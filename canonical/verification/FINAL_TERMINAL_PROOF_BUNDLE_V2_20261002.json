@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_FINAL_TERMINAL_PROOF_BUNDLE_V2",
+  "date": "2026-10-02",
+  "status": "FROZEN_CANDIDATE__19_OF_19_OWNERSHIP_ROWS__ALL_GLOBAL_POSTCONDITIONS_PASS__PENDING_INDEPENDENT_FINALITY_VERIFICATION",
+  "objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "terminal_execution": {
+    "snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+    "beacon": "36977020853",
+    "full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+    "fresh_terminal_case_executions": 3352,
+    "replay_authorized": false
+  },
+  "adjudication": {
+    "terminal_contracts_pass": "12/12",
+    "capability_families_behavioral_pass": "19/19",
+    "capability_families_verified_owned_candidate": "19/19",
+    "donor_dependent_required_behaviors": 0,
+    "unresolved_verifier_mutations": 0,
+    "unresolved_composition_failures": 0,
+    "contaminated_promotion_evidence": 0,
+    "resource_or_authority_violations": 0,
+    "donor_deletion_cleanroom_pass": true
+  },
+  "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V2.json",
+  "ordered_evidence": [
+    {
+      "path": "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
+      "git_blob_sha": "76be865fb7f20a36f7daab4a2708950432034b37"
+    },
+    {
+      "path": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
+      "git_blob_sha": "2af505d440115709212eafaf6eeb882975544f19"
+    },
+    {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "git_blob_sha": "55440e4519b3aaf8245b39ef60507410a4228b69"
+    },
+    {
+      "path": "canonical/runtime/test_terminal_closure_reducer.py",
+      "git_blob_sha": "d5bb1c65fff1767f1b911c24bc826f0a2c3d59bf"
+    },
+    {
+      "path": "canonical/runtime/terminal_contract_result_reducer_v1.py",
+      "git_blob_sha": "6c3dffe0dab22efb155945ddc81d14ef7ab891f5"
+    },
+    {
+      "path": "canonical/runtime/terminal_family_adjudication_reducer_v1.py",
+      "git_blob_sha": "183b21005084343bfaad65dd0efa9b1b27054d41"
+    },
+    {
+      "path": "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py",
+      "git_blob_sha": "fa5bb7eaac06820376c41f12df2cc4e777c88213"
+    },
+    {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V2.json",
+      "git_blob_sha": "1936fec15a983f7027e3696905aed99756727cfc"
+    },
+    {
+      "path": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "d4abf1dbda1328674489afca49bbece93c794cd1"
+    },
+    {
+      "path": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "e0dbd996c18bdb818693ab0d217d751594a03d0f"
+    },
+    {
+      "path": "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V6_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "e9d405576c540388b48d74da0f2e498c03e4684a"
+    },
+    {
+      "path": "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "d62bb3815239619c79b5ac64fc1bf93a2860413f"
+    },
+    {
+      "path": "canonical/verification/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3_INDEPENDENT_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "85fe26c4234df1a8e01dea48ce5177007b5f3e8b"
+    },
+    {
+      "path": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "d3144bf0aa618b15ef594d24de54d55cbdb329fd"
+    },
+    {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    {
+      "path": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "git_blob_sha": "51e3e7578e9adbeee2168d2223b84481fea16a09"
+    }
+  ],
+  "root_encoding": {
+    "sort": "LEXICOGRAPHIC_PATH",
+    "leaf": "SHA256(UTF8('leaf\\\\0'||path||'\\\\0'||git_blob_sha))",
+    "parent": "SHA256(UTF8('node\\\\0')||HEX_DECODE(left)||HEX_DECODE(right))",
+    "odd_node_rule": "DUPLICATE_LAST",
+    "evidence_count": 16
+  },
+  "merkle_root_sha256": "11eef43b66bb3cb697c7cb49f374df6cb45c6b6200610cc276998aa37d7f9a66",
+  "proof_bundle_frozen": true,
+  "finality_rule": "INDEPENDENT_PUBLIC_RUNNER_MUST_RECOMPUTE_ALL_BOUND_BLOBS_MERKLE_ROOT_OWNERSHIP_MATRIX_19_OF_19_AND_HARDENED_TERMINAL_CLOSURE_REDUCER_TRUE",
+  "terminal_replay_permitted": false,
+  "incremental_spend_usd": 0,
+  "candidate_only_until_independent_finality_verification": true
+}
