@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_ACTIVATION__INDEPENDENT_BRIDGE_PASS__SLICER_RECOMPUTATION_REQUIRED__ZERO_CREDIT",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "bridge": "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_V1.json",
+  "bridge_verification": "canonical/verification/COMPOSITION_BEHAVIORAL_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "slicer": "canonical/runtime/composition_component_proof_slicer_v1.py",
+  "slicer_input": "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V1.json",
+  "authorized_receipt_ids": [
+    "COMPOSITION_BRIDGE::DELEGATION::V1",
+    "COMPOSITION_BRIDGE::TOOL_DISCOVERY::V1"
+  ],
+  "expected_projection": {
+    "total_interfaces": 12,
+    "newly_scoped_proved_interfaces": 2,
+    "expected_scoped_proved_components": [
+      "delegation",
+      "tool discovery"
+    ],
+    "expected_open_interfaces": 10,
+    "composition_component_parent_predicate_closed": false
+  },
+  "hard_rules": [
+    "AUTHORIZE_ONLY_BINDINGS_RECOMPUTED_AND_INDEPENDENTLY_VERIFIED_BY_THE_BRIDGE_RECEIPT",
+    "EVERY_SLICER_RECEIPT_MUST_BE_VERIFIED_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_AND_BOUND_TO_THE_FROZEN_COMPOSITION_CLAIM",
+    "NO_OTHER_COMPONENT_BINDING_BY_NAME_OR_FAMILY_ANALOGY",
+    "TWO_COMPONENT_PROOFS_DO_NOT_CLOSE_THE_PARENT_COMPOSITION_COMPONENT_PREDICATE",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
