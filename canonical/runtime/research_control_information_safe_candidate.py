@@ -22,7 +22,8 @@ def next_action(public:Mapping[str,Any])->dict[str,Any]:
     if results:
         admissible=[
             x for x in results
-            if float(x.get("authority",0.0))>=minimum
+            if str(x.get("target_requirement_id") or "")==rid
+            and float(x.get("authority",0.0))>=minimum
             and not any(
                 r.get("source_id")==x.get("source_id")
                 for r in public.get("evidence_receipts",[])
