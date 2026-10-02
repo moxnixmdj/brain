@@ -1,0 +1,46 @@
+name: Verify live proof atom receipt index freeze v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/proof_atom_receipt_index_v1.py"
+      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"
+      - "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json"
+      - "canonical/state/PROOF_ATOM_RECEIPT_INDEX_LIVE_FREEZE_20261002_V1.json"
+      - "canonical/tests/test_proof_atom_receipt_index_freeze_v1.py"
+      - ".github/workflows/verify-proof-atom-receipt-index-freeze-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Recompute current live receipt index
+        run: |
+          python -m canonical.runtime.proof_atom_receipt_index_v1 > live-proof-atom-receipt-index.json
+
+      - name: Emit exact live payload for deterministic freeze
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("live-proof-atom-receipt-index.json")
+          if p.exists():
+              obj=json.loads(p.read_text())
+              print("BEGIN_PROJECT_BRAIN_LIVE_RECEIPT_INDEX_JSON")
+              print(json.dumps(obj, sort_keys=True, separators=(",", ":")))
+              print("END_PROJECT_BRAIN_LIVE_RECEIPT_INDEX_JSON")
+          PY
+
+      - name: Verify frozen live index
+        run: |
+          python -m unittest canonical.tests.test_proof_atom_receipt_index_freeze_v1 -v
