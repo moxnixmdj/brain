@@ -1,0 +1,24 @@
+name: Verify terminal parent portfolio launcher
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/terminal_parent_portfolio_launcher_v1.py
+      - canonical/tests/test_terminal_parent_portfolio_launcher_v1.py
+      - .github/workflows/verify-terminal-parent-portfolio-launcher.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_terminal_parent_portfolio_launcher_v1
