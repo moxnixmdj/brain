@@ -309,6 +309,12 @@ class PublicBarReceiptTests(unittest.TestCase):
         self.assertTrue((ROOT / ev["driver"].split(" ")[0]).is_file())
         self.assertIn("0.25", " ".join(ev["demonstrates"]))
         self.assertIn("Synthetic questions", ev["limit"])
+        pre = ev["end_to_end_preflight"]
+        self.assertIn("0 scorer exceptions", pre["result"])
+        self.assertIn("d2ada7da94a38cfe406351614c4e686846ed2da6d1b339db95fa5ead19554a4a", pre["dev_proxy"])
+        self.assertIn("no real LLM was called", pre["limit"])
+        self.assertTrue((ROOT / pre["test"].split(" ")[0]).is_file())
+        self.assertEqual(len(ev["upstream_robustness_findings"]), 2)
         # the repo-side claims quoted by the receipt must be what the repo files say (skip if they were later changed)
         for e in (x for x in defect["evidence"] if x["class"] == "REPO"):
             if not (ROOT / e["path"]).is_file() or _git_blob_sha(e["path"]) != e["git_blob_sha"]:
@@ -325,6 +331,9 @@ class PublicBarReceiptTests(unittest.TestCase):
         self.assertNotIn("declared metric = prompt-level loose accuracy", readme)
         self.assertIn("--assert-no-frozen-questions", readme)
         self.assertIn("--frozen-release-min 2025-11-25", readme)
+        self.assertIn("IFBench_test.jsonl", readme)
+        self.assertIn("scorer_exceptions", readme)
+        self.assertIn("NLTK_REAL_DIR", readme)
 
     def test_livebench_row_records_the_open_model_update(self):
         row = next(r for r in self.receipt["public_bar_rows"] if r["predicate_id"] == "LIVEBENCH_IF_GE_65_7")
@@ -484,6 +493,12 @@ class CensusReceiptTests(unittest.TestCase):
         self.assertIn("strict mean-of-two", self.receipt["reconciliation"]["answer"])
         self.assertTrue(any("matches no release" in c for c in p13["evidence"]["caveats"]))
         self.assertTrue(any(u.startswith("Metric alignment") for u in self.receipt["reconciliation"]["unverified_parts"]))
+
+    def test_census_points_to_the_verified_dev_proxy_not_older_releases(self):
+        self.assertIn("IFBench's 300 public test prompts", self.receipt["next_action"])
+        self.assertIn("poor proxy", self.receipt["next_action"])
+        self.assertIn("IFBench's public test prompts", self.receipt["reconciliation"]["answer"])
+        self.assertNotIn("from earlier releases", self.receipt["reconciliation"]["answer"])
 
     def test_correction_and_reconciliation_are_explicit(self):
         self.assertIn("was wrong", self.receipt["correction_notice"])

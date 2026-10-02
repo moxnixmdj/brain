@@ -714,8 +714,19 @@
           "prompt-level loose accuracy has no fixed order against the official score (one case each way)"
         ],
         "driver": "livebench_if_generation_v1/score_livebench_if.py (calls upstream ifbench_process_results; refuses an unpinned or modified checkout)",
-        "run_here": "15 of 15 tests pass with the real upstream; 7 pass and 8 skip without it",
-        "limit": "Synthetic questions and three simple checkers; it proves the aggregator and strictness semantics, not the difficulty of the real question set."
+        "run_here": "20 scorer tests pass with the real upstream (11 pass and 9 skip without it); 5 pre-flight tests pass with all three checkouts (skip without)",
+        "limit": "Synthetic questions and three simple checkers; it proves the aggregator and strictness semantics, not the difficulty of the real question set.",
+        "end_to_end_preflight": {
+          "test": "livebench_if_generation_v1/test_pipeline_preflight.py (runs when LIVEBENCH_ROOT, IFBENCH_TEST_JSONL and NLTK_REAL_DIR are set)",
+          "dev_proxy": "allenai/IFBench data/IFBench_test.jsonl (300 public prompts, all 58 checker types, ODC-BY-1.0, sha256 d2ada7da94a38cfe406351614c4e686846ed2da6d1b339db95fa5ead19554a4a)",
+          "result": "with a placeholder responder in place of the LLM: 300 of 300 answered, adapter ID-set preflight PASS, provenance chain valid, LiveBench's scorer ran every checker with 0 scorer exceptions, repeat scoring identical",
+          "nltk_data_pins": "the five nltk_data artifacts fetched by git at the project's pinned commit have blob SHAs equal to the pins in LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json",
+          "limit": "Placeholder responses prove plumbing, not model quality; no real LLM was called."
+        },
+        "upstream_robustness_findings": [
+          "nltk.download('stopwords') is called inside functions on every stop-word check and punkt at import: a scoring run is network-dependent unless nltk.download is made a local-presence check (done in the driver, fail closed).",
+          "upstream's exception handler indexes turns[0].split('<instructions>')[1] and crashes on prompts without those tags: the driver scores such a question 0 and reports it."
+        ]
       }
     }
   ]

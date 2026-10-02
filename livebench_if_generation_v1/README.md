@@ -28,6 +28,20 @@ It does **not** score, read results, authorize anything, or claim capability.
 LIVEBENCH_ROOT=/path/to/LiveBench@8f8e5c3 python -m pytest livebench_if_generation_v1/test_score_livebench_if.py
 ```
 
+## Pre-flight on the public IFBench dev prompts (everything except the LLM)
+
+IFBench's repository (code Apache-2.0, data ODC-BY-1.0, https://github.com/allenai/IFBench) ships `data/IFBench_test.jsonl`: 300 public prompts that exercise **all 58** checker types (about 1.15 constraints per prompt, against about 3 for LiveBench). It is a non-frozen development proxy and is retrievable from GitHub, so no HuggingFace access is needed.
+
+```text
+python livebench_if_generation_v1/ifbench_to_questions.py --input IFBench_test.jsonl --output dev_questions.jsonl
+LIVEBENCH_ROOT=/path/to/LiveBench@8f8e5c3 IFBENCH_TEST_JSONL=/path/to/IFBench_test.jsonl NLTK_REAL_DIR=/path/to/unzipped_nltk_data \
+  python -m pytest livebench_if_generation_v1/test_pipeline_preflight.py
+```
+
+What the pre-flight verified when it was run (a local mock stands in for the LLM and returns a fixed placeholder; every other stage is real): conversion of all 300 prompts; the generation kit (frozen policy, budget cap, hash-chained provenance); the repo's verified adapter and ID-set preflight (PASS, 300); LiveBench's own scorer with all 58 checkers and **zero scorer exceptions**; deterministic repeat scoring; no prompt text in any stored output. The pinned NLTK artifacts were fetched with git at the project's pinned `nltk_data` commit and their five blob SHAs equal the pins in `LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json`.
+
+Two robustness findings about upstream, handled in the driver rather than hidden: (1) upstream calls `nltk.download('stopwords')` inside functions on every stop-word check and downloads `punkt` at import, which makes a scoring run network-dependent; the driver replaces `nltk.download` with a local-presence check that raises if a resource is missing. (2) upstream's exception handler indexes `turns[0].split('<instructions>')[1]` and would itself crash on prompts without those tags; the driver scores such a question 0 as upstream intends and reports every occurrence (`scorer_exceptions`, exit code 3 unless `--allow-scorer-exceptions`).
+
 ## Safety properties (each is tested and mutation-checked)
 
 1. **Budget cap, fail closed.** A worst-case check (`estimated input + max_completion_tokens`) runs before every call; the run stops with exit code 4 rather than exceed `--max-total-tokens` or `--max-neurons-per-utc-day`. A failed attempt is never counted as spend.
@@ -72,7 +86,7 @@ python livebench_if_generation_v1/score_livebench_if.py --questions q.jsonl --mo
 #    LIVEBENCH_IF_METRIC_AND_RELEASE_ALIGNMENT).
 ```
 
-**Dev data.** Upstream code routes IF questions released on or after 2025-11-25 to the new IFBench-format scorer (58 checker types) and older ones to an older IFEval-style path, and the leaderboard scores the current set. So older releases are a poor proxy for the frozen set. A better non-frozen dev proxy is IFBench's own public prompts (same 58 checker types); the loader's defaults (`question_id`, `turns[0]`, `livebench_release_date`) match the field names used by upstream code, but whether the exported rows carry them was not verified here (HuggingFace is unreachable from the authoring sandbox). Override with `--id-field`, `--prompt-field`, `--release-field` if needed. Illustrative export, **UNTESTED**:
+**Dev data.** Upstream code routes IF questions released on or after 2025-11-25 to the new IFBench-format scorer (58 checker types) and older ones to an older IFEval-style path, and the leaderboard scores the current set. So older releases are a poor proxy for the frozen set. The non-frozen dev proxy is IFBench's own public prompts (section above); for LiveBench-format rows the loader's defaults (`question_id`, `turns[0]`, `livebench_release_date`) match the field names used by upstream code, but whether the exported rows carry them was not verified here (HuggingFace is unreachable from the authoring sandbox). Override with `--id-field`, `--prompt-field`, `--release-field` if needed. Illustrative export, **UNTESTED**:
 
 ```python
 from datasets import load_dataset

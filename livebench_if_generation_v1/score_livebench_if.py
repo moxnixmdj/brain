@@ -17,7 +17,8 @@ It needs a LiveBench checkout (``--livebench-root``) and the packages upstream i
 (pandas, nltk, emoji, syllapy, langdetect, immutabledict, absl-py). Upstream also imports spaCy
 and downloads NLTK data at import time; the project's hermetic runtime removes that (spaCy is
 dead code with zero checker references): provide the same hermetic setup, or a stub spaCy plus
-an ``NLTK_DATA`` folder, exactly as the integration test does.
+an ``NLTK_DATA`` folder, exactly as the integration test does. ``nltk.download`` is replaced by a
+local-presence check (fail closed), so a run never reaches the network.
 """
 from __future__ import annotations
 
@@ -39,7 +40,40 @@ class Blocked(Exception):
     code = 2
 
 
-def load_upstream(livebench_root: Path, verify_commit: bool = True):
+_NLTK_PATHS = {
+    "punkt": "tokenizers/punkt", "punkt_tab": "tokenizers/punkt_tab", "stopwords": "corpora/stopwords",
+    "averaged_perceptron_tagger": "taggers/averaged_perceptron_tagger",
+    "averaged_perceptron_tagger_eng": "taggers/averaged_perceptron_tagger_eng",
+}
+
+
+def install_hermetic_nltk() -> bool:
+    """Replace ``nltk.download`` by a check that the resource is already local; never touch the network.
+
+    Upstream calls ``nltk.download('stopwords')`` inside functions on every stop-word check and downloads
+    punkt at import. That makes a scoring run non-hermetic and network-dependent. Here a missing resource
+    raises instead (fail closed); a present one is a no-op. Returns False when nltk is not installed.
+    """
+    try:
+        import nltk
+    except ImportError:
+        return False
+
+    def _download(info_or_id=None, *args, **kwargs):
+        rel = _NLTK_PATHS.get(str(info_or_id))
+        if rel is None:
+            raise RuntimeError(f"NLTK_RESOURCE_NOT_ALLOWED_IN_HERMETIC_RUN:{info_or_id}")
+        try:
+            nltk.data.find(rel)
+        except LookupError:
+            raise RuntimeError(f"NLTK_RESOURCE_MISSING_PROVIDE_NLTK_DATA:{rel}")
+        return True
+
+    nltk.download = _download
+    return True
+
+
+def load_upstream(livebench_root: Path, verify_commit: bool = True, hermetic_nltk: bool = True):
     root = Path(livebench_root).resolve()
     if not (root / "livebench").is_dir():
         raise Blocked("LIVEBENCH_ROOT_HAS_NO_livebench_PACKAGE")
@@ -50,6 +84,8 @@ def load_upstream(livebench_root: Path, verify_commit: bool = True):
         dirty = subprocess.run(["git", "-C", str(root), "status", "--porcelain", "--", "livebench"], capture_output=True, text=True).stdout.strip()
         if dirty:
             raise Blocked("LIVEBENCH_CHECKOUT_HAS_LOCAL_EDITS")
+    if hermetic_nltk:
+        install_hermetic_nltk()
     if str(root) not in sys.path:
         sys.path.insert(0, str(root))
     utils = importlib.import_module("livebench.process_results.instruction_following.utils")
@@ -92,9 +128,17 @@ def score_run(questions: Sequence[Mapping[str, Any]], model_answers: Mapping[str
     if a_ids != set(q_ids):
         raise Blocked(f"ID_SET_MISMATCH:missing={len(set(q_ids) - a_ids)}:extra={len(a_ids - set(q_ids))}")
     rows = []
+    exceptions: list[dict[str, str]] = []
     for q in questions:
         text = _answer_text(model_answers, model_id, q["question_id"])
-        official = float(utils.ifbench_process_results(dict(q), text))  # LiveBench's own function
+        try:
+            official = float(utils.ifbench_process_results(dict(q), text))  # LiveBench's own function
+        except Exception as exc:
+            # Upstream returns 0 when a checker raises, but its handler indexes turns[0].split('<instructions>')[1]
+            # and would itself crash on prompts without those tags. Keep upstream's intended semantics (score 0),
+            # and report every occurrence: an exception is never a silent zero.
+            official = 0.0
+            exceptions.append({"question_id": q["question_id"], "type": type(exc).__name__})
         inp = lib.InputExample(key=q["question_id"], instruction_id_list=q["instruction_id_list"], prompt=q["turns"][0], kwargs=q["kwargs"])
         response = _extract(text)
         try:
@@ -126,6 +170,8 @@ def score_run(questions: Sequence[Mapping[str, Any]], model_answers: Mapping[str
             "prompt_level_loose_accuracy": mean("prompt_loose"),
             "instruction_level_strict_accuracy": mean("instruction_strict"),
         },
+        "scorer_exceptions": {"count": len(exceptions), "by_type": {t: sum(1 for e in exceptions if e["type"] == t) for t in sorted({e["type"] for e in exceptions})},
+                              "question_ids": [e["question_id"] for e in exceptions]},
         "per_question": [{"question_id": r["question_id"], "task": r["task"], "score": r["score"]} for r in rows],
         "execution_authority": False, "promotion_authority": False, "capability_credit_delta": 0,
         "incremental_spend_usd": 0, "note": "PROVISIONAL tooling output; zero progress credit",
@@ -139,6 +185,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     ap.add_argument("--model-id", default="brain")
     ap.add_argument("--livebench-root", required=True, type=Path)
     ap.add_argument("--out", required=True, type=Path)
+    ap.add_argument("--allow-scorer-exceptions", action="store_true", help="exit 0 even when some questions raised in the scorer (they still score 0 and are reported)")
     args = ap.parse_args(argv)
     try:
         utils, lib = load_upstream(args.livebench_root)
@@ -147,7 +194,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"BLOCKED {exc}", file=sys.stderr)
         return exc.code
     args.out.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps({k: summary[k] for k in ("questions", "leaderboard_style_category_score", "question_mean_score")}))
+    print(json.dumps({k: summary[k] for k in ("questions", "leaderboard_style_category_score", "question_mean_score")}
+                     | {"scorer_exception_count": summary["scorer_exceptions"]["count"]}))
+    if summary["scorer_exceptions"]["count"] and not args.allow_scorer_exceptions:
+        print("SCORER_EXCEPTIONS_PRESENT__SCORES_ARE_NOT_TRUSTWORTHY", file=sys.stderr)
+        return 3
     return 0
 
 

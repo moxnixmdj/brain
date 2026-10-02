@@ -128,6 +128,28 @@ class StubLayer(unittest.TestCase):
             with self.subTest(case=label), self.assertRaises(sc.Blocked):
                 sc.load_questions(p)
 
+    def test_scorer_exceptions_score_zero_but_are_counted_and_reported(self):
+        self.utils.ifbench_process_results = lambda q, a, debug=False: (_ for _ in ()).throw(IndexError("handler crash")) if a == "RAISE" else 1.0
+        qs = [question("ok", ["x"]), question("bad", ["x"])]
+        s = sc.score_run(qs, answers({"ok": "x", "bad": "RAISE"}), "brain", self.utils, self.lib)
+        self.assertEqual({r["question_id"]: r["score"] for r in s["per_question"]}, {"ok": 1.0, "bad": 0.0})
+        self.assertEqual(s["scorer_exceptions"], {"count": 1, "by_type": {"IndexError": 1}, "question_ids": ["bad"]})
+
+    def test_cli_exits_3_on_scorer_exceptions_unless_allowed(self):
+        qpath, apath = (Path(self.tmp.name) / n for n in ("q.jsonl", "a.json"))
+        qpath.write_text(json.dumps(question("bad", ["x"])) + "\n")
+        apath.write_text(json.dumps(answers({"bad": "RAISE"})))
+        self.utils.ifbench_process_results = lambda q, a, debug=False: (_ for _ in ()).throw(ValueError("boom"))
+        orig = sc.load_upstream
+        sc.load_upstream = lambda root, verify_commit=True: (self.utils, self.lib)
+        try:
+            args = ["--questions", str(qpath), "--model-answers", str(apath), "--livebench-root", self.tmp.name]
+            self.assertEqual(sc.main(args + ["--out", str(Path(self.tmp.name) / "o1.json")]), 3)
+            self.assertEqual(sc.main(args + ["--out", str(Path(self.tmp.name) / "o2.json"), "--allow-scorer-exceptions"]), 0)
+            self.assertEqual(json.loads((Path(self.tmp.name) / "o1.json").read_text())["scorer_exceptions"]["count"], 1)
+        finally:
+            sc.load_upstream = orig
+
     def test_no_prompt_or_response_text_reaches_the_summary_or_stdout(self):
         qs_path, ans_path, out = (Path(self.tmp.name) / n for n in ("q.jsonl", "a.json", "s.json"))
         qs_path.write_text(json.dumps(question("q1", ["x"])) + "\n")
@@ -162,6 +184,28 @@ class StubLayer(unittest.TestCase):
             finally:
                 sc.PINNED_COMMIT = old
 
+    def test_hermetic_nltk_never_downloads_and_fails_closed(self):
+        try:
+            import nltk
+        except ImportError:
+            self.skipTest("nltk not installed")
+        original, saved_paths = nltk.download, list(nltk.data.path)
+        try:
+            with tempfile.TemporaryDirectory() as t:
+                (Path(t) / "corpora" / "stopwords").mkdir(parents=True)
+                nltk.data.path[:] = [t]  # search ONLY this folder, independent of any earlier test or NLTK_DATA
+                self.assertTrue(sc.install_hermetic_nltk())
+                self.assertIs(nltk.download("stopwords"), True)  # present locally: no-op
+                with self.assertRaises(RuntimeError) as cm:
+                    nltk.download("punkt")  # missing locally: refuse, do not fetch
+                self.assertIn("NLTK_RESOURCE_MISSING", str(cm.exception))
+                with self.assertRaises(RuntimeError) as cm2:
+                    nltk.download("some_other_corpus")
+                self.assertIn("NOT_ALLOWED_IN_HERMETIC_RUN", str(cm2.exception))
+        finally:
+            nltk.download = original
+            nltk.data.path[:] = saved_paths
+
     def test_solution_extraction_used_by_the_diagnostics(self):
         self.assertEqual(sc._extract("noise <solution>\n inner text \n</solution> tail"), "inner text")
         self.assertEqual(sc._extract("  no tags here  "), "no tags here")
@@ -186,16 +230,25 @@ class RealUpstreamLayer(unittest.TestCase):
         stubs.mkdir(parents=True)
         (stubs / "__init__.py").write_text("class _U:\n    @staticmethod\n    def is_package(n):\n        return True\nutil = _U()\n")
         (stubs / "cli.py").write_text("def download(*a, **k):\n    raise RuntimeError('no downloads in the hermetic verification run')\n")
-        nltk_dir = Path(cls.tmp.name) / "nltk_data" / "tokenizers"
-        (nltk_dir / "punkt").mkdir(parents=True)
-        (nltk_dir / "punkt_tab").mkdir(parents=True)
-        os.environ["NLTK_DATA"] = str(Path(cls.tmp.name) / "nltk_data")
+        data_dir = os.environ.get("NLTK_REAL_DIR")  # optional: the project's pinned NLTK data, unzipped
+        if not data_dir:
+            data_dir = str(Path(cls.tmp.name) / "nltk_data")
+            for sub in ("tokenizers/punkt", "tokenizers/punkt_tab"):
+                (Path(data_dir) / sub).mkdir(parents=True)  # empty folders satisfy upstream's import-time lookup
+        os.environ["NLTK_DATA"] = data_dir
+        import nltk
+
+        cls._nltk_paths = list(nltk.data.path)
+        nltk.data.path.insert(0, data_dir)  # NLTK reads NLTK_DATA only at import time; extend explicitly
         sys.path.insert(0, str(Path(cls.tmp.name) / "stubs"))
         cls.utils, cls.lib = sc.load_upstream(Path(LIVEBENCH_ROOT))
 
     @classmethod
     def tearDownClass(cls):
         sys.path[:] = cls._path
+        import nltk
+
+        nltk.data.path[:] = [p for p in cls._nltk_paths if p != os.environ.get("NLTK_DATA")]
         if cls._env is None:
             os.environ.pop("NLTK_DATA", None)
         else:
