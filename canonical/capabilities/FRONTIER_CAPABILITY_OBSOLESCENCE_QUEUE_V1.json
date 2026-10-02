@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "GLOBAL_TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_NEW_REALITY_INFORMATION__THEN_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "M0A_CONTEXTUAL_SEMANTICS_PRIMARY__M1A_ONLY_EVIDENCE_IDENTIFIABILITY_AND_NO_CONSENSUS_BOUNDARIES_REMAIN__M1B_COMPLETE",
+    "exact_blocker": "POST_V5_FRONTIER__M0A_UPSTREAM_MENTION_IDENTIFICATION_CONTEXTUAL_ANAPHORA_PREDICATE_ARGUMENT_AND_IMPLICIT_LONG_RANGE_DISCOURSE_ZERO_REALITY_COMPOSITION_OPEN__M1A_PROOF_ONLY__M1B_PROOF_ONLY__NO_FRESH_MATCHED_EVIDENCE",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "LOCALIZE_MINIMAL_M0A_CONTEXTUAL_RESIDUAL_FROM_FROZEN_NONPROMOTION_EVIDENCE__BOUND_REMAINING_M1A_EVIDENCE_IDENTIFIABILITY_CASES__FREEZE_RESIDUAL_UNIVERSE_V2__RUN_EXACT_FROZEN_UNIVERSE_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
+    "next_action": "M0A_ONLY_ACTIVE_ZERO_REALITY__SUBTRACT_ALL_OWNED_OPERATOR_CLASSES_FROM_NONHELDOUT_DIAGNOSTICS__DETERMINISTIC_COMPOSITION_FIRST__SPECIALIZED_WHITE_BOX_PROPOSAL_ONLY_WHERE_MEASURED_RESIDUAL_SURVIVES__USE_BRAIN_OWNED_SEMANTIC_CONSENSUS_GATE__THEN_FREEZE_V6_FROM_FAITHFUL_COSTS__M1A_M1B_MATCHED_PROOFS_ONLY_IF_V6_ADMITS__NO_FRESH_UNTOUCHED_INFORMATION",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -204,7 +204,16 @@
     "zero_reality_residual_reconciliation_v3": {
       "evidence": "canonical/reasoning/2026-10-02_ZERO_REALITY_RESIDUAL_RECONCILIATION_V3.json",
       "residual_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json"
-    }
+    },
+    "v5_cut_status": "INVALIDATED",
+    "active_zero_reality_obligations": [
+      "M0A"
+    ],
+    "proof_only_obligations": [
+      "M1A",
+      "M1B"
+    ],
+    "fresh_matched_evidence_authorized": false
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -498,7 +507,7 @@
     "white_box_capability_capsule_schema": "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
     "whole_model_adoption_default_forbidden": true
   },
-  "next_progress_event_target": "M0A_M1A_COMPLETE_SELF_CONTAINED_BUNDLES_OR_FAIL_CLOSED_IDENTIFIABILITY_BOUNDARY",
+  "next_progress_event_target": "M0A_ZERO_REALITY_RESIDUAL_SATURATED__V6_FROZEN_OR_FAIL_CLOSED",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",

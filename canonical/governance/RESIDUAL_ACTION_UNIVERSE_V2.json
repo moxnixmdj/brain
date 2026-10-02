@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__M0A_ZERO_REALITY_LOCALIZATION_ACTIVE__M1A_PROOF_ONLY__M1B_PROOF_ONLY__NOT_FROZEN",
+  "status": "OPEN_DISCOVERY__M0A_ONLY_ZERO_REALITY_COMPOSITION_ACTIVE__M1A_PROOF_ONLY__M1B_PROOF_ONLY__V5_INVALIDATED__NOT_FROZEN",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -14,7 +14,8 @@
         "canonical/capabilities/opus55/EXPLICIT_DEFINITION_REFERENCE_GRAPH_001.json",
         "canonical/capabilities/opus55/SEMANTIC_IDENTIFIABILITY_GATE_001.json",
         "canonical/capabilities/opus55/BOUNDED_CONTEXTUAL_SEMANTICS_001.json",
-        "canonical/capabilities/opus55/M0A_SEMANTIC_GRAPH_CONSENSUS_001.json"
+        "canonical/capabilities/opus55/M0A_SEMANTIC_GRAPH_CONSENSUS_001.json",
+        "canonical/capabilities/opus55/EXPLICIT_DISCOURSE_OPERATOR_ALGEBRA_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -25,10 +26,10 @@
         "allenai/allennlp-models@b1f372248c17ad12684d344955fbcd98e957e77e"
       ],
       "uncovered": [
-        "GENERAL_OR_NONEXACT_COREFERENCE_OUTSIDE_UNIQUE_FEATURE_COMPATIBLE_BOUNDED_PRONOUN_CASES_AND_EXPLICIT_NAMED_REFERENCES",
-        "IMPLICIT_OR_LONG_RANGE_DISCOURSE_RELATION_AND_CONTEXTUAL_SCOPE_OUTSIDE_EXPLICIT_CONNECTIVES",
+        "UPSTREAM_CONSTITUENT_OR_MENTION_IDENTIFICATION_REQUIRED_BY_BOUNDED_REFERENCE_OPERATORS",
+        "CONDITIONAL_OR_CONTEXTUAL_ANAPHORA_OUTSIDE_VERIFIED_BOUNDED_FEATURE_COMPATIBLE_AND_EXPLICIT_OPERATOR_CASES",
         "PREDICATE_ARGUMENT_AND_MULTI_CLASS_CONTEXT_DEPENDENT_EXPLICIT_SEMANTICS",
-        "OTHER_SEMANTIC_PHENOMENA_OUTSIDE_EXISTING_DECIDABLE_AND_VERIFIED_BOUNDED_ROUTES"
+        "IMPLICIT_OR_LONG_RANGE_DISCOURSE_OUTSIDE_VERIFIED_EXPLICIT_CONNECTIVES_AND_OPERATOR_ALGEBRA"
       ],
       "complete_action_bundle": true,
       "verification_receipts": {
@@ -78,7 +79,15 @@
         "branch_result": "canonical/capabilities/opus55/M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_001.json",
         "subspace_protocol": "canonical/evaluation/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_V1.json",
         "scope": "ONLY_LAYER_1_AND_11_MLP_INTERMEDIATE_SUBSPACES__BASELINE_CORRECT_SIGNAL_ONLY__NO_HELDOUT"
-      }
+      },
+      "olmo_mixed_subspace_disposition": "STOPPED__NO_MATERIAL_EIGHT_WAY_GROUP__MIXED_PROBE_OBSOLETED_BY_NEW_DETERMINISTIC_CLOSURES__DIAGNOSTIC_ONLY",
+      "olmo_subspace_evidence": [
+        "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_001.json",
+        "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_RESULT_001.json",
+        "canonical/governance/M0A_OLMO_MLP_SUBSPACE_PROTOCOL_INVALIDATION_V1.json"
+      ],
+      "heldout_exposure": "canonical/governance/M0A_CONTEXTUAL_HELDOUT_EXPOSURE_RECONCILIATION_V1.json",
+      "promotion_evidence_rule": "EXPOSED_CONTEXTUAL_HELDOUTS_ARE_SPENT_NONPROMOTION_DIAGNOSTIC_ONLY__ANY_FUTURE_FRESH_MATCHED_BATCH_MUST_BE_NEW_PREDECLARED_AND_V6_ADMITTED"
     },
     "M1A": {
       "status": "PROOF_ONLY__ZERO_REALITY_PREFIX_SATURATED__MATCHED_PARITY_NOT_YET_AUTHORIZED",
@@ -261,7 +270,7 @@
     "M1A",
     "M1B"
   ],
-  "next": "FINISH_ONLY_ACTIVE_M0A_ZERO_REALITY_USEFUL_SIGNAL_SUBSPACE_LOCALIZATION_AND_COMPOSITION__THEN_FREEZE_V6_FROM_CURRENT_FAITHFUL_COSTS__M1A_AND_M1B_ARE_PROOF_ONLY_PENDING_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
+  "next": "M0A_ONLY_ACTIVE_ZERO_REALITY__SUBTRACT_ALL_OWNED_OPERATOR_CLASSES_FROM_NONHELDOUT_DIAGNOSTICS__DETERMINISTIC_COMPOSITION_FIRST__SPECIALIZED_WHITE_BOX_PROPOSAL_ONLY_WHERE_MEASURED_RESIDUAL_SURVIVES__USE_BRAIN_OWNED_SEMANTIC_CONSENSUS_GATE__THEN_FREEZE_V6_FROM_FAITHFUL_COSTS__M1A_M1B_MATCHED_PROOFS_ONLY_IF_V6_ADMITS__NO_FRESH_UNTOUCHED_INFORMATION",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -269,7 +278,15 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "note": "M1A zero-reality mechanism search saturated into proof-only V2 after verified compound visual resolver and identifiability/JIT classification. M1B formal zero-reality coverage audit completed and cannot prove whole terminal coverage; one matched coverage distinction survives. M0A remains the only active zero-reality mechanism localization.",
+    "note": "Final post-V5 zero-reality reconciliation: M0A is the only active mechanism lane. Verified bounded contextual/discourse/consensus operators are subtracted from the residual. Mixed OLMo subspace harvesting is stopped and diagnostic-only; exposed M0A heldouts are quarantined. M1A and M1B are proof-only. No fresh matched evidence is authorized before V6.",
     "supersedes": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json"
-  }
+  },
+  "active_zero_reality_obligations": [
+    "M0A"
+  ],
+  "proof_only_obligations": [
+    "M1A",
+    "M1B"
+  ],
+  "v5_authority": "INVALIDATED"
 }
