@@ -81,5 +81,60 @@ class ProofRouteDominanceTests(unittest.TestCase):
         self.assertEqual(out["status"],"INVALID")
 
 
+    def test_terminal_result_required_without_receipt_cannot_dominate(self):
+        out=evaluate({
+            "obligations":[{"id":"A","min_oracle_strength":2}],
+            "routes":[
+                {"id":"private","covers":["A"],"oracle_strength":2,"blocked":True},
+                {
+                    "id":"planned_terminal_route","covers":["A"],"oracle_strength":3,
+                    "zero_cost":True,"executable":True,"independent_oracle":True,
+                    "scope_mapping_frozen":True,"contamination_boundary_frozen":True,
+                    "terminal_result_required":True,
+                    "terminal_result_pass":False,
+                    "terminal_result_receipt":None,
+                },
+            ],
+        })
+        self.assertEqual(out["status"],"FAIL_CLOSED_UNCOVERED_OBLIGATIONS")
+        self.assertEqual(out["global_uncovered_obligations"],["A"])
+        self.assertEqual(out["pending_terminal_result_routes"],["planned_terminal_route"])
+
+    def test_terminal_result_pass_without_receipt_cannot_dominate(self):
+        out=evaluate({
+            "obligations":[{"id":"A","min_oracle_strength":2}],
+            "routes":[
+                {"id":"private","covers":["A"],"oracle_strength":2,"blocked":True},
+                {
+                    "id":"unreceipted","covers":["A"],"oracle_strength":3,
+                    "zero_cost":True,"executable":True,"independent_oracle":True,
+                    "scope_mapping_frozen":True,"contamination_boundary_frozen":True,
+                    "terminal_result_required":True,
+                    "terminal_result_pass":True,
+                },
+            ],
+        })
+        self.assertEqual(out["status"],"FAIL_CLOSED_UNCOVERED_OBLIGATIONS")
+
+    def test_terminal_result_pass_with_receipt_can_dominate(self):
+        out=evaluate({
+            "obligations":[{"id":"A","min_oracle_strength":2}],
+            "routes":[
+                {"id":"private","covers":["A"],"oracle_strength":2,"blocked":True},
+                {
+                    "id":"receipted","covers":["A"],"oracle_strength":3,
+                    "zero_cost":True,"executable":True,"independent_oracle":True,
+                    "scope_mapping_frozen":True,"contamination_boundary_frozen":True,
+                    "terminal_result_required":True,
+                    "terminal_result_pass":True,
+                    "terminal_result_receipt":"canonical/verification/terminal-pass.json",
+                },
+            ],
+        })
+        self.assertEqual(out["status"],"COMPLETE")
+        self.assertIn("receipted",out["admissible_routes"])
+        self.assertEqual(out["pending_terminal_result_routes"],[])
+
+
 if __name__=="__main__":
     unittest.main()

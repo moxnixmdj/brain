@@ -62,6 +62,14 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             "scope_mapping_frozen":row.get("scope_mapping_frozen") is True,
             "contamination_boundary_frozen":row.get("contamination_boundary_frozen") is True,
             "blocked":row.get("blocked") is True,
+            "terminal_result_required":row.get("terminal_result_required") is True,
+            "terminal_result_pass":row.get("terminal_result_pass") is True,
+            "terminal_result_receipt":(
+                row.get("terminal_result_receipt").strip()
+                if isinstance(row.get("terminal_result_receipt"),str)
+                and row.get("terminal_result_receipt").strip()
+                else None
+            ),
         })
 
     if errors:
@@ -72,6 +80,13 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             r["zero_cost"] and r["executable"] and r["independent_oracle"]
             and r["scope_mapping_frozen"] and r["contamination_boundary_frozen"]
             and not r["blocked"]
+            and (
+                not r["terminal_result_required"]
+                or (
+                    r["terminal_result_pass"]
+                    and r["terminal_result_receipt"] is not None
+                )
+            )
         )
 
     admissible_routes=[r for r in normalized if admissible(r)]
@@ -109,5 +124,10 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         "obligation_support":{k:sorted(v) for k,v in sorted(obligation_support.items())},
         "blocked_route_verdicts":sorted(blocked_verdicts,key=lambda x:x["route_id"]),
         "admissible_routes":sorted(r["id"] for r in admissible_routes),
+        "pending_terminal_result_routes":sorted(
+            r["id"] for r in normalized
+            if r["terminal_result_required"]
+            and not (r["terminal_result_pass"] and r["terminal_result_receipt"] is not None)
+        ),
         "principle":"BEHAVIORAL_OBLIGATIONS_ARE_TERMINAL_REQUIREMENTS__BENCHMARKS_ARE_REPLACEABLE_EVIDENCE_ROUTES_ONLY_WITH_EXPLICIT_NONWEAKENING_COVERAGE_PROOF",
     }
