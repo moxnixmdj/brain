@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4",
+  "date": "2026-10-02",
+  "status": "EXACT_MINIMUM__CURRENT_FROZEN_RESIDUAL_UNIVERSE__ZERO_FRESH_EVIDENCE_SPENT_BY_COMPUTATION",
+  "exact_minimum": true,
+  "unresolved_distinctions": [
+    "M0A",
+    "M1A",
+    "M1B"
+  ],
+  "selected_observations": [
+    "A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1",
+    "A_M1A_VERIFIED_DETERMINISTIC_FRONTIER_V1",
+    "A_M1B_IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_TOLERANCE_V1"
+  ],
+  "observation_count": 3,
+  "total_cost": 2,
+  "rule": "MINIMUM_COST__THEN_MINIMUM_COUNT__THEN_LEXICOGRAPHIC_ID",
+  "execution_order": {
+    "zero_reality_parallel_prefix": [
+      "A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1__PRE_MATCHED_EVALUATION",
+      "A_M1A_VERIFIED_DETERMINISTIC_FRONTIER_V1__PRE_MATCHED_EVALUATION",
+      "A_M1B_IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_TOLERANCE_V1"
+    ],
+    "recompute_after_prefix": true,
+    "only_if_still_irreducible": [
+      "M0A_MATCHED_SEMANTIC_PARITY_EVALUATION_BATCH",
+      "M1A_MATCHED_DRAWING_PARITY_EVALUATION_BATCH"
+    ]
+  },
+  "scope_limit": "EXACT_FOR_SHARED_MECHANISM_RESIDUALS_ONLY__FULL_17_FAMILY_PARITY_PROOF_CUT_REMAINS_OPEN",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
