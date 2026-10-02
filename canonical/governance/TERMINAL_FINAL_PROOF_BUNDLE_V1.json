@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FINAL_PROOF_BUNDLE_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_CONTENT_ADDRESSED_TERMINAL_PROOF_BUNDLE__PENDING_FINAL_REDUCER_CI",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+  "terminal_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+  "evidence": [
+    {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "role": "immutable one-shot terminal result"
+    },
+    {
+      "path": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "blob_sha": "51e3e7578e9adbeee2168d2223b84481fea16a09",
+      "role": "12-contract 19-family behavioral adjudication"
+    },
+    {
+      "path": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "blob_sha": "d3144bf0aa618b15ef594d24de54d55cbdb329fd",
+      "role": "donor-denied byte-identical cleanroom qualification"
+    },
+    {
+      "path": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "blob_sha": "d4abf1dbda1328674489afca49bbece93c794cd1",
+      "role": "verifier mutation closure"
+    },
+    {
+      "path": "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "blob_sha": "d62bb3815239619c79b5ac64fc1bf93a2860413f",
+      "role": "controller composition independent verification"
+    },
+    {
+      "path": "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
+      "blob_sha": "76be865fb7f20a36f7daab4a2708950432034b37",
+      "role": "frozen dependency identity"
+    },
+    {
+      "path": "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py",
+      "blob_sha": "fa5bb7eaac06820376c41f12df2cc4e777c88213",
+      "role": "fail-closed global ownership reducer"
+    },
+    {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "blob_sha": "2732a577b441e8031ee128629410f792bfe36201",
+      "role": "fail-closed terminal achieved reducer"
+    }
+  ],
+  "closed_predicates": [
+    "EXACT_TARGET_FAMILY_COUNT_19",
+    "EVERY_REQUIRED_BEHAVIOR_CONTRACTED",
+    "EVERY_REQUIRED_BEHAVIOR_HAS_ADMISSIBLE_PROOF",
+    "DONOR_DEPENDENT_REQUIRED_BEHAVIORS_ZERO",
+    "UNEXPLAINED_REQUIRED_BEHAVIORS_ZERO",
+    "UNRESOLVED_VERIFIER_MUTATIONS_ZERO",
+    "UNRESOLVED_COMPOSITION_FAILURES_ZERO",
+    "CONTAMINATED_EVIDENCE_USED_FOR_PROMOTION_ZERO",
+    "RESOURCE_OR_AUTHORITY_VIOLATIONS_ZERO",
+    "ALL_FROZEN_OPUS_ACCEPTANCE_PREDICATES_PASS",
+    "FINAL_DONOR_DELETION_CLEANROOM_PASS"
+  ],
+  "proof_bundle_frozen": true,
+  "terminal_replay_permitted": false,
+  "incremental_spend_usd": 0,
+  "finalization_rule": "FINAL_CLOSURE_REDUCER_MUST_RETURN_ACHIEVED_TRUE_ON_MANIFEST_BOUND_TO_THIS_BUNDLE__THEN_FAMILY_OWNERSHIP_PROMOTION_MAY_BE_RECORDED",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
