@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_TERMINAL_ACCEPTANCE_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_TERMINAL_ACCEPTANCE_BINDING__NO_TERMINAL_CASES_EXECUTED",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "proof_mode": "EXHAUSTIVE_FINITE_POST_BEACON_POPULATION_VERIFICATION",
+  "route": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+  "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+  "population_binding": "canonical/runtime/delegation_terminal_population_binding_v1.py",
+  "population_version": "DELEGATION_WHOLE_SCOPE_TERMINAL_POP_V1",
+  "sample_count": 512,
+  "acceptance_rule": "ALL_512_CASES_EXACT_PASS_AND_ALL_SIX_FROZEN_DELEGATION_CASE_CLASSES_PRESENT",
+  "required_case_classes": [
+    "BASE_PARALLEL",
+    "RESOURCE_CONFLICT",
+    "WORKER_UNAVAILABLE",
+    "STEP_UNAVAILABLE",
+    "WORKER_CAPABILITY_REMOVED",
+    "RESOURCE_CAPACITY_CHANGED"
+  ],
+  "selection_protocol": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
+  "scope_gate_input": "canonical/governance/DELEGATION_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+  "scope_gate_verification": "canonical/verification/DELEGATION_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "population_binding_verification": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "information_boundary": {
+    "candidate_visible": "ONLY_FROZEN_CONTRACT_VISIBLE_TASK_GRAPH_CAPABILITY_RESOURCE_EVIDENCE_AND_RECEIPT_FIELDS",
+    "hidden_oracle": [
+      "MINIMUM_COST_EXECUTABLE_TASK_SET",
+      "DIRECT_DEPENDENCY_GRAPH",
+      "CAPABILITY_COMPATIBLE_ASSIGNMENT",
+      "MINIMUM_WAVE_RESOURCE_FEASIBLE_SCHEDULE",
+      "EVIDENCE_OWNERSHIP",
+      "TERMINAL_FANIN_COMPLETENESS",
+      "SERIAL_OR_NAIVE_FANOUT_BASELINE_ADVANTAGE",
+      "RECEIPT_DRIVEN_REPLAN"
+    ],
+    "reference_solution_visible": false
+  },
+  "adaptive_case_selection": false,
+  "replay_for_tuning": false,
+  "case_replacement": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority_delta": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
