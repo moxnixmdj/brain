@@ -38,6 +38,9 @@ class ResidualClaim:
     decomposes_to_existing_residuals: bool = False
     dependency_residual_ids: tuple[str, ...] = ()
     terminal_success_requires_unverifiable_ranking: bool = False
+    terminal_failure_required_before_implementation: bool = False
+    repeatable_solvable_terminal_failure_observed: bool = False
+    current_composed_route_exists: bool = False
     evidence: Mapping[str, Any] | None = None
 
 
@@ -143,6 +146,21 @@ def eliminate_residual(claim: ResidualClaim) -> dict[str, Any]:
             "status": "ELIMINATED",
             "disposition": "BOUNDED_BRAIN_OWNED_SYNTHESIS",
         }
+
+    if claim.terminal_failure_required_before_implementation:
+        if not claim.current_composed_route_exists:
+            return {
+                **base,
+                "status": "FAIL_CLOSED",
+                "reason": "PROOF_ONLY_DEFERRAL_REQUIRES_CURRENT_COMPOSED_ROUTE",
+            }
+        if not claim.repeatable_solvable_terminal_failure_observed:
+            return {
+                **base,
+                "status": "ELIMINATED",
+                "disposition": "PROOF_ONLY_DEFERRED__MEASURE_CURRENT_COMPOSED_ROUTE_FIRST",
+                "reopen_condition": "REPEATABLE_SOLVABLE_CAUSALLY_LOCALIZED_TERMINAL_FAILURE",
+            }
 
     if claim.mechanical_suffix_owned or claim.decomposes_to_existing_residuals or claim.dependency_residual_ids:
         if not (claim.mechanical_suffix_owned and claim.decomposes_to_existing_residuals and claim.dependency_residual_ids):
