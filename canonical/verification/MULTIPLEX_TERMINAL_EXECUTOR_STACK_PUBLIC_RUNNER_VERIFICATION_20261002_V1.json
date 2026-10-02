@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_MULTIPLEX_TERMINAL_EXECUTOR_STACK_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SIX_PARENT_MULTIPLEX_EXECUTOR_BINDINGS_EXACT_BLOBS_VERIFIED__ZERO_TERMINAL_CASES_CONSUMED",
+  "behaviors": [
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+  ],
+  "exact_brain_blobs": {
+    "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py": "42a6d9fe1a5d5db1ecc95809cbd0eaeec456ba03",
+    "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py": "7f2aef43c54d373233ca6b78face434d92d9af65",
+    "canonical/runtime/multiplex_terminal_instrumentation_reducer_v1.py": "9633949c5a0602ebd740f9fb15aaaf598e17f46f",
+    "canonical/tests/test_multiplex_terminal_instrumentation_reducer_v1.py": "724387459a21d4c9cb3ae4174080d069083ef06d"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 703,
+    "head_sha": "ad3316bcfe3b9d176d158141ac0d5fab40e07e62",
+    "merge_commit": "db1a4e569a8ca6bb5579324bc75707f03e97071c",
+    "workflow_run_id": 36970759331,
+    "workflow_name": "Verify multiplex terminal executor stack v1",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_BLOB_HASHES_MATCHED",
+    "MULTIPLEX_INSTRUMENTATION_ADAPTER_TESTS_PASS",
+    "SAME_CASE_MULTIPLEX_REDUCER_TESTS_PASS",
+    "ALL_SIX_PARENT_MULTIPLEX_BEHAVIORS_BOUND",
+    "MISSING_PARENT_COVERAGE_FAILS_CLOSED",
+    "PARENT_TERMINAL_FAILURE_BLOCKS_BEHAVIOR",
+    "DIRECT_INSTRUMENTATION_FAILURE_BLOCKS_BEHAVIOR",
+    "CROSS_BEHAVIOR_INHERITANCE_FORBIDDEN",
+    "DUPLICATE_PARENT_CASE_CANNOT_DOUBLE_COUNT",
+    "TUNING_REPLAY_FAILS_CLOSED",
+    "NO_POST_FREEZE_BEACON_USED",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
