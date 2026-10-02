@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ABDUCTIVE_RESIDUAL_THEOREM_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_INDEPENDENT_PASS__WEAKEST_SUFFICIENT_RESIDUAL_PROOF_COMPRESSION__ZERO_CREDIT",
+  "objective": "Insert exact weakest-sufficient residual synthesis between verified implication closure and minimum terminal basis selection, using only independently verified finite Horn implication edges.",
+  "runtime": {
+    "path": "canonical/runtime/abductive_residual_theorem_v1.py",
+    "git_blob_sha": "aef25c462163170defd9d6c81beec628b350b51f"
+  },
+  "tests": {
+    "path": "canonical/tests/test_abductive_residual_theorem_v1.py",
+    "git_blob_sha": "d38ad776500d98dc5e96cd49bfcbfb4ba151ae63"
+  },
+  "governance": {
+    "path": "canonical/governance/ABDUCTIVE_RESIDUAL_THEOREM_COMPILER_V1.json",
+    "git_blob_sha": "3749962bf9cf4eedcf0f4d50465b5a6b2b415ac3"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/ABDUCTIVE_RESIDUAL_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "public_verifier_pr": 986,
+    "workflow_run_id": 37028380726,
+    "workflow_job_id": 110908709575,
+    "merge_commit": "19166df8613d7f76b81ea9c5bf8a9305d96f518f"
+  },
+  "execution_order": [
+    "SATURATE_EXISTING_VERIFIED_EVIDENCE",
+    "RUN_VERIFIED_FORWARD_IMPLICATION_CLOSURE",
+    "IF_EXPLICIT_FINITE_INDEPENDENTLY_VERIFIED_IMPLICATION_CONE_EXISTS_RUN_ABDUCTIVE_RESIDUAL_THEOREM_COMPILER",
+    "QUOTIENT_IDENTICAL_MINIMUM_RESIDUALS",
+    "FEED_ONLY_SYNTHESIZED_RESIDUAL_FACTS_TO_MINIMUM_TERMINAL_BASIS_AND_PROOF_GRADIENT",
+    "RUN_ACCEPTANCE_FIXED_POINT_AFTER_EVERY_NEW_VERIFIED_FACT",
+    "ONLY_THEN_COMPUTE_MINIMUM_REALITY_CUT_FOR_IRREDUCIBLE_RESIDUE"
+  ],
+  "applicability": {
+    "requires_explicit_finite_verified_implication_graph": true,
+    "current_activation_binds_live_implication_graph": false,
+    "current_live_projection": "NOT_COMPUTED__NO_LIVE_IMPLICATION_INPUT_IS_BOUND_BY_THIS_ACTIVATION",
+    "consequence": "NO_TARGET_CLOSURE_OR_ACCEPTANCE_CHANGE_FROM_ACTIVATION_ALONE"
+  },
+  "hard_rules": [
+    "NO_UNVERIFIED_IMPLICATION_EDGE_COUNTS",
+    "NO_SEMANTIC_SCOPE_METRIC_OR_NUMERIC_BOUND_INVENTION",
+    "NO_CIRCULAR_SELF_PROOF",
+    "UNREACHABLE_TARGETS_REMAIN_UNPROVED",
+    "DO_NOT_RUN_AS_A_REASON_TO_DELAY_AN_ALREADY_VALID_ZERO_REALITY_PROOF_ACTION",
+    "NO_FRESH_REALITY_AUTHORIZED_BY_THIS_ACTIVATION",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEX_EXISTING_CONTENT_ADDRESSED_RECEIPTS_AGAINST_40_CANONICAL_LEAF_ATOMS__WHEN_THAT_WORK_MATERIALIZES_INDEPENDENTLY_VERIFIED_IMPLICATION_EDGES_RUN_ABDUCTIVE_RESIDUAL_COMPILATION_IMMEDIATELY__THEN_MINIMUM_TERMINAL_BASIS_AND_FIXED_POINT",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
