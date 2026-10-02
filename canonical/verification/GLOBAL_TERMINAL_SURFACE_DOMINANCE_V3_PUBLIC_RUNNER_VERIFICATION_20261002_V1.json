@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__ZERO_GLOBAL_UNCOVERED_BEHAVIORAL_OBLIGATIONS__ALL_14_NAMED_BENCHMARK_SURFACES_REDUNDANT_AS_REQUIRED_EXECUTION_ROUTES__ZERO_TERMINAL_RESULTS",
+  "brain_repository": "moxnixmdj/brain",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 511,
+  "public_pr_head": "155bb2325437f91a45d9dbb1fe0f771dea35cee6",
+  "public_merge_commit": "7da8819f7dc6bda06e23b4b42cee88da3043d3b9",
+  "workflow_run_id": 36957052908,
+  "input": {
+    "path": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V3.json",
+    "blob_sha": "931bdd17e6351477281dd81492521f9337de5121"
+  },
+  "compiler": {
+    "path": "canonical/runtime/proof_route_dominance.py",
+    "blob_sha": "64efeaad5d4295d5bd1a3bd53feae5170c22a8a4"
+  },
+  "independently_verified": [
+    "INPUT_AND_COMPILER_EXACT_BLOB_BINDING_PASS",
+    "COMPILER_STATUS_COMPLETE",
+    "GLOBAL_UNCOVERED_BEHAVIORAL_OBLIGATIONS_ZERO",
+    "BLOCKED_NAMED_SURFACE_COUNT_14",
+    "ALL_14_BLOCKED_NAMED_SURFACES_REDUNDANT_WITH_ZERO_UNCOVERED_OBLIGATIONS",
+    "ADMISSIBLE_EQUAL_OR_STRONGER_ZERO_COST_EXECUTABLE_INDEPENDENT_ROUTES_AT_LEAST_10"
+  ],
+  "boundary": [
+    "SURFACE_DELETION_DOES_NOT_INHERIT_ANY_NAMED_BENCHMARK_SCORE",
+    "SURFACE_DELETION_DOES_NOT_GRANT_CAPABILITY_OR_FAMILY_CREDIT",
+    "TERMINAL_CANDIDATE_MUST_STILL_PASS_THE_REPLACEMENT_PROOF_POPULATIONS",
+    "ANY_BEHAVIORAL_CONTRACT_REGISTRY_OR_SCOPE_MAPPING_CHANGE_INVALIDATES_THIS RECEIPT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
