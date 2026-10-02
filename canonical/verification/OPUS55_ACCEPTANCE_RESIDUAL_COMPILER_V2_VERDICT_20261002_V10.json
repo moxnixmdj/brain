@@ -48,5 +48,12 @@
   "terminal_results_replayed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "tb4_attainability": {
+    "source": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+    "state": "IMPOSSIBLE",
+    "maximum_attainable_successes": 180,
+    "required_successes": 220,
+    "reality_execution_authorized": false
+  }
 }
