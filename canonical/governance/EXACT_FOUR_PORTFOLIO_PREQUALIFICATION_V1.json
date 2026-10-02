@@ -83,7 +83,7 @@
         "LiveBench Instruction Following >=65.7%"
       ],
       "blockers": [
-        "LIVEBENCH_IF_VERIFIER_SOURCE_BYTES_FROZEN__EN_CORE_WEB_SM_AND_RUNTIME_DEPENDENCY_HASHES_DATASET_REVISION_BRAIN_ADAPTER_AND_SYNTHETIC_MUTATION_PREFLIGHT_REMAIN",
+        "LIVEBENCH_IF_VERIFIER_SOURCE_BYTES_FROZEN__SPACY_DEAD_DEPENDENCY_DELETED__NLTK_DATA_EMOJI_SYLLAPY_DATASET_REVISION_BRAIN_ADAPTER_AND_58_CHECKER_SYNTHETIC_MUTATION_PREFLIGHT_REMAIN",
         "OSWORLD_2_1_CODE_IS_PUBLIC_BUT_COMPLETE_ASSET_ROUTE_INCLUDES_GATED_ASSETS__ZERO_COST_END_TO_END_ROUTE_NOT_YET_PROVEN",
         "OPEN_ENDED_DELEGATION_RECOVERY_TOOL_LEARNING_AND_COMPOSITION_LEAVES_REQUIRE_ABSOLUTE_OR_SCOPE_EQUIVALENT_PROOF_CONTRACTS",
         "T2_CAUSAL_ABLATION_RESCUE_AND_COMPOSITION_MUTATION_BUNDLE_NOT_YET_FROZEN"
@@ -190,7 +190,11 @@
     "no_known_unresolved_composition_defect_before_wave": "PREWAVE_AUDIT_REQUIRED",
     "four_portfolios_pairwise_execution_independent": "SHARED_PROTOCOL_FROZEN__PER_PORTFOLIO_NAMESPACE_BINDINGS_REQUIRED",
     "livebench_if_verifier_source_bytes_frozen": true,
-    "finance_and_accounting_index_surface_accounted_for": true
+    "finance_and_accounting_index_surface_accounted_for": true,
+    "proof_route_dominance_independently_verified": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "finite_population_lower_bound_independently_verified": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "private_brain_actions_runner_currently_unusable_for_new_checks": "RUNNER_NOT_ASSIGNED__PUBLIC_VERIFICATION_CAPSULE_ROUTE_USED",
+    "livebench_spacy_dead_dependency_deleted": true
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -209,5 +213,8 @@
     "PUBLIC_RUNNABLE_SURFACES_REQUIRE_PINNED_ZERO_COST_BRAIN_ADAPTER_AND_RESOURCE_PREFLIGHT",
     "PORTFOLIO_TASK_ORACLE_MUTATION_CONTAMINATION_AND_DEPENDENCY_MANIFESTS_REQUIRE_FREEZE_BEFORE_FIRST_RESULT"
   ],
-  "livebench_if_verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json"
+  "livebench_if_verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
+  "proof_route_dominance_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "finite_population_proof_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "private_surface_dependency_deletion_map": "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json"
 }
