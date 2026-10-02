@@ -215,7 +215,13 @@
     "contract_native_absolute_proof_suites_independently_verified": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "controller_composition_independent_pass": "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "four_direct_proof_mutation_preflights_independently_verified": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "terminal_portfolio_namespace_and_stop_rule_manifest_frozen": "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json"
+    "terminal_portfolio_namespace_and_stop_rule_manifest_frozen": "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
+    "public_route_facts_refreshed": true,
+    "terminal_bench_4_public_identity_frozen": true,
+    "osworld_exact_zero_cost_route": "FAIL_CLOSED_ON_GATED_ASSETS__USE_SCOPE_EQUIVALENT_ROUTE_OR_PROVE_ACCESS",
+    "hle_with_tools_equivalence": "NOT_PROVEN__SCOPE_EQUIVALENCE_GATE_REMAINS",
+    "terminal_bench_science_public_identity_frozen": true,
+    "chartography_public_identity_frozen": true
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -225,7 +231,7 @@
     "public_score_only_no_exact_executable_route_found_count": 2,
     "zero_cost_executable_surface_count": 0,
     "portfolio_prequalification_pass_count": 0,
-    "conclusion": "NO_PORTFOLIO_IS_EXECUTION_AUTHORIZED_YET__GENERIC_PREWAVE_POLICY_AMBIGUITY_REMOVED__REMAINING_WORK_IS_SURFACE_BINDING_AND_SCOPE_EQUIVALENCE",
+    "conclusion": "GENERIC_MECHANISMS_AND_DIRECT_PROOF_MUTATION_PREFLIGHTS_CLOSED__REMAINING_WORK_IS_SURFACE_RESOURCE_ADAPTER_SCORER_DEPENDENCY_AND_SCOPE_EQUIVALENCE_PREFLIGHT__NO_TERMINAL_EXECUTION_AUTHORITY",
     "unresolved_identity_or_access_count": 1
   },
   "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
@@ -268,5 +274,6 @@
     "public_runner_workflow_run_id": 36955055153
   },
   "livebench_if_hermetic_input_binding": "canonical/governance/LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json",
-  "livebench_if_adapter_verification": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  "livebench_if_adapter_verification": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
 }
