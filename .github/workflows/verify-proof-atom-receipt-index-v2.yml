@@ -21,3 +21,55 @@ jobs:
           python-version: "3.12"
       - name: Run V2 receipt index tests
         run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+      - name: Build exact live corpus index freeze candidate
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          GITHUB_SHA_VALUE: ${{ github.sha }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          python -m canonical.runtime.proof_atom_receipt_index_v2 > proof_atom_receipt_index_v2.live.json
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          p = Path("proof_atom_receipt_index_v2.live.json")
+          raw = p.read_bytes()
+          data = json.loads(raw)
+          assert str(data.get("status", "")).startswith("PASS"), data
+          assert data.get("canonical_atom_count") == 40, data
+          assert data.get("capability_credit_delta") == 0, data
+          assert data.get("family_credit_delta") == 0, data
+          assert data.get("execution_authority") is False, data
+          assert data.get("promotion_authority") is False, data
+          assert all(str(row.get("atom_id", "")).startswith("PA1:") for row in data.get("atoms", [])), data
+
+          manifest = {
+              "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V2_FREEZE_CANDIDATE_V1",
+              "head_sha": os.environ.get("HEAD_SHA") or None,
+              "github_sha": os.environ["GITHUB_SHA_VALUE"],
+              "workflow_run_id": int(os.environ["RUN_ID"]),
+              "index_sha256": hashlib.sha256(raw).hexdigest(),
+              "index": data,
+              "credit_rule": "ZERO_CREDIT_DISCOVERY_ONLY_UNTIL_EXPLICIT_SEMANTIC_REVIEW_AND_INDEPENDENT_VERIFICATION",
+          }
+          Path("proof_atom_receipt_index_v2.freeze_candidate.json").write_text(
+              json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps({
+              "canonical_atom_count": data["canonical_atom_count"],
+              "atoms_with_candidate_matches": data["atoms_with_candidate_matches"],
+              "atoms_without_candidate_matches": data["atoms_without_candidate_matches"],
+              "candidate_match_count": data["candidate_match_count"],
+              "index_sha256": manifest["index_sha256"],
+          }, sort_keys=True))
+          PY
+      - name: Upload content-addressed live corpus index
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v2-live-freeze-candidate
+          path: proof_atom_receipt_index_v2.freeze_candidate.json
+          if-no-files-found: error
+          retention-days: 1
