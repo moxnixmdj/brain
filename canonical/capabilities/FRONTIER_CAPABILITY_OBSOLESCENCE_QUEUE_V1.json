@@ -82,11 +82,11 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "selected_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "GLOBAL_TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_NEW_REALITY_INFORMATION__THEN_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "ACTIVE_TERMINAL_PROOF_BASIS_HAS_12_CONTRACTS_AND_1_ADMISSIBLE_FROZEN_TERMINAL_ROUTE__11_REMAINING",
+    "exact_blocker": "17_OF_19_OPUS55_ACCEPTANCE_FAMILIES_OPEN__31_OF_38_ATOMIC_PREDICATES_UNRESOLVED__P1_SCOPE_QUARANTINE_AND_SELF_REFLECTION_HARDENED_RECEIPT_INDEX_VERIFICATION_PENDING",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "CLOSE_NEXT_NONDOMINATED_ACTIVE_TERMINAL_ROUTE_BINDINGS_IN_PARALLEL__PRIORITIZE_ALREADY_PREFLIGHTED_ROUTES__NO_FRESH_TERMINAL_WAVE_BEFORE_12_OF_12_AND_PREQUALIFICATION_PASS",
+    "next_action": "INDEPENDENTLY_VERIFY_P1_V6_DERIVED_ONLY_FALSIFICATION_AND_P1_V7_FAILURE_SEMANTICS_REPAIR__IN_PARALLEL_VERIFY_PROOF_ATOM_RECEIPT_INDEX_V4__NO_FRESH_TERMINAL_REPLAY__ZERO_ACCEPTANCE_CREDIT_UNTIL_FIXED_POINT",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
