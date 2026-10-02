@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_VERDICT",
+  "date": "2026-10-02",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "status": "ADMISSIBLE_SUBSTITUTION__ZERO_TERMINAL_CREDIT",
+  "admissible": true,
+  "source_input": "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+  "source_surface": "BEHAVIORAL_CONTRACT_REGISTRY_V1::STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "candidate_route": "canonical/runtime/structured_method_normalized_rule_graph_v3.py + canonical/runtime/structured_method_normalized_rule_oracle_v3.py",
+  "proof_mode": "ABSOLUTE_BEHAVIORAL_PROTOCOL",
+  "required_behavior_count": 1,
+  "covered_behavior_count": 1,
+  "required_interaction_count": 8,
+  "covered_interaction_count": 8,
+  "required_inference_ids": [
+    "GRAPH_TOPOLOGY",
+    "REQUIREMENT_LINEAGE",
+    "JUSTIFIED_EXCLUSIONS",
+    "DEPENDENCY_ORDER",
+    "TYPE_DIMENSION_CONSISTENCY",
+    "REQUIRED_OUTPUT_TRACEABILITY",
+    "EDGE_ACCEPTANCE_CONSEQUENCES"
+  ],
+  "leaked_inference_ids": [],
+  "errors": [],
+  "evidence": [
+    "canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/STRUCTURED_METHOD_EXPRESSION_AST_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "boundary": "NORMALIZED_APPLICABLE_RULES_AND_DECLARED_SEMANTIC_SIGNATURES_ARE_INPUTS__UNSTATED_RULE_EXTRACTION_IS_OUTSIDE_THIS_CONTRACT",
+  "terminal_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
