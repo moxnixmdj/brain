@@ -14,9 +14,9 @@ frontier = load("canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V1.json")
 out = evaluate(frontier)
 
 assert out["status"] == "EXACT_TERMINAL_CERTIFICATE_CUT_COMPUTED", out
-assert out["unresolved_predicate_count"] == 29, out
+assert out["unresolved_predicate_count"] == 31, out
 assert out["certificate_candidate_count"] == 13, out
-assert out["covered_predicate_count"] == 29, out
+assert out["covered_predicate_count"] == 31, out
 assert out["uncovered_predicates"] == [], out
 assert out["selected_certificate_count"] == 13, out
 assert out["selected_new_reality_units"] == 0, out
