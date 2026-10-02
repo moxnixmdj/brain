@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "12_ROUTE_IDENTITIES_ENUMERATED__5_CURRENT_DIRECT_EXECUTORS_INDEPENDENTLY_BOUND__6_MULTIPLEX_REVERIFY_PENDING__CAD_REOPENED__ZERO_TERMINAL_RESULTS",
+  "status": "12_ROUTE_IDENTITIES_ENUMERATED__11_CURRENT_EXECUTORS_INDEPENDENTLY_BOUND__ONLY_CAD_V4_REFREEZE_AND_EXECUTOR_REVERIFY_REMAIN__ZERO_TERMINAL_RESULTS",
   "authority": [
     "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
     "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json",
@@ -17,7 +17,7 @@
     "UNDECLARED_PAID_FALLBACK"
   ],
   "route_count": 12,
-  "bound_executor_count": 5,
+  "bound_executor_count": 11,
   "routes": [
     {
       "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
@@ -40,7 +40,7 @@
       "frozen_route": "canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "PORTFOLIO_MULTIPLEXED_OPEN_DOMAIN",
       "independent_verification": "canonical/verification/M0_PORTFOLIO_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "CURRENT_MULTIPLEX_EXECUTOR_CHANGED_AFTER_PRIOR_RECEIPT__INDEPENDENT_REVERIFICATION_PENDING",
+      "executor_status": "BOUND_PARENT_MULTIPLEX_EXECUTOR__CURRENT_EXACT_BLOBS_INDEPENDENT_PUBLIC_RUNNER_PASS_V3",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
@@ -48,14 +48,16 @@
       "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
       "standalone_terminal_population": false,
       "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY",
-      "independent_executor_verification": null
+      "independent_executor_verification": "canonical/verification/CURRENT_EXECUTOR_SNAPSHOT_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "executor_blob_sha": "dd8fba0f27691002babbc7ad1fc6b65d7bb57282",
+      "executor_test_blob_sha": "4f8690c5d3d8136f8659e34555282ac93845bb4c"
     },
     {
       "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
       "frozen_route": "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "T1_MULTIPLEXED_MECHANICAL_GATE_PLUS_PUBLIC_PROFESSIONAL_BAR",
       "independent_verification": "canonical/verification/NATIVE_ARTIFACT_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "CURRENT_MULTIPLEX_EXECUTOR_CHANGED_AFTER_PRIOR_RECEIPT__INDEPENDENT_REVERIFICATION_PENDING",
+      "executor_status": "BOUND_PARENT_MULTIPLEX_EXECUTOR__CURRENT_EXACT_BLOBS_INDEPENDENT_PUBLIC_RUNNER_PASS_V3",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
@@ -63,14 +65,16 @@
       "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
       "standalone_terminal_population": false,
       "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY",
-      "independent_executor_verification": null
+      "independent_executor_verification": "canonical/verification/CURRENT_EXECUTOR_SNAPSHOT_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "executor_blob_sha": "dd8fba0f27691002babbc7ad1fc6b65d7bb57282",
+      "executor_test_blob_sha": "4f8690c5d3d8136f8659e34555282ac93845bb4c"
     },
     {
       "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
       "frozen_route": "canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "PORTFOLIO_MULTIPLEXED_DETERMINISTIC_GATE",
       "independent_verification": "canonical/verification/STRUCTURED_METHOD_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "CURRENT_MULTIPLEX_EXECUTOR_CHANGED_AFTER_PRIOR_RECEIPT__INDEPENDENT_REVERIFICATION_PENDING",
+      "executor_status": "BOUND_PARENT_MULTIPLEX_EXECUTOR__CURRENT_EXACT_BLOBS_INDEPENDENT_PUBLIC_RUNNER_PASS_V3",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
@@ -78,14 +82,16 @@
       "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
       "standalone_terminal_population": false,
       "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY",
-      "independent_executor_verification": null
+      "independent_executor_verification": "canonical/verification/CURRENT_EXECUTOR_SNAPSHOT_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "executor_blob_sha": "dd8fba0f27691002babbc7ad1fc6b65d7bb57282",
+      "executor_test_blob_sha": "4f8690c5d3d8136f8659e34555282ac93845bb4c"
     },
     {
       "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
       "frozen_route": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "T1_MULTIPLEXED_DIRECT_PROFESSIONAL_QUALITY_GATE",
       "independent_verification": "canonical/verification/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "CURRENT_MULTIPLEX_EXECUTOR_CHANGED_AFTER_PRIOR_RECEIPT__INDEPENDENT_REVERIFICATION_PENDING",
+      "executor_status": "BOUND_PARENT_MULTIPLEX_EXECUTOR__CURRENT_EXACT_BLOBS_INDEPENDENT_PUBLIC_RUNNER_PASS_V3",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
@@ -93,14 +99,16 @@
       "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
       "standalone_terminal_population": false,
       "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY",
-      "independent_executor_verification": null
+      "independent_executor_verification": "canonical/verification/CURRENT_EXECUTOR_SNAPSHOT_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "executor_blob_sha": "dd8fba0f27691002babbc7ad1fc6b65d7bb57282",
+      "executor_test_blob_sha": "4f8690c5d3d8136f8659e34555282ac93845bb4c"
     },
     {
       "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
       "frozen_route": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "T1_T3_MULTIPLEXED_DIRECT_GROUNDED_SYNTHESIS_GATE",
       "independent_verification": "canonical/verification/P3_SYNTHESIS_T1_T3_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "CURRENT_MULTIPLEX_EXECUTOR_CHANGED_AFTER_PRIOR_RECEIPT__INDEPENDENT_REVERIFICATION_PENDING",
+      "executor_status": "BOUND_PARENT_MULTIPLEX_EXECUTOR__CURRENT_EXACT_BLOBS_INDEPENDENT_PUBLIC_RUNNER_PASS_V3",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
@@ -108,7 +116,9 @@
       "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
       "standalone_terminal_population": false,
       "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY",
-      "independent_executor_verification": null
+      "independent_executor_verification": "canonical/verification/CURRENT_EXECUTOR_SNAPSHOT_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "executor_blob_sha": "dd8fba0f27691002babbc7ad1fc6b65d7bb57282",
+      "executor_test_blob_sha": "4f8690c5d3d8136f8659e34555282ac93845bb4c"
     },
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
@@ -153,7 +163,7 @@
       "frozen_route": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "T0_T2_MULTIPLEXED_DETERMINISTIC_INTERVENTION_RESCUE_GATE",
       "independent_verification": "canonical/verification/P1_TRAJECTORY_T0_T2_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "CURRENT_MULTIPLEX_EXECUTOR_CHANGED_AFTER_PRIOR_RECEIPT__INDEPENDENT_REVERIFICATION_PENDING",
+      "executor_status": "BOUND_PARENT_MULTIPLEX_EXECUTOR__CURRENT_EXACT_BLOBS_INDEPENDENT_PUBLIC_RUNNER_PASS_V3",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
@@ -161,7 +171,9 @@
       "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
       "standalone_terminal_population": false,
       "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY",
-      "independent_executor_verification": null
+      "independent_executor_verification": "canonical/verification/CURRENT_EXECUTOR_SNAPSHOT_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "executor_blob_sha": "dd8fba0f27691002babbc7ad1fc6b65d7bb57282",
+      "executor_test_blob_sha": "4f8690c5d3d8136f8659e34555282ac93845bb4c"
     },
     {
       "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
@@ -210,7 +222,7 @@
     }
   ],
   "launch_authority": false,
-  "next": "REVERIFY_CURRENT_MULTIPLEX_EXECUTOR_BYTES__CLOSE_CAD_ANTISHORTCUT_REPAIR_AND_REFREEZE__VERIFY_CURRENT_CAD_EXECUTOR__RECOMPUTE_LAUNCH_AUTHORITY",
+  "next": "FREEZE_CURRENT_CAD_CANDIDATE_V4__VERIFY_CURRENT_CAD_POST_REFREEZE_BINDING__REPIN_AND_VERIFY_CURRENT_CAD_TERMINAL_EXECUTOR__RECOMPUTE_LAUNCH_AUTHORITY",
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
