@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ATOMIC_ROUTE_SPECIFIC_TERMINAL_LAUNCH_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ATOMIC_V2_ROUTE_SPECIFIC_LAUNCH_CAPSULE_EXACT_BLOBS_VERIFIED__ZERO_TERMINAL_CASES_CONSUMED",
+  "exact_brain_blobs": {
+    "canonical/runtime/atomic_route_specific_terminal_launch_v1.py": "b042d04a43cc2866744c01d30a447bd47a21dddc",
+    "canonical/tests/test_atomic_route_specific_terminal_launch_v1.py": "46036b35e5e912f13c2b7adc94a6809b924b9135",
+    "canonical/governance/TERMINAL_ROUTE_EXECUTION_PLAN_V1.json": "621f41ccc22688b31d364e895bc62449b5c7e2be"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 746,
+    "head_sha": "04ca3e35a63445dbb5fdd0e1001da3c6bf148c0a",
+    "merge_commit": "e895bab37923035daef744541c362ad5c26b14a6",
+    "workflow_run_id": 36973013939,
+    "workflow_job_id": 110730801689,
+    "workflow_name": "Verify atomic V2 terminal launch capsule",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_ATOMIC_LAUNCHER_BLOB",
+    "EXACT_LAUNCHER_TEST_BLOB",
+    "EXACT_CAD_V4_REPINNED_EXECUTION_PLAN_BLOB",
+    "SIX_DIRECT_AND_SIX_MULTIPLEX_EXACT_COVERAGE",
+    "FROZEN_ROUTE_SAMPLE_COUNTS_PRESERVED",
+    "CONTENT_ADDRESSED_EXECUTOR_RECEIPT_DERIVATION",
+    "DETERMINISTIC_PRELAUNCH_COMMITMENT",
+    "MISSING_PARENT_COVERAGE_FAILS_CLOSED",
+    "TUNING_REPLAY_FAILS_CLOSED",
+    "AUTHORITY_FALSE_TOUCHES_ZERO_TERMINAL_EXECUTORS",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "LAUNCHER_VERIFICATION_ONLY__AUTHORITY_MUST_BE_DERIVED_SEPARATELY_FROM_CURRENT_PREQUALIFICATION_AND_EXACT_LAUNCH_CAPSULE"
+}
