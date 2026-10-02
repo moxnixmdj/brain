@@ -105,14 +105,14 @@ def solve(public_case: Mapping[str, Any]) -> dict[str, Any]:
         for resource in writes[aid]:
             last_writer[resource] = aid
 
-    terminal_actions = {last_writer[r] for r in terminal_failed if r in last_writer}
-    if len(terminal_actions) != len(set(terminal_failed)):
-        missing = sorted(r for r in terminal_failed if r not in last_writer)
+    missing = sorted(r for r in terminal_failed if r not in last_writer)
+    if missing:
         return {
             "status": "ESCALATE",
             "reason": "NO_PRODUCER_FOR_TERMINAL_FAILED_RESOURCE",
             "missing_terminal_resources": missing,
         }
+    terminal_actions = {last_writer[r] for r in terminal_failed}
 
     relevant: set[str] = set()
     stack = list(terminal_actions)
