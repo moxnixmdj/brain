@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_M1A_QWEN_VISUAL_DEV_FALSIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "FALSIFIED_AS_DEFAULT_M1A_COMPOUND_VISUAL_RESIDUAL_DONOR__ZERO_CAPABILITY_CREDIT",
+  "parent_residual": "M1A_COMPOUND_VISUAL_FEATURE_SEMANTICS",
+  "donor": {
+    "repository": "Qwen/Qwen3-VL-2B-Instruct",
+    "resolved_hf_sha": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "license": "Apache-2.0"
+  },
+  "frozen_corpus": "canonical/evaluation/M1A_COMPOUND_VISUAL_SEMANTICS_FROZEN_CORPUS_V1.json",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 459,
+    "merge_commit": "19769cca3da8869a65bae21cfbae58abf4147096",
+    "workflow_run_id": 36945390197,
+    "job_id": 110646224009,
+    "conclusion": "success"
+  },
+  "dev_result": {
+    "case_count": 4,
+    "pass_count": 2,
+    "accuracy": 0.5,
+    "passed": [
+      "DEV_3X_WITH_DISTRACTOR_001",
+      "DEV_AMBIGUOUS_QUANTITY_001"
+    ],
+    "failed": [
+      {
+        "id": "DEV_2X_EQUAL_HOLES_001",
+        "expected": "H1,H2",
+        "observed": "H1"
+      },
+      {
+        "id": "DEV_SLOT_TARGET_001",
+        "expected": "S1",
+        "observed": "H1"
+      }
+    ]
+  },
+  "admissible_conclusion": "CURRENT_DETERMINISTIC_M1A_BUNDLE_DOMINATES_USING_QWEN3_VL_2B_AS_DEFAULT_RESIDUAL_DONOR_FOR_THE_TESTED_COMPOUND_VISUAL_ATOMS__DO_NOT_ADVANCE_TO_HARVEST_OR_HELDOUT",
+  "preserved_possible_roles": [
+    "FUTURE_NARROW_RESIDUAL_ONLY_IF_DETERMINISTIC_M1A_ROUTE_LATER_LOCALIZES_A_DIFFERENT_REPEATABLE_SOLVABLE_VISUAL_CLASS"
+  ],
+  "heldout_cases_exposed": 0,
+  "next": "REMOVE_QWEN3_VL_2B_FROM_ACTIVE_DEFAULT_M1A_HARVEST_PATH__KEEP_M1A_DETERMINISTIC_ACTION_BUNDLE__DO_NOT_SPEND_HELDOUT",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
