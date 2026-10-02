@@ -1,0 +1,22 @@
+name: Verify P1 typed trajectory causal route V5
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py"
+      - "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py"
+      - "canonical/tests/test_trajectory_failure_typed_ir_v5.py"
+      - "canonical/governance/TRAJECTORY_TYPED_IR_V5_SCOPE_RESCUE_ACTIVATION.json"
+      - ".github/workflows/verify-trajectory-typed-ir-v5.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run V5 P1 scope and rescue tests
+        run: python -m pytest canonical/tests/test_trajectory_failure_typed_ir_v5.py -q
