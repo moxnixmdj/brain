@@ -404,16 +404,17 @@
     },
     "global_abductive_residual_cut": {
       "activation_path": "canonical/governance/GLOBAL_CERTIFICATE_ABDUCTIVE_RESIDUAL_ACTIVATION_V1.json",
-      "verification_path": "canonical/verification/GLOBAL_ABDUCTIVE_RESIDUAL_AND_TARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "verification_path": "canonical/verification/GLOBAL_ABDUCTIVE_AND_MULTITARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "status": "ACTIVE_INDEPENDENT_PASS__31_TARGETS__40_PRIMITIVE_FACTS__NO_FURTHER_GLOBAL_STRUCTURAL_COMPRESSION",
       "primitive_residual_fact_count": 40,
       "minimum_joint_residual_size": 40,
       "capability_credit_delta": 0,
-      "family_credit_delta": 0
+      "family_credit_delta": 0,
+      "supplementary_verification_alias": "canonical/verification/GLOBAL_ABDUCTIVE_RESIDUAL_AND_TARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     "multitarget_certificate_target_refinement": {
       "activation_path": "canonical/governance/MULTITARGET_CERTIFICATE_TARGET_REFINEMENT_ACTIVATION_V1.json",
-      "verification_path": "canonical/verification/GLOBAL_ABDUCTIVE_RESIDUAL_AND_TARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "verification_path": "canonical/verification/GLOBAL_ABDUCTIVE_AND_MULTITARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "status": "ACTIVE_INDEPENDENT_PASS__FOUR_TARGET_SPECIFIC_CHILDREN__JOINT_RESIDUAL_40_UNCHANGED",
       "targets": [
         "CODING_FRONTIERCODE_GE_54_4",
@@ -568,12 +569,12 @@
     },
     "global_abductive_residual_cut": {
       "path": "canonical/governance/GLOBAL_CERTIFICATE_ABDUCTIVE_RESIDUAL_ACTIVATION_V1.json",
-      "verification": "canonical/verification/GLOBAL_ABDUCTIVE_RESIDUAL_AND_TARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "verification": "canonical/verification/GLOBAL_ABDUCTIVE_AND_MULTITARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "status": "ACTIVE_INDEPENDENT_PASS__GLOBAL_STRUCTURAL_RECOMPRESSION_EXHAUSTED_AT_40_PRIMITIVE_FACTS"
     },
     "multitarget_certificate_target_refinement": {
       "path": "canonical/governance/MULTITARGET_CERTIFICATE_TARGET_REFINEMENT_ACTIVATION_V1.json",
-      "verification": "canonical/verification/GLOBAL_ABDUCTIVE_RESIDUAL_AND_TARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "verification": "canonical/verification/GLOBAL_ABDUCTIVE_AND_MULTITARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "status": "ACTIVE_INDEPENDENT_PASS__PARTIAL_CLOSURE_ENABLED_FOR_FOUR_TARGETS__ZERO_CREDIT"
     }
   },
