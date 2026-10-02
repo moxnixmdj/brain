@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_CANDIDATE",
+  "date": "2026-10-02",
+  "status": "IMPLEMENTED_CANDIDATE__SCOPE_FIREWALL_ADDED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prevent narrow or merely similarly named Brain evidence from satisfying a broader frozen Opus55 acceptance target by requiring an explicit independently verified EXACT or SUPERSET witness-to-target scope relation before atom/metric implication can pass.",
+  "runtime": "canonical/runtime/protocol_implication_scope_algebra_v2.py",
+  "tests": "canonical/tests/test_protocol_implication_scope_algebra_v2.py",
+  "supersedes_only_after_independent_verification": "canonical/runtime/protocol_implication_scope_algebra_v1.py",
+  "discovered_failure_mode": {
+    "description": "V1 could return PASS when normalized atoms and metric bounds matched even if the witness covered only a narrower scope than the frozen target, because scope coverage was not represented as an independently verified input.",
+    "concrete_guard_case": "A narrow 13/13 deterministic execution-guard receipt must not satisfy the broader SELF_VERIFICATION_DEBUGGING_AND_RECOVERY frozen intervention-portfolio invariant without an independently verified scope relation.",
+    "risk": "FALSE_ZERO_REALITY_ACCEPTANCE_CLOSURE"
+  },
+  "new_required_input": {
+    "field": "verified_scope_relations",
+    "admissible_relations": ["EXACT", "SUPERSET"],
+    "mandatory_flags": ["verified", "independent"],
+    "mandatory_receipt": true,
+    "forbidden_inference_sources": ["name_similarity", "prose_similarity", "family_label", "atom_overlap"]
+  },
+  "additional_hardening": [
+    "VERIFIED_IMPLICATION_EDGES_MUST_NOW_ALSO_BE_INDEPENDENT",
+    "SAME_SCOPE_STRING_ALONE_DOES_NOT_COUNT_WITHOUT_AN_EXPLICIT_VERIFIED_SCOPE_RELATION",
+    "SUBSET_DISJOINT_AND_UNKNOWN_RELATIONS_CANNOT_CLOSE_A_TARGET",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_COMPILER_IMPLEMENTATION"
+  ],
+  "literal_evidence_join_audit": {
+    "proved_witness_count": 9,
+    "supporting_source_file_count": 17,
+    "normalized_target_count": 11,
+    "target_atom_and_metric_source_literal_count": 57,
+    "exact_target_literal_matches_in_proved_witness_sources": 0,
+    "consequence": "NO_EXISTING_LITERAL_ONLY_WITNESS_TO_TARGET_EDGE_CAN_BE_PROMOTED_FROM_THE_CURRENT_NINE_WITNESSES"
+  },
+  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_AND_TEST_BLOBS__THEN_REPLACE_V1_IN_THE_PROTOCOL_IMPLICATION_GATE__NORMALIZE_EXPLICIT_TARGET_AND_WITNESS_SCOPE_REFS_AND_VERIFIED_SCOPE_RELATIONS__RERUN_ZERO_REALITY_ALGEBRA",
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
