@@ -1,0 +1,21 @@
+{
+  "allowed_case_fail_count": 0,
+  "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+  "case_replacement": false,
+  "ceiling_definition": "100_PERCENT_INDEPENDENT_INTERMEDIATE_AND_FINAL_CORRECTNESS_ON_THE_FROZEN_SCOPE_EQUIVALENT_POST_FREEZE_TERMINAL_SUITE",
+  "ceiling_reason": "OBJECTIVE_NUMERIC_GROUND_TRUTH_WITH_4096_OF_4096_REQUIRED_PASS_HAS_NO_HIGHER_CORRECTNESS_SCORE_ON_THE_FROZEN_SCOPE_EQUIVALENT_SUITE",
+  "date": "2026-10-02",
+  "execution_failure_counts_as_failure": true,
+  "mutation_after_freeze_forbidden": true,
+  "required_case_pass_count": 4096,
+  "required_coverage": "ALL_POPULATION_MANIFEST_COVERAGE_MUST_INCLUDE_VALUES_PRESENT",
+  "required_independent_oracle": true,
+  "required_scope_gate_receipt": "canonical/verification/SA_CCR_SCOPE_GATE_V2_CANONICAL_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "required_scope_gate_status": "ADMISSIBLE_SUBSTITUTION",
+  "schema": "PROJECT_BRAIN_TERMINAL_ACCEPTANCE_RULE_MANIFEST_V1",
+  "status": "FROZEN_PRE_BEACON",
+  "terminal_acceptance_proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
+  "terminal_credit_before_execution": 0,
+  "tuning_replay": false,
+  "zero_incremental_spend_required": true
+}
