@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_COMPILER_STACK_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_BLOBS__12_TESTS_PASS__ZERO_TERMINAL_CREDIT",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "verification_pr": 651,
+  "verification_pr_head_sha": "e8d697cb570f86efb5b3a40cb9370a3d5cafd6c2",
+  "workflow_run_id": 36965606848,
+  "job_id": 110708578158,
+  "workflow_conclusion": "success",
+  "python": "3.12.14",
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_proof_supercompiler.py": "c7a4b8bc29d041fcc04fbcfa8a79db44fa9fe370",
+    "canonical/tests/test_terminal_proof_supercompiler.py": "e91e2c2dc3f7978d115fdd45efdfe4b66e9af33a",
+    "canonical/runtime/prewave_anti_circularity_compiler.py": "e610b392fdb8bce337b748f2924b1134ccdfbbd9",
+    "canonical/tests/test_prewave_anti_circularity_compiler.py": "6c69bfb96d5c28916774b4d0e044d981b2e48f60",
+    "canonical/runtime/generated_terminal_state_compiler.py": "24acf38a28b97068986f957feba3d8edf6ed8073",
+    "canonical/tests/test_generated_terminal_state_compiler.py": "a93b1c8ccf85d9b2850be49e7cee5cb3bb434a47"
+  },
+  "verified": [
+    "EXACT_BRAIN_BLOB_IDENTITY_PASS",
+    "PROOF_SUPERCOMPILER_EXISTING_FAIL_CLOSED_AND_TRANSMUTATION_TESTS_PASS",
+    "WHOLE_EIGHT_CONTRACT_FRONTIER_CAPACITY_40_BLOCKER_TEST_PASS",
+    "ANTI_CIRCULARITY_TERMINAL_RESULT_DEMOTION_TEST_PASS",
+    "ANTI_CIRCULARITY_SAFETY_GATE_NONDEMOTION_TEST_PASS",
+    "ANTI_CIRCULARITY_CIRCULAR_PRECONDITION_REJECTION_PASS",
+    "GENERATED_STATE_CONTRACT_SET_MISMATCH_FAILS_CLOSED",
+    "GENERATED_STATE_PROGRESS_DOES_NOT_SELF_PROMOTE",
+    "GENERATED_STATE_READY_FIXTURE_AUTHORIZES_ONLY_WHEN_CANONICAL_INPUTS_READY"
+  ],
+  "test_count": 12,
+  "test_result": "OK",
+  "authority_effect": "NEW_COMPILER_STACK_MAY_BE_USED_FOR_PREPROOF_SCHEDULING_RECONCILIATION_AND_ANTI_CIRCULARITY__IT_DOES_NOT_BY_ITSELF_PROMOTE_ANY_CONTRACT_OR_GRANT_TERMINAL_EXECUTION_AUTHORITY",
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
