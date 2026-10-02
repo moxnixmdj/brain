@@ -1,0 +1,25 @@
+name: Test postwave witness frontier delta v1
+on:
+  push:
+    branches:
+      - breakthrough/postwave-witness-frontier-v1-20261002
+    paths:
+      - "canonical/runtime/postwave_witness_frontier_delta_v1.py"
+      - "canonical/tests/test_postwave_witness_frontier_delta_v1.py"
+      - ".github/workflows/verify-postwave-witness-frontier-delta-v1.yml"
+      - "canonical/reasoning/2026-10-02_POSTWAVE_STRONGER_PROOF_RESATURATION_V1.json"
+      - "canonical/governance/P1_TERMINAL_EXECUTION_SCOPE_MISMATCH_QUARANTINE_V1.json"
+      - "canonical/verification/OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      - "canonical/verification/OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_postwave_witness_frontier_delta_v1 -v
