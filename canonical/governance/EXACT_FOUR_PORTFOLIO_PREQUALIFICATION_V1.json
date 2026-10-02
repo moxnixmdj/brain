@@ -194,7 +194,9 @@
     "proof_route_dominance_independently_verified": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "finite_population_lower_bound_independently_verified": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "private_brain_actions_runner_currently_unusable_for_new_checks": "RUNNER_NOT_ASSIGNED__PUBLIC_VERIFICATION_CAPSULE_ROUTE_USED",
-    "livebench_spacy_dead_dependency_deleted": true
+    "livebench_spacy_dead_dependency_deleted": true,
+    "independent_verifier_failover_installed": true,
+    "public_runner_exact_blob_binding_verified": true
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -216,5 +218,6 @@
   "livebench_if_verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
   "proof_route_dominance_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "finite_population_proof_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "private_surface_dependency_deletion_map": "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json"
+  "private_surface_dependency_deletion_map": "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json",
+  "independent_verification_carrier_fallback": "canonical/governance/INDEPENDENT_VERIFICATION_CARRIER_FALLBACK_V1.json"
 }
