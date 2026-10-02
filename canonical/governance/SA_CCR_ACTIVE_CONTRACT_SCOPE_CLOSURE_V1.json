@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_SA_CCR_ACTIVE_CONTRACT_SCOPE_CLOSURE_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_CONTRACT_MECHANISM_SCOPE_CLOSED_TO_EXISTING_KERNEL__TERMINAL_PROOF_ROUTE_PRESENT_NOT_YET_PROMOTED__ZERO_FAMILY_CREDIT",
+  "status": "ACTIVE_CONTRACT_MECHANISM_SCOPE_CLOSED__INDEPENDENT_INFORMATION_SAFE_PREFLIGHT_PASS__SCOPE_GATE_AND_POST_FREEZE_TERMINAL_RESULT_PENDING__ZERO_FAMILY_CREDIT",
   "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
   "authority": [
     "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
@@ -56,10 +56,11 @@
     "missing_factor_canary": true
   },
   "terminal_proof_route": {
-    "id": "SA_CCR_ACTIVE_CONTRACT_HELDOUT_PORTFOLIO_PROOF_V1",
-    "candidate": "canonical/runtime/saccr_credit_kernel.py",
-    "population": "POST_FREEZE_HELDOUT_LINEAR_CREDIT_SINGLE_NAME_AND_INDEX_PORTFOLIOS_SPANNING_MARGined_UNMARGINED_RATINGS_DIRECTIONS_MATURITIES_AND_ENTITY_AGGREGATION",
-    "oracle": "INDEPENDENT_INTERMEDIATE_LINEAGE_ORACLE_NOT_IMPORTING_CANDIDATE_KERNEL",
+    "id": "SA_CCR_ACTIVE_CONTRACT_INFORMATION_SAFE_PROOF_V1",
+    "route_manifest": "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json",
+    "candidate": "canonical/runtime/saccr_credit_information_safe_candidate.py",
+    "proof_population": "canonical/runtime/saccr_credit_information_safe_proof.py",
+    "independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "required_checks": [
       "SUPERVISORY_DURATION",
       "ADJUSTED_NOTIONAL",
@@ -71,6 +72,7 @@
       "ENTITY_AGGREGATION",
       "CREDIT_ADDON"
     ],
+    "scope_equivalent_proof_gate_v2_pass": false,
     "terminal_result_observed": false
   },
   "reopen_conditions": [
