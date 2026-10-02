@@ -18,7 +18,7 @@ class Tests(unittest.TestCase):
         by_id = {x["id"]: x for x in out["findings"]}
         self.assertTrue(by_id["P3_EXPRESSION_NOT_LOAD_BEARING"]["expression_corruption_pass"])
         self.assertEqual(out["p0_structured_method_disposition"], "NO_FINDING_FROM_THIS_AUDIT")
-        self.assertIn("not invalidated", out["p2_current_active_route_disposition"].lower())
+        self.assertIn("not_invalidated", out["p2_current_active_route_disposition"].lower())
 
 
 if __name__ == "__main__":
