@@ -355,5 +355,7 @@
     "authority_effect": "SCHEDULING_RECONCILIATION_AND_ANTI_CIRCULARITY_ONLY__NO_ROUTE_PROMOTION_FROM_STACK_ALONE",
     "independent_verification": "canonical/verification/TERMINAL_CLOSURE_COMPILER_STACK_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
-  "latest_independent_objective_binding_verification": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  "latest_independent_objective_binding_verification": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "prewave_route_execution_readiness": true,
+  "prewave_route_execution_readiness_rule": "ALL_12_ACTIVE_BEHAVIORAL_CONTRACTS_HAVE_FROZEN_ADMISSIBLE_PREWAVE_ROUTES_WITH_ZERO_BLOCKERS__DISTINCT_FROM_TERMINAL_WAVE_EXECUTION_AUTHORITY"
 }
