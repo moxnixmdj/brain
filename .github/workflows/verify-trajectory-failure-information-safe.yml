@@ -1,0 +1,28 @@
+name: Verify information-safe trajectory failure preflight
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/trajectory_failure_information_safe_proof.py
+      - canonical/runtime/trajectory_failure_information_safe_candidate.py
+      - canonical/tests/test_trajectory_failure_information_safe.py
+      - .github/workflows/verify-trajectory-failure-information-safe.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/trajectory_failure_information_safe_proof.py
+      - canonical/runtime/trajectory_failure_information_safe_candidate.py
+      - canonical/tests/test_trajectory_failure_information_safe.py
+      - .github/workflows/verify-trajectory-failure-information-safe.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_trajectory_failure_information_safe
