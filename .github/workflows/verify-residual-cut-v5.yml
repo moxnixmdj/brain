@@ -1,0 +1,37 @@
+name: Verify exact residual cut v5
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V5.json
+      - canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json
+      - canonical/runtime/minimum_reality_cut.py
+      - .github/workflows/verify-residual-cut-v5.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Recompute exact V5 cut
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.minimum_reality_cut import solve
+          inp=json.loads(Path("canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V5.json").read_text())
+          expected=json.loads(Path("canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json").read_text())
+          out=solve(inp)
+          print(json.dumps(out,sort_keys=True,indent=2))
+          assert out["status"]=="EXACT_MINIMUM", out
+          assert out["exact_minimum"] is True, out
+          assert out["selected_observations"]==expected["selected_observations"], (out,expected)
+          assert out["observation_count"]==expected["observation_count"], (out,expected)
+          assert out["total_cost"]==expected["total_cost"], (out,expected)
+          assert out["unresolved_distinctions"]==expected["unresolved_distinctions"], (out,expected)
+          PY
