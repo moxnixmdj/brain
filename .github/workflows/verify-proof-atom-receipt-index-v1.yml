@@ -81,3 +81,5 @@ jobs:
           assert p["capability_credit_delta"] == 0
           assert p["family_credit_delta"] == 0
           PY
+
+# live full-brain corpus freeze trigger 20261002-v2
