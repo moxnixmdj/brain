@@ -65,18 +65,22 @@ def compile_next_frontier(
         if a["available_now"] and int(a.get("new_reality_units", 0) or 0) == 0
     ]
 
-    if critical_blocked:
-        primary = critical_blocked[0]
-        primary_state = "BLOCKED_PRECONDITIONS"
-    elif critical_available_zero_reality:
+    # Never label a blocked edge as the next executable action. Diagnosis and
+    # execution are separate outputs so a large blocked hyperedge cannot stall
+    # smaller proof-producing work that is available now.
+    if critical_available_zero_reality:
         primary = critical_available_zero_reality[0]
         primary_state = "AVAILABLE_ZERO_REALITY"
-    elif ranked:
-        primary = ranked[0]
-        primary_state = "AVAILABLE" if primary["available_now"] else "BLOCKED_PRECONDITIONS"
+    elif available_zero_reality:
+        primary = available_zero_reality[0]
+        primary_state = "AVAILABLE_ZERO_REALITY"
     else:
-        primary = None
-        primary_state = "NO_RESIDUAL_ACTION"
+        available_any = [a for a in ranked if a["available_now"]]
+        primary = available_any[0] if available_any else None
+        primary_state = "AVAILABLE" if primary else "NO_EXECUTABLE_RESIDUAL_ACTION"
+
+    blocked_any = [a for a in ranked if not a["available_now"]]
+    highest_blocked = critical_blocked[0] if critical_blocked else (blocked_any[0] if blocked_any else None)
 
     return {
         "schema": SCHEMA,
@@ -88,6 +92,9 @@ def compile_next_frontier(
         "primary_unresolved_target_count": len(primary["unresolved_target_predicates"]) if primary else 0,
         "primary_unresolved_targets": primary["unresolved_target_predicates"] if primary else [],
         "primary_unsatisfied_preconditions": primary["unsatisfied_preconditions"] if primary else [],
+        "highest_leverage_blocked_action_id": highest_blocked["id"] if highest_blocked else None,
+        "highest_leverage_blocked_action_target_count": len(highest_blocked["unresolved_target_predicates"]) if highest_blocked else 0,
+        "highest_leverage_blocked_action_preconditions": highest_blocked["unsatisfied_preconditions"] if highest_blocked else [],
         "available_zero_reality_critical_actions": [a["id"] for a in critical_available_zero_reality],
         "available_zero_reality_actions": [a["id"] for a in available_zero_reality],
         "blocked_critical_actions": [
@@ -99,8 +106,8 @@ def compile_next_frontier(
             for a in critical_blocked
         ],
         "rule": (
-            "PRIMARY_IS_HIGHEST_COVERAGE_CRITICAL_PATH_FRONTIER__"
-            "BLOCKED_PRIMARY_MEANS_DISCHARGE_LISTED_PRECONDITIONS_NOT_RUN_ACTION__"
+            "PRIMARY_IS_NEXT_EXECUTABLE_ACTION_NEVER_A_BLOCKED_EDGE__"
+            "HIGHEST_LEVERAGE_BLOCKED_ACTION_IS_REPORTED_SEPARATELY_FOR_PRECONDITION_DISCHARGE__"
             "NO_SEMANTIC_INFERENCE_NO_NEW_EVIDENCE_NO_PROMOTION"
         ),
         "new_reality_units_consumed": 0,
