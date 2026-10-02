@@ -21,6 +21,10 @@ SCAN_ROOTS = (
     "canonical/capabilities/opus55",
 )
 EXPECTED_JSON_COUNT = 768
+POST_SNAPSHOT_CONTROL_PATHS = {
+    "canonical/governance/OPUS55_ACCEPTANCE_ZERO_REALITY_DERIVATIONS_V1.json",
+    "canonical/governance/OPUS55_ACCEPTANCE_RECEIPT_SATURATION_V1.json",
+}
 
 TERMINAL_RESULT_PATH = "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json"
 TERMINAL_RESULT_BLOB = "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
@@ -56,7 +60,7 @@ def _json_count(root: Path) -> int:
     for rel in SCAN_ROOTS:
         base = root / rel
         for p in base.rglob("*.json"):
-            if p.is_file():
+            if p.is_file() and p.relative_to(root).as_posix() not in POST_SNAPSHOT_CONTROL_PATHS:
                 seen.add(p.resolve())
     return len(seen)
 
