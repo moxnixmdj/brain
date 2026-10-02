@@ -1,0 +1,22 @@
+name: Verify terminal donor independence
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py"
+      - "canonical/runtime/**"
+      - ".github/workflows/verify-terminal-donor-independence.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run fail-closed donor-independence audit
+        run: python canonical/runtime/terminal_candidate_donor_independence_audit_v1.py
