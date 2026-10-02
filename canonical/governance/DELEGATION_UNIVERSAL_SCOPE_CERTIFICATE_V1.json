@@ -18,11 +18,11 @@
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
     "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
     "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "af83f4899169e81017767c3316ddcf6b61da5ef6",
-    "canonical/runtime/delegation_universal_scope_certificate_v1.py": "2447ab22a2f1c4647485c31a3ad84c2e6c67f5a4",
+    "canonical/runtime/delegation_universal_scope_certificate_v1.py": "0c96a97b015b367063c9ba138eae7022cc39b9f0",
     "canonical/tests/test_delegation_universal_scope_certificate_v1.py": "771bcadbc47195365825f69ad33539ef86eef880"
   },
   "proof_domain": {
-    "population": "ALL_FINITE_VALID_EXPLICIT_DELEGATION_CONTRACTS_ACCEPTED_BY_THE_FROZEN_CANDIDATE_MODEL_WITH_AT_LEAST_ONE_EXECUTABLE_FEASIBLE_PLAN",
+    "population": "ALL_FINITE_VALID_EXPLICIT_DELEGATION_CONTRACTS_ACCEPTED_BY_THE_FROZEN_CANDIDATE_MODEL__FEASIBLE_OR_PROVABLY_INFEASIBLE",
     "finite_steps": true,
     "finite_workers": true,
     "monotone_explicit_facts": true,
@@ -35,12 +35,12 @@
       "RESOURCE_CAPACITY_CHANGED"
     ],
     "no_static_task_count_cutoff": true,
-    "infeasible_or_invalid_contracts": "FAIL_CLOSED__OUTSIDE_POSITIVE_TERMINAL_SUCCESS_CLAIM"
+    "infeasible_or_invalid_contracts": "VALID_BUT_INFEASIBLE_CONTRACTS_FAIL_CLOSED_AFTER_COMPLETE_FINITE_SEARCH_AND_HAVE_ATTAINABLE_TERMINAL_SUCCESS_CEILING_ZERO__MALFORMED_CONTRACTS_ARE_OUTSIDE_PROTOCOL_DOMAIN"
   },
   "formal_lemmas": [
     {
       "id": "L1_FINITE_SEARCH_COMPLETENESS",
-      "statement": "Because each declared step may appear at most once, only fact-adding applicable unused steps are extended, and the step set is finite, the candidate search tree is finite and reaches every simple executable fact-producing sequence."
+      "statement": "Because each declared step may appear at most once, only fact-adding applicable unused steps are extended, and the step set is finite, the candidate search tree is finite and reaches every simple executable fact-producing sequence. Exhaustion with no schedulable goal is therefore a complete impossibility result within the declared finite model."
     },
     {
       "id": "L2_GLOBAL_PLAN_OPTIMALITY",
@@ -64,10 +64,10 @@
     }
   ],
   "acceptance_consequence": {
-    "terminal_success": "OBJECTIVE_CEILING_ON_EVERY_ADMISSIBLE_FEASIBLE_CONTRACT_IN_PROOF_DOMAIN",
+    "terminal_success": "CEILING_1_FOR_EVERY_FEASIBLE_VALID_CONTRACT__CEILING_0_AND_FAIL_CLOSED_FOR_EVERY_VALID_CONTRACT_PROVED_INFEASIBLE_UNDER_IDENTICAL_DECLARED_CONSTRAINTS",
     "critical_coordination_violations": "ZERO_BY_CONSTRUCTION_OR_FAIL_CLOSED",
     "claimed_speedup": "NEVER_OBTAINED_BY_TRADING_AWAY_EXACT_PLAN_CORRECTNESS",
-    "relation_to_opus": "A_MATCHED_SYSTEM_CANNOT_EXCEED_TERMINAL_SUCCESS_CEILING_1__SO_UNIVERSAL_BRAIN_CEILING_IMPLIES_NONINFERIOR_TERMINAL_SUCCESS_ON_THE_SAME_ADMISSIBLE_PROTOCOL_DOMAIN"
+    "relation_to_opus": "ON_THE_SAME_DECLARED_PROTOCOL_CONSTRAINTS_NO_MATCHED_SYSTEM_CAN_EXCEED_1_ON_FEASIBLE_CASES_OR_SUCCEED_ON_PROVED_INFEASIBLE_CASES__BRAIN_THEREFORE_REACHES_THE_ATTAINABLE_TERMINAL_SUCCESS_CEILING_POINTWISE"
   },
   "falsification_conditions": [
     "ANY_LOAD_BEARING_EXACT_INPUT_BLOB_CHANGES",
@@ -79,10 +79,10 @@
   "hard_nonclaims": [
     "NO_ACCEPTANCE_CREDIT_UNTIL_INDEPENDENT_CLEAN_ROOM_VERIFICATION_PASSES",
     "NO_FAMILY_OWNERSHIP_CREDIT_FROM_THIS_CERTIFICATE_ALONE",
-    "NO_CLAIM_ABOUT_INFEASIBLE_OR_MALFORMED_TASKS_AS_SUCCESS_CASES",
     "NO_EMPIRICAL_GENERALIZATION_FROM_THE_132_CASE_TERMINAL_SAMPLE",
     "NO_TERMINAL_REPLAY",
-    "NO_NEW_REALITY"
+    "NO_NEW_REALITY",
+    "MALFORMED_CONTRACTS_REMAIN_OUTSIDE_THE_VALID_PROTOCOL_DOMAIN_AND_FAIL_CLOSED"
   ],
   "runtime": "canonical/runtime/delegation_universal_scope_certificate_v1.py",
   "tests": "canonical/tests/test_delegation_universal_scope_certificate_v1.py",
