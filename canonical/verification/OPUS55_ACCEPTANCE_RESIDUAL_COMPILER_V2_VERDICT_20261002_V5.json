@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V5",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SATURATION_COMPLETE__7_PROVED__1_OPEN_TB4_AUTHORIZED__30_BLOCKED__ZERO_CREDIT",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V4.json",
+  "inputs": {
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "sha": "cd15b26246771cc0fa7a38fddfa267b05795add0"
+    },
+    "comparator": {
+      "path": "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json",
+      "sha": "f67e22cee5e6fce1ebfae92ebf0946f78fafcee1"
+    },
+    "readiness": {
+      "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+      "sha": "d9a86d9a2b505d18befd1b7bbd70a8d0fad745da"
+    },
+    "runtime": {
+      "path": "canonical/runtime/opus55_acceptance_residual_compiler_v2.py",
+      "sha": "cae5bc3bfda9c77d7d7e5151127f55aafddb9522"
+    }
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 820,
+    "pull_request_head": "0a16580c5d173891aba1151a55d20b1fe1c02e25",
+    "merge_commit": "a2d3d767467ecfff9ea7f4b7b8ef047d884c3807",
+    "workflow_run_id": 36985800401,
+    "workflow_job_id": 110770424100,
+    "conclusion": "success"
+  },
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 7,
+  "open_predicate_count": 1,
+  "blocked_predicate_count": 30,
+  "open_predicates": [
+    {
+      "predicate_id": "CODING_TB4_GE_66_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Terminal-Bench 4.0",
+      "state": "OPEN"
+    }
+  ],
+  "authorized_acceptance_case_actions": [
+    {
+      "action_id": "ACTION::PUBLIC_BAR::CODING_TB4_GE_66_4",
+      "predicate_id": "CODING_TB4_GE_66_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "surface": "Terminal-Bench 4.0",
+      "action_class": "RUN_PUBLIC_FIXED_BAR",
+      "execution_authorized": true,
+      "authorization_basis": "SCORE_PRODUCING_ROUTE_READY_TRUE__SATURATION_COMPLETE__PUBLIC_FIXED_BAR"
+    }
+  ],
+  "terminal_promotion_allowed": false,
+  "fresh_acceptance_cases_consumed_by_this_recompile": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "THIS_RECEIPT_RECONCILES_THE_NEWER_TB4_READY_MATRIX_WITH_THE_ATOMIC_RESIDUAL__IT_AUTHORIZES_EXECUTION_BUT_GRANTS_NO_ACCEPTANCE_CREDIT_UNTIL_SCORE_EVIDENCE_PASSES"
+}
