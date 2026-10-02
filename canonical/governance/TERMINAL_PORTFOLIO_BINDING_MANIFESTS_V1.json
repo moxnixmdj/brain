@@ -21,9 +21,10 @@
         {
           "id": "TERMINAL_BENCH_4_0",
           "route": "harbor run -d terminal-bench/terminal-bench@4.0.0",
-          "binding_state": "PUBLIC_IDENTITY_FROZEN__ZERO_COST_RUNNER_RESOURCE_AND_BRAIN_ADAPTER_PREFLIGHT_OPEN",
+          "binding_state": "PUBLIC_IDENTITY_AND_ZERO_COST_HARBOR_LOCAL_DOCKER_CARRIER_PREFLIGHT_INDEPENDENT_PASS__BRAIN_ADAPTER_AND_TASK_RESOURCE_ENVELOPE_PREFLIGHT_OPEN",
           "public_route_status": "PINNED_PUBLIC_RELEASE__LOCAL_DOCKER_FRAMEWORK_SUPPORTED",
-          "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
+          "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json",
+          "harbor_carrier_preflight": "canonical/verification/HARBOR_ZERO_COST_TERMINAL_CARRIER_PREFLIGHT_20261002_V1.json"
         },
         {
           "id": "FRONTIERCODE_V1_1",
@@ -176,9 +177,10 @@
         {
           "id": "LIVEBENCH_IF",
           "route": "PUBLIC_DETERMINISTIC_VERIFIER",
-          "binding_state": "FULL_58_CHECKER_HERMETIC_RUNTIME_INDEPENDENT_PASS__SYNTHETIC_GOOD_BAD_BOUNDARY_MUTATION_PREFLIGHT_OPEN",
+          "binding_state": "FULL_58_CHECKER_HERMETIC_RUNTIME_AND_SYNTHETIC_GOOD_BAD_BOUNDARY_PREFLIGHT_INDEPENDENT_PASS__TERMINAL_EXECUTION_PENDING",
           "adapter_verification": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-          "hermetic_runtime_smoke_verification": "canonical/verification/LIVEBENCH_IF_58_CHECKER_HERMETIC_SMOKE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          "hermetic_runtime_smoke_verification": "canonical/verification/LIVEBENCH_IF_58_CHECKER_HERMETIC_SMOKE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "mutation_preflight_verification": "canonical/verification/LIVEBENCH_IF_58_CHECKER_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         },
         {
           "id": "RECOVERY_SCOPE_COMPOSITION",
@@ -218,9 +220,10 @@
         {
           "id": "TERMINAL_BENCH_SCIENCE_0_1",
           "route": "PUBLIC_HARBOR_HARNESS",
-          "binding_state": "RESOURCE_AND_LOCAL_DOCKER_BRAIN_ADAPTER_PREFLIGHT_OPEN",
+          "binding_state": "PUBLIC_IDENTITY_AND_ZERO_COST_HARBOR_LOCAL_DOCKER_CARRIER_PREFLIGHT_INDEPENDENT_PASS__BRAIN_ADAPTER_AND_TASK_RESOURCE_ENVELOPE_PREFLIGHT_OPEN",
           "public_route_status": "PUBLIC_TASKS_AND_HARBOR_HARNESS",
-          "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
+          "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json",
+          "harbor_carrier_preflight": "canonical/verification/HARBOR_ZERO_COST_TERMINAL_CARRIER_PREFLIGHT_20261002_V1.json"
         },
         {
           "id": "UNKNOWN_DOMAIN_SYNTHESIS",
