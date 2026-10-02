@@ -13,15 +13,31 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  syntax:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Verify future-only comparator elimination route
-        run: |
-          python -m py_compile canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
-          python -m unittest canonical.tests.test_synthesis_future_absolute_ceiling_route_v1 -v
-          python canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
+      - run: python -m py_compile canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
+
+  tests:
+    needs: syntax
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_synthesis_future_absolute_ceiling_route_v1 -v
+
+  live-verdict:
+    needs: tests
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
