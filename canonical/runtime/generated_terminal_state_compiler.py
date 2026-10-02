@@ -64,6 +64,27 @@ def compile_state(root:Path)->dict[str,Any]:
     if basis.get("admissible_frozen_terminal_route_count")!=len(admitted):
         errors.append("BASIS_ADMISSIBLE_COUNT_MISMATCH")
 
+    protocol_admitted=protocol.get("admissible_frozen_routes")
+    if not isinstance(protocol_admitted,list) or any(not isinstance(x,str) or not x for x in protocol_admitted):
+        errors.append("PROTOCOL_ADMISSIBLE_ROUTES_INVALID")
+        protocol_admitted=[]
+    else:
+        if set(protocol_admitted)!=set(admitted):
+            errors.append(
+                "PROTOCOL_ADMISSION_MISMATCH:"
+                +"missing="+",".join(sorted(set(admitted)-set(protocol_admitted)))
+                +";extra="+",".join(sorted(set(protocol_admitted)-set(admitted)))
+            )
+        if protocol.get("admissible_frozen_route_count")!=len(protocol_admitted):
+            errors.append("PROTOCOL_ADMISSIBLE_COUNT_MISMATCH")
+
+    preq_count=prequal.get("admissible_frozen_terminal_route_count")
+    if preq_count is not None and preq_count!=len(admitted):
+        errors.append(f"PREQUAL_ADMISSIBLE_COUNT_MISMATCH:{preq_count}!={len(admitted)}")
+    preq_basis_status=prequal.get("active_terminal_proof_basis_status")
+    if preq_basis_status is not None and preq_basis_status!=basis.get("status"):
+        errors.append("PREQUAL_BASIS_STATUS_MISMATCH")
+
     portfolios=prequal.get("portfolio_status")
     portfolio_blockers={}
     if isinstance(portfolios,dict):
@@ -104,6 +125,11 @@ def compile_state(root:Path)->dict[str,Any]:
         "active_contract_count":len(set(active_ids)),
         "authoritative_admissible_route_count":len(admitted),
         "authoritative_admissible_routes":sorted(admitted),
+        "protocol_admissible_routes":sorted(protocol_admitted),
+        "derived_state_reconciliation_required": any(
+            x.startswith(("PROTOCOL_ADMISSION_MISMATCH","PROTOCOL_ADMISSIBLE_COUNT_MISMATCH","PREQUAL_ADMISSIBLE_COUNT_MISMATCH","PREQUAL_BASIS_STATUS_MISMATCH"))
+            for x in errors
+        ),
         "blocked_contracts":blocked,
         "portfolio_blockers":portfolio_blockers,
         "progress_artifacts":progress,
