@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_NEXT_ACTION_COMPILER_V2_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_CANDIDATE_PENDING_COMPOSED_AUTHORITY_VERIFICATION__ZERO_CREDIT",
+  "objective": "Replace the stale Hypergraph V1 next-action projection with the independently verified Hypergraph V2 scheduler output without changing acceptance truth or authorizing fresh reality.",
+  "runtime": {
+    "path": "canonical/runtime/terminal_next_action_compiler_v2.py",
+    "git_blob_sha": "7b3352488e25ceb90c6202dce9888a0a346af8db"
+  },
+  "test": {
+    "path": "canonical/tests/test_terminal_next_action_compiler_v2.py",
+    "git_blob_sha": "ee56b6a36bf7d4fc2559fe7c0ee2d6b97f75d952"
+  },
+  "hypergraph": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+    "git_blob_sha": "ec0ca144939a19234f1c53378cc76af2014a6179"
+  },
+  "independent_verification": "canonical/verification/TERMINAL_NEXT_ACTION_COMPILER_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "current_projection": {
+    "proved_predicates": 7,
+    "unresolved_predicates": 31,
+    "primary_action_id": "BUILD_DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+    "primary_action_state": "AVAILABLE_ZERO_REALITY",
+    "available_zero_reality_critical_actions": [
+      "BUILD_DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "BUILD_TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
+      "RUN_COMPOSITION_COMPONENT_PROOF_SLICER"
+    ],
+    "synthesis_action_state": "BLOCKED",
+    "synthesis_unsatisfied_preconditions": [
+      "SYNTHESIS_MATCHED_QUALITY_AND_NONINFERIORITY_BINDINGS_INDEPENDENT_PASS",
+      "SYNTHESIS_MATCHED_TARGET_SCOPE_DISCHARGE_AVAILABLE"
+    ],
+    "highest_leverage_blocked_action_id": "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"
+  },
+  "hard_rules": [
+    "ACTIVE_HYPERGRAPH_V2_ONLY",
+    "BLOCKED_ACTION_MUST_NEVER_BE_PRIMARY_EXECUTABLE_ACTION",
+    "SYNTHESIS_REOPENS_ONLY_WHEN_BOTH_CURRENT_V2_PRECONDITIONS_PASS",
+    "ZERO_NEW_REALITY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
