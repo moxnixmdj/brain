@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_RESULT_V1",
+  "date": "2026-10-02",
+  "status": "DEV_CAUSAL_LOCALIZATION_PASS__TWO_MLP_BRANCHES_MATERIAL__ZERO_CAPABILITY_CREDIT",
+  "parent": "canonical/capabilities/opus55/M0A_OLMO_LAYER_CAUSAL_LOCALIZATION_RESULT_001.json",
+  "protocol": "canonical/evaluation/M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_V1.json",
+  "donor": {
+    "repository": "allenai/OLMo-2-0425-1B",
+    "resolved_hf_sha": "a1847dff35000b4271fa70afc5db10fd29fedbdf"
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 465,
+    "head_sha": "0b8cc12bda01eb009d1fc0b9e4e19597cad60be7",
+    "workflow_run_id": 36946100181,
+    "job_id": 110648468741,
+    "conclusion": "success"
+  },
+  "baseline": {
+    "correct_count": 6,
+    "total": 7,
+    "accuracy": 0.8571428571428571,
+    "mean_margin": 0.6499526791651822,
+    "known_failure": "DEV_FORMER_LATTER_001"
+  },
+  "material_rule": "BASELINE_MEAN_MARGIN_MINUS_ABLATED_MEAN_MARGIN_GE_0_10_OR_ANY_BASELINE_CORRECT_CASE_FLIPS_WRONG",
+  "material_branches": [
+    {
+      "layer": 1,
+      "branch": "MLP_OUTPUT",
+      "mean_margin_loss": 0.3139805821316178,
+      "baseline_correct_to_wrong_flips": [],
+      "ablated_accuracy": 1,
+      "caution": "ABLATION_RESCUED_THE_KNOWN_FORMER_LATTER_FAILURE__INFLUENCE_IS_NOT_EQUIVALENT_TO_USEFULNESS"
+    },
+    {
+      "layer": 11,
+      "branch": "MLP_OUTPUT",
+      "mean_margin_loss": 0.12810143179706723,
+      "baseline_correct_to_wrong_flips": [],
+      "ablated_accuracy": 0.8571428571428571
+    }
+  ],
+  "deleted_from_active_harvest": [
+    "LAYER_1_SELF_ATTENTION_OUTPUT",
+    "LAYER_3_SELF_ATTENTION_OUTPUT",
+    "LAYER_3_MLP_OUTPUT",
+    "LAYER_4_SELF_ATTENTION_OUTPUT",
+    "LAYER_4_MLP_OUTPUT",
+    "LAYER_6_SELF_ATTENTION_OUTPUT",
+    "LAYER_6_MLP_OUTPUT",
+    "LAYER_11_SELF_ATTENTION_OUTPUT"
+  ],
+  "interpretation": [
+    "WHOLE_MODEL_HARVEST_IS_NOT_MINIMAL",
+    "WHOLE_MATERIAL_LAYER_HARVEST_IS_NOT_MINIMAL",
+    "ONLY_LAYER_1_MLP_AND_LAYER_11_MLP_MAY_ADVANCE_TO_SUBSPACE_LOCALIZATION",
+    "MATERIALITY_DOES_NOT_PROVE_SUFFICIENCY_USEFULNESS_OR_OWNERSHIP",
+    "LAYER_1_MLP_CONTAINS_AT_LEAST_ONE_HARMFUL_OR_CONFOUNDING_EFFECT_BECAUSE_FULL_BRANCH_ABLATION_RESCUES_FORMER_LATTER",
+    "AMBIGUOUS_INPUT_REMAINS_NONAUTHORITATIVE"
+  ],
+  "heldout_exposed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "next": "FREEZE_HIERARCHICAL_MLP_INTERMEDIATE_CHANNEL_GROUP_ABLATION_FOR_LAYERS_1_AND_11__SCORE_USEFUL_BASELINE_CORRECT_CASES_SEPARATELY_FROM_KNOWN_DONOR_FAILURE__NO_HELDOUT"
+}
