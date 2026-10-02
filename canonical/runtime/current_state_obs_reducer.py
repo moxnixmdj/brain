@@ -304,6 +304,10 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         errors.append("POINTER_LOCAL_V6_WRONGLY_GLOBAL")
     if eg.get("fresh_terminal_evidence_requires_outer_exact_cut") is not True:
         errors.append("POINTER_OUTER_EXACT_CUT_NOT_REQUIRED")
+    expected_open_mechanism_lanes=(global_universe.get("counts") or {}).get("open_mechanism_lanes")
+    pointer_open_mechanism_count=eg.get("open_mechanism_residual_count")
+    if expected_open_mechanism_lanes is not None and pointer_open_mechanism_count!=expected_open_mechanism_lanes:
+        errors.append("POINTER_OPEN_MECHANISM_RESIDUAL_COUNT_DRIFT")
 
     him=hierarchy.get("information_minimization_control") or {}
     if not _s(him.get("status")).startswith("ACTIVE_CANONICAL"):
