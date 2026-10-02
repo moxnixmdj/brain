@@ -64,7 +64,7 @@ def _scope_relation(doc: Mapping[str, Any], target_scope: str, witness_scope: st
             or relation not in {"EXACT", "SUPERSET", "SUBSET", "DISJOINT", "UNKNOWN"}
             or not isinstance(receipt, str) or not receipt
         ):
-            return None, f"SCOPE_RELATION_{i}_INVALID"
+            return None, None, f"SCOPE_RELATION_{i}_INVALID"
         if source == witness_scope and target == target_scope and relation in {"EXACT", "SUPERSET"}:
             admissible.append((relation, receipt))
     if not admissible:
@@ -184,6 +184,7 @@ def evaluate(doc: Mapping[str, Any]) -> dict[str, Any]:
         "implies_target": implies,
         "candidate_scope_relation": relation,
         "verified_scope_relation": scope_relation,
+        "verified_scope_relation_receipt": scope_receipt,
         "verified_scope_relation_receipt": scope_receipt,
         "target_scope_ref": target_scope,
         "witness_scope_ref": witness_scope,
