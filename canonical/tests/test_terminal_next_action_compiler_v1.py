@@ -28,11 +28,12 @@ class TerminalNextActionCompilerTests(unittest.TestCase):
         self.assertEqual(out["status"], "PASS__DETERMINISTIC_FRONTIER__ZERO_CREDIT")
         self.assertEqual(out["proved_predicate_count"], 9)
         self.assertEqual(out["unresolved_predicate_count"], 29)
-        self.assertEqual(out["primary_action_id"], "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA")
-        self.assertEqual(out["primary_action_state"], "BLOCKED_PRECONDITIONS")
-        self.assertEqual(out["primary_unresolved_target_count"], 11)
+        self.assertEqual(out["primary_action_id"], "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE")
+        self.assertEqual(out["primary_action_state"], "AVAILABLE_ZERO_REALITY")
+        self.assertEqual(out["highest_leverage_blocked_action_id"], "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA")
+        self.assertEqual(out["highest_leverage_blocked_action_target_count"], 11)
         self.assertEqual(
-            out["primary_unsatisfied_preconditions"],
+            out["highest_leverage_blocked_action_preconditions"],
             ["MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS"],
         )
         self.assertIn("RUN_COMPOSITION_COMPONENT_PROOF_SLICER", out["available_zero_reality_critical_actions"])
@@ -51,6 +52,7 @@ class TerminalNextActionCompilerTests(unittest.TestCase):
         self.assertEqual(out["primary_action_id"], "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA")
         self.assertEqual(out["primary_action_state"], "AVAILABLE_ZERO_REALITY")
         self.assertEqual(out["primary_unsatisfied_preconditions"], [])
+        self.assertNotEqual(out["highest_leverage_blocked_action_id"], "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA")
 
 
 if __name__ == "__main__":
