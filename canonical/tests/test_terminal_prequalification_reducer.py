@@ -47,8 +47,8 @@ class TerminalPrequalificationReducerTests(unittest.TestCase):
         basis_contracts=None,
         protocol_contracts=None,
         route_ready=True,
-        basis_execution_authority=True,
-        protocol_execution_authority=True,
+        basis_prewave_readiness=True,
+        protocol_prewave_readiness=True,
     ):
         active_contracts = active_contracts or ["B1", "B2"]
         basis_contracts = basis_contracts or list(active_contracts)
@@ -74,7 +74,8 @@ class TerminalPrequalificationReducerTests(unittest.TestCase):
                 json.dumps({
                     "active_contract_count": len(basis_contracts),
                     "admissible_frozen_terminal_route_count": len(basis_contracts) if route_ready else 0,
-                    "execution_authority": basis_execution_authority,
+                    "execution_authority": False,
+                    "prewave_route_execution_readiness": basis_prewave_readiness,
                     "contracts": [
                         {"behavior_id": x, "proof_state": state, "blockers": blockers}
                         for x in basis_contracts
@@ -85,7 +86,8 @@ class TerminalPrequalificationReducerTests(unittest.TestCase):
             (path / "GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json").write_text(
                 json.dumps({
                     "active_contracts": protocol_contracts,
-                    "execution_authority": protocol_execution_authority,
+                    "execution_authority": False,
+                    "prewave_route_execution_readiness": protocol_prewave_readiness,
                 }),
                 encoding="utf-8",
             )
