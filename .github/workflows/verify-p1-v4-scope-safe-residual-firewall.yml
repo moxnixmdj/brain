@@ -1,0 +1,24 @@
+name: Verify P1 V4 scope-safe residual firewall
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/p1_v4_scope_safe_residual_discharge_v1.py"
+      - "canonical/tests/test_p1_v4_scope_safe_residual_discharge_v1.py"
+      - "canonical/governance/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_ACTIVATION_V1.json"
+      - "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json"
+      - ".github/workflows/verify-p1-v4-scope-safe-residual-firewall.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run P1 residual firewall tests
+        run: python -m unittest canonical.tests.test_p1_v4_scope_safe_residual_discharge_v1 -v
