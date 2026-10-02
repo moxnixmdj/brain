@@ -73,13 +73,13 @@ FORBIDDEN_RECEIPT_KEYS = {
 
 
 
-defdef _git_object_sha(root: Path, relative_path: str) -> str:
+def _git_object_sha(root: Path, relative_path: str) -> str:
     data = (root / relative_path).read_bytes()
     header = b"blob " + str(len(data)).encode() + bytes([0])
     return hashlib.sha1(header + data).hexdigest()
 
 
- static_binding_preflight(root: Path = Path(".")) -> dict[str, Any]:
+def static_binding_preflight(root: Path = Path(".")) -> dict[str, Any]:
     """Verify the seven exact frozen governance binding blobs before any parent wave."""
     errors: list[str] = []
     rows: dict[str, dict[str, Any]] = {}
