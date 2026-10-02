@@ -1,0 +1,107 @@
+name: Verify live proof atom receipt index freeze v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/proof_atom_receipt_index_v1.py"
+      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"
+      - "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json"
+      - "canonical/governance/**"
+      - "canonical/verification/**"
+      - "canonical/capabilities/**"
+      - "canonical/state/PROOF_ATOM_RECEIPT_INDEX_LIVE_FREEZE_20261002_V1.json"
+      - "canonical/tests/test_proof_atom_receipt_index_freeze_v1.py"
+      - ".github/workflows/verify-proof-atom-receipt-index-freeze-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: RED - freeze verifier before generation
+        id: red
+        continue-on-error: true
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_proof_atom_receipt_index_freeze_v1 -v
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Recompute exact current live receipt index
+        run: |
+          python -m canonical.runtime.proof_atom_receipt_index_v1 > live-proof-atom-receipt-index.json
+
+      - name: Freeze exact payload plus scanned-corpus fingerprint
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from canonical.runtime.proof_atom_receipt_index_v1 import _blob_sha, _candidate_files
+
+          root = Path(".").resolve()
+          live = json.loads(Path("live-proof-atom-receipt-index.json").read_text(encoding="utf-8"))
+          rows = []
+          for path in _candidate_files(root):
+              rel = path.relative_to(root).as_posix()
+              rows.append(f"{rel}\0{_blob_sha(path.read_bytes())}")
+          corpus_fingerprint = hashlib.sha256("\n".join(rows).encode("utf-8")).hexdigest()
+
+          frozen = {
+              "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_LIVE_FREEZE_V1",
+              "date": "2026-10-02",
+              "status": "FROZEN__ZERO_CREDIT__CURRENT_SCANNED_CORPUS_EXACT_MATCH",
+              "source_corpus_fingerprint": corpus_fingerprint,
+              "source_basis": {
+                  "global_frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+                  "matched_subfrontier": "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json"
+              },
+              "payload": live,
+              "new_reality_units_consumed": 0,
+              "incremental_spend_usd": 0,
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+              "execution_authority": False,
+              "promotion_authority": False
+          }
+
+          out = Path("canonical/state/PROOF_ATOM_RECEIPT_INDEX_LIVE_FREEZE_20261002_V1.json")
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_text(json.dumps(frozen, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          PY
+
+      - name: GREEN - verify exact frozen result
+        run: |
+          python -m unittest canonical.tests.test_proof_atom_receipt_index_freeze_v1 -v
+
+      - name: Enforce RED-to-GREEN on first freeze
+        if: github.event_name == 'pull_request'
+        run: |
+          if [ "${{ steps.red.outputs.exit_code }}" = "0" ] && ! git diff --quiet -- canonical/state/PROOF_ATOM_RECEIPT_INDEX_LIVE_FREEZE_20261002_V1.json; then
+            echo "Freeze changed but pre-generation verifier was already green" >&2
+            exit 1
+          fi
+
+      - name: Commit deterministic freeze to PR branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          if git diff --quiet -- canonical/state/PROOF_ATOM_RECEIPT_INDEX_LIVE_FREEZE_20261002_V1.json; then
+            echo "Freeze already exact; no commit needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add canonical/state/PROOF_ATOM_RECEIPT_INDEX_LIVE_FREEZE_20261002_V1.json
+          git commit -m "Freeze current full-Brain proof atom receipt index"
+          git push origin "HEAD:${{ github.head_ref }}"
