@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__5_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__6_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -185,31 +185,25 @@
     {
       "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
       "portfolio": "T1_T3",
-      "proof_state": "INFORMATION_SAFE_V3_PREFLIGHT_PRESERVED__OBJECTIVE_GROUNDING_BINDING_ACTIONABLE__UNCOVERED_SUBJECTIVE_QUALITY_EXTERNAL_BLOCKED",
-      "route": "canonical/runtime/p3_information_safe_proof_suite_v3.py",
-      "blockers": [
-        "FREEZE_OBJECTIVE_CLAIM_SUPPORT_COVERAGE_UNCERTAINTY_AND_CONSTRAINT_SCORER",
-        "FREEZE_BRAIN_OWNED_SYNTHESIS_PACKAGE_AND_DEPENDENCY_MANIFEST",
-        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNCOVERED_SUBJECTIVE_SYNTHESIS_QUALITY"
-      ],
+      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+      "route": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "blockers": [],
       "candidate": "canonical/runtime/p3_information_safe_candidate_v3.py",
       "preflight_verification": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
-      "independent_preflight": "canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json",
+      "independent_preflight": "canonical/verification/P3_SYNTHESIS_T1_T3_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "invalidated_route": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
-      "proof_mode_classification": "OBJECTIVE_GROUNDING_GATES_PLUS_OPEN_DOMAIN_MATCHED_QUALITY",
+      "proof_mode_classification": "T1_T3_MULTIPLEXED_DIRECT_GROUNDED_SYNTHESIS_GATE",
       "synthetic_whole_domain_scope_gate_required": false,
       "supercompiler_reconciliation": {
-        "status": "STRONGER_ABSOLUTE_ROUTE_CANDIDATE_PRECEDES_COMPARATOR_IRREDUCIBILITY",
-        "route": "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json::P3_EVIDENCE_TO_AUDIENCE_SYNTHESIS_DIRECT",
-        "proposed_proof_mode": "EXHAUSTIVE_FINITE",
-        "minimum_internal_unblock": [
-          "P3_SCOPE_EQUIVALENCE",
-          "P3_TERMINAL_BINDING"
-        ],
-        "exact_opus_irreducibility": "NOT_PROVEN",
-        "verdict": "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json",
-        "authority_effect": "SCHEDULING_ONLY__EXISTING_BLOCKERS_AND_ZERO_TERMINAL_CREDIT_PRESERVED"
-      }
+        "status": "P3_INTERNAL_UNBLOCK_RESOLVED_BY_TERMINAL_PORTFOLIO_MULTIPLEX_DIRECT_INSTRUMENTATION",
+        "route": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+        "proof_mode": "T1_T3_MULTIPLEXED_DIRECT_GROUNDED_SYNTHESIS_GATE",
+        "exact_opus_irreducibility": "ELIMINATED_FOR_PREWAVE_ADMISSION",
+        "independent_verification": "canonical/verification/P3_SYNTHESIS_T1_T3_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "terminal_credit": "ZERO_UNTIL_TERMINAL_WAVE"
+      },
+      "prewave_admissible": true,
+      "terminal_results_observed": 0
     },
     {
       "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
@@ -308,7 +302,7 @@
     }
   ],
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 5,
+  "admissible_frozen_terminal_route_count": 6,
   "execution_authority": false,
   "next": "RECOMPUTE_TERMINAL_ROUTE_CLOSURE_QUEUE__CONTINUE_ZERO_REALITY_PREWAVE_ROUTE_CLOSURE__NO_TERMINAL_WAVE_BEFORE_PREQUALIFICATION_PASS",
   "fresh_terminal_evidence_consumed": 0,
