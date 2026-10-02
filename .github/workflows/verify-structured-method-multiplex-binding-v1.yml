@@ -1,0 +1,19 @@
+name: Verify structured method multiplex binding
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json
+      - canonical/runtime/verify_structured_method_multiplex_binding_v1.py
+      - canonical/tests/test_structured_method_multiplex_binding_v1.py
+      - .github/workflows/verify-structured-method-multiplex-binding-v1.yml
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python -m unittest -v canonical.tests.test_structured_method_multiplex_binding_v1
