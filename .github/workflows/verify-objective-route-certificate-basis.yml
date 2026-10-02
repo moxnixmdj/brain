@@ -1,0 +1,60 @@
+name: Verify shared objective route certificate basis
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/OBJECTIVE_ROUTE_CERTIFICATE_BASIS_V1.json
+      - canonical/governance/OBJECTIVE_ROUTE_CERTIFICATE_KERNEL_ACTIVATION_V1.json
+      - canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json
+      - canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json
+      - canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_SELECTION_KERNEL_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json
+      - canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json
+      - canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json
+      - canonical/runtime/objective_route_certificate_verifier.py
+      - canonical/runtime/browser_*
+      - canonical/runtime/tool_discovery_*
+      - canonical/runtime/research_*
+      - canonical/tests/test_objective_route_certificate_verifier.py
+      - canonical/tests/test_browser_t2_objective_binding_validator.py
+      - canonical/tests/test_tool_discovery_t2_t3_objective_binding_validator.py
+      - canonical/tests/test_research_t3_objective_binding_validator.py
+      - canonical/verification/BROWSER_GOAL_GROUNDING_RECOVERY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - canonical/verification/BROWSER_TRANSITION_OBJECTIVE_AUDIT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - .github/workflows/verify-objective-route-certificate-basis.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify common certificate kernel
+        run: |
+          python -m unittest -v canonical.tests.test_objective_route_certificate_verifier
+          python canonical/runtime/objective_route_certificate_verifier.py .
+      - name: Verify browser residual
+        run: |
+          python -m unittest -v canonical.tests.test_browser_t2_objective_binding_validator
+          python canonical/runtime/browser_t2_objective_binding_validator.py .
+      - name: Verify tool-discovery residual
+        run: |
+          python -m unittest -v canonical.tests.test_tool_discovery_t2_t3_objective_binding_validator
+          python canonical/runtime/tool_discovery_t2_t3_objective_binding_validator.py .
+      - name: Verify research residual
+        run: |
+          python -m unittest -v canonical.tests.test_research_t3_objective_binding_validator
+          python canonical/runtime/research_t3_objective_binding_validator.py .
