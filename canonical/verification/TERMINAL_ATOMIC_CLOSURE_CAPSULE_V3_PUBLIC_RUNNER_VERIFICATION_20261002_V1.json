@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_POST_AUTHORITY_PACKAGE_COMMITMENT_AND_AUTHORITY_REPLAY_PASS__ZERO_TERMINAL_RESULTS",
+  "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+  "package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+  "capsule": "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3.json",
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 786,
+    "head_sha": "0967c1fe4aa217a15569791f09253b6f2f72d688",
+    "merge_commit": "a5d655af91645e91cceee24c6d9b7789d2676894",
+    "workflow_run_id": 36976738645,
+    "workflow_job_id": 110742079131,
+    "workflow_name": "Verify terminal atomic closure V3",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_SNAPSHOT_BLOB_ASSERTIONS_PASS",
+    "FIVE_SEMANTIC_COMPONENT_HASHES_RECOMPUTED_PASS",
+    "PACKAGE_COMMITMENT_RECOMPUTED_PASS",
+    "HARDENED_LAUNCH_AUTHORITY_REPLAY_ON_FINAL_SYNCHRONIZED_MANIFEST_PASS",
+    "EXECUTION_AUTHORITY_TRUE_AT_SNAPSHOT",
+    "ROUTE_SPECIFIC_LAUNCH_AUTHORITY_TRUE_AT_SNAPSHOT",
+    "ZERO_TERMINAL_CASES_CONSUMED",
+    "POST_FREEZE_BEACON_NOT_YET_CREATED"
+  ],
+  "verified_for_beacon": true,
+  "post_freeze_beacon": null,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
