@@ -1,6 +1,12 @@
 name: Verify native PDF edit transactions
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/pdf_native_edit_transaction.py
+      - canonical/tests/test_pdf_native_edit_transaction.py
+      - .github/workflows/verify-pdf-native-edit-transaction.yml
   push:
     branches: [main]
     paths:
