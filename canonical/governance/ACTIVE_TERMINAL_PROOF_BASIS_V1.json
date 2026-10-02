@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__DELEGATION_DYNAMIC_REASSIGNMENT_PREFLIGHT_INDEPENDENT_PASS__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__DELEGATION_AND_TOOL_DISCOVERY_INFORMATION_SAFE_PREFLIGHTS_INDEPENDENT_PASS__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
@@ -156,11 +156,16 @@
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
       "portfolio": "T2_T3",
-      "proof_state": "ROUTE_REQUIRED",
+      "proof_state": "INDEPENDENT_INFORMATION_SAFE_MULTI_CAPABILITY_DISCOVERY_TRANSFER_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
       "route_requirement": "HIDDEN_TOOL_CAPABILITY_ECOSYSTEM_WITH_SAFE_PROBES_SELECTION_COST_AND_SECOND_TASK_TRANSFER",
       "blockers": [
-        "EXPLICIT_VERIFIED_CAPABILITY_SELECTOR_IS_ONLY_A_NARROW_COMPONENT"
-      ]
+        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
+        "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
+      ],
+      "route": "canonical/runtime/tool_discovery_information_safe_proof.py",
+      "candidate": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+      "independent_preflight": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "preferred_over_bounded_single_capability_route": "canonical/governance/TOOL_ROUTE_INFORMATION_SAFE_BOUNDED_PREFLIGHT_V1.json"
     },
     {
       "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
