@@ -47,8 +47,8 @@ class TerminalPrequalificationReducerTests(unittest.TestCase):
         basis_contracts=None,
         protocol_contracts=None,
         route_ready=True,
-        basis_execution_authority=True,
-        protocol_execution_authority=True,
+        basis_execution_authority=False,
+        protocol_execution_authority=False,
     ):
         active_contracts = active_contracts or ["B1", "B2"]
         basis_contracts = basis_contracts or list(active_contracts)
@@ -102,15 +102,30 @@ class TerminalPrequalificationReducerTests(unittest.TestCase):
         self.assertTrue(any(x.startswith("TERMINAL_ROUTE_NOT_ADMISSIBLE:") for x in out["failed_predicates"]))
         self.assertIn("TERMINAL_ROUTE_COVERAGE_INCOMPLETE:0/2", out["failed_predicates"])
 
-    def test_basis_execution_authority_required(self):
-        out = self.run_fixture(self.fixture(), basis_execution_authority=False)
-        self.assertFalse(out["pass"])
-        self.assertIn("ACTIVE_TERMINAL_PROOF_BASIS_EXECUTION_AUTHORITY_FALSE", out["failed_predicates"])
+    def test_self_asserted_authority_is_not_required(self):
+        out = self.run_fixture(
+            self.fixture(),
+            basis_execution_authority=False,
+            protocol_execution_authority=False,
+        )
+        self.assertTrue(out["pass"])
+        self.assertEqual(
+            out["authority_derivation"],
+            "PURE_FUNCTION_OF_ACTIVE_CONTRACT_COVERAGE_ROUTE_ADMISSIBILITY_PROTOCOL_SET_AND_EXPLICIT_PREWAVE_FACTS",
+        )
 
-    def test_population_protocol_execution_authority_required(self):
-        out = self.run_fixture(self.fixture(), protocol_execution_authority=False)
+    def test_self_asserted_authority_cannot_override_real_blocker(self):
+        out = self.run_fixture(
+            self.fixture(),
+            route_ready=False,
+            basis_execution_authority=True,
+            protocol_execution_authority=True,
+        )
         self.assertFalse(out["pass"])
-        self.assertIn("TERMINAL_POPULATION_PROTOCOL_EXECUTION_AUTHORITY_FALSE", out["failed_predicates"])
+        self.assertTrue(any(
+            x.startswith("TERMINAL_ROUTE_NOT_ADMISSIBLE:")
+            for x in out["failed_predicates"]
+        ))
 
     def test_surface_blocker_fails_closed(self):
         out = self.run_fixture(self.fixture({"T1": ["SCORER_OPEN"]}))
