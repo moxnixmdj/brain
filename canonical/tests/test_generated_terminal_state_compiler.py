@@ -24,7 +24,18 @@ class Tests(unittest.TestCase):
         (g/"EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json").write_text(json.dumps({
             "admissible_frozen_terminal_route_count":1 if admitted else 0,
             "active_terminal_proof_basis_status":basis_status,
+            "prequalification_progress":{
+                "admissible_frozen_terminal_route_count":1 if admitted else 0,
+                "admissible_frozen_terminal_routes":[bid] if admitted else []
+            },
             "portfolio_status":{"T0":{"blockers":[] if admitted else ["X"]}}
+        }))
+        (g/"TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1.json").write_text(json.dumps({
+            "source_basis_status":basis_status,
+            "closed_route_count":1 if admitted else 0,
+            "open_route_count":0 if admitted else 1,
+            "closed_behavior_ids":[bid] if admitted else [],
+            "queue":[] if admitted else [{"behavior_id":bid}]
         }))
         (g/"progress.json").write_text(json.dumps({"status":"INDEPENDENT_PASS"}))
         (g/"TERMINAL_PROGRESS_EVIDENCE_INDEX_V1.json").write_text(json.dumps({"entries":[{"behavior_id":bid,"path":"canonical/governance/progress.json"}]}))
@@ -61,6 +72,38 @@ class Tests(unittest.TestCase):
             self.assertTrue(out["derived_state_reconciliation_required"])
             self.assertTrue(any(x.startswith("PROTOCOL_ADMISSION_MISMATCH:") for x in out["errors"]))
             self.assertIn("PREQUAL_ADMISSIBLE_COUNT_MISMATCH:0!=1",out["errors"])
+        finally: td.cleanup()
+
+    def test_closure_queue_drift_fails_closed(self):
+        td,root=self.make(True)
+        try:
+            g=root/"canonical/governance"
+            q=json.loads((g/"TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1.json").read_text())
+            q["closed_behavior_ids"]=[]
+            q["closed_route_count"]=0
+            q["open_route_count"]=1
+            q["queue"]=[{"behavior_id":"B1"}]
+            (g/"TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1.json").write_text(json.dumps(q))
+            out=compile_state(root)
+            self.assertFalse(out["pass"])
+            self.assertTrue(out["derived_state_reconciliation_required"])
+            self.assertTrue(any(x.startswith("QUEUE_CLOSED_ADMISSION_MISMATCH:") for x in out["errors"]))
+            self.assertIn("QUEUE_CLOSED_COUNT_MISMATCH",out["errors"])
+        finally: td.cleanup()
+
+    def test_nested_prequalification_drift_fails_closed(self):
+        td,root=self.make(True)
+        try:
+            g=root/"canonical/governance"
+            p=json.loads((g/"EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json").read_text())
+            p["prequalification_progress"]["admissible_frozen_terminal_route_count"]=0
+            p["prequalification_progress"]["admissible_frozen_terminal_routes"]=[]
+            (g/"EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json").write_text(json.dumps(p))
+            out=compile_state(root)
+            self.assertFalse(out["pass"])
+            self.assertTrue(out["derived_state_reconciliation_required"])
+            self.assertIn("PREQUAL_NESTED_ADMISSIBLE_COUNT_MISMATCH:0!=1",out["errors"])
+            self.assertTrue(any(x.startswith("PREQUAL_NESTED_ADMISSION_MISMATCH:") for x in out["errors"]))
         finally: td.cleanup()
 
     def test_contract_set_mismatch_fails_closed(self):
