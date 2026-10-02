@@ -186,7 +186,8 @@
     "differential_dominance_required_when_complete_finite_matched_scope_available": true,
     "differential_dominance_activation": "canonical/governance/DIFFERENTIAL_DOMINANCE_COMPILER_ACTIVATION_V1.json",
     "terminal_certificate_cut_required": true,
-    "terminal_certificate_cut_activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V3.json"
+    "terminal_certificate_cut_activation": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json",
+    "information_dominance_recompute_required_on_active_frontier": true
   },
   "global_terminal_proof_cut": {
     "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
@@ -336,22 +337,23 @@
     "terminal_credit_from_compiler_alone": false
   },
   "terminal_certificate_cut": {
-    "status": "ACTIVE_INDEPENDENT_PASS__EXACT_V3_FRONTIER__INFORMATION_DOMINANCE_SCHEDULING_ACTIVE__ZERO_CREDIT",
-    "activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V3.json",
+    "status": "ACTIVE_INDEPENDENT_PASS__FRONTIER_V5__17_CERTIFICATES__ACTION_HYPERGRAPH_V2__ZERO_CREDIT",
+    "activation": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json",
     "runtime": "canonical/runtime/terminal_certificate_cut_v1.py",
-    "frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V3.json",
-    "frontier_git_blob_sha": "106139ff69616670993dbc6af324d8686747e8b1",
-    "information_dominance_runtime": "canonical/runtime/terminal_information_dominance_v1.py",
-    "information_dominance_runtime_git_blob_sha": "f10986bd09a7cc64a1fae3c6ea8e69b5655f2199",
-    "verification": "canonical/verification/TERMINAL_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "rule": "AFTER_EVIDENCE_AND_DEDUCTIVE_SATURATION__VERIFY_EXACT_FRONTIER_BLOB__RUN_CERTIFICATE_CUT__RUN_INFORMATION_DOMINANCE__DELETE_ONLY_STRICTLY_PROVED_DOMINATED_SCHEDULING_OPTIONS__DO_NOT_INVENT_PROOF_COST__RECOMPUTE_AFTER_EVERY_VERIFIED_CERTIFICATE__NEVER_GRANTS_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+    "frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+    "frontier_git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8",
+    "action_hypergraph": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+    "action_hypergraph_git_blob_sha": "ec0ca144939a19234f1c53378cc76af2014a6179",
+    "verification": "canonical/verification/TERMINAL_SCHEDULING_ACTIVATION_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "rule": "VERIFY_EXACT_FRONTIER_AND_ACTION_GRAPH__RUN_CERTIFICATE_CUT__DO_NOT_RESURRECT_DELETED_PRIVATE_ROUTES__USE_SCOPE_COMPLETE_STRONGER_PROOF_SUBSTITUTIONS__RECOMPUTE_AFTER_EVERY_VERIFIED_CERTIFICATE__ZERO_ACCEPTANCE_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING"
   },
   "information_dominance": {
     "required_before_irreducible_reality_cut": true,
     "runtime": "canonical/runtime/terminal_information_dominance_v1.py",
-    "activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V3.json",
-    "verification": "canonical/verification/TERMINAL_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "semantic_rule": "SCHEDULING_ONLY__CERTIFICATE_COVERAGE_IS_NOT_ACCEPTANCE_PROOF__REQUIREMENT_CARDINALITY_IS_NOT_PROOF_DIFFICULTY"
+    "activation": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json",
+    "current_projection_status": "STALE_AFTER_FRONTIER_CHANGE_15_TO_17__RECOMPUTATION_REQUIRED_ON_EXACT_V5",
+    "prior_verification": "canonical/verification/TERMINAL_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "semantic_rule": "SCHEDULING_ONLY__NO_STALE_PROJECTION_REUSE__CERTIFICATE_COVERAGE_IS_NOT_ACCEPTANCE_PROOF__REQUIREMENT_CARDINALITY_IS_NOT_PROOF_DIFFICULTY"
   },
   "verified_semantic_overlay_compilation": {
     "required_before_new_matched_scope_reality": true,
