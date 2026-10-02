@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1",
   "date": "2026-10-02",
-  "source_basis_blob_sha": "d4665e3722bafc7ae6751baa6c9dc0693a3a0ab0",
-  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__5_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "source_basis_blob_sha": "07fd337a0994516d6ecbda23046edb01380e5ef3",
+  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__6_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "status": "CANONICAL_SCHEDULING_RECEIPT__REBOUND_TO_LIVE_BASIS__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
   "closed_route_count": 5,
@@ -42,24 +42,22 @@
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
       "portfolio": "T0",
-      "proof_state": "ZERO_REALITY_COMPONENT_PREFIX_RECONCILED__WHOLE_SCOPE_ADMISSION_AND_TERMINAL_BINDING_PENDING",
+      "proof_state": "T0_OPEN_DOMAIN_MULTIPLEX_PROTOCOL_FROZEN__SCORER_VERIFICATION_AND_ORACLE_EXTRACTION_BINDING_PENDING",
       "blockers": [
-        "M1A_WHOLE_COMPOSED_RAW_DRAWING_ROUTE_SCOPE_EQUIVALENCE_AND_MUTATION_PREFLIGHT_PENDING",
-        "FROZEN_TERMINAL_ENVELOPE_GEOMETRY_CLASS_COVERAGE_BEYOND_VERIFIED_ANALYTIC_CSG_LINE_ARC_REVOLVE_SPLINE_REVOLVE_AND_MULTI_SECTION_LOFT_GRAMMARS_NOT_YET_PROVEN",
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
-        "POST_FREEZE_TERMINAL_POPULATION_AND_INDEPENDENT_ORACLE_BINDING_PENDING"
+        "INDEPENDENT_CAD_T0_SCORER_VERIFICATION_PENDING",
+        "T0_GEOMETRY_CASE_SOURCE_OR_POPULATION_BINDING_AND_INDEPENDENT_ORACLE_EXTRACTION_ROUTE_NOT_YET_FROZEN"
       ],
       "blocker_classes": {
         "binding": 1,
-        "scope_gate": 1,
-        "scope_expansion": 2,
-        "open_domain_protocol": 0,
+        "scope_gate": 0,
+        "scope_expansion": 0,
+        "open_domain_protocol": 1,
         "external_block": 0,
         "other": 0
       },
       "portfolio_leverage": 1,
       "priority_score": 300,
-      "next_action_class": "CLOSE_M1A_COMPOSED_SCOPE_AND_M1B_TERMINAL_ENVELOPE_COVERAGE__THEN_SCOPE_GATE_AND_BINDING",
+      "next_action_class": "VERIFY_CAD_T0_SCORER__THEN_FREEZE_T0_GEOMETRY_POPULATION_AND_INDEPENDENT_ORACLE_EXTRACTION",
       "zero_reality_blocker_reconciliation": "canonical/reasoning/2026-10-02_CAD_ZERO_REALITY_BLOCKER_RECONCILIATION_V1.json",
       "stale_blockers_deleted": [
         "CADQUERY_OR_EQUIVALENT_NATIVE_SOLID_MATERIALIZATION_NOT_YET_BOUND_IN_THIS_ROUTE"
@@ -67,7 +65,10 @@
       "stale_blockers_narrowed": [
         "RAW_DRAWING_OCR_DIMENSION_TOLERANCE_TO_NORMALIZED_ORTHOGRAPHIC_INPUT_NOT_YET_BOUND_END_TO_END",
         "ANALYTIC_CURVED_CSG_SPLINE_LOFT_AND_GENERAL_3D_GEOMETRY_SCOPE_EQUIVALENCE_NOT_YET_PROVEN"
-      ]
+      ],
+      "proof_mode_reconciliation": "canonical/reasoning/2026-10-02_CAD_OPEN_DOMAIN_PROOF_MODE_RECONCILIATION_V1.json",
+      "prewave_binding": "canonical/governance/CAD_T0_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "synthetic_whole_domain_scope_gate_deleted": true
     },
     {
       "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
