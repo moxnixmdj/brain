@@ -224,7 +224,7 @@ def _parse_visible(rows: list[str]) -> tuple[dict[str, Any], dict[str, Any] | No
 
     if any(x.startswith("POLYGON LOFT section Z=0:") for x in rows):
         m0 = _one(r"POLYGON LOFT section Z=0:\s*(\[.*\])$", rows, "POLYGON_LOFT_Z0")
-        m1 = _one(r"section Z=([0-9.]+):\s*(\[.*\])$", rows, "POLYGON_LOFT_Z1")
+        m1 = _one(r"^section Z=([0-9.]+):\s*(\[.*\])$", rows, "POLYGON_LOFT_Z1")
         p0 = json.loads(m0.group(1))
         z1 = _f(m1.group(1))
         p1 = json.loads(m1.group(2))
