@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_P1_COMPOSITE_PROOF_READJUDICATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__9_OF_9_MUTATIONS_KILLED__ZERO_V4_BASELINE_REGRESSION__ZERO_TERMINAL_REPLAY__ZERO_CREDIT",
+  "brain": {
+    "pull_request": 951,
+    "branch": "worker/p1-readjudication-v2-20261002",
+    "candidate_head_sha": "2ba6bc945281babe01a514894e36fdf4c863f7b5",
+    "exact_blobs": {
+      "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+      "canonical/governance/P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_V1.json": "1da223b8133e83d3ba1b238012593b39dcae91f9",
+      "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py": "0c386e6b78a8e97e9c1944e63600047bc4e2849b",
+      "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py": "6e1dfaa6b63fc629d55d07b2361bf625f11a5ce3",
+      "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+      "canonical/runtime/p1_composite_proof_readjudicator_v2.py": "4c78106d5cda114f052cf8ef160ba0d172d1bacf",
+      "canonical/tests/test_p1_composite_proof_readjudicator_v2.py": "7013994bb52709efe7d3f2a5d60e1ad6fcbf2215",
+      "canonical/governance/P1_COMPOSITE_PROOF_READJUDICATION_CANDIDATE_V2.json": "407b3851fda96cedfe8907bb65a76a3c6b92b2d5"
+    }
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 976,
+    "pull_request_head": "87d6095c7123b2904e360f9c0d7f64670a5b484c",
+    "merge_commit": "b10ffe11f9b57b65ddafe5e95377c4adb023d2bd",
+    "workflow_name": "Verify P1 readjudication v2",
+    "push_workflow_run_id": 37024060596,
+    "push_workflow_job_id": 110894100640,
+    "pull_request_workflow_run_id": 37024078170,
+    "conclusion": "success"
+  },
+  "verified": [
+    "ALL_EIGHT_MIRRORED_BRAIN_BLOBS_MATCH_EXACT_GIT_BLOB_SHA",
+    "FROZEN_EIGHT_REQUIRED_CHECKS_PARTITION_EXACTLY_ACROSS_PREDECLARED_V4_AND_T0_T2_ROLES",
+    "FROZEN_NINE_REQUIRED_MUTATIONS_PARTITION_EXACTLY_ACROSS_PREDECLARED_V4_AND_T0_T2_ROLES",
+    "ALL_NINE_REQUIRED_MUTATIONS_ARE_EXECUTABLY_KILLED",
+    "DROP_PROVENANCE_OR_DEPENDENCY_EDGE_IS_KILLED_BY_EVIDENCE_AWARE_V4_READJUDICATION",
+    "UNFALSIFIABLE_DIAGNOSIS_IS_KILLED_BY_THE_CURRENT_PREDECLARED_V4_ROLE",
+    "ALL_168_EXISTING_V4_CROSS_PRODUCT_BASELINE_CASES_PASS_STRICT_READJUDICATION",
+    "NO_BRAIN_CANDIDATE_CODE_CHANGED",
+    "ZERO_TERMINAL_V3_REPLAY",
+    "ZERO_FRESH_TERMINAL_EVIDENCE",
+    "ZERO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "terminal_results_replayed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "predicate_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
