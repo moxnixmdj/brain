@@ -14,7 +14,8 @@ from typing import Any
 
 PREQUAL = "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
 REGISTRY = "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
-SURFACE_DOMINANCE = "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V3.json"
+PROOF_BASIS = "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json"
+POPULATION_PROTOCOL = "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json"
 
 _REQUIRED_TRUE_PROGRESS = (
     "exact_cut_current_and_verified",
@@ -60,34 +61,84 @@ def evaluate(root: Path) -> dict[str, Any]:
     p = _load(root, PREQUAL)
     failures: list[str] = []
 
-    # Global execution authority requires the terminal proof basis to cover every
-    # active behavioral contract, not merely every contract referenced by a
-    # family mapping. A missing active contract is an unproved terminal behavior.
+    # Terminal execution authority comes from the active behavioral proof basis,
+    # never from benchmark/surface-dominance bookkeeping.
     try:
         registry = _load(root, REGISTRY)
-        dominance = _load(root, SURFACE_DOMINANCE)
+        basis = _load(root, PROOF_BASIS)
+        protocol = _load(root, POPULATION_PROTOCOL)
+
         active_rows = registry.get("active_contracted_residuals")
-        obligation_rows = dominance.get("obligations")
-        if not isinstance(active_rows, list) or not isinstance(obligation_rows, list):
+        basis_rows = basis.get("contracts")
+        protocol_ids = protocol.get("active_contracts")
+
+        if not isinstance(active_rows, list) or not isinstance(basis_rows, list):
             failures.append("ACTIVE_CONTRACT_COVERAGE_INPUT_INVALID")
+        elif not isinstance(protocol_ids, list) or any(not isinstance(x, str) or not x for x in protocol_ids):
+            failures.append("TERMINAL_POPULATION_PROTOCOL_CONTRACT_SET_INVALID")
         else:
-            active_ids = {
+            active_ids = [
                 row.get("behavior_id")
                 for row in active_rows
                 if isinstance(row, dict) and isinstance(row.get("behavior_id"), str)
-            }
-            obligation_ids = {
-                row.get("id")
-                for row in obligation_rows
-                if isinstance(row, dict) and isinstance(row.get("id"), str)
-            }
-            if len(active_ids) != len(active_rows):
+            ]
+            basis_ids = [
+                row.get("behavior_id")
+                for row in basis_rows
+                if isinstance(row, dict) and isinstance(row.get("behavior_id"), str)
+            ]
+            if len(active_ids) != len(active_rows) or len(active_ids) != len(set(active_ids)):
                 failures.append("ACTIVE_CONTRACT_REGISTRY_INVALID_OR_DUPLICATE")
-            missing_active = sorted(active_ids - obligation_ids)
-            if missing_active:
-                failures.append("ACTIVE_CONTRACTS_MISSING_FROM_TERMINAL_PROOF_BASIS:" + ",".join(missing_active))
+            if len(basis_ids) != len(basis_rows) or len(basis_ids) != len(set(basis_ids)):
+                failures.append("ACTIVE_TERMINAL_PROOF_BASIS_INVALID_OR_DUPLICATE")
+            if set(active_ids) != set(basis_ids):
+                missing = sorted(set(active_ids) - set(basis_ids))
+                extra = sorted(set(basis_ids) - set(active_ids))
+                failures.append(
+                    "ACTIVE_TERMINAL_PROOF_BASIS_SET_MISMATCH:"
+                    + "missing=" + ",".join(missing)
+                    + ";extra=" + ",".join(extra)
+                )
+            if set(active_ids) != set(protocol_ids) or len(protocol_ids) != len(set(protocol_ids)):
+                missing = sorted(set(active_ids) - set(protocol_ids))
+                extra = sorted(set(protocol_ids) - set(active_ids))
+                failures.append(
+                    "TERMINAL_POPULATION_PROTOCOL_SET_MISMATCH:"
+                    + "missing=" + ",".join(missing)
+                    + ";extra=" + ",".join(extra)
+                )
+
+            terminal_ready = 0
+            for row in basis_rows:
+                if not isinstance(row, dict):
+                    failures.append("ACTIVE_TERMINAL_PROOF_BASIS_ROW_INVALID")
+                    continue
+                bid = row.get("behavior_id")
+                state = row.get("proof_state")
+                blockers = row.get("blockers")
+                if state != "TERMINAL_ROUTE_FROZEN_ADMISSIBLE":
+                    failures.append("TERMINAL_ROUTE_NOT_ADMISSIBLE:" + str(bid) + ":" + str(state))
+                else:
+                    terminal_ready += 1
+                if not isinstance(blockers, list):
+                    failures.append("TERMINAL_ROUTE_BLOCKERS_INVALID:" + str(bid))
+                elif blockers:
+                    failures.append("TERMINAL_ROUTE_BLOCKED:" + str(bid) + ":" + ",".join(str(x) for x in blockers))
+
+            if basis.get("active_contract_count") != len(set(active_ids)):
+                failures.append("ACTIVE_TERMINAL_PROOF_BASIS_COUNT_MISMATCH")
+            if basis.get("admissible_frozen_terminal_route_count") != terminal_ready:
+                failures.append("ACTIVE_TERMINAL_PROOF_BASIS_READY_COUNT_MISMATCH")
+            if terminal_ready != len(set(active_ids)):
+                failures.append(
+                    f"TERMINAL_ROUTE_COVERAGE_INCOMPLETE:{terminal_ready}/{len(set(active_ids))}"
+                )
+            if protocol.get("execution_authority") is not True:
+                failures.append("TERMINAL_POPULATION_PROTOCOL_EXECUTION_AUTHORITY_FALSE")
+            if basis.get("execution_authority") is not True:
+                failures.append("ACTIVE_TERMINAL_PROOF_BASIS_EXECUTION_AUTHORITY_FALSE")
     except (FileNotFoundError, ValueError, json.JSONDecodeError):
-        failures.append("ACTIVE_CONTRACT_COVERAGE_INPUT_MISSING_OR_INVALID")
+        failures.append("ACTIVE_TERMINAL_PROOF_BASIS_OR_PROTOCOL_MISSING_OR_INVALID")
 
     if p.get("schema") != "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1":
         failures.append("SCHEMA")
