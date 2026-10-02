@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_ZERO_COST_PREQUALIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_BINDING__INDEPENDENT_PR_VERIFICATION_REQUIRED__NO_TERMINAL_CASE_EXPOSURE",
+  "terminal_portfolio": "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO",
+  "surface": "LiveBench Instruction Following / IFBench",
+  "target_bar_frozen_in_brain": ">=65.7%",
+  "public_route": {
+    "benchmark_repository": "LiveBench/LiveBench",
+    "source_pin": "canonical/governance/PUBLIC_BENCHMARK_SOURCE_PINS_V1.json",
+    "brain_pinned_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "evaluator_contract_reference_repository": "allenai/IFBench",
+    "evaluator_contract_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "evaluator_contract": "response JSONL records contain prompt and response; deterministic instruction verifiers compute strict/loose results",
+    "external_model_judge_required": false,
+    "paid_service_required": false
+  },
+  "brain_binding": {
+    "adapter": "canonical/runtime/livebench_if_response_adapter.py",
+    "tests": "canonical/tests/test_livebench_if_response_adapter.py",
+    "verification_workflow": ".github/workflows/verify-livebench-if-prequalification.yml",
+    "output_schema": [
+      "prompt",
+      "response"
+    ],
+    "mutation_policy": "PRESERVE_PROMPT_AND_RESPONSE_TEXT_EXACTLY__FAIL_CLOSED_ON_DUPLICATE_PROMPT_OR_INVALID_SCHEMA"
+  },
+  "prequalification_scope": {
+    "proven_if_verification_passes": [
+      "BRAIN_RESPONSE_TO_IFBENCH_EVALUATOR_SCHEMA_BINDING",
+      "DETERMINISTIC_NO_MODEL_JUDGE_SCORER_ROUTE_EXISTS",
+      "ADAPTER_REQUIRES_NO_EXTERNAL_API_OR_PAID_SERVICE",
+      "SYNTHETIC_SCHEMA_AND_FAIL_CLOSED_MUTATION_TESTS_PASS"
+    ],
+    "not_proven": [
+      "TERMINAL_CASE_EXECUTION",
+      "BRAIN_SCORE_GE_65_7",
+      "FULL_T2_PORTFOLIO_PASS",
+      "OPUS55_FAMILY_CLOSURE"
+    ]
+  },
+  "contamination_boundary": "NO_IFBENCH_TERMINAL_CASE_CONTENT_READ_OR_USED_BY_THIS_CHANGE",
+  "incremental_spend_usd": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
