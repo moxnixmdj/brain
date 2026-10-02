@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACTIVE_CONTRACT_COVERAGE_GUARD_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_REDUCER_AND_TEST_BLOBS__12_VS_10_ACTIVE_CONTRACT_OMISSION_FAILS_CLOSED__ZERO_TERMINAL_RESULTS",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 523,
+  "public_merge_commit": "9cd3c0864d46bb5141792c84144706f8846ce0aa",
+  "workflow_run_id": 36957880816,
+  "workflow_conclusion": "success",
+  "exact_brain_candidate_blobs": {
+    "canonical/runtime/terminal_prequalification_reducer.py": "e05a69031c17bdf4a5aaa344666c2824751a7907",
+    "canonical/tests/test_terminal_prequalification_reducer.py": "bba702852285d4691da70802ce054c489b06efd5"
+  },
+  "independently_verified": [
+    "EXACT_BLOB_HASH_BINDING_PASS",
+    "REDUCER_REGRESSION_SUITE_PASS",
+    "MISSING_ACTIVE_CONTRACT_FAILS_CLOSED",
+    "MISSING_COVERAGE_INPUT_FAILS_CLOSED",
+    "12_ACTIVE_CONTRACTS_VS_10_PROOF_BASIS_FAILS_CLOSED_AND_NAMES_CAD_AND_SA_CCR_OMISSIONS"
+  ],
+  "boundary": [
+    "PUBLIC_RUNNER_VERIFIES_GUARD_LOGIC_AND_DECLARED_12_VS_10_FIXTURE",
+    "SOURCE_FACT_THAT_PRIVATE_REGISTRY_HAS_12_AND_V3_INPUT_HAS_10_WAS_ESTABLISHED_BY_CANONICAL_BLOB_INSPECTION_NOT_PUBLIC_RUNNER_ACCESS",
+    "NO_TERMINAL_CAPABILITY_RESULT",
+    "NO_FAMILY_CREDIT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
