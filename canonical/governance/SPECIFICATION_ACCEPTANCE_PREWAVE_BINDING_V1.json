@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_SPECIFICATION_ACCEPTANCE_PREWAVE_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_INSTRUMENTATION_PACKAGE__ZERO_TERMINAL_AUTHORITY",
+  "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "purpose": "Freeze direct semantic-acceptance instrumentation, ambiguity/counterexample scoring, four-portfolio information-boundary bindings, and post-freeze accounting without claiming terminal semantic correctness.",
+  "exact_brain_package": {
+    "runtime": "canonical/runtime/independent_acceptance_model.py",
+    "runtime_blob_sha": "710298c5d7154b5a3c2a4a1700420c40cb2fa55a",
+    "evidence": "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json",
+    "measurement_semantics": "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MEASUREMENT_SEMANTICS_002.json",
+    "spent_reduction": "canonical/governance/M0_SEMANTIC_ACCEPTANCE_SPENT_PORTFOLIO_REDUCTION_V1.json"
+  },
+  "direct_instrumentation": {
+    "source_accounting": "REQUIRE_SOURCE_BYTES_OR_DECLARED_OBSERVATION_UNITS_TO_REMAIN_TRACEABLE_TO_REQUIREMENTS",
+    "independent_acceptance": "REJECT_CHECKS_WITH_BUILDER_DERIVATION_SHARED_NONRAW_DEPENDENCIES_OR_NONINDEPENDENT_PROVENANCE",
+    "requirement_coverage": "EVERY_CRITICAL_REQUIREMENT_MUST_HAVE_AT_LEAST_ONE_INDEPENDENT_CHECK_AND_ZERO_UNCOVERED_DECLARED_FAILURE_OBLIGATIONS",
+    "disagreement": "SEMANTIC_DISAGREEMENT_OR_NONIDENTIFIABILITY_IS_EXPLICIT_FAILURE_OR_UNKNOWN__NEVER_SILENTLY_RESOLVED",
+    "terminal_authority": false
+  },
+  "ambiguity_counterexample_scorer": {
+    "inputs": [
+      "typed_requirements",
+      "independent_checks",
+      "provenance_labels",
+      "declared_transform_kinds",
+      "declared_failure_obligations"
+    ],
+    "per_requirement_outputs": [
+      "independent_checks",
+      "rejected_checks",
+      "uncovered_failure_modes",
+      "counterexample_templates"
+    ],
+    "fail_conditions": [
+      "CRITICAL_REQUIREMENT_WITHOUT_INDEPENDENT_ACCEPTANCE",
+      "UNCOVERED_DECLARED_FAILURE_MODE",
+      "BUILDER_CORRELATED_ACCEPTANCE_CHECK",
+      "SHARED_NONRAW_DEPENDENCY",
+      "DERIVED_FROM_BUILDER_OUTPUT",
+      "AMBIGUITY_WITHOUT_FAIL_CLOSED_OR_DISCRIMINATING_EVIDENCE"
+    ],
+    "nonclaim": "COUNTEREXAMPLE_TEMPLATES_ARE_DIAGNOSTIC_AND_DO_NOT_SYNTHESIZE_DOMAIN_GOLD_VALUES"
+  },
+  "portfolio_bindings": {
+    "T0": {
+      "portfolio": "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO",
+      "visible_information": "EXACT_TASK_SOURCE_AND_AUTHORIZED_JIT_KNOWLEDGE_ONLY",
+      "instrumentation": [
+        "SOURCE_TO_REQUIREMENT_TRACEABILITY",
+        "ALTERNATIVE_INTERPRETATION_OR_AMBIGUITY_AUDIT",
+        "INDEPENDENT_ACCEPTANCE_CONSEQUENCE_AUDIT"
+      ]
+    },
+    "T1": {
+      "portfolio": "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO",
+      "visible_information": "EXACT_ARTIFACT_TASK_SOURCE_AND_AUTHORIZED_JIT_KNOWLEDGE_ONLY",
+      "instrumentation": [
+        "REQUIREMENT_AND_RUBRIC_TRACEABILITY",
+        "EVIDENCE_SUPPORT_AND_UNSUPPORTED_CLAIM_AUDIT",
+        "INDEPENDENT_ACCEPTANCE_COVERAGE"
+      ]
+    },
+    "T2": {
+      "portfolio": "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO",
+      "visible_information": "EXACT_INTERACTIVE_TASK_STATE_AND_AUTHORIZED_JIT_KNOWLEDGE_ONLY",
+      "instrumentation": [
+        "TASK_REQUIREMENT_TRACEABILITY",
+        "STATE_TRANSITION_ACCEPTANCE_OBLIGATIONS",
+        "RECOVERY_AND_SCOPE_COUNTEREXAMPLE_AUDIT"
+      ]
+    },
+    "T3": {
+      "portfolio": "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO",
+      "visible_information": "EXACT_RESEARCH_OBJECTIVE_AND_AUTHORIZED_JIT_KNOWLEDGE_ONLY",
+      "instrumentation": [
+        "OBJECTIVE_TO_REQUIREMENT_TRACEABILITY",
+        "EVIDENCE_SUFFICIENCY_AND_COUNTEREXAMPLE_AUDIT",
+        "UNKNOWN_OR_AMBIGUOUS_INTERPRETATION_ABSTENTION"
+      ]
+    }
+  },
+  "post_freeze_selector_and_accounting": {
+    "select_cases_before_candidate_freeze": false,
+    "adaptive_case_replacement": false,
+    "tune_on_selected_cases": false,
+    "scorer_mutation_after_results": false,
+    "failed_or_unknown_case_counts_as_pass": false,
+    "per_portfolio_semantic_acceptance_receipt_required": true,
+    "shared_behavior_credit_requires_direct_instrumentation": true
+  },
+  "limitations": [
+    "NO_TERMINAL_RESULT",
+    "NO_FAMILY_OR_CAPABILITY_CREDIT",
+    "DOES_NOT_PROVE_ARBITRARY_LANGUAGE_UNDERSTANDING",
+    "DOES_NOT_SYNTHESIZE_DOMAIN_GOLD_VALUES",
+    "DOES_NOT_PROVE_A_PASSING_ACCEPTANCE_PLAN_IS_SUFFICIENT_FOR_TASK_CORRECTNESS",
+    "PORTFOLIO_EXECUTION_REMAINS_BLOCKED_BY_GLOBAL_PREQUALIFICATION"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
