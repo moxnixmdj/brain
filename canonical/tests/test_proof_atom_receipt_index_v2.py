@@ -77,6 +77,45 @@ class Tests(unittest.TestCase):
             row=next(x for x in out["atoms"] if x["proposition"]=="R1")
             self.assertEqual(row["candidate_match_count"],0)
 
+    def test_identifier_superstring_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/r.json"
+            p.parent.mkdir(parents=True)
+            p.write_text('{"claim":"R1_EXTENDED"}\n',encoding="utf-8")
+            out=build_index(frontier(),overlay(),root=root)
+            row=next(x for x in out["atoms"] if x["proposition"]=="R1")
+            self.assertEqual(row["candidate_match_count"],0)
+
+    def test_corpus_manifest_is_content_sensitive_and_deterministic(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/r.json"
+            p.parent.mkdir(parents=True)
+            p.write_text('{"claim":"R1"}\n',encoding="utf-8")
+            a=build_index(frontier(),overlay(),root=root)
+            b=build_index(frontier(),overlay(),root=root)
+            self.assertEqual(a["scanned_corpus_manifest_sha256"],b["scanned_corpus_manifest_sha256"])
+            self.assertEqual(a["canonical_atom_manifest_sha256"],b["canonical_atom_manifest_sha256"])
+            p.write_text('{"claim":"R1","extra":1}\n',encoding="utf-8")
+            c=build_index(frontier(),overlay(),root=root)
+            self.assertNotEqual(a["scanned_corpus_manifest_sha256"],c["scanned_corpus_manifest_sha256"])
+            self.assertEqual(a["canonical_atom_manifest_sha256"],c["canonical_atom_manifest_sha256"])
+
+    def test_match_cap_never_hides_actual_candidate_count(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            d=root/"canonical/verification"
+            d.mkdir(parents=True)
+            for i in range(65):
+                (d/f"r{i:02d}.json").write_text('{"claim":"R1"}\n',encoding="utf-8")
+            out=build_index(frontier(),overlay(),root=root)
+            row=next(x for x in out["atoms"] if x["proposition"]=="R1")
+            self.assertEqual(row["candidate_match_count"],65)
+            self.assertEqual(row["stored_candidate_match_count"],64)
+            self.assertTrue(row["candidate_match_truncated"])
+            self.assertEqual(out["atoms_with_truncated_candidate_lists"],1)
+
     def test_no_credit_or_authority(self):
         with tempfile.TemporaryDirectory() as td:
             out=build_index(frontier(),overlay(),root=Path(td))
