@@ -45,8 +45,13 @@ def generate_case(seed:int,ordinal:int)->dict[str,Any]:
       _tool(ids[4],4.0,5,"eu",4,50),
     ]
     if cls=="UNAVAILABLE_OR_UNAUTHORIZED":
-        tools[0]["available"]=False
-        tools[1]["authorized"]=False
+        # Exercise availability and authorization independently. Keep tool1
+        # eligible-but-insufficient so schema-only/popularity baselines remain
+        # discriminating instead of accidentally selecting the same oracle-best route.
+        if (ordinal // len(CLASSES)) % 2 == 0:
+            tools[0]["available"]=False
+        else:
+            tools[0]["authorized"]=False
 
     epoch0={
       ids[0]:{"CAP_A"},
