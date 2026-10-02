@@ -36,10 +36,17 @@
         },
         {
           "id": "MATCHED_BRAIN_WITNESS_NORMALIZATION_INDEPENDENT_PASS",
-          "satisfied": false
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_BRAIN_WITNESS_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "reason": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_OF_9_WITNESSES_EXACT_RECOMPUTATION__ZERO_SEMANTIC_CREDIT",
+          "derived_evidence": {
+            "path": "canonical/verification/OPUS55_BRAIN_WITNESS_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+            "field": "status",
+            "equals": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_OF_9_WITNESSES_EXACT_RECOMPUTATION__ZERO_SEMANTIC_CREDIT"
+          }
         }
       ],
-      "notes": "Target-side matched/scope atoms are independently source-provenance verified. Implication algebra remains unavailable until Brain witness-side atoms/bounds are independently normalized and bound; no semantic equivalence may be invented."
+      "notes": "Target-side normalization and Brain witness-side content-addressed normalization are independently verified. Protocol implication algebra may now run only over explicit independently verified witness-to-target semantic edges; zero such edges are currently granted by the normalization receipts themselves."
     },
     {
       "id": "RUN_FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
@@ -334,7 +341,9 @@
     "composition_component_interface_verification": "canonical/verification/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "matched_target_normalization": "INDEPENDENT_PUBLIC_RUNNER_PASS__11_TARGETS__47_ATOMS__10_METRICS__SOURCE_PROVENANCE_ONLY",
     "matched_target_normalization_verification": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "matched_brain_witness_normalization": "OPEN__REQUIRED_BEFORE_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"
+    "matched_brain_witness_normalization": "OPEN__REQUIRED_BEFORE_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+    "brain_witness_normalization": "INDEPENDENT_PASS__9_EXACT_WITNESSES__ZERO_TARGET_ATOM_MAPPING__ZERO_SEMANTIC_CREDIT",
+    "brain_witness_normalization_verification": "canonical/verification/OPUS55_BRAIN_WITNESS_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
