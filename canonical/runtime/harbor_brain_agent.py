@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from canonical.runtime import astra_runtime
+from canonical.runtime.harbor_environment_transport import HarborEnvironmentTransport
 
 try:
     from harbor.agents.base import BaseAgent
@@ -136,14 +137,12 @@ async def run_bounded_harbor_goal(
             timeout_s = max(1, min(int(raw_timeout), 180))
         except (TypeError, ValueError):
             raise RuntimeError("HARBOR_TIMEOUT_INVALID")
-        result = await environment.exec(command=command, timeout_sec=timeout_s)
-        stdout = str(getattr(result, "stdout", "") or "")[-MAX_OUTPUT_CHARS:]
-        stderr = str(getattr(result, "stderr", "") or "")[-MAX_OUTPUT_CHARS:]
-        returncode = int(getattr(result, "return_code", getattr(result, "returncode", 0)) or 0)
+        transport = HarborEnvironmentTransport(environment)
+        receipt = await transport.exec(command, timeout_sec=timeout_s)
         observed = {
-            "returncode": returncode,
-            "stdout": stdout,
-            "stderr": stderr,
+            "returncode": receipt.returncode,
+            "stdout": receipt.stdout[-MAX_OUTPUT_CHARS:],
+            "stderr": receipt.stderr[-MAX_OUTPUT_CHARS:],
         }
         trace.append({
             "cycle": cycle,
