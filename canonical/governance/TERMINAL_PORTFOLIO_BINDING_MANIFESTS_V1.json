@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_NAMESPACE_AND_STOP_RULE_BINDINGS__SURFACE_SPECIFIC_HASHES_AND_ZERO_COST_RESOURCE_PREFLIGHTS_STILL_FAIL_CLOSED",
+  "status": "FROZEN_NAMESPACE_STOP_RULE_AND_PRIVATE_ROUTE_DELETION_BINDINGS__PUBLIC_SURFACE_RESOURCE_PREFLIGHTS_STILL_FAIL_CLOSED",
   "shared_protocol": "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
@@ -30,11 +30,13 @@
             "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
             "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
           ],
-          "binding_state": "DIRECT_PROOF_BINDING_FROZEN__TERMINAL_RESULT_PENDING",
+          "binding_state": "REQUIRED_PRIVATE_EXECUTION_ROUTE_DELETED__CONTRACT_NATIVE_DIRECT_PROOF_ROUTE_FROZEN__TERMINAL_PROOF_EXECUTION_PENDING",
           "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
           "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
           "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "route_deletion_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         },
         {
           "id": "CURSORBENCH_4_0",
@@ -42,11 +44,13 @@
           "proof_routes": [
             "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
           ],
-          "binding_state": "DIRECT_PROOF_BINDING_FROZEN__TERMINAL_RESULT_PENDING",
+          "binding_state": "REQUIRED_PRIVATE_EXECUTION_ROUTE_DELETED__CONTRACT_NATIVE_DIRECT_PROOF_ROUTE_FROZEN__TERMINAL_PROOF_EXECUTION_PENDING",
           "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
           "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
           "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "route_deletion_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         }
       ],
       "metric_thresholds": [
@@ -88,11 +92,13 @@
             "P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF",
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "DIRECT_PROOF_BINDING_FROZEN__TERMINAL_RESULT_PENDING",
+          "binding_state": "REQUIRED_PRIVATE_EXECUTION_ROUTE_DELETED__CONTRACT_NATIVE_DIRECT_PROOF_ROUTE_FROZEN__TERMINAL_PROOF_EXECUTION_PENDING",
           "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
           "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
           "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "route_deletion_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         },
         {
           "id": "CHARTOGRAPHY",
@@ -127,13 +133,14 @@
             "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "PUBLIC_SAMPLE_RESOURCE_AND_GRADER_PREFLIGHT_OPEN__DIRECT_GRAPH_SYNTHESIS_BINDING_FROZEN",
+          "binding_state": "PRIVATE_HELDOUT_EXECUTION_ROUTE_DELETED__PUBLIC_SCOPE_AND_CONTRACT_NATIVE_DIRECT_PROOF_ROUTE_FROZEN__PUBLIC_SAMPLE_RESOURCE_PREFLIGHT_OPTIONAL_FOR_SUPPORT",
           "direct_proof_binding": {
             "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
             "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
             "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
             "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
-          }
+          },
+          "route_deletion_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json"
         }
       ],
       "mutation_set": [
@@ -172,11 +179,12 @@
           "proof_routes": [
             "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
           ],
-          "binding_state": "DIRECT_PROOF_BINDING_FROZEN__TERMINAL_RESULT_PENDING",
+          "binding_state": "DIRECT_PROOF_MACHINE_AND_MUTATION_PREFLIGHT_FROZEN__TERMINAL_POPULATION_EXECUTION_PENDING",
           "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
           "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
           "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         }
       ],
       "mutation_set": [
@@ -209,11 +217,12 @@
           "proof_routes": [
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "DIRECT_PROOF_BINDING_FROZEN_FOR_SYNTHESIS_SCOPE__TERMINAL_RESULT_PENDING",
+          "binding_state": "DIRECT_PROOF_MACHINE_MUTATION_PREFLIGHT_FROZEN__UNKNOWN_DOMAIN_SCOPE_AUDIT_STILL_OPEN",
           "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
           "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
           "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         }
       ],
       "mutation_set": [
@@ -254,5 +263,7 @@
     ],
     "terminal_results_observed": false,
     "capability_credit_delta": 0
-  }
+  },
+  "private_surface_dominance": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+  "direct_proof_mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
