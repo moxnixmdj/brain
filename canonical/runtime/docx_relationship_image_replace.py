@@ -111,11 +111,22 @@ def replace_image_by_relationship(
     # Preserve extension/content-type contract. We do not silently change media
     # type because [Content_Types].xml and downstream consumers may depend on it.
     ext = "." + target.rsplit(".", 1)[-1].lower() if "." in target.rsplit("/", 1)[-1] else ""
-    known = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tif", ".tiff", ".emf", ".wmf"}
+    known = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tif", ".tiff"}
     if ext not in known:
         return {"status": "FAIL_CLOSED", "reason": "UNSUPPORTED_IMAGE_EXTENSION", "extension": ext}
 
     replacement = bytes(replacement_image)
+    signatures = {
+        ".png": lambda b: b.startswith(b"\\x89PNG\\r\\n\\x1a\\n"),
+        ".jpg": lambda b: b.startswith(b"\\xff\\xd8\\xff"),
+        ".jpeg": lambda b: b.startswith(b"\\xff\\xd8\\xff"),
+        ".gif": lambda b: b.startswith((b"GIF87a", b"GIF89a")),
+        ".bmp": lambda b: b.startswith(b"BM"),
+        ".tif": lambda b: b.startswith((b"II*\\x00", b"MM\\x00*")),
+        ".tiff": lambda b: b.startswith((b"II*\\x00", b"MM\\x00*")),
+    }
+    if not signatures[ext](replacement):
+        return {"status": "FAIL_CLOSED", "reason": "REPLACEMENT_IMAGE_SIGNATURE_MISMATCH", "extension": ext}
     if replacement == original[target]:
         return {"status": "FAIL_CLOSED", "reason": "REPLACEMENT_IDENTICAL_TO_ORIGINAL"}
 
