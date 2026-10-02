@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_HARBOR_REAL_API_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PINNED_REAL_HARBOR_API__EXACT_CURRENT_BRAIN_RUNTIME__ZERO_BENCHMARK_CASES",
+  "brain": {
+    "coding_control_kernel": {
+      "path": "canonical/runtime/coding_control_kernel_v1.py",
+      "git_blob_sha": "2b5cd4bebc28b8e7096f87aa63ffbb329a819057"
+    },
+    "harbor_adapter": {
+      "path": "canonical/runtime/harbor_brain_agent.py",
+      "git_blob_sha": "3d7d803bdd25df0379d81b360af3ea40da254771"
+    },
+    "harbor_tests": {
+      "path": "canonical/tests/test_harbor_brain_agent.py",
+      "git_blob_sha": "68b3d219ca8cec70fcaa07821397b0ecfad6d6a5"
+    }
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 821,
+    "pull_request_head": "c6d391133f279b61cd0a49e4a62636e0aceba7e6",
+    "merge_commit": "ee955ee17c6ad9d880deaa67c4000639dbed490e",
+    "workflow_run_id": 36986071814,
+    "workflow_job_id": 110771277061,
+    "conclusion": "success"
+  },
+  "environment": {
+    "python": "3.12",
+    "harbor_version": "0.23.0",
+    "real_harbor_classes_required": true
+  },
+  "verified": [
+    "EXACT_CURRENT_BRAIN_RUNTIME_BLOBS_MATCH",
+    "PINNED_HARBOR_0_23_0_INSTALLS",
+    "HARBOR_BASE_AGENT_IMPORT_IS_REAL_NOT_FALLBACK",
+    "HARBOR_AGENT_CAPABILITIES_IMPORT_IS_REAL_NOT_FALLBACK",
+    "HARBOR_BRAIN_AGENT_SUBCLASSES_REAL_BASE_AGENT",
+    "CURRENT_ADAPTER_REGRESSIONS_PASS_UNDER_REAL_HARBOR_PACKAGE"
+  ],
+  "not_proven": [
+    "TASK_SPECIFIC_RS_ARCHIVE_CLONE_PERFORMANCE",
+    "TB4_STAGE1_SCORE",
+    "WHOLE_FAMILY_OPUS55_ACCEPTANCE"
+  ],
+  "benchmark_case_content_consumed": false,
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
