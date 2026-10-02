@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_M0A_SPECIALIZED_WHITE_BOX_DONOR_DECOMPOSITION_V1",
+  "date": "2026-10-02",
+  "status": "PINNED_SPECIALIZED_DONORS__ZERO_CAPABILITY_CREDIT__NARROW_HARVEST_FRONTIER",
+  "parent_residual": "M0A_ARBITRARY_SOURCE_TO_INDEPENDENT_SEMANTIC_DECOMPOSITIONS",
+  "decomposition": [
+    {
+      "residual": "M0A_CROSS_SENTENCE_COREFERENCE_AND_NONEXACT_REFERENCE_BINDING",
+      "donor": {
+        "repository": "shon-otmazgin/fastcoref",
+        "revision": "ae224139196d122b225af5a7e73b5fc0b6e1076d",
+        "license": "MIT"
+      },
+      "role": "WHITE_BOX_COREFERENCE_MECHANISM_SOURCE",
+      "why": "Directly targets mention clustering and cross-sentence reference resolution rather than generic language modeling."
+    },
+    {
+      "residual": "M0A_LONG_RANGE_DISCOURSE_RELATION_AND_SCOPE_STRUCTURE",
+      "donor": {
+        "repository": "jiyfeng/RSTParser",
+        "revision": "0be4570ec73f0004d4384d010de63b95e6809dfc",
+        "license": "MIT"
+      },
+      "role": "WHITE_BOX_DISCOURSE_STRUCTURE_SOURCE",
+      "why": "Document-level shift-reduce rhetorical/discourse structure isolates long-range relation organization."
+    },
+    {
+      "residual": "M0A_PREDICATE_ARGUMENT_AND_MULTI_CLASS_EXPLICIT_SEMANTICS",
+      "donor": {
+        "repository": "allenai/allennlp-models",
+        "revision": "b1f372248c17ad12684d344955fbcd98e957e77e",
+        "license": "Apache-2.0"
+      },
+      "role": "WHITE_BOX_STRUCTURED_PREDICTION_SOURCE",
+      "why": "Semantic-role and graph-prediction machinery isolates who-did-what-to-whom structure without adopting a general frontier model."
+    }
+  ],
+  "acquisition_rule": [
+    "USE_DETERMINISTIC_OWNED_M0A_ROUTES_FIRST",
+    "INVOKE_SPECIALIZED_DONOR_ONLY_ON_UNRESOLVED_RESIDUAL_SPANS",
+    "VERIFY_ON_SYNTHETIC_PUBLIC_OR_ALREADY_SPENT_CORPORA",
+    "ABLATE_DONOR_COMPONENT_TO_LOCALIZE_TERMINAL_DELTA",
+    "INTERNALIZE_ONLY_MINIMAL_SPECIALIZED_RUNTIME_OR_DISTILLED_RESIDUAL",
+    "DELETE_EXTERNAL_DONOR_REPOSITORY_AND_REMOTE_ROUTE",
+    "REPLAY_WITH_BRAIN_LOCAL_COMPONENT_ONLY",
+    "NO_DONOR_SELF_CERTIFICATION_OR_FAMILY_CREDIT"
+  ],
+  "replaces_as_first_move": "GENERAL_OLMO_2_1B_DONOR_FOR_ALL_M0A",
+  "retained_fallback": "GENERAL_OLMO_2_1B_MAY_REMAIN_A_LATER_CONTROL_ONLY_IF_SPECIALIZED_ROUTES_LEAVE_A_MEASURED_RESIDUAL",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
