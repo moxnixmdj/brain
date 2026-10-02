@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_BRAIN_GATEWAY_CONFIGURATION_V1",
   "date": "2026-10-02",
-  "status": "INDEPENDENT_PASS__SOURCE_GATE_V2_ADMISSIBLE__FREE_PLANNER_TRANSPORT_PASS__ZERO_CAPABILITY_CREDIT",
+  "status": "INDEPENDENT_PASS__HERMETIC_SELF_CONTAINED__SOURCE_GATE_V2_ADMISSIBLE__ZERO_CAPABILITY_CREDIT",
   "family": "BUSINESS_WORKFLOW_AUTOMATION",
   "benchmark": "AutomationBench public 600",
   "runtime": "canonical/runtime/automationbench_brain_gateway_v1.py",
@@ -26,10 +26,16 @@
     "hidden_target_capability_provider_forbidden": true
   },
   "materiality_test": "A deliberately invalid substrate proposal that would request an unknown or schema-invalid tool must be blocked by Brain while an equivalent valid proposal passes.",
-  "next": "BIND_ROUTE_IN_PUBLIC_BAR_READINESS__RERUN_ATOMIC_RESIDUAL_COMPILER__EXECUTE_PUBLIC_600_ONLY_IF_COMPILER_AUTHORIZES",
+  "next": "QUALIFY_AND_FREEZE_GENERAL_COGNITION_SUBSTRATE_ON_SYNTHETIC_NON_BENCHMARK_TOOL_CONTRACTS__RERUN_ATOMIC_RESIDUAL__EXECUTE_PUBLIC_600_ONLY_AFTER_EXACT_FINAL_AUTHORIZATION",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "independent_verification": "canonical/verification/AUTOMATIONBENCH_BRAIN_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "free_planner_transport_verification": "canonical/verification/AUTOMATIONBENCH_FREE_PLANNER_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  "free_planner_transport_verification": "canonical/verification/AUTOMATIONBENCH_FREE_PLANNER_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "current_runtime_git_blob_sha": "e15f671276952e4dac762eb1fa5531550ed23a46",
+  "current_authority": "canonical/verification/AUTOMATIONBENCH_HERMETIC_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+  "historical_receipts": [
+    "canonical/verification/AUTOMATIONBENCH_BRAIN_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/AUTOMATIONBENCH_FREE_PLANNER_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ]
 }
