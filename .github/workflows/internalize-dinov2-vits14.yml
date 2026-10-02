@@ -1,10 +1,6 @@
 name: Internalize DINOv2 ViT-S14 checkpoint
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/internalize-dinov2-vits14.yml
   workflow_dispatch:
 
 permissions:
