@@ -10,7 +10,7 @@ COMMITMENT = "candidate-package-commitment"
 BEACON = "post-freeze-beacon"
 
 
-def good_parent_rows(portfolio, *, commitment=COMMITMENT, beacon=BEACON):
+def good_parent_rows(portfolio, *, commitment=COMMITMENT, beacon=BEACON, direct_results=None):
     rows = []
     for behavior_id, binding in multiplex.BINDINGS.items():
         if portfolio not in binding["portfolios"]:
@@ -59,6 +59,7 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
             parent_calls[portfolio] += 1
             self.assertEqual(kwargs["commitment"], COMMITMENT)
             self.assertEqual(kwargs["beacon"], BEACON)
+            self.assertIn(launcher.CAD_ID, kwargs["direct_results"])
             return good_parent_rows(portfolio, **kwargs)
 
         def direct_runner(behavior_id, **kwargs):
@@ -94,6 +95,36 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
         self.assertEqual(set(direct_calls), set(launcher.DIRECT_PORTFOLIOS))
         self.assertTrue(all(count == 1 for count in direct_calls.values()))
         self.assertEqual(out["shared_direct_route_duplicate_execution_count"], 0)
+
+    def test_default_parent_runner_is_concrete_and_receives_direct_results(self):
+        direct_calls = Counter()
+
+        def direct_runner(behavior_id, **kwargs):
+            direct_calls[behavior_id] += 1
+            return {"behavior_id": behavior_id, "pass": True, "terminal_result": True}
+
+        def cad_runner(**kwargs):
+            direct_calls[launcher.CAD_ID] += 1
+            return {"behavior_id": launcher.CAD_ID, "pass": True, "terminal_result": True}
+
+        seen = []
+        def concrete_parent(portfolio, **kwargs):
+            seen.append((portfolio, set(kwargs["direct_results"])))
+            return good_parent_rows(portfolio, **kwargs)
+
+        with patch.object(launcher.launch_authority, "evaluate", return_value={"launch_authority": True}), \
+             patch.object(launcher.parent_portfolio_runner, "execute_parent_portfolio", side_effect=concrete_parent):
+            out = launcher.execute_wave(
+                commitment=COMMITMENT,
+                beacon=BEACON,
+                direct_runner=direct_runner,
+                cad_runner=cad_runner,
+            )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual([p for p, _ in seen], list(launcher.PORTFOLIOS))
+        expected = set(launcher.DIRECT_PORTFOLIOS)
+        self.assertTrue(all(ids == expected for _, ids in seen))
+        self.assertTrue(all(count == 1 for count in direct_calls.values()))
 
     def test_launch_authority_guard_blocks_before_any_runner_invocation(self):
         parent_calls = Counter()
@@ -160,6 +191,7 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
 
     def test_direct_failure_blocks_wave(self):
         def parent_runner(portfolio, **kwargs):
+            self.assertIn(launcher.CAD_ID, kwargs["direct_results"])
             return good_parent_rows(portfolio, **kwargs)
 
         def direct_runner(behavior_id, **kwargs):
