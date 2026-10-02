@@ -7,6 +7,7 @@ on:
       - "canonical/runtime/global_terminal_universe.py"
       - "canonical/tests/test_global_terminal_universe.py"
       - "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json"
+      - "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
       - "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json"
       - "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
       - "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
