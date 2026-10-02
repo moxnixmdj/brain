@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CODING_GENERAL_SUBSTRATE_MATERIALITY_BINDING_V1",
   "date": "2026-10-02",
-  "status": "PENDING_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION__ZERO_ACCEPTANCE_CASES",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__GENERAL_SUBSTRATE_MATERIAL_CONTROL_PROVEN__ZERO_ACCEPTANCE_CASES",
   "objective": "Prove that the Brain-owned mini-SWE/Superpowers capability configuration materially controls advanced-coding terminal execution while GPT-5.6 Sol remains declared general cognition substrate rather than hidden target-capability provider.",
   "brain_configuration": {
     "path": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
@@ -16,7 +16,8 @@
     "held_constant": "IDENTICAL_TERMINAL_PROPOSAL_STREAM",
     "bare_control": "ACCEPTS_COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT_WITHOUT_BRAIN_AUTHORIZATION",
     "configured_treatment": "REQUIRES_BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1__ZERO_KNOWN_FAILURES__ALL_ACCEPTANCE_CRITERIA_PASS__ALL_VERIFICATION_COMMANDS_EXIT_ZERO",
-    "benchmark_case_content_consumed": false
+    "benchmark_case_content_consumed": false,
+    "independent_verification": "canonical/verification/CODING_SUBSTRATE_MATERIALITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "real_execution_support": {
     "configured_route": "SESSION_MEDIATED_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_GPT_5_6_SOL_GENERAL_COGNITION_SUBSTRATE",
@@ -30,11 +31,18 @@
     "declared_role": "GENERAL_COGNITION_SUBSTRATE",
     "standalone_model_superiority_used_as_ownership_evidence": false,
     "brain_configuration_survives_provider_loss": true,
-    "configuration_material_control": "PENDING_COUNTERFACTUAL_VERIFICATION",
-    "external_hidden_target_capability_provider": "PENDING_COUNTERFACTUAL_VERIFICATION"
+    "configuration_material_control": true,
+    "external_hidden_target_capability_provider": false,
+    "general_substrate_test_pass": true,
+    "basis": [
+      "BRAIN_OWNED_MINI_SWE_SUPERPOWERS_CONFIGURATION_IS_DURABLE_AND_BOUND",
+      "IDENTICAL_PROPOSAL_STREAM_CAUSALLY_DIVERGES_UNDER_BRAIN_COMPLETION_CONTRACT",
+      "REAL_CONFIGURED_WAL_RECOVERY_ORDERING_TASK_PASS_EXISTS",
+      "STANDALONE_MODEL_SUPERIORITY_IS_NOT_USED_AS_OWNERSHIP_EVIDENCE"
+    ]
   },
   "source_gate_target": "canonical/runtime/acceptance_capability_source_gate_v2.py",
-  "terminal_bench_case_exposure_authorized": false,
+  "terminal_bench_case_exposure_authorized": "PENDING_SOURCE_GATE_V2_REEVALUATION",
   "fresh_acceptance_cases_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
