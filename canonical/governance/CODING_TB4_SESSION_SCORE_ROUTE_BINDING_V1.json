@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_TB4_SESSION_SCORE_ROUTE_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "PRECASE_SCORE_ROUTE_COMPLETE__SOURCE_GATE_ADMISSIBLE__ZERO_CASES_CONSUMED",
+  "family": "ADVANCED_AGENTIC_CODING",
+  "surface": "Terminal-Bench 4.0",
+  "acceptance_threshold_percent": 66.4,
+  "brain_configuration": {
+    "path": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+    "git_blob_sha": "d63d7656c7da293a7c22c32042a4f03f2d13593d",
+    "id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_SUPERPOWERS_V1",
+    "durable_inputs_brain_owned": true
+  },
+  "execution_carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verification_commit": "94881d91a925935611e790c6c8cbabb41e801dd3",
+    "controller_fast_blob": "f615e727bf88e9e986e334a3336dc522b3a324b0",
+    "acceptance_contract_blob": "9c37c34a5eaf20892ca3e53d0c97f2c6ec09a527",
+    "material_control_verification": "canonical/verification/CODING_SESSION_CARRIER_MATERIAL_CONTROL_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "zero_incremental_cost": true
+  },
+  "benchmark_identity": "canonical/verification/TERMINAL_BENCH_4_ZERO_CASE_ROUTE_VERIFICATION_20261002_V1.json",
+  "prior_real_task_evidence": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
+  "source_gate_semantics": "canonical/verification/CODING_TB4_SOURCE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "materiality_chain": [
+    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+    "canonical/governance/CODING_GENERAL_SUBSTRATE_MATERIALITY_BINDING_V1.json",
+    "canonical/verification/CODING_SUBSTRATE_MATERIALITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/CODING_SESSION_CARRIER_MATERIAL_CONTROL_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "model_role": "GENERAL_COGNITION_SUBSTRATE",
+  "hidden_target_capability_provider": false,
+  "promotion_evaluates_brain_configured_system": true,
+  "score_producing_route_ready": true,
+  "clean_case_execution_authority": "PENDING_RESIDUAL_COMPILER_RECOMPUTATION",
+  "contamination_policy": "canonical/governance/TB4_STAGE_B_SOURCE_ALLOWLIST_V1.json",
+  "terminal_v3_replay": false,
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
