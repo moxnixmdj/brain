@@ -17,7 +17,7 @@ assert holes["M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE"] == "?P"
 assert holes["M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION"] == "?P"
 for key in ("M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL","M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL","M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL","M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY"):
     assert holes[key] == "?M"
-assert "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS" in u["global_cut"]["open_specification_holes"]
+assert u["global_cut"]["open_specification_holes"] == []
 assert u["global_cut"]["exact_cut_ready"] is False
 assert u["execution_authority"]["fresh_terminal_evidence_allowed"] is False
 assert u["local_v6_subcut"]["exact_minimum"] is True
