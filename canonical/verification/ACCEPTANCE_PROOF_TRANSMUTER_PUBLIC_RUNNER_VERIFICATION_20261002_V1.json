@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ACCEPTANCE_PROOF_TRANSMUTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_RUNTIME_AND_FROZEN_LIVE_INPUT__2_OF_19_CLOSED__17_OPEN",
+  "brain": {
+    "repository": "moxnixmdj/brain",
+    "runtime_path": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+    "runtime_git_blob_sha": "0580f9819b5465c9617f0a1e8ff9a96902eedfc6",
+    "test_path": "canonical/tests/test_acceptance_proof_transmuter_v1.py",
+    "test_git_blob_sha": "b93980642213119d9e1c7767e877403d797591b9",
+    "protocols_path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "protocols_git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "live_input_path": "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json",
+    "live_input_git_blob_sha": "0e5f8c66599d12cb5bdc103b6bedb991e460c58f"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 812,
+    "merge_commit": "5581a1e6b5fcc49d6f14488288d9cc4137de2b10",
+    "workflow_run_id": 36982809428,
+    "workflow_job_id": 110760951980,
+    "conclusion": "success",
+    "runtime_mirror_git_blob_sha": "0580f9819b5465c9617f0a1e8ff9a96902eedfc6",
+    "protocols_mirror_git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "live_input_mirror_git_blob_sha": "0e5f8c66599d12cb5bdc103b6bedb991e460c58f",
+    "runner_test_git_blob_sha": "7f1cb866b9a3e51251fa4f303c7bb78318db8904",
+    "workflow_git_blob_sha": "3dc07fafa8e8afdd876edbda62be79955fe9b5df"
+  },
+  "verified": [
+    "EXACT_BRAIN_RUNTIME_BYTES_EXECUTED_ON_PUBLIC_RUNNER",
+    "EXACT_FROZEN_19_FAMILY_PROTOCOL_BYTES_MIRRORED",
+    "EXACT_LIVE_EMPTY_TYPED_WITNESS_INPUT_BYTES_MIRRORED",
+    "UNIVERSAL_FULL_SCOPE_PROOF_CAN_CLOSE_AN_OPEN_RELATIVE_PROTOCOL",
+    "BEHAVIORAL_ONLY_EVIDENCE_CANNOT_CLOSE_OPUS55_ACCEPTANCE",
+    "PARTIAL_SCOPE_EVIDENCE_CANNOT_CLOSE_OPUS55_ACCEPTANCE",
+    "UNVERIFIED_EVIDENCE_CANNOT_CLOSE_OPUS55_ACCEPTANCE",
+    "THEORETICAL_CEILING_AND_FLOOR_DOMINANCE_WORK",
+    "ADMISSIBLE_TARGET_BOUND_SQUEEZE_WORKS",
+    "PARTIAL_PUBLIC_BAR_CANNOT_CLOSE_A_COMPOSITE_PROTOCOL",
+    "MALFORMED_EVIDENCE_FAILS_CLOSED",
+    "CURRENT_FROZEN_LIVE_STATE_REMAINS_2_OF_19_CLOSED_AND_17_OPEN",
+    "CAPABILITY_AND_FAMILY_CREDIT_DELTAS_REMAIN_ZERO"
+  ],
+  "current_live_result": {
+    "family_count": 19,
+    "acceptance_closed_family_count": 2,
+    "acceptance_open_family_count": 17,
+    "new_family_promotions": 0
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "VERIFIES_PROOF_TRANSMUTATION_MECHANICS_ONLY__DOES_NOT_BY_ITSELF_CLOSE_ANY_OF_THE_17_OPEN_OPUS55_PROTOCOLS"
+}
