@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ABDUCTIVE_RESIDUAL_THEOREM_V2_CANDIDATE",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_FAIL_CLOSED_GLOBAL_JOINT_EXACTNESS_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Repair V1 exactness hazards without mutating active verified V1: preserve inclusion-minimal target alternatives for global joint optimization and refuse exactness whenever antichain caps bind.",
+  "runtime": "canonical/runtime/abductive_residual_theorem_v2.py",
+  "tests": "canonical/tests/test_abductive_residual_theorem_v2.py",
+  "hazards_addressed": [
+    "PER_TARGET_SHORTEST_ONLY_ALTERNATIVES_CAN_HIDE_A_SMALLER_GLOBAL_JOINT_UNION",
+    "ANTICHAIN_OR_COMBINATION_CAP_BINDING_MUST_NOT_RETAIN_EXACT_STATUS"
+  ],
+  "hard_rules": [
+    "ACTIVE_V1_REMAINS_UNCHANGED_UNTIL_V2_INDEPENDENT_PASS",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SOLVER",
+    "ONLY_INDEPENDENTLY_VERIFIED_IMPLICATION_EDGES_COUNT",
+    "ANY_BOUND_EVENT_FORCES_BOUNDED_INCOMPLETE",
+    "NO_FRESH_REALITY"
+  ],
+  "next": "RUN_ADVERSARIAL_AND_CURRENT_FRONTIER_SHADOW_TESTS__INDEPENDENTLY_VERIFY_EXACT_V2_BLOBS__ONLY_THEN_CONSIDER_AUTHORITY_REBIND",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
