@@ -86,5 +86,13 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "new_reality_units_consumed": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "bounded_exhaustive_implementation": {
+    "runtime": "canonical/runtime/finite_verifier_search.py",
+    "tests": "canonical/verification/test_finite_verifier_search.py",
+    "role": "CONCRETE_IMPLEMENTATION_FOR_EXPLICIT_FINITE_CANDIDATE_UNIVERSES__SUBORDINATE_TO_THIS_EXISTING_CANONICAL_THEOREM",
+    "local_self_test_status": "PASS",
+    "independent_runner_status": "PENDING",
+    "authority_limit": "NO_CAPABILITY_OR_TERMINAL_CREDIT_UNTIL_INDEPENDENT_VERIFICATION"
+  }
 }
