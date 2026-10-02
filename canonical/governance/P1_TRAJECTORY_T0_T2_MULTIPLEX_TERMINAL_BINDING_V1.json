@@ -10,7 +10,7 @@
     "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
     "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
     "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
-    "canonical/verification/TRAJECTORY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    "canonical/verification/TRAJECTORY_TYPED_IR_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   ],
   "decomposition": {
     "owned_behavior": "FAILED_EXECUTION_TRAJECTORY_TO_EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_CLASS_AND_FALSIFIABLE_REPAIR_TARGET_WITH_INTERVENTION_RESCUE_EVIDENCE",
@@ -53,10 +53,10 @@
     "POST_FREEZE_CASE_SELECTION_INFORMATION"
   ],
   "evaluator": {
-    "bounded_information_safe_preflight": "canonical/runtime/trajectory_failure_information_safe_proof_v2.py",
-    "bounded_candidate": "canonical/runtime/trajectory_failure_information_safe_candidate_v2.py",
-    "independent_preflight": "canonical/verification/TRAJECTORY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "role_of_bounded_suite": "INFORMATION_BOUNDARY_NONIDENTIFIABILITY_AND_COUNTERFACTUAL_REPAIR_PREFLIGHT_ONLY__NOT_WHOLE_DOMAIN_TERMINAL_SCORE",
+    "bounded_information_safe_preflight": "canonical/runtime/trajectory_failure_typed_ir_proof_v3.py",
+    "bounded_candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v3.py",
+    "independent_preflight": "canonical/verification/TRAJECTORY_TYPED_IR_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "role_of_bounded_suite": "TYPED_CROSS_DOMAIN_INFORMATION_BOUNDARY_MECHANISM_CLASS_DELAYED_INTERACTION_NONIDENTIFIABILITY_PREFLIGHT_ONLY__TERMINAL_RESCUE_REMAINS_LOAD_BEARING_INSIDE_FROZEN_T0_T2",
     "required_checks": [
       "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE",
       "FAILURE_MECHANISM_CLASSIFICATION_SUPPORTED_BY_VISIBLE_RECEIPTS",
@@ -112,9 +112,9 @@
     "terminal_case_selection_before_route_freeze": false
   },
   "dependencies": [
-    "canonical/runtime/trajectory_failure_information_safe_candidate_v2.py",
-    "canonical/runtime/trajectory_failure_information_safe_proof_v2.py",
-    "canonical/verification/TRAJECTORY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v3.py",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v3.py",
+    "canonical/verification/TRAJECTORY_TYPED_IR_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
     "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
     "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
@@ -127,5 +127,33 @@
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "v3_reconciliation": {
+    "status": "BOUND_TO_INDEPENDENTLY_VERIFIED_TYPED_CROSS_DOMAIN_CAUSAL_PREFLIGHT",
+    "verification": "canonical/verification/TRAJECTORY_TYPED_IR_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "covered_domains": [
+      "BROWSER",
+      "FILESYSTEM",
+      "TOOL_API",
+      "ARTIFACT",
+      "RESEARCH",
+      "CODE"
+    ],
+    "covered_mechanisms": [
+      "AUTHORITY",
+      "SCHEMA",
+      "PROVENANCE",
+      "INVARIANT",
+      "STATE_TRANSITION",
+      "TOOL_CONTRACT",
+      "DEPENDENCY"
+    ],
+    "covered_patterns": [
+      "SINGLE",
+      "DELAYED",
+      "INTERACTION",
+      "AMBIGUOUS"
+    ],
+    "terminal_rescue_rule": "TERMINAL_INTERVENTION_RESCUE_REMAINS_REQUIRED_ON_LOAD_BEARING_FROZEN_T0_T2_CASES__PREFLIGHT_DOES_NOT_SELF_PROMOTE"
+  }
 }
