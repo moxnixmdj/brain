@@ -15,5 +15,11 @@
     "NO_FAMILY_CREDIT"
   ],
   "fresh_terminal_evidence_consumed": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "retry": {
+    "reason": "NPM_WORKSPACE_ARBORIST_EDGESOUT_NULL_BEFORE_TEST_EXECUTION",
+    "repair": "REWRITE_INTERNAL_GENOFFICE_WILDCARD_DEPENDENCIES_TO_EXPLICIT_LOCAL_FILE_EDGES",
+    "prior_run_id": 36949193148,
+    "capability_falsified": false
+  }
 }
