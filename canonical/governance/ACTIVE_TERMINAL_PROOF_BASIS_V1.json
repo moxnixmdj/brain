@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__DELEGATION_MATCHED_PROTOCOL_EXTERNAL_BLOCKED__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__2_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -47,15 +47,10 @@
     {
       "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
       "portfolio": "T0_T1_T2_T3",
-      "proof_state": "BOUNDED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__PORTFOLIO_MULTIPLEXED_OPEN_DOMAIN_PREWAVE_BINDING_PENDING",
+      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
       "route_requirement": "RAW_SOURCE_TO_TYPED_REQUIREMENTS_TO_INDEPENDENT_ACCEPTANCE_WITH_HIDDEN_SEMANTIC_GOLD_AND_AMBIGUITY_ORACLE",
-      "blockers": [
-        "FREEZE_DIRECT_SEMANTIC_ACCEPTANCE_INSTRUMENTATION",
-        "FREEZE_AMBIGUITY_AND_COUNTEREXAMPLE_SCORER",
-        "BIND_BEHAVIOR_INSTRUMENTATION_TO_T0_T1_T2_T3_INFORMATION_BOUNDARIES",
-        "FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING"
-      ],
-      "route": "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+      "blockers": [],
+      "route": "canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "prewave_receipt": "canonical/verification/M0A_RAW_SOURCE_POST_REPAIR_PUBLIC_RUNNER_20261002_V1.json",
       "verified_bounded_classes": [
         "DIRECT_ACTIVE",
@@ -67,9 +62,11 @@
         "TEMPORAL_AFTER",
         "UNLESS_EXCEPTION"
       ],
-      "independent_preflight": "canonical/verification/M0A_RAW_SOURCE_POST_REPAIR_DIAGNOSTIC_PUBLIC_RUNNER_20261002_V1.json",
+      "independent_preflight": "canonical/verification/M0_PORTFOLIO_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "proof_mode_classification": "PORTFOLIO_MULTIPLEXED_OPEN_DOMAIN",
-      "synthetic_whole_domain_scope_gate_required": false
+      "synthetic_whole_domain_scope_gate_required": false,
+      "prewave_admissible": true,
+      "terminal_results_observed": 0
     },
     {
       "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
@@ -267,9 +264,9 @@
     }
   ],
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 1,
+  "admissible_frozen_terminal_route_count": 2,
   "execution_authority": false,
-  "next": "RUN_DETERMINISTIC_ROUTE_CLOSURE_CONTROLLER__FREEZE_ACTIONABLE_PUBLIC_BAR_AND_PORTFOLIO_MULTIPLEX_PREWAVE_FIELDS_FIRST__EXTERNAL_COMPARATOR_BLOCKED_LANES_FREEZE_INTERNAL_FIELDS_ONLY__NO_CLEAN_CASE_SPEND",
+  "next": "RECOMPUTE_TERMINAL_ROUTE_CLOSURE_QUEUE__CLOSE_NEXT_ACTIONABLE_ZERO_REALITY_ROUTE__EXTERNAL_COMPARATOR_BLOCKED_LANES_DO_NOT_SPEND_CLEAN_CASES",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
