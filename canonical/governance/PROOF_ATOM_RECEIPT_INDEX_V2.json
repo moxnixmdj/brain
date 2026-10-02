@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V2",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_REFINEMENT_AWARE_V2_RECEIPT_INDEX__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Upgrade new receipt indexing to the active independently verified proof-atom basis V2, preserving PA1 proposition identity while excluding basis/refinement/scheduler restatements and failing closed if match enumeration caps bind.",
+  "runtime": "canonical/runtime/proof_atom_receipt_index_v2.py",
+  "tests": "canonical/tests/test_proof_atom_receipt_index_v2.py",
+  "basis_activation": "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_ACTIVATION_V2.json",
+  "refinement_overlay": "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json",
+  "expected": {
+    "canonical_atoms": 40,
+    "bounded_incomplete": false
+  },
+  "hard_rules": [
+    "V1_INDEX_REMAINS_HISTORICAL_FOR_ITS_VERIFIED_SNAPSHOT",
+    "NEW_INDEXING_USES_ACTIVE_V2_PROOF_ATOM_BASIS",
+    "EXACT_LITERAL_MATCH_IS_CANDIDATE_POINTER_ONLY",
+    "NO_BASIS_OVERLAY_FRONTIER_SCHEDULER_OR_INDEX_SELF_RESTATEMENT_CREDIT",
+    "ANY_MATCH_CAP_BINDING_FORCES_INCOMPLETE_STATUS",
+    "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "RUN_EXACT_V2_SCAN__FREEZE_COMMIT_TREE_INPUT_BLOBS_AND_SCAN_OUTPUT__INDEPENDENTLY_VERIFY__THEN_LIQUIDATE_HIGHEST_LEVERAGE_CANDIDATE_RECEIPTS",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
