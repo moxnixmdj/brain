@@ -1,0 +1,149 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_DIRECT_PROOF_SCOPE_INSTANCES_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_SCOPE_AND_IO_BINDINGS__NO_TERMINAL_RESULTS__POPULATION_MANIFEST_FREEZES_AFTER_CANDIDATE_COMMIT_BEFORE_RESULT",
+  "authority": [
+    "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+    "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+    "canonical/runtime/contract_native_proof_suites.py",
+    "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "evaluator": {
+    "path": "canonical/runtime/contract_native_proof_suites.py",
+    "blob_sha": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "case_api": "generate_case(contract, seed, difficulty)",
+    "candidate_visible_api": "public_task(case)",
+    "scorer_api": "score_case(case, candidate)",
+    "oracle_reference_api": "oracle_candidate(case)",
+    "oracle_visibility_to_candidate": false
+  },
+  "common_population_policy": {
+    "candidate_package_frozen_before_case_selection": true,
+    "seed_source": "POST_FREEZE_UNCONTROLLABLE_PUBLIC_BEACON_HASH",
+    "difficulty_schedule": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "same_case_replay_for_tuning": false,
+    "evaluator_or_oracle_payload_read_by_candidate": false,
+    "result_feedback_into_runtime_during_wave": false,
+    "population_size_and_case_ids": "FREEZE_IN_TERMINAL_EXECUTION_MANIFEST_AFTER_CANDIDATE_COMMIT_AND_BEFORE_ANY_RESULT",
+    "failure_policy": "CASE_FAILURE_COUNTS_AS_FAILURE_UNLESS_GLOBAL_SCORER_IDENTITY_OR_SEMANTIC_INVALIDATION_IS_PROVEN"
+  },
+  "route_instances": [
+    {
+      "route_id": "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
+      "contract": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "portfolios": [
+        "T0",
+        "T1"
+      ],
+      "candidate_output_schema": {
+        "graph": "list[{factor:string, coefficient:int}]"
+      },
+      "oracle_properties": [
+        "COMPLETE_REQUIRED_FACTOR_COVERAGE",
+        "EXACT_COEFFICIENT_SEMANTICS",
+        "HIDDEN_COUNTERFACTUAL_PROBES",
+        "NO_EXTRA_OR_MISSING_FACTORS"
+      ],
+      "surface_bindings": [
+        "T0/FRONTIERCODE_V1_1_REPRESENTED_STRUCTURED_METHOD_BEHAVIOR",
+        "T1/FINANCE_ACCOUNTING_INDEX_REPRESENTED_STRUCTURED_METHOD_BEHAVIOR",
+        "T1/FINANCE_AGENT_V2_REPRESENTED_STRUCTURED_METHOD_BEHAVIOR"
+      ]
+    },
+    {
+      "route_id": "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "contract": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "portfolios": [
+        "T0",
+        "T2"
+      ],
+      "candidate_output_schema": {
+        "cause_step": "int",
+        "repair_id": "string",
+        "evidence_steps": "list[int]"
+      },
+      "oracle_properties": [
+        "EARLIEST_CAUSAL_STEP_MATCH",
+        "REPAIR_RESCUES_TERMINAL_OUTCOME",
+        "DOWNSTREAM_SYMPTOM_REPAIR_REJECTED",
+        "NONIDENTIFIABLE_CASE_ABSTAINS_OR_REQUESTS_DISCRIMINATOR"
+      ],
+      "surface_bindings": [
+        "T0/FRONTIERCODE_V1_1_REPRESENTED_DEBUG_RECOVERY_BEHAVIOR",
+        "T0/CURSORBENCH_4_0_REPRESENTED_LONG_HORIZON_FAILURE_RECOVERY_BEHAVIOR",
+        "T2/RECOVERY_SCOPE_COMPOSITION"
+      ]
+    },
+    {
+      "route_id": "P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF",
+      "contract": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "portfolios": [
+        "T1"
+      ],
+      "candidate_output_schema": {
+        "selected_edits": "list[string]"
+      },
+      "oracle_properties": [
+        "EXPLICIT_RUBRIC_OPTIMUM",
+        "SUPPORTED_EDITS_ONLY",
+        "HARD_CONSTRAINT_PRESERVATION",
+        "EDIT_BUDGET",
+        "NATIVE_STRUCTURE_VALIDITY_AT_ARTIFACT_GATE"
+      ],
+      "surface_bindings": [
+        "T1/GDPVAL_AA_V2_1_REPRESENTED_PROFESSIONAL_PLAN_QUALITY_BEHAVIOR",
+        "T1/AA_BRIEFCASE_V1_1_REPRESENTED_PROFESSIONAL_ARTIFACT_BEHAVIOR"
+      ]
+    },
+    {
+      "route_id": "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF",
+      "contract": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "portfolios": [
+        "T1",
+        "T3"
+      ],
+      "candidate_output_schema": {
+        "selected_claims": "list[string]",
+        "uncertainty_claims": "list[string]"
+      },
+      "oracle_properties": [
+        "EVERY_MATERIAL_CLAIM_SUPPORTED",
+        "REQUIRED_CLAIMS_COVERED",
+        "CONFLICT_AND_UNCERTAINTY_PRESERVED",
+        "NO_DECISION_RELEVANT_EVIDENCE_DROPPED",
+        "AUDIENCE_FORMAT_CONSTRAINTS_PASS"
+      ],
+      "surface_bindings": [
+        "T1/GDPVAL_AA_V2_1_REPRESENTED_EVIDENCE_SYNTHESIS_BEHAVIOR",
+        "T1/AA_BRIEFCASE_V1_1_REPRESENTED_EVIDENCE_SYNTHESIS_BEHAVIOR",
+        "T1/FINANCE_ACCOUNTING_INDEX_REPRESENTED_EVIDENCE_SYNTHESIS_BEHAVIOR",
+        "T1/FINANCE_AGENT_V2_REPRESENTED_EVIDENCE_SYNTHESIS_BEHAVIOR",
+        "T3/UNKNOWN_DOMAIN_SYNTHESIS"
+      ]
+    }
+  ],
+  "anti_weakening": [
+    "SCOPE_INSTANCE_PASS_DOES_NOT_CLAIM_REPRODUCTION_OF_A_DELETED_PRIVATE_BENCHMARK_SCORE",
+    "PUBLIC_FIXED_BARS_REMAIN_REQUIRED_WHERE_ZERO_COST_SCOPE_EQUIVALENT_PUBLIC_EXECUTION_IS_ADMITTED",
+    "A_ROUTE_PROVES_ONLY_THE_BEHAVIOR_IDS_AND_SURFACE_LEAVES_EXPLICITLY_BOUND_HERE",
+    "UNEXERCISED_FAMILY_LEAVES_RECEIVE_ZERO_CREDIT",
+    "TERMINAL_RESULT_REPAIR_OR_RETUNING_ON_THE_SAME_SELECTED_CASE_IS_FORBIDDEN"
+  ],
+  "prewave_state": {
+    "mutation_preflight": "INDEPENDENT_PASS",
+    "mutation_receipt": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "terminal_results_observed": false,
+    "execution_authority": false
+  },
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
