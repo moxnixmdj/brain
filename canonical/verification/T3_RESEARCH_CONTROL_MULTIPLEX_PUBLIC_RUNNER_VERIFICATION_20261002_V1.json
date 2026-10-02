@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_T3_RESEARCH_CONTROL_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
   "date": "2026-10-02",
-  "status": "INDEPENDENT_PASS__EXACT_FROZEN_T3_RESEARCH_CONTROL_MULTIPLEX_PREWAVE_BINDING__ZERO_TERMINAL_RESULTS",
+  "status": "INDEPENDENT_PASS__SUPERSEDED_OLDER_T3_BINDING_BLOB__NOT_CURRENT_PROMOTION_AUTHORITY__ZERO_TERMINAL_RESULTS",
   "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
   "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
   "public_pr": 641,
@@ -9,7 +9,7 @@
   "workflow_run_id": 36964747979,
   "workflow_conclusion": "success",
   "exact_brain_blobs": {
-    "canonical/governance/T3_RESEARCH_CONTROL_MULTIPLEX_TERMINAL_BINDING_V1.json": "46834cff249f02cec1046e2f7188e1b5e1b24ab1",
+    "canonical/governance/T3_RESEARCH_CONTROL_MULTIPLEX_TERMINAL_BINDING_V1.json": "56520fac851048c3442209cb217beca2e56e86f4",
     "canonical/governance/ACTIVE_CONTRACT_PROOF_MODE_CLASSIFICATION_V1.json": "9bd8a3848510e1b450d07bcfd90ce6e6a9f4adbb",
     "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json": "d3f05f1c0ed727c6e792cd3694461e92568770d7",
     "canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "860cd929e3b7fdab6befec5bf052479dc4ae41ac",
@@ -32,13 +32,17 @@
   "limitations": [
     "PREWAVE_BINDING_ONLY",
     "TERMINAL_HLE_AND_TERMINAL_BENCH_SCIENCE_RESULTS_NOT_EXECUTED",
-    "ZERO_CAPABILITY_OR_FAMILY_CREDIT"
+    "ZERO_CAPABILITY_OR_FAMILY_CREDIT",
+    "NOT_CURRENT_BYTE_PROMOTION_AUTHORITY"
   ],
-  "prewave_admissible": true,
+  "prewave_admissible": false,
   "execution_authority": false,
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "superseded_by_current_binding_verification": "canonical/verification/T3_RESEARCH_CONTROL_MULTIPLEX_BINDING_PUBLIC_VERIFICATION_20261002_V1.json",
+  "current_binding_blob_at_reconciliation": "46834cff249f02cec1046e2f7188e1b5e1b24ab1",
+  "staleness_reason": "PR_641_VERIFIED_THE_EARLIER_56520F_BINDING__LIVE_BINDING_WAS_HARDENED_AFTER_CAPSULE_FREEZE"
 }
