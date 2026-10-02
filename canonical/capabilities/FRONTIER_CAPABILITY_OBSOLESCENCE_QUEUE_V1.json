@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "GLOBAL_TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_NEW_REALITY_INFORMATION__THEN_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "EXACT_FOUR_PORTFOLIO_CUT_FROZEN__ONLY_SHARED_S0_G0_SEMANTIC_MODEL_ACQUISITION_REMAINS_BEFORE_OPERATIVE_ROUTE_FREEZE",
+    "exact_blocker": "EXACT_FOUR_PORTFOLIO_CUT_FROZEN__OPERATIVE_ROUTE_CLOSURE__ONLY_SHARED_S0_G0_SEMANTIC_MODEL_ACQUISITION_REMAINS",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -185,7 +185,7 @@
       "status": "SOURCE_READ_AFTER_REVOCATION__ZERO_CREDIT__NO_EXECUTION",
       "evidence_path": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json"
     },
-    "next_progress_event_target": "S0_G0_CLOSED_OR_EXACT_FAIL_CLOSED_UNSOLVED_BOUNDARY",
+    "next_progress_event_target": "S0_G0_CLOSED_OR_EXACT_FAIL_CLOSED_BLOCKER_VERDICT",
     "open_mechanism_residual_count": 0,
     "open_mechanism_residuals": [],
     "m0b_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
