@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CEILING_WITNESS_LIFTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_8_BRAIN_BLOBS__5_LIFTER_TESTS_PASS__ZERO_CREDIT",
+  "source_brain_candidate_commit": "f55a7a41b21c90a106cb68d6fad09b0cc1ba813e",
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_ceiling_witness_lifter_v1.py": "ec98010166db350db81ed01ffc70590805c536a8",
+    "canonical/tests/test_terminal_ceiling_witness_lifter_v1.py": "fb73b07792a19ada2ab899cbd96a15420e315e86",
+    "canonical/governance/TERMINAL_CEILING_WITNESS_LIFTER_ACTIVATION_V1.json": "2777a763df1b922bed23b7fa2525df137f15deea",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
+    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "c61882d69a66f61b4ea1ce6ad14f86fcefd1f76a",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 857,
+    "pull_request_head": "c0d00aebb7dc687c08655965903ca0b785c3af20",
+    "merge_commit": "13b04f8c0da6b49a08d60cb1f308fc2d7fda6ccc",
+    "workflow_run_id": 36999972524,
+    "workflow_job_id": 110815189900,
+    "workflow_name": "Verify Brain terminal ceiling witness lifter v1",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_8_OF_8_MIRRORED_BRAIN_GIT_BLOB_IDENTITIES_MATCH",
+    "LIVE_TOOL_DISCOVERY_CANDIDATE_COMPILES_AT_180_OF_180_THEORETICAL_CEILING",
+    "FROZEN_POPULATION_MISMATCH_FAILS_CLOSED",
+    "PARTIAL_FAMILY_MAPPING_FAILS_CLOSED",
+    "ONE_TERMINAL_FAILURE_FAILS_CLOSED",
+    "MISSING_PREWAVE_COMPARATOR_DELETION_INTENT_FAILS_CLOSED",
+    "CANDIDATE_ONLY_ZERO_CREDIT_GOVERNANCE_ASSERTED"
+  ],
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
