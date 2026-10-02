@@ -13,6 +13,7 @@ on:
       - 'canonical/governance/EVALUATION_INFORMATION_FIREWALL_V1.json'
       - 'canonical/governance/PROOF_FIRST_FRONTIER_V1.json'
       - 'canonical/governance/ACCEPTANCE_BOUND_SCAN_20261002_V1.json'
+      - '.github/workflows/verify-proof-compression-v1.yml'
   workflow_dispatch:
 
 jobs:
@@ -25,4 +26,6 @@ jobs:
           python-version: '3.11'
       - name: Run exact proof-compression tests
         run: |
-          python -m unittest             canonical.tests.test_acceptance_bound_compiler_v1             canonical.tests.test_evaluation_information_firewall_v1             canonical.tests.test_acceptance_proof_first_frontier_v1 -v
+          python canonical/tests/test_acceptance_bound_compiler_v1.py
+          python canonical/tests/test_evaluation_information_firewall_v1.py
+          python canonical/tests/test_acceptance_proof_first_frontier_v1.py
