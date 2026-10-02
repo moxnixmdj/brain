@@ -5,7 +5,13 @@
   "objective": "Lift already-consumed immutable V3 evidence through exact-byte chronology into the existing Opus55 acceptance proof system without replay, historical rewrites, or a second truth authority.",
   "current_authority": {
     "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-    "required_truth": "3/19_ACCEPTANCE__8/38_ATOMIC__TERMINAL_FALSE"
+    "git_blob_sha": "3f8705da36009fc444af185de8565f3576493f81",
+    "required_truth": "3/19_ACCEPTANCE__8/38_ATOMIC__TERMINAL_FALSE",
+    "independent_verification": {
+      "path": "canonical/verification/CURRENT_TERMINAL_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261002_V10.json",
+      "git_blob_sha": "e2c7f3bf932209195463d6f40665e078aeeb47d0",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_AUTHORITY_3_OF_19__8_OF_38__30_BLOCKED__TB4_180_LT_220__ZERO_CREDIT"
+    }
   },
   "components": {
     "postwave_reconciler": {
