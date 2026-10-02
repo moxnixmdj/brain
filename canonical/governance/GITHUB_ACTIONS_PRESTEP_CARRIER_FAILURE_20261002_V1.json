@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_GITHUB_ACTIONS_PRESTEP_CARRIER_FAILURE_20261002_V1",
+  "date": "2026-10-02",
+  "status": "VERIFIED_SHARED_CARRIER_FAILURE_SIGNATURE__EXACT_PLATFORM_CAUSE_UNKNOWN__DO_NOT_TREAT_RED_RUNS_AS_CAPABILITY_FAILURES",
+  "observation": {
+    "queried_recent_run_count": 100,
+    "failure_count": 100,
+    "success_count": 0,
+    "signature": "CROSS_WORKFLOW_FAILURES_WITH_JOBS_COMPLETED_FAILURE_BEFORE_ANY_RECORDED_STEP_AND_WITHOUT_JOB_LOG_URL",
+    "samples": [
+      {
+        "workflow": "Verify finite population proof",
+        "run_id": 36954270671,
+        "head_sha": "57066a736d6866a3084a11d64710f37e0ad0696e",
+        "conclusion": "failure",
+        "jobs": [
+          {
+            "job_id": 110674179491,
+            "name": "verify",
+            "status": "completed",
+            "conclusion": "failure",
+            "steps": null,
+            "logs_url": null
+          }
+        ]
+      },
+      {
+        "workflow": "Verify prewave controller composition",
+        "run_id": 36954346821,
+        "head_sha": "601a0104416c08b64ef570e9992055a05c1fb63b",
+        "conclusion": "failure",
+        "jobs": [
+          {
+            "job_id": 110673886213,
+            "name": "verify",
+            "status": "completed",
+            "conclusion": "failure",
+            "steps": null,
+            "logs_url": null
+          }
+        ]
+      },
+      {
+        "workflow": "Verify proof route dominance",
+        "run_id": 36954628335,
+        "head_sha": "29f26c582a2d33118d751b1774e387c5a6a21d48",
+        "conclusion": "failure",
+        "jobs": [
+          {
+            "job_id": 110674753750,
+            "name": "verify",
+            "status": "completed",
+            "conclusion": "failure",
+            "steps": null,
+            "logs_url": null
+          }
+        ]
+      },
+      {
+        "workflow": "Verify scope-equivalent proof gate",
+        "run_id": 36954460874,
+        "head_sha": "300cff4f1b48983d85446192dd3e43419e859e6c",
+        "conclusion": "failure",
+        "jobs": [
+          {
+            "job_id": 110674243820,
+            "name": "verify",
+            "status": "completed",
+            "conclusion": "failure",
+            "steps": null,
+            "logs_url": null
+          }
+        ]
+      },
+      {
+        "workflow": "Drift Immunity Guard",
+        "run_id": 36954651297,
+        "head_sha": "dba83c20a3b88c3247997b39e4427eabfb437920",
+        "conclusion": "failure",
+        "jobs": [
+          {
+            "job_id": 110674825506,
+            "name": "continuous-obs-runtime",
+            "status": "completed",
+            "conclusion": "failure",
+            "steps": null,
+            "logs_url": null
+          },
+          {
+            "job_id": 110674825782,
+            "name": "guard",
+            "status": "completed",
+            "conclusion": "failure",
+            "steps": null,
+            "logs_url": null
+          }
+        ]
+      }
+    ]
+  },
+  "inference_boundary": {
+    "supported": "THE_CURRENT_GITHUB_ACTIONS_EXECUTION_CARRIER_IS_NOT_PRODUCING_ADMISSIBLE_TEST_BODY_RESULTS_FOR_THE_SAMPLED_RUNS",
+    "not_supported": [
+      "EXACT_CAUSE_IS_BILLING_OR_QUOTA",
+      "TEST_CODE_FAILED",
+      "CAPABILITY_FAILED"
+    ]
+  },
+  "consequence": [
+    "FAIL_CLOSED_ON_GITHUB_ACTIONS_AS_CURRENT_INDEPENDENT_VERIFICATION_CARRIER",
+    "PRESERVE_WORKFLOW_RUNS_AS_CARRIER_FAILURE_EVIDENCE_ONLY",
+    "USE_AN_INDEPENDENT_ZERO_INCREMENTAL_SPEND_EXECUTION_PATH_FOR_SMALL_DETERMINISTIC_PREWAVE_PROOFS_WHERE_AVAILABLE",
+    "DO_NOT_SPEND_CLEAN_TERMINAL_PORTFOLIOS_UNTIL_A_RELIABLE_PINNED_CARRIER_IS_AVAILABLE"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
