@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__DONOR_DENIED_IDENTICAL_FROZEN_QUALIFICATION__BEHAVIOR_PRESERVED",
+  "source_terminal_result": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+  "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+  "package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+  "canonical_beacon": "36977020853",
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 801,
+    "qualifying_head_sha": "a70433f26ec3d287e12df7bfb6ac384c5129b7a0",
+    "workflow_run_id": 36979526858,
+    "workflow_job_id": 110750648273,
+    "conclusion": "success",
+    "artifact_id": 11214343023,
+    "artifact_name": "terminal-v3-donor-deletion-cleanroom",
+    "artifact_zip_sha256": "c5b67d049c1c15e2d2b2ca3a80c18127154efe90c5134c6b4aed3ba24a05728f"
+  },
+  "dependency_authority": [
+    "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
+    "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
+    "canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V1.json"
+  ],
+  "donor_identity_and_hash": [],
+  "donor_classification": "NO_TARGET_CAPABILITY_DONOR_REACHABLE_IN_FROZEN_TERMINAL_EXECUTION_ROUTE",
+  "network_denial_or_donor_unavailability_evidence": {
+    "outbound_ipv4_policy": "DROP_EXCEPT_LOOPBACK_AND_ESTABLISHED",
+    "outbound_ipv6_policy": "DROP_EXCEPT_LOOPBACK_AND_ESTABLISHED_WHEN_AVAILABLE",
+    "provider_credentials_present": [],
+    "workflow_permissions": "CONTENTS_READ_ONLY"
+  },
+  "predeletion_result": {
+    "full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+    "pass": true
+  },
+  "postdeletion_result": {
+    "full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+    "pass": true
+  },
+  "behavior_preserved": true,
+  "byte_identical_terminal_result": true,
+  "undeclared_dependency_count": 0,
+  "verified": [
+    "EXACT_FROZEN_V3_CARRIER_53_OF_53",
+    "OUTBOUND_NETWORK_DENIED_DURING_QUALIFICATION",
+    "NO_PROVIDER_CREDENTIALS_PRESENT",
+    "FROZEN_BEHAVIORAL_QUALIFICATION_PASS",
+    "POSTDELETION_FULL_RESULT_SHA256_EQUALS_PREDELETION_FULL_RESULT_SHA256",
+    "UNDECLARED_DEPENDENCY_COUNT_ZERO"
+  ],
+  "accidental_non_authoritative_replay": {
+    "workflow_run_id": 36979526903,
+    "disposition": "EXCLUDED_FROM_ALL_PROOF_ACCOUNTING__INHERITED_TRIGGER_REMOVED_FROM_CLEANROOM_BRANCH",
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "rule": "OWNERSHIP_EVIDENCE_ONLY__PASS_IFF_DONOR_DENIED_IDENTICAL_QUALIFICATION_PRESERVES_EXACT_RESULT_AND_UNDECLARED_DEPENDENCIES_ZERO"
+}
