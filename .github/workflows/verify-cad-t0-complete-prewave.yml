@@ -1,0 +1,30 @@
+name: Verify CAD T0 complete prewave binding
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/cad_t0_geometry_population.py
+      - canonical/runtime/cad_t0_oracle_adapter.py
+      - canonical/runtime/cad_t0_prewave_binding_guard.py
+      - canonical/tests/test_cad_t0_geometry_population_and_oracle.py
+      - canonical/tests/test_cad_t0_prewave_binding_guard.py
+      - canonical/governance/CAD_T0_GEOMETRY_SOURCE_POOL_V1.json
+      - canonical/governance/CAD_T0_CANDIDATE_FREEZE_V1.json
+      - canonical/governance/CAD_T0_MULTIPLEX_TERMINAL_BINDING_V1.json
+      - canonical/governance/CAD_T0_EVALUATOR_OBSERVATION_SCHEMA_V1.json
+      - canonical/governance/CAD_T0_COMPLETE_PREWAVE_BINDING_V1.json
+      - .github/workflows/verify-cad-t0-complete-prewave.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_cad_t0_geometry_population_and_oracle canonical.tests.test_cad_t0_prewave_binding_guard
+      - run: python canonical/runtime/cad_t0_prewave_binding_guard.py .
