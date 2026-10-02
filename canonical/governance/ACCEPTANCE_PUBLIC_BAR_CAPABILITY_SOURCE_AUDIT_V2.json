@@ -58,23 +58,30 @@
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
       "benchmark_harness_zero_cost": true,
       "scorer_frozen": true,
-      "brain_candidate_bound": false,
-      "brain_owned_operative_configuration": false,
-      "configuration_materially_constrains_execution": false,
-      "capability_package_contains_configuration": false,
-      "promotion_evaluates_brain_configured_system": false,
+      "brain_candidate_bound": true,
+      "brain_owned_operative_configuration": true,
+      "configuration_materially_constrains_execution": true,
+      "capability_package_contains_configuration": true,
+      "promotion_evaluates_brain_configured_system": true,
       "external_hidden_target_capability_provider": false,
       "ownership_claim_relies_on_model_standalone_superiority": false,
-      "future_use_requires_capability_rediscovery": true,
-      "model_role": "NONE",
-      "model_dependency_count": 0,
+      "future_use_requires_capability_rediscovery": false,
+      "model_role": "GENERAL_COGNITION_SUBSTRATE",
+      "model_dependency_count": 1,
       "incremental_spend_usd": 0,
       "evidence": [
         "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
-        "canonical/verification/AUTOMATIONBENCH_PUBLIC_ROUTE_PREFLIGHT_20261002_V1.json"
+        "canonical/verification/AUTOMATIONBENCH_PUBLIC_ROUTE_PREFLIGHT_20261002_V1.json",
+        "canonical/runtime/automationbench_brain_gateway_v1.py",
+        "canonical/capabilities/opus55/AUTOMATIONBENCH_BRAIN_GATEWAY_CONFIGURATION_V1.json",
+        "canonical/verification/AUTOMATIONBENCH_BRAIN_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/verification/AUTOMATIONBENCH_FREE_PLANNER_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
       ],
-      "disposition": "BLOCKED_BEFORE_CASE_SPEND__NO_BRAIN_INTERNALIZED_OPERATIVE_AUTOMATION_CANDIDATE_BOUND",
-      "next": "BIND_EXISTING_REUSABLE_AUTOMATION_CAPABILITY_CONFIGURATION_INTO_BRAIN__THEN_RUN_V2_GATE"
+      "disposition": "ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION__ZERO_CAPABILITY_CREDIT_UNTIL_FROZEN_AUTOMATIONBENCH_BAR_RESULT",
+      "next": "RERUN_PUBLIC_BAR_READINESS_AND_ATOMIC_RESIDUAL_COMPILER__EXECUTE_PUBLIC_600_ONLY_IF_SCORE_ROUTE_READY_AND_COMPILER_AUTHORIZES",
+      "model_dependencies_declared": true,
+      "general_substrate_test_pass": true,
+      "clean_case_execution_authority": true
     },
     {
       "id": "LIVEBENCH_IF_PUBLIC_ROUTE",
@@ -103,9 +110,10 @@
   ],
   "conclusion": {
     "currently_clean_case_executable_routes": 1,
-    "public_harness_ready_but_candidate_blocked_routes": 2,
+    "public_harness_ready_but_candidate_blocked_routes": 1,
     "terminal_cases_authorized": 1,
-    "reason": "TB4_CONFIGURED_CODING_ROUTE_INDEPENDENTLY_PASSES_MATERIALITY_SOURCE_GATE_V2_AND_EXACT_CURRENT_RUNTIME_VERIFICATION__AUTOMATIONBENCH_AND_LIVEBENCH_OPERATIVE_CANDIDATES_REMAIN_UNBOUND"
+    "reason": "CODING_AND_AUTOMATION_CONFIGURED_ROUTES_INDEPENDENTLY_PASS_SOURCE_GATE_V2__LIVEBENCH_OPERATIVE_CANDIDATE_REMAINS_UNBOUND__FULL_SCORE_READINESS_SEPARATELY_CONTROLLED_BY_READINESS_MATRIX",
+    "currently_source_gate_admissible_routes": 2
   },
   "v1_correction": {
     "old_requirement": "MODEL_DEPENDENCY_COUNT_ZERO",
