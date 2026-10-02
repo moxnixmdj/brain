@@ -1,0 +1,23 @@
+name: Verify professional artifact internal prewave
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json
+      - canonical/runtime/verify_professional_artifact_internal_prewave_v1.py
+      - canonical/tests/test_professional_artifact_internal_prewave_v1.py
+      - canonical/runtime/p2_p3_information_safe_candidate_v2.py
+      - canonical/runtime/p2_p3_information_safe_proof_suites_v2.py
+      - canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+ verify:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - uses: actions/setup-python@v5
+     with: {python-version: "3.11"}
+   - run: python -m unittest -v canonical.tests.test_professional_artifact_internal_prewave_v1

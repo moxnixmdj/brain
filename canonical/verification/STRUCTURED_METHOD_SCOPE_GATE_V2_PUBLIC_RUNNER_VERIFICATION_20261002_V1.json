@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__ADMISSIBLE_SUBSTITUTION__ZERO_UNRESOLVED_DIMENSIONS__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 621,
+  "verified_head": "1381cd7672e91c0e3e9f1d7c61f18901f4ac6255",
+  "workflow_run_id": 36963464619,
+  "workflow_conclusion": "success",
+  "exact_bound_blobs": {
+    "canonical/runtime/scope_equivalent_proof_gate_v2.py": "2d05172becfc559de3ff1e4e5623c5180028be1b",
+    "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json": "fc2e739789825bba5f30da56c6896de11678b6e8",
+    "canonical/tests/test_structured_method_scope_gate_v2.py": "f568b4ff4fd719ad43e1c348696ab76feba90f44"
+  },
+  "verdict": {
+    "status": "ADMISSIBLE_SUBSTITUTION",
+    "admissible": true,
+    "required_behavior_count": 1,
+    "covered_behavior_count": 1,
+    "required_interaction_count": 8,
+    "covered_interaction_count": 8,
+    "leaked_inference_ids": [],
+    "errors": []
+  },
+  "boundary": "NORMALIZED_APPLICABLE_RULES_ARE_FROZEN_CONTRACT_INPUTS__UNSTATED_OR_IMPLICIT_RULE_EXTRACTION_REMAINS_SEPARATE_RESIDUAL",
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}

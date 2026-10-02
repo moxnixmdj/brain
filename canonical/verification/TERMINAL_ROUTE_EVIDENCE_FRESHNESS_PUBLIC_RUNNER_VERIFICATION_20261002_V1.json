@@ -21,12 +21,6 @@
     "OPEN_DOMAIN_MATCHED_PROTOCOL_SCHEDULING_BEHAVIOR_PRESERVED",
     "ACTUAL_DELEGATION_STALE_CANDIDATE_RECEIPT_MISMATCH_DETECTED_F1A93_VS_9F2C3"
   ],
-  "actual_regression": {
-    "artifact": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
-    "stale_receipt": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "verified_blob_sha": "9f2c3aa42352cba66967afb1f8a3f45357833c41",
-    "current_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
-  },
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "capability_credit_delta": 0,

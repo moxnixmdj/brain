@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "INTERNAL_PREWAVE_ROUTE_FROZEN__PUBLIC_BAR_EXECUTION_EXTERNAL_BLOCKED__ZERO_TERMINAL_RESULT",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "exact_blobs": {
+    "candidate": "ea8057b0eadac210c4f4378298df93ed233c5824",
+    "information_safe_suite": "9d3d9bb837a98a7f78b5794cec0c0ae88bb32860",
+    "preflight_receipt": "11a7212c3b54ed130212b3a7d4f4e4386bc590f5",
+    "behavioral_registry": "afa00109031d638fef32cc3fe10be18786605c39",
+    "population_protocol": "adc413a2127141a1bc032149967eb07b86e0fde7"
+  },
+  "information_boundary": {
+    "candidate_visible": [
+      "OBJECTIVE",
+      "AUDIENCE",
+      "REQUIRED_TOPICS",
+      "RUBRIC_WEIGHTS",
+      "SOURCE_FACTS_WITH_PROVENANCE",
+      "CURRENT_DRAFT",
+      "EDIT_CANDIDATES",
+      "EDIT_BUDGET"
+    ],
+    "hidden_oracle": [
+      "HIDDEN_SUPPORTED_FLAG",
+      "HIDDEN_REQUIRED_TOPIC_QUALITY_FACTOR",
+      "HIDDEN_AUDIENCE_FIT_QUALITY_FACTOR",
+      "HIDDEN_ANALYSIS_VALUE_FACTOR",
+      "GOLD_OPTIMAL_EDIT_SUBSET"
+    ],
+    "candidate_receives_hidden_oracle": false,
+    "candidate_receives_reference_solution": false
+  },
+  "objective_internal_gates": [
+    "SELECTED_EDIT_IDS_EXIST",
+    "EDIT_BUDGET_NOT_EXCEEDED",
+    "ALL_SELECTED_CLAIMS_REFERENCE_VISIBLE_FACT_IDS",
+    "REQUIRED_TOPICS_NOT_SILENTLY_DROPPED_WHEN_SUPPORTED",
+    "UNSUPPORTED_CLAIMS_PENALIZED",
+    "AUDIENCE_AND_ANALYSIS_KIND_ARE_LOAD_BEARING"
+  ],
+  "uncovered_scope_audit": {
+    "public_bars_cover": "GDPVAL_AA_AND_AA_BRIEFCASE_REPRESENTED_PROFESSIONAL_DELIVERABLE_SCOPE_ONLY",
+    "remains_explicit": [
+      "FORMAT_SPECIFIC_NATIVE_LAYOUT_AND_VISUAL_QUALITY_NOT_EXERCISED_BY_AVAILABLE_PUBLIC_BAR_ROUTE",
+      "PRIVATE_AA_BRIEFCASE_OFFICIAL_TASK_ACCESS_AND_OFFICIAL_ELO_SCORING",
+      "ANY_PROFESSIONAL_QUALITY_LEAF_NOT_MEASURED_BY_THE_PUBLIC_BAR_HARNESS"
+    ],
+    "no_scope_inheritance": true
+  },
+  "post_freeze_accounting": {
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "tuning_replay": false,
+    "failed_case_counts_as_failure": true,
+    "selector_rule": "ONLY_AFTER_AN_ADMISSIBLE_ZERO_COST_PUBLIC_BAR_ROUTE_OR_OTHER_SCOPE_EQUIVALENT_ROUTE_EXISTS"
+  },
+  "zero_cost_executability_audit": "canonical/governance/PROFESSIONAL_PUBLIC_BAR_ZERO_COST_EXECUTABILITY_AUDIT_V1.json",
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}

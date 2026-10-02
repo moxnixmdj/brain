@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_SCOPE_RELATION_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_RELATION_CANDIDATE__AWAITING_INDEPENDENT_SCOPE_GATE_VERIFICATION__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "registry": {
+    "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "blob_sha": "afa00109031d638fef32cc3fe10be18786605c39"
+  },
+  "contract_boundary": {
+    "owned": "REQUIREMENT_TO_INTERMEDIATE_TO_OUTPUT_GRAPH_MATERIALIZATION_AND_STRUCTURAL_ACCEPTANCE_AFTER_RULE_NORMALIZATION",
+    "upstream": "SEMANTIC_EXTRACTION_AND_NORMALIZATION_OF_UNSTATED_OR_IMPLICIT_RULES",
+    "source_kinds": [
+      "formula",
+      "constraint",
+      "schema",
+      "standard",
+      "feature_callout"
+    ]
+  },
+  "candidate": {
+    "path": "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
+    "blob_sha": "79d3896818b03223348f05adf4fdcd574f6f355e"
+  },
+  "independent_oracle": {
+    "path": "canonical/runtime/structured_method_normalized_rule_oracle_v3.py",
+    "blob_sha": "5d92b1360fbb1bb27baacc8a04adb3744abf690c"
+  },
+  "independent_verification": "canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "coverage": {
+    "requirement_or_factor_accounting": "ALL_APPLICABLE_REQUIREMENTS_MUST_HAVE_CONSUMERS__EXCLUDED_REQUIREMENTS_REQUIRE_EXPLICIT_REASON",
+    "intermediate_dag": "ARBITRARY_FINITE_NORMALIZED_RULE_DEPENDENCY_GRAPH__RULE_ORDER_INDEPENDENT__CYCLE_OR_GAP_FAILS_CLOSED",
+    "type_dimension": "EVERY_EDGE_CHECKED_AGAINST_EXPLICIT_NORMALIZED_INPUT_TYPE_AND_DIMENSION_CONTRACT",
+    "invariants": "EVERY_DECLARED_RULE_INVARIANT_PRESERVED_IN_GRAPH_AND_INDEPENDENT_ACCEPTANCE",
+    "operator_scope": "ARBITRARY_NONEMPTY_NORMALIZED_OPERATOR_IDENTITY__SEMANTIC_SIGNATURE_IS_UPSTREAM_INPUT",
+    "output_trace": "EVERY_REQUIRED_OUTPUT_MUST_BE_TRACED_TO_INPUT_OR_DERIVED_NODE",
+    "independent_acceptance": "INDEPENDENT_ORACLE_REDERIVES_NODES_EDGES_LINEAGE_EXCLUSIONS_OUTPUTS_AND_EDGE_CHECKS_WITHOUT_IMPORTING_CANDIDATE"
+  },
+  "population_relation": {
+    "relation": "CANDIDATE_SUPERSET_PROVEN",
+    "basis": [
+      "Compiler and oracle iterate arbitrary finite input, requirement, normalized-rule and required-output collections without task-specific IDs",
+      "Operator identity is opaque and unrestricted after upstream normalization",
+      "All five frozen source kinds are admitted",
+      "Dependency resolution is graph-generic and fails closed on cycles or unresolved inputs"
+    ]
+  },
+  "environment_relation": "EXACT",
+  "oracle_relation": {
+    "relation": "CANDIDATE_STRONGER_PROVEN",
+    "basis": [
+      "Independent oracle reconstructs structural consequences from candidate-visible normalized source input",
+      "Mutation tests reject edge deletion/rewire, type/dimension changes, lineage loss, exclusion loss, output changes and invariant deletion",
+      "Oracle source does not import the Brain graph compiler"
+    ]
+  },
+  "candidate_information_relation": "EXACT_CANDIDATE_VISIBLE_INFORMATION",
+  "unresolved_required_dimensions": [],
+  "required_subjective_quality_dimensions": [],
+  "candidate_subjective_quality_dimensions": [],
+  "target_weakened": false,
+  "opaque_target_capability_provider": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
