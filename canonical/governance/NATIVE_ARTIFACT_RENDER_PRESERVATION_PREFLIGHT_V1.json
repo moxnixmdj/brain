@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__BOUNDED_RENDER_PRESERVATION_ONLY__ZERO_TERMINAL_AUTHORITY",
+  "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+  "candidate": "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
+  "structural_oracle": "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+  "render_oracle": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+  "tests": "canonical/tests/test_native_artifact_render_preservation_v1.py",
+  "render_stack": {
+    "docx_xlsx_pptx_to_pdf": "LibreOffice headless",
+    "pdf_to_pixels": "Poppler pdftoppm at 96 DPI",
+    "pixel_comparison": "Pillow ImageChops"
+  },
+  "acceptance": {
+    "page_count_equal": true,
+    "page_pixel_dimensions_equal": true,
+    "minimum_visible_change_required": true,
+    "max_changed_pixel_fraction": 0.025,
+    "max_changed_bounding_box_fraction": 0.1,
+    "pixel_delta_threshold": 8
+  },
+  "anti_shortcut_checks": [
+    "UNCHANGED_OUTPUT_REJECTED",
+    "LARGE_DOCX_PAGE_GEOMETRY_MUTATION_REJECTED",
+    "STRUCTURAL_HIDDEN_ORACLE_MUST_PASS_BEFORE_RENDER_ACCEPTANCE"
+  ],
+  "scope_limitation": "BOUNDED_EXPLICIT_LOW_LEVEL_TEXT_EDITS_ON_GENERATED_DOCX_XLSX_PPTX_PDF__NO_ARBITRARY_SEMANTIC_TARGET_SELECTION__NO_WHOLE_CONTRACT_SCOPE_EQUIVALENCE",
+  "execution_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "independent_preflight": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "verified_public_run": 36961230895,
+  "first_failed_run": 36961067082,
+  "causal_verifier_repair": "UNCHANGED_PAGES_PRESERVED__AT_LEAST_ONE_CHANGED_PAGE_REQUIRED"
+}
