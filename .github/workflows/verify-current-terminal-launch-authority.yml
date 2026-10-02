@@ -12,6 +12,7 @@ on:
       - canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py
       - canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json
       - canonical/governance/TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1.json
+      - canonical/governance/TERMINAL_PARENT_LAUNCHER_BINDING_V1.json
       - canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json
       - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
       - canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json
@@ -20,74 +21,47 @@ on:
       - .github/workflows/verify-current-terminal-launch-authority.yml
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
   verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Capture exact current verdict
+      - name: Run fail-closed regressions
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python -m unittest -v canonical.tests.test_terminal_wave_launch_authority_reducer_v1 canonical.tests.test_terminal_parent_portfolio_launcher_v1
+      - name: Derive authority from exact current state
         shell: bash
         run: |
           set +e
-          PYTHONPATH=. python -m unittest -v canonical.tests.test_terminal_wave_launch_authority_reducer_v1 canonical.tests.test_terminal_parent_portfolio_launcher_v1 > /tmp/tests.txt 2>&1
-          tests_rc=$?
-          PYTHONPATH=. python canonical/runtime/terminal_wave_launch_authority_reducer_v1.py . > /tmp/authority.json 2> /tmp/authority.err
-          reducer_rc=$?
-          TESTS_RC="$tests_rc" REDUCER_RC="$reducer_rc" python - <<'PY'
+          PYTHONPATH=. python canonical/runtime/terminal_wave_launch_authority_reducer_v1.py . > /tmp/authority.json
+          rc=$?
+          cat /tmp/authority.json
+          REDUCER_RC="$rc" python - <<'PY'
           import json, os
           from pathlib import Path
-          try:
-              authority=json.loads(Path("/tmp/authority.json").read_text())
-          except Exception:
-              authority={
-                  "parse_error":True,
-                  "stdout":Path("/tmp/authority.json").read_text(errors="replace"),
-                  "stderr":Path("/tmp/authority.err").read_text(errors="replace"),
-              }
-          out={
-              "schema":"PROJECT_BRAIN_CURRENT_TERMINAL_LAUNCH_AUTHORITY_DIAGNOSTIC_20261002_V2",
-              "tests_exit_code":int(os.environ["TESTS_RC"]),
-              "reducer_exit_code":int(os.environ["REDUCER_RC"]),
-              "authority":authority,
-              "tests_tail":Path("/tmp/tests.txt").read_text(errors="replace")[-12000:],
-              "authority_stderr":Path("/tmp/authority.err").read_text(errors="replace")[-4000:],
-              "terminal_results_observed":0,
-              "fresh_terminal_evidence_consumed":0,
-              "capability_credit_delta":0,
-              "family_credit_delta":0,
-              "incremental_spend_usd":0
-          }
-          path=Path("canonical/verification/CURRENT_TERMINAL_LAUNCH_AUTHORITY_DIAGNOSTIC_20261002_V2.json")
-          path.write_text(json.dumps(out,indent=2,sort_keys=True)+"\n")
+          authority=json.loads(Path("/tmp/authority.json").read_text())
+          binding=json.loads(Path("canonical/governance/TERMINAL_PARENT_LAUNCHER_BINDING_V1.json").read_text())
+          status=str(binding.get("status","")).upper()
+          verified=("INDEPENDENT" in status and "PASS" in status and not any(x in status for x in ("PENDING","STALE","FAIL_CLOSED")))
+          ready=binding.get("launch_ready") is True
+          if verified and ready:
+              assert int(os.environ["REDUCER_RC"]) == 0, authority
+              assert authority.get("pass") is True, authority
+              assert authority.get("launch_authority") is True, authority
+              assert authority.get("execution_authority") is True, authority
+              assert authority.get("route_count") == 12, authority
+              assert authority.get("failed_predicates") == [], authority
+          else:
+              assert authority.get("pass") is False, authority
+              assert authority.get("launch_authority") is False, authority
+              failures=set(authority.get("failed_predicates") or [])
+              assert any(x.startswith("LAUNCHER_") for x in failures), failures
+          assert authority.get("terminal_results_observed",0) == 0, authority
+          assert authority.get("fresh_terminal_evidence_consumed",0) == 0, authority
           PY
-          git config user.name "project-brain-ci"
-          git config user.email "project-brain-ci@users.noreply.github.com"
-          git add canonical/verification/CURRENT_TERMINAL_LAUNCH_AUTHORITY_DIAGNOSTIC_20261002_V2.json
-          git commit -m "Record exact current terminal launch authority diagnostic" || true
-          git push origin HEAD:main
-          exit 0
-      - name: Enforce authority gate
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          out=json.loads(Path("canonical/verification/CURRENT_TERMINAL_LAUNCH_AUTHORITY_DIAGNOSTIC_20261002_V2.json").read_text())
-          assert out["tests_exit_code"] == 0, out["tests_tail"]
-          assert out["reducer_exit_code"] == 0, out["authority"]
-          authority=out["authority"]
-          assert authority.get("pass") is True, authority
-          assert authority.get("launch_authority") is True, authority
-          assert authority.get("execution_authority") is True, authority
-          assert authority.get("route_count") == 12, authority
-          assert authority.get("failed_predicates") == [], authority
-          PY
-# reverify-trigger: post-SA-CCR independent verification promotion
