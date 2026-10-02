@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "POSTWAVE_RECONCILED__19_BEHAVIORAL_PASS__3_ACCEPTANCE_CALIBRATED__2_VERIFIED_OWNED__16_ACCEPTANCE_OPEN",
+  "status": "POSTWAVE_RECONCILED__19_BEHAVIORAL_PASS__4_ACCEPTANCE_CALIBRATED__2_VERIFIED_OWNED__15_ACCEPTANCE_OPEN",
   "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -695,15 +695,16 @@
     "rule": "ROW_MECHANISM_STATUS_BELOW_IS_HISTORICAL_ROUTE_CONTEXT__CURRENT_OWNERSHIP_CREDIT_IS_CONTROLLED_BY_POSTWAVE_ACCEPTANCE_CALIBRATION"
   },
   "postwave_acceptance_summary": {
-    "calibrated_family_count": 3,
+    "calibrated_family_count": 4,
     "verified_owned_family_count": 2,
-    "pending_acceptance_family_count": 16,
+    "pending_acceptance_family_count": 15,
     "calibrated_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
       "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
     ],
-    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
     "promotion_authority": false
   }
 }
