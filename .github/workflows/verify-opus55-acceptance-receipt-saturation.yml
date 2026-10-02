@@ -1,0 +1,55 @@
+name: Verify Opus 5.5 acceptance receipt saturation
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/opus55_acceptance_receipt_saturator_v1.py"
+      - "canonical/tests/test_opus55_acceptance_receipt_saturator_v1.py"
+      - "canonical/governance/OPUS55_ACCEPTANCE_RECEIPT_SATURATION_V1.json"
+      - "canonical/governance/OPUS55_ACCEPTANCE_ZERO_REALITY_DERIVATIONS_V1.json"
+      - "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
+      - ".github/workflows/verify-opus55-acceptance-receipt-saturation.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit test saturation
+        run: python -m unittest canonical.tests.test_opus55_acceptance_receipt_saturator_v1 -v
+      - name: Recompute saturation and validate bindings
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.opus55_acceptance_receipt_saturator_v1 import evaluate
+          from canonical.runtime.opus55_acceptance_residual_compiler_v2 import evaluate as compile_residual
+
+          root = Path(".")
+          sat = evaluate(root)
+          assert sat["status"] == "COMPLETE__ZERO_NEW_REALITY__3_ATOMIC_PREDICATES_PROVED", sat
+          bindings = json.loads(Path("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json").read_text())
+          assert bindings["saturation"]["status"] == "COMPLETE", bindings
+          assert bindings["saturation"]["source_snapshot_sha"] == sat["source_snapshot_sha"], bindings
+          assert {c["predicate_id"] for c in bindings["claims"]} == {c["predicate_id"] for c in sat["claims"]}, bindings
+
+          load = lambda p: json.loads(Path(p).read_text())
+          out = compile_residual(
+              load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"),
+              bindings,
+              load("canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json"),
+              load("canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json"),
+          )
+          assert out["proved_predicate_count"] == 3, out
+          assert out["open_predicate_count"] == 10, out
+          assert out["blocked_predicate_count"] == 25, out
+          assert out["refuted_predicate_count"] == 0, out
+          assert not out["terminal_promotion_allowed"], out
+          print(json.dumps(out, indent=2, sort_keys=True))
+          PY
