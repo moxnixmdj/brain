@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "POSTWAVE_SCOPE_QUARANTINE_RECONCILED__RAW_TERMINAL_3352_OF_3352_PASS__11_OF_19_UNAFFECTED_BEHAVIORAL_FAMILY_ROWS_PASS__8_P1_DEPENDENT_ROWS_QUARANTINED__2_ACCEPTANCE_CLOSED__2_VERIFIED_OWNED__17_ACCEPTANCE_OPEN",
+  "status": "POSTWAVE_P1_SCOPE_RESTORED__RAW_TERMINAL_3352_OF_3352_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILY_ROWS_PASS__2_ACCEPTANCE_CLOSED__2_VERIFIED_OWNED__17_ACCEPTANCE_OPEN",
   "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -65,8 +65,9 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
       "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_RESTORED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_REINSTATED",
+      "current_behavioral_scope_evidence": "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "p1_scope_restoration_activation": "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3.json"
     },
     {
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
@@ -100,8 +101,9 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
       "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_RESTORED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_REINSTATED",
+      "current_behavioral_scope_evidence": "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "p1_scope_restoration_activation": "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3.json"
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
@@ -174,8 +176,9 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
       "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_RESTORED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_REINSTATED",
+      "current_behavioral_scope_evidence": "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "p1_scope_restoration_activation": "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3.json"
     },
     {
       "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
@@ -233,8 +236,9 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
       "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_RESTORED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_REINSTATED",
+      "current_behavioral_scope_evidence": "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "p1_scope_restoration_activation": "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3.json"
     },
     {
       "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
@@ -299,8 +303,9 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
       "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_RESTORED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_REINSTATED",
+      "current_behavioral_scope_evidence": "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "p1_scope_restoration_activation": "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3.json"
     },
     {
       "family": "FINANCIAL_ANALYSIS",
@@ -353,8 +358,9 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
       "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_RESTORED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_REINSTATED",
+      "current_behavioral_scope_evidence": "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "p1_scope_restoration_activation": "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3.json"
     },
     {
       "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -447,8 +453,9 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
       "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_RESTORED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_REINSTATED",
+      "current_behavioral_scope_evidence": "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "p1_scope_restoration_activation": "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3.json"
     },
     {
       "family": "ARTIFACT_CREATION",
@@ -598,8 +605,9 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
       "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_RESTORED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_REINSTATED",
+      "current_behavioral_scope_evidence": "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "p1_scope_restoration_activation": "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3.json"
     },
     {
       "family": "EXACT_SYMBOLIC_COMPUTATION",
@@ -752,5 +760,22 @@
     "quarantined_behavioral_family_count": 8,
     "quarantined_behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
     "rule": "PRESERVE_INTERNALIZATION_STATUS__RETRACT_ONLY_WHOLE_SCOPE_BEHAVIORAL_CREDIT_CAUSALLY_DEPENDENT_ON_P1"
+  },
+  "p1_scope_restoration": {
+    "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__8_OF_8_P1_DEPENDENT_BEHAVIORAL_ROWS_RESTORED__ZERO_OPUS55_ACCEPTANCE_CREDIT",
+    "activation": "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3.json",
+    "verification": "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+    "restored_family_count": 8,
+    "restored_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "COMPUTER_AND_BROWSER_USE",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+    ],
+    "opus55_acceptance_unchanged": "2_OF_19_CLOSED__17_OPEN"
   }
 }
