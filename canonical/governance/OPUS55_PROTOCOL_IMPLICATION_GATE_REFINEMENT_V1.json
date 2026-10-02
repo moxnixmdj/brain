@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__CATALOG_VERIFIED__ATOM_METRIC_BINDINGS_AND_CONTAMINATION_ADMISSIBILITY_OPEN__ZERO_CREDIT",
+  "objective": "Prevent independently verified witness-catalog normalization from being mistaken for the stronger witness-side semantic inputs required by protocol implication/scope algebra.",
+  "authority": {
+    "witness_normalization": "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V1.json",
+    "witness_normalization_verification": "canonical/verification/OPUS55_BRAIN_WITNESS_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "target_normalization": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json",
+    "algebra_runtime": "canonical/runtime/protocol_implication_scope_algebra_v1.py",
+    "action_hypergraph": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json"
+  },
+  "exact_gate_state": {
+    "brain_witness_catalog_independent_pass": true,
+    "brain_witness_target_atom_metric_bindings_independent_pass": false,
+    "brain_witness_contamination_admissibility_independent_pass": false,
+    "semantic_implication_verified": false,
+    "protocol_implication_scope_algebra_available": false
+  },
+  "basis": [
+    "THE_INDEPENDENT_RECEIPT_EXPLICITLY_SETS_TARGET_ATOM_MAPPING_VERIFIED_FALSE_AND_SEMANTIC_IMPLICATION_VERIFIED_FALSE",
+    "THE_NORMALIZED_WITNESS_ROWS_CURRENTLY_HAVE_EMPTY_NORMALIZED_TARGET_ATOMS_AND_EMPTY_SEMANTIC_IMPLICATIONS",
+    "THE_ALGEBRA_RUNTIME_REQUIRES_EXPLICIT_PROVED_ATOMS_METRIC_BOUNDS_AND_CONTAMINATION_CLEAN_ADMISSIBILITY",
+    "CATALOG_IDENTITY_ALONE_CANNOT_SUPPLY_ANY_OF_THOSE_SEMANTIC_INPUTS"
+  ],
+  "hard_rules": [
+    "CATALOG_NORMALIZATION_IS_NOT_WITNESS_TO_TARGET_SEMANTIC_NORMALIZATION",
+    "NO_ATOM_OR_METRIC_BINDING_BY_NAME_ANALOGY_OR_PROSE_SIMILARITY",
+    "NO_CONTAMINATION_CLEAN_FLAG_BY_INFERENCE",
+    "NO_PROTOCOL_IMPLICATION_EXECUTION_UNTIL_ALL_REQUIRED_WITNESS_SIDE_INPUTS_ARE_INDEPENDENTLY_VERIFIED",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "BUILD_ONLY_EXPLICIT_CONTENT_ADDRESSED_WITNESS_TO_TARGET_ATOM_AND_METRIC_BINDINGS_PLUS_CONTAMINATION_ADMISSIBILITY__INDEPENDENTLY_VERIFY__THEN_RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
