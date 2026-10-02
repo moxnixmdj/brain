@@ -25,6 +25,7 @@ from canonical.runtime import portfolio_multiplex_terminal_instrumentation_v1 as
 SCHEMA = "PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_RUNNER_V1"
 ROOT = Path(__file__).resolve().parents[2]
 BINDING_PATH = "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json"
+BINDING_BLOB = "5212f5996dbc83e87a308b8c9d9d1d9ed3da5aab"
 AUTHORITY_PATH = "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json"
 MANIFEST_PATH = "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json"
 
@@ -73,6 +74,8 @@ def static_preflight() -> dict[str, Any]:
     errors: list[str] = []
     try:
         binding = _load(BINDING_PATH)
+        if _git_blob_sha(BINDING_PATH) != BINDING_BLOB:
+            errors.append("RUNNER_BINDING_BLOB_DRIFT")
     except Exception as exc:
         return {
             "schema": SCHEMA,
@@ -248,11 +251,23 @@ def _run_behavior(
         result = direct_results.get(CAD)
         if not isinstance(result, Mapping):
             return {"behavior_id": CAD, "pass": False, "reason": "CAD_DIRECT_RESULT_REQUIRED"}
+        cases = result.get("cases")
+        rehearsal = commitment == REHEARSAL_COMMITMENT and beacon == REHEARSAL_BEACON
+        exact_128 = (
+            result.get("behavior_id") == CAD
+            and result.get("pass") is True
+            and result.get("terminal_result") is True
+            and result.get("case_count") == 128
+            and isinstance(cases, list)
+            and len(cases) == 128
+            and (result.get("preterminal_stub") is not True or rehearsal)
+        )
         return {
             "behavior_id": CAD,
-            "pass": result.get("pass") is True and result.get("terminal_result") is True,
-            "case_count": int(result.get("case_count", result.get("sample_count", 128)) or 128),
+            "pass": exact_128,
+            "case_count": len(cases) if isinstance(cases, list) else 0,
             "reused_direct_result": True,
+            "exact_direct_cad_population_bound": exact_128,
         }
     if behavior_id == M0:
         return _run_m0(portfolio, commitment, beacon, count)
@@ -361,8 +376,9 @@ def execute_parent_portfolio(
         direct_results=direct_results,
         require_authority=True,
     )
-    if out["pass"] is not True:
-        raise RuntimeError("PARENT_PORTFOLIO_FAIL_CLOSED:" + portfolio)
+    # A terminal behavioral failure is evidence, not infrastructure failure.
+    # Return its receipts so the parent launcher can reduce all started portfolios
+    # without replacement, replay, or selective early-stop bias.
     return list(out["receipts"])
 
 
@@ -374,6 +390,7 @@ def rehearse_parent_portfolio(portfolio: str) -> dict[str, Any]:
             "pass": True,
             "terminal_result": True,
             "case_count": 128,
+            "cases": [{"case_id": f"REHEARSAL_CAD::{i}"} for i in range(128)],
             "preterminal_stub": True,
         }
     }
