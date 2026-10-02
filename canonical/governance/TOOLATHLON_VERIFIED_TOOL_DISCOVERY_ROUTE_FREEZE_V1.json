@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_TOOLATHLON_VERIFIED_TOOL_DISCOVERY_ROUTE_FREEZE_V1",
+  "date": "2026-10-02",
+  "status": "PRE_TASK_CONTENT_FREEZE__BRAIN_PACKAGE_AND_PUBLIC_BENCHMARK_IDENTITY_FROZEN__SCOPE_ZERO_COST_AND_TERMINAL_BINDING_PENDING__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+  "purpose": "TEST_WHETHER_TOOLATHLON_VERIFIED_CAN_REPLACE_THE_LIVE_OPUS_5_5_COMPARATOR_FOR_THE_REPRESENTED_REAL_WORLD_TOOL_SELECTION_AND_LONG_HORIZON_EXECUTION_SCOPE_WHILE_BRAIN_INTERNAL_INFORMATION_SAFE_PROOFS_COVER_TRANSFER_VERSIONING_LEAST_COST_AND_ESCALATION_RESIDUALS",
+  "freeze_order_position": "BRAIN_CANDIDATE_FROZEN_BEFORE_ANY_TOOLATHLON_TASK_PROMPT_OR_GROUND_TRUTH_CONTENT_IS_READ",
+  "brain_package": {
+    "candidate": {
+      "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+      "blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+    },
+    "v1_hidden_capability_proof": {
+      "path": "canonical/runtime/tool_discovery_information_safe_proof.py",
+      "blob_sha": "2450a9644119c9fdf9c43307a1d115098d6ba592"
+    },
+    "v2_hardened_proof": {
+      "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+      "blob_sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+    },
+    "v2_tests": {
+      "path": "canonical/tests/test_tool_discovery_information_safe_proof_v2.py",
+      "blob_sha": "34e3fa1064d02c9b18b87f99329b4decc7604021"
+    },
+    "independent_receipt": {
+      "path": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "blob_sha": "d4ce5641e564f330bff32f6ffb7f184e87d8495d"
+    }
+  },
+  "brain_verified_internal_dimensions": [
+    "TRUE_CAPABILITY_HIDDEN_FROM_CANDIDATE",
+    "SAFE_PROBE_ONLY_CURRENT_REQUIRED_CAPABILITY",
+    "LEAST_COST_EVIDENCE_SUPPORTED_SUFFICIENT_ROUTE_SELECTION",
+    "CROSS_TASK_REUSE_OF_VALID_CAPABILITY_EVIDENCE",
+    "VERSION_CHANGE_INVALIDATES_STALE_CAPABILITY_EVIDENCE",
+    "CHEAPER_CAPABILITY_GAIN_REVERSES_SELECTION",
+    "SELECTED_TOOL_CAPABILITY_LOSS_RESELECTS",
+    "UNAVAILABLE_AND_UNAUTHORIZED_ROUTES_EXCLUDED",
+    "NO_SUFFICIENT_ROUTE_ESCALATES_ONLY_AFTER_RELEVANT_NEGATIVE_EVIDENCE"
+  ],
+  "benchmark_identity": {
+    "repository": "hkust-nlp/Toolathlon",
+    "repository_url": "https://github.com/hkust-nlp/Toolathlon",
+    "frozen_head_commit": "9be8d8fe07a497b18ee61e3f2ae694e9797f39eb",
+    "readme_blob": "f31aebd1cf48a460a79cf86b6d8af69250595611",
+    "eval_service_readme_blob": "28633f85a9fb862bfe4e9a0d419b7f046d68a6d7",
+    "finalpool_tree_sha": "0e6db218108c4666f3cdaa8d1ab976ab4807617c",
+    "finalpool_task_directory_count": 108,
+    "task_file_presence": {
+      "docs/agent_system_prompt.md": 108,
+      "docs/task.md": 108,
+      "evaluation/main.py": 108,
+      "task_config.json": 108
+    },
+    "identity_method": "GIT_TREE_METADATA_ONLY__TASK_PROMPT_AND_GROUND_TRUTH_CONTENT_NOT_READ_BEFORE_BRAIN_PACKAGE_FREEZE",
+    "release_fact": "REPOSITORY_README_STATES_MAIN_CORRESPONDS_TO_TOOLATHLON_VERIFIED_FINAL_RELEASE_RELEASED_2026_06_30_WITH_PROMPTS_GROUND_TRUTHS_AND_EVALUATORS_REVIEWED_AND_ALIGNED"
+  },
+  "opus55_reference_bar": {
+    "benchmark": "Toolathlon-Verified",
+    "pass_at_1_percent": 77.8,
+    "pass_at_3_percent": 82.4,
+    "pass_cubed_percent": 72.2,
+    "avg_assistant_turns": 26.9,
+    "task_count": 108,
+    "trials": 3,
+    "effort": "max",
+    "source_render": "https://malob.github.io/ai-system-cards/anthropic/claude-opus-5-5/",
+    "original_anthropic_pdf": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "source_status": "FIRST_PARTY_SYSTEM_CARD_CONTENT_VIA_FAITHFUL_WEB_RENDER_WITH_ORIGINAL_PDF_LINK__DURABLE_LOCAL_EVIDENCE_BINDING_STILL_REQUIRED"
+  },
+  "benchmark_surface_claims_from_public_metadata": [
+    "108_REAL_WORLD_LONG_HORIZON_TASKS",
+    "600_PLUS_TOOLS",
+    "32_APPLICATIONS",
+    "EXECUTION_BASED_END_STATE_EVALUATION",
+    "PUBLIC_EVALUATION_SERVICE",
+    "PRIVATE_MODE_SUPPORTS_LOCALLY_DEPLOYED_OPENAI_COMPATIBLE_MODEL_WITH_DUMMY_API_KEY",
+    "LOCAL_SELF_HOSTED_DOCKER_OR_PODMAN_ROUTE_EXISTS"
+  ],
+  "contamination_state": {
+    "brain_candidate_frozen_before_task_prompt_content": true,
+    "task_prompt_content_read_by_this_route_audit_before_freeze": false,
+    "ground_truth_content_read_by_this_route_audit_before_freeze": false,
+    "only_git_path_names_and_metadata_inspected_before_freeze": true,
+    "public_benchmark_pretraining_contamination": "UNKNOWN__MUST_BE_ACCOUNTED_FOR_BY_PUBLIC_FIXED_BAR_POLICY_AND_NO_POST_FREEZE_TUNING"
+  },
+  "unresolved_before_public_fixed_bar_admission": [
+    "MAP_TOOLATHLON_REPRESENTED_DIMENSIONS_TO_FROZEN_TOOL_DISCOVERY_CONTRACT_WITHOUT_SCOPE_WEAKENING",
+    "PROVE_EXACT_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER_OR_FAIL_CLOSED",
+    "FREEZE_CHECKER_AND_TASK_POPULATION_IDENTITY_WITHOUT_POST_FREEZE_TUNING",
+    "BIND_OPUS_5_5_77_8_PASS_AT_1_SOURCE_DURABLY_AND_INDEPENDENTLY",
+    "DEFINE_HOW_INTERNAL_TRANSFER_VERSIONING_LEAST_COST_AND_ESCALATION_PROOFS_COMPOSE_WITH_TOOLATHLON_FIXED_BAR",
+    "FREEZE_TERMINAL_ACCEPTANCE_ACCOUNTING_AND_SELECTOR"
+  ],
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
