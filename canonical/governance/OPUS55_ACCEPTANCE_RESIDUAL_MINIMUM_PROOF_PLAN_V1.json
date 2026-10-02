@@ -34,13 +34,13 @@
       "semantics": "V6_V3_SUBSTRATE_AWARE__GENERAL_COGNITION_SUBSTRATE_ALLOWED__HIDDEN_TARGET_CAPABILITY_PROVIDER_FORBIDDEN",
       "independent_verification": {
         "path": "canonical/verification/ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
-        "git_blob_sha": "913496d739afa5a695a358e6d57de89e8202bd29",
-        "status": "INDEPENDENT_PASS"
+        "git_blob_sha": "5eb6cdb71bc59f180aacfac1e9de6048f30814b2",
+        "status": "INDEPENDENT_PASS__CURRENT_V7_V3"
       }
     },
     "public_bar_capability_source_audit": {
       "path": "canonical/governance/ACCEPTANCE_PUBLIC_BAR_CAPABILITY_SOURCE_AUDIT_V2.json",
-      "git_blob_sha": "75d12f768f7694ef77d974b09b7d7fd972f31070",
+      "git_blob_sha": "173b043687e42c0e6f788c2b4c02f7e2fac91660",
       "independent_gate_verification": "canonical/verification/ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
     },
     "acceptance_source_gate_theory_correction": {
@@ -51,7 +51,13 @@
       "runtime": "canonical/runtime/acceptance_proof_transmuter_v1.py",
       "live_input": "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json",
       "status": "ACTIVE_FAIL_CLOSED__SCHEDULING_ONLY__ZERO_CREDIT"
-    }
+    },
+    "current_internalization_laws": [
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md"
+    ]
   },
   "invariant_truths": [
     "V6_SURFACE_DELETION_IS_EXECUTION_ROUTE_DEDUPLICATION_ONLY",
@@ -321,7 +327,7 @@
   "v1_source_gate_correction": {
     "superseded_gate": "canonical/runtime/acceptance_capability_source_gate_v1.py",
     "superseded_requirement": "MODEL_DEPENDENCY_COUNT_ZERO_AS_TERMINAL_REQUIREMENT",
-    "correction": "MODEL_PRESENCE_ALLOWED_AS_GENERAL_COGNITION_SUBSTRATE__OWNED_OPERATIVE_CONFIGURATION_REQUIRED__HIDDEN_TARGET_CAPABILITY_PROVIDER_FORBIDDEN",
+    "correction": "MODEL_PRESENCE_ALLOWED_AS_GENERAL_COGNITION_SUBSTRATE__V7_BRAIN_OWNED_OPERATIVE_MECHANISM_REQUIRED__HIDDEN_TARGET_CAPABILITY_PROVIDER_FORBIDDEN",
     "decision_receipt": "canonical/reasoning/2026-10-02_ACCEPTANCE_CAPABILITY_SOURCE_GATE_SUBSTRATE_CORRECTION_V1.json"
   }
 }
