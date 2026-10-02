@@ -1,0 +1,27 @@
+name: Verify composition component interface manifest v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/OPUS55_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json"
+      - "canonical/runtime/opus55_composition_component_interface_manifest_v1.py"
+      - "canonical/tests/test_opus55_composition_component_interface_manifest_v1.py"
+      - ".github/workflows/verify-composition-component-interface-manifest-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run adversarial manifest tests
+        run: python -m unittest canonical.tests.test_opus55_composition_component_interface_manifest_v1 -v
+      - name: Verify live manifest projection
+        run: python canonical/runtime/opus55_composition_component_interface_manifest_v1.py
