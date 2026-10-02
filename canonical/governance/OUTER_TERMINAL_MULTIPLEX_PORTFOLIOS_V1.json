@@ -9,7 +9,8 @@
     "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
     "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
     "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
-    "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
+    "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json",
+    "canonical/governance/PRIVATE_SURFACE_ROUTE_DELETION_VS_SUBSTITUTION_RECONCILIATION_V1.json"
   ],
   "universal_requirements": [
     "PUBLIC_FIXED_OPUS55_BAR_USED_WHERE_SCOPE_EQUIVALENT",
@@ -113,8 +114,7 @@
       ],
       "required_external_surfaces": [
         "Humanity's Last Exam with tools >=67.7%",
-        "Terminal-Bench-Science 0.1 >=58.7%",
-        "Vals MysteryMechanism >=49.55% for represented scope"
+        "Terminal-Bench-Science 0.1 >=58.7%"
       ],
       "direct_mechanism_instrumentation": [
         "QUERY_GENERATION_FROM_REQUIREMENT_GAPS",
@@ -124,7 +124,11 @@
         "CALIBRATED_UNKNOWN_ABSTENTION"
       ],
       "new_reality_unit_cost": 1,
-      "dependency_depth": 1
+      "dependency_depth": 1,
+      "background_reference_surfaces": [
+        "Vals MysteryMechanism >=49.55% represented scope__DIRECT_EXECUTION_ROUTE_DELETED_BY_CONTRACT_NATIVE_DOMINANCE__NO_SCORE_REPRODUCTION_CLAIM"
+      ],
+      "contract_native_route_deletion": "canonical/governance/PRIVATE_SURFACE_ROUTE_DELETION_VS_SUBSTITUTION_RECONCILIATION_V1.json"
     }
   ],
   "coverage_claim": {
