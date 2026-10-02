@@ -153,7 +153,14 @@ def compile_graph(
         "affected_families": open_ids,
     })
 
-    for rid in sorted(residual_by_id):
+    terminal_residual_ids = sorted({
+        rid
+        for fid in open_ids
+        for rid in (family_map.get(fid) if isinstance(family_map.get(fid), list) else [])
+    })
+    supporting_residual_ids = sorted(set(residual_by_id) - set(terminal_residual_ids))
+
+    for rid in terminal_residual_ids:
         residual = residual_by_id[rid]
         mechanism_state = residual.get("mechanism_state")
         remaining_scope = residual.get("remaining_scope")
@@ -175,8 +182,8 @@ def compile_graph(
             "dependency_boundary": residual.get("dependency_boundary"),
             "dependencies": ["GLOBAL_BEHAVIOR_BASIS_COMPLETENESS_001"],
             "affected_families": sorted(
-                fid for fid, mapped in family_map.items()
-                if isinstance(mapped, list) and rid in mapped
+                fid for fid in open_ids
+                if isinstance(family_map.get(fid), list) and rid in family_map[fid]
             ),
         }
         nodes.append(node)
@@ -184,18 +191,13 @@ def compile_graph(
     for fid in open_ids:
         family = family_by_id[fid]
         ownership = family.get("ownership_status")
-        if ownership in PROOF_ONLY_FAMILY_STATUS:
-            hole_type = "?P"
-        elif ownership in MECHANISM_GAP_FAMILY_STATUS:
-            hole_type = "?M"
-        else:
-            hole_type = "?M"
+        if ownership not in PROOF_ONLY_FAMILY_STATUS | MECHANISM_GAP_FAMILY_STATUS:
             errors.append(f"UNKNOWN_OPEN_FAMILY_OWNERSHIP_STATUS:{fid}:{ownership}")
         mapped = family_map.get(fid) if isinstance(family_map.get(fid), list) else []
         nodes.append({
             "id": f"FAMILY::{fid}",
             "kind": "FAMILY_ACCEPTANCE",
-            "hole_type": hole_type,
+            "hole_type": "?P",
             "status": "OPEN",
             "ownership_status": ownership,
             "acceptance_basis": family.get("acceptance_basis"),
@@ -273,11 +275,15 @@ def compile_graph(
             "closed_families": len(closed_ids),
             "open_families": len(open_ids),
             "active_residual_contracts": len(residual_by_id),
+            "terminal_residual_contracts": len(terminal_residual_ids),
+            "supporting_nonterminal_residual_contracts": len(supporting_residual_ids),
             "obligation_nodes": len(nodes),
             "hole_types": hole_counts,
         },
         "closed_families": closed_ids,
         "open_families": open_ids,
+        "terminal_residual_ids": terminal_residual_ids,
+        "supporting_nonterminal_residual_ids": supporting_residual_ids,
         "structural_mapping_complete": not any(
             e.startswith("OPEN_FAMILY_UNMAPPED:")
             or e.startswith("FAMILY_REFERENCES_UNKNOWN_RESIDUAL:")
@@ -294,7 +300,10 @@ def compile_graph(
         "nodes": nodes,
         "errors": sorted(set(errors)),
         "rule": (
-            "STRUCTURAL_MAPPING_IS_NOT_TERMINAL_SEMANTIC_COMPLETENESS; "
+            "ONLY RESIDUALS REFERENCED BY OPEN-FAMILY COVERAGE ARE TERMINAL BASIS NODES; "
+            "SUPPORTING NARROW CONTRACTS ARE PRESERVED WITHOUT OVERCONSTRAINING TERMINAL CLOSURE; "
+            "FAMILY NODES ARE PROOF-ONLY BECAUSE MECHANISM GAPS LIVE IN RESIDUAL DEPENDENCIES; "
+            "STRUCTURAL MAPPING IS NOT TERMINAL SEMANTIC COMPLETENESS; "
             "NO FRESH REALITY QUERY IS AUTHORIZED BY THIS GRAPH ALONE"
         ),
     }
