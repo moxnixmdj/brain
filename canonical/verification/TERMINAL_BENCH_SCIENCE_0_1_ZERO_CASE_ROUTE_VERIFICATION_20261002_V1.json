@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_0_1_ZERO_CASE_ROUTE_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_V0_1_0_PUBLIC_DATASET_IDENTITY_AND_ZERO_COST_LOCAL_DOCKER_HARBOR_CARRIER__ZERO_TASK_CASE_READ",
+  "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+  "portfolio": "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO",
+  "source": {
+    "repository": "harbor-framework/terminal-bench-science",
+    "tag": "v0.1.0",
+    "commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "citation_blob_sha": "7a899ac093cc66b7d25e95106b38b20fe99f17ed",
+    "license": "Apache-2.0"
+  },
+  "harbor_dataset": {
+    "package": "terminal-bench-science/terminal-bench-science",
+    "requested_tag": "0.1.0",
+    "revision": 10,
+    "content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
+    "tags": [
+      "0.1.0",
+      "latest",
+      "v0.1"
+    ],
+    "visibility": "public"
+  },
+  "carrier": {
+    "harbor_version": "0.23.0",
+    "runner": "ubuntu-24.04",
+    "local_docker": true,
+    "paid_or_larger_runner_required": false
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 627,
+    "workflow_run_id": 36963873723,
+    "workflow_job_id": 110703253451,
+    "merge_commit": "a2acb97fa0f2cdceabaf7a98962251db97ad2f20"
+  },
+  "verified": [
+    "EXACT_TB_SCIENCE_V0_1_0_SOURCE_TAG_AND_COMMIT",
+    "EXACT_PUBLIC_HARBOR_DATASET_REVISION_AND_CONTENT_HASH",
+    "STANDARD_PUBLIC_GITHUB_RUNNER_LOCAL_DOCKER",
+    "HARBOR_0_23_0_INSTALLS_AND_EXPOSES_RUN_AND_VERSION_CONTROLS",
+    "ZERO_TASK_CASE_CONTENT_READ"
+  ],
+  "limitations": [
+    "NO_TERMINAL_TASK_EXECUTION",
+    "NO_PER_TASK_RESOURCE_FIT_PROOF",
+    "NO_BRAIN_AGENT_ADAPTER_TERMINAL_RUN",
+    "RESOURCE_FAILURES_MUST_FAIL_CLOSED_AND_MAY_NOT_TRIGGER_POST_HOC_TASK_REPLACEMENT"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
