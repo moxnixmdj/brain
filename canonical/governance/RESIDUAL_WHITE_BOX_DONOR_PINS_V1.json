@@ -62,8 +62,27 @@
     "zero_incremental_spend_required": true,
     "remote_first": true,
     "user_laptop_forbidden_by_default": true,
-    "current_status": "NOT_YET_PROVEN_ON_AVAILABLE_ZERO_COST_EXECUTION_SURFACE",
-    "rule": "DONOR_PIN_IS_NOT_AN_ADMISSIBLE_COMPLETE_ACTION_BUNDLE_UNTIL_MATERIALIZATION_RUNTIME_MEMORY_AND_WALL_CLOCK_FEASIBILITY_ARE_PROVEN"
+    "current_status": "PROVEN_ON_CURRENT_ZERO_COST_REMOTE_PUBLIC_GITHUB_ACTIONS_SURFACE",
+    "rule": "MATERIALIZATION_AND_MINIMAL_RUNTIME_FEASIBILITY_NOW_PROVEN__NEXT_GATE_IS_CAUSAL_RESIDUAL_LOCALIZATION_AND_DONOR_DELETION__NO_CAPABILITY_CREDIT_FROM_FEASIBILITY",
+    "evidence": "canonical/verification/ZERO_COST_WHITE_BOX_DONOR_FEASIBILITY_20261002_V1.json",
+    "M0A": {
+      "status": "PASS",
+      "donor": "allenai/OLMo-2-0425-1B",
+      "resolved_hf_sha": "a1847dff35000b4271fa70afc5db10fd29fedbdf",
+      "materialized_bytes": 5949373576,
+      "peak_rss_kb": 5544748,
+      "one_token_seconds": 0.49337053298950195,
+      "workflow_run_id": 36944412815
+    },
+    "M1A": {
+      "status": "PASS",
+      "donor": "Qwen/Qwen3-VL-2B-Instruct",
+      "resolved_hf_sha": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "materialized_bytes": 4266641337,
+      "peak_rss_kb": 4770448,
+      "one_token_seconds": 18.66275715827942,
+      "workflow_run_id": 36944417067
+    }
   },
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
