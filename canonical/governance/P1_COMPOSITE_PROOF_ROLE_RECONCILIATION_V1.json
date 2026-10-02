@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE_FULL_REQUIRED_CHECK_AND_MUTATION_PARTITION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE_CORRECTED_COMPOSITE_CHECK_AND_MUTATION_PARTITION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
   "objective": "Respect the frozen P1 composite proof architecture: typed V4 is the predeclared cross-domain mechanism/causal-pattern preflight, while frozen T0/T2 contract-native execution supplies the terminal intervention/rescue judgment. Prove every frozen required check and mutation has exactly one load-bearing proof role without pretending the terminal scorer alone evaluated all semantics.",
   "authority": {
@@ -62,12 +62,12 @@
       "FORCE_UNIQUE_CAUSE_ON_NONIDENTIFIABLE_TRACE",
       "DROP_CAUSAL_PREDECESSOR_IN_MULTI_STEP_CHAIN",
       "SWAP_TOOL_OR_AUTHORITY_FAILURE_CLASS",
-      "DROP_PROVENANCE_OR_DEPENDENCY_EDGE"
+      "DROP_PROVENANCE_OR_DEPENDENCY_EDGE",
+      "UNFALSIFIABLE_DIAGNOSIS"
     ],
     "T0_T2_TERMINAL_INTERVENTION_RESCUE": [
       "SELECT_DOWNSTREAM_SYMPTOM",
       "SELECT_LATER_CORRELATED_STEP",
-      "UNFALSIFIABLE_DIAGNOSIS",
       "REPAIR_TARGET_WITH_NO_RESCUE"
     ]
   },
@@ -98,7 +98,14 @@
       ],
       "case_count": 168,
       "hidden_oracle_not_candidate_visible": true,
-      "falsifiable_repair_targets_scored_against_hidden_oracle": true
+      "falsifiable_repair_targets_scored_against_hidden_oracle": true,
+      "operational_support": {
+        "failure_mechanism_classification": "score_case compares exact mechanism classes over AUTHORITY, SCHEMA, PROVENANCE, INVARIANT, STATE_TRANSITION, TOOL_CONTRACT, DEPENDENCY",
+        "nonidentifiability": "AMBIGUOUS cases reject unique-cause claims and require an information request",
+        "multistep_and_delay": "DELAYED and INTERACTION causal patterns are in the 168-case cross-product",
+        "falsifiable_repair_target": "test_wrong_repair_target_is_rejected_by_hidden_oracle plus FALSIFIABLE_REPAIR_TARGET_WRONG scorer path",
+        "provenance_and_dependency": "PROVENANCE and DEPENDENCY are explicit mechanism classes in the exact independently verified V4 matrix"
+      }
     },
     "terminal": {
       "portfolios": [
@@ -113,7 +120,12 @@
         "evidence_steps"
       ],
       "rescue_is_exact_correct_repair_identity": true,
-      "downstream_repairs_visible_as_negative_controls": true
+      "downstream_repairs_visible_as_negative_controls": true,
+      "operational_support": {
+        "downstream_or_late_cause_rejection": "cause_step must equal the hidden injected cause; downstream correlated steps fail",
+        "causal_evidence_required": "evidence_steps must contain the hidden cause step",
+        "rescue": "repair_id must equal the hidden causal repair identity; any other repair yields RESCUE_FAILED"
+      }
     }
   },
   "disposition": {
