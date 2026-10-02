@@ -21,3 +21,38 @@ jobs:
           python-version: "3.12"
       - name: Run V2 receipt index tests
         run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+      - name: Freeze exact live V2 scan result
+        run: |
+          python canonical/runtime/proof_atom_receipt_index_v2.py > proof-atom-receipt-index-v2-live.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("proof-atom-receipt-index-v2-live.json")
+          d = json.loads(p.read_text())
+          assert d["status"].startswith("PASS"), d["status"]
+          assert d["canonical_atom_count"] == 40, d["canonical_atom_count"]
+          assert d["execution_authority"] is False
+          assert d["promotion_authority"] is False
+          print(json.dumps({
+              "status": d["status"],
+              "canonical_atom_count": d["canonical_atom_count"],
+              "scanned_file_count": d["scanned_file_count"],
+              "candidate_match_count": d["candidate_match_count"],
+              "atoms_with_candidate_matches": d["atoms_with_candidate_matches"],
+              "atoms_without_candidate_matches": d["atoms_without_candidate_matches"],
+              "atom_ids_without_candidate_matches": d["atom_ids_without_candidate_matches"],
+              "candidate_matches_by_source_class": d["candidate_matches_by_source_class"],
+          }, sort_keys=True))
+          PY
+          git hash-object canonical/runtime/proof_atom_receipt_index_v2.py
+          git hash-object canonical/tests/test_proof_atom_receipt_index_v2.py
+          git hash-object canonical/runtime/canonical_proof_atom_basis_v2.py
+          git hash-object canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json
+          sha256sum proof-atom-receipt-index-v2-live.json
+      - name: Upload frozen live scan
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v2-live-scan
+          path: proof-atom-receipt-index-v2-live.json
+          if-no-files-found: error
+          retention-days: 7
