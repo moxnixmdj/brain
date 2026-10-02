@@ -266,7 +266,8 @@
     "global_terminal_surface_dominance_v3_mechanical_verification_valid": true,
     "global_terminal_surface_dominance_v3_scope_mapping_valid": false,
     "global_surface_route_deletion_authority": false,
-    "contract_native_brain_candidate_independent_pass": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    "contract_native_brain_candidate_independent_pass": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "terminal_active_contract_coverage_guard_independent_pass": "canonical/verification/TERMINAL_ACTIVE_CONTRACT_COVERAGE_GUARD_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
