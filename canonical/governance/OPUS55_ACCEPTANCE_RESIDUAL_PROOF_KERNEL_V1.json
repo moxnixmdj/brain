@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_PROOF_KERNEL_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__PREDICATE_LEVEL_EXECUTION_GATE__ZERO_CREDIT",
+  "objective": "Reduce the 17 open Opus 5.5 family protocols to atomic verdict-changing predicates, reuse exact evidence first, block inadmissible matched work, and permit terminal promotion only at residual zero.",
+  "inputs": {
+    "registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V1.json",
+    "evidence_bindings": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V1.json",
+    "comparator_reconciliation": "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json",
+    "frozen_protocols": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "minimum_proof_plan": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json"
+  },
+  "runtime": "canonical/runtime/opus55_acceptance_residual_compiler_v1.py",
+  "tests": "canonical/tests/test_opus55_acceptance_residual_compiler_v1.py",
+  "execution_law": [
+    "NO_ACTION_EXECUTES_UNLESS_ITS_RESULT_CAN_CHANGE_A_FROZEN_TERMINAL_ACCEPTANCE_PREDICATE",
+    "EXISTING_CONTENT_ADDRESSED_EVIDENCE_MUST_BE_SATURATED_BEFORE_NEW_REALITY",
+    "OPEN_PUBLIC_BAR_AND_DIRECT_ORACLE_PREDICATES_MAY_EXECUTE_IN_PARALLEL_WHEN_THEIR_HARNESSES_ARE_ADMISSIBLE",
+    "MATCHED_PREDICATES_WITHOUT_EXACT_ZERO_COST_OPUS55_ACCESS_ARE_BLOCKED_BEFORE_CASE_EXPOSURE_UNLESS_A_SCOPE_COMPLETE_STRONGER_PROOF_EXISTS",
+    "BOUND_DOMINANCE_IS_ADMISSIBLE_ONLY_WHEN_BRAIN_LOWER_BOUND_GE_OPUS_UPPER_BOUND_ON_THE_SAME_COMPLETE_SCOPE",
+    "OBJECTIVE_CEILING_IS_ADMISSIBLE_ONLY_WHEN_SCOPE_COMPLETE_AND_BRAIN_REACHES_THE_TRUE_CEILING",
+    "NO_FAMILY_PROMOTION_UNTIL_ALL_REGISTERED_PREDICATES_FOR_THAT_FAMILY_ARE_PROVED",
+    "NO_TERMINAL_PROMOTION_UNTIL_ALL_38_PREDICATES_ARE_PROVED"
+  ],
+  "current_expected_state": {
+    "residual_families": 17,
+    "atomic_predicates": 38,
+    "terminal_promotion_allowed": false
+  },
+  "next": [
+    "SATURATE_EXISTING_IMMUTABLE_RECEIPTS_INTO_EVIDENCE_BINDINGS",
+    "RUN_COMPILER_AND_EXECUTE_ONLY_AUTHORIZED_VERDICT_CHANGING_ACTIONS",
+    "RECOMPUTE_AFTER_EVERY_NEW_PROOF_RECEIPT",
+    "WHEN_RESIDUAL_ZERO_REBUILD_FINAL_BUNDLE_AND_RUN_INDEPENDENT_FINALITY"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
