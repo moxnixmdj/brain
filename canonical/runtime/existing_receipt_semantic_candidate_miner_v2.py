@@ -197,6 +197,7 @@ def main() -> int:
     global_matches: list[dict[str, Any]] = []
     contamination_pointers: list[dict[str, Any]] = []
     truncated_literal_search_count = 0
+    global_actual_reuse_candidate_count = 0
 
     witnesses = [w for w in witness_doc.get("witnesses", []) if isinstance(w, dict)]
     targets = [t for t in target_doc.get("targets", []) if isinstance(t, dict)]
@@ -255,6 +256,7 @@ def main() -> int:
                 if not hits:
                     continue
                 actual_per_literal += 1
+                global_actual_reuse_candidate_count += 1
                 if stored_per_literal < MAX_MATCHES_PER_LITERAL:
                     global_matches.append({
                         "target_predicate_id": pid,
@@ -298,6 +300,7 @@ def main() -> int:
         "witness_count": len(witnesses),
         "exact_catalog_edge_candidate_count": len(catalog_matches),
         "targets_with_catalog_edge_candidates": targets_with_catalog,
+        "global_actual_reuse_candidate_count": global_actual_reuse_candidate_count,
         "global_stored_reuse_candidate_count": len(global_matches),
         "truncated_literal_search_count": truncated_literal_search_count,
         "targets_with_global_exact_reuse_candidates": targets_with_global,
