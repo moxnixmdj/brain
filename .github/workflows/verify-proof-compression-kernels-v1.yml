@@ -11,6 +11,7 @@ on:
       - "canonical/tests/test_protocol_implication_scope_algebra_v1.py"
       - "canonical/governance/PROOF_COMPRESSION_KERNELS_V1.json"
       - ".github/workflows/verify-proof-compression-kernels-v1.yml"
+  workflow_dispatch:
   pull_request:
     branches: [main]
     paths:
@@ -25,12 +26,12 @@ on:
 
 jobs:
   verify:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.11"
       - name: Run exact deterministic tests
         run: |
           PYTHONPATH=. python canonical/tests/test_epistemic_closure_kernel_v1.py
