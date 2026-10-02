@@ -71,11 +71,33 @@ class TerminalWaveLaunchAuthorityReducerTests(unittest.TestCase):
             "terminal_results_observed":0,"fresh_terminal_evidence_consumed":0,
         }
         basis={"contracts":contracts}
-        return pre,manifest,basis,parent_producers,receipts,blobs
+        launcher="runtime/terminal_launcher.py"
+        launcher_test="tests/test_terminal_launcher.py"
+        launcher_sha="launcher-sha"
+        launcher_test_sha="launcher-test-sha"
+        launcher_receipt="verify/launcher.json"
+        launcher_binding={
+            "status":"INDEPENDENT_PUBLIC_RUNNER_PASS",
+            "launcher":launcher,
+            "tests":launcher_test,
+            "launcher_blob_sha":launcher_sha,
+            "launcher_test_blob_sha":launcher_test_sha,
+            "independent_verification":launcher_receipt,
+            "launch_ready":True,
+        }
+        receipts[launcher_receipt]={
+            "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_TERMINAL_RESULTS",
+            "exact_brain_blobs":{launcher:launcher_sha,launcher_test:launcher_test_sha},
+            "terminal_results_observed":0,
+            "fresh_terminal_evidence_consumed":0,
+        }
+        blobs[launcher]=launcher_sha
+        blobs[launcher_test]=launcher_test_sha
+        return pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs
 
-    def _eval(self, pre, manifest, basis, parent_producers, receipts, blobs):
+    def _eval(self, pre, manifest, basis, parent_producers, launcher_binding, receipts, blobs):
         return evaluate_documents(
-            pre,manifest,basis,parent_producers,
+            pre,manifest,basis,parent_producers,launcher_binding,
             load_verification=lambda p: receipts[p],
             blob_sha=lambda p: blobs.get(p),
         )
@@ -94,30 +116,30 @@ class TerminalWaveLaunchAuthorityReducerTests(unittest.TestCase):
         self.assertTrue(out["pass"],out)
 
     def test_one_stale_executor_fails_closed(self):
-        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
+        pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs=self._fixture()
         manifest["routes"][3]["executor_blob_sha"]="new"
-        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
+        out=self._eval(pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs)
         self.assertFalse(out["pass"])
         self.assertIn("EXECUTOR_BLOB_DRIFT:B3",out["failed_predicates"])
 
     def test_missing_independent_receipt_fails_closed(self):
-        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
+        pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs=self._fixture()
         manifest["routes"][2]["independent_executor_verification"]=None
-        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
+        out=self._eval(pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs)
         self.assertFalse(out["pass"])
         self.assertIn("EXECUTOR_INDEPENDENT_RECEIPT_MISSING:B2",out["failed_predicates"])
 
     def test_missing_real_parent_producer_fails_closed(self):
-        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
+        pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs=self._fixture()
         parent_producers["portfolios"]["T2"]["producer"]=None
-        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
+        out=self._eval(pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs)
         self.assertFalse(out["pass"])
         self.assertIn("PARENT_PRODUCER_BINDING_FIELDS_MISSING:T2",out["failed_predicates"])
 
     def test_stub_parent_producer_semantics_fail_closed(self):
-        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
+        pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs=self._fixture()
         parent_producers["portfolios"]["T1"]["no_stub_receipts"]=False
-        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
+        out=self._eval(pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs)
         self.assertFalse(out["pass"])
         self.assertIn(
             "PARENT_PRODUCER_SEMANTIC_FLAG_MISSING:T1:no_stub_receipts",
@@ -125,11 +147,28 @@ class TerminalWaveLaunchAuthorityReducerTests(unittest.TestCase):
         )
 
     def test_prequalification_failure_fails_closed(self):
-        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
+        pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs=self._fixture()
         pre["pass"]=False; pre["execution_authority"]=False
-        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
+        out=self._eval(pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs)
         self.assertFalse(out["pass"])
         self.assertIn("PREQUALIFICATION_NOT_AUTHORIZED",out["failed_predicates"])
+
+    def test_launcher_blob_drift_fails_closed(self):
+        pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs=self._fixture()
+        blobs[launcher_binding["launcher"]]="changed"
+        out=self._eval(pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs)
+        self.assertFalse(out["pass"])
+        self.assertIn("LAUNCHER_BLOB_DRIFT",out["failed_predicates"])
+
+    def test_launcher_pending_reverification_fails_closed(self):
+        pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs=self._fixture()
+        launcher_binding["status"]="PENDING_INDEPENDENT_REVERIFICATION"
+        launcher_binding["launch_ready"]=False
+        launcher_binding["independent_verification"]=None
+        out=self._eval(pre,manifest,basis,parent_producers,launcher_binding,receipts,blobs)
+        self.assertFalse(out["pass"])
+        self.assertIn("LAUNCHER_BINDING_STATUS_NOT_CURRENT_INDEPENDENT_PASS",out["failed_predicates"])
+        self.assertIn("LAUNCHER_INDEPENDENT_RECEIPT_MISSING",out["failed_predicates"])
 
 
 if __name__ == "__main__":
