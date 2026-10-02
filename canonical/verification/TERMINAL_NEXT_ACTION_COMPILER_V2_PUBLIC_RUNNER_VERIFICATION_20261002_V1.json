@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_NEXT_ACTION_COMPILER_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ACTIVE_HYPERGRAPH_V2__SYNTHESIS_BLOCKED__FOUR_ZERO_REALITY_CRITICAL_ACTIONS__ZERO_CREDIT",
+  "objective": "Independently verify the deterministic next-action compiler against the active private-route-safe Hypergraph V2 and eliminate the stale V1 synthesis-available projection.",
+  "exact_brain_blobs": {
+    "canonical/runtime/acceptance_ir_compiler_v1.py": "c6961bcd87e16c9ff63b4c365e8547a0885b2eb4",
+    "canonical/runtime/terminal_next_action_compiler_v1.py": "2f07e4132ab112ef6aa40f0c2ad05f1049edb287",
+    "canonical/runtime/terminal_next_action_compiler_v2.py": "7b3352488e25ceb90c6202dce9888a0a346af8db",
+    "canonical/tests/test_terminal_next_action_compiler_v2.py": "ee56b6a36bf7d4fc2559fe7c0ee2d6b97f75d952",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "af83f4899169e81017767c3316ddcf6b61da5ef6",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json": "ec0ca144939a19234f1c53378cc76af2014a6179"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 992,
+    "verified_head": "183eb69d59f404fa8accfbba5f60448235bd4db0",
+    "merge_commit": "7ec461dcf1c44b6e8a70ae59538386225289b9b9",
+    "workflow_run_id": 37030259056,
+    "workflow_job_id": 110915008771,
+    "conclusion": "success"
+  },
+  "result": {
+    "proved_predicates": 7,
+    "unresolved_predicates": 31,
+    "primary_action_id": "BUILD_DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+    "primary_action_state": "AVAILABLE_ZERO_REALITY",
+    "available_zero_reality_critical_actions": [
+      "BUILD_DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "BUILD_TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
+      "RUN_COMPOSITION_COMPONENT_PROOF_SLICER"
+    ],
+    "synthesis_action_state": "BLOCKED",
+    "synthesis_unsatisfied_preconditions": [
+      "SYNTHESIS_MATCHED_QUALITY_AND_NONINFERIORITY_BINDINGS_INDEPENDENT_PASS",
+      "SYNTHESIS_MATCHED_TARGET_SCOPE_DISCHARGE_AVAILABLE"
+    ],
+    "highest_leverage_blocked_action_id": "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"
+  },
+  "supersedes_for_current_scheduling": "canonical/verification/TERMINAL_NEXT_ACTION_SYNTHESIS_DELTA_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
