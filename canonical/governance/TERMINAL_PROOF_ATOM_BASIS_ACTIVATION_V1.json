@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROOF_ATOM_BASIS_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__EXACT_PRIMITIVE_PROOF_ATOM_COMPILER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Compile the active terminal scheduling world below certificate granularity into canonical primitive proof atoms, replacing only the active independently verified matched-scope parent with its 11-child lossless refinement and deduplicating only exact identical requirements.",
+  "authorities": {
+    "terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+    "matched_hierarchy_activation": "canonical/governance/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_ACTIVATION_V1.json",
+    "matched_subfrontier": "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json"
+  },
+  "runtime": "canonical/runtime/terminal_proof_atom_basis_v1.py",
+  "tests": "canonical/tests/test_terminal_proof_atom_basis_v1.py",
+  "hard_rules": [
+    "BYTE_IDENTICAL_REQUIREMENT_DEDUP_ONLY",
+    "NO_SEMANTIC_ANALOGY_OR_NAME_BASED_MERGE",
+    "NO_CROSS_TARGET_CHILD_INHERITANCE",
+    "NO_PARENT_AND_CHILD_DOUBLE_COUNTING",
+    "ACTIVE_INDEPENDENT_HIERARCHICAL_REFINEMENT_REQUIRED",
+    "FAIL_CLOSED_ON_PARTITION_OR_TARGET_COVERAGE_MISMATCH",
+    "ZERO_NEW_REALITY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "promotion_condition": "INDEPENDENT_EXACT_BLOB_VERIFICATION_PASS__LIVE_COMPILER_PASS__ADVERSARIAL_TESTS_PASS",
+  "next": "RUN_EXACT_COMPILER_AND_ADVERSARIAL_TESTS__INDEPENDENTLY_VERIFY_EXACT_BLOBS__ONLY_THEN_BIND_PROOF_ATOM_BASIS_TO_TERMINAL_AUTHORITY_AND_USE_ATOM_FANOUT_FOR_SCHEDULING",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
