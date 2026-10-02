@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "FAIL_CLOSED__19_OF_19_BEHAVIORAL_FAMILY_ADJUDICATION_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_REMAIN",
+  "status": "FAIL_CLOSED__19_OF_19_BEHAVIORAL_FAMILY_ADJUDICATION_PASS__ONLY_DONOR_CLEANROOM_AND_FINAL_BUNDLE_REMAIN",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -313,8 +313,8 @@
     "every_required_behavior_has_admissible_proof": true,
     "donor_dependent_required_behaviors_zero": false,
     "unexplained_required_behaviors_zero": true,
-    "unresolved_verifier_mutations_zero": false,
-    "unresolved_composition_failures_zero": false,
+    "unresolved_verifier_mutations_zero": true,
+    "unresolved_composition_failures_zero": true,
     "contaminated_evidence_used_for_promotion_zero": true,
     "resource_or_authority_violations_zero": true,
     "all_frozen_opus_acceptance_predicates_pass": true,
@@ -325,8 +325,8 @@
     "uncontracted_required_behaviors": 0,
     "unproved_required_behaviors": 0,
     "donor_dependent_required_behaviors": null,
-    "unresolved_verifier_mutations": null,
-    "unresolved_composition_failures": null,
+    "unresolved_verifier_mutations": 0,
+    "unresolved_composition_failures": 0,
     "contaminated_promotion_evidence": 0,
     "resource_or_authority_violations": 0
   },
@@ -340,7 +340,7 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "19_OF_19_BEHAVIORAL_FAMILY_ROWS_PASS__DONOR_DEPENDENCE_VERIFIER_MUTATION_COMPOSITION_FINAL_CLEANROOM_AND_PROOF_BUNDLE_POSTCONDITIONS_REMAIN_OPEN",
+    "reason": "19_OF_19_BEHAVIORAL_FAMILY_ROWS_PASS__VERIFIER_AND_COMPOSITION_POSTCONDITIONS_CLOSED__DONOR_DEPENDENCE_FINAL_CLEANROOM_AND_FINAL_PROOF_BUNDLE_REMAIN_OPEN",
     "override_allowed": false
   },
   "specification_closure": {
@@ -366,5 +366,11 @@
     "status": "ACTIVE_FAIL_CLOSED__DERIVE_EXACT_RESIDUAL_OWNERSHIP_CUT",
     "rule": "TERMINAL_BEHAVIORAL_PASS_DOES_NOT_IMPLY_DONOR_INDEPENDENT_OWNERSHIP__ALL_GLOBAL_POSTCONDITIONS_REQUIRE_EXPLICIT_INDEPENDENT_RECEIPTS"
   },
-  "next": "RUN_POSTWAVE_GLOBAL_OWNERSHIP_REDUCER__CLOSE_ONLY_ITS_EXACT_RESIDUAL_BLOCKERS_WITH_INDEPENDENT_RECEIPTS__THEN_RERUN_TERMINAL_CLOSURE_REDUCER__NO_TERMINAL_WAVE_REPLAY"
+  "next": "RUN_POSTWAVE_GLOBAL_OWNERSHIP_REDUCER__CLOSE_ONLY_ITS_EXACT_RESIDUAL_BLOCKERS_WITH_INDEPENDENT_RECEIPTS__THEN_RERUN_TERMINAL_CLOSURE_REDUCER__NO_TERMINAL_WAVE_REPLAY",
+  "postwave_global_ownership_reconciliation": "canonical/governance/POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1.json",
+  "postwave_remaining_exact_gates": [
+    "DONOR_DEPENDENT_REQUIRED_BEHAVIORS_ZERO",
+    "FINAL_DONOR_DELETION_CLEANROOM_PASS",
+    "PROOF_BUNDLE_FROZEN"
+  ]
 }
