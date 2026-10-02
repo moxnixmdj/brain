@@ -5,6 +5,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from canonical.runtime.proof_atom_receipt_index_v2 import build_index
 
@@ -145,6 +146,33 @@ class Tests(unittest.TestCase):
             out=build_index(frontier(),overlay(),root=root)
             row=next(x for x in out["atoms"] if x["proposition"]=="R1")
             self.assertEqual(row["candidate_match_count"],0)
+
+    def test_oversize_text_candidate_fails_closed_instead_of_disappearing(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/large.json"
+            p.parent.mkdir(parents=True)
+            p.write_text('{"claim":"R1"}\n',encoding="utf-8")
+            with patch("canonical.runtime.proof_atom_receipt_index_v2.MAX_FILE_BYTES",4):
+                out=build_index(frontier(),overlay(),root=root)
+            self.assertEqual(out["status"],"FAIL_CLOSED")
+            self.assertEqual(out["declared_candidate_file_count"],1)
+            self.assertEqual(out["scanned_file_count"],0)
+            self.assertEqual(out["unsearched_file_count"],1)
+            self.assertTrue(any(x.startswith("OVERSIZE_UNSEARCHED:canonical/verification/large.json:") for x in out["errors"]))
+
+    def test_non_utf8_text_candidate_fails_closed_instead_of_disappearing(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/bad.json"
+            p.parent.mkdir(parents=True)
+            p.write_bytes(b"\xff")
+            out=build_index(frontier(),overlay(),root=root)
+            self.assertEqual(out["status"],"FAIL_CLOSED")
+            self.assertEqual(out["declared_candidate_file_count"],1)
+            self.assertEqual(out["scanned_file_count"],0)
+            self.assertEqual(out["unsearched_file_count"],1)
+            self.assertIn("NON_UTF8_UNSEARCHED:canonical/verification/bad.json",out["errors"])
 
     def test_no_credit_or_authority(self):
         with tempfile.TemporaryDirectory() as td:
