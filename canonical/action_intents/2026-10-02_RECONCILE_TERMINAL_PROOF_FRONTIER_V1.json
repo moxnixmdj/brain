@@ -1,0 +1,130 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-TERMINAL-PROOF-FRONTIER-20261002-V1",
+  "status": "CANDIDATE__EXACT_BASE_BOUND__ZERO_CREDIT__NO_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a1fb91ba41e6a2cd4142b0d253f9eb8dc4541cf5",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "CANONICAL_FRONTIER_CONTROL_SURFACES_DISAGREE_AND_DRIFT_GUARD_CANNOT_CERTIFY_SENSITIVE_TERMINAL_PROOF_WORK",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::CANONICAL_FRONTIER_CONTROL_SURFACES_DISAGREE_AND_DRIFT_GUARD_CANNOT_CERTIFY_SENSITIVE_TERMINAL_PROOF_WORK",
+  "expected_parent_frontier_change": "Restore fail-closed exact consistency across CANONICAL_POINTER, ACTIVE_GOAL_HIERARCHY, FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE, the Opus 5.5 ownership frontier record, and REAL_OUTPUT_SCOREBOARD. Preserve strict terminal truth at 2/19 families and 7/38 atomic predicates, grant zero credit, and point the active frontier only to already-existing independent P1 V6/V7 and receipt-index V4 verification work with no fresh terminal replay.",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "CURRENT_CONTROL_SURFACES_DIRECTLY_OBSERVED_INCONSISTENT__RECONCILIATION_IS_ZERO_CREDIT",
+  "probe_id": null,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "prior_work_checked": [
+    "CURRENT_TERMINAL_AUTHORITY_V1 directly reports terminal false, 2/19 acceptance, 7/38 atomic predicates proved, and 31/38 unresolved.",
+    "CANONICAL_POINTER and ACTIVE_GOAL_HIERARCHY already select OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1 but disagree on blocker/next action.",
+    "FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE and REAL_OUTPUT_SCOREBOARD still select ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1.",
+    "The drift guard requires exact cross-surface equality before frontier-sensitive work can pass.",
+    "P1 V6 derived-only falsification and P1 V7 repair verification are already represented by existing Brain/public-runner artifacts; receipt-index V4 verification is already in flight. This action creates no new empirical evidence."
+  ],
+  "stop_condition": "Stop when the trusted drift guard sees identical active target, blocker, next action, progress target, and active program across pointer, hierarchy, queue, target record, and scoreboard; JSON parses; no counters or acceptance credit change; and no task execution, fresh terminal evidence, or terminal replay occurs.",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "a1fb91ba41e6a2cd4142b0d253f9eb8dc4541cf5",
+    "real_outcome": "Restore a single fail-closed terminal-proof frontier so trusted guards can certify current proof/runtime work without changing acceptance truth.",
+    "required_capability": "CANONICAL_CONTROL_PLANE_EXACT_FRONTIER_CONSISTENCY",
+    "obs_goal": {
+      "real_outcome": "One exact active frontier across all canonical control surfaces.",
+      "proxy_goals_deleted": [
+        "Do not count metadata reconciliation as capability progress.",
+        "Do not reopen spent terminal cases."
+      ],
+      "surviving_necessity": "Cross-surface consistency is required by the trusted drift guard before sensitive proof/runtime changes can be certified."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "trusted drift guard",
+        "historical frontier reconciliation pattern",
+        "CURRENT_TERMINAL_AUTHORITY_V1"
+      ],
+      "external_existing_routes_checked": [
+        "No external capability route is needed for metadata reconciliation."
+      ],
+      "capability_work_deleted": [
+        "No new solver, model, benchmark, or execution carrier is introduced."
+      ],
+      "surviving_gap": "Control surfaces disagree on active target/blocker/action and the Opus ownership target record is absent."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_CONTROL_PLANE_DRIFT",
+      "delete_bypass_substitute_options": [
+        "Delete stale legacy mirrors by rebinding them to current terminal proof authority; do not bypass guard."
+      ],
+      "surviving_causal_blocker": "Trusted guard reads contradictory canonical mirrors before it can certify sensitive PRs."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1_RECONCILE_EXISTING_MIRRORS_TO_CURRENT_TERMINAL_PROOF_CAMPAIGN",
+        "2_DISABLE_OR_BYPASS_DRIFT_GUARD_REJECTED",
+        "3_REVERT_TO_LEGACY_SOFTWARE_ENGINEERING_SUBCAMPAIGN_REJECTED",
+        "4_CREATE_NEW_PROOF_ARCHITECTURE_REJECTED"
+      ],
+      "losing_routes_reason": "Bypassing the guard weakens truth controls; reverting to a stale subcampaign contradicts current terminal authority; new architecture does not repair mirror disagreement.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run trusted drift guard on the exact PR head and check literal equality of target, blocker, action, progress, and program across all five control surfaces. No fresh capability evidence is needed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Stale ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1 queue/scoreboard selection as top-level active frontier.",
+        "Mismatched pointer/hierarchy blocker and next-action strings."
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Existing P1 V6/V7 verification work.",
+        "Existing proof-atom receipt-index V4 independent verification work."
+      ],
+      "fresh_reuse_plan": "After mirror reconciliation, reuse the same trusted guard for subsequent sensitive proof/runtime PRs; do not rediscover the active frontier."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused direct current-base pointer/hierarchy/queue/scoreboard reads.",
+        "Reused CURRENT_TERMINAL_AUTHORITY and existing V6/V7/V4 artifacts."
+      ],
+      "search_stop_decision": "Stop route search because the defect is deterministic mirror inconsistency and a direct exact reconciliation is sufficient.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "EXACT_CURRENT_AUTHORITY_MIRROR_RECONCILIATION",
+      "BYPASS_DRIFT_GUARD",
+      "REVERT_TO_LEGACY_SOFTWARE_ENGINEERING_FRONTIER",
+      "BUILD_NEW_META_SCHEDULER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "BYPASS_DRIFT_GUARD",
+      "REVERT_TO_LEGACY_SOFTWARE_ENGINEERING_FRONTIER",
+      "BUILD_NEW_META_SCHEDULER"
+    ],
+    "selected_surviving_route": "EXACT_CURRENT_AUTHORITY_MIRROR_RECONCILIATION__ZERO_CREDIT__NO_EXECUTION",
+    "why_selected_route_is_fastest_sufficient": "The defect is literal disagreement among canonical control surfaces. Rebinding the existing mirrors to one already-evidenced terminal proof frontier is the smallest sufficient repair and requires no new reality.",
+    "expected_parent_level_state_change": "Restore fail-closed exact consistency across CANONICAL_POINTER, ACTIVE_GOAL_HIERARCHY, FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE, the Opus 5.5 ownership frontier record, and REAL_OUTPUT_SCOREBOARD. Preserve strict terminal truth at 2/19 families and 7/38 atomic predicates, grant zero credit, and point the active frontier only to already-existing independent P1 V6/V7 and receipt-index V4 verification work with no fresh terminal replay.",
+    "stop_condition": "Stop when the trusted drift guard sees identical active target, blocker, next action, progress target, and active program across pointer, hierarchy, queue, target record, and scoreboard; JSON parses; no counters or acceptance credit change; and no task execution, fresh terminal evidence, or terminal replay occurs.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER is a zero-credit canonical control-plane repair; it does not select an external capability-acquisition route."
+    }
+  }
+}
