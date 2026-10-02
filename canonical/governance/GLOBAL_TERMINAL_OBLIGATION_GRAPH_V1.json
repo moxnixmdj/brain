@@ -216,7 +216,7 @@
         "AGENTIC_SCIENTIFIC_RESEARCH",
         "UNKNOWN_DOMAIN_ADAPTATION"
       ],
-      "remaining": "OPEN_DOMAIN_SEMANTIC_QUERY_GENERATION_FROM_RAW_OR_AMBIGUOUS_OBJECTIVES__SOURCE_TRUTH_AND_AUTHORITY_PRIORITIZATION_BEYOND_EXPLICIT_VERIFIED_METADATA__SUFFICIENCY_JUDGMENT_WHEN_REQUIREMENT_COVERAGE_IS_IMPLICIT",
+      "remaining": "NO_INDEPENDENT_M4_MECHANISM_RESIDUAL__REMAINING_END_TO_END_PARITY_DEPENDS_ON_M0_SEMANTIC_NORMALIZATION_AND_M3_OPEN_ENDED_DISCOVERY_WHERE_REQUIRED",
       "existing_evidence": [
         "canonical/capabilities/opus55/SHARED_BOUNDED_DECISION_PRIMITIVES_001.json",
         "canonical/capabilities/opus55/M4_DECISION_ROLE_RELEVANCE_001.json",
@@ -228,7 +228,14 @@
         "NORMALIZED_EXPLICIT_EVIDENCE_GAP_TO_DETERMINISTIC_QUERY_SET",
         "EXPLICIT_VERIFIED_SOURCE_METADATA_TO_PARETO_NONDOMINATED_FRONTIER"
       ],
-      "verified_bounded_research_frontier_receipt": "canonical/capabilities/opus55/M4_BOUNDED_RESEARCH_FRONTIER_001.json"
+      "verified_bounded_research_frontier_receipt": "canonical/capabilities/opus55/M4_BOUNDED_RESEARCH_FRONTIER_001.json",
+      "hole_type": "?P",
+      "dependency_compression": "canonical/reasoning/2026-10-02_M4_DEPENDENCY_COMPRESSION_V1.json",
+      "dependencies": [
+        "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+        "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL"
+      ],
+      "independent_mechanism_residual": false
     },
     {
       "id": "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
