@@ -5,6 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 ACTIVATION = ROOT / "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V2.json"
+LEGACY = ROOT / "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V1.json"
 
 
 def load(rel: str):
@@ -15,6 +16,7 @@ def main() -> int:
     activation = json.loads(ACTIVATION.read_text(encoding="utf-8"))
     frontier_path = activation["frontier"]
     frontier = load(frontier_path)
+    legacy = json.loads(LEGACY.read_text(encoding="utf-8"))
 
     errors = []
     status = str(frontier.get("status", ""))
@@ -38,11 +40,18 @@ def main() -> int:
         if required not in ids:
             errors.append("ACTIVE_FRONTIER_MISSING_REQUIRED_CERTIFICATE:" + required)
 
+    legacy_status = str(legacy.get("status", ""))
+    if "SUPERSEDED" not in legacy_status or "NONCANONICAL" not in legacy_status:
+        errors.append("LEGACY_FRONTIER_NOT_EXPLICITLY_SUPERSEDED")
+    if legacy.get("superseded_by") != frontier_path:
+        errors.append("LEGACY_FRONTIER_SUPERSESSION_POINTER_MISMATCH")
+
     out = {
         "status": "PASS" if not errors else "FAIL_CLOSED",
         "errors": errors,
         "frontier": frontier_path,
         "frontier_status": status,
+        "legacy_status": legacy_status,
         "unresolved_predicate_count": len(frontier.get("unresolved_predicates", [])),
         "certificate_count": len(frontier.get("certificates", [])),
     }
