@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "ZERO_REALITY_SATURATED__M0A_M1A_M1B_ALL_PROOF_ONLY__READY_TO_FREEZE_V6",
+  "status": "FROZEN_SHARED_MECHANISM_FRONTIER__M0A_M1A_M1B_ALL_PROOF_ONLY__V7_EXACT_CUT_READY",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -103,9 +103,9 @@
         "branch_result": "canonical/capabilities/opus55/M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_001.json",
         "contiguous_result": "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_RESULT_001.json",
         "lowrank_result": "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json",
-        "consequence": "NO_FURTHER_OLMO_HARVEST__MATCHED_PARITY_ONLY_IF_ADMITTED_BY_EXACT_CUT",
+        "consequence": "NO_FURTHER_OLMO_HARVEST__PROOF_ONLY",
         "lowrank_protocol": "canonical/evaluation/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_V1.json",
-        "lowrank_status": "FROZEN_BEFORE_RESULTS__DEV_ONLY__ZERO_CAPABILITY_CREDIT"
+        "lowrank_status": "COMPLETED__NO_SMALL_CAUSALLY_MATERIAL_LOWRANK_CAPSULE__HARVEST_STOPPED"
       },
       "donor_frontier": {
         "reconciliation": "canonical/reasoning/2026-10-02_M0A_SPECIALIZED_DONOR_FEASIBILITY_RECONCILIATION_V2.json",
@@ -291,7 +291,7 @@
     "M1A",
     "M1B"
   ],
-  "next": "FINISH_FROZEN_M0A_LOWRANK_CAUSAL_DIAGNOSTIC__COMPOSE_VERIFIED_BRAIN_OWNED_CONTEXTUAL_REFERENCE_AND_DISCOURSE_SLICES__IF_NO_SMALL_CAUSALLY_SUFFICIENT_RESIDUAL_EXISTS_MOVE_M0A_TO_PROOF_ONLY__THEN_FREEZE_V6_AND_RECOMPUTE_EXACT_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
+  "next": "FREEZE_FAITHFUL_V7_FROM_ALL_PROOF_ONLY_UNIVERSE__RUN_AND_VERIFY_EXACT_CUT__AUTHORIZE_ONLY_SELECTED_CLEAN_PROOF_BATCHES__THEN_RECOMPUTE_GLOBAL_17_FAMILY_PROOF_CUT",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -299,9 +299,8 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "note": "M0A zero-reality search saturated: deterministic contextual/operator/predicate-argument slices verified; FastCoref partial; RST/DPLP/AllenNLP routes non-dominating fallbacks; OLMo contiguous and low-rank causal harvests found no small material capsule. M0A, M1A and M1B are now proof-only.",
-    "supersedes": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json",
-    "m0a_lowrank_result": "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json"
+    "note": "M0A M1A and M1B zero-reality implementation frontiers are saturated and proof-only. M0A contiguous and low-rank OLMo harvests are terminated; bounded contextual reference and predicate-argument mechanisms are verified. V6 was invalidated by a post-freeze source-universe blob change. Freeze V7 from this exact blob.",
+    "supersedes": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json"
   },
   "combined_evaluation_candidates": [
     {
@@ -320,10 +319,9 @@
       ]
     }
   ],
-  "active_zero_reality_mechanism_blockers": [
-    "M0A"
-  ],
+  "active_zero_reality_mechanism_blockers": [],
   "proof_only_obligations": [
+    "M0A",
     "M1A",
     "M1B"
   ]
