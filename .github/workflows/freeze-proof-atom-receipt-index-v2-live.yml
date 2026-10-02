@@ -1,0 +1,47 @@
+name: Freeze proof atom receipt index v2 live corpus
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/freeze-proof-atom-receipt-index-v2-live.yml"
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify V2 indexer tests
+        run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+      - name: Compute exact live-corpus index
+        run: |
+          python canonical/runtime/proof_atom_receipt_index_v2.py > /tmp/proof_atom_receipt_index_v2_live.json
+          python - <<'PY'
+          import json
+          p=json.load(open("/tmp/proof_atom_receipt_index_v2_live.json",encoding="utf-8"))
+          assert p["status"].startswith("PASS"),p
+          assert p["canonical_atom_count"]==40,p
+          assert p["capability_credit_delta"]==0
+          assert p["family_credit_delta"]==0
+          assert p["execution_authority"] is False
+          assert p["promotion_authority"] is False
+          print("LIVE_INDEX_SUMMARY_BEGIN")
+          print(json.dumps({
+            "canonical_atom_count":p["canonical_atom_count"],
+            "canonical_atom_manifest_sha256":p.get("canonical_atom_manifest_sha256"),
+            "scanned_file_count":p["scanned_file_count"],
+            "scanned_corpus_manifest_sha256":p.get("scanned_corpus_manifest_sha256"),
+            "candidate_match_count":p["candidate_match_count"],
+            "atoms_with_candidate_matches":p["atoms_with_candidate_matches"],
+            "atoms_without_candidate_matches":p["atoms_without_candidate_matches"],
+            "atoms_with_truncated_candidate_lists":p.get("atoms_with_truncated_candidate_lists",0),
+            "candidate_matches_by_source_class":p["candidate_matches_by_source_class"],
+          },sort_keys=True))
+          print("LIVE_INDEX_SUMMARY_END")
+          print("LIVE_INDEX_JSON_BEGIN")
+          print(json.dumps(p,sort_keys=True,separators=(",",":")))
+          print("LIVE_INDEX_JSON_END")
+          PY
