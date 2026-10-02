@@ -31,20 +31,37 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Run fail-closed reducer regressions
+      - name: Capture regressions and derived authority
+        shell: bash
         run: |
-          set -euo pipefail
-          PYTHONPATH=. python -m unittest -v canonical.tests.test_terminal_wave_launch_authority_reducer_v1 canonical.tests.test_terminal_parent_portfolio_launcher_v1
-      - name: Derive authority from exact current state
+          set +e
+          mkdir -p /tmp/terminal-authority-diagnostic
+          PYTHONPATH=. python -m unittest -v canonical.tests.test_terminal_wave_launch_authority_reducer_v1 canonical.tests.test_terminal_parent_portfolio_launcher_v1 > /tmp/terminal-authority-diagnostic/tests.txt 2>&1
+          echo "$?" > /tmp/terminal-authority-diagnostic/tests.rc
+          PYTHONPATH=. python canonical/runtime/terminal_wave_launch_authority_reducer_v1.py . > /tmp/terminal-authority-diagnostic/authority.json 2> /tmp/terminal-authority-diagnostic/authority.err
+          echo "$?" > /tmp/terminal-authority-diagnostic/reducer.rc
+          cat /tmp/terminal-authority-diagnostic/tests.txt
+          cat /tmp/terminal-authority-diagnostic/authority.json
+          cat /tmp/terminal-authority-diagnostic/authority.err
+          exit 0
+      - name: Upload diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terminal-launch-authority-diagnostic
+          path: /tmp/terminal-authority-diagnostic
+          if-no-files-found: error
+          retention-days: 1
+      - name: Enforce authority gate
         shell: bash
         run: |
           set -euo pipefail
-          PYTHONPATH=. python canonical/runtime/terminal_wave_launch_authority_reducer_v1.py . > /tmp/terminal-launch-authority.json
-          cat /tmp/terminal-launch-authority.json
+          test "$(cat /tmp/terminal-authority-diagnostic/tests.rc)" = "0"
+          test "$(cat /tmp/terminal-authority-diagnostic/reducer.rc)" = "0"
           python - <<'PY'
           import json
           from pathlib import Path
-          out=json.loads(Path("/tmp/terminal-launch-authority.json").read_text())
+          out=json.loads(Path("/tmp/terminal-authority-diagnostic/authority.json").read_text())
           assert out.get("pass") is True, out
           assert out.get("launch_authority") is True, out
           assert out.get("execution_authority") is True, out
