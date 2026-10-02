@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__11_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_PREWAVE_ADMISSIBLE__12_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__GLOBAL_EXECUTION_AUTHORITY_REDERIVATION_PENDING",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -38,14 +38,10 @@
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
       "portfolio": "T0",
-      "proof_state": "PREWAVE_REOPENED__CURRENT_SOURCE_ONLY_CANDIDATE_FALSIFIED_BY_RENDER_EQUIVALENT_SVG_SOURCE_STRUCTURE_MUTATION__ANTI_SHORTCUT_REPAIR_REFREEZE_REVERIFY_REQUIRED",
+      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
       "route_requirement": "END_TO_END_DRAWING_TO_SOLID_WITH_HIDDEN_GLOBAL_GEOMETRY_ORACLE_AND_IDENTIFIABILITY_GATE",
-      "blockers": [
-        "CAD_RENDER_EQUIVALENT_SOURCE_STRUCTURE_ANTISHORTCUT_FAILURE",
-        "CAD_CANDIDATE_DEPENDENCY_CONE_REFREEZE_AFTER_REPAIR",
-        "CAD_POST_REFREEZE_BINDING_REVALIDATION_AND_INDEPENDENT_VERIFICATION"
-      ],
-      "route": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json",
+      "blockers": [],
+      "route": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json",
       "candidate": "canonical/runtime/cad_t0_route_specific_candidate_v1.py",
       "independent_preflight": "canonical/verification/CAD_ORTHOGRAPHIC_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "terminal_route": "canonical/governance/CAD_ACTIVE_CONTRACT_END_TO_END_PROOF_ROUTE_V1.json",
@@ -72,13 +68,15 @@
       "candidate_contamination_rule": "PRE_BRIDGE_FREEZE_IS_SPENT_DIAGNOSTIC_ONLY_AFTER_RUNTIME_CHANGE__PROMOTION_REQUIRES_FRESH_CLEAN_REFREEZE_AND_POST_FREEZE_CASES",
       "positioned_ocr_bridge_verification": "canonical/verification/M1A_POSITIONED_OCR_TSV_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "positioned_ocr_bridge_state": "CLOSED_PREWAVE_INTERFACE_COMPONENT",
-      "prewave_admissible": false,
-      "clean_candidate_refreeze": "canonical/governance/CAD_T0_CANDIDATE_FREEZE_V2.json",
-      "post_refreeze_binding": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json",
-      "post_refreeze_independent_verification": "canonical/verification/CAD_T0_POST_REFREEZE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "prewave_admissible": true,
+      "clean_candidate_refreeze": "canonical/governance/CAD_T0_CANDIDATE_FREEZE_V4.json",
+      "post_refreeze_binding": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json",
+      "post_refreeze_independent_verification": "canonical/verification/CAD_T0_POST_REFREEZE_BINDING_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "terminal_results_observed": 0,
       "fresh_terminal_evidence_consumed": 0,
-      "antishortcut_falsification": "canonical/verification/CAD_T0_SOURCE_STRUCTURE_ANTISHORTCUT_FALSIFICATION_20261002_V1.json"
+      "antishortcut_falsification": "canonical/verification/CAD_T0_SOURCE_STRUCTURE_ANTISHORTCUT_FALSIFICATION_20261002_V1.json",
+      "antishortcut_repair_verification": "canonical/verification/CURRENT_EXECUTOR_SNAPSHOT_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "antishortcut_falsification_disposition": "SUPERSEDED_FOR_CURRENT_CANDIDATE_BLOB_AA32750B__HISTORICAL_FALSIFICATION_RETAINED"
     },
     {
       "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
@@ -337,7 +335,7 @@
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 12,
   "execution_authority": false,
-  "next": "REPAIR_CAD_RENDER_EQUIVALENT_ANTI_SHORTCUT_FAILURE__REFREEZE_AND_REVERIFY_CAD__RECOMPUTE_PREQUALIFICATION__NO_TERMINAL_BEACON_BEFORE_12_OF_12",
+  "next": "REVERIFY_CURRENT_CAD_EXECUTOR_BINDING__SYNCHRONIZE_PREQUALIFICATION__INDEPENDENTLY_REDERIVE_GLOBAL_TERMINAL_WAVE_AUTHORITY__ONLY_THEN_CREATE_POST_FREEZE_BEACON",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
