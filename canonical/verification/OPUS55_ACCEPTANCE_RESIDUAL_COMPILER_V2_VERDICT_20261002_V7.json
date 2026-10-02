@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V7",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SATURATION_COMPLETE__7_PROVED__1_OPEN__30_BLOCKED__ZERO_CREDIT",
+  "supersedes_for_current_frontier": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V6.json",
+  "inputs": {
+    "compiler": {
+      "path": "canonical/runtime/opus55_acceptance_residual_compiler_v2.py",
+      "git_blob_sha": "cae5bc3bfda9c77d7d7e5151127f55aafddb9522"
+    },
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "cd15b26246771cc0fa7a38fddfa267b05795add0"
+    },
+    "comparator": {
+      "path": "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json",
+      "git_blob_sha": "f67e22cee5e6fce1ebfae92ebf0946f78fafcee1"
+    },
+    "readiness": {
+      "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+      "git_blob_sha": "bad3ddf9aefc0340f2a5408a2e1e606ceaa6f4c4"
+    }
+  },
+  "result": {
+    "receipt_saturation_complete": true,
+    "predicate_count": 38,
+    "proved_predicate_count": 7,
+    "open_predicate_count": 1,
+    "blocked_predicate_count": 30,
+    "authorized_actions": [
+      {
+        "predicate_id": "AUTOMATIONBENCH_GE_40",
+        "family": "BUSINESS_WORKFLOW_AUTOMATION",
+        "action_class": "RUN_PUBLIC_FIXED_BAR",
+        "execution_authorized": true
+      }
+    ],
+    "terminal_promotion_allowed": false
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 841,
+    "merge_commit": "7c265d5932db0590ed1295df8498aeba8bda95ed",
+    "workflow_run_id": 36997019180,
+    "workflow_job_id": 110805949119,
+    "conclusion": "success",
+    "exact_compiler_replay": true
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
