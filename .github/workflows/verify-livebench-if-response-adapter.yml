@@ -1,0 +1,26 @@
+name: Verify LiveBench IF response adapter
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/livebench_if_response_adapter.py
+      - canonical/tests/test_livebench_if_response_adapter.py
+      - .github/workflows/verify-livebench-if-response-adapter.yml
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/livebench_if_response_adapter.py
+      - canonical/tests/test_livebench_if_response_adapter.py
+      - .github/workflows/verify-livebench-if-response-adapter.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_livebench_if_response_adapter
