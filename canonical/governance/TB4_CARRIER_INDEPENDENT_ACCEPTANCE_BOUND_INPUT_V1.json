@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CARRIER_INDEPENDENT_ACCEPTANCE_BOUND_INPUT_V1",
+  "metric_semantics_frozen": true,
+  "population_frozen": true,
+  "worst_case_assignment_admissible": true,
+  "metric_type": "BINARY_RATE",
+  "total_slots": 330,
+  "executable_slots": 215,
+  "observed_successes": 0,
+  "observed_failures": 0,
+  "threshold_percent": 66.4,
+  "derivation_manifest": "canonical/governance/TB4_CARRIER_INDEPENDENT_BOUND_MANIFEST_V1.json",
+  "interpretation": "EXECUTABLE_SLOTS_IS_AN_OPTIMISTIC_CARRIER_INDEPENDENT_CREDITABLE_SLOT_CEILING__NOT_CURRENT_HARDWARE_CAPACITY"
+}
