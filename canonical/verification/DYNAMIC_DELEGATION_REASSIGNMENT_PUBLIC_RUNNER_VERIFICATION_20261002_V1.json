@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_DYNAMIC_DELEGATION_REASSIGNMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__INFORMATION_SAFE_RECEIPT_DRIVEN_REASSIGNMENT_PREFLIGHT__ZERO_TERMINAL_CREDIT",
+  "behavior_contract": "TASK_TO_DELEGATION_GRAPH_001",
+  "brain_merge_commit": "39e480e9b9df447205083a8cda2fa9898a3bc7e2",
+  "exact_brain_blobs": {
+    "canonical/runtime/delegation_dynamic_reassignment_proof.py": "22c895badc21dc7a3a226117ff45a8418c58dd53",
+    "canonical/runtime/delegation_dynamic_reassignment_candidate.py": "41329226d68fe195df9f189781734d5a3208066f",
+    "canonical/tests/test_delegation_dynamic_reassignment_proof.py": "5be41bfffe1611a7ddbb57e57e54a663b373a3e0",
+    "canonical/runtime/m3_contract_task_decomposition.py": "90702f9b4c5b53ba2b29eff4faa7741474bd4529",
+    "canonical/runtime/shared_decision_primitives.py": "794e8d1ca9525564b592ffc3af899037183ef655"
+  },
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 548,
+  "public_merge_commit": "b3423c6092890b12adc23708bb1d87f3dd752a37",
+  "workflow_run_id": 36959256300,
+  "workflow_job_id": 110689052550,
+  "workflow_conclusion": "success",
+  "verified": [
+    "WORKER_UNAVAILABLE_RECEIPT_CAUSES_REASSIGNMENT",
+    "STEP_UNAVAILABLE_RECEIPT_CAUSES_REPARTITION_TO_BACKUP_STEP",
+    "WORKER_CAPABILITY_LOSS_CAUSES_COMPATIBLE_REASSIGNMENT",
+    "COMPLETED_WORK_REPLAY_REJECTED",
+    "RECEIPT_PROVENANCE_REQUIRED",
+    "NONOPTIMAL_REPLAN_REJECTED",
+    "EXACT_BRAIN_BLOB_HASHES_VERIFIED"
+  ],
+  "limitations": [
+    "PREFLIGHT_ONLY__NOT_POST_FREEZE_TERMINAL_POPULATION",
+    "BOUNDED_EXPLICIT_TASK_CONTRACT_POPULATION",
+    "SCOPE_EQUIVALENCE_GATE_V2_FOR_WHOLE_CONTRACT_STILL_REQUIRED"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
