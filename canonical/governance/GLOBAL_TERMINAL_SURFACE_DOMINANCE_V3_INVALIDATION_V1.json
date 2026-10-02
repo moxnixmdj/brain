@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_INVALIDATION_V1",
+  "date": "2026-10-02",
+  "status": "INVALIDATED_FOR_GLOBAL_EXECUTION_AUTHORITY__ACTIVE_CONTRACT_COVERAGE_10_OF_12__PARTIAL_ROUTE_DOMINANCE_EVIDENCE_PRESERVED",
+  "invalidated_claim": "ALL_14_NAMED_BENCHMARK_SURFACES_REDUNDANT_AS_REQUIRED_EXECUTION_ROUTES_FOR_COMPLETE_TERMINAL_OBJECTIVE",
+  "preserved_claim": "FOR_THE_10_OBLIGATIONS_EXPLICITLY_PRESENT_IN_V3_INPUT__THE_INDEPENDENT_DOMINANCE_VERDICT_REMAINS_VALID",
+  "source_bindings": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
+      "active_contract_count": 12
+    },
+    "dominance_input_v3": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V3.json",
+      "blob_sha": "931bdd17e6351477281dd81492521f9337de5121",
+      "obligation_count": 10
+    },
+    "dominance_verdict_v3": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_VERDICT_V3.json",
+      "blob_sha": "410220dccffc38bcfd0d2e6b05f6b419694d688f"
+    }
+  },
+  "missing_active_contracts": [
+    {
+      "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "disposition": "OPEN_PROOF_ONLY__NOT_COVERED_BY_V3_DOMINANCE_BASIS",
+      "evidence": [
+        "canonical/capabilities/opus55/CAD_MODEL_TB4_SPENT_CAUSAL_DECOMPOSITION_20261001_V1.json",
+        "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V2.json",
+        "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json"
+      ]
+    },
+    {
+      "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+      "disposition": "NARROW_OWNED_COMPONENT_EXISTS__FULL_ACTIVE_CONTRACT_NOT_COVERED_BY_V3_DOMINANCE_BASIS",
+      "evidence": [
+        "canonical/capabilities/opus55/SACCR_CREDIT_KERNEL_001.json",
+        "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
+      ]
+    }
+  ],
+  "causal_error": "COMPLETENESS_RECEIPT_CHECKED_ALL_FAMILY_REFERENCES_RESOLVE_TO_ACTIVE_CONTRACTS_BUT_DID_NOT_CHECK_REVERSE_COVERAGE_OF_ALL_ACTIVE_CONTRACTS_BY_TERMINAL_FAMILY_PROOF_BASIS",
+  "mandatory_repair": [
+    "FAIL_CLOSED_TERMINAL_PREQUALIFICATION_WHEN_ANY_ACTIVE_CONTRACT_IS_ABSENT_FROM_TERMINAL_PROOF_BASIS",
+    "REBUILD_GLOBAL_SURFACE_DOMINANCE_FROM_ALL_12_ACTIVE_CONTRACTS_OR_EXPLICITLY_VERIFIED_TERMINAL_DISPOSITIONS",
+    "BIND_CAD_CONTRACT_TO_T0_GEOMETRY_PROOF_SCOPE",
+    "BIND_SA_CCR_CONTRACT_TO_T1_FINANCIAL_PROOF_SCOPE",
+    "RECOMPUTE_DOMINANCE_AND_PREQUALIFICATION_BEFORE_ANY_FRESH_TERMINAL_WAVE"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
