@@ -1,0 +1,16 @@
+{
+  "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+  "blobs": {
+    "canonical/runtime/saccr_credit_information_safe_candidate.py": "ff2fa256738ffbe5b15bb813a11c82046692b5e8",
+    "canonical/runtime/saccr_credit_kernel.py": "4a9536a391e21ec9895c1abdf45a673c0451ba3a"
+  },
+  "candidate_entrypoint": "canonical/runtime/saccr_credit_information_safe_candidate.py::solve",
+  "candidate_receives_hidden_oracle": false,
+  "candidate_receives_reference_solution": false,
+  "date": "2026-10-02",
+  "mutation_after_freeze_forbidden": true,
+  "opaque_target_capability_provider": false,
+  "ownership": "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_NONOPAQUE",
+  "schema": "PROJECT_BRAIN_TERMINAL_CANDIDATE_BLOB_MANIFEST_V1",
+  "status": "FROZEN_PRE_BEACON"
+}
