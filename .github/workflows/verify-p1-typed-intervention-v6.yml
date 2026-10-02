@@ -1,0 +1,39 @@
+name: Verify P1 V6 execution-based intervention replay
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py"
+      - "canonical/tests/test_trajectory_failure_typed_ir_v6.py"
+      - "canonical/governance/P1_EXECUTION_REPLAY_INTERVENTION_ENVELOPE_V6.json"
+      - "canonical/governance/P1_V5_RESCUE_CLAIM_QUARANTINE_V1.json"
+      - ".github/workflows/verify-p1-typed-intervention-v6.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run P1 V6 execution-replay tests
+        run: python -m unittest canonical.tests.test_trajectory_failure_typed_ir_v6 -v
+      - name: Execute full V6 proof matrix
+        run: |
+          python - <<'PY'
+          from canonical.runtime import trajectory_failure_typed_ir_candidate_v5 as candidate
+          from canonical.runtime import trajectory_failure_typed_ir_proof_v6 as proof
+          cases=proof.suite_cases()
+          assert len(cases)==192
+          failures=[]
+          for case in cases:
+              out=candidate.solve(proof.public_task(case))
+              verdict=proof.score_case(case,out)
+              if verdict.get("pass") is not True:
+                  failures.append((case["seed"], verdict, out))
+          assert failures==[], failures
+          print({"status":"PASS","cases":len(cases),"credit_delta":0})
+          PY
