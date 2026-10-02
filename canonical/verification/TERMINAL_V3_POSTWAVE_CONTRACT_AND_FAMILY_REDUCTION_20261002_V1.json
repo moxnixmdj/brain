@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__12_OF_12_TERMINAL_CONTRACTS_PASS__19_OF_19_PROVISIONAL_FAMILY_ROWS_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_REMAIN",
+  "source_terminal_result": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+  "source_full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+  "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+  "post_freeze_beacon": "36977020853",
+  "reducers": {
+    "contract": {
+      "path": "canonical/runtime/terminal_contract_result_reducer_v1.py",
+      "blob_sha": "6c3dffe0dab22efb155945ddc81d14ef7ab891f5"
+    },
+    "family": {
+      "path": "canonical/runtime/terminal_family_adjudication_reducer_v1.py",
+      "blob_sha": "183b21005084343bfaad65dd0efa9b1b27054d41"
+    }
+  },
+  "semantic_inputs": {
+    "behavioral_contract_registry_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "opus55_terminal_proof_protocols_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "terminal_closure_manifest_input_blob_sha": "813f0c7d89c2e67228589c47cb76bb9ee8ec175c"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 800,
+    "head_sha": "f14d6cc9685d5c1fd2eb60444b4efae746acf5b2",
+    "workflow_run_id": 36978438396,
+    "workflow_job_id": 110747302593,
+    "conclusion": "success"
+  },
+  "contract_verdict": {
+    "valid": true,
+    "contract_count": 12,
+    "contract_pass_count": 12,
+    "all_contracts_pass": true,
+    "passed_contracts": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "TASK_TO_DELEGATION_GRAPH_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    ],
+    "failed_contracts": [],
+    "errors": []
+  },
+  "family_verdict": {
+    "valid": true,
+    "family_count": 19,
+    "family_pass_count": 19,
+    "all_families_pass": true,
+    "passed_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "ARTIFACT_CREATION",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "COMPUTER_AND_BROWSER_USE",
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "FINANCIAL_ANALYSIS",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    ],
+    "failed_families": [],
+    "basis": "2_PREEXISTING_VERIFIED_PASS_PLUS_17_CONJUNCTIONS_OF_MAPPED_TERMINAL_BEHAVIORAL_CONTRACTS"
+  },
+  "global_ownership_postconditions_still_required": [
+    "DONOR_DEPENDENT_REQUIRED_BEHAVIORS_ZERO",
+    "UNRESOLVED_VERIFIER_MUTATIONS_ZERO",
+    "UNRESOLVED_COMPOSITION_FAILURES_ZERO",
+    "CONTAMINATED_PROMOTION_EVIDENCE_ZERO",
+    "RESOURCE_OR_AUTHORITY_VIOLATIONS_ZERO",
+    "FINAL_DONOR_DELETION_CLEANROOM_PASS",
+    "PROOF_BUNDLE_FROZEN"
+  ],
+  "terminal_results_observed": 1,
+  "fresh_terminal_evidence_consumed": 3352,
+  "terminal_replay_permitted": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "FAMILY_PASS_IS_PROVISIONAL_BEHAVIORAL_ADJUDICATION__TERMINAL_OWNERSHIP_REQUIRES_GLOBAL_CLOSURE_REDUCER_PASS"
+}
