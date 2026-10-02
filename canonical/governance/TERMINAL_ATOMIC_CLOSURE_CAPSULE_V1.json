@@ -1,17 +1,17 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ATOMIC_CLOSURE_CAPSULE_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREBEACON_CONTENT_ADDRESSED_PACKAGE__CURRENT_AUTHORITY_GATE_REQUIRED__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_PREBEACON_CONTENT_ADDRESSED_PACKAGE__CURRENT_12_ROUTE_AUTHORITY_SYNCHRONIZED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_TERMINAL_RESULTS",
   "objective": "Seal the exact pre-beacon terminal execution package so unrelated repository drift cannot change candidate identity between authority derivation and one-shot terminal execution.",
   "commitment_rule": "SHA256('PROJECT_BRAIN_TERMINAL_ATOMIC_CLOSURE_CAPSULE_V1\\0' || sorted(path || '\\0' || git_blob_sha, joined by '\\n'))",
-  "package_commitment": "5a381717bdbeca8c44243693502dadc99106228259e9b8ecdeb364e17a83d9f8",
+  "package_commitment": "63ad9e733a72d1a442e322481ab8c28184cbd2d66ffa7fd1d61cb58d04311771",
   "critical_blobs": {
     "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json": "9c60356ab509a16df5104777f360b9fb18255842",
     "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "afa00109031d638fef32cc3fe10be18786605c39",
     "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json": "d1dc7f28738ba24a3ca5919755e03190fbf30939",
     "canonical/governance/TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1.json": "5ff24e390056ba8e980ad3b88116149869ee85ce",
     "canonical/governance/TERMINAL_PARENT_LAUNCHER_BINDING_V1.json": "eeb258f6376bf06b8b1151d74d9262699fe5202d",
-    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "e90ad37c122899fc2de567bcfda054803ffc9c36",
+    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "62e888a0ca582306dc1125521178466767c8cd5e",
     "canonical/runtime/terminal_parent_portfolio_launcher_v1.py": "f5a94b07ac48d05ec90aa062ab567e4aa608f2fc",
     "canonical/runtime/terminal_prequalification_reducer.py": "da929015fafabed2b5a134a2e95b6bff2f47349c",
     "canonical/runtime/terminal_wave_launch_authority_reducer_v1.py": "48ceab4c3e97b80f25d1ae648348b5c86ad0ba54",
@@ -48,5 +48,6 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "next": "REQUIRE_CURRENT_AUTHORITY_GATE_PASS__INDEPENDENTLY_VERIFY_THIS_EXACT_CAPSULE_COMMITMENT__THEN_CREATE_ONE_POST_FREEZE_BEACON_AND_EXECUTE_ONCE"
+  "next": "INDEPENDENTLY_VERIFY_THIS_EXACT_CURRENT_CAPSULE_COMMITMENT__THEN_CREATE_ONE_POST_FREEZE_BEACON_AND_EXECUTE_ONCE",
+  "refreeze_reason": "REPAIR_SINGLE_BLOB_RACE__ROUTE_SPECIFIC_EXECUTOR_MANIFEST_AUTHORITY_SYNCHRONIZED_AFTER_INITIAL_CAPSULE_SOURCE_SNAPSHOT__ZERO_TERMINAL_RESULTS_CONSUMED"
 }
