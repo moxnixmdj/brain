@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CAD_M1A_POSITIONED_OCR_INTERFACE_GAP_20261002_V1",
   "date": "2026-10-02",
-  "status": "BRIDGE_IMPLEMENTED__INDEPENDENT_VERIFICATION_AND_CLEAN_CANDIDATE_REFREEZE_PENDING__ZERO_TERMINAL_RESULTS",
+  "status": "STATIC_INTERFACE_DEFECT_REPAIRED_AND_INDEPENDENTLY_VERIFIED__SPENT_PRIOR_CASE_PRESERVED__ZERO_TERMINAL_RESULTS",
   "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
   "affected_obligation": "M1A_DRAWING_TO_NORMALIZED_VIEW_AND_FEATURE_CONSTRAINT_GRAPH",
   "evidence": {
@@ -74,5 +74,13 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "resolution": {
+    "residual": "M1A_PINNED_POSITIONED_OCR_TSV_BRIDGE",
+    "status": "CLOSED_PREWAVE_INTERFACE_COMPONENT",
+    "implementation": "canonical/runtime/bound_capabilities/image_ocr_tesseract_positioned.py",
+    "verification": "canonical/verification/M1A_POSITIONED_OCR_TSV_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "exact_runtime_blob": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
+    "fresh_promotion_case_required": true
+  }
 }
