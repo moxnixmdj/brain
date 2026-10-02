@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_INDEPENDENT_VERIFICATION_CARRIER_FALLBACK_V1",
+  "date": "2026-10-02",
+  "status": "CANONICAL_ACTIVE_FAIL_CLOSED",
+  "objective": "PRESERVE_INDEPENDENT_VERIFICATION_WHEN_PRIVATE_BRAIN_GITHUB_ACTIONS_FAILS_BEFORE_RUNNER_ASSIGNMENT_WITHOUT_CONFLATING_CARRIER_FAILURE_WITH_CODE_FAILURE",
+  "primary_carrier": {
+    "repository": "moxnixmdj/brain",
+    "mechanism": "GitHub Actions",
+    "current_health": "DEGRADED__NEW_JOBS_OBSERVED_FAILING_BEFORE_RUNNER_ASSIGNMENT",
+    "evidence": [
+      {
+        "workflow_run_id": 36954360046,
+        "job_id": 110673926338,
+        "runner_id": 0,
+        "runner_name": "",
+        "steps": 0,
+        "conclusion": "failure"
+      },
+      {
+        "workflow_run_id": 36954346821,
+        "conclusion": "failure"
+      },
+      {
+        "workflow_run_id": 36954242142,
+        "conclusion": "failure"
+      }
+    ],
+    "interpretation": "CARRIER_FAILURE_ONLY_WHEN_RUNNER_ID_ZERO_AND_NO_STEPS__DO_NOT_INFER_CODE_FAILURE"
+  },
+  "fallback_carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "visibility": "public",
+    "allowed_payload": "MINIMUM_NONSECRET_SOURCE_TEST_FIXTURE_CAPSULE_ONLY__NO_TERMINAL_CASES__NO_PRIVATE_HELDOUT_DATA__NO_SECRETS",
+    "binding_requirements": [
+      "EXACT_BRAIN_SOURCE_BLOB_SHA_BOUND",
+      "EXACT_BRAIN_TEST_BLOB_SHA_BOUND",
+      "PINNED_ACTION_REVISIONS",
+      "INDEPENDENT_RUN_ID_AND_JOB_IDS_RECORDED",
+      "MERGED_OR_IMMUTABLY_REFERENCED_VERIFICATION_COMMIT_RECORDED"
+    ],
+    "successful_reference": {
+      "public_pr": 476,
+      "workflow_run_id": 36954591954,
+      "jobs": [
+        110674645504,
+        110674645632
+      ],
+      "merge_commit": "662b53519d546f923de6f77db7f4d8a008ae0592",
+      "receipt": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    }
+  },
+  "routing_rule": [
+    "RUN_CHEAP_LOCAL_OR_STATIC_PREFLIGHT_FIRST",
+    "ATTEMPT_PRIMARY_INDEPENDENT_CARRIER_ONCE_WHEN_HEALTHY",
+    "IF_JOB_FAILS_BEFORE_RUNNER_ASSIGNMENT_CLASSIFY_AS_CARRIER_FAILURE_NOT_ARTIFACT_FAILURE",
+    "DO_NOT_REPEAT_IDENTICAL_PRIVATE_CARRIER_ATTEMPT_WITHOUT_HEALTH_CHANGE",
+    "USE_PUBLIC_FALLBACK_ONLY_FOR_MINIMUM_DISCLOSABLE_HASH_BOUND_CAPSULE",
+    "BIND_SUCCESS_RECEIPT_BACK_TO_PRIVATE_BRAIN",
+    "TERMINAL_CASE_EXPOSURE_REMAINS_GOVERNED_BY_PREQUALIFICATION_AND_IS_NOT_AUTHORIZED_BY_CARRIER_FAILOVER"
+  ],
+  "forbidden": [
+    "PUBLISH_SECRETS_PRIVATE_HELDOUT_CASES_OR_UNNECESSARY_BRAIN_CONTENT",
+    "COUNT_CARRIER_FAILURE_AS_NEGATIVE_CAPABILITY_EVIDENCE",
+    "COUNT_FALLBACK_TEST_PASS_AS_FAMILY_OR_TERMINAL_CAPABILITY_CREDIT",
+    "RETRY_DEAD_PRIVATE_CARRIER_IN_A_TIGHT_LOOP"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
