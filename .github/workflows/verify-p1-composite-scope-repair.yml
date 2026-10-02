@@ -1,0 +1,24 @@
+name: Verify P1 composite scope repair
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/p1_composite_scope_repair_verifier_v1.py"
+      - "canonical/tests/test_p1_composite_scope_repair_v1.py"
+      - "canonical/governance/P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_V1.json"
+      - ".github/workflows/verify-p1-composite-scope-repair.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify exact composite proof partition
+        run: python -m unittest -v canonical.tests.test_p1_composite_scope_repair_v1
