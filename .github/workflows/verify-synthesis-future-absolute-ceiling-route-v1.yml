@@ -13,20 +13,38 @@ permissions:
   contents: read
 
 jobs:
-  verify-native:
+  runner-smoke:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Native runner smoke
+        run: |
+          python3 --version
+          git --version
+
+  clone-smoke:
     runs-on: ubuntu-24.04
     env:
       GH_TOKEN: ${{ github.token }}
       HEAD_REF: ${{ github.head_ref }}
       REPOSITORY: ${{ github.repository }}
     steps:
-      - name: Clone PR head without marketplace actions
+      - name: Native private clone smoke
         run: |
           git clone --depth 1 --branch "$HEAD_REF" "https://x-access-token:$GH_TOKEN@github.com/$REPOSITORY.git" repo
-      - name: Native Python verification
+          test -f repo/canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
+
+  verify-native:
+    needs: [runner-smoke, clone-smoke]
+    runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+      HEAD_REF: ${{ github.head_ref }}
+      REPOSITORY: ${{ github.repository }}
+    steps:
+      - name: Clone and verify
         run: |
+          git clone --depth 1 --branch "$HEAD_REF" "https://x-access-token:$GH_TOKEN@github.com/$REPOSITORY.git" repo
           cd repo
-          python3 --version
           python3 -m py_compile canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
           python3 -m unittest canonical.tests.test_synthesis_future_absolute_ceiling_route_v1 -v
           python3 canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
