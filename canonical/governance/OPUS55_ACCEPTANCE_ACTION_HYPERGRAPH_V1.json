@@ -33,6 +33,38 @@
       "notes": "Before generic stronger-proof search or exact comparator work, normalize candidate and target scopes into explicit atoms/bounds and derive only verified implications. No semantic-equivalence claim may be invented by the algebra."
     },
     {
+      "id": "RUN_FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
+      "action_class": "PROOF_COMPRESSION",
+      "effect": "REDUCES_OR_CLOSES",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "preconditions": [
+        {
+          "id": "DIFFERENTIAL_DOMINANCE_COMPILER_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/DIFFERENTIAL_DOMINANCE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        },
+        {
+          "id": "MATCHED_TARGET_NORMALIZATION_INDEPENDENT_PASS",
+          "satisfied": false,
+          "evidence": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json"
+        },
+        {
+          "id": "COMPLETE_FROZEN_FINITE_SHARED_CRITERION_SCOPE_AVAILABLE_PER_TARGET",
+          "satisfied": false
+        }
+      ],
+      "notes": "Run only after target normalization is independently verified and a complete frozen finite shared-criterion case universe is content-addressed. Eliminate comparator-success/Brain-failure cases before exact comparator execution. Candidate witness still requires independent exact-scope verification and ordinary acceptance evidence binding. Public bars and separate safety/scope invariants are not substituted."
+    },
+    {
       "id": "RUN_EPISTEMIC_CLOSURE_DIRECT_JUDGMENT_SUBTRACTION",
       "action_class": "PROOF_COMPRESSION",
       "effect": "REDUCES",
@@ -284,7 +316,9 @@
     "delegation_transport_verification": "canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "delegation_transmutation_verification": "canonical/verification/DELEGATION_TEMPORAL_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "proof_compression_kernels": "ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_PRECEDES_COMPARATOR_JUDGMENT_AND_COMPOSITION_WORK",
-    "proof_compression_verification": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    "proof_compression_verification": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "differential_dominance_compiler": "ACTIVE_PENDING_TARGET_NORMALIZATION_AND_SCOPE_INPUTS__INDEPENDENT_IMPLEMENTATION_PASS__ZERO_CREDIT",
+    "differential_dominance_verifier": "verification-capsule-runner PR888__RUN37009287824__JOB110844881495__PASS"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",

@@ -53,6 +53,7 @@
     "NORMALIZED_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
     "EPISTEMIC_CLOSURE_AND_MINIMUM_DISCRIMINATOR",
     "LOAD_BEARING_COMPONENT_PROOF_SLICING",
+    "FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
     "COUNTERFACTUAL_TERMINAL_COMPILATION",
     "IMPOSSIBILITY_AND_DOMINANCE_DELETION",
     "EXACT_MINIMUM_UNBLOCK_CUT",
@@ -85,6 +86,7 @@
     "NORMALIZED_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
     "EPISTEMIC_IDENTIFIABILITY_AND_MINIMUM_DISCRIMINATOR",
     "LOAD_BEARING_COMPONENT_PROOF_SLICING",
+    "FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
     "DETERMINISTIC_COUNTEREXAMPLES",
     "HISTORICAL_SPENT_CASES",
     "ADVERSARIAL_SPENT_CASES",
@@ -179,7 +181,9 @@
     "minimum_internal_unblock_cut_required": true,
     "external_comparator_irreducibility_must_be_proven_relative_to_frozen_routes": true,
     "proof_compression_kernels_required": true,
-    "proof_compression_activation": "canonical/governance/PROOF_COMPRESSION_KERNELS_ACTIVATION_V1.json"
+    "proof_compression_activation": "canonical/governance/PROOF_COMPRESSION_KERNELS_ACTIVATION_V1.json",
+    "differential_dominance_required_when_complete_finite_matched_scope_available": true,
+    "differential_dominance_activation": "canonical/governance/DIFFERENTIAL_DOMINANCE_COMPILER_ACTIVATION_V1.json"
   },
   "global_terminal_proof_cut": {
     "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
@@ -254,13 +258,15 @@
       "COMPUTE_EXACT_MINIMUM_INTERNALLY_CLOSABLE_UNBLOCK_CUT_OVER_FROZEN_ROUTE_BLOCKER_UNIVERSE",
       "SHARED_UPSTREAM_BLOCKER_IS_PAID_ONCE_ACROSS_ALL_COVERED_OBLIGATIONS",
       "EXTERNAL_IRREDUCIBILITY_MUST_BE_PROVEN_RELATIVE_TO_FROZEN_ADMISSIBLE_ROUTE_UNIVERSE__NO_PROXY_SUBSTITUTION",
-      "RECOMPUTE_AFTER_EVERY_BLOCKER_CLOSURE_OR_NEW_ADMISSIBLE_ROUTE"
+      "RECOMPUTE_AFTER_EVERY_BLOCKER_CLOSURE_OR_NEW_ADMISSIBLE_ROUTE",
+      "TRY_COMPLETE_DIFFERENTIAL_DOMINANCE_BEFORE_MATCHED_EXACT_OPUS_WHEN_SCOPE_IS_COMPLETE_FINITE_AND_SHARED_CRITERION_BOUND"
     ],
     "proof_mode_order": [
       "EXISTING_RECEIPT",
       "EXACT_DEDUCTION",
       "FORMAL_PROOF",
       "EXHAUSTIVE_FINITE",
+      "FINITE_COMPLETE_DIFFERENTIAL_DOMINANCE",
       "DETERMINISTIC_HIDDEN_ORACLE",
       "PUBLIC_FIXED_BAR",
       "PUBLIC_SAME_CASE_OPUS",
@@ -312,5 +318,15 @@
     "composition_component_proof_slicer": "canonical/runtime/composition_component_proof_slicer_v1.py",
     "ordering_rule": "RUN_BEFORE_NEW_COMPARATOR_JUDGMENT_OR_COMPOSITION_REALITY_WHEN_APPLICABLE",
     "terminal_credit_from_kernels_alone": false
+  },
+  "differential_dominance_compiler": {
+    "status": "ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_ONLY__ZERO_CREDIT",
+    "activation": "canonical/governance/DIFFERENTIAL_DOMINANCE_COMPILER_ACTIVATION_V1.json",
+    "verification": "canonical/verification/DIFFERENTIAL_DOMINANCE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "runtime": "canonical/runtime/differential_dominance_compiler_v1.py",
+    "target_normalization": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json",
+    "rule": "FOR_COMPLETE_FROZEN_FINITE_MATCHED_NONINFERIORITY_SCOPE__ELIMINATE_ONLY_COMPARATOR_SUCCESS_AND_BRAIN_FAILURE_CASES__UNKNOWN_REMAINS_RESIDUAL",
+    "before_exact_comparator_execution": true,
+    "terminal_credit_from_compiler_alone": false
   }
 }
