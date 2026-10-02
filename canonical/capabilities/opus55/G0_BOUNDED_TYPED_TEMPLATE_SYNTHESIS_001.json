@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_G0_BOUNDED_TYPED_TEMPLATE_SYNTHESIS_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_TYPED_TEMPLATE_PROPOSAL_GENERATOR__ZERO_WHOLE_G0_OR_FAMILY_CREDIT",
+  "parent_residual": "G0_NOVEL_TYPED_TEMPLATE_AND_EFFECT_MODEL_SYNTHESIS",
+  "implementation": "canonical/runtime/typed_template_synthesizer.py",
+  "implementation_blob_sha": "fa287f2ac9be26378cdcbd0b164f44ed10e4004d",
+  "tests": "canonical/tests/test_typed_template_synthesizer.py",
+  "tests_blob_sha": "1dd4e7d8051b463d4fdd3f13f398bf3a827623b5",
+  "workflow": ".github/workflows/verify-bounded-typed-template-synthesizer.yml",
+  "workflow_blob_sha": "c3dfd7e0bc19554dd2b61f6a25af8eebe13dac59",
+  "verification_merge_commit": "964481cf041a17e175fbb9fec266f02dd47bac03",
+  "independent_verification": {
+    "workflow_run_id": 36952169730,
+    "conclusion": "success",
+    "verified_pr_head": "d1e862485272ea35f810e08a3812f799b4da6d18"
+  },
+  "owned_scope": [
+    "FINITE_EXPLICIT_TYPED_PRIMITIVE_VOCABULARY_TO_EXHAUSTIVE_WELL_TYPED_LINEAR_COMPOSITION_TEMPLATES_WITHIN_DECLARED_STEP_AND_STATE_BOUNDS",
+    "COMPLETE_WITHIN_DECLARED_BOUND_REPORTED_ONLY_WHEN_SEARCH_NOT_TRUNCATED",
+    "TARGET_TYPED_TERMINALS_ENUMERATED_WITH_NO_TRUTH_AUTHORITY",
+    "INVALID_TYPES_DUPLICATE_PRIMITIVES_AND_INVALID_BOUNDS_FAIL_CLOSED"
+  ],
+  "exclusions": [
+    "NO_NEW_PRIMITIVE_OR_TYPE_INVENTION",
+    "NO_TRUTH_OR_CORRECTNESS_SELECTION_AMONG_CANDIDATES",
+    "NO_UNBOUNDED_PROGRAM_SYNTHESIS",
+    "NO_RAW_LANGUAGE_OR_MULTIMODAL_SEMANTIC_INFERENCE",
+    "NO_WHOLE_G0_OR_FAMILY_CAPABILITY_CREDIT"
+  ],
+  "donor_runtime_required": false,
+  "external_model_or_api_required": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
