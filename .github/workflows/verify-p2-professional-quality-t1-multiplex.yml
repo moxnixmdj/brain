@@ -8,6 +8,14 @@ on:
       - canonical/tests/test_p2_professional_quality_t1_multiplex_preflight.py
       - canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json
       - .github/workflows/verify-p2-professional-quality-t1-multiplex.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json
+      - canonical/runtime/p2_professional_quality_t1_multiplex_preflight.py
+      - canonical/tests/test_p2_professional_quality_t1_multiplex_preflight.py
+      - canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json
+      - .github/workflows/verify-p2-professional-quality-t1-multiplex.yml
   workflow_dispatch:
 permissions:
   contents: read
