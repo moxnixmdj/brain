@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PARENT_LAUNCHER_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_LAUNCHER_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "launcher": "canonical/runtime/terminal_parent_portfolio_launcher_v1.py",
+  "tests": "canonical/tests/test_terminal_parent_portfolio_launcher_v1.py",
+  "launcher_blob_sha": "f5a94b07ac48d05ec90aa062ab567e4aa608f2fc",
+  "launcher_test_blob_sha": "fccb3f99e3577d332ffd4ade9e6677daeefd4a47",
+  "parent_runner": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
+  "parent_runner_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
+  "parent_runner_binding": "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json",
+  "parent_runner_binding_blob_sha": "5212f5996dbc83e87a308b8c9d9d1d9ed3da5aab",
+  "parent_runner_independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "required_semantics": [
+    "DERIVED_LAUNCH_AUTHORITY_CHECKED_BEFORE_ANY_CASE_GENERATION",
+    "CONCRETE_PARENT_RUNNER_IS_DEFAULT",
+    "DIRECT_ROUTES_EXECUTED_EXACTLY_ONCE",
+    "CAD_DIRECT_RESULT_REUSED_BY_T0_PARENT",
+    "ALL_FOUR_PARENT_PORTFOLIOS_EXECUTED_ONCE",
+    "NO_CASE_REPLACEMENT",
+    "NO_TUNING_REPLAY"
+  ],
+  "independent_verification": null,
+  "launch_ready": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
