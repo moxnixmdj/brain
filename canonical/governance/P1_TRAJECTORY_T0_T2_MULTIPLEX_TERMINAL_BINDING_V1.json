@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREWAVE_T0_T2_CAUSAL_RECOVERY_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_PREWAVE_T0_T2_CAUSAL_RECOVERY_BINDING__V4_TYPED_ROUTE_IMPORTED_AND_INDEPENDENTLY_VERIFIED__BINDING_ADMISSION_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
   "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
   "proof_mode": "T0_T2_MULTIPLEXED_DETERMINISTIC_INTERVENTION_RESCUE_GATE",
   "authority": [
@@ -10,7 +10,8 @@
     "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
     "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
     "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
-    "canonical/verification/TRAJECTORY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    "canonical/verification/TRAJECTORY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   ],
   "decomposition": {
     "owned_behavior": "FAILED_EXECUTION_TRAJECTORY_TO_EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_CLASS_AND_FALSIFIABLE_REPAIR_TARGET_WITH_INTERVENTION_RESCUE_EVIDENCE",
@@ -78,7 +79,12 @@
       "SWAP_TOOL_OR_AUTHORITY_FAILURE_CLASS",
       "DROP_PROVENANCE_OR_DEPENDENCY_EDGE"
     ],
-    "mutation_acceptance": "ALL_APPLICABLE_LOAD_BEARING_P1_MUTATIONS_MUST_BE_REJECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE"
+    "mutation_acceptance": "ALL_APPLICABLE_LOAD_BEARING_P1_MUTATIONS_MUST_BE_REJECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE",
+    "typed_cross_domain_candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py",
+    "typed_cross_domain_proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py",
+    "typed_cross_domain_tests": "canonical/tests/test_trajectory_failure_typed_ir_v4.py",
+    "typed_cross_domain_independent_preflight": "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "typed_cross_domain_scope_role": "CROSS_DOMAIN_MECHANISM_CAUSAL_PATTERN_INFORMATION_SAFE_PREFLIGHT__TERMINAL_RESCUE_JUDGMENT_REMAINS_INSIDE_FROZEN_T0_T2_OBSERVATIONS"
   },
   "terminal_acceptance": {
     "prewave_binding_is_terminal_result": false,
@@ -118,7 +124,11 @@
     "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
     "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
     "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
-    "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json"
+    "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py",
+    "canonical/tests/test_trajectory_failure_typed_ir_v4.py",
+    "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   ],
   "prewave_admissible": false,
   "independent_verification": null,
