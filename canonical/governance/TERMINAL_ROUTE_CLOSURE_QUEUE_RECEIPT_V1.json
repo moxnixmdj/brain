@@ -1,42 +1,21 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1",
   "date": "2026-10-02",
-  "source_basis_blob_sha": "a6d6f99899e2c6a0773999a0d7e31cc0f736abe3",
-  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__4_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "source_basis_blob_sha": "d4665e3722bafc7ae6751baa6c9dc0693a3a0ab0",
+  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__5_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "status": "CANONICAL_SCHEDULING_RECEIPT__REBOUND_TO_LIVE_BASIS__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
-  "closed_route_count": 4,
-  "open_route_count": 8,
+  "closed_route_count": 5,
+  "open_route_count": 7,
   "closed_behavior_ids": [
     "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
     "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
     "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
     "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
   ],
-  "top_priority_behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "top_priority_behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
   "queue": [
-    {
-      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
-      "portfolio": "T1",
-      "proof_state": "INFORMATION_SAFE_PREFLIGHT_PRESERVED__PUBLIC_FIXED_BAR_AND_UNCOVERED_SCOPE_BINDING_PENDING",
-      "blockers": [
-        "FREEZE_GDPVAL_AA_AND_AA_BRIEFCASE_HARNESS_SCOPE_MAPPING",
-        "FREEZE_INFORMATION_BOUNDARY_AND_ZERO_COST_ROUTE_FOR_PUBLIC_BAR_SCOPE",
-        "FREEZE_EXPLICIT_UNCOVERED_ARTIFACT_QUALITY_SCOPE_AUDIT",
-        "FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING"
-      ],
-      "blocker_classes": {
-        "binding": 0,
-        "scope_gate": 0,
-        "scope_expansion": 0,
-        "open_domain_protocol": 4,
-        "external_block": 0,
-        "other": 0
-      },
-      "portfolio_leverage": 1,
-      "priority_score": 5,
-      "next_action_class": "FREEZE_OPEN_DOMAIN_OR_PUBLIC_BAR_PROTOCOL"
-    },
     {
       "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
       "portfolio": "T3",
