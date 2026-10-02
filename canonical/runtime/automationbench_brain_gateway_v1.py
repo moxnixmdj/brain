@@ -14,6 +14,7 @@ import json
 import os
 import time
 import uuid
+import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable, Mapping
 
@@ -209,8 +210,42 @@ def openai_response(payload: Mapping[str, Any], planner: Callable[[str], Any]) -
     }
 
 def default_planner(prompt: str) -> Mapping[str, Any]:
-    from canonical.runtime.astra_runtime import _planner_post
-    return _planner_post(prompt, timeout_s=int(os.environ.get("BRAIN_AUTOMATION_PLANNER_TIMEOUT_S", "60")))
+    """Zero-incremental proposal transport; output remains untrusted."""
+    endpoint = os.environ.get("BRAIN_AUTOMATION_PLANNER_URL", "https://text.pollinations.ai/").strip()
+    timeout_s = int(os.environ.get("BRAIN_AUTOMATION_PLANNER_TIMEOUT_S", "60"))
+    models = tuple(
+        x.strip() for x in os.environ.get(
+            "BRAIN_AUTOMATION_PLANNER_MODELS", "openai-fast,openai,mistral"
+        ).split(",") if x.strip()
+    )
+    if not endpoint or not models:
+        raise GatewayBlocked("PLANNER_TRANSPORT_CONFIGURATION_INVALID")
+    errors: list[str] = []
+    for model in models:
+        body = json.dumps({
+            "messages": [{"role": "user", "content": prompt}],
+            "model": model,
+            "jsonMode": True,
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            endpoint,
+            data=body,
+            headers={"Content-Type": "application/json", "User-Agent": "ProjectBrain-Automation/1.0"},
+            method="POST",
+        )
+        t = time.monotonic()
+        try:
+            with urllib.request.urlopen(req, timeout=timeout_s) as response:
+                raw = response.read(30000).decode("utf-8", "replace")
+            return {
+                "text": raw,
+                "model": model,
+                "duration_s": round(time.monotonic() - t, 3),
+                "transport": "ZERO_INCREMENTAL_PUBLIC_PROPOSAL_ENDPOINT",
+            }
+        except Exception as exc:
+            errors.append(f"{model}:{type(exc).__name__}:{str(exc)[:200]}")
+    raise GatewayBlocked("PLANNER_ALL_ROUTES_FAILED:" + "|".join(errors))
 
 class Handler(BaseHTTPRequestHandler):
     planner = staticmethod(default_planner)
