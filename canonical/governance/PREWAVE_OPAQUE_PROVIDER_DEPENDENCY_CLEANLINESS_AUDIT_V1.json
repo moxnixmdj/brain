@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_PREWAVE_OPAQUE_PROVIDER_AND_DEPENDENCY_CLEANLINESS_AUDIT_V1",
+  "date": "2026-10-02",
+  "status": "PASS_PREWAVE_ONLY__KNOWN_OPAQUE_TARGET_PROVIDER_ABSENT__DEPENDENCIES_HASH_BOUND__TERMINAL_DONOR_DELETION_STILL_REQUIRED",
+  "authority": [
+    "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
+    "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md"
+  ],
+  "checked": [
+    "OPERATIVE_BRAIN_RUNTIME_BLOBS_HASH_BOUND",
+    "GENERAL_SUBSTRATE_PINNED_BY_MODEL_FILE_SHA256_AND_RUNTIME_COMMIT",
+    "GENERAL_SUBSTRATE_DECLARED_NONAUTHORITATIVE_FOR_OWNERSHIP",
+    "NO_PAID_OR_HOSTED_TARGET_CAPABILITY_PROVIDER_DECLARED",
+    "CURRENT_CONTROLLER_COMPOSITION_INDEPENDENT_PASS",
+    "SUBSTRATE_OR_RUNTIME_CHANGE_INVALIDATES_PREWAVE_CLEANLINESS"
+  ],
+  "prewave_predicates": {
+    "brain_route_and_dependency_manifest_frozen": true,
+    "no_known_opaque_target_capability_provider_in_operative_brain_route": true,
+    "no_known_unresolved_controller_composition_defect_before_wave": true,
+    "final_donor_deletion_cleanroom_pass": false
+  },
+  "boundary": "THIS_RECEIPT_DOES_NOT_PROVE_TERMINAL_CAPABILITY_SUFFICIENCY_OR_DONOR_INDEPENDENCE__THOSE_REQUIRE_TERMINAL_WAVE_AND_FINAL_DONOR_DELETION_OR_ABLATION",
+  "execution_authority_delta": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
