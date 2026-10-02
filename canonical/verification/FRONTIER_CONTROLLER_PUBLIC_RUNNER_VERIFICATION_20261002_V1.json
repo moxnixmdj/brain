@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CONTROLLER_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_MERGED_BRAIN_BLOBS__FRONTIER_CONSISTENCY_AND_CAUSAL_TRANSACTION_CONTROLLER",
+  "brain_repository": "moxnixmdj/brain",
+  "brain_commit": "c4099ae1eb2b00dca1614a4efb8dfa472abe2e23",
+  "runner_repository": "moxnixmdj/verification-capsule-runner",
+  "runner_pr": 508,
+  "runner_head_commit": "4f32e44d2f70c2cc89be59f962d71c1011271d18",
+  "runner_merge_commit": "b3c4ad36b097c336e8eafc5f6e6a2a71205f3465",
+  "workflow_run_id": 36956857858,
+  "job_id": 110681634223,
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_closure_reducer.py": "2732a577b441e8031ee128629410f792bfe36201",
+    "canonical/tests/test_terminal_frontier_reducer.py": "14a9a7e2b06d9ce30aba139246204fe12800c478",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json": "d9bfe5998157f299d0d5da4cda60503b57147f34",
+    "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json": "b0af6a013a4ab38550dd1e5b0fefab477faf8093",
+    "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json": "b0ae68c5cdcc7a4ab02b719a96b141928700dfea"
+  },
+  "checks": [
+    "EXACT_BLOB_BINDING_PASS",
+    "PYTHON_COMPILE_PASS",
+    "LIVE_FRONTIER_CURRENT_STATE_REDUCES_TO_PREQUALIFICATION",
+    "STALE_SURVIVOR_CONTRADICTION_FAILS_CLOSED",
+    "PREQUALIFICATION_PASS_AUTOMATICALLY_AUTHORIZES_PARALLEL_T0_T1_T2_T3",
+    "LIVE_FRONTIER_CLI_REDUCTION_PASS"
+  ],
+  "limitations": [
+    "NO_TERMINAL_CAPABILITY_RESULT",
+    "NO_FAMILY_OR_CAPABILITY_CREDIT",
+    "NO_TERMINAL_BENCHMARK_CASE_CONTENT_EXPOSED"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
