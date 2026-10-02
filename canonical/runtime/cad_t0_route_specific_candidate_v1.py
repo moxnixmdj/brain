@@ -22,18 +22,54 @@ class CandidateError(ValueError):
     pass
 
 
+def _svg_number_attr(attrs: str, name: str) -> float | None:
+    match = re.search(
+        rf"\\b{re.escape(name)}\\s*=\\s*[\"']\\s*(-?[0-9]+(?:\\.[0-9]+)?)\\s*[\"']",
+        attrs,
+        flags=re.I,
+    )
+    return float(match.group(1)) if match else None
+
+
 def _texts(svg: Any) -> list[str]:
+    """Recover rendered text lines, independent of SVG DOM text-node boundaries."""
     if not isinstance(svg, str) or not svg.strip():
         raise CandidateError("DRAWING_SVG_REQUIRED")
-    rows = []
-    for raw in re.findall(r"<text\b[^>]*>(.*?)</text>", svg, flags=re.I | re.S):
-        text = html.unescape(re.sub(r"<[^>]+>", "", raw)).strip()
-        if text:
-            rows.append(text)
+
+    fragments: list[tuple[float, float, int, str]] = []
+    for index, match in enumerate(
+        re.finditer(r"<text\\b([^>]*)>(.*?)</text>", svg, flags=re.I | re.S)
+    ):
+        attrs, raw = match.groups()
+        text = html.unescape(re.sub(r"<[^>]+>", "", raw))
+        if not text.strip():
+            continue
+        y = _svg_number_attr(attrs, "y")
+        x = _svg_number_attr(attrs, "x")
+        if y is None:
+            y = 1_000_000_000.0 + index
+        if x is None:
+            x = float(index)
+        fragments.append((y, x, index, text))
+
+    if not fragments:
+        raise CandidateError("DRAWING_TEXT_EMPTY")
+
+    grouped: dict[float, list[tuple[float, int, str]]] = {}
+    for y, x, index, text in fragments:
+        grouped.setdefault(round(y, 6), []).append((x, index, text))
+
+    rows: list[str] = []
+    for y in sorted(grouped):
+        pieces = sorted(grouped[y], key=lambda item: (item[0], item[1]))
+        rendered = "".join(piece[2] for piece in pieces)
+        rendered = re.sub(r"\\s+", " ", rendered).strip()
+        if rendered:
+            rows.append(rendered)
+
     if not rows:
         raise CandidateError("DRAWING_TEXT_EMPTY")
     return rows
-
 
 def _one(pattern: str, rows: list[str], label: str, flags: int = 0):
     hits = []
