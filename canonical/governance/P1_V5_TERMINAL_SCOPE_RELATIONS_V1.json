@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_TERMINAL_SCOPE_RELATIONS_V1",
+  "date": "2026-10-02",
+  "status": "OPEN__THREE_CLAIM_BOUND_SCOPE_RELATIONS_REQUIRED__ZERO_CREDIT",
+  "source_binding": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+  "source_v5_activation": "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5_ACTIVATION_V1.json",
+  "rule": "V5_PREWAVE_ENVELOPE_MAY_TRANSPORT_ONLY_WHERE_AN_INDEPENDENTLY_VERIFIED_CLAIM_BOUND_RELATION_PROVES_EXACT_OR_SUPERSET_COVERAGE_OF_THE_FROZEN_DIRECT_SURFACE",
+  "relations": [
+    {
+      "direct_surface": "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "relation": "OPEN",
+      "claim_bound_scope_witness": null,
+      "independent_verification": null,
+      "terminal_credit_authorized": false
+    },
+    {
+      "direct_surface": "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "relation": "OPEN",
+      "claim_bound_scope_witness": null,
+      "independent_verification": null,
+      "terminal_credit_authorized": false
+    },
+    {
+      "direct_surface": "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "relation": "OPEN",
+      "claim_bound_scope_witness": null,
+      "independent_verification": null,
+      "terminal_credit_authorized": false
+    }
+  ],
+  "all_relations_admissible": false,
+  "p1_scope_quarantine_clearable": false,
+  "next": "DISCHARGE_THE_THREE_RELATIONS_INDEPENDENTLY__IF_ANY_EXACT_OR_SUPERSET_RELATION_IS_FALSE_SPLIT_THE_STRONGER_PROOF_BY_THAT_SURFACE__DO_NOT_REPLAY_FULL_TERMINAL",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
