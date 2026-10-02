@@ -1,0 +1,254 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_EXECUTION_PLAN_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PRELAUNCH_EXECUTION_GRAPH__6_DIRECT_POPULATIONS__6_PARENT_MULTIPLEX_INSTRUMENTATIONS__ZERO_TERMINAL_RESULTS",
+  "objective": "EXECUTE_ALL_12_ADMITTED_BEHAVIORAL_CONTRACTS_WITHOUT_GLOBAL_SAMPLE_SHORTCUTS_OR_DUPLICATED_PARENT_REALITY",
+  "selection_kernel": {
+    "path": "canonical/governance/GLOBAL_TERMINAL_SELECTION_KERNEL_V1.json",
+    "blob_sha": "669afcde50302e76c1b0a1f6b186aaafa8730515"
+  },
+  "invariants": [
+    "NO_TERMINAL_CASE_GENERATION_BEFORE_ALL_EXECUTOR_BINDINGS_INDEPENDENTLY_VERIFIED_AND_LAUNCH_AUTHORITY_TRUE",
+    "DIRECT_POPULATIONS_USE_ONLY_THEIR_FROZEN_POST_BEACON_SELECTOR_AND_SAMPLE_COUNT",
+    "PARENT_MULTIPLEX_INSTRUMENTATION_MUST_RUN_ON_THE_SAME_PARENT_PORTFOLIO_CASE_NOT_A_STANDALONE_SYNTHETIC_SUBSTITUTE",
+    "ONE_PARENT_OBSERVATION_MAY_FEED_MULTIPLE_DECLARED_BEHAVIOR_INSTRUMENTS_WITHOUT_CROSS_BEHAVIOR_SCORE_INHERITANCE",
+    "NO_CASE_REPLACEMENT",
+    "NO_REPLAY_FOR_TUNING",
+    "ZERO_INCREMENTAL_SPEND",
+    "RESULTS_COMPILE_ONLY_AFTER_ALL_STARTED_PARENT_AND_DIRECT_EXECUTIONS_TERMINATE"
+  ],
+  "parent_portfolios": [
+    "T0",
+    "T1",
+    "T2",
+    "T3"
+  ],
+  "direct_populations": [
+    {
+      "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "mode": "DIRECT_POST_BEACON_POPULATION_PLUS_T0_PARENT_ACCEPTANCE",
+      "parents": [
+        "T0"
+      ],
+      "binding": {
+        "path": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json",
+        "blob_sha": "c519bb75aff10002c2399ebf76aa6b66e82e79c9"
+      },
+      "sample_count": 128,
+      "generator": {
+        "path": "canonical/runtime/cad_t0_geometry_population.py",
+        "blob_sha": "64ca276410e2c1dbcd55cfad057e3eec0709790a"
+      },
+      "oracle": {
+        "path": "canonical/runtime/cad_t0_oracle_adapter.py",
+        "blob_sha": "a6e76e1865b9bd9829dbbcf38886486636f76e8a"
+      },
+      "scorer": {
+        "path": "canonical/runtime/cad_t0_multiplex_scorer.py",
+        "blob_sha": "89833581dc4ac67498753feb94e2ff69bad3b7f1"
+      }
+    },
+    {
+      "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+      "mode": "DIRECT_POST_BEACON_POPULATION_PLUS_T1_PARENT_ACCEPTANCE",
+      "parents": [
+        "T1"
+      ],
+      "binding": {
+        "path": "canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json",
+        "blob_sha": "d8059952cdf358f3e682cd8177be4a7a0b2801ed"
+      },
+      "sample_count": 2000,
+      "generator_oracle": {
+        "path": "canonical/runtime/saccr_credit_information_safe_proof.py",
+        "blob_sha": "8eb94b8e8b00e3ace662e7fac2e8b6a8f7bb2200"
+      },
+      "candidate": {
+        "path": "canonical/runtime/saccr_credit_information_safe_candidate.py",
+        "blob_sha": "ff2fa256738ffbe5b15bb813a11c82046692b5e8"
+      }
+    },
+    {
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "mode": "DIRECT_OBJECTIVE_POST_BEACON_POPULATION_PLUS_T2_PARENT_PUBLIC_BAR",
+      "parents": [
+        "T2"
+      ],
+      "binding": {
+        "path": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+        "blob_sha": "28e955d5d593d1de9cfab0f9cdcdae732fd315f1"
+      },
+      "sample_count": 150,
+      "generator_oracle": {
+        "path": "canonical/runtime/browser_state_information_safe_proof.py",
+        "blob_sha": "3723d3233d6058f0a43491e4654a21490f992d1e"
+      },
+      "candidate": {
+        "path": "canonical/runtime/browser_state_information_safe_candidate.py",
+        "blob_sha": "8acf61f21a15a0d3b3e0e5735ebb80e20393e405"
+      },
+      "transition_auditor": {
+        "path": "canonical/runtime/browser_transition_objective_audit_v1.py",
+        "blob_sha": "e37548030083627d711f12b85f7c3785aed41081"
+      }
+    },
+    {
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "mode": "DIRECT_OBJECTIVE_POST_BEACON_POPULATION_PLUS_T2_PARENT_ACCEPTANCE",
+      "parents": [
+        "T2"
+      ],
+      "binding": {
+        "path": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+        "blob_sha": "a1e441567b132d71713ed55dfc51f01d8de112d1"
+      },
+      "sample_count": 132,
+      "candidate": {
+        "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+        "blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+      },
+      "v2_oracle": {
+        "path": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+        "blob_sha": "928466401b36e4f3b09c517950cc050432a0616f"
+      },
+      "v3_oracle": {
+        "path": "canonical/runtime/delegation_structural_variety_proof_v3.py",
+        "blob_sha": "f5e1f45519278ed2cafa27d23b8602b0a362a492"
+      }
+    },
+    {
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "mode": "DIRECT_OBJECTIVE_POST_BEACON_POPULATION_PLUS_T2_T3_PARENT_ACCEPTANCE",
+      "parents": [
+        "T2",
+        "T3"
+      ],
+      "binding": {
+        "path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+        "blob_sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+      },
+      "sample_count": 180,
+      "generator_oracle": {
+        "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+        "blob_sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+      },
+      "candidate": {
+        "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+        "blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+      }
+    },
+    {
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "mode": "DIRECT_OBJECTIVE_POST_BEACON_POPULATION_PLUS_T3_PARENT_ACCEPTANCE",
+      "parents": [
+        "T3"
+      ],
+      "binding": {
+        "path": "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+        "blob_sha": "a7015b12f55fc971233f9fdddf59d50cfc43892b"
+      },
+      "sample_count": 180,
+      "generator_oracle": {
+        "path": "canonical/runtime/research_control_information_safe_proof.py",
+        "blob_sha": "16c47efee0e0e38f479163d1285d7079798efdaf"
+      },
+      "candidate": {
+        "path": "canonical/runtime/research_control_information_safe_candidate.py",
+        "blob_sha": "cd6bf6e4163bbba64878b856766b1af4372d68bc"
+      }
+    }
+  ],
+  "multiplex_instrumentation": [
+    {
+      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "parents": [
+        "T0",
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "binding": {
+        "path": "canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
+        "blob_sha": "d34a284f7c1f99fd93d420f3a5aba93851b29ef6"
+      },
+      "mode": "SAME_PARENT_CASE_DIRECT_M0_INSTRUMENTATION"
+    },
+    {
+      "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "parents": [
+        "T0",
+        "T1"
+      ],
+      "binding": {
+        "path": "canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
+        "blob_sha": "6d2e9adbd45af41c26c543f69769a6f9c69d52ac"
+      },
+      "mode": "SAME_PARENT_CASE_STRUCTURED_GRAPH_INSTRUMENTATION"
+    },
+    {
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "parents": [
+        "T0",
+        "T2"
+      ],
+      "binding": {
+        "path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+        "blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+      },
+      "mode": "SAME_PARENT_CASE_CAUSAL_INTERVENTION_RESCUE_INSTRUMENTATION"
+    },
+    {
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "parents": [
+        "T1"
+      ],
+      "binding": {
+        "path": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+        "blob_sha": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d"
+      },
+      "mode": "SAME_PARENT_CASE_PROFESSIONAL_QUALITY_INSTRUMENTATION"
+    },
+    {
+      "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "parents": [
+        "T1"
+      ],
+      "binding": {
+        "path": "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+        "blob_sha": "977e18ce2c19f7bb8a429a8f1c99407ff3000e92"
+      },
+      "mode": "SAME_PARENT_CASE_NATIVE_STRUCTURE_AND_RENDER_INSTRUMENTATION"
+    },
+    {
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "parents": [
+        "T1",
+        "T3"
+      ],
+      "binding": {
+        "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+        "blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+      },
+      "mode": "SAME_PARENT_CASE_GROUNDED_SYNTHESIS_INSTRUMENTATION"
+    }
+  ],
+  "counts": {
+    "direct_population_contracts": 6,
+    "multiplex_instrumentation_contracts": 6,
+    "total_contracts": 12
+  },
+  "launch_authority": false,
+  "terminal_case_generation_allowed": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "next": [
+    "INDEPENDENTLY_VERIFY_EXECUTION_GRAPH_EXACT_BLOB_BINDINGS_AND_12_CONTRACT_COVERAGE",
+    "IMPLEMENT_DIRECT_POPULATION_EXECUTOR_ADAPTERS_WITHOUT_GENERATING_TERMINAL_CASES_DURING_PREFLIGHT",
+    "IMPLEMENT_PARENT_T0_T1_T2_T3_CARRIERS_AND_SAME_CASE_INSTRUMENTATION_HOOKS",
+    "BIND_ALL_EXECUTORS_TO_ROUTE_MANIFEST_AND_INDEPENDENTLY_VERIFY",
+    "ONLY_THEN_CREATE_POST_FREEZE_BEACON_AND_LAUNCH_ONCE"
+  ]
+}
