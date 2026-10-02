@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_COUNTEREXAMPLE_ENVELOPE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_BRAIN_BLOB_BOUND__FAIL_CLOSED_SELF_TEST_PASS__ZERO_TERMINAL_CREDIT",
+  "compiler": {
+    "path": "canonical/runtime/terminal_counterexample_envelope_compiler.py",
+    "brain_blob_sha": "86344162be260f294e5af87c56141e7e41fd0f5a",
+    "brain_commit": "850bfd57cd5dbf59542e0ceabed2823a05fdc70b"
+  },
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 589,
+  "public_merge_commit": "b5429c82ffa5d853824d58d470348a5551ae2824",
+  "workflow_run_id": 36961797567,
+  "workflow_job_id": 110696883698,
+  "workflow_conclusion": "success",
+  "verified": [
+    "EXACT_BRAIN_COMPILER_BLOB_HASH_BOUND",
+    "FAIL_CLOSED_SELF_TEST_PASS",
+    "VERIFIED_IMPLICATION_CLOSURE_REDUCES_RESIDUAL_BASIS",
+    "CONTRADICTORY_VERIFIED_PASS_AND_FAIL_EVIDENCE_FAILS_CLOSED",
+    "SIMULATION_PREDICTION_PROOF_KIND_REJECTED_AS_NONAUTHORITATIVE"
+  ],
+  "limitations": [
+    "COMPILER_PROPAGATES_ONLY_PREVERIFIED_EVIDENCE_AND_VERIFIED_IMPLICATIONS",
+    "NO_NEW_CAPABILITY_TRUTH_CREATED_BY_COMPILER",
+    "ABSENCE_OF_COUNTEREXAMPLE_IS_NOT_PROOF_UNLESS_SEARCH_IS_FORMALLY_COMPLETE_OR_EXHAUSTIVE",
+    "EXACT_MINIMUM_RESIDUAL_BASIS_ONLY_FOR_DECLARED_UNKNOWN_DIMENSION_UNIVERSE_OF_AT_MOST_20_DIMENSIONS"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
