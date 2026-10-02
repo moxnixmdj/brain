@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -96,8 +97,46 @@ def _candidate_files(root: Path) -> list[Path]:
     return sorted(out, key=lambda p: p.relative_to(root).as_posix())
 
 
+_IDENTIFIER_NEIGHBOR = r"A-Za-z0-9_:.\\-"
+
+
 def _line_hits(text: str, literal: str) -> list[int]:
-    return [i for i, line in enumerate(text.splitlines(), start=1) if literal in line]
+    """Return literal-token line hits, rejecting superstring identifier matches."""
+    pattern = re.compile(
+        rf"(?<![{_IDENTIFIER_NEIGHBOR}]){re.escape(literal)}(?![{_IDENTIFIER_NEIGHBOR}])"
+    )
+    return [
+        i
+        for i, line in enumerate(text.splitlines(), start=1)
+        if pattern.search(line) is not None
+    ]
+
+
+def _manifest_sha256(rows: list[tuple[str, str, str, str]]) -> str:
+    h = hashlib.sha256()
+    for rel, source_class, blob_sha, _text in rows:
+        h.update(rel.encode("utf-8"))
+        h.update(b"\\0")
+        h.update(source_class.encode("utf-8"))
+        h.update(b"\\0")
+        h.update(blob_sha.encode("ascii"))
+        h.update(b"\\n")
+    return h.hexdigest()
+
+
+def _atom_manifest_sha256(atoms: list[Mapping[str, Any]]) -> str:
+    normalized = [
+        {
+            "atom_id": x.get("atom_id"),
+            "proposition": x.get("proposition"),
+            "associated_target_predicates": x.get("associated_target_predicates", []),
+        }
+        for x in atoms
+    ]
+    payload = json.dumps(
+        normalized, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
 
 
 def build_index(
@@ -137,31 +176,34 @@ def build_index(
             return _fail("CANONICAL_ATOM_INVALID")
 
         matches = []
+        actual_match_count = 0
         for rel, source_class, blob_sha, text in file_cache:
             if proposition not in text:
                 continue
             hits = _line_hits(text, proposition)
             if not hits:
                 continue
-            matches.append({
-                "path": rel,
-                "git_blob_sha": blob_sha,
-                "source_class": source_class,
-                "line_numbers": hits[:16],
-                "candidate_only": True,
-            })
+            actual_match_count += 1
             source_class_counts[source_class] = source_class_counts.get(source_class, 0) + 1
-            if len(matches) >= MAX_MATCHES_PER_ATOM:
-                break
+            if len(matches) < MAX_MATCHES_PER_ATOM:
+                matches.append({
+                    "path": rel,
+                    "git_blob_sha": blob_sha,
+                    "source_class": source_class,
+                    "line_numbers": hits[:16],
+                    "candidate_only": True,
+                })
 
-        if matches:
+        if actual_match_count:
             atoms_with_matches += 1
-        total_matches += len(matches)
+        total_matches += actual_match_count
         atom_rows.append({
             "atom_id": atom_id,
             "proposition": proposition,
             "associated_target_predicates": atom.get("associated_target_predicates", []),
-            "candidate_match_count": len(matches),
+            "candidate_match_count": actual_match_count,
+            "stored_candidate_match_count": len(matches),
+            "candidate_match_truncated": actual_match_count > len(matches),
             "candidate_matches": matches,
             "candidate_only": True,
         })
@@ -174,8 +216,13 @@ def build_index(
         "status": "PASS__CONTENT_ADDRESSED_CANDIDATE_RECEIPT_INDEX_COMPUTED__ZERO_CREDIT",
         "errors": [],
         "canonical_atom_count": len(atom_rows),
+        "canonical_atom_manifest_sha256": _atom_manifest_sha256(atoms),
         "scanned_file_count": len(file_cache),
+        "scanned_corpus_manifest_sha256": _manifest_sha256(file_cache),
         "candidate_match_count": total_matches,
+        "atoms_with_truncated_candidate_lists": sum(
+            1 for row in atom_rows if row["candidate_match_truncated"]
+        ),
         "atoms_with_candidate_matches": atoms_with_matches,
         "atoms_without_candidate_matches": len(zero),
         "atom_ids_with_candidate_matches": nonzero,
@@ -183,8 +230,11 @@ def build_index(
         "candidate_matches_by_source_class": dict(sorted(source_class_counts.items())),
         "atoms": atom_rows,
         "rule": (
-            "EXACT_LITERAL_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY__"
-            "CONTENT_ADDRESS_EACH_MATCH__EXCLUDE_FRONTIER_AND_SCHEDULER_RESTATEMENTS__"
+            "EXACT_LITERAL_TOKEN_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY__"
+            "REJECT_IDENTIFIER_SUPERSTRING_FALSE_POSITIVES__"
+            "CONTENT_ADDRESS_EACH_MATCH__CONTENT_ADDRESS_FULL_SCANNED_CORPUS_MANIFEST__"
+            "REPORT_MATCH_TRUNCATION_EXPLICITLY__"
+            "EXCLUDE_FRONTIER_AND_SCHEDULER_RESTATEMENTS__"
             "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_INDEX"
         ),
         "new_reality_units_consumed": 0,
