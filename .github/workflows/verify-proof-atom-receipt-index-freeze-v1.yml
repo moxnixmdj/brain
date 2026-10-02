@@ -21,8 +21,6 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref || github.ref_name }}
 
       - uses: actions/setup-python@v5
         with:
@@ -102,6 +100,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "${{ github.head_ref }}" HEAD
           git add canonical/state/PROOF_ATOM_RECEIPT_INDEX_LIVE_FREEZE_20261002_V1.json
           git commit -m "Freeze current full-Brain proof atom receipt index"
           git push origin "HEAD:${{ github.head_ref }}"
