@@ -103,8 +103,14 @@ jobs:
           # need no third-party runner. Deleting one fails this step outright.
           # canonical.tests.test_frontier_target_mirror is included because the
           # checker it exercises is now wired into the guard above.
+          # canonical.tests.test_current_state_obs_reducer_binding is included
+          # because the continuous-obs-runtime job in this same workflow runs the
+          # reducer as a script against the BASE tree, which cannot pin a binding:
+          # a predicate that reads a path no surface populates fails on every tree
+          # and looks exactly like real drift. This module holds the distinction.
           python3 -m unittest \
             canonical.runtime.test_reconcile_frontier_mirrors \
             canonical.tests.test_frontier_target_mirror \
+            canonical.tests.test_current_state_obs_reducer_binding \
             canonical.runtime.test_prequalification_stage_a_generic \
             canonical.runtime.test_prequalification_stage_a_reducer_v2

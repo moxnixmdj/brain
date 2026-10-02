@@ -335,7 +335,15 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         if eg.get("outer_global_terminal_observation_cut_execution_authorized") is not False:
             errors.append("POINTER_OUTER_OBSERVATION_CUT_PREMATURE_AUTHORITY")
     expected_open_mechanism_lanes=(global_universe.get("counts") or {}).get("open_mechanism_lanes")
-    pointer_open_mechanism_count=eg.get("open_mechanism_residual_count")
+    # Bind to where the pointer has always carried this count. It was added under
+    # current_frontier in 50c4e086; execution_governance has never held it, and the
+    # check itself was added later in 5b5cdb72, so reading eg made the predicate
+    # unsatisfiable: it compared the authority against None and fired on every tree,
+    # including compliant ones. Every other pointer mirror check in this function
+    # reads current_frontier (POINTER_TARGET_DRIFT, POINTER_BLOCKER_DRIFT,
+    # POINTER_NEXT_STEP_DRIFT); this was the only one reaching into
+    # execution_governance. A missing count stays unknown and still fails closed.
+    pointer_open_mechanism_count=current.get("open_mechanism_residual_count")
     if expected_open_mechanism_lanes is not None and pointer_open_mechanism_count!=expected_open_mechanism_lanes:
         errors.append("POINTER_OPEN_MECHANISM_RESIDUAL_COUNT_DRIFT")
 
