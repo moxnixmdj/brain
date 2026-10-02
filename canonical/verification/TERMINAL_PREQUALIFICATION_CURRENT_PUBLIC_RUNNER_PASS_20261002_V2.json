@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PREQUALIFICATION_CURRENT_PUBLIC_RUNNER_PASS_20261002_V2",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_CURRENT_12_OF_12_STATE_AUTHORIZES_PARALLEL_TERMINAL_WAVE__ZERO_TERMINAL_RESULTS",
+  "authorization": "T0_T1_T2_T3_PARALLEL_TERMINAL_WAVE",
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 691,
+    "pr_head_sha": "3bedbffbee239cd4cec00ec7a1b632d42dc3c998",
+    "merge_commit": "29a480c18eeff2d88f995d591a0dd60d6cd59483",
+    "workflow_run_id": 36968999031,
+    "workflow_job_id": 110718820668,
+    "conclusion": "success"
+  },
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_prequalification_reducer.py": "da929015fafabed2b5a134a2e95b6bff2f47349c",
+    "canonical/tests/test_terminal_prequalification_reducer.py": "9b09e96c9bf0340d174b4a752148c0807be9043e",
+    "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json": "d85f90df76db4b6b1650fe40279f33d6a7d9e7b5",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "afa00109031d638fef32cc3fe10be18786605c39",
+    "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json": "2ba39428f0065f0d8739c43935f7026ba6eedcfb",
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json": "432f1f9122a0a136f71a89eae5c8fb81692e4071"
+  },
+  "verified": [
+    "EXACT_CURRENT_BLOBS_BOUND",
+    "REDUCER_REGRESSIONS_PASS",
+    "ACTIVE_12_CONTRACT_SET_MATCHES_REGISTRY_AND_POPULATION_PROTOCOL",
+    "12_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE",
+    "ALL_FOUR_PORTFOLIO_BLOCKER_LISTS_EMPTY",
+    "ALL_REQUIRED_PREWAVE_GATES_PASS",
+    "FAILED_PREDICATES_EMPTY",
+    "EXECUTION_AUTHORITY_TRUE"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
