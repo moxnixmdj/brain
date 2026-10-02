@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_NEXT_ACTION_COMPILER_V2_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__ACTIVE_HYPERGRAPH_V2__ZERO_CREDIT_SCHEDULING_ONLY",
+  "objective": "Activate the independently verified next-action compiler bound to OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2 while preserving the quarantined historical V1 projection.",
+  "runtime": {
+    "path": "canonical/runtime/terminal_next_action_compiler_v2.py",
+    "git_blob_sha": "7b3352488e25ceb90c6202dce9888a0a346af8db"
+  },
+  "test": {
+    "path": "canonical/tests/test_terminal_next_action_compiler_v2.py",
+    "git_blob_sha": "ee56b6a36bf7d4fc2559fe7c0ee2d6b97f75d952"
+  },
+  "hypergraph": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+    "git_blob_sha": "ec0ca144939a19234f1c53378cc76af2014a6179"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/TERMINAL_NEXT_ACTION_COMPILER_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "public_verifier_pr": 992,
+    "workflow_run_id": 37030259056,
+    "workflow_job_id": 110915008771,
+    "merge_commit": "7ec461dcf1c44b6e8a70ae59538386225289b9b9"
+  },
+  "current_projection": {
+    "primary_action_id": "BUILD_DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+    "primary_action_state": "AVAILABLE_ZERO_REALITY",
+    "available_zero_reality_critical_actions": [
+      "BUILD_DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "BUILD_TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
+      "RUN_COMPOSITION_COMPONENT_PROOF_SLICER"
+    ],
+    "synthesis_action_state": "BLOCKED",
+    "highest_leverage_blocked_action_id": "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"
+  },
+  "hard_rules": [
+    "HISTORICAL_V1_PROJECTION_REMAINS_QUARANTINED",
+    "ACTIVE_HYPERGRAPH_V2_ONLY",
+    "BLOCKED_ACTION_MUST_NEVER_BE_PRIMARY_EXECUTABLE_ACTION",
+    "NO_NEW_REALITY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
