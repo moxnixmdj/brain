@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__16_OPUS55_ACCEPTANCE_FAMILIES_PENDING__30_OF_38_ATOMIC_PREDICATES_BLOCKED__ZERO_DIRECT_REALITY_ACTIONS",
+  "status": "ACTIVE_FAIL_CLOSED__15_OPUS55_ACCEPTANCE_FAMILIES_PENDING__29_OF_38_ATOMIC_PREDICATES_BLOCKED__ZERO_DIRECT_REALITY_ACTIONS",
   "objective": "Close only the frozen Opus 5.5 equal-or-better acceptance residuals with the minimum new reality, preserving the immutable terminal wave and zero incremental spend.",
   "authorities": {
     "protocols": {
@@ -9,9 +9,9 @@
       "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
     },
     "calibration": {
-      "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "git_blob_sha": "aea96cc8321f6695f027c135bb8b1471ef27c038",
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__3_OF_19_ACCEPTANCE_CALIBRATED__16_PENDING"
+      "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+      "git_blob_sha": "54c52bd5aefd6714bcf7f5022d66dac8321620ac",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__4_OF_19_ACCEPTANCE_CALIBRATED__15_PENDING"
     },
     "v6_dominance_input": {
       "path": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V6.json",
@@ -84,7 +84,7 @@
     "HIDDEN_EXTERNAL_TARGET_CAPABILITY_PROVIDER_IS_FORBIDDEN_EVEN_IF_FREE_OR_DURABLY_ROUTED",
     "STRONGER_FULL_SCOPE_UNIVERSAL_EXHAUSTIVE_OR_ABSOLUTE_PROOF_MAY_DISCHARGE_A_RELATIVE_PROTOCOL_WITHOUT_WEAKENING_THE_FROZEN_ACCEPTANCE_RULE"
   ],
-  "residual_family_count": 16,
+  "residual_family_count": 15,
   "residual_families": [
     {
       "family": "ADVANCED_AGENTIC_CODING",
@@ -172,12 +172,6 @@
       ]
     },
     {
-      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "proof_mode": "MATCHED_DIRECT_NONINFERIORITY_WITH_MECHANICAL_CEILINGS",
-      "status": "DEFINED_RESULT_OPEN",
-      "acceptance": "Brain matched portfolio terminal success conservative bound >= Opus matched bound; deterministic coordination invariants must reach zero critical violations; claimed speedup must not trade away correctness."
-    },
-    {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "proof_mode": "MATCHED_CAUSAL_INTERVENTION_PROTOCOL",
       "status": "DEFINED_RESULT_OPEN",
@@ -247,7 +241,6 @@
         "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
         "COMPUTER_AND_BROWSER_USE",
         "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-        "SUBAGENT_DELEGATION_AND_COORDINATION",
         "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
         "ARTIFACT_CREATION",
         "COMMUNICATION_AND_SYNTHESIS",
@@ -340,16 +333,16 @@
     "correction": "MODEL_PRESENCE_ALLOWED_AS_GENERAL_COGNITION_SUBSTRATE__V7_BRAIN_OWNED_OPERATIVE_MECHANISM_REQUIRED__HIDDEN_TARGET_CAPABILITY_PROVIDER_FORBIDDEN",
     "decision_receipt": "canonical/reasoning/2026-10-02_ACCEPTANCE_CAPABILITY_SOURCE_GATE_SUBSTRATE_CORRECTION_V1.json"
   },
-  "next": "RECOMPUTE_ZERO_REALITY_STRONGER_PROOF_AND_ROUTE_BINDING_OVER_THE_30_BLOCKED_ATOMIC_FRONTIER__DO_NOT_EXECUTE_ACCEPTANCE_CASES_UNTIL_A_MACHINE_VERIFIED_ROUTE_MOVES_A_BLOCKED_PREDICATE_TO_AUTHORIZED_OPEN",
+  "next": "RECOMPUTE_ZERO_REALITY_STRONGER_PROOF_AND_ROUTE_BINDING_OVER_THE_29_BLOCKED_ATOMIC_FRONTIER__DO_NOT_EXECUTE_ACCEPTANCE_CASES_UNTIL_A_MACHINE_VERIFIED_ROUTE_MOVES_A_BLOCKED_PREDICATE_TO_AUTHORIZED_OPEN",
   "current_acceptance_state": {
-    "calibrated_family_count": 3,
-    "pending_family_count": 16,
+    "calibrated_family_count": 4,
+    "pending_family_count": 15,
     "atomic_predicates_total": 38,
-    "proved_atomic_predicates": 8,
-    "blocked_atomic_predicates": 30,
+    "proved_atomic_predicates": 9,
+    "blocked_atomic_predicates": 29,
     "open_direct_atomic_predicates": 0,
     "authorized_acceptance_case_actions": [],
-    "residual_verdict": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json",
+    "residual_verdict": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
     "tb4_attainability": "IMPOSSIBLE_180_LT_220_UNDER_CURRENT_FROZEN_NO_REPLAY_RULES"
   }
 }
