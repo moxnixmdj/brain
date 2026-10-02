@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__4_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__5_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -148,19 +148,18 @@
     {
       "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
       "portfolio": "T1",
-      "proof_state": "INFORMATION_SAFE_PREFLIGHT_PRESERVED__PUBLIC_FIXED_BAR_AND_UNCOVERED_SCOPE_BINDING_PENDING",
-      "route": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
-      "blockers": [
-        "FREEZE_GDPVAL_AA_AND_AA_BRIEFCASE_HARNESS_SCOPE_MAPPING",
-        "FREEZE_INFORMATION_BOUNDARY_AND_ZERO_COST_ROUTE_FOR_PUBLIC_BAR_SCOPE",
-        "FREEZE_EXPLICIT_UNCOVERED_ARTIFACT_QUALITY_SCOPE_AUDIT",
-        "FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING"
-      ],
+      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+      "route": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "blockers": [],
       "candidate": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
       "preflight_verification": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
-      "independent_preflight": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
-      "proof_mode_classification": "PUBLIC_FIXED_BAR_PLUS_EXPLICIT_UNCOVERED_SCOPE",
-      "synthetic_whole_domain_scope_gate_required": false
+      "independent_preflight": "canonical/verification/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "proof_mode_classification": "T1_MULTIPLEXED_DIRECT_PROFESSIONAL_QUALITY_GATE",
+      "synthetic_whole_domain_scope_gate_required": false,
+      "internal_scope_binding": "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json",
+      "adjacent_native_mechanical_gate": "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "prewave_admissible": true,
+      "terminal_results_observed": 0
     },
     {
       "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
@@ -303,7 +302,7 @@
     }
   ],
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 4,
+  "admissible_frozen_terminal_route_count": 5,
   "execution_authority": false,
   "next": "RECOMPUTE_TERMINAL_ROUTE_CLOSURE_QUEUE__CONTINUE_ZERO_REALITY_PREWAVE_ROUTE_CLOSURE__NO_TERMINAL_WAVE_BEFORE_PREQUALIFICATION_PASS",
   "fresh_terminal_evidence_consumed": 0,
