@@ -196,11 +196,10 @@
       "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION",
       "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
       "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
-      "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY"
-    ],
-    "implementation_lanes_still_open": [
+      "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
       "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL"
     ],
+    "implementation_lanes_still_open": [],
     "dominant_remaining_residual": "S0_IMPLICIT_LONG_RANGE_RAW_MULTIMODAL_AND_UNVERIFIABLE_NOVEL_SEMANTIC_OR_EFFECT_MODEL_ACQUISITION",
     "secondary_remaining_residuals": [],
     "independent_shared_semantic_mechanism_classes": [
