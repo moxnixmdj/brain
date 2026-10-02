@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_ZERO_CASE_ATTAINABILITY_REOPEN_CUT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Find the smallest resource-only carrier recovery sufficient to reopen the frozen Terminal-Bench 4.0 attainability interval without reading task instructions, executing acceptance cases, replaying irreversible-zero tasks, or requiring the full 66-task population on one carrier.",
+  "authority": {
+    "carrier_compatibility_verification": {
+      "path": "canonical/verification/TB4_FULL_CARRIER_COMPATIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "0ac17c6eb66e95b8673b6031c2dbfe420437a6fc",
+      "public_runner_pr": 826,
+      "workflow_run_id": 36995397872,
+      "workflow_job_id": 110800840609
+    },
+    "attainability_manifest": {
+      "path": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
+      "git_blob_sha": "36cfd7b29465a2da6c05667b18848bdcabcd22e6"
+    },
+    "attainability_verdict": {
+      "path": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+      "git_blob_sha": "a7b0c692251b92819007c581b9fe84b75960cab7"
+    }
+  },
+  "frozen_score_math": {
+    "total_task_count": 66,
+    "trials_per_task": 5,
+    "required_successes": 220,
+    "current_remaining_creditable_tasks": 36,
+    "current_upper_bound_successes": 180,
+    "additional_creditable_tasks_needed": 8,
+    "reopened_creditable_task_count": 44,
+    "reopened_upper_bound_successes": 220,
+    "theorem": "CEIL((220_MINUS_36_TIMES_5)_DIV_5)=8__AND__(36_PLUS_8)_TIMES_5=220"
+  },
+  "resource_metadata_source": {
+    "source": "EXACT_PUBLIC_RUNNER_JOB_LOG_FROM_PR826__TASK_TOML_RESOURCE_METADATA_ONLY",
+    "task_instruction_files_read": 0,
+    "solution_files_read": 0,
+    "acceptance_cases_executed": 0,
+    "resource_exceed_task_count": 12,
+    "gpu_task_count": 3
+  },
+  "resource_exceed_tasks": [
+    {"task":"terminal-bench/distributed-dedup","cpus":8,"memory_mb":16384,"storage_mb":15000,"gpus":0},
+    {"task":"terminal-bench/formal-crypto","cpus":8,"memory_mb":4096,"storage_mb":10240,"gpus":0},
+    {"task":"terminal-bench/fp8-rmsnorm-gemm","cpus":4,"memory_mb":16384,"storage_mb":30720,"gpus":1},
+    {"task":"terminal-bench/jax-speedrun-gpu","cpus":16,"memory_mb":32768,"storage_mb":1024000,"gpus":1},
+    {"task":"terminal-bench/lake-temp-glm","cpus":8,"memory_mb":8192,"storage_mb":20480,"gpus":0},
+    {"task":"terminal-bench/live-database-cutover","cpus":16,"memory_mb":16384,"storage_mb":20480,"gpus":0},
+    {"task":"terminal-bench/math-eval-grader","cpus":8,"memory_mb":16384,"storage_mb":30720,"gpus":1},
+    {"task":"terminal-bench/medical-claims-processing","cpus":2,"memory_mb":16384,"storage_mb":20480,"gpus":0},
+    {"task":"terminal-bench/shadow-relay","cpus":8,"memory_mb":4096,"storage_mb":10240,"gpus":0},
+    {"task":"terminal-bench/takens-embedding-lean","cpus":4,"memory_mb":16384,"storage_mb":51200,"gpus":0},
+    {"task":"terminal-bench/uefi-bootkit","cpus":2,"memory_mb":16384,"storage_mb":10240,"gpus":0},
+    {"task":"terminal-bench/wdm-design","cpus":8,"memory_mb":16384,"storage_mb":10240,"gpus":0}
+  ],
+  "minimum_recovery_set": [
+    "terminal-bench/distributed-dedup",
+    "terminal-bench/formal-crypto",
+    "terminal-bench/lake-temp-glm",
+    "terminal-bench/medical-claims-processing",
+    "terminal-bench/shadow-relay",
+    "terminal-bench/takens-embedding-lean",
+    "terminal-bench/uefi-bootkit",
+    "terminal-bench/wdm-design"
+  ],
+  "minimum_carrier_envelope": {
+    "cpus_at_least": 8,
+    "usable_memory_mb_at_least": 16384,
+    "free_storage_mb_at_least": 51200,
+    "gpus_required": 0,
+    "docker_required": true,
+    "docker_compose_required": true,
+    "note": "Usable memory must meet the declared 16384 MB requirement after platform reservation; nominal 16 GB is not sufficient evidence."
+  },
+  "deliberately_not_required_for_attainability_reopen": [
+    "terminal-bench/fp8-rmsnorm-gemm",
+    "terminal-bench/jax-speedrun-gpu",
+    "terminal-bench/live-database-cutover",
+    "terminal-bench/math-eval-grader",
+    "ANY_OF_THE_18_IRREVERSIBLE_ZERO_TASKS"
+  ],
+  "hard_rules": [
+    "THIS_CUT_ONLY_PROVES_THE_MINIMUM_RESOURCE_ENVELOPE_AND_SCORE_ARITHMETIC__IT_DOES_NOT_PROVE_A_CARRIER_EXISTS",
+    "NO_TASK_INSTRUCTION_OR_SOLUTION_CONTENT_MAY_BE_READ_TO_SELECT_THE_EIGHT",
+    "NO_ACCEPTANCE_CASE_EXECUTION_FROM_THIS_CANDIDATE",
+    "A_CONCRETE_CARRIER_MUST_BE_ZERO_INCREMENTAL_SPEND_AND_PROTOCOL_COMPARABLE",
+    "THE_EIGHT_RECOVERED_TASKS_MUST_BE_CONTENT_ADDRESSED_TO_THE_EXACT_FROZEN_BENCHMARK_POPULATION_BEFORE_ATTAINABILITY_RECOMPILE",
+    "HETEROGENEOUS_CARRIER_USE_REQUIRES_EXPLICIT_PROTOCOL_EQUIVALENCE__NO_ASSUMED_SCORE_COMPARABILITY",
+    "RECOMPILE_THE_CANONICAL_ATTAINABILITY_CUT_AFTER_ANY_CARRIER_BINDING__DO_NOT_DIRECTLY AUTHORIZE_EXECUTION"
+  ],
+  "verification_state": {
+    "candidate_math_verified": true,
+    "resource_metadata_independent_reproduction_required": true,
+    "task_identity_binding_required": true,
+    "concrete_zero_cost_carrier_bound": false,
+    "protocol_equivalence_bound": false,
+    "attainability_recompiled": false
+  },
+  "new_reality_units_consumed": 0,
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
