@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PREWAVE_ROUTE_DEPENDENCY_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_CANDIDATE__CONTROLLER_COMPOSITION_PREFLIGHT_PENDING__ZERO_CAPABILITY_CREDIT",
+  "status": "FROZEN_CANDIDATE__CONTROLLER_COMPOSITION_INDEPENDENT_PASS__TERMINAL_CAPABILITY_SUFFICIENCY_REMAINS_UNPROVEN_BY_DESIGN",
   "brain_commit": "fb6062390ee0edaf423db97861d8d39f248578ed",
   "capability_layer": {
     "authority": "BRAIN_OWNED_CONFIGURATIONS_AND_DETERMINISTIC_CONTROL",
@@ -69,14 +69,17 @@
     "NO_SPENT_TASK_REPLAY",
     "TERMINAL_PORTFOLIOS_MUST_USE_FROZEN_BRAIN_COMMIT_AND_DEPENDENCY_HASHES",
     "MODEL_SUBSTRATE_MAY_BE_REPLACED_ONLY_WITH_DECLARED_EQUIVALENT_OR_REQUIRES_NEW_DEPENDENCY_MANIFEST",
-    "FINAL_DONOR_DELETION_OR_ABLATION_REMAINS_POST_WAVE_TERMINAL_GATE"
+    "FINAL_DONOR_DELETION_OR_ABLATION_REMAINS_POST_WAVE_TERMINAL_GATE",
+    "CURRENT_CONTROLLER_COMPOSITION_MUST_REMAIN_HASH_BOUND_TO_INDEPENDENT_PASS_RECEIPT_OR_REVERIFY"
   ],
   "current_prequalification": {
     "route_bytes_available": true,
     "historical_zero_cost_carrier_execution": true,
-    "current_controller_regression": "PENDING",
-    "terminal_capability_sufficiency": "UNPROVEN_BY_DESIGN__MEASURE_IN_T0_T1_T2_T3",
-    "execution_authority": false
+    "current_controller_regression": "INDEPENDENT_PASS",
+    "terminal_capability_sufficiency": "UNPROVEN_BY_DESIGN__MEASURE_ONLY_AFTER_FULL_PREQUALIFICATION",
+    "execution_authority": false,
+    "current_controller_regression_receipt": "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "controller_tested_brain_blobs_bound": true
   },
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
