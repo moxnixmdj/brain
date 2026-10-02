@@ -3,22 +3,25 @@ name: Verify P1 composite mutation crosswalk v1
 on:
   pull_request:
     paths:
-      - canonical/runtime/p1_composite_mutation_adversarial_audit_v1.py
-      - canonical/tests/test_p1_composite_mutation_adversarial_audit_v1.py
-      - canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py
-      - canonical/runtime/trajectory_failure_typed_ir_proof_v4.py
-      - canonical/governance/P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_V1.json
+      - "canonical/runtime/p1_composite_mutation_adversarial_audit_v1.py"
+      - "canonical/tests/test_p1_composite_mutation_adversarial_audit_v1.py"
+      - "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py"
+      - "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py"
+      - "canonical/governance/P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_V1.json"
+      - ".github/workflows/verify-p1-composite-mutation-crosswalk-v1.yml"
   workflow_dispatch:
 
 jobs:
   verify:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-      - name: Run exact adversarial P1 crosswalk audit
-        run: |
-          python -m pytest -q canonical/tests/test_p1_composite_mutation_adversarial_audit_v1.py
-          python canonical/runtime/p1_composite_mutation_adversarial_audit_v1.py
+          python-version: "3.12"
+      - name: Run exact adversarial P1 crosswalk audit tests
+        run: python -m unittest canonical.tests.test_p1_composite_mutation_adversarial_audit_v1 -v
+      - name: Emit machine-readable audit
+        run: python canonical/runtime/p1_composite_mutation_adversarial_audit_v1.py
