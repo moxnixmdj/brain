@@ -19,8 +19,14 @@ class LiveProofSchedulerReconciliationTests(unittest.TestCase):
         registry = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json")
         evidence = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json")
         hypergraph = load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json")
+        receipt = load("canonical/verification/TERMINAL_NEXT_ACTION_COMPILER_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json")
+        exhaustion = load("canonical/governance/OPUS55_SYNTHESIS_ZERO_REALITY_DISCHARGE_EXHAUSTION_V1.json")
         out = compile_next_frontier_v2(registry, evidence, hypergraph)
         projected = authority["compiled_next_frontier"]
+
+        self.assertTrue(receipt["status"].startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"))
+        self.assertEqual(receipt["public_runner"]["conclusion"], "success")
+        self.assertFalse(exhaustion["current_zero_reality_discharge_available"])
 
         self.assertEqual(projected["schema"], out["schema"])
         self.assertEqual(projected["proved_predicate_count"], out["proved_predicate_count"])
