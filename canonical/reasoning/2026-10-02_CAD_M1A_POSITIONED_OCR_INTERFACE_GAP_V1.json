@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CAD_M1A_POSITIONED_OCR_INTERFACE_GAP_20261002_V1",
   "date": "2026-10-02",
-  "status": "STATIC_INTERFACE_DEFECT_CONFIRMED__SPECIFIC_M1A_MECHANISM_RESIDUAL_REOPENED__ZERO_TERMINAL_RESULTS",
+  "status": "BRIDGE_IMPLEMENTED__INDEPENDENT_VERIFICATION_AND_CLEAN_CANDIDATE_REFREEZE_PENDING__ZERO_TERMINAL_RESULTS",
   "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
   "affected_obligation": "M1A_DRAWING_TO_NORMALIZED_VIEW_AND_FEATURE_CONSTRAINT_GRAPH",
   "evidence": {
@@ -36,7 +36,30 @@
       "FAIL_CLOSED_ON_MALFORMED_NONFINITE_OR_OUT_OF_BOUNDS_BOXES",
       "NO_ENGINEERING_SEMANTIC_AUTHORITY"
     ],
-    "no_other_m1a_mechanism_reopened": true
+    "no_other_m1a_mechanism_reopened": true,
+    "implementation": {
+      "runtime": "canonical/runtime/positioned_ocr_tesseract_bridge.py",
+      "tests": "canonical/tests/test_positioned_ocr_tesseract_bridge.py",
+      "workflow": ".github/workflows/verify-positioned-ocr-bridge.yml",
+      "runtime_commit": "213082b601da6a36ba3f403cda1e67332fc138ef",
+      "tests_commit": "3402f5ea741a3d00443a756c623185f7d2bdb112",
+      "workflow_commit": "e88dd89fda12ec6fdfd7a34657090a23cd919e0a",
+      "implemented_properties": [
+        "SAME_PINNED_TESSERACT_DEPENDENCY_VERIFIER_REUSED",
+        "TSV_WORD_EXTRACTION",
+        "DETERMINISTIC_PAGE_BLOCK_PARAGRAPH_LINE_GROUPING",
+        "X0_Y0_X1_EXCLUSIVE_Y1_EXCLUSIVE_BOX_CONTRACT",
+        "SOURCE_IMAGE_SHA256_AND_DEPENDENCY_RECEIPT",
+        "FAIL_CLOSED_MALFORMED_NEGATIVE_OUT_OF_BOUNDS_OR_INVALID_CONFIDENCE",
+        "NO_ENGINEERING_SEMANTIC_AUTHORITY"
+      ]
+    },
+    "remaining_before_closure": [
+      "INDEPENDENT_CI_PASS_ON_EXACT_BRIDGE_AND_TEST_BLOBS",
+      "INSTALL_BRIDGE_IN_CLEAN_POST_CONTAMINATION_CANDIDATE_PACKAGE",
+      "REFREEZE_CAD_CANDIDATE_DEPENDENCY_CONE",
+      "USE_ONLY_FRESH_POST_FREEZE_TERMINAL_CASES_FOR_PROMOTION"
+    ]
   },
   "contamination_consequence": {
     "hidden_grader_was_inspected_after_candidate_freeze": true,
