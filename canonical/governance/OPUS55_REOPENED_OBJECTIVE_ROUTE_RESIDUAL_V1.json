@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_REOPENED_OBJECTIVE_ROUTE_RESIDUAL_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_RECONCILIATION_INPUT__ZERO_TERMINAL_RESULTS__ZERO_CREDIT",
+  "objective": "Exploit the independently revalidated direct-objective gates exactly once while preventing prewave evidence from being mistaken for full acceptance evidence.",
+  "gate_receipt": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+  "required_gate_status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_CURRENT_OBJECTIVE_BINDINGS_EXACT_BYTES__PREWAVE_ONLY__ZERO_TERMINAL_CREDIT",
+  "registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+  "routes": [
+    {
+      "id": "DELEGATION_DIRECT_OBJECTIVE_REPLACEMENT",
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "binding": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "scope_relation": "FULL_PROTOCOL_REPLACEMENT_CANDIDATE",
+      "target_predicates": [
+        "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "terminal_requirement": "FRESH_SCOPE_VALID_T2_TERMINAL_OBJECTIVE_EVIDENCE_UNDER_CURRENT_EXACT_BINDING"
+    },
+    {
+      "id": "TOOL_DISCOVERY_DIRECT_OBJECTIVE_REPLACEMENT",
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "binding": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "scope_relation": "FULL_PROTOCOL_REPLACEMENT_CANDIDATE",
+      "target_predicates": [
+        "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+      ],
+      "terminal_requirement": "FRESH_SCOPE_VALID_T2_T3_TERMINAL_OBJECTIVE_EVIDENCE_UNDER_CURRENT_EXACT_BINDING"
+    },
+    {
+      "id": "TRAJECTORY_CAUSAL_LOCALIZATION_DIRECT_OBJECTIVE_REPLACEMENT",
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "binding": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "scope_relation": "FULL_PROTOCOL_REPLACEMENT_CANDIDATE",
+      "target_predicates": [
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR"
+      ],
+      "terminal_requirement": "FRESH_SCOPE_VALID_T0_T2_INTERVENTION_RESCUE_TERMINAL_EVIDENCE_UNDER_CURRENT_EXACT_BINDING"
+    },
+    {
+      "id": "BROWSER_DIRECT_OBJECTIVE_ROUTE",
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "binding": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "scope_relation": "PARTIAL_ONLY",
+      "target_predicates": [],
+      "related_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+      ],
+      "limitation": "BROWSER_GROUNDING_IS_ONLY_ONE_MULTI_TOOL_AGENCY_SLICE_AND_CANNOT_CLOSE_THE_FULL_MATCHED_AGENCY_PROTOCOL_BY_ITSELF"
+    },
+    {
+      "id": "RESEARCH_CONTROL_DIRECT_OBJECTIVE_ROUTE",
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "binding": "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "scope_relation": "ROUTE_ENABLER_ONLY",
+      "target_predicates": [],
+      "related_public_predicates": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "limitation": "DIRECT_RESEARCH_CONTROL_ROUTE_EXPLICITLY_CLAIMS_NO_HLE_SCORE_EQUIVALENCE"
+    }
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
