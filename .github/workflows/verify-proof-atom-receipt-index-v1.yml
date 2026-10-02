@@ -1,4 +1,5 @@
 name: Verify proof atom receipt index v1
+# snapshot-trigger: 2026-10-02 full live corpus freeze
 on:
   pull_request:
     paths:
