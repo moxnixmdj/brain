@@ -94,14 +94,15 @@
       "route_requirement": "FULL_STRUCTURED_METHOD_REQUIREMENT_TO_INTERMEDIATE_TO_OUTPUT_DAG_WITH_DIMENSION_TYPE_INVARIANT_BRANCH_EXCLUSION_AND_INDEPENDENT_EDGE_ACCEPTANCE_ORACLE",
       "scope_audit": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
       "candidate": "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
-      "independent_preflight": "canonical/verification/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight": "canonical/verification/STRUCTURED_METHOD_TERMINAL_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1B.json",
       "normalized_rule_verification": "canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "normalized_rule_boundary": "NORMALIZED_RULE_SEMANTICS_UPSTREAM__STRUCTURED_METHOD_OWNS_GRAPH_MATERIALIZATION_AND_STRUCTURAL_ACCEPTANCE",
       "scope_gate_input": "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
       "scope_gate_verification": "canonical/verification/STRUCTURED_METHOD_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "prewave_admissible": true,
       "terminal_results_observed": 0,
-      "proof_mode_classification": "PORTFOLIO_MULTIPLEXED_DETERMINISTIC_GATE"
+      "proof_mode_classification": "PORTFOLIO_MULTIPLEXED_DETERMINISTIC_GATE",
+      "terminal_population_binding": "canonical/governance/STRUCTURED_METHOD_TERMINAL_POPULATION_BINDING_V1.json"
     },
     {
       "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
