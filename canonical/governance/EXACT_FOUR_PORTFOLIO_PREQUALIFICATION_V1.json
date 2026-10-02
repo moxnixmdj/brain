@@ -265,7 +265,8 @@
     "global_terminal_replacement_proof_wave_frozen": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1.json",
     "global_terminal_surface_dominance_v3_mechanical_verification_valid": true,
     "global_terminal_surface_dominance_v3_scope_mapping_valid": false,
-    "global_surface_route_deletion_authority": false
+    "global_surface_route_deletion_authority": false,
+    "contract_native_brain_candidate_independent_pass": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -288,7 +289,6 @@
   "remaining_irreducible_prequalification_blockers": [
     "COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_TERMINAL_PROOF_ROUTE_MUST_PASS_SCOPE_EQUIVALENT_PROOF_GATE",
     "FRESH_POST_FREEZE_CROSS_DOMAIN_RAW_SPEC_POPULATION_WITH_ALTERNATIVE_INTERPRETATION_AND_ACCEPTANCE_CONSEQUENCE_ORACLE_MUST_BE_FROZEN",
-    "INDEPENDENT_PASS_REQUIRED_FOR_FOUR_CONTRACT_NATIVE_BRAIN_CANDIDATE_ADAPTERS",
     "FRESH_TERMINAL_CANDIDATE_AND_POPULATION_BINDINGS_REQUIRED_FOR_ACCEPTANCE_ARTIFACT_RESEARCH_TOOL_GROUNDING_AND_DELEGATION_ROUTES",
     "POST_FREEZE_SEED_POPULATION_SELECTION_AND_FULL_FOUR_PORTFOLIO_BINDING_MUST_BE_MACHINE_FROZEN"
   ],
