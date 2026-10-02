@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_CONTRACT_PROOF_BASIS_RESYNCHRONIZED__2_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_CONTRACT_PROOF_BASIS_RESYNCHRONIZED__3_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
@@ -337,7 +337,7 @@
     "remaining_six_candidate_bindings": "NARROW_COMPONENT_PREFLIGHT_ONLY__ALL_SIX_FAIL_FULL_CONTRACT_SCOPE_AUDIT__ZERO_TERMINAL_ROUTE_AUTHORITY__canonical/verification/REMAINING_SIX_TERMINAL_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "active_terminal_proof_basis_current": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
     "active_terminal_contract_count": 12,
-    "admissible_frozen_terminal_route_count": 1,
+    "admissible_frozen_terminal_route_count": 3,
     "global_terminal_surface_dominance_v4_independently_verified": "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V4_CURRENT_FAIL_CLOSED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "remaining_behavior_information_boundary_audit": "canonical/governance/REMAINING_BEHAVIOR_INFORMATION_BOUNDARY_AUDIT_V1.json",
     "terminal_replacement_population_protocol_v2": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
@@ -370,7 +370,12 @@
     "delegation_terminal_route_frozen_admissible": true,
     "open_domain_scope_superset_deadlock_audit": "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json",
     "open_domain_bounded_synthetic_whole_scope_promotion_forbidden": true,
-    "delegation_current_candidate_oracle_revalidation": "PENDING_AFTER_EXACT_BLOB_CHANGE"
+    "delegation_current_candidate_oracle_revalidation": "PENDING_AFTER_EXACT_BLOB_CHANGE",
+    "admissible_frozen_terminal_routes": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+      "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001"
+    ]
   },
   "route_audit_summary": {
     "surface_count": 14,
