@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PROJECTION_CONSISTENCY_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__DERIVED_PROJECTION_DRIFT_FIREWALL__ZERO_CREDIT",
+  "status": "ACTIVE_FAIL_CLOSED__DERIVED_PROJECTION_DRIFT_FIREWALL__4_OF_19__9_OF_38__ZERO_CREDIT",
   "objective": "Prevent stale terminal closure, ownership, residual-plan, proof-kernel, or authority pointers from disagreeing with independently verified Opus55 acceptance calibration and residual frontier state.",
   "runtime": "canonical/runtime/terminal_projection_consistency_v1.py",
   "tests": "canonical/tests/test_terminal_projection_consistency_v1.py",
   "current_truth": {
     "behavioral_families": "19/19_PASS",
-    "opus55_acceptance": "3/19_CALIBRATED__16_PENDING",
+    "opus55_acceptance": "4/19_CALIBRATED__15_PENDING",
     "verified_owned": "2/19",
-    "atomic_acceptance_frontier": "8/38_PROVED__0_OPEN_DIRECT__30_BLOCKED",
+    "atomic_acceptance_frontier": "9/38_PROVED__0_OPEN_DIRECT__29_BLOCKED",
     "authorized_acceptance_case_actions": [],
     "tb4_reality_execution": "REVOKED__180_LT_220",
     "terminal_goal_achieved": false
@@ -23,7 +23,7 @@
     "NO_TERMINAL_REPLAY",
     "NO_CAPABILITY_OR_FAMILY_CREDIT_FROM_THIS_FIREWALL"
   ],
-  "invalidation": "ANY_SOURCE_BLOB_OR_ACCEPTANCE_RESIDUAL_AUTHORITY_CHANGE",
+  "invalidation": "ANY_SOURCE_BLOB_OR_ACCEPTANCE_CALIBRATION_V3_OR_RESIDUAL_V10_AUTHORITY_CHANGE",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
