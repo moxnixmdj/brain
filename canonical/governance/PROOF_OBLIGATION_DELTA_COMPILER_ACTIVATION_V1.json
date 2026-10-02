@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_OBLIGATION_DELTA_COMPILER_ACTIVATION_V1",
   "date": "2026-10-02",
-  "status": "IMPLEMENTED_HARDENED_CANDIDATE__CONTENT_ADDRESSED_BINDING_RECEIPTS_REQUIRED__CI_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__HARDENED_CONTENT_ADDRESSED_BINDINGS__ZERO_CREDIT",
   "objective": "Compile frozen target obligations and verified witness evidence into one explicit content-addressed normal form and return the exact unresolved proof delta before any semantic implication, comparator execution, or fresh reality query.",
   "runtime": "canonical/runtime/proof_obligation_delta_compiler_v1.py",
   "tests": "canonical/tests/test_proof_obligation_delta_compiler_v1.py",
@@ -67,5 +67,13 @@
     "runtime_fix_commit": "d931fe110293084b529ecd64623f88ec40621219",
     "regression_fix_commit": "e65b3683fb463dc527d8c6f35db8cb37c77a0948",
     "disposition": "FIXED_BEFORE_INDEPENDENT_ACTIVATION__NO_PRIOR_CREDIT"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/PROOF_OBLIGATION_DELTA_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "git_blob_sha": "ec961c2ced39874a3746e0126dac67fac1519797",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__HARDENED_CONTENT_ADDRESSED_BINDINGS__OPAQUE_RECEIPTS_AND_DUPLICATE_TARGET_BINDINGS_REJECTED__ZERO_CREDIT",
+    "public_runner_pr": 937,
+    "workflow_run_id": 37015696259,
+    "merge_commit": "4be52aea1ef5f58ade48ed91dadd56e97657289e"
   }
 }
