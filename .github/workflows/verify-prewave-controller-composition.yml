@@ -1,4 +1,5 @@
 name: Verify prewave controller composition
+# Trigger note: current-main zero-reality prewave regression.
 
 on:
   push:
