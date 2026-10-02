@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_M2_DOCX_EXACT_TEXT_PRESERVATION_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_NARROW_NATIVE_DOCX_EDIT_COMPONENT__ZERO_WHOLE_LANE_CREDIT",
+  "parent_lane": "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+  "implementation": "canonical/runtime/docx_exact_text_edit.py",
+  "implementation_blob_sha": "7e04831173fd0ffab1e7a263d1e16ddadaa9fbbc",
+  "tests": "canonical/tests/test_docx_exact_text_edit.py",
+  "tests_blob_sha": "7e30c1a303effdb9be697b485e46a7ceb116af2b",
+  "independent_verification": {
+    "workflow_run_id": 36949425940,
+    "conclusion": "success",
+    "verified_commit": "d56bfd3186c6444a7607d385cb25c009ea7e2b54"
+  },
+  "owned_scope": [
+    "UNIQUE_EXACT_WORD_DOCUMENT_XML_TEXT_NODE_REPLACEMENT",
+    "ALL_NON_DOCUMENT_XML_ZIP_MEMBERS_PRESERVED_BYTE_FOR_BYTE",
+    "PACKAGE_MEMBER_SET_PRESERVED",
+    "AMBIGUOUS_MISSING_INVALID_OR_NONUNIQUE_TARGET_FAILS_CLOSED"
+  ],
+  "exclusions": [
+    "NO_GENERAL_DOCX_STRUCTURED_EDIT_CLAIM",
+    "NO_MULTI_RUN_OR_FORMAT_PRESERVING_REPLACEMENT_CLAIM",
+    "NO_VISUAL_LAYOUT_EQUIVALENCE_CLAIM",
+    "NO_HEADERS_FOOTERS_COMMENTS_TRACKED_CHANGES_FIELDS_DRAWINGS_OR_RELATIONSHIP_EDIT_CLAIM",
+    "NO_PROFESSIONAL_QUALITY_JUDGMENT"
+  ],
+  "donor_runtime_required": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "family_credit_delta": 0
+}
