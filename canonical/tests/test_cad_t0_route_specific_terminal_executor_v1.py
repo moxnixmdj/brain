@@ -11,9 +11,11 @@ class CadT0RouteSpecificTerminalExecutorTests(unittest.TestCase):
     C = "TEST_ONLY_COMMITMENT"
     B = "TEST_ONLY_NONTERMINAL_BEACON"
 
-    def test_static_dependency_blobs_match(self):
+    def test_static_dependency_preflight_fails_closed_on_reopened_cad_binding(self):
         out = ex.static_dependency_preflight(Path("."))
-        self.assertTrue(out["pass"], out)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("CAD_BINDING_NOT_PREWAVE_ADMISSIBLE", out["errors"])
+        self.assertIn("CAD_ANTISHORTCUT_FALSIFICATION_ACTIVE", out["errors"])
 
     def test_exact_frozen_count_and_family_cycle(self):
         self.assertEqual(ex.COUNT, 128)
@@ -32,15 +34,12 @@ class CadT0RouteSpecificTerminalExecutorTests(unittest.TestCase):
                 self.assertTrue(row["pass"], row)
                 self.assertFalse(row["candidate_hidden_oracle_present"])
 
-    def test_full_128_slot_executor(self):
+    def test_full_executor_refuses_to_consume_cases_while_binding_reopened(self):
         out = ex.execute_cad_route(commitment=self.C, beacon=self.B, root=Path("."))
-        self.assertTrue(out["pass"], out)
-        self.assertEqual(out["case_count"], 128)
-        self.assertEqual(out["pass_count"], 128)
-        self.assertEqual(out["failed_count"], 0)
-        self.assertEqual(out["candidate_hidden_oracle_leak_count"], 0)
-        self.assertEqual(set(out["family_counts"]), set(population.FAMILIES))
-        self.assertTrue(all(v == 16 for v in out["family_counts"].values()))
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(out["status"], "FAIL_CLOSED_PREEXECUTION")
+        self.assertEqual(out["case_count"], 0)
+        self.assertFalse(out["terminal_result"])
 
     def test_no_reduced_count_argument(self):
         with self.assertRaises(TypeError):
