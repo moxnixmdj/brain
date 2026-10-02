@@ -63,12 +63,14 @@
         "GDPval-AA v2.1 >=1846 Elo",
         "AA-Briefcase v1.1 >=1822 Elo",
         "Chartography with tools >=89%",
+        "Finance & Accounting Index >=61 for represented scope",
         "Finance Agent v2 >=58.59% for represented scope"
       ],
       "blockers": [
         "AA_BRIEFCASE_V1_1_IS_PRIVATE__FREEZE_SCOPE_EQUIVALENT_ABSOLUTE_PROFESSIONAL_WORK_PROOF_OR_REMAIN_BLOCKED",
         "GDPVAL_UNDERLYING_GOLD_SUBSET_IS_PUBLIC_BUT_EXACT_GDPVAL_AA_V2_1_ZERO_COST_PAIRWISE_ROUTE_NOT_VERIFIED",
         "FINANCE_AGENT_V2_PUBLIC_HARNESS_HAS_PUBLIC_SAMPLES_BUT_OFFICIAL_PLATFORM_AND_HELDOUT_TEST_ARE_GATED_OR_PRIVATE",
+        "FINANCE_AND_ACCOUNTING_INDEX_AUTHORITATIVE_IDENTITY_TASK_SET_HARNESS_SCORER_AND_ZERO_COST_ROUTE_UNRESOLVED__RESOLVE_OR_FREEZE_BEHAVIORALLY_DOMINANT_ABSOLUTE_PROOF",
         "CHARTOGRAPHY_PUBLIC_HARNESS_EXISTS__FULL_SCORER_TOOL_EQUIVALENCE_PREFLIGHT_NOT_YET_FROZEN",
         "UNREPRESENTED_FINANCIAL_ARTIFACT_COMMUNICATION_LEAVES_REQUIRE_PREDECLARED_ABSOLUTE_OR_SCOPE_EQUIVALENT_PROOFS"
       ]
@@ -187,17 +189,19 @@
     "no_known_opaque_target_capability_provider_in_operative_brain_route": "PREWAVE_AUDIT_REQUIRED",
     "no_known_unresolved_composition_defect_before_wave": "PREWAVE_AUDIT_REQUIRED",
     "four_portfolios_pairwise_execution_independent": "SHARED_PROTOCOL_FROZEN__PER_PORTFOLIO_NAMESPACE_BINDINGS_REQUIRED",
-    "livebench_if_verifier_source_bytes_frozen": true
+    "livebench_if_verifier_source_bytes_frozen": true,
+    "finance_and_accounting_index_surface_accounted_for": true
   },
   "route_audit_summary": {
-    "surface_count": 13,
+    "surface_count": 14,
     "exact_public_inputs_or_harness_count": 6,
     "public_scope_equivalent_candidate_count": 3,
     "official_gated_or_private_count": 2,
     "public_score_only_no_exact_executable_route_found_count": 2,
     "zero_cost_executable_surface_count": 0,
     "portfolio_prequalification_pass_count": 0,
-    "conclusion": "NO_PORTFOLIO_IS_EXECUTION_AUTHORIZED_YET__GENERIC_PREWAVE_POLICY_AMBIGUITY_REMOVED__REMAINING_WORK_IS_SURFACE_BINDING_AND_SCOPE_EQUIVALENCE"
+    "conclusion": "NO_PORTFOLIO_IS_EXECUTION_AUTHORIZED_YET__GENERIC_PREWAVE_POLICY_AMBIGUITY_REMOVED__REMAINING_WORK_IS_SURFACE_BINDING_AND_SCOPE_EQUIVALENCE",
+    "unresolved_identity_or_access_count": 1
   },
   "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
   "remaining_irreducible_prequalification_blockers": [
