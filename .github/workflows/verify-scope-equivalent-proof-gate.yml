@@ -1,0 +1,18 @@
+name: Verify scope-equivalent proof gate
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/scope_equivalent_proof_gate.py"
+      - "canonical/tests/test_scope_equivalent_proof_gate.py"
+      - "canonical/governance/SCOPE_EQUIVALENT_ABSOLUTE_PROOF_SUBSTITUTION_V1.json"
+      - ".github/workflows/verify-scope-equivalent-proof-gate.yml"
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python canonical/runtime/scope_equivalent_proof_gate.py --self-test
+      - run: python -m unittest canonical.tests.test_scope_equivalent_proof_gate -v
