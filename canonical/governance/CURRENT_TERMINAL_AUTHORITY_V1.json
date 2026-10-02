@@ -6,7 +6,7 @@
     "terminal_execution": "3352/3352_PASS",
     "contracts": "12/12_PASS",
     "behavioral_families": "19/19_PASS",
-    "opus55_acceptance": "3/19_PASS__16/19_OPEN",
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
     "global_postconditions": "INDEPENDENT_PASS",
     "donor_cleanroom": "INDEPENDENT_PASS",
     "achieved": false
@@ -14,20 +14,20 @@
   "sources": {
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-      "git_blob_sha": "ec212d3a8f4bf3c8bbfe0005634a29a5b0434cf4"
+      "git_blob_sha": "886801ea0de58dd18e67c79f0adef6cdacc2b094"
     },
     "ownership_matrix": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "git_blob_sha": "5ee8b95b337bd6b17a81d4da29ab43a230ff9e31"
+      "git_blob_sha": "504fa844a931119b55e9ff94e641bda01a8dd2f0"
     },
     "acceptance_calibration": {
-      "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "git_blob_sha": "aea96cc8321f6695f027c135bb8b1471ef27c038",
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__3_OF_19_ACCEPTANCE_CALIBRATED__16_PENDING"
+      "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+      "git_blob_sha": "50d0319de27bd54ed8f6166545f640b20ec72ce9",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__4_OF_19_ACCEPTANCE_CALIBRATED__15_PENDING"
     },
     "residual_plan": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json",
-      "git_blob_sha": "03370552a3e73d97da7723ae15cd3fc80cbb4613"
+      "git_blob_sha": "fe0be44884bcbe39dfafcfde30cceb537f13acfe"
     },
     "global_postconditions": {
       "path": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -39,7 +39,7 @@
     },
     "acceptance_residual_proof_kernel_v2": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_PROOF_KERNEL_V2.json",
-      "git_blob_sha": "c4d58a8e6e0fa47615f0d15fed83c323811e767d"
+      "git_blob_sha": "b5afd6da827066184c3476bea919f06d3cce4822"
     },
     "acceptance_residual_verdict_v2": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V2.json",
@@ -97,7 +97,7 @@
     "acceptance_residual_verdict_v9": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json",
       "git_blob_sha": "b25b0ed71183dc9020687d3f529ff49a85edee14",
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__8_PROVED__0_OPEN__30_BLOCKED"
+      "status": "SUPERSEDED_BY_V10_DELEGATION_ATOMIC_CLOSURE"
     },
     "terminal_closure_basis_v2": {
       "path": "canonical/verification/TERMINAL_CLOSURE_BASIS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
@@ -105,38 +105,67 @@
     },
     "terminal_projection_consistency": {
       "governance_path": "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json",
-      "governance_git_blob_sha": "69daa6f18f1b5617b948d943988191102182de8e",
+      "governance_git_blob_sha": "070bc8aaa460653999b507626e6d5a76a41af064",
       "runtime_path": "canonical/runtime/terminal_projection_consistency_v1.py",
-      "runtime_git_blob_sha": "322df61ab251f5e19bd0b10fb67727887482aa25",
+      "runtime_git_blob_sha": "a804856c01c76bcd09ba2e9d1a1845f6c09afc01",
       "tests_path": "canonical/tests/test_terminal_projection_consistency_v1.py",
-      "tests_git_blob_sha": "fc1daa3ee8588c1d7eef4537c2f79baa1dcfaaf1",
+      "tests_git_blob_sha": "eb0a909d79fbb465860a243ebe3d5f5887cf6da6",
       "workflow_path": ".github/workflows/verify-terminal-projection-consistency.yml",
-      "workflow_git_blob_sha": "893e895785692f97d4936920d39c9688b05754a1",
-      "status": "ACTIVE_FAIL_CLOSED__PR_VERIFICATION_PENDING"
+      "status": "ACTIVE_FAIL_CLOSED__DYNAMIC_COUNTS__PUBLIC_VERIFICATION_REQUIRED_BEFORE_MERGE"
+    },
+    "acceptance_calibration_governance": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_CALIBRATION_V2.json",
+      "git_blob_sha": "8fddf939685a9437636f6f2d825df0989c77faf8",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__4_OF_19_ACCEPTANCE_CALIBRATED__15_PENDING__ZERO_CREDIT"
+    },
+    "acceptance_residual_verdict_v10": {
+      "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
+      "git_blob_sha": "18f2bdcb9bcced0a6f93747ba16d7829b882fe41",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_PROVED__0_OPEN__29_BLOCKED"
+    },
+    "post_delegation_acceptance_reconciliation": {
+      "path": "canonical/verification/POST_DELEGATION_ACCEPTANCE_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "5b9940e962aee489547bcb6d71bfca48daaaee51",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__4_OF_19__9_OF_38__29_OF_29_ACTION_COVERAGE"
+    },
+    "action_coverage_guard": {
+      "path": "canonical/verification/TERMINAL_ACTION_COVERAGE_GUARD_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "7c36a158e8dc0e68d10fd5a82de56f9bd9c8004e",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__29_OF_29_UNPROVED_PREDICATES_COVERED"
+    },
+    "delegation_temporal_transport": {
+      "path": "canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "5278abb7fcaa6b97189b67598c75e4df395e1788",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_REPLAY__ZERO_CREDIT"
+    },
+    "delegation_ceiling_transmutation": {
+      "path": "canonical/verification/DELEGATION_TEMPORAL_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "5023cc222a44f99b57785f5954cc95a29b739193",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_4_OF_19__ZERO_CREDIT"
     }
   },
   "residual": [
-    "30_OF_38_ATOMIC_OPUS55_ACCEPTANCE_PREDICATES_BLOCKED__0_OPEN__8_PROVED",
-    "TOOL_DISCOVERY_SELECTION_AND_LEARNING_ACCEPTANCE_CALIBRATED__TOTAL_ACCEPTED_FAMILIES_3_OF_19",
+    "29_OF_38_ATOMIC_OPUS55_ACCEPTANCE_PREDICATES_BLOCKED__0_OPEN__9_PROVED",
+    "SUBAGENT_DELEGATION_AND_COORDINATION_ACCEPTANCE_CALIBRATED_BY_INDEPENDENT_TEMPORAL_CEILING_WITNESS__TOTAL_ACCEPTED_FAMILIES_4_OF_19",
     "CURRENT_THRESHOLD_ROUTE_MATHEMATICALLY_UNATTAINABLE__MAXIMUM_180_SUCCESSES_LT_220_REQUIRED",
     "PENDING_STAGE_C_BATCH_REVOKED_BEFORE_EXECUTION__PRESERVE_UNSPENT",
     "14_OTHER_PUBLIC_BAR_PREDICATES_BLOCKED_ON_SCORE_PRODUCING_BRAIN_ROUTES",
-    "12_MATCHED_OR_SUPERPORTFOLIO_PREDICATES_BLOCKED_ON_EXACT_OPUS55_COMPARATOR_OR_SCOPE_COMPLETE_STRONGER_PROOF",
+    "11_MATCHED_OR_SUPERPORTFOLIO_PREDICATES_BLOCKED_ON_EXACT_OPUS55_COMPARATOR_OR_SCOPE_COMPLETE_STRONGER_PROOF",
     "2_DIRECT_JUDGMENT_PREDICATES_BLOCKED_ON_INTERNAL_OPERATIVE_SOURCE",
     "1_COMPOSITION_DEPENDENCY_PREDICATE_BLOCKED_ON_UPSTREAM_COMPONENT_PROOFS",
     "REBUILD_FINAL_BUNDLE_AFTER_ACCEPTANCE_CLOSURE",
     "FINAL_CLOSURE_AND_INDEPENDENT_FINALITY"
   ],
   "no_terminal_replay": true,
-  "next": "RECOMPUTE_TERMINAL_PROOF_SUPERCOMPILER_ON_30_BLOCKED_FRONTIER__PRIORITIZE_ZERO_REALITY_STRONGER_PROOF_AND_ROUTE_BINDING__TB4_REALITY_REMAINS_REVOKED_UNTIL_MACHINE_VERIFIED_UPPER_BOUND_GE_220",
-  "rule": "DERIVED_POINTER_ONLY__CURRENT_ACCEPTANCE_CALIBRATION_V2_AND_RESIDUAL_V9_ARE_LOAD_BEARING__TERMINAL_PROJECTION_CONSISTENCY_FIREWALL_ACTIVE__RECOMPUTE_IF_ANY_SOURCE_BLOB_CHANGES",
+  "next": "RECOMPUTE_TERMINAL_PROOF_SUPERCOMPILER_ON_29_BLOCKED_FRONTIER__PRIORITIZE_ZERO_REALITY_STRONGER_PROOF_AND_ROUTE_BINDING__TB4_REALITY_REMAINS_REVOKED_UNTIL_MACHINE_VERIFIED_UPPER_BOUND_GE_220",
+  "rule": "DERIVED_POINTER_ONLY__CURRENT_ACCEPTANCE_CALIBRATION_V3_AND_RESIDUAL_V10_ARE_LOAD_BEARING__DYNAMIC_TERMINAL_PROJECTION_FIREWALL_ACTIVE__RECOMPUTE_IF_ANY_SOURCE_BLOB_CHANGES",
   "atomic_acceptance_frontier": {
-    "proved": 8,
+    "proved": 9,
     "open_direct": 0,
-    "blocked": 30,
+    "blocked": 29,
     "total": 38,
     "authorized_acceptance_case_actions": [],
-    "source": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json"
+    "source": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json"
   },
   "tb4_threshold_execution": {
     "full_population_trial_slots": 330,
