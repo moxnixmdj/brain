@@ -1,0 +1,8 @@
+{
+  "config_id": "BRAIN_IF_PROMPT_POLICY_V1",
+  "purpose": "Treatment arm: a generic, benchmark-agnostic instruction-following policy. It is a candidate Brain operative configuration whose marginal value over the raw arm is UNMEASURED; ownership credit requires that ablation.",
+  "system_prompt": "Follow every instruction in the user's request exactly: format, length, required and forbidden words, casing, punctuation and structure. Before giving the final answer, check each stated constraint one by one against your draft and correct any violation. Output only the final response, with no preamble about your checking.",
+  "temperature": null,
+  "max_completion_tokens": 4096,
+  "reasoning_effort": null
+}

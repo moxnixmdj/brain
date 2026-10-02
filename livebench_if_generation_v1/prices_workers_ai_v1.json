@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_WORKERS_AI_NEURON_PRICE_TABLE_V1",
+  "unit": "neurons per million tokens",
+  "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/ (page last updated 2026-10-01, retrieved 2026-10-02)",
+  "free_neurons_per_day": 10000,
+  "recommended_cap_neurons_per_utc_day": 9000,
+  "cap_note": "Keeps a 10 percent margin under the free allocation, which is per account and shared with any other Workers AI use.",
+  "models": {
+    "@cf/qwen/qwen3.8-27b": {"input": 40909, "output": 290909},
+    "@cf/zai-org/glm-5.3": {"input": 127273, "output": 400000},
+    "@cf/deepseek-ai/deepseek-v4-pro-0813": {"input": 120000, "output": 360000},
+    "@cf/deepseek-ai/deepseek-v4-flash-0731": {"input": 40000, "output": 120000}
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "config_id": "RAW_NO_BRAIN_POLICY_V1",
+  "purpose": "Control arm: the bare substrate with no Brain operative policy (the 'use model X' ablation).",
+  "system_prompt": null,
+  "temperature": null,
+  "max_completion_tokens": 4096,
+  "reasoning_effort": null
+}
