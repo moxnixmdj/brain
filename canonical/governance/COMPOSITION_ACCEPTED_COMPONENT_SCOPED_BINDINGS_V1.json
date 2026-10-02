@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_ACCEPTED_COMPONENT_SCOPED_BINDINGS_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_TWO_EXACT_SHARED_BEHAVIOR_BRIDGES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "authority": {
+    "manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "addd53bb26f2a0d8d2f212501e2f7f306cd920c4"
+    },
+    "registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "calibration": {
+      "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+      "git_blob_sha": "c50034c670f797d91fa443d244853071f09bd37a"
+    },
+    "delegation_witness": {
+      "path": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "git_blob_sha": "cb3b7c4b6c4e1f2a0471c6b6be72c4ca9ebddc80"
+    },
+    "tool_discovery_witness": {
+      "path": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "git_blob_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7"
+    }
+  },
+  "bindings": [
+    {
+      "binding_id": "COMPOSITION_DELEGATION_SHARED_BEHAVIOR_SCOPED_PROOF_V1",
+      "component_id": "delegation",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "source_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "source_behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "source_witness": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "proved_properties": ["SCOPED_ACCEPTANCE_PROOF"],
+      "bridge_rule": "EXACT_SHARED_ACTIVE_BEHAVIOR_ID_LOAD_BEARING_IN_COMPOSITION_AND_SOLE_SOURCE_FAMILY_CONTRACT"
+    },
+    {
+      "binding_id": "COMPOSITION_TOOL_DISCOVERY_SHARED_BEHAVIOR_SCOPED_PROOF_V1",
+      "component_id": "tool discovery",
+      "interface_id": "coding+debugging+tool discovery",
+      "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "source_behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "source_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "proved_properties": ["SCOPED_ACCEPTANCE_PROOF"],
+      "bridge_rule": "EXACT_SHARED_ACTIVE_BEHAVIOR_ID_LOAD_BEARING_IN_COMPOSITION_AND_SOLE_SOURCE_FAMILY_CONTRACT"
+    }
+  ],
+  "hard_rules": [
+    "NO_BINDING_BY_NAME_OR_ANALOGY_ALONE",
+    "COMPOSITION_FAMILY_MUST_EXPLICITLY_LIST_THE_SOURCE_BEHAVIOR_ID",
+    "SOURCE_FAMILY_MUST_MAP_EXACTLY_TO_THE_SAME_SINGLE_ACTIVE_BEHAVIOR_ID",
+    "SOURCE_FAMILY_MUST_BE_CURRENTLY_ACCEPTANCE_CALIBRATED",
+    "SOURCE_WITNESS_MUST_BE_VERIFIED_INDEPENDENT_CONTAMINATION_CLEAN_BIND_FROZEN_PROTOCOL_PROVEN_STRONGER_AND_CLOSE_ENTIRE_PROTOCOL",
+    "SOURCE_WITNESS_BEHAVIOR_ID_MUST_EQUAL_THE_SHARED_ACTIVE_BEHAVIOR_ID",
+    "BRIDGE_GRANTS_ONLY_SCOPED_ACCEPTANCE_PROOF_TO_THE_DECLARED_LITERAL_INTERFACE",
+    "NO_CROSS_COMPONENT_INTERACTION_OR_COMPOSITION_TERMINAL_CREDIT"
+  ],
+  "expected_slicer_projection": {
+    "interface_count": 12,
+    "scoped_proved_interface_count": 2,
+    "open_interface_count": 10,
+    "composition_component_predicate_closed": false
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
