@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_POSTWAVE_EVIDENCE_LIFTER_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Lift already-consumed immutable V3 evidence through exact-byte chronology into the existing Opus55 acceptance proof system without replay, historical rewrites, or a second truth authority.",
+  "current_authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "required_truth": "3/19_ACCEPTANCE__8/38_ATOMIC__TERMINAL_FALSE"
+  },
+  "components": {
+    "postwave_reconciler": {
+      "runtime": "canonical/runtime/postwave_evidence_reconciler_v1.py",
+      "tests": "canonical/tests/test_postwave_evidence_reconciler_v1.py",
+      "input": "canonical/governance/POSTWAVE_EVIDENCE_RECONCILIATION_INPUT_V1.json"
+    },
+    "atomic_family_lifter": {
+      "runtime": "canonical/runtime/postwave_atomic_family_witness_lifter_v1.py",
+      "tests": "canonical/tests/test_postwave_atomic_family_witness_lifter_v1.py",
+      "target_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "target_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR"
+    }
+  },
+  "expected_zero_credit_result": {
+    "delegation": "FULL_FAMILY_ABSOLUTE_DOMINANCE_CANDIDATE_READY__VERIFIED_FALSE__INDEPENDENT_FALSE",
+    "recovery_causal_localization": "SCOPE_VALID_POSTWAVE_EVIDENCE_READY__BOUND_ADJUDICATION_STILL_REQUIRED",
+    "strict_family_count_unchanged": 3,
+    "proved_atomic_predicate_count_unchanged": 8
+  },
+  "next_only_after_independent_verification": [
+    "BIND_VERIFIED_DELEGATION_FAMILY_WITNESS_INTO_EXISTING_OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT",
+    "BIND_VERIFIED_DELEGATION_ATOMIC_CEILING_CLAIM_INTO_EXISTING_ATOMIC_EVIDENCE_LEDGER",
+    "REPLAY_EXISTING_ACCEPTANCE_TRANSMUTER_CALIBRATION_V2_AND_RESIDUAL_COMPILER_V2_WITH_ZERO_NEW_REALITY",
+    "UPDATE_CURRENT_TERMINAL_AUTHORITY_ONLY_IF_INDEPENDENT_RECEIPTS_PROVE_NEW_COUNTS"
+  ],
+  "hard_rules": [
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_HISTORICAL_BINDING_REWRITE",
+    "NO_SECOND_CURRENT_TRUTH_AUTHORITY",
+    "NO_CANDIDATE_SELF_PROMOTION",
+    "NO_RECOVERY_NONINFERIORITY_CREDIT_FROM_SCOPE_EVIDENCE_ALONE",
+    "EXISTING_ACCEPTANCE_PROOF_TRANSMUTER_AND_RESIDUAL_COMPILER_REMAIN_PROMOTION_AUTHORITIES"
+  ],
+  "workflow": ".github/workflows/verify-postwave-evidence-lifter-v1.yml",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
