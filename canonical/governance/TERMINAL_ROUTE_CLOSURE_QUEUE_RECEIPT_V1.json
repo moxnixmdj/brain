@@ -1,13 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1",
   "date": "2026-10-02",
-  "source_basis_blob_sha": "615fb2d82906fd4f3d2b62afcee133d16a8fc9a7",
-  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__10_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
-  "status": "CANONICAL_SCHEDULING_RECEIPT__REBOUND_TO_LIVE_9_OF_12_BASIS__ZERO_PROMOTION_AUTHORITY",
+  "source_basis_blob_sha": "411f054140f25c4b0c71dc7287c48893ff550082",
+  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__12_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "CANONICAL_SCHEDULING_RECEIPT__LIVE_12_OF_12_BASIS__ZERO_OPEN_ROUTE_BLOCKERS__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
-  "closed_route_count": 10,
-  "open_route_count": 2,
+  "closed_route_count": 12,
+  "open_route_count": 0,
   "closed_behavior_ids": [
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
     "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
     "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
     "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
@@ -17,49 +18,11 @@
     "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
     "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
     "TASK_TO_DELEGATION_GRAPH_001",
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
     "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
   ],
-  "top_priority_behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
-  "queue": [
-    {
-      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
-      "portfolio": "T2",
-      "proof_state": "DIRECT_OBJECTIVE_T2_TERMINAL_BINDING_FROZEN__INDEPENDENT_VERIFICATION_PENDING",
-      "blockers": [
-        "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_OF_EXACT_BROWSER_T2_BINDING_PENDING"
-      ],
-      "blocker_classes": {
-        "binding": 1,
-        "scope_gate": 0,
-        "scope_expansion": 0,
-        "open_domain_protocol": 0,
-        "external_block": 0,
-        "other": 0
-      },
-      "portfolio_leverage": 1,
-      "priority_score": 1,
-      "next_action_class": "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_OF_EXACT_BROWSER_T2_BINDING_PENDING"
-    },
-    {
-      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
-      "portfolio": "T2_T3",
-      "proof_state": "DIRECT_OBJECTIVE_T2_T3_TERMINAL_BINDING_FROZEN__INDEPENDENT_VERIFICATION_PENDING",
-      "blockers": [
-        "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_OF_EXACT_TOOL_DISCOVERY_T2_T3_BINDING_PENDING"
-      ],
-      "blocker_classes": {
-        "binding": 1,
-        "scope_gate": 0,
-        "scope_expansion": 0,
-        "open_domain_protocol": 0,
-        "external_block": 0,
-        "other": 0
-      },
-      "portfolio_leverage": 2,
-      "priority_score": 2,
-      "next_action_class": "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_OF_EXACT_TOOL_DISCOVERY_T2_T3_BINDING_PENDING"
-    }
-  ],
+  "top_priority_behavior_id": null,
+  "queue": [],
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_terminal_evidence_consumed": 0,
@@ -73,12 +36,13 @@
     "rule": "P1_AND_P3_EXTERNAL_COMPARATOR_BLOCKS_MUST_NOT_DOMINATE_SCHEDULING_UNTIL_STRONGER_ABSOLUTE_ROUTE_SCOPE_EQUIVALENCE_IS_RESOLVED"
   },
   "derived_state_reconciliation": {
-    "basis_blob_sha": "615fb2d82906fd4f3d2b62afcee133d16a8fc9a7",
+    "basis_blob_sha": "411f054140f25c4b0c71dc7287c48893ff550082",
     "rule": "QUEUE_MEMBERSHIP_BLOCKERS_AND_COUNTS_DERIVED_MECHANICALLY_FROM_CURRENT_ACTIVE_TERMINAL_PROOF_BASIS__ZERO_PROMOTION_AUTHORITY",
-    "current_closed_count": 10,
-    "current_open_count": 2,
+    "current_closed_count": 12,
+    "current_open_count": 0,
     "removed_stale_open_entries": [
-      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
     ],
     "date": "2026-10-02"
   }
