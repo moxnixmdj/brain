@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261002_V10",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_AUTHORITY_3_OF_19__8_OF_38__30_BLOCKED__TB4_180_LT_220__ZERO_CREDIT",
+  "source_brain_commit": "fbd78a46d37abe484b002237cfeda0693d21466b",
+  "verified_authority_blob_sha": "3f8705da36009fc444af185de8565f3576493f81",
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 869,
+    "pull_request_head": "65d14e630e5120a15f742c44dd8d8864bc6af370",
+    "merge_commit": "4aaf6f25b68fce3f21db89676cb2aa5f5058ed2f",
+    "workflow_run_id": 37003079960,
+    "workflow_job_id": 110824999988,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_9_OF_9_MIRRORED_BRAIN_BLOB_IDENTITIES_MATCH",
+    "CURRENT_AUTHORITY_OPUS55_ACCEPTANCE_EQUALS_3_OF_19_PASS_16_OF_19_OPEN",
+    "CALIBRATION_V2_RECOMPUTED_3_OF_19_CALIBRATED_16_PENDING",
+    "RESIDUAL_V9_RECOMPUTED_8_OF_38_PROVED_0_OPEN_30_BLOCKED",
+    "EVIDENCE_LEDGER_EQUALS_8_PROVED_30_UNRESOLVED",
+    "ATOMIC_FRONTIER_EQUALS_8_PROVED_0_OPEN_30_BLOCKED",
+    "ZERO_AUTHORIZED_ACCEPTANCE_CASE_ACTIONS",
+    "TERMINAL_GOAL_FALSE",
+    "TB4_ATTAINABILITY_IMPOSSIBLE_180_LT_220",
+    "TERMINAL_CLOSURE_BASIS_INDEPENDENT_PASS"
+  ],
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "execution_authority": false
+}
