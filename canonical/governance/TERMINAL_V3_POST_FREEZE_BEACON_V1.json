@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_V3_POST_FREEZE_BEACON_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_POST_FREEZE_BEACON__NO_REROLL__ZERO_TERMINAL_RESULTS",
+  "status": "INVALIDATED_LATE_DUPLICATE_BEACON__DO_NOT_USE_FOR_TERMINAL_SELECTION",
   "policy": "canonical/governance/TERMINAL_V3_POST_FREEZE_BEACON_POLICY_V1.json",
   "terminal_capsule": "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3.json",
   "terminal_capsule_verification": "canonical/verification/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3_INDEPENDENT_VERIFICATION_20261002_V1.json",
@@ -18,7 +18,7 @@
     "created_at": "2026-10-02T07:09:53Z",
     "run_url": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36977132461"
   },
-  "selection_rule_satisfied": true,
+  "selection_rule_satisfied": false,
   "run_id_known_before_policy_freeze": false,
   "reroll_allowed": false,
   "terminal_cases_generated": 0,
@@ -29,5 +29,8 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "next": "EXECUTE_EXACT_SNAPSHOT_821712C059B139F3494723DCA6E8D0FC82EE59A4_ONCE_WITH_PACKAGE_COMMITMENT_AND_THIS_BEACON__NO_CASE_REPLACEMENT_OR_TUNING"
+  "next": "DO_NOT_USE_THIS_BEACON__USE_CANONICAL_BEACON_36977020853",
+  "canonical_beacon": "36977020853",
+  "reconciliation": "canonical/governance/TERMINAL_V3_BEACON_RECONCILIATION_V1.json",
+  "disposition": "HISTORICAL_NONCANONICAL_REROLL__CANONICAL_BEACON_WAS_ALREADY_FIXED_BY_EARLIER_VALID_PREDECLARED_SOURCE"
 }
