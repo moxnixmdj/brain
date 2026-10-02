@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V10",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_PROVED__0_OPEN__29_BLOCKED__ZERO_CREDIT",
+  "source_brain_commit": "b81bc1cb88156406a37cd7ba82b8274787b49dab",
+  "exact_source_blobs": {
+    "canonical/runtime/opus55_acceptance_calibration_reducer_v2.py": "73b0b27644e0fa0d89ff8fbdb51005c20eae3632",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json": "51e3e7578e9adbeee2168d2223b84481fea16a09",
+    "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json": "96052a6b5178305b37a2526fb25c3f53fa33b9b5",
+    "canonical/runtime/acceptance_proof_transmuter_v1.py": "0580f9819b5465c9617f0a1e8ff9a96902eedfc6",
+    "canonical/runtime/opus55_acceptance_residual_compiler_v2.py": "cae5bc3bfda9c77d7d7e5151127f55aafddb9522",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "f500b56e7349ce8c0f97cfd0bd1db4888ec6887c",
+    "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json": "f67e22cee5e6fce1ebfae92ebf0946f78fafcee1",
+    "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json": "4e59e30461c9ff1bee1a9474627d5fb4074844b2",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "bf3d1128ea2b02b5acee9ee3b227293e82611ca3"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 885,
+    "pull_request_head": "344af5f2df34c9686ebfc3d8fe8ad55a4a54cfaa",
+    "merge_commit": "69315034d608157d6f5ccc38f7cbb5c6a0774a56",
+    "workflow_run_id": 37008473206,
+    "workflow_job_id": 110842237768,
+    "conclusion": "success"
+  },
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 9,
+  "open_predicate_count": 0,
+  "blocked_predicate_count": 29,
+  "refuted_predicate_count": 0,
+  "newly_proved_predicate": {
+    "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "proof_kind": "ABSOLUTE_CEILING"
+  },
+  "delegation_family_state": {
+    "state": "PROVED",
+    "proved": 3,
+    "blocked": 0
+  },
+  "authorized_acceptance_case_actions": [],
+  "terminal_promotion_allowed": false,
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
