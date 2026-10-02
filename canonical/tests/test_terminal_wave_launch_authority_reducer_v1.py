@@ -26,17 +26,56 @@ class TerminalWaveLaunchAuthorityReducerTests(unittest.TestCase):
             }
             blobs[ex]=es; blobs[te]=ts
         pre={"pass":True,"execution_authority":True}
+        parent_producers={"portfolios":{}}
+        for portfolio in ("T0","T1","T2","T3"):
+            producer=f"runtime/parent_{portfolio}.py"
+            producer_test=f"tests/parent_{portfolio}.py"
+            producer_sha=f"parent-{portfolio}-sha"
+            producer_test_sha=f"parent-{portfolio}-test-sha"
+            receipt=f"verify/parent_{portfolio}.json"
+            parent_producers["portfolios"][portfolio]={
+                "status":"INDEPENDENT_PUBLIC_RUNNER_PASS",
+                "producer":producer,
+                "tests":producer_test,
+                "producer_blob_sha":producer_sha,
+                "test_blob_sha":producer_test_sha,
+                "independent_verification":receipt,
+                "real_parent_case_producer":True,
+                "post_freeze_selection_only":True,
+                "same_case_instrumentation":True,
+                "hidden_oracle_isolated":True,
+                "parent_terminal_acceptance_derived":True,
+                "direct_instrumentation_verdict_derived":True,
+                "no_stub_receipts":True,
+            }
+            receipts[receipt]={
+                "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_TERMINAL_RESULTS",
+                "exact_brain_blobs":{producer:producer_sha,producer_test:producer_test_sha},
+                "verified":[
+                    "REAL_PARENT_CASE_PRODUCER",
+                    "POST_FREEZE_SELECTION_ONLY",
+                    "SAME_CASE_INSTRUMENTATION",
+                    "PARENT_TERMINAL_ACCEPTANCE_DERIVED",
+                    "DIRECT_INSTRUMENTATION_VERDICT_DERIVED",
+                    "NO_STUB_RECEIPTS",
+                    "ZERO_TERMINAL_CASES_CONSUMED",
+                ],
+                "terminal_results_observed":0,
+                "fresh_terminal_evidence_consumed":0,
+            }
+            blobs[producer]=producer_sha
+            blobs[producer_test]=producer_test_sha
         manifest={
             "route_count":12,"implemented_executor_count":12,"bound_executor_count":12,
             "routes":routes,"launch_authority":False,
             "terminal_results_observed":0,"fresh_terminal_evidence_consumed":0,
         }
         basis={"contracts":contracts}
-        return pre,manifest,basis,receipts,blobs
+        return pre,manifest,basis,parent_producers,receipts,blobs
 
-    def _eval(self, pre, manifest, basis, receipts, blobs):
+    def _eval(self, pre, manifest, basis, parent_producers, receipts, blobs):
         return evaluate_documents(
-            pre,manifest,basis,
+            pre,manifest,basis,parent_producers,
             load_verification=lambda p: receipts[p],
             blob_sha=lambda p: blobs.get(p),
         )
@@ -55,23 +94,40 @@ class TerminalWaveLaunchAuthorityReducerTests(unittest.TestCase):
         self.assertTrue(out["pass"],out)
 
     def test_one_stale_executor_fails_closed(self):
-        pre,manifest,basis,receipts,blobs=self._fixture()
+        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
         manifest["routes"][3]["executor_blob_sha"]="new"
-        out=self._eval(pre,manifest,basis,receipts,blobs)
+        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
         self.assertFalse(out["pass"])
         self.assertIn("EXECUTOR_BLOB_DRIFT:B3",out["failed_predicates"])
 
     def test_missing_independent_receipt_fails_closed(self):
-        pre,manifest,basis,receipts,blobs=self._fixture()
+        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
         manifest["routes"][2]["independent_executor_verification"]=None
-        out=self._eval(pre,manifest,basis,receipts,blobs)
+        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
         self.assertFalse(out["pass"])
         self.assertIn("EXECUTOR_INDEPENDENT_RECEIPT_MISSING:B2",out["failed_predicates"])
 
+    def test_missing_real_parent_producer_fails_closed(self):
+        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
+        parent_producers["portfolios"]["T2"]["producer"]=None
+        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
+        self.assertFalse(out["pass"])
+        self.assertIn("PARENT_PRODUCER_BINDING_FIELDS_MISSING:T2",out["failed_predicates"])
+
+    def test_stub_parent_producer_semantics_fail_closed(self):
+        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
+        parent_producers["portfolios"]["T1"]["no_stub_receipts"]=False
+        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "PARENT_PRODUCER_SEMANTIC_FLAG_MISSING:T1:no_stub_receipts",
+            out["failed_predicates"],
+        )
+
     def test_prequalification_failure_fails_closed(self):
-        pre,manifest,basis,receipts,blobs=self._fixture()
+        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
         pre["pass"]=False; pre["execution_authority"]=False
-        out=self._eval(pre,manifest,basis,receipts,blobs)
+        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
         self.assertFalse(out["pass"])
         self.assertIn("PREQUALIFICATION_NOT_AUTHORIZED",out["failed_predicates"])
 
