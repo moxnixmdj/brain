@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_TERMINAL_POPULATION_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "proof_mode": "ABSOLUTE_BEHAVIORAL_PROTOCOL",
+  "scope_relation": "canonical/governance/STRUCTURED_METHOD_SCOPE_RELATION_V1.json",
+  "scope_gate_verification": "canonical/verification/STRUCTURED_METHOD_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "exact_candidate": {
+    "path": "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
+    "blob_sha": "79d3896818b03223348f05adf4fdcd574f6f355e"
+  },
+  "exact_independent_oracle": {
+    "path": "canonical/runtime/structured_method_normalized_rule_oracle_v3.py",
+    "blob_sha": "5d92b1360fbb1bb27baacc8a04adb3744abf690c"
+  },
+  "frozen_population": {
+    "relation": "CANDIDATE_SUPERSET_PROVEN",
+    "contract_boundary": "REQUIREMENT_TO_INTERMEDIATE_TO_OUTPUT_GRAPH_MATERIALIZATION_AND_STRUCTURAL_ACCEPTANCE_AFTER_RULE_NORMALIZATION",
+    "source_kinds": [
+      "formula",
+      "constraint",
+      "schema",
+      "standard",
+      "feature_callout"
+    ],
+    "normalized_rule_operator_scope": "ARBITRARY_NONEMPTY_NORMALIZED_OPERATOR_IDENTITY__SEMANTIC_SIGNATURE_IS_UPSTREAM_INPUT",
+    "environment_relation": "EXACT",
+    "oracle_relation": "CANDIDATE_STRONGER_PROVEN",
+    "candidate_information_relation": "EXACT_CANDIDATE_VISIBLE_INFORMATION",
+    "unresolved_required_dimensions": [],
+    "subjective_quality_dimensions": []
+  },
+  "acceptance": {
+    "scope_gate_admissible": true,
+    "scope_gate_errors": [],
+    "required_behavior_count": 1,
+    "covered_behavior_count": 1,
+    "required_interaction_count": 8,
+    "covered_interaction_count": 8,
+    "leaked_inference_ids": [],
+    "any_structural_or_scope_gate_failure_blocks": true,
+    "post_freeze_candidate_or_oracle_mutation_invalidates_binding": true
+  },
+  "information_boundary": {
+    "candidate_receives": "NORMALIZED_APPLICABLE_RULES_AND_DECLARED_SEMANTIC_SIGNATURES_ONLY",
+    "unstated_or_implicit_rule_extraction": "OUTSIDE_THIS_BEHAVIORAL_CONTRACT",
+    "hidden_oracle_payload_visible": false,
+    "reference_solution_visible": false
+  },
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
