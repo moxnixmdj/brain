@@ -189,12 +189,16 @@
     },
     "terminal_next_action_compiler": {
       "runtime_path": "canonical/runtime/terminal_next_action_compiler_v1.py",
-      "runtime_git_blob_sha": "2e0c4837e572aae2456847cd229d97583ac8dff6",
+      "runtime_git_blob_sha": "2f07e4132ab112ef6aa40f0c2ad05f1049edb287",
       "tests_path": "canonical/tests/test_terminal_next_action_compiler_v1.py",
-      "tests_git_blob_sha": "86c2608a66d78e96b147c5cd15d4588ad425c4fd",
-      "workflow_path": ".github/workflows/verify-terminal-next-action-compiler.yml",
-      "workflow_git_blob_sha": "958b88a96646dc52d8fc89e3f3f032d814195418",
-      "status": "INSTALLED__EXPLICIT_ATOM_METRIC_AND_SCOPE_BLOCKERS__CI_TRIGGERED__ZERO_CREDIT"
+      "tests_git_blob_sha": "6b801a47d3d14d91dd6bac29f24830aaf47b5af3",
+      "verification_path": "canonical/verification/TERMINAL_NEXT_ACTION_SYNTHESIS_DELTA_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "verification_git_blob_sha": "c5c31a292a8565deefded8d7c4de074ae5ecbd7e",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__7_OF_38_CURRENT_LEDGER__SYNTHESIS_EXACT_DELTA_PRIMARY_ZERO_REALITY_ACTION__GLOBAL_IMPLICATION_FAIL_CLOSED__ZERO_CREDIT",
+      "public_verifier_pr": 963,
+      "workflow_run_id": 37017822433,
+      "workflow_job_id": 110872965565,
+      "merge_commit": "a901e993a242603a44328b1d19696dc0c2402223"
     },
     "brain_witness_contamination_admissibility": {
       "path": "canonical/verification/OPUS55_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -212,8 +216,8 @@
     },
     "acceptance_action_hypergraph": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json",
-      "git_blob_sha": "d85f78cf86b374d84fd18f5444d5286fd1acadd9",
-      "status": "IMPLICATION_ROUTE_BLOCKED_ON_WITNESS_TARGET_ATOM_METRIC_BINDINGS_AND_EXACT_OR_SUPERSET_SCOPE_RELATIONS"
+      "git_blob_sha": "15589dccf0bc9109594a791d702bfc93d5795c4d",
+      "status": "SYNTHESIS_EXACT_DELTA_BOUND__GLOBAL_IMPLICATION_REMAINS_FAIL_CLOSED"
     },
     "protocol_implication_scope_algebra_v2": {
       "runtime_path": "canonical/runtime/protocol_implication_scope_algebra_v2.py",
@@ -319,6 +323,15 @@
       "path": "canonical/verification/P1_COMPOSITE_PROOF_COUNTEREXAMPLE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "git_blob_sha": "4e7bbef8528bdac9a9423caac3dca49ed5d239e3",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__TWO_LOAD_BEARING_COUNTEREXAMPLES__COMPOSITE_RESTORATION_INADMISSIBLE__QUARANTINE_MUST_REMAIN"
+    },
+    "synthesis_proof_obligation_delta": {
+      "path": "canonical/verification/OPUS55_SYNTHESIS_PROOF_OBLIGATION_DELTA_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "dc3045403cabfc2adac373afb7089647bb971635",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ONE_SCOPE_COMPONENT_ONE_ATOM_TWO_METRIC_BINDINGS_OPEN__ZERO_CREDIT",
+      "public_verifier_pr": 949,
+      "workflow_run_id": 37016505081,
+      "workflow_job_id": 110868562474,
+      "merge_commit": "9a14e55b849ecf3760bd307f28aafe3706354f7a"
     }
   },
   "residual": [
@@ -338,7 +351,7 @@
     "FINAL_BUNDLE_REBUILD_ONLY_AFTER_CURRENT_SCOPE_AND_ACCEPTANCE_PREDICATES_CLOSE"
   ],
   "no_terminal_replay": true,
-  "next": "EXECUTE_ONLY_CURRENT_CERTIFICATE_FRONTIER_V2_ZERO_REALITY_ACTIONS__BUILD_AND_INDEPENDENTLY_VERIFY_EXPLICIT_CONTENT_ADDRESSED_SCOPE_ATOM_METRIC_RELATIONS__REPAIR_P1_ONLY_BY_KILLING_SURVIVING_LOAD_BEARING_MUTATIONS_OR_BY_A_MACHINE_AUTHORIZED_IRREDUCIBLE_OBSERVATION__KEEP_SYNTHESIS_CEILING_TRANSPORT_QUARANTINED__CONTINUE_COMPOSITION_SCOPED_INTERFACE_PROOFS__NO_TERMINAL_REPLAY__NO_FRESH_REALITY_UNTIL_MACHINE_AUTHORIZED",
+  "next": "DISCHARGE_ONLY_THE_INDEPENDENTLY_VERIFIED_SYNTHESIS_EXACT_DELTA_FROM_EXISTING_CONTENT_ADDRESSED_RECEIPTS__ONE_TARGET_POPULATION_SCOPE_RELATION_ONE_MATCHED_QUALITY_ATOM_TWO_NONINFERIORITY_METRIC_BINDINGS__IN_PARALLEL_CONTINUE_OTHER_AVAILABLE_ZERO_REALITY_CRITICAL_ACTIONS__GLOBAL_IMPLICATION_REMAINS_BLOCKED__NO_TERMINAL_REPLAY__NO_FRESH_REALITY_UNTIL_MACHINE_AUTHORIZED",
   "rule": "DERIVED_POINTER_ONLY__RAW_3352_OF_3352_EXECUTION_RECEIPT_PRESERVED__WHOLE_SCOPE_SEMANTIC_CREDIT_FAILS_CLOSED_ON_P1_SCOPE_MISMATCH__CURRENT_ACCEPTANCE_IS_2_OF_19_AND_7_OF_38_ATOMIC__SCOPE_FIREWALL_V2_MANDATORY__TERMINAL_FALSE__RECOMPUTE_IF_ANY_SOURCE_BLOB_CHANGES",
   "atomic_acceptance_frontier": {
     "proved": 7,
@@ -360,19 +373,24 @@
     "state": "INDEPENDENT_PASS__IMPOSSIBLE_UNDER_CURRENT_FROZEN_NO_REPLAY_RULES"
   },
   "compiled_next_frontier": {
-    "primary_action_id": "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
-    "primary_action_state": "BLOCKED_PRECONDITIONS",
-    "unresolved_target_count": 11,
-    "unsatisfied_preconditions": [
+    "primary_action_id": "DISCHARGE_SYNTHESIS_EXACT_PROOF_DELTA",
+    "primary_action_state": "AVAILABLE_ZERO_REALITY",
+    "unresolved_target_count": 1,
+    "primary_unsatisfied_preconditions": [],
+    "highest_leverage_blocked_action_id": "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+    "highest_leverage_blocked_action_target_count": 11,
+    "highest_leverage_blocked_action_preconditions": [
       "MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
       "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"
     ],
     "available_zero_reality_critical_actions": [
-      "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
-      "RUN_COMPOSITION_COMPONENT_PROOF_SLICER"
+      "DISCHARGE_SYNTHESIS_EXACT_PROOF_DELTA",
+      "RUN_COMPOSITION_COMPONENT_PROOF_SLICER",
+      "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE"
     ],
     "authority": "canonical/runtime/terminal_next_action_compiler_v1.py",
-    "rule": "SCOPE_SAFE_V2_ACTIVE__BLOCKED_PRIMARY_MEANS_DISCHARGE_EXPLICIT_ATOM_METRIC_AND_SCOPE_RELATION_PRECONDITIONS_NOT_RUN_ACTION__NO_SEMANTIC_INFERENCE__NO_FRESH_REALITY"
+    "independent_verification": "canonical/verification/TERMINAL_NEXT_ACTION_SYNTHESIS_DELTA_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "rule": "EXECUTE_THE_INDEPENDENTLY_VERIFIED_SYNTHESIS_DELTA_ONLY__GLOBAL_SCOPE_ALGEBRA_REMAINS_BLOCKED__NO_FRESH_REALITY__NO_SCOPE_OR_METRIC_INFERENCE"
   },
   "integrator_reconciliation_20261002_scope_v2": {
     "status": "SUPERSEDED_BY_20261002_ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION",
