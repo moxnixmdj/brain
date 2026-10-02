@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-10-02_ACCEPTANCE_CAPABILITY_SOURCE_GATE_SUBSTRATE_CORRECTION_V1",
+  "status": "CANONICAL_CORRECTION__SUPERSEDE_MODEL_DEPENDENCY_ZERO_AS_TERMINAL_ADMISSIBILITY_REQUIREMENT",
+  "real_objective": "Evaluate only genuinely Brain-internalized Opus 5.5 capability candidates while preserving the canonical allowance for declared general cognition substrates.",
+  "governing_authority": [
+    {
+      "path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+      "git_blob_sha": "1de77202bb8eec4a0c10cb92828cda8ff0c49e20"
+    },
+    {
+      "path": "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
+      "git_blob_sha": "7532aa0a5700fc061c9cf6b003fa8a9ac27d3972"
+    },
+    {
+      "path": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
+      "git_blob_sha": "7f89aaa1f83fefc3886f0bc9ce0f447ac75d46d5"
+    }
+  ],
+  "material_facts": [
+    "V6 defines effective frontier intelligence as Brain-internalized capability configurations plus external JIT knowledge plus general computation substrate.",
+    "V3 explicitly permits a model as general cognition substrate when Brain owns and materially supplies the operative capability configuration.",
+    "V6 forbids opaque external target-capability providers and provider-routing-only ownership claims.",
+    "acceptance_capability_source_gate_v1.py required model_dependency_count == 0, which is stricter than the current canonical ownership law.",
+    "The current Terminal-Bench Harbor route remains blocked independently because its external planner is not yet proven to be merely general substrate under a materially sufficient Brain-owned capability configuration."
+  ],
+  "conclusion": "Replace the model-dependency-zero gate with a substrate-aware internalization gate. Model presence is not itself disqualifying; hidden target-capability outsourcing is.",
+  "selected_route": "ADD_ACCEPTANCE_CAPABILITY_SOURCE_GATE_V2__CLASSIFY_MODEL_ROLE__REQUIRE_BRAIN_OWNED_OPERATIVE_CONFIGURATION_AND_NO_HIDDEN_TARGET_CAPABILITY_PROVIDER__FAIL_CLOSED_ON_UNCLASSIFIED_ROLE",
+  "rejected_material_alternatives": [
+    {
+      "route": "KEEP_V1_MODEL_DEPENDENCY_ZERO",
+      "reason": "Contradicts current V6/V3 canonical law and can falsely block valid Brain-owned capabilities executed on approved cognition substrates."
+    },
+    {
+      "route": "ALLOW_ANY_CONFIGURED_MODEL_ROUTE",
+      "reason": "Would reintroduce the forbidden loophole where routing to an opaque model that already contains capability C is mislabeled Brain ownership."
+    }
+  ],
+  "uncertainty": [
+    "Existing public-bar routes must be individually classified under the V2 substrate/provider test; this correction does not itself authorize any benchmark case spend."
+  ],
+  "next_action": "Install and independently verify substrate-aware acceptance capability-source gate V2; reclassify current ready public-bar routes; consume zero clean acceptance cases until a route passes.",
+  "supersedes": [
+    "Any terminal-admissibility interpretation of MODEL_DEPENDENCY_COUNT_ZERO in canonical/runtime/acceptance_capability_source_gate_v1.py",
+    "Any residual-plan language requiring model-dependency-zero rather than the V6/V3 general-substrate test"
+  ],
+  "terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
