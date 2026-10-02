@@ -147,6 +147,16 @@ class Tests(unittest.TestCase):
             ["SHARED_TYPED_BOUNDARY"],
         )
 
+    def test_conditional_scope_authority_requires_bound_closable_scope_blocker(self):
+        p = base_payload()
+        p["routes"][0]["terminal_scope_authority"] = False
+        p["routes"][0]["terminal_scope_authority_after_blockers"] = True
+        p["routes"][0]["scope_authority_blocker"] = "SHARED_TYPED_BOUNDARY"
+        out = compile_superproof(p)
+        self.assertEqual(out["status"], "EXACT_MINIMUM_UNBLOCK_CUT_FOUND", out)
+        selected = {r["id"]: r for r in out["minimum_unblock_cut"]["selected_routes"]}
+        self.assertTrue(selected["A_FORMAL"]["conditional_terminal_scope_authority"])
+
     def test_claimed_formal_route_without_machine_checkable_proof_fails_closed(self):
         p = base_payload()
         del p["routes"][0]["machine_checkable"]
