@@ -46,5 +46,16 @@ class FeatureConstraintComposerTests(unittest.TestCase):
         ])
         self.assertEqual(o["status"],"FAIL_CLOSED")
 
+    def test_declarative_jit_claim_composes(self):
+        o=compose_feature_constraints([
+            {"target_id":"surface1","source_id":"jit","annotation":{
+                "status":"PARSED","kind":"declarative_claim",
+                "property":"surface_finish.ra",
+                "value":{"roughness":3.2,"units":"UM"}
+            }}
+        ])
+        self.assertEqual(o["status"],"COMPOSED")
+        self.assertEqual(o["features"]["surface1"]["surface_finish.ra"]["roughness"],3.2)
+
 if __name__=="__main__":
     unittest.main()
