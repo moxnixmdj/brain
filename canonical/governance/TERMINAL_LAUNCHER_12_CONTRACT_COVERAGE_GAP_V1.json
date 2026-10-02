@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_LAUNCHER_12_CONTRACT_COVERAGE_GAP_V1",
+  "date": "2026-10-02",
+  "status": "LIVE_BLOCKER__TERMINAL_WAVE_AUTHORIZED__LAUNCHER_EXECUTOR_COVERAGE_10_OF_12__NO_TERMINAL_CASES_CONSUMED",
+  "authority": {
+    "terminal_wave_execution_authority": "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json",
+    "authorization_receipt": "canonical/verification/TERMINAL_PREQUALIFICATION_AUTHORIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "active_basis": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+    "active_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
+  },
+  "authorized_contract_count": 12,
+  "current_launcher": "canonical/runtime/terminal_replacement_wave.py",
+  "current_launcher_contract_count": 10,
+  "current_launcher_contract_source": [
+    "canonical/runtime/contract_native_proof_suites.py",
+    "canonical/runtime/remaining_behavior_proof_suites.py"
+  ],
+  "missing_executor_contracts": [
+    {
+      "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "frozen_population": {
+        "binding": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json",
+        "generator": "canonical/runtime/cad_t0_geometry_population.py",
+        "slot_count": 128,
+        "oracle_adapter": "canonical/runtime/cad_t0_oracle_adapter.py",
+        "scorer": "canonical/runtime/cad_t0_multiplex_scorer.py"
+      },
+      "launcher_gap": "NO_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BRANCH_BOUND_TO_FROZEN_CAD_POST_REFREEZE_POPULATION",
+      "critical_constraint": "MUST_PRESERVE_EXACT_FROZEN_CAD_DEPENDENCY_CONE_AND_POST_FREEZE_BEACON_SELECTION__NO_GENERIC_12_SLOT_SUBSTITUTION"
+    },
+    {
+      "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+      "frozen_population": {
+        "binding": "canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json",
+        "generator": "canonical/runtime/saccr_credit_information_safe_proof.py",
+        "candidate": "canonical/runtime/saccr_credit_information_safe_candidate.py",
+        "sample_count": 2000
+      },
+      "launcher_gap": "NO_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BRANCH_BOUND_TO_2000_CASE_SA_CCR_TERMINAL_POPULATION",
+      "critical_constraint": "MUST_EXECUTE_ALL_2000_FROZEN_POST_BEACON_CASES_WITH_ZERO_REPLACEMENT_AND_ZERO_TUNING_REPLAY__NO_GENERIC_12_SLOT_SUBSTITUTION"
+    }
+  ],
+  "invalid_shortcut": "EXPANDING_GENERIC_CONTRACT_SET_WITHOUT_ROUTE_SPECIFIC_FROZEN_POPULATION_SEMANTICS_WOULD_VIOLATE_TERMINAL_BINDINGS",
+  "exact_next_cut": [
+    "ADD_ROUTE_SPECIFIC_CAD_TERMINAL_EXECUTOR_ADAPTER_USING_FROZEN_128_SLOT_POPULATION",
+    "ADD_ROUTE_SPECIFIC_SA_CCR_TERMINAL_EXECUTOR_ADAPTER_USING_FROZEN_2000_CASE_POPULATION",
+    "REWRITE_TERMINAL_LAUNCHER_TO_DISPATCH_PER_CONTRACT_FROZEN_POPULATION_SEMANTICS_INSTEAD_OF_GLOBAL_12_SLOT_ASSUMPTION",
+    "INDEPENDENTLY_VERIFY_EXACT_12_CONTRACT_EXECUTOR_COVERAGE_AND_FROZEN_SAMPLE_COUNTS",
+    "ONLY_THEN_CONSUME_POST_FREEZE_BEACON_AND_LAUNCH_T0_T1_T2_T3_PARALLEL_TERMINAL_WAVE"
+  ],
+  "execution_authority": true,
+  "launcher_execution_ready": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
