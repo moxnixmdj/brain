@@ -94,3 +94,51 @@ assert select_repair_target([
 ]).status=="ESCALATE"
 
 print("shared_decision_primitives_hardening: PASS")
+
+
+# UI grounding: explicit observable metadata only; unauthorized/hidden candidates never selected.
+els=[
+    UIElement("save", "Save document", "button", frozenset({"click"})),
+    UIElement("save2", "Save document backup", "button", frozenset({"click"}), authorized=False),
+    UIElement("hidden", "Save document", "button", frozenset({"click"}), visible=False),
+]
+g=select_grounded_ui_action({"save","document"},"click",els)
+assert g.status=="SELECT" and g.element_id=="save"
+assert select_grounded_ui_action({"delete"},"click",els).status=="ESCALATE"
+
+# Artifact plan: exact minimum-cost structure-preserving coverage, rejecting destructive shortcuts.
+ops=[
+    ArtifactOperation("text",frozenset({"replace_text"}),1),
+    ArtifactOperation("table",frozenset({"edit_table"}),1),
+    ArtifactOperation("both",frozenset({"replace_text","edit_table"}),3),
+    ArtifactOperation("destructive",frozenset({"replace_text","edit_table"}),0,preserves_unrequested_structure=False),
+]
+p=plan_artifact_operations({"replace_text","edit_table"},ops)
+assert p.status=="PASS" and p.operation_ids==("table","text")
+assert plan_artifact_operations({"pdf_redaction"},ops).status=="ESCALATE"
+
+# Research candidate generation: every explicit unresolved requirement gets a direct,
+# verified and authorized search action without learned query rewriting.
+providers=[
+    SearchProvider("web",1),
+    SearchProvider("bad",0,verified=False),
+]
+ra=compile_requirement_search_actions({"r1":"official API retention policy","r2":"benchmark acceptance rule"},providers)
+assert len(ra)==2
+assert {next(iter(x.covers)) for x in ra}=={"r1","r2"}
+assert all(x.action_id.startswith("search::web::") for x in ra)
+
+# Non-replayable failure candidate generation: preserve every prior authorized,
+# intervenable decision without falsely treating temporal order as causality.
+td=[
+    TraceDecision("d1",1),
+    TraceDecision("d2",2,intervenable=False),
+    TraceDecision("d3",3),
+    TraceDecision("after",5),
+]
+fc=enumerate_nonreplayable_failure_candidates(td,4)
+assert fc.status=="CANDIDATES" and fc.candidate_ids==("d1","d3")
+assert "NO_CAUSAL_CLAIM" in fc.reason
+assert enumerate_nonreplayable_failure_candidates(td,1).status=="ESCALATE"
+
+print("shared_decision_primitives_m2_m5: PASS")
