@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  unit-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -24,4 +24,13 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m unittest -v canonical.tests.test_terminal_proof_route_autocompiler
+
+  live-compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
       - run: python canonical/runtime/terminal_proof_route_autocompiler.py canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json
