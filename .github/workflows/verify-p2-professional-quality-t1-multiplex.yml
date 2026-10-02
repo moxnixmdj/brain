@@ -1,5 +1,4 @@
 name: Verify P2 professional quality T1 multiplex
-# current-main verification trigger
 on:
   push:
     branches: [main]
@@ -13,21 +12,19 @@ on:
 permissions:
   contents: read
 jobs:
-  verify:
+  live-binding:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_p2_professional_quality_t1_multiplex_preflight
-      - name: Verify live binding
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          from canonical.runtime.p2_professional_quality_t1_multiplex_preflight import evaluate
-          import json
-          out=evaluate(Path("."))
-          print(json.dumps(out,indent=2,sort_keys=True))
-          raise SystemExit(0 if out["pass"] else 1)
-          PY
+      - run: python -m unittest -v canonical.tests.test_p2_professional_quality_t1_multiplex_preflight.Tests.test_live_binding
+  mutation-guards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_p2_professional_quality_t1_multiplex_preflight.Tests.test_gold_quality_leak_fails canonical.tests.test_p2_professional_quality_t1_multiplex_preflight.Tests.test_private_execution_dependency_fails canonical.tests.test_p2_professional_quality_t1_multiplex_preflight.Tests.test_private_score_inference_fails canonical.tests.test_p2_professional_quality_t1_multiplex_preflight.Tests.test_missing_ablation_rescue_check_fails canonical.tests.test_p2_professional_quality_t1_multiplex_preflight.Tests.test_cross_behavior_inheritance_fails canonical.tests.test_p2_professional_quality_t1_multiplex_preflight.Tests.test_manifest_route_loss_fails canonical.tests.test_p2_professional_quality_t1_multiplex_preflight.Tests.test_missing_dependency_fails
