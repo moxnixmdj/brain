@@ -43,11 +43,11 @@
       "notes": "One allowlisted official Stage-B exposure only after independent Stage-A pass. No task execution."
     },
     {
-      "id": "EXECUTE_NEXT_CLEAN_TB4_STAGE_C_ONE_SHOT",
+      "id": "EXECUTE_NEXT_CLEAN_TB4_PRECOMMITTED_TRIAL_BATCH",
       "action_class": "REALITY_QUERY",
       "effect": "ADVANCES",
       "critical_path": true,
-      "new_reality_units": 1,
+      "new_reality_units": 5,
       "consumes_acceptance_case": true,
       "target_predicates": [
         "CODING_TB4_GE_66_4"
@@ -60,9 +60,13 @@
         {
           "id": "CURRENT_CARRIER_RUNTIME_REVALIDATED",
           "satisfied": true
+        },
+        {
+          "id": "TB4_CONSERVATIVE_THRESHOLD_CUT_INDEPENDENT_PASS",
+          "satisfied": true
         }
       ],
-      "notes": "Consumes exactly one fresh TB4 case only after all staged gates. Rank24 is contaminated and forbidden; rank26 is current clean sample candidate."
+      "notes": "For one clean resource-compatible frozen TB4 task, atomically precommit five isolated result-blind replicas before any replica result is visible. Frozen Brain configuration; no cross-trial state, tuning, replay, or task-specific learning propagation. Failed/unrun/contaminated slots score zero. Advances the 220-of-330 conservative threshold cut only after all staged task gates."
     },
     {
       "id": "SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL",
@@ -165,5 +169,15 @@
     "rank24": "CONTAMINATED_POST_STAGE_B__NO_STAGE_C__NO_REPLAY",
     "rank25": "INELIGIBLE_PREEXPOSURE__PRIOR_RUNNER_EXPOSURE",
     "rank26": "CLEAN_PREEXPOSURE__STAGE_A_INDEPENDENT_VERIFICATION_PENDING__PR833"
+  },
+  "threshold_cut": {
+    "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "full_population_trial_slots": 330,
+    "required_successes": 220,
+    "compatible_trial_capacity": 270,
+    "unavailable_or_unrun_slot_credit": 0,
+    "execution_unit": "FIVE_PRECOMMITTED_RESULT_BLIND_REPLICAS_PER_CLEAN_RESOURCE_COMPATIBLE_TASK",
+    "pass_lock": "SUCCESS_COUNT_GE_220",
+    "fail_lock": "SUCCESS_COUNT_PLUS_REMAINING_EXECUTABLE_SLOTS_LT_220"
   }
 }
