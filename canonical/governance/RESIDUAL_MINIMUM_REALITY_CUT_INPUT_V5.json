@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V5",
   "date": "2026-10-02",
-  "status": "FROZEN_FOR_EXACT_SOLVER",
+  "status": "INVALIDATED__M1B_COST_MISMATCH_AND_POST_FREEZE_M0A_CANDIDATES",
   "source_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
   "source_universe_blob_sha": "1da11bb0696bed273cdb974bcc5cfc8ac1438cb7",
   "distinctions": [
@@ -45,9 +45,10 @@
     "semantics": "M0A_AND_M1A_COST_ONE_ONLY_FOR_CONDITIONAL_MATCHED_PARITY_REALITY_AFTER_ZERO_COST_PREFIXES__M1B_V2_FULL_PREFIX_COST_ZERO"
   },
   "freeze": {
-    "frozen": true,
+    "frozen": false,
     "rule": "ANY_NEW_ADMISSIBLE_ACTION_CHANGED_COST_CHANGED_OBLIGATION_OR_CHANGED_ACTION_BUNDLE_INVALIDATES_V5"
   },
   "new_reality_units_consumed_so_far": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "invalidation_reason": "SOURCE_UNIVERSE_BLOB_1DA11BB0_DECLARES_M1B_NEW_REALITY_UNITS_1_BUT_V5_INPUT_REWRITES_IT_AS_COST_0__PLUS_POST_FREEZE_M0A_SEMANTIC_CONSENSUS_AND_BRANCH_LOCALIZATION_CHANGED_THE_CANDIDATE_UNIVERSE"
 }
