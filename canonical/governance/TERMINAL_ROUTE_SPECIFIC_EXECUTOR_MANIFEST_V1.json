@@ -223,7 +223,7 @@
     }
   ],
   "launch_authority": true,
-  "next": "FREEZE_EXACT_POST_AUTHORITY_EXECUTION_SNAPSHOT__INDEPENDENTLY_VERIFY_PACKAGE__ONLY_THEN_BEACON_AND_EXECUTE_ONCE",
+  "next": "REFREEZE_COMPLETE_EXACT_CURRENT_EXECUTION_CLOSURE__INDEPENDENTLY_VERIFY_FREEZE__ONLY_THEN_CREATE_POST_FREEZE_BEACON_AND_EXECUTE_ONCE",
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
@@ -231,5 +231,6 @@
   "family_credit_delta": 0,
   "implemented_executor_count": 12,
   "direct_executor_verification_v2": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
-  "stale_executor_verification_v1_disposition": "SUPERSEDED_AFTER_DELEGATION_SELECTOR_FIX__DO_NOT_USE_FOR_CURRENT_DIRECT_EXECUTOR_BLOB"
+  "stale_executor_verification_v1_disposition": "SUPERSEDED_AFTER_DELEGATION_SELECTOR_FIX__DO_NOT_USE_FOR_CURRENT_DIRECT_EXECUTOR_BLOB",
+  "launch_authority_receipt": "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
