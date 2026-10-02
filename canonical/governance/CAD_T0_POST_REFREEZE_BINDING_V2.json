@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CAD_T0_POST_REFREEZE_BINDING_V2",
   "date": "2026-10-02",
-  "status": "FROZEN_POST_REFREEZE_PREWAVE_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_POST_REFREEZE_PREWAVE_BINDING__COMPONENTS_INDEPENDENTLY_VERIFIED__COMPOSITION_GUARD_INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
   "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
   "candidate_freeze": {
     "path": "canonical/governance/CAD_T0_CANDIDATE_FREEZE_V2.json",
@@ -16,7 +16,9 @@
     "case_replacement": false,
     "adaptive_selection": false,
     "tuning_replay": false,
-    "external_spent_task_used_for_promotion": false
+    "external_spent_task_used_for_promotion": false,
+    "independent_verification": "canonical/verification/CAD_T0_POPULATION_ORACLE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "independent_verification_blob_sha": "d27aece637d10e46bff72b762f5743d5048c7af0"
   },
   "evaluator": {
     "oracle_adapter": "canonical/runtime/cad_t0_oracle_adapter.py",
@@ -39,7 +41,7 @@
     "spent_external_task_role": "NONPROMOTION_DIAGNOSTIC_ONLY",
     "fresh_geometry_population_role": "PROMOTION_ELIGIBLE_ONLY_AFTER_POST_FREEZE_BEACON_AND_TERMINAL_AUTHORIZATION"
   },
-  "admission_rule": "EXACT_DEPENDENCY_CONE_MATCH__OCR_BRIDGE_INDEPENDENT_PASS__POST_BEACON_GENERATOR_AND_ORACLE_BOUND__SPENT_TASK_EXCLUDED__INFORMATION_BOUNDARY_PASS",
+  "admission_rule": "EXACT_DEPENDENCY_CONE_MATCH__OCR_BRIDGE_INDEPENDENT_PASS__POPULATION_ORACLE_INDEPENDENT_PASS__POST_BEACON_GENERATOR_BOUND__SPENT_TASK_EXCLUDED__INFORMATION_BOUNDARY_PASS__COMPOSITION_GUARD_INDEPENDENT_PASS",
   "independent_verification": "PENDING_PUBLIC_RUNNER",
   "prewave_admissible": false,
   "execution_authority": false,
