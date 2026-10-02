@@ -362,5 +362,13 @@
     "verification": "canonical/verification/VERIFIED_WITNESS_TARGET_OVERLAYS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "runtime": "canonical/runtime/protocol_implication_overlay_batch_reducer_v1.py",
     "semantic_rule": "ONLY_INDEPENDENTLY_VERIFIED_PAIR_RESIDUALS__NEGATIVE_SCOPE_RECEIPTS_REMAIN_LOAD_BEARING__NO_CREDIT_FROM_COMPRESSION"
+  },
+  "matched_scope_hierarchical_refinement": {
+    "status": "ACTIVE_INDEPENDENT_PASS__11_TARGET_SPECIFIC_CHILD_CERTIFICATES__ZERO_CREDIT",
+    "activation": "canonical/governance/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_ACTIVATION_V1.json",
+    "subfrontier": "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json",
+    "subhypergraph": "canonical/governance/MATCHED_SCOPE_BINDING_SUBHYPERGRAPH_V1.json",
+    "verification": "canonical/verification/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "rule": "PARTIAL_CHILD_CLOSURE_PROPAGATES_IMMEDIATELY__NO_WAIT_FOR_BLOCKED_SIBLINGS__NO_CROSS_TARGET_INHERITANCE"
   }
 }
