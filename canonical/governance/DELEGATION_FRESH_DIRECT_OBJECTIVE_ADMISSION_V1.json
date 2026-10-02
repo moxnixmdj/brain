@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_FRESH_DIRECT_OBJECTIVE_ADMISSION_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_ADMISSION_CANDIDATE__PENDING_INDEPENDENT_VERIFICATION__ZERO_TERMINAL_RESULTS",
+  "objective": "Admit exactly one fresh delegation-only 132-case direct-objective terminal population under the current rebound binding, without retroactively crediting Terminal V3.",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "population_version": "DELEGATION_T2_OBJECTIVE_POOL_V1",
+  "case_count": 132,
+  "class_count": 11,
+  "exact_components": {
+    "binding": {
+      "path": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "a1e441567b132d71713ed55dfc51f01d8de112d1"
+    },
+    "direct_executor": {
+      "path": "canonical/runtime/direct_route_terminal_executors_v1.py",
+      "git_blob_sha": "28ef55db77ac81e78bd5c67e4d2b39fef131b505"
+    },
+    "candidate": {
+      "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+      "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+    },
+    "oracle_v2": {
+      "path": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+      "git_blob_sha": "928466401b36e4f3b09c517950cc050432a0616f"
+    },
+    "oracle_v3": {
+      "path": "canonical/runtime/delegation_structural_variety_proof_v3.py",
+      "git_blob_sha": "f5e1f45519278ed2cafa27d23b8602b0a362a492"
+    },
+    "selection_kernel": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_SELECTION_KERNEL_V1.json",
+      "git_blob_sha": "669afcde50302e76c1b0a1f6b186aaafa8730515"
+    }
+  },
+  "supporting_receipts": {
+    "current_objective_binding": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+    "executor_verification": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
+  },
+  "commitment_algorithm": "SHA256_NUL_JOINED_COMPONENT_SHA_LIST_V1",
+  "commitment_component_order": [
+    "DELEGATION_FRESH_DIRECT_OBJECTIVE_V1",
+    "a1e441567b132d71713ed55dfc51f01d8de112d1",
+    "28ef55db77ac81e78bd5c67e4d2b39fef131b505",
+    "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "928466401b36e4f3b09c517950cc050432a0616f",
+    "f5e1f45519278ed2cafa27d23b8602b0a362a492",
+    "669afcde50302e76c1b0a1f6b186aaafa8730515"
+  ],
+  "package_commitment": "dcb9fa1a18b7671d9c90107cec8b67cac007c0589c2dc4d85e082ad6acc156c4",
+  "chronology": {
+    "prior_terminal_v3_result_creditable_under_this_admission": false,
+    "fresh_result_required": true,
+    "admission_verification_must_precede_terminal_beacon": true,
+    "terminal_beacon_must_be_unknown_before_admission_freeze": true,
+    "beacon_source": "FIRST_AUTHORIZED_PUBLIC_RUNNER_WORKFLOW_RUN_ID_AFTER_ADMISSION_VERIFICATION",
+    "no_case_replacement": true,
+    "no_tuning_replay": true,
+    "no_result_to_runtime_feedback": true
+  },
+  "acceptance": {
+    "every_case_must_pass": true,
+    "every_one_of_11_classes_must_be_present": true,
+    "terminal_result_required": true,
+    "target_acceptance_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "possible_proof_mode_if_ceiling_reached": "ABSOLUTE_DOMINANCE_OVER_BINARY_TERMINAL_SUCCESS_FOR_FROZEN_DIRECT_OBJECTIVE_SCOPE",
+    "no_family_credit_until_existing_acceptance_transmuter_accepts_full_frozen_protocol_witness": true
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
