@@ -316,11 +316,14 @@
     "status": "ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_ONLY",
     "activation": "canonical/governance/PROOF_COMPRESSION_KERNELS_ACTIVATION_V1.json",
     "verification": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "protocol_implication_scope_algebra": "canonical/runtime/protocol_implication_scope_algebra_v1.py",
+    "protocol_implication_scope_algebra": "canonical/runtime/protocol_implication_scope_algebra_v2.py",
     "epistemic_closure_minimum_discriminator": "canonical/runtime/epistemic_closure_kernel_v1.py",
     "composition_component_proof_slicer": "canonical/runtime/composition_component_proof_slicer_v1.py",
-    "ordering_rule": "RUN_BEFORE_NEW_COMPARATOR_JUDGMENT_OR_COMPOSITION_REALITY_WHEN_APPLICABLE",
-    "terminal_credit_from_kernels_alone": false
+    "ordering_rule": "TOTALIZE_BASE_SURFACE__COMPILE_EXACT_VERIFIED_PAIR_OVERLAYS__PRESERVE_NEGATIVE_RECEIPTS__RUN_SCOPE_SAFE_V2_ALGEBRA__THEN_CONTINUE_ZERO_REALITY_PROOF_COMPRESSION",
+    "terminal_credit_from_kernels_alone": false,
+    "protocol_implication_scope_algebra_verification": "canonical/verification/PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "verified_witness_target_overlay_activation": "canonical/governance/VERIFIED_WITNESS_TARGET_OVERLAY_ACTIVATION_V1.json",
+    "verified_witness_target_overlay_runtime": "canonical/runtime/protocol_implication_overlay_batch_reducer_v1.py"
   },
   "differential_dominance_compiler": {
     "status": "ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_ONLY__ZERO_CREDIT",
@@ -349,5 +352,12 @@
     "activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V3.json",
     "verification": "canonical/verification/TERMINAL_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "semantic_rule": "SCHEDULING_ONLY__CERTIFICATE_COVERAGE_IS_NOT_ACCEPTANCE_PROOF__REQUIREMENT_CARDINALITY_IS_NOT_PROOF_DIFFICULTY"
+  },
+  "verified_semantic_overlay_compilation": {
+    "required_before_new_matched_scope_reality": true,
+    "activation": "canonical/governance/VERIFIED_WITNESS_TARGET_OVERLAY_ACTIVATION_V1.json",
+    "verification": "canonical/verification/VERIFIED_WITNESS_TARGET_OVERLAYS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "runtime": "canonical/runtime/protocol_implication_overlay_batch_reducer_v1.py",
+    "semantic_rule": "ONLY_INDEPENDENTLY_VERIFIED_PAIR_RESIDUALS__NEGATIVE_SCOPE_RECEIPTS_REMAIN_LOAD_BEARING__NO_CREDIT_FROM_COMPRESSION"
   }
 }
