@@ -397,9 +397,10 @@
   "final_proof_bundle_candidate": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_CANDIDATE_V1.json",
   "behavioral_pass_family_count": 19,
   "acceptance_calibration": {
-    "status": "FAIL_CLOSED__2_OF_19_CALIBRATED__17_OPEN",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FAIL_CLOSED_2_OF_19_CALIBRATED__17_OPEN",
     "evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
-    "evidence_blob_sha": "1b73fadfaea4be3eb03d73546ec8f60709db6c62",
+    "independent_verification": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "independent_verification_blob_sha": "7c507155ed5fbe847b8b0a9ca1c49b19685f2ff8",
     "acceptance_calibrated_family_count": 2,
     "acceptance_pending_family_count": 17,
     "acceptance_pending_families": [
