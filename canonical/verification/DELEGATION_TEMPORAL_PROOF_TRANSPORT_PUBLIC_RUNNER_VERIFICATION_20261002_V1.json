@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__TEMPORAL_DEPENDENCY_IDENTITY__8_TRANSPORT_TESTS_PASS__ZERO_REPLAY__ZERO_CREDIT",
+  "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "source_brain_branch": "proof/delegation-temporal-transport-v1",
+  "source_brain_candidate_head": "ed8259c8c983776b1bfe8a24a8e9faf15c5adae7",
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 870,
+    "pull_request_head": "ee4c7bbe628aedbc1182789e9fb733b9e61f565a",
+    "merge_commit": "fcf9da8987b89bcfe4fbb77efead6dcf762be652",
+    "workflow_run_id": 37005325244,
+    "workflow_job_id": 110832134612,
+    "conclusion": "success"
+  },
+  "exact_current_brain_blobs": {
+    "canonical/runtime/temporal_proof_transport_v1.py": "4cf9827e3aa61a95798b3553ddb06dc84ee35b56",
+    "canonical/tests/test_temporal_proof_transport_v1.py": "4a39176973290312a5902197d1f697aa55e8ff62",
+    "canonical/governance/DELEGATION_TEMPORAL_PROOF_TRANSPORT_V1.json": "b6d03ac87d8cd9d308f127e4e525e48be0d0a971",
+    "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json": "a1e441567b132d71713ed55dfc51f01d8de112d1",
+    "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json": "52392515cd4de672f82f8afac82a41d3ce442656",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4f3b09c517950cc050432a0616f",
+    "canonical/runtime/delegation_structural_variety_proof_v3.py": "f5e1f45519278ed2cafa27d23b8602b0a362a492",
+    "canonical/runtime/direct_route_terminal_executors_v1.py": "28ef55db77ac81e78bd5c67e4d2b39fef131b505",
+    "canonical/tests/test_direct_route_terminal_executors_v1.py": "17c5c2c6828c89fd5a2cfdd5c3eda6110ab0fb03",
+    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "c61882d69a66f61b4ea1ce6ad14f86fcefd1f76a",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json": "3aa8168fc7f81581eea4085504e4a70205949af9",
+    "canonical/verification/DELEGATION_SCOPE_GATE_V2_V3_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "eddfe01c81ae9d6e9453c4bc30737f9ddd273a83"
+  },
+  "exact_historical_brain_blobs": {
+    "snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json": "a1e441567b132d71713ed55dfc51f01d8de112d1",
+    "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json": "52392515cd4de672f82f8afac82a41d3ce442656",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "afa00109031d638fef32cc3fe10be18786605c39",
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4f3b09c517950cc050432a0616f",
+    "canonical/runtime/delegation_structural_variety_proof_v3.py": "f5e1f45519278ed2cafa27d23b8602b0a362a492",
+    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "cd2dabd11fd169ad9b972e976ad474be51cc9e35",
+    "canonical/runtime/direct_route_terminal_executors_v1.py": "28ef55db77ac81e78bd5c67e4d2b39fef131b505",
+    "canonical/tests/test_direct_route_terminal_executors_v1.py": "17c5c2c6828c89fd5a2cfdd5c3eda6110ab0fb03"
+  },
+  "verified": [
+    "EXACT_CURRENT_AND_HISTORICAL_MIRRORED_BLOB_IDENTITIES_MATCH_EXPECTED_GIT_OBJECTS",
+    "DELEGATION_BINDING_IDENTICAL_ACROSS_TERMINAL_SNAPSHOT_AND_CURRENT_STATE",
+    "DELEGATION_SCOPE_RELATION_IDENTICAL_ACROSS_TERMINAL_SNAPSHOT_AND_CURRENT_STATE",
+    "FROZEN_PROTOCOLS_IDENTICAL_ACROSS_TERMINAL_SNAPSHOT_AND_CURRENT_STATE",
+    "DELEGATION_CONTRACT_ROW_AND_SOLE_FAMILY_MAPPING_SEMANTIC_SLICE_UNCHANGED",
+    "DELEGATION_EXECUTOR_EXECUTABLE_AND_TEST_BLOBS_UNCHANGED",
+    "EXECUTOR_MANIFEST_DRIFT_IS_LIFECYCLE_ONLY__NOT_EXECUTED_TO_CONSUMED__RERUN_FORBIDDEN",
+    "CURRENT_EXACT_BINDING_HAS_INDEPENDENT_EXTERNAL_VERIFICATION",
+    "SCOPE_SUBSTITUTION_REMAINS_INDEPENDENTLY_ADMISSIBLE",
+    "IMMUTABLE_TERMINAL_RESULT_REMAINS_132_OF_132_WITH_ZERO_REPLAY_REPLACEMENT_OR_RESULT_FEEDBACK",
+    "EIGHT_FAIL_CLOSED_TRANSPORT_TESTS_PASS"
+  ],
+  "limitations": [
+    "THIS_RECEIPT_VERIFIES_TRANSPORT_ELIGIBILITY_ONLY",
+    "NO_FAMILY_CREDIT_UNTIL_TYPED_WITNESS_IS_ACCEPTED_BY_EXISTING_ACCEPTANCE_PROOF_TRANSMUTER_AND_THAT_INTEGRATION_IS_INDEPENDENTLY_VERIFIED"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
