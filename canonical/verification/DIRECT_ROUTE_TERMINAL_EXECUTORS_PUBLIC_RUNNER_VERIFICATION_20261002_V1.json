@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_ROUTE_SPECIFIC_EXECUTORS_EXACT_BLOBS_VERIFIED__ZERO_TERMINAL_CASES_CONSUMED",
+  "behaviors": [
+    "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "TASK_TO_DELEGATION_GRAPH_001",
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
+  ],
+  "exact_brain_blobs": {
+    "canonical/runtime/direct_route_terminal_executors_v1.py": "531a3d565dcedd8e76a6d178cef9ebfcf468f654",
+    "canonical/tests/test_direct_route_terminal_executors_v1.py": "5bb84aa247001faf727bd64c1ab00e265b8a8d9e",
+    "canonical/runtime/saccr_credit_information_safe_proof.py": "8eb94b8e8b00e3ace662e7fac2e8b6a8f7bb2200",
+    "canonical/runtime/saccr_credit_information_safe_candidate.py": "ff2fa256738ffbe5b15bb813a11c82046692b5e8",
+    "canonical/runtime/saccr_credit_kernel.py": "4a9536a391e21ec9895c1abdf45a673c0451ba3a",
+    "canonical/runtime/browser_state_information_safe_proof.py": "3723d3233d6058f0a43491e4654a21490f992d1e",
+    "canonical/runtime/browser_state_information_safe_candidate.py": "8acf61f21a15a0d3b3e0e5735ebb80e20393e405",
+    "canonical/runtime/consensus_dom_grounding.py": "2849a9eea74c6c595709f77eba23fd40a3be8c9a",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4f3b09c517950cc050432a0616f",
+    "canonical/runtime/delegation_structural_variety_proof_v3.py": "f5e1f45519278ed2cafa27d23b8602b0a362a492",
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "canonical/runtime/tool_discovery_information_safe_proof_v2.py": "5e8a953864e13ec76768c3e8920644107c65a644",
+    "canonical/runtime/tool_discovery_information_safe_proof.py": "2450a9644119c9fdf9c43307a1d115098d6ba592",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py": "64c02edd568d95ec5ed54b7b8122183ce5b82e17",
+    "canonical/runtime/research_control_information_safe_proof.py": "16c47efee0e0e38f479163d1285d7079798efdaf",
+    "canonical/runtime/research_control_information_safe_candidate.py": "cd6bf6e4163bbba64878b856766b1af4372d68bc"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 700,
+    "head_sha": "e1fde9ff156aeb1190170d4d3972e316d550494a",
+    "merge_commit": "9a2f296fbdc28f1a04b7e916f457a1844c43a7d1",
+    "workflow_run_id": 36970374138,
+    "workflow_job_id": 110722896597,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_BLOB_HASHES_MATCHED",
+    "EXACT_FROZEN_ROUTE_COUNTS_BOUND_2000_150_132_180_180",
+    "ROUTE_SPECIFIC_SEED_NAMESPACES_VERIFIED",
+    "SA_CCR_CANDIDATE_TO_HIDDEN_ORACLE_CASE_EXECUTION_PASS",
+    "BROWSER_FIVE_CLASS_CYCLE_PASS",
+    "DELEGATION_ELEVEN_CLASS_CYCLE_PASS",
+    "TOOL_DISCOVERY_SIX_CLASS_CYCLE_PASS",
+    "RESEARCH_SIX_DOMAIN_CYCLE_PASS",
+    "PRODUCTION_EXECUTOR_HAS_NO_REDUCED_COUNT_OVERRIDE",
+    "NO_REAL_POST_FREEZE_TERMINAL_BEACON_USED",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
