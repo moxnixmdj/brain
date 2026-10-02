@@ -55,6 +55,7 @@ class Tests(unittest.TestCase):
         self.assertTrue(out["implies_target"])
         self.assertEqual(out["candidate_scope_relation"], "PROVEN_STRONGER")
         self.assertEqual(out["verified_scope_relation"], "SUPERSET")
+        self.assertEqual(out["verified_scope_relation_receipt"], "receipt://scope/witness_superset_target")
 
     def test_exact_scope_exact_atoms_can_be_exact(self):
         d = base()
