@@ -206,6 +206,24 @@ def evaluate(binding=None,manifest=None,routes=None,contracts=None,residual=None
   "pass":not errors,"errors":errors,"behavior_id":BEHAVIOR,
   "surface_count":len(surfaces),"surfaces":sorted(surfaces),
   "scope_relation":"SUPERSET_OF_FROZEN_P1_DIRECT_PROOF_CONTRACT_SEMANTICS_BOUND_TO_ALL_THREE_DECLARED_SURFACES" if not errors else "NOT_PROVED",
+  "claim_bound_relations":[
+   {
+    "claim_id":"P1_V5_SCOPE_SUPERSET::"+surface.split("::",1)[0].replace("/","::"),
+    "direct_surface":surface,
+    "relation":"SUPERSET" if not errors else "NOT_PROVED",
+    "witness_basis":{
+     "frozen_surface_binding":P1_BINDING,
+     "surface_manifest":MANIFEST,
+     "frozen_direct_contract":FOUR_CONTRACTS,
+     "frozen_direct_route":DIRECT_ROUTES,
+     "v4_exact_residual_receipt":V4_RESIDUAL,
+     "v5_independent_receipt":V5_RECEIPT,
+    },
+    "claim_scope":"FROZEN_P1_DIRECT_PROOF_CONTRACT_SEMANTICS_ONLY",
+    "private_benchmark_population_scope_claimed":False,
+   }
+   for surface in sorted(surfaces)
+  ],
   "private_benchmark_population_scope_claimed":False,
   "semantic_basis":{"v4_exact_residuals":sorted(EXPECTED_RESIDUALS),
                     "v5_exact_residuals_addressed":sorted(v5.get("exact_residuals_addressed") or []),
