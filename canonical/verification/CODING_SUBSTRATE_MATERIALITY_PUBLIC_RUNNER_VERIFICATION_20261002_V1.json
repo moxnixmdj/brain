@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_SUBSTRATE_MATERIALITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SAME_PROPOSAL_CONFIGURED_VS_BARE_MATERIALITY_CAUSAL_DIFFERENTIAL",
+  "brain": {
+    "runtime_path": "canonical/runtime/coding_substrate_materiality_counterfactual_v1.py",
+    "runtime_git_blob_sha": "dd217ad1bd4b2262adbff2abd6a8893171e3a9fe",
+    "test_path": "canonical/tests/test_coding_substrate_materiality_counterfactual_v1.py",
+    "test_git_blob_sha": "99c1ebb77b874c9dfc45bb6b3cbe4a684dbe8c04"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 814,
+    "pull_request_head": "ac8b18bf57fcf078e92f7c50afd4c00435bb5db3",
+    "merge_commit": "327347bf2d3e302ca45161cb09e27f966eab05e2",
+    "workflow_run_id": 36984065631,
+    "workflow_job_id": 110764946083,
+    "conclusion": "success"
+  },
+  "verified": [
+    "IDENTICAL_TERMINAL_PROPOSAL_STREAM_HELD_FIXED",
+    "BARE_ROUTE_ACCEPTS_PREMATURE_TERMINAL_PROPOSAL",
+    "BRAIN_CONFIGURED_ROUTE_BLOCKS_WHILE_KNOWN_RELEVANT_FAILURE_REMAINS",
+    "BRAIN_CONFIGURED_ROUTE_BLOCKS_FAILED_VERIFICATION_COMMAND",
+    "BRAIN_CONFIGURED_ROUTE_ACCEPTS_AFTER_ZERO_KNOWN_FAILURES_AND_ALL_ACCEPTANCE_AND_VERIFICATION_EVIDENCE_PASS",
+    "ZERO_BENCHMARK_CASE_CONTENT_CONSUMED",
+    "ZERO_TERMINAL_BENCH_REPLAY"
+  ],
+  "interpretation": "THE_BRAIN_OWNED_MINI_SWE_SUPERPOWERS_COMPLETION_CONTRACT_MATERIALLY_CHANGES_TERMINAL_EXECUTION_WHILE_THE_PROPOSAL_STREAM_IS_HELD_FIXED__THIS_ESTABLISHES_CAUSAL_CONFIGURATION_CONTROL_OF_VERIFIED_COMPLETION__NOT_FULL_CODING_BAR_PERFORMANCE",
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
