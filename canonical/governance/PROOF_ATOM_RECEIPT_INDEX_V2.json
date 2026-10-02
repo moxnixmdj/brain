@@ -9,7 +9,15 @@
     "activation": "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json",
     "verification": "canonical/verification/CANONICAL_PROOF_ATOM_BASIS_V2_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "expected_canonical_atoms": 40,
-    "atom_identity_namespace": "PA1"
+    "atom_identity_namespace": "PA1",
+    "runtime_path": "canonical/runtime/canonical_proof_atom_basis_v2.py",
+    "runtime_git_blob_sha": "5b5957f353edab6c86a34f947ef253099822b0d1",
+    "refinement_overlay_path": "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json",
+    "refinement_overlay_git_blob_sha": "898e450c62c06cf6d1a4a3f826a255da9161a229",
+    "frontier_path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+    "frontier_git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8",
+    "basis_verification_git_blob_sha": "cf296e9de1d74e929adbc5a6a80650a367c5b2fc",
+    "active_authority_git_blob_sha": "5ab461c41db852cb6fbe47c287c03239dee87e91"
   },
   "searched_roots": [
     "canonical/verification",
@@ -32,5 +40,7 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "runtime_git_blob_sha": "1b9e2983a46e8526190abbc2d041070f846bc825",
+  "tests_git_blob_sha": "20f3f69986776beb22bba59edc06dac7c536fb6e"
 }
