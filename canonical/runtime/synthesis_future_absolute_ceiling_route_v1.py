@@ -35,7 +35,7 @@ METRICS={"matched_quality_noninferiority","required_claim_coverage_noninferiorit
 
 def load(p:Path): return json.loads(p.read_text(encoding="utf-8"))
 def blob_sha(p:Path)->str:
-    b=p.read_bytes(); return hashlib.sha1(b"blob "+str(len(b)).encode()+b"\0"+b).hexdigest()
+    b=p.read_bytes(); return hashlib.sha1(b"blob "+str(len(b)).encode()+bytes([0])+b).hexdigest()
 def fail(*errors:str)->dict[str,Any]:
     return {"schema":SCHEMA,"status":"FAIL_CLOSED","pass":False,"errors":sorted(set(errors)),
             "route_preexposure_valid":False,"exact_opus_required_if_brain_hits_ceiling":None,
