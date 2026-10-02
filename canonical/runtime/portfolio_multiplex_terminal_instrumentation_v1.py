@@ -10,7 +10,7 @@ canonical.runtime.direct_route_terminal_executors_v1.
 """
 from __future__ import annotations
 
-import hashlib
+import subprocess
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -73,9 +73,15 @@ FORBIDDEN_RECEIPT_KEYS = {
 
 
 
-def _git_blob_sha(path: Path) -> str:
-    data = path.read_bytes()
-    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\\0" + data).hexdigest()
+def _git_object_sha(root: Path, relative_path: str) -> str:
+    out = subprocess.check_output(
+        ["git", "-C", str(root), "rev-parse", "HEAD:" + relative_path],
+        text=True,
+        stderr=subprocess.DEVNULL,
+    ).strip()
+    if len(out) != 40 or any(ch not in "0123456789abcdef" for ch in out.lower()):
+        raise ValueError("INVALID_GIT_OBJECT_SHA")
+    return out.lower()
 
 
 def static_binding_preflight(root: Path = Path(".")) -> dict[str, Any]:
@@ -88,7 +94,18 @@ def static_binding_preflight(root: Path = Path(".")) -> dict[str, Any]:
             errors.append("BINDING_MISSING:" + behavior_id)
             rows[behavior_id] = {"path": binding["binding"], "exists": False}
             continue
-        got = _git_blob_sha(path)
+        try:
+            got = _git_object_sha(root, binding["binding"])
+        except Exception as exc:
+            errors.append("BINDING_OBJECT_ID_UNAVAILABLE:" + behavior_id + ":" + type(exc).__name__)
+            rows[behavior_id] = {
+                "path": binding["binding"],
+                "exists": True,
+                "expected_blob": binding["binding_blob"],
+                "actual_blob": None,
+                "match": False,
+            }
+            continue
         expected = binding["binding_blob"]
         ok = got == expected
         if not ok:
