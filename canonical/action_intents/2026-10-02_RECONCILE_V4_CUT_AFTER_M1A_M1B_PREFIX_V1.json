@@ -1,0 +1,191 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-V4-CUT-AFTER-M1A-M1B-PREFIX-20261002-V1",
+  "status": "PROPOSED_CURRENT_BASE__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "38eb636f0f2db209b48fa9c9b9c3b0901b652afb",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CANONICAL_SCHEDULER_STALE_AFTER_V4_EXACT_CUT_AND_M1A_M1B_PREFIX_EXECUTION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CANONICAL_SCHEDULER_STALE_AFTER_V4_EXACT_CUT_AND_M1A_M1B_PREFIX_EXECUTION",
+  "expected_parent_frontier_change": "PROMOTE_CURRENT_V4_SHARED_RESIDUAL_CUT_STATE__RECORD_M1A_AND_M1B_ZERO_REALITY_PREFIXES_EXECUTED_VERIFIED__SCHEDULE_ONLY_M0A_ZERO_REALITY_PREFIX__REQUIRE_RECOMPUTE_BEFORE_ANY_MATCHED_EVALUATION",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "All canonical frontier mirrors agree that M1A and M1B zero-reality prefixes are executed and verified, only M0A zero-reality prefix is next, V4 cut independently recomputes exactly, and no matched evaluation is authorized before recomputation.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION",
+    "semantic_contract_policy": "NO_TERM_WITHOUT_COMPLETE_BEHAVIORAL_CONTRACT__ACCOUNTING_LABELS_HAVE_ZERO_IMPLEMENTATION_ONTOLOGY_AUTHORITY"
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "NO_NEW_CAPABILITY_CREDIT_CLAIMED",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "NOT_APPLICABLE_TO_STATE_RECONCILIATION",
+    "GENERAL_SUBSTRATE_TEST": "PASS",
+    "SPECIMEN_SEPARATION_TEST": "PASS",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "NOT_APPLICABLE_TO_STATE_RECONCILIATION",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "M1A_AND_M1B_PREFIX_RECEIPTS_VERIFIED__M0A_PENDING",
+    "OWNERSHIP_PACKAGE_TEST": "NO_PROMOTION"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "38eb636f0f2db209b48fa9c9b9c3b0901b652afb",
+    "real_outcome": "Make the live scheduler truthfully reflect V4 after two verified zero-reality prefix executions, without spending new terminal information or claiming family closure.",
+    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "obs_goal": {
+      "real_outcome": "Eliminate stale scheduler/mirror state and schedule only the remaining M0A zero-reality prefix before mandatory cut recomputation.",
+      "proxy_goals_deleted": [
+        "commit count",
+        "workflow count",
+        "re-running M1A",
+        "re-running M1B",
+        "premature matched evaluation",
+        "family promotion"
+      ],
+      "surviving_necessity": "One atomic cross-surface reconciliation to current V4 execution state."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4",
+        "M1A_ZERO_REALITY_PREFIX_EXECUTION_001",
+        "M1B_CONTINUOUS_GEOMETRY_COMPILER_001"
+      ],
+      "external_existing_routes_checked": [
+        "No external discovery is needed to reconcile already-produced canonical receipts."
+      ],
+      "capability_work_deleted": [
+        "No M1A replay",
+        "No M1B replay",
+        "No new donor search",
+        "No fresh matched evaluation",
+        "No capability promotion"
+      ],
+      "surviving_gap": "M0A_ZERO_REALITY_PREFIX_PENDING_BEFORE_MANDATORY_RECOMPUTE"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific canonical-state drift: V4 and prefix receipts exist but scheduler mirrors still name pre-V4 discovery/freeze work.",
+      "delete_bypass_substitute_options": [
+        "Delete obsolete V2/V3 authority",
+        "Bypass repeated discovery",
+        "Reuse V4 verdict and prefix receipts",
+        "Do not spend matched evaluation before recompute"
+      ],
+      "surviving_causal_blocker": "CANONICAL_SCHEDULER_STALE_AFTER_V4_EXACT_CUT_AND_M1A_M1B_PREFIX_EXECUTION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "Atomic reconciliation to V4 executed-prefix state",
+        "Leave stale scheduler",
+        "Re-run completed prefixes",
+        "Jump directly to matched evaluation"
+      ],
+      "losing_routes_reason": "Stale state is false; replay wastes time; matched evaluation before required recomputation violates the V4 verdict.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Independently recompute V4 exact minimum cut from frozen input and run canonical drift/OBS guards."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "V2/V3 cut authority",
+        "pre-V4 search/freeze scheduler wording",
+        "M1A prefix pending",
+        "M1B prefix pending"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "M1A deterministic composed drawing prefix",
+        "M1B executable continuous geometry prefix"
+      ],
+      "fresh_reuse_plan": "Execute only M0A zero-reality prefix, then recompute before any fresh matched evaluation."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Do not rediscover V4 candidates",
+        "Do not re-audit already verified M1A/M1B prefixes",
+        "Reuse frozen input and deterministic solver"
+      ],
+      "search_stop_decision": "Current task is state reconciliation from canonical receipts; external search cannot change those receipts.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_TO_V4_EXECUTED_PREFIX_STATE",
+      "KEEP_STALE_STATE",
+      "REPLAY_PREFIXES",
+      "SPEND_MATCHED_EVALUATION_NOW"
+    ],
+    "deleted_or_bypassed_paths": [
+      "KEEP_STALE_STATE",
+      "REPLAY_PREFIXES",
+      "SPEND_MATCHED_EVALUATION_NOW"
+    ],
+    "selected_surviving_route": "RECONCILE_TO_V4_EXECUTED_PREFIX_STATE",
+    "why_selected_route_is_fastest_sufficient": "All necessary evidence already exists in canonical receipts; one atomic reconciliation removes drift without new reality spend.",
+    "expected_parent_level_state_change": "PROMOTE_CURRENT_V4_SHARED_RESIDUAL_CUT_STATE__RECORD_M1A_AND_M1B_ZERO_REALITY_PREFIXES_EXECUTED_VERIFIED__SCHEDULE_ONLY_M0A_ZERO_REALITY_PREFIX__REQUIRE_RECOMPUTE_BEFORE_ANY_MATCHED_EVALUATION",
+    "stop_condition": "All canonical frontier mirrors agree that M1A and M1B zero-reality prefixes are executed and verified, only M0A zero-reality prefix is next, V4 cut independently recomputes exactly, and no matched evaluation is authorized before recomputation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER action uses already-canonical receipts and frozen exact-cut evidence; new route discovery cannot alter historical execution facts."
+    }
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "CANONICAL_SCHEDULER_EQUALS_CURRENT_V4_EXECUTION_STATE",
+    "hole_type": "?P",
+    "expected_certificate_or_receipt": "DRIFT_GUARD_PASS_PLUS_V4_EXACT_RECOMPUTATION_PASS",
+    "validator": "canonical/runtime/enforce_goal_hierarchy.py",
+    "maximum_cheap_test_cost": "ONE_PR_CI_PASS",
+    "prerequisites": [
+      "V4_VERDICT_PRESENT",
+      "M1A_PREFIX_RECEIPT_PRESENT",
+      "M1B_PREFIX_RECEIPT_PRESENT"
+    ],
+    "contamination_risk": "NONE__NO_FRESH_TERMINAL_EVIDENCE",
+    "reversibility": "FULLY_REVERSIBLE_STATE_RECONCILIATION",
+    "falsification_condition": "ANY_MIRROR_DISAGREES_OR_V4_RECOMPUTATION_DIFFERS",
+    "critical_path_relation": "REMOVES_STALE_SCHEDULER_BEFORE_M0A_PREFIX_EXECUTION"
+  },
+  "continuous_obs": {
+    "required": true,
+    "post_receipt_revalidation_required": true,
+    "material_unknown_fails_closed": true
+  },
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "proof_obligation": "STATE_RECONCILIATION_ONLY",
+    "minimum_reality_cut": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4.json",
+    "terminal_decision_value": "ZERO_NEW_INFORMATION"
+  },
+  "global_terminal_proof_cut": {
+    "proposed_action_membership": "RECONCILIATION_ONLY__NO_NEW_TERMINAL_OBSERVATION",
+    "shared_residual_cut": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4.json",
+    "full_17_family_cut_remains_open": true
+  }
+}

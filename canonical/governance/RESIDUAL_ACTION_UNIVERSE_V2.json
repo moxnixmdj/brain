@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "FROZEN_COMPLETE_ACTION_BUNDLES__V4_EXACT_CUT_READY__ZERO_CAPABILITY_CREDIT",
+  "status": "FROZEN_V4_EXACT_CUT__M1A_M1B_ZERO_REALITY_PREFIXES_EXECUTED_VERIFIED__M0A_PREFIX_PENDING__ZERO_CAPABILITY_CREDIT",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -215,7 +215,7 @@
     "M1A",
     "M1B"
   ],
-  "next": "RUN_EXACT_RESIDUAL_MINIMUM_REALITY_CUT_V4__EXECUTE_ZERO_REALITY_PREFIXES__RECOMPUTE_BEFORE_ANY_FRESH_MATCHED_EVALUATION",
+  "next": "EXECUTE_A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1_PRE_MATCHED_EVALUATION__THEN_RECOMPUTE_RESIDUAL_MINIMUM_REALITY_CUT__NO_MATCHED_EVALUATION_BEFORE_RECOMPUTE",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -223,7 +223,27 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "note": "M1B current continuous geometry and tolerance action bundle frozen; all three shared residuals now have complete self-contained action bundles; ready for V4 exact cut.",
-    "supersedes": "canonical/governance/RESIDUAL_CUT_RECONCILIATION_V1.json"
+    "note": "V4 exact shared-residual cut is current. M1A and M1B zero-reality prefixes are executed and verified; only the M0A zero-reality prefix remains before mandatory recomputation. No matched parity reality unit is yet authorized."
+  },
+  "v4_exact_cut": {
+    "input": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V4.json",
+    "verdict": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4.json",
+    "exact_minimum": true,
+    "selected_observations": [
+      "A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1",
+      "A_M1A_VERIFIED_DETERMINISTIC_FRONTIER_V1",
+      "A_M1B_IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_TOLERANCE_V1"
+    ],
+    "total_cost": 2,
+    "execution_state": {
+      "m0a_zero_reality_prefix": "PENDING",
+      "m1a_zero_reality_prefix": "EXECUTED_VERIFIED",
+      "m1b_zero_reality_prefix": "EXECUTED_VERIFIED"
+    },
+    "execution_evidence": {
+      "m1a": "canonical/capabilities/opus55/M1A_ZERO_REALITY_PREFIX_EXECUTION_001.json",
+      "m1b": "canonical/capabilities/opus55/M1B_CONTINUOUS_GEOMETRY_COMPILER_001.json"
+    },
+    "next_rule": "EXECUTE_M0A_ZERO_REALITY_PREFIX__RECOMPUTE_BEFORE_ANY_FRESH_MATCHED_EVALUATION"
   }
 }

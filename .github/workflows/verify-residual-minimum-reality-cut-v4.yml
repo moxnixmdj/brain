@@ -1,0 +1,58 @@
+name: Verify residual minimum reality cut v4
+on:
+  pull_request:
+    paths:
+      - 'canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V4.json'
+      - 'canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4.json'
+      - 'canonical/runtime/minimum_reality_cut.py'
+      - 'canonical/capabilities/opus55/M1A_ZERO_REALITY_PREFIX_EXECUTION_001.json'
+      - 'canonical/capabilities/opus55/M1B_CONTINUOUS_GEOMETRY_COMPILER_001.json'
+      - '.github/workflows/verify-residual-minimum-reality-cut-v4.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V4.json'
+      - 'canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4.json'
+      - 'canonical/runtime/minimum_reality_cut.py'
+      - '.github/workflows/verify-residual-minimum-reality-cut-v4.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: residual-cut-v4-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Recompute exact V4 cut and verify executed prefixes
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.minimum_reality_cut import solve
+          root=Path(".")
+          inp=json.loads((root/"canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V4.json").read_text())
+          frozen=json.loads((root/"canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4.json").read_text())
+          out=solve(inp)
+          assert out["status"]=="EXACT_MINIMUM", out
+          assert out["exact_minimum"] is True, out
+          assert out["selected_observations"]==frozen["selected_observations"], (out,frozen)
+          assert out["total_cost"]==frozen["total_cost"]==2, (out,frozen)
+          assert set(out["selected_observations"])=={
+            "A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1",
+            "A_M1A_VERIFIED_DETERMINISTIC_FRONTIER_V1",
+            "A_M1B_IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_TOLERANCE_V1",
+          }, out
+          m1a=json.loads((root/"canonical/capabilities/opus55/M1A_ZERO_REALITY_PREFIX_EXECUTION_001.json").read_text())
+          m1b=json.loads((root/"canonical/capabilities/opus55/M1B_CONTINUOUS_GEOMETRY_COMPILER_001.json").read_text())
+          assert m1a["status"].startswith("EXECUTED_VERIFIED_ZERO_REALITY_PREFIX"), m1a
+          assert m1a["new_reality_units_consumed"]==0, m1a
+          assert m1b["status"].startswith("VERIFIED_BRAIN_OWNED_BOUNDED_CONTINUOUS_GEOMETRY_PREFIX"), m1b
+          assert m1b["new_reality_units_consumed"]==0, m1b
+          print(json.dumps({"status":"PASS","cut":out,"m1a_prefix":"PASS","m1b_prefix":"PASS"},sort_keys=True))
+          PY
