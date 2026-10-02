@@ -153,7 +153,10 @@ def verify(
 
     # Re-run the existing fail-closed scope gate. This checks behavior/interaction
     # coverage, hidden inference separation, anti-shortcut mutations and target weakening.
-    gate_out=scope_gate(dict(gate_input))
+    gate_payload=dict(gate_input)
+    gate_payload["relation_receipts"]=dict(gate_input.get("relation_receipts") or {})
+    gate_payload["relation_receipts"]["population"]="canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V2.json"
+    gate_out=scope_gate(gate_payload)
     if gate_out.get("admissible") is not True:
         errors.append("SCOPE_EQUIVALENT_GATE_NOT_ADMISSIBLE")
 
