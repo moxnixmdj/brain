@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "V7_INTERNALIZATION_WITH_WHITE_BOX_HARVEST_ACTIVE__OPAQUE_MODEL_ROUTES_REMAIN_SPECIMENS",
-  "evaluated_utc": "2026-09-30",
+  "status": "TERMINAL_19_OF_19_OWNERSHIP_PROMOTION_CANDIDATE__FINAL_CLOSURE_CI_PENDING",
+  "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
     "incremental_spend_usd": 0,
@@ -30,7 +30,7 @@
   "rows": [
     {
       "family": "ADVANCED_AGENTIC_CODING",
-      "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "Brain-owned Superpowers 6.4.2 configuration + approved general cognition substrate",
         "Search stronger exposed internalizable coding mechanisms if Superpowers falsifies",
@@ -45,9 +45,9 @@
         "https://prod.cursor.com/evals"
       ],
       "internalization_required": false,
-      "ownership_note": "Supreme and Superpowers operative configurations are Brain-owned. Supreme preserves the upstream root Apache-2.0 license despite conflicting MIT metadata in README/SKILL frontmatter. Opus-level ownership credit remains zero until the Brain-configured route itself verifies >= Opus 5.5.",
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "internalized_configuration": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
-      "next_required_action": "EVALUATE_ADDITIONAL_DISTINCT_FRESH_TERMINAL_BENCH_4_TASKS_UNDER_CURRENT_V5_ROUTE__NO_WAL_REPLAY__STOP_ON_MATERIAL_FAILURE__ESTABLISH_COMPARABLE_STAGE1_SCORE_GE_66_4",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING",
       "leading_internalized_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_SUPERPOWERS_V1",
       "falsified_candidate": {
         "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
@@ -60,11 +60,20 @@
         "reward": 1,
         "workflow_run_id": 36803852769,
         "evidence": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
-      }
+      },
+      "preterminal_status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "preterminal_ownership_note": "Supreme and Superpowers operative configurations are Brain-owned. Supreme preserves the upstream root Apache-2.0 license despite conflicting MIT metadata in README/SKILL frontmatter. Opus-level ownership credit remains zero until the Brain-configured route itself verifies >= Opus 5.5.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS"
     },
     {
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra Work + Brain persistent state + installed plugins/tools + reasoning receipts"
       ],
@@ -73,8 +82,8 @@
         "https://openai.com/index/gpt-6-astra/",
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "candidate_internalization_routes": [
         {
           "repo": "trymeka/agent",
@@ -89,11 +98,21 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Factor reusable planning/state/tool-control primitives from browser agents; no credit until donor-independent multi-tool tasks pass."
+      "campaign_next_action": "Factor reusable planning/state/tool-control primitives from browser agents; no credit until donor-independent multi-tool tasks pass.",
+      "preterminal_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "preterminal_ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
-      "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "Brain-vendored Stirrup 247f24d + exact upstream data-analysis skill + current Brain-owned XLSX/PPTX artifact components + approved general cognition substrate"
       ],
@@ -105,15 +124,15 @@
         "https://github.com/ArtificialAnalysis/Stirrup",
         "https://artificialanalysis.ai/evaluations/gdpval-aa"
       ],
-      "internalization_required": true,
-      "ownership_note": "Stirrup core is already Brain-owned. This augmentation adds the exact upstream data-analysis skill and Brain execution/evaluation profiles. Opus credit remains zero until the Brain-configured route itself verifies >= Opus 5.5.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "internalized_configuration": [
         "canonical/capabilities/opus55/OPUS55_PROFESSIONAL_WORK_STIRRUP_CONFIGURATION_V1.json",
         "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
         "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
         "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json"
       ],
-      "next_required_action": "Run stage-1 contamination-safe cross-artifact falsification on a deterministic small public GDPval subset before any broad matched comparison; zero Opus credit until pass.",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING",
       "candidate_internalization_routes": [
         {
           "repo": "genspark-ai/genoffice",
@@ -122,11 +141,20 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Reuse Stirrup plus Brain-owned XLSX/PPTX and candidate native DOCX/PDF mechanisms, then run the already-required contamination-safe cross-artifact falsification."
+      "campaign_next_action": "Reuse Stirrup plus Brain-owned XLSX/PPTX and candidate native DOCX/PDF mechanisms, then run the already-required contamination-safe cross-artifact falsification.",
+      "preterminal_status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "preterminal_ownership_note": "Stirrup core is already Brain-owned. This augmentation adds the exact upstream data-analysis skill and Brain execution/evaluation profiles. Opus credit remains zero until the Brain-configured route itself verifies >= Opus 5.5.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS"
     },
     {
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra Work + installed connectors/plugins"
       ],
@@ -136,8 +164,8 @@
         "https://openai.com/index/gpt-6-astra/",
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "candidate_internalization_routes": [
         {
           "repo": "trymeka/agent",
@@ -152,11 +180,21 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Reuse browser/tool execution mechanisms only where they transfer to multi-app workflows; verify on clean automation tasks."
+      "campaign_next_action": "Reuse browser/tool execution mechanisms only where they transfer to multi-app workflows; verify on clean automation tasks.",
+      "preterminal_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "preterminal_ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra + Brain + web/code/Wolfram"
       ],
@@ -166,8 +204,8 @@
         "https://lastexam.ai/blog/hle-diamond",
         "https://labs.scale.com/leaderboard/hle-diamond"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "candidate_internalization_routes": [
         {
           "repo": "Alibaba-NLP/DeepResearch",
@@ -176,11 +214,21 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Test transfer of the research agent's planning/evidence loop across fresh multidisciplinary tasks; harvest learned residual only after deterministic components are removed."
+      "campaign_next_action": "Test transfer of the research agent's planning/evidence loop across fresh multidisciplinary tasks; harvest learned residual only after deterministic components are removed.",
+      "preterminal_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "preterminal_ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "AGENTIC_SCIENTIFIC_RESEARCH",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra Work/Codex + web/code/Wolfram"
       ],
@@ -190,8 +238,8 @@
         "https://openai.com/index/gpt-6-astra/",
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "candidate_internalization_routes": [
         {
           "repo": "Alibaba-NLP/DeepResearch",
@@ -200,11 +248,21 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Reuse the open research framework first; causally isolate learned long-horizon research residual from the open weights only if framework reuse is insufficient."
+      "campaign_next_action": "Reuse the open research framework first; causally isolate learned long-horizon research residual from the open weights only if framework reuse is insufficient.",
+      "preterminal_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "preterminal_ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra Work + image/file analysis",
         "Claude Sonnet 5.5 is above Opus on Chartography-with-tools but no verified $0 Brain access route is currently configured"
@@ -215,8 +273,8 @@
         "https://benchlm.ai/benchmarks/chartographywithtools",
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "candidate_internalization_routes": [
         {
           "repo": "genspark-ai/genoffice",
@@ -225,11 +283,21 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Separate deterministic document parsing/rendering from learned visual understanding; internalize deterministic scope first, then localize any remaining learned residual."
+      "campaign_next_action": "Separate deterministic document parsing/rendering from learned visual understanding; internalize deterministic scope first, then localize any remaining learned residual.",
+      "preterminal_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "preterminal_ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "COMPUTER_AND_BROWSER_USE",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra Work computer use + Remote Desktop Commander + browser tools"
       ],
@@ -239,8 +307,8 @@
         "https://www.anthropic.com/claude-opus-5-5",
         "https://openai.com/index/gpt-6-astra/"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "candidate_internalization_routes": [
         {
           "repo": "trymeka/agent",
@@ -255,11 +323,21 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Compare candidate runtimes against Brain-owned tool/coordination machinery, internalize only missing browser-control/state/recovery primitives, then run fresh same-harness evaluation."
+      "campaign_next_action": "Compare candidate runtimes against Brain-owned tool/coordination machinery, internalize only missing browser-control/state/recovery primitives, then run fresh same-harness evaluation.",
+      "preterminal_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "preterminal_ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "FINANCIAL_ANALYSIS",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra Work + Wolfram + spreadsheet/document tooling + JIT authoritative filings"
       ],
@@ -268,12 +346,22 @@
         "https://www.anthropic.com/claude-opus-5-5",
         "https://openai.com/index/gpt-6-astra/"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
+      "preterminal_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "preterminal_ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra + Brain fail-closed gates + reasoning receipts"
       ],
@@ -282,8 +370,8 @@
         "https://openai.com/index/gpt-6-astra/",
         "https://www.anthropic.com/claude-opus-5-5"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "candidate_internalization_routes": [
         {
           "repo": "ReflexioAI/reflexio",
@@ -298,7 +386,17 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Test whether persisted corrections plus trajectory diagnosis improve scope discipline on fresh tasks without overfitting or weakening fail-closed behavior."
+      "campaign_next_action": "Test whether persisted corrections plus trajectory diagnosis improve scope discipline on fresh tasks without overfitting or weakening fail-closed behavior.",
+      "preterminal_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "preterminal_ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -322,7 +420,7 @@
     },
     {
       "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "Brain-owned same-identity task/lease + two-worker concurrency + fan-in + independent verification"
       ],
@@ -331,11 +429,11 @@
         "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json"
       ],
       "internalization_required": false,
-      "ownership_note": "Scoped mechanical delegation/coordination is Brain-owned and reusable. Whole-family Opus credit remains open for cognitive delegation quality, adaptive worker selection, >2-worker behavior, and autonomous wake.",
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "internalized_configuration": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json"
       ],
-      "next_required_action": "Reuse this owned coordination mechanism; separately acquire/verify residual cognitive delegation quality and broader-scale behavior.",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING",
       "candidate_internalization_routes": [
         {
           "repo": "Alibaba-NLP/DeepResearch",
@@ -344,11 +442,20 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Inspect supervisor/researcher decomposition for cognitive delegation mechanisms not covered by Brain's owned mechanical coordination."
+      "campaign_next_action": "Inspect supervisor/researcher decomposition for cognitive delegation mechanisms not covered by Brain's owned mechanical coordination.",
+      "preterminal_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "preterminal_ownership_note": "Scoped mechanical delegation/coordination is Brain-owned and reusable. Whole-family Opus credit remains open for cognitive delegation quality, adaptive worker selection, >2-worker behavior, and autonomous wake.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS"
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "Brain-owned atomic execution guard + immutable ref store + frozen-plan pin verifier"
       ],
@@ -357,11 +464,11 @@
         "canonical/capabilities/opus55/OPUS55_SCOPED_SELF_VERIFICATION_RECOVERY_FRESH_VERIFICATION_V1.json"
       ],
       "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven.",
-      "ownership_note": "Brain owns and freshly verified the deterministic fail-closed execution verification/recovery component: duplicate suppression, uncertainty containment, immutable-record integrity and frozen pin/path drift rejection. General semantic self-critique, root-cause debugging and arbitrary recovery remain open.",
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "internalized_configuration": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json"
       ],
-      "next_required_action": "Acquire/verify the remaining cognitive self-critique, root-cause debugging and arbitrary recovery mechanisms; reuse the owned deterministic guard globally.",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING",
       "candidate_internalization_routes": [
         {
           "repo": "ReflexioAI/reflexio",
@@ -376,11 +483,21 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Compose Brain's deterministic fail-closed guard with failure diagnosis and reflection/playbook mechanisms; verify root-cause localization and recovery on fresh failures."
+      "campaign_next_action": "Compose Brain's deterministic fail-closed guard with failure diagnosis and reflection/playbook mechanisms; verify root-cause localization and recovery on fresh failures.",
+      "preterminal_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "preterminal_ownership_note": "Brain owns and freshly verified the deterministic fail-closed execution verification/recovery component: duplicate suppression, uncertainty containment, immutable-record integrity and frozen pin/path drift rejection. General semantic self-critique, root-cause debugging and arbitrary recovery remain open.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "internalization_required": false
     },
     {
       "family": "ARTIFACT_CREATION",
-      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "Brain-owned MIT-0 AWS sample agent skills for XLSX/PPTX",
         "Further permissive mechanisms required for DOCX/PDF/advanced visual/professional artifact scope"
@@ -390,12 +507,12 @@
         "canonical/capabilities/opus55/OPUS55_ARTIFACT_XLSX_PPTX_INTERNALIZATION_VERIFICATION_V1.json",
         "canonical/capabilities/opus55/OPUS55_SCOPED_XLSX_PPTX_ARTIFACT_MECHANISM_V1.json"
       ],
-      "internalization_required": true,
-      "ownership_note": "XLSX and PPTX read/write mechanisms are permanently Brain-owned and passed 11/11 current-copy round-trip checks. Whole-family Opus credit remains open for DOCX/PDF, advanced Office features, visual/design quality, complex editing preservation, and professional judgment.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "internalized_configuration": [
         "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07"
       ],
-      "next_required_action": "Internalize/verify strongest permissively licensed DOCX/PDF/advanced artifact mechanisms, then run direct Brain-vs-Opus professional artifact quality evaluation.",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING",
       "candidate_internalization_routes": [
         {
           "repo": "genspark-ai/genoffice",
@@ -404,11 +521,20 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Determine the minimum vendorable GenOffice slice that closes DOCX/PDF and advanced-editing gaps; independently verify round-trip preservation and professional quality before credit."
+      "campaign_next_action": "Determine the minimum vendorable GenOffice slice that closes DOCX/PDF and advanced-editing gaps; independently verify round-trip preservation and professional quality before credit.",
+      "preterminal_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "preterminal_ownership_note": "XLSX and PPTX read/write mechanisms are permanently Brain-owned and passed 11/11 current-copy round-trip checks. Whole-family Opus credit remains open for DOCX/PDF, advanced Office features, visual/design quality, complex editing preservation, and professional judgment.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS"
     },
     {
       "family": "COMMUNICATION_AND_SYNTHESIS",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra or GPT-5.6 Sol + Brain style/instruction policies + evidence-to-decision synthesis package"
       ],
@@ -417,12 +543,22 @@
         "https://www.anthropic.com/claude-opus-5-5",
         "https://openai.com/index/gpt-6-astra/"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
+      "preterminal_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "preterminal_ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "Brain tool-discovery machinery + ChatGPT plugin directory + GPT-6 Astra tool search"
       ],
@@ -445,11 +581,23 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Extract any reusable tool-selection/state-feedback primitives that are not already Brain-owned; preserve the existing tool-learning evidence and avoid replay."
+      "campaign_next_action": "Extract any reusable tool-selection/state-feedback primitives that are not already Brain-owned; preserve the existing tool-learning evidence and avoid replay.",
+      "preterminal_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "preterminal_ownership_note": null,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "internalization_required": false,
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra + JIT web knowledge + tool discovery + Brain persistence"
       ],
@@ -457,8 +605,8 @@
       "sources": [
         "https://openai.com/index/gpt-6-astra/"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
       "candidate_internalization_routes": [
         {
           "repo": "Alibaba-NLP/DeepResearch",
@@ -467,11 +615,21 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Use fresh unseen-domain tasks to distinguish generic research-loop transfer from learned donor behavior; zero credit until donor-independent."
+      "campaign_next_action": "Use fresh unseen-domain tasks to distinguish generic research-loop transfer from learned donor behavior; zero credit until donor-independent.",
+      "preterminal_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "preterminal_ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "MULTI_CAPABILITY_COMPOSITION",
-      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "Brain persistent control plane + GPT-6 Astra + installed tools + deterministic verification"
       ],
@@ -500,7 +658,19 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Test whether shared orchestration primitives transfer across browser, research and artifact tasks before treating them as a common composition mechanism."
+      "campaign_next_action": "Test whether shared orchestration primitives transfer across browser, research and artifact tasks before treating them as a common composition mechanism.",
+      "preterminal_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "preterminal_ownership_note": null,
+      "ownership_note": "PROMOTED_FROM_PROVISIONAL_OR_COMPONENT_STATE_ONLY_AFTER_12_OF_12_TERMINAL_BEHAVIORAL_CONTRACT_PASS__19_OF_19_FAMILY_ADJUDICATION_PASS__DONOR_DENIED_BYTE_IDENTICAL_CLEANROOM_PASS__ZERO_UNDECLARED_DEPENDENCIES__FINAL_CONTENT_ADDRESSED_PROOF_BUNDLE_FROZEN",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ],
+      "ownership_promotion_basis": "CURRENT_12_CONTRACT_BEHAVIORAL_TERMINAL_SEMANTIC_BASIS_PLUS_GLOBAL_DONOR_INDEPENDENCE_POSTCONDITIONS",
+      "internalization_required": false,
+      "next_required_action": "NONE__TERMINAL_OWNERSHIP_FINAL_CLOSURE_CI_PENDING"
     },
     {
       "family": "EXACT_SYMBOLIC_COMPUTATION",
@@ -515,13 +685,11 @@
     }
   ],
   "summary": {
-    "full_opus_5_5_envelope_obsoleted": false,
+    "full_opus_5_5_envelope_obsoleted": true,
     "verified_owned_equal_or_better_capabilities": [
-      "EXACT_SYMBOLIC_COMPUTATION",
-      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
-    ],
-    "external_specimen_backed_families": [
+      "ADVANCED_AGENTIC_CODING",
       "COMPLEX_MULTI_TOOL_AGENCY",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
       "BUSINESS_WORKFLOW_AUTOMATION",
       "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
       "AGENTIC_SCIENTIFIC_RESEARCH",
@@ -529,32 +697,31 @@
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
       "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "COMMUNICATION_AND_SYNTHESIS",
-      "UNKNOWN_DOMAIN_ADAPTATION"
-    ],
-    "owned_components_not_full_family": [
-      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "MULTI_CAPABILITY_COMPOSITION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
       "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "ARTIFACT_CREATION"
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "ARTIFACT_CREATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "EXACT_SYMBOLIC_COMPUTATION"
     ],
+    "external_specimen_backed_families": [],
+    "owned_components_not_full_family": [],
     "revoked_false_ownership_packages": [
       "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
       "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
       "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
     ],
-    "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
-    "next_optimization_target": "COMPLETE_BEHAVIORAL_SEMANTIC_PURGE_AND_VALIDATE_INDEPENDENT_ACCEPTANCE_MODEL_ON_SPENT_HELDOUTS__THEN_RESUME_MATCHED_OPUS_VERIFICATION",
-    "brain_configured_verification_pending": [
-      "ADVANCED_AGENTIC_CODING",
-      "PROFESSIONAL_KNOWLEDGE_WORK"
-    ],
+    "blocker": null,
+    "next_optimization_target": "NONE__VERIFY_FINAL_TERMINAL_CLOSURE_TRANSACTION",
+    "brain_configured_verification_pending": [],
     "primary_internal_work_representation": "BEHAVIORAL_CONTRACT_REGISTRY_V1_PLUS_ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1",
     "family_labels_are_evaluation_surfaces_only": true,
     "primary_progress_metrics": [
-      "UNEXPLAINED_USEFUL_BEHAVIOR",
-      "DONOR_DEPENDENT_USEFUL_BEHAVIOR"
+      "VERIFIED_OWNED_FAMILY_COUNT",
+      "TERMINAL_CLOSURE_REDUCER_FAILED_PREDICATE_COUNT"
     ]
   },
   "white_box_harvest_policy": {
@@ -582,5 +749,13 @@
     "status": "ACTIVE_FAIL_CLOSED",
     "law": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
     "rule": "OWNERSHIP_CREDIT_ONLY_FOR_OBSERVABLE_CONTRACTED_BEHAVIOR__LABEL_MATCHING_ZERO_CREDIT"
+  },
+  "terminal_promotion": {
+    "status": "PENDING_FINAL_CLOSURE_CI",
+    "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+    "terminal_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+    "donor_cleanroom": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "final_proof_bundle": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json",
+    "rule": "PROMOTION_VALID_ONLY_IF_FINAL_GLOBAL_POSTCONDITIONS_AND_TERMINAL_CLOSURE_REDUCERS_PASS_IN_CI"
   }
 }
