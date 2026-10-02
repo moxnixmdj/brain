@@ -101,19 +101,42 @@ def _extract_direct_descriptor(doc: Mapping[str, Any]) -> dict[str, Any] | None:
 
 def _extract_multiplex_descriptor(doc: Mapping[str, Any]) -> dict[str, Any] | None:
     term = doc.get("terminal_acceptance")
-    if not isinstance(term, Mapping):
-        return None
-    source = term.get("terminal_evidence_source")
-    rule = term.get("proof_rule")
-    if not _nonempty_str(source) or not _nonempty_str(rule):
-        return None
-    return {
-        "terminal_evidence_source": source,
-        "proof_rule": rule,
-        "evaluator_or_threshold_edit_after_first_terminal_result": term.get(
-            "evaluator_or_threshold_edit_after_first_terminal_result"
-        ),
-    }
+    if isinstance(term, Mapping):
+        source = term.get("terminal_evidence_source")
+        rule = term.get("proof_rule")
+        if _nonempty_str(source) and _nonempty_str(rule):
+            return {
+                "terminal_evidence_source": source,
+                "proof_rule": rule,
+                "evaluator_or_threshold_edit_after_first_terminal_result": term.get(
+                    "evaluator_or_threshold_edit_after_first_terminal_result"
+                ),
+                "binding_form": "terminal_acceptance",
+            }
+
+    # Native artifact preservation encodes its multiplex terminal semantics under
+    # terminal_surface: every frozen T1 case that uses the native-edit route must
+    # pass the mechanical preservation gates.  Treat that as an explicit parent
+    # observation binding rather than inventing a standalone sample population.
+    surface = doc.get("terminal_surface")
+    if isinstance(surface, Mapping):
+        portfolio = surface.get("portfolio")
+        gate = surface.get("mechanical_gate_rule")
+        if _nonempty_str(portfolio) and _nonempty_str(gate):
+            return {
+                "terminal_evidence_source": {
+                    "portfolio": portfolio,
+                    "binding": "terminal_surface",
+                },
+                "proof_rule": gate,
+                "evaluator_or_threshold_edit_after_first_terminal_result": doc.get(
+                    "contamination", {}
+                ).get("oracle_or_threshold_edit_after_first_terminal_result")
+                if isinstance(doc.get("contamination"), Mapping)
+                else None,
+                "binding_form": "terminal_surface",
+            }
+    return None
 
 
 def _contract_index(basis: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
@@ -296,7 +319,7 @@ def compile_plan(root: Path) -> dict[str, Any]:
             errors.append("EXECUTION_CLASS_UNRESOLVED:" + bid)
 
         executor_status = manifest_row.get("executor_status")
-        executor_path = manifest_row.get("executor_path")
+        executor_path = manifest_row.get("executor_path") or manifest_row.get("executor")
         executor_bound = (
             isinstance(executor_status, str)
             and executor_status.startswith("BOUND")
