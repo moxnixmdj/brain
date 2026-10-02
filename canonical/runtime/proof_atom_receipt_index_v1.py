@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime.canonical_proof_atom_basis_v1 import compile_basis
+from canonical.runtime.canonical_proof_atom_basis_v2 import compile_basis
 
 SCHEMA = "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -29,6 +29,9 @@ EXCLUDED_BASENAMES = {
     "OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
     "MATCHED_SCOPE_BINDING_SUBHYPERGRAPH_V1.json",
     "CANONICAL_PROOF_ATOM_BASIS_ACTIVATION_V1.json",
+    "CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVATION_V1.json",
+    "CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json",
+    "PROOF_ATOM_REFINEMENT_OVERLAY_V1.json",
     "CURRENT_TERMINAL_AUTHORITY_V1.json",
     "EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1.json",
     "PROOF_ATOM_RECEIPT_INDEX_V1.json",
@@ -95,11 +98,11 @@ def _line_hits(text: str, literal: str) -> list[int]:
 
 def build_index(
     global_frontier: Mapping[str, Any],
-    matched_subfrontier: Mapping[str, Any],
+    refinement_overlay: Mapping[str, Any],
     *,
     root: Path = ROOT,
 ) -> dict[str, Any]:
-    basis = compile_basis(global_frontier, matched_subfrontier)
+    basis = compile_basis(global_frontier, refinement_overlay)
     if not str(basis.get("status", "")).startswith("PASS"):
         return _fail("CANONICAL_PROOF_ATOM_BASIS_NOT_PASS")
 
@@ -164,8 +167,11 @@ def build_index(
 
     return {
         "schema": SCHEMA,
-        "status": "PASS__CONTENT_ADDRESSED_CANDIDATE_RECEIPT_INDEX_COMPUTED__ZERO_CREDIT",
+        "status": "PASS__V2_REFINEMENT_AWARE_CONTENT_ADDRESSED_CANDIDATE_RECEIPT_INDEX_COMPUTED__ZERO_CREDIT",
         "errors": [],
+        "source_basis_schema": basis.get("schema"),
+        "source_basis_refined_parent_count": basis.get("refined_parent_count"),
+        "source_basis_leaf_requirement_occurrence_count": basis.get("leaf_requirement_occurrence_count"),
         "canonical_atom_count": len(atom_rows),
         "scanned_file_count": len(file_cache),
         "candidate_match_count": total_matches,
@@ -176,8 +182,10 @@ def build_index(
         "candidate_matches_by_source_class": dict(sorted(source_class_counts.items())),
         "atoms": atom_rows,
         "rule": (
+            "CANONICAL_V2_REFINEMENT_OVERLAY_ONLY__"
+            "PA1_IDENTITY_IS_SHA256_OF_EXACT_PROPOSITION__"
             "EXACT_LITERAL_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY__"
-            "CONTENT_ADDRESS_EACH_MATCH__EXCLUDE_FRONTIER_AND_SCHEDULER_RESTATEMENTS__"
+            "CONTENT_ADDRESS_EACH_MATCH__EXCLUDE_FRONTIER_REFINEMENT_AND_SCHEDULER_RESTATEMENTS__"
             "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_INDEX"
         ),
         "new_reality_units_consumed": 0,
@@ -192,10 +200,10 @@ def main() -> int:
     global_frontier = json.loads(
         (ROOT / "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json").read_text(encoding="utf-8")
     )
-    matched_subfrontier = json.loads(
-        (ROOT / "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json").read_text(encoding="utf-8")
+    refinement_overlay = json.loads(
+        (ROOT / "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json").read_text(encoding="utf-8")
     )
-    out = build_index(global_frontier, matched_subfrontier)
+    out = build_index(global_frontier, refinement_overlay)
     print(json.dumps(out, indent=2, sort_keys=True))
     return 0 if str(out.get("status", "")).startswith("PASS") else 1
 
