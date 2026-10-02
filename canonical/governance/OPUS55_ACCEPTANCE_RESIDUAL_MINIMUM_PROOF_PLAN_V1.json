@@ -31,11 +31,17 @@
     "acceptance_capability_source_gate": {
       "path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
       "git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de",
-      "semantics": "V6_V3_SUBSTRATE_AWARE__GENERAL_COGNITION_SUBSTRATE_ALLOWED__HIDDEN_TARGET_CAPABILITY_PROVIDER_FORBIDDEN"
+      "semantics": "V6_V3_SUBSTRATE_AWARE__GENERAL_COGNITION_SUBSTRATE_ALLOWED__HIDDEN_TARGET_CAPABILITY_PROVIDER_FORBIDDEN",
+      "independent_verification": {
+        "path": "canonical/verification/ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+        "git_blob_sha": "913496d739afa5a695a358e6d57de89e8202bd29",
+        "status": "INDEPENDENT_PASS"
+      }
     },
     "public_bar_capability_source_audit": {
       "path": "canonical/governance/ACCEPTANCE_PUBLIC_BAR_CAPABILITY_SOURCE_AUDIT_V2.json",
-      "git_blob_sha": "f42fa64da6b83e40774e175ce4421c44efcd81b7"
+      "git_blob_sha": "75d12f768f7694ef77d974b09b7d7fd972f31070",
+      "independent_gate_verification": "canonical/verification/ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
     },
     "acceptance_source_gate_theory_correction": {
       "path": "canonical/reasoning/2026-10-02_ACCEPTANCE_CAPABILITY_SOURCE_GATE_SUBSTRATE_CORRECTION_V1.json"
