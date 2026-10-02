@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1",
   "date": "2026-10-02",
-  "source_basis_blob_sha": "07fd337a0994516d6ecbda23046edb01380e5ef3",
+  "source_basis_blob_sha": "9e89fe83077fd0397534f100071343063846edb1",
   "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__6_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "status": "CANONICAL_SCHEDULING_RECEIPT__REBOUND_TO_LIVE_BASIS__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
@@ -42,22 +42,21 @@
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
       "portfolio": "T0",
-      "proof_state": "T0_OPEN_DOMAIN_MULTIPLEX_PROTOCOL_FROZEN__SCORER_VERIFICATION_AND_ORACLE_EXTRACTION_BINDING_PENDING",
+      "proof_state": "T0_OPEN_DOMAIN_MULTIPLEX_PROTOCOL_AND_SCORER_VERIFIED__ORACLE_EXTRACTION_POPULATION_BINDING_PENDING",
       "blockers": [
-        "INDEPENDENT_CAD_T0_SCORER_VERIFICATION_PENDING",
         "T0_GEOMETRY_CASE_SOURCE_OR_POPULATION_BINDING_AND_INDEPENDENT_ORACLE_EXTRACTION_ROUTE_NOT_YET_FROZEN"
       ],
       "blocker_classes": {
         "binding": 1,
         "scope_gate": 0,
         "scope_expansion": 0,
-        "open_domain_protocol": 1,
+        "open_domain_protocol": 0,
         "external_block": 0,
         "other": 0
       },
       "portfolio_leverage": 1,
       "priority_score": 300,
-      "next_action_class": "VERIFY_CAD_T0_SCORER__THEN_FREEZE_T0_GEOMETRY_POPULATION_AND_INDEPENDENT_ORACLE_EXTRACTION",
+      "next_action_class": "FREEZE_T0_GEOMETRY_CASE_SOURCE_POPULATION_AND_INDEPENDENT_ORACLE_EXTRACTION_ROUTE",
       "zero_reality_blocker_reconciliation": "canonical/reasoning/2026-10-02_CAD_ZERO_REALITY_BLOCKER_RECONCILIATION_V1.json",
       "stale_blockers_deleted": [
         "CADQUERY_OR_EQUIVALENT_NATIVE_SOLID_MATERIALIZATION_NOT_YET_BOUND_IN_THIS_ROUTE"
@@ -68,7 +67,8 @@
       ],
       "proof_mode_reconciliation": "canonical/reasoning/2026-10-02_CAD_OPEN_DOMAIN_PROOF_MODE_RECONCILIATION_V1.json",
       "prewave_binding": "canonical/governance/CAD_T0_MULTIPLEX_TERMINAL_BINDING_V1.json",
-      "synthetic_whole_domain_scope_gate_deleted": true
+      "synthetic_whole_domain_scope_gate_deleted": true,
+      "scorer_independent_verification": "canonical/verification/CAD_T0_MULTIPLEX_SCORER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
