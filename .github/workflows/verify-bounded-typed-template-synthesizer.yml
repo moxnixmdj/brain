@@ -1,5 +1,11 @@
 name: Verify bounded typed template synthesizer
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/typed_template_synthesizer.py
+      - canonical/tests/test_typed_template_synthesizer.py
+      - .github/workflows/verify-bounded-typed-template-synthesizer.yml
   push:
     branches: [main]
     paths:
