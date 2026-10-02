@@ -168,10 +168,10 @@
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
       "portfolio": "T2",
-      "proof_state": "SCOPE_EQUIVALENT_GATE_V2_INDEPENDENT_PASS__TERMINAL_POPULATION_BINDING_IMPLEMENTED__INDEPENDENT_BINDING_VERIFICATION_PENDING",
+      "proof_state": "INDEPENDENT_TERMINAL_POPULATION_BINDING_PREFLIGHT_PASS__REGISTRY_TERMINAL_ACCEPTANCE_MODE_BINDING_PENDING",
       "route_requirement": "ARBITRARY_FINITE_EXPLICIT_TASK_GRAPH_PARTITION_ASSIGNMENT_RESOURCE_EVIDENCE_FANIN_BASELINE_AND_RECEIPT_DRIVEN_REPLAN",
       "blockers": [
-        "POST_FREEZE_TERMINAL_POPULATION_BINDING_INDEPENDENT_VERIFICATION_PENDING"
+        "REGISTRY_TERMINAL_ACCEPTANCE_MODE_BINDING_PENDING"
       ],
       "route": "canonical/runtime/delegation_whole_scope_proof_v2.py",
       "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
@@ -189,7 +189,9 @@
       "envelope_compiler": "canonical/runtime/terminal_counterexample_envelope_compiler.py",
       "envelope_compiler_verification": "canonical/verification/TERMINAL_COUNTEREXAMPLE_ENVELOPE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "terminal_population_binding": "canonical/runtime/delegation_terminal_population_binding_v1.py",
-      "terminal_population_binding_test": "canonical/tests/test_delegation_terminal_population_binding_v1.py"
+      "terminal_population_binding_test": "canonical/tests/test_delegation_terminal_population_binding_v1.py",
+      "population_binding_verification": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "population_binding_workflow_run_id": 36962042528
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
