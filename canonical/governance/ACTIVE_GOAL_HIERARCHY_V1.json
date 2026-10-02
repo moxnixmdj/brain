@@ -792,7 +792,7 @@
     "M1B_CONSTRAINT_GRAPH_TO_HIDDEN_TOPOLOGY_AND_CONTINUOUS_GEOMETRY"
   ],
   "residual_action_universe_v2": {
-    "status": "ZERO_REALITY_SATURATED__M0A_M1A_M1B_ALL_PROOF_ONLY__READY_TO_FREEZE_V6",
+    "status": "PROOF_ONLY_INNER_UNIVERSE__M0A_M1A_M1B_COMPLETE_BUNDLES__OUTER_FOUR_PORTFOLIO_CUT_IS_LIVE",
     "path": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
     "receipt": "canonical/reasoning/2026-10-02_ZERO_REALITY_RESIDUAL_COMPRESSION_UPDATE_V2.json",
     "exact_cut_ready": true,
@@ -826,13 +826,23 @@
       "M1A",
       "M1B"
     ],
-    "active_zero_reality_mechanism_blockers": [
-      "M0A"
-    ],
+    "active_zero_reality_mechanism_blockers": [],
     "proof_only_obligations": [
+      "M0A",
       "M1A",
       "M1B"
-    ]
+    ],
+    "outer_frontier_authority": {
+      "global_terminal_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
+      "outer_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
+      "shared_semantic_basis": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
+      "live_shared_residuals": [
+        "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL",
+        "G0_NOVEL_TYPED_TEMPLATE_AND_EFFECT_MODEL_SYNTHESIS"
+      ],
+      "execution_authority": false,
+      "fresh_terminal_evidence_authorized": false
+    }
   },
   "m1_frontier_20261002": {
     "M1A": "PROOF_ONLY__ZERO_REALITY_PREFIX_SATURATED__MATCHED_PARITY_PENDING",
