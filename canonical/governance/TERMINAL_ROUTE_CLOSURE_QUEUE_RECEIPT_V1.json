@@ -1,40 +1,18 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1",
   "date": "2026-10-02",
-  "source_basis_blob_sha": "bce749415e15172f170193889f9f7389fb29452b",
-  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__DELEGATION_MATCHED_PROTOCOL_EXTERNAL_BLOCKED__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "source_basis_blob_sha": "ead2ce276ae240e1450892ce0be817adb3be9faf",
+  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__2_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "status": "CANONICAL_SCHEDULING_RECEIPT__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
-  "closed_route_count": 1,
-  "open_route_count": 11,
+  "closed_route_count": 2,
+  "open_route_count": 10,
   "closed_behavior_ids": [
-    "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001"
+    "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
   ],
-  "top_priority_behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "top_priority_behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
   "queue": [
-    {
-      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
-      "portfolio": "T0_T1_T2_T3",
-      "proof_state": "BOUNDED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__PORTFOLIO_MULTIPLEXED_OPEN_DOMAIN_PREWAVE_BINDING_PENDING",
-      "blockers": [
-        "FREEZE_DIRECT_SEMANTIC_ACCEPTANCE_INSTRUMENTATION",
-        "FREEZE_AMBIGUITY_AND_COUNTEREXAMPLE_SCORER",
-        "BIND_BEHAVIOR_INSTRUMENTATION_TO_T0_T1_T2_T3_INFORMATION_BOUNDARIES",
-        "FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING"
-      ],
-      "blocker_classes": {
-        "binding": 0,
-        "scope_gate": 0,
-        "scope_expansion": 0,
-        "open_domain_protocol": 3,
-        "external_block": 0,
-        "other": 1
-      },
-      "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 4,
-      "priority_score": 42,
-      "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
-    },
     {
       "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
       "portfolio": "T0_T1",
