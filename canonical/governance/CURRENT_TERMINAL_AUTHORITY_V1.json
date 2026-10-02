@@ -194,11 +194,13 @@
       "tests_git_blob_sha": "6b801a47d3d14d91dd6bac29f24830aaf47b5af3",
       "verification_path": "canonical/verification/TERMINAL_NEXT_ACTION_SYNTHESIS_DELTA_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "verification_git_blob_sha": "c5c31a292a8565deefded8d7c4de074ae5ecbd7e",
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__7_OF_38_CURRENT_LEDGER__SYNTHESIS_EXACT_DELTA_PRIMARY_ZERO_REALITY_ACTION__GLOBAL_IMPLICATION_FAIL_CLOSED__ZERO_CREDIT",
+      "status": "HISTORICAL_V1_PROJECTION_ONLY__SUPERSEDED_FOR_EXECUTION_BY_TERMINAL_SCHEDULING_V6_FRONTIER_V5_ACTION_HYPERGRAPH_V2_AND_HIERARCHICAL_MATCHED_SCOPE",
       "public_verifier_pr": 963,
       "workflow_run_id": 37017822433,
       "workflow_job_id": 110872965565,
-      "merge_commit": "a901e993a242603a44328b1d19696dc0c2402223"
+      "merge_commit": "a901e993a242603a44328b1d19696dc0c2402223",
+      "current_execution_authority": false,
+      "current_projection_use": "HISTORICAL_DIAGNOSTIC_ONLY"
     },
     "brain_witness_contamination_admissibility": {
       "path": "canonical/verification/OPUS55_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -405,24 +407,37 @@
     "state": "INDEPENDENT_PASS__IMPOSSIBLE_UNDER_CURRENT_FROZEN_NO_REPLAY_RULES"
   },
   "compiled_next_frontier": {
-    "primary_action_id": "DISCHARGE_SYNTHESIS_EXACT_PROOF_DELTA",
-    "primary_action_state": "AVAILABLE_ZERO_REALITY",
-    "unresolved_target_count": 1,
-    "primary_unsatisfied_preconditions": [],
-    "highest_leverage_blocked_action_id": "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
-    "highest_leverage_blocked_action_target_count": 11,
-    "highest_leverage_blocked_action_preconditions": [
-      "MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
-      "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"
-    ],
-    "available_zero_reality_critical_actions": [
-      "DISCHARGE_SYNTHESIS_EXACT_PROOF_DELTA",
-      "RUN_COMPOSITION_COMPONENT_PROOF_SLICER",
-      "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE"
-    ],
-    "authority": "canonical/runtime/terminal_next_action_compiler_v1.py",
-    "independent_verification": "canonical/verification/TERMINAL_NEXT_ACTION_SYNTHESIS_DELTA_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "rule": "EXECUTE_THE_INDEPENDENTLY_VERIFIED_SYNTHESIS_DELTA_ONLY__GLOBAL_SCOPE_ALGEBRA_REMAINS_BLOCKED__NO_FRESH_REALITY__NO_SCOPE_OR_METRIC_INFERENCE"
+    "status": "SUPERSEDED_FOR_EXECUTION__HISTORICAL_FLAT_V1_PROJECTION_QUARANTINED",
+    "historical_projection": {
+      "primary_action_id": "DISCHARGE_SYNTHESIS_EXACT_PROOF_DELTA",
+      "source": "canonical/runtime/terminal_next_action_compiler_v1.py",
+      "source_generation": "ACTION_HYPERGRAPH_V1",
+      "prior_verification": "canonical/verification/TERMINAL_NEXT_ACTION_SYNTHESIS_DELTA_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    "invalidation": {
+      "reason": "CURRENT_SCHEDULING_AUTHORITY_IS_FRONTIER_V5_PLUS_ACTION_HYPERGRAPH_V2_WITH_ACTIVE_MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_AND_CANONICAL_PROOF_ATOM_BASIS",
+      "synthesis_action_state": "BLOCKED_PRECONDITIONS",
+      "synthesis_unsatisfied_preconditions": [
+        "SYNTHESIS_MATCHED_TARGET_SCOPE_DISCHARGE_AVAILABLE",
+        "SYNTHESIS_MATCHED_QUALITY_AND_NONINFERIORITY_BINDINGS_INDEPENDENT_PASS"
+      ],
+      "synthesis_exhaustion_authority": "canonical/governance/OPUS55_SYNTHESIS_ZERO_REALITY_DISCHARGE_EXHAUSTION_V1.json",
+      "current_action_hypergraph": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+      "current_action_hypergraph_git_blob_sha": "ec0ca144939a19234f1c53378cc76af2014a6179"
+    },
+    "execution_facing_authority": {
+      "scheduling_activation": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json",
+      "frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+      "action_hypergraph": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+      "matched_scope_refinement": "canonical/governance/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_ACTIVATION_V1.json",
+      "proof_atom_basis": "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_ACTIVATION_V1.json",
+      "directive": "INDEX_EXISTING_CONTENT_ADDRESSED_RECEIPTS_AGAINST_40_CANONICAL_LEAF_PROOF_ATOMS__DISCHARGE_OR_FALSIFY_TARGET_SPECIFIC_ZERO_REALITY_ATOMS_INDEPENDENTLY__SKIP_EXHAUSTED_SYNTHESIS_PATH_UNLESS_ADMISSIBLE_INPUT_CHANGES"
+    },
+    "execution_authority": false,
+    "promotion_authority": false,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "rule": "NESTED_FLAT_V1_PROJECTION_IS_HISTORICAL_ONLY__MUST_NOT_OVERRIDE_CURRENT_TOP_LEVEL_NEXT_OR_V6_V5_V2_HIERARCHICAL_SCHEDULING"
   },
   "integrator_reconciliation_20261002_scope_v2": {
     "status": "SUPERSEDED_BY_20261002_ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION",
