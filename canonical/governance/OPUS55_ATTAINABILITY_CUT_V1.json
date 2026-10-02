@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ATTAINABILITY_CUT_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__REALITY_ACTION_REQUIRES_ATTAINABILITY_OPEN",
+  "status": "ACTIVE_FAIL_CLOSED__INDEPENDENT_PUBLIC_RUNNER_PASS__REALITY_ACTION_REQUIRES_ATTAINABILITY_OPEN",
   "runtime": "canonical/runtime/attainability_cut_compiler_v1.py",
   "tests": "canonical/tests/test_attainability_cut_compiler_v1.py",
   "evidence_manifest": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
@@ -23,5 +23,13 @@
   },
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 854,
+    "merge_commit": "adfbb513ad9c9b6fd79de12ba3837c73d4a2565f",
+    "workflow_run_id": 36998571400,
+    "workflow_job_id": 110810813480,
+    "conclusion": "success"
+  }
 }
