@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_TERMINAL_POPULATION_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_BINDING__INDEPENDENT_PREFLIGHT_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "proof_mode": "ABSOLUTE_BEHAVIORAL_PROTOCOL",
+  "route_population_version": "DELEGATION_WHOLE_SCOPE_TERMINAL_POP_V1",
+  "exact_bound_blobs": {
+    "candidate": "9f2c3aa42352cba66967afb1f8a3f45357833c41",
+    "oracle": "5785b07f482e38acdf7916e5414d90c2c0c305b7",
+    "binding": "fae6d0bf2efbcb9b8fe2a2a627900889c5ec6cab",
+    "tests": "e060355aa2cdc800a9b7d0d8af587c3d13a62b03",
+    "scope_gate_input": "b434c2ad13154f5d4f43a76cfb27d6b492e93e01",
+    "scope_gate_receipt": "ab1d8d19217fe683b62682c8f7f2ce7800fcfe57",
+    "population_protocol": "8d30bb8805be9eef5155f0f31de17dd4bc9e5d1f"
+  },
+  "population": {
+    "sample_count": 512,
+    "post_freeze_beacon": null,
+    "adaptive_case_selection": false,
+    "replay_for_tuning": false,
+    "case_replacement": false,
+    "required_case_classes": [
+      "BASE_PARALLEL",
+      "RESOURCE_CONFLICT",
+      "WORKER_UNAVAILABLE",
+      "STEP_UNAVAILABLE",
+      "WORKER_CAPABILITY_REMOVED",
+      "RESOURCE_CAPACITY_CHANGED"
+    ]
+  },
+  "acceptance": {
+    "allowed_failed_cases": 0,
+    "require_all_six_case_classes": true,
+    "rule": "ALL_512_CASES_EXACT_PASS_AND_ALL_SIX_FROZEN_DELEGATION_CASE_CLASSES_PRESENT"
+  },
+  "pre_beacon_frozen": true,
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
