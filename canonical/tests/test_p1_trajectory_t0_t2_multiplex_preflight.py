@@ -64,6 +64,24 @@ class P1TrajectoryT0T2MultiplexPreflightTests(unittest.TestCase):
         out = self.fixture(manifest_mutate=mutate)
         self.assertFalse(out["pass"])
 
+    def test_missing_v4_route_specific_override_fails(self):
+        def mutate(m):
+            for row in m["portfolios"]["T2"]["surfaces"]:
+                if row.get("id") == "RECOVERY_SCOPE_COMPOSITION":
+                    row["route_specific_evaluators"].pop("P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF", None)
+        out = self.fixture(manifest_mutate=mutate)
+        self.assertFalse(out["pass"])
+        self.assertTrue(any("P1_V4_BINDING_MISSING" in x for x in out["errors"]))
+
+    def test_generic_evaluator_cannot_regain_p1_authority(self):
+        def mutate(m):
+            for row in m["portfolios"]["T0"]["surfaces"]:
+                if row.get("id") == "CURSORBENCH_4_0":
+                    row["route_specific_evaluators"]["P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"]["generic_contract_native_evaluator_superseded_for_this_route"] = False
+        out = self.fixture(manifest_mutate=mutate)
+        self.assertFalse(out["pass"])
+        self.assertTrue(any("GENERIC_P1_EVALUATOR_NOT_SUPERSEDED" in x for x in out["errors"]))
+
     def test_missing_nonidentifiability_check_fails(self):
         out = self.fixture(lambda b: b["evaluator"]["required_checks"].remove("NONIDENTIFIABLE_OR_CAUSALLY_EQUIVALENT_CASE_DOES_NOT_FORCE_UNIQUE_CAUSE"))
         self.assertFalse(out["pass"])
