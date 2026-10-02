@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_BYTES__168_V4_CASES_RECOMPUTED__TWO_RESIDUAL_OBLIGATIONS_PRESERVED__ZERO_CREDIT",
+  "objective": "Independently verify the zero-reality compiler that reduces the audited terminal P1 scope mismatch using only admissible existing typed V4 evidence.",
+  "brain_source": {
+    "repository": "moxnixmdj/brain",
+    "pull_request": 932,
+    "branch": "proof/p1-v4-residual-discharge-20261002",
+    "verified_candidate_commit": "41f6e0d3c0acd74bb4567300fc5db4329acc6159"
+  },
+  "exact_brain_blobs": {
+    "canonical/runtime/p1_v4_scope_safe_residual_discharge_v1.py": "6beb3b529f2bda999fd9d7da1cbecc25f68a7667",
+    "canonical/tests/test_p1_v4_scope_safe_residual_discharge_v1.py": "6c44f3620e30906b198d6046023f913143a9cdfc",
+    "canonical/runtime/p1_terminal_execution_scope_audit_v1.py": "6793cc98fa8ef767cb6ec8fdd33d8e7d50b2833d",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py": "0c386e6b78a8e97e9c1944e63600047bc4e2849b",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py": "6e1dfaa6b63fc629d55d07b2361bf625f11a5ce3",
+    "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "ee69a93c45a2b16676c49bfb0a01749a5c4ea1e2",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json": "a1630299d29ea9c07e55b4314c07ddb3228c3287",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py": "431b62e503a6a179f19339ae5e0ab6948424a650",
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337"
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_install_pull_request": 945,
+    "verifier_install_merge_commit": "6ff41ff854d4756c2410cc9174aa603be41b7f45",
+    "trigger_pull_request": 953,
+    "trigger_head_sha": "2e7f0e5d50e1190a6c2dee45540471a42a48a3ef",
+    "workflow": "Verify Brain P1 V4 residual discharge",
+    "workflow_run_id": 37016720067,
+    "workflow_job_id": 110869287145,
+    "conclusion": "success",
+    "python": "3.12"
+  },
+  "verified": {
+    "p1_terminal_execution_scope_mismatch_reproduced": true,
+    "typed_v4_cross_product_case_count_recomputed": 168,
+    "typed_v4_case_failures": 0,
+    "live_compiler_status": "PASS__V4_COMPRESSES_P1_SCOPE_QUARANTINE_TO_EXACT_RESIDUAL",
+    "existing_v4_discharges": [
+      "FAILURE_MECHANISM_CLASSIFICATION_SUPPORTED_BY_VISIBLE_RECEIPTS",
+      "NONIDENTIFIABLE_OR_CAUSALLY_EQUIVALENT_CASE_DOES_NOT_FORCE_UNIQUE_CAUSE",
+      "MULTISTEP_OR_DELAYED_CAUSAL_INTERACTIONS_ARE_NOT_REDUCED_TO_FIRST_VISIBLE_SYMPTOM"
+    ],
+    "exact_residual_obligations": [
+      "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+      "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+    ],
+    "scope_spoof_without_live_candidate_support_fails_closed": true,
+    "missing_ambiguity_pattern_fails_closed": true,
+    "unverified_rescue_claim_is_ignored": true,
+    "p1_scope_quarantine_clearable": false
+  },
+  "proof_effect": "THE_PRIOR_FOUR_MISSING_TERMINAL_P1_SEMANTICS_ARE_COMPRESSED_USING_EXISTING_INDEPENDENTLY_VERIFIED_V4_EVIDENCE_TO_TWO_EXACT_LOAD_BEARING_RESIDUALS__NO_TERMINAL_REPLAY_OR_NEW_REALITY_IS_CONSUMED__WHOLE_RECOVERY_ACCEPTANCE_REMAINS_QUARANTINED",
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "execution_authority": false
+}
