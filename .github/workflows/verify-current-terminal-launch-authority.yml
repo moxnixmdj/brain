@@ -1,0 +1,56 @@
+name: Verify current terminal launch authority
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/terminal_wave_launch_authority_reducer_v1.py
+      - canonical/runtime/terminal_prequalification_reducer.py
+      - canonical/runtime/terminal_parent_portfolio_launcher_v1.py
+      - canonical/runtime/terminal_parent_portfolio_runner_v1.py
+      - canonical/runtime/direct_route_terminal_executors_v1.py
+      - canonical/runtime/cad_t0_route_specific_terminal_executor_v1.py
+      - canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py
+      - canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json
+      - canonical/governance/TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1.json
+      - canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json
+      - canonical/verification/**
+      - canonical/tests/test_terminal_wave_launch_authority_reducer_v1.py
+      - canonical/tests/test_terminal_parent_portfolio_launcher_v1.py
+      - .github/workflows/verify-current-terminal-launch-authority.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run fail-closed reducer regressions
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python -m unittest -v             canonical.tests.test_terminal_wave_launch_authority_reducer_v1             canonical.tests.test_terminal_parent_portfolio_launcher_v1
+      - name: Derive authority from exact current state
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python canonical/runtime/terminal_wave_launch_authority_reducer_v1.py > /tmp/terminal-launch-authority.json
+          cat /tmp/terminal-launch-authority.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          out=json.loads(Path("/tmp/terminal-launch-authority.json").read_text())
+          assert out.get("pass") is True, out
+          assert out.get("launch_authority") is True, out
+          assert out.get("execution_authority") is True, out
+          assert out.get("route_count") == 12, out
+          assert out.get("failed_predicates") == [], out
+          assert out.get("terminal_results_observed", 0) == 0, out
+          assert out.get("fresh_terminal_evidence_consumed", 0) == 0, out
+          print("CURRENT_TERMINAL_LAUNCH_AUTHORITY=PASS")
+          PY
