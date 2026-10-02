@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_ACCEPTANCE_BINDINGS_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_EXPLICIT_SCOPE_BINDINGS__3_OF_12__BRANCH_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Reuse already calibrated acceptance-level Brain proofs as isolated-component scoped proofs for the frozen multi-capability composition claim, but only through explicit content-addressed bindings and fail-closed source validation.",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "source_manifest": {
+    "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+    "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+  },
+  "protocol_authority": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+  },
+  "calibration_authority": {
+    "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+    "git_blob_sha": "c50034c670f797d91fa443d244853071f09bd37a",
+    "exact_calibrated_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "SUBAGENT_DELEGATION_AND_COORDINATION"
+    ]
+  },
+  "bindings": [
+    {
+      "binding_id": "COMPONENT_MEMORY_FROM_VERIFIED_CONTINUITY_FAMILY_V1",
+      "component_id": "memory",
+      "interface_id": "browser/computer action+memory+recovery",
+      "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "source_profile": "OWNERSHIP_PACKAGE_V1",
+      "source_path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "source_git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470",
+      "independent_verification": {
+        "profile": "CLEANROOM_ADJUDICATION_V1",
+        "path": "canonical/qualification/SUPERWORKER_INTEGRATED_2_CLEANROOM_WOLFRAM_ADJUDICATION_V1.json",
+        "git_blob_sha": "6507459b072ce80aa7376c5ee0cdaca7654b6271"
+      },
+      "scope_relation_basis": {
+        "composition_literal": "memory",
+        "family_protocol_status": "PASS",
+        "family_claim_scope_requirement": "Durable cross-session project state and same-mission checkpoint/relaunch continuity",
+        "rule": "FULL_VERIFIED_FAMILY_SCOPE_IS_USED_ONLY_AS_THE_ISOLATED_MEMORY_COMPONENT_PROOF__NO_BROWSER_OR_RECOVERY_CREDIT"
+      }
+    },
+    {
+      "binding_id": "COMPONENT_TOOL_DISCOVERY_FROM_ABSOLUTE_CEILING_FAMILY_V1",
+      "component_id": "tool discovery",
+      "interface_id": "coding+debugging+tool discovery",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "source_profile": "ACCEPTANCE_TYPED_WITNESS_V1",
+      "source_path": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "source_git_blob_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7",
+      "independent_verification": {
+        "profile": "PUBLIC_RUNNER_V1",
+        "path": "canonical/verification/TERMINAL_CEILING_WITNESS_LIFTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "git_blob_sha": "a1c702c79d2b29bfc9c4d5a238f9c260bc204770"
+      },
+      "scope_relation_basis": {
+        "composition_literal": "tool discovery",
+        "family_protocol_task_dimension": "unknown tool discovery",
+        "rule": "FULL_FROZEN_TOOL_DISCOVERY_FAMILY_CEILING_IS_USED_ONLY_AS_THE_ISOLATED_TOOL_DISCOVERY_COMPONENT_PROOF__NO_CODING_OR_DEBUGGING_CREDIT"
+      }
+    },
+    {
+      "binding_id": "COMPONENT_DELEGATION_FROM_ABSOLUTE_CEILING_FAMILY_V1",
+      "component_id": "delegation",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "source_profile": "ACCEPTANCE_TYPED_WITNESS_V1",
+      "source_path": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "source_git_blob_sha": "cb3b7c4b6c4e1f2a0471c6b6be72c4ca9ebddc80",
+      "independent_verification": {
+        "profile": "PUBLIC_RUNNER_V1",
+        "path": "canonical/verification/DELEGATION_TEMPORAL_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "git_blob_sha": "5023cc222a44f99b57785f5954cc95a29b739193"
+      },
+      "scope_relation_basis": {
+        "composition_literal": "delegation",
+        "family_protocol_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "rule": "FULL_FROZEN_DELEGATION_FAMILY_CEILING_IS_USED_ONLY_AS_THE_ISOLATED_DELEGATION_COMPONENT_PROOF__NO_SYNTHESIS_OR_ARTIFACT_CREDIT"
+      }
+    }
+  ],
+  "expected_candidate_effect": {
+    "scoped_proved_component_count": 3,
+    "open_component_count": 9,
+    "all_used_component_interfaces_scoped_proved": false,
+    "composition_atomic_predicate_closed": false
+  },
+  "hard_rules": [
+    "NO_BINDING_BY_NAME_ONLY",
+    "EVERY_BINDING_MUST_MATCH_AN_EXACT_FROZEN_COMPONENT_AND_INTERFACE_PAIR",
+    "EVERY_SOURCE_MUST_BE_CONTENT_ADDRESSED",
+    "EVERY_SOURCE_FAMILY_MUST_BE_IN_THE_INDEPENDENTLY_CALIBRATED_SET",
+    "ACCEPTANCE_TYPED_WITNESSES_MUST_BE_INDEPENDENT_CONTAMINATION_CLEAN_FULL_PROTOCOL_PROVEN_STRONGER_CEILING_PROOFS",
+    "OWNERSHIP_PACKAGES_MUST_HAVE_FRESH_VERIFICATION_AND_INDEPENDENT_CLEANROOM_ADJUDICATION",
+    "A_COMPONENT_BINDING_PROVES_ONLY_ITS_DECLARED_ISOLATED_COMPONENT_PROPERTY",
+    "UNBOUND_COMPONENTS_REMAIN_OPEN",
+    "NO_COMPOSITION_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
