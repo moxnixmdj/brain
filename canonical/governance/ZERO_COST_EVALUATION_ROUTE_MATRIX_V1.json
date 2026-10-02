@@ -170,13 +170,14 @@
       {
         "surface": "Vals MysteryMechanism",
         "target": ">=49.55% represented scope",
-        "classification": "PUBLIC_SCORE_ONLY_NO_EXACT_EXECUTABLE_ROUTE_FOUND",
+        "classification": "DELETED_AS_REQUIRED_ROUTE_BY_INDEPENDENT_BEHAVIORAL_DOMINANCE_PROOF",
         "sources": [
           "https://www.vals.ai/home"
         ],
         "fact": "A public score is visible, but this audit did not establish a public exact task+harness route.",
-        "zero_cost_status": "BLOCKED_EXACT",
-        "next": "FREEZE_SCOPE_EQUIVALENT_PUBLIC_UNKNOWN_MECHANISM_INFERENCE_ROUTE_WITH_COMPLETE_OR_INDEPENDENT_GRADING"
+        "zero_cost_status": "NOT_REQUIRED_FOR_TERMINAL_EXECUTION__PUBLISHED_SCORE_BACKGROUND_REFERENCE_ONLY",
+        "next": "NONE__DO_NOT_SPEND_REALITY_OR_COMPUTE_ON_THIS_PRIVATE_ROUTE",
+        "dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V1.json"
       }
     ]
   },
@@ -189,7 +190,8 @@
     "zero_cost_executable_surface_count": 0,
     "portfolio_prequalification_pass_count": 0,
     "livebench_if_verifier_source_binding_frozen": true,
-    "unresolved_identity_or_access_count": 1
+    "unresolved_identity_or_access_count": 1,
+    "private_surface_routes_deleted_by_dominance": 1
   },
   "cross_surface_deductions": [
     "PUBLIC_LEADERBOARD_VISIBILITY_IS_NOT_EXECUTION_AUTHORITY",
@@ -197,7 +199,8 @@
     "PUBLIC_TASKS_WITH_PRIVATE_OFFICIAL_HOLDOUTS_MAY_SUPPORT_SCOPE_EQUIVALENT_ABSOLUTE_PROOF_BUT_NOT CLAIM EXACT_OFFICIAL_SCORE_EQUIVALENCE",
     "NO_DIRECT_OPUS_CASE_LEVEL_COMPARATOR_IS_REQUIRED_WHERE_A_FIXED_PUBLIC_BAR_OR_THEORETICAL_CEILING_ROUTE_PROVES_EQUAL_OR_BETTER_SCOPE",
     "ZERO_COST_REQUIRES_THE_FULL_AGENT_ENVIRONMENT_AND_GRADER_ROUTE_TO_HAVE_A_HARD_NO_SPEND_PATH__PUBLIC_CODE_ALONE_IS_INSUFFICIENT",
-    "A_FROZEN_PORTFOLIO_SURFACE_MAY_NOT_DISAPPEAR_FROM_PREQUALIFICATION_SIMPLY_BECAUSE_ITS_IDENTITY_OR_ACCESS_IS_UNRESOLVED"
+    "A_FROZEN_PORTFOLIO_SURFACE_MAY_NOT_DISAPPEAR_FROM_PREQUALIFICATION_SIMPLY_BECAUSE_ITS_IDENTITY_OR_ACCESS_IS_UNRESOLVED",
+    "MYSTERYMECHANISM_PRIVATE_ROUTE_IS_DELETED_AS_REQUIRED_EXECUTION_SURFACE_BY_INDEPENDENT_BEHAVIORAL_DOMINANCE_PROOF__ZERO_CAPABILITY_CREDIT_FROM_DELETION"
   ],
   "fresh_terminal_evidence_consumed": 0,
   "new_reality_units_consumed": 0,
