@@ -1,0 +1,26 @@
+name: Verify structured method terminal binding
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/STRUCTURED_METHOD_TERMINAL_POPULATION_BINDING_V1.json
+      - canonical/runtime/verify_structured_method_terminal_binding_v1.py
+      - canonical/tests/test_structured_method_terminal_binding_v1.py
+      - canonical/runtime/structured_method_normalized_rule_graph_v3.py
+      - canonical/runtime/structured_method_normalized_rule_oracle_v3.py
+      - canonical/runtime/structured_method_terminal_population_v1.py
+      - canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json
+      - canonical/verification/STRUCTURED_METHOD_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+ verify:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - uses: actions/setup-python@v5
+     with: {python-version: "3.11"}
+   - run: python -m unittest -v canonical.tests.test_structured_method_terminal_binding_v1
