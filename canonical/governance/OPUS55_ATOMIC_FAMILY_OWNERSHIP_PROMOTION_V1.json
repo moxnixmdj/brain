@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ATOMIC_FAMILY_OWNERSHIP_PROMOTION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVATION_CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED",
+  "from_state": {
+    "verified_owned_families": 2,
+    "acceptance_calibrated_families": 4,
+    "acceptance_pending_families": 15
+  },
+  "to_state": {
+    "verified_owned_families": 4,
+    "acceptance_calibrated_families": 4,
+    "acceptance_pending_families": 15,
+    "terminal_goal_achieved": false
+  },
+  "promoted_families": [
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "SUBAGENT_DELEGATION_AND_COORDINATION"
+  ],
+  "eligibility": {
+    "path": "canonical/verification/OPUS55_FAMILY_OWNERSHIP_PROMOTION_ELIGIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "git_blob_sha": "23d3d92ebeb8fd34320923ccce1d017b2031ec6e",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS"
+  },
+  "rules": [
+    "NO_UNRELATED_FAMILY_CREDIT",
+    "NO_ACCEPTANCE_PROTOCOL_WEAKENING",
+    "NO_TERMINAL_OR_ACCEPTANCE_REPLAY",
+    "NO_OPAQUE_PROVIDER_INTRODUCTION",
+    "ACTIVATE_ONLY_IF_EXACT_TRANSACTION_PASSES_INDEPENDENT_RUNNER"
+  ],
+  "new_reality_units": 0,
+  "terminal_cases_replayed": 0,
+  "incremental_spend_usd": 0,
+  "promotion_authority": false
+}
