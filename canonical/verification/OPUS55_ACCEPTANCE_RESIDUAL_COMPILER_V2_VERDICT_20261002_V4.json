@@ -1,0 +1,530 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_VERDICT_V2_RECEIPT",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__SATURATION_COMPLETE__ZERO_ACCEPTANCE_CASE_ACTIONS_AUTHORIZED__UNBLOCKER_WORK_ONLY",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V3.json",
+  "inputs": {
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "sha": "cd15b26246771cc0fa7a38fddfa267b05795add0"
+    },
+    "comparator": {
+      "path": "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json",
+      "sha": "f67e22cee5e6fce1ebfae92ebf0946f78fafcee1"
+    },
+    "readiness": {
+      "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+      "sha": "9770307c5051a11ed79adefc86c92f91536c3dd4"
+    },
+    "runtime": {
+      "path": "canonical/runtime/opus55_acceptance_residual_compiler_v2.py",
+      "sha": "cae5bc3bfda9c77d7d7e5151127f55aafddb9522"
+    },
+    "saturation": {
+      "path": "canonical/verification/OPUS55_ACCEPTANCE_ATOMIC_RECEIPT_SATURATION_20261002_V7.json",
+      "sha": "74a3b4ff309225456e49a9b1e8a75295aa0f45f1"
+    }
+  },
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 7,
+  "open_predicate_count": 0,
+  "blocked_predicate_count": 31,
+  "predicates": [
+    {
+      "predicate_id": "CODING_TB4_GE_66_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Terminal-Bench 4.0",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "CODING_FRONTIERCODE_GE_54_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "FrontierCode v1.1 Main",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "CODING_CURSORBENCH_GE_57_8",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "CursorBench 4.0",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "kind": "MATCHED_SCOPE_AUDIT",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "PROWORK_GDPVAL_GE_1846",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "GDPval-AA v2.1",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "PROWORK_AA_BRIEFCASE_GE_1822",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "AA-Briefcase v1.1",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "AUTOMATIONBENCH_GE_40",
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "AutomationBench public 600",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "HLE_TOOLS_GE_67_7",
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Humanity's Last Exam with tools",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "TB_SCIENCE_GE_58_7",
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Terminal-Bench-Science 0.1",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Chartography with tools",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "VISION_DENSE_NONCHART_SCOPE",
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "kind": "MATCHED_SCOPE_AUDIT",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "OSWorld 2.1 partial",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "family": "FINANCIAL_ANALYSIS",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Finance & Accounting Index",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "FINANCE_AGENT_V2_GE_58_59",
+      "family": "FINANCIAL_ANALYSIS",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Finance Agent v2",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "family": "FINANCIAL_ANALYSIS",
+      "kind": "DIRECT_SCOPE_AUDIT",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "LiveBench Instruction Following",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "kind": "MATCHED_SCOPE_AUDIT",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "DELEGATION_ZERO_CRITICAL_COORDINATION_VIOLATIONS",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "kind": "INVARIANT",
+      "surface": null,
+      "state": "PROVED"
+    },
+    {
+      "predicate_id": "DELEGATION_SPEEDUP_NO_CORRECTNESS_TRADE",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "kind": "DIRECT_SCOPE_AUDIT",
+      "surface": null,
+      "state": "PROVED"
+    },
+    {
+      "predicate_id": "RECOVERY_TERMINAL_NONINFERIOR",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "kind": "MATCHED_SCOPE_AUDIT",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "ARTIFACT_MECHANICAL_GATES_CEILING",
+      "family": "ARTIFACT_CREATION",
+      "kind": "ABSOLUTE_CEILING",
+      "surface": null,
+      "state": "PROVED"
+    },
+    {
+      "predicate_id": "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "family": "ARTIFACT_CREATION",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "AA-Briefcase v1.1",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT",
+      "family": "ARTIFACT_CREATION",
+      "kind": "DIRECT_SCOPE_AUDIT",
+      "surface": null,
+      "state": "PROVED"
+    },
+    {
+      "predicate_id": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "kind": "INVARIANT",
+      "surface": null,
+      "state": "PROVED"
+    },
+    {
+      "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_SECOND_TASK_TRANSFER",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "kind": "DIRECT_SCOPE_AUDIT",
+      "surface": null,
+      "state": "PROVED"
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "kind": "INVARIANT",
+      "surface": null,
+      "state": "PROVED"
+    },
+    {
+      "predicate_id": "MYSTERYMECHANISM_GE_49_55",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "MysteryMechanism",
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "kind": "DIRECT_SCOPE_AUDIT",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "kind": "DEPENDENCY_PROOF",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    },
+    {
+      "predicate_id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "kind": "MATCHED_SCOPE_AUDIT",
+      "surface": null,
+      "state": "EXTERNAL_BLOCKED"
+    }
+  ],
+  "authorized_acceptance_case_actions": [],
+  "blocker_certificates": [
+    {
+      "predicate_id": "CODING_TB4_GE_66_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "Terminal-Bench 4.0",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "CODING_FRONTIERCODE_GE_54_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "FrontierCode v1.1 Main",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "CODING_CURSORBENCH_GE_57_8",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "CursorBench 4.0",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "PROWORK_GDPVAL_GE_1846",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "GDPval-AA v2.1",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "PROWORK_AA_BRIEFCASE_GE_1822",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "AA-Briefcase v1.1",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "AUTOMATIONBENCH_GE_40",
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "AutomationBench public 600",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "HLE_TOOLS_GE_67_7",
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "Humanity's Last Exam with tools",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "TB_SCIENCE_GE_58_7",
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "Terminal-Bench-Science 0.1",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "Chartography with tools",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "VISION_DENSE_NONCHART_SCOPE",
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "OSWorld 2.1 partial",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "family": "FINANCIAL_ANALYSIS",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "Finance & Accounting Index",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "FINANCE_AGENT_V2_GE_58_59",
+      "family": "FINANCIAL_ANALYSIS",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "Finance Agent v2",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "family": "FINANCIAL_ANALYSIS",
+      "blocker_class": "INTERNAL_OPERATIVE_SOURCE_MISSING",
+      "reason": "NO_VERIFIED_BRAIN_OWNED_OR_CONFIGURED_OPERATIVE_FINANCE_JUDGMENT_ROUTE_FOR_SUPERVISORY_COMPLIANCE_AND_DOCUMENT_INTERPRETATION_LEAVES",
+      "discharge_condition": "ADMIT_A_BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_LOAD_BEARING_CONFIGURATION_THROUGH_SOURCE_GATE_V2__THEN_RUN_ONLY_THE_TWO_FROZEN_DIRECT_ORACLE_LEAVES"
+    },
+    {
+      "predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "LiveBench Instruction Following",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "RECOVERY_TERMINAL_NONINFERIOR",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "family": "ARTIFACT_CREATION",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "AA-Briefcase v1.1",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "MYSTERYMECHANISM_GE_49_55",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+      "surface": "MysteryMechanism",
+      "reason": "PUBLIC_BAR_SCORE_PRODUCING_BRAIN_ROUTE_NOT_READY"
+    },
+    {
+      "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "blocker_class": "INTERNAL_OPERATIVE_SOURCE_MISSING",
+      "reason": "NO_VERIFIED_BRAIN_OWNED_OR_CONFIGURED_OPERATIVE_UNKNOWN_DOMAIN_JUDGMENT_ROUTE_FOR_CROSS_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION",
+      "discharge_condition": "INTERNALIZE_OR_BIND_A_LOAD_BEARING_BRAIN_CONFIGURATION__PASS_SOURCE_GATE_V2__THEN_RUN_ONLY_THE_TWO_FROZEN_INFORMATION_SAFE_DIRECT_ORACLE_LEAVES"
+    },
+    {
+      "predicate_id": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "blocker_class": "INTERNAL_DEPENDENCY",
+      "reason": "INTERNAL_DEPENDENCY_GRAPH_INCOMPLETE",
+      "discharge_condition": "ALL_ISOLATED_COMPONENTS_USED_BY_THE_FROZEN_MULTI_CAPABILITY_COMPOSITION_CLAIM_HAVE_SCOPE_COMPLETE_ACCEPTANCE_PROOF"
+    },
+    {
+      "predicate_id": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    },
+    {
+      "predicate_id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "blocker_class": "EXACT_COMPARATOR_OR_STRONGER_PROOF_MISSING",
+      "reason": "EXACT_OPUS55_ZERO_INCREMENTAL_COMPARATOR_UNAVAILABLE"
+    }
+  ],
+  "blocker_classes": {
+    "public_score_routes": 15,
+    "exact_comparator_or_stronger_proof": 13,
+    "internal_operational_source": 2,
+    "internal_dependency": 1
+  },
+  "authorized_unblocker_work": [
+    "VERIFY_AND_ADMIT_LOAD_BEARING_BRAIN_CONFIGURATIONS_FOR_PUBLIC_SCORE_ROUTES",
+    "INTERNALIZE_OR_BIND_BRAIN_OWNED_JUDGMENT_CONFIGURATIONS_FOR_FINANCE_AND_UNKNOWN_DOMAIN_DIRECT_ORACLES",
+    "SEARCH_FOR_SCOPE_COMPLETE_STRONGER_PROOFS_OR_ADMISSIBLE_EXACT_OPUS55_CASE_LEVEL_COMPARATOR_WITHOUT_SPEND",
+    "RECOMPUTE_READINESS_AND_RESIDUAL_AFTER_EACH_UNBLOCKER_RECEIPT"
+  ],
+  "terminal_promotion_allowed": false,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "NO_ACCEPTANCE_CASE_EXPOSURE_WHILE_EVERY_UNRESOLVED_ATOMIC_PREDICATE_IS_BLOCKED__ONLY_BLOCKER_DISCHARGE_WORK_HAS_EXECUTION_AUTHORITY"
+}
