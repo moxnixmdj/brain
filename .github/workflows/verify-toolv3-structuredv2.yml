@@ -1,0 +1,37 @@
+name: Verify tool discovery V3 and structured method AST V2
+on:
+  push:
+    branches: [main, obs-verify-toolv3-structuredv2-20261002]
+    paths:
+      - canonical/runtime/tool_discovery_dynamic_candidate_v3.py
+      - canonical/runtime/tool_discovery_dynamic_proof_v3.py
+      - canonical/tests/test_tool_discovery_dynamic_v3.py
+      - canonical/runtime/structured_method_expression_ast_candidate_v2.py
+      - canonical/runtime/structured_method_expression_ast_proof_v2.py
+      - canonical/tests/test_structured_method_expression_ast_v2.py
+      - .github/workflows/verify-toolv3-structuredv2.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/tool_discovery_dynamic_candidate_v3.py
+      - canonical/runtime/tool_discovery_dynamic_proof_v3.py
+      - canonical/tests/test_tool_discovery_dynamic_v3.py
+      - canonical/runtime/structured_method_expression_ast_candidate_v2.py
+      - canonical/runtime/structured_method_expression_ast_proof_v2.py
+      - canonical/tests/test_structured_method_expression_ast_v2.py
+      - .github/workflows/verify-toolv3-structuredv2.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Tool discovery V3
+        run: python -m unittest -v canonical.tests.test_tool_discovery_dynamic_v3
+      - name: Structured method AST V2
+        run: python -m unittest -v canonical.tests.test_structured_method_expression_ast_v2
