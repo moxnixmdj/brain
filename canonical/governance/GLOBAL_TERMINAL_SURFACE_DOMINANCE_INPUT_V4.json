@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V4",
   "date": "2026-10-02",
-  "status": "FROZEN_CORRECTED_INPUT__V3_SPECIFICATION_SCOPE_OVERCLAIM_REMOVED__AWAITING_INDEPENDENT_COMPILER_VERDICT__ZERO_TERMINAL_RESULT",
+  "status": "FROZEN_CORRECTED_FAIL_CLOSED_INPUT__RAW_SOURCE_ACCEPTANCE_SCOPE_PROOF_NOT_YET_ADMITTED__ZERO_TERMINAL_RESULT",
   "objective": "TEST_NAMED_SURFACE_REDUNDANCY_WITH_WHOLE_CONTRACT_SCOPE_PRESERVED__RAW_SPEC_SEMANTICS_MUST_FLOW_THROUGH_MATCHED_CROSS_DOMAIN_M0A_TERMINAL_PROOF_BEFORE_ACCEPTANCE_COMPILATION",
   "authority": {
     "behavioral_contract_registry": {
@@ -77,11 +77,11 @@
       ],
       "oracle_strength": 3,
       "zero_cost": true,
-      "executable": true,
+      "executable": false,
       "independent_oracle": true,
-      "scope_mapping_frozen": true,
+      "scope_mapping_frozen": false,
       "contamination_boundary_frozen": true,
-      "blocked": false,
+      "blocked": true,
       "evidence": [
         "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V2.json",
         "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json",
@@ -97,7 +97,8 @@
         "ALTERNATIVE_INTERPRETATIONS_PRESERVED_OR_FAIL_CLOSED",
         "INDEPENDENT_ACCEPTANCE_CONSEQUENCES_COVER_MATERIAL_INTERPRETATIONS"
       ],
-      "nonclaim": "REQUIREMENT_ACCEPTANCE_COMPILER_ALONE_DOES_NOT_COVER_RAW_SOURCE_SEMANTICS"
+      "nonclaim": "CURRENT_BOUNDED_COMPONENTS_AND_ACCEPTANCE_COMPILER_DO_NOT_YET_PROVE_WHOLE_RAW_SOURCE_SEMANTIC_SCOPE",
+      "terminal_proof_state": "REQUIRED_NOT_YET_EXECUTED"
     },
     {
       "id": "VERIFIED_NATIVE_ARTIFACT_TRANSACTIONS",
@@ -578,9 +579,21 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "precommit_expected_check": {
-    "global_uncovered": [],
-    "surfaces_with_uncovered": []
+    "global_uncovered": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+    ],
+    "surfaces_with_uncovered": [
+      "SURFACE_CURSORBENCH_4_0",
+      "SURFACE_FINANCE_ACCOUNTING_INDEX",
+      "SURFACE_FINANCE_AGENT_V2",
+      "SURFACE_FRONTIERCODE_V1_1",
+      "SURFACE_HLE_WITH_TOOLS",
+      "SURFACE_LIVEBENCH_IF",
+      "SURFACE_MYSTERYMECHANISM",
+      "SURFACE_TERMINAL_BENCH_4"
+    ]
   },
   "supersedes": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V3.json",
-  "v3_scope_invalidation": "canonical/governance/GLOBAL_SURFACE_DOMINANCE_V3_SCOPE_MAPPING_INVALIDATION_V1.json"
+  "v3_scope_invalidation": "canonical/governance/GLOBAL_SURFACE_DOMINANCE_V3_SCOPE_MAPPING_INVALIDATION_V1.json",
+  "next": "EXECUTE_CORRECTED_RAW_SOURCE_TO_ACCEPTANCE_SCOPE_PROOF__ONLY_ON_INDEPENDENT_PASS_MAY_ROUTE_BECOME_ADMISSIBLE_AND_V4_BE_RECOMPUTED"
 }
