@@ -44,7 +44,7 @@
   },
   "portfolio_status": {
     "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__2_BLOCKERS__LATEST_ROUTE_RECONCILIATION",
+      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__2_BLOCKERS__MECHANICALLY_REBUILT_FROM_ACTIVE_BASIS",
       "known_required_surfaces": [
         "Terminal-Bench 4.0 >=66.4%",
         "FrontierCode v1.1 Main >=54.4%",
@@ -80,7 +80,7 @@
       ]
     },
     "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__3_BLOCKERS__LATEST_ROUTE_RECONCILIATION",
+      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__3_BLOCKERS__MECHANICALLY_REBUILT_FROM_ACTIVE_BASIS",
       "known_required_surfaces": [
         "GDPval-AA v2.1 >=1846 Elo",
         "AA-Briefcase v1.1 >=1822 Elo",
@@ -114,7 +114,7 @@
       ]
     },
     "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__8_BLOCKERS__LATEST_ROUTE_RECONCILIATION",
+      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__8_BLOCKERS__MECHANICALLY_REBUILT_FROM_ACTIVE_BASIS",
       "known_required_surfaces": [
         "AutomationBench >=40%",
         "OSWorld 2.1 matched >=81.8% where comparable",
@@ -146,7 +146,7 @@
       "authority_source": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json"
     },
     "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__11_BLOCKERS__LATEST_ROUTE_RECONCILIATION",
+      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__11_BLOCKERS__MECHANICALLY_REBUILT_FROM_ACTIVE_BASIS",
       "known_required_surfaces": [
         "Humanity's Last Exam with tools >=67.7%",
         "Terminal-Bench-Science 0.1 >=58.7%"
@@ -392,12 +392,12 @@
     "public_score_only_no_exact_executable_route_found_count": 2,
     "zero_cost_executable_surface_count": 0,
     "portfolio_prequalification_pass_count": 4,
-    "conclusion": "LIVE_12_CONTRACT_BASIS_RECONCILED_TO_LATEST_ROUTE_STATE__4_ROUTES_FROZEN_ADMISSIBLE__EIGHT_OPEN_CONTRACTS_COMPILED_TO_CURRENT_PREWAVE_FRONTIER",
+    "conclusion": "PORTFOLIO_BLOCKER_FRONTIER_MECHANICALLY_DERIVED_FROM_ACTIVE_12_CONTRACT_BASIS__NO_STALE_PORTFOLIO_LIST_AUTHORITY",
     "unresolved_identity_or_access_count": 1,
     "deleted_required_execution_routes_by_dominance_v2": 5,
     "required_private_or_nonreproducible_execution_route_count": 0,
     "required_named_benchmark_execution_route_count": 0,
-    "global_uncovered_behavioral_obligation_count": 4,
+    "global_uncovered_behavioral_obligation_count": 5,
     "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
     "portfolio_prequalification_input_blocker_count": 14
   },
@@ -486,7 +486,7 @@
   "admissible_frozen_terminal_route_count": 12,
   "last_basis_resynchronization": {
     "basis_blob_sha": "b5aa20127ca5c83608de83446c57d09ca212a957",
-    "method": "MECHANICAL_RECONCILIATION_FROM_ACTIVE_BASIS_AND_LATEST_FROZEN_ROUTE_BINDINGS__NO_PROMOTION",
+    "method": "MECHANICAL_FULL_REBUILD_FROM_ACTIVE_BASIS__NO_PARTIAL_MERGE__NO_PROMOTION",
     "date": "2026-10-02"
   },
   "derived_state_reconciliation": {
