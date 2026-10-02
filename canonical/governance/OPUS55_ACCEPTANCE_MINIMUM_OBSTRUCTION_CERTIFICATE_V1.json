@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_MINIMUM_OBSTRUCTION_CERTIFICATE_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_FAIL_CLOSED__2_OF_19_ACCEPTANCE_CLOSED__17_RESULT_OBLIGATIONS_OPEN__GLOBAL_OWNERSHIP_GATES_CLOSED",
+  "status": "SUPERSEDED_BY_RESIDUAL_V10_AND_CURRENT_ACTION_HYPERGRAPH__HISTORICAL_2_OF_19_SNAPSHOT_ONLY",
   "objective": "Compress every remaining terminal blocker to the minimum evidence-producing actions required by the frozen Opus 5.5 equal-or-better protocols.",
   "authorities": {
     "protocols": {
@@ -102,5 +102,11 @@
   "terminal_goal_achieved": false,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "superseded_by": [
+    "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+  ],
+  "scheduling_authority": false
 }
