@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_PROOF_CUT_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__EXACT_OUTER_TERMINAL_OBSERVATION_CUT_FROZEN__ZERO_PREPROOF_IMPLEMENTATION_RESIDUALS__EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_ONLY",
+  "status": "SUPERSEDED_SNAPSHOT__HISTORICAL_2_OF_19_PRE_ACCEPTANCE_TRANSMUTATION__DO_NOT_SCHEDULE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
   "evidence_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
@@ -252,12 +252,7 @@
       ]
     }
   ],
-  "scheduling_authority": {
-    "family_labels": false,
-    "benchmark_rank_order": false,
-    "current_active_family": false,
-    "global_terminal_proof_cut": true
-  },
+  "scheduling_authority": false,
   "required_pipeline": [
     "ATOMIZE_ALL_OPEN_TERMINAL_PROOF_OBLIGATIONS",
     "SATURATE_EXISTING_EVIDENCE_FOR_ALL_OPEN_OBLIGATIONS",
@@ -429,5 +424,10 @@
     "runtime": "canonical/runtime/terminal_counterexample_envelope_compiler.py",
     "status": "ACTIVE_INDEPENDENT_PASS__PRE_REALITY_QUERY_PROOF_COMPRESSION",
     "rule": "BEFORE_COUNTERFACTUAL_OR_REALITY_CUT__PROPAGATE_VERIFIED_ENVELOPES_FAILURES_AND_IMPLICATIONS__SCHEDULE_ONLY_MINIMUM_RESIDUAL_UNKNOWN_BASIS"
-  }
+  },
+  "superseded_by": [
+    "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+  ]
 }
