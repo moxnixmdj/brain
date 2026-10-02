@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "POSTWAVE_RECONCILED__19_BEHAVIORAL_PASS__4_ACCEPTANCE_CALIBRATED__2_VERIFIED_OWNED__15_ACCEPTANCE_OPEN",
+  "status": "POSTWAVE_SCOPE_COMPLETENESS_RECONCILED__19_BEHAVIORAL_PASS__2_ACCEPTANCE_CLOSED__2_VERIFIED_OWNED__17_ACCEPTANCE_OPEN",
   "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -374,11 +374,11 @@
         "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json"
       ],
       "internalization_required": false,
-      "ownership_note": "Scoped mechanical delegation/coordination remains Brain-owned and reusable. Full frozen Opus55 family acceptance is now independently calibrated PASS via the temporally transported full-scope absolute-dominance witness; ownership promotion remains separate and ungranted.",
+      "ownership_note": "Scoped mechanical delegation/coordination remains Brain-owned and reusable. Full Opus55 family acceptance is REOPENED: the prior 132-case absolute-dominance witness lacks an independently verified protocol-wide exact, exhaustive-finite, or universal scope-completeness certificate.",
       "internalized_configuration": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json"
       ],
-      "next_required_action": "PRESERVE_ACCEPTANCE_PASS__DO_NOT_REPLAY__CONTINUE_ONLY_GLOBAL_OWNERSHIP_PROMOTION_AFTER_TERMINAL_ACCEPTANCE_CLOSURE",
+      "next_required_action": "SEARCH_EXISTING_IMMUTABLE_PROOFS_FOR_DELEGATION_SCOPE_COMPLETE_CERTIFICATE__NO_REPLAY__ONLY_IRREDUCIBLE_UNCERTAINTY_MAY_AUTHORIZE_NEW_REALITY",
       "candidate_internalization_routes": [
         {
           "repo": "Alibaba-NLP/DeepResearch",
@@ -387,11 +387,11 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "PRESERVE_ACCEPTANCE_PASS__DO_NOT_REPLAY__REMOVE_DELEGATION_FROM_ACCEPTANCE_RESIDUAL_FRONTIER",
+      "campaign_next_action": "SEARCH_EXISTING_IMMUTABLE_PROOFS_FOR_DELEGATION_SCOPE_COMPLETE_CERTIFICATE__NO_REPLAY__ONLY_IRREDUCIBLE_UNCERTAINTY_MAY_AUTHORIZE_NEW_REALITY",
       "postwave_terminal_behavioral_status": "PASS",
-      "postwave_opus55_acceptance_status": "PASS_VIA_TEMPORALLY_TRANSPORTED_FULL_SCOPE_ABSOLUTE_DOMINANCE_WITNESS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN__REOPENED_ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
       "postwave_ownership_credit": "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+      "postwave_acceptance_evidence": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
       "postwave_acceptance_witness": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
     },
     {
@@ -490,7 +490,7 @@
       "sources": [
         "https://openai.com/index/gpt-6-astra/"
       ],
-      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven.",
+      "internalization_note": "Historical Brain-owned tool-discovery mechanisms remain useful components, but full Opus-family acceptance is reopened because the 180-case finite sample does not by itself prove protocol-wide scope completeness.",
       "candidate_internalization_routes": [
         {
           "repo": "trymeka/agent",
@@ -505,11 +505,11 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "PRESERVE_ACCEPTANCE_PASS__DO_NOT_REPLAY__CONTINUE_ONLY_GLOBAL_OWNERSHIP_PROMOTION_AFTER_TERMINAL_ACCEPTANCE_CLOSURE",
+      "campaign_next_action": "SEARCH_EXISTING_IMMUTABLE_PROOFS_FOR_TOOL_DISCOVERY_SCOPE_COMPLETE_CERTIFICATE__NO_REPLAY__ONLY_IRREDUCIBLE_UNCERTAINTY_MAY_AUTHORIZE_NEW_REALITY",
       "postwave_terminal_behavioral_status": "PASS",
-      "postwave_opus55_acceptance_status": "PASS_VIA_FULL_SCOPE_ABSOLUTE_DOMINANCE_WITNESS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN__REOPENED_ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
       "postwave_ownership_credit": "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "postwave_acceptance_evidence": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
       "postwave_acceptance_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json"
     },
     {
