@@ -369,9 +369,13 @@
       "best_existing_routes": [
         "Brain-owned same-identity task/lease + two-worker concurrency + fan-in + independent verification"
       ],
-      "evidence": "Fresh two-process local verification passed distinct worker/task identity, real overlap, cross-claim rejection, exactly-once execution, exact two-result fan-in, independent task/mission hash recomputation, and $0 spend.",
+      "evidence": "Brain-owned delegation route passed the immutable frozen 132/132 direct terminal population. Independent temporal proof transport preserved the load-bearing binding/scope/protocol/contract/executor identities, and the unchanged Opus55 acceptance transmuter closes delegation as the fourth calibrated family by absolute ceiling dominance.",
       "sources": [
-        "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json"
+        "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json",
+        "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
+        "canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/verification/DELEGATION_TEMPORAL_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json"
       ],
       "internalization_required": false,
       "ownership_note": "Scoped mechanical delegation/coordination is Brain-owned and reusable. Whole-family Opus credit remains open for cognitive delegation quality, adaptive worker selection, >2-worker behavior, and autonomous wake.",
@@ -387,11 +391,12 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Inspect supervisor/researcher decomposition for cognitive delegation mechanisms not covered by Brain's owned mechanical coordination.",
+      "campaign_next_action": "PRESERVE_ACCEPTANCE_PASS__DO_NOT_REPLAY__KEEP_DIRECT_OWNERSHIP_PROMOTION_DISTINCT_FROM_ACCEPTANCE_CALIBRATION",
       "postwave_terminal_behavioral_status": "PASS",
-      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
-      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_opus55_acceptance_status": "PASS_VIA_FULL_SCOPE_TEMPORALLY_TRANSPORTED_ABSOLUTE_DOMINANCE_WITNESS",
+      "postwave_ownership_credit": "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+      "postwave_acceptance_witness": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
