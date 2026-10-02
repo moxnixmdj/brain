@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TRAJECTORY_CAUSAL_IR_V5_SCOPE_RESCUE_ACTIVATION",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__P1_TWO_RESIDUAL_CAPABILITY_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "objective": "Close the two exact P1 capability residuals by adding a first-class SCOPE mechanism and requiring machine-verified post-intervention terminal rescue over the heterogeneous typed envelope.",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py",
+  "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py",
+  "tests": "canonical/tests/test_trajectory_failure_typed_ir_v5.py",
+  "repairs": [
+    "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+    "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+  ],
+  "envelope": {
+    "normalized_domains": [
+      "BROWSER",
+      "FILESYSTEM",
+      "TOOL_API",
+      "ARTIFACT",
+      "RESEARCH",
+      "CODE"
+    ],
+    "mechanism_classes": [
+      "AUTHORITY",
+      "SCOPE",
+      "SCHEMA",
+      "PROVENANCE",
+      "INVARIANT",
+      "STATE_TRANSITION",
+      "TOOL_CONTRACT",
+      "DEPENDENCY"
+    ],
+    "causal_patterns": [
+      "SINGLE",
+      "DELAYED",
+      "INTERACTION",
+      "AMBIGUOUS"
+    ],
+    "case_count": 192,
+    "rescue_required_case_count": 144,
+    "ambiguity_abstention_case_count": 48
+  },
+  "proof_rules": [
+    "HIDDEN_ORACLE_NEVER_ENTERS_CANDIDATE_INPUT",
+    "SCOPE_IS_DISTINCT_FROM_AUTHORITY",
+    "REPAIR_TARGET_NAMING_ALONE_CANNOT_PROVE_RESCUE",
+    "PROPOSED_REPAIRS_ARE_APPLIED_TO_VISIBLE_TYPED_DEPENDENCY_SEMANTICS",
+    "DERIVED_DOWNSTREAM_FAILURES_RECOMPUTE_AFTER_INTERVENTION",
+    "SINGLE_DELAYED_AND_CONJUNCTIVE_INTERACTION_CASES_REQUIRE_TERMINAL_CAUSAL_SLICE_CLEARANCE",
+    "AMBIGUOUS_CASES_MUST_ABSTAIN_AND_MUST_NOT_CLAIM_RESCUE",
+    "NO_RETROACTIVE_CREDIT_TO_IMMUTABLE_TERMINAL_V3",
+    "INDEPENDENT_EXACT_BYTE_VERIFICATION_REQUIRED_BEFORE_ANY_P1_QUARANTINE_CHANGE"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "RUN_EXACT_BYTES_AND_ADVERSARIAL_TESTS_ON_INDEPENDENT_PUBLIC_RUNNER__IF_PASS_COMPILE_SCOPE_SAFE_P1_QUARANTINE_DISCHARGE_WITHOUT_REPLAYING_TERMINAL_V3"
+}
