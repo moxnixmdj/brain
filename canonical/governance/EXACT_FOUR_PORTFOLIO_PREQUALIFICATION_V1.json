@@ -341,7 +341,7 @@
     "saccr_information_safe_independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "p2_p3_information_safe_independent_preflight": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
     "terminal_prequalification_reducer_12_contract_current_independent_pass": "canonical/verification/TERMINAL_PREQUALIFICATION_12_CONTRACT_CURRENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "active_terminal_proof_basis_blob_sha": "93e5c03c737d907bf826453c0419f01ebb8b0c54",
+    "active_terminal_proof_basis_blob_sha": "beeddfb8027c3f0712265673cd72bfd493f43ae7",
     "p2_information_safe_independent_preflight": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
     "p3_v2_information_safe_preflight_authority": "INVALIDATED_FOR_P3_BY_STANCE_SUPPORT_LEAK__ZERO_TERMINAL_AUTHORITY",
     "p3_raw_evidence_v3_independent_preflight": "INDEPENDENT_PASS_BOUNDED_ONLY__canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json",
@@ -360,13 +360,14 @@
     "delegation_structural_variety_independent_preflight": "canonical/verification/DELEGATION_STRUCTURAL_VARIETY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "tool_discovery_hardened_v2_independent_pass": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "delegation_terminal_acceptance_binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_BINDING_V1.json",
-    "delegation_terminal_route_frozen_admissible": true,
+    "delegation_terminal_route_frozen_admissible": false,
     "open_domain_scope_superset_deadlock_audit": "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json",
     "open_domain_bounded_synthetic_whole_scope_promotion_forbidden": true,
     "delegation_current_candidate_oracle_revalidation": "PENDING_AFTER_EXACT_BLOB_CHANGE",
     "admissible_frozen_terminal_routes": [
       "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
       "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
       "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001"
     ]
   },
@@ -378,7 +379,7 @@
     "public_score_only_no_exact_executable_route_found_count": 2,
     "zero_cost_executable_surface_count": 0,
     "portfolio_prequalification_pass_count": 0,
-    "conclusion": "LIVE_12_CONTRACT_BASIS_IS_TERMINAL_PREWAVE_AUTHORITY__FOUR_ROUTES_FROZEN_ADMISSIBLE__EIGHT_REMAIN_OPEN",
+    "conclusion": "LIVE_12_CONTRACT_BASIS_IS_TERMINAL_PREWAVE_AUTHORITY__4_ROUTES_FROZEN_ADMISSIBLE__8_REMAIN_OPEN",
     "unresolved_identity_or_access_count": 1,
     "deleted_required_execution_routes_by_dominance_v2": 5,
     "required_private_or_nonreproducible_execution_route_count": 0,
@@ -481,19 +482,19 @@
     "v4_independent_verification": "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V4_CURRENT_FAIL_CLOSED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "active_terminal_proof_basis": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
-  "active_terminal_proof_basis_blob_sha": "887cfe13ea8ecd2b509e3ad00d836aa94faf1699",
+  "active_terminal_proof_basis_blob_sha": "beeddfb8027c3f0712265673cd72bfd493f43ae7",
   "population_protocol": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
   "superseded_ten_obligation_package": {
     "path": "canonical/governance/TERMINAL_REPLACEMENT_CANDIDATE_PACKAGE_FREEZE_V1.json",
     "status": "HISTORICAL_PREFLIGHT_ONLY__NOT_TERMINAL_AUTHORITY__SUPERSEDED_BY_12_CONTRACT_PROOF_BASIS"
   },
   "controller_defect_audit": "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json",
-  "active_terminal_proof_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__2_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "active_terminal_proof_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__4_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 2,
+  "admissible_frozen_terminal_route_count": 4,
   "last_basis_resynchronization": {
-    "basis_blob_sha": "19727de62c9b0b2e973e613e7e5ffe058057a2d1",
-    "method": "MECHANICAL_COPY_OF_ACTIVE_BASIS_BLOCKERS_GROUPED_BY_PORTFOLIO__NO_PROMOTION",
+    "basis_blob_sha": "beeddfb8027c3f0712265673cd72bfd493f43ae7",
+    "method": "MECHANICAL_RECONCILIATION_FROM_ACTIVE_BASIS__NO_PROMOTION",
     "date": "2026-10-02"
   }
 }
