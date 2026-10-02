@@ -1,0 +1,23 @@
+name: Verify CAD render-equivalent anti-shortcut repair
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/cad_t0_route_specific_candidate_v1.py
+      - canonical/tests/test_cad_t0_route_specific_candidate_v1.py
+      - canonical/tests/test_cad_t0_render_equivalent_antishortcut.py
+      - .github/workflows/verify-cad-t0-render-equivalent-antishortcut.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --disable-pip-version-check --no-input "pydantic>=2,<3" "cadquery==2.6.1"
+      - run: PYTHONPATH=.:canonical/runtime python -m unittest -v canonical.tests.test_cad_t0_route_specific_candidate_v1 canonical.tests.test_cad_t0_render_equivalent_antishortcut
