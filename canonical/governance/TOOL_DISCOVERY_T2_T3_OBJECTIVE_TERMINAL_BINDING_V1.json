@@ -124,5 +124,5 @@
     "kernel_blob_sha": "669afcde50302e76c1b0a1f6b186aaafa8730515",
     "mutable_global_scoreboard_is_route_dependency": false
   },
-  "independent_verification": "canonical/verification/TOOL_DISCOVERY_T2_T3_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  "independent_verification": "canonical/verification/FINAL_THREE_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
