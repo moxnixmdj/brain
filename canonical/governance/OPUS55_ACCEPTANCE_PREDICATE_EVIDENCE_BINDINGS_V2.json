@@ -1,17 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2",
   "date": "2026-10-02",
-  "status": "RECEIPT_SATURATION_COMPLETE__5_ATOMIC_PREDICATES_PROVED__33_UNRESOLVED__NEW_REALITY_GATED_BY_V2_KERNEL",
+  "status": "RECEIPT_SATURATION_REOPENED_FOR_VALIDATED_SIXTH_ATOMIC_CLAIM__NO_NEW_REALITY",
   "objective": "Bind only content-addressed atomic acceptance evidence. Until saturation is complete, benchmark and matched-case execution remains forbidden.",
   "saturation": {
-    "status": "COMPLETE",
-    "source_snapshot_sha": "d096ca148a0af0a226add3b11198093df9bfc8dc",
-    "receipt": "canonical/verification/OPUS55_ACCEPTANCE_ATOMIC_RECEIPT_SATURATION_20261002_V1.json",
-    "receipt_sha": "d096ca148a0af0a226add3b11198093df9bfc8dc",
-    "proved_predicate_count": 5,
-    "unresolved_predicate_count": 33,
-    "new_reality_units_consumed": 0,
-    "rule": "COMPLETE_FOR_THE_CONTENT_ADDRESSED_CANONICAL_ACCEPTANCE_AUTHORITY_SET_BOUND_IN_THE_SATURATION_RECEIPT__INVALIDATE_AND_RESATURATE_IF_THAT_AUTHORITY_SET_CHANGES"
+    "status": "IN_PROGRESS",
+    "superseded_receipt": "canonical/verification/OPUS55_ACCEPTANCE_ATOMIC_RECEIPT_SATURATION_20261002_V1.json",
+    "reason": "VALIDATED_SIXTH_ATOMIC_RECEIPT_REQUIRES_RESATURATION_RECEIPT",
+    "new_reality_units_consumed": 0
   },
   "claims": [
     {
@@ -117,6 +113,30 @@
         }
       ],
       "scope_limit": "EXPLICIT_LOW_LEVEL_NATIVE_EDIT_PRESERVATION_FOR_DOCX_XLSX_PPTX_PDF_ONLY__NO_PROFESSIONAL_QUALITY_OR_SEMANTIC_TARGET_SELECTION_CREDIT"
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION",
+      "state": "PROVED",
+      "proof_kind": "RECEIPT",
+      "source_path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "source_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "basis": "180_OF_180_FROZEN_TOOL_DISCOVERY_DIRECT_CASES_PASS__FROZEN_OBJECTIVE_BINDING_REQUIRES_EVIDENCE_BACKED_CAPABILITY_UPDATE_AND_NO_SELECTION_WITHOUT_CURRENT_POSITIVE_EVIDENCE",
+      "supporting_sources": [
+        {
+          "path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+          "sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+        },
+        {
+          "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+          "sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+        },
+        {
+          "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+          "sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+        }
+      ]
     }
   ],
   "rules": [
