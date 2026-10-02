@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_PROOF_CUT_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__EXACT_OUTER_TERMINAL_OBSERVATION_CUT_FROZEN__SINGLE_SHARED_IMPLEMENTATION_FRONTIER_S0_WITH_G0_SUBCASE",
+  "status": "ACTIVE_FAIL_CLOSED__EXACT_OUTER_TERMINAL_OBSERVATION_CUT_FROZEN__ZERO_PREPROOF_IMPLEMENTATION_RESIDUALS__EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_ONLY",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
   "evidence_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
@@ -291,7 +291,7 @@
     "disposition": "PRESERVE_SOURCE_AS_SPENT_EVIDENCE__NO_EXECUTION__NO_AUTOMATIC_NEXT_RANK",
     "spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
   },
-  "next_action": "ACQUIRE_AND_INTERNALIZE_ONLY_S0_E__CAUSALLY_LOCALIZE_MINIMUM_PERMISSIVE_WHITE_BOX_DONOR_COMPONENT_OR_SUBSPACE__DISTILL_OR_REIMPLEMENT_ONLY_CAUSALLY_MATERIAL_RESIDUAL__VERIFY_SOURCE_TRACEABILITY_CROSS_DOMAIN_TRANSFER_ABLATION_RESCUE_AND_DONOR_DELETION__THEN_ADMIT_FROZEN_T0_T1_T2_T3_PARALLEL_PROOF_WAVE",
+  "next_action": "COMPLETE_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_FROM_ZERO_COST_EXECUTABLE_OR_SCOPE_EQUIVALENT_ABSOLUTE_PROOF_ROUTES__FREEZE_ALL_PRE_WAVE_MANIFESTS__THEN_EXECUTE_T0_T1_T2_T3_IN_PARALLEL",
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
@@ -313,8 +313,10 @@
   },
   "outer_global_universe": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
   "global_fresh_evidence_guard": {
-    "status": "ACTIVE_BLOCK_UNTIL_SHARED_IMPLEMENTATION_FRONTIER_CLOSED_OR_BOUNDED",
+    "status": "ACTIVE_BLOCK_UNTIL_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_PASS",
     "exact_outer_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
+    "prequalification": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json",
+    "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
     "outer_cut_count": 4,
     "blocked_clean_actions": [
       "T0",
@@ -322,7 +324,7 @@
       "T2",
       "T3"
     ],
-    "reason": "OUTER_TERMINAL_OBSERVATIONS_ARE_PROOF_ACTIONS__DO_NOT_SPEND_UNTIL_S0_E_IS_DONOR_INDEPENDENT_OR_FORMALLY_BOUNDED"
+    "reason": "NO_SPECIFICATION_OR_IMPLEMENTATION_HOLES_REMAIN__CLEAN_TERMINAL_EVIDENCE_IS_BLOCKED_ONLY_UNTIL_EACH_REQUIRED_SURFACE_HAS_A_FROZEN_ZERO_COST_EXECUTABLE_OR_SCOPE_EQUIVALENT_ABSOLUTE_PROOF_ROUTE_AND_PRE_WAVE_MANIFESTS_PASS"
   },
   "specification_closure": {
     "status": "VERIFIED_CLOSED_AT_CURRENT_19_FAMILY_ENVELOPE",
@@ -333,17 +335,14 @@
     "verdict": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
     "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
     "exact_minimum_count": 4,
-    "execution_authorized": false
+    "execution_authorized": false,
+    "prequalification": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
   },
   "shared_semantic_residual_basis": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
   "shared_semantic_residual_reuse_scan": "canonical/reasoning/2026-10-02_SHARED_SEMANTIC_RESIDUAL_REUSE_SCAN_V1.json",
   "current_mechanism_frontier": {
-    "true_remaining_implementation_classes": [
-      "S0_E_PROBABILISTIC_SEMANTIC_RELATION_FORMATION_WITHOUT_COMPLETE_ORACLE"
-    ],
-    "embedded_subcases": [
-      "G0_ONLY_WHERE_REQUIRED_STRUCTURE_IS_NOT_RETRIEVABLE_DEDUCIBLE_ENUMERABLE_OR_COMPLETE_VERIFIER_CHECKABLE"
-    ],
+    "true_remaining_implementation_classes": [],
+    "embedded_subcases": [],
     "proof_only": [
       "M0",
       "M1",
@@ -351,14 +350,18 @@
       "M3",
       "M4",
       "M5",
+      "S0",
       "S1",
+      "G0",
       "D0"
     ],
     "deleted_as_independent_blockers": [
       "D0",
-      "M2"
+      "M2",
+      "S0",
+      "G0"
     ],
-    "rationale": "D0_VERIFIED_CLOSED_FOR_FROZEN_EXACT_PATCH_PLAN_SCOPE__M2_NO_LANE_LOCAL_MECHANISM_RESIDUAL__M3_M4_M5_PROOF_ONLY__G0_IS_NOT_INDEPENDENT_OF_S0_AND_ONLY_APPLIES_WHEN_REQUIRED_STRUCTURE_IS_NOT_RETRIEVABLE_DEDUCIBLE_OR_ENUMERABLE_UNDER_COMPLETE_ACCEPTANCE"
+    "rationale": "ZERO_REALITY_IMPLEMENTATION_FRONTIER_SATURATED__S0_G0_RECLASSIFIED_TO_TERMINAL_PROOF_AND_SPECIFICITY__ONLY_A_REPEATABLE_SOLVABLE_CAUSALLY_LOCALIZED_TERMINAL_FAILURE_MAY_REOPEN_A_SPECIFIC_MECHANISM"
   },
   "frontier_reconciliation": {
     "date": "2026-10-02",
@@ -368,8 +371,10 @@
     "uncontracted_required_behaviors": 0,
     "d0_independent_mechanism_residual": false,
     "m2_independent_mechanism_residual": false,
-    "true_remaining_implementation_class_count": 1,
-    "zero_new_reality_units_consumed": 0
+    "true_remaining_implementation_class_count": 0,
+    "zero_new_reality_units_consumed": 0,
+    "prequalification": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
   },
-  "frontier_boundary": "canonical/governance/S0_IRREDUCIBLE_SEMANTIC_BOUNDARY_V1.json"
+  "frontier_boundary": "canonical/governance/S0_IRREDUCIBLE_SEMANTIC_BOUNDARY_V1.json",
+  "prequalification": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
 }
