@@ -7,7 +7,6 @@
     "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
     "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
     "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
-    "TASK_TO_DELEGATION_GRAPH_001",
     "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
     "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
   ],
@@ -57,11 +56,12 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
-  "note": "Live frontier resynchronized to ACTIVE_TERMINAL_PROOF_BASIS_V1: admitted P3 synthesis removed. Five obligations currently have no internally admissible route encoded here; trajectory retains the P1 internal absolute-route candidate. Scheduling only; no terminal credit.",
+  "note": "Live frontier resynchronized to ACTIVE_TERMINAL_PROOF_BASIS_V1 after independently verified delegation objective route promotion: five contracts remain blocked. Trajectory retains the P1 internal absolute-route candidate; CAD, Browser, Tool Discovery, and Research remain residual until stronger routes are fully bound. Scheduling only; no terminal credit.",
   "authority_sync": {
     "source": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
-    "admitted_contract_removed": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
-    "expected_open_obligation_count": 6,
+    "authority_basis_blob_sha": "b345393acde78c9c9ce005facc6ba801d3cd3edf",
+    "admitted_contract_removed": "TASK_TO_DELEGATION_GRAPH_001",
+    "expected_open_obligation_count": 5,
     "fail_closed_if_authority_diverges": true
   }
 }
