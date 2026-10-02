@@ -1,0 +1,22 @@
+name: Verify M4 composed research control
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/m4_research_control.py
+      - canonical/runtime/shared_decision_primitives.py
+      - canonical/runtime/bound_capabilities/research_query_focus.py
+      - canonical/tests/test_m4_research_control.py
+      - .github/workflows/verify-m4-research-control.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_m4_research_control
