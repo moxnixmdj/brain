@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_CAPABILITY_OWNERSHIP_PACKAGE_V1",
+  "date": "2026-10-02",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+  "operative_route": {
+    "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+    "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17",
+    "brain_owned": true,
+    "deterministic": true,
+    "candidate_visible_inputs_only": true,
+    "opaque_target_provider_required": false
+  },
+  "acceptance": {
+    "witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+    "git_blob_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7",
+    "full_protocol": true,
+    "scope_relation": "PROVEN_STRONGER",
+    "brain_lower_bound": 1,
+    "theoretical_upper_bound": 1,
+    "terminal_population": "180_OF_180",
+    "independent": true,
+    "contamination_clean": true
+  },
+  "global_postconditions": {
+    "evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "git_blob_sha": "e0dbd996c18bdb818693ab0d217d751594a03d0f",
+    "donor_dependent_required_behaviors": 0,
+    "unresolved_verifier_mutations": 0,
+    "unresolved_composition_failures": 0,
+    "donor_deletion_cleanroom_pass": true
+  },
+  "promotion": {
+    "eligibility": "canonical/verification/OPUS55_FAMILY_OWNERSHIP_PROMOTION_ELIGIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "eligibility_blob_sha": "23d3d92ebeb8fd34320923ccce1d017b2031ec6e",
+    "mode": "FAMILY_LOCAL_ZERO_REALITY",
+    "terminal_goal_achieved": false
+  },
+  "incremental_spend_usd": 0
+}
