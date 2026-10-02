@@ -5,7 +5,7 @@ load-bearing source identities and derives the premises of a universal proof for
 the Brain-owned finite delegation planner.  The proof domain is the declared
 finite explicit-task model accepted by the candidate: finite steps/workers,
 monotone facts, non-negative finite costs, finite positive resource capacities,
-supported live receipts, and at least one executable feasible plan.
+supported live receipts. Feasible and provably infeasible valid contracts are both covered.
 
 The mathematical step is standard finite-search reasoning, not extrapolation from
 the 132 empirical terminal cases:
