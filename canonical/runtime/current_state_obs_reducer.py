@@ -27,6 +27,7 @@ COUNTERFACTUAL_COMPILER="canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V
 MINIMUM_REALITY_CUT_RUNTIME="canonical/runtime/minimum_reality_cut.py"
 GLOBAL_PROOF_LAW="canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md"
 GLOBAL_CUT="canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json"
+GLOBAL_UNIVERSE="canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json"
 
 REQUIRED_GATE_CHECKS={
     "CONTINUOUS_OBS_CONTEXT_PRESENT_AND_CURRENT",
@@ -117,6 +118,7 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         template=load(root,TEMPLATE)
         obs=load(root,OBS_POLICY)
         global_cut=load(root,GLOBAL_CUT)
+        global_universe=load(root,GLOBAL_UNIVERSE)
     except Exception as exc:
         return {
             "schema":"PROJECT_BRAIN_CURRENT_STATE_OBS_REDUCER_V1",
@@ -275,6 +277,33 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         errors.append("GLOBAL_CUT_NOT_SCHEDULING_AUTHORITY")
     if scheduling.get("family_labels") is not False or scheduling.get("benchmark_rank_order") is not False:
         errors.append("GLOBAL_CUT_LOCAL_ORDER_STILL_AUTHORITATIVE")
+
+    # The outer universe dominates every local residual cut until the entire
+    # terminal graph has no open specification/mechanism holes and an exact
+    # outer cut is frozen. Local optimality is not terminal authority.
+    outer=global_universe.get("global_cut") or {}
+    outer_auth=global_universe.get("execution_authority") or {}
+    if not _s(global_universe.get("status")).startswith("FROZEN_OUTER_UNIVERSE"):
+        errors.append("GLOBAL_TERMINAL_UNIVERSE_NOT_FROZEN")
+    exact_outer=outer.get("exact_cut_ready") is True
+    fresh_allowed=outer_auth.get("fresh_terminal_evidence_allowed") is True
+    if not exact_outer and fresh_allowed:
+        errors.append("OUTER_UNIVERSE_PREMATURE_FRESH_EVIDENCE_AUTHORITY")
+    if not exact_outer:
+        if "OUTER_GLOBAL_TERMINAL_UNIVERSE" not in blocker:
+            errors.append("HIERARCHY_IGNORES_OPEN_OUTER_GLOBAL_UNIVERSE")
+        if any(token in next_action for token in ("PREQUALIFY_IN_PARALLEL","EXECUTE_","EXPOSE_")):
+            errors.append("HIERARCHY_PREMATURE_FRESH_ACTION_WHILE_OUTER_CUT_OPEN")
+        local_v6=hierarchy.get("v6_residual_cut") or {}
+        if local_v6.get("execution_authorized") is True or local_v6.get("prequalification_parallel") is True:
+            errors.append("LOCAL_V6_ESCAPES_OUTER_GLOBAL_GUARD")
+    eg_outer=_s(eg.get("outer_global_terminal_universe"))
+    if eg_outer!=GLOBAL_UNIVERSE:
+        errors.append("POINTER_OUTER_GLOBAL_UNIVERSE_DRIFT")
+    if eg.get("local_v6_is_global_execution_authority") is not False:
+        errors.append("POINTER_LOCAL_V6_WRONGLY_GLOBAL")
+    if eg.get("fresh_terminal_evidence_requires_outer_exact_cut") is not True:
+        errors.append("POINTER_OUTER_EXACT_CUT_NOT_REQUIRED")
 
     him=hierarchy.get("information_minimization_control") or {}
     if not _s(him.get("status")).startswith("ACTIVE_CANONICAL"):
