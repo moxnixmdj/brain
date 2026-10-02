@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "12_FROZEN_ROUTES_ENUMERATED__5_OF_12_ROUTE_SPECIFIC_EXECUTORS_INDEPENDENTLY_BOUND__LEGACY_GLOBAL_EXECUTOR_FAIL_CLOSED",
+  "status": "12_FROZEN_ROUTES_ENUMERATED__11_ROUTE_EXECUTOR_BINDINGS_IMPLEMENTED__5_OF_12_INDEPENDENTLY_BOUND__CAD_DIRECT_EXECUTOR_OPEN__LEGACY_GLOBAL_EXECUTOR_FAIL_CLOSED",
   "authority": [
     "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
     "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json",
@@ -24,17 +24,16 @@
       "frozen_route": "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json",
       "proof_mode": null,
       "independent_verification": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "BOUND_ROUTE_SPECIFIC_EXECUTOR__INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "executor_status": "INDEPENDENTLY_BOUND__ROUTE_SPECIFIC_EXECUTOR_PREFLIGHT_PASS__ZERO_TERMINAL_RESULTS",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
-      "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
+      "executor": "canonical/runtime/saccr_route_specific_terminal_executor_v1.py",
       "tests": "canonical/tests/test_saccr_route_specific_terminal_executor_v1.py",
       "executor_independent_verification": "canonical/verification/SACCR_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "executor_blob_sha": "9810e3f9a2dd94dc372b6b9a865510795d0262fd",
       "executor_test_blob_sha": "59e01148f9cc0cff741e81b3238e023358a2a88a",
       "terminal_population_binding": "canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json",
-      "terminal_population_binding_blob_sha": "d8059952cdf358f3e682cd8177be4a7a0b2801ed",
-      "independent_executor_verification": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "terminal_population_binding_blob_sha": "d8059952cdf358f3e682cd8177be4a7a0b2801ed"
     },
     {
       "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
@@ -111,13 +110,16 @@
       "frozen_route": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "proof_mode": "T2_MULTIPLEXED_DIRECT_OBJECTIVE_DELEGATION_GATE",
       "independent_verification": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "BOUND_ROUTE_SPECIFIC_EXECUTOR__INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "executor_status": "BOUND_ROUTE_SPECIFIC_EXECUTOR__INDEPENDENT_PUBLIC_RUNNER_PASS_V2",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
       "tests": "canonical/tests/test_direct_route_terminal_executors_v1.py",
       "brain_ci": ".github/workflows/verify-direct-route-terminal-executors.yml",
-      "independent_executor_verification": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "independent_executor_verification": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "executor_blob_sha": "28ef55db77ac81e78bd5c67e4d2b39fef131b505",
+      "executor_test_blob_sha": "17c5c2c6828c89fd5a2cfdd5c3eda6110ab0fb03",
+      "selector_reconciliation": "canonical/governance/DELEGATION_TERMINAL_SELECTOR_RECONCILIATION_V1.json"
     },
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
@@ -155,47 +157,55 @@
       "frozen_route": "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "proof_mode": "PUBLIC_FIXED_BAR_MULTIPLEX_PLUS_EXPLICIT_UNCOVERED_SCOPE",
       "independent_verification": "canonical/verification/RESEARCH_T3_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "BOUND_ROUTE_SPECIFIC_EXECUTOR__INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "executor_status": "BOUND_ROUTE_SPECIFIC_EXECUTOR__INDEPENDENT_PUBLIC_RUNNER_PASS_V2",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
       "tests": "canonical/tests/test_direct_route_terminal_executors_v1.py",
       "brain_ci": ".github/workflows/verify-direct-route-terminal-executors.yml",
-      "independent_executor_verification": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "independent_executor_verification": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "executor_blob_sha": "28ef55db77ac81e78bd5c67e4d2b39fef131b505",
+      "executor_test_blob_sha": "17c5c2c6828c89fd5a2cfdd5c3eda6110ab0fb03"
     },
     {
       "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
       "frozen_route": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "proof_mode": "T2_MULTIPLEXED_DIRECT_OBJECTIVE_BROWSER_GATE",
       "independent_verification": "canonical/verification/BROWSER_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "BOUND_ROUTE_SPECIFIC_EXECUTOR__INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "executor_status": "BOUND_ROUTE_SPECIFIC_EXECUTOR__INDEPENDENT_PUBLIC_RUNNER_PASS_V2",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
       "tests": "canonical/tests/test_direct_route_terminal_executors_v1.py",
       "brain_ci": ".github/workflows/verify-direct-route-terminal-executors.yml",
-      "independent_executor_verification": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "independent_executor_verification": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "executor_blob_sha": "28ef55db77ac81e78bd5c67e4d2b39fef131b505",
+      "executor_test_blob_sha": "17c5c2c6828c89fd5a2cfdd5c3eda6110ab0fb03"
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
       "frozen_route": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "proof_mode": "T2_T3_MULTIPLEXED_DIRECT_OBJECTIVE_TOOL_DISCOVERY_GATE",
       "independent_verification": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "BOUND_ROUTE_SPECIFIC_EXECUTOR__INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "executor_status": "BOUND_ROUTE_SPECIFIC_EXECUTOR__INDEPENDENT_PUBLIC_RUNNER_PASS_V2",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
       "tests": "canonical/tests/test_direct_route_terminal_executors_v1.py",
       "brain_ci": ".github/workflows/verify-direct-route-terminal-executors.yml",
-      "independent_executor_verification": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "independent_executor_verification": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "executor_blob_sha": "28ef55db77ac81e78bd5c67e4d2b39fef131b505",
+      "executor_test_blob_sha": "17c5c2c6828c89fd5a2cfdd5c3eda6110ab0fb03"
     }
   ],
   "launch_authority": false,
-  "next": "IMPLEMENT_AND_INDEPENDENTLY_VERIFY_REMAINING_SIX_REPLACEMENT_POPULATION_EXECUTORS_AND_CAD_T0_EXECUTOR__THEN_BIND_ALL_12__ONLY_THEN_CONSTRUCT_POST_FREEZE_BEACON_AND_LAUNCH_ONCE",
+  "next": "INDEPENDENTLY_VERIFY_AND_BIND_SIX_PARENT_MULTIPLEX_EXECUTORS__IMPLEMENT_AND_VERIFY_CAD_128_CASE_DIRECT_EXECUTOR__THEN_BIND_ALL_12__ONLY_THEN_CONSTRUCT_REAL_POST_FREEZE_BEACON_AND_LAUNCH_ONCE",
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "implemented_executor_count": 5
+  "implemented_executor_count": 11,
+  "direct_executor_verification_v2": "canonical/verification/DIRECT_ROUTE_TERMINAL_EXECUTORS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+  "stale_executor_verification_v1_disposition": "SUPERSEDED_AFTER_DELEGATION_SELECTOR_FIX__DO_NOT_USE_FOR_CURRENT_DIRECT_EXECUTOR_BLOB"
 }
