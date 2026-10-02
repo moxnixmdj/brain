@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_TERMINAL_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "proof_mode": "ABSOLUTE_BEHAVIORAL_PROTOCOL",
+  "scope_gate": "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_VERDICT.json",
+  "candidate": {
+    "primary": "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
+    "independent_oracle": "canonical/runtime/structured_method_normalized_rule_oracle_v3.py",
+    "supporting_executable_semantics": "canonical/runtime/structured_method_expression_ast_candidate_v2.py",
+    "supporting_independent_proof": "canonical/runtime/structured_method_expression_ast_proof_v2.py"
+  },
+  "verification": [
+    "canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/STRUCTURED_METHOD_EXPRESSION_AST_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "frozen_population": {
+    "relation": "CANDIDATE_SUPERSET_PROVEN_FOR_FROZEN_NORMALIZED_RULE_CONTRACT",
+    "interaction_ids": [
+      "APPLICABLE_REQUIREMENT_TO_CONSUMER_LINEAGE",
+      "INAPPLICABLE_REQUIREMENT_TO_JUSTIFIED_EXCLUSION",
+      "INPUT_TO_RULE_TO_DERIVED_OUTPUT_DAG",
+      "DEPENDENCY_ORDER_AND_CYCLE_REJECTION",
+      "TYPE_AND_DIMENSION_CONTRACT_VALIDATION",
+      "DECLARED_INVARIANT_PRESERVATION",
+      "REQUIRED_OUTPUT_TRACEABILITY",
+      "MATERIAL_EDGE_INDEPENDENT_STRUCTURAL_ACCEPTANCE"
+    ],
+    "inference_ids": [
+      "GRAPH_TOPOLOGY",
+      "REQUIREMENT_LINEAGE",
+      "JUSTIFIED_EXCLUSIONS",
+      "DEPENDENCY_ORDER",
+      "TYPE_DIMENSION_CONSISTENCY",
+      "REQUIRED_OUTPUT_TRACEABILITY",
+      "EDGE_ACCEPTANCE_CONSEQUENCES"
+    ],
+    "anti_shortcut_mutations": [
+      "DELETE_EDGE",
+      "REWIRE_EDGE",
+      "MUTATE_TYPE_OR_DIMENSION",
+      "DELETE_REQUIREMENT_CONSUMER",
+      "DELETE_JUSTIFIED_EXCLUSION",
+      "MUTATE_REQUIRED_OUTPUT",
+      "DELETE_DECLARED_INVARIANT"
+    ],
+    "hidden_oracle_ids": [
+      "GRAPH_TOPOLOGY",
+      "REQUIREMENT_LINEAGE",
+      "JUSTIFIED_EXCLUSIONS",
+      "DEPENDENCY_ORDER",
+      "TYPE_DIMENSION_CONSISTENCY",
+      "REQUIRED_OUTPUT_TRACEABILITY",
+      "EDGE_ACCEPTANCE_CONSEQUENCES"
+    ],
+    "candidate_visible_derived_or_oracle_ids": []
+  },
+  "acceptance": {
+    "all_required_interactions_present": true,
+    "zero_unresolved_required_dimensions": true,
+    "zero_load_bearing_oracle_leak": true,
+    "all_declared_type_dimension_lineage_invariant_and_required_output_mutations_detected": true,
+    "cycle_or_unresolved_dependency_fails_closed": true,
+    "candidate_must_not_receive_reference_solution": true,
+    "candidate_must_not_receive_hidden_oracle_payload": true,
+    "any_case_failure_blocks_route": true,
+    "scorer_or_population_mutation_after_freeze_forbidden": true
+  },
+  "information_boundary": {
+    "candidate_receives": "NORMALIZED_RULE_GRAPH_INPUT_ONLY",
+    "semantic_rule_extraction": "UPSTREAM_OUTSIDE_THIS_CONTRACT",
+    "reference_solution_visible": false,
+    "hidden_oracle_visible": false
+  },
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
