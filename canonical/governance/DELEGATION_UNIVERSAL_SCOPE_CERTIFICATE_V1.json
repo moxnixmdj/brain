@@ -18,11 +18,16 @@
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
     "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
     "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "af83f4899169e81017767c3316ddcf6b61da5ef6",
-    "canonical/runtime/delegation_universal_scope_certificate_v1.py": "0c96a97b015b367063c9ba138eae7022cc39b9f0",
-    "canonical/tests/test_delegation_universal_scope_certificate_v1.py": "771bcadbc47195365825f69ad33539ef86eef880"
+    "canonical/runtime/delegation_universal_scope_certificate_v1.py": "7f3a766795298bc3249b70de38729950609b368f",
+    "canonical/tests/test_delegation_universal_scope_certificate_v1.py": "6b94d78dfa0fc199ba92c6f5c90a87b799650c31",
+    "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json": "52392515cd4de672f82f8afac82a41d3ce442656",
+    "canonical/governance/DELEGATION_TEMPORAL_PROOF_TRANSPORT_V1.json": "b6d03ac87d8cd9d308f127e4e525e48be0d0a971",
+    "canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "5278abb7fcaa6b97189b67598c75e4df395e1788",
+    "canonical/verification/DELEGATION_SCOPE_GATE_V2_V3_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "eddfe01c81ae9d6e9453c4bc30737f9ddd273a83",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31"
   },
   "proof_domain": {
-    "population": "ALL_FINITE_VALID_EXPLICIT_DELEGATION_CONTRACTS_ACCEPTED_BY_THE_FROZEN_CANDIDATE_MODEL__FEASIBLE_OR_PROVABLY_INFEASIBLE",
+    "population": "FROZEN_DELEGATION_PROTOCOL_TRANSPORTED_BY_INDEPENDENT_SCOPE_SUBSTITUTION_TO_THE_CURRENT_EXPLICIT_FINITE_TASK_MODEL",
     "finite_steps": true,
     "finite_workers": true,
     "monotone_explicit_facts": true,
@@ -35,9 +40,24 @@
       "RESOURCE_CAPACITY_CHANGED"
     ],
     "no_static_task_count_cutoff": true,
-    "infeasible_or_invalid_contracts": "VALID_BUT_INFEASIBLE_CONTRACTS_FAIL_CLOSED_AFTER_COMPLETE_FINITE_SEARCH_AND_HAVE_ATTAINABLE_TERMINAL_SUCCESS_CEILING_ZERO__MALFORMED_CONTRACTS_ARE_OUTSIDE_PROTOCOL_DOMAIN"
+    "infeasible_or_invalid_contracts": "VALID_BUT_INFEASIBLE_CONTRACTS_FAIL_CLOSED_AFTER_COMPLETE_FINITE_SEARCH_AND_HAVE_ATTAINABLE_TERMINAL_SUCCESS_CEILING_ZERO__MALFORMED_CONTRACTS_ARE_OUTSIDE_PROTOCOL_DOMAIN",
+    "transport": {
+      "scope_relation": "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json",
+      "independent_temporal_transport": "canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_scope_receipt": "canonical/verification/DELEGATION_SCOPE_GATE_V2_V3_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "candidate_population_relation": "CANDIDATE_SUPERSET_PROVEN",
+      "environment_relation": "EXACT",
+      "information_relation": "EXACT_CANDIDATE_VISIBLE_INFORMATION",
+      "current_contract_registry_blob": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "historical_contract_registry_blob_verified_by_transport": "afa00109031d638fef32cc3fe10be18786605c39",
+      "current_delegation_contract_semantically_equal_to_historical": true
+    }
   },
   "formal_lemmas": [
+    {
+      "id": "L0_INDEPENDENT_PROTOCOL_SCOPE_TRANSPORT",
+      "statement": "Independent scope verification establishes the explicit finite task model as a candidate superset of TASK_TO_DELEGATION_GRAPH_001 with exact environment and candidate-visible information. Independent temporal transport pins that relation to the exact current candidate, oracle, and Opus55 family-protocol blobs. The current behavioral-registry delegation row is semantically identical to the historical row independently checked by that transport."
+    },
     {
       "id": "L1_FINITE_SEARCH_COMPLETENESS",
       "statement": "Because each declared step may appear at most once, only fact-adding applicable unused steps are extended, and the step set is finite, the candidate search tree is finite and reaches every simple executable fact-producing sequence. Exhaustion with no schedulable goal is therefore a complete impossibility result within the declared finite model."
@@ -64,17 +84,20 @@
     }
   ],
   "acceptance_consequence": {
-    "terminal_success": "CEILING_1_FOR_EVERY_FEASIBLE_VALID_CONTRACT__CEILING_0_AND_FAIL_CLOSED_FOR_EVERY_VALID_CONTRACT_PROVED_INFEASIBLE_UNDER_IDENTICAL_DECLARED_CONSTRAINTS",
-    "critical_coordination_violations": "ZERO_BY_CONSTRUCTION_OR_FAIL_CLOSED",
+    "terminal_success": "WITHIN_THE_INDEPENDENTLY_TRANSPORTED_FROZEN_PROTOCOL_SCOPE__BRAIN_REACHES_THE_EXACT_ATTAINABLE_OUTCOME_OF_THE_EXHAUSTIVE_FINITE_OBJECTIVE_MODEL_OR_FAILS_CLOSED_WHEN_THE_DECLARED_MODEL_HAS_NO_VALID_FEASIBLE_SUCCESS",
+    "critical_coordination_violations": "ZERO_BY_CONSTRUCTION_FOR_SUCCESSFUL_OUTPUTS__INVALID_OR_CONFLICTING_EVIDENCE_OWNERSHIP_FAILS_CLOSED",
     "claimed_speedup": "NEVER_OBTAINED_BY_TRADING_AWAY_EXACT_PLAN_CORRECTNESS",
-    "relation_to_opus": "ON_THE_SAME_DECLARED_PROTOCOL_CONSTRAINTS_NO_MATCHED_SYSTEM_CAN_EXCEED_1_ON_FEASIBLE_CASES_OR_SUCCEED_ON_PROVED_INFEASIBLE_CASES__BRAIN_THEREFORE_REACHES_THE_ATTAINABLE_TERMINAL_SUCCESS_CEILING_POINTWISE"
+    "relation_to_opus": "UNIVERSAL_FORMAL_SCOPE_BASIS_REPLACES_FINITE_SAMPLE_GENERALIZATION_ONLY_IF_INDEPENDENT_VERIFIER_CONFIRMS_SCOPE_TRANSPORT_AND_ALL_ALGORITHMIC_PREMISES"
   },
   "falsification_conditions": [
     "ANY_LOAD_BEARING_EXACT_INPUT_BLOB_CHANGES",
+    "CURRENT_DELEGATION_CONTRACT_SEMANTIC_SLICE_DIFFERS_FROM_THE_TRANSPORT_VERIFIED_HISTORICAL_SLICE",
+    "SCOPE_RELATION_CEASES_TO_BE_CANDIDATE_SUPERSET_OR_EXACT_ENVIRONMENT_INFORMATION",
+    "INDEPENDENT_TEMPORAL_TRANSPORT_NO_LONGER_PINS_CURRENT_CANDIDATE_ORACLE_SCOPE_PROTOCOL",
     "ANY_REQUIRED_FORMAL_PREMISE_IS_NOT_DERIVABLE_FROM_SOURCE",
-    "A_VALID_FINITE_CONTRACT_EXISTS_FOR_WHICH_CANDIDATE_AND_EXHAUSTIVE_ORACLE_DIFFER",
+    "A_FROZEN_PROTOCOL_CASE_WITHIN_THE_VERIFIED_SCOPE_EXISTS_WHERE_CANDIDATE_AND_EXHAUSTIVE_OBJECTIVE_MODEL_DIFFER",
     "SCHEDULER_STATE_REQUIRES_HISTORY_NOT_CAPTURED_BY_COMPLETED_TASK_SET",
-    "A_SUPPORTED_RECEIPT_BREAKS_THE_SHARED_EXACT_SOLVER_THEOREM"
+    "A_SUPPORTED_FROZEN_RECEIPT_CLASS_BREAKS_THE_SHARED_EXACT_SOLVER_THEOREM"
   ],
   "hard_nonclaims": [
     "NO_ACCEPTANCE_CREDIT_UNTIL_INDEPENDENT_CLEAN_ROOM_VERIFICATION_PASSES",
@@ -86,7 +109,7 @@
   ],
   "runtime": "canonical/runtime/delegation_universal_scope_certificate_v1.py",
   "tests": "canonical/tests/test_delegation_universal_scope_certificate_v1.py",
-  "next": "INDEPENDENTLY_MIRROR_EXACT_BLOBS_AND_RUN_FAIL_CLOSED_PROOF_CHECKS__IF_PASS_ACTIVATE_ONLY_THE_DELEGATION_SCOPE_COMPLETENESS_ATOM_AND_REDUCE_ACCEPTANCE_FIXED_POINT",
+  "next": "MIRROR_CURRENT_EXACT_PROOF_CONE_PLUS_HISTORICAL_REGISTRY_BLOB_TO_INDEPENDENT_VERIFIER__REJECT_ON_ANY_SCOPE_OR_SEMANTIC_DRIFT__ONLY_AFTER_PASS_MAY_THE_DELEGATION_SCOPE_ATOM_BE_PROPOSED_FOR_ACTIVATION",
   "new_reality_units": 0,
   "terminal_cases_replayed": 0,
   "incremental_spend_usd": 0,
