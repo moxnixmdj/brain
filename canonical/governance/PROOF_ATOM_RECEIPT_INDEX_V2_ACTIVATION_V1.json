@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V2_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V2_INDEX_BYTES__LIVE_CORPUS_RESULT_STILL_REQUIRES_SEALED_VERIFICATION__ZERO_CREDIT",
+  "objective": "Promote only the independently verified exact V2 receipt-index tooling as the active zero-reality candidate-discovery mechanism while keeping live-corpus semantic closure fail-closed.",
+  "verified_inputs": {
+    "runtime": {
+      "path": "canonical/runtime/proof_atom_receipt_index_v2.py",
+      "git_blob_sha": "7faf9f16acc2b18c501f0d08164833027d3d68fa"
+    },
+    "tests": {
+      "path": "canonical/tests/test_proof_atom_receipt_index_v2.py",
+      "git_blob_sha": "14103ef7c96330a281367409a5b76a0a74e7129d"
+    },
+    "governance": {
+      "path": "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V2.json",
+      "git_blob_sha": "b9803927a2e1f2935686f1d37382e4d2d8d968ed"
+    },
+    "basis_runtime": {
+      "path": "canonical/runtime/canonical_proof_atom_basis_v2.py",
+      "git_blob_sha": "5b5957f353edab6c86a34f947ef253099822b0d1"
+    },
+    "frontier": {
+      "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+      "git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+    },
+    "refinement_overlay": {
+      "path": "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json",
+      "git_blob_sha": "898e450c62c06cf6d1a4a3f826a255da9161a229"
+    }
+  },
+  "verification": {
+    "path": "canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pull_request": 1021,
+    "workflow_run_id": 37038712536,
+    "workflow_job_id": 110943228509,
+    "public_merge_commit": "86b415c65bcef971c0506d9ab20bcb92bfe3cdad"
+  },
+  "projection": {
+    "canonical_leaf_atoms": 40,
+    "atom_identity_namespace": "PA1",
+    "self_reflection_quarantine": [
+      "PROOF_ATOM_RECEIPT_INDEX_*",
+      "PROOF_ATOM_RECEIPT_SNAPSHOT_*",
+      "DECLARED_CONTENT_ADDRESSED_EVIDENCE_CORPUS_*"
+    ],
+    "semantic_credit_from_literal_match": false,
+    "live_corpus_snapshot_authority": false
+  },
+  "supersedes_for_candidate_discovery": "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V1.json",
+  "preserve_v1_as_historical_evidence": true,
+  "hard_rules": [
+    "EXACT_VERIFIED_BYTES_ONLY",
+    "PA1_ATOM_IDENTITY_PRESERVED",
+    "CANDIDATE_DISCOVERY_IS_NOT_SEMANTIC_PROOF",
+    "SELF_REFLECTION_QUARANTINE_MANDATORY",
+    "LIVE_CORPUS_RESULT_MUST_BE_SEALED_TO_CLEAN_GIT_COMMIT_TREE_AND_CONTENT_ADDRESSED_MANIFEST",
+    "NO_ATOM_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_ACTIVATION"
+  ],
+  "next": "VERIFY_AND_FREEZE_ONE_CURRENT_CLEAN_GIT_CORPUS_SNAPSHOT__THEN_REVIEW_ONLY_CONTENT_ADDRESSED_CANDIDATES__DISCHARGE_OR_FALSIFY_EACH_ATOM_EXPLICITLY__RUN_ACCEPTANCE_FIXED_POINT_AFTER_EACH_VERIFIED_FACT",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
