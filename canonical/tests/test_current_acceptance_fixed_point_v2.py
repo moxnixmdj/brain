@@ -18,7 +18,8 @@ assert ir["predicate_count"] == 38, ir
 assert ir["proved_predicate_count"] == 9, ir
 assert ir["unresolved_predicate_count"] == 29, ir
 actions={a["id"]:a for a in ir["actions"]}
-assert actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]["available_now"] is False, actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]\nassert actions["SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"]["available_now"] is True, actions["SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"]
+assert actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]["available_now"] is False, actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]
+assert actions["SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"]["available_now"] is True, actions["SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"]
 assert actions["RUN_COMPOSITION_COMPONENT_PROOF_SLICER"]["available_now"] is True, actions["RUN_COMPOSITION_COMPONENT_PROOF_SLICER"]
 
 cut=cut_evaluate(ir)
@@ -35,7 +36,8 @@ print(json.dumps({
     "status":"PASS",
     "proved_predicates":ir["proved_predicate_count"],
     "unresolved_predicates":ir["unresolved_predicate_count"],
-    "available_implication_algebra":actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]["available_now"],\n    "available_stronger_proof_search":actions["SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"]["available_now"],
+    "available_implication_algebra":actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]["available_now"],
+    "available_stronger_proof_search":actions["SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"]["available_now"],
     "available_composition_slicer":actions["RUN_COMPOSITION_COMPONENT_PROOF_SLICER"]["available_now"],
     "covered_predicates":cut["covered_predicate_count"],
     "selected_actions":cut["selected_actions"],
