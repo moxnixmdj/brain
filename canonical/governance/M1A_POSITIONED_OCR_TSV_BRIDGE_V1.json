@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_M1A_POSITIONED_OCR_TSV_BRIDGE_V1",
   "date": "2026-10-02",
-  "status": "IMPLEMENTED__INDEPENDENT_VERIFICATION_PENDING__SPECIFIC_M1A_INTERFACE_RESIDUAL_ONLY__ZERO_TERMINAL_CREDIT",
+  "status": "IMPLEMENTED__INDEPENDENT_PUBLIC_RUNNER_PASS__SPECIFIC_M1A_INTERFACE_RESIDUAL_CLOSED__ZERO_TERMINAL_CREDIT",
   "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
   "closes_candidate_residual": "M1A_PINNED_POSITIONED_OCR_TSV_BRIDGE",
   "runtime": "canonical/runtime/bound_capabilities/image_ocr_tesseract_positioned.py",
@@ -34,5 +34,8 @@
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
-}\n
+  "family_credit_delta": 0,
+  "independent_verification": "canonical/verification/M1A_POSITIONED_OCR_TSV_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "residual_state": "CLOSED_PREWAVE_INTERFACE_COMPONENT",
+  "next": "FREEZE_FRESH_CAD_CANDIDATE_DEPENDENCY_CONE_AND_POST_FREEZE_POPULATION__DO_NOT_REUSE_SPENT_FREECAD_PLATFORM_DRAWING_FOR_PROMOTION"
+}
