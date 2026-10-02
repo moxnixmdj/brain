@@ -445,9 +445,15 @@
           "class": "OFFICIAL_PRIMARY",
           "url": "https://arxiv.org/pdf/2406.19314",
           "excerpt": "we open-source the leaderboard, all questions, all code to run API and open-source models, all model outputs for 40 models, and all code to score the models ... scored automatically according to the objective ground truth without the use of an LLM judge."
+        },
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://livebench.ai/",
+          "retrieved_utc": "2026-10-02",
+          "excerpt": "Leaderboard, Instruction Following column: Claude 5.5 Opus Thinking Max Effort 65.7; open-weights rows above it include Qwen 3.8 Flash Next 77.1, Qwen3.8 27B 72.7, Kimi K3 71.4, DeepSeek V4.1 Flash 70.0, GLM-5.3 69.3, DeepSeek V4 Pro 0813 67.7."
         }
       ],
-      "note": "Questions rotate monthly, so a score is comparable only within one pinned release; repo has a hermetic pinned input and 58 checkers (scorer ready, generator missing).",
+      "note": "Questions rotate monthly, so a score is comparable only within one pinned release; repo has a hermetic pinned input and 58 checkers (scorer ready, generator missing). UPDATE: the official leaderboard shows at least ten open-weights models above the bar, so for this surface the capability gap is negative and the open generator question is the only gap (see 2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1 P13/P14). Release comparability (registry pins 2026-06-25) is unverified.",
       "repo_readiness": {
         "dataset": "PINNED_HERMETIC_INPUT_BINDING_READY",
         "scorer": "58_CHECKERS_HERMETIC_AND_MUTATION_PREFLIGHT_PASS",
@@ -534,7 +540,7 @@
     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
     "canonical/reasoning/2026-10-02_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1.json"
   ],
-  "conclusion": "No unilateral zero-cost route to the conjunction of the 15 public-bar predicates is currently evidenced, and the project's own route audit agrees (zero_cost_executable_surface_count = 0 of 14 surfaces). Eight predicates are owner-computed or owner-private: the project cannot measure them, and the only candidate route is the owner's stronger-proof substitution, for which no discharge mechanism is visible and which, by the project's own scope-transport prohibition, cannot imply a numeric bar on an unobservable private population from finite Brain-side evidence (an inference to be tested by the first BUILD_*_STRONGER_PROOF attempt; the repo's fallback for such predicates is to remain blocked). Four predicates are third-party runnable but all need a pinned donor-independent generator that is not bound in the repo (a pinned open-weights route exists on Cloudflare Workers AI, but its $0 allocation is orders of magnitude below one benchmark pass; see 2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1): the best CPU-hostable open model found scores 9.2% on Terminal-Bench (version unspecified), about 57 points below the TB4 bar, and the best open-weights model on an independent TB4 board (41.8%) needs GPU-class inference that is not zero-cost. Because the terminal certificate requires every predicate, the terminal goal cannot be made true by capability work inside the current constraints unless the owner-computed predicates are re-posed or proven by a mechanism not yet shown, and a pinned generator is bound. This is evidence about the formulation and constraints, not a claim that Opus-level capability is impossible in principle.",
+  "conclusion": "No unilateral zero-cost route to the conjunction of the 15 public-bar predicates is currently evidenced, and the project's own route audit agrees (zero_cost_executable_surface_count = 0 of 14 surfaces). Eight predicates are owner-computed or owner-private: the project cannot measure them, and the only candidate route is the owner's stronger-proof substitution, for which no discharge mechanism is visible and which, by the project's own scope-transport prohibition, cannot imply a numeric bar on an unobservable private population from finite Brain-side evidence (an inference to be tested by the first BUILD_*_STRONGER_PROOF attempt; the repo's fallback for such predicates is to remain blocked). Four predicates are third-party runnable but all need a pinned donor-independent generator that is not bound in the repo (a pinned open-weights route exists on Cloudflare Workers AI, but its $0 allocation is orders of magnitude below one benchmark pass; see 2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1): the best CPU-hostable open model found scores 9.2% on Terminal-Bench (version unspecified), about 57 points below the TB4 bar, and the best open-weights model on an independent TB4 board (41.8%) needs GPU-class inference that is not zero-cost. Because the terminal certificate requires every predicate, the terminal goal cannot be made true by capability work inside the current constraints unless the owner-computed predicates are re-posed or proven by a mechanism not yet shown, and a pinned generator is bound. This is evidence about the formulation and constraints, not a claim that Opus-level capability is impossible in principle. CORRECTION (added later in this PR): LiveBench Instruction Following is an exception to the generator and capability gap described for agentic surfaces; open-weights models already exceed its bar (census P13), making it the first credible zero-cost route to a real predicate.",
   "selected_route": "RECORD_THEORY_FALSIFICATION_EVIDENCE__REQUIRE_OWNER_LEVEL_RECONCILIATION_OF_PREDICATES_AND_CONSTRAINTS__SPEND_NO_REALITY_UNIT_ON_THE_8_OWNER_COMPUTED_PREDICATES__CONTINUE_ONLY_ZERO_REALITY_ACTIONS",
   "owner_level_levers_not_adopted": [
     {
@@ -607,5 +613,7 @@
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "authority_status": "PROVISIONAL_ANALYSIS__NO_CURRENT_BASE_SEVEN_LAYER_OBS_RECEIPT__ZERO_CANONICAL_AUTHORITY_UNTIL_OBS_AND_TRUSTED_GUARD",
+  "progress_credit": "ZERO__ACTIVITY_AND_CORRECTION_ONLY"
 }

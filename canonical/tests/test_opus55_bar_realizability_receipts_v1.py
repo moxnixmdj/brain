@@ -39,6 +39,7 @@ REQUIRED_RECEIPT_KEYS = (
     "evidence_refs", "conclusion", "selected_route",
     "rejected_material_alternatives", "uncertainties", "assumptions",
     "non_goals", "next_action", "supersession_conditions",
+    "authority_status", "progress_credit",
 )
 ZERO_FIELDS = (
     "capability_credit_delta", "family_credit_delta",
@@ -99,6 +100,9 @@ class ReceiptStructureTests(unittest.TestCase):
                     self.assertEqual(r[key], 0, key)
                 self.assertIs(r["execution_authority"], False)
                 self.assertIs(r["promotion_authority"], False)
+                # reporting rule: no consequential claim is canonical without current-base OBS + trusted guard
+                self.assertTrue(r["authority_status"].startswith("PROVISIONAL_ANALYSIS"), r["authority_status"])
+                self.assertTrue(r["progress_credit"].startswith("ZERO"), r["progress_credit"])
                 for key in ("material_premises", "rejected_material_alternatives",
                             "uncertainties", "non_goals", "supersession_conditions"):
                     self.assertTrue(r[key], key)
@@ -126,6 +130,14 @@ class BillingReceiptTests(unittest.TestCase):
         self.assertLess(p3["last_success_utc"], p3["first_failure_after_success_utc"])
         self.assertEqual(p3["runs_in_window_01_53_45_to_03_20_00"]["success"], 0)
         self.assertNotIn("EXACT_CAUSE_IS_BILLING_OR_QUOTA", json.dumps(r["rejected_material_alternatives"]))
+
+
+    def test_billing_receipt_follows_the_weak_surface_kill_rule(self):
+        r = _load(BILLING)
+        align = r["law_alignment"]
+        self.assertIn("EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1", align["law"])
+        self.assertIn("conflicts with hard $0", align["consequence"])
+        self.assertIn("retired surface", r["next_action"])
 
 
 class Tb4ReceiptTests(unittest.TestCase):
@@ -262,6 +274,12 @@ class PublicBarReceiptTests(unittest.TestCase):
             "the dischargeability concern must stay labelled as an inference",
         )
 
+    def test_livebench_row_records_the_open_model_update(self):
+        row = next(r for r in self.receipt["public_bar_rows"] if r["predicate_id"] == "LIVEBENCH_IF_GE_65_7")
+        self.assertTrue(any("livebench.ai" in e["url"] and e["class"] == "OFFICIAL_PRIMARY" for e in row["evidence"]))
+        self.assertIn("UPDATE", row["note"])
+        self.assertIn("CORRECTION", self.receipt["conclusion"])
+
     def test_no_row_claims_credit_or_execution(self):
         blob = json.dumps(self.receipt)
         self.assertNotRegex(blob, r'"(capability|family)_credit_delta":\s*[1-9]')
@@ -367,6 +385,53 @@ class CensusReceiptTests(unittest.TestCase):
         self.assertIn(f"${min(pilot):,.2f} to ${max(pilot):,.2f}", fact)
         self.assertIn("not measurements", fact)
         self.assertIn("decision_rule_proposal", ev)
+
+    def test_livebench_if_open_models_exceed_the_bar_arithmetic(self):
+        ev = self.premises["P13_LIVEBENCH_IF_OPEN_WEIGHTS_EXCEED_THE_BAR"]["evidence"]
+        bar = ev["bar"]
+        self.assertEqual(bar, 65.7)
+        above = [r for r in ev["rows"] if r["livebench_instruction_following"] > bar]
+        for r in ev["rows"]:
+            self.assertEqual(r["margin_vs_opus_5_5_bar"], round(r["livebench_instruction_following"] - bar, 1), r["model"])
+            self.assertTrue(r["open_weights"])
+        fact = self.premises["P13_LIVEBENCH_IF_OPEN_WEIGHTS_EXCEED_THE_BAR"]["fact"]
+        self.assertIn(f"{len(above)} open-weights rows", fact)
+        on_cf = [r for r in above if r["workers_ai_id_by_name_only"]]
+        self.assertTrue(on_cf)
+        pricing_fact = self.premises["P2_WORKERS_AI_PINNED_MODELS"]["fact"]
+        for r in on_cf:
+            self.assertIn(r["workers_ai_id_by_name_only"].split("/", 1)[1], pricing_fact, r["model"])
+        below = [r for r in ev["rows"] if r["livebench_instruction_following"] <= bar]
+        self.assertTrue(below, "context rows at or below the bar must be kept to avoid a cherry-picked list")
+        self.assertTrue(any("release date was not recorded" in c for c in ev["caveats"]))
+        self.assertIn("external capability provider", self.premises["P13_LIVEBENCH_IF_OPEN_WEIGHTS_EXCEED_THE_BAR"]["ownership_caveat"])
+
+    def test_livebench_if_pass_cost_grid_recomputes(self):
+        p = self.premises["P14_LIVEBENCH_IF_PASS_COST"]
+        ev = p["evidence"]
+        for g in ev["grid"]:
+            pin, pout = ev["models_neurons_per_million_tokens_input_output"][g["model"]]
+            neurons = g["questions"] * (ev["input_tokens_per_question"] * pin / 1e6 + g["output_tokens_per_question"] * pout / 1e6)
+            with self.subTest(model=g["model"], n=g["questions"], out=g["output_tokens_per_question"]):
+                self.assertAlmostEqual(g["neurons_per_pass"], neurons, delta=1)
+                self.assertAlmostEqual(g["free_days_per_pass"], neurons / ev["free_neurons_per_day"], delta=0.01)
+                self.assertAlmostEqual(g["paid_usd_per_pass_estimate"], neurons / 1000 * ev["usd_per_1000_neurons"], delta=0.01)
+        days = [g["free_days_per_pass"] for g in ev["grid"]]
+        usd = [g["paid_usd_per_pass_estimate"] for g in ev["grid"]]
+        self.assertIn(f"{min(days):.1f} to {max(days):.1f} days", p["fact"])
+        self.assertIn(f"${min(usd):.2f} to ${max(usd):.2f}", p["fact"])
+        concl = self.receipt["conclusion"]
+        self.assertIn(f"{min(days):.1f} to {max(days):.1f} days", concl)
+        self.assertIn(f"${min(usd):.2f} to ${max(usd):.2f}", concl)
+        self.assertIn("parametric grid, not a measurement", p["fact"])
+
+    def test_correction_and_reconciliation_are_explicit(self):
+        self.assertIn("was wrong", self.receipt["correction_notice"])
+        rec = self.receipt["reconciliation"]
+        self.assertEqual(rec["question"], "What is the shortest verified path from the current state to the terminal capability now?")
+        self.assertIn("LIVEBENCH_IF_GE_65_7", rec["answer"])
+        self.assertTrue(rec["verified_parts"] and rec["unverified_parts"])
+        self.assertTrue(any(r["relation"] == "CORRECTS" for r in self.receipt["relation_to_prior_work"]))
 
     def test_tb21_dev_set_is_name_disjoint_from_frozen_tb4_tasks(self):
         ev = self.premises["P11_TB21_IS_A_NAME_DISJOINT_DEV_SET"]["evidence"]

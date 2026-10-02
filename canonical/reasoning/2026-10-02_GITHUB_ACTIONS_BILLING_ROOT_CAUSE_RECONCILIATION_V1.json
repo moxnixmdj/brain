@@ -155,7 +155,7 @@
     "Executing any reality unit or granting capability or family credit.",
     "Judging whether any workflow's test logic is correct."
   ],
-  "next_action": "Account owner decides between (a) restoring Brain-hosted Actions by fixing payment or raising the spending limit as an explicit exception to the $0 rule, or (b) formally declaring the public runner the sole independent carrier and relocating guard/consistency enforcement there. Until then: zero-reality actions only, and no Brain-hosted red run is admissible evidence of anything.",
+  "next_action": "Treat Brain-hosted private-repo Actions as a retired surface (law section 7) and keep independent verification on the public runner. Moving guard and consistency enforcement to a surface that can run is the remaining design question; restoring billing is an owner exception to the $0 rule, not the default. Until then no Brain-hosted red run is admissible evidence of anything.",
   "supersession_conditions": [
     "Brain Actions jobs start executing steps again.",
     "GitHub changes the annotation semantics or evidence shows a second independent cause.",
@@ -166,5 +166,13 @@
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "authority_status": "PROVISIONAL_ANALYSIS__NO_CURRENT_BASE_SEVEN_LAYER_OBS_RECEIPT__ZERO_CANONICAL_AUTHORITY_UNTIL_OBS_AND_TRUSTED_GUARD",
+  "progress_credit": "ZERO__ACTIVITY_AND_CORRECTION_ONLY",
+  "law_alignment": {
+    "law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
+    "section_7_weak_surface_kill_rule": "A surface demonstrably unreliable for the required action, including 'subscription/payment boundaries incompatible with the mission', MUST be retired quickly; no further wall-clock on equivalent variations of the same broken surface.",
+    "consequence": "Option (b) (formally make the public runner the sole independent carrier and relocate guard/consistency enforcement) is the law-compliant default. Option (a) (restore Brain-hosted Actions by paying or raising a spending limit) conflicts with hard $0 incremental spend and would need an explicit owner exception.",
+    "also_relevant": "Section 13: user action only for a genuine external authority boundary, minimized to the smallest credential/legal step, after everything else is prepared."
+  }
 }

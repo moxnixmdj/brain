@@ -274,5 +274,7 @@
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "authority_status": "PROVISIONAL_ANALYSIS__NO_CURRENT_BASE_SEVEN_LAYER_OBS_RECEIPT__ZERO_CANONICAL_AUTHORITY_UNTIL_OBS_AND_TRUSTED_GUARD",
+  "progress_credit": "ZERO__ACTIVITY_AND_CORRECTION_ONLY"
 }

@@ -2,10 +2,10 @@
   "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
   "date": "2026-10-02",
   "decision_id": "2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1",
-  "status": "EXECUTED__PINNED_OPEN_WEIGHTS_GENERATOR_EXISTS_BUT_ZERO_COST_QUOTA_IS_1_TO_4_ORDERS_BELOW_ONE_BENCHMARK_PASS__GITHUB_MODELS_DISQUALIFIED__MEASURED_RESIDUAL_FOR_BRAIN_CONFIGURATION_RECORDED__ZERO_CREDIT",
+  "status": "EXECUTED__PROVISIONAL__TEXT_ONLY_SURFACES_HAVE_A_ZERO_COST_GENERATOR_AND_OPEN_MODELS_ALREADY_EXCEED_THE_LIVEBENCH_IF_BAR__AGENTIC_SURFACES_REMAIN_QUOTA_AND_CAPABILITY_BLOCKED__GITHUB_MODELS_DISQUALIFIED__ZERO_CREDIT",
   "canonical_base_commit": "6e4b739bcaba178b0965e7b5cda21e3dfd22be74",
   "facts_first_gathered_at_commit": "6e4b739bcaba178b0965e7b5cda21e3dfd22be74",
-  "real_objective": "Replace the vague claim 'no pinned generator is bound' with an exact, falsifiable statement of what blocks a donor-independent response generator for the four third-party-runnable public bars, so the owner can decide the one lever that matters.",
+  "real_objective": "Determine, per runnable public bar, whether a pinned donor-independent generator exists at zero spend and how large the remaining capability gap is, so the shortest verified path to a first real predicate can be named.",
   "governing_invariants": [
     "Hard $0 incremental spend unless the owner records an explicit exception.",
     "Models may be a substrate only if the Brain-owned configuration materially adds the capability (General Cognition Substrate Law V3); a substrate alone earns no ownership credit.",
@@ -26,12 +26,17 @@
     },
     {
       "id": "P2_WORKERS_AI_PINNED_MODELS",
-      "fact": "Cloudflare Workers AI lists strong open-weights models with exact IDs and neuron prices, including @cf/deepseek-ai/deepseek-v4-flash-0731, @cf/deepseek-ai/deepseek-v4-pro-0813, @cf/zai-org/glm-5.2, @cf/zai-org/glm-5.3, @cf/zai-org/glm-5.3-flash, @cf/moonshotai/kimi-k2.5, kimi-k2.6, kimi-k2.7-code, @cf/openai/gpt-oss-120b and @cf/nvidia/nemotron-3-120b-a12b. The DeepSeek IDs carry date suffixes (suggesting pinning); pinning semantics of the others were not verified.",
+      "fact": "Cloudflare Workers AI lists strong open-weights models with exact IDs and neuron prices, including @cf/qwen/qwen3.8-27b (27B instruction-tuned, vision, 262,144-token context, reasoning low/medium/xhigh with xhigh default per its model page), @cf/deepseek-ai/deepseek-v4-flash-0731, @cf/deepseek-ai/deepseek-v4-pro-0813, @cf/zai-org/glm-5.2, @cf/zai-org/glm-5.3, @cf/zai-org/glm-5.3-flash, @cf/moonshotai/kimi-k2.5, kimi-k2.6, kimi-k2.7-code, @cf/openai/gpt-oss-120b and @cf/nvidia/nemotron-3-120b-a12b. The DeepSeek IDs carry date suffixes (suggesting pinning); pinning semantics of the others were not verified.",
       "evidence": {
         "class": "OFFICIAL_PRIMARY",
         "url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
         "retrieved_utc": "2026-10-02",
-        "page_last_updated": "2026-10-01"
+        "page_last_updated": "2026-10-01",
+        "model_pages_read": [
+          "https://developers.cloudflare.com/workers-ai/models/qwen3.8-27b/",
+          "https://developers.cloudflare.com/workers-ai/models/glm-5.3/"
+        ],
+        "model_page_note": "Neither model page read states a Workers Paid requirement; the limits page says each model page states it, so absence is weak evidence only."
       },
       "resolution": "NON_DOMINATED_CANDIDATE"
     },
@@ -613,13 +618,397 @@
         ],
         "decision_rule_proposal": "Proceed to frozen runs only if the lower 95% bound of the measured uplift is at least the residual in P7 (FrontierCode) or P8 (TB4) for the surface being targeted; otherwise record the predicate as unattainable on this substrate."
       }
+    },
+    {
+      "id": "P13_LIVEBENCH_IF_OPEN_WEIGHTS_EXCEED_THE_BAR",
+      "fact": "On the official LiveBench leaderboard (retrieved 2026-10-02) Claude 5.5 Opus Thinking Max Effort scores 65.7 on Instruction Following, which is the registry bar (the registry pins it to the LiveBench 2026-06-25 release). 10 open-weights rows in the retrieved portion score above it, up to 77.1, and 3 of them map by name to Cloudflare Workers AI IDs: Qwen3.8 27B 72.7 (@cf/qwen/qwen3.8-27b); GLM-5.3 69.3 (@cf/zai-org/glm-5.3); DeepSeek V4 Pro 0813 67.7 (@cf/deepseek-ai/deepseek-v4-pro-0813). DeepSeek V4 Flash 0731 (65.5) is just below the bar. For this surface the capability gap of the best Workers-AI-hosted open model is negative (about +7 points above the bar), unlike the agentic surfaces in P7 and P8.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://livebench.ai/",
+        "retrieved_utc": "2026-10-02",
+        "rows": [
+          {
+            "model": "Qwen 3.8 Flash Next",
+            "livebench_instruction_following": 77.1,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": 11.4,
+            "workers_ai_id_by_name_only": null
+          },
+          {
+            "model": "Qwen 3.8 Max",
+            "livebench_instruction_following": 74.1,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": 8.4,
+            "workers_ai_id_by_name_only": null
+          },
+          {
+            "model": "Nemotron 3 Ultra 550B A55B",
+            "livebench_instruction_following": 73.4,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": 7.7,
+            "workers_ai_id_by_name_only": null
+          },
+          {
+            "model": "Qwen3.8 27B",
+            "livebench_instruction_following": 72.7,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": 7.0,
+            "workers_ai_id_by_name_only": "@cf/qwen/qwen3.8-27b"
+          },
+          {
+            "model": "Kimi K3",
+            "livebench_instruction_following": 71.4,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": 5.7,
+            "workers_ai_id_by_name_only": null
+          },
+          {
+            "model": "DeepSeek V4 Flash Vision Exp",
+            "livebench_instruction_following": 71.0,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": 5.3,
+            "workers_ai_id_by_name_only": null
+          },
+          {
+            "model": "Inkling xHigh Effort",
+            "livebench_instruction_following": 70.1,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": 4.4,
+            "workers_ai_id_by_name_only": null
+          },
+          {
+            "model": "DeepSeek V4.1 Flash Max Effort",
+            "livebench_instruction_following": 70.0,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": 4.3,
+            "workers_ai_id_by_name_only": null
+          },
+          {
+            "model": "GLM-5.3",
+            "livebench_instruction_following": 69.3,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": 3.6,
+            "workers_ai_id_by_name_only": "@cf/zai-org/glm-5.3"
+          },
+          {
+            "model": "DeepSeek V4 Pro 0813",
+            "livebench_instruction_following": 67.7,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": 2.0,
+            "workers_ai_id_by_name_only": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+          },
+          {
+            "model": "DeepSeek V4 Flash 0731",
+            "livebench_instruction_following": 65.5,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": -0.2,
+            "workers_ai_id_by_name_only": "@cf/deepseek-ai/deepseek-v4-flash-0731"
+          },
+          {
+            "model": "Kimi K2.6 Thinking",
+            "livebench_instruction_following": 64.4,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": -1.3,
+            "workers_ai_id_by_name_only": "@cf/moonshotai/kimi-k2.6"
+          },
+          {
+            "model": "GLM-5.2",
+            "livebench_instruction_following": 62.3,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": -3.4,
+            "workers_ai_id_by_name_only": "@cf/zai-org/glm-5.2"
+          },
+          {
+            "model": "Kimi K2.7 Code",
+            "livebench_instruction_following": 56.3,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": -9.4,
+            "workers_ai_id_by_name_only": "@cf/moonshotai/kimi-k2.7-code"
+          },
+          {
+            "model": "Qwen 3.6 27B",
+            "livebench_instruction_following": 53.2,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": -12.5,
+            "workers_ai_id_by_name_only": null
+          },
+          {
+            "model": "GLM-5.3 Flash",
+            "livebench_instruction_following": 52.8,
+            "open_weights": true,
+            "margin_vs_opus_5_5_bar": -12.9,
+            "workers_ai_id_by_name_only": "@cf/zai-org/glm-5.3-flash"
+          }
+        ],
+        "bar": 65.7,
+        "caveats": [
+          "Only the first part of the leaderboard page was retrieved; more rows may exist.",
+          "The snapshot's release date was not recorded; the registry pins the bar to the 2026-06-25 release, so cross-release comparison is invalid until the same release is confirmed.",
+          "LiveBench model names map to Workers AI IDs by name only; version identity and pinning are unverified.",
+          "The Opus 5.5 row and the open rows are measured by the same leaderboard, but effort settings differ by row."
+        ]
+      },
+      "scorer_state": "The scorer (58 checkers, prompt-level loose accuracy), the response adapter and the ID-set preflight are already independently verified in the repo (LIVEBENCH_IF_* public-runner verification receipts); the adapter contract is a list of {question_id, response} records.",
+      "ownership_caveat": "A raw open model that already exceeds the bar would be an 'external capability provider' under General Cognition Substrate Law V3 unless the Brain-owned operative configuration measurably adds value (ablation: configuration versus bare 'use model X'). A passing score would still close the atomic public-bar predicate; family promotion and ownership credit have separate tests."
+    },
+    {
+      "id": "P14_LIVEBENCH_IF_PASS_COST",
+      "fact": "A LiveBench IF pass is small: questions average about 1800 input tokens (LiveBench paper, IF tasks summarize, paraphrase, story generation, simplify) and a few hundred output tokens without reasoning. For the three Workers-AI-hosted models above the bar, one pass of 50 to 200 questions costs 8,045 to 445,818 neurons (0.8 to 44.6 days of the 10,000-neuron/day free allocation, or $0.09 to $4.90 at the paid rate). The high end assumes 5,000 output tokens per question (reasoning models; GLM-5.3 reasoning cannot be disabled and Qwen3.8-27B defaults to xhigh effort). The 2026 question count and token sizes are unknown; this is a parametric grid, not a measurement.",
+      "evidence": {
+        "class": "COMPUTED",
+        "input_tokens_per_question": 1800,
+        "input_token_source": {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://livebench.ai/livebench.pdf",
+          "excerpt": "instruction_following summarize/paraphrase/story_generation/simplify, 50 questions each, mean input tokens about 1,795 to 1,835"
+        },
+        "free_neurons_per_day": 10000,
+        "usd_per_1000_neurons": 0.011,
+        "models_neurons_per_million_tokens_input_output": {
+          "@cf/qwen/qwen3.8-27b": [
+            40909,
+            290909
+          ],
+          "@cf/zai-org/glm-5.3": [
+            127273,
+            400000
+          ],
+          "@cf/deepseek-ai/deepseek-v4-pro-0813": [
+            120000,
+            360000
+          ]
+        },
+        "grid": [
+          {
+            "model": "@cf/qwen/qwen3.8-27b",
+            "questions": 50,
+            "output_tokens_per_question": 300,
+            "neurons_per_pass": 8045,
+            "free_days_per_pass": 0.8,
+            "paid_usd_per_pass_estimate": 0.09
+          },
+          {
+            "model": "@cf/qwen/qwen3.8-27b",
+            "questions": 50,
+            "output_tokens_per_question": 1000,
+            "neurons_per_pass": 18227,
+            "free_days_per_pass": 1.82,
+            "paid_usd_per_pass_estimate": 0.2
+          },
+          {
+            "model": "@cf/qwen/qwen3.8-27b",
+            "questions": 50,
+            "output_tokens_per_question": 5000,
+            "neurons_per_pass": 76409,
+            "free_days_per_pass": 7.64,
+            "paid_usd_per_pass_estimate": 0.84
+          },
+          {
+            "model": "@cf/qwen/qwen3.8-27b",
+            "questions": 100,
+            "output_tokens_per_question": 300,
+            "neurons_per_pass": 16091,
+            "free_days_per_pass": 1.61,
+            "paid_usd_per_pass_estimate": 0.18
+          },
+          {
+            "model": "@cf/qwen/qwen3.8-27b",
+            "questions": 100,
+            "output_tokens_per_question": 1000,
+            "neurons_per_pass": 36455,
+            "free_days_per_pass": 3.65,
+            "paid_usd_per_pass_estimate": 0.4
+          },
+          {
+            "model": "@cf/qwen/qwen3.8-27b",
+            "questions": 100,
+            "output_tokens_per_question": 5000,
+            "neurons_per_pass": 152818,
+            "free_days_per_pass": 15.28,
+            "paid_usd_per_pass_estimate": 1.68
+          },
+          {
+            "model": "@cf/qwen/qwen3.8-27b",
+            "questions": 200,
+            "output_tokens_per_question": 300,
+            "neurons_per_pass": 32182,
+            "free_days_per_pass": 3.22,
+            "paid_usd_per_pass_estimate": 0.35
+          },
+          {
+            "model": "@cf/qwen/qwen3.8-27b",
+            "questions": 200,
+            "output_tokens_per_question": 1000,
+            "neurons_per_pass": 72909,
+            "free_days_per_pass": 7.29,
+            "paid_usd_per_pass_estimate": 0.8
+          },
+          {
+            "model": "@cf/qwen/qwen3.8-27b",
+            "questions": 200,
+            "output_tokens_per_question": 5000,
+            "neurons_per_pass": 305636,
+            "free_days_per_pass": 30.56,
+            "paid_usd_per_pass_estimate": 3.36
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "questions": 50,
+            "output_tokens_per_question": 300,
+            "neurons_per_pass": 17455,
+            "free_days_per_pass": 1.75,
+            "paid_usd_per_pass_estimate": 0.19
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "questions": 50,
+            "output_tokens_per_question": 1000,
+            "neurons_per_pass": 31455,
+            "free_days_per_pass": 3.15,
+            "paid_usd_per_pass_estimate": 0.35
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "questions": 50,
+            "output_tokens_per_question": 5000,
+            "neurons_per_pass": 111455,
+            "free_days_per_pass": 11.15,
+            "paid_usd_per_pass_estimate": 1.23
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "questions": 100,
+            "output_tokens_per_question": 300,
+            "neurons_per_pass": 34909,
+            "free_days_per_pass": 3.49,
+            "paid_usd_per_pass_estimate": 0.38
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "questions": 100,
+            "output_tokens_per_question": 1000,
+            "neurons_per_pass": 62909,
+            "free_days_per_pass": 6.29,
+            "paid_usd_per_pass_estimate": 0.69
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "questions": 100,
+            "output_tokens_per_question": 5000,
+            "neurons_per_pass": 222909,
+            "free_days_per_pass": 22.29,
+            "paid_usd_per_pass_estimate": 2.45
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "questions": 200,
+            "output_tokens_per_question": 300,
+            "neurons_per_pass": 69818,
+            "free_days_per_pass": 6.98,
+            "paid_usd_per_pass_estimate": 0.77
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "questions": 200,
+            "output_tokens_per_question": 1000,
+            "neurons_per_pass": 125818,
+            "free_days_per_pass": 12.58,
+            "paid_usd_per_pass_estimate": 1.38
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "questions": 200,
+            "output_tokens_per_question": 5000,
+            "neurons_per_pass": 445818,
+            "free_days_per_pass": 44.58,
+            "paid_usd_per_pass_estimate": 4.9
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+            "questions": 50,
+            "output_tokens_per_question": 300,
+            "neurons_per_pass": 16200,
+            "free_days_per_pass": 1.62,
+            "paid_usd_per_pass_estimate": 0.18
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+            "questions": 50,
+            "output_tokens_per_question": 1000,
+            "neurons_per_pass": 28800,
+            "free_days_per_pass": 2.88,
+            "paid_usd_per_pass_estimate": 0.32
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+            "questions": 50,
+            "output_tokens_per_question": 5000,
+            "neurons_per_pass": 100800,
+            "free_days_per_pass": 10.08,
+            "paid_usd_per_pass_estimate": 1.11
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+            "questions": 100,
+            "output_tokens_per_question": 300,
+            "neurons_per_pass": 32400,
+            "free_days_per_pass": 3.24,
+            "paid_usd_per_pass_estimate": 0.36
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+            "questions": 100,
+            "output_tokens_per_question": 1000,
+            "neurons_per_pass": 57600,
+            "free_days_per_pass": 5.76,
+            "paid_usd_per_pass_estimate": 0.63
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+            "questions": 100,
+            "output_tokens_per_question": 5000,
+            "neurons_per_pass": 201600,
+            "free_days_per_pass": 20.16,
+            "paid_usd_per_pass_estimate": 2.22
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+            "questions": 200,
+            "output_tokens_per_question": 300,
+            "neurons_per_pass": 64800,
+            "free_days_per_pass": 6.48,
+            "paid_usd_per_pass_estimate": 0.71
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+            "questions": 200,
+            "output_tokens_per_question": 1000,
+            "neurons_per_pass": 115200,
+            "free_days_per_pass": 11.52,
+            "paid_usd_per_pass_estimate": 1.27
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+            "questions": 200,
+            "output_tokens_per_question": 5000,
+            "neurons_per_pass": 403200,
+            "free_days_per_pass": 40.32,
+            "paid_usd_per_pass_estimate": 4.44
+          }
+        ],
+        "shared_allocation_caveat": "The free allocation is per account and shared with every other Workers AI use (for example the Superworker)."
+      }
     }
   ],
   "evidence_refs": [
     "canonical/agents/SUPERHERO_RUNTIME_CLOUDFLARE_V1.json",
     "canonical/reasoning/2026-10-02_PUBLIC_BAR_MEASURABILITY_AND_SUBSTRATE_FEASIBILITY_V1.json",
     "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
-    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md"
+    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
+    "canonical/governance/TERMINAL_PORTFOLIO_ZERO_COST_ACCESS_AUDIT_V1.json",
+    "canonical/governance/LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json",
+    "canonical/runtime/livebench_if_response_adapter.py",
+    "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md"
   ],
   "relation_to_prior_work": [
     {
@@ -631,10 +1020,20 @@
       "artifact": "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
       "relation": "AGREES",
       "detail": "Its zero_cost_executable_surface_count = 0 is consistent with P6: no zero-cost route reaches benchmark scale."
+    },
+    {
+      "artifact": "canonical/reasoning/2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1.json (earlier commits of this same PR)",
+      "relation": "CORRECTS",
+      "detail": "See correction_notice."
+    },
+    {
+      "artifact": "canonical/governance/TERMINAL_PORTFOLIO_ZERO_COST_ACCESS_AUDIT_V1.json",
+      "relation": "AGREES",
+      "detail": "The owner's audit classifies LiveBench Instruction Following as PUBLIC_QUESTIONS_AND_OBJECTIVE_VERIFIERS / PUBLIC_EXECUTABLE__BRAIN_ROUTE_INTEGRATION_REQUIRED."
     }
   ],
-  "conclusion": "A pinned, donor-independent, strong open-weights generator exists (Cloudflare Workers AI), so 'no generator exists' is false; but at $0 it is unusable at benchmark scale: the free allocation covers one agentic pass in 35 to 9,964 days (P6), GitHub Models is retired (P1) and keyed free tiers are request-capped (P4). Rate limits are not binding (about 4 to 5 hours per pass at 20 requests/minute, P10). The decisive lever is therefore the $0 rule itself: an estimated $4 to $1,096 per pass would buy a pinned generator. Money does not close the capability gap: the best open-weights baselines sit about 14.3 points (FrontierCode) and 24.6 points (TB4, independent harness) below the bars, and that residual is exactly what a Brain-owned configuration would have to supply and demonstrate.",
-  "selected_route": "RECORD_THE_SUBSTRATE_ROUTE_CENSUS__FRAME_LEVER_L2_AS_A_BOUNDED_STAGE_GATED_BUDGET_EXCEPTION_FOR_A_PINNED_WORKERS_AI_SUBSTRATE__MEASURE_BRAIN_CONFIGURATION_UPLIFT_ON_NON_FROZEN_DEVELOPMENT_TASKS_BEFORE_ANY_FROZEN_RUN",
+  "conclusion": "Two regimes, not one. (1) Text-only short-context surfaces, exemplified by LiveBench Instruction Following (about 1.8k input tokens per question): the bar (Opus 5.5 = 65.7) is exceeded on the official leaderboard by at least ten open-weights models (up to 77.1), three of which (Qwen3.8 27B 72.7, GLM-5.3 69.3, DeepSeek V4 Pro 0813 67.7) map to Cloudflare Workers AI IDs; a pass costs 0.8 to 44.6 days of the free allocation or $0.09 to $4.90 paid (P14), and the scorer, adapter and ID-set preflight are already independently verified in the repo. The missing elements are a generator route and a Brain-owned operative configuration, not money or capability. (2) Agentic long-horizon surfaces (TB4, TB-Science, AutomationBench-scale): the free allocation is 1.5 to 4 orders of magnitude below one pass (P6), and measured open-weights gaps are about 14.3 points (FrontierCode) and 24.6 points (TB4) (P7, P8); the lever there is budget plus a demonstrated configuration uplift (P12). GitHub Models is retired (P1). See correction_notice for what the earlier version got wrong.",
+  "selected_route": "RECORD_THE_CENSUS__NAME_LIVEBENCH_IF_AS_THE_SHORTEST_VERIFIED_PATH_TO_A_FIRST_REAL_PREDICATE__KEEP_AGENTIC_SURFACES_BEHIND_THE_STAGE_GATED_UPLIFT_EXPERIMENT",
   "proposed_stage_gate_for_owner_reconciliation_not_adopted": [
     "S0 (zero spend; partly done in P10/P11): read the per-model pages to learn which candidate IDs require Workers Paid and which are version-pinned, and check semantic (not only name) disjointness of Terminal-Bench 2.1 from the exposed TB4 ledger using metadata only.",
     "S1a (micro-pilot, owner-set hard cap; priced in P12): 12 trials on a few Terminal-Bench 2.1 tasks to measure tokens per trial, per-task variance and harness failure modes before sizing S1b.",
@@ -670,7 +1069,12 @@
     "The TB4 open-weights ceiling (P8) comes from a secondary aggregator and one harness; a stronger harness could move it by an unknown amount.",
     "Other keyed free tiers (Cerebras, Groq, NVIDIA NIM, Hugging Face, Google AI Studio) were not investigated.",
     "Terminal-Bench 2.1 vs frozen TB4 disjointness was checked by task name only; semantic overlap (renamed or derived tasks) was not examined and must be checked from metadata only before any use.",
-    "Cognition's 'Kimi K2.7' row is not verified to be the same model as Workers AI's kimi-k2.7-code; GLM 5.3 and the DeepSeek rows map by name."
+    "Cognition's 'Kimi K2.7' row is not verified to be the same model as Workers AI's kimi-k2.7-code; GLM 5.3 and the DeepSeek rows map by name.",
+    "The leaderboard snapshot's release date was not recorded; the registry pins the bar to the LiveBench 2026-06-25 release.",
+    "LiveBench names map to Workers AI IDs by name only; version identity and pinning are unverified.",
+    "Whether the candidate Workers AI models require the Workers Paid plan was not stated on the model pages read; if they do, the free-allocation route is unavailable.",
+    "The 2026 LiveBench IF question count and token sizes are unknown; P14 is a parametric grid anchored to the paper's IF task statistics.",
+    "Brain-owned operative configuration uplift is unmeasured; ownership credit needs an ablation (Substrate Law V3)."
   ],
   "assumptions": [
     "Prices and quotas on the retrieved pages are current as of 2026-10-02."
@@ -680,7 +1084,7 @@
     "Exposing any frozen or untouched benchmark case.",
     "Granting any capability or family credit."
   ],
-  "next_action": "Owner decision on lever L2 as a bounded, stage-gated budget exception (S0..S2 above); S1a/S1b are priced and powered in P12 (planning estimate, about $23 to $10,720 for the whole dev experiment). If declined, record in the mission ledger that the four third-party-runnable public bars have no zero-cost generator at benchmark scale and keep all four unexecuted.",
+  "next_action": "(1) Bind a generator route for LiveBench IF: the only external dependency is access to a Workers AI route (the owner's Worker or a scoped credential) for a pinned model from P13; no money is required if the pass runs inside the free allocation (P14). (2) Before any frozen exposure, measure tokens per question and the raw-versus-Brain-configured difference on non-frozen LiveBench IF questions from earlier releases. (3) One-shot frozen run only after global prewave admission, scored by the already verified scorer. (4) Agentic surfaces stay behind S0..S2. Everything here is PROVISIONAL_ANALYSIS until current-base OBS and the trusted guard.",
   "supersession_conditions": [
     "Cloudflare changes the free allocation or model list, or the owner supplies a different pinned substrate.",
     "A measured, harness-controlled TB4 or FrontierCode result for a pinned Workers AI model replaces P7/P8.",
@@ -691,5 +1095,27 @@
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "authority_status": "PROVISIONAL_ANALYSIS__NO_CURRENT_BASE_SEVEN_LAYER_OBS_RECEIPT__ZERO_CANONICAL_AUTHORITY_UNTIL_OBS_AND_TRUSTED_GUARD",
+  "progress_credit": "ZERO__ACTIVITY_AND_CORRECTION_ONLY",
+  "correction_notice": "The first version of this receipt headlined 'the decisive lever is the $0 rule' and applied the AA-Briefcase token scale (52M to 970M tokens per pass) and the TB4/FrontierCode residuals to all four third-party-runnable bars. For LiveBench Instruction Following that was wrong: a pass is about 0.4M tokens and open-weights models already exceed the bar (P13, P14). Regime 2 below (agentic surfaces) keeps the original analysis; regime 1 (text-only surfaces) is new.",
+  "reconciliation": {
+    "law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md section 15",
+    "question": "What is the shortest verified path from the current state to the terminal capability now?",
+    "answer": "There is no verified path to the terminal conjunction. The shortest verified path to the first real predicate closure is LIVEBENCH_IF_GE_65_7: (1) bind a pinned generator route from the P13 candidates; (2) measure tokens per question and raw-versus-Brain-configured difference on non-frozen LiveBench IF questions from earlier releases; (3) one-shot frozen run after global prewave admission; (4) independent scoring with the already verified scorer.",
+    "verified_parts": [
+      "Leaderboard scores and the 65.7 bar (official page, P13)",
+      "Scorer, adapter and ID-set preflight independently verified (repo receipts)",
+      "Workers AI model IDs and prices (official pricing page, P2)",
+      "Pass-cost arithmetic (recomputed in the test)"
+    ],
+    "unverified_parts": [
+      "Release comparability (registry pins 2026-06-25)",
+      "Whether the candidate Workers AI models require the Workers Paid plan",
+      "Model version pinning semantics",
+      "Brain-configuration uplift (unmeasured) and the ablation needed for ownership credit",
+      "Global prewave admission timing",
+      "The one external dependency: a Workers AI route (owner Worker or scoped credential) reachable from the public runner"
+    ]
+  }
 }
