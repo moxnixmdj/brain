@@ -3,8 +3,8 @@
   "date": "2026-10-02",
   "decision_id": "2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1",
   "status": "EXECUTED__PINNED_OPEN_WEIGHTS_GENERATOR_EXISTS_BUT_ZERO_COST_QUOTA_IS_1_TO_4_ORDERS_BELOW_ONE_BENCHMARK_PASS__GITHUB_MODELS_DISQUALIFIED__MEASURED_RESIDUAL_FOR_BRAIN_CONFIGURATION_RECORDED__ZERO_CREDIT",
-  "canonical_base_commit": "069d633ef86ec92c2342cf76cedbb63ee2710f1c",
-  "facts_first_gathered_at_commit": "069d633ef86ec92c2342cf76cedbb63ee2710f1c",
+  "canonical_base_commit": "6e4b739bcaba178b0965e7b5cda21e3dfd22be74",
+  "facts_first_gathered_at_commit": "6e4b739bcaba178b0965e7b5cda21e3dfd22be74",
   "real_objective": "Replace the vague claim 'no pinned generator is bound' with an exact, falsifiable statement of what blocks a donor-independent response generator for the four third-party-runnable public bars, so the owner can decide the one lever that matters.",
   "governing_invariants": [
     "Hard $0 incremental spend unless the owner records an explicit exception.",
@@ -365,6 +365,254 @@
         "url": "https://antigma.ai/eval",
         "excerpt": "Verified Public Leaderboard ... Same parameters: 89 tasks, 5 trials/task (22 official rows)"
       }
+    },
+    {
+      "id": "P12_PRICED_UPLIFT_EXPERIMENT",
+      "fact": "A paired uplift experiment on the 89 name-disjoint Terminal-Bench 2.1 tasks (raw pinned substrate versus Brain-configured system, same tasks) has, under a normal approximation with task-level clustering, a 95% CI half-width of about 6 to 10 points and about 92%+ power to detect the 14.3-point FrontierCode-sized residual when the per-task paired SD is at most 0.4. Estimated budget for 3 to 5 trials per task per arm (534 to 890 trials) is $23 to $10,720 across the two candidate models, two token mixes and a 0.57M to 10.7M tokens-per-trial proxy range (derived from AA-Briefcase per-task token usage). The spread is dominated by the unknown tokens per trial (about 19x), so a micro-pilot of 12 trials, costing about $0.51 to $40.29 at DeepSeek V4 Flash prices, should measure tokens per trial and per-task variance before the full experiment is sized. These are planning estimates with explicit assumptions, not measurements.",
+      "evidence": {
+        "class": "COMPUTED",
+        "micro_pilot_table": [
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M1_CACHE_HEAVY",
+            "total_trials": 12,
+            "tokens_per_trial_label": "LOW_0.57M_TOKENS_PER_TRIAL",
+            "estimated_usd": 0.51
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M1_CACHE_HEAVY",
+            "total_trials": 12,
+            "tokens_per_trial_label": "HIGH_10.7M_TOKENS_PER_TRIAL",
+            "estimated_usd": 9.49
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M2_CACHE_LIGHT",
+            "total_trials": 12,
+            "tokens_per_trial_label": "LOW_0.57M_TOKENS_PER_TRIAL",
+            "estimated_usd": 2.16
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M2_CACHE_LIGHT",
+            "total_trials": 12,
+            "tokens_per_trial_label": "HIGH_10.7M_TOKENS_PER_TRIAL",
+            "estimated_usd": 40.29
+          }
+        ],
+        "assumptions": [
+          "Tasks are independent clusters; the outcome of interest is the per-task paired difference of success rates.",
+          "The SD of per-task paired differences is assumed (0.30, 0.40, 0.50), not measured.",
+          "Tokens per trial are proxied from AA-Briefcase (52M..970M tokens over 91 tasks); Terminal-Bench trials may differ by an unknown factor.",
+          "Prices as in P6; excludes retries, a Workers Paid base fee and any debugging spend."
+        ],
+        "power_table": [
+          {
+            "sd_of_per_task_paired_difference": 0.3,
+            "true_uplift": 0.05,
+            "power_two_sided_alpha_0_05": 0.349,
+            "ci95_half_width_points": 6.2
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.3,
+            "true_uplift": 0.1,
+            "power_two_sided_alpha_0_05": 0.882,
+            "ci95_half_width_points": 6.2
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.3,
+            "true_uplift": 0.143,
+            "power_two_sided_alpha_0_05": 0.994,
+            "ci95_half_width_points": 6.2
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.3,
+            "true_uplift": 0.246,
+            "power_two_sided_alpha_0_05": 1.0,
+            "ci95_half_width_points": 6.2
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.4,
+            "true_uplift": 0.05,
+            "power_two_sided_alpha_0_05": 0.218,
+            "ci95_half_width_points": 8.3
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.4,
+            "true_uplift": 0.1,
+            "power_two_sided_alpha_0_05": 0.655,
+            "ci95_half_width_points": 8.3
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.4,
+            "true_uplift": 0.143,
+            "power_two_sided_alpha_0_05": 0.921,
+            "ci95_half_width_points": 8.3
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.4,
+            "true_uplift": 0.246,
+            "power_two_sided_alpha_0_05": 1.0,
+            "ci95_half_width_points": 8.3
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.5,
+            "true_uplift": 0.05,
+            "power_two_sided_alpha_0_05": 0.157,
+            "ci95_half_width_points": 10.4
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.5,
+            "true_uplift": 0.1,
+            "power_two_sided_alpha_0_05": 0.471,
+            "ci95_half_width_points": 10.4
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.5,
+            "true_uplift": 0.143,
+            "power_two_sided_alpha_0_05": 0.77,
+            "ci95_half_width_points": 10.4
+          },
+          {
+            "sd_of_per_task_paired_difference": 0.5,
+            "true_uplift": 0.246,
+            "power_two_sided_alpha_0_05": 0.996,
+            "ci95_half_width_points": 10.4
+          }
+        ],
+        "budget_table": [
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M1_CACHE_HEAVY",
+            "trials_per_task": 3,
+            "total_trials": 534,
+            "tokens_per_trial_label": "LOW_0.57M_TOKENS_PER_TRIAL",
+            "estimated_usd": 22.64
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M1_CACHE_HEAVY",
+            "trials_per_task": 3,
+            "total_trials": 534,
+            "tokens_per_trial_label": "HIGH_10.7M_TOKENS_PER_TRIAL",
+            "estimated_usd": 422.37
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M1_CACHE_HEAVY",
+            "trials_per_task": 5,
+            "total_trials": 890,
+            "tokens_per_trial_label": "LOW_0.57M_TOKENS_PER_TRIAL",
+            "estimated_usd": 37.74
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M1_CACHE_HEAVY",
+            "trials_per_task": 5,
+            "total_trials": 890,
+            "tokens_per_trial_label": "HIGH_10.7M_TOKENS_PER_TRIAL",
+            "estimated_usd": 703.95
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M2_CACHE_LIGHT",
+            "trials_per_task": 3,
+            "total_trials": 534,
+            "tokens_per_trial_label": "LOW_0.57M_TOKENS_PER_TRIAL",
+            "estimated_usd": 96.12
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M2_CACHE_LIGHT",
+            "trials_per_task": 3,
+            "total_trials": 534,
+            "tokens_per_trial_label": "HIGH_10.7M_TOKENS_PER_TRIAL",
+            "estimated_usd": 1793.02
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M2_CACHE_LIGHT",
+            "trials_per_task": 5,
+            "total_trials": 890,
+            "tokens_per_trial_label": "LOW_0.57M_TOKENS_PER_TRIAL",
+            "estimated_usd": 160.2
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M2_CACHE_LIGHT",
+            "trials_per_task": 5,
+            "total_trials": 890,
+            "tokens_per_trial_label": "HIGH_10.7M_TOKENS_PER_TRIAL",
+            "estimated_usd": 2988.36
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M1_CACHE_HEAVY",
+            "trials_per_task": 3,
+            "total_trials": 534,
+            "tokens_per_trial_label": "LOW_0.57M_TOKENS_PER_TRIAL",
+            "estimated_usd": 132.43
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M1_CACHE_HEAVY",
+            "trials_per_task": 3,
+            "total_trials": 534,
+            "tokens_per_trial_label": "HIGH_10.7M_TOKENS_PER_TRIAL",
+            "estimated_usd": 2470.35
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M1_CACHE_HEAVY",
+            "trials_per_task": 5,
+            "total_trials": 890,
+            "tokens_per_trial_label": "LOW_0.57M_TOKENS_PER_TRIAL",
+            "estimated_usd": 220.72
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M1_CACHE_HEAVY",
+            "trials_per_task": 5,
+            "total_trials": 890,
+            "tokens_per_trial_label": "HIGH_10.7M_TOKENS_PER_TRIAL",
+            "estimated_usd": 4117.25
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M2_CACHE_LIGHT",
+            "trials_per_task": 3,
+            "total_trials": 534,
+            "tokens_per_trial_label": "LOW_0.57M_TOKENS_PER_TRIAL",
+            "estimated_usd": 344.81
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M2_CACHE_LIGHT",
+            "trials_per_task": 3,
+            "total_trials": 534,
+            "tokens_per_trial_label": "HIGH_10.7M_TOKENS_PER_TRIAL",
+            "estimated_usd": 6432.05
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M2_CACHE_LIGHT",
+            "trials_per_task": 5,
+            "total_trials": 890,
+            "tokens_per_trial_label": "LOW_0.57M_TOKENS_PER_TRIAL",
+            "estimated_usd": 574.69
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M2_CACHE_LIGHT",
+            "trials_per_task": 5,
+            "total_trials": 890,
+            "tokens_per_trial_label": "HIGH_10.7M_TOKENS_PER_TRIAL",
+            "estimated_usd": 10720.09
+          }
+        ],
+        "decision_rule_proposal": "Proceed to frozen runs only if the lower 95% bound of the measured uplift is at least the residual in P7 (FrontierCode) or P8 (TB4) for the surface being targeted; otherwise record the predicate as unattainable on this substrate."
+      }
     }
   ],
   "evidence_refs": [
@@ -389,7 +637,8 @@
   "selected_route": "RECORD_THE_SUBSTRATE_ROUTE_CENSUS__FRAME_LEVER_L2_AS_A_BOUNDED_STAGE_GATED_BUDGET_EXCEPTION_FOR_A_PINNED_WORKERS_AI_SUBSTRATE__MEASURE_BRAIN_CONFIGURATION_UPLIFT_ON_NON_FROZEN_DEVELOPMENT_TASKS_BEFORE_ANY_FROZEN_RUN",
   "proposed_stage_gate_for_owner_reconciliation_not_adopted": [
     "S0 (zero spend; partly done in P10/P11): read the per-model pages to learn which candidate IDs require Workers Paid and which are version-pinned, and check semantic (not only name) disjointness of Terminal-Bench 2.1 from the exposed TB4 ledger using metadata only.",
-    "S1 (bounded budget B, cap set by the owner): run the raw pinned substrate and the Brain-configured system on the same non-frozen development tasks (the public Terminal-Bench 2.1 set, name-disjoint from the frozen TB4 tasks per P11) and estimate the configuration uplift with a confidence interval.",
+    "S1a (micro-pilot, owner-set hard cap; priced in P12): 12 trials on a few Terminal-Bench 2.1 tasks to measure tokens per trial, per-task variance and harness failure modes before sizing S1b.",
+    "S1b (bounded budget B, cap set by the owner after S1a): run the raw pinned substrate and the Brain-configured system on the same non-frozen development tasks (the public Terminal-Bench 2.1 set, name-disjoint from the frozen TB4 tasks per P11) and estimate the configuration uplift with a confidence interval.",
     "S2 (only if projected uplift is at least the residual in P7/P8): authorize frozen runs under the existing one-shot lease rules; otherwise record the predicate as unattainable on this substrate."
   ],
   "rejected_material_alternatives": [
@@ -431,7 +680,7 @@
     "Exposing any frozen or untouched benchmark case.",
     "Granting any capability or family credit."
   ],
-  "next_action": "Owner decision on lever L2 as a bounded, stage-gated budget exception (S0..S2 above). If declined, record in the mission ledger that the four third-party-runnable public bars have no zero-cost generator at benchmark scale and keep all four unexecuted.",
+  "next_action": "Owner decision on lever L2 as a bounded, stage-gated budget exception (S0..S2 above); S1a/S1b are priced and powered in P12 (planning estimate, about $23 to $10,720 for the whole dev experiment). If declined, record in the mission ledger that the four third-party-runnable public bars have no zero-cost generator at benchmark scale and keep all four unexecuted.",
   "supersession_conditions": [
     "Cloudflare changes the free allocation or model list, or the owner supplies a different pinned substrate.",
     "A measured, harness-controlled TB4 or FrontierCode result for a pinned Workers AI model replaces P7/P8.",

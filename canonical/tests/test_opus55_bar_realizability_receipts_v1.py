@@ -328,6 +328,46 @@ class CensusReceiptTests(unittest.TestCase):
         self.assertEqual(d["hours_at_20_rpm_high"], round(d["requests_high"] / 20 / 60, 1))
         self.assertLess(d["hours_at_20_rpm_high"], 24)  # the rate limit is not the binding constraint
 
+    def test_priced_uplift_experiment_recomputes_from_recorded_constants(self):
+        from statistics import NormalDist
+
+        ev = self.premises["P12_PRICED_UPLIFT_EXPERIMENT"]["evidence"]
+        consts = self.premises["P6_COMPUTED_FREE_TIER_VS_ONE_PASS"]["evidence"]["constants"]
+        z = NormalDist()
+        n = 89
+        for row in ev["power_table"]:
+            sd, d = row["sd_of_per_task_paired_difference"], row["true_uplift"]
+            se = sd / n ** 0.5
+            power = z.cdf(d / se - z.inv_cdf(0.975)) + z.cdf(-d / se - z.inv_cdf(0.975))
+            with self.subTest(sd=sd, uplift=d):
+                self.assertAlmostEqual(row["power_two_sided_alpha_0_05"], power, delta=0.0006)
+                self.assertAlmostEqual(row["ci95_half_width_points"], 1.96 * se * 100, delta=0.06)
+
+        tokens = {"LOW_0.57M_TOKENS_PER_TRIAL": 52e6 / 91, "HIGH_10.7M_TOKENS_PER_TRIAL": 970e6 / 91}
+
+        def usd_per_million(model, mix):
+            price = consts["models_neurons_per_million_tokens"][model]
+            share = consts["token_mixes"][mix]
+            return sum(price[k] * share[k] for k in share) / 1000 * consts["usd_per_1000_neurons"]
+
+        for row in ev["budget_table"]:
+            expected = row["total_trials"] * tokens[row["tokens_per_trial_label"]] / 1e6 * usd_per_million(row["model"], row["mix"])
+            with self.subTest(budget=row["model"], mix=row["mix"], k=row["trials_per_task"]):
+                self.assertEqual(row["total_trials"], 89 * row["trials_per_task"] * 2)
+                self.assertAlmostEqual(row["estimated_usd"], expected, delta=0.01)
+        for row in ev["micro_pilot_table"]:
+            expected = row["total_trials"] * tokens[row["tokens_per_trial_label"]] / 1e6 * usd_per_million(row["model"], row["mix"])
+            with self.subTest(pilot=row["mix"], tokens=row["tokens_per_trial_label"]):
+                self.assertEqual(row["total_trials"], 12)
+                self.assertAlmostEqual(row["estimated_usd"], expected, delta=0.01)
+        fact = self.premises["P12_PRICED_UPLIFT_EXPERIMENT"]["fact"]
+        usd = [r["estimated_usd"] for r in ev["budget_table"]]
+        pilot = [r["estimated_usd"] for r in ev["micro_pilot_table"]]
+        self.assertIn(f"${min(usd):,.0f} to ${max(usd):,.0f}", fact)
+        self.assertIn(f"${min(pilot):,.2f} to ${max(pilot):,.2f}", fact)
+        self.assertIn("not measurements", fact)
+        self.assertIn("decision_rule_proposal", ev)
+
     def test_tb21_dev_set_is_name_disjoint_from_frozen_tb4_tasks(self):
         ev = self.premises["P11_TB21_IS_A_NAME_DISJOINT_DEV_SET"]["evidence"]
         names21 = ev["tb21_task_names"]
