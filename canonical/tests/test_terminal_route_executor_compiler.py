@@ -40,6 +40,19 @@ class TerminalRouteExecutorCompilerTests(unittest.TestCase):
         })
         self.assertEqual(out["terminal_evidence_source"], "THE_FROZEN_T1_TERMINAL_OBSERVATIONS")
 
+    def test_native_terminal_surface_is_explicit_multiplex_binding(self):
+        out = _extract_multiplex_descriptor({
+            "terminal_surface": {
+                "portfolio": "T1",
+                "mechanical_gate_rule": "ANY_T1_CASE_USING_ROUTE_MUST_PASS_MECHANICAL_GATES",
+            },
+            "contamination": {
+                "oracle_or_threshold_edit_after_first_terminal_result": False,
+            },
+        })
+        self.assertEqual(out["binding_form"], "terminal_surface")
+        self.assertEqual(out["terminal_evidence_source"]["portfolio"], "T1")
+
     def _write(self, root: Path, rel: str, obj) -> None:
         p = root / rel
         p.parent.mkdir(parents=True, exist_ok=True)
