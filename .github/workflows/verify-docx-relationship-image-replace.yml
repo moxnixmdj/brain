@@ -1,5 +1,4 @@
 name: Verify DOCX relationship image replacement
-
 on:
   push:
     branches: [main]
@@ -8,10 +7,8 @@ on:
       - canonical/tests/test_docx_relationship_image_replace.py
       - .github/workflows/verify-docx-relationship-image-replace.yml
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -20,4 +17,4 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_docx_relationship_image_replace
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_docx_relationship_image_replace

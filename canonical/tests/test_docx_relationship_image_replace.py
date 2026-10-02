@@ -5,78 +5,92 @@ import zipfile
 
 from canonical.runtime.docx_relationship_image_replace import replace_image_by_relationship
 
-DOC = """<?xml version="1.0" encoding="UTF-8"?>
-<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+PNG1 = b"\x89PNG\r\n\x1a\nOLD"
+PNG2 = b"\x89PNG\r\n\x1a\nNEW"
+
+DOC = b'''<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
- xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
- xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+ xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
  <w:body><w:p><w:r><w:drawing><a:blip r:embed="rId5"/></w:drawing></w:r></w:p></w:body>
-</w:document>"""
+</w:document>'''
 
-RELS = """<?xml version="1.0" encoding="UTF-8"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+RELS = b'''<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
  <Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image1.png"/>
-</Relationships>"""
+</Relationships>'''
 
-CT = """<?xml version="1.0" encoding="UTF-8"?>
-<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+CT = b'''<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
  <Default Extension="png" ContentType="image/png"/>
-</Types>"""
+</Types>'''
 
-OLD_PNG = b"\x89PNG\r\n\x1a\nOLDPAYLOAD"
-NEW_PNG = b"\x89PNG\r\n\x1a\nNEWPAYLOAD"
-
-
-def make_docx(path: Path, *, referenced=True, rel_type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"):
-    doc = DOC if referenced else DOC.replace('r:embed="rId5"', 'r:embed="rId999"')
-    rels = RELS.replace("http://schemas.openxmlformats.org/officeDocument/2006/relationships/image", rel_type)
+def make_docx(path: Path, *, document=DOC, rels=RELS):
     with zipfile.ZipFile(path, "w") as z:
         z.writestr("[Content_Types].xml", CT)
-        z.writestr("word/document.xml", doc)
+        z.writestr("word/document.xml", document)
         z.writestr("word/_rels/document.xml.rels", rels)
-        z.writestr("word/media/image1.png", OLD_PNG)
-        z.writestr("word/styles.xml", "<styles/>")
+        z.writestr("word/media/image1.png", PNG1)
+        z.writestr("word/styles.xml", b"<styles/>")
 
+def members(path: Path):
+    with zipfile.ZipFile(path) as z:
+        return {n: z.read(n) for n in z.namelist()}
 
-class DocxRelationshipImageReplaceTests(unittest.TestCase):
-    def test_replaces_only_media_part(self):
+class Tests(unittest.TestCase):
+    def test_exact_relationship_replacement_changes_only_media(self):
         with tempfile.TemporaryDirectory() as td:
             src=Path(td)/"in.docx"; dst=Path(td)/"out.docx"
             make_docx(src)
-            out=replace_image_by_relationship(src,dst,source_part="word/document.xml",relationship_id="rId5",replacement_image=NEW_PNG)
-            self.assertEqual(out["status"],"PASS")
-            self.assertEqual(out["changed_members"],["word/media/image1.png"])
-            self.assertEqual(out["relationship_reference_count"],1)
-            with zipfile.ZipFile(src) as a, zipfile.ZipFile(dst) as b:
-                for name in a.namelist():
-                    if name=="word/media/image1.png":
-                        self.assertEqual(b.read(name),NEW_PNG)
-                    else:
-                        self.assertEqual(a.read(name),b.read(name))
-
-    def test_wrong_signature_fails_closed(self):
-        with tempfile.TemporaryDirectory() as td:
-            src=Path(td)/"in.docx"; dst=Path(td)/"out.docx"; make_docx(src)
-            out=replace_image_by_relationship(src,dst,source_part="word/document.xml",relationship_id="rId5",replacement_image=b"not png")
-            self.assertEqual(out["status"],"FAIL_CLOSED")
-            self.assertEqual(out["reason"],"REPLACEMENT_IMAGE_SIGNATURE_MISMATCH")
-            self.assertFalse(dst.exists())
+            before=members(src)
+            out=replace_image_by_relationship(
+                src,dst,source_part="word/document.xml",
+                relationship_id="rId5",replacement_image=PNG2,
+            )
+            self.assertEqual(out["status"],"PASS",out)
+            after=members(dst)
+            self.assertEqual(after["word/media/image1.png"],PNG2)
+            changed=[n for n in sorted(before) if before[n] != after[n]]
+            self.assertEqual(changed,["word/media/image1.png"])
+            self.assertTrue(out["layout_xml_preserved_byte_identical"])
+            self.assertTrue(out["relationship_xml_preserved_byte_identical"])
 
     def test_unreferenced_relationship_fails_closed(self):
         with tempfile.TemporaryDirectory() as td:
-            src=Path(td)/"in.docx"; dst=Path(td)/"out.docx"; make_docx(src,referenced=False)
-            out=replace_image_by_relationship(src,dst,source_part="word/document.xml",relationship_id="rId5",replacement_image=NEW_PNG)
-            self.assertEqual(out["status"],"FAIL_CLOSED")
+            src=Path(td)/"in.docx"; dst=Path(td)/"out.docx"
+            make_docx(src,document=DOC.replace(b'r:embed="rId5"',b'r:embed="rId9"'))
+            out=replace_image_by_relationship(
+                src,dst,source_part="word/document.xml",
+                relationship_id="rId5",replacement_image=PNG2,
+            )
+            self.assertEqual(out["status"],"FAIL_CLOSED",out)
             self.assertEqual(out["reason"],"RELATIONSHIP_ID_NOT_REFERENCED_BY_SOURCE_PART")
+            self.assertFalse(dst.exists())
+
+    def test_media_signature_mismatch_fails_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            src=Path(td)/"in.docx"; dst=Path(td)/"out.docx"
+            make_docx(src)
+            out=replace_image_by_relationship(
+                src,dst,source_part="word/document.xml",
+                relationship_id="rId5",replacement_image=b"not a png",
+            )
+            self.assertEqual(out["status"],"FAIL_CLOSED",out)
+            self.assertEqual(out["reason"],"REPLACEMENT_IMAGE_SIGNATURE_MISMATCH")
+            self.assertFalse(dst.exists())
 
     def test_non_image_relationship_fails_closed(self):
         with tempfile.TemporaryDirectory() as td:
             src=Path(td)/"in.docx"; dst=Path(td)/"out.docx"
-            make_docx(src,rel_type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink")
-            out=replace_image_by_relationship(src,dst,source_part="word/document.xml",relationship_id="rId5",replacement_image=NEW_PNG)
-            self.assertEqual(out["status"],"FAIL_CLOSED")
+            rels=RELS.replace(
+                b"/relationships/image",
+                b"/relationships/hyperlink",
+            )
+            make_docx(src,rels=rels)
+            out=replace_image_by_relationship(
+                src,dst,source_part="word/document.xml",
+                relationship_id="rId5",replacement_image=PNG2,
+            )
+            self.assertEqual(out["status"],"FAIL_CLOSED",out)
             self.assertEqual(out["reason"],"RELATIONSHIP_NOT_IMAGE")
-
+            self.assertFalse(dst.exists())
 
 if __name__=="__main__":
-    unittest.main()
+    unittest.main(verbosity=2)
