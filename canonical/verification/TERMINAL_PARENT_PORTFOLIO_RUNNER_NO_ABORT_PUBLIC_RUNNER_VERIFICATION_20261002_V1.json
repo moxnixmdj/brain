@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_RUNNER_NO_ABORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_NO_ABORT_T0_T1_T2_T3_PARENT_RUNNER__ZERO_TERMINAL_RESULTS",
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py": "431b62e503a6a179f19339ae5e0ab6948424a650",
+    "canonical/tests/test_terminal_parent_portfolio_runner_v1.py": "6ab2a7921a0bfa7f573cfd75a307c6fa4b2481d3",
+    "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json": "4e33f458b7e04e31f372f69cabc1cfbe5ee6507f"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 794,
+    "head_sha": "56d227b424136ef2f0fbc817eb41d4ebe323dae5",
+    "workflow_run_id": 36977657368,
+    "workflow_job_id": 110744885073,
+    "workflow_name": "Verify terminal parent portfolio runner V1",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_CURRENT_RUNNER_BLOB",
+    "EXACT_CURRENT_RUNNER_TEST_BLOB",
+    "EXACT_CURRENT_BINDING_BLOB",
+    "TRANSITIVE_PARENT_RUNTIME_DEPENDENCY_HASHES_MATCH",
+    "FULL_SENTINEL_REHEARSAL_PASS",
+    "ALL_FOUR_PARENT_PORTFOLIOS_REMAIN_EXECUTABLE_AFTER_ANY_PARENT_FAILURE",
+    "PARENT_FAILURE_RETURNS_FAIL_CLOSED_RECEIPTS_NOT_ORCHESTRATION_EXCEPTION",
+    "POST_FREEZE_SELECTION_ONLY",
+    "SAME_CASE_DIRECT_INSTRUMENTATION",
+    "HIDDEN_ORACLE_ISOLATED",
+    "NO_CASE_REPLACEMENT",
+    "NO_TUNING_REPLAY",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
