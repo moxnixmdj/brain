@@ -198,7 +198,9 @@
         "terminal_parent_binding_frozen": true,
         "independent_verification_pass": true
       },
-      "route_gate_evidence": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "route_gate_evidence": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "route_gate_authority": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "route_gate_verification": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
