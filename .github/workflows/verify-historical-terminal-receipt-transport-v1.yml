@@ -1,0 +1,28 @@
+name: Verify historical terminal receipt transport
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/HISTORICAL_TERMINAL_RECEIPT_TRANSPORT_V1.json"
+      - "canonical/runtime/historical_terminal_receipt_transport_v1.py"
+      - "canonical/tests/test_historical_terminal_receipt_transport_v1.py"
+      - "canonical/governance/OPUS55_REOPENED_OBJECTIVE_ROUTE_RESIDUAL_V1.json"
+      - ".github/workflows/verify-historical-terminal-receipt-transport-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run adversarial unit tests
+        run: python -m unittest canonical.tests.test_historical_terminal_receipt_transport_v1 -v
+      - name: Verify live historical receipt transport
+        run: python canonical/runtime/historical_terminal_receipt_transport_v1.py
