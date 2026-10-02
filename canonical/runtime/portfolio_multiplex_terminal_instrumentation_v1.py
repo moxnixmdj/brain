@@ -10,6 +10,8 @@ canonical.runtime.direct_route_terminal_executors_v1.
 """
 from __future__ import annotations
 
+import hashlib
+from pathlib import Path
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_PORTFOLIO_MULTIPLEX_TERMINAL_INSTRUMENTATION_V1"
@@ -68,6 +70,48 @@ FORBIDDEN_RECEIPT_KEYS = {
     "expected_failure_reason",
     "mutation_identity",
 }
+
+
+
+def _git_blob_sha(path: Path) -> str:
+    data = path.read_bytes()
+    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\\0" + data).hexdigest()
+
+
+def static_binding_preflight(root: Path = Path(".")) -> dict[str, Any]:
+    """Verify the seven exact frozen governance binding blobs before any parent wave."""
+    errors: list[str] = []
+    rows: dict[str, dict[str, Any]] = {}
+    for behavior_id, binding in sorted(BINDINGS.items()):
+        path = root / binding["binding"]
+        if not path.is_file():
+            errors.append("BINDING_MISSING:" + behavior_id)
+            rows[behavior_id] = {"path": binding["binding"], "exists": False}
+            continue
+        got = _git_blob_sha(path)
+        expected = binding["binding_blob"]
+        ok = got == expected
+        if not ok:
+            errors.append("BINDING_BLOB_DRIFT:" + behavior_id)
+        rows[behavior_id] = {
+            "path": binding["binding"],
+            "exists": True,
+            "expected_blob": expected,
+            "actual_blob": got,
+            "match": ok,
+        }
+    return {
+        "schema": SCHEMA,
+        "status": "PASS" if not errors else "FAIL_CLOSED",
+        "pass": not errors,
+        "binding_count": len(BINDINGS),
+        "bindings": rows,
+        "errors": errors,
+        "execution_authority": False,
+        "promotion_authority": False,
+        "capability_credit_delta": 0,
+        "family_credit_delta": 0,
+    }
 
 
 def bound_behavior_ids() -> tuple[str, ...]:
