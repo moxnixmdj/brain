@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_CAUSAL_SOUNDNESS_VETO_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_COUNTEREXAMPLE__V5_SCOPE_SUPERSET_MUST_FAIL_CLOSED_IF_REPRODUCED__INDEPENDENT_VERIFICATION_PENDING__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "counterexample_runtime": "canonical/runtime/p1_v5_causal_soundness_veto_v1.py",
+  "tests": "canonical/tests/test_p1_v5_causal_soundness_veto_v1.py",
+  "falsified_route": "canonical/governance/P1_V5_DIRECT_SURFACE_SCOPE_SUPERSET_V1.json",
+  "falsified_assumption": "VISIBLE_FAILED_ROOT_IS_CAUSAL_WHEN_IT_IS_AN_EARLY_ANCESTOR",
+  "construction": "Early SCOPE failure lies on one arm of an ALTERNATIVE dependency whose other arm is healthy; later STATE_TRANSITION failure alone blocks terminal success.",
+  "executable_ground_truth": {
+    "repair_A1_SCOPE_rescues": false,
+    "repair_A4_STATE_TRANSITION_rescues": true
+  },
+  "expected_v5_failure": "V5 identifies A1/SCOPE even though its repair does not rescue and A4 is the unique rescuing defect.",
+  "hard_rule": "SCOPE_SUPERSET_TRANSPORT_IS_FORBIDDEN_WHILE_THIS_CAUSAL_SOUNDNESS_COUNTEREXAMPLE_REPRODUCES",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
