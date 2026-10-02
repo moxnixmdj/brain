@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ENGINEERING_FEATURE_NOTATION_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_NARROW_COMPONENT__ZERO_FAMILY_CREDIT",
+  "parent_residual": "M1A_COMPOUND_VISUAL_FEATURE_SEMANTICS_AND_GD_AND_T",
+  "artifact": "canonical/runtime/engineering_feature_notation.py",
+  "tests": "canonical/tests/test_engineering_feature_notation.py",
+  "verification": {
+    "workflow": ".github/workflows/verify-engineering-feature-notation.yml",
+    "workflow_run_id": 36943717516,
+    "conclusion": "success"
+  },
+  "verified_scope": [
+    "OPTIONAL_FEATURE_QUANTITY_PREFIX",
+    "DIAMETER_HOLE_WITH_THRU_OR_DEPTH",
+    "COUNTERBORE_DIAMETER_AND_DEPTH",
+    "COUNTERSINK_DIAMETER_AND_ANGLE",
+    "ISO_METRIC_THREAD_WITH_OPTIONAL_DEPTH",
+    "RADIUS_FEATURE",
+    "DATUM_DECLARATION",
+    "OCR_FRIENDLY_TEXT_GDT_POSITION_FLATNESS_STRAIGHTNESS_PERPENDICULARITY_PARALLELISM_CIRCULARITY_CYLINDRICITY_PROFILE_LINE_PROFILE_SURFACE_CIRCULAR_RUNOUT_TOTAL_RUNOUT",
+    "FORM_CONTROL_DATUM_REJECTION_AND_ORIENTATION_RUNOUT_DATUM_REQUIREMENT",
+    "UNSUPPORTED_NOTATION_FAILS_CLOSED"
+  ],
+  "remaining": [
+    "MATERIAL_CONDITION_MODIFIERS_MMC_LMC_RFS",
+    "DATUM_FEATURE_MODIFIERS_AND_COMPOSITE_FRAMES",
+    "FREE_STATE_PROJECTED_TOLERANCE_ZONE_AND_SPECIALIZED_GDT",
+    "SEMANTIC_ASSOCIATION_OF_PARSED_FRAME_TO_TARGET_FEATURE_WHEN_GEOMETRIC_LEADER_IS_AMBIGUOUS"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
