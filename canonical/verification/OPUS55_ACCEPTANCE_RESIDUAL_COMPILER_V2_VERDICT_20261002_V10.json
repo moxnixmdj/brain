@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V10",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_PROVED__0_OPEN__29_BLOCKED__DELEGATION_3_OF_3_PROVED__TB4_ATTAINABILITY_IMPOSSIBLE__ZERO_CREDIT",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json",
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 9,
+  "open_predicate_count": 0,
+  "blocked_predicate_count": 29,
+  "refuted_predicate_count": 0,
+  "fully_proved_residual_family_count": 2,
+  "newly_proved_predicate": {
+    "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "proof_kind": "ABSOLUTE_CEILING",
+    "source": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
+  },
+  "newly_fully_proved_family": {
+    "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "predicate_count": 3,
+    "proved": 3,
+    "blocked": 0
+  },
+  "blocker_partition": {
+    "current_tb4_public_bar_impossible": 1,
+    "other_public_fixed_bars_not_score_ready": 14,
+    "matched_or_scope_audit_without_exact_comparator_or_full_scope_stronger_proof": 11,
+    "direct_judgment_source_blockers": 2,
+    "composition_dependency_blocker": 1,
+    "total": 29
+  },
+  "tb4_attainability": {
+    "source": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+    "state": "IMPOSSIBLE",
+    "maximum_attainable_successes": 180,
+    "required_successes": 220,
+    "reality_execution_authorized": false
+  },
+  "authorized_acceptance_case_actions": [],
+  "terminal_promotion_allowed": false,
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 878,
+    "pull_request_head": "2aa39bd77069a37a330bd25c7ee617d37a1fee94",
+    "merge_commit": "d307d7749c89fb1a5c4a5f90ee93e2fc04d9488c",
+    "workflow_run_id": 37006759313,
+    "workflow_job_id": 110836741133,
+    "conclusion": "success",
+    "exact_input_blobs_verified": true,
+    "exact_residual_replay": true,
+    "exact_counts_verified": true,
+    "delegation_three_of_three_verified": true,
+    "delegation_removal_reopens_family": true,
+    "terminal_promotion_false_verified": true
+  },
+  "fresh_acceptance_cases_consumed_by_this_recompile": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "CURRENT_EVIDENCE_LEDGER_CONTROLS_ATOMIC_COUNTS__PROVED_PREDICATES_DELETE_WORK__EXACT_TERMINAL_EVIDENCE_CONTINUITY_MAY_DISCHARGE_A_MATCHED_PREDICATE_ONLY_THROUGH_AN_INDEPENDENTLY_VERIFIED_FULL_SCOPE_CEILING_WITNESS__ATTAINABILITY_PRECEDES_REALITY__NO_CASE_EXECUTION_WHILE_AUTHORIZED_ACTION_SET_EMPTY"
+}
