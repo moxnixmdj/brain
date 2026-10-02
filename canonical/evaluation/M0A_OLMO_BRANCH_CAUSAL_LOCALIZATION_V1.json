@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_BEFORE_BRANCH_ABLATION_RESULTS__DEV_ONLY__ZERO_CAPABILITY_CREDIT",
+  "parent_result": "canonical/capabilities/opus55/M0A_OLMO_LAYER_CAUSAL_LOCALIZATION_RESULT_001.json",
+  "donor": {
+    "repository": "allenai/OLMo-2-0425-1B",
+    "resolved_hf_sha": "a1847dff35000b4271fa70afc5db10fd29fedbdf"
+  },
+  "source_probe": "canonical/evaluation/M0A_OLMO_CONTRASTIVE_DEV_V1.json",
+  "admissible_layers": [1, 3, 4, 6, 11],
+  "branches": ["SELF_ATTENTION_OUTPUT", "MLP_OUTPUT"],
+  "intervention": "FOR_EACH_ADMISSIBLE_LAYER_AND_BRANCH_ZERO_ONLY_THAT_BRANCH_OUTPUT__PRESERVE_ALL_OTHER_LAYER_COMPUTATION",
+  "metrics": [
+    "CORRECT_PREFERENCE_COUNT_OF_7",
+    "MEAN_CORRECT_MINUS_WRONG_TOKEN_NORMALIZED_LOGPROB_MARGIN",
+    "PER_CASE_MARGIN_DELTA_VS_BASELINE",
+    "BASELINE_CORRECT_TO_WRONG_FLIPS"
+  ],
+  "candidate_rule": {
+    "material_branch": "BASELINE_MEAN_MARGIN_MINUS_ABLATED_MEAN_MARGIN_GE_0_10_OR_ANY_BASELINE_CORRECT_CASE_FLIPS_WRONG",
+    "ranking": "DESCENDING_BASELINE_MINUS_ABLATED_MEAN_MARGIN",
+    "no_material_branch_in_material_layer": "CLASSIFY_LAYER_EFFECT_AS_INTERACTION_OR_DISTRIBUTED_WITHIN_LAYER__DO_NOT_INVENT_BRANCH_CAPSULE"
+  },
+  "followup_rule": "ONLY_MATERIAL_BRANCHES_MAY_ADVANCE_TO_HEAD_CHANNEL_OR_MLP_SUBSPACE_LOCALIZATION__NO_HELDOUT_EXPOSURE",
+  "known_boundary": "FORMER_LATTER_BASELINE_FAILURE_IS_NOT_COUNTED_AS_A_SUCCESS_SIGNAL_TO_PRESERVE",
+  "heldout_exposed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
