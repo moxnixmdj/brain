@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_TRAJECTORY_FAILURE_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PREWAVE_PASS__INFORMATION_BOUNDARY_AND_COUNTERFACTUAL_RESCUE_BEHAVIOR_VERIFIED__WHOLE_CONTRACT_SCOPE_NOT_YET_ADMITTED",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 535,
+  "public_merge_commit": "1098178c617cce0faf154dbc3335c007b2159e09",
+  "workflow_run_id": 36958881226,
+  "workflow_job_id": 110687895110,
+  "workflow_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/runtime/trajectory_failure_information_safe_candidate.py": "9ede7fdeaf82d9a8c59fb9eca1aa99fff2a5cd87",
+    "canonical/runtime/trajectory_failure_information_safe_proof.py": "3bc29023ea04d2dfb4dd0474efff2e267e0f7e8d",
+    "canonical/tests/test_trajectory_failure_information_safe.py": "8fff062484df34afcb89f1ae0e5a046a0d7d641e"
+  },
+  "verified": [
+    "CANDIDATE_SOURCE_DOES_NOT_IMPORT_ORACLE_OR_PROOF_MODULE",
+    "IDENTIFIABLE_COUNTERFACTUAL_RESCUE_CASES_PASS",
+    "NONIDENTIFIABLE_MULTIPLE_RESCUER_CASES_ABSTAIN_AS_AMBIGUOUS",
+    "EARLIEST_VIOLATION_SHORTCUT_FAILS",
+    "FORCED_UNIQUE_CAUSE_ON_AMBIGUOUS_CASE_FAILS"
+  ],
+  "test_count": 5,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "limitation": "CURRENT_ROUTE_SELECTS_AMONG_PREDECLARED_FALSIFIABLE_REPAIR_ACTIONS__FULL_REPAIR_TARGET_NOMINATION_SCOPE_AND_SCOPE_EQUIVALENT_GATE_V2_REMAIN_OPEN"
+}
