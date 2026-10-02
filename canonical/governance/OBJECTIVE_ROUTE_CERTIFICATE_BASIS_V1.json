@@ -21,14 +21,14 @@
     {
       "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
       "binding_path": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
-      "binding_blob_sha": "36e96b9dc90301fe89f7a8f963c24920f6c6595e",
+      "binding_blob_sha": "28e955d5d593d1de9cfab0f9cdcdae732fd315f1",
       "residual_validator": "canonical/runtime/browser_t2_objective_binding_validator.py",
       "residual_tests": "canonical/tests/test_browser_t2_objective_binding_validator.py"
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
       "binding_path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
-      "binding_blob_sha": "c68ab0f9480dacc758171df74e891e1ac817c7d3",
+      "binding_blob_sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
       "residual_validator": "canonical/runtime/tool_discovery_t2_t3_objective_binding_validator.py",
       "residual_tests": "canonical/tests/test_tool_discovery_t2_t3_objective_binding_validator.py"
     },
