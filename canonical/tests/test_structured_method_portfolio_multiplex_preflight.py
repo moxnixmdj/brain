@@ -40,6 +40,11 @@ def valid():
     }
 
 class Tests(unittest.TestCase):
+    def test_live_binding(self):
+        root=Path(__file__).resolve().parents[2]
+        out=evaluate(root)
+        self.assertTrue(out["pass"],out)
+
     def run_fixture(self,mutate=None,missing_dep=None):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td)
