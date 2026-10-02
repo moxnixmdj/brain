@@ -78,6 +78,10 @@ def case_id(behavior_id: str, slot: int) -> str:
         raise ValueError("SLOT_OUT_OF_RANGE")
     if behavior_id == SA_CCR_ID:
         return f"{SA_CCR_ID}::SA_CCR_TERMINAL_POPULATION_V1::slot::{slot}"
+    if behavior_id == DELEGATION_ID:
+        # No route-specific case-id override exists for delegation; the
+        # immutable V2 selection kernel's generic case-id rule therefore applies.
+        return f"{DELEGATION_ID}::{VERSIONS[DELEGATION_ID]}::slot::{slot}"
     return f"{VERSIONS[behavior_id]}::slot::{slot}"
 
 
