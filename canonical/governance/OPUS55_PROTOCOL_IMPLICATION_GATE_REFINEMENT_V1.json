@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__CATALOG_AND_CONTAMINATION_VERIFIED__ATOM_METRIC_BINDINGS_OPEN__ZERO_CREDIT",
+  "status": "ACTIVE_SCOPE_SAFE_V2__CATALOG_AND_CONTAMINATION_VERIFIED__ATOM_METRIC_AND_SCOPE_BINDINGS_OPEN__ZERO_CREDIT",
   "objective": "Prevent independently verified witness-catalog normalization from being mistaken for the stronger witness-side semantic inputs required by protocol implication/scope algebra.",
   "authority": {
     "witness_normalization": "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V1.json",
@@ -18,7 +18,8 @@
     "brain_witness_contamination_admissibility_independent_pass": true,
     "semantic_implication_verified": false,
     "protocol_implication_scope_algebra_available": false,
-    "scope_safe_algebra_v2_independent_pass": true
+    "scope_safe_algebra_v2_independent_pass": true,
+    "brain_witness_target_scope_relations_independent_pass": false
   },
   "basis": [
     "THE_NORMALIZED_9_WITNESS_CATALOG_IS_INDEPENDENTLY_VERIFIED",
@@ -38,7 +39,7 @@
     "V1_SCOPE_INFERENCE_PATH_IS_SUPERSEDED_FOR_NEW_IMPLICATION_WORK_BY_INDEPENDENTLY_VERIFIED_V2",
     "V2_MAY_NOT_RUN_TO_POSITIVE_ACCEPTANCE_WITHOUT_EXPLICIT_INDEPENDENT_SCOPE_RELATION_AND_ATOM_METRIC_BINDINGS"
   ],
-  "next": "BUILD_ONLY_EXPLICIT_CONTENT_ADDRESSED_WITNESS_TO_TARGET_ATOM_METRIC_AND_SCOPE_BINDINGS__INDEPENDENTLY_VERIFY__THEN_RUN_SCOPE_SAFE_PROTOCOL_IMPLICATION_ALGEBRA_V2",
+  "next": "BUILD_ONLY_EXPLICIT_CONTENT_ADDRESSED_WITNESS_TO_TARGET_ATOM_METRIC_BINDINGS_AND_EXACT_OR_SUPERSET_SCOPE_RELATIONS__INDEPENDENTLY_VERIFY__THEN_RUN_SCOPE_SAFE_PROTOCOL_IMPLICATION_ALGEBRA_V2",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
