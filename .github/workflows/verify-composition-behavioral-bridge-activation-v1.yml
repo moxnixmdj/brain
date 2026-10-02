@@ -1,0 +1,20 @@
+name: Verify composition behavioral bridge activation v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V1.json"
+      - "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_V1.json"
+      - "canonical/tests/test_composition_behavioral_bridge_activation_v1.py"
+      - ".github/workflows/verify-composition-behavioral-bridge-activation-v1.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python canonical/tests/test_composition_behavioral_bridge_activation_v1.py
