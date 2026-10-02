@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_SCOPE_AUDIT__ALL_UNKNOWN_DOMAIN_CONTRACTS_BOUND__TERMINAL_RESULTS_PENDING",
+  "portfolio": "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO",
+  "family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "frozen_family_dimensions": [
+    "UNFAMILIAR_ONTOLOGY_ACQUISITION",
+    "NOVEL_MECHANISM_INFERENCE",
+    "NEW_TOOL_DISCOVERY",
+    "CROSS_DOMAIN_TRANSFER",
+    "CALIBRATED_UNKNOWN_OR_ABSTENTION"
+  ],
+  "frozen_behavioral_contracts": [
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+  ],
+  "direct_route_bindings": [
+    {
+      "behavior": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "routes": [
+        "canonical/capabilities/opus55/M4_BOUNDED_RESEARCH_FRONTIER_001.json",
+        "canonical/capabilities/opus55/SHARED_DECISION_PRIMITIVES_001.json"
+      ],
+      "proof_strength": 3,
+      "terminal_population_requirement": "MUST_EXERCISE_QUERY_FROM_GAP_SOURCE_SELECTION_COVERAGE_STOP_AND_CROSS_DOMAIN_TRANSFER"
+    },
+    {
+      "behavior": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "routes": [
+        "canonical/verification/REQUIREMENT_ACCEPTANCE_COMPILER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json"
+      ],
+      "proof_strength": 3,
+      "terminal_population_requirement": "MUST_EXERCISE_UNFAMILIAR_ONTOLOGY_OR_MECHANISM_INTERPRETATION_AND_INDEPENDENT_ACCEPTANCE_CONSEQUENCE"
+    },
+    {
+      "behavior": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "routes": [
+        "canonical/capabilities/opus55/SHARED_DECISION_PRIMITIVES_001.json",
+        "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json"
+      ],
+      "proof_strength": 3,
+      "terminal_population_requirement": "MUST_INCLUDE_HIDDEN_OR_CHANGED_TOOL_CAPABILITIES_AND_SECOND_TASK_TRANSFER"
+    }
+  ],
+  "direct_synthesis_binding": {
+    "route": "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF",
+    "role": "SUPPORTING_T3_SYNTHESIS_INSTRUMENTATION_NOT_A_REPLACEMENT_FOR_UNKNOWN_DOMAIN_CONTRACTS",
+    "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  },
+  "population_constraints": [
+    "EVERY_FROZEN_UNKNOWN_DOMAIN_DIMENSION_EXERCISED_AT_LEAST_ONCE",
+    "NO_TASK_SPECIFIC_HIDDEN_MECHANISM_READ_BEFORE_EXECUTION_AUTHORITY",
+    "CALIBRATED_ABSTENTION_CASES_INCLUDE_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS",
+    "TRANSFER_CASE_REQUIRES_REUSE_OF_FIRST_TASK_DISCOVERY_WITHOUT_FULL_REDISCOVERY",
+    "FAILURE_OF_ANY_REQUIRED_CONTRACT_BLOCKS_UNKNOWN_DOMAIN_FAMILY_PROMOTION"
+  ],
+  "coverage": {
+    "required_contract_count": 3,
+    "bound_contract_count": 3,
+    "unbound_contracts": [],
+    "required_dimension_count": 5,
+    "scope_audit_frozen": true
+  },
+  "public_surfaces": {
+    "HLE_WITH_TOOLS": "REMAINS_PUBLIC_BAR_ROUTE__TOOLS_EQUIVALENCE_PREFLIGHT_OPEN",
+    "TERMINAL_BENCH_SCIENCE": "REMAINS_PUBLIC_BAR_ROUTE__RESOURCE_ADAPTER_PREFLIGHT_OPEN",
+    "MYSTERYMECHANISM": "DELETED_AS_REQUIRED_EXECUTION_ROUTE_BY_PRIVATE_SURFACE_DOMINANCE_V2__BACKGROUND_REFERENCE_ONLY"
+  },
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
