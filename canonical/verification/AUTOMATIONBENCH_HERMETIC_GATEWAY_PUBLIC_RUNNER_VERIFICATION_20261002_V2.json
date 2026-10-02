@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_HERMETIC_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V2",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SELF_CONTAINED_GATEWAY__LIVE_ZERO_INCREMENTAL_TRANSPORT__SOURCE_GATE_V2_ADMISSIBLE__ZERO_BENCHMARK_CASES",
+  "candidate": {
+    "runtime": "canonical/runtime/automationbench_brain_gateway_v1.py",
+    "runtime_git_blob_sha": "e15f671276952e4dac762eb1fa5531550ed23a46",
+    "tests": "canonical/tests/test_automationbench_brain_gateway_v1.py",
+    "tests_git_blob_sha": "40e21379d4554aa9f1288ad1a51e6a3b11bf1463",
+    "source_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "source_gate_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 844,
+    "merge_commit": "a6f94ea8dc4e6a45552f12b47565d769713a32d4",
+    "workflow_run_id": 36997159573,
+    "workflow_job_id": 110806410824,
+    "conclusion": "success"
+  },
+  "verified": [
+    "6_OF_6_SYNTHETIC_MATERIALITY_AND_FAIL_CLOSED_TESTS_PASS",
+    "SELF_CONTAINED_RUNTIME_HAS_NO_ASTRA_RUNTIME_IMPORT_DEPENDENCY",
+    "LIVE_ZERO_INCREMENTAL_PROPOSAL_TRANSPORT_RETURNS_VALID_TOOL_CALL",
+    "OBSERVED_SUBSTRATE_ALIAS_OPENAI_FAST",
+    "OBSERVED_TRANSPORT_ZERO_INCREMENTAL_PUBLIC_PROPOSAL_ENDPOINT",
+    "CANONICAL_SOURCE_GATE_V2_PASS",
+    "CLEAN_CASE_EXECUTION_AUTHORITY_TRUE"
+  ],
+  "benchmark_cases_read": 0,
+  "benchmark_cases_executed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
