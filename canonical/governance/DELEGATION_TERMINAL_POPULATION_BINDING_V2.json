@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_TERMINAL_POPULATION_BINDING_V2",
+  "date": "2026-10-02",
+  "status": "PRE_BEACON_FROZEN_CANDIDATE__CURRENT_EXACT_BLOB_REVALIDATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
+  "route_population_version": "DELEGATION_SCOPE_REPAIRED_TERMINAL_POP_V2",
+  "bound_paths": {
+    "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+    "interaction_oracle": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+    "structural_oracle": "canonical/runtime/delegation_structural_variety_proof_v3.py",
+    "binding_runtime": "canonical/runtime/delegation_terminal_population_binding_v2.py",
+    "tests": "canonical/tests/test_delegation_terminal_population_binding_v2.py",
+    "scope_gate_input": "canonical/governance/TASK_TO_DELEGATION_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+    "scope_gate_receipt": "PENDING_CURRENT_EXACT_BLOB_REVALIDATION",
+    "population_protocol": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json"
+  },
+  "population": {
+    "sample_count": 512,
+    "interaction_case_count": 256,
+    "structural_case_count": 256,
+    "post_freeze_beacon": null,
+    "adaptive_case_selection": false,
+    "replay_for_tuning": false,
+    "case_replacement": false,
+    "required_interaction_classes": [
+      "BASE_PARALLEL",
+      "RESOURCE_CONFLICT",
+      "WORKER_UNAVAILABLE",
+      "STEP_UNAVAILABLE",
+      "WORKER_CAPABILITY_REMOVED",
+      "RESOURCE_CAPACITY_CHANGED"
+    ],
+    "required_structural_classes": [
+      "CHAIN",
+      "FORK_JOIN",
+      "FANOUT_JOIN",
+      "DUAL_ROOT_FANIN",
+      "ALTERNATIVE_PLAN"
+    ]
+  },
+  "acceptance": {
+    "allowed_failed_cases": 0,
+    "require_all_interaction_and_structural_classes": true,
+    "rule": "ALL_512_CASES_EXACT_PASS__ALL_SIX_INTERACTION_CLASSES_AND_ALL_FIVE_STRUCTURAL_CLASSES_PRESENT",
+    "terminal_acceptance_proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
+    "ceiling_definition": "100_PERCENT_EXACT_CORRECTNESS_ON_THE_FROZEN_SCOPE_REPAIRED_POST_FREEZE_DELEGATION_POPULATION_WITH_ZERO_FAILED_CASES_AND_COMPLETE_INTERACTION_PLUS_STRUCTURAL_CLASS_COVERAGE",
+    "ceiling_reason": "100_PERCENT_EXACT_CORRECTNESS_AND_COMPLETE_FROZEN_CLASS_COVERAGE_IS_THE_MAXIMUM_ATTAINABLE_SCORE_ON_THIS_OBJECTIVE_SCOPE_REPAIRED_POPULATION"
+  },
+  "pre_beacon_frozen": true,
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "supersedes": "canonical/governance/DELEGATION_TERMINAL_POPULATION_BINDING_V1.json",
+  "terminal_acceptance_mode_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json::terminal_acceptance_proof_modes"
+}
