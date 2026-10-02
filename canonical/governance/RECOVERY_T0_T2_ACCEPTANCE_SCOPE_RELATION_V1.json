@@ -6,6 +6,7 @@
   "source_behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
   "target_protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json::SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
   "target_atomic_predicates": [
+    "RECOVERY_TERMINAL_NONINFERIOR",
     "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
     "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
   ],
@@ -55,20 +56,23 @@
       "source_check": "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE",
       "direction": "higher",
       "observed_bound": 1,
-      "theoretical_bound": 1
+      "theoretical_bound": 1,
+      "target_predicate": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR"
     },
     "terminal_recovery": {
       "source_check": "NOMINATED_REPAIR_RESCUES_TERMINAL_OUTCOME_WHEN_CAUSE_IS_IDENTIFIABLE",
       "direction": "higher",
       "observed_bound": 1,
-      "theoretical_bound": 1
+      "theoretical_bound": 1,
+      "target_predicate": "RECOVERY_TERMINAL_NONINFERIOR"
     },
     "critical_fail_closed_misses": {
       "source_check": "AUTHORITY_SCOPE_TOOL_STATE_PROVENANCE_AND_DEPENDENCY_FAILURE_CLASSES_ARE_LOAD_BEARING_WHEN_PRESENT",
       "direction": "lower",
       "observed_bound": 0,
       "theoretical_bound": 0,
-      "enforcement": "ALL_APPLICABLE_LOAD_BEARING_P1_MUTATIONS_MUST_BE_REJECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE"
+      "enforcement": "ALL_APPLICABLE_LOAD_BEARING_P1_MUTATIONS_MUST_BE_REJECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE",
+      "target_predicate": "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
     }
   },
   "frozen_population": {
@@ -85,7 +89,7 @@
     "every_case_requires_parent_terminal_acceptance_pass": true
   },
   "relation": "PROVEN_STRONGER_CANDIDATE",
-  "proof_rule": "IF_THE_EXACT_FROZEN_T0_T2_P1_POPULATION_PASSES_ALL_LOAD_BEARING_CAUSAL_LOCALIZATION_RESCUE_AND_FAIL_CLOSED_CHECKS_AT_THEIR_OBJECTIVE_BOUNDS_THEN_THE_WEAKER_MATCHED_RECOVERY_PROTOCOL_CANNOT_EXCEED_BRAIN_ON_ITS_LOAD_BEARING_ACCEPTANCE_CONDITIONS",
+  "proof_rule": "ONLY_IF_THE_EXECUTION_SNAPSHOT_ADMITTED_THE_EXACT_P1_ROUTE_PREWAVE_AND_THE_EXACT_FROZEN_T0_T2_LOAD_BEARING_POPULATION_PASSES_CAUSAL_LOCALIZATION_RESCUE_AND_FAIL_CLOSED_CHECKS_AT_OBJECTIVE_BOUNDS_MAY_THE_THREE_FROZEN_RECOVERY_ACCEPTANCE_PREDICATES_BE_TREATED_AS_ABSOLUTELY_DOMINATED__ANY_DRIFT_FAILS_CLOSED",
   "limitations": [
     "CANDIDATE_ONLY_UNTIL_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
     "DOES_NOT_TRANSFER_TO_OTHER_FAMILIES",
@@ -94,5 +98,11 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "source_execution_basis": {
+    "path": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+    "git_blob_sha": "9c60356ab509a16df5104777f360b9fb18255842",
+    "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "required_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE__PREWAVE_ADMISSIBLE_TRUE__ZERO_BLOCKERS"
+  }
 }
