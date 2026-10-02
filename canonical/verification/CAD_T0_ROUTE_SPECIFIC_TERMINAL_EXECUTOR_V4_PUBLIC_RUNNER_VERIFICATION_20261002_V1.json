@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_T0_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_CAD_V4_EXECUTOR_EXACT_BLOBS_VERIFIED__GLOBAL_LAUNCH_GUARD_FAIL_CLOSED__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "exact_brain_blobs": {
+    "canonical/runtime/cad_t0_route_specific_terminal_executor_v1.py": "4a90d2e6838a6b5fd4a8411de3a3dd654e84ec1c",
+    "canonical/tests/test_cad_t0_route_specific_terminal_executor_v1.py": "49e911745bca7c3b36a7af5e726910d942d538ab",
+    "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json": "a636d1292e6f92d240fab420a9ee75ced7a05104"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 737,
+    "head_sha": "ccea928fbb6fde3832fea26b411183560eaed6b5",
+    "merge_commit": "26c208462c15e9af1d53b7313a9dfaeb2154499e",
+    "workflow_run_id": 36972421356,
+    "workflow_job_id": 110729004999,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_CURRENT_EXECUTOR_BLOB_MATCH",
+    "EXACT_CURRENT_EXECUTOR_TEST_BLOB_MATCH",
+    "EXACT_PROMOTED_V4_BINDING_BLOB_MATCH",
+    "GIT_BLOB_HASH_USES_REAL_NUL_SEPARATOR",
+    "STATIC_V4_DEPENDENCY_PREFLIGHT_PASS",
+    "ALL_EIGHT_CAD_GEOMETRY_FAMILIES_PRETERMINAL_PASS",
+    "HIDDEN_ORACLE_NOT_CANDIDATE_VISIBLE",
+    "GLOBAL_LAUNCH_AUTHORITY_FALSE_CAUSES_ZERO_CASE_FAIL_CLOSED",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
