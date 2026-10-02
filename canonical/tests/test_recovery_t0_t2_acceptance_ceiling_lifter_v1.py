@@ -1,5 +1,5 @@
 from __future__ import annotations
-import json,unittest
+import copy,json,unittest
 from pathlib import Path
 from canonical.runtime.recovery_t0_t2_acceptance_ceiling_lifter_v1 import evaluate
 
