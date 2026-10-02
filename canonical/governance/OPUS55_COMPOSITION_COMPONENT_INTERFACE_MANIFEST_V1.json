@@ -1,0 +1,188 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_FROZEN_INTERFACE_MANIFEST__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "claim_id": "OPUS55_MULTI_CAPABILITY_COMPOSITION_FROZEN_CLAIM_V1",
+  "objective": "Materialize only the exact isolated component interfaces load-bearing in the frozen multi-capability composition acceptance claim, without inheriting whole-family credit or claiming cross-component interaction success.",
+  "authority": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "direct_scope_decomposition": {
+      "path": "canonical/governance/OPUS55_DIRECT_SCOPE_AUDIT_RESIDUAL_DECOMPOSITION_V1.json",
+      "git_blob_sha": "3ad720497287591fda2ebe9af17ee9d55ecd184e"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "frozen_composition_dimensions": [
+    "research+tool use+artifact creation",
+    "browser/computer action+memory+recovery",
+    "coding+debugging+tool discovery",
+    "delegation+evidence synthesis+artifact production",
+    "cross-capability state handoff and rollback"
+  ],
+  "interfaces": [
+    {
+      "component_role": "RESEARCH",
+      "component_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "interface_id": "research_evidence_control",
+      "required_properties": [
+        "requirement_gap_driven_next_action",
+        "provenance_preserving_evidence_update",
+        "sufficiency_or_stop_decision"
+      ]
+    },
+    {
+      "component_role": "TOOL",
+      "component_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "interface_id": "tool_route_control",
+      "required_properties": [
+        "unknown_or_changing_tool_discovery",
+        "admissible_route_selection",
+        "capability_state_update_without_unsupported_promotion"
+      ]
+    },
+    {
+      "component_role": "ARTIFACT",
+      "component_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "interface_id": "artifact_native_mechanics",
+      "required_properties": [
+        "requested_native_change_present",
+        "unrequested_structure_preserved",
+        "round_trip_validity"
+      ]
+    },
+    {
+      "component_role": "ARTIFACT",
+      "component_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "interface_id": "artifact_quality_judgment",
+      "required_properties": [
+        "rubric_relevant_revision_plan",
+        "evidence_grounded_content_choice",
+        "layout_and_quality_choice"
+      ]
+    },
+    {
+      "component_role": "BROWSER",
+      "component_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "interface_id": "browser_state_action",
+      "required_properties": [
+        "current_state_grounding",
+        "valid_action_target_and_arguments",
+        "observable_state_mismatch_recovery"
+      ]
+    },
+    {
+      "component_role": "MEMORY",
+      "component_id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "interface_id": "state_continuity",
+      "required_properties": [
+        "long_horizon_state_retention",
+        "state_handoff_continuity",
+        "state_restore_without_untracked_loss"
+      ]
+    },
+    {
+      "component_role": "RECOVERY",
+      "component_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "interface_id": "failure_localization_and_repair",
+      "required_properties": [
+        "causal_failure_localization",
+        "falsifiable_repair_target",
+        "intervention_rescue_or_fail_closed_ambiguity"
+      ]
+    },
+    {
+      "component_role": "CODING_DEBUGGING",
+      "component_id": "ADVANCED_AGENTIC_CODING",
+      "interface_id": "coding_debugging_execution",
+      "required_properties": [
+        "scoped_coding_task_success",
+        "debugging_after_failure",
+        "tool_integrated_code_execution"
+      ]
+    },
+    {
+      "component_role": "DELEGATION",
+      "component_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "interface_id": "delegation_coordination",
+      "required_properties": [
+        "dependency_respecting_partition",
+        "evidence_preserving_fan_in",
+        "receipt_driven_reassignment"
+      ]
+    },
+    {
+      "component_role": "SYNTHESIS",
+      "component_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "interface_id": "grounded_synthesis",
+      "required_properties": [
+        "supported_required_claims",
+        "decision_relevant_evidence_coverage",
+        "provenance_uncertainty_and_format_preservation"
+      ]
+    }
+  ],
+  "dimension_to_interfaces": {
+    "research+tool use+artifact creation": [
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001::research_evidence_control",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001::tool_route_control",
+      "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001::artifact_native_mechanics",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001::artifact_quality_judgment"
+    ],
+    "browser/computer action+memory+recovery": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001::browser_state_action",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY::state_continuity",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001::failure_localization_and_repair"
+    ],
+    "coding+debugging+tool discovery": [
+      "ADVANCED_AGENTIC_CODING::coding_debugging_execution",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001::failure_localization_and_repair",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001::tool_route_control"
+    ],
+    "delegation+evidence synthesis+artifact production": [
+      "TASK_TO_DELEGATION_GRAPH_001::delegation_coordination",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::grounded_synthesis",
+      "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001::artifact_native_mechanics",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001::artifact_quality_judgment"
+    ],
+    "cross-capability state handoff and rollback": [
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY::state_continuity",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001::failure_localization_and_repair"
+    ]
+  },
+  "isolated_component_scope_only": true,
+  "explicitly_not_claimed_by_this_manifest": [
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+    "CROSS_COMPONENT_INTERACTION_SUCCESS",
+    "WHOLE_FAMILY_PASS_INHERITANCE"
+  ],
+  "receipts": [],
+  "expected_initial_slicer_state": "RESIDUAL_COMPONENT_INTERFACE_PROOFS_OPEN",
+  "expected_initial_scoped_proved_interface_count": 0,
+  "expected_initial_open_interface_count": 10,
+  "hard_rules": [
+    "INTERFACE_SET_IS_DERIVED_ONLY_FROM_FROZEN_COMPOSITION_DIMENSIONS_AND_EXISTING_DIRECT_SCOPE_DECOMPOSITION",
+    "NO_WHOLE_FAMILY_PASS_INHERITANCE",
+    "NO_CROSS_COMPONENT_INTERACTION_CREDIT_FROM_ISOLATED_COMPONENT_PROOFS",
+    "ONLY_INDEPENDENTLY_VERIFIED_ACCEPTANCE_SCOPED_CLAIM_BOUND_RECEIPTS_MAY_CLOSE_INTERFACE_PROPERTIES",
+    "ZERO_NEW_REALITY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_MANIFEST__THEN_BIND_ONLY_EXISTING_ACCEPTANCE_SCOPED_CLAIM_BOUND_COMPONENT_RECEIPTS__RUN_COMPOSITION_COMPONENT_PROOF_SLICER__PRESERVE_ALL_MISSING_PROPERTIES_AS_EXPLICIT_UPSTREAM_RESIDUALS",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
