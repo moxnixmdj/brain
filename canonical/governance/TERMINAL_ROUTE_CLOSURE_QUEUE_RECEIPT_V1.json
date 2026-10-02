@@ -1,35 +1,18 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1",
   "date": "2026-10-02",
-  "source_basis_blob_sha": "824b1cdcc59a67e89b38c9051c552904076f6f1b",
-  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__DELEGATION_TERMINAL_ACCEPTANCE_PROOF_REOPENED__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "source_basis_blob_sha": "cfba09f6d2b1badb1aa5f23a95a2d669d581d73e",
+  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__2_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "status": "CANONICAL_SCHEDULING_RECEIPT__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
-  "closed_route_count": 1,
-  "open_route_count": 11,
+  "closed_route_count": 2,
+  "open_route_count": 10,
   "closed_behavior_ids": [
-    "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001"
+    "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+    "TASK_TO_DELEGATION_GRAPH_001"
   ],
-  "top_priority_behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "top_priority_behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
   "queue": [
-    {
-      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
-      "portfolio": "T2",
-      "proof_state": "SCOPE_GATE_AND_TERMINAL_POPULATION_PREFLIGHT_PASS__REGISTRY_TERMINAL_ACCEPTANCE_PROOF_PENDING",
-      "blockers": [
-        "REGISTRY_TERMINAL_ACCEPTANCE_PROOF_NOT_YET_TRUTHFULLY_ESTABLISHED"
-      ],
-      "blocker_classes": {
-        "binding": 0,
-        "scope_gate": 0,
-        "scope_expansion": 0,
-        "other": 1
-      },
-      "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 1,
-      "priority_score": 39,
-      "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
-    },
     {
       "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
       "portfolio": "T2",
