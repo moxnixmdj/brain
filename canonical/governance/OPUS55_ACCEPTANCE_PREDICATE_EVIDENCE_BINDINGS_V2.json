@@ -1,16 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2",
   "date": "2026-10-02",
-  "status": "RECEIPT_SATURATION_COMPLETE__7_PROVED__3_BOUND_BLOCKERS__28_OTHER_UNRESOLVED__ZERO_DIRECT_ACCEPTANCE_CASE_ACTIONS_READY",
+  "status": "RECEIPT_SATURATION_COMPLETE__8_PROVED__3_BOUND_BLOCKERS__27_OTHER_UNRESOLVED__ZERO_DIRECT_ACCEPTANCE_CASE_ACTIONS_READY",
   "objective": "Bind only content-addressed atomic acceptance evidence. Until saturation is complete, benchmark and matched-case execution remains forbidden.",
   "saturation": {
     "status": "COMPLETE",
     "source_snapshot_sha": "74a3b4ff309225456e49a9b1e8a75295aa0f45f1",
     "receipt": "canonical/verification/OPUS55_ACCEPTANCE_ATOMIC_RECEIPT_SATURATION_20261002_V7.json",
     "receipt_sha": "74a3b4ff309225456e49a9b1e8a75295aa0f45f1",
-    "proved_predicate_count": 7,
+    "proved_predicate_count": 8,
     "bound_blocker_count": 3,
-    "unresolved_predicate_count": 31,
+    "unresolved_predicate_count": 30,
     "new_reality_units_consumed": 0,
     "rule": "COMPLETE_FOR_LEDGER_AND_REGISTRY_BOUND_IN_V7__INVALIDATE_ON_AUTHORITY_CHANGE"
   },
@@ -183,6 +183,33 @@
       "source_path": "canonical/governance/OPUS55_DIRECT_JUDGMENT_SOURCE_BLOCKERS_V1.json",
       "source_sha": "a76ee612853c01a8605d2029387d407fb75571c5",
       "family": "UNKNOWN_DOMAIN_ADAPTATION"
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "state": "PROVED",
+      "proof_kind": "ABSOLUTE_CEILING",
+      "source_path": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "source_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": true,
+      "brain_value": 1,
+      "objective_ceiling_value": 1,
+      "basis": "FULL_FROZEN_PREWAVE_TOOL_DISCOVERY_COMPARATOR_DELETION_ROUTE_PASSED_180_OF_180__FAMILY_MAPS_EXACTLY_TO_THIS_SINGLE_RESIDUAL_CONTRACT__100_PERCENT_IS_OBJECTIVE_UPPER_CEILING_SO_MATCHED_OPUS_SUCCESS_AND_VALID_ROUTE_BOUNDS_CANNOT_EXCEED_BRAIN",
+      "supporting_sources": [
+        {
+          "path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+          "sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+        },
+        {
+          "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+          "sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+        },
+        {
+          "path": "canonical/verification/TERMINAL_CEILING_WITNESS_LIFTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "sha": "a1c702c79d2b29bfc9c4d5a238f9c260bc204770"
+        }
+      ]
     }
   ],
   "rules": [

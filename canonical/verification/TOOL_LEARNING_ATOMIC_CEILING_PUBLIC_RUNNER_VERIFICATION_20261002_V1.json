@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_LEARNING_ATOMIC_CEILING_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_9_BLOBS__TOOL_LEARNING_3_OF_3_PREDICATES_PROVED__GLOBAL_TERMINAL_PROMOTION_FALSE",
+  "source_brain_candidate_commit": "5d9a25d10146569fe5ca652f5fff5b94e4b87144",
+  "exact_brain_blobs": {
+    "canonical/runtime/opus55_acceptance_residual_compiler_v2.py": "cae5bc3bfda9c77d7d7e5151127f55aafddb9522",
+    "canonical/tests/test_opus55_acceptance_residual_compiler_v2.py": "88b5b481381d8707313fd9024a8291d47ca144ea",
+    "canonical/tests/test_terminal_ceiling_witness_residual_v1.py": "6f1ef3449d22b7c048d07116ba8e97042e7aafb8",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "f26d250f86e7f2ce18d790e451fe09bbacecb694",
+    "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json": "f67e22cee5e6fce1ebfae92ebf0946f78fafcee1",
+    "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json": "4e59e30461c9ff1bee1a9474627d5fb4074844b2",
+    "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7",
+    "canonical/verification/TERMINAL_CEILING_WITNESS_LIFTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "a1c702c79d2b29bfc9c4d5a238f9c260bc204770"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 861,
+    "pull_request_head": "c4864308cc5e4132db6f8e36117d75f94ab169bf",
+    "merge_commit": "3e05fefbf233248dc3f10f99ce4710f227673949",
+    "workflow_run_id": 37000763729,
+    "workflow_job_id": 110817689902,
+    "workflow_name": "Verify Brain tool-learning atomic ceiling closure v1",
+    "conclusion": "success"
+  },
+  "verified": {
+    "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "predicate_count": 3,
+    "proved": 3,
+    "open": 0,
+    "blocked": 0,
+    "refuted": 0,
+    "family_state": "PROVED",
+    "ceiling_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "proof_kind": "ABSOLUTE_CEILING",
+    "source_witness_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7",
+    "removing_ceiling_claim_reopens_family": true,
+    "global_terminal_promotion_allowed": false
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_goal_achieved": false
+}
