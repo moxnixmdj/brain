@@ -1,0 +1,30 @@
+name: Verify P1 V4 residual discharge
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/p1_v4_scope_safe_residual_discharge_v1.py"
+      - "canonical/tests/test_p1_v4_scope_safe_residual_discharge_v1.py"
+      - "canonical/governance/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_ACTIVATION_V1.json"
+      - "canonical/runtime/p1_terminal_execution_scope_audit_v1.py"
+      - "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py"
+      - "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py"
+      - "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  push:
+    branches:
+      - "proof/p1-v4-residual-discharge-20261002"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile live residual
+        run: python canonical/runtime/p1_v4_scope_safe_residual_discharge_v1.py
+      - name: Run fail-closed residual tests
+        run: python -m unittest canonical.tests.test_p1_v4_scope_safe_residual_discharge_v1 -v
