@@ -5,7 +5,7 @@
   "objective": "Activate the independently recomputed global abductive residual cut as scheduling authority while granting no acceptance, capability, family, execution, or promotion credit.",
   "candidate_path": "canonical/governance/GLOBAL_CERTIFICATE_ABDUCTIVE_RESIDUAL_EXECUTION_V1.json",
   "candidate_git_blob_sha": "e32e7d1710d150dd0e372c669153ed8fe8436ea3",
-  "verification_path": "canonical/verification/GLOBAL_ABDUCTIVE_RESIDUAL_AND_TARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "verification_path": "canonical/verification/GLOBAL_ABDUCTIVE_AND_MULTITARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "result": {
     "target_count": 31,
     "primitive_residual_fact_count": 40,
@@ -25,5 +25,6 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "supplementary_verification_alias": "canonical/verification/GLOBAL_ABDUCTIVE_RESIDUAL_AND_TARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
