@@ -15,30 +15,41 @@ class Tests(unittest.TestCase):
             load("canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json"),
         ]
 
-    def test_live_effective_calibration_is_exactly_3_of_19(self):
+    def test_live_effective_calibration_is_exactly_4_of_19(self):
         out=evaluate(*self.live())
         self.assertEqual(out["errors"],[])
         self.assertFalse(out["pass"])
         self.assertEqual(out["behavioral_pass_family_count"],19)
-        self.assertEqual(out["acceptance_calibrated_family_count"],3)
-        self.assertEqual(out["acceptance_pending_family_count"],16)
+        self.assertEqual(out["acceptance_calibrated_family_count"],4)
+        self.assertEqual(out["acceptance_pending_family_count"],15)
         self.assertEqual(set(out["acceptance_calibrated_families"]),{
             "EXACT_SYMBOLIC_COMPUTATION",
             "LONG_HORIZON_MEMORY_AND_CONTINUITY",
             "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+            "SUBAGENT_DELEGATION_AND_COORDINATION",
         })
         row=next(r for r in out["families"] if r["family"]=="TOOL_DISCOVERY_SELECTION_AND_LEARNING")
         self.assertEqual(row["proof_source"],"VERIFIED_FULL_PROTOCOL_STRONGER_WITNESS")
         self.assertEqual(row["effective_closure_mode"],"ABSOLUTE_DOMINANCE")
         self.assertEqual(row["effective_witness_id"],"TOOL_DISCOVERY_TERMINAL_CEILING_ABSOLUTE_DOMINANCE_20261002_V1")
 
-    def test_without_transmutation_witness_reverts_to_2_of_19(self):
+    def test_without_transmutation_witnesses_reverts_to_2_of_19(self):
         e,p,r,t=self.live()
         t=copy.deepcopy(t); t["evidence"]=[]
         out=evaluate(e,p,r,t)
         self.assertEqual(out["acceptance_calibrated_family_count"],2)
         self.assertEqual(out["acceptance_pending_family_count"],17)
         self.assertNotIn("TOOL_DISCOVERY_SELECTION_AND_LEARNING",out["acceptance_calibrated_families"])
+        self.assertNotIn("SUBAGENT_DELEGATION_AND_COORDINATION",out["acceptance_calibrated_families"])
+
+    def test_without_delegation_witness_is_3_of_19(self):
+        e,p,r,t=self.live()
+        t=copy.deepcopy(t)
+        t["evidence"]=[x for x in t["evidence"] if x.get("family")!="SUBAGENT_DELEGATION_AND_COORDINATION"]
+        out=evaluate(e,p,r,t)
+        self.assertEqual(out["acceptance_calibrated_family_count"],3)
+        self.assertIn("TOOL_DISCOVERY_SELECTION_AND_LEARNING",out["acceptance_calibrated_families"])
+        self.assertNotIn("SUBAGENT_DELEGATION_AND_COORDINATION",out["acceptance_calibrated_families"])
 
     def test_behavioral_pass_is_still_required(self):
         e,p,r,t=self.live()
