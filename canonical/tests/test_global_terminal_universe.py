@@ -24,3 +24,5 @@ assert u["local_v6_subcut"]["exact_minimum"] is True
 assert u["local_v6_subcut"]["globally_authorized"] is False
 assert len(u["local_v6_subcut"]["selected_observations"]) == 2
 print("GLOBAL_TERMINAL_UNIVERSE_V1 verification: PASS")
+
+# Verified bounded shared decision kernel must be visible in each still-open M2-M5 lane source graph.\ngraph = json.loads((ROOT / "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json").read_text())\nfor lane in graph["shared_mechanism_obligations"]:\n    if lane["id"].split("_",1)[0] in {"M2","M3","M4","M5"}:\n        assert "canonical/capabilities/opus55/SHARED_BOUNDED_DECISION_PRIMITIVES_001.json" in lane.get("existing_evidence", [])\n
