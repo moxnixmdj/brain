@@ -26,7 +26,7 @@ for key in (
     assert holes[key] == "?M"
 
 assert "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS" not in u["global_cut"]["open_specification_holes"]
-assert u["counts"]["open_specification_holes"] == 0
+assert u["counts"]["open_specification_holes"] == 0\nassert u["counts"]["open_mechanism_lanes"] == 3
 assert u["global_cut"]["exact_cut_ready"] is False
 assert u["execution_authority"]["fresh_terminal_evidence_allowed"] is False
 assert u["local_v6_subcut"]["exact_minimum"] is True
