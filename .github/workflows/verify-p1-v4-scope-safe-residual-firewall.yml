@@ -1,0 +1,41 @@
+name: Verify P1 V4 scope-safe residual firewall
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/p1_v4_scope_safe_residual_discharge_v1.py"
+      - "canonical/tests/test_p1_v4_scope_safe_residual_discharge_v1.py"
+      - "canonical/governance/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_ACTIVATION_V1.json"
+      - "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json"
+      - ".github/workflows/verify-p1-v4-scope-safe-residual-firewall.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run P1 residual firewall tests
+        id: tests
+        shell: bash
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_p1_v4_scope_safe_residual_discharge_v1 -v > /tmp/p1-firewall-tests.txt 2>&1
+          RC=$?
+          cat /tmp/p1-firewall-tests.txt
+          echo "rc=$RC" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p1-residual-firewall-test-log
+          path: /tmp/p1-firewall-tests.txt
+          if-no-files-found: error
+      - name: Enforce test result
+        run: test "${{ steps.tests.outputs.rc }}" = "0"
