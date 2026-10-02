@@ -20,4 +20,23 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run V2 receipt index tests
-        run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+        shell: bash
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v > /tmp/v2-index-tests.txt 2>&1
+          RC=$?
+          printf '%s\n' "$RC" > /tmp/v2-index-tests.rc
+          cat /tmp/v2-index-tests.txt
+          exit 0
+      - name: Upload V2 index diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-index-test-diagnostic
+          path: |
+            /tmp/v2-index-tests.txt
+            /tmp/v2-index-tests.rc
+          if-no-files-found: error
+      - name: Enforce V2 index tests
+        shell: bash
+        run: test "$(cat /tmp/v2-index-tests.rc)" = "0"
