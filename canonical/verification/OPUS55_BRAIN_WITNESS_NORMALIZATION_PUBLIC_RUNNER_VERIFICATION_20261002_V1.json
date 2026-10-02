@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_BRAIN_WITNESS_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_9_WITNESSES_RECOMPUTED__ZERO_SEMANTIC_CREDIT",
+  "brain": {
+    "repository": "moxnixmdj/brain",
+    "source_commit": "66feb09d68e6c2efe46b41697518e74363910a29",
+    "exact_blobs": {
+      "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "f500b56e7349ce8c0f97cfd0bd1db4888ec6887c",
+      "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V1.json": "68af5a081b87ce83db6f69e864843d090206db4c",
+      "canonical/runtime/brain_witness_normalization_verifier_v1.py": "b6b54af71d62624a0682dee9c86611752bcb2e81",
+      "canonical/tests/test_brain_witness_normalization_v1.py": "5c1673ac68a25b011981e889431f83b175911869"
+    }
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 900,
+    "pull_request_head": "269e4760cfabdca2c88b0c871f355dd0b3403b1f",
+    "merge_commit": "3a31802756303660448e2204440c0634df0cc81a",
+    "workflow_run_id": 37012631436,
+    "workflow_job_id": 110855791529,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_ACCEPTANCE_EVIDENCE_BINDINGS_BLOB_MATCH",
+    "EXACT_9_OF_9_PROVED_CLAIMS_RECOMPUTE_TO_9_WITNESSES",
+    "WITNESS_SOURCE_IDENTITIES_CONTENT_ADDRESSED",
+    "TARGET_ATOM_INFERENCE_REJECTED",
+    "SEMANTIC_IMPLICATION_INFERENCE_REJECTED",
+    "STALE_SOURCE_BLOB_AUTHORITY_REJECTED",
+    "ZERO_ACCEPTANCE_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "result": {
+    "witness_count": 9,
+    "semantic_implication_verified": false,
+    "brain_witness_normalization_verified": true
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
