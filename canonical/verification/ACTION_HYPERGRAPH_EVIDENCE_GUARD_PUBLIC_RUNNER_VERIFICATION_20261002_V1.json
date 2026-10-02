@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_HYPERGRAPH_EVIDENCE_GUARD_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_MIRRORED_BLOBS__LIVE_GUARD_PASS__ZERO_CREDIT",
+  "brain_source_commit": "d226ce94780e57fadca420c9358b27d0711327a8",
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 856,
+    "merge_commit": "d3298cd9f0813127604058038bbed7d6b1ed8015",
+    "workflow_run_id": 36999642892,
+    "workflow_job_id": 110814147305,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_MIRRORED_GIT_BLOB_IDENTITIES_PASS",
+    "EVIDENCE_GUARD_UNIT_TESTS_PASS",
+    "LIVE_HYPERGRAPH_DERIVED_EVIDENCE_ASSERTION_PASS",
+    "ZERO_CREDIT_GOVERNANCE_PASS",
+    "TB4_ATTAINABILITY_REVOCATION_PRESERVED"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
