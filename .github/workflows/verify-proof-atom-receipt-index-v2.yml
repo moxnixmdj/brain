@@ -7,6 +7,9 @@ on:
       - "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V2.json"
       - "canonical/runtime/canonical_proof_atom_basis_v2.py"
       - "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json"
+      - "canonical/runtime/proof_atom_receipt_snapshot_v1.py"
+      - "canonical/tests/test_proof_atom_receipt_snapshot_v1.py"
+      - "canonical/governance/PROOF_ATOM_RECEIPT_SNAPSHOT_V1.json"
       - ".github/workflows/verify-proof-atom-receipt-index-v2.yml"
   workflow_dispatch:
 jobs:
@@ -21,3 +24,5 @@ jobs:
           python-version: "3.12"
       - name: Run V2 receipt index tests
         run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+      - name: Run sealed receipt snapshot tests
+        run: python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v
