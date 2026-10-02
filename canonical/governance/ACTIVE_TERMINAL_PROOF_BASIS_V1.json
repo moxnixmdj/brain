@@ -274,20 +274,24 @@
     {
       "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
       "portfolio": "T3",
-      "proof_state": "HARDENED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__PUBLIC_FIXED_BAR_MULTIPLEX_PREWAVE_BINDING_PENDING",
+      "proof_state": "PREWAVE_BINDING_INDEPENDENT_PASS__TB_SCIENCE_EXECUTION_ROUTE_FROZEN__HLE_CANONICAL_CONTENT_ACCESS_EXTERNAL_BLOCKED",
       "route_requirement": "HIDDEN_EVIDENCE_WORLD_WITH_QUERY_SOURCE_SELECTION_INFORMATION_GAIN_PROVENANCE_AND_STOP_ORACLE",
       "blockers": [
-        "FREEZE_HLE_TOOLS_TERMINAL_BENCH_SCIENCE_AND_MYSTERYMECHANISM_SCOPE_MAPPING",
-        "FREEZE_RESEARCH_QUERY_SOURCE_STOP_INSTRUMENTATION_AND_INFORMATION_BOUNDARY",
-        "FREEZE_ZERO_COST_EXECUTABLE_PUBLIC_BAR_ROUTES_FOR_REPRESENTED_SCOPE",
-        "FREEZE_EXPLICIT_UNCOVERED_RESEARCH_CONTROL_SCOPE_AUDIT",
-        "FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING"
+        "HLE_CANONICAL_CONTENT_ACCESS_AT_ZERO_INCREMENTAL_SPEND_EXTERNAL_BLOCKED"
       ],
-      "route": "canonical/runtime/research_control_information_safe_proof.py",
+      "route": "canonical/governance/T3_RESEARCH_CONTROL_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "candidate": "canonical/runtime/research_control_information_safe_candidate.py",
-      "independent_preflight": "canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight": "canonical/verification/T3_RESEARCH_CONTROL_MULTIPLEX_BINDING_PUBLIC_VERIFICATION_20261002_V1.json",
       "proof_mode_classification": "PUBLIC_FIXED_BAR_MULTIPLEX_PLUS_EXPLICIT_UNCOVERED_SCOPE",
-      "synthetic_whole_domain_scope_gate_required": false
+      "synthetic_whole_domain_scope_gate_required": false,
+      "prewave_admissible": true,
+      "terminal_results_observed": 0,
+      "exact_public_route_receipts": [
+        "canonical/verification/HLE_STRICT_LOWER_BOUND_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/verification/HLE_DATASET_ZERO_CASE_METADATA_VERIFICATION_20261002_V1.json",
+        "canonical/verification/TERMINAL_BENCH_SCIENCE_0_1_ZERO_CASE_ROUTE_VERIFICATION_20261002_V1.json"
+      ],
+      "external_execution_dependency": "HLE_CANONICAL_CONTENT_ACCESS_AT_ZERO_INCREMENTAL_SPEND"
     }
   ],
   "active_contract_count": 12,
