@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_CONTRACT_NATIVE_POPULATION_EMBEDDING_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_STRUCTURAL_POPULATION_SUPERSET_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prove, without replaying Terminal V3, that every semantic case shape emitted by the exact frozen contract-native P1 generator used by T0/T2 embeds losslessly into the stronger V5 typed intervention envelope, while V5 exposes strictly less answer-bearing information and uses a stronger oracle.",
+  "runtime": "canonical/runtime/p1_v5_contract_native_population_embedding_v1.py",
+  "tests": "canonical/tests/test_p1_v5_contract_native_population_embedding_v1.py",
+  "exact_brain_blobs": {
+    "canonical/runtime/p1_v5_contract_native_population_embedding_v1.py": "a8c5af1d5e5efd06489ea8ea2db2549ac3e37ae2",
+    "canonical/tests/test_p1_v5_contract_native_population_embedding_v1.py": "cb75bef70c6da86337ecce8faa63436911b1459a",
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py": "3fc600a8176dac250219e3d98b92cf93d8fceef5",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json": "a1630299d29ea9c07e55b4314c07ddb3228c3287",
+    "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5_ACTIVATION_V1.json": "e01df1a703266e055ab965ec7c37c491051b221b"
+  },
+  "structural_proof_basis": {
+    "frozen_parent_mode": "CONTRACT_NATIVE",
+    "frozen_case_count_per_parent_portfolio": 30,
+    "frozen_difficulty_cycle": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "legacy_semantic_shape_count": 30,
+    "canonical_domain_count": 6,
+    "embedded_domain_shape_count": 180,
+    "seed_semantic_degrees_of_freedom": [
+      "CAUSE_POSITION"
+    ],
+    "seed_visible_nonsemantic_degrees_of_freedom": [
+      "REPAIR_CANDIDATE_ORDER"
+    ],
+    "removed_candidate_visible_answer_bearing_field": "repair_candidates",
+    "candidate_information_relation": "CANDIDATE_HAS_STRICTLY_LESS_INFORMATION_PROVEN",
+    "oracle_relation": "CANDIDATE_STRONGER_PROVEN"
+  },
+  "claim_bound_relation_candidates": [
+    {
+      "direct_surface": "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "claim_id": "P1-V5-FRONTIERCODE-CONTRACT-NATIVE-EMBEDDING-V1",
+      "relation": "SUPERSET_PENDING_INDEPENDENT_VERIFICATION"
+    },
+    {
+      "direct_surface": "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "claim_id": "P1-V5-CURSORBENCH-CONTRACT-NATIVE-EMBEDDING-V1",
+      "relation": "SUPERSET_PENDING_INDEPENDENT_VERIFICATION"
+    },
+    {
+      "direct_surface": "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "claim_id": "P1-V5-RECOVERY-CONTRACT-NATIVE-EMBEDDING-V1",
+      "relation": "SUPERSET_PENDING_INDEPENDENT_VERIFICATION"
+    }
+  ],
+  "anti_overclaim": [
+    "THIS_CANDIDATE_PROVES_A_RELATION_TO_THE_EXACT_FROZEN_CONTRACT_NATIVE_P1_POPULATION_GRAMMAR__NOT_TO_ARBITRARY_UNBOUND_REAL_WORLD_TRAJECTORIES",
+    "THE_FROZEN_P1_CONTRACT_NORMALIZATION_BOUNDARY_REMAINS_LOAD_BEARING",
+    "INDEPENDENT_VERIFICATION_IS_REQUIRED_BEFORE_ANY_RELATION_ROW_MAY_CHANGE_FROM_OPEN_TO_SUPERSET",
+    "EVEN_THREE_VERIFIED_SCOPE_RELATIONS_DO_NOT_BY_THEMSELVES_CLEAR_P1__COMPOSITE_RESTORATION_RECONCILIATION_REMAINS_REQUIRED",
+    "NO_TERMINAL_V3_REPLAY_NO_RESULT_FEEDBACK_NO_NEW_REALITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_THE_EXACT_EMBEDDING_BLOBS__IF_PASS_UPDATE_ONLY_THE_THREE_CLAIM_BOUND_SCOPE_RELATION_ROWS_TO_SUPERSET_WITH_THE_EXACT_WITNESS_AND_VERIFICATION_RECEIPT__THEN_RUN_THE_EXISTING_P1_V5_TERMINAL_SCOPE_ADMISSIBILITY_GATE",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
