@@ -422,14 +422,14 @@
     },
     {
       "id": "G_DONOR_DEPENDENCE_ZERO",
-      "hole_type": "?M",
+      "hole_type": "?P",
       "predicate": "donor_dependent_required_behaviors_zero",
       "current": false,
       "closed": false
     },
     {
       "id": "G_UNEXPLAINED_BEHAVIOR_ZERO",
-      "hole_type": "?M",
+      "hole_type": "?P",
       "predicate": "unexplained_required_behaviors_zero",
       "current": false,
       "closed": false
@@ -443,7 +443,7 @@
     },
     {
       "id": "G_COMPOSITION_FAILURES_ZERO",
-      "hole_type": "?M",
+      "hole_type": "?P",
       "predicate": "unresolved_composition_failures_zero",
       "current": false,
       "closed": false
@@ -491,10 +491,7 @@
     "open_mechanism_holes": [
       "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
       "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL",
-      "G0_NOVEL_TYPED_TEMPLATE_AND_EFFECT_MODEL_SYNTHESIS",
-      "G_DONOR_DEPENDENCE_ZERO",
-      "G_UNEXPLAINED_BEHAVIOR_ZERO",
-      "G_COMPOSITION_FAILURES_ZERO"
+      "G0_NOVEL_TYPED_TEMPLATE_AND_EFFECT_MODEL_SYNTHESIS"
     ],
     "open_proof_holes": [
       "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
@@ -520,7 +517,10 @@
       "G_VERIFIER_MUTATIONS_ZERO",
       "G_OPUS_ACCEPTANCE_ALL_PASS",
       "G_FINAL_DONOR_DELETION_CLEANROOM",
-      "G_PROOF_BUNDLE_FROZEN"
+      "G_PROOF_BUNDLE_FROZEN",
+      "G_DONOR_DEPENDENCE_ZERO",
+      "G_UNEXPLAINED_BEHAVIOR_ZERO",
+      "G_COMPOSITION_FAILURES_ZERO"
     ],
     "terminal_observation_cut_exact": true,
     "terminal_observation_cut_verdict": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
