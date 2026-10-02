@@ -1,25 +1,19 @@
 """Zero-reality universal scope certificate candidate for delegation.
 
-This module does not grant acceptance or ownership credit.  It checks exact
-load-bearing source identities and derives the premises of a universal proof for
-the Brain-owned finite delegation planner.  The proof domain is the declared
-finite explicit-task model accepted by the candidate: finite steps/workers,
-monotone facts, non-negative finite costs, finite positive resource capacities,
-supported live receipts. Feasible and provably infeasible valid contracts are both covered.
+This module grants no acceptance or ownership credit. It proves a universal
+algorithmic result only when two independent premises hold together:
 
-The mathematical step is standard finite-search reasoning, not extrapolation from
-the 132 empirical terminal cases:
-  * the planner enumerates every applicable simple fact-adding step sequence;
-  * all edge costs are non-negative and the heap key is the protocol objective;
-  * a goal is returned only if the sequence is schedulable;
-  * the independent oracle enumerates every subset/permutation and applies the
-    same schedulability condition and objective key;
-  * the scheduler breadth-first searches all feasible wave matchings;
-  * receipt replanning re-runs the same exact search on the transformed state.
+1. Scope transport: the frozen Opus55 delegation protocol has already been
+   independently shown to be covered by the explicit finite task model, and a
+   later independent temporal-transport receipt pins that scope relation to the
+   exact current candidate/oracle/protocol bytes.
+2. Universal algorithm proof: over that model, the Brain planner exhaustively
+   searches every relevant finite plan, optimizes the frozen objective exactly,
+   exhaustively schedules feasible worker/resource matchings, and reruns the
+   same exact solver after supported receipts.
 
-Therefore the candidate equals the exhaustive oracle for every admissible finite
-contract in this model.  This candidate still requires independent clean-room
-verification before the scope-completeness atom may be discharged.
+The 132/132 terminal sample is deliberately not a proof premise. Finite samples
+may corroborate behavior; they do not establish protocol-wide scope.
 """
 from __future__ import annotations
 
@@ -37,6 +31,36 @@ EXPECTED_BLOBS = {
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
     "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
     "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "af83f4899169e81017767c3316ddcf6b61da5ef6",
+    "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json": "52392515cd4de672f82f8afac82a41d3ce442656",
+    "canonical/governance/DELEGATION_TEMPORAL_PROOF_TRANSPORT_V1.json": "b6d03ac87d8cd9d308f127e4e525e48be0d0a971",
+    "canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "5278abb7fcaa6b97189b67598c75e4df395e1788",
+    "canonical/verification/DELEGATION_SCOPE_GATE_V2_V3_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "eddfe01c81ae9d6e9453c4bc30737f9ddd273a83",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+}
+
+EXPECTED_CONTRACT_ROW = {
+    "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+    "source": "SUBAGENT_DELEGATION_AND_COORDINATION / COMPLEX_MULTI_TOOL_AGENCY / MULTI_CAPABILITY_COMPOSITION rows",
+    "inputs": "Task requirement/dependency graph, worker/tool capabilities, current state, concurrency/resource constraints and evidence ownership rules",
+    "environment_state": "Task with potentially separable subtasks and multiple workers/tools",
+    "allowed_information": "Declared worker/tool capabilities and live receipts",
+    "required_output_or_action": "Partition only independent/usefully parallelizable work, assign owners, define dependencies/fanin and revise assignments when receipts falsify assumptions",
+    "success_condition": "Fresh tasks achieve equal-or-better correctness with lower wall-clock or higher evidence coverage, without duplicate/conflicting work or lost provenance, versus single-worker/naive fanout baseline",
+    "failure_condition": "Duplicate work, conflicting writes, dependency violation, idle critical path, wrong worker capability, or fanin loses required evidence",
+    "terminal_consequence": "Shared residual for delegation, multi-tool agency and composition",
+    "verification_route": "Fresh tasks with controlled worker-count/assignment ablations; critical-path and correctness comparison",
+    "dependency_boundary": "Leases, ownership locks, queues and fanin mechanics are deterministic/partly owned; partition/assignment quality is residual when task structure/capabilities are uncertain",
+    "scope": "Adaptive task partition and worker/tool assignment",
+    "terminal_acceptance": {
+        "proof_mode": "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_WITH_BRAIN_LOWER_BOUND_AT_OR_ABOVE_OPUS_5_5_ACCEPTANCE_BOUND",
+        "binding": "canonical/governance/DELEGATION_MATCHED_TERMINAL_ACCEPTANCE_V2.json",
+        "generic_acceptance_runtime": "canonical/runtime/matched_statistical_acceptance.py",
+        "generic_protocol": "canonical/governance/OPEN_ENDED_MATCHED_STATISTICAL_PROOF_PROTOCOL_V1.json",
+        "family_protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json::SUBAGENT_DELEGATION_AND_COORDINATION",
+        "exact_comparator": "Claude Opus 5.5",
+        "comparator_zero_incremental_status": "BLOCKED__CURRENT_FREE_ARENA_DIRECT_GUEST_ROUTE_FALSIFIED",
+        "terminal_result_status": "NOT_EXECUTED",
+    },
 }
 
 REQUIRED_FACTS = (
@@ -51,6 +75,15 @@ REQUIRED_FACTS = (
     "EVIDENCE_OWNERSHIP_AND_TERMINAL_FANIN_ARE_TOTAL_FOR_SELECTED_WORK",
     "RECEIPT_REPLAN_REUSES_SAME_EXACT_SOLVER",
     "SUPPORTED_RECEIPT_STATE_CHANGES_FAIL_CLOSED_ON_INVALID_INPUT",
+    "SCOPE_RELATION_CANDIDATE_SUPERSET",
+    "SCOPE_RELATION_ENVIRONMENT_EXACT",
+    "SCOPE_RELATION_INFORMATION_EXACT",
+    "SCOPE_RELATION_NO_UNRESOLVED_DIMENSIONS",
+    "SCOPE_RELATION_PROTOCOL_BOUNDARY_EXCLUDES_IMPLICIT_UNKNOWN_SEMANTICS",
+    "INDEPENDENT_TEMPORAL_TRANSPORT_PINS_CURRENT_ALGORITHM_SCOPE_AND_PROTOCOL",
+    "INDEPENDENT_SCOPE_SUBSTITUTION_REMAINS_ADMISSIBLE",
+    "CURRENT_CONTRACT_SEMANTIC_SLICE_UNCHANGED",
+    "DELEGATION_FAMILY_HAS_SOLE_RESIDUAL_CONTRACT",
 )
 
 
@@ -62,6 +95,10 @@ def _blob(rel: str) -> str:
 
 def _load_text(rel: str) -> str:
     return (ROOT / rel).read_text(encoding="utf-8")
+
+
+def _load_json(rel: str) -> Any:
+    return json.loads(_load_text(rel))
 
 
 def _assert_exact_blobs() -> None:
@@ -83,8 +120,22 @@ def _all(text: str, literals: tuple[str, ...]) -> bool:
     return all(x in text for x in literals)
 
 
+def _registry_contract(registry: Mapping[str, Any]) -> Mapping[str, Any] | None:
+    rows = (
+        registry.get("contracts")
+        or registry.get("behaviors")
+        or registry.get("rows")
+        or registry.get("behavioral_contracts")
+        or []
+    )
+    return next(
+        (x for x in rows if x.get("behavior_id") == "TASK_TO_DELEGATION_GRAPH_001"),
+        None,
+    )
+
+
 def derive_source_facts(candidate_text: str, oracle_text: str) -> dict[str, bool]:
-    """Derive proof premises directly from the exact source texts."""
+    """Derive algorithmic proof premises directly from exact source texts."""
     cf = _functions(candidate_text)
     of = _functions(oracle_text)
 
@@ -92,7 +143,7 @@ def derive_source_facts(candidate_text: str, oracle_text: str) -> dict[str, bool
         "FINITE_SIMPLE_SEQUENCE_SEARCH": (
             "_plan" in cf
             and _all(candidate_text, (
-                "eligible=sorted(s for s,x in steps.items() if x[\"available\"])",
+                'eligible=sorted(s for s,x in steps.items() if x["available"])',
                 "used=set(seq)",
                 "if sid in used:",
                 "ns=seq+(sid,)",
@@ -101,10 +152,10 @@ def derive_source_facts(candidate_text: str, oracle_text: str) -> dict[str, bool
         ),
         "EVERY_APPLICABLE_FACT_ADDING_UNUSED_STEP_EXPANDED": _all(candidate_text, (
             "for sid in eligible:",
-            "if not row[\"requires\"].issubset(facts):",
-            "nf=facts|row[\"produces\"]",
+            'if not row["requires"].issubset(facts):',
+            'nf=facts|row["produces"]',
             "if nf==facts:",
-            "heappush(heap,(cost+row[\"cost\"],count+1,ns,nf))",
+            'heappush(heap,(cost+row["cost"],count+1,ns,nf))',
         )),
         "NONNEGATIVE_FINITE_STEP_COSTS_ENFORCED": _all(candidate_text, (
             "math.isfinite(float(cost))",
@@ -114,7 +165,7 @@ def derive_source_facts(candidate_text: str, oracle_text: str) -> dict[str, bool
         "HEAP_OBJECTIVE_IS_COST_COUNT_LEXICAL_SEQUENCE": _all(candidate_text, (
             "heap=[(0.0,0,(),frozenset(initial))]",
             "cost,count,seq,facts=heappop(heap)",
-            "heappush(heap,(cost+row[\"cost\"],count+1,ns,nf))",
+            'heappush(heap,(cost+row["cost"],count+1,ns,nf))',
         )),
         "GOAL_REQUIRES_SCHEDULABILITY_BEFORE_RETURN": _all(candidate_text, (
             "if required.issubset(facts):",
@@ -148,8 +199,9 @@ def derive_source_facts(candidate_text: str, oracle_text: str) -> dict[str, bool
         ),
         "EVIDENCE_OWNERSHIP_AND_TERMINAL_FANIN_ARE_TOTAL_FOR_SELECTED_WORK": _all(candidate_text, (
             "owners,fanin,terminal_evidence=_evidence",
+            "EVIDENCE_OWNER_CONFLICT:",
             "terminal_evidence.update(lineage[s])",
-            "terminal_evidence.update(steps[s][\"evidence\"])",
+            'terminal_evidence.update(steps[s]["evidence"])',
             "terminal_evidence.update(completed_evidence.get(d,set()))",
         )),
         "RECEIPT_REPLAN_REUSES_SAME_EXACT_SOLVER": _all(candidate_text, (
@@ -169,6 +221,68 @@ def derive_source_facts(candidate_text: str, oracle_text: str) -> dict[str, bool
     }
 
 
+def derive_transport_facts(
+    relation: Mapping[str, Any],
+    transport: Mapping[str, Any],
+    scope_receipt: Mapping[str, Any],
+    registry: Mapping[str, Any],
+) -> dict[str, bool]:
+    current = transport.get("exact_current_brain_blobs") or {}
+    verified = set(transport.get("verified") or [])
+    exclusions = relation.get("frozen_scope_exclusions") or {}
+    family_map = registry.get("family_to_residual_contracts") or {}
+    row = _registry_contract(registry)
+
+    return {
+        "SCOPE_RELATION_CANDIDATE_SUPERSET": (
+            (relation.get("candidate_population_relation") or {}).get("relation")
+            == "CANDIDATE_SUPERSET_PROVEN"
+        ),
+        "SCOPE_RELATION_ENVIRONMENT_EXACT": relation.get("environment_relation") == "EXACT",
+        "SCOPE_RELATION_INFORMATION_EXACT": (
+            relation.get("information_relation")
+            == "EXACT_CANDIDATE_VISIBLE_INFORMATION"
+        ),
+        "SCOPE_RELATION_NO_UNRESOLVED_DIMENSIONS": (
+            len(relation.get("required_interactions") or []) == 11
+            and "TASK_REQUIREMENTS_TO_MINIMUM_COST_PARTITION"
+            in set(relation.get("required_interactions") or [])
+            and "REVISION_TO_RECEIPT_PROVENANCE"
+            in set(relation.get("required_interactions") or [])
+        ),
+        "SCOPE_RELATION_PROTOCOL_BOUNDARY_EXCLUDES_IMPLICIT_UNKNOWN_SEMANTICS": (
+            "implicit_unknown_step_semantics" in exclusions
+            and "undeclared_worker_or_tool_capabilities" in exclusions
+            and "OUTSIDE_THIS_BEHAVIOR_INPUT_CONTRACT"
+            in str(exclusions.get("implicit_unknown_step_semantics"))
+            and "OUTSIDE_ALLOWED_INFORMATION"
+            in str(exclusions.get("undeclared_worker_or_tool_capabilities"))
+        ),
+        "INDEPENDENT_TEMPORAL_TRANSPORT_PINS_CURRENT_ALGORITHM_SCOPE_AND_PROTOCOL": (
+            transport.get("status", "").startswith("INDEPENDENT_PUBLIC_RUNNER_PASS")
+            and current.get("canonical/runtime/delegation_whole_scope_candidate_v2.py")
+            == EXPECTED_BLOBS["canonical/runtime/delegation_whole_scope_candidate_v2.py"]
+            and current.get("canonical/runtime/delegation_whole_scope_proof_v2.py")
+            == EXPECTED_BLOBS["canonical/runtime/delegation_whole_scope_proof_v2.py"]
+            and current.get("canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json")
+            == EXPECTED_BLOBS["canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json"]
+            and current.get("canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json")
+            == EXPECTED_BLOBS["canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"]
+        ),
+        "INDEPENDENT_SCOPE_SUBSTITUTION_REMAINS_ADMISSIBLE": (
+            "SCOPE_SUBSTITUTION_REMAINS_INDEPENDENTLY_ADMISSIBLE" in verified
+            and scope_receipt.get("status", "").startswith("INDEPENDENT_PASS")
+            and (scope_receipt.get("verdict") or {}).get("admissible") is True
+            and not (scope_receipt.get("verdict") or {}).get("errors")
+        ),
+        "CURRENT_CONTRACT_SEMANTIC_SLICE_UNCHANGED": row == EXPECTED_CONTRACT_ROW,
+        "DELEGATION_FAMILY_HAS_SOLE_RESIDUAL_CONTRACT": (
+            family_map.get("SUBAGENT_DELEGATION_AND_COORDINATION")
+            == ["TASK_TO_DELEGATION_GRAPH_001"]
+        ),
+    }
+
+
 def prove_from_facts(facts: Mapping[str, bool]) -> dict[str, Any]:
     missing = [name for name in REQUIRED_FACTS if facts.get(name) is not True]
     if missing:
@@ -184,10 +298,16 @@ def prove_from_facts(facts: Mapping[str, bool]) -> dict[str, Any]:
     return {
         "status": "PASS__UNIVERSAL_FORMAL_SCOPE_PROOF_DERIVED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
         "proof_domain": (
-            "ALL_FINITE_VALID_EXPLICIT_DELEGATION_CONTRACTS_ACCEPTED_BY_THE_"
-            "FROZEN_CANDIDATE_MODEL_WITH_AT_LEAST_ONE_EXECUTABLE_FEASIBLE_PLAN"
+            "FROZEN_DELEGATION_PROTOCOL_AS_TRANSPORTED_TO_ALL_FINITE_VALID_EXPLICIT_"
+            "DELEGATION_CONTRACTS_IN_THE_INDEPENDENTLY_VERIFIED_CANDIDATE_SUPERSET"
         ),
         "theorem": {
+            "scope_transport": (
+                "Independent scope verification establishes that the explicit finite task model "
+                "is a candidate superset of the frozen delegation behavior with exact environment "
+                "and candidate-visible information; independent temporal transport pins that "
+                "relation to the exact current candidate, oracle, and family protocol bytes."
+            ),
             "planner_completeness": (
                 "Every simple applicable fact-adding sequence is reached in a finite search."
             ),
@@ -198,21 +318,26 @@ def prove_from_facts(facts: Mapping[str, bool]) -> dict[str, Any]:
             "oracle_equivalence": (
                 "The exhaustive oracle enumerates the same finite simple-sequence universe, "
                 "filters by the same schedulability predicate, and minimizes the same key; "
-                "therefore candidate plan equals oracle plan for every contract in the proof domain."
+                "therefore candidate plan equals oracle plan throughout the transported proof domain."
             ),
             "schedule_optimality": (
                 "Breadth-first search over completed-task subsets with exhaustive feasible "
                 "worker matchings yields minimum wave count because worker availability and "
                 "resource capacities reset per wave and future readiness depends only on completed tasks."
             ),
+            "evidence_integrity": (
+                "Evidence ownership conflicts fail closed and successful selected/completed work "
+                "preserves complete terminal fan-in provenance."
+            ),
             "replanning_closure": (
-                "Each supported live receipt transforms the finite explicit state and the same "
-                "exact solver is rerun; the theorem is therefore closed under supported replanning."
+                "Each supported live receipt transforms the same finite explicit state and the same "
+                "exact solver is rerun; the theorem is therefore closed under the frozen supported "
+                "receipt classes covered by the scope relation."
             ),
             "acceptance_consequence": (
-                "For every admissible feasible contract, terminal success reaches the objective "
-                "ceiling and critical dependency/resource/worker/evidence invariants are preserved. "
-                "Any speedup claim is made only without sacrificing that exact correctness."
+                "Within the independently transported frozen protocol scope, Brain reaches the "
+                "attainable exact outcome of the exhaustive objective model without trading away "
+                "dependency/resource/worker/evidence correctness for claimed speedup."
             ),
         },
         "target_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
@@ -237,9 +362,9 @@ def prove_from_facts(facts: Mapping[str, bool]) -> dict[str, Any]:
 def verify() -> dict[str, Any]:
     _assert_exact_blobs()
 
-    protocols = json.loads(_load_text(
+    protocols = _load_json(
         "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
-    ))
+    )
     rows = protocols.get("protocols") or protocols.get("families") or protocols.get("rows") or []
     row = next(x for x in rows if x.get("family") == "SUBAGENT_DELEGATION_AND_COORDINATION")
     assert row["status"] == "DEFINED_RESULT_OPEN"
@@ -247,17 +372,17 @@ def verify() -> dict[str, Any]:
     assert "zero critical violations" in row["acceptance"]
     assert "speedup must not trade away correctness" in row["acceptance"]
 
-    reconciliation = json.loads(_load_text(
+    reconciliation = _load_json(
         "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json"
-    ))
+    )
     assert "UNIVERSAL_FORMAL_SCOPE_PROOF" in reconciliation["admissible_absolute_dominance_bases"]
     assert "SUBAGENT_DELEGATION_AND_COORDINATION" in reconciliation[
         "expected_current_reduction"
     ]["reopened_pending_scope_completeness"]
 
-    bindings = json.loads(_load_text(
+    bindings = _load_json(
         "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
-    ))
+    )
     claim = next(
         x for x in bindings["claims"]
         if x.get("predicate_id") == "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR"
@@ -270,6 +395,12 @@ def verify() -> dict[str, Any]:
         _load_text("canonical/runtime/delegation_whole_scope_candidate_v2.py"),
         _load_text("canonical/runtime/delegation_whole_scope_proof_v2.py"),
     )
+    facts.update(derive_transport_facts(
+        _load_json("canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json"),
+        _load_json("canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"),
+        _load_json("canonical/verification/DELEGATION_SCOPE_GATE_V2_V3_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"),
+        _load_json("canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"),
+    ))
     out = prove_from_facts(facts)
     assert out["universal_scope_proved"] is True
     return out
