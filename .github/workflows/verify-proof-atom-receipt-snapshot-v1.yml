@@ -32,24 +32,36 @@ jobs:
         shell: bash
         run: |
           set +e
-          D="$RUNNER_TEMP/proof-atom-receipt-snapshot-v1"
-          rm -rf "$D"
-          mkdir -p "$D"
-          : > "$D/proof_atom_snapshot_diagnostic.txt"
-          git status --porcelain > "$D/initial_worktree.txt"
-          python -m canonical.runtime.proof_atom_receipt_snapshot_v1 > "$D/proof_atom_receipt_snapshot_v1.json" 2>> "$D/proof_atom_snapshot_diagnostic.txt"
-          echo "$?" > "$D/snapshot.exitcode"
-          git status --porcelain > "$D/post_snapshot_worktree.txt"
-          python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v >> "$D/proof_atom_snapshot_diagnostic.txt" 2>&1
-          echo "$?" > "$D/tests.exitcode"
-          python -m json.tool "$D/proof_atom_receipt_snapshot_v1.json" >/dev/null 2>> "$D/proof_atom_snapshot_diagnostic.txt"
-          echo "$?" > "$D/json.exitcode"
-          if [ -s "$D/proof_atom_receipt_snapshot_v1.json" ]; then
-            SNAPSHOT_JSON="$D/proof_atom_receipt_snapshot_v1.json" python - <<'PY' > "$D/proof_atom_receipt_snapshot_v1_summary.json" 2>> "$D/proof_atom_snapshot_diagnostic.txt"
+          T="$RUNNER_TEMP/proof_atom_snapshot_v1"
+          mkdir -p "$T"
+          : > "$T/proof_atom_snapshot_diagnostic.txt"
+          git status --porcelain > "$T/initial_worktree.txt"
+
+          # Critical invariant: do not create any repository-local output before
+          # the snapshot runtime has checked git status and sealed HEAD.
+          python -m canonical.runtime.proof_atom_receipt_snapshot_v1 \
+            > "$T/proof_atom_receipt_snapshot_v1.json" \
+            2>> "$T/proof_atom_snapshot_diagnostic.txt"
+          echo "$?" > "$T/snapshot.exitcode"
+
+          git status --porcelain > "$T/post_snapshot_worktree.txt"
+
+          python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v \
+            >> "$T/proof_atom_snapshot_diagnostic.txt" 2>&1
+          echo "$?" > "$T/tests.exitcode"
+
+          python -m json.tool "$T/proof_atom_receipt_snapshot_v1.json" \
+            >/dev/null 2>> "$T/proof_atom_snapshot_diagnostic.txt"
+          echo "$?" > "$T/json.exitcode"
+
+          if [ -s "$T/proof_atom_receipt_snapshot_v1.json" ]; then
+            SNAPSHOT_PATH="$T/proof_atom_receipt_snapshot_v1.json" \
+            python - <<'PY' > "$T/proof_atom_receipt_snapshot_v1_summary.json" \
+              2>> "$T/proof_atom_snapshot_diagnostic.txt"
           import json
           import os
           from pathlib import Path
-          s=json.loads(Path(os.environ["SNAPSHOT_JSON"]).read_text())
+          s=json.loads(Path(os.environ["SNAPSHOT_PATH"]).read_text())
           i=s.get("index",{})
           r=s.get("repository_snapshot",{})
           summary={
@@ -86,30 +98,30 @@ jobs:
         with:
           name: proof-atom-receipt-snapshot-v1
           path: |
-            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/proof_atom_receipt_snapshot_v1.json
-            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/proof_atom_receipt_snapshot_v1_summary.json
-            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/proof_atom_snapshot_diagnostic.txt
-            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/initial_worktree.txt
-            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/post_snapshot_worktree.txt
-            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/snapshot.exitcode
-            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/tests.exitcode
-            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/json.exitcode
+            ${{ runner.temp }}/proof_atom_snapshot_v1/proof_atom_receipt_snapshot_v1.json
+            ${{ runner.temp }}/proof_atom_snapshot_v1/proof_atom_receipt_snapshot_v1_summary.json
+            ${{ runner.temp }}/proof_atom_snapshot_v1/proof_atom_snapshot_diagnostic.txt
+            ${{ runner.temp }}/proof_atom_snapshot_v1/initial_worktree.txt
+            ${{ runner.temp }}/proof_atom_snapshot_v1/post_snapshot_worktree.txt
+            ${{ runner.temp }}/proof_atom_snapshot_v1/snapshot.exitcode
+            ${{ runner.temp }}/proof_atom_snapshot_v1/tests.exitcode
+            ${{ runner.temp }}/proof_atom_snapshot_v1/json.exitcode
           if-no-files-found: error
       - name: Enforce fail-closed result
         if: always()
         shell: bash
         run: |
-          D="$RUNNER_TEMP/proof-atom-receipt-snapshot-v1"
-          test "$(cat "$D/snapshot.exitcode")" = "0"
-          test "$(cat "$D/tests.exitcode")" = "0"
-          test "$(cat "$D/json.exitcode")" = "0"
-          test ! -s "$D/initial_worktree.txt"
-          test ! -s "$D/post_snapshot_worktree.txt"
-          SNAPSHOT_JSON="$D/proof_atom_receipt_snapshot_v1.json" python - <<'PY'
+          T="$RUNNER_TEMP/proof_atom_snapshot_v1"
+          test "$(cat "$T/snapshot.exitcode")" = "0"
+          test "$(cat "$T/tests.exitcode")" = "0"
+          test "$(cat "$T/json.exitcode")" = "0"
+          test ! -s "$T/initial_worktree.txt"
+          test ! -s "$T/post_snapshot_worktree.txt"
+          SNAPSHOT_PATH="$T/proof_atom_receipt_snapshot_v1.json" python - <<'PY'
           import json
           import os
           from pathlib import Path
-          s=json.loads(Path(os.environ["SNAPSHOT_JSON"]).read_text())
+          s=json.loads(Path(os.environ["SNAPSHOT_PATH"]).read_text())
           assert str(s.get("status","")).startswith("PASS"), s
           i=s["index"]
           assert i["canonical_atom_count"] == 40
