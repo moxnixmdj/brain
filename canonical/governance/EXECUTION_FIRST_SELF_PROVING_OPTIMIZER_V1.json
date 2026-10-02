@@ -48,9 +48,11 @@
     "GLOBAL_TERMINAL_PROOF_CUT_REFRESH",
     "EXISTING_EVIDENCE_SATURATION",
     "DEDUCTIVE_CLOSURE",
+    "PROOF_MODE_TRANSMUTATION",
     "VERIFIED_ENVELOPE_AND_IMPLICATION_CLOSURE",
     "COUNTERFACTUAL_TERMINAL_COMPILATION",
     "IMPOSSIBILITY_AND_DOMINANCE_DELETION",
+    "EXACT_MINIMUM_UNBLOCK_CUT",
     "EXACT_MINIMUM_REALITY_CUT",
     "DIRECT_NONDOMINATED_IRREDUCIBLE_PROOF_ACTION",
     "CHEAP_REVERSIBLE_INDEPENDENT_RACE_ONLY_WITHIN_MINIMUM_REALITY_CUT",
@@ -166,7 +168,10 @@
     "same_information_reacquisition_forbidden_without_documented_invalidation": true,
     "fail_closed_on_unknown": true,
     "activation_state": "FULLY_ACTIVE_FOR_ALL_SUBSEQUENT_FRESH_EVIDENCE_SPEND",
-    "current_existing_evidence_priority": "canonical/capabilities/opus55/FREECAD_SPRING_CLIP_RANK22_STAGE_C_EXECUTION_RECONCILIATION_V1.json"
+    "current_existing_evidence_priority": "canonical/capabilities/opus55/FREECAD_SPRING_CLIP_RANK22_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
+    "proof_mode_transmutation_required": true,
+    "minimum_internal_unblock_cut_required": true,
+    "external_comparator_irreducibility_must_be_proven_relative_to_frozen_routes": true
   },
   "global_terminal_proof_cut": {
     "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
@@ -230,5 +235,29 @@
       "FRESH_TERMINAL_EVIDENCE_SPEND"
     ],
     "terminal_credit_from_compiler_alone": false
+  },
+  "terminal_proof_supercompiler": {
+    "status": "ACTIVE__PREPROOF_SCHEDULING_ONLY__FAIL_CLOSED__ZERO_CAPABILITY_CREDIT",
+    "activation": "canonical/governance/TERMINAL_PROOF_SUPERCOMPILER_ACTIVATION_V1.json",
+    "runtime": "canonical/runtime/terminal_proof_supercompiler.py",
+    "rules": [
+      "DECOMPOSE_TO_SMALLEST_TERMINAL_PROOF_ATOM_BEFORE_ACCEPTING_WHOLE_CONTRACT_COMPARATOR_DEPENDENCE",
+      "TRY_STRONGER_PROOF_MODES_BEFORE_MATCHED_EXACT_OPUS",
+      "COMPUTE_EXACT_MINIMUM_INTERNALLY_CLOSABLE_UNBLOCK_CUT_OVER_FROZEN_ROUTE_BLOCKER_UNIVERSE",
+      "SHARED_UPSTREAM_BLOCKER_IS_PAID_ONCE_ACROSS_ALL_COVERED_OBLIGATIONS",
+      "EXTERNAL_IRREDUCIBILITY_MUST_BE_PROVEN_RELATIVE_TO_FROZEN_ADMISSIBLE_ROUTE_UNIVERSE__NO_PROXY_SUBSTITUTION",
+      "RECOMPUTE_AFTER_EVERY_BLOCKER_CLOSURE_OR_NEW_ADMISSIBLE_ROUTE"
+    ],
+    "proof_mode_order": [
+      "EXISTING_RECEIPT",
+      "EXACT_DEDUCTION",
+      "FORMAL_PROOF",
+      "EXHAUSTIVE_FINITE",
+      "DETERMINISTIC_HIDDEN_ORACLE",
+      "PUBLIC_FIXED_BAR",
+      "PUBLIC_SAME_CASE_OPUS",
+      "MATCHED_EXACT_OPUS"
+    ],
+    "no_fresh_terminal_evidence_until": "MINIMUM_INTERNAL_UNBLOCK_CUT_CLOSED_OR_EXTERNAL_IRREDUCIBILITY_PROVEN_AND_EXISTING_TERMINAL_EXECUTION_AUTHORITY_SEPARATELY_PASSES"
   }
 }
