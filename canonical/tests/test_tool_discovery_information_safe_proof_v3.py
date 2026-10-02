@@ -31,6 +31,16 @@ class Tests(unittest.TestCase):
         self.assertTrue(out["pass"],out)
         self.assertNotEqual(out["stage1"]["selected"],case["pages"][0][1]["tool_id"])
 
+    def test_unavailable_and_unauthorized_subclasses_both_exercised(self):
+        unavailable=proof.generate_case(77,4)
+        unauthorized=proof.generate_case(77,10)
+        self.assertFalse(unavailable["pages"][0][0]["available"])
+        self.assertTrue(unavailable["pages"][0][0]["authorized"])
+        self.assertTrue(unauthorized["pages"][0][0]["available"])
+        self.assertFalse(unauthorized["pages"][0][0]["authorized"])
+        self.assertTrue(proof.score_episode(unavailable,candidate.next_action)["pass"])
+        self.assertTrue(proof.score_episode(unauthorized,candidate.next_action)["pass"])
+
     def test_no_route_escalates_after_negative_evidence(self):
         case=proof.generate_case(77,5)
         out=proof.score_episode(case,candidate.next_action)
