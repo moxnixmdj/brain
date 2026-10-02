@@ -1,6 +1,12 @@
 name: Verify DOCX structural transaction coverage
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/ooxml_package_transaction.py
+      - canonical/tests/test_docx_structural_transaction_coverage.py
+      - .github/workflows/verify-docx-structural-transaction-coverage.yml
   push:
     branches: [main]
     paths:
