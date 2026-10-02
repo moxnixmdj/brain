@@ -16,6 +16,7 @@ Scheduling law:
 7. Exact-comparator gaps with no authorized zero-cost route are marked external-blocked
    and must not consume clean terminal cases.
 8. Unknown state fails closed and is scheduled for reconciliation, not promotion.
+9. Every queue is reconciled against proof coverage derived from the same active basis.
 """
 from __future__ import annotations
 
@@ -25,6 +26,8 @@ from pathlib import Path
 from typing import Any
 
 from canonical.runtime.terminal_route_evidence_freshness import evaluate_row_evidence_freshness
+from canonical.runtime.build_current_proof_coverage_manifest import build as build_proof_coverage_manifest
+from canonical.runtime.proof_coverage_compiler import evaluate as evaluate_proof_coverage
 
 BASIS = "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json"
 OPEN_DOMAIN_AUDIT = "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json"
@@ -259,6 +262,37 @@ def evaluate(root: Path) -> dict[str, Any]:
 
     queue.sort(key=lambda x: (x["priority_score"], x["behavior_id"]))
 
+    try:
+        coverage_manifest = build_proof_coverage_manifest(root)
+        coverage = evaluate_proof_coverage(coverage_manifest)
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        coverage_manifest = {}
+        coverage = {
+            "status": "FAIL_CLOSED",
+            "admissible_route_count": -1,
+            "uncovered_obligations": [],
+            "errors": ["PROOF_COVERAGE_RECONCILIATION_EXCEPTION:" + str(exc)],
+        }
+        errors.append("PROOF_COVERAGE_RECONCILIATION_FAILED")
+
+    queue_ids = sorted(x["behavior_id"] for x in queue)
+    uncovered_ids = sorted(coverage.get("uncovered_obligations") or [])
+    if coverage.get("status") not in {"INCOMPLETE_COVER", "EXACT_MINIMUM_COVER_FOUND"}:
+        errors.append("PROOF_COVERAGE_STATUS_INVALID")
+    if coverage.get("admissible_route_count") != len(closed):
+        errors.append("PROOF_COVERAGE_ADMISSIBLE_COUNT_MISMATCH")
+    if uncovered_ids != queue_ids:
+        errors.append("PROOF_COVERAGE_OPEN_ROUTE_SET_MISMATCH")
+
+    proof_coverage_reconciliation = {
+        "status": coverage.get("status"),
+        "admissible_route_count": coverage.get("admissible_route_count"),
+        "uncovered_obligations": uncovered_ids,
+        "queue_behavior_ids": queue_ids,
+        "source_basis_blob_sha": coverage_manifest.get("source_basis_blob_sha"),
+        "errors": coverage.get("errors") or [],
+    }
+
     declared_count = basis.get("active_contract_count")
     declared_closed = basis.get("admissible_frozen_terminal_route_count")
     if declared_count != len(seen):
@@ -278,6 +312,7 @@ def evaluate(root: Path) -> dict[str, Any]:
         "open_domain_deadlock_audit_applied": bool(open_domain_contracts),
         "open_domain_contract_count": len(open_domain_contracts),
         "reclassification_required_behavior_ids": sorted(reclassification_required),
+        "proof_coverage_reconciliation": proof_coverage_reconciliation,
         "queue": queue,
         "top_priority_behavior_id": queue[0]["behavior_id"] if queue else None,
         "errors": sorted(set(errors)),
