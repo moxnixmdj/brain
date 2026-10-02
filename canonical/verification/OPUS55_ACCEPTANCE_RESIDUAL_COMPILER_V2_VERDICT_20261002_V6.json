@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V6",
   "date": "2026-10-02",
-  "status": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION__SATURATION_COMPLETE__7_PROVED__0_OPEN__31_BLOCKED__ZERO_CREDIT",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SATURATION_COMPLETE__7_PROVED__0_OPEN__31_BLOCKED__ZERO_CREDIT",
   "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V5.json",
   "reconciliation_basis": {
     "prior_v5_sha": "9a8f8e21a5df03c922679bd60c6966fad422f581",
@@ -29,5 +29,15 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "rule": "SOURCE_GATE_ADMISSION_IS_PRESERVED__CARRIER_COMPATIBILITY_IS_A_SEPARATE_REQUIRED_READINESS_PREDICATE__NO_TB4_CASE_EXPOSURE_UNTIL_FULL_SCOPE_COMPARABLE_ZERO_COST_CARRIER_IS_BOUND"
+  "rule": "SOURCE_GATE_ADMISSION_IS_PRESERVED__CARRIER_COMPATIBILITY_IS_A_SEPARATE_REQUIRED_READINESS_PREDICATE__NO_TB4_CASE_EXPOSURE_UNTIL_FULL_SCOPE_COMPARABLE_ZERO_COST_CARRIER_IS_BOUND",
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 827,
+    "pull_request_head": "37f03cb6d2c8648318ed6c41216b57f0a091964b",
+    "merge_commit": "e23c710f4ea5f6c378bef8b1a9b5866594ebb1a9",
+    "workflow_run_id": 36995697935,
+    "workflow_job_id": 110801786436,
+    "conclusion": "success",
+    "exact_compiler_replay": true
+  }
 }
