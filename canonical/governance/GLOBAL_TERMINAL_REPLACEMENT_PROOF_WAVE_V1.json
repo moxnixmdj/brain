@@ -1,0 +1,141 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_ROUTE_MAP__FOUR_CONTRACT_NATIVE_CANDIDATE_ADAPTERS_INSTALLED_PENDING_INDEPENDENT_PASS__SIX_COMPOSED_TERMINAL_BINDINGS_REMAIN",
+  "supersedes_required_named_surface_execution": true,
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "surface_dominance": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_VERDICT_V3.json",
+    "surface_dominance_verification": "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "behavioral_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "contract_native_suites": "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
+    "four_direct_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json"
+  },
+  "rules": [
+    "NO_NAMED_BENCHMARK_SCORE_INHERITANCE",
+    "NO_CAPABILITY_CREDIT_FROM_SURFACE_DELETION_OR_PREWAVE_FREEZE",
+    "CANDIDATE_COMMIT_ORACLE_SCORER_POPULATION_POLICY_AND_DEPENDENCIES_FREEZE_BEFORE_POST_FREEZE_SEED",
+    "CANDIDATE_MAY_RECEIVE_ONLY_PUBLIC_CASE_PAYLOAD__HIDDEN_ORACLE_PAYLOAD_FORBIDDEN",
+    "ANY_REQUIRED_OBLIGATION_FAILURE_BLOCKS_DEPENDENT_FAMILY_PROMOTION",
+    "NO_SAME_CASE_REPLAY_FOR_TUNING",
+    "ZERO_INCREMENTAL_SPEND_ONLY"
+  ],
+  "candidate_commit_freeze": "FREEZE_AT_EXECUTION_AUTHORIZATION",
+  "portfolios": {
+    "T0": {
+      "namespace": "terminal_replacement_wave/T0/",
+      "obligations": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ]
+    },
+    "T1": {
+      "namespace": "terminal_replacement_wave/T1/",
+      "obligations": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ]
+    },
+    "T2": {
+      "namespace": "terminal_replacement_wave/T2/",
+      "obligations": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "TASK_TO_DELEGATION_GRAPH_001"
+      ]
+    },
+    "T3": {
+      "namespace": "terminal_replacement_wave/T3/",
+      "obligations": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+      ]
+    }
+  },
+  "unique_obligations": [
+    {
+      "id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "route": "VERIFIED_ACCEPTANCE_COMPILER_DIRECT",
+      "implementation": "canonical/runtime/requirement_acceptance_compiler.py",
+      "fresh_terminal_binding": "REQUIRED"
+    },
+    {
+      "id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "route": "VERIFIED_CONTRACT_NATIVE_STRUCTURED_METHOD",
+      "evaluator": "canonical/runtime/contract_native_proof_suites.py",
+      "candidate": "canonical/runtime/contract_native_brain_candidate.py",
+      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PENDING"
+    },
+    {
+      "id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "route": "VERIFIED_CONTRACT_NATIVE_TRAJECTORY_FAILURE_LOCALIZATION",
+      "evaluator": "canonical/runtime/contract_native_proof_suites.py",
+      "candidate": "canonical/runtime/contract_native_brain_candidate.py",
+      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PENDING"
+    },
+    {
+      "id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "route": "VERIFIED_CONTRACT_NATIVE_PROFESSIONAL_PLAN_QUALITY",
+      "evaluator": "canonical/runtime/contract_native_proof_suites.py",
+      "candidate": "canonical/runtime/contract_native_brain_candidate.py",
+      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PENDING"
+    },
+    {
+      "id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "route": "VERIFIED_NATIVE_ARTIFACT_TRANSACTIONS",
+      "implementation": "canonical/runtime/exact_artifact_materializer.py",
+      "fresh_terminal_binding": "REQUIRED"
+    },
+    {
+      "id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "route": "VERIFIED_CONTRACT_NATIVE_EVIDENCE_SYNTHESIS",
+      "evaluator": "canonical/runtime/contract_native_proof_suites.py",
+      "candidate": "canonical/runtime/contract_native_brain_candidate.py",
+      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PENDING"
+    },
+    {
+      "id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "route": "VERIFIED_M4_RESEARCH_CONTROL",
+      "implementation": "canonical/runtime/m4_research_control.py",
+      "fresh_terminal_binding": "REQUIRED"
+    },
+    {
+      "id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "route": "VERIFIED_TOOL_SELECTION_PRIMITIVES",
+      "implementation": "canonical/runtime/shared_decision_primitives.py",
+      "fresh_terminal_binding": "REQUIRED"
+    },
+    {
+      "id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "route": "VERIFIED_M3_CONSENSUS_DOM_GROUNDING",
+      "implementation": "canonical/runtime/consensus_dom_grounding.py",
+      "fresh_terminal_binding": "REQUIRED"
+    },
+    {
+      "id": "TASK_TO_DELEGATION_GRAPH_001",
+      "route": "VERIFIED_TASK_TO_DELEGATION_GRAPH_DIRECT_PROOF",
+      "evaluator": "canonical/runtime/delegation_contract_proof_suite.py",
+      "fresh_terminal_binding": "REQUIRED"
+    }
+  ],
+  "remaining_prequalification_work": [
+    "INDEPENDENTLY_VERIFY_CONTRACT_NATIVE_BRAIN_CANDIDATE_FOR_FOUR_GENERATED_CONTRACTS",
+    "FREEZE_FRESH_TERMINAL_CANDIDATE_BINDINGS_FOR_ACCEPTANCE_ARTIFACT_RESEARCH_TOOL_GROUNDING_AND_DELEGATION_ROUTES",
+    "FREEZE_POST_FREEZE_SEED_AND_POPULATION_SELECTION_PROTOCOL_FOR_ALL_TEN_OBLIGATIONS",
+    "RUN_MACHINE_PREQUALIFICATION_REDUCER__AUTHORIZE_WAVE_ONLY_ON_PASS"
+  ],
+  "brain_head_at_freeze": "1619d381df36f3a805f576d07ffeb4b29e476e8f",
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
