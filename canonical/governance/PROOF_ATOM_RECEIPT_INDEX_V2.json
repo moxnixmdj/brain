@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V2",
   "date": "2026-10-02",
-  "status": "CANDIDATE__V2_REFINEMENT_AWARE_CONTENT_ADDRESSED_40_ATOM_INDEX__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__V2_REFINEMENT_AWARE_CONTENT_ADDRESSED_40_ATOM_INDEX__EXACT_INPUTS_REPINNED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "objective": "Index existing evidence against the active V2 40-atom basis while preserving PA1 content addresses and target-specific refinement associations.",
   "runtime": "canonical/runtime/proof_atom_receipt_index_v2.py",
   "tests": "canonical/tests/test_proof_atom_receipt_index_v2.py",
@@ -34,7 +34,7 @@
     "ZERO_FRESH_REALITY",
     "RECOMPUTE_WHEN_V2_BASIS_REFINEMENT_OVERLAY_OR_SCANNED_EVIDENCE_CHANGES"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_INDEXER_BYTES__THEN_FREEZE_ONE_EXACT_REPOSITORY_SCAN_RESULT_AND_REVIEW_ONLY_CONTENT_ADDRESSED_CANDIDATES__NO_FRESH_REALITY",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_REPINNED_V2_INDEXER_AND_TEST_BYTES__THEN_FREEZE_ONE_EXACT_REPOSITORY_SCAN_RESULT_AND_REVIEW_ONLY_CONTENT_ADDRESSED_CANDIDATES__NO_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
