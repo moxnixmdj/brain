@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_WHOLE_DIMENSION_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__TYPED_DAG_WHOLE_DIMENSION_BOUNDED_PREFLIGHT__ZERO_TERMINAL_CREDIT",
+  "behavior_contract": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "brain_merge_commit": "cfaedb1dcb5c750d01908b0a20662e3c4ec1783c",
+  "exact_brain_blobs": {
+    "canonical/runtime/structured_method_graph_candidate_v1.py": "def5eb4aad6232d6c240827c1ff24d433612e9a5",
+    "canonical/runtime/structured_method_graph_proof_v1.py": "d0b0e6619a1066a7bc8b70f1226f4ab0f95a5e4c",
+    "canonical/tests/test_structured_method_graph_preflight_v1.py": "8c917d9808e4d70011806e45700af8b481f0ad4b"
+  },
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 580,
+  "public_merge_commit": "79356393bdf74c5a8e19f3775f4047f2ca99c231",
+  "workflow_run_id": 36961004115,
+  "workflow_conclusion": "success",
+  "verified": [
+    "INTERMEDIATE_DAG_STRUCTURE_AND_CONSUMER_LINEAGE",
+    "JUSTIFIED_EXCLUSION_OF_INAPPLICABLE_REQUIREMENTS",
+    "DIMENSION_AND_TYPE_VALIDATION",
+    "INVARIANT_VALIDATION",
+    "MULTIPLE_METHOD_BRANCH_SELECTION",
+    "SCHEMA_STANDARD_AND_FEATURE_CALLOUT_REQUIREMENT_COVERAGE",
+    "INDEPENDENT_OUTPUT_CONSEQUENCES",
+    "MISSING_INTERMEDIATE_MUTATION_REJECTED",
+    "FALSE_EXCLUSION_MUTATION_REJECTED",
+    "DIMENSION_MISMATCH_FAILS_CLOSED",
+    "AMBIGUOUS_BRANCH_FAILS_CLOSED",
+    "UNCONSUMED_APPLICABLE_REQUIREMENT_FAILS_CLOSED",
+    "WRONG_OUTPUT_VALUE_REJECTED",
+    "EXACT_BRAIN_BLOB_HASHES_VERIFIED"
+  ],
+  "limitations": [
+    "BOUNDED_NORMALIZED_RULE_GRAMMAR_ONLY",
+    "SEMANTIC_EXTRACTION_OF_UNSTATED_RULES_REMAINS_SEPARATE_RESIDUAL",
+    "ARBITRARY_FORMULA_STANDARD_AND_SCHEMA_GRAMMARS_NOT_PROVEN",
+    "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
+    "NOT_POST_FREEZE_TERMINAL_POPULATION"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
