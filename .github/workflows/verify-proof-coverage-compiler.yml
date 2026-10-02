@@ -1,0 +1,22 @@
+name: Verify proof coverage compiler
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/proof_coverage_compiler.py
+      - canonical/tests/test_proof_coverage_compiler.py
+      - canonical/governance/CURRENT_PROOF_COVERAGE_MANIFEST_V1.json
+      - .github/workflows/verify-proof-coverage-compiler.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_proof_coverage_compiler
+      - run: python canonical/runtime/proof_coverage_compiler.py canonical/governance/CURRENT_PROOF_COVERAGE_MANIFEST_V1.json
