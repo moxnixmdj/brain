@@ -42,7 +42,8 @@
         "canonical/runtime/orthographic_view_identity.py",
         "canonical/runtime/callout_geometry_association.py",
         "canonical/runtime/drawing_view_registration.py",
-        "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json"
+        "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
+        "canonical/capabilities/opus55/PLANAR_PERSPECTIVE_REGISTRATION_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -50,7 +51,7 @@
         "opencv/opencv@adb7afef1512cf3f9846cedc3fc3cf394333791c"
       ],
       "uncovered": [
-        "VIEW_REGISTRATION_OUTSIDE_SINGLE_BOUNDED_GLOBAL_ROTATION_DESKEW__INCLUDING_LOCAL_WARP_PERSPECTIVE_AND_NONORTHOGONAL_LAYOUTS",
+        "VIEW_REGISTRATION_OUTSIDE_GLOBAL_ROTATION_OR_EXPLICIT_PLANAR_PROJECTIVE_RECTIFICATION__INCLUDING_LOCAL_NONLINEAR_WARP_AUTOMATIC_QUAD_DISCOVERY_AND_ARBITRARY_NONORTHOGONAL_LAYOUTS",
         "COMPOUND_VISUAL_FEATURE_SEMANTICS",
         "GD_AND_T_AND_BROADER_ENGINEERING_NOTATION",
         "ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST_SCOPE"
@@ -88,6 +89,12 @@
           "conclusion": "success",
           "capability_receipt": "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
           "scope": "ENGLISH_RASTER_TEXT_EXTRACTION_ON_EXACT_PINNED_TESSERACT_5_3_4_AND_ENG_TRAINEDDATA_SHA256_7D4322BD__NO_ENGINEERING_SEMANTIC_AUTHORITY"
+        },
+        "planar_perspective_registration": {
+          "workflow_run_id": 36943628353,
+          "conclusion": "success",
+          "capability_receipt": "canonical/capabilities/opus55/PLANAR_PERSPECTIVE_REGISTRATION_001.json",
+          "scope": "PLANAR_PROJECTIVE_PERSPECTIVE_RECTIFICATION_FROM_EXPLICIT_CONVEX_TL_TR_BR_BL_QUADRILATERAL"
         }
       }
     },
@@ -121,7 +128,7 @@
   "nonblocking_ready_obligation": [
     "M1B"
   ],
-  "next": "M0A_REMAINS_BLOCKED_BY_CONTEXTUAL_IMPLICIT_LONG_RANGE_AND_OPEN_SEMANTICS__M1A_OCR_ATOM_CLOSED__M1A_REMAINS_BLOCKED_BY_NON_GLOBAL_REGISTRATION_COMPOUND_VISUAL_SEMANTICS_BROADER_ENGINEERING_NOTATION_AND_ROBUSTNESS__SEARCH_REUSE_SUBSTITUTE_PER_UNCOVERED_ATOM__FREEZE_ONLY_WHEN_COMPLETE",
+  "next": "M0A_REMAINS_BLOCKED_BY_CONTEXTUAL_IMPLICIT_LONG_RANGE_AND_OPEN_SEMANTICS__M1A_OCR_AND_EXPLICIT_PLANAR_PERSPECTIVE_ATOMS_CLOSED__M1A_REMAINS_BLOCKED_BY_LOCAL_NONLINEAR_REGISTRATION_AUTOMATIC_QUAD_DISCOVERY_COMPOUND_VISUAL_SEMANTICS_BROADER_ENGINEERING_NOTATION_AND_ROBUSTNESS__SEARCH_REUSE_SUBSTITUTE_PER_UNCOVERED_ATOM__FREEZE_ONLY_WHEN_COMPLETE",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -129,7 +136,7 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "newly_verified_components": 6,
-    "note": "Pinned English image OCR atom independently closed at exact dependency surface; M0A and M1A remain open and exact cut remains unauthorized."
+    "newly_verified_components": 7,
+    "note": "Planar projective perspective rectification independently closed at explicit-quad scope; local nonlinear warp and free-form layout remain open."
   }
 }
