@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OBJECTIVE_ORACLE_DOMINANCE_COMPILER_ACTIVATION_V1",
   "date": "2026-10-02",
-  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ACTIVE_PROOF_ROUTE_DISCOVERY_AND_SCHEDULING_CONTROL__ZERO_TERMINAL_CREDIT",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_LIVE_INPUT_VERIFIED__ACTIVE_PROOF_ROUTE_DISCOVERY_AND_SCHEDULING_CONTROL__ZERO_TERMINAL_CREDIT",
   "objective": "DELETE_WEAKER_EXTERNAL_MODEL_OR_GATED_BENCHMARK_DEPENDENCIES_ONLY_WHEN_THE_DECLARED_BEHAVIORAL_CONTRACT_IS_COMPLETELY_COVERED_BY_A_STRONGER_OBJECTIVE_HIDDEN_INDEPENDENT_ORACLE_ROUTE",
   "runtime": "canonical/runtime/objective_oracle_dominance_compiler.py",
   "tests": "canonical/tests/test_objective_oracle_dominance_compiler.py",
@@ -36,6 +36,6 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "independent_verification": "canonical/verification/OBJECTIVE_ORACLE_DOMINANCE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "verified_live_input_blob_sha": "79d1c88b854f05b73d37734cbb2b4bf5000a5472"
+  "independent_verification": "canonical/verification/OBJECTIVE_ORACLE_DOMINANCE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+  "verified_live_input_blob_sha": "e9f197d3ab2c54f7b2488b3887d55f465630bb93"
 }
