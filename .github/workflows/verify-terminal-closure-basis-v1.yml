@@ -2,8 +2,8 @@ name: verify-terminal-closure-basis-v1
 on:
   pull_request:
     paths:
-      - 'canonical/runtime/terminal_action_basis_compiler_v1.py'
-      - 'canonical/tests/test_terminal_action_basis_compiler_v1.py'
+      - 'canonical/runtime/terminal_action_coverage_guard_v1.py'
+      - 'canonical/tests/test_terminal_action_coverage_guard_v1.py'
       - 'canonical/runtime/reopened_objective_route_compiler_v1.py'
       - 'canonical/tests/test_reopened_objective_route_compiler_v1.py'
       - 'canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json'
@@ -18,13 +18,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python -m unittest canonical.tests.test_terminal_action_basis_compiler_v1 canonical.tests.test_reopened_objective_route_compiler_v1 -v
-      - name: Compile live terminal action basis
+      - run: python -m unittest canonical.tests.test_terminal_action_coverage_guard_v1 canonical.tests.test_reopened_objective_route_compiler_v1 -v
+      - name: Verify live unresolved action coverage
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          from canonical.runtime.terminal_action_basis_compiler_v1 import evaluate
+          from canonical.runtime.terminal_action_coverage_guard_v1 import evaluate
           root=Path('.')
           load=lambda p: json.loads((root/p).read_text())
           out=evaluate(
@@ -34,9 +34,9 @@ jobs:
           )
           print(json.dumps(out,indent=2))
           assert out['status']=='PASS', out
-          assert out['coverage_complete'] is True, out
           assert out['unresolved_predicate_count']==31, out
           assert out['represented_unresolved_predicate_count']==31, out
+          assert out['uncovered_unresolved_predicates']==[], out
           PY
       - name: Compile reopened objective routes
         run: |
