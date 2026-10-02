@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TRAJECTORY_ABSOLUTE_TERMINAL_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_ABSOLUTE_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "proof_mode": "DETERMINISTIC_HIDDEN_ORACLE_INTERVENTION_RESCUE",
+  "authority": [
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
+    "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json",
+    "canonical/runtime/trajectory_failure_information_safe_proof_v2.py"
+  ],
+  "scope_equivalence": {
+    "visible_inputs": [
+      "NORMALIZED_EXECUTION_TRAJECTORY",
+      "EXPLICIT_PER_STEP_CONTRACT_TRANSITIONS",
+      "TERMINAL_GOAL",
+      "DECLARED_REPAIR_LANGUAGE"
+    ],
+    "required_outputs": [
+      "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_STEP",
+      "FAILURE_CLASS_WITH_SUPPORTING_RECEIPTS",
+      "FALSIFIABLE_REPAIR_TARGET"
+    ],
+    "hidden_oracle": [
+      "GROUND_TRUTH_INJECTED_CAUSE_OR_INTERVENTION_ESTABLISHED_CAUSAL_STEP",
+      "RESCUE_OUTCOME_FOR_EACH_CANDIDATE_REPAIR",
+      "NONIDENTIFIABILITY_EQUIVALENCE_CLASS"
+    ],
+    "scope_rule": "A_CASE_IS_IN_SCOPE_ONLY_WHEN_CAUSAL_IDENTITY_IS_ESTABLISHED_BY_FROZEN_INTERVENTION_RESCUE_ORACLE_OR_DECLARED_NONIDENTIFIABILITY__OBSERVATIONAL_UNIDENTIFIABLE_CASES_REQUIRE_ABSTENTION",
+    "no_weakening": [
+      "FIRST_INVARIANT_VIOLATION_IS_NOT_CAUSE_BY_DEFAULT",
+      "DOWNSTREAM_SYMPTOM_SELECTION_FAILS",
+      "UNFALSIFIABLE_DIAGNOSIS_FAILS",
+      "NONRESCUING_REPAIR_FAILS",
+      "FORCED_UNIQUE_CAUSE_ON_NONIDENTIFIABLE_TRACE_FAILS"
+    ],
+    "verdict": "CANDIDATE_SCOPE_EQUIVALENT_TO_FROZEN_CAUSAL_LOCALIZATION_CONTRACT_FOR_DECLARED_INTERVENTION_IDENTIFIABLE_ENVELOPE__WHOLE_OPEN_DOMAIN_GENERALITY_IS_PROVEN_ONLY_BY_TERMINAL_POPULATION_COVERAGE_NOT_BY_THIS_BINDING_ALONE"
+  },
+  "candidate": {
+    "implementation": "canonical/runtime/trajectory_failure_information_safe_candidate_v2.py",
+    "proof_suite": "canonical/runtime/trajectory_failure_information_safe_proof_v2.py",
+    "dependency_manifest_required": true
+  },
+  "population": {
+    "classes": [
+      "SINGLE_IDENTIFIABLE_EARLY_CAUSE_WITH_DOWNSTREAM_SYMPTOMS",
+      "MULTIPLE_VISIBLE_DEVIATIONS_WITH_ONLY_ONE_TERMINAL_RESCUER",
+      "TWO_OR_MORE_DISTINCT_SINGLE_STEP_RESCUERS_NONIDENTIFIABLE",
+      "AUTHORITY_OR_INVARIANT_VIOLATION_WITH_COUNTERFACTUAL_RESCUE",
+      "PUBLIC_REPLAYABLE_AGENT_FAILURE_WITH_INDEPENDENT_INTERVENTION"
+    ],
+    "selection_rule": "FREEZE_GENERATOR_PUBLIC_FAILURE_POOL_MUTATIONS_AND_SEED_RULE_BEFORE_TERMINAL_BEACON",
+    "spent_failures_role": "VERIFIER_MUTATION_PREFLIGHT_ONLY__NO_TERMINAL_SCORE"
+  },
+  "evaluator": {
+    "required_checks": [
+      "CAUSE_ACTION_MATCHES_UNIQUE_RESCUER_WHEN_IDENTIFIABLE",
+      "FALSIFIABLE_REPAIR_MATCHES_RESCUING_INTERVENTION",
+      "SUPPORTING_RECEIPT_REFERENCES_CAUSAL_STEP",
+      "AMBIGUOUS_STATUS_RETURNED_WHEN_MULTIPLE_RESCUERS_EXIST",
+      "NO_FORCED_UNIQUE_CAUSE_ON_NONIDENTIFIABLE_TRACE"
+    ],
+    "mutations": [
+      "SELECT_DOWNSTREAM_SYMPTOM",
+      "SELECT_LATER_CORRELATED_STEP",
+      "IGNORE_VIOLATED_AUTHORITY_OR_INVARIANT",
+      "UNFALSIFIABLE_DIAGNOSIS",
+      "REPAIR_TARGET_WITH_NO_RESCUE",
+      "FORCE_UNIQUE_CAUSE_ON_NONIDENTIFIABLE_TRACE"
+    ],
+    "acceptance": "ALL_REQUIRED_CASE_CLASSES_PASS__ALL_APPLICABLE_CRITICAL_MUTATIONS_KILLED__ZERO_CAUSAL_OVERCLAIM"
+  },
+  "terminal_binding": {
+    "portfolios": [
+      "T0",
+      "T2"
+    ],
+    "terminal_evidence_source": "FROZEN_T0_T2_OBSERVATIONS_PLUS_PREDECLARED_INTERVENTION_RESCUE_CASES",
+    "any_load_bearing_failure_blocks_behavior_proof": true,
+    "external_opus_comparator_required": false,
+    "reason": "ABSOLUTE_CAUSAL_INTERVENTION_ORACLE_DEFINES_SUCCESS_WITHOUT_MODEL_RELATIVE_JUDGMENT"
+  },
+  "contamination": {
+    "post_freeze_tuning": false,
+    "case_replacement": false,
+    "evaluator_edit_after_results": false
+  },
+  "prewave_admissible": false,
+  "independent_verification": null,
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
