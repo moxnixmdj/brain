@@ -156,7 +156,7 @@ class Tests(unittest.TestCase):
             root=Path(td)
             p=root/"canonical/verification/bad.json"
             p.parent.mkdir(parents=True)
-            p.write_bytes(b"\\xff")
+            p.write_bytes(b"\xff")
             out=build_index(frontier(),overlay(),root=root)
             self.assertEqual(out["status"],"FAIL_CLOSED")
             self.assertEqual(out["declared_candidate_file_count"],1)
