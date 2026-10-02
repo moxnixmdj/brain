@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V10",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_PROVED__0_OPEN__29_BLOCKED__TB4_ATTAINABILITY_IMPOSSIBLE__ZERO_CREDIT",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json",
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 9,
+  "open_predicate_count": 0,
+  "blocked_predicate_count": 29,
+  "refuted_predicate_count": 0,
+  "fully_proved_residual_family_count": 2,
+  "newly_proved_predicate": {
+    "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "proof_kind": "ABSOLUTE_CEILING",
+    "source": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
+  },
+  "blocker_partition": {
+    "current_tb4_public_bar_impossible": 1,
+    "other_public_fixed_bars_not_score_ready": 14,
+    "matched_or_scope_audit_without_exact_comparator_or_full_scope_stronger_proof": 11,
+    "direct_judgment_source_blockers": 2,
+    "composition_dependency_blocker": 1,
+    "total": 29
+  },
+  "tb4_attainability": {
+    "source": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+    "state": "IMPOSSIBLE",
+    "maximum_attainable_successes": 180,
+    "required_successes": 220,
+    "reality_execution_authorized": false
+  },
+  "authorized_acceptance_case_actions": [],
+  "terminal_promotion_allowed": false,
+  "exact_brain_inputs": {
+    "canonical/runtime/opus55_acceptance_residual_compiler_v2.py": "cae5bc3bfda9c77d7d7e5151127f55aafddb9522",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "f500b56e7349ce8c0f97cfd0bd1db4888ec6887c",
+    "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json": "f67e22cee5e6fce1ebfae92ebf0946f78fafcee1",
+    "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json": "4e59e30461c9ff1bee1a9474627d5fb4074844b2"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 886,
+    "pull_request_head": "5a4d67768213d4bfc780bc7656ceb98ec29c86d2",
+    "merge_commit": "86a2177fe4490edc9469d128e09eebf7cc93579f",
+    "workflow_run_id": 37008568995,
+    "workflow_job_id": 110842547415,
+    "conclusion": "success"
+  },
+  "counterfactual": {
+    "remove_delegation_atomic_ceiling_claim": "REVERTS_TO_8_PROVED__30_BLOCKED",
+    "verified": true
+  },
+  "fresh_acceptance_cases_consumed_by_this_recompile": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "CURRENT_EVIDENCE_LEDGER_CONTROLS_ATOMIC_COUNTS__PROVED_PREDICATES_DELETE_WORK__ATTAINABILITY_PRECEDES_REALITY__NO_CASE_EXECUTION_WHILE_AUTHORIZED_ACTION_SET_EMPTY"
+}
