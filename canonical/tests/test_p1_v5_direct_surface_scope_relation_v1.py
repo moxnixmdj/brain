@@ -23,6 +23,8 @@ class P1V5DirectSurfaceScopeRelationTests(unittest.TestCase):
         self.assertTrue(out["all_declared_p1_surface_relations_exact_or_superset"])
         self.assertTrue(out["v5_is_superset_carrier_for_frozen_p1_residual_role"])
         self.assertEqual(len(out["surface_relations"]), 3)
+        self.assertEqual(len({r["claim_id"] for r in out["surface_relations"]}), 3)
+        self.assertTrue(all(r["relation_scope"] == "UNRESOLVED_SEMANTICS_WITHIN_EXACT_FROZEN_P1_CONTRACT_ROLE_ONLY" for r in out["surface_relations"]))
         self.assertFalse(out["full_surface_superset_claim"])
         self.assertFalse(out["terminal_surface_proof_complete"])
         self.assertFalse(out["can_clear_p1_scope_quarantine"])
@@ -71,7 +73,7 @@ class P1V5DirectSurfaceScopeRelationTests(unittest.TestCase):
         self.assertFalse(out["anti_overclaim"]["private_benchmark_score_reproduction_claim"])
         self.assertEqual(
             {r["relation"] for r in out["surface_relations"]},
-            {"EXACT_FROZEN_P1_CONTRACT_ROLE_BINDING"},
+            {"SUPERSET"},
         )
 
 
