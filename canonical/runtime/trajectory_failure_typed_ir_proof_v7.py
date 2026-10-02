@@ -201,13 +201,10 @@ def execute_intervention(public_case: Mapping[str, Any], candidate: Mapping[str,
 
     repairs = _repair_set(candidate)
     by_id: dict[str, Mapping[str, Any]] = {}
-    explicit_deps: dict[str, set[str]] = {}
     deps: dict[str, set[str]] = {}
     composition: dict[str, str] = {}
     last_writer: dict[str, str] = {}
-    resource_writer_at_step: dict[tuple[str, str], str] = {}
 
-    # Parse in declared topological order and bind dataflow to the latest prior writer.
     for row in rows:
         if not isinstance(row, Mapping):
             return {"terminal_rescued": False, "reason": "ROW_INVALID"}
@@ -232,14 +229,12 @@ def execute_intervention(public_case: Mapping[str, Any], candidate: Mapping[str,
             return {"terminal_rescued": False, "reason": "NON_TOPOLOGICAL_DEPENDENCY"}
 
         by_id[aid] = row
-        explicit_deps[aid] = set(raw_deps)
         deps[aid] = set(raw_deps)
         composition[aid] = comp
         for resource in raw_reads:
             producer = last_writer.get(resource)
             if producer is not None:
                 deps[aid].add(producer)
-                resource_writer_at_step[(aid, resource)] = producer
         for resource in raw_writes:
             last_writer[resource] = aid
 
@@ -253,28 +248,54 @@ def execute_intervention(public_case: Mapping[str, Any], candidate: Mapping[str,
             "missing_terminal_resources": missing_terminal,
         }
 
+    terminal_actions = {last_writer[str(r)] for r in terminal_resources}
+    relevant_actions: set[str] = set()
+    stack = list(terminal_actions)
+    while stack:
+        aid = stack.pop()
+        if aid in relevant_actions:
+            continue
+        relevant_actions.add(aid)
+        stack.extend(deps.get(aid, set()))
+
     action_valid: dict[str, bool] = {}
+    baseline_action_valid: dict[str, bool] = {}
     action_reason: dict[str, list[str]] = {}
     resource_valid: dict[str, bool] = {}
+    baseline_resource_valid: dict[str, bool] = {}
     matched_repairs: set[tuple[str, str]] = set()
+    matched_relevant_repairs: set[tuple[str, str]] = set()
     active_direct: list[tuple[str, str]] = []
     active_derived: list[tuple[str, str]] = []
 
     for row in rows:
         aid = str(row["action_id"])
-        pred_ids = deps[aid]
-        pred_values = [action_valid.get(x, False) for x in pred_ids]
         comp = composition[aid]
-        if not pred_values:
-            predecessors_valid = True
-        elif comp == "ALTERNATIVE":
-            predecessors_valid = any(pred_values)
-        else:
-            predecessors_valid = all(pred_values)
+
+        pred_values = [action_valid.get(x, False) for x in deps[aid]]
+        baseline_pred_values = [baseline_action_valid.get(x, False) for x in deps[aid]]
+        read_values = [resource_valid.get(str(x), False) for x in row.get("reads") or []]
+        baseline_read_values = [
+            baseline_resource_valid.get(str(x), False) for x in row.get("reads") or []
+        ]
+
+        def compose(values: list[bool]) -> bool:
+            if not values:
+                return True
+            if comp == "ALTERNATIVE":
+                return any(values)
+            return all(values)
+
+        predecessors_valid = compose(pred_values) and compose(read_values)
+        baseline_predecessors_valid = (
+            compose(baseline_pred_values) and compose(baseline_read_values)
+        )
 
         direct_ok = True
+        baseline_direct_ok = True
         row_derived: list[tuple[str, str]] = []
         reasons: list[str] = []
+
         for check in row["checks"]:
             if not isinstance(check, Mapping):
                 return {"terminal_rescued": False, "reason": "CHECK_INVALID"}
@@ -287,55 +308,77 @@ def execute_intervention(public_case: Mapping[str, Any], candidate: Mapping[str,
                 return {"terminal_rescued": False, "reason": "FAILURE_SEMANTICS_INVALID"}
             if passed:
                 continue
+
             key = (aid, kind)
             if semantics == "DIRECT_CONTRACT":
+                baseline_direct_ok = False
                 if key in repairs:
                     matched_repairs.add(key)
+                    if aid in relevant_actions:
+                        matched_relevant_repairs.add(key)
                 else:
                     direct_ok = False
-                    active_direct.append(key)
+                    if aid in relevant_actions:
+                        active_direct.append(key)
             else:
                 row_derived.append(key)
 
-        # A derived symptom is active exactly when its upstream action state remains
-        # invalid. It is never repaired directly and never establishes root validity.
-        derived_ok = True
-        if row_derived and not predecessors_valid:
-            derived_ok = False
+        derived_ok = not row_derived or predecessors_valid
+        baseline_derived_ok = not row_derived or baseline_predecessors_valid
+        if row_derived and not predecessors_valid and aid in relevant_actions:
             active_derived.extend(row_derived)
 
         valid = predecessors_valid and direct_ok and derived_ok
+        baseline_valid = (
+            baseline_predecessors_valid and baseline_direct_ok and baseline_derived_ok
+        )
         action_valid[aid] = valid
+        baseline_action_valid[aid] = baseline_valid
+
         if not predecessors_valid:
-            reasons.append("PREDECESSOR_STATE_INVALID")
+            reasons.append("PREDECESSOR_OR_INPUT_RESOURCE_INVALID")
         if not direct_ok:
             reasons.append("DIRECT_CONTRACT_FAILURE_UNREPAIRED")
         if not derived_ok:
             reasons.append("DERIVED_UPSTREAM_FAILURE_ACTIVE")
         action_reason[aid] = reasons
 
-        for resource in row["writes"]:
+        for resource in row.get("writes") or []:
             resource_valid[str(resource)] = valid
+            baseline_resource_valid[str(resource)] = baseline_valid
 
     terminal_validity = {
         str(resource): bool(resource_valid.get(str(resource), False))
         for resource in terminal_resources
     }
-    relevant_matched_repair = bool(matched_repairs)
+    baseline_terminal_validity = {
+        str(resource): bool(baseline_resource_valid.get(str(resource), False))
+        for resource in terminal_resources
+    }
+    terminal_was_failed = not all(baseline_terminal_validity.values())
     terminal_rescued = (
-        all(terminal_validity.values())
-        and relevant_matched_repair
-        and not active_direct
+        terminal_was_failed
+        and all(terminal_validity.values())
+        and bool(matched_relevant_repairs)
     )
 
     return {
         "terminal_rescued": terminal_rescued,
+        "terminal_was_failed_before_intervention": terminal_was_failed,
+        "baseline_terminal_resource_validity": baseline_terminal_validity,
         "terminal_resource_validity": terminal_validity,
         "action_validity": dict(action_valid),
         "action_failure_reasons": action_reason,
         "matched_direct_repairs": [f"{a}:{k}" for a, k in sorted(matched_repairs)],
-        "active_direct_failures": [f"{a}:{k}" for a, k in sorted(active_direct)],
-        "active_derived_failures": [f"{a}:{k}" for a, k in sorted(active_derived)],
+        "matched_relevant_direct_repairs": [
+            f"{a}:{k}" for a, k in sorted(matched_relevant_repairs)
+        ],
+        "active_relevant_direct_failures": [
+            f"{a}:{k}" for a, k in sorted(active_direct)
+        ],
+        "active_relevant_derived_failures": [
+            f"{a}:{k}" for a, k in sorted(active_derived)
+        ],
         "reason": "TERMINAL_STATE_REPLAY_VALID" if terminal_rescued else "TERMINAL_STATE_REPLAY_FAILED",
     }
 
