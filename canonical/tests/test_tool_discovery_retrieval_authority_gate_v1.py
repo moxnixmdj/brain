@@ -27,8 +27,8 @@ def actual_blobs():
         "router_blob": gate.git_blob_sha(raw(gate.EXPECTED["router_path"])),
         "github_provider_blob": gate.git_blob_sha(raw(gate.EXPECTED["github_provider_path"])),
         "backend_verification_blob": gate.git_blob_sha(raw(gate.EXPECTED["backend_verification_path"])),
-        "multilingual_input_blob": gate.git_blob_sha(raw(gate.EXPECTED["multilingual_input_path"])),
-        "recall_verification_blob": gate.git_blob_sha(raw(gate.EXPECTED["recall_verification_path"])),
+        "multilingual_input_blob": gate.git_blob_sha(raw(gate.RECALL_EXPECTED["multilingual_input_path"])),
+        "recall_verification_blob": gate.git_blob_sha(raw(gate.RECALL_EXPECTED["recall_verification_path"])),
     }
 
 
@@ -39,7 +39,7 @@ def validate(hypergraph=None, activation=None, activation_verification=None, com
         activation_verification or load(gate.EXPECTED["activation_verification_path"]),
         compiler_verification or load(gate.EXPECTED["compiler_verification_path"]),
         backend_verification or load(gate.EXPECTED["backend_verification_path"]),
-        recall_verification or load(gate.EXPECTED["recall_verification_path"]),
+        recall_verification or load(gate.RECALL_EXPECTED["recall_verification_path"]),
         blobs or actual_blobs(),
     )
 
@@ -100,16 +100,15 @@ class ToolDiscoveryRetrievalAuthorityGateV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"], out)
         self.assertIn("TOOL_DISCOVERY_TARGET_ACTION_COUNT_NE_1:2", out["errors"])
 
-    def test_missing_multilingual_input_binding_fails_closed(self):
-        h = load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json")
-        action = next(x for x in h["actions"] if gate.TARGET in x.get("target_predicates", []))
-        action["mandatory_retrieval_authority"].pop("multilingual_input_blob", None)
-        out = validate(hypergraph=h)
+    def test_multilingual_input_byte_drift_fails_closed(self):
+        blobs = actual_blobs()
+        blobs["multilingual_input_blob"] = "0" * 40
+        out = validate(blobs=blobs)
         self.assertFalse(out["pass"], out)
-        self.assertIn("AUTHORITY_BINDING_MISMATCH:multilingual_input_blob", out["errors"])
+        self.assertIn("ACTUAL_BLOB_MISMATCH:multilingual_input_blob", out["errors"])
 
     def test_recall_below_one_fails_closed(self):
-        receipt = load(gate.EXPECTED["recall_verification_path"])
+        receipt = load(gate.RECALL_EXPECTED["recall_verification_path"])
         receipt["verified"]["finite_supported_fixture_recall"] = 0.99
         out = validate(recall_verification=receipt)
         self.assertFalse(out["pass"], out)
