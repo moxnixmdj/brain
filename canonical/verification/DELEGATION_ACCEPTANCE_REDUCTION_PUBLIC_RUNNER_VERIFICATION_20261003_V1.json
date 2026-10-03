@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
   "date": "2026-10-03",
-  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__DELEGATION_ONLY_NEW_FAMILY_CLOSURE__3_OF_19__ZERO_FRESH_REALITY",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__DELEGATION_ONLY_NEW_FAMILY_CLOSURE_ELIGIBLE__3_OF_19_COMPILED__ZERO_CREDIT_FROM_VERIFIER",
   "exact_brain_inputs": {
     "canonical/runtime/acceptance_proof_transmuter_v1.py": "39b5611e53485674b29e2a05da91b89801bc5aa6",
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
@@ -34,7 +34,8 @@
     ],
     "closure_mode": "ABSOLUTE_DOMINANCE",
     "witness_reason": "THEORETICAL_CEILING_DOMINANCE",
-    "scope_completeness_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF"
+    "scope_completeness_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "promotion_eligible_only_via_separate_atomic_integrator_step": true
   },
   "hard_nonclaims": [
     "NO_OTHER_OPEN_FAMILY_RECEIVES_CREDIT",
@@ -46,9 +47,9 @@
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 1,
+  "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": true,
+  "promotion_authority": false,
   "promotion_scope": [
     "SUBAGENT_DELEGATION_AND_COORDINATION",
     "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR"
