@@ -267,6 +267,8 @@ def evaluate(root: Path) -> dict[str,Any]:
         "profile_metrics":profile_metrics,
         "conditional_top1_recovery":conditional,
         "route_top1_correlation":correlations,
+        "route_top1_hit_case_ids":{route:sorted(route_hits[route]) for route in ROUTES},
+        "route_top3_hit_case_ids":{route:sorted(route_top3[route]) for route in ROUTES},
         "hybrid_top1_misses":n-len(route_hits["HYBRID"]),
         "hybrid_top3_misses":n-len(route_top3["HYBRID"]),
         "worst_hybrid_cases":worst,
