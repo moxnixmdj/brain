@@ -1,0 +1,618 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "RECONCILE-CURRENT-FRONTIER-MIRRORS-20261003-V2",
+  "status": "CURRENT_AUTHORITY_DERIVED_MIRROR_REPAIR__ZERO_CREDIT__NO_NEW_REALITY__NO_TERMINAL_REPLAY",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "fde07ef620f061272b07b986a6c1d64bb2c48617",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "CURRENT_AUTHORITY_MIRROR_PROJECTION_DRIFT__POINTER_OPEN_MECHANISM_COUNT_QUEUE_BLOCKER_QUEUE_NEXT_AND_TARGET_PROGRESS_EVENT_STALE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::CURRENT_AUTHORITY_MIRROR_PROJECTION_DRIFT__POINTER_OPEN_MECHANISM_COUNT_QUEUE_BLOCKER_QUEUE_NEXT_AND_TARGET_PROGRESS_EVENT_STALE",
+  "expected_parent_frontier_change": "Reconcile only derived current-frontier projections: set CANONICAL_POINTER current_frontier and execution_governance open_mechanism_residual_count to GLOBAL_TERMINAL_UNIVERSE counts.open_mechanism_lanes=0; set FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE immediate_frontier exact_blocker and next_action to the exact ACTIVE_GOAL_HIERARCHY current_parent_blocker and next_required_action_class; add/update the target current_atomic_progress_event to the exact hierarchy next_progress_event_target. CURRENT_TERMINAL_AUTHORITY.next equals ACTIVE_GOAL_HIERARCHY.next_required_action_class and is preserved byte-for-byte: AUTOMATIONBENCH_PUBLIC_600_TERMINAL_SPEND_BLOCKED_ON_VERIFIED_PRIVATE_LEADERBOARD_SCOPE_MISMATCH__PRESERVE_BUSINESS_WORKFLOW_TARGET__RERANK_TO_SHORTEST_PROMOTION_SAFE_ONE_PREDICATE_FAMILY_OR_SCOPE_COMPLETE_STRONGER_PROOF__DO_NOT_EXECUTE_PUBLIC_600_FOR_PRIVATE_40_PERCENT_BAR. Do not edit CURRENT_TERMINAL_AUTHORITY, ACTIVE_GOAL_HIERARCHY, REAL_OUTPUT_SCOREBOARD, reducer/workflows, acceptance evidence, or source scope. Preserve terminal=false, 3/19 families, 8/38 predicates proved, 30 unresolved, zero open mechanism lanes, and all current execution/promotion restrictions. No AutomationBench public-600 execution, P1 execution, PR1150 acceptance reduction, terminal replay, public corpus exposure, or credit.",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "CURRENT_MAIN_FDE07EF__3_OF_19__8_OF_38__AUTOMATIONBENCH_PRIVATE_SCOPE_MISMATCH_VERIFIED__PUBLIC_600_BLOCKED__FOUR_MIRROR_DRIFTS__ZERO_CREDIT",
+  "probe_id": null,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "prior_work_checked": [
+    "Current main and fixed session branch are at fde07ef620f061272b07b986a6c1d64bb2c48617; no older 16c870 mirror candidate is reused.",
+    "Current authority remains terminal=false, 3/19 families accepted, 8/38 predicates proved, 30 unresolved, with zero authorized acceptance case actions.",
+    "CURRENT_TERMINAL_AUTHORITY.next is byte-identical to ACTIVE_GOAL_HIERARCHY.next_required_action_class and forbids public-600 execution for the private 40% bar.",
+    "Before repair the current-state reducer reported exactly POINTER_OPEN_MECHANISM_RESIDUAL_COUNT_DRIFT, QUEUE_BLOCKER_DRIFT, QUEUE_NEXT_ACTION_DRIFT and TARGET_ATOMIC_EVENT_DRIFT.",
+    "Brain PR #1190 authority-derived mirror repair is merged but its checks failed; this action is re-grounded to current fde07ef and repairs only current residual fields.",
+    "AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT independently proves public 600 is not the official private leaderboard population; BUSINESS_WORKFLOW_AUTOMATION target remains preserved and promotion remains false.",
+    "Acceptance-backprop V1, Tool Discovery V8, OBS V2 and proof-router V2 have independent zero-credit passes; Tool Discovery comparability and valid-route top-1 remain open.",
+    "Post-delegation authority has 30 unresolved predicates and 39 PA1 atoms. The existing V4 corpus snapshot is pinned to older source and is historical, not a current scan.",
+    "P1 remains quarantined and unauthorized. Do not execute P1, run PR1150 acceptance reduction, execute public 600, or replay terminal tasks.",
+    "A mistyped module --help invocation executed proof_atom_receipt_index_v4.py main() on the default pre-delegation 40-atom basis. It wrote no files, used no public runner or external corpus, and its stdout is disqualified, not retained or used; it is not the required current 39-atom post-delegation scan."
+  ],
+  "stop_condition": "Stop when current_state_obs_reducer returns pass=true with no errors; pointer counts equal the current GLOBAL_TERMINAL_UNIVERSE count; queue blocker/next and target event equal ACTIVE_GOAL_HIERARCHY exactly; CURRENT_TERMINAL_AUTHORITY.next remains unchanged; terminal acceptance remains 3/19 and 8/38 proved / 30 unresolved; and no credit, spend, terminal result, P1 execution, PR1150 reduction, or public-600 run occurs. This action is only a truth-preserving guard-precondition repair. The accidental default 40-atom V4 output is disqualified and not used. No 39-atom current scan result is claimed by this action. Then continue with the current authority rerank; do not claim terminal completion.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION",
+    "semantic_contract_policy": "NO_TERM_WITHOUT_COMPLETE_BEHAVIORAL_CONTRACT__ACCOUNTING_LABELS_HAVE_ZERO_IMPLEMENTATION_ONTOLOGY_AUTHORITY"
+  },
+  "ownership_tests": [],
+  "reasoning_durability": {
+    "chat_only_authority": false,
+    "real_objective": "Permanently own Brain-configured routes for all useful Opus 5.5 capabilities at equal or better performance; this action only repairs a current-state precondition.",
+    "governing_invariants": [
+      "Current terminal authority is read-only input.",
+      "No terminal completion claim without authoritative acceptance evidence.",
+      "No public-600 task execution for the private leaderboard threshold.",
+      "No P1 execution or PR1150 acceptance reduction.",
+      "No credit from mirror repair."
+    ],
+    "material_premises": [
+      "CURRENT_TERMINAL_AUTHORITY says 3/19 families and 8/38 atomic predicates proved; terminal false.",
+      "CURRENT_TERMINAL_AUTHORITY.next equals ACTIVE_GOAL_HIERARCHY.next_required_action_class.",
+      "The independent scope cut blocks public-600 results from the private 40% bar.",
+      "The current reducer reports exactly four mirror drifts before the patch."
+    ],
+    "evidence_refs": [
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+      "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+      "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json",
+      "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json",
+      "canonical/runtime/current_state_obs_reducer.py"
+    ],
+    "conclusion": "Update only deterministic derived mirrors; preserve the exact current terminal and acceptance state and keep public-600 terminal spend blocked.",
+    "selected_route": "EXACT_DERIVED_MIRROR_RECONCILIATION__ZERO_CREDIT__NO_TERMINAL_EXECUTION",
+    "rejected_material_alternatives": [
+      "Change the current terminal authority or active hierarchy to match stale queue/pointer state.",
+      "Bypass the reducer or guard.",
+      "Run AutomationBench public 600 against the private leaderboard bar.",
+      "Execute P1 or rerun PR1150 acceptance reduction."
+    ],
+    "uncertainties": [
+      "No family is promoted by this repair. The shortest promotion-safe one-predicate route remains to be reranked from current evidence.",
+      "Current full-corpus V4 scan is pinned to an older source commit and is not treated as current evidence.",
+      "The accidental 40-atom default scan is invalid for current authority, not evidence, and not reused; the authorized current 39-atom scan remains unrun."
+    ],
+    "assumptions": [
+      "Current main at fde07ef is the exact base for this action.",
+      "No authority source changes during this local transaction."
+    ],
+    "non_goals": [
+      "No public-600 execution.",
+      "No P1 execution.",
+      "No PR1150 acceptance reduction.",
+      "No terminal replay.",
+      "No admissible/current 39-atom private corpus scan, terminal-case replay, or public corpus exposure is part of this action. The accidental 40-atom default invocation is disqualified, unretained, and not used.",
+      "No acceptance, capability, family, execution or promotion credit."
+    ],
+    "next_action": "AUTOMATIONBENCH_PUBLIC_600_TERMINAL_SPEND_BLOCKED_ON_VERIFIED_PRIVATE_LEADERBOARD_SCOPE_MISMATCH__PRESERVE_BUSINESS_WORKFLOW_TARGET__RERANK_TO_SHORTEST_PROMOTION_SAFE_ONE_PREDICATE_FAMILY_OR_SCOPE_COMPLETE_STRONGER_PROOF__DO_NOT_EXECUTE_PUBLIC_600_FOR_PRIVATE_40_PERCENT_BAR",
+    "supersession_conditions": [
+      "CURRENT_TERMINAL_AUTHORITY or ACTIVE_GOAL_HIERARCHY changes before this action is validated.",
+      "GLOBAL_TERMINAL_UNIVERSE open_mechanism_lanes changes before this action is validated."
+    ],
+    "supersedes": "2026-10-03_RECONCILE_CURRENT_FRONTIER_MIRRORS_V1.json (stale 16c870 base and superseded Tool Discovery V6 route)."
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "fde07ef620f061272b07b986a6c1d64bb2c48617",
+    "real_outcome": "The derived pointer, capability queue and active target progress event agree with current authority while acceptance and terminal truth remain unchanged.",
+    "required_capability": "EXACT_CURRENT_TERMINAL_AUTHORITY_MIRROR_COHERENCE",
+    "obs_goal": {
+      "real_outcome": "Restore the fail-closed current-state reducer precondition so the exact active rerank can proceed without stale mirrors.",
+      "proxy_goals_deleted": [
+        "Do not count control-plane cleanup as an accepted capability or family.",
+        "Do not execute AutomationBench public 600 for the official private 40% bar."
+      ],
+      "surviving_necessity": "The current reducer fails on four deterministic projection drifts: pointer residual count, queue blocker, queue next action, and target progress event."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "CURRENT_TERMINAL_AUTHORITY_V1",
+        "ACTIVE_GOAL_HIERARCHY_V1",
+        "GLOBAL_TERMINAL_UNIVERSE_V1",
+        "current_state_obs_reducer.py",
+        "enforce_goal_hierarchy.py"
+      ],
+      "external_existing_routes_checked": [
+        "No external capability provider or external source is required for deterministic mirror reconciliation."
+      ],
+      "capability_work_deleted": [
+        "No benchmark run, acceptance reduction, model change, capability implementation, or corpus scan is part of this action."
+      ],
+      "surviving_gap": "Terminal remains false at 3/19 and 8/38 proved; current terminal next blocks public-600 spend on the private-scope mismatch and requires reranking."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_DERIVED_MIRROR_DRIFT",
+      "delete_bypass_substitute_options": [
+        "Rebind only the stale derived mirror fields from their canonical active hierarchy/global-universe sources.",
+        "Changing the authority to match stale mirrors is rejected.",
+        "Bypassing or weakening the current-state guard is rejected."
+      ],
+      "surviving_causal_blocker": "The reducer rejects subsequent control-plane work until the pointer count, queue route fields, and active target progress event agree with current authority."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1_MINIMAL_EXACT_DERIVED_MIRROR_REBINDING",
+        "2_MUTATE_CURRENT_TERMINAL_AUTHORITY_OR_HIERARCHY_TO_MATCH_STALE_MIRRORS_REJECTED",
+        "3_BYPASS_OR_WEAKEN_GUARD_REJECTED",
+        "4_EXECUTE_PUBLIC_600_OR_REPLAY_TERMINAL_WORK_REJECTED"
+      ],
+      "losing_routes_reason": "The authoritative hierarchy/terminal next already agree. Only three derived surfaces and two pointer count fields drift. Altering source authority or spending terminal observations cannot fix this cheaper deterministic consistency defect.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run current_state_obs_reducer.py, continuous_obs_runtime.py, exact mirror assertions and the hierarchy guard on the exact committed base/head; all must pass. No terminal result is needed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Stale pointer open-mechanism count of one.",
+        "Stale queue blocker/next-action duplicated from a prior routing generation.",
+        "Missing active-target current_atomic_progress_event mirror."
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Current verified terminal baseline: 3/19 accepted, 8/38 proved, 30 unresolved.",
+        "Tool Discovery V8, OBS V2, proof-router V2 and acceptance-backprop independent passes are zero-credit only.",
+        "Business Workflow target remains preserved; public 600 is not admissible for the private leaderboard bar.",
+        "Current post-delegation proof basis is 39 PA1 atoms; the pinned V4 scan is historical, not a current-head scan.",
+        "P1 remains quarantined and unauthorized; PR1150 is not rerun."
+      ],
+      "fresh_reuse_plan": "Reuse the exact current ACTIVE_GOAL_HIERARCHY blocker/next/event, CURRENT_TERMINAL_AUTHORITY next, and GLOBAL_TERMINAL_UNIVERSE open-mechanism count. Leave authority and score surfaces unchanged."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Used the exact local reducer error set and read the current source authority values.",
+        "Checked the public/private AutomationBench scope cut and current one-family closure contract; no benchmark route is admissible."
+      ],
+      "search_stop_decision": "Stop this control-plane action after reducer and hierarchy guard pass; then continue with current-authority reranking without public-600 spend.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "EXACT_DERIVED_MIRROR_RECONCILIATION",
+      "CHANGE_TERMINAL_AUTHORITY_TO_MATCH_STALE_MIRRORS",
+      "BYPASS_CURRENT_STATE_GUARD",
+      "PUBLIC_600_TERMINAL_EXECUTION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CHANGE_TERMINAL_AUTHORITY_TO_MATCH_STALE_MIRRORS",
+      "BYPASS_CURRENT_STATE_GUARD",
+      "PUBLIC_600_TERMINAL_EXECUTION"
+    ],
+    "selected_surviving_route": "EXACT_DERIVED_MIRROR_RECONCILIATION__ZERO_CREDIT__NO_TERMINAL_EXECUTION",
+    "why_selected_route_is_fastest_sufficient": "The active terminal authority and active hierarchy already agree byte-for-byte on the current next route. Correcting only the derived fields is the smallest deterministic change that restores the existing fail-closed reducer.",
+    "expected_parent_level_state_change": "Reconcile only derived current-frontier projections: set CANONICAL_POINTER current_frontier and execution_governance open_mechanism_residual_count to GLOBAL_TERMINAL_UNIVERSE counts.open_mechanism_lanes=0; set FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE immediate_frontier exact_blocker and next_action to the exact ACTIVE_GOAL_HIERARCHY current_parent_blocker and next_required_action_class; add/update the target current_atomic_progress_event to the exact hierarchy next_progress_event_target. CURRENT_TERMINAL_AUTHORITY.next equals ACTIVE_GOAL_HIERARCHY.next_required_action_class and is preserved byte-for-byte: AUTOMATIONBENCH_PUBLIC_600_TERMINAL_SPEND_BLOCKED_ON_VERIFIED_PRIVATE_LEADERBOARD_SCOPE_MISMATCH__PRESERVE_BUSINESS_WORKFLOW_TARGET__RERANK_TO_SHORTEST_PROMOTION_SAFE_ONE_PREDICATE_FAMILY_OR_SCOPE_COMPLETE_STRONGER_PROOF__DO_NOT_EXECUTE_PUBLIC_600_FOR_PRIVATE_40_PERCENT_BAR. Do not edit CURRENT_TERMINAL_AUTHORITY, ACTIVE_GOAL_HIERARCHY, REAL_OUTPUT_SCOREBOARD, reducer/workflows, acceptance evidence, or source scope. Preserve terminal=false, 3/19 families, 8/38 predicates proved, 30 unresolved, zero open mechanism lanes, and all current execution/promotion restrictions. No AutomationBench public-600 execution, P1 execution, PR1150 acceptance reduction, terminal replay, public corpus exposure, or credit.",
+    "stop_condition": "Stop when current_state_obs_reducer returns pass=true with no errors; pointer counts equal the current GLOBAL_TERMINAL_UNIVERSE count; queue blocker/next and target event equal ACTIVE_GOAL_HIERARCHY exactly; CURRENT_TERMINAL_AUTHORITY.next remains unchanged; terminal acceptance remains 3/19 and 8/38 proved / 30 unresolved; and no credit, spend, terminal result, P1 execution, PR1150 reduction, or public-600 run occurs. This action is only a truth-preserving guard-precondition repair. The accidental default 40-atom V4 output is disqualified and not used. No 39-atom current scan result is claimed by this action. Then continue with the current authority rerank; do not claim terminal completion.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER is an explicit route-discovery exemption; this action selects no external supplier and performs no external search."
+    },
+    "theory_invariants": {
+      "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+      "knowledge_policy": "EXTERNAL_JIT",
+      "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+      "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+      "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+      "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+      "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+      "provider_access_is_ownership": false,
+      "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION",
+      "semantic_contract_policy": "NO_TERM_WITHOUT_COMPLETE_BEHAVIORAL_CONTRACT__ACCOUNTING_LABELS_HAVE_ZERO_IMPLEMENTATION_ONTOLOGY_AUTHORITY"
+    },
+    "reasoning_durability": {
+      "chat_only_authority": false,
+      "real_objective": "Permanently own Brain-configured routes for all useful Opus 5.5 capabilities at equal or better performance; this action only repairs a current-state precondition.",
+      "governing_invariants": [
+        "Current terminal authority is read-only input.",
+        "No terminal completion claim without authoritative acceptance evidence.",
+        "No public-600 task execution for the private leaderboard threshold.",
+        "No P1 execution or PR1150 acceptance reduction.",
+        "No credit from mirror repair."
+      ],
+      "material_premises": [
+        "CURRENT_TERMINAL_AUTHORITY says 3/19 families and 8/38 atomic predicates proved; terminal false.",
+        "CURRENT_TERMINAL_AUTHORITY.next equals ACTIVE_GOAL_HIERARCHY.next_required_action_class.",
+        "The independent scope cut blocks public-600 results from the private 40% bar.",
+        "The current reducer reports exactly four mirror drifts before the patch."
+      ],
+      "evidence_refs": [
+        "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+        "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+        "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+        "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json",
+        "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json",
+        "canonical/runtime/current_state_obs_reducer.py"
+      ],
+      "conclusion": "Update only deterministic derived mirrors; preserve the exact current terminal and acceptance state and keep public-600 terminal spend blocked.",
+      "selected_route": "EXACT_DERIVED_MIRROR_RECONCILIATION__ZERO_CREDIT__NO_TERMINAL_EXECUTION",
+      "rejected_material_alternatives": [
+        "Change the current terminal authority or active hierarchy to match stale queue/pointer state.",
+        "Bypass the reducer or guard.",
+        "Run AutomationBench public 600 against the private leaderboard bar.",
+        "Execute P1 or rerun PR1150 acceptance reduction."
+      ],
+      "uncertainties": [
+        "No family is promoted by this repair. The shortest promotion-safe one-predicate route remains to be reranked from current evidence.",
+        "Current full-corpus V4 scan is pinned to an older source commit and is not treated as current evidence.",
+        "The accidental 40-atom default scan is invalid for current authority, not evidence, and not reused; the authorized current 39-atom scan remains unrun."
+      ],
+      "assumptions": [
+        "Current main at fde07ef is the exact base for this action.",
+        "No authority source changes during this local transaction."
+      ],
+      "non_goals": [
+        "No public-600 execution.",
+        "No P1 execution.",
+        "No PR1150 acceptance reduction.",
+        "No terminal replay.",
+        "No admissible/current 39-atom private corpus scan, terminal-case replay, or public corpus exposure is part of this action. The accidental 40-atom default invocation is disqualified, unretained, and not used.",
+        "No acceptance, capability, family, execution or promotion credit."
+      ],
+      "next_action": "AUTOMATIONBENCH_PUBLIC_600_TERMINAL_SPEND_BLOCKED_ON_VERIFIED_PRIVATE_LEADERBOARD_SCOPE_MISMATCH__PRESERVE_BUSINESS_WORKFLOW_TARGET__RERANK_TO_SHORTEST_PROMOTION_SAFE_ONE_PREDICATE_FAMILY_OR_SCOPE_COMPLETE_STRONGER_PROOF__DO_NOT_EXECUTE_PUBLIC_600_FOR_PRIVATE_40_PERCENT_BAR",
+      "supersession_conditions": [
+        "CURRENT_TERMINAL_AUTHORITY or ACTIVE_GOAL_HIERARCHY changes before this action is validated.",
+        "GLOBAL_TERMINAL_UNIVERSE open_mechanism_lanes changes before this action is validated."
+      ],
+      "supersedes": "2026-10-03_RECONCILE_CURRENT_FRONTIER_MIRRORS_V1.json (stale 16c870 base and superseded Tool Discovery V6 route)."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "CANONICAL_FRONTIER_MIRROR_RECONCILIATION_V2",
+    "inputs": "Current terminal authority, active hierarchy, global terminal universe, canonical pointer, queue and target record at exact base fde07ef620f061272b07b986a6c1d64bb2c48617.",
+    "environment_state": "Terminal authority and hierarchy agree on next=AUTOMATIONBENCH_PUBLIC_600_TERMINAL_SPEND_BLOCKED_ON_VERIFIED_PRIVATE_LEADERBOARD_SCOPE_MISMATCH__PRESERVE_BUSINESS_WORKFLOW_TARGET__RERANK_TO_SHORTEST_PROMOTION_SAFE_ONE_PREDICATE_FAMILY_OR_SCOPE_COMPLETE_STRONGER_PROOF__DO_NOT_EXECUTE_PUBLIC_600_FOR_PRIVATE_40_PERCENT_BAR; reducer found four derived mirror drifts. Terminal remains 3/19 and 8/38; AutomationBench public/private population mismatch blocks public-600 direct promotion.",
+    "allowed_information": "Current local Brain authority/mirror inputs and reducer output. A mistyped --help invoked the default V4 40-atom scanner; its stdout was discarded and is not evidence. No benchmark task contents, public-600 execution, P1 execution, PR1150 acceptance reduction, external corpus, or 39-atom scan is used by this mirror action.",
+    "required_output_or_action": "Set two pointer open-mechanism counters to current global-universe count 0, set queue exact blocker/next to active hierarchy, and set target current_atomic_progress_event to active hierarchy event. Leave current authority, hierarchy, scoreboard, workflows and evidence untouched.",
+    "success_condition": "Reducer passes; exact projected fields match current authority/hierarchy/global universe; terminal remains false at 3/19 and 8/38; no spend, replay or credit.",
+    "failure_condition": "Any projection mismatch remains, a source authority changes, or this action changes terminal truth, acceptance evidence, execution authorization, or spend.",
+    "terminal_consequence": "Only restores a fail-closed control-plane precondition. It creates no terminal evidence or acceptance progress.",
+    "verification_route": "Run continuous_obs_runtime.py, current_state_obs_reducer.py, exact mirror equality assertions, and enforce_goal_hierarchy.py on the exact base/head.",
+    "dependency_boundary": "No current terminal authority, active hierarchy, score, acceptance binding, P1 state, Tool Discovery scope, AutomationBench scope, or public-600 execution is modified.",
+    "scope": "Only pointer open-mechanism count mirrors, queue immediate blocker/next fields, and target current_atomic_progress_event."
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "Control-plane mirror repair only; no untouched qualification source, task instructions, terminal execution or acceptance promotion is involved.",
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_terminal_evidence": false
+  },
+  "qualification_stage": "NOT_APPLICABLE__CONTROL_PLANE_RECONCILIATION_ONLY",
+  "terminal_proof_control": {
+    "proof_obligation": "Current canonical derived mirrors must agree with the active terminal authority before the current rerank can be cleanly scheduled.",
+    "hole_type": "DETERMINISTIC_CURRENT_STATE_MIRROR_DRIFT",
+    "expected_certificate_or_receipt": "Current-state reducer PASS and goal-hierarchy guard PASS on the exact committed base/head.",
+    "validator": "canonical/runtime/current_state_obs_reducer.py and canonical/runtime/enforce_goal_hierarchy.py",
+    "maximum_cheap_test_cost": "LOCAL_JSON_ASSERTIONS_ONLY__ZERO_REALITY",
+    "prerequisites": [
+      "CURRENT_TERMINAL_AUTHORITY.next exactly equals ACTIVE_GOAL_HIERARCHY.next_required_action_class.",
+      "Global terminal universe reports open_mechanism_lanes=0.",
+      "AutomationBench private scope mismatch is independently verified; public 600 is blocked.",
+      "No P1 execution, PR1150 acceptance reduction, public-600 task execution or terminal replay occurs."
+    ],
+    "contamination_risk": "NONE__NO_TERMINAL_CASE_OR_TASK_CONTENT_READ",
+    "reversibility": "REVERTIBLE_DERIVED_MIRROR_FIELD_UPDATES",
+    "falsification_condition": "Reducer or exact mirror assertions fail, or any canonical source changes during the action.",
+    "critical_path_relation": "CONTROL_PLANE_PRECONDITION_ONLY__NO_ACCEPTANCE_PREDICATE_CLOSED"
+  },
+  "continuous_obs": {
+    "schema": "PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
+    "status": "CURRENT",
+    "checked_at_utc": "2026-10-03T05:17:28.784315+00:00",
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      {
+        "path": "canonical/CANONICAL_POINTER.json",
+        "sha256": "094b63f593ae1c03ee6e4549ad132e8d90a3d4d3d1b26e4cc20515311f201b50"
+      },
+      {
+        "path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+        "sha256": "e8b1b5b1dbaad489c1ccfbf8871ace635f60e67812322c71833beab7d53182db"
+      },
+      {
+        "path": "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json",
+        "sha256": "382723c6b92c910d599e65008823e33253a48de3edcc2f96d791d2b98550b192"
+      },
+      {
+        "path": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+        "sha256": "4195b6d2188fa31ed6c0e2bda3dae10f142357d1a8330de65ab3b61ea93e9d8f"
+      },
+      {
+        "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+        "sha256": "ae948a1ecf340cbbb59cc80cdc23bdaa937b4cce8adbab18325c24f0f1a00d9c"
+      },
+      {
+        "path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+        "sha256": "e5e3def88cbc9b74bd3c53bc98efe939770f963ca0d4986b9b990d6e488ff033"
+      },
+      {
+        "path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+        "sha256": "c8bb30230ac748f88d16c7d0b45af7aa03ac143aa52e564a8836a454ead19d73"
+      },
+      {
+        "path": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+        "sha256": "34a7a8e30c6432e0057bcb6a0c1406e846fc6a8d08f2ec95fedb140277916568"
+      },
+      {
+        "path": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+        "sha256": "9bd6f4b4391b9c3143dbcea80eeec090a9b007f246b2be51fb3d6ecec1559987"
+      },
+      {
+        "path": "canonical/runtime/current_state_obs_reducer.py",
+        "sha256": "b4c593f9309504f2458568bda084097c06f4e71edbb9f91f1307b776f653f471"
+      },
+      {
+        "path": "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json",
+        "sha256": "6bb8ee41438024a688edde43fe4e455b33062ff60e58eb1df493f9378cb557c3"
+      },
+      {
+        "path": "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json",
+        "sha256": "47ac9fa6405ff818d5cc8f964ab94ab1f05f0c59b164de9ceb3bfdc93bc101a4"
+      },
+      {
+        "path": "canonical/governance/POST_DELEGATION_FRONTIER_RECOMPILE_ACTIVE_AUTHORITY_V1.json",
+        "sha256": "eba4b514a6b77a56480e91334d0b0ecc59de9f42b8263b183e189daa0a935956"
+      },
+      {
+        "path": "canonical/verification/ACCEPTANCE_BACKPROP_COMPILER_V1_CURRENT_MAIN_INDEPENDENT_VERIFICATION_20261003_V1.json",
+        "sha256": "326e0eef2988b618260103f70ed65842ef57304782c4c25fcf15501c80f9b739"
+      },
+      {
+        "path": "canonical/governance/TOOL_DISCOVERY_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json",
+        "sha256": "8f2b54f575fc1f32e7bf0522115b82cec5dec657f1d75e33e623cd9fef904ae7"
+      },
+      {
+        "path": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
+        "sha256": "b7ea55760347c72d2b84c10ec1b628158f7a2b22a6999ade13ef5be9de70332e"
+      },
+      {
+        "path": "canonical/governance/OBS_DEPENDENCY_FRESHNESS_V1.json",
+        "sha256": "4353d25a21800e12ee38cb2d7923232ba6d204a7dc6f5a55f08850e3d81809f7"
+      }
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "obs_layers_current": {
+      "goal": true,
+      "capability": true,
+      "blocker": true,
+      "solution": true,
+      "verification": true,
+      "inherited_system": true,
+      "obs_process": true
+    },
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": true,
+    "information_boundary_complete": true,
+    "information_policy": {
+      "mode": "NO_EXTERNAL_INFORMATION",
+      "allowed_exact_sources": [],
+      "allowed_external_tool_kinds": []
+    },
+    "dependencies": [
+      {
+        "dependency_id": "current_terminal_authority",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json:e40b7cc2fdb82e0ddb7bc7444ffa1366a582c7a5"
+        ]
+      },
+      {
+        "dependency_id": "active_goal_hierarchy",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json:3af8d13557805d9f9c7730c06195762cb926097e"
+        ]
+      },
+      {
+        "dependency_id": "canonical_pointer",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/CANONICAL_POINTER.json:c6aced55a287b4b4376bffdc171c2dec73c75ff8"
+        ]
+      },
+      {
+        "dependency_id": "frontier_queue",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json:c7570f10839f97b45beea2fabbf10d3e5a1a202e"
+        ]
+      },
+      {
+        "dependency_id": "active_target_record",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json:1e96f3adaaaa4b255e08a59fa34a9d4a72fbfe4f"
+        ]
+      },
+      {
+        "dependency_id": "global_terminal_universe_count",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json:ff97ffee7c9b25a491ff5ee231919ea4964f09e3"
+        ]
+      },
+      {
+        "dependency_id": "real_output_scoreboard",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json:55ebd18168dca1d3df3c8fe14db6a6d94533ec82"
+        ]
+      },
+      {
+        "dependency_id": "residual_action_universe",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json:874aa2c114aa0eef3cbe5b323e3af5f1d583491a"
+        ]
+      },
+      {
+        "dependency_id": "current_state_obs_reducer",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/runtime/current_state_obs_reducer.py:28216bf3302b4a8001ae60ea8f3d09a8248ad500"
+        ]
+      },
+      {
+        "dependency_id": "automationbench_scope_cut",
+        "class": "VERIFICATION_RECEIPT",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json:3f09067d0fa174c343f2f157495d3654a15b3965"
+        ]
+      },
+      {
+        "dependency_id": "business_workflow_closure_contract",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json:9c28951ab3c86a5104b4eec3628c105de79bd761"
+        ]
+      },
+      {
+        "dependency_id": "post_delegation_projection_authority",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/POST_DELEGATION_FRONTIER_RECOMPILE_ACTIVE_AUTHORITY_V1.json:bcd98020bac54ed539d00649606d7e46671604c4"
+        ]
+      },
+      {
+        "dependency_id": "tool_discovery_family_closure",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/TOOL_DISCOVERY_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json:73d89d6ea112efe0c00f48002a761452251109a9"
+        ]
+      },
+      {
+        "dependency_id": "acceptance_backprop_independent_receipt",
+        "class": "VERIFICATION_RECEIPT",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/verification/ACCEPTANCE_BACKPROP_COMPILER_V1_CURRENT_MAIN_INDEPENDENT_VERIFICATION_20261003_V1.json:7ee190769c87eff26a7ff76ebf5e837c8bab7348"
+        ]
+      }
+    ]
+  },
+  "reality_query_admission": {
+    "proof_obligation": "Mirror coherence only; no terminal-relevant new observation is requested.",
+    "existing_evidence_search": "Read current terminal authority, active hierarchy, global universe, pointer, queue, score and target locally; used the exact four-error reducer output. A mistyped --help invoked V4 main on the default 40-atom basis; the result was disqualified and discarded, and no current 39-atom scan result is claimed.",
+    "evidence_scope_equivalence": "All proposed values are literal projections from their designated current canonical source; no semantic scope inference is made.",
+    "deductive_closure": "The exact mirror equalities are deterministic; no acceptance predicate is discharged.",
+    "counterfactual_terminal_distinctions": [
+      "Mirrors consistent versus stale; terminal acceptance, score and goal status remain identical."
+    ],
+    "dominated_observations_deleted": [
+      "AutomationBench public-600 run for the private bar.",
+      "P1 execution and PR1150 acceptance reduction.",
+      "Terminal replay or external corpus exposure.",
+      "The accidental default 40-atom V4 invocation: wrong basis, stdout-only, no files, disqualified and not reused."
+    ],
+    "candidate_observations": [],
+    "minimum_reality_cut": {
+      "status": "EMPTY__NO_REALITY_QUERY_REQUIRED",
+      "members": []
+    },
+    "terminal_decision_value": "NO_REALITY_QUERY_REQUIRED__THIS_ACTION_ONLY_REPAIRS_A_GUARD_PRECONDITION",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "global_cut_snapshot": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "global_cut_membership": "CONTROL_PLANE_PRECONDITION__NO_NEW_TERMINAL_OBSERVATION"
+  },
+  "global_terminal_proof_cut": {
+    "graph_snapshot": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "existing_evidence_saturation": "No admissible new evidence acquired; current authority and independent receipts are reused as read-only state. The accidental default 40-atom output is disqualified and not used.",
+    "deductive_closure": "Only deterministic mirror equalities are repaired; no terminal predicate is closed.",
+    "shared_residual_compression": "Preserve the current authority projection of 30 unresolved predicates and the post-delegation 39-atom basis.",
+    "candidate_observations": [],
+    "dominance_deletions": [
+      "Public-600 terminal run for the private bar.",
+      "P1 execution and PR1150 acceptance reduction.",
+      "Terminal replay."
+    ],
+    "exact_global_minimum_reality_cut": "EMPTY__ZERO_REALITY_ACTION",
+    "proposed_action_membership": "CURRENT_CONTROL_PLANE_RECONCILIATION_PRECONDITION__NO_NEW_REALITY",
+    "terminal_decision_value": "RESTORES_GUARD_CONSISTENCY_ONLY__ZERO_ACCEPTANCE_DELTA"
+  },
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "ownership_test_applicability": "NOT_APPLICABLE__NO_CAPABILITY_OWNERSHIP_CLAIM_OR_PROMOTION__ZERO_CREDIT",
+  "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json"
+}
