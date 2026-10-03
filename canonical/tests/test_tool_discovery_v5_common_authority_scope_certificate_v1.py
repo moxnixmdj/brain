@@ -23,7 +23,7 @@ class Tests(unittest.TestCase):
    self.assertIn(name,out["missing"])
  def test_permission_skip_regression_kills_scope_soundness_fact(self):
   mutant=self.src.replace(
-   'return {"action": "ESCALATE", "reason": "PROBE_PERMISSION_UNAVAILABLE_FOR_UNRESOLVED_CHEAPER_ROUTE",',
+   'return {"action": "ESCALATE", "reason": "SAFE_PROBE_PERMISSION_MISSING_FOR_UNRESOLVED_CHEAPER_ROUTE",',
    'continue  # UNSOUND_SKIP'
   )
   facts=derive_facts(mutant)
