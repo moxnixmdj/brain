@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V4_UNIVERSAL_SCOPE_CERTIFICATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__V1_REFINEMENT_FALSIFIED__V4_PROGRAM_SIDE_UNIVERSAL_PROOF__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "objective": "Replace the unsound Tool Discovery V1 conditional refinement with a sound universal program-side proof for discovery-exhaustive V4, while preserving the exact frozen target and leaving the external complete-interface instance independently open.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "truth_repair": {
+    "active_v1_refinement": "canonical/runtime/tool_discovery_dynamic_refinement_v1.py",
+    "active_v1_blob": "991c039c0b405bf77508ce7921abc69460f57332",
+    "falsification": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_V3_REFINEMENT_FALSIFICATION_V1.json",
+    "falsification_blob": "f84a83562aac2b43254eda3826744be09b271a1e",
+    "defect": "V3_CAN_SELECT_A_VERIFIED_VISIBLE_ROUTE_BEFORE_QUERYING_AN_UNQUERIED_COMPLETE_AUTHORITATIVE_SOURCE_THAT_CONTAINS_A_CHEAPER_SUFFICIENT_ROUTE",
+    "consequence": "THE_V1_LEAST_COST_CONDITIONAL_GUARANTEE_IS_FALSE_EVEN_WHEN_ALL_V1_INTERFACE_PROPERTIES_HOLD",
+    "supersession_rule": "ONLY_AFTER_INDEPENDENT_PUBLIC_RUNNER_VERIFIES_THE_EXACT_V3_COUNTEREXAMPLE_AND_V4_REPAIR_BYTES_MAY_V1_BE_MARKED_FALSIFIED_IN_ACTIVE_AUTHORITY"
+  },
+  "exact_inputs": {
+    "canonical/runtime/tool_discovery_dynamic_candidate_v4.py": "231221a16a631a4c9ee7994b5c890da89b3bdb38",
+    "canonical/tests/test_tool_discovery_dynamic_candidate_v4.py": "f7deba581e1b4e03c02c4dcd3578751eebf8231f",
+    "canonical/runtime/tool_discovery_dynamic_universal_scope_certificate_v4.py": "dc7ef791018fd85c5ffcd60a93c7e70002dbd7e6",
+    "canonical/tests/test_tool_discovery_dynamic_universal_scope_certificate_v4.py": "ee8f2c85a462edd474cb422ffdbc4921095ce3ba",
+    "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json": "bd8261913ce3eca063e87da967dce80a888e831e",
+    "canonical/governance/TOOL_DISCOVERY_DYNAMIC_V3_REFINEMENT_FALSIFICATION_V1.json": "f84a83562aac2b43254eda3826744be09b271a1e",
+    "canonical/runtime/tool_discovery_dynamic_candidate_v3.py": "bbbee4d6baf8df937543644397abba38a67dce62",
+    "canonical/runtime/tool_discovery_dynamic_refinement_v1.py": "991c039c0b405bf77508ce7921abc69460f57332",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json": "48ba33998e73b8eec2731be51a7ec78077ed0d4a"
+  },
+  "proof_domain": {
+    "population": "ALL_FINITE_DECISION_EPOCHS_WITH_FINITE_AVAILABLE_AUTHORITATIVE_DISCOVERY_SOURCES__FINITE_RESULTS_PER_SOURCE__COMPLETE_IN_SCOPE_IDENTITY_UNION__TRUTHFUL_METADATA__TRUTHFUL_EPOCH_BOUND_SAFE_PROBES__AND_STABLE_OR_RESTARTED_VERSION_EPOCHS",
+    "initial_visibility": "ARBITRARY_SUBSET_OF_THE_COMPLETE_IN_SCOPE_TOOL_IDENTITY_UNIVERSE",
+    "source_query_order": "DETERMINISTIC_DECLARED_DISCOVERY_COST_THEN_SOURCE_ID",
+    "route_order": "DETERMINISTIC_DECLARED_TOOL_COST_THEN_TOOL_ID_AFTER_COMPLETE_DISCOVERY",
+    "evidence_semantics": "ONLY_CURRENT_EPOCH_SAFE_CAPABILITY_PROBE_RECEIPTS_BIND",
+    "unknown_or_malformed_interface_behavior": "FAIL_CLOSED_OR_RESTART_EPISODE",
+    "terminal_case_replay_required": false
+  },
+  "formal_lemmas": [
+    {
+      "id": "L1_V1_COUNTEREXAMPLE",
+      "statement": "A V1-contract-satisfying state exists with EXPENSIVE cost 10 visible and positively evidenced, CHEAP cost 1 hidden behind one unqueried complete authoritative source, and a stable epoch; exact V3 returns SELECT EXPENSIVE before DISCOVER. Therefore the active V1 least-cost conditional guarantee is false."
+    },
+    {
+      "id": "L2_FINITE_SOURCE_EXHAUSTION",
+      "statement": "V4 checks available unqueried discovery sources before any tool probe or selection. Each successful discovery receipt identifies its queried source, and queried sources are excluded. A finite available source set is therefore exhausted in finitely many receipt-advancing steps."
+    },
+    {
+      "id": "L3_COMPLETE_IDENTITY_VISIBILITY",
+      "statement": "Each authoritative discovery result is finite and monotonically adds identities. When all available sources are exhausted, the contract's complete-union property makes every in-scope candidate tool identity visible."
+    },
+    {
+      "id": "L4_CURRENT_EPOCH_EVIDENCE_SOUNDNESS",
+      "statement": "V4 keys capability evidence by tool identity, required capability and current epoch; version change updates the epoch key, invalidating stale receipts. Truthful safe probes therefore make positive and negative capability states sound within an episode."
+    },
+    {
+      "id": "L5_GLOBAL_LEAST_COST_SELECTION",
+      "statement": "After complete identity visibility, V4 orders every available authorized constraint-satisfying tool by declared cost then tool_id. Every cheaper route is either disproved by truthful current-epoch evidence or selected once every required capability is positively evidenced. Thus V4 cannot select a more expensive route while a cheaper sufficient admissible route exists."
+    },
+    {
+      "id": "L6_SOUND_NO_ROUTE_ESCALATION",
+      "statement": "V4 reaches ESCALATE only after source exhaustion and after the entire cost-ordered admissible visible tool scan yields no positively completable route. Under complete identity coverage and truthful probes this is a sound no-route conclusion for the declared target scope."
+    },
+    {
+      "id": "L7_TRANSFER_AND_CHANGE",
+      "statement": "Current-epoch receipts persist across later calls and are reused without reprobe; version events alter epoch identity so stale capability evidence is not reused after change."
+    }
+  ],
+  "expected_independent_projection": {
+    "v1_refinement_falsified": true,
+    "v4_counterexample_repaired": true,
+    "conditional_universal_program_proof": true,
+    "universal_target_proved": false,
+    "interface_instance_verified": false,
+    "target_preserved": true,
+    "uses_empirical_generalization": false,
+    "minimum_missing_fact": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2",
+    "terminal_results_replayed": 0,
+    "new_reality_units_consumed": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "promotion_rule": "INDEPENDENT_PUBLIC_RUNNER_MUST_VERIFY_EXACT_BLOBS_AND_ADVERSARIAL_TESTS__THEN_ACTIVE_AUTHORITY_MAY_REPLACE_V1_PROGRAM_SIDE_REFINEMENT_WITH_V4__THE_TOOL_DISCOVERY_SCOPE_ATOM_REMAINS_OPEN_UNTIL_A_SEPARATE_CONTENT_ADDRESSED_INTERFACE_INSTANCE_SATISFIES_V2",
+  "hard_nonclaims": [
+    "NO_CURRENT_REAL_DISCOVERY_INTERFACE_IS_CLAIMED_COMPLETE",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT_FROM_THE_PROGRAM_SIDE_PROOF_ALONE",
+    "NO_FAMILY_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_ACCEPTANCE_CASES",
+    "NO_TARGET_WEAKENING",
+    "NO_PRIVATE_CARRIER_RETRY",
+    "NO_CROSS_FAMILY_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_THE_EXACT_V3_COUNTEREXAMPLE_V4_RUNTIME_V4_TESTS_V2_INTERFACE_CONTRACT_AND_V4_UNIVERSAL_CERTIFICATE__IF_PASS_ACTIVATE_TRUTH_REPAIR__THEN_SEARCH_OR_BUILD_ONE_CONTENT_ADDRESSED_COMPLETE_INTERFACE_INSTANCE_FOR_V2__THEN_RUN_SEPARATE_ACCEPTANCE_REDUCTION",
+  "terminal_results_observed": 0,
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
