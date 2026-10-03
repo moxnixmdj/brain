@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_SCOPE_CLOSURE_COMPILER_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GENERIC_ROOT3_PREPROCESSOR__ZERO_CREDIT",
+  "current_main_at_activation": "850a6d14c3925f30b8ec818e924ab93d6d4461c7",
+  "runtime": {
+    "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039"
+  },
+  "verification": {
+    "path": "canonical/verification/UNIVERSAL_SCOPE_CLOSURE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V2.json",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pr": 1425,
+    "verifier_merge_commit": "966cca4c393b32e42ed5331b8089a188bb3f7a9f",
+    "workflow_run_id": 37156756044,
+    "workflow_job_id": 111301607829,
+    "conclusion": "success"
+  },
+  "root3_bearing_target_count": 11,
+  "active_rule": "SCOPE_COMPLETE_ONLY_WITH_INDEPENDENT_VERIFIED_EXACT_OR_PROVEN_STRONGER_UNIVERSAL__EXACT_FINITE__EXHAUSTIVE_SUPERSET__OR_LOSSLESS_DECOMPOSITION_CERTIFICATE__PERFORMANCE_REMAINS_SEPARATE",
+  "next": "RUN_ONLY_PREDICATE_SPECIFIC_ROOT3_CERTIFICATES_THROUGH_THIS_COMPILER__NO_REPEAT_GENERIC_SCOPE_INFRASTRUCTURE_WORK",
+  "hard_rules": [
+    "NO_FINITE_SAMPLE_TO_OPEN_WORLD_GENERALIZATION",
+    "NO_SCOPE_TO_PERFORMANCE_INFERENCE",
+    "NO_CURRENT_OPEN_PREDICATE_CLOSES_FROM_ACTIVATION_ALONE",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
