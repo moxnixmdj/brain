@@ -1,0 +1,34 @@
+name: verify-root2-tb-science-inference-adapter-v1
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/root2_tb_science_inference_adapter_v1.py'
+      - 'canonical/tests/test_root2_tb_science_inference_adapter_v1.py'
+      - 'canonical/governance/ROOT2_EXTERNAL_TASK_ADAPTER_REGISTRY_V1.json'
+      - 'canonical/governance/ROOT2_TB_SCIENCE_INFERENCE_ADAPTER_CANDIDATE_V1.json'
+      - '.github/workflows/verify-root2-tb-science-inference-adapter-v1.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests
+        run: python -m unittest canonical.tests.test_root2_tb_science_inference_adapter_v1
+      - name: Fail-closed preflight
+        run: |
+          python canonical/runtime/root2_external_task_entrypoint_v1.py > /tmp/preflight.json
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/preflight.json'))
+          row=x['benchmarks']['TERMINAL_BENCH_SCIENCE_0_1']
+          assert row['status']=='PASS__INFERENCE_ADAPTER_BOUND', row
+          assert row['inference_ready'] is True, row
+          print(json.dumps(row, sort_keys=True))
+          PY
