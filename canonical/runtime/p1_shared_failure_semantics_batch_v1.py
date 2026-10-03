@@ -1,14 +1,13 @@
-"""One-shot source-native P1 shared failure-semantics batch.
+"""Predeclared P1 shared failure-semantics batch harness.
 
-The fresh cases come from the independently verified contract-native P1 source
-generator, not from the V7 synthetic proof population. Hidden injected-cause
-metadata is used only by source instrumentation to bind DIRECT_CONTRACT versus
-DERIVED_UPSTREAM before candidate visibility. The candidate never receives the
-source oracle.
+This module is deliberately unable to bind candidate-visible failure semantics
+from hidden oracle data. The binder accepts only the frozen public source case.
+Hidden source oracle data is retained exclusively for post-candidate scoring.
 
-A caller supplies an uncontrollable post-freeze beacon (for the terminal run,
-the independent public runner's GitHub Actions run identity). No result feedback
-is accepted by this module and no terminal-v3 receipt is replayed.
+Running this module, including a full batch with a spent beacon, never grants or
+claims a fresh-reality unit. Reality consumption and promotion are external
+adjudication facts that require a separately frozen execution activation and an
+independent public-runner receipt.
 """
 from __future__ import annotations
 
@@ -26,7 +25,7 @@ from canonical.runtime.p1_shared_failure_semantics_normalizer_v1 import (
     normalize_case,
 )
 
-SCHEMA = "PROJECT_BRAIN_P1_SHARED_FAILURE_SEMANTICS_BATCH_V1"
+SCHEMA = "PROJECT_BRAIN_P1_SHARED_FAILURE_SEMANTICS_BATCH_HARNESS_V2"
 CONTRACT = "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
 SURFACES = (
     "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
@@ -36,7 +35,9 @@ SURFACES = (
 CASES_PER_SURFACE = 64
 TOTAL_CASES = len(SURFACES) * CASES_PER_SURFACE
 DIFFICULTIES = (1, 2, 3, 4, 5)
-BEACON_NAMESPACE = "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH_V1"
+BEACON_NAMESPACE = "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH_V2"
+DIRECT_PUBLIC_STATES = {"FAULT_INJECTED"}
+DERIVED_PUBLIC_STATES = {"DOWNSTREAM_DEGRADED"}
 
 if set(SURFACES) != set(NORMALIZER_SURFACES):
     raise RuntimeError("NORMALIZER_SURFACE_SET_DRIFT")
@@ -67,61 +68,69 @@ def derive_seed(beacon: str, surface_id: str, case_index: int) -> int:
     return int.from_bytes(hashlib.sha256(material).digest()[:8], "big")
 
 
-def _source_receipt(full_source_case: Mapping[str, Any]) -> str:
-    return "sha256:" + _sha256(full_source_case)
-
-
-def instrument_source_case(
-    full_source_case: Mapping[str, Any],
+def bind_public_source_case(
+    public_source_case: Mapping[str, Any],
     *,
     surface_id: str,
     case_index: int,
 ) -> dict[str, Any]:
-    """Bind source-truth failure semantics without exposing the hidden oracle."""
+    """Bind semantics using public source fields only.
+
+    The caller must pass source.public_task(full_case), never the full hidden
+    case. Presence of _oracle is an explicit fail-closed violation.
+    """
+    if not isinstance(public_source_case, Mapping):
+        return {"status": "FAIL_CLOSED", "reason": "PUBLIC_SOURCE_NOT_MAPPING"}
+    if "_oracle" in public_source_case:
+        return {"status": "FAIL_CLOSED", "reason": "HIDDEN_ORACLE_INPUT_FORBIDDEN"}
     if surface_id not in SURFACES:
         return {"status": "FAIL_CLOSED", "reason": "SURFACE_NOT_FROZEN"}
-    if full_source_case.get("contract") != CONTRACT:
+    if public_source_case.get("contract") != CONTRACT:
         return {"status": "FAIL_CLOSED", "reason": "SOURCE_CONTRACT_MISMATCH"}
 
-    task = full_source_case.get("task")
-    oracle = full_source_case.get("_oracle")
-    if not isinstance(task, Mapping) or not isinstance(oracle, Mapping):
-        return {"status": "FAIL_CLOSED", "reason": "SOURCE_CASE_SCHEMA_INVALID"}
+    task = public_source_case.get("task")
+    if not isinstance(task, Mapping):
+        return {"status": "FAIL_CLOSED", "reason": "PUBLIC_SOURCE_TASK_INVALID"}
     steps = task.get("trajectory")
-    cause_step = oracle.get("cause_step")
-    if (
-        not isinstance(steps, list)
-        or not steps
-        or not isinstance(cause_step, int)
-        or isinstance(cause_step, bool)
-    ):
-        return {"status": "FAIL_CLOSED", "reason": "SOURCE_CAUSAL_TRUTH_INVALID"}
+    if not isinstance(steps, list) or not steps:
+        return {"status": "FAIL_CLOSED", "reason": "PUBLIC_SOURCE_TRAJECTORY_INVALID"}
 
-    receipt = _source_receipt(full_source_case)
+    receipt = "sha256:" + _sha256(public_source_case)
     rows: list[dict[str, Any]] = []
+    direct: list[int] = []
+    derived: list[int] = []
+
     for i, step in enumerate(steps):
         if not isinstance(step, Mapping):
             return {"status": "FAIL_CLOSED", "reason": f"SOURCE_STEP_INVALID:{i}"}
         if step.get("step") != i or step.get("action") != f"A{i}":
             return {"status": "FAIL_CLOSED", "reason": f"SOURCE_STEP_ID_DRIFT:{i}"}
         invariant = step.get("invariant_pass")
-        if type(invariant) is not bool:
-            return {"status": "FAIL_CLOSED", "reason": f"SOURCE_INVARIANT_INVALID:{i}"}
+        state = step.get("state")
+        if type(invariant) is not bool or not isinstance(state, str):
+            return {"status": "FAIL_CLOSED", "reason": f"SOURCE_VISIBLE_FIELDS_INVALID:{i}"}
 
-        evidence = [
-            f"{receipt}#step={i}",
-            f"{receipt}#state={step.get('state')}",
-        ]
         check: dict[str, Any] = {
             "kind": "INVARIANT",
             "id": f"A{i}:INVARIANT",
             "pass": invariant,
-            "evidence": evidence,
+            "evidence": [
+                f"{receipt}#step={i}",
+                f"{receipt}#public-state={state}",
+            ],
         }
         if invariant is False:
-            check["failure_semantics"] = (
-                "DIRECT_CONTRACT" if i == cause_step else "DERIVED_UPSTREAM"
-            )
+            if state in DIRECT_PUBLIC_STATES:
+                check["failure_semantics"] = "DIRECT_CONTRACT"
+                direct.append(i)
+            elif state in DERIVED_PUBLIC_STATES:
+                check["failure_semantics"] = "DERIVED_UPSTREAM"
+                derived.append(i)
+            else:
+                return {
+                    "status": "FAIL_CLOSED",
+                    "reason": f"FAILED_CHECK_PUBLIC_SEMANTICS_UNBOUND:{i}",
+                }
 
         rows.append(
             {
@@ -136,24 +145,10 @@ def instrument_source_case(
             }
         )
 
-    direct = [
-        i
-        for i, row in enumerate(rows)
-        for check in row["checks"]
-        if check.get("pass") is False
-        and check.get("failure_semantics") == "DIRECT_CONTRACT"
-    ]
-    derived = [
-        i
-        for i, row in enumerate(rows)
-        for check in row["checks"]
-        if check.get("pass") is False
-        and check.get("failure_semantics") == "DERIVED_UPSTREAM"
-    ]
-    if direct != [cause_step]:
-        return {"status": "FAIL_CLOSED", "reason": "SOURCE_DIRECT_BINDING_NOT_UNIQUE"}
-    if not derived or any(i <= cause_step for i in derived):
-        return {"status": "FAIL_CLOSED", "reason": "SOURCE_DERIVED_BINDING_INVALID"}
+    if not direct:
+        return {"status": "FAIL_CLOSED", "reason": "DIRECT_CONTRACT_NOT_PRESENT"}
+    if not derived:
+        return {"status": "FAIL_CLOSED", "reason": "DERIVED_UPSTREAM_NOT_PRESENT"}
 
     raw = {
         "surface_id": surface_id,
@@ -170,39 +165,43 @@ def instrument_source_case(
             "normalizer": normalized,
         }
 
-    public_candidate_case = {
-        "schema": SCHEMA,
-        "behavior_id": CONTRACT,
-        "task": copy.deepcopy(normalized["task"]),
-    }
-    v7_full_case = {
-        **copy.deepcopy(public_candidate_case),
-        "_oracle": {
-            "status": "IDENTIFIED",
-            "roots": [f"A{cause_step}"],
-            "critical": f"A{cause_step}",
-            "mechanisms": {f"A{cause_step}": ["INVARIANT"]},
-        },
-    }
     return {
         "status": "PASS",
         "surface_id": surface_id,
         "case_id": raw["case_id"],
         "source_observation_receipt": receipt,
-        "source_case": full_source_case,
-        "candidate_case": public_candidate_case,
-        "v7_full_case": v7_full_case,
-        "cause_step": cause_step,
+        "candidate_case": {
+            "schema": SCHEMA,
+            "behavior_id": CONTRACT,
+            "task": copy.deepcopy(normalized["task"]),
+        },
         "semantics_counts": {
             "DIRECT_CONTRACT": len(direct),
             "DERIVED_UPSTREAM": len(derived),
         },
+        "semantic_binding_basis": (
+            "FROZEN_PUBLIC_SOURCE_STATE_AND_INVARIANT_RESULT_ONLY__"
+            "HIDDEN_ORACLE_INPUT_FORBIDDEN"
+        ),
     }
 
 
-def _adapt_v7_to_source_candidate(
-    v7_output: Mapping[str, Any],
-) -> dict[str, Any]:
+def _v7_oracle_from_hidden_source(full_source_case: Mapping[str, Any]) -> dict[str, Any]:
+    oracle = full_source_case.get("_oracle")
+    if not isinstance(oracle, Mapping):
+        raise ValueError("HIDDEN_SOURCE_ORACLE_INVALID")
+    cause = oracle.get("cause_step")
+    if not isinstance(cause, int) or isinstance(cause, bool):
+        raise ValueError("HIDDEN_SOURCE_CAUSE_INVALID")
+    return {
+        "status": "IDENTIFIED",
+        "roots": [f"A{cause}"],
+        "critical": f"A{cause}",
+        "mechanisms": {f"A{cause}": ["INVARIANT"]},
+    }
+
+
+def _adapt_v7_to_source_candidate(v7_output: Mapping[str, Any]) -> dict[str, Any]:
     if v7_output.get("status") != "IDENTIFIED":
         return {"cause_step": None, "repair_id": None, "evidence_steps": []}
     aid = v7_output.get("cause_action_id")
@@ -213,25 +212,20 @@ def _adapt_v7_to_source_candidate(
     except ValueError:
         return {"cause_step": None, "repair_id": None, "evidence_steps": []}
     receipts = v7_output.get("supporting_receipts")
-    evidence_steps = [step] if isinstance(receipts, list) and receipts else []
     return {
         "cause_step": step,
         "repair_id": f"repair_{step}",
-        "evidence_steps": evidence_steps,
+        "evidence_steps": [step] if isinstance(receipts, list) and receipts else [],
     }
 
 
-def evaluate_one(
-    *,
-    beacon: str,
-    surface_id: str,
-    case_index: int,
-) -> dict[str, Any]:
+def evaluate_one(*, beacon: str, surface_id: str, case_index: int) -> dict[str, Any]:
     seed = derive_seed(beacon, surface_id, case_index)
     difficulty = DIFFICULTIES[case_index % len(DIFFICULTIES)]
     full_source_case = source.generate_case(CONTRACT, seed, difficulty)
-    bound = instrument_source_case(
-        full_source_case, surface_id=surface_id, case_index=case_index
+    public_source_case = source.public_task(full_source_case)
+    bound = bind_public_source_case(
+        public_source_case, surface_id=surface_id, case_index=case_index
     )
     if bound.get("status") != "PASS":
         return {
@@ -240,12 +234,17 @@ def evaluate_one(
             "case_index": case_index,
             "seed": seed,
             "difficulty": difficulty,
-            "reason": "INSTRUMENTATION_FAIL_CLOSED",
+            "reason": "PUBLIC_SOURCE_BINDING_FAIL_CLOSED",
             "detail": bound,
         }
 
-    v7_output = candidate.solve(copy.deepcopy(bound["candidate_case"]))
-    v7_verdict = scorer.score_case(bound["v7_full_case"], v7_output)
+    candidate_case = copy.deepcopy(bound["candidate_case"])
+    v7_output = candidate.solve(copy.deepcopy(candidate_case))
+    v7_full_case = {
+        **copy.deepcopy(candidate_case),
+        "_oracle": _v7_oracle_from_hidden_source(full_source_case),
+    }
+    v7_verdict = scorer.score_case(v7_full_case, v7_output)
     source_candidate = _adapt_v7_to_source_candidate(v7_output)
     source_verdict = source.score_case(full_source_case, source_candidate)
     passed = (
@@ -260,21 +259,16 @@ def evaluate_one(
         "seed": seed,
         "difficulty": difficulty,
         "source_observation_receipt": bound["source_observation_receipt"],
-        "source_case_public_sha256": _sha256(source.public_task(full_source_case)),
-        "candidate_input_sha256": _sha256(bound["candidate_case"]),
+        "source_case_public_sha256": _sha256(public_source_case),
+        "candidate_input_sha256": _sha256(candidate_case),
         "candidate_output_sha256": _sha256(v7_output),
         "candidate_status": v7_output.get("status"),
-        "cause_step": bound["cause_step"],
         "semantics_counts": bound["semantics_counts"],
+        "semantic_binding_basis": bound["semantic_binding_basis"],
         "v7_intervention_scorer_pass": v7_verdict.get("pass") is True,
         "source_native_rescue_scorer_pass": source_verdict.get("pass") is True,
         "source_native_rescue_pass": source_verdict.get("rescue_pass") is True,
-        "failure_reason": None
-        if passed
-        else {
-            "v7": v7_verdict,
-            "source": source_verdict,
-        },
+        "failure_reason": None if passed else {"v7": v7_verdict, "source": source_verdict},
     }
 
 
@@ -289,9 +283,9 @@ def _wilson_lower(successes: int, total: int, z: float = 1.96) -> float:
 
 
 def run_batch(beacon: str) -> dict[str, Any]:
+    """Evaluate a complete batch shape without granting reality or credit."""
     if not isinstance(beacon, str) or not beacon:
         raise ValueError("BEACON_REQUIRED")
-
     rows = [
         evaluate_one(beacon=beacon, surface_id=surface, case_index=i)
         for surface in SURFACES
@@ -320,11 +314,7 @@ def run_batch(beacon: str) -> dict[str, Any]:
     )
     return {
         "schema": SCHEMA,
-        "status": (
-            "PASS__ONE_SHARED_SOURCE_NATIVE_P1_FAILURE_SEMANTICS_BATCH"
-            if all_pass
-            else "FAIL_CLOSED__P1_SHARED_BATCH"
-        ),
+        "status": "PASS__BATCH_SHAPE" if all_pass else "FAIL_CLOSED__BATCH_SHAPE",
         "pass": all_pass,
         "beacon_sha256": hashlib.sha256(beacon.encode("utf-8")).hexdigest(),
         "beacon_namespace": BEACON_NAMESPACE,
@@ -339,78 +329,58 @@ def run_batch(beacon: str) -> dict[str, Any]:
         "by_surface": by_surface,
         "case_receipts": rows,
         "terminal_v3_replayed": 0,
-        "fresh_reality_units_consumed": 1,
+        "fresh_reality_units_consumed": 0,
+        "reality_unit_candidate_if_separately_authorized_and_independently_adjudicated": 1,
         "incremental_spend_usd": 0,
         "capability_credit_delta": 0,
         "family_credit_delta": 0,
         "execution_authority": False,
         "promotion_authority": False,
         "rule": (
-            "ONE_BATCH_OBSERVATION_ONLY__P1_QUARANTINE_LIFT_REQUIRES_SEPARATE_"
-            "INDEPENDENT_ADJUDICATION_AND_ACCEPTANCE_REDUCTION"
+            "RUNTIME_CANNOT_SELF_PROMOTE__ONLY_SEPARATELY_FROZEN_EXECUTION_ACTIVATION_"
+            "PLUS_INDEPENDENT_PUBLIC_RUNNER_RECEIPT_MAY_ADJUDICATE_ONE_FRESH_REALITY_UNIT"
         ),
     }
 
 
 def mutation_preflight() -> dict[str, Any]:
-    """Spent deterministic fixture; never counts as fresh terminal evidence."""
-    fixture = source.generate_case(CONTRACT, 70001, 3)
-    good = instrument_source_case(
-        fixture, surface_id=SURFACES[0], case_index=0
+    full = source.generate_case(CONTRACT, 70001, 3)
+    public = source.public_task(full)
+    good = bind_public_source_case(public, surface_id=SURFACES[0], case_index=0)
+
+    hidden = copy.deepcopy(public)
+    hidden["_oracle"] = {"cause_step": 1}
+    hidden_verdict = bind_public_source_case(
+        hidden, surface_id=SURFACES[0], case_index=0
     )
-    if good.get("status") != "PASS":
-        return {"pass": False, "reason": "GOOD_FIXTURE_REJECTED", "detail": good}
 
-    raw_task = copy.deepcopy(good["candidate_case"]["task"])
-    # Reconstruct a normalizer raw payload from the accepted task.
-    raw = {
-        "surface_id": SURFACES[0],
-        "case_id": "mutation-fixture",
-        "source_observation_receipt": "spent-fixture",
-        "trajectory": raw_task["trajectory"],
-        "terminal_failed_resources": raw_task["terminal_failed_resources"],
-    }
+    bad_state = copy.deepcopy(public)
+    for row in bad_state["task"]["trajectory"]:
+        if row.get("invariant_pass") is False:
+            row["state"] = "UNKNOWN_FAILED_STATE"
+            break
+    state_verdict = bind_public_source_case(
+        bad_state, surface_id=SURFACES[0], case_index=0
+    )
 
-    missing_semantics = copy.deepcopy(raw)
-    for row in missing_semantics["trajectory"]:
-        for check in row["checks"]:
-            if check.get("pass") is False:
-                check.pop("failure_semantics", None)
-                break
-        else:
-            continue
-        break
-
-    empty_receipt = copy.deepcopy(raw)
-    for row in empty_receipt["trajectory"]:
-        for check in row["checks"]:
-            if check.get("pass") is False:
-                check["evidence"] = []
-                break
-        else:
-            continue
-        break
-
-    wrong_surface = copy.deepcopy(raw)
-    wrong_surface["surface_id"] = "UNFROZEN/SURFACE"
-
-    verdicts = {
-        "missing_failure_semantics": normalize_case(missing_semantics),
-        "empty_failed_check_receipt": normalize_case(empty_receipt),
-        "unfrozen_surface": normalize_case(wrong_surface),
-    }
-    ok = all(v.get("status") == "FAIL_CLOSED" for v in verdicts.values())
+    ok = (
+        good.get("status") == "PASS"
+        and hidden_verdict.get("reason") == "HIDDEN_ORACLE_INPUT_FORBIDDEN"
+        and state_verdict.get("status") == "FAIL_CLOSED"
+    )
     return {
         "pass": ok,
-        "status": "PASS__LOAD_BEARING_NEGATIVE_CONTROLS" if ok else "FAIL_CLOSED",
-        "verdicts": verdicts,
+        "status": "PASS__PUBLIC_ONLY_BINDER_FIREWALL" if ok else "FAIL_CLOSED",
+        "hidden_oracle_input": hidden_verdict,
+        "unknown_failed_state": state_verdict,
         "fresh_reality_units_consumed": 0,
+        "execution_authority": False,
+        "promotion_authority": False,
     }
 
 
 if __name__ == "__main__":
     import argparse
-
     p = argparse.ArgumentParser()
     p.add_argument("--beacon", required=True)
     args = p.parse_args()
