@@ -20,11 +20,15 @@ def public():
     }
 
 class Tests(unittest.TestCase):
-    def test_substrate_cannot_name_tool_or_choose_route(self):
-        p=public()
-        p["subproblem_contract"]["goal"]="Use cheap_search"
-        out=a.next_action(p)
-        self.assertEqual(out["reason"],"SUBSTRATE_BOUNDARY_VIOLATION")
+    def test_subproblem_request_has_structural_catalog_nonexposure(self):
+        payload=a.build_subproblem_request(task_context="Find document.",public_state_summary="Need the next operation.")
+        encoded=repr(payload)
+        self.assertNotIn("cheap_search",encoded)
+        self.assertNotIn("expensive_search",encoded)
+        self.assertNotIn("input_schema",encoded)
+        self.assertNotIn("'cost'",encoded)
+
+    def test_substrate_cannot_choose_route_via_contract_fields(self):
         p=public()
         p["subproblem_contract"]["selected_tool"]="cheap_search"
         self.assertEqual(a.next_action(p)["reason"],"SUBSTRATE_BOUNDARY_VIOLATION")
