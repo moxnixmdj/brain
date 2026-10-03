@@ -753,6 +753,24 @@
       "reducer_blob": "cfb2336291112eff247ae74b7a5e381fc9009317",
       "universal_scope_receipt_blob": "f327bfdb5d52bb9551b52f67da14a4cd425533a3",
       "new_reality_units_consumed": 0
+    },
+    "residual_witness_retrieval_control": {
+      "contract_path": "canonical/governance/RESIDUAL_WITNESS_RETRIEVAL_CONTRACT_V1.json",
+      "contract_git_blob_sha": "9c3098454d9c577cd92b020bdc2de157e8c626e9",
+      "runtime_path": "canonical/runtime/residual_witness_retrieval_compiler_v1.py",
+      "runtime_git_blob_sha": "9daa8d590f3356b3fc51eccf75c56cbf515239e4",
+      "verification_path": "canonical/verification/RESIDUAL_WITNESS_RETRIEVAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "verification_git_blob_sha": "f0a68c8219d704875535543060f63b9ecaca6dd5",
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__UNICODE_BEHAVIORAL_QUERY_LATTICE__NO_RESULT_NONEXISTENCE_FIREWALL__SCOPE_LIMITED_EXHAUSTIVE_CLOSURE__ZERO_CREDIT"
+    },
+    "residual_witness_backend_router": {
+      "contract_path": "canonical/governance/RESIDUAL_WITNESS_BACKEND_CONTRACT_V1.json",
+      "contract_git_blob_sha": "97acb0d74848230df2deeed0b6902186087c12b5",
+      "runtime_path": "canonical/runtime/residual_witness_backend_router_v1.py",
+      "runtime_git_blob_sha": "8935439e587fb723a4464fe9a15e8772ddb076bf",
+      "verification_path": "canonical/verification/RESIDUAL_WITNESS_BACKEND_ROUTER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "verification_git_blob_sha": "34512250b7bc7a69a03ab7d4e9b4d1ef4d2c8bfc",
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__CANDIDATE_SUFFICIENCY_FIREWALL__BACKEND_AUTHORITY_SEPARATION__ZERO_CREDIT"
     }
   },
   "residual": [
@@ -1363,5 +1381,45 @@
     "execution_authority": false,
     "promotion_authority": false
   },
-  "next_terminal_action": "VERIFY_TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_REPAIR_V1__NO_NEW_SCIENCE_TERMINAL_SLOT_AUTHORITY_UNTIL_INDEPENDENT_PASS"
+  "next_terminal_action": "VERIFY_TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_REPAIR_V1__NO_NEW_SCIENCE_TERMINAL_SLOT_AUTHORITY_UNTIL_INDEPENDENT_PASS",
+  "residual_witness_retrieval": {
+    "status": "ACTIVE_VERIFIED_CONTROL_PLANE__LIVE_ACCEPTANCE_CREDIT_REQUIRES_INDEPENDENT_SUFFICIENT_WITNESS",
+    "purpose": "COMPILE_EXACT_OPEN_ACCEPTANCE_RESIDUALS_INTO_UNICODE_BEHAVIORAL_QUERY_LATTICES__ROUTE_ORTHOGONAL_DISCOVERY_SURFACES__STOP_ON_FIRST_INDEPENDENTLY_VERIFIED_SUFFICIENT_WITNESS__NEVER_TREAT_INCOMPLETE_SEARCH_AS_NONEXISTENCE",
+    "candidate_only_surfaces": [
+      "REPOSITORY_METADATA",
+      "SOCIAL_TECHNICAL_DISCUSSION"
+    ],
+    "built_in_bound_surfaces": [
+      "PACKAGE_REGISTRY",
+      "OPEN_WEB",
+      "DOCUMENTATION",
+      "SCHOLARLY"
+    ],
+    "host_bound_surfaces_required_for_full_operational_recall": [
+      "CODE_CONTENT",
+      "SYMBOLS",
+      "MANIFESTS",
+      "TESTS_EXAMPLES",
+      "ISSUES_PRS",
+      "COMMITS_RELEASES_BRANCHES_TAGS"
+    ],
+    "current_tool_discovery_live_application": {
+      "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "retrieval_result": "NO_NEW_ADMISSIBLE_WITNESS_FROM_CURRENT_OFFICIAL_PUBLIC_SOURCE_SURFACES",
+      "preserved_open_facts": [
+        "SAME_HARNESS_AND_COMMON_TOOL_AUTHORITY_COMPARABILITY",
+        "VALID_ROUTE_TOP1_OPUS55_COMPARATOR"
+      ],
+      "evidence": [
+        "canonical/governance/OPUS55_TOOLATHLON_REFERENCE_BINDING_V1.json",
+        "canonical/reasoning/2026-10-03_TOOLATHLON_OPUS55_HARNESS_COMPARABILITY_CUT_V1.json"
+      ],
+      "boundary": "BOUNDED_SEARCH_RESULT_ONLY__NOT_GLOBAL_NONEXISTENCE"
+    },
+    "current_acceptance_preserved": "3_OF_19__8_OF_38",
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false
+  }
 }
