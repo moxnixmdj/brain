@@ -116,7 +116,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         unresolved = [] if requirements is None else sorted(set(requirements) - resolved)
         prompt = (
             "You are an OPTIONAL semantic proposal source inside Project Brain, not execution authority. "
-            "Return one JSON object only. Project Brain owns action selection, command policy, verification, "
+            "Return one structured proposal object only. Project Brain owns action selection, command policy, verification, "
             "requirement-state updates, and finish authority. No network acquisition, package installation, "
             "git fetch/clone/pull, secrets, or host escape. "
             "On the first cycle provide material_requirements (1-16 stable short IDs). "
@@ -128,7 +128,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
             "Recent observations: " + json.dumps(observations[-4:], sort_keys=True)[:12000]
         )
-        planned = science_planner.plan(prompt, timeout_s=20)
+        planned = science_planner.plan(prompt, timeout_s=180)
         raw = science_planner.normalize_proposal_object(
             science_planner.extract_json_object(planned.get("text", ""))
         )
@@ -259,7 +259,7 @@ class HarborScienceAgent(BaseAgent):
         return "project-brain-science"
 
     def version(self) -> str:
-        return "1.1.0"
+        return "1.2.0"
 
     async def setup(self, environment: BaseEnvironment) -> None:
         return None
