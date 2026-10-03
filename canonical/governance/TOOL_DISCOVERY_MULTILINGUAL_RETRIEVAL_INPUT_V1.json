@@ -1,0 +1,207 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_MULTILINGUAL_RETRIEVAL_INPUT_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_EXACT_RESIDUAL_INPUT__OPEN_WORLD_FAIL_CLOSED__ZERO_CREDIT",
+  "residual_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "effect": "Find a scope-complete Tool Discovery proof or matched Claude Opus 5.5 Toolathlon evidence sufficient to close TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "required_capabilities": [
+    "scope-complete proof over all admissible frozen target ecosystems",
+    "matched Claude Opus 5.5 Toolathlon trajectory or harness evidence",
+    "valid_route_top1 comparator or independently derivable equivalent"
+  ],
+  "aliases": [
+    "Toolathlon Opus 5.5",
+    "Claude Opus 5.5 Toolathlon",
+    "claude-opus-5-5 Toolathlon",
+    "Toolathlon valid_route_top1",
+    "valid_route_top1",
+    "Toolathlon evaluation harness",
+    "Toolathlon reference trajectories",
+    "Toolathlon Pass@1 77.8",
+    "Toolathlon 108 tasks 3 trials",
+    "Toolathlon 324 trials",
+    "same harness common tool authority",
+    "tool authority identity scope",
+    "scope complete discovery interface",
+    "exhaustive finite tool ecosystem",
+    "universal tool discovery scope proof",
+    "site:github.com Toolathlon Opus 5.5",
+    "site:gitlab.com Toolathlon Opus 5.5",
+    "site:gitee.com Toolathlon Opus 5.5",
+    "site:codeberg.org Toolathlon Opus 5.5",
+    "site:huggingface.co Toolathlon Opus 5.5",
+    "site:paperswithcode.com Toolathlon",
+    "site:arxiv.org Toolathlon"
+  ],
+  "language_variants": {
+    "zh": [
+      "工具发现",
+      "工具选择",
+      "工具路由",
+      "评测轨迹",
+      "评测框架",
+      "工具能力发现",
+      "Claude Opus 5.5 Toolathlon 评测"
+    ],
+    "ar": [
+      "اكتشاف الأدوات",
+      "اختيار الأدوات",
+      "توجيه الأدوات",
+      "مسار التقييم",
+      "إطار التقييم",
+      "Claude Opus 5.5 Toolathlon تقييم"
+    ],
+    "ru": [
+      "обнаружение инструментов",
+      "выбор инструментов",
+      "маршрутизация инструментов",
+      "траектория оценки",
+      "стенд оценки",
+      "Claude Opus 5.5 Toolathlon оценка"
+    ],
+    "ja": [
+      "ツール探索",
+      "ツール選択",
+      "ツールルーティング",
+      "評価軌跡",
+      "評価ハーネス",
+      "Claude Opus 5.5 Toolathlon 評価"
+    ],
+    "ko": [
+      "도구 탐색",
+      "도구 선택",
+      "도구 라우팅",
+      "평가 궤적",
+      "평가 하네스",
+      "Claude Opus 5.5 Toolathlon 평가"
+    ],
+    "es": [
+      "descubrimiento de herramientas",
+      "selección de herramientas",
+      "enrutamiento de herramientas",
+      "trayectoria de evaluación",
+      "arnés de evaluación",
+      "evaluación Claude Opus 5.5 Toolathlon"
+    ],
+    "fr": [
+      "découverte d'outils",
+      "sélection d'outils",
+      "routage d'outils",
+      "trajectoire d'évaluation",
+      "harnais d'évaluation",
+      "évaluation Claude Opus 5.5 Toolathlon"
+    ],
+    "de": [
+      "Werkzeugentdeckung",
+      "Werkzeugauswahl",
+      "Werkzeug-Routing",
+      "Evaluierungstrajektorie",
+      "Evaluierungsharness",
+      "Claude Opus 5.5 Toolathlon Bewertung"
+    ],
+    "pt": [
+      "descoberta de ferramentas",
+      "seleção de ferramentas",
+      "roteamento de ferramentas",
+      "trajetória de avaliação",
+      "harness de avaliação",
+      "avaliação Claude Opus 5.5 Toolathlon"
+    ],
+    "hi": [
+      "उपकरण खोज",
+      "उपकरण चयन",
+      "उपकरण रूटिंग",
+      "मूल्यांकन ट्रैजेक्टरी",
+      "मूल्यांकन हार्नेस",
+      "Claude Opus 5.5 Toolathlon मूल्यांकन"
+    ],
+    "tr": [
+      "araç keşfi",
+      "araç seçimi",
+      "araç yönlendirme",
+      "değerlendirme yörüngesi",
+      "değerlendirme koşum takımı",
+      "Claude Opus 5.5 Toolathlon değerlendirmesi"
+    ],
+    "id": [
+      "penemuan alat",
+      "pemilihan alat",
+      "perutean alat",
+      "lintasan evaluasi",
+      "harness evaluasi",
+      "evaluasi Claude Opus 5.5 Toolathlon"
+    ],
+    "vi": [
+      "khám phá công cụ",
+      "lựa chọn công cụ",
+      "định tuyến công cụ",
+      "quỹ đạo đánh giá",
+      "bộ khung đánh giá",
+      "đánh giá Claude Opus 5.5 Toolathlon"
+    ]
+  },
+  "observables": {
+    "api_symbols": [
+      "valid_route_top1",
+      "tool_authority_identity",
+      "route_selection",
+      "tool_discovery",
+      "reference_trajectory"
+    ],
+    "commands": [
+      "toolathlon",
+      "evaluate",
+      "run_toolathlon"
+    ],
+    "protocols": [
+      "Toolathlon-Verified",
+      "OpenAI chat completions structured tool calls"
+    ],
+    "file_formats": [
+      "json",
+      "jsonl",
+      "md",
+      "mdx"
+    ],
+    "error_strings": [
+      "sandbox-escape monitor",
+      "safety classifiers",
+      "incomparable harness"
+    ],
+    "imports": [
+      "toolathlon",
+      "mcp"
+    ],
+    "input_signatures": [
+      "108 tasks",
+      "3 trials",
+      "324 trials"
+    ],
+    "output_signatures": [
+      "77.8 Pass@1",
+      "82.4 Pass@3",
+      "72.2 Pass³",
+      "26.9 turns"
+    ]
+  },
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "no_paid_provider_configuration": true,
+    "candidate_discovery_does_not_grant_acceptance": true,
+    "no_result_does_not_mean_nonexistence": true,
+    "stop_on_first_independently_verified_sufficient_witness": true
+  },
+  "declared_scope": null,
+  "hard_nonclaims": [
+    "NO_CLAIM_THESE_LANGUAGE_VARIANTS_COVER_ALL_HUMAN_LANGUAGES",
+    "NO_CLAIM_TRANSLATION_TERMS_ARE_SEMANTICALLY_EXHAUSTIVE",
+    "NO_PUBLIC_WEB_OR_CODE_HOST_IS_ASSERTED_COMPLETE",
+    "NO_PRIVATE_DELETED_OR_UNINDEXED_SOURCE_IS_ASSERTED_SEARCHED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
