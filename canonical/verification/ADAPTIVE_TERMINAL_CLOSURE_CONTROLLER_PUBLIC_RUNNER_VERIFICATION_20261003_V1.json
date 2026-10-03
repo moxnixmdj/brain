@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_TERMINAL_CLOSURE_CONTROLLER_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__COUNT_GENERIC_ADAPTIVE_ZERO_REALITY_AND_OWNERSHIP_SCHEDULER__ZERO_CREDIT",
+  "exact_brain_blobs": {
+    "canonical/runtime/adaptive_terminal_closure_controller_v1.py": "2c15aeef745ac3b0e3a6eaa578f0d7893e935bd9",
+    "canonical/tests/test_adaptive_terminal_closure_controller_v1.py": "df33a45f233f749af501c22c0a8597ba6066ea22",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163",
+    "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json": "4b5517dbd12978f8ffe481fb775e85592c7790c8",
+    "canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json": "fae786d6051277865ed6ecde69be5da98e2bf509",
+    "canonical/verification/CURRENT_27_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "1931ae5a7edb5dde2021a8a4f7e7a3ad0fd821f1",
+    "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json": "438e2775b64bee5ed6e792522ab35ebd0d6e1771",
+    "canonical/verification/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_EXECUTION_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json": "9915c55fe6a9da6d47c0e58476722a116d7cb0ec",
+    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json": "3cbbcd1ddabde7dbf4c3f4d118bdb9d78d0c8605",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "f47a69253e7eb75e139b445b736d3d18b33be622"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1317,
+    "verifier_merge_commit": "d7d3adfa5ce5f9685f939ec901161e64acf88237",
+    "workflow_run_id": 37120139607,
+    "workflow_job_id": 111194489731,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_blob_binding": true,
+    "live_world_11_proved_27_open": true,
+    "live_16_nondominated_certificates": true,
+    "live_19_verified_zero_reality_requirements": true,
+    "matched_16_child_first_resource_priority": true,
+    "ownership_reconciliation_for_two_already_accepted_unowned_families": true,
+    "tool_discovery_v2_gate_preserved": true,
+    "unknown_success_probability_not_invented": true,
+    "empirical_beta_posterior_scheduling_only": true,
+    "future_recomputed_world_12_proved_26_open_requires_no_controller_code_change": true,
+    "zero_authority_leak": true
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_CREDIT",
+    "NO_FAMILY_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_GOAL_CLOSURE_FROM_SCHEDULER_VERIFICATION"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
