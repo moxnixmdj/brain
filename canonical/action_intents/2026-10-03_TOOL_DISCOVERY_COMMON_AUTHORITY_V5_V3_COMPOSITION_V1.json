@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-03",
+  "id": "TOOL_DISCOVERY_COMMON_AUTHORITY_V5_V3_COMPOSITION_V1",
+  "status": "EXECUTED_ON_CANDIDATE_BRANCH__INDEPENDENT_VERIFICATION_PENDING",
+  "terminal_goal": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "mission_lock": "TOOL_DISCOVERY_SELECTION_AND_LEARNING_WHOLE_PROTOCOL_COMMON_AUTHORITY_SCOPE_ONLY",
+  "trigger": {
+    "current_acceptance": "3_OF_19_FAMILIES__8_OF_38_ATOMIC",
+    "blocker": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "residual": "COMMON_FROZEN_BRAIN_OPUS_TOOL_AUTHORITY_SCOPE_PLUS_SOUND_PROGRAM_SIDE_DISCOVERY"
+  },
+  "action": "COMPOSE_CONVERGED_CONTENT_BOUND_V5_WITH_ROUTE_NEUTRAL_COMMON_MATCHED_AUTHORITY_CONTRACT_V3",
+  "outputs": [
+    "canonical/runtime/tool_discovery_dynamic_candidate_v5.py",
+    "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V3.json",
+    "canonical/runtime/common_frozen_tool_authority_v3.py",
+    "canonical/tests/test_common_frozen_tool_authority_v3.py",
+    "canonical/runtime/tool_discovery_common_authority_v5_v3_certificate.py",
+    "canonical/governance/TOOL_DISCOVERY_COMMON_AUTHORITY_V5_V3_THEOREM_V1.json"
+  ],
+  "prohibitions": [
+    "NO_4_OF_19_PROMOTION_FROM_THIS_CANDIDATE",
+    "NO_BRAIN_ONLY_AUTHORITY_SUBSTITUTION",
+    "NO_PER_CASE_SCOPE_TO_WHOLE_PROTOCOL_GENERALIZATION",
+    "NO_UNOBSERVABLE_ROUTE_OPTIMALITY_CLAIM",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY"
+  ],
+  "next": "INDEPENDENT_EXACT_BYTE_PUBLIC_RUNNER_VERIFICATION__THEN_SEPARATE_ACCEPTANCE_REDUCTION_ONLY_IF_THE_SCOPE_INTERFACE_AND_V5_SOUNDNESS_BOTH_PASS",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
