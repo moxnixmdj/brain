@@ -18,16 +18,16 @@
     "candidate_tests": "canonical/tests/test_tool_discovery_dynamic_candidate_v4.py",
     "candidate_tests_git_blob_sha": "57a5758becdf3314e1c8dad66af47233c4a443c7",
     "refinement_runtime": "canonical/runtime/tool_discovery_dynamic_refinement_v2.py",
-    "refinement_runtime_git_blob_sha": "6c8bfffe90c5df54dfa479ae4496cf36f845bba9",
+    "refinement_runtime_git_blob_sha": "716f7d96ac3f347d49accc382f07f4c768a1004e",
     "refinement_tests": "canonical/tests/test_tool_discovery_dynamic_refinement_v2.py",
     "refinement_tests_git_blob_sha": "83b3e949b4c1018b7409e0c2c558d0bb2b9ff357",
     "interface_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json",
-    "interface_contract_git_blob_sha": "f359e88ae18e79988d0af9e97f05da2ac7cf250d"
+    "interface_contract_git_blob_sha": "d342962d6d90f4fdb78446d7f7711c05938a3a25"
   },
   "verified_candidate_delta_if_independent_pass": [
     "V3_LEAST_COST_COUNTEREXAMPLE_BECOMES_PERMANENT_REGRESSION_INVARIANT",
     "V4_EXHAUSTS_AVAILABLE_AUTHORITATIVE_DISCOVERY_SOURCES_BEFORE_PROBE_OR_SELECT",
-    "V2_INTERFACE_CONTRACT_ADDS_SOURCE_SET_AND_ROUTE_RANKING_STABILITY_OR_RESTART",
+    "V2_INTERFACE_CONTRACT_REQUIRES_UNIQUE_CANONICAL_IDENTITIES_EXACT_RESULT_INCORPORATION_TOTAL_ORDER_COST_AND_EPOCH_STABILITY_OR_RESTART",
     "FROZEN_TARGET_REMAINS_UNCHANGED",
     "UNIVERSAL_TARGET_REMAINS_UNPROVED"
   ],
