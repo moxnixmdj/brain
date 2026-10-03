@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_V11_CURRENT_POINTER_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V11_CURRENT_POINTER_CANDIDATE__ZERO_CREDIT",
+  "verified_pointer": {
+    "path": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "3f2320220ebb218f16b95c18e3b38dee26d1b533"
+  },
+  "bound_activation_verification": {
+    "path": "canonical/verification/GLOBAL_RETRIEVAL_V11_DUAL_EMPIRICAL_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "35d9efe922071196abece96bf4db39d26525c557"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1405,
+    "merge_commit": "c3f3b611f9829e26b2862b46005b55dc1149dbd5",
+    "workflow_run_id": 37153903334,
+    "workflow_job_id": 111293212701,
+    "conclusion": "success"
+  },
+  "verified": {
+    "v11_entrypoint_v3_binding_exact": true,
+    "v8_live_empirical_extension_preserved": true,
+    "v9_generated_stress_extension_preserved": true,
+    "transport_failure_recall_exclusion_bound": true,
+    "measured_poor_routes_demoted_not_disabled": true,
+    "unmeasured_route_exploration_preserved": true,
+    "open_world_unknown_preserved": true,
+    "zero_credit_preserved": true
+  },
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
