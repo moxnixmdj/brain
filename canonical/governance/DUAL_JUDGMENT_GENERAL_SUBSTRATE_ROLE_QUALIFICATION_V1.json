@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_DUAL_JUDGMENT_GENERAL_SUBSTRATE_ROLE_QUALIFICATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_REALITY_ROLE_QUALIFICATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prove that the single declared model dependency in the dual Finance/Unknown-Domain judgment envelope is functioning as a general cognition substrate rather than as an opaque target-capability provider, using current exact Brain bytes plus the already independently verified material-control counterfactual.",
+  "target_requirements": [
+    "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_FINANCE_JUDGMENT_SOURCE_GATE_PASS",
+    "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_UNKNOWN_DOMAIN_JUDGMENT_SOURCE_GATE_PASS"
+  ],
+  "exact_inputs": {
+    "envelope": {
+      "path": "canonical/capabilities/opus55/DUAL_JUDGMENT_CONTROL_ENVELOPE_V1.json",
+      "git_blob_sha": "6ea46314887a59de742e56f32893de9efce1103a"
+    },
+    "runtime": {
+      "path": "canonical/runtime/judgment_control_envelope_v1.py",
+      "git_blob_sha": "5ebfd1e7fa871da89ecca40ffeb8dd6575c21582"
+    },
+    "tests": {
+      "path": "canonical/tests/test_judgment_control_envelope_v1.py",
+      "git_blob_sha": "e712746ecfb0c912779fc6436cbb4f2b51521c3d"
+    },
+    "source_gate": {
+      "path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+      "git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+    },
+    "material_control_receipt": {
+      "path": "canonical/verification/DUAL_JUDGMENT_CONTROL_CURRENT_MAIN_INDEPENDENT_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "041b73f3c212d86d870554d2dc7b8ad0b691d921"
+    },
+    "law": {
+      "path": "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
+      "git_blob_sha": "7532aa0a5700fc061c9cf6b003fa8a9ac27d3972"
+    }
+  },
+  "theorem": {
+    "premises": [
+      "THE_BRAIN_OWNED_CONFIGURATION_IS_INDEPENDENTLY_PROVED_CAUSALLY_LOAD_BEARING_FOR_FINANCE_AND_UNKNOWN_DOMAIN_TERMINAL_DECISIONS",
+      "THE_OPERATIVE_RUNTIME_CONTAINS_NO_MODEL_OR_PROVIDER_CLIENT_AND EXPOSES_ONE_GENERIC_PROPOSAL_PLUS_PROOF_BUNDLE INTERFACE ACROSS_BOTH MODES",
+      "THE_RUNTIME_WITHHOLDS_TERMINAL_AUTHORITY_FROM_THE_PROPOSAL_SOURCE_AND ROUTES FINAL ADMISSION THROUGH BRAIN_OWNED_DETERMINISTIC CHECKS",
+      "THE_CAPABILITY_PACKAGE_PERSISTS AS CONTENT_ADDRESSED_BRAIN_ARTIFACTS AND DOES_NOT_REQUIRE CAPABILITY_REDISCOVERY",
+      "NO_STANDALONE_MODEL_BENCHMARK_SUPERIORITY_IS_USED AS OWNERSHIP EVIDENCE"
+    ],
+    "conclusion": "THE_DECLARED_MODEL_DEPENDENCY_IS_ADMISSIBLE_AS_GENERAL_cognition_substrate_FOR_SOURCE_GATE_V2_ROLE_CLASSIFICATION",
+    "nonclaim": "THIS_DOES_NOT_PROVE_FINANCE_OR_UNKNOWN_DOMAIN_DIRECT_LEAF PERFORMANCE; THOSE REMAIN SEPARATE FROZEN ORACLE EVALUATIONS."
+  },
+  "expected": {
+    "general_substrate_test_pass": true,
+    "source_gate_v2_pass": true,
+    "clean_direct_case_execution_authority": true,
+    "finance_source_requirement_closable": true,
+    "unknown_domain_source_requirement_closable": true,
+    "acceptance_predicates_closed": 0,
+    "family_acceptance_delta": 0,
+    "ownership_delta": 0
+  },
+  "hard_rules": [
+    "NO_DIRECT_ORACLE_CASE_CONTENT_READ",
+    "NO_FINANCE_OR_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT_FROM_ROLE_QUALIFICATION",
+    "NO_MODEL_STANDALONE_SUPERIORITY_EVIDENCE",
+    "NO_PROVIDER_NETWORK_CALL_REQUIRED",
+    "FAIL_CLOSED_ON_ANY_BOUND_BLOB_DRIFT",
+    "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_REQUIRED_BEFORE_SOURCE_GATE_ACTIVATION"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
