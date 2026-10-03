@@ -13,10 +13,12 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["original_open_preconditions"], 6)
         self.assertTrue(out["checker_and_task_population_frozen"])
         self.assertTrue(out["proved_existing_atomic_inputs"])
+        self.assertTrue(out["legacy_77_8_candidate_is_not_a_matched_reference"])
         self.assertTrue(out["terminal_selector_frozen"])
         self.assertEqual(out["closed_zero_reality_count"], 2)
         self.assertEqual(out["absorbed_original_precondition_count"], 2)
         self.assertEqual(out["minimum_remaining_fact_count"], 3)
+        self.assertEqual(out["minimum_remaining_facts"][-1], "OPUS55_TOOLATHLON_MATCHED_REFERENCE_BAR")
         self.assertFalse(out["terminal_execution_authorized"])
         self.assertEqual(out["terminal_results_observed"], 0)
         self.assertEqual(out["capability_credit_delta"], 0)
@@ -44,6 +46,14 @@ class Tests(unittest.TestCase):
         row["scope_complete"] = False
         out = cut.evaluate(bindings=bindings)
         self.assertIn("REQUIRED_EXISTING_TOOL_ATOMS_NOT_PROVED", out["errors"])
+
+    def test_legacy_77_8_source_state_is_not_reclassified_as_matched(self):
+        freeze = cut._load(cut.FREEZE)
+        freeze = copy.deepcopy(freeze)
+        freeze["opus55_reference_bar"]["source_status"] = "MATCHED_REFERENCE_READY"
+        out = cut.evaluate(freeze=freeze)
+        self.assertEqual(out["status"], "FAIL_CLOSED__PRECONDITION_CUT_INVALID")
+        self.assertIn("LEGACY_REFERENCE_CANDIDATE_STATE_DRIFT", out["errors"])
 
     def test_selector_cannot_execute_with_two_of_three(self):
         state = {x: True for x in cut.REMAINING}
