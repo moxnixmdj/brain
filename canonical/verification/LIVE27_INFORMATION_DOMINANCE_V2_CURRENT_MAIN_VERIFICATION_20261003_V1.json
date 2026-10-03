@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE27_INFORMATION_DOMINANCE_V2_CURRENT_MAIN_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_MAIN_DEPENDENCY_EQUIVALENCE_PASS__ZERO_REALITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "live_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN"
+  },
+  "exact_runtime": {
+    "path": "canonical/runtime/current_terminal_information_dominance_v2.py",
+    "git_blob_sha": "0fc5bc26e55c3756d3c5d9213f3aa6d0a7b4bb1e"
+  },
+  "exact_tests": {
+    "path": "canonical/tests/test_current_terminal_information_dominance_v2.py",
+    "git_blob_sha": "8e67b17ddc084235cad491e7c42ba0f076ccffc5"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1304,
+    "head_sha": "28b9b16a8a9126b4b02019f12a294ea09456be29",
+    "workflow": "Verify live27 information dominance V2",
+    "workflow_run_id": 37117407266,
+    "conclusion": "success"
+  },
+  "dependency_equivalence": {
+    "checked_on_current_main": true,
+    "dependency_blob_count": 17,
+    "all_match": true,
+    "current_main_at_check": "b6ac28f56bc76d32567eb890d72f3de665774287"
+  },
+  "verified_properties": [
+    "38_FROZEN_11_PROVED_27_UNRESOLVED",
+    "RECOVERY_AND_DELEGATION_PROVED_TARGETS_REMOVED",
+    "TOOL_DISCOVERY_TARGET_REMAINS_OPEN",
+    "MANDATORY_TOOL_DISCOVERY_V2_RETRIEVAL_GATE_REQUIRED_AND_PASSING",
+    "DIRECT_BYPASS_FORBIDDEN",
+    "CONSUMED_EPOCH_REPLAY_FORBIDDEN",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "FULL_LIVE_ACTION_COVERAGE_27",
+    "ZERO_FRESH_REALITY"
+  ],
+  "hard_nonclaims": [
+    "INFORMATION_DOMINANCE_IS_SCHEDULING_ONLY",
+    "NO_ACCEPTANCE_FAMILY_OR_CAPABILITY_CREDIT",
+    "NO_BENCHMARK_EXECUTION_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
