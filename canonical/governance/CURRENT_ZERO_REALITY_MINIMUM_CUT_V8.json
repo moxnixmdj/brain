@@ -28,7 +28,7 @@
     },
     "root2_routes": {
       "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-      "git_blob_sha": "0e4e6f76b5bb76d3ca59a5893f10d64e352fae01"
+      "git_blob_sha": "afd0497b1a6088d5984b86a950b106758c682166"
     },
     "minimum_frontier": {
       "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
