@@ -39,6 +39,15 @@ class ToolDiscoveryUniversalScopeCertificateV2Tests(unittest.TestCase):
             self.assertFalse(out["universal_scope_proved"], name)
             self.assertIn(name, out["missing"])
 
+    def test_nonfinite_cost_guard_mutation_kills_scope_proof(self):
+        mutant = self.interface.replace(
+            "if not math.isfinite(cost):",
+            "if False:",
+        )
+        facts = derive_source_facts(mutant, self.v4)
+        self.assertFalse(facts["COMMON_AUTHORITY_INTERFACE_FINITE_NORMALIZED"])
+        self.assertFalse(prove_from_facts(facts)["universal_scope_proved"])
+
     def test_interface_coverage_mutation_kills_scope_proof(self):
         mutant = self.interface.replace(
             "for i, row in enumerate(authority):",
