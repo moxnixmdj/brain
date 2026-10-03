@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CANARY_V3_FINAL_ZERO_RECONCILIATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_FINAL_ZERO__PRE_TASK_LOCAL_SUBSTRATE_RESOURCE_FAILURE__INDEPENDENT_VERIFICATION_REQUIRED__NO_RETRY_NO_REPLACEMENT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_AUTHORITY_V3.json",
+    "git_blob_sha": "ae5bc607b828e8f55092e80e0a806d5a496eb54b",
+    "hard_rule": "ANY_INFRA_TIMEOUT_RESOURCE_INVALID_OR_MISSING_VERIFIER_RESULT_FINALIZES_THIS_SLOT_AS_ZERO"
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37110691405,
+    "workflow_job_id": 111167854392,
+    "head_sha": "2526faede780cd30438df2010ff5c4741a4a8b30",
+    "run_attempt": 1,
+    "run_conclusion": "failure",
+    "runner_assignment": "ASSIGNED_AND_USER_CODE_EXECUTED",
+    "authority_guard_step": "success",
+    "harbor_install_and_docker_step": "success",
+    "llama_cpp_build_step": "success",
+    "qwen_model_hash_step": "success",
+    "local_cognition_endpoint_step": "failure",
+    "terminal_slot_step": "skipped",
+    "finalizer_step": "success",
+    "artifact_upload_step": "success"
+  },
+  "observed_failure": {
+    "class": "PRE_TASK_LOCAL_SUBSTRATE_RESOURCE_INVALID",
+    "root_cause_observation": "LLAMA_CPP_SERVER_PROCESS_EXITED_WITH_ILLEGAL_INSTRUCTION_BEFORE_HEALTH_ENDPOINT_BECAME_READY",
+    "terminal_task_content_read": 0,
+    "harbor_terminal_task_started": false,
+    "verifier_reward_observed": false
+  },
+  "artifact": {
+    "id": 11269073658,
+    "name": "tb-science-virtual-baseline-localization-trial-0-v3",
+    "digest": "sha256:06c17101b2a3a762548c3d372cc7f055eaa8eaf27199433c6b1f742e37f8f1f0",
+    "slot_receipt_path": "virtual-baseline-localization-trial-0__SLOT_RECEIPT.json",
+    "slot_receipt": {
+      "slot_id": "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "errors": [
+        "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD"
+      ],
+      "harbor_step_outcome": "skipped",
+      "execution_authority_consumed": true,
+      "rerun_credit": false,
+      "promotion_authority": false
+    }
+  },
+  "accounting": {
+    "fixed_denominator": 210,
+    "required_successes": 133,
+    "finalized_failures_before_v3": 4,
+    "v3_success_delta": 0,
+    "v3_failure_delta": 1,
+    "finalized_failures_after_v3": 5,
+    "remaining_failures_before_fail_lock": 73,
+    "threshold_unchanged": true
+  },
+  "disposition": {
+    "authorized_slot_consumed": true,
+    "rerun_allowed": false,
+    "replacement_allowed": false,
+    "denominator_shrink_allowed": false,
+    "execution_authority_after_finalization": false,
+    "promotion_authority": false,
+    "next": "REPAIR_LOCAL_SUBSTRATE_CPU_PORTABILITY_ZERO_TERMINAL__INDEPENDENTLY_VERIFY__ONLY_THEN_SELECT_NEXT_UNTOUCHED_MANIFEST_SLOT_AND_ISSUE_SEPARATE_AUTHORITY"
+  },
+  "hard_rules": [
+    "DO_NOT_RERUN_VIRTUAL_BASELINE_LOCALIZATION_TRIAL_0",
+    "DO_NOT_REPLACE_OR_ERASE_FINAL_ZERO",
+    "DO_NOT_COUNT_PRE_TASK_FAILURE_AS_CAPABILITY_SUCCESS",
+    "DO_NOT_AUTHORIZE_NEXT_SLOT_BEFORE_CPU_PORTABILITY_REPAIR_HAS_ZERO_TERMINAL_INDEPENDENT_PASS",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
