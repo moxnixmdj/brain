@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_MONOTONE_AGGREGATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PUBLISHED_NONNEGATIVE_WEIGHTED_AVERAGE__COMPONENTWISE_NONINFERIORITY_SUFFICIENT__ZERO_CREDIT",
+  "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_commit": "0bf876cdb79dd577a8aa5aa1bd67185f7ed3ebe7",
+    "workflow_path": ".github/workflows/verify-finance-index-monotone-aggregation.yml",
+    "workflow_run_id": 37155381249,
+    "workflow_job_id": 111297585688,
+    "conclusion": "success"
+  },
+  "verified": {
+    "aggregation_kind": "PUBLISHED_WEIGHTED_AVERAGE",
+    "higher_is_better": true,
+    "components": [
+      {
+        "name": "Business Knowledge",
+        "weight": 0.3
+      },
+      {
+        "name": "Agentic Knowledge Work",
+        "weight": 0.3
+      },
+      {
+        "name": "Reasoning",
+        "weight": 0.2
+      },
+      {
+        "name": "Agentic Tool Use",
+        "weight": 0.1
+      },
+      {
+        "name": "Long-Context",
+        "weight": 0.05
+      },
+      {
+        "name": "Non-Hallucination",
+        "weight": 0.05
+      }
+    ],
+    "weight_sum": 1,
+    "all_weights_nonnegative": true
+  },
+  "theorem": "FOR_F(B)=SUM_i(w_i*B_i)_WITH_ALL_w_i_GE_0__IF_FOR_ALL_i_BRAIN_i_GE_OPUS55_i__THEN_F(BRAIN)_GE_F(OPUS55)",
+  "consequence": "A_SEPARATE_FINANCE_INDEX_RUN_IS_NOT_REQUIRED_IF_ALL_SIX_FROZEN_COMPONENT_SCORES_AND_THEIR_NORMALIZATION_BINDINGS_ARE_INDEPENDENTLY_PROVED_NONINFERIOR_TO_THE_FROZEN_OPUS55_COMPONENTS",
+  "hard_nonclaims": [
+    "NO_COMPONENT_SCORE_FOR_BRAIN_IS_PROVED_BY_THIS_RECEIPT",
+    "NO_COMPONENT_NORMALIZATION_BINDING_IS_PROVED_BY_THIS_RECEIPT",
+    "NO_FINANCE_INDEX_ACCEPTANCE_CREDIT_FROM_THEOREM_ALONE",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
