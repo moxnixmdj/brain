@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_POST_DELEGATION_RECONCILIATION_V4",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_TRUTH_REPAIR_AND_TWO_COMPONENT_PROOF_RECONCILIATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Replace stale 0/12 composition authority logic with current post-delegation truth while keeping Tool Discovery quarantined and independently checking the current memory-family bridge.",
+  "canonical_base_commit": "a99c37a85cd2edb4dacaae7457f56b1de12f263f",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "stale_state_detected": {
+    "stale_authority": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V3.json",
+    "stale_authority_blob_sha": "23b35112407e60ea7199e0990edf6e2620eea406",
+    "stale_acceptance_blob_used": "af83f4899169e81017767c3316ddcf6b61da5ef6",
+    "current_acceptance_blob": "7885a827b1483bfb38315c1f492848f7e4680285",
+    "stale_delegation_state": "EXTERNAL_BLOCKED",
+    "current_delegation_state": "PROVED",
+    "current_delegation_scope_complete": true,
+    "current_acceptance": "3_OF_19__8_OF_38"
+  },
+  "candidate_receipts": [
+    "canonical/governance/COMPOSITION_DELEGATION_SCOPE_COMPLETE_BRIDGE_V1.json",
+    "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2.json"
+  ],
+  "expected_verdict": {
+    "current_admissible_scoped_proved": 2,
+    "current_open_or_quarantined": 10,
+    "scoped_proved_components": [
+      "delegation",
+      "memory"
+    ],
+    "quarantined_components": [
+      "tool discovery"
+    ],
+    "parent_composition_predicate_closed": false,
+    "fresh_reality_units": 0
+  },
+  "hard_rules": [
+    "CURRENT_ACCEPTANCE_AUTHORITY_OVERRIDES_STALE_PRE_DELEGATION_SNAPSHOT",
+    "TOOL_DISCOVERY_REMAINS_QUARANTINED_UNTIL_ITS_CURRENT_WHOLE_PROTOCOL_SCOPE_COMPLETENESS_CLOSES",
+    "DELEGATION_COMPONENT_MAY_RETURN_ONLY_THROUGH_A_NEW_RECEIPT_COMPOSING_CURRENT_SCOPE_COMPLETE_FAMILY_CLOSURE_WITH_THE_VERIFIED_LITERAL_COMPONENT_MAPPING",
+    "MEMORY_COMPONENT_MAY_ENTER_ONLY_IF_CURRENT_CLOSED_WORLD_SEMANTIC_MAPPING_AND_CURRENT_OWNERSHIP_BYTES_PASS_INDEPENDENTLY",
+    "NO_PARENT_COMPOSITION_ACCEPTANCE_FROM_COMPONENT_COUNT_REPAIR",
+    "NO_NEW_REALITY_OR_TERMINAL_REPLAY",
+    "ZERO_CAPABILITY_FAMILY_EXECUTION_AND_PROMOTION_CREDIT_FROM_RECONCILIATION"
+  ],
+  "runtime": "canonical/runtime/composition_post_delegation_reconciler_v1.py",
+  "tests": "canonical/tests/test_composition_post_delegation_reconciler_v1.py",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
