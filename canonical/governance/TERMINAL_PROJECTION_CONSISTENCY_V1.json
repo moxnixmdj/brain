@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PROJECTION_CONSISTENCY_V1",
-  "date": "2026-10-02",
+  "date": "2026-10-03",
   "status": "ACTIVE_FAIL_CLOSED__CURRENT_SCOPE_AND_ACCEPTANCE_PROJECTION_FIREWALL__ZERO_CREDIT",
   "objective": "Prevent raw terminal execution success, whole-scope behavioral credit, Opus55 acceptance, atomic acceptance, ownership, and current authority pointers from drifting apart after independent scope quarantines or acceptance-scope reconciliations.",
   "runtime": "canonical/runtime/terminal_projection_consistency_v1.py",
@@ -9,9 +9,9 @@
     "raw_terminal_execution": "3352/3352_PASS__IMMUTABLE",
     "whole_scope_contracts": "11/12_PASS__1_P1_QUARANTINED",
     "behavioral_families": "11/19_UNAFFECTED_PROVISIONAL_PASS__8/19_P1_DEPENDENT_QUARANTINED",
-    "opus55_acceptance": "2/19_CLOSED__17/19_OPEN",
-    "verified_owned": "2/19",
-    "atomic_acceptance_frontier": "7/38_PROVED__31_UNRESOLVED",
+    "opus55_acceptance": "3/19_CLOSED__16/19_OPEN",
+    "verified_owned": "3/19",
+    "atomic_acceptance_frontier": "8/38_PROVED__30_UNRESOLVED",
     "authorized_acceptance_case_actions": [],
     "tb4_reality_execution": "REVOKED__180_LT_220",
     "terminal_goal_achieved": false
@@ -27,7 +27,7 @@
     "NO_TERMINAL_REPLAY",
     "NO_CAPABILITY_OR_FAMILY_CREDIT_FROM_THIS_FIREWALL"
   ],
-  "invalidation": "ANY_CURRENT_AUTHORITY_INPUT_BLOB_OR_SCOPE_ACCEPTANCE_AUTHORITY_CHANGE",
+  "invalidation": "ANY_CURRENT_AUTHORITY_INPUT_BLOB_OR_SCOPE_ACCEPTANCE_AUTHORITY_CHANGE__INCLUDING_NEW_INDEPENDENT_FAMILY_CLOSURE",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
@@ -37,7 +37,7 @@
     "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
     "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-    "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+    "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V2.json",
     "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
     "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   ]
