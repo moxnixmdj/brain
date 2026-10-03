@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_BRAIN_ROUTE_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_CASE__BRAIN_OWNED_RESEARCH_CONTROL_COMPOSED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "frozen_surface": {
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
+    "acceptance_bar_percent": 58.7,
+    "terminal_cases_exposed": 0
+  },
+  "composed_owned_components": [
+    "canonical/runtime/harbor_environment_transport.py",
+    "canonical/runtime/harbor_command_policy.py",
+    "canonical/runtime/shared_decision_primitives.py",
+    "canonical/runtime/bounded_research_frontier.py",
+    "canonical/capabilities/opus55/M4_BOUNDED_RESEARCH_FRONTIER_001.json",
+    "canonical/reasoning/2026-10-02_M4_DEPENDENCY_COMPRESSION_V1.json"
+  ],
+  "candidate_runtime": "canonical/runtime/harbor_science_agent_v1.py",
+  "candidate_tests": "canonical/tests/test_harbor_science_agent_v1.py",
+  "control_boundary": {
+    "substrate_role": "OPTIONAL_GENERAL_COGNITION_PROPOSAL_SOURCE",
+    "brain_owns": [
+      "FROZEN_MATERIAL_REQUIREMENT_STATE_AFTER_FIRST_PLAN",
+      "COMMAND_ADMISSIBILITY",
+      "DETERMINISTIC_CANDIDATE_SELECTION_BY_VERIFIED_RESEARCH_CONTROL_PRIMITIVE",
+      "SEPARATE_ACTION_AND_VERIFY_EXECUTION",
+      "REQUIREMENT_COVERAGE_PROMOTION_ONLY_AFTER_ZERO_EXIT_VERIFY",
+      "FINISH_AUTHORITY_ONLY_AFTER_ALL_FROZEN_REQUIREMENTS_RESOLVE"
+    ],
+    "substrate_forbidden": [
+      "DIRECT_ENVIRONMENT_EXECUTION",
+      "MUTATING_FROZEN_REQUIREMENTS",
+      "DIRECT_FINISH_AUTHORITY",
+      "NETWORK_ACQUISITION_OR_PACKAGE_INSTALLATION_THROUGH_ENVIRONMENT_COMMANDS"
+    ]
+  },
+  "source_gate_projection_if_independently_verified": {
+    "brain_candidate_bound": true,
+    "brain_owned_operative_configuration": true,
+    "configuration_materially_constrains_execution": true,
+    "capability_package_contains_configuration": true,
+    "promotion_evaluates_brain_configured_system": true,
+    "external_hidden_target_capability_provider": false,
+    "ownership_claim_relies_on_model_standalone_superiority": false,
+    "future_use_requires_capability_rediscovery": false,
+    "model_role": "GENERAL_COGNITION_SUBSTRATE",
+    "model_dependency_count": 1,
+    "model_dependencies_declared": true,
+    "general_substrate_test_pass": true,
+    "benchmark_harness_zero_cost": true
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_BENCH_SCIENCE_TASK_READ_OR_EXECUTED",
+    "NO_CLAIM_THE_SUBSTRATE_IS_CORRECT",
+    "NO_CLAIM_TB_SCIENCE_58_7_IS_MET",
+    "NO_FAMILY_OR_CAPABILITY_CREDIT",
+    "NO_TERMINAL_EXECUTION_AUTHORITY_UNTIL_EXACT_ROUTE_ZERO_CASE_PREFLIGHT_AND_INDEPENDENT_SOURCE_GATE_PASS"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_results_observed": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
