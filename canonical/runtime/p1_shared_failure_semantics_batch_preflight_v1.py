@@ -82,13 +82,13 @@ EXPECTED_AUTHORITY = {
         "canonical/runtime/p1_shared_failure_semantics_normalizer_v1.py",
         "b6ba06fc6a35fa132eb19389ee256e74a63a4849",
     ),
-    "shared_batch_executor_v1": (
+    "batch_harness_v2": (
         "canonical/runtime/p1_shared_failure_semantics_batch_v1.py",
-        "fa92b6021e9a7aed9347fb80f5ad55b8652b7a0c",
+        "695cfe3f283723a52bafb6299236a2d0378dc79e",
     ),
-    "shared_batch_tests_v1": (
+    "batch_harness_tests_v2": (
         "canonical/tests/test_p1_shared_failure_semantics_batch_v1.py",
-        "9433835e6996705c11e4de4e1a58beaf45886319",
+        "7512a920c72d7bdeb2b072788e4c4bc8d2ff2d08",
     ),
 }
 
@@ -260,13 +260,23 @@ def evaluate(*, freeze_override: Mapping[str, Any] | None = None) -> dict[str, A
     # Directly check that instrumentation removes the source oracle before the
     # V7 candidate receives the case.
     fixture = source.generate_case("TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001", 991337, 4)
-    bound = batch.instrument_source_case(fixture, surface_id=sorted(EXPECTED_SURFACES)[0], case_index=0)
-    _error(errors, bound.get("status") == "PASS", "ORACLE_LEAK_FIXTURE_BIND")
+    public_fixture = source.public_task(fixture)
+    bound = batch.bind_public_source_case(
+        public_fixture, surface_id=sorted(EXPECTED_SURFACES)[0], case_index=0
+    )
+    _error(errors, bound.get("status") == "PASS", "PUBLIC_ONLY_FIXTURE_BIND")
     if bound.get("status") == "PASS":
         candidate_case = bound.get("candidate_case") or {}
         _error(errors, "_oracle" not in candidate_case, "ORACLE_LEAK")
         _error(errors, "source_case" not in candidate_case, "SOURCE_CASE_LEAK")
-        _error(errors, bound.get("cause_step") == fixture["_oracle"]["cause_step"], "SOURCE_CAUSE_BINDING")
+        _error(errors, bound.get("semantic_binding_basis") == "FROZEN_PUBLIC_SOURCE_STATE_AND_INVARIANT_RESULT_ONLY__HIDDEN_ORACLE_INPUT_FORBIDDEN", "PUBLIC_ONLY_BINDING_BASIS")
+
+    hidden_fixture = copy.deepcopy(public_fixture)
+    hidden_fixture["_oracle"] = copy.deepcopy(fixture["_oracle"])
+    hidden_verdict = batch.bind_public_source_case(
+        hidden_fixture, surface_id=sorted(EXPECTED_SURFACES)[0], case_index=0
+    )
+    _error(errors, hidden_verdict.get("reason") == "HIDDEN_ORACLE_INPUT_FORBIDDEN", "HIDDEN_ORACLE_FIREWALL")
 
     _error(errors, freeze.get("new_reality_units_consumed") == 0, "NEW_REALITY_ALREADY_CONSUMED")
     _error(errors, freeze.get("terminal_results_replayed") == 0, "TERMINAL_REPLAY")
