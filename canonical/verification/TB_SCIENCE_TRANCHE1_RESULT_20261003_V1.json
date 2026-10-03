@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANCHE1_RESULT_20261003_V1",
+  "date": "2026-10-03",
+  "status": "FINALIZED__0_SUCCESS__3_FINAL_ZERO__SHARED_SCIENCE_PLANNER_ERROR__AUTHORITY_MUST_REVOKE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow": "Execute TB-Science tranche 1 V1",
+    "workflow_run_id": 37101712032,
+    "workflow_head_sha": "9f69b4d4faecc561831ec8e57212e5ee04c5895b",
+    "conclusion": "success",
+    "created_at": "2026-10-03T06:01:51Z",
+    "updated_at": "2026-10-03T06:03:45Z",
+    "incremental_spend_usd": 0
+  },
+  "frozen_inputs": {
+    "brain_authority_commit": "501466bca32e88dd7795bb0f69061050784e2ae0",
+    "active_authority_blob": "89406ed4c8d214dfa81eddbb1f8caeebc33e82b2",
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "controller_blob": "8ab8287fdb6a9b63b9fe2d2addde731486c89d1e",
+    "planner_blob": "17472fd2b01b164fbb180aecfc04385b55b11499",
+    "reducer_blob": "3b48ea534d606cf47a8321b56427353066393577",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "execution_workflow_blob": "bf79ac405b0d88d6926383db2e67e513a95f77d3"
+  },
+  "slots": [
+    {
+      "slot_id": "terminal-bench-science/mri-harmonization::trial-0",
+      "job_id": 111142377000,
+      "artifact_id": 11266251943,
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "receipt_error": "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD",
+      "harbor_step_outcome": "success",
+      "harbor_summary": {
+        "trials": 0,
+        "exceptions": 1,
+        "mean": 0,
+        "exception_class": "SciencePlannerError"
+      }
+    },
+    {
+      "slot_id": "terminal-bench-science/genomic-model-ranking::trial-0",
+      "job_id": 111142377106,
+      "artifact_id": 11266261781,
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "receipt_error": "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD",
+      "harbor_step_outcome": "success",
+      "harbor_summary": {
+        "trials": 0,
+        "exceptions": 1,
+        "mean": 0,
+        "exception_class": "SciencePlannerError"
+      }
+    },
+    {
+      "slot_id": "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "job_id": 111142377130,
+      "artifact_id": 11266816617,
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "receipt_error": "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD",
+      "harbor_step_outcome": "success",
+      "harbor_summary": {
+        "trials": 0,
+        "exceptions": 1,
+        "mean": 0,
+        "exception_class": "SciencePlannerError"
+      }
+    }
+  ],
+  "reduction": {
+    "finalized_slots": 3,
+    "successes": 0,
+    "finalized_failures": 3,
+    "remaining_successes_required_for_frozen_pass_lock": 124,
+    "irreversible_failures_remaining_before_fail_lock": 84,
+    "fixed_denominator": 210,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "predicate_closed": false
+  },
+  "causal_observation": {
+    "shared_failure_signature": "SCIENCE_PLANNER_ERROR_BEFORE_ANY_TRIAL_RESULT_ON_3_OF_3_INDEPENDENT_TASKS",
+    "inference": "SHARED_PLANNER_OR_PROPOSAL_TRANSPORT_PATH_IS_THE_FIRST_CAUSAL_REPAIR_TARGET__DO_NOT_SPEND_MORE_TERMINAL_SLOTS_BEFORE_EXACT_EXCEPTION_LOCALIZATION",
+    "task_specific_failure_claimed": false
+  },
+  "authority_disposition": "AUTO_REVOKE_AFTER_ALL_THREE_AUTHORIZED_SLOTS_FINALIZED",
+  "execution_authority": false,
+  "promotion_authority": false
+}
