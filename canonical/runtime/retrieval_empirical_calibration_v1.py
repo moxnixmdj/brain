@@ -171,6 +171,7 @@ def calibrate_arena(root:Path)->dict[str,Any]:
             "hybrid_top3_misses":result["hybrid_top3_misses"],
             "metrics":result["metrics"],
             "profile_metrics":result["profile_metrics"],
+            "monotonic_pooled_candidate_metrics":result["monotonic_pooled_candidate_metrics"],
         },
         "calibration":calibrated,
         "open_world_completeness_claim":False,
