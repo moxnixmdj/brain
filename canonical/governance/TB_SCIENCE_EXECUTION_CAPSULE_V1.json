@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_EXECUTION_CAPSULE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CONTENT_ADDRESSED_ZERO_CASE_EXECUTION_CAPSULE__INDEPENDENT_VERIFICATION_REQUIRED__EXECUTION_FALSE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "frozen_acceptance": {
+    "bar_percent": 58.7,
+    "slot_count": 210,
+    "required_successes": 124,
+    "irreversible_failure_count": 87,
+    "binary_reward": "0_OR_1",
+    "exact_trial_success": "reward >= 1.0"
+  },
+  "dataset_binding": {
+    "package": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "dataset_manifest_blob": "b506a7777d2dd5ae3e70c590366ceac4ee59ae28",
+    "content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
+    "harbor_version": "0.23.0"
+  },
+  "exact_brain_bindings": {
+    "canonical/runtime/harbor_science_agent_v1.py": "8ab8287fdb6a9b63b9fe2d2addde731486c89d1e",
+    "canonical/runtime/harbor_science_planner_v1.py": "17472fd2b01b164fbb180aecfc04385b55b11499",
+    "canonical/runtime/acceptance_capability_source_gate_v2.py": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py": "3b48ea534d606cf47a8321b56427353066393577",
+    "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "canonical/verification/TB_SCIENCE_210_SLOT_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "e9bca17092cecbb7d2611d5c081bae8336c2083f",
+    "canonical/verification/TB_SCIENCE_DEDICATED_PLANNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "50f319b6af8fd75f84f24035a45ad02db55e6518",
+    "canonical/verification/TB_SCIENCE_CONSERVATIVE_CENSORING_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "625cd4fc6e2a503f9ed0514f5b5113fc3250bb88"
+  },
+  "proof_chain": {
+    "manifest_candidate_verified_blob": "e0318f4fcde040498077dcdd872e398e32240791",
+    "current_manifest_activation_commit": "56591fedc97cacf08a00f835e3ddfff9fe0356ec",
+    "manifest_verification": "canonical/verification/TB_SCIENCE_210_SLOT_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "planner_controller_verification": "canonical/verification/TB_SCIENCE_DEDICATED_PLANNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "conservative_reducer_verification": "canonical/verification/TB_SCIENCE_CONSERVATIVE_CENSORING_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  },
+  "execution_law": [
+    "ONLY_FROZEN_210_MANIFEST_SLOT_IDS_MAY_BE_EXECUTED",
+    "ZERO_RETRIES_PER_SLOT",
+    "ZERO_SLOT_REPLACEMENT",
+    "FIXED_DENOMINATOR_210",
+    "ONLY_EXACT_SCORER_SUCCESS_COUNTS_ONE",
+    "EVERY_FINAL_NON_SUCCESS_COUNTS_ZERO",
+    "EVERY_FINALIZED_UNRUNNABLE_SLOT_COUNTS_ZERO",
+    "STOP_ON_124_SUCCESSES_OR_87_FINAL_FAILURES",
+    "NO_TASK_CONTENT_USED_FOR_SCHEDULING",
+    "NO_PAID_FALLBACK",
+    "POINT_OF_USE_ZERO_INCREMENTAL_SPEND_CARRIER_ADMISSION_REQUIRED_BEFORE_EACH_EXECUTED_SLOT",
+    "NO_PROMOTION_UNTIL_CONTENT_ADDRESSED_RESULT_AND_ACCEPTANCE_REDUCER_PASS"
+  ],
+  "target_freshness_guard": {
+    "frozen_protocol_bar_percent": 58.7,
+    "rule": "DO_NOT_MUTATE_THE_FROZEN_ACCEPTANCE_BAR_INSIDE_THIS_CAPSULE__A_NEWER_PUBLIC_COMPARATOR_OBSERVATION_MUST_BE_SEPARATELY_RECONCILED_FOR_EXACT_DATASET_HARNESS_AGENT_EFFORT_AND_SCORING_EQUIVALENCE_BEFORE_IT_CAN_CHANGE_TERMINAL_ACCEPTANCE",
+    "status": "SEPARATE_RECONCILIATION_REQUIRED_IF_NEWER_COMPARATOR_IS_PROPOSED"
+  },
+  "remaining_before_execution_authority": [
+    "INDEPENDENTLY_VERIFY_THIS_EXACT_CAPSULE_AND_CURRENT_BOUND_BLOBS",
+    "POINT_OF_USE_ZERO_INCREMENTAL_SPEND_CARRIER_ADMISSION_FOR_FROZEN_SLOT_IDS_OR_FINALIZE_UNRUNNABLE_SLOTS_ZERO",
+    "ISSUE_ONE_USE_TERMINAL_EXECUTION_AUTHORITY_BOUND_TO_THIS_CAPSULE_HASH"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_TASK_INSTRUCTION_READ_BY_CAPSULE_CONSTRUCTION",
+    "NO_TERMINAL_TRIAL_EXECUTED",
+    "NO_TB_SCIENCE_SCORE",
+    "NO_ACCEPTANCE_FAMILY_OR_CAPABILITY_CREDIT",
+    "NO_EXECUTION_AUTHORITY_FROM_CANDIDATE_CAPSULE"
+  ],
+  "terminal_task_content_read": 0,
+  "terminal_trials_executed": 0,
+  "terminal_results_observed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
