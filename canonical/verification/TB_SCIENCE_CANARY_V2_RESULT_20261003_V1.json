@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CANARY_V2_RESULT_20261003_V1",
+  "date": "2026-10-03",
+  "status": "FINALIZED__0_SUCCESS__1_FINAL_ZERO__SCIENCE_PLANNER_ERROR__ONE_USE_AUTHORITY_REVOKED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow": "Execute TB-Science one-slot canary V2",
+    "workflow_run_id": 37106127198,
+    "workflow_job_id": 111154893275,
+    "workflow_head_sha": "8fac642506cb03726ad3bb54a1c1799da1f5a161",
+    "conclusion": "success",
+    "artifact_id": 11267982635,
+    "artifact_zip_sha256": "ffe482ebd229c01e0f3b50f3a6bb9c30bb5dfe027ef011a402da8ac447360569",
+    "created_at": "2026-10-03T07:22:24Z",
+    "finalized_at": "2026-10-03T07:27:58Z",
+    "incremental_spend_usd": 0
+  },
+  "slot": {
+    "slot_id": "terminal-bench-science/baseline-free-localization::trial-0",
+    "task_name": "terminal-bench-science/baseline-free-localization",
+    "task_digest": "sha256:f35349bcb083094b096a2400d9e98e55690b35f26e2b395796364ad109e91d57",
+    "status": "FINAL_ZERO",
+    "reward": 0,
+    "receipt_error": "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD",
+    "harbor_step_outcome": "success",
+    "harbor_summary": {"trials": 0, "exceptions": 1, "mean": 0, "exception_class": "SciencePlannerError"}
+  },
+  "reduction": {
+    "frozen_comparator_percent": 63.33333333333333,
+    "fixed_denominator": 210,
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "total_finalized_slots": 4,
+    "total_successes": 0,
+    "total_finalized_failures": 4,
+    "remaining_successes_required_for_pass_lock": 133,
+    "remaining_failures_before_fail_lock": 74,
+    "predicate_closed": false
+  },
+  "causal_observation": {
+    "prior_synthetic_local_qwen_proposal_contract": "6_OF_6_PASS",
+    "prior_real_harbor_zero_case_composition": "PASS",
+    "terminal_canary_exception": "SciencePlannerError",
+    "inference": "CURRENT_FAILURE_IS_TASK_CONDITIONED_INSIDE_THE_SCIENCE_PLANNER_PATH_BEFORE_A_VERIFIER_RESULT",
+    "next_information_target": "LOCALIZE_EXACT_SCIENCE_PLANNER_EXCEPTION_FROM_CONTENT_ADDRESSED_CANARY_ARTIFACT__REPAIR_WITH_NONTERMINAL_EQUIVALENT_REPRODUCTION__INDEPENDENTLY_VERIFY_BEFORE_ANY_NEW_TERMINAL_SLOT"
+  },
+  "authority_disposition": "AUTO_REVOKED_AFTER_SINGLE_AUTHORIZED_SLOT_FINALIZED",
+  "hard_rules": [
+    "BASELINE_FREE_LOCALIZATION_TRIAL_0_IS_PERMANENTLY_CONSUMED",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "NO_NEW_TB_SCIENCE_TERMINAL_SLOT_AUTHORITY_BEFORE_EXACT_EXCEPTION_LOCALIZATION_AND_INDEPENDENT_NONTERMINAL_REPAIR_VERIFICATION",
+    "WORKFLOW_SUCCESS_DOES_NOT_OVERRIDE_FINAL_ZERO_RECEIPT_SEMANTICS"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
