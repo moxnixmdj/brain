@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMPLETE_INTERFACE_SCOPE_CERTIFICATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CLOSED_WORLD_COMPLETE_INTERFACE_UNIVERSAL_CONSTRUCTION__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "objective": "Satisfy the one remaining independently verified Tool Discovery minimum fact by constructing a content-addressed complete discovery interface whose source union is exactly the Brain-callable tool universe for every finite decision epoch, then compose it only with the already independently verified PR1100 conditional refinement.",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "minimum_missing_fact": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+  "exact_inputs": {
+    "canonical/runtime/tool_discovery_complete_interface_instance_v1.py": "566cdcaba2f0eece4e267d2620b786d867eaa864",
+    "canonical/tests/test_tool_discovery_complete_interface_instance_v1.py": "cff463b1134ab2f74d3f68c7442ca313dab34d11",
+    "canonical/runtime/tool_discovery_complete_interface_scope_certificate_v1.py": "a42e7a9b1378ad78493e50d7122534607dfcf23f",
+    "canonical/tests/test_tool_discovery_complete_interface_scope_certificate_v1.py": "bf9a37a352a983cf7d1650a197061e117c9056cf",
+    "canonical/runtime/tool_discovery_dynamic_candidate_v3.py": "bbbee4d6baf8df937543644397abba38a67dce62",
+    "canonical/runtime/tool_discovery_dynamic_refinement_v1.py": "991c039c0b405bf77508ce7921abc69460f57332",
+    "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json": "49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7",
+    "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json": "44faeb24bdc2d9189b7c0de1b1e2be9b1210aeeb",
+    "canonical/verification/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "5fcdc5ae35f51c40f312edbe5727284c9f6ca3dd",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+  },
+  "declared_target_scope": "ALL_FINITE_BRAIN_CALLABLE_FROZEN_TOOL_ECOSYSTEMS_WITH_ARBITRARY_HIDDEN_BOOLEAN_CAPABILITY_VARIANTS_PUBLIC_AUTHORITY_AND_CONSTRAINT_METADATA_AND_ANY_FINITE_SEQUENCE_OF_CONTENT_ADDRESSED_VERSION_EPOCHS",
+  "construction": {
+    "epoch_universe": "U_IS_THE_EXACT_CONTENT_ADDRESSED_SET_OF_TOOL_IDENTITIES_ADMISSIBLE_AT_THE_INTERFACE_EXECUTION_BOUNDARY_FOR_ONE_DECISION_EPOCH",
+    "source_completeness": "EVERY_U_MEMBER_MUST_BELONG_TO_EXACTLY_ONE_AVAILABLE_AUTHORITATIVE_DISCOVERY_SOURCE__MISSING_EXTRANEOUS_OR_DUPLICATE_IDENTITIES_FAIL_CLOSED",
+    "discovery_progress": "SESSION_DISCOVERY_IS_SET_UNION_ONLY__EACH_SOURCE_AT_MOST_ONCE__FINITE_SOURCE_EXHAUSTION_REVEALS_ALL_U_IDENTITIES",
+    "metadata_soundness": "DISCOVERY_AND_EXECUTION_PROJECT_THE_SAME_CANONICAL_TOOL_RECORD",
+    "probe_soundness": "SAFE_PROBE_RETURNS_ONLY_EXACT_HIDDEN_CAPABILITY_TRUTH_BOUND_TO_EPOCH_AND_FINGERPRINT",
+    "version_semantics": "ACTIVE_EPOCH_MUTATION_FAILS_FINGERPRINT__VERSION_CHANGE_CREATES_A_STRICTLY_NEW_EPOCH__OLD_SESSION_REUSE_FAILS_CLOSED",
+    "execution_completeness": "TOOL_ID_OUTSIDE_U_HAS_NO_FALLBACK_EXECUTION_PATH_THROUGH_THIS_INTERFACE"
+  },
+  "formal_lemmas": [
+    {
+      "id": "L1_CLOSED_WORLD_CARRIER",
+      "statement": "For any valid interface epoch, execution_admit rejects every identity outside U, so the operational Brain-callable tool universe for that episode is a subset of U; every available/authorized U member is admissible through the same gate."
+    },
+    {
+      "id": "L2_EXACT_SOURCE_PARTITION",
+      "statement": "compile_epoch accepts only finite source lists whose tool-id ownership is total and unique over U; missing, extraneous, duplicate, or unavailable authoritative source coverage fails closed."
+    },
+    {
+      "id": "L3_FINITE_DISCOVERY_COMPLETENESS",
+      "statement": "A session starts with a subset of U, each successful source query is unique, and apply_discovery updates visibility by set union. Therefore after at most |S| source queries, every identity in U is visible and no prior identity is removed."
+    },
+    {
+      "id": "L4_METADATA_AUTHORITY_IDENTITY",
+      "statement": "discover and execution_admit project the same canonical tool rows, so availability, authorization, cost, and arbitrary public constraint metadata cannot disagree between discovery and execution."
+    },
+    {
+      "id": "L5_TRUTHFUL_EPOCH_BOUND_PROBES",
+      "statement": "probe reads only the hidden capability-truth table for the requested U member/capability and binds supported truth to the exact epoch and fingerprint; hidden truth is excluded from public tool metadata."
+    },
+    {
+      "id": "L6_VERSION_RESTART_INDUCTION",
+      "statement": "Every session is fingerprint-bound to one immutable epoch. rotate_epoch creates a strictly newer content-addressed epoch and an old session fails against it. Induction covers every finite sequence of changing epochs."
+    },
+    {
+      "id": "L7_PRIOR_VERIFIED_DYNAMIC_COMPOSITION",
+      "statement": "PR1100 independently verified that under exactly the seven complete-interface properties, dynamic V3 provides discovery progress, unknown-identity coverage, least-cost evidence-supported selection, sound no-route escalation, current-epoch evidence use, and target preservation."
+    },
+    {
+      "id": "L8_ARBITRARY_FINITE_SCOPE",
+      "statement": "L1-L7 depend on finite-set and exact-identity invariants, not on any sampled tool name, source count, capability assignment, or epoch count. Thus the proof ranges over every finite valid frozen Brain-callable tool ecosystem and every finite version history in the declared scope."
+    }
+  ],
+  "expected_independent_projection": {
+    "complete_interface_instance_proved": true,
+    "minimum_missing_fact_satisfied_candidate": true,
+    "scope_atom_satisfied_candidate": true,
+    "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "uses_empirical_generalization": false,
+    "terminal_cases_replayed": 0,
+    "new_reality_units_consumed": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_FAMILY_OWNERSHIP_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_CLAIM_THAT_APT_PYPI_NPM_MCP_OR_THE_OPEN_INTERNET_IS_GLOBALLY_COMPLETE",
+    "NO_EMPIRICAL_GENERALIZATION_FROM_THE_180_OR_1200_CASE_SAMPLES",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "NO_TARGET_WEAKENING",
+    "NO_SCOPE_CLAIM_OUTSIDE_THE_FROZEN_TOOL_DISCOVERY_CONTRACT",
+    "SEPARATE_ACCEPTANCE_REDUCTION_REMAINS_REQUIRED_AFTER_INDEPENDENT_PASS"
+  ],
+  "next": "INDEPENDENTLY_MIRROR_EXACT_BLOBS_IN_PUBLIC_RUNNER__RUN_INTERFACE_ADVERSARIAL_TESTS_AND_SCOPE_CERTIFICATE__IF_AND_ONLY_IF_PASS_BIND_PUBLIC_RECEIPT__THEN_RUN_SEPARATE_TOOL_DISCOVERY_ACCEPTANCE_REDUCTION",
+  "terminal_results_observed": 0,
+  "terminal_cases_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
