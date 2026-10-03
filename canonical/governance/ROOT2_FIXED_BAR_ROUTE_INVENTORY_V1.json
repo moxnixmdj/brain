@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_FAIL_CLOSED__15_ROOT2_PREDICATES__14_UNIQUE_BENCHMARK_SURFACES__TB4_RENDER_RESOLVED_EMPTY__ZERO_CREDIT",
+  "status": "ACTIVE_FAIL_CLOSED__15_ROOT2_PREDICATES__14_UNIQUE_BENCHMARK_SURFACES__TB_SCIENCE_CARRIER_ATTAINABILITY_CLOSED__ZERO_CREDIT",
   "objective": "Collapse the 15 Root-2-only public fixed-bar predicates into the minimum 14 unique benchmark-route obligations, while preserving the distinction between historical execution-route deletion and strict Opus 5.5 acceptance proof.",
   "authority": {
     "root_state": {
@@ -120,8 +120,13 @@
         "TB_SCIENCE_GE_58_7"
       ],
       "target": ">=58.7%",
-      "state": "PUBLIC_HARNESS_AVAILABLE__HARD_ZERO_COST_EXECUTION_ROUTE_NOT_TERMINALLY_CLOSED",
-      "next": "USE_ONLY_CURRENT_VERIFIED_PORTABLE_ROUTE_STATE__NO_NEW_CASES_BEFORE_ZERO_REALITY_FIXED_POINT"
+      "state": "PUBLIC_V01_EXACT_POPULATION__ZERO_COST_PUBLIC_GITHUB_CARRIER_ATTAINABILITY_INDEPENDENT_PASS__BRAIN_SCORE_ONLY_OPEN",
+      "next": "PRESERVE_FOR_MINIMUM_REALITY_BRAIN_SCORE_EXECUTION_AFTER_ZERO_REALITY_FIXED_POINT__NO_MORE_CARRIER_SEARCH_UNLESS_VERIFIED_CARRIER_STATE_REGRESSES",
+      "carrier_atainability": {
+        "path": "canonical/verification/TB_SCIENCE_V01_PUBLIC_GITHUB_CARRIER_ATTAINABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "aacdd4431ec4a0c889d1bb4249c8eba9ee476390",
+        "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_COST_CARRIER_ATTAINABILITY"
+      }
     },
     {
       "surface": "Chartography with tools",
@@ -184,14 +189,14 @@
   ],
   "route_classes": {
     "brain_score_only_open": [
-      "LIVEBENCH_IF_GE_65_7"
+      "LIVEBENCH_IF_GE_65_7",
+      "TB_SCIENCE_GE_58_7"
     ],
     "current_route_mathematically_unattainable": [
       "CODING_TB4_GE_66_4"
     ],
     "public_inputs_or_harness_but_execution_or_grading_route_open": [
       "HLE_TOOLS_GE_67_7",
-      "TB_SCIENCE_GE_58_7",
       "CHARTOGRAPHY_TOOLS_GE_89",
       "OSWORLD_2_1_PARTIAL_GE_81_8"
     ],
@@ -220,7 +225,7 @@
     "NO_SCORE_INHERITANCE_ACROSS_SURFACES",
     "NO_DUPLICATE_EXECUTION_FOR_THE_SHARED_AA_BRIEFCASE_SURFACE_IF_ONE_VALID_RUN_CAN_SEPARATELY_SATISFY_BOTH_PREDICATE_SCOPES"
   ],
-  "next": "PARALLEL_ROUTE_BINDING_OVER_THE_14_UNIQUE_SURFACES__FINANCE_INDEX_IDENTITY_NOW_RESOLVED__PRIORITIZE_ONLY_INCREMENTAL_ROUTE_SCORER_CARRIER_AND_SCOPE_GAPS__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY",
+  "next": "PARALLEL_ROUTE_BINDING_OVER_REMAINING_ZERO_REALITY_GAPS__TB_SCIENCE_AND_LIVEBENCH_IF_BRAIN_SCORE_ONLY_OPEN__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
