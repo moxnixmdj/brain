@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V9_CURRENT__RECOVERY_4_OF_19__MANDATORY_TOOL_DISCOVERY_V2_RETRIEVAL_GATE__ZERO_CREDIT",
+  "current_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_V9_ACTIVE_AUTHORITY_V1.json",
+    "git_blob_sha": "0637e90ed6f81592339b643bde148129494ccd2f"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/TERMINAL_SCHEDULING_V9_ACTIVE_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "06cc1f4d4e695a6a47c26e1828607750a58088d4",
+    "workflow_run_id": 37116360584,
+    "workflow_job_id": 111183841689,
+    "conclusion": "success"
+  },
+  "live_world": {
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "tool_learning_success_route_noninferior": "OPEN"
+  },
+  "mandatory_tool_discovery_retrieval": {
+    "gate_path": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py",
+    "gate_git_blob_sha": "9af1bd62048277cc8c4fabab8efe5d217c367bac",
+    "hypergraph_git_blob_sha": "e29ce3a7c782c7b9ab1097dd3124a917d3fea9d2",
+    "scheduler_runtime_git_blob_sha": "9ae2b990578b042dd24074fd5013378b72e64b6b",
+    "v2_activation_git_blob_sha": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e",
+    "mandatory": true,
+    "direct_bypass_allowed": false,
+    "stale_authority_allowed": false,
+    "consumed_source_epoch_replay_allowed": false,
+    "no_result_means_nonexistence": false
+  },
+  "supersedes_for_current_scheduling": [
+    "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json"
+  ],
+  "abandoned_unmerged_candidates": [
+    "CURRENT_TERMINAL_SCHEDULING_WORLD_V2",
+    "TERMINAL_SCHEDULING_ACTIVATION_V8"
+  ],
+  "hard_rules": [
+    "THIS_FILE_IS_THE_SINGLE_CURRENT_SCHEDULING_AUTHORITY_POINTER",
+    "ALL_TOOL_DISCOVERY_RETRIEVAL_MUST_PASS_THE_EXACT_VERIFIED_V2_GATE",
+    "PRESERVE_RECOVERY_4_OF_19_PROMOTION",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
