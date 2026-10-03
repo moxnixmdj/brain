@@ -40,6 +40,9 @@ EXPECTED = {
     "github_provider_blob": "29b808935559382ab7ddc81aaa08fe0611a05df8",
     "backend_verification_path": "canonical/verification/GITHUB_PUBLIC_RETRIEVAL_SURFACES_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "backend_verification_blob": "ca5acd7afbf14b7cce568ec482c160c3795e57ba",
+}
+
+RECALL_EXPECTED = {
     "multilingual_input_path": "canonical/governance/TOOL_DISCOVERY_MULTILINGUAL_RETRIEVAL_INPUT_V1.json",
     "multilingual_input_blob": "a244205a759144bbe01f25c2c9101ef6045efd79",
     "recall_verification_path": "canonical/verification/TOOL_DISCOVERY_RETRIEVAL_RECALL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
@@ -101,6 +104,10 @@ def validate(
     for key, expected in EXPECTED.items():
         if binding.get(key) != expected:
             errors.append(f"AUTHORITY_BINDING_MISMATCH:{key}")
+        if key.endswith("_blob") and actual_blobs.get(key) != expected:
+            errors.append(f"ACTUAL_BLOB_MISMATCH:{key}")
+
+    for key, expected in RECALL_EXPECTED.items():
         if key.endswith("_blob") and actual_blobs.get(key) != expected:
             errors.append(f"ACTUAL_BLOB_MISMATCH:{key}")
 
@@ -249,8 +256,8 @@ def evaluate_repository(root: Path) -> dict[str, Any]:
         "router_blob": git_blob_sha(raw(EXPECTED["router_path"])),
         "github_provider_blob": git_blob_sha(raw(EXPECTED["github_provider_path"])),
         "backend_verification_blob": git_blob_sha(raw(EXPECTED["backend_verification_path"])),
-        "multilingual_input_blob": git_blob_sha(raw(EXPECTED["multilingual_input_path"])),
-        "recall_verification_blob": git_blob_sha(raw(EXPECTED["recall_verification_path"])),
+        "multilingual_input_blob": git_blob_sha(raw(RECALL_EXPECTED["multilingual_input_path"])),
+        "recall_verification_blob": git_blob_sha(raw(RECALL_EXPECTED["recall_verification_path"])),
     }
     return validate(
         load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
@@ -258,7 +265,7 @@ def evaluate_repository(root: Path) -> dict[str, Any]:
         load(EXPECTED["activation_verification_path"]),
         load(EXPECTED["compiler_verification_path"]),
         load(EXPECTED["backend_verification_path"]),
-        load(EXPECTED["recall_verification_path"]),
+        load(RECALL_EXPECTED["recall_verification_path"]),
         actual_blobs,
     )
 
