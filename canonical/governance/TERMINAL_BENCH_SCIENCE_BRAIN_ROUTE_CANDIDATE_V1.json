@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_BRAIN_ROUTE_CANDIDATE_V1",
   "date": "2026-10-03",
-  "status": "REPAIRED_CANDIDATE_ZERO_CASE__DEDICATED_PROPOSAL_PLANNER__INDEPENDENT_REVERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "REPAIRED_CANDIDATE_ZERO_CASE__DEDICATED_PLANNER_PLUS_OBSERVED_EXACT_ALIAS_NORMALIZATION__INDEPENDENT_REVERIFICATION_REQUIRED__ZERO_CREDIT",
   "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "target_predicate": "TB_SCIENCE_GE_58_7",
   "frozen_surface": {
@@ -67,11 +67,12 @@
   "capability_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "candidate_runtime_git_blob_sha": "4aacda7973ff4310a1d22a4b1f289da301ec4381",
+  "candidate_runtime_git_blob_sha": "08862621cfe6ff6915a98120db36686ae5a08dab",
   "candidate_tests_git_blob_sha": "b6c5ea794398ace7a08b43f434a56da51e5323fd",
   "candidate_planner": "canonical/runtime/harbor_science_planner_v1.py",
-  "candidate_planner_git_blob_sha": "6d61f28c79a6c9675cf1b3dc134e509f8731cc35",
+  "candidate_planner_git_blob_sha": "17472fd2b01b164fbb180aecfc04385b55b11499",
   "candidate_planner_tests": "canonical/tests/test_harbor_science_planner_v1.py",
-  "candidate_planner_tests_git_blob_sha": "0f89c7a35f25698b758a65ff2e59616a20c5c3d6",
-  "repair_reason": "PRIOR_CONTROLLER_CALLED_ASTRA_RUNTIME_PRIVATE_PLANNER_PATH_THAT_REQUIRES_CONTINUOUS_OBS_CONTEXT_NOT_BOUND_BY_HARBOR_AGENT__WOULD_FAIL_BEFORE_FIRST_REAL_ACTION"
+  "candidate_planner_tests_git_blob_sha": "6f32250bce81ee66fdddbd29b72061089674c5b3",
+  "repair_reason": "PRIOR_CONTROLLER_CALLED_ASTRA_RUNTIME_PRIVATE_PLANNER_PATH_THAT_REQUIRES_CONTINUOUS_OBS_CONTEXT_NOT_BOUND_BY_HARBOR_AGENT__WOULD_FAIL_BEFORE_FIRST_REAL_ACTION",
+  "observed_schema_repair": "SAFE_CANDIDATES_TO_CANDIDATES_EXACT_ALIAS_ONLY__AMBIGUOUS_DUAL_KEYS_REJECTED"
 }
