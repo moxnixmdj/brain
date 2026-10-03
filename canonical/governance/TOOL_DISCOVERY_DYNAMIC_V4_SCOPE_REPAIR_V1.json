@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V4_SCOPE_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_TRUTH_REPAIR__V3_CONDITIONAL_LEAST_COST_IMPLICATION_FALSIFIED__V4_REPAIR_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Falsify the active Tool Discovery V3 conditional least-cost implication with a concrete complete-interface counterexample, and replace only the defective selection order with discovery-first V4 semantics before any interface-instance or acceptance reduction work.",
+  "canonical_base_commit": "a153e2b54cb9c4094c4a90c50149839cf939105b",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "falsified_activation": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json",
+  "falsified_obligation": "LEAST_COST_EVIDENCE_SUPPORTED_SELECTION",
+  "counterexample": {
+    "authoritative_complete_source": "S0",
+    "initially_visible_sufficient_route": {
+      "tool_id": "T0",
+      "cost": 10
+    },
+    "undiscovered_sufficient_route": {
+      "tool_id": "T1",
+      "cost": 1
+    },
+    "v3_behavior": "SELECT_T0_BEFORE_DISCOVER_S0",
+    "consequence": "FIRST_SELECTED_ROUTE_IS_NOT_LEAST_COST_WITHIN_COMPLETE_DECLARED_INTERFACE"
+  },
+  "repair": {
+    "runtime": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "runtime_git_blob_sha": "b19c01ce2c501e3a9883be6aa00b4b6ef2e2141f",
+    "tests": "canonical/tests/test_tool_discovery_dynamic_candidate_v4.py",
+    "tests_git_blob_sha": "de32033d609f25e02a3280b362ee3185129d7f36",
+    "verifier": "canonical/runtime/tool_discovery_dynamic_v4_repair_v1.py",
+    "verifier_git_blob_sha": "4e337eeeed88a75c4492cb923a6a2f4e906039e5",
+    "verifier_tests": "canonical/tests/test_tool_discovery_dynamic_v4_repair_v1.py",
+    "verifier_tests_git_blob_sha": "60ce221003a91c7eb55e1277cd9bfd8f0c626f58",
+    "rule": "EXHAUST_AVAILABLE_UNQUERIED_AUTHORITATIVE_DISCOVERY_SOURCES_BEFORE_PROBE_OR_SELECT"
+  },
+  "preserved_sources": {
+    "v3": "bbbee4d6baf8df937543644397abba38a67dce62",
+    "conditional_refinement_runtime": "991c039c0b405bf77508ce7921abc69460f57332",
+    "interface_contract": "49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7"
+  },
+  "expected_verification": [
+    "REPRODUCE_V3_SELECT_T0_BEFORE_DISCOVERY_COUNTEREXAMPLE",
+    "V4_DISCOVERS_S0_FIRST",
+    "AFTER_DISCOVERY_V4_PROBES_T1_BEFORE_T0_SELECTION",
+    "AFTER_POSITIVE_T1_RECEIPT_V4_SELECTS_T1",
+    "V4_PASSES_EXISTING_1200_CASE_DYNAMIC_GRID"
+  ],
+  "authority_effect": "IF_INDEPENDENTLY_VERIFIED__QUARANTINE_ONLY_THE_UNSOUND_V3_CONDITIONAL_LEAST_COST_IMPLICATION__PRESERVE_TARGET_AND_OTHER_VALID_EVIDENCE__USE_V4_FOR_FUTURE_COMPLETE_INTERFACE_THEOREM",
+  "remaining_external_fact": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+  "hard_rules": [
+    "TRUTH_REPAIR_PRECEDES_TERMINAL_CREDIT",
+    "DO_NOT_PROMOTE_V4_FROM_LOCAL_OR_SELF_VERIFICATION",
+    "DO_NOT_TREAT_1200_CASE_GRID_AS_UNIVERSAL_SCOPE_PROOF",
+    "DO_NOT_WEAKEN_LEAST_COST_TARGET",
+    "NO_FRESH_TERMINAL_REPLAY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
