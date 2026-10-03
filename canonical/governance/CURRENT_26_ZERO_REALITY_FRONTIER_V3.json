@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_26_ZERO_REALITY_FRONTIER_V3",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__BENCHMARK_DOMINANCE_BOUND__COUNTS_UNCHANGED__5_OF_19__12_OF_38__26_UNRESOLVED__30_PRIMITIVE_ZERO_REALITY_UNITS__ZERO_CREDIT",
+  "objective": "Recompile the current 26-predicate zero-reality frontier after independent external-benchmark-dominance verification and LiveBench IF comparator reconciliation, deleting no obligation unless an exact discharge is independently proved.",
+  "authority": {
+    "prior_frontier": {
+      "path": "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V2.json",
+      "git_blob_sha": "352fe17467a8335a348949ce2f2b6fdb6235e9ac"
+    },
+    "benchmark_gate": {
+      "path": "canonical/governance/EXTERNAL_BENCHMARK_DOMINANCE_GATE_V1.json",
+      "git_blob_sha": "d5eba104f28f6ba0bb400967057dc02029e2353e"
+    },
+    "benchmark_verification": {
+      "path": "canonical/verification/EXTERNAL_BENCHMARK_DOMINANCE_V1_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "9fcad9359ad75d1dfa9b5fd672a2a081128d5001"
+    },
+    "livebench_if_route": {
+      "path": "canonical/governance/LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2.json",
+      "git_blob_sha": "7067a849585d9020f3d78aa374c0eeecb5078c8b"
+    }
+  },
+  "exact_state": {
+    "acceptance": "5/19_PASS__14/19_OPEN",
+    "proved_predicates": 12,
+    "unresolved_predicates": 26,
+    "active_zero_reality_requirements": 16,
+    "active_nondominated_certificates": 13,
+    "zero_reality_covered_predicates": 24,
+    "primitive_zero_reality_work_units": 30,
+    "matched_priority_child_facts": 16,
+    "current_normalized_targets": 8,
+    "current_normalized_witnesses": 12,
+    "direct_reality_eligible_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "direct_reality_execution_authorized_now": false
+  },
+  "verified_delta_analysis": {
+    "external_benchmark_full_substitutions": 0,
+    "custom_benchmark_creation_authorized": false,
+    "livebench_if_comparator_route": "CLOSED_EXCEPT_BRAIN_SCORE",
+    "shared_public_benchmark_certificate": "REMAINS_OPEN_BECAUSE_AUTOMATIONBENCH_AND_TB_SCIENCE_ROUTE_COMPLETENESS_IS_NOT_DISCHARGED_BY_LIVEBENCH_ONLY",
+    "zero_reality_requirement_delta": 0,
+    "primitive_work_unit_delta": 0,
+    "acceptance_predicate_delta": 0,
+    "family_delta": 0
+  },
+  "scheduling_precedence": [
+    "EXACT_EXISTING_OPUS55_BENCHMARK_REUSE",
+    "VERIFIED_EXTERNAL_EXACT_OR_SUPERSET_SUBSTITUTION",
+    "EXISTING_BRAIN_RECEIPT_SATURATION",
+    "FORMAL_OR_DEDUCTIVE_DISCHARGE",
+    "IRREDUCIBLE_FRESH_EVALUATION_ONLY_AFTER_VERIFIED_FIXED_POINT"
+  ],
+  "hard_rules": [
+    "NO_COUNT_REDUCTION_FROM_PARTIAL_EXTERNAL_BENCHMARK_COVERAGE",
+    "NO_SHARED_CERTIFICATE_DISCHARGE_FROM_ONE_MEMBER_ROUTE_WHEN_OTHER_MEMBER_ROUTES_REMAIN_OPEN",
+    "NO_CUSTOM_BENCHMARK_WHEN_EXACT_EXISTING_OPUS55_SURFACE_EXISTS",
+    "NO_FRESH_REALITY_BEFORE_BENCHMARK_DOMINANCE_AND_RECEIPT_SATURATION_FIXED_POINT",
+    "RECOMPUTE_AFTER_EVERY_INDEPENDENTLY_VERIFIED_DELTA",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "SATURATE_EXISTING_RECEIPTS_UNDER_BENCHMARK_DOMINANCE_PRECEDENCE__RECOMPUTE_FIXED_POINT__ONLY_THEN_AUTHORIZE_IRREDUCIBLE_FRESH_EVALUATION",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
