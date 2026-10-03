@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_MEASUREMENT_BRIDGE_CURRENT_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_ZERO_CREDIT__OWNER_FANOUT_STARTED__ENTRYPOINT_BOUND_FAIL_CLOSED",
+  "merge_commit": "f545378d05c9d785995ea52a86129886fd783e9d",
+  "exact_blobs": {
+    "capsule": "ccc880a0ece7990c250bffe7f439435d8b75547b",
+    "owner_fanout": "97e013061abd5b2ad3229aa856835369931404e0",
+    "adapter_registry": "a154fd5e91c340ee81b5243f6409d09558783fe9",
+    "external_task_entrypoint": "603beefe0db24102b86b7c965e5433bd880392af"
+  },
+  "state": {
+    "owner_channels_started": 5,
+    "root2_fixed_bar_predicates_targeted": 9,
+    "generic_entrypoint_bound": true,
+    "inference_capable_adapter_count": 0
+  },
+  "next": "BIND_FIRST_REAL_INFERENCE_ADAPTER__BIND_OWNER_REPLIES__RECOMPUTE_ROOT2_FIXED_POINT",
+  "incremental_spend_usd": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
