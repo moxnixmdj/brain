@@ -61,11 +61,11 @@ class CommonAuthorityInterfaceV1Tests(unittest.TestCase):
             action=v4.next_action(ep)
             if action["action"]=="DISCOVER":
                 ep=iface.apply_discovery(
-                    ep,iface.discover(inst,ep,action["source_id"],action["query"])
+                    inst,ep,iface.discover(inst,ep,action["source_id"],action["query"])
                 )
             elif action["action"]=="PROBE":
                 ep=iface.apply_probe(
-                    ep,iface.safe_probe(inst,ep,action["tool_id"],action["capability"])
+                    inst,ep,iface.safe_probe(inst,ep,action["tool_id"],action["capability"])
                 )
             elif action["action"]=="SELECT":
                 self.assertEqual(action["tool_id"],"never-seen-before::cheap")
@@ -107,7 +107,26 @@ class CommonAuthorityInterfaceV1Tests(unittest.TestCase):
         rec=iface.discover(inst,ep,iface.SOURCE_ID,"CAP_A")
         rec["authority_sha256"]="0"*64
         with self.assertRaises(iface.InterfaceError):
-            iface.apply_discovery(ep,rec)
+            iface.apply_discovery(inst,ep,rec)
+
+    def test_truncated_discovery_payload_fails_closed_even_with_valid_digest_field(self):
+        inst=self._instance()
+        ep=iface.begin_episode(inst,["CAP_A"])
+        rec=iface.discover(inst,ep,iface.SOURCE_ID,"CAP_A")
+        rec["tools"]=rec["tools"][:-1]
+        with self.assertRaises(iface.InterfaceError) as cm:
+            iface.apply_discovery(inst,ep,rec)
+        self.assertIn("DISCOVERY_PAYLOAD_NOT_EXACT_COMPLETE_AUTHORITY",str(cm.exception))
+
+    def test_forged_probe_truth_fails_closed_before_candidate_can_reuse_it(self):
+        inst=self._instance()
+        ep=iface.begin_episode(inst,["CAP_A"])
+        rec=iface.safe_probe(inst,ep,"第三工具","CAP_A")
+        self.assertFalse(rec["supported"])
+        rec["supported"]=True
+        with self.assertRaises(iface.InterfaceError) as cm:
+            iface.apply_probe(inst,ep,rec)
+        self.assertIn("PROBE_RECEIPT_TRUTH_MISMATCH",str(cm.exception))
 
     def test_hidden_capabilities_cannot_leak_in_public_metadata(self):
         with self.assertRaises(iface.InterfaceError) as cm:
@@ -173,9 +192,9 @@ class CommonAuthorityInterfaceV1Tests(unittest.TestCase):
             for _ in range(12):
                 a=v4.next_action(ep)
                 if a["action"]=="DISCOVER":
-                    ep=iface.apply_discovery(ep,iface.discover(inst,ep,a["source_id"],a["query"]))
+                    ep=iface.apply_discovery(inst,ep,iface.discover(inst,ep,a["source_id"],a["query"]))
                 elif a["action"]=="PROBE":
-                    ep=iface.apply_probe(ep,iface.safe_probe(inst,ep,a["tool_id"],a["capability"]))
+                    ep=iface.apply_probe(inst,ep,iface.safe_probe(inst,ep,a["tool_id"],a["capability"]))
                 else:
                     return a
             self.fail("budget")
