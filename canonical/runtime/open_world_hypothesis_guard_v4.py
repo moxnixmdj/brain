@@ -78,7 +78,23 @@ def _residual_invariant(*,environment_id:str,goal_id:str,action:str,receipt:Mapp
 
 def decision_sufficient(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]],coverage_receipt:Mapping[str,Any]|None=None,residual_action_receipt:Mapping[str,Any]|None=None)->dict[str,Any]:
     coverage=close_space(environment_id=environment_id,goal_id=goal_id,hypotheses=hypotheses,coverage_receipt=coverage_receipt)
-    base=v3.sufficient(hypotheses)
+    live=[];seen=set()
+    for raw in hypotheses:
+        hid=str(raw.get("id") or "").strip()
+        if not hid or hid in seen:
+            raise OpenWorldHypothesisError("HYPOTHESIS_ID_INVALID_OR_DUPLICATE")
+        seen.add(hid)
+        if raw.get("plausible") is not True:
+            continue
+        action=str(raw.get("best_action") or "").strip()
+        if not action:
+            raise OpenWorldHypothesisError("LIVE_HYPOTHESIS_ACTION_REQUIRED")
+        live.append((hid,action))
+    if not live:
+        base={"sufficient":False,"action":None,"reason":"NO_LIVE_PLAUSIBLE_HYPOTHESES"}
+    else:
+        actions={action for _,action in live}
+        base=({"sufficient":True,"action":next(iter(actions)),"reason":"ALL_LIVE_PLAUSIBLE_HYPOTHESES_AGREE"} if len(actions)==1 else {"sufficient":False,"action":None,"reason":"LIVE_PLAUSIBLE_HYPOTHESES_DISAGREE"})
     if not base["sufficient"]:
         return {**base,"hypothesis_space_closed":coverage["closed"],"hypothesis_space_sha256":coverage["hypothesis_space_sha256"],"open_world_safe":False}
     action=str(base["action"])
