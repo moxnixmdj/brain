@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_MINIMUM_ACTION_CUT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ROOT3_11_PREDICATES_TO_3_EVENT_CLASSES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Freeze the minimum nonduplicative Root3 action frontier after universal-scope compilation, population coalescence, matched-superportfolio binding, and current zero-reality saturation.",
+  "derivation": {
+    "live_root3_predicates": 11,
+    "formal_targets_coalesced_to_population_identities": 4,
+    "synthesis_root3_residual": "ONE_SCOPE_RELATION",
+    "composition_dependency": "8_OPEN_INTERFACES__EVENT_DRIVEN_ONLY",
+    "matched_scope_execution": "8_TARGETS__ONE_SHARED_FUTURE_SUPERPORTFOLIO_WAVE",
+    "direct_oracle_residual": "4_FROZEN_LEAVES",
+    "current_generic_zero_reality_search": "SATURATED__96_PAIRS__0_DIRECT_CLOSURES"
+  },
+  "minimum_event_classes": [
+    "NEW_SCOPE_CERTIFICATE_EVENT",
+    "UPSTREAM_SCOPE_RECEIPT_EVENT",
+    "ROOT3_FRESH_REALITY_EVENT"
+  ],
+  "current_consequence": "NO_NONDOMINATED_ROOT3_EXECUTION_IS_CURRENTLY_AUTHORIZED_OR_INFORMATION_POSITIVE_UNDER_BOUND_EVIDENCE__WAIT_FOR_A_RESUME_EVENT",
+  "hard_rules": [
+    "NO_REPEAT_GENERIC_ROOT3_SEARCH_WHILE_SATURATION_INPUTS_UNCHANGED",
+    "NO_DIRECT_COMPOSITION_REALITY",
+    "NO_REPROVING_SEVEN_SYNTHESIS_OPERATIONAL_ATOMS",
+    "NO_SOURCE_REINTERNALIZATION_FOR_FINANCE_OR_UNKNOWN_DOMAIN",
+    "NO_MATCHED_CASE_GENERATION_BEFORE_EXACT_COMPARATOR_ADMISSIBILITY_AND_ZERO_REALITY_FIXED_POINT",
+    "NO_DIRECT_ORACLE_EXECUTION_BEFORE_EXPLICIT_FRESH_REALITY_AUTHORIZATION",
+    "SEARCH_FAILURE_IS_NOT_NONEXISTENCE",
+    "ZERO_CREDIT_FROM_SCHEDULING_OR_COMPRESSION"
+  ],
+  "runtime": "canonical/runtime/root3_minimum_action_cut_v1.py",
+  "tests": "canonical/tests/test_root3_minimum_action_cut_v1.py",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
