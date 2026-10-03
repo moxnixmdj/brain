@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_V3_ACTIVE_AUTHORITY_INDEPENDENT_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_ACTIVE_AUTHORITY_AND_CANONICAL_POINTER__ONE_UNTOUCHED_SLOT_ONLY__ZERO_CREDIT",
+  "brain_source": {
+    "pull_request": 1271,
+    "merge_commit": "14ea3036c722787006891df093e6a74a70ec7996",
+    "authority_path": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_AUTHORITY_V3.json",
+    "authority_git_blob_sha": "ae5bc607b828e8f55092e80e0a806d5a496eb54b",
+    "current_terminal_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "current_terminal_authority_git_blob_sha": "b4d601ff630e9bd62329b4c21504eb4f043ab523"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1257,
+    "verifier_head_sha": "8424108147a1b3959a95d17e62a06738977f5778",
+    "merge_commit": "c0da1354f976834b0d0bfb3f148c0f65adc9d7cd",
+    "workflow_run_id": 37109224014,
+    "workflow_job_id": 111163728935,
+    "conclusion": "success",
+    "artifact_id": 11268654272,
+    "artifact_digest": "sha256:53b725cc794caaa5867454184f1f874d11045f39e36a1791d68d9fe23dc9956c"
+  },
+  "verified": {
+    "authority_blob": "ae5bc607b828e8f55092e80e0a806d5a496eb54b",
+    "current_terminal_authority_blob": "b4d601ff630e9bd62329b4c21504eb4f043ab523",
+    "authorized_slot": "terminal-bench-science/virtual-baseline-localization::trial-0",
+    "required_successes": 133,
+    "finalized_failures": 4,
+    "remaining_failures_before_fail_lock": 74,
+    "execution_authority_verified": true,
+    "acceptance_counts_unchanged": true,
+    "terminal_results_observed": 0
+  },
+  "sequence": {
+    "authority_and_pointer_were_on_brain_pr_before_runner_verification": true,
+    "runner_verification_completed_at": "2026-10-03T08:18:01Z",
+    "brain_atomic_merge_completed_at": "2026-10-03T08:19:54Z",
+    "execution_carrier_existed_before_atomic_merge": false,
+    "retroactive_authorization": false
+  },
+  "consequence": "CANONICAL_BRAIN_MAIN_CONTAINS_THE_EXACT_INDEPENDENTLY_VERIFIED_ONE_USE_SCIENCE_V3_AUTHORITY_AND_POINTER__EXECUTION_CARRIER_MAY_NOW_BE_CREATED_FOR_EXACTLY_THE_NAMED_SLOT",
+  "execution_authority_verified": true,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
