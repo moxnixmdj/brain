@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_REFINEMENT_V1_COUNTEREXAMPLE_AND_V4_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_FAIL_CLOSED_CORRECTION__V1_CONDITIONAL_LEAST_COST_IMPLICATION_FALSIFIED__V4_REPAIR_PROPOSED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_base_commit": "a99c37a85cd2edb4dacaae7457f56b1de12f263f",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "falsified_active_claim": {
+    "activation": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json",
+    "verification": "canonical/verification/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "claim": "A_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_IS_SUFFICIENT_FOR_DYNAMIC_V3_PROGRAM_SIDE_LEAST_COST_SELECTION_OBLIGATIONS",
+    "disposition": "FAIL_CLOSED__DO_NOT_USE_FOR_SCOPE_CREDIT_OR_INTERFACE_INSTANCE_PROMOTION_UNTIL_REPAIRED"
+  },
+  "machine_checkable_counterexample": {
+    "required_capability": "CAP_A",
+    "initial_visible_route": {
+      "tool_id": "EXPENSIVE_VISIBLE",
+      "cost": 10,
+      "current_positive_evidence": true
+    },
+    "unqueried_authoritative_source": {
+      "source_id": "AUTHORITATIVE_SOURCE_0",
+      "contains_route": {
+        "tool_id": "CHEAP_DISCOVERED",
+        "cost": 1,
+        "capability_supported": true
+      }
+    },
+    "interface_assumptions": [
+      "FINITE_SOURCE_SET",
+      "AUTHORITATIVE_SOURCE_UNION_COMPLETE",
+      "CORRECT_COST_AND_AUTHORIZATION_METADATA",
+      "TRUTHFUL_CURRENT_EPOCH_PROBES",
+      "STABLE_EPISODE"
+    ],
+    "dynamic_v3_first_action": "SELECT_EXPENSIVE_VISIBLE",
+    "required_first_progress_for_GLOBAL_LEAST_COST": "DISCOVER_AUTHORITATIVE_SOURCE_0",
+    "failure": "V3_CAN_SELECT_A_PROVED_VISIBLE_ROUTE_BEFORE_DISCOVERING_A_CHEAPER_SUFFICIENT_ROUTE"
+  },
+  "why_public_verifier_pass_did_not_CLOSE_THE_THEOREM": "THE_V1_TESTS_CHECKED_ACTION_VOCABULARY_STRUCTURAL_MARKERS_AND_CONTRACT_SHAPE_BUT_CONTAINED_NO_ADVERSARIAL_VISIBLE_SUFFICIENT_VS_CHEAPER_UNDISCOVERED_ROUTE_CASE",
+  "repair": {
+    "candidate": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "tests": "canonical/tests/test_tool_discovery_dynamic_v4.py",
+    "interface_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json",
+    "semantic_delta": "EXHAUST_ALL_AVAILABLE_UNQUERIED_AUTHORITATIVE_DISCOVERY_SOURCES_BEFORE_ANY_PROBE_OR_SELECT__THEN_DELEGATE_UNCHANGED_SELECTION_EVIDENCE_AND_ESCALATION_SEMANTICS_TO_V3"
+  },
+  "current_acceptance_must_remain": "3_OF_19_FAMILIES__8_OF_38_ATOMIC_PREDICATES",
+  "terminal_goal_achieved": false,
+  "next": "INDEPENDENTLY_VERIFY_THE_COUNTEREXAMPLE_AND_V4_REPAIR__ONLY_AFTER_PASS_MAY_THE_PROGRAM_SIDE_CONDITIONAL_REFINEMENT_BE_REACTIVATED__THEN_SEARCH_OR_BUILD_ONE_CONTENT_ADDRESSED_V2_COMPLETE_INTERFACE_INSTANCE__NO_FRESH_TERMINAL_REPLAY",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
