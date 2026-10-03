@@ -19,6 +19,10 @@ def plan(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]],
     closure=guard.close_space(environment_id=environment_id,goal_id=goal_id,hypotheses=hypotheses,coverage_receipt=hypothesis_coverage_receipt)
     if closure.get("closed") is not True:
         raise AdaptiveExperimentPlannerError("CLOSED_HYPOTHESIS_SPACE_REQUIRED")
+    coverage_epoch=str(hypothesis_coverage_receipt.get("experiment_epoch") or "").strip()
+    coverage_state=str(hypothesis_coverage_receipt.get("state_fingerprint") or "").strip()
+    if not coverage_epoch or not coverage_state:
+        raise AdaptiveExperimentPlannerError("HYPOTHESIS_COVERAGE_EPOCH_AND_STATE_REQUIRED")
 
     ids=[]; best={};seen=set()
     for h in hypotheses:
@@ -43,6 +47,10 @@ def plan(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]],
         raise AdaptiveExperimentPlannerError("PROBE_EXPERIMENT_EPOCH_MISMATCH")
     if len(fingerprints)>1:
         raise AdaptiveExperimentPlannerError("PROBE_STATE_FINGERPRINT_MISMATCH")
+    if epochs and next(iter(epochs))!=coverage_epoch:
+        raise AdaptiveExperimentPlannerError("HYPOTHESIS_AND_PROBE_EPOCH_MISMATCH")
+    if fingerprints and next(iter(fingerprints))!=coverage_state:
+        raise AdaptiveExperimentPlannerError("HYPOTHESIS_AND_PROBE_STATE_MISMATCH")
     by_id={p["id"]:p for p in admitted}
 
     def solved(state:frozenset[str])->str|None:
@@ -102,8 +110,8 @@ def plan(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]],
     return {
         "schema":SCHEMA,"status":"VERIFIED_MINIMUM_WORST_CASE_ADAPTIVE_PLAN",
         "hypothesis_space_closed":True,
-        "experiment_epoch":next(iter(epochs)) if epochs else None,
-        "state_fingerprint":next(iter(fingerprints)) if fingerprints else None,
+        "experiment_epoch":coverage_epoch,
+        "state_fingerprint":coverage_state,
         "optimization":"EXACT_FINITE_LEXICOGRAPHIC_MINIMUM__HARD_SAFETY_AND_STATE_INVARIANCE__THEN_WORST_CASE_WALL_CLOCK_THEN_RESOURCE_COST_THEN_RESIDUAL_RISK_THEN_STEPS",
         "probability_model_required":False,
         "recommended_probe":first,
