@@ -30,6 +30,10 @@
     "normalizer_v1": {
       "path": "canonical/runtime/p1_shared_failure_semantics_normalizer_v1.py",
       "git_blob_sha": "b6ba06fc6a35fa132eb19389ee256e74a63a4849"
+    },
+    "minimum_reality_independent_verification": {
+      "path": "canonical/verification/P1_V7_PROVENANCE_AND_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "01ca625add4db7035224f0d4cb9efb406d17362d"
     }
   },
   "frozen_direct_surfaces": [
