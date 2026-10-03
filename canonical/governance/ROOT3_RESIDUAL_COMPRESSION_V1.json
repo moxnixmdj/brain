@@ -24,6 +24,13 @@
       "old_target_normalization_git_blob_sha": "0910ce3a2351fc439e03a1fa2ae708fb3c6463ef",
       "current_target_normalization_path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
       "current_target_normalization_git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    },
+    "synthesis_overlay_current_v3": {
+      "activation_path": "canonical/governance/SYNTHESIS_OVERLAY_V3_REBIND_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "6c71e496e01a111d5cef9431034d90e3f1af8acb",
+      "verification_path": "canonical/verification/SYNTHESIS_OVERLAY_V3_REBIND_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "verification_git_blob_sha": "57b7fc8df4fd820e3eda426f121b56acfce37a15",
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__SEVEN_ATOMS_TRANSPORTED__FOUR_RESIDUAL_OBLIGATIONS_OPEN__ZERO_CREDIT"
     }
   },
   "compressed_residuals": [
@@ -47,8 +54,22 @@
       "predicate_id": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
       "root_class": "ROOT3",
       "current_residual": "8_OF_12_FROZEN_COMPONENT_INTERFACES_OPEN",
-      "proved_components": ["memory","recovery","delegation","tool discovery"],
-      "open_components": ["research","tool use","artifact creation","browser/computer action","coding","debugging","evidence synthesis","artifact production"],
+      "proved_components": [
+        "memory",
+        "recovery",
+        "delegation",
+        "tool discovery"
+      ],
+      "open_components": [
+        "research",
+        "tool use",
+        "artifact creation",
+        "browser/computer action",
+        "coding",
+        "debugging",
+        "evidence synthesis",
+        "artifact production"
+      ],
       "next": "RECOMPUTE_FROM_CURRENT_SCOPE_COMPLETE_ACCEPTANCE_RECEIPTS_AFTER_EACH_UPSTREAM_FAMILY_DELTA__NO_DIRECT_REALITY_FOR_THIS_DEPENDENCY_PREDICATE"
     },
     {
@@ -56,14 +77,30 @@
       "root_class": "ROOT2_AND_ROOT3",
       "current_residual_candidate": {
         "missing_scope_relation": true,
-        "missing_atoms": ["metric:matched_quality"],
-        "missing_metric_bounds": ["matched_quality_noninferiority","required_claim_coverage_noninferiority"]
+        "missing_atoms": [
+          "metric:matched_quality"
+        ],
+        "missing_metric_bounds": [
+          "matched_quality_noninferiority",
+          "required_claim_coverage_noninferiority"
+        ]
       },
       "independent_historical_overlay_pass": true,
       "target_semantics_v1_to_v3": "EXACTLY_UNCHANGED_ATOM_AND_METRIC_REQUIREMENT_SET_BY_DIRECT_CONTENT_COMPARISON",
       "current_portability_credit": 0,
-      "current_rebind_required": true,
-      "next": "INDEPENDENTLY_REBIND_THE_EXISTING_VERIFIED_SYNTHESIS_OVERLAY_TO_CURRENT_TARGET_NORMALIZATION_V3__DO_NOT_REPROVE_THE_SEVEN_ALREADY_VERIFIED_OPERATIONAL_ATOMS"
+      "current_rebind_required": false,
+      "next": "SEARCH_OR_PROVE_ONLY_SCOPE_RELATION__METRIC_MATCHED_QUALITY__MATCHED_QUALITY_NONINFERIORITY__REQUIRED_CLAIM_COVERAGE_NONINFERIORITY__DO_NOT_REPROVE_SEVEN_TRANSPORTED_ATOMS",
+      "current_residual": {
+        "missing_scope_relation": true,
+        "missing_atoms": [
+          "metric:matched_quality"
+        ],
+        "missing_metric_bounds": [
+          "matched_quality_noninferiority",
+          "required_claim_coverage_noninferiority"
+        ]
+      },
+      "current_rebind_status": "COMPLETE__INDEPENDENT_PUBLIC_RUNNER_PASS"
     }
   ],
   "remaining_root3_targets_without_a_current_positive_pair_overlay_bound_here": [
@@ -85,7 +122,7 @@
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_RESIDUAL_COMPRESSION",
     "NO_FRESH_REALITY_BEFORE_ROOT2_ROOT3_ZERO_REALITY_FIXED_POINT"
   ],
-  "next": "REBIND_SYNTHESIS_OVERLAY_TO_V3__SEARCH_ONLY_LOAD_BEARING_SCOPE_OR_SEMANTIC_CERTIFICATES_FOR_THE_OTHER_SEVEN_TARGETS__RECOMPUTE_COMPOSITION_DEPENDENCY_FROM_UPSTREAM_ACCEPTANCE_DELTAS__PRESERVE_FOUR_DIRECT_ORACLE_LEAVES_FOR_THE_EVENTUAL_MINIMUM_REALITY_CUT",
+  "next": "SEARCH_ONLY_LOAD_BEARING_SCOPE_OR_SEMANTIC_CERTIFICATES_FOR_SEVEN_OTHER_ROOT3_TARGETS__WORK_ONLY_FOUR_REMAINING_SYNTHESIS_OBLIGATIONS__RECOMPUTE_COMPOSITION_FROM_UPSTREAM_ACCEPTANCE_DELTAS__PRESERVE_FOUR_DIRECT_ORACLE_LEAVES_FOR_EVENTUAL_MINIMUM_REALITY_CUT",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
