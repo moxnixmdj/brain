@@ -1,0 +1,28 @@
+{
+  "acceptance_credit_allowed": false,
+  "active_authority_merged": false,
+  "active_authority_pr": 1258,
+  "active_authority_pr_created_at": "2026-10-03T07:58:51Z",
+  "artifact_id": 11268841992,
+  "brain_main_at_execution": "0a90772212ecb92d6405476a6795be20b50086df",
+  "capability_credit_delta": 0,
+  "cases": 192,
+  "execution_run_id": 37108111537,
+  "execution_run_started_at": "2026-10-03T07:58:11Z",
+  "execution_workflow_merge_at": "2026-10-03T07:58:07Z",
+  "family_credit_delta": 0,
+  "fresh_reality_units_consumed": 1,
+  "passes": 192,
+  "promotion_authority": false,
+  "schema": "PROJECT_BRAIN_P1_RECOVERY_SEQUENCE_VIOLATION_INDEPENDENT_VERIFICATION_V1",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ACTIVE_AUTHORITY_ABSENT_BEFORE_EXECUTION__ONE_REALITY_UNIT_CONSUMED__192_OF_192_RESULT_INADMISSIBLE__ZERO_CREDIT",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37108487276,
+    "head_sha": "619b0d99385555cf55e2c2786636ad83e6546cf6",
+    "artifact_id": 11268438311,
+    "artifact_digest": "sha256:ef781db604309e08d222ed13af56dd14d95f2ac535421ff2abc0f881424e4210",
+    "candidate_blob": "88301973b5cc5cce83e52835afaa23ceb20cf3ef",
+    "conclusion": "success"
+  }
+}
