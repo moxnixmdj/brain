@@ -37,6 +37,12 @@ def plan(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]],
         if p["id"] in pseen: raise AdaptiveExperimentPlannerError("PROBE_ID_DUPLICATE")
         pseen.add(p["id"]);admitted.append(p)
 
+    epochs={p["experiment_epoch"] for p in admitted}
+    fingerprints={p["state_fingerprint"] for p in admitted}
+    if len(epochs)>1:
+        raise AdaptiveExperimentPlannerError("PROBE_EXPERIMENT_EPOCH_MISMATCH")
+    if len(fingerprints)>1:
+        raise AdaptiveExperimentPlannerError("PROBE_STATE_FINGERPRINT_MISMATCH")
     by_id={p["id"]:p for p in admitted}
 
     def solved(state:frozenset[str])->str|None:
@@ -96,7 +102,9 @@ def plan(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]],
     return {
         "schema":SCHEMA,"status":"VERIFIED_MINIMUM_WORST_CASE_ADAPTIVE_PLAN",
         "hypothesis_space_closed":True,
-        "optimization":"EXACT_FINITE_LEXICOGRAPHIC_MINIMUM__HARD_SAFETY_THEN_WORST_CASE_WALL_CLOCK_THEN_RESOURCE_COST_THEN_RESIDUAL_RISK_THEN_STEPS",
+        "experiment_epoch":next(iter(epochs)) if epochs else None,
+        "state_fingerprint":next(iter(fingerprints)) if fingerprints else None,
+        "optimization":"EXACT_FINITE_LEXICOGRAPHIC_MINIMUM__HARD_SAFETY_AND_STATE_INVARIANCE__THEN_WORST_CASE_WALL_CLOCK_THEN_RESOURCE_COST_THEN_RESIDUAL_RISK_THEN_STEPS",
         "probability_model_required":False,
         "recommended_probe":first,
         "worst_case_wall_clock":str(wall_clock),
