@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_FAIL_CLOSED__15_ROOT2_PREDICATES__14_UNIQUE_BENCHMARK_SURFACES__ZERO_CREDIT",
+  "status": "ACTIVE_FAIL_CLOSED__15_ROOT2_PREDICATES__14_UNIQUE_BENCHMARK_SURFACES__TB4_RENDER_RESOLVED_EMPTY__ZERO_CREDIT",
   "objective": "Collapse the 15 Root-2-only public fixed-bar predicates into the minimum 14 unique benchmark-route obligations, while preserving the distinction between historical execution-route deletion and strict Opus 5.5 acceptance proof.",
   "authority": {
     "root_state": {
@@ -44,12 +44,12 @@
         "CODING_TB4_GE_66_4"
       ],
       "target": ">=66.4%",
-      "state": "CURRENT_ROUTE_MATHEMATICALLY_UNATTAINABLE__NO_CONNECTED_ADMISSIBLE_ZERO_COST_RECOVERY_CARRIER_BOUND",
+      "state": "CURRENT_ROUTE_MATHEMATICALLY_UNATTAINABLE__CONNECTED_RENDER_RESOLVED_EMPTY__NO_ADMISSIBLE_ZERO_COST_RECOVERY_CARRIER_BOUND",
       "exact_blocker": "CURRENT_MACHINE_VERIFIED_ROUTE_MAXIMUM_180_SUCCESSES__PASS_REQUIRES_220__180_LT_220",
       "next": "REOPEN_ONLY_ON_PROVED_ZERO_COST_8CPU_16GB_50GB_DOCKER_CARRIER__VALID_RESOURCE_EQUIVALENCE_PROOF__OR_OTHER_ADMISSIBLE_ROUTE_RAISING_UPPER_BOUND_TO_AT_LEAST_220",
       "zero_cost_carrier_census": {
         "path": "canonical/governance/TB4_ZERO_COST_CARRIER_CENSUS_20261003_V1.json",
-        "git_blob_sha": "8bbd1ad5c2b614b8b800155d1142df216ac32765"
+        "git_blob_sha": "6c42b74d50276eeeee984707963e93ef5c227df4"
       }
     },
     {
