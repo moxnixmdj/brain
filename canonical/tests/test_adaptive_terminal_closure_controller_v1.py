@@ -121,6 +121,22 @@ class AdaptiveTerminalClosureControllerV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn("DOMINANCE_VERIFIED_COUNTS_MISMATCH", out["errors"])
 
+    def test_recomputed_future_world_requires_no_controller_code_change(self):
+        m = self._module()
+        docs = copy.deepcopy(live_docs())
+        pid = "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+        claim = next(x for x in docs[1]["claims"] if x.get("predicate_id") == pid)
+        claim["state"] = "PROVED"
+        claim["scope_complete"] = True
+        docs[3]["live_world"]["proved_predicates"] = 12
+        docs[3]["live_world"]["unresolved_predicates"] = 26
+        docs[4]["verified"]["proved_predicates"] = 12
+        docs[4]["verified"]["unresolved_predicates"] = 26
+        out = m.evaluate(*docs)
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["live_world"]["proved_predicates"], 12)
+        self.assertEqual(out["live_world"]["unresolved_predicates"], 26)
+
     def test_controller_never_grants_credit_or_reality_authority(self):
         m = self._module()
         out = m.evaluate_repository(ROOT)
