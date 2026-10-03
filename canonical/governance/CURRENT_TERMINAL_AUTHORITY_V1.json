@@ -1198,9 +1198,9 @@
     },
     "tb_science_one_slot_canary_v4_candidate": {
       "path": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_CANDIDATE_V4.json",
-      "git_blob_sha": "487cd17ef51cc49c8bdf36733c7c594e9bbf410b",
+      "git_blob_sha": "dba3ff2c53765f8423d4161e079b663c76959fc1",
       "authorized_slot": "terminal-bench-science/koopman-mfg-id::trial-0",
-      "status": "CANONICAL_CANDIDATE__INDEPENDENT_AUTHORITY_VERIFICATION_REQUIRED__EXECUTION_FALSE__ZERO_CREDIT",
+      "status": "CANDIDATE_VERIFIED_PUBLICLY__ACTIVATION_SEPARATE__EXECUTION_FALSE",
       "execution_authority": false,
       "promotion_authority": false
     }
