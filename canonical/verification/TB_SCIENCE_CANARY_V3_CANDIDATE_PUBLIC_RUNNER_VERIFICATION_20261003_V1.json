@@ -1,0 +1,29 @@
+{
+  "authorized_slot_candidate": "terminal-bench-science/virtual-baseline-localization::trial-0",
+  "candidate_blob": "616f393f2622bb09da7ee096bc067893a4b1ed76",
+  "capability_credit_delta": 0,
+  "consumed_slot_count": 4,
+  "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+  "execution_authority": false,
+  "execution_workflow_blob": "72951c4efe42563b88a1b974afd707dd025d23d1",
+  "fail_lock_failures": 78,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+  "planner_blob": "fe7c0ce885197217774638df382aeb6f68ff38dd",
+  "promotion_authority": false,
+  "required_successes": 133,
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_V3_CANDIDATE_VERIFICATION_V1",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIRST_UNCONSUMED_SLOT_RECOMPUTED__PATCHED_ROUTE_EXACT__INERT_CARRIER_BOUND__ZERO_TERMINAL_EXPOSURE__ZERO_CREDIT",
+  "terminal_results_observed": 0,
+  "terminal_task_content_read": 0,
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37109229209,
+    "head_sha": "268577bc7cdb3012ba1b5a7b9f5cb52ae63f423e",
+    "artifact_id": 11268764059,
+    "artifact_digest": "sha256:3dc6f677b4e6e5c8e5b641803fe37c0986cee3ba2956a29698c837ea4ad266ff",
+    "receipt_sha256": "eed002f81f539233cd418c6326d87d9e1cbdacb8642f0c21e6f5301a200da4af",
+    "conclusion": "success"
+  }
+}
