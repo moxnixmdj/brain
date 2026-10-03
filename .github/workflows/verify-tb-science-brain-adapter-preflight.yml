@@ -1,0 +1,31 @@
+name: Verify TBS Brain adapter preflight
+
+on:
+  push:
+    branches: ["close-science-family-route-20261003-v1"]
+    paths:
+      - "canonical/runtime/tb_science_brain_adapter_preflight_v1.py"
+      - "canonical/tests/test_tb_science_brain_adapter_preflight_v1.py"
+      - "canonical/governance/AGENTIC_SCIENTIFIC_RESEARCH_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json"
+      - ".github/workflows/verify-tb-science-brain-adapter-preflight.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/tb_science_brain_adapter_preflight_v1.py"
+      - "canonical/tests/test_tb_science_brain_adapter_preflight_v1.py"
+      - "canonical/governance/AGENTIC_SCIENTIFIC_RESEARCH_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json"
+      - ".github/workflows/verify-tb-science-brain-adapter-preflight.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run exact zero-task preflight
+        run: python3 canonical/runtime/tb_science_brain_adapter_preflight_v1.py
+      - name: Run focused tests
+        run: python3 -m unittest canonical.tests.test_tb_science_brain_adapter_preflight_v1
