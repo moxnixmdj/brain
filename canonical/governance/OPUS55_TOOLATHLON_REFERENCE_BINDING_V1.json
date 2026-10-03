@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TOOLATHLON_REFERENCE_BINDING_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__DURABLE_FIRST_PARTY_BYTE_BINDING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "objective": "Durably and independently bind the frozen matched Tool Discovery route to Claude Opus 5.5's Toolathlon-Verified Pass@1 reference without relying on a mutable web render.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "closes_if_independently_verified": [
+    "BIND_OPUS_5_5_77_8_PASS_AT_1_SOURCE_DURABLY_AND_INDEPENDENTLY",
+    "OPUS55_TOOLATHLON_77_8_DURABLE_FIRST_PARTY_BYTE_BINDING"
+  ],
+  "first_party_source": {
+    "vendor": "Anthropic",
+    "model": "Claude Opus 5.5",
+    "release_date": "2026-09-22",
+    "title": "Claude Opus 5.5 System Card",
+    "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+    "pages": 230
+  },
+  "matched_reference": {
+    "benchmark": "Toolathlon-Verified",
+    "pass_at_1_percent": 77.8,
+    "task_count": 108,
+    "trials": 3,
+    "total_trials": 324,
+    "model_effort": "max",
+    "reported_metrics": {
+      "pass_at_3_percent": 82.4,
+      "pass_cubed_percent": 72.2,
+      "avg_assistant_turns": 26.9
+    }
+  },
+  "independent_content_addressed_projection": {
+    "repository": "malob/ai-system-cards",
+    "commit": "282a67c3c79617b23a1a23ed0869239b6e28d139",
+    "files": {
+      "cards/anthropic/claude-opus-5-5/meta.yaml": "2d4ae4c2f790af72e8ca299e92a80f267996a00e",
+      "cards/anthropic/claude-opus-5-5/l2-links.json": "bbe68f4da175b1b10c91adb89d70b1d3493954df",
+      "cards/anthropic/claude-opus-5-5/source-inventory.json": "ab7269f3a83c6bc578e3d68c3ad789386e7501e3",
+      "cards/anthropic/claude-opus-5-5/sections/08b-capabilities-2.md": "de110235f19d017f7b9a7a76392a7cc4a7ddc854"
+    },
+    "source_sha256_agreement": [
+      "l2-links.json source_sha256 = first_party_source.sha256",
+      "source-inventory.json source_sha256 = first_party_source.sha256"
+    ],
+    "section_claims": [
+      "Claude Opus 5.5 achieved 77.8% Pass@1",
+      "324 trials",
+      "Pass@1 averaged over three trials across all 108 tasks"
+    ]
+  },
+  "independent_verification_requirements": [
+    "FETCH_ORIGINAL_ANTHROPIC_PDF_FROM_THE_BOUND_FIRST_PARTY_URL",
+    "SHA256_OF_FETCHED_PDF_EQUALS_7311C9C6BBB16D012F1C12C7418B05949FCF7AE3E30D2C40F22050074B2A7378",
+    "EXTRACTED_OR_DIRECTLY_OBSERVED_FIRST_PARTY_PDF_TEXT_CONTAINS_THE_77_8_PASS_AT_1_AND_108_TASK_THREE_TRIAL_FACTS",
+    "VERIFY_EXACT_CONTENT_ADDRESSED_PROJECTION_FILES_AND_SOURCE_SHA256_AGREEMENT",
+    "VERIFY_NO_REFERENCE_METRIC_OR_MODEL_ID_DRIFT"
+  ],
+  "hard_nonclaims": [
+    "NO_BRAIN_TOOLATHLON_RESULT",
+    "NO_ZERO_COST_EXECUTION_CARRIER_CLAIM",
+    "NO_TOOLATHLON_SCOPE_EQUIVALENCE_CLAIM_FROM_THIS_ARTIFACT",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_CLAIM_THAT_77_8_PERCENT_ALONE_CLOSES_TOOL_DISCOVERY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
