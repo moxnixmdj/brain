@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_SCOPE_CERTIFICATE_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_CANDIDATE_FROM_INDEPENDENT_PUBLIC_RUNNER_PASS__SCOPE_ONLY__ZERO_PERFORMANCE_CREDIT",
+  "id": "SYNTHESIS_SCOPE_CERTIFICATE_V1",
+  "target_scope_id": "scope://opus55/SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "witness_scope_id": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+  "basis": "LOSSLESS_DECOMPOSITION",
+  "verified": true,
+  "independent": true,
+  "scope_relation": "PROVEN_STRONGER",
+  "coverage_complete": true,
+  "coverage_relation": "EXACT_UNION",
+  "coverage_proof_verified": true,
+  "children": [
+    {
+      "id": "SYNTHESIS_SCOPE_DIMENSION_CLAIM_TO_SOURCE_FIDELITY_V1",
+      "target_scope_id": "scope://opus55/synthesis/claim-to-source fidelity",
+      "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "verified": true,
+      "independent": true,
+      "scope_relation": "PROVEN_STRONGER",
+      "formal_completeness": true,
+      "all_admissible_target_inputs_proved": true,
+      "premise_set_id": "sha1:62394e5b7d221ec9f69c3458f669e40e253a9d09+ee187f611a0e82b2de495ee377682f39bc31dd31::inputs:Verified evidence units with provenance|required_output_or_action:required claims are supported|success_condition:no unsupported material claims"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_DIMENSION_REQUIRED_EVIDENCE_COVERAGE_V1",
+      "target_scope_id": "scope://opus55/synthesis/required evidence coverage",
+      "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "verified": true,
+      "independent": true,
+      "scope_relation": "PROVEN_STRONGER",
+      "formal_completeness": true,
+      "all_admissible_target_inputs_proved": true,
+      "premise_set_id": "sha1:62394e5b7d221ec9f69c3458f669e40e253a9d09+ee187f611a0e82b2de495ee377682f39bc31dd31::inputs:required claims|success_condition:required coverage is complete"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_DIMENSION_UNCERTAINTY_DISAGREEMENT_PRESERVATION_V1",
+      "target_scope_id": "scope://opus55/synthesis/uncertainty/disagreement preservation",
+      "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "verified": true,
+      "independent": true,
+      "scope_relation": "PROVEN_STRONGER",
+      "formal_completeness": true,
+      "all_admissible_target_inputs_proved": true,
+      "premise_set_id": "sha1:62394e5b7d221ec9f69c3458f669e40e253a9d09+ee187f611a0e82b2de495ee377682f39bc31dd31::required_output_or_action:material uncertainty/disagreement is preserved|failure_condition:distorted disagreement/uncertainty"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_DIMENSION_AUDIENCE_ADAPTATION_V1",
+      "target_scope_id": "scope://opus55/synthesis/audience adaptation",
+      "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "verified": true,
+      "independent": true,
+      "scope_relation": "PROVEN_STRONGER",
+      "formal_completeness": true,
+      "all_admissible_target_inputs_proved": true,
+      "premise_set_id": "sha1:62394e5b7d221ec9f69c3458f669e40e253a9d09+ee187f611a0e82b2de495ee377682f39bc31dd31::inputs:user objective/audience|success_condition:audience/format constraints pass"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_DIMENSION_FORMAT_STYLE_CONSTRAINTS_V1",
+      "target_scope_id": "scope://opus55/synthesis/format/style constraints",
+      "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "verified": true,
+      "independent": true,
+      "scope_relation": "PROVEN_STRONGER",
+      "formal_completeness": true,
+      "all_admissible_target_inputs_proved": true,
+      "premise_set_id": "sha1:62394e5b7d221ec9f69c3458f669e40e253a9d09+ee187f611a0e82b2de495ee377682f39bc31dd31::inputs:output constraints|success_condition:audience/format constraints pass"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_DIMENSION_COMPRESSION_WITHOUT_DECISION_RELEVANT_LOSS_V1",
+      "target_scope_id": "scope://opus55/synthesis/compression without decision-relevant loss",
+      "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "verified": true,
+      "independent": true,
+      "scope_relation": "PROVEN_STRONGER",
+      "formal_completeness": true,
+      "all_admissible_target_inputs_proved": true,
+      "premise_set_id": "sha1:62394e5b7d221ec9f69c3458f669e40e253a9d09+ee187f611a0e82b2de495ee377682f39bc31dd31::required_output_or_action:irrelevant detail is omitted|success_condition:compression does not delete decision-relevant evidence"
+    }
+  ],
+  "authority": {
+    "independent_verification": "canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "independent_verification_git_blob_sha": "1852516f725f5b72badfc2f65be22e542ed83623",
+    "protocols_git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "behavioral_contract_registry_git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "synthesis_atoms_verification_git_blob_sha": "1a67bc568944212c4d235a463c8bd7bea21b3993"
+  },
+  "consequence": {
+    "root3_scope_relation_closed": true,
+    "predicate_remains_open_for_root2": true,
+    "remaining_root2_residuals": [
+      "metric:matched_quality",
+      "matched_quality_noninferiority",
+      "required_claim_coverage_noninferiority"
+    ]
+  },
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
