@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_P1_UNIVERSAL_GENERATOR_TRANSPORT_THEOREM_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_REALITY_STRONGER_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "runtime": "canonical/runtime/p1_universal_generator_transport_theorem_v1.py",
+  "proof_strategy": "FINITE_STRUCTURAL_QUOTIENT_OF_INFINITE_SEED_SPACE",
+  "quotient": {
+    "difficulties": 5,
+    "trajectory_lengths": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "cause_positions_per_difficulty": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "structural_equivalence_classes": 30,
+    "frozen_surface_count": 3,
+    "frozen_case_indices_per_surface": 64,
+    "repair_shuffle_semantically_irrelevant": true
+  },
+  "quarantined_run_37108111537_used_as_proof": false,
+  "intended_discharge": [
+    "P1_FAILURE_SEMANTICS_TRANSPORT_FRONTIERCODE",
+    "P1_FAILURE_SEMANTICS_TRANSPORT_CURSORBENCH",
+    "P1_FAILURE_SEMANTICS_TRANSPORT_RECOVERY_SCOPE_COMPOSITION"
+  ],
+  "independent_verification_required": true,
+  "scope_reduction_required_after_verification": true,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
