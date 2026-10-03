@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS55_TOOL_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__PRIMARY_PDF_153_OF_153_POLICY_EQUALITY__ENFORCEMENT_TESTS_PASS__ZERO_CASES__ZERO_CREDIT",
+  "subject": {
+    "brain_pr": 1466,
+    "frozen_head_sha": "abc288341fd25dcc9e1a7922b765b2ae5dbaa58e",
+    "exact_blobs": {
+      "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f",
+      "canonical/tests/test_root2_hle_opus55_tool_adapter_v1.py": "42f7b723842a24c9fc5528262acefcd035f67b0b",
+      "canonical/governance/HLE_OPUS55_TOOL_POLICY_V1.json": "d2a2427b483fe1c06c6b1e6bc98d72bf07e7a730",
+      "canonical/governance/HLE_OPUS55_TOOL_ADAPTER_V1.json": "79860f8a8d2365b873d88cd78be49a4ea7b5028b"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1490,
+    "verifier_head_sha": "63dd96da021b4a4bf6da530dd12b0bebdd4b3a34",
+    "workflow_run_id": 37162704933,
+    "workflow_job_id": 111319273318,
+    "conclusion": "success",
+    "primary_pdf_pages": 230,
+    "policy_pattern_count": 153,
+    "unit_tests_passed": 10
+  },
+  "verified": {
+    "exact_candidate_blob_identity": true,
+    "primary_pdf_policy_equality_153_of_153": true,
+    "blocked_search_result_filtering": true,
+    "blocked_initial_fetch_rejection": true,
+    "blocked_redirect_fetch_rejection": true,
+    "safe_fetch_hashing": true,
+    "restricted_code_math_execution": true,
+    "network_related_import_rejection": true,
+    "dangerous_open_builtin_rejection": true,
+    "one_sided_soundness_bound": true,
+    "identical_vendor_backend_claim": false
+  },
+  "consequence": "HLE_BRAIN_VENDOR_SEMANTICS_TOOL_ADAPTER_BLOCKER_DISCHARGED__PRESERVE_FULL_2500_MATERIAL_GATE_ACCESS__CLAUDE_OPUS_4_6_COMPARABLE_GRADER_OR_STRONGER_SCORER_RELATION__BRAIN_SCORE_GE_67_7",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
