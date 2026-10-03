@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_OBSERVABILITY_PARTITION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_MINIMUM_REALITY_CUT__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Partition the exact Tool Discovery residual after identity-scope closure into the region where universal program-side proof is information-theoretically admissible and the region where matched comparator evidence is irreducible.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "runtime": "canonical/runtime/tool_discovery_observability_partition_v1.py",
+  "tests": "canonical/tests/test_tool_discovery_observability_partition_v1.py",
+  "precondition": "IDENTITY_SCOPE_COMPLETE_FOR_THE_COMMON_MATCHED_TOOL_AUTHORITY",
+  "partition": {
+    "universal_region": "Every admissible route that can still change the least-cost valid-route decision has all unresolved required capability facts safely probe-decidable; routes already disproved or strictly more expensive than a verified sufficient route cannot change the least-cost decision.",
+    "matched_only_region": "At least one admissible route can still change the least-cost valid-route decision while at least one required capability fact is neither currently evidenced nor safely probe-decidable.",
+    "boundary_rule": "The matched-only region is information-theoretically irreducible to a universal valid-plus-global-least-cost program theorem because observationally identical worlds can require different terminal actions."
+  },
+  "scheduler_effect_if_independently_verified": [
+    "STOP_UNIVERSAL_PROOF_SEARCH_ON_MATCHED_ONLY_PARTITION",
+    "ALLOW_V5_OR_SUCCESSOR_UNIVERSAL_PROOF_ONLY_ON_OBSERVABILITY_COMPLETE_PARTITION",
+    "REQUEST_MATCHED_OPUS_EVIDENCE_ONLY_FOR_THE_IRREDUCIBLE_PARTITION",
+    "DO_NOT_REPLAY_TERMINAL_CASES_OR_SPEND_REALITY_ON_ALREADY_DEDUCIBLE_PARTITION_MEMBERSHIP"
+  ],
+  "relations": {
+    "lower_bound_candidate": "canonical/governance/TOOL_DISCOVERY_OBSERVABILITY_LOWER_BOUND_V1.json",
+    "common_authority_candidate": "canonical/governance/TOOL_DISCOVERY_COMMON_FROZEN_AUTHORITY_SCOPE_THEOREM_V1.json",
+    "program_side_candidate": "canonical/runtime/tool_discovery_dynamic_candidate_v5.py"
+  },
+  "hard_nonclaims": [
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_CLAIM_THAT_CURRENT_COMMON_AUTHORITY_OR_V5_BYTES_ARE_ALREADY_INDEPENDENTLY_VERIFIED",
+    "NO_REDEFINITION_OF_UNOBSERVABLE_ROUTES_AS_NONEXISTENT",
+    "NO_ASSUMPTION_THAT_EXPLICIT_PROBE_DENIAL_MEANS_NEGATIVE_CAPABILITY",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
