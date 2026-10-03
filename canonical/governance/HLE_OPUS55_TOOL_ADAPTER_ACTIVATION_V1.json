@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS55_TOOL_ADAPTER_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENTLY_VERIFIED__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "verified_candidate": {
+    "frozen_head_sha": "abc288341fd25dcc9e1a7922b765b2ae5dbaa58e",
+    "runtime_blob_sha": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f",
+    "tests_blob_sha": "42f7b723842a24c9fc5528262acefcd035f67b0b",
+    "policy_blob_sha": "d2a2427b483fe1c06c6b1e6bc98d72bf07e7a730",
+    "candidate_governance_blob_sha": "79860f8a8d2365b873d88cd78be49a4ea7b5028b"
+  },
+  "verification": {
+    "path": "canonical/verification/HLE_OPUS55_TOOL_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "942cd3032f8e1c53555f2df0810f82c86273f9ae",
+    "workflow_run_id": 37162704933,
+    "workflow_job_id": 111319273318,
+    "conclusion": "success"
+  },
+  "activated_contract": [
+    "PRIMARY_PDF_BLOCKLIST_153_OF_153",
+    "BLOCKLIST_FILTERED_WEB_SEARCH",
+    "BLOCKLIST_ENFORCED_WEB_FETCH_INITIAL_AND_REDIRECT",
+    "PROGRAMMATIC_TOOL_INVOCATION_BOUNDARY",
+    "RESTRICTED_PYTHON_CODE_EXECUTION",
+    "NO_CONTEXT_COMPACTION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "soundness": {
+    "pass_evidence": "ONE_SIDED_ADMISSIBLE_WHEN_REMAINING_FROZEN_PROTOCOL_TERMS_MATCH",
+    "failure_evidence": "NON_DISPOSITIVE_IF_BRAIN_TOOL_STACK_IS_STRICTLY_WEAKER_THAN_VENDOR_STACK",
+    "identical_vendor_backend_claim": false
+  },
+  "remaining_hle_root2_residuals": [
+    "MATERIAL_CAIS_HLE_FULL_2500_AUTO_GATE_ACCOUNT_ACCESS_WITHOUT_CONTAMINATION",
+    "ZERO_COST_CLAUDE_OPUS_4_6_COMPARABLE_GRADER_OR_STRONGER_SCORER_RELATION",
+    "BRAIN_SCORE_GE_67_7"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
