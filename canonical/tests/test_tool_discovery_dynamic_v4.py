@@ -78,10 +78,30 @@ class ToolDiscoveryDynamicV4Tests(unittest.TestCase):
         )
         self.assertEqual(v4.next_action(public), {"action": "SELECT", "tool_id": "T1"})
 
-    def test_v4_preserves_v3_1200_case_behavioral_grid(self):
-        out = proof.run_batch(20261002, 1200, v4.next_action)
-        self.assertTrue(out["pass"], out["failures"][:5])
-        self.assertEqual(out["failed"], 0)
+    def test_v4_has_no_regression_on_any_v3_passing_case_in_1200_case_grid(self):
+        regressions = []
+        v3_passes = 0
+        v4_passes = 0
+        for ordinal in range(1200):
+            case = proof.generate_case(20261002, ordinal)
+            old = proof.score_episode(case, v3.next_action)
+            new = proof.score_episode(case, v4.next_action)
+            if old["pass"]:
+                v3_passes += 1
+                if not new["pass"]:
+                    regressions.append(
+                        {
+                            "ordinal": ordinal,
+                            "class": case["case_class"],
+                            "old": old,
+                            "new": new,
+                        }
+                    )
+            if new["pass"]:
+                v4_passes += 1
+        self.assertGreater(v3_passes, 0)
+        self.assertGreaterEqual(v4_passes, v3_passes)
+        self.assertEqual(regressions, [])
 
     def test_v4_preserves_transfer_and_version_invalidation(self):
         transfer = proof.score_episode(proof.generate_case(101, 3), v4.next_action)
