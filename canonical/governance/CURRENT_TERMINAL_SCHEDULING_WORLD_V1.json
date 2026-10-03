@@ -4,7 +4,7 @@
   "status": "CANDIDATE__RECEIPT_DERIVED_30_PREDICATE_WORLD__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "objective": "Eliminate stale scheduling state by deriving the live Opus 5.5 acceptance work frontier directly from the frozen 38-predicate registry minus current PROVED/REFUTED evidence claims.",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "source_main_commit": "1789fd5313989875b34e0c6d0325cb1e507ffc1d",
+  "source_main_commit": "401206f7e3dcbee65acc0c7764cfe520a5876111",
   "exact_inputs": {
     "current_terminal_authority": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
@@ -46,7 +46,7 @@
   "supersession": {
     "historical_scheduler": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json",
     "reason": "V6 encodes a 31-predicate world while current evidence proves Delegation terminal success and current authority has 30 unresolved predicates.",
-    "activation_rule": "THIS_CANDIDATE_MAY_SUPERSEDE_V6_FOR SCHEDULING ONLY AFTER EXACT-BLOB INDEPENDENT VERIFICATION",
+    "activation_rule": "THIS_CANDIDATE_MAY_SUPERSEDE_V6_FOR_SCHEDULING ONLY AFTER EXACT-BLOB INDEPENDENT VERIFICATION",
     "historical_verification_receipts_remain_valid_for_their_original_bytes": true
   },
   "hard_rules": [
@@ -58,7 +58,7 @@
     "ZERO_FRESH_REALITY_BEFORE_RECEIPT_DERIVED_WORLD_IS_INDEPENDENTLY_VERIFIED_AND_INFORMATION_DOMINANCE_IS_RECOMPUTED",
     "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_CANDIDATE_BYTES__THEN_ACTIVATE_RECEIPT_DERIVED_30_PREDICATE_WORLD__RECOMPUTE_ZERO_REALITY_INFORMATION_DOMINANCE_AND_PROOF_FIRST_FRONTIER__ONLY_THEN REEVALUATE_THE_CURRENT_SCIENCE_ONE_SLOT_AUTHORITY",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_CANDIDATE_BYTES__THEN_ACTIVATE_RECEIPT_DERIVED_30_PREDICATE_WORLD__RECOMPUTE_ZERO_REALITY_INFORMATION_DOMINANCE_AND_PROOF_FIRST_FRONTIER__ONLY_THEN_REEVALUATE_THE_CURRENT_SCIENCE_ONE_SLOT_AUTHORITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
