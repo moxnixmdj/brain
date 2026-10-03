@@ -1,0 +1,110 @@
+{
+  "schema":"PROJECT_BRAIN_RETRIEVAL_REAL_HIDDEN_WITNESS_CATALOG_V1",
+  "date":"2026-10-03",
+  "purpose":"Frozen real public targets previously discovered during Brain work. Exact repository identities are hidden from the retriever during masked arena cases; expected identities remain only in the answer key.",
+  "targets":[
+    {
+      "id":"RW_STANZA","repository":"stanfordnlp/stanza","commit":"c9a2158a87502dd63f757ab1aa933230b0acbce7",
+      "description":"Stanford NLP Python library for tokenization, sentence segmentation, NER, and parsing of many human languages",
+      "language":"Python","topics":["artificial-intelligence","corenlp","deep-learning","machine-learning","named-entity-recognition","natural-language-processing","nlp","python","pytorch","universal-dependencies"],
+      "root_paths":[".github",".gitignore",".travis.yml","CONTRIBUTING.md","LICENSE","README.md","SECURITY.md","demo","doc","scripts","setup.py","stanza"],
+      "behavioral_queries":["syntactic decomposition for natural language obligations","tokenization sentence segmentation parsing many human languages"],
+      "historical_evidence":"canonical/reasoning/2026-10-02_M0_RESIDUAL_DISCOVERY_V1.json"
+    },
+    {
+      "id":"RW_SPACY","repository":"explosion/spaCy","commit":"c2dabfce56ad2991685ec85783cd59637a5d7b8f",
+      "description":"Industrial-strength Natural Language Processing NLP in Python",
+      "language":"Python","topics":["ai","artificial-intelligence","cython","data-science","deep-learning","entity-linking","machine-learning","named-entity-recognition","natural-language-processing","neural-network","nlp","nlp-library","python","spacy","text-classification","tokenization"],
+      "root_paths":[".github",".gitignore",".pre-commit-config.yaml","CITATION.cff","CONTRIBUTING.md","LICENSE","MANIFEST.in","Makefile","README.md","RELEASE_NOTES.md","bin","build-constraints.txt","examples","extra","licenses","netlify.toml","pyproject.toml","requirements.txt","setup.cfg","setup.py","spacy","website"],
+      "behavioral_queries":["independent challenger for syntactic and natural language decomposition","industrial natural language processing tokenization text classification"],
+      "historical_evidence":"canonical/reasoning/2026-10-02_M0_RESIDUAL_DISCOVERY_V1.json"
+    },
+    {
+      "id":"RW_CAD_IMAGE_3D","repository":"skykim/cad-image-to-3d","commit":"b70f7b5a8cd18c96a7ec869e0a5d946f79480226",
+      "description":"","language":"Python","topics":[],
+      "root_paths":[".claude-plugin",".gitignore","LICENSE","NOTICE","README.md","drawing-vs-render.png","examples","skills"],
+      "behavioral_queries":["technical drawing image to 3D CAD render compare feature audit dimension assumption logging","render compare engineering drawing reconstruction"],
+      "historical_evidence":"canonical/reasoning/2026-10-02_M1_RESIDUAL_DISCOVERY_V1.json"
+    },
+    {
+      "id":"RW_TECH_EUROPE","repository":"D4V1ND/tech_europe","commit":"9d7026d6441153032b4bc1d93050bfd1d825296a",
+      "description":"Turning a technical drawing into a 3D part","language":"Python","topics":[],
+      "root_paths":[".gitignore",".mplcache","LICENSE","README.md","docs","drawing2cad","gif","out","pyproject.toml","requirements.txt","tests"],
+      "behavioral_queries":["technical drawing to deterministic 3D part CAD schema dimension validation","drawing to CAD deterministic geometry validation"],
+      "historical_evidence":"canonical/reasoning/2026-10-02_M1_RESIDUAL_DISCOVERY_V1.json"
+    },
+    {
+      "id":"RW_PEN2STEP","repository":"unes21/pen2step","commit":"08cf6280f5d447e5a98ce5f4dcd630724ebd8acd",
+      "description":"Training-Free Conversion of Hand-Drawn Engineering Sketches to Parametric CAD Models using a Frozen Vision-Language Model",
+      "language":"Python","topics":[],
+      "root_paths":[".gitattributes",".gitignore","CITATION.cff","LICENSE","README.md","S2CAD.py","app.py","benchmark","examples","figures","notebooks","requirements.txt","results","src","tools"],
+      "behavioral_queries":["hand drawn engineering sketch to parametric CAD model multiview OCR AST repair scale recovery","engineering sketch parametric CAD conversion"],
+      "historical_evidence":"canonical/reasoning/2026-10-02_M1_RESIDUAL_DISCOVERY_V1.json"
+    },
+    {
+      "id":"RW_CADRIP","repository":"zackska/cadRip","commit":"6d59a510f7e72d0b5956f7d47dc3b730aaacdef0",
+      "description":"parse Solidworks drawings for dimensions and callouts","language":"Python","topics":[],
+      "root_paths":["CadRip.py","LICENSE","README.md"],
+      "behavioral_queries":["dimension symbol OCR text clustering engineering drawing callouts","parse drawings dimensions callouts"],
+      "historical_evidence":"canonical/reasoning/2026-10-02_M1_RESIDUAL_DISCOVERY_V1.json"
+    },
+    {
+      "id":"RW_SCAN2SKETCH","repository":"Scan2Sketch/Scan2Sketch","commit":"9cdca297fc4f8f67807a6bc004556282ba58d5a5",
+      "description":"Open-source FreeCAD add-on that converts calibrated flatbed scans into editable, validated sketches and optional pads.",
+      "language":"Python","topics":["3d-printing","cad","computer-vision","flatbed-scanner","freecad","opencv","python"],
+      "root_paths":[".github",".gitignore","CODE_OF_CONDUCT.md","CONTRIBUTING.md","INSTALL.md","INSTALL_DE.md","Init.py","InitGui.py","LICENSE","README.md","README_DE.md","SECURITY.md","THIRD_PARTY_NOTICES.md","UNINSTALL.md","UNINSTALL_DE.md","benchmark_tools","docs","package.xml","requirements-opencv-spike.txt","requirements-sam-spike.txt","scan2sketch","scripts","tests"],
+      "behavioral_queries":["edge refinement curve fitting topology validation engineering sketch","scan image to editable validated CAD sketch"],
+      "historical_evidence":"canonical/reasoning/2026-10-02_M1_RESIDUAL_DISCOVERY_V1.json"
+    },
+    {
+      "id":"RW_2D3D_CAD","repository":"Mohil-Ahuja/2D-to-3D-CAD-Reconstruction","commit":"a1c4d0d263ae894c5fadec6afedf9e2e5907bfa4",
+      "description":"Deep learning pipeline reconstructing 3D parametric CAD models from 2D multi-view orthographic drawings using ResNet-Transformer Seq2Seq architecture, generating STEP files with procedural CAD operations.",
+      "language":"Python","topics":[],
+      "root_paths":[".gitattributes",".gitignore","LICENSE","README.md","data","drawing2part","environment.yml","logs","models","requirements.txt","scripts","tests"],
+      "behavioral_queries":["procedural data generator CAD token space build123d executor orthographic drawing to 3D parametric model","2D multiview orthographic drawing to STEP CAD reconstruction"],
+      "historical_evidence":"canonical/reasoning/2026-10-02_M1_RESIDUAL_DISCOVERY_V1.json"
+    },
+    {
+      "id":"RW_TESSERACT","repository":"tesseract-ocr/tesseract","commit":"db20f322d03664d1e878e2fbf6e904f5da755594",
+      "description":"Tesseract Open Source OCR Engine main repository","language":"C++","topics":["hacktoberfest","lstm","machine-learning","ocr","ocr-engine","tesseract","tesseract-ocr"],
+      "root_paths":[".clang-format",".gitattributes",".github",".gitignore",".gitmodules",".mailmap","AUTHORS","CITATIONS.bib","CMakeLists.txt","CONTRIBUTING.md","ChangeLog","INSTALL","INSTALL.GIT.md","LICENSE","Makefile.am","README.md","SECURITY.md","VERSION","appveyor.yml","autogen.sh","cmake","configure.ac","doc","include","java","m4","nsis","snap","src","sw.cpp","tessdata","tesseract.pc.cmake","tesseract.pc.in","test","unittest"],
+      "behavioral_queries":["OCR text extraction from raster engineering drawings","open source OCR engine text extraction"],
+      "historical_evidence":"canonical/reasoning/2026-10-02_M1_RESIDUAL_DISCOVERY_V1.json"
+    },
+    {
+      "id":"RW_OPENCV","repository":"opencv/opencv","commit":"20e367198c7adde8f1efc0f525256b1e15798024",
+      "description":"Open Source Computer Vision Library","language":"C++","topics":["c-plus-plus","computer-vision","deep-learning","image-processing","opencv"],
+      "root_paths":[".editorconfig",".gitattributes",".github",".gitignore","3rdparty","CMakeLists.txt","CONTRIBUTING.md","COPYRIGHT","LICENSE","README.md","SECURITY.md","apps","cmake","doc","docs_sphinx","hal","include","modules","platforms","samples","supporters.txt"],
+      "behavioral_queries":["segmentation registration primitives image processing engineering drawing","computer vision image processing registration segmentation library"],
+      "historical_evidence":"canonical/reasoning/2026-10-02_M1_RESIDUAL_DISCOVERY_V1.json"
+    },
+    {
+      "id":"RW_TOOLATHLON","repository":"WaitHZ/toolathlon-website","commit":"2fa0967bb598eb2df410b6bfb054f3120994a97f",
+      "description":"","language":"Python","topics":[],
+      "root_paths":[".gitignore",".python-version","classification.py","crop.py","docs.json","docs.json.backup","docs","figs","icon.py","icon2.py","icons","introduction.mdx","map.txt","package-lock.json","prepare.py","pyproject.toml","record","replace_svgs.py","scripts","styles","task-pages.json","traj.py","update.sh","update_inst.py","uv.lock","videos"],
+      "behavioral_queries":["Toolathlon verified trajectories task pages benchmark route comparator","Toolathlon public benchmark trajectories"],
+      "historical_evidence":"canonical/reasoning/2026-10-03_TOOL_DISCOVERY_GITHUB_RETRIEVAL_WAKE_V1.json"
+    },
+    {
+      "id":"RW_AI_SYSTEM_CARDS","repository":"malob/ai-system-cards","commit":"282a67c3c79617b23a1a23ed0869239b6e28d139",
+      "description":"Readable archive of AI model system cards faithful HTML and markdown conversions of the original PDFs","language":"Python","topics":[],
+      "root_paths":[".claude",".github",".gitignore",".mcp.json","CLAUDE.md","LICENSE","README.md","cards","docs","pipeline","site"],
+      "behavioral_queries":["Claude Opus system card Toolathlon capabilities benchmark extraction","AI model system card archive benchmark metrics"],
+      "historical_evidence":"canonical/reasoning/2026-10-03_TOOL_DISCOVERY_GITHUB_RETRIEVAL_WAKE_V1.json"
+    },
+    {
+      "id":"RW_BENCHBOARD","repository":"SYuan03/benchboard","commit":"082441b8a09601928252331eceae432e96b559ca",
+      "description":"Source-linked collection of published AI model benchmark scores.","language":"JavaScript","topics":["agents","ai-benchmarks","leaderboard","llm","multimodal"],
+      "root_paths":[".github",".gitignore",".nojekyll","CONTRIBUTING.md","LICENSE","README.md","app.js","assets","data-packs","data.js","docs","favicon.svg","index.html","package.json","scripts","styles.css"],
+      "behavioral_queries":["source linked published AI model benchmark scores Toolathlon Opus","AI benchmark score reference index"],
+      "historical_evidence":"canonical/reasoning/2026-10-03_TOOL_DISCOVERY_GITHUB_RETRIEVAL_WAKE_V1.json"
+    }
+  ],
+  "hard_rules":[
+    "TARGET_IDENTITIES_ARE_ANSWER_KEY_ONLY_IN_MASKED_CASES",
+    "PINNED_COMMITS_PREVENT_TARGET_DRIFT",
+    "HISTORICAL_BRAIN_DISCOVERY_EVIDENCE_PROVIDES_REAL_TARGET_PROVENANCE",
+    "ARENA_RECALL_IS_SCOPE_LIMITED_TO_THIS_FROZEN_CATALOG",
+    "NO_CATALOG_RESULT_TO_OPEN_WORLD_COMPLETENESS_INFERENCE"
+  ]
+}
