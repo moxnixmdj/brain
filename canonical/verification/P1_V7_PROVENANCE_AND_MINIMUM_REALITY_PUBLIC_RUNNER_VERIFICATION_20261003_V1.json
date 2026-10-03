@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V7_PROVENANCE_AND_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V7_KILLS_DROP_PROVENANCE__EXACT_MINIMUM_REALITY_ONE_SHARED_P1_BATCH__ZERO_CREDIT",
+  "exact_brain_blobs": {
+    "canonical/runtime/p1_v7_provenance_mutation_closure_v1.py": "63be0669c8f2c5a20bb688fd1e2c37020bf74df2",
+    "canonical/tests/test_p1_v7_provenance_mutation_closure_v1.py": "afb982406917a4e7b42231238500d36094a4f711",
+    "canonical/governance/P1_MINIMUM_REALITY_CUT_INPUT_V1.json": "cbcb2faff8404623846e77e19fcc5b0ad00e81d9",
+    "canonical/runtime/p1_minimum_reality_cut_verifier_v1.py": "f50b15a87f2eff348be9aa25e7d663cb849b6209",
+    "canonical/tests/test_p1_minimum_reality_cut_verifier_v1.py": "bbe9e4f5350853bc355a6ab422e9a58d4ab0adef",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py": "28940387bd6c11671035ad9201e37bba13fd9bc9",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "canonical/runtime/minimum_reality_cut_v2.py": "4f79cf8caa5415be4cbe30e7b36bd11cdfce07e8"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1116,
+    "pull_request_head": "465669767978d2879601c6e19130eb3b200106bb",
+    "merge_commit": "008cabb758a2c9452bd824da0dcfc34137b66ed9",
+    "workflow_run_id": 37086450558,
+    "workflow_job_id": 111097661535,
+    "conclusion": "success"
+  },
+  "verified": [
+    "CURRENT_V7_UNMUTATED_PROVENANCE_CASE_PASSES",
+    "DROP_PROVENANCE_OR_DEPENDENCY_EDGE_CAUSES_V7_CANDIDATE_FAIL_CLOSED",
+    "DROP_PROVENANCE_MUTATED_CASE_DOES_NOT_PASS_V6_SCORER",
+    "OLD_V4_DROP_PROVENANCE_COUNTEREXAMPLE_DOES_NOT_SURVIVE_CURRENT_V7_MECHANISM",
+    "THREE_FROZEN_P1_DIRECT_SURFACE_TRANSPORT_REQUIREMENTS_EXPLICIT",
+    "ONE_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH_COVERS_ALL_THREE_REQUIREMENTS",
+    "THREE_SPLIT_SURFACE_BATCHES_ARE_STRICTLY_DOMINATED_AT_EQUAL_UNIT_COST",
+    "EXACT_MINIMUM_REALITY_SOLVER_RETURNS_ONE_SHARED_BATCH",
+    "MINIMUM_NEW_REALITY_UNITS_EQUALS_ONE",
+    "TERMINAL_V3_REPLAY_NOT_REQUIRED",
+    "ZERO_NEW_REALITY_CONSUMED_BY_VERIFICATION",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "result": {
+    "provenance_mutation_closed_under_current_v7": true,
+    "remaining_p1_information_residual": "FAILURE_SEMANTICS_TRANSPORT_TO_THREE_FROZEN_DIRECT_SURFACES",
+    "exact_minimum_reality": true,
+    "selected_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+    "minimum_new_reality_units": 1,
+    "execution_authority": false
+  },
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
