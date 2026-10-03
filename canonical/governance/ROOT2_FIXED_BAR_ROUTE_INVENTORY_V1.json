@@ -43,6 +43,11 @@
       "path": "canonical/verification/FRONTIERCODE_CURSORBENCH_OWNER_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "git_blob_sha": "26c1f813503c156e818499b2e6fe4fdb00d40c05",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS"
+    },
+    "gdpval_primary_source_verification": {
+      "path": "canonical/verification/GDPVAL_AA_V21_PRIMARY_SOURCE_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "dee93e49f5ecf0bd2b939670931ff27886623a6c",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS"
     }
   },
   "deduplication": {
@@ -108,13 +113,19 @@
         "PROWORK_GDPVAL_GE_1846"
       ],
       "target": ">=1846 Elo",
-      "state": "PUBLIC_220_OPENAI_GOLD_POPULATION_AND_PUBLIC_STIRRUP_SUBSTRATE_INDEPENDENT_PASS__EXACT_ARTIFICIAL_ANALYSIS_PAIRWISE_ELO_OWNER_LAYER_OPEN",
-      "next": "BIND_EXACT_ARTIFICIAL_ANALYSIS_PAIRWISE_ELO_OWNER_LAYER_OR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF__STOP_GENERIC_POPULATION_AND_HARNESS_SEARCH",
+      "state": "PUBLIC_220_OPENAI_GOLD_POPULATION_STIRRUP_AND_PRIMARY_METHODOLOGY_INDEPENDENT_PASS__EXACT_PAIRWISE_ELO_RESULT_ROUTE_OPEN",
+      "next": "WORK_ONLY_EXACT_PAIRWISE_ELO_RESULT_ROUTE_OR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF",
       "public_route_boundary": {
         "path": "canonical/verification/GDPVAL_AA_V21_PUBLIC_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
         "git_blob_sha": "e3d890b0fdfe2c5173cf18efddbc1483b7db6701",
         "workflow_run_id": 37154939755,
         "workflow_job_id": 111296297386
+      },
+      "primary_source_verification": {
+        "path": "canonical/verification/GDPVAL_AA_V21_PRIMARY_SOURCE_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "dee93e49f5ecf0bd2b939670931ff27886623a6c",
+        "workflow_run_id": 37155634503,
+        "workflow_job_id": 111298328921
       }
     },
     {
