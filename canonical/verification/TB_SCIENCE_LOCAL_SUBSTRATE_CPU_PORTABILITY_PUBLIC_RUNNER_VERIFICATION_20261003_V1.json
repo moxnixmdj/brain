@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CLEAN_CURRENT_RUNNER_LLAMA_CPP_BUILD__HEALTH_AND_SYNTHETIC_COMPLETION_PASS__ZERO_TERMINAL__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "brain_contract": {
+    "path": "canonical/governance/TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_REPAIR_V1.json",
+    "git_blob_sha": "7e44ab43908860703a478df2ec8646246620260a"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1267,
+    "head_sha": "5471be8a4923ca611a97d47b6449252b66436ea2",
+    "merge_commit": "5d7990c232dbecc593a6638db1fbaaeb34ba84c0",
+    "workflow_run_id": 37111616149,
+    "workflow_job_id": 111170472199,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_REPAIR_CONTRACT_BOUND",
+    "EXACT_LLAMA_CPP_SOURCE_CHECKED_OUT_WITH_NO_COMPILED_CACHE",
+    "LLAMA_SERVER_BUILT_ON_CURRENT_UBUNTU_24_04_RUNNER",
+    "EXACT_QWEN_MODEL_SHA256_VERIFIED",
+    "LOCAL_HEALTH_ENDPOINT_PASS",
+    "ZERO_TERMINAL_SYNTHETIC_COMPLETION_CONTAINS_READY"
+  ],
+  "terminal_task_content_read": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "consequence": "CPU_PORTABILITY_BLOCKER_CLOSED__NEXT_UNTOUCHED_SLOT_MAY_BE_STAGED_ONLY_UNDER_SEPARATE_ONE_USE_AUTHORITY_CANDIDATE_AND_INDEPENDENT_EXACT_BYTE_VERIFICATION"
+}
