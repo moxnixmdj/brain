@@ -1224,5 +1224,28 @@
     "preserved_fact": "PER_CASE_TOOL_IDENTITY_COMPLETENESS",
     "rejected_acceptance_inference": "PER_CASE_IDENTITY_COMPLETENESS_DOES_NOT_PROVE_180_CASES_ARE_EXACT_COMPLETE_PROTOCOL_POPULATION",
     "current_acceptance": "3_OF_19__8_OF_38"
+  },
+  "terminal_causal_depth_controller": {
+    "status": "ACTIVE_ZERO_CREDIT",
+    "runtime_path": "canonical/runtime/terminal_causal_depth_controller_v1.py",
+    "runtime_blob_sha": "20b5854af2a1ecc1ab1fbb374fcda8529622b8aa",
+    "tests_path": "canonical/tests/test_terminal_causal_depth_controller_v1.py",
+    "tests_blob_sha": "fa89bc5d4b68dcf2b459f28c154cfb768d302c6d",
+    "verification_path": "canonical/verification/TERMINAL_CAUSAL_DEPTH_CONTROLLER_INDEPENDENT_VERIFICATION_20261003_V2.json",
+    "verifier_pr": 1225,
+    "isolated_verification_run_id": 37100901714,
+    "execution_guard_run_id": 37100901656,
+    "current_zero_reality_parallel_action_count": 16,
+    "scheduling_order": [
+      "ZERO_REALITY_MEGABATCH",
+      "MINIMUM_REALITY_TRANSACTION",
+      "ATOMIC_FINALITY"
+    ],
+    "proved_target_subtraction_required": true,
+    "fresh_reality_before_zero_reality_saturation": false,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false
   }
 }
