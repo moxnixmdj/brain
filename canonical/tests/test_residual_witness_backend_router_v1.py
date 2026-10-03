@@ -79,11 +79,11 @@ class ResidualWitnessBackendRouterTests(unittest.TestCase):
                 "candidates":[{"repository":"x/y","verified_sufficient":True}],
             },
         )
-        self.assertEqual(out["status"],"BACKEND_FAILED_TRANSIENT",out)
+        self.assertEqual(out["status"],"BACKEND_REJECTED_PERMANENT",out)
         self.assertIn("BACKEND_CANDIDATE_SELF_VERIFICATION",out["error"],out)
         self.assertEqual(
             [x for x in out["state"]["cells"] if x["query_id"]=="Q000" and x["surface"]=="CODE_CONTENT"][0]["state"],
-            "FAILED_TRANSIENT",
+            "FAILED_PERMANENT",
         )
 
     def test_unbound_backend_fails_closed_and_moves_on(self):
