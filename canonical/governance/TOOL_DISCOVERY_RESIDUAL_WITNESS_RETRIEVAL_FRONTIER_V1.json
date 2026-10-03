@@ -21,19 +21,6 @@
     "verification": "canonical/verification/RESIDUAL_WITNESS_BACKEND_ROUTER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "verification_blob": "34512250b7bc7a69a03ab7d4e9b4d1ef4d2c8bfc"
   },
-  "exact_current_residual": {
-    "source": "canonical/verification/TOOL_DISCOVERY_SIX_CLASS_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "source_blob": "a0e5b7793a91e1848fac90247d00772544b87165",
-    "frozen_generator_semantic_classes": 6,
-    "all_six_classes_pass": true,
-    "identifier_suffix_alpha_renaming_only": true,
-    "open_domain_scope_relation_closed": false,
-    "strict_acceptance_closed": false,
-    "remaining_minimum_residual": [
-      "SCOPE_COMPLETE_PROOF_THAT_ALL_ADMISSIBLE_FROZEN_TARGET_ECOSYSTEMS_ARE_COVERED_BY_PROVED_GENERATOR_OR_UNIVERSALLY_PROVED_COMPLETE_INTERFACE_CLASS",
-      "OR_MATCHED_OPUS_EVIDENCE_ONLY_FOR_ANY_IRREDUCIBLE_TARGET_REMAINDER"
-    ]
-  },
   "evaluated_witness_classes": [
     {
       "witness_class": "FROZEN_DIRECT_GENERATOR_SIX_CLASS_QUOTIENT",
@@ -84,12 +71,6 @@
     "next_action_on_wake": "COMPILE_NEW_EVIDENCE_AS_RESIDUAL_WITNESS__VERIFY_SCOPE_FIRST__STOP_ON_FIRST_INDEPENDENTLY_VERIFIED_SUFFICIENT_WITNESS",
     "next_action_without_wake": "DO_NOT_SPEND_ADDITIONAL_RETRIEVAL_ACTIONS_ON_THIS_RESIDUAL__ALLOW_OTHER_TERMINAL_FRONTIER_WORK_TO_PROCEED"
   },
-  "acceptance_truth": {
-    "accepted_families": "3_OF_19",
-    "proved_atomic_predicates": "8_OF_38",
-    "tool_discovery_family_closed": false,
-    "terminal_goal_achieved": false
-  },
   "hard_rules": [
     "NO_FINITE_SAMPLE_TO_PROTOCOL_WIDE_INFERENCE",
     "NO_APT_INSTANCE_TO_ALL_ECOSYSTEMS_INFERENCE",
@@ -105,5 +86,29 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "residual_epoch": {
+    "source_path": "canonical/verification/TOOL_DISCOVERY_SIX_CLASS_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "source_blob": "a0e5b7793a91e1848fac90247d00772544b87165",
+    "semantic_state": {
+      "frozen_generator_semantic_classes": 6,
+      "all_six_classes_pass": true,
+      "identifier_suffix_alpha_renaming_only": true,
+      "open_domain_scope_relation_closed": false,
+      "strict_acceptance_closed": false,
+      "remaining_minimum_residual": [
+        "SCOPE_COMPLETE_PROOF_THAT_ALL_ADMISSIBLE_FROZEN_TARGET_ECOSYSTEMS_ARE_COVERED_BY_PROVED_GENERATOR_OR_UNIVERSALLY_PROVED_COMPLETE_INTERFACE_CLASS",
+        "OR_MATCHED_OPUS_EVIDENCE_ONLY_FOR_ANY_IRREDUCIBLE_TARGET_REMAINDER"
+      ]
+    }
+  },
+  "acceptance_snapshot_at_creation_base": {
+    "brain_base_commit": "084265f6f9e892f8aae1ce03a766ba6c16f1f81c",
+    "accepted_families": "3_OF_19",
+    "proved_atomic_predicates": "8_OF_38",
+    "tool_discovery_family_closed": false,
+    "terminal_goal_achieved": false,
+    "snapshot_only": true
+  },
+  "supersession_rule": "THIS_FRONTIER_REMAINS_THE_RETRIEVAL_POLICY_FOR_THE_BOUND_RESIDUAL_EPOCH_ONLY__A_NEW_SCOPE_OR_MATCHED_COMPARATOR_RECEIPT_MUST_CREATE_A_NEW_CONTENT_ADDRESSED_FRONTIER_RATHER_THAN_MUTATE_THE_HISTORICAL_RESULT"
 }
