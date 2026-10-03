@@ -16,7 +16,7 @@
     "unknown_is_not_missing": true
   },
   "exact_bound_components": {
-    "canonical/runtime/root1_capability_acquisition_controller_v1.py": "e69a85543080b0488ebe4f09c3458eb56c06fc35",
+    "canonical/runtime/root1_capability_acquisition_controller_v1.py": "6df9f5699c15c988b5566a23d73252e93751c84e",
     "canonical/tests/test_root1_capability_acquisition_controller_v1.py": "4863151cd44f7fc0a75c7ae991770c054d17cd55",
     "canonical/runtime/structural_transfer_v3.py": "2c5d854ba88493edcd843ae4ac2994e727319fa7"
   },
