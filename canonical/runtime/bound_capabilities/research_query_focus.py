@@ -9,6 +9,7 @@ search/ranking query.
 from __future__ import annotations
 import hashlib
 import re
+import unicodedata
 
 SCHEMA="PROJECT_BRAIN_RESEARCH_QUERY_FOCUS_V1"
 
@@ -35,7 +36,7 @@ _CONTROL_CLAUSE_BOUNDARY=re.compile(
     r"preserve|produce|provide|discover|verify|run|execute|save|cite|report|return)\b)",
     re.IGNORECASE,
 )
-_TOKEN=re.compile(r"[A-Za-z0-9]+(?:[-/.][A-Za-z0-9]+)*")
+_TOKEN=re.compile(r"[^\W_]+(?:[-/.][^\W_]+)*", re.UNICODE)
 # Keep technical nouns/adjectives (including "primary", "reference",
 # "higher/lower", and noun "use"). Orchestration sentences are removed
 # structurally instead of by deleting potentially meaningful domain words.
@@ -48,7 +49,7 @@ _STOP={
 }
 
 def _canon(value):
-    return " ".join(str(value or "").strip().split())
+    return " ".join(unicodedata.normalize("NFKC",str(value or "")).strip().split())
 
 def _decision_clause(objective):
     text=_canon(objective)
@@ -68,7 +69,7 @@ def _decision_clause(objective):
 def _tokens(text):
     out=[]
     for raw in _TOKEN.findall(text):
-        t=raw.lower().strip("-/.")
+        t=raw.casefold().strip("-/.")
         if len(t)<2 or t in _STOP:
             continue
         if t not in out:
@@ -102,6 +103,6 @@ def focus(objective,max_tokens=32):
         "query":query,
         "tokens":tokens,
         "query_sha256":hashlib.sha256(query.encode("utf-8")).hexdigest(),
-        "method":"DECISION_TEXT_UNTIL_EXPLICIT_ORCHESTRATION_BOUNDARY_PLUS_MINIMAL_FUNCTION_WORD_FILTER",
+        "method":"DECISION_TEXT_UNTIL_EXPLICIT_ORCHESTRATION_BOUNDARY_PLUS_UNICODE_FUNCTION_WORD_FILTER",
         "claim_scope":"DETERMINISTIC_RESEARCH_SUBJECT_QUERY_ONLY",
     }
