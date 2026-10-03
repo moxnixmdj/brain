@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "BIND-TB-SCIENCE-EXECUTION-CAPSULE-ZERO-CASE-20261003-V1",
+  "status": "ZERO_REALITY_RECONCILIATION_DONE__CAPSULE_CANDIDATE_REQUIRES_INDEPENDENT_VERIFICATION__NO_EXECUTION_AUTHORITY",
+  "canonical_base_commit": "df8acf6efc0e30931e20d61a8365ccdd23d53c71",
+  "working_branch_head_before_action": "25b3219",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "action_kind": "ZERO_REALITY_EXACT_BLOB_RECONCILIATION_AND_CONTENT_ADDRESSED_ROUTE_BINDING",
+  "governing_authority": {
+    "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "current_terminal_authority_git_blob_sha": "a8f3bb99aeecd3b8fa43d48ec11ea7ddb9ceb6e4",
+    "science_route_activation": "canonical/governance/TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1.json",
+    "science_route_activation_git_blob_sha": "8509ea794f5f554102baf0a7f4745eafefa12157",
+    "applicable_hypergraph_action": "BIND_SHARED_PUBLIC_BENCHMARK_EXECUTION_ABI",
+    "new_reality_units": 0
+  },
+  "causal_finding": {
+    "current_main_manifest_git_blob_before_reconciliation": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "independent_receipt_exact_manifest_git_blob": "e0318f4fcde040498077dcdd872e398e32240791",
+    "independent_manifest_receipt": "canonical/verification/TB_SCIENCE_210_SLOT_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "independent_workflow_run_id": 37101057700,
+    "independent_workflow_job_id": 111140509307,
+    "receipt_conclusion": "success",
+    "mismatch_cause": "POST_VERIFICATION_STATUS_AND_RECEIPT_POINTER_EDITS_CHANGED_THE_MANIFEST_GIT_BLOB_WITHOUT_A_NEW_EXACT_BLOB_VERIFICATION",
+    "required_repair": "RESTORED_PREVIOUSLY_VERIFIED_IMMUTABLE_MANIFEST_BYTES__SESSION_BRANCH_BLOB_NOW_MATCHES_RECEIPT",
+    "session_branch_manifest_git_blob_after_reconciliation": "e0318f4fcde040498077dcdd872e398e32240791",
+    "capsule_candidate": {
+      "path": "canonical/governance/TB_SCIENCE_EXECUTION_CAPSULE_CANDIDATE_V1.json",
+      "git_blob_sha": "dd87840f39500207d4e1ac72dcdbd25913abce0d",
+      "status": "UNVERIFIED_CANDIDATE_NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+    }
+  },
+  "planned_bindings": [
+    "EXACT_BRAIN_CONTROLLER_DEDICATED_PLANNER_AND_TRANSITIVE_HARBOR_EXECUTION_DEPENDENCY_BLOBS",
+    "EXACT_ROUTE_CANDIDATE_SOURCE_GATE_AND_HARBOR_VERSION",
+    "EXACT_ROUTE_TEST_BLOBS",
+    "EXACT_UPSTREAM_DATASET_SOURCE_COMMIT_DATASET_MANIFEST_BLOB_AND_CONTENT_HASH",
+    "EXACT_SCORER_SEMANTICS_AND_SCORER_COMPONENT_BLOB_IDENTITIES",
+    "EXACT_210_SLOT_MANIFEST_BLOB_MATCHING_ITS_INDEPENDENT_RECEIPT",
+    "ZERO_RETRY_ZERO_REPLACEMENT_FIXED_DENOMINATOR_AND_CONSERVATIVE_CENSORING_RULES",
+    "STANDARD_RUNNER_RESOURCE_CUT_AND_ITS_CONSERVATIVE_ZERO_TREATMENT",
+    "EXACT_CURRENT_GLOBAL_AUTHORITY_GUARD_WITH_NO_CASE_ACTIONS"
+  ],
+  "independent_verification_screen": {
+    "status": "NO_ADMISSIBLE_CAPSULE_VERIFICATION_FOUND",
+    "excluded_run": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1227,
+      "workflow_run_id": 37101489446,
+      "workflow_job_id": 111141738841,
+      "conclusion": "success",
+      "candidate_manifest_git_blob_sha_expected_by_that_workflow": "6dfa880b1f68881531afbba6ca211681801fd19b",
+      "current_capsule_manifest_git_blob_sha": "e0318f4fcde040498077dcdd872e398e32240791",
+      "exclusion_reasons": [
+        "THE_WORKFLOW_BINDS_A_DIFFERENT_MANIFEST_BLOB_THAN_THIS_CAPSULE",
+        "THE_WORKFLOW_RUNS_HARBOR_DRY_RUNS_FOR_TASK_IDENTIFIERS_AND_IS_NOT_METADATA_ONLY"
+      ],
+      "authority_or_credit": false
+    },
+    "clean_runner_preflight": {
+      "workflow_path": ".github/workflows/verify-tb-science-capsule-metadata-only-v1.yml",
+      "scope": "SAME_REPOSITORY_CLEAN_RUNNER_STATIC_BLOB_AND_METADATA_TESTS_ONLY__NO_TASK_DOWNLOAD_DRY_RUN_MODEL_REQUEST_OR_AUTHORITY",
+      "status": "CONFIGURED__RESULT_NON_AUTHORIZING_AND_NOT_YET_ADJUDICATED"
+    },
+    "next": "RUN_THE_NON_AUTHORIZING_METADATA_ONLY_CLEAN_RUNNER_PREFLIGHT__THEN_SEEK_SEPARATE_INDEPENDENT_CAPSULE_VERIFICATION"
+  },
+  "hard_limits": [
+    "NO_TERMINAL_BENCH_SCIENCE_TASK_INSTRUCTION_OR_SOLUTION_READ",
+    "NO_TERMINAL_CASE_OR_TASK_EXECUTION",
+    "NO_MODEL_REQUEST_OR_PROVIDER_SPEND",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_OR_CAPABILITY_CREDIT",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "DO_NOT_EMBED_TASK_NAMES_SLOT_IDS_OR_TASK_CONTENT_IN_THE_CAPSULE",
+    "THE_GLOBAL_ZERO_REALITY_BARRIER_AND_CURRENT_ROUTE_ACTIVATION_REMAIN_BINDING"
+  ],
+  "expected_outputs": [
+    "CANONICAL_MANIFEST_BLOB_MATCHES_THE_EXISTING_INDEPENDENT_EXACT_BLOB_RECEIPT",
+    "CONTENT_ADDRESSED_SCIENCE_CAPSULE_CANDIDATE_WITH_ALL_ROUTE_AND_SCORER_IDENTITIES",
+    "LOCAL_SYNTHETIC_TESTS_FAIL_CLOSED_ON_ANY_BLOB_OR_AUTHORITY_MISMATCH"
+  ],
+  "completion_rule": "CANDIDATE_CAPSULE_IS_NOT_EXECUTABLE_AUTHORITY__INDEPENDENT_CAPSULE_VERIFICATION_AND_CURRENT_TOP_LEVEL_MINIMUM_REALITY_AUTHORITY_ARE_REQUIRED_BEFORE_ANY_TERMINAL_CASE_EXPOSURE",
+  "terminal_task_content_read": 0,
+  "terminal_trials_executed": 0,
+  "terminal_results_observed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

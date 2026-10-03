@@ -1,0 +1,100 @@
+name: Verify TB-Science capsule metadata only V1
+on:
+  push:
+    branches: ["arena/01a0ff38-brain"]
+    paths:
+      - "canonical/governance/TB_SCIENCE_EXECUTION_CAPSULE_CANDIDATE_V1.json"
+      - "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json"
+      - "canonical/governance/TB_SCIENCE_MANIFEST_EXACT_BLOB_BINDING_V1.json"
+      - "canonical/governance/ACTION_INTENTS/BIND_TB_SCIENCE_EXECUTION_CAPSULE_ZERO_CASE_V1.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+      - "canonical/governance/TB_SCIENCE_DEDICATED_PLANNER_V2_CANDIDATE.json"
+      - "canonical/governance/TB_SCIENCE_PROMOTION_PREFLIGHT_RECONCILIATION_20261003_V1.json"
+      - "canonical/governance/TB_SCIENCE_CONSERVATIVE_CENSORING_LOWER_BOUND_V1.json"
+      - "canonical/runtime/harbor_science_agent_v1.py"
+      - "canonical/runtime/harbor_science_planner_v1.py"
+      - "canonical/runtime/harbor_command_policy.py"
+      - "canonical/runtime/harbor_environment_transport.py"
+      - "canonical/runtime/acceptance_capability_source_gate_v2.py"
+      - "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py"
+      - "canonical/tests/test_harbor_science_agent_v1.py"
+      - "canonical/tests/test_harbor_science_planner_v1.py"
+      - "canonical/tests/test_tb_science_general_substrate_materiality_v1.py"
+      - "canonical/tests/test_tb_science_execution_capsule_v1.py"
+      - "canonical/verification/TB_SCIENCE_210_SLOT_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - "canonical/verification/TB_SCIENCE_DEDICATED_PLANNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - "canonical/verification/TB_SCIENCE_CONSERVATIVE_CENSORING_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - ".github/workflows/verify-tb-science-capsule-metadata-only-v1.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/TB_SCIENCE_EXECUTION_CAPSULE_CANDIDATE_V1.json"
+      - "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json"
+      - "canonical/governance/TB_SCIENCE_MANIFEST_EXACT_BLOB_BINDING_V1.json"
+      - "canonical/governance/ACTION_INTENTS/BIND_TB_SCIENCE_EXECUTION_CAPSULE_ZERO_CASE_V1.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+      - "canonical/governance/TB_SCIENCE_DEDICATED_PLANNER_V2_CANDIDATE.json"
+      - "canonical/governance/TB_SCIENCE_PROMOTION_PREFLIGHT_RECONCILIATION_20261003_V1.json"
+      - "canonical/governance/TB_SCIENCE_CONSERVATIVE_CENSORING_LOWER_BOUND_V1.json"
+      - "canonical/runtime/harbor_science_agent_v1.py"
+      - "canonical/runtime/harbor_science_planner_v1.py"
+      - "canonical/runtime/harbor_command_policy.py"
+      - "canonical/runtime/harbor_environment_transport.py"
+      - "canonical/runtime/acceptance_capability_source_gate_v2.py"
+      - "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py"
+      - "canonical/tests/test_harbor_science_agent_v1.py"
+      - "canonical/tests/test_harbor_science_planner_v1.py"
+      - "canonical/tests/test_tb_science_general_substrate_materiality_v1.py"
+      - "canonical/tests/test_tb_science_execution_capsule_v1.py"
+      - "canonical/verification/TB_SCIENCE_210_SLOT_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - "canonical/verification/TB_SCIENCE_DEDICATED_PLANNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - "canonical/verification/TB_SCIENCE_CONSERVATIVE_CENSORING_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - ".github/workflows/verify-tb-science-capsule-metadata-only-v1.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    name: Exact-blob and metadata-only checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Bind exact capsule and zero-case inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob() {
+            local path="$1"
+            local expected="$2"
+            local actual
+            actual="$(git hash-object "$path")"
+            if [[ "$actual" != "$expected" ]]; then
+              echo "::error::EXACT_BLOB_MISMATCH:$path"
+              exit 1
+            fi
+          }
+          check_blob canonical/governance/TB_SCIENCE_EXECUTION_CAPSULE_CANDIDATE_V1.json dd87840f39500207d4e1ac72dcdbd25913abce0d
+          check_blob canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json e0318f4fcde040498077dcdd872e398e32240791
+          check_blob canonical/governance/TB_SCIENCE_MANIFEST_EXACT_BLOB_BINDING_V1.json bd1c63c088f5f08f367251c04691223478c340e7
+          check_blob canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json a8f3bb99aeecd3b8fa43d48ec11ea7ddb9ceb6e4
+          check_blob canonical/governance/TB_SCIENCE_DEDICATED_PLANNER_V2_CANDIDATE.json 3ce89bcbfd1f261c8c44b588102e2507f30be372
+          check_blob canonical/governance/TB_SCIENCE_PROMOTION_PREFLIGHT_RECONCILIATION_20261003_V1.json d1b9a4c3893bef2cc8fd83cd93737e7659afdca5
+          check_blob canonical/governance/TB_SCIENCE_CONSERVATIVE_CENSORING_LOWER_BOUND_V1.json eb5142c2b55f649912f9b60ee42daa9faf0b60e4
+          check_blob canonical/runtime/harbor_science_agent_v1.py 8ab8287fdb6a9b63b9fe2d2addde731486c89d1e
+          check_blob canonical/runtime/harbor_science_planner_v1.py 17472fd2b01b164fbb180aecfc04385b55b11499
+          check_blob canonical/runtime/harbor_command_policy.py a525773417291c7a4841bf35e1baff5370350d0d
+          check_blob canonical/runtime/harbor_environment_transport.py ec46f648214a37bb16025d5ef2593efdf59f0d79
+          check_blob canonical/runtime/acceptance_capability_source_gate_v2.py b168b131f6383e158bdc0d931439d14e61f2a5de
+          check_blob canonical/runtime/tb_science_conservative_censoring_reducer_v1.py 3b48ea534d606cf47a8321b56427353066393577
+          check_blob canonical/verification/TB_SCIENCE_210_SLOT_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json e9bca17092cecbb7d2611d5c081bae8336c2083f
+          check_blob canonical/verification/TB_SCIENCE_DEDICATED_PLANNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json 50f319b6af8fd75f84f24035a45ad02db55e6518
+          check_blob canonical/verification/TB_SCIENCE_CONSERVATIVE_CENSORING_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json 625cd4fc6e2a503f9ed0514f5b5113fc3250bb88
+          check_blob canonical/tests/test_tb_science_execution_capsule_v1.py bc51bfa542ceaab531be22ab05fcd8cea687708f
+      - name: Run metadata-only capsule contract tests
+        run: PYTHONDONTWRITEBYTECODE=1 python -m unittest canonical.tests.test_tb_science_execution_capsule_v1
+      - name: Report non-authorizing scope
+        run: |
+          echo '{"schema":"PROJECT_BRAIN_TB_SCIENCE_CAPSULE_METADATA_PREFLIGHT_V1","status":"CLEAN_RUNNER_METADATA_ONLY_PREFLIGHT_PASS","dataset_or_task_payload_downloads":0,"terminal_trials_executed":0,"model_requests":0,"execution_authority":false,"promotion_authority":false}'

@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_MANIFEST_EXACT_BLOB_BINDING_V1",
+  "date": "2026-10-03",
+  "status": "SESSION_BRANCH_EXACT_BLOB_RESTORED__INDEPENDENT_RECEIPT_BINDS_BYTES__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "manifest_path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+  "exact_verified_manifest_git_blob_sha": "e0318f4fcde040498077dcdd872e398e32240791",
+  "manifest_source_commit": "167382d8d2a7b8f9d28efffc068b16efcfa956aa",
+  "prior_main_blob_rejected_for_exact_binding": "6dfa880b1f68881531afbba6ca211681801fd19b",
+  "prior_main_blob_difference": [
+    "status field changed after verification",
+    "independent_verification receipt pointer appended after verification"
+  ],
+  "independent_verification": {
+    "receipt_path": "canonical/verification/TB_SCIENCE_210_SLOT_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "receipt_git_blob_sha": "e9bca17092cecbb7d2611d5c081bae8336c2083f",
+    "source_brain_pr": 1224,
+    "verifier_pr": 1226,
+    "workflow_run_id": 37101057700,
+    "workflow_job_id": 111140509307,
+    "conclusion": "success",
+    "exact_manifest_git_blob_sha": "e0318f4fcde040498077dcdd872e398e32240791",
+    "scope": "EXACT_70_TASK_METADATA_210_UNIQUE_SLOTS_THREE_ATTEMPTS_NO_RETRY_NO_REPLACEMENT_FIXED_DENOMINATOR_AND_CONSERVATIVE_LOCKS__NO_TASK_INSTRUCTIONS_OR_SOLUTIONS"
+  },
+  "reconciliation": {
+    "method": "RESTORE_EXACT_BYTES_FROM_THE_VERIFIED_BRAIN_COMMIT__KEEP_VERIFICATION_STATE_IN_THIS_SEPARATE_BINDING_ARTIFACT",
+    "current_branch_only": "arena/01a0ff38-brain",
+    "manifest_content_changed": false,
+    "task_metadata_changed": false,
+    "task_instruction_or_solution_read": false,
+    "terminal_case_executed": false
+  },
+  "nonclaims": [
+    "NO_TERMINAL_TASK_OR_TRIAL_EXECUTION",
+    "NO_SCORE",
+    "NO_ACCEPTANCE_FAMILY_OR_CAPABILITY_CREDIT",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "THIS_DOES_NOT_REVERIFY_THE_EXECUTION_CAPSULE_CANDIDATE"
+  ],
+  "terminal_results_observed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
