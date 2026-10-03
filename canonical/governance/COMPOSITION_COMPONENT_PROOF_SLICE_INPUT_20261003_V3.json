@@ -1,0 +1,127 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V3",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CURRENT_ADMISSIBLE_RECEIPTS_ONLY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_base_commit": "1afab11f371b9bea130ad2c931fd35ee106c9f86",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "interfaces": [
+    {
+      "component_id": "research",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "tool use",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "artifact creation",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "browser/computer action",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "memory",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "recovery",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "coding",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "debugging",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "tool discovery",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "delegation",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "evidence synthesis",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "artifact production",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    }
+  ],
+  "receipts": [
+    {
+      "receipt_id": "COMPOSITION_OWNED_FAMILY_BRIDGE::LONG_HORIZON_MEMORY_AND_CONTINUITY::memory",
+      "component_id": "memory",
+      "interface_id": "browser/computer action+memory+recovery",
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "verified": true,
+      "independent": true,
+      "contamination_clean": true,
+      "acceptance_scoped": true,
+      "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+      "source_family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "source_verification": "canonical/verification/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+    }
+  ],
+  "excluded_historical_receipts": [
+    "COMPOSITION_BRIDGE::TOOL_ROUTE_DISCOVERY_AND_SELECTION_001::tool_discovery",
+    "COMPOSITION_BRIDGE::TASK_TO_DELEGATION_GRAPH_001::delegation"
+  ],
+  "exclusion_reason": "HISTORICAL_V2_RECEIPTS_QUARANTINED_BY_CURRENT_SOURCE_FAMILY_SCOPE_FIREWALL__MUST_NOT_INHERIT_OLD_2_OF_12_CREDIT",
+  "expected_scoped_proved_components": [
+    "memory"
+  ],
+  "expected_scoped_proved_count": 1,
+  "expected_open_count": 11,
+  "parent_composition_acceptance": false,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
