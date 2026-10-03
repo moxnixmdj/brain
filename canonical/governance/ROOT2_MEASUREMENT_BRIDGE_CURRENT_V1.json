@@ -1,29 +1,30 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_MEASUREMENT_BRIDGE_CURRENT_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_ZERO_CREDIT__OWNER_FANOUT_STARTED__ENTRYPOINT_BOUND_FAIL_CLOSED",
+  "status": "ACTIVE_ZERO_CREDIT__FIRST_INDEPENDENT_INFERENCE_ADAPTER_VERIFIED__LIVEBENCH_IF_ONLY__BROADER_SEAM_OPEN",
   "merge_commit": "f545378d05c9d785995ea52a86129886fd783e9d",
   "exact_blobs": {
     "capsule": "b3c71b238c7358c607ebd2a01cb8601055d33c21",
     "owner_fanout": "97e013061abd5b2ad3229aa856835369931404e0",
-    "adapter_registry": "afa021a25d2de53e293d10ab6759e55eaabaea21",
+    "adapter_registry": "542a831ece4c81728f69d01906d97c28fa1520e7",
     "external_task_entrypoint": "603beefe0db24102b86b7c965e5433bd880392af",
-    "generic_inference_seam_boundary": "831ac05e5d57c346a9cd77fc145c73f01d825e28",
+    "generic_inference_seam_boundary": "2012142d344a8f8c4ef8716a3983380d89445bbd",
     "livebench_if_astra_inference_adapter": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
-    "livebench_if_astra_cleanroom_verification": "05fe911b180e0edae890519670216c589b38e354"
+    "livebench_if_astra_cleanroom_verification": "05fe911b180e0edae890519670216c589b38e354",
+    "livebench_if_astra_public_runner_verification": "8d144888e0d0fcbe6617dbc18dfb3cbb72a1e6b1"
   },
   "state": {
     "owner_channels_started": 5,
     "root2_fixed_bar_predicates_targeted": 9,
     "generic_entrypoint_bound": true,
-    "inference_capable_adapter_count": 0,
-    "generic_inference_seam_boundary": "PARTIALLY_CLOSED_BY_LIVEBENCH_IF_CANDIDATE__BROADER_SEAM_OPEN",
-    "inference_capable_adapter_candidate_count": 1,
-    "independently_verified_inference_adapter_count": 0,
+    "inference_capable_adapter_count": 1,
+    "generic_inference_seam_boundary": "LIVEBENCH_IF_SPECIFIC_SEAM_INDEPENDENT_PASS__BROADER_GENERAL_REUSE_OPEN",
+    "inference_capable_adapter_candidate_count": 0,
+    "independently_verified_inference_adapter_count": 1,
     "cleanroom_verified_inference_adapter_count": 1,
-    "livebench_if_inference_adapter": "CLEAN_ROOM_EXACT_BLOBS_PASS__PUBLIC_RUNNER_ATTESTATION_PENDING"
+    "livebench_if_inference_adapter": "INDEPENDENT_PUBLIC_RUNNER_PASS__MODEL_INDEPENDENT_PROVENANCE_BOUNDARY__ZERO_CASE"
   },
-  "next": "OBTAIN_PUBLIC_RUNNER_ATTESTATION_FOR_LIVEBENCH_IF_ASTRA_ADAPTER__BIND_OWNER_REPLIES__THEN_RECOMPUTE_ROOT2_FIXED_POINT",
+  "next": "RECOMPUTE_PREDICATE_LOCAL_ZERO_REALITY_FIXED_POINT_ON_CURRENT_ROOT2_ROOT3_STATE__DO_NOT_EXECUTE_CASES_BEFORE_EXPLICIT_FRESH_REALITY_ACTIVATION",
   "incremental_spend_usd": 0,
   "terminal_cases_consumed": 0,
   "acceptance_credit_delta": 0,
