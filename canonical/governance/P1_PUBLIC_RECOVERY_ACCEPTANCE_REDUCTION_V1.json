@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_ACCEPTANCE_REDUCTION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_DEDUCTIVE_REDUCTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_HANDWRITTEN_PROMOTION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND OWN ALL USEFUL OPUS 5.5 CAPABILITIES AT EQUAL OR BETTER LEVEL",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "authorities": {
+    "minimum_reality_cut": {
+      "path": "canonical/governance/P1_MINIMUM_REALITY_CUT_INPUT_V1.json",
+      "git_blob_sha": "cbcb2faff8404623846e77e19fcc5b0ad00e81d9"
+    },
+    "freeze": {
+      "path": "canonical/governance/P1_SHARED_FAILURE_SEMANTICS_BATCH_FREEZE_V1.json",
+      "git_blob_sha": "6a4b606a759d5479bb5ddbdf29426b1a1808b007"
+    },
+    "independent_result": {
+      "path": "canonical/verification/P1_PUBLIC_RECOVERY_RESULT_INDEPENDENT_ADJUDICATION_20261003_V1.json"
+    }
+  },
+  "exact_requirements": [
+    "P1_FAILURE_SEMANTICS_TRANSPORT_FRONTIERCODE",
+    "P1_FAILURE_SEMANTICS_TRANSPORT_CURSORBENCH",
+    "P1_FAILURE_SEMANTICS_TRANSPORT_RECOVERY_SCOPE_COMPOSITION"
+  ],
+  "discharge": {
+    "observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+    "covers_all_three": true,
+    "independently_adjudicated": true,
+    "cases": 192,
+    "passes": 192,
+    "failures": 0,
+    "all_three_surfaces_present": true,
+    "both_failure_semantics_classes_present_every_case": true,
+    "terminal_v3_replayed": 0,
+    "fresh_reality_units_consumed": 1,
+    "incremental_spend_usd": 0
+  },
+  "derived": {
+    "all_minimum_cut_requirements_discharged": true,
+    "remaining_p1_failure_semantics_information_residual": 0,
+    "p1_scope_quarantine_lift_eligible": true
+  },
+  "hard_rules": [
+    "THIS_FILE_DOES_NOT_SELF_PROMOTE_P1",
+    "INDEPENDENT_VERIFIER_MUST_RECOMPUTE_THE_REDUCTION_FROM_EXACT_MINIMUM_CUT_FREEZE_AND_RESULT_RECEIPT",
+    "NO_CREDIT_IF_ANY_OF_THE_THREE_REQUIREMENTS_IS_NOT_COVERED",
+    "NO_CREDIT_IF_RESULT_IS_NOT_192_OF_192_OR_BOTH_SEMANTICS_CLASSES_ARE_NOT_PRESENT_EVERY_CASE",
+    "NO_TERMINAL_V3_REPLAY"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "next": "INDEPENDENTLY_VERIFY_REDUCTION__IF_PASS_RECONCILE_P1_QUARANTINE_AND_PROPAGATE_SCOPE_RESTORATION_THROUGH_CURRENT_ACCEPTANCE_GRAPH"
+}
