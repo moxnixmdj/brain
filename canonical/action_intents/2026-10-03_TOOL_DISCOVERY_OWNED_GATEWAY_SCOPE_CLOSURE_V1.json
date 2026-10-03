@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "TOOL-DISCOVERY-LIVE-BOUND-AUTHORITY-V3-20261003",
+  "status": "CANDIDATE__CAUSALLY_BOUND_ZERO_REALITY_SCOPE_PROOF__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "blocker_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "primitive_fact_id": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "current_minimum_missing_fact": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+  "selected_route": "BIND_TOOL_DISCOVERY_DIRECTLY_TO_THE_EXACT_OPERATIVE_BOUND_CAPABILITY_REGISTRY_AND_ASTRA_INVOKE_CAPABILITY_CHOKEPOINT__DISCOVER_COMPLETE_AUTHORITY_BEFORE_DYNAMIC_V3_SELECTION",
+  "supersedes_local_routes": [
+    "SYNTHETIC_TOOL_UNIVERSE_GATEWAY_V1",
+    "SYNTHETIC_OWNED_COMPLETE_INTERFACE_V2"
+  ],
+  "falsification_preserved": "canonical/tests/test_tool_discovery_v3_cheaper_unseen_counterexample_v1.py",
+  "candidate_runtime": "canonical/runtime/tool_discovery_live_bound_authority_v3.py",
+  "candidate_tests": "canonical/tests/test_tool_discovery_live_bound_authority_v3.py",
+  "candidate_governance": "canonical/governance/TOOL_DISCOVERY_LIVE_BOUND_AUTHORITY_INSTANCE_V3.json",
+  "expected_terminal_delta": "IF_AND_ONLY_IF_INDEPENDENT_EXACT_BYTE_PUBLIC_VERIFICATION_PASSES__SATISFY_CURRENT_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_FACT_FOR_THE_FROZEN_LIVE_BOUND_CAPABILITY_AUTHORITY__NO_ACCEPTANCE_CREDIT_UNTIL_SEPARATE_REDUCTION",
+  "reality_query_admission": "NO_NEW_REALITY_REQUIRED_FOR_THIS_STRUCTURAL_AUTHORITY_BINDING",
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
