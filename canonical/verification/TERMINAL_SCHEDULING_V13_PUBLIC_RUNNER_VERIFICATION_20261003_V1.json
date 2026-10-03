@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V13_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V13_POST_DUAL_17_REQUIREMENTS__31_ZERO_REALITY_WORK_UNITS__STRICT_RETRIEVAL_V5_BOUND__ZERO_CREDIT",
+  "verified_candidate": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_V13_ACTIVE_AUTHORITY_CANDIDATE_V1.json",
+    "git_blob_sha": "2b597ea1840196623a2d7e31f9c613cd993ec6ba",
+    "brain_pull_request": 1349,
+    "verified_head_sha": "97da05e07e7f3fe4705635801ebdffd9250bbee8"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1346,
+    "head_sha": "e6157b5334cb39a46f53c5440bdcbf9e65bca1b5",
+    "workflow_run_id": 37124958158,
+    "workflow_job_id": 111208269666,
+    "workflow_name": "Verify terminal scheduling V13",
+    "conclusion": "success"
+  },
+  "verified": {
+    "active_zero_reality_requirements": 17,
+    "active_nondominated_certificates": 14,
+    "zero_reality_covered_predicates": 25,
+    "primitive_zero_reality_work_units": 31,
+    "matched_priority_child_facts": 16,
+    "direct_reality_blocked_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "tool_discovery_retrieval_authority": "V5_OVER_VERIFIED_V4_OVER_VERIFIED_V3_OVER_VERIFIED_V2_BASE",
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "strict_success_only_source_cell_consumption": true,
+    "failed_cells_retryable_and_unconsumed": true,
+    "partial_batch_epoch_consumption": false,
+    "fresh_reality_authority": false
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "hard_nonclaims": [
+    "SCHEDULING_VERIFICATION_DOES_NOT_CLOSE_ACCEPTANCE",
+    "SCHEDULING_VERIFICATION_DOES_NOT_GRANT_OWNERSHIP",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_OPEN_WORLD_RETRIEVAL_COMPLETENESS_OR_NONEXISTENCE_CLAIM"
+  ]
+}
