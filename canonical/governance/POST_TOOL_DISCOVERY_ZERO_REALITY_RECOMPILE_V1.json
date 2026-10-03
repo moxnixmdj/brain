@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_POST_TOOL_DISCOVERY_ZERO_REALITY_RECOMPILE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_5_OF_19_12_OF_38__EXACT_ZERO_REALITY_RECOMPILE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Recompute the exact current zero-reality acceptance action frontier after independently verified Tool Discovery promotion, remove the now-proved Tool Discovery target from live scheduling, and forbid stale V13 execution.",
+  "exact_inputs": {
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "e5888b0f03ddd3a7fbfdfd74d11b4680abc9f0dd",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json": "38b53147597b5457859e3b0d031168842560e3e2",
+    "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "2fe5d35d62f264de0661860afb8f2192fc87801b"
+  },
+  "expected_projection": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "atomic_predicates": 38,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "available_zero_reality_actions": 17,
+    "exact_selected_action_count": 15,
+    "covered_unresolved_predicates": 26,
+    "uncovered_unresolved_predicates": 0,
+    "selected_new_reality_units": 0
+  },
+  "exact_selected_actions": [
+    "BIND_CHARTOGRAPHY_PUBLIC_BAR_ROUTE",
+    "BIND_FINANCE_ACCOUNTING_INDEX_PUBLIC_ROUTE",
+    "BIND_GDPVAL_PUBLIC_ROUTE",
+    "BIND_OSWORLD_COMPARABLE_PUBLIC_ROUTE",
+    "BIND_SHARED_PUBLIC_BENCHMARK_EXECUTION_ABI",
+    "BUILD_AA_BRIEFCASE_DELETED_PRIVATE_BAR_STRONGER_PROOFS",
+    "BUILD_CODING_DELETED_PRIVATE_BAR_STRONGER_PROOFS",
+    "BUILD_FINANCE_AGENT_V2_DELETED_PRIVATE_BAR_STRONGER_PROOF",
+    "BUILD_MYSTERYMECHANISM_DELETED_PRIVATE_BAR_STRONGER_PROOF",
+    "INTERNALIZE_FINANCE_JUDGMENT_ROUTE",
+    "INTERNALIZE_UNKNOWN_DOMAIN_JUDGMENT_ROUTE",
+    "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
+    "RESOLVE_HLE_PUBLIC_BAR_ROUTE_OR_SCOPE_COMPLETE_REPLACEMENT",
+    "RUN_COMPOSITION_COMPONENT_PROOF_SLICER",
+    "SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"
+  ],
+  "hard_rules": [
+    "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR_IS_ALREADY_PROVED_AND_MUST_NOT_BE_RESCHEDULED",
+    "DO_NOT_EXECUTE_STALE_V13_SCHEDULER",
+    "NO_FRESH_REALITY_WHILE_CURRENT_ZERO_REALITY_ACTIONS_CAN_ADVANCE_THE_FRONTIER",
+    "RECOMPUTE_AFTER_EACH_INDEPENDENTLY_VERIFIED_DELTA",
+    "THIS_RECOMPILE_GRANTS_ZERO_ACCEPTANCE_FAMILY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "runtime": "canonical/runtime/post_tool_discovery_zero_reality_recompile_v1.py",
+  "tests": "canonical/tests/test_post_tool_discovery_zero_reality_recompile_v1.py",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_BYTES__THEN_PROMOTE_AS_CURRENT_ZERO_REALITY_FRONTIER_AND_EXECUTE_THE_HIGHEST_INFORMATION_NONDOMINATED_ZERO_REALITY_RESIDUAL",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
