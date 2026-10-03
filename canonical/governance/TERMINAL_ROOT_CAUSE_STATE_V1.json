@@ -30,6 +30,14 @@
       "reconciliation": {
         "path": "canonical/governance/POST_SOURCE_GATE_ROOT1_RECLASSIFICATION_V1.json",
         "rule": "SOURCE_ADMISSION_REMOVES_THE_ONLY_CURRENT_POSITIVE_OPERATIVE_SOURCE_MISSING_PREMISES__DIRECT_ORACLE_LEAVES_REMAIN_OPEN_AS_SCOPE_EVIDENCE"
+      },
+      "active_acquisition_control": {
+        "path": "canonical/governance/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2_ACTIVATION_V1.json",
+        "git_blob_sha": "be600d377860ca83766bf9477bbba3ced75839a9",
+        "status": "ACTIVE_PENDING_INDEPENDENT_ACTIVATION_PROJECTION_VERIFICATION__ZERO_CREDIT",
+        "operative_runtime": "canonical/runtime/root1_acquisition_closure_controller_v2.py",
+        "independent_core_verification": "canonical/verification/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "current_envelope_sealed": false
       }
     },
     "root_2_measurement_or_comparator": {
