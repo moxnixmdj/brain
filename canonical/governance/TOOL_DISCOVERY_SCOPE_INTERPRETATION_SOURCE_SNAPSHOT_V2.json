@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_SCOPE_INTERPRETATION_SOURCE_SNAPSHOT_V2",
+  "date": "2026-10-03",
+  "sources": {
+    "historical_protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "ref": "6b2e936a885f8c34750244f577474d2e724ce15d",
+      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "proof_mode": "MATCHED_HIDDEN_TOOL_ECOSYSTEM_TRANSFER",
+      "acceptance": "On frozen tool ecosystems with hidden capability variants, Brain conservative terminal-success/valid-route bounds >= Opus matched bounds, with demonstrated second-task transfer from first-task evidence and no unsupported capability-state promotion."
+    },
+    "prewave_binding": {
+      "path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "terminal_sample_count": 180,
+      "class_cycle_count": 6,
+      "complete_cycles": 30,
+      "population_or_source_pool_frozen": true,
+      "every_selected_case_must_pass": true,
+      "terminal_scope_claim": "DIRECT_OBJECTIVE_INSTRUMENTATION_INSIDE_T2_T3__NOT_EXHAUSTIVE_PROOF_OF_ALL_OPEN_DOMAIN_TOOL_ECOSYSTEMS"
+    },
+    "quarantine": {
+      "path": "canonical/governance/TOOL_DISCOVERY_FROZEN_SCOPE_TYPE_MISMATCH_QUARANTINE_V1.json",
+      "git_blob_sha": "407a2669ab51104345017403ffab24331994777d",
+      "rationale": "The bound 180-case source explicitly disclaims exhaustive proof of all open-domain tool ecosystems."
+    }
+  },
+  "provenance_limit": "EXTRACTED_FROM_CONTENT_ADDRESSED_BRAIN_OBJECTS_BY_CONNECTED_GITHUB_READER__INDEPENDENT_VERIFIER_CONFIRMS_EXCERPT_LOGIC_AND_EXACT_SNAPSHOT_BYTES_BUT_NOT_REMOTE_GIT_HISTORY_FETCH",
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0
+}
