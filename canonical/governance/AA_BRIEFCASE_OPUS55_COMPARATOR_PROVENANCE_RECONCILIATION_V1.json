@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OPUS55_COMPARATOR_PROVENANCE_RECONCILIATION_V1",
+  "date": "2026-10-03",
+  "status": "SOURCE_PROVENANCE_RECONCILED__FROZEN_1822_VENDOR_OBSERVATION_PRESERVED__LIVE_1808_NOT_SUBSTITUTED__ZERO_CREDIT",
+  "target_predicates": ["PROWORK_AA_BRIEFCASE_GE_1822","ARTIFACT_AA_BRIEFCASE_GE_1822"],
+  "frozen_comparator": {
+    "model": "Claude Opus 5.5",
+    "effort": "Max",
+    "benchmark": "AA-Briefcase v1.1",
+    "score": 1822,
+    "unit": "Elo",
+    "observation_date": "2026-09-22",
+    "primary_vendor_context": "https://www.anthropic.com/claude-opus-5-5-system-card",
+    "corroborating_primary_table": "https://www.anthropic.com/claude-sonnet-5-5",
+    "role": "FROZEN_TERMINAL_COMPARATOR"
+  },
+  "current_live_benchmark_owner_observation": {
+    "model": "Claude Opus 5.5 (Max, Default Fallback)",
+    "benchmark": "AA-Briefcase v1.1",
+    "score": 1808,
+    "unit": "Elo",
+    "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+    "role": "CURRENT_LIVE_REFERENCE_ONLY__NOT_AUTOMATIC_REPLACEMENT_FOR_FROZEN_COMPARATOR"
+  },
+  "deduction": "1822_AND_1808_ARE_DISTINCT_PUBLISHED_OBSERVATIONS__THE_EXISTENCE_OF_A_NEWER_LIVE_ROW_DOES_NOT_LOGICALLY_INVALIDATE_OR_REWRITE_THE_FROZEN_VENDOR_REPORTED_TERMINAL_COMPARATOR",
+  "hard_rules": [
+    "DO_NOT_WEAKEN_1822_TO_1808_WITHOUT_AN_EXPLICIT_TERMINAL_COMPARATOR_REBASING_PROTOCOL",
+    "DO_NOT_MIX_VENDOR_REPORTED_AND_LIVE_BENCHMARK_OWNER_OBSERVATIONS_AS_IF_THEY_WERE_ONE_RUN",
+    "DO_NOT_INFER_TASK_OR_HARNESS_EQUIVALENCE_FROM_MATCHING_BENCHMARK_NAME_ALONE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "next": "PRESERVE_1822_FOR_CURRENT_FROZEN_PREDICATES__BIND_A_COMPARABLE_EXECUTION_OR_STRONGER_ADMISSIBLE_PROOF_ROUTE__TREAT_LIVE_1808_ONLY_AS_DIAGNOSTIC_CONTEXT",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
