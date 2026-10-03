@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_TOOLATHLON_ZERO_INCREMENTAL_SPEND_CARRIER_CUT_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__ZERO_REALITY_CARRIER_REDUCTION__PUBLIC_PRIVATE_MODE_ROUTE_BOUND__POINT_OF_USE_PREFLIGHT_AND_TERMINAL_EXECUTION_STILL_REQUIRED__ZERO_CREDIT",
+  "objective": "Reduce TOOLATHLON_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER to the minimum truthful point-of-use obligation without self-hosting Toolathlon applications, consuming terminal task evidence, using a paid model/API, or granting acceptance credit.",
+  "canonical_base_commit": "8b041a7b0fe1577020814f659efe03b64fe804ce",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_fact": "TOOLATHLON_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER",
+  "already_verified_inputs": {
+    "zero_cost_public_runner": {
+      "path": "canonical/governance/PUBLIC_STANDARD_RUNNER_ZERO_COST_CARRIER_V1.json",
+      "git_blob_sha": "79f61579c8520b55877f5f99fd6a24a30e064c2e",
+      "established": [
+        "STANDARD_GITHUB_HOSTED_RUNNERS_FOR_PUBLIC_REPOSITORY_HAVE_ZERO_INCREMENTAL_SPEND",
+        "UBUNTU_STANDARD_RUNNER_BASE_CAPACITY_IS_ADMISSIBLE_ONLY_WHEN_SURFACE_RESOURCE_FIT_IS_SEPARATELY_PROVED",
+        "PAID_OR_LARGER_RUNNERS_FORBIDDEN"
+      ]
+    },
+    "pinned_local_substrate_fit_receipt": {
+      "path": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
+      "git_blob_sha": "405f7059c1ae4387cea61ff23b7adb227dac4351",
+      "established": [
+        "PUBLIC_GITHUB_ACTIONS_ZERO_INCREMENTAL_SPEND_EXECUTION_OCCURRED",
+        "LLAMA_CPP_BUILD_AND_PIN_SUCCEEDED",
+        "QWEN3_5_9B_Q4_K_M_MODEL_DOWNLOAD_BYTES_AND_SHA256_VERIFIED",
+        "MODEL_SERVER_HEALTH_PASSED",
+        "LOCAL_EXTERNAL_PLANNER_BRIDGE_PASSED"
+      ],
+      "exact_model": {
+        "repository": "TheStageAI/Qwen3.5-9B-GGUF",
+        "file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+        "bytes": 5060174144,
+        "sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c"
+      },
+      "hard_boundary": "THIS_RECEIPT_PROVES_TRANSPORT_AND_RESOURCE_FIT_FOR_THE_PINNED_LOCAL_SUBSTRATE_ONLY__ITS_REAL_TASK_TERMINAL_RESULT_FAILED_AND GRANTS_NO_CAPABILITY_CREDIT"
+    }
+  },
+  "frozen_toolathlon_private_mode_transport": {
+    "repository": "hkust-nlp/Toolathlon",
+    "frozen_commit": "9be8d8fe07a497b18ee61e3f2ae694e9797f39eb",
+    "exact_blobs": {
+      "EVAL_SERVICE_README.md": "28633f85a9fb862bfe4e9a0d419b7f046d68a6d7",
+      "eval_client.py": "1c0b7d9611e12c419b94f39dd43f14da5e6c95fe",
+      "simple_client_ws.py": "a959b48c114d1bdfe30272b831f1426bc17a7aeb"
+    },
+    "source_level_facts": [
+      "OFFICIAL_PUBLIC_EVALUATION_SERVICE_HOSTS_REQUIRED_TOOLATHLON_MCP_ACCOUNTS_AND_TASK_ENVIRONMENT",
+      "PRIVATE_MODE_SUPPORTS_A_LOCAL_NON_PUBLIC_OPENAI_CHAT_COMPLETIONS_ENDPOINT",
+      "PRIVATE_MODE_KEEPS_LOCAL_MODEL_URL_AND_API_KEY_ON_CLIENT_AND_PROXIES_INFERENCE_REQUESTS_RESPONSES_OVER_WEBSOCKET",
+      "PRIVATE_MODE_ACCEPTS_DUMMY_API_KEY_FOR_LOCAL_ENDPOINT",
+      "PUBLIC_SERVICE_HAS_180_MINUTE_CUMULATIVE_24H_ADMISSION_ACCOUNTING_AND_3_REQUEST_POST_THRESHOLD_RULE",
+      "SERVER_JOB_TIMEOUT_IS_240_MINUTES",
+      "FULL_EVAL_CAN_BE_SUBMITTED_AS_ONE JOB_WITH_CONFIGURABLE_WORKER_COUNT"
+    ],
+    "reduction": "BECAUSE_THE_OFFICIAL_SERVICE_OWNS_THE_BENCHMARK_ENVIRONMENT_AND_MCP_ACCOUNT_SETUP__THE_ZERO_COST_BRAIN_CARRIER_NEED_NOT_PULL_THE_TOOLATHLON_TASK_IMAGE_OR_DEPLOY_THE_APPLICATION_STACK_ON_THE_GITHUB_RUNNER"
+  },
+  "deleted_carrier_obligations": [
+    "FIT_FULL_TOOLATHLON_APPLICATION_STACK_PLUS_PINNED_LOCAL_SUBSTRATE_ON_ONE_14GB_RUNNER_DISK",
+    "PROVISION_TOOLATHLON_MCP_APP_ACCOUNTS_OR_SECRETS_ON_BRAIN_RUNNER",
+    "EXPOSE_LOCAL_BRAIN_MODEL_ENDPOINT_TO_PUBLIC_INTERNET",
+    "USE_PAID_HOSTED_MODEL_OR_API_FOR_TOOLATHLON_INFERENCE"
+  ],
+  "minimum_remaining_point_of_use_preflight": [
+    "EXACT_FROZEN_TOOLATHLON_CLIENT_AND_WEBSOCKET_PROXY_BLOBS_LOAD_ON_ADMITTED_STANDARD_PUBLIC_RUNNER",
+    "PINNED_LOCAL_BRAIN_ENDPOINT_STARTS_WITH_ZERO_INCREMENTAL_SPEND_AND EXPOSES_THE_REQUIRED_OPENAI_CHAT_COMPLETIONS_TOOL_CALL_CONTRACT",
+    "OFFICIAL_TOOLATHLON_PUBLIC_SERVICE_IS_LIVE_AND_ACCEPTS_ONE_PRIVATE_MODE_FULL_EVAL_JOB_UNDER_ITS_CURRENT_FAIR_USE_AND_SERVER_TIMEOUT_RULES",
+    "NO_PAID_MODEL_API_OR_PAID_COMPUTE_ROUTE_IS_CONFIGURED_OR_REACHABLE",
+    "THE_BRAIN_TOOL_DISCOVERY_ADAPTER_AND_SUBSTRATE_MATERIALITY_GATES_REQUIRED_BY_THE_MATCHED_SCOPE_CERTIFICATE_ARE_EXACTLY_THE_FROZEN_BYTES_SELECTED_BEFORE_ANY_TERMINAL_RESULT"
+  ],
+  "atomic_execution_rule": {
+    "rationale": "A separate terminal-case preflight would spend the same frozen reality twice. Carrier checks that do not require task content must execute first in the same capsule; terminal task exposure may begin only after every nonterminal preflight and every other matched-route prerequisite independently passes.",
+    "stage_a_nonterminal": [
+      "VERIFY_ZERO_INCREMENTAL_SPEND_RUNNER",
+      "VERIFY_EXACT_PINNED_LOCAL_SUBSTRATE_BYTES_AND_SERVER_HEALTH",
+      "VERIFY_OPENAI_CHAT_COMPLETIONS_TOOL_CALL_COMPATIBILITY_WITH_LOCAL_SYNTHETIC_REQUEST",
+      "VERIFY_TOOLATHLON_SERVICE_HEALTH_AND_PRIVATE_MODE_JOB_ADMISSION",
+      "VERIFY_NO_PAID_PROVIDER_CONFIGURATION",
+      "VERIFY_FROZEN_CLIENT_PROXY_ADAPTER_AND_SCORER_IDENTITIES"
+    ],
+    "stage_b_terminal_gate": [
+      "TOOLATHLON_MATCHED_SCOPE_COMPOSITION_CERTIFICATE__INDEPENDENT_PASS",
+      "OPUS55_TOOLATHLON_MATCHED_REFERENCE_BAR__INDEPENDENT_PASS",
+      "ALL_STAGE_A_CARRIER_PREFLIGHTS_PASS"
+    ],
+    "stage_b_action": "SUBMIT_EXACTLY_ONE_FROZEN_108_TASK_TOOLATHLON_VERIFIED_PRIVATE_MODE_TERMINAL_JOB_AND_CAPTURE_CONTENT_ADDRESSED_RESULTS",
+    "on_any_failure": "FAIL_CLOSED__NO_TERMINAL_TASK_EXPOSURE_IF_FAILURE_PRECEDES_STAGE_B__NO_RETRY_OR_ROUTE_SUBSTITUTION_AFTER_TERMINAL_RESULTS_WITHOUT_NEW_PRECOMMITTED_AUTHORITY"
+  },
+  "service_limit_truth": {
+    "public_service_is_durable_capacity_guarantee": false,
+    "full_job_completion_under_240_minutes_proved": false,
+    "current_service_admission_proved": false,
+    "consequence": "THE_SERVICE_ROUTE_IS_A CONTENT_ADDRESSED_ZERO_COST_CARRIER_CANDIDATE__LIVE_ADMISSION_AND END_TO_END_COMPLETION_REMAIN_REALITY_FACTS_AT_POINT_OF_USE"
+  },
+  "expected_projection_if_independently_verified": {
+    "self_hosted_toolathlon_resource_fit_required": false,
+    "paid_api_required": false,
+    "separate_terminal_case_carrier_trial_required": false,
+    "carrier_fact_fully_closed": false,
+    "minimum_new_nonterminal_carrier_reality_units": 1,
+    "terminal_execution_authorized": false,
+    "terminal_goal_achieved": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_QWEN3_5_9B_ALREADY_SATISFIES_TOOLATHLON_OR_OPUS55_CAPABILITY",
+    "NO_CLAIM_THAT_THE_PUBLIC_TOOLATHLON_SERVICE_WILL_ACCEPT_OR_COMPLETE_THE_FULL_RUN_AT_LAUNCH_TIME",
+    "NO_CLAIM_THAT_SOURCE_LEVEL_PRIVATE_MODE_SUPPORT_ALONE_PROVES_THE_EXECUTION_CARRIER",
+    "NO_CLAIM_THAT_A_FREE_EXTERNAL_MODEL_ENDPOINT_COUNTS_AS_OWNED_CAPABILITY",
+    "NO_TERMINAL_RESULTS_OBSERVED_OR_REPLAYED",
+    "NO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_observed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
