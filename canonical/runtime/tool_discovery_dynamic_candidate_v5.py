@@ -12,6 +12,8 @@ This module grants no acceptance/capability/family/execution/promotion credit.
 """
 from __future__ import annotations
 
+import hashlib
+import json
 from typing import Any, Mapping
 
 CMP={"eq","neq","in","not_in","lt","le","gt","ge","contains","exists"}
@@ -80,8 +82,38 @@ def _decision_epoch(public: Mapping[str, Any]) -> int | None:
     return value
 
 
-def _source_set_digest(public: Mapping[str, Any]) -> str:
-    return str(public.get("source_set_digest") or "")
+def _tools_digest(tools: Any) -> str:
+    if not isinstance(tools,list):
+        return ""
+    if any(not isinstance(row,Mapping) for row in tools):
+        return ""
+    rows=[dict(row) for row in tools]
+    rows.sort(key=lambda row:str(row.get("tool_id") or ""))
+    try:
+        raw=json.dumps(rows,sort_keys=True,separators=(",",":"),ensure_ascii=False)
+    except (TypeError,ValueError):
+        return ""
+    return "sha256:"+hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def _source_set_digest(sources: list[Mapping[str, Any]]) -> str:
+    payload=[]
+    for source in sources:
+        payload.append({
+            "source_id":str(source.get("source_id") or ""),
+            "cost":float(source.get("cost",0.0)),
+            "available":source.get("available"),
+            "authorized":source.get("authorized"),
+            "authoritative":source.get("authoritative"),
+            "source_epoch":source.get("source_epoch"),
+            "source_digest":str(source.get("source_digest") or ""),
+        })
+    payload.sort(key=lambda row:row["source_id"])
+    try:
+        raw=json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False)
+    except (TypeError,ValueError):
+        return ""
+    return "sha256:"+hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
 def _source_valid_shape(source: Mapping[str, Any]) -> bool:
@@ -101,27 +133,37 @@ def _source_valid_shape(source: Mapping[str, Any]) -> bool:
     )
 
 
-def _active_sources(public: Mapping[str, Any]) -> tuple[list[Mapping[str, Any]], str | None]:
+def _active_sources(public: Mapping[str, Any]) -> tuple[list[Mapping[str, Any]], str, str | None]:
     raw=public.get("discovery_sources",[])
     if not isinstance(raw,list):
-        return [],"DISCOVERY_SOURCES_NOT_LIST"
-    out=[]
+        return [],"","DISCOVERY_SOURCES_NOT_LIST"
+    active=[]
+    all_sources=[]
     ids=set()
     for source in raw:
         if not isinstance(source,Mapping):
-            return [],"DISCOVERY_SOURCE_NOT_OBJECT"
-        if source.get("authoritative") is not True:
-            continue
+            return [],"","DISCOVERY_SOURCE_NOT_OBJECT"
+        for field in ("authoritative","available","authorized"):
+            if not isinstance(source.get(field),bool):
+                return [],"","DISCOVERY_SOURCE_"+field.upper()+"_UNDECLARED"
         if not _source_valid_shape(source):
-            return [],"AUTHORITATIVE_DISCOVERY_SOURCE_MALFORMED"
+            return [],"","DISCOVERY_SOURCE_MALFORMED"
         sid=str(source.get("source_id"))
         if sid in ids:
-            return [],"DUPLICATE_AUTHORITATIVE_DISCOVERY_SOURCE_ID"
+            return [],"","DUPLICATE_DISCOVERY_SOURCE_ID"
         ids.add(sid)
-        if source.get("available") is True and source.get("authorized") is True:
-            out.append(source)
-    out.sort(key=lambda s:(float(s.get("cost",0.0)),str(s.get("source_id"))))
-    return out,None
+        all_sources.append(source)
+        if (
+            source.get("authoritative") is True
+            and source.get("available") is True
+            and source.get("authorized") is True
+        ):
+            active.append(source)
+    active.sort(key=lambda s:(float(s.get("cost",0.0)),str(s.get("source_id"))))
+    digest=_source_set_digest(all_sources)
+    if raw and not digest:
+        return [],"","SOURCE_SET_DIGEST_COMPUTATION_FAILED"
+    return active,digest,None
 
 
 def _receipt_matches(
@@ -142,6 +184,7 @@ def _receipt_matches(
         and str(rec.get("source_set_digest") or "")==source_set_digest
         and str(rec.get("query") or "")==query
         and isinstance(rec.get("tools"),list)
+        and _tools_digest(rec.get("tools"))==str(source.get("source_digest") or "")
     )
 
 
@@ -150,14 +193,12 @@ def _valid_receipts(
     sources: list[Mapping[str, Any]],
     *,
     decision_epoch: int,
+    source_set_digest: str,
     query: str,
 ) -> tuple[dict[str, Mapping[str, Any]], str | None]:
     raw=public.get("discovery_receipts",[])
     if not isinstance(raw,list):
         return {},"DISCOVERY_RECEIPTS_NOT_LIST"
-    source_set_digest=_source_set_digest(public)
-    if sources and not source_set_digest:
-        return {},"SOURCE_SET_DIGEST_MISSING"
     out={}
     for source in sources:
         matches=[
@@ -275,10 +316,15 @@ def next_action(public: Mapping[str, Any]) -> dict[str, Any]:
     if decision_epoch is None:
         return {"action":"ESCALATE","reason":"DECISION_EPOCH_INVALID"}
 
-    sources,err=_active_sources(public)
+    sources,source_set_digest,err=_active_sources(public)
     if err:
         return {"action":"ESCALATE","reason":err}
-    receipts,err=_valid_receipts(public,sources,decision_epoch=decision_epoch,query=query)
+    receipts,err=_valid_receipts(
+        public,sources,
+        decision_epoch=decision_epoch,
+        source_set_digest=source_set_digest,
+        query=query,
+    )
     if err:
         return {"action":"ESCALATE","reason":err}
 
