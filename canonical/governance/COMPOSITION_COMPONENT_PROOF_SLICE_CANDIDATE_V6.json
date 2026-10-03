@@ -1,0 +1,190 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_SLICER_V1",
+  "status": "CANDIDATE_RESIDUAL_COMPONENT_INTERFACE_PROOFS_OPEN__EXPECTED_4_OF_12_SCOPED_PROVED__INDEPENDENT_RECOMPUTE_REQUIRED",
+  "errors": [],
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "interfaces": [
+    {
+      "component_id": "research",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "tool use",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "artifact creation",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "browser/computer action",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "memory",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "missing_properties": [],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [
+        "COMPOSITION_OWNED_FAMILY_BRIDGE_V2::LONG_HORIZON_MEMORY_AND_CONTINUITY::memory"
+      ],
+      "state": "SCOPED_PROVED"
+    },
+    {
+      "component_id": "recovery",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "missing_properties": [],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [
+        "COMPOSITION_SCOPE_COMPLETE_BRIDGE::SELF_VERIFICATION_DEBUGGING_AND_RECOVERY::recovery::V1"
+      ],
+      "state": "SCOPED_PROVED"
+    },
+    {
+      "component_id": "coding",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "debugging",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "tool discovery",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "missing_properties": [],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [
+        "COMPOSITION_SCOPE_COMPLETE_BRIDGE::TOOL_DISCOVERY_SELECTION_AND_LEARNING::tool_discovery::V1"
+      ],
+      "state": "SCOPED_PROVED"
+    },
+    {
+      "component_id": "delegation",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "missing_properties": [],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [
+        "COMPOSITION_SCOPE_COMPLETE_BRIDGE::SUBAGENT_DELEGATION_AND_COORDINATION::delegation::V1"
+      ],
+      "state": "SCOPED_PROVED"
+    },
+    {
+      "component_id": "evidence synthesis",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "artifact production",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    }
+  ],
+  "all_used_component_interfaces_scoped_proved": false,
+  "rule": "ONLY_EXACT_DECLARED_LOAD_BEARING_INTERFACES_ARE_REDUCED__NO_WHOLE_FAMILY_PASS_INHERITANCE__NO_UNBOUND_RECEIPT_CREDIT",
+  "new_reality_units_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "hard_nonclaim": "THIS_IS_A_DETERMINISTIC_EXPECTED_PROJECTION_ONLY__INDEPENDENT_SLICER_RECOMPUTATION_REQUIRED_BEFORE_CURRENT_COMPONENT_STATE_CHANGES"
+}
