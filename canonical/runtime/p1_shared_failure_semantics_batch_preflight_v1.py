@@ -260,13 +260,19 @@ def evaluate(*, freeze_override: Mapping[str, Any] | None = None) -> dict[str, A
     # Directly check that instrumentation removes the source oracle before the
     # V7 candidate receives the case.
     fixture = source.generate_case("TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001", 991337, 4)
-    bound = batch.instrument_source_case(fixture, surface_id=sorted(EXPECTED_SURFACES)[0], case_index=0)
+    public_fixture = source.public_task(fixture)
+    _error(errors, "_oracle" not in public_fixture, "PUBLIC_FIXTURE_ORACLE_LEAK")
+    bound = batch.bind_public_source_case(
+        public_fixture,
+        surface_id=sorted(EXPECTED_SURFACES)[0],
+        case_index=0,
+    )
     _error(errors, bound.get("status") == "PASS", "ORACLE_LEAK_FIXTURE_BIND")
     if bound.get("status") == "PASS":
         candidate_case = bound.get("candidate_case") or {}
         _error(errors, "_oracle" not in candidate_case, "ORACLE_LEAK")
         _error(errors, "source_case" not in candidate_case, "SOURCE_CASE_LEAK")
-        _error(errors, bound.get("cause_step") == fixture["_oracle"]["cause_step"], "SOURCE_CAUSE_BINDING")
+        _error(errors, "cause_step" not in bound, "SOURCE_CAUSE_LEAK")
 
     _error(errors, freeze.get("new_reality_units_consumed") == 0, "NEW_REALITY_ALREADY_CONSUMED")
     _error(errors, freeze.get("terminal_results_replayed") == 0, "TERMINAL_REPLAY")
