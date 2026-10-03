@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TOOLATHLON_BRAIN_HOST_INTEGRATION_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_REAL_DECOUPLED_GATEWAY_BINDING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_FROZEN_TOOLATHLON_GATEWAY_BINDING_VERIFIED__ZERO_CREDIT",
   "canonical_base_commit": "6b594cb36f774ec143d8e8d750d1bdd46419b2a8",
   "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
@@ -60,5 +60,15 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1198,
+    "workflow_run_id": 37095295947,
+    "verifier_merge_sha": "b89d9fa9c132b6921a74afb139b7e9b74913c4b1",
+    "conclusion": "success",
+    "exact_frozen_gateway_sha": "130628187647fdcacf2d3cf59934a2b310014a81",
+    "note": "INDEPENDENT_TEST_USED_EXACT_REAL_GATEWAY_LIST_SHAPE_WITHOUT_COST_OR_AUTH_FIELDS"
+  },
+  "verified_effect": "REAL_TOOLATHLON_DECOUPLED_GATEWAY_TO_BRAIN_ADAPTER_BINDING_PRECONDITION_CLOSED_FOR_EXACT_FROZEN_JSONRPC_CONTRACT"
 }
