@@ -50,6 +50,16 @@ def admit(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]]
         raise VerifiedProbeModelError("OUTCOME_MODEL_RECEIPT_INVALID")
     if model.get("decision_relevant_outcome_partition_complete") is not True:
         raise VerifiedProbeModelError("OUTCOME_PARTITION_COMPLETENESS_NOT_PROVED")
+    if model.get("observation_only_or_state_restored") is not True:
+        raise VerifiedProbeModelError("PROBE_STATE_RESTORATION_NOT_PROVED")
+    if model.get("future_probe_model_invariance_verified") is not True:
+        raise VerifiedProbeModelError("FUTURE_PROBE_MODEL_INVARIANCE_NOT_PROVED")
+    epoch=str(model.get("experiment_epoch") or "").strip()
+    state_fingerprint=str(model.get("state_fingerprint") or "").strip()
+    if not epoch or not state_fingerprint:
+        raise VerifiedProbeModelError("EXPERIMENT_EPOCH_AND_STATE_FINGERPRINT_REQUIRED")
+    if str(safety.get("experiment_epoch") or "").strip()!=epoch:
+        raise VerifiedProbeModelError("SAFETY_AND_OUTCOME_MODEL_EPOCH_MISMATCH")
     if str(model.get("environment_id") or "").strip()!=env or str(model.get("goal_id") or "").strip()!=goal or str(model.get("action_id") or "").strip()!=aid:
         raise VerifiedProbeModelError("OUTCOME_MODEL_SCOPE_MISMATCH")
     hd=v4.hypothesis_digest(hypotheses)
@@ -70,6 +80,8 @@ def admit(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]]
         "residual_risk":r,
         "safety_receipt":srid,
         "outcome_model_receipt":mrid,
+        "experiment_epoch":epoch,
+        "state_fingerprint":state_fingerprint,
         "hypothesis_space_sha256":hd,
         "outcome_map_sha256":od,
         "verified":True,
