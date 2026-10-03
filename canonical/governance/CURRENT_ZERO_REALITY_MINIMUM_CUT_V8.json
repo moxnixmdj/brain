@@ -28,11 +28,11 @@
     },
     "root2_routes": {
       "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-      "git_blob_sha": "0e4e6f76b5bb76d3ca59a5893f10d64e352fae01"
+      "git_blob_sha": "2737cb5d1c6241f9805f1e7f00e44f7a90a45fda"
     },
     "minimum_frontier": {
       "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
-      "git_blob_sha": "156125aef1c8077885a3c7320961ee1cb73a391a"
+      "git_blob_sha": "0af95d94b2de464f1590911394596a63dcff30f8"
     },
     "root2_public_access_refresh": {
       "path": "canonical/governance/ROOT2_PUBLIC_ACCESS_REFRESH_20261003_V1.json",
