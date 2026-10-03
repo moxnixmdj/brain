@@ -49,6 +49,31 @@ class ScienceAgentTests(unittest.TestCase):
         self.assertEqual(result["status"],"FINISHED")
         self.assertEqual(result["resolved_requirements"],["R1","R2"])
 
+    def test_candidate_actions_alias_is_normalized(self):
+        env,result=self.run_goal([
+            {
+                "material_requirements":["R1"],
+                "candidate_actions":[
+                    {"action_id":"a","covers":["R1"],"command":"echo work","verify_command":"echo verify"}
+                ]
+            },
+            {"finish_summary":"done"}
+        ])
+        self.assertEqual(env.commands[0],"echo work")
+        self.assertEqual(result["status"],"FINISHED")
+        self.assertEqual(result["resolved_requirements"],["R1"])
+
+    def test_conflicting_candidate_aliases_fail_closed(self):
+        env=Env()
+        outputs=[{
+            "material_requirements":["R1"],
+            "candidates":[{"action_id":"a","covers":["R1"],"command":"echo one","verify_command":"echo verify"}],
+            "candidate_actions":[{"action_id":"b","covers":["R1"],"command":"echo two","verify_command":"echo verify"}],
+        }]
+        with patch.object(s.astra_runtime, "_planner_post", planner(outputs)):
+            with self.assertRaisesRegex(RuntimeError,"CANDIDATE_ALIAS_CONFLICT"):
+                asyncio.run(s.run_science_goal("goal",env,max_cycles=1))
+
     def test_failed_verify_does_not_promote_coverage_or_finish(self):
         env,result=self.run_goal([
             {
