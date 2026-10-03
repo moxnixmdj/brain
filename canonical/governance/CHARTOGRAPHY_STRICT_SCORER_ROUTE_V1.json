@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_STRICT_SCORER_ROUTE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__DETERMINISTIC_CONSERVATIVE_SCORER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "frozen_target_percent": 89,
+  "upstream_code": {
+    "repository": "surge-ai/chartography",
+    "scorer_blob": "11cffaa92dff3bed126247990d41f1509574040e",
+    "dataset_blob": "4d1bc311794527a86019f6ed4cf1efbd9bceb9bb",
+    "task_blob": "163d910274f06720b601006ef1b6266e7cfd30b6"
+  },
+  "claim": "THE_LOCAL_DETERMINISTIC_SCORER_IS_STRICTER_THAN_THE_PUBLISHED_WRITTEN_MATCHING_RULE_BECAUSE_IT_CREDITS_ONLY_EXACT_REFERENCE_STRING_MATCHES_AFTER_OUTER_WHITESPACE_NORMALIZATION",
+  "limitations": [
+    "DOES_NOT_REPRODUCE_THE_PUBLISHED_MODEL_JUDGE",
+    "DOES_NOT_ESTABLISH_ANTHROPIC_TOOL_CONFIGURATION_IDENTITY",
+    "DOES_NOT_CLOSE_THE_ACCEPTANCE_PREDICATE",
+    "DOES_NOT_RUN_BENCHMARK_ITEMS"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
