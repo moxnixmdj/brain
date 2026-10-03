@@ -9,7 +9,6 @@
   "candidate_tests": "canonical/tests/test_tool_discovery_terminal_complete_interface_adapter_v1.py",
   "contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json",
   "terminal_binding": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
-  "immutable_terminal_result": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
   "construction": [
     "THE_FROZEN_V2_EVALUATOR_OWNS_THE_COMPLETE_CASE_TOOLS_LIST",
     "INITIAL_CANDIDATE_VISIBILITY_IS_EMPTY",
@@ -31,6 +30,8 @@
     "VERSION_EPOCH_STABLE_DURING_ONE_SELECTION_EPISODE_OR_RESTARTS_EPISODE"
   ],
   "hard_nonclaims": [
+    "THE_EXISTING_180_OF_180_RESULT_IS_REUSED_ONLY_AS_VALID_EXECUTED_SAMPLE_EVIDENCE",
+    "THE_PRIOR_ABSOLUTE_DOMINANCE_SCOPE_OVERCLAIM_REMAINS_REJECTED",
     "NO_ACCEPTANCE_CREDIT_FROM_THIS_CANDIDATE_ALONE",
     "NO_WHOLE_PROTOCOL_SCOPE_PROMOTION_BEFORE_SEPARATE_ACCEPTANCE_REDUCTION",
     "NO_FRESH_TERMINAL_CASES",
@@ -44,5 +45,7 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "terminal_sample_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+  "scope_truth_boundary": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json"
 }
