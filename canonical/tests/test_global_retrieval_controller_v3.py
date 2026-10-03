@@ -21,7 +21,7 @@ assert all("retrieval_priority_v3" in x for x in ranked)
 plan=e.compile_authorized_plan(root=ROOT,query_actions=actions,sources=[])
 assert plan["status"]=="PASS__AUTHORIZED_ROUTE_STRATEGY_EMPIRICAL_GLOBAL_RETRIEVAL_PLAN_COMPILED",plan
 assert plan["plan"]["provider_only_calibration_forbidden"] is True
-assert plan["route_strategy_calibration"]["best_known_strategy_union"]["hit_case_count"]>=11
+assert plan["route_strategy_calibration"]["best_known_strategy_union"]["hit_case_count"]==13\nassert plan["route_strategy_calibration"]["best_known_strategy_union"]["hit_rate"]==1.0\nassert plan["route_strategy_calibration"]["best_known_strategy_union"]["miss_case_ids"]==[]
 assert plan["execution_authority"] is False
 assert plan["promotion_authority"] is False
 
