@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_T0_BROAD_ANTISHORTCUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_CAD_CANDIDATE_BROAD_RENDER_EQUIVALENT_MUTATION_MATRIX_AND_FULL_EIGHT_FAMILY_PASS__ZERO_TERMINAL_CASES_CONSUMED",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "exact_current_candidate": {
+    "path": "canonical/runtime/cad_t0_route_specific_candidate_v1.py",
+    "blob_sha": "aa32750b220a023617938b7be9476f6b3aac6704"
+  },
+  "durable_brain_regression": {
+    "path": "canonical/tests/test_cad_current_render_equivalent_mutations_v2.py",
+    "blob_sha": "f042c45ad728b585af6e39463e0af64112d5077e"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 728,
+    "pr_head_sha": "b7a6b69271666605fa46e09d4020235bd7e6c9ac",
+    "merge_commit": "5a2d5f756db7ba3a656a5428b237857d8746dd53",
+    "workflow_run_id": 36971920234,
+    "workflow_name": "Verify current CAD anti-shortcut v2",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_CURRENT_BRAIN_CANDIDATE_BLOB_MATCH",
+    "FULL_TWO_CYCLE_ALL_EIGHT_FROZEN_GEOMETRY_FAMILIES_PASS",
+    "RENDER_EQUIVALENT_SAME_Y_NODE_SPLIT_PASS",
+    "RENDER_EQUIVALENT_WITHIN_WORD_SPLIT_PASS",
+    "RENDER_EQUIVALENT_INTRA_NUMERIC_TOKEN_SPLIT_PASS",
+    "RENDERED_X_ORDER_OVERRIDES_SVG_SOURCE_NODE_ORDER",
+    "NESTED_TSPAN_AND_HARMLESS_WRAPPER_PASS",
+    "ATTRIBUTE_QUOTE_COMMENT_WHITESPACE_AND_ENTITY_CHANGES_PASS",
+    "DOM_LINE_ORDER_CHANGE_PRESERVES_SEMANTIC_PARSE",
+    "EQUIVALENT_NUMERIC_COORDINATE_SPELLINGS_PASS",
+    "NO_POST_FREEZE_TERMINAL_BEACON_USED",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "mutation_job_conclusions": {
+    "same_y_split": "success",
+    "word_split": "success",
+    "numeric_token_split": "success",
+    "same_line_source_reversal": "success",
+    "nested_tspan_wrapper": "success",
+    "attributes_comments_whitespace_entities": "success",
+    "line_dom_order": "success",
+    "coordinate_spellings": "success",
+    "full_eight_family": "success",
+    "exact_candidate": "success"
+  },
+  "supersedes_weaker_current_candidate_antishortcut_evidence": false,
+  "role": "STRENGTHENED_ADDITIVE_CURRENT_CANDIDATE_PRETERMINAL_PROOF__DOES_NOT_BY_ITSELF_GRANT_PREWAVE_ADMISSION",
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
