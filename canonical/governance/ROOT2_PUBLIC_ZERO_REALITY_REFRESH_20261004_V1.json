@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PUBLIC_ZERO_REALITY_REFRESH_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FRESH_PUBLIC_ROUTE_TIGHTENING__ZERO_CREDIT__NO_CASE_EXPOSURE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority_base": {
+    "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "root_state": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root2_inventory": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+    "minimum_cut": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V7.json",
+    "base_commit": "4cf319a3a896dc82261569a4af38a43be27cb186"
+  },
+  "fresh_public_facts": [
+    {
+      "surface": "OSWorld 2.1",
+      "source": "https://github.com/xlang-ai/OSWorld-V2/blob/main/benchmark_releases/README.md",
+      "fact": "osworld-v2.1 is the active recommended release and explicitly pins OSWorld code, tasks, assets, website version, and provider images.",
+      "consequence": "ROOT2_PROTOCOL_IDENTITY_IS_TIGHTER__DO_NOT_SPEND_MORE_SEARCH_ON_VERSION_IDENTITY__REMAINING_ZERO_REALITY_WORK_IS_VM_BOOT_GATED_ASSET_ACCESS_SELF_HOST_BINDING_AND_END_TO_END_EQUIVALENCE"
+    },
+    {
+      "surface": "Chartography",
+      "source": "https://github.com/surge-ai/chartography",
+      "fact": "The full task set is available via Hugging Face, the Inspect harness is public, and the scorer uses one model-graded call per sample with the judge shown the question, golden answer, and response but not the chart. The public quick-start names Gemini 3.5 Flash as a judge option.",
+      "consequence": "TASK_POPULATION_AND_SCORER_SHAPE_ARE_PUBLIC__DO_NOT_SEARCH_FOR_ANOTHER HARNESS__REMAINING ZERO_COST BLOCKER IS EXACT COMPARABLE JUDGE ACCESS_QUOTA_AND_HARD_ZERO_SPEND_BINDING"
+    },
+    {
+      "surface": "Terminal-Bench-Science",
+      "source": "https://github.com/harbor-framework/terminal-bench-science",
+      "fact": "The benchmark is public through Harbor, with oracle prechecks recommended and Modal or Daytona recommended for benchmark execution; task configuration explicitly declares resource and network requirements.",
+      "consequence": "PROTOCOL_ROUTE_IS_PUBLIC__DO_NOT_REOPEN_GENERIC_PROTOCOL_SEARCH__PRESERVE_CURRENT BRAIN_SCORE_ONLY OR CARRIER_SPECIFIC CUT"
+    },
+    {
+      "surface": "AutomationBench",
+      "source": "https://github.com/zapier/AutomationBench",
+      "fact": "The 600-task public benchmark is public and programmatically scored, but the maintainers explicitly state public improvement is only directionally associated with the private set and not guaranteed to transfer one-to-one.",
+      "consequence": "PUBLIC_600_MUST_NOT_BE_TREATED_AS_EXACT_PRIVATE_SCORE_EQUIVALENT__ONLY A FORMAL SCOPE_DOMINANCE_EQUIVALENCE CERTIFICATE OR EXACT OFFICIAL ROUTE CAN CLOSE THE FROZEN ROOT2 PREDICATE"
+    },
+    {
+      "surface": "LiveBench Instruction Following",
+      "source": "https://github.com/LiveBench/LiveBench/blob/main/livebench/if_runner/ifbench/README.md",
+      "fact": "IFBench exposes the instruction-following constraints and evaluation path publicly; this does not add any new comparator credit beyond the already prequalified Brain route.",
+      "consequence": "NO MORE COMPARATOR_IDENTITY SEARCH__PRESERVE BRAIN_SCORE_ONLY AS THE REMAINING FACT AFTER ZERO_REALITY FIXED_POINT"
+    },
+    {
+      "surface": "HLE with tools",
+      "source": "https://github.com/activeloopai/hle_with_tools",
+      "fact": "A public HLE-with-tools fork exists with public runner code and public HLE dataset instructions, but this does not by itself prove identity with the frozen HLE Diamond tools population or its exact comparable judge route.",
+      "consequence": "DO_NOT SUBSTITUTE PUBLIC HLE_WITH_TOOLS FOR THE FROZEN HLE_DIAMOND ROUTE WITHOUT AN EXACT IDENTITY OR STRONGER SCOPE PROOF"
+    }
+  ],
+  "root_effect": {
+    "root1": "UNCHANGED_INACTIVE__ZERO_POSITIVELY_ESTABLISHED_CAPABILITY_GAPS",
+    "root2": "OPEN__ROUTE_AMBIGUITY_REDUCED_ON_PUBLIC SURFACES__NO SCORE CREDIT",
+    "root3": "UNCHANGED__NO FINITE_SAMPLE OR PUBLIC_TASK_SUBSTITUTION GENERALIZATION"
+  },
+  "deleted_work": [
+    "OSWORLD_GENERIC_VERSION_IDENTITY_SEARCH",
+    "CHARTOGRAPHY_GENERIC_HARNESS_SEARCH",
+    "TB_SCIENCE_GENERIC_PROTOCOL_SEARCH",
+    "LIVEBENCH_IF_GENERIC_SCORER_IDENTITY_SEARCH",
+    "AUTOMATIONBENCH_PUBLIC_600_AS_IF_PRIVATE_EQUIVALENCE"
+  ],
+  "remaining_high_value_zero_reality_work": [
+    "OSWORLD_V2_1_PINNED_VM_BOOT__GATED_ASSET_ACCESS__SELF_HOST_BINDING__END_TO_END_PROTOCOL_EQUIVALENCE",
+    "CHARTOGRAPHY_EXACT_JUDGE_ACCESS_QUOTA__HARD_ZERO_SPEND_STOP",
+    "HLE_DIAMOND_EXACT_POPULATION_ACCESS__ZERO_COST_COMPARABLE_JUDGE__BRAIN_TOOL_ADAPTER",
+    "AUTOMATIONBENCH_STRONGER_SCOPE_EQUIVALENCE_OR_EXACT_OFFICIAL_ROUTE",
+    "FINANCE_INCREMENTAL_COMPONENT_OR_OWNER_PROOF",
+    "ROOT2_PRIVATE_OWNER_ACCESS_STATE_CHANGES_ONLY__NO REPEATED GENERIC SEARCH",
+    "TB_SCIENCE_AND_LIVEBENCH_IF_BRAIN_SCORE_ONLY_AFTER ZERO_REALITY FIXED_POINT"
+  ],
+  "hard_rules": [
+    "UNKNOWN_IS_NOT_MISSING",
+    "PUBLIC_SEARCH_FAILURE_IS_NOT_NONEXISTENCE",
+    "PUBLIC_DIAGNOSTIC_SET_IS_NOT_PRIVATE_OFFICIAL_EQUIVALENT_WITHOUT PROOF",
+    "NO BENCHMARK CASE EXPOSURE BEFORE ZERO_REALITY FIXED_POINT",
+    "NO ACCEPTANCE FAMILY CAPABILITY OWNERSHIP CREDIT FROM THIS REFRESH",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "INDEPENDENTLY VERIFY THESE PUBLIC ROUTE FACTS__THEN MERGE ONLY IF THEY DELETE STALE SEARCH WITHOUT WEAKENING ANY FROZEN ACCEPTANCE REQUIREMENT"
+}
