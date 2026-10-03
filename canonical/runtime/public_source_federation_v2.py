@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Diversity-preserving federation selector for Retrieval V4."""
 from __future__ import annotations
-import hashlib, re, unicodedata
+import hashlib, json, re, unicodedata
 from collections import defaultdict
 from typing import Any, Mapping, Sequence
 
@@ -72,4 +72,5 @@ def compile_federation(queries:Sequence[str]|Sequence[Mapping[str,Any]],max_quer
             requests.append({"request_id":rid,"source_class":source_class,"domain":domain,"query":query,"base_query":row["text"],"script":row["script"],"selection_class":row["selection_class"],"selected_rank":rank,"authority":"CANDIDATE_ONLY","complete":False})
     available={r["script"] for r in rows(queries)}
     chosen={r["script"] for r in selected}
-    return {"schema":SCHEMA,"status":"COMPILED_DIVERSITY_PRESERVING","selected_queries":selected,"source_group_count":len(SOURCE_GROUPS),"request_count":len(requests),"requests":requests,"available_scripts":sorted(available),"selected_scripts":sorted(chosen),"nonlatin_available":any(x not in {"LATIN","UNKNOWN"} for x in available),"nonlatin_selected":any(x not in {"LATIN","UNKNOWN"} for x in chosen),"complete":False,"incremental_spend_usd":0,"hard_rules":["CROSS_SCRIPT_DIVERSITY_PRECEDES_REDUNDANT_BASE_QUERIES","EMPTY_RESULT_IS_UNKNOWN_NOT_NONEXISTENCE","CANDIDATES_REQUIRE_INDEPENDENT_VERIFICATION"]}
+    program_sha=hashlib.sha256(json.dumps(requests,sort_keys=True,ensure_ascii=False,separators=(",",":")).encode()).hexdigest()
+    return {"schema":SCHEMA,"status":"COMPILED_DIVERSITY_PRESERVING","selected_queries":selected,"source_group_count":len(SOURCE_GROUPS),"request_count":len(requests),"requests":requests,"available_scripts":sorted(available),"selected_scripts":sorted(chosen),"nonlatin_available":any(x not in {"LATIN","UNKNOWN"} for x in available),"nonlatin_selected":any(x not in {"LATIN","UNKNOWN"} for x in chosen),"federation_program_sha256":program_sha,"complete":False,"incremental_spend_usd":0,"hard_rules":["CROSS_SCRIPT_DIVERSITY_PRECEDES_REDUNDANT_BASE_QUERIES","EMPTY_RESULT_IS_UNKNOWN_NOT_NONEXISTENCE","CANDIDATES_REQUIRE_INDEPENDENT_VERIFICATION"]}
