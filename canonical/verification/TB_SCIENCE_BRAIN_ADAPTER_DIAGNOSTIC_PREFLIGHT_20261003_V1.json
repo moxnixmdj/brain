@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_BRAIN_ADAPTER_DIAGNOSTIC_PREFLIGHT_20261003_V1",
+  "date": "2026-10-03",
+  "status": "DIAGNOSTIC_PASS__EXACT_BOUND_BLOBS__3_OF_3_FOCUSED_TESTS_PASS__ZERO_TERMINAL_EXPOSURE__ZERO_ACCEPTANCE_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "pull_request": 1211,
+  "preflight_result": "PASS",
+  "focused_tests": "3_OF_3_PASS",
+  "exact_bound_blobs": {
+    "harbor_brain_agent": "3d7d803bdd25df0379d81b360af3ea40da254771",
+    "astra_runtime": "7f5d16b1db69cb620954bc778e0ba6e15e687b75",
+    "harbor_command_policy": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "tbs_zero_case_route": "6ba9d041576c3e4ffad5e0f7310110149be2fe6b",
+    "local_qwen_preflight": "df65f00a46de5570f0366eec5292c9b92b9d03ed",
+    "public_bar_readiness": "4e59e30461c9ff1bee1a9474627d5fb4074844b2"
+  },
+  "observed": {
+    "candidate_closes_readiness_gap": "NO_BOUND_GENERAL_BRAIN_AGENT_ADAPTER_FOR_TERMINAL_SCIENCE_TASKS",
+    "terminal_task_content_consumed": false,
+    "terminal_result_observed": false,
+    "family_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "github_actions_attempt": {
+    "status": "CARRIER_FAILED_BEFORE_USER_CODE",
+    "evidence": "RUNNER_ID_0__ZERO_STEPS",
+    "no_blind_retry": true
+  },
+  "diagnostic_execution": {
+    "status": "PASS_ON_SECOND_ISOLATED_CARRIER",
+    "independence_status": "NOT_ACCEPTED_AS_INDEPENDENT_PROMOTION_VERIFIER",
+    "spend_accounting": "NOT_ASSERTED"
+  },
+  "remains_open": [
+    "INDEPENDENT_EXACT_BYTE_VERIFICATION",
+    "RESOURCE_FIT_OR_PREDECLARED_RESOURCE_FAILURE_POLICY",
+    "HARBOR_AGENT_REGISTRATION_AND_BOOTSTRAP_BINDING",
+    "FROZEN_TRIAL_ACCOUNTING_AND_SCORER_BINDING",
+    "POINT_OF_USE_LOCAL_MODEL_RECHECK",
+    "PROMOTION_PREFLIGHT_FOR_TB_SCIENCE_GE_58_7"
+  ]
+}
