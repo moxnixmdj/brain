@@ -22,6 +22,7 @@ EVENT_FILES=(
  "canonical/governance/RETRIEVAL_V10_OPTIMIZED_LIVE_PROVIDER_EVENTS_20261004_V1.json",
  "canonical/governance/RETRIEVAL_V10_MULTI_QUERY_LIVE_PROVIDER_EVENTS_20261004_V1.json",
  "canonical/governance/RETRIEVAL_V10_DEEP_WINDOW_LIVE_PROVIDER_EVENTS_20261004_V1.json",
+ "canonical/governance/RETRIEVAL_V10_VERIFIED_BRIDGED_LIVE_EVENTS_20261004_V1.json",
 )
 
 def _beta(successes:int,trials:int)->dict[str,float]:
