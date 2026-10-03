@@ -1,0 +1,16 @@
+{
+  "schema":"PROJECT_BRAIN_RETRIEVAL_V6_OPEN_WORLD_HARDENING_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date":"2026-10-03",
+  "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__291_GENERATED_CASES__PAIRWISE_COMPLETE__FINITE_FIXTURE_RECALL_1__ZERO_CREDIT",
+  "verified_activation":{"path":"canonical/governance/RETRIEVAL_V6_OPEN_WORLD_HARDENING_ACTIVATION_V1.json","git_blob_sha":"4398fee2d6d0a8a62ca7209852c961bc1fca1c7c"},
+  "independent_runner":{"repository":"moxnixmdj/verification-capsule-runner","pull_request":1363,"merge_commit":"f95d9ff8124520ddae35f7ddb59ee537af014db9","workflow_run_id":37129777116,"workflow_job_id":111222410198,"conclusion":"success"},
+  "verified":{"exact_subject_blobs_verified":true,"tests":"9/9_PASS","generated_adversarial_cases":291,"pairwise_failure_dimension_coverage":true,"lexical_only_recall_on_declared_fixture_universe":0.9347079037800687,"v6_recall_on_declared_finite_fixture_universe":1.0,"monotonic_candidate_retention":true,"queryless_bounded_enumeration":true,"conditional_novelty_scheduling":true,"zero_yield_rounds_never_prove_completeness":true,"outside_scope_opaque_state":"UNKNOWN","open_world_completeness_claim_authorized":false,"zero_credit_preserved":true},
+  "hard_nonclaims":["NO_OPEN_WORLD_COMPLETENESS_CLAIM","NO_ALL_LANGUAGE_SEMANTIC_COMPLETENESS_CLAIM","NO_PRIVATE_DELETED_OFFLINE_OR_INACCESSIBLE_SOURCE_COMPLETENESS_CLAIM","NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT"],
+  "incremental_spend_usd":0,
+  "acceptance_credit_delta":0,
+  "capability_credit_delta":0,
+  "family_credit_delta":0,
+  "ownership_credit_delta":0,
+  "execution_authority":false,
+  "promotion_authority":false
+}
