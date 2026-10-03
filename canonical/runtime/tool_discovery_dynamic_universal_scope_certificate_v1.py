@@ -25,6 +25,7 @@ PROTOCOL="canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
 REGISTRY="canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
 BINDINGS="canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
 RELATION="canonical/governance/TOOL_DISCOVERY_COMPLETE_SOURCE_SCOPE_RELATION_V1.json"
+INTERFACE="canonical/runtime/tool_discovery_complete_source_interface_v1.py"
 CANDIDATE="canonical/runtime/tool_discovery_dynamic_candidate_v4.py"
 V3_PROOF="canonical/runtime/tool_discovery_dynamic_proof_v3.py"
 V3_TESTS="canonical/tests/test_tool_discovery_dynamic_v3.py"
@@ -33,7 +34,8 @@ EXPECTED_BLOBS={
     PROTOCOL:"62394e5b7d221ec9f69c3458f669e40e253a9d09",
     REGISTRY:"ee187f611a0e82b2de495ee377682f39bc31dd31",
     BINDINGS:"7885a827b1483bfb38315c1f492848f7e4680285",
-    RELATION:"c7516844cc9b7d3ce230b1ef75b9830e44791d06",
+    RELATION:"6ef77a95808c9df63b607ee3754f2b23dd5897e0",
+    INTERFACE:"4e459b745b7ed5f4b9e2458396aa38cf4cadd74a",
     CANDIDATE:"43689341231f0e137cc5b31c0f05b5bf0c64504d",
     V3_PROOF:"f82d949f3890ffc0f2513f9b39cc3585a5d22ebb",
     V3_TESTS:"ee1d8b3549555ec8280af88047b8d11823047ab6",
@@ -44,6 +46,7 @@ REQUIRED_FACTS=(
     "TARGET_UNKNOWN_TOOL_DISCOVERY",
     "TARGET_LEAST_COST_DISCOVER_SELECT",
     "COMPLETE_SOURCE_INTERFACE_EXPLICIT",
+    "EXECUTABLE_COMPLETE_INTERFACE_VERIFIED",
     "SAME_TOOL_AUTHORITY_BOUND",
     "DISCOVERY_PRECEDES_PROBE_OR_SELECT",
     "DISCOVERY_EXHAUSTS_AVAILABLE_SOURCES",
@@ -145,6 +148,43 @@ def derive_source_facts(src:str)->dict[str,bool]:
         "ESCALATION_AFTER_COMPLETE_DISCOVERY": final_escalate,
     }
 
+def derive_interface_facts(src:str)->dict[str,bool]:
+    coverage=(
+        "def validate_frozen_case" in src
+        and "missing=sorted(all_ids-available_coverage)" in src
+        and "INCOMPLETE_FROZEN_AUTHORITY_COVERAGE" in src
+    )
+    discover_complete=(
+        "def discover(" in src
+        and "v=validate_frozen_case(case)" in src
+        and '"complete":True' in src
+        and '"authority_manifest_sha256":v["authority_manifest_sha256"]' in src
+        and '"tools":[byid[x] for x in source["tool_ids"]]' in src
+    )
+    public_only=(
+        "PUBLIC_TOOL_KEYS=(" in src
+        and "def _public_tool(" in src
+        and "out={k:raw[k] for k in PUBLIC_TOOL_KEYS if k in raw}" in src
+    )
+    receipt_binding=(
+        "def apply_discovery(" in src
+        and "DISCOVERY_RECEIPT_NOT_COMPLETE" in src
+        and "DISCOVERY_AUTHORITY_MANIFEST_MISMATCH" in src
+        and "CONFLICTING_PUBLIC_TOOL_METADATA" in src
+        and "DISCOVERY_SOURCE_ALREADY_QUERIED" in src
+    )
+    malformed_rejection=(
+        "DUPLICATE_TOOL_ID:" in src
+        and "DUPLICATE_SOURCE_ID:" in src
+        and "SOURCE_TOOL_UNKNOWN:" in src
+        and "NOT_FINITE_NONNEGATIVE" in src
+    )
+    return {
+        "EXECUTABLE_COMPLETE_INTERFACE_VERIFIED": (
+            coverage and discover_complete and public_only and receipt_binding and malformed_rejection
+        )
+    }
+
 def prove_from_facts(facts:Mapping[str,bool])->dict[str,Any]:
     missing=[name for name in REQUIRED_FACTS if facts.get(name) is not True]
     if missing:
@@ -205,6 +245,7 @@ def verify()->dict[str,Any]:
     )
 
     facts=derive_source_facts(_text(CANDIDATE))
+    facts.update(derive_interface_facts(_text(INTERFACE)))
     facts.update({
         "TARGET_FROZEN_ECOSYSTEM": (
             "frozen tool ecosystems with hidden capability variants" in str(row.get("acceptance") or "")
