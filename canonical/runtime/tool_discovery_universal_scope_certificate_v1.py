@@ -28,6 +28,7 @@ EXPECTED_BLOBS={
  "canonical/tests/test_tool_discovery_v3_owned_gateway_bridge_v1.py":"af74201e956c3c89093d1376b132546c35bb966d",
  "canonical/runtime/tool_discovery_dynamic_candidate_v3.py":"bbbee4d6baf8df937543644397abba38a67dce62",
  "canonical/runtime/tool_discovery_information_safe_candidate.py":"64c02edd568d95ec5ed54b7b8122183ce5b82e17",
+ "canonical/runtime/tool_discovery_information_safe_proof.py":"2450a9644119c9fdf9c43307a1d115098d6ba592",
  "canonical/runtime/tool_discovery_information_safe_proof_v2.py":"5e8a953864e13ec76768c3e8920644107c65a644",
  "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json":"62394e5b7d221ec9f69c3458f669e40e253a9d09",
  "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json":"7885a827b1483bfb38315c1f492848f7e4680285",
