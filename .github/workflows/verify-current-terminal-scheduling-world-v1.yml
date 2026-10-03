@@ -37,16 +37,23 @@ jobs:
           x=json.load(open("CURRENT_TERMINAL_SCHEDULING_WORLD_RESULT.json"))
           assert x["pass"] is True,x
           assert x["registry_predicate_count"]==38,x
-          assert x["proved_predicate_count"]==8,x
-          assert x["unresolved_predicate_count"]==30,x
-          assert x["live_action_coverage_count"]==30,x
-          assert x["source_scheduling_world_stale"] is True,x
-          assert "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR" in x["proved_predicates"],x
-          assert "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR" not in x["unresolved_predicates"],x
+          assert x["proved_predicate_count"]==11,x
+          assert x["unresolved_predicate_count"]==27,x
+          assert x["live_action_coverage_count"]==27,x
+          assert x["authority_opus55_acceptance"]=="4/19_PASS__15/19_OPEN",x
+          closed={
+              "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+              "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+              "RECOVERY_TERMINAL_NONINFERIOR",
+              "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+          }
+          assert closed.issubset(set(x["proved_predicates"])),x
+          assert closed.isdisjoint(set(x["unresolved_predicates"])),x
           assert "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR" in x["unresolved_predicates"],x
           assert x["new_reality_units_consumed"]==0,x
           assert x["execution_authority"] is False,x
           assert x["promotion_authority"] is False,x
+          assert x["fresh_reality_authority"] is False,x
           print("live scheduling world verified")
           PY
       - uses: actions/upload-artifact@v4
