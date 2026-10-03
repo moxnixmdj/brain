@@ -53,5 +53,5 @@ jobs:
             {'id':'real','safe':True,'outcome_by_hypothesis':{'h1':'l','h2':'r'},'decision_gain':0,'time':1},
           ])
           assert [x['id'] for x in ranked]==['real'],ranked
-          assert ranked[0]['derived_decision_gain']=='1/2',ranked
+          assert ranked[0]['conditional_decision_gain']=='1/2',ranked
           PY
