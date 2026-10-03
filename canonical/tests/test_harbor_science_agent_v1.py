@@ -74,6 +74,25 @@ class ScienceAgentTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError,"CANDIDATE_ALIAS_CONFLICT"):
                 asyncio.run(s.run_science_goal("goal",env,max_cycles=1))
 
+    def test_brain_finishes_immediately_after_verified_coverage(self):
+        env,result=self.run_goal([
+            {
+                "material_requirements":["R1"],
+                "candidates":[
+                    {"action_id":"a","covers":["R1"],"command":"echo work","verify_command":"echo verify"}
+                ],
+                "finish_summary":"premature-substrate-finish"
+            }
+        ])
+        self.assertEqual(env.commands,["echo work","echo verify"])
+        self.assertEqual(result["status"],"FINISHED")
+        self.assertEqual(result["finish_authority"],"BRAIN_VERIFIED_STATE")
+        self.assertEqual(result["cycles"],1)
+        self.assertEqual(result["resolved_requirements"],["R1"])
+        self.assertFalse(result["model_has_terminal_authority"])
+        self.assertNotEqual(result["summary"],"premature-substrate-finish")
+        self.assertEqual(result["trace"][0]["kind"],"FINISH_REJECTED")
+
     def test_failed_verify_does_not_promote_coverage_or_finish(self):
         env,result=self.run_goal([
             {
