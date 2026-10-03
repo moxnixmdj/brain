@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_PRETERMINAL_ROUTE__SOURCE_GATE_AND_REAL_HARBOR_ZERO_CASE_PREFLIGHT_PASS__TERMINAL_EXECUTION_STILL_FAIL_CLOSED",
+  "status": "REPAIR_STAGED__DEDICATED_PLANNER_CONTEXT_FIX__INDEPENDENT_REVERIFICATION_REQUIRED__TERMINAL_EXECUTION_BLOCKED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "predicate": "TB_SCIENCE_GE_58_7",
@@ -10,13 +10,15 @@
     "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
     "dataset_content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
     "brain_controller": "canonical/runtime/harbor_science_agent_v1.py",
-    "brain_controller_git_blob_sha": "5d6685d66ca04cec5e332993329e997f6e9fe272",
+    "brain_controller_git_blob_sha": "4aacda7973ff4310a1d22a4b1f289da301ec4381",
     "source_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
     "source_gate_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de",
     "harbor_version": "0.23.0",
-    "incremental_spend_usd": 0
+    "incremental_spend_usd": 0,
+    "brain_planner": "canonical/runtime/harbor_science_planner_v1.py",
+    "brain_planner_git_blob_sha": "6d61f28c79a6c9675cf1b3dc134e509f8731cc35"
   },
-  "independent_binding": "canonical/verification/TB_SCIENCE_INDEPENDENT_PREQUALIFICATION_BINDING_20261003_V1.json",
+  "independent_binding": "STALE_AFTER_CONTROLLER_RUNTIME_REPAIR__REVERIFY_REQUIRED",
   "source_gate_reduction": {
     "benchmark_harness_zero_cost": true,
     "scorer_frozen": true,
@@ -31,14 +33,14 @@
     "model_role": "GENERAL_COGNITION_SUBSTRATE",
     "model_dependency_count": 1,
     "model_dependencies_declared": true,
-    "general_substrate_test_pass": true,
+    "general_substrate_test_pass": false,
     "incremental_spend_usd": 0,
-    "verdict": "ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION"
+    "verdict": "BLOCKED_BEFORE_CASE_SPEND__REPAIRED_CONTROLLER_MATERIALITY_NOT_YET_INDEPENDENTLY_REVERIFIED"
   },
   "remaining_before_terminal_case_exposure": [
-    "FREEZE_EXACT_TERMINAL_EXECUTION_MANIFEST",
+    "INDEPENDENTLY_REVERIFY_REPAIRED_CONTROLLER_PLANNER_AND_MATERIALITY",
     "BIND_EXACT_SCORER_AND_POPULATION_IDENTITIES_WITHOUT_READING_TASK_CONTENT",
-    "FREEZE_THRESHOLD_ARITHMETIC_AND_EARLY_STOP_RULE_IF_BINARY_RATE_SEMANTICS_APPLY",
+    "FREEZE_EXACT_TERMINAL_EXECUTION_MANIFEST",
     "INDEPENDENTLY_VERIFY_EXECUTION_MANIFEST_AND_PROMOTION_PREFLIGHT",
     "ONLY_THEN_ISSUE_ONE_TERMINAL_EXECUTION_AUTHORITY"
   ],
@@ -49,5 +51,5 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "next": "BIND_SCORER_AND_POPULATION_METADATA_ZERO_CASE__FREEZE_PROMOTION_SAFE_EXECUTION_MANIFEST__INDEPENDENTLY_VERIFY__THEN_EXECUTE_ONLY_IF THE RESULT CAN DIRECTLY PROMOTE TB_SCIENCE_GE_58_7"
+  "next": "INDEPENDENTLY_VERIFY_REPAIRED_CONTROLLER_PLUS_DEDICATED_PLANNER__THEN_BIND_ZERO_CASE_SCORER_POPULATION_RECEIPT__THEN_FREEZE_PROMOTION_SAFE_EXECUTION_MANIFEST"
 }
