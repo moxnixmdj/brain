@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_SLICE_PUBLIC_RUNNER_VERIFICATION_20261003_V3",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACTLY_1_OF_12_SCOPED_PROVED_MEMORY__11_OPEN__ZERO_PARENT_CREDIT",
+  "exact_brain_inputs": {
+    "canonical/runtime/composition_component_proof_slicer_v1.py": "0e5028d8547bc3e17e7128b6311f734ac30a16d8",
+    "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V3.json": "141fa6f38d7da69b7c5e9e24729187da1c9a8c06"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1125,
+    "head_sha": "4c275f7b54d55fab17b88ede2e1c331a3f049cbb",
+    "merge_commit": "04507bfc95a4728970a47065e9273dd41816d0ac",
+    "workflow_run_id": 37086683177,
+    "workflow_job_id": 111098344499,
+    "conclusion": "success"
+  },
+  "verified_result": {
+    "frozen_interface_count": 12,
+    "scoped_proved_count": 1,
+    "open_count": 11,
+    "scoped_proved_components": [
+      "memory"
+    ],
+    "parent_composition_predicate_closed": false,
+    "all_used_component_interfaces_scoped_proved": false
+  },
+  "verified_memory_receipt_id": "COMPOSITION_OWNED_FAMILY_BRIDGE_V2::LONG_HORIZON_MEMORY_AND_CONTINUITY::memory",
+  "hard_nonclaims": [
+    "NO_OTHER_COMPONENT_PROVED",
+    "NO_PARENT_MULTI_CAPABILITY_COMPOSITION_ACCEPTANCE",
+    "NO_OPUS55_FAMILY_OR_ATOMIC_PREDICATE_CREDIT_DELTA",
+    "NO_HISTORICAL_QUARANTINED_RECEIPT_REUSE",
+    "NO_NEW_REALITY",
+    "NO_TERMINAL_REPLAY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
