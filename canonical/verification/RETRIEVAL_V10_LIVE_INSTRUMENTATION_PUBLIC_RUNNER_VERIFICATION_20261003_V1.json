@@ -1,0 +1,36 @@
+{
+  "schema":"PROJECT_BRAIN_RETRIEVAL_V10_LIVE_INSTRUMENTATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date":"2026-10-03",
+  "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__AUTOMATIC_LIVE_RETRIEVAL_MEASUREMENT_AND_APPEND_ONLY_EVENT_EMISSION__ZERO_CREDIT",
+  "verified_subjects":{
+    "canonical/runtime/retrieval_live_instrumented_executor_v1.py":"a63a4991daa3dca147f373b7890151f07afd3f4e",
+    "canonical/tests/test_retrieval_live_instrumented_executor_v1.py":"6f28c317ec231f1e912e4ad74f5326b9a39b9c0e",
+    "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json":"cb58ff10b7c3ac99da8cbee7b8aa0b76006f8dfe"
+  },
+  "independent_runner":{
+    "repository":"moxnixmdj/verification-capsule-runner",
+    "pull_request":1392,
+    "merge_commit":"97feaff50059825ff4ea6a4be03543b32aeb451c",
+    "workflow_run_id":37151475427,
+    "workflow_job_id":111286094440,
+    "conclusion":"success"
+  },
+  "verified":{
+    "current_global_retrieval_authority_checked_before_execution":true,
+    "wall_clock_latency_measured_with_perf_counter":true,
+    "successful_action_appends_exactly_one_live_event":true,
+    "retryable_failure_appends_failure_event":true,
+    "duplicate_episode_action_rejected_before_provider_call":true,
+    "provider_self_certification_rejected_as_permanent_failure":true,
+    "independent_receipt_required_for_sufficient_candidate_recording":true,
+    "live_calibration_recomputed_after_append":true,
+    "zero_credit_preserved":true
+  },
+  "incremental_spend_usd":0,
+  "acceptance_credit_delta":0,
+  "family_credit_delta":0,
+  "capability_credit_delta":0,
+  "ownership_credit_delta":0,
+  "execution_authority":false,
+  "promotion_authority":false
+}
