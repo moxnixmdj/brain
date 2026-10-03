@@ -6,7 +6,7 @@
   "authority": {
     "root_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "bb38521bf7dd4a8d404a1a62cfd326769eb075ea"
+      "git_blob_sha": "458a01f6a4b4f172c04785a3cdb4911086875f7c"
     },
     "route_matrix": {
       "path": "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
