@@ -36,7 +36,8 @@ PATHS={
     "contract":"canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json",
     "refinement_verification":"canonical/verification/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "terminal_binding":"canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
-    "terminal_result":"canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+    "ceiling_witness":"canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+    "scope_reconciliation":"canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
 }
 EXPECTED={
     PATHS["v1_proof"]:"2450a9644119c9fdf9c43307a1d115098d6ba592",
@@ -46,7 +47,8 @@ EXPECTED={
     PATHS["contract"]:"49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7",
     PATHS["refinement_verification"]:"5fcdc5ae35f51c40f312edbe5727284c9f6ca3dd",
     PATHS["terminal_binding"]:"6bcabc0a7d0525532ce7b80e132278f7c99caa43",
-    PATHS["terminal_result"]:"bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    PATHS["ceiling_witness"]:"60a7c1139cad315d977bf5ed97e708cc5ec3fcc7",
+    PATHS["scope_reconciliation"]:"ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
 }
 REQUIRED={
     "FINITE_DISCOVERY_SOURCE_SET_PER_DECISION_EPOCH",
@@ -325,19 +327,21 @@ def evaluate(*,run_exhaustive:bool=True)->dict[str,Any]:
         }
 
     binding=_load(PATHS["terminal_binding"])
-    terminal=_load(PATHS["terminal_result"])
+    ceiling=_load(PATHS["ceiling_witness"])
+    scope=_load(PATHS["scope_reconciliation"])
     errors=[]
     if binding.get("source_pool",{}).get("terminal_sample_count")!=180:
         errors.append("TERMINAL_BINDING_SAMPLE_COUNT_DRIFT")
     if binding.get("exact_bound_blobs",{}).get("candidate",{}).get("blob_sha")!=EXPECTED[PATHS["old_policy"]]:
         errors.append("TERMINAL_BINDING_OLD_POLICY_DRIFT")
-    route=terminal.get("direct_terminal_population",{}).get("routes",{}).get(
-        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",{}
-    )
-    if route!={"cases":180,"passes":180}:
-        errors.append("IMMUTABLE_TOOL_DISCOVERY_TERMINAL_RESULT_DRIFT")
-    if terminal.get("result_guards",{}).get("no_tuning_replay") is not True:
-        errors.append("TERMINAL_NO_REPLAY_GUARD_MISSING")
+    if ceiling.get("source_behavior_id")!="TOOL_ROUTE_DISCOVERY_AND_SELECTION_001" or ceiling.get("source_case_count")!=180:
+        errors.append("IMMUTABLE_TOOL_DISCOVERY_SAMPLE_WITNESS_DRIFT")
+    if scope.get("live_counterexample",{}).get("source_case_count")!=180:
+        errors.append("SCOPE_RECONCILIATION_SAMPLE_COUNT_DRIFT")
+    if scope.get("live_counterexample",{}).get("repaired_transmutation")!="DEFINED_RESULT_OPEN__ABSOLUTE_SCOPE_COMPLETENESS_MISSING":
+        errors.append("SCOPE_RECONCILIATION_TRUTH_BOUNDARY_DRIFT")
+    if "RAW_180_OF_180_TOOL_DISCOVERY_RESULT_REMAINS_VALID_FOR_ITS_EXECUTED_SAMPLE" not in (scope.get("hard_nonclaims") or []):
+        errors.append("IMMUTABLE_180_OF_180_VALIDITY_BOUNDARY_MISSING")
 
     # Six exact V2 classes are sufficient only as interface-shape witnesses.
     # Completeness itself is constructional: discovery_source(case).tool_ids is
