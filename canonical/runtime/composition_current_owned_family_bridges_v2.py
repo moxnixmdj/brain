@@ -11,6 +11,7 @@ reconstruct the exact source bindings before setting verified/independent true.
 from __future__ import annotations
 
 import copy
+import re
 from typing import Any, Mapping
 
 SCHEMA="PROJECT_BRAIN_COMPOSITION_CURRENT_OWNED_FAMILY_BRIDGES_V2"
@@ -77,7 +78,7 @@ def derive(
     if composition.get("acceptance")!=manifest.get("source_acceptance_literal"):
         errors.append("CURRENT_COMPOSITION_ACCEPTANCE_DIFFERS_FROM_FROZEN_MANIFEST")
 
-    mem_lit=[x for x in families if isinstance(x,Mapping) and "memory" in str(x.get("useful_behavior","")).lower().split()]
+    mem_lit=[x for x in families if isinstance(x,Mapping) and re.search(r"\bmemory\b", str(x.get("useful_behavior","")), flags=re.IGNORECASE)]
     mem_ids=sorted(str(x.get("id")) for x in mem_lit)
     if mem_ids!=sorted([MEMORY_FAMILY,"MULTI_CAPABILITY_COMPOSITION"]):
         errors.append("MEMORY_LITERAL_NOT_UNIQUE_TO_MEMORY_AND_COMPOSITION_FAMILIES")
