@@ -13,6 +13,7 @@ are not invocable by either side and therefore cannot be valid matched routes.
 from __future__ import annotations
 
 from copy import deepcopy
+import math
 from typing import Any, Mapping, Sequence
 
 PUBLIC_FIELDS = ("tool_id", "cost", "available", "authorized", "epoch", "meta")
@@ -38,7 +39,10 @@ def _normalize_authority(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, An
         cost = raw.get("cost")
         if isinstance(cost, bool) or not isinstance(cost, (int, float)):
             raise InterfaceError("AUTHORITY_COST_NUMERIC_REQUIRED:" + tid)
-        if float(cost) < 0:
+        cost = float(cost)
+        if not math.isfinite(cost):
+            raise InterfaceError("AUTHORITY_COST_FINITE_REQUIRED:" + tid)
+        if cost < 0:
             raise InterfaceError("AUTHORITY_COST_NEGATIVE:" + tid)
         if raw.get("available") not in (True, False):
             raise InterfaceError("AUTHORITY_AVAILABILITY_BOOL_REQUIRED:" + tid)
@@ -61,7 +65,7 @@ def _normalize_authority(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, An
             raise InterfaceError("AUTHORITY_META_MAPPING_REQUIRED:" + tid)
         out.append({
             "tool_id": tid,
-            "cost": float(cost),
+            "cost": cost,
             "available": bool(raw["available"]),
             "authorized": bool(raw["authorized"]),
             "epoch": int(epoch),
