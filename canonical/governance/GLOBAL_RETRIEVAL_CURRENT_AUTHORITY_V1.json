@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V6_CURRENT__EMPIRICAL_V8_ENTRYPOINT_V2_BOUND__GENERATED_STRESS_V9_BOUND__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V6_CURRENT__EMPIRICAL_V10_ENTRYPOINT_V3_BOUND__V8_V9_REGRESSIONS_PRESERVED__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_global_retrieval_authority": {
     "path": "canonical/governance/GLOBAL_RETRIEVAL_V6_ACTIVATION_V1.json",
@@ -58,7 +58,16 @@
     "FIXED_SOURCE_CORRELATION_AND_INDEPENDENCE_MULTIPLIERS_ARE_FORBIDDEN_FOR_CURRENT_EMPIRICAL_ROUTING",
     "FROZEN_768_CASE_GENERATED_HIDDEN_WITNESS_RECALL_MUST_NOT_REGRESS_BELOW_1_0_WITHOUT_EXPLICIT_FAIL_CLOSED_SUPERSESSION",
     "GENERATED_STRESS_ARENA_MUST_NOT_CALIBRATE_LIVE_PROVIDER_ROUTING",
-    "QUERYLESS_MULTILINGUAL_AND_REVISION_HISTORY_ABLATIONS_MUST_CONTINUE_TO_FAIL"
+    "QUERYLESS_MULTILINGUAL_AND_REVISION_HISTORY_ABLATIONS_MUST_CONTINUE_TO_FAIL",
+    "AUTHORIZED_GLOBAL_RETRIEVAL_PLAN_COMPILATION_MUST_USE_GLOBAL_RETRIEVAL_ENTRYPOINT_V3",
+    "GLOBAL_RETRIEVAL_ENTRYPOINT_V3_MUST_PASS_THE_EXISTING_FAIL_CLOSED_AUTHORITY_GUARD",
+    "PROVIDER_ROUTE_AND_QUERY_STRATEGY_ARE_JOINT_CALIBRATION_IDENTITIES",
+    "PROVIDER_ONLY_PERFORMANCE_CALIBRATION_IS_FORBIDDEN",
+    "UNKNOWN_ROUTE_STRATEGIES_USE_EXPLICIT_JEFFREYS_COLD_START",
+    "DIRECTIONAL_CONDITIONAL_RECOVERY_USES_ONLY_SHARED_LABELED_LIVE_CASES",
+    "MORE_QUERIES_OR_DEEPER_WINDOWS_ARE_NOT_ASSUMED_BETTER_WITHOUT_MEASURED_RECOVERY",
+    "PACKAGE_IDENTITY_RECOVERY_FROM_REPOSITORY_DISCOVERY_REQUIRES_VERIFIED_MANIFEST_OR_REGISTRY_BRIDGE",
+    "BEST_KNOWN_13_OF_13_LIVE_UNION_IS_FINITE_REGRESSION_TRUTH_NOT_OPEN_WORLD_COMPLETENESS"
   ],
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
@@ -113,10 +122,11 @@
       "entrypoint_v2_path": "canonical/runtime/global_retrieval_entrypoint_v2.py",
       "entrypoint_v2_git_blob_sha": "b34bb56b49a71c136c5a72e97acf7aeac94a3b97",
       "controller_verification_git_blob_sha": "5e9a16be3cf51a42f530377524c6cb08c81d4347",
-      "mandatory_for_authorized_global_retrieval_plan_compilation": true,
+      "mandatory_for_authorized_global_retrieval_plan_compilation": false,
       "fixed_correlation_multiplier_used": false,
       "fixed_source_independence_multiplier_used": false,
-      "live_calibration_maturity": "EARLY__ONE_VERIFIED_HISTORICAL_SOURCE_EPOCH"
+      "live_calibration_maturity": "EARLY__ONE_VERIFIED_HISTORICAL_SOURCE_EPOCH",
+      "superseded_for_current_plan_compilation_by": "canonical/runtime/global_retrieval_entrypoint_v3.py"
     }
   },
   "v9_generated_stress_extension": {
@@ -136,5 +146,43 @@
     "mandatory_regression_only": true,
     "permitted_to_calibrate_live_provider_routing": false,
     "open_world_recall_claim": false
+  },
+  "v10_route_strategy_extension": {
+    "activation_path": "canonical/governance/GLOBAL_RETRIEVAL_V10_ROUTE_STRATEGY_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "7682e239cd5e0f0ce87a3e66e2584f6e1de3aa3d",
+    "activation_verification_path": "canonical/verification/GLOBAL_RETRIEVAL_V10_ROUTE_STRATEGY_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "activation_verification_git_blob_sha": "ac18bbb04e9177c764ab91f34396d28280dca8b2",
+    "workflow_run_id": 37160712634,
+    "workflow_job_id": 111313384015,
+    "conclusion": "success",
+    "controller_v3_path": "canonical/runtime/global_retrieval_controller_v3.py",
+    "controller_v3_git_blob_sha": "44cb29b284f7ff069a68bf21e221f15d17ee94fa",
+    "entrypoint_v3_path": "canonical/runtime/global_retrieval_entrypoint_v3.py",
+    "entrypoint_v3_git_blob_sha": "f4af9c9c11b84371fd9fde751e7f0ddd56a9148d",
+    "calibration_v2_path": "canonical/runtime/retrieval_route_strategy_calibration_v2.py",
+    "calibration_v2_git_blob_sha": "018f859959d4a15540e8ee1428f6d3e60fe32d11",
+    "controller_verification_git_blob_sha": "83f5e4b28d9b79442a08d1ac22170cfb66c0339c",
+    "mandatory_for_authorized_global_retrieval_plan_compilation": true,
+    "best_known_live_labeled_case_count": 13,
+    "best_known_live_hit_count": 13,
+    "best_known_live_miss_count": 0,
+    "best_known_live_hit_rate": 1,
+    "optimized_single_strategy_task_count": 15,
+    "optimized_single_strategy_hit_count": 11,
+    "optimized_single_strategy_hit_rate": 0.7333333333333333,
+    "optimized_relative_recall_multiplier_over_raw": 5.133333333333333,
+    "cross_ecosystem_repo_bridge_hit_count": 4,
+    "cross_ecosystem_repo_bridge_case_count": 5,
+    "verified_repository_to_package_bridge_count": 2,
+    "deep_window_50_hit_count": 1,
+    "deep_window_50_case_count": 5,
+    "open_world_recall_claim": false
+  },
+  "v10_current_pointer_candidate_verification": {
+    "path": "canonical/verification/GLOBAL_RETRIEVAL_V10_CURRENT_POINTER_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "56e9f9305cbc2d73ee592911154290bf9fa511c0",
+    "workflow_run_id": 37160809783,
+    "workflow_job_id": 111313666076,
+    "conclusion": "success"
   }
 }

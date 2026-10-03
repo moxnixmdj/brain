@@ -1,0 +1,36 @@
+{
+  "schema":"PROJECT_BRAIN_GLOBAL_RETRIEVAL_V10_CURRENT_POINTER_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date":"2026-10-04",
+  "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V10_CURRENT_POINTER_CANDIDATE__ZERO_CREDIT",
+  "verified_pointer":{
+    "path":"canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha":"eb88533398a3c4ecb81a0f87bd2f212348f1b9e9"
+  },
+  "independent_runner":{
+    "repository":"moxnixmdj/verification-capsule-runner",
+    "pull_request":1463,
+    "merge_commit":"e88cd8c63baf78b0fde63a236c2a05f05ae362ef",
+    "workflow_run_id":37160809783,
+    "workflow_job_id":111313666076,
+    "conclusion":"success"
+  },
+  "verified":{
+    "v10_activation_binding_exact":true,
+    "v10_activation_verification_binding_exact":true,
+    "entrypoint_v3_binding_exact":true,
+    "controller_v3_binding_exact":true,
+    "calibration_v2_binding_exact":true,
+    "entrypoint_v2_superseded_for_current_plan_compilation":true,
+    "entrypoint_v3_mandatory_for_current_plan_compilation":true,
+    "best_known_live_13_of_13_finite_regression_bound":true,
+    "open_world_recall_claim":false,
+    "zero_credit_preserved":true
+  },
+  "incremental_spend_usd":0,
+  "acceptance_credit_delta":0,
+  "family_credit_delta":0,
+  "capability_credit_delta":0,
+  "ownership_credit_delta":0,
+  "execution_authority":false,
+  "promotion_authority":false
+}
