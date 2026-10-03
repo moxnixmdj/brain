@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_BRAIN_ROUTE_CANDIDATE_V1",
   "date": "2026-10-03",
-  "status": "REPAIRED_CANDIDATE_ZERO_CASE__DEDICATED_PLANNER_PLUS_OBSERVED_EXACT_ALIAS_NORMALIZATION__INDEPENDENT_REVERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "REPAIRED_CANDIDATE_ZERO_CASE__DEDICATED_PLANNER_PLUS_EXACT_ALIAS_NORMALIZATION__SYNTAX_DEFECT_CORRECTED__INDEPENDENT_REVERIFICATION_REQUIRED__ZERO_CREDIT",
   "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "target_predicate": "TB_SCIENCE_GE_58_7",
   "frozen_surface": {
@@ -67,7 +67,7 @@
   "capability_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "candidate_runtime_git_blob_sha": "08862621cfe6ff6915a98120db36686ae5a08dab",
+  "candidate_runtime_git_blob_sha": "8967f84a8f8537dad17b677329ed17e7b4ff0fad",
   "candidate_tests_git_blob_sha": "b6c5ea794398ace7a08b43f434a56da51e5323fd",
   "candidate_planner": "canonical/runtime/harbor_science_planner_v1.py",
   "candidate_planner_git_blob_sha": "17472fd2b01b164fbb180aecfc04385b55b11499",
