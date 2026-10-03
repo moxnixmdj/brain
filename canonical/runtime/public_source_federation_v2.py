@@ -24,7 +24,9 @@ def script(text:str)->str:
         elif "DEVANAGARI" in n: c["DEVANAGARI"]+=1
         elif "LATIN" in n: c["LATIN"]+=1
         else: c["OTHER"]+=1
-    return max(sorted(c),key=lambda k:c[k]) if c else "UNKNOWN"
+    for preferred in ("CJK","ARABIC","CYRILLIC","DEVANAGARI","OTHER"):
+        if c.get(preferred,0)>0: return preferred
+    return "LATIN" if c.get("LATIN",0)>0 else "UNKNOWN"
 
 def rows(queries:Sequence[str]|Sequence[Mapping[str,Any]])->list[dict[str,str]]:
     out=[]; seen=set()
