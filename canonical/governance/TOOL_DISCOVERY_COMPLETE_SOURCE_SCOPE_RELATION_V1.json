@@ -30,6 +30,10 @@
     "current_formalism_cut": {
       "path": "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json",
       "git_blob_sha": "48ba33998e73b8eec2731be51a7ec78077ed0d4a"
+    },
+    "complete_source_interface": {
+      "path": "canonical/runtime/tool_discovery_complete_source_interface_v1.py",
+      "git_blob_sha": "4e459b745b7ed5f4b9e2458396aa38cf4cadd74a"
     }
   },
   "target_semantics": {
@@ -49,7 +53,18 @@
     "duplicate_rule": "Duplicate tool identities across sources must carry identical public metadata for the same epoch; conflicting metadata invalidates the interface instance fail-closed.",
     "receipt_rule": "A discovery receipt identifies exactly one declared source and is immutable within the frozen episode; one receipt makes that source queried.",
     "authority_boundary": "Tools not exposed by the common frozen tool authority are outside both routes' admissible information and are not silently counted as Brain misses.",
-    "finite_progress": "Every valid DISCOVER adds one previously absent source receipt; every valid PROBE adds one previously absent current-epoch tool/capability receipt."
+    "finite_progress": "Every valid DISCOVER adds one previously absent source receipt; every valid PROBE adds one previously absent current-epoch tool/capability receipt.",
+    "implementation": "canonical/runtime/tool_discovery_complete_source_interface_v1.py",
+    "executable_validation": [
+      "REJECT_DUPLICATE_OR_UNKNOWN_TOOL_IDENTITIES",
+      "REJECT_DUPLICATE_OR_UNKNOWN_SOURCE_BINDINGS",
+      "REJECT_NONFINITE_OR_NEGATIVE_DECLARED_COSTS",
+      "REJECT_INCOMPLETE_AVAILABLE_SOURCE_PLUS_INITIAL_VISIBILITY_COVERAGE",
+      "DISCOVER_RETURNS_ALL_PUBLIC_METADATA_BOUND_TO_THE_SELECTED_AVAILABLE_SOURCE",
+      "DISCOVER_NEVER_RETURNS_HIDDEN_CAPABILITY_TRUTH",
+      "DISCOVERY_RECEIPT_BINDS_THE_FROZEN_AUTHORITY_MANIFEST",
+      "APPLY_DISCOVERY_REJECTS_CONFLICTING_PUBLIC_METADATA_AND_REPLAYED_SOURCES"
+    ]
   },
   "candidate_v4_invariants": [
     "ALL_AVAILABLE_DECLARED_DISCOVERY_SOURCES_ARE_EXHAUSTED_BEFORE_ANY_PROBE_OR_SELECT",
@@ -108,12 +123,12 @@
   },
   "hard_nonclaims": [
     "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_CANDIDATE_RELATION",
-    "NO_CLAIM_THAT_ARBITRARY_BROKEN_OR_INCOMPLETE_EXTERNAL_DISCOVERY_SOURCES_ARE_COMPLETE",
     "NO_CLAIM_FOR_TOOLS_OUTSIDE_THE_COMMON_FROZEN_TOOL_AUTHORITY",
     "NO_EMPIRICAL_GENERALIZATION_FROM_THE_V3_SAMPLE_GRID",
     "NO_TERMINAL_REPLAY",
     "NO_NEW_REALITY",
-    "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_AND_SEPARATE_ACCEPTANCE_REDUCTION_REMAIN_REQUIRED"
+    "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_AND_SEPARATE_ACCEPTANCE_REDUCTION_REMAIN_REQUIRED",
+    "INCOMPLETE_OR_BROKEN_DISCOVERY_AUTHORITIES_ARE_REJECTED_BY_THE_EXECUTABLE_INTERFACE_AND_RECEIVE_NO_SCOPE_CREDIT"
   ],
   "terminal_cases_replayed": 0,
   "new_reality_units_consumed": 0,
