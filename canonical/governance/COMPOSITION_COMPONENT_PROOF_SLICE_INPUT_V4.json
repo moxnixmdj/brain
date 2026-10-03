@@ -124,7 +124,7 @@
       "source_universal_scope_receipt": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "source_acceptance_receipt": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "bridge_candidate_path": "canonical/governance/COMPOSITION_DELEGATION_SCOPE_COMPLETE_BRIDGE_V1.json",
-      "bridge_verification_path": "canonical/verification/COMPOSITION_DELEGATION_SCOPE_COMPLETE_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      "bridge_verification_path": "canonical/verification/COMPOSITION_DELEGATION_BRIDGE_V1_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
     }
   ],
   "rule": "ONLY_TWO_INDEPENDENTLY_VERIFIED_CURRENT_SOURCE_COMPONENT_RECEIPTS_ARE_ADDED_TO_THE_FROZEN_12_INTERFACE_BASELINE__MEMORY_AND_DELEGATION__HISTORICAL_QUARANTINED_RECEIPTS_REMAIN_EXCLUDED__NO_ADJACENT_OR_PARENT_CREDIT",
@@ -141,7 +141,7 @@
       "conclusion": "success"
     },
     "delegation": {
-      "path": "canonical/verification/COMPOSITION_DELEGATION_SCOPE_COMPLETE_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "path": "canonical/verification/COMPOSITION_DELEGATION_BRIDGE_V1_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "public_runner_pr": 1129,
       "workflow_run_id": 37086752998,
       "workflow_job_id": 111098549344,
