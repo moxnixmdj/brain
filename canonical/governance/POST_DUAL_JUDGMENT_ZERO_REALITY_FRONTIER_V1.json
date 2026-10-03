@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__POST_DUAL_SOURCE_GATE_FRONTIER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_base_commit": "2378c6bc1d8ac28f24ed5a61e74f4eafbc114f5d",
+  "objective": "Recompute only the zero-reality scheduling frontier after independently verified shared Finance/Unknown-Domain source admission, without closing either direct acceptance predicate or granting fresh-reality authority.",
+  "exact_inputs": {
+    "previous_dominance": {
+      "path": "canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json",
+      "git_blob_sha": "fae786d6051277865ed6ecde69be5da98e2bf509"
+    },
+    "previous_dominance_verification": {
+      "path": "canonical/verification/CURRENT_27_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "1931ae5a7edb5dde2021a8a4f7e7a3ad0fd821f1"
+    },
+    "terminal_certificate_frontier": {
+      "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+      "git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+    },
+    "dual_source_activation_verification": {
+      "path": "canonical/verification/DUAL_JUDGMENT_SOURCE_GATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "6ec5f6d808c88bf9ea728fb7f259edc3b4ae5a51"
+    },
+    "matched_scope_v2": {
+      "path": "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json",
+      "git_blob_sha": "438e2775b64bee5ed6e792522ab35ebd0d6e1771"
+    },
+    "current_v10_scheduling": {
+      "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+      "git_blob_sha": "54be838a5a0a9698398893ad113641496d5051b8"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "predicate_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163"
+    }
+  },
+  "reducer": {
+    "path": "canonical/runtime/post_dual_judgment_zero_reality_frontier_v1.py",
+    "git_blob_sha": "410e4e1b7b29fa4b488f224c89f613896f35dd7a"
+  },
+  "tests": {
+    "path": "canonical/tests/test_post_dual_judgment_zero_reality_frontier_v1.py",
+    "git_blob_sha": "290b99444a94e3e8ff070a4645ca41045630ac1a"
+  },
+  "expected": {
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "previous_zero_reality_requirements": 19,
+    "discharged_zero_reality_requirements": 2,
+    "current_zero_reality_requirements": 17,
+    "previous_nondominated_zero_reality_certificates": 16,
+    "retired_zero_reality_certificates": 2,
+    "current_nondominated_zero_reality_certificates": 14,
+    "zero_reality_covered_predicates": 25,
+    "direct_reality_blocked_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "primitive_zero_reality_work_units": 31,
+    "matched_priority_child_facts": 16
+  },
+  "hard_rules": [
+    "THE_TWO_DIRECT_PREDICATES_REMAIN_OPEN",
+    "SOURCE_GATE_DISCHARGE_IS_NOT_ACCEPTANCE_CLOSURE",
+    "NO_DIRECT_ORACLE_CASE_CONTENT_READ",
+    "GLOBAL_FRESH_REALITY_AUTHORITY_REMAINS_FALSE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_case_content_read": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "derivation_rule": "DERIVE_EXACT_LIVE_27_IDS_FROM_38_PREDICATE_REGISTRY_MINUS_11_PROVED_EVIDENCE_CLAIMS__INTERSECT_HISTORICAL_V5_CERTIFICATE_TARGETS__THEN_SUBTRACT_ONLY_TWO_INDEPENDENTLY_DISCHARGED_SOURCE_REQUIREMENTS"
+}
