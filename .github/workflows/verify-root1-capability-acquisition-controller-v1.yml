@@ -1,0 +1,50 @@
+name: Verify Root1 capability acquisition controller v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/root1_capability_acquisition_controller_v1.py"
+      - "canonical/tests/test_root1_capability_acquisition_controller_v1.py"
+      - "canonical/governance/ROOT1_CAPABILITY_ACQUISITION_CONTROLLER_V1.json"
+      - "canonical/action_intents/2026-10-04_ROOT1_CAPABILITY_ACQUISITION_CONTROLLER_V1.json"
+      - ".github/workflows/verify-root1-capability-acquisition-controller-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run Root1 and V3 tests
+        run: |
+          python -m unittest             canonical.tests.test_universal_learning_decision_router_v3             canonical.tests.test_root1_capability_acquisition_controller_v1 -v
+      - name: Verify exact blobs and dormant boundary
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          from canonical.runtime import root1_capability_acquisition_controller_v1 as r1
+          gov=json.loads(Path("canonical/governance/ROOT1_CAPABILITY_ACQUISITION_CONTROLLER_V1.json").read_text())
+          for path,expected in gov["exact_bound_components"].items():
+              got=subprocess.check_output(["git","hash-object",path],text=True).strip()
+              assert got==expected,(path,got,expected)
+          out=r1.acquisition_transaction(
+              gap_evidence=None,
+              required_primitives={"x"},
+              verified_primitives=set(),
+              actions=[{"id":"search","safe":True,"source_class":"web","p_close":1,"terminal_leverage":1,"information_gain":1,"time":1,"risk":0,"incremental_spend_usd":0}],
+          )
+          assert out["status"]=="NO_ACTION_ROOT1_INACTIVE",out
+          assert out["selected_actions"]==[],out
+          assert out["fresh_reality_authority"] is False
+          assert out["promotion_authority"] is False
+          PY
