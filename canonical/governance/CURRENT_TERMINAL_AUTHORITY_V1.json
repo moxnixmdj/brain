@@ -888,7 +888,7 @@
     },
     "root2_root3_minimum_execution_frontier_v1": {
       "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
-      "git_blob_sha": "5acf38e43574a7b7c6878487f9cbfe20dc3b0e21",
+      "git_blob_sha": "76286eacc8d7a5ed0dd1025236b1bea34ab361a8",
       "status": "ACTIVE__ROOT3_CURRENT_BOUND_SEARCH_SATURATED__ROOT2_ROUTE_BINDING_ACTIVE__TB4_RENDER_RESOLVED_EMPTY__ZERO_CREDIT"
     },
     "current_witness_target_totalization_v2_candidate": {
@@ -903,7 +903,7 @@
     },
     "root3_residual_compression_v1": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
-      "git_blob_sha": "0a21b5b2cbb928b44ea22635df1c37919f2eb612",
+      "git_blob_sha": "f6e264a0f7a63e1076be4bc4af7986f9aed07544",
       "status": "ACTIVE_FAIL_CLOSED__CURRENT_ROOT3_RESIDUALS_COMPRESSED__ZERO_CREDIT"
     },
     "current_zero_reality_minimum_cut_v7": {
@@ -918,7 +918,7 @@
     },
     "current_zero_reality_minimum_cut_v8": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
-      "git_blob_sha": "1bc2c254207b546a631022163dd51d6f22472d11",
+      "git_blob_sha": "5fe71dcc8a44274f2608e07a2a6c1b8dd12bd0f3",
       "status": "CANDIDATE__TB_SCIENCE_CARRIER_ATTAINABILITY_DISCHARGED__CURRENT_BOUND_ZERO_REALITY_SEARCH_COMPRESSED__ZERO_CREDIT"
     },
     "current_v8_post_compression_verification_binding": {
@@ -938,6 +938,13 @@
         "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
         "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
       ]
+    },
+    "universal_learning_open_world_v4": {
+      "governance_path": "canonical/governance/UNIVERSAL_LEARNING_OPEN_WORLD_ROUTER_V4.json",
+      "governance_git_blob_sha": "a08ea261bc83bcf7a32c8fe437b4d491d1124b32",
+      "verification_path": "canonical/verification/UNIVERSAL_LEARNING_OPEN_WORLD_V4_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "8ed4f50303645921458b8429728ffca2c2ce293a",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT3_OPERATIVE_OVERLAY_ONLY__ZERO_ACCEPTANCE_AND_OWNERSHIP_CREDIT"
     }
   },
   "residual": [
