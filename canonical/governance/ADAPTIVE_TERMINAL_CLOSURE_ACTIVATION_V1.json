@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__POLICY_AND_CONTROLLER_BOUND__INDEPENDENT_ACTIVATION_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Activate the independently verified count-generic adaptive terminal closure controller as scheduling authority only, preserving all existing acceptance, ownership, execution, promotion, and fresh-reality gates.",
+  "supersedes_scheduling_behavior": "TERMINAL_SCHEDULING_V9_STATIC_POST_RECOVERY_PRIORITY_WHILE_PRESERVING_ALL_V9_HARD_GATES",
+  "exact_subjects": {
+    "policy": {
+      "path": "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_POLICY_V1.json",
+      "git_blob_sha": "860bd1947a1e3ccc0d73d5ad85d006360c443337"
+    },
+    "controller": {
+      "path": "canonical/runtime/adaptive_terminal_closure_controller_v1.py",
+      "git_blob_sha": "2c15aeef745ac3b0e3a6eaa578f0d7893e935bd9"
+    },
+    "tests": {
+      "path": "canonical/tests/test_adaptive_terminal_closure_controller_v1.py",
+      "git_blob_sha": "df33a45f233f749af501c22c0a8597ba6066ea22"
+    },
+    "controller_verification": {
+      "path": "canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_CONTROLLER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f7dbc7b4075b36371b9e3db3d22f18136c0dd5b9"
+    },
+    "prior_scheduling_pointer": {
+      "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+      "git_blob_sha": "04f0ee3cd64c3f77b29ece159ac9a35eae47a9dc"
+    }
+  },
+  "current_world": {
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN"
+  },
+  "activation_semantics": {
+    "scheduler_can_rank_and_refine_zero_reality_work": true,
+    "scheduler_can_launch_fresh_reality": false,
+    "scheduler_can_grant_acceptance": false,
+    "scheduler_can_grant_capability_credit": false,
+    "scheduler_can_grant_family_credit": false,
+    "scheduler_can_grant_ownership_credit": false,
+    "scheduler_can_promote": false,
+    "fixed_point_after_every_independently_verified_delta": true,
+    "recompute_dominance_after_every_acceptance_delta": true,
+    "preserve_tool_discovery_v2_gate": true,
+    "preserve_no_result_not_nonexistence": true
+  },
+  "hard_rules": [
+    "SCHEDULING_ONLY_ZERO_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CONFLATION",
+    "NO_STALE_FRONTIER_REPLAY",
+    "COUNT_GENERIC_RECOMPUTATION_AFTER_VERIFIED_DELTAS",
+    "TOOL_DISCOVERY_V2_GATE_REMAINS_MANDATORY"
+  ],
+  "next": "INDEPENDENT_PUBLIC_RUNNER_VERIFY_EXACT_ACTIVATION_SUBJECTS_AND_INVARIANTS__THEN_UPDATE_SINGLE_CURRENT_SCHEDULING_AUTHORITY_POINTER",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
