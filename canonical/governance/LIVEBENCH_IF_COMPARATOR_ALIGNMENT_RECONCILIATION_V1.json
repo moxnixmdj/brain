@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_COMPARATOR_ALIGNMENT_RECONCILIATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_FAIL_CLOSED__CURRENT_METRIC_BINDING_CONTRADICTS_PINNED_LIVEBENCH_SCORER__COMPARATOR_RELEASE_IDENTITY_UNPROVED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "objective": "Correct the zero-reality comparator ABI before any LiveBench-IF terminal execution. This artifact grants no score, acceptance, family, capability, ownership, execution, or promotion credit.",
+  "current_brain_binding": {
+    "path": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
+    "git_blob_sha": "477c82d98a15fe9e3b1d47f56cd50afe357202bf",
+    "conflicting_literal": "PROMPT_LEVEL_LOOSE_ACCURACY_IS_PUBLICLY_DECLARED_REPORTED_METRIC"
+  },
+  "current_input_binding": {
+    "path": "canonical/governance/LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json",
+    "git_blob_sha": "5d0b876e07901b61f92c89b2257bd07790f53e60",
+    "dataset_repository": "livebench/instruction_following",
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "data_artifact_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25"
+  },
+  "frozen_predicate_registry": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "acceptance": "LiveBench Instruction Following >= 65.7%"
+  },
+  "pinned_upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "process_results_path": "livebench/process_results/instruction_following/utils.py",
+    "process_results_git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676",
+    "ifbench_evaluation_path": "livebench/if_runner/ifbench/evaluation_lib.py",
+    "ifbench_evaluation_git_blob_sha": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+    "changelog_path": "changelog.md",
+    "changelog_git_blob_sha": "97a0b6ffd845aec29f48f96ca24b96ac100e4162"
+  },
+  "verified_source_semantics_candidate": {
+    "evaluation_mode": "STRICT",
+    "score_formula": "(ALL_INSTRUCTIONS_FOLLOWED_INDICATOR + FRACTION_OF_INSTRUCTIONS_FOLLOWED) / 2",
+    "score_range": [
+      0,
+      1
+    ],
+    "evidence": [
+      "ifbench_process_results calls evaluation_lib.test_instruction_following_strict",
+      "score_results computes score_1 from follow_all_instructions, score_2 as mean(follow_instruction_list), then avg_score=(score_1+score_2)/2"
+    ]
+  },
+  "release_identity_candidate": {
+    "pinned_changelog_latest_entry": "2026-01-08",
+    "pinned_changelog_instruction_following_refresh": "2025-11-25",
+    "claimed_or_assumed_release_label_not_found": "2026-06-25",
+    "exact_65_7_bar_to_dataset_revision_relation": "UNPROVED"
+  },
+  "consequences": [
+    "DO_NOT_SCORE_OR_PROMOTE_LIVEBENCH_IF_USING_PROMPT_LEVEL_LOOSE_ACCURACY",
+    "DO_NOT_TREAT_DATASET_REVISION_0868379C_AS_THE_65_7_COMPARATOR_POPULATION_UNTIL_EXACT_FIRST_PARTY_OR_INDEPENDENT_EQUIVALENCE_IS_BOUND",
+    "EXISTING_58_CHECKER_RUNTIME_AND_ADAPTER_PREFLIGHTS_REMAIN_USEFUL_BUT_DO_NOT_ESTABLISH_COMPARATOR_ALIGNMENT",
+    "LIVEBENCH_IF_GE_65_7_REMAINS_OPEN"
+  ],
+  "discharge_conditions": [
+    "INDEPENDENTLY_VERIFY_EXACT_PINNED_LIVEBENCH_STRICT_AVERAGED_SCORER_SEMANTICS",
+    "BIND_THE_65_7_OPUS55_COMPARATOR_TO_AN_EXACT_DATASET_RELEASE_OR_INDEPENDENTLY_PROVE_THE_CURRENT_DATASET_REVISION_EQUIVALENT",
+    "REBUILD_LIVEBENCH_IF_COMPARABLE_SCORE_ROUTE_WITH_THE_CORRECT_METRIC_AND_POPULATION_IDENTITY",
+    "INDEPENDENTLY_VERIFY_THE_REBUILT_ROUTE_BEFORE_ANY_TERMINAL_CASE_EXECUTION"
+  ],
+  "hard_rules": [
+    "NO_TERMINAL_CASE_CONTENT_READ",
+    "NO_SCORE_INFERENCE_FROM_IFBENCH_PAPER_METRIC",
+    "NO_RELEASE_LABEL_INVENTION",
+    "NO_DATASET_EQUIVALENCE_BY_DATE_OR_NAME_ANALOGY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "terminal_case_content_read": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
