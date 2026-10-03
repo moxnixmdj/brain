@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_TERMINAL_CLOSURE_V12_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V12_V4_POST_DUAL__31_PRIMITIVE_ZERO_REALITY_WORK_UNITS__16_MATCHED_FIRST_PRIORITY__2_OWNERSHIP_RECONCILIATION__ZERO_CREDIT",
+  "verified_brain_subjects": {
+    "controller": {
+      "path": "canonical/runtime/adaptive_terminal_closure_controller_v2.py",
+      "git_blob_sha": "3d3c3c788593a5bf55e76b6e5f15f61f886e641b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_adaptive_terminal_closure_controller_v2.py",
+      "git_blob_sha": "9ec7c9eedb42a92b6b4a0646b24e0d40b60b987a"
+    },
+    "activation_candidate": {
+      "path": "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V2.json",
+      "git_blob_sha": "5701eac93b0017c55f8db9d6adbf4fc9eae00752"
+    },
+    "current_scheduling_authority": {
+      "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+      "git_blob_sha": "bc578e6db4eedcefbed61f6860e1cc5192cf05f4"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1345,
+    "verifier_head_sha": "d91eac8954ce81c054d161cb75adc17062bb72fd",
+    "merge_commit": "97628aca005e073e70ad8c8bb0d46fc638cee440",
+    "workflow_run_id": 37124155533,
+    "workflow_job_id": 111205980618,
+    "conclusion": "success"
+  },
+  "verified": {
+    "live_predicate_state": "11_PROVED__27_UNRESOLVED",
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "nondominated_certificates": 14,
+    "zero_reality_requirements": 17,
+    "zero_reality_covered_predicates": 25,
+    "primitive_acceptance_work_units": 31,
+    "matched_first_resource_priority_work_units": 16,
+    "direct_nonmatched_zero_reality_work_units": 15,
+    "direct_reality_blocked_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "ownership_reconciliation_work_units": 2,
+    "v12_current_scheduling_authority_required": true,
+    "tool_discovery_v4_over_verified_v3_v2_required": true,
+    "unknown_probabilities_not_invented": true,
+    "empirical_probability_scheduling_only": true,
+    "zero_authority_leakage": true
+  },
+  "consequence": "ADAPTIVE_CONTROLLER_V2_IS_VERIFIED_FOR_ZERO_CREDIT_SCHEDULING_USE_ON_CURRENT_V12_V4_POST_DUAL_WORLD__V1_REMAINS_HISTORICAL",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_OR_FAMILY_PROMOTION",
+    "NO_OWNERSHIP_PROMOTION",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_DIRECT_FINANCE_OR_UNKNOWN_DOMAIN_REALITY_EXECUTION"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
