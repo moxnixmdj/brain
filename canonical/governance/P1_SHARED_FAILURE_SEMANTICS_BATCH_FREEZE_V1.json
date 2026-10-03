@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_P1_SHARED_FAILURE_SEMANTICS_BATCH_FREEZE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_PRE_CASE_SELECTION_FREEZE__INDEPENDENT_VERIFICATION_REQUIRED__EXECUTION_NOT_AUTHORIZED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Freeze the exact minimum one-shared-batch P1 fresh-reality observation before any fresh case is selected, so the remaining failure-semantics transport residual can be measured once across all three frozen direct surfaces without replay, tuning, semantic guessing, or paid execution.",
+  "selected_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+  "minimum_new_reality_units": 1,
+  "exact_authority": {
+    "minimum_reality_cut": {
+      "path": "canonical/governance/P1_MINIMUM_REALITY_CUT_INPUT_V1.json",
+      "git_blob_sha": "cbcb2faff8404623846e77e19fcc5b0ad00e81d9"
+    },
+    "multiplex_binding": {
+      "path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+    },
+    "portfolio_manifest": {
+      "path": "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
+      "git_blob_sha": "8b439403a05b4a912f06a8866db25f6e53b52473"
+    },
+    "candidate_v7": {
+      "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+      "git_blob_sha": "28940387bd6c11671035ad9201e37bba13fd9bc9"
+    },
+    "intervention_scorer_v6": {
+      "path": "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py",
+      "git_blob_sha": "0f41a36e6ad16722ce05b180e036fb921a2ef886"
+    },
+    "normalizer_v1": {
+      "path": "canonical/runtime/p1_shared_failure_semantics_normalizer_v1.py",
+      "git_blob_sha": "b6ba06fc6a35fa132eb19389ee256e74a63a4849"
+    }
+  },
+  "frozen_direct_surfaces": [
+    "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+  ],
+  "frozen_pipeline": {
+    "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+    "source_semantics_normalizer": "canonical/runtime/p1_shared_failure_semantics_normalizer_v1.py",
+    "scorer": "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py::score_case",
+    "intervention_replay": "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py::execute_intervention",
+    "source_semantics_rule": "FAILED_CHECK_FAILURE_SEMANTICS_MUST_BE_EXPLICITLY_SOURCE_BOUND_BEFORE_CANDIDATE_VISIBILITY__MISSING_OR_UNKNOWN_VALUE_FAILS_CLOSED",
+    "support_rule": "EVERY_FAILED_CHECK_MUST_CARRY_NONEMPTY_CAUSALLY_RELEVANT_SUPPORTING_RECEIPTS",
+    "semantic_classes": [
+      "DIRECT_CONTRACT",
+      "DERIVED_UPSTREAM"
+    ]
+  },
+  "shared_batch_contract": {
+    "one_batch_covers_all_three_surfaces": true,
+    "all_three_surface_identities_required": true,
+    "both_failure_semantics_classes_required_per_admitted_case": true,
+    "v7_candidate_frozen_before_case_selection": true,
+    "scorer_frozen_before_case_selection": true,
+    "normalizer_frozen_before_case_selection": true,
+    "surface_mapping_frozen_before_case_selection": true,
+    "post_freeze_case_selection_required": true,
+    "candidate_must_not_receive_case_selection_information_before_freeze": true,
+    "fresh_case_source_must_be_external_or_source_native_and_not_chosen_from_result_feedback": true,
+    "terminal_v3_replay": false,
+    "synthetic_v7_only_credit_forbidden": true,
+    "post_result_case_replacement": false,
+    "post_result_tuning": false,
+    "incremental_spend_usd": 0
+  },
+  "admission_boundary": {
+    "this_freeze_consumes_fresh_reality": false,
+    "this_freeze_authorizes_execution": false,
+    "execution_may_be_authorized_only_after_independent_verification_of_exact_freeze_and_normalizer_bytes": true,
+    "fresh_batch_must_still_supply_source_bound_semantics_and_receipts": true
+  },
+  "hard_rules": [
+    "NO_FAILURE_SEMANTICS_INFERENCE_OR_DEFAULT",
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_POST_FREEZE_CASE_SPECIFIC_TUNING",
+    "NO_POST_RESULT_CASE_REPLACEMENT",
+    "NO_PAID_ROUTE",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT_FROM_PREFLIGHT",
+    "NO_P1_QUARANTINE_LIFT_FROM_PREFLIGHT_ALONE"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_FREEZE_NORMALIZER_CANDIDATE_SCORER_SURFACE_AND_MINIMUM_CUT_BYTES__IF_PASS__AUTHORIZE_ONLY_ONE_POST_FREEZE_SOURCE_NATIVE_SHARED_BATCH__THEN_REDUCE_P1_SCOPE_TRANSPORT_WITHOUT_TERMINAL_V3_REPLAY"
+}
