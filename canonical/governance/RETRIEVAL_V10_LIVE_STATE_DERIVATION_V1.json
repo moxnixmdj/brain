@@ -1,0 +1,27 @@
+{
+  "corrections": [
+    "TITLE_ONLY_SCHOLARLY_SUFFICIENCY_REMOVED",
+    "SUFFICIENCY_REQUIRES_FROZEN_EXACT_TARGET_ID",
+    "EXPLICIT_CROSS_SOURCE_ENTITY_EQUIVALENCE_APPLIED",
+    "UNMAPPED_CANDIDATES_REMAIN_SOURCE_SCOPED"
+  ],
+  "derived_state": {
+    "episode_count": 13,
+    "event_count": 31,
+    "live_retryable_failure_count": 2,
+    "live_success_count": 28,
+    "source_count": 10,
+    "state_sha256": "cc4168d8c63e03a9aa0ccd4ba4bfab1f22cf941e97afe2b2703d1b8f75e39124",
+    "task_class_count": 7,
+    "verified_sufficient_event_count": 7
+  },
+  "incremental_spend_usd": 0,
+  "open_world_completeness_claim": false,
+  "raw_artifact": {
+    "artifact_id": 11285937655,
+    "raw_event_count": 30,
+    "sha256": "fa764e4d337083050f45ab7453865fd232a37962c9b09ac58952c0c30034bc40",
+    "workflow_run_id": 37157325986
+  },
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V10_LIVE_STATE_DERIVATION_V1"
+}
