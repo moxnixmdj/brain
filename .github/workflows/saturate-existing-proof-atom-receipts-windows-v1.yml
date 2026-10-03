@@ -1,0 +1,31 @@
+name: Saturate existing proof-atom receipts Windows V1
+
+on:
+  push:
+    branches:
+      - execute/receipt-saturation-windows-20261003-sol
+    paths:
+      - ".github/workflows/saturate-existing-proof-atom-receipts-windows-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  saturate:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compute exact current proof-atom receipt index
+        shell: pwsh
+        run: |
+          python canonical/runtime/proof_atom_receipt_index_v2.py | Out-File -Encoding utf8 canonical/reasoning/PROOF_ATOM_RECEIPT_SCAN_WINDOWS_20261003_V1.json
+          python -c "import json; p=json.load(open('canonical/reasoning/PROOF_ATOM_RECEIPT_SCAN_WINDOWS_20261003_V1.json',encoding='utf-8-sig')); assert str(p.get('status','')).startswith('PASS'), p; assert p.get('canonical_atom_count')==40, p; print(json.dumps({k:p.get(k) for k in ['status','scanned_file_count','candidate_match_count','atoms_with_candidate_matches','atoms_without_candidate_matches']},indent=2,sort_keys=True))"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-saturation-windows-v1
+          path: canonical/reasoning/PROOF_ATOM_RECEIPT_SCAN_WINDOWS_20261003_V1.json
