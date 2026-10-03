@@ -1,0 +1,108 @@
+{
+  "schema":"PROJECT_BRAIN_GLOBAL_RETRIEVAL_PUBLIC_SOURCE_CAPABILITY_EVIDENCE_20261003_V1",
+  "date":"2026-10-03",
+  "status":"PUBLIC_DOCUMENTATION_EVIDENCE__CANDIDATE_SOURCE_CAPABILITIES_ONLY__NO_COMPLETENESS_BEYOND_DECLARED_SCOPE",
+  "sources":[
+    {
+      "source_id":"PYPI_PUBLIC_PROJECTS",
+      "documentation":"Python Packaging User Guide Simple Repository API",
+      "documentation_url":"https://packaging.python.org/en/latest/specifications/simple-repository-api/",
+      "observed_capability":"The Simple API root project-list representation exposes project names available from the repository.",
+      "admitted_scope":"PROJECT_NAMES_VISIBLE_THROUGH_THE_SELECTED_SIMPLE_REPOSITORY_AT_THE_OBSERVATION_EPOCH",
+      "bounded_scope":true,
+      "authoritative_enumeration":true,
+      "caveats":["DYNAMIC_EPOCH","PROJECT_NAME_ENUMERATION_IS_NOT_PACKAGE_BEHAVIOR_COMPLETENESS","INTERRUPTED_FETCH_IS_NOT_COMPLETE"]
+    },
+    {
+      "source_id":"HUGGING_FACE_PUBLIC_HUB",
+      "documentation":"Hugging Face Hub search/list documentation",
+      "documentation_url":"https://huggingface.co/docs/huggingface_hub/guides/search",
+      "observed_capability":"HfApi exposes iterators that list models, datasets, and Spaces stored on the Hub.",
+      "admitted_scope":"PUBLIC_OR_CALLER_VISIBLE_MODEL_DATASET_AND_SPACE_REPOSITORIES_AT_THE_OBSERVATION_EPOCH",
+      "bounded_scope":true,
+      "authoritative_enumeration":true,
+      "caveats":["RATE_LIMITS_APPLY","PRIVATE_OR_GATED_VISIBILITY_DEPENDS_ON_CALLER_ACCESS","DYNAMIC_EPOCH"]
+    },
+    {
+      "source_id":"GITLAB_PUBLIC_PROJECTS",
+      "documentation":"GitLab Projects API",
+      "documentation_url":"https://docs.gitlab.com/api/projects/",
+      "observed_capability":"GET /projects lists projects accessible to the caller; unauthenticated requests return public projects and keyset pagination can list beyond 50,000.",
+      "admitted_scope":"PUBLIC_PROJECTS_VISIBLE_ON_THE_SELECTED_GITLAB_INSTANCE_AT_THE_OBSERVATION_EPOCH",
+      "bounded_scope":true,
+      "authoritative_enumeration":true,
+      "caveats":["INSTANCE_SCOPED","AUTHENTICATION_CHANGES_VISIBILITY","RATE_LIMITS_APPLY","DYNAMIC_EPOCH"]
+    },
+    {
+      "source_id":"CROSSREF_WORKS",
+      "documentation":"Crossref REST API",
+      "documentation_url":"https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+      "observed_capability":"The public REST API exposes /works and other list endpoints for metadata deposited with Crossref; no signup is required for public access.",
+      "admitted_scope":"CROSSREF_REGISTERED_METADATA_VISIBLE_THROUGH_THE_PUBLIC_API_AT_THE_OBSERVATION_EPOCH",
+      "bounded_scope":true,
+      "authoritative_enumeration":true,
+      "caveats":["METADATA_UNIVERSE_NOT_FULL_TEXT_UNIVERSE","RATE_LIMITS_AND_POLITE_POOL_GUIDANCE_APPLY","DYNAMIC_EPOCH"]
+    },
+    {
+      "source_id":"COMMON_CRAWL_CDX_SNAPSHOT",
+      "documentation":"Common Crawl CDXJ Index",
+      "documentation_url":"https://commoncrawl.org/cdxj-index",
+      "observed_capability":"Each crawl exposes a finite CDXJ index of captures, available through index.commoncrawl.org or downloadable index files.",
+      "admitted_scope":"CAPTURES_INDEXED_IN_ONE_EXPLICIT_COMMON_CRAWL_COLLECTION",
+      "bounded_scope":true,
+      "authoritative_enumeration":true,
+      "caveats":["ONE_CRAWL_IS_NOT_THE_WEB","NO_SINGLE_INDEX_COVERS_ALL_MONTHLY_CRAWLS","FULL_SNAPSHOT_ENUMERATION_IS_HIGH_VOLUME","TARGETED_URL_OR_DOMAIN_LOOKUP_PREFERRED"]
+    },
+    {
+      "source_id":"GITHUB_SCOPED_REPOSITORY_LIST",
+      "documentation":"GitHub REST repository endpoints",
+      "documentation_url":"https://docs.github.com/en/rest/repos/repos",
+      "observed_capability":"Repository list endpoints enumerate repositories within declared organizations or other explicit repository scopes with pagination.",
+      "admitted_scope":"ONE_EXPLICIT_GITHUB_ORGANIZATION_USER_OR_OTHER_DOCUMENTED_REPOSITORY_SCOPE",
+      "bounded_scope":true,
+      "authoritative_enumeration":true,
+      "caveats":["NOT_GLOBAL_GITHUB_ENUMERATION","CALLER_VISIBILITY_AND_RATE_LIMITS_APPLY","SCOPE_MUST_BE_EXPLICIT"]
+    },
+    {
+      "source_id":"GITHUB_GLOBAL_SEARCH",
+      "documentation":"GitHub REST/search surfaces",
+      "documentation_url":"https://docs.github.com/en/rest/search",
+      "observed_capability":"GitHub search surfaces produce public repository/code candidates subject to search-specific limits.",
+      "admitted_scope":"OPEN_WORLD_CANDIDATE_GENERATION_ONLY",
+      "bounded_scope":false,
+      "authoritative_enumeration":false,
+      "caveats":["SEARCH_RESULTS_ARE_NOT_GLOBAL_COMPLETENESS_PROOF","SEARCH_ENDPOINTS_HAVE_RESTRICTIVE_RATE_LIMITS"]
+    },
+    {
+      "source_id":"NPM_PUBLIC_REGISTRY",
+      "documentation":"npm public registry documentation",
+      "documentation_url":"https://docs.npmjs.com/cli/v11/using-npm/registry/",
+      "observed_capability":"The public npm registry exposes package metadata and registry/search interfaces.",
+      "admitted_scope":"OPEN_WORLD_CANDIDATE_GENERATION_UNTIL_A_CURRENT_COMPLETE_ENUMERATION_CONTRACT_IS_SEPARATELY_VERIFIED",
+      "bounded_scope":false,
+      "authoritative_enumeration":false,
+      "caveats":["DO_NOT_INFER_COMPLETE_PACKAGE_ENUMERATION_FROM_REGISTRY_EXISTENCE_ALONE"]
+    },
+    {
+      "source_id":"GENERAL_OPEN_WEB",
+      "documentation":"Multiple external web indexes",
+      "documentation_url":null,
+      "observed_capability":"General web search supplies broad candidate reach across heterogeneous public pages.",
+      "admitted_scope":"OPEN_WORLD_CANDIDATE_GENERATION_ONLY",
+      "bounded_scope":false,
+      "authoritative_enumeration":false,
+      "caveats":["OPAQUE_INDEX_COVERAGE","RANKING_TRUNCATION","INDEX_DELAY","NO_NEGATIVE_COMPLETENESS_AUTHORITY"]
+    }
+  ],
+  "hard_rules":[
+    "AUTHORITATIVE_ENUMERATION_MEANS_ONLY_THE_DECLARED_SOURCE_SCOPE_AT_ONE_EPOCH",
+    "INTERRUPTED_OR_RATE_LIMITED_ENUMERATION_IS_RETRYABLE_NOT_COMPLETE",
+    "SOURCE_DOCUMENTATION_IS_NOT_A_WITNESS_OF_BEHAVIORAL_SUFFICIENCY",
+    "SEARCH_ONLY_SOURCES_NEVER_AUTHORIZE_NONEXISTENCE",
+    "PUBLIC_SOURCE_CAPABILITIES_MUST_BE_RECHECKED_WHEN_PROVIDER_BEHAVIOR_OR_DOCUMENTATION_MATERIALLY_CHANGES"
+  ],
+  "acceptance_credit_delta":0,
+  "capability_credit_delta":0,
+  "family_credit_delta":0,
+  "ownership_credit_delta":0
+}
