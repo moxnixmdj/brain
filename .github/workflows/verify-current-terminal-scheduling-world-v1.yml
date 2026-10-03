@@ -5,19 +5,16 @@ on:
     paths:
       - "canonical/runtime/current_terminal_scheduling_world_v1.py"
       - "canonical/tests/test_current_terminal_scheduling_world_v1.py"
-      - "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V1.json"
       - ".github/workflows/verify-current-terminal-scheduling-world-v1.yml"
   pull_request:
     paths:
       - "canonical/runtime/current_terminal_scheduling_world_v1.py"
       - "canonical/tests/test_current_terminal_scheduling_world_v1.py"
-      - "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V1.json"
       - ".github/workflows/verify-current-terminal-scheduling-world-v1.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
-
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -25,29 +22,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+        with: {python-version: "3.12"}
       - name: Run fail-closed scheduling world tests
         run: python -m unittest canonical.tests.test_current_terminal_scheduling_world_v1 -v
-      - name: Compile live world
+      - name: Compile live world and compare to current authority
         run: |
           python canonical/runtime/current_terminal_scheduling_world_v1.py > CURRENT_TERMINAL_SCHEDULING_WORLD_RESULT.json
           python - <<'PY'
           import json
           x=json.load(open("CURRENT_TERMINAL_SCHEDULING_WORLD_RESULT.json"))
+          a=json.load(open("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"))
+          af=a["atomic_acceptance_frontier"]
           assert x["pass"] is True,x
-          assert x["registry_predicate_count"]==38,x
-          assert x["proved_predicate_count"]==8,x
-          assert x["unresolved_predicate_count"]==30,x
-          assert x["live_action_coverage_count"]==30,x
-          assert x["source_scheduling_world_stale"] is True,x
-          assert "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR" in x["proved_predicates"],x
-          assert "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR" not in x["unresolved_predicates"],x
+          assert x["registry_predicate_count"]==af["total"],x
+          assert x["proved_predicate_count"]==af["proved"],x
+          assert x["unresolved_predicate_count"]==af["unresolved"],x
+          assert x["live_action_coverage_count"]==af["unresolved"],x
+          assert x["uncovered_predicates"]==[],x
           assert "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR" in x["unresolved_predicates"],x
+          for pid in ("DELEGATION_TERMINAL_SUCCESS_NONINFERIOR","RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR","RECOVERY_TERMINAL_NONINFERIOR","RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"):
+              assert pid in x["proved_predicates"],(pid,x)
+              assert pid not in x["unresolved_predicates"],(pid,x)
           assert x["new_reality_units_consumed"]==0,x
           assert x["execution_authority"] is False,x
           assert x["promotion_authority"] is False,x
-          print("live scheduling world verified")
+          print("live receipt-derived scheduling world verified")
           PY
       - uses: actions/upload-artifact@v4
         with:
