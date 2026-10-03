@@ -1,0 +1,114 @@
+{
+  "schema": "PROJECT_BRAIN_ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1",
+  "date": "2026-10-03",
+  "status": "PASS__DEDUCTIVE_ZERO_REALITY_OWNERSHIP_PROMOTION__THREE_OF_THREE",
+  "theorem": "canonical/governance/EXACT_ACCEPTED_ROUTE_OWNERSHIP_THEOREM_V1.json",
+  "base_commit": "f02cc4c81b6de97c2bc7d0adb57cb22653001b22",
+  "families": [
+    {
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "acceptance": "PASS",
+      "acceptance_receipt": {
+        "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+      },
+      "scope_receipt": {
+        "path": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156"
+      },
+      "operative_artifact": {
+        "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+        "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+      },
+      "exact_receipt_binding": true,
+      "imports": [
+        "__future__",
+        "collections",
+        "heapq",
+        "itertools",
+        "math",
+        "typing"
+      ],
+      "forbidden_provider_or_escape_hits": [],
+      "external_target_capability_provider": false,
+      "promotion": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+    },
+    {
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "acceptance": "PASS",
+      "acceptance_receipt": {
+        "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+        "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+      },
+      "scope_receipts": [
+        {
+          "path": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+          "git_blob_sha": "95422fdb13ada158930486442c9441c9c5cd9852"
+        },
+        {
+          "path": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+          "git_blob_sha": "2c6bb594d353e4c6a169821da5f84a91be212ca7"
+        }
+      ],
+      "operative_artifact": {
+        "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+        "git_blob_sha": "28940387bd6c11671035ad9201e37bba13fd9bc9"
+      },
+      "exact_receipt_binding": true,
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "forbidden_provider_or_escape_hits": [],
+      "external_target_capability_provider": false,
+      "promotion": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+    },
+    {
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "acceptance": "PASS",
+      "acceptance_receipt": {
+        "path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "913d171b3c855000d322e183b142b3200eeaf0a9"
+      },
+      "scope_receipt": {
+        "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+      },
+      "operative_artifact": {
+        "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+        "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+      },
+      "exact_receipt_binding": true,
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "forbidden_provider_or_escape_hits": [],
+      "external_target_capability_provider": false,
+      "promotion": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+    }
+  ],
+  "verification": {
+    "existing_acceptance_independent_public_runner": true,
+    "git_server_content_address_identity": true,
+    "exact_source_provider_escape_scan": true,
+    "separate_python_ast_provider_audit": true,
+    "github_actions_promotion_job_required_for_logic": false,
+    "failed_github_actions_jobs_are_non_load_bearing_diagnostic_only": true
+  },
+  "accounting": {
+    "verified_owned_before": 2,
+    "verified_owned_after": 5,
+    "acceptance_before": 5,
+    "acceptance_after": 5,
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_NEW_ACCEPTANCE_FAMILY",
+    "NO_CHANGE_TO_14_ACCEPTANCE_OPEN_FAMILIES",
+    "NO_TERMINAL_GOAL_CLAIM",
+    "NO_DONOR_HARVESTING_CLAIM"
+  ],
+  "promotion_authority": true
+}
