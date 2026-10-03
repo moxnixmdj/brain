@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V6_VERSION_RESTART_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_TRUTH_REPAIR__REBASED_ON_HARDENED_V5__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "base_candidate": {
+    "path": "canonical/runtime/tool_discovery_dynamic_candidate_v5.py",
+    "git_blob_sha": "42d096ef93e8ad06c4d1d5dfe730881bf45a2a72"
+  },
+  "counterexample": {
+    "id": "V5_TOOL_VERSION_CHANGE_REUSES_STALE_DISCOVERY_METADATA",
+    "construction": [
+      "EXACT_CURRENT_COMPLETE_DISCOVERY_RECEIPT_EXPOSES_T0_AT_TOOL_EPOCH_0_WITH_COST_1_AVAILABLE_TRUE_AUTHORIZED_TRUE_SAFE_PROBE_CAP_A_AND_CONTENT_ADDRESSED_SOURCE_BINDING",
+      "OBSERVE_TOOL_VERSION_CHANGED_T0_TO_EPOCH_1",
+      "OBTAIN_TRUTHFUL_EPOCH_1_POSITIVE_CAP_A_PROBE_RECEIPT",
+      "HARDENED_V5_UPDATES_EFFECTIVE_PROBE_EPOCH_BUT_REUSES_EPOCH_0_DISCOVERY_METADATA",
+      "HARDENED_V5_SELECTS_T0_EVEN_THOUGH_EPOCH_1_COST_AVAILABILITY_AUTHORIZATION_OR_PROBE_PERMISSION_MAY_HAVE_CHANGED"
+    ],
+    "violated_contract_rule": "VERSION_OR_AUTHORITY_CHANGE_RESTARTS_OR_INVALIDATES_STALE_EVIDENCE"
+  },
+  "repair": {
+    "runtime": "canonical/runtime/tool_discovery_dynamic_candidate_v6.py",
+    "rule": "ANY_TOOL_VERSION_CHANGED_EVENT_IS_A_FAIL_CLOSED_EPISODE_RESTART_BOUNDARY_BEFORE_DISCOVERY_METADATA_OR_PROBE_EVIDENCE_REUSE",
+    "rationale": "Decision-relevant metadata and hidden capability evidence share one versioned causal state. Revalidating only capability receipts is insufficient."
+  },
+  "hard_nonclaims": [
+    "NO_COMPLETE_INTERFACE_INSTANCE_CLAIM",
+    "NO_SCOPE_COMPLETENESS_CLAIM",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "INDEPENDENT_EXACT_BYTE_VERIFICATION_REQUIRED"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

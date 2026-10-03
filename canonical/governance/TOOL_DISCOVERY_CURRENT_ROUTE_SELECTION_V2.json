@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_CURRENT_ROUTE_SELECTION_V2",
+  "date": "2026-10-03",
+  "status": "CURRENT_BASE_CANDIDATE__FLATTENED_V5_V6_V7_V8__INDEPENDENT_V8_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "base_main_commit": "16c8708761065ce4644fed1e2a049dbe7ba688b3",
+  "selected_runtime": {
+    "path": "canonical/runtime/tool_discovery_dynamic_candidate_v8.py",
+    "git_blob_sha": "b43443ef8b0387ed88bb5a852de01323276ad2aa"
+  },
+  "exact_stack": {
+    "v5_runtime": "42d096ef93e8ad06c4d1d5dfe730881bf45a2a72",
+    "v6_runtime": "2020b7c2dc750009a9cc363d0703184b9115cfa6",
+    "v7_runtime": "e29328dfe5aff5650c1b938472ccf5ecf826831a",
+    "v8_runtime": "b43443ef8b0387ed88bb5a852de01323276ad2aa"
+  },
+  "repaired_invariants": [
+    "DISCOVERY_COMPLETES_BEFORE_ROUTE_COMMITMENT",
+    "UNRESOLVED_UNPROBEABLE_CHEAPER_ROUTE_BLOCKS_EXPENSIVE_SELECTION",
+    "TOOL_VERSION_OR_AUTHORITY_CHANGE_RESTARTS_EPISODE",
+    "CATALOG_RECEIPTS_TRANSFER_ACROSS_TASK_CHANGES_WITHOUT_REDUNDANT_REDISCOVERY",
+    "COST_ORDER_IS_FINITE_NONNEGATIVE_TOTAL_ORDER",
+    "PROBE_EVIDENCE_BINDS_TOOL_AND_AUTHORITY_EPOCH",
+    "PREVISIBLE_IDENTITIES_CANNOT_BYPASS_COMPLETE_CURRENT_CATALOG",
+    "LOAD_BEARING_TOOL_METADATA_IS_SHAPE_VALIDATED"
+  ],
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1192,
+    "status": "QUEUED",
+    "content_address_reuse_rule": "PASS_MAY_BE_REUSED_ONLY_IF_PINNED_V5_V7_V8_BLOBS_EQUAL_THIS_FLATTENED_BRANCH_EXACT_BLOBS"
+  },
+  "remaining_after_program_side_pass": [
+    "COMMON_MATCHED_BRAIN_OPUS_TOOL_AUTHORITY_IDENTITY_SCOPE",
+    "OBSERVABILITY_V2_THREE_WAY_CUT",
+    "SAFE_OBSERVATION_OR_MATCHED_COMPARATOR_ONLY_FOR_IRREDUCIBLE_DECISION_FACTS",
+    "SEPARATE_INDEPENDENT_ACCEPTANCE_REDUCTION"
+  ],
+  "hard_rules": [
+    "DO_NOT_SCHEDULE_V5_V6_OR_V7_AS_FINAL_SOUNDNESS_TARGET",
+    "NO_180_CASE_SAMPLE_AS_WHOLE_PROTOCOL_SCOPE_PROOF",
+    "NO_TERMINAL_REPLAY",
+    "ZERO_INCREMENTAL_SPEND",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
