@@ -11,7 +11,7 @@ POLICY={
 class Tests(unittest.TestCase):
     def test_blocklist_normalization_matches_reference_semantics(self):
         self.assertEqual(a.block_match("HTTPS://Blocked.Example/path",POLICY),"blocked.example")
-        self.assertEqual(a.block_match("https://safe.example/last/exam",POLICY),"last-exam")
+        self.assertEqual(a.block_match("https://safe.example/last-exam",POLICY),"last-exam")
         self.assertIsNone(a.block_match("https://safe.example/reference",POLICY))
 
     def test_search_filters_blocked_results(self):
@@ -57,6 +57,12 @@ class Tests(unittest.TestCase):
     def test_code_dangerous_builtin_rejected(self):
         with self.assertRaises(a.HLEToolBlocked):
             a.execute_code("print(open('/etc/passwd').read())")
+
+    def test_real_policy_loads_exact_count(self):
+        policy=a.load_policy()
+        self.assertEqual(len(policy["blocklist_patterns"]),153)
+        self.assertIn("huggingface.co",policy["blocklist_patterns"])
+        self.assertIn("shashankskagnihotri/Humanitys_Second_Last_Exam",policy["blocklist_patterns"])
 
     def test_result_redirect_parser(self):
         u=a._normalize_result_href("google","/url?q=https%3A%2F%2Fsafe.example%2Fx")
