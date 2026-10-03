@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_DELEGATION_SCOPE_COMPLETE_BRIDGE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_SCOPE_COMPLETE_DELEGATION_COMPONENT_RECEIPT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Restore only the frozen composition delegation component after the source family regained current whole-protocol closure through an independently verified universal formal scope proof.",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "component_binding": {
+    "component_id": "delegation",
+    "interface_id": "delegation+evidence synthesis+artifact production",
+    "proved_properties_after_independent_verification": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ]
+  },
+  "authority": {
+    "manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "historical_component_mapping": {
+      "path": "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_V1.json",
+      "git_blob_sha": "59504f4608f9490022c1aa58214e34191fb0b6e9"
+    },
+    "current_acceptance_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "7885a827b1483bfb38315c1f492848f7e4680285"
+    },
+    "delegation_acceptance_verification": {
+      "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+    },
+    "current_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    }
+  },
+  "derivation": {
+    "component_mapping_source_is_used_only_for_literal_component_to_family_binding": true,
+    "stale_historical_acceptance_transport_is_not_reused": true,
+    "current_source_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "current_source_predicate_state": "PROVED",
+    "current_source_scope_complete": true,
+    "current_source_objective_ceiling": true,
+    "current_source_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "current_source_family_protocol_status": "PASS",
+    "scope_completeness_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF"
+  },
+  "candidate_receipt": {
+    "receipt_id": "COMPOSITION_SCOPE_COMPLETE_BRIDGE::SUBAGENT_DELEGATION_AND_COORDINATION::delegation",
+    "component_id": "delegation",
+    "interface_id": "delegation+evidence synthesis+artifact production",
+    "proved_properties": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ],
+    "verified": false,
+    "independent": false,
+    "contamination_clean": true,
+    "acceptance_scoped": true,
+    "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+    "source_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "source_acceptance_receipt": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  },
+  "hard_rules": [
+    "DO_NOT_REACTIVATE_THE_HISTORICAL_DELEGATION_RECEIPT_BY_STALENESS_ALONE",
+    "USE_THE_HISTORICAL_BRIDGE_ONLY_FOR_THE_INDEPENDENTLY_VERIFIED_LITERAL_COMPONENT_MAPPING",
+    "CURRENT_SOURCE_FAMILY_CLOSURE_MUST_BE_SCOPE_COMPLETE_AND_INDEPENDENTLY_VERIFIED",
+    "TOOL_DISCOVERY_REMAINS_QUARANTINED",
+    "NO_PARENT_COMPOSITION_ACCEPTANCE_FROM_THIS_COMPONENT",
+    "NO_NEW_REALITY_OR_TERMINAL_REPLAY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_BEFORE_INDEPENDENT_VERIFICATION"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
