@@ -17,3 +17,8 @@ def test_v13_exact_current_world_and_v5_binding():
     assert x["family_credit_delta"] == 0
     assert x["ownership_credit_delta"] == 0
     assert x["incremental_spend_usd"] == 0
+
+
+if __name__ == "__main__":
+    test_v13_exact_current_world_and_v5_binding()
+    print("V13 candidate assertions passed")
