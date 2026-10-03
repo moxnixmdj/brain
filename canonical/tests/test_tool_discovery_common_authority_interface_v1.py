@@ -74,6 +74,57 @@ class CommonAuthorityInterfaceV1Tests(unittest.TestCase):
                 self.fail(action)
         self.fail("action budget exhausted")
 
+    def test_arbitrary_public_constraint_metadata_is_preserved_and_used(self):
+        a=tool("cheap-but-wrong",1)
+        b=tool("allowed-route",2)
+        a["custom_constraint_field"]="blocked"
+        b["custom_constraint_field"]="allowed"
+        inst=iface.freeze_instance(
+            [a,b],
+            {
+                "cheap-but-wrong":{"0":["CAP_A"]},
+                "allowed-route":{"0":["CAP_A"]},
+            },
+        )
+        ep=iface.begin_episode(
+            inst,
+            ["CAP_A"],
+            constraint={"op":"eq","path":"custom_constraint_field","value":"allowed"},
+        )
+        action=v4.next_action(ep)
+        self.assertEqual(action["action"],"DISCOVER")
+        ep=iface.apply_discovery(
+            inst,ep,iface.discover(inst,ep,action["source_id"],action["query"])
+        )
+        byid={x["tool_id"]:x for x in ep["visible_tools"]}
+        self.assertEqual(byid["allowed-route"]["custom_constraint_field"],"allowed")
+        action=v4.next_action(ep)
+        self.assertEqual(action,{"action":"PROBE","tool_id":"allowed-route","capability":"CAP_A"})
+        ep=iface.apply_probe(
+            inst,ep,iface.safe_probe(inst,ep,action["tool_id"],action["capability"])
+        )
+        self.assertEqual(
+            v4.next_action(ep),
+            {"action":"SELECT","tool_id":"allowed-route"},
+        )
+
+    def test_brain_and_opus_are_bound_to_same_exact_authority_digest(self):
+        inst=self._instance()
+        binding=iface.matched_route_binding(inst)
+        self.assertTrue(binding["same_frozen_tool_authority"])
+        self.assertEqual(
+            binding["brain"]["public_authority_sha256"],
+            binding["opus"]["public_authority_sha256"],
+        )
+        self.assertEqual(
+            binding["brain"]["interface_instance_sha256"],
+            binding["opus"]["interface_instance_sha256"],
+        )
+        self.assertEqual(
+            binding["brain"]["public_authority_sha256"],
+            inst["public_authority_sha256"],
+        )
+
     def test_probe_truth_is_hidden_and_epoch_bound(self):
         inst=self._instance()
         ep=iface.begin_episode(inst,["CAP_A","CAP_B"])
