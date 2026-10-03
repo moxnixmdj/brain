@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V2_BLOBS__DORMANT_GATE__FINITE_ENVELOPE_CLOSURE__DECISION_COMPLETE_SEARCH_STOP__ZERO_CREDIT",
+  "brain_candidate": {
+    "repository": "moxnixmdj/brain",
+    "pull_request": 1434,
+    "candidate_head_sha": "d7307ad55f544c5ea2741ec29fa29bb75cfd9911",
+    "exact_blobs": {
+      "canonical/runtime/root1_acquisition_closure_controller_v2.py": "9683d993a99da27dffbb45a30e941e04094e1046",
+      "canonical/tests/test_root1_acquisition_closure_controller_v2.py": "e8eb7585b33717deb56d8e5368f749f6d7d7aad4",
+      "canonical/runtime/structural_transfer_v3.py": "2c5d854ba88493edcd843ae4ac2994e727319fa7",
+      "canonical/governance/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2.json": "2ffec0cba9fc634d9b5a0bf896cfcba839aebfc3",
+      "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "e94469ffdeb7535f9a921a244e62cde6b84fda5c"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1449,
+    "verifier_head_sha": "5c95d02fbaaa7ca2981c38113d081976a4b4eb77",
+    "verifier_merge_commit": "0ffb7c54771bc5e93bdbc85bf859c06972ed76be",
+    "workflow_run_id": 37159994052,
+    "workflow_job_id": 111311273150,
+    "conclusion": "success",
+    "successful_steps": [
+      "Compile copied Brain V2",
+      "Run copied Brain V2 tests",
+      "Run independent adversarial verifier"
+    ]
+  },
+  "verified": {
+    "exact_brain_blob_identities": true,
+    "current_root1_positive_gap_count_zero": true,
+    "root1_inactive_means_zero_acquisition_actions": true,
+    "unknown_or_unproved_does_not_reopen_root1": true,
+    "constructive_content_addressed_operative_gap_required_to_reopen": true,
+    "proven_structural_transfer_can_reduce_minimum_capability_delta": true,
+    "frozen_envelope_closure_requires_complete_exact_envelope_receipt": true,
+    "every_covered_primitive_requires_verified_owned_or_verified_executable_internalizable_zero_cost_route": true,
+    "paid_route_cannot_seal_frozen_envelope": true,
+    "search_consensus_alone_cannot_stop": true,
+    "exact_residual_action_invariance_receipt_can_stop_search": true,
+    "source_and_dependency_orthogonalization_verified": true,
+    "universal_semantic_learning_success_not_claimed": true,
+    "current_frozen_envelope_not_claimed_sealed": true,
+    "zero_terminal_credit_preserved": true
+  },
+  "interpretation": "V2_IS_INDEPENDENTLY_VERIFIED_AS_A_ROOT1_CONTROL_AND_FINITE_ENVELOPE_CLOSURE_MECHANISM__CURRENT_ROOT1_REMAINS_INACTIVE__THIS_RECEIPT_DOES_NOT_PROVE_COMPLETE_OPUS55_PRIMITIVE_ENVELOPE_COVERAGE",
+  "hard_nonclaims": [
+    "NO_UNIVERSAL_SEMANTIC_LEARNING_SUCCESS_CLAIM",
+    "NO_CLAIM_THAT_EVERY_POSSIBLE_CAPABILITY_IS_ACQUIRABLE",
+    "NO_CURRENT_FULL_OPUS55_ENVELOPE_SEAL",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
