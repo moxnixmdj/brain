@@ -1,0 +1,44 @@
+name: verify-adaptive-terminal-closure-controller-v1
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/adaptive_terminal_closure_controller_v1.py'
+      - 'canonical/tests/test_adaptive_terminal_closure_controller_v1.py'
+      - 'canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_CONTROLLER_CANDIDATE_V1.json'
+      - '.github/workflows/verify-adaptive-terminal-closure-controller-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify controller tests
+        run: python -m pytest -q canonical/tests/test_adaptive_terminal_closure_controller_v1.py
+      - name: Fail closed on authority escalation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_CONTROLLER_CANDIDATE_V1.json")
+          j=json.loads(p.read_text())
+          a=j["authority"]
+          assert j["terminal_claim"] is False
+          assert a["acceptance_credit"] == 0
+          assert a["family_credit"] == 0
+          assert a["capability_credit"] == 0
+          assert a["ownership_credit"] == 0
+          assert a["execution_authority"] is False
+          assert a["promotion_authority"] is False
+          assert a["fresh_reality_authority"] is False
+          assert j["hard_gates"]["tb4_execution_authorized"] is False
+          assert j["hard_gates"]["tool_discovery_v2_gate_mandatory"] is True
+          print("PASS_ZERO_CREDIT_FAIL_CLOSED")
+          PY
