@@ -47,7 +47,7 @@ def plan(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]],
     def dp(state:frozenset[str], remaining:tuple[str,...]):
         terminal=solved(state)
         if terminal is not None:
-            return (Fraction(0),0,{"type":"DECIDE","action":terminal,"hypotheses":sorted(state)})
+            return (Fraction(0),Fraction(0),Fraction(0),0,{"type":"DECIDE","action":terminal,"hypotheses":sorted(state)})
         best_candidate=None
         for pid in remaining:
             p=by_id[pid]
@@ -57,45 +57,51 @@ def plan(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]],
                 groups.setdefault(outcome,set()).add(hid)
             if len(groups)<=1: continue
             next_remaining=tuple(x for x in remaining if x!=pid)
-            children={}; worst_cost=Fraction(0); worst_steps=0; feasible=True
+            children={}; child_vectors=[]; feasible=True
             for outcome,group in sorted(groups.items()):
                 child=dp(frozenset(group),next_remaining)
                 if child is None:
                     feasible=False;break
-                cc,cs,ct=child
+                wt,wc,wr,ws,ct=child
                 children[outcome]=ct
-                worst_cost=max(worst_cost,cc)
-                worst_steps=max(worst_steps,cs)
+                child_vectors.append((wt,wc,wr,ws))
             if not feasible: continue
-            total=p["total_cost"]+worst_cost
-            steps=1+worst_steps
+            worst=max(child_vectors) if child_vectors else (Fraction(0),Fraction(0),Fraction(0),0)
+            vector=(p["wall_clock"]+worst[0],p["resource_cost"]+worst[1],p["residual_risk"]+worst[2],1+worst[3])
             tree={
-                "type":"PROBE","probe_id":pid,"probe_cost":str(p["total_cost"]),
+                "type":"PROBE","probe_id":pid,
+                "probe_wall_clock":str(p["wall_clock"]),
+                "probe_resource_cost":str(p["resource_cost"]),
+                "probe_residual_risk":str(p["residual_risk"]),
                 "safety_receipt":p["safety_receipt"],"outcome_model_receipt":p["outcome_model_receipt"],
                 "branches":children,
             }
-            candidate=(total,steps,pid,tree)
-            if best_candidate is None or candidate[:3]<best_candidate[:3]:
+            candidate=(vector,pid,tree)
+            if best_candidate is None or (candidate[0],candidate[1])<(best_candidate[0],best_candidate[1]):
                 best_candidate=candidate
         if best_candidate is None: return None
-        return (best_candidate[0],best_candidate[1],best_candidate[3])
+        v=best_candidate[0]
+        return (v[0],v[1],v[2],v[3],best_candidate[2])
 
     result=dp(frozenset(ids),tuple(sorted(by_id)))
     if result is None:
         return {
             "schema":SCHEMA,"status":"NO_VERIFIED_ADAPTIVE_RESOLUTION_PLAN",
             "hypothesis_space_closed":True,"recommended_probe":None,
-            "worst_case_cost":None,"worst_case_steps":None,"plan":None,
+            "worst_case_wall_clock":None,"worst_case_resource_cost":None,"worst_case_residual_risk":None,"worst_case_steps":None,"plan":None,
             "acceptance_credit_delta":0,"ownership_credit_delta":0,
         }
-    cost,steps,tree=result
+    wall_clock,resource_cost,residual_risk,steps,tree=result
     first=tree.get("probe_id") if tree.get("type")=="PROBE" else None
     return {
         "schema":SCHEMA,"status":"VERIFIED_MINIMUM_WORST_CASE_ADAPTIVE_PLAN",
         "hypothesis_space_closed":True,
-        "optimization":"EXACT_FINITE_MINIMUM_WORST_CASE_TOTAL_PROBE_COST",
+        "optimization":"EXACT_FINITE_LEXICOGRAPHIC_MINIMUM__HARD_SAFETY_THEN_WORST_CASE_WALL_CLOCK_THEN_RESOURCE_COST_THEN_RESIDUAL_RISK_THEN_STEPS",
         "probability_model_required":False,
         "recommended_probe":first,
-        "worst_case_cost":str(cost),"worst_case_steps":steps,"plan":tree,
+        "worst_case_wall_clock":str(wall_clock),
+        "worst_case_resource_cost":str(resource_cost),
+        "worst_case_residual_risk":str(residual_risk),
+        "worst_case_steps":steps,"plan":tree,
         "acceptance_credit_delta":0,"ownership_credit_delta":0,
     }
