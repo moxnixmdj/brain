@@ -62,12 +62,12 @@ def admit(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]]
     if not mrid: raise VerifiedProbeModelError("OUTCOME_MODEL_RECEIPT_ID_REQUIRED")
 
     t=_f(probe.get("time",0),"time"); c=_f(probe.get("cost",0),"cost"); r=_f(probe.get("risk",0),"risk")
-    total=t+c+r
-    if total<=0: raise VerifiedProbeModelError("PROBE_TOTAL_COST_MUST_BE_POSITIVE")
     return {
         "id":aid,
         "outcome_by_hypothesis":{str(k):str(v) for k,v in outcomes.items()},
-        "total_cost":total,
+        "wall_clock":t,
+        "resource_cost":c,
+        "residual_risk":r,
         "safety_receipt":srid,
         "outcome_model_receipt":mrid,
         "hypothesis_space_sha256":hd,
