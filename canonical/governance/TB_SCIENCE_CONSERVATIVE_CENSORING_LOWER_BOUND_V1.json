@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CONSERVATIVE_CENSORING_LOWER_BOUND_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__TARGET_PRESERVING_STRONGER_PROOF_ROUTE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "frozen_reference": {
+    "benchmark": "Terminal-Bench-Science 0.1",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "task_count": 70,
+    "trials_per_task": 3,
+    "trial_slots": 210,
+    "binary_reward": "0_OR_1",
+    "trial_pass_condition": "reward >= 1.0",
+    "opus55_reference_percent": 58.7,
+    "required_successes": 124
+  },
+  "theorem": {
+    "proposition": "AT_LEAST_124_EXACT_SCORER_SUCCESSES_OVER_THE_FIXED_210_SLOT_DENOMINATOR_PROVES_A_CONSERVATIVE_RATE_AT_LEAST_58_7_PERCENT_EVEN_IF_EVERY_TIMEOUT_RESOURCE_FAILURE_INFRA_FAILURE_INVALID_OR_UNOBSERVED_SLOT_IS_ZERO",
+    "arithmetic": {
+      "pass_boundary": "ceil(0.587 * 210) = 124",
+      "rate_at_124": 0.5904761904761905,
+      "rate_at_123": 0.5857142857142857,
+      "irreversible_failure_boundary": "87 finalized failures leaves at most 123 possible successes"
+    },
+    "positive_credit_rule": "ONLY_EXACT_BENCHMARK_SCORER_SUCCESS_COUNTS_ONE",
+    "negative_credit_rule": "EVERY_FINAL_NON_SUCCESS_COUNTS_ZERO",
+    "no_invalid_run_exclusion": true,
+    "no_retry_credit": true,
+    "no_case_replacement": true,
+    "denominator_never_shrinks": true
+  },
+  "carrier_cut": {
+    "corrected_zero_case_run": 37099734267,
+    "standard_public_runner_documented_limits": "4_CPU__16_GB_RAM__14_GB_SSD__6_HOUR_JOB",
+    "declared_full_envelope_incompatible_tasks": 70,
+    "implication": "FULL_RESOURCE_EQUIVALENCE_IS_NOT_REQUIRED_FOR_THIS_CONSERVATIVE_LOWER_BOUND_ROUTE__CARRIER_FAILURES_ARE_ZEROS"
+  },
+  "runtime": "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py",
+  "tests": "canonical/tests/test_tb_science_conservative_censoring_reducer_v1.py",
+  "hard_rules": [
+    "EXACT_210_PREDECLARED_SLOT_UNIVERSE",
+    "ONLY_EXACT_SCORER_SUCCESS_COUNTS_POSITIVE",
+    "ALL_OTHER_FINAL_OUTCOMES_COUNT_ZERO",
+    "NO_RETRY_OR_SLOT_REPLACEMENT_AFTER_EXPOSURE",
+    "PASS_ONLY_AT_SUCCESS_COUNT_GTE_124",
+    "FAIL_LOCK_WHEN_MAX_POSSIBLE_SUCCESS_COUNT_LT_124",
+    "ZERO_TERMINAL_CASE_EXPOSURE_FROM_THIS_PROOF"
+  ],
+  "terminal_results_observed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
