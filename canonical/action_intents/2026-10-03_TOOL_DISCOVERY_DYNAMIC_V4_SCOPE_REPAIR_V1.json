@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-03",
+  "action": "FALSIFY_UNSOUND_TOOL_DISCOVERY_V3_CONDITIONAL_LEAST_COST_IMPLICATION_AND_STAGE_DISCOVERY_FIRST_V4_TRUTH_REPAIR",
+  "authorized_by": "USER_EXPLICIT_MAKE_IMMEDIATE_BREAKTHROUGHS_DIRECTIVE",
+  "canonical_base_commit": "a153e2b54cb9c4094c4a90c50149839cf939105b",
+  "blocker_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "primitive_fact_id": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "classification": "TRUTH_REPAIR__NO_TERMINAL_CREDIT",
+  "reason": "The active conditional refinement claims least-cost first selection under a complete discovery interface, but V3 SELECTs a sufficient visible route before querying an unqueried authoritative source. A cost-10 visible route plus cost-1 undiscovered sufficient route is a direct counterexample.",
+  "planned_write_set": [
+    "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "canonical/tests/test_tool_discovery_dynamic_candidate_v4.py",
+    "canonical/runtime/tool_discovery_dynamic_v4_repair_v1.py",
+    "canonical/tests/test_tool_discovery_dynamic_v4_repair_v1.py",
+    "canonical/governance/TOOL_DISCOVERY_DYNAMIC_V4_SCOPE_REPAIR_V1.json",
+    "canonical/action_intents/2026-10-03_TOOL_DISCOVERY_DYNAMIC_V4_SCOPE_REPAIR_V1.json"
+  ],
+  "expected_parent_frontier_change": "ZERO_CREDIT__IF_INDEPENDENT_PASS_QUARANTINE_UNSOUND_V3_CONDITIONAL_LEAST_COST_IMPLICATION_AND_REPLACE_PROGRAM_SIDE_CANDIDATE_WITH_DISCOVERY_FIRST_V4",
+  "remaining_external_fact": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+  "terminal_truth_preserved": true,
+  "no_target_weakening": true,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
