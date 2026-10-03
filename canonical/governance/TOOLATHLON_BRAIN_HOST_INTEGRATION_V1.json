@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TOOLATHLON_BRAIN_HOST_INTEGRATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_REAL_DECOUPLED_GATEWAY_BINDING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_base_commit": "6b594cb36f774ec143d8e8d750d1bdd46419b2a8",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "objective": "Bind the exact frozen Toolathlon decoupled JSON-RPC tools/list and tools/call surface to the independently verified Brain-owned selection adapter without allowing the cognition substrate to choose or directly call a route.",
+  "frozen_toolathlon_contract": {
+    "repository": "hkust-nlp/Toolathlon",
+    "commit": "9be8d8fe07a497b18ee61e3f2ae694e9797f39eb",
+    "gateway_path": "scripts/decoupled/container_tool_gateway.py",
+    "gateway_git_blob_sha": "130628187647fdcacf2d3cf59934a2b310014a81",
+    "host_path": "scripts/decoupled/host_agent_loop.py",
+    "relation": [
+      "GATEWAY_JSONRPC_TOOLS_LIST_RETURNS_NAME_DESCRIPTION_INPUT_SCHEMA",
+      "GATEWAY_JSONRPC_TOOLS_CALL_ACCEPTS_NAME_AND_ARGUMENT_OBJECT",
+      "UNKNOWN_TOOL_ID_FAILS_CLOSED",
+      "CONTAINER_RETAINS_TASK_ENVIRONMENT_AND_EVALUATOR"
+    ]
+  },
+  "brain_inputs": {
+    "adapter_path": "canonical/runtime/toolathlon_brain_owned_selection_adapter_v1.py",
+    "adapter_git_blob_sha": "64c66a56a681b2919fbfcaf09c325c5db55f5f81",
+    "materiality_path": "canonical/governance/TOOLATHLON_GENERAL_SUBSTRATE_MATERIALITY_V1.json",
+    "materiality_verifier_merge": "7b595125425710fa67ebc6dc76b4d8ff8ea88a90"
+  },
+  "runtime": "canonical/runtime/toolathlon_brain_host_integration_v1.py",
+  "tests": "canonical/tests/test_toolathlon_brain_host_integration_v1.py",
+  "causal_flow": [
+    "TOOLS_LIST",
+    "NORMALIZE_GATEWAY_SNAPSHOT",
+    "SUBSTRATE_TOOL_AGNOSTIC_SUBPROBLEM_ONLY",
+    "BRAIN_OWNED_SCHEMA_EVIDENCE_AND_SELECTION_LOOP",
+    "SUBSTRATE_ARGUMENTS_ONLY_FOR_ALREADY_SELECTED_ANONYMOUS_SCHEMA",
+    "TOOLS_CALL_ONLY_FOR_BRAIN_SELECTED_IDENTITY"
+  ],
+  "fail_closed": [
+    "MALFORMED_GATEWAY_RESPONSE",
+    "GATEWAY_ERROR",
+    "SUBSTRATE_ROUTE_KEY_INJECTION",
+    "NONBOOLEAN_SCHEMA_JUDGMENT",
+    "NONOBJECT_ARGUMENTS",
+    "BRAIN_SELECTED_IDENTITY_OUTSIDE_SNAPSHOT",
+    "SELECTION_ESCALATION"
+  ],
+  "expected_effect_if_independently_verified": "CLOSE_REAL_TOOLATHLON_DECOUPLED_HOST_INTEGRATION_BINDS_GATEWAY_TO_THIS_ADAPTER_PRECONDITION_ONLY",
+  "hard_nonclaims": [
+    "NO_TOOLATHLON_TERMINAL_TASK_EXECUTED",
+    "NO_LIVE_PUBLIC_SERVICE_ADMISSION_PROVED",
+    "NO_LOCAL_MODEL_TOOL_CALL_COMPATIBILITY_PROVED",
+    "NO_MATCHED_OPUS_REFERENCE_COMPARABILITY_PROVED",
+    "NO_TERMINAL_SUCCESS_OR_VALID_ROUTE_TOP1_RESULT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_CREDIT"
+  ],
+  "terminal_results_observed": 0,
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
