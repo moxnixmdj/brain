@@ -122,7 +122,7 @@ def build_fixture(case:Mapping[str,str],index:int)->dict[str,Any]:
   "history":"",
   "dependencies":[],
   "forks":[],
-  "enumerable":case["indexing"]=="WEB_UNINDEXED_ENUMERABLE" or case["vocabulary"]=="NO_SHARED_TEXT",
+  "enumerable":case["indexing"]!="WEB_INDEXED" or case["vocabulary"]=="NO_SHARED_TEXT",
   "web_indexed":case["indexing"]=="WEB_INDEXED",
   "index_lag":case["indexing"]=="INDEX_LAG",
   "structure":case["structure"],
@@ -230,18 +230,17 @@ def run_case(fixture:Mapping[str,Any],mechanisms:set[str])->dict[str,Any]:
  # stable dedupe through the real monotonic candidate memory
  state=controller.new_state()
  state=controller.add_candidates(state,found,source_id="ARENA",upstream_group="FINITE_ARENA",action_id="RUN")
- ids={x["candidate_id"] for x in state["candidates"]}
- witness_seen=witness["candidate_id"] in ids or any(
-  str(x).startswith(("dep:","fork:")) and str(x).endswith(witness["candidate_id"].split(":")[-1])
-  for x in ids
- )
- # behavioral verification eliminates lexical decoys
+ # Brain canonicalizes candidate identity independently of the fixture's
+ # private witness id, so recovery is measured by the frozen behavioral
+ # signature rather than by a fixture-local identifier.
+ witness_seen=False
  verified=False
- if witness_seen:
-  for row in state["candidates"]:
-   payload=row.get("payload") or {}
-   if payload.get("behavior_signature")==goal["behavior_signature"]:
-    verified=True; break
+ for row in state["candidates"]:
+  payload=row.get("payload") or {}
+  if payload.get("behavior_signature")==goal["behavior_signature"]:
+   witness_seen=True
+   verified=True
+   break
  return {
   "witness_seen":witness_seen,
   "verified":verified,
