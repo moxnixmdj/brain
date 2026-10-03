@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V12_CURRENT_POINTER_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V12_CURRENT_POINTER_BLOB__17_REQUIREMENTS__31_WORK_UNITS__V4_MANDATORY__ZERO_CREDIT",
+  "verified_brain": {
+    "pointer_candidate_path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V12_CANDIDATE_V1.json",
+    "pointer_candidate_git_blob_sha": "bc578e6db4eedcefbed61f6860e1cc5192cf05f4",
+    "active_authority_path": "canonical/governance/TERMINAL_SCHEDULING_V12_ACTIVE_AUTHORITY_V1.json",
+    "active_authority_git_blob_sha": "43108097f5542e5aa15cd2452125f52a863fa2ba",
+    "first_stage_verification_path": "canonical/verification/TERMINAL_SCHEDULING_V12_POST_DUAL_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "first_stage_verification_git_blob_sha": "86f4ec2da215491bf4de9812cf76e3e1f5120ee2",
+    "verifier_path": "canonical/runtime/verify_terminal_scheduling_current_authority_v12_candidate_v1.py",
+    "verifier_git_blob_sha": "9400da640abc30dcb531e0cd37bb85e27f542a64",
+    "test_path": "canonical/tests/test_terminal_scheduling_current_authority_v12_candidate_v1.py",
+    "test_git_blob_sha": "575783924aa74119b7fd4bf98cbebce018b45db8"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1342,
+    "verified_head_sha": "5480e45e16a2beec9fcd59b7d5729ae8592ec837",
+    "merge_commit": "39efaa771343c8bc742cc1c610c544412117fe38",
+    "workflow_run_id": 37123395398,
+    "workflow_job_id": 111203779727,
+    "conclusion": "success"
+  },
+  "verified": {
+    "pointer_blob_sha": "bc578e6db4eedcefbed61f6860e1cc5192cf05f4",
+    "active_zero_reality_requirements": 17,
+    "primitive_zero_reality_work_units": 31,
+    "zero_reality_covered_predicates": 25,
+    "direct_reality_blocked_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "tool_discovery_retrieval_authority": "V4_OVER_VERIFIED_V3_OVER_VERIFIED_V2_BASE",
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "zero_credit_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_OR_FAMILY_PROMOTION",
+    "NO_OWNERSHIP_PROMOTION",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_DIRECT_ORACLE_EXECUTION"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
