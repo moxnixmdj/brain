@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_POST_DELEGATION_TERMINAL_PROJECTION_RECONCILIATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__TRUTH_PRESERVING_CONTROL_PLANE_RECONCILIATION__ZERO_CREDIT",
+  "canonical_base_commit": "0fa257b9a4940edc01d3503902a06d6a0027e2d1",
+  "verified_current_sources": {
+    "delegation_acceptance": {
+      "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+    },
+    "atomic_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "7885a827b1483bfb38315c1f492848f7e4680285"
+    }
+  },
+  "reconciled_truth": {
+    "acceptance": "3_OF_19_CLOSED__16_OPEN",
+    "atomic": "8_OF_38_PROVED__30_UNRESOLVED",
+    "terminal_goal_achieved": false
+  },
+  "drift_removed": [
+    "TERMINAL_CLOSURE_MANIFEST_STALE_2_OF_19_7_OF_38",
+    "OWNERSHIP_MATRIX_STALE_2_OF_19_7_OF_38",
+    "TERMINAL_PROJECTION_CHECKER_HARDCODED_PRE_DELEGATION_COUNTS",
+    "STALE_4_OF_19_9_OF_38_PLANNING_ARTIFACTS_PRETENDED_CURRENT"
+  ],
+  "invariant": "LIVE_PROJECTION_COUNTS_MUST_BE_DERIVED_FROM_CURRENT_INDEPENDENT_RECEIPTS__HISTORICAL_SNAPSHOTS_CANNOT_OVERRIDE_CURRENT_PROOF_STATE",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
