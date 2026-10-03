@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_V4_CONDITIONAL_PROGRAM_PROOF_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__HASH_PINNED_STRUCTURAL_PLUS_GLOBAL_ORACLE_ABSTRACT_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "objective": "Prove the Brain-owned V4 program-side unknown-identity discovery and least-cost evidence-supported selection obligations conditional on the explicit V2 interface contract, without asserting that any real interface satisfies that contract.",
+  "runtime": "canonical/runtime/tool_discovery_v4_conditional_program_proof_v1.py",
+  "tests": "canonical/tests/test_tool_discovery_v4_conditional_program_proof_v1.py",
+  "bound_candidate": {
+    "path": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "git_blob_sha": "9572b25f7bdaee0f35e00cf3a1f25bc0dbd69096"
+  },
+  "bound_contract": {
+    "path": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json",
+    "git_blob_sha": "c63faf97a598b811588e86e6a5f7568293302b4c"
+  },
+  "proof_components": [
+    "EXACT_CONTENT_ADDRESSED_SOURCE_BINDING",
+    "GENERIC_CONTROL_FLOW_ORDERING_INVARIANTS",
+    "CURRENT_DECISION_EPOCH_DISCOVERY_RECEIPT_INVARIANT",
+    "AUTHORIZED_DISCOVERY_SOURCE_INVARIANT",
+    "EXPLICIT_SAFE_PROBE_PERMISSION_INVARIANT",
+    "EXHAUSTIVE_THREE_TOOL_TWO_CAPABILITY_DYNAMIC_DISCOVERY_ABSTRACTION_OVER_ALL_INITIAL_VISIBILITY_SOURCE_ASSIGNMENTS_AND_BOOLEAN_CAPABILITY_WORLDS",
+    "GLOBAL_COMPLETE_TOOL_SET_LEAST_COST_ORACLE_NOT_VISIBLE_ONLY_ORACLE",
+    "STALE_DISCOVERY_RECEIPT_AND_UNAUTHORIZED_SOURCE_ADVERSARIAL_CHECKS"
+  ],
+  "candidate_reduced_missing_fact": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2",
+  "universal_target_proved": false,
+  "interface_instance_verified": false,
+  "hard_rules": [
+    "INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED_BEFORE_PROGRAM_SIDE_RESIDUAL_REDUCTION_COUNTS",
+    "FINITE_ABSTRACT_MODEL_CHECK_DOES_NOT_STAND_ALONE_AS_UNIVERSAL_PROOF__GENERIC_CONTROL_FLOW_INVARIANTS_ARE_LOAD_BEARING",
+    "NO_REAL_INTERFACE_COMPLETENESS_SELF_ASSERTION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_TERMINAL_REPLAY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
