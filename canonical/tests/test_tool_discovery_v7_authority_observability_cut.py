@@ -97,8 +97,10 @@ class ToolDiscoveryV7SynthesisTests(unittest.TestCase):
     def test_safe_probe_permission_is_public_but_support_is_not(self):
         inst=instance()
         public=m.initial_public(inst,required_capabilities=["CAP_A"])
-        self.assertNotIn("capabilities",repr(public))
-        self.assertIn("safe_probe_capabilities",repr(public))
+        for row in public["visible_tools"]:
+            self.assertNotIn("capabilities",row)
+            self.assertIn("safe_probe_capabilities",row)
+        self.assertTrue(all("tool_ids" not in s for s in public["discovery_sources"]))
         # Support truth is supplied only after a candidate probe action.
         action=v6.next_action(public)
         self.assertEqual(action["action"],"DISCOVER")
