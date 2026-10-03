@@ -1,0 +1,114 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_TERMINAL_CLOSURE_CONTROLLER_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "base_main_commit": "045ddd4cc8f0efe2d9e5e9c4c989d9c2908cdf71",
+  "objective": "MINIMIZE_EXPECTED_WALL_CLOCK_TO_TRUE_TERMINAL_CLOSURE_WITH_ZERO_FALSE_PROMOTION_AND_ZERO_INCREMENTAL_SPEND",
+  "live_world": {
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "verified_owned_equal_or_better": 2,
+    "nondominated_certificates": 16,
+    "unique_zero_reality_requirements": 19,
+    "highest_direct_leverage": {
+      "certificate": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+      "covered_predicates": 8,
+      "fraction": 0.2962962962962963
+    },
+    "matched_scope": {
+      "live_targets": 8,
+      "primitive_child_facts": 16,
+      "shared_residual_groups": 0
+    }
+  },
+  "controller": {
+    "runtime_path": "canonical/runtime/adaptive_terminal_closure_controller_v1.py",
+    "test_path": "canonical/tests/test_adaptive_terminal_closure_controller_v1.py",
+    "score": "(p_discharge*(wP*predicate_delta+wF*family_delta+wO*ownership_delta+wD*downstream_delta)+wI*information_gain)/expected_seconds",
+    "scheduling_probability_is_not_proof": true,
+    "parallel_launch_of_independent_zero_reality_actions": true,
+    "fixed_point_after_every_verified_delta": true,
+    "stop_branch_when_dominated": true,
+    "ownership_parallel_with_acceptance": true
+  },
+  "hard_gates": {
+    "max_incremental_spend_usd": 0,
+    "fresh_reality_authority": false,
+    "tool_discovery_v2_gate_mandatory": true,
+    "consumed_tool_discovery_source_epoch_replay": false,
+    "tb4_current_attainable_upper_bound": 180,
+    "tb4_required_successes": 220,
+    "tb4_execution_authorized": false,
+    "reason_tb4_execution_authorized_false": "CURRENT_MACHINE_VERIFIED_UPPER_BOUND_180_LT_220"
+  },
+  "orthogonal_information_policy": {
+    "exact_residual_targeting_required": true,
+    "one_global_best_search_engine_claim": false,
+    "source_router_required": true,
+    "query_dimensions": [
+      "LITERAL",
+      "ALIASES",
+      "BEHAVIOR",
+      "CODE_SYMBOLS",
+      "IMPORTS",
+      "COMMANDS",
+      "ERROR_STRINGS",
+      "INPUT_OUTPUT_SIGNATURES",
+      "PROTOCOL_INVARIANTS",
+      "NATIVE_LANGUAGE_VARIANTS"
+    ],
+    "source_families": [
+      "CANONICAL_BRAIN_GITHUB",
+      "GOOGLE_DRIVE_EVIDENCE_MIRROR",
+      "GITHUB_CODE_HISTORY_V2_CONSUMED_FOR_TOOL_DISCOVERY_RESIDUAL",
+      "NON_GITHUB_CODE_HOSTS_NEW_EPOCH_IF_BOUND",
+      "SOFTWARE_ARCHIVES_NEW_EPOCH_IF_BOUND",
+      "PACKAGE_REGISTRIES",
+      "OFFICIAL_PRIMARY_SITES",
+      "SCHOLARLY_METADATA_AND_PRIMARY",
+      "DATASET_REGISTRIES",
+      "HISTORICAL_WEB_ARCHIVES",
+      "SOCIAL_TECHNICAL_DISCUSSION_CANDIDATE_ONLY"
+    ],
+    "no_result_means_nonexistence": false,
+    "candidate_only_surfaces_cannot_close_acceptance": true,
+    "capture_recapture_is_completeness_proof": false
+  },
+  "ownership_policy": {
+    "equation": "ACCEPTANCE_PASS AND INTERNALIZED AND DONOR_INDEPENDENT AND SCOPE_COMPLETE",
+    "start_before_all_acceptance_closes": true,
+    "immediate_targets": [
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+    ],
+    "donor_behavior_is_specimen_only": true
+  },
+  "event_policy": {
+    "on_verified_delta": [
+      "RECOMPUTE_ACCEPTANCE_FIXED_POINT",
+      "RECOMPUTE_INFORMATION_DOMINANCE",
+      "RECOMPUTE_ACTION_PRIORITIES",
+      "CANCEL_NEWLY_DOMINATED_BRANCHES",
+      "RECOMPUTE_OWNERSHIP_READINESS"
+    ],
+    "on_new_source_epoch": [
+      "ALLOW_ONLY_EXACT_RESIDUAL_TARGETED_RETRIEVAL",
+      "PRESERVE_V2_TOOL_DISCOVERY_AUTHORITY_GATE"
+    ],
+    "on_fresh_reality_authority_change": [
+      "RECOMPUTE_MINIMUM_IRREDUCIBLE_REALITY_CUT_BEFORE_ANY_EXECUTION"
+    ]
+  },
+  "authority": {
+    "acceptance_credit": 0,
+    "family_credit": 0,
+    "capability_credit": 0,
+    "ownership_credit": 0,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "activation_condition": "INDEPENDENT_TEST_AND_POLICY_VERIFICATION_PASS_ON_EXACT_BLOBS__THEN_SCHEDULING_ONLY_ACTIVATION",
+  "terminal_claim": false
+}
