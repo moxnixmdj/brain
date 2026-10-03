@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_RETRIEVAL_RECALL_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FINITE_SUPPORTED_FIXTURE_RECALL_1_0__OPEN_WORLD_BOUNDARIES_UNKNOWN__ZERO_CREDIT",
+  "verified_subjects": {
+    "canonical/governance/TOOL_DISCOVERY_MULTILINGUAL_RETRIEVAL_INPUT_V1.json": "a244205a759144bbe01f25c2c9101ef6045efd79",
+    "canonical/runtime/tool_discovery_retrieval_false_negative_benchmark_v1.py": "0e8779e7acdf7a5a64c55403e7db795165027f6d",
+    "canonical/tests/test_tool_discovery_retrieval_false_negative_benchmark_v1.py": "ecd53d3e3d7cad22ee247a35b574330d4d791139",
+    "canonical/runtime/residual_witness_retrieval_compiler_v1.py": "9daa8d590f3356b3fc51eccf75c56cbf515239e4"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1325,
+    "head_sha": "9be50660a43c77784829f4d9f56f4c3e48aa0ef0",
+    "merge_commit": "ae77058210cfc21e9928be21a060af8f6c1ebf80",
+    "workflow_run_id": 37120764785,
+    "workflow_job_id": 111196253716,
+    "conclusion": "success"
+  },
+  "verified": {
+    "supported_fixture_count": 24,
+    "supported_fixture_found_count": 24,
+    "supported_fixture_missed_count": 0,
+    "finite_supported_fixture_recall": 1.0,
+    "explicit_language_variant_count": 13,
+    "chinese_variant_mutation_creates_detectable_false_negative": true,
+    "valid_route_top1_mutation_creates_detectable_false_negative": true,
+    "descriptionless_code_identifier_fixture_recovered": true,
+    "misleading_metadata_code_fixture_recovered": true,
+    "open_world_unsupported_boundary_count": 5,
+    "unsupported_boundaries_preserve_unknown": true,
+    "no_result_nonexistence_inference_forbidden": true,
+    "zero_credit_preserved": true
+  },
+  "open_world_boundaries": [
+    "NONDEFAULT_BRANCH_ONLY",
+    "PRIVATE_REPOSITORY_ONLY",
+    "DELETED_REF_ONLY",
+    "UNINDEXED_DISCUSSION_ONLY",
+    "BINARY_OR_LFS_ONLY"
+  ],
+  "hard_nonclaims": [
+    "FINITE_FIXTURE_RECALL_1_0_IS_NOT_OPEN_WORLD_RECALL_1_0",
+    "NO_CLAIM_13_LANGUAGE_VARIANTS_COVER_ALL_HUMAN_LANGUAGES",
+    "NO_CLAIM_TRANSLATION_TERMS_ARE_SEMANTICALLY_EXHAUSTIVE",
+    "NO_PRIVATE_DELETED_UNINDEXED_OR_BINARY_SOURCE_NONEXISTENCE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
