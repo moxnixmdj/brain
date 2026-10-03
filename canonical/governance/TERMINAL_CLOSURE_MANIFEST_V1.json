@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "CURRENT_SCOPE_RECONCILED__P1_QUARANTINE_PRESERVED__3_OF_19_OPUS55_ACCEPTANCE_PASS__16_OPEN__TERMINAL_FALSE",
+  "status": "CURRENT_SCOPE_RECONCILED__P1_SCOPE_RESTORED__4_OF_19_OPUS55_ACCEPTANCE_PASS__15_OPEN__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -270,22 +270,21 @@
     },
     {
       "id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-      "closure_state": "P1_WHOLE_SCOPE_QUARANTINED__BEHAVIORAL_PASS_RETRACTED",
-      "ownership_status": "OPEN__P1_WHOLE_SCOPE_QUARANTINE__OPUS55_ACCEPTANCE_OPEN",
+      "closure_state": "WHOLE_SCOPE_PASS__STRICT_OPUS55_ACCEPTANCE_PASS",
+      "ownership_status": "OPUS55_ACCEPTANCE_CLOSED__OWNERSHIP_PROMOTION_SEPARATE",
       "target_behavior": "Check work creatively, falsify conclusions, diagnose failures and recover without losing the goal.",
-      "acceptance_basis": null,
+      "acceptance_basis": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
       "proof_bundle": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json"
       ],
-      "unresolved": [
-        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_WHOLE_FROZEN_SCOPE_QUARANTINED",
-        "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
-      ],
+      "unresolved": [],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN",
-      "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "opus55_acceptance_calibrated": true,
+      "opus55_acceptance_state": "PASS",
+      "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "current_behavioral_scope_state": "P1_SCOPE_RESTORED__WHOLE_SCOPE_PASS",
+      "scope_restoration_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
     },
     {
       "id": "ARTIFACT_CREATION",
@@ -385,7 +384,7 @@
   "terminal_predicates": {
     "exact_target_family_count_19": true,
     "every_required_behavior_contracted": true,
-    "every_required_behavior_has_admissible_proof": false,
+    "every_required_behavior_has_admissible_proof": true,
     "donor_dependent_required_behaviors_zero": true,
     "unexplained_required_behaviors_zero": true,
     "unresolved_verifier_mutations_zero": true,
@@ -398,7 +397,7 @@
   },
   "counters": {
     "uncontracted_required_behaviors": 0,
-    "unproved_required_behaviors": 1,
+    "unproved_required_behaviors": 0,
     "donor_dependent_required_behaviors": 0,
     "unresolved_verifier_mutations": 0,
     "unresolved_composition_failures": 0,
@@ -417,7 +416,7 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__P1_WHOLE_SCOPE_QUARANTINED__11_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__11_OF_19_UNAFFECTED_BEHAVIORAL_FAMILY_ROWS_PASS__8_P1_DEPENDENT_ROWS_QUARANTINED__3_OF_19_OPUS55_ACCEPTANCE_PASS__16_OPEN__8_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__30_UNRESOLVED",
+    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__4_OF_19_OPUS55_ACCEPTANCE_PASS__15_OPEN__11_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__27_UNRESOLVED__OWNERSHIP_PROMOTION_SEPARATE",
     "override_allowed": false
   },
   "specification_closure": {
@@ -434,14 +433,16 @@
     "historical_status": "SUPERSEDED_FOR_WHOLE_SCOPE_INTERPRETATION_BY_INDEPENDENT_P1_SCOPE_QUARANTINE",
     "scope_quarantine_evidence": "canonical/verification/P1_TERMINAL_EXECUTION_SCOPE_AUDIT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "scope_quarantine_propagation": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "whole_scope_contracts_passed": 11,
-    "whole_scope_contracts_quarantined": 1,
-    "whole_scope_quarantined_contract": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
-    "unaffected_behavioral_families_passed": 11,
-    "p1_dependent_behavioral_families_quarantined": 8,
+    "whole_scope_contracts_passed": 12,
+    "whole_scope_contracts_quarantined": 0,
+    "whole_scope_quarantined_contract": null,
+    "unaffected_behavioral_families_passed": 19,
+    "p1_dependent_behavioral_families_quarantined": 0,
     "raw_terminal_execution_result": "3352/3352_PASS__IMMUTABLE_RAW_EXECUTION_EVIDENCE",
     "terminal_results_replayed": 0,
-    "note": "RAW_EXECUTION_SUCCESS_IS_PRESERVED__WHOLE_SCOPE_SEMANTIC_CREDIT_FAILS_CLOSED_WHERE_EXECUTED_SCORER_WAS_NARROWER_THAN_FROZEN_CONTRACT"
+    "note": "RAW_EXECUTION_SUCCESS_PRESERVED__P1_WHOLE_SCOPE_RESTORED_BY_INDEPENDENT_ZERO_REALITY_UNIVERSAL_PROOF__STRICT_OPUS55_ACCEPTANCE_REMAINS_SEPARATE",
+    "current_scope_restoration_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "current_status": "P1_WHOLE_SCOPE_RESTORED__12_OF_12_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS"
   },
   "postwave_global_ownership_reducer": {
     "path": "canonical/runtime/postwave_global_ownership_reducer_v1.py",
@@ -451,7 +452,7 @@
     "retained_role": "HISTORICAL_GLOBAL_POSTCONDITION_RESIDUAL_DIAGNOSTIC_ONLY",
     "rule": "GLOBAL_POSTCONDITION_CLOSURE_DOES_NOT_SUBSTITUTE_FOR_FROZEN_OPUS55_PROTOCOL_RESULT"
   },
-  "next": "WORK_ONLY_CURRENT_30_UNRESOLVED_ATOMIC_ACCEPTANCE_PREDICATES_AND_P1_WHOLE_SCOPE_REPAIR_OBLIGATIONS__PRIORITIZE_ZERO_REALITY_CONTENT_ADDRESSED_SCOPE_ATOM_METRIC_PROOFS__NO_TERMINAL_REPLAY__NO_FRESH_REALITY_UNTIL_MACHINE_AUTHORIZED",
+  "next": "RECOMPUTE_LIVE_27_PREDICATE_INFORMATION_DOMINANCE_AND_ZERO_REALITY_FRONTIER__NO_FRESH_REALITY_UNTIL_RECOMPUTE",
   "postwave_global_ownership_reconciliation": "canonical/governance/POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1.json",
   "postwave_remaining_exact_gates": [
     "RESTORE_OR_REDEFINE_P1_WHOLE_FROZEN_SCOPE_ONLY_WITH_ADMISSIBLE_PREDECLARED_EVIDENCE_OR_EXPLICITLY_AUTHORIZED_IRREDUCIBLE_NEW_OBSERVATION",
@@ -460,7 +461,7 @@
     "RUN_FINAL_CLOSURE_REDUCER_AND_INDEPENDENT_FINALITY_VERIFICATION"
   ],
   "final_proof_bundle_candidate": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_CANDIDATE_V1.json",
-  "behavioral_pass_family_count": 11,
+  "behavioral_pass_family_count": 19,
   "acceptance_calibration": {
     "status": "CURRENT_FAIL_CLOSED__2_OF_19_ACCEPTANCE_PASS__17_OPEN__FINITE_SAMPLE_ABSOLUTE_DOMINANCE_CLAIMS_REOPENED",
     "current_authority": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
@@ -490,12 +491,13 @@
     "invalidation_blob_sha": "9dfda8e533e0d51985b2b32f709b1b238db1ef19"
   },
   "opus55_acceptance_summary": {
-    "calibrated_family_count": 3,
-    "pending_family_count": 16,
+    "calibrated_family_count": 4,
+    "pending_family_count": 15,
     "calibrated_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
       "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-      "SUBAGENT_DELEGATION_AND_COORDINATION"
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
     ],
     "pending_families": [
       "ADVANCED_AGENTIC_CODING",
@@ -508,21 +510,20 @@
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
       "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "ARTIFACT_CREATION",
       "COMMUNICATION_AND_SYNTHESIS",
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "UNKNOWN_DOMAIN_ADAPTATION",
       "MULTI_CAPABILITY_COMPOSITION"
     ],
-    "authority": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "authority": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
     "atomic_predicates": {
-      "proved": 8,
-      "unresolved": 30,
+      "proved": 11,
+      "unresolved": 27,
       "total": 38
     },
     "ownership_promotion_authority": false,
     "rule": "ACCEPTANCE_PASS_REQUIRES_CURRENT_SCOPE_COMPLETE_PROTOCOL_EVIDENCE__RAW_BEHAVIORAL_EXECUTION_DOES_NOT_SUBSTITUTE"
   },
-  "behavioral_quarantined_family_count": 8
+  "behavioral_quarantined_family_count": 0
 }
