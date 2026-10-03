@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_V3_CANDIDATE_INDEPENDENT_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PATCHED_ROUTE__FIRST_UNTOUCHED_SLOT_VIRTUAL_BASELINE_LOCALIZATION_TRIAL_0__133_OF_210_TARGET__ZERO_CREDIT",
+  "candidate": {
+    "path": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_CANDIDATE_V3.json",
+    "git_blob_sha": "f80e4b6a0b20cee28c60b844e34a54da01398052",
+    "merged_on_main_commit": "2aa36f96badb6e4c8232c1f501f2c5e2e5d05dea"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1256,
+    "verifier_head_sha": "0e939dd490150dc38d63f6013321cf9adcdf069b",
+    "merge_commit": "a12eb0dd9af519c9c05421fcbe38ea1bfb7eda6e",
+    "workflow_run_id": 37109016591,
+    "workflow_job_id": 111163130643,
+    "conclusion": "success",
+    "artifact_id": 11269335769,
+    "artifact_digest": "sha256:5e3ea05e2a5217d8a14a03ba0f4f38326b9e708c2a8446e8b3be89211aac90bc"
+  },
+  "verified": {
+    "candidate_blob": "f80e4b6a0b20cee28c60b844e34a54da01398052",
+    "overlay_blob": "64c02d44b38066577c7e7866a931bc7aa8ee9fcc",
+    "integration_receipt_blob": "4512996a6698463be367052b13a891bd0f647f73",
+    "authorized_slot_candidate": "terminal-bench-science/virtual-baseline-localization::trial-0",
+    "schedule_order": 4,
+    "task_rank": 4,
+    "attempt_index": 0,
+    "task_digest": "sha256:18e64cb62b351e3861e1995bdc3ba08bba37f0ae3e645ee4b250714b6f0c00ee",
+    "finalized_failures": 4,
+    "remaining_failures_before_fail_lock": 74,
+    "required_successes": 133,
+    "terminal_task_content_read": 0,
+    "terminal_results_observed": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "consequence": "THE_EXACT_V3_CANDIDATE_IS_INDEPENDENTLY_VERIFIED__A_SEPARATE_ACTIVE_ONE_USE_AUTHORITY_MAY_NOW_BE_VERIFIED__NO_TERMINAL_EXECUTION_YET"
+}
