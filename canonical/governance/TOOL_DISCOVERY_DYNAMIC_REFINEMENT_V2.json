@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_REFINEMENT_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__V3_COUNTEREXAMPLE_COMPILED__V4_DISCOVERY_FIRST_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "supersedes": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_V1.json",
+  "objective": "Fail-close the unsound V1/V3 least-cost implication, permanently bind its counterexample, and replace it with discovery-exhaustive V4 plus a hardened V2 interface contract without granting premature acceptance credit.",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "falsification": {
+    "artifact": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_V3_LEAST_COST_COUNTEREXAMPLE_V1.json",
+    "git_blob_sha": "062a8b11f75d702ab8fc0e6369091aeb4f7bb6a9",
+    "result": "DYNAMIC_V3_SELECTS_VISIBLE_EXPENSIVE_ROUTE_BEFORE_QUERYING_SOURCE_CONTAINING_CHEAPER_SUFFICIENT_ROUTE",
+    "v1_conditional_implication_valid": false
+  },
+  "replacement": {
+    "candidate": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "candidate_git_blob_sha": "b8cd817a07c0b93ff740120f869e7fbb5650f801",
+    "candidate_tests": "canonical/tests/test_tool_discovery_dynamic_candidate_v4.py",
+    "candidate_tests_git_blob_sha": "57a5758becdf3314e1c8dad66af47233c4a443c7",
+    "refinement_runtime": "canonical/runtime/tool_discovery_dynamic_refinement_v2.py",
+    "refinement_runtime_git_blob_sha": "716f7d96ac3f347d49accc382f07f4c768a1004e",
+    "refinement_tests": "canonical/tests/test_tool_discovery_dynamic_refinement_v2.py",
+    "refinement_tests_git_blob_sha": "83b3e949b4c1018b7409e0c2c558d0bb2b9ff357",
+    "interface_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json",
+    "interface_contract_git_blob_sha": "d342962d6d90f4fdb78446d7f7711c05938a3a25"
+  },
+  "verified_candidate_delta_if_independent_pass": [
+    "V3_LEAST_COST_COUNTEREXAMPLE_BECOMES_PERMANENT_REGRESSION_INVARIANT",
+    "V4_EXHAUSTS_AVAILABLE_AUTHORITATIVE_DISCOVERY_SOURCES_BEFORE_PROBE_OR_SELECT",
+    "V2_INTERFACE_CONTRACT_REQUIRES_UNIQUE_CANONICAL_IDENTITIES_EXACT_RESULT_INCORPORATION_TOTAL_ORDER_COST_AND_EPOCH_STABILITY_OR_RESTART",
+    "FROZEN_TARGET_REMAINS_UNCHANGED",
+    "UNIVERSAL_TARGET_REMAINS_UNPROVED"
+  ],
+  "minimum_missing_facts_after_candidate": [
+    "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2",
+    "INDEPENDENT_SCOPE_COMPLETE_FORMAL_OR_EXHAUSTIVE_ACCEPTANCE_PROOF_FOR_DISCOVERY_EXHAUSTIVE_V4_OVER_THE_FROZEN_TOOL_DISCOVERY_TARGET"
+  ],
+  "hard_rules": [
+    "DO_NOT_PROMOTE_TOOL_DISCOVERY_DYNAMIC_REFINEMENT_V1",
+    "DO_NOT_INHERIT_V3_TERMINAL_OR_SAMPLE_CREDIT_TO_V4",
+    "DO_NOT_ASSERT_INTERFACE_COMPLETENESS_FROM_INTERFACE_SPECIFICATION_ALONE",
+    "DO_NOT_ASSERT_FULL_TOOL_DISCOVERY_ACCEPTANCE_FROM_DISCOVERY_FIRST_ORDERING_ALONE",
+    "NO_FRESH_TERMINAL_REPLAY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_V4_BYTES__THEN_ATTACK_THE_TWO_EXPLICIT_MISSING_FACTS_WITH_PROOF_FIRST_AND_NO_FRESH_TERMINAL_REPLAY",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
