@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_UNIVERSAL_SCOPE_FORMALISM_CUT_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_TOOL_DISCOVERY_UNIVERSAL_SCOPE_ROUTE_BLOCKED_BY_FORMALISM_GAP__ZERO_CREDIT",
+  "source_brain_pr": 1085,
+  "exact_brain_blobs": {
+    "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_FORMALISM_CUT_V1.json": "e485b9729e8aea6bee2d75453167912023167fe8",
+    "canonical/runtime/tool_discovery_universal_scope_formalism_cut_v1.py": "797a20b58ee53c8aecaa4c2013a95a7d5407de4d",
+    "canonical/tests/test_tool_discovery_universal_scope_formalism_cut_v1.py": "0a42eb7857c38517832b540a94f2f8b68bcc845d"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1106,
+    "pull_request_head": "6c259afc8e96e4adca43ab2feb8c290a0238b61c",
+    "workflow_run_id": 37083001619,
+    "workflow_job_id": 111087387992,
+    "merge_commit": "94083e7158518c7158d54dfc17442e1abb77c857",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_FORMALISM_CUT_TESTS_PASS",
+    "SOURCE_BLOB_DRIFT_EMPTY",
+    "SPECIFICATION_OR_FORMALISM_RESIDUAL",
+    "FORMALISM_GAP_ESTABLISHED",
+    "CURRENT_TERMINAL_CANDIDATE_HAS_NO_DISCOVER_ACTION",
+    "BROADER_DYNAMIC_CANDIDATE_HAS_DISCOVER_ACTION_BUT_RECEIVES_ZERO_PROMOTION_CREDIT",
+    "UNIVERSAL_SCOPE_CERTIFICATE_CURRENTLY_INADMISSIBLE",
+    "ZERO_TERMINAL_REPLAY_AND_ZERO_NEW_REALITY"
+  ],
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "minimum_missing_fact": "INDEPENDENT_EXACT_SCOPE_SEMANTICS_PROVING_PREENUMERATED_TOOL_IDS_ARE_COMPLETE_FOR_THE_FROZEN_TARGET__OR_A_VERIFIED_DISCOVERY_INTERFACE_AND_UNIVERSAL_PROOF_COVERING_UNKNOWN_TOOL_IDENTITIES",
+  "hard_nonclaims": [
+    "TOOL_DISCOVERY_FAMILY_TARGET_NOT_FALSIFIED",
+    "RAW_180_OF_180_SAMPLE_NOT_INVALIDATED",
+    "DYNAMIC_V3_NOT_PROMOTED",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
