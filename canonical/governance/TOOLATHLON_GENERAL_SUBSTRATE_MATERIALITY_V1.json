@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TOOLATHLON_GENERAL_SUBSTRATE_MATERIALITY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_COUNTERFACTUAL_MATERIALITY_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_base_commit": "8242ea9193c26b3b867bd5564d6236394537b25c",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "exact_inputs": {
+    "adapter": "canonical/runtime/toolathlon_brain_owned_selection_adapter_v1.py",
+    "adapter_git_blob_sha": "64c66a56a681b2919fbfcaf09c325c5db55f5f81",
+    "source_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "source_gate_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+  },
+  "counterfactual": {
+    "fixed_substrate_outputs": [
+      "TOOL_AGNOSTIC_SUBPROBLEM_REQUIRES_SEARCH_WORKSPACE",
+      "ANONYMOUS_CHEAP_SCHEMA_SUPPORTS_SEARCH_WORKSPACE_TRUE",
+      "ANONYMOUS_EXPENSIVE_SCHEMA_SUPPORTS_SEARCH_WORKSPACE_TRUE"
+    ],
+    "brain_present_outcome": "SELECT_CHEAPEST_AUTHORIZED_SUPPORTED_ROUTE_BY_INTERNAL_COST_THEN_ID_ORDER",
+    "brain_removed_outcome": "NO_LEGAL_EXECUTABLE_ROUTE_SELECTION_EXISTS_UNDER_THE_FROZEN_SUBSTRATE_INTERFACE_BECAUSE_TOOL_IDS_COSTS_ALTERNATIVES_AND_ROUTE_KEYS_ARE_STRUCTURALLY_WITHHELD",
+    "illegal_bypass_outcome": "SUBSTRATE_SELECTED_TOOL_OR_ROUTE_KEY_IS_REJECTED_AS_SUBSTRATE_BOUNDARY_VIOLATION",
+    "implication": "BRAIN_OWNED_TOOL_DISCOVERY_SELECTION_CONFIGURATION_IS_CAUSALLY_LOAD_BEARING_FOR_ROUTE_SELECTION_WHILE_THE_MODEL_REMAINS_A_GENERAL_COGNITION_SUBSTRATE"
+  },
+  "source_gate_projection_if_independently_verified": {
+    "configuration_materially_constrains_execution": true,
+    "external_hidden_target_capability_provider": false,
+    "ownership_claim_relies_on_model_standalone_superiority": false,
+    "model_role": "GENERAL_COGNITION_SUBSTRATE",
+    "model_dependencies_declared": true,
+    "general_substrate_test_pass": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_GENERAL_SUBSTRATE_TASK_LANGUAGE_OR_ARGUMENT_SYNTHESIS_IS_ALWAYS_CORRECT",
+    "NO_TOOLATHLON_TERMINAL_SUCCESS_CLAIM",
+    "NO_REAL_HOST_INTEGRATION_CLAIM",
+    "NO_LIVE_SERVICE_ADMISSION_CLAIM",
+    "NO_MATCHED_REFERENCE_COMPARABILITY_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
