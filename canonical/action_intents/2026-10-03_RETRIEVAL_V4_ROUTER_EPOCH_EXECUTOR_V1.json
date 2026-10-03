@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RETRIEVAL-V4-ROUTER-EPOCH-EXECUTOR-20261003-V1",
+  "status": "CANDIDATE__CLOSE_MISSING_V4_EXECUTION_SEAM_ONLY",
+  "canonical_base_commit": "28fd3c70d164a81dcb43c882843bf65e9dc46df6",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "reason": "V4 federation and epoch gate are independently verified, but no current reusable runtime executes federation V2 requests through the exact verified router and returns one gate-compatible receipt per selected cell.",
+  "expected_terminal_delta": "ENABLE_ONE_FRESH_V4_SOURCE_EPOCH_WITHOUT_WEAKENING_SCOPE_OR_AUTHORITY_RULES",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
