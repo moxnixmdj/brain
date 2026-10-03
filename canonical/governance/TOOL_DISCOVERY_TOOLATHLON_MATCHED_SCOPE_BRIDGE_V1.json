@@ -1,0 +1,129 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_TOOLATHLON_MATCHED_SCOPE_BRIDGE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__TARGET_LOCAL_SCOPE_BRIDGE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "objective": "Discharge the matched-route Toolathlon scope-mapping precondition without substituting Brain-only registry completeness for the common open-domain Tool Discovery authority.",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_route": "MATCHED_FROZEN_TARGET_ROUTE__TOOLATHLON_VERIFIED",
+  "frozen_protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "proof_mode": "MATCHED_HIDDEN_TOOL_ECOSYSTEM_TRANSFER",
+    "dimensions": [
+      "unknown tool discovery",
+      "schema/authority filtering",
+      "route selection under incomplete evidence",
+      "safe probe choice",
+      "capability-state update",
+      "later-task transfer without rediscovery"
+    ]
+  },
+  "frozen_target": {
+    "benchmark": "Toolathlon-Verified",
+    "repository": "hkust-nlp/Toolathlon",
+    "commit": "9be8d8fe07a497b18ee61e3f2ae694e9797f39eb",
+    "finalpool_tree_sha": "0e6db218108c4666f3cdaa8d1ab976ab4807617c",
+    "task_count": 108,
+    "source_blobs": {
+      "readme": "f31aebd1cf48a460a79cf86b6d8af69250595611",
+      "task_config_runtime": "189b179a85f7e93ab4f32458958f7b70ea487f7e",
+      "container_tool_gateway": "130628187647fdcacf2d3cf59934a2b310014a81",
+      "claude_sdk_host_loop": "d53fd8dd032328d7e58bddf19736631b54c60ca2",
+      "decoupled_runner": "48cdbdde67929d87862312b398c74a1814a79936"
+    }
+  },
+  "independently_verified_internal_support": {
+    "hidden_tool_route_receipt": {
+      "path": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "d4ce5641e564f330bff32f6ffb7f184e87d8495d"
+    },
+    "v4_program_side_receipt": {
+      "path": "canonical/verification/TOOL_DISCOVERY_DYNAMIC_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "10cb18355d247a05177230d0dd345e161e84111d"
+    }
+  },
+  "target_local_callable_surface_theorem": {
+    "carrier_mode": "TOOLATHLON_DECOUPLED__CLAUDE_AGENT_SDK",
+    "premises": [
+      "TASK_CONFIG_BUILD_LOADS_NEEDED_MCP_SERVERS_FROM_EACH_FROZEN_TASK_CONFIG",
+      "CONTAINER_GATEWAY_CONNECTS_ONLY_THE_TASK_DECLARED_NEEDED_MCP_SERVERS",
+      "FOR_EACH_CONNECTED_SERVER_GATEWAY_CALLS_SERVER_LIST_TOOLS_AND_ADDS_EVERY_RETURNED_TOOL_TO_ITS_REGISTRY",
+      "GATEWAY_ADDS_THE_SINGLE_LOCAL_CLAIM_DONE_TOOL",
+      "GATEWAY_TOOLS_LIST_RETURNS_THE_REGISTRY_IDENTITIES_WITH_DESCRIPTION_AND_INPUT_SCHEMA",
+      "GATEWAY_TOOLS_CALL_REJECTS_ANY_IDENTITY_ABSENT_FROM_THE_REGISTRY",
+      "CLAUDE_SDK_HOST_LOOP_DERIVES_ALLOWED_TOOLS_FROM_GATEWAY_TOOLS_LIST",
+      "CLAUDE_SDK_HOST_LOOP_SETS_BUILTIN_TOOLS_TO_EMPTY_AND_CONFIGURES_ONLY_THE_GATEWAY_MCP_SERVER",
+      "CLAUDE_SDK_HOST_LOOP_USES_STRICT_MCP_CONFIG"
+    ],
+    "conclusion": "FOR_EACH_SUCCESSFULLY_STARTED_STABLE_FROZEN_TARGET_EPISODE__EVERY_TOOL_IDENTITY_CALLABLE_BY_THE_AGENT_IS_IN_THE_GATEWAY_TOOLS_LIST_SNAPSHOT_AND_EVERY_LISTED_REMOTE_IDENTITY_DERIVES_FROM_LIST_TOOLS_ON_A_TASK_DECLARED_CONNECTED_SERVER__UNKNOWN_IDENTITIES_ARE_UNCALLABLE",
+    "scope_boundary": "TARGET_LOCAL_CALLABLE_SURFACE_ONLY__NO_CLAIM_THAT_ALL_OPEN_WORLD_TOOLS_OR_SERVERS_ARE_ENUMERABLE"
+  },
+  "dimension_mapping": [
+    {
+      "protocol_dimension": "unknown tool discovery",
+      "coverage": "TARGET_LOCAL_EXTERNAL",
+      "basis": "TOOLS_ARE_DISCOVERED_AT_RUNTIME_FROM_LIST_TOOLS_ACROSS_TASK_DECLARED_CONNECTED_MCP_SERVERS_AND_EXPOSED_THROUGH_THE_SINGLE_GATEWAY"
+    },
+    {
+      "protocol_dimension": "schema/authority filtering",
+      "coverage": "TARGET_LOCAL_EXTERNAL",
+      "basis": "GATEWAY_EXPOSES_DESCRIPTION_AND_INPUT_SCHEMA_FOR_REGISTERED_IDENTITIES_AND_REJECTS_UNREGISTERED_CALLS__HOST_ALLOWED_TOOLS_IS_DERIVED_FROM_GATEWAY_LIST"
+    },
+    {
+      "protocol_dimension": "route selection under incomplete evidence",
+      "coverage": "COMPOSED_EXTERNAL_PLUS_INTERNAL",
+      "basis": "TOOLATHLON_SUPPLIES_REAL_LONG_HORIZON_MULTI_TOOL_ROUTE_CHOICE__INDEPENDENT_INTERNAL_HIDDEN_CAPABILITY_RECEIPT_COVERS_SELECTION_WITH_CAPABILITY_STATE_HIDDEN"
+    },
+    {
+      "protocol_dimension": "safe probe choice",
+      "coverage": "INDEPENDENT_INTERNAL",
+      "basis": "TOOL_DISCOVERY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_VERIFIES_SAFE_PROBES_RESTRICTED_TO_CURRENT_REQUIRED_CAPABILITIES"
+    },
+    {
+      "protocol_dimension": "capability-state update",
+      "coverage": "INDEPENDENT_INTERNAL",
+      "basis": "INTERNAL_RECEIPT_VERIFIES_CURRENT_EPOCH_EVIDENCE_REUSE__VERSION_INVALIDATION__CAPABILITY_GAIN_AND_LOSS_RESELECTION"
+    },
+    {
+      "protocol_dimension": "later-task transfer without rediscovery",
+      "coverage": "INDEPENDENT_INTERNAL",
+      "basis": "INTERNAL_RECEIPT_VERIFIES_VALID_PRIOR_CAPABILITY_EVIDENCE_REUSED_ON_LATER_TASK"
+    }
+  ],
+  "benchmark_surface_relation": [
+    "TOOLATHLON_README_DEFINES_GENERAL_TOOL_USE_IN_REALISTIC_ENVIRONMENTS",
+    "TOOLATHLON_README_STATES_600_PLUS_DIVERSE_TOOLS",
+    "TOOLATHLON_README_STATES_EACH_TASK_REQUIRES_LONG_HORIZON_TOOL_CALLS",
+    "FROZEN_FINALPOOL_HAS_108_TASK_DIRECTORIES_AND_PER_TASK_EVALUATORS",
+    "DECOUPLED_CLAUDE_SDK_MODE_DISABLES_BUILTIN_TOOLS_SO_THE_GATEWAY_IS_THE_ONLY_AGENT_TOOL_AUTHORITY"
+  ],
+  "precondition_effect_if_independently_verified": {
+    "closes": [
+      "MAP_TOOLATHLON_REPRESENTED_DIMENSIONS_TO_FROZEN_TOOL_DISCOVERY_CONTRACT_WITHOUT_SCOPE_WEAKENING"
+    ],
+    "does_not_close": [
+      "PROVE_EXACT_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER_OR_FAIL_CLOSED",
+      "BIND_OPUS_5_5_77_8_PASS_AT_1_SOURCE_DURABLY_AND_INDEPENDENTLY",
+      "BRAIN_MATCHED_TARGET_RESULT_INDEPENDENT_PASS",
+      "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_DOMAIN_UNIVERSAL_TOOL_ENUMERATION_CLAIM",
+    "NO_BRAIN_ONLY_REGISTRY_SUBSTITUTION",
+    "NO_CLAIM_THAT_TOOLATHLON_ALONE_TESTS_VERSION_CHANGE_OR_CROSS_TASK_EVIDENCE_TRANSFER",
+    "NO_CLAIM_THAT_INTERNAL_PREFLIGHT_ALONE_PROVES_REAL_WORLD_TERMINAL_SUCCESS",
+    "NO_OPUS_REFERENCE_BINDING_FROM_THIS_ARTIFACT",
+    "NO_ZERO_COST_CARRIER_CLAIM",
+    "NO_BRAIN_TOOLATHLON_RESULT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
