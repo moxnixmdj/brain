@@ -205,6 +205,22 @@ def execute_action(
     try:
         raw=provider(dict(action))
         normalized=_normalize_result(action,raw)
+    except RetrievalBackendError as exc:
+        failed=core.update_cell(
+            state,
+            query_id=str(action["query_id"]),
+            surface=str(action["surface"]),
+            cell_state="FAILED_PERMANENT",
+        )
+        return {
+            "schema":SCHEMA,
+            "status":"BACKEND_REJECTED_PERMANENT",
+            "error_class":type(exc).__name__,
+            "error":str(exc)[:1000],
+            "state":failed,
+            "action":dict(action),
+            "acceptance_credit":0,
+        }
     except Exception as exc:
         failed=core.update_cell(
             state,
