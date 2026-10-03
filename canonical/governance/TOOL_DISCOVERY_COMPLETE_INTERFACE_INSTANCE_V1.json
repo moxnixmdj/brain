@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMPLETE_INTERFACE_INSTANCE_V1",
+  "date": "2026-10-03",
+  "status": "SEALED_CANDIDATE_INTERFACE_INSTANCE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "scope_id": "SEALED_TWO_SOURCE_GLOBAL_COST_COUNTEREXAMPLE_20261003_V1",
+  "scope_semantics": "ALL_TOOL_IDENTITIES_IN_THE_SEALED_AUTHORITATIVE_SOURCE_INVENTORY_FOR_DECISION_EPOCH_0",
+  "episode_epoch": 0,
+  "required_capabilities": [
+    "CAP_X"
+  ],
+  "constraint": null,
+  "initial_visible_tool_ids": [],
+  "sources": [
+    {
+      "source_id": "SRC_FIRST",
+      "cost": 0.1,
+      "available": true,
+      "tools": [
+        {
+          "tool_id": "urn:sealed-tool:7f2b9c-exp",
+          "cost": 10,
+          "available": true,
+          "authorized": true,
+          "epoch": 0,
+          "meta": {
+            "region": "GLOBAL",
+            "risk": 0,
+            "tags": [
+              "sealed"
+            ]
+          },
+          "constraints": {
+            "scope": "SEALED_TWO_SOURCE_GLOBAL_COST_COUNTEREXAMPLE_20261003_V1"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "SRC_SECOND",
+      "cost": 0.2,
+      "available": true,
+      "tools": [
+        {
+          "tool_id": "urn:sealed-tool:1a4d3e-cheap",
+          "cost": 1,
+          "available": true,
+          "authorized": true,
+          "epoch": 0,
+          "meta": {
+            "region": "GLOBAL",
+            "risk": 0,
+            "tags": [
+              "sealed"
+            ]
+          },
+          "constraints": {
+            "scope": "SEALED_TWO_SOURCE_GLOBAL_COST_COUNTEREXAMPLE_20261003_V1"
+          }
+        }
+      ]
+    }
+  ],
+  "hidden_capability_truth": {
+    "urn:sealed-tool:7f2b9c-exp": {
+      "CAP_X": true
+    },
+    "urn:sealed-tool:1a4d3e-cheap": {
+      "CAP_X": true
+    }
+  },
+  "version_events": [],
+  "interface_rules": {
+    "discovery_source_listing": "PUBLIC_SOURCE_METADATA_EXCLUDES_TOOL_IDENTITIES_UNTIL_DISCOVER",
+    "discovery_result": "RETURNS_THE_COMPLETE_PUBLIC_TOOL_METADATA_LIST_FOR_EXACTLY_ONE_QUERIED_SOURCE",
+    "probe_receipt": "SUPPORTED_EQUALS_SEALED_HIDDEN_CAPABILITY_TRUTH_AT_THE_CURRENT_TOOL_EPOCH",
+    "episode_stability": "NO_VERSION_EVENT_OCCURS_DURING_THIS_SEALED_SELECTION_EPISODE",
+    "restart_rule": "ANY_FUTURE_VERSION_EPOCH_CHANGE_REQUIRES_A_NEW_SELECTION_EPISODE"
+  },
+  "hard_nonclaims": [
+    "THIS_INSTANCE_DOES_NOT_ASSERT_THE_INTERNET_IS_FINITE_OR_COMPLETE",
+    "THIS_INSTANCE_DOES_NOT_GRANT_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "THE_POLICY_DOES_NOT_RECEIVE_SOURCE_TOOL_IDENTITIES_BEFORE_DISCOVERY"
+  ]
+}
