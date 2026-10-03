@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_PROOF_ROUTER_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_THREE_WAY_MINIMUM_REALITY_ROUTER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Route independently verified Tool Discovery proof obligations through exactly one of universal proof, safe observation, or irreducible matched comparator after exact common Brain/Opus authority identity scope.",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "runtime": "canonical/runtime/tool_discovery_proof_router_v2.py",
+  "tests": "canonical/tests/test_tool_discovery_proof_router_v2.py",
+  "supersedes_candidate": "canonical/governance/TOOL_DISCOVERY_PROOF_ROUTER_V1.json",
+  "input_contracts": [
+    "INDEPENDENT_EXACT_BYTE_BOUND_V6_OR_SUCCESSOR_PROGRAM_SOUNDNESS_RECEIPT",
+    "INDEPENDENT_EXACT_COMMON_BRAIN_OPUS_AUTHORITY_IDENTITY_SCOPE_RECEIPT",
+    "INDEPENDENT_CONTENT_BOUND_OBSERVABILITY_PARTITION_V2_RECEIPT"
+  ],
+  "three_way_order": [
+    "UNIVERSAL_PROOF_WHEN_DECISION_OBSERVABILITY_IS_CLOSED",
+    "SAFE_PROBE_WHEN_THE_CHEAPEST_UNRESOLVED_FRONTIER_HAS_SAFE_DECISION_RELEVANT_OBSERVATION",
+    "MATCHED_COMPARATOR_ONLY_AFTER_SAFE_OBSERVATION_CLOSURE_LEAVES_IRREDUCIBLE_DECISION_RELEVANT_FACT"
+  ],
+  "hard_rules": [
+    "POLICY_MUST_BE_V6_OR_SUCCESSOR_AND_INDEPENDENTLY_EXACT_BYTE_VERIFIED",
+    "IDENTITY_SCOPE_MUST_BE_EXACT_COMMON_BRAIN_OPUS_AUTHORITY",
+    "PARTITION_RESULT_MUST_BE_V2_AND_CONTENT_BOUND_TO_ITS_INDEPENDENT_RECEIPT",
+    "EXACTLY_ONE_OF_THREE_REGIONS_MUST_HOLD",
+    "SAFE_OBSERVATION_FORBIDS_MATCHED_COMPARATOR_SPEND_UNTIL_RECLASSIFICATION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
