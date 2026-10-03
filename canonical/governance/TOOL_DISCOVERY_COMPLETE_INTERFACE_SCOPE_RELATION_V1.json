@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMPLETE_INTERFACE_SCOPE_RELATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_SCOPE_RELATION__UNIVERSAL_CERTIFICATE_REQUIRED__ZERO_CREDIT",
+  "objective": "Close only the tool-discovery scope-completeness residual without weakening the frozen TOOL_ROUTE_DISCOVERY_AND_SELECTION_001 contract, empirical extrapolation, or terminal replay.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "minimum_missing_fact": "INDEPENDENT_EXACT_SCOPE_SEMANTICS_PROVING_PREENUMERATED_TOOL_IDS_ARE_COMPLETE_FOR_THE_FROZEN_TARGET__OR_A_VERIFIED_DISCOVERY_INTERFACE_AND_UNIVERSAL_PROOF_COVERING_UNKNOWN_TOOL_IDENTITIES",
+  "frozen_contract_binding": {
+    "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+    "registry_path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "registry_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "protocol_path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "protocol_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "terminal_binding_path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+    "terminal_binding_blob_sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+  },
+  "interface_domain": {
+    "population": "ALL_FINITE_CURRENT_TOOL_ECOSYSTEMS_EXPOSED_THROUGH_THE_FROZEN_CANDIDATE_VISIBLE_TOOL_AUTHORITY_AND_ANY_FINITE_SET_OF_CANDIDATE_VISIBLE_DISCOVERY_SOURCES",
+    "discoverable_identity_definition": "A tool identity is discoverable iff it is represented by the current candidate-visible tool authority directly or by at least one current authorized discovery source. An identity absent from all candidate-visible information is observationally unavailable to both matched routes under the frozen same-information rule and cannot be required as a uniquely selectable hidden action.",
+    "registry_contract": "COMPLETE_DISCOVERY_REGISTRY enumerates every current candidate-visible discovery source for the frozen task authority, with source identity, epoch, cost, availability and authorization content-addressed by source_manifest_sha256.",
+    "source_result_contract": "A current DISCOVERY_RESULT marked complete contains the full finite tool listing exposed by that source at the bound registry and source epochs. Stale results do not count as source exhaustion.",
+    "unknown_identity_scope": "Discovered tool_id values are arbitrary nonempty strings; the V4 policy has no enumerated tool-id vocabulary and unions identities returned by all current authorized sources.",
+    "capability_truth_boundary": "Tool metadata never proves hidden capability support. Only current-epoch SAFE_CAPABILITY_PROBE receipts may establish positive or negative support for a required capability.",
+    "probe_authority": "A newly discovered tool may be probed only when safe_probe_allowed is explicitly true. Absence is fail-closed.",
+    "version_semantics": "Public TOOL_VERSION_CHANGED events advance the effective tool epoch and make older capability receipts inadmissible.",
+    "constraint_language": "The frozen generic constraint evaluator is exact for and/or/not plus eq, neq, in, not_in, lt, le, gt, ge, contains and exists over candidate-visible metadata.",
+    "cost_objective": "Among currently available, authorized, constraint-admissible tools, select the least-cost identity whose every required capability has current positive probe evidence; ties are deterministic by tool_id."
+  },
+  "legacy_projection": {
+    "rule": "If discovery_registry is absent, V4 delegates directly to the exact verified legacy candidate.",
+    "legacy_candidate_path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+    "legacy_candidate_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17",
+    "effect": "The frozen 180-case terminal inputs contain no discovery_registry, so the prior immutable sample result is behaviorally preserved without replay."
+  },
+  "v3_counterexample": {
+    "candidate_path": "canonical/runtime/tool_discovery_dynamic_candidate_v3.py",
+    "candidate_blob_sha": "bbbee4d6baf8df937543644397abba38a67dce62",
+    "defect": "V3 probes or selects an already-visible tool before exhausting unqueried discovery sources. Therefore a source can contain a cheaper sufficient tool that V3 never discovers before selecting a more expensive route.",
+    "repair": "V4 exhausts every current available and authorized source before any capability probe or selection."
+  },
+  "universal_proof_obligations": [
+    "LEGACY_EXACT_PROJECTION",
+    "FINITE_CURRENT_SOURCE_EXHAUSTION",
+    "COMPLETE_DISCOVERABLE_IDENTITY_UNION",
+    "NO_HARDCODED_TOOL_IDENTITY_ASSUMPTION",
+    "SAFE_PROBE_AUTHORITY_ENFORCED",
+    "CURRENT_EPOCH_EVIDENCE_ONLY",
+    "FINITE_REQUIRED_CAPABILITY_PROBE_PROGRESS",
+    "GLOBAL_LEAST_COST_PROVED_SUFFICIENT_SELECTION",
+    "FAIL_CLOSED_NO_VERIFIED_ROUTE",
+    "V3_PRE_DISCOVERY_SELECTION_COUNTEREXAMPLE_ELIMINATED"
+  ],
+  "hard_nonclaims": [
+    "THE_REGISTRY_COMPLETE_FIELD_DOES_NOT_SELF_CERTIFY_INTERFACE_COMPLETENESS",
+    "A_DISCOVERY_RESULT_COMPLETE_FIELD_DOES_NOT_BY_ITSELF_PROVE_EXTERNAL_SOURCE_TRUTHFULNESS",
+    "NO_FINITE_180_CASE_SAMPLE_IS_RELABELED_AS_UNIVERSAL_PROOF",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_SCOPE_RELATION",
+    "NO_TERMINAL_REPLAY",
+    "NO_TARGET_WEAKENING"
+  ],
+  "independent_verification_requirement": "A public clean-room verifier must bind the exact V4 implementation, its mutation/adversarial tests, this scope relation and the frozen contract/firewall blobs; only then may the scope atom be considered for a separate acceptance reduction.",
+  "new_reality_units_consumed": 0,
+  "terminal_cases_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
