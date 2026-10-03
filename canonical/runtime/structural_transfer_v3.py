@@ -1,12 +1,12 @@
 from typing import Any, Iterable, Mapping, Sequence
 
 RELATIONS={"EXACT","PROVEN_STRONGER"}
-SURFACE={"LABEL_MATCH","IDENTIFIER_MATCH","NAME_SIMILARITY"}
+BASES={"STRUCTURAL_EQUIVALENCE","CAUSAL_ISOMORPHISM","FORMAL_REDUCTION","PROTOCOL_EQUIVALENCE"}
 
 class StructuralTransferError(ValueError):
     pass
 
-def _receipt(receipt:Mapping[str,Any])->str:
+def _receipt(receipt:Mapping[str,Any],*,source:str,target:str,relation:str,basis:str)->str:
     rid=str(receipt.get("receipt_id") or "").strip()
     if not rid:
         raise StructuralTransferError("RECEIPT_ID_REQUIRED")
@@ -16,6 +16,20 @@ def _receipt(receipt:Mapping[str,Any])->str:
         raise StructuralTransferError("RECEIPT_NOT_EXACT_BYTE_BOUND")
     if receipt.get("conclusion")!="success":
         raise StructuralTransferError("RECEIPT_NOT_SUCCESS")
+    bound={
+        "source_primitive":str(receipt.get("source_primitive") or "").strip(),
+        "target_primitive":str(receipt.get("target_primitive") or "").strip(),
+        "relation":str(receipt.get("relation") or "").strip(),
+        "mapping_basis":str(receipt.get("mapping_basis") or "").strip(),
+    }
+    expected={
+        "source_primitive":source,
+        "target_primitive":target,
+        "relation":relation,
+        "mapping_basis":basis,
+    }
+    if bound!=expected:
+        raise StructuralTransferError("RECEIPT_MAPPING_BINDING_MISMATCH")
     return rid
 
 def admit(mapping:Mapping[str,Any])->dict[str,Any]:
@@ -27,8 +41,8 @@ def admit(mapping:Mapping[str,Any])->dict[str,Any]:
         raise StructuralTransferError("TRANSFER_PRIMITIVE_REQUIRED")
     if rel not in RELATIONS:
         raise StructuralTransferError("TRANSFER_RELATION_NOT_PROVED")
-    if not basis or basis in SURFACE:
-        raise StructuralTransferError("SURFACE_ONLY_TRANSFER_FORBIDDEN")
+    if basis not in BASES:
+        raise StructuralTransferError("TRANSFER_MAPPING_BASIS_NOT_ADMISSIBLE")
     rec=mapping.get("verification_receipt")
     if not isinstance(rec,Mapping):
         raise StructuralTransferError("TRANSFER_RECEIPT_REQUIRED")
@@ -40,7 +54,7 @@ def admit(mapping:Mapping[str,Any])->dict[str,Any]:
         "target_primitive":tgt,
         "relation":rel,
         "mapping_basis":basis,
-        "receipt_id":_receipt(rec),
+        "receipt_id":_receipt(rec,source=src,target=tgt,relation=rel,basis=basis),
         "provenance_chain":prov,
         "transfer_admitted":True,
     }
