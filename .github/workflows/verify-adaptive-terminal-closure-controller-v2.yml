@@ -7,6 +7,7 @@ on:
       - "canonical/tests/test_adaptive_terminal_closure_controller_v2.py"
       - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V2.json"
       - "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json"
+      - "canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_V12_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
       - ".github/workflows/verify-adaptive-terminal-closure-controller-v2.yml"
   pull_request:
     paths:
@@ -34,7 +35,7 @@ jobs:
       - name: Compile current V12 V4 adaptive frontier
         run: |
           set -euo pipefail
-          python canonical/runtime/adaptive_terminal_closure_controller_v2.py > /tmp/adaptive-v2.json
+          test "$(git hash-object canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_V12_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json)" = "f733da430bed9459b3da0cc3e8a1582625b0c361"\n          python canonical/runtime/adaptive_terminal_closure_controller_v2.py > /tmp/adaptive-v2.json
           python - <<'PY'
           import json
           x=json.load(open("/tmp/adaptive-v2.json"))
