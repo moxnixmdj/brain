@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_APT_V4_TRANSFERABLE_INTERFACE_INSTANCE_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_LIVE_V4_REALIZABILITY_WITNESS__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "objective": "Qualify one real changing zero-cost APT ecosystem against all twelve properties of the frozen V4 transferable complete-interface contract, without claiming universal protocol scope.",
+  "contract": {
+    "path": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V4_TRANSFERABLE_CATALOG.json",
+    "git_blob_sha": "0a9a788c2637610f4b4cfc5e0f770ba972409137"
+  },
+  "runtime": "canonical/runtime/tool_discovery_apt_v4_transferable_interface_instance_v1.py",
+  "base_live_instance_runtime": "canonical/runtime/tool_discovery_apt_complete_interface_instance_v1.py",
+  "tests": "canonical/tests/test_tool_discovery_apt_v4_transferable_interface_instance_v1.py",
+  "v8_runtime": "canonical/runtime/tool_discovery_dynamic_candidate_v8.py",
+  "declared_target_scope": "ALL_SOURCE_QUALIFIED_BINARY_PACKAGE_TOOL_IDENTITIES_EXPOSED_BY_EVERY_ENABLED_PUBLIC_APT_PACKAGES_INDEX_ON_ONE_VERIFIED_RUNNER_AUTHORITY_SOURCE_EPOCH__WITH_ONE_LIVE_CAPABILITY_REQUIREMENT_PROBED_AND_TRANSFER_RESTART_BLOCKING_SEMANTICS_CHECKED",
+  "hard_rules": [
+    "THIS_IS_A_REALIZABILITY_WITNESS_NOT_A_UNIVERSAL_SCOPE_PROOF",
+    "DO_NOT_INFER_ALL_REAL_WORLD_TOOL_ECOSYSTEMS_FROM_APT",
+    "DO_NOT_INFER_OPUS_NONINFERIORITY_FROM_INTERFACE_REALIZABILITY",
+    "NO_TERMINAL_TOOLATHLON_CASES",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next_if_verified": "BUILD_AND_INDEPENDENTLY_VERIFY_A_PARAMETRIC_UNIVERSAL_SOUNDNESS_THEOREM_FOR_V8_OVER_EVERY_INTERFACE_SATISFYING_THE_V4_CONTRACT__ONLY_THEN_ATTEMPT_TOOL_DISCOVERY_ACCEPTANCE_REDUCTION",
+  "new_reality_units_authorized": 1,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": true,
+  "execution_authority_scope": "ONE_INDEPENDENT_LIVE_APT_V4_INTERFACE_QUALIFICATION_ONLY__NO_ACCEPTANCE_CASES",
+  "promotion_authority": false
+}
