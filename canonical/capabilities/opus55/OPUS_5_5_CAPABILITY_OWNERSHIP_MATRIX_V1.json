@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "POSTWAVE_SCOPE_RESTORED__RAW_TERMINAL_3352_OF_3352_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILY_ROWS_PASS__4_ACCEPTANCE_CLOSED__2_VERIFIED_OWNED__15_ACCEPTANCE_OPEN",
+  "status": "POSTWAVE_SCOPE_RESTORED__RAW_TERMINAL_3352_OF_3352_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILY_ROWS_PASS__5_ACCEPTANCE_CLOSED__2_VERIFIED_OWNED__14_ACCEPTANCE_OPEN",
   "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -691,13 +691,13 @@
     "authority_blob_sha": "8c1a4db776e419ebb263da9f781245dd6491ea2f",
     "historical_source_reduction": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
     "historical_source_behavioral_pass_family_count": 19,
-    "current_unaffected_behavioral_pass_family_count": 11,
-    "current_p1_dependent_quarantined_family_count": 8,
-    "whole_scope_contracts_passed": 11,
-    "whole_scope_contracts_quarantined": 1,
-    "quarantined_behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+    "current_unaffected_behavioral_pass_family_count": 19,
+    "current_p1_dependent_quarantined_family_count": 0,
+    "whole_scope_contracts_passed": 12,
+    "whole_scope_contracts_quarantined": 0,
+    "quarantined_behavior_id": null,
     "verified_owned_equal_or_better_count": 2,
-    "acceptance_protocol_result_open_count": 16,
+    "acceptance_protocol_result_open_count": 14,
     "verified_owned_equal_or_better_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
       "LONG_HORIZON_MEMORY_AND_CONTINUITY"
@@ -713,14 +713,15 @@
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
       "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "ARTIFACT_CREATION",
       "COMMUNICATION_AND_SYNTHESIS",
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "UNKNOWN_DOMAIN_ADAPTATION",
       "MULTI_CAPABILITY_COMPOSITION"
     ],
-    "rule": "ROW_MECHANISM_STATUS_IS_HISTORICAL_ROUTE_CONTEXT__CURRENT_BEHAVIORAL_SCOPE_CREDIT_OBEYS_INDEPENDENT_P1_QUARANTINE_PROPAGATION__CURRENT_OPUS55_ACCEPTANCE_OBEYS_SCOPE_COMPLETE_ACCEPTANCE_AUTHORITY"
+    "rule": "CURRENT_BEHAVIORAL_SCOPE_IS_19_OF_19_RESTORED__CURRENT_OPUS55_ACCEPTANCE_IS_5_OF_19__STRICT_OWNERSHIP_REMAINS_2_OF_19",
+    "current_scope_restoration_authority": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "current_acceptance_authority": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "current_acceptance_state": "5_OF_19_PASS__14_OPEN"
   },
   "postwave_acceptance_summary": {
     "calibrated_family_count": 5,
