@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_SATURATED_ROOT2_ACTIVE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT3_CURRENT_BOUND_SEARCH_SATURATED__ROOT2_14_SURFACE_BINDING_ACTIVE__NO_FRESH_REALITY__ZERO_CREDIT",
+  "exact_brain_subjects": {
+    "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "815038c358d31b8b0abade1352bb09d8096a51e5",
+    "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json": "5e7eca8956eb4453858525bc50c4d63d0de12e02",
+    "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json": "98f878ecf0227284ab37aedc176432f6b1b6051c",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "66464155ac5960a227ecc8e81afdbfcf2752ff30",
+    "canonical/governance/CURRENT_ROOT3_ZERO_REALITY_STRONGER_PROOF_SATURATION_V1.json": "bdc78fdc147a014e5d77d5daafb5434b1a4e878f",
+    "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json": "a9d3e6ebf05032d30fc20ac785e88e6823474601",
+    "canonical/verification/CURRENT_WITNESS_TARGET_TOTALIZATION_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "48c2318aaffffec67855199523235e6943289fc6",
+    "canonical/verification/SYNTHESIS_OVERLAY_V3_REBIND_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "1a67bc568944212c4d235a463c8bd7bea21b3993",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1397,
+    "final_head_sha": "a8106b83064fa6b39c46236df31572baebab43ea",
+    "merge_commit": "02acd96ff557ec72d2fc8050382f1f0e49924664",
+    "workflow_run_id": 37152795953,
+    "workflow_job_id": 111289943705,
+    "conclusion": "success"
+  },
+  "verified": {
+    "acceptance": "5/19_PASS__14/19_OPEN",
+    "root1_positive_gap_count": 0,
+    "root2_only_predicate_count": 15,
+    "root2_unique_surface_count": 14,
+    "current_matched_targets": 8,
+    "current_witnesses": 12,
+    "direct_witness_reuse_closures": 0,
+    "synthesis_transport_proved_atoms": 7,
+    "root3_current_bound_generic_search_saturated": true,
+    "additional_root3_closures_from_current_bound_search": 0,
+    "current_active_steps": [
+      3,
+      4,
+      5
+    ],
+    "generic_root3_search_authorized": false,
+    "fresh_reality_authority": false,
+    "terminal_achieved": false
+  },
+  "consequence": "STOP_GENERIC_ROOT3_STRONGER_PROOF_SEARCH_UNTIL_RESUME_CONDITION__FOCUS_14_ROOT2_ROUTE_GAPS_AND_OTHER_NONDOMINATED_ZERO_REALITY_RESIDUALS__THEN_COMPUTE_MINIMUM_IRREDUCIBLE_REALITY_CUT",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
