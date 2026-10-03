@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS55_ROUTE_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PRIMARY_ANTHROPIC_PDF__HF_AUTO_GATE_CONFIRMED__OPUS55_GRADER_CLAUDE_OPUS_4_6__ZERO_CREDIT",
+  "subjects": [
+    {
+      "path": "canonical/governance/ROOT2_HLE_DIAMOND_PUBLIC_ACCESS_DELTA_20261004_V1.json",
+      "git_blob_sha": "44facb9a4c88ccd73095726b79a8d64461ab7535",
+      "proved": "HUGGINGFACE_METADATA_GATED_AUTO__POPULATION_ACCESS_REMAINS_GATED"
+    },
+    {
+      "path": "canonical/governance/HLE_OPUS55_COMPARATOR_PROTOCOL_CORRECTION_20261004_V1.json",
+      "git_blob_sha": "146746d56dbf0fa3aace07352336418c58829f37",
+      "proved": "OPUS55_HLE_WITH_TOOLS_USES_CLAUDE_OPUS_4_6_GRADER__WEB_SEARCH_FETCH_PROGRAMMATIC_TOOLS_CODE_EXECUTION__1M_TOKEN_CAP__NO_CONTEXT_COMPACTION"
+    }
+  ],
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1477,
+    "verifier_head_sha": "3b3cac11b35b397b5621209cfc132e147bd06537",
+    "workflow_run_id": 37161644038,
+    "workflow_job_id": 111316131545,
+    "conclusion": "success",
+    "primary_pdf_pages": 230,
+    "huggingface_gated_value": "auto",
+    "grader": "Claude Opus 4.6"
+  },
+  "consequence": [
+    "KEEP_HLE_DIAMOND_POPULATION_ACCESS_GATED",
+    "DELETE_O3_MINI_2025_01_31_AS_FROZEN_OPUS55_COMPARATOR_GRADER",
+    "REQUIRE_ZERO_COST_CLAUDE_OPUS_4_6_COMPARABLE_GRADER_OR_PROVED_EQUIVALENT_SCORER",
+    "PRESERVE_BRAIN_ADAPTER_AND_BRAIN_SCORE_RESIDUALS"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
