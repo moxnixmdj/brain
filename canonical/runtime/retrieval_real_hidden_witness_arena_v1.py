@@ -72,6 +72,28 @@ def load_catalog(root: Path) -> dict[str, Any]:
     return obj
 
 
+def _identity_terms(row: Mapping[str, Any]) -> set[str]:
+    repo=canon(row.get("repository"))
+    name=repo.rsplit("/",1)[-1] if repo else ""
+    parts=set(tokens(name.replace("-"," ").replace("_"," ")))
+    compact=re.sub(r"[^0-9a-z]+","",name.casefold())
+    if compact:
+        parts.add(compact)
+    return parts
+
+
+def _redact_identity(text: str, row: Mapping[str, Any]) -> str:
+    blocked=_identity_terms(row)
+    kept=[]
+    for raw in TOKEN.findall(canon(text)):
+        t=raw.casefold()
+        compact=re.sub(r"[^0-9a-z]+","",t)
+        if t in blocked or compact in blocked:
+            continue
+        kept.append(raw)
+    return " ".join(kept)
+
+
 def surface_text(row: Mapping[str, Any], *, profile: str, route: str) -> str:
     if profile not in PROFILES or route not in ROUTES:
         raise ValueError("ARENA_PROFILE_OR_ROUTE_INVALID")
@@ -79,19 +101,19 @@ def surface_text(row: Mapping[str, Any], *, profile: str, route: str) -> str:
     topics=" ".join(canon(x) for x in (row.get("topics") or []))
     paths=" ".join(canon(x) for x in (row.get("root_paths") or []))
     language=canon(row.get("language"))
-    # Identity is intentionally excluded from all scored routes.  The answer key
-    # knows repository/id, the retriever does not get to win by matching names.
+    # Repository/id fields are never scored. NO_IDENTITY additionally redacts
+    # project-name tokens that leak through descriptions/topics/path names.
     if profile=="METADATA_ONLY":
         paths=""
     elif profile=="NO_DESCRIPTION":
         description=""
     elif profile=="STRUCTURAL_ONLY":
         description=""; topics=""
-    # NO_IDENTITY is equivalent to the normal nonidentity view because identity
-    # is never admitted into scored text.  It is retained as an explicit
-    # regression profile so future implementations cannot silently add it.
     metadata=" ".join(x for x in (description,topics,language) if x)
     structure=" ".join(x for x in (paths,language) if x)
+    if profile=="NO_IDENTITY":
+        metadata=_redact_identity(metadata,row)
+        structure=_redact_identity(structure,row)
     if route=="METADATA":
         return metadata
     if route=="STRUCTURE":
