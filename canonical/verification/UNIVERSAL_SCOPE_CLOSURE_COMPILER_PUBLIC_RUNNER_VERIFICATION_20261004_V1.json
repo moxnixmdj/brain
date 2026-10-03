@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_SCOPE_CLOSURE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_GENERIC_SCOPE_COMPILER_BYTES__ADVERSARIAL_FAIL_CLOSED__ZERO_CREDIT",
+  "verified_brain": {
+    "runtime_path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "runtime_git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039",
+    "tests_path": "canonical/tests/test_universal_scope_closure_compiler_v1.py",
+    "tests_git_blob_sha": "dc3c3abdfa5c0fb7ff76fa897eb9b23accfca71d",
+    "activation_path": "canonical/governance/UNIVERSAL_SCOPE_CLOSURE_COMPILER_ACTIVATION_V1.json",
+    "activation_verified_input_git_blob_sha": "beef965fd2c0e3628c2312113f844ffdd1a1ed4e"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1425,
+    "verified_head_sha": "ffd200e75e7a51d63d412dfaccd6d5301af85517",
+    "merge_commit": "966cca4c393b32e42ed5331b8089a188bb3f7a9f",
+    "workflow_run_id": 37156756044,
+    "workflow_job_id": 111301607829,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_THREE_BRAIN_BLOBS_MATCHED",
+    "UNIVERSAL_FORMAL_SCOPE_PROOF_ACCEPTED_ONLY_WITH_COMPLETE_PREMISES",
+    "EXACT_COMPLETE_TARGET_CASE_UNIVERSE_ACCEPTED_ONLY_WITH_BOUND_UNIVERSE_IDENTITY",
+    "EXHAUSTIVE_FINITE_SUPERSET_ACCEPTED_ONLY_WITH_TARGET_SUBSET_PROOF",
+    "LOSSLESS_DECOMPOSITION_REQUIRES_COMPLETE_VERIFIED_UNION_AND_ALL_CHILDREN_CLOSED",
+    "UNVERIFIED_NONINDEPENDENT_UNKNOWN_BASIS_AND_DUPLICATE_CHILD_CASES_FAIL_CLOSED",
+    "FINITE_SAMPLE_PERFECT_SUCCESS_DOES_NOT_IMPLY_OPEN_WORLD_SCOPE",
+    "SCOPE_COMPLETENESS_GRANTS_ZERO_PERFORMANCE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
