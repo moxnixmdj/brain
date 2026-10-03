@@ -1,0 +1,22 @@
+name: Verify current composition memory slice V3
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_20261003_V3.json"
+      - "canonical/verification/COMPOSITION_COMPONENT_PROOF_SLICE_20261003_V3.json"
+      - "canonical/verification/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - "canonical/tests/test_composition_memory_current_slice_v3.py"
+      - ".github/workflows/verify-composition-memory-current-slice-v3.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Recompute current composition slice
+        run: python canonical/tests/test_composition_memory_current_slice_v3.py
