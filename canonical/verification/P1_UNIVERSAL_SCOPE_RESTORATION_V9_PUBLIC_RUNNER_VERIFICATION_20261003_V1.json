@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__P1_WHOLE_SCOPE_RESTORABLE__12_OF_12_CONTRACTS__19_OF_19_PROVISIONAL_BEHAVIORAL_ROWS__ZERO_REALITY__ZERO_OPUS55_CREDIT",
+  "brain_candidate": {
+    "pull_request": 1274,
+    "reducer_path": "canonical/runtime/p1_universal_scope_restoration_v9.py",
+    "reducer_git_blob_sha": "cfb2336291112eff247ae74b7a5e381fc9009317",
+    "tests_git_blob_sha": "192fa292d38feefb1eeefe52e8104cd39502a502",
+    "candidate_git_blob_sha": "6ebaed1262bed76f003c2a337e3a80b3b099e9e0"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1261,
+    "verifier_head_sha": "ed6a6078047d78385007f3bffede2d65f135f402",
+    "merge_commit": "93cfe5b07102524d9e4298e0d808473860cf519a",
+    "workflow_run_id": 37110511439,
+    "workflow_job_id": 111167334901,
+    "conclusion": "success",
+    "artifact_id": 11269776417,
+    "artifact_digest": "sha256:3b906d9544da8c4aa07bb59c6ac8c289b145fca6eaa17c239865b0c288ad2c00"
+  },
+  "decisive_source": {
+    "path": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_SCOPE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "f327bfdb5d52bb9551b52f67da14a4cd425533a3",
+    "quarantined_execution_used_as_proof": false
+  },
+  "verified": {
+    "whole_p1_contract_restored": true,
+    "whole_scope_contract_pass_count": 12,
+    "whole_scope_quarantined_contract_count": 0,
+    "provisional_behavioral_family_pass_count": 19,
+    "p1_quarantined_behavioral_family_count": 0,
+    "reactivated_family_count": 8,
+    "source_fresh_reality_units_consumed": 0,
+    "restoration_new_reality_units_consumed": 0,
+    "terminal_results_replayed": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_OPUS55_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_OPUS55_FAMILY_OWNERSHIP_CREDIT",
+    "NO_USE_OF_QUARANTINED_RUN_37108111537_AS_PROOF"
+  ],
+  "opus55_acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
