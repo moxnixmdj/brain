@@ -1,0 +1,107 @@
+name: Verify universal learning engine v2
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/UNIVERSAL_LEARNING_ENGINE_V2.json"
+      - "canonical/action_intents/2026-10-03_UNIVERSAL_LEARNING_V2.json"
+      - "canonical/runtime/universal_learning_engine_v2.py"
+      - "canonical/runtime/metacognitive_learning_policy_v1.py"
+      - "canonical/tests/test_universal_learning_engine_v2.py"
+      - "canonical/tests/test_metacognitive_learning_policy_v1.py"
+      - ".github/workflows/verify-universal-learning-engine-v2.yml"
+  push:
+    paths:
+      - "canonical/governance/UNIVERSAL_LEARNING_ENGINE_V2.json"
+      - "canonical/action_intents/2026-10-03_UNIVERSAL_LEARNING_V2.json"
+      - "canonical/runtime/universal_learning_engine_v2.py"
+      - "canonical/runtime/metacognitive_learning_policy_v1.py"
+      - "canonical/tests/test_universal_learning_engine_v2.py"
+      - "canonical/tests/test_metacognitive_learning_policy_v1.py"
+      - ".github/workflows/verify-universal-learning-engine-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run V1 regression and V2 falsification tests
+        run: |
+          python -m unittest             canonical.tests.test_universal_learning_contract_v1             canonical.tests.test_universal_learning_engine_v2             canonical.tests.test_metacognitive_learning_policy_v1 -v
+      - name: Verify exact bound blobs and fail-closed governance
+        run: |
+          python - <<'PY'
+          import json
+          import subprocess
+          from itertools import product
+          from pathlib import Path
+
+          from canonical.runtime import universal_learning_engine_v2 as v2
+          from canonical.runtime import metacognitive_learning_policy_v1 as meta
+
+          root = Path('.')
+          gov = json.loads((root/'canonical/governance/UNIVERSAL_LEARNING_ENGINE_V2.json').read_text())
+
+          for path, expected in gov['exact_bound_components'].items():
+              got = subprocess.check_output(['git','hash-object',path], text=True).strip()
+              assert got == expected, (path, got, expected)
+
+          assert gov['acceptance_credit_delta'] == 0
+          assert gov['ownership_credit_delta'] == 0
+          assert gov['fresh_reality_authority'] is False
+          assert gov['causal_binding']['named_blocker'] == 'UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT'
+
+          # Exhaust all two- and three-hypothesis binary terminal-action assignments.
+          # Consensus must execute; disagreement with no safe discriminator must abstain.
+          for n in (2, 3):
+              hids = [f'h{i}' for i in range(n)]
+              probs = {h: '1' for h in hids}
+              for assignment in product(('A','B'), repeat=n):
+                  terminal = dict(zip(hids, assignment))
+                  out = v2.choose_learning_step(
+                      probabilities=probs,
+                      terminal_action_by_hypothesis=terminal,
+                      actions=[],
+                  )
+                  if len(set(assignment)) == 1:
+                      assert out['status'] == 'DECISION_SUFFICIENT__EXECUTE', (n, assignment, out)
+                      assert out['abstain'] is False
+                  else:
+                      assert out['status'].startswith('NONIDENTIFIABLE_OR_UNDERSPECIFIED'), (n, assignment, out)
+                      assert out['abstain'] is True
+
+          # A perfect safe discriminator must eliminate terminal-action ambiguity.
+          action = v2.LearningAction(
+              'perfect',
+              {'h1':'o1','h2':'o2'},
+              time_cost=1,
+          )
+          ranked = v2.rank_learning_actions(
+              probabilities={'h1':'1/2','h2':'1/2'},
+              terminal_action_by_hypothesis={'h1':'A','h2':'B'},
+              actions=[action],
+          )
+          assert str(ranked[0]['expected_post_probe_ambiguity']) == '0'
+          assert str(ranked[0]['decision_gain']) == '1/2'
+
+          # Metacognitive strategy promotion requires matched, verified, no-regression evidence.
+          episodes = [
+              meta.VerifiedEpisode('t1','old',True,True,wall_clock=10,reality_calls=2,information_actions=4),
+              meta.VerifiedEpisode('t2','old',True,True,wall_clock=10,reality_calls=2,information_actions=4),
+              meta.VerifiedEpisode('t1','new',True,True,wall_clock=8,reality_calls=2,information_actions=3),
+              meta.VerifiedEpisode('t2','new',True,True,wall_clock=8,reality_calls=2,information_actions=3),
+          ]
+          cmp = meta.compare_strategies(episodes=episodes, incumbent='old', candidate='new')
+          assert cmp['promotion_allowed_for_environment_class'] is True
+          assert cmp['universal_superiority_claimed'] is False
+          PY
