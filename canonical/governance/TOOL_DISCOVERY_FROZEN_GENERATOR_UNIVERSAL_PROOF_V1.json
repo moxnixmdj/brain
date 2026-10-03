@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_FROZEN_GENERATOR_UNIVERSAL_PROOF_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__UNIVERSAL_FORMAL_SCOPE_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "objective": "Replace the invalid 180-sample scope inference with a universal proof over every admissible input of the exact frozen V2 Tool Discovery generator.",
+  "proof_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+  "theorem": [
+    "V2 partitions every nonnegative ordinal into exactly six classes by ordinal mod 6.",
+    "For a fixed class, V1 seed randomness changes only a shared string suffix used to rename tool/capability/task identifiers; substantive costs, eligibility, capability incidence, requirements and mutation semantics are fixed.",
+    "The exact candidate is invariant to that renaming for correctness: tool order is fixed by unique costs; generated capability labels preserve role order; evidence is keyed consistently to the same renamed symbols.",
+    "Therefore one representative per class is a complete structural quotient of all admissible generator inputs.",
+    "All six representatives satisfy the exact scorer, including transfer, version invalidation, availability/authorization, least-cost choice, and no-route escalation.",
+    "The worst case needs at most eight relevant probes plus one terminal select/escalate action, below the evaluator budgets."
+  ],
+  "exact_sources": {
+    "candidate": {
+      "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+      "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+    },
+    "v1": {
+      "path": "canonical/runtime/tool_discovery_information_safe_proof.py",
+      "git_blob_sha": "2450a9644119c9fdf9c43307a1d115098d6ba592"
+    },
+    "v2": {
+      "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+      "git_blob_sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+    },
+    "protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "binding": {
+      "path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+    }
+  },
+  "invalidates_as_acceptance_basis": "canonical/verification/TOOL_DISCOVERY_FROZEN_SCOPE_COMPLETENESS_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "preserves_from_that_receipt": "CASE_LOCAL_TOOL_IDENTITY_COMPLETENESS_LEMMA_ONLY",
+  "runtime": "canonical/runtime/tool_discovery_frozen_generator_universal_proof_v1.py",
+  "tests": "canonical/tests/test_tool_discovery_frozen_generator_universal_proof_v1.py",
+  "expected_independent_verdict": "UNIVERSAL_FORMAL_SCOPE_PROOF_OVER_ALL_ADMISSIBLE_FROZEN_GENERATOR_INPUTS",
+  "hard_nonclaims": [
+    "NO_OPEN_DOMAIN_GENERALIZATION",
+    "NO_FINITE_SAMPLE_GENERALIZATION",
+    "NO_ACCEPTANCE_CREDIT_BEFORE_INDEPENDENT_VERIFICATION_AND_SEPARATE_REDUCTION",
+    "NO_WHOLE_FAMILY_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
