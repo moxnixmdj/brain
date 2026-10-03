@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACTION_CUT_OVERLAY_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE__EXACT_VERIFIED_ROUTE_CUTS_ONLY__ZERO_CREDIT",
+  "objective": "Prevent the deterministic terminal scheduler from selecting actions whose exact current route has been independently proven impossible or inadmissible, without deleting or proving the target predicate.",
+  "blocked_actions": [
+    {
+      "action_id": "BUILD_TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "cut_id": "TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_20261003",
+      "authority_path": "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json",
+      "authority_git_blob_sha": "48ba33998e73b8eec2731be51a7ec78077ed0d4a",
+      "verification_path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_FORMALISM_CUT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "verification_git_blob_sha": "e628d8d5b63c2020400129fcc9e0bc6fde6101b2",
+      "state": "BLOCKED_UNTIL_MATERIAL_SCOPE_SEMANTICS_OR_DISCOVERY_INTERFACE_CHANGE",
+      "reason": "Current terminal-bound policy cannot support universal unknown-tool-identity discovery scope; rerunning the unchanged certificate route is forbidden by active verified authority.",
+      "reopen_only_on": [
+        "INDEPENDENT_EXACT_SCOPE_SEMANTICS_PROVING_PREENUMERATED_TOOL_IDS_COMPLETE_FOR_FROZEN_TARGET",
+        "VERIFIED_DISCOVERY_INTERFACE_AND_UNIVERSAL_PROOF_COVERING_UNKNOWN_TOOL_IDENTITIES"
+      ]
+    }
+  ],
+  "hard_rules": [
+    "CUT_BLOCKS_ONLY_THE_EXACT_ACTION_ROUTE_NOT_THE_TARGET_PREDICATE",
+    "NO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT_FROM_A_ROUTE_CUT",
+    "NO_SEMANTIC_INFERENCE_WHEN_APPLYING_ACTION_CUTS",
+    "UNKNOWN_OR_MALFORMED_ACTION_CUT_BINDINGS_FAIL_CLOSED"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
