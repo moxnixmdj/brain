@@ -27,10 +27,10 @@ def _registry(sources, epoch=7):
     }
 
 
-def _tool(tid,cost,epoch=0,available=True,authorized=True,region="US"):
+def _tool(tid,cost,epoch=0,available=True,authorized=True,region="US",safe_probe_allowed=True):
     return {
         "tool_id":tid,"cost":float(cost),"epoch":epoch,
-        "available":available,"authorized":authorized,
+        "available":available,"authorized":authorized,"safe_probe_allowed":safe_probe_allowed,
         "meta":{"region":region},
     }
 
@@ -127,6 +127,17 @@ class Tests(unittest.TestCase):
             {"kind":"SAFE_CAPABILITY_PROBE","tool_id":"T0","capability":"A","epoch":0,"supported":True}
         ]
         self.assertEqual(next_action(p),{"action":"PROBE","tool_id":"T0","capability":"B","epoch":0})
+
+    def test_tool_without_safe_probe_authority_is_never_probed(self):
+        p=self.public()
+        p["discovery_receipts"]=[
+            {"kind":"DISCOVERY_RESULT","source_id":"S0","registry_epoch":7,"source_epoch":1,
+             "complete":True,"tools":[_tool("T0",1,safe_probe_allowed=False)]},
+            {"kind":"DISCOVERY_RESULT","source_id":"S1","registry_epoch":7,"source_epoch":3,
+             "complete":True,"tools":[_tool("T1",2,safe_probe_allowed=True)]},
+        ]
+        a=next_action(p)
+        self.assertEqual(a,{"action":"PROBE","tool_id":"T1","capability":"CAP_A","epoch":0})
 
     def test_transfer_reuses_current_receipt(self):
         p=self.public()
