@@ -25,6 +25,8 @@ class Tests(unittest.TestCase):
             {"action":"SELECT","tool_id":"CHEAP"},
         )
         self.assertEqual(out["v4_safe_probe_gate_check"],{"action":"SELECT","tool_id":"SAFE"})
+        self.assertEqual(out["v4_stale_discovery_receipt_check"],{"action":"DISCOVER","source_id":"S0","query":"CAP_A"})
+        self.assertEqual(out["v4_unauthorized_source_check"],{"action":"SELECT","tool_id":"SAFE"})
 
     def test_no_credit(self):
         out=repair.evaluate()
