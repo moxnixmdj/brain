@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_WITH_TOOLS_CANONICAL_ROUTE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_REALITY_ROUTE_BINDING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "target_bar_percent": 67.7,
+  "population": {
+    "dataset": "cais/hle",
+    "revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "split": "test",
+    "examples": 2500,
+    "gated": "auto",
+    "metadata_only_retrieval_used": true,
+    "benchmark_examples_read": 0
+  },
+  "upstream_protocol": {
+    "repository": "centerforaisafety/hle",
+    "commit": "22ed3074b1e7b134bcbc09028d0ba320839b0655",
+    "readme_blob": "a948c9512541fff702aaf5e0c8bc371fded3689c",
+    "tools_protocol_blob": "78ad17375fe3ec2239615cf05f577d6196af2992",
+    "blocklist_blob": "8ca485255e99736e2615d73a25736b30055c5c5b",
+    "requirements_blob": "d700cda6162e2d4f5d86dbf4865487721d979050",
+    "judge_blob": "4caca7c5e6eaa9c64ec33e5f1bcc93312e6c5b31",
+    "python": "3.11.16",
+    "direct_code_sandbox_internet": false,
+    "web_search_max_results": 20,
+    "web_fetch_max_chars": 60000,
+    "allowed_task_web_tools": [
+      "web_search",
+      "web_fetch"
+    ],
+    "opus55_reference_harness": "Claude Code 2.1.280"
+  },
+  "brain_route_contract": {
+    "provider_specific_agent_harness_allowed": true,
+    "require_same_dataset_revision": true,
+    "require_same_task_web_authority": true,
+    "require_network_isolated_code_sandbox": true,
+    "require_exact_pinned_python_environment": true,
+    "require_exact_or_stricter_contamination_filter": true,
+    "candidate_must_not_receive_reference_answer": true,
+    "scorer": "canonical/runtime/hle_strict_reference_scorer.py",
+    "scorer_blob": "d30882400982c058f1130b82af790b197767a091",
+    "scorer_verification": "canonical/verification/HLE_STRICT_LOWER_BOUND_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "scorer_verification_blob": "624959a5c731b3ecff4cac200122d028744d15a3"
+  },
+  "conservative_proof": {
+    "judge_replacement": "EXACT_REFERENCE_SCORER_IS_STRICTER_THAN_PUBLISHED_HLE_JUDGE",
+    "contamination_rule": "ANY_BRAIN_CONTAMINATION_FLAG_COUNTS_WRONG__NO_MODEL_REVIEWER_NEEDED",
+    "threshold_implication": "BRAIN_STRICT_CONTAMINATION_SAFE_SCORE_GE_67_7_IMPLIES_HLE_SCORE_GE_67_7_ON_SAME_FROZEN_POPULATION",
+    "opaque_judge_dependency_required": false,
+    "opaque_contamination_reviewer_required": false
+  },
+  "blocklist_history": {
+    "initial_protocol_commit": "1001c327f5e487addc902292e86fc266690913ac",
+    "initial_blocklist_blob": "08eaff6b4b0a36e29837526585c0b8cf75b1fb9c",
+    "current_blocklist_effectively_not_weaker": true,
+    "note": "CURRENT_DOMAIN_WIDE_JSDLIVR_BLOCK_DOMINATES_REMOVED_NARROW_CDN_PREFIX; OTHER_CHANGES_ADD_BLOCKING"
+  },
+  "result": {
+    "canonical_with_tools_protocol_frozen": true,
+    "exact_population_frozen": true,
+    "conservative_scorer_bound_verified": true,
+    "contamination_policy_content_addressed": true,
+    "route_protocol_bound": true,
+    "terminal_score_observed": false,
+    "acceptance_closed": false
+  },
+  "hard_rules": [
+    "NO_HLE_BENCHMARK_QUESTION_OR_ANSWER_CONTENT_READ_DURING_ROUTE_BINDING",
+    "NO_TERMINAL_HLE_CASE_EXECUTION_FROM_THIS_CANDIDATE",
+    "NO_SCORE_CREDIT_FROM_ROUTE_READINESS",
+    "BRAIN_AGENT_HARNESS_NEED_NOT_EQUAL_CLAUDE_CODE_BECAUSE_OFFICIAL_PROTOCOL_IS_PROVIDER_SPECIFIC__TASK_POPULATION_TOOL_AUTHORITY_SANDBOX_AND_SCORING_SCOPE_MUST_MATCH",
+    "ANY_CONTAMINATION_FLAG_IS_ZERO_CREDIT_FOR_THAT_CASE",
+    "STRICT_REFERENCE_SCORE_IS_A_LOWER_BOUND_NOT_SCORE_EQUIVALENCE"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_PRIMARY_SOURCE_BYTES_DATASET_METADATA_PROTOCOL_MONOTONICITY_AND_STRICT_SCORER_BOUND__IF_PASS_DISCHARGE_HLE_CANONICAL_ROUTE_ZERO_REALITY_REQUIREMENT__DO_NOT_RUN_HLE_UNTIL_GLOBAL_MINIMUM_REALITY_CUT_AUTHORIZES"
+}
