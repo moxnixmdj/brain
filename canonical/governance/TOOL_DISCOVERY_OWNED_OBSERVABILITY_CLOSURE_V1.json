@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_OWNED_OBSERVABILITY_CLOSURE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_REALITY_OBSERVABILITY_CLOSURE__INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "objective": "Eliminate the observability lower-bound matched-only partition for the operative owned 42-tool Brain authority by proving every invocable identity is registry-gated and every required capability bit is deterministically membership-decidable from verification-bound provides metadata.",
+  "exact_authority": {
+    "registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "registry_git_blob": "7badee4878700f2cd4176beb8319d2a6a0bdf782",
+    "invocation_runtime": "canonical/runtime/astra_runtime.py",
+    "invocation_runtime_git_blob": "7f5d16b1db69cb620954bc778e0ba6e15e687b75",
+    "tool_count": 42
+  },
+  "verification_census": {
+    "local_content_addressed_evidence_bindings": 41,
+    "external_public_runner_bindings": 1,
+    "unbound_entries": 0,
+    "external_binding": {
+      "tool_id": "source.objective_relevance.rank.bm25",
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pr": 143,
+      "workflow_run_id": 36678278264,
+      "exact_producer_blob": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790"
+    }
+  },
+  "implication_if_independently_verified": [
+    "FOR_THE_OPERATIVE_OWNED_42_TOOL_AUTHORITY__EVERY_REGISTERED_REQUIRED_CAPABILITY_FACT_IS_SAFE_LOOKUP_DECIDABLE",
+    "OBSERVABILITY_LOWER_BOUND_MATCHED_ONLY_REGION_IS_EMPTY_FOR_REGISTERED_INVOCABLE_IDENTITIES",
+    "DO_NOT_INFER_WHOLE_PROTOCOL_IDENTITY_SCOPE_COMPLETENESS_FROM_THIS_FACT",
+    "COMPOSE_ONLY_WITH_INDEPENDENT_IDENTITY_AUTHORITY_SCOPE_PROOF_AND_INDEPENDENTLY_VERIFIED_V6_OR_SUCCESSOR_POLICY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_THE_42_TOOL_REGISTRY_ENUMERATES_ALL_PRESENT_OR_FUTURE_EXTERNAL_TOOLS",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_OPUS_COMPARATOR_BINDING",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "BM25_PUBLIC_RUN_MUST_BE_RECHECKED_BY_INDEPENDENT_VERIFIER"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
