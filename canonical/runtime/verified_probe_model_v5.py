@@ -62,6 +62,8 @@ def admit(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]]
         raise VerifiedProbeModelError("EXPERIMENT_EPOCH_AND_STATE_FINGERPRINT_REQUIRED")
     if str(safety.get("experiment_epoch") or "").strip()!=epoch:
         raise VerifiedProbeModelError("SAFETY_AND_OUTCOME_MODEL_EPOCH_MISMATCH")
+    if str(safety.get("state_fingerprint") or "").strip()!=state_fingerprint:
+        raise VerifiedProbeModelError("SAFETY_AND_OUTCOME_MODEL_STATE_MISMATCH")
     if str(model.get("environment_id") or "").strip()!=env or str(model.get("goal_id") or "").strip()!=goal or str(model.get("action_id") or "").strip()!=aid:
         raise VerifiedProbeModelError("OUTCOME_MODEL_SCOPE_MISMATCH")
     hd=v4.hypothesis_digest(hypotheses)
