@@ -1,0 +1,31 @@
+name: Verify adaptive terminal closure candidate
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
+      - "canonical/tests/test_adaptive_terminal_closure_controller_v1.py"
+      - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_CONTROLLER_ACTIVATION_V1.json"
+      - "canonical/runtime/social_technical_discussion_provider_v1.py"
+      - "canonical/runtime/social_technical_discussion_binding_candidate_v1.py"
+      - "canonical/tests/test_social_technical_discussion_provider_v1.py"
+      - "canonical/governance/SOCIAL_TECHNICAL_DISCUSSION_SOURCE_EPOCH_V1.json"
+      - ".github/workflows/verify-adaptive-terminal-closure-candidate.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run adaptive controller tests
+        run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v1 -v
+      - name: Run social provider tests
+        run: python -m unittest canonical.tests.test_social_technical_discussion_provider_v1 -v
+      - name: Compile live adaptive zero-reality projection
+        run: python canonical/runtime/adaptive_terminal_closure_controller_v1.py
