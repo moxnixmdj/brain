@@ -6,7 +6,7 @@
   "authority": {
     "root_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "bb38521bf7dd4a8d404a1a62cfd326769eb075ea"
+      "git_blob_sha": "458a01f6a4b4f172c04785a3cdb4911086875f7c"
     },
     "current_frontier": {
       "path": "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V3.json",
@@ -19,11 +19,18 @@
     "current_witness_target_totalization_candidate": {
       "path": "canonical/governance/CURRENT_WITNESS_TARGET_TOTALIZATION_V2_CANDIDATE.json",
       "git_blob_sha": "953161b63ae0fa220cea19ed2b884ab9dd98cc84",
-      "independent_verification": "PENDING__GITHUB_ACTIONS_JOB_FAILED_BEFORE_USER_STEPS"
+      "independent_verification": {
+        "path": "canonical/verification/CURRENT_WITNESS_TARGET_TOTALIZATION_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "48c2318aaffffec67855199523235e6943289fc6",
+        "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_8X12_TOTALIZATION__ZERO_DIRECT_REUSE_CLOSURES__ZERO_CREDIT",
+        "verifier_pull_request": 1394,
+        "workflow_run_id": 37151661821,
+        "workflow_job_id": 111286635619
+      }
     },
     "root2_fixed_bar_route_inventory": {
       "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-      "git_blob_sha": "95950322ca2f76e86e9926338d522648e6c1f420",
+      "git_blob_sha": "a0ad666e43c4dd5121d6f235f87962dd2bf17004",
       "consequence": "15_ROOT2_ONLY_PREDICATES_COLLAPSED_TO_14_UNIQUE_BENCHMARK_ROUTE_OBLIGATIONS__HISTORICAL_ROUTE_DELETION_IS_NOT_ACCEPTANCE_CLOSURE"
     },
     "finance_accounting_index_identity_reconciliation": {
@@ -33,8 +40,15 @@
     },
     "root3_residual_compression": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
-      "git_blob_sha": "0a21b5b2cbb928b44ea22635df1c37919f2eb612",
+      "git_blob_sha": "a5726e4d17e41120bece55191222b6039ef9e0a5",
       "consequence": "FINANCE_2_DIRECT_LEAVES__UNKNOWN_DOMAIN_2_DIRECT_LEAVES__COMPOSITION_8_OF_12_OPEN__SYNTHESIS_EXISTING_OVERLAY_REBIND_ONLY"
+    },
+    "synthesis_overlay_v3_rebind": {
+      "activation_path": "canonical/governance/SYNTHESIS_OVERLAY_V3_REBIND_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "6c71e496e01a111d5cef9431034d90e3f1af8acb",
+      "verification_path": "canonical/verification/SYNTHESIS_OVERLAY_V3_REBIND_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "verification_git_blob_sha": "57b7fc8df4fd820e3eda426f121b56acfce37a15",
+      "consequence": "SEVEN_SYNTHESIS_ATOMS_PRESERVED__ONLY_FOUR_SYNTHESIS_OBLIGATIONS_REMAIN"
     }
   },
   "exact_state": {
@@ -70,13 +84,16 @@
       "step": 1,
       "action": "VERIFY_CURRENT_8X12_WITNESS_TARGET_TOTALIZATION_V2_ON_A_WORKING_EXECUTION_CARRIER",
       "new_reality_units": 0,
-      "reason": "CURRENT_TARGET_V3_AND_WITNESS_V2_NORMALIZATIONS_ARE_INDEPENDENTLY_VERIFIED__TOTALIZATION_MUST_FAIL_CLOSED_ON_BLOB_DRIFT__GITHUB_ACTIONS_ATTEMPT_EXECUTED_ZERO_USER_STEPS"
+      "reason": "CURRENT_TARGET_V3_AND_WITNESS_V2_NORMALIZATIONS_ARE_INDEPENDENTLY_VERIFIED__TOTALIZATION_MUST_FAIL_CLOSED_ON_BLOB_DRIFT__GITHUB_ACTIONS_ATTEMPT_EXECUTED_ZERO_USER_STEPS",
+      "status": "COMPLETE__INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "result": "0_OF_8_TARGETS_CLOSED_BY_CURRENT_NORMALIZED_WITNESS_DIRECT_REUSE"
     },
     {
       "step": 2,
-      "action": "REBIND_EXISTING_SYNTHESIS_OVERLAY_TO_CURRENT_V3__THEN_SEARCH_ONLY_FOR_CONTENT_ADDRESSED_SEMANTIC_BINDING_OR_EXACT_SUPERSET_SCOPE_CERTIFICATES_FOR_THE_OTHER_SEVEN_ROOT3_TARGETS",
+      "action": "SEARCH_ONLY_FOR_CONTENT_ADDRESSED_SEMANTIC_BINDING_OR_EXACT_SUPERSET_SCOPE_CERTIFICATES_FOR_SEVEN_OTHER_ROOT3_TARGETS__AND_ONLY_FOUR_REMAINING_SYNTHESIS_OBLIGATIONS",
       "new_reality_units": 0,
-      "reason": "SYNTHESIS_ALREADY_HAS_INDEPENDENT_SEVEN_ATOM_OVERLAY_WITH_TARGET_SEMANTICS_UNCHANGED__DO_NOT_REPROVE_SOLVED_ATOMS__OTHER_TARGET_SEARCH_MUST_REMAIN_LOAD_BEARING_ONLY"
+      "reason": "SYNTHESIS_V3_TRANSPORT_INDEPENDENT_PASS__SEVEN_OPERATIONAL_ATOMS_ALREADY_PROVED__DO_NOT_REPROVE",
+      "status": "PARTIAL_COMPLETE__SYNTHESIS_REBIND_DONE"
     },
     {
       "step": 3,
@@ -124,5 +141,16 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "current_active_steps": [
+    2,
+    3,
+    4
+  ],
+  "current_active_cut": {
+    "root3": "SEVEN_TARGET_CERTIFICATE_SEARCH_PLUS_FOUR_SYNTHESIS_OBLIGATIONS_PLUS_FOUR_EVENTUAL_DIRECT_ORACLE_LEAVES__COMPOSITION_DEPENDENCY_RECOMPUTE_ONLY",
+    "root2": "14_UNIQUE_SURFACE_INCREMENTAL_ROUTE_BINDING",
+    "fresh_reality": false
+  },
+  "next": "PARALLEL_ZERO_REALITY_WAVE__SEVEN_ROOT3_TARGET_CERTIFICATE_SEARCH__FOUR_SYNTHESIS_RESIDUAL_OBLIGATIONS__14_ROOT2_INCREMENTAL_ROUTE_GAPS__TB4_ATTAINABILITY__RECOMPUTE_FIXED_POINT_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY"
 }
