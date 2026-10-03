@@ -564,6 +564,35 @@
       "path": "canonical/governance/CURRENT_MAIN_RECEIPT_DERIVED_PROJECTION_RECONCILIATION_V1.json",
       "git_blob_sha": "ea5930311150ee8aa18a68d7f4c8906f1f627f3b",
       "status": "CANDIDATE_TRUTH_PRESERVING_CONTROL_PLANE_RECONCILIATION__ZERO_CREDIT"
+    },
+    "tool_discovery_v4_safe_probe_program_repair": {
+      "runtime_path": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+      "runtime_git_blob_sha": "56d9553a2ddb37fd513123a369bffa0ff8a87837",
+      "tests_path": "canonical/tests/test_tool_discovery_dynamic_candidate_v4.py",
+      "tests_git_blob_sha": "2785466b09f3f0f587fe6170d4322fe4281b7289",
+      "contract_path": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json",
+      "contract_git_blob_sha": "f5ade295e5f9e82d6be5cfec99ea6b798c753185",
+      "verification_path": "canonical/verification/TOOL_DISCOVERY_V4_SAFE_PROBE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "verification_git_blob_sha": "9c9692a6afb4857b5e9b3e97f09c62f83b34c956",
+      "public_verifier_pr": 1128,
+      "workflow_run_id": 37086733092,
+      "workflow_job_id": 111098491560,
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SAFE_PROBE_AWARE_V4_PROGRAM_SIDE_REPAIR__UNIVERSAL_TARGET_NOT_PROVED__ZERO_CREDIT"
+    },
+    "composition_component_proof_current_slice_v4": {
+      "path": "canonical/verification/COMPOSITION_COMPONENT_PROOF_SLICE_20261003_V4.json",
+      "git_blob_sha": "7081165dc1052c62436d4a0b2b23726675da321f",
+      "status": "CURRENT_RECEIPT_DERIVED_SLICE__2_OF_12_SCOPED_PROVED_MEMORY_AND_DELEGATION__10_OPEN__PARENT_OPEN__ZERO_CREDIT",
+      "independent_support": [
+        {
+          "component": "memory",
+          "status": "CURRENT_SOURCE_SCOPED_PROVED"
+        },
+        {
+          "component": "delegation",
+          "status": "CURRENT_SOURCE_INDEPENDENT_PUBLIC_RUNNER_PASS"
+        }
+      ]
     }
   },
   "residual": [
@@ -676,7 +705,7 @@
     ],
     "p1_scope": "INDEPENDENTLY_QUARANTINED__COMPOSITE_RESTORATION_FALSIFIED__RAW_NARROW_EVIDENCE_PRESERVED",
     "synthesis_delta": "INDEPENDENT_PASS__ONE_SCOPE_ONE_ATOM_TWO_METRIC_BINDINGS_OPEN",
-    "composition": "0_OF_12_CURRENTLY_ADMISSIBLE__HISTORICAL_2_QUARANTINED_AFTER_SCOPE_FIREWALL__MEMORY_CANDIDATE_PENDING__PARENT_OPEN",
+    "composition": "2_OF_12_CURRENTLY_ADMISSIBLE__MEMORY_AND_DELEGATION_SCOPED_PROVED__10_OPEN__PARENT_OPEN",
     "new_reality_units_consumed": 0,
     "terminal_results_replayed": 0,
     "terminal_goal_achieved": false
@@ -811,7 +840,7 @@
     "current_effective_canonical_leaf_atoms": 39
   },
   "last_reconciled_control_plane_head": "c052bb055b21cb99d4021d9a389796a1461b4ce4",
-  "last_reconciled_reason": "TOOL_DISCOVERY_LOCAL_SCOPE_RECEIPT_PRESERVED__WHOLE_PROTOCOL_ACCEPTANCE_REDUCTION_REJECTED_FAIL_CLOSED__PR1150_CLOSURE_INTEGRATED",
+  "last_reconciled_reason": "SAFE_PROBE_V4_EXACT_PUBLIC_VERIFIER_BYTES_RESTORED__COMPOSITION_CURRENT_SLICE_2_OF_12_RECONCILED__TERMINAL_ACCEPTANCE_UNCHANGED_3_OF_19__ATOMIC_UNCHANGED_8_OF_38__ZERO_CREDIT",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
