@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "TRANCHE1_FINALIZED__0_SUCCESS__3_FINAL_ZERO__LOCAL_QWEN_REPAIR_INDEPENDENT_PASS__ZERO_CASE_PREFLIGHT_PENDING__TARGET_FRESHNESS_HOLD__PROMOTION_FALSE",
+  "status": "CANARY_V2_FINALIZED_AND_REVOKED__0_SUCCESS__4_FINAL_ZERO__LOCAL_QWEN_REAL_PROMPT_TIMEOUT_LOCALIZED__PROMOTION_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "predicate": "TB_SCIENCE_GE_58_7",
@@ -43,12 +43,12 @@
   ],
   "execution_authority": false,
   "promotion_authority": false,
-  "terminal_results_observed": 3,
+  "terminal_results_observed": 4,
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "next": "RUN_ZERO_CASE_HARBOR_PREFLIGHT_ON_INDEPENDENTLY_VERIFIED_LOCAL_QWEN_REPAIR__RESOLVE_OPUS55_TARGET_FRESHNESS_SNAPSHOT_IDENTITY__NO_NEW_TB_SCIENCE_TERMINAL_SLOTS_UNTIL_BOTH_PASS",
+  "next": "BUILD_REAL_SIZE_ZERO_CASE_PLANNER_LATENCY_PREFLIGHT_FROM_OBSERVED_1552_TOKEN_PROMPT__VERIFY_TIMEOUT_ENVELOPE_OR_LATENCY_REDUCTION__RERANK_BEFORE_ANY_NEW_TB_SCIENCE_TERMINAL_SLOT",
   "deterministic_terminalization_verification": "canonical/verification/TB_SCIENCE_DETERMINISTIC_TERMINALIZATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
   "conservative_lower_bound": {
     "governance": "canonical/governance/TB_SCIENCE_CONSERVATIVE_CENSORING_LOWER_BOUND_V1.json",
@@ -94,5 +94,28 @@
     "same_snapshot_fail_lock_failures_if_proved": 78,
     "execution_authority": false,
     "promotion_authority": false
+  },
+  "canary_v2_summary": {
+    "result": "canonical/verification/TB_SCIENCE_ONE_SLOT_CANARY_RESULT_20261003_V2.json",
+    "revocation": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_REVOCATION_20261003_V1.json",
+    "finalized_slots": 1,
+    "slot_id": "terminal-bench-science/baseline-free-localization::trial-0",
+    "success": 0,
+    "final_zero": 1,
+    "shared_exception_class": "SciencePlannerError",
+    "exception_message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "causal_localization": "1552_TOKEN_REAL_PROMPT_USED_125_20S_PREFILL_AND_WAS_STILL_DECODING_AT_5_9_TOK_S_WHEN_180S_CLIENT_TIMEOUT_CANCELLED",
+    "current_total_successes": 0,
+    "current_total_failures": 4,
+    "untouched_slots_remaining": 206,
+    "current_required_successes": 133,
+    "current_failures_remaining_before_fail_lock": 74
+  },
+  "current_target_overlay": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V1.json",
+    "git_blob_sha": "2a0cb3abbbd6920cb74a3afce66c3e175811c573",
+    "current_comparator_percent": 63.33333333333333,
+    "required_successes": 133,
+    "fail_lock_failures": 78
   }
 }
