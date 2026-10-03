@@ -6,7 +6,7 @@ on:
       - 'canonical/tests/test_terminal_action_coverage_guard_v1.py'
       - 'canonical/runtime/reopened_objective_route_compiler_v1.py'
       - 'canonical/tests/test_reopened_objective_route_compiler_v1.py'
-      - 'canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json'
+      - 'canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json'
       - 'canonical/governance/OPUS55_REOPENED_OBJECTIVE_ROUTE_RESIDUAL_V1.json'
       - 'canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json'
       - '.github/workflows/verify-terminal-closure-basis-v1.yml'
@@ -32,7 +32,7 @@ jobs:
           out=evaluate(
             load(Path('canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json')),
             evidence,
-            load(Path('canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json')),
+            load(Path('canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json')),
           )
           print(json.dumps(out,indent=2))
           assert out['status']=='PASS', out
