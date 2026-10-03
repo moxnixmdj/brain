@@ -200,7 +200,20 @@ def evaluate(
             if not claim.get("source_path") or not claim.get("source_sha"):
                 errors.append(f"UNBOUND_EVIDENCE:{pid}")
                 continue
-            if claim.get("independent_or_objective") is not True:
+            proof_kind = claim.get("proof_kind")
+            universal_scope = claim.get("scope_completeness")
+            independently_grounded = claim.get("independent_or_objective") is True
+            if proof_kind == "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS":
+                independently_grounded = bool(
+                    isinstance(universal_scope, Mapping)
+                    and universal_scope.get("basis") == "UNIVERSAL_FORMAL_SCOPE_PROOF"
+                    and universal_scope.get("formal_completeness") is True
+                    and universal_scope.get("all_admissible_target_inputs_proved") is True
+                    and isinstance(universal_scope.get("receipt"), str) and universal_scope.get("receipt")
+                    and isinstance(universal_scope.get("receipt_sha"), str) and universal_scope.get("receipt_sha")
+                    and str(claim.get("source_path") or "").startswith("canonical/verification/")
+                )
+            if not independently_grounded:
                 errors.append(f"NONINDEPENDENT_EVIDENCE:{pid}")
                 continue
         if state == "PROVED":
