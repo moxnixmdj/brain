@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_FROZEN_SCOPE_INTERPRETATION_REPAIR_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_REALITY_SCOPE_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "historical_protocol": {
+    "commit": "6b2e936a885f8c34750244f577474d2e724ce15d",
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "tool_discovery_row": {
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "proof_mode": "MATCHED_HIDDEN_TOOL_ECOSYSTEM_TRANSFER",
+      "task_dimensions": [
+        "unknown tool discovery",
+        "schema/authority filtering",
+        "route selection under incomplete evidence",
+        "safe probe choice",
+        "capability-state update",
+        "later-task transfer without rediscovery"
+      ],
+      "primary_metrics": [
+        "terminal_success",
+        "valid_route_top1",
+        "failed_probe_count",
+        "unnecessary_probe_count",
+        "transfer_reuse_rate"
+      ],
+      "acceptance": "On frozen tool ecosystems with hidden capability variants, Brain conservative terminal-success/valid-route bounds >= Opus matched bounds, with demonstrated second-task transfer from first-task evidence and no unsupported capability-state promotion.",
+      "status": "DEFINED_RESULT_OPEN"
+    }
+  },
+  "prewave_binding": {
+    "path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+    "binding_commit": "6b2e936a885f8c34750244f577474d2e724ce15d",
+    "frozen_verified_commit": "0d6a6d2696c49222c3eeadf0ba8d424d6b0897cc",
+    "expected_behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+    "expected_terminal_sample_count": 180,
+    "expected_class_cycle_count": 6,
+    "expected_complete_cycles": 30
+  },
+  "disputed_quarantine": {
+    "path": "canonical/governance/TOOL_DISCOVERY_FROZEN_SCOPE_TYPE_MISMATCH_QUARANTINE_V1.json",
+    "disputed_reason": "THE_180_CASE_SOURCE_IS_NOT_EXHAUSTIVE_PROOF_OF_ALL_OPEN_DOMAIN_TOOL_ECOSYSTEMS"
+  },
+  "proposition": "THE_PREDECLARED_FROZEN_ACCEPTANCE_SCOPE_DOES_NOT_REQUIRE_EXHAUSTING_ALL_OPEN_DOMAIN_TOOL_ECOSYSTEMS__THE_OPEN_DOMAIN_DISCLAIMER_ONLY_BLOCKS_GENERALIZATION_BEYOND_THE_FROZEN_ACCEPTANCE_POPULATION",
+  "nonclaims": [
+    "DOES_NOT_YET_PROVE_THE_180_CASE_POOL_IS_THE_COMPLETE_FROZEN_ACCEPTANCE_POPULATION",
+    "DOES_NOT_GRANT_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "DOES_NOT_REPLAY_TERMINAL_CASES",
+    "DOES_NOT_GENERALIZE_TO_ALL_OPEN_DOMAIN_TOOL_ECOSYSTEMS"
+  ],
+  "next_if_verified": "PROVE_OR_REFUTE_EXACT_IDENTITY_BETWEEN_THE_PREDECLARED_180_CASE_SOURCE_POOL_AND_THE_FROZEN_ACCEPTANCE_POPULATION__IF_IDENTITY_PROVED_REDUCE_TOOL_DISCOVERY_ACCEPTANCE_WITHOUT_FRESH_REALITY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
