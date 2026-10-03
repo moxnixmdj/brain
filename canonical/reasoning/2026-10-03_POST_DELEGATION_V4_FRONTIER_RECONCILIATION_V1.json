@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-03",
+  "status": "CURRENT_BASE_BOUND_RECONCILIATION_DECISION",
+  "canonical_base_commit": "1afab11f371b9bea130ad2c931fd35ee106c9f86",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Remove stale scheduling state after independently verified delegation closure and post-delegation V4 proof-atom corpus freeze, without granting unearned capability credit or replaying terminal evidence.",
+  "invariants": [
+    "NO_FRESH_TERMINAL_REPLAY",
+    "NO_NEW_REALITY_UNITS",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT_FROM_RECONCILIATION",
+    "PRESERVE_3_OF_19_FAMILIES_CLOSED_AND_8_OF_38_ATOMIC_PREDICATES_PROVED",
+    "P1_REOPENS_ONLY_ON_NEW_ADMISSIBLE_INFORMATION",
+    "TB4_CURRENT_THRESHOLD_ROUTE_REMAINS_IMPOSSIBLE_UNDER_FROZEN_RULES",
+    "COMPOSITION_SLICER_REMAINS_EXHAUSTED_AT_2_OF_12_UNTIL_INPUT_RECEIPT_SET_CHANGES"
+  ],
+  "evidence": [
+    {
+      "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23",
+      "effect": "INDEPENDENTLY_VERIFIED_THIRD_FAMILY_CLOSURE__3_OF_19"
+    },
+    {
+      "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V2.json",
+      "blob_sha": "1daba02240d3bbfc3881990a59892186d1a3887e",
+      "effect": "COMPLETE_CONTENT_ADDRESSED_POST_DELEGATION_V4_ELIGIBLE_UNIVERSE"
+    },
+    {
+      "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V2.json",
+      "blob_sha": "a0eada020f23e33cde569cbf75bdc7fed1317b07",
+      "effect": "INDEPENDENT_SESSION_REVIEWED_FULL_CORPUS_INDEX"
+    },
+    {
+      "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_ADJUDICATION_20261003_V2.json",
+      "blob_sha": "3fd561cd54897ca32afa89ce3a5a34dd8b8bdaac",
+      "effect": "INDEPENDENT_SESSION_REVIEWED_LITERAL_ADJUDICATION"
+    },
+    {
+      "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CLOSURE_20261003_V2.json",
+      "blob_sha": "a9e13f07d9e659c3e7ca133ee3af2a97485c753e",
+      "effect": "POST_DELEGATION_CLOSURE_IR_AND_CRITICAL_PATH_ACTIONS_COMPILED"
+    },
+    {
+      "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_INDEPENDENT_SESSION_REVIEW_20261003_V2.json",
+      "blob_sha": "7f535a0a7521b6871d62bd570dd9a50e5549f5b1",
+      "effect": "INDEPENDENT_SESSION_REVIEW_PASS"
+    },
+    {
+      "path": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json",
+      "blob_sha": "44faeb24bdc2d9189b7c0de1b1e2be9b1210aeeb",
+      "effect": "TOOL_DISCOVERY_RESIDUAL_REDUCED_TO_ONE_COMPLETE_INTERFACE_INSTANCE_FACT"
+    },
+    {
+      "path": "canonical/verification/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "blob_sha": "5fcdc5ae35f51c40f312edbe5727284c9f6ca3dd",
+      "effect": "PROGRAM_SIDE_DYNAMIC_REFINEMENT_INDEPENDENT_PASS"
+    },
+    {
+      "path": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+      "blob_sha": "a7b0c692251b92819007c581b9fe84b75960cab7",
+      "effect": "CURRENT_TB4_THRESHOLD_ROUTE_IMPOSSIBLE__180_LT_220"
+    },
+    {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICER_EXHAUSTION_V1.json",
+      "blob_sha": "f27ea2a2d5de56b0ed4acb77e1574bc2bba44a96",
+      "effect": "COMPOSITION_SLICER_EXHAUSTED_AT_2_OF_12"
+    }
+  ],
+  "conclusion": {
+    "stale_leaf": "POST_DELEGATION_PROOF_ATOM_RECOMPILE_AND_V4_PRIVATE_CORPUS_FREEZE_PENDING",
+    "replacement_state": "COMPLETE_INDEPENDENTLY_REVIEWED__REMOVE_FROM_SCHEDULING",
+    "current_acceptance": "3_OF_19_FAMILIES_CLOSED__8_OF_38_ATOMIC_PREDICATES_PROVED__16_FAMILIES_OPEN__30_ATOMIC_PREDICATES_UNRESOLVED",
+    "highest_leverage_zero_reality_residual": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+    "secondary_zero_reality_residuals": [
+      "SEARCH_EXISTING_CONTENT_ADDRESSED_EVIDENCE_FOR_TEN_OPEN_COMPOSITION_COMPONENT_SCOPED_ACCEPTANCE_RECEIPTS",
+      "REPLACE_IMPOSSIBLE_TB4_THRESHOLD_ROUTE_WITH_STRONGER_PROOF_OR_DIFFERENT_VALID_ACCEPTANCE_ROUTE_WITHOUT_CASE_REPLAY"
+    ]
+  },
+  "rejected_alternatives": [
+    {
+      "route": "RERUN_POST_DELEGATION_V4_CORPUS_SCAN",
+      "reason": "DUPLICATE__EXACT_VERIFIED_V2_RECEIPTS_ALREADY_PRESENT"
+    },
+    {
+      "route": "EXECUTE_MORE_TB4_CASES",
+      "reason": "FORBIDDEN_AND_NONCAUSAL__CURRENT_THRESHOLD_ROUTE_PROVED_IMPOSSIBLE_UNDER_FROZEN_CREDIT_RULES"
+    },
+    {
+      "route": "RERUN_COMPOSITION_SLICER_WITH_IDENTICAL_INPUTS",
+      "reason": "EXHAUSTED__NO_INPUT_RECEIPT_SET_CHANGE"
+    },
+    {
+      "route": "PROMOTE_TOOL_DISCOVERY_FAMILY_NOW",
+      "reason": "UNIVERSAL_TARGET_REMAINS_OPEN__COMPLETE_INTERFACE_INSTANCE_NOT_YET_INDEPENDENTLY_VERIFIED"
+    }
+  ],
+  "uncertainty": [
+    "No claim is made that the complete discovery-interface instance already exists.",
+    "No other open acceptance family receives credit from this reconciliation."
+  ],
+  "supersession_conditions": [
+    "NEW_ADMISSIBLE_ACCEPTANCE_EVIDENCE",
+    "INDEPENDENT_VERIFICATION_INVALIDATES_ANY_BOUND_RECEIPT",
+    "CANONICAL_BASE_OR_RELEVANT_PREDICATE_STATE_CHANGES"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
