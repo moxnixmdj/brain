@@ -23,7 +23,13 @@ class RecoveryOpus55ZeroRealityAcceptanceReductionV1Tests(unittest.TestCase):
         self.assertTrue(b["objective_ceiling_or_floor"])
         self.assertFalse(b["exact_opus_case_level_access_required"])
         self.assertFalse(b["historical_narrow_terminal_run_used_as_proof"])
+        self.assertFalse(b["historical_relation_observed_bound_used_as_proof"])
         self.assertFalse(b["quarantined_public_recovery_run_used_as_proof"])
+        self.assertEqual(b["universal_achieved_bounds"],{
+            "causal_localization":1,
+            "terminal_recovery":1,
+            "critical_fail_closed_misses":0,
+        })
         self.assertEqual(out["new_reality_units_consumed"],0)
         self.assertEqual(out["terminal_results_replayed"],0)
 
