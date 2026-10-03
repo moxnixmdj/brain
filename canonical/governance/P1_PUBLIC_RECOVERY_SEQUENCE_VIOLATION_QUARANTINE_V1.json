@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_SEQUENCE_VIOLATION_QUARANTINE_V1",
+  "date": "2026-10-03",
+  "status": "FAIL_CLOSED__FRESH_REALITY_PHYSICALLY_CONSUMED__CANONICAL_ACTIVE_AUTHORITY_ABSENT_AT_EXECUTION_START__RESULT_INADMISSIBLE_FOR_ACCEPTANCE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "authorized_observation_target": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+  "sequencing_evidence": {
+    "brain_proposal_merge": {
+      "commit": "0a90772212ecb92d6405476a6795be20b50086df",
+      "merged_at": "2026-10-03T07:56:23Z",
+      "execution_authority": false
+    },
+    "active_authority_pr": {
+      "pull_request": 1258,
+      "path": "canonical/governance/P1_PUBLIC_RECOVERY_CARRIER_ACTIVE_AUTHORITY_V1.json",
+      "candidate_blob": "d1f1bd9eef376ba68f1a895ec19181cab7cb7415",
+      "merged": false,
+      "canonical_at_execution_start": false,
+      "disposition": "CLOSED_UNMERGED__RETROACTIVE_AUTHORIZATION_FORBIDDEN"
+    },
+    "verifier_execution_workflow_merge": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1245,
+      "merge_commit": "e489b191363c52c838b720cd759c99f638170c67",
+      "merged_at": "2026-10-03T07:58:07Z",
+      "workflow_blob": "547f57f43a71f289b006602c1067a962171f38d4"
+    },
+    "execution": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 37108111537,
+      "workflow_job_id": 111160509570,
+      "created_at": "2026-10-03T07:58:11Z",
+      "completed_at": "2026-10-03T07:58:26Z",
+      "conclusion": "success",
+      "artifact_id": 11268841992,
+      "artifact_digest": "sha256:e25bcf3fcab61b1fa00882c202a00714ecb81772378005e4934edc712a22d038"
+    }
+  },
+  "observed_result": {
+    "cases": 192,
+    "passes": 192,
+    "failures": 0,
+    "all_three_surfaces_pass": true,
+    "per_surface_cases": 64,
+    "wilson_95_lower_all": 0.9803841471883398,
+    "authorized_result_receipt_sha256": "24eec602e4f8bc2762b7c48f1652b97149ba0c995ee8448d3a59b41ed9fcee4f",
+    "raw_batch_result_sha256": "768fa639b7e4c5e611945362a3ceddc43dc272f1d882629cba7b688709850a1f",
+    "spent_preflight_sha256": "11b0166d68bbf219ca6df6c60246350a541a599eab46b79fe37613b7c193a800",
+    "fresh_reality_units_physically_consumed": 1
+  },
+  "admissibility": {
+    "canonical_active_authority_present_before_execution": false,
+    "post_hoc_authorization_allowed": false,
+    "acceptance_credit_allowed": false,
+    "family_credit_allowed": false,
+    "capability_credit_allowed": false,
+    "p1_quarantine_lifted": false,
+    "reason": "THE_PRECOMMITTED_RECOVERY_PROTOCOL_REQUIRED_ACTIVE_RECOVERY_AUTHORITY_TO_BE_MERGED_TO_CANONICAL_BRAIN_MAIN_BEFORE_THE_PUBLIC_EXECUTION_WORKFLOW_WAS_MERGED_AND_TRIGGERED__THAT_ORDER_WAS_NOT_SATISFIED"
+  },
+  "hard_rules": [
+    "DO_NOT_RETROACTIVELY_MERGE_OR_TREAT_PR_1258_AS_PREEXECUTION_AUTHORITY",
+    "DO_NOT_RERUN_WORKFLOW_37108111537",
+    "DO_NOT_REUSE_OR_REPLACE_THE_192_EXPOSED_CASES_FOR_ACCEPTANCE_CREDIT",
+    "DO_NOT_TUNE_AGAINST_THE_OBSERVED_192_OF_192_RESULT",
+    "PRESERVE_THE_RESULT_AS_PROVENANCE_AND_NEGATIVE_GOVERNANCE_EVIDENCE_ONLY",
+    "P1_WHOLE_SCOPE_QUARANTINE_REMAINS",
+    "REOPEN_P1_ONLY_ON_A_TARGET_PRESERVING_ADMISSIBLE_NEW_INFORMATION_SOURCE_OR_STRONGER_PROOF_THAT_DOES_NOT LAUNDER_THE_SPENT_BATCH"
+  ],
+  "fresh_reality_units_consumed": 1,
+  "terminal_results_replayed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "next": "INDEPENDENTLY_VERIFY_THIS_SEQUENCE_QUARANTINE__THEN_RECOMPILE_P1_FRONTIER_WITH_THE_SPENT_INADMISSIBLE_BATCH_REMOVED_FROM_EXECUTABLE_OPTIONS__SEARCH_ONLY_FOR_TARGET_PRESERVING_NEW_ADMISSIBLE_INFORMATION_OR_STRONGER_PROOF"
+}
