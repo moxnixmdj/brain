@@ -148,5 +148,16 @@
     ],
     "derivation_rule": "PUBLIC_FIXED_BAR=>ROOT2__DIRECT_OR_MATCHED_SCOPE_AUDIT_OR_DEPENDENCY_PROOF=>ROOT3__MATCHED_NONINFERIORITY=>ROOT2_AND_ROOT3_UNLESS_A_STRONGER_SCOPE_COMPLETE_PROOF_COLLAPSES_ONE_SIDE",
     "accounting": "CLASSIFICATION_ONLY__ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  },
+  "root3_current_execution_state": {
+    "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V1.json",
+    "git_blob_sha": "10a28a403dae6df94f8fe58b1d9d3f9e0b60c11b",
+    "verification_path": "canonical/verification/ROOT3_MINIMUM_ACTION_CUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "e24058eab431a1643dae340a8ff564490f992097",
+    "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__11_ROOT3_PREDICATES_TO_3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
+    "live_root3_predicates": 11,
+    "event_class_count": 3,
+    "currently_runnable_event_count": 0,
+    "fresh_reality_authority": false
   }
 }

@@ -958,6 +958,13 @@
       "final_reconciliation_path": "canonical/verification/ROOT1_V2_FINAL_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT1_ZERO_POSITIVE_GAPS__FROZEN_ENVELOPE_UNSEALED__ZERO_CREDIT",
       "final_reconciliation_git_blob_sha": "5f3d17fed096d753d51cee95d056bed9046b23db"
+    },
+    "root3_minimum_action_cut": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V1.json",
+      "git_blob_sha": "10a28a403dae6df94f8fe58b1d9d3f9e0b60c11b",
+      "verification_path": "canonical/verification/ROOT3_MINIMUM_ACTION_CUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "e24058eab431a1643dae340a8ff564490f992097",
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__11_ROOT3_PREDICATES_TO_3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT"
     }
   },
   "residual": [
