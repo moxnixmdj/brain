@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_FROZEN_SCOPE_UNIVERSAL_THEOREM_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_UNIVERSAL_FORMAL_SCOPE_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "objective": "Discharge the scope-completeness residual without finite-sample transport by proving the exact frozen protocol class is finite visible tool identity sets with hidden or changing capability state, then prove the bound policy terminates and selects the least-cost evidence-supported sufficient route for any such finite ecosystem.",
+  "authorities": {
+    "behavioral_contract": {"path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json", "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"},
+    "family_protocol": {"path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json", "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"},
+    "terminal_binding": {"path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json", "git_blob_sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"},
+    "candidate": {"path": "canonical/runtime/tool_discovery_information_safe_candidate.py", "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"},
+    "proof_model": {"path": "canonical/runtime/tool_discovery_information_safe_proof.py", "git_blob_sha": "2450a9644119c9fdf9c43307a1d115098d6ba592"}
+  },
+  "scope_semantics": {
+    "contract_inputs": "Current subproblem contract, available tool schemas/capabilities, historical tool outcomes and active constraints",
+    "contract_environment": "Tool ecosystem with overlapping, unknown or changing capabilities",
+    "contract_verification_route": "Held-out tool ecosystems with hidden capability variants; discovery/selection ablation and transfer test",
+    "protocol_acceptance_fragment": "On frozen tool ecosystems with hidden capability variants",
+    "binding_visible_identity": "TOOL_IDS_AND_DECLARED_COSTS",
+    "binding_hidden_state": "ACTUAL_TOOL_CAPABILITY_MATRIX",
+    "ruling": "FROZEN_TARGET_UNKNOWNNESS_IS_CAPABILITY_STATE_OVER_AVAILABLE_TOOL_IDENTITIES__NOT_UNOBSERVABLE_IDENTITY_EXISTENCE"
+  },
+  "universal_proof": {
+    "domain": "ANY_FINITE_FROZEN_SET_OF_AVAILABLE_TOOL_IDENTITIES_WITH_FINITE_REQUIRED_CAPABILITY_SET_AND_SOUND_CURRENT_EPOCH_SAFE_PROBE_RECEIPTS",
+    "ranking_function": "COUNT_OF_UNRESOLVED_ELIGIBLE_TOOL_REQUIRED_CAPABILITY_PAIRS",
+    "progress": "EACH_PROBE_ADDS_CURRENT_EPOCH EVIDENCE FOR ONE PREVIOUSLY_UNRESOLVED PAIR; A NEGATIVE ELIMINATES THAT TOOL; A POSITIVE REDUCES ITS UNRESOLVED SET",
+    "least_cost": "TOOLS_ARE_SORTED_BY_COST_THEN_ID; A LATER TOOL IS CONSIDERED ONLY AFTER EVERY EARLIER ELIGIBLE TOOL HAS CURRENT NEGATIVE EVIDENCE FOR AT LEAST ONE REQUIRED CAPABILITY",
+    "selection_soundness": "SELECT_OCCURS_ONLY_WHEN_ALL_REQUIRED_CAPABILITIES_FOR_THE_SELECTED_TOOL_HAVE_CURRENT_POSITIVE_EVIDENCE",
+    "exhaustion": "FINITE_RANKING_FUNCTION_STRICTLY_DECREASES_UNTIL_SELECT_OR_ALL_ELIGIBLE_TOOLS_ARE_ELIMINATED_AND_ESCALATE",
+    "version_safety": "EVIDENCE_IS_KEYED_TO_CURRENT_TOOL_EPOCH_AND_STALE_RECEIPTS_ARE_IGNORED_AFTER_VERSION_CHANGE",
+    "transfer": "UNCHANGED_CURRENT_EPOCH_RECEIPTS_ARE_REUSED_ACROSS_LATER_TASKS"
+  },
+  "scope_firewall": [
+    "NO_CLAIM_OF_EXHAUSTING_ALL_OPEN_DOMAIN_TOOL_ECOSYSTEM_IDENTITIES",
+    "NO_CLAIM_THAT_AN_UNOBSERVABLE_TOOL_WITH_NO_SCHEMA_OR_DISCOVERY_SURFACE_CAN_BE_FOUND",
+    "NO_FINITE_180_CASE_TRANSPORT",
+    "NO_DYNAMIC_V3_PROMOTION",
+    "NO_ACCEPTANCE_CREDIT_BEFORE_INDEPENDENT_VERIFICATION_AND_REDUCTION"
+  ],
+  "claimed_delta_if_independently_verified": "MINIMUM_MISSING_SCOPE_SEMANTICS_FACT_DISCHARGED_FOR_THE_EXACT_FROZEN_PROTOCOL_CLASS__REOPEN_ACCEPTANCE_REDUCTION_USING_EXISTING_RAW_SAMPLE_AND_ATOMIC_CEILING_RECEIPTS",
+  "runtime": "canonical/runtime/tool_discovery_frozen_scope_universal_theorem_v1.py",
+  "tests": "canonical/tests/test_tool_discovery_frozen_scope_universal_theorem_v1.py",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
