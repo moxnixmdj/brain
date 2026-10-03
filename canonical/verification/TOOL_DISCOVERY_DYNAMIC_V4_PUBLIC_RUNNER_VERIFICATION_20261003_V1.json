@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V4_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-03",
+  "status": "PASS__EXACT_BYTES__PROGRAM_SIDE_LEAST_COST_REPAIR_ONLY__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "falsified_prior_program_side_claim": "DYNAMIC_V3_CAN_SELECT_A_VISIBLE_SUPPORTED_ROUTE_BEFORE_QUERYING_AN_AVAILABLE_DISCOVERY_SOURCE_THAT_MAY_CONTAIN_A_CHEAPER_SUPPORTED_ROUTE",
+  "verified_repair": "EXHAUST_AVAILABLE_DECLARED_DISCOVERY_SOURCES_BEFORE_ANY_PROBE_OR_SELECT__THEN_PROBE_AND_SELECT_IN_DECLARED_GLOBAL_COST_ORDER",
+  "exact_blobs": {
+    "existing_v3": {
+      "path": "canonical/runtime/tool_discovery_dynamic_candidate_v3.py",
+      "git_blob_sha": "bbbee4d6baf8df937543644397abba38a67dce62"
+    },
+    "v4": {
+      "path": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+      "git_blob_sha": "e614d0bed8e291e31f57189cd6f0f75aa39b0f74"
+    },
+    "tests": {
+      "path": "canonical/tests/test_tool_discovery_dynamic_v4.py",
+      "git_blob_sha": "23f0add178ca0c731d15e0645ee9b8841317efee"
+    }
+  },
+  "independent_public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_commit": "5954621781376274b11fc8878fd9ccbe22639fda",
+    "workflow": ".github/workflows/verify-tool-discovery-v4-universal-closure.yml",
+    "run_id": 37086675797,
+    "run_conclusion": "success",
+    "checks": [
+      "EXACT_GIT_BLOB_IDENTITIES_MATCH",
+      "V3_PREMATURE_SELECTION_COUNTEREXAMPLE_REPRODUCED",
+      "V4_DISCOVERY_FIRST_COUNTEREXAMPLE_REPAIRED",
+      "EXHAUSTIVE_SMALL_FINITE_ECOSYSTEM_LEAST_COST_REGRESSION_PASS",
+      "UNAVAILABLE_OR_UNAUTHORIZED_CHEAPER_ROUTE_REJECTED",
+      "CURRENT_EPOCH_EVIDENCE_REUSE_AND_VERSION_INVALIDATION_PASS",
+      "NO_ROUTE_ESCALATION_ONLY_AFTER_DISCOVERY_AND_NEGATIVE_EVIDENCE_PASS"
+    ]
+  },
+  "hard_nonclaims": [
+    "DOES_NOT_PROVE_DECLARED_DISCOVERY_SOURCES_ARE_COMPLETE_FOR_THE_FROZEN_MATCHED_TOOL_AUTHORITY",
+    "DOES_NOT_CLOSE_UNKNOWN_TOOL_IDENTITY_SCOPE_COMPLETENESS",
+    "DOES_NOT_BY_ITSELF_GRANT_TOOL_DISCOVERY_ACCEPTANCE_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT",
+    "DOES_NOT_REPLAY_TERMINAL_CASES"
+  ],
+  "residual_after_this_pass": "ONE_TARGET_SCOPE_COMPLETENESS_FACT_REMAINS__DECLARED_DISCOVERY_SOURCE_UNION_MUST_BE_PROVED_COMPLETE_FOR_THE_COMMON_FROZEN_TOOL_AUTHORITY_OR_REPLACED_BY_AN_EQUIVALENT_UNIVERSAL_SCOPE_THEOREM",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
