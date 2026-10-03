@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_P1_PREAUTHORITY_PUBLIC_RECOVERY_EXECUTION_QUARANTINE_V1",
+  "date": "2026-10-03",
+  "status": "QUARANTINED_DIAGNOSTIC_ONLY__PUBLIC_RECOVERY_EXECUTED_BEFORE_ACTIVE_BRAIN_AUTHORITY__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "ordering_fact": {
+    "brain_proposal_merge_commit": "0a90772212ecb92d6405476a6795be20b50086df",
+    "proposal_only_execution_authority": false,
+    "verifier_execution_pr": 1245,
+    "verifier_execution_pr_merged_at": "2026-10-03T07:58:07Z",
+    "verifier_execution_merge_commit": "e489b191363c52c838b720cd759c99f638170c67",
+    "public_execution_run_id": 37108111537,
+    "public_execution_job_id": 111160509570,
+    "public_execution_created_at": "2026-10-03T07:58:11Z",
+    "public_execution_started_at": "2026-10-03T07:58:17Z",
+    "public_execution_completed_at": "2026-10-03T07:58:25Z",
+    "intended_active_authority_pr": 1258,
+    "active_authority_pr_created_at": "2026-10-03T07:58:51Z",
+    "active_authority_pr_merged": false,
+    "active_authority_pr_closed_fail_closed": true,
+    "consequence": "EXECUTION_PRECEDED_EXISTENCE_OF_ACTIVE_BRAIN_MAIN_AUTHORITY__RETROACTIVE_AUTHORIZATION_FORBIDDEN"
+  },
+  "execution_evidence": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow": "Execute P1 public recovery carrier V1",
+    "workflow_run_id": 37108111537,
+    "workflow_job_id": 111160509570,
+    "workflow_head_sha": "e489b191363c52c838b720cd759c99f638170c67",
+    "workflow_blob": "547f57f43a71f289b006602c1067a962171f38d4",
+    "run_attempt": 1,
+    "runner_id": 1000037683,
+    "steps_completed": true,
+    "case_generation_began": true,
+    "artifact_id": 11268841992,
+    "artifact_digest": "sha256:e25bcf3fcab61b1fa00882c202a00714ecb81772378005e4934edc712a22d038",
+    "result": {
+      "cases": 192,
+      "passes": 192,
+      "failures": 0,
+      "by_surface_cases": 64,
+      "all_three_surfaces_all_pass": true,
+      "both_semantics_classes_present_every_case": true,
+      "wilson_95_lower_all": 0.9803841471883398
+    }
+  },
+  "admissibility": {
+    "capability_result_interpretation": "POSITIVE_DIAGNOSTIC_SIGNAL_ONLY",
+    "acceptance_admissible": false,
+    "family_promotion_admissible": false,
+    "retroactive_authority_admissible": false,
+    "authorized_fresh_reality_units_consumed": 0,
+    "physical_fresh_batch_exposed": 1,
+    "cases_exposed": 192,
+    "rerun_credit": false,
+    "replacement_credit": false,
+    "post_result_tuning_forbidden": true
+  },
+  "hard_rules": [
+    "DO_NOT_PROMOTE_P1_FROM_RUN_37108111537",
+    "DO_NOT_MERGE_PR_1258_RETROACTIVELY",
+    "DO_NOT_RERUN_THE_SAME_PUBLIC_RECOVERY_WORKFLOW_FOR_CREDIT",
+    "DO_NOT_REPLACE_CASES_AFTER_OBSERVING_192_OF_192_PASS_UNDER_THE_EXISTING_FREEZE",
+    "USE_RESULT_ONLY_AS_DIAGNOSTIC_INFORMATION_UNLESS_AN_INDEPENDENT_ZERO_REALITY_ADMISSIBILITY_THEOREM_PROVES_A_NONRETROACTIVE_ROUTE"
+  ],
+  "next": "COMPUTE_ZERO_REALITY_P1_ADMISSIBILITY_CUT__TEST_WETHER_CURRENT_FROZEN_SOURCE_AND_V7_BYTES_ADMIT_A_UNIVERSAL_FAILURE_SEMANTICS_TRANSPORT_PROOF_WITHOUT_USING_RUN_37108111537_AS_ACCEPTANCE_EVIDENCE__OTHERWISE_REFORMULATE_THE_P1_PROOF_OBLIGATION_WITH_A_NEW_INDEPENDENTLY_PRECOMMITTED_PROTOCOL_NOT_CONDITIONED_ON_RESULT",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
