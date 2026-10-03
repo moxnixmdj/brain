@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V3_LEAST_COST_COUNTEREXAMPLE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_COUNTEREXAMPLE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+  "falsified_claim": "DYNAMIC_REFINEMENT_V1::LEAST_COST_EVIDENCE_SUPPORTED_SELECTION_CONDITIONAL_GUARANTEE",
+  "exact_v3_blob": "bbbee4d6baf8df937543644397abba38a67dce62",
+  "contract_blob": "49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7",
+  "counterexample": {
+    "required_capabilities": [
+      "CAP_A"
+    ],
+    "initially_visible_tool": {
+      "tool_id": "T0",
+      "cost": 10,
+      "available": true,
+      "authorized": true,
+      "epoch": 0
+    },
+    "unqueried_authoritative_source": {
+      "source_id": "S0",
+      "available": true,
+      "possible_complete_result": {
+        "tool_id": "T1",
+        "cost": 1,
+        "available": true,
+        "authorized": true,
+        "epoch": 0
+      }
+    },
+    "truthful_probe_receipt_for_T0": {
+      "supported": true,
+      "epoch": 0
+    },
+    "v3_trace": [
+      "PROBE T0",
+      "SELECT T0"
+    ],
+    "violated_requirement": "select the least-cost admissible route that can satisfy the subproblem",
+    "reason": "V3 evaluates visible tools before unqueried discovery sources, so a positive visible route can preempt discovery of a cheaper sufficient route."
+  },
+  "scope": "This falsifies only the prior conditional least-cost program proof. It does not erase valid finite V3 sample receipts or prove V4 accepted.",
+  "repair": {
+    "candidate": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "rule": "EXHAUST_AVAILABLE_UNQUERIED_AUTHORITATIVE_DISCOVERY_SOURCES_BEFORE_ANY_PROBE_OR_SELECT__THEN_GLOBAL_COST_ORDER",
+    "candidate_blob": "c7726fc77bb4f8c582b1e57c71eeaa0ba8253065"
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
