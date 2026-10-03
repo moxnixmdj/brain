@@ -25,14 +25,22 @@ def route(*,goal:str,environment_id:str,verified_coverage:Any,goal_facts:Iterabl
         novelty=v2.minimum_novelty_delta(required_facts=fallback_required_facts,verified_facts=coverage["verified_facts"])
         novelty_kind="CONSERVATIVE_FLAT_FALLBACK"
     abstraction_candidate=None
+    abstraction_candidate_status="INSUFFICIENT_VERIFIED_SKILLS_FOR_ABSTRACTION"
     if len(verified_skills)>=2:
-        abstraction_candidate=abs5.induce_candidate(verified_skills)
+        try:
+            abstraction_candidate=abs5.induce_candidate(verified_skills)
+            abstraction_candidate_status="CANDIDATE_EMITTED"
+        except abs5.RecursiveAbstractionError as exc:
+            if str(exc)!="NO_COMMON_VERIFIED_STRUCTURE":
+                raise
+            abstraction_candidate_status="NO_COMMON_VERIFIED_STRUCTURE"
     common={
         "schema":SCHEMA,
         "novelty_delta":novelty,
         "novelty_delta_kind":novelty_kind,
         "transfer_coverage":coverage,
         "abstraction_candidate":abstraction_candidate,
+        "abstraction_candidate_status":abstraction_candidate_status,
         "trusted_execution_authorized":False,
         "promotion_authorized":False,
         "acceptance_credit_delta":0,
