@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_WITNESS_BACKEND_ROUTER_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__BACKEND_AUTHORITY_BOUNDARY_VERIFIED__ZERO_CREDIT",
+  "brain_pull_request": 1279,
+  "exact_brain_blobs": {
+    "canonical/runtime/residual_witness_backend_router_v1.py": "8935439e587fb723a4464fe9a15e8772ddb076bf",
+    "canonical/runtime/residual_witness_retrieval_compiler_v1.py": "9daa8d590f3356b3fc51eccf75c56cbf515239e4"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1268,
+    "head_sha": "6b3898fd4edc8ba2dc04b7f0e571914da1a7aad3",
+    "merge_commit": "df5328f1930aa59f972abdb2c31b1cb245a30363",
+    "workflow_run_id": 37111977067,
+    "workflow_job_id": 111171488716,
+    "conclusion": "success"
+  },
+  "verified": {
+    "candidate_sufficiency_firewall": true,
+    "fake_completeness_rejected": true,
+    "independent_completeness_receipt_admitted": true,
+    "backend_self_verification_quarantined": true,
+    "transient_failure_stays_unknown": true,
+    "unbound_surface_stays_unknown": true,
+    "independent_witness_receipt_required": true,
+    "built_in_zero_cost_backends_bound": true
+  },
+  "hard_nonclaims": [
+    "NO_EXTERNAL_CODE_CONTENT_SYMBOL_MANIFEST_TEST_OR_HISTORY_PROVIDER_IS_ASSERTED COMPLETE",
+    "NO_BACKEND_CANDIDATE IS ACCEPTANCE EVIDENCE BY ITSELF",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY EXECUTION OR PROMOTION CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
