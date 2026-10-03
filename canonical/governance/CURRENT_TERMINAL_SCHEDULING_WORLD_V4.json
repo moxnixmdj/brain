@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_SCHEDULING_WORLD_V4",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_4_OF_19_38_11_27_WORLD__MANDATORY_TOOL_DISCOVERY_V3_RETRIEVAL_GATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Recompile the current receipt-derived scheduling world against the latest 4-of-19 authority while requiring the exact independently verified Tool Discovery V3 retrieval gate and preserving all unresolved acceptance predicates.",
+  "source_main_commit": "873b5ef6d243ef06d096cc83e701a43c0cae2c72",
+  "current_authority_inputs": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "f47a69253e7eb75e139b445b736d3d18b33be622",
+      "opus55_acceptance": "4/19_PASS__15/19_OPEN"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163"
+    }
+  },
+  "exact_candidate_blobs": {
+    "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py": "73ff5863845402fdd304c0e8c64b4b1d36330f45",
+    "canonical/tests/test_tool_discovery_retrieval_authority_gate_v1.py": "4028160b0ab81f59ab8095419a74272e832e9844",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json": "38b53147597b5457859e3b0d031168842560e3e2",
+    "canonical/runtime/current_terminal_scheduling_world_v1.py": "9ae2b990578b042dd24074fd5013378b72e64b6b",
+    "canonical/tests/test_current_terminal_scheduling_world_v1.py": "856517ca43bf05cd2888bfeeed5e8aea963c6eed",
+    "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V3_ACTIVATION_V1.json": "4fde285b62a3a84e7f12852d8600aecfc01bab81",
+    "canonical/verification/RETRIEVAL_V3_LIVE_GATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "a1bc5d4ef2a767973e48a96ed986f7181630d959"
+  },
+  "expected_live_world": {
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "tool_learning_success_route_noninferior": "OPEN",
+    "tool_discovery_retrieval_gate_required": true,
+    "tool_discovery_retrieval_gate_pass": true,
+    "tool_discovery_retrieval_authority": "V3_OVER_VERIFIED_V2_BASE"
+  },
+  "required_falsification_tests": [
+    "REMOVE_MANDATORY_RETRIEVAL_BINDING__MUST_FAIL",
+    "MUTATE_V3_ACTIVATION_HASH__MUST_FAIL",
+    "INVALIDATE_V3_ACTIVATION_RECEIPT__MUST_FAIL",
+    "REMOVE_V3_EPOCH_EXHAUSTION_FIREWALL__MUST_FAIL",
+    "ADD_SECOND_TOOL_DISCOVERY_ACTION_BYPASS__MUST_FAIL",
+    "CALL_LIVE_SCHEDULER_WITHOUT_RETRIEVAL_GATE__MUST_FAIL",
+    "MUTATE_ACTUAL_ROUTER_BYTES_HASH__MUST_FAIL",
+    "REENABLE_CONSUMED_V2_GITHUB_EPOCH__MUST_FAIL"
+  ],
+  "supersession": {
+    "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V3.json": "HISTORICAL_V2_ONLY_RETRIEVAL_GATE_WORLD_AFTER_V3_LIVE_GATE_PASS",
+    "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json": "REMAINS_CURRENT_UNTIL_V4_AND_NEW_ACTIVATION_ARE_INDEPENDENTLY_VERIFIED_AND_PROMOTED"
+  },
+  "hard_rules": [
+    "NO_LIVE_TOOL_DISCOVERY_SEARCH_ACTION_WITHOUT_EXACT_VERIFIED_V2_BASE_PLUS_V3_RETRIEVAL_AUTHORITY",
+    "NO_SOURCE_EPOCH_EXHAUSTION_BEFORE_V3_EXPANSION_UNLESS_A_VERIFIED_SUFFICIENT_WITNESS_ALREADY_STOPPED_SEARCH",
+    "NO_DIRECT_OR_STALE_SEARCH_BYPASS",
+    "NO_CONSUMED_SOURCE_EPOCH_REPLAY",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "NO_FINITE_ADVERSARIAL_BENCHMARK_TO_OPEN_WORLD_COMPLETENESS_INFERENCE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

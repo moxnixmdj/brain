@@ -27,16 +27,20 @@ def actual_blobs():
         "router_blob": gate.git_blob_sha(raw(gate.EXPECTED["router_path"])),
         "github_provider_blob": gate.git_blob_sha(raw(gate.EXPECTED["github_provider_path"])),
         "backend_verification_blob": gate.git_blob_sha(raw(gate.EXPECTED["backend_verification_path"])),
+        "v3_activation_blob": gate.git_blob_sha(raw(gate.EXPECTED["v3_activation_path"])),
+        "v3_activation_verification_blob": gate.git_blob_sha(raw(gate.EXPECTED["v3_activation_verification_path"])),
     }
 
 
-def validate(hypergraph=None, activation=None, activation_verification=None, compiler_verification=None, backend_verification=None, blobs=None):
+def validate(hypergraph=None, activation=None, activation_verification=None, compiler_verification=None, backend_verification=None, v3_activation=None, v3_activation_verification=None, blobs=None):
     return gate.validate(
         hypergraph or load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
         activation or load(gate.EXPECTED["activation_path"]),
         activation_verification or load(gate.EXPECTED["activation_verification_path"]),
         compiler_verification or load(gate.EXPECTED["compiler_verification_path"]),
         backend_verification or load(gate.EXPECTED["backend_verification_path"]),
+        v3_activation or load(gate.EXPECTED["v3_activation_path"]),
+        v3_activation_verification or load(gate.EXPECTED["v3_activation_verification_path"]),
         blobs or actual_blobs(),
     )
 
@@ -47,6 +51,7 @@ class ToolDiscoveryRetrievalAuthorityGateV1Tests(unittest.TestCase):
         self.assertTrue(out["pass"], out)
         self.assertTrue(out["unknown_preserved"], out)
         self.assertTrue(out["same_epoch_replay_disabled"], out)
+        self.assertTrue(out["v3_multilingual_adaptive_federation_mandatory"], out)
         self.assertEqual(out["capability_credit_delta"], 0)
         self.assertEqual(out["family_credit_delta"], 0)
 
@@ -86,6 +91,30 @@ class ToolDiscoveryRetrievalAuthorityGateV1Tests(unittest.TestCase):
         out = validate(activation_verification=receipt)
         self.assertFalse(out["pass"], out)
         self.assertIn("ACTIVATION_INDEPENDENT_RUNNER_NOT_SUCCESS", out["errors"])
+
+    def test_stale_v3_activation_hash_fails_closed(self):
+        h = load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json")
+        action = next(x for x in h["actions"] if gate.TARGET in x.get("target_predicates", []))
+        action["mandatory_retrieval_authority"]["v3_activation_blob"] = "0" * 40
+        out = validate(hypergraph=h)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("AUTHORITY_BINDING_MISMATCH:v3_activation_blob", out["errors"])
+
+    def test_failed_v3_activation_receipt_fails_closed(self):
+        receipt = load(gate.EXPECTED["v3_activation_verification_path"])
+        receipt["independent_runner"]["conclusion"] = "failure"
+        out = validate(v3_activation_verification=receipt)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("V3_ACTIVATION_INDEPENDENT_RUNNER_NOT_SUCCESS", out["errors"])
+
+    def test_removing_v3_epoch_exhaustion_firewall_fails_closed(self):
+        activation = load(gate.EXPECTED["v3_activation_path"])
+        activation["hard_rules"].remove(
+            "NO_SOURCE_EPOCH_EXHAUSTION_BEFORE_V3_EXPANSION_UNLESS_A_VERIFIED_SUFFICIENT_WITNESS_ALREADY_STOPPED_THE_SEARCH"
+        )
+        out = validate(v3_activation=activation)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("V3_EPOCH_EXHAUSTION_FIREWALL_MISSING", out["errors"])
 
     def test_second_tool_discovery_action_fails_closed(self):
         h = load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json")

@@ -1,16 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V9_CURRENT__RECOVERY_4_OF_19__MANDATORY_TOOL_DISCOVERY_V2_RETRIEVAL_GATE__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V10_CURRENT__RECOVERY_4_OF_19__MANDATORY_TOOL_DISCOVERY_V3_RETRIEVAL_GATE__ZERO_CREDIT",
   "current_authority": {
-    "path": "canonical/governance/TERMINAL_SCHEDULING_V9_ACTIVE_AUTHORITY_V1.json",
-    "git_blob_sha": "0637e90ed6f81592339b643bde148129494ccd2f"
+    "path": "canonical/governance/TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_V1.json",
+    "git_blob_sha": "b1d37d015d93eb71fba1742a498b793b5a2a4ea0"
   },
   "independent_verification": {
-    "path": "canonical/verification/TERMINAL_SCHEDULING_V9_ACTIVE_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "git_blob_sha": "06cc1f4d4e695a6a47c26e1828607750a58088d4",
-    "workflow_run_id": 37116360584,
-    "workflow_job_id": 111183841689,
+    "path": "canonical/verification/TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "20fb5ddba2ec8ae93ab3b8543ff455236abef672",
+    "workflow_run_id": 37120177746,
+    "workflow_job_id": 111194599730,
     "conclusion": "success"
   },
   "live_world": {
@@ -22,17 +22,21 @@
   },
   "mandatory_tool_discovery_retrieval": {
     "gate_path": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py",
-    "gate_git_blob_sha": "9af1bd62048277cc8c4fabab8efe5d217c367bac",
-    "hypergraph_git_blob_sha": "e29ce3a7c782c7b9ab1097dd3124a917d3fea9d2",
+    "gate_git_blob_sha": "73ff5863845402fdd304c0e8c64b4b1d36330f45",
+    "hypergraph_git_blob_sha": "38b53147597b5457859e3b0d031168842560e3e2",
     "scheduler_runtime_git_blob_sha": "9ae2b990578b042dd24074fd5013378b72e64b6b",
-    "v2_activation_git_blob_sha": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e",
+    "v2_base_activation_git_blob_sha": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e",
+    "v3_activation_git_blob_sha": "4fde285b62a3a84e7f12852d8600aecfc01bab81",
+    "v3_live_gate_verification_git_blob_sha": "a1bc5d4ef2a767973e48a96ed986f7181630d959",
     "mandatory": true,
     "direct_bypass_allowed": false,
     "stale_authority_allowed": false,
+    "pre_v3_epoch_exhaustion_allowed": false,
     "consumed_source_epoch_replay_allowed": false,
     "no_result_means_nonexistence": false
   },
   "supersedes_for_current_scheduling": [
+    "canonical/governance/TERMINAL_SCHEDULING_V9_ACTIVE_AUTHORITY_V1.json",
     "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json"
   ],
   "abandoned_unmerged_candidates": [
@@ -41,8 +45,9 @@
   ],
   "hard_rules": [
     "THIS_FILE_IS_THE_SINGLE_CURRENT_SCHEDULING_AUTHORITY_POINTER",
-    "ALL_TOOL_DISCOVERY_RETRIEVAL_MUST_PASS_THE_EXACT_VERIFIED_V2_GATE",
-    "PRESERVE_RECOVERY_4_OF_19_PROMOTION",
+    "ALL_TOOL_DISCOVERY_RETRIEVAL_MUST_PASS_THE_EXACT_VERIFIED_V2_BASE_PLUS_V3_GATE",
+    "NO_SOURCE_EPOCH_EXHAUSTION_BEFORE_V3_EXPANSION_UNLESS_A_VERIFIED_SUFFICIENT_WITNESS_ALREADY_STOPPED_SEARCH",
+    "PRESERVE_CURRENT_4_OF_19_ACCEPTANCE_AUTHORITY",
     "NO_RESULT_IS_NOT_NONEXISTENCE",
     "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING"
   ],
@@ -52,5 +57,12 @@
   "family_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "final_pointer_candidate_verification": {
+    "path": "canonical/verification/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V10_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "746111757bf0c7b8c0c3e6e70a7172d798141c4c",
+    "workflow_run_id": 37120345704,
+    "workflow_job_id": 111195072424,
+    "conclusion": "success"
+  }
 }

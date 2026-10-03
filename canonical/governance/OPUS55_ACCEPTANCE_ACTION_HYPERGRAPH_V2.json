@@ -448,7 +448,7 @@
           "evidence": "canonical/verification/FUTURE_MATCHED_SCOPE_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         }
       ],
-      "notes": "Finite historical samples cannot transport into the future matched scope. All live retrieval for this predicate is mechanically gated by mandatory_retrieval_authority and must use the exact independently verified V2 residual-witness retrieval stack. Search only for independent universal formal scope proof, exhaustive finite superset, or admissible matched evidence for any irreducible remainder. No direct, stale, or same-source-epoch replay path.",
+      "notes": "Finite historical samples cannot transport into the future matched scope. All live retrieval for this predicate is mechanically gated by mandatory_retrieval_authority: exact verified V2 base plus verified V3 multilingual/adaptive/federated expansion before any source epoch may be declared exhausted, unless an independently verified sufficient witness already stops search. Search only for independent universal formal scope proof, exhaustive finite superset, or admissible matched evidence for any irreducible remainder. No direct, stale, same-source-epoch, or pre-V3 exhaustion path.",
       "mandatory_retrieval_authority": {
         "activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1.json",
         "activation_blob": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e",
@@ -464,7 +464,11 @@
         "github_provider_blob": "29b808935559382ab7ddc81aaa08fe0611a05df8",
         "backend_verification_path": "canonical/verification/GITHUB_PUBLIC_RETRIEVAL_SURFACES_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
         "backend_verification_blob": "ca5acd7afbf14b7cce568ec482c160c3795e57ba",
-        "rule": "ALL_LIVE_TOOL_DISCOVERY_RETRIEVAL_MUST_PASS_THIS_EXACT_VERIFIED_V2_AUTHORITY__NO_DIRECT_OR_STALE_SEARCH_PATH"
+        "rule": "ALL_LIVE_TOOL_DISCOVERY_RETRIEVAL_MUST_PASS_THE_EXACT_VERIFIED_V2_BASE_AND_V3_MULTILINGUAL_ADAPTIVE_FEDERATION_AUTHORITY__NO_DIRECT_STALE_OR_PRE_V3_EPOCH_EXHAUSTION_PATH",
+        "v3_activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V3_ACTIVATION_V1.json",
+        "v3_activation_blob": "4fde285b62a3a84e7f12852d8600aecfc01bab81",
+        "v3_activation_verification_path": "canonical/verification/RETRIEVAL_V3_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "v3_activation_verification_blob": "5ab1f983a6f373bb29680e14d83c3e83cd2c0d68"
       }
     },
     {

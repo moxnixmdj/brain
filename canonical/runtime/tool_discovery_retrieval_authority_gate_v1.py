@@ -40,6 +40,10 @@ EXPECTED = {
     "github_provider_blob": "29b808935559382ab7ddc81aaa08fe0611a05df8",
     "backend_verification_path": "canonical/verification/GITHUB_PUBLIC_RETRIEVAL_SURFACES_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "backend_verification_blob": "ca5acd7afbf14b7cce568ec482c160c3795e57ba",
+    "v3_activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V3_ACTIVATION_V1.json",
+    "v3_activation_blob": "4fde285b62a3a84e7f12852d8600aecfc01bab81",
+    "v3_activation_verification_path": "canonical/verification/RETRIEVAL_V3_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "v3_activation_verification_blob": "5ab1f983a6f373bb29680e14d83c3e83cd2c0d68",
 }
 
 
@@ -67,6 +71,8 @@ def validate(
     activation_verification: Mapping[str, Any],
     compiler_verification: Mapping[str, Any],
     backend_verification: Mapping[str, Any],
+    v3_activation: Mapping[str, Any],
+    v3_activation_verification: Mapping[str, Any],
     actual_blobs: Mapping[str, str],
 ) -> dict[str, Any]:
     errors: list[str] = []
@@ -175,6 +181,54 @@ def validate(
             if b_verified.get(field) is not True:
                 errors.append("BACKEND_VERIFICATION_FALSE:" + field)
 
+    if v3_activation.get("schema") != "PROJECT_BRAIN_TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V3_ACTIVATION_V1":
+        errors.append("V3_ACTIVATION_SCHEMA_INVALID")
+    base = v3_activation.get("base_retrieval_authority")
+    if not isinstance(base, Mapping) or base.get("git_blob_sha") != EXPECTED["activation_blob"]:
+        errors.append("V3_DOES_NOT_PRESERVE_EXACT_V2_BASE")
+    v3_verified_extension = v3_activation.get("v3_verified_extension")
+    if not isinstance(v3_verified_extension, Mapping):
+        errors.append("V3_VERIFIED_EXTENSION_MISSING")
+    protocol = v3_activation.get("mandatory_epoch_protocol")
+    if not isinstance(protocol, list):
+        errors.append("V3_MANDATORY_EPOCH_PROTOCOL_MISSING")
+        protocol = []
+    for required in (
+        "RUN_V2_EXACT_RESIDUAL_COMPILER_AND_VERIFIED_BACKENDS",
+        "RUN_ADAPTIVE_UNICODE_QUERY_EVOLUTION_USING_TECHNICAL_ANCHORS_AND_PRIOR_CANDIDATE_TERMS",
+        "COMPILE_ORTHOGONAL_PUBLIC_SOURCE_FEDERATION_REQUESTS",
+        "IF_NO_SUFFICIENT_WITNESS_EXISTS_PRESERVE_UNKNOWN_AND_CONTENT_ADDRESS_THE_CONSUMED_SOURCE_EPOCH",
+    ):
+        if required not in protocol:
+            errors.append("V3_PROTOCOL_MISSING:" + required)
+    if "NO_SOURCE_EPOCH_EXHAUSTION_BEFORE_V3_EXPANSION_UNLESS_A_VERIFIED_SUFFICIENT_WITNESS_ALREADY_STOPPED_THE_SEARCH" not in (v3_activation.get("hard_rules") or []):
+        errors.append("V3_EPOCH_EXHAUSTION_FIREWALL_MISSING")
+    if v3_activation.get("stop_rules", {}).get("no_witness_and_scope_not_complete") != "UNKNOWN__DO_NOT_INFER_NONEXISTENCE":
+        errors.append("V3_UNKNOWN_STOP_RULE_INVALID")
+
+    if v3_activation_verification.get("schema") != "PROJECT_BRAIN_RETRIEVAL_V3_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1":
+        errors.append("V3_ACTIVATION_VERIFICATION_SCHEMA_INVALID")
+    v3_runner = v3_activation_verification.get("independent_runner")
+    if not isinstance(v3_runner, Mapping) or v3_runner.get("conclusion") != "success":
+        errors.append("V3_ACTIVATION_INDEPENDENT_RUNNER_NOT_SUCCESS")
+    v3v = v3_activation_verification.get("verified")
+    if not isinstance(v3v, Mapping):
+        errors.append("V3_ACTIVATION_VERIFIED_BLOCK_MISSING")
+    else:
+        for field in (
+            "exact_activation_blob_verified",
+            "v2_base_authority_preserved",
+            "v3_component_receipt_binding_verified",
+            "multilingual_candidate_generation_required_before_epoch_exhaustion",
+            "adaptive_unicode_query_evolution_required_before_epoch_exhaustion",
+            "orthogonal_public_source_federation_required_before_epoch_exhaustion",
+            "unbridgeable_material_preserves_unknown",
+            "no_result_nonexistence_inference_forbidden",
+            "zero_credit_preserved",
+        ):
+            if v3v.get(field) is not True:
+                errors.append("V3_ACTIVATION_VERIFICATION_FALSE:" + field)
+
     if action.get("new_reality_units") != 0:
         errors.append("TOOL_DISCOVERY_RETRIEVAL_EDGE_FRESH_REALITY_NONZERO")
 
@@ -190,6 +244,7 @@ def validate(
         "exact_binding": dict(EXPECTED),
         "unknown_preserved": True,
         "same_epoch_replay_disabled": True,
+        "v3_multilingual_adaptive_federation_mandatory": True,
         "acceptance_credit": 0,
         "execution_authority": False,
         "promotion_authority": False,
@@ -214,6 +269,8 @@ def evaluate_repository(root: Path) -> dict[str, Any]:
         "router_blob": git_blob_sha(raw(EXPECTED["router_path"])),
         "github_provider_blob": git_blob_sha(raw(EXPECTED["github_provider_path"])),
         "backend_verification_blob": git_blob_sha(raw(EXPECTED["backend_verification_path"])),
+        "v3_activation_blob": git_blob_sha(raw(EXPECTED["v3_activation_path"])),
+        "v3_activation_verification_blob": git_blob_sha(raw(EXPECTED["v3_activation_verification_path"])),
     }
     return validate(
         load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
@@ -221,6 +278,8 @@ def evaluate_repository(root: Path) -> dict[str, Any]:
         load(EXPECTED["activation_verification_path"]),
         load(EXPECTED["compiler_verification_path"]),
         load(EXPECTED["backend_verification_path"]),
+        load(EXPECTED["v3_activation_path"]),
+        load(EXPECTED["v3_activation_verification_path"]),
         actual_blobs,
     )
 

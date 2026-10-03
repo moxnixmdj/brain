@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CURRENT_AUTHORITY__V10_INDEPENDENT_PASS__FINAL_POINTER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_scheduling_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V10.json",
+    "git_blob_sha": "7b82d88f94491db17fcb8d2672a830b251f320c5"
+  },
+  "independent_activation_verification": {
+    "path": "canonical/verification/TERMINAL_SCHEDULING_V10_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "f7bf49299797d877fbe86ae22978b8e27959d779",
+    "workflow_run_id": 37120023944,
+    "workflow_job_id": 111194167627,
+    "conclusion": "success"
+  },
+  "live_scheduler": {
+    "runtime_path": "canonical/runtime/current_terminal_scheduling_world_v1.py",
+    "runtime_git_blob_sha": "9ae2b990578b042dd24074fd5013378b72e64b6b",
+    "action_hypergraph_path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+    "action_hypergraph_git_blob_sha": "38b53147597b5457859e3b0d031168842560e3e2",
+    "retrieval_gate_path": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py",
+    "retrieval_gate_git_blob_sha": "73ff5863845402fdd304c0e8c64b4b1d36330f45"
+  },
+  "live_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "tool_learning_success_route_noninferior": "OPEN"
+  },
+  "tool_discovery_retrieval_authority": {
+    "mandatory": true,
+    "version": "V3_OVER_VERIFIED_V2_BASE",
+    "activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V3_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "4fde285b62a3a84e7f12852d8600aecfc01bab81",
+    "live_gate_verification_path": "canonical/verification/RETRIEVAL_V3_LIVE_GATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "live_gate_verification_git_blob_sha": "a1bc5d4ef2a767973e48a96ed986f7181630d959",
+    "direct_or_stale_bypass_allowed": false,
+    "pre_v3_epoch_exhaustion_allowed": false,
+    "same_consumed_source_epoch_replay_allowed": false,
+    "no_result_means_nonexistence": false
+  },
+  "supersession": {
+    "canonical/governance/TERMINAL_SCHEDULING_V9_ACTIVE_AUTHORITY_V1.json": "HISTORICAL_ONLY_AFTER_FINAL_V10_POINTER_PASS"
+  },
+  "hard_rules": [
+    "DO_NOT_SCHEDULE_TOOL_DISCOVERY_RETRIEVAL_OUTSIDE_THE_MANDATORY_V3_GATE",
+    "DO_NOT_DECLARE_RETRIEVAL_EPOCH_EXHAUSTED_BEFORE_V3_EXPANSION_UNLESS_A_VERIFIED_SUFFICIENT_WITNESS_ALREADY_STOPPED_SEARCH",
+    "DO_NOT_REPEAT_CONSUMED_RETRIEVAL_SOURCE_EPOCHS",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "PRESERVE_CURRENT_4_OF_19_ACCEPTANCE_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_THIS_POINTER_EXACT_BYTES__THEN_REBIND_TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1_TO_V10",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

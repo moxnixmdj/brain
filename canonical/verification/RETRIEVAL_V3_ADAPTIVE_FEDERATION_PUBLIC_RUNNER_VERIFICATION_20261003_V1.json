@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V3_ADAPTIVE_FEDERATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__MULTILINGUAL_ADAPTIVE_FEDERATED_RETRIEVAL__FINITE_OBSERVABLE_RECALL_1__UNBRIDGEABLE_UNKNOWN__ZERO_CREDIT",
+  "exact_brain_blobs": {
+    "canonical/runtime/wikidata_language_bridge_v1.py": "1698a02f372a7ed6446d1519d9385dcff8619786",
+    "canonical/runtime/adaptive_retrieval_query_expansion_v1.py": "180cce242914a0b7c0925c50579dd1e336b9ef35",
+    "canonical/runtime/public_source_federation_v1.py": "3f69b3e8371fe3e5abc173c6c9fe17e9003a938b",
+    "canonical/runtime/retrieval_adversarial_recall_benchmark_v1.py": "947f09640bc6e8ca98c4e3c2c975ab87071f6f1f",
+    "canonical/tests/test_retrieval_v3_adaptive_federation.py": "b12ad4392cb5d7802507cce75dd90a3089169f4a"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1314,
+    "merge_commit": "be616f54b26e1580eb9010a055626a518cba4063",
+    "head_sha": "2384d1d4cf65d1c1ca9461dae962ca39a68ab784",
+    "workflow_run_id": 37119113819,
+    "workflow_job_id": 111191609585,
+    "conclusion": "success"
+  },
+  "verified": {
+    "wikidata_cross_script_candidate_generation": true,
+    "wikidata_no_match_preserves_unknown": true,
+    "adaptive_unicode_query_evolution": true,
+    "pseudo_relevance_unicode_term_harvest": true,
+    "technical_anchor_plus_multilingual_variant_generation": true,
+    "orthogonal_public_source_federation": true,
+    "federation_source_group_count": 14,
+    "declared_finite_observable_adversarial_recall": 1.0,
+    "declared_finite_observable_adversarial_misses": 0,
+    "unbridgeable_artifact_preserves_unknown": true,
+    "open_world_completeness_claim": false,
+    "zero_credit_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_ALL_LANGUAGE_TRANSLATION_COMPLETENESS_CLAIM",
+    "NO_WIKIDATA_SEMANTIC_EQUIVALENCE_ORACLE_CLAIM",
+    "NO_OPEN_WORLD_RETRIEVAL_COMPLETENESS_CLAIM",
+    "NO_SOCIAL_PRIVATE_DELETED_OR_UNINDEXED_SOURCE_COMPLETENESS_CLAIM",
+    "NO_SYNTHETIC_FINITE_FIXTURE_TO_OPEN_WORLD_COMPLETENESS_INFERENCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
