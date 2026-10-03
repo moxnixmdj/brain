@@ -16,6 +16,8 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any, Mapping
 
+from canonical.runtime import tool_discovery_retrieval_authority_gate_v1 as tool_retrieval_gate
+
 SCHEMA = "PROJECT_BRAIN_CURRENT_TERMINAL_SCHEDULING_WORLD_V1"
 TERMINAL_STATES = {"PROVED", "REFUTED"}
 
@@ -64,6 +66,7 @@ def evaluate(
     hypergraph: Mapping[str, Any],
     scheduling: Mapping[str, Any],
     authority: Mapping[str, Any],
+    retrieval_authority_gate: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     registry_ids, registry_by_id, errors = _ids_from_registry(registry)
     registry_set = set(registry_ids)
@@ -96,6 +99,16 @@ def evaluate(
     refuted = {pid for pid, state in states.items() if state == "REFUTED"}
     unresolved = [pid for pid in registry_ids if pid not in terminal]
     unresolved_set = set(unresolved)
+
+    tool_retrieval_gate_required = tool_retrieval_gate.TARGET in unresolved_set
+    tool_retrieval_gate_pass = (
+        isinstance(retrieval_authority_gate, Mapping)
+        and retrieval_authority_gate.get("schema") == tool_retrieval_gate.SCHEMA
+        and retrieval_authority_gate.get("pass") is True
+        and retrieval_authority_gate.get("target_predicate") == tool_retrieval_gate.TARGET
+    )
+    if tool_retrieval_gate_required and not tool_retrieval_gate_pass:
+        errors.append("TOOL_DISCOVERY_RETRIEVAL_AUTHORITY_GATE_NOT_PASS")
 
     old_front = frontier.get("unresolved_predicates")
     if not isinstance(old_front, list):
@@ -188,15 +201,15 @@ def evaluate(
         errors.append("AUTHORITY_CONTRACT_WORLD_NOT_CURRENT")
     if truth.get("behavioral_families") != "19/19_PROVISIONAL_BEHAVIORAL_PASS__P1_SCOPE_QUARANTINE_CLEARED__STRICT_OPUS55_ACCEPTANCE_SEPARATE":
         errors.append("AUTHORITY_BEHAVIORAL_WORLD_NOT_CURRENT")
-    if truth.get("opus55_acceptance") != "3/19_PASS__16/19_OPEN":
-        errors.append("AUTHORITY_ACCEPTANCE_WORLD_NOT_3_OF_19")
+    if truth.get("opus55_acceptance") != "4/19_PASS__15/19_OPEN":
+        errors.append("AUTHORITY_ACCEPTANCE_WORLD_NOT_4_OF_19")
 
     if len(registry_ids) != 38:
         errors.append(f"REGISTRY_COUNT_NOT_38:{len(registry_ids)}")
-    if len(proved) != 8:
-        errors.append(f"PROVED_COUNT_NOT_8:{len(proved)}")
-    if len(unresolved) != 30:
-        errors.append(f"UNRESOLVED_COUNT_NOT_30:{len(unresolved)}")
+    if len(proved) != 11:
+        errors.append(f"PROVED_COUNT_NOT_11:{len(proved)}")
+    if len(unresolved) != 27:
+        errors.append(f"UNRESOLVED_COUNT_NOT_27:{len(unresolved)}")
 
     scheduled_frontier = scheduling.get("frontier")
     scheduled_hypergraph = scheduling.get("action_hypergraph")
@@ -249,6 +262,13 @@ def evaluate(
         "removed_terminal_action_targets": removed_action_targets,
         "source_scheduling_world_stale": bool(stale_reasons),
         "source_scheduling_world_stale_reasons": sorted(stale_reasons),
+        "tool_discovery_retrieval_authority_gate_required": tool_retrieval_gate_required,
+        "tool_discovery_retrieval_authority_gate_pass": tool_retrieval_gate_pass,
+        "tool_discovery_retrieval_authority_gate_status": (
+            retrieval_authority_gate.get("status")
+            if isinstance(retrieval_authority_gate, Mapping)
+            else None
+        ),
         "legacy_authority_next": authority.get("next"),
         "required_next": (
             "INDEPENDENTLY_VERIFY_THIS_RECEIPT_DERIVED_30_PREDICATE_WORLD__"
@@ -280,6 +300,7 @@ def main() -> int:
         load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
         load("canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json"),
         load("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"),
+        tool_retrieval_gate.evaluate_repository(root),
     )
     print(json.dumps(out, indent=2, sort_keys=True))
     return 0 if out.get("pass") is True else 1
