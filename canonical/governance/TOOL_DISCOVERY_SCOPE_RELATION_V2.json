@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_SCOPE_RELATION_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_UNIVERSAL_FORMAL_SCOPE_RELATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge the current tool-discovery scope/formalism residual without new terminal cases by proving the frozen protocol universally over arbitrary finite declared tool ecosystems, rather than extrapolating from the preserved 180-case sample.",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "supersedes_if_independently_verified": "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json",
+  "exact_sources": {
+    "candidate": {
+      "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+      "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+    },
+    "proof_v1": {
+      "path": "canonical/runtime/tool_discovery_information_safe_proof.py",
+      "git_blob_sha": "2450a9644119c9fdf9c43307a1d115098d6ba592"
+    },
+    "proof_v2": {
+      "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+      "git_blob_sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+    },
+    "terminal_binding": {
+      "path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+    },
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "scope_firewall": {
+      "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+      "git_blob_sha": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d"
+    },
+    "current_blocker": {
+      "path": "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json",
+      "git_blob_sha": "48ba33998e73b8eec2731be51a7ec78077ed0d4a"
+    },
+    "acceptance_binding": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "7885a827b1483bfb38315c1f492848f7e4680285"
+    }
+  },
+  "exact_frozen_scope_semantics": {
+    "protocol_acceptance_population": "FROZEN_TOOL_ECOSYSTEMS_WITH_HIDDEN_CAPABILITY_VARIANTS",
+    "candidate_visible_identity_surface": "TOOL_IDS_AND_DECLARED_COSTS",
+    "candidate_hidden_surface": "ACTUAL_TOOL_CAPABILITY_MATRIX",
+    "registry_environment": "TOOL_ECOSYSTEM_WITH_OVERLAPPING_UNKNOWN_OR_CHANGING_CAPABILITIES",
+    "scope_ruling": "WITHIN_THE_CURRENT_FROZEN_ACCEPTANCE_PROTOCOL_UNKNOWN_TOOL_DISCOVERY_IS_UNKNOWN_CAPABILITY_DISCOVERY_AND_ROUTE_SELECTION_OVER_THE_DECLARED_FINITE_TOOL_IDENTITY_UNIVERSE__ARBITRARY_OPEN_WORLD_TOOL_IDENTITY_ENUMERATION_IS_NOT_PART_OF_THIS_FROZEN_PROTOCOL",
+    "broader_dynamic_v3_disposition": "PRESERVED_AS_STRONGER_SEPARATE_CAPABILITY_CANDIDATE__NOT_REQUIRED_FOR_THIS_FROZEN_PROTOCOL__NO_CREDIT_FROM_THIS_RELATION"
+  },
+  "valid_contract_domain": {
+    "tool_universe": "ANY_FINITE_DECLARED_SET_OF_TOOL_IDENTITIES_WITH_FINITE_NUMERIC_DECLARED_COSTS_AND_DECLARED_AVAILABILITY_AUTHORIZATION",
+    "required_capabilities": "ANY_FINITE_DECLARED_SET",
+    "hidden_state": "ANY_CAPABILITY_TRUTH_ASSIGNMENT_FOR_DECLARED_TOOL_CAPABILITY_PAIRS_AT_THE_CURRENT_PUBLIC_EPOCH",
+    "probe_semantics": "SAFE_CAPABILITY_PROBE_RETURNS_THE_TRUE_CURRENT_EPOCH_BOOLEAN_FOR_THE_REQUESTED_DECLARED_TOOL_AND_REQUIRED_CAPABILITY",
+    "prior_evidence": "ANY_FINITE_SOUND_CURRENT_OR_STALE_PROBE_RECEIPT_HISTORY__STALE_RECEIPTS_ARE_IGNORED_BY_PUBLIC_EPOCH",
+    "version_events": "ANY_FINITE_PUBLIC_TOOL_VERSION_CHANGE_SET_APPLIED_BEFORE_ACTION_SELECTION_FOR_THE_STAGE",
+    "malformed_or_undeclared_inputs": "FAIL_CLOSED_OUTSIDE_THE_VALID_DECLARED_CONTRACT_DOMAIN"
+  },
+  "formal_lemmas": [
+    {
+      "id": "L1_FINITE_ORDER",
+      "statement": "Every eligible declared tool is placed in one deterministic total order by declared cost then tool id."
+    },
+    {
+      "id": "L2_MONOTONE_PROBE_PROGRESS",
+      "statement": "A PROBE action is emitted only for a current-epoch required capability whose evidence state is unknown for the current candidate tool; a sound probe therefore converts one unknown pair to true or false and never repeats that pair in the same epoch."
+    },
+    {
+      "id": "L3_FALSE_ELIMINATION",
+      "statement": "Any tool with a current negative receipt for any required capability is skipped and can never be selected in that stage."
+    },
+    {
+      "id": "L4_POSITIVE_SELECTION",
+      "statement": "A tool is selected only after every required capability has current positive evidence."
+    },
+    {
+      "id": "L5_LEAST_COST_SUFFICIENCY",
+      "statement": "Because tools are considered in increasing cost/id order, every cheaper predecessor has been either proved insufficient or made ineligible before the first fully proved sufficient tool is selected; selection is therefore least-cost among sufficient eligible routes."
+    },
+    {
+      "id": "L6_FINITE_TERMINATION",
+      "statement": "There are finitely many current-epoch tool/capability pairs. Each probe resolves one previously unknown pair, so after at most |eligible tools| times |required capabilities| probes the policy selects a least-cost sufficient tool or exhausts every eligible tool."
+    },
+    {
+      "id": "L7_SOUND_ESCALATION",
+      "statement": "If no sufficient eligible route exists, finite probe progress eventually gives every eligible tool at least one negative required-capability fact and the policy escalates only after the ordered tool scan is exhausted."
+    },
+    {
+      "id": "L8_TRANSFER_AND_STALENESS",
+      "statement": "Current-epoch receipts are reused across later tasks, while a public version change advances only the changed tool epoch and makes its older receipts non-current, forcing rediscovery only where evidence became stale."
+    },
+    {
+      "id": "L9_POINTWISE_CEILING",
+      "statement": "For every valid finite frozen-protocol case, least-cost sufficient route selection or sound no-route escalation is the exact terminal correctness ceiling for the declared route-selection contract; the policy reaches that ceiling without unsupported capability promotion."
+    }
+  ],
+  "population_relation": {
+    "relation": "UNIVERSAL_FORMAL_SCOPE_CANDIDATE",
+    "covers": "ALL_VALID_FINITE_DECLARED_TOOL_ECOSYSTEMS_WITH_ARBITRARY_HIDDEN_CAPABILITY_VARIANTS_SOUND_SAFE_PROBES_CURRENT_EPOCH_VERSION_SEMANTICS_AND_ANY_FINITE_REQUIRED_CAPABILITY_SET",
+    "not_empirical": true,
+    "preserved_sample_role": "THE_IMMUTABLE_180_OF_180_RESULT_REMAINS_SAMPLE_EVIDENCE_AND_IS_NOT_USED_TO_GENERALIZE_THE_THEOREM",
+    "excludes": "OPEN_WORLD_ENUMERATION_OF_TOOL_IDENTITIES_NOT_PRESENT_IN_THE_DECLARED_FROZEN_TOOL_ECOSYSTEM__MALFORMED_DECLARATIONS__UNSOUND_PROBE_RECEIPTS"
+  },
+  "relation_to_frozen_acceptance_protocol": {
+    "same_scope_rule": "BRAIN_AND_OPUS_USE_THE_SAME_FROZEN_TASK_POPULATION_HARNESS_TOOL_AUTHORITY_UNLESS_AN_ABSOLUTE_THEORETICAL_CEILING_IS_THE_PROOF_MODE",
+    "acceptance_rule": "ON_FROZEN_TOOL_ECOSYSTEMS_WITH_HIDDEN_CAPABILITY_VARIANTS_BRAIN_CONSERVATIVE_TERMINAL_SUCCESS_VALID_ROUTE_BOUNDS_GE_OPUS_MATCHED_BOUNDS_WITH_SECOND_TASK_TRANSFER_AND_NO_UNSUPPORTED_CAPABILITY_STATE_PROMOTION",
+    "pointwise_claim": "THE_POLICY_REACHES_TERMINAL_SUCCESS_AND_VALID_ROUTE_VALUE_1_ON_EVERY_VALID_CASE_WITH_A_SUFFICIENT_ROUTE_AND CORRECT_NO_ROUTE_ESCALATION_ON EVERY VALID INFEASIBLE CASE__TRANSFER_AND_STALENESS_INVARIANTS_HOLD_BY CURRENT_EPOCH EVIDENCE ALGEBRA",
+    "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF"
+  },
+  "falsification_conditions": [
+    "THE_CURRENT_FROZEN_PROTOCOL_IS_SHOWN_TO_REQUIRE_DISCOVERY_OF_TOOL_IDENTITIES_NOT_PRESENT_IN_THE_DECLARED_TOOL_UNIVERSE",
+    "A_VALID_FINITE_DECLARED_CASE_EXISTS_WHERE_THE_POLICY_SELECTS_A_NON_SUFFICIENT_OR_NON_MINIMUM_COST_ROUTE",
+    "A_VALID_FINITE_DECLARED_CASE_EXISTS_WHERE_THE_POLICY_ESCALATES_WHILE_A_SUFFICIENT_ELIGIBLE_ROUTE_REMAINS_UNRESOLVED_OR_AVAILABLE",
+    "A_SOUND_CURRENT_EPOCH_PROBE_PAIR_CAN_BE_REPEATED_WITHOUT_A_VERSION_CHANGE",
+    "A_VERSION_CHANGE_CAN_CAUSE_STALE_POSITIVE_EVIDENCE_TO_REMAIN_ACTIVE_FOR_THE_CHANGED_TOOL",
+    "ANY_LOAD_BEARING_CONTENT_ADDRESSED_SOURCE_BLOB_CHANGES"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT_UNTIL_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
+    "NO_FAMILY_OWNERSHIP_CREDIT_FROM_THIS_ARTIFACT_ALONE",
+    "NO_EMPIRICAL_GENERALIZATION_FROM_180_CASES",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "NO_CLAIM_OF_ARBITRARY_OPEN_WORLD_TOOL_IDENTITY_ENUMERATION",
+    "NO_DYNAMIC_V3_PROMOTION"
+  ],
+  "terminal_cases_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "BIND_THIS_RELATION_TO_A_FAIL_CLOSED_SOURCE_CHECKER__INDEPENDENTLY_VERIFY_EXACT_BLOBS_AND_EVERY_FORMAL_PREMISE__ONLY_THEN_REDUCE_THE_SINGLE_TOOL_DISCOVERY_SCOPE_ATOM"
+}
