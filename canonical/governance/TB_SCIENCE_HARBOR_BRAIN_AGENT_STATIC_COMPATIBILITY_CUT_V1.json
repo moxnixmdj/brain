@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_HARBOR_BRAIN_AGENT_STATIC_COMPATIBILITY_CUT_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_STATIC_EXACT_INTERFACE_COMPATIBILITY_PASS__FRESH_HARBOR_IMPORT_EXECUTION_STILL_REQUIRED__ZERO_CREDIT",
+  "objective": "Reduce the Terminal-Bench-Science 0.1 Brain-agent-adapter residual without reading any terminal task case by comparing the exact current Brain agent interface to the exact Harbor v0.23.0 BaseAgent/custom-agent contract.",
+  "current_main_base": "04c344413341a43e863b9874e3bdf0ea95911d0d",
+  "brain_agent": {
+    "path": "canonical/runtime/harbor_brain_agent.py",
+    "git_blob_sha": "3d7d803bdd25df0379d81b360af3ea40da254771",
+    "class": "HarborBrainAgent",
+    "import_path": "canonical.runtime.harbor_brain_agent:HarborBrainAgent",
+    "structural_facts": [
+      "SUBCLASSES_HARBOR_BASEAGENT_WHEN_HARBOR_IMPORT_IS_AVAILABLE",
+      "DECLARES_AGENTCAPABILITIES_INSTANCE",
+      "STATIC_NAME_RETURNS_PROJECT_BRAIN",
+      "VERSION_RETURNS_1_1_0",
+      "ASYNC_SETUP_ACCEPTS_ENVIRONMENT",
+      "ASYNC_RUN_ACCEPTS_INSTRUCTION_ENVIRONMENT_CONTEXT",
+      "WRITES_TRACE_UNDER_BASEAGENT_LOGS_DIR",
+      "SETS_AGENTCONTEXT_COST_USD_TO_ZERO_WHEN_FIELD_EXISTS"
+    ],
+    "prior_independent_policy_transport_verification": {
+      "path": "canonical/verification/HARBOR_BRAIN_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "status": "INDEPENDENT_PASS_FOR_PRIOR_EXACT_BLOB__CURRENT_BLOB_REQUIRES_CURRENT_COMPATIBILITY_EXECUTION",
+      "limitation": "PRIOR_RECEIPT_DOES_NOT_TRANSPORT_AUTOMATICALLY_TO_CURRENT_AGENT_BLOB"
+    }
+  },
+  "harbor_0_23_0": {
+    "repository": "harbor-framework/harbor",
+    "tag": "v0.23.0",
+    "base_agent_path": "src/harbor/agents/base.py",
+    "base_agent_git_blob_sha": "a3bcc11299c1de3a551fb07552db12eaf53ca340",
+    "docs_path": "docs/content/docs/agents/index.mdx",
+    "docs_git_blob_sha": "52c0edadac4930cc61484806ceb34713bc905fb7",
+    "required_external_agent_contract": [
+      "STATIC_NAME",
+      "VERSION",
+      "ASYNC_SETUP_ENVIRONMENT",
+      "ASYNC_RUN_INSTRUCTION_ENVIRONMENT_CONTEXT"
+    ],
+    "custom_agent_loading": "harbor run -d <dataset@version> --agent path.to.agent:SomeAgent"
+  },
+  "terminal_bench_science_route": {
+    "existing_verification": "canonical/verification/TERMINAL_BENCH_SCIENCE_0_1_ZERO_CASE_ROUTE_VERIFICATION_20261002_V1.json",
+    "dataset_tag": "v0.1.0",
+    "harbor_version": "0.23.0",
+    "carrier": "ubuntu-24.04 local Docker",
+    "existing_status": "INDEPENDENT_PASS__DATASET_IDENTITY_AND_ZERO_COST_CARRIER__ZERO_TASK_CASE_READ"
+  },
+  "deductions": {
+    "required_method_surface_match": true,
+    "custom_import_path_mechanism_exists": true,
+    "adapter_source_shape_is_structurally_compatible": true,
+    "task_case_exposure_required_for_static_compatibility": false,
+    "real_harbor_package_import_and_agent_instantiation_proved": false,
+    "terminal_task_performance_proved": false,
+    "family_acceptance_proved": false
+  },
+  "exact_remaining_adapter_cut": [
+    "FRESH_RUNNER_INSTALL_EXACT_HARBOR_0_23_0",
+    "IMPORT_EXACT_CURRENT_BRAIN_AGENT_BLOB_WITH_ITS_CURRENT_DEPENDENCIES",
+    "INSTANTIATE_THROUGH_HARBOR_BASEAGENT_CONSTRUCTOR",
+    "CALL_SETUP_ON_A_NONTERMINAL_FAKE_OR_EMPTY_ENVIRONMENT",
+    "VERIFY_CUSTOM_IMPORT_PATH_RESOLUTION",
+    "VERIFY_NO_TASK_CASE_CONTENT_READ",
+    "VERIFY_ZERO_INCREMENTAL_SPEND_AND_NO_EXTERNAL_PAID_FALLBACK"
+  ],
+  "next": "RUN_ONE_ZERO_CASE_FRESH_HARBOR_0_23_0_COMPATIBILITY_EXECUTION_BOUND_TO_THE_CURRENT_AGENT_BLOB__IF_PASS_RECOMPUTE_TB_SCIENCE_ROUTE_READINESS_BEFORE_ANY_TERMINAL_CASE_EXPOSURE",
+  "terminal_results_observed": 0,
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
