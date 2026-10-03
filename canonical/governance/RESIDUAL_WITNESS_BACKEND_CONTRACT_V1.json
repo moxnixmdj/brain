@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_WITNESS_BACKEND_CONTRACT_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_BACKEND_BINDING_CONTRACT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "VERIFIED_BACKEND_BINDING_CONTRACT__EXTERNAL_CODE_SURFACES_OPEN__ZERO_CREDIT",
   "objective": "Execute retrieval-compiler QUERY actions through concrete backends without allowing discovery providers to self-award sufficiency, completeness, or acceptance credit.",
   "built_in_zero_cost_backends": {
     "PACKAGE_REGISTRY": "canonical/runtime/capability_discovery.py::search_all",
@@ -32,5 +32,6 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification": "canonical/verification/RESIDUAL_WITNESS_BACKEND_ROUTER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
 }
