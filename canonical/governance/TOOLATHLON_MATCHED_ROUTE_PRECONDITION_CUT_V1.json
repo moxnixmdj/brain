@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_TOOLATHLON_MATCHED_ROUTE_PRECONDITION_CUT_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE__SIX_TO_THREE_MATCHED_ROUTE_PRECONDITION_CUT__REFERENCE_HARNESS_TRUTH_REPAIRED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
-  "objective": "Compress the six open preconditions on the already pre-task-frozen Toolathlon-Verified matched Tool Discovery route to the exact irreducible three-fact cut without reading terminal results, replaying terminal cases, weakening the frozen Tool Discovery contract, or granting acceptance credit.",
+  "status": "CANDIDATE__SIX_TO_THREE_RESIDUAL_FACTORIZATION__REFERENCE_HARNESS_AND_OWNERSHIP_TRUTH_REPAIRED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Compress and factor the six listed open preconditions on the already pre-task-frozen Toolathlon-Verified matched Tool Discovery route into three current fail-closed residual buckets without claiming irreducible minimality, reading terminal results, replaying terminal cases, weakening the frozen Tool Discovery contract, or granting acceptance credit.",
   "canonical_base_commit": "07c4d993c30bde3db4c639864b7376d058dfae5f",
   "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
@@ -137,10 +137,11 @@
     "original_open_preconditions": 6,
     "closed_by_existing_frozen_evidence_or_selector": 2,
     "absorbed_into_one_joint_certificate": 2,
-    "minimum_remaining_fact_count": 3,
     "legacy_77_8_value_satisfies_matched_reference_fact": false,
     "terminal_execution_authorized": false,
-    "terminal_goal_achieved": false
+    "terminal_goal_achieved": false,
+    "minimum_claim": false,
+    "current_remaining_fact_bucket_count": 3
   },
   "new_reality_units_consumed": 0,
   "terminal_results_replayed": 0,
@@ -153,5 +154,9 @@
   "hard_nonclaims": [
     "NO_CLAIM_THAT_CLAUDE_AGENT_SDK_OR_ANY_OTHER_EXTERNAL_MODEL_SCAFFOLD_COUNTS_AS_BRAIN_TOOL_DISCOVERY_OWNERSHIP",
     "NO_TOOLATHLON_RESULT_IS_ADMISSIBLE_UNLESS_SOURCE_GATE_V2_AND_SUBSTRATE_MATERIALITY_PASS"
-  ]
+  ],
+  "cut_minimality": {
+    "status": "NOT_PROVEN__NO_IRREDUCIBILITY_CLAIM",
+    "rule": "THE_THREE_BUCKET_PARTITION_MAY_BE_FURTHER_REDUCED_ONLY_BY_NEW_ADMISSIBLE_EVIDENCE_OR_EXACT_LOGICAL_IMPLICATION"
+  }
 }
