@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DEDUCTIVE_ACCEPTANCE_BOUND_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_ZERO_REALITY_DEDUCTIVE_BOUND__NO_ACCEPTANCE_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_REALITY_DEDUCTIVE_BOUND_VERIFIED__ZERO_CREDIT",
   "canonical_base_commit": "47874df08687ed096a1eb00e605e613a81899e5d",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
@@ -94,5 +94,15 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1195,
+    "workflow_run_id": 37094345355,
+    "verifier_head_sha": "75e8d54f25cd67658e90ce34c6ad8ac9ee08d49f",
+    "verifier_merge_sha": "8e56245ca0a9b28278790c1af7705b6469a56240",
+    "conclusion": "success",
+    "scope": "EXACT_TRANSPORTED_BYTES_PLUS_DEDUCTIVE_BOUND_AND_CONDITIONAL_252_OF_324_MATH"
+  },
+  "promotion_rule": "THIS_VERIFIED_RECEIPT_MAY_DELETE_THE_STATIC_108_TASK_PROVED_PASS_SCAN_UNDER_CURRENT_PREMISES__IT_DOES_NOT_GRANT_ACCEPTANCE_FAMILY_CAPABILITY_OR_EXECUTION_CREDIT"
 }
