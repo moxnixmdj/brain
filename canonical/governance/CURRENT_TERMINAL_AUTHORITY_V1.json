@@ -897,8 +897,8 @@
     },
     "root2_fixed_bar_route_inventory_v1": {
       "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-      "git_blob_sha": "584231fb85ffa00c0f3c4b40dcd36d967e31f138",
-      "status": "ACTIVE__15_ROOT2_PREDICATES__14_UNIQUE_SURFACES__TB4_RENDER_RESOLVED_EMPTY__ZERO_CREDIT"
+      "git_blob_sha": "8f14db06a701db26800e4da06aa9b185c9efdfca",
+      "status": "ACTIVE__15_ROOT2_PREDICATES__14_UNIQUE_SURFACES__OSWORLD_BASE_KVM_CARRIER_AND_PINNED_VM_BOOT_PASS__ZERO_CREDIT"
     },
     "root3_residual_compression_v1": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
@@ -925,6 +925,18 @@
       "git_blob_sha": "3868e6faf8192ee1b5cbd5cba6154411e56555d4",
       "status": "ZERO_CREDIT_RECONCILIATION__CURRENT_V8_EXACT_BLOB_HAS_INDEPENDENT_PASS",
       "consequence": "CURRENT_V8_POST_COMPRESSION_BYTES_INDEPENDENTLY_VERIFIED__OLD_PRE_COMPRESSION_V8_RECEIPT_NOT_USED_FOR_CHANGED_BYTES"
+    },
+    "current_zero_reality_minimum_cut_v10": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V10.json",
+      "git_blob_sha": "7193bcd18880c79ab3467d3f149a4e93c1fd44ff",
+      "status": "CANDIDATE__OSWORLD_ZERO_CASE_BOOT_DISCHARGED__BASE_CARRIER_AND_VM_ARTIFACT_BOOT_CLOSED__NO_FRESH_REALITY__ZERO_CREDIT"
+    },
+    "osworld_v21_zero_case_boot": {
+      "path": "canonical/verification/OSWORLD_V21_ZERO_CASE_BOOT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f49ca9786ba049ea197b0fff44854a155581f59f",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PINNED_V2_1_VM_IMAGE_AND_RUNTIME_BOOT__ZERO_BENCHMARK_CASES__ZERO_CREDIT",
+      "workflow_run_id": 37155331628,
+      "workflow_job_id": 111297449304
     }
   },
   "residual": [
@@ -1564,5 +1576,5 @@
     "execution_authority": false,
     "promotion_authority": false
   },
-  "next_terminal_action": "VERIFY_ONLY_REMAINING_ROOT2_SCORER_CARRIER_ACCESS_SCOPE_GAPS__NO_GENERIC_ROOT1_OR_ROOT3_SEARCH__NO_TERMINAL_CASE_EXECUTION_BEFORE_FIXED_POINT"
+  "next_terminal_action": "BIND_OSWORLD_BRAIN_ADAPTER_AND_ONLY_FROZEN_TASK_LEVEL_DEPENDENCIES__VERIFY_REMAINING_ROOT2_SCORER_ACCESS_SCOPE_GAPS__NO_DUPLICATE_OSWORLD_BASE_BOOT__NO_TERMINAL_CASE_EXECUTION_BEFORE_FIXED_POINT"
 }
