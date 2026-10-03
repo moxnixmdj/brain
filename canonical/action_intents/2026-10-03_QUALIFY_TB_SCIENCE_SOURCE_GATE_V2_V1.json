@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "QUALIFY-TB-SCIENCE-SOURCE-GATE-V2-20261003-V1",
+  "status": "CANDIDATE__ZERO_CASE_SOURCE_GATE_QUALIFICATION__ZERO_CREDIT",
+  "canonical_base_commit": "fde07ef620f061272b07b986a6c1d64bb2c48617",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "causal_blockers": [
+    "TB_SCIENCE_CLEAN_CASE_EXECUTION_NOT_YET_SOURCE_GATE_AUTHORIZED"
+  ],
+  "action_kind": "INDEPENDENT_SOURCE_GATE_QUALIFICATION",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "observed_input_evidence": {
+    "controller_independent_pass": "verification-capsule-runner#1206__RUN_37097885454",
+    "materiality_independent_pass": "verification-capsule-runner#1207__RUN_37098116024",
+    "real_harbor_zero_case_preflight_pass": "verification-capsule-runner#1208__RUN_37098187748",
+    "terminal_cases_exposed": 0
+  },
+  "expected_parent_frontier_change": "IF_EXACT_SOURCE_GATE_EVALUATION_PASSES__TB_SCIENCE_BECOMES_CLEAN_CASE_EXECUTION_READY__NO_ACCEPTANCE_CREDIT_UNTIL_FROZEN_SCORE_RESULT",
+  "exception_basis": "ZERO_CASE_TRUTH_PRESERVING_EXECUTION_ADMISSION__NO_CAPABILITY_CREDIT",
+  "next": "INDEPENDENTLY_EVALUATE_EXACT_ADMISSION_WITH_SOURCE_GATE_V2__IF_PASS_FREEZE_ONE_TERMINAL_BENCH_SCIENCE_EXECUTION_ACTIVATION_WITH_EARLY_STOP_THRESHOLD",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
