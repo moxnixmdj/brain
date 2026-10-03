@@ -9,7 +9,7 @@
   "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
   "proof_domain": "ALL_FINITE_VALID_BRAIN_OWNED_TOOL_REGISTRIES_WITH_UNIQUE_IDENTITIES_NONNEGATIVE_FINITE_COSTS__FINITE_NONEMPTY_REQUIRED_CAPABILITY_SETS__WELL_FORMED_STATIC_SUPPORTED_CONSTRAINTS__TRUTHFUL_EPOCH_BOUND_SAFE_PROBE_RECEIPTS__ATOMIC_REGISTRY_EPOCH_CHANGES",
   "formal_lemmas": [
-    {"id":"T1_OWNED_IDENTITY_COMPLETENESS","statement":"Every Brain-invocable tool identity is registered; discovery enumerates exactly the registry; unregistered identities are uninvocable."},
+    {"id":"T1_OWNED_IDENTITY_COMPLETENESS","statement":"The owned route begins with zero pre-visible tool identities and exactly one discovery source: the Brain-owned registry gateway. Every Brain-invocable tool identity is registered; discovery enumerates exactly that registry; unregistered identities are uninvocable."},
     {"id":"T2_FINITE_DISCOVERY_PROGRESS","statement":"The sole owned discovery source is queried at most once per stable epoch and then exposes the exact finite registry."},
     {"id":"T3_FINITE_PROBE_PROGRESS","statement":"Each Dynamic V3 PROBE targets one missing required capability on the first non-falsified admissible route; a truthful current-epoch receipt removes that missing pair from the finite progress measure."},
     {"id":"T4_LEAST_COST_SELECTION","statement":"Cost/id ordering plus skip-on-false, probe-on-unknown, select-on-all-true makes the first SELECT the least-cost admissible sufficient route under the declared tie-break."},
