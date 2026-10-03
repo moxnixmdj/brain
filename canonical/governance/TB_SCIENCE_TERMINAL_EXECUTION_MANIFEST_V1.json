@@ -1,0 +1,3169 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_FROZEN_ZERO_CASE_MANIFEST__INDEPENDENT_VERIFICATION_REQUIRED__EXECUTION_FALSE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "frozen_dataset": {
+    "package": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "dataset_manifest_blob": "b506a7777d2dd5ae3e70c590366ceac4ee59ae28",
+    "content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
+    "task_count": 70,
+    "trials_per_task": 3,
+    "slot_count": 210
+  },
+  "acceptance": {
+    "frozen_bar_percent": 58.7,
+    "binary_reward": "0_OR_1",
+    "exact_trial_success": "reward >= 1.0",
+    "required_successes": 124,
+    "irreversible_failure_count": 87,
+    "reducer": "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py",
+    "rule": "ONLY_EXACT_SCORER_SUCCESS_COUNTS_ONE__EVERY_FINAL_NON_SUCCESS_AND_EVERY_FINALIZED_UNRUN_SLOT_COUNTS_ZERO__FIXED_DENOMINATOR_210"
+  },
+  "execution_rules": {
+    "retries_per_slot": 0,
+    "slot_replacement": false,
+    "denominator_shrink": false,
+    "duplicate_slot_credit": false,
+    "stop_on_pass_lock": "successes>=124",
+    "stop_on_fail_lock": "finalized_failures>=87",
+    "task_content_used_for_scheduling": false,
+    "scheduling_basis": "FROZEN_RESOURCE_METADATA_ONLY",
+    "schedule_order": "STORAGE_FEASIBLE_FIRST__THEN_STORAGE_MB__THEN_BUILD_PLUS_VERIFIER_TIMEOUT__THEN_TASK_NAME__INTERLEAVE_ATTEMPT_ROUNDS_0_1_2",
+    "carrier_failure_credit": 0,
+    "timeout_credit": 0,
+    "resource_failure_credit": 0,
+    "infra_failure_credit": 0
+  },
+  "carrier_cut": {
+    "reference_verifier_run_id": 37100286391,
+    "reference_verifier_job_id": 111138307884,
+    "standard_public_runner_limits": {
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 14000,
+      "job_seconds": 21600
+    },
+    "full_declared_envelope_compatible_tasks": 0,
+    "storage_feasible_tasks": 57,
+    "storage_infeasible_tasks": 13,
+    "feasible_slot_upper_bound": 171,
+    "minimum_feasible_slot_success_rate_for_124": 0.7251461988304093,
+    "note": "FULL_DECLARED_TIMEOUT_ENVELOPE_EXCEEDS_STANDARD_PUBLIC_JOB_LIMIT_FOR_ALL_TASKS__SUCCESS_UNDER_ANY_STRICTER_TIMEOUT_IS_STILL_POSITIVE_EXACT_SCORER_EVIDENCE__FAILURES_COUNT_ZERO"
+  },
+  "task_metadata": [
+    {
+      "name": "terminal-bench-science/genomic-model-ranking",
+      "digest": "sha256:214a7fbf37e1c99e1300856d4bcea1a56c3bd8ff298981f3c47f50998d7e17e5",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 2048,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 29520,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/mri-harmonization",
+      "digest": "sha256:8c5f397f05c402ad96621293313d645ace82bfb4a24865109337d39f04cb5dc4",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 4096,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 29700,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/navigation-sensor-calibration",
+      "digest": "sha256:0e559f50518c6bb5cf0a37e163dceecb61efc83fe151aada66b71554f5dfc8b0",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 4096,
+      "gpus": 0,
+      "build_timeout_sec": 300,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 700,
+      "declared_max_job_seconds": 29800,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/baseline-free-localization",
+      "digest": "sha256:f35349bcb083094b096a2400d9e98e55690b35f26e2b395796364ad109e91d57",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 4096,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 30000,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/virtual-baseline-localization",
+      "digest": "sha256:18e64cb62b351e3861e1995bdc3ba08bba37f0ae3e645ee4b250714b6f0c00ee",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 4096,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 30000,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/koopman-mfg-id",
+      "digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f",
+      "cpus": 4,
+      "memory_mb": 12288,
+      "storage_mb": 4096,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 30300,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/reactor-safety-control",
+      "digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 4096,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 2400,
+      "declared_max_job_seconds": 32100,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/linked-cell-suppression",
+      "digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 4096,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 12000,
+      "declared_max_job_seconds": 41400,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/neo-orbit-determination",
+      "digest": "sha256:b0038fd39395b57f2036b2c0271f37b508e1250fc97d12c899590b61e997cada",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 5120,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 29520,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/rdkit-ic-constraints",
+      "digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f",
+      "cpus": 4,
+      "memory_mb": 4096,
+      "storage_mb": 5120,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 5400,
+      "declared_max_job_seconds": 34800,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/supraglacial-lake-classification",
+      "digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 6144,
+      "gpus": 0,
+      "build_timeout_sec": 3600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 32520,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/clinical-metadata-recovery",
+      "digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 29520,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/dapi-he-alignment",
+      "digest": "sha256:a4291c3f09b0fc2a1c8713129d3afd1b46929482f6c03df630c25814b53b755e",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 29520,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/inverse-lithography",
+      "digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530",
+      "cpus": 1,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 29520,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/protein-active-learning",
+      "digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 29520,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/sparse-network-assimilation",
+      "digest": "sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 29520,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/variable-star-vetting",
+      "digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67",
+      "cpus": 2,
+      "memory_mb": 2048,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 29520,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/longitudinal-clinical-agent",
+      "digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+      "cpus": 1,
+      "memory_mb": 2048,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 180,
+      "declared_max_job_seconds": 29580,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/diag-chipseq",
+      "digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 29700,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/hysteretic-aquifer-control",
+      "digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 29700,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/ode-law-discovery",
+      "digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 29700,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/rv-astrometry-fitting",
+      "digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+      "cpus": 4,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 360,
+      "declared_max_job_seconds": 29760,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/dna-storage-codec",
+      "digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+      "cpus": 1,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 420,
+      "declared_max_job_seconds": 29820,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/inelastic-constitutive-discovery",
+      "digest": "sha256:15d263523a164a8eba4247f5fc213771e6683e889a5e14da9645874d417cd55f",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 29820,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/mendota-ice-phenology",
+      "digest": "sha256:4cbc2fee1983383051c4769b03d8d3282349d1f2f7861f275c9594dea9db0501",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 29820,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/energy-routing",
+      "digest": "sha256:3a72c6a2427fa952eb51cdd44a03ed8becb35f692d7dac1e2da9a449723c7ced",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 180,
+      "declared_max_job_seconds": 29880,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/eeg-erp-recovery",
+      "digest": "sha256:491561942081ad3c9e4769bca4e98a2eaafcb5fa7a8809ea2064c7570505dc58",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 240,
+      "declared_max_job_seconds": 29940,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/geometric-pharmacophore-alignment",
+      "digest": "sha256:fa7bed4c7830b856c996f61831e5b1cc5cecbe8a0cb683a8c78866d5e1107cd2",
+      "cpus": 4,
+      "memory_mb": 2048,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 30000,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/microarch-modeling",
+      "digest": "sha256:356fc64e3430d6322cd1dcefa6c827b8db7719fe9a5a7ef0bd8c0028f6398983",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 30000,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/symbolic-regression",
+      "digest": "sha256:eef0140e2832db2c03f9062913da924caa4edff519bd995571540c1eb38de235",
+      "cpus": 1,
+      "memory_mb": 2048,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 30000,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/ankle-mri-findings",
+      "digest": "sha256:7bd51ef29342811693043f200babc9f09c8ff2b6faa3b4c7688ca2d535d3e176",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1200,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 30120,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/duan-thesis",
+      "digest": "sha256:332e73bb5d534bfd698d4f0772dde3719bf60309f4062ebe90441f3e6e7b36a7",
+      "cpus": 1,
+      "memory_mb": 2048,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1000,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 500,
+      "declared_max_job_seconds": 30300,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/foraging-cognitive-model",
+      "digest": "sha256:2a1abd12a6bb69c17f5af312b88f3029de3fcd9ba366808d1335a15ba458cef1",
+      "cpus": 4,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 30300,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/si-fracture-fbc",
+      "digest": "sha256:f6a0922de395d4495d566a45fbf7211d7378fcd1b9d011441d96e06917f70bcb",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1200,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 30300,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/ont-tn-qc",
+      "digest": "sha256:dacfd350b20fd61f197a3acc4c4e1604b38cd60d298d5f81d7563420607e7da9",
+      "cpus": 4,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1200,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 30600,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/frustrated-heisenberg-nqs",
+      "digest": "sha256:c3ebfdfec825351a185dfc7cd54d3e0fbee022db447a7926b4695c7214a61a49",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1200,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 900,
+      "declared_max_job_seconds": 30900,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/nanoindentation-property-extraction",
+      "digest": "sha256:43ece969b97a5c858183b722574150c411022927756f1b25e4bf72d8b8287989",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1800,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 30900,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/tess-transit-vetting",
+      "digest": "sha256:431eaa15ddb3c872e38db23b6d0605d6ab05cea04ab4a81f5d92db767da50f70",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 1200,
+      "declared_max_job_seconds": 30900,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/xrd-multiphase-qpa",
+      "digest": "sha256:61e0ae760254b065856db374b6bbe071834801902043c7b984cf61298e0565dc",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1800,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 30900,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/guided-wave-localization",
+      "digest": "sha256:89881ce57c1db56f03c817382f84cefd7b938c46e593b90a50c0424a4a77d38d",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 1800,
+      "declared_max_job_seconds": 31200,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/masked-spherical-remap",
+      "digest": "sha256:5cf09acc7262754001f2da0d7b8f16bf3d363c14915c9b5e92b707115f4a0944",
+      "cpus": 2,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 1800,
+      "declared_max_job_seconds": 31200,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/spin-glass-groundstate",
+      "digest": "sha256:96373c8f043745cfe27f9eabdd17f28095a8b5297d48433d835650e868e78e72",
+      "cpus": 4,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1800,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 31200,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/traffic-flux-inversion",
+      "digest": "sha256:9003d54b9842f1b976b27dfe992a564252f6fe30f3aa44c5385db6cca1885ce0",
+      "cpus": 2,
+      "memory_mb": 2048,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 1800,
+      "declared_max_job_seconds": 31200,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/stacking-disorder-diffraction",
+      "digest": "sha256:43e38f956a3b74f0e51885a5202bf7cb81c3409b5d84406b296884b9a0199265",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 2400,
+      "declared_max_job_seconds": 31800,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/regularized-game-proof",
+      "digest": "sha256:34b246d10cf3ae74cca5a75e5930b1890625de0480236e49abef125068f1bd12",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1800,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 1800,
+      "declared_max_job_seconds": 32400,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/tumor-immune-interface",
+      "digest": "sha256:0f8604b05bf7267dff257f68a4e9c9968fe6923ef965518df909dd6d2360f219",
+      "cpus": 2,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 3000,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 32400,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/rolling-shutter-oma",
+      "digest": "sha256:f98baab61e0c96ee4772af688f89c255e0e9b477021225b715b8a5a6c7d01fac",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 3600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 32520,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/inverse-waveguide-shape",
+      "digest": "sha256:2e798c88bc50bce23fead7e9ea6550a384a3735e0af2fe7674e704df449c8260",
+      "cpus": 1,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 3600,
+      "declared_max_job_seconds": 33000,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/localized-sspd-solver",
+      "digest": "sha256:9b33184a3cb5951c6c10b38f3ae99c9687db46f381961ce3c257a21b960ebde9",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 3600,
+      "declared_max_job_seconds": 33300,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/certified-sparse-regression",
+      "digest": "sha256:719c1b13dfb99a043ea21c9eec60d83daefdb2781b642b7dea93616d99665886",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1200,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 3600,
+      "declared_max_job_seconds": 33600,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/noisy-blackbox-optimization",
+      "digest": "sha256:ac2182cfa5ce9b2fbe6bc6d1b1c0a25b77b0da2187e457fe104aa212c9d1e954",
+      "cpus": 4,
+      "memory_mb": 4096,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1200,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 3600,
+      "declared_max_job_seconds": 33600,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/highdim-mediation-debiasing",
+      "digest": "sha256:9bdbaa358a1c2e93415a66158d4e4a92eabec8f4d48d143ff95459b01afe5f87",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1200,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 4800,
+      "declared_max_job_seconds": 34800,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/tamp-skill-planning",
+      "digest": "sha256:012ff3c48d654d5b3414dcd2cfc1804303e10ff1e13793a2e0bdd38762e384a5",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1800,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 5400,
+      "declared_max_job_seconds": 36000,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/small-area-equivalence",
+      "digest": "sha256:fdbf952fcc0b32a512a59f03c347b97ef6dea6694095dc7c191c37593f5a7d9e",
+      "cpus": 2,
+      "memory_mb": 8192,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 7200,
+      "declared_max_job_seconds": 36600,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/hbv-calibration-1",
+      "digest": "sha256:2682710a3229c546c18fb4f0132410c2d8a8813618be05560266ff6c2e1b9eb7",
+      "cpus": 4,
+      "memory_mb": 2048,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 1000,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 7200,
+      "declared_max_job_seconds": 37000,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/qsm-reconstruction",
+      "digest": "sha256:b5fc66e0544866280a287b75087777567cff2ca4f89c2fb5ff7970e02cf4e225",
+      "cpus": 4,
+      "memory_mb": 2048,
+      "storage_mb": 10240,
+      "gpus": 0,
+      "build_timeout_sec": 6000,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 6000,
+      "declared_max_job_seconds": 40800,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/ambient-rna-correction",
+      "digest": "sha256:e1840cb89f6213c61b1ac74884ed382194f8b0b05b5d0768ff4e7620763331cd",
+      "cpus": 4,
+      "memory_mb": 12288,
+      "storage_mb": 12288,
+      "gpus": 0,
+      "build_timeout_sec": 2400,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 31800,
+      "standard_public_storage_feasible": true,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/spatial-cell-annotation",
+      "digest": "sha256:f1e80120379ae53358526c61b798b09cc1601e996c70f35e8a230a28f57962b0",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 15360,
+      "gpus": 0,
+      "build_timeout_sec": 6000,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 35100,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/cilia-segmentation",
+      "digest": "sha256:d61b3c0f6df6596fef2596edcb7883948a03740c5d9d4ea81b3c4de74613e5cc",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 16384,
+      "gpus": 0,
+      "build_timeout_sec": 1200,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 30300,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/amr-poisson-optimize",
+      "digest": "sha256:fd1639a9333784522961ee9efc18bb2b6f0e7f0830e3d131780b036d2848c2e1",
+      "cpus": 4,
+      "memory_mb": 4096,
+      "storage_mb": 16384,
+      "gpus": 0,
+      "build_timeout_sec": 900,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 3600,
+      "declared_max_job_seconds": 33300,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/cmb-cross-inference",
+      "digest": "sha256:855f6ef3034aa3900525329516be1733e06e0363bb51796d26d326a2ce2cd4d0",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 16384,
+      "gpus": 0,
+      "build_timeout_sec": 3600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 1800,
+      "declared_max_job_seconds": 34200,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/3x2pt-inference",
+      "digest": "sha256:ac4d76da52625a15fe2be39620e45b1cf14857abab69bd70150c208b52ec16e9",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 20480,
+      "gpus": 0,
+      "build_timeout_sec": 600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 30000,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/betalactam-multimodal-transfer",
+      "digest": "sha256:fbc19b1d725da785ebfe798eea113654b6f252819727b1aceb54a30f00a0b228",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 20480,
+      "gpus": 0,
+      "build_timeout_sec": 1800,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 300,
+      "declared_max_job_seconds": 30900,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/finite-free-stam",
+      "digest": "sha256:27880ab19d400debb58ba3f2959e294450f69ad92ee69c5724b78168c18bdc2f",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 20480,
+      "gpus": 0,
+      "build_timeout_sec": 1800,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 31200,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/cell-lineage-reconstruction",
+      "digest": "sha256:1776c430c243a6be3877e3a57688af327727c9795da07efb965b5d6961f620fa",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 20480,
+      "gpus": 0,
+      "build_timeout_sec": 2400,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 31800,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/leaky-bloch-meep",
+      "digest": "sha256:a8f11e46c67ab81c62e475d016f8864585fe6f394fb7101ec7147791edbb8593",
+      "cpus": 4,
+      "memory_mb": 15360,
+      "storage_mb": 20480,
+      "gpus": 0,
+      "build_timeout_sec": 1800,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 10800,
+      "declared_max_job_seconds": 41400,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/stereo-dem-icesat2",
+      "digest": "sha256:323ef2f958383d240910eb08f02e7bc5720462d568d8d0a3a976afa6ad2e29b3",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 30720,
+      "gpus": 0,
+      "build_timeout_sec": 3600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 33000,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/gen-turan-paths",
+      "digest": "sha256:cf650bffd15e1ff99f69a5ba032f55451a1e4637924717f162347ae67cfd9c60",
+      "cpus": 4,
+      "memory_mb": 8192,
+      "storage_mb": 32768,
+      "gpus": 0,
+      "build_timeout_sec": 3600,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 600,
+      "declared_max_job_seconds": 33000,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/animal-reid",
+      "digest": "sha256:1804428d3dcc07ada7ce08bed7c2bfe921b6516a97488168a05824a2fd7eb2ee",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 32768,
+      "gpus": 0,
+      "build_timeout_sec": 7200,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 120,
+      "declared_max_job_seconds": 36120,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    },
+    {
+      "name": "terminal-bench-science/onsager-ising-lean",
+      "digest": "sha256:a72b7713688b757f6bea6e47448d894f6ddc1491aa5c8ed7a904fef9b6e46882",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 51200,
+      "gpus": 0,
+      "build_timeout_sec": 1800,
+      "agent_timeout_sec": 28800,
+      "verifier_timeout_sec": 4200,
+      "declared_max_job_seconds": 34800,
+      "standard_public_storage_feasible": false,
+      "full_declared_envelope_public_runner_compatible": false,
+      "public_runner_incompatibility_reasons": [
+        "STORAGE_GT_14GB",
+        "DECLARED_JOB_ENVELOPE_GT_6H"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "slot_id": "terminal-bench-science/genomic-model-ranking::trial-0",
+      "schedule_order": 0,
+      "attempt_index": 0,
+      "task_rank": 0,
+      "task_name": "terminal-bench-science/genomic-model-ranking",
+      "task_digest": "sha256:214a7fbf37e1c99e1300856d4bcea1a56c3bd8ff298981f3c47f50998d7e17e5",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/mri-harmonization::trial-0",
+      "schedule_order": 1,
+      "attempt_index": 0,
+      "task_rank": 1,
+      "task_name": "terminal-bench-science/mri-harmonization",
+      "task_digest": "sha256:8c5f397f05c402ad96621293313d645ace82bfb4a24865109337d39f04cb5dc4",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "schedule_order": 2,
+      "attempt_index": 0,
+      "task_rank": 2,
+      "task_name": "terminal-bench-science/navigation-sensor-calibration",
+      "task_digest": "sha256:0e559f50518c6bb5cf0a37e163dceecb61efc83fe151aada66b71554f5dfc8b0",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/baseline-free-localization::trial-0",
+      "schedule_order": 3,
+      "attempt_index": 0,
+      "task_rank": 3,
+      "task_name": "terminal-bench-science/baseline-free-localization",
+      "task_digest": "sha256:f35349bcb083094b096a2400d9e98e55690b35f26e2b395796364ad109e91d57",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "schedule_order": 4,
+      "attempt_index": 0,
+      "task_rank": 4,
+      "task_name": "terminal-bench-science/virtual-baseline-localization",
+      "task_digest": "sha256:18e64cb62b351e3861e1995bdc3ba08bba37f0ae3e645ee4b250714b6f0c00ee",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/koopman-mfg-id::trial-0",
+      "schedule_order": 5,
+      "attempt_index": 0,
+      "task_rank": 5,
+      "task_name": "terminal-bench-science/koopman-mfg-id",
+      "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/reactor-safety-control::trial-0",
+      "schedule_order": 6,
+      "attempt_index": 0,
+      "task_rank": 6,
+      "task_name": "terminal-bench-science/reactor-safety-control",
+      "task_digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/linked-cell-suppression::trial-0",
+      "schedule_order": 7,
+      "attempt_index": 0,
+      "task_rank": 7,
+      "task_name": "terminal-bench-science/linked-cell-suppression",
+      "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/neo-orbit-determination::trial-0",
+      "schedule_order": 8,
+      "attempt_index": 0,
+      "task_rank": 8,
+      "task_name": "terminal-bench-science/neo-orbit-determination",
+      "task_digest": "sha256:b0038fd39395b57f2036b2c0271f37b508e1250fc97d12c899590b61e997cada",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/rdkit-ic-constraints::trial-0",
+      "schedule_order": 9,
+      "attempt_index": 0,
+      "task_rank": 9,
+      "task_name": "terminal-bench-science/rdkit-ic-constraints",
+      "task_digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+      "schedule_order": 10,
+      "attempt_index": 0,
+      "task_rank": 10,
+      "task_name": "terminal-bench-science/supraglacial-lake-classification",
+      "task_digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+      "schedule_order": 11,
+      "attempt_index": 0,
+      "task_rank": 11,
+      "task_name": "terminal-bench-science/clinical-metadata-recovery",
+      "task_digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/dapi-he-alignment::trial-0",
+      "schedule_order": 12,
+      "attempt_index": 0,
+      "task_rank": 12,
+      "task_name": "terminal-bench-science/dapi-he-alignment",
+      "task_digest": "sha256:a4291c3f09b0fc2a1c8713129d3afd1b46929482f6c03df630c25814b53b755e",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/inverse-lithography::trial-0",
+      "schedule_order": 13,
+      "attempt_index": 0,
+      "task_rank": 13,
+      "task_name": "terminal-bench-science/inverse-lithography",
+      "task_digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/protein-active-learning::trial-0",
+      "schedule_order": 14,
+      "attempt_index": 0,
+      "task_rank": 14,
+      "task_name": "terminal-bench-science/protein-active-learning",
+      "task_digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/sparse-network-assimilation::trial-0",
+      "schedule_order": 15,
+      "attempt_index": 0,
+      "task_rank": 15,
+      "task_name": "terminal-bench-science/sparse-network-assimilation",
+      "task_digest": "sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/variable-star-vetting::trial-0",
+      "schedule_order": 16,
+      "attempt_index": 0,
+      "task_rank": 16,
+      "task_name": "terminal-bench-science/variable-star-vetting",
+      "task_digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+      "schedule_order": 17,
+      "attempt_index": 0,
+      "task_rank": 17,
+      "task_name": "terminal-bench-science/longitudinal-clinical-agent",
+      "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+      "schedule_order": 18,
+      "attempt_index": 0,
+      "task_rank": 18,
+      "task_name": "terminal-bench-science/diag-chipseq",
+      "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+      "schedule_order": 19,
+      "attempt_index": 0,
+      "task_rank": 19,
+      "task_name": "terminal-bench-science/hysteretic-aquifer-control",
+      "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+      "schedule_order": 20,
+      "attempt_index": 0,
+      "task_rank": 20,
+      "task_name": "terminal-bench-science/ode-law-discovery",
+      "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+      "schedule_order": 21,
+      "attempt_index": 0,
+      "task_rank": 21,
+      "task_name": "terminal-bench-science/rv-astrometry-fitting",
+      "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/dna-storage-codec::trial-0",
+      "schedule_order": 22,
+      "attempt_index": 0,
+      "task_rank": 22,
+      "task_name": "terminal-bench-science/dna-storage-codec",
+      "task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/inelastic-constitutive-discovery::trial-0",
+      "schedule_order": 23,
+      "attempt_index": 0,
+      "task_rank": 23,
+      "task_name": "terminal-bench-science/inelastic-constitutive-discovery",
+      "task_digest": "sha256:15d263523a164a8eba4247f5fc213771e6683e889a5e14da9645874d417cd55f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/mendota-ice-phenology::trial-0",
+      "schedule_order": 24,
+      "attempt_index": 0,
+      "task_rank": 24,
+      "task_name": "terminal-bench-science/mendota-ice-phenology",
+      "task_digest": "sha256:4cbc2fee1983383051c4769b03d8d3282349d1f2f7861f275c9594dea9db0501",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/energy-routing::trial-0",
+      "schedule_order": 25,
+      "attempt_index": 0,
+      "task_rank": 25,
+      "task_name": "terminal-bench-science/energy-routing",
+      "task_digest": "sha256:3a72c6a2427fa952eb51cdd44a03ed8becb35f692d7dac1e2da9a449723c7ced",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/eeg-erp-recovery::trial-0",
+      "schedule_order": 26,
+      "attempt_index": 0,
+      "task_rank": 26,
+      "task_name": "terminal-bench-science/eeg-erp-recovery",
+      "task_digest": "sha256:491561942081ad3c9e4769bca4e98a2eaafcb5fa7a8809ea2064c7570505dc58",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/geometric-pharmacophore-alignment::trial-0",
+      "schedule_order": 27,
+      "attempt_index": 0,
+      "task_rank": 27,
+      "task_name": "terminal-bench-science/geometric-pharmacophore-alignment",
+      "task_digest": "sha256:fa7bed4c7830b856c996f61831e5b1cc5cecbe8a0cb683a8c78866d5e1107cd2",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/microarch-modeling::trial-0",
+      "schedule_order": 28,
+      "attempt_index": 0,
+      "task_rank": 28,
+      "task_name": "terminal-bench-science/microarch-modeling",
+      "task_digest": "sha256:356fc64e3430d6322cd1dcefa6c827b8db7719fe9a5a7ef0bd8c0028f6398983",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/symbolic-regression::trial-0",
+      "schedule_order": 29,
+      "attempt_index": 0,
+      "task_rank": 29,
+      "task_name": "terminal-bench-science/symbolic-regression",
+      "task_digest": "sha256:eef0140e2832db2c03f9062913da924caa4edff519bd995571540c1eb38de235",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ankle-mri-findings::trial-0",
+      "schedule_order": 30,
+      "attempt_index": 0,
+      "task_rank": 30,
+      "task_name": "terminal-bench-science/ankle-mri-findings",
+      "task_digest": "sha256:7bd51ef29342811693043f200babc9f09c8ff2b6faa3b4c7688ca2d535d3e176",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/duan-thesis::trial-0",
+      "schedule_order": 31,
+      "attempt_index": 0,
+      "task_rank": 31,
+      "task_name": "terminal-bench-science/duan-thesis",
+      "task_digest": "sha256:332e73bb5d534bfd698d4f0772dde3719bf60309f4062ebe90441f3e6e7b36a7",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/foraging-cognitive-model::trial-0",
+      "schedule_order": 32,
+      "attempt_index": 0,
+      "task_rank": 32,
+      "task_name": "terminal-bench-science/foraging-cognitive-model",
+      "task_digest": "sha256:2a1abd12a6bb69c17f5af312b88f3029de3fcd9ba366808d1335a15ba458cef1",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/si-fracture-fbc::trial-0",
+      "schedule_order": 33,
+      "attempt_index": 0,
+      "task_rank": 33,
+      "task_name": "terminal-bench-science/si-fracture-fbc",
+      "task_digest": "sha256:f6a0922de395d4495d566a45fbf7211d7378fcd1b9d011441d96e06917f70bcb",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ont-tn-qc::trial-0",
+      "schedule_order": 34,
+      "attempt_index": 0,
+      "task_rank": 34,
+      "task_name": "terminal-bench-science/ont-tn-qc",
+      "task_digest": "sha256:dacfd350b20fd61f197a3acc4c4e1604b38cd60d298d5f81d7563420607e7da9",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/frustrated-heisenberg-nqs::trial-0",
+      "schedule_order": 35,
+      "attempt_index": 0,
+      "task_rank": 35,
+      "task_name": "terminal-bench-science/frustrated-heisenberg-nqs",
+      "task_digest": "sha256:c3ebfdfec825351a185dfc7cd54d3e0fbee022db447a7926b4695c7214a61a49",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/nanoindentation-property-extraction::trial-0",
+      "schedule_order": 36,
+      "attempt_index": 0,
+      "task_rank": 36,
+      "task_name": "terminal-bench-science/nanoindentation-property-extraction",
+      "task_digest": "sha256:43ece969b97a5c858183b722574150c411022927756f1b25e4bf72d8b8287989",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/tess-transit-vetting::trial-0",
+      "schedule_order": 37,
+      "attempt_index": 0,
+      "task_rank": 37,
+      "task_name": "terminal-bench-science/tess-transit-vetting",
+      "task_digest": "sha256:431eaa15ddb3c872e38db23b6d0605d6ab05cea04ab4a81f5d92db767da50f70",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/xrd-multiphase-qpa::trial-0",
+      "schedule_order": 38,
+      "attempt_index": 0,
+      "task_rank": 38,
+      "task_name": "terminal-bench-science/xrd-multiphase-qpa",
+      "task_digest": "sha256:61e0ae760254b065856db374b6bbe071834801902043c7b984cf61298e0565dc",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/guided-wave-localization::trial-0",
+      "schedule_order": 39,
+      "attempt_index": 0,
+      "task_rank": 39,
+      "task_name": "terminal-bench-science/guided-wave-localization",
+      "task_digest": "sha256:89881ce57c1db56f03c817382f84cefd7b938c46e593b90a50c0424a4a77d38d",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/masked-spherical-remap::trial-0",
+      "schedule_order": 40,
+      "attempt_index": 0,
+      "task_rank": 40,
+      "task_name": "terminal-bench-science/masked-spherical-remap",
+      "task_digest": "sha256:5cf09acc7262754001f2da0d7b8f16bf3d363c14915c9b5e92b707115f4a0944",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/spin-glass-groundstate::trial-0",
+      "schedule_order": 41,
+      "attempt_index": 0,
+      "task_rank": 41,
+      "task_name": "terminal-bench-science/spin-glass-groundstate",
+      "task_digest": "sha256:96373c8f043745cfe27f9eabdd17f28095a8b5297d48433d835650e868e78e72",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/traffic-flux-inversion::trial-0",
+      "schedule_order": 42,
+      "attempt_index": 0,
+      "task_rank": 42,
+      "task_name": "terminal-bench-science/traffic-flux-inversion",
+      "task_digest": "sha256:9003d54b9842f1b976b27dfe992a564252f6fe30f3aa44c5385db6cca1885ce0",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/stacking-disorder-diffraction::trial-0",
+      "schedule_order": 43,
+      "attempt_index": 0,
+      "task_rank": 43,
+      "task_name": "terminal-bench-science/stacking-disorder-diffraction",
+      "task_digest": "sha256:43e38f956a3b74f0e51885a5202bf7cb81c3409b5d84406b296884b9a0199265",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/regularized-game-proof::trial-0",
+      "schedule_order": 44,
+      "attempt_index": 0,
+      "task_rank": 44,
+      "task_name": "terminal-bench-science/regularized-game-proof",
+      "task_digest": "sha256:34b246d10cf3ae74cca5a75e5930b1890625de0480236e49abef125068f1bd12",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/tumor-immune-interface::trial-0",
+      "schedule_order": 45,
+      "attempt_index": 0,
+      "task_rank": 45,
+      "task_name": "terminal-bench-science/tumor-immune-interface",
+      "task_digest": "sha256:0f8604b05bf7267dff257f68a4e9c9968fe6923ef965518df909dd6d2360f219",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/rolling-shutter-oma::trial-0",
+      "schedule_order": 46,
+      "attempt_index": 0,
+      "task_rank": 46,
+      "task_name": "terminal-bench-science/rolling-shutter-oma",
+      "task_digest": "sha256:f98baab61e0c96ee4772af688f89c255e0e9b477021225b715b8a5a6c7d01fac",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/inverse-waveguide-shape::trial-0",
+      "schedule_order": 47,
+      "attempt_index": 0,
+      "task_rank": 47,
+      "task_name": "terminal-bench-science/inverse-waveguide-shape",
+      "task_digest": "sha256:2e798c88bc50bce23fead7e9ea6550a384a3735e0af2fe7674e704df449c8260",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/localized-sspd-solver::trial-0",
+      "schedule_order": 48,
+      "attempt_index": 0,
+      "task_rank": 48,
+      "task_name": "terminal-bench-science/localized-sspd-solver",
+      "task_digest": "sha256:9b33184a3cb5951c6c10b38f3ae99c9687db46f381961ce3c257a21b960ebde9",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/certified-sparse-regression::trial-0",
+      "schedule_order": 49,
+      "attempt_index": 0,
+      "task_rank": 49,
+      "task_name": "terminal-bench-science/certified-sparse-regression",
+      "task_digest": "sha256:719c1b13dfb99a043ea21c9eec60d83daefdb2781b642b7dea93616d99665886",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/noisy-blackbox-optimization::trial-0",
+      "schedule_order": 50,
+      "attempt_index": 0,
+      "task_rank": 50,
+      "task_name": "terminal-bench-science/noisy-blackbox-optimization",
+      "task_digest": "sha256:ac2182cfa5ce9b2fbe6bc6d1b1c0a25b77b0da2187e457fe104aa212c9d1e954",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/highdim-mediation-debiasing::trial-0",
+      "schedule_order": 51,
+      "attempt_index": 0,
+      "task_rank": 51,
+      "task_name": "terminal-bench-science/highdim-mediation-debiasing",
+      "task_digest": "sha256:9bdbaa358a1c2e93415a66158d4e4a92eabec8f4d48d143ff95459b01afe5f87",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/tamp-skill-planning::trial-0",
+      "schedule_order": 52,
+      "attempt_index": 0,
+      "task_rank": 52,
+      "task_name": "terminal-bench-science/tamp-skill-planning",
+      "task_digest": "sha256:012ff3c48d654d5b3414dcd2cfc1804303e10ff1e13793a2e0bdd38762e384a5",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/small-area-equivalence::trial-0",
+      "schedule_order": 53,
+      "attempt_index": 0,
+      "task_rank": 53,
+      "task_name": "terminal-bench-science/small-area-equivalence",
+      "task_digest": "sha256:fdbf952fcc0b32a512a59f03c347b97ef6dea6694095dc7c191c37593f5a7d9e",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/hbv-calibration-1::trial-0",
+      "schedule_order": 54,
+      "attempt_index": 0,
+      "task_rank": 54,
+      "task_name": "terminal-bench-science/hbv-calibration-1",
+      "task_digest": "sha256:2682710a3229c546c18fb4f0132410c2d8a8813618be05560266ff6c2e1b9eb7",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/qsm-reconstruction::trial-0",
+      "schedule_order": 55,
+      "attempt_index": 0,
+      "task_rank": 55,
+      "task_name": "terminal-bench-science/qsm-reconstruction",
+      "task_digest": "sha256:b5fc66e0544866280a287b75087777567cff2ca4f89c2fb5ff7970e02cf4e225",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ambient-rna-correction::trial-0",
+      "schedule_order": 56,
+      "attempt_index": 0,
+      "task_rank": 56,
+      "task_name": "terminal-bench-science/ambient-rna-correction",
+      "task_digest": "sha256:e1840cb89f6213c61b1ac74884ed382194f8b0b05b5d0768ff4e7620763331cd",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/spatial-cell-annotation::trial-0",
+      "schedule_order": 57,
+      "attempt_index": 0,
+      "task_rank": 57,
+      "task_name": "terminal-bench-science/spatial-cell-annotation",
+      "task_digest": "sha256:f1e80120379ae53358526c61b798b09cc1601e996c70f35e8a230a28f57962b0",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/cilia-segmentation::trial-0",
+      "schedule_order": 58,
+      "attempt_index": 0,
+      "task_rank": 58,
+      "task_name": "terminal-bench-science/cilia-segmentation",
+      "task_digest": "sha256:d61b3c0f6df6596fef2596edcb7883948a03740c5d9d4ea81b3c4de74613e5cc",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/amr-poisson-optimize::trial-0",
+      "schedule_order": 59,
+      "attempt_index": 0,
+      "task_rank": 59,
+      "task_name": "terminal-bench-science/amr-poisson-optimize",
+      "task_digest": "sha256:fd1639a9333784522961ee9efc18bb2b6f0e7f0830e3d131780b036d2848c2e1",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/cmb-cross-inference::trial-0",
+      "schedule_order": 60,
+      "attempt_index": 0,
+      "task_rank": 60,
+      "task_name": "terminal-bench-science/cmb-cross-inference",
+      "task_digest": "sha256:855f6ef3034aa3900525329516be1733e06e0363bb51796d26d326a2ce2cd4d0",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/3x2pt-inference::trial-0",
+      "schedule_order": 61,
+      "attempt_index": 0,
+      "task_rank": 61,
+      "task_name": "terminal-bench-science/3x2pt-inference",
+      "task_digest": "sha256:ac4d76da52625a15fe2be39620e45b1cf14857abab69bd70150c208b52ec16e9",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/betalactam-multimodal-transfer::trial-0",
+      "schedule_order": 62,
+      "attempt_index": 0,
+      "task_rank": 62,
+      "task_name": "terminal-bench-science/betalactam-multimodal-transfer",
+      "task_digest": "sha256:fbc19b1d725da785ebfe798eea113654b6f252819727b1aceb54a30f00a0b228",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/finite-free-stam::trial-0",
+      "schedule_order": 63,
+      "attempt_index": 0,
+      "task_rank": 63,
+      "task_name": "terminal-bench-science/finite-free-stam",
+      "task_digest": "sha256:27880ab19d400debb58ba3f2959e294450f69ad92ee69c5724b78168c18bdc2f",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/cell-lineage-reconstruction::trial-0",
+      "schedule_order": 64,
+      "attempt_index": 0,
+      "task_rank": 64,
+      "task_name": "terminal-bench-science/cell-lineage-reconstruction",
+      "task_digest": "sha256:1776c430c243a6be3877e3a57688af327727c9795da07efb965b5d6961f620fa",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/leaky-bloch-meep::trial-0",
+      "schedule_order": 65,
+      "attempt_index": 0,
+      "task_rank": 65,
+      "task_name": "terminal-bench-science/leaky-bloch-meep",
+      "task_digest": "sha256:a8f11e46c67ab81c62e475d016f8864585fe6f394fb7101ec7147791edbb8593",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/stereo-dem-icesat2::trial-0",
+      "schedule_order": 66,
+      "attempt_index": 0,
+      "task_rank": 66,
+      "task_name": "terminal-bench-science/stereo-dem-icesat2",
+      "task_digest": "sha256:323ef2f958383d240910eb08f02e7bc5720462d568d8d0a3a976afa6ad2e29b3",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/gen-turan-paths::trial-0",
+      "schedule_order": 67,
+      "attempt_index": 0,
+      "task_rank": 67,
+      "task_name": "terminal-bench-science/gen-turan-paths",
+      "task_digest": "sha256:cf650bffd15e1ff99f69a5ba032f55451a1e4637924717f162347ae67cfd9c60",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/animal-reid::trial-0",
+      "schedule_order": 68,
+      "attempt_index": 0,
+      "task_rank": 68,
+      "task_name": "terminal-bench-science/animal-reid",
+      "task_digest": "sha256:1804428d3dcc07ada7ce08bed7c2bfe921b6516a97488168a05824a2fd7eb2ee",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/onsager-ising-lean::trial-0",
+      "schedule_order": 69,
+      "attempt_index": 0,
+      "task_rank": 69,
+      "task_name": "terminal-bench-science/onsager-ising-lean",
+      "task_digest": "sha256:a72b7713688b757f6bea6e47448d894f6ddc1491aa5c8ed7a904fef9b6e46882",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/genomic-model-ranking::trial-1",
+      "schedule_order": 70,
+      "attempt_index": 1,
+      "task_rank": 0,
+      "task_name": "terminal-bench-science/genomic-model-ranking",
+      "task_digest": "sha256:214a7fbf37e1c99e1300856d4bcea1a56c3bd8ff298981f3c47f50998d7e17e5",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/mri-harmonization::trial-1",
+      "schedule_order": 71,
+      "attempt_index": 1,
+      "task_rank": 1,
+      "task_name": "terminal-bench-science/mri-harmonization",
+      "task_digest": "sha256:8c5f397f05c402ad96621293313d645ace82bfb4a24865109337d39f04cb5dc4",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/navigation-sensor-calibration::trial-1",
+      "schedule_order": 72,
+      "attempt_index": 1,
+      "task_rank": 2,
+      "task_name": "terminal-bench-science/navigation-sensor-calibration",
+      "task_digest": "sha256:0e559f50518c6bb5cf0a37e163dceecb61efc83fe151aada66b71554f5dfc8b0",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/baseline-free-localization::trial-1",
+      "schedule_order": 73,
+      "attempt_index": 1,
+      "task_rank": 3,
+      "task_name": "terminal-bench-science/baseline-free-localization",
+      "task_digest": "sha256:f35349bcb083094b096a2400d9e98e55690b35f26e2b395796364ad109e91d57",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/virtual-baseline-localization::trial-1",
+      "schedule_order": 74,
+      "attempt_index": 1,
+      "task_rank": 4,
+      "task_name": "terminal-bench-science/virtual-baseline-localization",
+      "task_digest": "sha256:18e64cb62b351e3861e1995bdc3ba08bba37f0ae3e645ee4b250714b6f0c00ee",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/koopman-mfg-id::trial-1",
+      "schedule_order": 75,
+      "attempt_index": 1,
+      "task_rank": 5,
+      "task_name": "terminal-bench-science/koopman-mfg-id",
+      "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/reactor-safety-control::trial-1",
+      "schedule_order": 76,
+      "attempt_index": 1,
+      "task_rank": 6,
+      "task_name": "terminal-bench-science/reactor-safety-control",
+      "task_digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/linked-cell-suppression::trial-1",
+      "schedule_order": 77,
+      "attempt_index": 1,
+      "task_rank": 7,
+      "task_name": "terminal-bench-science/linked-cell-suppression",
+      "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/neo-orbit-determination::trial-1",
+      "schedule_order": 78,
+      "attempt_index": 1,
+      "task_rank": 8,
+      "task_name": "terminal-bench-science/neo-orbit-determination",
+      "task_digest": "sha256:b0038fd39395b57f2036b2c0271f37b508e1250fc97d12c899590b61e997cada",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/rdkit-ic-constraints::trial-1",
+      "schedule_order": 79,
+      "attempt_index": 1,
+      "task_rank": 9,
+      "task_name": "terminal-bench-science/rdkit-ic-constraints",
+      "task_digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/supraglacial-lake-classification::trial-1",
+      "schedule_order": 80,
+      "attempt_index": 1,
+      "task_rank": 10,
+      "task_name": "terminal-bench-science/supraglacial-lake-classification",
+      "task_digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/clinical-metadata-recovery::trial-1",
+      "schedule_order": 81,
+      "attempt_index": 1,
+      "task_rank": 11,
+      "task_name": "terminal-bench-science/clinical-metadata-recovery",
+      "task_digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/dapi-he-alignment::trial-1",
+      "schedule_order": 82,
+      "attempt_index": 1,
+      "task_rank": 12,
+      "task_name": "terminal-bench-science/dapi-he-alignment",
+      "task_digest": "sha256:a4291c3f09b0fc2a1c8713129d3afd1b46929482f6c03df630c25814b53b755e",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/inverse-lithography::trial-1",
+      "schedule_order": 83,
+      "attempt_index": 1,
+      "task_rank": 13,
+      "task_name": "terminal-bench-science/inverse-lithography",
+      "task_digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/protein-active-learning::trial-1",
+      "schedule_order": 84,
+      "attempt_index": 1,
+      "task_rank": 14,
+      "task_name": "terminal-bench-science/protein-active-learning",
+      "task_digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/sparse-network-assimilation::trial-1",
+      "schedule_order": 85,
+      "attempt_index": 1,
+      "task_rank": 15,
+      "task_name": "terminal-bench-science/sparse-network-assimilation",
+      "task_digest": "sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/variable-star-vetting::trial-1",
+      "schedule_order": 86,
+      "attempt_index": 1,
+      "task_rank": 16,
+      "task_name": "terminal-bench-science/variable-star-vetting",
+      "task_digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-1",
+      "schedule_order": 87,
+      "attempt_index": 1,
+      "task_rank": 17,
+      "task_name": "terminal-bench-science/longitudinal-clinical-agent",
+      "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/diag-chipseq::trial-1",
+      "schedule_order": 88,
+      "attempt_index": 1,
+      "task_rank": 18,
+      "task_name": "terminal-bench-science/diag-chipseq",
+      "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-1",
+      "schedule_order": 89,
+      "attempt_index": 1,
+      "task_rank": 19,
+      "task_name": "terminal-bench-science/hysteretic-aquifer-control",
+      "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ode-law-discovery::trial-1",
+      "schedule_order": 90,
+      "attempt_index": 1,
+      "task_rank": 20,
+      "task_name": "terminal-bench-science/ode-law-discovery",
+      "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-1",
+      "schedule_order": 91,
+      "attempt_index": 1,
+      "task_rank": 21,
+      "task_name": "terminal-bench-science/rv-astrometry-fitting",
+      "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/dna-storage-codec::trial-1",
+      "schedule_order": 92,
+      "attempt_index": 1,
+      "task_rank": 22,
+      "task_name": "terminal-bench-science/dna-storage-codec",
+      "task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/inelastic-constitutive-discovery::trial-1",
+      "schedule_order": 93,
+      "attempt_index": 1,
+      "task_rank": 23,
+      "task_name": "terminal-bench-science/inelastic-constitutive-discovery",
+      "task_digest": "sha256:15d263523a164a8eba4247f5fc213771e6683e889a5e14da9645874d417cd55f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/mendota-ice-phenology::trial-1",
+      "schedule_order": 94,
+      "attempt_index": 1,
+      "task_rank": 24,
+      "task_name": "terminal-bench-science/mendota-ice-phenology",
+      "task_digest": "sha256:4cbc2fee1983383051c4769b03d8d3282349d1f2f7861f275c9594dea9db0501",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/energy-routing::trial-1",
+      "schedule_order": 95,
+      "attempt_index": 1,
+      "task_rank": 25,
+      "task_name": "terminal-bench-science/energy-routing",
+      "task_digest": "sha256:3a72c6a2427fa952eb51cdd44a03ed8becb35f692d7dac1e2da9a449723c7ced",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/eeg-erp-recovery::trial-1",
+      "schedule_order": 96,
+      "attempt_index": 1,
+      "task_rank": 26,
+      "task_name": "terminal-bench-science/eeg-erp-recovery",
+      "task_digest": "sha256:491561942081ad3c9e4769bca4e98a2eaafcb5fa7a8809ea2064c7570505dc58",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/geometric-pharmacophore-alignment::trial-1",
+      "schedule_order": 97,
+      "attempt_index": 1,
+      "task_rank": 27,
+      "task_name": "terminal-bench-science/geometric-pharmacophore-alignment",
+      "task_digest": "sha256:fa7bed4c7830b856c996f61831e5b1cc5cecbe8a0cb683a8c78866d5e1107cd2",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/microarch-modeling::trial-1",
+      "schedule_order": 98,
+      "attempt_index": 1,
+      "task_rank": 28,
+      "task_name": "terminal-bench-science/microarch-modeling",
+      "task_digest": "sha256:356fc64e3430d6322cd1dcefa6c827b8db7719fe9a5a7ef0bd8c0028f6398983",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/symbolic-regression::trial-1",
+      "schedule_order": 99,
+      "attempt_index": 1,
+      "task_rank": 29,
+      "task_name": "terminal-bench-science/symbolic-regression",
+      "task_digest": "sha256:eef0140e2832db2c03f9062913da924caa4edff519bd995571540c1eb38de235",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ankle-mri-findings::trial-1",
+      "schedule_order": 100,
+      "attempt_index": 1,
+      "task_rank": 30,
+      "task_name": "terminal-bench-science/ankle-mri-findings",
+      "task_digest": "sha256:7bd51ef29342811693043f200babc9f09c8ff2b6faa3b4c7688ca2d535d3e176",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/duan-thesis::trial-1",
+      "schedule_order": 101,
+      "attempt_index": 1,
+      "task_rank": 31,
+      "task_name": "terminal-bench-science/duan-thesis",
+      "task_digest": "sha256:332e73bb5d534bfd698d4f0772dde3719bf60309f4062ebe90441f3e6e7b36a7",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/foraging-cognitive-model::trial-1",
+      "schedule_order": 102,
+      "attempt_index": 1,
+      "task_rank": 32,
+      "task_name": "terminal-bench-science/foraging-cognitive-model",
+      "task_digest": "sha256:2a1abd12a6bb69c17f5af312b88f3029de3fcd9ba366808d1335a15ba458cef1",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/si-fracture-fbc::trial-1",
+      "schedule_order": 103,
+      "attempt_index": 1,
+      "task_rank": 33,
+      "task_name": "terminal-bench-science/si-fracture-fbc",
+      "task_digest": "sha256:f6a0922de395d4495d566a45fbf7211d7378fcd1b9d011441d96e06917f70bcb",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ont-tn-qc::trial-1",
+      "schedule_order": 104,
+      "attempt_index": 1,
+      "task_rank": 34,
+      "task_name": "terminal-bench-science/ont-tn-qc",
+      "task_digest": "sha256:dacfd350b20fd61f197a3acc4c4e1604b38cd60d298d5f81d7563420607e7da9",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/frustrated-heisenberg-nqs::trial-1",
+      "schedule_order": 105,
+      "attempt_index": 1,
+      "task_rank": 35,
+      "task_name": "terminal-bench-science/frustrated-heisenberg-nqs",
+      "task_digest": "sha256:c3ebfdfec825351a185dfc7cd54d3e0fbee022db447a7926b4695c7214a61a49",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/nanoindentation-property-extraction::trial-1",
+      "schedule_order": 106,
+      "attempt_index": 1,
+      "task_rank": 36,
+      "task_name": "terminal-bench-science/nanoindentation-property-extraction",
+      "task_digest": "sha256:43ece969b97a5c858183b722574150c411022927756f1b25e4bf72d8b8287989",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/tess-transit-vetting::trial-1",
+      "schedule_order": 107,
+      "attempt_index": 1,
+      "task_rank": 37,
+      "task_name": "terminal-bench-science/tess-transit-vetting",
+      "task_digest": "sha256:431eaa15ddb3c872e38db23b6d0605d6ab05cea04ab4a81f5d92db767da50f70",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/xrd-multiphase-qpa::trial-1",
+      "schedule_order": 108,
+      "attempt_index": 1,
+      "task_rank": 38,
+      "task_name": "terminal-bench-science/xrd-multiphase-qpa",
+      "task_digest": "sha256:61e0ae760254b065856db374b6bbe071834801902043c7b984cf61298e0565dc",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/guided-wave-localization::trial-1",
+      "schedule_order": 109,
+      "attempt_index": 1,
+      "task_rank": 39,
+      "task_name": "terminal-bench-science/guided-wave-localization",
+      "task_digest": "sha256:89881ce57c1db56f03c817382f84cefd7b938c46e593b90a50c0424a4a77d38d",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/masked-spherical-remap::trial-1",
+      "schedule_order": 110,
+      "attempt_index": 1,
+      "task_rank": 40,
+      "task_name": "terminal-bench-science/masked-spherical-remap",
+      "task_digest": "sha256:5cf09acc7262754001f2da0d7b8f16bf3d363c14915c9b5e92b707115f4a0944",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/spin-glass-groundstate::trial-1",
+      "schedule_order": 111,
+      "attempt_index": 1,
+      "task_rank": 41,
+      "task_name": "terminal-bench-science/spin-glass-groundstate",
+      "task_digest": "sha256:96373c8f043745cfe27f9eabdd17f28095a8b5297d48433d835650e868e78e72",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/traffic-flux-inversion::trial-1",
+      "schedule_order": 112,
+      "attempt_index": 1,
+      "task_rank": 42,
+      "task_name": "terminal-bench-science/traffic-flux-inversion",
+      "task_digest": "sha256:9003d54b9842f1b976b27dfe992a564252f6fe30f3aa44c5385db6cca1885ce0",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/stacking-disorder-diffraction::trial-1",
+      "schedule_order": 113,
+      "attempt_index": 1,
+      "task_rank": 43,
+      "task_name": "terminal-bench-science/stacking-disorder-diffraction",
+      "task_digest": "sha256:43e38f956a3b74f0e51885a5202bf7cb81c3409b5d84406b296884b9a0199265",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/regularized-game-proof::trial-1",
+      "schedule_order": 114,
+      "attempt_index": 1,
+      "task_rank": 44,
+      "task_name": "terminal-bench-science/regularized-game-proof",
+      "task_digest": "sha256:34b246d10cf3ae74cca5a75e5930b1890625de0480236e49abef125068f1bd12",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/tumor-immune-interface::trial-1",
+      "schedule_order": 115,
+      "attempt_index": 1,
+      "task_rank": 45,
+      "task_name": "terminal-bench-science/tumor-immune-interface",
+      "task_digest": "sha256:0f8604b05bf7267dff257f68a4e9c9968fe6923ef965518df909dd6d2360f219",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/rolling-shutter-oma::trial-1",
+      "schedule_order": 116,
+      "attempt_index": 1,
+      "task_rank": 46,
+      "task_name": "terminal-bench-science/rolling-shutter-oma",
+      "task_digest": "sha256:f98baab61e0c96ee4772af688f89c255e0e9b477021225b715b8a5a6c7d01fac",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/inverse-waveguide-shape::trial-1",
+      "schedule_order": 117,
+      "attempt_index": 1,
+      "task_rank": 47,
+      "task_name": "terminal-bench-science/inverse-waveguide-shape",
+      "task_digest": "sha256:2e798c88bc50bce23fead7e9ea6550a384a3735e0af2fe7674e704df449c8260",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/localized-sspd-solver::trial-1",
+      "schedule_order": 118,
+      "attempt_index": 1,
+      "task_rank": 48,
+      "task_name": "terminal-bench-science/localized-sspd-solver",
+      "task_digest": "sha256:9b33184a3cb5951c6c10b38f3ae99c9687db46f381961ce3c257a21b960ebde9",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/certified-sparse-regression::trial-1",
+      "schedule_order": 119,
+      "attempt_index": 1,
+      "task_rank": 49,
+      "task_name": "terminal-bench-science/certified-sparse-regression",
+      "task_digest": "sha256:719c1b13dfb99a043ea21c9eec60d83daefdb2781b642b7dea93616d99665886",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/noisy-blackbox-optimization::trial-1",
+      "schedule_order": 120,
+      "attempt_index": 1,
+      "task_rank": 50,
+      "task_name": "terminal-bench-science/noisy-blackbox-optimization",
+      "task_digest": "sha256:ac2182cfa5ce9b2fbe6bc6d1b1c0a25b77b0da2187e457fe104aa212c9d1e954",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/highdim-mediation-debiasing::trial-1",
+      "schedule_order": 121,
+      "attempt_index": 1,
+      "task_rank": 51,
+      "task_name": "terminal-bench-science/highdim-mediation-debiasing",
+      "task_digest": "sha256:9bdbaa358a1c2e93415a66158d4e4a92eabec8f4d48d143ff95459b01afe5f87",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/tamp-skill-planning::trial-1",
+      "schedule_order": 122,
+      "attempt_index": 1,
+      "task_rank": 52,
+      "task_name": "terminal-bench-science/tamp-skill-planning",
+      "task_digest": "sha256:012ff3c48d654d5b3414dcd2cfc1804303e10ff1e13793a2e0bdd38762e384a5",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/small-area-equivalence::trial-1",
+      "schedule_order": 123,
+      "attempt_index": 1,
+      "task_rank": 53,
+      "task_name": "terminal-bench-science/small-area-equivalence",
+      "task_digest": "sha256:fdbf952fcc0b32a512a59f03c347b97ef6dea6694095dc7c191c37593f5a7d9e",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/hbv-calibration-1::trial-1",
+      "schedule_order": 124,
+      "attempt_index": 1,
+      "task_rank": 54,
+      "task_name": "terminal-bench-science/hbv-calibration-1",
+      "task_digest": "sha256:2682710a3229c546c18fb4f0132410c2d8a8813618be05560266ff6c2e1b9eb7",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/qsm-reconstruction::trial-1",
+      "schedule_order": 125,
+      "attempt_index": 1,
+      "task_rank": 55,
+      "task_name": "terminal-bench-science/qsm-reconstruction",
+      "task_digest": "sha256:b5fc66e0544866280a287b75087777567cff2ca4f89c2fb5ff7970e02cf4e225",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ambient-rna-correction::trial-1",
+      "schedule_order": 126,
+      "attempt_index": 1,
+      "task_rank": 56,
+      "task_name": "terminal-bench-science/ambient-rna-correction",
+      "task_digest": "sha256:e1840cb89f6213c61b1ac74884ed382194f8b0b05b5d0768ff4e7620763331cd",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/spatial-cell-annotation::trial-1",
+      "schedule_order": 127,
+      "attempt_index": 1,
+      "task_rank": 57,
+      "task_name": "terminal-bench-science/spatial-cell-annotation",
+      "task_digest": "sha256:f1e80120379ae53358526c61b798b09cc1601e996c70f35e8a230a28f57962b0",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/cilia-segmentation::trial-1",
+      "schedule_order": 128,
+      "attempt_index": 1,
+      "task_rank": 58,
+      "task_name": "terminal-bench-science/cilia-segmentation",
+      "task_digest": "sha256:d61b3c0f6df6596fef2596edcb7883948a03740c5d9d4ea81b3c4de74613e5cc",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/amr-poisson-optimize::trial-1",
+      "schedule_order": 129,
+      "attempt_index": 1,
+      "task_rank": 59,
+      "task_name": "terminal-bench-science/amr-poisson-optimize",
+      "task_digest": "sha256:fd1639a9333784522961ee9efc18bb2b6f0e7f0830e3d131780b036d2848c2e1",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/cmb-cross-inference::trial-1",
+      "schedule_order": 130,
+      "attempt_index": 1,
+      "task_rank": 60,
+      "task_name": "terminal-bench-science/cmb-cross-inference",
+      "task_digest": "sha256:855f6ef3034aa3900525329516be1733e06e0363bb51796d26d326a2ce2cd4d0",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/3x2pt-inference::trial-1",
+      "schedule_order": 131,
+      "attempt_index": 1,
+      "task_rank": 61,
+      "task_name": "terminal-bench-science/3x2pt-inference",
+      "task_digest": "sha256:ac4d76da52625a15fe2be39620e45b1cf14857abab69bd70150c208b52ec16e9",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/betalactam-multimodal-transfer::trial-1",
+      "schedule_order": 132,
+      "attempt_index": 1,
+      "task_rank": 62,
+      "task_name": "terminal-bench-science/betalactam-multimodal-transfer",
+      "task_digest": "sha256:fbc19b1d725da785ebfe798eea113654b6f252819727b1aceb54a30f00a0b228",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/finite-free-stam::trial-1",
+      "schedule_order": 133,
+      "attempt_index": 1,
+      "task_rank": 63,
+      "task_name": "terminal-bench-science/finite-free-stam",
+      "task_digest": "sha256:27880ab19d400debb58ba3f2959e294450f69ad92ee69c5724b78168c18bdc2f",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/cell-lineage-reconstruction::trial-1",
+      "schedule_order": 134,
+      "attempt_index": 1,
+      "task_rank": 64,
+      "task_name": "terminal-bench-science/cell-lineage-reconstruction",
+      "task_digest": "sha256:1776c430c243a6be3877e3a57688af327727c9795da07efb965b5d6961f620fa",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/leaky-bloch-meep::trial-1",
+      "schedule_order": 135,
+      "attempt_index": 1,
+      "task_rank": 65,
+      "task_name": "terminal-bench-science/leaky-bloch-meep",
+      "task_digest": "sha256:a8f11e46c67ab81c62e475d016f8864585fe6f394fb7101ec7147791edbb8593",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/stereo-dem-icesat2::trial-1",
+      "schedule_order": 136,
+      "attempt_index": 1,
+      "task_rank": 66,
+      "task_name": "terminal-bench-science/stereo-dem-icesat2",
+      "task_digest": "sha256:323ef2f958383d240910eb08f02e7bc5720462d568d8d0a3a976afa6ad2e29b3",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/gen-turan-paths::trial-1",
+      "schedule_order": 137,
+      "attempt_index": 1,
+      "task_rank": 67,
+      "task_name": "terminal-bench-science/gen-turan-paths",
+      "task_digest": "sha256:cf650bffd15e1ff99f69a5ba032f55451a1e4637924717f162347ae67cfd9c60",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/animal-reid::trial-1",
+      "schedule_order": 138,
+      "attempt_index": 1,
+      "task_rank": 68,
+      "task_name": "terminal-bench-science/animal-reid",
+      "task_digest": "sha256:1804428d3dcc07ada7ce08bed7c2bfe921b6516a97488168a05824a2fd7eb2ee",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/onsager-ising-lean::trial-1",
+      "schedule_order": 139,
+      "attempt_index": 1,
+      "task_rank": 69,
+      "task_name": "terminal-bench-science/onsager-ising-lean",
+      "task_digest": "sha256:a72b7713688b757f6bea6e47448d894f6ddc1491aa5c8ed7a904fef9b6e46882",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/genomic-model-ranking::trial-2",
+      "schedule_order": 140,
+      "attempt_index": 2,
+      "task_rank": 0,
+      "task_name": "terminal-bench-science/genomic-model-ranking",
+      "task_digest": "sha256:214a7fbf37e1c99e1300856d4bcea1a56c3bd8ff298981f3c47f50998d7e17e5",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/mri-harmonization::trial-2",
+      "schedule_order": 141,
+      "attempt_index": 2,
+      "task_rank": 1,
+      "task_name": "terminal-bench-science/mri-harmonization",
+      "task_digest": "sha256:8c5f397f05c402ad96621293313d645ace82bfb4a24865109337d39f04cb5dc4",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/navigation-sensor-calibration::trial-2",
+      "schedule_order": 142,
+      "attempt_index": 2,
+      "task_rank": 2,
+      "task_name": "terminal-bench-science/navigation-sensor-calibration",
+      "task_digest": "sha256:0e559f50518c6bb5cf0a37e163dceecb61efc83fe151aada66b71554f5dfc8b0",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/baseline-free-localization::trial-2",
+      "schedule_order": 143,
+      "attempt_index": 2,
+      "task_rank": 3,
+      "task_name": "terminal-bench-science/baseline-free-localization",
+      "task_digest": "sha256:f35349bcb083094b096a2400d9e98e55690b35f26e2b395796364ad109e91d57",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/virtual-baseline-localization::trial-2",
+      "schedule_order": 144,
+      "attempt_index": 2,
+      "task_rank": 4,
+      "task_name": "terminal-bench-science/virtual-baseline-localization",
+      "task_digest": "sha256:18e64cb62b351e3861e1995bdc3ba08bba37f0ae3e645ee4b250714b6f0c00ee",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/koopman-mfg-id::trial-2",
+      "schedule_order": 145,
+      "attempt_index": 2,
+      "task_rank": 5,
+      "task_name": "terminal-bench-science/koopman-mfg-id",
+      "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/reactor-safety-control::trial-2",
+      "schedule_order": 146,
+      "attempt_index": 2,
+      "task_rank": 6,
+      "task_name": "terminal-bench-science/reactor-safety-control",
+      "task_digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/linked-cell-suppression::trial-2",
+      "schedule_order": 147,
+      "attempt_index": 2,
+      "task_rank": 7,
+      "task_name": "terminal-bench-science/linked-cell-suppression",
+      "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/neo-orbit-determination::trial-2",
+      "schedule_order": 148,
+      "attempt_index": 2,
+      "task_rank": 8,
+      "task_name": "terminal-bench-science/neo-orbit-determination",
+      "task_digest": "sha256:b0038fd39395b57f2036b2c0271f37b508e1250fc97d12c899590b61e997cada",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/rdkit-ic-constraints::trial-2",
+      "schedule_order": 149,
+      "attempt_index": 2,
+      "task_rank": 9,
+      "task_name": "terminal-bench-science/rdkit-ic-constraints",
+      "task_digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/supraglacial-lake-classification::trial-2",
+      "schedule_order": 150,
+      "attempt_index": 2,
+      "task_rank": 10,
+      "task_name": "terminal-bench-science/supraglacial-lake-classification",
+      "task_digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/clinical-metadata-recovery::trial-2",
+      "schedule_order": 151,
+      "attempt_index": 2,
+      "task_rank": 11,
+      "task_name": "terminal-bench-science/clinical-metadata-recovery",
+      "task_digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/dapi-he-alignment::trial-2",
+      "schedule_order": 152,
+      "attempt_index": 2,
+      "task_rank": 12,
+      "task_name": "terminal-bench-science/dapi-he-alignment",
+      "task_digest": "sha256:a4291c3f09b0fc2a1c8713129d3afd1b46929482f6c03df630c25814b53b755e",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/inverse-lithography::trial-2",
+      "schedule_order": 153,
+      "attempt_index": 2,
+      "task_rank": 13,
+      "task_name": "terminal-bench-science/inverse-lithography",
+      "task_digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/protein-active-learning::trial-2",
+      "schedule_order": 154,
+      "attempt_index": 2,
+      "task_rank": 14,
+      "task_name": "terminal-bench-science/protein-active-learning",
+      "task_digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/sparse-network-assimilation::trial-2",
+      "schedule_order": 155,
+      "attempt_index": 2,
+      "task_rank": 15,
+      "task_name": "terminal-bench-science/sparse-network-assimilation",
+      "task_digest": "sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/variable-star-vetting::trial-2",
+      "schedule_order": 156,
+      "attempt_index": 2,
+      "task_rank": 16,
+      "task_name": "terminal-bench-science/variable-star-vetting",
+      "task_digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-2",
+      "schedule_order": 157,
+      "attempt_index": 2,
+      "task_rank": 17,
+      "task_name": "terminal-bench-science/longitudinal-clinical-agent",
+      "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/diag-chipseq::trial-2",
+      "schedule_order": 158,
+      "attempt_index": 2,
+      "task_rank": 18,
+      "task_name": "terminal-bench-science/diag-chipseq",
+      "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-2",
+      "schedule_order": 159,
+      "attempt_index": 2,
+      "task_rank": 19,
+      "task_name": "terminal-bench-science/hysteretic-aquifer-control",
+      "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ode-law-discovery::trial-2",
+      "schedule_order": 160,
+      "attempt_index": 2,
+      "task_rank": 20,
+      "task_name": "terminal-bench-science/ode-law-discovery",
+      "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-2",
+      "schedule_order": 161,
+      "attempt_index": 2,
+      "task_rank": 21,
+      "task_name": "terminal-bench-science/rv-astrometry-fitting",
+      "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/dna-storage-codec::trial-2",
+      "schedule_order": 162,
+      "attempt_index": 2,
+      "task_rank": 22,
+      "task_name": "terminal-bench-science/dna-storage-codec",
+      "task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/inelastic-constitutive-discovery::trial-2",
+      "schedule_order": 163,
+      "attempt_index": 2,
+      "task_rank": 23,
+      "task_name": "terminal-bench-science/inelastic-constitutive-discovery",
+      "task_digest": "sha256:15d263523a164a8eba4247f5fc213771e6683e889a5e14da9645874d417cd55f",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/mendota-ice-phenology::trial-2",
+      "schedule_order": 164,
+      "attempt_index": 2,
+      "task_rank": 24,
+      "task_name": "terminal-bench-science/mendota-ice-phenology",
+      "task_digest": "sha256:4cbc2fee1983383051c4769b03d8d3282349d1f2f7861f275c9594dea9db0501",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/energy-routing::trial-2",
+      "schedule_order": 165,
+      "attempt_index": 2,
+      "task_rank": 25,
+      "task_name": "terminal-bench-science/energy-routing",
+      "task_digest": "sha256:3a72c6a2427fa952eb51cdd44a03ed8becb35f692d7dac1e2da9a449723c7ced",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/eeg-erp-recovery::trial-2",
+      "schedule_order": 166,
+      "attempt_index": 2,
+      "task_rank": 26,
+      "task_name": "terminal-bench-science/eeg-erp-recovery",
+      "task_digest": "sha256:491561942081ad3c9e4769bca4e98a2eaafcb5fa7a8809ea2064c7570505dc58",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/geometric-pharmacophore-alignment::trial-2",
+      "schedule_order": 167,
+      "attempt_index": 2,
+      "task_rank": 27,
+      "task_name": "terminal-bench-science/geometric-pharmacophore-alignment",
+      "task_digest": "sha256:fa7bed4c7830b856c996f61831e5b1cc5cecbe8a0cb683a8c78866d5e1107cd2",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/microarch-modeling::trial-2",
+      "schedule_order": 168,
+      "attempt_index": 2,
+      "task_rank": 28,
+      "task_name": "terminal-bench-science/microarch-modeling",
+      "task_digest": "sha256:356fc64e3430d6322cd1dcefa6c827b8db7719fe9a5a7ef0bd8c0028f6398983",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/symbolic-regression::trial-2",
+      "schedule_order": 169,
+      "attempt_index": 2,
+      "task_rank": 29,
+      "task_name": "terminal-bench-science/symbolic-regression",
+      "task_digest": "sha256:eef0140e2832db2c03f9062913da924caa4edff519bd995571540c1eb38de235",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ankle-mri-findings::trial-2",
+      "schedule_order": 170,
+      "attempt_index": 2,
+      "task_rank": 30,
+      "task_name": "terminal-bench-science/ankle-mri-findings",
+      "task_digest": "sha256:7bd51ef29342811693043f200babc9f09c8ff2b6faa3b4c7688ca2d535d3e176",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/duan-thesis::trial-2",
+      "schedule_order": 171,
+      "attempt_index": 2,
+      "task_rank": 31,
+      "task_name": "terminal-bench-science/duan-thesis",
+      "task_digest": "sha256:332e73bb5d534bfd698d4f0772dde3719bf60309f4062ebe90441f3e6e7b36a7",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/foraging-cognitive-model::trial-2",
+      "schedule_order": 172,
+      "attempt_index": 2,
+      "task_rank": 32,
+      "task_name": "terminal-bench-science/foraging-cognitive-model",
+      "task_digest": "sha256:2a1abd12a6bb69c17f5af312b88f3029de3fcd9ba366808d1335a15ba458cef1",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/si-fracture-fbc::trial-2",
+      "schedule_order": 173,
+      "attempt_index": 2,
+      "task_rank": 33,
+      "task_name": "terminal-bench-science/si-fracture-fbc",
+      "task_digest": "sha256:f6a0922de395d4495d566a45fbf7211d7378fcd1b9d011441d96e06917f70bcb",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ont-tn-qc::trial-2",
+      "schedule_order": 174,
+      "attempt_index": 2,
+      "task_rank": 34,
+      "task_name": "terminal-bench-science/ont-tn-qc",
+      "task_digest": "sha256:dacfd350b20fd61f197a3acc4c4e1604b38cd60d298d5f81d7563420607e7da9",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/frustrated-heisenberg-nqs::trial-2",
+      "schedule_order": 175,
+      "attempt_index": 2,
+      "task_rank": 35,
+      "task_name": "terminal-bench-science/frustrated-heisenberg-nqs",
+      "task_digest": "sha256:c3ebfdfec825351a185dfc7cd54d3e0fbee022db447a7926b4695c7214a61a49",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/nanoindentation-property-extraction::trial-2",
+      "schedule_order": 176,
+      "attempt_index": 2,
+      "task_rank": 36,
+      "task_name": "terminal-bench-science/nanoindentation-property-extraction",
+      "task_digest": "sha256:43ece969b97a5c858183b722574150c411022927756f1b25e4bf72d8b8287989",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/tess-transit-vetting::trial-2",
+      "schedule_order": 177,
+      "attempt_index": 2,
+      "task_rank": 37,
+      "task_name": "terminal-bench-science/tess-transit-vetting",
+      "task_digest": "sha256:431eaa15ddb3c872e38db23b6d0605d6ab05cea04ab4a81f5d92db767da50f70",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/xrd-multiphase-qpa::trial-2",
+      "schedule_order": 178,
+      "attempt_index": 2,
+      "task_rank": 38,
+      "task_name": "terminal-bench-science/xrd-multiphase-qpa",
+      "task_digest": "sha256:61e0ae760254b065856db374b6bbe071834801902043c7b984cf61298e0565dc",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/guided-wave-localization::trial-2",
+      "schedule_order": 179,
+      "attempt_index": 2,
+      "task_rank": 39,
+      "task_name": "terminal-bench-science/guided-wave-localization",
+      "task_digest": "sha256:89881ce57c1db56f03c817382f84cefd7b938c46e593b90a50c0424a4a77d38d",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/masked-spherical-remap::trial-2",
+      "schedule_order": 180,
+      "attempt_index": 2,
+      "task_rank": 40,
+      "task_name": "terminal-bench-science/masked-spherical-remap",
+      "task_digest": "sha256:5cf09acc7262754001f2da0d7b8f16bf3d363c14915c9b5e92b707115f4a0944",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/spin-glass-groundstate::trial-2",
+      "schedule_order": 181,
+      "attempt_index": 2,
+      "task_rank": 41,
+      "task_name": "terminal-bench-science/spin-glass-groundstate",
+      "task_digest": "sha256:96373c8f043745cfe27f9eabdd17f28095a8b5297d48433d835650e868e78e72",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/traffic-flux-inversion::trial-2",
+      "schedule_order": 182,
+      "attempt_index": 2,
+      "task_rank": 42,
+      "task_name": "terminal-bench-science/traffic-flux-inversion",
+      "task_digest": "sha256:9003d54b9842f1b976b27dfe992a564252f6fe30f3aa44c5385db6cca1885ce0",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/stacking-disorder-diffraction::trial-2",
+      "schedule_order": 183,
+      "attempt_index": 2,
+      "task_rank": 43,
+      "task_name": "terminal-bench-science/stacking-disorder-diffraction",
+      "task_digest": "sha256:43e38f956a3b74f0e51885a5202bf7cb81c3409b5d84406b296884b9a0199265",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/regularized-game-proof::trial-2",
+      "schedule_order": 184,
+      "attempt_index": 2,
+      "task_rank": 44,
+      "task_name": "terminal-bench-science/regularized-game-proof",
+      "task_digest": "sha256:34b246d10cf3ae74cca5a75e5930b1890625de0480236e49abef125068f1bd12",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/tumor-immune-interface::trial-2",
+      "schedule_order": 185,
+      "attempt_index": 2,
+      "task_rank": 45,
+      "task_name": "terminal-bench-science/tumor-immune-interface",
+      "task_digest": "sha256:0f8604b05bf7267dff257f68a4e9c9968fe6923ef965518df909dd6d2360f219",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/rolling-shutter-oma::trial-2",
+      "schedule_order": 186,
+      "attempt_index": 2,
+      "task_rank": 46,
+      "task_name": "terminal-bench-science/rolling-shutter-oma",
+      "task_digest": "sha256:f98baab61e0c96ee4772af688f89c255e0e9b477021225b715b8a5a6c7d01fac",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/inverse-waveguide-shape::trial-2",
+      "schedule_order": 187,
+      "attempt_index": 2,
+      "task_rank": 47,
+      "task_name": "terminal-bench-science/inverse-waveguide-shape",
+      "task_digest": "sha256:2e798c88bc50bce23fead7e9ea6550a384a3735e0af2fe7674e704df449c8260",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/localized-sspd-solver::trial-2",
+      "schedule_order": 188,
+      "attempt_index": 2,
+      "task_rank": 48,
+      "task_name": "terminal-bench-science/localized-sspd-solver",
+      "task_digest": "sha256:9b33184a3cb5951c6c10b38f3ae99c9687db46f381961ce3c257a21b960ebde9",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/certified-sparse-regression::trial-2",
+      "schedule_order": 189,
+      "attempt_index": 2,
+      "task_rank": 49,
+      "task_name": "terminal-bench-science/certified-sparse-regression",
+      "task_digest": "sha256:719c1b13dfb99a043ea21c9eec60d83daefdb2781b642b7dea93616d99665886",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/noisy-blackbox-optimization::trial-2",
+      "schedule_order": 190,
+      "attempt_index": 2,
+      "task_rank": 50,
+      "task_name": "terminal-bench-science/noisy-blackbox-optimization",
+      "task_digest": "sha256:ac2182cfa5ce9b2fbe6bc6d1b1c0a25b77b0da2187e457fe104aa212c9d1e954",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/highdim-mediation-debiasing::trial-2",
+      "schedule_order": 191,
+      "attempt_index": 2,
+      "task_rank": 51,
+      "task_name": "terminal-bench-science/highdim-mediation-debiasing",
+      "task_digest": "sha256:9bdbaa358a1c2e93415a66158d4e4a92eabec8f4d48d143ff95459b01afe5f87",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/tamp-skill-planning::trial-2",
+      "schedule_order": 192,
+      "attempt_index": 2,
+      "task_rank": 52,
+      "task_name": "terminal-bench-science/tamp-skill-planning",
+      "task_digest": "sha256:012ff3c48d654d5b3414dcd2cfc1804303e10ff1e13793a2e0bdd38762e384a5",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/small-area-equivalence::trial-2",
+      "schedule_order": 193,
+      "attempt_index": 2,
+      "task_rank": 53,
+      "task_name": "terminal-bench-science/small-area-equivalence",
+      "task_digest": "sha256:fdbf952fcc0b32a512a59f03c347b97ef6dea6694095dc7c191c37593f5a7d9e",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/hbv-calibration-1::trial-2",
+      "schedule_order": 194,
+      "attempt_index": 2,
+      "task_rank": 54,
+      "task_name": "terminal-bench-science/hbv-calibration-1",
+      "task_digest": "sha256:2682710a3229c546c18fb4f0132410c2d8a8813618be05560266ff6c2e1b9eb7",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/qsm-reconstruction::trial-2",
+      "schedule_order": 195,
+      "attempt_index": 2,
+      "task_rank": 55,
+      "task_name": "terminal-bench-science/qsm-reconstruction",
+      "task_digest": "sha256:b5fc66e0544866280a287b75087777567cff2ca4f89c2fb5ff7970e02cf4e225",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/ambient-rna-correction::trial-2",
+      "schedule_order": 196,
+      "attempt_index": 2,
+      "task_rank": 56,
+      "task_name": "terminal-bench-science/ambient-rna-correction",
+      "task_digest": "sha256:e1840cb89f6213c61b1ac74884ed382194f8b0b05b5d0768ff4e7620763331cd",
+      "standard_public_storage_feasible": true
+    },
+    {
+      "slot_id": "terminal-bench-science/spatial-cell-annotation::trial-2",
+      "schedule_order": 197,
+      "attempt_index": 2,
+      "task_rank": 57,
+      "task_name": "terminal-bench-science/spatial-cell-annotation",
+      "task_digest": "sha256:f1e80120379ae53358526c61b798b09cc1601e996c70f35e8a230a28f57962b0",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/cilia-segmentation::trial-2",
+      "schedule_order": 198,
+      "attempt_index": 2,
+      "task_rank": 58,
+      "task_name": "terminal-bench-science/cilia-segmentation",
+      "task_digest": "sha256:d61b3c0f6df6596fef2596edcb7883948a03740c5d9d4ea81b3c4de74613e5cc",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/amr-poisson-optimize::trial-2",
+      "schedule_order": 199,
+      "attempt_index": 2,
+      "task_rank": 59,
+      "task_name": "terminal-bench-science/amr-poisson-optimize",
+      "task_digest": "sha256:fd1639a9333784522961ee9efc18bb2b6f0e7f0830e3d131780b036d2848c2e1",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/cmb-cross-inference::trial-2",
+      "schedule_order": 200,
+      "attempt_index": 2,
+      "task_rank": 60,
+      "task_name": "terminal-bench-science/cmb-cross-inference",
+      "task_digest": "sha256:855f6ef3034aa3900525329516be1733e06e0363bb51796d26d326a2ce2cd4d0",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/3x2pt-inference::trial-2",
+      "schedule_order": 201,
+      "attempt_index": 2,
+      "task_rank": 61,
+      "task_name": "terminal-bench-science/3x2pt-inference",
+      "task_digest": "sha256:ac4d76da52625a15fe2be39620e45b1cf14857abab69bd70150c208b52ec16e9",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/betalactam-multimodal-transfer::trial-2",
+      "schedule_order": 202,
+      "attempt_index": 2,
+      "task_rank": 62,
+      "task_name": "terminal-bench-science/betalactam-multimodal-transfer",
+      "task_digest": "sha256:fbc19b1d725da785ebfe798eea113654b6f252819727b1aceb54a30f00a0b228",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/finite-free-stam::trial-2",
+      "schedule_order": 203,
+      "attempt_index": 2,
+      "task_rank": 63,
+      "task_name": "terminal-bench-science/finite-free-stam",
+      "task_digest": "sha256:27880ab19d400debb58ba3f2959e294450f69ad92ee69c5724b78168c18bdc2f",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/cell-lineage-reconstruction::trial-2",
+      "schedule_order": 204,
+      "attempt_index": 2,
+      "task_rank": 64,
+      "task_name": "terminal-bench-science/cell-lineage-reconstruction",
+      "task_digest": "sha256:1776c430c243a6be3877e3a57688af327727c9795da07efb965b5d6961f620fa",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/leaky-bloch-meep::trial-2",
+      "schedule_order": 205,
+      "attempt_index": 2,
+      "task_rank": 65,
+      "task_name": "terminal-bench-science/leaky-bloch-meep",
+      "task_digest": "sha256:a8f11e46c67ab81c62e475d016f8864585fe6f394fb7101ec7147791edbb8593",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/stereo-dem-icesat2::trial-2",
+      "schedule_order": 206,
+      "attempt_index": 2,
+      "task_rank": 66,
+      "task_name": "terminal-bench-science/stereo-dem-icesat2",
+      "task_digest": "sha256:323ef2f958383d240910eb08f02e7bc5720462d568d8d0a3a976afa6ad2e29b3",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/gen-turan-paths::trial-2",
+      "schedule_order": 207,
+      "attempt_index": 2,
+      "task_rank": 67,
+      "task_name": "terminal-bench-science/gen-turan-paths",
+      "task_digest": "sha256:cf650bffd15e1ff99f69a5ba032f55451a1e4637924717f162347ae67cfd9c60",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/animal-reid::trial-2",
+      "schedule_order": 208,
+      "attempt_index": 2,
+      "task_rank": 68,
+      "task_name": "terminal-bench-science/animal-reid",
+      "task_digest": "sha256:1804428d3dcc07ada7ce08bed7c2bfe921b6516a97488168a05824a2fd7eb2ee",
+      "standard_public_storage_feasible": false
+    },
+    {
+      "slot_id": "terminal-bench-science/onsager-ising-lean::trial-2",
+      "schedule_order": 209,
+      "attempt_index": 2,
+      "task_rank": 69,
+      "task_name": "terminal-bench-science/onsager-ising-lean",
+      "task_digest": "sha256:a72b7713688b757f6bea6e47448d894f6ddc1491aa5c8ed7a904fef9b6e46882",
+      "standard_public_storage_feasible": false
+    }
+  ],
+  "hard_nonclaims": [
+    "NO_TASK_INSTRUCTION_READ_FOR_MANIFEST_FREEZE",
+    "NO_SOLUTION_FILE_READ",
+    "NO_TERMINAL_TRIAL_EXECUTED",
+    "NO_SCORE_OR_FAMILY_CREDIT",
+    "MANIFEST_DOES_NOT_AUTHORIZE_EXECUTION"
+  ],
+  "terminal_task_content_read": 0,
+  "terminal_trials_executed": 0,
+  "terminal_results_observed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
