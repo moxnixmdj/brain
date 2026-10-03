@@ -1,15 +1,15 @@
-"""Common frozen tool-authority compiler for Tool Discovery V5.
+"""Common frozen matched tool authority for Tool Discovery V6.
 
-This is a target-preserving matched-harness boundary, not a Brain-only registry.
-Both BRAIN and COMPARATOR roles are gated by the exact same finite frozen
-authority snapshot. Tool identities are not candidate-visible initially.
-The snapshot may be partitioned across any finite number of authoritative
-sources; querying every source yields exactly the common authority universe.
-Hidden capability truth remains private behind bounded safe probes.
+Both BRAIN and COMPARATOR are gated by the exact same finite authority snapshot.
+Tool identities are hidden initially and partitioned across any finite number of
+authoritative discovery sources. Each source digest is exactly the digest of the
+public tool metadata it returns, using the same canonicalization as the V5 proof
+core. Hidden capability truth is never part of discovery metadata.
 
-The construction is parametric in tool identities, source partition, costs,
-availability/authorization, metadata, hidden capability relations, exact
-requirement sets, and atomic authority epochs.
+Safe-probe permission is fixed metadata of the frozen authority snapshot. It is
+not synthesized from the current query. Therefore source content digests remain
+stable within an authority epoch. V6 handles any authority/tool version change as
+an episode-restart boundary before old discovery metadata can be reused.
 """
 from __future__ import annotations
 
@@ -25,14 +25,6 @@ class AuthorityError(ValueError):
     pass
 
 
-def _canon(obj:Any)->bytes:
-    return json.dumps(obj,sort_keys=True,separators=(",",":"),ensure_ascii=True).encode()
-
-
-def _sha(obj:Any)->str:
-    return "sha256:"+hashlib.sha256(_canon(obj)).hexdigest()
-
-
 def _required(xs:Sequence[str])->list[str]:
     out=sorted({str(x) for x in xs if str(x)})
     if not out or any(any(ch.isspace() for ch in x) for x in out):
@@ -40,8 +32,32 @@ def _required(xs:Sequence[str])->list[str]:
     return out
 
 
+def _tools_digest(tools:Sequence[Mapping[str,Any]])->str:
+    rows=[dict(x) for x in tools]
+    rows.sort(key=lambda row:str(row.get("tool_id") or ""))
+    raw=json.dumps(rows,sort_keys=True,separators=(",",":"),ensure_ascii=False)
+    return "sha256:"+hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def _source_set_digest(sources:Sequence[Mapping[str,Any]])->str:
+    payload=[]
+    for source in sources:
+        payload.append({
+            "source_id":str(source.get("source_id") or ""),
+            "cost":float(source.get("cost",0.0)),
+            "available":source.get("available"),
+            "authorized":source.get("authorized"),
+            "authoritative":source.get("authoritative"),
+            "source_epoch":source.get("source_epoch"),
+            "source_digest":str(source.get("source_digest") or ""),
+        })
+    payload.sort(key=lambda row:row["source_id"])
+    raw=json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False)
+    return "sha256:"+hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
 class CommonFrozenToolAuthority:
-    """One exact finite authority snapshot shared by Brain and comparator."""
+    """One finite, content-addressed tool authority shared by both matched roles."""
 
     def __init__(self, entries:Sequence[Mapping[str,Any]], *, epoch:int=0):
         if isinstance(epoch,bool) or not isinstance(epoch,int) or epoch<0:
@@ -73,12 +89,18 @@ class CommonFrozenToolAuthority:
                 raise AuthorityError("CONFLICTING_SOURCE_COST")
             self._source_cost[sid]=scost
 
+            safe=raw.get("safe_probe_capabilities",[])
+            if not isinstance(safe,(list,tuple,set,frozenset)):
+                raise AuthorityError("SAFE_PROBE_CAPABILITIES_NOT_SEQUENCE")
+            safe_ids=sorted({str(x) for x in safe if str(x)})
+
             public={
                 "tool_id":tid,
                 "cost":float(cost),
                 "available":raw.get("available") is True,
                 "authorized":raw.get("authorized") is True,
                 "epoch":epoch,
+                "safe_probe_capabilities":safe_ids,
             }
             meta=raw.get("meta")
             if isinstance(meta,Mapping):
@@ -101,27 +123,15 @@ class CommonFrozenToolAuthority:
     def source_ids(self)->tuple[str,...]:
         return tuple(sorted(self._source_cost))
 
-    def _hidden_commitment_for_source(self, source_id:str)->str:
-        rows={
-            tid:sorted(self._hidden[tid])
-            for tid in sorted(self._registry)
-            if self._source_for_tool[tid]==source_id
-        }
-        return _sha(rows)
-
-    def _source_payload(self, source_id:str)->dict[str,Any]:
-        if source_id not in self._source_cost:
+    def public_tools_for_source(self, source_id:str)->list[dict[str,Any]]:
+        sid=str(source_id or "")
+        if sid not in self._source_cost:
             raise AuthorityError("UNKNOWN_SOURCE_ID")
-        return {
-            "epoch":self._epoch,
-            "source_id":source_id,
-            "registry":[
-                self._registry[tid]
-                for tid in sorted(self._registry)
-                if self._source_for_tool[tid]==source_id
-            ],
-            "hidden_commitment":self._hidden_commitment_for_source(source_id),
-        }
+        return [
+            dict(self._registry[tid])
+            for tid in sorted(self._registry)
+            if self._source_for_tool[tid]==sid
+        ]
 
     def discovery_sources(self)->list[dict[str,Any]]:
         return [
@@ -132,13 +142,13 @@ class CommonFrozenToolAuthority:
                 "authorized":True,
                 "authoritative":True,
                 "source_epoch":self._epoch,
-                "source_digest":_sha(self._source_payload(sid)),
+                "source_digest":_tools_digest(self.public_tools_for_source(sid)),
             }
             for sid in self.source_ids()
         ]
 
     def source_set_digest(self)->str:
-        return _sha(self.discovery_sources())
+        return _source_set_digest(self.discovery_sources())
 
     def initial_public(
         self,
@@ -162,30 +172,20 @@ class CommonFrozenToolAuthority:
 
     def discover(self, source_id:str, required_capabilities:Sequence[str])->dict[str,Any]:
         sid=str(source_id or "")
-        if sid not in self._source_cost:
-            raise AuthorityError("UNKNOWN_SOURCE_ID")
         req=_required(required_capabilities)
-        query=" ".join(req)
-        tools=[]
-        for tid in sorted(self._registry):
-            if self._source_for_tool[tid]!=sid:
-                continue
-            row=dict(self._registry[tid])
-            # Permission to test an exact required capability is not evidence
-            # that the capability is supported; support truth remains hidden.
-            row["safe_probe_capabilities"]=list(req)
-            tools.append(row)
-        source=next(x for x in self.discovery_sources() if x["source_id"]==sid)
+        sources={x["source_id"]:x for x in self.discovery_sources()}
+        if sid not in sources:
+            raise AuthorityError("UNKNOWN_SOURCE_ID")
         return {
             "kind":"DISCOVERY_RESULT",
             "source_id":sid,
             "complete":True,
             "decision_epoch":self._epoch,
             "source_epoch":self._epoch,
-            "source_digest":source["source_digest"],
+            "source_digest":sources[sid]["source_digest"],
             "source_set_digest":self.source_set_digest(),
-            "query":query,
-            "tools":tools,
+            "query":" ".join(req),
+            "tools":self.public_tools_for_source(sid),
         }
 
     def probe(
@@ -204,6 +204,8 @@ class CommonFrozenToolAuthority:
         req=_required(required_capabilities)
         if cap not in req:
             raise AuthorityError("PROBE_OUTSIDE_EXACT_REQUIREMENT_QUERY")
+        if cap not in set(self._registry[tid]["safe_probe_capabilities"]):
+            raise AuthorityError("PROBE_NOT_SAFE_FOR_FROZEN_AUTHORITY")
         return {
             "kind":"SAFE_CAPABILITY_PROBE",
             "tool_id":tid,
@@ -221,6 +223,15 @@ class CommonFrozenToolAuthority:
         if tid not in self._registry:
             raise AuthorityError("UNREGISTERED_TOOL_ID")
         return {"role":role,"tool_id":tid,"epoch":self._epoch}
+
+    def version_change_event(self, tool_id:str, *, new_epoch:int|None=None)->dict[str,Any]:
+        tid=str(tool_id or "")
+        if tid not in self._registry:
+            raise AuthorityError("UNREGISTERED_TOOL_ID")
+        epoch=self._epoch+1 if new_epoch is None else new_epoch
+        if isinstance(epoch,bool) or not isinstance(epoch,int) or epoch<=self._epoch:
+            raise AuthorityError("INVALID_NEW_EPOCH")
+        return {"kind":"TOOL_VERSION_CHANGED","tool_id":tid,"new_epoch":epoch}
 
     def replace(self, entries:Sequence[Mapping[str,Any]])->"CommonFrozenToolAuthority":
         return CommonFrozenToolAuthority(entries,epoch=self._epoch+1)
@@ -246,6 +257,13 @@ def prove_common_authority_instance(
     )
     source_ids=tuple(sorted(x["source_id"] for x in public["discovery_sources"]))
     complete_sources=tuple(sorted(str(r["source_id"]) for r in receipts))
+    digests_ok=all(
+        _tools_digest(r["tools"])==r["source_digest"]
+        for r in receipts
+    ) and all(
+        r["source_set_digest"]==_source_set_digest(public["discovery_sources"])
+        for r in receipts
+    )
     return {
         "status":"PASS__COMMON_AUTHORITY_COMPLETE_INTERFACE_BY_CONSTRUCTION"
             if (
@@ -253,29 +271,19 @@ def prove_common_authority_instance(
                 and source_ids==complete_sources==a.source_ids()
                 and all(x["authoritative"] is True for x in public["discovery_sources"])
                 and all(r["complete"] is True for r in receipts)
-                and all(r["source_set_digest"]==public["source_set_digest"] for r in receipts)
+                and digests_ok
                 and ids==a.registry_ids()==brain_ids==comparator_ids
-                and "_hidden" not in receipt_text
                 and "hidden_capabilities" not in receipt_text
                 and "supported" not in receipt_text
-                and all(
-                    t["safe_probe_capabilities"]==req
-                    for r in receipts for t in r["tools"]
-                )
             ) else "FAIL_CLOSED",
         "identity_universe_complete":ids==a.registry_ids(),
         "source_union_complete":source_ids==complete_sources==a.source_ids(),
         "same_brain_comparator_authority":brain_ids==comparator_ids==a.registry_ids(),
         "identities_initially_hidden":public["visible_tools"]==[],
         "hidden_capability_truth_not_disclosed":(
-            "hidden_capabilities" not in receipt_text
-            and "_hidden" not in receipt_text
-            and "supported" not in receipt_text
+            "hidden_capabilities" not in receipt_text and "supported" not in receipt_text
         ),
-        "all_exact_requirement_probes_safely_decidable":all(
-            t["safe_probe_capabilities"]==req
-            for r in receipts for t in r["tools"]
-        ),
+        "source_and_source_set_digests_exact":digests_ok,
         "source_set_complete_by_construction":True,
         "new_reality_units_consumed":0,
         "terminal_results_replayed":0,
