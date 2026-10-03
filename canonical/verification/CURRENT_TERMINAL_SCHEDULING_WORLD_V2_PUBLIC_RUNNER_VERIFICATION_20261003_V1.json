@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_SCHEDULING_WORLD_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__38_8_30_LIVE_WORLD__TOOL_DISCOVERY_V2_RETRIEVAL_GATE_MANDATORY__ADVERSARIAL_BYPASS_BLOCKED__ZERO_CREDIT",
+  "verified_candidate": {
+    "path": "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V2.json",
+    "git_blob_sha": "d227569856afaf3212ddf23250134ebf56fcf079"
+  },
+  "exact_brain_blobs": {
+    "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py": "9af1bd62048277cc8c4fabab8efe5d217c367bac",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json": "e29ce3a7c782c7b9ab1097dd3124a917d3fea9d2",
+    "canonical/runtime/current_terminal_scheduling_world_v1.py": "de8434ea4d67f824070a94f70913979a2b4a2acd",
+    "canonical/tests/test_tool_discovery_retrieval_authority_gate_v1.py": "6f8e38356b0a5bebf1815c7d1c199ddc86b4c9de",
+    "canonical/tests/test_current_terminal_scheduling_world_v1.py": "aa401d6363efcc46f55f30fdea1ee3e1b150f9da"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1294,
+    "merge_commit": "219154e4439cd9937390071ca92c887c03faa3f4",
+    "head_sha": "fb5e7e2249c65c5236b2db01a4c649a063d353d0",
+    "workflow_run_id": 37115332074,
+    "workflow_job_id": 111180949132,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_subject_blobs_verified": true,
+    "live_registry_predicates": 38,
+    "live_proved_predicates": 8,
+    "live_unresolved_predicates": 30,
+    "tool_learning_success_route_noninferior_remains_open": true,
+    "tool_discovery_retrieval_gate_required": true,
+    "tool_discovery_retrieval_gate_pass": true,
+    "missing_gate_fails_closed": true,
+    "stale_compiler_binding_fails_closed": true,
+    "actual_router_byte_drift_fails_closed": true,
+    "reenabled_consumed_v2_github_epoch_fails_closed": true,
+    "invalid_independent_receipt_fails_closed": true,
+    "second_tool_discovery_action_bypass_fails_closed": true,
+    "scheduler_call_without_gate_fails_closed": true,
+    "execution_authority_remains_false": true,
+    "promotion_authority_remains_false": true
+  },
+  "hard_nonclaims": [
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_RETRIEVAL_IS_GLOBALLY_COMPLETE",
+    "NO_AUTOMATIC_ALL_LANGUAGE_TRANSLATION_CLAIM",
+    "NO_TERMINAL_TOOLATHLON_EXECUTION_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
