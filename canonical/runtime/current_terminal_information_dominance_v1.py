@@ -9,6 +9,7 @@ from typing import Any
 
 from canonical.runtime.current_terminal_scheduling_world_v1 import evaluate as compile_world
 from canonical.runtime.terminal_information_dominance_v1 import evaluate as information_dominance
+from canonical.runtime import tool_discovery_retrieval_authority_gate_v1 as tool_retrieval_gate
 
 SCHEMA="PROJECT_BRAIN_CURRENT_TERMINAL_INFORMATION_DOMINANCE_V1"
 
@@ -19,8 +20,9 @@ def evaluate(
     hypergraph:dict[str,Any],
     scheduling_v6:dict[str,Any],
     authority:dict[str,Any],
+    retrieval_authority_gate:dict[str,Any] | None = None,
 )->dict[str,Any]:
-    live=compile_world(registry,evidence,frontier,hypergraph,scheduling_v6,authority)
+    live=compile_world(registry,evidence,frontier,hypergraph,scheduling_v6,authority,retrieval_authority_gate)
     if live.get("pass") is not True:
         return {
             "schema":SCHEMA,"status":"FAIL_CLOSED__LIVE_WORLD_INVALID",
@@ -35,7 +37,7 @@ def evaluate(
     ok=dominance.get("status")=="EXACT_INFORMATION_DOMINANCE_COMPUTED"
     return {
         "schema":SCHEMA,
-        "status":"PASS__EXACT_LIVE_30_INFORMATION_DOMINANCE__ZERO_REALITY__ZERO_CREDIT" if ok else "FAIL_CLOSED__DOMINANCE_NOT_COMPUTED",
+        "status":f"PASS__EXACT_LIVE_{live['unresolved_predicate_count']}_INFORMATION_DOMINANCE__ZERO_REALITY__ZERO_CREDIT" if ok else "FAIL_CLOSED__DOMINANCE_NOT_COMPUTED",
         "pass":ok,
         "live_world_summary":{
             "frozen_predicates":live["registry_predicate_count"],
@@ -66,6 +68,7 @@ def main()->int:
         load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
         load("canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json"),
         load("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"),
+        tool_retrieval_gate.evaluate_repository(root),
     )
     print(json.dumps(out,indent=2,sort_keys=True))
     return 0 if out.get("pass") else 1
