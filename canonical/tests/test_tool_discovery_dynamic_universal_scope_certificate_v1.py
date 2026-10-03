@@ -4,6 +4,7 @@ import unittest
 
 from canonical.runtime import tool_discovery_dynamic_candidate_v3 as v3
 from canonical.runtime import tool_discovery_dynamic_candidate_v4 as v4
+from canonical.runtime import tool_discovery_complete_source_interface_v1 as iface
 from canonical.runtime import tool_discovery_dynamic_proof_v3 as regression
 from canonical.runtime import tool_discovery_dynamic_universal_scope_certificate_v1 as cert
 
@@ -120,6 +121,69 @@ class ToolDiscoveryDynamicUniversalScopeV1Tests(unittest.TestCase):
         )
         facts=cert.derive_source_facts(mutant)
         self.assertFalse(facts["DETERMINISTIC_GLOBAL_COST_ORDER"])
+
+    def test_executable_interface_covers_arbitrary_unknown_identities(self):
+        case={
+            "tools":[
+                {"tool_id":"visible::alpha","cost":5.0,"available":True,"authorized":True,"epoch":0,"meta":{"region":"EU"}},
+                {"tool_id":"never-seen-before/β","cost":1.0,"available":True,"authorized":True,"epoch":0,"meta":{"region":"EU"}},
+            ],
+            "initial_visible":["visible::alpha"],
+            "discovery_sources":[
+                {"source_id":"catalog://opaque","cost":0.0,"available":True,"tool_ids":["never-seen-before/β"]}
+            ],
+        }
+        verdict=iface.validate_frozen_case(case)
+        self.assertTrue(verdict["complete_identity_coverage"])
+        public=iface.initial_public_state(case,["CAP_A"])
+        receipt=iface.discover(case,"catalog://opaque","CAP_A")
+        self.assertTrue(receipt["complete"])
+        self.assertEqual(receipt["tools"][0]["tool_id"],"never-seen-before/β")
+        merged=iface.apply_discovery(public,receipt)
+        self.assertEqual(
+            {x["tool_id"] for x in merged["visible_tools"]},
+            {"visible::alpha","never-seen-before/β"},
+        )
+
+    def test_incomplete_discovery_authority_is_rejected(self):
+        case={
+            "tools":[
+                {"tool_id":"A","cost":1.0,"available":True,"authorized":True,"epoch":0},
+                {"tool_id":"UNREACHABLE","cost":2.0,"available":True,"authorized":True,"epoch":0},
+            ],
+            "initial_visible":["A"],
+            "discovery_sources":[],
+        }
+        with self.assertRaises(iface.InterfaceError) as cm:
+            iface.validate_frozen_case(case)
+        self.assertIn("INCOMPLETE_FROZEN_AUTHORITY_COVERAGE",str(cm.exception))
+
+    def test_conflicting_discovered_metadata_is_rejected(self):
+        case={
+            "tools":[
+                {"tool_id":"A","cost":1.0,"available":True,"authorized":True,"epoch":0},
+            ],
+            "initial_visible":["A"],
+            "discovery_sources":[
+                {"source_id":"S","cost":0.0,"available":True,"tool_ids":["A"]}
+            ],
+        }
+        public=iface.initial_public_state(case,["CAP_A"])
+        receipt=iface.discover(case,"S","CAP_A")
+        receipt["tools"][0]["cost"]=999.0
+        with self.assertRaises(iface.InterfaceError) as cm:
+            iface.apply_discovery(public,receipt)
+        self.assertIn("CONFLICTING_PUBLIC_TOOL_METADATA",str(cm.exception))
+
+    def test_interface_completeness_mutation_kills_scope_fact(self):
+        src=cert._text(cert.INTERFACE)
+        mutant=src.replace(
+            'missing=sorted(all_ids-available_coverage)',
+            'missing=[]',
+            1,
+        )
+        facts=cert.derive_interface_facts(mutant)
+        self.assertFalse(facts["EXECUTABLE_COMPLETE_INTERFACE_VERIFIED"])
 
 
 if __name__=="__main__":
