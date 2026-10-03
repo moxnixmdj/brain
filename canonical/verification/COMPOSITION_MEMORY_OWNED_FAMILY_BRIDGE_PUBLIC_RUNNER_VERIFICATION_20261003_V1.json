@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_MEMORY_BRIDGE_SOURCE_RELATION__ZERO_CREDIT__CURRENT_PROTOCOL_TRANSPORT_SEPARATELY_REQUIRED",
+  "source_candidate": {
+    "path": "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V1.json",
+    "git_blob_sha": "d073b395c3ec335e5aebe45e100a8a9a345905f6"
+  },
+  "exact_brain_blobs": {
+    "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json": "2d912cf8df64bd806fffb6a1070d95644d005470",
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V1.json": "d073b395c3ec335e5aebe45e100a8a9a345905f6",
+    "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1069,
+    "pull_request_merge_ref_sha": "0a164f6c1aae37a3eae6895360230a5bcf730bda",
+    "verifier_main_commit": "a75a1166fd8cf95cd8346cfc17d740724665d2f6",
+    "workflow_run_id": 37040567011,
+    "workflow_job_id": 110949368670,
+    "workflow_name": "Verify Brain composition memory owned-family bridge",
+    "conclusion": "success"
+  },
+  "verified": {
+    "composition_component": "memory",
+    "unique_noncomposition_memory_family": [
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+    ],
+    "memory_protocol_status": "PASS",
+    "source_ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "scope_exactly_preserved": true
+  },
+  "temporal_guard": {
+    "verified_protocol_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "current_protocol_blob_must_be_rechecked": true,
+    "rule": "THIS_RECEIPT_DOES_NOT_BY_ITSELF_AUTHORIZE_CURRENT_COMPOSITION_TRANSPORT_AFTER_ANY_PROTOCOL_BLOB_CHANGE"
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
