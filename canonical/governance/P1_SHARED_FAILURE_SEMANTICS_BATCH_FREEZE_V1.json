@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_P1_SHARED_FAILURE_SEMANTICS_BATCH_FREEZE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_FREEZE__RESULTS_UNOBSERVED__INDEPENDENT_VERIFICATION_REQUIRED__EXECUTION_UNAUTHORIZED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Freeze the exact one-new-reality-unit shared P1 batch that transports candidate-visible failure_semantics to all three frozen direct surfaces without terminal V3 replay, post-result tuning, or candidate access to hidden oracle fields.",
+  "direct_surfaces": [
+    "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+  ],
+  "route_binding": {
+    "surface_route_id": "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "contract_native_route_id": "DIRECT_TRAJECTORY_CAUSAL_CONTRACT_SUITE",
+    "source_generator": "canonical/runtime/contract_native_proof_suites.py",
+    "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+    "batch_runtime": "canonical/runtime/p1_shared_failure_semantics_batch_v1.py",
+    "freeze_verifier": "canonical/runtime/p1_shared_failure_semantics_batch_freeze_verifier_v1.py",
+    "rule": "CONTRACT_NATIVE_GENERATOR_IS_SOURCE_REALITY__NORMALIZER_BINDS_FAILURE_SEMANTICS_BEFORE_CANDIDATE_EXECUTION__V7_BYTES_UNCHANGED__CONTRACT_NATIVE_RESCUE_ORACLE_REMAINS_FINAL_CASE_JUDGE"
+  },
+  "normalization_contract": {
+    "direct": "SOURCE_STATE_FAULT_INJECTED_AND_INVARIANT_FAIL_AND_NOT_TERMINAL_SYMPTOM__TO__DIRECT_CONTRACT",
+    "derived": "SOURCE_STATE_DOWNSTREAM_DEGRADED_AND_INVARIANT_FAIL_AND_TERMINAL_SYMPTOM__TO__DERIVED_UPSTREAM",
+    "passed": "SOURCE_STATE_OK_AND_INVARIANT_PASS__REMAINS_PASSING",
+    "failed_receipts": "NONEMPTY_SURFACE_SOURCE_SEED_STEP_STATE_AND_INVARIANT_RECEIPTS_REQUIRED",
+    "oracle_visibility": "SOURCE__ORACLE_IS_NEVER_INCLUDED_IN_V7_PUBLIC_PAYLOAD"
+  },
+  "difficulty_schedule": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "batch_shape": {
+    "one_shared_beacon": true,
+    "surface_count": 3,
+    "cases_per_surface": 5,
+    "total_cases": 15,
+    "reality_unit": "ONE_PREDECLARED_CLEAN_P1_SCOPE_TRANSPORT_BATCH",
+    "all_cases_required": true,
+    "failure_rule": "ANY_CASE_OR_SURFACE_FAILURE_FAILS_CLOSED__NO_PARTIAL_TRANSPORT_CREDIT"
+  },
+  "post_freeze_beacon": {
+    "network": "drand League of Entropy mainnet quicknet",
+    "beacon_id": "quicknet",
+    "chain_hash": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+    "genesis_time": 1692803367,
+    "period_seconds": 3,
+    "anchor": "CANONICAL_BRAIN_MAIN_MERGE_COMMIT_OF_THIS_FREEZE",
+    "round_rule": "FLOOR((ANCHOR_COMMITTER_UNIX-GENESIS_TIME)/PERIOD_SECONDS)+2",
+    "meaning": "FIRST_QUICKNET_ROUND_WHOSE_NOMINAL_START_TIME_IS_STRICTLY_AFTER_THE_FREEZE_MERGE_COMMIT_TIME",
+    "relay_agreement_required": [
+      "https://api.drand.sh",
+      "https://drand.cloudflare.com"
+    ],
+    "seed_derivation": "SHA256(PROJECT_BRAIN_P1_SHARED_BATCH_V1_NUL || RANDOMNESS_BYTES || NUL || SURFACE_ID || NUL || DIFFICULTY_ASCII)__FIRST_8_BYTES_BIG_ENDIAN"
+  },
+  "anti_contamination": [
+    "FREEZE_CANDIDATE_SCORER_NORMALIZER_SOURCE_GENERATOR_SURFACE_SET_DIFFICULTIES_AND_BEACON_RULE_BEFORE_RANDOMNESS_EXISTS",
+    "POST_FREEZE_UNCONTROLLABLE_BEACON_SELECTION",
+    "NO_TERMINAL_V3_CASE_REPLAY",
+    "NO_CASE_REPLACEMENT",
+    "NO_POST_RESULT_TUNING",
+    "NO_RESULT_TO_RUNTIME_FEEDBACK",
+    "NO_HIDDEN_ORACLE_FIELD_TO_CANDIDATE",
+    "NO_PAID_ROUTE"
+  ],
+  "exact_source_blobs": {
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py": "28940387bd6c11671035ad9201e37bba13fd9bc9",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json": "8b439403a05b4a912f06a8866db25f6e53b52473",
+    "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json": "75cd1ad0ec0739ebd894cf6075af5837b93d83f8",
+    "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json": "8c7ffe3d9ff789eddd286496f6de3ce84472c909",
+    "canonical/governance/P1_MINIMUM_REALITY_CUT_INPUT_V1.json": "cbcb2faff8404623846e77e19fcc5b0ad00e81d9",
+    "canonical/verification/P1_V7_PROVENANCE_AND_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "01ca625add4db7035224f0d4cb9efb406d17362d",
+    "canonical/verification/P1_V7_DIRECT_SURFACE_TRANSPORT_AND_IDENTIFIABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "e9d0632bd85e2deb43247d6bc78e641cb6440db4",
+    "canonical/verification/P1_V7_FAILURE_SEMANTICS_ZERO_REALITY_SOURCE_AUDIT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "44962dc709cdcf7f3a05ca9ac864abf9fe2aaa67"
+  },
+  "success_interpretation": {
+    "proves": "THE_PREDECLARED_FAILURE_SEMANTICS_TRANSPORT_BATCH_PASSED_ON_ALL_THREE_FROZEN_SURFACE_BINDINGS_WITH_NATIVE_RESCUE_ORACLE_AND_UNCHANGED_V7",
+    "does_not_by_itself_prove": "P1_PARENT_ACCEPTANCE_OR_ANY_OF_8_QUARANTINED_FAMILY_CLOSURES",
+    "next_if_pass": "INDEPENDENTLY_VERIFY_EXACT_BATCH_RESULT__RUN_RECEIPT_DERIVED_P1_ACCEPTANCE_REDUCTION__ONLY_THEN_PROPAGATE_ANY_AUTHORIZED_QUARANTINE_CHANGE",
+    "next_if_fail": "PRESERVE_EXACT_FAILED_CASES_AS_COUNTEREXAMPLES__NO_CREDIT__REPAIR_PROGRAM_SIDE_MECHANISM_ONLY_WITHOUT_REUSING_THE_SAME_BEACON_CASES_FOR_CREDIT"
+  },
+  "fresh_reality_units_consumed_so_far": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
