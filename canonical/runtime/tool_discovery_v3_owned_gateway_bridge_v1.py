@@ -73,6 +73,8 @@ def prove_bridge_instance(entries:Sequence[Mapping[str,Any]])->dict[str,Any]:
     a0=v3.next_action(p0)
     p1=apply_gateway_discovery(p0,g,a0)
     discovered=tuple(sorted(str(x["tool_id"]) for x in p1["visible_tools"]))
+    initial_visible_empty=p0["visible_tools"]==[]
+    gateway_only=p0["discovery_sources"]==[g.discovery_source()]
     a1=v3.next_action(p1)
     probe_gate_pass=(
       a1.get("action")=="PROBE"
@@ -82,13 +84,15 @@ def prove_bridge_instance(entries:Sequence[Mapping[str,Any]])->dict[str,Any]:
       "schema":SCHEMA,
       "status":"PASS__DYNAMIC_V3_BOUND_TO_OWNED_COMPLETE_IDENTITY_CARRIER"
           if identity["status"].startswith("PASS") and a0.get("action")=="DISCOVER"
+          and initial_visible_empty and gateway_only
           and discovered==g.registry_ids() and probe_gate_pass else "FAIL_CLOSED",
       "initial_action":a0,
       "post_discovery_action":a1,
       "visible_after_discovery":list(discovered),
       "registry_ids":list(g.registry_ids()),
       "identity_scope_complete":identity["status"].startswith("PASS"),
-      "gateway_is_only_declared_discovery_source":p0["discovery_sources"]==[g.discovery_source()],
+      "initial_visible_tools_empty":initial_visible_empty,
+      "gateway_is_only_declared_discovery_source":gateway_only,
       "probe_must_pass_gateway":probe_gate_pass,
       "select_must_pass_gateway":True,
       "new_reality_units_consumed":0,"incremental_spend_usd":0,
