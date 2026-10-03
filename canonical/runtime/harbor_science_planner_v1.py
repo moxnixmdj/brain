@@ -169,7 +169,7 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
         "tool_choice": "required",
         "parallel_tool_calls": False,
         "temperature": 0,
-        "max_tokens": 1024,
+        "max_tokens": 384,
         "stream": False,
     }).encode("utf-8")
     req = urllib.request.Request(
