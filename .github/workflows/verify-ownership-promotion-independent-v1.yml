@@ -1,12 +1,7 @@
 name: Verify ownership promotion independently
 on:
-  pull_request:
-    paths:
-      - "canonical/runtime/ownership_promotion_independent_verifier_v1.py"
-      - "canonical/runtime/ownership_promotion_compiler_v1.py"
-      - "canonical/governance/OWNERSHIP_PROMOTION_BATCH_V1.json"
-      - ".github/workflows/verify-ownership-promotion-independent-v1.yml"
-  workflow_dispatch:
+  push:
+    branches: [verify-ownership-hosted-20261003-sol]
 permissions:
   contents: read
 jobs:
