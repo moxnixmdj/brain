@@ -64,6 +64,8 @@ def rank(*,hypotheses,actions,transfer_weight="1/2",proof_weight="1/2"):
     by={h["id"]:h for h in hs}
     tw=_f(transfer_weight,"transfer_weight")
     pw=_f(proof_weight,"proof_weight")
+    if tw<0 or pw<0:
+        raise DecisionDiscriminatorError("NEGATIVE_WEIGHT")
     ranked=[];seen=set()
     for raw in actions:
         aid=str(raw.get("id") or "").strip()
@@ -100,8 +102,9 @@ def rank(*,hypotheses,actions,transfer_weight="1/2",proof_weight="1/2"):
             score=(gain+tw*tr+pw*pr)/den
             ranked.append({
                 "id":aid,
-                "derived_decision_gain":str(gain),
+                "conditional_decision_gain":str(gain),
                 "expected_post_probe_ambiguity":str(expected),
+                "gain_basis":"EXACT_CONDITIONAL_ON_DECLARED_HYPOTHESES_PROBABILITIES_TERMINAL_ACTIONS_AND_PREDICTED_OUTCOMES",
                 "value_density":str(score),
                 "_gain":gain,
                 "_score":score,
