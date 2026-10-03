@@ -29,9 +29,13 @@ V4="canonical/runtime/tool_discovery_dynamic_candidate_v4.py"
 CONTRACT="canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json"
 EXPECTED={
     V4:"9572b25f7bdaee0f35e00cf3a1f25bc0dbd69096",
-    CONTRACT:"c63faf97a598b811588e86e6a5f7568293302b4c",
+    CONTRACT:"066ae03f40769abf3ce29cbd4e8bbfcb3fdbba92",
 }
 REQUIRED_PROPERTIES={
+"PUBLIC_INPUT_SCHEMA_IS_TOTAL_TYPED_AND_VALIDATED_BEFORE_POLICY_CALL",
+"DISCOVERY_SOURCE_IDS_AND_TOOL_IDS_ARE_NONEMPTY_AND_UNIQUE_WITHIN_THEIR_CURRENT_SCOPE",
+"EVERY_DISCOVERY_SOURCE_AND_TOOL_COST_USED_FOR_ORDERING_IS_FINITE_NONNEGATIVE_NUMERIC",
+"ACTIVE_CONSTRAINT_USES_DECLARED_V4_PREDICATE_LANGUAGE_WITH_TYPED_OPERANDS",
 "FINITE_DISCOVERY_SOURCE_SET_PER_DECISION_EPOCH",
 "DECISION_EPOCH_EXPLICIT_AND_DISCOVERY_RECEIPTS_EPOCH_BOUND",
 "DECISION_EPOCH_ADVANCES_ON_REQUIRED_CAPABILITY_CONSTRAINT_OR_DISCOVERY_SOURCE_SEMANTIC_CHANGE",
@@ -235,6 +239,122 @@ def _exhaustive_dynamic_abstraction()->dict[str,Any]:
                         return {"pass":False,"checked":checked,"failures":failures}
     return {"pass":True,"checked":checked,"failures":[]}
 
+
+def _ref_get(obj:dict[str,Any],path:str):
+    cur:Any=obj
+    for part in str(path).split("."):
+        if not isinstance(cur,dict) or part not in cur:
+            return None
+        cur=cur[part]
+    return cur
+
+def _ref_pred(expr:Any,tool:dict[str,Any])->bool:
+    if expr in (None,{},[]):
+        return True
+    if not isinstance(expr,dict):
+        return False
+    op=str(expr.get("op") or "")
+    if op=="and":
+        xs=expr.get("args")
+        return isinstance(xs,list) and all(_ref_pred(x,tool) for x in xs)
+    if op=="or":
+        xs=expr.get("args")
+        return isinstance(xs,list) and bool(xs) and any(_ref_pred(x,tool) for x in xs)
+    if op=="not":
+        return not _ref_pred(expr.get("arg"),tool)
+    value=_ref_get(tool,str(expr.get("path") or ""))
+    target=expr.get("value")
+    if op=="exists":
+        return (value is not None) is bool(target)
+    if op=="eq": return value==target
+    if op=="neq": return value!=target
+    if op=="in": return isinstance(target,list) and value in target
+    if op=="not_in": return isinstance(target,list) and value not in target
+    if op=="contains": return isinstance(value,(str,list,tuple,set)) and target in value
+    if isinstance(value,bool) or isinstance(target,bool):
+        return False
+    if not isinstance(value,(int,float)) or not isinstance(target,(int,float)):
+        return False
+    if op=="lt": return value<target
+    if op=="le": return value<=target
+    if op=="gt": return value>target
+    if op=="ge": return value>=target
+    return False
+
+def _predicate_semantics_checks()->dict[str,Any]:
+    tools=[
+        {"meta":{"region":"EU","risk":1,"tags":["prod","safe"],"provider":"P1"},"n":2,"flag":True},
+        {"meta":{"region":"US","risk":3,"tags":["prod"],"provider":"P2"},"n":0,"flag":False},
+        {"meta":{"region":"EU","risk":2,"tags":[],"provider":"P3"},"n":-1},
+    ]
+    atoms=[
+        {"op":"eq","path":"meta.region","value":"EU"},
+        {"op":"neq","path":"meta.provider","value":"P2"},
+        {"op":"in","path":"meta.region","value":["EU","APAC"]},
+        {"op":"not_in","path":"meta.region","value":["US"]},
+        {"op":"contains","path":"meta.tags","value":"safe"},
+        {"op":"exists","path":"meta.region","value":True},
+        {"op":"exists","path":"missing","value":False},
+        {"op":"lt","path":"meta.risk","value":2},
+        {"op":"le","path":"meta.risk","value":2},
+        {"op":"gt","path":"n","value":0},
+        {"op":"ge","path":"n","value":0},
+    ]
+    exprs=list(atoms)
+    exprs.extend([
+        {"op":"and","args":[atoms[0],atoms[7]]},
+        {"op":"or","args":[atoms[4],atoms[10]]},
+        {"op":"not","arg":atoms[1]},
+        {"op":"and","args":[atoms[0],{"op":"or","args":[atoms[4],atoms[8]]}]},
+    ])
+    checked=0
+    failures=[]
+    for tool in tools:
+        for expr in exprs:
+            got=v4._pred(expr,tool)
+            expected=_ref_pred(expr,tool)
+            checked+=1
+            if got!=expected:
+                failures.append({"tool":tool,"expr":expr,"expected":expected,"got":got})
+    malformed=[
+        "bad",
+        {"op":"unknown","path":"n","value":1},
+        {"op":"or","args":[]},
+        {"op":"lt","path":"flag","value":1},
+    ]
+    for expr in malformed:
+        got=v4._pred(expr,tools[0])
+        expected=_ref_pred(expr,tools[0])
+        checked+=1
+        if got!=expected:
+            failures.append({"tool":tools[0],"expr":expr,"expected":expected,"got":got})
+    return {"pass":not failures,"checked":checked,"failures":failures}
+
+def _route_filter_checks()->dict[str,bool]:
+    required=["CAP_A"]
+    cheap=_tool(0,required)
+    expensive=_tool(1,required)
+    cheap["meta"]={"region":"US"}
+    expensive["meta"]={"region":"EU"}
+    public=_base(required,[cheap,expensive],[])
+    public["constraint"]={"op":"eq","path":"meta.region","value":"EU"}
+    public["prior_probe_receipts"]=[
+        {"kind":"SAFE_CAPABILITY_PROBE","tool_id":"T0","capability":"CAP_A","epoch":0,"supported":True},
+        {"kind":"SAFE_CAPABILITY_PROBE","tool_id":"T1","capability":"CAP_A","epoch":0,"supported":True},
+    ]
+    constrained=v4.next_action(public)
+
+    cheap2=dict(cheap); cheap2["authorized"]=False
+    public2=_base(required,[cheap2,expensive],[])
+    public2["prior_probe_receipts"]=list(public["prior_probe_receipts"])
+    unauthorized=v4.next_action(public2)
+    return {
+        "CONSTRAINT_FILTERS_CHEAPER_INADMISSIBLE_ROUTE":
+            constrained=={"action":"SELECT","tool_id":"T1"},
+        "TOOL_AUTHORIZATION_FILTERS_CHEAPER_INADMISSIBLE_ROUTE":
+            unauthorized=={"action":"SELECT","tool_id":"T1"},
+    }
+
 def _epoch_and_authority_checks()->dict[str,bool]:
     required=["CAP_A"]
     t=_tool(0,required)
@@ -276,12 +396,16 @@ def evaluate()->dict[str,Any]:
     structural=_structural_invariants()
     abstraction=_exhaustive_dynamic_abstraction()
     edge=_epoch_and_authority_checks()
+    predicate=_predicate_semantics_checks()
+    route_filters=_route_filter_checks()
     program_pass=(
         not drift
         and property_exact
         and all(structural.values())
         and abstraction["pass"]
         and all(edge.values())
+        and predicate["pass"]
+        and all(route_filters.values())
     )
     return {
         "schema":SCHEMA,
@@ -295,6 +419,8 @@ def evaluate()->dict[str,Any]:
         "structural_induction_obligations":structural,
         "exhaustive_dynamic_abstraction":abstraction,
         "epoch_and_authority_checks":edge,
+        "predicate_language_semantics":predicate,
+        "route_filter_checks":route_filters,
         "conditional_program_sound_under_v2_contract":program_pass,
         "global_oracle_is_over_complete_tool_set_not_current_visible_subset":True,
         "universal_target_proved":False,
