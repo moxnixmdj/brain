@@ -132,7 +132,7 @@ def derive_facts(v5_source:str)->dict[str,bool]:
     and "tool_id not in self._tools" in v5_source
   ),
   "V5_MISSING_PROBE_PERMISSION_FAILS_CLOSED":(
-    "PROBE_PERMISSION_UNAVAILABLE_FOR_UNRESOLVED_CHEAPER_ROUTE" in v5_source
+    "SAFE_PROBE_PERMISSION_MISSING_FOR_UNRESOLVED_CHEAPER_ROUTE" in v5_source
     and '"action": "ESCALATE"' in v5_source
   ),
   "V5_THEOREM_REQUIRES_DISCOVERED_EQUALS_REGISTRY":"DISCOVERED_IDENTITIES_EQUAL_REGISTRY" in inv,
