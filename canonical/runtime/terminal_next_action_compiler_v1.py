@@ -17,7 +17,7 @@ from canonical.runtime.acceptance_ir_compiler_v1 import compile_ir
 ROOT = Path(__file__).resolve().parents[2]
 REGISTRY = ROOT / "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"
 EVIDENCE = ROOT / "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
-HYPERGRAPH = ROOT / "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json"
+HYPERGRAPH = ROOT / "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"
 
 SCHEMA = "PROJECT_BRAIN_TERMINAL_NEXT_ACTION_COMPILED_V1"
 
