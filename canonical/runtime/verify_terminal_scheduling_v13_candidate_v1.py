@@ -205,4 +205,6 @@ def evaluate():
     }
 
 if __name__ == "__main__":
-    print(json.dumps(evaluate(), indent=2, sort_keys=True))
+    out = evaluate()
+    print(json.dumps(out, indent=2, sort_keys=True))
+    raise SystemExit(0 if out.get("pass") is True else 1)
