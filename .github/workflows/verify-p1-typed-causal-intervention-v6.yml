@@ -1,0 +1,22 @@
+name: Verify P1 typed causal intervention V6
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/trajectory_failure_typed_ir_candidate_v6.py"
+      - "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py"
+      - "canonical/tests/test_trajectory_failure_typed_ir_v6.py"
+      - "canonical/governance/P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V6.json"
+      - ".github/workflows/verify-p1-typed-causal-intervention-v6.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run V6 forward causal intervention tests
+        run: python -m unittest canonical.tests.test_trajectory_failure_typed_ir_v6 -v
