@@ -70,7 +70,7 @@ class GitHubPublicRetrievalProviderTests(unittest.TestCase):
         opener=RecordingOpener()
         out=g.search(self.action("CODE_CONTENT"),opener=opener)
         self.assertEqual(out["candidate_count"],1,out)
-        decoded=urllib.parse.unquote(opener.urls[0])
+        decoded=urllib.parse.unquote_plus(opener.urls[0])
         self.assertIn("中文 UBJSON 编解码器",decoded)
         self.assertFalse(out["complete"])
         self.assertFalse(out["independently_complete"])
@@ -97,7 +97,7 @@ class GitHubPublicRetrievalProviderTests(unittest.TestCase):
             opener=RecordingOpener()
             out=g.search(self.action(surface,"ubjson"),limit=2,opener=opener)
             self.assertGreaterEqual(out["candidate_count"],1,out)
-            decoded="\n".join(urllib.parse.unquote(x) for x in opener.urls)
+            decoded="\n".join(urllib.parse.unquote_plus(x) for x in opener.urls)
             self.assertIn(needle,decoded)
 
     def test_issue_and_history_surfaces_are_candidates_only(self):
