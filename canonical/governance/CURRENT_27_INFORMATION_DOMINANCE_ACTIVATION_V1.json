@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_27_INFORMATION_DOMINANCE_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CURRENT_ZERO_REALITY_FRONTIER__INDEPENDENT_POINTER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Activate the independently verified exact 27-predicate information-dominance result as the current scheduling layer without granting fresh-reality, execution, promotion, acceptance, family, capability, or ownership credit.",
+  "verified_result": {
+    "candidate_path": "canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json",
+    "candidate_git_blob_sha": "fae786d6051277865ed6ecde69be5da98e2bf509",
+    "verification_path": "canonical/verification/CURRENT_27_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verification_git_blob_sha": "1931ae5a7edb5dde2021a8a4f7e7a3ad0fd821f1"
+  },
+  "current_scheduling_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "04f0ee3cd64c3f77b29ece159ac9a35eae47a9dc"
+  },
+  "live_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "nondominated_certificates": 16,
+    "unique_zero_reality_requirements": 19
+  },
+  "active_priority": {
+    "first_resource_priority": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+    "covered_predicates": 8,
+    "fraction_of_live_atomic_frontier": 0.2962962962962963,
+    "rule": "FIRST_RESOURCE_PRIORITY_WITHOUT_SERIALIZING_OTHER_INDEPENDENT_ZERO_REALITY_BRANCHES"
+  },
+  "execution_policy": {
+    "parallel_zero_reality_frontier": true,
+    "fixed_point_after_every_verified_delta": true,
+    "stop_branch_when_dominated": true,
+    "fresh_reality_authority": false,
+    "tool_discovery_v2_retrieval_authority_mandatory": true,
+    "repeated_consumed_tool_discovery_source_epoch_forbidden": true
+  },
+  "hard_rules": [
+    "NO_FRESH_REALITY_UNTIL_ZERO_REALITY_FRONTIER_SATURATES_AND_SEPARATE_MINIMUM_REALITY_AUTHORITY_IS_INDEPENDENTLY_VERIFIED",
+    "NO_ACCEPTANCE_COUNTS_CHANGE_FROM_THIS_ACTIVATION",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING",
+    "MATCHED_SCOPE_BINDING_GETS_FIRST_RESOURCE_PRIORITY_BUT_DOES_NOT_SERIALIZE_OTHER_INDEPENDENT_ZERO_REALITY_BRANCHES",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_ACCEPTANCE_DELTA",
+    "TOOL_DISCOVERY_RETRIEVAL_MUST_PASS_CURRENT_V2_RETRIEVAL_AUTHORITY_GATE"
+  ],
+  "next": "LAUNCH_PARALLEL_ZERO_REALITY_REQUIREMENT_DISCHARGE__PRIORITIZE_MATCHED_SCOPE_BINDINGS__RECOMPUTE_AFTER_FIRST_VERIFIED_DELTA__NO_FRESH_REALITY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
