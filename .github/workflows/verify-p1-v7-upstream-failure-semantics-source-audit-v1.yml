@@ -1,0 +1,50 @@
+name: Verify P1 V7 upstream failure semantics source audit v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/P1_V7_UPSTREAM_FAILURE_SEMANTICS_SOURCE_AUDIT_V1.json"
+      - "canonical/runtime/p1_v7_upstream_failure_semantics_source_audit_v1.py"
+      - "canonical/tests/test_p1_v7_upstream_failure_semantics_source_audit_v1.py"
+      - ".github/workflows/verify-p1-v7-upstream-failure-semantics-source-audit-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run adversarial audit tests
+        run: python -m unittest canonical.tests.test_p1_v7_upstream_failure_semantics_source_audit_v1 -v
+      - name: Execute exact frozen-source audit
+        run: python -m canonical.runtime.p1_v7_upstream_failure_semantics_source_audit_v1 > p1-v7-upstream-source-audit.json
+      - name: Enforce current zero-credit classification
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("p1-v7-upstream-source-audit.json"))
+          assert p["classification"]=="INFORMATION_OR_SPECIFICATION_RESIDUAL", p
+          assert p["status"]=="FAIL_CLOSED__NO_EXPLICIT_BOUND_UPSTREAM_FAILURE_SEMANTICS_SOURCE_IN_FROZEN_P1_EVIDENCE_SET__ZERO_CREDIT", p
+          assert p["surface_count"]==3, p
+          assert p["aggregate_p1_receipt_count"]==2, p
+          assert p["complete_explicit_source_documents"]==[], p
+          assert p["event_level_transport_declared_in_aggregate_receipts"] is False, p
+          assert p["terminal_results_replayed"]==0, p
+          assert p["new_reality_units_consumed"]==0, p
+          assert p["capability_credit_delta"]==0 and p["family_credit_delta"]==0, p
+          assert p["execution_authority"] is False and p["promotion_authority"] is False, p
+          PY
+      - name: Upload verdict
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p1-v7-upstream-failure-semantics-source-audit-v1
+          path: p1-v7-upstream-source-audit.json
+          if-no-files-found: error
