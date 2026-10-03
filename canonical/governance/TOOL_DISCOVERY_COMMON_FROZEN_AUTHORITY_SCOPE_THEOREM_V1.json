@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMMON_FROZEN_AUTHORITY_SCOPE_THEOREM_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CONDITIONAL_EXACT_IDENTITY_SCOPE_THEOREM__NO_INSTANCE_CLAIM__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "theorem": "For any concrete matched decision epoch whose Brain and Opus views are content-addressed to the same finite public tool-authority manifest, and whose complete current authoritative discovery-result union equals that manifest exactly, identity scope is exact and complete for that matched authority.",
+  "runtime": "canonical/runtime/tool_discovery_common_frozen_authority_scope_theorem_v1.py",
+  "tests": "canonical/tests/test_tool_discovery_common_frozen_authority_scope_theorem_v1.py",
+  "proves": [
+    "EXACT_COMMON_BRAIN_OPUS_AUTHORITY_IDENTITY_RELATION_IF_INSTANCE_PREMISES_HOLD",
+    "NO_MISSING_OR_EXTRA_DISCOVERED_TOOL_IDENTITIES",
+    "NO_CROSS_SOURCE_METADATA_CONFLICT"
+  ],
+  "does_not_prove": [
+    "AN_ACTUAL_CURRENT_INSTANCE_EXISTS",
+    "CAPABILITY_TRUTH",
+    "SAFE_PROBE_DECIDABILITY",
+    "V6_SOUNDNESS",
+    "TOOL_DISCOVERY_ACCEPTANCE"
+  ],
+  "hard_rules": [
+    "NO_BRAIN_ONLY_REGISTRY_SUBSTITUTION",
+    "NO_HIDDEN_CAPABILITY_TRUTH_IN_IDENTITY_SCOPE_PROOF",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
