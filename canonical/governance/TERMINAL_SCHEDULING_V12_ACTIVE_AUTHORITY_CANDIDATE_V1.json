@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V12_ACTIVE_AUTHORITY_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ACTIVE_ZERO_REALITY_SCHEDULING__17_REQUIREMENTS__14_ACTIVE_CERTIFICATES__27_UNRESOLVED__MANDATORY_TOOL_DISCOVERY_V4__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Make the live scheduling authority internally consistent after the 19-to-17 zero-reality reduction and Retrieval V4 promotion, without changing strict acceptance or authorizing fresh reality.",
+  "authority_basis": {
+    "current_zero_reality_frontier": {
+      "path": "canonical/governance/CURRENT_27_ZERO_REALITY_FRONTIER_V2.json",
+      "git_blob_sha": "bab3876a1c4bd6a065d20d42b320df4b4b3fa519"
+    },
+    "current_zero_reality_frontier_verification": {
+      "path": "canonical/verification/CURRENT_27_ZERO_REALITY_FRONTIER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "ac56cdefc44aa9a9b649945d10e84c84ee9945be"
+    },
+    "tool_discovery_live_gate": {
+      "path": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py",
+      "git_blob_sha": "b01292c1f198f251b8a9606b4de173541204c2dc"
+    },
+    "tool_discovery_v4_activation": {
+      "path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V4_ACTIVATION_V1.json",
+      "git_blob_sha": "643890c1d09844ea49de434df8ffec02962806e4"
+    },
+    "tool_discovery_v4_activation_verification": {
+      "path": "canonical/verification/RETRIEVAL_V4_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "e35dc954e0cf892d5522e62b5948bb64edeed4f7"
+    },
+    "tool_discovery_v4_live_gate_verification": {
+      "path": "canonical/verification/RETRIEVAL_V4_LIVE_GATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "ebb4ab1a05e47e20ecfacba41eb99d1f5c71694d"
+    },
+    "action_hypergraph": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+      "git_blob_sha": "38b53147597b5457859e3b0d031168842560e3e2"
+    },
+    "scheduling_runtime": {
+      "path": "canonical/runtime/current_terminal_scheduling_world_v1.py",
+      "git_blob_sha": "9ae2b990578b042dd24074fd5013378b72e64b6b"
+    }
+  },
+  "live_world": {
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "active_zero_reality_requirements": 17,
+    "active_nondominated_certificates": 14,
+    "discharged_zero_reality_requirements": 2,
+    "tool_learning_success_route_noninferior": "OPEN"
+  },
+  "mandatory_tool_discovery_retrieval": {
+    "chain": "V2_BASE_PLUS_V3_MULTILINGUAL_ADAPTIVE_FEDERATION_PLUS_V4_DIVERSITY_PRESERVING_ROUTER_EPOCH_GATE",
+    "gate_path": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py",
+    "gate_git_blob_sha": "b01292c1f198f251b8a9606b4de173541204c2dc",
+    "v4_activation_git_blob_sha": "643890c1d09844ea49de434df8ffec02962806e4",
+    "v4_activation_verification_git_blob_sha": "e35dc954e0cf892d5522e62b5948bb64edeed4f7",
+    "v4_live_gate_verification_git_blob_sha": "ebb4ab1a05e47e20ecfacba41eb99d1f5c71694d",
+    "mandatory": true,
+    "direct_bypass_allowed": false,
+    "stale_authority_allowed": false,
+    "consumed_source_epoch_replay_allowed": false,
+    "backend_unbound_counts_as_attempt": false,
+    "failed_or_empty_attempt_means_nonexistence": false,
+    "source_epoch_consumption_means_open_world_complete": false
+  },
+  "supersedes_for_scheduling_only": [
+    "canonical/governance/TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_V1.json",
+    "canonical/governance/TERMINAL_SCHEDULING_V11_ACTIVE_AUTHORITY_CANDIDATE_V1.json"
+  ],
+  "supersession_reason": "V10_HAS_19_STALE_REQUIREMENTS_AND_V3_ONLY_GATE__V11_HAS_17_REQUIREMENTS_BUT_PREDATES_MANDATORY_V4_GATE",
+  "next": "PARALLEL_ZERO_REALITY_DISCHARGE_ON_17_ACTIVE_REQUIREMENTS__MATCHED_SCOPE_16_CHILD_FACTS_FIRST_RESOURCE_PRIORITY__TOOL_DISCOVERY_RETRIEVAL_MUST_USE_EXACT_V4_CHAIN__FIXED_POINT_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY_YET",
+  "hard_rules": [
+    "PRESERVE_4_OF_19_ACCEPTANCE_AND_11_OF_38_ATOMIC_COUNTS",
+    "PRESERVE_27_UNRESOLVED_ACCEPTANCE_PREDICATES",
+    "PRESERVE_EXACT_INDEPENDENTLY_VERIFIED_17_REQUIREMENT_FRONTIER",
+    "TOOL_DISCOVERY_V4_GATE_IS_MANDATORY_AND_V3_ONLY_SCHEDULING_IS_STALE",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "NO_FRESH_REALITY_UNTIL_ACTIVE_ZERO_REALITY_FRONTIER_REACHES_VERIFIED_FIXED_POINT",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
