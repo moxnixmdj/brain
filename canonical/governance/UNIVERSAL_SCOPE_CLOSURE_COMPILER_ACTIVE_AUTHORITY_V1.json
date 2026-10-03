@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_SCOPE_CLOSURE_COMPILER_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GENERIC_ROOT3_PREPROCESSOR__ZERO_CREDIT",
+  "objective": "Route every Root3-bearing acceptance target through one verified fail-closed scope-certificate type system before any predicate-specific acceptance reduction.",
+  "candidate": {
+    "path": "canonical/governance/UNIVERSAL_SCOPE_CLOSURE_COMPILER_ACTIVATION_V1.json",
+    "git_blob_sha": "beef965fd2c0e3628c2312113f844ffdd1a1ed4e"
+  },
+  "runtime": {
+    "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039"
+  },
+  "tests": {
+    "path": "canonical/tests/test_universal_scope_closure_compiler_v1.py",
+    "git_blob_sha": "dc3c3abdfa5c0fb7ff76fa897eb9b23accfca71d"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/UNIVERSAL_SCOPE_CLOSURE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pr": 1425,
+    "verifier_merge_commit": "966cca4c393b32e42ed5331b8089a188bb3f7a9f",
+    "workflow_run_id": 37156756044,
+    "workflow_job_id": 111301607829,
+    "conclusion": "success"
+  },
+  "root3_target_count": 11,
+  "active_rule": "SCOPE_COMPLETE_ONLY_IF_THE_PREDICATE_HAS_AN_INDEPENDENT_VERIFIED_EXACT_OR_PROVEN_STRONGER_CERTIFICATE_USING_UNIVERSAL_EXACT_FINITE_EXHAUSTIVE_SUPERSET_OR_LOSSLESS_DECOMPOSITION_BASIS__PERFORMANCE_REMAINS_SEPARATE",
+  "next": "COMPILE_ONLY_CURRENT_PREDICATE_SPECIFIC_SCOPE_CERTIFICATES__PROMOTE_ONLY_NEW_SCOPE_DELTAS__DO_NOT_REPEAT_GENERIC_STRONGER_PROOF_SEARCH_OR_INFER_PERFORMANCE",
+  "hard_rules": [
+    "NO_CURRENT_OPEN_ROOT3_PREDICATE_CLOSES_FROM_COMPILER_ACTIVATION_ALONE",
+    "FINITE_SAMPLE_SUCCESS_NEVER_IMPLIES_OPEN_WORLD_SCOPE_COMPLETENESS",
+    "SCOPE_COMPLETENESS_NEVER_IMPLIES_PERFORMANCE_NONINFERIORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT_FROM_INFRASTRUCTURE"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
