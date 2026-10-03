@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_BRIDGE_SCOPE_FIREWALL_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_COMPOSITION_BASELINE_0_OF_12_BEFORE_NEW_RECEIPTS__ZERO_CREDIT",
+  "source_candidate": {
+    "path": "canonical/governance/COMPOSITION_BRIDGE_SCOPE_FIREWALL_RECONCILIATION_V1.json",
+    "git_blob_sha": "6bdcc7376125d9d4c1bf7f7771630634a342d4e5"
+  },
+  "exact_brain_blobs": {
+    "canonical/governance/COMPOSITION_BRIDGE_SCOPE_FIREWALL_RECONCILIATION_V1.json": "6bdcc7376125d9d4c1bf7f7771630634a342d4e5",
+    "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_V1.json": "d6cb17f548493e64ca3d200d51b049412a939ef7",
+    "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_V1.json": "59504f4608f9490022c1aa58214e34191fb0b6e9",
+    "canonical/verification/COMPOSITION_COMPONENT_PROOF_SLICE_20261002_V2.json": "714d1771ad2fa3ca240c0fb73609dc4873ea4390",
+    "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "af83f4899169e81017767c3316ddcf6b61da5ef6"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1071,
+    "verification_branch": "verify-composition-scope-firewall-reconciliation-sol-20261002",
+    "branch_head_sha": "d863543a8156c6d38e34cec2bb1f7afe8c6c7e41",
+    "workflow_run_id": 37041156527,
+    "workflow_job_id": 110951324466,
+    "workflow_name": "Verify composition scope-firewall reconciliation v1",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_SIX_BRAIN_BLOBS",
+    "BRIDGE_REQUIRES_WHOLE_SOURCE_PROTOCOL_CLOSURE",
+    "BOTH_BRIDGE_SOURCE_FAMILIES_REOPENED_BY_LATER_SCOPE_FIREWALL",
+    "BOTH_CURRENT_SOURCE_ACCEPTANCE_PREDICATES_BLOCKED_ON_SCOPE_COMPLETENESS_AT_VERIFIED_SNAPSHOT",
+    "V2_SLICE_TWO_PROOFS_ARE_EXACTLY_THE_AFFECTED_RECEIPTS",
+    "QUARANTINE_PRESERVES_RAW_SAMPLE_EVIDENCE_AND_GRANTS_ZERO_CREDIT",
+    "COUNTERFACTUAL_SOURCE_RESTORATION_DETECTED"
+  ],
+  "verified_effect": "CURRENT_COMPOSITION_ADMISSIBLE_BASELINE_REDUCES_FROM_2_OF_12_TO_0_OF_12_BEFORE_ANY_NEW_INDEPENDENT_RECEIPT",
+  "temporal_note": "Later source-family closure may satisfy the reconciliation restoration rule, but must be recomputed against current authority before any component receipt is restored.",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
