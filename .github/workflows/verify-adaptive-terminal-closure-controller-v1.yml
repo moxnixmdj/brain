@@ -1,4 +1,4 @@
-name: Verify adaptive terminal closure controller v1
+name: Verify historical adaptive terminal closure controller v1
 
 on:
   push:
@@ -6,49 +6,31 @@ on:
       - "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
       - "canonical/tests/test_adaptive_terminal_closure_controller_v1.py"
       - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json"
+      - "canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_V10_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
       - ".github/workflows/verify-adaptive-terminal-closure-controller-v1.yml"
   pull_request:
     paths:
       - "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
       - "canonical/tests/test_adaptive_terminal_closure_controller_v1.py"
       - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json"
-      - "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json"
+      - "canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_V10_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
       - ".github/workflows/verify-adaptive-terminal-closure-controller-v1.yml"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  verify:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
+  verify-historical-integrity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Run adaptive controller tests
-        run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v1 -v
-      - name: Compile current adaptive terminal closure frontier
+      - name: Verify immutable V1 historical subjects
         run: |
-          python canonical/runtime/adaptive_terminal_closure_controller_v1.py > ADAPTIVE_TERMINAL_CLOSURE_RESULT.json
-          python - <<'PY'
-          import json
-          x=json.load(open("ADAPTIVE_TERMINAL_CLOSURE_RESULT.json"))
-          assert x["pass"] is True,x
-          assert x["live_world"]["proved_predicates"]==11,x
-          assert x["live_world"]["unresolved_predicates"]==27,x
-          assert x["live_world"]["nondominated_certificates"]==16,x
-          assert x["live_world"]["verified_zero_reality_requirements"]==19,x
-          assert x["live_world"]["matched_primitive_child_facts"]==16,x
-          assert x["action_refinement"]["primitive_acceptance_work_units"]==33,x
-          assert len(x["first_resource_priority_work_unit_ids"])==16,x
-          assert len(x["ownership_reconciliation_work_units"])==2,x
-          td=[r for r in x["acceptance_work_units"] if "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR" in r["target_predicates"]]
-          assert len(td)==1,x
-          assert td[0]["mandatory_tool_discovery_v3_gate"] is True,x
-          assert td[0]["source_hints"][0]=="MANDATORY_TOOL_DISCOVERY_V3_OVER_VERIFIED_V2_BASE_RETRIEVAL_GATE",x
-          assert x["execution_authority"] is False,x
-          assert x["promotion_authority"] is False,x
-          assert x["fresh_reality_authority"] is False,x
-          print("adaptive V10/V3 terminal closure controller verified")
-          PY
+          set -euo pipefail
+          test "$(git hash-object canonical/runtime/adaptive_terminal_closure_controller_v1.py)" = "06d16ef1e8caa08835bc4e958c3047833bf52a32"
+          test "$(git hash-object canonical/tests/test_adaptive_terminal_closure_controller_v1.py)" = "874706e94596cde028bed872cc40f07f6fa0d843"
+          test "$(git hash-object canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json)" = "78dda53305200ed466099db8658840980b2126fc"
+          test "$(git hash-object canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_V10_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json)" = "bb3786357ba77d62de0f2782363119ff1a55030e"
+          echo "historical V10/V3 adaptive controller V1 integrity preserved; V2 owns current scheduling"
