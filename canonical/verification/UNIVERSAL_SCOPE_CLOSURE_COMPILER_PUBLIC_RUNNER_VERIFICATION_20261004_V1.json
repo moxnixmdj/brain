@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_SCOPE_CLOSURE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_CURRENT_BYTES__ZERO_CREDIT",
+  "current_main": "1f9cc94f5d0481d23d2bf072e73e78b7d09b9c73",
+  "exact_brain_blobs": {
+    "runtime": "b208255789b14e44e86c82c196e06b5c41b3d039",
+    "tests": "dc3c3abdfa5c0fb7ff76fa897eb9b23accfca71d",
+    "candidate": "beef965fd2c0e3628c2312113f844ffdd1a1ed4e"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1425,
+    "merge_commit": "966cca4c393b32e42ed5331b8089a188bb3f7a9f",
+    "workflow_run_id": 37156756044,
+    "workflow_job_id": 111301607829,
+    "conclusion": "success"
+  },
+  "consequence": "GENERIC_ROOT3_SCOPE_COMPILER_INDEPENDENTLY_VERIFIED__PREDICATE_SPECIFIC_CERTIFICATE_STILL_REQUIRED",
+  "credit_delta": 0
+}
