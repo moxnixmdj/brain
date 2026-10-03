@@ -14,12 +14,12 @@
   "sources": {
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-      "git_blob_sha": "c66551ce3c77592f8937d165686a7133807d6654",
+      "git_blob_sha": "68b70685d7e4b91934f46e189d07600886d6c126",
       "status": "CURRENT_SCOPE_RECONCILED__P1_SCOPE_RESTORED__5_OF_19_ACCEPTANCE_PASS__14_OPEN__TERMINAL_FALSE"
     },
     "ownership_matrix": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "git_blob_sha": "7d4b89a408416201c0de6e2cb31797a24737223b",
+      "git_blob_sha": "96453d601e054edc42793e8c0a07d1b14b794027",
       "status": "CURRENT_RECONCILED__P1_SCOPE_RESTORED__5_OF_19_ACCEPTANCE__2_VERIFIED_OWNED__14_ACCEPTANCE_OPEN"
     },
     "acceptance_calibration": {
@@ -1321,7 +1321,7 @@
     "current_effective_canonical_leaf_atoms": 39
   },
   "last_reconciled_control_plane_head": "62af767d06485f594c7670aec44452ef2e3d77c1",
-  "last_reconciled_reason": "TOOL_DISCOVERY_UNIVERSAL_FORMAL_SCOPE_AND_ACCEPTANCE_REDUCTION_INDEPENDENTLY_VERIFIED__PROMOTED_EXACTLY_ONE_PREDICATE_TO_12_OF_38_AND_ONE_FAMILY_TO_5_OF_19__OWNERSHIP_REMAINS_SEPARATE__ZERO_NEW_REALITY",
+  "last_reconciled_reason": "TOOL_DISCOVERY_UNIVERSAL_FORMAL_SCOPE_AND_ACCEPTANCE_REDUCTION_INDEPENDENTLY_VERIFIED__PROMOTED_EXACTLY_ONE_PREDICATE_TO_12_OF_38_AND_ONE_FAMILY_TO_5_OF_19__CURRENT_CLOSURE_AND_OWNERSHIP_MIRRORS_REBOUND__OWNERSHIP_REMAINS_SEPARATE__ZERO_NEW_REALITY",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
