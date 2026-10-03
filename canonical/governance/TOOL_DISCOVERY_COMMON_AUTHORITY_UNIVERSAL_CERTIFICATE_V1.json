@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMMON_AUTHORITY_UNIVERSAL_CERTIFICATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__COMMON_MATCHED_AUTHORITY_UNIVERSAL_FORMAL_SCOPE_PROOF__INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge the whole-protocol Tool Discovery scope atom without empirical extrapolation, Brain-only universe narrowing, terminal replay, or new reality by proving V5 over every admissible finite frozen common matched tool-authority snapshot.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+  "proof_domain": "ALL_FINITE_FROZEN_COMMON_MATCHED_TOOL_AUTHORITY_SNAPSHOTS_WITH_UNIQUE_IDENTITIES__ARBITRARY_FINITE_AUTHORITATIVE_SOURCE_PARTITIONS__FINITE_NONNEGATIVE_TOOL_AND_SOURCE_COSTS__ARBITRARY_AVAILABILITY_AUTHORIZATION_AND_PUBLIC_METADATA__ARBITRARY_HIDDEN_CAPABILITY_RELATIONS__FINITE_NONEMPTY_EXACT_REQUIREMENT_SETS__WELL_FORMED_SUPPORTED_STATIC_CONSTRAINTS__TRUTHFUL_BOUNDED_EXACT_REQUIREMENT_SAFE_PROBES__ATOMIC_AUTHORITY_EPOCH_CHANGES",
+  "exact_candidate_blobs": {
+    "common_authority": {
+      "path": "canonical/runtime/common_frozen_tool_authority_v1.py",
+      "git_blob_sha": "9e02d13516035ebece97a210d633afa906c32b90"
+    },
+    "common_authority_tests": {
+      "path": "canonical/tests/test_common_frozen_tool_authority_v1.py",
+      "git_blob_sha": "824bb1c3a783b2d0f58556150a68a8a739143f6d"
+    },
+    "v5": {
+      "path": "canonical/runtime/tool_discovery_dynamic_candidate_v5.py",
+      "git_blob_sha": "f4e076626b2aca63059a271bed71759ba6e1b741"
+    },
+    "v5_tests": {
+      "path": "canonical/tests/test_tool_discovery_dynamic_candidate_v5.py",
+      "git_blob_sha": "08888a94998ccba49aa31a4928d66e6bd987fa85"
+    },
+    "certificate": {
+      "path": "canonical/runtime/tool_discovery_common_authority_universal_certificate_v1.py",
+      "git_blob_sha": "7768378eb04930313b1e1d1257035388edf9930e"
+    },
+    "certificate_tests": {
+      "path": "canonical/tests/test_tool_discovery_common_authority_universal_certificate_v1.py",
+      "git_blob_sha": "e2240e9d883985ae60cb278b215befbd7552dcb7"
+    },
+    "interface_contract": {
+      "path": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V3.json",
+      "git_blob_sha": "d00afbdf2f0ff09bba32b5b29aa5bd2c8938732f"
+    },
+    "v5_truth_repair": {
+      "path": "canonical/governance/TOOL_DISCOVERY_V5_CONVERGED_SOUNDNESS_REPAIR_V1.json",
+      "git_blob_sha": "1712bae87ec22648e782050c059f748b4860f121"
+    }
+  },
+  "frozen_target_blobs": {
+    "protocols": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "behavioral_contract_registry": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "atomic_evidence_bindings": "7885a827b1483bfb38315c1f492848f7e4680285",
+    "frozen_terminal_binding": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+  },
+  "theorem_lemmas": [
+    "COMMON_AUTHORITY_SYMMETRY__BRAIN_AND_COMPARATOR_SHARE_THE_EXACT_SAME_INVOCABLE_IDENTITY_UNIVERSE",
+    "ARBITRARY_FINITE_AUTHORITATIVE_SOURCE_PARTITION_UNION_EQUALS_COMMON_REGISTRY",
+    "IDENTITIES_HIDDEN_BEFORE_DISCOVERY__CAPABILITY_SUPPORT_HIDDEN_AFTER_DISCOVERY",
+    "DISCOVERY_PROGRESS_TERMINATES_IN_AT_MOST_SOURCE_COUNT_COMPLETE_RECEIPTS",
+    "EVIDENCE_PROGRESS_TERMINATES_IN_AT_MOST_TOOL_COUNT_TIMES_REQUIREMENT_COUNT_CURRENT_PROBES",
+    "FIRST_SELECTED_ROUTE_IS_LEAST_COST_ADMISSIBLE_SUFFICIENT_ROUTE",
+    "FINAL_NO_ROUTE_ESCALATION_REQUIRES_EVERY_ADMISSIBLE_ROUTE_TO_HAVE_A_CURRENT_NEGATIVE_WITNESS",
+    "CURRENT_EPOCH_RECEIPTS_TRANSFER_WITHOUT_CAPABILITY_REDISCOVERY",
+    "AUTHORITY_OR_TOOL_EPOCH_CHANGE_INVALIDATES_STALE_EVIDENCE_AND_STALE_INVOCATION",
+    "ALL_SIX_FROZEN_TOOL_DISCOVERY_TASK_DIMENSIONS_ARE_MAPPED_WITHOUT_PROXY_SUBSTITUTION",
+    "EVERY_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V3_PROPERTY_IS_LOAD_BEARING"
+  ],
+  "target_preservation": {
+    "brain_only_registry": false,
+    "same_tool_authority_for_brain_and_comparator": true,
+    "empirical_180_case_generalization": false,
+    "hidden_capability_truth_disclosed": false,
+    "frozen_protocol_changed": false,
+    "comparator_threshold_changed": false
+  },
+  "hard_rules": [
+    "DO_NOT_USE_180_OF_180_AS_UNIVERSAL_SCOPE_PROOF",
+    "DO_NOT_USE_PER_CASE_IDENTITY_COMPLETENESS_AS_COMPLETE_PROTOCOL_CASE_POPULATION",
+    "DO_NOT_PROMOTE_FROM_SELF_VERIFICATION",
+    "INDEPENDENT_PUBLIC_EXACT_BYTE_VERIFICATION_REQUIRED",
+    "SEPARATE_ACCEPTANCE_REDUCTION_REQUIRED_AFTER_SCOPE_PASS",
+    "NO_FRESH_TERMINAL_REALITY",
+    "NO_TERMINAL_REPLAY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "expected_independent_projection": {
+    "universal_scope_proved": true,
+    "whole_protocol_common_authority_scope_proved": true,
+    "all_admissible_target_inputs_proved": true,
+    "formal_completeness": true,
+    "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "target_preserved": true
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
