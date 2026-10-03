@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V3_RECONCILIATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_PROOF_SEMANTICS_RECONCILIATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Repair the stale V2 residual compiler so it can faithfully consume the already-promoted current proof forms without weakening proof requirements or changing any acceptance state.",
+  "exact_inputs": {
+    "runtime": {
+      "path": "canonical/runtime/opus55_acceptance_residual_compiler_v3.py",
+      "git_blob_sha": "6eaea32aedc88591091000557a15189eff2ab911"
+    },
+    "tests": {
+      "path": "canonical/tests/test_opus55_acceptance_residual_compiler_v3.py",
+      "git_blob_sha": "72011c22ec497165fa8a6a496be44bb9a338e118"
+    },
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163"
+    },
+    "comparator": {
+      "path": "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json",
+      "git_blob_sha": "f67e22cee5e6fce1ebfae92ebf0946f78fafcee1"
+    },
+    "readiness": {
+      "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+      "git_blob_sha": "4e59e30461c9ff1bee1a9474627d5fb4074844b2"
+    }
+  },
+  "proof_semantic_delta": {
+    "newly_understood_proof_kinds": [
+      "SCOPE_COMPLETE_STRONGER_PROOF",
+      "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS"
+    ],
+    "delegation_universal_scope_certificate_is_load_bearing": true,
+    "recovery_independent_scope_complete_flags_are_load_bearing": true,
+    "unknown_future_proof_kinds_fail_closed": true
+  },
+  "expected_current_projection": {
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "terminal_promotion_allowed": false,
+    "receipt_saturation_complete": false,
+    "authorized_actions": [
+      "ACTION::SATURATE_EXISTING_RECEIPTS"
+    ]
+  },
+  "hard_rules": [
+    "COMPILER_RECONCILIATION_GRANTS_NO_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "DO_NOT_EDIT_OR_DOWNGRADE_CURRENT_EVIDENCE_LEDGER_TO_SATISFY_STALE_COMPILER",
+    "ONLY_EXPLICITLY_ADMITTED_CURRENT_PROOF_KINDS_ARE_ACCEPTED",
+    "UNIVERSAL_SCOPE_METADATA_IS_LOAD_BEARING",
+    "INDEPENDENCE_AND_SCOPE_COMPLETENESS_REMAIN_REQUIRED",
+    "UNKNOWN_PROOF_KINDS_FAIL_CLOSED"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
