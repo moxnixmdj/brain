@@ -49,7 +49,7 @@
   "prerequisite_receipt_blobs": {
     "canonical/verification/TB_SCIENCE_PATCHED_REAL_HARBOR_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "4512996a6698463be367052b13a891bd0f647f73",
     "canonical/verification/TB_SCIENCE_OPUS55_SNAPSHOT_IDENTITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "3bff4c8ec68bba45d0538812101fbbfed7b9b2ec",
-    "canonical/verification/TB_SCIENCE_CANARY_V2_RESULT_20261003_V1.json": "c3e9d8248d15af8974d5673234d0df5029d79646"
+    "canonical/verification/TB_SCIENCE_CANARY_V2_RESULT_20261003_V1.json": "0c8661698af57557b2205c43e29610f88f194ed4"
   },
   "execution_semantics": {
     "slots_authorized_if_promoted": 1,
