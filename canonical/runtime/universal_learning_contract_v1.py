@@ -190,7 +190,10 @@ def prove_control_invariants() -> dict[str, Any]:
                 got = None
             if got != expected:
                 errors.append(f"TRANSITION_MISMATCH:{state}:{event}:{got}:{expected}")
-            if got == "VERIFIED" and (state, event) != ("CANDIDATE", "VERIFY_PASS"):
+            if got == "VERIFIED" and (state, event) not in {
+                ("CANDIDATE", "VERIFY_PASS"),
+                ("VERIFIED", "REUSE"),
+            }:
                 errors.append("VERIFIED_REACHED_WITHOUT_VERIFY_PASS")
 
     for state in STATES:
