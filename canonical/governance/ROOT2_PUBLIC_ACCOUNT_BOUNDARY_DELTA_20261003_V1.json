@@ -1,0 +1,114 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PUBLIC_ACCOUNT_BOUNDARY_DELTA_20261003_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__PUBLIC_ZERO_REALITY_BOUNDARY_COMPRESSION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Delete public-search uncertainty that is already decidable from first-party Chartography, Gemini API, and OSWorld V2.1 documentation without consuming terminal cases or weakening comparator requirements.",
+  "chartography": {
+    "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+    "sources": {
+      "chartography_repository": "surge-ai/chartography",
+      "chartography_source_commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+      "gemini_pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+      "gemini_rate_limits": "https://ai.google.dev/gemini-api/docs/rate-limits"
+    },
+    "proved_public_facts": {
+      "full_task_count": 100,
+      "leaderboard_epochs": 10,
+      "judge_model": "google/gemini-3.5-flash",
+      "judge_calls_per_sample": 1,
+      "exact_leaderboard_judge_call_mass": 1000,
+      "standard_free_tier_input_price_usd": 0,
+      "standard_free_tier_output_price_usd": 0,
+      "rate_limits_are_project_scoped": true,
+      "exact_active_rpm_rpd_visible_in_ai_studio": true,
+      "published_limits_not_guaranteed": true
+    },
+    "removed": [
+      "UNKNOWN_EXACT_JUDGE_CALL_MASS",
+      "GENERIC_GEMINI_3_5_FLASH_MONETARY_PRICE_BLOCKER",
+      "GENERIC_PUBLIC_RATE_LIMIT_SEARCH"
+    ],
+    "remaining": [
+      "ACCOUNT_BOUND_GEMINI_3_5_FLASH_FREE_TIER_MODEL_ACCESS_STATE",
+      "ACCOUNT_BOUND_ACTIVE_RPM_RPD_SUFFICIENCY_FOR_1000_JUDGE_CALLS_WITH_RETRY_POLICY",
+      "HARD_ZERO_SPEND_STOP",
+      "BRAIN_SCORE_AFTER_ZERO_REALITY_FIXED_POINT"
+    ],
+    "hard_rule": "FREE_PRICE_DOES_NOT_IMPLY_ACCOUNT_QUOTA_SUFFICIENCY__ONLY_ACTIVE_PROJECT_LIMITS_OR_A_PROVED_LOWER_BOUND_MAY_DISCHARGE_QUOTA"
+  },
+  "osworld_2_1": {
+    "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "sources": {
+      "repository": "xlang-ai/OSWorld-V2",
+      "source_commit": "acdd3493808e716825975b0f0208194bb2faf3c3",
+      "task_dataset": "xlangai/osworld_v2_tasks@osworld-v2.1",
+      "gated_asset_dataset": "xlangai/osworld_v2_assets_gated@osworld-v2.1",
+      "self_host_repository": "Task-Web/OSWorld-web@osworld-v2.1"
+    },
+    "proved_public_facts": {
+      "task_access_requires_accepting_gated_request": true,
+      "task_access_request_auto_approved_after_acceptance": true,
+      "gated_asset_access_requires_acceptance": true,
+      "gated_asset_auto_approval_not_claimed": true,
+      "local_huggingface_auth_required": true,
+      "exact_release_component_matching_required": true,
+      "public_assets_are_not_complete_task_asset_source": true
+    },
+    "removed": [
+      "GENERIC_TASK_GATE_APPROVAL_UNCERTAINTY",
+      "GENERIC_RELEASE_COMPONENT_IDENTITY_DISCOVERY",
+      "GENERIC_PUBLIC_ASSET_SUBSTITUTION_SEARCH"
+    ],
+    "remaining": [
+      "ACCOUNT_STATE_CHECK_FOR_TASK_AND_GATED_ASSET_ACCEPTANCE",
+      "HUGGINGFACE_AUTHENTICATED_MATERIALIZATION_OF_PINNED_V2_1_TASKS_AND_ASSETS",
+      "SELF_HOST_DEPENDENCIES_AT_EXACT_V2_1_TAG",
+      "END_TO_END_PROTOCOL_EQUIVALENCE",
+      "BRAIN_SCORE_AFTER_ZERO_REALITY_FIXED_POINT"
+    ],
+    "hard_rule": "DO_NOT_INFER_ASSET_GATE_AUTO_APPROVAL_FROM_TASK_GATE_AUTO_APPROVAL__DO_NOT_SUBSTITUTE_PUBLIC_RUNTIME_ASSETS_FOR_COMPLETE_GATED_ASSET_SNAPSHOT"
+  },
+  "finance_index": {
+    "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "source": "https://artificialanalysis.ai/methodology/capability-indices",
+    "public_methodology_reconfirmed": {
+      "component_weights": {
+        "BUSINESS_KNOWLEDGE": 0.3,
+        "AGENTIC_KNOWLEDGE_WORK": 0.3,
+        "REASONING": 0.2,
+        "AGENTIC_TOOL_USE": 0.1,
+        "LONG_CONTEXT": 0.05,
+        "NON_HALLUCINATION": 0.05
+      },
+      "separate_index_execution_still_dominated_by_existing_componentwise_monotone_theorem": true
+    },
+    "acceptance_delta": 0,
+    "remaining": "THE_SIX_COMPONENT_NONINFERIORITY_AND_EXACT_NORMALIZATION_PREMISES_REMAIN_LOAD_BEARING"
+  },
+  "hle_tools": {
+    "target_predicate": "HLE_TOOLS_GE_67_7",
+    "public_reference_harness_fact": "CAIS_REFERENCE_HLE_USES_MODEL_PREDICTIONS_PLUS_MODEL_JUDGE__JUDGE_CHOICE_IS_LOAD_BEARING",
+    "consequence": "NO_DETERMINISTIC_REFERENCE_MATCH_SHORTCUT_RESTORED__COMPARABLE_OFFICIAL_OR_PROVED_EQUIVALENT_JUDGE_REMAINS_REQUIRED",
+    "acceptance_delta": 0
+  },
+  "hard_rules": [
+    "NO_TERMINAL_CASE_CONTENT_READ_OR_EXECUTED",
+    "NO_ACCOUNT_STATE_INFERRED_FROM_PUBLIC_DOCUMENTATION",
+    "NO_FREE_PRICE_TO_QUOTA_SUFFICIENCY_INFERENCE",
+    "NO_GATED_ASSET_ACCESS_INFERENCE_BEYOND_FIRST_PARTY_TEXT",
+    "NO_HLE_JUDGE_EQUIVALENCE_INFERENCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_PUBLIC_FACTS__THEN_COMPILE_V12_CUT_WITH_CHARTOGRAPHY_AND_OSWORLD_SEARCH_CLASSES_REDUCED_TO_ACCOUNT_BOUND_AND_PROTOCOL_BOUND_LEAVES",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
