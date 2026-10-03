@@ -1,0 +1,227 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V9",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__GDPVAL_FRONTIERCODE_CURSORBENCH_ROUTE_SEARCH_COMPRESSED__TB4_FOUR_CPU_SHORTCUT_FALSIFIED__NO_FRESH_REALITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 15,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 4,
+    "root2_unique_benchmark_surfaces": 14
+  },
+  "authority": {
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "e94469ffdeb7535f9a921a244e62cde6b84fda5c"
+    },
+    "evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5"
+    },
+    "root2_routes": {
+      "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+      "git_blob_sha": "afe631a420b547a8c4e06bf1bdf15467eee3198b"
+    },
+    "minimum_frontier": {
+      "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
+      "git_blob_sha": "0af95d94b2de464f1590911394596a63dcff30f8"
+    },
+    "root2_public_access_refresh": {
+      "path": "canonical/governance/ROOT2_PUBLIC_ACCESS_REFRESH_20261003_V1.json",
+      "git_blob_sha": "905d4ac3e186b7f69c4dc6eaf83a82b7a7044a75"
+    },
+    "tb4_carrier_census": {
+      "path": "canonical/governance/TB4_ZERO_COST_CARRIER_CENSUS_20261003_V1.json",
+      "git_blob_sha": "6c42b74d50276eeeee984707963e93ef5c227df4"
+    },
+    "root3_saturation": {
+      "path": "canonical/governance/CURRENT_ROOT3_ZERO_REALITY_STRONGER_PROOF_SATURATION_V1.json",
+      "git_blob_sha": "bdc78fdc147a014e5d77d5daafb5434b1a4e878f"
+    },
+    "root3_compression": {
+      "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
+      "git_blob_sha": "a9d3e6ebf05032d30fc20ac785e88e6823474601"
+    },
+    "matched_totalization": {
+      "path": "canonical/verification/CURRENT_WITNESS_TARGET_TOTALIZATION_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "48c2318aaffffec67855199523235e6943289fc6"
+    },
+    "synthesis_transport": {
+      "path": "canonical/verification/SYNTHESIS_OVERLAY_V3_REBIND_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "1a67bc568944212c4d235a463c8bd7bea21b3993"
+    },
+    "finance_index_identity": {
+      "path": "canonical/governance/FINANCE_ACCOUNTING_INDEX_IDENTITY_RECONCILIATION_V1.json",
+      "git_blob_sha": "dcd910e2af97c1648ab29d614552b072c66d647e"
+    },
+    "aa_briefcase_comparator": {
+      "path": "canonical/governance/AA_BRIEFCASE_OPUS55_COMPARATOR_PROVENANCE_RECONCILIATION_V1.json",
+      "git_blob_sha": "55974d8c5d8e32f276149543959ad88f2c5abb89"
+    },
+    "tb_science_public_carrier": {
+      "path": "canonical/verification/TB_SCIENCE_V01_PUBLIC_GITHUB_CARRIER_ATTAINABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "aacdd4431ec4a0c889d1bb4249c8eba9ee476390"
+    },
+    "chartography_osworld_route_compression": {
+      "path": "canonical/governance/ROOT2_CHARTOGRAPHY_OSWORLD_ROUTE_COMPRESSION_20261003_V1.json",
+      "git_blob_sha": "ca80a5ee13c27d3a4607ec31890a81434b720940"
+    },
+    "root2_route_refresh": {
+      "path": "canonical/governance/ROOT2_ROUTE_REFRESH_20261003_V1.json",
+      "git_blob_sha": "5e75da77b1edc689b69c15472204ad08e16dc4cb"
+    },
+    "tb4_four_cpu_shortcut_falsification": {
+      "path": "canonical/governance/TB4_FOUR_CPU_DOCKER_LIMIT_ROUTE_FALSIFICATION_V1.json",
+      "consequence": "FOUR_CPU_GITHUB_RUNNER_RESOURCE_EQUIVALENCE_SHORTCUT_CLOSED__DO_NOT_RETRY_WITHOUT_MATERIAL_NEW_EVIDENCE"
+    }
+  },
+  "exhausted_or_waiting": [
+    {
+      "class": "CURRENT_NORMALIZED_WITNESS_DIRECT_REUSE",
+      "state": "EXHAUSTED",
+      "resume": "NORMALIZED_WITNESS_CATALOG_OR_TARGET_SEMANTICS_CHANGE"
+    },
+    {
+      "class": "GENERIC_ROOT3_STRONGER_PROOF_SEARCH",
+      "state": "SATURATED_CURRENT_BOUND_INPUTS",
+      "resume": "NEW_EXACT_OR_SUPERSET_CERTIFICATE__NEW_FULL_PROTOCOL_WITNESS__CATALOG_OR_TARGET_CHANGE__NEW_VERIFIED_BINDING"
+    },
+    {
+      "class": "PRIVATE_HELDOUT_PUBLIC_ACCESS_SEARCH",
+      "state": "SATURATED",
+      "surfaces": [
+        "AA-Briefcase v1.1",
+        "AutomationBench official",
+        "Finance Agent v2",
+        "CursorBench 4.0",
+        "MysteryMechanism"
+      ],
+      "resume": "ACCESS_STATE_CHANGE_OR_NEW_STRONGER_SCOPE_COMPLETE_PROOF"
+    },
+    {
+      "class": "TB4_CURRENT_CONNECTED_CARRIER_SEARCH",
+      "state": "SATURATED__RENDER_INSPECTED_EMPTY",
+      "fact": "NO_ADMISSIBLE_ZERO_COST_8CPU_16GB_50GB_DOCKER_CARRIER_BOUND__180_LT_220",
+      "resume": "NEW_PROVED_ZERO_COST_CARRIER__RESOURCE_EQUIVALENCE_PROOF__OR_OTHER_ADMISSIBLE_SCORE_ROUTE_GE_220"
+    },
+    {
+      "class": "FIRST_PARTY_OWNER_EVALUATION_BOUNDARIES",
+      "state": "GENERIC_PUBLIC_SELF_RUN_SEARCH_CLOSED",
+      "surfaces": [
+        "FrontierCode v1.1 Main",
+        "CursorBench 4.0"
+      ],
+      "resume": "OWNER_EVALUATION_ACCESS_STATE_CHANGE_OR_NEW_SCOPE_COMPLETE_STRONGER_PROOF"
+    },
+    {
+      "class": "GDPVAL_PUBLIC_POPULATION_AND_HARNESS_DISCOVERY",
+      "state": "DISCHARGED",
+      "fact": "PUBLIC_220_TASK_OPENAI_GOLD_POPULATION_AND_PUBLIC_STIRRUP_SUBSTRATE_INDEPENDENTLY_BOUND",
+      "resume": "EXACT_ARTIFICIAL_ANALYSIS_PAIRWISE_ELO_OWNER_LAYER_OR_NEW_STRONGER_PROOF"
+    }
+  ],
+  "active_zero_reality_work": [
+    {
+      "surface": "HLE with tools",
+      "work": "FREEZE_EXACT_TOOLS_CONFIGURATION_AND_HARD_ZERO_COST_COMPARABLE_GRADING_ROUTE"
+    },
+    {
+      "surface": "Chartography with tools",
+      "work": "VERIFY_PROJECT_FREE_TIER_ACCESS_AND_QUOTA_FOR_EXACT_GEMINI_3_5_FLASH_JUDGE__BIND_HARD_ZERO_SPEND_STOP"
+    },
+    {
+      "surface": "Terminal-Bench-Science 0.1",
+      "work": "ROUTE_COMPLETE_TO_BRAIN_SCORE_ONLY__PRESERVE_FOR_EVENTUAL_MINIMUM_REALITY_EXECUTION__NO_CASES_NOW"
+    },
+    {
+      "surface": "OSWorld 2.1 partial",
+      "work": "VERIFY_ZERO_COST_KVM_CARRIER_GATED_ASSET_ACCESS_AND_REQUIRED_SELF_HOST_DEPENDENCIES_ON_EXACT_V2_1_ROUTE"
+    },
+    {
+      "surface": "GDPval-AA v2.1",
+      "work": "PUBLIC_POPULATION_AND_STIRRUP_BOUND__WORK_ONLY_EXACT_ARTIFICIAL_ANALYSIS_PAIRWISE_ELO_OWNER_LAYER_OR_STRONGER_SCOPE_COMPLETE_PROOF"
+    },
+    {
+      "surface": "Finance & Accounting Index",
+      "work": "BIND_ONLY_AA_OMNISCIENCE_LCR_AND_INDEX_AGGREGATION_INCREMENT"
+    },
+    {
+      "surface": "AutomationBench public 600",
+      "work": "SEARCH_ONLY_FOR_SCOPE_DOMINANCE_OR_EQUIVALENCE_CERTIFICATE__NO_ACCESS_RESEARCH"
+    },
+    {
+      "surface": "FrontierCode v1.1 Main",
+      "work": "OWNER_EVALUATION_ACCESS_OR_STRONGER_SCOPE_COMPLETE_PROOF_ONLY__PUBLIC_SELF_RUN_SEARCH_CLOSED"
+    },
+    {
+      "surface": "LiveBench IF",
+      "work": "ROUTE_COMPLETE__PRESERVE_FOR_EVENTUAL_MINIMUM_REALITY_BRAIN_SCORE__NO_CASES_NOW"
+    },
+    {
+      "surface": "CursorBench 4.0",
+      "work": "OWNER_EVALUATION_ACCESS_OR_STRONGER_SCOPE_COMPLETE_PROOF_ONLY__PUBLIC_SELF_RUN_SEARCH_CLOSED"
+    }
+  ],
+  "preserved_irreducible_candidates": [
+    "SYNTHESIS__ONE_SCOPE_RELATION__ONE_MATCHED_QUALITY_ATOM__TWO_NUMERIC_BOUNDS",
+    "FINANCE_UNCOVERED_SCOPE__TWO_FROZEN_DIRECT_ORACLE_LEAVES",
+    "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER__TWO_FROZEN_INFORMATION_SAFE_DIRECT_ORACLE_LEAVES",
+    "COMPOSITION__4_OF_12_SCOPED_COMPONENTS_PROVED__8_OPEN__RECOMPUTE_ONLY_FROM_UPSTREAM_DELTAS",
+    "OTHER_SEVEN_LIVE_ROOT3_TARGETS__NO_CLOSURE_FROM_CURRENT_BOUND_ZERO_REALITY_STRONGER_PROOF_INPUTS"
+  ],
+  "optimization_rule": "RUN_ONLY_ACTIONS_WITH_POSITIVE_EXPECTED_TERMINAL_INFORMATION_VALUE__STOP_SATURATED_SEARCH_CLASSES__RECOMPUTE_FIXED_POINT_AFTER_EACH_VERIFIED_DELTA__THEN_COMPUTE_EXACT_MINIMUM_REALITY_AND_ACCESS_CUT",
+  "next": "EXECUTE_OSWORLD_PINNED_VM_BOOT_PREFLIGHT__CHARTOGRAPHY_REQUIRES_ACCOUNT_BOUND_QUOTA_PREFLIGHT__CONTINUE_HLE_JUDGE_ADAPTER_FINANCE_INCREMENT_AND_ROOT3_LOAD_BEARING_PROOFS__TB_SCIENCE_AND_LIVEBENCH_SCORE_ONLY__RECOMPUTE_FIXED_POINT__NO_FRESH_REALITY",
+  "hard_rules": [
+    "UNKNOWN_IS_NOT_MISSING",
+    "SEARCH_FAILURE_IS_NOT_NONEXISTENCE",
+    "NO_CUSTOM_BENCHMARK_WHEN_FROZEN_OPUS55_SURFACE_EXISTS",
+    "NO_PRIVATE_PUBLIC_SUBSTITUTION_WITHOUT_EXACT_OR_SUPERSET_PROOF",
+    "NO_CASE_EXPOSURE_BEFORE_FIXED_POINT",
+    "ZERO_INCREMENTAL_SPEND",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "completed_zero_reality_deltas": [
+    {
+      "target": "TB_SCIENCE_GE_58_7",
+      "delta": "ZERO_COST_PUBLIC_GITHUB_CARRIER_ATTAINABILITY_INDEPENDENT_PASS",
+      "consequence": "CARRIER_ROUTE_GAP_REMOVED__BRAIN_SCORE_ONLY_REMAINS",
+      "new_reality_units": 0
+    },
+    {
+      "target": "PROWORK_GDPVAL_GE_1846",
+      "delta": "PUBLIC_220_TASK_POPULATION_AND_STIRRUP_SUBSTRATE_INDEPENDENT_PASS",
+      "consequence": "GENERIC_POPULATION_AND_HARNESS_DISCOVERY_REMOVED__EXACT_PAIRWISE_ELO_OWNER_LAYER_REMAINS",
+      "new_reality_units": 0
+    },
+    {
+      "target": "CODING_FRONTIERCODE_GE_54_4",
+      "delta": "FIRST_PARTY_OWNER_ROUTE_BOUNDARY_INDEPENDENT_PASS",
+      "consequence": "GENERIC_PUBLIC_SELF_RUN_SEARCH_REMOVED__OWNER_EVALUATION_OR_STRONGER_PROOF_REMAINS",
+      "new_reality_units": 0
+    },
+    {
+      "target": "CODING_CURSORBENCH_GE_57_8",
+      "delta": "FIRST_PARTY_OWNER_ROUTE_BOUNDARY_INDEPENDENT_PASS",
+      "consequence": "GENERIC_PUBLIC_SELF_RUN_SEARCH_REMOVED__OWNER_EVALUATION_OR_STRONGER_PROOF_REMAINS",
+      "new_reality_units": 0
+    }
+  ]
+}

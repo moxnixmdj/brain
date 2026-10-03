@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_FAIL_CLOSED__15_ROOT2_PREDICATES__14_UNIQUE_SURFACES__TB_SCIENCE_HLE_OSWORLD_BASIC_AND_FINANCE_PUBLIC_ROUTE_DELTAS_CLOSED__ZERO_CREDIT",
+  "status": "ACTIVE_FAIL_CLOSED__15_ROOT2_PREDICATES__14_UNIQUE_SURFACES__GDPVAL_FRONTIERCODE_CURSORBENCH_ROUTE_BOUNDARIES_COMPRESSED__ZERO_CREDIT",
   "objective": "Collapse the 15 Root-2-only public fixed-bar predicates into the minimum 14 unique benchmark-route obligations, while preserving the distinction between historical execution-route deletion and strict Opus 5.5 acceptance proof.",
   "authority": {
     "root_state": {
@@ -28,6 +28,21 @@
       "path": "canonical/governance/ROOT2_CHARTOGRAPHY_OSWORLD_ROUTE_COMPRESSION_20261003_V1.json",
       "git_blob_sha": "ca80a5ee13c27d3a4607ec31890a81434b720940",
       "status": "CANDIDATE__ZERO_REALITY_ROUTE_COMPRESSION__ZERO_CREDIT"
+    },
+    "root2_route_refresh": {
+      "path": "canonical/governance/ROOT2_ROUTE_REFRESH_20261003_V1.json",
+      "git_blob_sha": "5e75da77b1edc689b69c15472204ad08e16dc4cb",
+      "status": "ACTIVE_FAIL_CLOSED__ZERO_REALITY_ROUTE_COMPRESSION__ZERO_CREDIT"
+    },
+    "gdpval_public_route_boundary": {
+      "path": "canonical/verification/GDPVAL_AA_V21_PUBLIC_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "e3d890b0fdfe2c5173cf18efddbc1483b7db6701",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS"
+    },
+    "frontiercode_cursorbench_owner_route_boundary": {
+      "path": "canonical/verification/FRONTIERCODE_CURSORBENCH_OWNER_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "26c1f813503c156e818499b2e6fe4fdb00d40c05",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS"
     }
   },
   "deduplication": {
@@ -63,8 +78,14 @@
         "CODING_FRONTIERCODE_GE_54_4"
       ],
       "target": ">=54.4%",
-      "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_BLOCKED_EXECUTION_ROUTE_DELETED_ONLY",
-      "next": "BIND_EXACT_EXISTING_FRONTIERCODE_COMPARABLE_ROUTE_OR_OTHERWISE_KEEP_PREDICATE_OPEN"
+      "state": "FIRST_PARTY_OWNER_ROUTE_BOUNDARY_INDEPENDENT_PASS__PUBLIC_EXACT_SELF_RUN_NOT_ESTABLISHED__STRICT_ACCEPTANCE_OPEN",
+      "next": "COGNITION_OWNER_EVALUATION_ACCESS_OR_SEPARATELY_ADMISSIBLE_STRONGER_SCOPE_COMPLETE_PROOF__STOP_GENERIC_PUBLIC_SELF_RUN_SEARCH",
+      "owner_route_boundary": {
+        "path": "canonical/verification/FRONTIERCODE_CURSORBENCH_OWNER_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "26c1f813503c156e818499b2e6fe4fdb00d40c05",
+        "workflow_run_id": 37155077586,
+        "workflow_job_id": 111296698655
+      }
     },
     {
       "surface": "CursorBench 4.0",
@@ -72,8 +93,14 @@
         "CODING_CURSORBENCH_GE_57_8"
       ],
       "target": ">=57.8%",
-      "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_BLOCKED_EXECUTION_ROUTE_DELETED_ONLY",
-      "next": "BIND_EXACT_EXISTING_CURSORBENCH_COMPARABLE_ROUTE_OR_OTHERWISE_KEEP_PREDICATE_OPEN"
+      "state": "FIRST_PARTY_OWNER_ROUTE_BOUNDARY_INDEPENDENT_PASS__PUBLIC_EXACT_SELF_RUN_NOT_ESTABLISHED__STRICT_ACCEPTANCE_OPEN",
+      "next": "CURSOR_OWNER_EVALUATION_ACCESS_OR_SEPARATELY_ADMISSIBLE_STRONGER_SCOPE_COMPLETE_PROOF__STOP_GENERIC_PUBLIC_SELF_RUN_SEARCH",
+      "owner_route_boundary": {
+        "path": "canonical/verification/FRONTIERCODE_CURSORBENCH_OWNER_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "26c1f813503c156e818499b2e6fe4fdb00d40c05",
+        "workflow_run_id": 37155077586,
+        "workflow_job_id": 111296698655
+      }
     },
     {
       "surface": "GDPval-AA v2.1",
@@ -81,8 +108,14 @@
         "PROWORK_GDPVAL_GE_1846"
       ],
       "target": ">=1846 Elo",
-      "state": "EXACT_OFFICIAL_ROUTE_OPEN__PUBLIC_SCOPE_EQUIVALENT_CANDIDATE_ONLY",
-      "next": "OBTAIN_EXACT_AA_V2_1_ROUTE_OR_INDEPENDENTLY_PROVE_A_SCOPE_EQUIVALENT_ABSOLUTE_ROUTE_ADMISSIBLE_UNDER_THE_FROZEN_PREDICATE"
+      "state": "PUBLIC_220_OPENAI_GOLD_POPULATION_AND_PUBLIC_STIRRUP_SUBSTRATE_INDEPENDENT_PASS__EXACT_ARTIFICIAL_ANALYSIS_PAIRWISE_ELO_OWNER_LAYER_OPEN",
+      "next": "BIND_EXACT_ARTIFICIAL_ANALYSIS_PAIRWISE_ELO_OWNER_LAYER_OR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF__STOP_GENERIC_POPULATION_AND_HARNESS_SEARCH",
+      "public_route_boundary": {
+        "path": "canonical/verification/GDPVAL_AA_V21_PUBLIC_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "e3d890b0fdfe2c5173cf18efddbc1483b7db6701",
+        "workflow_run_id": 37154939755,
+        "workflow_job_id": 111296297386
+      }
     },
     {
       "surface": "AA-Briefcase v1.1",
@@ -234,13 +267,10 @@
       "OSWORLD_2_1_PARTIAL_GE_81_8"
     ],
     "public_scope_equivalent_but_exact_comparability_open": [
-      "PROWORK_GDPVAL_GE_1846",
       "AUTOMATIONBENCH_GE_40"
     ],
     "identity_or_access_unresolved": [],
     "historical_execution_route_deleted_but_strict_predicate_still_open": [
-      "CODING_FRONTIERCODE_GE_54_4",
-      "CODING_CURSORBENCH_GE_57_8",
       "PROWORK_AA_BRIEFCASE_GE_1822",
       "ARTIFACT_AA_BRIEFCASE_GE_1822",
       "FINANCE_AGENT_V2_GE_58_59",
@@ -248,6 +278,13 @@
     ],
     "identity_resolved_exact_scoring_route_open": [
       "FINANCE_ACCOUNTING_INDEX_GE_61"
+    ],
+    "public_population_and_harness_bound_owner_grading_layer_open": [
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "first_party_owner_evaluation_boundary_bound": [
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8"
     ]
   },
   "hard_rules": [
@@ -258,7 +295,7 @@
     "NO_SCORE_INHERITANCE_ACROSS_SURFACES",
     "NO_DUPLICATE_EXECUTION_FOR_THE_SHARED_AA_BRIEFCASE_SURFACE_IF_ONE_VALID_RUN_CAN_SEPARATELY_SATISFY_BOTH_PREDICATE_SCOPES"
   ],
-  "next": "CONTINUE_OSWORLD_BOOT_GATED_ASSET_SELF_HOST__CHARTOGRAPHY_QUOTA__GDPVAL__FINANCE_INCREMENTAL_OWNER_OR_COMPONENT_PROOF__HLE_RESIDUAL_AND_ADMISSIBLE_STRONGER_PROOF_DELTAS__TB_SCIENCE_AND_LIVEBENCH_IF_SCORE_ONLY__NO_FRESH_REALITY",
+  "next": "CONTINUE_OSWORLD_VM_BOOT__CHARTOGRAPHY_ACCOUNT_BOUND_QUOTA__HLE_JUDGE_ADAPTER__FINANCE_INCREMENTAL_COMPONENT_OR_OWNER_PROOF__AUTOMATIONBENCH_STRONGER_SCOPE_PROOF__TB_SCIENCE_AND_LIVEBENCH_IF_SCORE_ONLY__NO_DUPLICATE_GENERIC_GDPVAL_FRONTIERCODE_CURSORBENCH_PUBLIC_ROUTE_SEARCH__NO_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
