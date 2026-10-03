@@ -1,0 +1,16 @@
+name: Verify Retrieval V6 live gate
+on:
+  push:
+    branches:
+      - critical/evidence-omniretrieval-v1-20261003
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_retrieval_v6_open_world_hardening canonical.tests.test_tool_discovery_retrieval_authority_gate_v2 -v
