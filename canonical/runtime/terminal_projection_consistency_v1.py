@@ -140,7 +140,8 @@ def evaluate_documents(authority:Mapping[str,Any], closure:Mapping[str,Any], mat
         row=mrows.get(fam)
         if not isinstance(row,Mapping):
             errors.append("MATRIX_FAMILY_ROW_MISSING:"+fam); continue
-        ispass=str(row.get("postwave_opus55_acceptance_status","")).startswith("PASS_")
+        status=str(row.get("postwave_opus55_acceptance_status",""))
+        ispass=status=="PASS" or status.startswith("PASS_")
         if ispass!=(fam in accepted):
             errors.append("MATRIX_FAMILY_ACCEPTANCE_MISMATCH:"+fam)
         if row.get("postwave_ownership_credit")=="VERIFIED_OWNED_EQUAL_OR_BETTER" and fam not in accepted:
