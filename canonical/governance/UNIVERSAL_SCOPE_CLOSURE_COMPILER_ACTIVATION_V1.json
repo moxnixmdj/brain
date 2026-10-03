@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_SCOPE_CLOSURE_COMPILER_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__GENERIC_ROOT3_SCOPE_CLOSURE_COMPILER__LOCAL_REGRESSION_PASS__INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Replace family-specific scope-completeness plumbing with one fail-closed recursive compiler that accepts only independently verified universal, exact finite, exhaustive-superset, or lossless-decomposition scope certificates while keeping semantic performance/noninferiority separate.",
+  "source_state": {
+    "brain_commit": "c5b283d72524119bf9f8244714cec6ca9682efca",
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root3_only": 7,
+    "root2_and_root3": 4,
+    "root3_bearing_total": 11
+  },
+  "runtime": {
+    "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039"
+  },
+  "tests": {
+    "path": "canonical/tests/test_universal_scope_closure_compiler_v1.py",
+    "git_blob_sha": "dc3c3abdfa5c0fb7ff76fa897eb9b23accfca71d",
+    "local_result": "7_OF_7_TEST_METHODS_PASS"
+  },
+  "admissible_scope_bases": [
+    "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+    "EXHAUSTIVE_FINITE_SUPERSET",
+    "LOSSLESS_DECOMPOSITION"
+  ],
+  "root3_targets": [
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "VISION_DENSE_NONCHART_SCOPE",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+  ],
+  "compiler_invariants": [
+    "UNVERIFIED_CERTIFICATE_FAILS_CLOSED",
+    "NONINDEPENDENT_CERTIFICATE_FAILS_CLOSED",
+    "SCOPE_RELATION_MUST_BE_EXACT_OR_PROVEN_STRONGER",
+    "FINITE_SAMPLE_SUCCESS_IS_NEVER_SCOPE_COMPLETENESS_WITHOUT_COMPLETE_UNIVERSE_IDENTITY",
+    "LOSSLESS_DECOMPOSITION_REQUIRES_VERIFIED_COMPLETE_UNION_AND_EVERY_CHILD_SCOPE_COMPLETE",
+    "DUPLICATE_CHILD_SCOPE_IDS_FAIL_CLOSED",
+    "UNKNOWN_PROOF_BASIS_FAILS_CLOSED",
+    "SCOPE_COMPLETENESS_NEVER_GRANTS_PERFORMANCE_NONINFERIORITY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT_FROM_COMPILER_OUTPUT_ALONE"
+  ],
+  "operational_use": {
+    "before": "ELEVEN_ROOT3_BEARING_PREDICATES_CAN_REQUIRE_FAMILY_SPECIFIC_SCOPE_ADJUDICATION",
+    "after_candidate": "ALL_ELEVEN_ROUTE_THROUGH_ONE_SCOPE_CERTIFICATE_TYPE_SYSTEM__ONLY_PREDICATE_SPECIFIC_EVIDENCE_OR_THEOREMS_REMAIN",
+    "next": "INDEPENDENTLY_VERIFY_EXACT_BYTES_AND_MUTATION_TESTS__THEN_BIND_AS_GENERIC_ROOT3_PREPROCESSOR__RUN_CURRENT_ROOT3_CERTIFICATES_THROUGH_COMPILER__PROMOTE_ONLY_PREDICATE_SPECIFIC_SCOPE_DELTAS"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_CURRENT_OPEN_ROOT3_PREDICATE_IS_CLOSED_BY_THIS_INFRASTRUCTURE",
+    "NO_CLAIM_SEMANTIC_PERFORMANCE_IS_FORMALLY_PROVED",
+    "NO_FINITE_SAMPLE_TO_OPEN_WORLD_GENERALIZATION",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_GOAL_ACHIEVEMENT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
