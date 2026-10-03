@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__HARDENED_THREE_RECOVERY_PREDICATES_SCOPE_COMPLETE_STRONGER_PROOF_ELIGIBLE__ZERO_CREDIT",
+  "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+  "exact_brain_inputs": {
+    "candidate_path": "canonical/governance/RECOVERY_OPUS55_ZERO_REALITY_ACCEPTANCE_CANDIDATE_V1.json",
+    "candidate_git_blob_sha": "89929d767f94052a9d28a958b0eb1b89dd1d6782",
+    "reducer_path": "canonical/runtime/recovery_opus55_zero_reality_acceptance_reduction_v1.py",
+    "reducer_git_blob_sha": "6c5633d399fdc5caeeac35b5b175572b69165323",
+    "tests_path": "canonical/tests/test_recovery_opus55_zero_reality_acceptance_reduction_v1.py",
+    "tests_git_blob_sha": "133306b674fbb430cab491ee744be382f36a741a",
+    "p1_universal_theorem_blob": "95422fdb13ada158930486442c9441c9c5cd9852",
+    "p1_scope_reduction_blob": "f327bfdb5d52bb9551b52f67da14a4cd425533a3",
+    "p1_scope_restoration_blob": "2c6bb594d353e4c6a169821da5f84a91be212ca7"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1283,
+    "head_sha": "9be9d1598fb860ac8f805993cb356f33b54a3419",
+    "merge_commit": "25301f9f2c9c78c2210663cc8a50f68aefb36518",
+    "workflow_name": "Verify Recovery Opus55 zero-reality acceptance",
+    "workflow_run_id": 37113558092,
+    "workflow_job_id": 111175919499,
+    "conclusion": "success",
+    "verifier_manifest_path": "capsules/recovery_opus55_zero_reality_v1/manifest.json",
+    "verifier_manifest_git_blob_sha": "b5bcf50f0803872301082204ac117db4fbf63c49"
+  },
+  "supersedes": {
+    "prior_runner_pull_request": 1282,
+    "reason": "PR1282 verified pre-hardening Recovery bytes and cannot support the later hardened reducer/candidate hashes."
+  },
+  "verified": {
+    "scope_complete": true,
+    "objective_ceiling_or_floor": true,
+    "universal_achieved_bounds": {
+      "causal_localization": 1,
+      "terminal_recovery": 1,
+      "critical_fail_closed_misses": 0
+    },
+    "historical_relation_observed_bound_used_as_proof": false,
+    "exact_opus_case_level_access_required": false,
+    "historical_narrow_terminal_run_used_as_proof": false,
+    "quarantined_public_recovery_run_used_as_proof": false,
+    "proposed_atomic_acceptance_delta": 3,
+    "proposed_family_acceptance_delta": 1,
+    "predicates": [
+      "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "RECOVERY_TERMINAL_NONINFERIOR",
+      "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+    ]
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "hard_nonclaims": [
+    "THIS_RECEIPT_DOES_NOT_MUTATE_ACCEPTANCE",
+    "OLD_NARROW_TERMINAL_P1_RESULT_IS_NOT_LOAD_BEARING",
+    "HISTORICAL_RELATION_OBSERVED_BOUND_FIELDS_ARE_NOT_LOAD_BEARING",
+    "QUARANTINED_RUN_37108111537_IS_NOT_LOAD_BEARING"
+  ]
+}
