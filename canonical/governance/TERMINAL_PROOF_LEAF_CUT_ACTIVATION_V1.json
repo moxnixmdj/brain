@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROOF_LEAF_CUT_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__RECURSIVE_REQUIREMENT_NORMAL_FORM__34_SELECTED_UNKNOWN_COST_LEAVES__ZERO_CREDIT",
+  "objective": "Schedule terminal work from recursively expanded proof leaves rather than certificate wrappers, while preserving unknown downstream reality cost as unknown.",
+  "runtime": "canonical/runtime/terminal_proof_leaf_cut_v1.py",
+  "graph": "canonical/governance/TERMINAL_CERTIFICATE_REQUIREMENT_LEAF_GRAPH_V1.json",
+  "verification": "canonical/verification/TERMINAL_PROOF_LEAF_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "current_state": {
+    "canonical_unresolved_predicates": 31,
+    "canonical_certificate_fronts": 15,
+    "nondominated_leaf_sets": 4,
+    "selected_leaf_count": 34,
+    "selected_unknown_cost_leaf_count": 34,
+    "lower_bound_reality_units": 0,
+    "upper_bound_reality_units": null,
+    "exact_minimum_reality_proved": false
+  },
+  "execution_order": [
+    "EXPAND_UNKNOWN_LEAVES_USING_EXISTING_CONTENT_ADDRESSED_EVIDENCE_AND_FORMAL_SCOPE_THEOREMS",
+    "MARK_ONLY_INDEPENDENTLY_VERIFIED_ZERO_REALITY_FACTS_AS_KNOWN_ZERO",
+    "DELETE_ONLY_MACHINE_PROVED_IMPOSSIBLE_BRANCHES",
+    "RECOMPUTE_RECURSIVE_LEAF_CUT_AFTER_EVERY_BOUND_LEAF",
+    "AUTHORIZE_FRESH_REALITY_ONLY_AFTER_UNKNOWN_COSTS_ARE_PRICED_AND_EXACT_MINIMUM_CUT_IS_PROVED"
+  ],
+  "hard_rules": [
+    "LOWER_BOUND_ZERO_IS_NOT_A_ZERO_REALITY_CLOSURE_CLAIM",
+    "CERTIFICATE_ROUTE_BINDING_COST_IS_NOT_TERMINAL_REALITY_COST",
+    "UNKNOWN_COST_MAY_NOT_BE_DEFAULTED_TO_ZERO",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "DECOMPOSE_AND_DISCHARGE_HIGHEST_REUSE_UNKNOWN_LEAVES__FIRST_SCOPE_COMPLETENESS_AND_SHARED_MATCHED_BINDINGS__THEN_COMPOSITION_AND_TB4_ROUTE_LEAVES__RECOMPUTE_AFTER_EACH_INDEPENDENT_RECEIPT",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
