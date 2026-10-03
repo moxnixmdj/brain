@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_OWNERSHIP_ESCROW_CURRENT_STATE_CONNECTOR_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "DETERMINISTIC_CONNECTOR_REPLAY_PASS__5_ACCEPTED__5_OWNED__ZERO_ACCEPTED_UNCLASSIFIED__ZERO_CREDIT",
+  "subject_branch": "ownership/escrow-and-provider-hardening-20261003-sol",
+  "exact_blobs": {
+    "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json": "fae1bc5338993911f1078680996aa48e677d7a15",
+    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json": "11498bd194c8018617767918edec020268239bc1",
+    "canonical/governance/OWNERSHIP_ESCROW_POLICY_V1.json": "1c10292e06999dfde5d453beba7452a9e027df16",
+    "canonical/runtime/ownership_escrow_guard_v1.py": "44452137bf4b8027dc93b0c6fb1d1be91aa6f921",
+    "canonical/runtime/ownership_promotion_compiler_v1.py": "b3a354605d53d4fe11630feefc67cb424d859e3c",
+    "canonical/runtime/ownership_promotion_independent_verifier_v1.py": "377ccc0f1bb76d2b956392c4e5d88c23e093c04c",
+    "canonical/tests/test_ownership_promotion_compiler_v1.py": "fee3de9fed3b2cd8ca13e7ed3f4151bab1d893de"
+  },
+  "verified": {
+    "total_families": 19,
+    "strict_acceptance_pass": 5,
+    "verified_owned_equal_or_better": 5,
+    "accepted_unclassified_ownership": 0,
+    "ownership_without_acceptance": 0,
+    "compiler_forbids_nonstdlib_provider_imports": true,
+    "compiler_forbids_stdlib_network_process_escape_imports": true,
+    "compiler_post_promotion_state_aware": true,
+    "independent_verifier_post_promotion_state_aware": true
+  },
+  "owned_families": [
+    "EXACT_SYMBOLIC_COMPUTATION",
+    "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+  ],
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "family_credit_delta": 0,
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NOT_AN_INDEPENDENT_PUBLIC_RUNNER_RECEIPT",
+    "DOES_NOT_CHANGE_5_OF_19_ACCEPTANCE_OR_5_OF_19_OWNERSHIP",
+    "DOES_NOT_CLOSE_ANY_OF_14_ACCEPTANCE_OPEN_FAMILIES",
+    "TERMINAL_GOAL_REMAINS_FALSE"
+  ],
+  "rule": "FUTURE_ACCEPTANCE_PASS_MUST_NOT_CREATE_UNKNOWN_OWNERSHIP_BACKLOG"
+}

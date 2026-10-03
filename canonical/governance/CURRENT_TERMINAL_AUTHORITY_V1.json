@@ -938,6 +938,14 @@
         "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
         "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
       ]
+    },
+    "ownership_escrow_control": {
+      "policy_path": "canonical/governance/OWNERSHIP_ESCROW_POLICY_V1.json",
+      "guard_path": "canonical/runtime/ownership_escrow_guard_v1.py",
+      "verification_path": "canonical/verification/OWNERSHIP_ESCROW_CURRENT_STATE_CONNECTOR_VERIFICATION_20261003_V1.json",
+      "verification_git_blob_sha": "8535cd129dd9710dca9fdad5f434fd16d4c1d078",
+      "status": "ACTIVE_FAIL_CLOSED_ZERO_CREDIT_CONTROL__5_ACCEPTED__5_OWNED__ZERO_ACCEPTED_UNCLASSIFIED",
+      "rule": "EVERY_STRICT_ACCEPTANCE_PASS_MUST_HAVE_VERIFIED_OWNERSHIP_OR_EXACT_MACHINE_READABLE_OWNERSHIP_BLOCKER"
     }
   },
   "residual": [

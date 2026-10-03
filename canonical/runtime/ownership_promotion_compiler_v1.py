@@ -6,6 +6,7 @@ from typing import Any, Mapping
 
 OWNED="VERIFIED_OWNED_EQUAL_OR_BETTER"
 STDLIB=set(getattr(sys,"stdlib_module_names",()))|{"__future__","typing"}
+FORBIDDEN_IMPORTS={"socket","urllib","http","subprocess","importlib","ctypes","ftplib","smtplib","telnetlib"}
 FORBIDDEN_CALLS={"__import__","eval","exec","compile","importlib.import_module",
                  "subprocess.run","subprocess.call","subprocess.Popen",
                  "os.system","requests.get","requests.post","httpx.get","httpx.post"}
@@ -53,9 +54,11 @@ def audit_source(source:str)->list[str]:
             for a in n.names:
                 top=a.name.split(".",1)[0]
                 if top not in STDLIB: e.append("NON_STDLIB_IMPORT:"+a.name)
+                if top in FORBIDDEN_IMPORTS: e.append("FORBIDDEN_ESCAPE_IMPORT:"+a.name)
         elif isinstance(n,ast.ImportFrom) and n.level==0:
             top=(n.module or "").split(".",1)[0]
             if top and top not in STDLIB: e.append("NON_STDLIB_IMPORT:"+(n.module or ""))
+            if top in FORBIDDEN_IMPORTS: e.append("FORBIDDEN_ESCAPE_IMPORT:"+(n.module or ""))
         elif isinstance(n,ast.Call):
             name=call_name(n)
             if name in FORBIDDEN_CALLS: e.append("FORBIDDEN_DYNAMIC_OR_PROVIDER_CALL:"+name)
@@ -69,8 +72,7 @@ def evaluate(root:Path,batch:Mapping[str,Any])->dict[str,Any]:
     for s in batch.get("families",[]):
         fam=s.get("family"); e=[]
         c=cr.get(fam,{}); m=mr.get(fam,{})
-        if m.get("status")==OWNED:
-            out.append({"family":fam,"status":"ALREADY_OWNED","errors":[]}); continue
+        already_owned=m.get("status")==OWNED
         if not (c.get("opus55_acceptance_state")=="PASS" and
                 c.get("opus55_acceptance_calibrated") is True and c.get("unresolved")==[]):
             e.append("STRICT_ACCEPTANCE_NOT_PASS")
@@ -97,17 +99,21 @@ def evaluate(root:Path,batch:Mapping[str,Any])->dict[str,Any]:
             e.append("CAPABILITY_REDISCOVERY_REQUIRED_OR_UNKNOWN")
         if s.get("incremental_spend_usd")!=0: e.append("INCREMENTAL_SPEND_NOT_ZERO")
         e=sorted(set(e))
+        status=("BLOCKED" if e else
+                ("ALREADY_OWNED_VERIFIED" if already_owned else "PROMOTION_ELIGIBLE_ZERO_REALITY"))
         out.append({"family":fam,
-                    "status":"PROMOTION_ELIGIBLE_ZERO_REALITY" if not e else "BLOCKED",
-                    "provider_audit":"SELF_CONTAINED_STDLIB_ONLY" if not any("IMPORT" in x or "CALL" in x for x in e) else "FAIL",
+                    "status":status,
+                    "provider_audit":"CLOSED_EXACT_RUNTIME_BOUNDARY" if not any("IMPORT" in x or "CALL" in x for x in e) else "FAIL",
                     "errors":e})
     eligible=[x["family"] for x in out if x["status"]=="PROMOTION_ELIGIBLE_ZERO_REALITY"]
+    already=[x["family"] for x in out if x["status"]=="ALREADY_OWNED_VERIFIED"]
     blocked=[x["family"] for x in out if x["status"]=="BLOCKED"]
     return {
       "schema":"PROJECT_BRAIN_OWNERSHIP_PROMOTION_COMPILER_V2",
       "status":"PASS" if not blocked else "FAIL_CLOSED",
       "families":out,"promotion_eligible_families":eligible,"blocked_families":blocked,
-      "counts":{"eligible":len(eligible),"blocked":len(blocked)},
+      "counts":{"eligible":len(eligible),"already_owned_verified":len(already),"blocked":len(blocked)},
+      "already_owned_verified_families":already,
       "new_reality_units_consumed":0,"incremental_spend_usd":0,
       "rule":"STRICT_ACCEPTANCE_AND_EXACT_CONTENT_BOUND_BRAIN_ARTIFACT_AND_INDEPENDENT_RECEIPTS_AND_CURRENT_SELF_CONTAINED_PROVIDER_AUDIT"
     }

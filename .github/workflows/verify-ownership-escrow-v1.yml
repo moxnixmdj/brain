@@ -1,0 +1,29 @@
+name: Verify ownership escrow
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+      - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+      - "canonical/governance/OWNERSHIP_ESCROW_POLICY_V1.json"
+      - "canonical/runtime/ownership_escrow_guard_v1.py"
+      - "canonical/tests/test_ownership_escrow_guard_v1.py"
+      - "canonical/runtime/ownership_promotion_compiler_v1.py"
+      - "canonical/tests/test_ownership_promotion_compiler_v1.py"
+      - ".github/workflows/verify-ownership-escrow-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify ownership compiler
+        run: python -m unittest canonical.tests.test_ownership_promotion_compiler_v1 -v
+      - name: Verify ownership escrow
+        run: python -m unittest canonical.tests.test_ownership_escrow_guard_v1 -v
+      - name: Evaluate live ownership escrow
+        run: python canonical/runtime/ownership_escrow_guard_v1.py
