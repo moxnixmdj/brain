@@ -35,7 +35,10 @@ assert cc["sources"][0]["queryless_default_enabled"] is False
 ctrl=su.controller_sources(bound)
 cb={x["source_id"]:x for x in ctrl}
 assert cb["CROSSREF_WORKS"]["authoritative_enumeration"] is False
-assert cb["COMMON_CRAWL_CDX_SNAPSHOT"]["authoritative_enumeration"] is False
+assert "COMMON_CRAWL_CDX_SNAPSHOT" not in cb
+ccctrl=su.controller_sources(cc)
+assert ccctrl[0]["source_id"]=="COMMON_CRAWL_CDX_SNAPSHOT"
+assert ccctrl[0]["authoritative_enumeration"] is False
 
 scoped=su.bind_sources(
     reg,epoch="E1",
