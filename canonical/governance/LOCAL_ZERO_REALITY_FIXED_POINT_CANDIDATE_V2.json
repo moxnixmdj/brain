@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_LOCAL_ZERO_REALITY_FIXED_POINT_CANDIDATE_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PREDICATE_LOCAL_ZERO_REALITY_CONE_COMMUTATIVITY__LIVEBENCH_ONLY__TB_SCIENCE_FAIL_CLOSED_ON_COMPARATOR_THRESHOLD_DRIFT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Authorize fresh measurement only where the predicate-local zero-reality cone is saturated and the currently bound comparator threshold/surface, scorer, execution route, and scope semantics are all current and internally consistent.",
+  "theorem": {
+    "statement": "FOR_PREDICATE_p__IF_DEPS0(p)_INTERSECT_PENDING0_IS_EMPTY__AND_CURRENT_COMPARATOR_THRESHOLD_AND_SURFACE_ARE_BOUND_WITHOUT_CONTRADICTION__AND_EXECUTION_ROUTE_IS_INDEPENDENTLY_PREQUALIFIED__AND_p_HAS_NO_ROOT3_SCOPE_OBLIGATION__THEN_THE_ALREADY_FROZEN_SCORE_EXECUTION_FOR_p_COMMUTES_WITH_UNRELATED_ZERO_REALITY_WORK",
+    "symbolic": "Deps0(p)∩Pending0=∅ ∧ ComparatorCurrent(p) ∧ RouteReady(p) ∧ ¬Root3(p) => Reduce_p(Score_p,Z_pending)=Reduce_p(Score_p)",
+    "scope": "CURRENT_CONTENT_ADDRESSED_STATE_ONLY"
+  },
+  "exact_inputs": {
+    "root2_routes": {
+      "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+      "git_blob_sha": "dd3ce9174fce6580b4b30a64e2ea5fddee81aadd"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "e94469ffdeb7535f9a921a244e62cde6b84fda5c"
+    },
+    "current_cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V11.json",
+      "git_blob_sha": "452c6f2231fbe93fd54e3299eb54d7103567a08a"
+    },
+    "minimum_frontier": {
+      "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
+      "git_blob_sha": "76286eacc8d7a5ed0dd1025236b1bea34ab361a8"
+    },
+    "current_frontier": {
+      "path": "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V3.json",
+      "git_blob_sha": "f052083c867f16d19cb04a1fe52e71fb813d396d"
+    },
+    "root2_measurement_bridge": {
+      "path": "canonical/governance/ROOT2_MEASUREMENT_BRIDGE_CURRENT_V1.json",
+      "git_blob_sha": "3e214b7c7933eb6b44e870a9f2593452236b9ac7"
+    },
+    "root3_population_coalescence": {
+      "path": "canonical/governance/ROOT3_TARGET_POPULATION_COALESCENCE_V1.json",
+      "git_blob_sha": "5a908133af0beed0791ae573051917dba5454acd"
+    },
+    "livebench_comparator": {
+      "path": "canonical/governance/LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2.json",
+      "git_blob_sha": "7067a849585d9020f3d78aa374c0eeecb5078c8b"
+    },
+    "livebench_inference_verification": {
+      "path": "canonical/verification/ROOT2_LIVEBENCH_IF_ASTRA_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "8d144888e0d0fcbe6617dbc18dfb3cbb72a1e6b1"
+    },
+    "tb_science_current_opus_snapshot": {
+      "path": "canonical/verification/TB_SCIENCE_OPUS55_SNAPSHOT_IDENTITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "3bff4c8ec68bba45d0538812101fbbfed7b9b2ec"
+    },
+    "tb_science_real_harbor_integration": {
+      "path": "canonical/verification/TB_SCIENCE_PATCHED_REAL_HARBOR_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "4512996a6698463be367052b13a891bd0f647f73"
+    },
+    "tb_science_public_carrier": {
+      "path": "canonical/verification/TB_SCIENCE_V01_PUBLIC_GITHUB_CARRIER_ATTAINABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "aacdd4431ec4a0c889d1bb4249c8eba9ee476390"
+    }
+  },
+  "eligibility_result": {
+    "LIVEBENCH_IF_GE_65_7": {
+      "root2_only": true,
+      "root3_obligation": false,
+      "route_class": "BRAIN_SCORE_ONLY_OPEN",
+      "comparator_current": true,
+      "exact_threshold": 65.7,
+      "scorer_and_population_prequalified": true,
+      "independent_brain_inference_adapter": true,
+      "predicate_local_zero_reality_cone_saturated": true,
+      "fresh_reality_authority_candidate": true
+    },
+    "TB_SCIENCE_GE_58_7": {
+      "root2_only": true,
+      "root3_obligation": false,
+      "route_class": "BRAIN_SCORE_ONLY_OPEN",
+      "execution_carrier_prequalified": true,
+      "exact_current_opus55_score_percent": 63.33333333333333,
+      "exact_current_required_successes": 133,
+      "frozen_predicate_literal_percent": 58.7,
+      "comparator_threshold_consistent_with_frozen_predicate": false,
+      "predicate_local_zero_reality_cone_saturated": false,
+      "fresh_reality_authority_candidate": false,
+      "blocker": "CURRENT_OPUS55_SNAPSHOT_63_333_PERCENT_CONTRADICTS_FROZEN_58_7_PREDICATE_LITERAL__RECONCILE_THRESHOLD_SEMANTICS_BEFORE_FRESH_EXECUTION"
+    }
+  },
+  "authorized_candidates": [
+    {
+      "predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "surface": "LiveBench Instruction Following 2026-06-25",
+      "exact_threshold": 65.7,
+      "reason": "ROOT2_ONLY__COMPARATOR_POPULATION_SCORER_INPUT_AND_INDEPENDENT_BRAIN_INFERENCE_ROUTE_PREQUALIFIED__NO_LOCAL_ZERO_REALITY_DEPENDENCIES_REMAIN",
+      "fresh_reality_authority_candidate": true
+    }
+  ],
+  "explicitly_unauthorized": [
+    {
+      "predicate_id": "TB_SCIENCE_GE_58_7",
+      "reason": "CURRENT_VERIFIED_OPUS55_COMPARATOR_IS_63_333_PERCENT_133_OF_210_WHILE_FROZEN_PREDICATE_LITERAL_REMAINS_58_7__THRESHOLD_SEMANTICS_NOT_CURRENTLY_CONSISTENT"
+    }
+  ],
+  "execution_constraints": [
+    "LIVEBENCH_EXACT_RELEASE_2026_06_25_ONLY",
+    "LIVEBENCH_EXACT_THRESHOLD_65_7_ONLY",
+    "USE_CONTENT_ADDRESSED_INDEPENDENTLY_VERIFIED_BRAIN_INFERENCE_ADAPTER",
+    "NO_TUNING_ON_TERMINAL_CASES",
+    "NO_CASE_REPLACEMENT_OR_ADAPTIVE_SELECTION",
+    "CAPTURE_IMMUTABLE_CASE_LEVEL_RECEIPTS",
+    "ZERO_INCREMENTAL_SPEND",
+    "RESULT_MAY_AFFECT_ONLY_ITS_FROZEN_PREDICATE_UNLESS_SEPARATE_VERIFIED_RULE_PROPAGATES_IT",
+    "TB_SCIENCE_REMAINS_FRESH_REALITY_FORBIDDEN_UNTIL_THRESHOLD_RECONCILIATION"
+  ],
+  "expected_if_verified": {
+    "fresh_reality_authorized_predicate_count": 1,
+    "fresh_reality_authorized_predicates": [
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_CURRENT_EXACT_INPUTS_AND_TB_SCIENCE_FAIL_CLOSED_EXCLUSION__THEN_ACTIVATE LIVEBENCH_IF_ONLY FRESH_REALITY AUTHORITY"
+}
