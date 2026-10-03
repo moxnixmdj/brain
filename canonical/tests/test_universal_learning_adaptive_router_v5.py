@@ -12,9 +12,9 @@ HS=[
     {"id":"h4","plausible":True,"best_action":"B"},
 ]
 def cov():
-    return {"receipt_id":"cov","independent_verified":True,"exact_byte_bound":True,"conclusion":"success","decision_relevant_exhaustive":True,"scope_relation":"EXACT","environment_id":ENV,"goal_id":GOAL,"hypothesis_space_sha256":guard.hypothesis_digest(HS)}
+    return {"receipt_id":"cov","independent_verified":True,"exact_byte_bound":True,"conclusion":"success","decision_relevant_exhaustive":True,"scope_relation":"EXACT","environment_id":ENV,"goal_id":GOAL,"experiment_epoch":EPOCH,"state_fingerprint":STATE,"hypothesis_space_sha256":guard.hypothesis_digest(HS)}
 def safe(aid,epoch=EPOCH):
-    return {"receipt_id":"safe-"+aid,"independent_verified":True,"exact_byte_bound":True,"conclusion":"success","safe_under_all_admissible_worlds":True,"environment_id":ENV,"goal_id":GOAL,"action_id":aid,"experiment_epoch":epoch}
+    return {"receipt_id":"safe-"+aid,"independent_verified":True,"exact_byte_bound":True,"conclusion":"success","safe_under_all_admissible_worlds":True,"environment_id":ENV,"goal_id":GOAL,"action_id":aid,"experiment_epoch":epoch,"state_fingerprint":STATE}
 def probe(aid,outcomes,cost):
     od=model.outcome_digest(action_id=aid,outcomes=outcomes)
     return {"id":aid,"outcome_by_hypothesis":outcomes,"time":cost,"safety_receipt":safe(aid),"outcome_model_receipt":{"receipt_id":"model-"+aid,"independent_verified":True,"exact_byte_bound":True,"conclusion":"success","decision_relevant_outcome_partition_complete":True,"deterministic_outcome_given_hypothesis_and_epoch":True,"observation_only_or_state_restored":True,"future_probe_model_invariance_verified":True,"experiment_epoch":EPOCH,"state_fingerprint":STATE,"environment_id":ENV,"goal_id":GOAL,"action_id":aid,"hypothesis_space_sha256":guard.hypothesis_digest(HS),"outcome_map_sha256":od}}
@@ -58,6 +58,19 @@ class Tests(unittest.TestCase):
         ps[1]["safety_receipt"]["experiment_epoch"]="epoch-2"
         with self.assertRaises(planner.AdaptiveExperimentPlannerError):
             planner.plan(environment_id=ENV,goal_id=GOAL,hypotheses=HS,hypothesis_coverage_receipt=cov(),probes=ps)
+
+
+    def test_safety_receipt_wrong_state_rejected(self):
+        p=probe("x",{"h1":"x","h2":"y","h3":"x","h4":"y"},1)
+        p["safety_receipt"]["state_fingerprint"]="other-state"
+        with self.assertRaises(model.VerifiedProbeModelError):
+            model.admit(environment_id=ENV,goal_id=GOAL,hypotheses=HS,probe=p)
+
+    def test_hypothesis_coverage_wrong_state_rejected(self):
+        coverage=cov()
+        coverage["state_fingerprint"]="other-state"
+        with self.assertRaises(planner.AdaptiveExperimentPlannerError):
+            planner.plan(environment_id=ENV,goal_id=GOAL,hypotheses=HS,hypothesis_coverage_receipt=coverage,probes=probes())
 
     def test_adaptive_plan_beats_greedy_direct_probe(self):
         out=planner.plan(environment_id=ENV,goal_id=GOAL,hypotheses=HS,hypothesis_coverage_receipt=cov(),probes=probes())
