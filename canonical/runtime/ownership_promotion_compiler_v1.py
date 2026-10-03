@@ -6,7 +6,7 @@ from typing import Any, Mapping
 
 OWNED="VERIFIED_OWNED_EQUAL_OR_BETTER"
 STDLIB=set(getattr(sys,"stdlib_module_names",()))|{"__future__","typing"}
-FORBIDDEN_CALLS={"__import__","eval","exec","compile","importlib.import_module",
+FORBIDDEN_IMPORTS={"socket","urllib","http","subprocess","importlib","ctypes","ftplib","smtplib","telnetlib"}\nFORBIDDEN_CALLS={"__import__","eval","exec","compile","importlib.import_module",
                  "subprocess.run","subprocess.call","subprocess.Popen",
                  "os.system","requests.get","requests.post","httpx.get","httpx.post"}
 
@@ -52,10 +52,10 @@ def audit_source(source:str)->list[str]:
         if isinstance(n,ast.Import):
             for a in n.names:
                 top=a.name.split(".",1)[0]
-                if top not in STDLIB: e.append("NON_STDLIB_IMPORT:"+a.name)
+                if top not in STDLIB: e.append("NON_STDLIB_IMPORT:"+a.name)\n                if top in FORBIDDEN_IMPORTS: e.append("FORBIDDEN_ESCAPE_IMPORT:"+a.name)
         elif isinstance(n,ast.ImportFrom) and n.level==0:
             top=(n.module or "").split(".",1)[0]
-            if top and top not in STDLIB: e.append("NON_STDLIB_IMPORT:"+(n.module or ""))
+            if top and top not in STDLIB: e.append("NON_STDLIB_IMPORT:"+(n.module or ""))\n            if top in FORBIDDEN_IMPORTS: e.append("FORBIDDEN_ESCAPE_IMPORT:"+(n.module or ""))
         elif isinstance(n,ast.Call):
             name=call_name(n)
             if name in FORBIDDEN_CALLS: e.append("FORBIDDEN_DYNAMIC_OR_PROVIDER_CALL:"+name)
