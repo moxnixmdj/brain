@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_26_ZERO_REALITY_FRONTIER_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_5_OF_19__12_OF_38__26_UNRESOLVED__16_ZERO_REQUIREMENTS__13_CERTIFICATES__30_PRIMITIVE_UNITS__2_DIRECT_ELIGIBLE_UNAUTHORIZED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Replace stale pre-Tool-Discovery scheduling counts with the exact current 12/38 evidence ledger while binding current 8-target and 12-witness normalizations and preserving the prohibition on fresh reality.",
+  "exact_state": {
+    "acceptance": "5/19_PASS__14/19_OPEN",
+    "proved_predicates": 12,
+    "unresolved_predicates": 26,
+    "active_zero_reality_requirements": 16,
+    "active_nondominated_certificates": 13,
+    "zero_reality_covered_predicates": 24,
+    "primitive_zero_reality_work_units": 30,
+    "matched_priority_child_facts": 16,
+    "current_normalized_targets": 8,
+    "current_normalized_witnesses": 12,
+    "direct_reality_eligible_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "direct_reality_execution_authorized_now": false
+  },
+  "hard_rules": [
+    "NO_STALE_19_REQUIREMENT_PROJECTION",
+    "NO_STALE_TOOL_DISCOVERY_WORK",
+    "MATCHED_PARENT_REQUIREMENTS_EXPAND_TO_EXACT_16_CHILD_FACTS",
+    "FINANCE_AND_UNKNOWN_SOURCES_ADMITTED_BUT_DIRECT_REALITY_REMAINS_UNAUTHORIZED",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_COUNTS_AND_INPUT_BLOBS__THEN_REBIND_TERMINAL_AND_SCHEDULING_POINTERS_TO_THIS_FRONTIER",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
