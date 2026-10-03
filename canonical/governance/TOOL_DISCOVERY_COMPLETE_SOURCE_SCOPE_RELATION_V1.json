@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMPLETE_SOURCE_SCOPE_RELATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_UNIVERSAL_SCOPE_RELATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Bind TOOL_DISCOVERY_SELECTION_AND_LEARNING to an identity-generic complete discovery-source interface over arbitrary finite frozen tool ecosystems, without enumerating tool identities, replaying terminal cases, or weakening the target.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "exact_authorities": {
+    "protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "candidate_v4": {
+      "path": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+      "git_blob_sha": "43689341231f0e137cc5b31c0f05b5bf0c64504d"
+    },
+    "prior_dynamic_proof_v3": {
+      "path": "canonical/runtime/tool_discovery_dynamic_proof_v3.py",
+      "git_blob_sha": "f82d949f3890ffc0f2513f9b39cc3585a5d22ebb"
+    },
+    "prior_dynamic_tests_v3": {
+      "path": "canonical/tests/test_tool_discovery_dynamic_v3.py",
+      "git_blob_sha": "ee1d8b3549555ec8280af88047b8d11823047ab6"
+    },
+    "current_formalism_cut": {
+      "path": "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json",
+      "git_blob_sha": "48ba33998e73b8eec2731be51a7ec78077ed0d4a"
+    }
+  },
+  "target_semantics": {
+    "protocol_scope": "On arbitrary finite frozen tool ecosystems with hidden capability variants under the same frozen task population, harness, and tool authority.",
+    "unknown_identity": "Tool identities not initially visible to the candidate are arbitrary opaque strings and may become visible only through declared discovery-source results.",
+    "changing_capability": "Capability changes are represented by public version/epoch events; stale probe evidence is inadmissible after an epoch change.",
+    "route_goal": "After complete discovery, choose the least-cost admissible route with current positive evidence for every required capability, or fail closed after all admissible routes are ruled out.",
+    "transfer_goal": "Current-epoch probe evidence is reusable on later tasks without rediscovery or redundant reprobe.",
+    "unsupported_promotion": "No hidden capability claim may be promoted without a current-epoch SAFE_CAPABILITY_PROBE receipt."
+  },
+  "complete_discovery_source_interface": {
+    "domain": "ANY_FINITE_FROZEN_TOOL_ECOSYSTEM_E_WITH_ANY_FINITE_SET_OF_AVAILABLE_DECLARED_DISCOVERY_SOURCES_S",
+    "initial_visibility": "Any finite subset V0 of E may be initially visible.",
+    "source_result": "For each available declared source s, DISCOVER(s,q) returns finite public metadata for every tool identity in that source's frozen exposure set Ts relevant to the allowed query q; hidden capability truth is never returned.",
+    "completeness": "V0 UNION THE UNION OF Ts OVER ALL AVAILABLE DECLARED SOURCES EQUALS THE COMPLETE TOOL-IDENTITY SET EXPOSED BY THE FROZEN TOOL AUTHORITY FOR BOTH BRAIN AND OPUS.",
+    "identity_rule": "tool_id and source_id are opaque nonempty strings; no proof step depends on any enumerated identity.",
+    "duplicate_rule": "Duplicate tool identities across sources must carry identical public metadata for the same epoch; conflicting metadata invalidates the interface instance fail-closed.",
+    "receipt_rule": "A discovery receipt identifies exactly one declared source and is immutable within the frozen episode; one receipt makes that source queried.",
+    "authority_boundary": "Tools not exposed by the common frozen tool authority are outside both routes' admissible information and are not silently counted as Brain misses.",
+    "finite_progress": "Every valid DISCOVER adds one previously absent source receipt; every valid PROBE adds one previously absent current-epoch tool/capability receipt."
+  },
+  "candidate_v4_invariants": [
+    "ALL_AVAILABLE_DECLARED_DISCOVERY_SOURCES_ARE_EXHAUSTED_BEFORE_ANY_PROBE_OR_SELECT",
+    "DISCOVERY_SOURCE_ORDER_IS_DETERMINISTIC_BY_DECLARED_COST_THEN_OPAQUE_SOURCE_ID",
+    "ALL_ADMISSIBLE_VISIBLE_TOOLS_ARE_ORDERED_BY_DECLARED_COST_THEN_OPAQUE_TOOL_ID",
+    "A_TOOL_WITH_ANY_CURRENT_NEGATIVE_REQUIRED_CAPABILITY_IS_SKIPPED",
+    "A_TOOL_WITH_ANY_UNKNOWN_REQUIRED_CAPABILITY_IS_PROBED_BEFORE_SELECTION",
+    "SELECT_OCCURS_ONLY_WHEN_EVERY_REQUIRED_CAPABILITY_HAS_CURRENT_POSITIVE_EVIDENCE",
+    "STALE_EVIDENCE_IS_IGNORED_AFTER_PUBLIC_VERSION_EPOCH_CHANGE",
+    "UNKNOWN_CONSTRAINT_OPERATORS_AND_MALFORMED_PREDICATES_FAIL_CLOSED",
+    "ESCALATION_OCCURS_ONLY_AFTER_DISCOVERY_IS_EXHAUSTED_AND_NO_EVIDENCE_SUPPORTED_ADMISSIBLE_TOOL_REMAINS"
+  ],
+  "formal_lemmas": [
+    {
+      "id": "L1_IDENTITY_PARAMETRICITY",
+      "statement": "Because the candidate contains no enumerated tool identity and uses tool_id only as an opaque map/tie-break key, renaming tool identities bijectively leaves every semantic decision invariant up to the same renaming."
+    },
+    {
+      "id": "L2_FINITE_DISCOVERY_EXHAUSTION",
+      "statement": "For finite available source set S, each DISCOVER targets one unqueried source and the receipt makes it queried; therefore after at most |S| discovery steps every available source is exhausted."
+    },
+    {
+      "id": "L3_COMPLETE_VISIBILITY_AFTER_DISCOVERY",
+      "statement": "By the complete-source interface contract, after source exhaustion the visible tool identities equal the entire tool set exposed by the common frozen authority, including identities absent initially."
+    },
+    {
+      "id": "L4_FINITE_CAPABILITY_EVIDENCE_PROGRESS",
+      "statement": "For finite required-capability set R and finite visible tool set E, each PROBE resolves one previously unknown current-epoch (tool, capability) pair, so probe progress is finite."
+    },
+    {
+      "id": "L5_GLOBAL_LEAST_COST_SELECTION",
+      "statement": "After complete visibility, candidates are traversed in nondecreasing declared cost and opaque-id tie order; every earlier candidate is either inadmissible or has current negative evidence, so the first selected candidate is the least-cost evidence-supported sufficient route in the frozen authority."
+    },
+    {
+      "id": "L6_NO_UNSUPPORTED_PROMOTION",
+      "statement": "SELECT is reachable only when no required capability is unknown or false for that tool; therefore every selected capability is backed by a current-epoch positive safe-probe receipt."
+    },
+    {
+      "id": "L7_VERSION_SOUNDNESS_AND_TRANSFER",
+      "statement": "Probe receipts are reusable while their epoch equals the current public tool epoch and are ignored immediately after a version event changes that epoch, giving transfer without stale promotion."
+    },
+    {
+      "id": "L8_SOUND_ESCALATION",
+      "statement": "After discovery exhaustion, the loop probes any not-yet-ruled-out admissible route before escalation; therefore escalation is reachable only when no evidence-supported sufficient route remains under the complete frozen authority."
+    },
+    {
+      "id": "L9_POINTWISE_SUCCESS_ROUTE_CEILING",
+      "statement": "For every valid finite interface instance, if an admissible sufficient tool exists the route eventually selects the least-cost such tool; otherwise it soundly escalates. Thus terminal-success/valid-route correctness reaches the pointwise contract ceiling without depending on an Opus comparator."
+    }
+  ],
+  "relation_to_existing_evidence": {
+    "second_task_transfer": "Already proved independently on the frozen 180-case terminal evidence and remains a separate predicate.",
+    "no_unsupported_promotion": "Already proved independently on the frozen 180-case terminal evidence and remains a separate predicate.",
+    "prior_v3_grid": "Regression/development evidence only; not used as universal proof.",
+    "current_formalism_cut": "Correctly rejected the old pre-enumerated no-DISCOVER route. This relation does not revive that route; it replaces it with a DISCOVER-capable, discovery-first policy and an explicit complete-source semantics."
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_CANDIDATE_RELATION",
+    "NO_CLAIM_THAT_ARBITRARY_BROKEN_OR_INCOMPLETE_EXTERNAL_DISCOVERY_SOURCES_ARE_COMPLETE",
+    "NO_CLAIM_FOR_TOOLS_OUTSIDE_THE_COMMON_FROZEN_TOOL_AUTHORITY",
+    "NO_EMPIRICAL_GENERALIZATION_FROM_THE_V3_SAMPLE_GRID",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_AND_SEPARATE_ACCEPTANCE_REDUCTION_REMAIN_REQUIRED"
+  ],
+  "terminal_cases_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
