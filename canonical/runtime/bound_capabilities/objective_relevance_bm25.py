@@ -16,7 +16,7 @@ import re
 import unicodedata
 
 SCHEMA="PROJECT_BRAIN_OBJECTIVE_RELEVANCE_BM25_V1"
-WORD_RE=re.compile(r"[^\\W_]+",re.UNICODE)
+WORD_RE=re.compile(r"[^\W_]+",re.UNICODE)
 GENERIC={
     "a","an","and","are","as","at","be","by","for","from","how","in","is","it",
     "of","on","or","that","the","this","to","was","were","what","when","where",
