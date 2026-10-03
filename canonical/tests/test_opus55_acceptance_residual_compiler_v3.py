@@ -23,6 +23,8 @@ def test_current_authoritative_proof_forms_compile_without_semantic_downgrade():
     assert out["errors"] == [], out
     assert out["proved_predicate_count"] == 11, out
     assert out["open_predicate_count"] + out["blocked_predicate_count"] == 27, out
+    assert out["receipt_saturation_complete"] is False, out
+    assert [a["action_id"] for a in out["authorized_actions"]] == ["ACTION::SATURATE_EXISTING_RECEIPTS"], out
     assert out["terminal_promotion_allowed"] is False
     assert out["capability_credit_delta"] == 0
     assert out["family_credit_delta"] == 0
