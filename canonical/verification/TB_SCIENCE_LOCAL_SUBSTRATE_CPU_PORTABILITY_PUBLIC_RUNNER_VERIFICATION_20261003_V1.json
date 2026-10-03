@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PASS__CLEAN_CURRENT_RUNNER_BUILD__HEALTH_AND_SYNTHETIC_COMPLETION_PASS__ZERO_TERMINAL",
+  "source_contract": {
+    "path": "canonical/governance/TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_REPAIR_V1.json",
+    "git_blob_sha": "7e44ab43908860703a478df2ec8646246620260a"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1267,
+    "verifier_head_sha": "5471be8a4923ca611a97d47b6449252b66436ea2",
+    "workflow_run_id": 37111616149,
+    "workflow_job_id": 111170472199,
+    "conclusion": "success",
+    "artifact_id": 11270152968,
+    "artifact_digest": "sha256:45632e954c512a398c41fa55c1b8855f30eff73655b0d6230f1ce73240c3c922"
+  },
+  "verified": {
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "qwen_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "compiled_build_cache_reused": false,
+    "clean_current_runner_build": true,
+    "health_pass": true,
+    "synthetic_completion_contains_READY": true,
+    "terminal_task_content_read": 0,
+    "terminal_results_observed": 0
+  },
+  "consequence": "CPU_PORTABILITY_DEFECT_REMOVED__RECOMPUTE_SCIENCE_ROUTE_AND_SELECT_NEXT_UNTOUCHED_MANIFEST_SLOT__SEPARATE_NEW_AUTHORITY_REQUIRED_BEFORE_ANY_TERMINAL_EXECUTION",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
