@@ -5,9 +5,11 @@ on:
     paths:
       - "canonical/runtime/terminal_information_dominance_v1.py"
       - "canonical/runtime/current_terminal_information_dominance_v1.py"
+      - "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
       - "canonical/tests/test_terminal_information_dominance_v1.py"
       - "canonical/tests/test_terminal_information_dominance_current_v1.py"
       - "canonical/tests/test_current_terminal_information_dominance_v1.py"
+      - "canonical/tests/test_adaptive_terminal_closure_controller_v1.py"
       - "canonical/governance/TERMINAL_INFORMATION_DOMINANCE_CANDIDATE_V1.json"
       - "canonical/governance/CURRENT_TERMINAL_INFORMATION_DOMINANCE_V1.json"
       - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V3.json"
@@ -17,9 +19,11 @@ on:
     paths:
       - "canonical/runtime/terminal_information_dominance_v1.py"
       - "canonical/runtime/current_terminal_information_dominance_v1.py"
+      - "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
       - "canonical/tests/test_terminal_information_dominance_v1.py"
       - "canonical/tests/test_terminal_information_dominance_current_v1.py"
       - "canonical/tests/test_current_terminal_information_dominance_v1.py"
+      - "canonical/tests/test_adaptive_terminal_closure_controller_v1.py"
       - "canonical/governance/TERMINAL_INFORMATION_DOMINANCE_CANDIDATE_V1.json"
       - "canonical/governance/CURRENT_TERMINAL_INFORMATION_DOMINANCE_V1.json"
       - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V3.json"
@@ -43,6 +47,8 @@ jobs:
         run: python -m unittest canonical.tests.test_terminal_information_dominance_current_v1 -v
       - name: Run live V9-bound frontier regression
         run: python -m unittest canonical.tests.test_current_terminal_information_dominance_v1 -v
+      - name: Run adaptive terminal closure controller tests
+        run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v1 -v
       - name: Evaluate historical V3 information dominance
         run: python canonical/runtime/terminal_information_dominance_v1.py
       - name: Evaluate live V9-bound information dominance
@@ -69,8 +75,30 @@ jobs:
           assert x["promotion_authority"] is False,x
           print("live V9-bound information dominance verified")
           PY
+      - name: Compile adaptive terminal closure frontier
+        run: |
+          python canonical/runtime/adaptive_terminal_closure_controller_v1.py > ADAPTIVE_TERMINAL_CLOSURE_RESULT.json
+          python - <<'PY'
+          import json
+          x=json.load(open("ADAPTIVE_TERMINAL_CLOSURE_RESULT.json"))
+          assert x["pass"] is True,x
+          assert x["live_world"]["unresolved_predicates"]==27,x
+          assert x["live_world"]["nondominated_certificates"]==16,x
+          assert x["live_world"]["verified_zero_reality_requirements"]==19,x
+          assert x["live_world"]["matched_primitive_child_facts"]==16,x
+          assert x["action_refinement"]["primitive_acceptance_work_units"]==33,x
+          assert len(x["first_resource_priority_work_unit_ids"])==16,x
+          assert len(x["ownership_reconciliation_work_units"])==2,x
+          assert x["probability_policy"]["empirically_scored_work_unit_count"]==0,x
+          assert x["fresh_reality_authority"] is False,x
+          assert x["execution_authority"] is False,x
+          assert x["promotion_authority"] is False,x
+          print("adaptive terminal closure controller verified")
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: current-terminal-information-dominance-v1
-          path: CURRENT_TERMINAL_INFORMATION_DOMINANCE_RESULT.json
+          path: |
+            CURRENT_TERMINAL_INFORMATION_DOMINANCE_RESULT.json
+            ADAPTIVE_TERMINAL_CLOSURE_RESULT.json
           if-no-files-found: error
