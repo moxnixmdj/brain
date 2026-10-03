@@ -59,14 +59,6 @@
       "path": "canonical/runtime/p1_shared_failure_semantics_normalizer_v1.py",
       "git_blob_sha": "b6ba06fc6a35fa132eb19389ee256e74a63a4849"
     },
-    "shared_batch_executor_v1": {
-      "path": "canonical/runtime/p1_shared_failure_semantics_batch_v1.py",
-      "git_blob_sha": "fa92b6021e9a7aed9347fb80f5ad55b8652b7a0c"
-    },
-    "shared_batch_tests_v1": {
-      "path": "canonical/tests/test_p1_shared_failure_semantics_batch_v1.py",
-      "git_blob_sha": "9433835e6996705c11e4de4e1a58beaf45886319"
-    },
     "batch_harness_v2": {
       "path": "canonical/runtime/p1_shared_failure_semantics_batch_v1.py",
       "git_blob_sha": "695cfe3f283723a52bafb6299236a2d0378dc79e"
@@ -83,22 +75,32 @@
   ],
   "source_native_case_contract": {
     "generator": "canonical/runtime/contract_native_proof_suites.py::generate_case",
+    "public_projection": "canonical/runtime/contract_native_proof_suites.py::public_task",
     "contract": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
     "source_universe": "INTERVENTION_IDENTIFIED_REPLAYABLE_AGENT_TRAJECTORIES_WITH_HIDDEN_FAULT_METADATA",
-    "hidden_source_truth_used_only_for_instrumentation": [
+    "semantics_binder": "canonical/runtime/p1_shared_failure_semantics_batch_v1.py::bind_public_source_case",
+    "semantics_binder_receives_only": "PUBLIC_SOURCE_CASE_WITH_ORACLE_REMOVED",
+    "semantic_binding_fields": [
+      "task.trajectory[*].state",
+      "task.trajectory[*].invariant_pass",
+      "task.trajectory[*].step",
+      "task.trajectory[*].action"
+    ],
+    "semantic_binding_rule": "FAILED_PUBLIC_SOURCE_STATE_FAULT_INJECTED_BINDS_DIRECT_CONTRACT__FAILED_PUBLIC_SOURCE_STATE_DOWNSTREAM_DEGRADED_BINDS_DERIVED_UPSTREAM__ANY_OTHER_FAILED_PUBLIC_STATE_FAILS_CLOSED",
+    "hidden_source_truth_used_only_for_post_candidate_scoring": [
       "_oracle.cause_step",
       "_oracle.repair_id"
     ],
     "candidate_oracle_exposure": false,
-    "source_truth_binding_rule": "THE_HIDDEN_INJECTED_CAUSE_STEP_IS_BOUND_AS_DIRECT_CONTRACT__DOWNSTREAM_FAILED_INVARIANTS_ARE_BOUND_AS_DERIVED_UPSTREAM__THE_MAPPING_OCCURS_BEFORE_CANDIDATE_VISIBILITY",
-    "source_observation_receipt": "SHA256_OF_FULL_SOURCE_CASE_BEFORE_ORACLE_REMOVAL",
+    "source_observation_receipt": "SHA256_OF_PUBLIC_SOURCE_CASE_AFTER_ORACLE_REMOVAL",
     "candidate_visible_case_excludes": [
       "_oracle",
       "source_case",
       "case_selection_beacon",
       "expected_root",
       "expected_repair"
-    ]
+    ],
+    "noninterference_rule": "MUTATING_HIDDEN_ORACLE_WHILE_HOLDING_PUBLIC_SOURCE_CASE_FIXED_MUST_NOT_CHANGE_SEMANTICS_BINDING"
   },
   "frozen_pipeline": {
     "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
@@ -121,7 +123,7 @@
     "reality_adjudication_rule": "RUNTIME_NEVER_SELF_CLAIMS_FRESH_REALITY__ONLY_SEPARATELY_FROZEN_EXECUTION_ACTIVATION_PLUS_INDEPENDENT_PUBLIC_RUNNER_RECEIPT_MAY_ADJUDICATE_ONE_REALITY_UNIT"
   },
   "frozen_selection": {
-    "namespace": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH_V1",
+    "namespace": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH_V2",
     "post_freeze_beacon": "INDEPENDENT_PUBLIC_RUNNER_GITHUB_ACTIONS_FIRST_ATTEMPT_IDENTITY",
     "seed_derivation": "UINT64_BE_SHA256(NAMESPACE_NEWLINE_BEACON_NEWLINE_SURFACE_ID_NEWLINE_CASE_INDEX)[0:8]",
     "cases_per_surface": 64,
@@ -171,12 +173,15 @@
   "preexecution_independent_verification_must_prove": [
     "EVERY_CONTENT_ADDRESSED_AUTHORITY_AND_PIPELINE_BLOB_MATCHES_THIS_FREEZE",
     "NORMALIZER_FAILS_CLOSED_ON_MISSING_SEMANTICS_EMPTY_FAILED_CHECK_RECEIPTS_AND_UNFROZEN_SURFACES",
-    "SOURCE_HIDDEN_CAUSE_METADATA_IS_NOT_PRESENT_IN_CANDIDATE_INPUT",
-    "SOURCE_CAUSE_BINDS_EXACTLY_ONE_DIRECT_CONTRACT_FAILURE_AND_DOWNSTREAM_FAILURES_BIND_AS_DERIVED_UPSTREAM",
-    "ALL_THREE_FROZEN_SURFACES_ROUTE_THROUGH_BOTH_SCORERS",
+    "SEMANTICS_BINDER_REJECTS_ANY_INPUT_CONTAINING_HIDDEN_ORACLE",
+    "SEMANTICS_BINDING_DEPENDS_ONLY_ON_FROZEN_PUBLIC_SOURCE_FIELDS",
+    "HIDDEN_ORACLE_MUTATION_WITH_FIXED_PUBLIC_SOURCE_CANNOT_CHANGE_SEMANTICS_BINDING",
+    "HIDDEN_SOURCE_ORACLE_IS_USED_ONLY_AFTER_CANDIDATE_OUTPUT_FOR_INDEPENDENT_SCORING",
+    "ALL_THREE_FROZEN_SURFACES_ROUTE_THROUGH_V7_AND_SOURCE_NATIVE_RESCUE_SCORERS",
     "POST_FREEZE_BEACON_SEED_FUNCTION_IS_DETERMINISTIC_AND_SURFACE_CASE_SENSITIVE",
+    "RUNTIME_FULL_BATCH_PREFLIGHT_ALWAYS_REPORTS_ZERO_FRESH_REALITY_CONSUMED",
     "FIXED_SPENT_TEST_BEACONS_ARE_PREFLIGHT_ONLY_AND_CANNOT_RECEIVE_TERMINAL_CREDIT",
-    "NO_TERMINAL_V3_RESULT_IS_READ_OR_REPLAYED_BY_THE_BATCH_EXECUTOR",
+    "NO_TERMINAL_V3_RESULT_IS_READ_OR_REPLAYED_BY_THE_BATCH_HARNESS",
     "ZERO_INCREMENTAL_SPEND"
   ],
   "admission_boundary": {
@@ -203,7 +208,7 @@
     "NO_P1_QUARANTINE_LIFT_FROM_BATCH_RESULT_WITHOUT_SEPARATE_INDEPENDENT_TRANSPORT_ADJUDICATION",
     "NO_HIDDEN_ORACLE_INPUT_TO_FAILURE_SEMANTICS_BINDER",
     "NO_RUNTIME_SELF_PROMOTION_OF_FRESH_REALITY",
-    "NO_PRELIGHT_OR_UNIT_TEST_BATCH_AS_TERMINAL_REALITY"
+    "NO_PREFLIGHT_OR_UNIT_TEST_BATCH_AS_TERMINAL_REALITY"
   ],
   "new_reality_units_consumed": 0,
   "terminal_results_replayed": 0,
