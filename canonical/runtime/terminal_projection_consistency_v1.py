@@ -179,7 +179,7 @@ def evaluate_documents(
     catomic = csum.get("atomic_predicates")
     if not isinstance(catomic, Mapping) or (
         catomic.get("proved"), catomic.get("unresolved"), catomic.get("total")
-    ) != (7, 31, 38):
+    ) != (8, 30, 38):
         errors.append("CLOSURE_ATOMIC_ACCEPTANCE_SUMMARY_MISMATCH")
 
     rows = closure.get("families")
@@ -215,7 +215,7 @@ def evaluate_documents(
     matomic = macc.get("atomic_acceptance")
     if not isinstance(matomic, Mapping) or (
         matomic.get("proved"), matomic.get("unresolved"), matomic.get("total")
-    ) != (7, 31, 38):
+    ) != (8, 30, 38):
         errors.append("MATRIX_ATOMIC_ACCEPTANCE_SUMMARY_MISMATCH")
 
     mrows = matrix.get("rows")
