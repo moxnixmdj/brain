@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_P1_FIRST_PUSH_FAILURE_RECONCILIATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "FIRST_AUTHORIZED_PUSH_ATTEMPT_FAILED__NO_ARTIFACTS__NO_RECORDED_JOB_STEPS__CASE_GENERATION_NOT_PROVED__REUSE_NOT_AUTHORIZED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "authorized_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+  "github_run": {
+    "repository": "moxnixmdj/brain",
+    "workflow_run_id": 37106776756,
+    "workflow_name": "Execute one-use P1 failure-semantics batch",
+    "head_sha": "b12723d5a3116d00edd438d389c8282b47b52016",
+    "event": "push",
+    "branch": "main",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-10-03T07:34:09Z",
+    "updated_at": "2026-10-03T07:34:13Z"
+  },
+  "job_observation": {
+    "only_job_id": 111156743001,
+    "only_job_name": "execute",
+    "status": "completed",
+    "conclusion": "failure",
+    "recorded_step_count": 0,
+    "artifact_count": 0
+  },
+  "adjudication": {
+    "case_generation_proved": false,
+    "fresh_reality_unit_consumed_proved": false,
+    "fresh_reality_unit_reusable_proved": false,
+    "manual_rerun_credit": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "required_before_any_reuse": "SEPARATE_INDEPENDENT_PRE_CASE_INFRASTRUCTURE_FAILURE_RECEIPT_PROVING_CASE_GENERATION_NEVER_BEGAN",
+    "fail_closed_default": "DO_NOT_RERUN__IF_PRE_CASE_NONCONSUMPTION_CANNOT_BE_INDEPENDENTLY_PROVED_TREAT_THE_ONE_USE_ROUTE_AS_UNAVAILABLE"
+  },
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "INDEPENDENTLY_ADJUDICATE_PRE_CASE_FAILURE_FROM_IMMUTABLE_GITHUB_RUN_METADATA__NO_MANUAL_RERUN__NO_REUSE_UNTIL_NONCONSUMPTION_IS_PROVED"
+}
