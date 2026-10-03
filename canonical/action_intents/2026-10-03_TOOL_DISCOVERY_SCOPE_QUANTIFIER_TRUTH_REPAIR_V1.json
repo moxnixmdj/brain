@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "TOOL-DISCOVERY-SCOPE-QUANTIFIER-TRUTH-REPAIR-20261003-V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prevent false Tool Discovery acceptance promotion caused by substituting per-case identity completeness for whole-protocol population completeness.",
+  "causal_target": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "on_independent_pass": [
+    "QUARANTINE_CURRENT_3_TO_4_OF_19_ACCEPTANCE_REDUCERS_THAT_USE_COMPLETE_TARGET_CASE_SET_FROM_THE_IDENTITY_SCOPE_RECEIPT",
+    "PRESERVE_3_OF_19__8_OF_38",
+    "SCHEDULE_ONLY_A_UNIVERSAL_OR_EXHAUSTIVE_PROTOCOL_SCOPE_CLOSURE_WITH_SOUND_LIVE_DISCOVERY_POLICY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
