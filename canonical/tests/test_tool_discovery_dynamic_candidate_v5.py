@@ -164,9 +164,10 @@ class Tests(unittest.TestCase):
 
     def test_unauthorized_or_nonauthoritative_source_does_not_block(self):
         p=base()
+        empty=v5._tools_digest([])
         p["discovery_sources"]=[
-            {"source_id":"NO","cost":0.0,"available":True,"authorized":False,"authoritative":True,"source_epoch":0,"source_digest":"x"},
-            {"source_id":"HINT","cost":0.0,"available":True,"authorized":True,"authoritative":False},
+            {"source_id":"NO","cost":0.0,"available":True,"authorized":False,"authoritative":True,"source_epoch":0,"source_digest":empty},
+            {"source_id":"HINT","cost":0.0,"available":True,"authorized":True,"authoritative":False,"source_epoch":0,"source_digest":empty},
         ]
         p["visible_tools"]=[{
             "tool_id":"T","cost":1.0,"available":True,"authorized":True,
