@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_TERMINAL_CLOSURE_CONTROLLER_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__EXACT_BLOBS_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Minimize wall-clock time to strict Opus 5.5 terminal closure by concurrently scheduling all nondominated zero-reality obligations, first-prioritizing the exact post-Recovery matched child facts, running ownership reconciliation in parallel, and recomputing after every independently verified delta without inventing probabilities.",
+  "runtime": {
+    "path": "canonical/runtime/adaptive_terminal_closure_controller_v1.py",
+    "git_blob_sha": "480df0025c067f55d2344a5e6fca12ca2229ae68"
+  },
+  "tests": {
+    "path": "canonical/tests/test_adaptive_terminal_closure_controller_v1.py",
+    "git_blob_sha": "33ef5e0c9365e03350cdffea0ce9c431c91fecf0"
+  },
+  "frozen_inputs": {
+    "information_dominance": {
+      "path": "canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json",
+      "git_blob_sha": "fae786d6051277865ed6ecde69be5da98e2bf509"
+    },
+    "matched_scope_residual": {
+      "path": "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json",
+      "git_blob_sha": "438e2775b64bee5ed6e792522ab35ebd0d6e1771"
+    },
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "3cbbcd1ddabde7dbf4c3f4d118bdb9d78d0c8605"
+    },
+    "certificate_frontier": {
+      "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+      "git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+    },
+    "atomic_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163"
+    }
+  },
+  "expected_live_projection": {
+    "unresolved_predicates": 27,
+    "nondominated_certificates": 16,
+    "unique_zero_reality_requirements": 19,
+    "matched_live_targets": 8,
+    "matched_primitive_child_facts": 16,
+    "other_zero_reality_requirements": 17,
+    "fresh_reality_authority": false
+  },
+  "scheduling_policy": {
+    "parallel_zero_reality_frontier": true,
+    "matched_child_facts_first_resource_priority": true,
+    "other_zero_reality_work_not_serialized": true,
+    "ownership_reconciliation_parallel_with_acceptance": true,
+    "fixed_point_after_every_independently_verified_delta": true,
+    "stop_newly_dominated_branches_immediately": true,
+    "tb4_current_execution_route_forbidden_until_upper_bound_ge_220": true,
+    "tool_discovery_consumed_github_epoch_replay_forbidden": true
+  },
+  "probability_policy": {
+    "invented_prior_forbidden": true,
+    "probabilistic_priority_requires_explicit_prior_plus_empirical_success_failure_counts": true,
+    "missing_probability_is_unknown_not_zero": true,
+    "probability_is_scheduling_only_and_never_acceptance_evidence": true
+  },
+  "ownership_policy": {
+    "acceptance_does_not_imply_ownership": true,
+    "accepted_but_unowned_families_enter_parallel_ownership_reconciliation": true,
+    "whole_family_ownership_requires_separate_scope_complete_owned_evidence": true
+  },
+  "hard_rules": [
+    "CONTROLLER_OUTPUT_IS_SCHEDULING_ONLY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CROSS_TARGET_MATCHED_SCOPE_INHERITANCE",
+    "NO_PROBABILITY_TO_PROOF_SUBSTITUTION",
+    "NO_CONSUMED_SOURCE_EPOCH_REPLAY_AS_PROGRESS",
+    "RECOMPUTE_ON_ANY_CONTENT_ADDRESSED_INPUT_CHANGE"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_TEST_AND_FROZEN_INPUT_BLOBS__ONLY_THEN_ACTIVATE_AS_CURRENT_ZERO_REALITY_PRIORITY_LAYER",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
