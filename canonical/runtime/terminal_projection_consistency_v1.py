@@ -9,8 +9,8 @@ Current truth after scope reconciliation:
 - P1 whole frozen scope is quarantined, leaving 11/12 whole-scope contracts;
 - quarantine propagates to exactly 8 dependent family rows, leaving 11 unaffected
   provisional behavioral family passes;
-- Opus55 acceptance is 2/19 closed and 17/19 open;
-- atomic acceptance is 7/38 proved and 31/38 unresolved;
+- Opus55 acceptance is 3/19 closed and 16/19 open;
+- atomic acceptance is 8/38 proved and 30/38 unresolved;
 - terminal goal remains false.
 """
 from __future__ import annotations
@@ -31,9 +31,14 @@ PATHS = {
     "p1_propagation": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
 }
 
-EXPECTED_ACCEPTED = {
+EXPECTED_BASELINE_ACCEPTED = {
     "EXACT_SYMBOLIC_COMPUTATION",
     "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+}
+EXPECTED_CURRENT_ACCEPTED = {
+    "EXACT_SYMBOLIC_COMPUTATION",
+    "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "SUBAGENT_DELEGATION_AND_COORDINATION",
 }
 EXPECTED_P1_QUARANTINED = {
     "ADVANCED_AGENTIC_CODING",
@@ -79,7 +84,7 @@ def evaluate_documents(
         errors.append("SCOPE_RECONCILIATION_CLOSED_COUNT_NOT_2")
     if expected.get("open_family_count") != 17:
         errors.append("SCOPE_RECONCILIATION_OPEN_COUNT_NOT_17")
-    if set(expected.get("preserved_closed_families") or []) != EXPECTED_ACCEPTED:
+    if set(expected.get("preserved_closed_families") or []) != EXPECTED_BASELINE_ACCEPTED:
         errors.append("SCOPE_RECONCILIATION_CLOSED_SET_MISMATCH")
     if expected.get("terminal_goal_achieved") is not False:
         errors.append("SCOPE_RECONCILIATION_TERMINAL_MUST_BE_FALSE")
@@ -89,10 +94,10 @@ def evaluate_documents(
     if not isinstance(saturation, Mapping):
         errors.append("ATOMIC_BINDING_SATURATION_MISSING")
         saturation = {}
-    if saturation.get("proved_predicate_count") != 7:
-        errors.append("ATOMIC_PROVED_COUNT_NOT_7")
-    if saturation.get("unresolved_predicate_count") != 31:
-        errors.append("ATOMIC_UNRESOLVED_COUNT_NOT_31")
+    if saturation.get("proved_predicate_count") != 8:
+        errors.append("ATOMIC_PROVED_COUNT_NOT_8")
+    if saturation.get("unresolved_predicate_count") != 30:
+        errors.append("ATOMIC_UNRESOLVED_COUNT_NOT_30")
     if saturation.get("new_reality_units_consumed") != 0:
         errors.append("ATOMIC_RECONCILIATION_CONSUMED_NEW_REALITY")
 
@@ -128,8 +133,8 @@ def evaluate_documents(
         "11/19_UNAFFECTED_PROVISIONAL_BEHAVIORAL_PASS__8/19_P1_DEPENDENT_ROWS_QUARANTINED"
     ):
         errors.append("AUTHORITY_BEHAVIORAL_FAMILY_STATE_MISMATCH")
-    if truth.get("opus55_acceptance") != "2/19_PASS__17/19_OPEN":
-        errors.append("AUTHORITY_ACCEPTANCE_NOT_2_OF_19")
+    if truth.get("opus55_acceptance") != "3/19_PASS__16/19_OPEN":
+        errors.append("AUTHORITY_ACCEPTANCE_NOT_3_OF_19")
     if truth.get("achieved") is not False:
         errors.append("AUTHORITY_TERMINAL_GOAL_MUST_REMAIN_FALSE")
 
@@ -137,7 +142,7 @@ def evaluate_documents(
     if not isinstance(af, Mapping):
         errors.append("AUTHORITY_ATOMIC_FRONTIER_MISSING")
         af = {}
-    if (af.get("proved"), af.get("unresolved"), af.get("total")) != (7, 31, 38):
+    if (af.get("proved"), af.get("unresolved"), af.get("total")) != (8, 30, 38):
         errors.append("AUTHORITY_ATOMIC_FRONTIER_MISMATCH")
     if af.get("authorized_acceptance_case_actions") != []:
         errors.append("AUTHORITY_UNAUTHORIZED_CASE_ACTION_PRESENT")
@@ -167,9 +172,9 @@ def evaluate_documents(
     if not isinstance(csum, Mapping):
         errors.append("CLOSURE_ACCEPTANCE_SUMMARY_MISSING")
         csum = {}
-    if csum.get("calibrated_family_count") != 2 or csum.get("pending_family_count") != 17:
+    if csum.get("calibrated_family_count") != 3 or csum.get("pending_family_count") != 16:
         errors.append("CLOSURE_ACCEPTANCE_SUMMARY_MISMATCH")
-    if set(csum.get("calibrated_families") or []) != EXPECTED_ACCEPTED:
+    if set(csum.get("calibrated_families") or []) != EXPECTED_CURRENT_ACCEPTED:
         errors.append("CLOSURE_ACCEPTANCE_FAMILY_SET_MISMATCH")
     catomic = csum.get("atomic_predicates")
     if not isinstance(catomic, Mapping) or (
@@ -203,9 +208,9 @@ def evaluate_documents(
     if not isinstance(macc, Mapping):
         errors.append("MATRIX_ACCEPTANCE_SUMMARY_MISSING")
         macc = {}
-    if macc.get("calibrated_family_count") != 2 or macc.get("pending_acceptance_family_count") != 17:
+    if macc.get("calibrated_family_count") != 3 or macc.get("pending_acceptance_family_count") != 16:
         errors.append("MATRIX_ACCEPTANCE_SUMMARY_MISMATCH")
-    if set(macc.get("calibrated_families") or []) != EXPECTED_ACCEPTED:
+    if set(macc.get("calibrated_families") or []) != EXPECTED_CURRENT_ACCEPTED:
         errors.append("MATRIX_ACCEPTANCE_FAMILY_SET_MISMATCH")
     matomic = macc.get("atomic_acceptance")
     if not isinstance(matomic, Mapping) or (
@@ -259,10 +264,10 @@ def evaluate_documents(
         "whole_scope_contract_quarantined": 1,
         "unaffected_behavioral_family_passes": 11,
         "p1_dependent_behavioral_families_quarantined": 8,
-        "acceptance_closed_families": 2,
-        "acceptance_open_families": 17,
-        "atomic_predicates_proved": 7,
-        "atomic_predicates_unresolved": 31,
+        "acceptance_closed_families": 3,
+        "acceptance_open_families": 16,
+        "atomic_predicates_proved": 8,
+        "atomic_predicates_unresolved": 30,
         "authorized_acceptance_case_actions": 0,
         "terminal_goal_achieved": False,
         "capability_credit_delta": 0,
