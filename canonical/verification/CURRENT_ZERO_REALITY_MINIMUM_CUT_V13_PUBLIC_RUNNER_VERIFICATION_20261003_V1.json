@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V13_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V13_CURRENT_HEAD_ROUTE_COMPRESSION__ZERO_CREDIT",
+  "candidate": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V13.json",
+    "git_blob_sha": "0e90450aaaad27714b272ad2b143ba23dd8f3dc0",
+    "source_main_commit": "f02cc4c81b6de97c2bc7d0adb57cb22653001b22"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-v13-root2-compression-20261003-sol",
+    "verifier_head_sha": "a3b2cacfc19a05ddcb41ebe8da36a722de8d8470",
+    "workflow_run_id": 37157748058,
+    "workflow_job_id": 111304604528,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_STATE_5_OF_19_ACCEPTED__12_OF_38_PROVED__TERMINAL_FALSE",
+    "ROOT1_POSITIVE_GAP_COUNT_ZERO_PRESERVED",
+    "V12_PUBLIC_ACCOUNT_BOUNDARY_RUN_IS_SUCCESS",
+    "FINANCE_WEIGHTED_BOUND_INDEPENDENT_RUN_IS_SUCCESS",
+    "CHARTOGRAPHY_GENERIC_PUBLIC_QUOTA_SEARCH_REDUCED_TO_ACCOUNT_BOUND_STATE",
+    "OSWORLD_GENERIC_TASK_GATE_AND_COMPONENT_IDENTITY_SEARCH_DISCHARGED",
+    "FINANCE_SIX_COMPONENTWISE_NONINFERIORITY_AS_MANDATORY_ROUTE_DOMINATED",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_PROMOTION_OR_FRESH_REALITY_CREDIT"
+  ],
+  "accounting": {
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
