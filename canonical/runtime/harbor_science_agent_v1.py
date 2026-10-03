@@ -122,8 +122,9 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "On the first cycle provide material_requirements (1-16 stable short IDs). "
             "Provide 1-8 candidate actions as {action_id,covers,command,verify_command}. "
             "covers must name only frozen material_requirements. verify_command must independently test the "
-            "candidate's claimed effect inside the task environment. Once every material requirement has a "
-            "successful command+verify pair, return finish_summary. "
+            "candidate's claimed effect inside the task environment. Brain alone decides completion after "
+            "independent verification resolves every frozen material requirement. finish_summary is optional "
+            "descriptive metadata only and never execution or finish authority. "
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
             "Recent observations: " + json.dumps(observations[-4:], sort_keys=True)[:12000]
         )
@@ -144,19 +145,22 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                 }
                 trace.append(rejected)
                 observations.append(rejected)
-                continue
-            return {
-                "schema": SCHEMA,
-                "status": "FINISHED",
-                "controller_mode": "BRAIN_OWNED_RESEARCH_CONTROL__OPTIONAL_GENERAL_COGNITION_SUBSTRATE",
-                "model_has_terminal_authority": False,
-                "material_requirements": requirements,
-                "resolved_requirements": sorted(resolved),
-                "cycles": cycle + 1,
-                "trace": trace,
-                "summary": finish_summary,
-                "planner_model_last": planned.get("model"),
-            }
+                # A premature finish request is metadata only. It must not suppress
+                # otherwise admissible candidate actions in the same proposal.
+            else:
+                return {
+                    "schema": SCHEMA,
+                    "status": "FINISHED",
+                    "controller_mode": "BRAIN_OWNED_RESEARCH_CONTROL__OPTIONAL_GENERAL_COGNITION_SUBSTRATE",
+                    "model_has_terminal_authority": False,
+                    "finish_authority": "BRAIN_VERIFIED_STATE",
+                    "material_requirements": requirements,
+                    "resolved_requirements": sorted(resolved),
+                    "cycles": cycle + 1,
+                    "trace": trace,
+                    "summary": finish_summary,
+                    "planner_model_last": planned.get("model"),
+                }
 
         if not candidates:
             rejected = {"cycle": cycle, "kind": "NO_CANDIDATES", "unresolved": sorted(unresolved_set)}
@@ -215,6 +219,24 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         trace.append(record)
         observations.append(record)
 
+        # Completion is a deterministic consequence of Brain-owned verified state.
+        # Do not spend another cognition turn asking the substrate to notice that
+        # all requirements are already resolved.
+        if requirements is not None and not (set(requirements) - resolved):
+            return {
+                "schema": SCHEMA,
+                "status": "FINISHED",
+                "controller_mode": "BRAIN_OWNED_RESEARCH_CONTROL__OPTIONAL_GENERAL_COGNITION_SUBSTRATE",
+                "model_has_terminal_authority": False,
+                "finish_authority": "BRAIN_VERIFIED_STATE",
+                "material_requirements": requirements,
+                "resolved_requirements": sorted(resolved),
+                "cycles": cycle + 1,
+                "trace": trace,
+                "summary": "Brain independently verified all frozen material requirements.",
+                "planner_model_last": planned.get("model"),
+            }
+
     return {
         "schema": SCHEMA,
         "status": "BLOCKED_MAX_CYCLES_NO_BRAIN_AUTHORIZED_FINISH",
@@ -235,7 +257,7 @@ class HarborScienceAgent(BaseAgent):
         return "project-brain-science"
 
     def version(self) -> str:
-        return "1.0.0"
+        return "1.1.0"
 
     async def setup(self, environment: BaseEnvironment) -> None:
         return None
