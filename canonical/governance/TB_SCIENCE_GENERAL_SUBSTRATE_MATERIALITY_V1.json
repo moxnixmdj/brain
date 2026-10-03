@@ -1,12 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_GENERAL_SUBSTRATE_MATERIALITY_V1",
   "date": "2026-10-03",
-  "status": "REPAIRED_CANDIDATE_COUNTERFACTUAL_MATERIALITY_PROOF__ALIAS_NORMALIZATION_ADDED__INDEPENDENT_REVERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "REPAIRED_CANDIDATE_COUNTERFACTUAL_MATERIALITY_PROOF__SYNTAX_CORRECT_CONTROLLER__INDEPENDENT_REVERIFICATION_REQUIRED__ZERO_CREDIT",
   "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "target_predicate": "TB_SCIENCE_GE_58_7",
   "exact_inputs": {
     "controller": "canonical/runtime/harbor_science_agent_v1.py",
-    "controller_git_blob_sha": "08862621cfe6ff6915a98120db36686ae5a08dab",
+    "controller_git_blob_sha": "8967f84a8f8537dad17b677329ed17e7b4ff0fad",
     "source_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
     "source_gate_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de",
     "planner": "canonical/runtime/harbor_science_planner_v1.py",
