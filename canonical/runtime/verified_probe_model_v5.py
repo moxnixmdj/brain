@@ -50,6 +50,8 @@ def admit(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]]
         raise VerifiedProbeModelError("OUTCOME_MODEL_RECEIPT_INVALID")
     if model.get("decision_relevant_outcome_partition_complete") is not True:
         raise VerifiedProbeModelError("OUTCOME_PARTITION_COMPLETENESS_NOT_PROVED")
+    if model.get("deterministic_outcome_given_hypothesis_and_epoch") is not True:
+        raise VerifiedProbeModelError("DETERMINISTIC_OUTCOME_MODEL_NOT_PROVED")
     if model.get("observation_only_or_state_restored") is not True:
         raise VerifiedProbeModelError("PROBE_STATE_RESTORATION_NOT_PROVED")
     if model.get("future_probe_model_invariance_verified") is not True:
