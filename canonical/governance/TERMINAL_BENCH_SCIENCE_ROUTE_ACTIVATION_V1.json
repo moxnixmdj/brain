@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_TRANCHE1_EXECUTION_AUTHORITY__THREE_FROZEN_SLOTS_ONLY__PROMOTION_FALSE",
+  "status": "FAIL_CLOSED_AFTER_TRANCHE1__0_OF_3_SUCCESS__PLANNER_TRANSPORT_FAILURE__REPLACEMENT_SUBSTRATE_REQUIRED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "predicate": "TB_SCIENCE_GE_58_7",
@@ -43,14 +43,14 @@
     "FREEZE_ZERO_RETRY_ZERO_REPLACEMENT_AND_CONSERVATIVE_ZERO_CENSORING",
     "ISSUE_TERMINAL_EXECUTION_AUTHORITY_ONLY_FOR_FROZEN_SLOT_IDS"
   ],
-  "execution_authority": true,
+  "execution_authority": false,
   "promotion_authority": false,
   "terminal_results_observed": 0,
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "next": "ARM_AND_EXECUTE_EXACTLY_THREE_AUTHORIZED_TRANCHE1_SLOT_IDS__REDUCE_RESULTS_IMMEDIATELY__AUTO_REVOKE_TRANCHE1_AUTHORITY",
+  "next": "PROVE_REPLACEMENT_ZERO_INCREMENTAL_GENERAL_COGNITION_SUBSTRATE_ON_LONG_SYNTHETIC_SCIENCE_PROMPTS__NO_RETRY_OF_SPENT_SLOTS__NO_MORE_TERMINAL_SPEND_BEFORE_PASS",
   "deterministic_terminalization_verification": "canonical/verification/TB_SCIENCE_DETERMINISTIC_TERMINALIZATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
   "conservative_lower_bound": {
     "governance": "canonical/governance/TB_SCIENCE_CONSERVATIVE_CENSORING_LOWER_BOUND_V1.json",
@@ -63,5 +63,6 @@
   "independent_planner_v2_verification": "canonical/verification/TB_SCIENCE_DEDICATED_PLANNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
   "verified_manifest": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
   "tranche1_execution_authority": "canonical/governance/TB_SCIENCE_TRANCHE1_EXECUTION_AUTHORITY_V1.json",
-  "tranche1_authority_verification": "canonical/verification/TB_SCIENCE_TRANCHE1_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  "tranche1_authority_verification": "canonical/verification/TB_SCIENCE_TRANCHE1_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "tranche1_result_reconciliation": "canonical/verification/TB_SCIENCE_TRANCHE1_RESULT_RECONCILIATION_20261003_V1.json"
 }
