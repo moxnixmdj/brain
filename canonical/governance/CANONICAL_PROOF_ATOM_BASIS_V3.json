@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_PROOF_ATOM_BASIS_V3",
+  "date": "2026-10-03",
+  "status": "IMPLEMENTED_CANDIDATE__30_TARGETS__16_CERTIFICATES__39_EXPECTED_ATOMS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Recompile canonical PA1 proof atoms after independently verified delegation acceptance closure removes one standalone unresolved predicate and certificate.",
+  "runtime": "canonical/runtime/canonical_proof_atom_basis_v2.py",
+  "runtime_git_blob_sha": "5b5957f353edab6c86a34f947ef253099822b0d1",
+  "inputs": {
+    "frontier": {
+      "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V6.json",
+      "git_blob_sha": "b6fd9bf4d50bbb147a4085902c84279a91dbb8f3"
+    },
+    "action_hypergraph": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V3.json",
+      "git_blob_sha": "7fd2d40fe759757a41b14b960548fa97d968b3b9"
+    },
+    "refinement_overlay": {
+      "path": "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V2.json"
+    }
+  },
+  "expected_projection": {
+    "global_unresolved_predicates": 30,
+    "global_certificates": 16,
+    "refined_parent_count": 3,
+    "leaf_requirement_occurrences": 39,
+    "canonical_leaf_atoms": 39,
+    "exact_duplicate_savings": 0,
+    "max_structural_target_fanout": 3
+  },
+  "hard_rules": [
+    "PA1_IDENTITY_REMAINS_SHA256_OF_EXACT_PROPOSITION_LITERAL",
+    "NO_SEMANTIC_EQUIVALENCE_INFERRED",
+    "ONLY_THE_INDEPENDENTLY_PROVED_DELEGATION_LEAF_IS_REMOVED",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING_ARTIFACT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
