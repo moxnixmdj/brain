@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V7_DIRECT_SURFACE_TRANSPORT_AND_IDENTIFIABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V7_DIRECT_SURFACE_TRANSPORT_NOT_PROVED__CURRENT_PROJECTION_NONIDENTIFYING__ZERO_CREDIT",
+  "brain_pull_request": 1079,
+  "brain_head_sha": "ea0715c902129867e9228b90337ca861a9cf4c6b",
+  "exact_brain_blobs": {
+    "canonical/governance/P1_V7_DIRECT_SURFACE_SCOPE_TRANSPORT_GATE_V1.json": "4c1076c29345e55d20a84e95d6dd6e6481549c77",
+    "canonical/runtime/p1_v7_direct_surface_scope_transport_v1.py": "781b7de5a01a16030842e9f75699b5dad7e9ae7c",
+    "canonical/tests/test_p1_v7_direct_surface_scope_transport_v1.py": "37a8a34627d2add12060aee35b4c8295e129dc80",
+    "canonical/governance/P1_V7_FAILURE_SEMANTICS_IDENTIFIABILITY_CUT_V1.json": "9346d717b2e46a040b693de44bd656c84d133096",
+    "canonical/runtime/p1_v7_failure_semantics_identifiability_v1.py": "78f4629dbc804cacca99c8e6493be7cfcd46f532",
+    "canonical/tests/test_p1_v7_failure_semantics_identifiability_v1.py": "7b980a2b29b091f5698c57dc77762c5861d5d651",
+    "canonical/tests/test_trajectory_failure_typed_ir_v7.py": "5985660c84d0f1e0eb5470e283f2544ea2cbf418",
+    "canonical/runtime/p1_v6_derived_only_counterexample_v1.py": "3466e7382d940133fa2b10206874bb39cdf3722f",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py": "28940387bd6c11671035ad9201e37bba13fd9bc9",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v6.py": "18d4de68ee8352410e986c318868642333ec085a",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json": "8b439403a05b4a912f06a8866db25f6e53b52473",
+    "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json": "75cd1ad0ec0739ebd894cf6075af5837b93d83f8",
+    "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json": "8c7ffe3d9ff789eddd286496f6de3ce84472c909",
+    "canonical/verification/P1_V6_DERIVED_ONLY_SCOPE_FALSIFICATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "dbd0bbb5da26de58a731fd8284b7a365f23bec1e",
+    "canonical/verification/P1_V7_CURRENT_MAIN_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "4e8cf594503a216302a1d61c2009945131d86041",
+    "canonical/governance/P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V7.json": "69e9802a8df577bd1d3398889f3f7e8a046419e1",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1098,
+    "workflow_run_id": 37081583043,
+    "workflow_job_id": 111083067604,
+    "merge_commit": "f8e423a07807841b6dec0155d22013e0d7db1446",
+    "conclusion": "success"
+  },
+  "verified_consequences": [
+    "EXACT_BRAIN_PR_1079_BYTES_PASS",
+    "P1_V7_DIRECT_SURFACE_TRANSPORT_GATE_REPRODUCES_FAIL_CLOSED_ON_MISSING_EXPLICIT_FAILURE_SEMANTICS_TRANSPORT",
+    "CURRENT_FROZEN_TRANSPORT_PROJECTION_UNDERDETERMINES_V7_FAILURE_SEMANTICS",
+    "TWO_FULL_SEMANTIC_WORLDS_HAVE_IDENTICAL_CURRENT_PROJECTION_BUT_REQUIRE_DIFFERENT_V7_BEHAVIOR",
+    "NO_DETERMINISTIC_ADAPTER_USING_ONLY_CURRENT_PROJECTED_FIELDS_CAN_BE_UNIVERSALLY_SOUND",
+    "MINIMUM_MISSING_FACT_IS_FAILURE_SEMANTICS_OR_AN_INDEPENDENTLY_PROVED_EQUIVALENT_DISCRIMINATOR",
+    "P1_QUARANTINE_REMAINS",
+    "NO_FRESH_TERMINAL_REPLAY_AND_ZERO_ACCEPTANCE_CAPABILITY_FAMILY_CREDIT"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
