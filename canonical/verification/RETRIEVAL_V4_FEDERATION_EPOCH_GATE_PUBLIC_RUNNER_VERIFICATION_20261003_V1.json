@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V4_FEDERATION_EPOCH_GATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__DIVERSITY_PRESERVING_FEDERATION__ROUTER_RECEIPT_EPOCH_GATE__ZERO_CREDIT",
+  "verified_subjects": {
+    "canonical/runtime/public_source_federation_v1.py": "3f69b3e8371fe3e5abc173c6c9fe17e9003a938b",
+    "canonical/runtime/public_source_federation_v2.py": "32f0443bfb1859168e14f7266a3b5b3c99a40f45",
+    "canonical/runtime/residual_witness_retrieval_compiler_v1.py": "9daa8d590f3356b3fc51eccf75c56cbf515239e4",
+    "canonical/runtime/residual_witness_backend_router_v1.py": "578c5f87901a458b12d7df984e0a6a525d367456",
+    "canonical/runtime/federated_retrieval_epoch_gate_v1.py": "0a36836c8f0428338a9931b757090a26f73c2672",
+    "canonical/tests/test_retrieval_v4_federated_epoch_gate.py": "c89f60ad64da2933a1a2a6b617f1daef7c18c0e4"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/retrieval-v4-federation-20261003",
+    "pull_request": 1331,
+    "head_sha": "a4cef9e9b0f7e3560510f1b048b3be56a4ef8539",
+    "workflow_run_id": 37121785104,
+    "workflow_job_id": 111199154177,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_subject_blobs_verified": true,
+    "exact_technical_anchor_survives_default_budget": true,
+    "cjk_variant_reaches_every_source_group": true,
+    "arabic_variant_reaches_every_source_group": true,
+    "cyrillic_variant_reaches_every_source_group": true,
+    "devanagari_variant_reaches_every_source_group": true,
+    "source_group_count": 14,
+    "router_plan_is_open_web_only": true,
+    "verified_backend_router_contract_accepts_v4_actions": true,
+    "epoch_consumption_requires_one_router_receipt_per_selected_cell": true,
+    "missing_receipt_fails_closed": true,
+    "unbound_backend_does_not_count_as_attempt": true,
+    "failed_or_empty_attempts_preserve_unknown": true,
+    "epoch_consumption_does_not_authorize_nonexistence": true,
+    "zero_credit_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_RETRIEVAL_COMPLETENESS_CLAIM",
+    "NO_ALL_LANGUAGE_TRANSLATION_COMPLETENESS_CLAIM",
+    "NO_CLAIM_EVERY_PUBLIC_SOURCE_IS_INDEX_COMPLETE",
+    "NO_EPOCH_CONSUMPTION_TO_NONEXISTENCE_INFERENCE",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

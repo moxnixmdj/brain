@@ -29,10 +29,12 @@ def actual_blobs():
         "backend_verification_blob": gate.git_blob_sha(raw(gate.EXPECTED["backend_verification_path"])),
         "v3_activation_blob": gate.git_blob_sha(raw(gate.EXPECTED["v3_activation_path"])),
         "v3_activation_verification_blob": gate.git_blob_sha(raw(gate.EXPECTED["v3_activation_verification_path"])),
+        "v4_activation_blob": gate.git_blob_sha(raw(gate.V4_EXPECTED["v4_activation_path"])),
+        "v4_activation_verification_blob": gate.git_blob_sha(raw(gate.V4_EXPECTED["v4_activation_verification_path"])),
     }
 
 
-def validate(hypergraph=None, activation=None, activation_verification=None, compiler_verification=None, backend_verification=None, v3_activation=None, v3_activation_verification=None, blobs=None):
+def validate(hypergraph=None, activation=None, activation_verification=None, compiler_verification=None, backend_verification=None, v3_activation=None, v3_activation_verification=None, v4_activation=None, v4_activation_verification=None, blobs=None):
     return gate.validate(
         hypergraph or load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
         activation or load(gate.EXPECTED["activation_path"]),
@@ -41,6 +43,8 @@ def validate(hypergraph=None, activation=None, activation_verification=None, com
         backend_verification or load(gate.EXPECTED["backend_verification_path"]),
         v3_activation or load(gate.EXPECTED["v3_activation_path"]),
         v3_activation_verification or load(gate.EXPECTED["v3_activation_verification_path"]),
+        v4_activation or load(gate.V4_EXPECTED["v4_activation_path"]),
+        v4_activation_verification or load(gate.V4_EXPECTED["v4_activation_verification_path"]),
         blobs or actual_blobs(),
     )
 
@@ -125,6 +129,32 @@ class ToolDiscoveryRetrievalAuthorityGateV1Tests(unittest.TestCase):
         out = validate(hypergraph=h)
         self.assertFalse(out["pass"], out)
         self.assertIn("TOOL_DISCOVERY_TARGET_ACTION_COUNT_NE_1:2", out["errors"])
+
+    def test_v4_exact_repository_passes_and_is_mandatory(self):
+        out = gate.evaluate_repository(ROOT)
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["v4_federated_router_receipts_mandatory"], out)
+
+    def test_stale_v4_activation_hash_fails_closed(self):
+        blobs = actual_blobs()
+        blobs["v4_activation_blob"] = "0" * 40
+        out = validate(blobs=blobs)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("ACTUAL_BLOB_MISMATCH:v4_activation_blob", out["errors"])
+
+    def test_v4_missing_router_receipt_rule_fails_closed(self):
+        activation = load(gate.V4_EXPECTED["v4_activation_path"])
+        activation["stop_rules"]["missing_or_unbound_router_receipt"] = "IGNORE"
+        out = validate(v4_activation=activation)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("V4_MISSING_RECEIPT_STOP_RULE_INVALID", out["errors"])
+
+    def test_failed_v4_independent_receipt_fails_closed(self):
+        receipt = load(gate.V4_EXPECTED["v4_activation_verification_path"])
+        receipt["independent_runner"]["conclusion"] = "failure"
+        out = validate(v4_activation_verification=receipt)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("V4_ACTIVATION_INDEPENDENT_RUNNER_NOT_SUCCESS", out["errors"])
 
 
 if __name__ == "__main__":
