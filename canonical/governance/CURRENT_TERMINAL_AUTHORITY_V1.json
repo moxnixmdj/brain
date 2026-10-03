@@ -109,7 +109,7 @@
       "governance_path": "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json",
       "governance_git_blob_sha": "d029e7e79122518e5f0117232259392b72c7ff36",
       "runtime_path": "canonical/runtime/terminal_projection_consistency_v1.py",
-      "runtime_git_blob_sha": "36caf07fbcac4f768c6d11bfbc779b8a118d38a3",
+      "runtime_git_blob_sha": "c4f51dcf30935037dbadcee52030d14d8440fd1a",
       "tests_path": "canonical/tests/test_terminal_projection_consistency_v1.py",
       "tests_git_blob_sha": "3c3e0daa17110a17a54b1bbad47c6035b7b3a733",
       "workflow_path": ".github/workflows/verify-terminal-projection-consistency.yml",
@@ -775,7 +775,7 @@
     "current_effective_leaf_requirement_occurrences": 39,
     "current_effective_canonical_leaf_atoms": 39
   },
-  "last_reconciled_control_plane_head": "b4f4d08207a013120c1a66a501240cd33c46c4a2",
+  "last_reconciled_control_plane_head": "2871b81bea37d7f3a70cd47c3359f9b4bcf828a2",
   "last_reconciled_reason": "POST_DELEGATION_PROJECTION_CHAIN_RECONCILED_TO_INDEPENDENTLY_PROMOTED_3_OF_19_AND_8_OF_38__TOOL_DISCOVERY_DYNAMIC_REFINEMENT_AND_EXACT_EXTERNAL_INTERFACE_INSTANCE_RESIDUAL_PRESERVED__TERMINAL_FALSE",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
