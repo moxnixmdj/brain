@@ -126,6 +126,21 @@ class ScienceAgentTests(unittest.TestCase):
             with self.assertRaises(Exception):
                 asyncio.run(s.run_science_goal("goal",env,max_cycles=1))
 
+    def test_task_conditioned_planner_uses_verified_300_second_latency_envelope(self):
+        env=Env()
+        seen=[]
+        def fake_plan(prompt, timeout_s=20):
+            seen.append(timeout_s)
+            return {"text":json.dumps({
+                "material_requirements":["R1"],
+                "candidates":[{"action_id":"a","covers":["R1"],"command":"echo work","verify_command":"echo verify"}],
+            }),"model":"synthetic-fixed-substrate"}
+        with patch.object(s.science_planner, "plan", fake_plan):
+            result=asyncio.run(s.run_science_goal("synthetic science goal",env,max_cycles=1))
+        self.assertEqual(seen,[300])
+        self.assertEqual(result["status"],"FINISHED")
+        self.assertEqual(result["resolved_requirements"],["R1"])
+
     def test_source_gate_projection_is_brain_owned_general_substrate(self):
         route={
             "benchmark_harness_zero_cost":True,
