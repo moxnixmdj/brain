@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_RECOVERY_DUAL_SEMANTIC_FIREWALL_V2",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__CURRENT_QUARANTINE_AND_PERMANENT_NONIMPLICATION_GUARD__ZERO_CREDIT",
+  "objective": "Prevent recovery acceptance transport both while the verified P1 execution-scope quarantine is active and after any future scope repair unless strict earliest-causal-localization evidence actually exists.",
+  "current_quarantine": {
+    "path": "canonical/governance/P1_TERMINAL_EXECUTION_SCOPE_MISMATCH_QUARANTINE_V1.json",
+    "active_token": "P1_WITNESS_TRANSPORT_INTO_RECOVERY_ACCEPTANCE",
+    "required_lifter_error": "P1_EXECUTED_TERMINAL_SCOPE_MISMATCH_QUARANTINE_ACTIVE"
+  },
+  "permanent_nonimplication": {
+    "target_atom": "dimension:earliest_causal_failure_localization",
+    "weak_source_literal": "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE",
+    "required_strict_source_literal": "EARLIEST_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE",
+    "countermodel": {
+      "critical_causal_failure_localized": true,
+      "earliest_causal_failure_localized": false,
+      "weak_source_literal_satisfied": true,
+      "strict_target_atom_satisfied": false
+    },
+    "logical_result": "WEAK_SOURCE_DOES_NOT_IMPLY_STRICT_TARGET"
+  },
+  "blocked_derivations": [
+    "STRICT_EARLIEST_TARGET_FROM_EARLIEST_OR_CRITICAL_SOURCE",
+    "CAUSAL_LOCALIZATION_OBJECTIVE_CEILING_FROM_EARLIEST_OR_CRITICAL_SOURCE",
+    "RECOVERY_ACCEPTANCE_TRANSPORT_WHILE_CURRENT_P1_SCOPE_QUARANTINE_IS_ACTIVE"
+  ],
+  "repair_conditions": [
+    "CURRENT_SCOPE_QUARANTINE_MUST_BE_LAWFULLY_CLEARED_BY_SCOPE_SAFE_EVIDENCE",
+    "STRICT_EARLIEST_TARGET_REQUIRES_A_MACHINE_VERIFIED_STRICT_EARLIEST_SOURCE_CHECK_OR_OTHER_EXPLICIT_ENTAILMENT",
+    "A_CRITICAL_ONLY_SUCCESS_IS_INSUFFICIENT_FOR_STRICT_EARLIEST_CREDIT"
+  ],
+  "runtime": "canonical/runtime/recovery_t0_t2_acceptance_ceiling_lifter_v1.py",
+  "tests": "canonical/tests/test_recovery_t0_t2_acceptance_ceiling_lifter_v1.py",
+  "hard_rules": [
+    "QUARANTINE_FIELD_EVOLUTION_MUST_NOT_SILENTLY_DISABLE_ENFORCEMENT",
+    "OR_DOES_NOT_IMPLY_EITHER_DISJUNCT",
+    "NO_1_0_STRICT_TARGET_CEILING_FROM_WEAKER_SOURCE",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "predicate_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
