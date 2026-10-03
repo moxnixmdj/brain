@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_OWNERSHIP_PROMOTION_BATCH_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_EXACT_ARTIFACT_PROVIDER_AUDIT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_REALITY",
+  "base_commit": "b35eac0ce7054fb29704933d735f9d49bd935a8a",
+  "closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+  "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+  "families": [
+    {
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "acceptance_receipts": [
+        "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      ],
+      "artifact": {
+        "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+        "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+        "binding_receipt": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "binding_pointer": "/exact_brain_blobs/canonical~1runtime~1delegation_whole_scope_candidate_v2.py"
+      },
+      "future_use_requires_capability_rediscovery": false,
+      "incremental_spend_usd": 0,
+      "provider_audit": "EXACT_ARTIFACT_AST_SELF_CONTAINED_STDLIB_ONLY__NO_DYNAMIC_IMPORT_PROCESS_NETWORK_OR_OPAQUE_MODEL_PROVIDER"
+    },
+    {
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "acceptance_receipts": [
+        "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+        "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      ],
+      "artifact": {
+        "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+        "git_blob_sha": "28940387bd6c11671035ad9201e37bba13fd9bc9",
+        "binding_receipt": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "binding_pointer": "exact_brain_bytes.candidate_v7_blob"
+      },
+      "future_use_requires_capability_rediscovery": false,
+      "incremental_spend_usd": 0,
+      "provider_audit": "EXACT_ARTIFACT_AST_SELF_CONTAINED_STDLIB_ONLY__NO_DYNAMIC_IMPORT_PROCESS_NETWORK_OR_OPAQUE_MODEL_PROVIDER"
+    },
+    {
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "acceptance_receipts": [
+        "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      ],
+      "artifact": {
+        "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+        "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17",
+        "binding_receipt": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "binding_pointer": "/exact_brain_blobs/canonical~1runtime~1tool_discovery_information_safe_candidate.py"
+      },
+      "future_use_requires_capability_rediscovery": false,
+      "incremental_spend_usd": 0,
+      "provider_audit": "EXACT_ARTIFACT_AST_SELF_CONTAINED_STDLIB_ONLY__NO_DYNAMIC_IMPORT_PROCESS_NETWORK_OR_OPAQUE_MODEL_PROVIDER"
+    }
+  ],
+  "rules": {
+    "accepted_only": true,
+    "brain_owned_artifact_required": true,
+    "content_addressed_binding_required": true,
+    "all_receipts_independent_pass": true,
+    "current_exact_artifact_provider_audit_required": true,
+    "no_global_stale_cleanroom_inheritance": true,
+    "new_reality_units": 0,
+    "incremental_spend_usd": 0
+  },
+  "expected_if_verified": {
+    "promotion_eligible": 3,
+    "verified_owned_before": 2,
+    "verified_owned_after": 5
+  },
+  "promotion_authority": false,
+  "ownership_credit_delta": 0,
+  "live_reconciliation": {
+    "checked_against_main": "8db7d0bb24de65edc81af4431a2301e4010003fc",
+    "closure_manifest_identical": true,
+    "ownership_matrix_identical": true,
+    "target_binding_receipts_identical": true
+  }
+}
