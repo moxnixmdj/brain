@@ -10,6 +10,10 @@ on:
       - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
       - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
       - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+      - "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json"
+      - "canonical/CANONICAL_POINTER.json"
+      - "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+      - "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json"
       - ".github/workflows/verify-tool-discovery-acceptance-promotion-v1.yml"
   workflow_dispatch:
 
