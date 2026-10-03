@@ -1,17 +1,17 @@
 {
   "schema": "PROJECT_BRAIN_ACCEPTANCE_BACKPROP_COMPILER_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_EXACT_BINARY_RATE_BACKPROP__PENDING_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION__ZERO_CREDIT",
+  "status": "CANDIDATE_HARDENED_EXACT_BINARY_RATE_BACKPROP__PENDING_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION__ZERO_CREDIT",
   "objective": "Reverse a frozen additive binary benchmark threshold into the exact minimum remaining success mass after independently verified scope-complete proof and observation partitions, so proof can substitute for execution without weakening the frozen acceptance predicate.",
   "authority": {
     "base_main_commit": "65ce1d4dc7c918dba759fae5e44dc459235e1715",
     "runtime": {
       "path": "canonical/runtime/acceptance_backprop_compiler_v1.py",
-      "git_blob_sha": "b64092054a08bd528bc13b5dbbc9ee80229f19d4"
+      "git_blob_sha": "b63c18a5a66eeb978780d2560f0f741ad255ad68"
     },
     "tests": {
       "path": "canonical/tests/test_acceptance_backprop_compiler_v1.py",
-      "git_blob_sha": "1e025ed0f9a68a727d7c421b35dda52ff38d8f35"
+      "git_blob_sha": "3f9b121aec301c549a4a872f73d51f0e919901bc"
     },
     "frozen_predicate_registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
     "existing_forward_bound_compiler": "canonical/runtime/acceptance_bound_compiler_v1.py"
@@ -26,10 +26,11 @@
     ],
     "positive_partition_requirements": [
       "EXPLICIT_FROZEN_POPULATION_SLOT_IDS",
-      "CONTENT_ADDRESSED_RECEIPT",
+      "COMPILER_RECOMPUTED_POPULATION_COMMITMENT_SHA256_MATCHES_DECLARATION",
+      "PARTITION_BINDS_EXACT_POPULATION_COMMITMENT_SHA256",
+      "CONTENT_ADDRESSED_RECEIPT_PATH_AND_40_OR_64_HEX_DIGEST",
       "INDEPENDENT_VERIFICATION_TRUE",
       "SCOPE_COMPLETE_TRUE",
-      "POPULATION_COMMITMENT_BOUND_TRUE",
       "NO_SLOT_OVERLAP"
     ],
     "exact_backpropagation": [
@@ -77,5 +78,18 @@
     "status": "REBASED_SEMANTIC_AUTHORITY_REFERENCE_TO_CURRENT_MAIN__NO_CODE_BYTES_CHANGED",
     "current_main_commit": "65ce1d4dc7c918dba759fae5e44dc459235e1715",
     "note": "Latest main adds Tool Discovery three-way routing only; acceptance backprop v1 runtime/test exact blobs remain unchanged and orthogonal."
+  },
+  "hardening": {
+    "status": "V2_HARDENING_BEFORE_FIRST_INDEPENDENT_PASS",
+    "changes": [
+      "RECOMPUTE_POPULATION_COMMITMENT_SHA256_FROM_SORTED_EXPLICIT_SLOT_IDS",
+      "REQUIRE_DECLARED_POPULATION_COMMITMENT_TO_MATCH_RECOMPUTED_VALUE",
+      "REQUIRE_EVERY_PROOF_OR_OBSERVATION_PARTITION_TO_BIND_THE_EXACT_POPULATION_COMMITMENT",
+      "REQUIRE_CONTENT_ADDRESSED_RECEIPT_PATH_PLUS_40_OR_64_HEX_DIGEST",
+      "ADD_ADVERSARIAL_TESTS_FOR_POPULATION_COMMITMENT_PARTITION_COMMITMENT_AND_RECEIPT_DIGEST"
+    ],
+    "prior_runtime_blob": "b64092054a08bd528bc13b5dbbc9ee80229f19d4",
+    "prior_tests_blob": "1e025ed0f9a68a727d7c421b35dda52ff38d8f35",
+    "prior_verifier_disposition": "SUPERSEDED_BEFORE_PROMOTION__DO_NOT_USE"
   }
 }
