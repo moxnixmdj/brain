@@ -965,6 +965,17 @@
       "verification_path": "canonical/verification/ROOT3_MINIMUM_ACTION_CUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "e24058eab431a1643dae340a8ff564490f992097",
       "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__11_ROOT3_PREDICATES_TO_3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT"
+    },
+    "root3_scope_certificate_admissibility_refinement": {
+      "path": "canonical/governance/ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V1.json",
+      "git_blob_sha": "8eb97e997c117e102fd115d03cce5793c416a482",
+      "refinement_path": "canonical/governance/ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_V1.json",
+      "refinement_git_blob_sha": "25a39569f141e6699320b5fb70e6cc434eef07fa",
+      "falsification_path": "canonical/governance/SYNTHESIS_SINGLETON_FAMILY_SCOPE_FALSIFICATION_V1.json",
+      "falsification_git_blob_sha": "f72d32807b23a4b5afaaeecce6d2c164e7835647",
+      "verification_path": "canonical/verification/SYNTHESIS_SINGLETON_FAMILY_SCOPE_FALSIFICATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "d109cdcbcf702243b92b3fa24b766d9b622213bd",
+      "status": "ACTIVE_INDEPENDENT_FALSIFICATION_BOUND__ACCOUNTING_LABEL_SCOPE_SHORTCUT_BLOCKED__ZERO_CREDIT"
     }
   },
   "residual": [
