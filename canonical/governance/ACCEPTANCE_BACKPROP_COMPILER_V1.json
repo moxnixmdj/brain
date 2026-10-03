@@ -4,7 +4,7 @@
   "status": "CANDIDATE_EXACT_BINARY_RATE_BACKPROP__PENDING_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION__ZERO_CREDIT",
   "objective": "Reverse a frozen additive binary benchmark threshold into the exact minimum remaining success mass after independently verified scope-complete proof and observation partitions, so proof can substitute for execution without weakening the frozen acceptance predicate.",
   "authority": {
-    "base_main_commit": "f88586a6c90aedd3489b9fd0dda4c8d5d02ba207",
+    "base_main_commit": "65ce1d4dc7c918dba759fae5e44dc459235e1715",
     "runtime": {
       "path": "canonical/runtime/acceptance_backprop_compiler_v1.py",
       "git_blob_sha": "b64092054a08bd528bc13b5dbbc9ee80229f19d4"
@@ -72,5 +72,10 @@
   "family_credit_delta": 0,
   "terminal_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "reconciliation": {
+    "status": "REBASED_SEMANTIC_AUTHORITY_REFERENCE_TO_CURRENT_MAIN__NO_CODE_BYTES_CHANGED",
+    "current_main_commit": "65ce1d4dc7c918dba759fae5e44dc459235e1715",
+    "note": "Latest main adds Tool Discovery three-way routing only; acceptance backprop v1 runtime/test exact blobs remain unchanged and orthogonal."
+  }
 }
