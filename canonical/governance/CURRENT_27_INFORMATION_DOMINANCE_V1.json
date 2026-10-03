@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_27_INFORMATION_DOMINANCE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__EXACT_LIVE_27_INFORMATION_DOMINANCE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Recompute exact structural information dominance after independently promoted Recovery acceptance, on the receipt-derived 38/11/27 scheduling world.",
+  "source_main_commit": "b345a03cc866b1be42b05036b8a36e75d75293a4",
+  "inputs": {
+    "scheduling_world": {
+      "path": "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V3.json",
+      "git_blob_sha": "35b8ccb4879ef7d56087eb5a119c25a8b9c6f183"
+    },
+    "scheduling_world_verification": {
+      "path": "canonical/verification/CURRENT_TERMINAL_SCHEDULING_WORLD_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "eb26cebccf1c692bf1fb8316e94ddbbb5c7b567a"
+    },
+    "frontier": {
+      "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+      "git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+    },
+    "evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163"
+    },
+    "dominance_runtime": {
+      "path": "canonical/runtime/terminal_information_dominance_v1.py",
+      "git_blob_sha": "f10986bd09a7cc64a1fae3c6ea8e69b5655f2199"
+    }
+  },
+  "live_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "certificate_count": 16,
+    "nondominated_certificate_count": 16,
+    "dominated_certificate_count": 0,
+    "unique_zero_reality_requirements": 19
+  },
+  "highest_direct_leverage": {
+    "certificate_id": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+    "covered_predicates": 8,
+    "fraction_of_live_atomic_frontier": 0.2962962962962963,
+    "required_propositions": [
+      "MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
+      "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"
+    ]
+  },
+  "second_direct_leverage": {
+    "certificate_id": "SHARED_PUBLIC_BENCHMARK_ABI_ROUTE_CERTIFICATE",
+    "covered_predicates": 3,
+    "fraction_of_live_atomic_frontier": 0.1111111111111111,
+    "required_propositions": [
+      "COMPLETE_COMPARABLE_SCORE_PRODUCING_ROUTE_PER_FROZEN_PREDICATE"
+    ]
+  },
+  "nondominated_certificate_ids": [
+    "AA_BRIEFCASE_STRONGER_PROOF_CERTIFICATE",
+    "CHARTOGRAPHY_PUBLIC_ROUTE_CERTIFICATE",
+    "CODING_PRIVATE_BAR_STRONGER_PROOF_CERTIFICATE",
+    "COMPOSITION_INTERFACE_RECEIPT_BINDING_CERTIFICATE",
+    "FINANCE_ACCOUNTING_INDEX_PUBLIC_ROUTE_CERTIFICATE",
+    "FINANCE_AGENT_V2_STRONGER_PROOF_CERTIFICATE",
+    "FINANCE_JUDGMENT_SOURCE_CERTIFICATE",
+    "GDPVAL_PUBLIC_ROUTE_CERTIFICATE",
+    "HLE_PUBLIC_ROUTE_OR_SCOPE_COMPLETE_PROOF_CERTIFICATE",
+    "MATCHED_SCOPE_BINDING_CERTIFICATE",
+    "MYSTERYMECHANISM_STRONGER_PROOF_CERTIFICATE",
+    "OSWORLD_PUBLIC_ROUTE_CERTIFICATE",
+    "SHARED_PUBLIC_BENCHMARK_ABI_ROUTE_CERTIFICATE",
+    "TB4_ATTAINABLE_ROUTE_CERTIFICATE",
+    "TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+    "UNKNOWN_DOMAIN_JUDGMENT_SOURCE_CERTIFICATE"
+  ],
+  "required_propositions": [
+    "ARTIFACT_AA_BRIEFCASE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+    "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_FINANCE_JUDGMENT_SOURCE_GATE_PASS",
+    "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_UNKNOWN_DOMAIN_JUDGMENT_SOURCE_GATE_PASS",
+    "CHARTOGRAPHY_DATASET_SCORER_ROUTE_CARRIER_THRESHOLD_CONTAMINATION_ATTAINABILITY_BOUND",
+    "COMPLETE_COMPARABLE_SCORE_PRODUCING_ROUTE_PER_FROZEN_PREDICATE",
+    "CURSORBENCH_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+    "FINANCE_ACCOUNTING_INDEX_ROUTE_BOUND",
+    "FINANCE_AGENT_V2_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+    "FRONTIERCODE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+    "GDPVAL_AA_ROUTE_BOUND",
+    "HLE_CANONICAL_ROUTE_OR_UNCHANGED_PROTOCOL_SCOPE_COMPLETE_STRONGER_WITNESS",
+    "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+    "MACHINE_VERIFIED_TB4_ROUTE_UPPER_BOUND_GE_220",
+    "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS",
+    "MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
+    "MYSTERYMECHANISM_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+    "PROWORK_AA_BRIEFCASE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+    "SAME_HARNESS_COMPARABLE_OSWORLD_2_1_PARTIAL_ROUTE_BOUND",
+    "TWELVE_LITERAL_INTERFACES_BOUND_TO_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_RECEIPTS"
+  ],
+  "execution_policy": {
+    "parallel_zero_reality_frontier": true,
+    "fresh_reality_authority": false,
+    "fixed_point_after_every_verified_delta": true,
+    "stop_branch_when_dominated": true,
+    "tool_discovery_v2_retrieval_authority_mandatory": true,
+    "repeated_consumed_tool_discovery_source_epoch_forbidden": true
+  },
+  "hard_rules": [
+    "STRUCTURAL_DOMINANCE_IS_SCHEDULING_ONLY_NOT_ACCEPTANCE_PROOF",
+    "ALL_16_CERTIFICATES_CURRENTLY_NONDOMINATED",
+    "REQUIREMENT_COUNT_IS_NOT_PROOF_DIFFICULTY_OR_SUCCESS_PROBABILITY",
+    "RUN_INDEPENDENT_ZERO_REALITY_BRANCHES_CONCURRENTLY",
+    "MATCHED_SCOPE_BINDING_GETS_FIRST_RESOURCE_PRIORITY_WITHOUT_SERIALIZING_OTHER_INDEPENDENT_BRANCHES",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_ACCEPTANCE_DELTA",
+    "NO_FRESH_REALITY_FROM_THIS_CANDIDATE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_27_PREDICATE_DOMINANCE__THEN_ACTIVATE_PARALLEL_ZERO_REALITY_FRONTIER__NO_FRESH_REALITY_UNTIL_ACTIVE",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
