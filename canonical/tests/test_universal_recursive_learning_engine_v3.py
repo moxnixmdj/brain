@@ -38,6 +38,53 @@ class UniversalRecursiveLearningEngineV3Tests(unittest.TestCase):
         self.assertTrue(out["accepted"])
         self.assertFalse(out["surface_label_evidence_used"])
 
+    def test_different_surface_labels_same_topology_transfer(self):
+        src = v3.structural_signature(
+            primitive_roles=["producer", "consumer"],
+            relation_roles=["producer->consumer"],
+            invariants=["ordered-transfer"],
+        )
+        tgt = v3.structural_signature(
+            primitive_roles=["writer", "reader"],
+            relation_roles=["writer->reader"],
+            invariants=["ordered-transfer"],
+        )
+        self.assertEqual(src["canonical_topology"], tgt["canonical_topology"])
+        out = v3.assess_transfer(
+            source_signature=src,
+            target_signature=tgt,
+            required_target_invariants=["ordered-transfer"],
+        )
+        self.assertTrue(out["accepted"])
+
+    def test_same_invariants_different_topology_rejected(self):
+        src = v3.structural_signature(
+            primitive_roles=["a", "b", "c"],
+            relation_roles=["a->b", "b->c"],
+            invariants=["flow"],
+        )
+        tgt = v3.structural_signature(
+            primitive_roles=["x", "y", "z"],
+            relation_roles=["x->y", "x->z"],
+            invariants=["flow"],
+        )
+        out = v3.assess_transfer(
+            source_signature=src,
+            target_signature=tgt,
+            required_target_invariants=["flow"],
+        )
+        self.assertFalse(out["accepted"])
+        self.assertEqual(out["reason"], "LABEL_INVARIANT_STRUCTURE_MISMATCH")
+
+    def test_large_structure_fails_closed_instead_of_heuristic_transfer(self):
+        with self.assertRaises(v3.RecursiveLearningError):
+            v3.structural_signature(
+                primitive_roles=[f"n{i}" for i in range(9)],
+                relation_roles=[],
+                invariants=["x"],
+            )
+
+
     def test_negative_transfer_contradiction_is_rejected(self):
         src = v3.structural_signature(
             primitive_roles=["a"],
@@ -130,7 +177,7 @@ class UniversalRecursiveLearningEngineV3Tests(unittest.TestCase):
                     "guarantees": ["safe", "fast"],
                     "invariants": ["verified-before-use", "fail-closed"],
                     "applicability": ["A"],
-                    "verification_receipts": ["r1"],
+                    "verification_receipts": [{"receipt_id": "r1", "independent_verified": True, "exact_byte_bound": True, "conclusion": "success"}],
                 },
                 {
                     "id": "s2",
@@ -138,7 +185,7 @@ class UniversalRecursiveLearningEngineV3Tests(unittest.TestCase):
                     "guarantees": ["safe"],
                     "invariants": ["verified-before-use"],
                     "applicability": ["B"],
-                    "verification_receipts": ["r2"],
+                    "verification_receipts": [{"receipt_id": "r2", "independent_verified": True, "exact_byte_bound": True, "conclusion": "success"}],
                 },
             ],
         )
@@ -157,14 +204,14 @@ class UniversalRecursiveLearningEngineV3Tests(unittest.TestCase):
                         "verified": True,
                         "guarantees": ["safe"],
                         "invariants": ["x"],
-                        "verification_receipts": ["r1"],
+                        "verification_receipts": [{"receipt_id": "r1", "independent_verified": True, "exact_byte_bound": True, "conclusion": "success"}],
                     },
                     {
                         "id": "s2",
                         "verified": False,
                         "guarantees": ["safe"],
                         "invariants": ["x"],
-                        "verification_receipts": ["r2"],
+                        "verification_receipts": [{"receipt_id": "r2", "independent_verified": True, "exact_byte_bound": True, "conclusion": "success"}],
                     },
                 ],
             )
