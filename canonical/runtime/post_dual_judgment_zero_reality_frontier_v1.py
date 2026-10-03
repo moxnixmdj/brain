@@ -25,6 +25,8 @@ PATHS = {
     "source_activation_verification": "canonical/verification/DUAL_JUDGMENT_SOURCE_GATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "matched": "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json",
     "scheduling": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+    "registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "evidence": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
 }
 EXPECTED = {
     PATHS["dominance"]: "fae786d6051277865ed6ecde69be5da98e2bf509",
@@ -33,6 +35,8 @@ EXPECTED = {
     PATHS["source_activation_verification"]: "6ec5f6d808c88bf9ea728fb7f259edc3b4ae5a51",
     PATHS["matched"]: "438e2775b64bee5ed6e792522ab35ebd0d6e1771",
     PATHS["scheduling"]: "54be838a5a0a9698398893ad113641496d5051b8",
+    PATHS["registry"]: "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    PATHS["evidence"]: "0ed075c1efa053fe6e4eb3519d9903cf63fcf163",
 }
 EXPECTED_DISCHARGED = {
     "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_FINANCE_JUDGMENT_SOURCE_GATE_PASS",
@@ -81,6 +85,8 @@ def evaluate() -> dict[str, Any]:
     source_v = _load(PATHS["source_activation_verification"])
     matched = _load(PATHS["matched"])
     scheduling = _load(PATHS["scheduling"])
+    registry = _load(PATHS["registry"])
+    evidence = _load(PATHS["evidence"])
     errors: list[str] = []
 
     live = dominance.get("live_world") or {}
@@ -155,9 +161,26 @@ def evaluate() -> dict[str, Any]:
     if len(remaining_ids) != 14:
         errors.append("POST_DISCHARGE_CERTIFICATE_COUNT_NOT_14")
 
-    unresolved = set(frontier.get("unresolved_predicates") or [])
-    if len(unresolved) != 27:
-        errors.append("FRONTIER_UNRESOLVED_NOT_27")
+    predicate_ids = {
+        str(row.get("id"))
+        for row in (registry.get("predicates") or [])
+        if isinstance(row, Mapping) and row.get("id")
+    }
+    proved_ids = {
+        str(row.get("predicate_id"))
+        for row in (evidence.get("claims") or [])
+        if isinstance(row, Mapping)
+        and row.get("predicate_id")
+        and row.get("state") == "PROVED"
+    }
+    unresolved = predicate_ids - proved_ids
+    if len(predicate_ids) != 38 or len(proved_ids) != 11 or len(unresolved) != 27:
+        errors.append("REGISTRY_EVIDENCE_LIVE_WORLD_NOT_38_11_27")
+
+    # V5 is a historical 31-predicate certificate carrier. Its certificate
+    # target lists are intersected with the current receipt-derived 27 IDs.
+    zero_reality_covered &= unresolved
+    transitioned_targets &= unresolved
     if zero_reality_covered | transitioned_targets != unresolved:
         errors.append("POST_DISCHARGE_FRONTIER_COVERAGE_INCOMPLETE")
     if zero_reality_covered & transitioned_targets:
