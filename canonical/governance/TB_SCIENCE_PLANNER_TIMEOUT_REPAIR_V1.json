@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PLANNER_TIMEOUT_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CAUSALLY_BOUND_TO_FIRST_CURRENT_ROUTE_TERMINAL_TIMEOUT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "source_failure": "canonical/verification/TB_SCIENCE_ONE_SLOT_CANARY_RESULT_V2.json",
+  "exact_change": {
+    "path": "canonical/runtime/harbor_science_agent_v1.py",
+    "before": "science_planner.plan(prompt, timeout_s=180)",
+    "after": "science_planner.plan(prompt, timeout_s=300)",
+    "changed_semantic_dimension": "LOCAL_PLANNER_HTTP_RESPONSE_BUDGET_ONLY"
+  },
+  "causal_basis": {
+    "real_terminal_prompt_tokens": 1552,
+    "observed_prompt_processing_seconds": 87.3,
+    "observed_recent_min_decode_tokens_per_second": 5.96,
+    "max_decode_tokens": 1024,
+    "conservative_observed_trace_projection_seconds": 259.12,
+    "new_timeout_seconds": 300,
+    "projected_margin_seconds": 40.88,
+    "note": "PROJECTION_IS_DIAGNOSTIC_NOT_A_GUARANTEE__LIVE_SYNTHETIC_LONG_PROMPT_PREFLIGHT_REQUIRED"
+  },
+  "preserves": [
+    "PINNED_QWEN_MODEL_BYTES",
+    "PINNED_LLAMA_CPP_BYTES",
+    "PROMPT_AND_TOOL_SCHEMA",
+    "TEMPERATURE_ZERO",
+    "MAX_TOKENS_1024",
+    "BRAIN_COMMAND_POLICY",
+    "INDEPENDENT_VERIFY_COMMAND",
+    "BRAIN_DETERMINISTIC_FINISH_AUTHORITY",
+    "DATASET_SCORER_AND_CURRENT_133_OF_210_TARGET",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "activation_preconditions": [
+    "EXACT_REPAIRED_CONTROLLER_AND_TEST_BLOBS_INDEPENDENTLY_VERIFIED",
+    "LIVE_ZERO_TERMINAL_CONTENT_LONG_PROMPT_COMPLETES_WITHIN_300S_ON_SAME_ZERO_COST_CPU_CARRIER_CLASS",
+    "SEPARATE_NEXT_UNTOUCHED_SLOT_AUTHORITY_AFTER_REPAIR_PASS"
+  ],
+  "terminal_case_replay_authorized": false,
+  "new_terminal_slot_authorized": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
