@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__EXACT_ONE_PREDICATE_ONE_FAMILY_ACCEPTANCE_PROMOTION__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "base_main_commit": "62af767d06485f594c7670aec44452ef2e3d77c1",
+  "independently_verified_basis": {
+    "acceptance_reduction_path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "acceptance_reduction_blob": "913d171b3c855000d322e183b142b3200eeaf0a9",
+    "universal_scope_path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "universal_scope_blob": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+  },
+  "exact_promoted_state_blobs": {
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "c5edb55b827d540a13f44dafc8d86ee477dcf5ff",
+    "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json": "c66551ce3c77592f8937d165686a7133807d6654",
+    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json": "7d4b89a408416201c0de6e2cb31797a24737223b",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "da0696c775f47f3cecd4ea9f85bad09a4e3d0c92"
+  },
+  "delta": {
+    "predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "atomic_before": {
+      "proved": 11,
+      "unresolved": 27,
+      "total": 38
+    },
+    "atomic_after": {
+      "proved": 12,
+      "unresolved": 26,
+      "total": 38
+    },
+    "families_before": {
+      "pass": 4,
+      "open": 15,
+      "total": 19
+    },
+    "families_after": {
+      "pass": 5,
+      "open": 14,
+      "total": 19
+    },
+    "verified_owned_before": 2,
+    "verified_owned_after": 2
+  },
+  "hard_rules": [
+    "PROMOTE_EXACTLY_TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "CLOSE_EXACTLY_TOOL_DISCOVERY_SELECTION_AND_LEARNING_ACCEPTANCE",
+    "NO_OTHER_ACCEPTANCE_STATE_CHANGE",
+    "NO_OWNERSHIP_PROMOTION",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "NO_EMPIRICAL_GENERALIZATION_AS_LOAD_BEARING_PROOF"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
