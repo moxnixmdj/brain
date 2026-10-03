@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V3_GLOBAL_LEAST_COST_COUNTEREXAMPLE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_TRUTH_REPAIR__V3_CONDITIONAL_LEAST_COST_CLAIM_FALSIFIED_BY_CONSTRUCTIVE_COUNTEREXAMPLE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "frozen_contract_literal": "select the least-cost admissible route that can satisfy the subproblem",
+  "affected_activation": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json",
+  "affected_verification": "canonical/verification/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "counterexample": {
+    "required_capabilities": ["CAP_A"],
+    "initial_visible_tool": {"tool_id": "EXPENSIVE", "cost": 10.0, "current_epoch_positive_evidence": ["CAP_A"]},
+    "unqueried_authoritative_source": {"source_id": "AUTH", "contains": [{"tool_id": "CHEAP", "cost": 1.0, "supports": ["CAP_A"]}]},
+    "v3_first_action": {"action": "SELECT", "tool_id": "EXPENSIVE"},
+    "required_first_action_for_global_least_cost_under_complete_discovery": {"action": "DISCOVER", "source_id": "AUTH"},
+    "violation": "V3_CAN_SELECT_A_VISIBLE_SUFFICIENT_ROUTE_BEFORE_QUERYING_AN_AUTHORITATIVE_SOURCE_THAT_CONTAINS_A_CHEAPER_SUFFICIENT_ROUTE"
+  },
+  "root_cause": "V3_EVALUATES_VISIBLE_TOOLS_FOR_PROBE_OR_SELECT_BEFORE_EVALUATING_UNQUERIED_DISCOVERY_SOURCES",
+  "repair": {
+    "candidate": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "test": "canonical/tests/test_tool_discovery_dynamic_v4.py",
+    "rule": "WHEN_ANY_AVAILABLE_AUTHORITATIVE_DISCOVERY_SOURCE_REMAINS_UNQUERIED_IN_THE_DECISION_EPOCH__DISCOVER_BEFORE_ANY_POSITIVE_SELECTION__THEN_PROBE_AND_SELECT_IN_GLOBAL_DECLARED_TOOL_COST_ORDER"
+  },
+  "hard_rules": [
+    "DO_NOT_COUNT_THE_PRIOR_V3_CONDITIONAL_LEAST_COST_GUARANTEE_AS_VALID_AFTER_THIS_COUNTEREXAMPLE_IS_INDEPENDENTLY_VERIFIED",
+    "DO_NOT_PROMOTE_V4_WITHOUT_INDEPENDENT_VERIFICATION",
+    "EXTERNAL_COMPLETE_INTERFACE_INSTANCE_REMAINS_SEPARATELY_REQUIRED",
+    "NO_NEW_ACCEPTANCE_CASES_OR_TERMINAL_REPLAY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_TRUTH_REPAIR_ALONE"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
