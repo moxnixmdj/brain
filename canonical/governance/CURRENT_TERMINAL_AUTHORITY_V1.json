@@ -707,6 +707,16 @@
       "path": "canonical/governance/TB_SCIENCE_TRANCHE1_EXECUTION_AUTHORITY_V1.json",
       "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__THREE_FROZEN_SLOTS_ONLY",
       "verification": "canonical/verification/TB_SCIENCE_TRANCHE1_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+    },
+    "tb_science_tranche1_execution": {
+      "authority_path": "canonical/governance/TB_SCIENCE_TRANCHE1_EXECUTION_AUTHORITY_V1.json",
+      "authority_git_blob_sha": "d2f8d37b83f7a07ad1faa1828ffb69e0d3da4030",
+      "route_path": "canonical/governance/TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1.json",
+      "route_git_blob_sha": "ab8443a2a40415b281aca6fb08f48ff0fe83e10c",
+      "result_path": "canonical/verification/TB_SCIENCE_TRANCHE1_RESULT_20261003_V1.json",
+      "active_byte_verification": "canonical/verification/TB_SCIENCE_TRANCHE1_ACTIVE_BYTES_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "workflow_run_id": 37101712032,
+      "status": "FINALIZED_AND_REVOKED__0_SUCCESS__3_FINAL_ZERO__SHARED_SCIENCE_PLANNER_ERROR__NO_PROMOTION"
     }
   },
   "residual": [
@@ -1260,5 +1270,6 @@
     "family_credit_delta": 0,
     "execution_authority": false,
     "promotion_authority": false
-  }
+  },
+  "next_terminal_action": "VERIFY_CAUSAL_LOCAL_QWEN_PLANNER_REPAIR__NO_NEW_TB_SCIENCE_TERMINAL_SLOTS_UNTIL_REPAIR_AND_ZERO_CASE_HARBOR_PREFLIGHT_PASS"
 }
