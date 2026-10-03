@@ -12,7 +12,7 @@
     "registry_path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
     "protocol_path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
-    "protocol_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "protocol_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
     "terminal_binding_path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
     "terminal_binding_blob_sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
   },
