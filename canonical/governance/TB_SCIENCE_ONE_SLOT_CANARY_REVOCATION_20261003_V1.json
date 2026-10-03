@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_REVOCATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_REVOCATION__ONE_USE_AUTHORITY_CONSUMED__NO_TB_SCIENCE_TERMINAL_EXECUTION_AUTHORIZED",
+  "authority_path": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_AUTHORITY_V2.json",
+  "authority_blob": "741d6ca0cc4880e6cd9c76e3046272b1feb756f1",
+  "result_path": "canonical/verification/TB_SCIENCE_ONE_SLOT_CANARY_RESULT_20261003_V2.json",
+  "result_terminal_status": "FINAL_ZERO",
+  "consumed_slot": "terminal-bench-science/baseline-free-localization::trial-0",
+  "consumed_slots_total": 4,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "hard_rules": [
+    "DO_NOT_REPLAY_ANY_OF_THE_FOUR_CONSUMED_SLOTS",
+    "DO_NOT_RETRY_BASELINE_FREE_LOCALIZATION_TRIAL_0",
+    "DO_NOT_AUTHORIZE_ANOTHER_TB_SCIENCE_TERMINAL_SLOT_UNTIL_REAL_SIZE_ZERO_CASE_PLANNER_LATENCY_PREFLIGHT_PASSES",
+    "SYNTHETIC_SHORT_PROMPT_PREFLIGHT_IS_INSUFFICIENT_FOR_THIS_FAILURE_MODE",
+    "REPAIR_OR_TIMEOUT_CHANGE_MUST_BE_INDEPENDENTLY_VERIFIED_BEFORE_NEW_TERMINAL_EXPOSURE"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
