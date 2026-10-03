@@ -1,0 +1,18 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_SCHEDULING_V13_CURRENT_POINTER_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date":"2026-10-03",
+  "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__V13_CURRENT_POINTER_CANDIDATE_VERIFIED__ZERO_CREDIT",
+  "verified_pointer":{"path":"canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json","git_blob_sha":"a2bec35e4eb0f6ed51af6d3c49a906558c560f39"},
+  "bound_active_authority":{"path":"canonical/governance/TERMINAL_SCHEDULING_V13_ACTIVE_AUTHORITY_V1.json","git_blob_sha":"9fb9897d55641aaa54d82a5740c51970e677acb0"},
+  "bound_active_authority_verification":{"path":"canonical/verification/TERMINAL_SCHEDULING_V13_ACTIVE_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json","git_blob_sha":"e86a86a251fee63876a387a50060d88a4d26ec0e"},
+  "independent_runner":{"repository":"moxnixmdj/verification-capsule-runner","pull_request":1350,"merge_commit":"cba6432e2957d1842839bbc2c6dfa6320ff7138a","workflow_run_id":37125680348,"workflow_job_id":111210384409,"conclusion":"success"},
+  "verified":{"retrieval_v5_mandatory":true,"direct_bypass_forbidden":true,"failed_or_partial_cell_epoch_consumption_forbidden":true,"consumed_epoch_replay_forbidden":true,"no_result_nonexistence_inference_forbidden":true,"zero_credit_preserved":true},
+  "incremental_spend_usd":0,
+  "acceptance_credit_delta":0,
+  "capability_credit_delta":0,
+  "family_credit_delta":0,
+  "ownership_credit_delta":0,
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false
+}
