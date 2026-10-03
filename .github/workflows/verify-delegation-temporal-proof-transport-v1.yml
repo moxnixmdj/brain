@@ -51,7 +51,7 @@ jobs:
         run: |
           python -m unittest -v             canonical.tests.test_temporal_proof_transport_v1             canonical.tests.test_delegation_temporal_ceiling_transmutation_v1
 
-      - name: Recompute exact 4 of 19 stronger-proof transmutation
+      - name: Recompute current 4 of 19 stronger-proof transmutation
         run: |
           python - <<'PY'
           import json
@@ -68,15 +68,25 @@ jobs:
           assert out["status"]=="PASS", out
           assert out["closed_family_count"]==4, out
           assert out["open_family_count"]==15, out
-          row=next(r for r in out["families"] if r["family"]=="SUBAGENT_DELEGATION_AND_COORDINATION")
-          assert row["result_status"]=="PASS", row
-          assert row["closure_mode"]=="ABSOLUTE_DOMINANCE", row
-          assert row["witness_id"]=="DELEGATION_TEMPORAL_TERMINAL_CEILING_ABSOLUTE_DOMINANCE_20261002_V1", row
+
+          delegation=next(r for r in out["families"] if r["family"]=="SUBAGENT_DELEGATION_AND_COORDINATION")
+          recovery=next(r for r in out["families"] if r["family"]=="SELF_VERIFICATION_DEBUGGING_AND_RECOVERY")
+          tool_discovery=next(r for r in out["families"] if r["family"]=="TOOL_DISCOVERY_SELECTION_AND_LEARNING")
+
+          assert delegation["result_status"]=="PASS", delegation
+          assert delegation["closure_mode"]=="ALREADY_PASS", delegation
+          assert recovery["result_status"]=="PASS", recovery
+          assert recovery["closure_mode"]=="ABSOLUTE_DOMINANCE", recovery
+          assert recovery["witness_id"]=="RECOVERY_UNIVERSAL_SCOPE_OBJECTIVE_BOUND_20261003_V2", recovery
+          assert tool_discovery["result_status"]=="DEFINED_RESULT_OPEN", tool_discovery
+
           print(json.dumps({
             "status":"PASS",
             "closed_family_count":out["closed_family_count"],
             "open_family_count":out["open_family_count"],
-            "delegation":row,
+            "delegation":delegation,
+            "recovery":recovery,
+            "tool_discovery":tool_discovery,
           },indent=2,sort_keys=True))
           PY
 
