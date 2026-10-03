@@ -46,6 +46,13 @@ EXPECTED = {
     "v3_activation_verification_blob": "5ab1f983a6f373bb29680e14d83c3e83cd2c0d68",
 }
 
+V4_EXPECTED = {
+    "v4_activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V4_ACTIVATION_V1.json",
+    "v4_activation_blob": "643890c1d09844ea49de434df8ffec02962806e4",
+    "v4_activation_verification_path": "canonical/verification/RETRIEVAL_V4_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "v4_activation_verification_blob": "e35dc954e0cf892d5522e62b5948bb64edeed4f7",
+}
+
 
 def git_blob_sha(raw: bytes) -> str:
     return hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
@@ -73,6 +80,8 @@ def validate(
     backend_verification: Mapping[str, Any],
     v3_activation: Mapping[str, Any],
     v3_activation_verification: Mapping[str, Any],
+    v4_activation: Mapping[str, Any],
+    v4_activation_verification: Mapping[str, Any],
     actual_blobs: Mapping[str, str],
 ) -> dict[str, Any]:
     errors: list[str] = []
@@ -102,6 +111,10 @@ def validate(
     for key, expected in EXPECTED.items():
         if binding.get(key) != expected:
             errors.append(f"AUTHORITY_BINDING_MISMATCH:{key}")
+        if key.endswith("_blob") and actual_blobs.get(key) != expected:
+            errors.append(f"ACTUAL_BLOB_MISMATCH:{key}")
+
+    for key, expected in V4_EXPECTED.items():
         if key.endswith("_blob") and actual_blobs.get(key) != expected:
             errors.append(f"ACTUAL_BLOB_MISMATCH:{key}")
 
@@ -229,6 +242,57 @@ def validate(
             if v3v.get(field) is not True:
                 errors.append("V3_ACTIVATION_VERIFICATION_FALSE:" + field)
 
+    if v4_activation.get("schema") != "PROJECT_BRAIN_TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V4_ACTIVATION_V1":
+        errors.append("V4_ACTIVATION_SCHEMA_INVALID")
+    base_v4=v4_activation.get("base_retrieval_authority")
+    if not isinstance(base_v4,Mapping) or base_v4.get("git_blob_sha") != EXPECTED["v3_activation_blob"]:
+        errors.append("V4_DOES_NOT_PRESERVE_EXACT_V3_BASE")
+    if not isinstance(base_v4,Mapping) or base_v4.get("rule") != "V3_REMAINS_MANDATORY_AND_IS_NOT_WEAKENED":
+        errors.append("V4_WEAKENS_V3_BASE")
+    protocol_v4=v4_activation.get("mandatory_epoch_protocol")
+    if not isinstance(protocol_v4,list):
+        errors.append("V4_MANDATORY_EPOCH_PROTOCOL_MISSING")
+        protocol_v4=[]
+    for required in (
+        "SELECT_FEDERATION_QUERIES_WITH_EXACT_TECHNICAL_ANCHORS_AND_CROSS_SCRIPT_DIVERSITY_BEFORE_REDUNDANT_BASE_QUERIES",
+        "COMPILE_SELECTED_SOURCE_QUERIES_INTO_OPEN_WEB_ACTIONS_FOR_THE_EXACT_VERIFIED_BACKEND_ROUTER",
+        "REQUIRE_ONE_ROUTER_ATTEMPT_RECEIPT_PER_SELECTED_SOURCE_QUERY_CELL_BEFORE_SOURCE_EPOCH_CONSUMPTION",
+        "BACKEND_UNBOUND_DOES_NOT_COUNT_AS_AN_ATTEMPT",
+        "FAILED_OR_EMPTY_ATTEMPTS_REMAIN_UNKNOWN",
+        "SOURCE_EPOCH_CONSUMPTION_NEVER_AUTHORIZES_OPEN_WORLD_NONEXISTENCE",
+    ):
+        if required not in protocol_v4:
+            errors.append("V4_PROTOCOL_MISSING:"+required)
+    if v4_activation.get("stop_rules",{}).get("missing_or_unbound_router_receipt") != "FAIL_CLOSED__DO_NOT_CONSUME_EPOCH":
+        errors.append("V4_MISSING_RECEIPT_STOP_RULE_INVALID")
+    if v4_activation.get("stop_rules",{}).get("no_witness_and_open_world_scope_not_complete") != "UNKNOWN__DO_NOT_INFER_NONEXISTENCE":
+        errors.append("V4_UNKNOWN_STOP_RULE_INVALID")
+    if v4_activation_verification.get("schema") != "PROJECT_BRAIN_RETRIEVAL_V4_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1":
+        errors.append("V4_ACTIVATION_VERIFICATION_SCHEMA_INVALID")
+    v4_runner=v4_activation_verification.get("independent_runner")
+    if not isinstance(v4_runner,Mapping) or v4_runner.get("conclusion")!="success":
+        errors.append("V4_ACTIVATION_INDEPENDENT_RUNNER_NOT_SUCCESS")
+    v4v=v4_activation_verification.get("verified")
+    if not isinstance(v4v,Mapping):
+        errors.append("V4_ACTIVATION_VERIFIED_BLOCK_MISSING")
+    else:
+        for field in (
+            "exact_activation_blob_verified",
+            "exact_v4_component_receipt_binding_verified",
+            "exact_v3_base_binding_verified",
+            "v3_remains_mandatory_and_unweakened",
+            "exact_technical_anchor_priority_required",
+            "cross_script_diversity_required_before_redundant_base_queries",
+            "selected_federation_queries_must_compile_to_verified_router_actions",
+            "one_router_attempt_receipt_per_selected_cell_required",
+            "backend_unbound_does_not_count_as_attempt",
+            "failed_or_empty_attempts_preserve_unknown",
+            "epoch_consumption_does_not_authorize_nonexistence",
+            "zero_credit_preserved",
+        ):
+            if v4v.get(field) is not True:
+                errors.append("V4_ACTIVATION_VERIFICATION_FALSE:"+field)
+
     if action.get("new_reality_units") != 0:
         errors.append("TOOL_DISCOVERY_RETRIEVAL_EDGE_FRESH_REALITY_NONZERO")
 
@@ -237,7 +301,7 @@ def validate(
 
     return {
         "schema": SCHEMA,
-        "status": "PASS__LIVE_TOOL_DISCOVERY_EDGE_MECHANICALLY_BOUND_TO_VERIFIED_V2_RETRIEVAL_AUTHORITY",
+        "status": "PASS__LIVE_TOOL_DISCOVERY_EDGE_MECHANICALLY_BOUND_TO_VERIFIED_V2_V3_V4_RETRIEVAL_AUTHORITY",
         "pass": True,
         "target_predicate": TARGET,
         "action_id": ACTION_ID,
@@ -245,6 +309,7 @@ def validate(
         "unknown_preserved": True,
         "same_epoch_replay_disabled": True,
         "v3_multilingual_adaptive_federation_mandatory": True,
+        "v4_federated_router_receipts_mandatory": True,
         "acceptance_credit": 0,
         "execution_authority": False,
         "promotion_authority": False,
@@ -271,6 +336,8 @@ def evaluate_repository(root: Path) -> dict[str, Any]:
         "backend_verification_blob": git_blob_sha(raw(EXPECTED["backend_verification_path"])),
         "v3_activation_blob": git_blob_sha(raw(EXPECTED["v3_activation_path"])),
         "v3_activation_verification_blob": git_blob_sha(raw(EXPECTED["v3_activation_verification_path"])),
+        "v4_activation_blob": git_blob_sha(raw(V4_EXPECTED["v4_activation_path"])),
+        "v4_activation_verification_blob": git_blob_sha(raw(V4_EXPECTED["v4_activation_verification_path"])),
     }
     return validate(
         load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
@@ -280,6 +347,8 @@ def evaluate_repository(root: Path) -> dict[str, Any]:
         load(EXPECTED["backend_verification_path"]),
         load(EXPECTED["v3_activation_path"]),
         load(EXPECTED["v3_activation_verification_path"]),
+        load(V4_EXPECTED["v4_activation_path"]),
+        load(V4_EXPECTED["v4_activation_verification_path"]),
         actual_blobs,
     )
 
