@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_OWNED_COMPLETE_INTERFACE_INSTANCE_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__OWNED_COMPLETE_INTERFACE_INSTANCE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Supply the exact remaining Tool Discovery interface fact without self-attested completeness and repair Dynamic V3's cheaper-undiscovered-route counterexample by making the Brain-owned discovery registry the invocation authority and materializing that whole authority before V3 may probe or select.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "prior_verified_minimum_missing_fact": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+  "frozen_scope_binding": {
+    "protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "protocol_git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "same_scope_rule": "Brain and Opus 5.5 must be evaluated on the same frozen task population/harness/tool authority unless an absolute/theoretical ceiling is the proof mode.",
+    "construction": "BRAIN_OWNED_TOOL_AUTHORITY_V2_IS_THE_INVOCATION_AUTHORITY_ITSELF__DISCOVERY_ENUMERATES_EXACTLY_THAT_AUTHORITY__UNREGISTERED_IDENTITIES_ARE_NOT_IN_THE_FROZEN_TOOL_AUTHORITY_AND_CANNOT_BE_INVOKED",
+    "target_preservation": "Unknown identities remain unknown to the policy until the authority snapshot is materialized; hidden capabilities remain hidden until safe probe receipts. Registry replacement advances the epoch and forces restart.",
+    "scope_nonclaim": "No claim is made that one frozen tool-authority epoch enumerates every tool on the global Internet or every future ecosystem."
+  },
+  "exact_candidate_blobs": {
+    "canonical/runtime/tool_universe_gateway_v1.py": "fd27f6f49e6a1ca6d47dc053f229c30492380b70",
+    "canonical/tests/test_tool_universe_gateway_v1.py": "cb4e0728c6bdf444a58e19bd1f854fbe2b6efc61",
+    "canonical/runtime/tool_discovery_owned_interface_v2.py": "66c33bde3d8f8e0cbb5a14bde8993dc37a0c221e",
+    "canonical/tests/test_tool_discovery_owned_interface_v2.py": "0f959e4d601b2e0ac07af26c0f949138636489ca",
+    "canonical/tests/test_tool_discovery_v3_cheaper_unseen_counterexample_v1.py": "a1ab743f1df2c7935c2f0687ba7962065d58dd54",
+    "canonical/runtime/tool_discovery_dynamic_candidate_v3.py": "bbbee4d6baf8df937543644397abba38a67dce62",
+    "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json": "49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7",
+    "canonical/verification/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "5fcdc5ae35f51c40f312edbe5727284c9f6ca3dd"
+  },
+  "v3_counterexample": {
+    "status": "EXPLICIT_REGRESSION_WITNESS_ADDED",
+    "fact": "Raw Dynamic V3 can SELECT a cost-10 visible sufficient tool while an unqueried discovery source may contain a cost-1 sufficient tool.",
+    "consequence": "The prior conditional refinement must not be interpreted as proving global least-cost selection for arbitrary incomplete visible sets, even when a complete discovery source exists.",
+    "repair": "V2 materializes the exact complete owned tool authority into visible_tools before Dynamic V3 is called, so no authority member remains undiscovered at selection time."
+  },
+  "interface_contract_v1_property_witnesses": {
+    "FINITE_DISCOVERY_SOURCE_SET_PER_DECISION_EPOCH": "Exactly one Brain-owned authority source exists per interface epoch.",
+    "DISCOVERY_RECEIPT_IDENTIFIES_QUERIED_SOURCE": "discover() emits source_id BRAIN_OWNED_TOOL_AUTHORITY_V2 and the current epoch.",
+    "DISCOVERY_RESULTS_MONOTONICALLY_ADD_VISIBLE_TOOL_IDENTITIES_WITHIN_EPOCH": "The single current-epoch discovery result materializes the full registry in one step; no within-epoch deletion or hidden member exists.",
+    "UNION_OF_AUTHORITATIVE_DISCOVERY_RESULTS_IS_COMPLETE_FOR_DECLARED_TARGET_SCOPE": "The registry is the invocation authority itself; every invocable identity is a registry member and discover() enumerates every registry member.",
+    "DISCOVERED_TOOL_METADATA_CORRECT_FOR_AVAILABILITY_AUTHORIZATION_COST_AND_CONSTRAINT_FIELDS": "Discovery metadata and invoke() read the same immutable current-epoch record.",
+    "SAFE_CAPABILITY_PROBE_RECEIPTS_ARE_TRUTHFUL_AND_EPOCH_BOUND": "safe_probe() reads the hidden capability set from the same current-epoch record and refuses stale epochs.",
+    "VERSION_EPOCH_STABLE_DURING_ONE_SELECTION_EPISODE_OR_RESTARTS_EPISODE": "replace_authority() increments the epoch; discover/probe/invoke reject stale episode epochs."
+  },
+  "universal_route_argument": [
+    "For any finite frozen tool-authority registry R, discover(R) returns exactly R while hiding capability truth.",
+    "The adapter materializes all of R before Dynamic V3 decides, eliminating identity incompleteness at selection time.",
+    "Dynamic V3 orders the complete admissible visible set by cost then tool id, probes the first unresolved required capability of the cheapest not-disproved tool, selects only after all required capabilities have current positive evidence, and skips a tool only after current negative evidence.",
+    "Therefore within R, any SELECT is the globally least-cost currently verified sufficient route; if no route survives current evidence, escalation is fail-closed.",
+    "Authority replacement changes epoch, so stale identity or capability evidence cannot silently cross ecosystems."
+  ],
+  "prior_conditional_refinement_disposition": "PRESERVE_ITS_EXACT_VERIFIED_BYTES_AS_A_CONDITIONAL_ARTIFACT__DO_NOT_USE_ITS_GENERAL_GLOBAL_LEAST_COST_WORDING_AS_PROOF__THE_V2_INSTANCE_HAS_A_STRONGER_COMPLETE_PREMATERIALIZATION_INVARIANT_AND_REQUIRES_SEPARATE_INDEPENDENT_VERIFICATION",
+  "expected_after_independent_verification": "IF_EXACT_BYTES_AND_TESTS_PASS_IN_AN_INDEPENDENT_PUBLIC_RUNNER__THE_CURRENT_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_FACT_IS_SATISFIED_FOR_THE_FROZEN_TOOL_AUTHORITY__THEN_RUN_A_SEPARATE_FAIL_CLOSED_TOOL_DISCOVERY_ACCEPTANCE_REDUCTION",
+  "current_acceptance_preserved": "3_OF_19__8_OF_38",
+  "terminal_goal_achieved": false,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
