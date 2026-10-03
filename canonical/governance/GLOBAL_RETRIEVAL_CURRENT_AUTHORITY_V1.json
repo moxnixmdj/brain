@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_CANDIDATE_POINTER__GLOBAL_RETRIEVAL_V10_ROUTE_STRATEGY_ENTRYPOINT_V3_BOUND__FINAL_POINTER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V6_CURRENT__EMPIRICAL_V10_ENTRYPOINT_V3_BOUND__V8_V9_REGRESSIONS_PRESERVED__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_global_retrieval_authority": {
     "path": "canonical/governance/GLOBAL_RETRIEVAL_V6_ACTIVATION_V1.json",
@@ -177,5 +177,12 @@
     "deep_window_50_hit_count": 1,
     "deep_window_50_case_count": 5,
     "open_world_recall_claim": false
+  },
+  "v10_current_pointer_candidate_verification": {
+    "path": "canonical/verification/GLOBAL_RETRIEVAL_V10_CURRENT_POINTER_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "56e9f9305cbc2d73ee592911154290bf9fa511c0",
+    "workflow_run_id": 37160809783,
+    "workflow_job_id": 111313666076,
+    "conclusion": "success"
   }
 }
