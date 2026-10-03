@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_TERMINAL_CLOSURE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V10_V3_ADAPTIVE_CONTROLLER_BYTES__ZERO_CREDIT",
+  "subject": {
+    "activation_path": "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "78dda53305200ed466099db8658840980b2126fc",
+    "runtime_path": "canonical/runtime/adaptive_terminal_closure_controller_v1.py",
+    "runtime_git_blob_sha": "06d16ef1e8caa08835bc4e958c3047833bf52a32",
+    "tests_path": "canonical/tests/test_adaptive_terminal_closure_controller_v1.py",
+    "tests_git_blob_sha": "874706e94596cde028bed872cc40f07f6fa0d843",
+    "current_v10_authority_path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+    "current_v10_authority_git_blob_sha": "54be838a5a0a9698398893ad113641496d5051b8"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1326,
+    "pull_request_head": "1f7cbebea8cc866cfa1e139f5d0256039543270e",
+    "merge_commit": "fbc1be241ed8bad24adfc3105d46d30b22893089",
+    "workflow_run_id": 37121349377,
+    "workflow_job_id": 111197924322,
+    "conclusion": "success"
+  },
+  "verified_claims": {
+    "current_live_world": "11_OF_38_PROVED__27_OPEN__4_OF_19_ACCEPTANCE",
+    "primitive_work_units": 33,
+    "matched_priority_child_facts": 16,
+    "ownership_reconciliation_units": 2,
+    "tool_discovery_v3_gate_required": true,
+    "stale_v9_rejected": true,
+    "pre_v3_exhaustion_rejected": true,
+    "recomputation_after_delta_verified": true,
+    "authority_leakage": false
+  },
+  "hard_nonclaims": [
+    "SCHEDULING_VERIFICATION_GRANTS_ZERO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
