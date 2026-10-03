@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SCOPE_CERTIFICATE_COMPILED__ROOT3_TO_ROOT2_ONLY_RECLASSIFICATION_PENDING_INDEPENDENT_VERIFICATION__ZERO_CREDIT",
+  "certificate": {
+    "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+    "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+  },
+  "generic_scope_compiler": {
+    "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039"
+  },
+  "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "before": {
+    "root_class": "ROOT2_AND_ROOT3",
+    "root2_only_count": 15,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 4,
+    "unresolved_total": 26
+  },
+  "after_if_verified": {
+    "root_class": "ROOT2_ONLY",
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "unresolved_total": 26,
+    "root2_involved_count": 19,
+    "root3_involved_count": 10
+  },
+  "remaining_root2_residuals": [
+    "metric:matched_quality",
+    "matched_quality_noninferiority",
+    "required_claim_coverage_noninferiority"
+  ],
+  "hard_rules": [
+    "RECLASSIFICATION_ONLY__NO_ACCEPTANCE_PREDICATE_CLOSURE",
+    "NO_PERFORMANCE_BOUND_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
