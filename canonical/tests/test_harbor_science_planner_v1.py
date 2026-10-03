@@ -97,6 +97,8 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(body["tool_choice"],"required")
         self.assertFalse(body["parallel_tool_calls"])
         self.assertEqual(body["temperature"],0)
+        self.assertEqual(body["chat_template_kwargs"],{"enable_thinking":False})
+        self.assertEqual(body["max_tokens"],512)
         self.assertFalse(body["stream"])
         self.assertEqual(len(body["tools"]),1)
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
@@ -141,7 +143,7 @@ class PlannerTests(unittest.TestCase):
                 p.plan("synthetic")
 
     def test_timeout_bounds_fail_closed(self):
-        for value in (0,301,True,1.5):
+        for value in (0,421,True,1.5):
             with self.subTest(value=value):
                 with self.assertRaisesRegex(Exception,"TIMEOUT_INVALID"):
                     p.plan("synthetic",timeout_s=value)
