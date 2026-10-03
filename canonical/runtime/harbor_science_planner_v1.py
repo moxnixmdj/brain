@@ -148,7 +148,7 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
     if (
         not isinstance(timeout_s, int)
         or isinstance(timeout_s, bool)
-        or not 1 <= timeout_s <= 300
+        or not 1 <= timeout_s <= 420
     ):
         raise SciencePlannerError("SCIENCE_PLANNER_TIMEOUT_INVALID")
 
@@ -169,7 +169,8 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
         "tool_choice": "required",
         "parallel_tool_calls": False,
         "temperature": 0,
-        "max_tokens": 1024,
+        "chat_template_kwargs": {"enable_thinking": False},
+        "max_tokens": 512,
         "stream": False,
     }).encode("utf-8")
     req = urllib.request.Request(
