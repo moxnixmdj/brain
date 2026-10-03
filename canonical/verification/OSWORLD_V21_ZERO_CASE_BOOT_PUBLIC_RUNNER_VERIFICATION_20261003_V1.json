@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_ZERO_CASE_BOOT_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PINNED_V2_1_VM_IMAGE_AND_RUNTIME_BOOT__ZERO_BENCHMARK_CASES__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "commit": "9f17bb161a0cf2d87eda23afe3ed7431a5ab08cb",
+    "workflow_path": ".github/workflows/verify-osworld-v21-zero-case-boot-v2.yml",
+    "workflow_git_blob_sha": "0d6f5b79fcf4533b110afa627a15514c93ed4ded",
+    "workflow_run_id": 37155331628,
+    "workflow_job_id": 111297449304,
+    "conclusion": "success"
+  },
+  "exact_route": {
+    "vm_image_url": "https://huggingface.co/datasets/xlangai/v2-image/resolve/6e16459a2feb5a8f1ed65babcfe7a2a6205d049d/osworld-v2-ubuntu-x86.qcow2.zip",
+    "vm_image_sha256": "14b08aa7ba6c023ecb91d46de8df5de32af4d1d6bd75ea925519caf9677fc8b3",
+    "runtime_image": "happysixd/osworld-docker@sha256:0e6497a9295647cf05bf2b2af522fdd79bdeba2737595259cab310a3bcf6baa9",
+    "requested_vm_cpu_cores": 4,
+    "requested_vm_ram_gb": 4,
+    "requested_vm_disk_gb": 32
+  },
+  "verified": {
+    "kvm_present": true,
+    "docker_available": true,
+    "pinned_vm_archive_downloaded": true,
+    "pinned_vm_archive_sha256_verified": true,
+    "pinned_vm_image_extracted": true,
+    "exact_runtime_image_pulled_by_digest": true,
+    "vm_booted": true,
+    "screenshot_endpoint_reached": true,
+    "nonempty_screenshot_observed": true,
+    "success_marker": "OSWORLD_V21_ZERO_CASE_BOOT_PASS",
+    "benchmark_cases_consumed": 0
+  },
+  "route_consequence": {
+    "public_runner_basic_carrier": "PROVED",
+    "base_v2_1_vm_artifact_access": "PROVED",
+    "pinned_v2_1_vm_boot": "PROVED",
+    "remaining": [
+      "BIND_BRAIN_ADAPTER_TO_EXACT_V2_1_PROTOCOL",
+      "VERIFY_ANY_TASK_LEVEL_EXTERNAL_DEPENDENCIES_REQUIRED_BY_THE_FROZEN_PARTIAL_POPULATION",
+      "INDEPENDENTLY_BIND_END_TO_END_PROTOCOL_EQUIVALENCE",
+      "RUN_BRAIN_SCORE_ONLY_AFTER_FRESH_REALITY_AUTHORITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_OSWORLD_ACCEPTANCE_SCORE_FROM_THIS_PREFLIGHT",
+    "NO_CLAIM_ALL_TASK_LEVEL_EXTERNAL_DEPENDENCIES_ARE_AVAILABLE",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
