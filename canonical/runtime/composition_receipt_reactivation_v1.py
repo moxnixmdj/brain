@@ -70,7 +70,7 @@ def evaluate(manifest, protocols, bridge, bridge_verification, memory_bridge, me
         ("MEMORY_PACKAGE_STATUS_NOT_OWNED",memory_package.get("status")=="VERIFIED_OWNED_EQUAL_OR_BETTER"),
         ("MEMORY_PARENT_FAMILY_NOT_CLOSED",pkg_dec.get("parent_family_closed_for_claim_scope") is True),
         ("MEMORY_DERIVATION_SCOPE_NOT_CLOSED",md.get("owned_memory_parent_family_closed_for_claim_scope") is True),
-        ("MEMORY_SCOPE_DRIFT",memory_package.get("claim_scope")!=(memory_bridge.get("scope_guard") or {}).get("included_scope")),
+        ("MEMORY_SCOPE_DRIFT",memory_package.get("claim_scope")==(memory_bridge.get("scope_guard") or {}).get("included_scope")),
     ]
     bad=[name for name,ok in memory_checks if not ok]
     if bad:
