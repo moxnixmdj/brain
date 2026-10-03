@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "REPAIR_STAGED__DEDICATED_PLANNER_CONTEXT_FIX__INDEPENDENT_REVERIFICATION_REQUIRED__TERMINAL_EXECUTION_BLOCKED",
+  "status": "REPAIR_STAGED__DEDICATED_PLANNER_AND_OBSERVED_EXACT_ALIAS_FIX__INDEPENDENT_REVERIFICATION_REQUIRED__TERMINAL_EXECUTION_BLOCKED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "predicate": "TB_SCIENCE_GE_58_7",
@@ -10,13 +10,13 @@
     "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
     "dataset_content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
     "brain_controller": "canonical/runtime/harbor_science_agent_v1.py",
-    "brain_controller_git_blob_sha": "4aacda7973ff4310a1d22a4b1f289da301ec4381",
+    "brain_controller_git_blob_sha": "08862621cfe6ff6915a98120db36686ae5a08dab",
     "source_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
     "source_gate_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de",
     "harbor_version": "0.23.0",
     "incremental_spend_usd": 0,
     "brain_planner": "canonical/runtime/harbor_science_planner_v1.py",
-    "brain_planner_git_blob_sha": "6d61f28c79a6c9675cf1b3dc134e509f8731cc35"
+    "brain_planner_git_blob_sha": "17472fd2b01b164fbb180aecfc04385b55b11499"
   },
   "independent_binding": "STALE_AFTER_CONTROLLER_RUNTIME_REPAIR__REVERIFY_REQUIRED",
   "source_gate_reduction": {
@@ -35,7 +35,7 @@
     "model_dependencies_declared": true,
     "general_substrate_test_pass": false,
     "incremental_spend_usd": 0,
-    "verdict": "BLOCKED_BEFORE_CASE_SPEND__REPAIRED_CONTROLLER_MATERIALITY_NOT_YET_INDEPENDENTLY_REVERIFIED"
+    "verdict": "BLOCKED_BEFORE_CASE_SPEND__REPAIRED_CONTROLLER_NOT_YET_INDEPENDENTLY_REVERIFIED"
   },
   "remaining_before_terminal_case_exposure": [
     "INDEPENDENTLY_REVERIFY_REPAIRED_CONTROLLER_PLANNER_AND_MATERIALITY",
