@@ -14,7 +14,7 @@ active-learning optimization authority.
 """
 from __future__ import annotations
 
-from itertools import combinations
+from itertools import combinations, permutations
 from math import isfinite
 from typing import Any, Iterable, Mapping, Sequence
 
@@ -53,30 +53,55 @@ def structural_signature(
     relation_roles: Iterable[Any],
     invariants: Iterable[Any],
 ) -> dict[str, Any]:
-    """Return a label-independent structural signature.
+    """Return an exact label-invariant finite directed-graph signature.
 
-    Surface labels / identifiers are deliberately absent. Transfer is based on
-    normalized role, relation, and invariant structure only.
+    Primitive names are treated only as node identifiers. Relation entries must
+    use "source->target". The canonical topology is the lexicographically
+    minimum adjacency encoding over every node permutation, so renaming nodes
+    cannot change the result. The exact algorithm is intentionally bounded to
+    eight nodes; larger structures fail closed rather than silently using a
+    heuristic signature.
     """
-    primitives = _items(primitive_roles)
-    relations = _items(relation_roles)
+    nodes = _items(primitive_roles)
     inv = _items(invariants)
-    if not primitives:
+    if not nodes:
         raise RecursiveLearningError("PRIMITIVE_ROLE_REQUIRED")
+    if len(nodes) > 8:
+        raise RecursiveLearningError("STRUCTURE_TOO_LARGE_FOR_EXACT_CANONICALIZATION")
     if not inv:
         raise RecursiveLearningError("INVARIANT_REQUIRED")
+
+    node_set = set(nodes)
+    edges: set[tuple[str, str]] = set()
+    for raw in relation_roles:
+        relation = _norm(raw)
+        if "->" not in relation:
+            raise RecursiveLearningError("RELATION_FORMAT_REQUIRED")
+        left, right = (part.strip() for part in relation.split("->", 1))
+        if not left or not right or left not in node_set or right not in node_set:
+            raise RecursiveLearningError("RELATION_ENDPOINT_UNKNOWN")
+        edges.add((left, right))
+
+    best: tuple[str, ...] | None = None
+    for perm in permutations(nodes):
+        index = {node: i for i, node in enumerate(perm)}
+        encoded = tuple(sorted(f"{index[a]}>{index[b]}" for a, b in edges))
+        if best is None or encoded < best:
+            best = encoded
+
+    canonical = best or ()
     return {
         "schema": SCHEMA,
-        "primitive_roles": primitives,
-        "relation_roles": relations,
+        "node_count": len(nodes),
+        "edge_count": len(edges),
+        "canonical_topology": canonical,
         "invariants": inv,
         "signature": (
-            ("P", primitives),
-            ("R", relations),
+            ("N", len(nodes)),
+            ("E", canonical),
             ("I", inv),
         ),
     }
-
 
 def assess_transfer(
     *,
@@ -95,6 +120,10 @@ def assess_transfer(
     """
     src_inv = set(_items(source_signature.get("invariants", ())))
     tgt_inv = set(_items(target_signature.get("invariants", ())))
+    source_topology = tuple(source_signature.get("canonical_topology", ()))
+    target_topology = tuple(target_signature.get("canonical_topology", ()))
+    source_nodes = source_signature.get("node_count")
+    target_nodes = target_signature.get("node_count")
     required = set(_items(required_target_invariants))
     contradicted = set(_items(contradicted_invariants))
     distractors = set(_items(distractor_features))
@@ -109,9 +138,12 @@ def assess_transfer(
     missing_source = sorted(required - src_inv)
     distractor_only = bool(support) and support <= distractors
 
-    accepted = not contradiction and not missing_source and not distractor_only
+    topology_mismatch = source_nodes != target_nodes or source_topology != target_topology
+    accepted = not topology_mismatch and not contradiction and not missing_source and not distractor_only
     reason = "STRUCTURAL_TRANSFER_ACCEPTED"
-    if contradiction:
+    if topology_mismatch:
+        reason = "LABEL_INVARIANT_STRUCTURE_MISMATCH"
+    elif contradiction:
         reason = "REQUIRED_INVARIANT_CONTRADICTED"
     elif missing_source:
         reason = "SOURCE_DOES_NOT_COVER_REQUIRED_TARGET_INVARIANTS"
@@ -125,6 +157,7 @@ def assess_transfer(
         "required_invariants": sorted(required),
         "missing_source_invariants": missing_source,
         "contradicted_required_invariants": contradiction,
+        "topology_mismatch": topology_mismatch,
         "distractor_only_support": distractor_only,
         "surface_label_evidence_used": False,
         "promotion_authorized": False,
@@ -271,19 +304,34 @@ def compress_verified_abstraction(
     applicability: set[str] = set()
     receipts: set[str] = set()
     member_ids: list[str] = []
+    seen_member_ids: set[str] = set()
 
     for member in members:
         mid = _norm(member.get("id"))
         if not mid:
             raise RecursiveLearningError("MEMBER_ID_REQUIRED")
+        if mid in seen_member_ids:
+            raise RecursiveLearningError("MEMBER_ID_DUPLICATE")
+        seen_member_ids.add(mid)
         if member.get("verified") is not True:
             raise RecursiveLearningError("UNVERIFIED_MEMBER")
         member_receipts = member.get("verification_receipts")
         if not isinstance(member_receipts, Sequence) or isinstance(member_receipts, (str, bytes)) or not member_receipts:
             raise RecursiveLearningError("MEMBER_RECEIPT_REQUIRED")
-        normalized_receipts = {_norm(r) for r in member_receipts}
-        if "" in normalized_receipts:
-            raise RecursiveLearningError("MEMBER_RECEIPT_INVALID")
+        normalized_receipts: set[str] = set()
+        for receipt in member_receipts:
+            if not isinstance(receipt, Mapping):
+                raise RecursiveLearningError("MEMBER_RECEIPT_INVALID")
+            rid = _norm(receipt.get("receipt_id"))
+            if not rid:
+                raise RecursiveLearningError("MEMBER_RECEIPT_ID_REQUIRED")
+            if receipt.get("independent_verified") is not True:
+                raise RecursiveLearningError("MEMBER_RECEIPT_NOT_INDEPENDENT")
+            if receipt.get("exact_byte_bound") is not True:
+                raise RecursiveLearningError("MEMBER_RECEIPT_NOT_EXACT_BYTE_BOUND")
+            if receipt.get("conclusion") != "success":
+                raise RecursiveLearningError("MEMBER_RECEIPT_NOT_SUCCESS")
+            normalized_receipts.add(rid)
         guarantees = set(_items(member.get("guarantees", ())))
         invariants = set(_items(member.get("invariants", ())))
         if not guarantees or not invariants:
@@ -356,7 +404,7 @@ def prove_v3_invariants() -> dict[str, Any]:
                 "guarantees": ["safe", "deterministic"],
                 "invariants": ["no-unsupported-promotion"],
                 "applicability": ["domain-a"],
-                "verification_receipts": ["r1"],
+                "verification_receipts": [{"receipt_id": "r1", "independent_verified": True, "exact_byte_bound": True, "conclusion": "success"}],
             },
             {
                 "id": "s2",
@@ -364,7 +412,7 @@ def prove_v3_invariants() -> dict[str, Any]:
                 "guarantees": ["safe"],
                 "invariants": ["no-unsupported-promotion"],
                 "applicability": ["domain-b"],
-                "verification_receipts": ["r2"],
+                "verification_receipts": [{"receipt_id": "r2", "independent_verified": True, "exact_byte_bound": True, "conclusion": "success"}],
             },
         ],
     )
