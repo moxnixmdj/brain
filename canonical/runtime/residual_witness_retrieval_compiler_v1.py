@@ -435,7 +435,7 @@ def _cell_priority(
     surface = str(cell["surface"])
     p_close, cost, coverage_gain = SURFACE_PRIOR[surface]
     query_penalty = 1.0 + 0.015 * max(0, query_count - 1)
-    repeat_penalty = 1.0 + 0.45 * max(0, surface_attempts)
+    repeat_penalty = 1.0 + 2.0 * max(0, surface_attempts)
     compatibility = 1.0
     if query_basis.startswith("OBSERVABLE_API_SYMBOLS") and surface in {"SYMBOLS", "CODE_CONTENT"}:
         compatibility = 1.45
