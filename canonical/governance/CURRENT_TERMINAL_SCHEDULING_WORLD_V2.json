@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_SCHEDULING_WORLD_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__RECEIPT_DERIVED_30_PREDICATE_WORLD__TOOL_DISCOVERY_V2_RETRIEVAL_GATE_MANDATORY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Preserve the verified 38/8/30 live acceptance world while making the independently verified Tool Discovery residual-witness V2 retrieval authority a fail-closed mechanical prerequisite of the live TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR action.",
+  "base_main_commit": "23c8fef6d8172f69054168ddd9f093ecb61d9ce0",
+  "exact_candidate_blobs": {
+    "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py": "9af1bd62048277cc8c4fabab8efe5d217c367bac",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json": "e29ce3a7c782c7b9ab1097dd3124a917d3fea9d2",
+    "canonical/runtime/current_terminal_scheduling_world_v1.py": "de8434ea4d67f824070a94f70913979a2b4a2acd",
+    "canonical/tests/test_tool_discovery_retrieval_authority_gate_v1.py": "6f8e38356b0a5bebf1815c7d1c199ddc86b4c9de",
+    "canonical/tests/test_current_terminal_scheduling_world_v1.py": "aa401d6363efcc46f55f30fdea1ee3e1b150f9da"
+  },
+  "mandatory_retrieval_authority": {
+    "activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e",
+    "activation_verification_path": "canonical/verification/TOOL_DISCOVERY_RETRIEVAL_FRONTIER_V2_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "activation_verification_git_blob_sha": "bbbd34e192aa65ba94c4bda19a1a1eb9c2b5b406",
+    "compiler_git_blob_sha": "9daa8d590f3356b3fc51eccf75c56cbf515239e4",
+    "router_git_blob_sha": "578c5f87901a458b12d7df984e0a6a525d367456",
+    "github_provider_git_blob_sha": "29b808935559382ab7ddc81aaa08fe0611a05df8"
+  },
+  "expected_live_world": {
+    "registry_predicates": 38,
+    "proved_predicates": 8,
+    "unresolved_predicates": 30,
+    "tool_learning_success_route_noninferior": "OPEN",
+    "tool_discovery_retrieval_gate_required": true,
+    "tool_discovery_retrieval_gate_pass": true
+  },
+  "required_falsification_tests": [
+    "REMOVE_MANDATORY_RETRIEVAL_BINDING__MUST_FAIL",
+    "MUTATE_COMPILER_HASH__MUST_FAIL",
+    "MUTATE_ACTUAL_ROUTER_BYTES_HASH__MUST_FAIL",
+    "REENABLE_CONSUMED_V2_GITHUB_EPOCH__MUST_FAIL",
+    "INVALIDATE_INDEPENDENT_RECEIPT__MUST_FAIL",
+    "ADD_SECOND_TOOL_DISCOVERY_ACTION_BYPASS__MUST_FAIL",
+    "CALL_LIVE_SCHEDULER_WITHOUT_RETRIEVAL_GATE__MUST_FAIL"
+  ],
+  "supersession": {
+    "scheduling_activation_v7": "REMAINS_HISTORICAL_FOR_ITS_EXACT_PRE_GATE_BYTES",
+    "activation_rule": "ONLY_AFTER_EXACT_BYTE_INDEPENDENT_PUBLIC_RUNNER_PASS_CREATE_TERMINAL_SCHEDULING_ACTIVATION_V8"
+  },
+  "hard_rules": [
+    "NO_LIVE_TOOL_DISCOVERY_SEARCH_ACTION_WITHOUT_EXACT_VERIFIED_V2_RETRIEVAL_AUTHORITY",
+    "NO_DIRECT_SEARCH_BYPASS",
+    "NO_STALE_V1_RETRIEVAL_AUTHORITY",
+    "NO_CONSUMED_SOURCE_EPOCH_REPLAY",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_THIS_GATE"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
