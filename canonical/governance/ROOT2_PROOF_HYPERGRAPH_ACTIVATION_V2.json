@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PROOF_HYPERGRAPH_ACTIVATION_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_ROUTE_AND_OVERLAY_REBIND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "SUPERSEDE_STALE_V1_ACTION_SELECTION_BINDING_WITH_THE_SAME_VERIFIED_OPTIMIZER_ALGORITHM_BOUND_TO_CURRENT_ROOT2_ROUTE_INVENTORY_AND_VERIFIED_ROUTE_COMPRESSION_V2",
+  "verified_algorithm_basis": {
+    "prior_activation_path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_ACTIVATION_V1.json",
+    "prior_verification_path": "canonical/verification/ROOT2_PROOF_HYPERGRAPH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "runtime_path": "canonical/runtime/root2_proof_hypergraph_v1.py",
+    "runtime_git_blob_sha": "dd2094c4845239a0be4cfd34af4d8f3a7e411060",
+    "tests_path": "canonical/tests/test_root2_proof_hypergraph_v1.py",
+    "tests_git_blob_sha": "235db2f21fe4b0f70096be69ae28af87a5ce31dd",
+    "algorithm_changed": false
+  },
+  "current_binding": {
+    "governance_path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_V2.json",
+    "governance_git_blob_sha": "74654619d97c2ae0df3e4918170972d2b2129f0a",
+    "comparator_vector_path": "canonical/governance/ROOT2_FROZEN_COMPARATOR_VECTOR_V2.json",
+    "comparator_vector_git_blob_sha": "3158425ec5524b15487978608b4a95eac4832eb8",
+    "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+    "route_inventory_git_blob_sha": "9bf96b66aadd2fcc075eccfacfd3b179684e9b41",
+    "verified_overlay_path": "canonical/governance/ROOT2_ROUTE_COMPRESSION_V2_20261004.json",
+    "verified_overlay_git_blob_sha": "dc826cd30a26ed76e8af487dbf722ef872098fbc",
+    "verified_overlay_receipt_path": "canonical/verification/ROOT2_ROUTE_COMPRESSION_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+  },
+  "required_independent_verification": [
+    "ALL_EXACT_BOUND_BLOBS_MATCH",
+    "VECTOR_HAS_14_SURFACES_AND_15_UNIQUE_PREDICATES_WITH_ONLY_AA_BRIEFCASE_SHARED",
+    "VECTOR_ROUTE_INVENTORY_AND_OVERLAY_IDENTITIES_MATCH",
+    "HLE_ROUTE_CLASS_REFLECTS_VERIFIED_OPUS46_GRADER_TRUTH",
+    "AUTOMATIONBENCH_SATURATED_PUBLIC600_EQUIVALENCE_SEARCH_DOES_NOT_REENTER",
+    "CHARTOGRAPHY_ROUTE_IS_PROJECT_ACCOUNT_QUOTA_AND_ADAPTER_THEN_SCORE",
+    "OSWORLD_ROUTE_PRESERVES_MATERIAL_ACCESS_GITLAB_REVISION_DEPLOYMENT_PROTOCOL_AND_SCORE",
+    "UNCHANGED_OPTIMIZER_UNIT_AND_ADVERSARIAL_TESTS_PASS",
+    "ZERO_SPEND_AND_NO_FRESH_REALITY_INVARIANTS_PASS"
+  ],
+  "activation_effect_if_verified": [
+    "SUPERSEDE_ROOT2_PROOF_HYPERGRAPH_ACTIVATION_V1_FOR_CURRENT_ACTION_SELECTION",
+    "USE_CURRENT_V2_VECTOR_CURRENT_ROUTE_INVENTORY_AND_VERIFIED_COMPRESSION_OVERLAY",
+    "PRESERVE_UNCHANGED_OPTIMIZER_ALGORITHM",
+    "RECOMPUTE_NONDOMINATED_ZERO_REALITY_ACTIONS",
+    "NO_ACCEPTANCE_OR_FRESH_REALITY_CREDIT_FROM_REBIND"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_BINDING__THEN_PROMOTE_AS_CURRENT_ROOT2_ACTION_SELECTION_AUTHORITY",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
