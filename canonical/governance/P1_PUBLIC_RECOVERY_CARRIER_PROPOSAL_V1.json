@@ -13,7 +13,19 @@
     "runner_id": 0,
     "steps_executed": 0,
     "case_generation_began": false,
-    "fresh_reality_units_consumed": 0
+    "fresh_reality_units_consumed": 0,
+    "independent_verification": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1244,
+      "verifier_head_sha": "d5f48bbfc6b1af6b358aaf376610a26e36486bd2",
+      "merge_commit": "5397fafb86af1b63cd867c603fd2eae0a519ea91",
+      "workflow_run_id": 37107461285,
+      "workflow_job_id": 111158689698,
+      "artifact_id": 11268103776,
+      "artifact_digest": "sha256:3ecb734c57ee4222a430ffd8c2b7d3fc68c42f250019e01f632bb205a9065dc6",
+      "conclusion": "success",
+      "reissue_new_one_use_authority_eligible": true
+    }
   },
   "recovery_carrier": {
     "repository": "moxnixmdj/verification-capsule-runner",
@@ -52,7 +64,7 @@
     "independent_post_execution_adjudication_required": true,
     "authority_consumed_after_case_generation_begins": true
   },
-  "activation_rule": "DO_NOT_MERGE_EXECUTION_WORKFLOW_TO_VERIFIER_MAIN_UNTIL_THIS_PROPOSAL_AND_EXACT_WORKFLOW_BYTES_PASS_SEPARATE_INDEPENDENT_ZERO_REALITY_VERIFICATION_AND_BRAIN_BINDS_AN_ACTIVE_RECOVERY_AUTHORITY",
+  "activation_rule": "DO_NOT_MERGE_EXECUTION_WORKFLOW_TO_VERIFIER_MAIN UNTIL THIS PROPOSAL AND EXACT WORKFLOW BYTES PASS SEPARATE INDEPENDENT ZERO_REALITY VERIFICATION; PRIOR PRIVATE PRE-CASE FAILURE IS ALREADY INDEPENDENTLY VERIFIED AS ZERO-CONSUMPTION.",
   "next_if_verified": "CREATE_CONTENT_ADDRESSED_ACTIVE_RECOVERY_AUTHORITY_BINDING_THE_INDEPENDENT_VERIFIER_RECEIPT__MERGE_ACTIVE_AUTHORITY_TO_BRAIN_MAIN__ONLY_THEN_MERGE_EXACT_EXECUTION_WORKFLOW_TO_PUBLIC_VERIFIER_MAIN",
   "fresh_reality_units_consumed": 0,
   "terminal_results_replayed": 0,
