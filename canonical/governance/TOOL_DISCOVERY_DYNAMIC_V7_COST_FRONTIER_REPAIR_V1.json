@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V7_COST_FRONTIER_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_TRUTH_REPAIR__STACKED_ON_V6__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "objective": "Repair V6's per-tool tie ordering so the policy reasons over the entire minimum-cost non-falsified frontier, matching the actual least-cost objective and the three-way observability partition.",
+  "base_candidate": {
+    "path": "canonical/runtime/tool_discovery_dynamic_candidate_v6.py",
+    "git_blob_sha": "2020b7c2dc750009a9cc363d0703184b9115cfa6"
+  },
+  "counterexample": {
+    "id": "V6_EQUAL_COST_UNPROBEABLE_PEER_FALSELY_BLOCKS_VERIFIED_LEAST_COST_ROUTE",
+    "construction": [
+      "TWO_ADMISSIBLE_ROUTES_HAVE_IDENTICAL_GLOBAL_MINIMUM_COST",
+      "LEXICOGRAPHICALLY_FIRST_ROUTE_HAS_UNRESOLVED_REQUIRED_CAPABILITY_AND_NO_SAFE_PROBE_PERMISSION",
+      "SECOND_ROUTE_HAS_CURRENT_POSITIVE_EVIDENCE_FOR_ALL_REQUIRED_CAPABILITIES",
+      "V6_INHERITS_V5_PER_TOOL_LOOP_AND_ESCALATES_ON_THE_FIRST_ROUTE",
+      "SELECTING_THE_VERIFIED_SECOND_ROUTE_IS_VALID_AND_GLOBAL_LEAST_COST_IN_EVERY_HIDDEN_WORLD"
+    ],
+    "violated_rule": "LEAST_COST_OBJECTIVE_HAS_NO_CANONICAL_EQUAL_COST_IDENTITY_REQUIREMENT"
+  },
+  "repair": {
+    "runtime": "canonical/runtime/tool_discovery_dynamic_candidate_v7.py",
+    "rule": "DECIDE_OVER_MINIMUM_COST_NONFALSIFIED_FRONTIER__SELECT_ANY_VERIFIED_SUFFICIENT_PEER__ELSE_CONSUME_SAFE_FRONTIER_OBSERVATION__ELSE_ESCALATE_MATCHED_ONLY",
+    "strictly_cheaper_unresolved_route_still_blocks": true,
+    "equal_cost_unresolved_peer_blocks_verified_route": false,
+    "safe_observation_precedes_matched_evidence": true,
+    "version_restart_v6_preserved": true,
+    "discovery_first_v5_preserved": true
+  },
+  "relation_to_observability_partition_v2": {
+    "brain_pull_request": 1178,
+    "rule": "UNRESOLVED_ROUTE_IS_DECISION_RELEVANT_ONLY_IF_IT_CAN_STRICTLY_IMPROVE_VERIFIED_LEAST_COST__SAFE_PROGRESS_BEFORE_MATCHED_COMPARATOR"
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_COMPLETE_COMMON_AUTHORITY_INTERFACE_CLAIM",
+    "NO_SCOPE_COMPLETENESS_CLAIM",
+    "NO_MATCHED_COMPARATOR_EVIDENCE_CLAIM",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "INDEPENDENT_EXACT_BYTE_VERIFICATION_REQUIRED"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
