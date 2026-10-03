@@ -182,7 +182,7 @@ def evaluate(*, freeze_override: Mapping[str, Any] | None = None) -> dict[str, A
     _error(errors, source_contract.get("generator") == "canonical/runtime/contract_native_proof_suites.py::generate_case", "SOURCE_GENERATOR_BINDING")
     _error(errors, source_contract.get("contract") == "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001", "SOURCE_CONTRACT_BINDING")
     _error(errors, source_contract.get("candidate_oracle_exposure") is False, "ORACLE_EXPOSURE_GUARD")
-    _error(errors, set(source_contract.get("hidden_source_truth_used_only_for_instrumentation") or []) == {"_oracle.cause_step", "_oracle.repair_id"}, "HIDDEN_SOURCE_TRUTH_SET")
+    _error(errors, set(source_contract.get("hidden_source_truth_used_only_for_post_candidate_scoring") or []) == {"_oracle.cause_step", "_oracle.repair_id"}, "HIDDEN_SOURCE_TRUTH_SET")
 
     pipe = freeze.get("frozen_pipeline") or {}
     expected_pipe = {
