@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict, Iterable, List
+from typing import Any, Dict, Iterable, List, Optional, Set
 
 
 FORBIDDEN_ACTION_IDS = {
@@ -19,12 +19,28 @@ def _load(path: Path) -> Dict[str, Any]:
         return json.load(f)
 
 
-def _available_zero_reality_actions(actions: Iterable[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def _proved_predicate_ids(predicate_bindings: Optional[Dict[str, Any]]) -> Set[str]:
+    if not predicate_bindings:
+        return set()
+    return {
+        str(c.get("predicate_id"))
+        for c in (predicate_bindings.get("claims", []) or [])
+        if c.get("state") == "PROVED" and c.get("predicate_id")
+    }
+
+
+def _available_zero_reality_actions(
+    actions: Iterable[Dict[str, Any]],
+    proved_predicates: Set[str],
+) -> List[Dict[str, Any]]:
     out: List[Dict[str, Any]] = []
     for action in actions:
         if action.get("id") in FORBIDDEN_ACTION_IDS:
             continue
         if int(action.get("new_reality_units", 0) or 0) != 0:
+            continue
+        targets = {str(x) for x in (action.get("target_predicates", []) or [])}
+        if targets and targets.issubset(proved_predicates):
             continue
         pre = action.get("preconditions", []) or []
         if any(p.get("satisfied") is False for p in pre):
@@ -36,14 +52,16 @@ def _available_zero_reality_actions(actions: Iterable[Dict[str, Any]]) -> List[D
 def compile_causal_depth_plan(
     authority: Dict[str, Any],
     action_hypergraph: Dict[str, Any],
+    predicate_bindings: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     atomic = authority.get("atomic_acceptance_frontier", {})
     proved = int(atomic.get("proved", 0))
     unresolved = int(atomic.get("unresolved", 0))
     total = int(atomic.get("total", proved + unresolved))
+    proved_ids = _proved_predicate_ids(predicate_bindings)
 
     actions = action_hypergraph.get("actions", []) or []
-    barrier1 = _available_zero_reality_actions(actions)
+    barrier1 = _available_zero_reality_actions(actions, proved_ids)
 
     return {
         "schema": "PROJECT_BRAIN_TERMINAL_CAUSAL_DEPTH_PLAN_V1",
@@ -53,6 +71,7 @@ def compile_causal_depth_plan(
             "total_atomic_predicates": total,
             "terminal_goal_achieved": bool(authority.get("truth", {}).get("achieved", False)),
         },
+        "proved_predicate_ids_used_for_stale_action_subtraction": sorted(proved_ids),
         "objective_order": [
             "MINIMIZE_CAUSAL_BARRIER_DEPTH",
             "MINIMIZE_NEW_REALITY_UNITS",
@@ -103,7 +122,8 @@ def main() -> None:
     root = Path(__file__).resolve().parents[1]
     authority = _load(root / "governance" / "CURRENT_TERMINAL_AUTHORITY_V1.json")
     hypergraph = _load(root / "governance" / "OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json")
-    print(json.dumps(compile_causal_depth_plan(authority, hypergraph), indent=2, sort_keys=True))
+    bindings = _load(root / "governance" / "OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json")
+    print(json.dumps(compile_causal_depth_plan(authority, hypergraph, bindings), indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":
