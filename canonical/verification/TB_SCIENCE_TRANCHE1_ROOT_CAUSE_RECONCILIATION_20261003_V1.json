@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANCHE1_ROOT_CAUSE_RECONCILIATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "CAUSAL_LOCALIZATION_COMPLETE__POLLINATIONS_PLANNER_TRANSPORT_FAILS_3_OF_3__CONSUMED_SLOTS_REMAIN_FINAL_ZERO__NO_SCIENCE_COMPETENCE_INFERENCE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "source_terminal_receipt": "canonical/verification/TB_SCIENCE_TRANCHE1_RESULT_20261003_V1.json",
+  "workflow_run_id": 37101712032,
+  "consumed_slot_semantics": {
+    "finalized_slots": 3,
+    "successes": 0,
+    "final_zeros": 3,
+    "retries_allowed": false,
+    "replacement_allowed": false,
+    "fixed_denominator": 210,
+    "required_successes_total": 124,
+    "remaining_unconsumed_slots": 207,
+    "remaining_successes_required": 124,
+    "required_success_fraction_of_remaining": 0.5990338164251208,
+    "failures_remaining_before_fail_lock": 84
+  },
+  "exact_shared_cause": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_blob": "17472fd2b01b164fbb180aecfc04385b55b11499",
+    "external_endpoint": "https://text.pollinations.ai/",
+    "model_aliases": [
+      "openai-fast",
+      "openai",
+      "mistral"
+    ],
+    "failure_phase": "PLANNER_PROPOSAL_BEFORE_ENVIRONMENT_ACTION_OR_VERIFIER",
+    "harbor_exception_class": "SciencePlannerError",
+    "verifier_result_present": false,
+    "task_specific_scientific_failure_observed": false,
+    "route_failure_observed": true
+  },
+  "slots": [
+    {
+      "slot_id": "terminal-bench-science/mri-harmonization::trial-0",
+      "job_id": 111142377000,
+      "artifact_id": 11266251943,
+      "artifact_zip_sha256": "42204af01a5574d5d1868a9452cd0e64deed15d3614167f81d6767eae311b21a",
+      "slot_receipt_sha256": "02f94c86614f1fd577d17fb624e430ce8cd7a945d5b702aa0dd23adf87bf90b0",
+      "exception_sha256": "158abb053e7aae7b9679c7fa31f1145e435161788646365500b99337480d754f",
+      "trial_result_sha256": "bf4d01043ae8ea941fc38c5c677b6f9ac8d6d079f95a8a55ed729296bb7addb8",
+      "aggregate_result_sha256": "10aa7fcc698c76593e282a342ab4b9e7d531bf5298960d14d4a21c3c3970b6f6",
+      "planner_errors": [
+        "openai-fast:HTTPError:HTTP Error 402: Payment Required",
+        "openai:HTTPError:HTTP Error 402: Payment Required",
+        "mistral:HTTPError:HTTP Error 402: Payment Required"
+      ]
+    },
+    {
+      "slot_id": "terminal-bench-science/genomic-model-ranking::trial-0",
+      "job_id": 111142377106,
+      "artifact_id": 11266261781,
+      "artifact_zip_sha256": "c66fc7060ff38ee388769176a097072e58bd48fed1d84668966000113cc605a3",
+      "slot_receipt_sha256": "22b7a83a7a371112e3c66edc41e815dbf2e3028a0957904f295523992badd3ad",
+      "exception_sha256": "226807e9e252989882f6134e9ee998d6ed4922bd35536361ed45ce512f989dfa",
+      "trial_result_sha256": "76486fd4b3e572141d4ae5bd3d8c863f343a727066ffe71ec261eb46f721321e",
+      "aggregate_result_sha256": "67e0184c26a64cc615074b01897a60f34671772357c9cb13045d614117fd38dd",
+      "planner_errors": [
+        "openai-fast:TimeoutError:timed out",
+        "openai:HTTPError:HTTP Error 402: Payment Required",
+        "mistral:HTTPError:HTTP Error 402: Payment Required"
+      ]
+    },
+    {
+      "slot_id": "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "job_id": 111142377130,
+      "artifact_id": 11266816617,
+      "artifact_zip_sha256": "81ea668c8c954bec75e6f89ae9b61deba14c33ac3679e3cb83ff6dd0c46a3887",
+      "slot_receipt_sha256": "908f0f7db850d7e763a8453fb2c2d64b9456d2427bd05db52b62159451368a04",
+      "exception_sha256": "f3b41e895563bc148f666757d044556eb0b2853c8b132d7790f24a555e450b9c",
+      "trial_result_sha256": "5e884dbe8dc2a64b552700379ba6c090f648f61ccd3b482481b6f431b0cec5bc",
+      "aggregate_result_sha256": "5105b268b53999f95b12539046b835fbad97a7f758940dac75a42817bd98a7fe",
+      "planner_errors": [
+        "openai-fast:TimeoutError:timed out",
+        "openai:HTTPError:HTTP Error 402: Payment Required",
+        "mistral:HTTPError:HTTP Error 402: Payment Required"
+      ]
+    }
+  ],
+  "causal_conclusion": "THE_THREE_FINAL_ZEROS_ARE_VALID_FROZEN_ACCEPTANCE_ZEROS_BUT_DO_NOT_IDENTIFY SCIENTIFIC_TASK_COMPETENCE__THE_FIRST_SHARED_CAUSAL FAILURE IS THE EXTERNAL POLLINATIONS PROPOSAL TRANSPORT__NO_MORE TERMINAL SLOTS MAY BE SPENT ON THAT ROUTE",
+  "next": "REPLACE_EXTERNAL_PLANNER_WITH_PINNED_LOCAL_QWEN_STRUCTURED_TOOL_CALL_ROUTE__INDEPENDENTLY_VERIFY_SYNTHETIC_CONTRACT_AND_CONTROLLER_BYTES__NO_NEW_TERMINAL_EXPOSURE_BEFORE_PASS",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
