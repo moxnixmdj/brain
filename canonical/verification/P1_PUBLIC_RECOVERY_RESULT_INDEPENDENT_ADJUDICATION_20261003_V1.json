@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_RESULT_INDEPENDENT_ADJUDICATION_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PASS__192_OF_192__ALL_THREE_SURFACES__FAILURE_SEMANTICS_TRANSPORT_OBSERVED__ONE_REALITY_UNIT_CONSUMED",
+  "source": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1250,
+    "source_run_id": 37108111537,
+    "source_artifact_id": 11268841992,
+    "source_artifact_digest": "sha256:e25bcf3fcab61b1fa00882c202a00714ecb81772378005e4934edc712a22d038",
+    "independent_workflow_run_id": 37108230071,
+    "independent_artifact_id": 11267824875,
+    "independent_artifact_digest": "sha256:fedb61c73738c1fb2250db8843df442247f58d7840165324356df12fdd470649",
+    "verifier_head_sha": "89f9313449f73f194f6780a1ca13196b0635c2e8",
+    "verifier_merge_sha": "c23cb93b3f2b55d5aa7e4fb8aa3032693ce592f5"
+  },
+  "exact_result_hashes": {
+    "authorized_result_sha256": "24eec602e4f8bc2762b7c48f1652b97149ba0c995ee8448d3a59b41ed9fcee4f",
+    "raw_result_sha256": "768fa639b7e4c5e611945362a3ceddc43dc272f1d882629cba7b688709850a1f"
+  },
+  "result": {
+    "cases": 192,
+    "passes": 192,
+    "failures": 0,
+    "surfaces": 3,
+    "cases_per_surface": 64,
+    "both_semantics_classes_present_every_case": true,
+    "fresh_reality_units_consumed": 1,
+    "terminal_v3_replayed": 0,
+    "incremental_spend_usd": 0,
+    "transport_fact_adjudicated": true
+  },
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "next": "RUN_FROZEN_P1_MINIMUM_CUT_ACCEPTANCE_REDUCTION__LIFT_QUARANTINE_ONLY_IF_ALL_THREE_REQUIREMENTS_ARE_EXACTLY_DISCHARGED_AND_NO_OTHER_CURRENT_P1_RESIDUAL_EXISTS"
+}
