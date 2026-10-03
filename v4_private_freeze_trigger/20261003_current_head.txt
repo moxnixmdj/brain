@@ -1,0 +1,1 @@
+Trigger exact current-head private V4 39-atom corpus freeze after live 30-predicate scheduling activation.
