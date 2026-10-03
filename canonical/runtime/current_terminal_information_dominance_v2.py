@@ -97,7 +97,7 @@ def evaluate(
         retrieval_gate,
     )
     if live.get("pass") is not True:
-        return _fail("LIVE_WORLD_INVALID", live_world=live)
+        return _fail(*(errors + ["LIVE_WORLD_INVALID"]), live_world=live)
 
     counts = (
         live.get("registry_predicate_count"),
