@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_MATCHED_TARGET_NORMALIZATION_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_8_LIVE_MATCHED_TARGETS__37_ATOMS__7_METRICS__SOURCE_LITERAL_PROVENANCE_ONLY__ZERO_CREDIT",
+  "verified_subjects": {
+    "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V3.json": "9b400e6eb1a95bacbd9c0cdb93b155ced0f72558",
+    "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json": "72a5cd689f55df84de73693371264f02ef4e7226",
+    "canonical/tests/test_matched_target_normalization_provenance_v3.py": "24e602f37e608d5abe19479c113feaff07acedea",
+    "canonical/runtime/matched_target_normalization_provenance_verifier_v1.py": "9bc7ef820b9a0107dd7672e79f33ab3b77bd9160",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "f99b00e6dca735ffa7a790a414155b4f69856cf0",
+    "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json": "438e2775b64bee5ed6e792522ab35ebd0d6e1771"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/matched-target-normalization-v3-20261003-sol",
+    "head_sha": "8c9f24e222751e8ea2ff9030e5580a0ad48a5515",
+    "workflow_run_id": 37148040159,
+    "workflow_job_id": 111275920022,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_subject_blobs": true,
+    "current_live_target_set_exact": true,
+    "live_target_count": 8,
+    "source_literal_atom_count": 37,
+    "source_literal_metric_requirement_count": 7,
+    "every_atom_bound_to_exact_current_frozen_literal": true,
+    "every_metric_requirement_bound_to_exact_current_frozen_literal": true,
+    "stale_closed_targets_absent": true,
+    "adversarial_literal_mutation_fails_closed": true,
+    "semantic_implication_verified": false,
+    "exact_or_superset_scope_relation_verified": false,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "operational_consequence": "THE_CURRENT_8_LIVE_MATCHED_SCOPE_TARGETS_HAVE_AN_INDEPENDENTLY_VERIFIED_LOSSLESS_TARGET_SIDE_NORMALIZATION__THIS_MAY_BE_USED_AS_TARGET_AUTHORITY_FOR_WITNESS_TO_TARGET_TOTALIZATION__IT DOES_NOT_PROVE_ANY_OF_THE_16_CHILD_FACTS_BY_ITSELF",
+  "hard_nonclaims": [
+    "NO_WITNESS_TO_TARGET_SEMANTIC_BINDING_CREDIT",
+    "NO_EXACT_OR_SUPERSET_SCOPE_RELATION_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_OR_EXECUTION_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
