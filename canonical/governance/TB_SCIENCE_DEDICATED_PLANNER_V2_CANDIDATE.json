@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_DEDICATED_PLANNER_V2_CANDIDATE",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__INDEPENDENT_REVERIFICATION_REQUIRED__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "canonical_base_commit": "32775438fe656453f86eafcb03d27133589ff7ed",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "causal_blocker": "CURRENT_HARBOR_AGENT_USES_ASTRA_RUNTIME_PRIVATE_PLANNER_PATH_REQUIRING_CONTINUOUS_OBS_CONTEXT_NOT_BOUND_BY_HARBOR_AGENT",
+  "repair": "NARROW_DEDICATED_GENERAL_COGNITION_PROPOSAL_TRANSPORT__NO_SEARCH_RETRIEVAL_ENVIRONMENT_ACTION_ACCEPTANCE_OR_FINISH_AUTHORITY",
+  "exact_candidate": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "controller_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "controller_blob": "8ab8287fdb6a9b63b9fe2d2addde731486c89d1e",
+    "controller_tests_blob": "1f1a162a0a046b4f13c0474d91f8defb1472f468",
+    "materiality_tests_blob": "bda78c83d5783c385b4c88fecd33c81305274c5e"
+  },
+  "preserves": [
+    "CANDIDATES_AND_CANDIDATE_ACTIONS_ALIAS_FAIL_CLOSED_INTEROP",
+    "SAFE_CANDIDATES_ALIAS_NORMALIZATION_ONLY_AT_TRANSPORT_BOUNDARY",
+    "BRAIN_DETERMINISTIC_TERMINALIZATION",
+    "REQUIREMENT_FREEZE",
+    "COMMAND_POLICY",
+    "SEPARATE_VERIFY_COMMAND",
+    "MODEL_HAS_NO_TERMINAL_AUTHORITY",
+    "CONSERVATIVE_210_SLOT_LOWER_BOUND"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
