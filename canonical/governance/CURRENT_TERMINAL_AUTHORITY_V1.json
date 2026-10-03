@@ -851,8 +851,8 @@
     },
     "terminal_root_cause_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "2fe5d35d62f264de0661860afb8f2192fc87801b",
-      "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL"
+      "git_blob_sha": "bb38521bf7dd4a8d404a1a62cfd326769eb075ea",
+      "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__ROOT1_CURRENTLY_INACTIVE__ROOT2_ROOT3_OPEN"
     },
     "opus55_acceptance_residual_v4": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
@@ -884,6 +884,16 @@
       "verification": "canonical/verification/CURRENT_26_ZERO_REALITY_FRONTIER_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "verification_git_blob_sha": "20d0ba6fc2aed1c72dfeda9449b6b69a819ddd44",
       "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__5_OF_19__12_OF_38__26_OPEN__30_PRIMITIVE_ZERO_REALITY_UNITS__ZERO_CREDIT"
+    },
+    "root2_root3_minimum_execution_frontier_v1": {
+      "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
+      "git_blob_sha": "d2066de76733a25afcb9e743dec7c223f010032a",
+      "status": "ACTIVE_FAIL_CLOSED__ROOT1_INACTIVE__ROOT2_ROOT3_ONLY__ZERO_CREDIT"
+    },
+    "current_witness_target_totalization_v2_candidate": {
+      "path": "canonical/governance/CURRENT_WITNESS_TARGET_TOTALIZATION_V2_CANDIDATE.json",
+      "git_blob_sha": "953161b63ae0fa220cea19ed2b884ab9dd98cc84",
+      "status": "CANDIDATE__CURRENT_8X12_ZERO_REALITY_TOTALIZATION__INDEPENDENT_VERIFICATION_PENDING__FIRST_GITHUB_ACTIONS_ATTEMPT_ZERO_USER_STEPS"
     }
   },
   "residual": [
@@ -1519,5 +1529,5 @@
     "execution_authority": false,
     "promotion_authority": false
   },
-  "next_terminal_action": "BENCHMARK_DOMINANCE_PRECEDENCE__SATURATE_EXISTING_RECEIPTS_ON_CURRENT_12_OF_38_STATE__RECOMPUTE_FIXED_POINT__NO_FRESH_REALITY"
+  "next_terminal_action": "VERIFY_CURRENT_8X12_WITNESS_TARGET_TOTALIZATION_ON_A_WORKING_CARRIER__SEARCH_ONLY_LOAD_BEARING_SEMANTIC_OR_SCOPE_CERTIFICATES__BIND_EXACT_EXISTING_OPUS55_BENCHMARK_ROUTES__RECOMPUTE_ROOT2_ROOT3_ZERO_REALITY_FIXED_POINT__NO_FRESH_REALITY_BEFORE_FIXED_POINT"
 }
