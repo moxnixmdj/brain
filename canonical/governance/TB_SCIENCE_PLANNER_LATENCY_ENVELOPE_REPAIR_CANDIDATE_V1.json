@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PLANNER_LATENCY_ENVELOPE_REPAIR_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_NONTERMINAL_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_CURRENT_OPUS55_SNAPSHOT",
+  "source_terminal_receipt": {
+    "path": "canonical/verification/TB_SCIENCE_CANARY_V2_RESULT_20261003_V1.json",
+    "workflow_run_id": 37106127198,
+    "workflow_job_id": 111154893275,
+    "artifact_id": 11267982635,
+    "consumed_slot": "terminal-bench-science/baseline-free-localization::trial-0",
+    "slot_status": "FINAL_ZERO"
+  },
+  "localized_failure": {
+    "exception_class": "SciencePlannerError",
+    "exact_error": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "request_timeout_seconds": 180,
+    "local_model_prompt_tokens_observed": 1552,
+    "prompt_processing_seconds_observed": 125.2,
+    "decoded_tokens_observed_before_cancel": 321,
+    "total_server_time_at_cancel_seconds_approx": 209.31,
+    "cause_class": "CLIENT_TIMEOUT_BEFORE_LOCAL_MODEL_COMPLETION",
+    "harbor_or_verifier_failure": false
+  },
+  "repair": {
+    "planner_request_timeout_seconds": 300,
+    "planner_timeout_validation_ceiling_seconds": 420,
+    "max_completion_tokens": 512,
+    "request_chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "rationale": [
+      "OBSERVED_180_SECOND_CLIENT_BUDGET_IS_STRICTLY_BELOW_THE_LIVE_MODEL_TIME_NEEDED_FOR_THIS_CONSUMED_SLOT",
+      "BOUND_COMPLETION_TO_512_TOKENS_TO_LIMIT_WALL_CLOCK_AND_OUTPUT_SIZE",
+      "REQUEST_NONTHINKING_TEMPLATE_WHERE_SUPPORTED_TO_REMOVE_NON_LOAD_BEARING_REASONING_LATENCY",
+      "PRESERVE_BRAIN_COMMAND_VERIFICATION_AND_FINISH_AUTHORITY"
+    ]
+  },
+  "hard_rules": [
+    "NO_REPLAY_OF_CONSUMED_BASELINE_FREE_LOCALIZATION_TRIAL_0",
+    "NO_NEW_TERMINAL_SLOT_AUTHORITY_FROM_THIS_REPAIR",
+    "VERIFY_NONTERMINALLY_ON_SYNTHETIC_OR_INFORMATION_SAFE_EQUIVALENT_LONG_PROMPT_BEFORE_ANY_NEW_SLOT",
+    "INDEPENDENTLY_VERIFY_EXACT_PLANNER_AGENT_AND_TEST_BLOBS",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "terminal_results_observed_by_this_repair": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
