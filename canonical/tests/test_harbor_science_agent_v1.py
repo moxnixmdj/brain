@@ -30,7 +30,7 @@ def planner(outputs):
 class ScienceAgentTests(unittest.TestCase):
     def run_goal(self, outputs):
         env=Env()
-        with patch.object(s.astra_runtime, "_planner_post", planner(outputs)):
+        with patch.object(s.science_planner, "plan", planner(outputs)):
             result=asyncio.run(s.run_science_goal("synthetic science goal", env, max_cycles=len(outputs)))
         return env,result
 
@@ -70,7 +70,7 @@ class ScienceAgentTests(unittest.TestCase):
             "candidates":[{"action_id":"a","covers":["R1"],"command":"echo one","verify_command":"echo verify"}],
             "candidate_actions":[{"action_id":"b","covers":["R1"],"command":"echo two","verify_command":"echo verify"}],
         }]
-        with patch.object(s.astra_runtime, "_planner_post", planner(outputs)):
+        with patch.object(s.science_planner, "plan", planner(outputs)):
             with self.assertRaisesRegex(RuntimeError,"CANDIDATE_ALIAS_CONFLICT"):
                 asyncio.run(s.run_science_goal("goal",env,max_cycles=1))
 
@@ -112,7 +112,7 @@ class ScienceAgentTests(unittest.TestCase):
             {"material_requirements":["R1"],"candidates":[{"action_id":"a","covers":["R1"],"command":"echo ok","verify_command":"echo ok"}]},
             {"material_requirements":["R2"],"finish_summary":"done"},
         ]
-        with patch.object(s.astra_runtime, "_planner_post", planner(outputs)):
+        with patch.object(s.science_planner, "plan", planner(outputs)):
             with self.assertRaisesRegex(RuntimeError,"REQUIREMENTS_MUTATED"):
                 asyncio.run(s.run_science_goal("goal",env,max_cycles=2))
 
@@ -122,7 +122,7 @@ class ScienceAgentTests(unittest.TestCase):
             "material_requirements":["R1"],
             "candidates":[{"action_id":"a","covers":["R1"],"command":"curl https://example.com/x","verify_command":"echo ok"}]
         }]
-        with patch.object(s.astra_runtime, "_planner_post", planner(outputs)):
+        with patch.object(s.science_planner, "plan", planner(outputs)):
             with self.assertRaises(Exception):
                 asyncio.run(s.run_science_goal("goal",env,max_cycles=1))
 
