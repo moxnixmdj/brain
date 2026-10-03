@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_LOCAL_QWEN_PLANNER_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CAUSALLY_BOUND_TO_TRANCHE1_SHARED_FAILURE__INDEPENDENT_LIVE_ZERO_CASE_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_base_commit": "3ea640fe776a4987e2a260b5e3b365e42d5065b8",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "causal_evidence": {
+    "terminal_run_id": 37101712032,
+    "affected_slots": 3,
+    "affected_slots_with_same_exception": 3,
+    "exact_exception": "SCIENCE_PLANNER_ALL_ROUTES_FAILED__HTTP_402_PAYMENT_REQUIRED_ON_OPENAI_FAST_OPENAI_MISTRAL",
+    "diagnosis": "HOSTED_POLLINATIONS_PROPOSAL_TRANSPORT_IS_THE_FIRST_SHARED_CAUSAL_FAILURE__NO_TRIAL_RESULT_REACHED_VERIFIER"
+  },
+  "selected_repair": {
+    "planner_endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model_alias": "brain-qwen3.5-9b",
+    "backend": "LOCAL_LLAMA_SERVER",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "model_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+    "model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "prior_independent_preflight": "canonical/verification/TOOLATHLON_LOCAL_QWEN_TOOLCALL_PREFLIGHT_20261003_V1.json",
+    "hosted_fallback": false,
+    "planner_timeout_seconds": 180
+  },
+  "required_before_any_new_terminal_slot": [
+    "INDEPENDENT_EXACT_BYTE_UNIT_TEST_PASS",
+    "LIVE_ZERO_CASE_LOCAL_QWEN_JSON_PROPOSAL_PASS_ON_UBUNTU_24_04",
+    "EXACT_LOCAL_MODEL_AND_LLAMA_CPP_IDENTITY_HASH_BINDING",
+    "SCIENCE_ROUTE_AND_TERMINAL_AUTHORITY_REBOUND_TO_VERIFIED_REPAIR_BYTES"
+  ],
+  "terminal_results_replayed": 0,
+  "new_terminal_slots_exposed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
