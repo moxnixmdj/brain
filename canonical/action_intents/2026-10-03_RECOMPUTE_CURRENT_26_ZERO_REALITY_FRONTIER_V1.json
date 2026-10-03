@@ -1,0 +1,294 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
+  "action_id": "RECOMPUTE-CURRENT-26-ZERO-REALITY-FRONTIER-20261003-V1",
+  "status": "CURRENT_BASE_RECONCILE_FRONTIER__INDEPENDENT_VERIFICATION_PASS_BOUND__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "339aedf998972e0693e893b386ccb534fc0852e7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "POST_TOOL_DISCOVERY_12_OF_38_ACCEPTANCE_FRONTIER_NOT_YET_CANONICALLY_RECOMPUTED_FROM_CURRENT_EVIDENCE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::POST_TOOL_DISCOVERY_12_OF_38_ACCEPTANCE_FRONTIER_NOT_YET_CANONICALLY_RECOMPUTED_FROM_CURRENT_EVIDENCE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "CANONICALIZE_POST_TOOL_DISCOVERY_12_OF_38_FRONTIER_AS_16_ZERO_REALITY_REQUIREMENTS_13_ACTIVE_CERTIFICATES_24_COVERED_PREDICATES_30_PRIMITIVE_WORK_UNITS_WITH_ZERO_CREDIT",
+  "stop_condition": "STOP_AFTER_EXACT_CURRENT_BASE_FRONTIER_IS_INDEPENDENTLY_VERIFIED_AND_MERGED__THEN_REFRESH_MAIN_BEFORE_ANY_NEXT_ACTION",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_RECONCILIATION_GLUE_ONLY",
+    "provider_access_is_ownership": false,
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5"
+  },
+  "ownership_tests": {
+    "applicability": "NO_OWNERSHIP_PROMOTION_IN_THIS_ACTION",
+    "ownership_credit_delta": 0
+  },
+  "prior_work_search": {
+    "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+    "reused": [
+      "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "canonical/governance/CURRENT_27_ZERO_REALITY_FRONTIER_V2.json",
+      "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+      "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json",
+      "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+    ],
+    "independent_verification": "canonical/verification/CURRENT_26_ZERO_REALITY_FRONTIER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "rejected_duplicate_route": "PR_1364_IS_OLDER_BASE_AND_NOT_SELECTED_OVER_CURRENT_BASE_PR_1366"
+  },
+  "reasoning_durability": {
+    "real_objective": "Advance terminal Opus 5.5 capability ownership by deleting stale scheduling obligations after verified Tool Discovery closure.",
+    "governing_invariants": [
+      "ZERO_FRESH_REALITY",
+      "ZERO_ACCEPTANCE_CREDIT_FROM_SCHEDULING",
+      "FAIL_CLOSED_ON_SOURCE_DRIFT",
+      "CURRENT_BASE_ONLY"
+    ],
+    "material_premises": [
+      "TOOL_DISCOVERY_IS_PROVED_IN_CURRENT_LEDGER",
+      "CURRENT_LEDGER_IS_12_OF_38",
+      "CURRENT_ACCEPTANCE_IS_5_OF_19",
+      "INDEPENDENT_VERIFIER_1367_PASSED_EXACT_REDUCER_AND_TEST_BYTES"
+    ],
+    "evidence_refs": [
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "canonical/verification/CURRENT_26_ZERO_REALITY_FRONTIER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+    ],
+    "conclusion": "Recompute and canonicalize the current 26-predicate zero-reality planning frontier; do not spend reality or promote capability.",
+    "selected_route": "REUSE_EXISTING_CERTIFICATE_FRONTIER_PLUS_CURRENT_LEDGER_AND_MATCHED_RESIDUAL_REDUCER",
+    "rejected_material_alternatives": [
+      "MERGE_STALE_PR_1364",
+      "CONTINUE_WITH_PRE_TOOL_DISCOVERY_27_PREDICATE_WORLD",
+      "SPEND_FRESH_TERMINAL_CASES",
+      "BUILD_NEW_SCHEDULER"
+    ],
+    "uncertainties": [
+      "NO_ACCEPTANCE_PREDICATE_IS_EXPECTED_TO_CLOSE_FROM_THIS_RECONCILIATION"
+    ],
+    "assumptions": [
+      "CURRENT_MAIN_BASE_339AEDF_REMAINS_TRUSTED_UNTIL_MERGE_GENERATION_LOCK"
+    ],
+    "non_goals": [
+      "NO_NEW_CAPABILITY",
+      "NO_OWNERSHIP_PROMOTION",
+      "NO_FRESH_REALITY",
+      "NO_TERMINAL_REPLAY"
+    ],
+    "next_action": "MERGE_ONLY_AFTER_DRIFT_GUARD_AND_CURRENT_BASE_CHECK_PASS__THEN_REFRESH_CANONICAL_STATE",
+    "supersession_conditions": [
+      "MAIN_MATERIAL_STATE_CHANGES_BEFORE_MERGE",
+      "BOUND_SOURCE_BLOB_DRIFT",
+      "A_NEWER_CURRENT_BASE_RECOMPUTE_SUPERSEDES_PR_1366"
+    ],
+    "supersedes": "PRE_TOOL_DISCOVERY_27_PREDICATE_SCHEDULING_PROJECTION_FOR_CURRENT_PLANNING_ONLY"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "339aedf998972e0693e893b386ccb534fc0852e7",
+    "real_outcome": "Reduce time to verified terminal Opus 5.5 ownership by deleting stale post-Tool-Discovery planning work.",
+    "required_capability": "Truth-preserving current-frontier reconciliation from existing independently verified evidence.",
+    "obs_goal": {
+      "real_outcome": "Current truthful minimum zero-reality work frontier after Tool Discovery closure.",
+      "proxy_goals_deleted": [
+        "PR_COUNT",
+        "COMMIT_COUNT",
+        "SCHEDULER_COMPLEXITY"
+      ],
+      "surviving_necessity": "The live goal hierarchy explicitly requires existing-receipt saturation and fixed-point recompute before fresh reality."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR_1366_CURRENT_BASE_REDUCER",
+        "PR_1364_OLDER_BASE_RECOMPUTE",
+        "CURRENT_27_ZERO_REALITY_FRONTIER_V2"
+      ],
+      "external_existing_routes_checked": [
+        "VERIFICATION_CAPSULE_RUNNER_PR_1367_EXACT_CLEAN_ROOM_PASS"
+      ],
+      "capability_work_deleted": "No new capability mechanism is needed; only planning-state reconciliation remains.",
+      "surviving_gap": "Canonical current-main projection has not yet materialized the 12/38-derived 26-predicate frontier."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_STALE_FRONTIER_PROJECTION",
+      "delete_bypass_substitute_options": [
+        "DELETE_STALE_TOOL_DISCOVERY_CERTIFICATE",
+        "REUSE_CURRENT_LEDGER",
+        "REUSE_CURRENT_CERTIFICATE_FRONTIER",
+        "REUSE_VERIFIED_MATCHED_CHILD_DECOMPOSITION"
+      ],
+      "surviving_causal_blocker": "Current canonical scheduling projection still contains obligations removed by Tool Discovery acceptance."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "PR_1366_CURRENT_BASE_EXACT_REDUCER",
+        "PR_1364_OLDER_BASE_REDUCER",
+        "BUILD_NEW_REDUCER",
+        "SPEND_FRESH_REALITY"
+      ],
+      "losing_routes_reason": "#1364 is older-base; a new reducer duplicates existing exact work; fresh reality is explicitly forbidden.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Independent clean-room exact-byte verification is required because this changes the scheduler's live frontier."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+        "ITS_SCOPE_COMPLETENESS_REQUIREMENT"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "POST_TOOL_DISCOVERY_LEDGER_PROMOTION_ALREADY_INHERITED"
+      ],
+      "fresh_reuse_plan": "Immediately regenerate later planning from the merged current 26 frontier rather than carrying stale counts."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_REPEAT_TOOL_DISCOVERY_PROOF",
+        "NO_REPEAT_FINANCE_UNKNOWN_SOURCE_GATE_PROOF",
+        "NO_NEW_ROUTE_SEARCH_FOR_PURE_RECONCILIATION"
+      ],
+      "search_stop_decision": "Stop route search because current-base PR #1366 is sufficient and independently verified; no plausible faster correctness-equivalent reconciler remains.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "PR_1366_CURRENT_BASE_EXACT_REDUCER",
+      "PR_1364_OLDER_BASE_RECOMPUTE",
+      "BUILD_NEW_REDUCER",
+      "SPEND_FRESH_REALITY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PR_1364_FOR_CURRENT_PROMOTION",
+      "PRE_TOOL_DISCOVERY_27_PREDICATE_PROJECTION_AS_CURRENT",
+      "FRESH_REALITY_BEFORE_ZERO_REALITY_FIXED_POINT"
+    ],
+    "selected_surviving_route": "PR_1366_CURRENT_BASE_EXACT_REDUCER",
+    "why_selected_route_is_fastest_sufficient": "It is based on exact current main, reuses existing verified evidence, has an independent exact-byte clean-room PASS, and consumes zero terminal reality.",
+    "expected_parent_level_state_change": "CANONICALIZE_POST_TOOL_DISCOVERY_12_OF_38_FRONTIER_AS_16_ZERO_REALITY_REQUIREMENTS_13_ACTIVE_CERTIFICATES_24_COVERED_PREDICATES_30_PRIMITIVE_WORK_UNITS_WITH_ZERO_CREDIT",
+    "stop_condition": "STOP_AFTER_EXACT_CURRENT_BASE_FRONTIER_IS_INDEPENDENTLY_VERIFIED_AND_MERGED__THEN_REFRESH_MAIN_BEFORE_ANY_NEXT_ACTION",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER reuses exact current canonical evidence and an already independently verified current-base reducer; no external capability supplier is being selected."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "CURRENT_26_ZERO_REALITY_FRONTIER_RECONCILIATION_001",
+    "inputs": [
+      "CURRENT_38_PREDICATE_REGISTRY",
+      "CURRENT_12_PROVED_EVIDENCE_BINDINGS",
+      "PREVIOUS_ACTIVE_CERTIFICATE_FRONTIER",
+      "MATCHED_CHILD_FACT_GRAPH",
+      "TOOL_DISCOVERY_PROMOTION_RECEIPT"
+    ],
+    "environment_state": "CURRENT_MAIN_BASE_339AEDF998972E0693E893B386CCB534FC0852E7",
+    "allowed_information": "PRESERVED_CANONICAL_AND_INDEPENDENT_VERIFICATION_EVIDENCE_ONLY",
+    "required_output_or_action": "Derive the exact remaining zero-reality planning frontier after removing proved Tool Discovery obligations.",
+    "success_condition": "12 proved, 26 unresolved, Tool Discovery removed, 16 requirements, 13 active certificates, 24 covered predicates, 30 primitive work units, zero authority leakage.",
+    "failure_condition": "Any bound source drift, stale Tool Discovery obligation retained, count mismatch, or nonzero credit/authority.",
+    "terminal_consequence": "Planning truth improves; terminal acceptance remains 5/19 and no capability credit is granted.",
+    "verification_route": "verification-capsule-runner PR 1367, run 37130972550, merged 30f0fab5bf941a0b72e23ad659fdfa043fd17f7b",
+    "dependency_boundary": "No terminal case execution, no external model/provider capability, no new empirical evidence.",
+    "scope": "CURRENT_POST_TOOL_DISCOVERY_ZERO_REALITY_SCHEDULING_ONLY"
+  },
+  "prequalification_controls": {
+    "applicability": "NOT_APPLICABLE__NO_UNTOUCHED_QUALIFICATION_EVIDENCE_OR_OWNERSHIP_PROMOTION",
+    "fresh_evidence_spend": false,
+    "promotion": false
+  },
+  "qualification_stage": "NOT_APPLICABLE__ZERO_REALITY_RECONCILIATION",
+  "terminal_proof_control": {
+    "proof_obligation": "Exact current post-Tool-Discovery zero-reality planning frontier.",
+    "hole_type": "STALE_CURRENT_SCHEDULING_PROJECTION",
+    "expected_certificate_or_receipt": "CURRENT_26_ZERO_REALITY_FRONTIER_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+    "validator": "INDEPENDENT_VERIFICATION_CAPSULE_RUNNER_PLUS_DRIFT_IMMUNITY_GUARD",
+    "maximum_cheap_test_cost": "ZERO_TERMINAL_CASES",
+    "prerequisites": [
+      "CURRENT_12_OF_38_LEDGER",
+      "TOOL_DISCOVERY_PROMOTION_RECEIPT",
+      "CURRENT_BASE_339AEDF"
+    ],
+    "contamination_risk": "NONE__NO_TERMINAL_CASE_CONTENT_READ",
+    "reversibility": "FULLY_REVERSIBLE_PLANNING_GLUE",
+    "falsification_condition": "ANY_SOURCE_BLOB_DRIFT_OR_VERIFIER_FAILURE_OR_MAIN_GENERATION_CHANGE",
+    "critical_path_relation": "ACTIVE_GOAL_HIERARCHY_REQUIRES_EXISTING_RECEIPT_SATURATION_AND_FIXED_POINT_RECOMPILE"
+  },
+  "continuous_obs": {
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      "CURRENT_TERMINAL_AUTHORITY",
+      "ACTIVE_GOAL_HIERARCHY",
+      "ACCEPTANCE_EVIDENCE_BINDINGS",
+      "TOOL_DISCOVERY_PROMOTION_RECEIPT"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "obs_layers_current": true,
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": "RECONCILE_CURRENT_ZERO_REALITY_FRONTIER_BEFORE_FRESH_REALITY",
+    "information_boundary_complete": true,
+    "information_policy": "EXISTING_EVIDENCE_ONLY",
+    "dependencies": [
+      {
+        "dependency": "Brain main base 339aedf998972e0693e893b386ccb534fc0852e7",
+        "status": "READY"
+      },
+      {
+        "dependency": "Independent verifier receipt 30f0fab5bf941a0b72e23ad659fdfa043fd17f7b",
+        "status": "READY"
+      }
+    ]
+  },
+  "reality_query_admission": {
+    "proof_obligation": "CURRENT_ZERO_REALITY_FRONTIER_RECONCILIATION",
+    "existing_evidence_search": "COMPLETE_FOR_SELECTED_RECONCILIATION_ROUTE",
+    "evidence_scope_equivalence": "EXACT_CURRENT_LEDGER_AND_BOUND_FRONTIER_INPUTS",
+    "deductive_closure": "SUFFICIENT_FOR_PLANNING_RECOMPUTE_ONLY",
+    "counterfactual_terminal_distinctions": "NONE_REQUIRE_NEW_REALITY_FOR_THIS_ACTION",
+    "dominated_observations_deleted": [
+      "ALL_FRESH_TERMINAL_CASE_EXECUTION"
+    ],
+    "candidate_observations": [],
+    "minimum_reality_cut": [],
+    "terminal_decision_value": "DELETE_STALE_WORK_AND_EXPOSE_NEXT_ZERO_REALITY_FIXED_POINT",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "global_cut_snapshot": "CURRENT_5_OF_19_12_OF_38_TERMINAL_FALSE",
+    "global_cut_membership": false
+  },
+  "global_terminal_proof_cut": {
+    "graph_snapshot": "CURRENT_5_OF_19_12_OF_38_ACCEPTANCE_GRAPH",
+    "existing_evidence_saturation": "RECONCILIATION_USES_ALREADY_VERIFIED_TOOL_DISCOVERY_AND_FRONTIER_EVIDENCE",
+    "deductive_closure": "CURRENT_26_FRONTIER_REDUCER_ONLY",
+    "shared_residual_compression": "REMOVE_PROVED_TOOL_DISCOVERY_OBLIGATION_FROM_SCHEDULER",
+    "candidate_observations": [],
+    "dominance_deletions": [
+      "FRESH_REALITY_FOR_THIS_ACTION",
+      "STALE_27_PREDICATE_PLANNING"
+    ],
+    "exact_global_minimum_reality_cut": "UNCHANGED__NO_NEW_REALITY_ADMITTED",
+    "proposed_action_membership": "ZERO_REALITY_RECONCILIATION_OUTSIDE_REALITY_CUT",
+    "terminal_decision_value": "CURRENT_TRUTHFUL_FRONTIER_FOR_SUBSEQUENT_PROOF_ACTIONS"
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
