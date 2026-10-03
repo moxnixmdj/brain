@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_POST_UNIVERSAL_LEARNING_ZERO_REALITY_FRONTIER_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__TOOL_DISCOVERY_SCOPE_REQUIREMENT_INDEPENDENTLY_DISCHARGED__16_ZERO_REALITY_REQUIREMENTS__13_CERTIFICATES__30_PRIMITIVE_WORK_UNITS__3_DIRECT_REALITY_BLOCKED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Remove exactly the already-independently-proved Tool Discovery frozen-target scope-completeness proposition from the live zero-reality scheduling frontier, without closing TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR. Reclassify its remaining residual as matched empirical learning-effectiveness noninferiority.",
+  "canonical_base_commit": "0be4c2c7ae337a25caa7ac4d6f2797537fe27f83",
+  "exact_inputs": {
+    "current_zero_reality_frontier": {
+      "path": "canonical/governance/CURRENT_27_ZERO_REALITY_FRONTIER_V2.json",
+      "git_blob_sha": "bab3876a1c4bd6a065d20d42b320df4b4b3fa519"
+    },
+    "post_dual_independent_verification": {
+      "path": "canonical/verification/POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f7f60a5932ac305aa0db8aef2643119dd10b33d9"
+    },
+    "certificate_frontier": {
+      "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+      "git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+    },
+    "tool_discovery_frozen_scope_verification": {
+      "path": "canonical/verification/TOOL_DISCOVERY_FROZEN_SCOPE_COMPLETENESS_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "c9adf25c2e63f9e8b111f1d022acda264d6571f5"
+    },
+    "universal_learning_verification": {
+      "path": "canonical/verification/UNIVERSAL_LEARNING_CONTRACT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "2bff1082b81755ff5f8e8f0e97587090cc873283"
+    },
+    "current_scheduling_authority": {
+      "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+      "git_blob_sha": "6717ff6bda388722b3a28f0ead66db7aadb8e0c7"
+    },
+    "tool_discovery_current_route": {
+      "path": "canonical/governance/TOOL_DISCOVERY_CURRENT_ROUTE_SELECTION_V2.json",
+      "git_blob_sha": "9b7662513d9e6b73b87a814daaf8c2b023c41559"
+    }
+  },
+  "exact_transition": {
+    "discharged_zero_reality_requirement": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+    "retired_zero_reality_certificate": "TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+    "transitioned_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "remaining_residual": "MATCHED_EMPIRICAL_LEARNING_EFFECTIVENESS_NONINFERIORITY",
+    "reason": "The exact frozen Tool Discovery target case universe is independently verified complete; newer independently verified universal-learning control closes the structural novelty-routing question while explicitly leaving semantic noninferiority empirical."
+  },
+  "expected_live_world": {
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "prior_zero_reality_requirements": 17,
+    "current_zero_reality_requirements": 16,
+    "prior_nondominated_zero_reality_certificates": 14,
+    "current_nondominated_zero_reality_certificates": 13,
+    "prior_zero_reality_covered_predicates": 25,
+    "current_zero_reality_covered_predicates": 24,
+    "direct_reality_blocked_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "prior_primitive_zero_reality_work_units": 31,
+    "current_primitive_zero_reality_work_units": 30,
+    "matched_priority_child_facts": 16
+  },
+  "execution_policy": {
+    "run_remaining_30_zero_reality_work_units_concurrently": true,
+    "matched_16_child_facts_first_resource_priority_without_serializing_siblings": true,
+    "fixed_point_after_every_independently_verified_delta": true,
+    "cancel_newly_dominated_branches": true,
+    "tool_discovery_empirical_execution_globally_authorized": false,
+    "fresh_reality_authority": false
+  },
+  "next": "INDEPENDENTLY_VERIFY_THIS_EXACT_DELTA__THEN_REBIND_CURRENT_ZERO_REALITY_SCHEDULING_TO_16_REQUIREMENTS_13_CERTIFICATES_30_PRIMITIVE_WORK_UNITS__DO_NOT_EXECUTE_TOOL_DISCOVERY_EMPIRICAL_CASES_UNTIL_THE_REMAINING_ZERO_REALITY_FRONTIER_REACHES_VERIFIED_FIXED_POINT_AND_A_MINIMUM_REALITY_CUT_SEPARATELY_AUTHORIZES_THEM",
+  "hard_rules": [
+    "SCOPE_COMPLETENESS_DISCHARGE_IS_NOT_TOOL_LEARNING_NONINFERIORITY",
+    "UNIVERSAL_LEARNING_CONTROL_INVARIANTS_DO_NOT_PROVE_SEMANTIC_SUCCESS_RATE",
+    "REMOVE_EXACTLY_ONE_ZERO_REALITY_REQUIREMENT_AND_ITS_SINGLE_FULLY_SATISFIED_CERTIFICATE",
+    "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR_REMAINS_OPEN",
+    "MATCHED_EMPIRICAL_LEARNING_EFFECTIVENESS_NONINFERIORITY_REMAINS_IRREDUCIBLE_UNLESS_SEPARATELY_PROVED",
+    "NO_TERMINAL_REPLAY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
