@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_INFORMATION_DOMINANCE_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__EXACT_LIVE_27_INFORMATION_DOMINANCE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Recompute exact structural information dominance on the post-Recovery live 27-predicate world with no invented proof probabilities or proof-cost estimates.",
+  "live_world": "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V2.json",
+  "runtime": {
+    "path": "canonical/runtime/current_terminal_information_dominance_v2.py",
+    "git_blob_sha": "f5a91705684df50d50e0126a0d871b02ead6f8d4"
+  },
+  "solver": {
+    "path": "canonical/runtime/terminal_information_dominance_v1.py",
+    "git_blob_sha": "f10986bd09a7cc64a1fae3c6ea8e69b5655f2199"
+  },
+  "tests": {
+    "path": "canonical/tests/test_current_terminal_information_dominance_v2.py",
+    "git_blob_sha": "a1585a0f09b3216294f4466712c2cfc3fad5dca7"
+  },
+  "expected_result": {
+    "unresolved_predicates": 27,
+    "certificate_count": 16,
+    "nondominated_certificate_count": 16,
+    "dominated_certificate_count": 0,
+    "live_action_count": 21,
+    "live_action_coverage_count": 27,
+    "unique_zero_reality_requirements": 19,
+    "highest_direct_coverage": {
+      "certificate_id": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+      "covered_predicates": 8,
+      "fraction_of_live_atomic_frontier": 0.2962962962962963,
+      "required_propositions": [
+        "MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
+        "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"
+      ]
+    },
+    "full_frontier_new_reality_units": 0
+  },
+  "interpretation": [
+    "RECOVERY_CLOSURE_REMOVES_THREE_MATCHED_SCOPE_TARGETS_BUT_DOES_NOT_REMOVE_THE_SHARED_MATCHED_SCOPE_CERTIFICATE",
+    "THE_FULL_FRONTIER_STILL_REQUIRES_19_DISTINCT_ZERO_REALITY_PROPOSITIONS",
+    "STRUCTURAL_COVERAGE_8_OF_27_IS_NOT_A_SUCCESS_PROBABILITY_OR_PROOF_DIFFICULTY_ESTIMATE",
+    "ALL_16_CERTIFICATES_REMAIN_STRUCTURALLY_NONDOMINATED"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_LIVE27_RESULT__THEN_ACTIVATE_PARALLEL_ZERO_REALITY_DISCHARGE_WITH_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
