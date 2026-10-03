@@ -138,35 +138,32 @@ def _contains_forbidden_key(obj: Any) -> bool:
     return False
 
 
-def _flatten_strings(obj: Any) -> list[str]:
-    if isinstance(obj, str):
-        return [obj]
-    if isinstance(obj, Mapping):
-        out: list[str] = []
-        for value in obj.values():
-            out.extend(_flatten_strings(value))
-        return out
-    if isinstance(obj, list):
-        out: list[str] = []
-        for value in obj:
-            out.extend(_flatten_strings(value))
-        return out
-    return []
+def build_subproblem_request(*, task_context: str, public_state_summary: str = "") -> dict[str, Any]:
+    """Tool-agnostic request for the general cognition substrate.
+
+    The catalog is deliberately not an argument to this function. This is the
+    structural noninterference boundary: subproblem formation cannot depend on
+    tool identities, alternatives, costs, schemas, or ranking state.
+    """
+    return {
+        "task_context": str(task_context),
+        "public_state_summary": str(public_state_summary),
+        "response_schema": {
+            "goal": "short string",
+            "required_capabilities": ["capability strings"],
+            "constraint": "optional deterministic predicate or null",
+        },
+    }
 
 
 def validate_subproblem_contract(contract: Mapping[str, Any], tools: list[Mapping[str, Any]]) -> tuple[bool, list[str]]:
+    del tools  # identities are intentionally irrelevant to contract validation
     errors: list[str] = []
     if _contains_forbidden_key(contract):
         errors.append("SUBSTRATE_CONTRACT_CONTAINS_FORBIDDEN_ROUTE_KEY")
     required = contract.get("required_capabilities")
     if not isinstance(required, list) or not required or not all(isinstance(x, str) and x.strip() for x in required):
         errors.append("REQUIRED_CAPABILITIES_MISSING_OR_INVALID")
-    text = "\n".join(_flatten_strings(contract)).lower()
-    for tool in tools:
-        tid = str(tool.get("tool_id") or "")
-        if tid and tid.lower() in text:
-            errors.append("SUBSTRATE_CONTRACT_LEAKS_TOOL_IDENTITY")
-            break
     return (not errors, sorted(set(errors)))
 
 
