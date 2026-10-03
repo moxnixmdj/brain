@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_30_INFORMATION_DOMINANCE_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PASS__16_NONDOMINATED_CERTIFICATES__19_ZERO_REALITY_REQUIREMENTS__ZERO_CREDIT",
+  "objective": "Activate the independently verified live-30 structural dominance result as the current proof-first scheduling layer without granting fresh-reality authority.",
+  "candidate": "canonical/governance/CURRENT_TERMINAL_INFORMATION_DOMINANCE_V1.json",
+  "verification": "canonical/verification/CURRENT_30_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "live_world": {
+    "unresolved_predicates": 30,
+    "certificate_count": 16,
+    "nondominated_certificate_count": 16,
+    "dominated_certificate_count": 0,
+    "unique_zero_reality_requirements": 19
+  },
+  "highest_direct_leverage": {
+    "certificate_id": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+    "covered_predicates": 11,
+    "fraction_of_live_atomic_frontier": 0.36666666666666664,
+    "required_propositions": [
+      "MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
+      "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"
+    ],
+    "priority_rule": "FIRST_RESOURCE_PRIORITY_BUT_DO_NOT_SERIALIZE_INDEPENDENT_ZERO_REALITY_WORK_BEHIND_IT"
+  },
+  "execution_policy": {
+    "parallel_zero_reality_frontier": true,
+    "fresh_reality_authority": false,
+    "fixed_point_after_every_verified_certificate": true,
+    "stop_work_on_any_branch_that_BECOMES_DOMINATED": true,
+    "residual_retrieval_contract": "canonical/governance/RESIDUAL_WITNESS_RETRIEVAL_CONTRACT_V1.json",
+    "residual_backend_contract": "canonical/governance/RESIDUAL_WITNESS_BACKEND_CONTRACT_V1.json"
+  },
+  "hard_rules": [
+    "ALL_16_CERTIFICATES_ARE_CURRENTLY_STRUCTURALLY_NONDOMINATED",
+    "STRUCTURAL_COVERAGE_DOES_NOT_IMPLY_PROOF_DIFFICULTY_OR_SUCCESS_PROBABILITY",
+    "RUN_INDEPENDENT_ZERO_REALITY_SEARCH_AND_PROOF_BRANCHES_CONCURRENTLY",
+    "MATCHED_SCOPE_BINDING_GETS_FIRST_RESOURCE_PRIORITY_BECAUSE_IT_COVERS_11_OF_30",
+    "RECOMPUTE_LIVE_WORLD_AND_DOMINANCE_AFTER_EVERY_VERIFIED_CLOSURE",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE_FROM_THIS_ACTIVATION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "LAUNCH_PARALLEL_ZERO_REALITY_REQUIREMENT_DISCHARGE__PRIORITIZE_MATCHED_SCOPE_BINDINGS__USE_VERIFIED_RESIDUAL_WITNESS_RETRIEVAL_FOR_MISSING_EXTERNAL_OR_INTERNAL_WITNESSES__RECOMPUTE_AFTER_FIRST_VERIFIED_DELTA",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

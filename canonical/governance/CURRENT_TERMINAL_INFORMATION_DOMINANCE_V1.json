@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_INFORMATION_DOMINANCE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__EXACT_LIVE_30_INFORMATION_DOMINANCE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Recompute exact certificate dominance only after filtering the historical scheduling world through the independently verified current 38/8/30 receipt-derived frontier.",
+  "runtime": "canonical/runtime/current_terminal_information_dominance_v1.py",
+  "tests": "canonical/tests/test_current_terminal_information_dominance_v1.py",
+  "live_world_authority": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json",
+  "solver": "canonical/runtime/terminal_information_dominance_v1.py",
+  "hard_rules": [
+    "NO_HISTORICAL_31_PREDICATE_DOMINANCE_PROJECTION_MAY_ORDER_CURRENT_WORK",
+    "REMOVE_PROVED_OR_REFUTED_TARGETS_BEFORE_DOMINANCE",
+    "INFORMATION_DOMINANCE_IS_STRUCTURAL_SCHEDULING_ONLY_NOT_ACCEPTANCE_PROOF",
+    "REQUIREMENT_COUNT_IS_NOT_PROOF_DIFFICULTY_OR_PROBABILITY",
+    "WORK_NONDOMINATED_ZERO_REALITY_CERTIFICATES_BEFORE_FRESH_REALITY",
+    "RUN_FIXED_POINT_AFTER_EACH_NEW_VERIFIED_CERTIFICATE",
+    "NO_EXECUTION_PROMOTION_FAMILY_OR_CAPABILITY_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_LIVE_30_DOMINANCE_RESULT__THEN_ACTIVATE_ONLY_THE_VERIFIED_NONDOMINATED_ZERO_REALITY_FRONTIER",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
