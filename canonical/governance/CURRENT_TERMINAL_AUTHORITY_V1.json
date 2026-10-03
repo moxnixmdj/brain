@@ -717,9 +717,10 @@
       "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__P1_NOT_CLEARABLE__ZERO_CREDIT"
     },
     "terminal_delta_admission_gate": {
-      "path": "canonical/governance/TERMINAL_DELTA_ADMISSION_GATE_ACTIVE_AUTHORITY_V1.json",
-      "verification": "canonical/verification/TERMINAL_DELTA_ADMISSION_GATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__FAIL_CLOSED_ARCHITECTURE_ADMISSION_POLICY__ZERO_CREDIT"
+      "path": "canonical/governance/CAUSAL_CUT_ADMISSION_GATE_V2_ACTIVE_AUTHORITY_V1.json",
+      "verification": "canonical/verification/CAUSAL_CUT_ADMISSION_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__CAUSAL_CUT_V2__ZERO_CREDIT",
+      "supersedes": "canonical/governance/TERMINAL_DELTA_ADMISSION_GATE_ACTIVE_AUTHORITY_V1.json"
     },
     "delegation_v4_acceptance": {
       "scope_verification": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
@@ -805,5 +806,13 @@
     "fresh_reality_units_consumed": 0,
     "terminal_results_replayed": 0,
     "proof_atom_recompile_required": true
+  },
+  "causal_cut_admission_policy": {
+    "status": "ACTIVE_FAIL_CLOSED_META_GOVERNANCE",
+    "rule": "NON_TRUTH_REPAIR_ARCHITECTURE_CHANGES_REQUIRE_VERIFIED_CAUSAL_BINDING_TO_A_CURRENT_PRIMITIVE_CUT_FACT_AND_NAMED_BLOCKER",
+    "current_acceptance_preserved": "3_OF_19__8_OF_38",
+    "primitive_cut_binding": "LAST_VERIFIED_40_FACT_BASIS_WITH_CLOSED_DELEGATION_LEAF_EXCLUDED_PENDING_POST_DELEGATION_RECOMPILE",
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0
   }
 }
