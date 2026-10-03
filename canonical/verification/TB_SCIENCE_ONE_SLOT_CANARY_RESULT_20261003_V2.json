@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_RESULT_20261003_V2",
+  "date": "2026-10-03",
+  "status": "FINALIZED__FINAL_ZERO__LOCAL_PLANNER_TIMEOUT__ONE_USE_AUTHORITY_CONSUMED__NO_PROMOTION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow": "Execute TB-Science one-slot canary V2",
+    "workflow_run_id": 37106127198,
+    "workflow_job_id": 111154893275,
+    "head_sha": "8fac642506cb03726ad3bb54a1c1799da1f5a161",
+    "workflow_conclusion": "success",
+    "terminal_result": "FINAL_ZERO",
+    "incremental_spend_usd": 0
+  },
+  "authority": {
+    "brain_activation_commit": "6a9e18be244b8999b1676d16e3c285e122f25bbe",
+    "authority_path": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_AUTHORITY_V2.json",
+    "authority_blob": "741d6ca0cc4880e6cd9c76e3046272b1feb756f1",
+    "independent_authority_verifier_pr": 1240,
+    "independent_authority_verifier_run_id": 37105048727,
+    "one_use_consumed": true
+  },
+  "frozen_route": {
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "planner_blob": "879887984e2ca8abacac486d687f519f5d0d78a5",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "environment_transport_blob": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "harbor_version": "0.23.0",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "qwen_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c"
+  },
+  "slot": {
+    "slot_id": "terminal-bench-science/baseline-free-localization::trial-0",
+    "task_name": "terminal-bench-science/baseline-free-localization",
+    "task_digest": "sha256:f35349bcb083094b096a2400d9e98e55690b35f26e2b395796364ad109e91d57",
+    "reward": 0,
+    "receipt_error": "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD",
+    "exception_class": "SciencePlannerError",
+    "exception_message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out"
+  },
+  "causal_localization": {
+    "exact_layer": "LOCAL_QWEN_HTTP_PROPOSAL_REQUEST",
+    "client_timeout_seconds": 180,
+    "request_prompt_tokens_observed": 1552,
+    "prompt_processing_seconds_observed": 125.2,
+    "prompt_processing_tokens_per_second_observed": 12.4,
+    "decoded_tokens_before_cancel_observed": 321,
+    "generation_tokens_per_second_observed": 5.94,
+    "interpretation": "LOCAL_MODEL_REMAINED_PRODUCTIVELY_DECODING_WHEN_CLIENT_TIMEOUT_CANCELLED_REQUEST__SYNTHETIC_PREFLIGHT_UNDERREPRESENTED_REAL_PROMPT_LATENCY__DO_NOT_SPEND_ANOTHER_TERMINAL_SLOT_BEFORE_REAL_SIZE_ZERO_CASE_TIMEOUT_ENVELOPE_VALIDATION",
+    "capability_failure_claimed": false,
+    "task_specific_failure_claimed": false
+  },
+  "content_addressed_evidence": {
+    "artifact_id": 11267982635,
+    "artifact_name": "tb-science-canary-v2-result",
+    "artifact_sha256": "ffe482ebd229c01e0f3b50f3a6bb9c30bb5dfe027ef011a402da8ac447360569",
+    "slot_receipt_sha256": "67dd740c8926e32e6bd94007e153d62022478ddf031feadcd270260e54005e30",
+    "exception_txt_sha256": "8b55911113cd40808e2d97abdebb3148c89edbb404bafe84fc0db8d17f4947a5",
+    "harbor_trial_result_sha256": "727e37030c9c2980c5eb5b9699b98e293fe9b98e187bc746537666e95508c028",
+    "local_qwen_server_log_sha256": "b24e1b8f146ec7a5d781769f8a6d716301d54ac55c8e77951011eb5c9c5931ec"
+  },
+  "reduction": {
+    "fixed_denominator": 210,
+    "comparator_percent": 63.33333333333333,
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "finalized_slots": 4,
+    "successes": 0,
+    "finalized_failures": 4,
+    "untouched_slots_remaining": 206,
+    "successes_remaining_for_pass_lock": 133,
+    "failures_remaining_before_fail_lock": 74,
+    "predicate_closed": false
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "next": "REVOKE_CANARY_AUTHORITY__BUILD_REAL_SIZE_ZERO_CASE_LATENCY_PREFLIGHT_FROM_OBSERVED_1552_TOKEN_ENVELOPE__VERIFY_TIMEOUT_BUDGET_OR_REDUCE_LATENCY_WITHOUT_TERMINAL_EXPOSURE__RERANK_BEFORE_ANY_NEW_SCIENCE_SLOT"
+}
