@@ -42,7 +42,7 @@ TOOL = {
                 "candidates": {
                     "type": "array",
                     "minItems": 1,
-                    "maxItems": 8,
+                    "maxItems": 1,
                     "items": {
                         "type": "object",
                         "properties": {
@@ -160,6 +160,8 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
                 "content": (
                     "You are an optional proposal source inside Project Brain. "
                     "Use the provided submit_science_proposal tool exactly once. "
+                    "Return exactly one terse candidate action per proposal. Use short requirement IDs, "
+                    "concise commands, and no explanatory prose. "
                     "Never claim execution or finish authority."
                 ),
             },
@@ -169,7 +171,7 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
         "tool_choice": "required",
         "parallel_tool_calls": False,
         "temperature": 0,
-        "max_tokens": 1024,
+        "max_tokens": 384,
         "stream": False,
     }).encode("utf-8")
     req = urllib.request.Request(
