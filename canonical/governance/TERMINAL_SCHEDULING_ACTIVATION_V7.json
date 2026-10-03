@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_ACTIVATION_V7",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PASS__RECEIPT_DERIVED_30_PREDICATE_WORLD__ZERO_CREDIT",
+  "objective": "Replace the stale 31-predicate scheduling projection with the independently verified receipt-derived current world while preserving all frozen acceptance targets.",
+  "candidate": {
+    "path": "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V1.json",
+    "git_blob_sha": "69e1fda3ac8b5763759736081886458659e137ec"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/CURRENT_TERMINAL_SCHEDULING_WORLD_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "public_runner_pr": 1270,
+    "workflow_run_id": 37112229338,
+    "workflow_job_id": 111172213216,
+    "artifact_id": 11269354566,
+    "artifact_digest": "sha256:e83ba3120b9581311ece3e5ad456c8a3a90a123217e459cdc8cc2f0fe55b585f"
+  },
+  "current_authority_binding": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "git_blob_sha": "ad482ff264d5cdd6286aaf2ffd32db47acd447f0",
+    "opus55_acceptance": "3/19_PASS__16/19_OPEN",
+    "whole_scope_contracts": "12/12_PASS",
+    "provisional_behavioral_families": "19/19_PASS"
+  },
+  "live_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 8,
+    "refuted_predicates": 0,
+    "unresolved_predicates": 30,
+    "action_coverage_predicates": 30,
+    "uncovered_predicates": 0,
+    "closed_predicate_removed": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "reopened_predicate_preserved": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+  },
+  "supersedes_for_scheduling_only": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json",
+    "git_blob_sha": "e56719b8c63078273a6974104d413aa1b643da3b",
+    "reason": "V6 binds a 31-predicate world; current independently verified receipt-derived world has 30 unresolved predicates."
+  },
+  "information_dominance": {
+    "old_projection_disposition": "STALE_ON_31_PREDICATE_WORLD__ZERO_AUTHORITY_FOR_CURRENT_ORDERING",
+    "required_recompute": "RECOMPUTE_ON_RECEIPT_DERIVED_FILTERED_30_PREDICATE_CERTIFICATE_AND_ACTION_WORLD",
+    "fresh_reality_rule": "NO_FRESH_REALITY_FROM_THIS_ACTIVATION"
+  },
+  "hard_rules": [
+    "LIVE_SCHEDULING_SET_IS_DERIVED_FROM_FROZEN_REGISTRY_MINUS_CURRENT_PROVED_OR_REFUTED_RECEIPTS",
+    "PROVED_OR_REFUTED_PREDICATES_CANNOT_REMAIN_LIVE_ACTION_OR_CERTIFICATE_TARGETS",
+    "EVERY_CURRENT_UNRESOLVED_PREDICATE_REQUIRES_AT_LEAST_ONE_ACTION_EDGE",
+    "RUN_ZERO_REALITY_INFORMATION_DOMINANCE_AND_PROOF_FIRST_RECOMPUTATION_BEFORE_ANY_NEW_FRESH_REALITY_AUTHORITY",
+    "HISTORICAL_VERIFICATION_RECEIPTS_REMAIN_VALID_ONLY_FOR_THEIR_ORIGINAL_BYTES",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING"
+  ],
+  "next": "RECOMPUTE_ZERO_REALITY_INFORMATION_DOMINANCE_AND_PROOF_FIRST_FRONTIER_ON_THE_VERIFIED_30_PREDICATE_WORLD__IN_PARALLEL_VERIFY_TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_REPAIR_V1__NO_NEW_TERMINAL_SLOT_AUTHORITY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
