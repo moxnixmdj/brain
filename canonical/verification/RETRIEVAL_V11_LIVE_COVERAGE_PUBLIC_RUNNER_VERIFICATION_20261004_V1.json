@@ -1,0 +1,138 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V11_LIVE_COVERAGE_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__18_LIVE_EVENTS__13_NEW_LABELED_CASES__6_CASE_HITS__7_CASE_MISSES_PRESERVED__ZERO_CREDIT",
+  "verified_subjects": {
+    "canonical/runtime/retrieval_live_provider_arena_v1.py": "ae22852836f61dd0f9691bbd89dbb4680aefa917",
+    "canonical/runtime/retrieval_live_provider_arena_v2.py": "8fb64595ba6c8872f6086d2c226758afb4b7e493",
+    "canonical/runtime/retrieval_live_provider_arena_v7.py": "9b630f61544b9da047d44cd748ec6055287e996e",
+    "canonical/tests/test_retrieval_live_provider_arena_v7.py": "70546882a3d30a7f53310a7025e3b7987f573682"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1468,
+    "merge_commit": "aa890e5032d775a3389b66efac8180b5c718fc50",
+    "workflow_run_id": 37161219690,
+    "workflow_job_id": 111314874027,
+    "conclusion": "success"
+  },
+  "measured": {
+    "event_count": 18,
+    "unique_labeled_case_count": 13,
+    "usable_event_count": 18,
+    "target_hit_event_count": 6,
+    "target_hit_case_count": 6,
+    "finite_case_union_recall": 0.46153846153846156,
+    "route_strategy_metrics": {
+      "CRATES_IO_SEARCH::ANCHOR_COMPRESSED_V11": {
+        "event_count": 3,
+        "mean_latency_ms": 202.72237566666243,
+        "target_hit_count": 1,
+        "target_hit_rate": 0.3333333333333333,
+        "usable_transport_count": 3
+      },
+      "CROSSREF_TITLE_SEARCH::PROVIDER_NATIVE_TITLE_V11": {
+        "event_count": 2,
+        "mean_latency_ms": 358.174220500004,
+        "target_hit_count": 1,
+        "target_hit_rate": 0.5,
+        "usable_transport_count": 2
+      },
+      "GITHUB_REPOSITORY_SEARCH::NATIVE_ONLY_V11": {
+        "event_count": 3,
+        "mean_latency_ms": 580.8605216666601,
+        "target_hit_count": 0,
+        "target_hit_rate": 0,
+        "usable_transport_count": 3
+      },
+      "GITHUB_REPOSITORY_SEARCH::NATIVE_PLUS_TECHNICAL_ANCHOR_V11": {
+        "event_count": 3,
+        "mean_latency_ms": 510.01288399999584,
+        "target_hit_count": 0,
+        "target_hit_rate": 0,
+        "usable_transport_count": 3
+      },
+      "HUGGINGFACE_MODEL_PIPELINE_ENUM::PROVIDER_NATIVE_ENUM_V11": {
+        "event_count": 2,
+        "mean_latency_ms": 94.56018550000067,
+        "target_hit_count": 2,
+        "target_hit_rate": 1,
+        "usable_transport_count": 2
+      },
+      "NPM_REGISTRY_SEARCH::ANCHOR_COMPRESSED_V11": {
+        "event_count": 3,
+        "mean_latency_ms": 356.342331999997,
+        "target_hit_count": 1,
+        "target_hit_rate": 0.3333333333333333,
+        "usable_transport_count": 3
+      },
+      "OPENALEX_WORK_SEARCH::TITLE_ANCHOR_V11": {
+        "event_count": 2,
+        "mean_latency_ms": 862.5001815000032,
+        "target_hit_count": 1,
+        "target_hit_rate": 0.5,
+        "usable_transport_count": 2
+      }
+    },
+    "cross_language_ab": {
+      "XLANG_ASYNC_WEB_API": {
+        "NATIVE_ONLY_V11": {
+          "hit": false,
+          "rank": null,
+          "usable": true
+        },
+        "NATIVE_PLUS_TECHNICAL_ANCHOR_V11": {
+          "hit": false,
+          "rank": null,
+          "usable": true
+        }
+      },
+      "XLANG_COMPUTER_VISION": {
+        "NATIVE_ONLY_V11": {
+          "hit": false,
+          "rank": null,
+          "usable": true
+        },
+        "NATIVE_PLUS_TECHNICAL_ANCHOR_V11": {
+          "hit": false,
+          "rank": null,
+          "usable": true
+        }
+      },
+      "XLANG_MACHINE_LEARNING": {
+        "NATIVE_ONLY_V11": {
+          "hit": false,
+          "rank": null,
+          "usable": true
+        },
+        "NATIVE_PLUS_TECHNICAL_ANCHOR_V11": {
+          "hit": false,
+          "rank": null,
+          "usable": true
+        }
+      }
+    }
+  },
+  "key_findings": [
+    "HUGGINGFACE_PROVIDER_NATIVE_ENUM_V11_RECOVERED_2_OF_2_NEW_MODEL_CASES",
+    "CROSSREF_AND_OPENALEX_WERE_COMPLEMENTARY_ON_THE_TWO_NEW_PAPER_CASES",
+    "NPM_ANCHOR_COMPRESSED_V11_RECOVERED_1_OF_3_NEW_PACKAGE_CASES",
+    "CRATES_ANCHOR_COMPRESSED_V11_RECOVERED_1_OF_3_NEW_PACKAGE_CASES",
+    "GITHUB_NATIVE_ONLY_V11_RECOVERED_0_OF_3_CROSS_LANGUAGE_CASES",
+    "GITHUB_NATIVE_PLUS_TECHNICAL_ANCHOR_V11_RECOVERED_0_OF_3_CROSS_LANGUAGE_CASES",
+    "SEVEN_NEW_CASES_REQUIRE_DIFFERENT_REPRESENTATION_OR_CROSS_ECOSYSTEM_RECOVERY"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_COMPLETENESS_CLAIM",
+    "NO_CLAIM_13_NEW_CASES_REPRESENT_ALL_DOMAINS_LANGUAGES_OR_PROVIDERS",
+    "NO_PROVIDER_MISS_TO_NONEXISTENCE_INFERENCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
