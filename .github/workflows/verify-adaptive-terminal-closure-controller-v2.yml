@@ -42,7 +42,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: |
-          python canonical/runtime/adaptive_terminal_closure_controller_v2.py > ADAPTIVE_TERMINAL_CLOSURE_V2_RESULT.json
+          python -m canonical.runtime.adaptive_terminal_closure_controller_v2 > ADAPTIVE_TERMINAL_CLOSURE_V2_RESULT.json
           python - <<'PY'
           import json
           x=json.load(open("ADAPTIVE_TERMINAL_CLOSURE_V2_RESULT.json"))
