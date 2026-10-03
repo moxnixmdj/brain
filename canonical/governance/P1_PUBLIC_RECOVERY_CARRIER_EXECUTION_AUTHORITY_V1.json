@@ -16,7 +16,7 @@
     "runner_id": 0,
     "steps_executed": 0,
     "case_generation_began": false,
-    "fresh_reality_units_consumed": 1,
+    "fresh_reality_units_consumed": 0,
     "independent_verification": {
       "repository": "moxnixmdj/verification-capsule-runner",
       "pull_request": 1244,
@@ -80,7 +80,7 @@
     "authority_consumed_after_case_generation_begins": true
   },
   "activation_condition": "THIS_FILE_MUST_BE_PRESENT_ON BRAIN MAIN BEFORE VERIFIER PR_1245 IS MERGED TO VERIFIER MAIN; ONLY THE FIRST PUBLIC CARRIER RUN MAY CONSUME THE ONE AUTHORIZED REALITY UNIT",
-  "fresh_reality_units_consumed": 0,
+  "fresh_reality_units_consumed": 1,
   "terminal_results_replayed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
