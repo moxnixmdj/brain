@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_AUTHORITY_V2",
   "date": "2026-10-03",
-  "status": "CANDIDATE_ACTIVE_ONE_USE_AUTHORITY__EXACTLY_ONE_UNTOUCHED_SLOT__INDEPENDENT_ACTIVE_BYTE_VERIFICATION_REQUIRED",
+  "status": "FINALIZED_REVOKED__ONE_AUTHORIZED_SLOT_CONSUMED__FINAL_ZERO__SCIENCE_PLANNER_ERROR",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "target_predicate": "TB_SCIENCE_GE_58_7",
@@ -73,13 +73,28 @@
     "NO_CONSUMED_SLOT_REPLAY",
     "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
     "NO_THRESHOLD_FALLBACK_TO_HISTORICAL_58_7",
-    "EXECUTE_EXACTLY_ONE_SLOT_THEN_AUTO_REVOKE",
     "ANY_INFRA_TIMEOUT_RESOURCE_INVALID_OR_MISSING_VERIFIER_RESULT_FINALIZES_THIS_SLOT_AS_ZERO",
-    "NO_EXECUTION_UNTIL_SEPARATE_INDEPENDENT_VERIFIER_BINDS_THIS_EXACT_AUTHORITY_BLOB"
+    "NO_EXECUTION_UNTIL_SEPARATE_INDEPENDENT_VERIFIER_BINDS_THIS_EXACT_AUTHORITY_BLOB",
+    "ONE_USE_AUTHORITY_IS_CONSUMED_AND_REVOKED__NO_RETRY_NO_REPLACEMENT",
+    "NO_NEW_TB_SCIENCE_TERMINAL_SLOT_AUTHORITY_BEFORE_EXACT_SCIENCE_PLANNER_ERROR_LOCALIZATION_AND_INDEPENDENT_NONTERMINAL_REPAIR_VERIFICATION"
   ],
-  "execution_authority": true,
+  "execution_authority": false,
   "promotion_authority": false,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "finalization": {
+    "result_path": "canonical/verification/TB_SCIENCE_CANARY_V2_RESULT_20261003_V1.json",
+    "workflow_run_id": 37106127198,
+    "workflow_job_id": 111154893275,
+    "artifact_id": 11267982635,
+    "artifact_zip_sha256": "ffe482ebd229c01e0f3b50f3a6bb9c30bb5dfe027ef011a402da8ac447360569",
+    "slot_status": "FINAL_ZERO",
+    "reward": 0,
+    "exception_class": "SciencePlannerError",
+    "receipt_error": "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD",
+    "finalized_failures_total": 4,
+    "required_successes": 133,
+    "remaining_failures_before_fail_lock": 74
+  }
 }
