@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROOT_CAUSE_STATE_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__ROOT1_NOT_OVERCLAIMED",
+  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__ROOT1_CURRENTLY_INACTIVE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_acceptance": {
     "accepted_families": 5,
@@ -14,7 +14,7 @@
   },
   "roots": {
     "root_1_capability_missing": {
-      "status": "OPEN_ONLY_WHERE_A_REQUIRED_CAPABILITY_LACK_IS_POSITIVELY_ESTABLISHED",
+      "status": "CURRENTLY_INACTIVE__ZERO_POSITIVELY_ESTABLISHED_CAPABILITY_GAPS__REOPEN_ONLY_ON_CONSTRUCTIVE_EVIDENCE",
       "verified_learning_control": {
         "path": "canonical/verification/UNIVERSAL_LEARNING_CONTRACT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
         "git_blob_sha": "2bff1082b81755ff5f8e8f0e97587090cc873283",
@@ -22,10 +22,15 @@
         "not_proved": "UNIVERSAL_SEMANTIC_LEARNING_SUCCESS"
       },
       "classification_rule": "UNKNOWN_OR_UNPROVED_CAPABILITY_MUST_NOT_BE_CLASSIFIED_AS_MISSING__ROOT1_REQUIRES_POSITIVE_EVIDENCE_OF_AN_OPERATIVE_CAPABILITY_GAP_AFTER_AVAILABLE_ACQUISITION_ROUTES_ARE_ACCOUNTED_FOR",
-      "current_examples_still_root1_candidates": [
-        "FINANCE_UNCOVERED_SCOPE_AUDIT__NO_VERIFIED_OPERATIVE_FINANCE_JUDGMENT_ROUTE",
-        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT__NO_VERIFIED_OPERATIVE_UNKNOWN_DOMAIN_JUDGMENT_ROUTE"
-      ]
+      "current_positive_root1_blockers": [],
+      "reclassified_prior_candidates": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT__ROOT3_DIRECT_SCOPE_EVIDENCE_RESIDUAL__OPERATIVE_SOURCE_ADMITTED",
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT__ROOT3_DIRECT_SCOPE_EVIDENCE_RESIDUAL__OPERATIVE_SOURCE_ADMITTED"
+      ],
+      "reconciliation": {
+        "path": "canonical/governance/POST_SOURCE_GATE_ROOT1_RECLASSIFICATION_V1.json",
+        "rule": "SOURCE_ADMISSION_REMOVES_THE_ONLY_CURRENT_POSITIVE_OPERATIVE_SOURCE_MISSING_PREMISES__DIRECT_ORACLE_LEAVES_REMAIN_OPEN_AS_SCOPE_EVIDENCE"
+      }
     },
     "root_2_measurement_or_comparator": {
       "status": "OPEN",
@@ -57,12 +62,13 @@
     "implication": "THIS_CLOSES_TOOL_DISCOVERY_ACCEPTANCE_AND_DEMONSTRATES_THAT_A_PRIOR_APPARENT_EMPIRICAL_LEARNING_BLOCKER_CAN_COLLAPSE_INTO_FORMAL_ROOT2_ROOT3_REASONING__IT_DOES_NOT_PROVE_UNIVERSAL_CAPABILITY_ACQUISITION"
   },
   "scheduler_policy": {
-    "before_any_work": "CLASSIFY_EACH_CURRENT_UNRESOLVED_TARGET_AS_ROOT1_ROOT2_OR_ROOT3_FROM_CURRENT_EVIDENCE",
+    "before_any_work": "CLASSIFY_EACH_CURRENT_UNRESOLVED_TARGET_AS_ROOT2_OR_ROOT3_UNLESS_NEW_POSITIVE_CONTENT_ADDRESSED_EVIDENCE_REOPENS_ROOT1",
     "unknown_is_not_missing": true,
     "stale_scheduler_execution_forbidden": true,
     "recompute_fixed_point_after_each_verified_delta": true,
     "fresh_reality_before_zero_reality_fixed_point": false,
-    "no_credit_from_classification_itself": true
+    "no_credit_from_classification_itself": true,
+    "root1_currently_active": false
   },
   "accounting": {
     "acceptance_credit_delta": 0,
