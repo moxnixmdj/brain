@@ -28,4 +28,4 @@ jobs:
       - name: Verify exact V13 candidate
         run: python canonical/runtime/verify_terminal_scheduling_v13_candidate_v1.py
       - name: Run V13 candidate test
-        run: python canonical/tests/test_terminal_scheduling_v13_candidate_v1.py
+        run: python -m canonical.tests.test_terminal_scheduling_v13_candidate_v1
