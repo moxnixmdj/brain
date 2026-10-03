@@ -16,7 +16,7 @@
     "runner_id": 0,
     "steps_executed": 0,
     "case_generation_began": false,
-    "fresh_reality_units_consumed": 0,
+    "fresh_reality_units_consumed": 1,
     "independent_verification": {
       "repository": "moxnixmdj/verification-capsule-runner",
       "pull_request": 1244,
@@ -85,7 +85,7 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "execution_authority": true,
+  "execution_authority": false,
   "promotion_authority": false,
-  "next": "MERGE_THIS_AUTHORITY_TO_BRAIN_MAIN__THEN_MERGE_VERIFIER_PR_1245_ONCE__CAPTURE_RESULT__REVOKE_AUTHORITY__INDEPENDENTLY_ADJUDICATE_TRANSPORT_AND_ACCEPTANCE"
+  "next": "INDEPENDENTLY_ADJUDICATE_RECORDED_PUBLIC_RECOVERY_RESULT__NO_RERUN"
 }
