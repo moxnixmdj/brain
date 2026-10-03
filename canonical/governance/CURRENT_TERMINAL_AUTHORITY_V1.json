@@ -817,6 +817,24 @@
       "status": "CANDIDATE_PENDING_INDEPENDENT_EXACT_BYTE_VERIFICATION__ZERO_CREDIT",
       "counterexample": "V5_CAN_COMBINE_FRESH_EPOCH_CAPABILITY_RECEIPT_WITH_STALE_DISCOVERY_METADATA_AFTER_TOOL_VERSION_CHANGED",
       "repair": "V6_FAILS_CLOSED_AND_REQUIRES_EPISODE_RESTART"
+    },
+    "p1_source_native_shared_batch_candidate": {
+      "brain_pull_request": 1172,
+      "route_selection": "canonical/governance/P1_SHARED_FAILURE_SEMANTICS_ROUTE_SELECTION_V1.json",
+      "source_lineage_pull_request": 1135,
+      "independent_verifier_pull_request": 1166,
+      "status": "CURRENT_BASE_CANDIDATE__SOURCE_NATIVE_DUAL_SCORER__PENDING_INDEPENDENT_EXACT_BYTE_VERIFICATION__ZERO_CREDIT",
+      "exact_core_blob_shas": {
+        "freeze": "6a4b606a759d5479bb5ddbdf29426b1a1808b007",
+        "preflight_runtime": "dafd0c12ec1391b83278c1b5bbd54d4271fa43fa",
+        "batch_runtime": "695cfe3f283723a52bafb6299236a2d0378dc79e",
+        "normalizer": "b6ba06fc6a35fa132eb19389ee256e74a63a4849",
+        "preflight_tests": "2b0b7a8b3fe7017e1be0fa85bed0f10b72802337",
+        "batch_tests": "7512a920c72d7bdeb2b072788e4c4bc8d2ff2d08"
+      },
+      "execution_authority": false,
+      "promotion_authority": false,
+      "rule": "NO_BEACON_OR_FRESH_P1_EXECUTION_UNTIL_INDEPENDENT_VERIFIER_PASSES__SUPERSEDES_SYNTHETIC_PR1153_FOR_SCHEDULING__ONE_SHARED_REALITY_UNIT_PRESERVED"
     }
   },
   "canonical_proof_atom_basis": {
@@ -850,8 +868,8 @@
     "current_effective_leaf_requirement_occurrences": 39,
     "current_effective_canonical_leaf_atoms": 39
   },
-  "last_reconciled_control_plane_head": "9713b2d687fd28a40799243c908766da6243a410",
-  "last_reconciled_reason": "COMPOSITION_2_OF_12_RECONCILED__TOOL_DISCOVERY_V5_MIXED_EPOCH_COUNTEREXAMPLE_IDENTIFIED__V6_CURRENT_BASE_CANDIDATE_STAGED_PENDING_INDEPENDENT_VERIFICATION__ACCEPTANCE_UNCHANGED",
+  "last_reconciled_control_plane_head": "eb9b919fff3039c52da277c96a0d9f14a17c86be",
+  "last_reconciled_reason": "COMPOSITION_2_OF_12_RECONCILED__TOOL_DISCOVERY_V5_MIXED_EPOCH_COUNTEREXAMPLE_IDENTIFIED__V6_CURRENT_BASE_CANDIDATE_STAGED_PENDING_INDEPENDENT_VERIFICATION__ACCEPTANCE_UNCHANGED__P1_SOURCE_NATIVE_CURRENT_BASE_CANDIDATE_STAGED__DUPLICATE_P1_BRANCHES_PR1153_AND_PR1135_CLOSED__ZERO_CREDIT",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
