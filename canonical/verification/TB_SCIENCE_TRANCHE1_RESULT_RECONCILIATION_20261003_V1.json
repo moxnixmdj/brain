@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANCHE1_RESULT_RECONCILIATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "OBJECTIVE_TERMINAL_TRANCHE_RECONCILED__0_OF_3_SUCCESS__3_FINAL_ZERO__PLANNER_TRANSPORT_FAILURE__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "frozen_execution": {
+    "brain_authority_commit": "501466bca32e88dd7795bb0f69061050784e2ae0",
+    "authority_blob": "89406ed4c8d214dfa81eddbb1f8caeebc33e82b2",
+    "execution_repository": "moxnixmdj/verification-capsule-runner",
+    "execution_branch": "execute-tb-science-tranche1-v1-20261003",
+    "arm_commit": "9f69b4d4faecc561831ec8e57212e5ee04c5895b",
+    "workflow_run_id": 37101712032,
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "controller_blob": "8ab8287fdb6a9b63b9fe2d2addde731486c89d1e",
+    "planner_blob": "17472fd2b01b164fbb180aecfc04385b55b11499"
+  },
+  "slots": [
+    {
+      "slot_id": "terminal-bench-science/mri-harmonization::trial-0",
+      "job_id": 111142377000,
+      "artifact_id": 11266251943,
+      "artifact_zip_sha256": "42204af01a5574d5d1868a9452cd0e64deed15d3614167f81d6767eae311b21a",
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "exception": "SCIENCE_PLANNER_ALL_ROUTES_FAILED",
+      "route_failures": [
+        "openai-fast:HTTP_402_PAYMENT_REQUIRED",
+        "openai:HTTP_402_PAYMENT_REQUIRED",
+        "mistral:HTTP_402_PAYMENT_REQUIRED"
+      ]
+    },
+    {
+      "slot_id": "terminal-bench-science/genomic-model-ranking::trial-0",
+      "job_id": 111142377106,
+      "artifact_id": 11266261781,
+      "artifact_zip_sha256": "c66fc7060ff38ee388769176a097072e58bd48fed1d84668966000113cc605a3",
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "exception": "SCIENCE_PLANNER_ALL_ROUTES_FAILED",
+      "route_failures": [
+        "openai-fast:TIMEOUT_20S",
+        "openai:HTTP_402_PAYMENT_REQUIRED",
+        "mistral:HTTP_402_PAYMENT_REQUIRED"
+      ]
+    },
+    {
+      "slot_id": "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "job_id": 111142377130,
+      "artifact_id": 11266816617,
+      "artifact_zip_sha256": "81ea668c8c954bec75e6f89ae9b61deba14c33ac3679e3cb83ff6dd0c46a3887",
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "exception": "SCIENCE_PLANNER_ALL_ROUTES_FAILED",
+      "route_failures": [
+        "openai-fast:TIMEOUT_20S",
+        "openai:HTTP_402_PAYMENT_REQUIRED",
+        "mistral:HTTP_402_PAYMENT_REQUIRED"
+      ]
+    }
+  ],
+  "causal_conclusion": "ZERO_SCIENTIFIC_VERIFIER_RESULTS_OBSERVED__ALL_THREE_SLOTS_FAILED_BEFORE_VERIFIER_AT_EXTERNAL_PLANNER_TRANSPORT__DO_NOT_INFER_SCIENCE_CAPABILITY_FAILURE__FROZEN_CONSERVATIVE_RULE_STILL_FINALIZES_ALL_THREE_AS_ZERO",
+  "accounting": {
+    "finalized_slots": 3,
+    "successes": 0,
+    "failures": 3,
+    "remaining_slots": 207,
+    "successes_still_required": 124,
+    "global_remaining_success_fraction_required": 0.5990338164251208,
+    "public_storage_feasible_slots_initial": 171,
+    "public_storage_feasible_slots_spent": 3,
+    "public_storage_feasible_slots_remaining": 168,
+    "public_storage_feasible_remaining_success_fraction_if_oversized_all_zero": 0.7380952380952381
+  },
+  "next_required_action": "DELETE_POLLINATIONS_AS_EXECUTION_ROUTE__PROVE_A_ZERO_INCREMENTAL_GENERAL_COGNITION_SUBSTRATE_ON_REPRESENTATIVE_LONG_SYNTHETIC_SCIENCE_PROMPTS__ONLY_THEN_AUTHORIZE_NEW_UNSPENT_SLOT_IDS",
+  "hard_rules": [
+    "NO_RETRY_OF_THE_THREE_SPENT_SLOT_IDS",
+    "NO_SCIENCE_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_MORE_TERMINAL_SCIENCE_SPEND_UNTIL_REPLACEMENT_SUBSTRATE_INDEPENDENTLY_PASSES_REPRESENTATIVE_LONG_PROMPT_PREFLIGHT",
+    "TRANCHE1_AUTHORITY_REVOKED"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
