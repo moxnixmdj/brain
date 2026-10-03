@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_RESULT_INDEPENDENT_ADJUDICATION_V1",
   "date": "2026-10-03",
-  "status": "INDEPENDENT_PASS__192_OF_192__ALL_THREE_SURFACES__FAILURE_SEMANTICS_TRANSPORT_OBSERVED__ONE_REALITY_UNIT_CONSUMED",
+  "status": "REVOKED_AS_ACCEPTANCE_ADJUDICATION__ARTIFACT_INTEGRITY_VERIFIED_BUT_PREAUTHORITY_EXECUTION_INADMISSIBLE__DIAGNOSTIC_ONLY",
   "source": {
     "repository": "moxnixmdj/verification-capsule-runner",
     "pull_request": 1250,
@@ -28,10 +28,19 @@
     "fresh_reality_units_consumed": 1,
     "terminal_v3_replayed": 0,
     "incremental_spend_usd": 0,
-    "transport_fact_adjudicated": true
+    "transport_fact_adjudicated": false
   },
   "acceptance_credit_delta": 0,
   "family_credit_delta": 0,
   "promotion_authority": false,
-  "next": "RUN_FROZEN_P1_MINIMUM_CUT_ACCEPTANCE_REDUCTION__LIFT_QUARANTINE_ONLY_IF_ALL_THREE_REQUIREMENTS_ARE_EXACTLY_DISCHARGED_AND_NO_OTHER_CURRENT_P1_RESIDUAL_EXISTS"
+  "next": "PRESERVE_ARTIFACT_AS_DIAGNOSTIC_PROVENANCE_ONLY__DO_NOT_DISCHARGE_MINIMUM_CUT_FROM_THIS_RECEIPT",
+  "admissibility": {
+    "artifact_integrity_verified": true,
+    "execution_order_admissible": false,
+    "canonical_active_authority_present_before_execution": false,
+    "acceptance_credit_allowed": false,
+    "quarantine_lift_allowed": false,
+    "retroactive_authorization_allowed": false
+  },
+  "capability_credit_delta": 0
 }
