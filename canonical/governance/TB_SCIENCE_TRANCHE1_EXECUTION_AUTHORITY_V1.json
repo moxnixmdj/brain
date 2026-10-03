@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANCHE1_EXECUTION_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__THREE_FROZEN_SLOTS_ONLY",
+  "status": "REVOKED_AFTER_THREE_AUTHORIZED_SLOTS_FINALIZED__0_SUCCESS__3_FINAL_ZERO__SHARED_SCIENCE_PLANNER_ERROR",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "predicate": "TB_SCIENCE_GE_58_7",
@@ -48,12 +48,18 @@
     "denominator": "FIXED_210"
   },
   "auto_revoke_after_all_authorized_slots_finalized": true,
-  "terminal_results_observed": 0,
+  "terminal_results_observed": 3,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "execution_authority": true,
+  "execution_authority": false,
   "promotion_authority": false,
   "incremental_spend_usd": 0,
   "independent_verification": "canonical/verification/TB_SCIENCE_TRANCHE1_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-  "activation_rule": "ONLY_AUTHORIZED_SLOT_IDS_MAY_RUN__AUTHORITY_AUTO_REVOKES_AFTER_ALL_THREE_FINALIZE"
+  "activation_rule": "ONLY_AUTHORIZED_SLOT_IDS_MAY_RUN__AUTHORITY_AUTO_REVOKES_AFTER_ALL_THREE_FINALIZE",
+  "finalized_slot_count": 3,
+  "success_count": 0,
+  "final_zero_count": 3,
+  "result_receipt": "canonical/verification/TB_SCIENCE_TRANCHE1_RESULT_20261003_V1.json",
+  "revocation_reason": "AUTO_REVOKE_AFTER_ALL_THREE_AUTHORIZED_SLOTS_FINALIZED",
+  "next": "LOCALIZE_SHARED_SCIENCE_PLANNER_ERROR_FROM_CONTENT_ADDRESSED_TRANCHE1_ARTIFACTS__REPAIR_AND_INDEPENDENTLY_VERIFY_ZERO_CASE_OR_SPENT_FIXTURE_PATH__NO_NEW_TERMINAL_SLOT_AUTHORITY_BEFORE_CAUSAL_REPAIR"
 }
