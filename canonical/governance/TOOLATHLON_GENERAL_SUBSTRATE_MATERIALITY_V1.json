@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TOOLATHLON_GENERAL_SUBSTRATE_MATERIALITY_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_COUNTERFACTUAL_MATERIALITY_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__GENERAL_SUBSTRATE_MATERIALITY_VERIFIED__ZERO_CREDIT",
   "canonical_base_commit": "8242ea9193c26b3b867bd5564d6236394537b25c",
   "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
@@ -44,5 +44,13 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1197,
+    "workflow_run_id": 37094763571,
+    "verifier_merge_sha": "7b595125425710fa67ebc6dc76b4d8ff8ea88a90",
+    "conclusion": "success"
+  },
+  "verified_implication": "FOR_THIS_EXACT_BRAIN_OWNED_TOOLATHLON_ADAPTER__GENERAL_SUBSTRATE_TEST_PASS_MAY_BE_TRUE_FOR_SOURCE_GATE_V2__BRAIN_SELECTION_CONTROL_IS_CAUSALLY_LOAD_BEARING"
 }
