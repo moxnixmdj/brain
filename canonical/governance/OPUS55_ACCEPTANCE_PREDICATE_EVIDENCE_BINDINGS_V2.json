@@ -201,7 +201,9 @@
         "receipt": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
         "receipt_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4",
         "formal_completeness": true,
-        "open_internet_tool_identity_completeness_claimed": false
+        "open_internet_tool_identity_completeness_claimed": false,
+        "all_admissible_target_inputs_proved": true,
+        "verification_interpretation": "INDEPENDENT_UNIVERSAL_SCOPE_PROVED_FOR_THE_FROZEN_HIDDEN_TOOL_PROTOCOL__COMPILED_AS_ALL_ADMISSIBLE_TARGET_INPUTS_PROVED_FOR_THIS_PREDICATE_SCOPE"
       },
       "prior_sample_evidence": {
         "prior_state": "PROVED",
