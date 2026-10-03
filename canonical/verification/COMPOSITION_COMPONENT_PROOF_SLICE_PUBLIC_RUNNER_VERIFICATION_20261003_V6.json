@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_SLICE_PUBLIC_RUNNER_VERIFICATION_20261003_V6",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__4_OF_12_CURRENT_SOURCE_COMPONENTS_SCOPED_PROVED__8_OPEN__ZERO_PARENT_OR_ACCEPTANCE_CREDIT",
+  "candidate_input": {
+    "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V6.json",
+    "git_blob_sha": "cb15018cd7a913bdf250d1cef884d4b1005d3d67"
+  },
+  "candidate_projection": {
+    "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_CANDIDATE_V6.json",
+    "git_blob_sha": "317b3f6d58e5294577eb645c9fe5c07235efdde1"
+  },
+  "slicer": {
+    "path": "canonical/runtime/composition_component_proof_slicer_v1.py",
+    "git_blob_sha": "0e5028d8547bc3e17e7128b6311f734ac30a16d8"
+  },
+  "bound_component_verifications": {
+    "memory": {
+      "path": "canonical/verification/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "88783df170065d3ff23e4ff3c2d2ab30ec7bc314"
+    },
+    "recovery": {
+      "path": "canonical/verification/COMPOSITION_RECOVERY_SCOPE_COMPLETE_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "2c18b5029b1a953488b2aefacb00f67b88d27659"
+    },
+    "delegation": {
+      "path": "canonical/verification/COMPOSITION_DELEGATION_SCOPE_COMPLETE_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "367eaa457c930d5bfcdb44778358ca665d999ae7"
+    },
+    "tool_discovery": {
+      "path": "canonical/verification/COMPOSITION_TOOL_DISCOVERY_SCOPE_COMPLETE_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "936057358b55a98f6510a8e6ca9062ab903ea83a"
+    }
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1370,
+    "head_sha": "cb77a81f1706dec530f5fa6921510edceaf32c1c",
+    "merge_commit": "f96ba2ae1ac56576ef875d459a586c1bd3af4f38",
+    "workflow_name": "Verify Brain Composition slice V6",
+    "workflow_run_id": 37131781283,
+    "workflow_job_id": 111228153283,
+    "conclusion": "success"
+  },
+  "verified": {
+    "interface_count": 12,
+    "scoped_proved_count": 4,
+    "open_count": 8,
+    "scoped_proved_components": [
+      "memory",
+      "recovery",
+      "delegation",
+      "tool discovery"
+    ],
+    "historical_tool_discovery_receipt_reused": false,
+    "coding_open": true,
+    "debugging_open": true,
+    "research_open": true,
+    "tool_use_open": true,
+    "artifact_creation_open": true,
+    "browser_computer_action_open": true,
+    "evidence_synthesis_open": true,
+    "artifact_production_open": true,
+    "all_used_component_interfaces_scoped_proved": false,
+    "parent_composition_open": true
+  },
+  "causal_delta": {
+    "prior_current_slice": "3_OF_12_MEMORY_RECOVERY_DELEGATION",
+    "new_verified_slice": "4_OF_12_MEMORY_RECOVERY_DELEGATION_TOOL_DISCOVERY",
+    "proved_component_delta": 1,
+    "open_component_delta": -1,
+    "strict_opus55_acceptance_delta": 0,
+    "family_acceptance_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_PARENT_MULTI_CAPABILITY_COMPOSITION_ACCEPTANCE",
+    "NO_CODING_OR_GENERAL_DEBUGGING_COMPONENT_CREDIT",
+    "NO_OTHER_OPEN_COMPONENT_NEW_CREDIT",
+    "NO_STRICT_OPUS55_ACCEPTANCE_DELTA",
+    "NO_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT_DELTA",
+    "NO_TERMINAL_REPLAY",
+    "NO_FRESH_REALITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
