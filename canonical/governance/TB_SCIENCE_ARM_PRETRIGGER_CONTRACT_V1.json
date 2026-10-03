@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ARM_PRETRIGGER_CONTRACT_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_PROCESS_SAFETY_CONTRACT__ZERO_CREDIT",
+  "objective": "Prevent an authorized Science slot from being consumed by an unverified trigger-payload shape.",
+  "required_fields": [
+    "schema",
+    "date",
+    "status",
+    "execution_authority",
+    "authority_blob",
+    "current_terminal_authority_blob",
+    "brain_authority_merge_sha",
+    "authority_independent_verification",
+    "execution_workflow_blob",
+    "carrier_preflight",
+    "authorized_slot_id",
+    "task_name",
+    "task_digest",
+    "retries",
+    "replacement",
+    "denominator",
+    "required_successes",
+    "finalized_failures_before_execution",
+    "remaining_failures_before_fail_lock",
+    "preflight_conclusion",
+    "incremental_spend_usd",
+    "hard_rules"
+  ],
+  "rules": [
+    "CREATE_NONTRIGGERING_ARM_CANDIDATE_FIRST",
+    "INDEPENDENTLY_VERIFY_ARM_CANDIDATE_EXACT_BYTES_AND_ALL_REQUIRED_FIELDS",
+    "TRIGGER_ARM_FILE_MUST_BE_BYTE_IDENTICAL_TO_VERIFIED_ARM_CANDIDATE_EXCEPT_FILENAME",
+    "NO_TERMINAL_EXECUTION_WORKFLOW_MAY_TRIGGER BEFORE ARM CANDIDATE VERIFICATION PASS",
+    "NO_SAME_SLOT_REPLAY_AFTER_ANY_AUTHORIZED_TRIGGER_FINALIZES"
+  ],
+  "source_failure": "canonical/verification/TB_SCIENCE_CANARY_V3_RESULT_INDEPENDENT_VERIFICATION_20261003_V1.json",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
