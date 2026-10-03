@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V3_GLOBAL_OPTIMALITY_FALSIFICATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_FALSIFICATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Falsify the current Dynamic V3 program-side universal refinement where an unqueried complete discovery source can contain a cheaper sufficient unknown-identity route than a currently visible sufficient route.",
+  "base_main_commit": "1afab11f371b9bea130ad2c931fd35ee106c9f86",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "affected_authority": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json",
+  "affected_runtime": "canonical/runtime/tool_discovery_dynamic_refinement_v1.py",
+  "candidate_under_test": "canonical/runtime/tool_discovery_dynamic_candidate_v3.py",
+  "evaluator_under_test": "canonical/runtime/tool_discovery_dynamic_proof_v3.py",
+  "counterexample": {
+    "required_capability": "CAP_A",
+    "visible_route": {
+      "tool_id": "T0",
+      "declared_cost": 10.0,
+      "current_positive_evidence": true,
+      "sufficient": true
+    },
+    "unqueried_discovery_source": {
+      "source_id": "S0",
+      "available": true,
+      "complete_interface_member": true,
+      "contains": {
+        "tool_id": "T1",
+        "declared_cost": 1.0,
+        "sufficient": true
+      }
+    },
+    "v3_first_action": {
+      "action": "SELECT",
+      "tool_id": "T0"
+    },
+    "required_global_optimality_action": {
+      "action": "DISCOVER",
+      "source_id": "S0"
+    }
+  },
+  "root_cause": [
+    "V3 iterates currently visible admissible tools and may PROBE or SELECT before examining unqueried discovery_sources.",
+    "The V3 evaluator function _best(case, stage, visible) excludes every tool identity not already in visible, so its oracle cannot detect a globally cheaper sufficient undiscovered route.",
+    "The activated conditional refinement therefore proves at most local optimality over the current visible catalog, not global valid-route top1 over a complete unknown-identity discovery interface."
+  ],
+  "falsified_claims": [
+    "TOOL_DISCOVERY_DYNAMIC_REFINEMENT_V1::LEAST_COST_EVIDENCE_SUPPORTED_SELECTION_AS_GLOBAL_ROUTE_GUARANTEE",
+    "TOOL_DISCOVERY_DYNAMIC_REFINEMENT_V1::PROGRAM_SIDE_FORMALISM_RESIDUAL_REDUCED_TO_ONLY_EXTERNAL_INTERFACE_INSTANCE"
+  ],
+  "preserved_claims": [
+    "RAW_180_OF_180_LEGACY_TERMINAL_SAMPLE_REMAINS_VALID_FOR_ITS_EXECUTED_SAMPLE",
+    "RAW_DYNAMIC_V3_FINITE_GRID_RESULTS_REMAIN_VALID_FOR_THEIR_EXECUTED_CASES",
+    "COMPLETE_DISCOVERY_INTERFACE_INSTANCE_IS_STILL_A_REAL_REQUIRED_EXTERNAL_FACT",
+    "TARGET_SEMANTICS_ARE_NOT_WEAKENED"
+  ],
+  "repair": {
+    "candidate": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "tests": "canonical/tests/test_tool_discovery_dynamic_candidate_v4.py",
+    "invariant": "ALL_AVAILABLE_UNQUERIED_AUTHORITATIVE_DISCOVERY_SOURCES_ARE_EXHAUSTED_BEFORE_ANY_PROBE_OR_SELECT",
+    "effect": "AFTER_COMPLETE_DISCOVERY__COST_ORDERED_PROBING_CAN_ESTABLISH_GLOBAL_LEAST_COST_SUFFICIENT_ROUTE_RELATIVE_TO_THE_VERIFIED_COMPLETE_INTERFACE"
+  },
+  "hard_rules": [
+    "DO_NOT_PROMOTE_V4_FROM_THIS_FALSIFICATION_ALONE",
+    "DO_NOT_REVOKE_EXECUTED_SAMPLE_RECEIPTS_OUTSIDE_THE_FALSIFIED_GLOBAL_SCOPE_CLAIM",
+    "INDEPENDENTLY_VERIFY_THE_COUNTEREXAMPLE_AND_V4_REGRESSION_TESTS",
+    "KEEP_ACCEPTANCE_AT_3_OF_19_AND_8_OF_38_UNTIL_SEPARATE_ACCEPTANCE_REDUCTION"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
