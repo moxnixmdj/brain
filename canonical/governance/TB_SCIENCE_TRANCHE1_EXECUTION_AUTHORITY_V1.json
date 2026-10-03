@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANCHE1_EXECUTION_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_PENDING_INDEPENDENT_AUTHORITY_VERIFICATION__EXECUTION_FALSE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "authorized_slot_ids": [
+    "terminal-bench-science/genomic-model-ranking::trial-0",
+    "terminal-bench-science/mri-harmonization::trial-0",
+    "terminal-bench-science/navigation-sensor-calibration::trial-0"
+  ],
+  "exact_inputs": {
+    "manifest_path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "controller_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "controller_blob": "8ab8287fdb6a9b63b9fe2d2addde731486c89d1e",
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_blob": "17472fd2b01b164fbb180aecfc04385b55b11499",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "harbor_transport_blob": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "reducer_blob": "3b48ea534d606cf47a8321b56427353066393577",
+    "harbor_version": "0.23.0",
+    "execution_repository": "moxnixmdj/verification-capsule-runner",
+    "execution_workflow": ".github/workflows/execute-tb-science-tranche1-v1.yml",
+    "execution_workflow_blob": "bf79ac405b0d88d6926383db2e67e513a95f77d3",
+    "execution_capsule_merge_sha": "32248ceb1e6965abb3ec56b61210590ef6da0a8d",
+    "preflight_run_id": 37101487121,
+    "preflight_job_id": 111141731934
+  },
+  "carrier": {
+    "runner": "ubuntu-24.04",
+    "harbor_attempts_per_job": 1,
+    "harbor_max_retries": 0,
+    "agent_timeout_multiplier": 0.6,
+    "environment_build_timeout_multiplier": 1,
+    "verifier_timeout_multiplier": 1,
+    "job_timeout_minutes": 350,
+    "incremental_spend_usd": 0
+  },
+  "result_semantics": {
+    "success": "EXACT_HARBOR_VERIFIER_REWARD_GE_1_0",
+    "every_other_final_state": "ZERO",
+    "duplicate_credit": false,
+    "retry_credit": false,
+    "replacement_credit": false,
+    "denominator": "FIXED_210"
+  },
+  "auto_revoke_after_all_authorized_slots_finalized": true,
+  "terminal_results_observed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0
+}
