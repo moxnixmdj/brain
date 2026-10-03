@@ -12,7 +12,6 @@ from typing import Any
 from canonical.runtime import astra_runtime
 from canonical.runtime.harbor_command_policy import validate_environment_command
 from canonical.runtime.harbor_environment_transport import HarborEnvironmentTransport
-from canonical.runtime.shared_decision_primitives import ResearchAction, next_research_action
 
 try:
     from harbor.agents.base import BaseAgent
@@ -160,29 +159,25 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             observations.append(rejected)
             continue
 
-        action_rows = [
-            ResearchAction(
-                action_id=row["action_id"],
-                covers=frozenset(row["covers"]),
-                cost=1.0,
-                reliability=1.0,
-                verified=True,
-            )
-            for row in candidates
-        ]
-        decision = next_research_action(requirements, resolved, action_rows)
-        if decision.status != "ACT" or decision.action_id is None:
+        # Candidate coverage is substrate-proposed metadata, not a verified semantic fact.
+        # Brain may use it only as a control heuristic; it never becomes acceptance evidence.
+        scored = []
+        for row in candidates:
+            new = len(set(row["covers"]) & unresolved_set)
+            if new:
+                scored.append((-new, row["action_id"], row))
+        if not scored:
             blocked = {
                 "cycle": cycle,
                 "kind": "BRAIN_RESEARCH_SELECTION_BLOCKED",
-                "reason": decision.reason,
-                "unresolved": sorted(decision.unresolved),
+                "reason": "NO_STRUCTURALLY_ADMITTED_PROPOSAL_COVERS_UNRESOLVED_REQUIREMENT",
+                "unresolved": sorted(unresolved_set),
             }
             trace.append(blocked)
             observations.append(blocked)
             continue
-
-        chosen = next(row for row in candidates if row["action_id"] == decision.action_id)
+        scored.sort(key=lambda x:(x[0],x[1]))
+        chosen = scored[0][2]
         transport = HarborEnvironmentTransport(environment)
         action_receipt = await transport.exec(chosen["command"], timeout_sec=180)
         action_observed = {
@@ -207,7 +202,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "kind": "BRAIN_SELECTED_RESEARCH_ACTION",
             "action_id": chosen["action_id"],
             "covers": chosen["covers"],
-            "selection_reason": decision.reason,
+            "selection_reason": "MAX_DECLARED_UNRESOLVED_COVERAGE_THEN_ACTION_ID__STRUCTURAL_CONTROL_ONLY",
             "action_result": action_observed,
             "verify_result": verify_observed,
             "coverage_promoted": verified,
