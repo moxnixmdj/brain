@@ -35,5 +35,21 @@ jobs:
           python-version: "3.12"
       - name: Run adversarial tests
         run: python -m unittest canonical.tests.test_p1_composite_proof_role_verifier_v1 -v
-      - name: Evaluate live P1 composite role candidate
-        run: python canonical/runtime/p1_composite_proof_role_verifier_v1.py
+      - name: Reproduce fail-closed live P1 composite quarantine
+        run: |
+          python - <<'PY'
+          import json
+          from canonical.runtime.p1_composite_proof_role_verifier_v1 import evaluate
+          out=evaluate()
+          assert out["pass"] is False, out
+          assert out["quarantine_lift_eligible"] is False, out
+          assert "V4_DROP_PROVENANCE_MUTATION_SURVIVES_SCORER" in out["errors"], out
+          assert "V4_UNFALSIFIABLE_DIAGNOSIS_MUTATION_SURVIVES_SCORER" in out["errors"], out
+          assert out["v4_drop_provenance_counterexample"]["counterexample_holds"] is True, out
+          assert out["v4_unfalsifiable_diagnosis_counterexample"]["counterexample_holds"] is True, out
+          assert out["terminal_results_replayed"] == 0, out
+          assert out["new_reality_units_consumed"] == 0, out
+          assert out["capability_credit_delta"] == 0, out
+          assert out["family_credit_delta"] == 0, out
+          print(json.dumps(out, indent=2, sort_keys=True))
+          PY
