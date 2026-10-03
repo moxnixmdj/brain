@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CANARY_V2_TIMEOUT_LOCALIZATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CAUSAL_LOCALIZATION__NONTERMINAL_REPAIR_STAGED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "failed_terminal_receipt": {
+    "workflow_run_id": 37106127198,
+    "workflow_job_id": 111154893275,
+    "artifact_id": 11267982635,
+    "artifact_zip_sha256": "ffe482ebd229c01e0f3b50f3a6bb9c30bb5dfe027ef011a402da8ac447360569",
+    "consumed_slot": "terminal-bench-science/baseline-free-localization::trial-0",
+    "final_reward": 0,
+    "exception_class": "SciencePlannerError",
+    "exception_message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "slot_replay_forbidden": true
+  },
+  "observed_local_server_timing": {
+    "request_selected_slot_at_server_s": 28.112375,
+    "prompt_tokens": 1552,
+    "prompt_processing_complete_at_server_s": 153.311698,
+    "prompt_processing_s": 125.2,
+    "prompt_tokens_per_s": 12.4,
+    "decoded_tokens_before_client_deadline": 321,
+    "decoded_checkpoint_at_server_s": 207.844937,
+    "approximate_generation_s": 54.53,
+    "approximate_generation_tokens_per_s": 5.89,
+    "server_cancel_observed_at_s": 209.151814,
+    "prior_client_timeout_s": 180,
+    "causal_alignment": "REQUEST_START_PLUS_180_SECONDS_APPROXIMATELY_EQUALS_SERVER_CANCELLATION_TIME"
+  },
+  "causal_conclusion": [
+    "THE_CANARY_FAILED_BEFORE_ANY_VERIFIER_RESULT_BECAUSE_THE_CLIENT_TIMEOUT_EXPIRED_WHILE_THE_PINNED_LOCAL_MODEL_WAS_STILL_GENERATING",
+    "THE_ARTIFACT_CONTAINS_NO_EVIDENCE_OF_MALFORMED_TOOL_ARGUMENTS_OR_SCIENCE_COMMAND_FAILURE_FOR_THIS_SLOT",
+    "THE_LOAD_BEARING_REPAIR_TARGET_IS_LOCAL_PROPOSAL_LATENCY_BUDGET_AND_NONESSENTIAL_THINKING_GENERATION__NOT_TERMINAL_TASK_RETRY"
+  ],
+  "selected_nonterminal_repair": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "agent_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "max_generation_tokens": 512,
+    "request_timeout_s": 240,
+    "measured_worst_case_budget_at_observed_rates_s": 212.13,
+    "nominal_margin_s": 27.87,
+    "rationale": "512 / 5.89 + 125.20 = 212.13 seconds before small transport overhead; disabling thinking is expected to reduce actual generation burden further",
+    "terminal_slot_authority_granted": false
+  },
+  "verification_requirements": [
+    "UNIT_TEST_REQUEST_PAYLOAD_BINDS_ENABLE_THINKING_FALSE_MAX_GENERATION_TOKENS_AND_DEFAULT_TIMEOUT",
+    "INDEPENDENT_NONTERMINAL_PINNED_QWEN_TOOL_CALL_PREFLIGHT_ON_THE_EXACT_REPAIRED_BYTES",
+    "NO_NEW_TB_SCIENCE_TERMINAL_SLOT_BEFORE_THE_NONTERMINAL_REPAIR_RECEIPT_PASSES"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_TB_SCIENCE_TASK_WOULD_HAVE_PASSED_WITH_MORE_TIME",
+    "NO_CLAIM_512_TOKENS_IS_SUFFICIENT_FOR_ALL_FUTURE_TASKS_BEFORE_NONTERMINAL_VERIFICATION",
+    "NO_RECOVERY_CREDIT_FOR_THE_CONSUMED_CANARY_SLOT",
+    "NO_FAMILY_OR_CAPABILITY_CREDIT"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
