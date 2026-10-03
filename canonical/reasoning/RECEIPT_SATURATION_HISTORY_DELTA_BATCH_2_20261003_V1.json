@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_RECEIPT_SATURATION_HISTORY_DELTA_BATCH_V1",
+  "batch": 2,
+  "windows": [
+    {
+      "base": "d82e89890d53b0f94d2b331e96b46bef3d6a4687",
+      "head": "0805ddba2886370cca8556ec9f32f61f8e8256e2",
+      "ahead_by": 22,
+      "file_count": 17
+    },
+    {
+      "base": "0805ddba2886370cca8556ec9f32f61f8e8256e2",
+      "head": "1789fd5313989875b34e0c6d0325cb1e507ffc1d",
+      "ahead_by": 7,
+      "file_count": 6
+    },
+    {
+      "base": "1789fd5313989875b34e0c6d0325cb1e507ffc1d",
+      "head": "4e3ddcabb8d3a6356dbd39cc7106acc0f9c89232",
+      "ahead_by": 8,
+      "file_count": 4
+    },
+    {
+      "base": "4e3ddcabb8d3a6356dbd39cc7106acc0f9c89232",
+      "head": "22baab25d3eceecb140284f0fb4c94588fafeb20",
+      "ahead_by": 47,
+      "file_count": 27
+    },
+    {
+      "base": "22baab25d3eceecb140284f0fb4c94588fafeb20",
+      "head": "1161b95a213d3667e8c87a2bc626036fe4bc1ba4",
+      "ahead_by": 7,
+      "file_count": 7
+    },
+    {
+      "base": "1161b95a213d3667e8c87a2bc626036fe4bc1ba4",
+      "head": "084265f6f9e892f8aae1ce03a766ba6c16f1f81c",
+      "ahead_by": 3,
+      "file_count": 2
+    },
+    {
+      "base": "084265f6f9e892f8aae1ce03a766ba6c16f1f81c",
+      "head": "b082d75a5526da53c11ed32d840fec61cb315ca4",
+      "ahead_by": 6,
+      "file_count": 5
+    },
+    {
+      "base": "b082d75a5526da53c11ed32d840fec61cb315ca4",
+      "head": "516b44a3b97b5ff58bb4e0c369ed0fb7f3121fd0",
+      "ahead_by": 6,
+      "file_count": 5
+    },
+    {
+      "base": "516b44a3b97b5ff58bb4e0c369ed0fb7f3121fd0",
+      "head": "dfe81dbbb7f20ebddcaf2b0674d0c68ff7d655e1",
+      "ahead_by": 6,
+      "file_count": 3
+    },
+    {
+      "base": "dfe81dbbb7f20ebddcaf2b0674d0c68ff7d655e1",
+      "head": "3aad32da466c56ce7717cf8b1995caa17e437e78",
+      "ahead_by": 3,
+      "file_count": 2
+    }
+  ],
+  "changed_paths": [
+    ".github/workflows/verify-current-terminal-scheduling-world-v1.yml",
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/action_intents/2026-10-03_ACTIVATE_TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V1.json",
+    "canonical/action_intents/2026-10-03_BIND_RESIDUAL_WITNESS_RETRIEVAL_BACKENDS_V1.json",
+    "canonical/action_intents/2026-10-03_INSTALL_RESIDUAL_WITNESS_RETRIEVAL_COMPILER_V1.json",
+    "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/governance/CURRENT_30_INFORMATION_DOMINANCE_ACTIVATION_V1.json",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "canonical/governance/CURRENT_TERMINAL_INFORMATION_DOMINANCE_V1.json",
+    "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V1.json",
+    "canonical/governance/P1_UNIVERSAL_GENERATOR_TRANSPORT_SCOPE_REDUCTION_CANDIDATE_V1.json",
+    "canonical/governance/P1_UNIVERSAL_GENERATOR_TRANSPORT_THEOREM_CANDIDATE_V1.json",
+    "canonical/governance/P1_UNIVERSAL_SCOPE_RESTORATION_V9_CANDIDATE.json",
+    "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+    "canonical/governance/RESIDUAL_WITNESS_BACKEND_CONTRACT_V1.json",
+    "canonical/governance/RESIDUAL_WITNESS_RETRIEVAL_CONTRACT_V1.json",
+    "canonical/governance/TB_SCIENCE_CANARY_V3_FINAL_ZERO_RECONCILIATION_V1.json",
+    "canonical/governance/TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V2.json",
+    "canonical/governance/TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_REPAIR_V1.json",
+    "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_AUTHORITY_V3.json",
+    "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_CANDIDATE_V3.json",
+    "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_CANDIDATE_V4.json",
+    "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json",
+    "canonical/governance/TOOL_DISCOVERY_APT_V4_TRANSFERABLE_INTERFACE_INSTANCE_CANDIDATE_V1.json",
+    "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V1.json",
+    "canonical/governance/TOOL_DISCOVERY_SIX_CLASS_RESIDUAL_COMPRESSION_V1.json",
+    "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
+    "canonical/runtime/bound_capabilities/research_query_focus.py",
+    "canonical/runtime/current_terminal_information_dominance_v1.py",
+    "canonical/runtime/current_terminal_scheduling_world_v1.py",
+    "canonical/runtime/p1_universal_generator_transport_theorem_v1.py",
+    "canonical/runtime/p1_universal_scope_restoration_v9.py",
+    "canonical/runtime/residual_witness_backend_router_v1.py",
+    "canonical/runtime/residual_witness_retrieval_compiler_v1.py",
+    "canonical/runtime/tool_discovery_apt_v4_transferable_interface_instance_v1.py",
+    "canonical/runtime/tool_discovery_six_class_residual_compression_v1.py",
+    "canonical/tests/test_current_terminal_information_dominance_v1.py",
+    "canonical/tests/test_current_terminal_scheduling_world_v1.py",
+    "canonical/tests/test_open_research_query_focus_relevance.py",
+    "canonical/tests/test_p1_universal_generator_transport_theorem_v1.py",
+    "canonical/tests/test_p1_universal_scope_restoration_v9.py",
+    "canonical/tests/test_residual_witness_backend_router_v1.py",
+    "canonical/tests/test_residual_witness_retrieval_compiler_v1.py",
+    "canonical/tests/test_tool_discovery_apt_complete_interface_instance_v1.py",
+    "canonical/tests/test_tool_discovery_apt_v4_transferable_interface_instance_v1.py",
+    "canonical/tests/test_tool_discovery_six_class_residual_compression_v1.py",
+    "canonical/verification/CURRENT_30_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/CURRENT_TERMINAL_SCHEDULING_WORLD_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_SCOPE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/P1_V9_CANONICAL_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/RESIDUAL_WITNESS_BACKEND_ROUTER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/RESIDUAL_WITNESS_RETRIEVAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/TB_SCIENCE_CANARY_V3_FINAL_ZERO_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/TB_SCIENCE_ONE_SLOT_CANARY_V3_ACTIVE_AUTHORITY_INDEPENDENT_VERIFICATION_20261003_V1.json",
+    "canonical/verification/TB_SCIENCE_ONE_SLOT_CANARY_V3_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/TB_SCIENCE_PATCHED_REAL_HARBOR_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/verification/TOOL_DISCOVERY_SIX_CLASS_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  ],
+  "previous_paths": [],
+  "status": "COMPLETE_UNTRUNCATED_COMPARE_WINDOWS"
+}
