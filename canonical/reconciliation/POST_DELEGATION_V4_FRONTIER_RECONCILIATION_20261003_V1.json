@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_POST_DELEGATION_V4_FRONTIER_RECONCILIATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "RECONCILED_FROM_INDEPENDENT_VERIFIED_CANONICAL_EVIDENCE__ZERO_CREDIT",
+  "canonical_base_commit": "1afab11f371b9bea130ad2c931fd35ee106c9f86",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "action_intent": "canonical/action_intents/2026-10-03_POST_DELEGATION_V4_FRONTIER_RECONCILIATION_V1.json",
+  "reasoning_receipt": "canonical/reasoning/2026-10-03_POST_DELEGATION_V4_FRONTIER_RECONCILIATION_V1.json",
+  "corrected_frontier": {
+    "acceptance_families": {
+      "closed": 3,
+      "open": 16,
+      "total": 19
+    },
+    "atomic_predicates": {
+      "proved": 8,
+      "unresolved": 30,
+      "total": 38
+    },
+    "delegation_family": "INDEPENDENTLY_CLOSED",
+    "post_delegation_v4_corpus_freeze": "COMPLETE_INDEPENDENTLY_REVIEWED",
+    "post_delegation_proof_atom_recompile": "COMPLETE_INDEPENDENTLY_REVIEWED",
+    "p1": "QUARANTINED__ZERO_REALITY_SOURCES_EXHAUSTED__REOPEN_ONLY_ON_NEW_ADMISSIBLE_INFORMATION",
+    "terminal_goal_achieved": false
+  },
+  "scheduler_deletions": [
+    "POST_DELEGATION_PROOF_ATOM_RECOMPILE_PENDING",
+    "V4_PRIVATE_CORPUS_FREEZE_PENDING",
+    "FRESH_TERMINAL_REPLAY_FOR_ALREADY_FROZEN_ACCEPTANCE_RESULTS",
+    "CURRENT_TB4_THRESHOLD_CASE_EXECUTION",
+    "COMPOSITION_SLICER_RERUN_WITH_UNCHANGED_INPUT_RECEIPTS"
+  ],
+  "highest_leverage_current_residual": {
+    "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "minimum_missing_fact": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+    "state": "OPEN",
+    "allowed_next": "SEARCH_OR_BIND_ONE_CONTENT_ADDRESSED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE__THEN_SEPARATE_ACCEPTANCE_REDUCTION__NO_NEW_ACCEPTANCE_CASES"
+  },
+  "parallel_zero_reality_residuals": [
+    {
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "state": "SLICER_EXHAUSTED_2_OF_12",
+      "allowed_next": "SEARCH_EXISTING_CONTENT_ADDRESSED_EVIDENCE_ONLY_FOR_NEW_CLAIM_BOUND_SCOPED_ACCEPTANCE_RECEIPTS_FOR_TEN_OPEN_COMPONENTS"
+    },
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "state": "CURRENT_TB4_THRESHOLD_ROUTE_IMPOSSIBLE",
+      "allowed_next": "DELETE_CURRENT_THRESHOLD_EXECUTION_ROUTE__SEARCH_STRONGER_PROOF_OR_DIFFERENT_VALID_ACCEPTANCE_ROUTE_WITHOUT_CASE_REPLAY"
+    }
+  ],
+  "evidence_sha_bindings": {
+    "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "d04f2a8c5594d261158835db1cae3822411b6b23",
+    "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V2.json": "1daba02240d3bbfc3881990a59892186d1a3887e",
+    "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V2.json": "a0eada020f23e33cde569cbf75bdc7fed1317b07",
+    "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_ADJUDICATION_20261003_V2.json": "3fd561cd54897ca32afa89ce3a5a34dd8b8bdaac",
+    "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CLOSURE_20261003_V2.json": "a9e13f07d9e659c3e7ca133ee3af2a97485c753e",
+    "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_INDEPENDENT_SESSION_REVIEW_20261003_V2.json": "7f535a0a7521b6871d62bd570dd9a50e5549f5b1",
+    "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json": "44faeb24bdc2d9189b7c0de1b1e2be9b1210aeeb",
+    "canonical/verification/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "5fcdc5ae35f51c40f312edbe5727284c9f6ca3dd",
+    "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json": "a7b0c692251b92819007c581b9fe84b75960cab7",
+    "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICER_EXHAUSTION_V1.json": "f27ea2a2d5de56b0ed4acb77e1574bc2bba44a96"
+  },
+  "hard_nonclaims": [
+    "NO_NEW_FAMILY_CREDIT",
+    "NO_NEW_CAPABILITY_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_CLAIM_THAT_TOOL_DISCOVERY_COMPLETE_INTERFACE_INSTANCE_ALREADY_EXISTS"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
