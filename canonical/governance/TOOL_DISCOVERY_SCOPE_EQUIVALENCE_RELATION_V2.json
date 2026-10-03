@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_SCOPE_EQUIVALENCE_RELATION_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_UNIVERSAL_COMMON_TOOL_AUTHORITY_SCOPE_RELATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_behavior": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+  "objective": "Relate the frozen matched Brain/Opus Tool Discovery authority to an arbitrary finite explicit common tool boundary and prove that the common-authority discovery adapter preserves the entire boundary while hiding capability truth until safe probes.",
+  "frozen_authority": {
+    "family_protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "family_protocol_git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "behavior_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "behavior_registry_git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "matched_protocol": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+    "matched_protocol_git_blob_sha": "49181a12362ba3d640fc18d0251901dd49dce929",
+    "matched_superportfolio": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+    "matched_superportfolio_git_blob_sha": "d9ac894594ebcd2883520f7b7977a3548420541c",
+    "absolute_scope_firewall": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+    "absolute_scope_firewall_git_blob_sha": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d"
+  },
+  "program": {
+    "v4": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "v4_git_blob_sha": "e614d0bed8e291e31f57189cd6f0f75aa39b0f74",
+    "common_authority_adapter": "canonical/runtime/tool_discovery_common_authority_adapter_v1.py",
+    "common_authority_adapter_git_blob_sha": "a04e252e3417dd17cfbac985f59b4619849ed83d",
+    "adapter_tests": "canonical/tests/test_tool_discovery_common_authority_adapter_v1.py",
+    "adapter_tests_git_blob_sha": "d1fcd5c0b1ac73fd1c8dc49c04824cdda17c25b9",
+    "interface_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json",
+    "interface_contract_git_blob_sha": "f03f01a531d0a023173629a7a7f4bc0bb65a3b39"
+  },
+  "proof_domain": {
+    "population": "ALL_FINITE_EXPLICIT_FROZEN_COMMON_TOOL_BOUNDARIES_WITH_CANONICAL_PUBLIC_ROUTE_METADATA__ARBITRARY_INITIAL_VISIBLE_SUBSET__ARBITRARY_HIDDEN_BOOLEAN_CAPABILITY_MATRIX_FOR_FINITE_REQUIRED_CAPABILITIES__V4_SUPPORTED_EXACT_CONSTRAINT_PREDICATES__AND_ANY_FINITE_SEQUENCE_OF_DECISION_EPOCHS",
+    "common_authority": "THE_FROZEN_CASE_TOOL_BOUNDARY_IS_THE_ROUTE_AUTHORITY_SHARED_BY_BRAIN_AND_OPUS__NO_ROUTE_OUTSIDE_THAT_BOUNDARY_IS_ACTIONABLE_BY_EITHER_SIDE",
+    "identity_discovery": "FOR_EACH_DECISION_EPOCH_THE_ADAPTER REPRESENTS_THE_EXACT COMPLEMENT_OF_THE_INITIAL_VISIBLE_SUBSET AS ONE HARNESS_OWNED_AUTHORITATIVE_DISCOVERY SOURCE__DISCOVER RETURNS ALL_AND_ONLY_THOSE PUBLIC_ROUTE_ROWS",
+    "capability_information": "ACTUAL_CAPABILITY_SUPPORT_REMAINS PRIVATE HARNESS TRUTH AND IS REVEALED TO V4 ONLY ONE REQUESTED CAPABILITY AT A TIME THROUGH SAFE PROBE RECEIPTS",
+    "changing_ecosystem": "A MATERIAL TOOL_VERSION_OR_BOUNDARY_CHANGE STARTS A NEW DECISION EPOCH__SAME_EPOCH EVIDENCE MAY TRANSFER__CROSS_EPOCH STALE EVIDENCE IS NOT INHERITED BY THE ADAPTER",
+    "constraint_scope": "EXACT CONSTRAINT FILTERING IS A DETERMINISTIC DEPENDENCY BOUNDARY__THE PROOF USES V4'S DECLARED EXACT PREDICATE LANGUAGE AND DOES NOT CLAIM UPSTREAM NATURAL_LANGUAGE_CONSTRAINT_COMPILATION",
+    "terminal_case_replay_required": false
+  },
+  "scope_relation": {
+    "task_population_relation": "STRONGER_UNIVERSAL_OVER_ALL_FINITE_EXPLICIT_FROZEN_TOOL_BOUNDARIES",
+    "tool_authority_relation": "EXACT_COMMON_BOUNDARY__NO_TOOL_ROUTE_REMOVED_OR_ADDED",
+    "visible_information_relation": "INFORMATION_SAFE__INITIAL_VISIBLE_ROWS_PRESERVED__HIDDEN_IDENTITIES_REVEALED_ONLY_AFTER_DISCOVER__CAPABILITY_TRUTH_HIDDEN_UNTIL_SAFE_PROBE",
+    "external_action_authority_relation": "EXACT__DISCOVER_AND_PROBE_ARE_HARNESS_ACTIONS_OVER_THE_SAME_FROZEN_COMMON_TOOL_BOUNDARY",
+    "cost_and_admissibility_relation": "EXACT_PUBLIC_METADATA_FIELDS_USED_BY_THE_FROZEN_BEHAVIORAL_CONTRACT",
+    "unknown_identity_relation": "STRICTLY_COVERS_UNKNOWN_TOOL_IDENTITIES_BECAUSE_ANY_SUBSET_OF_COMMON_BOUNDARY_IDENTITIES_MAY_BEGIN HIDDEN_BEHIND_DISCOVER",
+    "version_relation": "COVERS_ARBITRARY_FINITE_EPOCH_SEQUENCES_WITH_STALE_EVIDENCE_DELETION_AT_EPOCH_CHANGE",
+    "brain_only_registry_narrowing": false
+  },
+  "formal_lemmas": [
+    {
+      "id": "L1_COMMON_AUTHORITY_EXACTNESS",
+      "statement": "The frozen protocols require the same frozen tool authority/tool classes/external action authority for Brain and Opus; the adapter's tool_boundary is exactly that per-case authority and never substitutes the Brain-only registry."
+    },
+    {
+      "id": "L2_BOUNDARY_PRESERVING_DISCOVERY_CONSTRUCTION",
+      "statement": "For any finite explicit boundary E and arbitrary initially visible subset V, the adapter constructs one discovery source whose result is exactly E minus V, so after one successful DISCOVER visible identities equal E."
+    },
+    {
+      "id": "L3_INFORMATION_SAFETY",
+      "statement": "The public V4 state contains public route metadata but not the hidden capability matrix; each PROBE receipt reveals only the requested capability truth for one canonical tool at its current epoch."
+    },
+    {
+      "id": "L4_DISCOVERY_PRECEDES_COMMITMENT",
+      "statement": "Current verified V4 returns DISCOVER whenever the adapter's unqueried source exists, so no PROBE or SELECT occurs while any common-boundary identity remains hidden."
+    },
+    {
+      "id": "L5_FINITE_DISCOVERY_CLOSURE",
+      "statement": "The adapter has at most one unqueried common-authority source per epoch; its atomic transition adds the exact hidden complement and the query receipt together, so discovery closure terminates with every boundary identity visible."
+    },
+    {
+      "id": "L6_TOTAL_ROUTE_ORDER",
+      "statement": "The adapter rejects duplicate identities and nonfinite costs; V4 filters availability/authorization/exact constraints then orders all remaining routes by finite cost and canonical tool id, yielding a deterministic total order."
+    },
+    {
+      "id": "L7_FINITE_PROBE_PROGRESS",
+      "statement": "For the first not-yet-disqualified route in total order, V4 probes one unknown required capability; each truthful receipt strictly reduces that route's finite unknown-capability set or disqualifies it."
+    },
+    {
+      "id": "L8_GLOBAL_LEAST_COST_SELECTION_INDUCTION",
+      "statement": "By induction over the finite ordered admissible route list, V4 cannot advance past a cheaper route while it may still satisfy all requirements; therefore the first SELECT is exactly the global least-cost sufficient route in the complete common boundary."
+    },
+    {
+      "id": "L9_CORRECT_NO_ROUTE_ESCALATION",
+      "statement": "If no admissible route is sufficient, finite truthful probing eventually gives every admissible route a negative required-capability witness and V4 returns ESCALATE only after complete discovery."
+    },
+    {
+      "id": "L10_SAME_EPOCH_TRANSFER",
+      "statement": "The adapter preserves visible identities, discovery receipts and safe probe receipts across later tasks in the same epoch; V4's epoch-bound evidence map reuses them and does not re-probe already known capability facts."
+    },
+    {
+      "id": "L11_NO_UNSUPPORTED_PROMOTION",
+      "statement": "V4 treats a capability as positive only from a current-epoch SAFE_CAPABILITY_PROBE receipt with supported true; the adapter emits that bit only from private harness truth, so no unsupported capability-state promotion can be created."
+    },
+    {
+      "id": "L12_EPOCH_CHANGE_STALE_EVIDENCE_DELETION",
+      "statement": "A material ecosystem change creates a fresh adapter decision epoch with no inherited probe receipts; hence evidence transfer is valid only within the frozen epoch and stale capability state cannot cross the change."
+    }
+  ],
+  "relation_to_frozen_acceptance": {
+    "family_task_dimensions_covered": [
+      "unknown tool discovery",
+      "schema/authority filtering",
+      "route selection under incomplete evidence",
+      "safe probe choice",
+      "capability-state update",
+      "later-task transfer without rediscovery"
+    ],
+    "behavior_success_covered": "VALID_ROUTE_SELECTION__LEAST_COST_SUFFICIENT_ROUTE__FAILED_OR_IRRELEVANT_PROBE_SUPPRESSION__LATER_TASK_TRANSFER",
+    "family_invariants_covered": [
+      "TOOL_LEARNING_SECOND_TASK_TRANSFER",
+      "TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION"
+    ],
+    "primary_predicate_scope": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "absolute_dominance_basis_if_independently_verified": "UNIVERSAL_FORMAL_SCOPE_PROOF"
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_RELATION_ALONE",
+    "NO_EMPIRICAL_GENERALIZATION_FROM_THE_180_EXECUTED_CASES",
+    "NO_INTERNET_WIDE_TOOL_REGISTRY_COMPLETENESS_CLAIM",
+    "NO_TOOL_ROUTE_OUTSIDE_THE_COMMON_FROZEN_HARNESS_AUTHORITY_IS_ADDED_OR_REMOVED",
+    "NO_OPAQUE_EXTERNAL_CAPABILITY_PROVIDER",
+    "NO_NATURAL_LANGUAGE_CONSTRAINT_COMPILATION_CLAIM"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
