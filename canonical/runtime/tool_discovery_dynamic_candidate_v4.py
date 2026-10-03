@@ -78,12 +78,17 @@ def _evidence(public:Mapping[str,Any])->dict[tuple[str,str],bool]:
             out[(tid,cap)]=rec.get("supported") is True
     return out
 
+def _decision_epoch(public:Mapping[str,Any])->int:
+    return int(public.get("decision_epoch",0))
+
 def _queried_sources(public:Mapping[str,Any])->set[str]:
+    epoch=_decision_epoch(public)
     return {
         str(x.get("source_id"))
         for x in public.get("discovery_receipts",[])
         if isinstance(x,Mapping)
         and x.get("kind")=="DISCOVERY_RESULT"
+        and int(x.get("decision_epoch",-1))==epoch
         and str(x.get("source_id") or "")
     }
 
@@ -101,6 +106,7 @@ def next_action(public:Mapping[str,Any])->dict[str,Any]:
         s for s in public.get("discovery_sources",[])
         if isinstance(s,Mapping)
         and s.get("available") is True
+        and s.get("authorized") is True
         and str(s.get("source_id") or "")
         and str(s.get("source_id") or "") not in queried
     ]
