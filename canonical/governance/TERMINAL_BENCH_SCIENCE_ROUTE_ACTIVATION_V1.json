@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_TRANCHE1_EXECUTION_AUTHORITY__THREE_FROZEN_SLOTS_ONLY__PROMOTION_FALSE",
+  "status": "TRANCHE1_FINALIZED__AUTHORITY_REVOKED__0_SUCCESS__3_FINAL_ZERO__SHARED_SCIENCE_PLANNER_ERROR__PROMOTION_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "predicate": "TB_SCIENCE_GE_58_7",
@@ -38,14 +38,14 @@
     "verdict": "ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION"
   },
   "remaining_before_terminal_case_exposure": [],
-  "execution_authority": true,
+  "execution_authority": false,
   "promotion_authority": false,
-  "terminal_results_observed": 0,
+  "terminal_results_observed": 3,
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "next": "ARM_AND_EXECUTE_EXACTLY_THREE_AUTHORIZED_TRANCHE1_SLOT_IDS__REDUCE_RESULTS_IMMEDIATELY__AUTO_REVOKE_TRANCHE1_AUTHORITY",
+  "next": "LOCALIZE_EXACT_SCIENCE_PLANNER_ERROR_FROM_TRANCHE1_ARTIFACTS__REPAIR_SHARED_CAUSE__INDEPENDENTLY_VERIFY_WITHOUT_NEW_TERMINAL_CASES__ONLY_THEN_CONSIDER_NEXT_FROZEN_SLOTS",
   "deterministic_terminalization_verification": "canonical/verification/TB_SCIENCE_DETERMINISTIC_TERMINALIZATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
   "conservative_lower_bound": {
     "governance": "canonical/governance/TB_SCIENCE_CONSERVATIVE_CENSORING_LOWER_BOUND_V1.json",
@@ -59,13 +59,17 @@
   "verified_manifest": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
   "tranche1_execution_authority": "canonical/governance/TB_SCIENCE_TRANCHE1_EXECUTION_AUTHORITY_V1.json",
   "tranche1_authority_verification": "canonical/verification/TB_SCIENCE_TRANCHE1_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-  "activation_preconditions_outside_canonical_state": [
-    "MERGE_THIS_EXACT_PR_HEAD_UNCHANGED_TO_MAIN_ONLY_AFTER_EXACT_ACTIVE_BYTE_INDEPENDENT_VERIFICATION_PASSES",
-    "EXECUTION_REPOSITORY_MUST_REMAIN_AT_EXECUTION_CAPSULE_MERGE_SHA_32248CEB1E6965ABB3EC56B61210590EF6DA0A8D",
-    "ARM_TRANCHE1_JSON_MAY_BE_MATERIALIZED_ONLY_AFTER_MAIN_CONTAINS_THE_EXACT_ACTIVE_AUTHORITY_BLOB",
-    "EXECUTION_WORKFLOW_BLOB_MUST_REMAIN_BF79AC405B0D88D6926383DB2E67E513A95F77D3"
-  ],
+  "activation_preconditions_outside_canonical_state": [],
   "active_authority_blob_sha": "89406ed4c8d214dfa81eddbb1f8caeebc33e82b2",
   "prior_verified_candidate_authority_blob_sha": "14227eba31de060cab3b7906dd15466486e4842c",
-  "active_byte_verification": "REQUIRED_BEFORE_MERGE__SATISFIED_ONLY_BY_SEPARATE_INDEPENDENT_RECEIPT_BOUND_TO_THIS_EXACT_ROUTE_AND_AUTHORITY_BLOB"
+  "active_byte_verification": "REQUIRED_BEFORE_MERGE__SATISFIED_ONLY_BY_SEPARATE_INDEPENDENT_RECEIPT_BOUND_TO_THIS_EXACT_ROUTE_AND_AUTHORITY_BLOB",
+  "result_receipt": "canonical/verification/TB_SCIENCE_TRANCHE1_RESULT_20261003_V1.json",
+  "tranche1_summary": {
+    "finalized_slots": 3,
+    "successes": 0,
+    "final_zeros": 3,
+    "shared_exception_class": "SciencePlannerError",
+    "remaining_successes_for_pass_lock": 124,
+    "remaining_failures_before_fail_lock": 84
+  }
 }
