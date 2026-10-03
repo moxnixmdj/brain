@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_RESULT_INDEPENDENT_ADJUDICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__192_OF_192__TRANSPORT_EVIDENCE_ADMISSIBLE__P1_REDUCTION_REQUIRED",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "authorized_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+  "independent_adjudicator": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37108221334,
+    "workflow_job_id": 111160816601,
+    "head_sha": "f17fd1976f0a23d086739f4bef36a6714de7779a",
+    "conclusion": "success",
+    "artifact_id": 11268842153,
+    "artifact_digest": "sha256:cb2a5be667ac9488b30c253bf679e1d12bbe6ee6398d3a0804dd016c2f51af38"
+  },
+  "source_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_path": ".github/workflows/execute-p1-public-recovery-carrier-v1.yml",
+    "workflow_git_blob_sha": "547f57f43a71f289b006602c1067a962171f38d4",
+    "workflow_run_id": 37108111537,
+    "workflow_job_id": 111160509570,
+    "run_attempt": 1,
+    "head_sha": "e489b191363c52c838b720cd759c99f638170c67",
+    "artifact_id": 11268841992,
+    "artifact_digest": "sha256:e25bcf3fcab61b1fa00882c202a00714ecb81772378005e4934edc712a22d038",
+    "active_authority_blob": "365c098d4763ddfacf660f77457cbac08f5ac72e",
+    "raw_result_sha256": "768fa639b7e4c5e611945362a3ceddc43dc272f1d882629cba7b688709850a1f",
+    "authorized_result_sha256": "24eec602e4f8bc2762b7c48f1652b97149ba0c995ee8448d3a59b41ed9fcee4f",
+    "beacon_sha256": "887b0f45d7651eaeb0ff1be8872352f12ee32e212a3607c2a205810a15dfa83d"
+  },
+  "result": {
+    "cases": 192,
+    "passes": 192,
+    "failures": 0,
+    "all_pass": true,
+    "by_surface": {
+      "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": {
+        "cases": 64,
+        "passes": 64,
+        "all_pass": true,
+        "both_semantics_classes_present_every_case": true,
+        "wilson_95_lower": 0.9433739770288436
+      },
+      "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": {
+        "cases": 64,
+        "passes": 64,
+        "all_pass": true,
+        "both_semantics_classes_present_every_case": true,
+        "wilson_95_lower": 0.9433739770288436
+      },
+      "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": {
+        "cases": 64,
+        "passes": 64,
+        "all_pass": true,
+        "both_semantics_classes_present_every_case": true,
+        "wilson_95_lower": 0.9433739770288436
+      }
+    }
+  },
+  "adjudicated_invariants": {
+    "exact_execution_workflow_match": true,
+    "first_attempt_only": true,
+    "spent_preflight_pass": true,
+    "post_freeze_uncontrollable_selection": true,
+    "all_three_frozen_surfaces_present": true,
+    "both_failure_semantics_classes_present_every_case": true,
+    "terminal_v3_replayed": 0,
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 1,
+    "rerun_credit": false
+  },
+  "p1_quarantine_lifted": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "next": "REVOKE_ONE_USE_AUTHORITY__RUN_INDEPENDENT_P1_PUBLIC_RECOVERY_TRANSPORT_REDUCER__NO_REPLAY"
+}
