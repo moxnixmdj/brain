@@ -10,6 +10,7 @@ from typing import Any, Mapping
 ROOT=Path(__file__).resolve().parents[2]
 OWNED="VERIFIED_OWNED_EQUAL_OR_BETTER"
 STDLIB=set(getattr(sys,"stdlib_module_names",()))|{"__future__","typing"}
+FORBIDDEN_IMPORTS={"socket","urllib","http","subprocess","importlib","ctypes","ftplib","smtplib","telnetlib"}
 FORBIDDEN={"__import__","eval","exec","compile","importlib.import_module",
            "subprocess.run","subprocess.call","subprocess.Popen","os.system"}
 TARGETS={
@@ -68,9 +69,11 @@ def provider_clean(rel:str)->tuple[bool,list[str]]:
         if isinstance(n,ast.Import):
             for a in n.names:
                 if a.name.split(".",1)[0] not in STDLIB: e.append("NON_STDLIB:"+a.name)
+                if a.name.split(".",1)[0] in FORBIDDEN_IMPORTS: e.append("FORBIDDEN_ESCAPE_IMPORT:"+a.name)
         elif isinstance(n,ast.ImportFrom) and n.level==0:
             top=(n.module or "").split(".",1)[0]
             if top and top not in STDLIB: e.append("NON_STDLIB:"+(n.module or ""))
+            if top in FORBIDDEN_IMPORTS: e.append("FORBIDDEN_ESCAPE_IMPORT:"+(n.module or ""))
         elif isinstance(n,ast.Call) and cname(n) in FORBIDDEN:
             e.append("FORBIDDEN_CALL:"+cname(n))
     return not e,sorted(set(e))
@@ -84,7 +87,7 @@ def verify()->dict[str,Any]:
         e=[]; c=cr[fam]; m=mr[fam]
         if not(c.get("opus55_acceptance_state")=="PASS" and c.get("opus55_acceptance_calibrated") is True and c.get("unresolved")==[]):
             e.append("ACCEPTANCE_NOT_CLOSED")
-        if m.get("status")==OWNED: e.append("ALREADY_OWNED_UNEXPECTED_FOR_CANDIDATE")
+        if m.get("status")!=OWNED: e.append("OWNERSHIP_PROMOTION_NOT_PRESENT")
         a=j(s["acceptance"]); r=j(s["receipt"])
         if not ip(a): e.append("ACCEPTANCE_RECEIPT_NOT_INDEPENDENT")
         if not ip(r): e.append("BINDING_RECEIPT_NOT_INDEPENDENT")
@@ -101,8 +104,8 @@ def verify()->dict[str,Any]:
       "status":"PASS" if passed else "FAIL_CLOSED",
       "verified_family_count":sum(1 for x in rows if x["pass"]),
       "families":rows,
-      "candidate_owned_count_before":2,
-      "candidate_owned_count_after":5 if passed else 2,
+      "expected_verified_owned_count":5,
+      "verified_promoted_family_count":sum(1 for x in rows if x["pass"]),
       "new_reality_units_consumed":0,
       "incremental_spend_usd":0,
       "promotion_authority":False,
