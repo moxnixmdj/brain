@@ -1,0 +1,314 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
+  "action_id": "AUDIT-COMPOSITION-OPEN-EIGHT-CURRENT-EVIDENCE-SATURATION-V1-20261003",
+  "status": "CURRENT_BASE_ZERO_REALITY_EVIDENCE_SATURATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "49e6df07bf1a7fa528e11444cd5a931592ffe591",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "COMPOSITION_HAS_8_OPEN_FROZEN_COMPONENT_INTERFACES_WITHOUT_CURRENT_ADMISSIBLE_SCOPED_ACCEPTANCE_RECEIPTS",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MULTI_CAPABILITY_COMPOSITION::OPEN_EIGHT_CURRENT_EVIDENCE_SATURATION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "CLASSIFY_CURRENT_AUTHORITATIVE_EVIDENCE_FOR_ALL_8_OPEN_COMPOSITION_COMPONENTS__EITHER_ADMIT_EXACT_RECEIPT_OR_FREEZE_MINIMUM_MISSING_CONDITION__ZERO_REALITY",
+  "stop_condition": "STOP_AFTER_INDEPENDENT_EXACT_BYTE_VERIFICATION__IF_ZERO_NEW_RECEIPTS_PERSISTS_DO_NOT_RERUN_SLICER__ROUTE_RETRIEVAL_ONLY_TO_THE_8_FROZEN_MISSING_CONDITIONS",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_invention": "FORBIDDEN__AUDIT_AND_RECONCILIATION_ONLY",
+    "provider_access_is_ownership": false,
+    "semantic_transport": "EXACT_SCOPE_ONLY__NO_NAME_OR_FAMILY_ANALOGY"
+  },
+  "ownership_tests": {
+    "applicability": "NO_OWNERSHIP_PROMOTION_IN_THIS_ACTION",
+    "ownership_credit_delta": 0
+  },
+  "prior_work_search": {
+    "evidence_presence_classification": "MULTIPLE_PARTIAL_CURRENT_RECEIPTS_PRESENT__NO_UNVERIFIED_TRANSPORT_ALLOWED",
+    "reused": [
+      "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
+      "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_V1.json",
+      "canonical/governance/COMPOSITION_RECOVERY_SCOPE_COMPLETE_BRIDGE_V1.json"
+    ],
+    "rejected_duplicate_route": "NO_EXISTING_CURRENT_BASE_OPEN_EIGHT_SATURATION_AUDIT_FOUND"
+  },
+  "reasoning_durability": {
+    "real_objective": "Reduce time to terminal closure by exhausting already-known current evidence for the eight open Composition component proofs before any fresh reality.",
+    "governing_invariants": [
+      "ZERO_NEW_REALITY",
+      "NO_GLOBAL_NONEXISTENCE_CLAIM",
+      "NO_SCOPE_TRANSPORT_BY_ANALOGY",
+      "NO_SLICER_RERUN_WITH_UNCHANGED_RECEIPTS"
+    ],
+    "material_premises": [
+      "CURRENT_COMPOSITION_AUTHORITY_V6_IS_4_OF_12_WITH_8_OPEN",
+      "RESEARCH_BROWSER_ARTIFACT_CODING_AND_SYNTHESIS_CANDIDATES_CARRY_EXPLICIT_SCOPE_LIMITS",
+      "RECOVERY_BRIDGE_EXPLICITLY_EXCLUDES_GENERAL_DEBUGGING",
+      "EXACT_BEHAVIORAL_BRIDGE_BINDS_TOOL_DISCOVERY_AND_DELEGATION_NOT_TOOL_USE"
+    ],
+    "evidence_refs": [
+      "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
+      "canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "canonical/verification/BROWSER_GOAL_GROUNDING_RECOVERY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "canonical/verification/NATIVE_ARTIFACT_CROSS_FORMAT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "canonical/verification/CURRENT_BRAIN_CODING_CONTROL_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "canonical/verification/OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "canonical/governance/COMPOSITION_RECOVERY_SCOPE_COMPLETE_BRIDGE_V1.json"
+    ],
+    "conclusion": "Run one bounded current-authority saturation audit over all eight open components and freeze exact insufficiency/missing conditions if no receipt qualifies.",
+    "selected_route": "CURRENT_AUTHORITY_SURFACE_FAIL_CLOSED_SATURATION",
+    "rejected_material_alternatives": [
+      "RERUN_COMPOSITION_SLICER_WITH_SAME_4_RECEIPTS",
+      "INFER_DEBUGGING_FROM_RECOVERY",
+      "INFER_TOOL_USE_FROM_TOOL_DISCOVERY",
+      "INFER_WHOLE_ARTIFACT_SCOPE_FROM_MECHANICAL_GATES",
+      "SPEND_FRESH_TERMINAL_CASES"
+    ],
+    "uncertainties": [
+      "UNINDEXED_OR_INACCESSIBLE_EVIDENCE_MAY_EXIST_OUTSIDE_THE_BOUND_CURRENT_AUTHORITATIVE_SURFACE"
+    ],
+    "assumptions": [
+      "BOUND_SOURCE_BLOBS_REMAIN_UNCHANGED_UNTIL_GENERATION_LOCK"
+    ],
+    "non_goals": [
+      "NO_GLOBAL_EVIDENCE_NONEXISTENCE_CLAIM",
+      "NO_COMPONENT_ACCEPTANCE_CREDIT_FROM_PARTIAL_PREFLIGHTS",
+      "NO_PARENT_COMPOSITION_ACCEPTANCE"
+    ],
+    "next_action": "INDEPENDENTLY_VERIFY_EXACT_AUDIT__THEN_ROUTE_CURRENT_GLOBAL_RETRIEVAL_V7_ONLY_TO_THE_FROZEN_MISSING_CONDITIONS",
+    "supersession_conditions": [
+      "MAIN_MATERIAL_STATE_CHANGE",
+      "A_NEW_INDEPENDENT_CURRENT_SOURCE_COMPONENT_RECEIPT_LANDS",
+      "BOUND_SOURCE_BLOB_DRIFT"
+    ],
+    "supersedes": "REPEATED_MANUAL_SEARCH_OF_THE_SAME_CURRENT_AUTHORITATIVE_COMPOSITION_CANDIDATE_SURFACE"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "49e6df07bf1a7fa528e11444cd5a931592ffe591",
+    "real_outcome": "Turn eight vague Composition component gaps into either admissible receipts or exact minimal proof obligations.",
+    "required_capability": "Fail-closed evidence qualification over content-addressed current receipts.",
+    "obs_goal": {
+      "real_outcome": "Delete repeated search and expose the true zero-reality residual for Composition.",
+      "proxy_goals_deleted": [
+        "NUMBER_OF_FILES_SCANNED",
+        "NUMBER_OF_CANDIDATE_RECEIPTS",
+        "SLICER_RERUN_COUNT"
+      ],
+      "surviving_necessity": "Current goal hierarchy requires existing-receipt saturation before fresh reality."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "CURRENT_COMPOSITION_V6_AUTHORITY",
+        "BEHAVIORAL_BRIDGE",
+        "RECOVERY_BRIDGE",
+        "RESEARCH_PREFLIGHT",
+        "BROWSER_PREFLIGHT",
+        "ARTIFACT_MECHANICS",
+        "CODING_CONTROL",
+        "SYNTHESIS_RESIDUAL"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_REQUIRED_FOR_THIS_BOUNDED_AUDIT"
+      ],
+      "capability_work_deleted": "No new capability mechanism or benchmark route is needed to classify the bound evidence.",
+      "surviving_gap": "Each of eight open literals lacks a current admitted scoped-acceptance receipt."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "INFORMATION_STATE_BLOCKER__PARTIAL_RECEIPTS_EXIST_BUT_SCOPE_ADMISSIBILITY_MUST_BE_EXPLICITLY_CLASSIFIED",
+      "delete_bypass_substitute_options": [
+        "REUSE_EXPLICIT_LIMITATIONS",
+        "REUSE_CURRENT_BRIDGE_NONCLAIMS",
+        "FREEZE_MINIMUM_MISSING_CONDITIONS"
+      ],
+      "surviving_causal_blocker": "No exact admissible current receipt is presently bound for the eight open component interfaces."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "BOUND_CURRENT_AUTHORITY_SATURATION",
+        "REPEAT_MANUAL_SEARCH",
+        "NEW_PROOF_CONSTRUCTION",
+        "FRESH_REALITY"
+      ],
+      "losing_routes_reason": "Bound saturation is zero-reality, deterministic, and prevents duplicate searches; broader routes are only justified after its residual is frozen.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Independent public runner must reproduce exact source hashes and each explicit scope insufficiency before the audit becomes planning authority."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "REPEATED_SLICER_RERUN_WITH_UNCHANGED_RECEIPTS",
+        "REPEATED_SEARCH_OF_ALREADY_FALSIFIED_SCOPE_SHORTCUTS"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "GLOBAL_RETRIEVAL_V7_FOR_POST_AUDIT_TARGETED_SEARCH_ONLY"
+      ],
+      "fresh_reuse_plan": "Use frozen minimum-missing-condition map as Retrieval V6 targets."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "RESEARCH_SCOPE_CHECK",
+        "BROWSER_SCOPE_CHECK",
+        "ARTIFACT_SCOPE_CHECK",
+        "CODING_SCOPE_CHECK",
+        "RECOVERY_TO_DEBUGGING_CHECK",
+        "SYNTHESIS_SCOPE_CHECK",
+        "TOOL_DISCOVERY_TO_TOOL_USE_CHECK"
+      ],
+      "search_stop_decision": "Stop on the bounded current-authority surface after independent verification; do not infer global nonexistence.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "BOUND_CURRENT_AUTHORITY_SATURATION",
+      "REPEAT_MANUAL_SEARCH",
+      "NEW_PROOF_CONSTRUCTION",
+      "FRESH_REALITY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SAME_RECEIPT_SLICER_RERUN",
+      "SEMANTIC_ANALOGY_TRANSPORT",
+      "FRESH_REALITY_BEFORE_SATURATION"
+    ],
+    "selected_surviving_route": "BOUND_CURRENT_AUTHORITY_SATURATION",
+    "why_selected_route_is_fastest_sufficient": "It evaluates all eight current open components in one deterministic zero-reality pass using already content-addressed evidence.",
+    "expected_parent_level_state_change": "EIGHT_EXACT_RESIDUAL_PROOF_OBLIGATIONS_FROZEN__NO_ACCEPTANCE_DELTA_UNLESS_A_BOUND_RECEIPT_UNEXPECTEDLY_QUALIFIES",
+    "stop_condition": "STOP_AFTER_INDEPENDENT_EXACT_BYTE_VERIFICATION__IF_ZERO_NEW_RECEIPTS_PERSISTS_DO_NOT_RERUN_SLICER__ROUTE_RETRIEVAL_ONLY_TO_THE_8_FROZEN_MISSING_CONDITIONS",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This action classifies already-bound evidence only; discovery resumes after the bounded residual is verified."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "COMPOSITION_OPEN_EIGHT_CURRENT_EVIDENCE_SATURATION_001",
+    "inputs": [
+      "CURRENT_COMPOSITION_V6_AUTHORITY",
+      "FROZEN_12_COMPONENT_MANIFEST",
+      "CURRENT_ACCEPTANCE_LEDGER",
+      "CURRENT_BEHAVIORAL_REGISTRY",
+      "BOUND_PARTIAL_COMPONENT_EVIDENCE"
+    ],
+    "environment_state": "CURRENT_MAIN_BASE_49E6DF07BF1A7FA528E11444CD5A931592FFE591",
+    "allowed_information": "CONTENT_ADDRESSED_CURRENT_CANONICAL_EVIDENCE_ONLY",
+    "required_output_or_action": "For every one of the eight open components, either identify a current admissible scoped-acceptance receipt or freeze the exact insufficiency and minimum missing condition.",
+    "success_condition": "All eight classified, no semantic/name transport, no partial preflight promoted, no global nonexistence claim, and all authority/credit/reality deltas remain zero.",
+    "failure_condition": "Any source drift, component omitted, unsupported receipt admission, or overclaim beyond bounded surface.",
+    "terminal_consequence": "Prevents duplicate zero-value searches and makes subsequent Retrieval V6 queries decision-relevant.",
+    "verification_route": "Separate exact-byte public-runner verification.",
+    "dependency_boundary": "No terminal cases, no provider calls, no fresh empirical evidence.",
+    "scope": "CURRENT_EXPLICIT_AUTHORITATIVE_COMPOSITION_COMPONENT_EVIDENCE_SURFACE_ONLY"
+  },
+  "prequalification_controls": {
+    "applicability": "NOT_APPLICABLE__ZERO_REALITY_EVIDENCE_AUDIT",
+    "fresh_evidence_spend": false,
+    "promotion": false
+  },
+  "qualification_stage": "NOT_APPLICABLE__ZERO_REALITY_EVIDENCE_AUDIT",
+  "terminal_proof_control": {
+    "proof_obligation": "Classify current admissibility for all eight open frozen Composition component interfaces.",
+    "hole_type": "CURRENT_EVIDENCE_SATURATION_AND_SCOPE_ADMISSIBILITY",
+    "expected_certificate_or_receipt": "INDEPENDENT_PASS__CURRENT_AUTHORITY_SURFACE_SATURATED__ZERO_NEW_ADMISSIBLE_RECEIPTS_OR_EXACT_DELTA",
+    "validator": "COMPOSITION_OPEN_EIGHT_CURRENT_EVIDENCE_SATURATION_V1_PLUS_PUBLIC_RUNNER",
+    "maximum_cheap_test_cost": "ZERO_TERMINAL_CASES",
+    "prerequisites": [
+      "COMPOSITION_CURRENT_AUTHORITY_V6",
+      "CURRENT_ACCEPTANCE_LEDGER",
+      "BOUND_PARTIAL_EVIDENCE_RECEIPTS"
+    ],
+    "contamination_risk": "NONE__NO_TERMINAL_CASE_CONTENT_READ",
+    "reversibility": "FULLY_REVERSIBLE_PLANNING_EVIDENCE_CLASSIFICATION",
+    "falsification_condition": "ANY_BOUND_RECEIPT_ACTUALLY_SATISFIES_SCOPED_ACCEPTANCE_OR_ANY_SOURCE_BLOB_DRIFTS",
+    "critical_path_relation": "EXISTING_RECEIPT_SATURATION_IS_THE_ACTIVE_GOAL_HIERARCHY_NEXT_ACTION"
+  },
+  "continuous_obs": {
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      "CURRENT_TERMINAL_AUTHORITY",
+      "ACTIVE_GOAL_HIERARCHY",
+      "COMPOSITION_CURRENT_AUTHORITY_V6",
+      "CURRENT_ACCEPTANCE_LEDGER"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [
+      "UNPUBLISHED_OR_INACCESSIBLE_EVIDENCE_OUTSIDE_BOUND_SURFACE"
+    ],
+    "obs_layers_current": true,
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": "ZERO_REALITY_EXISTING_RECEIPT_SATURATION",
+    "information_boundary_complete": true,
+    "information_policy": "BOUND_CURRENT_CANONICAL_EVIDENCE_ONLY",
+    "dependencies": [
+      {
+        "dependency": "Brain main 49e6df07bf1a7fa528e11444cd5a931592ffe591",
+        "status": "READY"
+      },
+      {
+        "dependency": "Composition current authority V6",
+        "status": "READY"
+      },
+      {
+        "dependency": "Global Retrieval V7 mechanical entrypoint",
+        "status": "READY_FOR_POST_AUDIT_TARGETED_SEARCH"
+      }
+    ]
+  },
+  "reality_query_admission": {
+    "proof_obligation": "COMPOSITION_OPEN_EIGHT_RECEIPT_SATURATION",
+    "existing_evidence_search": "BOUND_CURRENT_AUTHORITATIVE_SURFACE_READY_FOR_DETERMINISTIC_CLASSIFICATION",
+    "evidence_scope_equivalence": "FAIL_CLOSED_PER_COMPONENT",
+    "deductive_closure": "CLASSIFICATION_ONLY",
+    "counterfactual_terminal_distinctions": "NO_FRESH_REALITY_REQUIRED_FOR_THIS_AUDIT",
+    "dominated_observations_deleted": [
+      "ALL_FRESH_TERMINAL_CASES_BEFORE_SATURATION"
+    ],
+    "candidate_observations": [],
+    "minimum_reality_cut": [],
+    "terminal_decision_value": "FREEZE_EXACT_NEXT_PROOF_CONDITION_FOR_EACH_OPEN_COMPONENT",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "global_cut_snapshot": "5_OF_19_ACCEPTANCE__12_OF_38_ATOMIC__COMPOSITION_4_OF_12",
+    "global_cut_membership": false
+  },
+  "global_terminal_proof_cut": {
+    "graph_snapshot": "CURRENT_5_OF_19_12_OF_38_WITH_COMPOSITION_4_OF_12_COMPONENT_SUBGRAPH",
+    "existing_evidence_saturation": "THIS_ACTION",
+    "deductive_closure": "FAIL_CLOSED_PER_COMPONENT_SCOPE_QUALIFICATION",
+    "shared_residual_compression": "EIGHT_COMPONENTS_TO_EIGHT_EXACT_MINIMUM_MISSING_CONDITIONS",
+    "candidate_observations": [],
+    "dominance_deletions": [
+      "FRESH_REALITY",
+      "SAME_RECEIPT_SLICER_RERUN",
+      "SEMANTIC_ANALOGY_TRANSPORT"
+    ],
+    "exact_global_minimum_reality_cut": "UNCHANGED_UNTIL_SATURATION_RESULT_IS_VERIFIED",
+    "proposed_action_membership": "ZERO_REALITY_PRECUT_SATURATION",
+    "terminal_decision_value": "TARGET_SUBSEQUENT_RETRIEVAL_ONLY_TO_PREDICATE_CHANGING_EVIDENCE"
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
