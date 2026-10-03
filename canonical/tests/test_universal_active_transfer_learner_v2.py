@@ -80,20 +80,53 @@ class UniversalActiveTransferLearnerV2Tests(unittest.TestCase):
             applicability={"unfamiliar-api"},
             dependencies={"schema-visible", "safe-read"},
             invalidators={"schema-version-changed"},
-            verification_receipts={"receipt-1"},
+            verification_receipts=[
+                {
+                    "receipt_id": "receipt-1",
+                    "independent_verified": True,
+                    "exact_byte_bound": True,
+                    "conclusion": "success",
+                }
+            ],
         )
         self.assertEqual(out["status"], "VERIFIED_SKILL")
         self.assertEqual(out["dependencies"], ["safe-read", "schema-visible"])
         self.assertEqual(out["invalidators"], ["schema-version-changed"])
         self.assertFalse(out["acceptance_credit"])
         self.assertFalse(out["ownership_credit"])
+        self.assertFalse(out["promotion_authorized"])
+
+    def test_skill_compilation_rejects_unverified_or_opaque_receipt_labels(self):
+        with self.assertRaises(v2.ActiveTransferLearnerError):
+            v2.compile_verified_skill(
+                skill_id="unsafe",
+                applicability={"x"},
+                dependencies=set(),
+                invalidators=set(),
+                verification_receipts=["receipt-name-only"],
+            )
+        with self.assertRaises(v2.ActiveTransferLearnerError):
+            v2.compile_verified_skill(
+                skill_id="unsafe",
+                applicability={"x"},
+                dependencies=set(),
+                invalidators=set(),
+                verification_receipts=[
+                    {
+                        "receipt_id": "r",
+                        "independent_verified": False,
+                        "exact_byte_bound": True,
+                        "conclusion": "success",
+                    }
+                ],
+            )
 
     def test_meta_learning_compiles_strategy_without_promoting_unverified_claims(self):
         episode = {
             "domain": "unfamiliar-api",
             "actions": [
-                {"kind": "web-search", "decision_gain": 1, "time": 5},
-                {"kind": "schema-inspection", "decision_gain": 5, "time": 1},
+                {"kind": "web-search", "decision_gain": 5, "transfer_gain": 0, "proof_gain": 0, "time": 2, "cost": 0, "risk": 0},
+                {"kind": "schema-inspection", "decision_gain": 4, "transfer_gain": 4, "proof_gain": 4, "time": 1, "cost": 0, "risk": 0},
             ],
             "verified": True,
         }
@@ -106,7 +139,7 @@ class UniversalActiveTransferLearnerV2Tests(unittest.TestCase):
         with self.assertRaises(v2.ActiveTransferLearnerError):
             v2.compile_learning_strategy({
                 "domain": "x",
-                "actions": [{"kind": "guess", "decision_gain": 99, "time": 0.1}],
+                "actions": [{"kind": "guess", "decision_gain": 99, "transfer_gain": 0, "proof_gain": 0, "time": 0.1, "cost": 0, "risk": 0}],
                 "verified": False,
             })
 
@@ -133,7 +166,7 @@ class UniversalActiveTransferLearnerV2Tests(unittest.TestCase):
         )
         self.assertEqual(out["state"], "VERIFIED_COVERAGE")
         self.assertTrue(out["trusted"])
-        self.assertTrue(out["promotion_authorized"])
+        self.assertFalse(out["promotion_authorized"])
         self.assertIsNone(out["next_action"])
 
 
