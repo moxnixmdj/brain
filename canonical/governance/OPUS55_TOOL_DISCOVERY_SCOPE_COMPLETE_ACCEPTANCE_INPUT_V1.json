@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TOOL_DISCOVERY_SCOPE_COMPLETE_ACCEPTANCE_INPUT_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__TOOL_DISCOVERY_SCOPE_COMPLETENESS_REPAIRED__INDEPENDENT_ACCEPTANCE_REDUCTION_REQUIRED",
+  "protocols": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+  },
+  "transmuter": {
+    "path": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+    "git_blob_sha": "39b5611e53485674b29e2a05da91b89801bc5aa6"
+  },
+  "source_witness": {
+    "path": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+    "git_blob_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7"
+  },
+  "scope_completeness_receipt": "canonical/verification/TOOL_DISCOVERY_FROZEN_SCOPE_COMPLETENESS_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "evidence": [
+    {
+      "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_TYPED_WITNESS_V1",
+      "date": "2026-10-02",
+      "id": "TOOL_DISCOVERY_TERMINAL_CEILING_ABSOLUTE_DOMINANCE_20261002_V1",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "mode": "ABSOLUTE_DOMINANCE",
+      "verified": true,
+      "independent": true,
+      "contamination_clean": true,
+      "binds_frozen_protocol": true,
+      "scope_relation": "PROVEN_STRONGER",
+      "closes_entire_protocol": true,
+      "source_behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "source_terminal_full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+      "source_case_count": 180,
+      "source_terminal_result": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "source_pre_wave_binding": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "source_executor_manifest": "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json",
+      "source_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "source_protocols": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "independent_verification": "canonical/verification/TERMINAL_CEILING_WITNESS_LIFTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "result": {
+        "direction": "higher",
+        "brain_lower_bound": 1,
+        "theoretical_upper_bound": 1
+      },
+      "proof_basis": [
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING_MAPS_EXACTLY_TO_ONE_ACTIVE_RESIDUAL_CONTRACT_TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "PREWAVE_BINDING_EXPLICITLY_DECLARED_DELETE_EXACT_OPUS_COMPARATOR_DEPENDENCY_FOR_TOOL_DISCOVERY_ONLY",
+        "PREWAVE_BINDING_REQUIRED_EVERY_SELECTED_CASE_PASS_AND_EVERY_CLASS_PRESENT",
+        "PREWAVE_BINDING_DIRECT_CHECKS_INCLUDE_SECOND_TASK_TRANSFER_AND_NO_UNSUPPORTED_CAPABILITY_STATE_PROMOTION",
+        "EXACT_ROUTE_SPECIFIC_EXECUTOR_WAS_INDEPENDENTLY_BOUND_AND_CONSUMED_IN_TERMINAL_V3",
+        "IMMUTABLE_TERMINAL_V3_DIRECT_POPULATION_PASSED_180_OF_180_WITH_ZERO_REPLAY_REPLACEMENT_RESULT_FEEDBACK_OR_DUPLICATE_EXECUTION",
+        "FULL_FROZEN_BINARY_ACCEPTANCE_POPULATION_AT_100_PERCENT_IS_THEORETICAL_CEILING_SO_MATCHED_OPUS_BOUND_CANNOT_EXCEED_BRAIN"
+      ],
+      "rule": "STRONGER_FULL_SCOPE_ABSOLUTE_CEILING_PROOF_DISCHARGES_THE_UNCHANGED_MATCHED_PROTOCOL_WITHOUT_RUNNING_OR_PROXYING_OPUS_5_5",
+      "capability_credit_delta": 0,
+      "family_credit_delta": 0,
+      "promotion_authority": false,
+      "scope_completeness": {
+        "verified": true,
+        "independent": true,
+        "basis": "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "complete_target_case_set": true,
+        "receipt": "canonical/verification/TOOL_DISCOVERY_FROZEN_SCOPE_COMPLETENESS_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      }
+    }
+  ],
+  "expected_compile_result": {
+    "family_count": 19,
+    "closed_family_count": 4,
+    "open_family_count": 15,
+    "newly_closed_families": [
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "preserved_closed_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION"
+    ]
+  },
+  "hard_rules": [
+    "ONLY_THE_SCOPE_COMPLETENESS_DEFECT_IS_REPAIRED",
+    "RAW_180_OF_180_TERMINAL_SAMPLE_REMAINS_IMMUTABLE",
+    "EXACT_FROZEN_SCOPE_CERTIFICATE_DOES_NOT_BY_ITSELF_GRANT_FAMILY_CREDIT",
+    "INDEPENDENT_ACCEPTANCE_REDUCTION_REQUIRED_BEFORE_CANONICAL_PROMOTION",
+    "NO_OPEN_DOMAIN_GENERALIZATION_FROM_FROZEN_SCOPE",
+    "ZERO_FRESH_TERMINAL_REALITY"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
