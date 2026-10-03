@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_OBSERVABILITY_PARTITION_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_MINIMUM_REALITY_CUT_V2__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Refine the Tool Discovery observability lower bound into the minimum-reality scheduler cut: consume safe decision-relevant observations before matched comparator evidence, and request comparator evidence only after the cheapest unresolved decision frontier is safe-observation-closed.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "runtime": "canonical/runtime/tool_discovery_observability_partition_v2.py",
+  "tests": "canonical/tests/test_tool_discovery_observability_partition_v2.py",
+  "preconditions": [
+    "COMMON_MATCHED_TOOL_IDENTITY_SCOPE_COMPLETE",
+    "PUBLIC_AVAILABILITY_AUTHORIZATION_CONSTRAINT_AND_SAFE_PROBE_PERMISSION_METADATA_CURRENT",
+    "CAPABILITY_EVIDENCE_EPOCH_CURRENT"
+  ],
+  "corrections_over_v1_candidate": [
+    "DO_NOT_REQUEST_MATCHED_EVIDENCE_WHILE_A_SAFE_PROBE_ON_THE_CHEAPEST_UNRESOLVED_FRONTIER_CAN_STILL_ELIMINATE_OR_ADVANCE_THAT_FRONTIER",
+    "EQUAL_COST_UNKNOWN_ROUTE_DOES_NOT_IMPROVE_THE_LEAST_COST_OBJECTIVE_WHEN_A_VERIFIED_SUFFICIENT_ROUTE_AT_THE_SAME_COST_ALREADY_EXISTS",
+    "MATCHED_ONLY_IS_AN_AFTER_SAFE_OBSERVATION_CLOSURE_STATE_NOT_MERELY_THE_PRESENCE_OF_ANY_UNOBSERVABLE_UNKNOWN"
+  ],
+  "three_way_cut": {
+    "universal_closed_region": "No unresolved route is strictly cheaper than the best verified sufficient route; or every route is already disproved. Universal program-side reasoning can finish without comparator evidence.",
+    "safe_progress_region": "At the cheapest unresolved decision frontier, at least one unresolved required fact is safely probe-decidable. Take the safe probe first because its result can eliminate a route or establish a least-cost route and thereby avoid comparator spend.",
+    "irreducible_matched_region": "At the cheapest unresolved decision frontier, no remaining unknown fact is safely observable. Observationally identical hidden worlds can require incompatible valid/least-cost choices, so matched evidence is irreducible."
+  },
+  "minimum_reality_law": "SAFE_OBSERVATION_CLOSURE_PRECEDES_MATCHED_COMPARATOR_SPEND",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_CLAIM_THAT_THE_COMMON_AUTHORITY_PRECONDITION_IS_ALREADY CLOSED",
+    "NO_CLAIM_THAT_MATCHED_EVIDENCE_IS_AVAILABLE",
+    "NO_TARGET_WEAKENING",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
