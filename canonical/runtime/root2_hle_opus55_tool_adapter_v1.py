@@ -242,7 +242,7 @@ def execute_code(source:str, *, timeout:float=10.0)->dict[str,Any]:
         "stdout":p.stdout[-12000:],
         "stderr":p.stderr[-12000:],
         "source_sha256":hashlib.sha256(src.encode("utf-8")).hexdigest(),
-        "network_capability":"ABSENT_BY_POLICY_IMPORT_RESTRICTION",
+        "network_policy":"NETWORK_RELATED_IMPORTS_FORBIDDEN__NOT_AN_OS_LEVEL_SANDBOX_CLAIM",
         "incremental_spend_usd":0,
     }
 
