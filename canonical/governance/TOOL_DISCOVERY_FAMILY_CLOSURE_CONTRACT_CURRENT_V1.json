@@ -24,12 +24,12 @@
     "brain_owned_selection_adapter": "INDEPENDENT_PUBLIC_RUNNER_PASS",
     "general_substrate_materiality": "INDEPENDENT_PUBLIC_RUNNER_PASS",
     "real_toolathlon_host_integration": "INDEPENDENT_PUBLIC_RUNNER_PASS",
-    "zero_incremental_spend_carrier_reduction": "INDEPENDENT_PUBLIC_RUNNER_PASS__POINT_OF_USE_PREFLIGHTS_REMAIN",
+    "zero_incremental_spend_carrier_reduction": "INDEPENDENT_PUBLIC_RUNNER_PASS__LOCAL_TOOLCALL_COMPATIBILITY_NOW_PROVED__LAUNCH_TIME_SERVICE_RECHECK_REMAINS",
+    "pinned_local_qwen_tool_call_compatibility": "INDEPENDENT_PUBLIC_RUNNER_PASS__RUN_37095419706__JOB_111124223601",
     "official_public_service_point_in_time_status": "REACHABLE_AND_IDLE__TERMINAL_LAUNCH_RECHECK_REQUIRED",
     "deductive_terminal_success_lower_bound": "ZERO__STATIC_TASK_PROOF_SCAN_DOMINATED"
   },
   "pending_gates_before_any_terminal_task_exposure": [
-    "PINNED_LOCAL_QWEN_OPENAI_CHAT_COMPLETIONS_TOOL_CALL_COMPATIBILITY__VERIFIER_PR1201_IN_PROGRESS",
     "POINT_OF_USE_OFFICIAL_SERVICE_ADMISSION_RECHECK",
     "NO_PAID_PROVIDER_CONFIGURATION",
     "EXACT_FROZEN_CLIENT_PROXY_ADAPTER_AND_SCORER_IDENTITIES",
