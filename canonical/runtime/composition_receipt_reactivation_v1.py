@@ -18,7 +18,7 @@ def load(path: Path):
         raise ValueError(f"{path} must contain a JSON object")
     return v
 
-def evaluate(manifest, protocols, bridge, bridge_verification, memory_bridge, memory_package):
+def evaluate(manifest, protocols, bridge, bridge_verification, memory_bridge, memory_bridge_verification, firewall_verification, memory_package, delegation_acceptance_verification):
     errors=[]
     if manifest.get("claim_id")!=CLAIM: errors.append("MANIFEST_CLAIM_MISMATCH")
     if bridge.get("claim_id")!=CLAIM: errors.append("BRIDGE_CLAIM_MISMATCH")
@@ -29,6 +29,31 @@ def evaluate(manifest, protocols, bridge, bridge_verification, memory_bridge, me
     activated=set(bridge_verification.get("activated_components",[]))
     if not str(bridge_verification.get("status","")).startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
         errors.append("HISTORICAL_BRIDGE_NOT_INDEPENDENTLY_VERIFIED")
+    if not str(firewall_verification.get("status","")).startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
+        errors.append("SCOPE_FIREWALL_NOT_INDEPENDENTLY_VERIFIED")
+    if firewall_verification.get("verified_effect")!="CURRENT_COMPOSITION_ADMISSIBLE_BASELINE_REDUCES_FROM_2_OF_12_TO_0_OF_12_BEFORE_ANY_NEW_INDEPENDENT_RECEIPT":
+        errors.append("SCOPE_FIREWALL_BASELINE_MISMATCH")
+    if not str(memory_bridge_verification.get("status","")).startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
+        errors.append("MEMORY_BRIDGE_NOT_INDEPENDENTLY_VERIFIED")
+    mv=memory_bridge_verification.get("verified") or {}
+    if mv.get("composition_component")!="memory":
+        errors.append("MEMORY_BRIDGE_VERIFIED_COMPONENT_MISMATCH")
+    if mv.get("unique_noncomposition_memory_family")!=["LONG_HORIZON_MEMORY_AND_CONTINUITY"]:
+        errors.append("MEMORY_BRIDGE_VERIFIED_FAMILY_NOT_UNIQUE")
+    if mv.get("scope_exactly_preserved") is not True:
+        errors.append("MEMORY_BRIDGE_VERIFIED_SCOPE_NOT_EXACT")
+    if (memory_bridge_verification.get("temporal_guard") or {}).get("current_protocol_blob_must_be_rechecked") is not True:
+        errors.append("MEMORY_BRIDGE_TEMPORAL_GUARD_MISSING")
+    if not str(delegation_acceptance_verification.get("status","")).startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
+        errors.append("DELEGATION_ACCEPTANCE_NOT_INDEPENDENTLY_VERIFIED")
+    dv=delegation_acceptance_verification.get("verified_result") or {}
+    if dv.get("newly_closed_families")!=["SUBAGENT_DELEGATION_AND_COORDINATION"]:
+        errors.append("DELEGATION_ACCEPTANCE_CLOSURE_SCOPE_MISMATCH")
+    dproto=protos.get("SUBAGENT_DELEGATION_AND_COORDINATION") or {}
+    if dproto.get("status")!=PASS:
+        errors.append("DELEGATION_SOURCE_FAMILY_NOT_CURRENT_PASS")
+    if dproto.get("closure_receipt")!="canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json":
+        errors.append("DELEGATION_CURRENT_CLOSURE_RECEIPT_MISMATCH")
 
     admitted=[]
     quarantined=[]
@@ -67,6 +92,10 @@ def evaluate(manifest, protocols, bridge, bridge_verification, memory_bridge, me
         ("MEMORY_RECEIPT_NOT_ACCEPTANCE_SCOPED",mr.get("acceptance_scoped") is True),
         ("MEMORY_RECEIPT_CLAIM_MISMATCH",mr.get("binds_frozen_claim")==CLAIM),
         ("MEMORY_SOURCE_FAMILY_NOT_CURRENT_PASS",(protos.get(mr.get("source_family")) or {}).get("status")==PASS),
+        ("MEMORY_INDEPENDENT_RELATION_NOT_VERIFIED",str(memory_bridge_verification.get("status","")).startswith("INDEPENDENT_PUBLIC_RUNNER_PASS")),
+        ("MEMORY_VERIFIED_COMPONENT_MISMATCH",mv.get("composition_component")=="memory"),
+        ("MEMORY_VERIFIED_FAMILY_MISMATCH",mv.get("unique_noncomposition_memory_family")==["LONG_HORIZON_MEMORY_AND_CONTINUITY"]),
+        ("MEMORY_VERIFIED_SCOPE_MISMATCH",mv.get("scope_exactly_preserved") is True),
         ("MEMORY_PACKAGE_STATUS_NOT_OWNED",memory_package.get("status")=="VERIFIED_OWNED_EQUAL_OR_BETTER"),
         ("MEMORY_PARENT_FAMILY_NOT_CLOSED",pkg_dec.get("parent_family_closed_for_claim_scope") is True),
         ("MEMORY_DERIVATION_SCOPE_NOT_CLOSED",md.get("owned_memory_parent_family_closed_for_claim_scope") is True),
@@ -119,9 +148,16 @@ def main():
     ap.add_argument("--bridge",type=Path,required=True)
     ap.add_argument("--bridge-verification",type=Path,required=True)
     ap.add_argument("--memory-bridge",type=Path,required=True)
+    ap.add_argument("--memory-bridge-verification",type=Path,required=True)
+    ap.add_argument("--firewall-verification",type=Path,required=True)
     ap.add_argument("--memory-package",type=Path,required=True)
+    ap.add_argument("--delegation-acceptance-verification",type=Path,required=True)
     a=ap.parse_args()
-    out=evaluate(*(load(x) for x in [a.manifest,a.protocols,a.bridge,a.bridge_verification,a.memory_bridge,a.memory_package]))
+    out=evaluate(*(load(x) for x in [
+        a.manifest,a.protocols,a.bridge,a.bridge_verification,a.memory_bridge,
+        a.memory_bridge_verification,a.firewall_verification,a.memory_package,
+        a.delegation_acceptance_verification
+    ]))
     print(json.dumps(out,indent=2,sort_keys=True))
     raise SystemExit(0 if out["status"]=="PASS" else 1)
 
