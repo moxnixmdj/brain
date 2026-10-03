@@ -29,6 +29,16 @@ class PlannerTests(unittest.TestCase):
         with self.assertRaisesRegex(Exception, "OBJECT_REQUIRED"):
             p.extract_json_object("[1,2]")
 
+    def test_normalizes_observed_safe_candidates_alias(self):
+        raw={"material_requirements":["R1"],"safe_candidates":[{"action_id":"A1","covers":["R1"],"command":"echo x","verify_command":"test true"}]}
+        out=p.normalize_proposal_object(raw)
+        self.assertNotIn("safe_candidates",out)
+        self.assertEqual(out["candidates"][0]["action_id"],"A1")
+
+    def test_rejects_ambiguous_candidate_aliases(self):
+        raw={"candidates":[],"safe_candidates":[]}
+        with self.assertRaisesRegex(Exception,"ALIAS_AMBIGUOUS"):
+            p.normalize_proposal_object(raw)
     def test_first_alias_success_and_payload_shape(self):
         seen=[]
         def fake(req, timeout=20):
