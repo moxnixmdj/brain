@@ -1,17 +1,17 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2",
   "date": "2026-10-02",
-  "status": "AUTHORITY_RECONCILED__7_PROVED__5_BOUND_BLOCKERS__26_OTHER_UNRESOLVED__31_TOTAL_UNRESOLVED__ZERO_DIRECT_ACCEPTANCE_CASE_ACTIONS_READY",
+  "status": "AUTHORITY_RECONCILED__8_PROVED__4_BOUND_BLOCKERS__26_OTHER_UNRESOLVED__30_TOTAL_UNRESOLVED__ZERO_DIRECT_ACCEPTANCE_CASE_ACTIONS_READY",
   "objective": "Bind only content-addressed atomic acceptance evidence. Until saturation is complete, benchmark and matched-case execution remains forbidden.",
   "saturation": {
-    "status": "INVALIDATED_AND_RECOMPUTED_AFTER_ABSOLUTE_DOMINANCE_SCOPE_FIREWALL",
-    "source_snapshot_sha": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
-    "receipt": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
-    "proved_predicate_count": 7,
-    "bound_blocker_count": 5,
-    "unresolved_predicate_count": 31,
+    "status": "RECOMPUTED_AFTER_INDEPENDENT_DELEGATION_UNIVERSAL_SCOPE_COMPLETENESS",
+    "source_snapshot_sha": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "receipt": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "proved_predicate_count": 8,
+    "bound_blocker_count": 4,
+    "unresolved_predicate_count": 30,
     "new_reality_units_consumed": 0,
-    "rule": "FINITE_SAMPLE_ABSOLUTE_DOMINANCE_REQUIRES_INDEPENDENT_PROTOCOL_WIDE_SCOPE_COMPLETENESS__TOOL_DISCOVERY_AND_DELEGATION_SUCCESS_NONINFERIOR_REOPENED__OTHER_SEVEN_PROVED_CLAIMS_PRESERVED"
+    "rule": "DELEGATION_SCOPE_FIREWALL_DISCHARGED_BY_INDEPENDENT_UNIVERSAL_FORMAL_SCOPE_PROOF__RAW_132_OF_132_TERMINAL_SAMPLE_PRESERVED__ONLY_DELEGATION_PREDICATE_PROMOTED"
   },
   "claims": [
     {
@@ -211,14 +211,23 @@
     },
     {
       "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
-      "state": "EXTERNAL_BLOCKED",
-      "blocker": "ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
-      "blocker_class": "SCOPE_COMPLETENESS",
-      "discharge_condition": "PROVIDE_INDEPENDENTLY_VERIFIED_EXACT_COMPLETE_TARGET_CASE_UNIVERSE__EXHAUSTIVE_FINITE_SUPERSET__OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_THE_CLAIMED_PROTOCOL_POPULATION",
-      "source_path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
-      "source_sha": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
+      "state": "PROVED",
+      "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+      "source_path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "source_sha": "d04f2a8c5594d261158835db1cae3822411b6b23",
       "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "basis": "INDEPENDENT_SCOPE_FIREWALL_REVOKES_FINITE_SAMPLE_ABSOLUTE_DOMINANCE_AS_WHOLE_PROTOCOL_PROOF__RAW_FROZEN_SAMPLE_RESULT_REMAINS_VALID_BUT_SCOPE_INCOMPLETE",
+      "basis": "INDEPENDENT_PUBLIC_RUNNER_COMPILED_THE_EXISTING_THEORETICAL_CEILING_WITNESS_WITH_AN_INDEPENDENT_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS_CERTIFICATE__DELEGATION_ONLY_NEW_CLOSURE",
+      "brain_value": 1,
+      "objective_ceiling_value": 1,
+      "scope_complete": true,
+      "objective_ceiling": true,
+      "scope_completeness": {
+        "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "receipt": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "receipt_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156",
+        "all_admissible_target_inputs_proved": true,
+        "formal_completeness": true
+      },
       "prior_sample_evidence": {
         "prior_state": "PROVED",
         "prior_proof_kind": "ABSOLUTE_CEILING",
@@ -231,9 +240,7 @@
       "reopened_by": {
         "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
         "reason": "FINITE_PERFECT_SAMPLE_IS_NOT_PROTOCOL_WIDE_ABSOLUTE_BOUND_WITHOUT_SCOPE_COMPLETENESS"
-      },
-      "scope_complete": false,
-      "objective_ceiling": false
+      }
     }
   ],
   "rules": [
