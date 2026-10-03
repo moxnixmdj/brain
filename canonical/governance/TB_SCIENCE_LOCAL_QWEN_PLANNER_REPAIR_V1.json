@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_LOCAL_QWEN_PLANNER_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CAUSALLY_BOUND_TO_TRANCHE1_SHARED_PLANNER_FAILURE__INDEPENDENT_LIVE_LOCAL_VERIFICATION_REQUIRED__EXECUTION_FALSE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "causal_failure": {
+    "result_receipt": "canonical/verification/TB_SCIENCE_TRANCHE1_RESULT_20261003_V1.json",
+    "workflow_run_id": 37101712032,
+    "finalized_slots": 3,
+    "successes": 0,
+    "final_zeros": 3,
+    "shared_exception_class": "SciencePlannerError",
+    "exact_failure_summary": [
+      "MRI_HARMONIZATION__OPENAI_FAST_HTTP_402__OPENAI_HTTP_402__MISTRAL_HTTP_402",
+      "GENOMIC_MODEL_RANKING__OPENAI_FAST_TIMEOUT_20_271S__OPENAI_HTTP_402__MISTRAL_HTTP_402",
+      "NAVIGATION_SENSOR_CALIBRATION__OPENAI_FAST_TIMEOUT_20_066S__OPENAI_HTTP_402__MISTRAL_HTTP_402"
+    ],
+    "conclusion": "KEYLESS_REMOTE_PROPOSAL_TRANSPORT_IS_NOT_A_DURABLE_ZERO_INCREMENTAL_SPEND_TERMINAL_CARRIER"
+  },
+  "replacement": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_git_blob_sha": "879887984e2ca8abacac486d687f519f5d0d78a5",
+    "controller_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "controller_git_blob_sha": "5557efd21f1a433ad16766def3775a79c459784b",
+    "planner_tests_path": "canonical/tests/test_harbor_science_planner_v1.py",
+    "planner_tests_git_blob_sha": "e1d68119258093d08801646c73c7220cd8f9018a",
+    "transport": "LOCAL_LLAMA_CPP_OPENAI_CHAT_COMPLETIONS_REQUIRED_TOOL_CALL",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model_alias": "brain-qwen3.5-9b",
+    "remote_generation_dependencies": 0,
+    "api_key_dependencies": 0
+  },
+  "pinned_local_substrate": {
+    "prior_independent_preflight": "canonical/verification/TOOLATHLON_LOCAL_QWEN_TOOLCALL_PREFLIGHT_20261003_V1.json",
+    "execution_surface": "PUBLIC_GITHUB_ACTIONS_UBUNTU_24_04",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "model_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+    "model_bytes": 5060174144,
+    "model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "incremental_spend_usd": 0
+  },
+  "required_independent_verification": [
+    "EXACT_REPAIR_BLOB_MATCH",
+    "PLANNER_UNIT_TESTS_PASS",
+    "CONTROLLER_SYNTHETIC_TESTS_PASS",
+    "PINNED_LLAMA_CPP_AND_QWEN_BYTES_MATCH_PRIOR_VERIFIED_CARRIER",
+    "LOCAL_ENDPOINT_HEALTH_PASS",
+    "REQUIRED_STRUCTURED_PROPOSAL_TOOL_CALL_PASS_MULTIPLE_SYNTHETIC_PROMPTS",
+    "NO_REMOTE_GENERATION_ENDPOINT_REFERENCED_BY_REPAIR",
+    "ZERO_TERMINAL_TASK_EXPOSURE"
+  ],
+  "next_if_verified": "PROMOTE_LOCAL_PLANNER_REPAIR_WITH_EXECUTION_FALSE__BUILD_NEW_ZERO_CASE_HARBOR_INTEGRATION_PREFLIGHT__ONLY_THEN_COMPUTE_MINIMUM_NEXT_TERMINAL_TRANCHE",
+  "terminal_trials_executed_by_repair": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
