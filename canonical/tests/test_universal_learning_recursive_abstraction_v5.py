@@ -217,7 +217,7 @@ class CompoundingProbeRankV5Tests(unittest.TestCase):
                 "id": "future-rich",
                 "safety_receipt": safety_receipt(env, goal, "future-rich"),
                 "outcome_by_hypothesis": {"h1": "1", "h2": "2"},
-                "time": 2,
+                "time": 1,
                 "cost": 0,
                 "risk": 0,
                 "incremental_spend_usd_ub": 0,
@@ -246,6 +246,47 @@ class CompoundingProbeRankV5Tests(unittest.TestCase):
         )
         self.assertEqual(out["ranked"][0]["id"], "future-rich")
 
+    def test_v4_current_value_density_precedes_future_compounding_tiebreak(self):
+        env, goal = "env", "goal"
+        hypotheses = [
+            {"id": "h1", "plausible": True, "best_action": "a"},
+            {"id": "h2", "plausible": True, "best_action": "b"},
+        ]
+        actions = [
+            {
+                "id": "current-efficient",
+                "safety_receipt": safety_receipt(env, goal, "current-efficient"),
+                "outcome_by_hypothesis": {"h1": "1", "h2": "2"},
+                "time": 1,
+                "cost": 0,
+                "risk": 0,
+                "incremental_spend_usd_ub": 0,
+                "future_transfer_lcb": 0,
+                "proof_value_lcb": 0,
+                "future_burden_ub": 10,
+            },
+            {
+                "id": "future-flashy-but-slow",
+                "safety_receipt": safety_receipt(env, goal, "future-flashy-but-slow"),
+                "outcome_by_hypothesis": {"h1": "x", "h2": "y"},
+                "time": 2,
+                "cost": 0,
+                "risk": 0,
+                "incremental_spend_usd_ub": 0,
+                "future_transfer_lcb": 100,
+                "proof_value_lcb": 100,
+                "future_burden_ub": 0,
+            },
+        ]
+        out = rank5.rank(
+            environment_id=env,
+            goal_id=goal,
+            hypotheses=hypotheses,
+            actions=actions,
+        )
+        self.assertEqual(out["ranked"][0]["id"], "current-efficient")
+        self.assertEqual(out["ranking_order"][1], "V4_CURRENT_VALUE_DENSITY_DESC")
+
     def test_positive_incremental_spend_is_rejected(self):
         env, goal = "env", "goal"
         out = rank5.rank(
@@ -273,6 +314,29 @@ class CompoundingProbeRankV5Tests(unittest.TestCase):
 
 
 class UniversalLearningRouterV5Tests(unittest.TestCase):
+    def test_unrelated_verified_skills_do_not_block_primary_learning_route(self):
+        a = skill("a", ["only-a"])
+        b = skill("b", ["only-b"])
+        out = router5.route(
+            goal="g",
+            environment_id="env",
+            verified_coverage=True,
+            goal_facts=[],
+            fallback_required_facts=[],
+            verified_facts=[],
+            dependencies={},
+            dependency_receipt=None,
+            transfer_mappings=[],
+            hypotheses=[],
+            hypothesis_coverage_receipt=None,
+            residual_action_receipt=None,
+            actions=[],
+            verified_skills=[a, b],
+        )
+        self.assertEqual(out["route"], "USE_VERIFIED_CAPABILITY")
+        self.assertIsNone(out["abstraction_candidate"])
+        self.assertEqual(out["abstraction_candidate_status"], "NO_COMMON_VERIFIED_STRUCTURE")
+
     def test_v5_invariants_preserve_v4_open_world_safety_and_zero_credit(self):
         out = router5.prove_v5_invariants()
         self.assertTrue(out["pass"], out)
