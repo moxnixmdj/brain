@@ -1,9 +1,9 @@
 name: Saturate existing proof-atom receipts Windows V1
 
 on:
-  push:
+  pull_request:
     branches:
-      - execute/receipt-saturation-windows-20261003-sol
+      - main
     paths:
       - ".github/workflows/saturate-existing-proof-atom-receipts-windows-v1.yml"
   workflow_dispatch:
