@@ -1017,5 +1017,6 @@
     "activation": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_ACTIVATION_V1.json",
     "root_state": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
     "ownership_credit_delta": 0
-  }
+  },
+  "current_acceptance_scoreboard_overlay_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_CURRENT_ACCEPTANCE_OVERLAY_V1.json"
 }
