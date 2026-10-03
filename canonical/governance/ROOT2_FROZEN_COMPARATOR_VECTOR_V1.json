@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FROZEN_COMPARATOR_VECTOR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FROZEN_15_PREDICATES_14_SURFACES__ZERO_CREDIT",
+  "scope": "ROOT2_ONLY_FIXED_BAR_PREDICATES",
+  "authority": {
+    "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+    "route_inventory_git_blob_sha": "dd3ce9174fce6580b4b30a64e2ea5fddee81aadd"
+  },
+  "surfaces": [
+    {"surface":"Terminal-Bench 4.0","predicates":["CODING_TB4_GE_66_4"],"target":">=66.4%","route_class":"MATHEMATICALLY_UNATTAINABLE_CURRENT_ROUTE"},
+    {"surface":"FrontierCode v1.1 Main","predicates":["CODING_FRONTIERCODE_GE_54_4"],"target":">=54.4%","route_class":"OWNER_EVALUATION_OR_STRONGER_PROOF"},
+    {"surface":"CursorBench 4.0","predicates":["CODING_CURSORBENCH_GE_57_8"],"target":">=57.8%","route_class":"OWNER_EVALUATION_OR_STRONGER_PROOF"},
+    {"surface":"GDPval-AA v2.1","predicates":["PROWORK_GDPVAL_GE_1846"],"target":">=1846 Elo","route_class":"OWNER_GRADING_LAYER_OR_STRONGER_PROOF"},
+    {"surface":"AA-Briefcase v1.1","predicates":["PROWORK_AA_BRIEFCASE_GE_1822","ARTIFACT_AA_BRIEFCASE_GE_1822"],"target":">=1822 Elo","route_class":"SHARED_OWNER_COMPARATOR"},
+    {"surface":"AutomationBench","predicates":["AUTOMATIONBENCH_GE_40"],"target":">=40%","route_class":"PRIVATE_HOLDOUT_OR_SCOPE_DOMINANCE"},
+    {"surface":"Humanity's Last Exam with tools","predicates":["HLE_TOOLS_GE_67_7"],"target":">=67.7%","route_class":"GATED_POPULATION_JUDGE_ADAPTER_SCORE"},
+    {"surface":"Terminal-Bench-Science 0.1","predicates":["TB_SCIENCE_GE_58_7"],"target":">=58.7%","route_class":"BRAIN_SCORE_ONLY"},
+    {"surface":"Chartography with tools","predicates":["CHARTOGRAPHY_TOOLS_GE_89"],"target":">=89%","route_class":"FREE_QUOTA_THEN_SCORE"},
+    {"surface":"OSWorld 2.1 partial","predicates":["OSWORLD_2_1_PARTIAL_GE_81_8"],"target":">=81.8%","route_class":"ASSET_DEPENDENCY_PROTOCOL_THEN_SCORE"},
+    {"surface":"Finance & Accounting Index","predicates":["FINANCE_ACCOUNTING_INDEX_GE_61"],"target":">=61 represented scope","route_class":"SIX_COMPONENT_PREMISES"},
+    {"surface":"Finance Agent v2","predicates":["FINANCE_AGENT_V2_GE_58_59"],"target":">=58.59%","route_class":"OWNER_COMPARATOR"},
+    {"surface":"LiveBench Instruction Following","predicates":["LIVEBENCH_IF_GE_65_7"],"target":">=65.7%","route_class":"BRAIN_SCORE_ONLY"},
+    {"surface":"Vals MysteryMechanism","predicates":["MYSTERYMECHANISM_GE_49_55"],"target":">=49.55%","route_class":"OWNER_COMPARATOR"}
+  ],
+  "hard_rules": [
+    "ROUTE_INVENTORY_BLOB_DRIFT_FAILS_CLOSED",
+    "NO_SCORE_INHERITANCE_ACROSS_SURFACES",
+    "SHARED_AA_BRIEFCASE_EXECUTION_MAY_SERVE_TWO_PREDICATES_ONLY_IF_BOTH_SCOPE_CONTRACTS_PASS",
+    "NO_TARGET_REBASE_FROM_LIVE_LEADERBOARD_DRIFT_WITHOUT_EXPLICIT_TERMINAL_REBASE",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
