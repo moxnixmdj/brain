@@ -39,7 +39,7 @@ SURFACES = (
     "SOCIAL_TECHNICAL_DISCUSSION",
 )
 
-CANDIDATE_ONLY_SURFACES = {"SOCIAL_TECHNICAL_DISCUSSION"}
+CANDIDATE_ONLY_SURFACES = {"REPOSITORY_METADATA", "SOCIAL_TECHNICAL_DISCUSSION"}
 
 SURFACE_PRIOR = {
     "PACKAGE_REGISTRY": (0.78, 1.0, 0.65),
@@ -366,7 +366,26 @@ def _all_declared_cells_closed(state: Mapping[str, Any]) -> bool:
     cells = state.get("cells") or []
     if not cells:
         return False
-    for cell in cells:
+
+    all_surfaces = {str(cell.get("surface")) for cell in cells}
+    all_queries = {str(cell.get("query_id")) for cell in cells}
+    required_surfaces = set(scope.get("required_surfaces") or all_surfaces)
+    required_queries = set(scope.get("required_query_ids") or all_queries)
+    if not required_surfaces or not required_queries:
+        return False
+    if not required_surfaces.issubset(all_surfaces):
+        raise ValueError("DECLARED_SCOPE_SURFACE_OUTSIDE_PROGRAM")
+    if not required_queries.issubset(all_queries):
+        raise ValueError("DECLARED_SCOPE_QUERY_OUTSIDE_PROGRAM")
+
+    relevant = [
+        cell for cell in cells
+        if str(cell.get("surface")) in required_surfaces
+        and str(cell.get("query_id")) in required_queries
+    ]
+    if len(relevant) != len(required_surfaces) * len(required_queries):
+        raise ValueError("DECLARED_SCOPE_CELL_MATRIX_INCOMPLETE")
+    for cell in relevant:
         _valid_cell(cell)
         if not (
             cell.get("state") == "EXHAUSTIVELY_CLOSED"
@@ -407,11 +426,32 @@ def terminal_status(state: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
-def _cell_priority(cell: Mapping[str, Any], query_count: int) -> float:
+def _cell_priority(
+    cell: Mapping[str, Any],
+    query_count: int,
+    query_basis: str,
+    surface_attempts: int,
+) -> float:
     surface = str(cell["surface"])
     p_close, cost, coverage_gain = SURFACE_PRIOR[surface]
     query_penalty = 1.0 + 0.015 * max(0, query_count - 1)
-    return (p_close + 0.35 * coverage_gain) / (cost * query_penalty)
+    repeat_penalty = 1.0 + 0.45 * max(0, surface_attempts)
+    compatibility = 1.0
+    if query_basis.startswith("OBSERVABLE_API_SYMBOLS") and surface in {"SYMBOLS", "CODE_CONTENT"}:
+        compatibility = 1.45
+    elif query_basis.startswith("OBSERVABLE_IMPORTS") and surface in {"MANIFESTS", "CODE_CONTENT"}:
+        compatibility = 1.35
+    elif query_basis.startswith("OBSERVABLE_COMMANDS") and surface in {"PACKAGE_REGISTRY", "DOCUMENTATION", "CODE_CONTENT"}:
+        compatibility = 1.25
+    elif query_basis == "LANGUAGE_VARIANT" and surface in {"CODE_CONTENT", "OPEN_WEB", "REPOSITORY_METADATA", "DOCUMENTATION"}:
+        compatibility = 1.20
+    elif query_basis == "BEHAVIOR_PLUS_OBSERVABLE" and surface in {"CODE_CONTENT", "TESTS_EXAMPLES", "SYMBOLS"}:
+        compatibility = 1.30
+    return (
+        (p_close + 0.35 * coverage_gain)
+        * compatibility
+        / (cost * query_penalty * repeat_penalty)
+    )
 
 
 def next_action(
@@ -426,6 +466,12 @@ def next_action(
         q["query_id"]: q
         for q in program.get("query_lattice") or []
     }
+    attempts_by_surface = {surface: 0 for surface in SURFACES}
+    for prior in state.get("cells") or []:
+        _valid_cell(prior)
+        if prior.get("state") != "UNQUERIED":
+            attempts_by_surface[str(prior["surface"])] += 1
+
     candidates = []
     for cell in state.get("cells") or []:
         _valid_cell(cell)
@@ -434,7 +480,13 @@ def next_action(
         qid = cell.get("query_id")
         if qid not in query_map:
             raise ValueError("STATE_QUERY_NOT_IN_PROGRAM")
-        priority = _cell_priority(cell, len(query_map))
+        query = query_map[qid]
+        priority = _cell_priority(
+            cell,
+            len(query_map),
+            str(query.get("basis") or ""),
+            attempts_by_surface[str(cell["surface"])],
+        )
         if cell.get("state") == "FAILED_TRANSIENT":
             priority *= 0.85
         candidates.append((priority, str(qid), str(cell["surface"])))
