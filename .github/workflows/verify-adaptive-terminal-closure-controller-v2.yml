@@ -1,0 +1,43 @@
+name: Verify adaptive terminal closure controller v2
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/adaptive_terminal_closure_controller_v2.py"
+      - "canonical/tests/test_adaptive_terminal_closure_controller_v2.py"
+      - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V2.json"
+      - ".github/workflows/verify-adaptive-terminal-closure-controller-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run V2 controller tests
+        run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v2 -v
+      - name: Compile exact V13 V5 post-dual frontier
+        run: |
+          python canonical/runtime/adaptive_terminal_closure_controller_v2.py > ADAPTIVE_TERMINAL_CLOSURE_V2_RESULT.json
+          python - <<'PY'
+          import json
+          x=json.load(open("ADAPTIVE_TERMINAL_CLOSURE_V2_RESULT.json"))
+          assert x["pass"] is True,x
+          assert x["live_world"]["nondominated_certificates"]==14,x
+          assert x["live_world"]["verified_zero_reality_requirements"]==17,x
+          assert x["action_refinement"]["primitive_acceptance_work_units"]==31,x
+          assert len(x["first_resource_priority_work_unit_ids"])==16,x
+          assert len(x["ownership_reconciliation_work_units"])==2,x
+          assert x["execution_policy"]["tool_discovery_v5_gate_mandatory"] is True,x
+          assert x["execution_authority"] is False,x
+          assert x["promotion_authority"] is False,x
+          assert x["fresh_reality_authority"] is False,x
+          print("adaptive V13/V5 post-dual controller V2 verified")
+          PY
