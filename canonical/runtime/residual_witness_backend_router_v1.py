@@ -96,13 +96,29 @@ def _scholarly_provider(action: Mapping[str, Any]) -> Mapping[str, Any]:
     }
 
 
+def _github_public_provider(action: Mapping[str, Any]) -> Mapping[str, Any]:
+    from canonical.runtime import github_public_retrieval_provider_v1
+    return github_public_retrieval_provider_v1.search(action,limit=20)
+
+
 def default_providers() -> dict[str, Callable[[Mapping[str, Any]], Mapping[str, Any]]]:
-    return {
+    providers={
         "PACKAGE_REGISTRY":_package_registry_provider,
         "OPEN_WEB":_open_web_provider,
         "DOCUMENTATION":_open_web_provider,
         "SCHOLARLY":_scholarly_provider,
     }
+    for surface in (
+        "REPOSITORY_METADATA",
+        "CODE_CONTENT",
+        "SYMBOLS",
+        "MANIFESTS",
+        "TESTS_EXAMPLES",
+        "ISSUES_PRS",
+        "COMMITS_RELEASES_BRANCHES_TAGS",
+    ):
+        providers[surface]=_github_public_provider
+    return providers
 
 
 def _candidate_id(candidate: Mapping[str, Any], index: int) -> str:
