@@ -274,7 +274,7 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "EXECUTE_EXACTLY_TERMINAL_BENCH_SCIENCE_VIRTUAL_BASELINE_LOCALIZATION_TRIAL_0__CAPTURE_CONTENT_ADDRESSED_RESULT__AUTO_REVOKE__NO_RETRY_NO_REPLACEMENT",
+    "next_step": "VERIFY_TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_REPAIR_V1__NO_NEW_SCIENCE_TERMINAL_SLOT_AUTHORITY_UNTIL_INDEPENDENT_PASS",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
