@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_MEMORY_COMPONENT_SCOPE_BRIDGE__ZERO_CREDIT",
+  "source_brain_path": "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V1.json",
+  "source_brain_blob_sha": "d073b395c3ec335e5aebe45e100a8a9a345905f6",
+  "exact_dependency_blobs": {
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d",
+    "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json": "2d912cf8df64bd806fffb6a1070d95644d005470"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37040567011,
+    "workflow_job_id": 110949368670,
+    "verifier_infrastructure_commit": "d09665c72fbc402c2032c1a563774b443fc33523",
+    "verification_bundle_commit": "a75a1166fd8cf95cd8346cfc17d740724665d2f6",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_SOURCE_AND_DEPENDENCY_BLOBS_MATCH",
+    "UNIQUE_NON_COMPOSITION_MEMORY_FAMILY_IS_LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "SOURCE_MEMORY_PROTOCOL_STATUS_PASS",
+    "SOURCE_MEMORY_PACKAGE_VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "MEMORY_CLAIM_SCOPE_EXACTLY_PRESERVED",
+    "SOURCE_EXCLUDED_SCOPE_EXACTLY_PRESERVED",
+    "FROZEN_COMPOSITION_MEMORY_COMPONENT_AND_INTERFACE_MATCH",
+    "CANDIDATE_RECEIPT_CONTAMINATION_CLEAN_AND_ACCEPTANCE_SCOPED",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "verified_receipt": {
+    "receipt_id": "COMPOSITION_OWNED_FAMILY_BRIDGE::LONG_HORIZON_MEMORY_AND_CONTINUITY::memory",
+    "component_id": "memory",
+    "interface_id": "browser/computer action+memory+recovery",
+    "proved_properties": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ],
+    "verified": true,
+    "independent": true,
+    "contamination_clean": true,
+    "acceptance_scoped": true,
+    "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+    "source_family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "source_witness_path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json"
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
