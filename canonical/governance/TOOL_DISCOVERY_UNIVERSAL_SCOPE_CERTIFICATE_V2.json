@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_COMMON_MATCHED_AUTHORITY_UNIVERSAL_FORMAL_SCOPE_PROOF__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge only the active Tool Discovery scope-completeness proof atom by composing the independently verified V4 program-side theorem with an exact complete discovery interface over the identical frozen Brain/Opus action authority, without empirical extrapolation, terminal replay, or Brain-only scope narrowing.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "exact_candidate_blobs": {
+    "canonical/runtime/tool_discovery_common_authority_interface_v1.py": "1c86903fed59790672de2285c9e7b3f6f46dff25",
+    "canonical/tests/test_tool_discovery_common_authority_interface_v1.py": "d54a447e19b32b2daa4b4f9b1855142b34671f39",
+    "canonical/governance/TOOL_DISCOVERY_COMMON_AUTHORITY_SCOPE_RELATION_V1.json": "4c890bc23e37f7c845a56affa9e0b175653f6271",
+    "canonical/runtime/tool_discovery_universal_scope_certificate_v2.py": "f562de098c1420e7b78d0da69c5155acb17bb629",
+    "canonical/tests/test_tool_discovery_universal_scope_certificate_v2.py": "d38ae4c41b14851eebe6330f2bf344ef3ac5befa"
+  },
+  "reused_independent_program_receipt": {
+    "path": "canonical/verification/TOOL_DISCOVERY_DYNAMIC_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "10cb18355d247a05177230d0dd345e161e84111d",
+    "scope": "PROGRAM_SIDE_DISCOVERY_BEFORE_COMMITMENT_AND_GLOBAL_LEAST_COST_EVIDENCE_ORDER_ONLY"
+  },
+  "proof_domain": "ALL_FINITE_FROZEN_MATCHED_TOOL_ECOSYSTEM_EPISODES_OVER_ONE_IDENTICAL_BRAIN_OPUS_EXTERNAL_ACTION_AUTHORITY__TOOL_IDENTITIES_MAY_BE_ENTIRELY_HIDDEN_AT_INITIAL_STATE__DISCOVERY_INTERFACE_PARTITIONS_AND_REVEALS_PUBLIC_METADATA_ONLY__CAPABILITY_TRUTH_ORACLE_ONLY",
+  "formal_result_candidate": {
+    "universal_scope_proved": true,
+    "scope_atom_satisfied_candidate": true,
+    "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "reason": "VALID_MATCHED_ROUTES_ARE_EXACTLY_SUBSET_OF_IDENTICAL_COMMON_ACTION_AUTHORITY__COMPLETE_DISCOVERY_INTERFACE_UNION_EQUALS_THAT_AUTHORITY_BY_CONSTRUCTION_AND_VALIDATION__V4_QUERIES_ALL_SOURCES_BEFORE_COMMITMENT",
+    "open_world_outside_authority_disposition": "NONINVOCABLE_BY_EITHER_SIDE__CANNOT_BE_VALID_MATCHED_ROUTE__NOT_A_SCOPE_OMISSION",
+    "unknown_identity_preserved": true,
+    "brain_only_registry_substitution": false,
+    "uses_empirical_generalization": false
+  },
+  "promotion_rule": "ONLY_AN_INDEPENDENT_PUBLIC_RUNNER_PASS_OVER_THE_EXACT_CONTENT_ADDRESSED_CANDIDATE_AND_REUSED_AUTHORITY_BLOBS_MAY_SATISFY_THE_SCOPE_ATOM__TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_REMAINS_A_SEPARATE_ATOMIC_STEP",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_OF_ENUMERATING_ALL_HYPOTHETICAL_WORLD_TOOLS",
+    "NO_BRAIN_ONLY_REGISTRY_SCOPE_SUBSTITUTION",
+    "NO_CAPABILITY_TRUTH_VISIBLE_TO_CANDIDATE",
+    "NO_EMPIRICAL_GENERALIZATION_FROM_180_CASES",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "expected_next_if_independent_pass": "BIND_PUBLIC_RECEIPT__THEN_RUN_SEPARATE_TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_AGAINST_THE_FROZEN_PREDICATE_WITH_ZERO_REPLAY",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
