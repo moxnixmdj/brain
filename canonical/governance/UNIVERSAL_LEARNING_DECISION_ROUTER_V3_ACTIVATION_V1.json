@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_UNIVERSAL_LEARNING_DECISION_ROUTER_V3_ACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_CANDIDATE_BRANCH__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT__UNKNOWN_DOMAIN_LEAVES_PRESERVED",
+  "status": "ACTIVE_MAIN__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT__UNKNOWN_DOMAIN_LEAVES_PRESERVED",
   "scope": "NEW_ENVIRONMENT_AND_NEW_THING_LEARNING_ONLY",
   "target_blocker": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
   "frozen_protocol": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
@@ -49,5 +49,6 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "activation_scope": "CANONICAL_MAIN"
 }

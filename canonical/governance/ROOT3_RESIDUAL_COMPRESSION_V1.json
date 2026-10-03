@@ -37,10 +37,10 @@
     },
     "universal_learning_v3_overlay": {
       "activation_path": "canonical/governance/UNIVERSAL_LEARNING_DECISION_ROUTER_V3_ACTIVATION_V1.json",
-      "activation_git_blob_sha": "e6ab0547f692e55c1918c300a09242f01db81204",
+      "activation_git_blob_sha": "b212fe38f3211e99f1a2c7a2ab04f09ee246149d",
       "verification_path": "canonical/verification/UNIVERSAL_LEARNING_DECISION_ROUTER_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "verification_git_blob_sha": "6810cce4dfeee587fde449951f17da8d37c1eb6e",
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__OPERATIVE_UNKNOWN_DOMAIN_LEARNING_OVERLAY__ZERO_CREDIT"
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ACTIVE_MAIN_OPERATIVE_UNKNOWN_DOMAIN_LEARNING_OVERLAY__ZERO_CREDIT"
     }
   },
   "compressed_residuals": [
