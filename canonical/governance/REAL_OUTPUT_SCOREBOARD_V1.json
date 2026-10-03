@@ -1325,7 +1325,7 @@
   },
   "terminal_authority_projection": {
     "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-    "source_commit_sha": "767e0f6be3f02ec0bbe5c48020989b009d74be0e",
-    "rule": "NEXT_AND_ACCEPTANCE_COUNTS_DERIVED_FROM_CURRENT_TERMINAL_AUTHORITY__VOLATILE_ROUTE_DETAIL_NOT_DUPLICATED_IN_MIRROR_BLOCKER"
+    "source_commit_sha": "1cdb7f94f3491e755014a3abfe4a64cf6fae7b5a",
+    "rule": "NEXT_AND_ACCEPTANCE_COUNTS_DERIVED_FROM_CURRENT_TERMINAL_AUTHORITY__RECOVERY_V2_PROMOTION_RECONCILED"
   }
 }
