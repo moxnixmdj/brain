@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V3_CANDIDATE",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_TRUTH_REPAIR__TOOL_DISCOVERY_HYBRID_ROUTE_COMPILED__ZERO_CREDIT",
+  "supersedes_for_scheduling_only": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+    "git_blob_sha": "ec0ca144939a19234f1c53378cc76af2014a6179",
+    "reason": "V2 encodes only one absolute-scope certificate although the frozen Tool Discovery protocol is matched noninferiority and current authority now requires an observability partition."
+  },
+  "terminal_goal": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "frozen_protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "proof_mode": "MATCHED_HIDDEN_TOOL_ECOSYSTEM_TRANSFER",
+    "acceptance": "On frozen tool ecosystems with hidden capability variants, Brain conservative terminal-success/valid-route bounds >= Opus matched bounds, with demonstrated second-task transfer from first-task evidence and no unsupported capability-state promotion."
+  },
+  "proof_routes": [
+    {
+      "id": "ABSOLUTE_DOMINANCE_ROUTE",
+      "status": "PRESERVED__NOT_CURRENTLY_DISCHARGED",
+      "sufficient_when": [
+        "WHOLE_PROTOCOL_COMMON_AUTHORITY_IDENTITY_COMPLETE",
+        "EVERY_DECISION_RELEVANT_HIDDEN_FACT_OBSERVABLE_OR_SAFELY_PROBEABLE",
+        "INDEPENDENTLY_VERIFIED_V6_OR_SUCCESSOR_PROGRAM_SOUNDNESS",
+        "UNIVERSAL_FORMAL_OR_EXHAUSTIVE_SCOPE_PROOF",
+        "ABSOLUTE_CEILING_DOMINANCE"
+      ],
+      "hard_rule": "OBSERVABILITY_LOWER_BOUND_FORBIDS_USING_THIS_ROUTE_ON_MATCHED_ONLY_STATES"
+    },
+    {
+      "id": "MATCHED_HYBRID_ROUTE",
+      "status": "CURRENT_CRITICAL_PATH__NOT_YET_SATISFIED",
+      "stages": [
+        {
+          "id": "PROGRAM_SOUNDNESS",
+          "requires": [
+            "INDEPENDENT_EXACT_BYTE_V6_OR_SUCCESSOR_PASS"
+          ],
+          "current_candidate": {
+            "brain_pr": 1163,
+            "head_sha": "a318516a081118c22af6dec4233c7cb76aa3c51d"
+          }
+        },
+        {
+          "id": "COMMON_MATCHED_AUTHORITY",
+          "requires": [
+            "INDEPENDENT_CONCRETE_COMMON_BRAIN_OPUS_AUTHORITY_INSTANCE_OR_TARGET_LOCAL_MATCHED_AUTHORITY_BINDING",
+            "IDENTITY_COMPLETENESS_PROVED_BY_CONTENT_ADDRESSED_STRUCTURE_NOT_SELF_REPORTED_FLAG"
+          ],
+          "conditional_infrastructure": {
+            "brain_pr": 1164,
+            "note": "PARAMETRIC_INTERFACE_ONLY__NO_SCOPE_CREDIT_BY_ITSELF"
+          }
+        },
+        {
+          "id": "OBSERVABILITY_PARTITION",
+          "requires": [
+            "INDEPENDENT_PARTITION_PASS"
+          ],
+          "current_candidate": {
+            "brain_pr": 1169,
+            "head_sha": "a256c7646084ad7be062652a9c02bf5a9bcbfa3f"
+          },
+          "universal_region": "ALL_DECISION_RELEVANT_HIDDEN_FACTS_ARE_EVIDENCED_OR_SAFELY_PROBE_DECIDABLE",
+          "matched_only_region": "AT_LEAST_ONE_DECISION_RELEVANT_HIDDEN_FACT_IS_NOT_EVIDENCED_AND_NOT_SAFELY_PROBE_DECIDABLE"
+        },
+        {
+          "id": "UNIVERSAL_REGION_PROOF",
+          "applies_when": "OBSERVABILITY_PARTITION==UNIVERSAL_REGION",
+          "requires": [
+            "V6_SOUNDNESS",
+            "COMMON_AUTHORITY_IDENTITY_COMPLETENESS",
+            "FORMAL_VALID_AND_LEAST_COST_PROOF_FOR_OBSERVABLE_REGION"
+          ]
+        },
+        {
+          "id": "MATCHED_ONLY_EVIDENCE",
+          "applies_when": "OBSERVABILITY_PARTITION==MATCHED_ONLY_REGION",
+          "requires": [
+            "VALID_FROZEN_TARGET_INSTANTIATION_SCOPE_RELATION",
+            "MATCHED_OPUS_REFERENCE_BOUND_TO_SAME_TARGET_AND_SAME_METRIC",
+            "BRAIN_MATCHED_TARGET_RESULT_INDEPENDENT_PASS",
+            "BRAIN_CONSERVATIVE_BOUND_GE_OPUS_MATCHED_BOUND"
+          ],
+          "current_target_candidates": [
+            {
+              "brain_pr": 1157,
+              "role": "TOOLATHLON_TARGET_LOCAL_SCOPE_BRIDGE__ZERO_CREDIT_PENDING_VERIFICATION"
+            },
+            {
+              "brain_pr": 1168,
+              "role": "OPUS55_TOOLATHLON_77_8_TERMINAL_SUCCESS_REFERENCE__ZERO_CREDIT_PENDING_VERIFICATION"
+            }
+          ],
+          "metric_boundary": {
+            "terminal_success": "TOOLATHLON_PASS_AT_1_MAY_BIND_ONLY_IF_SCOPE_AND_SOURCE_VERIFIED",
+            "valid_route_top1": "SEPARATE_MATCHED_OR_SCOPE_COMPLETE_EVIDENCE_REQUIRED",
+            "forbidden": "DO_NOT_RELABEL_TERMINAL_PASS_AT_1_AS_VALID_ROUTE_TOP1"
+          }
+        },
+        {
+          "id": "TRANSFER_AND_CAPABILITY_STATE",
+          "requires": [
+            "SECOND_TASK_TRANSFER_FROM_FIRST_TASK_EVIDENCE",
+            "NO_UNSUPPORTED_CAPABILITY_STATE_PROMOTION",
+            "VERSION_OR_AUTHORITY_CHANGE_INVALIDATES_OR_RESTARTS_STALE_STATE"
+          ]
+        },
+        {
+          "id": "SEPARATE_ACCEPTANCE_REDUCTION",
+          "requires": [
+            "ALL_PRECEDING_LOAD_BEARING_FACTS_INDEPENDENTLY_BOUND"
+          ],
+          "effect_if_pass": "ONLY_THEN_MAY_TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR_PROMOTE"
+        }
+      ]
+    }
+  ],
+  "scheduler_rules": [
+    "PREFER_ZERO_REALITY_DEDUCTION_AND_EXISTING_RECEIPTS_BEFORE_NEW_EXECUTION",
+    "DO_NOT_SEARCH_FOR_UNIVERSAL_OMNISCIENT_PROOF_ON_MATCHED_ONLY_PARTITION",
+    "DO_NOT_USE_PARAMETRIC_AUTHORITY_ARGUMENT_AS_CONCRETE_COMMON_AUTHORITY_PROOF",
+    "DO_NOT_USE_FINITE_SAMPLE_AS_WHOLE_PROTOCOL_SCOPE_PROOF",
+    "DO_NOT_USE_TOOLATHLON_TERMINAL_SUCCESS_AS_VALID_ROUTE_TOP1",
+    "DO_NOT_PROMOTE_FROM_CANDIDATE_OR_QUEUED_VERIFIER_STATUS",
+    "REQUIRE_SEPARATE_INDEPENDENT_ACCEPTANCE_REDUCTION"
+  ],
+  "current_truth_preserved": {
+    "opus55_acceptance": "3/19_PASS__16/19_OPEN",
+    "atomic_acceptance": "8/38_PROVED__30_UNRESOLVED",
+    "terminal_goal_achieved": false
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
