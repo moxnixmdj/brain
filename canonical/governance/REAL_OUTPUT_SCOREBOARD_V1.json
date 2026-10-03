@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "V4_PRIVATE_CORPUS_FREEZE_PRODUCES_A_VERIFIED_ZERO_REALITY_RECEIPT_DELTA__OR_ANOTHER_NON_CARRIER_BLOCKED_TERMINAL_PROOF_ACTION_CLOSES_OR_FALSIFIES__P1_REOPENS_ONLY_ON_NEW_ADMISSIBLE_INFORMATION__NO_NEW_ACCEPTANCE_CREDIT_WITHOUT_FIXED_POINT",
+  "next_progress_event_target": "POST_DELEGATION_30_PREDICATE_FRONTIER_RECOMPILE_INDEPENDENT_PASS__OR_V4_PRIVATE_CORPUS_FREEZE_PRODUCES_A_VERIFIED_ZERO_REALITY_RECEIPT_DELTA__OR_ANOTHER_NON_CARRIER_BLOCKED_TERMINAL_PROOF_ACTION_CLOSES_OR_FALSIFIES__NO_FRESH_TERMINAL_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1288,5 +1288,23 @@
     "admissible_routes": 2,
     "remaining_routes": 10,
     "execution_authority": false
+  },
+  "terminal_acceptance_state": {
+    "accepted_families": 3,
+    "total_families": 19,
+    "proved_atomic_predicates": 8,
+    "unresolved_atomic_predicates": 30,
+    "total_atomic_predicates": 38,
+    "terminal_goal_achieved": false
+  },
+  "last_terminal_acceptance_delta": {
+    "event_id": "DELEGATION_V4_UNIVERSAL_SCOPE_ACCEPTANCE_CLOSURE_20261003",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PROMOTED",
+    "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "atomic_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "receipt": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "fresh_reality_units_consumed": 0,
+    "terminal_results_replayed": 0,
+    "scoreboard_counter_increase": 0
   }
 }

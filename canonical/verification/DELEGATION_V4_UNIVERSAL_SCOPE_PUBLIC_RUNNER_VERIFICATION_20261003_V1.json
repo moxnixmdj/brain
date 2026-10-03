@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CUMULATIVE_HISTORY_REPAIR_AND_UNIVERSAL_FORMAL_SCOPE_PROOF__ZERO_CREDIT_PENDING_ACCEPTANCE_REDUCTION",
+  "source_brain_pr": 1063,
+  "exact_brain_blobs": {
+    "canonical/runtime/delegation_receipt_history_candidate_v4.py": "e4faa96bacb3d948e960899ba44ec75485703991",
+    "canonical/tests/test_delegation_receipt_history_candidate_v4.py": "bf0f4edff4a7553d3e36812da38068e0e06ccdff",
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4f3b09c517950cc050432a0616f",
+    "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json": "8ffe02f3efe1ceebed30354404bc2f60f3bd6bbd",
+    "canonical/runtime/delegation_universal_scope_certificate_v2.py": "900a1fba2da1590e0636222091af5b8522574e81",
+    "canonical/tests/test_delegation_universal_scope_certificate_v2.py": "cdfb10a4dca18bd60cb8ff9dae4840285c0cc60d",
+    "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json": "f53937a9849cccdb408a75842aad4415a5992cc9"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1107,
+    "workflow_run_id": 37083091335,
+    "workflow_job_id": 111087652841,
+    "merge_commit": "3ed05dd0fb01e2bea5e2a9fb5d8a13dd3ce92fcb",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_BLOB_IDENTITIES_PASS",
+    "CUMULATIVE_RECEIPT_HISTORY_ADVERSARIAL_TESTS_PASS",
+    "FULL_HISTORY_REPLAY_FROM_IMMUTABLE_BASE_PASS",
+    "NO_PRIOR_DISABLE_OR_REMOVAL_STATE_RESURRECTION_PASS",
+    "UNIVERSAL_FINITE_HISTORY_INDUCTION_PASS",
+    "UNIVERSAL_SCOPE_PROVED_TRUE",
+    "SCOPE_ATOM_SATISFIED_CANDIDATE_TRUE",
+    "BASIS_KIND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "NO_EMPIRICAL_GENERALIZATION",
+    "ZERO_TERMINAL_REPLAY_AND_ZERO_NEW_REALITY"
+  ],
+  "target_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_DELEGATION_PROTOCOL",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
