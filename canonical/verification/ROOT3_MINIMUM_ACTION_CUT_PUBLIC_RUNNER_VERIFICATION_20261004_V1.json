@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_MINIMUM_ACTION_CUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__11_ROOT3_PREDICATES_TO_3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
+  "source_brain": {
+    "pull_request": 1446,
+    "source_head_sha": "2e45de3b5aea5e23d54329a3d2629b1e97c9316e",
+    "merged_main_commit": "518cf62c3fd595a4e2822bafd3d4b4fac8e25c7c",
+    "governance_path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V1.json",
+    "runtime_path": "canonical/runtime/root3_minimum_action_cut_v1.py",
+    "tests_path": "canonical/tests/test_root3_minimum_action_cut_v1.py"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1467,
+    "verifier_head_sha": "0ebc21d737a9856a2a4d251b5cc623eb8b34a6a7",
+    "merge_commit": "a7fb8949920751c2f6f8558291308823ee78e183",
+    "workflow_run_id": 37160999556,
+    "workflow_job_id": 111314221103,
+    "conclusion": "success",
+    "artifact_id": 11288095099,
+    "artifact_name": "root3-minimum-action-cut-v1-verdict",
+    "artifact_digest": "sha256:94e36171be705f92f64131cdbb923cfbbcf6c1d8adde44edd664b2c46e19847b"
+  },
+  "verified": {
+    "live_root3_predicates": 11,
+    "formal_population_identities": 4,
+    "matched_scope_targets_one_wave": 8,
+    "composition_open_interfaces": 8,
+    "direct_oracle_leaves": 4,
+    "event_class_count": 3,
+    "currently_runnable_event_count": 0,
+    "bound_source_errors": []
+  },
+  "accounting": {
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "hard_nonclaims": [
+    "NO_ROOT3_PREDICATE_CLOSED_BY_THIS_RECEIPT",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_RELEVANT_UNPUBLISHED_SCOPE_CERTIFICATES_DO_NOT_EXIST",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ]
+}
