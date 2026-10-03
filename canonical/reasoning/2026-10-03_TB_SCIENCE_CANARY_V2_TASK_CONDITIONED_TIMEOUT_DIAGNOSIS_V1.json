@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CANARY_V2_TASK_CONDITIONED_TIMEOUT_DIAGNOSIS_V1",
+  "date": "2026-10-03",
+  "status": "CAUSAL_LOCALIZATION__HTTP_RESPONSE_TIMEOUT_AT_180S_WHILE_LOCAL_QWEN_STILL_GENERATING__REPAIR_CANDIDATE_300S__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source": {
+    "terminal_result": "canonical/verification/TB_SCIENCE_CANARY_V2_RESULT_20261003_V1.json",
+    "workflow_run_id": 37106127198,
+    "workflow_job_id": 111154893275,
+    "artifact_id": 11267982635,
+    "artifact_zip_sha256": "ffe482ebd229c01e0f3b50f3a6bb9c30bb5dfe027ef011a402da8ac447360569",
+    "consumed_slot": "terminal-bench-science/baseline-free-localization::trial-0"
+  },
+  "observed": {
+    "planner_exception": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "planner_timeout_seconds": 180,
+    "local_model_prompt_tokens_processed": 1552,
+    "prompt_processing_seconds": 125.2,
+    "prompt_tokens_per_second": 12.4,
+    "decoded_tokens_before_cancel": 321,
+    "generation_tokens_per_second_approx": 5.94,
+    "local_server_still_processing_at_cancel": true,
+    "verifier_started": false,
+    "reward": 0
+  },
+  "inference": {
+    "failure_class": "PLANNER_TRANSPORT_LATENCY_ENVELOPE_TOO_SHORT_FOR_OBSERVED_TASK_CONDITIONED_REQUEST",
+    "evidence_against_model_crash": "LLAMA_SERVER_LOG_SHOWS_CONTINUOUS_PROMPT_PROCESSING_AND_TOKEN_GENERATION_UNTIL_CLIENT_CANCELLATION",
+    "evidence_against_harbor_carrier_failure": "HARBOR_STEP_COMPLETED_AND_REPORTED_SCIENCE_PLANNER_ERROR_FROM_AGENT_PATH",
+    "narrow_repair": "CHANGE_CONTROLLER_PLANNER_CALL_TIMEOUT_FROM_180_TO_300_SECONDS_ONLY",
+    "no_claim": "DOES_NOT_PROVE_THE_MODEL_WILL_RETURN_A_VALID_TOOL_CALL_OR_THAT_ANY_FUTURE_TERMINAL_SLOT_WILL_PASS"
+  },
+  "quantitative_bound": {
+    "observed_time_to_321_decoded_tokens_seconds_approx": 179.2,
+    "additional_budget_seconds": 120,
+    "repaired_timeout_seconds": 300,
+    "rationale": "300_SECONDS_IS_ALREADY_WITHIN_PLANNER_VALIDATED_TIMEOUT_BOUND_AND_DOMINATES_THE_OBSERVED_180_SECOND_CENSORING_POINT_WITHOUT_CHANGING_MODEL_BYTES_PROMPT_SEMANTICS_TOOL_SCHEMA_OR_COMMAND_POLICY"
+  },
+  "required_verification": [
+    "UNIT_TEST_EXACT_CONTROLLER_CALL_USES_300_SECONDS",
+    "INDEPENDENT_NONTERMINAL_LONG_PROMPT_LOCAL_QWEN_REPRODUCTION_COMPLETES_WITHIN_300_SECONDS",
+    "EXACT_REPAIRED_BLOBS_CONTENT_ADDRESSED",
+    "NO_NEW_TB_SCIENCE_TERMINAL_SLOT_BEFORE_INDEPENDENT_REPAIR_PASS"
+  ],
+  "hard_rules": [
+    "CONSUMED_CANARY_SLOT_REMAINS_FINAL_ZERO",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_REPAIR",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE_DURING_REPAIR_VERIFICATION"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
