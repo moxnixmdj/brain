@@ -1,7 +1,7 @@
 from __future__ import annotations
 import copy, unittest
 from pathlib import Path
-from canonical.runtime.ownership_promotion_compiler_v1 import evaluate, load
+from canonical.runtime.ownership_promotion_compiler_v1 import audit_source, evaluate, load
 
 ROOT=Path(__file__).resolve().parents[2]
 BATCH=ROOT/"canonical/governance/OWNERSHIP_PROMOTION_BATCH_V1.json"
@@ -38,6 +38,15 @@ class TestOwnershipPromotionCompilerV1(unittest.TestCase):
         out=evaluate(ROOT,b)
         self.assertEqual(out["status"],"FAIL_CLOSED")
         self.assertTrue(any(x.startswith("RECEIPT_UNAVAILABLE:") for x in out["families"][2]["errors"]))
+
+    def test_external_provider_import_fails_closed(self):
+        self.assertTrue(audit_source("import requests\n"))
+        self.assertTrue(audit_source("from openai import OpenAI\n"))
+        self.assertEqual(audit_source("from __future__ import annotations\nimport math\n"),[])
+
+    def test_dynamic_escape_fails_closed(self):
+        self.assertTrue(audit_source("exec('x=1')\n"))
+        self.assertTrue(audit_source("__import__('requests')\n"))
 
     def test_binding_pointer_mutation_fails_closed(self):
         b=load(BATCH); b=copy.deepcopy(b)
