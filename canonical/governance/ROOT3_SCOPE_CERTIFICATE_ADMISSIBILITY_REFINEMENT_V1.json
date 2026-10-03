@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_FALSIFICATION_BOUND__ACCOUNTING_LABEL_SCOPE_SHORTCUT_BLOCKED__ZERO_CREDIT",
+  "authority": {
+    "falsification": {
+      "path": "canonical/governance/SYNTHESIS_SINGLETON_FAMILY_SCOPE_FALSIFICATION_V1.json",
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "verification_path": "canonical/verification/SYNTHESIS_SINGLETON_FAMILY_SCOPE_FALSIFICATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "d109cdcbcf702243b92b3fa24b766d9b622213bd"
+    },
+    "semantic_purge_law": {
+      "path": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+      "git_blob_sha": "5b70ed776f13194ea02d7df1d878a88386a48b61"
+    },
+    "universal_scope_compiler": {
+      "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+      "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039"
+    }
+  },
+  "new_admissibility_rule": "ACCOUNTING_LABEL_CARDINALITY_OR_SINGLETON_FAMILY_TO_CONTRACT_MAPPING_IS_NEVER_SCOPE_COMPLETENESS_EVIDENCE_WITHOUT_AN_EXPLICIT_INDEPENDENT_LOSSLESS_OR_EXHAUSTIVE_DECOMPOSITION_CERTIFICATE",
+  "affected_work_classes": [
+    "ROOT3_FORMAL_SCOPE_SHARED_V1",
+    "ROOT3_SYNTHESIS_SCOPE_RELATION_V1"
+  ],
+  "scheduling_effect": "NO_NEW_RUNNABLE_ACTION__INVALID_SHORTCUT_DELETED__NEW_SCOPE_CERTIFICATE_EVENT_MUST_INCLUDE_EXPLICIT_DECOMPOSITION_COMPLETENESS_WHEN_DERIVING_FROM_FAMILY_ACCOUNTING",
+  "hard_nonclaims": [
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_SYNTHESIS_SCOPE_RELATION_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
