@@ -208,6 +208,33 @@ def run(case:Mapping[str,Any],max_steps:int|None=None)->dict[str,Any]:
         state=step(state)
     raise AdapterError("STEP_BUDGET_EXCEEDED")
 
+
+def start_next_task(
+    state:Mapping[str,Any],
+    required_capabilities:list[str],
+    *,
+    constraint:Any=None,
+)->dict[str,Any]:
+    """Start a later task in the same decision epoch while preserving earned evidence."""
+    if not isinstance(state,Mapping) or state.get("schema")!=SCHEMA:
+        raise AdapterError("INVALID_STATE_SCHEMA")
+    if state.get("terminal") is None:
+        raise AdapterError("PRIOR_TASK_NOT_TERMINAL")
+    required=sorted({str(x) for x in required_capabilities if str(x)})
+    if not required:
+        raise AdapterError("REQUIRED_CAPABILITIES_EMPTY")
+    truth=state["private"]["capability_truth"]
+    for tid,caps in truth.items():
+        missing=[cap for cap in required if cap not in caps]
+        if missing:
+            raise AdapterError("HIDDEN_CAPABILITY_MATRIX_INCOMPLETE:"+tid+":"+",".join(missing))
+    out=deepcopy(dict(state))
+    out["public"]["required_capabilities"]=required
+    out["public"]["constraint"]=deepcopy(constraint)
+    out["terminal"]=None
+    out.pop("last_action",None)
+    return out
+
 def oracle_least_cost_sufficient(case:Mapping[str,Any])->str|None:
     tools=_tool_rows(case)
     truth=_truth(case,{x["tool_id"] for x in tools})
