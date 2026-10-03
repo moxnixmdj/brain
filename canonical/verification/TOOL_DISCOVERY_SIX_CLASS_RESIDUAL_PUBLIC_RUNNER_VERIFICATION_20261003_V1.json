@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_SIX_CLASS_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FROZEN_GENERATOR_SIX_CLASS_QUOTIENT__OPEN_DOMAIN_SCOPE_RELATION_REMAINS__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "brain_pull_request": 1282,
+  "independently_verified_brain_head": "50635186295b2cdf053a465ebb2681dfcbbff7f7",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1273,
+    "head_sha": "24159075a47bf240ab6d2dd4e4294eb9b03dc0e5",
+    "merge_sha": "a7ab2a2ab9a38d7fc9d9e13b0f70393e8fc573da",
+    "workflow_run_id": 37112477977,
+    "workflow_job_id": 111172924270,
+    "conclusion": "success",
+    "verified_steps": [
+      "EXACT_MIRRORED_BLOBS",
+      "ISOLATED_SIX_CLASS_THEOREM_TESTS",
+      "ZERO_CREDIT_SCOPE_FIREWALL"
+    ]
+  },
+  "verified": {
+    "frozen_generator_semantic_classes": 6,
+    "all_six_classes_pass": true,
+    "identifier_suffix_alpha_renaming_only": true,
+    "open_domain_scope_relation_closed": false,
+    "strict_acceptance_closed": false
+  },
+  "hard_nonclaims": [
+    "NO_TOOL_DISCOVERY_FAMILY_PROMOTION",
+    "NO_OPUS_COMPARATOR_EQUIVALENCE",
+    "NO_OPEN_DOMAIN_EXHAUSTIVENESS_INFERENCE",
+    "NO_ACCEPTANCE_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "ATTACK_ONLY_OPEN_DOMAIN_SCOPE_RELATION_OR_IRREDUCIBLE_MATCHED_COMPARATOR_REMAINDER"
+}
