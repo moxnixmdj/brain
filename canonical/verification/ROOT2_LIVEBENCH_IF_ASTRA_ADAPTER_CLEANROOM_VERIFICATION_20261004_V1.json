@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_LIVEBENCH_IF_ASTRA_ADAPTER_CLEANROOM_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CLEAN_ROOM_LOCAL_EXECUTION_PASS__EXACT_CANDIDATE_BLOBS__6_OF_6_TESTS_PASS__NOT_PUBLIC_RUNNER__ZERO_CREDIT",
+  "scope": "ROOT2_LIVEBENCH_IF_ASTRA_INFERENCE_ADAPTER_AND_EXTERNAL_TASK_ENTRYPOINT_WIRING_ONLY",
+  "exact_blobs": {
+    "adapter": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
+    "external_task_entrypoint": "603beefe0db24102b86b7c965e5433bd880392af",
+    "adapter_test": "87b5e4c7e58d1a1b224ec67aedd1735d55608948",
+    "entrypoint_test": "d81a736b32652b6002173acf0729770acc9d96f9",
+    "adapter_registry": "afa021a25d2de53e293d10ab6759e55eaabaea21"
+  },
+  "test_result": {
+    "passed": 6,
+    "failed": 0,
+    "covered": [
+      "MODEL_INDEPENDENT_RESULT_ACCEPTED",
+      "MODEL_ASSISTED_RESULT_REJECTED",
+      "EXTERNAL_TOOLS_REJECTED",
+      "LIVEBENCH_ADAPTER_PREFLIGHT_PASS",
+      "UNKNOWN_BENCHMARK_FAIL_CLOSED",
+      "MALFORMED_LIVEBENCH_REQUEST_FAIL_CLOSED"
+    ]
+  },
+  "limitations": [
+    "ASTRA_RUNTIME_WAS_STUBBED_AT_THE_UNIT_BOUNDARY_AND_RUN_GOAL_WAS_MOCKED_FOR_ADAPTER_BEHAVIOR_TESTS",
+    "THIS_DOES_NOT_PROVE_REAL_LIVEBENCH_PROMPT_SUCCESS",
+    "THIS_DOES_NOT_PROVE_LIVEBENCH_SCORE",
+    "THIS_IS_NOT_AN_INDEPENDENT_PUBLIC_RUNNER_ATTESTATION",
+    "NO_BENCHMARK_CASE_CONTENT_WAS_READ"
+  ],
+  "consequence": "CANDIDATE_WIRING_AND_FAIL_CLOSED_SEMANTICS_CLEANROOM_VERIFIED__FULL_ASTRA_INTEGRATION_AND_PUBLIC_RUNNER_ATTESTATION_REMAIN_OPEN",
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
