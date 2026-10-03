@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V4_REPAIR_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_PROGRAM_SIDE_TRUTH_REPAIR__SCOPE_COMPLETENESS_STILL_OPEN__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "supersedes_for_program_side_least_cost_only": [
+    "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json"
+  ],
+  "authority": [
+    "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "canonical/tests/test_tool_discovery_dynamic_v4.py",
+    "canonical/verification/TOOL_DISCOVERY_DYNAMIC_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  ],
+  "repaired_invariant": "NO_POSITIVE_ROUTE_COMMITMENT_WHILE_ANY_AVAILABLE_DECLARED_DISCOVERY_SOURCE_REMAINS_UNQUERIED",
+  "valid_conditional_scope": "ARBITRARY_FINITE_STABLE_EPISODE_WHERE_AVAILABLE_DECLARED_DISCOVERY_SOURCE_UNION_IS_COMPLETE_FOR_THE_COMMON_FROZEN_TOOL_AUTHORITY_AND_DISCOVERY_METADATA_AND_CURRENT_EPOCH_PROBES_ARE_TRUTHFUL",
+  "remaining_primitive_fact": "PROVE_COMPLETE_TARGET_SCOPE_DISCOVERY_INTERFACE_OR_EQUIVALENT_UNIVERSAL_SCOPE_RELATION_WITHOUT_NARROWING_THE_COMMON_BRAIN_OPUS_TOOL_AUTHORITY",
+  "forbidden_shortcut": "BRAIN_ONLY_REGISTRY_COMPLETENESS_MUST_NOT_BE_SUBSTITUTED_FOR_COMMON_FROZEN_TOOL_AUTHORITY_COMPLETENESS",
+  "terminal_effect": "PROGRAM_SIDE_V3_ORDERING_BUG_REMOVED__EXTERNAL_OR_FORMAL_SCOPE_COMPLETENESS_RESIDUAL_PRESERVED",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
