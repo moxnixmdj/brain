@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_CARRIER_EXECUTION_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_ACTIVE_ONE_USE_RECOVERY_AUTHORITY__INDEPENDENT_CARRIER_VERIFICATION_PASS__BECOMES_ACTIVE_ONLY_ON_MERGE_TO_BRAIN_MAIN",
+  "status": "SEQUENCE_VIOLATION__PUBLIC_BATCH_EXECUTED_BEFORE_CANONICAL_ACTIVE_AUTHORITY__RESULT_INADMISSIBLE__AUTHORITY_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
   "authorized_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
@@ -87,5 +87,22 @@
   "family_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "next": "INDEPENDENTLY_ADJUDICATE_RECORDED_PUBLIC_RECOVERY_RESULT__NO_RERUN"
+  "next": "QUARANTINE_RUN_37108111537_AS_DIAGNOSTIC_ONLY__NO_RERUN_NO_REPLACEMENT_NO_RETROACTIVE_AUTHORIZATION__SEARCH_ZERO_REALITY_TARGET_PRESERVING_STRONGER_PROOF_OR_NEW_PRECOMMITTED_PROTOCOL_NOT_CONDITIONED_ON_OBSERVED_RESULT",
+  "sequence_violation": {
+    "verifier_execution_pr": 1245,
+    "verifier_execution_pr_merged_at": "2026-10-03T07:58:07Z",
+    "execution_run_id": 37108111537,
+    "execution_created_at": "2026-10-03T07:58:11Z",
+    "execution_started_at": "2026-10-03T07:58:17Z",
+    "intended_active_authority_pr": 1258,
+    "intended_active_authority_pr_created_at": "2026-10-03T07:58:51Z",
+    "intended_active_authority_merged": false,
+    "activation_condition_satisfied": false,
+    "retroactive_authorization_allowed": false
+  },
+  "fresh_reality_units_physically_exposed": 1,
+  "authorized_acceptance_reality_units_consumed": 0,
+  "acceptance_credit_allowed": false,
+  "family_credit_allowed": false,
+  "capability_credit_allowed": false
 }
