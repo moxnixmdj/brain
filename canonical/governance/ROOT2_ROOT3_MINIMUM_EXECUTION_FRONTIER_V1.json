@@ -23,7 +23,7 @@
     },
     "root2_fixed_bar_route_inventory": {
       "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-      "git_blob_sha": "0e4e6f76b5bb76d3ca59a5893f10d64e352fae01",
+      "git_blob_sha": "2737cb5d1c6241f9805f1e7f00e44f7a90a45fda",
       "consequence": "15_ROOT2_ONLY_PREDICATES__14_UNIQUE_SURFACES__TB_SCIENCE_ZERO_COST_CARRIER_ATTAINABILITY_INDEPENDENT_PASS__TB_SCIENCE_BRAIN_SCORE_ONLY_OPEN"
     },
     "finance_accounting_index_identity_reconciliation": {
