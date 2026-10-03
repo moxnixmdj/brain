@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CANARY_V2_TIMEOUT_LOCALIZATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "EXACT_ARTIFACT_LOCALIZATION__LOCAL_QWEN_CLIENT_TIMEOUT_BEFORE_RESPONSE__ZERO_CREDIT",
+  "source_result": "canonical/verification/TB_SCIENCE_CANARY_V2_RESULT_20261003_V1.json",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37106127198,
+    "workflow_job_id": 111154893275,
+    "head_sha": "8fac642506cb03726ad3bb54a1c1799da1f5a161",
+    "artifact_id": 11267982635,
+    "artifact_sha256": "ffe482ebd229c01e0f3b50f3a6bb9c30bb5dfe027ef011a402da8ac447360569"
+  },
+  "exact_exception": {
+    "class": "SciencePlannerError",
+    "message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "exception_txt_sha256": "8b55911113cd40808e2d97abdebb3148c89edbb404bafe84fc0db8d17f4947a5",
+    "harbor_trial_result_sha256": "727e37030c9c2980c5eb5b9699b98e293fe9b98e187bc746537666e95508c028",
+    "local_qwen_server_log_sha256": "b24e1b8f146ec7a5d781769f8a6d716301d54ac55c8e77951011eb5c9c5931ec"
+  },
+  "observed_latency": {
+    "client_timeout_s": 180,
+    "prompt_tokens": 1552,
+    "prompt_processing_s": 125.2,
+    "prompt_tokens_per_s": 12.4,
+    "decoded_tokens_before_cancel": 321,
+    "generation_tokens_per_s": 5.94,
+    "server_cancelled_after_client_timeout": true,
+    "model_was_productively_decoding_at_cancel": true
+  },
+  "configured_output_budget": {
+    "max_tokens": 1024,
+    "observed_speed_full_budget_projection_s": 297.5905723905724,
+    "old_180s_budget_structurally_insufficient_at_observed_speed": true,
+    "candidate_600s_budget_has_more_than_2x_projected_full_budget": true
+  },
+  "causal_conclusion": "THE_LOCAL_QWEN_ROUTE_REACHED_AND_LOADED_CORRECTLY__THE_FAILURE_WAS_THE_180_SECOND_CLIENT_TIMEOUT_ENVELOPE__NOT_A_VERIFIER_RESULT_AND_NOT_EVIDENCE_OF_TASK_CAPABILITY_FAILURE",
+  "hard_rules": [
+    "BASELINE_FREE_LOCALIZATION_TRIAL_0_REMAINS_PERMANENTLY_CONSUMED",
+    "NO_TERMINAL_RETRY",
+    "NO_NEW_TB_SCIENCE_SLOT_BEFORE_REAL_SIZE_ZERO_CASE_PREFLIGHT_OF_THE_REPAIRED_TIMEOUT_ENVELOPE",
+    "A_SHORT_SYNTHETIC_PROMPT_IS_NOT_AN_ADMISSIBLE_PREFLIGHT_FOR_THIS_FAILURE_MODE"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
