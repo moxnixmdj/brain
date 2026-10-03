@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_OWNED_UNIVERSAL_V5_THEOREM_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_UNIVERSAL_FORMAL_SCOPE_PROOF__TARGET_PRESERVED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge only TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR by a universal construction that covers both unknown tool identities and hidden/changing capability state, without transporting the 180-case sample or redefining the frozen target.",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "canonical_base_commit": "07c4d993c30bde3db4c639864b7376d058dfae5f",
+  "runtime": "canonical/runtime/tool_discovery_owned_universal_v5.py",
+  "tests": "canonical/tests/test_tool_discovery_owned_universal_v5.py",
+  "target_preservation": {
+    "protocol_task_dimensions_preserved": [
+      "unknown tool discovery",
+      "schema/authority filtering",
+      "route selection under incomplete evidence",
+      "safe probe choice",
+      "capability-state update",
+      "later-task transfer without rediscovery"
+    ],
+    "behavioral_contract_preserved": {
+      "inputs": "Current subproblem contract, available tool schemas/capabilities, historical tool outcomes and active constraints",
+      "environment_state": "Tool ecosystem with overlapping, unknown or changing capabilities",
+      "required_output_or_action": "Discover candidate tools if needed, select the least-cost admissible route that can satisfy the subproblem, and update capability evidence from observed outcomes",
+      "scope": "Unknown/changing tool ecosystem to verified usable route"
+    },
+    "terminal_binding_preserved": [
+      "UNKNOWN_CAPABILITY_DISCOVERY",
+      "ACTIVE_CONSTRAINT_ADMISSIBILITY",
+      "LEAST_COST_SUFFICIENT_ROUTE",
+      "SAFE_RELEVANT_PROBE_SELECTION",
+      "EVIDENCE_BACKED_CAPABILITY_UPDATE",
+      "CROSS_TASK_TRANSFER",
+      "VERSION_STALENESS_INVALIDATION",
+      "KNOWN_UNSUITABLE_PROBE_SUPPRESSION",
+      "CORRECT_NO_ROUTE_ESCALATION"
+    ],
+    "stronger_than_minimum_identity_interpretation": "IDENTITIES_BEGIN_HIDDEN_AND_ARE_DISCOVERED_FROM_A_COMPLETE_OWNED_AUTHORITY__SO_THE_PROOF_DOES_NOT_REQUIRE_REINTERPRETING_UNKNOWN_TOOL_DISCOVERY_AS_VISIBLE_IDENTITIES_ONLY"
+  },
+  "proof_factorization": {
+    "already_proved_atoms_not_reopened": [
+      "TOOL_LEARNING_SECOND_TASK_TRANSFER",
+      "TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION"
+    ],
+    "only_open_atom": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "normalized_active_constraint_boundary": "The behavioral contract already classifies schema parsing and exact constraint filtering as deterministic. V5 consumes their exact public result as per-tool admissible=true/false; arbitrary constraint semantics are therefore not silently reduced to availability/authorization.",
+    "safe_probe_boundary": "If a cheaper unresolved route lacks safe-probe permission, V5 fails closed rather than skipping it and falsely claiming least-cost optimality."
+  },
+  "universal_construction": {
+    "domain": "ANY_FINITE_FROZEN_TOOL_AUTHORITY_U_WITH_FINITE_REQUIRED_CAPABILITY_SET",
+    "identity_completeness": "Instantiate the owned registry with arbitrary U. Every member is assigned to exactly one discovery source; every invocation is gated by the same registry; the union of source discovery results is exactly U.",
+    "unknown_identity_handling": "The policy starts with zero visible identities and exhausts all current-epoch discovery sources before PROBE, SELECT, or terminal no-route escalation.",
+    "hidden_capability_handling": "Discovery metadata excludes true capability sets. Truth enters only through current-epoch safe-probe receipts from the same authority.",
+    "constraint_handling": "Only available, authorized and normalized-admissible tools enter the route order.",
+    "ordering": "Admissible tools are ordered by declared cost then tool id.",
+    "progress_measure": "LEXICOGRAPHIC_PAIR(unqueried_discovery_sources, unresolved_required_capability_pairs_before_first_noneliminated_route)",
+    "progress": "Each DISCOVER strictly decreases unqueried sources. After discovery closure, each permitted PROBE resolves one previously unresolved current-epoch pair; one negative eliminates that route, while all positives make it selectable.",
+    "least_cost_soundness": "A route can be SELECTed only after every cheaper admissible route has been eliminated by truthful current negative evidence and every required capability of the selected route has truthful current positive evidence.",
+    "no_route_soundness": "NO_VERIFIED_ADMISSIBLE_SUFFICIENT_ROUTE occurs only after every admissible route has a current negative required-capability receipt. Missing permission on an unresolved cheaper route has a distinct fail-closed verdict and cannot be mistaken for a proved no-route world.",
+    "version_safety": "Authority replacement increments the epoch. Discovery/probe/invocation reject stale episodes and old probe receipts are ignored.",
+    "transfer": "Current-epoch prior receipts are reusable; this is retained but no new transfer credit is claimed because the transfer atom is already proved."
+  },
+  "why_this_is_scope_complete_without_global_internet_enumeration": "The theorem quantifies over arbitrary finite frozen authority U; it does not claim one registry enumerates every tool that exists globally. For every admissible frozen ecosystem, U is instantiated to that ecosystem. This is the same quantifier form as the frozen protocol, not a fixed-world shortcut.",
+  "acceptance_implication_if_independently_verified": "For TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR, V5 reaches the objective ceiling on valid least-cost route correctness over the claimed protocol population whenever the frozen information boundary supplies safe probe permission for unresolved required capability pairs; when it does not, V5 refuses to make an unsupported optimality claim. Combine this universal scope proof with the already preserved perfect raw result and separately proved transfer/no-unsupported-promotion atoms in a fail-closed acceptance reduction.",
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_ONE_FIXED_REGISTRY_ENUMERATES_ALL_GLOBAL_OR_FUTURE_TOOLS",
+    "NO_REINTERPRETATION_OF_UNKNOWN_TOOL_DISCOVERY_AS_VISIBLE_IDENTITIES_ONLY",
+    "NO_FINITE_180_CASE_TRANSPORT_AS_UNIVERSAL_PROOF",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
