@@ -862,5 +862,32 @@
     "primitive_cut_binding": "LAST_VERIFIED_40_FACT_BASIS_WITH_CLOSED_DELEGATION_LEAF_EXCLUDED_PENDING_POST_DELEGATION_RECOMPILE",
     "capability_credit_delta": 0,
     "family_credit_delta": 0
+  },
+  "proof_atom_receipt_snapshot_v4": {
+    "active_basis": "VERIFIED_POST_DELEGATION_RECOMPILE__39_PA1_ATOMS",
+    "atoms_with_literal_candidates": 2,
+    "atoms_without_literal_candidates": 37,
+    "candidate_adjudication": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_ADJUDICATION_20261003_V2.json",
+    "candidate_pointers": 3,
+    "closure_transaction": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CLOSURE_20261003_V2.json",
+    "corpus_manifest": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V2.json",
+    "eligible_bytes": 5674807,
+    "eligible_files": 1337,
+    "historical_candidate_gate_verdict": "REJECT_NO_TERMINAL_DELTA_ON_FROZEN_SOURCE_ONLY",
+    "independent_session_review": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_INDEPENDENT_SESSION_REVIEW_20261003_V2.json",
+    "index_fingerprint_sha256": "3c2c393959a591aef44bd2d1042bff615f8b3b71c379155e0d550ad263e7c341",
+    "integration_rule": "CURRENT_SOURCE_IS_NEWER_THAN_PINNED_SNAPSHOT__PRESERVE_ALL_NEWER_TERMINAL_AND_ROUTE_AUTHORITY__USE_NEGATIVE_LITERAL_RESULT_ONLY_FOR_ITS_FROZEN_INPUTS",
+    "live_corpus_equality_at_integration": false,
+    "new_accepted_families": 0,
+    "new_positive_admissible_atoms": 0,
+    "new_proved_acceptance_predicates": 0,
+    "result": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V2.json",
+    "reuse_requires_current_eligible_manifest_equality": true,
+    "reuse_rule": "REUSE_SCAN_IF_EXACT_ELIGIBLE_PATH_BLOB_MANIFEST_SCAN_POLICY_AND_EFFECTIVE_BASIS_ARE_UNCHANGED__REOPEN_FOR_CONTENT_ADDRESSED_INPUT_CHANGE_OR_NEW_VERIFIED_SEMANTIC_MAPPING",
+    "scanned_corpus_manifest_sha256": "7c0ed69d889783e6b6d454b4928d622c0c9b29ecb5d380588b6f2c7d9a0e33b8",
+    "scope_limit": "ZERO_LITERAL_MATCH_DOES_NOT_ESTABLISH_NO_SEMANTIC_PROOF_OR_GLOBAL_ZERO_REALITY_EXHAUSTION",
+    "source_commit_sha": "f896a7fb410e1dc290ef55f1a844d4d40f76e816",
+    "source_tree_sha": "2f5e95ec6b8fef1db0358aa488bac6dfbb7b30b6",
+    "status": "HISTORICAL_PINNED_SESSION_EXECUTION_AND_INDEPENDENT_SESSION_REVIEW_PASS__NOT_A_CURRENT_CORPUS_ASSERTION__ZERO_CREDIT"
   }
 }
