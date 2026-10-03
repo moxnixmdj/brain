@@ -35,9 +35,9 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         self.assertEqual(out["whole_scope_contract_passes"], 11)
         self.assertEqual(out["unaffected_behavioral_family_passes"], 11)
         self.assertEqual(out["p1_dependent_behavioral_families_quarantined"], 8)
-        self.assertEqual(out["acceptance_closed_families"], 2)
-        self.assertEqual(out["atomic_predicates_proved"], 7)
-        self.assertEqual(out["atomic_predicates_unresolved"], 31)
+        self.assertEqual(out["acceptance_closed_families"], 3)
+        self.assertEqual(out["atomic_predicates_proved"], 8)
+        self.assertEqual(out["atomic_predicates_unresolved"], 30)
 
     def test_stale_19_of_19_behavioral_authority_fails_closed(self):
         docs, shas = self.live()
