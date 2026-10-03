@@ -33,6 +33,11 @@ def prove(equivalence_class:Mapping[str,Any])->dict[str,Any]:
     allowed=equivalence_class.get("allowed_information_fields")
     if not isinstance(allowed,list) or not allowed:
         return _fail("ALLOWED_INFORMATION_FIELDS_NOT_LIST")
+    allowed_names=[str(x) for x in allowed if isinstance(x,str) and x]
+    if len(allowed_names)!=len(allowed) or len(set(allowed_names))!=len(allowed_names):
+        return _fail("ALLOWED_INFORMATION_FIELDS_INVALID_OR_DUPLICATE")
+    if set(allowed_names)!=set(obs):
+        return _fail("PUBLIC_OBSERVATION_FIELDS_DO_NOT_MATCH_ALLOWED_INFORMATION")
     worlds=equivalence_class.get("hidden_worlds")
     if not isinstance(worlds,list) or len(worlds)<2:
         return _fail("AT_LEAST_TWO_HIDDEN_WORLDS_REQUIRED")
