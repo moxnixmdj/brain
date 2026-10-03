@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_LIVE_BOUND_AUTHORITY_INSTANCE_V3",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__LIVE_OPERATIVE_AUTHORITY_BINDING__INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "current_minimum_missing_fact": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+  "breakthrough": "REPLACE_SYNTHETIC_OR_SELF_ATTESTED_COMPLETENESS_WITH_THE_EXACT_OPERATIVE_BRAIN_BOUND_CAPABILITY_AUTHORITY_AND_ITS_REAL_INVOKE_CAPABILITY_CHOKEPOINT",
+  "frozen_scope": {
+    "proof_mode": "MATCHED_HIDDEN_TOOL_ECOSYSTEM_TRANSFER",
+    "same_scope_rule": "Brain and Opus 5.5 must be evaluated on the same frozen task population/harness/tool authority unless an absolute/theoretical ceiling is the proof mode.",
+    "authority_instance": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "invocation_chokepoint": "canonical/runtime/astra_runtime.py::_invoke_bound_capability",
+    "dispatch_binding": "canonical/runtime/astra_runtime.py::_goal_action type=invoke_capability -> _invoke_bound_capability(args)",
+    "scope_ruling": "The complete-interface obligation is bound to the frozen Tool Discovery tool authority. Shell, raw HTTP, verification helpers and other internal runtime primitives are not silently reclassified as Tool Discovery tool identities.",
+    "nonclaim": "No claim is made that this frozen authority enumerates every present or future tool on the Internet."
+  },
+  "exact_blobs": {
+    "canonical/runtime/tool_discovery_live_bound_authority_v3.py": "f7a8445ff70d7e971774a876da82177492fcb28c",
+    "canonical/tests/test_tool_discovery_live_bound_authority_v3.py": "c9b15cfa827f6acbbbc37fd77ed12700e0a29885",
+    "canonical/runtime/tool_discovery_dynamic_candidate_v3.py": "bbbee4d6baf8df937543644397abba38a67dce62",
+    "canonical/runtime/astra_runtime.py": "7f5d16b1db69cb620954bc778e0ba6e15e687b75",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json": "7badee4878700f2cd4176beb8319d2a6a0bdf782",
+    "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json": "49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+  },
+  "operative_authority_facts": {
+    "registered_tool_count": 42,
+    "all_entries_status": "VERIFIED_BOUND_CAPABILITY",
+    "all_entries_incremental_spend_usd": 0,
+    "all_entries_have_verification_receipts": true,
+    "unknown_identity_runtime_behavior": "BOUND_CAPABILITY_UNKNOWN_FAIL_CLOSED_BEFORE_ADAPTER_LOAD_OR_EXECUTION",
+    "registry_and_invocation_runtime_content_addressed": true
+  },
+  "discovery_composition": {
+    "first_action_without_current_receipt": "DISCOVER",
+    "discovery_source_id": "BRAIN_BOUND_CAPABILITY_AUTHORITY_V1",
+    "discovery_identity_set": "EXACT_SORTED_KEYS_OF_BOUND_CAPABILITY_REGISTRY_V1.capabilities",
+    "hidden_from_policy": [
+      "provides",
+      "verification internals"
+    ],
+    "safe_probe_basis": "CURRENT_CONTENT_ADDRESSED_VERIFIED_BOUND_CAPABILITY_PROVIDES_CONTRACT",
+    "epoch_basis": "CONTENT_IDENTITY_OF_BOUND_CAPABILITY_REGISTRY",
+    "selection_precondition": "EXACT_CURRENT_COMPLETE_AUTHORITY_RECEIPT_VALIDATED_BEFORE_DYNAMIC_V3",
+    "v3_bug_repair": "NO_REGISTRY_MEMBER_CAN_REMAIN_UNDISCOVERED_AT_SELECT_TIME; THEREFORE THE PRIOR CHEAPER_UNSEEN_ROUTE_COUNTEREXAMPLE_IS REMOVED FOR THIS LIVE AUTHORITY INSTANCE"
+  },
+  "interface_contract_property_witnesses": {
+    "FINITE_DISCOVERY_SOURCE_SET_PER_DECISION_EPOCH": "One content-addressed live bound-capability authority snapshot is the discovery source for the frozen decision epoch.",
+    "DISCOVERY_RECEIPT_IDENTIFIES_QUERIED_SOURCE": "Receipt binds source id, registry blob, astra runtime blob and content-derived epoch.",
+    "DISCOVERY_RESULTS_MONOTONICALLY_ADD_VISIBLE_TOOL_IDENTITIES_WITHIN_EPOCH": "One exact complete receipt materializes all authority identities before policy reasoning; partial or tampered receipts are rejected.",
+    "UNION_OF_AUTHORITATIVE_DISCOVERY_RESULTS_IS_COMPLETE_FOR_DECLARED_TARGET_SCOPE": "Discovery enumerates exactly the keys of the same registry that _invoke_bound_capability uses to authorize identities.",
+    "DISCOVERED_TOOL_METADATA_CORRECT_FOR_AVAILABILITY_AUTHORIZATION_COST_AND_CONSTRAINT_FIELDS": "Projection reads the same immutable registry records; only VERIFIED_BOUND_CAPABILITY zero-spend entries are admitted.",
+    "SAFE_CAPABILITY_PROBE_RECEIPTS_ARE_TRUTHFUL_AND_EPOCH_BOUND": "Probe reveals membership in the hidden provides set only for the exact verified registry blob and exact content-derived epoch.",
+    "VERSION_EPOCH_STABLE_DURING_ONE_SELECTION_EPISODE_OR_RESTARTS_EPISODE": "Any registry byte change violates the pinned blob/epoch and fails closed before reuse."
+  },
+  "falsification_and_repairs": [
+    {
+      "falsified_route": "Dynamic V3 over arbitrary incomplete visible sets",
+      "counterexample": "A cost-10 visible sufficient tool can be selected while an unqueried source contains a cost-1 sufficient tool.",
+      "repair": "Complete live authority must be discovered and validated before Dynamic V3 is entered."
+    },
+    {
+      "falsified_route": "Synthetic standalone gateway as proof of live authority completeness",
+      "counterexample": "A toy registry can be complete while the operative Brain invokes through another authority.",
+      "repair": "V3 binds exact BOUND_CAPABILITY_REGISTRY_V1 and exact astra_runtime invocation chokepoint bytes."
+    },
+    {
+      "falsified_route": "Global subprocess/HTTP choke-point requirement",
+      "counterexample": "It broadens Tool Discovery identity scope beyond the frozen tool authority into unrelated runtime primitives.",
+      "repair": "Bind only the frozen matched tool authority named by the protocol same-scope rule."
+    }
+  ],
+  "independent_verification_requirements": [
+    "EXACT_BLOB_MATCH",
+    "RUN_ALL_LIVE_BOUND_AUTHORITY_TESTS",
+    "VERIFY_42_OF_42_LIVE_REGISTRY_IDENTITIES_EXACTLY_ENUMERATED",
+    "VERIFY_PROVIDES_HIDDEN_FROM_DISCOVERY",
+    "VERIFY_SAFE_PROBE_CURRENT_EPOCH_POSITIVE_AND_NEGATIVE",
+    "VERIFY_TAMPERED_OR_STALE_RECEIPTS_FAIL_CLOSED",
+    "VERIFY_UNKNOWN_SELECTED_ID_FAILS_AT_REAL_ASTRA_CHOKEPOINT",
+    "VERIFY_SINGLE_INVOKE_CAPABILITY_DISPATCH_REACHES_REAL_CHOKEPOINT",
+    "VERIFY_COMPLETE_PREMATERIALIZATION_PREVENTS_PREMATURE_LATER_TOOL_SELECTION"
+  ],
+  "expected_if_independently_verified": "SATISFY_THE_CURRENT_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_FACT_FOR_THE_FROZEN_BOUND_CAPABILITY_TOOL_AUTHORITY__THEN_RUN_A_SEPARATE_ACCEPTANCE_REDUCTION_COMBINING_SCOPE_COMPLETENESS_WITH_EXISTING_MATCHED_PERFORMANCE_TRANSFER_AND_NO_UNSUPPORTED_PROMOTION_EVIDENCE",
+  "terminal_goal_achieved": false,
+  "current_acceptance_preserved": "3_OF_19_FAMILIES__8_OF_38_ATOMIC_PREDICATES",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
