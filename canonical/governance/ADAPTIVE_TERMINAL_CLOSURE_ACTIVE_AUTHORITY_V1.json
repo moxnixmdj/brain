@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_TERMINAL_CLOSURE_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ACTIVE_POINTER__EXACT_CONTROLLER_INDEPENDENT_PASS__POINTER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "base_scheduling_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "54be838a5a0a9698398893ad113641496d5051b8",
+    "rule": "V10_REMAINS_UNMODIFIED_AND_AUTHORITATIVE_FOR_EXECUTION_GATING"
+  },
+  "adaptive_controller": {
+    "activation_path": "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "78dda53305200ed466099db8658840980b2126fc",
+    "runtime_path": "canonical/runtime/adaptive_terminal_closure_controller_v1.py",
+    "runtime_git_blob_sha": "06d16ef1e8caa08835bc4e958c3047833bf52a32",
+    "tests_path": "canonical/tests/test_adaptive_terminal_closure_controller_v1.py",
+    "tests_git_blob_sha": "874706e94596cde028bed872cc40f07f6fa0d843"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "external_repository": "moxnixmdj/verification-capsule-runner",
+    "external_pull_request": 1326,
+    "workflow_run_id": 37121349377,
+    "workflow_job_id": 111197924322,
+    "conclusion": "success"
+  },
+  "live_policy": {
+    "run_all_nondominated_zero_reality_branches_concurrently": true,
+    "recompute_after_every_independently_verified_delta": true,
+    "cancel_newly_dominated_branches": true,
+    "ownership_reconciliation_parallel_with_acceptance": true,
+    "probabilities_schedule_only": true,
+    "unknown_probabilities": "UNKNOWN_NOT_INVENTED",
+    "tool_discovery_retrieval": "MANDATORY_V3_OVER_VERIFIED_V2_BASE",
+    "fresh_reality_authority": false
+  },
+  "current_projection": {
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "primitive_work_units": 33,
+    "matched_priority_child_facts": 16,
+    "ownership_reconciliation_units": 2
+  },
+  "hard_rules": [
+    "THIS_LAYER_SCHEDULES_ONLY_AND_CANNOT_GRANT_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "V10_EXECUTION_GATES_REMAIN_AUTHORITATIVE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "RECOMPUTE_ON_ANY_BOUND_SOURCE_BLOB_CHANGE",
+    "POINTER_MUST_FAIL_CLOSED_IF_INDEPENDENT_VERIFICATION_BYTES_DO_NOT_MATCH"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
