@@ -1,0 +1,28 @@
+name: Verify post-universal-learning zero-reality frontier V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/POST_UNIVERSAL_LEARNING_ZERO_REALITY_FRONTIER_V1.json"
+      - "canonical/runtime/post_universal_learning_zero_reality_frontier_v1.py"
+      - "canonical/tests/test_post_universal_learning_zero_reality_frontier_v1.py"
+      - ".github/workflows/verify-post-universal-learning-zero-reality-frontier-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile reducer
+        run: python -m py_compile canonical/runtime/post_universal_learning_zero_reality_frontier_v1.py
+      - name: Run exact frontier tests
+        run: python -m pytest -q canonical/tests/test_post_universal_learning_zero_reality_frontier_v1.py
+      - name: Execute reducer
+        run: python canonical/runtime/post_universal_learning_zero_reality_frontier_v1.py
