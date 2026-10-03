@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COMPOSITION_RECEIPT_REACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE__CURRENT_SOURCE_FAMILY_REACTIVATION_PLUS_SCOPED_MEMORY_BINDING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "status": "CANDIDATE__CURRENT_SOURCE_FAMILY_REACTIVATION_PLUS_INDEPENDENT_SCOPED_MEMORY_BINDING__INDEPENDENT_REVERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
   "objective": "Recompute composition component receipt admissibility after the independently verified delegation family closure, and admit the already-declared scoped memory ownership bridge without reviving tool discovery or inferring any new family mapping.",
   "causal_breakthrough": "The Oct 2 composition quarantine treated delegation as source-family scope-incomplete. The Oct 3 universal delegation proof and acceptance reduction make that exact source-family closure precondition current again. The prior delegation component binding was independently verified; it can therefore be reactivated. The long-horizon memory family is also current PASS with a verified owned scoped package and an explicit frozen memory component bridge.",
   "inputs": {
@@ -32,6 +32,14 @@
     "delegation_acceptance_receipt": {
       "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+    },
+    "memory_bridge_verification": {
+      "path": "canonical/verification/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "9d4acea1af86210f083701a3bd1de3836ffef1da"
+    },
+    "scope_firewall_verification": {
+      "path": "canonical/verification/COMPOSITION_BRIDGE_SCOPE_FIREWALL_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "41de1a6d4202283f3583a260bb9eeaf346049a81"
     }
   },
   "expected_current_projection": {
@@ -49,6 +57,8 @@
     "NO_COMPONENT_MAPPING_BY_ANALOGY",
     "HISTORICAL_BINDING_MAY_REACTIVATE_ONLY_IF_THAT_EXACT_COMPONENT_BINDING_WAS_INDEPENDENTLY_VERIFIED_AND_ITS_SOURCE_FAMILY_IS_CURRENT_PASS",
     "TOOL_DISCOVERY_REMAINS_QUARANTINED_WHILE_ITS_SOURCE_FAMILY_IS_OPEN",
+    "MEMORY_COMPONENT_RELATION_MUST_HAVE_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_AND_CURRENT_PROTOCOL_TRANSPORT_RECHECK",
+    "ZERO_OF_12_SCOPE_FIREWALL_BASELINE_MUST_HAVE_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
     "MEMORY_BINDING_IS_LIMITED_TO_THE_EXACT_OWNED_LONG_HORIZON_CONTINUITY_CLAIM_SCOPE",
     "TEN_UNPROVED_COMPONENTS_REMAIN_OPEN",
     "TWELVE_COMPONENT_PARENT_ATOM_REMAINS_UNPROVED",
@@ -56,7 +66,7 @@
   ],
   "runtime": "canonical/runtime/composition_receipt_reactivation_v1.py",
   "tests": "canonical/tests/test_composition_receipt_reactivation_v1.py",
-  "next": "INDEPENDENTLY_VERIFY_EXACT_BYTES_AND_CURRENT_2_OF_12_PROJECTION__IF_PASS_PROMOTE_THE_COMPOSITION_COMPONENT_CURRENT_AUTHORITY_TO_2_OF_12_AND_RECOMPILE_THE_POST_DELEGATION_FRONTIER_WITHOUT_CLOSING_THE_PARENT_ATOM",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_STRONGENED_BYTES_AND_CURRENT_2_OF_12_PROJECTION__IF_PASS_PROMOTE_ONLY_COMPONENT_AUTHORITY_TO_2_OF_12__KEEP_PARENT_ATOM_AND_3_OF_19_8_OF_38_TERMINAL_ACCEPTANCE UNCHANGED",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
