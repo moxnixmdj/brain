@@ -26,6 +26,11 @@ class ToolDiscoveryMatchedRoutePreconditionReducerV1Tests(unittest.TestCase):
         self.assertTrue(out["tree_checker_population_freeze_proved"])
         self.assertTrue(out["internal_composition_basis_proved"])
         self.assertTrue(out["fixed_full_population_selector_accounting_proved"])
+        self.assertEqual(out["fixed_bound_alpha"], 0.05)
+        self.assertEqual(out["minimum_passes_for_fixed_bound"], 97)
+        self.assertGreaterEqual(out["lower_bound_at_minimum_passes"], 0.778)
+        self.assertTrue(out["toolathlon_pass_at_1_used_only_for_terminal_success"])
+        self.assertTrue(out["valid_route_top1_remains_separate_metric"])
         self.assertEqual(out["closed_precondition_count"], 3)
         self.assertEqual(out["remaining_precondition_count"], 3)
         self.assertFalse(out["toolathlon_result_observed"])
@@ -62,13 +67,32 @@ class ToolDiscoveryMatchedRoutePreconditionReducerV1Tests(unittest.TestCase):
         self.assertFalse(out["precondition_reduction_proved"])
         self.assertIn("INDEPENDENT_INTERNAL_COMPOSITION_BASIS_NOT_PROVED", out["errors"])
 
-    def test_85_is_the_minimum_integer_threshold_for_reported_77_8_bar(self):
+    def test_97_is_the_minimum_integer_threshold_for_95pct_hoeffding_bound_over_77_8(self):
         good = evaluate(self.freeze, self.internal, self.protocols, self.reduction)
         self.assertTrue(good["fixed_full_population_selector_accounting_proved"])
+        self.assertEqual(good["minimum_passes_for_fixed_bound"], 97)
         mutant = copy.deepcopy(self.reduction)
         for row in mutant["reductions"]:
             if row["prior_open_precondition"] == "FREEZE_TERMINAL_ACCEPTANCE_ACCOUNTING_AND_SELECTOR":
-                row["accounting"]["minimum_integer_brain_passes_to_meet_or_exceed_reported_bar"] = 84
+                row["accounting"]["minimum_integer_brain_passes_for_bound_at_or_above_77_8_percent"] = 96
+        out = evaluate(self.freeze, self.internal, self.protocols, mutant)
+        self.assertFalse(out["precondition_reduction_proved"])
+        self.assertIn("FULL_POPULATION_SELECTOR_OR_MINIMUM_THRESHOLD_NOT_PROVED", out["errors"])
+
+    def test_raw_85_of_108_is_not_accepted_as_a_conservative_bound(self):
+        mutant = copy.deepcopy(self.reduction)
+        for row in mutant["reductions"]:
+            if row["prior_open_precondition"] == "FREEZE_TERMINAL_ACCEPTANCE_ACCOUNTING_AND_SELECTOR":
+                row["accounting"]["minimum_integer_brain_passes_for_bound_at_or_above_77_8_percent"] = 85
+        out = evaluate(self.freeze, self.internal, self.protocols, mutant)
+        self.assertFalse(out["precondition_reduction_proved"])
+        self.assertIn("FULL_POPULATION_SELECTOR_OR_MINIMUM_THRESHOLD_NOT_PROVED", out["errors"])
+
+    def test_toolathlon_pass_at_1_cannot_substitute_for_valid_route_top1(self):
+        mutant = copy.deepcopy(self.reduction)
+        for row in mutant["reductions"]:
+            if row["prior_open_precondition"] == "FREEZE_TERMINAL_ACCEPTANCE_ACCOUNTING_AND_SELECTOR":
+                row["accounting"]["valid_route_metric_rule"] = "TREAT_PASS_AT_1_AS_VALID_ROUTE_TOP1"
         out = evaluate(self.freeze, self.internal, self.protocols, mutant)
         self.assertFalse(out["precondition_reduction_proved"])
         self.assertIn("FULL_POPULATION_SELECTOR_OR_MINIMUM_THRESHOLD_NOT_PROVED", out["errors"])
