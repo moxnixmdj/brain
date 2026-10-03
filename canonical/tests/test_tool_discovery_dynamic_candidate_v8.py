@@ -81,9 +81,9 @@ class ToolDiscoveryDynamicV8Tests(unittest.TestCase):
         bad=tool("NAN", float("nan"))
         expensive=tool("FINITE", 5.0)
         s=state([bad,expensive])
-        # NaN destroys a total least-cost order. The exact selected id is an
-        # implementation artifact, so the only valid universal behavior is refusal.
-        self.assertIn(v7.next_action(copy.deepcopy(s))["action"], {"SELECT","PROBE","ESCALATE"})
+        # Python's tuple sort leaves this NaN route at the front because NaN is
+        # unordered. V7 therefore commits to a route under a non-total cost order.
+        self.assertEqual(v7.next_action(copy.deepcopy(s)),{"action":"SELECT","tool_id":"NAN"})
         self.assertEqual(v8.next_action(s),{"action":"ESCALATE","reason":"TOOL_COST_INVALID"})
 
     def test_v8_rejects_positive_infinite_tool_cost(self):
