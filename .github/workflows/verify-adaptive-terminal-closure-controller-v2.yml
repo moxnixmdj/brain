@@ -18,13 +18,11 @@ on:
 permissions:
   contents: read
 
-x-setup: &setup
-  runs-on: ubuntu-latest
-  timeout-minutes: 5
 
 jobs:
   pins:
-    <<: *setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
@@ -37,7 +35,8 @@ jobs:
           PY
 
   v13:
-    <<: *setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
@@ -57,7 +56,8 @@ jobs:
           PY
 
   post-dual:
-    <<: *setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
@@ -75,7 +75,8 @@ jobs:
           PY
 
   dual-source:
-    <<: *setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
@@ -92,7 +93,8 @@ jobs:
           PY
 
   inner-v1:
-    <<: *setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
@@ -117,7 +119,8 @@ jobs:
           PY
 
   full:
-    <<: *setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     needs: [pins, v13, post-dual, dual-source, inner-v1]
     steps:
       - uses: actions/checkout@v4
