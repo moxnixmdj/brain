@@ -14,13 +14,13 @@
   "sources": {
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-      "git_blob_sha": "48bb21479da4bd7e49bd0e1d3324cce34aa8f9a3",
-      "status": "FAIL_CLOSED__P1_SCOPE_QUARANTINE_PROPAGATED__2_OF_19_ACCEPTANCE_PASS__TERMINAL_FALSE"
+      "git_blob_sha": "4824c4f3d6c7d51584216bd4a99bfc81d5fb862c",
+      "status": "FAIL_CLOSED__P1_SCOPE_QUARANTINE_PROPAGATED__3_OF_19_ACCEPTANCE_PASS__TERMINAL_FALSE"
     },
     "ownership_matrix": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "git_blob_sha": "f0fed8856b17f06912ac715b8710d6c0b778291e",
-      "status": "RECONCILED__P1_SCOPE_QUARANTINE__2_OF_19_CURRENT_ACCEPTANCE"
+      "git_blob_sha": "64396ff8823d20cd2625f878eac09475210d356f",
+      "status": "RECONCILED__P1_SCOPE_QUARANTINE__3_OF_19_CURRENT_ACCEPTANCE__DELEGATION_INDEPENDENTLY_OWNED_EQUAL_OR_BETTER"
     },
     "acceptance_calibration": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
@@ -107,14 +107,14 @@
     },
     "terminal_projection_consistency": {
       "governance_path": "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json",
-      "governance_git_blob_sha": "2ca1be79d8183602eac4ffbdf0765c063772f6d6",
+      "governance_git_blob_sha": "d029e7e79122518e5f0117232259392b72c7ff36",
       "runtime_path": "canonical/runtime/terminal_projection_consistency_v1.py",
-      "runtime_git_blob_sha": "3393dbecc7e02cba444ce05fc327d5d6fcf01a1c",
+      "runtime_git_blob_sha": "36caf07fbcac4f768c6d11bfbc779b8a118d38a3",
       "tests_path": "canonical/tests/test_terminal_projection_consistency_v1.py",
-      "tests_git_blob_sha": "8855957dc121f971913d933a7c462891b50c4f28",
+      "tests_git_blob_sha": "3c3e0daa17110a17a54b1bbad47c6035b7b3a733",
       "workflow_path": ".github/workflows/verify-terminal-projection-consistency.yml",
       "workflow_git_blob_sha": "7c7e03a1e771d5fda0a280a01b042c058fb8eb8a",
-      "status": "HISTORICAL_PRE_DELEGATION_PROJECTION__SUPERSEDED_FOR_CURRENT_ACCEPTANCE_COUNTS__REVERIFY_POST_DELEGATION_PROJECTION_SEPARATELY"
+      "status": "ACTIVE_FAIL_CLOSED__POST_DELEGATION_CURRENT_PROJECTION__3_OF_19__8_OF_38__ZERO_CREDIT"
     },
     "acceptance_residual_verdict_v10": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
@@ -775,8 +775,8 @@
     "current_effective_leaf_requirement_occurrences": 39,
     "current_effective_canonical_leaf_atoms": 39
   },
-  "last_reconciled_control_plane_head": "2747d00fc69c211d02239519dae7045512348992",
-  "last_reconciled_reason": "TOOL_DISCOVERY_DYNAMIC_V3_CONDITIONAL_REFINEMENT_INDEPENDENT_PUBLIC_RUNNER_PASS__PROGRAM_SIDE_FORMALISM_RESIDUAL_REDUCED_TO_ONE_EXTERNAL_COMPLETE_INTERFACE_INSTANCE_FACT__ACCEPTANCE_UNCHANGED",
+  "last_reconciled_control_plane_head": "e68ccdb722befef93b90a6c460b3856c5527b257",
+  "last_reconciled_reason": "TOOL_DISCOVERY_DYNAMIC_V3_CONDITIONAL_REFINEMENT_INDEPENDENT_PUBLIC_RUNNER_PASS__PROGRAM_SIDE_FORMALISM_RESIDUAL_REDUCED_TO_ONE_EXTERNAL_COMPLETE_INTERFACE_INSTANCE_FACT__PLUS_POST_DELEGATION_PROJECTION_CHAIN_RECONCILED_TO_3_OF_19_AND_8_OF_38__TERMINAL_FALSE",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
