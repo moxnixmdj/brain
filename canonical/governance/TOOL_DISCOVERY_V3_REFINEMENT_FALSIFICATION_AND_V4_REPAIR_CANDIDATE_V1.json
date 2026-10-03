@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_V3_REFINEMENT_FALSIFICATION_AND_V4_REPAIR_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_base_commit": "a99c37a85cd2edb4dacaae7457f56b1de12f263f",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "falsified_candidate_authority": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json",
+  "counterexample": {
+    "premises": [
+      "Complete discovery interface declares one still-unqueried source S.",
+      "Visible tool EXPENSIVE costs 10 and already has current positive evidence for all required capabilities.",
+      "Source S contains admissible sufficient tool CHEAP costing 1."
+    ],
+    "observed_v3_next_action": {"action": "SELECT", "tool_id": "EXPENSIVE"},
+    "required_for_global_least_cost": "DISCOVER_SOURCE_S_BEFORE_SELECTION_OR_PROVE_A_LOWER_BOUND_THAT_S_CANNOT_CONTAIN_A_CHEAPER_SUFFICIENT_ROUTE",
+    "consequence": "The active V3 conditional refinement cannot validly conclude least-cost route selection merely from complete-interface existence; its program-side implication is falsified."
+  },
+  "repair": {
+    "candidate": "canonical/runtime/tool_discovery_complete_scope_candidate_v4.py",
+    "theorem": "canonical/runtime/tool_discovery_complete_scope_theorem_v1.py",
+    "tests": "canonical/tests/test_tool_discovery_complete_scope_v4.py",
+    "rule": "NO_PROBE_OR_SELECT_BEFORE_ALL_AVAILABLE_DECLARED_DISCOVERY_SOURCES_HAVE_SCOPE_BOUND_COMPLETE_RECEIPTS",
+    "scope": "ARBITRARY_FINITE_FROZEN_TOOL_ECOSYSTEM_WITH_CONTENT_ADDRESSED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE"
+  },
+  "truth_effect_if_independently_verified": [
+    "QUARANTINE_TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1_AS_LOGICALLY_FALSIFIED",
+    "PRESERVE_3_OF_19_FAMILIES_AND_8_OF_38_ATOMIC_ACCEPTANCE_PREDICATES",
+    "REPLACE_V3_PROGRAM_SIDE_REFINEMENT_WITH_V4_COMPLETE_SCOPE_POLICY",
+    "KEEP_TOOL_DISCOVERY_TARGET_OPEN_UNTIL_V4_EXACT_BYTES_AND_ONE_TARGET_SCOPED_COMPLETE_INTERFACE_INSTANCE_ARE_INDEPENDENTLY_VERIFIED",
+    "RUN_SEPARATE_ACCEPTANCE_REDUCTION_ONLY_AFTER_THOSE_PRECONDITIONS_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_CURRENT_EXTERNAL_REGISTRY_IS_ASSERTED_GLOBALLY_COMPLETE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_NEW_TERMINAL_CASES_OR_REPLAY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
