@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_REAL_SIZE_LATENCY_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_CREDIT__INDEPENDENT_REAL_SIZE_PREFLIGHT_REQUIRED__EXECUTION_FALSE",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "causal_source": "canonical/verification/TB_SCIENCE_CANARY_V2_TIMEOUT_LOCALIZATION_20261003_V1.json",
+  "candidate_bytes": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_blob": "f0c1902e9184570d60de805ebb190fdb0f831118",
+    "agent_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "agent_blob": "988b92ce38ae0e0965fa296f857ac56d98a4a0e7",
+    "planner_tests_path": "canonical/tests/test_harbor_science_planner_v1.py",
+    "planner_tests_blob": "d6fc35fb19fa86a39eefbe168c05e17913c861d4",
+    "agent_tests_path": "canonical/tests/test_harbor_science_agent_v1.py",
+    "agent_tests_blob": "f7beefdda22c43de70593343d27f4d3162454944"
+  },
+  "change": {
+    "planner_max_timeout_s_before": 300,
+    "planner_max_timeout_s_after": 600,
+    "science_agent_planner_timeout_s_before": 180,
+    "science_agent_planner_timeout_s_after": 600,
+    "output_max_tokens_unchanged": 1024,
+    "model_bytes_unchanged": true,
+    "command_policy_unchanged": true,
+    "environment_transport_unchanged": true,
+    "benchmark_task_content_used_to_design_repair": false
+  },
+  "required_preflight": {
+    "terminal_task_exposure": 0,
+    "terminal_trials_executed": 0,
+    "synthetic_prompt_must_be_at_least_observed_real_prompt_cost": true,
+    "observed_real_prompt_tokens_reference": 1552,
+    "exact_local_qwen_and_llama_cpp_bytes_required": true,
+    "structured_tool_call_required": true,
+    "response_must_complete_within_600_seconds": true,
+    "independent_public_runner_required": true
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "next": "INDEPENDENTLY_VERIFY_UNIT_TESTS_AND_REAL_SIZE_SYNTHETIC_LATENCY_ENVELOPE__NO_TERMINAL_SLOT"
+}
