@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_V3_CONDITIONAL_REFINEMENT_FALSIFICATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__EXACT_COUNTEREXAMPLE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Falsify only the unsound active implication that a complete discovery-interface instance is sufficient to discharge Dynamic V3 least-cost selection obligations, while preserving the frozen Tool Discovery target and all raw evidence.",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "exact_bound_sources": {
+    "dynamic_v3": {
+      "path": "canonical/runtime/tool_discovery_dynamic_candidate_v3.py",
+      "git_blob_sha": "bbbee4d6baf8df937543644397abba38a67dce62"
+    },
+    "active_refinement_runtime": {
+      "path": "canonical/runtime/tool_discovery_dynamic_refinement_v1.py",
+      "git_blob_sha": "991c039c0b405bf77508ce7921abc69460f57332"
+    },
+    "active_refinement_activation": {
+      "path": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json",
+      "git_blob_sha": "44faeb24bdc2d9189b7c0de1b1e2be9b1210aeeb"
+    },
+    "interface_contract": {
+      "path": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json",
+      "git_blob_sha": "49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7"
+    }
+  },
+  "counterexample": {
+    "complete_interface_contract_satisfied": true,
+    "visible_sufficient_route_cost": 10,
+    "discoverable_sufficient_route_cost": 1,
+    "v3_action_sequence": [
+      "PROBE_VISIBLE_COST_10",
+      "SELECT_VISIBLE_COST_10"
+    ],
+    "discover_before_select": false,
+    "contradiction": "ACTIVE_REFINEMENT_CLAIMS_FIRST_SELECTED_ROUTE_IS_LEAST_COST_ACROSS_THE_COMPLETE_DECLARED_TARGET_SCOPE__COUNTEREXAMPLE_SELECTS_COST_10_WHILE_COMPLETE_INTERFACE_CONTAINS_SUFFICIENT_COST_1"
+  },
+  "required_truth_repair": [
+    "REVOKE_ACTIVE_DYNAMIC_V3_CONDITIONAL_REFINEMENT_AS_TERMINAL_RESIDUAL_REDUCTION",
+    "RESTORE_TOOL_DISCOVERY_MINIMUM_MISSING_FACT_TO_INCLUDE_A_PROGRAM_ROUTE_THAT_ACTUALLY_EXHAUSTS_OR_CERTIFIES_DISCOVERY_SCOPE_BEFORE_SELECTION",
+    "PRESERVE_3_OF_19_FAMILY_ACCEPTANCE_AND_8_OF_38_ATOMIC_ACCEPTANCE",
+    "PRESERVE_RAW_180_OF_180_SAMPLE_EVIDENCE_ONLY_FOR_ITS_EXECUTED_SAMPLE",
+    "DO_NOT_PROMOTE_V4_UNTIL_INDEPENDENT_VERIFICATION_AND_SCOPE_BINDING"
+  ],
+  "candidate_counterexample_runtime": "canonical/runtime/tool_discovery_dynamic_refinement_counterexample_v1.py",
+  "candidate_tests": "canonical/tests/test_tool_discovery_dynamic_refinement_counterexample_v1.py",
+  "hard_nonclaims": [
+    "THE_TOOL_DISCOVERY_FAMILY_TARGET_IS_NOT_FALSIFIED",
+    "THE_COMPLETE_INTERFACE_CONTRACT_ITSELF_IS_NOT_FALSIFIED",
+    "ONLY_THE_DYNAMIC_V3_CONDITIONAL_IMPLICATION_IS_FALSIFIED",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_FRESH_TERMINAL_REPLAY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
