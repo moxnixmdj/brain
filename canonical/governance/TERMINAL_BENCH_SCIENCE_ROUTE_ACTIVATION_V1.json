@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "TRANCHE1_AUTHORITY_CANDIDATE_STAGED__EXECUTION_FALSE_PENDING_INDEPENDENT_AUTHORITY_VERIFICATION",
+  "status": "ACTIVE_TRANCHE1_EXECUTION_AUTHORITY__THREE_FROZEN_SLOTS_ONLY__PROMOTION_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "predicate": "TB_SCIENCE_GE_58_7",
@@ -43,14 +43,14 @@
     "FREEZE_ZERO_RETRY_ZERO_REPLACEMENT_AND_CONSERVATIVE_ZERO_CENSORING",
     "ISSUE_TERMINAL_EXECUTION_AUTHORITY_ONLY_FOR_FROZEN_SLOT_IDS"
   ],
-  "execution_authority": false,
+  "execution_authority": true,
   "promotion_authority": false,
   "terminal_results_observed": 0,
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "next": "INDEPENDENTLY_VERIFY_EXACT_TRANCHE1_AUTHORITY__THEN_ACTIVATE_ONLY_THREE_FROZEN_SLOT_IDS__THEN_ARM_CONTENT_ADDRESSED_EXECUTION_BRANCH",
+  "next": "ARM_AND_EXECUTE_EXACTLY_THREE_AUTHORIZED_TRANCHE1_SLOT_IDS__REDUCE_RESULTS_IMMEDIATELY__AUTO_REVOKE_TRANCHE1_AUTHORITY",
   "deterministic_terminalization_verification": "canonical/verification/TB_SCIENCE_DETERMINISTIC_TERMINALIZATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
   "conservative_lower_bound": {
     "governance": "canonical/governance/TB_SCIENCE_CONSERVATIVE_CENSORING_LOWER_BOUND_V1.json",
@@ -62,5 +62,6 @@
   },
   "independent_planner_v2_verification": "canonical/verification/TB_SCIENCE_DEDICATED_PLANNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
   "verified_manifest": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
-  "tranche1_execution_authority": "canonical/governance/TB_SCIENCE_TRANCHE1_EXECUTION_AUTHORITY_V1.json"
+  "tranche1_execution_authority": "canonical/governance/TB_SCIENCE_TRANCHE1_EXECUTION_AUTHORITY_V1.json",
+  "tranche1_authority_verification": "canonical/verification/TB_SCIENCE_TRANCHE1_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
 }
