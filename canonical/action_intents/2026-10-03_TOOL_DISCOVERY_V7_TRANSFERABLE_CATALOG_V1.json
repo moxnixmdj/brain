@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "TOOL-DISCOVERY-V7-TRANSFERABLE-CATALOG-20261003-V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__STACKED_ON_V6__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Repair cross-task transfer so Tool Discovery catalog state is reused without rediscovery when task requirements change but the authority/source/tool causal state does not.",
+  "causal_target": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "depends_on": [
+    "PR_1155_V5_SOUNDNESS_REPAIR",
+    "PR_1163_V6_TOOL_VERSION_RESTART"
+  ],
+  "next_if_independently_verified": [
+    "REPLACE_V5_V6_POLICY_DEPENDENCY_IN_THE_COMMON_MATCHED_AUTHORITY_SCOPE_THEOREM_WITH_V7",
+    "VERIFY_A_V4_TRANSFERABLE_CATALOG_INTERFACE_INSTANCE_OVER_THE_COMMON_BRAIN_OPUS_AUTHORITY",
+    "RUN_A_SEPARATE_MATCHED_ACCEPTANCE_REDUCTION_ONLY_AFTER_SCOPE_AND_PROGRAM_PROOFS_PASS"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
