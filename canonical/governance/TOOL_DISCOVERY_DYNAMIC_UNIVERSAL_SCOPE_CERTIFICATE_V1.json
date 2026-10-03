@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_UNIVERSAL_SCOPE_CERTIFICATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_IDENTITY_GENERIC_COMPLETE_SOURCE_UNIVERSAL_FORMAL_SCOPE_PROOF__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge only the active TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR scope-completeness atom with a universal proof over arbitrary finite frozen tool ecosystems using a complete declared discovery-source interface and discovery-first V4 policy.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "exact_inputs": {
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "7885a827b1483bfb38315c1f492848f7e4680285",
+    "canonical/governance/TOOL_DISCOVERY_COMPLETE_SOURCE_SCOPE_RELATION_V1.json": "c7516844cc9b7d3ce230b1ef75b9830e44791d06",
+    "canonical/runtime/tool_discovery_dynamic_candidate_v4.py": "43689341231f0e137cc5b31c0f05b5bf0c64504d",
+    "canonical/runtime/tool_discovery_dynamic_proof_v3.py": "f82d949f3890ffc0f2513f9b39cc3585a5d22ebb",
+    "canonical/tests/test_tool_discovery_dynamic_v3.py": "ee1d8b3549555ec8280af88047b8d11823047ab6",
+    "canonical/runtime/tool_discovery_dynamic_universal_scope_certificate_v1.py": "79a23c5b52a616e4fadd53cab0042605804b60c6",
+    "canonical/tests/test_tool_discovery_dynamic_universal_scope_certificate_v1.py": "2d53b573a103b8d5cb9a9bb24dfa7b40c5a02380"
+  },
+  "repaired_defects": [
+    "V3_COULD_SELECT_AN_INITIALLY_VISIBLE_EXPENSIVE_SUFFICIENT_TOOL_BEFORE_DISCOVERING_A_CHEAPER_UNKNOWN_IDENTITY",
+    "OLD_TERMINAL_BOUND_CANDIDATE_HAD_NO_DISCOVER_ACTION_AND_COULD_NOT_SUPPORT_UNKNOWN_IDENTITY_SCOPE",
+    "OLD_FORMALISM_CUT_WAS_PINNED_TO_A_SUPERSEDED_WHOLE_PROTOCOL_BLOB_EVEN_THOUGH_THE_TOOL_DISCOVERY_PROTOCOL_ROW_WAS_SEMANTICALLY_UNCHANGED"
+  ],
+  "proof_summary": [
+    "ARBITRARY_TOOL_IDENTITIES_ARE_HANDLED_PARAMETRICALLY_AS_OPAQUE_STRINGS",
+    "ALL_AVAILABLE_DECLARED_DISCOVERY_SOURCES_ARE_EXHAUSTED_BEFORE_PROBE_OR_SELECT",
+    "COMPLETE_SOURCE_RELATION_MAKES_ALL_IDENTITIES_IN_THE_COMMON_FROZEN_TOOL_AUTHORITY_VISIBLE_AFTER_FINITE_DISCOVERY",
+    "CURRENT_EPOCH_SAFE_PROBE_EVIDENCE_IS_REQUIRED_FOR_SELECTION_AND_STALE_EVIDENCE_IS_IGNORED",
+    "GLOBAL_COST_ORDER_AFTER_COMPLETE_DISCOVERY_MAKES_FIRST_SELECTED_ROUTE_LEAST_COST_AMONG_EVIDENCE_SUPPORTED_ADMISSIBLE_ROUTES",
+    "FINITE_SOURCE_AND_CAPABILITY_PROGRESS_GIVES_TERMINATION_TO_SELECT_OR_SOUND_ESCALATION",
+    "PROOF_IS_UNIVERSAL_AND_DOES_NOT_GENERALIZE_FROM_THE_EXISTING_V3_SAMPLE_GRID"
+  ],
+  "expected_independent_projection": {
+    "universal_scope_proved": true,
+    "scope_atom_satisfied_candidate": true,
+    "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "uses_empirical_generalization": false,
+    "terminal_cases_replayed": 0,
+    "new_reality_units_consumed": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "promotion_rule": "ONLY_AN_INDEPENDENT_PUBLIC_RUNNER_PASS_OVER_THE_EXACT_CONTENT_ADDRESSED_INPUTS_MAY_SATISFY_THE_TOOL_DISCOVERY_SCOPE_ATOM__ACCEPTANCE_REDUCTION_REMAINS_A_SEPARATE_ATOMIC_STEP",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_CLAIM_FOR_TOOLS_OUTSIDE_THE_COMMON_FROZEN_TOOL_AUTHORITY",
+    "NO_CLAIM_THAT_INCOMPLETE_OR_BROKEN_DISCOVERY_SOURCES_ARE_COMPLETE",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "NO_TARGET_WEAKENING"
+  ],
+  "next": "RUN_INDEPENDENT_PUBLIC_RUNNER_OVER_EXACT_BLOBS__IF_AND_ONLY_IF_PASS_BIND_SCOPE_ATOM_AND_RUN_SEPARATE_ACCEPTANCE_REDUCTION",
+  "terminal_cases_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
