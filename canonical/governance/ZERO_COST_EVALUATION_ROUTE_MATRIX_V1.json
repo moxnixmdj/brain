@@ -141,15 +141,17 @@
       {
         "surface": "LiveBench Instruction Following",
         "target": ">=65.7%",
-        "classification": "EXACT_PUBLIC_INPUTS_AND_HARNESS",
+        "classification": "EXACT_PUBLIC_INPUTS_HARNESS_COMPARATOR_AND_ACTIVE_POPULATION_BOUND__BRAIN_SCORE_OPEN",
         "sources": [
           "https://github.com/LiveBench/LiveBench",
           "https://github.com/livebench/livebench/blob/main/livebench/if_runner/ifbench/README.md"
         ],
-        "fact": "Instruction-following data and deterministic constraint verifiers are public.",
-        "zero_cost_status": "VERIFIER_SOURCE_BYTES_FROZEN__HERMETIC_DEPENDENCIES_DATASET_HASH_AND_BRAIN_ADAPTER_STILL_OPEN",
-        "next": "PIN_VERIFIER_RUNTIME_AND_EN_CORE_WEB_SM_ARTIFACT_HASHES__PIN_DATASET_REVISION_WITHOUT_CASE_EXPOSURE__FREEZE_BRAIN_RESPONSE_ADAPTER__RUN_SYNTHETIC_MUTATION_PREFLIGHT",
-        "verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json"
+        "fact": "Exact public IF input bytes, strict deterministic scorer, Brain adapter, 2026-06-25 Opus 5.5 comparator bar, and the 200-question active public population are independently bound. No Brain terminal score has been executed under current authority.",
+        "zero_cost_status": "COMPARATOR_ROUTE_PREQUALIFIED__BRAIN_SCORE_EXECUTION_NOT_AUTHORIZED_UNTIL_ZERO_REALITY_FIXED_POINT",
+        "next": "RECOMPUTE_SHARED_PUBLIC_BENCHMARK_ABI_ROUTE__DO_NOT_RUN_LIVEBENCH_TERMINAL_CASES_UNDER_CURRENT_AUTHORITY",
+        "verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
+        "comparator_route_reconciliation": "canonical/governance/LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2.json",
+        "population_verification": "canonical/verification/LIVEBENCH_IF_2026_06_25_RELEASE_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
       }
     ],
     "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO": [
