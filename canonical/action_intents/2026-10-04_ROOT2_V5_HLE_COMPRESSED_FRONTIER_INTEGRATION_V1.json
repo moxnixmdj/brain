@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ROOT2-V5-HLE-COMPRESSED-FRONTIER-INTEGRATION-20261004",
+  "status": "CURRENT_BASE_570E6581__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "base_commit_sha": "570e6581a75a3b6af0b76f7b3c4efa695891e7e0",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "blocker_id": "ROOT2_SCORER_ACCESS_ACCOUNT_GRADER_DEPLOYMENT_GAPS",
+  "candidate_authority_blobs": {
+    "root2_fixed_bar_route_inventory_v1": "bca14e3bc81dbf38e329020a789a0aaacdab36ed",
+    "current_zero_reality_minimum_cut_v8": "34978940366f468256b9f9b780afb0feb78c3962",
+    "root2_root3_minimum_execution_frontier_v1": "49b6df4ff8f1939014ac13229708f06cbbd65131",
+    "current_terminal_authority_v1": "43177b70f688dac4b323cf979489f402d47e8695"
+  },
+  "selected_route": "PRESERVE_UNIVERSAL_LEARNING_V5_AND_ROOT3_REFINEMENT__BIND_VERIFIED_HLE_TOOL_ADAPTER__DELETE_DOMINATED_AUTOMATIONBENCH_CHARTOGRAPHY_OSWORLD_SEARCH__KEEP_ONLY_EXACT_ROOT2_RESIDUALS",
+  "expected_terminal_delta": "NO_ACCEPTANCE_OR_OWNERSHIP_DELTA__HLE_ADAPTER_BLOCKER_REMOVED__THREE_DOMINATED_SEARCH_BRANCHES_REMOVED__LIVE_ROOT2_FRONTIER_REDUCED",
+  "supersedes": [
+    "BRAIN_PR_1468_STALE_AFTER_V5_AUTHORITY_OVERLAP",
+    "VERIFIER_PR_1491_VALID_ONLY_FOR_PRE_V5_AUTHORITY_PROJECTION"
+  ],
+  "invariants": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gap_count": 0,
+    "root3_currently_runnable_events": 0,
+    "unknown_domain_direct_leaves_open": 2,
+    "terminal_goal_achieved": false
+  },
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
