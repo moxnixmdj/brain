@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_TOOL_DISCOVERY_SCOPE_COMPLETE_ACCEPTANCE_INPUT_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE__TOOL_DISCOVERY_SCOPE_COMPLETENESS_REPAIRED__INDEPENDENT_ACCEPTANCE_REDUCTION_REQUIRED",
+  "status": "REJECTED__QUANTIFIER_MISMATCH__DO_NOT_CONSUME_FOR_ACCEPTANCE_REDUCTION",
   "protocols": {
     "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
     "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
@@ -56,21 +56,20 @@
       "family_credit_delta": 0,
       "promotion_authority": false,
       "scope_completeness": {
-        "verified": true,
-        "independent": true,
-        "basis": "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
-        "complete_target_case_set": true,
-        "receipt": "canonical/verification/TOOL_DISCOVERY_FROZEN_SCOPE_COMPLETENESS_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+        "verified": false,
+        "independent": false,
+        "basis": "REJECTED_QUANTIFIER_MISMATCH",
+        "complete_target_case_set": false,
+        "receipt": "canonical/verification/TOOL_DISCOVERY_FROZEN_SCOPE_COMPLETENESS_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "invalidation": "canonical/governance/TOOL_DISCOVERY_FROZEN_SCOPE_QUANTIFIER_INVALIDATION_V1.json"
       }
     }
   ],
   "expected_compile_result": {
     "family_count": 19,
-    "closed_family_count": 4,
-    "open_family_count": 15,
-    "newly_closed_families": [
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
-    ],
+    "closed_family_count": 3,
+    "open_family_count": 16,
+    "newly_closed_families": [],
     "preserved_closed_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
       "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -78,11 +77,10 @@
     ]
   },
   "hard_rules": [
-    "ONLY_THE_SCOPE_COMPLETENESS_DEFECT_IS_REPAIRED",
-    "RAW_180_OF_180_TERMINAL_SAMPLE_REMAINS_IMMUTABLE",
-    "EXACT_FROZEN_SCOPE_CERTIFICATE_DOES_NOT_BY_ITSELF_GRANT_FAMILY_CREDIT",
-    "INDEPENDENT_ACCEPTANCE_REDUCTION_REQUIRED_BEFORE_CANONICAL_PROMOTION",
-    "NO_OPEN_DOMAIN_GENERALIZATION_FROM_FROZEN_SCOPE",
+    "CASE_LOCAL_TOOL_IDENTITY_COMPLETENESS_MUST_NOT_BE_RELABELLED_AS_COMPLETE_TARGET_CASE_UNIVERSE",
+    "FINITE_180_OF_180_SAMPLE_CANNOT_ESTABLISH_PROTOCOL_WIDE_ABSOLUTE_LOWER_BOUND",
+    "REQUIRE_EXHAUSTIVE_FINITE_TARGET_CASE_SET_OR_UNIVERSAL_FORMAL_PROOF_OVER_ALL_ADMISSIBLE_FROZEN_GENERATOR_INPUTS",
+    "NO_ACCEPTANCE_FAMILY_ATOM_EXECUTION_OR_PROMOTION_CREDIT",
     "ZERO_FRESH_TERMINAL_REALITY"
   ],
   "incremental_spend_usd": 0,
@@ -91,5 +89,6 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "scope_completeness_receipt_status": "INVALID_FOR_TARGET_CASE_UNIVERSE_COMPLETENESS__CASE_LOCAL_IDENTITY_COMPLETENESS_ONLY"
 }
