@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_V4_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CANONICAL_V4_CANDIDATE_AND_CPU_PREREQUISITE__ZERO_TERMINAL__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "canonical_candidate": {
+    "path": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_CANDIDATE_V4.json",
+    "git_blob_sha": "487cd17ef51cc49c8bdf36733c7c594e9bbf410b",
+    "slot_id": "terminal-bench-science/koopman-mfg-id::trial-0",
+    "schedule_order": 5
+  },
+  "cpu_prerequisite": {
+    "path": "canonical/verification/TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "7497bc7249431a832a0e938fcf6d575bfbfaf5f3"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1277,
+    "head_sha": "ffdcbbca30eae8e08435c86a9d0db68d6c597818",
+    "merge_commit": "3fb062d73fbe9e4dea99ef64b1553a21f99bf2b0",
+    "workflow_run_id": 37112819723,
+    "workflow_job_id": 111173885679,
+    "conclusion": "success",
+    "verified_steps": [
+      "BIND_EXACT_BRAIN_PR1290_BYTES",
+      "VERIFY_CANDIDATE_AND_CPU_PREREQUISITE",
+      "VERIFY_AUTHORITY_AND_ALL_MIRRORS_AGREE"
+    ]
+  },
+  "verified": {
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "finalized_failures": 5,
+    "failures_remaining_before_fail_lock": 73,
+    "consumed_slot_count": 5,
+    "next_slot": "terminal-bench-science/koopman-mfg-id::trial-0",
+    "clean_current_runner_build_required": true,
+    "compiled_llama_cpp_cache_forbidden": true,
+    "candidate_execution_authority": false
+  },
+  "terminal_task_content_read": 0,
+  "terminal_results_observed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
