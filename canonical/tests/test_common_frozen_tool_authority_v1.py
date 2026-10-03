@@ -37,7 +37,7 @@ def drive(authority: CommonFrozenToolAuthority, required=("A", "B"), *, receipts
         actions.append(dict(action))
         kind = action["action"]
         if kind == "DISCOVER":
-            public["discovery_receipts"].append(authority.discover(required))
+            public["discovery_receipts"].append(authority.discover(action["source_id"], required))
             continue
         if kind == "PROBE":
             public["prior_probe_receipts"].append(
@@ -76,7 +76,7 @@ class CommonFrozenToolAuthorityTests(unittest.TestCase):
 
     def test_discovery_does_not_leak_capability_truth(self):
         a = CommonFrozenToolAuthority(entries())
-        r = a.discover(["A", "B"])
+        r = a.discover(a.source_ids()[0], ["A", "B"])
         text = repr(r).lower()
         self.assertNotIn("hidden_capabilities", text)
         self.assertNotIn("supported", text)
@@ -90,7 +90,7 @@ class CommonFrozenToolAuthorityTests(unittest.TestCase):
         public = a.initial_public(["A", "B"])
         first = v5.next_action(public)
         self.assertEqual(first["action"], "DISCOVER")
-        public["discovery_receipts"].append(a.discover(["A", "B"]))
+        public["discovery_receipts"].append(a.discover(first["source_id"], ["A", "B"]))
         second = v5.next_action(public)
         self.assertEqual(second["action"], "PROBE")
 
@@ -133,7 +133,9 @@ class CommonFrozenToolAuthorityTests(unittest.TestCase):
         a1 = a0.replace(changed)
         public1 = a1.initial_public(["A", "B"], prior_probe_receipts=old)
         self.assertEqual(v5.next_action(public1)["action"], "DISCOVER")
-        public1["discovery_receipts"].append(a1.discover(["A", "B"]))
+        d = v5.next_action(public1)
+        self.assertEqual(d["action"], "DISCOVER")
+        public1["discovery_receipts"].append(a1.discover(d["source_id"], ["A", "B"]))
         first_after_discovery = v5.next_action(public1)
         self.assertEqual(first_after_discovery, {"action": "PROBE", "tool_id": "T0", "capability": "A"})
 
@@ -155,6 +157,27 @@ class CommonFrozenToolAuthorityTests(unittest.TestCase):
         a = CommonFrozenToolAuthority(rows)
         selected, _, _ = drive(a)
         self.assertEqual(selected, "T2")
+
+    def test_arbitrary_source_partition_union_is_complete(self):
+        rows = entries(0b1010)
+        rows[0]["source_id"] = "S2"
+        rows[1]["source_id"] = "S1"
+        rows[2]["source_id"] = "S2"
+        rows[3]["source_id"] = "S3"
+        rows[0]["source_cost"] = 2.0
+        rows[2]["source_cost"] = 2.0
+        rows[1]["source_cost"] = 1.0
+        rows[3]["source_cost"] = 3.0
+        a = CommonFrozenToolAuthority(rows)
+        out = prove_common_authority_instance(rows, ["A", "B"])
+        self.assertTrue(out["source_union_complete"], out)
+        self.assertEqual(a.source_ids(), ("S1", "S2", "S3"))
+        selected, actions, _ = drive(a)
+        self.assertEqual(selected, "T1")
+        self.assertEqual(
+            {x["source_id"] for x in actions if x["action"] == "DISCOVER"},
+            {"S1", "S2", "S3"},
+        )
 
     def test_arbitrary_identity_names_and_cost_orders_preserve_completeness(self):
         names = ("z", "a", "mid")
