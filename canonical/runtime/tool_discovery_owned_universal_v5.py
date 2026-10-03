@@ -140,14 +140,15 @@ class OwnedToolAuthorityV5:
         ]
 
     def registry_digest_sha256(self) -> str:
-        rows = []
-        for tid in self.registry_ids():
-            tool = self._tools[tid]
-            rows.append({
-                "public": tool.public(self._epoch),
-                "hidden_capabilities": sorted(tool.capabilities),
-            })
-        payload = {"epoch": self._epoch, "rows": rows}
+        # Candidate-visible digest binds only public authority metadata.
+        # Hidden capability truth must never be encoded into a public digest,
+        # even indirectly, because a small hidden state space can make hashes
+        # distinguishable by enumeration.
+        rows = [
+            self._tools[tid].public(self._epoch)
+            for tid in self.registry_ids()
+        ]
+        payload = {"epoch": self._epoch, "public_rows": rows}
         return sha256(_canon(payload).encode("utf-8")).hexdigest()
 
     def initial_public(
