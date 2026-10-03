@@ -6,7 +6,7 @@
   "authority": {
     "root_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "bb38521bf7dd4a8d404a1a62cfd326769eb075ea"
+      "git_blob_sha": "e94469ffdeb7535f9a921a244e62cde6b84fda5c"
     },
     "current_frontier": {
       "path": "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V3.json",
@@ -23,7 +23,7 @@
     },
     "root2_fixed_bar_route_inventory": {
       "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-      "git_blob_sha": "ea5b71a504eacf6de2c6ce8dd63a94f20d5215e9",
+      "git_blob_sha": "fd2b0b5e3020e853dd1d610205fec21fff34f693",
       "consequence": "15_ROOT2_ONLY_PREDICATES_COLLAPSED_TO_14_UNIQUE_BENCHMARK_ROUTE_OBLIGATIONS__TB4_RENDER_CONNECTED_RESOURCE_AMBIGUITY_RESOLVED_EMPTY__HISTORICAL_ROUTE_DELETION_IS_NOT_ACCEPTANCE_CLOSURE"
     },
     "finance_accounting_index_identity_reconciliation": {
