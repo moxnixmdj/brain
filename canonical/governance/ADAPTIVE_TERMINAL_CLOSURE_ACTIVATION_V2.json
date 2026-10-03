@@ -32,7 +32,7 @@
   },
   "workflow": {
     "path": ".github/workflows/verify-adaptive-terminal-closure-controller-v2.yml",
-    "git_blob_sha": "af60fd8fa55807aa0addbc49c5cce044b33e0eaa"
+    "git_blob_sha": "edea0ab80b1d62c25972fa4b93e6f45894ad5d81"
   },
   "expected_live_world": {
     "unresolved_predicates": 27,
