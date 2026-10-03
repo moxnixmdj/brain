@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_27_INFORMATION_DOMINANCE_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PASS__16_NONDOMINATED_CERTIFICATES__19_ZERO_REALITY_REQUIREMENTS__V9_RETRIEVAL_GATED__ZERO_CREDIT",
+  "objective": "Activate the independently verified live-27 structural dominance result as the current proof-first scheduling layer, preserving mandatory Tool Discovery V2 retrieval authority and granting no fresh-reality authority.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "candidate": {
+    "path": "canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json",
+    "git_blob_sha": "fae786d6051277865ed6ecde69be5da98e2bf509"
+  },
+  "verification": {
+    "path": "canonical/verification/CURRENT_27_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "1931ae5a7edb5dde2021a8a4f7e7a3ad0fd821f1",
+    "public_runner_pr": 1307,
+    "workflow_run_id": 37117367476,
+    "workflow_job_id": 111186653431,
+    "conclusion": "success"
+  },
+  "current_scheduling_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "04f0ee3cd64c3f77b29ece159ac9a35eae47a9dc",
+    "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V9_CURRENT__RECOVERY_4_OF_19__MANDATORY_TOOL_DISCOVERY_V2_RETRIEVAL_GATE__ZERO_CREDIT"
+  },
+  "live_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "certificate_count": 16,
+    "nondominated_certificate_count": 16,
+    "dominated_certificate_count": 0,
+    "unique_zero_reality_requirements": 19
+  },
+  "highest_direct_leverage": {
+    "certificate_id": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+    "covered_predicates": 8,
+    "fraction_of_live_atomic_frontier": 0.2962962962962963,
+    "required_propositions": [
+      "MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
+      "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"
+    ],
+    "priority_rule": "FIRST_RESOURCE_PRIORITY_BUT_DO_NOT_SERIALIZE_INDEPENDENT_ZERO_REALITY_WORK_BEHIND_IT"
+  },
+  "execution_policy": {
+    "parallel_zero_reality_frontier": true,
+    "fresh_reality_authority": false,
+    "fixed_point_after_every_verified_delta": true,
+    "stop_work_on_any_branch_that_becomes_dominated": true,
+    "tool_discovery_v2_retrieval_authority_mandatory": true,
+    "repeated_consumed_tool_discovery_source_epoch_forbidden": true,
+    "current_tool_discovery_retrieval_activation": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1.json"
+  },
+  "hard_rules": [
+    "ALL_16_CERTIFICATES_ARE_CURRENTLY_STRUCTURALLY_NONDOMINATED",
+    "STRUCTURAL_COVERAGE_DOES_NOT_IMPLY_PROOF_DIFFICULTY_OR_SUCCESS_PROBABILITY",
+    "RUN_CAUSALLY_INDEPENDENT_ZERO_REALITY_SEARCH_AND_PROOF_BRANCHES_CONCURRENTLY",
+    "MATCHED_SCOPE_BINDING_GETS_FIRST_RESOURCE_PRIORITY_BECAUSE_IT_COVERS_8_OF_27",
+    "TOOL_DISCOVERY_RETRIEVAL_MUST_USE_VERIFIED_V2_AUTHORITY_AND_MUST_NOT_REPLAY_CONSUMED_SOURCE_EPOCHS",
+    "RECOMPUTE_LIVE_WORLD_AND_DOMINANCE_AFTER_EVERY_VERIFIED_CLOSURE",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE_FROM_THIS_ACTIVATION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "LAUNCH_PARALLEL_ZERO_REALITY_REQUIREMENT_DISCHARGE__PRIORITIZE_MATCHED_SCOPE_BINDINGS__USE_VERIFIED_ORTHOGONAL_RESIDUAL_WITNESS_RETRIEVAL_ONLY_WHERE_WAKE_CONDITIONS_HOLD__RECOMPUTE_AFTER_FIRST_VERIFIED_DELTA__NO_FRESH_REALITY_UNTIL_ZERO_REALITY_SATURATION_AND_SEPARATE_AUTHORITY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
