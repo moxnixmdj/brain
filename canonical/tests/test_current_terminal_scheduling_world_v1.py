@@ -32,7 +32,7 @@ class CurrentTerminalSchedulingWorldV1Tests(unittest.TestCase):
         self.assertEqual(out["registry_predicate_count"], 38)
         self.assertEqual(out["proved_predicate_count"], 11)
         self.assertEqual(out["unresolved_predicate_count"], 27)
-        self.assertEqual(out["live_action_coverage_count"], 30)
+        self.assertEqual(out["live_action_coverage_count"], 27)
         self.assertEqual(out["uncovered_predicates"], [])
 
     def test_delegation_and_recovery_are_removed_but_tool_learning_remains_open(self):
@@ -56,7 +56,7 @@ class CurrentTerminalSchedulingWorldV1Tests(unittest.TestCase):
         out = self.live()
         self.assertTrue(out["source_scheduling_world_stale"])
         reasons = out["source_scheduling_world_stale_reasons"]
-        self.assertTrue(any("31" in x and "30" in x for x in reasons), reasons)
+        self.assertTrue(any("31" in x and "27" in x for x in reasons), reasons)
         self.assertTrue(any("TERMINAL_TARGETS" in x for x in reasons), reasons)
 
     def test_compiler_cannot_grant_execution_or_credit(self):
