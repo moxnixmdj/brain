@@ -95,11 +95,6 @@ def _candidate_files(root: Path) -> list[Path]:
                 continue
             if any(p.name.startswith(prefix) for prefix in EXCLUDED_BASENAME_PREFIXES):
                 continue
-            try:
-                if p.stat().st_size > MAX_FILE_BYTES:
-                    continue
-            except OSError:
-                continue
             out.append(p)
     return sorted(out, key=lambda p: p.relative_to(root).as_posix())
 
@@ -162,14 +157,32 @@ def build_index(
 
     files = _candidate_files(root)
     file_cache: list[tuple[str, str, str, str]] = []
+    coverage_errors: list[str] = []
     for path in files:
         rel = path.relative_to(root).as_posix()
         try:
             data = path.read_bytes()
+        except OSError as exc:
+            coverage_errors.append(f"CANDIDATE_READ_FAILED:{rel}:{type(exc).__name__}")
+            continue
+        if len(data) > MAX_FILE_BYTES:
+            coverage_errors.append(f"CANDIDATE_OVERSIZE:{rel}:{len(data)}")
+            continue
+        try:
             text = data.decode("utf-8")
-        except (OSError, UnicodeDecodeError):
+        except UnicodeDecodeError:
+            coverage_errors.append(f"CANDIDATE_NOT_UTF8:{rel}")
             continue
         file_cache.append((rel, _source_class(rel), _blob_sha(data), text))
+
+    if coverage_errors:
+        out = _fail(*coverage_errors)
+        out.update({
+            "declared_candidate_file_count": len(files),
+            "scanned_file_count": len(file_cache),
+            "unsearched_candidate_file_count": len(files) - len(file_cache),
+        })
+        return out
 
     atom_rows = []
     total_matches = 0
@@ -224,7 +237,9 @@ def build_index(
         "errors": [],
         "canonical_atom_count": len(atom_rows),
         "canonical_atom_manifest_sha256": _atom_manifest_sha256(atoms),
+        "declared_candidate_file_count": len(files),
         "scanned_file_count": len(file_cache),
+        "unsearched_candidate_file_count": 0,
         "scanned_corpus_manifest_sha256": _manifest_sha256(file_cache),
         "candidate_match_count": total_matches,
         "atoms_with_truncated_candidate_lists": sum(
@@ -243,6 +258,7 @@ def build_index(
             "REPORT_MATCH_TRUNCATION_EXPLICITLY__"
             "EXCLUDE_FRONTIER_AND_SCHEDULER_RESTATEMENTS__"
             "EXCLUDE_RECEIPT_PIPELINE_SELF_VERIFICATION_AND_DECLARED_CORPUS_RESTATEMENTS__"
+            "FAIL_CLOSED_IF_ANY_DECLARED_CANDIDATE_IS_OVERSIZE_UNREADABLE_OR_NON_UTF8__"
             "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_INDEX"
         ),
         "new_reality_units_consumed": 0,
