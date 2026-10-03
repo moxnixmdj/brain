@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_ZERO_REALITY_WAVE1_V3_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT_POINTER_REPAIRED__8X12_EXHAUSTION_ACTIVE__SYNTHESIS_V3_COMPRESSED__14_ROOT2_SURFACES_PRESERVED__ZERO_CREDIT",
+  "exact_brain_subjects": {
+    "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "458a01f6a4b4f172c04785a3cdb4911086875f7c",
+    "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json": "a0ad666e43c4dd5121d6f235f87962dd2bf17004",
+    "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json": "a5726e4d17e41120bece55191222b6039ef9e0a5",
+    "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json": "471496219ef8bea258334cbd563e2f22c69e3b5f",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "4d49ddcdf244f5b1508b0933223d27bfe29944bf",
+    "canonical/governance/SYNTHESIS_OVERLAY_V3_REBIND_ACTIVATION_V1.json": "6c71e496e01a111d5cef9431034d90e3f1af8acb",
+    "canonical/verification/SYNTHESIS_OVERLAY_V3_REBIND_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "57b7fc8df4fd820e3eda426f121b56acfce37a15",
+    "canonical/verification/CURRENT_WITNESS_TARGET_TOTALIZATION_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "48c2318aaffffec67855199523235e6943289fc6",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1396,
+    "verifier_head_sha": "2c00a359dbe1f66a7e374dc49d1658aae6413915",
+    "merge_commit": "7e992a4a466843d93f744b170ce88fbd04c47d39",
+    "workflow_run_id": 37152537809,
+    "workflow_job_id": 111289185721,
+    "conclusion": "success"
+  },
+  "verified": {
+    "acceptance": "5/19_PASS__14/19_OPEN",
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gap_count": 0,
+    "root2_predicates": 15,
+    "root2_unique_surfaces": 14,
+    "aa_briefcase_frozen_score": 1822,
+    "aa_briefcase_live_reference_score": 1808,
+    "normalized_matched_targets": 8,
+    "normalized_witnesses": 12,
+    "witness_target_pairs": 96,
+    "direct_reuse_target_closures": 0,
+    "synthesis_preserved_atoms": 7,
+    "synthesis_remaining_obligation_count": 4,
+    "terminal_achieved": false,
+    "fresh_reality_authority": false
+  },
+  "active_cut": [
+    "SEARCH_LOAD_BEARING_CERTIFICATES_FOR_SEVEN_OTHER_ROOT3_TARGETS",
+    "CLOSE_ONLY_FOUR_SYNTHESIS_RESIDUAL_OBLIGATIONS",
+    "BIND_INCREMENTAL_GAPS_ACROSS_14_ROOT2_SURFACES",
+    "RESOLVE_TB4_ATTAINABILITY",
+    "RECOMPUTE_COMPOSITION_AFTER_UPSTREAM_DELTAS",
+    "RECOMPUTE_FIXED_POINT_AFTER_EACH_VERIFIED_DELTA"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
