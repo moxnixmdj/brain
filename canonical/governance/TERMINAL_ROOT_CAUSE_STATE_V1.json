@@ -85,7 +85,12 @@
     },
     "evidence": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "f99b00e6dca735ffa7a790a414155b4f69856cf0"
+      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5",
+      "pointer_reconciliation": {
+        "status": "RECONCILED_TO_CURRENT_12_PROVED_26_UNRESOLVED_LEDGER",
+        "previous_stale_git_blob_sha": "f99b00e6dca735ffa7a790a414155b4f69856cf0",
+        "acceptance_credit_delta": 0
+      }
     },
     "unresolved_total": 26,
     "root1_positive_gap_count": 0,
