@@ -1,0 +1,339 @@
+{
+  "schema": "PROJECT_BRAIN_EXTERNAL_BENCHMARK_DOMINANCE_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__EXTERNAL_BENCHMARK_REUSE_FIRST__NO_CUSTOM_BENCHMARK_AUTHORITY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_base_commit": "a55363f47e97bfdba841ef163d27969bd6ae7b41",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Minimize terminal actions by reusing exact existing Opus 5.5 benchmark surfaces before any bespoke evaluation, and admit a custom residual only when no verified external benchmark or combination is an exact-or-superset substitute.",
+  "exact_brain_inputs": {
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5"
+    },
+    "matched_targets": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V3.json",
+      "git_blob_sha": "9b400e6eb1a95bacbd9c0cdb93b155ced0f72558"
+    },
+    "current_frontier": {
+      "path": "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V2.json",
+      "git_blob_sha": "352fe17467a8335a348949ce2f2b6fdb6235e9ac"
+    },
+    "livebench_if_route": {
+      "path": "canonical/governance/LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2.json",
+      "git_blob_sha": "7067a849585d9020f3d78aa374c0eeecb5078c8b"
+    }
+  },
+  "official_opus55_reference_surfaces": [
+    {
+      "id": "TERMINAL_BENCH_4_0",
+      "score": 66.4,
+      "unit": "percent",
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "note": "xhigh effort"
+    },
+    {
+      "id": "FRONTIERCODE_V1_1_MAIN",
+      "score": 54.4,
+      "unit": "percent",
+      "source": "https://www.anthropic.com/claude-opus-5-5"
+    },
+    {
+      "id": "CURSORBENCH_4_0",
+      "score": 57.8,
+      "unit": "percent",
+      "source": "https://www.anthropic.com/claude-opus-5-5"
+    },
+    {
+      "id": "GDPVAL_AA_V2_1",
+      "score": 1846,
+      "unit": "elo",
+      "source": "https://www.anthropic.com/claude-opus-5-5"
+    },
+    {
+      "id": "AUTOMATIONBENCH",
+      "score": 40,
+      "unit": "percent",
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "note": "run and reported by Zapier"
+    },
+    {
+      "id": "HLE_WITH_TOOLS",
+      "score": 67.7,
+      "unit": "percent",
+      "source": "https://www.anthropic.com/claude-opus-5-5"
+    },
+    {
+      "id": "TERMINAL_BENCH_SCIENCE_0_1",
+      "score": 58.7,
+      "unit": "percent",
+      "source": "https://www.anthropic.com/claude-opus-5-5"
+    },
+    {
+      "id": "OSWORLD_2_1_PARTIAL",
+      "score": 81.8,
+      "unit": "percent",
+      "source": "https://www.anthropic.com/claude-opus-5-5"
+    },
+    {
+      "id": "CHARTOGRAPHY_WITH_TOOLS",
+      "score": 89,
+      "unit": "percent",
+      "source": "https://www.anthropic.com/claude-opus-5-5"
+    },
+    {
+      "id": "AA_BRIEFCASE_V1_1",
+      "score": 1822,
+      "unit": "elo",
+      "source": "https://www.anthropic.com/claude-sonnet-5-5",
+      "note": "Anthropic comparison table; live AA leaderboard may evolve"
+    }
+  ],
+  "high_value_external_candidates": [
+    {
+      "id": "GDP_PDF",
+      "opus55_score": 30.6,
+      "unit": "percent",
+      "source": "https://surgehq.ai/benchmarks/gdp-pdf",
+      "harness": "https://github.com/surge-ai/gdp-pdf",
+      "accessibility": "FULL_PUBLIC_DATASET_AND_HARNESS",
+      "measures": [
+        "professional_multimodal_reasoning",
+        "dense_pdf_understanding",
+        "document_question_answering"
+      ]
+    },
+    {
+      "id": "COMPLEX_CONSTRAINTS",
+      "opus55_score": 49.9,
+      "unit": "percent",
+      "source": "https://surgehq.ai/benchmarks/complex-constraints",
+      "harness": "https://github.com/surge-ai/complex-constraints",
+      "accessibility": "FULL_PUBLIC_DATASET_AND_HARNESS",
+      "measures": [
+        "professional_instruction_following",
+        "interlocking_constraints",
+        "conditional_constraints",
+        "context_inference"
+      ]
+    },
+    {
+      "id": "ENTERPRISEBENCH_CORECRAFT",
+      "opus55_score": 74.4,
+      "unit": "percent",
+      "source": "https://surgehq.ai/benchmarks/enterprisebench-corecraft",
+      "accessibility": "OWNER_HOSTED_RESULT__HARNESS_ACCESS_NOT_YET_BOUND",
+      "measures": [
+        "tool_use",
+        "planning",
+        "adaptability",
+        "groundedness",
+        "common_sense",
+        "enterprise_agent_tasks"
+      ]
+    },
+    {
+      "id": "DAYJOB_FINANCE",
+      "opus55_score": 23.9,
+      "unit": "percent",
+      "source": "https://arxiv.org/abs/2610.01306",
+      "accessibility": "50_OF_80_FINANCE_TASKS_PLUS_HARNESS_PUBLIC",
+      "measures": [
+        "long_horizon_professional_finance",
+        "expert_rubric",
+        "delivered_files",
+        "premise_validation"
+      ]
+    },
+    {
+      "id": "DAYJOB_HEALTHCARE",
+      "opus55_score": 24.7,
+      "unit": "percent",
+      "source": "https://arxiv.org/abs/2610.01306",
+      "accessibility": "ALL_50_HEALTHCARE_TASKS_PLUS_HARNESS_PUBLIC",
+      "measures": [
+        "long_horizon_professional_healthcare",
+        "expert_rubric",
+        "delivered_files",
+        "premise_validation"
+      ]
+    }
+  ],
+  "public_fixed_bar_policy": {
+    "expected_unresolved_public_fixed_bar_count": 15,
+    "action": "REUSE_EXISTING_EXTERNAL_BENCHMARK_ROUTE__DO_NOT_INVENT_REPLACEMENT_BENCHMARK",
+    "custom_benchmark_creation_authorized": false
+  },
+  "matched_target_adjudication": [
+    {
+      "predicate_id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "candidates": [
+        "ENTERPRISEBENCH_CORECRAFT"
+      ],
+      "coverage_state": "PARTIAL_NOT_SUPERSET",
+      "missing_atoms": [
+        "long_horizon_state_retention",
+        "tool_failure_and_recovery",
+        "subtask_dependency_and_fan_in",
+        "minimal_oversight_completion",
+        "exact_matched_noninferiority_semantics"
+      ],
+      "replacement_authorized": false
+    },
+    {
+      "predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "candidates": [
+        "ENTERPRISEBENCH_CORECRAFT"
+      ],
+      "coverage_state": "PARTIAL_NOT_SUPERSET",
+      "missing_atoms": [
+        "safety_no_material_regression",
+        "scope_no_material_regression",
+        "invalid_action_no_material_regression",
+        "unrecovered_failure_no_material_regression"
+      ],
+      "replacement_authorized": false
+    },
+    {
+      "predicate_id": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "candidates": [
+        "ENTERPRISEBENCH_CORECRAFT",
+        "DAYJOB_FINANCE"
+      ],
+      "coverage_state": "PARTIAL_NOT_SUPERSET",
+      "missing_atoms": [
+        "research_tool_artifact_exact_composition",
+        "browser_memory_recovery_exact_composition",
+        "coding_debugging_tool_discovery_exact_composition",
+        "delegation_evidence_synthesis_artifact_exact_composition",
+        "cross_capability_state_handoff_and_rollback"
+      ],
+      "replacement_authorized": false
+    },
+    {
+      "predicate_id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "candidates": [
+        "ENTERPRISEBENCH_CORECRAFT"
+      ],
+      "coverage_state": "PARTIAL_NOT_SUPERSET",
+      "missing_atoms": [
+        "zero_critical_composition_failures",
+        "cross_component_state_loss_zero_or_noncritical",
+        "evidence_provenance_complete"
+      ],
+      "replacement_authorized": false
+    },
+    {
+      "predicate_id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "candidates": [
+        "COMPLEX_CONSTRAINTS"
+      ],
+      "coverage_state": "PARTIAL_NOT_SUPERSET",
+      "missing_atoms": [
+        "authorization_and_scope_boundaries",
+        "routine_ambiguity",
+        "requirement_change",
+        "explicit_abstention_and_fail_closed_cases",
+        "exact_scope_boundary_noninferiority_semantics"
+      ],
+      "replacement_authorized": false
+    },
+    {
+      "predicate_id": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "candidates": [
+        "COMPLEX_CONSTRAINTS"
+      ],
+      "coverage_state": "PARTIAL_NOT_SUPERSET",
+      "missing_atoms": [
+        "zero_critical_authority_violations"
+      ],
+      "replacement_authorized": false
+    },
+    {
+      "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "candidates": [
+        "GDP_PDF",
+        "DAYJOB_FINANCE",
+        "DAYJOB_HEALTHCARE"
+      ],
+      "coverage_state": "PARTIAL_NOT_SUPERSET",
+      "missing_atoms": [
+        "uncertainty_and_disagreement_preservation",
+        "audience_adaptation",
+        "format_and_style_constraints",
+        "compression_without_decision_relevant_loss",
+        "exact_matched_quality_noninferiority_semantics"
+      ],
+      "replacement_authorized": false
+    },
+    {
+      "predicate_id": "VISION_DENSE_NONCHART_SCOPE",
+      "candidates": [
+        "GDP_PDF"
+      ],
+      "coverage_state": "STRONG_PARTIAL__EXACT_FROZEN_NONCHART_SCOPE_RELATION_UNPROVED",
+      "missing_atoms": [
+        "exact_proof_that_GDP_PDF_covers_all_frozen_nonchart_leaves_not_exercised_by_Chartography"
+      ],
+      "replacement_authorized": false
+    }
+  ],
+  "direct_scope_candidate_routes": [
+    {
+      "predicate_id": "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "candidates": [
+        "DAYJOB_FINANCE",
+        "GDP_PDF",
+        "COMPLEX_CONSTRAINTS"
+      ],
+      "coverage_state": "COMBINATION_CANDIDATE__EXACT_SUBLEAF_MAPPING_UNPROVED",
+      "replacement_authorized": false
+    },
+    {
+      "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "candidates": [],
+      "coverage_state": "NO_VERIFIED_EXTERNAL_SUPERSET_IDENTIFIED_IN_CURRENT_HIGH_VALUE_SWEEP",
+      "replacement_authorized": false
+    },
+    {
+      "predicate_id": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "candidates": [],
+      "coverage_state": "DEPENDENCY_GRAPH__EXTERNAL_BENCHMARK_SUBSTITUTION_NOT_DIRECTLY_APPLICABLE",
+      "replacement_authorized": false
+    }
+  ],
+  "optimization": {
+    "old_default": "PARALLEL_DISCHARGE_30_PRIMITIVE_ZERO_REALITY_UNITS",
+    "new_precedence": [
+      "REUSE_EXACT_EXISTING_BENCHMARKS",
+      "ADJUDICATE_EXTERNAL_BENCHMARK_SUPERSETS",
+      "SATURATE_EXISTING_BRAIN_RECEIPTS",
+      "ONLY_THEN_AUTHORIZE_IRREDUCIBLE_FRESH_EVALUATION"
+    ],
+    "immediate_full_substitutions_claimed": 0,
+    "reason": "Current external candidates reduce search uncertainty but no exact-or-superset semantic relation has yet been independently proved for a custom matched target."
+  },
+  "hard_rules": [
+    "NO_CUSTOM_BENCHMARK_WHEN_AN_EXACT_EXISTING_OPUS55_SURFACE_EXISTS",
+    "NO_EXTERNAL_BENCHMARK_SUBSTITUTION_WITHOUT_VERIFIED_EXACT_OR_SUPERSET_SCOPE_RELATION",
+    "NO_SCORE_COMPARISON_ACROSS_NONIDENTICAL_HARNESS_OR_POPULATION_WITHOUT_EXPLICIT_ALIGNMENT_PROOF",
+    "NO_PRIVATE_OR_UNPUBLISHED_DATA_ASSUMED_ACCESSIBLE",
+    "NO_PUBLIC_SEARCH_COMPLETENESS_CLAIM",
+    "SOCIAL_OR_AGGREGATOR_SOURCES_ARE_DISCOVERY_ONLY_UNLESS_PRIMARY_EVIDENCE_IS_BOUND",
+    "NO_FRESH_REALITY_BEFORE_ZERO_REALITY_BENCHMARK_DOMINANCE_AND_RECEIPT_SATURATION_FIXED_POINT",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXTERNAL_SOURCE_FACTS_AND_COMPILER_FAIL_CLOSED_RULES__THEN_PROMOTE_BENCHMARK_DOMINANCE_AS_PRE_EXECUTION_GATE_AND_RECOMPUTE_CURRENT_FRONTIER"
+}
