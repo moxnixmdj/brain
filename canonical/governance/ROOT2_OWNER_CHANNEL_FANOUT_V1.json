@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_OWNER_CHANNEL_FANOUT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FIVE_OWNER_CHANNELS_STARTED__ZERO_CREDIT",
+  "objective": "START_ALL_LONG_LATENCY_ROOT2_OWNER_DEPENDENCIES_AT_ONCE_AND_DEDUPLICATE_SURFACES_BY_OWNER",
+  "channels": [
+    {
+      "owner": "Artificial Analysis",
+      "state": "OUTREACH_SENT",
+      "surfaces": [
+        "GDPval-AA v2.1",
+        "AA-Briefcase v1.1",
+        "AA-Omniscience Business Accuracy",
+        "AA-Omniscience Business Non-Hallucination",
+        "AA-LCR v1.1",
+        "AutomationBench-AA Finance",
+        "Finance & Accounting Index/components"
+      ],
+      "expected_predicates": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822",
+        "FINANCE_ACCOUNTING_INDEX_GE_61"
+      ]
+    },
+    {
+      "owner": "Vals AI",
+      "state": "OUTREACH_SENT",
+      "surfaces": [
+        "Finance Agent v2",
+        "MysteryMechanism"
+      ],
+      "expected_predicates": [
+        "FINANCE_AGENT_V2_GE_58_59",
+        "MYSTERYMECHANISM_GE_49_55"
+      ]
+    },
+    {
+      "owner": "Cursor",
+      "state": "OUTREACH_SENT",
+      "surfaces": [
+        "CursorBench 4.0"
+      ],
+      "expected_predicates": [
+        "CODING_CURSORBENCH_GE_57_8"
+      ]
+    },
+    {
+      "owner": "Cognition",
+      "state": "OUTREACH_SENT",
+      "surfaces": [
+        "FrontierCode v1.1 Main"
+      ],
+      "expected_predicates": [
+        "CODING_FRONTIERCODE_GE_54_4"
+      ],
+      "primary_public_evidence": "https://cognition.com/blog/frontier-code",
+      "evidence_note": "Cognition states tasks stay private while evaluation is opened to model creators."
+    },
+    {
+      "owner": "Zapier",
+      "state": "OUTREACH_SENT",
+      "surfaces": [
+        "AutomationBench official private held-out"
+      ],
+      "expected_predicates": [
+        "AUTOMATIONBENCH_GE_40"
+      ],
+      "primary_public_evidence": "https://github.com/zapier/AutomationBench/issues/18",
+      "evidence_note": "Existing public issue asks the same private-submission eligibility question and was still unanswered when checked."
+    }
+  ],
+  "deduplication": {
+    "channel_count": 5,
+    "directly_targeted_root2_fixed_bar_predicates": 9,
+    "shared_surface_note": "AA-Briefcase one owner result can potentially serve two frozen predicates only after each predicate scope is independently satisfied.",
+    "finance_note": "Finance Index owner evidence may also discharge component premises; separate index execution remains dominated if all six component premises close."
+  },
+  "response_policy": {
+    "first_sufficient_owner_receipt": "BIND_EXACT_PROTOCOL_AND_RESULT_THEN_RECOMPUTE_ROOT2_FIXED_POINT",
+    "owner_declines_or_no_route": "PRESERVE_PREDICATE_OPEN_AND_SEARCH_ONLY_FOR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF",
+    "paid_offer": "REJECT_UNLESS_USER_EXPLICITLY_CHANGES_HARD_ZERO_INCREMENTAL_SPEND",
+    "private_task_offer": "DO_NOT_REQUEST_OR_STORE_PRIVATE_HELDOUT_CONTENT_IF_OWNER_RUN_EVALUATION_CAN_KEEP_IT_SERVER_SIDE"
+  },
+  "hard_rules": [
+    "OUTREACH_IS_NOT_ACCEPTANCE_EVIDENCE",
+    "NO_PREDICATE_CREDIT_UNTIL_EXACT_RESULT_PROTOCOL_AND_COMPARATOR_BINDING_ARE_INDEPENDENTLY_VERIFIED",
+    "NO_DUPLICATE_OWNER_OUTREACH_WITHOUT_MATERIAL_WAKE",
+    "NO_PAID_CUSTOM_EVALUATION",
+    "NO_PRIVATE_HELDOUT_TASK_EXFILTRATION"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
