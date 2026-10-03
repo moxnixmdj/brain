@@ -192,12 +192,36 @@ def _epoch_snapshot() -> dict[str, Any]:
     return {"epoch_sha256": root, **body, "_index_rows": indexes}
 
 
-def _public_source(site: str) -> bool:
-    s = site.strip().lower()
+def _public_http_uri(uri: str) -> bool:
+    s = str(uri or "").strip().lower()
     return (
         (s.startswith("http://") or s.startswith("https://"))
         and "@" not in s.split("://", 1)[-1].split("/", 1)[0]
     )
+
+
+def _public_source(site: str) -> bool:
+    raw = str(site or "").strip()
+    if _public_http_uri(raw):
+        return True
+    prefix = "mirror+file:"
+    if not raw.lower().startswith(prefix):
+        return False
+    mirror_path = Path(raw[len(prefix):])
+    if not mirror_path.is_absolute() or not mirror_path.is_file():
+        return False
+    try:
+        lines = mirror_path.read_text(encoding="utf-8", errors="strict").splitlines()
+    except (OSError, UnicodeError):
+        return False
+    mirrors: list[str] = []
+    for line in lines:
+        value = line.strip()
+        if not value or value.startswith("#"):
+            continue
+        uri = value.split(None, 1)[0]
+        mirrors.append(uri)
+    return bool(mirrors) and all(_public_http_uri(uri) for uri in mirrors)
 
 
 def _probe_coreutils(epoch_sha256: str, source_for_package: dict[str, str] | None) -> dict[str, Any]:
