@@ -12,7 +12,7 @@
   },
   "candidate_tests": {
     "path": "canonical/tests/test_tool_discovery_dynamic_v4.py",
-    "git_blob_sha": "0125582ee4dbef732f2c84b6b70ac180d7f1a91e"
+    "git_blob_sha": "5e38b58e3d9b20fc9bcbedf1a38630afe6aefcb5"
   },
   "interface_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json",
   "repair_invariant": "NO_SELECT_OR_PROBE_WHILE_ANY_AVAILABLE_DISCOVERY_SOURCE_REMAINS_UNQUERIED",
