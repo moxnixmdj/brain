@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_SOCIAL_TECHNICAL_DISCUSSION_SOURCE_EPOCH_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_NEW_ORTHOGONAL_SOURCE_EPOCH__EXACT_BLOBS_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "purpose": "Add a genuinely new candidate-discovery source epoch for technical discussion without modifying or bypassing the exact verified Tool Discovery V2 compiler/router.",
+  "provider": {
+    "path": "canonical/runtime/social_technical_discussion_provider_v1.py",
+    "git_blob_sha": "73041b941bba0e8d232e187fa0bf805ec37873cd",
+    "backend_id": "HN_ALGOLIA_PUBLIC_SEARCH_V1",
+    "surface": "SOCIAL_TECHNICAL_DISCUSSION"
+  },
+  "binding": {
+    "path": "canonical/runtime/social_technical_discussion_binding_candidate_v1.py",
+    "git_blob_sha": "4dbb0f2d33961acc739a13c4d4040c0380d7b2f0",
+    "mechanism": "EXISTING_VERIFIED_ROUTER_EXTERNAL_PROVIDER_CONTRACT"
+  },
+  "tests": {
+    "path": "canonical/tests/test_social_technical_discussion_provider_v1.py",
+    "git_blob_sha": "ae787a2fdd04ecf298babd46f5a955302c152257"
+  },
+  "preserved_verified_stack": {
+    "compiler_path": "canonical/runtime/residual_witness_retrieval_compiler_v1.py",
+    "compiler_git_blob_sha": "9daa8d590f3356b3fc51eccf75c56cbf515239e4",
+    "router_path": "canonical/runtime/residual_witness_backend_router_v1.py",
+    "router_git_blob_sha": "578c5f87901a458b12d7df984e0a6a525d367456",
+    "current_v2_activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1.json",
+    "current_v2_activation_git_blob_sha": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e"
+  },
+  "source_epoch": {
+    "id": "HN_ALGOLIA_PUBLIC_SEARCH_V1",
+    "orthogonal_to_consumed_github_code_history_epoch": true,
+    "candidate_only": true,
+    "complete": false,
+    "independently_complete": false,
+    "no_result_means_nonexistence": false,
+    "unicode_query_transport_required": true
+  },
+  "authority_boundary": {
+    "candidate_discovery_only": true,
+    "provider_cannot_self_verify_candidate": true,
+    "provider_cannot_assert_scope_completeness": true,
+    "independent_witness_verification_still_required": true,
+    "tool_discovery_acceptance_credit": 0
+  },
+  "hard_nonclaims": [
+    "NO_SOCIAL_SEARCH_COMPLETENESS_CLAIM",
+    "NO_GLOBAL_INTERNET_COMPLETENESS_CLAIM",
+    "NO_AUTOMATIC_ALL_LANGUAGE_COVERAGE_CLAIM",
+    "NO_SOCIAL_CANDIDATE_AS_ACCEPTANCE_EVIDENCE",
+    "NO_NEGATIVE_NONEXISTENCE_INFERENCE_FROM_ZERO_RESULTS"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_PROVIDER_BINDING_TEST_BLOBS__IF_PASS_ADMIT_AS_NEW_MATERIAL_TOOL_DISCOVERY_SOURCE_EPOCH_AND_RECOMPILE_ONLY_THE_OPEN_RESIDUAL",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
