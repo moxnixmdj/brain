@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_RECOVERY_DEBUGGING_SCOPE_COMPLETE_BRIDGE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_RECOVERY_SCOPE_COMPLETE_DEBUGGING_COMPONENT_BRIDGE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_PARENT_CREDIT",
+  "objective": "Bind only the frozen MULTI_CAPABILITY_COMPOSITION `debugging` component to the now independently scope-complete and canonically accepted SELF_VERIFICATION_DEBUGGING_AND_RECOVERY family, using the exact shared residual contract whose terminal consequence explicitly names debugging.",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "component_binding": {
+    "component_id": "debugging",
+    "interface_id": "coding+debugging+tool discovery",
+    "proved_properties_after_independent_verification": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ]
+  },
+  "authority": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "composition_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "recovery_scope_verification": {
+      "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+    },
+    "recovery_acceptance_integrator_verification": {
+      "path": "canonical/verification/RECOVERY_ACCEPTANCE_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "48a865f38f65be212df1cf0ba52d296b71cd003a"
+    },
+    "current_acceptance_manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "dc629d69b1bbf1ebf25e99c474588ad0aa76fb92"
+    },
+    "current_composition_authority": {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V5.json",
+      "git_blob_sha": "4c51caa97fc10e429b36b7cb82aa1dc83ad784f2"
+    }
+  },
+  "derivation": {
+    "source_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "exact_source_behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+    "same_behavior_assigned_to_composition": true,
+    "source_family_exact_residual_count": 1,
+    "contract_terminal_consequence_literal": "Shared residual for self-verification/debugging/recovery, instruction/scope judgment, agency recovery and tool learning",
+    "frozen_component_literal": "debugging",
+    "frozen_interface_literal": "coding+debugging+tool discovery",
+    "component_literal_occurs_in_contract_terminal_consequence": true,
+    "source_acceptance_closed": true,
+    "source_scope_complete": true,
+    "source_objective_ceiling_or_floor": true,
+    "current_component_state_before_bridge": "OPEN"
+  },
+  "scope_guard": {
+    "included_scope": [
+      "semantic self-check",
+      "counterexample discovery",
+      "earliest causal failure localization",
+      "repair selection",
+      "recovery after injected failure",
+      "debugging as causal failure localization plus falsifiable repair selection"
+    ],
+    "excluded_scope": [
+      "CODING_COMPONENT",
+      "TOOL_DISCOVERY_COMPONENT",
+      "PARENT_COMPOSITION_TERMINAL_SUCCESS",
+      "PARENT_COMPOSITION_INVARIANT_CLOSURE"
+    ],
+    "rule": "ONLY_THE_LITERAL_DEBUGGING_COMPONENT_RECEIVES_THIS_RECEIPT__NO_ADJACENT_COMPONENT_OR_PARENT_CREDIT"
+  },
+  "candidate_receipt": {
+    "receipt_id": "COMPOSITION_SCOPE_COMPLETE_BRIDGE::SELF_VERIFICATION_DEBUGGING_AND_RECOVERY::debugging::V1",
+    "component_id": "debugging",
+    "interface_id": "coding+debugging+tool discovery",
+    "proved_properties": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ],
+    "verified": false,
+    "independent": false,
+    "contamination_clean": true,
+    "acceptance_scoped": true,
+    "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+    "source_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+  },
+  "expected_component_projection": {
+    "before_scoped_proved": 3,
+    "after_scoped_proved": 4,
+    "before_open": 9,
+    "after_open": 8,
+    "parent_composition_predicate_closed": false
+  },
+  "hard_rules": [
+    "NO_BINDING_BY_FAMILY_NAME_ALONE",
+    "EXACT_SHARED_BEHAVIOR_ID_MUST_BE_ASSIGNED_TO_BOTH_RECOVERY_AND_COMPOSITION",
+    "DEBUGGING_LITERAL_MUST_OCCUR_IN_CANONICAL_SHARED_CONTRACT_TEXT",
+    "RECOVERY_SOURCE_FAMILY_MUST_REMAIN_CURRENTLY_ACCEPTED_AND_SCOPE_COMPLETE",
+    "NO_CODING_TOOL_DISCOVERY_OR_PARENT_COMPOSITION_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
