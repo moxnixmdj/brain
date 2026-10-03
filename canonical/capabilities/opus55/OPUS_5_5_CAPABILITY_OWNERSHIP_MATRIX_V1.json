@@ -445,7 +445,7 @@
       "campaign_next_action": "PRESERVE_ACCEPTANCE_PASS__OWNERSHIP_PROMOTION_REMAINS_SEPARATE__DO_NOT_REOPEN_WITHOUT_CONTENT_ADDRESSED_COUNTEREVIDENCE",
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "PASS_VIA_SCOPE_COMPLETE_ZERO_REALITY_STRONGER_PROOF",
-      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_ownership_credit": "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE",
       "postwave_acceptance_evidence": "canonical/verification/RECOVERY_ACCEPTANCE_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "current_behavioral_scope_state": "RESTORED_BY_P1_UNIVERSAL_SCOPE_V9__PROVISIONAL_BEHAVIORAL_PASS",
       "current_behavioral_scope_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
