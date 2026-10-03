@@ -32,11 +32,11 @@ EXPECTED_BLOBS = {
     "canonical/verification/TOOL_DISCOVERY_DYNAMIC_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json":
         "10cb18355d247a05177230d0dd345e161e84111d",
     "canonical/runtime/tool_discovery_common_authority_interface_v1.py":
-        "1c86903fed59790672de2285c9e7b3f6f46dff25",
+        "d4d4433088d9becb4cd32215a7e6fdcec29f5103",
     "canonical/tests/test_tool_discovery_common_authority_interface_v1.py":
-        "d54a447e19b32b2daa4b4f9b1855142b34671f39",
+        "7d21ccbe8668d4609e6ecd233dc3e80f6d033550",
     "canonical/governance/TOOL_DISCOVERY_COMMON_AUTHORITY_SCOPE_RELATION_V1.json":
-        "4c890bc23e37f7c845a56affa9e0b175653f6271",
+        "0a6bdc1cc7548f3323830241afce075d600c7230",
     "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json":
         "ee187f611a0e82b2de495ee377682f39bc31dd31",
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json":
@@ -173,6 +173,9 @@ def derive_source_facts(interface_source: str, v4_source: str) -> dict[str, bool
                 interface_source,
                 "seen: set[str] = set()",
                 "DUPLICATE_AUTHORITY_TOOL_ID:",
+                "import math",
+                "math.isfinite(cost)",
+                "AUTHORITY_COST_FINITE_REQUIRED:",
                 "source_count < 1",
             )
         ),
