@@ -69,7 +69,12 @@ jobs:
               applicability={'x'},
               dependencies={'d'},
               invalidators={'v'},
-              verification_receipts={'r'},
+              verification_receipts=[{
+                  'receipt_id':'r',
+                  'independent_verified':True,
+                  'exact_byte_bound':True,
+                  'conclusion':'success',
+              }],
           )
           assert skill['trusted'] is True, skill
           assert skill['acceptance_credit'] is False, skill
