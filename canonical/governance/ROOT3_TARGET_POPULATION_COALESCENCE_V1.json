@@ -10,7 +10,7 @@
     },
     "predicate_registry": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
-      "git_blob_sha": "562536d9ba3f245a6bd24490a414155b4f69856cf0"
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
     }
   },
   "population_groups": [
