@@ -5,15 +5,24 @@ from canonical.runtime import retrieval_empirical_calibration_v1 as cal
 ROOT=Path(__file__).resolve().parents[2]
 
 catalog=arena.load_catalog(ROOT)
+trees=arena.load_tree_fingerprints(ROOT)
 assert len(catalog["targets"])==13
+assert len(trees)==13
 assert all(len(x.get("commit") or "")==40 for x in catalog["targets"])
+for target in catalog["targets"]:
+    fp=trees[target["id"]]
+    assert fp["repository"]==target["repository"]
+    assert fp["commit"]==target["commit"]
+    assert fp["truncated"] is False
+    assert fp["path_count"]>=3
 
 tess=next(x for x in catalog["targets"] if x["id"]=="RW_TESSERACT")
-hidden=arena.surface_text(tess,profile="NO_IDENTITY",route="HYBRID").casefold()
+hidden=arena.surface_text(tess,profile="NO_IDENTITY",route="HYBRID",tree_tokens=trees["RW_TESSERACT"]["tree_tokens"]).casefold()
 assert "tesseract" not in hidden
 
 result=arena.evaluate(ROOT)
 assert result["catalog_target_count"]==13
+assert result["query_independent_tree_fingerprint_count"]==13
 assert result["case_count"]==104
 assert result["open_world_completeness_claim"] is False
 assert result["external_provider_recall_measured"] is False
