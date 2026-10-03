@@ -17,6 +17,8 @@ ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions"
 MODEL = "brain-qwen3.5-9b"
 TOOL_NAME = "submit_science_proposal"
 MAX_RESPONSE_BYTES = 100_000
+DEFAULT_TIMEOUT_S = 240
+MAX_GENERATION_TOKENS = 512
 
 TOOL = {
     "type": "function",
@@ -141,7 +143,7 @@ def _decode_tool_arguments(data: dict[str, Any]) -> dict[str, Any]:
     return matched[0]
 
 
-def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
+def plan(prompt: str, *, timeout_s: int = DEFAULT_TIMEOUT_S) -> dict[str, Any]:
     prompt = str(prompt or "")
     if not prompt.strip():
         raise SciencePlannerError("SCIENCE_PLANNER_PROMPT_REQUIRED")
@@ -168,8 +170,9 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
         "tools": [TOOL],
         "tool_choice": "required",
         "parallel_tool_calls": False,
+        "chat_template_kwargs": {"enable_thinking": False},
         "temperature": 0,
-        "max_tokens": 1024,
+        "max_tokens": MAX_GENERATION_TOKENS,
         "stream": False,
     }).encode("utf-8")
     req = urllib.request.Request(
