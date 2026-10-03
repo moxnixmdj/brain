@@ -12,9 +12,12 @@ class T(unittest.TestCase):
         self.bridge=j("governance/COMPOSITION_BEHAVIORAL_BRIDGE_V1.json")
         self.bridgev=j("verification/COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json")
         self.memory=j("governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V1.json")
+        self.memoryv=j("verification/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json")
+        self.firewallv=j("verification/COMPOSITION_BRIDGE_SCOPE_FIREWALL_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json")
         self.package=j("capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json")
+        self.delegationv=j("verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json")
     def runv(self,*xs):
-        return evaluate(*(xs or [self.manifest,self.protocols,self.bridge,self.bridgev,self.memory,self.package]))
+        return evaluate(*(xs or [self.manifest,self.protocols,self.bridge,self.bridgev,self.memory,self.memoryv,self.firewallv,self.package,self.delegationv]))
     def test_current_truth_restores_exactly_delegation_and_memory(self):
         v=self.runv()
         self.assertEqual(v["status"],"PASS")
@@ -27,16 +30,26 @@ class T(unittest.TestCase):
     def test_delegation_recloses_only_while_source_family_passes(self):
         p=copy.deepcopy(self.protocols)
         next(x for x in p["protocols"] if x["family"]=="SUBAGENT_DELEGATION_AND_COORDINATION")["status"]="DEFINED_RESULT_OPEN"
-        v=evaluate(self.manifest,p,self.bridge,self.bridgev,self.memory,self.package)
+        v=evaluate(self.manifest,p,self.bridge,self.bridgev,self.memory,self.memoryv,self.firewallv,self.package,self.delegationv)
         self.assertEqual({x["component_id"] for x in v["admitted_receipts"]},{"memory"})
     def test_memory_fails_closed_if_owned_scope_not_closed(self):
         pkg=copy.deepcopy(self.package); pkg["decision"]["parent_family_closed_for_claim_scope"]=False
-        v=evaluate(self.manifest,self.protocols,self.bridge,self.bridgev,self.memory,pkg)
+        v=evaluate(self.manifest,self.protocols,self.bridge,self.bridgev,self.memory,self.memoryv,self.firewallv,pkg,self.delegationv)
         self.assertEqual({x["component_id"] for x in v["admitted_receipts"]},{"delegation"})
+    def test_memory_independent_receipt_is_load_bearing(self):
+        mv=copy.deepcopy(self.memoryv); mv["status"]="FAIL"
+        v=evaluate(self.manifest,self.protocols,self.bridge,self.bridgev,self.memory,mv,self.firewallv,self.package,self.delegationv)
+        self.assertEqual(v["status"],"FAIL_CLOSED")
+        self.assertEqual(v["scoped_proved_interface_count"],0)
+    def test_firewall_receipt_is_load_bearing(self):
+        fw=copy.deepcopy(self.firewallv); fw["verified_effect"]="WRONG"
+        v=evaluate(self.manifest,self.protocols,self.bridge,self.bridgev,self.memory,self.memoryv,fw,self.package,self.delegationv)
+        self.assertEqual(v["status"],"FAIL_CLOSED")
+        self.assertEqual(v["scoped_proved_interface_count"],0)
     def test_invented_binding_fails_closed(self):
         b=copy.deepcopy(self.bridge)
         b["bindings"].append({"component_id":"invented","interface_id":"x","source_family":"EXACT_SYMBOLIC_COMPUTATION","proved_properties":["SCOPED_ACCEPTANCE_PROOF"]})
-        v=evaluate(self.manifest,self.protocols,b,self.bridgev,self.memory,self.package)
+        v=evaluate(self.manifest,self.protocols,b,self.bridgev,self.memory,self.memoryv,self.firewallv,self.package,self.delegationv)
         self.assertEqual(v["status"],"FAIL_CLOSED")
         self.assertEqual(v["scoped_proved_interface_count"],0)
 
