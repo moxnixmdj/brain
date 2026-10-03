@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_EXTERNAL_BENCHMARK_DOMINANCE_V1_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__BENCHMARK_REUSE_FIRST__15_PUBLIC_FIXED_BARS__8_MATCHED_TARGETS_ADJUDICATED__ZERO_UNVERIFIED_SUBSTITUTIONS__ZERO_CREDIT",
+  "exact_brain_subjects": {
+    "canonical/governance/EXTERNAL_BENCHMARK_DOMINANCE_CANDIDATE_V1.json": "338fb50828825afd6c12eecebe192532543c616b",
+    "canonical/runtime/external_benchmark_dominance_compiler_v1.py": "f12f49f50358e8795b88aec1ada99f697d65a25e",
+    "canonical/tests/test_external_benchmark_dominance_compiler_v1.py": "89cac2b2130860e474195db9d626b0281a165351",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5",
+    "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V3.json": "9b400e6eb1a95bacbd9c0cdb93b155ced0f72558",
+    "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V2.json": "352fe17467a8335a348949ce2f2b6fdb6235e9ac"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1383,
+    "verifier_head_sha": "8c25fec57214ad900e3b188e8f4224f0dd3451d4",
+    "merge_commit": "bcf010b62ec52af34e11948971026351186e281e",
+    "workflow_run_id": 37150278950,
+    "workflow_job_id": 111282524848,
+    "conclusion": "success"
+  },
+  "verified": {
+    "current_proved_predicates": 12,
+    "current_unresolved_predicates": 26,
+    "unresolved_public_fixed_bar_count": 15,
+    "current_matched_target_count": 8,
+    "custom_benchmark_creation_authorized": false,
+    "immediate_external_full_substitutions": 0,
+    "all_matched_targets_adjudicated": true,
+    "no_partial_candidate_promoted_as_full_substitute": true,
+    "public_harnesses_verified": [
+      "GDP_PDF",
+      "COMPLEX_CONSTRAINTS"
+    ],
+    "external_owner_or_primary_facts_verified": {
+      "GDP_PDF": {
+        "opus55_score": 30.6
+      },
+      "COMPLEX_CONSTRAINTS": {
+        "opus55_score": 49.9
+      },
+      "ENTERPRISEBENCH_CORECRAFT": {
+        "opus55_score": 74.4
+      },
+      "DAYJOB_FINANCE": {
+        "opus55_score": 23.9
+      },
+      "DAYJOB_HEALTHCARE": {
+        "opus55_score": 24.7
+      }
+    },
+    "fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "consequence": "EXISTING_OPUS55_BENCHMARK_REUSE_AND_EXTERNAL_SUPERSET_ADJUDICATION_MUST_PRECEDE_BESPOKE_OR_FRESH_EVALUATION__CURRENT_PARTIAL_EXTERNAL_CANDIDATES_DO_NOT_CLOSE_ANY_MATCHED_TARGET__RECOMPUTE_ONLY_AFTER_EXACT_OR_SUPERSET_PROOF_OR_EXISTING_RECEIPT_SATURATION",
+  "hard_nonclaims": [
+    "NO_NEW_ACCEPTANCE_PREDICATE_PROVED",
+    "NO_NEW_FAMILY_ACCEPTED",
+    "NO_EXTERNAL_BENCHMARK_DECLARED_COMPLETE_FOR_ANY_MATCHED_TARGET",
+    "NO_PUBLIC_SEARCH_COMPLETENESS_CLAIM",
+    "NO_FRESH_REALITY_OR_BENCHMARK_EXECUTION_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
