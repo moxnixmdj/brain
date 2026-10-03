@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V14_POST_TOOL_DISCOVERY_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__RECEIPT_DERIVED_5_OF_19_12_OF_38_26_UNRESOLVED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_main_commit": "a02a7f538d0134de113c4a0e11de241fddd7f478",
+  "exact_inputs": {
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "6fdd6529ec914879ab2ba6a3dc865d85751e2d80",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "e5888b0f03ddd3a7fbfdfd74d11b4680abc9f0dd",
+    "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json": "4b5517dbd12978f8ffe481fb775e85592c7790c8",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json": "38b53147597b5457859e3b0d031168842560e3e2",
+    "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json": "e56719b8c63078273a6974104d413aa1b643da3b",
+    "canonical/runtime/current_terminal_scheduling_world_v2.py": "1b09388b91ba52e1f13e3e26af9f97f8dd2eca65",
+    "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_ACTIVATION_V1.json": "0b14d28e356e3d730cfb6615dcde4c9f00bafdd4",
+    "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "bed23f2e69d4bc8937d792b07b5812364cf26a85"
+  },
+  "expected_live_world": {
+    "registry_predicates": 38,
+    "proved_predicates": 12,
+    "refuted_predicates": 0,
+    "unresolved_predicates": 26,
+    "opus55_acceptance": "5/19_PASS__14/19_OPEN",
+    "live_certificates": 15,
+    "live_actions": 20,
+    "live_action_coverage": 26,
+    "uncovered_predicates": [],
+    "tool_learning_success_route_noninferior": "PROVED",
+    "tool_discovery_acceptance_action_live": false
+  },
+  "expected_stale_source_filter": {
+    "source_frontier_unresolved": 31,
+    "source_scheduling_v6_unresolved": 31,
+    "source_scheduling_v6_action_coverage": 31,
+    "removed_terminal_certificate_target_count": 5,
+    "removed_terminal_action_target_count": 10,
+    "mandatory_removed_predicates": [
+      "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "RECOVERY_TERMINAL_NONINFERIOR",
+      "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+    ]
+  },
+  "hard_rules": [
+    "LIVE_WORLD_IS_DERIVED_FROM_FROZEN_REGISTRY_MINUS_CURRENT_PROVED_OR_REFUTED_RECEIPTS",
+    "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR_MUST_NOT_REMAIN_A_LIVE_TARGET",
+    "NO_STALE_31_PREDICATE_WORLD_AS_CURRENT_AUTHORITY",
+    "NO_TERMINAL_PREDICATE_ACTION_OR_CERTIFICATE_EDGE_MAY_EXECUTE",
+    "NO_FRESH_REALITY_AUTHORITY_FROM_SCHEDULING_RECOMPUTATION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
