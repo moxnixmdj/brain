@@ -498,3 +498,4 @@ def contract_certificate(epoch: Mapping[str, Any]) -> dict[str, Any]:
         "execution_authority": False,
         "promotion_authority": False,
     }
+
