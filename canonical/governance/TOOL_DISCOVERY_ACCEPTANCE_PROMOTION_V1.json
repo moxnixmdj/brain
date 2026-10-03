@@ -12,9 +12,9 @@
   },
   "exact_promoted_state_blobs": {
     "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "c5edb55b827d540a13f44dafc8d86ee477dcf5ff",
-    "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json": "c66551ce3c77592f8937d165686a7133807d6654",
-    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json": "7d4b89a408416201c0de6e2cb31797a24737223b",
-    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "da0696c775f47f3cecd4ea9f85bad09a4e3d0c92"
+    "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json": "68b70685d7e4b91934f46e189d07600886d6c126",
+    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json": "96453d601e054edc42793e8c0a07d1b14b794027",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "5965fe9284c386de29a781b884e124b9c83fb0d4"
   },
   "delta": {
     "predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
@@ -49,7 +49,8 @@
     "NO_OWNERSHIP_PROMOTION",
     "NO_TERMINAL_REPLAY",
     "NO_NEW_REALITY",
-    "NO_EMPIRICAL_GENERALIZATION_AS_LOAD_BEARING_PROOF"
+    "NO_EMPIRICAL_GENERALIZATION_AS_LOAD_BEARING_PROOF",
+    "ALL_CURRENT_FRONTIER_MIRRORS_MUST_PROJECT_THE_SAME_5_OF_19_12_OF_38_AUTHORITY"
   ],
   "new_reality_units_consumed": 0,
   "terminal_results_replayed": 0,
@@ -57,5 +58,11 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "exact_projection_mirror_blobs": {
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json": "5e34f4f62d69a7d0ae3b7553cd83555ba3aadd80",
+    "canonical/CANONICAL_POINTER.json": "fe273ba8d99363a4392c18cb1d3bcf45ed3a7bee",
+    "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json": "ac020c3832acc915441142cfd2164693e5d9560f",
+    "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json": "331108cbaace0fd20b69524f7277a052a5bd8201"
+  }
 }
