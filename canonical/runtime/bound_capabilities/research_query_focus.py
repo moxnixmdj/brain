@@ -36,7 +36,7 @@ _CONTROL_CLAUSE_BOUNDARY=re.compile(
     r"preserve|produce|provide|discover|verify|run|execute|save|cite|report|return)\b)",
     re.IGNORECASE,
 )
-_TOKEN=re.compile(r"[^\\W_]+(?:[-/.][^\\W_]+)*", re.UNICODE)
+_TOKEN=re.compile(r"[^\W_]+(?:[-/.][^\W_]+)*", re.UNICODE)
 # Keep technical nouns/adjectives (including "primary", "reference",
 # "higher/lower", and noun "use"). Orchestration sentences are removed
 # structurally instead of by deleting potentially meaningful domain words.
