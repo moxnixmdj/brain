@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_LOCAL_ZERO_REALITY_FIXED_POINT_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_FOR_MAIN__INDEPENDENT_PUBLIC_RUNNER_PASS__SCOPED_FRESH_REALITY_AUTHORITY_TWO_PREDICATES__ZERO_ACCEPTANCE_CREDIT",
+  "theorem_candidate": {
+    "path": "canonical/governance/LOCAL_ZERO_REALITY_FIXED_POINT_CANDIDATE_V1.json",
+    "git_blob_sha": "d488701114d9a6e8f9ecbbac151765886fcbe296"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/LOCAL_ZERO_REALITY_FIXED_POINT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "52cb662d94d176800529d11b6d9181014c8f442d",
+    "runner_merge": "561fbad461aeb71bf80ce4a2909e70a70c559844",
+    "run": 37158244145,
+    "job": 111306055369,
+    "conclusion": "success"
+  },
+  "active_cut_candidate": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json",
+    "git_blob_sha": "755bf5efce7e7e5f6b1c0462eb824755ab8c3138"
+  },
+  "global_fresh_reality_authority": false,
+  "scoped_fresh_reality_authority": true,
+  "scoped_authorized_predicates": [
+    "LIVEBENCH_IF_GE_65_7",
+    "TB_SCIENCE_GE_58_7"
+  ],
+  "all_other_unresolved_predicates_authorized": false,
+  "execution_constraints": [
+    "FREEZE_EXACT_BRAIN_ROUTE_BEFORE_CASE_EXPOSURE",
+    "NO_TUNING_ON_TERMINAL_CASES",
+    "NO_CASE_REPLACEMENT",
+    "NO_ADAPTIVE_CASE_SELECTION",
+    "CAPTURE_IMMUTABLE_CASE_LEVEL_RECEIPTS",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "promotion_authority": false
+}

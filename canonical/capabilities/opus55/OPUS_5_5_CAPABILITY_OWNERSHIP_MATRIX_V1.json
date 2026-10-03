@@ -636,7 +636,10 @@
     "full_opus_5_5_envelope_obsoleted": false,
     "verified_owned_equal_or_better_capabilities": [
       "EXACT_SYMBOLIC_COMPUTATION",
-      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
     ],
     "external_specimen_backed_families": [
       "COMPLEX_MULTI_TOOL_AGENCY",
@@ -651,11 +654,8 @@
       "UNKNOWN_DOMAIN_ADAPTATION"
     ],
     "owned_components_not_full_family": [
-      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "MULTI_CAPABILITY_COMPOSITION",
-      "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "ARTIFACT_CREATION"
+      "ARTIFACT_CREATION",
+      "MULTI_CAPABILITY_COMPOSITION"
     ],
     "revoked_false_ownership_packages": [
       "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
@@ -739,7 +739,7 @@
   },
   "postwave_acceptance_summary": {
     "calibrated_family_count": 5,
-    "verified_owned_family_count": 2,
+    "verified_owned_family_count": 5,
     "pending_acceptance_family_count": 14,
     "calibrated_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
@@ -767,5 +767,22 @@
     "quarantined_behavior_id": null,
     "rule": "P1_WHOLE_SCOPE_RESTORED_BY_INDEPENDENT_ZERO_REALITY_UNIVERSAL_PROOF__STRICT_ACCEPTANCE_AND_OWNERSHIP_ACCOUNTED_SEPARATELY",
     "current_restoration_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  },
+  "summary_reconciliation_20261004": {
+    "status": "ROW_DERIVED_SUMMARY_REPAIRED__NO_NEW_OWNERSHIP_CREDIT",
+    "verified_owned_equal_or_better_count": 5,
+    "verified_owned_equal_or_better_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "owned_component_not_full_family_count": 2,
+    "owned_component_not_full_family_families": [
+      "ARTIFACT_CREATION",
+      "MULTI_CAPABILITY_COMPOSITION"
+    ],
+    "source_rule": "DERIVE_SUMMARY_ONLY_FROM_CURRENT_ROW_STATUS__DO_NOT_REPROMOTE"
   }
 }

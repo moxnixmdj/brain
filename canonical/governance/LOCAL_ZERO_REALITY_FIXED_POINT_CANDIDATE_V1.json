@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_LOCAL_ZERO_REALITY_FIXED_POINT_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PREDICATE_LOCAL_ZERO_REALITY_CONE_COMMUTATIVITY__AUTHORIZE_ONLY_SCORE_ONLY_ROOT2_PREDICATES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Remove unnecessary global serialization by authorizing fresh measurement for a predicate only when its own currently bound zero-reality dependency cone is saturated and all remaining work is exactly the frozen Brain score on an already prequalified public route.",
+  "theorem": {
+    "statement": "FOR_PREDICATE_p__IF_ALL_CURRENT_ZERO_REALITY_ACTIONS_THAT_CAN_CHANGE_p_OR_ELIMINATE_ITS_SCORE_REQUIREMENT_ARE_DISCHARGED__AND_PENDING_ZERO_REALITY_ACTIONS_HAVE_NO_DEPENDENCY_EDGE_TO_p__THEN_EXECUTING_THE_ALREADY_FROZEN_SCORE_FOR_p_COMMUTES_WITH_THOSE_UNRELATED_ACTIONS_AND_DOES_NOT_CHANGE_ACCEPTANCE_SEMANTICS",
+    "symbolic": "Deps0(p)∩Pending0=∅ => Reduce_p(Score_p,Z_pending)=Reduce_p(Score_p)",
+    "scope": "CURRENT_BOUND_EVIDENCE_AND_FROZEN_ACCEPTANCE_SEMANTICS_ONLY",
+    "nonclaim": "DOES_NOT_PROVE_NO_FUTURE_UNPUBLISHED_STRONGER_PROOF_CAN_EXIST"
+  },
+  "exact_inputs": {
+    "root2_routes": {
+      "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+      "git_blob_sha": "f7a6e7c4ed86076959a0c8cea4371f49c85a8d59"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "e94469ffdeb7535f9a921a244e62cde6b84fda5c"
+    },
+    "current_cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V11.json",
+      "git_blob_sha": "452c6f2231fbe93fd54e3299eb54d7103567a08a"
+    },
+    "minimum_frontier": {
+      "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
+      "git_blob_sha": "0af95d94b2de464f1590911394596a63dcff30f8"
+    },
+    "current_frontier": {
+      "path": "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V3.json",
+      "git_blob_sha": "f052083c867f16d19cb04a1fe52e71fb813d396d"
+    }
+  },
+  "eligibility_rule": [
+    "PREDICATE_IS_CURRENTLY_UNRESOLVED",
+    "PREDICATE_IS_ROOT2_ONLY",
+    "PREDICATE_IS_LISTED_IN_ROOT2_ROUTE_CLASS_BRAIN_SCORE_ONLY_OPEN",
+    "ROUTE_STATE_EXPLICITLY_SAYS_BRAIN_SCORE_ONLY_OPEN_OR_EQUIVALENT",
+    "NO_ROOT3_SCOPE_OBLIGATION_FOR_PREDICATE",
+    "NO_CURRENT_ROUTE_SCORER_ACCESS_CARRIER_OR_PROTOCOL_ZERO_REALITY_BLOCKER_REMAINS",
+    "SCORE_POPULATION_SCORER_OR_CARRIER_PREQUALIFICATION_IS_ALREADY_BOUND",
+    "FROZEN_ACCEPTANCE_THRESHOLD_AND_SURFACE_ARE_UNCHANGED",
+    "EXECUTION_MUST_USE_THE_ALREADY_FROZEN_ROUTE_WITH_NO_ADAPTIVE_CASE_SELECTION"
+  ],
+  "authorized_candidates": [
+    {
+      "predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "surface": "LiveBench Instruction Following",
+      "reason": "ROOT2_ONLY__COMPARATOR_POPULATION_SCORER_AND_INPUT_ROUTE_PREQUALIFIED__BRAIN_SCORE_ONLY_OPEN",
+      "fresh_reality_authority_candidate": true
+    },
+    {
+      "predicate_id": "TB_SCIENCE_GE_58_7",
+      "surface": "Terminal-Bench-Science 0.1",
+      "reason": "ROOT2_ONLY__PUBLIC_V01_EXACT_POPULATION__ZERO_COST_PUBLIC_GITHUB_CARRIER_ATTAINABILITY_INDEPENDENT_PASS__BRAIN_SCORE_ONLY_OPEN",
+      "fresh_reality_authority_candidate": true
+    }
+  ],
+  "explicitly_unauthorized_classes": [
+    "ANY_ROOT3_OR_ROOT2_AND_ROOT3_PREDICATE",
+    "ANY_ROUTE_WITH_PENDING_ACCESS_QUOTA_SCORER_ADAPTER_CARRIER_OR_PROTOCOL_EQUIVALENCE_WORK",
+    "PRIVATE_OR_OWNER_ONLY_SURFACES_WITHOUT_BOUND_EXECUTION_ROUTE",
+    "TB4_WHILE_MACHINE_ATTAINABILITY_UPPER_BOUND_REMAINS_BELOW_PASS_THRESHOLD",
+    "HLE_CHARTOGRAPHY_OSWORLD_FINANCE_GDPVAL_FRONTIERCODE_CURSORBENCH_AUTOMATIONBENCH_AA_BRIEFCASE_FINANCE_AGENT_MYSTERYMECHANISM"
+  ],
+  "execution_constraints": [
+    "NO_TUNING_ON_TERMINAL_CASES",
+    "NO_CASE_REPLACEMENT",
+    "NO_ADAPTIVE_CASE_SELECTION",
+    "FREEZE_EXACT_BRAIN_ROUTE_BEFORE_CASE_EXPOSURE",
+    "CAPTURE_IMMUTABLE_CASE_LEVEL_RECEIPTS",
+    "ZERO_INCREMENTAL_SPEND",
+    "RESULT_MAY_ONLY_AFFECT_ITS_OWN_FROZEN_PREDICATE_UNLESS_A_SEPARATE_VERIFIED_DEPENDENCY_RULE_PROPAGATES_IT"
+  ],
+  "expected_if_verified": {
+    "fresh_reality_authorized_predicate_count": 2,
+    "fresh_reality_authorized_predicates": [
+      "LIVEBENCH_IF_GE_65_7",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
