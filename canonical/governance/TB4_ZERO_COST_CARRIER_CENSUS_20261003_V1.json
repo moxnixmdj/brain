@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_ZERO_COST_CARRIER_CENSUS_20261003_V1",
+  "date": "2026-10-03",
+  "status": "CURRENT_CONNECTED_CARRIER_CENSUS__NO_ADMISSIBLE_ZERO_COST_8CPU_16GB_50GB_DOCKER_CARRIER_BOUND__ZERO_CREDIT",
+  "objective": "Determine whether the already-derived minimum TB4 recovery carrier can be satisfied by an existing connected uncontaminated resource at hard zero incremental spend, without reading or executing terminal task cases.",
+  "tb4_minimum_cut": {
+    "path": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+    "git_blob_sha": "fc5bb61b1b97e6aae46222b9de84e16797510bcc",
+    "minimum_envelope": {
+      "cpus_at_least": 8,
+      "usable_memory_mb_at_least": 16384,
+      "free_storage_mb_at_least": 51200,
+      "gpus_required": 0,
+      "docker_required": true,
+      "docker_compose_required": true
+    },
+    "additional_creditable_tasks_needed": 8
+  },
+  "connected_resource_census": [
+    {
+      "provider": "DigitalOcean",
+      "read_only_result": "ACCOUNT_BALANCE_0_00__MONTH_TO_DATE_USAGE_0_00__DROPLET_LIST_EMPTY",
+      "disposition": "NO_EXISTING_CARRIER_BOUND__NO_CREDIT_SIGNAL_JUSTIFIES_NEW_PAID_PROVISIONING"
+    },
+    {
+      "provider": "Railway",
+      "read_only_result": "ONLY_TWO_PROJECTS_VISIBLE__BOTH_EXPLICITLY_NAMED_BRAIN_HELDOUT_ENVIRONMENTS",
+      "disposition": "FORBIDDEN_FOR_TERMINAL_BENCHMARK_REUSE_TO_PRESERVE_HELDOUT_EVIDENCE_INTEGRITY"
+    },
+    {
+      "provider": "Sprites",
+      "read_only_result": "EXISTING_SPRITE_IS_HELDOUT_AND_COLD__SERVICE_IS_METERED",
+      "disposition": "NO_WAKE_OR_NEW_RESOURCE_WITHOUT_PROVED_ZERO_INCREMENTAL_SPEND"
+    },
+    {
+      "provider": "GitHub Actions",
+      "read_only_result": "STANDARD_RUNNER_DOES_NOT_SATISFY_CURRENT_TB4_MINIMUM_ENVELOPE__LARGER_RUNNERS_ARE_BILLABLE",
+      "disposition": "NO_ADMISSIBLE_HARD_ZERO_COST_8CPU_CARRIER_BOUND"
+    },
+    {
+      "provider": "Render",
+      "read_only_result": "ONE_WORKSPACE_VISIBLE_BUT_RESOURCE_ENUMERATION_REQUIRES_EXPLICIT_WORKSPACE_SELECTION_CONFIRMATION_IN_CONNECTOR",
+      "disposition": "UNINSPECTED_NOT_NEGATIVE_EVIDENCE__NO_RESOURCE_ACTION_TAKEN"
+    }
+  ],
+  "harbor_resource_semantics": {
+    "result": "TASK_CPU_MEMORY_RESOURCE_FIELDS_ARE_ENFORCED_BY_HARBOR_POLICIES__LOWER_RESOURCE_EXECUTION_CANNOT_BE_ASSUMED_PROTOCOL_EQUIVALENT",
+    "candidate_override": "RESOURCE_ENFORCEMENT_IGNORE_OR_NUMERIC_OVERRIDE",
+    "override_disposition": "NOT_ADMISSIBLE_WITHOUT_SEPARATE_TASK_SCOPE_RESOURCE_MONOTONICITY_OR_PROTOCOL_EQUIVALENCE_PROOF"
+  },
+  "current_consequence": "TB4_ATTAINABILITY_CANNOT_BE_REOPENED_FROM_CURRENT_CONNECTED_UNCONTAMINATED_PROVED_ZERO_COST_CARRIERS__CURRENT_180_LT_220_ROUTE_REMAINS_BLOCKED",
+  "reopen_conditions": [
+    "AN_EXISTING_CONNECTED_UNCONTAMINATED_CARRIER_IS_PROVED_TO_MEET_THE_MINIMUM_ENVELOPE_AT_ZERO_INCREMENTAL_SPEND",
+    "A_NEW_FREE_CREDIT_BEARING_CARRIER_WITH_HARD_SPEND_STOP_IS_BOUND",
+    "A_SEPARATE_INDEPENDENT_PROTOCOL_EQUIVALENCE_PROOF_VALIDLY_LOWERS_THE_RESOURCE_ENVELOPE",
+    "A_DIFFERENT_ADMISSIBLE_SCORE_ROUTE_RAISES_THE_TB4_ATTAINABILITY_UPPER_BOUND_TO_AT_LEAST_220_WITHOUT_TERMINAL_CASE_EXPOSURE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_NO_ZERO_COST_CARRIER_EXISTS_ANYWHERE",
+    "NO_CLAIM_ABOUT_UNCONNECTED_ACCOUNTS_OR_UNINSPECTED_RENDER_RESOURCES",
+    "NO_RESOURCE_PROVISIONING_PERFORMED",
+    "NO_TERMINAL_CASE_CONTENT_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
