@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TOOLATHLON_OPUS55_HARNESS_COMPARABILITY_CUT_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_SOURCE_PASS__PUBLIC_SERVICE_VS_OPUS55_INTERNAL_HARNESS_EXACT_COMPARABILITY_NOT_PROVED__TERMINAL_EXECUTION_BLOCKED__ZERO_CREDIT",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "first_party_source": {
+    "owner": "Anthropic",
+    "title": "Claude Opus 5.5 System Card",
+    "sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+    "bound_pass_at_1_percent": 77.8,
+    "task_count": 108,
+    "trials": 3
+  },
+  "independently_verified_source_facts": {
+    "opus55_result_labeled_internal_harness": true,
+    "environment_specific_setup_patches_disclosed": true,
+    "container_image_pinning_disclosed": true,
+    "public_vs_internal_reference_model_score_shift_disclosed": true,
+    "null_attempt_difference_disclosed": true,
+    "exact_internal_vs_public_harness_byte_identity_proved": false,
+    "valid_route_top1_opus55_published": false
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1202,
+    "merge_sha": "faf66b30a18ab0e330ebd5aeef890d3e5cf279bf",
+    "workflow_run_id": 37096084479,
+    "workflow_job_id": 111126185648,
+    "conclusion": "success",
+    "artifact_id": 11264625860,
+    "artifact_digest": "sha256:fdf68b8e83df8be51546dcdac5283fd01a536985c1941b9dcb20ce45ebf48df2"
+  },
+  "deduction": {
+    "same_harness_common_tool_authority_comparability_closed": false,
+    "public_service_brain_score_directly_comparable_to_77_8_internal_reference": false,
+    "reason": "FIRST_PARTY_REFERENCE_IS_INTERNAL_HARNESS_WITH_DISCLOSED_SETUP_DIFFERENCES__EXACT_EQUIVALENCE_TO_PUBLIC_SERVICE_NOT_ESTABLISHED",
+    "terminal_execution_disposition": "BLOCKED_UNTIL_EXACT_MATCHED_COMPARABILITY_OR_AN_ADMISSIBLE_STRONGER_SCOPE_COMPLETE_PROOF_ROUTE_IS_INDEPENDENTLY_VERIFIED"
+  },
+  "search_boundary": {
+    "official_public_toolathlon_verified_trajectories_checked": true,
+    "opus55_public_matched_trajectory_found": false,
+    "claim": "NO_ADMISSIBLE_PUBLIC_OPUS55_MATCHED_RECEIPT_FOUND_IN_THE_SEARCHED_OFFICIAL_PUBLIC_SOURCES__NOT_A_CLAIM_OF_GLOBAL_NONEXISTENCE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OPUS55_PUBLIC_SERVICE_PERFORMANCE_EQUALS_77_8",
+    "NO_CLAIM_77_8_IS_INVALID",
+    "NO_CLAIM_THE_INTERNAL_HARNESS_IS_WEAKER_OR_STRONGER_FOR_BRAIN",
+    "NO_TOOLATHLON_TERMINAL_BRAIN_TASK_EXECUTED",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT"
+  ],
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
