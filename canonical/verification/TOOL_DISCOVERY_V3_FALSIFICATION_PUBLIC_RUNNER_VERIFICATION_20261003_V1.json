@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_V3_FALSIFICATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ACTIVE_DYNAMIC_V3_LEAST_COST_REFINEMENT_FALSIFIED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "verified_claim": {
+    "dynamic_v3_falsified": true,
+    "falsified_implication": "COMPLETE_DISCOVERY_INTERFACE_INSTANCE_ALONE_DISCHARGES_DYNAMIC_V3_LEAST_COST_SELECTION_OBLIGATIONS",
+    "counterexample": "VISIBLE_SUFFICIENT_COST_10_ROUTE_SELECTED_BEFORE_AUTHORIZED_DISCOVERY_CAN_REVEAL_SUFFICIENT_COST_1_ROUTE",
+    "prior_residual_reduction_to_interface_instance_only_sound": false
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1128,
+    "head_sha": "b0ace27067437505dc0c6b5c543d9a977bd0b1d4",
+    "merge_tested_sha": "bd5ee1c40622a5f89c58d2c043a187606549701e",
+    "workflow_run_id": 37086975855,
+    "workflow_job_id": 111099200374,
+    "conclusion": "success",
+    "runner": "ubuntu-24.04",
+    "python": "3.12.14"
+  },
+  "exact_verified_blobs": {
+    "dynamic_v3": "bbbee4d6baf8df937543644397abba38a67dce62",
+    "v4_candidate_in_that_verifier": "9572b25f7bdaee0f35e00cf3a1f25bc0dbd69096",
+    "v4_soundness_runtime": "739b0a349bf91099d6fa6ea91450ed900211dc87",
+    "v4_tests": "9c0693b131058f18e061c25e2dc3cbe5fee36d28",
+    "v4_soundness_tests": "67420c1f576e18d89ab9ad5538a080fff47681a8",
+    "complete_interface_contract_v2": "ca1a8c5d1e49feac9077a834bb20773cca982215",
+    "falsification_and_repair_governance": "66a39a5521930b7f901f01e57eb5be0e74e70a78"
+  },
+  "verified_checks": [
+    "EXACT_BRAIN_BLOB_IDENTITIES_PASS",
+    "V3_COUNTEREXAMPLE_REPRODUCED",
+    "V3_SELECTS_VISIBLE_EXPENSIVE_ROUTE_BEFORE_COMPLETE_DISCOVERY",
+    "VERIFIED_V4_CANDIDATE_DISCOVERS_BEFORE_SELECTION",
+    "VERIFIED_V4_CANDIDATE_SELECTS_GLOBAL_CHEAPEST_AFTER_DISCOVERY_EXHAUSTION",
+    "SAFE_PROBE_PERMISSION_GATE_PASS",
+    "STALE_DISCOVERY_RECEIPT_REDISCOVERY_PASS",
+    "UNAUTHORIZED_DISCOVERY_SOURCE_GATE_PASS",
+    "FAIL_CLOSED_ZERO_CREDIT_GATE_PASS"
+  ],
+  "hard_nonclaims": [
+    "THIS_RECEIPT_DOES_NOT_VERIFY_CURRENT_CANONICAL_V4_BLOB_E614D0BED8E291E31F57189CD6F0F75AA39B0F74",
+    "THIS_RECEIPT_DOES_NOT_PROVE_UNIVERSAL_TOOL_DISCOVERY_SCOPE",
+    "THIS_RECEIPT_DOES_NOT CLOSE_TOOL_DISCOVERY_ACCEPTANCE",
+    "CURRENT_CANONICAL_V4_REQUIRES_ITS_OWN_EXACT_BLOB_VERIFICATION",
+    "A_V2_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_AND_SEPARATE_ACCEPTANCE_SCOPE_REDUCTION_REMAIN_REQUIRED"
+  ],
+  "current_canonical_v4_pending": {
+    "path": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "git_blob_sha": "e614d0bed8e291e31f57189cd6f0f75aa39b0f74",
+    "tests_path": "canonical/tests/test_tool_discovery_dynamic_v4.py",
+    "tests_git_blob_sha": "23f0add178ca0c731d15e0645ee9b8841317efee",
+    "exact_verifier_pr": 1142,
+    "verification_state": "PENDING"
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
