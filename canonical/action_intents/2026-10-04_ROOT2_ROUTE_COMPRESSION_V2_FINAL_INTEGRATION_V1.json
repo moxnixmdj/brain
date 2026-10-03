@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ROOT2-ROUTE-COMPRESSION-V2-FINAL-INTEGRATION-20261004",
+  "status": "CURRENT_BASE_AUTHORITY_RECONCILIATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "base_commit_sha": "deb61749c171ee04e7f97bb4cbcb0b7d583599da",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "blocker_id": "ROOT2_SCORER_CARRIER_ACCESS_ADAPTER_GAPS",
+  "verified_inputs": [
+    {
+      "path": "canonical/verification/ROOT2_ROUTE_COMPRESSION_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "288f0924157b0c0af0ff6bf302a56944f69f2fba"
+    },
+    {
+      "path": "canonical/verification/OSWORLD_V21_SELF_HOST_SOURCE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "4290221e46c05af4c4cb4bc479c800564d9a41c2"
+    },
+    {
+      "path": "canonical/verification/HLE_OPUS55_POPULATION_ACCESS_CORRECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V2.json",
+      "git_blob_sha": "a62f0a2add46dc1fc5ee719592d929440e5522bb"
+    }
+  ],
+  "candidate_authority_blobs": {
+    "root2_fixed_bar_route_inventory_v1": "e53337c1d403f1b251204547ba59f0a326ae7cc6",
+    "current_zero_reality_minimum_cut_v8": "7e2c8dbde8369763c0f94e8bd96307ae5b265ae9",
+    "root2_root3_minimum_execution_frontier_v1": "59242a061c35bb3cc60dbe3e31effe1da38955c6",
+    "current_terminal_authority_v1": "fbfee45928cf67dc88ef024d4db3e945afc6271f"
+  },
+  "selected_route": "RECONCILE_CURRENT_ROOT2_SCHEDULER_TO_VERIFIED_SEARCH_DELETIONS__PRESERVE_FULL_HLE_2500_CORRECTION__PRESERVE_ROOT3_ADMISSIBILITY_REFINEMENT__PRESERVE_OSWORLD_KVM_VM_BOOT_PASS",
+  "expected_terminal_delta": "NO_ACCEPTANCE_OR_OWNERSHIP_DELTA__REMOVE_DOMINATED_AUTOMATIONBENCH_CHARTOGRAPHY_AND_OSWORLD_SEARCH__REDUCE_LIVE_ROOT2_ZERO_REALITY_FRONTIER",
+  "superseded_candidate": {
+    "brain_pr": 1461,
+    "verifier_pr": 1484,
+    "verifier_run_id": 37162321892,
+    "state": "SUPERSEDED_AND_FAILED_AFTER_CURRENT_AUTHORITY_MOVED__NOT_LOAD_BEARING"
+  },
+  "invariants": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gap_count": 0,
+    "root3_currently_runnable_events": 0,
+    "terminal_goal_achieved": false
+  },
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
