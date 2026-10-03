@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PLANNER_LATENCY_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_NONTERMINAL_CAUSAL_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "causal_evidence": {
+    "result_path": "canonical/verification/TB_SCIENCE_CANARY_V2_RESULT_20261003_V1.json",
+    "workflow_run_id": 37106127198,
+    "exception_class": "SciencePlannerError",
+    "exception_message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "failure_location": "harbor_science_planner_v1.plan__FIRST_TASK_CONDITIONED_LOCAL_QWEN_REQUEST",
+    "timeout_s": 180,
+    "prior_synthetic_contract": "6_OF_6_PASS",
+    "prior_max_tokens": 1024,
+    "prior_candidate_max_items": 8
+  },
+  "repair": {
+    "strategy": "DELETE_UNUSED_BRANCHING_AT_PROPOSAL_BOUNDARY",
+    "candidate_max_items": 1,
+    "max_tokens": 384,
+    "system_instruction": "ONE_TERSE_CANDIDATE_PER_PROPOSAL__SHORT_REQUIREMENT_IDS__CONCISE_COMMANDS__NO_EXPLANATORY_PROSE",
+    "controller_semantics_changed": false,
+    "command_policy_changed": false,
+    "verification_semantics_changed": false,
+    "benchmark_task_replay": false
+  },
+  "rationale": "THE_BRAIN_EXECUTES_AT_MOST_ONE_SELECTED_CANDIDATE_PER_CYCLE__GENERATING_UP_TO_EIGHT CANDIDATES IS DOMINATED WORK__BOUNDING_OUTPUT DIRECTLY TARGETS THE OBSERVED 180_SECOND FIRST_REQUEST TIMEOUT WITHOUT INFLATING TIMEOUTS OR SPENDING ANOTHER TERMINAL SLOT",
+  "required_verification": [
+    "EXACT_UNIT_TESTS_PASS",
+    "PINNED_LOCAL_QWEN_SYNTHETIC_SHORT_CONTRACT_PASS",
+    "PINNED_LOCAL_QWEN_CONSUMED_TASK_LENGTH_EQUIVALENT_NONTERMINAL_PROMPT_PASS_WITHIN_180_SECONDS",
+    "DISTINCT_LONG_COMPLEX_SYNTHETIC_PROMPT_PASS_WITHIN_180_SECONDS",
+    "NO_TERMINAL_BENCH_SCIENCE_SLOT_EXECUTION"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}

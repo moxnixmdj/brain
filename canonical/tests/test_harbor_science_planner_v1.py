@@ -97,9 +97,11 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(body["tool_choice"],"required")
         self.assertFalse(body["parallel_tool_calls"])
         self.assertEqual(body["temperature"],0)
+        self.assertEqual(body["max_tokens"],384)
         self.assertFalse(body["stream"])
         self.assertEqual(len(body["tools"]),1)
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
+        self.assertEqual(body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["maxItems"],1)
 
     def test_missing_tool_call_fails_closed(self):
         response=json.dumps({
