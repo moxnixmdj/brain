@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_TARGET_POPULATION_COALESCENCE_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__7_FORMAL_ROOT3_TARGETS_TO_4_PROTOCOL_BOUND_POPULATION_IDENTITIES__ZERO_CREDIT",
+  "source_brain": {
+    "pull_request": 1433,
+    "candidate_git_blob_sha": "d96729ead30521374044a2854dde28c17527f1f0",
+    "runtime_path": "canonical/runtime/root3_target_population_coalescence_verifier_v1.py",
+    "runtime_git_blob_sha": "caa136e0c4e1b45ccf9643945128d4e01a9f8e0b",
+    "tests_path": "canonical/tests/test_root3_target_population_coalescence_verifier_v1.py",
+    "tests_git_blob_sha": "df562a6355915a2e8221f322b301bac94bd333d4"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1448,
+    "verified_head_sha": "467bd989adb761c4a80e7a77a4933f8fce8fdd88",
+    "merge_commit": "b36d56ea28fce03a59183abf7964ce6fe5ff9f2d",
+    "workflow_run_id": 37159865120,
+    "workflow_job_id": 111310891915,
+    "conclusion": "success"
+  },
+  "verified": {
+    "formal_root3_target_count": 7,
+    "population_group_count": 4,
+    "shared_multi_predicate_population_group_count": 3,
+    "duplicate_population_definitions_eliminated": 3,
+    "exact_protocol_literals": true,
+    "exact_predicate_family_membership": true
+  },
+  "hard_nonclaims": [
+    "NO_SEMANTIC_BINDING_FACT_CLOSED",
+    "NO_SCOPE_COMPLETENESS_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
