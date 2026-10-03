@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V8_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V8_CURRENT_FOR_SCHEDULING__MANDATORY_TOOL_DISCOVERY_V2_RETRIEVAL_GATE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_scheduling_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V8.json",
+    "git_blob_sha": "bc1d47f5250e78f3625f258bc0320b273cdc5a67"
+  },
+  "independent_activation_verification": {
+    "path": "canonical/verification/TERMINAL_SCHEDULING_V8_RETRIEVAL_GATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "4f63b2ce18f2f6a8c0e667f562f5af946403cd79",
+    "workflow_run_id": 37115484856,
+    "workflow_job_id": 111181389737,
+    "conclusion": "success"
+  },
+  "live_scheduler": {
+    "runtime_path": "canonical/runtime/current_terminal_scheduling_world_v1.py",
+    "runtime_git_blob_sha": "de8434ea4d67f824070a94f70913979a2b4a2acd",
+    "action_hypergraph_path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+    "action_hypergraph_git_blob_sha": "e29ce3a7c782c7b9ab1097dd3124a917d3fea9d2",
+    "retrieval_gate_path": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py",
+    "retrieval_gate_git_blob_sha": "9af1bd62048277cc8c4fabab8efe5d217c367bac"
+  },
+  "live_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 8,
+    "unresolved_predicates": 30,
+    "opus55_acceptance": "3/19_PASS__16/19_OPEN",
+    "tool_learning_success_route_noninferior": "OPEN"
+  },
+  "tool_discovery_retrieval_authority": {
+    "mandatory": true,
+    "activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e",
+    "direct_or_stale_bypass_allowed": false,
+    "same_consumed_source_epoch_replay_allowed": false,
+    "no_result_means_nonexistence": false
+  },
+  "supersession": {
+    "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json": "HISTORICAL_EXACT_BYTES_ONLY__NOT_CURRENT_SCHEDULING_AUTHORITY",
+    "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V1.json": "HISTORICAL_PRE_GATE_CANDIDATE__V2_IS_CURRENT_SCHEDULING_WORLD"
+  },
+  "next": "PRESERVE_V8_AS_CURRENT_SCHEDULING_AUTHORITY__ANY_TOOL_DISCOVERY_RETRIEVAL_WAKE_MUST_ENTER_THROUGH_THE_EXACT_VERIFIED_V2_GATE__IMPROVE_ONLY_RECALL_GAPS_THAT_PROPAGATE_THROUGH_THIS_GATE",
+  "hard_rules": [
+    "DO_NOT_SCHEDULE_TOOL_DISCOVERY_RETRIEVAL_OUTSIDE_THE_MANDATORY_GATE",
+    "DO_NOT_USE_V7_AS_CURRENT_SCHEDULING_AUTHORITY",
+    "DO_NOT_REPEAT_CONSUMED_RETRIEVAL_SOURCE_EPOCHS",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
