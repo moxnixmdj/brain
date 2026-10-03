@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT3_UNIVERSAL_SCOPE_CLOSURE_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__EXACT_11_ROOT3_TARGETS_TO_4_WORK_CLASSES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_11_ROOT3_TARGETS_TO_4_WORK_CLASSES__ZERO_CREDIT",
   "objective": "Minimize canonical Root3 scope-completeness work without weakening proof standards or spending fresh reality before the zero-reality fixed point.",
   "current_truth": {
     "root3_only_predicates": 7,
@@ -31,17 +31,24 @@
     },
     {
       "id": "ROOT3_SYNTHESIS_SCOPE_RELATION_V1",
-      "targets": ["SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"],
+      "targets": [
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ],
       "policy": "PROVE_ONLY_THE_MISSING_SCOPE_RELATION_FOR_ROOT3__PRESERVE_MATCHED_QUALITY_AND_NUMERIC_BOUNDS_AS_ROOT2_RESIDUALS__DO_NOT_REPROVE_SEVEN_OPERATIONAL_ATOMS"
     },
     {
       "id": "ROOT3_COMPOSITION_DEPENDENCY_RECOMPUTE_V1",
-      "targets": ["COMPOSITION_COMPONENT_SCOPED_PROOFS"],
+      "targets": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
       "policy": "EVENT_DRIVEN_ONLY__RECOMPUTE_AFTER_NEW_UPSTREAM_SCOPE_COMPLETE_RECEIPT__NO_DIRECT_REALITY"
     },
     {
       "id": "ROOT3_FROZEN_DIRECT_ORACLE_MINCUT_V1",
-      "targets": ["FINANCE_UNCOVERED_SCOPE_AUDIT", "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"],
+      "targets": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT",
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
       "policy": "PRESERVE_EXACTLY_FOUR_FROZEN_LEAVES__EXECUTE_ONLY_AFTER_ZERO_REALITY_FIXED_POINT_AND_EXPLICIT_FRESH_REALITY_AUTHORIZATION"
     }
   ],
@@ -75,5 +82,19 @@
   "acceptance_credit_delta": 0,
   "family_credit_delta": 0,
   "capability_credit_delta": 0,
-  "ownership_credit_delta": 0
+  "ownership_credit_delta": 0,
+  "independent_verification": {
+    "path": "canonical/verification/ROOT3_UNIVERSAL_SCOPE_CLOSURE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1446,
+    "verifier_head_sha": "7a5650e7f83a007725f192b4148b749b50c47ff7",
+    "workflow_run_id": 37159393217,
+    "workflow_job_id": 111309464910,
+    "conclusion": "success"
+  },
+  "active_relationship": {
+    "generic_certificate_preprocessor": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "frontier_compiler": "canonical/runtime/root3_universal_scope_closure_compiler_v1.py",
+    "rule": "GENERIC_COMPILER_VALIDATES_CERTIFICATE_SEMANTICS__ROOT3_FRONTIER_COMPILER_MINIMIZES_AND_SCHEDULES_CURRENT_SCOPE_OBLIGATIONS"
+  }
 }
