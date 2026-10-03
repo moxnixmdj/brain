@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "STALE_AFTER_VERIFIED_TOOL_DISCOVERY_ACCEPTANCE_PROMOTION__RECOMPILE_REQUIRED__NO_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FROM_INDEPENDENT_RESIDUAL_V4_PROJECTION__RECEIPT_SATURATION_ONLY__NO_FRESH_REALITY",
   "current_authority": {
     "path": "canonical/governance/TERMINAL_SCHEDULING_V13_ACTIVE_AUTHORITY_V1.json",
     "git_blob_sha": "9fb9897d55641aaa54d82a5740c51970e677acb0"
@@ -42,12 +42,12 @@
     "canonical/governance/TERMINAL_SCHEDULING_V12_ACTIVE_AUTHORITY_V1.json"
   ],
   "hard_rules": [
-    "THIS_POINTER_IS_FAIL_CLOSED_STALE_AFTER_TOOL_DISCOVERY_ACCEPTANCE_PROMOTION",
-    "DO_NOT_EXECUTE_V13_31_UNIT_FRONTIER_AGAINST_THE_OLD_4_OF_19_WORLD",
-    "RECOMPUTE_INFORMATION_DOMINANCE_AND_ZERO_REALITY_FRONTIER_FROM_CURRENT_12_OF_38__5_OF_19_ACCEPTANCE_STATE",
+    "THIS_POINTER_IS_CURRENT_FOR_THE_POST_TOOL_DISCOVERY_5_OF_19_WORLD",
+    "CURRENT_RESIDUAL_V4_INDEPENDENTLY_VERIFIED_AT_12_OF_38_PROVED__26_UNRESOLVED",
+    "ONLY_ACTION_SATURATE_EXISTING_RECEIPTS_IS_AUTHORIZED",
+    "NO_FRESH_REALITY_BEFORE_RECEIPT_SATURATION_COMPLETES_AND_FIXED_POINT_IS_RECOMPUTED",
     "ALL_TOOL_DISCOVERY_RETRIEVAL_MUST_STILL_PASS_THE_EXACT_VERIFIED_V5_OVER_V4_OVER_V3_OVER_V2_GATE",
     "NO_RESULT_IS_NOT_NONEXISTENCE",
-    "NO_FRESH_REALITY_BEFORE_CURRENT_ZERO_REALITY_FIXED_POINT_IS_RECOMPUTED",
     "NO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_CREDIT_FROM_SCHEDULING"
   ],
   "new_reality_units_consumed": 0,
@@ -56,7 +56,7 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "ownership_credit_delta": 0,
-  "execution_authority": false,
+  "execution_authority": true,
   "promotion_authority": false,
   "fresh_reality_authority": false,
   "final_pointer_candidate_verification": {
@@ -64,6 +64,15 @@
     "git_blob_sha": "4da56ab4f42e56ae1f4046c7e66ac7483eeeff39",
     "workflow_run_id": 37125680348,
     "workflow_job_id": 111210384409,
+    "conclusion": "success"
+  },
+  "authorized_actions": [
+    "ACTION::SATURATE_EXISTING_RECEIPTS"
+  ],
+  "execution_authority_scope": "ZERO_REALITY_RECEIPT_SATURATION_ONLY",
+  "current_projection_verification": {
+    "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "ea19f4ae71c9148b8d8d526d1814651fa071a02b",
     "conclusion": "success"
   }
 }
