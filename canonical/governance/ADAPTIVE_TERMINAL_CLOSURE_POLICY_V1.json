@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_TERMINAL_CLOSURE_POLICY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__INDEPENDENT_CONTROLLER_VERIFICATION_BOUND__ACTIVATION_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Minimize wall-clock time to verified terminal closure by parallel zero-reality discharge, target-specific matched refinement, concurrent ownership reconciliation, empirical-only scheduling posteriors, immediate fixed-point recomputation, and branch cancellation on verified dominance.",
+  "source_main_commit": "873b5ef6d243ef06d096cc83e701a43c0cae2c72",
+  "controller": {
+    "path": "canonical/runtime/adaptive_terminal_closure_controller_v1.py",
+    "git_blob_sha": "2c15aeef745ac3b0e3a6eaa578f0d7893e935bd9"
+  },
+  "tests": {
+    "path": "canonical/tests/test_adaptive_terminal_closure_controller_v1.py",
+    "git_blob_sha": "df33a45f233f749af501c22c0a8597ba6066ea22"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_CONTROLLER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "f7dbc7b4075b36371b9e3db3d22f18136c0dd5b9",
+    "public_runner_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1317,
+    "workflow_run_id": 37120139607,
+    "workflow_job_id": 111194489731,
+    "verifier_merge_commit": "d7d3adfa5ce5f9685f939ec901161e64acf88237",
+    "conclusion": "success"
+  },
+  "current_verified_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "acceptance": "4/19_PASS__15/19_OPEN",
+    "nondominated_certificates": 16,
+    "unique_zero_reality_requirements": 19,
+    "matched_live_targets": 8,
+    "matched_primitive_child_facts": 16,
+    "matched_shared_residual_groups": 0
+  },
+  "execution_policy": {
+    "launch_all_current_zero_reality_work_concurrently": true,
+    "matched_target_children_first_resource_priority": true,
+    "matched_first_resource_priority_does_not_serialize_other_branches": true,
+    "fixed_point_after_every_independently_verified_delta": true,
+    "recompute_information_dominance_after_every_acceptance_delta": true,
+    "cancel_newly_dominated_work": true,
+    "ownership_reconciliation_parallel_with_acceptance": true,
+    "ownership_prework_allowed_without_promotion": true,
+    "fresh_reality_before_verified_zero_reality_fixed_point": false,
+    "tool_discovery_retrieval_authority_gate_mandatory": true
+  },
+  "probability_policy": {
+    "invented_success_probability_forbidden": true,
+    "invented_proof_cost_forbidden": true,
+    "empirical_history_model": "Beta(1+s,1+f)",
+    "posterior_use": "SCHEDULING_ONLY",
+    "posterior_may_grant_acceptance_or_promotion": false
+  },
+  "hard_rules": [
+    "COUNT_GENERIC_AFTER_VERIFIED_FRONTIER_RECOMPUTATION",
+    "MATCHED_PARENT_REQUIREMENTS_REFINE_TO_INDEPENDENT_TARGET_SPECIFIC_CHILD_FACTS",
+    "NO_CROSS_TARGET_SEMANTIC_OR_SCOPE_INHERITANCE",
+    "NO_REPEAT_CONSUMED_TOOL_DISCOVERY_SOURCE_EPOCH",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "SCHEDULING_ONLY_ZERO_CREDIT",
+    "ACCEPTANCE_AND_OWNERSHIP_REMAIN_SEPARATE",
+    "NO_FRESH_REALITY_FROM_THIS_POLICY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_POLICY_AND_ACTIVATION_BYTES__THEN_PROMOTE_AS_CURRENT_SCHEDULING_AUTHORITY_ONLY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
