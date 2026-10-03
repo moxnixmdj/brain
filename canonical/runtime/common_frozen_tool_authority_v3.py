@@ -28,10 +28,10 @@ class CommonFrozenToolAuthorityV3:
         if isinstance(epoch,bool) or not isinstance(epoch,int) or epoch<0:
             raise AuthorityError("INVALID_EPOCH")
         self._epoch=epoch
-        self._tools=self._normalize(entries)
+        self._tools=self._normalize(entries, epoch)
 
     @staticmethod
-    def _normalize(entries):
+    def _normalize(entries, epoch):
         out={}
         for raw in entries:
             if not isinstance(raw,Mapping): raise AuthorityError("INVALID_TOOL_ENTRY")
@@ -49,7 +49,7 @@ class CommonFrozenToolAuthorityV3:
             safe=row.get("safe_probe_capabilities")
             if not isinstance(caps,(list,tuple,set,frozenset)): raise AuthorityError("CAPABILITIES_REQUIRED:"+tid)
             if not isinstance(safe,list): raise AuthorityError("SAFE_PROBE_CAPABILITIES_REQUIRED:"+tid)
-            row["tool_id"]=tid; row["source_id"]=sid; row["cost"]=float(cost); row["epoch"]=0
+            row["tool_id"]=tid; row["source_id"]=sid; row["cost"]=float(cost); row["epoch"]=epoch
             out[tid]={"public":row,"capabilities":frozenset(str(x) for x in caps if str(x))}
         return out
 
@@ -161,7 +161,10 @@ class CommonFrozenToolAuthorityV3:
         return out
 
     def replace_authority(self,entries):
-        self._tools=self._normalize(entries); self._epoch+=1; return self._epoch
+        new_epoch=self._epoch+1
+        self._tools=self._normalize(entries,new_epoch)
+        self._epoch=new_epoch
+        return self._epoch
 
 def execute_v5(authority,route,*,required_capabilities,constraint=None,initial_visible_ids=(),max_actions=100):
     epoch=authority.epoch
