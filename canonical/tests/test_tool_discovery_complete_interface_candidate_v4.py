@@ -4,6 +4,7 @@ import json
 import unittest
 
 from canonical.runtime.tool_discovery_complete_interface_candidate_v4 import next_action
+from canonical.runtime import tool_discovery_information_safe_candidate as legacy
 
 
 def _sha(v):
@@ -13,13 +14,13 @@ def _sha(v):
 
 def _registry(sources, epoch=7):
     manifest=sorted(
-        [{"source_id":x["source_id"],"epoch":x["epoch"],"available":x["available"]} for x in sources],
+        [{"source_id":x["source_id"],"epoch":x["epoch"],"cost":float(x["cost"]),
+          "available":x["available"],"authorized":x.get("authorized") is True} for x in sources],
         key=lambda x:x["source_id"],
     )
     return {
         "kind":"COMPLETE_DISCOVERY_REGISTRY",
         "complete":True,
-        "independently_verified":True,
         "epoch":epoch,
         "sources":sources,
         "source_manifest_sha256":_sha(manifest),
@@ -37,8 +38,8 @@ def _tool(tid,cost,epoch=0,available=True,authorized=True,region="US"):
 class Tests(unittest.TestCase):
     def public(self):
         src=[
-            {"source_id":"S0","epoch":1,"cost":0.2,"available":True},
-            {"source_id":"S1","epoch":3,"cost":0.1,"available":True},
+            {"source_id":"S0","epoch":1,"cost":0.2,"available":True,"authorized":True},
+            {"source_id":"S1","epoch":3,"cost":0.1,"available":True,"authorized":True},
         ]
         return {
             "required_capabilities":["CAP_A"],
@@ -48,6 +49,43 @@ class Tests(unittest.TestCase):
             "prior_probe_receipts":[],
             "tool_version_events":[],
         }
+
+    def test_exact_legacy_projection_without_discovery_registry(self):
+        public={
+            "required_capabilities":["CAP_A"],
+            "tools":[
+                {"tool_id":"T0","cost":1.0,"available":True,"authorized":True},
+                {"tool_id":"T1","cost":2.0,"available":True,"authorized":True},
+            ],
+            "prior_probe_receipts":[
+                {"kind":"SAFE_CAPABILITY_PROBE","tool_id":"T0","capability":"CAP_A","epoch":0,"supported":True}
+            ],
+            "version_events":[],
+        }
+        self.assertEqual(next_action(public), legacy.next_action(public))
+
+    def test_registry_manifest_binds_cost_and_authorization(self):
+        p=self.public()
+        p["discovery_registry"]["sources"][0]["cost"]=999
+        a=next_action(p)
+        self.assertEqual(a["action"],"ESCALATE")
+        self.assertIn("MANIFEST_MISMATCH",a["reason"])
+
+        p=self.public()
+        p["discovery_registry"]["sources"][0]["authorized"]=False
+        a=next_action(p)
+        self.assertEqual(a["action"],"ESCALATE")
+        self.assertIn("MANIFEST_MISMATCH",a["reason"])
+
+    def test_unauthorized_source_is_not_queried(self):
+        p=self.public()
+        p["discovery_registry"]["sources"][1]["authorized"]=False
+        # Recompute the manifest after an authority change: semantics are now
+        # different but internally consistent.
+        p["discovery_registry"]=_registry(p["discovery_registry"]["sources"])
+        a=next_action(p)
+        self.assertEqual(a["action"],"DISCOVER")
+        self.assertEqual(a["source_id"],"S0")
 
     def test_discovers_all_sources_before_probe_or_select(self):
         p=self.public()
