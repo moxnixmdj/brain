@@ -128,7 +128,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
             "Recent observations: " + json.dumps(observations[-4:], sort_keys=True)[:12000]
         )
-        planned = science_planner.plan(prompt, timeout_s=180)
+        planned = science_planner.plan(prompt)
         raw = science_planner.normalize_proposal_object(
             science_planner.extract_json_object(planned.get("text", ""))
         )
@@ -259,7 +259,7 @@ class HarborScienceAgent(BaseAgent):
         return "project-brain-science"
 
     def version(self) -> str:
-        return "1.2.0"
+        return "1.2.1"
 
     async def setup(self, environment: BaseEnvironment) -> None:
         return None
