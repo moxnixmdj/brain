@@ -1,5 +1,9 @@
 import copy
+import json
+import pathlib
 import unittest
+
+from canonical.runtime.acceptance_capability_source_gate_v2 import evaluate as evaluate_source_gate
 
 from canonical.runtime.judgment_control_envelope_v1 import (
     FINANCE_DOCUMENT,
@@ -118,6 +122,20 @@ class Tests(unittest.TestCase):
         out = configured_terminal_decision(p, b, mode="FINANCE")
         self.assertFalse(out["accepted"])
         self.assertIn("EXPLICIT_SEMANTIC_OPERATOR_CONTRACT_FAIL", out["errors"])
+
+    def test_materiality_does_not_launder_general_substrate_qualification(self):
+        root = pathlib.Path(__file__).resolve().parents[2]
+        cfg = json.loads(
+            (root / "canonical/capabilities/opus55/DUAL_JUDGMENT_CONTROL_ENVELOPE_V1.json").read_text(encoding="utf-8")
+        )
+        route = copy.deepcopy(cfg["source_gate_v2_candidate"])
+        materiality = evaluate_materiality_counterfactual()
+        self.assertTrue(materiality["configuration_material_control_proven"], materiality)
+        route["configuration_materially_constrains_execution"] = True
+        self.assertFalse(route["general_substrate_test_pass"])
+        out = evaluate_source_gate(route)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("GENERAL_SUBSTRATE_TEST_NOT_PROVEN", out["errors"])
 
     def test_missing_provenance_fails_closed(self):
         text = "Every applicable rule must not omit a material exception before execution."
