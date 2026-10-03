@@ -24,11 +24,11 @@
   },
   "controller": {
     "path": "canonical/runtime/adaptive_terminal_closure_controller_v1.py",
-    "git_blob_sha": "66c27280dfd62328f04efd5f67b3cdd29b03c96d"
+    "git_blob_sha": "06d16ef1e8caa08835bc4e958c3047833bf52a32"
   },
   "tests": {
     "path": "canonical/tests/test_adaptive_terminal_closure_controller_v1.py",
-    "git_blob_sha": "7693cb47dcd48337bcc205095f13e5b6f3f7da66"
+    "git_blob_sha": "874706e94596cde028bed872cc40f07f6fa0d843"
   },
   "policy": {
     "run_all_nondominated_zero_reality_branches_concurrently": true,
@@ -41,7 +41,8 @@
     "ownership_reconciliation_parallel_with_acceptance": true,
     "empirical_probabilities_scheduling_only": true,
     "missing_probabilities": "UNKNOWN_NOT_INVENTED",
-    "fresh_reality_authority": false
+    "fresh_reality_authority": false,
+    "tool_discovery_retrieval": "V3_OVER_VERIFIED_V2_BASE_MANDATORY"
   },
   "hard_rules": [
     "NO_ACCEPTANCE_CREDIT_FROM_SCHEDULING",
@@ -52,7 +53,8 @@
     "NO_FRESH_REALITY_WHILE_V10_CURRENT_AUTHORITY_FORBIDS_IT",
     "EMPIRICAL_PROBABILITIES_MAY_ORDER_RESOURCES_BUT_CAN_NEVER_SUBSTITUTE_FOR_PROOF",
     "UNKNOWN_PROBABILITIES_MUST_NOT_BE_INVENTED",
-    "RECOMPUTE_AND_CANCEL_DOMINATED_BRANCHES_AFTER_EVERY_VERIFIED_DELTA"
+    "RECOMPUTE_AND_CANCEL_DOMINATED_BRANCHES_AFTER_EVERY_VERIFIED_DELTA",
+    "TOOL_DISCOVERY_MUST_USE_CURRENT_V10_BOUND_V3_OVER_VERIFIED_V2_BASE_RETRIEVAL_AUTHORITY"
   ],
   "expected_live_world": {
     "unresolved_predicates": 27,
