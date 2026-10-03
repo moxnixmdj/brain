@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-03",
+  "action": "CONDITIONALLY_RECOMPILE_TB4_ATTAINABILITY_AFTER_DOCKER_LIMIT_SEMANTICS_PROBE",
+  "status": "CANDIDATE_PENDING_INDEPENDENT_PROBE",
+  "trigger": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1143,
+    "workflow": "Verify TB4 Docker limit semantics",
+    "required_conclusion": "success"
+  },
+  "on_pass": [
+    "INDEPENDENTLY_VERIFY_CANONICAL_RUNTIME_AND_TEST_BYTES",
+    "PROMOTE_ONLY_THE_ATTAINABILITY_REOPEN_DELTA",
+    "RECOMPUTE_THE_MINIMUM_FRESH_REALITY_CUT_FROM_THE_NINE_NON_GPU_ROWS"
+  ],
+  "on_fail": [
+    "PRESERVE_THE_EXISTING_180_LT_220_IMPOSSIBILITY_VERDICT",
+    "DO_NOT_SPEND_AN_ACCEPTANCE_CASE_ON_THIS_BRANCH"
+  ],
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
