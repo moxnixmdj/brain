@@ -1,0 +1,182 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_ZERO_COST_ROUTE_COMPRESSION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__ZERO_REALITY_ROUTE_COMPRESSION__ZERO_CREDIT",
+  "objective": "Narrow Root-2 execution/scoring/access blockers using exact public route facts and frozen benchmark metadata without consuming terminal benchmark cases.",
+  "sources": {
+    "github_public_runner": {
+      "url": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+      "facts": {
+        "public_repository_standard_linux_runner": {
+          "cpu": 4,
+          "memory_gb": 16,
+          "storage_gb": 14,
+          "architecture": "x64"
+        },
+        "public_standard_runner_usage": "FREE_AND_UNLIMITED"
+      }
+    },
+    "terminal_bench_science": {
+      "repository": "harbor-framework/terminal-bench-science",
+      "release": "v0.1.0",
+      "release_notes_path": "release-notes-v0.1.0.md",
+      "public_results_source": "https://www.tbench.ai/news/terminal-bench-science-0-1",
+      "scoring_facts": [
+        "70_TASKS",
+        "THREE_INDEPENDENT_TRIALS_PER_TASK",
+        "TASK_REWARD_BINARY_0_OR_1"
+      ]
+    },
+    "chartography": {
+      "repository": "surge-ai/chartography",
+      "source": "https://github.com/surge-ai/chartography",
+      "leaderboard_configuration": {
+        "full_task_count": 100,
+        "epochs_per_task": 10,
+        "judge_model": "gemini-3.5-flash"
+      }
+    },
+    "gemini_35_flash": {
+      "pricing_source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "rate_limit_source": "https://ai.google.dev/gemini-api/docs/rate-limits",
+      "free_tier_input": "FREE_OF_CHARGE",
+      "free_tier_output": "FREE_OF_CHARGE",
+      "quota_note": "ACTIVE_RATE_LIMITS_ARE_PROJECT_SPECIFIC_AND_NOT_GUARANTEED"
+    },
+    "osworld_2_1": {
+      "repository": "xlang-ai/OSWorld-V2",
+      "release": "osworld-v2.1",
+      "source": "https://github.com/xlang-ai/OSWorld-V2",
+      "exact_public_route": [
+        "PINNED_OSWORLD_V2_1_CODE",
+        "PINNED_TASK_FILES",
+        "PINNED_TASK_ASSETS",
+        "PINNED_DOCKER_PROVIDER_IMAGE",
+        "SELF_HOSTED_OSWORLD_WEB_REQUIRED"
+      ]
+    }
+  },
+  "terminal_bench_science_declared_resource_scan": {
+    "method": "READ_ONLY_SCAN_OF_ALL_70_V0_1_0_TASK_TOML_ENVIRONMENT_METADATA__NO_INSTRUCTION_CASE_ASSET_SOLUTION_OR_VERIFIER_CONTENT_READ",
+    "standard_public_runner_nominal_limits": {
+      "cpu": 4,
+      "memory_mb": 16384,
+      "storage_mb": 14336,
+      "gpus": 0
+    },
+    "total_tasks": 70,
+    "nominally_within_all_four_declared_limits": 57,
+    "nominally_outside_storage_limit_only": 13,
+    "nominal_fit_fraction": 0.8142857142857143,
+    "opus55_target_fraction": 0.587,
+    "threshold_attainability_observation": "57_OF_70_DECLARED_RESOURCE_FIT_TASKS_EXCEEDS_THE_58_7_PERCENT_SUCCESS_MASS_REQUIRED_IF_NONFIT_TASKS_ARE_FAIL_CLOSED_TO_ZERO__THIS_IS_NOT_YET_A_CARRIER_EXECUTION_PROOF",
+    "outside_storage_limit": [
+      {
+        "task": "animal-reid",
+        "storage_mb": 32768
+      },
+      {
+        "task": "leaky-bloch-meep",
+        "storage_mb": 20480
+      },
+      {
+        "task": "3x2pt-inference",
+        "storage_mb": 20480
+      },
+      {
+        "task": "spatial-cell-annotation",
+        "storage_mb": 15360
+      },
+      {
+        "task": "cell-lineage-reconstruction",
+        "storage_mb": 20480
+      },
+      {
+        "task": "stereo-dem-icesat2",
+        "storage_mb": 30720
+      },
+      {
+        "task": "cmb-cross-inference",
+        "storage_mb": 16384
+      },
+      {
+        "task": "cilia-segmentation",
+        "storage_mb": 16384
+      },
+      {
+        "task": "onsager-ising-lean",
+        "storage_mb": 51200
+      },
+      {
+        "task": "gen-turan-paths",
+        "storage_mb": 32768
+      },
+      {
+        "task": "finite-free-stam",
+        "storage_mb": 20480
+      },
+      {
+        "task": "betalactam-multimodal-transfer",
+        "storage_mb": 20480
+      },
+      {
+        "task": "amr-poisson-optimize",
+        "storage_mb": 16384
+      }
+    ],
+    "exact_remaining_proof_obligations": [
+      "INDEPENDENTLY_REVERIFY_THE_70_FROZEN_METADATA_ROWS_AND_57_COUNT",
+      "PROVE_STANDARD_PUBLIC_RUNNER_REAL_DOCKER_BUILD_AND_RUNTIME_COMPATIBILITY_FOR_THE_SELECTED_TASK_SUBSET_WITHOUT_READING_TERMINAL_CASE_CONTENT",
+      "PROVE_FAIL_CLOSED_ZERO_FOR_UNRUNNABLE_TASKS_IS_ADMISSIBLE_IN_THE_EXACT_SCORE_AGGREGATION",
+      "BIND_BRAIN_AGENT_TO_THE_SAME_HARBOR_RELEASE_AND_PROTOCOL"
+    ],
+    "route_consequence": "DELETE_THE_COARSE_CLAIM_THAT_TB_SCIENCE_HAS_NO_ZERO_COST_CARRIER_CANDIDATE__KEEP_BENCHMARK_SCORE_EXECUTION_OPEN"
+  },
+  "chartography_zero_cost_judge_compression": {
+    "prior_blocker": "ZERO_COST_COMPARABLE_JUDGE_ROUTE_OPEN",
+    "new_fact": "THE_EXACT_LEADERBOARD_JUDGE_MODEL_GEMINI_3_5_FLASH_HAS_A_FREE_TIER_WITH_ZERO_INPUT_AND_OUTPUT_PRICE",
+    "consequence": "MONETARY_PRICE_IS_NOT_THE_REMAINING_JUDGE_BLOCKER",
+    "remaining": [
+      "VERIFY_USER_PROJECT_HAS_SUFFICIENT_FREE_TIER_QUOTA_AND_MODEL_ACCESS",
+      "VERIFY_QUOTA_CAN_COMPLETE_THE_REQUIRED_JUDGE_CALL_MASS_WITH_RETRIES_WITHOUT_PAID_FALLBACK",
+      "BIND_HARD_ZERO_SPEND_STOP",
+      "THEN_RUN_ONLY_AFTER_GLOBAL_ZERO_REALITY_FIXED_POINT"
+    ]
+  },
+  "osworld_2_1_route_compression": {
+    "prior_blocker": "ZERO_COST_COMPARABLE_ENVIRONMENT_ROUTE_OPEN",
+    "new_fact": "EXACT_V2_1_DOCKER_PROVIDER_AND_RELEASE_PINNING_ROUTE_EXISTS_PUBLICLY",
+    "consequence": "PROTOCOL_IDENTITY_IS_NARROWED__GENERIC_ENVIRONMENT_ROUTE_DISCOVERY_IS_NO_LONGER_REQUIRED",
+    "remaining": [
+      "ZERO_COST_KVM_CAPABLE_EXECUTION_CARRIER",
+      "ACCESS_TO_REQUIRED_GATED_V2_1_ASSETS",
+      "SELF_HOSTED_MATCHING_WEBSITE_AND_GITLAB_DEPENDENCIES_WHERE_REQUIRED",
+      "INDEPENDENT_PROTOCOL_EQUIVALENCE_VERIFICATION"
+    ]
+  },
+  "hard_rules": [
+    "NO_BENCHMARK_CASE_CONTENT_CONSUMED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_SCORE_INFERENCE_FROM_RESOURCE_METADATA",
+    "NO_QUOTA_AVAILABILITY_ASSUMED_FROM_FREE_PRICING",
+    "NO_CLAIM_THAT_DECLARED_RESOURCE_FIT_PROVES_RUNTIME_FIT",
+    "NO_PRIVATE_OR_HELDOUT_POPULATION_SUBSTITUTION",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": [
+    "INDEPENDENTLY_VERIFY_TB_SCIENCE_METADATA_COUNT_AND_SCORING_ADMISSIBILITY",
+    "VERIFY_CHARTOGRAPHY_FREE_TIER_QUOTA_ACCESS_WITH_HARD_ZERO_SPEND_STOP_WITHOUT_TERMINAL_CASE_EXECUTION",
+    "VERIFY_OSWORLD_V2_1_ZERO_COST_KVM_AND_GATED_ASSET_ACCESS",
+    "RECOMPUTE_ROOT2_ZERO_REALITY_FIXED_POINT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
