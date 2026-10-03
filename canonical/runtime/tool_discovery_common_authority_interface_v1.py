@@ -25,11 +25,6 @@ from typing import Any, Mapping, Sequence
 
 SOURCE_ID="COMMON_FROZEN_BRAIN_OPUS_TOOL_AUTHORITY"
 SCHEMA="PROJECT_BRAIN_COMMON_AUTHORITY_DISCOVERY_INTERFACE_V1"
-PUBLIC_KEYS=(
-    "tool_id","cost","available","authorized","epoch","meta","schema_tags",
-    "provider","region","risk","tags",
-)
-
 class InterfaceError(ValueError):
     pass
 
@@ -64,7 +59,7 @@ def _public_tool(raw:Mapping[str,Any])->dict[str,Any]:
     forbidden={"hidden_capabilities","capabilities","supported_capabilities","_oracle"}
     if forbidden & set(raw):
         raise InterfaceError("PUBLIC_METADATA_CONTAINS_HIDDEN_CAPABILITY_FIELD:"+tid)
-    out={k:deepcopy(raw[k]) for k in PUBLIC_KEYS if k in raw}
+    out=deepcopy(dict(raw))
     out["tool_id"]=tid
     out["cost"]=float(raw.get("cost",0.0))
     out["available"]=bool(raw["available"])
@@ -162,6 +157,24 @@ def public_interface_descriptor(instance:Mapping[str,Any])->dict[str,Any]:
             "available":True,
             "authority_sha256":frozen["public_authority_sha256"],
         }],
+    }
+
+def matched_route_binding(instance:Mapping[str,Any])->dict[str,Any]:
+    """Bind both compared routes to one exact common frozen authority instance."""
+    frozen=validate_instance(instance)
+    digest=frozen["public_authority_sha256"]
+    instance_digest=frozen["instance_sha256"]
+    return {
+        "kind":"COMMON_MATCHED_TOOL_AUTHORITY_BINDING",
+        "brain":{
+            "public_authority_sha256":digest,
+            "interface_instance_sha256":instance_digest,
+        },
+        "opus":{
+            "public_authority_sha256":digest,
+            "interface_instance_sha256":instance_digest,
+        },
+        "same_frozen_tool_authority":True,
     }
 
 def begin_episode(
