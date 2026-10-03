@@ -77,5 +77,54 @@
     "ownership_credit_delta": 0,
     "new_reality_units_consumed": 0,
     "incremental_spend_usd": 0
+  },
+  "current_residual_root_partition": {
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "f99b00e6dca735ffa7a790a414155b4f69856cf0"
+    },
+    "unresolved_total": 26,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 15,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 4,
+    "root2_only": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "LIVEBENCH_IF_GE_65_7",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "MYSTERYMECHANISM_GE_49_55"
+    ],
+    "root3_only": [
+      "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "VISION_DENSE_NONCHART_SCOPE",
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+    ],
+    "root2_and_root3": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+    ],
+    "derivation_rule": "PUBLIC_FIXED_BAR=>ROOT2__DIRECT_OR_MATCHED_SCOPE_AUDIT_OR_DEPENDENCY_PROOF=>ROOT3__MATCHED_NONINFERIORITY=>ROOT2_AND_ROOT3_UNLESS_A_STRONGER_SCOPE_COMPLETE_PROOF_COLLAPSES_ONE_SIDE",
+    "accounting": "CLASSIFICATION_ONLY__ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
   }
 }
