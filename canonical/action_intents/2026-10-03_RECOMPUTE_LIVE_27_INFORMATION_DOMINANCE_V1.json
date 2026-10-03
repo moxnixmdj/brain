@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECOMPUTE-LIVE-27-INFORMATION-DOMINANCE-20261003-V1",
+  "status": "CANDIDATE__ZERO_REALITY_SCHEDULING_TRUTH_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "8e5e5b4d089809cad850a6d55eed30d85ba60573",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "CURRENT_SCHEDULING_AND_INFORMATION_DOMINANCE_COMPILERS_ENCODE_PRE_RECOVERY_8_OF_38_30_UNRESOLVED_ASSUMPTIONS_WHILE_CURRENT_TERMINAL_AUTHORITY_IS_11_OF_38_27_UNRESOLVED",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::CURRENT_SCHEDULING_AND_INFORMATION_DOMINANCE_COMPILERS_ENCODE_PRE_RECOVERY_8_OF_38_30_UNRESOLVED_ASSUMPTIONS",
+  "action_kind": "ZERO_REALITY_SCHEDULING_TRUTH_REPAIR_AND_INFORMATION_DOMINANCE_RECOMPUTE",
+  "expected_parent_frontier_change": {
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "scheduling_world": "30_UNRESOLVED_STALE_TO_27_UNRESOLVED_RECEIPT_DERIVED",
+    "proof_frontier": "RECOMPUTE_NONDOMINATED_ZERO_REALITY_CERTIFICATES_AFTER_RECOVERY_PROMOTION",
+    "fresh_reality_authority": false
+  },
+  "theory_invariants": {
+    "capability_invention": "FORBIDDEN",
+    "underlying_capability_change": "NONE",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_policy": "INTERNALIZED_CONFIGURED_VERIFIED_OWNERSHIP",
+    "no_fresh_terminal_reality": true
+  },
+  "prior_work_search": {
+    "reused": [
+      "canonical/runtime/current_terminal_scheduling_world_v1.py",
+      "canonical/runtime/current_terminal_information_dominance_v1.py",
+      "canonical/runtime/terminal_information_dominance_v1.py",
+      "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+      "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"
+    ],
+    "rejected_new_optimizer": "EXISTING_EXACT_DOMINANCE_SOLVER_IS_SUFFICIENT__ONLY_STALE_LIVE_WORLD_ASSUMPTIONS_REQUIRE_REPAIR"
+  },
+  "evidence_refs": [
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+    "canonical/verification/RECOVERY_ACCEPTANCE_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  ],
+  "recursive_obs": {
+    "goal": "REPAIR_ONLY_THE_STALE_SCHEDULING_TRUTH_LAYER_NEEDED_TO_SELECT_THE_FASTEST_CURRENT_ZERO_REALITY_TERMINAL_ACTIONS",
+    "capability": "REUSE_EXISTING_SCHEDULING_AND_EXACT_INFORMATION_DOMINANCE_COMPILERS",
+    "blocker": "DELETE_HARD_CODED_8_OF_38_30_UNRESOLVED_ASSUMPTIONS_AND_CROSS_CHECK_DERIVED_COUNTS_AGAINST_CURRENT_AUTHORITY",
+    "solution_order": [
+      "DELETE_STALE_CONSTANTS",
+      "REUSE_EXISTING_COMPILERS",
+      "REGENERATE_27_PREDICATE_CANDIDATES",
+      "INDEPENDENTLY_VERIFY",
+      "ACTIVATE_ONLY_AFTER_PASS"
+    ],
+    "verification": "RUN_EXISTING_GITHUB_CI_PLUS_SEPARATE_PUBLIC_RUNNER_EXACT_BYTE_VERIFICATION_BEFORE_ACTIVATION",
+    "inherited_system": "PRESERVE_FROZEN_38_PREDICATE_REGISTRY_AND_EXISTING_VERIFIED_HISTORICAL_RECEIPTS",
+    "obs": "STOP_META_ANALYSIS_ONCE_CURRENT_RECEIPT_DERIVED_27_WORLD_AND_DOMINANCE_ARE_INDEPENDENTLY_VERIFIED"
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "CURRENT_LIVE_WORLD_EQUALS_FROZEN_38_MINUS_CURRENT_PROVED_OR_REFUTED_RECEIPTS_AND_DOMINANCE_IS_COMPUTED_ONLY_ON_THAT_SET",
+    "hole_type": "STALE_SCHEDULING_TRUTH",
+    "expected_certificate_or_receipt": "INDEPENDENT_EXACT_BYTE_VERIFICATION_OF_38_11_27_WORLD_AND_EXACT_DOMINANCE_RESULT",
+    "validator": "EXISTING_UNIT_TESTS_PLUS_GITHUB_ACTIONS_PLUS_VERIFICATION_CAPSULE_RUNNER",
+    "maximum_cheap_test_cost": "ZERO_TERMINAL_CASES",
+    "contamination_risk": "NONE__NO_TERMINAL_CASE_EXPOSURE",
+    "reversibility": "FULLY_REVERSIBLE_SCHEDULING_GLUE",
+    "falsification_condition": "ANY_AUTHORITY_RECEIPT_COUNT_MISMATCH_UNCOVERED_PREDICATE_OR_CI_FAILURE",
+    "critical_path_relation": "CURRENT_TERMINAL_AUTHORITY_EXPLICITLY_REQUIRES_LIVE_27_INFORMATION_DOMINANCE_RECOMPUTE_BEFORE_FRESH_REALITY"
+  },
+  "reality_query_admission": {
+    "verdict": "NO_REALITY_QUERY_REQUIRED",
+    "new_reality_units_consumed": 0
+  },
+  "hard_rules": [
+    "NO_TERMINAL_CASE_EXPOSURE",
+    "NO_ACCEPTANCE_OR_FAMILY_PROMOTION_FROM_SCHEDULING",
+    "NO_STALE_30_OR_31_PREDICATE_ORDERING_AFTER_RECOVERY_PROMOTION",
+    "FAIL_CLOSED_ON_AUTHORITY_ATOMIC_COUNT_MISMATCH",
+    "NO_MERGE_TO_ACTIVE_SCHEDULING_AUTHORITY_BEFORE_INDEPENDENT_EXACT_BYTE_VERIFICATION"
+  ],
+  "reasoning_durability": {
+    "conclusion": "REPAIR_EXISTING_LIVE_WORLD_COMPILER_AND_RECOMPUTE_DOMINANCE__DO_NOT_BUILD_NEW_OPTIMIZER_OR_SPEND_REALITY",
+    "selected_route": "AUTHORITY_DERIVED_DYNAMIC_COUNTS_PLUS_EXISTING_EXACT_DOMINANCE_SOLVER",
+    "rejected_material_alternatives": [
+      "KEEP_30_PREDICATE_HARDCODE",
+      "CREATE_NEW_PARALLEL_OPTIMIZER",
+      "RUN_TB_SCIENCE_BEFORE_ZERO_REALITY_RECOMPUTE"
+    ],
+    "uncertainties": [
+      "INDEPENDENT_VERIFIER_RESULT_PENDING"
+    ],
+    "next_action": "OPEN_GUARDED_BRAIN_PR__RUN_CI__THEN_SEPARATE_PUBLIC_RUNNER_EXACT_BYTE_VERIFICATION",
+    "supersession_conditions": [
+      "CURRENT_TERMINAL_AUTHORITY_CHANGES_BEFORE_MERGE_OR_VERIFICATION"
+    ]
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
