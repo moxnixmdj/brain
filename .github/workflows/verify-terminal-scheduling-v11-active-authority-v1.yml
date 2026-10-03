@@ -1,0 +1,20 @@
+name: Verify terminal scheduling V11 active authority
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/TERMINAL_SCHEDULING_V11_ACTIVE_AUTHORITY_V1.json"
+      - "canonical/tests/test_terminal_scheduling_v11_active_authority_v1.py"
+      - ".github/workflows/verify-terminal-scheduling-v11-active-authority-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_terminal_scheduling_v11_active_authority_v1 -v
