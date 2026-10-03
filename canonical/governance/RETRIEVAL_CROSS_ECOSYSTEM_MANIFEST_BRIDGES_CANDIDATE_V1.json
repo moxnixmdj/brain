@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RETRIEVAL_CROSS_ECOSYSTEM_MANIFEST_BRIDGES_CANDIDATE_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__THREE_DIRECT_MANIFEST_BRIDGES__TYPESCRIPT_REQUIRES_REGISTRY_REVERSE_METADATA__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__FOUR_DIRECT_MANIFEST_BRIDGES__TYPESCRIPT_REGISTRY_METADATA_BRIDGE_OBSERVED__PUBLIC_RUNNER_REGISTRY_VERIFICATION_PENDING__ZERO_CREDIT",
   "bridges": [
     {
       "episode_id": "PACKAGE_TYPED_JS",
@@ -43,6 +43,16 @@
       "expected_package": "clap",
       "bridge_status": "MANIFEST_DIRECT_MATCH",
       "manifest_package_name": "clap"
+    },
+    {
+      "episode_id": "PACKAGE_JS_LINT",
+      "repository": "eslint/eslint",
+      "repository_commit": "a438ec39512c3381f4785a1f3058982ce9845970",
+      "manifest_path": "package.json",
+      "manifest_git_blob_sha": "80e7724d6beba8e3cc96be78e38994199ee61821",
+      "manifest_package_name": "eslint",
+      "expected_package": "eslint",
+      "bridge_status": "MANIFEST_DIRECT_MATCH"
     }
   ],
   "hard_rules": [
@@ -52,5 +62,13 @@
     "NO_REPO_HIT_TO_PACKAGE_IDENTITY_INFERENCE_WITHOUT_A_BRIDGE",
     "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
   ],
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "typescript_registry_observation": {
+    "package_id": "typescript",
+    "observed_registry_url": "https://registry.npmjs.org/typescript/latest",
+    "observed_name": "typescript",
+    "observed_repository_url": "git+https://github.com/microsoft/TypeScript.git",
+    "observed_repository_canonical": "microsoft/typescript",
+    "evidence_status": "OFFICIAL_PUBLIC_REGISTRY_OBSERVATION__PUBLIC_RUNNER_REPRODUCTION_PENDING"
+  }
 }
