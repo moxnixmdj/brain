@@ -121,18 +121,18 @@
     },
     {
       "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
-      "root_class": "ROOT2_AND_ROOT3",
+      "root_class": "ROOT2_ONLY",
       "independent_historical_overlay_pass": true,
       "target_semantics_v1_to_v3": "EXACTLY_UNCHANGED_ATOM_AND_METRIC_REQUIREMENT_SET_BY_DIRECT_CONTENT_COMPARISON",
       "current_portability_credit": 0,
       "current_rebind_required": false,
-      "next": "INDEPENDENTLY_REBIND_THE_EXISTING_VERIFIED_SYNTHESIS_OVERLAY_TO_CURRENT_TARGET_NORMALIZATION_V3__DO_NOT_REPROVE_THE_SEVEN_ALREADY_VERIFIED_OPERATIONAL_ATOMS",
+      "next": "WORK_ONLY_ROOT2_MATCHED_QUALITY_ATOM_AND_TWO_NUMERIC_NONINFERIORITY_BOUNDS__DO_NOT_REOPEN_ROOT3_SCOPE_RELATION",
       "current_rebind_candidate": "canonical/governance/SYNTHESIS_OVERLAY_V3_REBIND_CANDIDATE_V1.json",
       "current_rebind_candidate_git_blob_sha": "65c68de4a95ebdfd2ba3649c642748b0f9d8f2c7",
       "current_transport_verified": true,
       "current_transport_verification": "canonical/verification/SYNTHESIS_OVERLAY_V3_REBIND_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "current_residual": {
-        "missing_scope_relation": true,
+        "root3_scope_relation": false,
         "missing_atoms": [
           "metric:matched_quality"
         ],
@@ -140,6 +140,11 @@
           "matched_quality_noninferiority",
           "required_claim_coverage_noninferiority"
         ]
+      },
+      "scope_certificate": {
+        "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+        "status": "VERIFIED__LOSSLESS_SIX_DIMENSION_SCOPE_RELATION__ROOT3_CLOSED",
+        "verification": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
       }
     }
   ],
@@ -165,7 +170,7 @@
     "UNIVERSAL_LEARNING_V4_CHANGES_THE_OPERATIVE_UNKNOWN_DOMAIN_MECHANISM_ONLY__TWO_FROZEN_DIRECT_LEAVES_REMAIN_OPEN__ZERO_ACCEPTANCE_OWNERSHIP_OR_FAMILY_CREDIT",
     "UNIVERSAL_LEARNING_V5_REPLACES_V4_AS_OPERATIVE_UNKNOWN_DOMAIN_LEARNING_MECHANISM_ONLY__V4_REMAINS_LOAD_BEARING_VERIFIED_BASE__TWO_FROZEN_DIRECT_LEAVES_REMAIN_OPEN__ZERO_ACCEPTANCE_OWNERSHIP_OR_FAMILY_CREDIT"
   ],
-  "next": "WORK_ONLY_SYNTHESIS_SCOPE_RELATION_MATCHED_QUALITY_ATOM_AND_TWO_NUMERIC_BOUNDS__SEARCH_ONLY_LOAD_BEARING_SCOPE_OR_SEMANTIC_CERTIFICATES_FOR_THE_OTHER_SEVEN_TARGETS__RECOMPUTE_COMPOSITION_FROM_UPSTREAM_DELTAS__PRESERVE_FOUR_DIRECT_ORACLE_LEAVES_FOR_MINIMUM_REALITY_CUT",
+  "next": "WORK_ONLY_SYNTHESIS_ROOT2_MATCHED_QUALITY_ATOM_AND_TWO_NUMERIC_BOUNDS__SEARCH_ONLY_LOAD_BEARING_SCOPE_OR_SEMANTIC_CERTIFICATES_FOR_THE_OTHER_ROOT3_TARGETS__RECOMPUTE_COMPOSITION_FROM_UPSTREAM_DELTAS__PRESERVE_FOUR_DIRECT_ORACLE_LEAVES_FOR_MINIMUM_REALITY_CUT",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,

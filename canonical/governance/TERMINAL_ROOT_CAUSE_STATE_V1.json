@@ -111,9 +111,9 @@
     },
     "unresolved_total": 26,
     "root1_positive_gap_count": 0,
-    "root2_only_count": 15,
+    "root2_only_count": 16,
     "root3_only_count": 7,
-    "root2_and_root3_count": 4,
+    "root2_and_root3_count": 3,
     "root2_only": [
       "CODING_TB4_GE_66_4",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -129,7 +129,8 @@
       "FINANCE_AGENT_V2_GE_58_59",
       "LIVEBENCH_IF_GE_65_7",
       "ARTIFACT_AA_BRIEFCASE_GE_1822",
-      "MYSTERYMECHANISM_GE_49_55"
+      "MYSTERYMECHANISM_GE_49_55",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
     ],
     "root3_only": [
       "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
@@ -143,19 +144,26 @@
     "root2_and_root3": [
       "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
       "IF_SCOPE_BOUNDARY_NONINFERIOR",
-      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
       "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
     ],
     "derivation_rule": "PUBLIC_FIXED_BAR=>ROOT2__DIRECT_OR_MATCHED_SCOPE_AUDIT_OR_DEPENDENCY_PROOF=>ROOT3__MATCHED_NONINFERIORITY=>ROOT2_AND_ROOT3_UNLESS_A_STRONGER_SCOPE_COMPLETE_PROOF_COLLAPSES_ONE_SIDE",
-    "accounting": "CLASSIFICATION_ONLY__ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+    "accounting": "CLASSIFICATION_ONLY__ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "synthesis_scope_reclassification": {
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT3_SCOPE_RELATION_CLOSED__ROOT2_ONLY_REMAINS",
+      "certificate": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "verification": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "root3_involved_before": 11,
+      "root3_involved_after": 10,
+      "acceptance_credit_delta": 0
+    }
   },
   "root3_current_execution_state": {
     "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V1.json",
     "git_blob_sha": "10a28a403dae6df94f8fe58b1d9d3f9e0b60c11b",
     "verification_path": "canonical/verification/ROOT3_MINIMUM_ACTION_CUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
     "verification_git_blob_sha": "e24058eab431a1643dae340a8ff564490f992097",
-    "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__11_ROOT3_PREDICATES_TO_3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
-    "live_root3_predicates": 11,
+    "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__10_ROOT3_PREDICATES__SYNTHESIS_SCOPE_DISCHARGED__ZERO_CREDIT",
+    "live_root3_predicates": 10,
     "event_class_count": 3,
     "currently_runnable_event_count": 0,
     "fresh_reality_authority": false
