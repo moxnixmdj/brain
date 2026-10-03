@@ -1,0 +1,21 @@
+name: Verify P2 P3 information-safe proof v2b
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/P2_P3_INFORMATION_SAFE_PROOF_REDESIGN_V1.json
+      - canonical/runtime/p2_p3_information_safe_proof_suites_v2.py
+      - canonical/runtime/p2_p3_information_safe_candidate_v2.py
+      - canonical/tests/test_p2_p3_information_safe_proof_v2.py
+      - .github/workflows/verify-p2-p3-information-safe-proof-v2b.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_p2_p3_information_safe_proof_v2
