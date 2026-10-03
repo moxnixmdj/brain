@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_LOCAL_QWEN_ROUTE_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_CASE__PINNED_LOCAL_QWEN_FORCED_TOOL_CALL__INDEPENDENT_VERIFICATION_REQUIRED__NO_TERMINAL_AUTHORITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "supersedes_failed_transport_only": {
+    "failed_planner": "canonical/runtime/harbor_science_planner_v1.py",
+    "failed_planner_blob": "17472fd2b01b164fbb180aecfc04385b55b11499",
+    "root_cause": "canonical/verification/TB_SCIENCE_TRANCHE1_ROOT_CAUSE_RECONCILIATION_20261003_V1.json",
+    "preserved_controller_semantics": "BRAIN_OWNS_COMMAND_POLICY_SELECTION_EXECUTION_VERIFICATION_STATE_TRANSITION_AND_DETERMINISTIC_FINISH",
+    "consumed_slots_replayed": false
+  },
+  "candidate_bytes": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v2.py",
+    "planner_blob": "ce17407590343e4535e78f1e5a1592fd815ce332",
+    "agent_path": "canonical/runtime/harbor_science_agent_v2.py",
+    "agent_blob": "e11d7116f344dc907ab12baee404f8b97c569208",
+    "planner_tests_path": "canonical/tests/test_harbor_science_planner_v2.py",
+    "planner_tests_blob": "64a0ee3834d28026e586416e174372a658dc9ee6",
+    "agent_tests_path": "canonical/tests/test_harbor_science_agent_v2.py",
+    "agent_tests_blob": "a4a655bb96d51b015248d32a8f34041cb4409d24"
+  },
+  "substrate": {
+    "role": "GENERAL_COGNITION_PROPOSAL_SUBSTRATE_ONLY",
+    "execution_surface": "PUBLIC_GITHUB_ACTIONS_UBUNTU_24_04",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "model_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+    "model_bytes": 5060174144,
+    "model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model_identity": "brain-qwen3.5-9b",
+    "prior_independent_toolcall_preflight": "canonical/verification/TOOLATHLON_LOCAL_QWEN_TOOLCALL_PREFLIGHT_20261003_V1.json",
+    "prior_preflight_workflow_run_id": 37095419706,
+    "incremental_spend_usd": 0
+  },
+  "interface": {
+    "forced_tool_name": "submit_science_proposal",
+    "tool_choice": "required",
+    "exactly_one_tool_call": true,
+    "parallel_tool_calls": false,
+    "external_network_fallback": false,
+    "exact_model_identity_required": true,
+    "endpoint_must_be_loopback": true,
+    "brain_deterministic_finish": true,
+    "substrate_execution_authority": false,
+    "substrate_verification_authority": false,
+    "substrate_finish_authority": false
+  },
+  "frozen_acceptance_state_after_tranche1": {
+    "total_slots": 210,
+    "consumed_slots": 3,
+    "successes": 0,
+    "final_zeros": 3,
+    "unconsumed_slots": 207,
+    "required_successes_total": 124,
+    "successes_still_required": 124,
+    "required_success_fraction_of_remaining": 0.5990338164251208,
+    "fail_lock_total_failures": 87,
+    "failures_remaining_before_fail_lock": 84
+  },
+  "preconditions_before_any_new_terminal_slot": [
+    "INDEPENDENT_VERIFY_EXACT_PLANNER_V2_AGENT_V2_AND_TEST_BLOBS",
+    "START_EXACT_PINNED_LOCAL_QWEN_LLAMA_CPP_ROUTE_AT_ZERO_INCREMENTAL_SPEND",
+    "PASS_FORCED_SUBMIT_SCIENCE_PROPOSAL_TOOL_CALL_CONTRACT_ON_SYNTHETIC_PROMPTS_ONLY",
+    "PASS_BRAIN_DETERMINISTIC_FINISH_AND_COMMAND_POLICY_TESTS",
+    "PROVE_NO_EXTERNAL_NETWORK_FALLBACK",
+    "BIND_NEW_EXECUTION_CAPSULE_AND_EXCLUDE_ALL_THREE_CONSUMED_SLOT_IDS",
+    "ISSUE_NEW_EXPLICIT_SLOT_AUTHORITY_ONLY_AFTER_ALL_PRECONDITIONS_PASS"
+  ],
+  "terminal_task_content_read": 0,
+  "new_terminal_trials_executed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
