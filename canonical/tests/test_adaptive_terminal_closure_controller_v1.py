@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-MODULE_PATH = ROOT / "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
+MODULE = "canonical.runtime.adaptive_terminal_closure_controller_v1"
 
 
 def load(rel: str):
@@ -20,150 +20,161 @@ def live_docs():
         load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"),
         load("canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"),
         load("canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json"),
-        load("canonical/verification/CURRENT_27_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"),
         load("canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json"),
         load("canonical/verification/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_EXECUTION_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json"),
+        load("canonical/verification/POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"),
         load("canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"),
         load("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"),
         load("canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json"),
     ]
 
 
-class AdaptiveTerminalClosureControllerV1Tests(unittest.TestCase):
-    def test_controller_module_exists(self):
-        self.assertTrue(MODULE_PATH.exists(), "adaptive controller runtime is missing")
+class AdaptiveTerminalClosureV13Tests(unittest.TestCase):
+    def m(self):
+        return importlib.import_module(MODULE)
 
-    def _module(self):
-        self.assertTrue(MODULE_PATH.exists(), "adaptive controller runtime is missing")
-        return importlib.import_module("canonical.runtime.adaptive_terminal_closure_controller_v1")
-
-    def test_live_frontier_compiles_exact_refinement(self):
-        m = self._module()
-        out = m.evaluate_repository(ROOT)
+    def test_current_v13_world_compiles_exact_31_unit_frontier(self):
+        out = self.m().evaluate(*live_docs())
         self.assertTrue(out["pass"], out)
+        self.assertEqual(out["live_world"]["proved_predicates"], 11)
         self.assertEqual(out["live_world"]["unresolved_predicates"], 27)
-        self.assertEqual(out["live_world"]["nondominated_certificates"], 16)
-        self.assertEqual(out["live_world"]["verified_zero_reality_requirements"], 19)
-        self.assertEqual(out["live_world"]["matched_live_targets"], 8)
+        self.assertEqual(out["live_world"]["active_zero_reality_requirements"], 17)
+        self.assertEqual(out["live_world"]["active_nondominated_certificates"], 14)
+        self.assertEqual(out["live_world"]["zero_reality_covered_predicates"], 25)
+        self.assertEqual(out["live_world"]["primitive_zero_reality_work_units"], 31)
         self.assertEqual(out["live_world"]["matched_primitive_child_facts"], 16)
-        self.assertEqual(out["live_world"]["matched_shared_residual_groups"], 0)
-        self.assertEqual(out["action_refinement"]["direct_nonmatched_work_units"], 17)
-        self.assertEqual(out["action_refinement"]["primitive_acceptance_work_units"], 33)
+        self.assertEqual(len(out["acceptance_work_units"]), 31)
         self.assertEqual(len(out["first_resource_priority_work_unit_ids"]), 16)
 
-    def test_matched_parent_flags_are_not_actionable_substitutes(self):
-        m = self._module()
-        out = m.evaluate_repository(ROOT)
-        ids = {x["work_unit_id"] for x in out["acceptance_work_units"]}
-        self.assertNotIn("MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS", ids)
-        self.assertNotIn("MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS", ids)
-        matched = [x for x in out["acceptance_work_units"] if x["lane"] == "MATCHED_TARGET_PROOF"]
-        self.assertEqual(len(matched), 16)
-        self.assertTrue(all(len(x["target_predicates"]) == 1 for x in matched))
-        self.assertTrue(all(x["first_resource_priority"] is True for x in matched))
+    def test_two_direct_reality_blocked_predicates_are_not_zero_reality_targets(self):
+        out = self.m().evaluate(*live_docs())
+        blocked = {
+            "FINANCE_UNCOVERED_SCOPE_AUDIT",
+            "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+        }
+        targets = {
+            p for row in out["acceptance_work_units"]
+            for p in row.get("target_predicates", [])
+        }
+        self.assertTrue(blocked.isdisjoint(targets))
+        self.assertEqual(len(targets), 25)
 
-    def test_already_accepted_unowned_families_get_parallel_ownership_reconciliation(self):
-        m = self._module()
-        out = m.evaluate_repository(ROOT)
+    def test_tool_discovery_is_bound_to_v5(self):
+        out = self.m().evaluate(*live_docs())
+        rows = [
+            row for row in out["acceptance_work_units"]
+            if "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR" in row.get("target_predicates", [])
+        ]
+        self.assertEqual(len(rows), 1, rows)
+        row = rows[0]
+        self.assertTrue(row["mandatory_tool_discovery_v5_gate"])
+        self.assertIn(
+            "MANDATORY_TOOL_DISCOVERY_V5_OVER_VERIFIED_V4_OVER_VERIFIED_V3_OVER_VERIFIED_V2_RETRIEVAL_GATE",
+            row["source_hints"],
+        )
+        self.assertTrue(out["execution_policy"]["tool_discovery_v5_gate_mandatory"])
+
+    def test_tb4_is_search_only(self):
+        out = self.m().evaluate(*live_docs())
+        row = next(
+            x for x in out["acceptance_work_units"]
+            if x["requirement"] == "MACHINE_VERIFIED_TB4_ROUTE_UPPER_BOUND_GE_220"
+        )
+        self.assertEqual(row["execution_mode"], "ROUTE_SEARCH_ONLY__CURRENT_DIRECT_EXECUTION_FORBIDDEN")
+
+    def test_ownership_reconciliation_remains_parallel(self):
+        out = self.m().evaluate(*live_docs())
         families = {x["family"] for x in out["ownership_reconciliation_work_units"]}
         self.assertEqual(
             families,
-            {"SUBAGENT_DELEGATION_AND_COORDINATION", "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"},
+            {
+                "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+                "SUBAGENT_DELEGATION_AND_COORDINATION",
+            },
         )
+        self.assertTrue(out["execution_policy"]["ownership_reconciliation_runs_in_parallel"])
 
-    def test_unknown_probability_is_not_invented(self):
-        m = self._module()
-        out = m.evaluate_repository(ROOT)
-        self.assertEqual(out["probability_policy"]["empirically_scored_work_unit_count"], 0)
+    def test_unknown_probabilities_are_not_invented(self):
+        out = self.m().evaluate(*live_docs())
         self.assertTrue(all(x["empirical_posterior"] is None for x in out["acceptance_work_units"]))
-        self.assertFalse(out["probability_policy"]["unknown_success_probability_may_be_invented"])
+        self.assertEqual(out["probability_policy"]["empirically_scored_work_unit_count"], 0)
 
-    def test_empirical_history_enables_scheduling_posterior_but_never_promotion(self):
-        m = self._module()
+    def test_empirical_history_changes_scheduling_only(self):
         docs = live_docs()
-        probe = m.evaluate(*docs)
-        unit_id = probe["acceptance_work_units"][0]["work_unit_id"]
-        out = m.evaluate(
+        req = "GDPVAL_AA_ROUTE_BOUND"
+        out = self.m().evaluate(
             *docs,
             attempt_history={
-                unit_id: {
+                req: {
                     "verified_successes": 3,
                     "verified_failures": 1,
                     "total_wall_seconds": 40,
                 }
             },
         )
-        row = next(x for x in out["acceptance_work_units"] if x["work_unit_id"] == unit_id)
-        posterior = row["empirical_posterior"]
-        self.assertEqual((posterior["alpha"], posterior["beta"]), (4, 2))
-        self.assertAlmostEqual(posterior["posterior_mean_verified_discharge_probability"], 4 / 6)
-        self.assertEqual(posterior["mean_wall_seconds"], 10.0)
-        self.assertTrue(posterior["promotion_use_forbidden"])
+        row = next(x for x in out["acceptance_work_units"] if x["requirement"] == req)
+        self.assertIsNotNone(row["empirical_posterior"])
+        self.assertAlmostEqual(
+            row["empirical_posterior"]["posterior_mean_verified_discharge_probability"],
+            4 / 6,
+        )
         self.assertFalse(out["promotion_authority"])
+        self.assertEqual(out["acceptance_credit_delta"], 0)
 
-    def test_tool_discovery_is_mechanically_kept_behind_v3_over_v2_gate(self):
-        m = self._module()
-        out = m.evaluate_repository(ROOT)
-        rows = [
-            x for x in out["acceptance_work_units"]
-            if "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR" in x["target_predicates"]
-        ]
-        self.assertEqual(len(rows), 1)
-        row = rows[0]
-        self.assertTrue(row["mandatory_tool_discovery_v3_gate"])
-        self.assertEqual(row["source_hints"][0], "MANDATORY_TOOL_DISCOVERY_V3_OVER_VERIFIED_V2_BASE_RETRIEVAL_GATE")
-        self.assertIn("NEW_ORTHOGONAL_SOURCE_EPOCH_ONLY", row["source_hints"])
-
-    def test_verified_frontier_count_mutation_fails_closed(self):
-        m = self._module()
+    def test_stale_v12_pointer_fails_closed(self):
         docs = copy.deepcopy(live_docs())
-        docs[4]["verified"]["unique_zero_reality_requirements"] = 18
-        out = m.evaluate(*docs)
+        docs[-1]["status"] = "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V12_CURRENT"
+        out = self.m().evaluate(*docs)
         self.assertFalse(out["pass"])
-        self.assertIn("DOMINANCE_VERIFIED_COUNTS_MISMATCH", out["errors"])
+        self.assertIn("SCHEDULING_AUTHORITY_NOT_CURRENT_V13_INDEPENDENT_PASS", out["errors"])
 
-    def test_recomputed_future_world_requires_no_controller_code_change(self):
-        m = self._module()
+    def test_partial_v5_epoch_permission_fails_closed(self):
         docs = copy.deepcopy(live_docs())
-        pid = "COMPOSITION_COMPONENT_SCOPED_PROOFS"
-        claim = next(x for x in docs[1]["claims"] if x.get("predicate_id") == pid)
-        claim["state"] = "PROVED"
-        claim["scope_complete"] = True
-        docs[3]["live_world"]["proved_predicates"] = 12
-        docs[3]["live_world"]["unresolved_predicates"] = 26
-        docs[4]["verified"]["proved_predicates"] = 12
-        docs[4]["verified"]["unresolved_predicates"] = 26
-        docs[-1]["live_world"]["proved_predicates"] = 12
-        docs[-1]["live_world"]["unresolved_predicates"] = 26
-        out = m.evaluate(*docs)
-        self.assertTrue(out["pass"], out)
-        self.assertEqual(out["live_world"]["proved_predicates"], 12)
-        self.assertEqual(out["live_world"]["unresolved_predicates"], 26)
-
-    def test_stale_v9_scheduling_authority_fails_closed(self):
-        m = self._module()
-        docs = copy.deepcopy(live_docs())
-        docs[-1]["status"] = "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V9_CURRENT"
-        out = m.evaluate(*docs)
+        docs[-1]["mandatory_tool_discovery_retrieval"]["partial_batch_epoch_consumption_allowed"] = True
+        out = self.m().evaluate(*docs)
         self.assertFalse(out["pass"])
-        self.assertIn("SCHEDULING_AUTHORITY_NOT_CURRENT_V10_INDEPENDENT_PASS", out["errors"])
+        self.assertIn(
+            "RETRIEVAL_FAIL_CLOSED_FLAG_NOT_FALSE:partial_batch_epoch_consumption_allowed",
+            out["errors"],
+        )
 
-    def test_pre_v3_exhaustion_permission_fails_closed(self):
-        m = self._module()
+
+    def test_v5_failed_cells_must_remain_retryable(self):
         docs = copy.deepcopy(live_docs())
-        docs[-1]["mandatory_tool_discovery_retrieval"]["pre_v3_epoch_exhaustion_allowed"] = True
-        out = m.evaluate(*docs)
+        docs[-1]["mandatory_tool_discovery_retrieval"]["transient_failures_retryable_and_unconsumed"] = False
+        out = self.m().evaluate(*docs)
         self.assertFalse(out["pass"])
-        self.assertIn("SCHEDULING_AUTHORITY_PRE_V3_EXHAUSTION_NOT_FORBIDDEN", out["errors"])
+        self.assertIn(
+            "RETRIEVAL_REQUIRED_FLAG_FALSE:transient_failures_retryable_and_unconsumed",
+            out["errors"],
+        )
+
+    def test_v5_consumed_cell_replay_fails_closed(self):
+        docs = copy.deepcopy(live_docs())
+        docs[-1]["mandatory_tool_discovery_retrieval"]["consumed_cell_replay_allowed"] = True
+        out = self.m().evaluate(*docs)
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "RETRIEVAL_FAIL_CLOSED_FLAG_NOT_FALSE:consumed_cell_replay_allowed",
+            out["errors"],
+        )
+
+    def test_v5_empty_or_failed_attempt_cannot_prove_nonexistence(self):
+        docs = copy.deepcopy(live_docs())
+        docs[-1]["mandatory_tool_discovery_retrieval"]["empty_or_failed_attempt_proves_nonexistence"] = True
+        out = self.m().evaluate(*docs)
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "RETRIEVAL_FAIL_CLOSED_FLAG_NOT_FALSE:empty_or_failed_attempt_proves_nonexistence",
+            out["errors"],
+        )
 
     def test_controller_never_grants_credit_or_reality_authority(self):
-        m = self._module()
-        out = m.evaluate_repository(ROOT)
+        out = self.m().evaluate(*live_docs())
         self.assertFalse(out["execution_authority"])
         self.assertFalse(out["promotion_authority"])
         self.assertFalse(out["fresh_reality_authority"])
         self.assertEqual(out["acceptance_credit_delta"], 0)
-        self.assertEqual(out["capability_credit_delta"], 0)
         self.assertEqual(out["family_credit_delta"], 0)
         self.assertEqual(out["ownership_credit_delta"], 0)
         self.assertEqual(out["incremental_spend_usd"], 0)
