@@ -1,0 +1,278 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
+  "action_id": "RECONCILE-COMPOSITION-4-OF-12-SLICE-V6-20261003",
+  "status": "CURRENT_BASE_ZERO_REALITY_RECEIPT_SATURATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_PARENT_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "07226b57c54962129f4020c19b2f21994552eece",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "COMPOSITION_COMPONENT_SCOPED_PROOFS_CURRENT_SLICE_HAS_NOT_INHERITED_NEW_INDEPENDENT_TOOL_DISCOVERY_COMPONENT_RECEIPT",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::COMPOSITION_COMPONENT_SCOPED_PROOFS_CURRENT_SLICE_HAS_NOT_INHERITED_NEW_INDEPENDENT_TOOL_DISCOVERY_COMPONENT_RECEIPT",
+  "action_kind": "RECONCILE_FRONTIER",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "COMPOSITION_SCOPED_COMPONENT_PROOFS_3_OF_12_TO_4_OF_12__8_OPEN__PARENT_COMPOSITION_AND_STRICT_OPUS55_ACCEPTANCE_UNCHANGED",
+  "stop_condition": "STOP_AFTER_EXACT_V6_SLICE_IS_INDEPENDENTLY_VERIFIED_AND_CURRENT_AUTHORITY_RECOMPUTED__THEN_REFRESH_MAIN_AND_FIXED_POINT",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_invention": "FORBIDDEN__RECEIPT_INTEGRATION_ONLY",
+    "provider_access_is_ownership": false,
+    "semantic_contract_policy": "NO_PARENT_COMPOSITION_CREDIT_FROM_COMPONENT_RECEIPT_ALONE"
+  },
+  "ownership_tests": {
+    "applicability": "NO_OWNERSHIP_PROMOTION_IN_THIS_ACTION",
+    "ownership_credit_delta": 0
+  },
+  "reasoning_durability": {
+    "real_objective": "Reduce the live Composition component-proof blocker using an already independently verified current-source Tool Discovery receipt.",
+    "governing_invariants": [
+      "NO_FRESH_REALITY",
+      "NO_HISTORICAL_QUARANTINED_RECEIPT_REUSE",
+      "NO_ADJACENT_CODING_OR_DEBUGGING_CREDIT",
+      "NO_PARENT_COMPOSITION_CREDIT"
+    ],
+    "material_premises": [
+      "CURRENT_COMPOSITION_AUTHORITY_IS_3_OF_12_MEMORY_RECOVERY_DELEGATION",
+      "TOOL_DISCOVERY_COMPONENT_BRIDGE_IS_INDEPENDENTLY_VERIFIED_CURRENT_SOURCE_AND_ACCEPTANCE_SCOPED",
+      "EXISTING_SLICER_ACCEPTS_ONLY_VERIFIED_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_EXACT_CLAIM_RECEIPTS"
+    ],
+    "evidence_refs": [
+      "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V5.json",
+      "canonical/verification/COMPOSITION_TOOL_DISCOVERY_SCOPE_COMPLETE_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "canonical/runtime/composition_component_proof_slicer_v1.py"
+    ],
+    "conclusion": "Add exactly the verified Tool Discovery component receipt to V5 and recompute the frozen 12-interface slice.",
+    "selected_route": "REUSE_EXISTING_COMPOSITION_SLICER_WITH_V5_PLUS_ONE_VERIFIED_TOOL_DISCOVERY_RECEIPT",
+    "rejected_material_alternatives": [
+      "REUSE_HISTORICAL_QUARANTINED_TOOL_DISCOVERY_RECEIPT",
+      "INFER_CODING_OR_DEBUGGING_BY_SHARED_INTERFACE_NAME",
+      "BUILD_NEW_SLICER",
+      "SPEND_FRESH_TERMINAL_REALITY"
+    ],
+    "uncertainties": [
+      "INDEPENDENT_EXACT_BYTE_V6_RECOMPUTE_NOT_YET_DURABLE_AT_ACTION_FREEZE"
+    ],
+    "assumptions": [
+      "MAIN_REMAINS_AT_BASE_07226B57_UNTIL_GENERATION_LOCK_REVALIDATION"
+    ],
+    "non_goals": [
+      "NO_COMPOSITION_PARENT_ACCEPTANCE",
+      "NO_STRICT_OPUS55_ACCEPTANCE_DELTA",
+      "NO_OWNERSHIP_DELTA",
+      "NO_FRESH_REALITY"
+    ],
+    "next_action": "RUN_SEPARATE_EXACT_BYTE_PUBLIC_RUNNER_VERIFICATION__IF_PASS_BIND_RECEIPT_AND_RECOMPUTE_CURRENT_COMPOSITION_AUTHORITY",
+    "supersession_conditions": [
+      "MAIN_MATERIAL_STATE_CHANGES_BEFORE_VERIFICATION_OR_MERGE",
+      "TOOL_DISCOVERY_BRIDGE_RECEIPT_INVALIDATED",
+      "NEWER_CURRENT_BASE_V6_SUCCESSOR_EXISTS"
+    ],
+    "supersedes": "COMPOSITION_V5_3_OF_12_SLICE_FOR_CURRENT_COMPONENT_ACCOUNTING_AFTER_TOOL_DISCOVERY_BRIDGE"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "07226b57c54962129f4020c19b2f21994552eece",
+    "real_outcome": "Shrink the terminal Composition proof residual by inheriting one already proved current-source component fact.",
+    "required_capability": "Truth-preserving deterministic component receipt saturation.",
+    "obs_goal": {
+      "real_outcome": "Advance Composition from three to four scoped-proved isolated components without overclaiming parent behavior.",
+      "proxy_goals_deleted": [
+        "NEW_SLICER_CODE",
+        "NEW_BENCHMARK_EXECUTION",
+        "HISTORICAL_RECEIPT_RESTORATION"
+      ],
+      "surviving_necessity": "Merged Tool Discovery bridge explicitly requires rerunning the frozen slicer with this new receipt."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V5",
+        "COMPOSITION_COMPONENT_PROOF_SLICER_V1",
+        "COMPOSITION_TOOL_DISCOVERY_SCOPE_COMPLETE_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1"
+      ],
+      "external_existing_routes_checked": [
+        "VERIFICATION_CAPSULE_RUNNER_FOR_INDEPENDENT_EXACT_BYTE_RECOMPUTE"
+      ],
+      "capability_work_deleted": "No new capability realization or slicer logic is needed.",
+      "surviving_gap": "Current slice omits the newly admissible Tool Discovery receipt."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_STALE_COMPONENT_SLICE",
+      "delete_bypass_substitute_options": [
+        "DELETE_STALE_TOOL_DISCOVERY_OPEN_STATE",
+        "REUSE_VERIFIED_BRIDGE_RECEIPT",
+        "REUSE_EXISTING_SLICER"
+      ],
+      "surviving_causal_blocker": "The current Composition slice has not consumed the verified Tool Discovery component receipt."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "V5_PLUS_ONE_VERIFIED_RECEIPT_EXISTING_SLICER",
+        "NEW_SLICER",
+        "HISTORICAL_QUARANTINED_RECEIPT",
+        "FRESH_REALITY"
+      ],
+      "losing_routes_reason": "Existing slicer plus one current verified receipt is exact and sufficient; alternatives add risk, duplicate logic, or violate scope/reality rules.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "The deterministic slicer is the existing oracle; separate public-runner exact-byte recomputation is required before current-state admission."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "TOOL_DISCOVERY_COMPONENT_OPEN_IN_COMPOSITION_V5"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING_SCOPE_COMPLETE_ACCEPTANCE"
+      ],
+      "fresh_reuse_plan": "After V6 verification, rerun current Composition authority and global fixed-point without waiting for sibling components."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_REPEAT_TOOL_DISCOVERY_SCOPE_PROOF",
+        "NO_REPEAT_MEMORY_RECOVERY_DELEGATION_PROOFS",
+        "NO_NEW_SLICER_DESIGN"
+      ],
+      "search_stop_decision": "The merged bridge names the exact existing slicer route and no competing current-base 4/12 successor dominates it.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "V5_PLUS_ONE_VERIFIED_RECEIPT_EXISTING_SLICER",
+      "NEW_SLICER",
+      "HISTORICAL_QUARANTINED_RECEIPT",
+      "FRESH_REALITY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "HISTORICAL_QUARANTINED_TOOL_DISCOVERY_RECEIPT",
+      "NEW_SLICER_IMPLEMENTATION",
+      "FRESH_TERMINAL_EXECUTION"
+    ],
+    "selected_surviving_route": "V5_PLUS_ONE_VERIFIED_RECEIPT_EXISTING_SLICER",
+    "why_selected_route_is_fastest_sufficient": "It changes only the receipt set, preserves exact frozen interfaces, uses the already verified slicer, and consumes zero reality.",
+    "expected_parent_level_state_change": "COMPOSITION_SCOPED_COMPONENT_PROOFS_3_OF_12_TO_4_OF_12__8_OPEN__PARENT_COMPOSITION_AND_STRICT_OPUS55_ACCEPTANCE_UNCHANGED",
+    "stop_condition": "STOP_AFTER_EXACT_V6_SLICE_IS_INDEPENDENTLY_VERIFIED_AND_CURRENT_AUTHORITY_RECOMPUTED__THEN_REFRESH_MAIN_AND_FIXED_POINT",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER consumes an already independently verified canonical receipt with an existing deterministic slicer; no external capability route is being selected."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "COMPOSITION_COMPONENT_RECEIPT_SATURATION_V6_001",
+    "inputs": [
+      "FROZEN_12_COMPONENT_INTERFACES",
+      "V5_THREE_CURRENT_RECEIPTS",
+      "VERIFIED_CURRENT_TOOL_DISCOVERY_COMPONENT_RECEIPT"
+    ],
+    "environment_state": "CURRENT_MAIN_BASE_07226B57C54962129F4020C19B2F21994552EECE",
+    "allowed_information": "CANONICAL_CURRENT_SOURCE_RECEIPTS_AND_FROZEN_INTERFACE_MANIFEST_ONLY",
+    "required_output_or_action": "Deterministically recompute scoped component proof coverage with exactly four admissible receipts.",
+    "success_condition": "Exactly memory, recovery, delegation, and tool discovery are SCOPED_PROVED; exactly eight interfaces remain OPEN; parent remains open; all credit deltas zero.",
+    "failure_condition": "Any other component gains credit, historical quarantined receipt is used, count differs from 4/12, or authority/credit becomes nonzero.",
+    "terminal_consequence": "Composition component residual decreases by one while strict terminal acceptance remains unchanged.",
+    "verification_route": "Separate verification-capsule-runner exact-byte recomputation before current authority update.",
+    "dependency_boundary": "No fresh task, comparator, model, provider, or hidden-case evidence.",
+    "scope": "MULTI_CAPABILITY_COMPOSITION_ISOLATED_COMPONENT_PROOF_ACCOUNTING_ONLY"
+  },
+  "prequalification_controls": {
+    "applicability": "NOT_APPLICABLE__NO_UNTOUCHED_QUALIFICATION_EVIDENCE_OR_OWNERSHIP_PROMOTION",
+    "fresh_evidence_spend": false,
+    "promotion": false
+  },
+  "qualification_stage": "NOT_APPLICABLE__ZERO_REALITY_RECEIPT_SATURATION",
+  "terminal_proof_control": {
+    "proof_obligation": "Show the new verified Tool Discovery bridge closes only the literal tool discovery component in the frozen Composition interface manifest.",
+    "hole_type": "STALE_COMPONENT_RECEIPT_SLICE",
+    "expected_certificate_or_receipt": "INDEPENDENT_PUBLIC_RUNNER_PASS__4_OF_12_CURRENT_SOURCE_COMPONENTS_SCOPED_PROVED__8_OPEN",
+    "validator": "EXISTING_COMPOSITION_COMPONENT_PROOF_SLICER_V1_PLUS_SEPARATE_PUBLIC_RUNNER",
+    "maximum_cheap_test_cost": "ZERO_TERMINAL_CASES",
+    "prerequisites": [
+      "V5_3_OF_12_CURRENT_SLICE",
+      "VERIFIED_TOOL_DISCOVERY_COMPONENT_BRIDGE"
+    ],
+    "contamination_risk": "NONE__NO_TERMINAL_CASE_CONTENT_READ",
+    "reversibility": "FULLY_REVERSIBLE_ACCOUNTING_GLUE",
+    "falsification_condition": "ANY_NON_TOOL_DISCOVERY_NEW_COMPONENT_CREDIT_OR_ANY_SOURCE_BLOB_DRIFT_OR_INDEPENDENT_RECOMPUTE_MISMATCH",
+    "critical_path_relation": "ACTIVE_GOAL_HIERARCHY_REQUIRES_EXISTING_RECEIPT_SATURATION_BEFORE_NEW_REALITY"
+  },
+  "continuous_obs": {
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      "CURRENT_COMPOSITION_AUTHORITY_V5",
+      "TOOL_DISCOVERY_COMPOSITION_BRIDGE_VERIFICATION",
+      "FROZEN_COMPOSITION_INTERFACE_MANIFEST"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "obs_layers_current": true,
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": "EXISTING_RECEIPT_SATURATION",
+    "information_boundary_complete": true,
+    "information_policy": "EXISTING_EVIDENCE_ONLY",
+    "dependencies": [
+      {
+        "dependency": "Brain main 07226b57c54962129f4020c19b2f21994552eece",
+        "status": "READY"
+      },
+      {
+        "dependency": "Tool Discovery Composition bridge verification",
+        "status": "READY"
+      }
+    ]
+  },
+  "reality_query_admission": {
+    "proof_obligation": "COMPOSITION_COMPONENT_RECEIPT_SATURATION",
+    "existing_evidence_search": "COMPLETE_FOR_THIS_COMPONENT_DELTA",
+    "evidence_scope_equivalence": "EXACT_LITERAL_TOOL_DISCOVERY_COMPONENT_ONLY",
+    "deductive_closure": "EXISTING_SLICER_IS_SUFFICIENT",
+    "counterfactual_terminal_distinctions": "NO_NEW_REALITY_REQUIRED_FOR_COMPONENT_ACCOUNTING_DELTA",
+    "dominated_observations_deleted": [
+      "FRESH_COMPOSITION_TASK_EXECUTION",
+      "FRESH_TOOL_DISCOVERY_EXECUTION"
+    ],
+    "candidate_observations": [],
+    "minimum_reality_cut": [],
+    "terminal_decision_value": "ONE_COMPONENT_PROOF_RESIDUAL_REMOVED",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "global_cut_snapshot": "5_OF_19_ACCEPTANCE__12_OF_38_ATOMIC__COMPOSITION_3_OF_12_BEFORE_THIS_RECONCILIATION",
+    "global_cut_membership": false
+  },
+  "global_terminal_proof_cut": {
+    "graph_snapshot": "CURRENT_5_OF_19_12_OF_38_WITH_COMPOSITION_COMPONENT_SUBGRAPH",
+    "existing_evidence_saturation": "NEW_TOOL_DISCOVERY_COMPONENT_RECEIPT_IS_ALREADY_INDEPENDENTLY_VERIFIED",
+    "deductive_closure": "EXISTING_COMPOSITION_SLICER_ONLY",
+    "shared_residual_compression": "COMPOSITION_COMPONENT_OPEN_COUNT_9_TO_8_IF_VERIFIED",
+    "candidate_observations": [],
+    "dominance_deletions": [
+      "FRESH_REALITY",
+      "HISTORICAL_QUARANTINED_RECEIPT_REUSE",
+      "NEW_SLICER"
+    ],
+    "exact_global_minimum_reality_cut": "UNCHANGED__NO_REALITY_QUERY_FOR_THIS_DELTA",
+    "proposed_action_membership": "ZERO_REALITY_EXISTING_RECEIPT_SATURATION",
+    "terminal_decision_value": "REDUCE_COMPOSITION_COMPONENT_SCOPED_PROOF_RESIDUAL"
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
