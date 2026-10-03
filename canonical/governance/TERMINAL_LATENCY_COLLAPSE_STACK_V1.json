@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_LATENCY_COLLAPSE_STACK_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__CAUSAL_ADMISSION_NOT_YET_GRANTED__ZERO_CREDIT",
+  "objective": "Remove avoidable verification, reality-acquisition, and reconciliation latency without weakening any terminal predicate, scope firewall, contamination rule, or ownership condition.",
+  "canonical_base_commit": "767e0f6be3f02ec0bbe5c48020989b009d74be0e",
+  "components": {
+    "branchless_proof_reuse": {
+      "runtime": "canonical/runtime/branchless_proof_promotion_gate_v1.py",
+      "tests": "canonical/tests/test_branchless_proof_reuse_v1.py",
+      "purpose": "Reuse an independently verified proof across unrelated branch drift only when all load-bearing payload and dependency-cone blob identities remain exact; current integration projection still requires verification.",
+      "current_blocker_binding": "P1_TOOL_DISCOVERY_AND_DUAL_JUDGMENT_HAVE_EXACT_BYTE_VERIFIERS_PENDING_WHILE_MAIN_CONTINUES_TO_ADVANCE"
+    },
+    "minimum_information_cut": {
+      "runtime": "canonical/runtime/terminal_information_cut_compiler_v1.py",
+      "tests": "canonical/tests/test_information_cut_v1.py",
+      "purpose": "Compute an exact minimum complete cover over only independently verified action candidates, allowing one explicitly verified action to discharge multiple primitive facts while paying reality cost once.",
+      "current_blocker_binding": "POST_DELEGATION_FRONTIER_HAS_39_PA1_ATOMS_AND_EXISTING_STRUCTURAL_RECOMPRESSION_IS_EXHAUSTED__P1_ALREADY_PROVES_ONE_SHARED_REALITY_BATCH_CAN_DOMINATE_SPLIT_BATCHES"
+    },
+    "closure_supertransaction": {
+      "runtime": "canonical/runtime/terminal_closure_supertransaction_guard_v1.py",
+      "tests": "canonical/tests/test_terminal_closure_transaction_v1.py",
+      "purpose": "Prevent partial promotion of derived terminal state by requiring acceptance, family, composition, frontier, and projection receipts on one exact source root and transaction id.",
+      "current_blocker_binding": "RECENT_DELEGATION_CLOSURE_REQUIRED_SEPARATE_ACCEPTANCE_COMPOSITION_AND_FRONTIER_RECONCILIATIONS__SERIAL_CONTROL_PLANE_LATENCY_IS_AVOIDABLE"
+    }
+  },
+  "protected_truth": {
+    "accepted_families": "3_OF_19",
+    "atomic_acceptance": "8_OF_38_PROVED__30_UNRESOLVED",
+    "composition": "2_OF_12_CURRENT_SOURCE_SCOPED_PROVED__10_OPEN",
+    "terminal_goal_achieved": false
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_THIS_STACK",
+    "NO_BRANCH_DRIFT_REUSE_IF_ANY_LOAD_BEARING_PAYLOAD_OR_DEPENDENCY_CONE_BLOB_CHANGES",
+    "CURRENT_INTEGRATION_PROJECTION_REVERIFICATION_REMAINS_MANDATORY",
+    "NO_INFORMATION_CUT_COVERAGE_FROM_UNVERIFIED_OR_NON_CONTENT_ADDRESSED_ACTIONS",
+    "NO_MULTIFACT_REALITY_CREDIT_UNLESS_ONE_VERIFIED_ACTION_EXPLICITLY_COVERS_ALL_CLAIMED_FACTS",
+    "NO_PARTIAL_CLOSURE_STATE_PROMOTION",
+    "NO_ACTIVE_AUTHORITY_PROMOTION_UNTIL_INDEPENDENT_EXACT_BYTE_VERIFICATION_AND_CURRENT_CAUSAL_CUT_ADMISSION"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_STACK_BYTES_ON_AN_ISOLATED_PUSH_ONLY_PUBLIC_RUNNER__THEN_APPLY_BRANCHLESS_REUSE_ONLY_TO_A_CURRENT_VERIFIED_CAPSULE_WITH_AN_INDEPENDENT_DEPENDENCY_CONE_RECEIPT__COMPILE_INFORMATION_CUT_ONLY_FROM CURRENT_VERIFIED_ACTION_CANDIDATES__KEEP STACK CANDIDATE IF CAUSAL_CUT_GATE DOES_NOT ADMIT A CONCRETE TERMINAL DELTA"
+}
