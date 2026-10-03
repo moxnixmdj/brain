@@ -852,8 +852,8 @@
     },
     "terminal_root_cause_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "e94469ffdeb7535f9a921a244e62cde6b84fda5c",
-      "status": "ACTIVE_FAIL_CLOSED__ROOT1_INACTIVE__EVIDENCE_POINTER_RECONCILED"
+      "git_blob_sha": "2e747250c0fb243f7cc9ae9fcd0fd71732761b8f",
+      "status": "ACTIVE_FAIL_CLOSED__ROOT1_INACTIVE__V2_ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT"
     },
     "opus55_acceptance_residual_v4": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
@@ -945,6 +945,19 @@
       "verification_path": "canonical/verification/UNIVERSAL_LEARNING_OPEN_WORLD_V4_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "8ed4f50303645921458b8429728ffca2c2ce293a",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT3_OPERATIVE_OVERLAY_ONLY__ZERO_ACCEPTANCE_AND_OWNERSHIP_CREDIT"
+    },
+    "root1_acquisition_closure_v2": {
+      "governance_path": "canonical/governance/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2.json",
+      "governance_git_blob_sha": "2ffec0cba9fc634d9b5a0bf896cfcba839aebfc3",
+      "activation_path": "canonical/governance/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "be600d377860ca83766bf9477bbba3ced75839a9",
+      "core_verification_path": "canonical/verification/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "core_verification_git_blob_sha": "65493307bab65a175c7e3885cc9e6c4da24523b5",
+      "activation_verification_path": "canonical/verification/ROOT1_ACQUISITION_CLOSURE_V2_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "activation_verification_git_blob_sha": "234c23e55e20d6a6ee07331d924882c3a68c5b24",
+      "final_reconciliation_path": "canonical/verification/ROOT1_V2_FINAL_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT1_ZERO_POSITIVE_GAPS__FROZEN_ENVELOPE_UNSEALED__ZERO_CREDIT",
+      "final_reconciliation_git_blob_sha": "5f3d17fed096d753d51cee95d056bed9046b23db"
     }
   },
   "residual": [
