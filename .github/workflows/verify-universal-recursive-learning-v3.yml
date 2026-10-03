@@ -11,12 +11,6 @@ on:
       - ".github/workflows/verify-universal-recursive-learning-v3.yml"
   push:
     branches: ["feature/universal-recursive-learning-v3-20261004-r2"]
-    paths:
-      - "canonical/runtime/universal_recursive_learning_engine_v3.py"
-      - "canonical/tests/test_universal_recursive_learning_engine_v3.py"
-      - "canonical/tests/test_universal_recursive_learning_engine_v3_binding.py"
-      - "canonical/governance/UNIVERSAL_RECURSIVE_LEARNING_ENGINE_V3.json"
-      - ".github/workflows/verify-universal-recursive-learning-v3.yml"
 
 permissions:
   contents: read
@@ -29,18 +23,42 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Compile V3
-        run: python -m py_compile canonical/runtime/universal_recursive_learning_engine_v3.py
-      - name: Run V3 tests
-        run: python -m pytest -q canonical/tests/test_universal_recursive_learning_engine_v3.py canonical/tests/test_universal_recursive_learning_engine_v3_binding.py
-      - name: Run V3 invariant proof
+      - name: Run diagnostic verifier
+        id: verifier
+        shell: bash
         run: |
-          python - <<'PY'
+          set +e
+          : > v3-verifier.log
+          echo "=== compile ===" >> v3-verifier.log
+          python -m py_compile canonical/runtime/universal_recursive_learning_engine_v3.py >> v3-verifier.log 2>&1
+          c1=$?
+          echo "compile_exit=$c1" >> v3-verifier.log
+
+          echo "=== tests ===" >> v3-verifier.log
+          python -m pytest -q canonical/tests/test_universal_recursive_learning_engine_v3.py canonical/tests/test_universal_recursive_learning_engine_v3_binding.py >> v3-verifier.log 2>&1
+          c2=$?
+          echo "tests_exit=$c2" >> v3-verifier.log
+
+          echo "=== invariant ===" >> v3-verifier.log
+          python - <<'PY' >> v3-verifier.log 2>&1
           from canonical.runtime.universal_recursive_learning_engine_v3 import prove_v3_invariants
           out = prove_v3_invariants()
+          print(out)
           assert out["pass"], out
           assert out["acceptance_credit_delta"] == 0
           assert out["ownership_credit_delta"] == 0
           assert out["promotion_authority"] is False
-          print(out)
           PY
+          c3=$?
+          echo "invariant_exit=$c3" >> v3-verifier.log
+
+          cat v3-verifier.log
+          if [ "$c1" -ne 0 ] || [ "$c2" -ne 0 ] || [ "$c3" -ne 0 ]; then
+            exit 1
+          fi
+      - name: Upload verifier transcript
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universal-recursive-learning-v3-verifier
+          path: v3-verifier.log
