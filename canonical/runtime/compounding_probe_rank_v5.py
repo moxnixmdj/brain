@@ -43,17 +43,22 @@ def rank(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]],
         item["future_transfer_lcb"]=str(transfer)
         item["proof_value_lcb"]=str(proof)
         item["future_burden_ub"]=str(burden)
+        v4_density=_f(row.get("value_density"),"v4_value_density")
         item["secondary_compounding_density"]=str(density)
+        item["v4_current_value_density"]=str(v4_density)
+        item["_v4_density"]=v4_density
         item["_secondary"]=density
         enriched.append(item)
 
     enriched.sort(key=lambda x:(
         -int(x["minimax_action_class_reduction"]),
+        -x["_v4_density"],
         -x["_secondary"],
         int(x["worst_case_remaining_action_classes"]),
         x["id"],
     ))
     for row in enriched:
+        row.pop("_v4_density",None)
         row.pop("_secondary",None)
     return {
         "schema":SCHEMA,
@@ -61,6 +66,7 @@ def rank(*,environment_id:str,goal_id:str,hypotheses:Sequence[Mapping[str,Any]],
         "rejected":rejected,
         "ranking_order":[
             "MINIMAX_ACTION_CLASS_REDUCTION_DESC",
+            "V4_CURRENT_VALUE_DENSITY_DESC",
             "SECONDARY_COMPOUNDING_DENSITY_DESC",
             "WORST_CASE_REMAINING_ACTION_CLASSES_ASC",
             "ACTION_ID_ASC",
