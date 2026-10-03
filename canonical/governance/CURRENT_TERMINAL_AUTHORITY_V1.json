@@ -14,13 +14,13 @@
   "sources": {
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-      "git_blob_sha": "48bb21479da4bd7e49bd0e1d3324cce34aa8f9a3",
-      "status": "FAIL_CLOSED__P1_SCOPE_QUARANTINE_PROPAGATED__2_OF_19_ACCEPTANCE_PASS__TERMINAL_FALSE"
+      "git_blob_sha": "8f176a50548d77cfba453197525b72a4b16d4fd2",
+      "status": "FAIL_CLOSED__P1_SCOPE_QUARANTINE_PROPAGATED__3_OF_19_ACCEPTANCE_PASS__TERMINAL_FALSE"
     },
     "ownership_matrix": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "git_blob_sha": "f0fed8856b17f06912ac715b8710d6c0b778291e",
-      "status": "RECONCILED__P1_SCOPE_QUARANTINE__2_OF_19_CURRENT_ACCEPTANCE"
+      "git_blob_sha": "077c9dd2570d426268f799c86f0534ffd80811ab",
+      "status": "RECONCILED__P1_SCOPE_QUARANTINE__3_OF_19_CURRENT_ACCEPTANCE__3_VERIFIED_OWNED"
     },
     "acceptance_calibration": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
@@ -107,14 +107,14 @@
     },
     "terminal_projection_consistency": {
       "governance_path": "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json",
-      "governance_git_blob_sha": "2ca1be79d8183602eac4ffbdf0765c063772f6d6",
+      "governance_git_blob_sha": "838608dd8f25535b39d663f0b0be5ec8f55a88a6",
       "runtime_path": "canonical/runtime/terminal_projection_consistency_v1.py",
-      "runtime_git_blob_sha": "3393dbecc7e02cba444ce05fc327d5d6fcf01a1c",
+      "runtime_git_blob_sha": "7a272aface836c2ede2320f25b55690a63976578",
       "tests_path": "canonical/tests/test_terminal_projection_consistency_v1.py",
-      "tests_git_blob_sha": "8855957dc121f971913d933a7c462891b50c4f28",
+      "tests_git_blob_sha": "3c3e0daa17110a17a54b1bbad47c6035b7b3a733",
       "workflow_path": ".github/workflows/verify-terminal-projection-consistency.yml",
       "workflow_git_blob_sha": "7c7e03a1e771d5fda0a280a01b042c058fb8eb8a",
-      "status": "HISTORICAL_PRE_DELEGATION_PROJECTION__SUPERSEDED_FOR_CURRENT_ACCEPTANCE_COUNTS__REVERIFY_POST_DELEGATION_PROJECTION_SEPARATELY"
+      "status": "CANDIDATE_POST_DELEGATION_CURRENT_PROJECTION__INDEPENDENT_CI_PASS_REQUIRED__ZERO_CREDIT"
     },
     "acceptance_residual_verdict_v10": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
@@ -287,13 +287,14 @@
       "status": "INDEPENDENTLY_FALSIFIED_SCOPE_TRANSPORT__SOURCE_SCOPE_NOT_PROVED_EXACT_OR_SUPERSET__ZERO_CREDIT"
     },
     "absolute_dominance_scope_completeness": {
-      "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FINITE_SAMPLE_ABSOLUTE_DOMINANCE_FAILS_CLOSED__TOOL_DISCOVERY_AND_DELEGATION_REOPENED__2_OF_19_CLOSED"
+      "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V2.json",
+      "git_blob_sha": "1409ca630c64f1c91757d88f63346a0d322be991",
+      "status": "CURRENT_RECONCILED__DELEGATION_UNIVERSAL_SCOPE_CLOSED__3_OF_19_CLOSED__TOOL_DISCOVERY_REMAINS_OPEN"
     },
     "acceptance_predicate_evidence_bindings_reconciled": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "af83f4899169e81017767c3316ddcf6b61da5ef6",
-      "status": "AUTHORITY_RECONCILED__7_PROVED__31_UNRESOLVED__TWO_SCOPE_INCOMPLETE_ABSOLUTE_CEILING_CLAIMS_REOPENED"
+      "git_blob_sha": "7885a827b1483bfb38315c1f492848f7e4680285",
+      "status": "AUTHORITY_RECONCILED__8_PROVED__30_UNRESOLVED__DELEGATION_CLOSED__TOOL_DISCOVERY_SCOPE_OPEN"
     },
     "protocol_implication_batch_scope_v2": {
       "path": "canonical/verification/PROTOCOL_IMPLICATION_BATCH_SCOPE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -540,6 +541,11 @@
       "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__DELEGATION_ONLY_NEW_FAMILY_CLOSURE__3_OF_19"
+    },
+    "absolute_dominance_scope_completeness_v1_historical": {
+      "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+      "git_blob_sha": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
+      "status": "HISTORICAL_INDEPENDENT_FIREWALL__SUPERSEDED_FOR_CURRENT_COUNTS_BY_V2"
     }
   },
   "residual": [
