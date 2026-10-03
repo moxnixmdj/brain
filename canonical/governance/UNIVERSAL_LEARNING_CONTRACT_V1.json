@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_LEARNING_CONTRACT_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__STRUCTURAL_NOVELTY_ROUTING_THEOREM__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem_reframing": {
+    "old_overbroad_question": "MUST_EVERY_POSSIBLE_FUTURE_ENVIRONMENT_BE_ENUMERATED_OR_SEPARATELY_PROVED",
+    "candidate_replacement": "ALL_UNVERIFIED_ENVIRONMENTS_MUST_ENTER_ONE_FAIL_CLOSED_LEARNING_CONTROL_PATH__SEMANTIC_SUCCESS_RATE_REMAINS_EMPIRICAL",
+    "rule": "NOVELTY_IS_A_LEARNING_EVENT_NOT_A_NEW_CAPABILITY_CLASS__NO_CLAIM_OF_GUARANTEED_SUCCESS"
+  },
+  "exact_bound_components": {
+    "canonical/runtime/universal_learning_contract_v1.py": "51a6dde1898eb1b59f21e31d2fbd6e5931914756",
+    "canonical/tests/test_universal_learning_contract_v1.py": "52d555728584bb968e7a354c75ad82583d4b575d",
+    "canonical/runtime/universal_learning_acceptance_reducer_v1.py": "d92caa9a06c984c48d45995a1e7342126caedd4d",
+    "canonical/tests/test_universal_learning_acceptance_reducer_v1.py": "26a146e42470f9e3bca7e56467e04f6285a3faad",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py": "64c02edd568d95ec5ed54b7b8122183ce5b82e17",
+    "canonical/runtime/tool_discovery_information_safe_proof_v2.py": "5e8a953864e13ec76768c3e8920644107c65a644",
+    "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py": "c3324e574c1fafb6aaab443f49b7a9600966e754",
+    "canonical/runtime/public_source_federation_executor_v2.py": "96497b15a9c096b8e5cc471313ae165fceaedd07",
+    "canonical/runtime/acceptance_capability_source_gate_v2.py": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163"
+  },
+  "learning_channels": [
+    "TRANSFER_PRIOR_KNOWLEDGE",
+    "RETRIEVE_DIRECT_OR_INDIRECT_EVIDENCE",
+    "OBSERVE_ENVIRONMENT",
+    "SAFE_EXPERIMENT",
+    "DERIVE_AND_REASON"
+  ],
+  "candidate_universal_control_claims": [
+    "ONLY_LITERAL_VERIFIED_COVERAGE_MAY_USE_A_KNOWN_CAPABILITY_ROUTE",
+    "ALL_OTHER_COVERAGE_STATES_FAIL_CLOSED_TO_LEARNING",
+    "A_LEARNED_CANDIDATE_IS_UNTRUSTED_UNTIL_VERIFICATION_PASS",
+    "PROMOTION_REQUIRES_VERIFIED_STATE",
+    "ENVIRONMENT_OR_VERSION_CHANGE_INVALIDATES_PRIOR_TRUST_TO_UNKNOWN",
+    "VERIFIED_LEARNING_IS_REUSABLE_WITHOUT_REDISCOVERY_UNTIL_INVALIDATED"
+  ],
+  "existing_acceptance_atoms_required": {
+    "TOOL_LEARNING_SECOND_TASK_TRANSFER": "PROVED",
+    "TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION": "PROVED"
+  },
+  "target_acceptance_decomposition": {
+    "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "current_state": "OPEN",
+    "structural_question": "DOES_NOVELTY_REQUIRE_SEPARATE_ENVIRONMENT_ENUMERATION",
+    "candidate_structural_answer": "NO__IF_ALL_RELEVANT_EXECUTION_PATHS_ARE_PROVED_TO_PASS_THE_UNIVERSAL_LEARNING_GATE",
+    "remaining_irreducible_question": "MATCHED_EMPIRICAL_LEARNING_EFFECTIVENESS_NONINFERIORITY",
+    "acceptance_credit_before_empirical_and_separate_reducer": 0
+  },
+  "matched_empirical_certificate_requirements": [
+    "TARGET_DISTRIBUTION_FROZEN_BEFORE_RESULT_EXPOSURE",
+    "BRAIN_AND_OPUS_COMPARATOR_USE_MATCHED_OR_STRICTLY_JUSTIFIED_EQUIVALENT_HARNESS",
+    "HELD_OUT_OR_INFORMATION_SAFE_TASKS",
+    "CONTAMINATION_AND_PRIOR_EXPOSURE_CONTROLS_PASS",
+    "INDEPENDENT_TRIALS_OR_EQUIVALENT_VALID_UNCERTAINTY_MODEL",
+    "CONFIDENCE_LEVEL_AND_NONINFERIORITY_MARGIN_PREDECLARED",
+    "BRAIN_CONSERVATIVE_LOWER_BOUND_GE_OPUS_CONSERVATIVE_UPPER_BOUND_MINUS_PREDECLARED_MARGIN",
+    "INDEPENDENT_VERIFICATION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_EVERY_NOVEL_ENVIRONMENT_IS_SOLVABLE",
+    "NO_CLAIM_THAT_THE_PUBLIC_INTERNET_CONTAINS_EVERY_NEEDED_FACT",
+    "NO_FINITE_SAMPLE_TO_OPEN_WORLD_SUCCESS_INFERENCE",
+    "NO_UNIVERSAL_SEMANTIC_CORRECTNESS_CLAIM",
+    "NO_TOOL_LEARNING_ACCEPTANCE_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_BOUND_BYTES_AND_CONTROL_THEOREM__THEN_RUN_FAIL_CLOSED_ACCEPTANCE_REDUCER__IF_STRUCTURAL_PASS_RECOMPILE_TOOL_DISCOVERY_RESIDUAL_TO_MATCHED_EMPIRICAL_EFFECTIVENESS_ONLY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
