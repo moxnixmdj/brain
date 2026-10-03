@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V4_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_TRUTH_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Repair the V3 premature-selection counterexample without weakening the frozen Tool Discovery least-cost target.",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "falsification": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_V3_LEAST_COST_FALSIFICATION_V1.json",
+  "candidate_runtime": {
+    "path": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "git_blob_sha": "9485d6f791e6d5f53ed66246615f30b938238b4b"
+  },
+  "candidate_tests": {
+    "path": "canonical/tests/test_tool_discovery_dynamic_v4.py",
+    "git_blob_sha": "0125582ee4dbef732f2c84b6b70ac180d7f1a91e"
+  },
+  "interface_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json",
+  "repair_invariant": "NO_SELECT_OR_PROBE_WHILE_ANY_AVAILABLE_DISCOVERY_SOURCE_REMAINS_UNQUERIED",
+  "derived_conditional_implication": [
+    "FINITE_COMPLETE_AUTHORITATIVE_DISCOVERY_INTERFACE_PLUS_MONOTONIC_DISCOVERY_IMPLIES_ALL_IN_SCOPE_TOOL_IDENTITIES_VISIBLE_BEFORE_ROUTE_COMMITMENT",
+    "CORRECT_COST_AND_CONSTRAINT_METADATA_PLUS_GLOBAL_COST_ORDER_IMPLIES_NO_MORE_EXPENSIVE_ROUTE_IS_SELECTED_BEFORE_A_CHEAPER_ADMISSIBLE_ROUTE_IS_FALSIFIED_OR_POSITIVELY_RESOLVED",
+    "TRUTHFUL_EPOCH_BOUND_PROBES_PLUS_VERSION_INVALIDATION_PRESERVE_EVIDENCE_SOUNDNESS"
+  ],
+  "hard_nonclaims": [
+    "NO_CURRENT_EXTERNAL_DISCOVERY_INTERFACE_INSTANCE_ASSERTED_COMPLETE",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT_FROM_THIS_REPAIR",
+    "NO_UNIVERSAL_TARGET_CLOSURE_UNTIL_INTERFACE_INSTANCE_AND_REPAIRED_PROGRAM_ARE_INDEPENDENTLY_VERIFIED",
+    "NO_NEW_ACCEPTANCE_CASES",
+    "NO_TERMINAL_REPLAY"
+  ],
+  "expected_verified_delta": "REPLACE_UNSOUND_V3_PROGRAM_SIDE_CONDITIONAL_REFINEMENT_WITH_V4_DISCOVERY_COMPLETE_BEFORE_COMMITMENT_REFINEMENT__EXTERNAL_COMPLETE_INTERFACE_INSTANCE_REMAINS_OPEN",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
