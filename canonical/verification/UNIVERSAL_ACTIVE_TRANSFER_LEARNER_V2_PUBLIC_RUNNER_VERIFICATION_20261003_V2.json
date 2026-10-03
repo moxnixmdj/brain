@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_ACTIVE_TRANSFER_LEARNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V2",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__HARDENED_ACTIVE_TRANSFER_OPTIMIZATION__PROOF_CARRYING_RECEIPTS__ZERO_PROMOTION_AUTHORITY__ZERO_CREDIT",
+  "source_brain_pr": 1401,
+  "source_brain_ref": "feature/universal-learning-v2-active-transfer-20261003",
+  "verified_brain_head_sha": "a56eba54aaa001ba5929f01fd174ff5796c47c7e",
+  "supersedes_for_current_bytes": "canonical/verification/UNIVERSAL_ACTIVE_TRANSFER_LEARNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "exact_brain_blobs": {
+    "canonical/runtime/universal_active_transfer_learner_v2.py": "6afa7cc538f151f222c18962b13a7941d6b12bed",
+    "canonical/tests/test_universal_active_transfer_learner_v2.py": "b5bb5de707bbcd4dcdd4250b359a24bab261cddb",
+    "canonical/governance/UNIVERSAL_ACTIVE_TRANSFER_LEARNER_V2.json": "c9f2069f0fe4decf1dcefdfa81c8dfb52e67c020",
+    "canonical/verification/UNIVERSAL_LEARNING_CONTRACT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "2bff1082b81755ff5f8e8f0e97587090cc873283"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1420,
+    "merge_commit": "969dd3475e86d27e3a0220e7fabec4573c0924af",
+    "workflow_run_id": 37155959144,
+    "workflow_job_id": 111299257885,
+    "conclusion": "success",
+    "successful_steps": [
+      "Compile V2 kernel",
+      "Run copied Brain V2 tests",
+      "Run independent adversarial verifier"
+    ]
+  },
+  "verified": {
+    "exact_brain_blob_identities": true,
+    "copied_brain_tests_pass": true,
+    "minimum_novelty_delta": true,
+    "decision_transfer_proof_value_density_ranking": true,
+    "negative_or_zero_cost_action_shortcuts_fail_closed": true,
+    "explicit_hypothesis_elimination": true,
+    "decision_sufficiency_stopping": true,
+    "dependency_cone_invalidation": true,
+    "proof_carrying_skill_compilation_requires_independent_exact_byte_bound_success_receipts": true,
+    "opaque_receipt_labels_rejected": true,
+    "verified_episode_meta_learning_uses_same_value_density": true,
+    "direct_v2_helpers_grant_no_promotion_authority": true,
+    "v1_safety_base_preserved": true,
+    "zero_terminal_credit_preserved": true
+  },
+  "interpretation": "HARDENED_V2_COMPRESSES_NOVELTY_AND_LEARNING_COST_WITH_PROOF_CARRYING_REUSE__V1_REMAINS_SAFETY_AUTHORITY__NO_SEMANTIC_SUCCESS_OR_UNKNOWN_DOMAIN_ACCEPTANCE_IS_INFERRED",
+  "hard_nonclaims": [
+    "NO_UNIVERSAL_SEMANTIC_SUCCESS_CLAIM",
+    "NO_CLAIM_THAT_EVERY_NOVEL_ENVIRONMENT_IS_SOLVABLE",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_ABOVE_EXPONENTIAL_GROWTH_GUARANTEE"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
