@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS55_TOOL_ADAPTER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PRIMARY_PDF_POLICY_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "exact_blobs": {
+    "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f",
+    "canonical/tests/test_root2_hle_opus55_tool_adapter_v1.py": "42f7b723842a24c9fc5528262acefcd035f67b0b",
+    "canonical/governance/HLE_OPUS55_TOOL_POLICY_V1.json": "d2a2427b483fe1c06c6b1e6bc98d72bf07e7a730"
+  },
+  "primary_policy_extraction": {
+    "source": "Claude Opus 5.5 System Card PDF section 9.2",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1482,
+    "workflow_run_id": 37162391621,
+    "workflow_job_id": 111318337173,
+    "verifier_head_sha": "a8d0103dc03536433f7d1e1786f5a757f32ee369",
+    "conclusion": "success",
+    "observed_pattern_count": 153
+  },
+  "tool_contract": {
+    "web_search": "FOUR_ENGINE_BING_RSS_BING_DUCKDUCKGO_GOOGLE__BLOCKLIST_FILTERED",
+    "web_fetch": "BLOCK_INITIAL_AND_FINAL_REDIRECT_URL__CONTENT_HASHED",
+    "programmatic_tool_calling": "SINGLE_TYPED_INVOKE_BOUNDARY",
+    "code_execution": "RESTRICTED_PYTHON__NETWORK_RELATED_IMPORTS_FORBIDDEN__NOT_OS_LEVEL_SANDBOX_CLAIM",
+    "context_compaction": false,
+    "incremental_spend_usd": 0
+  },
+  "soundness": {
+    "pass": "A_SCORE_AT_OR_ABOVE_67_7_UNDER_THIS_CLEAN_STACK_CAN_SUPPORT_NONINFERIORITY_IF_REMAINING_FROZEN_PROTOCOL_TERMS_MATCH",
+    "fail": "A_SCORE_BELOW_67_7_IS_NOT_BY_ITSELF_PROOF_OF_INTRINSIC_CAPABILITY_INFERIORITY_WHEN_BRAIN_TOOL_IMPLEMENTATION_MAY_BE_STRICTLY_WEAKER_THAN_VENDOR_TOOLS",
+    "identical_vendor_backend_claim": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ADAPTER_EQUALS_ANTHROPIC_PROPRIETARY_TOOL_BACKEND",
+    "NO_CLAIM_RESTRICTED_PYTHON_IS_A_HARDENED_ADVERSARIAL_SANDBOX",
+    "NO_HLE_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
