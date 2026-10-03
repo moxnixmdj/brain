@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V12_PUBLIC_ACCOUNT_BOUNDARY_COMPRESSION__ZERO_CREDIT",
+  "exact_candidate": {
+    "cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json",
+      "git_blob_sha": "37631739d83ae0098a3c63a16bd23a1686d3bf12"
+    },
+    "delta": {
+      "path": "canonical/governance/ROOT2_PUBLIC_ACCOUNT_BOUNDARY_DELTA_20261003_V1.json",
+      "git_blob_sha": "e5e49002a1a3635062cdb580d5a85f5f4e0734a4"
+    }
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-v12-public-boundaries-20261003-sol",
+    "verifier_head_sha": "599d396326707968d45b547a45c8e8807e5c6083",
+    "workflow_run_id": 37157621217,
+    "workflow_job_id": 111304219083,
+    "conclusion": "success"
+  },
+  "verified": [
+    "V12_EXACT_STATE_PRESERVES_5_OF_19_FAMILIES__12_OF_38_ATOMS__TERMINAL_FALSE__ROOT1_POSITIVE_GAPS_ZERO",
+    "CHARTOGRAPHY_100_TASKS_TIMES_10_EPOCHS_TIMES_ONE_JUDGE_CALL_EQUALS_1000_JUDGE_CALLS",
+    "GEMINI_3_5_FLASH_STANDARD_FREE_TIER_INPUT_AND_OUTPUT_PRICE_ZERO",
+    "GEMINI_RATE_LIMITS_PROJECT_SCOPED__ACTIVE_LIMITS_ACCOUNT_BOUND__PUBLISHED_LIMITS_NOT_GUARANTEED",
+    "OSWORLD_V21_TASK_GATE_AUTO_APPROVED_AFTER_ACCEPTANCE",
+    "OSWORLD_V21_GATED_ASSET_ACCEPTANCE_STILL_REQUIRED",
+    "OSWORLD_V21_EXACT_RELEASE_COMPONENT_MATCHING_REQUIRED",
+    "OSWORLD_PUBLIC_RUNTIME_ASSETS_NOT_COMPLETE_GATED_ASSET_SNAPSHOT",
+    "FINANCE_30_30_20_10_5_5_PUBLIC_WEIGHTS_SUM_TO_ONE",
+    "HLE_REFERENCE_FLOW_INCLUDES_MODEL_PREDICTIONS_AND_MODEL_JUDGE"
+  ],
+  "accounting": {
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
