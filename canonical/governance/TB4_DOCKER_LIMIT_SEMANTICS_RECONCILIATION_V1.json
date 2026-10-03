@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_DOCKER_LIMIT_SEMANTICS_RECONCILIATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__PUBLIC_ZERO_CASE_PROBE_PENDING__ZERO_CREDIT__NO_EXECUTION_AUTHORITY",
+  "objective": "Recompile the frozen TB4 attainability upper bound if independent evidence falsifies the assumption that task.toml CPU and memory declarations are hard physical-host minima for the Docker route.",
+  "canonical_base_commit": "9a88fae67f870e72508b5c37d863d718db5e4294",
+  "prior_authority": {
+    "attainability_manifest": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
+    "attainability_verdict": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+    "minimum_carrier_cut": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json"
+  },
+  "independent_probe": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1143,
+    "required_workflow": "Verify TB4 Docker limit semantics",
+    "required_result": "PASS_ZERO_CASE_DOCKER_LIMIT_COUNTEREXAMPLE",
+    "status": "PENDING"
+  },
+  "semantic_delta_under_probe_pass": {
+    "old_inference": "TASK_DECLARED_CPU_OR_MEMORY_ABOVE_HOST_CAPACITY_IMPLIES_STRUCTURAL_UNRUNNABILITY",
+    "replacement": "FOR_HARBOR_DOCKER_AUTO_MODE_CPU_AND_MEMORY_VALUES_ARE_CONTAINER_LIMITS__HOST_CAPACITY_BELOW_A_LIMIT_DOES_NOT_BY_ITSELF_PROVE_STRUCTURAL_UNRUNNABILITY",
+    "still_hard_blocked_without_ACCELERATOR": [
+      "terminal-bench/fp8-rmsnorm-gemm",
+      "terminal-bench/jax-speedrun-gpu",
+      "terminal-bench/math-eval-grader"
+    ],
+    "non_gpu_rows_reopened_from_structural_zero_to_unknown_executability": [
+      "terminal-bench/distributed-dedup",
+      "terminal-bench/formal-crypto",
+      "terminal-bench/lake-temp-glm",
+      "terminal-bench/live-database-cutover",
+      "terminal-bench/medical-claims-processing",
+      "terminal-bench/shadow-relay",
+      "terminal-bench/takens-embedding-lean",
+      "terminal-bench/uefi-bootkit",
+      "terminal-bench/wdm-design"
+    ]
+  },
+  "conditional_score_math": {
+    "prior_remaining_creditable_tasks": 36,
+    "conditionally_reopened_non_gpu_tasks": 9,
+    "conditional_remaining_creditable_tasks": 45,
+    "trials_per_task": 5,
+    "conditional_upper_bound_successes": 225,
+    "required_successes": 220,
+    "headroom_successes": 5,
+    "conditional_attainability_state": "NOT_FALSIFIED__ROUTE_REOPENED_FOR_MINIMUM_REALITY_SELECTION",
+    "theorem": "(36_PLUS_9)_TIMES_5_EQUALS_225__AND__225_GE_220"
+  },
+  "critical_distinction": "REOPENED_MEANS_NOT_PROVED_IMPOSSIBLE__IT_DOES_NOT_MEAN_ANY_OF_THE_NINE_TASKS_WILL_SUCCEED_ON_THE_STANDARD_RUNNER",
+  "remaining_requirements_after_probe_pass": [
+    "INDEPENDENTLY_VERIFY_THIS_RECOMPILE_AGAINST_EXACT_FROZEN_SOURCE_BINDINGS",
+    "PRESERVE_GPU_ROWS_AS_BLOCKED_UNLESS_A_COMPARABLE_ZERO_COST_GPU_ROUTE_IS_BOUND",
+    "SELECT_THE_MINIMUM_FRESH_REALITY_CUT_FROM_REOPENED_NON_GPU_ROWS_WITHOUT_REPLAYING_IRREVERSIBLE_ZERO_TASKS",
+    "NO_ACCEPTANCE_CREDIT_UNTIL_REAL_FROZEN_CASE_RECEIPTS_EXIST"
+  ],
+  "hard_rules": [
+    "DO_NOT_MERGE_OR_ACTIVATE_IF_PR1143_DOES_NOT_INDEPENDENTLY_PASS",
+    "DO_NOT_TREAT_LIMIT_ACCEPTANCE_AS_TASK_SUCCESS",
+    "DO_NOT_READ_TASK_INSTRUCTIONS_OR_SOLUTIONS FOR_THIS_RECOMPILE",
+    "DO_NOT_EXECUTE_AN_ACCEPTANCE_CASE_FROM_THIS_CANDIDATE",
+    "DO_NOT_GRANT_SCORE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
