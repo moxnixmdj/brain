@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-03",
+  "intent_id": "TOOL_DISCOVERY_OBSERVABILITY_PARTITION_V1",
+  "objective": "Compile the observability lower bound into an exact scheduler cut so universal-proof work stops on the information-theoretically irreducible Tool Discovery partition.",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "allowed_changes": [
+    "ADD_ZERO_CREDIT_OBSERVABILITY_PARTITION_RUNTIME",
+    "ADD_ADVERSARIAL_PARTITION_TESTS",
+    "ADD_ZERO_CREDIT_GOVERNANCE_MINIMUM_REALITY_CUT"
+  ],
+  "forbidden_changes": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CREDIT",
+    "NO_TERMINAL_REPLAY",
+    "NO_TARGET_WEAKENING",
+    "NO_PROMOTION_OR_EXECUTION_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0
+}
