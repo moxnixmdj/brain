@@ -26,11 +26,23 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - name: Verify immutable V1 historical subjects
         run: |
-          set -euo pipefail
-          test "$(git hash-object canonical/runtime/adaptive_terminal_closure_controller_v1.py)" = "06d16ef1e8caa08835bc4e958c3047833bf52a32"
-          test "$(git hash-object canonical/tests/test_adaptive_terminal_closure_controller_v1.py)" = "874706e94596cde028bed872cc40f07f6fa0d843"
-          test "$(git hash-object canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json)" = "78dda53305200ed466099db8658840980b2126fc"
-          test "$(git hash-object canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_V10_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json)" = "bb3786357ba77d62de0f2782363119ff1a55030e"
-          echo "historical V10/V3 adaptive controller V1 integrity preserved; V2 owns current scheduling"
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected={
+            "canonical/runtime/adaptive_terminal_closure_controller_v1.py":"06d16ef1e8caa08835bc4e958c3047833bf52a32",
+            "canonical/tests/test_adaptive_terminal_closure_controller_v1.py":"874706e94596cde028bed872cc40f07f6fa0d843",
+            "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json":"78dda53305200ed466099db8658840980b2126fc",
+            "canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_V10_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json":"bb3786357ba77d62de0f2782363119ff1a55030e",
+          }
+          for path,want in expected.items():
+              data=Path(path).read_bytes()
+              got=hashlib.sha1(b"blob "+str(len(data)).encode()+b"\0"+data).hexdigest()
+              assert got==want,(path,got,want)
+          print("historical V10/V3 adaptive controller V1 integrity preserved; V2 owns current scheduling")
+          PY
