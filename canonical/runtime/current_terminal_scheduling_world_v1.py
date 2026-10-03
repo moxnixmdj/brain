@@ -16,7 +16,7 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime import tool_discovery_retrieval_authority_gate_v1 as tool_retrieval_gate
+from canonical.runtime import tool_discovery_retrieval_authority_gate_v2 as tool_retrieval_gate
 
 SCHEMA = "PROJECT_BRAIN_CURRENT_TERMINAL_SCHEDULING_WORLD_V1"
 TERMINAL_STATES = {"PROVED", "REFUTED"}
