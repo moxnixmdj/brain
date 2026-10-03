@@ -40,6 +40,10 @@ EXPECTED = {
     "github_provider_blob": "29b808935559382ab7ddc81aaa08fe0611a05df8",
     "backend_verification_path": "canonical/verification/GITHUB_PUBLIC_RETRIEVAL_SURFACES_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "backend_verification_blob": "ca5acd7afbf14b7cce568ec482c160c3795e57ba",
+    "multilingual_input_path": "canonical/governance/TOOL_DISCOVERY_MULTILINGUAL_RETRIEVAL_INPUT_V1.json",
+    "multilingual_input_blob": "a244205a759144bbe01f25c2c9101ef6045efd79",
+    "recall_verification_path": "canonical/verification/TOOL_DISCOVERY_RETRIEVAL_RECALL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "recall_verification_blob": "41b8c11d1d970889fb4645a1d08c38362d43b7dd",
 }
 
 
@@ -67,6 +71,7 @@ def validate(
     activation_verification: Mapping[str, Any],
     compiler_verification: Mapping[str, Any],
     backend_verification: Mapping[str, Any],
+    recall_verification: Mapping[str, Any],
     actual_blobs: Mapping[str, str],
 ) -> dict[str, Any]:
     errors: list[str] = []
@@ -175,6 +180,36 @@ def validate(
             if b_verified.get(field) is not True:
                 errors.append("BACKEND_VERIFICATION_FALSE:" + field)
 
+    if recall_verification.get("schema") != "PROJECT_BRAIN_TOOL_DISCOVERY_RETRIEVAL_RECALL_PUBLIC_RUNNER_VERIFICATION_20261003_V1":
+        errors.append("RECALL_VERIFICATION_SCHEMA_INVALID")
+    r_runner = recall_verification.get("independent_runner")
+    if not isinstance(r_runner, Mapping) or r_runner.get("conclusion") != "success":
+        errors.append("RECALL_INDEPENDENT_RUNNER_NOT_SUCCESS")
+    r_verified = recall_verification.get("verified")
+    if not isinstance(r_verified, Mapping):
+        errors.append("RECALL_VERIFIED_BLOCK_MISSING")
+    else:
+        expected_true = (
+            "chinese_variant_mutation_creates_detectable_false_negative",
+            "valid_route_top1_mutation_creates_detectable_false_negative",
+            "descriptionless_code_identifier_fixture_recovered",
+            "misleading_metadata_code_fixture_recovered",
+            "unsupported_boundaries_preserve_unknown",
+            "no_result_nonexistence_inference_forbidden",
+            "zero_credit_preserved",
+        )
+        for field in expected_true:
+            if r_verified.get(field) is not True:
+                errors.append("RECALL_VERIFICATION_FALSE:" + field)
+        if r_verified.get("finite_supported_fixture_recall") != 1.0:
+            errors.append("FINITE_SUPPORTED_FIXTURE_RECALL_NOT_1_0")
+        if r_verified.get("supported_fixture_count") != 24:
+            errors.append("FINITE_SUPPORTED_FIXTURE_COUNT_NOT_24")
+        if r_verified.get("supported_fixture_missed_count") != 0:
+            errors.append("FINITE_SUPPORTED_FIXTURE_MISS_NONZERO")
+        if r_verified.get("explicit_language_variant_count") != 13:
+            errors.append("EXPLICIT_LANGUAGE_VARIANT_COUNT_NOT_13")
+
     if action.get("new_reality_units") != 0:
         errors.append("TOOL_DISCOVERY_RETRIEVAL_EDGE_FRESH_REALITY_NONZERO")
 
@@ -183,7 +218,7 @@ def validate(
 
     return {
         "schema": SCHEMA,
-        "status": "PASS__LIVE_TOOL_DISCOVERY_EDGE_MECHANICALLY_BOUND_TO_VERIFIED_V2_RETRIEVAL_AUTHORITY",
+        "status": "PASS__LIVE_TOOL_DISCOVERY_EDGE_MECHANICALLY_BOUND_TO_VERIFIED_V2_RETRIEVAL_AUTHORITY_AND_RECALL_PACKAGE",
         "pass": True,
         "target_predicate": TARGET,
         "action_id": ACTION_ID,
@@ -214,6 +249,8 @@ def evaluate_repository(root: Path) -> dict[str, Any]:
         "router_blob": git_blob_sha(raw(EXPECTED["router_path"])),
         "github_provider_blob": git_blob_sha(raw(EXPECTED["github_provider_path"])),
         "backend_verification_blob": git_blob_sha(raw(EXPECTED["backend_verification_path"])),
+        "multilingual_input_blob": git_blob_sha(raw(EXPECTED["multilingual_input_path"])),
+        "recall_verification_blob": git_blob_sha(raw(EXPECTED["recall_verification_path"])),
     }
     return validate(
         load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
@@ -221,6 +258,7 @@ def evaluate_repository(root: Path) -> dict[str, Any]:
         load(EXPECTED["activation_verification_path"]),
         load(EXPECTED["compiler_verification_path"]),
         load(EXPECTED["backend_verification_path"]),
+        load(EXPECTED["recall_verification_path"]),
         actual_blobs,
     )
 
