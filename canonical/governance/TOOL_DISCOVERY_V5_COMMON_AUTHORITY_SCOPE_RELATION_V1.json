@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_V5_COMMON_AUTHORITY_SCOPE_RELATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_UNIVERSAL_SCOPE_RELATION__MATCHED_ACCEPTANCE_SEPARATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Bind OwnedToolAuthorityV5's arbitrary finite authority U to the exact frozen common Brain/Opus external action authority for each matched Tool Discovery episode, proving protocol scope completeness without claiming absolute omniscient performance or matched acceptance.",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "exact_candidate": {
+    "runtime": "canonical/runtime/tool_discovery_owned_universal_v5.py",
+    "runtime_git_blob_sha": "04a4a32197cd820f8a529421e8e28bc14f2c2332",
+    "tests": "canonical/tests/test_tool_discovery_owned_universal_v5.py",
+    "tests_git_blob_sha": "d4aba846af38e1c2f74f6d0391073b0e4faa40b0",
+    "theorem": "canonical/governance/TOOL_DISCOVERY_OWNED_UNIVERSAL_V5_THEOREM_V1.json",
+    "theorem_git_blob_sha": "2c422acb30242f0ca77b2aff11f858fcd27f1272"
+  },
+  "canonical_scope_authorities": {
+    "matched_protocol": {
+      "path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+      "git_blob_sha": "49181a12362ba3d640fc18d0251901dd49dce929"
+    },
+    "matched_superportfolio": {
+      "path": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+      "git_blob_sha": "d9ac894594ebcd2883520f7b7977a3548420541c"
+    },
+    "family_protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "behavioral_contract": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "prior_formalism_cut": {
+      "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_FORMALISM_CUT_V1.json",
+      "git_blob_sha": "e485b9729e8aea6bee2d75453167912023167fe8"
+    }
+  },
+  "universal_relation": {
+    "episode_domain": "ALL_FINITE_FROZEN_MATCHED_TOOL_DISCOVERY_EPISODES_WITH_IDENTICAL_BRAIN_OPUS_EXTERNAL_ACTION_AUTHORITY_AND_TOOL_BOUNDARY",
+    "authority_instantiation": "FOR_EACH_EPISODE__SET_V5_U_EQUAL_TO_THE_EXACT_COMMON_EXTERNAL_ACTION_AUTHORITY_A_FROZEN_FOR_BOTH_BRAIN_AND_OPUS",
+    "valid_route_scope": "ANY_TOOL_IDENTITY_OUTSIDE_A_IS_NONINVOCABLE_BY_BOTH_SIDES_AND_CANNOT_BE_A_VALID_MATCHED_ROUTE",
+    "identity_visibility": "A_IS_EVALUATOR_HELD__INITIAL_CANDIDATE_VISIBLE_IDENTITIES_MAY_BE_EMPTY__DISCOVERY_EXPOSES_PUBLIC_TOOL_IDENTITIES_ONLY",
+    "identity_completeness": "V5_DISCOVERY_SOURCE_UNION_EQUALS_U_BY_CONSTRUCTION__THEREFORE_EQUALS_A",
+    "capability_boundary": "TRUE_CAPABILITY_SETS_ARE_HIDDEN__CURRENT_EPOCH_SAFE_PROBE_RECEIPTS_ARE_THE_ONLY_CAPABILITY_TRUTH_INPUT",
+    "probe_permission_boundary": "SAFE_PROBE_CAPABILITIES_IS_PUBLIC_PERMISSION_METADATA__MISSING_PERMISSION_ON_A_CHEAPER_UNRESOLVED_ROUTE_CAUSES_DISTINCT_FAIL_CLOSED_ESCALATION",
+    "version_boundary": "AUTHORITY_REPLACEMENT_ADVANCES_EPOCH__STALE_DISCOVERY_AND_CAPABILITY_EVIDENCE_CANNOT_AUTHORIZE_CURRENT_SELECTION",
+    "constraint_boundary": "FROZEN_CONTRACT_CLASSIFIES_SCHEMA_PARSING_AND_EXACT_CONSTRAINT_FILTERING_AS_DETERMINISTIC_UPSTREAM__V5_CONSUMES_NORMALIZED_PUBLIC_ADMISSIBLE_BIT",
+    "acceptance_boundary": "UNIVERSAL_SCOPE_COMPLETENESS_DOES_NOT_IMPLY_MATCHED_NONINFERIORITY__FAIL_CLOSED_PERMISSION_GAPS_AND_OTHER_UNOBSERVABLE_DECISION_FACTS_REMAIN_MATCHED_ACCEPTANCE_CASES"
+  },
+  "formal_lemmas": [
+    {
+      "id": "L1_COMMON_AUTHORITY",
+      "statement": "Frozen matched parity requires same visible-information policy, same tool classes and same external action authority; superportfolio requires identical case payloads and tool boundaries."
+    },
+    {
+      "id": "L2_VALID_ROUTE_SUBSET",
+      "statement": "A matched-valid route must be invocable under the shared authority A; identities outside A are unavailable to both systems and cannot be omitted valid routes."
+    },
+    {
+      "id": "L3_ARBITRARY_U_INSTANTIATION",
+      "statement": "V5 is quantified over arbitrary finite U, so for every finite matched episode instantiate U=A without restricting the canonical episode population."
+    },
+    {
+      "id": "L4_UNKNOWN_IDENTITY_PRESERVED",
+      "statement": "V5 begins with zero visible identities and exhausts source discovery before route commitment, so unknown identities remain genuinely unknown until DISCOVER."
+    },
+    {
+      "id": "L5_COMPLETE_DISCOVERY",
+      "statement": "V5 assigns every U identity to exactly one source and theorem_invariants checks the discovered union equals registry_ids with no capability truth leaked."
+    },
+    {
+      "id": "L6_CURRENT_EVIDENCE_ONLY",
+      "statement": "Only current-epoch safe-probe receipts enter capability evidence; authority replacement invalidates stale evidence."
+    },
+    {
+      "id": "L7_PERMISSION_FAIL_CLOSED",
+      "statement": "If a cheaper unresolved route lacks probe permission, V5 emits a distinct fail-closed result rather than skipping it and falsely asserting global least-cost optimality."
+    },
+    {
+      "id": "L8_SCOPE_NOT_ACCEPTANCE",
+      "statement": "L1-L7 prove the protocol population is covered by the construction. They do not prove Brain matched terminal-success/valid-route bounds exceed Opus; that remains a separate acceptance route."
+    }
+  ],
+  "causal_effect": {
+    "blocker_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "primitive_fact_id": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+    "effect": "BINDS_ROUTE_OR_SCOPE"
+  },
+  "expected_if_independently_verified": {
+    "universal_scope_proved": true,
+    "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "unknown_identity_scope_preserved": true,
+    "brain_only_authority_narrowing": false,
+    "matched_acceptance_proved": false,
+    "terminal_cases_replayed": 0,
+    "new_reality_units_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_ABSOLUTE_OMNISCIENT_CEILING_CLAIM",
+    "NO_CLAIM_V5_FAIL_CLOSED_PERMISSION_GAPS_ARE_MATCHED_SUCCESSES",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_BRAIN_ONLY_REGISTRY_SUBSTITUTION",
+    "NO_FINITE_SAMPLE_GENERALIZATION",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "SEPARATE_MATCHED_ACCEPTANCE_REDUCTION_REQUIRED"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
