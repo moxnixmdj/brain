@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ROOT_CAUSE_STATE_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__ROOT1_NOT_OVERCLAIMED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_acceptance": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false
+  },
+  "roots": {
+    "root_1_capability_missing": {
+      "status": "OPEN_ONLY_WHERE_A_REQUIRED_CAPABILITY_LACK_IS_POSITIVELY_ESTABLISHED",
+      "verified_learning_control": {
+        "path": "canonical/verification/UNIVERSAL_LEARNING_CONTRACT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "2bff1082b81755ff5f8e8f0e97587090cc873283",
+        "proved": "ALL_UNVERIFIED_ENVIRONMENTS_ENTER_FAIL_CLOSED_LEARNING_CONTROL__VERIFICATION_PRECEDES_TRUST__ENVIRONMENT_CHANGE_INVALIDATES_TO_UNKNOWN",
+        "not_proved": "UNIVERSAL_SEMANTIC_LEARNING_SUCCESS"
+      },
+      "classification_rule": "UNKNOWN_OR_UNPROVED_CAPABILITY_MUST_NOT_BE_CLASSIFIED_AS_MISSING__ROOT1_REQUIRES_POSITIVE_EVIDENCE_OF_AN_OPERATIVE_CAPABILITY_GAP_AFTER_AVAILABLE_ACQUISITION_ROUTES_ARE_ACCOUNTED_FOR",
+      "current_examples_still_root1_candidates": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT__NO_VERIFIED_OPERATIVE_FINANCE_JUDGMENT_ROUTE",
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT__NO_VERIFIED_OPERATIVE_UNKNOWN_DOMAIN_JUDGMENT_ROUTE"
+      ]
+    },
+    "root_2_measurement_or_comparator": {
+      "status": "OPEN",
+      "rule": "WHEN_CAPABILITY_MAY_EXIST_BUT_EQUAL_OR_BETTER_STRENGTH_CANNOT_BE_VALIDLY_ESTABLISHED__CLASSIFY_ROOT2",
+      "preferred_discharge_order": [
+        "OBJECTIVE_CEILING_OR_FLOOR",
+        "FORMAL_DOMINANCE_OR_EQUIVALENCE",
+        "EXISTING_CONTENT_ADDRESSED_COMPARATOR_EVIDENCE",
+        "MATCHED_EMPIRICAL_COMPARISON",
+        "NEW_REALITY_ONLY_IF_IRREDUCIBLE"
+      ]
+    },
+    "root_3_scope_completeness": {
+      "status": "OPEN",
+      "rule": "WHEN_EVIDENCE_PROVES_ONLY_A_SUBSET_OF_THE_CLAIMED_SCOPE__CLASSIFY_ROOT3",
+      "preferred_discharge_order": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "GENUINELY_EXHAUSTIVE_FINITE_UNIVERSE",
+        "SCOPE_SAFE_STRONGER_PROOF",
+        "ADDITIONAL_ADMISSIBLE_EVIDENCE_ONLY_FOR_IRREDUCIBLE_RESIDUAL"
+      ],
+      "hard_rule": "FINITE_SAMPLE_SUCCESS_NEVER_IMPLIES_OPEN_WORLD_SCOPE_COMPLETENESS"
+    }
+  },
+  "tool_discovery_case": {
+    "acceptance_status": "CLOSED__5TH_ACCEPTED_FAMILY",
+    "predicate_status": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR__PROVED",
+    "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+    "implication": "THIS_CLOSES_TOOL_DISCOVERY_ACCEPTANCE_AND_DEMONSTRATES_THAT_A_PRIOR_APPARENT_EMPIRICAL_LEARNING_BLOCKER_CAN_COLLAPSE_INTO_FORMAL_ROOT2_ROOT3_REASONING__IT_DOES_NOT_PROVE_UNIVERSAL_CAPABILITY_ACQUISITION"
+  },
+  "scheduler_policy": {
+    "before_any_work": "CLASSIFY_EACH_CURRENT_UNRESOLVED_TARGET_AS_ROOT1_ROOT2_OR_ROOT3_FROM_CURRENT_EVIDENCE",
+    "unknown_is_not_missing": true,
+    "stale_scheduler_execution_forbidden": true,
+    "recompute_fixed_point_after_each_verified_delta": true,
+    "fresh_reality_before_zero_reality_fixed_point": false,
+    "no_credit_from_classification_itself": true
+  },
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  }
+}

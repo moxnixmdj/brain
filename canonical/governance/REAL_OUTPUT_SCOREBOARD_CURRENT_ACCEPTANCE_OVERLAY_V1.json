@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_REAL_OUTPUT_SCOREBOARD_CURRENT_ACCEPTANCE_OVERLAY_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_CURRENT_ACCEPTANCE_OVERLAY__HISTORICAL_SCOREBOARD_COUNTERS_UNCHANGED",
+  "base_scoreboard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+  "current_terminal_acceptance": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false
+  },
+  "latest_delta": {
+    "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "state": "PROVED",
+    "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+    "activation": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_ACTIVATION_V1.json"
+  },
+  "next_progress_event_target": "RECOMPUTE_CURRENT_ZERO_REALITY_FIXED_POINT_FROM_5_OF_19__12_OF_38__THEN_EXECUTE_ONLY_NONDOMINATED_ROOT1_ROOT2_ROOT3_RESIDUALS",
+  "accounting": {
+    "historical_scoreboard_counters_changed": false,
+    "capability_ownership_credit_delta": 0,
+    "fresh_reality_units": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_rules": [
+    "THIS_OVERLAY_SUPERSEDES_ONLY_CURRENT_ACCEPTANCE_PROJECTION_NOT_HISTORICAL_PROGRESS_EVENTS",
+    "TOOL_DISCOVERY_ACCEPTANCE_CLOSED_DOES_NOT_SELF_PROMOTE_WHOLE_FAMILY_OWNERSHIP",
+    "NO_FRESH_REALITY_BEFORE_POST_PROMOTION_FIXED_POINT_RECOMPILE"
+  ]
+}
