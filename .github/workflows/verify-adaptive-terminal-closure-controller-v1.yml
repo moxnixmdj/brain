@@ -1,6 +1,12 @@
-name: verify-adaptive-terminal-closure-controller-v1
+name: Verify adaptive terminal closure controller v1
 
 on:
+  push:
+    paths:
+      - "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
+      - "canonical/tests/test_adaptive_terminal_closure_controller_v1.py"
+      - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json"
+      - ".github/workflows/verify-adaptive-terminal-closure-controller-v1.yml"
   pull_request:
     paths:
       - "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
@@ -10,22 +16,22 @@ on:
       - "canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json"
       - "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json"
       - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+      - ".github/workflows/verify-adaptive-terminal-closure-controller-v1.yml"
   workflow_dispatch:
-
-permissions:
-  contents: read
 
 jobs:
   verify:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Verify frozen blob bindings
-        shell: python
         run: |
+          python - <<'PY'
           import json, subprocess, sys
           from pathlib import Path
 
@@ -46,6 +52,8 @@ jobs:
           if bad:
               print(bad)
               sys.exit(1)
+          print("exact adaptive closure blobs verified")
+          PY
       - name: Run adaptive controller falsification tests
         run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v1 -v
       - name: Emit zero-credit live projection
