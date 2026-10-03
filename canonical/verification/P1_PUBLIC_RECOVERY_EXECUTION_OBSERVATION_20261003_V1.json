@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_EXECUTION_OBSERVATION_V1",
+  "date": "2026-10-03",
+  "status": "FINALIZED_RESULT_OBSERVED__192_OF_192_PASS__ONE_REALITY_UNIT_USED__POST_RUN_REVIEW_REQUIRED",
+  "run": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37108111537,
+    "workflow_job_id": 111160509570,
+    "head_sha": "e489b191363c52c838b720cd759c99f638170c67",
+    "attempt": 1,
+    "conclusion": "success",
+    "artifact_id": 11268841992,
+    "artifact_digest": "sha256:e25bcf3fcab61b1fa00882c202a00714ecb81772378005e4934edc712a22d038"
+  },
+  "result": {
+    "cases": 192,
+    "passes": 192,
+    "failures": 0,
+    "wilson_95_lower_all": 0.9803841471883398,
+    "per_surface_cases": 64,
+    "per_surface_passes": 64,
+    "per_surface_wilson_95_lower": 0.9433739770288436,
+    "both_semantics_classes_present_every_case": true
+  },
+  "integrity": {
+    "execution_workflow_blob": "547f57f43a71f289b006602c1067a962171f38d4",
+    "beacon_sha256": "887b0f45d7651eaeb0ff1be8872352f12ee32e212a3607c2a205810a15dfa83d",
+    "fresh_reality_units_consumed": 1,
+    "terminal_v3_replayed": 0,
+    "rerun_credit": false,
+    "incremental_spend_usd": 0
+  },
+  "next": "SEPARATE_INDEPENDENT_POST_RUN_REVIEW_OF_SCOPE_TRANSPORT_AND_SCORING"
+}
