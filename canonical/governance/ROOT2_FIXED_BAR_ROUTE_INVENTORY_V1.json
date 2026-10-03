@@ -40,7 +40,9 @@
   "routes": [
     {
       "surface": "Terminal-Bench 4.0",
-      "predicate_ids": ["CODING_TB4_GE_66_4"],
+      "predicate_ids": [
+        "CODING_TB4_GE_66_4"
+      ],
       "target": ">=66.4%",
       "state": "CURRENT_ROUTE_MATHEMATICALLY_UNATTAINABLE",
       "exact_blocker": "CURRENT_MACHINE_VERIFIED_ROUTE_MAXIMUM_180_SUCCESSES__PASS_REQUIRES_220__180_LT_220",
@@ -48,99 +50,134 @@
     },
     {
       "surface": "FrontierCode v1.1 Main",
-      "predicate_ids": ["CODING_FRONTIERCODE_GE_54_4"],
+      "predicate_ids": [
+        "CODING_FRONTIERCODE_GE_54_4"
+      ],
       "target": ">=54.4%",
       "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_BLOCKED_EXECUTION_ROUTE_DELETED_ONLY",
       "next": "BIND_EXACT_EXISTING_FRONTIERCODE_COMPARABLE_ROUTE_OR_OTHERWISE_KEEP_PREDICATE_OPEN"
     },
     {
       "surface": "CursorBench 4.0",
-      "predicate_ids": ["CODING_CURSORBENCH_GE_57_8"],
+      "predicate_ids": [
+        "CODING_CURSORBENCH_GE_57_8"
+      ],
       "target": ">=57.8%",
       "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_BLOCKED_EXECUTION_ROUTE_DELETED_ONLY",
       "next": "BIND_EXACT_EXISTING_CURSORBENCH_COMPARABLE_ROUTE_OR_OTHERWISE_KEEP_PREDICATE_OPEN"
     },
     {
       "surface": "GDPval-AA v2.1",
-      "predicate_ids": ["PROWORK_GDPVAL_GE_1846"],
+      "predicate_ids": [
+        "PROWORK_GDPVAL_GE_1846"
+      ],
       "target": ">=1846 Elo",
       "state": "EXACT_OFFICIAL_ROUTE_OPEN__PUBLIC_SCOPE_EQUIVALENT_CANDIDATE_ONLY",
       "next": "OBTAIN_EXACT_AA_V2_1_ROUTE_OR_INDEPENDENTLY_PROVE_A_SCOPE_EQUIVALENT_ABSOLUTE_ROUTE_ADMISSIBLE_UNDER_THE_FROZEN_PREDICATE"
     },
     {
       "surface": "AA-Briefcase v1.1",
-      "predicate_ids": ["PROWORK_AA_BRIEFCASE_GE_1822","ARTIFACT_AA_BRIEFCASE_GE_1822"],
+      "predicate_ids": [
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
       "target": ">=1822 Elo",
       "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_PRIVATE_EXECUTION_ROUTE_DELETED_ONLY",
       "next": "BIND_COMPARABLE_AA_BRIEFCASE_ROUTE_OR_KEEP_BOTH_PREDICATES_OPEN__NO_CREDIT_FROM_OLD_ROUTE_DELETION"
     },
     {
       "surface": "AutomationBench",
-      "predicate_ids": ["AUTOMATIONBENCH_GE_40"],
+      "predicate_ids": [
+        "AUTOMATIONBENCH_GE_40"
+      ],
       "target": ">=40%",
       "state": "EXACT_OFFICIAL_PRIVATE_HOLDOUT_ROUTE_OPEN__PUBLIC_600_SCOPE_EQUIVALENT_ONLY",
       "next": "PROVE_PUBLIC_600_ABSOLUTE_ROUTE_SCOPE_SUFFICIENT_OR_BIND_EXACT_OFFICIAL_COMPARABLE_ROUTE"
     },
     {
       "surface": "Humanity's Last Exam with tools",
-      "predicate_ids": ["HLE_TOOLS_GE_67_7"],
+      "predicate_ids": [
+        "HLE_TOOLS_GE_67_7"
+      ],
       "target": ">=67.7%",
       "state": "PUBLIC_DATA_AND_BASE_EVAL_AVAILABLE__TOOLS_HARNESS_AND_ZERO_COST_GRADING_ROUTE_OPEN",
       "next": "FREEZE_EXACT_WITH_TOOLS_HARNESS_AND_ZERO_COST_SHORT_ANSWER_GRADING_ROUTE"
     },
     {
       "surface": "Terminal-Bench-Science 0.1",
-      "predicate_ids": ["TB_SCIENCE_GE_58_7"],
+      "predicate_ids": [
+        "TB_SCIENCE_GE_58_7"
+      ],
       "target": ">=58.7%",
       "state": "PUBLIC_HARNESS_AVAILABLE__HARD_ZERO_COST_EXECUTION_ROUTE_NOT_TERMINALLY_CLOSED",
       "next": "USE_ONLY_CURRENT_VERIFIED_PORTABLE_ROUTE_STATE__NO_NEW_CASES_BEFORE_ZERO_REALITY_FIXED_POINT"
     },
     {
       "surface": "Chartography with tools",
-      "predicate_ids": ["CHARTOGRAPHY_TOOLS_GE_89"],
+      "predicate_ids": [
+        "CHARTOGRAPHY_TOOLS_GE_89"
+      ],
       "target": ">=89%",
       "state": "PUBLIC_INPUTS_AND_HARNESS_AVAILABLE__ZERO_COST_EQUIVALENT_SCORER_OR_MODEL_JUDGE_ROUTE_OPEN",
       "next": "FREEZE_INDEPENDENT_ZERO_COST_EQUIVALENT_SCORER_OR_PROVE_EXISTING_DETERMINISTIC_GOLD_SCORING_SUFFICIENT"
     },
     {
       "surface": "OSWorld 2.1 partial",
-      "predicate_ids": ["OSWORLD_2_1_PARTIAL_GE_81_8"],
+      "predicate_ids": [
+        "OSWORLD_2_1_PARTIAL_GE_81_8"
+      ],
       "target": ">=81.8%",
       "state": "PUBLIC_RELEASE_AVAILABLE__ZERO_COST_COMPARABLE_ENVIRONMENT_ROUTE_OPEN",
       "next": "FREEZE_SELF_HOSTED_OR_INCLUDED_QUOTA_ENVIRONMENT_WITH_MATCHED_VERSION_AND_HARD_SPEND_STOP"
     },
     {
       "surface": "Finance & Accounting Index",
-      "predicate_ids": ["FINANCE_ACCOUNTING_INDEX_GE_61"],
+      "predicate_ids": [
+        "FINANCE_ACCOUNTING_INDEX_GE_61"
+      ],
       "target": ">=61 represented scope",
-      "state": "AUTHORITATIVE_BENCHMARK_IDENTITY_OR_ACCESS_UNRESOLVED",
-      "next": "RESOLVE_EXACT_BENCHMARK_IDENTITY_SCOPE_HARNESS_AND_SCORER_BEFORE_ANY_EXECUTION"
+      "state": "PRIMARY_SOURCE_IDENTITY_RESOLVED__EXACT_REPRODUCIBLE_BRAIN_SCORE_ROUTE_OPEN",
+      "next": "REUSE_EXISTING_COMPONENT_ROUTE_WORK__BIND_ONLY_INCREMENTAL_AA_OMNISCIENCE_LCR_AND_INDEX_AGGREGATION_DELTA__NO_EXECUTION_BEFORE_ZERO_REALITY_FIXED_POINT",
+      "identity_reconciliation": {
+        "path": "canonical/governance/FINANCE_ACCOUNTING_INDEX_IDENTITY_RECONCILIATION_V1.json",
+        "git_blob_sha": "dcd910e2af97c1648ab29d614552b072c66d647e"
+      }
     },
     {
       "surface": "Finance Agent v2",
-      "predicate_ids": ["FINANCE_AGENT_V2_GE_58_59"],
+      "predicate_ids": [
+        "FINANCE_AGENT_V2_GE_58_59"
+      ],
       "target": ">=58.59%",
       "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_GATED_EXECUTION_ROUTE_DELETED_ONLY",
       "next": "BIND_EXACT_COMPARABLE_ROUTE_OR_KEEP_PREDICATE_OPEN__NO_CREDIT_FROM_OLD_ROUTE_DELETION"
     },
     {
       "surface": "LiveBench Instruction Following",
-      "predicate_ids": ["LIVEBENCH_IF_GE_65_7"],
+      "predicate_ids": [
+        "LIVEBENCH_IF_GE_65_7"
+      ],
       "target": ">=65.7%",
       "state": "COMPARATOR_POPULATION_SCORER_AND_INPUT_ROUTE_PREQUALIFIED__BRAIN_SCORE_ONLY_OPEN",
       "next": "DO_NOT_EXECUTE_CASES_UNTIL_ZERO_REALITY_FIXED_POINT__THEN_RUN_ONLY_THE_MINIMUM_AUTHORIZED_BRAIN_SCORE_EVALUATION"
     },
     {
       "surface": "Vals MysteryMechanism",
-      "predicate_ids": ["MYSTERYMECHANISM_GE_49_55"],
+      "predicate_ids": [
+        "MYSTERYMECHANISM_GE_49_55"
+      ],
       "target": ">=49.55%",
       "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_BLOCKED_EXECUTION_ROUTE_DELETED_ONLY",
       "next": "BIND_EXACT_COMPARABLE_ROUTE_OR_KEEP_PREDICATE_OPEN__OLD_DOMINANCE_DELETED_ONLY_A_REQUIRED_EXECUTION_ROUTE_AND_GRANTED_ZERO_ACCEPTANCE_CAPABILITY_FAMILY_CREDIT"
     }
   ],
   "route_classes": {
-    "brain_score_only_open": ["LIVEBENCH_IF_GE_65_7"],
-    "current_route_mathematically_unattainable": ["CODING_TB4_GE_66_4"],
+    "brain_score_only_open": [
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "current_route_mathematically_unattainable": [
+      "CODING_TB4_GE_66_4"
+    ],
     "public_inputs_or_harness_but_execution_or_grading_route_open": [
       "HLE_TOOLS_GE_67_7",
       "TB_SCIENCE_GE_58_7",
@@ -151,7 +188,7 @@
       "PROWORK_GDPVAL_GE_1846",
       "AUTOMATIONBENCH_GE_40"
     ],
-    "identity_or_access_unresolved": ["FINANCE_ACCOUNTING_INDEX_GE_61"],
+    "identity_or_access_unresolved": [],
     "historical_execution_route_deleted_but_strict_predicate_still_open": [
       "CODING_FRONTIERCODE_GE_54_4",
       "CODING_CURSORBENCH_GE_57_8",
@@ -159,6 +196,9 @@
       "ARTIFACT_AA_BRIEFCASE_GE_1822",
       "FINANCE_AGENT_V2_GE_58_59",
       "MYSTERYMECHANISM_GE_49_55"
+    ],
+    "identity_resolved_exact_scoring_route_open": [
+      "FINANCE_ACCOUNTING_INDEX_GE_61"
     ]
   },
   "hard_rules": [
@@ -169,7 +209,7 @@
     "NO_SCORE_INHERITANCE_ACROSS_SURFACES",
     "NO_DUPLICATE_EXECUTION_FOR_THE_SHARED_AA_BRIEFCASE_SURFACE_IF_ONE_VALID_RUN_CAN_SEPARATELY_SATISFY_BOTH_PREDICATE_SCOPES"
   ],
-  "next": "PARALLEL_ROUTE_BINDING_OVER_THE_14_UNIQUE_SURFACES__PRIORITIZE_ZERO_REALITY_ROUTE_IDENTITY_SCORER_AND_CARRIER_BINDINGS__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY",
+  "next": "PARALLEL_ROUTE_BINDING_OVER_THE_14_UNIQUE_SURFACES__FINANCE_INDEX_IDENTITY_NOW_RESOLVED__PRIORITIZE_ONLY_INCREMENTAL_ROUTE_SCORER_CARRIER_AND_SCOPE_GAPS__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
