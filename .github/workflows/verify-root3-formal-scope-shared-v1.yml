@@ -1,0 +1,21 @@
+name: Verify Root3 formal scope shared execution v1
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/root3_formal_scope_shared_execution_v1.py"
+      - "canonical/tests/test_root3_formal_scope_shared_execution_v1.py"
+      - ".github/workflows/verify-root3-formal-scope-shared-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_root3_formal_scope_shared_execution_v1 -v
+      - run: python canonical/runtime/root3_formal_scope_shared_execution_v1.py
