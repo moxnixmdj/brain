@@ -57,11 +57,25 @@ jobs:
           )
           print(json.dumps(out,indent=2))
           assert out['status']=='PASS', out
-          assert out['candidate_predicates']==[
+          proved={
+            c['predicate_id'] for c in evidence.get('claims',[])
+            if isinstance(c,dict) and c.get('state')=='PROVED'
+          }
+          candidates=set(out['candidate_predicates'])
+          already=set(out['already_proved_matched_predicates'])
+          reopened_proved=set(out['reopened_route_targets_already_proved'])
+          assert candidates.isdisjoint(proved), (candidates,proved,out)
+          assert already.issubset(proved), (already,proved,out)
+          assert reopened_proved.issubset(proved), (reopened_proved,proved,out)
+          assert out['full_protocol_replacement_candidate_count']==len(candidates), out
+          for pid in (
             'DELEGATION_TERMINAL_SUCCESS_NONINFERIOR',
             'RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR',
-          ], out
-          assert out['full_protocol_replacement_candidate_count']==2, out
-          assert 'TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR' in out['already_proved_matched_predicates'], out
-          assert 'TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR' in out['reopened_route_targets_already_proved'], out
+            'RECOVERY_TERMINAL_NONINFERIOR',
+            'RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES',
+          ):
+            if pid in proved:
+              assert pid not in candidates, (pid,out)
+          if 'TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR' not in proved:
+            assert 'TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR' in candidates, out
           PY

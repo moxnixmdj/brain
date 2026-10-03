@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_SCHEDULING_WORLD_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__RECEIPT_DERIVED_27_PREDICATE_WORLD__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Derive the live Opus 5.5 scheduling world from the frozen 38-predicate registry minus current terminal evidence after verified Recovery acceptance closure.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_inputs": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "d39164cc78174b34174cece115728cf0e657aed6"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "e62c732937d4dae4eb5297dff96d354dcc52236e"
+    },
+    "compiler": {
+      "path": "canonical/runtime/current_terminal_scheduling_world_v1.py",
+      "git_blob_sha": "2ee308f64d1cc5b88f1468cca6faed6c15d7b8db"
+    },
+    "tests": {
+      "path": "canonical/tests/test_current_terminal_scheduling_world_v1.py",
+      "git_blob_sha": "97fcec97eab078a352abd0e1567c37c865348cf6"
+    },
+    "historical_frontier": {
+      "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+      "git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+    },
+    "historical_action_hypergraph": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+      "git_blob_sha": "ec0ca144939a19234f1c53378cc76af2014a6179"
+    },
+    "historical_scheduling_activation": {
+      "path": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json",
+      "git_blob_sha": "8ff745bf0c43def264c74c5d676e49913a288625"
+    }
+  },
+  "expected_live_world": {
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "refuted_predicates": 0,
+    "unresolved_predicates": 27,
+    "live_action_coverage_predicates": 27,
+    "opus55_acceptance_families": "4/19_PASS__15/19_OPEN",
+    "whole_scope_contracts": "12/12_PASS",
+    "provisional_behavioral_families": "19/19_PASS",
+    "newly_removed_predicates": [
+      "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "RECOVERY_TERMINAL_NONINFERIOR",
+      "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+    ],
+    "previously_removed_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "still_unresolved_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+  },
+  "supersession": {
+    "historical_active_scheduler": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json",
+    "historical_candidate": "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V1.json",
+    "reason": "Recovery acceptance promotion changes current receipt-derived world from 30 unresolved predicates to 27.",
+    "activation_rule": "V2 MAY BECOME SCHEDULING AUTHORITY ONLY AFTER INDEPENDENT EXACT-BYTE VERIFICATION; HISTORICAL RECEIPTS REMAIN VALID ONLY FOR THEIR ORIGINAL BYTES."
+  },
+  "hard_rules": [
+    "LIVE_UNRESOLVED_SET_EQUALS_FROZEN_REGISTRY_MINUS_CURRENT_PROVED_OR_REFUTED_RECEIPTS",
+    "RECOVERY_THREE_PROVED_PREDICATES_MUST_NOT_REMAIN_ACTION_OR_CERTIFICATE_TARGETS",
+    "EVERY_LIVE_UNRESOLVED_PREDICATE_MUST_RETAIN_AT_LEAST_ONE_ACTION_EDGE",
+    "NO_FRESH_REALITY_BEFORE_INDEPENDENT_VERIFICATION_AND_ZERO_REALITY_INFORMATION_DOMINANCE_RECOMPUTE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_BYTES__THEN_ACTIVATE_27_PREDICATE_WORLD__RECOMPUTE_INFORMATION_DOMINANCE__ONLY_THEN_REEVALUATE_FRESH_REALITY_AUTHORITY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
