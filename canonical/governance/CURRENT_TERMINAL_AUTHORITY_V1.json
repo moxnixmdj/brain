@@ -919,6 +919,12 @@
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
       "git_blob_sha": "1bc2c254207b546a631022163dd51d6f22472d11",
       "status": "CANDIDATE__TB_SCIENCE_CARRIER_ATTAINABILITY_DISCHARGED__CURRENT_BOUND_ZERO_REALITY_SEARCH_COMPRESSED__ZERO_CREDIT"
+    },
+    "current_v8_post_compression_verification_binding": {
+      "path": "canonical/governance/CURRENT_V8_POST_COMPRESSION_VERIFICATION_BINDING_V1.json",
+      "git_blob_sha": "3868e6faf8192ee1b5cbd5cba6154411e56555d4",
+      "status": "ZERO_CREDIT_RECONCILIATION__CURRENT_V8_EXACT_BLOB_HAS_INDEPENDENT_PASS",
+      "consequence": "CURRENT_V8_POST_COMPRESSION_BYTES_INDEPENDENTLY_VERIFIED__OLD_PRE_COMPRESSION_V8_RECEIPT_NOT_USED_FOR_CHANGED_BYTES"
     }
   },
   "residual": [
