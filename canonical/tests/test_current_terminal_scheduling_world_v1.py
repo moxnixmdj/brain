@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from canonical.runtime.current_terminal_scheduling_world_v1 import evaluate
+from canonical.runtime import tool_discovery_retrieval_authority_gate_v1 as retrieval_gate
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -22,6 +23,7 @@ class CurrentTerminalSchedulingWorldV1Tests(unittest.TestCase):
             load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
             load("canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json"),
             load("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"),
+            retrieval_gate.evaluate_repository(ROOT),
         )
 
     def test_live_world_is_38_8_30(self):
@@ -63,6 +65,26 @@ class CurrentTerminalSchedulingWorldV1Tests(unittest.TestCase):
         self.assertEqual(out["capability_credit_delta"], 0)
         self.assertEqual(out["family_credit_delta"], 0)
 
+    def test_tool_discovery_retrieval_gate_is_mandatory(self):
+        registry = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json")
+        evidence = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json")
+        frontier = load("canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json")
+        hypergraph = load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json")
+        scheduling = load("canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json")
+        authority = load("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json")
+        out = evaluate(registry, evidence, frontier, hypergraph, scheduling, authority)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("TOOL_DISCOVERY_RETRIEVAL_AUTHORITY_GATE_NOT_PASS", out["errors"])
+
+    def test_live_world_reports_verified_tool_discovery_retrieval_gate(self):
+        out = self.live()
+        self.assertTrue(out["tool_discovery_retrieval_authority_gate_required"], out)
+        self.assertTrue(out["tool_discovery_retrieval_authority_gate_pass"], out)
+        self.assertIn(
+            "PASS__LIVE_TOOL_DISCOVERY_EDGE_MECHANICALLY_BOUND",
+            out["tool_discovery_retrieval_authority_gate_status"],
+        )
+
     def test_mutation_reopening_delegation_changes_world_and_fails_expected_count(self):
         registry = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json")
         evidence = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json")
@@ -74,7 +96,15 @@ class CurrentTerminalSchedulingWorldV1Tests(unittest.TestCase):
             if claim.get("predicate_id") == "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR":
                 claim["state"] = "EXTERNAL_BLOCKED"
                 break
-        out = evaluate(registry, evidence, frontier, hypergraph, scheduling, authority)
+        out = evaluate(
+            registry,
+            evidence,
+            frontier,
+            hypergraph,
+            scheduling,
+            authority,
+            retrieval_gate.evaluate_repository(ROOT),
+        )
         self.assertFalse(out["pass"])
         self.assertIn("UNRESOLVED_COUNT_NOT_30:31", out["errors"])
 
