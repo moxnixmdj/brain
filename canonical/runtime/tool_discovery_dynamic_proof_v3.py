@@ -16,6 +16,7 @@ CLASSES=(
  "MULTI_SOURCE",
  "TRANSFER",
  "VERSION_CHANGE",
+ "BASELINE_ADVANTAGE",
  "NO_ROUTE",
 )
 
@@ -66,6 +67,10 @@ def generate_case(seed:int,ordinal:int)->dict[str,Any]:
     elif cls=="VERSION_CHANGE":
         hidden0["T1"]=True
         hidden1["T1"]=False; hidden1["T2"]=True
+    elif cls=="BASELINE_ADVANTAGE":
+        # Popular/schema-advertised T0 is incapable; less-popular T1 is the
+        # cheapest actually capable route discoverable through safe evidence.
+        hidden0["T1"]=True; hidden1["T1"]=True
     elif cls=="NO_ROUTE":
         pass
     return {
@@ -223,7 +228,7 @@ def score_episode(case,policy):
     if case["case_class"]=="NO_ROUTE":
         ok=s1["reason"]=="PASS_ESCALATE"
         return {"pass":ok,"reason":"PASS" if ok else "NO_ROUTE_NOT_ESCALATED","baseline_failed_invocations":baseline}
-    if baseline < 1:
+    if case["case_class"]=="BASELINE_ADVANTAGE" and baseline < 1:
         return {"pass":False,"reason":"BASELINE_ADVANTAGE_NOT_LOAD_BEARING"}
 
     if case["case_class"] in {"TRANSFER","VERSION_CHANGE"}:
