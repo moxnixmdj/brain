@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__SCOPE_CERTIFICATE_COMPILED__ROOT3_TO_ROOT2_ONLY_RECLASSIFICATION_PENDING_INDEPENDENT_VERIFICATION__ZERO_CREDIT",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT3_TO_ROOT2_ONLY__ZERO_CREDIT",
   "certificate": {
     "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
     "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
@@ -46,5 +46,21 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "independent_verification": {
+    "path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "4f25ed739f9ac8d19026dcc8b8b53c4e9e09e6c9",
+    "conclusion": "success",
+    "verified_effect": "ROOT2_AND_ROOT3_TO_ROOT2_ONLY__ROOT3_INVOLVED_11_TO_10__ZERO_ACCEPTANCE_CREDIT"
+  },
+  "after_verified": {
+    "root_class": "ROOT2_ONLY",
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "unresolved_total": 26,
+    "root2_involved_count": 19,
+    "root3_involved_count": 10
+  },
+  "activation_effect": "RECLASSIFY_SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_FROM_ROOT2_AND_ROOT3_TO_ROOT2_ONLY"
 }
