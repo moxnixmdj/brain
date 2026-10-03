@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_OWNER_CHANNEL_FANOUT_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__FIVE_OWNER_CHANNELS_STARTED__ZERO_CREDIT",
+  "status": "ACTIVE__FOUR_OWNER_CHANNELS_WAITING__CURSOR_BOUNDARY_CLOSED__ZERO_CREDIT",
   "objective": "START_ALL_LONG_LATENCY_ROOT2_OWNER_DEPENDENCIES_AT_ONCE_AND_DEDUPLICATE_SURFACES_BY_OWNER",
   "channels": [
     {
@@ -37,13 +37,19 @@
     },
     {
       "owner": "Cursor",
-      "state": "OUTREACH_SENT",
+      "state": "CLOSED_BY_DIRECT_OWNER_REPLY",
       "surfaces": [
         "CursorBench 4.0"
       ],
       "expected_predicates": [
         "CODING_CURSORBENCH_GE_57_8"
-      ]
+      ],
+      "owner_reply": {
+        "sender_domain": "cursor.com",
+        "subject": "Re: Research evaluation request: CursorBench 4.0 external-system submission",
+        "received_at": "2026-10-03T22:26:58+00:00",
+        "consequence": "NO_OWNER_RUN_EXTERNAL_EVALUATION__NO_PUBLIC_SUBMISSION_INTERFACE__REOPEN_ONLY_ON_MATERIAL_POLICY_CHANGE"
+      }
     },
     {
       "owner": "Cognition",
@@ -74,7 +80,9 @@
     "channel_count": 5,
     "directly_targeted_root2_fixed_bar_predicates": 9,
     "shared_surface_note": "AA-Briefcase one owner result can potentially serve two frozen predicates only after each predicate scope is independently satisfied.",
-    "finance_note": "Finance Index owner evidence may also discharge component premises; separate index execution remains dominated if all six component premises close."
+    "finance_note": "Finance Index owner evidence may also discharge component premises; separate index execution remains dominated if all six component premises close.",
+    "owner_channels_waiting": 4,
+    "owner_channels_closed": 1
   },
   "response_policy": {
     "first_sufficient_owner_receipt": "BIND_EXACT_PROTOCOL_AND_RESULT_THEN_RECOMPUTE_ROOT2_FIXED_POINT",
