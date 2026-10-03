@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_TB_SCIENCE_INFERENCE_ADAPTER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FIRST_REAL_ROOT2_INFERENCE_ADAPTER__ZERO_CASE__VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Bind the already zero-case-qualified Brain-owned Terminal-Bench-Science Harbor controller to the generic Root2 external-task entrypoint without exposing terminal cases or granting score credit.",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "benchmark_id": "TERMINAL_BENCH_SCIENCE_0_1",
+  "exact_candidate_blobs": {
+    "canonical/runtime/root2_tb_science_inference_adapter_v1.py": "a079797d85582eb354400af3a4c235f9ddd62d5b",
+    "canonical/tests/test_root2_tb_science_inference_adapter_v1.py": "12d9ea59ca398ee2ef010ef9c93ad07278482435",
+    "canonical/governance/ROOT2_EXTERNAL_TASK_ADAPTER_REGISTRY_V1.json": "8b1d9157fbb78085e1295fb99c9a4e30ff8397ce",
+    ".github/workflows/verify-root2-tb-science-inference-adapter-v1.yml": "9335d435d2cb174ffe357396965bf28b184fe548"
+  },
+  "exact_existing_route_blobs": {
+    "canonical/runtime/harbor_science_agent_v1.py": "5557efd21f1a433ad16766def3775a79c459784b",
+    "canonical/governance/TERMINAL_BENCH_SCIENCE_BRAIN_ROUTE_CANDIDATE_V1.json": "379bf08cc270b3780a7df5a8b94cf0d2f44a2db2",
+    "canonical/verification/TB_SCIENCE_PATCHED_REAL_HARBOR_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "4512996a6698463be367052b13a891bd0f647f73"
+  },
+  "candidate_effect": {
+    "root2_generic_inference_adapter_count_before": 0,
+    "root2_generic_inference_adapter_count_after_if_verified": 1,
+    "benchmark_route": "TERMINAL_BENCH_SCIENCE_0_1",
+    "inference_mode": "LIVE_HARBOR_ENVIRONMENT_TO_BRAIN_OWNED_SCIENCE_CONTROLLER",
+    "task_environment_required": true,
+    "terminal_case_content_read": 0,
+    "terminal_results_observed": 0,
+    "score_produced": false,
+    "acceptance_closed": false
+  },
+  "ownership_boundary": {
+    "controller_mode": "BRAIN_OWNED_RESEARCH_CONTROL__OPTIONAL_GENERAL_COGNITION_SUBSTRATE",
+    "model_dependency_count": 1,
+    "model_role": "GENERAL_COGNITION_SUBSTRATE",
+    "model_has_terminal_authority": false,
+    "brain_owns": [
+      "COMMAND_ADMISSIBILITY",
+      "FROZEN_REQUIREMENT_STATE",
+      "ACTION_SELECTION_CONTROL",
+      "SEPARATE_VERIFICATION",
+      "REQUIREMENT_PROMOTION_AFTER_VERIFY",
+      "FINISH_AUTHORITY"
+    ]
+  },
+  "verification_requirements": [
+    "EXACT_BLOB_BINDINGS_MATCH",
+    "UNIT_TESTS_PASS_WITHOUT_BENCHMARK_CASES",
+    "GENERIC_ENTRYPOINT_PREFLIGHT_REPORTS_PASS__INFERENCE_ADAPTER_BOUND",
+    "MISSING_HARBOR_ENVIRONMENT_FAILS_CLOSED",
+    "WRONG_BENCHMARK_ID_FAILS_CLOSED",
+    "UNSUPPORTED_TOOL_DECLARATIONS_FAIL_CLOSED",
+    "NO_ACCEPTANCE_OR_EXECUTION_AUTHORITY_GRANTED_BY_BINDING"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_BENCH_SCIENCE_CASE_EXECUTION",
+    "NO_TB_SCIENCE_SCORE",
+    "NO_CLAIM_58_7_PERCENT_IS_MET",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_GENERAL_ROOT2_INFERENCE_IS_SOLVED_FOR_OTHER_BENCHMARKS",
+    "NO_CLAIM_GENERAL_COGNITION_SUBSTRATE_IS_CORRECT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "VERIFY_THIS_ZERO_CASE_BINDING__IF_PASS_PROMOTE_ONLY_ADAPTER_READINESS_THEN_RECOMPUTE_ROOT2_MEASUREMENT_BRIDGE__DO_NOT_RUN_BENCHMARK_CASES_UNTIL_ZERO_REALITY_FIXED_POINT"
+}
