@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_CURRENT_ROUTE_SELECTION_V3_CANDIDATE",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__V9_OVER_VERIFIED_V8_AUTHORITY_SOUNDNESS__EQUAL_COST_FRONTIER_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Replace the current V8 terminal decision rule with V9 only after independent exact-byte verification, because V9 preserves V8 structural/authority gates while repairing the demonstrated equal-cost frontier false-block/probe behavior.",
+  "base_main_commit": "f234942a0da899b83d6d57ee24cf55fd4c5482d6",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "prior_current_route": {
+    "path": "canonical/governance/TOOL_DISCOVERY_CURRENT_ROUTE_SELECTION_V2.json",
+    "git_blob_sha": "c6d9a9da66ea7758d40417d12a960b30244e3c12",
+    "selected_runtime": "canonical/runtime/tool_discovery_dynamic_candidate_v8.py",
+    "selected_runtime_git_blob_sha": "b43443ef8b0387ed88bb5a852de01323276ad2aa"
+  },
+  "candidate_runtime": {
+    "path": "canonical/runtime/tool_discovery_dynamic_candidate_v9.py",
+    "git_blob_sha": "d53b6b68b0e404591b9ee6fc93bc475cbdbb42fd",
+    "test_path": "canonical/tests/test_tool_discovery_dynamic_candidate_v9.py",
+    "test_git_blob_sha": "245c5e9bca14e724b65e4706c7d89ac1513c4940"
+  },
+  "inherited_exact_stack": {
+    "v5_runtime_git_blob_sha": "42d096ef93e8ad06c4d1d5dfe730881bf45a2a72",
+    "v8_runtime_git_blob_sha": "b43443ef8b0387ed88bb5a852de01323276ad2aa"
+  },
+  "demonstrated_v8_counterexample": {
+    "class": "EQUAL_COST_FRONTIER_FALSE_BLOCK_OR_UNNECESSARY_PROBE",
+    "condition": "A minimum-cost peer is verified sufficient while another equal-cost peer remains unresolved.",
+    "v8_bad_behavior": "May probe or fail-closed on the unresolved equal-cost peer before selecting the already verified sufficient equal-cost peer.",
+    "v9_repair": "Evaluate the whole minimum-cost non-falsified frontier; select a verified sufficient peer first, otherwise take a safe probe on that frontier, otherwise fail closed."
+  },
+  "preservation_claims": [
+    "V8_AUTHORITY_EPOCH_BINDING_PRESERVED",
+    "V8_COMPLETE_CATALOG_IDENTITY_FIREWALL_PRESERVED",
+    "V8_VERSION_RESTART_PRESERVED",
+    "V8_NONFINITE_COST_FIREWALL_PRESERVED",
+    "DISCOVERY_COMPLETES_BEFORE_TERMINAL_ROUTE_DECISION",
+    "STRICTLY_CHEAPER_IRREDUCIBLE_FRONTIER_STILL_BLOCKS_MORE_EXPENSIVE_ROUTE",
+    "NO_UNSUPPORTED_PROMOTION"
+  ],
+  "hard_nonclaims": [
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT",
+    "NO_UNIVERSAL_SCOPE_COMPLETENESS_CLAIM_FROM_V9_ALONE",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V5_V8_V9_BYTES_AND_V9_TESTS__THEN_ATOMICALLY_REBIND_CURRENT_TOOL_DISCOVERY_ROUTE_TO_V9__THEN_PROVE_COMMON_AUTHORITY_UNIVERSAL_SCOPE_OVER_V9",
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
