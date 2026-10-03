@@ -1,0 +1,84 @@
+name: Verify P1 pre-case carrier failure
+
+on:
+  push:
+    branches: ["reconcile/p1-precase-carrier-failure-20261003-sol"]
+    paths:
+      - "canonical/governance/P1_ONE_USE_PRECASE_CARRIER_FAILURE_RECONCILIATION_CANDIDATE_V1.json"
+      - ".github/workflows/verify-p1-precase-carrier-failure.yml"
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Independently verify GitHub run ended before runner assignment or user steps
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          C=canonical/governance/P1_ONE_USE_PRECASE_CARRIER_FAILURE_RECONCILIATION_CANDIDATE_V1.json
+          test "$(git hash-object "$C")" = "fa1d179a2bf8f273c3adb8d6f80fee77f847bfbd"
+          mkdir -p evidence
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/moxnixmdj/brain/actions/runs/37106776756" -o evidence/run.json
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/moxnixmdj/brain/actions/runs/37106776756/jobs" -o evidence/jobs.json
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/moxnixmdj/brain/actions/runs/37106776756/artifacts" -o evidence/artifacts.json
+          python - <<'PY'
+          import datetime as dt,json
+          from pathlib import Path
+          c=json.loads(Path("canonical/governance/P1_ONE_USE_PRECASE_CARRIER_FAILURE_RECONCILIATION_CANDIDATE_V1.json").read_text())
+          r=json.loads(Path("evidence/run.json").read_text())
+          js=json.loads(Path("evidence/jobs.json").read_text())
+          ar=json.loads(Path("evidence/artifacts.json").read_text())
+          assert c["failed_execution"]["workflow_run_id"]==37106776756
+          assert c["failed_execution"]["workflow_job_id"]==111156743001
+          assert r["head_sha"]=="b12723d5a3116d00edd438d389c8282b47b52016"
+          assert r["run_attempt"]==1 and r["event"]=="push"
+          assert r["status"]=="completed" and r["conclusion"]=="failure"
+          assert js["total_count"]==1
+          j=js["jobs"][0]
+          assert j["id"]==111156743001
+          assert j["name"]=="execute"
+          assert j["status"]=="completed" and j["conclusion"]=="failure"
+          assert j["runner_id"]==0
+          assert j.get("steps")==[]
+          assert ar["total_count"]==0 and ar.get("artifacts")==[]
+          started=dt.datetime.fromisoformat(j["started_at"].replace("Z","+00:00"))
+          ended=dt.datetime.fromisoformat(j["completed_at"].replace("Z","+00:00"))
+          assert (ended-started).total_seconds() <= 10
+          receipt={
+            "schema":"PROJECT_BRAIN_P1_PRECASE_CARRIER_FAILURE_INDEPENDENT_VERIFICATION_20261003_V1",
+            "status":"INDEPENDENT_GITHUB_RUNNER_PASS__RUNNER_ZERO__ZERO_STEPS__ZERO_ARTIFACTS__PRECASE_INFRASTRUCTURE_FAILURE",
+            "candidate_blob":"fa1d179a2bf8f273c3adb8d6f80fee77f847bfbd",
+            "failed_run_id":37106776756,
+            "failed_job_id":111156743001,
+            "activation_head_sha":r["head_sha"],
+            "runner_id":j["runner_id"],
+            "observed_steps":0,
+            "artifact_count":0,
+            "case_generation_established":False,
+            "fresh_reality_consumption_established":False,
+            "p1_quarantine_lifted":False,
+            "failed_workflow_rerun_authorized":False,
+            "new_one_use_authority_may_be_separately_reissued":True,
+            "incremental_spend_usd":0,
+            "capability_credit_delta":0,
+            "family_credit_delta":0,
+            "promotion_authority":False
+          }
+          Path("evidence/receipt.json").write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: p1-precase-carrier-failure-independent-verification
+          path: evidence/
+          if-no-files-found: error
