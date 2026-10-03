@@ -33,8 +33,8 @@ BINDINGS="canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.
 
 EXPECTED={
     CONTRACT:"49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7",
-    INTERFACE:"d99981eabb75ee338e6139d4029767e5e87ea2f1",
-    INTERFACE_TESTS:"7414fe67c111fad6cebc544f05e1dc7fa24aa424",
+    INTERFACE:"4b69aeb7b3d66ee3f7950ff202f2c492dcb033e2",
+    INTERFACE_TESTS:"b93ed898ba681808851ab92f4bb35ac00c1f047a",
     V4:"e614d0bed8e291e31f57189cd6f0f75aa39b0f74",
     V4_VERIFICATION:"10cb18355d247a05177230d0dd345e161e84111d",
     PROTOCOL:"62394e5b7d221ec9f69c3458f669e40e253a9d09",
@@ -132,6 +132,7 @@ def derive_interface_facts(source:str)->dict[str,bool]:
             'list(episode.get("visible_tools") or [])+list(receipt.get("tools") or [])',
             "CONFLICTING_PUBLIC_TOOL_METADATA:",
             "DISCOVERY_SOURCE_ALREADY_QUERIED",
+            "DISCOVERY_PAYLOAD_NOT_EXACT_COMPLETE_AUTHORITY",
         )),
         "PUBLIC_METADATA_EXCLUDES_HIDDEN_CAPABILITY_TRUTH": all(x in source for x in (
             'forbidden={"hidden_capabilities","capabilities","supported_capabilities","_oracle"}',
@@ -149,6 +150,8 @@ def derive_interface_facts(source:str)->dict[str,bool]:
             '"generation":frozen["generation"]',
             "PROBE_INSTANCE_MISMATCH",
             "PROBE_GENERATION_MISMATCH",
+            "PROBE_RECEIPT_EPOCH_MISMATCH",
+            "PROBE_RECEIPT_TRUTH_MISMATCH",
         )),
         "VERSION_CHANGE_CREATES_NEW_GENERATION": all(x in source for x in (
             "def evolve_tool(",
