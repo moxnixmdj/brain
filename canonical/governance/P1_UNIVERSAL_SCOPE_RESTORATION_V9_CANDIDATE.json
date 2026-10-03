@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_P1_UNIVERSAL_SCOPE_RESTORATION_V9_CANDIDATE",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_REALITY_RESTORATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_OPUS55_ACCEPTANCE_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "reducer": "canonical/runtime/p1_universal_scope_restoration_v9.py",
+  "tests": "canonical/tests/test_p1_universal_scope_restoration_v9.py",
+  "decisive_receipt": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_SCOPE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "source_quarantine": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "expected_if_verified": {
+    "whole_scope_contract_pass_count": 12,
+    "p1_quarantined_contract_count": 0,
+    "provisional_behavioral_family_pass_count": 19,
+    "p1_quarantined_behavioral_family_count": 0,
+    "opus55_acceptance_credit_delta": 0
+  },
+  "hard_rules": [
+    "NO_USE_OF_RUN_37108111537_AS_PROOF",
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_NEW_REALITY",
+    "NO_OPUS55_ACCEPTANCE_OR_FAMILY_OWNERSHIP_CREDIT_FROM_BEHAVIORAL_SCOPE_RESTORATION"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0
+}
