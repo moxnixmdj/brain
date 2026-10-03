@@ -110,11 +110,8 @@ def derive_source_facts(
         "ONLY_EXHAUSTIVE_SOURCE_ACTIONS_ADMITTED": (
             'raw.get("result_semantics") != "EXHAUSTIVE_CURRENT_TOOL_LIST"' in builder
             and "DISCOVERY_SOURCE_RESULT_NOT_EXHAUSTIVE:" in builder
-            and "PARTIAL" not in str(semantics.get("source_admissibility") or "").upper().replace(
-                "PARTIAL/PAGINATED SOURCE ACTIONS REQUIRE AN EXHAUSTIVE ADAPTER BEFORE ADMISSION AND OTHERWISE FAIL CLOSED.",
-                ""
-            )
             and "exhaustive" in str(semantics.get("source_admissibility") or "").lower()
+            and "fail closed" in str(semantics.get("source_admissibility") or "").lower()
         ),
         "AUTHORITY_MANIFEST_BINDS_ALL_ACTIONS": (
             "normalized_actions.append({" in builder
