@@ -1,0 +1,645 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_LIVE_PROVIDER_EVENTS_20261003_V1",
+  "date": "2026-10-03",
+  "status": "RECORDED_LIVE_PROVIDER_OBSERVATIONS__PROVISIONAL_PROVIDER_TRUTH__ZERO_CREDIT",
+  "catalog": {
+    "path": "canonical/governance/RETRIEVAL_REAL_HIDDEN_WITNESS_CATALOG_V1.json",
+    "git_blob_sha": "dd7bea1661257a38abcfcb8300795757103b6a63"
+  },
+  "observations": [
+    {
+      "case_id": "RW_STANZA:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 687,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_STANZA:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 821,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_SPACY:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 831,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_SPACY:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 504,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_CAD_IMAGE_3D:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 837,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_CAD_IMAGE_3D:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 485,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_TECH_EUROPE:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 1555,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_TECH_EUROPE:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 637,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_PEN2STEP:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 525,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_PEN2STEP:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 8458,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_CADRIP:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9516,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_CADRIP:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 2860,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_SCAN2SKETCH:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9596,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_SCAN2SKETCH:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 6685,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_2D3D_CAD:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 1398,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_2D3D_CAD:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 4731,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_TESSERACT:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 6881,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_TESSERACT:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9385,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_OPENCV:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 8116,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_OPENCV:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9397,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_TOOLATHLON:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 1197,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_TOOLATHLON:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 1218,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_AI_SYSTEM_CARDS:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 1636,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_AI_SYSTEM_CARDS:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9838,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_BENCHBOARD:Q0",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 1479,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_BENCHBOARD:Q1",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9472,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_STANZA:ANCHOR",
+      "target_id": "RW_STANZA",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 5012,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_SPACY:ANCHOR",
+      "target_id": "RW_SPACY",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9430,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_CAD_IMAGE_3D:ANCHOR",
+      "target_id": "RW_CAD_IMAGE_3D",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9403,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_TECH_EUROPE:ANCHOR",
+      "target_id": "RW_TECH_EUROPE",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9403,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_PEN2STEP:ANCHOR",
+      "target_id": "RW_PEN2STEP",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9501,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_CADRIP:ANCHOR",
+      "target_id": "RW_CADRIP",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 2225,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_SCAN2SKETCH:ANCHOR",
+      "target_id": "RW_SCAN2SKETCH",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 8123,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_2D3D_CAD:ANCHOR",
+      "target_id": "RW_2D3D_CAD",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9463,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_TESSERACT:ANCHOR",
+      "target_id": "RW_TESSERACT",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9898,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_OPENCV:ANCHOR",
+      "target_id": "RW_OPENCV",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9401,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_TOOLATHLON:ANCHOR",
+      "target_id": "RW_TOOLATHLON",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 1222,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_AI_SYSTEM_CARDS:ANCHOR",
+      "target_id": "RW_AI_SYSTEM_CARDS",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9411,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_BENCHBOARD:ANCHOR",
+      "target_id": "RW_BENCHBOARD",
+      "provider_route": "GITHUB_CODE_SEARCH",
+      "query_family": "TECHNICAL_ANCHOR_COMPRESSED",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": 9375,
+      "observation_authority": "LIVE_CONNECTED_PROVIDER_OBSERVATION__NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    {
+      "case_id": "RW_STANZA:Q1_WEB",
+      "target_id": "RW_STANZA",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": true,
+      "rank": 1,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_SPACY:Q1_WEB",
+      "target_id": "RW_SPACY",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": true,
+      "rank": 1,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_CAD_IMAGE_3D:Q1_WEB",
+      "target_id": "RW_CAD_IMAGE_3D",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_TECH_EUROPE:Q1_WEB",
+      "target_id": "RW_TECH_EUROPE",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_PEN2STEP:Q1_WEB",
+      "target_id": "RW_PEN2STEP",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_CADRIP:Q1_WEB",
+      "target_id": "RW_CADRIP",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_SCAN2SKETCH:Q1_WEB",
+      "target_id": "RW_SCAN2SKETCH",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_2D3D_CAD:Q1_WEB",
+      "target_id": "RW_2D3D_CAD",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_TESSERACT:Q1_WEB",
+      "target_id": "RW_TESSERACT",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_OPENCV:Q1_WEB",
+      "target_id": "RW_OPENCV",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_TOOLATHLON:Q1_WEB",
+      "target_id": "RW_TOOLATHLON",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_AI_SYSTEM_CARDS:Q1_WEB",
+      "target_id": "RW_AI_SYSTEM_CARDS",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_BENCHBOARD:Q1_WEB",
+      "target_id": "RW_BENCHBOARD",
+      "provider_route": "WEB_SEARCH_GITHUB_DOMAIN",
+      "query_family": "DIRECT_BEHAVIORAL_Q1",
+      "transport_status": "SUCCESS",
+      "hit_at_10": false,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CHAT_WEB_TOOL_OBSERVATION__PROVISIONAL_COVERAGE_SIGNAL_ONLY"
+    },
+    {
+      "case_id": "RW_STANZA:Q0:REPO_API",
+      "provider_route": "GITHUB_REPOSITORY_SEARCH_VIA_FETCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "UNSUPPORTED_ENDPOINT",
+      "hit_at_10": null,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CONNECTED_PROVIDER_TRANSPORT_OBSERVATION"
+    },
+    {
+      "case_id": "RW_STANZA:Q1:REPO_API",
+      "provider_route": "GITHUB_REPOSITORY_SEARCH_VIA_FETCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "UNSUPPORTED_ENDPOINT",
+      "hit_at_10": null,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CONNECTED_PROVIDER_TRANSPORT_OBSERVATION"
+    },
+    {
+      "case_id": "RW_SPACY:Q0:REPO_API",
+      "provider_route": "GITHUB_REPOSITORY_SEARCH_VIA_FETCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "UNSUPPORTED_ENDPOINT",
+      "hit_at_10": null,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CONNECTED_PROVIDER_TRANSPORT_OBSERVATION"
+    },
+    {
+      "case_id": "RW_SPACY:Q1:REPO_API",
+      "provider_route": "GITHUB_REPOSITORY_SEARCH_VIA_FETCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "UNSUPPORTED_ENDPOINT",
+      "hit_at_10": null,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CONNECTED_PROVIDER_TRANSPORT_OBSERVATION"
+    },
+    {
+      "case_id": "RW_CAD_IMAGE_3D:Q0:REPO_API",
+      "provider_route": "GITHUB_REPOSITORY_SEARCH_VIA_FETCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "UNSUPPORTED_ENDPOINT",
+      "hit_at_10": null,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CONNECTED_PROVIDER_TRANSPORT_OBSERVATION"
+    },
+    {
+      "case_id": "RW_CAD_IMAGE_3D:Q1:REPO_API",
+      "provider_route": "GITHUB_REPOSITORY_SEARCH_VIA_FETCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "UNSUPPORTED_ENDPOINT",
+      "hit_at_10": null,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CONNECTED_PROVIDER_TRANSPORT_OBSERVATION"
+    },
+    {
+      "case_id": "RW_TECH_EUROPE:Q0:REPO_API",
+      "provider_route": "GITHUB_REPOSITORY_SEARCH_VIA_FETCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "UNSUPPORTED_ENDPOINT",
+      "hit_at_10": null,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CONNECTED_PROVIDER_TRANSPORT_OBSERVATION"
+    },
+    {
+      "case_id": "RW_TECH_EUROPE:Q1:REPO_API",
+      "provider_route": "GITHUB_REPOSITORY_SEARCH_VIA_FETCH",
+      "query_family": "BEHAVIORAL_FULL",
+      "transport_status": "UNSUPPORTED_ENDPOINT",
+      "hit_at_10": null,
+      "rank": null,
+      "latency_ms": null,
+      "observation_authority": "CONNECTED_PROVIDER_TRANSPORT_OBSERVATION"
+    }
+  ],
+  "hard_rules": [
+    "TRANSPORT_FAILURES_ARE_EXCLUDED_FROM_RECALL_DENOMINATORS",
+    "PROVIDER_MISS_IS_SCOPE_LIMITED_TO_THIS_QUERY_PROVIDER_EPOCH",
+    "LIVE_CHAT_TOOL_OBSERVATIONS_ARE_NOT_INDEPENDENT_PROVIDER_REPRODUCTION",
+    "NO_PROVIDER_MISS_TO_NONEXISTENCE_INFERENCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0
+}

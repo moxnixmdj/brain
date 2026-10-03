@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_V11_DUAL_EMPIRICAL_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__V8_OPEN_WORLD_NOVELTY_PLUS_V9_STRESS_PLUS_V11_LABELED_PROVIDER_QUERY_RECOVERY__INDEPENDENT_ACTIVATION_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "base_current_authority": {
+    "path": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "cb58ff10b7c3ac99da8cbee7b8aa0b76006f8dfe",
+    "rule": "V8_V9_CURRENT_AUTHORITY_PRESERVED_AS_BASE"
+  },
+  "measured_epoch": {
+    "github_code_behavioral_full": {
+      "trials": 26,
+      "hits_at_10": 0,
+      "posterior_mean": 0.018518518518518517
+    },
+    "github_code_technical_anchor_compressed": {
+      "trials": 13,
+      "hits_at_10": 0,
+      "posterior_mean": 0.03571428571428571
+    },
+    "web_search_github_domain_direct_q1": {
+      "trials": 13,
+      "hits_at_10": 2,
+      "posterior_mean": 0.17857142857142858,
+      "provisional_provider_truth": true
+    },
+    "github_repository_search_via_fetch": {
+      "successful_transport_trials": 0,
+      "transport_failures": 8,
+      "recall_denominator": 0
+    }
+  },
+  "mandatory_policy": [
+    "AUTHORIZED_GLOBAL_RETRIEVAL_PLAN_COMPILATION_MUST_USE_GLOBAL_RETRIEVAL_ENTRYPOINT_V3",
+    "ENTRYPOINT_V3_MUST_FIRST_PASS_EXISTING_FAIL_CLOSED_GLOBAL_RETRIEVAL_AUTHORITY_GUARD",
+    "OPEN_WORLD_CANDIDATE_NOVELTY_FROM_V8_AND_LABELED_PROVIDER_QUERY_FAMILY_RECOVERY_FROM_V10_MUST_BOTH_INFORM_ROUTING",
+    "PROVIDER_AND_QUERY_FAMILY_MUST_BE_CALIBRATED_JOINTLY",
+    "TRANSPORT_FAILURES_MUST_NOT_ENTER_RECALL_DENOMINATORS",
+    "UNMEASURED_PROVIDER_QUERY_FAMILIES_KEEP_EXPLICIT_JEFFREYS_COLD_START_PRIOR",
+    "MEASURED_POOR_PROVIDER_QUERY_FAMILIES_ARE_DEMOTED_NOT_DISABLED",
+    "GITHUB_CODE_SEARCH_BEHAVIORAL_FULL_AND_TECHNICAL_ANCHOR_COMPRESSED_ARE_NOT_PRIMARY_UNKNOWN_IDENTITY_DISCOVERY_ROUTES_FOR_THIS_EVIDENCE_EPOCH",
+    "WEB_SEARCH_GITHUB_DOMAIN_REMAINS_CANDIDATE_GENERATOR_ONLY",
+    "OPEN_WORLD_MISS_REMAINS_UNKNOWN",
+    "V9_GENERATED_STRESS_REGRESSION_REMAINS_MANDATORY_AND_CANNOT_CALIBRATE_LIVE_PROVIDER_ROUTING"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GITHUB_CODE_SEARCH_IS_UNIVERSALLY_BAD",
+    "NO_CLAIM_WEB_SEARCH_TWO_OF_THIRTEEN_IS_MATURE_CALIBRATION",
+    "NO_CLAIM_RECORDED_CHAT_TOOL_OBSERVATIONS_ARE_INDEPENDENTLY_REPRODUCED_PROVIDER_TRUTH",
+    "NO_OPEN_WORLD_COMPLETENESS_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "v11_labeled_calibration": {
+    "events_path": "canonical/governance/RETRIEVAL_LIVE_PROVIDER_EVENTS_20261003_V1.json",
+    "events_git_blob_sha": "a5d73e154f865865f1f2186c16e36921e834357a",
+    "calibration_path": "canonical/runtime/retrieval_live_provider_calibration_v1.py",
+    "calibration_git_blob_sha": "e023c17d46dc6841b6a5df5506f9c21533407d1c",
+    "controller_v3_path": "canonical/runtime/global_retrieval_controller_v3.py",
+    "controller_v3_git_blob_sha": "51acba67af90306be25fcfb055292a4233f97316",
+    "entrypoint_v3_path": "canonical/runtime/global_retrieval_entrypoint_v3.py",
+    "entrypoint_v3_git_blob_sha": "f913c25bef03a500c7c8a5d2b44a27c39b3ef34d",
+    "verification_path": "canonical/verification/RETRIEVAL_V11_DUAL_EMPIRICAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verification_git_blob_sha": "91a57904c684f5445d00c8b4244714e95317949d",
+    "workflow_run_id": 37153239058,
+    "workflow_job_id": 111291248193,
+    "conclusion": "success"
+  }
+}

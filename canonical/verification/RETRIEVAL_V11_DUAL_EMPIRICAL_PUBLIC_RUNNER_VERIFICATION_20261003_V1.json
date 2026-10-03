@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V11_DUAL_EMPIRICAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__RETRIEVAL_V11_DUAL_EMPIRICAL_PROVIDER_X_QUERY_FAMILY_ROUTING__ZERO_CREDIT",
+  "verified_subjects": {
+    "canonical/governance/RETRIEVAL_LIVE_PROVIDER_EVENTS_20261003_V1.json": "a5d73e154f865865f1f2186c16e36921e834357a",
+    "canonical/runtime/retrieval_live_provider_calibration_v1.py": "e023c17d46dc6841b6a5df5506f9c21533407d1c",
+    "canonical/runtime/global_retrieval_controller_v3.py": "51acba67af90306be25fcfb055292a4233f97316",
+    "canonical/runtime/global_retrieval_entrypoint_v3.py": "f913c25bef03a500c7c8a5d2b44a27c39b3ef34d",
+    "canonical/tests/test_retrieval_live_provider_calibration_v1.py": "3aa5d8e2dfaa541be0e15e684ad14055dec90984",
+    "canonical/tests/test_global_retrieval_controller_v3.py": "4b57230778e790ea709a98c60f182d6129d4154d"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1400,
+    "merge_commit": "57cbe6d41703d2b5975e3f44c788f9ffce55c352",
+    "workflow_run_id": 37153239058,
+    "workflow_job_id": 111291248193,
+    "conclusion": "success"
+  },
+  "recomputed": {
+    "GITHUB_CODE_SEARCH::BEHAVIORAL_FULL": {
+      "successful_transport_trials": 26,
+      "hit_at_10": 0,
+      "hit_at_10_rate": 0,
+      "mean_latency_ms": 4182.5,
+      "median_latency_ms": 1595.5
+    },
+    "GITHUB_CODE_SEARCH::TECHNICAL_ANCHOR_COMPRESSED": {
+      "successful_transport_trials": 13,
+      "hit_at_10": 0,
+      "hit_at_10_rate": 0,
+      "mean_latency_ms": 7835.923076923077,
+      "median_latency_ms": 9403
+    },
+    "WEB_SEARCH_GITHUB_DOMAIN::DIRECT_BEHAVIORAL_Q1": {
+      "successful_transport_trials": 13,
+      "hit_at_10": 2,
+      "hit_at_10_rate": 0.15384615384615385,
+      "latency_measured": false,
+      "provider_truth_independently_reproduced": false
+    },
+    "GITHUB_REPOSITORY_SEARCH_VIA_FETCH::BEHAVIORAL_FULL": {
+      "successful_transport_trials": 0,
+      "transport_failures": 8,
+      "recall_denominator": 0
+    }
+  },
+  "verified": {
+    "transport_failures_excluded_from_recall_denominator": true,
+    "provider_and_query_family_calibrated_jointly": true,
+    "open_world_live_novelty_preserved_from_v8": true,
+    "unmeasured_routes_keep_jeffreys_cold_start": true,
+    "measured_poor_routes_demoted_not_disabled": true,
+    "code_search_full_and_anchor_rank_below_web_and_unmeasured_route_in_controlled_test": true,
+    "provider_miss_to_nonexistence_inference": false,
+    "zero_credit_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_RECORDED_LIVE_TOOL_OBSERVATIONS_ARE_INDEPENDENTLY_REPRODUCED_PROVIDER_TRUTH",
+    "NO_CLAIM_GITHUB_CODE_SEARCH_IS_UNIVERSALLY_BAD",
+    "NO_CLAIM_WEB_SEARCH_2_OF_13_IS_MATURE_PROVIDER_CALIBRATION",
+    "NO_OPEN_WORLD_COMPLETENESS_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_V11_DUAL_EMPIRICAL_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V11_DUAL_EMPIRICAL_EXTENSION_OVER_V8_V9_CURRENT__ZERO_CREDIT",
+  "verified_activation": {
+    "path": "canonical/governance/GLOBAL_RETRIEVAL_V11_DUAL_EMPIRICAL_ACTIVATION_V1.json",
+    "git_blob_sha": "08d6e44391f31d1acbc6ac85658e45edaa1fd838"
+  },
+  "bound_subject_verification": {
+    "path": "canonical/verification/RETRIEVAL_V11_DUAL_EMPIRICAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "91a57904c684f5445d00c8b4244714e95317949d"
+  },
+  "base_pointer": {
+    "path": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "cb58ff10b7c3ac99da8cbee7b8aa0b76006f8dfe"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1403,
+    "merge_commit": "4a9b1d589a44b6925e6645e4ca42f482cf40fb6d",
+    "workflow_run_id": 37153711781,
+    "workflow_job_id": 111292644373,
+    "conclusion": "success"
+  },
+  "verified": {
+    "v8_v9_base_preserved": true,
+    "exact_v11_receipt_binding": true,
+    "provider_query_family_joint_calibration": true,
+    "transport_failures_excluded_from_recall_denominators": true,
+    "unmeasured_routes_keep_jeffreys_cold_start": true,
+    "measured_poor_routes_demoted_not_disabled": true,
+    "open_world_unknown_preserved": true,
+    "zero_credit_preserved": true
+  },
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

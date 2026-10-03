@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_V11_CURRENT_POINTER_FINAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ACTIVE_V11_DUAL_EMPIRICAL_CURRENT_POINTER__ZERO_CREDIT",
+  "verified_pointer": {
+    "path": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "c85a66713d662a29c6ddec491c2028d9a9be96fa"
+  },
+  "bound_candidate_pointer_verification": {
+    "path": "canonical/verification/GLOBAL_RETRIEVAL_V11_CURRENT_POINTER_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "ab21c189081c25cb178609aacab23632fc41d9f8"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1407,
+    "merge_commit": "f1e461a9f21d28026ca1fb75c5effed5c99d68bd",
+    "workflow_run_id": 37154098739,
+    "workflow_job_id": 111293792147,
+    "conclusion": "success"
+  },
+  "verified": {
+    "active_status_exact": true,
+    "v11_entrypoint_v3_binding_exact": true,
+    "v11_activation_verification_binding_exact": true,
+    "v8_real_hidden_witness_regression_preserved": true,
+    "v9_generated_stress_regression_preserved": true,
+    "transport_failures_excluded_from_labeled_recall": true,
+    "measured_poor_provider_query_families_demoted_not_disabled": true,
+    "unmeasured_provider_query_families_keep_jeffreys_exploration": true,
+    "open_world_unknown_preserved": true,
+    "zero_credit_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_COMPLETENESS_CLAIM",
+    "NO_CLAIM_GITHUB_CODE_SEARCH_IS_UNIVERSALLY_BAD",
+    "NO_CLAIM_WEB_SEARCH_TWO_OF_THIRTEEN_IS_MATURE_PROVIDER_CALIBRATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
