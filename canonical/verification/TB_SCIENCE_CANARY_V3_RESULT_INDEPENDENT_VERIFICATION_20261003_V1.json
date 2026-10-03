@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CANARY_V3_RESULT_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PASS__AUTHORIZED_V3_TRIGGER_FINAL_ZERO__HARBOR_SKIPPED_AFTER_ARM_SCHEMA_GATE_FAILURE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "source": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "source_run_id": 37109467429,
+    "source_artifact_id": 11268634533,
+    "source_artifact_digest": "sha256:c3a786984e98c2e24ec98cc51331ba872e195666aad8b31815b21ba600ac74f9",
+    "receipt_sha256": "f75d59cc1d75fe769a14c4adf1a1e0022859c91cc02bce584144b8866a7c256f",
+    "independent_pull_request": 1259,
+    "independent_workflow_run_id": 37109574334,
+    "independent_artifact_id": 11268689637,
+    "independent_artifact_digest": "sha256:eb584ee3fa4ce68568c7bf9062c3b1ab536442d70aa3d6d11d4e36c0a8287afe",
+    "independent_merge_sha": "f5736c9aafa0cc0bf9ddfacb836081b39309ea9f"
+  },
+  "result": {
+    "slot_id": "terminal-bench-science/virtual-baseline-localization::trial-0",
+    "final_zero": true,
+    "reward": 0,
+    "harbor_step_outcome": "skipped",
+    "task_execution_began": false,
+    "cause": "ARM_SCHEMA_MISSING_PREFLIGHT_CONCLUSION_BEFORE_HARBOR_STEP",
+    "counts_as_final_zero_under_v3_authority": true,
+    "replay_allowed": false
+  },
+  "arithmetic_after": {
+    "finalized_slots": 5,
+    "successes": 0,
+    "finalized_failures": 5,
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "remaining_failures_before_fail_lock": 73,
+    "fixed_denominator": 210
+  },
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
