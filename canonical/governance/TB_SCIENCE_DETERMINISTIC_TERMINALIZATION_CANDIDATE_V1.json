@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_DETERMINISTIC_TERMINALIZATION_CANDIDATE_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT__ZERO_TERMINAL_CASES",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT__ZERO_TERMINAL_CASES",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "target_predicate": "TB_SCIENCE_GE_58_7",
@@ -45,5 +45,6 @@
   "terminal_results_observed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "independent_verification": "canonical/verification/TB_SCIENCE_DETERMINISTIC_TERMINALIZATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
 }
