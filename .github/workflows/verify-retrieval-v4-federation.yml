@@ -1,0 +1,22 @@
+name: Verify Retrieval V4 federation
+on:
+  push:
+    branches:
+      - repair/retrieval-v4-federation-execution-20261003
+    paths:
+      - canonical/runtime/public_source_federation_v2.py
+      - canonical/runtime/public_source_federation_executor_v1.py
+      - canonical/tests/test_retrieval_v4_federation_execution.py
+      - .github/workflows/verify-retrieval-v4-federation.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_retrieval_v4_federation_execution
