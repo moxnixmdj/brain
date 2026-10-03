@@ -1,0 +1,833 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "POST-DELEGATION-V4-39-ATOM-PRIVATE-SCAN-20261003-V1",
+  "status": "CURRENT_39_ATOM_PRIVATE_V4_SCAN__LOCAL_CANDIDATE_ONLY__ZERO_CREDIT__COMPOSITION_NOT_INDEPENDENTLY_VERIFIED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "fde07ef620f061272b07b986a6c1d64bb2c48617",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "POST_DELEGATION_39_ATOM_BASIS_LACKS_CURRENT_SOURCE_CONTENT_ADDRESSED_V4_CANDIDATE_INDEX_FOR_AUTHORITY_RERANK",
+  "action_kind": "EVIDENCE_PRESERVATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::POST_DELEGATION_39_ATOM_BASIS_LACKS_CURRENT_SOURCE_CONTENT_ADDRESSED_V4_CANDIDATE_INDEX_FOR_AUTHORITY_RERANK",
+  "expected_parent_frontier_change": "Produce canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V3.json and canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V3.json from the exact current private Brain repository corpus at source commit 0257761299d0201688c3358760d21fcc623155cf (tree d47c6ba4cec6dca30c6c41718952feddeff5d27f), by direct invocation of the independently verified post-delegation recompiler and V4 indexer components, using only the exact 30-predicate/16-certificate/21-action/39-PA1-atom projection. Verify input code and tests against their recorded independent receipts; verify compiled projection counts, basis-manifest digest, scan-policy digest, full eligible-file manifest and its SHA-256 equal the V4 index output. Do not invoke the unverified composition adapter. Label the local composition as not independently verified. This is candidate discovery/scheduling only: do not adjudicate candidates as proof, alter CURRENT_TERMINAL_AUTHORITY, ACTIVE_GOAL_HIERARCHY, scoreboard, acceptance bindings, or any scope contract; no public corpus exposure, no public-600 run, no P1, no PR1150, and no terminal replay. Preserve 3/19 families, 8/38 proved, 30 unresolved, terminal=false and zero credit.",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "POST_DELEGATION_RECOMPILER_30_16_21_39_AND_V4_INDEXER_EXACT_BLOBS_INDEPENDENTLY_VERIFIED__CURRENT_SOURCE_SCAN_MISSING__HISTORICAL_SNAPSHOT_F896_ONLY",
+  "probe_id": null,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "prior_work_checked": [
+    "Current branch base for this action is the validated mirror-repair commit 0257761299d0201688c3358760d21fcc623155cf (tree d47c6ba4cec6dca30c6c41718952feddeff5d27f); current terminal authority and hierarchy remain aligned, and reducer/continuous OBS/V11 hierarchy guard pass.",
+    "Current terminal authority still says 3/19 families, 8/38 predicates proved, 30 unresolved, terminal false; no terminal action or public-600 spend is authorized.",
+    "Post-delegation recompile active authority independently verifies exactly 30 unresolved predicates, 16 certificates, 21 actions and 39 PA1 atoms after removing only the delegation leaf.",
+    "V4 indexer and recompiler component code, tests and pinned source input blobs match their exact independent public-runner receipts; the composition adapter itself has no independent receipt and will not be invoked.",
+    "Historical V4 scan V2 is bound to source f896a7fb410e1dc290ef55f1a844d4d40f76e816 and is explicitly not a current-corpus result; its two-candidate adjudication is not reused as current.",
+    "A previous mistyped module --help invocation accidentally executed the default pre-delegation 40-atom indexer. No artifacts were written; it is disqualified, not used, and not substituted for this exact 39-atom scan.",
+    "The prior mirror action intent V2 is completed and recorded in commit 0257761299d0201688c3358760d21fcc623155cf; this action is distinct and bound to the current terminal rerank and post-delegation scan authority.",
+    "The repository was confirmed private. This action uses only a local private checkout; no public runner, network search, public corpus exposure, task instruction, or terminal replay.",
+    "The Business Workflow target is preserved. AutomationBench public 600 is not the official private leaderboard population and cannot discharge the frozen 40% bar.",
+    "The existing TB-Science Brain-control candidate is zero-case and claims neither the 58.7% bar nor acceptance credit; it is not selected as a promotion route."
+  ],
+  "stop_condition": "Stop only if the exact active recompiler/indexer/test/input blobs match the recorded independent receipts; recompile returns 30 unresolved predicates, 16 certificates, 21 actions and 39 PA1 atoms; V4 returns PASS with 39 atoms and zero credit; the independently reconstructed eligible-file manifest count and digest exactly match the index output; result and manifest are stored under the declared private verification paths; and post-action continuous OBS plus the hierarchy gate pass. Do not treat literal matches as proof, do not claim a family/predicate closure, do not update terminal acceptance, and do not expose the corpus publicly or replay terminal work.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION",
+    "semantic_contract_policy": "NO_TERM_WITHOUT_COMPLETE_BEHAVIORAL_CONTRACT__ACCOUNTING_LABELS_HAVE_ZERO_IMPLEMENTATION_ONTOLOGY_AUTHORITY"
+  },
+  "ownership_tests": [],
+  "reasoning_durability": {
+    "chat_only_authority": false,
+    "real_objective": "Permanently own Brain-configured routes for Opus 5.5 useful capabilities at equal or better performance. This zero-credit action refreshes only the candidate receipt inventory used for the current rerank.",
+    "governing_invariants": [
+      "Current terminal authority is read-only input.",
+      "Literal receipt matches are candidate pointers only, never proof.",
+      "No acceptance or family promotion from index output.",
+      "No public-600 execution for the private leaderboard bar.",
+      "No P1, PR1150 reduction, terminal replay, or public corpus exposure.",
+      "The post-delegation 39-atom basis and current source corpus must be exactly bound."
+    ],
+    "material_premises": [
+      "Current authority is terminal=false at 3/19 and 8/38 with 30 unresolved.",
+      "Independent post-delegation receipt authorizes the 30/16/21/39 projection with zero credit.",
+      "Independent V4 receipt verifies exact indexer bytes and adversarial suite, but not a current corpus scan or the recompiler/indexer composition.",
+      "The existing V4 snapshot is historical at source f896 and cannot be reused as current.",
+      "The active post-delegation authority requests a private-safe V4 scan over exactly 39 PA1 atoms."
+    ],
+    "evidence_refs": [
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+      "canonical/governance/POST_DELEGATION_FRONTIER_RECOMPILE_ACTIVE_AUTHORITY_V1.json",
+      "canonical/verification/POST_DELEGATION_FRONTIER_RECOMPILE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V4.json",
+      "canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V2.json",
+      "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json"
+    ],
+    "conclusion": "Create a current, content-addressed local candidate index and complete eligible-file manifest using the exact 39-atom projection; leave proof adjudication and family reranking unresolved until candidates are reviewed against scope-complete acceptance evidence.",
+    "selected_route": "DIRECT_LOCAL_INVOCATION_OF_EXACT_VERIFIED_COMPONENTS_WITH_EXPLICIT_39_ATOM_AND_MANIFEST_ASSERTIONS__NO_UNVERIFIED_ADAPTER__CANDIDATE_ONLY",
+    "rejected_material_alternatives": [
+      "Run V4 default entrypoint on its stale 40-atom basis.",
+      "Invoke the unverified post_delegation_v4_index_adapter_v1 as if independently verified.",
+      "Reuse the historical V4 scan at f896 as current corpus evidence.",
+      "Use a public runner or upload the private corpus.",
+      "Run AutomationBench public 600 for the private bar.",
+      "Replay terminal tasks or use P1/PR1150."
+    ],
+    "uncertainties": [
+      "The local composition of independently verified recompiler and indexer is not independently verified; output is a local candidate only.",
+      "Literal matching can miss semantically equivalent evidence and can include stale/open restatements; every candidate requires review.",
+      "No current shortest promotion-safe one-predicate family is selected by this scan.",
+      "The accidental 40-atom default scan output is invalid and disqualified; no 39-atom current scan has yet run."
+    ],
+    "assumptions": [
+      "The exact source tree at 0257761299d0201688c3358760d21fcc623155cf is the current content-addressed private corpus for this scan.",
+      "All candidate paths are restricted to the V4 indexer search roots and policy.",
+      "The recompiler, V4 indexer and basis compiler remain byte-identical to their independent receipts."
+    ],
+    "non_goals": [
+      "No terminal case/task read or replay.",
+      "No public corpus exposure or external runner.",
+      "No AutomationBench public-600 execution.",
+      "No P1 execution or PR1150 reduction.",
+      "No family or predicate acceptance claim.",
+      "No capability/family/execution/promotion credit.",
+      "No adapter integration or code change."
+    ],
+    "next_action": "AUTOMATIONBENCH_PUBLIC_600_TERMINAL_SPEND_BLOCKED_ON_VERIFIED_PRIVATE_LEADERBOARD_SCOPE_MISMATCH__PRESERVE_BUSINESS_WORKFLOW_TARGET__RERANK_TO_SHORTEST_PROMOTION_SAFE_ONE_PREDICATE_FAMILY_OR_SCOPE_COMPLETE_STRONGER_PROOF__DO_NOT_EXECUTE_PUBLIC_600_FOR_PRIVATE_40_PERCENT_BAR",
+    "supersession_conditions": [
+      "Any exact input/runtime/test/verification blob changes before scan.",
+      "Current terminal authority or hierarchy changes before scan.",
+      "The 39-atom projection no longer matches the active authority."
+    ],
+    "supersedes": "2026-10-03_POST_DELEGATION_V4_INDEX_ADAPTER_V1.json is stale/unverified and not executed; 2026-10-03_RECONCILE_CURRENT_FRONTIER_MIRRORS_V2.json records the separately completed mirror repair."
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "fde07ef620f061272b07b986a6c1d64bb2c48617",
+    "real_outcome": "Produce a complete current-source candidate index bound to the verified 39-atom post-delegation projection and private corpus manifest, solely to improve the next evidence-based rerank.",
+    "required_capability": "CONTENT_ADDRESSED_PRIVATE_EVIDENCE_CANDIDATE_INDEXING_ON_CURRENT_PA1_BASIS",
+    "obs_goal": {
+      "real_outcome": "Refresh only literal candidate pointers for the exact current 39-atom post-delegation basis; preserve terminal truth and promote nothing.",
+      "proxy_goals_deleted": [
+        "Do not interpret index hits as proof.",
+        "Do not treat zero literal hits as absence of semantic proof.",
+        "Do not rerun a terminal benchmark to replace a local receipt scan."
+      ],
+      "surviving_necessity": "Active post-delegation authority explicitly requests a current private-safe V4 index; the only existing full scan is pinned to older source f896."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Independently verified post_delegation_frontier_recompile_v1 component and exact receipt.",
+        "Independently verified proof_atom_receipt_index_v4 component and exact receipt.",
+        "canonical_proof_atom_basis_v2 compiler with exact recorded blob.",
+        "Current private Brain repository and historical V4 scan artifacts."
+      ],
+      "external_existing_routes_checked": [
+        "No external provider or runner is required; exact local canonical files are the complete input boundary."
+      ],
+      "capability_work_deleted": [
+        "No model training, capability implementation, benchmark task, acceptance reduction, or public scan is part of this action."
+      ],
+      "surviving_gap": "Current V4 corpus result on the exact 39-atom basis is absent; candidate pointers remain scheduling-only and all 30 predicates remain unresolved."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "CURRENT_SOURCE_CORPUS_SNAPSHOT_MISSING__HISTORICAL_SCAN_IS_STALE",
+      "delete_bypass_substitute_options": [
+        "Use the already verified exact recompiler and V4 functions directly with explicit invariant checks.",
+        "Historical V4 scan at f896 is not reusable as a current scan.",
+        "The unverified composition adapter is not invoked.",
+        "Public runner/upload is rejected by private-corpus boundary."
+      ],
+      "surviving_causal_blocker": "No current content-addressed eligible-file manifest and V4 candidate map exists over the exact post-delegation 39-atom basis."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1_DIRECT_LOCAL_CALLS_TO_EXACT_VERIFIED_RECOMPILER_AND_V4_INDEXER_WITH_39_ATOM_ASSERTIONS",
+        "2_UNVERIFIED_COMPOSITION_ADAPTER_REJECTED_AS_INDEPENDENT_AUTHORITY",
+        "3_REUSE_HISTORICAL_F896_SCAN_REJECTED_AS_STALE",
+        "4_PUBLIC_RUNNER_OR_CORPUS_UPLOAD_REJECTED"
+      ],
+      "losing_routes_reason": "Only the direct local component calls preserve exact verified binaries while keeping corpus private; the other routes use stale input, unverified glue or public exposure.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Assert exact independent component/input blob identities, 30/16/21/39 recompile counts, exact basis digest, V4 PASS/39/zero-credit flags, and independently reconstructed corpus-manifest count/digest equality. Run local current-state reducer, continuous OBS and V11 hierarchy gate; no terminal task is needed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Historical pinned V4 full corpus scan V2 at f896 is not current.",
+        "The old adapter action intent/runtime is unverified and stale; do not invoke or use as authority.",
+        "The accidental pre-delegation 40-atom default V4 output is disqualified and not used."
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Current post-delegation frontier is 30 unresolved predicates and 39 PA1 atoms.",
+        "Business Workflow target remains preserved; public 600 fails official private-population scope.",
+        "Tool Discovery V8, OBS V2, proof-router V2 and acceptance-backprop passes remain zero-credit and do not select a family here.",
+        "P1 remains quarantined and unauthorized; no PR1150 reduction."
+      ],
+      "fresh_reuse_plan": "Reuse the exact source frontier/hypergraph/overlay and exact independently verified component code. Keep the scan local and write only candidate pointers plus complete content-addressed manifest."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Current terminal/hierarchy mirror reducer and V11 gate already pass at the current branch head.",
+        "Exact component and test blob identities are pinned by independent receipts.",
+        "Historical V4 snapshot source commit and corpus inequality are already recorded; do not rescan that source."
+      ],
+      "search_stop_decision": "Stop after the 39-atom result and complete manifest verify; no semantic adjudication, acceptance reduction or terminal task execution is authorized by this action.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "DIRECT_LOCAL_39_ATOM_V4_SCAN",
+      "UNVERIFIED_ADAPTER",
+      "HISTORICAL_SCAN_REUSE",
+      "PUBLIC_CORPUS_CARRIER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "UNVERIFIED_ADAPTER_AS_AUTHORITY",
+      "HISTORICAL_SCAN_REUSE_AS_CURRENT",
+      "PUBLIC_CORPUS_CARRIER"
+    ],
+    "selected_surviving_route": "DIRECT_LOCAL_39_ATOM_V4_SCAN__LOCAL_CANDIDATE_ONLY__ZERO_CREDIT",
+    "why_selected_route_is_fastest_sufficient": "A local direct call to the exact verified components performs the expressly authorized current scan without public transfer, stale basis or new code adapter.",
+    "expected_parent_level_state_change": "Produce canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V3.json and canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V3.json from the exact current private Brain repository corpus at source commit 0257761299d0201688c3358760d21fcc623155cf (tree d47c6ba4cec6dca30c6c41718952feddeff5d27f), by direct invocation of the independently verified post-delegation recompiler and V4 indexer components, using only the exact 30-predicate/16-certificate/21-action/39-PA1-atom projection. Verify input code and tests against their recorded independent receipts; verify compiled projection counts, basis-manifest digest, scan-policy digest, full eligible-file manifest and its SHA-256 equal the V4 index output. Do not invoke the unverified composition adapter. Label the local composition as not independently verified. This is candidate discovery/scheduling only: do not adjudicate candidates as proof, alter CURRENT_TERMINAL_AUTHORITY, ACTIVE_GOAL_HIERARCHY, scoreboard, acceptance bindings, or any scope contract; no public corpus exposure, no public-600 run, no P1, no PR1150, and no terminal replay. Preserve 3/19 families, 8/38 proved, 30 unresolved, terminal=false and zero credit.",
+    "stop_condition": "Stop only if the exact active recompiler/indexer/test/input blobs match the recorded independent receipts; recompile returns 30 unresolved predicates, 16 certificates, 21 actions and 39 PA1 atoms; V4 returns PASS with 39 atoms and zero credit; the independently reconstructed eligible-file manifest count and digest exactly match the index output; result and manifest are stored under the declared private verification paths; and post-action continuous OBS plus the hierarchy gate pass. Do not treat literal matches as proof, do not claim a family/predicate closure, do not update terminal acceptance, and do not expose the corpus publicly or replay terminal work.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "EVIDENCE_PRESERVATION uses only exact local verified components and local repository corpus; no supplier or external route is selected."
+    },
+    "theory_invariants": {
+      "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+      "knowledge_policy": "EXTERNAL_JIT",
+      "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+      "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+      "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+      "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+      "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+      "provider_access_is_ownership": false,
+      "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION",
+      "semantic_contract_policy": "NO_TERM_WITHOUT_COMPLETE_BEHAVIORAL_CONTRACT__ACCOUNTING_LABELS_HAVE_ZERO_IMPLEMENTATION_ONTOLOGY_AUTHORITY"
+    },
+    "reasoning_durability": {
+      "chat_only_authority": false,
+      "real_objective": "Permanently own Brain-configured routes for Opus 5.5 useful capabilities at equal or better performance. This zero-credit action refreshes only the candidate receipt inventory used for the current rerank.",
+      "governing_invariants": [
+        "Current terminal authority is read-only input.",
+        "Literal receipt matches are candidate pointers only, never proof.",
+        "No acceptance or family promotion from index output.",
+        "No public-600 execution for the private leaderboard bar.",
+        "No P1, PR1150 reduction, terminal replay, or public corpus exposure.",
+        "The post-delegation 39-atom basis and current source corpus must be exactly bound."
+      ],
+      "material_premises": [
+        "Current authority is terminal=false at 3/19 and 8/38 with 30 unresolved.",
+        "Independent post-delegation receipt authorizes the 30/16/21/39 projection with zero credit.",
+        "Independent V4 receipt verifies exact indexer bytes and adversarial suite, but not a current corpus scan or the recompiler/indexer composition.",
+        "The existing V4 snapshot is historical at source f896 and cannot be reused as current.",
+        "The active post-delegation authority requests a private-safe V4 scan over exactly 39 PA1 atoms."
+      ],
+      "evidence_refs": [
+        "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+        "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+        "canonical/governance/POST_DELEGATION_FRONTIER_RECOMPILE_ACTIVE_AUTHORITY_V1.json",
+        "canonical/verification/POST_DELEGATION_FRONTIER_RECOMPILE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V4.json",
+        "canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V2.json",
+        "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json"
+      ],
+      "conclusion": "Create a current, content-addressed local candidate index and complete eligible-file manifest using the exact 39-atom projection; leave proof adjudication and family reranking unresolved until candidates are reviewed against scope-complete acceptance evidence.",
+      "selected_route": "DIRECT_LOCAL_INVOCATION_OF_EXACT_VERIFIED_COMPONENTS_WITH_EXPLICIT_39_ATOM_AND_MANIFEST_ASSERTIONS__NO_UNVERIFIED_ADAPTER__CANDIDATE_ONLY",
+      "rejected_material_alternatives": [
+        "Run V4 default entrypoint on its stale 40-atom basis.",
+        "Invoke the unverified post_delegation_v4_index_adapter_v1 as if independently verified.",
+        "Reuse the historical V4 scan at f896 as current corpus evidence.",
+        "Use a public runner or upload the private corpus.",
+        "Run AutomationBench public 600 for the private bar.",
+        "Replay terminal tasks or use P1/PR1150."
+      ],
+      "uncertainties": [
+        "The local composition of independently verified recompiler and indexer is not independently verified; output is a local candidate only.",
+        "Literal matching can miss semantically equivalent evidence and can include stale/open restatements; every candidate requires review.",
+        "No current shortest promotion-safe one-predicate family is selected by this scan.",
+        "The accidental 40-atom default scan output is invalid and disqualified; no 39-atom current scan has yet run."
+      ],
+      "assumptions": [
+        "The exact source tree at 0257761299d0201688c3358760d21fcc623155cf is the current content-addressed private corpus for this scan.",
+        "All candidate paths are restricted to the V4 indexer search roots and policy.",
+        "The recompiler, V4 indexer and basis compiler remain byte-identical to their independent receipts."
+      ],
+      "non_goals": [
+        "No terminal case/task read or replay.",
+        "No public corpus exposure or external runner.",
+        "No AutomationBench public-600 execution.",
+        "No P1 execution or PR1150 reduction.",
+        "No family or predicate acceptance claim.",
+        "No capability/family/execution/promotion credit.",
+        "No adapter integration or code change."
+      ],
+      "next_action": "AUTOMATIONBENCH_PUBLIC_600_TERMINAL_SPEND_BLOCKED_ON_VERIFIED_PRIVATE_LEADERBOARD_SCOPE_MISMATCH__PRESERVE_BUSINESS_WORKFLOW_TARGET__RERANK_TO_SHORTEST_PROMOTION_SAFE_ONE_PREDICATE_FAMILY_OR_SCOPE_COMPLETE_STRONGER_PROOF__DO_NOT_EXECUTE_PUBLIC_600_FOR_PRIVATE_40_PERCENT_BAR",
+      "supersession_conditions": [
+        "Any exact input/runtime/test/verification blob changes before scan.",
+        "Current terminal authority or hierarchy changes before scan.",
+        "The 39-atom projection no longer matches the active authority."
+      ],
+      "supersedes": "2026-10-03_POST_DELEGATION_V4_INDEX_ADAPTER_V1.json is stale/unverified and not executed; 2026-10-03_RECONCILE_CURRENT_FRONTIER_MIRRORS_V2.json records the separately completed mirror repair."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "POST_DELEGATION_PRIVATE_V4_SCAN_39_ATOM_V1",
+    "inputs": "Private local Brain repository source tree 0257761299d0201688c3358760d21fcc623155cf (d47c6ba4cec6dca30c6c41718952feddeff5d27f); TERMINAL_CERTIFICATE_FRONTIER_V5, OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2, PROOF_ATOM_REFINEMENT_OVERLAY_V1; exact verified recompiler, V4 indexer and basis compiler.",
+    "environment_state": "Current terminal authority is 3/19 and 8/38 with 30 unresolved. Active post-delegation authority is 30 predicates / 16 certificates / 21 actions / 39 PA1 atoms. Historical scan V2 is pinned to f896 and is not current. Public-600 remains blocked for the private bar.",
+    "allowed_information": "Read only the V4-declared local canonical/verification, canonical/capabilities and canonical/governance search roots plus the exact recompile inputs. No public runner, external source, task instruction, terminal task content, public corpus exposure, or terminal execution.",
+    "required_output_or_action": "Write canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V3.json and canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V3.json with exact source commit/tree, verified input blob IDs, recompile summary, V4 result, complete eligible-file manifest, and matching content digests. Mark composition as local/unverified and every match candidate-only.",
+    "success_condition": "Recompile matches 30/16/21/39; V4 returns PASS over 39 atoms with all credit/execution/promotion fields zero; eligible-file manifest count and digest exactly match V4 output; terminal acceptance and restrictions unchanged.",
+    "failure_condition": "Any blob mismatch, basis/count mismatch, manifest mismatch, decode/scan failure, unexpected workspace change in the scan roots, result not PASS, or nonzero credit/authority.",
+    "terminal_consequence": "No acceptance or family predicate is closed. Output only supports candidate review and scheduling; all current terminal truth is preserved.",
+    "verification_route": "Check current component/test blobs against independent receipts, run component unit tests where available, call compile_post_delegation then build_index directly (not the adapter), assert basis digest/counts, rebuild manifest using the indexer candidate enumeration/hash functions and compare digest, then run reducer/continuous OBS/hierarchy gate.",
+    "dependency_boundary": "No edits to terminal authority, active hierarchy, score, acceptance binding, global cut, target scope, model/runtime behavior or benchmark surfaces. No corpus leaves the private local checkout.",
+    "scope": "Only local read-only V4 candidate scan plus two declared private verification artifacts; no promotion/adjudication."
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "Read-only local repository evidence indexing; no qualification task instruction or task content is exposed and no terminal execution occurs.",
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_terminal_evidence": false
+  },
+  "qualification_stage": "NOT_APPLICABLE__READ_ONLY_LOCAL_REPOSITORY_CANDIDATE_SCAN",
+  "terminal_proof_control": {
+    "proof_obligation": "Generate a current content-addressed candidate map over the exact independently verified post-delegation 39-atom basis.",
+    "hole_type": "CURRENT_ELIGIBLE_CORPUS_INDEX_MISSING__HISTORICAL_SCAN_STALE",
+    "expected_certificate_or_receipt": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V3.json plus canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V3.json; local candidate only, no independent composition receipt.",
+    "validator": "canonical/runtime/post_delegation_frontier_recompile_v1.py and canonical/runtime/proof_atom_receipt_index_v4.py direct functions; canonical/runtime/continuous_obs_runtime.py; canonical/runtime/enforce_goal_hierarchy.py",
+    "maximum_cheap_test_cost": "LOCAL_CPU_ONLY__ZERO_EXTERNAL_REALITY__NO_TERMINAL_TASK",
+    "prerequisites": [
+      "Exact recompiler and V4 indexer component blobs match independent receipts.",
+      "Active post-delegation projection is exactly 30/16/21/39.",
+      "Repository remains private; scan stays local.",
+      "No public-600 execution, P1 execution, PR1150 reduction, terminal replay or corpus upload."
+    ],
+    "contamination_risk": "NONE__NO_TERMINAL_TASK_OR_INSTRUCTION_CONTENT_READ__CANONICAL_EVIDENCE_CORPUS_ONLY",
+    "reversibility": "DELETE_CANDIDATE_ARTIFACTS_WITHOUT_CHANGING_AUTHORITY",
+    "falsification_condition": "Any exact input digest or output invariant fails; quarantine output and do not use for rerank.",
+    "critical_path_relation": "ZERO_CREDIT_EVIDENCE_SATURATION_SUPPORTING_CURRENT_RERANK__NOT_ACCEPTANCE_CLOSURE"
+  },
+  "continuous_obs": {
+    "schema": "PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
+    "status": "CURRENT",
+    "checked_at_utc": "2026-10-03T05:26:49.340002+00:00",
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      {
+        "path": "canonical/CANONICAL_POINTER.json",
+        "sha256": "094b63f593ae1c03ee6e4549ad132e8d90a3d4d3d1b26e4cc20515311f201b50"
+      },
+      {
+        "path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+        "sha256": "e8b1b5b1dbaad489c1ccfbf8871ace635f60e67812322c71833beab7d53182db"
+      },
+      {
+        "path": "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json",
+        "sha256": "382723c6b92c910d599e65008823e33253a48de3edcc2f96d791d2b98550b192"
+      },
+      {
+        "path": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+        "sha256": "4195b6d2188fa31ed6c0e2bda3dae10f142357d1a8330de65ab3b61ea93e9d8f"
+      },
+      {
+        "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+        "sha256": "ae948a1ecf340cbbb59cc80cdc23bdaa937b4cce8adbab18325c24f0f1a00d9c"
+      },
+      {
+        "path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+        "sha256": "e5e3def88cbc9b74bd3c53bc98efe939770f963ca0d4986b9b990d6e488ff033"
+      },
+      {
+        "path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+        "sha256": "c8bb30230ac748f88d16c7d0b45af7aa03ac143aa52e564a8836a454ead19d73"
+      },
+      {
+        "path": "canonical/governance/POST_DELEGATION_FRONTIER_RECOMPILE_ACTIVE_AUTHORITY_V1.json",
+        "sha256": "eba4b514a6b77a56480e91334d0b0ecc59de9f42b8263b183e189daa0a935956"
+      },
+      {
+        "path": "canonical/governance/POST_DELEGATION_FRONTIER_RECOMPILE_V1.json",
+        "sha256": "7df35fc66ddeb4bea54114b9aed92955c6735065e40b2714d63dc12418929625"
+      },
+      {
+        "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+        "sha256": "e6b9e651cb6045c17c08ec7d4d0723922ccb1d617128f0976173100abf497b5f"
+      },
+      {
+        "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+        "sha256": "051a5619d502131a4a3b0bd1c2233877fc22e73fed4691caff909c22ddf95895"
+      },
+      {
+        "path": "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json",
+        "sha256": "3c7e570a55bab0dc3dfce12caddcdbf6c658138f4ce5f5dcd1a88966019e19ef"
+      },
+      {
+        "path": "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V4.json",
+        "sha256": "f732eba8cfddedb1c75d62a9d0039db9f0eaa72f468fbbb3ce22b445e7fece9f"
+      },
+      {
+        "path": "canonical/runtime/post_delegation_frontier_recompile_v1.py",
+        "sha256": "95d23bdca5ed04eec9a19c2d58af8015478c76a68d39861b57c43965ff9ac28c"
+      },
+      {
+        "path": "canonical/tests/test_post_delegation_frontier_recompile_v1.py",
+        "sha256": "eace0e4323e32f6195db69036a40635481dbbffba634975a6b711b459268ade9"
+      },
+      {
+        "path": "canonical/runtime/proof_atom_receipt_index_v4.py",
+        "sha256": "9e7e6bb87f6fa0eed392d44855ce3717d49c4961bfcb38c52074ec2c43fafb91"
+      },
+      {
+        "path": "canonical/tests/test_proof_atom_receipt_index_v4.py",
+        "sha256": "9dd53ee3ef2e30ee39d223590a664c07fbbc4c0e0ea4c2d464cedf74200eac0b"
+      },
+      {
+        "path": "canonical/runtime/canonical_proof_atom_basis_v2.py",
+        "sha256": "c04ae758476d72e214904beaed6022746ba0d2ee0ead12548c4705bf3b421a97"
+      },
+      {
+        "path": "canonical/verification/POST_DELEGATION_FRONTIER_RECOMPILE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "sha256": "faf5d9b6663f428297327e9cd765c7572df061a2c0742efff951ae058a834001"
+      },
+      {
+        "path": "canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "sha256": "d98f252c362bc56f661e5690a9c17b03d02c8f9719a968fc85dbc69fa5ac4f40"
+      },
+      {
+        "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V2.json",
+        "sha256": "c0a15123b14317825662177dd0f7e6aebdf0bda333d5db9ad83a66a6b991d91f"
+      },
+      {
+        "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V2.json",
+        "sha256": "d3051f945091272719104d9b8ebba3a4a71529e85fc7a594018595ad57da01f1"
+      },
+      {
+        "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_ADJUDICATION_20261003_V2.json",
+        "sha256": "4d626681ffd46fe3e48c047af4ff69d3dcf2d7509cf98f94246ff027b8b7b7b6"
+      },
+      {
+        "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CLOSURE_20261003_V2.json",
+        "sha256": "bc310cf3b0f467218803fa06fc6185b9571e9af8cda4779a1eab4ce29c0aa64e"
+      },
+      {
+        "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_INDEPENDENT_SESSION_REVIEW_20261003_V2.json",
+        "sha256": "74d3bc68900f42a260b3d7d93d40c45767de52acc8730d88c3bd0103dcf21589"
+      },
+      {
+        "path": "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json",
+        "sha256": "6bb8ee41438024a688edde43fe4e455b33062ff60e58eb1df493f9378cb557c3"
+      },
+      {
+        "path": "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json",
+        "sha256": "47ac9fa6405ff818d5cc8f964ab94ab1f05f0c59b164de9ceb3bfdc93bc101a4"
+      }
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "obs_layers_current": {
+      "goal": true,
+      "capability": true,
+      "blocker": true,
+      "solution": true,
+      "verification": true,
+      "inherited_system": true,
+      "obs_process": true
+    },
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": true,
+    "information_boundary_complete": true,
+    "information_policy": {
+      "mode": "NO_EXTERNAL_INFORMATION",
+      "allowed_exact_sources": [
+        "canonical/CANONICAL_POINTER.json",
+        "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+        "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json",
+        "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+        "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+        "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+        "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+        "canonical/governance/POST_DELEGATION_FRONTIER_RECOMPILE_ACTIVE_AUTHORITY_V1.json",
+        "canonical/governance/POST_DELEGATION_FRONTIER_RECOMPILE_V1.json",
+        "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+        "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+        "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json",
+        "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V4.json",
+        "canonical/runtime/post_delegation_frontier_recompile_v1.py",
+        "canonical/tests/test_post_delegation_frontier_recompile_v1.py",
+        "canonical/runtime/proof_atom_receipt_index_v4.py",
+        "canonical/tests/test_proof_atom_receipt_index_v4.py",
+        "canonical/runtime/canonical_proof_atom_basis_v2.py",
+        "canonical/verification/POST_DELEGATION_FRONTIER_RECOMPILE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V2.json",
+        "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V2.json",
+        "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_ADJUDICATION_20261003_V2.json",
+        "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CLOSURE_20261003_V2.json",
+        "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_INDEPENDENT_SESSION_REVIEW_20261003_V2.json",
+        "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json",
+        "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json"
+      ],
+      "allowed_external_tool_kinds": []
+    },
+    "dependencies": [
+      {
+        "dependency_id": "current_terminal_authority",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json:e40b7cc2fdb82e0ddb7bc7444ffa1366a582c7a5"
+        ]
+      },
+      {
+        "dependency_id": "active_goal_hierarchy",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json:3af8d13557805d9f9c7730c06195762cb926097e"
+        ]
+      },
+      {
+        "dependency_id": "canonical_pointer",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/CANONICAL_POINTER.json:c6aced55a287b4b4376bffdc171c2dec73c75ff8"
+        ]
+      },
+      {
+        "dependency_id": "frontier_queue",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json:c7570f10839f97b45beea2fabbf10d3e5a1a202e"
+        ]
+      },
+      {
+        "dependency_id": "active_ownership_target",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json:1e96f3adaaaa4b255e08a59fa34a9d4a72fbfe4f"
+        ]
+      },
+      {
+        "dependency_id": "global_terminal_universe",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json:ff97ffee7c9b25a491ff5ee231919ea4964f09e3"
+        ]
+      },
+      {
+        "dependency_id": "real_output_scoreboard",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json:55ebd18168dca1d3df3c8fe14db6a6d94533ec82"
+        ]
+      },
+      {
+        "dependency_id": "post_delegation_active_authority",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/POST_DELEGATION_FRONTIER_RECOMPILE_ACTIVE_AUTHORITY_V1.json:bcd98020bac54ed539d00649606d7e46671604c4"
+        ]
+      },
+      {
+        "dependency_id": "post_delegation_recompile_spec",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/POST_DELEGATION_FRONTIER_RECOMPILE_V1.json:f297597233957f8596917436ec8060fa4894db2f"
+        ]
+      },
+      {
+        "dependency_id": "post_delegation_recompile_runtime",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/runtime/post_delegation_frontier_recompile_v1.py:47adb1b3c91fde4972563a58b466c22eba0278a1"
+        ]
+      },
+      {
+        "dependency_id": "post_delegation_recompile_test",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/tests/test_post_delegation_frontier_recompile_v1.py:954383d6ddf405d6321260a05eafab8f4713148b"
+        ]
+      },
+      {
+        "dependency_id": "post_delegation_recompile_receipt",
+        "class": "VERIFICATION_RECEIPT",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/verification/POST_DELEGATION_FRONTIER_RECOMPILE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json:75cd86b9b0a29743e1f70c8821e4104adbe1bb78"
+        ]
+      },
+      {
+        "dependency_id": "v4_index_spec",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V4.json:65d0e860110b0dce40d6f2016003d1612614dc28"
+        ]
+      },
+      {
+        "dependency_id": "v4_index_runtime",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/runtime/proof_atom_receipt_index_v4.py:712443ddad23aed8d27df1e4f5372147c00ca57a"
+        ]
+      },
+      {
+        "dependency_id": "v4_index_test",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/tests/test_proof_atom_receipt_index_v4.py:6c1165a8836d480f36a3016d09214be93cd7061f"
+        ]
+      },
+      {
+        "dependency_id": "v4_index_receipt",
+        "class": "VERIFICATION_RECEIPT",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json:94f17692e7e875cb1ae603b8806e3f07484cbead"
+        ]
+      },
+      {
+        "dependency_id": "post_delegation_frontier_input",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json:4b5517dbd12978f8ffe481fb775e85592c7790c8"
+        ]
+      },
+      {
+        "dependency_id": "action_hypergraph_input",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json:ec0ca144939a19234f1c53378cc76af2014a6179"
+        ]
+      },
+      {
+        "dependency_id": "refinement_overlay_input",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json:898e450c62c06cf6d1a4a3f826a255da9161a229"
+        ]
+      },
+      {
+        "dependency_id": "canonical_proof_atom_basis_compiler",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/runtime/canonical_proof_atom_basis_v2.py:5b5957f353edab6c86a34f947ef253099822b0d1"
+        ]
+      },
+      {
+        "dependency_id": "historical_v4_full_snapshot",
+        "class": "VERIFICATION_RECEIPT",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V2.json:a0eada020f23e33cde569cbf75bdc7fed1317b07"
+        ]
+      },
+      {
+        "dependency_id": "historical_v4_manifest",
+        "class": "VERIFICATION_RECEIPT",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V2.json:1daba02240d3bbfc3881990a59892186d1a3887e"
+        ]
+      },
+      {
+        "dependency_id": "historical_v4_adjudication",
+        "class": "VERIFICATION_RECEIPT",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_ADJUDICATION_20261003_V2.json:3fd561cd54897ca32afa89ce3a5a34dd8b8bdaac"
+        ]
+      },
+      {
+        "dependency_id": "automationbench_scope_cut",
+        "class": "VERIFICATION_RECEIPT",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json:3f09067d0fa174c343f2f157495d3654a15b3965"
+        ]
+      },
+      {
+        "dependency_id": "business_workflow_scope_contract",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json:9c28951ab3c86a5104b4eec3628c105de79bd761"
+        ]
+      }
+    ]
+  },
+  "reality_query_admission": {
+    "proof_obligation": "Current source-bound local candidate map for 39 PA1 atoms; no terminal fact is queried and no task content is read.",
+    "existing_evidence_search": "Read current post-delegation active authority, exact independent runtime receipts and historical V4 manifest. Verified the old scan source is f896 and explicitly not reusable for current head.",
+    "evidence_scope_equivalence": "The V4 indexer policy searches only local canonical verification/capability/governance text roots; matches are literal candidates and the result binds each scanned eligible blob and the 39-atom basis.",
+    "deductive_closure": "Recompile removes exactly the independently closed delegation leaf. The indexer creates candidate pointers only; no acceptance proposition is discharged.",
+    "counterfactual_terminal_distinctions": [
+      "Current exact 39-atom projection versus stale default 40-atom input; only the former is admissible for candidate indexing.",
+      "Historical f896 corpus manifest versus current source-tree manifest; equality is not assumed."
+    ],
+    "dominated_observations_deleted": [
+      "AutomationBench public 600 for the official private bar.",
+      "P1 execution and PR1150 acceptance reduction.",
+      "Public runner upload of private corpus.",
+      "Terminal replay or untouched task-source reads.",
+      "The accidental default 40-atom output; invalid basis and not used."
+    ],
+    "candidate_observations": [],
+    "minimum_reality_cut": {
+      "status": "ZERO_EXTERNAL_REALITY__LOCAL_AUTHORITY_EXPLICITLY_REQUESTS_PRIVATE_SAFE_INDEX",
+      "members": [
+        "POST_DELEGATION_FRONTIER_RECOMPILE_ACTIVE_AUTHORITY_V1.next__EXACT_39_ATOM_LOCAL_V4_SCAN"
+      ]
+    },
+    "terminal_decision_value": "Improve current evidence saturation/rerank inputs without changing terminal acceptance; scan output is candidate-only and zero credit.",
+    "admission_verdict": "AUTHORIZED_LOCAL_PRIVATE_CORPUS_CANDIDATE_INDEX__NO_EXTERNAL_REALITY_OR_TERMINAL_REPLAY",
+    "global_cut_snapshot": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "global_cut_membership": "POST_DELEGATION_FRONTIER_RECOMPILE_ACTIVE_AUTHORITY_V1.next__CURRENT_39_ATOM_SCAN__ZERO_CREDIT"
+  },
+  "global_terminal_proof_cut": {
+    "graph_snapshot": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "existing_evidence_saturation": "Current authority and component verification receipts reused; historical V4 snapshot is expressly rejected as current. This action adds only a current local literal-candidate index.",
+    "deductive_closure": "Exactly one delegation leaf is removed by verified recompiler; V4 candidate matches are not proof and no acceptance predicate closes.",
+    "shared_residual_compression": "Preserve the active 30 unresolved predicates and 39 PA1 atom basis.",
+    "candidate_observations": [],
+    "dominance_deletions": [
+      "Public-600 execution for private bar.",
+      "P1 and PR1150.",
+      "Public scan carrier.",
+      "Terminal replay."
+    ],
+    "exact_global_minimum_reality_cut": "NO_EXTERNAL_TERMINAL_REALITY__LOCAL_REPOSITORY_SCAN_ONLY",
+    "proposed_action_membership": "POST_DELEGATION_ACTIVE_AUTHORITY__PRIVATE_39_ATOM_V4_CANDIDATE_SCAN",
+    "terminal_decision_value": "CURRENT_CANDIDATE_SATURATION_ONLY__ZERO_ACCEPTANCE_DELTA"
+  },
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "ownership_test_applicability": "NOT_APPLICABLE__CANDIDATE_INDEX_ONLY__ZERO_CREDIT",
+  "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json"
+}
