@@ -1,0 +1,150 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V4",
+  "date": "2026-10-03",
+  "status": "ACTIVE_TWO_CURRENTLY_ADMISSIBLE_MEMORY_AND_DELEGATION_RECEIPTS__2_SCOPED_PROVED_EXPECTED__10_OPEN__ZERO_PARENT_CREDIT",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "source_manifest": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+  "source_manifest_git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d",
+  "interfaces": [
+    {
+      "component_id": "research",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "tool use",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "artifact creation",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "browser/computer action",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "memory",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "recovery",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "coding",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "debugging",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "tool discovery",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "delegation",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "evidence synthesis",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "artifact production",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    }
+  ],
+  "receipts": [
+    {
+      "receipt_id": "COMPOSITION_OWNED_FAMILY_BRIDGE_V2::LONG_HORIZON_MEMORY_AND_CONTINUITY::memory",
+      "component_id": "memory",
+      "interface_id": "browser/computer action+memory+recovery",
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "verified": true,
+      "independent": true,
+      "contamination_clean": true,
+      "acceptance_scoped": true,
+      "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+      "source_family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "source_witness_path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "bridge_candidate_path": "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2.json"
+    },
+    {
+      "receipt_id": "COMPOSITION_SCOPE_COMPLETE_BRIDGE::SUBAGENT_DELEGATION_AND_COORDINATION::delegation::V1",
+      "component_id": "delegation",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "verified": true,
+      "independent": true,
+      "contamination_clean": true,
+      "acceptance_scoped": true,
+      "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+      "source_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "source_universal_scope_receipt": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "source_acceptance_receipt": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "bridge_candidate_path": "canonical/governance/COMPOSITION_DELEGATION_SCOPE_COMPLETE_BRIDGE_V1.json"
+    }
+  ],
+  "rule": "ONLY_SEPARATELY_INDEPENDENTLY_VERIFIED_CURRENT_SOURCE_MEMORY_AND_DELEGATION_RECEIPTS_ARE_ADDED_TO_THE_FROZEN_12_INTERFACE_BASELINE__HISTORICAL_QUARANTINED_RECEIPTS_REMAIN_EXCLUDED__NO_ADJACENT_INTERFACE_OR_PARENT_CREDIT",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "receipt_verification": [
+    {
+      "path": "canonical/verification/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "public_runner_pr": 1120,
+      "workflow_run_id": 37086511516,
+      "conclusion": "success"
+    },
+    {
+      "path": "canonical/verification/COMPOSITION_DELEGATION_BRIDGE_V1_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "public_runner_pr": 1129,
+      "workflow_run_id": 37086752998,
+      "workflow_job_id": 111098549344,
+      "conclusion": "success"
+    }
+  ]
+}
