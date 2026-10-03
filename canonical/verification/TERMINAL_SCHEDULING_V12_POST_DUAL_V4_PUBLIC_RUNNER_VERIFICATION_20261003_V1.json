@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V12_POST_DUAL_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__POST_DUAL_17_REQUIREMENTS__14_CERTIFICATES__31_PRIMITIVE_WORK_UNITS__V4_RETRIEVAL_MANDATORY__ZERO_CREDIT",
+  "verified_brain": {
+    "pull_request": 1342,
+    "candidate_path": "canonical/governance/TERMINAL_SCHEDULING_V12_ACTIVE_AUTHORITY_CANDIDATE_V1.json",
+    "candidate_git_blob_sha": "e9f0b028eeb6b1a36384bfc4f814f38a5ca79aa2",
+    "verifier_path": "canonical/runtime/verify_terminal_scheduling_v12_candidate_v1.py",
+    "verifier_git_blob_sha": "0424c3f7dff852d2b5373e247d0f0906591966e5",
+    "test_path": "canonical/tests/test_terminal_scheduling_v12_candidate_v1.py",
+    "test_git_blob_sha": "b1a7fccc58619be7bf8dd621630a72fa5a9ca2bf"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1338,
+    "verified_head_sha": "19f784d265904a9cb3ad346102be4358a165ef70",
+    "merge_commit": "53e6e09d42dad92741a7bba8705b4558bce507bb",
+    "workflow_run_id": 37122936230,
+    "workflow_job_id": 111202477468,
+    "conclusion": "success"
+  },
+  "verified": {
+    "active_zero_reality_requirements": 17,
+    "active_nondominated_certificates": 14,
+    "zero_reality_covered_predicates": 25,
+    "primitive_zero_reality_work_units": 31,
+    "matched_priority_child_facts": 16,
+    "direct_reality_blocked_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "tool_discovery_retrieval_authority": "V4_OVER_VERIFIED_V3_OVER_VERIFIED_V2_BASE",
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "fresh_reality_authority": false,
+    "zero_credit_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_OR_FAMILY_PROMOTION",
+    "NO_OWNERSHIP_PROMOTION",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_FINANCE_OR_UNKNOWN_DOMAIN_DIRECT_ORACLE_EXECUTION",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
