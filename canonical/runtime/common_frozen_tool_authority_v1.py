@@ -104,13 +104,13 @@ class CommonFrozenToolAuthority:
     def source_set_digest(self)->str:
         return _sha([self.discovery_source()])
 
-    def initial_public(self, required_capabilities:Sequence[str], *, constraint:Mapping[str,Any]|None=None)->dict[str,Any]:
+    def initial_public(self, required_capabilities:Sequence[str], *, constraint:Mapping[str,Any]|None=None, prior_probe_receipts:Sequence[Mapping[str,Any]]=())->dict[str,Any]:
         req=_required(required_capabilities)
         return {
             "required_capabilities":req,
             "constraint":dict(constraint) if isinstance(constraint,Mapping) else None,
             "visible_tools":[],
-            "prior_probe_receipts":[],
+            "prior_probe_receipts":[dict(x) for x in prior_probe_receipts],
             "discovery_sources":[self.discovery_source()],
             "discovery_receipts":[],
             "version_events":[],
