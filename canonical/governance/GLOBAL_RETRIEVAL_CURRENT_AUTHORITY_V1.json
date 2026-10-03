@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V6_CURRENT__EMPIRICAL_V8_ENTRYPOINT_V2_BOUND__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V6_CURRENT__EMPIRICAL_V8_ENTRYPOINT_V2_BOUND__GENERATED_STRESS_V9_BOUND__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_global_retrieval_authority": {
     "path": "canonical/governance/GLOBAL_RETRIEVAL_V6_ACTIVATION_V1.json",
@@ -55,7 +55,10 @@
     "FINITE_HIDDEN_WITNESS_ARENA_IS_REGRESSION_EVIDENCE_NOT_A_LIVE_PROVIDER_ORACLE",
     "FROZEN_104_CASE_MONOTONIC_POOLED_TOP5_RECALL_MUST_NOT_REGRESS_BELOW_1_0_WITHOUT_EXPLICIT_FAIL_CLOSED_SUPERSESSION",
     "LIVE_RETRIEVAL_EVENTS_ARE_APPEND_ONLY",
-    "FIXED_SOURCE_CORRELATION_AND_INDEPENDENCE_MULTIPLIERS_ARE_FORBIDDEN_FOR_CURRENT_EMPIRICAL_ROUTING"
+    "FIXED_SOURCE_CORRELATION_AND_INDEPENDENCE_MULTIPLIERS_ARE_FORBIDDEN_FOR_CURRENT_EMPIRICAL_ROUTING",
+    "FROZEN_768_CASE_GENERATED_HIDDEN_WITNESS_RECALL_MUST_NOT_REGRESS_BELOW_1_0_WITHOUT_EXPLICIT_FAIL_CLOSED_SUPERSESSION",
+    "GENERATED_STRESS_ARENA_MUST_NOT_CALIBRATE_LIVE_PROVIDER_ROUTING",
+    "QUERYLESS_MULTILINGUAL_AND_REVISION_HISTORY_ABLATIONS_MUST_CONTINUE_TO_FAIL"
   ],
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
@@ -115,5 +118,23 @@
       "fixed_source_independence_multiplier_used": false,
       "live_calibration_maturity": "EARLY__ONE_VERIFIED_HISTORICAL_SOURCE_EPOCH"
     }
+  },
+  "v9_generated_stress_extension": {
+    "activation_path": "canonical/governance/GLOBAL_RETRIEVAL_V9_STRESS_EXTENSION_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "aa13e5b42b71430e17402893c70cabced5dcfa76",
+    "activation_verification_path": "canonical/verification/GLOBAL_RETRIEVAL_V9_STRESS_EXTENSION_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "activation_verification_git_blob_sha": "2ba0906603e02b9bba6fdfa2575bcd853e4d3534",
+    "workflow_run_id": 37150908440,
+    "workflow_job_id": 111284430350,
+    "conclusion": "success",
+    "generated_hidden_witness_arena_path": "canonical/runtime/retrieval_hidden_witness_arena_v1.py",
+    "generated_hidden_witness_arena_git_blob_sha": "7cf00ad65bc160f4b3d1e7d90233c52f496a1bd1",
+    "generated_hidden_witness_test_git_blob_sha": "4d543fb4e54a23ab1979c774d938d7fa551e7a98",
+    "generated_hidden_witness_verification_git_blob_sha": "9abc46d4e673e4b02789f9cbd39ea19125b575b4",
+    "generated_case_count": 768,
+    "finite_hidden_witness_recall": 1,
+    "mandatory_regression_only": true,
+    "permitted_to_calibrate_live_provider_routing": false,
+    "open_world_recall_claim": false
   }
 }
