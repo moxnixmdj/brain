@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-03",
+  "action": "REPAIR_TOOL_DISCOVERY_DYNAMIC_LEAST_COST_SOUNDNESS_BEFORE_INTERFACE_INSTANCE_PROMOTION",
+  "authorized_by": "USER_EXPLICIT_JOIN_BRAIN_AND_MAKE_IMMEDIATE_BREAKTHROUGHS_DIRECTIVE",
+  "base_commit_sha": "ac46c26bd3f73f354d236ac7e20d54a02a20f97a",
+  "scope": "TOOL_DISCOVERY_CURRENT_CRITICAL_PATH__ZERO_FRESH_REALITY__NO_ACCEPTANCE_PROMOTION",
+  "discovery": "V3_SELECTS_VISIBLE_SUFFICIENT_ROUTE_BEFORE_UNQUERIED_COMPLETE_INTERFACE_SOURCES__HIDDEN_CHEAPER_SUFFICIENT_ROUTE_IS_A_COUNTEREXAMPLE_TO_LEAST_COST_CONDITIONAL_GUARANTEE",
+  "planned_write_set": [
+    "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "canonical/tests/test_tool_discovery_dynamic_v4.py",
+    "canonical/governance/TOOL_DISCOVERY_DYNAMIC_LEAST_COST_REPAIR_V1.json",
+    "canonical/action_intents/2026-10-03_TOOL_DISCOVERY_DYNAMIC_LEAST_COST_REPAIR_V1.json"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
