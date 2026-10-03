@@ -67,5 +67,5 @@
   ],
   "active_authority_blob_sha": "89406ed4c8d214dfa81eddbb1f8caeebc33e82b2",
   "prior_verified_candidate_authority_blob_sha": "14227eba31de060cab3b7906dd15466486e4842c",
-  "active_byte_verification": "PENDING_SEPARATE_INDEPENDENT_EXACT_BYTE_VERIFICATION__DO_NOT_MERGE_UNTIL_PASS"
+  "active_byte_verification": "REQUIRED_BEFORE_MERGE__SATISFIED_ONLY_BY_SEPARATE_INDEPENDENT_RECEIPT_BOUND_TO_THIS_EXACT_ROUTE_AND_AUTHORITY_BLOB"
 }
