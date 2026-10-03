@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE__TARGET_3_OF_19_TO_4_OF_19__NO_FAMILY_CREDIT_YET",
+  "family": "BUSINESS_WORKFLOW_AUTOMATION",
+  "remaining_predicate": "AUTOMATIONBENCH_GE_40",
+  "acceptance": {
+    "surface": "AutomationBench public 600",
+    "upstream_commit": "4a8e1061254004d9dac807054eed33fad7d1ff14",
+    "population_size": 600,
+    "binary_metric": "task_completed_correctly",
+    "threshold_percent": 40,
+    "threshold_success_count": 240
+  },
+  "backpropagation": {
+    "compiler": "canonical/runtime/acceptance_backprop_compiler_v1.py",
+    "compiler_independent_verification": "canonical/verification/PROJECT_BRAIN_ACCEPTANCE_BACKPROP_COMPILER_V1_CURRENT_MAIN_INDEPENDENT_VERIFICATION_20261003_V1.json",
+    "pass_lock": "240_DISTINCT_VERIFIED_PASSES",
+    "fail_lock": "CREDITED_PASSES_PLUS_UNKNOWN_LT_240",
+    "initial_zero_credit_fail_lock": "361_DISTINCT_FAILS",
+    "rule_frozen_before_terminal_results": true
+  },
+  "population_binding": {
+    "slot_id_rule": "DOMAIN_COLON_ZERO_PADDED_ZERO_BASED_ROW_INDEX__100_EXPECTED_PER_SIX_FROZEN_DOMAINS",
+    "expected_commitment_sha256": "73fb894dd1679968f1a2c7805f2e51a65208b321579d614e47aa45756899a9b9",
+    "independent_count_verification": "PENDING"
+  },
+  "current_prerequisites": {
+    "public_scope_binding": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
+    "route_preflight": "canonical/verification/AUTOMATIONBENCH_PUBLIC_ROUTE_PREFLIGHT_20261002_V1.json",
+    "exact_client_local_qwen_preflight": "PENDING_VERIFIER_PR_1204"
+  },
+  "terminal_execution_authority": false,
+  "promotion_rule": "ONLY_AUTOMATIONBENCH_GE_40_PLUS_FAMILY_REDUCER_MAY_CHANGE_3_OF_19_TO_4_OF_19",
+  "on_pass": "RUN_ACCEPTANCE_REDUCER_THEN_FAMILY_REDUCER",
+  "on_fail": "COMPILE_CAUSAL_FAILURE_CLASSES_INTO_TASK_AGNOSTIC_BRAIN_RUNTIME_REPAIR_BEFORE_ANY_NEW_QUALIFICATION",
+  "controller_task_content_exposure": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "family_credit_delta": 0
+}
