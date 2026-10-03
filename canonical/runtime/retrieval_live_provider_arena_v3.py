@@ -138,17 +138,19 @@ def run(*,limit_per_query:int=10,timeout:float=20.0)->dict[str,Any]:
                 err=f"{type(exc).__name__}:{str(exc)[:400]}"
                 status="PARTIAL_RETRYABLE" if union else "FAILED_RETRYABLE"
                 errors.append(err)
+            before=len(union)
             for cid in ids:
                 cid=str(cid)
                 if cid not in seen:
                     seen.add(cid)
                     union.append(cid)
+            new_count=len(union)-before
             query_rows.append({
                 "query_index":qi,
                 "query":q,
                 "status":qstatus,
                 "candidate_count":len(ids),
-                "new_union_candidates":len([x for x in ids if list(map(str,ids)).count(str(x))>=1 and str(x) in seen]),
+                "new_union_candidates":new_count,
                 "latency_seconds":max(0.0,time.perf_counter()-qstart),
                 "error":err,
             })
