@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_CARRIER_EXECUTION_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ACTIVE_ONE_USE_RECOVERY_AUTHORITY__INDEPENDENT_CARRIER_VERIFICATION_PASS__BECOMES_ACTIVE_ONLY_ON_MERGE_TO_BRAIN_MAIN",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "authorized_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+  "fresh_reality_units_authorized": 1,
+  "proposal": {
+    "path": "canonical/governance/P1_PUBLIC_RECOVERY_CARRIER_PROPOSAL_V1.json",
+    "git_blob_sha": "4a0146ea409dfad45638b15b279d5a5cc8bf4143"
+  },
+  "prior_pre_case_failure": {
+    "workflow_run_id": 37106776756,
+    "workflow_job_id": 111156743001,
+    "runner_id": 0,
+    "steps_executed": 0,
+    "case_generation_began": false,
+    "fresh_reality_units_consumed": 0,
+    "independent_verification": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1244,
+      "workflow_run_id": 37107461285,
+      "workflow_job_id": 111158689698,
+      "artifact_id": 11268103776,
+      "artifact_digest": "sha256:3ecb734c57ee4222a430ffd8c2b7d3fc68c42f250019e01f632bb205a9065dc6",
+      "conclusion": "success",
+      "recovery_eligible": true
+    }
+  },
+  "recovery_carrier_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1245,
+    "verifier_head_sha": "509180c953dd95c27f1b40fd77e045bbb343c584",
+    "workflow_run_id": 37107899295,
+    "workflow_job_id": 111159912616,
+    "artifact_id": 11267974478,
+    "artifact_digest": "sha256:b0fbf09719dc99e8abb84289beed88ba7e5d547b94df49636110651568584473",
+    "conclusion": "success",
+    "activation_eligible": true,
+    "fresh_reality_units_consumed": 0
+  },
+  "exact_recovery_carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_path": ".github/workflows/execute-p1-public-recovery-carrier-v1.yml",
+    "workflow_git_blob_sha": "547f57f43a71f289b006602c1067a962171f38d4",
+    "trigger": "FIRST_PUSH_TO_VERIFIER_MAIN_THAT_INTRODUCES_EXACT_WORKFLOW",
+    "runner": "ubuntu-24.04",
+    "distinct_from_failed_private_carrier": true,
+    "beacon_namespace": "P1_PUBLIC_RECOVERY_CARRIER_V1"
+  },
+  "exact_inputs": {
+    "freeze_blob": "6a4b606a759d5479bb5ddbdf29426b1a1808b007",
+    "preflight_runtime_blob": "13c33adda55f58d1eac913e63daa7f6ae1eb6a63",
+    "batch_runtime_blob": "695cfe3f283723a52bafb6299236a2d0378dc79e",
+    "normalizer_blob": "b6ba06fc6a35fa132eb19389ee256e74a63a4849",
+    "source_generator_blob": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "candidate_v7_blob": "28940387bd6c11671035ad9201e37bba13fd9bc9",
+    "intervention_scorer_v6_blob": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "batch_tests_blob": "7512a920c72d7bdeb2b072788e4c4bc8d2ff2d08",
+    "preflight_tests_blob": "2b0b7a8b3fe7017e1be0fa85bed0f10b72802337"
+  },
+  "selection": {
+    "source": "PUBLIC_VERIFIER_GITHUB_ACTIONS_RUN_ID_PLUS_ATTEMPT_PLUS_HEAD_SHA",
+    "candidate_receives_beacon": false,
+    "total_cases": 192,
+    "cases_per_surface": 64,
+    "surface_count": 3,
+    "post_freeze_uncontrollable_selection": true
+  },
+  "execution_contract": {
+    "first_attempt_only": true,
+    "no_manual_rerun_credit": true,
+    "no_retry_credit": true,
+    "no_case_replacement": true,
+    "no_post_result_tuning": true,
+    "terminal_v3_replay": false,
+    "runtime_self_promotion_forbidden": true,
+    "independent_post_execution_adjudication_required": true,
+    "authority_consumed_after_case_generation_begins": true
+  },
+  "activation_condition": "THIS_FILE_MUST_BE_PRESENT_ON BRAIN MAIN BEFORE VERIFIER PR_1245 IS MERGED TO VERIFIER MAIN; ONLY THE FIRST PUBLIC CARRIER RUN MAY CONSUME THE ONE AUTHORIZED REALITY UNIT",
+  "fresh_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": true,
+  "promotion_authority": false,
+  "next": "MERGE_THIS_AUTHORITY_TO_BRAIN_MAIN__THEN_MERGE_VERIFIER_PR_1245_ONCE__CAPTURE_RESULT__REVOKE_AUTHORITY__INDEPENDENTLY_ADJUDICATE_TRANSPORT_AND_ACCEPTANCE"
+}
