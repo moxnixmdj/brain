@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__17_ZERO_REALITY_REQUIREMENTS__14_ZERO_REALITY_CERTIFICATES__25_PREDICATES_ZERO_REALITY_COVERED__2_DIRECT_REALITY_BLOCKED__31_PRIMITIVE_ZERO_REALITY_WORK_UNITS__ZERO_CREDIT",
+  "verified_brain": {
+    "pull_request": 1337,
+    "projection_path": "canonical/governance/POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_V1.json",
+    "projection_git_blob_sha": "3b62096fdba09a41096f9aba12f9ec04d810cac8",
+    "runtime_path": "canonical/runtime/post_dual_judgment_zero_reality_frontier_v1.py",
+    "runtime_git_blob_sha": "410e4e1b7b29fa4b488f224c89f613896f35dd7a",
+    "tests_path": "canonical/tests/test_post_dual_judgment_zero_reality_frontier_v1.py",
+    "tests_git_blob_sha": "290b99444a94e3e8ff070a4645ca41045630ac1a"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1334,
+    "verified_head_sha": "2e8ab33d8263556f072c4afe52684e734d9a3f08",
+    "workflow_run_id": 37122247572,
+    "workflow_job_id": 111200510738,
+    "conclusion": "success"
+  },
+  "verified": {
+    "predicate_state": "11_PROVED__27_UNRESOLVED",
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "previous_zero_reality_requirements": 19,
+    "discharged_zero_reality_requirements": 2,
+    "current_zero_reality_requirements": 17,
+    "previous_nondominated_zero_reality_certificates": 16,
+    "retired_zero_reality_certificates": 2,
+    "current_nondominated_zero_reality_certificates": 14,
+    "zero_reality_covered_predicates": 25,
+    "direct_reality_blocked_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "primitive_zero_reality_work_units": 31,
+    "matched_priority_child_facts": 16,
+    "current_global_fresh_reality_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_FAMILY_ACCEPTANCE_DELTA",
+    "NO_OWNERSHIP_DELTA",
+    "NO_DIRECT_ORACLE_CASE_CONTENT_READ",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_case_content_read": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
