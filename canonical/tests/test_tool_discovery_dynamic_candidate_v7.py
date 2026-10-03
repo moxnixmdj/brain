@@ -104,6 +104,22 @@ class ToolDiscoveryDynamicV7Tests(unittest.TestCase):
         self.assertEqual(action["action"],"DISCOVER")
         self.assertEqual(action["query"],"CAP_B")
 
+    def test_v6_query_change_alone_forces_redundant_rediscovery(self):
+        state=v6_task_a_state()
+        state["required_capabilities"]=["CAP_B"]
+        # Keep decision epoch unchanged: query coupling alone is sufficient.
+        action=v6.next_action(state)
+        self.assertEqual(action["action"],"DISCOVER")
+        self.assertEqual(action["query"],"CAP_B")
+
+    def test_v6_decision_epoch_change_alone_forces_redundant_rediscovery(self):
+        state=v6_task_a_state()
+        # Keep required capabilities unchanged: decision-epoch coupling alone is sufficient.
+        state["decision_epoch"]=1
+        action=v6.next_action(state)
+        self.assertEqual(action["action"],"DISCOVER")
+        self.assertEqual(action["query"],"CAP_A")
+
     def test_v7_reuses_catalog_and_probe_evidence_across_task_change(self):
         first=v7_state(("CAP_A",),0)
         second=v7_state(("CAP_B",),1)
