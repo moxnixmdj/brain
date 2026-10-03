@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_P1_PRECASE_CARRIER_FAILURE_OBSERVATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "OBJECTIVE_GITHUB_RUN_METADATA__RUNNER_ID_0__ZERO_STEPS__NO_USER_CODE__ZERO_FRESH_REALITY_CONSUMED__RECOVERY_NOT_YET_AUTHORIZED",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "source": {
+    "repository": "moxnixmdj/brain",
+    "workflow_run_id": 37106776756,
+    "workflow_job_id": 111156743001,
+    "head_sha": "b12723d5a3116d00edd438d389c8282b47b52016",
+    "conclusion": "failure",
+    "runner_id": 0,
+    "runner_name": "",
+    "steps": [],
+    "created_at": "2026-10-03T07:34:09Z",
+    "started_at": "2026-10-03T07:34:09Z",
+    "completed_at": "2026-10-03T07:34:12Z"
+  },
+  "interpretation": {
+    "user_code_executed": false,
+    "p1_batch_runtime_executed": false,
+    "case_generation_began": false,
+    "fresh_reality_units_consumed": 0,
+    "capability_failure_inferred": false,
+    "p1_semantic_result_inferred": false
+  },
+  "contract_binding": {
+    "authority_prior_blob": "ec8bc10097aac030966bf0a7d03f5bb5ff06c2da",
+    "authority_consumed_after_case_generation_begins": true,
+    "pre_case_infrastructure_failure_reuse_requires_separate_independent_receipt": true,
+    "first_attempt_only": true,
+    "rerun_credit": false
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
