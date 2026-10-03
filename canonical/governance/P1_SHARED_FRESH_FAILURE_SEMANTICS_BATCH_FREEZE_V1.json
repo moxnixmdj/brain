@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_P1_SHARED_FRESH_FAILURE_SEMANTICS_BATCH_FREEZE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_PREFREEZE__INDEPENDENT_VERIFICATION_REQUIRED__NO_BEACON_SELECTED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "causal_cut_binding": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+  "objective": "Freeze every program-side degree of freedom required by the independently verified one-reality-unit P1 minimum cut before any fresh case-selection beacon exists.",
+  "base_main_commit": "223886b741992cfd9b85e95ad9e6a3ac54feebcd",
+  "runtime": "canonical/runtime/p1_shared_fresh_failure_semantics_batch_v1.py",
+  "tests": "canonical/tests/test_p1_shared_fresh_failure_semantics_batch_v1.py",
+  "pinned_exact_bytes": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py": "28940387bd6c11671035ad9201e37bba13fd9bc9",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json": "75cd1ad0ec0739ebd894cf6075af5837b93d83f8",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/governance/P1_MINIMUM_REALITY_CUT_INPUT_V1.json": "cbcb2faff8404623846e77e19fcc5b0ad00e81d9",
+    "canonical/verification/P1_V7_CURRENT_MAIN_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "4e8cf594503a216302a1d61c2009945131d86041",
+    "canonical/verification/P1_V7_PROVENANCE_AND_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "01ca625add4db7035224f0d4cb9efb406d17362d"
+  },
+  "surface_mapping": [
+    {
+      "surface": "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "domain": "CODE",
+      "shared_normalizer": "INSTRUMENTED_TRAJECTORY_TO_V7_TYPED_IR_V1"
+    },
+    {
+      "surface": "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "domain": "CODE",
+      "shared_normalizer": "INSTRUMENTED_TRAJECTORY_TO_V7_TYPED_IR_V1"
+    },
+    {
+      "surface": "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "domain": "TOOL_API",
+      "shared_normalizer": "INSTRUMENTED_TRAJECTORY_TO_V7_TYPED_IR_V1"
+    }
+  ],
+  "normalization_rule": {
+    "LOCAL_CONTRACT_INSTRUMENTATION": "DIRECT_CONTRACT",
+    "UPSTREAM_PROPAGATION_INSTRUMENTATION": "DERIVED_UPSTREAM",
+    "missing_or_unknown_origin": "FAIL_CLOSED"
+  },
+  "fresh_population": {
+    "cross_product": {
+      "surfaces": 3,
+      "failure_mechanism_classes": 8,
+      "causal_patterns": 4
+    },
+    "case_count": 96,
+    "failure_mechanism_classes": [
+      "AUTHORITY",
+      "SCOPE",
+      "SCHEMA",
+      "PROVENANCE",
+      "INVARIANT",
+      "STATE_TRANSITION",
+      "TOOL_CONTRACT",
+      "DEPENDENCY"
+    ],
+    "causal_patterns": [
+      "SINGLE",
+      "DELAYED",
+      "INTERACTION",
+      "AMBIGUOUS"
+    ],
+    "beacon_effects": [
+      "CAUSAL_DISTANCE",
+      "BRANCH_DELAY",
+      "RESOURCE_IDENTITIES",
+      "DISTRACTOR_PRESENCE",
+      "SECOND_INTERACTION_MECHANISM"
+    ]
+  },
+  "case_selection": {
+    "beacon_value": null,
+    "rule": "FIRST_ADMISSIBLE_POST_FREEZE_UNCONTROLLABLE_PUBLIC_BEACON_RECEIPT_ONLY",
+    "same_beacon_retry_for_tuning": false,
+    "replacement_beacon_after_observing_results": false,
+    "selection_information_visible_to_candidate_before_freeze": false
+  },
+  "scoring": {
+    "candidate": "EXACT_PINNED_V7",
+    "scorer": "EXACT_PINNED_TRAJECTORY_FAILURE_TYPED_IR_PROOF_V6_SCORE_CASE",
+    "all_96_cells_must_pass": true,
+    "any_failure_blocks_p1_restoration": true
+  },
+  "hard_rules": [
+    "NO_TERMINAL_EXECUTION_BEFORE_INDEPENDENT_EXACT_BYTE_PREFREEZE_VERIFICATION",
+    "NO_TERMINAL_EXECUTION_WITH_A_BEACON_OBSERVED_BEFORE_PREFREEZE_COMPLETES",
+    "NO_USER_OR_AGENT_CHOSEN_SEED",
+    "NO_CASE_REPLACEMENT_OR_RESULT_CONDITIONED_RETRY",
+    "NO_FAILURE_SEMANTICS_INFERENCE_FROM_HIDDEN_CAUSE_LABELS",
+    "FAILURE_SEMANTICS_COMES_ONLY_FROM_PREDECLARED_INSTRUMENTATION_PROVENANCE",
+    "V7_CANDIDATE_USED_UNCHANGED",
+    "V6_INTERVENTION_RESCUE_SCORER_USED_UNCHANGED",
+    "NO_TERMINAL_V3_REPLAY",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "truth_effect_if_independently_verified": [
+    "P1_PROGRAM_SIDE_SHARED_BATCH_PACKAGE_FROZEN",
+    "P1_REMAINING_MINIMUM_MISSING_FACT_REDUCES_TO_ONE_POST_FREEZE_UNCONTROLLABLE_PUBLIC_BEACON_RECEIPT_AND_ITS_SINGLE_BATCH_EXECUTION",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_UNTIL_THAT_BATCH_PASSES_AND_A_SEPARATE_REDUCTION_PROMOTES_IT"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
