@@ -92,7 +92,26 @@ def generate_pairwise_universe()->list[dict[str,Any]]:
   for b in dims[i+1:]:
    for va,vb in itertools.product(DIMENSIONS[a],DIMENSIONS[b]):
     c=dict(base);c[a]=va;c[b]=vb;add(c)
- # Add deliberately nasty compound cases that pairwise generation does not force.
+
+ # Deterministic three-way interaction expansion. Pairwise coverage alone misses
+ # composed failures such as language x history x zero-lexical-overlap. Cap the
+ # finite universe to keep CI fast while still creating thousands of distinct
+ # counterexamples.
+ target_cases=4096
+ stop=False
+ for ai,a in enumerate(dims):
+  if stop: break
+  for bi in range(ai+1,len(dims)):
+   if stop: break
+   b=dims[bi]
+   for ci in range(bi+1,len(dims)):
+    cdim=dims[ci]
+    for va,vb,vc in itertools.product(DIMENSIONS[a],DIMENSIONS[b],DIMENSIONS[cdim]):
+     row=dict(base);row[a]=va;row[b]=vb;row[cdim]=vc;add(row)
+     if len(rows)>=target_cases:
+      stop=True;break
+    if stop: break
+ # Add deliberately nasty compound cases that pairwise/triple generation does not force.
  compounds=[
   {"script":"CJK","metadata":"EMPTY","revision":"NONDEFAULT_BRANCH","vocabulary":"NO_SHARED_TEXT","popularity":"ZERO_STAR","structure":"DEEP_MONOREPO","noise":"DECOY","indexing":"WEB_UNINDEXED_ENUMERABLE"},
   {"script":"ARABIC","metadata":"MISLEADING","surface":"TESTS","revision":"OLD_COMMIT","vocabulary":"SYNONYM","structure":"DEPENDENCY_ONLY","indexing":"INDEX_LAG"},
