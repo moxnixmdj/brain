@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__8_MATCHED_SCOPE_TARGETS__ONE_FUTURE_SUPERPORTFOLIO_WAVE__TWO_ROOT3_EMPIRICAL_BATCH_CLASSES__ZERO_CREDIT",
+  "source_brain": {
+    "pull_request": 1435,
+    "candidate_git_blob_sha": "62be0973d0a8dc824f8db263b382fc61ce7038af",
+    "runtime_path": "canonical/runtime/root3_matched_superportfolio_minimum_reality_verifier_v1.py",
+    "runtime_git_blob_sha": "c679981fc7c7f520fd153a7793c32deec487bcd9",
+    "tests_path": "canonical/tests/test_root3_matched_superportfolio_minimum_reality_verifier_v1.py",
+    "tests_git_blob_sha": "03681ffe65b35f9e9183fd51fd005933c9da9061"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1451,
+    "verified_head_sha": "796a5ef6914de038f65bd58eb8d6469c7bbc5a8b",
+    "merge_commit": "fd8dfcba3c4b3986d18ebf8cd7acb6902b8c6c97",
+    "workflow_run_id": 37160070571,
+    "workflow_job_id": 111311502241,
+    "conclusion": "success"
+  },
+  "verified": {
+    "matched_scope_target_count": 8,
+    "shared_future_superportfolio_wave_count": 1,
+    "root3_empirical_batch_class_count": 2,
+    "core_family_count": 3,
+    "optional_scope_extension_family_count": 2,
+    "case_generation_now": false,
+    "comparator_currently_admissible": false,
+    "per_family_verdicts_remain_independent": true
+  },
+  "hard_nonclaims": [
+    "NO_SCOPE_PREDICATE_CLOSED",
+    "NO_COMPARATOR_ADMISSIBILITY_CLAIM",
+    "NO_CASE_GENERATION_OR_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
