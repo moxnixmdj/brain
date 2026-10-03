@@ -53,6 +53,17 @@ V4_EXPECTED = {
     "v4_activation_verification_blob": "e35dc954e0cf892d5522e62b5948bb64edeed4f7",
 }
 
+V5_EXPECTED = {
+    "v5_activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V5_ACTIVATION_V1.json",
+    "v5_activation_blob": "8b8b80d43972bb7113b193baaf21dbda292d595e",
+    "v5_activation_verification_path": "canonical/verification/RETRIEVAL_V5_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "v5_activation_verification_blob": "acd898bdea67ef0337e33b4335426fbe0dd7320d",
+    "v5_executor_path": "canonical/runtime/public_source_federation_executor_v2.py",
+    "v5_executor_blob": "96497b15a9c096b8e5cc471313ae165fceaedd07",
+    "v5_execution_verification_path": "canonical/verification/RETRIEVAL_V5_FEDERATION_EXECUTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "v5_execution_verification_blob": "cd1501e167a5429ad0d918e080c527e6d43b8a4d",
+}
+
 
 def git_blob_sha(raw: bytes) -> str:
     return hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
@@ -82,6 +93,9 @@ def validate(
     v3_activation_verification: Mapping[str, Any],
     v4_activation: Mapping[str, Any],
     v4_activation_verification: Mapping[str, Any],
+    v5_activation: Mapping[str, Any],
+    v5_activation_verification: Mapping[str, Any],
+    v5_execution_verification: Mapping[str, Any],
     actual_blobs: Mapping[str, str],
 ) -> dict[str, Any]:
     errors: list[str] = []
@@ -115,6 +129,10 @@ def validate(
             errors.append(f"ACTUAL_BLOB_MISMATCH:{key}")
 
     for key, expected in V4_EXPECTED.items():
+        if key.endswith("_blob") and actual_blobs.get(key) != expected:
+            errors.append(f"ACTUAL_BLOB_MISMATCH:{key}")
+
+    for key, expected in V5_EXPECTED.items():
         if key.endswith("_blob") and actual_blobs.get(key) != expected:
             errors.append(f"ACTUAL_BLOB_MISMATCH:{key}")
 
@@ -293,6 +311,93 @@ def validate(
             if v4v.get(field) is not True:
                 errors.append("V4_ACTIVATION_VERIFICATION_FALSE:"+field)
 
+    if v5_activation.get("schema") != "PROJECT_BRAIN_TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V5_ACTIVATION_V1":
+        errors.append("V5_ACTIVATION_SCHEMA_INVALID")
+    base_v5 = v5_activation.get("base_retrieval_authority")
+    if not isinstance(base_v5, Mapping) or base_v5.get("git_blob_sha") != V4_EXPECTED["v4_activation_blob"]:
+        errors.append("V5_DOES_NOT_PRESERVE_EXACT_V4_BASE")
+    if not isinstance(base_v5, Mapping) or base_v5.get("rule") != "V4_REMAINS_MANDATORY_AND_IS_NOT_WEAKENED":
+        errors.append("V5_WEAKENS_V4_BASE")
+
+    protocol_v5 = v5_activation.get("mandatory_epoch_protocol")
+    if not isinstance(protocol_v5, list):
+        errors.append("V5_MANDATORY_EPOCH_PROTOCOL_MISSING")
+        protocol_v5 = []
+    for required in (
+        "ONLY_SUCCESSFULLY_EXECUTED_QUERY_CELLS_ENTER_THE_CONSUMED_SET",
+        "TRANSIENT_OR_REJECTED_BACKEND_FAILURES_REMAIN_RETRYABLE_AND_UNCONSUMED",
+        "PARTIAL_BATCH_EXECUTION_CANNOT_CONSUME_THE_SOURCE_EPOCH",
+        "REQUIRE_ALL_SELECTED_SOURCE_QUERY_CELLS_SUCCESSFULLY_CONSUMED_BEFORE_SOURCE_EPOCH_CONSUMPTION",
+        "FILTER_OFF_DOMAIN_RESULTS_BEFORE_A_SOURCE_CELL_CAN_BE_SATISFIED",
+        "REJECT_CANDIDATE_SELF_PROMOTION_OR_ACCEPTANCE_AUTHORITY_SMUGGLING",
+        "STOP_IMMEDIATELY_ON_FIRST_INDEPENDENTLY_VERIFIED_SUFFICIENT_WITNESS",
+    ):
+        if required not in protocol_v5:
+            errors.append("V5_PROTOCOL_MISSING:" + required)
+    rules_v5 = v5_activation.get("hard_rules") or []
+    for required in (
+        "NO_FAILED_TRANSIENT_OR_REJECTED_BACKEND_CELL_MAY_BE_MARKED_CONSUMED",
+        "NO_PARTIAL_BATCH_TO_SOURCE_EPOCH_CONSUMPTION",
+        "NO_OFF_DOMAIN_RESULT_MAY_SATISFY_A_DOMAIN_SPECIFIC_SOURCE_CELL",
+        "NO_CONSUMED_CELL_REPLAY",
+        "NO_SOURCE_EPOCH_CONSUMPTION_TO_OPEN_WORLD_COMPLETENESS_OR_NONEXISTENCE_INFERENCE",
+    ):
+        if required not in rules_v5:
+            errors.append("V5_HARD_RULE_MISSING:" + required)
+    if v5_activation.get("stop_rules", {}).get("some_selected_cells_unconsumed_or_failed") != "CONTINUE_OR_RETRY_ONLY_REMAINING_CELLS__EPOCH_NOT_CONSUMED":
+        errors.append("V5_RETRY_STOP_RULE_INVALID")
+    if v5_activation.get("stop_rules", {}).get("open_world_no_witness") != "UNKNOWN__DO_NOT_INFER_NONEXISTENCE":
+        errors.append("V5_UNKNOWN_STOP_RULE_INVALID")
+
+    if v5_activation_verification.get("schema") != "PROJECT_BRAIN_RETRIEVAL_V5_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1":
+        errors.append("V5_ACTIVATION_VERIFICATION_SCHEMA_INVALID")
+    v5_runner = v5_activation_verification.get("independent_runner")
+    if not isinstance(v5_runner, Mapping) or v5_runner.get("conclusion") != "success":
+        errors.append("V5_ACTIVATION_INDEPENDENT_RUNNER_NOT_SUCCESS")
+    v5v = v5_activation_verification.get("verified")
+    if not isinstance(v5v, Mapping):
+        errors.append("V5_ACTIVATION_VERIFIED_BLOCK_MISSING")
+    else:
+        for field in (
+            "exact_activation_blob_verified",
+            "exact_v4_base_binding_verified",
+            "v4_remains_mandatory_and_unweakened",
+            "strict_success_only_source_cell_consumption_mandatory",
+            "transient_failures_retryable_and_unconsumed",
+            "partial_batch_epoch_consumption_forbidden",
+            "all_selected_cells_required_before_epoch_consumption",
+            "off_domain_source_cell_satisfaction_forbidden",
+            "consumed_cell_replay_forbidden",
+            "open_world_unknown_preserved",
+            "zero_credit_preserved",
+        ):
+            if v5v.get(field) is not True:
+                errors.append("V5_ACTIVATION_VERIFICATION_FALSE:" + field)
+
+    if v5_execution_verification.get("schema") != "PROJECT_BRAIN_RETRIEVAL_V5_FEDERATION_EXECUTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1":
+        errors.append("V5_EXECUTION_VERIFICATION_SCHEMA_INVALID")
+    v5e_runner = v5_execution_verification.get("independent_runner")
+    if not isinstance(v5e_runner, Mapping) or v5e_runner.get("conclusion") != "success":
+        errors.append("V5_EXECUTION_INDEPENDENT_RUNNER_NOT_SUCCESS")
+    v5e = v5_execution_verification.get("verified")
+    if not isinstance(v5e, Mapping):
+        errors.append("V5_EXECUTION_VERIFIED_BLOCK_MISSING")
+    else:
+        for field in (
+            "partial_batch_cannot_consume_epoch",
+            "transient_failure_remains_unconsumed_and_retryable",
+            "all_selected_cells_required_before_epoch_consumption",
+            "off_domain_candidate_filtering",
+            "consumed_cell_replay_suppression",
+            "request_id_tamper_rejected",
+            "candidate_self_promotion_rejected",
+            "source_epoch_receipt_deterministic",
+            "epoch_consumption_does_not_authorize_nonexistence",
+            "zero_credit_preserved",
+        ):
+            if v5e.get(field) is not True:
+                errors.append("V5_EXECUTION_VERIFICATION_FALSE:" + field)
+
     if action.get("new_reality_units") != 0:
         errors.append("TOOL_DISCOVERY_RETRIEVAL_EDGE_FRESH_REALITY_NONZERO")
 
@@ -301,7 +406,7 @@ def validate(
 
     return {
         "schema": SCHEMA,
-        "status": "PASS__LIVE_TOOL_DISCOVERY_EDGE_MECHANICALLY_BOUND_TO_VERIFIED_V2_V3_V4_RETRIEVAL_AUTHORITY",
+        "status": "PASS__LIVE_TOOL_DISCOVERY_EDGE_MECHANICALLY_BOUND_TO_VERIFIED_V2_V3_V4_V5_RETRIEVAL_AUTHORITY",
         "pass": True,
         "target_predicate": TARGET,
         "action_id": ACTION_ID,
@@ -310,6 +415,7 @@ def validate(
         "same_epoch_replay_disabled": True,
         "v3_multilingual_adaptive_federation_mandatory": True,
         "v4_federated_router_receipts_mandatory": True,
+        "v5_success_only_epoch_consumption_mandatory": True,
         "acceptance_credit": 0,
         "execution_authority": False,
         "promotion_authority": False,
@@ -338,6 +444,10 @@ def evaluate_repository(root: Path) -> dict[str, Any]:
         "v3_activation_verification_blob": git_blob_sha(raw(EXPECTED["v3_activation_verification_path"])),
         "v4_activation_blob": git_blob_sha(raw(V4_EXPECTED["v4_activation_path"])),
         "v4_activation_verification_blob": git_blob_sha(raw(V4_EXPECTED["v4_activation_verification_path"])),
+        "v5_activation_blob": git_blob_sha(raw(V5_EXPECTED["v5_activation_path"])),
+        "v5_activation_verification_blob": git_blob_sha(raw(V5_EXPECTED["v5_activation_verification_path"])),
+        "v5_executor_blob": git_blob_sha(raw(V5_EXPECTED["v5_executor_path"])),
+        "v5_execution_verification_blob": git_blob_sha(raw(V5_EXPECTED["v5_execution_verification_path"])),
     }
     return validate(
         load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
@@ -349,6 +459,9 @@ def evaluate_repository(root: Path) -> dict[str, Any]:
         load(EXPECTED["v3_activation_verification_path"]),
         load(V4_EXPECTED["v4_activation_path"]),
         load(V4_EXPECTED["v4_activation_verification_path"]),
+        load(V5_EXPECTED["v5_activation_path"]),
+        load(V5_EXPECTED["v5_activation_verification_path"]),
+        load(V5_EXPECTED["v5_execution_verification_path"]),
         actual_blobs,
     )
 

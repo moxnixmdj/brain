@@ -1,0 +1,15 @@
+{
+  "schema":"PROJECT_BRAIN_RETRIEVAL_V5_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date":"2026-10-03",
+  "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__V5_EXTENDS_V4__STRICT_SUCCESS_ONLY_FEDERATION_EPOCH_CONSUMPTION__ZERO_CREDIT",
+  "verified_activation":{"path":"canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V5_ACTIVATION_V1.json","git_blob_sha":"8b8b80d43972bb7113b193baaf21dbda292d595e"},
+  "bound_v5_execution_verification":{"path":"canonical/verification/RETRIEVAL_V5_FEDERATION_EXECUTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json","git_blob_sha":"cd1501e167a5429ad0d918e080c527e6d43b8a4d"},
+  "bound_v4_activation":{"path":"canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V4_ACTIVATION_V1.json","git_blob_sha":"643890c1d09844ea49de434df8ffec02962806e4"},
+  "independent_runner":{"repository":"moxnixmdj/verification-capsule-runner","pull_request":1343,"merge_commit":"68dd3c2f8e5dae4d502fc3ec43327e2c4381db6b","head_sha":"437c94277bb6caebea6128b46f1f770f011e3d7d","workflow_run_id":37123460560,"workflow_job_id":111203975981,"conclusion":"success"},
+  "verified":{"exact_activation_blob_verified":true,"exact_v4_base_binding_verified":true,"v4_remains_mandatory_and_unweakened":true,"strict_success_only_source_cell_consumption_mandatory":true,"transient_failures_retryable_and_unconsumed":true,"partial_batch_epoch_consumption_forbidden":true,"all_selected_cells_required_before_epoch_consumption":true,"off_domain_source_cell_satisfaction_forbidden":true,"consumed_cell_replay_forbidden":true,"open_world_unknown_preserved":true,"zero_credit_preserved":true},
+  "incremental_spend_usd":0,
+  "capability_credit_delta":0,
+  "family_credit_delta":0,
+  "execution_authority":false,
+  "promotion_authority":false
+}

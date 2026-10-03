@@ -31,10 +31,14 @@ def actual_blobs():
         "v3_activation_verification_blob": gate.git_blob_sha(raw(gate.EXPECTED["v3_activation_verification_path"])),
         "v4_activation_blob": gate.git_blob_sha(raw(gate.V4_EXPECTED["v4_activation_path"])),
         "v4_activation_verification_blob": gate.git_blob_sha(raw(gate.V4_EXPECTED["v4_activation_verification_path"])),
+        "v5_activation_blob": gate.git_blob_sha(raw(gate.V5_EXPECTED["v5_activation_path"])),
+        "v5_activation_verification_blob": gate.git_blob_sha(raw(gate.V5_EXPECTED["v5_activation_verification_path"])),
+        "v5_executor_blob": gate.git_blob_sha(raw(gate.V5_EXPECTED["v5_executor_path"])),
+        "v5_execution_verification_blob": gate.git_blob_sha(raw(gate.V5_EXPECTED["v5_execution_verification_path"])),
     }
 
 
-def validate(hypergraph=None, activation=None, activation_verification=None, compiler_verification=None, backend_verification=None, v3_activation=None, v3_activation_verification=None, v4_activation=None, v4_activation_verification=None, blobs=None):
+def validate(hypergraph=None, activation=None, activation_verification=None, compiler_verification=None, backend_verification=None, v3_activation=None, v3_activation_verification=None, v4_activation=None, v4_activation_verification=None, v5_activation=None, v5_activation_verification=None, v5_execution_verification=None, blobs=None):
     return gate.validate(
         hypergraph or load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
         activation or load(gate.EXPECTED["activation_path"]),
@@ -45,6 +49,9 @@ def validate(hypergraph=None, activation=None, activation_verification=None, com
         v3_activation_verification or load(gate.EXPECTED["v3_activation_verification_path"]),
         v4_activation or load(gate.V4_EXPECTED["v4_activation_path"]),
         v4_activation_verification or load(gate.V4_EXPECTED["v4_activation_verification_path"]),
+        v5_activation or load(gate.V5_EXPECTED["v5_activation_path"]),
+        v5_activation_verification or load(gate.V5_EXPECTED["v5_activation_verification_path"]),
+        v5_execution_verification or load(gate.V5_EXPECTED["v5_execution_verification_path"]),
         blobs or actual_blobs(),
     )
 
@@ -155,6 +162,48 @@ class ToolDiscoveryRetrievalAuthorityGateV1Tests(unittest.TestCase):
         out = validate(v4_activation_verification=receipt)
         self.assertFalse(out["pass"], out)
         self.assertIn("V4_ACTIVATION_INDEPENDENT_RUNNER_NOT_SUCCESS", out["errors"])
+
+
+    def test_v5_strict_execution_is_required(self):
+        out = gate.evaluate_repository(ROOT)
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["v5_success_only_epoch_consumption_mandatory"], out)
+
+    def test_removing_v5_retry_rule_fails_closed(self):
+        activation = load(gate.V5_EXPECTED["v5_activation_path"])
+        activation["mandatory_epoch_protocol"].remove(
+            "TRANSIENT_OR_REJECTED_BACKEND_FAILURES_REMAIN_RETRYABLE_AND_UNCONSUMED"
+        )
+        out = validate(v5_activation=activation)
+        self.assertFalse(out["pass"], out)
+        self.assertIn(
+            "V5_PROTOCOL_MISSING:TRANSIENT_OR_REJECTED_BACKEND_FAILURES_REMAIN_RETRYABLE_AND_UNCONSUMED",
+            out["errors"],
+        )
+
+    def test_failed_v5_execution_receipt_fails_closed(self):
+        receipt = load(gate.V5_EXPECTED["v5_execution_verification_path"])
+        receipt["independent_runner"]["conclusion"] = "failure"
+        out = validate(v5_execution_verification=receipt)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("V5_EXECUTION_INDEPENDENT_RUNNER_NOT_SUCCESS", out["errors"])
+
+    def test_stale_v5_executor_hash_fails_closed(self):
+        blobs = actual_blobs()
+        blobs["v5_executor_blob"] = "0" * 40
+        out = validate(blobs=blobs)
+        self.assertFalse(out["pass"], out)
+        self.assertIn("ACTUAL_BLOB_MISMATCH:v5_executor_blob", out["errors"])
+
+    def test_v5_partial_batch_rule_removal_fails_closed(self):
+        activation = load(gate.V5_EXPECTED["v5_activation_path"])
+        activation["hard_rules"].remove("NO_PARTIAL_BATCH_TO_SOURCE_EPOCH_CONSUMPTION")
+        out = validate(v5_activation=activation)
+        self.assertFalse(out["pass"], out)
+        self.assertIn(
+            "V5_HARD_RULE_MISSING:NO_PARTIAL_BATCH_TO_SOURCE_EPOCH_CONSUMPTION",
+            out["errors"],
+        )
 
 
 if __name__ == "__main__":
