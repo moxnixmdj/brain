@@ -101,6 +101,24 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(len(body["tools"]),1)
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
 
+    def test_600_second_timeout_is_allowed_and_forwarded(self):
+        seen=[]
+        args={
+            "material_requirements":["R1"],
+            "candidates":[{
+                "action_id":"A1",
+                "covers":["R1"],
+                "command":"echo x",
+                "verify_command":"test true",
+            }],
+        }
+        def fake(req, timeout=180):
+            seen.append(timeout)
+            return Response(tool_response(args))
+        with patch.object(p.urllib.request,"urlopen",fake):
+            p.plan("synthetic",timeout_s=600)
+        self.assertEqual(seen,[600])
+
     def test_missing_tool_call_fails_closed(self):
         response=json.dumps({
             "model":p.MODEL,
@@ -141,7 +159,7 @@ class PlannerTests(unittest.TestCase):
                 p.plan("synthetic")
 
     def test_timeout_bounds_fail_closed(self):
-        for value in (0,301,True,1.5):
+        for value in (0,601,True,1.5):
             with self.subTest(value=value):
                 with self.assertRaisesRegex(Exception,"TIMEOUT_INVALID"):
                     p.plan("synthetic",timeout_s=value)
