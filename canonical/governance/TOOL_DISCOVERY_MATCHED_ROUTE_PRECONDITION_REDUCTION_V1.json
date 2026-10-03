@@ -64,10 +64,18 @@
       },
       "accounting": {
         "reported_opus55_pass_at_1_percent_from_existing_freeze": 77.8,
-        "minimum_integer_brain_passes_to_meet_or_exceed_reported_bar": 85,
-        "brain_fixed_population_pass_rate_at_85_of_108_percent": 78.7037037037037,
+        "statistical_protocol": "canonical/governance/OPEN_ENDED_MATCHED_STATISTICAL_PROOF_PROTOCOL_V1.json",
+        "statistical_runtime": "canonical/runtime/matched_statistical_acceptance.py",
+        "proof_mode": "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_WITH_BRAIN_LOWER_BOUND_AT_OR_ABOVE_OPUS_5_5_ACCEPTANCE_BOUND",
+        "alpha": 0.05,
+        "bound": "HOEFFDING_ONE_SIDED_LOWER_CONFIDENCE_BOUND_FOR_X_IN_0_1",
+        "formula": "max(0, mean - sqrt(log(1/alpha)/(2*n)))",
+        "minimum_integer_brain_passes_for_bound_at_or_above_77_8_percent": 97,
+        "brain_raw_pass_rate_at_97_of_108_percent": 89.81481481481481,
+        "brain_one_sided_lower_bound_at_97_of_108_percent": 0.7803808738480129,
         "terminal_result_credit_rule": "NO_RESULT_CREDIT_UNTIL_THE_FROZEN_TARGET_RUN_IS_INDEPENDENTLY_EXECUTED_AND_BOUND",
-        "valid_route_and_transfer_rule": "END_STATE_PASS_RATE_ALONE_IS_NOT_WHOLE_FAMILY_ACCEPTANCE; THE FROZEN_PROTOCOLS_ADDITIONAL_ROUTE_AND_TRANSFER OBLIGATIONS REMAIN LOAD_BEARING."
+        "valid_route_metric_rule": "TOOLATHLON_PASS_AT_1_BINDS_TERMINAL_SUCCESS_ONLY__IT_MUST_NOT_BE_RELABELED_AS_VALID_ROUTE_TOP1",
+        "valid_route_and_transfer_rule": "END_STATE_PASS_RATE_ALONE_IS_NOT_WHOLE_FAMILY_ACCEPTANCE; THE FROZEN PROTOCOLS VALID_ROUTE, ROUTE-SAFETY, TRANSFER, AND PROMOTION OBLIGATIONS REMAIN LOAD_BEARING."
       }
     }
   ],
@@ -90,5 +98,19 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "metric_semantic_boundary": {
+    "toolathlon_public_opus_metric": "PASS_AT_1_END_STATE_SUCCESS",
+    "toolathlon_opus55_pass_at_1_percent": 77.8,
+    "frozen_protocol_metrics": [
+      "terminal_success",
+      "valid_route_top1",
+      "failed_probe_count",
+      "unnecessary_probe_count",
+      "transfer_reuse_rate"
+    ],
+    "hard_rule": "DO_NOT_SUBSTITUTE_TOOLATHLON_PASS_AT_1_FOR_VALID_ROUTE_TOP1_OR_ANY_OTHER_DISTINCT_PROTOCOL_METRIC",
+    "valid_route_top1_disposition": "MUST_BE_COMPOSED_FROM_A_SEPARATE_SCOPE_COMPLETE_ROUTE_OR_A_MATCHED_COMPARATOR_THAT_ACTUALLY_MEASURES_VALID_ROUTE",
+    "scope_mapping_disposition": "REMAINS_OPEN"
+  }
 }
