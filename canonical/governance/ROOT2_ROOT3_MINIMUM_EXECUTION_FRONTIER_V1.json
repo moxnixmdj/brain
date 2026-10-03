@@ -45,6 +45,13 @@
       "path": "canonical/verification/TB_SCIENCE_V01_PUBLIC_GITHUB_CARRIER_ATTAINABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "git_blob_sha": "aacdd4431ec4a0c889d1bb4249c8eba9ee476390",
       "consequence": "ZERO_COST_CARRIER_ATTAINABILITY_DISCHARGED__BRAIN_SCORE_REMAINS"
+    },
+    "root3_minimum_action_cut": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V1.json",
+      "git_blob_sha": "10a28a403dae6df94f8fe58b1d9d3f9e0b60c11b",
+      "verification_path": "canonical/verification/ROOT3_MINIMUM_ACTION_CUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "e24058eab431a1643dae340a8ff564490f992097",
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__11_ROOT3_PREDICATES_TO_3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT"
     }
   },
   "exact_state": {
