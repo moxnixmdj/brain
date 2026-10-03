@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMPLETE_INTERFACE_UNIVERSAL_SCOPE_CERTIFICATE_V4",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__COMPLETE_DISCOVERY_INTERFACE_UNIVERSAL_FORMAL_SCOPE_PROOF__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge only the active Tool Discovery scope-completeness atom by replacing the independently falsified pre-enumerated-only formalism with an explicit completeness-carrying discovery interface and a universal proof over arbitrary finite valid discovery epochs.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "canonical_base_commit": "0fa257b9a4940edc01d3503902a06d6a0027e2d1",
+  "causal_origin": {
+    "activation": "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json",
+    "verification": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_FORMALISM_CUT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "independently_verified_missing_fact": "INDEPENDENT_EXACT_SCOPE_SEMANTICS_PROVING_PREENUMERATED_TOOL_IDS_ARE_COMPLETE_FOR_THE_FROZEN_TARGET__OR_A_VERIFIED_DISCOVERY_INTERFACE_AND_UNIVERSAL_PROOF_COVERING_UNKNOWN_TOOL_IDENTITIES"
+  },
+  "exact_inputs": {
+    "canonical/runtime/tool_discovery_complete_interface_candidate_v4.py": "7bd881ae427df05b114aa070a35acb71ad98172b",
+    "canonical/tests/test_tool_discovery_complete_interface_candidate_v4.py": "598a952aae58f11f8a9ff32ca28a350b323ee2ac",
+    "canonical/runtime/tool_discovery_complete_interface_universal_scope_certificate_v4.py": "85ce3d3a8c8020ad97eebb5e8c6a18da5e77341f",
+    "canonical/tests/test_tool_discovery_complete_interface_universal_scope_certificate_v4.py": "40a2d844f74c65e223f75d76e7f76717fe09dc3c",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
+    "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json": "48ba33998e73b8eec2731be51a7ec78077ed0d4a",
+    "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_FORMALISM_CUT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "e628d8d5b63c2020400129fcc9e0bc6fde6101b2",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "7885a827b1483bfb38315c1f492848f7e4680285"
+  },
+  "proof_domain": {
+    "population": "ALL_FINITE_VALID_TOOL_ECOSYSTEMS_PRESENTED_THROUGH_AN_EXPLICIT_INDEPENDENTLY_VERIFIED_COMPLETE_DISCOVERY_REGISTRY_WITH_FINITE_COMPLETE_PER_SOURCE_RESULTS__FINITE_REQUIRED_CAPABILITIES__GENERIC_PUBLIC_CONSTRAINTS__CURRENT_EPOCH_SAFE_PROBE_RECEIPTS__AND_FINITE_VERSION_EVENTS",
+    "identity_discovery": "ALL_AVAILABLE_REGISTERED_SOURCES_EXHAUSTED_BEFORE_CAPABILITY_SELECTION",
+    "capability_evidence": "CURRENT_TOOL_EPOCH_SAFE_PROBE_RECEIPTS_ONLY",
+    "registry_change": "NEW_REGISTRY_EPOCH_INVALIDATES_PRIOR_DISCOVERY_COMPLETENESS",
+    "source_change": "SOURCE_EPOCH_MISMATCH_INVALIDATES_SOURCE_RECEIPT",
+    "tool_change": "TOOL_EPOCH_CHANGE_INVALIDATES_STALE_CAPABILITY_RECEIPTS",
+    "unknown_or_conflicting_identity": "FAIL_CLOSED",
+    "terminal_case_replay_required": false
+  },
+  "formal_lemmas": [
+    {
+      "id": "L1_COMPLETE_IDENTITY_UNIVERSE",
+      "statement": "An independently verified complete registry plus complete current receipts from every available registered source yields the complete discoverable identity universe for that epoch."
+    },
+    {
+      "id": "L2_FINITE_DISCOVERY_INDUCTION",
+      "statement": "Each DISCOVER transition resolves one previously unresolved source in a finite registry, so discovery terminates with complete identity coverage or fails closed."
+    },
+    {
+      "id": "L3_HIDDEN_CAPABILITY_SOUNDNESS",
+      "statement": "Metadata never promotes hidden capability state; only current-epoch safe-probe receipts can establish capability support or rejection."
+    },
+    {
+      "id": "L4_GLOBAL_LEAST_COST_ROUTE",
+      "statement": "After complete identity discovery, cost/id ordered evaluation skips only currently disproved tools and selects the first all-positive tool, therefore the globally least-cost verified sufficient route is selected."
+    },
+    {
+      "id": "L5_PROBE_NECESSITY_BY_INDISTINGUISHABILITY",
+      "statement": "For an unresolved capability of the cheapest not-disproved tool, two allowed worlds differ only in that capability; any universally sound route must acquire distinguishing evidence before selecting it or safely bypassing it."
+    },
+    {
+      "id": "L6_FAIL_CLOSED_ESCALATION",
+      "statement": "Escalation occurs only after complete discovery and after no admissible tool survives current evidence, so no verified admissible route remains in scope."
+    },
+    {
+      "id": "L7_TRANSFER_AND_INVALIDATION",
+      "statement": "Current receipts transfer across later tasks while source/tool epoch changes invalidate only stale evidence, preserving supported learning without unsupported state promotion."
+    },
+    {
+      "id": "L8_FROZEN_TARGET_PRESERVATION",
+      "statement": "The route implements unknown identity discovery, schema/authority filtering, incomplete-evidence route selection, safe probing, capability-state update and later-task transfer without weakening the frozen Tool Discovery target."
+    }
+  ],
+  "expected_independent_projection": {
+    "universal_scope_proved": true,
+    "scope_atom_satisfied_candidate": true,
+    "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "uses_empirical_generalization": false,
+    "terminal_cases_replayed": 0,
+    "new_reality_units_consumed": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "historical_sample_role": "RAW_180_OF_180_RESULTS_PRESERVED_AS_REGRESSION_AND_MATCHED_PERFORMANCE_EVIDENCE_ONLY__NOT_USED_AS_UNIVERSAL_SCOPE_BASIS",
+  "promotion_rule": "ONLY_AN_INDEPENDENT_PUBLIC_RUNNER_PASS_OVER_THE_EXACT_CONTENT_ADDRESSED_INPUTS_MAY_SATISFY_THE_TOOL_DISCOVERY_PA1_SCOPE_ATOM__ACCEPTANCE_REDUCTION_IS_A_SEPARATE_ATOMIC_STEP",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_FAMILY_OWNERSHIP_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_PROMOTION_FROM_DYNAMIC_V3_BY_DISCOVER_LITERAL_ALONE",
+    "NO_ASSUMPTION_THAT_PREENUMERATED_TOOL_IDS_ARE_COMPLETE",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "NO_TARGET_WEAKENING"
+  ],
+  "next": "INDEPENDENTLY_MIRROR_EXACT_BLOBS_IN_PUBLIC_VERIFIER__RUN_CANDIDATE_AND_CERTIFICATE_TESTS__RUN_CERTIFICATE_MAIN__IF_AND_ONLY_IF_PASS_BIND_RECEIPT_THEN_SEPARATELY_REDUCE_TOOL_DISCOVERY_ACCEPTANCE",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
