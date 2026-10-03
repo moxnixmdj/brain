@@ -1,0 +1,115 @@
+name: Private V4 post-delegation corpus freeze
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/private-v4-post-delegation-corpus-freeze.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify exact independently verified engines and inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object canonical/runtime/post_delegation_frontier_recompile_v1.py)" = "47adb1b3c91fde4972563a58b466c22eba0278a1"
+          test "$(git hash-object canonical/runtime/proof_atom_receipt_index_v4.py)" = "712443ddad23aed8d27df1e4f5372147c00ca57a"
+          test "$(git hash-object canonical/runtime/canonical_proof_atom_basis_v2.py)" = "5b5957f353edab6c86a34f947ef253099822b0d1"
+          test "$(git hash-object canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json)" = "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+          test "$(git hash-object canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json)" = "ec0ca144939a19234f1c53378cc76af2014a6179"
+          test "$(git hash-object canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json)" = "898e450c62c06cf6d1a4a3f826a255da9161a229"
+          test "$(git hash-object canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V4.json)" = "65d0e860110b0dce40d6f2016003d1612614dc28"
+
+      - name: Recompile exact 39-atom frontier and run unchanged V4 index
+        shell: bash
+        env:
+          EXECUTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from canonical.runtime.post_delegation_frontier_recompile_v1 import compile_post_delegation
+          from canonical.runtime.proof_atom_receipt_index_v4 import build_index
+
+          root=Path(".").resolve()
+          load=lambda p: json.loads((root/p).read_text(encoding="utf-8"))
+          frontier=load("canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json")
+          hyper=load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json")
+          overlay=load("canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json")
+
+          recomp=compile_post_delegation(frontier,hyper,overlay)
+          assert recomp["status"].startswith("PASS__EXACT_ONE_LEAF_DELEGATION_REMOVAL"),recomp
+          assert recomp["after"]["unresolved_predicates"]==30,recomp
+          assert recomp["after"]["certificates"]==16,recomp
+          assert recomp["after"]["actions"]==21,recomp
+          assert recomp["after"]["canonical_leaf_atoms"]==39,recomp
+          assert recomp["after"]["leaf_requirement_occurrences"]==39,recomp
+
+          idx=build_index(recomp["frontier_projection"],overlay,root=root)
+          assert idx["status"].startswith("PASS__CORPUS_BOUND_CONTENT_ADDRESSED_CANDIDATE_INDEX"),idx
+          assert idx["canonical_atom_count"]==39,idx
+          assert idx["capability_credit_delta"]==0 and idx["family_credit_delta"]==0,idx
+          assert idx["execution_authority"] is False and idx["promotion_authority"] is False,idx
+
+          bundle={
+            "schema":"PROJECT_BRAIN_PRIVATE_V4_POST_DELEGATION_CORPUS_FREEZE_V1",
+            "executed_head_sha":os.environ["EXECUTED_HEAD_SHA"],
+            "recompile_status":recomp["status"],
+            "recompile_after":recomp["after"],
+            "index":idx,
+            "terminal_results_replayed":0,
+            "new_reality_units_consumed":0,
+            "incremental_spend_usd":0,
+            "capability_credit_delta":0,
+            "family_credit_delta":0,
+            "execution_authority":False,
+            "promotion_authority":False
+          }
+          json.dump(bundle,open("/tmp/v4-post-delegation-result.json","w",encoding="utf-8"),indent=2,sort_keys=True)
+
+          carrier={
+            "schema":"PROJECT_BRAIN_PRIVATE_V4_POST_DELEGATION_CARRIER_RECEIPT_V1",
+            "executed_head_sha":os.environ["EXECUTED_HEAD_SHA"],
+            "canonical_atom_count":idx["canonical_atom_count"],
+            "basis_manifest_sha256":idx["basis_manifest_sha256"],
+            "scanned_file_count":idx["scanned_file_count"],
+            "scanned_corpus_manifest_sha256":idx["scanned_corpus_manifest_sha256"],
+            "scan_policy_sha256":idx["scan_policy_sha256"],
+            "index_fingerprint_sha256":idx["index_fingerprint_sha256"],
+            "candidate_match_count":idx["candidate_match_count"],
+            "atoms_with_candidate_matches":idx["atoms_with_candidate_matches"],
+            "atoms_without_candidate_matches":idx["atoms_without_candidate_matches"],
+            "new_reality_units_consumed":0,
+            "capability_credit_delta":0,
+            "family_credit_delta":0,
+            "execution_authority":False,
+            "promotion_authority":False
+          }
+          json.dump(carrier,open("/tmp/v4-post-delegation-carrier.json","w",encoding="utf-8"),indent=2,sort_keys=True)
+          PY
+
+      - name: Upload private content-addressed result only
+        uses: actions/upload-artifact@v4
+        with:
+          name: private-v4-post-delegation-corpus-freeze
+          path: |
+            /tmp/v4-post-delegation-result.json
+            /tmp/v4-post-delegation-carrier.json
+          if-no-files-found: error
+          retention-days: 7
