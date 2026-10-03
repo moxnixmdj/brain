@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_TOOL_DISCOVERY_SCOPE_COMPLETE_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_SOURCE_SCOPE_COMPLETE_TOOL_DISCOVERY_COMPONENT_BRIDGE__ZERO_PARENT_OR_ADJACENT_CREDIT",
+  "candidate": {
+    "path": "canonical/governance/COMPOSITION_TOOL_DISCOVERY_SCOPE_COMPLETE_BRIDGE_V1.json",
+    "git_blob_sha": "89d2ec6b677c211ecaf5372d8c68dae6881b1bc5"
+  },
+  "test": {
+    "path": "canonical/tests/test_composition_tool_discovery_scope_complete_bridge_v1.py",
+    "git_blob_sha": "5f5b5c2d309ac56a40bffab0103d7a0159d8f73e"
+  },
+  "exact_source_blobs": {
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d",
+    "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4",
+    "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "913d171b3c855000d322e183b142b3200eeaf0a9",
+    "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "bed23f2e69d4bc8937d792b07b5812364cf26a85",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "4000854d577f7ab5f0146d21d16e91d017458431"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1368,
+    "merge_commit": "c82d7e9b3e0064e2377d73cf02502bf0bda68cc9",
+    "head_sha": "f843620983aa92bd93e25c7bdf855ec69770b61e",
+    "workflow_run_id": 37131293099,
+    "workflow_job_id": 111226767783,
+    "workflow_name": "Verify Brain Composition Tool Discovery bridge V1",
+    "conclusion": "success"
+  },
+  "verified": {
+    "component": "tool discovery",
+    "interface": "coding+debugging+tool discovery",
+    "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "current_source_bound": true,
+    "source_scope_complete": true,
+    "source_objective_ceiling": true,
+    "source_acceptance_closed": true,
+    "historical_receipt_reused": false,
+    "adjacent_coding_credit": false,
+    "adjacent_debugging_credit": false,
+    "parent_composition_credit": false
+  },
+  "verified_component_receipt": {
+    "receipt_id": "COMPOSITION_SCOPE_COMPLETE_BRIDGE::TOOL_DISCOVERY_SELECTION_AND_LEARNING::tool_discovery::V1",
+    "component_id": "tool discovery",
+    "interface_id": "coding+debugging+tool discovery",
+    "proved_properties": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ],
+    "verified": true,
+    "independent": true,
+    "contamination_clean": true,
+    "acceptance_scoped": true,
+    "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+    "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "source_universal_scope_receipt": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "source_acceptance_receipt": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "source_promotion_receipt": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "bridge_candidate_path": "canonical/governance/COMPOSITION_TOOL_DISCOVERY_SCOPE_COMPLETE_BRIDGE_V1.json"
+  },
+  "operational_consequence": "THE_NEW_CURRENT_SOURCE_TOOL_DISCOVERY_COMPONENT_RECEIPT_IS_ADMISSIBLE_FOR_THE_FROZEN_COMPOSITION_SLICER__RERUN_WITH_MEMORY_RECOVERY_DELEGATION_AND_TOOL_DISCOVERY__NO_PARENT_CREDIT",
+  "hard_nonclaims": [
+    "NO_HISTORICAL_QUARANTINED_RECEIPT_RESTORATION",
+    "NO_CODING_COMPONENT_CREDIT",
+    "NO_GENERAL_DEBUGGING_COMPONENT_CREDIT",
+    "NO_PARENT_MULTI_CAPABILITY_COMPOSITION_ACCEPTANCE",
+    "NO_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT_DELTA",
+    "NO_FRESH_REALITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
