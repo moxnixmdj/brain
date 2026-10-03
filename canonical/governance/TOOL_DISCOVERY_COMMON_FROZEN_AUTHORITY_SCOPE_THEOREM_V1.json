@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMMON_FROZEN_AUTHORITY_SCOPE_THEOREM_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_UNIVERSAL_COMMON_AUTHORITY_CONSTRUCTION__INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge the remaining Tool Discovery identity-scope completeness residual without narrowing the common Brain/Opus tool authority: for every finite frozen authority R, both matched routes are bound to the same route-neutral authority instance; DISCOVER enumerates exactly R while hidden capability truth remains probe-only.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "proof_mode": "MATCHED_HIDDEN_TOOL_ECOSYSTEM_TRANSFER",
+  "frozen_authorities": {
+    "protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "common_scope_rule": "Brain and Opus 5.5 must be evaluated on the same frozen task population/harness/tool authority unless an absolute/theoretical ceiling is the proof mode.",
+    "v4_activation": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_V4_REPAIR_ACTIVATION_V1.json",
+    "interface_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json"
+  },
+  "construction": {
+    "domain": "ANY_FINITE_FROZEN_MATCHED_TOOL_AUTHORITY_R",
+    "route_set": [
+      "BRAIN",
+      "OPUS55"
+    ],
+    "identity_visibility": "ARBITRARY_SUBSET_MAY_BE_VISIBLE_INITIALLY__ALL_OTHER_R_IDENTITIES_REMAIN_UNKNOWN_UNTIL_DISCOVER",
+    "discovery_source": "ONE_ROUTE_NEUTRAL_SOURCE_DERIVED_DIRECTLY_FROM_R",
+    "discovery_result": "EXACTLY_ALL_PUBLIC_TOOL_METADATA_FOR_EVERY_IDENTITY_IN_R__NO_HIDDEN_CAPABILITY_TRUTH",
+    "invocation_authority": "THE_SAME_R_FOR_BOTH_MATCHED_ROUTES",
+    "completeness_relation": "DISCOVER(R).IDENTITIES = R.IDENTITIES",
+    "non_narrowing": "R_IS_AN_ARBITRARY_INPUT_TO_THE_CONSTRUCTION__NO_TOOL_IDENTITY_OR_PROVIDER_IS_ENUMERATED_IN_THE_THEOREM",
+    "temporal_rule": "REPLACING_R_ADVANCES_EPOCH_AND_STALE_EPISODES_FAIL_CLOSED"
+  },
+  "universal_argument": [
+    "Let R be any finite frozen tool authority admitted by the matched protocol.",
+    "The route-neutral authority stores exactly R and derives both Brain and Opus views from that same stored R and epoch.",
+    "DISCOVER iterates every identity in stored R, so the authoritative discovery union equals R exactly for either route.",
+    "Because R is arbitrary rather than a fixed Brain-only registry, this construction does not shrink the common matched authority.",
+    "Hidden capability truth is excluded from discovery and is available only through current-epoch safe probes, preserving the hidden-capability task dimension.",
+    "The independently verified V4 policy makes no positive route commitment until all available discovery sources are queried; under this one complete source, every identity in R is therefore visible before probe/select.",
+    "After visibility closure, the independently verified V4 program-side invariant orders admissible routes by cost, requires current positive evidence, skips current negatives, invalidates stale evidence after epoch change, and escalates only after the finite reachable universe is exhausted.",
+    "Thus the remaining identity-scope premise is supplied for arbitrary finite common matched authorities without a Brain-only completeness substitution."
+  ],
+  "v1_contract_properties_supplied": [
+    "FINITE_DISCOVERY_SOURCE_SET_PER_DECISION_EPOCH",
+    "DISCOVERY_RECEIPT_IDENTIFIES_QUERIED_SOURCE",
+    "DISCOVERY_RESULTS_MONOTONICALLY_ADD_VISIBLE_TOOL_IDENTITIES_WITHIN_EPOCH",
+    "UNION_OF_AUTHORITATIVE_DISCOVERY_RESULTS_IS_COMPLETE_FOR_DECLARED_TARGET_SCOPE",
+    "DISCOVERED_TOOL_METADATA_CORRECT_FOR_AVAILABILITY_AUTHORIZATION_COST_AND_CONSTRAINT_FIELDS",
+    "SAFE_CAPABILITY_PROBE_RECEIPTS_ARE_TRUTHFUL_AND_EPOCH_BOUND",
+    "VERSION_EPOCH_STABLE_DURING_ONE_SELECTION_EPISODE_OR_RESTARTS_EPISODE"
+  ],
+  "forbidden_shortcut_respected": true,
+  "forbidden_shortcut": "BRAIN_ONLY_REGISTRY_COMPLETENESS_MUST_NOT_BE_SUBSTITUTED_FOR_COMMON_FROZEN_TOOL_AUTHORITY_COMPLETENESS",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_CANDIDATE",
+    "NO CLAIM THAT AN ARBITRARY EXTERNAL INTERNET TOOL CATALOG IS COMPLETE",
+    "NO TOOL OUTSIDE THE FROZEN MATCHED AUTHORITY R IS SILENTLY COUNTED",
+    "NO TERMINAL CASE REPLAY",
+    "NO TARGET WEAKENING",
+    "INDEPENDENT EXACT_BYTE VERIFICATION AND SEPARATE ACCEPTANCE REDUCTION REMAIN REQUIRED"
+  ],
+  "next": "INDEPENDENT_PUBLIC_RUNNER_MUST_VERIFY_EXACT_BYTES__COMMON_ROUTE_DIGEST_EQUALITY__EXACT_REGISTRY_ENUMERATION__HIDDEN_CAPABILITY_NONDISCLOSURE__EPOCH_FAIL_CLOSED__AND_V4_COMPOSITION__THEN_RUN_SEPARATE_TOOL_DISCOVERY_ACCEPTANCE_REDUCTION",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
