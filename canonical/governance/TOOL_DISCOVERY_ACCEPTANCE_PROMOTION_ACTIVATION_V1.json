@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE__CANONICAL_ACCEPTANCE_PROMOTED__5_OF_19__12_OF_38__ZERO_NEW_REALITY__OWNERSHIP_UNCHANGED",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "before": {
+    "accepted_families": 4,
+    "open_families": 15,
+    "proved_atomic": 11,
+    "unresolved_atomic": 27
+  },
+  "after": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26
+  },
+  "proof_basis": {
+    "reduction": {
+      "path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "913d171b3c855000d322e183b142b3200eeaf0a9",
+      "conclusion": "success"
+    },
+    "universal_scope": {
+      "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+    },
+    "promotion_integrator": {
+      "path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "bed23f2e69d4bc8937d792b07b5812364cf26a85",
+      "conclusion": "success"
+    }
+  },
+  "promoted_claim": {
+    "state": "PROVED",
+    "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+    "brain_value": 1,
+    "objective_ceiling_value": 1,
+    "scope_complete": true,
+    "finite_sample_generalization_used": false
+  },
+  "canonical_mutations": [
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+    "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json",
+    "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json"
+  ],
+  "accounting": {
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 1,
+    "family_credit_delta": 1,
+    "ownership_credit_delta": 0
+  },
+  "hard_rules": [
+    "TOOL_DISCOVERY_ACCEPTANCE_IS_CLOSED",
+    "TOOL_DISCOVERY_WHOLE_FAMILY_OWNERSHIP_IS_NOT_PROMOTED_BY_THIS_ACTIVATION",
+    "OLD_4_OF_19_SCHEDULER_STATE_IS_STALE",
+    "RECOMPUTE_ZERO_REALITY_FIXED_POINT_BEFORE_ANY_FRESH_REALITY",
+    "NO_FINITE_180_OF_180_SAMPLE_AS_WHOLE_SCOPE_PROOF"
+  ]
+}
