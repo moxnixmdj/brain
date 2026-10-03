@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_RECOVERY_SCOPE_COMPLETE_BRIDGE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_SOURCE_BOUND_RECOVERY_COMPONENT_BRIDGE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Bind only the frozen MULTI_CAPABILITY_COMPOSITION recovery component to the now independently scope-complete and canonically accepted SELF_VERIFICATION_DEBUGGING_AND_RECOVERY family, without transporting browser/computer action, memory, debugging, or parent composition scope.",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "component_binding": {
+    "component_id": "recovery",
+    "interface_id": "browser/computer action+memory+recovery",
+    "proved_properties_after_independent_verification": ["SCOPED_ACCEPTANCE_PROOF"]
+  },
+  "authority": {
+    "terminal_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "composition_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "recovery_scope_verification": {
+      "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+    },
+    "recovery_acceptance_integrator_verification": {
+      "path": "canonical/verification/RECOVERY_ACCEPTANCE_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "48a865f38f65be212df1cf0ba52d296b71cd003a"
+    },
+    "current_acceptance_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163"
+    }
+  },
+  "derivation": {
+    "composition_envelope_literal": "Compose reasoning, research, tools, code, memory, actions and verification into one causal execution system.",
+    "source_family_id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "source_family_envelope_literal": "Check work creatively, falsify conclusions, diagnose failures and recover without losing the goal.",
+    "frozen_component_literal": "recovery",
+    "frozen_interface_literal": "browser/computer action+memory+recovery",
+    "source_protocol_recovery_dimension_literal": "recovery after injected failure",
+    "source_protocol_terminal_metric_literal": "terminal_recovery_rate",
+    "source_acceptance_closed": true,
+    "source_scope_complete": true,
+    "source_objective_ceiling_or_floor": true,
+    "historical_receipt_reused": false
+  },
+  "scope_guard": {
+    "included_scope": [
+      "semantic self-check",
+      "counterexample discovery",
+      "earliest causal failure localization",
+      "repair selection",
+      "recovery after injected failure",
+      "terminal recovery",
+      "zero critical fail-closed misses"
+    ],
+    "excluded_scope": [
+      "BROWSER_COMPUTER_ACTION_COMPONENT",
+      "MEMORY_COMPONENT",
+      "GENERAL_DEBUGGING_COMPONENT",
+      "GENERAL_MULTI_CAPABILITY_COMPOSITION_INTERACTION_SUCCESS",
+      "CROSS_CAPABILITY_STATE_HANDOFF_AND_ROLLBACK"
+    ],
+    "rule": "ONLY_THE_LITERAL_RECOVERY_COMPONENT_INHERITS_THE_CURRENT_SCOPE_COMPLETE_RECOVERY_FAMILY_PROOF__ADJACENT_PLUS_JOINED_COMPONENTS_AND_PARENT_COMPOSITION_REMAIN_OPEN"
+  },
+  "candidate_receipt": {
+    "receipt_id": "COMPOSITION_SCOPE_COMPLETE_BRIDGE::SELF_VERIFICATION_DEBUGGING_AND_RECOVERY::recovery::V1",
+    "component_id": "recovery",
+    "interface_id": "browser/computer action+memory+recovery",
+    "proved_properties": ["SCOPED_ACCEPTANCE_PROOF"],
+    "verified": false,
+    "independent": false,
+    "contamination_clean": true,
+    "acceptance_scoped": true,
+    "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+    "source_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "source_scope_receipt": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+    "source_acceptance_receipt": "canonical/verification/RECOVERY_ACCEPTANCE_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  },
+  "hard_rules": [
+    "NO_HISTORICAL_QUARANTINED_RECEIPT_REUSE",
+    "SOURCE_RECOVERY_SCOPE_RECEIPT_MUST_BE_INDEPENDENT_SCOPE_COMPLETE_AND_OBJECTIVE_CEILING_OR_FLOOR",
+    "SOURCE_ACCEPTANCE_INTEGRATOR_MUST_CLOSE_EXACTLY_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "CURRENT_ACCEPTANCE_LEDGER_MUST_KEEP_ALL_THREE_RECOVERY_PREDICATES_PROVED_AND_SCOPE_COMPLETE",
+    "FROZEN_MANIFEST_MUST_CONTAIN_EXACTLY_ONE_LITERAL_RECOVERY_COMPONENT",
+    "NO_BROWSER_COMPUTER_ACTION_MEMORY_DEBUGGING_OR_PARENT_COMPOSITION_CREDIT_TRANSPORT",
+    "NO_NEW_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_BEFORE_INDEPENDENT_VERIFICATION"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V1_AND_CURRENT_SOURCE_BYTES__IF_PASS_PROMOTE_ONLY_RECOVERY_AS_ONE_CURRENTLY_ADMISSIBLE_COMPOSITION_COMPONENT_RECEIPT__RERUN_COMPONENT_PROOF_SLICER_ON_CHANGED_INPUT__PARENT_COMPOSITION_REMAINS_OPEN",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
