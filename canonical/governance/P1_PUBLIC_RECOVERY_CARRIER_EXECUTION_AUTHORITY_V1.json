@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_CARRIER_EXECUTION_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_ACTIVE_ONE_USE_RECOVERY_AUTHORITY__INDEPENDENT_CARRIER_VERIFICATION_PASS__BECOMES_ACTIVE_ONLY_ON_MERGE_TO_BRAIN_MAIN",
+  "status": "CONSUMED__ONE_USE_PUBLIC_RECOVERY_EXECUTED__INDEPENDENT_192_OF_192_ADJUDICATION_PASS__TRANSPORT_REDUCTION_PENDING",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
   "authorized_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
@@ -80,12 +80,33 @@
     "authority_consumed_after_case_generation_begins": true
   },
   "activation_condition": "THIS_FILE_MUST_BE_PRESENT_ON BRAIN MAIN BEFORE VERIFIER PR_1245 IS MERGED TO VERIFIER MAIN; ONLY THE FIRST PUBLIC CARRIER RUN MAY CONSUME THE ONE AUTHORIZED REALITY UNIT",
-  "fresh_reality_units_consumed": 0,
+  "fresh_reality_units_consumed": 1,
   "terminal_results_replayed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "execution_authority": true,
+  "execution_authority": false,
   "promotion_authority": false,
-  "next": "MERGE_THIS_AUTHORITY_TO_BRAIN_MAIN__THEN_MERGE_VERIFIER_PR_1245_ONCE__CAPTURE_RESULT__REVOKE_AUTHORITY__INDEPENDENTLY_ADJUDICATE_TRANSPORT_AND_ACCEPTANCE"
+  "next": "RUN_INDEPENDENT_P1_PUBLIC_RECOVERY_TRANSPORT_REDUCER__NO_RERUN_NO_REPLACEMENT_NO_POST_RESULT_TUNING",
+  "authority_at_execution": {
+    "git_blob_sha": "365c098d4763ddfacf660f77457cbac08f5ac72e",
+    "brain_main_merge_commit": "0a90772212ecb92d6405476a6795be20b50086df",
+    "brain_main_merged_at_utc": "2026-10-03T07:56:23Z"
+  },
+  "execution_result": {
+    "source_run_id": 37108111537,
+    "source_job_id": 111160509570,
+    "source_head_sha": "e489b191363c52c838b720cd759c99f638170c67",
+    "source_artifact_id": 11268841992,
+    "source_artifact_digest": "sha256:e25bcf3fcab61b1fa00882c202a00714ecb81772378005e4934edc712a22d038",
+    "independent_adjudication_path": "canonical/verification/P1_PUBLIC_RECOVERY_RESULT_ADJUDICATION_20261003_V1.json",
+    "independent_adjudication_run_id": 37108221334,
+    "independent_adjudication_artifact_id": 11268842153,
+    "independent_adjudication_artifact_digest": "sha256:cb2a5be667ac9488b30c253bf679e1d12bbe6ee6398d3a0804dd016c2f51af38",
+    "cases": 192,
+    "passes": 192,
+    "failures": 0,
+    "all_pass": true
+  },
+  "authorization_order": "canonical/governance/P1_PUBLIC_RECOVERY_AUTHORIZATION_ORDER_V1.json"
 }
