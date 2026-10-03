@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V4_UNIVERSAL_CLOSURE_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__V3_COUNTEREXAMPLE_REPRODUCED__V4_DISCOVERY_FIRST_REPAIR_STAGED__INDEPENDENT_VERIFICATION_PENDING__ZERO_CREDIT",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "frozen_target_preserved": true,
+  "objective": "Repair the current tool-discovery route without weakening the frozen least-cost admissible-route contract, then reduce the remaining universal-scope blocker to the exact discovery-interface completeness fact.",
+  "v3_falsification": {
+    "source_path": "canonical/runtime/tool_discovery_dynamic_candidate_v3.py",
+    "source_git_blob_sha": "bbbee4d6baf8df937543644397abba38a67dce62",
+    "counterexample": {
+      "visible_route": "SUPPORTED_ADMISSIBLE_TOOL_COST_10",
+      "unqueried_discovery_result": "SUPPORTED_ADMISSIBLE_TOOL_COST_1",
+      "observed_v3_behavior": "PROBE_VISIBLE_COST_10__THEN_SELECT_COST_10_WITHOUT_DISCOVERY",
+      "violated_frozen_contract": "SELECT_THE_LEAST_COST_ADMISSIBLE_ROUTE__DO_NOT_IGNORE_CHEAPER_SUFFICIENT_ROUTE"
+    },
+    "consequence": "V3_CANNOT_SUPPORT_A_UNIVERSAL_CORRECTNESS_PROOF_FOR_THE_FROZEN_TARGET"
+  },
+  "v4_candidate": {
+    "runtime_path": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "runtime_git_blob_sha": "e614d0bed8e291e31f57189cd6f0f75aa39b0f74",
+    "tests_path": "canonical/tests/test_tool_discovery_dynamic_v4.py",
+    "tests_git_blob_sha": "23f0add178ca0c731d15e0645ee9b8841317efee",
+    "invariant_order": [
+      "EXHAUST_ALL_AVAILABLE_UNQUERIED_DISCOVERY_SOURCES_BEFORE_ROUTE_SELECTION",
+      "FILTER_TO_AVAILABLE_AUTHORIZED_CONSTRAINT_ADMISSIBLE_TOOLS",
+      "ORDER_CANDIDATES_BY_COST_THEN_STABLE_TOOL_ID",
+      "REQUIRE_CURRENT_EPOCH_POSITIVE_CAPABILITY_RECEIPTS_BEFORE_SELECTION",
+      "INVALIDATE_STALE_RECEIPTS_ON_VERSION_CHANGE",
+      "ESCALATE_ONLY_AFTER_DISCOVERY_CLOSURE_AND_RELEVANT_NEGATIVE_EVIDENCE"
+    ]
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "setup_pr": 1119,
+    "setup_merge_commit": "ec9c8ab649e191ca57ae13e66250773442bffd4c",
+    "execution_pr": 1121,
+    "workflow_run_id": 37086551951,
+    "workflow_job_id": 111097960019,
+    "status": "QUEUED"
+  },
+  "exact_remaining_fact": "INDEPENDENT_TARGET_PRESERVING_PROOF_THAT_THE_FROZEN_PROTOCOLS_UNKNOWN_TOOL_IDENTITY_DOMAIN_EQUALS_OR_IS_COVERED_BY_THE_OPERATIONALLY_REACHABLE_IDENTITY_CLOSURE_OF_INITIAL_VISIBLE_TOOLS_PLUS_ALL_ALLOWED_DISCOVERY_INTERFACES__OR_AN_EQUIVALENT_VERIFIED_SCOPE_CERTIFICATE",
+  "terminal_delta_if_verified": [
+    "NEW_TERMINAL_RELEVANT_IMPOSSIBILITY__V3_UNIVERSAL_ROUTE_FALSIFIED",
+    "CURRENT_ROUTE_MECHANISM_REPAIRED_FOR_THE_IDENTIFIED_COUNTEREXAMPLE_CLASS",
+    "SCOPE_BLOCKER_REDUCED_TO_ONE_EXPLICIT_DISCOVERY_INTERFACE_COMPLETENESS_FACT"
+  ],
+  "hard_nonclaims": [
+    "V4_TEST_PASS_ALONE_DOES_NOT_CLOSE_TOOL_DISCOVERY_ACCEPTANCE",
+    "FINITE_EXHAUSTIVE_SMALL_ECOSYSTEM_TESTS_ARE_NOT_A_PROTOCOL_WIDE_UNIVERSAL_SCOPE_CERTIFICATE",
+    "NO_CLAIM_THAT_ALL_OPEN_DOMAIN_TOOL_IDENTITIES_ARE_ENUMERATED",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_FRESH_TERMINAL_REALITY_CONSUMED"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
