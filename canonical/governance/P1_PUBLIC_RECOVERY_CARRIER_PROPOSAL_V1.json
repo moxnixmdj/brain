@@ -31,11 +31,12 @@
     "repository": "moxnixmdj/verification-capsule-runner",
     "visibility": "public",
     "workflow_path": ".github/workflows/execute-p1-public-recovery-carrier-v1.yml",
-    "workflow_git_blob_sha": "29e879f6aca5c76ee83d36c7fd2a0295b02a675b",
+    "workflow_git_blob_sha": "547f57f43a71f289b006602c1067a962171f38d4",
     "runner": "ubuntu-24.04",
     "trigger": "FIRST_PUSH_TO_VERIFIER_MAIN_THAT_INTRODUCES_EXACT_WORKFLOW",
     "distinct_from_failed_carrier": true,
-    "distinct_beacon_namespace": "P1_PUBLIC_RECOVERY_CARRIER_V1"
+    "distinct_beacon_namespace": "P1_PUBLIC_RECOVERY_CARRIER_V1",
+    "wrapper_correction": "PREFLIGHT_VERDICT_USES_NEW_REALITY_UNITS_CONSUMED__EXECUTION_BATCH_RESULT_USES_FRESH_REALITY_UNITS_CONSUMED"
   },
   "frozen_inputs": {
     "capsule_root": "capsules/p1_one_use_authority_v1",
