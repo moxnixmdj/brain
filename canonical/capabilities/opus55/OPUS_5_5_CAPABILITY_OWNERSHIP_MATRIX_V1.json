@@ -752,15 +752,6 @@
     "quarantined_behavioral_family_count": 0,
     "quarantined_behavior_id": null,
     "rule": "P1_WHOLE_SCOPE_RESTORED_BY_INDEPENDENT_ZERO_REALITY_UNIVERSAL_PROOF__STRICT_ACCEPTANCE_AND_OWNERSHIP_ACCOUNTED_SEPARATELY",
-    "current_restoration_evidence": {
-      "evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "raw_terminal_execution": "3352/3352_PASS__IMMUTABLE",
-      "whole_scope_contracts": "12/12_PASS__P1_RESTORED",
-      "unaffected_behavioral_family_pass_count": 19,
-      "quarantined_behavioral_family_count": 0,
-      "quarantined_behavior_id": null,
-      "rule": "P1_WHOLE_SCOPE_RESTORED_BY_INDEPENDENT_ZERO_REALITY_UNIVERSAL_PROOF__STRICT_ACCEPTANCE_AND_OWNERSHIP_ACCOUNTED_SEPARATELY",
-      "current_restoration_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
-    }
+    "current_restoration_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
   }
 }
