@@ -11,7 +11,7 @@
     "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
     "controller_path": "canonical/runtime/harbor_science_agent_v1.py",
     "controller_blob": "8ab8287fdb6a9b63b9fe2d2addde731486c89d1e",
-    "controller_tests_blob": "1f1a162a0a046b4f13c0474d91f8defb1472f468",
+    "controller_tests_blob": "292f8c4447122569e6168deb22847e2570db155e",
     "materiality_tests_blob": "bda78c83d5783c385b4c88fecd33c81305274c5e"
   },
   "preserves": [
@@ -29,5 +29,6 @@
   "terminal_results_observed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "test_reconciliation": "REQUIREMENT_MUTATION_TEST_NOW_FORCES_FIRST_VERIFY_FAILURE_SO_DETERMINISTIC_SUCCESS_TERMINATION_DOES_NOT_SHORT_CIRCUIT_THE_SECOND_CYCLE"
 }
