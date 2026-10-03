@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_STATISTICAL_PROMOTION_PLAN_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_FROZEN_BEFORE_ANY_TERMINAL_BENCH_SCIENCE_TASK_EXPOSURE__ZERO_CREDIT",
+  "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "benchmark": "Terminal-Bench-Science 0.1",
+  "benchmark_source": {
+    "repository": "harbor-framework/terminal-bench-science",
+    "tag": "v0.1.0",
+    "commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "frozen_dataset_content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a"
+  },
+  "acceptance_target": 0.587,
+  "metric_semantics": {
+    "class": "BINARY_RATE",
+    "frozen_task_count": 70,
+    "independent_trials_per_task": 3,
+    "frozen_trial_slots": 210,
+    "per_trial_outcome": "BINARY_REWARD_PASS_OR_FAIL",
+    "denominator_rule": "ALL_210_PRECOMMITTED_TRIAL_SLOTS_ENTER_DENOMINATOR",
+    "unavailable_unrun_failed_or_invalid_slot_value": 0,
+    "no_post_hoc_task_or_trial_replacement": true,
+    "no_cross_trial_tuning": true
+  },
+  "statistical_rule": {
+    "method": "ONE_SIDED_EXACT_CLOPPER_PEARSON_LOWER_BOUND",
+    "familywise_alpha": 0.05,
+    "looks": 1,
+    "per_look_alpha": 0.05,
+    "promotion_rule": "PROVE_TB_SCIENCE_GE_58_7_ONLY_IF_ONE_SIDED_EXACT_LOWER_BOUND_GE_0_587",
+    "no_promotion_from_point_estimate_alone": true,
+    "minimum_successes_for_promotion": 136,
+    "threshold_boundary": {
+      "successes_135": {
+        "point_estimate": 0.6428571428571429,
+        "one_sided_exact_lower_bound_approx": 0.5848158634362433,
+        "promotes": false
+      },
+      "successes_136": {
+        "point_estimate": 0.6476190476190476,
+        "one_sided_exact_lower_bound_approx": 0.589689209292089,
+        "promotes": true
+      }
+    }
+  },
+  "derivation": {
+    "project_precedent": "canonical/capabilities/opus55/TB4_V5_STAGE1_STATISTICAL_PROMOTION_PLAN_V1.json",
+    "generic_bound_policy": "canonical/governance/ACCEPTANCE_BOUND_COMPILER_V1.json",
+    "exact_equivalent_test": "UNDER_NULL_P_EQ_0_587__REQUIRE_BINOMIAL_UPPER_TAIL_P_X_GE_K_LE_0_05",
+    "tail_at_135_or_more_approx": 0.056938806687909536,
+    "tail_at_136_or_more_approx": 0.042399629051843864
+  },
+  "stopping_rule": "ONE_FINAL_LOOK_ONLY_AFTER_ALL_210_PRECOMMITTED_TRIAL_SLOTS_HAVE_TERMINAL_VALUES",
+  "early_stop_for_promotion": false,
+  "early_stop_for_repair": "MATERIAL_CAUSAL_FAILURE_MAY_STOP_EXECUTION_FOR_REPAIR_BUT_EARNS_ZERO_ACCEPTANCE_CREDIT",
+  "multiplicity_control": "ONE_LOOK__NO_ADDITIONAL_ALPHA_SPENDING_REQUIRED",
+  "contamination_rules": [
+    "NO_TERMINAL_TASK_INSTRUCTION_READ_BEFORE_ALL_STAGE_A_AND_PROMOTION_PREFLIGHT_GATES_PASS",
+    "NO_THRESHOLD_OR_STATISTICAL_RULE_CHANGE_AFTER_FIRST_TERMINAL_TASK_EXPOSURE",
+    "NO_TASK_OR_TRIAL_REPLACEMENT_AFTER_FAILURE",
+    "NO_CHERRY_PICKING",
+    "NO_REPLAY_FOR_PROMOTION"
+  ],
+  "outcome_complete_rule": {
+    "successes_ge_136": "SUBJECT_TO_ALL_SCOPE_OWNERSHIP_CARRIER_SCORER_AND_PROVENANCE_GATES__PREDICATE_MAY_PROMOTE",
+    "successes_le_135": "PREDICATE_NOT_PROVED__COMPILE_CAUSAL_FAILURES_INTO_REPAIR__NO_FAMILY_CREDIT",
+    "incomplete_or_inadmissible": "PREDICATE_NOT_PROVED__ZERO_FAMILY_CREDIT"
+  },
+  "terminal_task_content_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
