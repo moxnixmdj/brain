@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_RESULT_V2",
+  "date": "2026-10-03",
+  "status": "FINAL_ZERO__SCIENCE_PLANNER_LOCAL_ROUTE_TIMEOUT_180S__AUTHORITY_AUTO_REVOKED__ZERO_PROMOTION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "slot_id": "terminal-bench-science/baseline-free-localization::trial-0",
+    "task_digest": "sha256:f35349bcb083094b096a2400d9e98e55690b35f26e2b395796364ad109e91d57",
+    "status": "FINAL_ZERO",
+    "reward": 0
+  },
+  "execution": {
+    "github_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37105286491,
+    "workflow_job_id": 111152462764,
+    "github_sha": "9e2da07893840dc6cf5f836b4c68fc3bf0c98bdc",
+    "artifact_id": 11267227685,
+    "artifact_zip_sha256": "45e171aacd0f6671125b3d5ab028f67e0e5e8d3b50911fab4c91be187ed23f2d",
+    "harbor_exit": 0,
+    "harbor_trial_exception": "SciencePlannerError",
+    "harbor_exception_message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "verifier_result_observed": false,
+    "conservative_disposition": "FINAL_ZERO"
+  },
+  "content_addresses": {
+    "harbor_job_result_sha256": "9683b5cbae786562be025d25927f9ad1f0dc9f0f8c1cd8dab7762d47a8026e03",
+    "harbor_trial_result_sha256": "7e40519cdbddfcd5cbad61d3aca16b94d92d6693d38fb7356d7060abe65cf3c7",
+    "exception_txt_sha256": "682b00414dc183f5a9cc462a1bfd40d14ff12402893443a41b57d268ac6a2754",
+    "trial_log_sha256": "f6c8c716bae35643e89dcd257b443bb6a7cccb1e60e9b8c080d60eb58dfc88f1"
+  },
+  "causal_observation": {
+    "planner_timeout_s": 180,
+    "prompt_tokens_processed": 1552,
+    "prompt_processing_seconds": 87.3,
+    "prompt_tokens_per_second": 17.78,
+    "decoded_tokens_before_timeout": 575,
+    "observed_decode_tokens_per_second_approx": 6.21,
+    "observed_recent_min_decode_tokens_per_second": 5.96,
+    "planner_max_tokens": 1024,
+    "qwen_server_cancelled_task_after_client_timeout": true,
+    "conclusion": "CURRENT_180S_HTTP_BUDGET_IS_CAUSALLY_INSUFFICIENT_ON_THIS_ZERO_COST_CPU_CARRIER_FOR_A_REAL_TERMINAL_PROMPT"
+  },
+  "current_target_after_finalization": {
+    "denominator": 210,
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "final_zeros_consumed": 4,
+    "remaining_failures_before_fail_lock": 74,
+    "successes_observed": 0
+  },
+  "hard_rules": [
+    "THIS_SLOT_IS_PERMANENTLY_CONSUMED_AND_MUST_NOT_BE_REPLAYED",
+    "NO_RETRY_OR_REPLACEMENT_CREDIT",
+    "NO_CAPABILITY_OR_FAMILY_PROMOTION",
+    "NO_NEW_TB_SCIENCE_SLOT_UNTIL_THE_PLANNER_TIMEOUT_CAUSE_IS_REPAIRED_AND_INDEPENDENTLY_VERIFIED"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
