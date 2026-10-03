@@ -199,14 +199,33 @@ def compile_verified_skill(
     applicability: Iterable[Any],
     dependencies: Iterable[Any],
     invalidators: Iterable[Any],
-    verification_receipts: Iterable[Any],
+    verification_receipts: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
     sid = str(skill_id or "").strip()
     if not sid:
         raise ActiveTransferLearnerError("SKILL_ID_REQUIRED")
-    receipts = _items(verification_receipts)
-    if not receipts:
+    if (
+        not isinstance(verification_receipts, Sequence)
+        or isinstance(verification_receipts, (str, bytes))
+        or not verification_receipts
+    ):
         raise ActiveTransferLearnerError("VERIFICATION_RECEIPT_REQUIRED")
+
+    normalized_receipts: list[str] = []
+    for receipt in verification_receipts:
+        if not isinstance(receipt, Mapping):
+            raise ActiveTransferLearnerError("VERIFICATION_RECEIPT_INVALID")
+        rid = str(receipt.get("receipt_id") or "").strip()
+        if not rid:
+            raise ActiveTransferLearnerError("VERIFICATION_RECEIPT_ID_REQUIRED")
+        if receipt.get("independent_verified") is not True:
+            raise ActiveTransferLearnerError("VERIFICATION_RECEIPT_NOT_INDEPENDENT")
+        if receipt.get("exact_byte_bound") is not True:
+            raise ActiveTransferLearnerError("VERIFICATION_RECEIPT_NOT_EXACT_BYTE_BOUND")
+        if receipt.get("conclusion") != "success":
+            raise ActiveTransferLearnerError("VERIFICATION_RECEIPT_NOT_SUCCESS")
+        normalized_receipts.append(rid)
+
     return {
         "schema": SCHEMA,
         "status": "VERIFIED_SKILL",
@@ -214,7 +233,7 @@ def compile_verified_skill(
         "applicability": sorted(_items(applicability)),
         "dependencies": sorted(_items(dependencies)),
         "invalidators": sorted(_items(invalidators)),
-        "verification_receipts": sorted(receipts),
+        "verification_receipts": sorted(set(normalized_receipts)),
         "trusted": True,
         "acceptance_credit": False,
         "ownership_credit": False,
@@ -232,25 +251,32 @@ def compile_learning_strategy(episode: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(actions, Sequence) or isinstance(actions, (str, bytes)) or not actions:
         raise ActiveTransferLearnerError("EPISODE_ACTIONS_REQUIRED")
 
-    ranked: list[tuple[float, str]] = []
+    normalized_actions: list[dict[str, Any]] = []
     for action in actions:
         if not isinstance(action, Mapping):
             raise ActiveTransferLearnerError("EPISODE_ACTION_INVALID")
         kind = str(action.get("kind") or "").strip()
         if not kind:
             raise ActiveTransferLearnerError("EPISODE_ACTION_KIND_REQUIRED")
-        gain = _number(action.get("decision_gain", 0), "decision_gain")
-        time = _number(action.get("time", 0), "time")
-        if gain < 0 or time <= 0:
-            raise ActiveTransferLearnerError("EPISODE_ACTION_VALUE_INVALID")
-        ranked.append((gain / time, kind))
-    ranked.sort(key=lambda pair: (-pair[0], pair[1]))
+        normalized_actions.append(
+            {
+                "id": kind,
+                "decision_gain": action.get("decision_gain", 0),
+                "transfer_gain": action.get("transfer_gain", 0),
+                "proof_gain": action.get("proof_gain", 0),
+                "time": action.get("time", 0),
+                "cost": action.get("cost", 0),
+                "risk": action.get("risk", 0),
+            }
+        )
+
+    ranked = rank_learning_actions(normalized_actions)
     return {
         "schema": SCHEMA,
         "status": "VERIFIED_META_STRATEGY_HINT",
         "domain": domain,
-        "preferred_action_kind": ranked[0][1],
-        "observed_value_density": ranked[0][0],
+        "preferred_action_kind": ranked[0]["id"],
+        "observed_value_density": ranked[0]["value_density"],
         "acceptance_credit": False,
         "ownership_credit": False,
         "promotion_authorized": False,
@@ -275,7 +301,7 @@ def learning_episode(
             "goal": normalized_goal,
             "state": "VERIFIED_COVERAGE",
             "trusted": True,
-            "promotion_authorized": True,
+            "promotion_authorized": False,
             "novelty_delta": delta,
             "decision_sufficiency": {"sufficient": True, "reason": "NO_NOVELTY_DELTA"},
             "next_action": None,
