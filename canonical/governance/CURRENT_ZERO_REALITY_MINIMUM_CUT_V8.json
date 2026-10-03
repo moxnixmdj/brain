@@ -48,7 +48,8 @@
     },
     "root3_compression": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
-      "git_blob_sha": "f6e264a0f7a63e1076be4bc4af7986f9aed07544"
+      "git_blob_sha": "471cb9f352bf64cc56a262dfe4df829555fc3679",
+      "status": "ACTIVE_FAIL_CLOSED__UNKNOWN_DOMAIN_OPERATIVE_LEARNING_OVERLAY_V5__TWO_FROZEN_LEAVES_PRESERVED__ZERO_CREDIT"
     },
     "matched_totalization": {
       "path": "canonical/verification/CURRENT_WITNESS_TARGET_TOTALIZATION_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
@@ -183,6 +184,12 @@
       "target": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
       "delta": "UNIVERSAL_LEARNING_V4_OPERATIVE_OVERLAY_INDEPENDENT_PASS",
       "consequence": "OPERATIVE_LEARNER_HARDENED__TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_LEAVES_REMAIN_OPEN__ZERO_ACCEPTANCE_CREDIT",
+      "new_reality_units": 0
+    },
+    {
+      "target": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "delta": "OPERATIVE_LEARNING_OVERLAY_V4_TO_INDEPENDENTLY_VERIFIED_V5",
+      "consequence": "MECHANISM_STRONGER__TWO_FROZEN_DIRECT_LEAVES_PRESERVED__ZERO_ACCEPTANCE_OWNERSHIP_CREDIT",
       "new_reality_units": 0
     }
   ]
