@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__OWNED_DYNAMIC_V3_UNIVERSAL_FORMAL_SCOPE_PROOF__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge only the reopened Tool Discovery scope-completeness atom by composing a Brain-owned complete identity gateway, Dynamic V3 finite progress/selection semantics, exact legacy-terminal semantic transport, and the already-separate scope-complete transfer/promotion atoms.",
+  "canonical_base_commit": "a153e2b54cb9c4094c4a90c50149839cf939105b",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "proof_domain": "ALL_FINITE_VALID_BRAIN_OWNED_TOOL_REGISTRIES_WITH_UNIQUE_IDENTITIES_NONNEGATIVE_FINITE_COSTS__FINITE_NONEMPTY_REQUIRED_CAPABILITY_SETS__WELL_FORMED_STATIC_SUPPORTED_CONSTRAINTS__TRUTHFUL_EPOCH_BOUND_SAFE_PROBE_RECEIPTS__ATOMIC_REGISTRY_EPOCH_CHANGES",
+  "formal_lemmas": [
+    {"id":"T1_OWNED_IDENTITY_COMPLETENESS","statement":"Every Brain-invocable tool identity is registered; discovery enumerates exactly the registry; unregistered identities are uninvocable."},
+    {"id":"T2_FINITE_DISCOVERY_PROGRESS","statement":"The sole owned discovery source is queried at most once per stable epoch and then exposes the exact finite registry."},
+    {"id":"T3_FINITE_PROBE_PROGRESS","statement":"Each Dynamic V3 PROBE targets one missing required capability on the first non-falsified admissible route; a truthful current-epoch receipt removes that missing pair from the finite progress measure."},
+    {"id":"T4_LEAST_COST_SELECTION","statement":"Cost/id ordering plus skip-on-false, probe-on-unknown, select-on-all-true makes the first SELECT the least-cost admissible sufficient route under the declared tie-break."},
+    {"id":"T5_SOUND_NO_ROUTE_ESCALATION","statement":"After complete discovery and probe exhaustion, absence of SELECT means every admissible registered route has a truthful negative required-capability witness, so escalation is sound."},
+    {"id":"T6_CHANGE_EPOCH_INDUCTION","statement":"Atomic registry replacement increments the universe epoch; stale episodes fail closed. Induction over finite registry changes reduces each episode to T1-T5."},
+    {"id":"T7_LEGACY_TERMINAL_TRANSPORT","statement":"On every valid state of the frozen V1/V2 terminal public schema, Dynamic V3 and the terminal-tested candidate have identical scorer-relevant decision semantics."},
+    {"id":"T8_SEPARATE_ACCEPTANCE_ATOMS","statement":"Second-task transfer and no-unsupported-promotion remain independently proved scope-complete atoms and are composed later; this scope certificate does not self-credit them."}
+  ],
+  "terminal_evidence_role": "The historical 180/180 terminal result is transported to Dynamic V3 as supporting acceptance evidence only; universal scope comes from T1-T6, not empirical extrapolation.",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_TERMINAL_CASE_REPLAY",
+    "NO_EMPIRICAL_GENERALIZATION_FROM_180_CASES",
+    "NO_CLAIM_FOR_MALFORMED_CONSTRAINTS_MALICIOUS_PROBE_RECEIPTS_OR_TOOLS_BYPASSING_THE_OWNED_INVOCATION_GATE",
+    "SEPARATE_INDEPENDENT_PUBLIC_RUNNER_PASS_REQUIRED",
+    "SEPARATE_ACCEPTANCE_REDUCTION_REQUIRED_AFTER_SCOPE_PASS"
+  ],
+  "expected_independent_projection": {
+    "universal_scope_proved": true,
+    "scope_atom_satisfied_candidate": true,
+    "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "uses_empirical_generalization": false,
+    "terminal_cases_replayed": 0,
+    "new_reality_units_consumed": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
