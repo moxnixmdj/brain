@@ -183,6 +183,9 @@ def _materialize(public: Mapping[str, Any], reg: Mapping[str, Any]) -> tuple[dic
         row = dict(raw)
         row["epoch"] = epoch
         row["cost"] = float(cost)
+        # Newly discovered identities may be probed only when the interface
+        # explicitly grants bounded safe-probe authority. Absence fails closed.
+        row["safe_probe_allowed"] = raw.get("safe_probe_allowed") is True
         prior = tools.get(tid)
         if prior is not None and _canon(prior) != _canon(row):
             raise ToolDiscoveryV4Error("DISCOVERED_TOOL_ID_CONFLICT:" + tid)
@@ -220,7 +223,7 @@ def _evidence(public: Mapping[str, Any], epochs: Mapping[str, int]) -> dict[tupl
         if tid not in epochs or rec.get("epoch") != epochs[tid] or not cap:
             continue
         value = rec.get("supported")
-        if value not in (True, False):
+        if value is not True and value is not False:
             raise ToolDiscoveryV4Error("PROBE_RECEIPT_RESULT_INVALID")
         key = (tid, cap)
         if key in out and out[key] is not value:
@@ -283,6 +286,8 @@ def next_action(public: Mapping[str, Any]) -> dict[str, Any]:
         if impossible:
             continue
         if unknown:
+            if tool.get("safe_probe_allowed") is not True:
+                continue
             return {
                 "action": "PROBE",
                 "tool_id": tid,
