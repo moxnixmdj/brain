@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_DEBUGGING_SCOPE_COMPLETE_BRIDGE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_SOURCE_BOUND_DEBUGGING_COMPONENT_BRIDGE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Bind only the frozen MULTI_CAPABILITY_COMPOSITION debugging component to the independently scope-complete and canonically accepted SELF_VERIFICATION_DEBUGGING_AND_RECOVERY family, without transporting coding, tool discovery, recovery, or parent composition scope.",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "component_binding": {
+    "component_id": "debugging",
+    "interface_id": "coding+debugging+tool discovery",
+    "proved_properties_after_independent_verification": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ]
+  },
+  "authority": {
+    "terminal_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "composition_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "recovery_scope_verification": {
+      "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+    },
+    "recovery_acceptance_integrator": {
+      "path": "canonical/verification/RECOVERY_ACCEPTANCE_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "48a865f38f65be212df1cf0ba52d296b71cd003a"
+    },
+    "current_acceptance_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5"
+    },
+    "current_composition_authority": {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
+      "git_blob_sha": "5bb089582a5bc2ee4a44143c8d3a11e919fecdff"
+    }
+  },
+  "derivation": {
+    "source_family_id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "source_family_envelope_literal": "Check work creatively, falsify conclusions, diagnose failures and recover without losing the goal.",
+    "frozen_component_literal": "debugging",
+    "frozen_interface_literal": "coding+debugging+tool discovery",
+    "source_protocol_debugging_dimensions": [
+      "semantic self-check",
+      "counterexample discovery",
+      "earliest causal failure localization",
+      "repair selection"
+    ],
+    "source_acceptance_closed": true,
+    "source_scope_complete": true,
+    "source_objective_ceiling_or_floor": true,
+    "current_component_state_before": "OPEN",
+    "relation": "SOURCE_SCOPE_IS_EXACT_OR_STRONGER_FOR_LITERAL_DEBUGGING_COMPONENT"
+  },
+  "scope_guard": {
+    "included_scope": [
+      "semantic self-check",
+      "counterexample discovery",
+      "earliest causal failure localization",
+      "repair selection",
+      "diagnose failures"
+    ],
+    "excluded_scope": [
+      "CODING_COMPONENT",
+      "TOOL_DISCOVERY_COMPONENT",
+      "RECOVERY_COMPONENT_CREDIT_FROM_THIS_RECEIPT",
+      "GENERAL_MULTI_CAPABILITY_COMPOSITION_INTERACTION_SUCCESS",
+      "CROSS_CAPABILITY_STATE_HANDOFF_AND_ROLLBACK"
+    ],
+    "rule": "ONLY_THE_LITERAL_DEBUGGING_COMPONENT_INHERITS_THE_CURRENT_SCOPE_COMPLETE_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY_FAMILY_PROOF__ADJACENT_CODING_TOOL_DISCOVERY_AND_PARENT_COMPOSITION_REMAIN_UNCHANGED"
+  },
+  "candidate_receipt": {
+    "receipt_id": "COMPOSITION_SCOPE_COMPLETE_BRIDGE::SELF_VERIFICATION_DEBUGGING_AND_RECOVERY::debugging::V1",
+    "component_id": "debugging",
+    "interface_id": "coding+debugging+tool discovery",
+    "proved_properties": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ],
+    "verified": false,
+    "independent": false,
+    "contamination_clean": true,
+    "acceptance_scoped": true,
+    "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+    "source_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "source_scope_receipt": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+    "source_acceptance_receipt": "canonical/verification/RECOVERY_ACCEPTANCE_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  },
+  "expected_effect_after_independent_verification": {
+    "current_composition_scoped_proved_components_before": 4,
+    "newly_admissible_component": "debugging",
+    "projected_scoped_proved_components_after": 5,
+    "projected_open_components_after": 7,
+    "parent_composition_predicate_closed": false,
+    "strict_opus55_acceptance_delta": 0
+  },
+  "hard_rules": [
+    "SOURCE_RECOVERY_FAMILY_MUST_REMAIN_INDEPENDENTLY_SCOPE_COMPLETE_AND_ACCEPTED",
+    "FROZEN_MANIFEST_MUST_CONTAIN_EXACTLY_ONE_LITERAL_DEBUGGING_COMPONENT",
+    "CURRENT_COMPOSITION_AUTHORITY_MUST_LIST_DEBUGGING_OPEN",
+    "NO_COMPONENT_CREDIT_BY_FAMILY_NAME_ALONE__PROTOCOL_DIMENSIONS_AND_ENVELOPE_SEMANTICS_ARE_LOAD_BEARING",
+    "NO_CODING_TOOL_DISCOVERY_RECOVERY_OR_PARENT_COMPOSITION_CREDIT_TRANSPORT",
+    "NO_NEW_CAPABILITY_FAMILY_ACCEPTANCE_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_SOURCE_BYTES_AND_EXACT_OR_STRONGER_DEBUGGING_SCOPE_RELATION__IF_PASS_ADMIT_ONLY_DEBUGGING_RECEIPT__RECOMPUTE_COMPOSITION_SLICE_TO_5_OF_12",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
