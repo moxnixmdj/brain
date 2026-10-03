@@ -1,16 +1,18 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V10_CURRENT__RECOVERY_4_OF_19__MANDATORY_TOOL_DISCOVERY_V3_RETRIEVAL_GATE__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V13_CURRENT__POST_DUAL_17_REQUIREMENTS__31_PRIMITIVE_WORK_UNITS__MANDATORY_STRICT_TOOL_DISCOVERY_V5_RETRIEVAL_GATE__ZERO_CREDIT",
   "current_authority": {
-    "path": "canonical/governance/TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_V1.json",
-    "git_blob_sha": "b1d37d015d93eb71fba1742a498b793b5a2a4ea0"
+    "path": "canonical/governance/TERMINAL_SCHEDULING_V13_ACTIVE_AUTHORITY_V1.json",
+    "git_blob_sha": "d6546a99a62c77b79ae0b169e822ca4f636eea72"
   },
   "independent_verification": {
-    "path": "canonical/verification/TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "git_blob_sha": "20fb5ddba2ec8ae93ab3b8543ff455236abef672",
-    "workflow_run_id": 37120177746,
-    "workflow_job_id": 111194599730,
+    "path": "canonical/verification/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V13_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "328c13b409777c3ac9130a38de7b5a852eb0fc11",
+    "public_runner_repository": "moxnixmdj/verification-capsule-runner",
+    "public_runner_pull_request": 1349,
+    "workflow_run_id": 37125478473,
+    "workflow_job_id": 111209806025,
     "conclusion": "success"
   },
   "live_world": {
@@ -18,51 +20,64 @@
     "proved_predicates": 11,
     "unresolved_predicates": 27,
     "opus55_acceptance": "4/19_PASS__15/19_OPEN",
-    "tool_learning_success_route_noninferior": "OPEN"
+    "active_zero_reality_requirements": 17,
+    "active_nondominated_certificates": 14,
+    "zero_reality_covered_predicates": 25,
+    "direct_reality_blocked_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "primitive_zero_reality_work_units": 31,
+    "matched_priority_child_facts": 16
   },
   "mandatory_tool_discovery_retrieval": {
+    "authority": "V5_OVER_VERIFIED_V4_OVER_VERIFIED_V3_OVER_VERIFIED_V2_BASE",
     "gate_path": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py",
-    "gate_git_blob_sha": "73ff5863845402fdd304c0e8c64b4b1d36330f45",
-    "hypergraph_git_blob_sha": "38b53147597b5457859e3b0d031168842560e3e2",
-    "scheduler_runtime_git_blob_sha": "9ae2b990578b042dd24074fd5013378b72e64b6b",
-    "v2_base_activation_git_blob_sha": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e",
-    "v3_activation_git_blob_sha": "4fde285b62a3a84e7f12852d8600aecfc01bab81",
-    "v3_live_gate_verification_git_blob_sha": "a1bc5d4ef2a767973e48a96ed986f7181630d959",
+    "gate_git_blob_sha": "c3324e574c1fafb6aaab443f49b7a9600966e754",
+    "v5_activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V5_ACTIVATION_V1.json",
+    "v5_activation_git_blob_sha": "8b8b80d43972bb7113b193baaf21dbda292d595e",
+    "v5_activation_verification_path": "canonical/verification/RETRIEVAL_V5_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "v5_activation_verification_git_blob_sha": "acd898bdea67ef0337e33b4335426fbe0dd7320d",
+    "v5_execution_verification_path": "canonical/verification/RETRIEVAL_V5_FEDERATION_EXECUTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "v5_execution_verification_git_blob_sha": "cd1501e167a5429ad0d918e080c527e6d43b8a4d",
+    "v5_live_gate_verification_path": "canonical/verification/RETRIEVAL_V5_LIVE_GATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "v5_live_gate_verification_git_blob_sha": "aa3a1ff960ba0f02ff5ad118053cf1b7d382d91b",
     "mandatory": true,
-    "direct_bypass_allowed": false,
-    "stale_authority_allowed": false,
-    "pre_v3_epoch_exhaustion_allowed": false,
-    "consumed_source_epoch_replay_allowed": false,
-    "no_result_means_nonexistence": false
+    "strict_success_only_source_cell_consumption_required": true,
+    "transient_failures_retryable_and_unconsumed": true,
+    "partial_batch_epoch_consumption_allowed": false,
+    "all_selected_cells_required_before_epoch_consumption": true,
+    "off_domain_result_may_satisfy_source_cell": false,
+    "consumed_cell_replay_allowed": false,
+    "empty_or_failed_attempt_proves_nonexistence": false
   },
   "supersedes_for_current_scheduling": [
-    "canonical/governance/TERMINAL_SCHEDULING_V9_ACTIVE_AUTHORITY_V1.json",
-    "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json"
-  ],
-  "abandoned_unmerged_candidates": [
-    "CURRENT_TERMINAL_SCHEDULING_WORLD_V2",
-    "TERMINAL_SCHEDULING_ACTIVATION_V8"
+    "canonical/governance/TERMINAL_SCHEDULING_V12_ACTIVE_AUTHORITY_V1.json",
+    "canonical/governance/TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_V1.json"
   ],
   "hard_rules": [
     "THIS_FILE_IS_THE_SINGLE_CURRENT_SCHEDULING_AUTHORITY_POINTER",
-    "ALL_TOOL_DISCOVERY_RETRIEVAL_MUST_PASS_THE_EXACT_VERIFIED_V2_BASE_PLUS_V3_GATE",
-    "NO_SOURCE_EPOCH_EXHAUSTION_BEFORE_V3_EXPANSION_UNLESS_A_VERIFIED_SUFFICIENT_WITNESS_ALREADY_STOPPED_SEARCH",
-    "PRESERVE_CURRENT_4_OF_19_ACCEPTANCE_AUTHORITY",
+    "PRESERVE_CURRENT_4_OF_19_ACCEPTANCE_AND_11_OF_38_PROVED_COUNTS",
+    "ALL_TOOL_DISCOVERY_RETRIEVAL_MUST_PASS_EXACT_VERIFIED_V5_OVER_V4_OVER_V3_OVER_V2_AUTHORITY",
+    "ONLY_SUCCESSFULLY_EXECUTED_V5_SOURCE_CELLS_MAY_BE_CONSUMED",
+    "FAILED_OR_REJECTED_V5_CELLS_REMAIN_RETRYABLE_AND_UNCONSUMED",
+    "NO_PARTIAL_BATCH_TO_SOURCE_EPOCH_CONSUMPTION",
+    "NO_SOURCE_EPOCH_REPLAY",
     "NO_RESULT_IS_NOT_NONEXISTENCE",
-    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING"
+    "NO_FRESH_REALITY_UNTIL_CURRENT_ZERO_REALITY_FRONTIER_REACHES_VERIFIED_FIXED_POINT",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING"
   ],
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "final_pointer_candidate_verification": {
-    "path": "canonical/verification/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V10_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "git_blob_sha": "746111757bf0c7b8c0c3e6e70a7172d798141c4c",
-    "workflow_run_id": 37120345704,
-    "workflow_job_id": 111195072424,
-    "conclusion": "success"
+  "final_pointer_candidate": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V13_CANDIDATE_V1.json",
+    "git_blob_sha": "9ae934eb9971d59bf205823317f44e97709fa618"
   }
 }
