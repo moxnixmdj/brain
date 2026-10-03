@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_P1_SHARED_FAILURE_SEMANTICS_BATCH_FREEZE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_PREEXECUTION_FREEZE__INDEPENDENT_VERIFICATION_REQUIRED__NO_REALITY_CONSUMED__ZERO_CREDIT",
+  "objective": "Freeze the exact candidate, scorer, normalizer, surface map and post-freeze all-eligible next-batch selection rule for the independently verified one-unit P1 minimum-reality observation without selecting cases or consuming the reality unit.",
+  "canonical_base_commit": "223886b741992cfd9b85e95ad9e6a3ac54feebcd",
+  "minimum_reality_authority": {
+    "path": "canonical/verification/P1_V7_PROVENANCE_AND_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "01ca625add4db7035224f0d4cb9efb406d17362d",
+    "selected_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+    "minimum_new_reality_units": 1
+  },
+  "frozen_candidate": {
+    "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+    "git_blob_sha": "28940387bd6c11671035ad9201e37bba13fd9bc9"
+  },
+  "frozen_intervention_rescue_scorer": {
+    "path": "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py",
+    "git_blob_sha": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "entrypoint": "score_case",
+    "rule": "USE_UNCHANGED"
+  },
+  "frozen_normalizer": {
+    "path": "canonical/runtime/p1_shared_failure_semantics_batch_normalizer_v1.py",
+    "rule": "SOURCE_MUST_EXPLICITLY_SUPPLY_FAILURE_SEMANTICS__NORMALIZER_MUST_NOT_INFER_DEFAULT_OR_REWRITE_IT"
+  },
+  "frozen_surfaces": [
+    "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+  ],
+  "source_binding_authority": {
+    "path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+    "git_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+  },
+  "batch_admission": [
+    "ONE_SOURCE_BATCH_ID_SHARED_ACROSS_ALL_INCLUDED_CASES",
+    "ALL_THREE_FROZEN_SURFACES_MUST_BE_PRESENT",
+    "DIRECT_CONTRACT_AND_DERIVED_UPSTREAM_MUST_BOTH_BE_PRESENT_ACROSS_THE_BATCH",
+    "EVERY_FAILED_CHECK_MUST_HAVE_NONEMPTY_CAUSALLY_RELEVANT_SUPPORTING_RECEIPTS",
+    "FAILURE_SEMANTICS_MUST_BE_SOURCE_BOUND_AT_NORMALIZATION_OR_INSTRUMENTATION_TIME",
+    "NO_MISSING_FAILURE_SEMANTICS_DEFAULT",
+    "NO_TERMINAL_V3_CASE_REPLAY",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "post_freeze_case_selection": {
+    "mode": "ALL_ELIGIBLE_CASES_FROM_FIRST_NEW_SOURCE_BOUND_BATCH_OBSERVED_AFTER_FREEZE_ACTIVATION",
+    "subset_selection_forbidden": true,
+    "case_replacement_forbidden": true,
+    "result_conditioned_selection_forbidden": true,
+    "prefreeze_case_identity_knowledge_forbidden": true,
+    "eligibility": "CASE_BELONGS_TO_ONE_OF_THREE_FROZEN_SURFACES_AND_SATISFIES_FROZEN_NORMALIZER_SCHEMA",
+    "note": "The freeze fixes eligibility and includes every eligible case in the first new source-bound batch. No random or hand-picked subset exists to tune."
+  },
+  "hard_nonclaims": [
+    "THIS_FREEZE_DOES_NOT_AUTHORIZE_EXECUTION",
+    "THIS_FREEZE_DOES_NOT_CONSUME_THE_ONE_REALITY_UNIT",
+    "THIS_FREEZE_DOES_NOT_LIFT_P1_QUARANTINE",
+    "THIS_FREEZE_DOES_NOT_GRANT_ATOMIC_FAMILY_OR_TERMINAL_CREDIT",
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_GUESSED_FAILURE_SEMANTICS"
+  ],
+  "execution_authority": false,
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_FREEZE_BYTES_NORMALIZER_FAIL_CLOSED_BEHAVIOR_AND_SELECTION_NON_TUNABILITY__ONLY_AFTER_PASS_MAY_A_SEPARATE_EXECUTION_AUTHORITY_DECIDE_WHETHER_TO_CONSUME_THE_SINGLE_MINIMUM_REALITY_UNIT"
+}
