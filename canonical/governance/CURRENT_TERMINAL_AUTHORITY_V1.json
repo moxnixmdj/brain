@@ -117,7 +117,8 @@
       "workflow_git_blob_sha": "ae09025a50653a35d3f06721901db6b849f1b690",
       "verification_path": "canonical/verification/COUNT_GENERIC_TERMINAL_PROJECTION_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "verification_git_blob_sha": "e74dd56ae251381324336773241d6a2896aea8b1",
-      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__COUNT_GENERIC_19_FAMILY_38_PREDICATE_PROJECTION__ZERO_CREDIT"
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__COUNT_GENERIC_19_FAMILY_38_PREDICATE_PROJECTION__ZERO_CREDIT",
+      "governance_git_blob_sha": "c432cd68770fcccdfe42e60cec6d8327000c1fd3"
     },
     "acceptance_residual_verdict_v10": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
