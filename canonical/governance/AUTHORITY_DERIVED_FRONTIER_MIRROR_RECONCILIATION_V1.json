@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_AUTHORITY_DERIVED_FRONTIER_MIRROR_RECONCILIATION_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_TRUTH_REPAIR__DETERMINISTIC_PREFLIGHT_REQUIRED__ZERO_CREDIT",
-  "base_commit": "16c8708761065ce4644fed1e2a049dbe7ba688b3",
+  "status": "CANDIDATE_TRUTH_REPAIR__REBASED_TO_CURRENT_AUTHORITY__DETERMINISTIC_PREFLIGHT_REQUIRED__ZERO_CREDIT",
+  "base_commit": "767e0f6be3f02ec0bbe5c48020989b009d74be0e",
   "source_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-  "source_authority_git_blob_sha": "34726c4325d2688ebd263cca50843a8bdcc88486",
+  "source_authority_git_blob_sha": "3a7b8e8a9df23f6dc1d142a98e192da47a17161b",
   "authority_mutated": false,
   "repaired_surfaces": [
     "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
