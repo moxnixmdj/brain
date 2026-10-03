@@ -1,0 +1,32 @@
+name: Verify residual witness retrieval
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/residual_witness_retrieval_compiler_v1.py"
+      - "canonical/runtime/bound_capabilities/research_query_focus.py"
+      - "canonical/runtime/bound_capabilities/objective_relevance_bm25.py"
+      - "canonical/tests/test_residual_witness_retrieval_compiler_v1.py"
+      - "canonical/tests/test_open_research_query_focus_relevance.py"
+      - "canonical/governance/RESIDUAL_WITNESS_RETRIEVAL_CONTRACT_V1.json"
+      - "canonical/action_intents/2026-10-03_INSTALL_RESIDUAL_WITNESS_RETRIEVAL_COMPILER_V1.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile changed Python
+        run: |
+          python -m py_compile             canonical/runtime/residual_witness_retrieval_compiler_v1.py             canonical/runtime/bound_capabilities/research_query_focus.py             canonical/runtime/bound_capabilities/objective_relevance_bm25.py             canonical/tests/test_residual_witness_retrieval_compiler_v1.py             canonical/tests/test_open_research_query_focus_relevance.py
+      - name: Run targeted retrieval tests
+        run: |
+          python -m unittest -v             canonical.tests.test_residual_witness_retrieval_compiler_v1             canonical.tests.test_open_research_query_focus_relevance
