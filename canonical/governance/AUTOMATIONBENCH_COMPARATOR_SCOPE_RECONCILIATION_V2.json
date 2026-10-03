@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_COMPARATOR_SCOPE_RECONCILIATION_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__FROZEN_PUBLIC600_SURFACE_AND_OPUS40_REFERENCE_POPULATION_MISMATCH__FAIL_CLOSED__ZERO_CREDIT",
+  "target_predicate": "AUTOMATIONBENCH_GE_40",
+  "target_family": "BUSINESS_WORKFLOW_AUTOMATION",
+  "objective": "Repair the AutomationBench Root-2 comparator semantics without executing terminal tasks or weakening the Brain>=Opus requirement.",
+  "exact_brain_authority": {
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "proof_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "readiness": {
+      "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+      "git_blob_sha": "4e59e30461c9ff1bee1a9474627d5fb4074844b2"
+    },
+    "route_matrix": {
+      "path": "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
+      "git_blob_sha": "03e818af38f57df2531cfeb11dbf95cbfb60281d"
+    },
+    "opus_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "frozen_contract_facts": {
+    "predicate_surface": "AutomationBench public 600",
+    "predicate_threshold_percent": 40,
+    "readiness_dataset": "PUBLIC_600_TASK_SET_FROZEN",
+    "readiness_scorer": "STRICT_BINARY_ASSERTION_METRIC_BOUND",
+    "universal_same_scope_rule": "Brain and Opus 5.5 must be evaluated on the same frozen task population/harness/tool authority unless an absolute/theoretical ceiling is the proof mode."
+  },
+  "first_party_public_set": {
+    "repository": "zapier/AutomationBench",
+    "commit": "4a8e1061254004d9dac807054eed33fad7d1ff14",
+    "readme_git_blob_sha": "680d7006e1a05e94c6ce208e91b13dd821d1554f",
+    "public_population": {
+      "scored_tasks": 600,
+      "domains": {
+        "sales": 100,
+        "marketing": 100,
+        "operations": 100,
+        "support": 100,
+        "finance": 100,
+        "hr": 100
+      },
+      "official_metric": "task_completed_correctly",
+      "metric_semantics": "strict binary pass iff every scored assertion passes"
+    },
+    "population_relation": {
+      "public_vs_official": "DISTINCT",
+      "official_leaderboard_population": "separate held-out private task set per domain",
+      "public_population": "repository public 600-task set",
+      "score_equivalence": "NOT_1_TO_1",
+      "directional_agreement_only": true
+    },
+    "pinned_public_score_table_contains_opus55": false
+  },
+  "independently_observed_zero_reality_preflight": {
+    "public_population_workflow_run_id": 37149624493,
+    "public_population_workflow_job_id": 111280524806,
+    "public_population_size": 600,
+    "public_population_commitment_sha256": "73fb894dd1679968f1a2c7805f2e51a65208b321579d614e47aa45756899a9b9",
+    "zero_cost_route_workflow_run_id": 37149624586,
+    "zero_cost_route_workflow_job_id": 111280524884,
+    "upstream_test_suite_passed": 1398,
+    "terminal_task_execution": false,
+    "terminal_results_observed": 0,
+    "custom_base_url_route": true
+  },
+  "contradiction": {
+    "statement": "The current frozen acceptance surface is public 600, while the existing 40.0 Opus reference is not presently bound to an Opus 5.5 result on that same public 600 population. The benchmark owner explicitly separates public and official held-out populations and denies 1:1 score equivalence.",
+    "consequence": "A Brain public-600 score >=40.0 cannot by itself prove Brain>=Opus 5.5 under the terminal protocol's same-scope rule.",
+    "stale_route_to_delete": "RUN_PUBLIC_600_AND_COMPARE_DIRECTLY_TO_40_PERCENT_AS_IF_SAME_POPULATION"
+  },
+  "admissible_discharge_routes": [
+    "BIND_AN_EXACT_OPUS_5_5_SCORE_ON_THE_SAME_PINNED_PUBLIC_600_POPULATION_AND_COMPARE_ON_THE_SAME_HARNESS",
+    "PROVE_A_SCOPE_COMPLETE_STRONGER_OR_ABSOLUTE_CEILING_RESULT_THAT_DOMINATES_OPUS_WITHOUT_REQUIRING_A_SAME_POPULATION_EMPIRICAL_SCORE",
+    "BIND_EXACT_OFFICIAL_HELD_OUT_POPULATION_AND_SAME_HARNESS_ACCESS_IF_IT_BECOMES_ADMISSIBLE_AND_ZERO_COST"
+  ],
+  "current_conclusion": {
+    "predicate_state": "OPEN",
+    "comparator_population_identity": "OPEN",
+    "public600_dataset_and_metric_route": "STRUCTURALLY_PREQUALIFIED",
+    "score_execution_on_public600_now": "DOMINATED_UNTIL_COMPARATOR_RELATION_IS_VALID",
+    "fresh_terminal_execution_authorized": false
+  },
+  "hard_rules": [
+    "DO_NOT_TREAT_DIRECTIONAL_AGREEMENT_AS_SCORE_EQUIVALENCE",
+    "DO_NOT_COMPARE_A_PUBLIC600_BRAIN_SCORE_TO_A_PRIVATE_HELDOUT_OPUS_SCORE",
+    "DO_NOT_WEAKEN_BRAIN_GE_OPUS_TO_AN_ARBITRARY_ABSOLUTE_40_PERCENT_BAR",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT",
+    "NO_FRESH_TERMINAL_CASE_EXECUTION",
+    "PUBLIC600_ROUTE_REMAINS_USEFUL_ONCE_A_VALID_SAME_SCOPE_COMPARATOR_OR_STRONGER_PROOF_IS_BOUND"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_THE_INTERNAL_CONTRACT_AND_PINNED_ZAPIER_PUBLIC_PRIVATE_DISTINCTION__THEN_RECOMPILE_SHARED_PUBLIC_BENCHMARK_ABI_ROUTE_WITH_AUTOMATIONBENCH_COMPARATOR_POPULATION_IDENTITY_AS_THE_ONLY_PUBLIC600_ROOT2_RESIDUAL"
+}
