@@ -1,22 +1,48 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_INFORMATION_DOMINANCE_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE__EXACT_LIVE_30_INFORMATION_DOMINANCE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
-  "objective": "Recompute exact certificate dominance only after filtering the historical scheduling world through the independently verified current 38/8/30 receipt-derived frontier.",
-  "runtime": "canonical/runtime/current_terminal_information_dominance_v1.py",
-  "tests": "canonical/tests/test_current_terminal_information_dominance_v1.py",
-  "live_world_authority": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json",
-  "solver": "canonical/runtime/terminal_information_dominance_v1.py",
+  "status": "CANDIDATE__EXACT_LIVE_27_INFORMATION_DOMINANCE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Recompute exact certificate dominance only after filtering the historical certificate/action world through the current 38/11/27 receipt-derived frontier.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_main_commit": "8e5e5b4d089809cad850a6d55eed30d85ba60573",
+  "runtime": {
+    "path": "canonical/runtime/current_terminal_information_dominance_v1.py",
+    "git_blob_sha": "f791f68faa493fc265e90e6bfb9a9ff7282a0fa5"
+  },
+  "tests": {
+    "path": "canonical/tests/test_current_terminal_information_dominance_v1.py",
+    "git_blob_sha": "b5c262ab0474065473ba06c1c7b2e5e3df337fac"
+  },
+  "live_world_candidate": {
+    "path": "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V1.json",
+    "git_blob_sha": "df7fff719f9b6166c8d41916d30484369bd5d920"
+  },
+  "historical_certificate_frontier": {
+    "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+    "git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+  },
+  "solver": {
+    "path": "canonical/runtime/terminal_information_dominance_v1.py",
+    "git_blob_sha": "f10986bd09a7cc64a1fae3c6ea8e69b5655f2199"
+  },
+  "expected_live_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "live_certificate_count": 16,
+    "recovery_and_delegation_closed_targets_removed": true,
+    "tool_discovery_scope_certificate_preserved": true
+  },
   "hard_rules": [
-    "NO_HISTORICAL_31_PREDICATE_DOMINANCE_PROJECTION_MAY_ORDER_CURRENT_WORK",
+    "NO_HISTORICAL_30_OR_31_PREDICATE_DOMINANCE_PROJECTION_MAY_ORDER_CURRENT_WORK",
     "REMOVE_PROVED_OR_REFUTED_TARGETS_BEFORE_DOMINANCE",
     "INFORMATION_DOMINANCE_IS_STRUCTURAL_SCHEDULING_ONLY_NOT_ACCEPTANCE_PROOF",
-    "REQUIREMENT_COUNT_IS_NOT_PROOF_DIFFICULTY_OR_PROBABILITY",
+    "REQUIREMENT_COUNT_IS_NOT_PROOF_DIFFICULTY_OR SUCCESS PROBABILITY",
     "WORK_NONDOMINATED_ZERO_REALITY_CERTIFICATES_BEFORE_FRESH_REALITY",
     "RUN_FIXED_POINT_AFTER_EACH_NEW_VERIFIED_CERTIFICATE",
     "NO_EXECUTION_PROMOTION_FAMILY_OR_CAPABILITY_CREDIT"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_LIVE_30_DOMINANCE_RESULT__THEN_ACTIVATE_ONLY_THE_VERIFIED_NONDOMINATED_ZERO_REALITY_FRONTIER",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_LIVE_27_DOMINANCE_RESULT__THEN_ACTIVATE_ONLY_THE_VERIFIED_NONDOMINATED_ZERO_REALITY_FRONTIER__NO_FRESH_REALITY_BEFORE_SATURATION",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
