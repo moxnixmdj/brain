@@ -1,0 +1,31 @@
+name: Verify Tool Discovery acceptance promotion v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_V1.json"
+      - "canonical/runtime/tool_discovery_acceptance_promotion_v1.py"
+      - "canonical/tests/test_tool_discovery_acceptance_promotion_v1.py"
+      - "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
+      - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+      - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+      - ".github/workflows/verify-tool-discovery-acceptance-promotion-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify exact acceptance-only promotion
+        run: |
+          python -m unittest canonical.tests.test_tool_discovery_acceptance_promotion_v1 -v
+          python canonical/runtime/tool_discovery_acceptance_promotion_v1.py
