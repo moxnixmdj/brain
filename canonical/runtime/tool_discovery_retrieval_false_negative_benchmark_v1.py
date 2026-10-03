@@ -128,6 +128,7 @@ def evaluate(retrieval_input: Mapping[str, Any]) -> dict[str, Any]:
         "retrieval_program_sha256": program["retrieval_program_sha256"],
         "query_count": len(rows),
         "language_hints": sorted({str(x.get("language_hint")) for x in rows}),
+        "explicit_language_variant_keys": sorted(str(x) for x in (retrieval_input.get("language_variants") or {}).keys()),
         "supported_fixture_count": total,
         "supported_fixture_found_count": len(found),
         "supported_fixture_missed_count": len(missed),
