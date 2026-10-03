@@ -39,6 +39,22 @@ def extract_json_object(text: Any) -> dict[str, Any]:
     return obj
 
 
+def normalize_proposal_object(obj: dict[str, Any]) -> dict[str, Any]:
+    """Normalize exactly one independently observed harmless schema alias.
+
+    Some proposal endpoints label the candidate list safe_candidates even
+    when instructed to emit candidates. Both at once is ambiguous and
+    therefore rejected. No other keys are guessed or renamed.
+    """
+    if not isinstance(obj, dict):
+        raise SciencePlannerError("SCIENCE_PLANNER_OBJECT_REQUIRED")
+    out = dict(obj)
+    if "safe_candidates" in out:
+        if "candidates" in out:
+            raise SciencePlannerError("SCIENCE_PLANNER_CANDIDATE_ALIAS_AMBIGUOUS")
+        out["candidates"] = out.pop("safe_candidates")
+    return out
+
 def plan(prompt: str, *, timeout_s: int = 20) -> dict[str, Any]:
     prompt = str(prompt or "")
     if not prompt.strip():
