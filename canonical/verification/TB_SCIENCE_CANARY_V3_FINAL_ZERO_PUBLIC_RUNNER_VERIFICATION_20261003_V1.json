@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CANARY_V3_FINAL_ZERO_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V3_AUTHORITY_CONSUMED__FINAL_ZERO__PRE_TASK_ILLEGAL_INSTRUCTION__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "candidate": {
+    "path": "canonical/governance/TB_SCIENCE_CANARY_V3_FINAL_ZERO_RECONCILIATION_V1.json",
+    "source_runner_git_blob_sha": "e532210e793e0bb2036d72d7eafc24bfc7a93e5f"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1264,
+    "head_sha": "719d2e3e9d560f019fc92f39b840209daf29e055",
+    "merge_commit": "367d71d37e8478d19896349d5e12c5b8bb2e7f30",
+    "workflow_run_id": 37111302253,
+    "workflow_job_id": 111169584840,
+    "conclusion": "success",
+    "verified_steps": [
+      "BIND_EXACT_BRAIN_CANDIDATE_AND_AUTHORITY",
+      "FETCH_AUTHENTICATED_EXECUTION_METADATA_LOGS_AND_ARTIFACT",
+      "INDEPENDENTLY_ADJUDICATE_FROZEN_ZERO_AND_ACCOUNTING"
+    ]
+  },
+  "verified": {
+    "slot_id": "terminal-bench-science/virtual-baseline-localization::trial-0",
+    "execution_authority_consumed": true,
+    "status": "FINAL_ZERO",
+    "reward": 0,
+    "terminal_task_started": false,
+    "terminal_task_content_read": 0,
+    "failure_class": "PRE_TASK_LOCAL_SUBSTRATE_RESOURCE_INVALID",
+    "root_cause_observation": "LLAMA_CPP_SERVER_PROCESS_EXITED_WITH_ILLEGAL_INSTRUCTION_BEFORE_HEALTH_ENDPOINT_BECAME_READY",
+    "finalized_failures_after_v3": 5,
+    "remaining_failures_before_fail_lock": 73,
+    "rerun_allowed": false,
+    "replacement_allowed": false,
+    "denominator_shrink_allowed": false
+  },
+  "consequence": "V3_SLOT_IS_IRREVOCABLY_SPENT__NO_NEW_SCIENCE_SLOT_AUTHORITY_UNTIL_LOCAL_SUBSTRATE_CPU_PORTABILITY_REPAIR_HAS_INDEPENDENT_ZERO_TERMINAL_PASS",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
