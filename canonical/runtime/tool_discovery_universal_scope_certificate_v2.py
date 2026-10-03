@@ -34,11 +34,11 @@ EXPECTED_BLOBS = {
     "canonical/runtime/tool_discovery_dynamic_candidate_v3.py":
         "bbbee4d6baf8df937543644397abba38a67dce62",
     "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_SCOPE_RELATION_V1.json":
-        "6f1f5c11aae7ba85167e5b484e03008d2f2b8e67",
+        "b27cf5a5f6a1b163b54abdd76ae618bfc85a08ea",
     "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json":
         "ee187f611a0e82b2de495ee377682f39bc31dd31",
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json":
-        "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+        "62394e5b7d221ec9f69c3458f669e40e253a9d09",
     "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json":
         "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
     "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json":
