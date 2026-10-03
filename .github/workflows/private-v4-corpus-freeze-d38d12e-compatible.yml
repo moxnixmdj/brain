@@ -1,0 +1,64 @@
+name: Private V4 corpus freeze d38d12e compatible runner
+on:
+  push:
+    branches:
+      - scan/current-v4-proof-atom-corpus-20261003-v2
+permissions:
+  contents: read
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify immutable snapshot and pinned V4 inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "d38d12e0801389f151434e176ee4e30c330650ac" || test "$(git merge-base HEAD d38d12e0801389f151434e176ee4e30c330650ac)" = "d38d12e0801389f151434e176ee4e30c330650ac"
+          test "$(git hash-object canonical/runtime/proof_atom_receipt_index_v4.py)" = "712443ddad23aed8d27df1e4f5372147c00ca57a"
+          test "$(git hash-object canonical/runtime/canonical_proof_atom_basis_v2.py)" = "5b5957f353edab6c86a34f947ef253099822b0d1"
+          test "$(git hash-object canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json)" = "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+          test "$(git hash-object canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json)" = "898e450c62c06cf6d1a4a3f826a255da9161a229"
+          test "$(git hash-object canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V4.json)" = "65d0e860110b0dce40d6f2016003d1612614dc28"
+          test "$(git hash-object canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json)" = "94f17692e7e875cb1ae603b8806e3f07484cbead"
+      - name: Run independently verified V4 index on private corpus
+        shell: bash
+        run: |
+          set -euo pipefail
+          python canonical/runtime/proof_atom_receipt_index_v4.py > /tmp/v4-result.json
+          python - <<'PY'
+          import json, os
+          d=json.load(open("/tmp/v4-result.json",encoding="utf-8"))
+          assert d["status"].startswith("PASS__CORPUS_BOUND_CONTENT_ADDRESSED_CANDIDATE_INDEX")
+          assert d["canonical_atom_count"]==40
+          assert d["new_reality_units_consumed"]==0
+          assert d["capability_credit_delta"]==0
+          assert d["family_credit_delta"]==0
+          assert d["execution_authority"] is False
+          assert d["promotion_authority"] is False
+          print(json.dumps({
+            "schema":"PROJECT_BRAIN_PRIVATE_V4_CORPUS_SNAPSHOT_COMPACT_V1",
+            "snapshot_base":"d38d12e0801389f151434e176ee4e30c330650ac",
+            "executed_head":os.environ["GITHUB_SHA"],
+            "scanned_file_count":d["scanned_file_count"],
+            "scanned_corpus_manifest_sha256":d["scanned_corpus_manifest_sha256"],
+            "index_fingerprint_sha256":d["index_fingerprint_sha256"],
+            "candidate_match_count":d["candidate_match_count"],
+            "atoms_with_candidate_matches":d["atoms_with_candidate_matches"],
+            "atoms_without_candidate_matches":d["atoms_without_candidate_matches"],
+            "review_queue":d["review_queue"],
+            "credit_delta":0
+          },sort_keys=True))
+          PY
+      - name: Upload private result
+        uses: actions/upload-artifact@v4
+        with:
+          name: private-v4-d38d12e-corpus-result
+          path: /tmp/v4-result.json
+          if-no-files-found: error
+          retention-days: 7
