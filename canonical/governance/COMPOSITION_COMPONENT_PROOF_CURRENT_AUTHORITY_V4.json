@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V4",
+  "date": "2026-10-03",
+  "status": "ACTIVE_FAIL_CLOSED__1_OF_12_CURRENTLY_ADMISSIBLE__MEMORY_CURRENT_SOURCE_VERIFIED__11_OPEN__PARENT_OPEN",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "truth": {
+    "frozen_interface_count": 12,
+    "historical_v2_scoped_proved": 2,
+    "historical_v2_receipts_quarantined": 2,
+    "current_admissible_scoped_proved": 1,
+    "current_open_or_quarantined": 11,
+    "current_scoped_proved_components": [
+      "memory"
+    ],
+    "parent_composition_predicate_closed": false
+  },
+  "current_admissible_receipts": [
+    {
+      "receipt_id": "COMPOSITION_OWNED_FAMILY_BRIDGE_V2::LONG_HORIZON_MEMORY_AND_CONTINUITY::memory",
+      "component_id": "memory",
+      "interface_id": "browser/computer action+memory+recovery",
+      "state": "INDEPENDENT_CURRENT_SOURCE_VERIFIED__SCOPED_PROVED",
+      "bridge_candidate": "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2.json",
+      "bridge_verification": "canonical/verification/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "slice_verification": "canonical/verification/COMPOSITION_COMPONENT_PROOF_SLICE_PUBLIC_RUNNER_VERIFICATION_20261003_V3.json"
+    }
+  ],
+  "quarantined_historical_receipts": [
+    "COMPOSITION_BRIDGE::TOOL_ROUTE_DISCOVERY_AND_SELECTION_001::tool_discovery",
+    "COMPOSITION_BRIDGE::TASK_TO_DELEGATION_GRAPH_001::delegation"
+  ],
+  "preservation": {
+    "historical_v2_slice": "PRESERVED_AS_HISTORICAL_ONLY",
+    "tool_discovery_raw_evidence": "PRESERVED__NO_CURRENT_COMPONENT_CREDIT",
+    "delegation_raw_evidence": "PRESERVED__HISTORICAL_RECEIPT_NOT_REUSED",
+    "rule": "CURRENT_CREDIT_COMES_ONLY_FROM_INDEPENDENTLY_VERIFIED_CURRENT_SOURCE_RECEIPTS__QUARANTINE_DOES_NOT_DELETE_RAW_EVIDENCE"
+  },
+  "activation_basis": {
+    "memory_bridge_v2": "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2.json",
+    "memory_bridge_v2_verification": "canonical/verification/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "slice_input_v3": "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V3.json",
+    "slice_output_v3": "canonical/verification/COMPOSITION_COMPONENT_PROOF_SLICE_20261003_V3.json",
+    "independent_slice_verification": "canonical/verification/COMPOSITION_COMPONENT_PROOF_SLICE_PUBLIC_RUNNER_VERIFICATION_20261003_V3.json"
+  },
+  "restoration_rule": "NO_QUARANTINED_COMPONENT_RETURNS_TO_SCOPED_PROVED_UNLESS_A_NEW_CONTENT_ADDRESSED_RECEIPT_WITH_CURRENT_SOURCE_PRECONDITIONS_IS_INDEPENDENTLY_VERIFIED__HISTORICAL_RECEIPT_IDENTITY_ALONE_NEVER_RESTORES_CREDIT",
+  "next": "VERIFY_THE_NEW_CURRENT_SOURCE_DELEGATION_COMPONENT_BRIDGE_DERIVED_FROM_THE_NOW_UNIVERSALLY_SCOPE_COMPLETE_DELEGATION_FAMILY__IF_PASS_COMBINE_ONLY_MEMORY_AND_NEW_DELEGATION_RECEIPTS_AND_RERUN_SLICER__EXPECTED_MAXIMUM_CURRENT_DELTA_2_OF_12__PARENT_REMAINS_OPEN_UNLESS_ALL_12_CLOSE_AND_COMPOSITION_INTERACTION_PROTOCOL_PASSES",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
