@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_UNIVERSAL_COMPARATOR_CAPSULE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAIL_CLOSED_EXTERNAL_MEASUREMENT_BRIDGE__ZERO_CREDIT",
+  "objective": "PROVIDE_ONE_CONTENT_ADDRESSED_BRAIN_SIDE_SUBMISSION_CONTRACT_FOR_ALL_ROOT2_COMPARATOR_CHANNELS_WITHOUT_CLAIMING_A_GENERIC_INFERENCE_ENTRYPOINT_EXISTS",
+  "canonical_base_ref": "main",
+  "root2_problem": "MISSING_ADMISSIBLE_BRAIN_TO_FROZEN_OPUS55_MEASUREMENT_BRIDGE",
+  "request_schema": {
+    "required": [
+      "benchmark_id",
+      "task_id",
+      "task_payload",
+      "allowed_tools",
+      "environment",
+      "output_contract"
+    ],
+    "task_payload_visibility": "BENCHMARK_OWNER_OR_PUBLIC_HARNESS_CONTROLS_DISCLOSURE",
+    "scorer_visibility": "BRAIN_MUST_NOT_RECEIVE_PRIVATE_SCORER_OR_HELDOUT_ANSWERS"
+  },
+  "response_schema": {
+    "required": [
+      "task_id",
+      "status",
+      "answer",
+      "artifacts",
+      "tool_trace",
+      "provenance"
+    ],
+    "provenance_required": [
+      "brain_commit",
+      "entrypoint_blob_sha",
+      "configuration_hash",
+      "tool_policy_hash",
+      "started_at",
+      "finished_at"
+    ],
+    "finalization": "IMMUTABLE_AFTER_SUBMISSION"
+  },
+  "current_brain_execution_seams": {
+    "provider_neutral_executor_admission": "canonical/runtime/executor_broker.py",
+    "historical_terminal_portfolio_runner": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
+    "historical_route_manifest": "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json",
+    "generic_external_task_entrypoint": null,
+    "conclusion": "GENERIC_EXTERNAL_TASK_ENTRYPOINT_NOT_CURRENTLY_BOUND__OWNER_SUBMISSION_PACKAGE_CANNOT_BE_CALLED RUNNABLE YET"
+  },
+  "comparator_channels": [
+    {
+      "channel": "ARTIFICIAL_ANALYSIS_OWNER",
+      "surfaces": [
+        "GDPval-AA v2.1",
+        "AA-Briefcase v1.1",
+        "Finance & Accounting component surfaces"
+      ],
+      "state": "OUTREACH_STARTED"
+    },
+    {
+      "channel": "VALS_OWNER",
+      "surfaces": [
+        "Finance Agent v2",
+        "MysteryMechanism"
+      ],
+      "state": "OUTREACH_STARTED"
+    },
+    {
+      "channel": "CURSOR_OWNER",
+      "surfaces": [
+        "CursorBench 4.0"
+      ],
+      "state": "OUTREACH_STARTED"
+    },
+    {
+      "channel": "COGNITION_OWNER",
+      "surfaces": [
+        "FrontierCode v1.1 Main"
+      ],
+      "state": "PUBLIC_CONTACT_ROUTE_OPEN"
+    },
+    {
+      "channel": "ZAPIER_OWNER",
+      "surfaces": [
+        "AutomationBench official private holdout"
+      ],
+      "state": "PUBLIC_CONTACT_ROUTE_OPEN"
+    },
+    {
+      "channel": "PUBLIC_EXACT_PROTOCOL",
+      "surfaces": [
+        "Terminal-Bench 4.0",
+        "HLE with tools",
+        "Terminal-Bench-Science 0.1",
+        "Chartography with tools",
+        "OSWorld 2.1 partial",
+        "LiveBench IF"
+      ],
+      "state": "MIXED_ROUTE_READINESS"
+    }
+  ],
+  "hard_rules": [
+    "NO_ACCEPTANCE_CREDIT_FROM_CAPSULE_EXISTENCE",
+    "NO_OWNER_SCORE_INHERITANCE_ACROSS_SURFACES",
+    "NO_PRIVATE_TASK_OR_SCORER_LEAKAGE_TO_BRAIN",
+    "NO_UNDECLARED_PAID_FALLBACK",
+    "NO_CASE_EXECUTION_BEFORE_CURRENT_ZERO_REALITY_FIXED_POINT",
+    "NO_RUNNABLE_CLAIM_UNTIL_GENERIC_EXTERNAL_TASK_ENTRYPOINT_IS_CONTENT_ADDRESSED_AND_INDEPENDENTLY_VERIFIED",
+    "SAME_BRAIN_ENTRYPOINT_AND_CONFIGURATION_HASH_MUST_BE_REUSED_ACROSS_OWNER_CHANNELS_UNLESS BENCHMARK_PROTOCOL_REQUIRES A DOCUMENTED ADAPTER"
+  ],
+  "next": "BUILD_AND_INDEPENDENTLY_VERIFY_GENERIC_EXTERNAL_TASK_ENTRYPOINT__THEN_PACKAGE_OWNER_SUBMISSIONS_AND PUBLIC_ROUTES THROUGH_THIS_CONTRACT",
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
