@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_DUAL_JUDGMENT_CONTROL_ENVELOPE_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE__PROOF_CARRYING_BRAIN_OWNED_OPERATIVE_JUDGMENT_CONTROL__INDEPENDENT_MATERIALITY_VERIFICATION_PENDING__ZERO_CREDIT",
+  "status": "CURRENT_BASE_CANDIDATE__PROOF_CARRYING_BRAIN_OWNED_JUDGMENT_CONTROL__MATERIALITY_VERIFICATION_PENDING__GENERAL_SUBSTRATE_QUALIFICATION_OPEN__ZERO_CREDIT",
   "objective": "Collapse the finance and unknown-domain operative-source blockers into one Brain-owned proof-carrying fail-closed judgment-control configuration; a declared model may propose typed structure but cannot self-assert verification.",
   "operative_runtime": "canonical/runtime/judgment_control_envelope_v1.py",
   "tests": "canonical/tests/test_judgment_control_envelope_v1.py",
@@ -76,7 +76,7 @@
     "general_substrate_test_pass": false,
     "incremental_spend_usd": 0
   },
-  "current_source_gate_state": "BLOCKED_PENDING_INDEPENDENT_PROOF_CARRYING_MATERIALITY_VERIFICATION",
+  "current_source_gate_state": "BLOCKED_PENDING_INDEPENDENT_MATERIAL_CONTROL_VERIFICATION_AND_SEPARATE_GENERAL_SUBSTRATE_QUALIFICATION",
   "clean_direct_case_execution_authority": false,
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
@@ -93,7 +93,13 @@
     "NO_RAW_DOMAIN_SEMANTIC_EXTRACTION_OWNERSHIP",
     "NO_SOURCE_TRUTH_ORACLE_OWNERSHIP"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_TEST_CONFIG_AND_DEPENDENCY_BYTES__VERIFY_PROOF_CARRYING_CONFIGURED_VS_BARE_MATERIALITY__THEN_SOURCE_GATE_V2__ONLY_AFTER_GATE_PASS_AUTHORIZE_THE_TWO_FROZEN_FINANCE_AND_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_ORACLE_LEAVES",
-  "operative_runtime_blob_sha": "42f5c941597f73597fd327aac0576baaba2dfb05",
-  "tests_blob_sha": "b9b371fffdf4f112d636e6ba794d76080fa63f1f"
+  "next": "INDEPENDENTLY_VERIFY_EXACT_CURRENT_BASE_RUNTIME_TEST_CONFIG_AND_DEPENDENCY_BYTES__PROMOTE_ONLY_CONFIGURATION_MATERIAL_CONTROL_IF_PASS__KEEP_GENERAL_SUBSTRATE_TEST_OPEN_UNTIL_SEPARATE_QUALIFICATION__ONLY_AFTER_SOURCE_GATE_V2_PASS_AUTHORIZE_FROZEN_FINANCE_AND_UNKNOWN_DOMAIN_DIRECT_LEAVES",
+  "operative_runtime_blob_sha": "5ebfd1e7fa871da89ecca40ffeb8dd6575c21582",
+  "tests_blob_sha": "164778d9eeeada9805fcafb988d9d716c1d91476",
+  "current_base_commit": "6f3a7dd8a5c989efff67a7e4d33882179ee99ab9",
+  "hard_truth_repair": {
+    "materiality_counterfactual_can_prove_configuration_material_control": true,
+    "materiality_counterfactual_does_not_prove_general_substrate_capability": true,
+    "source_gate_must_remain_blocked_until_both_facts_are_independently_bound": true
+  }
 }
