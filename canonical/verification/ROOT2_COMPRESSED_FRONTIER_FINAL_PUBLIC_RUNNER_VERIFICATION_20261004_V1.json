@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_COMPRESSED_FRONTIER_FINAL_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_AUTHORITY_PROJECTION__ROOT1_ZERO__ROOT3_ZERO_RUNNABLE_REFINEMENT_PRESERVED__FULL_HLE_2500__AUTOMATIONBENCH_SEARCH_DELETED__CHARTOGRAPHY_1000_CALL_ACCOUNT_RESIDUAL__OSWORLD_BOOT_AND_SOURCE_COMPRESSION_PRESERVED__ZERO_CREDIT",
+  "brain_candidate": {
+    "pull_request": 1468,
+    "verified_base_commit_sha": "deb61749c171ee04e7f97bb4cbcb0b7d583599da",
+    "verified_head_sha": "69da91350488db39c4aa8f2f4a1499600ebd2981",
+    "exact_authority_blobs": {
+      "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json": "e53337c1d403f1b251204547ba59f0a326ae7cc6",
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json": "7e2c8dbde8369763c0f94e8bd96307ae5b265ae9",
+      "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json": "59242a061c35bb3cc60dbe3e31effe1da38955c6",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "fbfee45928cf67dc88ef024d4db3e945afc6271f"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1491,
+    "verifier_head_sha": "5644eef4d8455fb2068b2e1b73d53dbefd42568e",
+    "merge_commit": "5ebfc15aaabb961b9ee19328418ac6f6406935c9",
+    "workflow_run_id": 37162730824,
+    "workflow_job_id": 111319352089,
+    "conclusion": "success",
+    "successful_step": "Verify final Root2 compressed frontier"
+  },
+  "verified": {
+    "truth_counts_preserved": true,
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gap_count_zero": true,
+    "root3_currently_runnable_events_zero": true,
+    "root3_admissibility_refinement_preserved": true,
+    "full_hle_2500_preserved": true,
+    "automationbench_public600_equivalence_search_deleted": true,
+    "chartography_exact_minimum_judge_calls": 1000,
+    "chartography_project_specific_capacity_residual": true,
+    "osworld_kvm_vm_boot_pass_preserved": true,
+    "osworld_generic_source_search_deleted": true,
+    "zero_credit": true
+  },
+  "observed_post_verification_base_movement": {
+    "current_main_sha": "f5ef63e6260ef77bd002f45ac3bbc695b5c6e9bd",
+    "previous_verified_base_sha": "deb61749c171ee04e7f97bb4cbcb0b7d583599da",
+    "classification": "DISJOINT_NEW_UNIVERSAL_LEARNING_V5_FILES_ONLY__NO_ROOT2_AUTHORITY_PATH_OVERLAP",
+    "load_bearing_verification_scope": "NOT_PART_OF_PUBLIC_RUNNER_PASS__MUST_RECHECK_IMMEDIATELY_BEFORE_MERGE"
+  },
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
