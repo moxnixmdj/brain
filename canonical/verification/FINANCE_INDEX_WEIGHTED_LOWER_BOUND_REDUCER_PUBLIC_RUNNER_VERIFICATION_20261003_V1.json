@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_WEIGHTED_LOWER_BOUND_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_WEIGHTED_INDEX_BOUND_THEOREM__ZERO_CREDIT",
+  "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+  "exact_brain_inputs": {
+    "runtime": {
+      "path": "canonical/runtime/finance_index_weighted_lower_bound_reducer_v1.py",
+      "git_blob_sha": "25ca8b2237035c21c6912f016aa83b24ac3e013c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_finance_index_weighted_lower_bound_reducer_v1.py",
+      "git_blob_sha": "c540a4b1dcadc1cc34e5504d09657f471672d2a8"
+    },
+    "governance": {
+      "path": "canonical/governance/FINANCE_INDEX_WEIGHTED_LOWER_BOUND_REDUCTION_V1.json",
+      "git_blob_sha": "c2af9c7c4b06ee7e5bec7963dd062a84f802fce2"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-finance-weighted-bound-20261003-sol",
+    "head_sha": "f80c03a3657eace0cb0accebf38fe6874fb9210d",
+    "workflow_run_id": 37157285340,
+    "workflow_job_id": 111303179578,
+    "conclusion": "success"
+  },
+  "verified": {
+    "published_weights_sum_to_one": true,
+    "exact_weighted_lower_bound_rule_pass": true,
+    "exact_weighted_upper_bound_falsification_rule_pass": true,
+    "missing_component_lower_bound_is_zero": true,
+    "missing_component_upper_bound_is_one_hundred": true,
+    "componentwise_noninferiority_is_sufficient_but_not_necessary": true,
+    "example_two_full_30pct_components_plus_reasoning_5_closes_exactly_at_61": true,
+    "minimum_additional_component_set_is_scheduling_only": true,
+    "malformed_bounds_fail_closed": true
+  },
+  "consequence": "REPLACE_SIX_COMPONENTWISE_NONINFERIORITY_AS_MANDATORY_ROUTE_WITH_EXACT_WEIGHTED_INDEX_INTERVAL_ROUTE__KEEP_COMPONENTWISE_ROUTE_AS_SUFFICIENT_OPTION__NO_ACCEPTANCE_CREDIT_UNTIL_ADMISSIBLE_COMPONENT_LOWER_BOUNDS_FORCE_WEIGHTED_LOWER_BOUND_GE_61",
+  "hard_nonclaims": [
+    "NO_FINANCE_INDEX_SCORE_PROVED",
+    "NO_COMPONENT_NUMERIC_BOUND_PROVED_BY_THIS_RECEIPT",
+    "NO_COMPONENT_NORMALIZATION_EQUIVALENCE_INFERRED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
