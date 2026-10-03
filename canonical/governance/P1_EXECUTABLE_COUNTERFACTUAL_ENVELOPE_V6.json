@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_P1_EXECUTABLE_COUNTERFACTUAL_ENVELOPE_V6",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__ZERO_REALITY_EXECUTABLE_STRUCTURAL_COUNTERFACTUAL_RESCUE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Replace oracle-set-membership intervention scoring with executable hidden structural counterfactual re-execution, preserving the typed heterogeneous P1 envelope while directly targeting the remaining heterogeneous intervention-rescue obligation.",
+  "candidate": {
+    "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py",
+    "expected_git_blob_sha": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "role": "PUBLIC_INFORMATION_ONLY_CAUSAL_LOCALIZER"
+  },
+  "proof": "canonical/runtime/trajectory_failure_executable_counterfactual_proof_v6.py",
+  "tests": "canonical/tests/test_trajectory_failure_executable_counterfactual_v6.py",
+  "scope": {
+    "domains": [
+      "BROWSER",
+      "FILESYSTEM",
+      "TOOL_API",
+      "ARTIFACT",
+      "RESEARCH",
+      "CODE"
+    ],
+    "mechanism_classes": [
+      "AUTHORITY",
+      "SCOPE",
+      "SCHEMA",
+      "PROVENANCE",
+      "INVARIANT",
+      "STATE_TRANSITION",
+      "TOOL_CONTRACT",
+      "DEPENDENCY"
+    ],
+    "causal_patterns": [
+      "SINGLE",
+      "DELAYED",
+      "INTERACTION",
+      "AMBIGUOUS"
+    ],
+    "cross_product_case_count": 192,
+    "identified_or_interaction_executable_rescue_cases": 144,
+    "ambiguous_two_hidden_world_cases": 48,
+    "explicit_scope_root_cases": 24
+  },
+  "residual_targeted": "P1_HETEROGENEOUS_INTERVENTION_RESCUE",
+  "preserves_candidate_scope_target": "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+  "breakthrough": {
+    "v5_problem": "V5 evaluate_intervention defines rescue by set inclusion against oracle-derived required_root_repairs.",
+    "v6_repair": "V6 evaluate_intervention parses proposed repairs and re-executes each hidden causal world through dependency composition, resource validity propagation, latent faults, and terminal resource validity.",
+    "non_circularity": [
+      "EVALUATE_INTERVENTION_DOES_NOT_READ_ORACLE",
+      "EVALUATE_INTERVENTION_DOES_NOT_READ_REQUIRED_ROOT_REPAIRS",
+      "TERMINAL_SUCCESS_IS_DERIVED_FROM_REEXECUTED_RESOURCE_VALIDITY",
+      "SYMPTOM_ONLY_REPAIRS_ARE_EXECUTED_AND_MUST_FAIL_TO_RESCUE",
+      "CONJUNCTIVE_INTERACTION_SINGLETON_REPAIRS_ARE_EXECUTED_AND_MUST_FAIL_TO_RESCUE",
+      "AMBIGUOUS_PUBLIC_TRACE_HAS_TWO_INCOMPATIBLE_HIDDEN_WORLDS_AND_NO_SINGLE_REPAIR_RESCUES_ALL"
+    ]
+  },
+  "hard_rules": [
+    "INTERVENTION_EVALUATOR_MUST_REEXECUTE_HIDDEN_STRUCTURAL_MODEL",
+    "INTERVENTION_RESCUE_MUST_NOT_BE_DECIDED_BY_ORACLE_REPAIR_SET_MEMBERSHIP",
+    "HIDDEN_WORLD_STATE_MUST_NOT_ENTER_CANDIDATE_PAYLOAD",
+    "BASELINE_TERMINAL_FAILURE_MUST_EXECUTE_IN_EVERY_HIDDEN_WORLD",
+    "NOMINATED_IDENTIFIED_OR_INTERACTION_REPAIRS_MUST_EXECUTABLY_RESCUE_ALL_COMPATIBLE_HIDDEN_WORLDS",
+    "DOWNSTREAM_SYMPTOM_ONLY_REPAIR_MUST_NOT_RESCUE_ANY_COMPATIBLE_HIDDEN_WORLD",
+    "CONJUNCTIVE_INTERACTION_REQUIRES_ALL_ROOT_REPAIRS",
+    "AMBIGUOUS_TRACE_REQUIRES_AT_LEAST_TWO_COMPATIBLE_HIDDEN_WORLDS_WITH_DIFFERENT_MINIMAL_RESCUERS",
+    "NO_TERMINAL_RESULT_REPLAY",
+    "ZERO_NEW_REALITY",
+    "ZERO_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_UNTIL_INDEPENDENT_VERIFICATION_AND_P1_RECONCILIATION"
+  ],
+  "verification_contract": [
+    "PIN_EXACT_V5_CANDIDATE_V6_PROOF_V6_TEST_AND_V6_GOVERNANCE_BLOBS",
+    "RUN_ALL_192_TYPED_CASES",
+    "REQUIRE_144_IDENTIFIED_OR_INTERACTION_CASES_TO_EXECUTABLY_RESCUE",
+    "REQUIRE_ALL_48_INTERACTION_CASES_TO_REJECT_SINGLETON_ROOT_REPAIRS",
+    "REQUIRE_ALL_144_CASES_WITH_DOWNSTREAM_SYMPTOMS_TO_REJECT_SYMPTOM_ONLY_REPAIR",
+    "REQUIRE_ALL_48_AMBIGUOUS_CASES_TO_HAVE_TWO_INCOMPATIBLE_RESCUE_VECTORS",
+    "REQUIRE_24_EXPLICIT_SCOPE_ROOT_CASES_ACROSS_ALL_SIX_DOMAINS_AND_FOUR_PATTERNS",
+    "STATICALLY_ASSERT_EVALUATE_INTERVENTION_DOES_NOT_REFERENCE_ORACLE_OR_REQUIRED_ROOT_REPAIRS"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V6_BLOBS__IF_PASS_RECOMPILE_P1_SCOPE_SAFE_RESIDUAL_AGAINST_V6__DO_NOT_LIFT_P1_OR_RECOVERY_UNTIL_RECONCILIATION_PROVES_THE_RESIDUAL_EMPTY",
+  "terminal_results_replayed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
