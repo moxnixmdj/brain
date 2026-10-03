@@ -1,0 +1,46 @@
+name: Verify universal recursive learning v3
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/universal_recursive_learning_engine_v3.py"
+      - "canonical/tests/test_universal_recursive_learning_engine_v3.py"
+      - "canonical/tests/test_universal_recursive_learning_engine_v3_binding.py"
+      - "canonical/governance/UNIVERSAL_RECURSIVE_LEARNING_ENGINE_V3.json"
+      - ".github/workflows/verify-universal-recursive-learning-v3.yml"
+  push:
+    branches: ["feature/universal-recursive-learning-v3-20261004-r2"]
+    paths:
+      - "canonical/runtime/universal_recursive_learning_engine_v3.py"
+      - "canonical/tests/test_universal_recursive_learning_engine_v3.py"
+      - "canonical/tests/test_universal_recursive_learning_engine_v3_binding.py"
+      - "canonical/governance/UNIVERSAL_RECURSIVE_LEARNING_ENGINE_V3.json"
+      - ".github/workflows/verify-universal-recursive-learning-v3.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile V3
+        run: python -m py_compile canonical/runtime/universal_recursive_learning_engine_v3.py
+      - name: Run V3 tests
+        run: python -m pytest -q canonical/tests/test_universal_recursive_learning_engine_v3.py canonical/tests/test_universal_recursive_learning_engine_v3_binding.py
+      - name: Run V3 invariant proof
+        run: |
+          python - <<'PY'
+          from canonical.runtime.universal_recursive_learning_engine_v3 import prove_v3_invariants
+          out = prove_v3_invariants()
+          assert out["pass"], out
+          assert out["acceptance_credit_delta"] == 0
+          assert out["ownership_credit_delta"] == 0
+          assert out["promotion_authority"] is False
+          print(out)
+          PY
