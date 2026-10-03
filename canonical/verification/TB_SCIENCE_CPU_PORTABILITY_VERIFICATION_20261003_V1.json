@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CPU_PORTABILITY_VERIFICATION_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PASS__ZERO_TERMINAL",
+  "contract_blob": "7e44ab43908860703a478df2ec8646246620260a",
+  "verifier_repo": "moxnixmdj/verification-capsule-runner",
+  "verifier_pr": 1267,
+  "verifier_run": 37111616149,
+  "verifier_job": 111170472199,
+  "artifact_id": 11270152968,
+  "artifact_digest": "sha256:45632e954c512a398c41fa55c1b8855f30eff73655b0d6230f1ce73240c3c922",
+  "clean_current_runner_build": true,
+  "health_pass": true,
+  "synthetic_ready_pass": true,
+  "terminal_task_content_read": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
