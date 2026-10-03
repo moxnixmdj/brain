@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_SOURCE_GATE_V2_ADMISSION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_PENDING_INDEPENDENT_GATE_EVALUATION__ZERO_CASE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "route": {
+    "id": "TERMINAL_BENCH_SCIENCE_0_1_BRAIN_OWNED_HARBOR_CONTROLLER_V1",
+    "benchmark_harness_zero_cost": true,
+    "scorer_frozen": true,
+    "brain_candidate_bound": true,
+    "brain_owned_operative_configuration": true,
+    "configuration_materially_constrains_execution": true,
+    "capability_package_contains_configuration": true,
+    "promotion_evaluates_brain_configured_system": true,
+    "external_hidden_target_capability_provider": false,
+    "ownership_claim_relies_on_model_standalone_superiority": false,
+    "future_use_requires_capability_rediscovery": false,
+    "model_role": "GENERAL_COGNITION_SUBSTRATE",
+    "model_dependency_count": 1,
+    "model_dependencies_declared": true,
+    "general_substrate_test_pass": true,
+    "incremental_spend_usd": 0
+  },
+  "exact_brain_inputs": {
+    "controller": {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "git_blob_sha": "5d6685d66ca04cec5e332993329e997f6e9fe272"
+    },
+    "route_candidate": {
+      "path": "canonical/governance/TERMINAL_BENCH_SCIENCE_BRAIN_ROUTE_CANDIDATE_V1.json",
+      "git_blob_sha": "379bf08cc270b3780a7df5a8b94cf0d2f44a2db2"
+    },
+    "materiality": {
+      "path": "canonical/governance/TB_SCIENCE_GENERAL_SUBSTRATE_MATERIALITY_V1.json",
+      "git_blob_sha": "78866ed6bfa6417145e01a29d0face816bb20d12"
+    },
+    "source_gate": {
+      "path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+      "git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+    },
+    "route_preflight": {
+      "path": "canonical/verification/TERMINAL_BENCH_SCIENCE_0_1_ZERO_CASE_ROUTE_VERIFICATION_20261002_V1.json"
+    }
+  },
+  "independent_prerequisite_runs": [
+    {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1206,
+      "workflow_run_id": 37097885454,
+      "workflow_job_id": 111131442842,
+      "conclusion": "success",
+      "scope": "EXACT_CONTROLLER_BYTES__ADVERSARIAL_TESTS__ZERO_CASE_SOURCE_GATE_SCOPE"
+    },
+    {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1207,
+      "workflow_run_id": 37098116024,
+      "workflow_job_id": 111132098619,
+      "conclusion": "success",
+      "scope": "FIXED_SUBSTRATE_MATERIALITY_COUNTERFACTUAL__ZERO_CASE"
+    },
+    {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1208,
+      "workflow_run_id": 37098187748,
+      "workflow_job_id": 111132302410,
+      "conclusion": "success",
+      "scope": "REAL_HARBOR_0_23_0_BINDING__FROZEN_DATASET_HASH__ZERO_COST_DOCKER_RUN_SURFACE__ZERO_CASE"
+    }
+  ],
+  "intended_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+  "expected_gate_result": {
+    "pass": true,
+    "status": "ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION",
+    "clean_case_execution_authority": true,
+    "errors": []
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_BENCH_SCIENCE_CASE_READ_OR_EXECUTED_BY_THIS_ADMISSION",
+    "NO_TB_SCIENCE_SCORE_CLAIM",
+    "NO_FAMILY_CAPABILITY_OR_ACCEPTANCE_CREDIT_FROM_SOURCE_GATE",
+    "NO_EXECUTION_AUTHORITY_UNTIL_THIS_EXACT_ADMISSION_IS_INDEPENDENTLY_EVALUATED"
+  ],
+  "terminal_results_observed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
