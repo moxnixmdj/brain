@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_27_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_LIVE_27_INFORMATION_DOMINANCE__16_NONDOMINATED_CERTIFICATES__19_ZERO_REALITY_REQUIREMENTS__ZERO_CREDIT",
+  "verified_candidate": {
+    "path": "canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json",
+    "git_blob_sha": "fae786d6051277865ed6ecde69be5da98e2bf509"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1307,
+    "head_sha": "750e06337edf48f3249d2226ab88e1c369a61f05",
+    "merge_commit": "84bfe057815b313cebb77388500a5ea771daa30d",
+    "workflow_run_id": 37117367476,
+    "workflow_job_id": 111186653431,
+    "conclusion": "success"
+  },
+  "verified": {
+    "frozen_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "certificate_count": 16,
+    "nondominated_certificate_count": 16,
+    "dominated_certificate_count": 0,
+    "unique_zero_reality_requirements": 19,
+    "highest_direct_certificate": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+    "highest_direct_coverage": 8,
+    "highest_direct_fraction": 0.2962962962962963,
+    "complete_live_predicate_coverage": true
+  },
+  "consequence": "ACTIVATE_PARALLEL_ZERO_REALITY_FRONTIER_ON_EXACT_27_PREDICATE_WORLD__NO_FRESH_REALITY_YET",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
