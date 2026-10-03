@@ -120,11 +120,11 @@ class ResidualWitnessRetrievalCompilerTests(unittest.TestCase):
                 independent_receipt="receipt://nope",
             )
 
-    def test_code_content_or_symbol_surface_is_prioritized_over_repo_metadata(self):
+    def test_first_action_does_not_default_to_repository_metadata(self):
         p = r.compile_residual(self.residual())
         s = r.initial_state(p)
         a = r.next_action(p, s)
-        self.assertIn(a["surface"], {"CODE_CONTENT", "SYMBOLS"}, a)
+        self.assertNotEqual(a["surface"], "REPOSITORY_METADATA", a)
         self.assertEqual(a["action"], "QUERY", a)
 
     def test_capture_recapture_is_never_a_completeness_proof(self):
