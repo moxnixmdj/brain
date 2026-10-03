@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V10_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V10_CURRENT_4_OF_19_38_11_27__MANDATORY_RETRIEVAL_V3_GATE__ZERO_CREDIT",
+  "verified_activation": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V10.json",
+    "git_blob_sha": "7b82d88f94491db17fcb8d2672a830b251f320c5"
+  },
+  "bound_world": {
+    "path": "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V4.json",
+    "git_blob_sha": "a17f20106cdb0518339f639b749a9a0b37f001b7"
+  },
+  "bound_world_verification": {
+    "path": "canonical/verification/CURRENT_TERMINAL_SCHEDULING_WORLD_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "cc4bb19832ae7eabddc123b1e2236f7fb5c3efe1"
+  },
+  "current_authority_binding": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "git_blob_sha": "f47a69253e7eb75e139b445b736d3d18b33be622",
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1319,
+    "merge_commit": "3b6568da4e13ba71ca3f08d6a9a048ce2b300d9c",
+    "head_sha": "c5f0ae48086ba0afed996be64dbcbbb566a4dcd6",
+    "workflow_run_id": 37120023944,
+    "workflow_job_id": 111194167627,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_activation_blob_verified": true,
+    "exact_v4_world_binding_verified": true,
+    "exact_v4_world_verification_binding_verified": true,
+    "exact_current_authority_binding_verified": true,
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "tool_learning_success_route_noninferior_remains_open": true,
+    "retrieval_v3_gate_mandatory": true,
+    "source_epoch_exhaustion_requires_v3_or_prior_sufficient_witness": true,
+    "zero_credit_preserved": true
+  },
+  "operational_consequence": "V10_IS_ELIGIBLE_TO_BECOME_CURRENT_SCHEDULING_AUTHORITY__V9_BECOMES_HISTORICAL_AFTER_A_VERIFIED_CURRENT_POINTER_REBIND",
+  "hard_nonclaims": [
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT",
+    "NO_OPEN_WORLD_RETRIEVAL_COMPLETENESS_CLAIM",
+    "NO_TERMINAL_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
