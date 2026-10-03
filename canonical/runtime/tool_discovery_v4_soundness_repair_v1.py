@@ -15,6 +15,7 @@ def _base():
         "discovery_sources":[],
         "discovery_receipts":[],
         "version_events":[],
+        "decision_epoch":0,
     }
 
 def evaluate():
@@ -27,7 +28,7 @@ def evaluate():
         "kind":"SAFE_CAPABILITY_PROBE","tool_id":"EXPENSIVE",
         "capability":"CAP_A","epoch":0,"supported":True,
     }]
-    c["discovery_sources"]=[{"source_id":"S0","cost":0.1,"available":True}]
+    c["discovery_sources"]=[{"source_id":"S0","cost":0.1,"available":True,"authorized":True}]
     v3_action=v3.next_action(c)
     v4_pre=v4.next_action(c)
 
@@ -40,8 +41,8 @@ def evaluate():
         {"kind":"SAFE_CAPABILITY_PROBE","tool_id":"CHEAP","capability":"CAP_A","epoch":0,"supported":True},
         {"kind":"SAFE_CAPABILITY_PROBE","tool_id":"EXPENSIVE","capability":"CAP_A","epoch":0,"supported":True},
     ]
-    d["discovery_sources"]=[{"source_id":"S0","cost":0.1,"available":True}]
-    d["discovery_receipts"]=[{"kind":"DISCOVERY_RESULT","source_id":"S0"}]
+    d["discovery_sources"]=[{"source_id":"S0","cost":0.1,"available":True,"authorized":True}]
+    d["discovery_receipts"]=[{"kind":"DISCOVERY_RESULT","source_id":"S0","decision_epoch":0}]
     v4_post=v4.next_action(d)
 
     unsafe=_base()
@@ -55,6 +56,24 @@ def evaluate():
     }]
     v4_unsafe=v4.next_action(unsafe)
 
+    stale=_base()
+    stale["decision_epoch"]=2
+    stale["discovery_sources"]=[{"source_id":"S0","cost":0.1,"available":True,"authorized":True}]
+    stale["discovery_receipts"]=[{"kind":"DISCOVERY_RESULT","source_id":"S0","decision_epoch":1}]
+    v4_stale=v4.next_action(stale)
+
+    unauth=_base()
+    unauth["visible_tools"]=[{
+        "tool_id":"SAFE","cost":2.0,"available":True,"authorized":True,
+        "epoch":0,"safe_probe_capabilities":["CAP_A"],
+    }]
+    unauth["prior_probe_receipts"]=[{
+        "kind":"SAFE_CAPABILITY_PROBE","tool_id":"SAFE",
+        "capability":"CAP_A","epoch":0,"supported":True,
+    }]
+    unauth["discovery_sources"]=[{"source_id":"UNAUTH","cost":0.0,"available":True,"authorized":False}]
+    v4_unauth=v4.next_action(unauth)
+
     v3_falsified=(
         v3_action=={"action":"SELECT","tool_id":"EXPENSIVE"}
         and v4_pre=={"action":"DISCOVER","source_id":"S0","query":"CAP_A"}
@@ -62,6 +81,8 @@ def evaluate():
     v4_checks=(
         v4_post=={"action":"SELECT","tool_id":"CHEAP"}
         and v4_unsafe=={"action":"SELECT","tool_id":"SAFE"}
+        and v4_stale=={"action":"DISCOVER","source_id":"S0","query":"CAP_A"}
+        and v4_unauth=={"action":"SELECT","tool_id":"SAFE"}
     )
     return {
         "schema":SCHEMA,
@@ -82,6 +103,8 @@ def evaluate():
         "v3_falsified":v3_falsified,
         "v4_repair_checks_pass":v4_checks,
         "v4_safe_probe_gate_check":v4_unsafe,
+        "v4_stale_discovery_receipt_check":v4_stale,
+        "v4_unauthorized_source_check":v4_unauth,
         "replacement_interface_contract":"canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json",
         "universal_target_proved":False,
         "minimum_missing_fact":(
