@@ -1,0 +1,25 @@
+name: Mine post-Recovery matched child receipts
+on:
+  push:
+    branches:
+      - research/post-recovery-child-receipts-v1-20261003
+    paths:
+      - canonical/runtime/post_recovery_matched_child_receipt_miner_v1.py
+      - canonical/tests/test_post_recovery_matched_child_receipt_miner_v1.py
+      - .github/workflows/mine-post-recovery-matched-child-receipts.yml
+permissions:
+  contents: read
+jobs:
+  mine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_post_recovery_matched_child_receipt_miner_v1
+      - run: PYTHONPATH=. python canonical/runtime/post_recovery_matched_child_receipt_miner_v1.py > post_recovery_matched_child_receipts.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: post-recovery-matched-child-receipts
+          path: post_recovery_matched_child_receipts.json
