@@ -1,0 +1,28 @@
+name: Verify adaptive terminal closure controller v1
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
+      - "canonical/tests/test_adaptive_terminal_closure_controller_v1.py"
+      - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_POLICY_V1.json"
+      - ".github/workflows/verify-adaptive-terminal-closure-controller-v1.yml"
+  pull_request:
+    paths:
+      - "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
+      - "canonical/tests/test_adaptive_terminal_closure_controller_v1.py"
+      - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_POLICY_V1.json"
+      - ".github/workflows/verify-adaptive-terminal-closure-controller-v1.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run adaptive controller tests
+        run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v1 -v
