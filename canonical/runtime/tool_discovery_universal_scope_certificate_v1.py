@@ -24,8 +24,8 @@ EXPECTED_BLOBS={
  "canonical/tests/test_tool_universe_gateway_v2.py":"e9051452592227d5e1f46314e812fadc9ba8c1fa",
  "canonical/runtime/tool_discovery_legacy_v3_transport_v1.py":"fb1510b9dfec8e96c49de2ca228630686195e14b",
  "canonical/tests/test_tool_discovery_legacy_v3_transport_v1.py":"45e272fe3c322a5687b3bb7a2d15406e0e1337c3",
- "canonical/runtime/tool_discovery_v3_owned_gateway_bridge_v1.py":"708519ca6bfe6772fd54145f4a2002154bfc5f77",
- "canonical/tests/test_tool_discovery_v3_owned_gateway_bridge_v1.py":"29cddd2f4a1e682d435f0aff3741925d25bdbffd",
+ "canonical/runtime/tool_discovery_v3_owned_gateway_bridge_v1.py":"2ee4bc46f43c2d7cc12f12109648835376126484",
+ "canonical/tests/test_tool_discovery_v3_owned_gateway_bridge_v1.py":"9b9e2aaf8eca189715b6377e1d4a47a48c5ad124",
  "canonical/runtime/tool_discovery_dynamic_candidate_v3.py":"bbbee4d6baf8df937543644397abba38a67dce62",
  "canonical/runtime/tool_discovery_information_safe_candidate.py":"64c02edd568d95ec5ed54b7b8122183ce5b82e17",
  "canonical/runtime/tool_discovery_information_safe_proof.py":"2450a9644119c9fdf9c43307a1d115098d6ba592",
@@ -48,6 +48,7 @@ REQUIRED_FACTS=(
  "V3_ESCALATES_AFTER_VISIBLE_AND_DISCOVERY_ROUTES_EXHAUSTED",
  "LEGACY_V3_TRANSPORT_EXECUTABLE",
  "OWNED_GATEWAY_BRIDGE_EXECUTABLE",
+ "OWNED_GATEWAY_STARTS_EMPTY_WITH_SOLE_DISCOVERY_SOURCE",
  "OWNED_GATEWAY_GATES_PROBE_AND_SELECT",
  "TRANSFER_ATOM_ALREADY_SCOPE_COMPLETE",
  "NO_UNSUPPORTED_PROMOTION_ATOM_ALREADY_SCOPE_COMPLETE",
@@ -126,6 +127,13 @@ def derive_source_facts()->dict[str,bool]:
   "V3_ESCALATES_AFTER_VISIBLE_AND_DISCOVERY_ROUTES_EXHAUSTED":'return {"action":"ESCALATE","reason":"NO_VERIFIED_ADMISSIBLE_TOOL_AFTER_DISCOVERY"}' in v,
   "LEGACY_V3_TRANSPORT_EXECUTABLE":_has(tr,'def semantic_quotient_exhaustion()','def prove_transport_candidate()'),
   "OWNED_GATEWAY_BRIDGE_EXECUTABLE":_has(br,'def apply_gateway_discovery(','def validate_probe(','def validate_select('),
+  "OWNED_GATEWAY_STARTS_EMPTY_WITH_SOLE_DISCOVERY_SOURCE":_has(br,
+    '"visible_tools":[]',
+    '"discovery_sources":[gateway.discovery_source()]',
+    'initial_visible_empty=p0["visible_tools"]==[]',
+    'gateway_only=p0["discovery_sources"]==[g.discovery_source()]',
+    'and initial_visible_empty and gateway_only',
+  ),
   "OWNED_GATEWAY_GATES_PROBE_AND_SELECT":_has(br,
     'if action.get("action")!="PROBE": raise BridgeError("NOT_PROBE")',
     'if action.get("action")!="SELECT": raise BridgeError("NOT_SELECT")',
@@ -169,7 +177,7 @@ def prove_from_facts(facts:Mapping[str,bool],*,transport_pass:bool,bridge_pass:b
     "TRUTHFUL_EPOCH_BOUND_SAFE_PROBE_RECEIPTS_AND_ATOMIC_REGISTRY_EPOCH_CHANGES"
    ),
    "identity_base":(
-    "The owned gateway is both sole invocation authority and sole discovery universe: "
+    "The owned route starts with no pre-visible tool identities, and the owned gateway is both sole invocation authority and sole discovery universe: "
     "unregistered identities are uninvocable and discovery enumerates every registered identity."
    ),
    "finite_progress_measure":(
