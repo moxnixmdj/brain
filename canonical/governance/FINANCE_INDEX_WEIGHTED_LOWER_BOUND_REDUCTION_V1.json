@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_WEIGHTED_LOWER_BOUND_REDUCTION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__EXACT_WEIGHTED_INDEX_BOUND_REDUCER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+  "frozen_acceptance": "Finance & Accounting Index >= 61 on comparable harness/configuration.",
+  "primary_methodology": "https://artificialanalysis.ai/methodology/capability-indices",
+  "theorem": {
+    "weights": {
+      "BUSINESS_KNOWLEDGE": 0.3,
+      "AGENTIC_KNOWLEDGE_WORK": 0.3,
+      "REASONING": 0.2,
+      "AGENTIC_TOOL_USE": 0.1,
+      "LONG_CONTEXT": 0.05,
+      "NON_HALLUCINATION": 0.05
+    },
+    "target": 61,
+    "exact_rule": "IF_SUM_i_WEIGHT_i_TIMES_VERIFIED_COMPARABLE_BRAIN_COMPONENT_LOWER_BOUND_i_GE_61__THEN_FINANCE_ACCOUNTING_INDEX_GE_61",
+    "interval_falsification": "IF_SUM_i_WEIGHT_i_TIMES_VERIFIED_COMPONENT_UPPER_BOUND_i_LT_61__THEN_CURRENT_BOUND_INPUTS_CANNOT_CLOSE_PREDICATE",
+    "missing_component_semantics": "LOWER_BOUND_0__UPPER_BOUND_100",
+    "consequence": "SIX_COMPONENTWISE_BRAIN_GE_OPUS_PREMISES_ARE_SUFFICIENT_BUT_NOT_NECESSARY__ONLY_THE_WEIGHTED_INDEX_LOWER_BOUND_IS_LOGICALLY_REQUIRED_BY_THE_FROZEN_PUBLIC_FIXED_BAR"
+  },
+  "exact_components": {
+    "runtime": {
+      "path": "canonical/runtime/finance_index_weighted_lower_bound_reducer_v1.py",
+      "git_blob_sha": "25ca8b2237035c21c6912f016aa83b24ac3e013c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_finance_index_weighted_lower_bound_reducer_v1.py",
+      "git_blob_sha": "c540a4b1dcadc1cc34e5504d09657f471672d2a8"
+    }
+  },
+  "admissibility": {
+    "component_bound_must_be": "CONTENT_ADDRESSED__INDEPENDENTLY_VERIFIED__SAME_COMPONENT_NORMALIZATION_AND_COMPARABLE_CONFIGURATION_OR_SEPARATELY_PROVED_STRONGER_ROUTE",
+    "scheduler_candidate_sets_grant_credit": false,
+    "no_cross_surface_score_inheritance": true
+  },
+  "hard_rules": [
+    "DO_NOT_TREAT_UNKNOWN_COMPONENT_AS_ZERO_SCORE__ZERO_IS_ONLY_CONSERVATIVE_LOWER_BOUND",
+    "DO_NOT_TREAT_COMPONENT_CEILING_AS_ACHIEVED_SCORE",
+    "MINIMUM_ADDITIONAL_COMPONENT_SET_IS_SCHEDULING_ONLY",
+    "NO_COMPONENT_BOUND_WITHOUT_EXACT_NORMALIZATION_OR_STRONGER_SCOPE_PROOF",
+    "NO_ACCEPTANCE_CREDIT_BEFORE_INDEPENDENT_VERIFICATION_AND_EVIDENCE_REDUCTION",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_REDUCER__SATURATE_EXISTING_COMPONENT_LOWER_AND_UPPER_BOUND_CERTIFICATES__COMPUTE_MINIMUM_WEIGHTED_RESIDUAL_CUT_INSTEAD_OF_REQUIRING_ALL_SIX_COMPONENTWISE_NONINFERIORITIES",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
