@@ -82,13 +82,13 @@ EXPECTED_AUTHORITY = {
         "canonical/runtime/p1_shared_failure_semantics_normalizer_v1.py",
         "b6ba06fc6a35fa132eb19389ee256e74a63a4849",
     ),
-    "shared_batch_executor_v1": (
+    "batch_harness_v2": (
         "canonical/runtime/p1_shared_failure_semantics_batch_v1.py",
-        "fa92b6021e9a7aed9347fb80f5ad55b8652b7a0c",
+        "695cfe3f283723a52bafb6299236a2d0378dc79e",
     ),
-    "shared_batch_tests_v1": (
+    "batch_harness_tests_v2": (
         "canonical/tests/test_p1_shared_failure_semantics_batch_v1.py",
-        "9433835e6996705c11e4de4e1a58beaf45886319",
+        "7512a920c72d7bdeb2b072788e4c4bc8d2ff2d08",
     ),
 }
 
