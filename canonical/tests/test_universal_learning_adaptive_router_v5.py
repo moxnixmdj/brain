@@ -4,7 +4,7 @@ from canonical.runtime import verified_probe_model_v5 as model
 from canonical.runtime import adaptive_experiment_planner_v5 as planner
 from canonical.runtime import universal_learning_adaptive_router_v5 as router
 
-ENV="env-v5";GOAL="solve"
+ENV="env-v5";GOAL="solve";EPOCH="epoch-1";STATE="state-1"
 HS=[
     {"id":"h1","plausible":True,"best_action":"A"},
     {"id":"h2","plausible":True,"best_action":"A"},
@@ -13,11 +13,11 @@ HS=[
 ]
 def cov():
     return {"receipt_id":"cov","independent_verified":True,"exact_byte_bound":True,"conclusion":"success","decision_relevant_exhaustive":True,"scope_relation":"EXACT","environment_id":ENV,"goal_id":GOAL,"hypothesis_space_sha256":guard.hypothesis_digest(HS)}
-def safe(aid):
-    return {"receipt_id":"safe-"+aid,"independent_verified":True,"exact_byte_bound":True,"conclusion":"success","safe_under_all_admissible_worlds":True,"environment_id":ENV,"goal_id":GOAL,"action_id":aid}
+def safe(aid,epoch=EPOCH):
+    return {"receipt_id":"safe-"+aid,"independent_verified":True,"exact_byte_bound":True,"conclusion":"success","safe_under_all_admissible_worlds":True,"environment_id":ENV,"goal_id":GOAL,"action_id":aid,"experiment_epoch":epoch}
 def probe(aid,outcomes,cost):
     od=model.outcome_digest(action_id=aid,outcomes=outcomes)
-    return {"id":aid,"outcome_by_hypothesis":outcomes,"time":cost,"safety_receipt":safe(aid),"outcome_model_receipt":{"receipt_id":"model-"+aid,"independent_verified":True,"exact_byte_bound":True,"conclusion":"success","decision_relevant_outcome_partition_complete":True,"environment_id":ENV,"goal_id":GOAL,"action_id":aid,"hypothesis_space_sha256":guard.hypothesis_digest(HS),"outcome_map_sha256":od}}
+    return {"id":aid,"outcome_by_hypothesis":outcomes,"time":cost,"safety_receipt":safe(aid),"outcome_model_receipt":{"receipt_id":"model-"+aid,"independent_verified":True,"exact_byte_bound":True,"conclusion":"success","decision_relevant_outcome_partition_complete":True,"observation_only_or_state_restored":True,"future_probe_model_invariance_verified":True,"experiment_epoch":EPOCH,"state_fingerprint":STATE,"environment_id":ENV,"goal_id":GOAL,"action_id":aid,"hypothesis_space_sha256":guard.hypothesis_digest(HS),"outcome_map_sha256":od}}
 def probes():
     return [
       probe("direct",{"h1":"a","h2":"a","h3":"b","h4":"b"},5),
@@ -37,6 +37,20 @@ class Tests(unittest.TestCase):
         p["outcome_model_receipt"]["independent_verified"]=False
         with self.assertRaises(model.VerifiedProbeModelError):
             model.admit(environment_id=ENV,goal_id=GOAL,hypotheses=HS,probe=p)
+
+
+    def test_state_mutating_probe_without_restoration_proof_rejected(self):
+        p=probe("x",{"h1":"x","h2":"y","h3":"x","h4":"y"},1)
+        p["outcome_model_receipt"]["observation_only_or_state_restored"]=False
+        with self.assertRaises(model.VerifiedProbeModelError):
+            model.admit(environment_id=ENV,goal_id=GOAL,hypotheses=HS,probe=p)
+
+    def test_mixed_experiment_epochs_rejected(self):
+        ps=probes()
+        ps[1]["outcome_model_receipt"]["experiment_epoch"]="epoch-2"
+        ps[1]["safety_receipt"]["experiment_epoch"]="epoch-2"
+        with self.assertRaises(planner.AdaptiveExperimentPlannerError):
+            planner.plan(environment_id=ENV,goal_id=GOAL,hypotheses=HS,hypothesis_coverage_receipt=cov(),probes=ps)
 
     def test_adaptive_plan_beats_greedy_direct_probe(self):
         out=planner.plan(environment_id=ENV,goal_id=GOAL,hypotheses=HS,hypothesis_coverage_receipt=cov(),probes=probes())
