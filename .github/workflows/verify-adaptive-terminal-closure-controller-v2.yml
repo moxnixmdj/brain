@@ -1,0 +1,60 @@
+name: Verify adaptive terminal closure controller v2
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/adaptive_terminal_closure_controller_v2.py"
+      - "canonical/tests/test_adaptive_terminal_closure_controller_v2.py"
+      - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V2.json"
+      - "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json"
+      - ".github/workflows/verify-adaptive-terminal-closure-controller-v2.yml"
+  pull_request:
+    paths:
+      - "canonical/runtime/adaptive_terminal_closure_controller_v2.py"
+      - "canonical/tests/test_adaptive_terminal_closure_controller_v2.py"
+      - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V2.json"
+      - "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json"
+      - ".github/workflows/verify-adaptive-terminal-closure-controller-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run V2 adaptive controller tests
+        run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v2 -v
+      - name: Compile current V12 V4 adaptive frontier
+        run: |
+          set -euo pipefail
+          python canonical/runtime/adaptive_terminal_closure_controller_v2.py > /tmp/adaptive-v2.json
+          python - <<'PY'
+          import json
+          x=json.load(open("/tmp/adaptive-v2.json"))
+          assert x["pass"] is True,x
+          assert x["live_world"]["proved_predicates"]==11,x
+          assert x["live_world"]["unresolved_predicates"]==27,x
+          assert x["live_world"]["nondominated_certificates"]==14,x
+          assert x["live_world"]["verified_zero_reality_requirements"]==17,x
+          assert x["live_world"]["zero_reality_covered_predicates"]==25,x
+          assert x["live_world"]["matched_primitive_child_facts"]==16,x
+          assert x["action_refinement"]["primitive_acceptance_work_units"]==31,x
+          assert len(x["first_resource_priority_work_unit_ids"])==16,x
+          assert len(x["ownership_reconciliation_work_units"])==2,x
+          assert len(x["direct_reality_blocked_work_units"])==2,x
+          td=[r for r in x["acceptance_work_units"] if "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR" in r["target_predicates"]]
+          assert len(td)==1,x
+          assert td[0]["mandatory_tool_discovery_v4_gate"] is True,x
+          assert td[0]["source_hints"][0]=="MANDATORY_TOOL_DISCOVERY_V4_OVER_VERIFIED_V3_OVER_VERIFIED_V2_BASE_RETRIEVAL_GATE",x
+          assert x["execution_authority"] is False,x
+          assert x["promotion_authority"] is False,x
+          assert x["fresh_reality_authority"] is False,x
+          print("adaptive V12/V4 terminal closure controller V2 verified")
+          PY
