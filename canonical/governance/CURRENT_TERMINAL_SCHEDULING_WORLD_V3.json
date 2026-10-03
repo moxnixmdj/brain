@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_SCHEDULING_WORLD_V3",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__RECEIPT_DERIVED_27_PREDICATE_WORLD__RECOVERY_PROMOTION_INCLUDED__TOOL_DISCOVERY_V2_RETRIEVAL_GATE_MANDATORY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Rebase the live scheduler onto the independently promoted Recovery 4-of-19 authority while making the exact verified Tool Discovery V2 residual-witness retrieval authority mechanically mandatory.",
+  "source_main_commit": "8e5e5b4d089809cad850a6d55eed30d85ba60573",
+  "current_authority_inputs": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "2560dbf990a4f39f006884a2c0d1fa7950e15795",
+      "opus55_acceptance": "4/19_PASS__15/19_OPEN"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163"
+    }
+  },
+  "exact_candidate_blobs": {
+    "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py": "9af1bd62048277cc8c4fabab8efe5d217c367bac",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json": "e29ce3a7c782c7b9ab1097dd3124a917d3fea9d2",
+    "canonical/runtime/current_terminal_scheduling_world_v1.py": "9ae2b990578b042dd24074fd5013378b72e64b6b",
+    "canonical/tests/test_tool_discovery_retrieval_authority_gate_v1.py": "6f8e38356b0a5bebf1815c7d1c199ddc86b4c9de",
+    "canonical/tests/test_current_terminal_scheduling_world_v1.py": "176c722c7dd09bb26e32fa87e8a1d70a5237191c"
+  },
+  "mandatory_retrieval_authority": {
+    "activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e",
+    "activation_verification_git_blob_sha": "bbbd34e192aa65ba94c4bda19a1a1eb9c2b5b406",
+    "compiler_git_blob_sha": "9daa8d590f3356b3fc51eccf75c56cbf515239e4",
+    "router_git_blob_sha": "578c5f87901a458b12d7df984e0a6a525d367456",
+    "github_provider_git_blob_sha": "29b808935559382ab7ddc81aaa08fe0611a05df8"
+  },
+  "expected_live_world": {
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "recovery_terminal_noninferior": "PROVED",
+    "recovery_causal_localization_noninferior": "PROVED",
+    "recovery_zero_critical_fail_closed_misses": "PROVED",
+    "tool_learning_success_route_noninferior": "OPEN",
+    "tool_discovery_retrieval_gate_required": true,
+    "tool_discovery_retrieval_gate_pass": true
+  },
+  "required_falsification_tests": [
+    "REMOVE_MANDATORY_RETRIEVAL_BINDING__MUST_FAIL",
+    "MUTATE_COMPILER_HASH__MUST_FAIL",
+    "MUTATE_ACTUAL_ROUTER_BYTES_HASH__MUST_FAIL",
+    "REENABLE_CONSUMED_V2_GITHUB_EPOCH__MUST_FAIL",
+    "INVALIDATE_INDEPENDENT_RECEIPT__MUST_FAIL",
+    "ADD_SECOND_TOOL_DISCOVERY_ACTION_BYPASS__MUST_FAIL",
+    "CALL_LIVE_SCHEDULER_WITHOUT_RETRIEVAL_GATE__MUST_FAIL",
+    "REOPEN_DELEGATION_WITHOUT_AUTHORITY_UPDATE__MUST_FAIL_11_27_WORLD"
+  ],
+  "supersession": {
+    "canonical/governance/CURRENT_TERMINAL_SCHEDULING_WORLD_V2.json": "ABANDONED_UNMERGED_3_OF_19_38_8_30_CANDIDATE__DO_NOT_PROMOTE",
+    "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json": "CURRENT_MAIN_PRE_GATE_SCHEDULER_UNTIL_V3_INDEPENDENT_PASS_AND_V9_ACTIVATION"
+  },
+  "hard_rules": [
+    "NO_LIVE_TOOL_DISCOVERY_SEARCH_ACTION_WITHOUT_EXACT_VERIFIED_V2_RETRIEVAL_AUTHORITY",
+    "NO_DIRECT_SEARCH_BYPASS",
+    "NO_STALE_V1_RETRIEVAL_AUTHORITY",
+    "NO_CONSUMED_SOURCE_EPOCH_REPLAY",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "RECOVERY_PROMOTION_MUST_REMAIN_REMOVED_FROM_LIVE_UNRESOLVED_SET",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_THIS_GATE"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
