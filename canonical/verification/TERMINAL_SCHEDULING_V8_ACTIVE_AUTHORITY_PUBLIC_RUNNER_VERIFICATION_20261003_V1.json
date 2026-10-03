@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V8_ACTIVE_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V8_IS_CURRENT_SCHEDULING_AUTHORITY__MANDATORY_TOOL_DISCOVERY_V2_RETRIEVAL_GATE__ZERO_CREDIT",
+  "verified_active_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_V8_ACTIVE_AUTHORITY_V1.json",
+    "git_blob_sha": "95da6ca0def18fe93f1ad29d67d01a27b31e7540"
+  },
+  "bound_activation": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V8.json",
+    "git_blob_sha": "bc1d47f5250e78f3625f258bc0320b273cdc5a67"
+  },
+  "bound_activation_verification": {
+    "path": "canonical/verification/TERMINAL_SCHEDULING_V8_RETRIEVAL_GATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "4f63b2ce18f2f6a8c0e667f562f5af946403cd79"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1298,
+    "merge_commit": "a278e4d6e2d073212a39fd36616f6183b915aa1a",
+    "head_sha": "35e6099ca5ee8a6a8b53f9fb772920f26a647c80",
+    "workflow_run_id": 37115648638,
+    "workflow_job_id": 111181838428,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_active_authority_blob_verified": true,
+    "exact_v8_activation_binding_verified": true,
+    "exact_activation_verification_binding_verified": true,
+    "v8_current_for_scheduling": true,
+    "live_38_8_30_world_preserved": true,
+    "opus55_acceptance_preserved_3_of_19": true,
+    "tool_learning_success_route_noninferior_remains_open": true,
+    "tool_discovery_retrieval_authority_mandatory": true,
+    "direct_or_stale_bypass_forbidden": true,
+    "consumed_source_epoch_replay_forbidden": true,
+    "no_result_nonexistence_inference_forbidden": true,
+    "zero_credit_preserved": true
+  },
+  "operational_consequence": "ALL_CURRENT_TOOL_DISCOVERY_RETRIEVAL_SCHEDULING_MUST_ENTER_THROUGH_THE_EXACT_VERIFIED_V2_GATE__V7_IS_HISTORICAL_ONLY",
+  "hard_nonclaims": [
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT",
+    "NO_GLOBAL_RETRIEVAL_COMPLETENESS_CLAIM",
+    "NO_AUTOMATIC_ALL_LANGUAGE_TRANSLATION_CLAIM",
+    "NO_TERMINAL_TOOLATHLON_EXECUTION_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
