@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_RECOVERY_T0_T2_SAMPLE_CEILING_FALSIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "FALSIFIED__FINITE_T0_T2_SAMPLE_DOES_NOT_ESTABLISH_PROTOCOL_WIDE_ABSOLUTE_CEILING__ZERO_CREDIT",
+  "objective": "Prevent the 60-case T0/T2 recovery terminal sample from being promoted into a theoretical 1.0 protocol-wide lower bound without a scope-complete proof basis.",
+  "candidate_under_test": {
+    "scope_relation": {
+      "path": "canonical/governance/RECOVERY_T0_T2_ACCEPTANCE_SCOPE_RELATION_V1.json",
+      "git_blob_sha": "3df22797c468a085d05a6185c5bb57acbdc6242a"
+    },
+    "ceiling_lifter": {
+      "path": "canonical/runtime/recovery_t0_t2_acceptance_ceiling_lifter_v1.py",
+      "git_blob_sha": "88ad2429bb06f26d5b28e5188d38214fd1bb9554"
+    }
+  },
+  "target_scope_authority": {
+    "path": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+    "git_blob_sha": "d9ac894594ebcd2883520f7b7977a3548420541c",
+    "status": "FROZEN_PREEXPOSURE_DESIGN__ZERO_CASES_GENERATED__EXACT_OPUS55_COMPARATOR_BLOCKED",
+    "generated_now": false,
+    "exposed_now": false
+  },
+  "firewall": {
+    "runtime": {
+      "path": "canonical/runtime/finite_sample_ceiling_firewall_v1.py",
+      "git_blob_sha": "41b755dd0f1fdac339863d35e1914c4acc085cd2"
+    },
+    "tests": {
+      "path": "canonical/tests/test_finite_sample_ceiling_firewall_v1.py",
+      "git_blob_sha": "37c14fe3310de3efba38e86180d6abcf3d3250ba"
+    }
+  },
+  "falsification": {
+    "source_case_count": 60,
+    "source_population": ["T0", "T2"],
+    "claimed_brain_lower_bound": 1.0,
+    "claimed_theoretical_upper_bound": 1.0,
+    "complete_target_case_universe_verified": false,
+    "exhaustive_finite_superset_verified": false,
+    "universal_formal_scope_proof_verified": false,
+    "reason": "THE_CANONICAL_MATCHED_TARGET_SUPERPORTFOLIO_HAS_ZERO_CASES_GENERATED_AND_THE_RECOVERY_RELATION_CONTAINS_ONLY_DIMENSION_TO_CHECK_MAPPINGS_PLUS_A_60_CASE_SAMPLE__IT_DOES_NOT_PROVE_THAT_THE_SAMPLE_IS_THE_COMPLETE_TARGET_UNIVERSE_AN_EXHAUSTIVE_SUPERSET_OR_A_UNIVERSAL_FORMALLY_COMPLETE_DOMAIN",
+    "verdict": "ABSOLUTE_CEILING_NOT_ESTABLISHED"
+  },
+  "additional_defect": {
+    "missing_target_predicate": "RECOVERY_TERMINAL_NONINFERIOR",
+    "candidate_relation_declared_target_predicates": [
+      "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+    ],
+    "consequence": "A_WITNESS_CANNOT_CLOSE_THE_ENTIRE_RECOVERY_PROTOCOL_WHILE_OMITTING_ONE_OF_ITS_THREE_ATOMIC_ACCEPTANCE_PREDICATES"
+  },
+  "admissible_escape_conditions": [
+    "INDEPENDENTLY_VERIFIED_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_IDENTITY_AFTER_TARGET_CASES_EXIST",
+    "INDEPENDENTLY_VERIFIED_EXHAUSTIVE_FINITE_SUPERSET_WITH_TARGET_SUBSET_PROOF",
+    "INDEPENDENTLY_VERIFIED_UNIVERSAL_FORMALLY_COMPLETE_SCOPE_PROOF"
+  ],
+  "rule": "FINITE_SAMPLE_SUCCESS_MAY_PROVE_THE_SAMPLE__IT_MUST_NOT_BE_RELABELED_AS_PROTOCOL_WIDE_THEORETICAL_CEILING_WITHOUT_SCOPE_COMPLETE_EVIDENCE",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
