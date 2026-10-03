@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_INFORMATION_DOMINANCE_V2",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__LIVE_38_11_27_WORLD__MANDATORY_TOOL_DISCOVERY_V2_GATE__ZERO_REALITY__ZERO_CREDIT",
+  "objective": "Recompute exact structural information dominance on the current Recovery-promoted 27-predicate acceptance frontier while requiring the verified Tool Discovery V2 retrieval authority.",
+  "runtime": {
+    "path": "canonical/runtime/current_terminal_information_dominance_v2.py",
+    "git_blob_sha": "c98466c0dc66016a898f8d2044cdbb849e7b0f3b"
+  },
+  "tests": {
+    "path": "canonical/tests/test_current_terminal_information_dominance_v2.py",
+    "git_blob_sha": "8e67b17ddc084235cad491e7c42ba0f076ccffc5"
+  },
+  "current_scheduling_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "04f0ee3cd64c3f77b29ece159ac9a35eae47a9dc"
+  },
+  "verified_result": {
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "live_certificates": 16,
+    "live_actions": 21,
+    "live_action_coverage": 27,
+    "dominated_certificates": 0,
+    "nondominated_certificates": 16,
+    "unique_zero_reality_requirements": 19,
+    "highest_direct_coverage_certificate": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+    "highest_direct_coverage_predicates": 8,
+    "full_frontier_new_reality_units": 0,
+    "tool_discovery_retrieval_gate_required": true,
+    "tool_discovery_retrieval_gate_pass": true
+  },
+  "hard_rules": [
+    "NO_FRESH_REALITY_FROM_INFORMATION_DOMINANCE",
+    "NO_CERTIFICATE_COVERAGE_TO_ACCEPTANCE_PROOF_INFERENCE",
+    "NO_PROVED_RECOVERY_OR_DELEGATION_TARGETS_IN_LIVE_FRONTIER",
+    "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR_REMAINS_OPEN",
+    "ALL_TOOL_DISCOVERY_RETRIEVAL_REMAINS_BOUND_TO_EXACT_VERIFIED_V2_AUTHORITY",
+    "WORK_ONLY_BOUNDED_ZERO_REALITY_ACTIONS_BEFORE_FRESH_REALITY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "COMPILE_THE_LIVE_27_ACTION_FRONTIER__RANK_ONLY_BOUNDED_NONSATURATED_ZERO_REALITY_ACTIONS__RUN_FIXED_POINT_AFTER_EACH_VERIFIED_CLOSURE__FRESH_REALITY_ONLY_AFTER_EXPLICIT_ZERO_REALITY_SATURATION",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
