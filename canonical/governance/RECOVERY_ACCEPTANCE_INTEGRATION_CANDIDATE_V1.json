@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_RECOVERY_ACCEPTANCE_INTEGRATION_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_REALITY_ACCEPTANCE_PROMOTION__INDEPENDENT_VERIFICATION_REQUIRED",
+  "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+  "current_acceptance": "3_OF_19__8_OF_38",
+  "proposed_acceptance": "4_OF_19__11_OF_38",
+  "newly_proved_predicates": [
+    "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+    "RECOVERY_TERMINAL_NONINFERIOR",
+    "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+  ],
+  "independent_source_receipt": {
+    "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+    "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+  },
+  "reducer": "canonical/runtime/recovery_acceptance_integrator_v1.py",
+  "tests": "canonical/tests/test_recovery_acceptance_integrator_v1.py",
+  "hard_rules": [
+    "EXACTLY_THREE_RECOVERY_PREDICATES_MAY_PROMOTE",
+    "EXACTLY_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY_MAY_NEWLY_CLOSE",
+    "NO_OTHER_ACCEPTANCE_MUTATION",
+    "NO_FRESH_REALITY",
+    "NO_TERMINAL_REPLAY",
+    "NO_CANONICAL_LEDGER_MUTATION_BEFORE_INDEPENDENT_EXACT_BYTE_PASS"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
