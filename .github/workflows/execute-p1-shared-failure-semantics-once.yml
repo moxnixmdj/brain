@@ -1,0 +1,122 @@
+name: Execute one-use P1 failure-semantics batch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/execute-p1-shared-failure-semantics-once.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: p1-shared-failure-semantics-one-use-v1
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Enforce first-attempt one-use authority
+        run: |
+          set -euo pipefail
+          test "$GITHUB_RUN_ATTEMPT" = "1"
+          test "$GITHUB_REF" = "refs/heads/main"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("canonical/governance/P1_ONE_USE_FAILURE_SEMANTICS_EXECUTION_AUTHORITY_V1.json")
+          a=json.loads(p.read_text())
+          assert a["status"]=="ACTIVE_ONE_USE__INDEPENDENT_PREFLIGHT_PASS__EXECUTION_AUTHORITY_TRUE__PROMOTION_FALSE", a
+          assert a["execution_authority"] is True
+          assert a["promotion_authority"] is False
+          assert a["authorized_observation"]=="P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH"
+          assert a["fresh_reality_units_authorized"]==1
+          assert a["first_attempt_only"] is True
+          assert a["rerun_credit"] is False
+          assert a["terminal_v3_replay"] is False
+          assert a["incremental_spend_usd"]==0
+          PY
+          test "$(git hash-object canonical/governance/P1_SHARED_FAILURE_SEMANTICS_BATCH_FREEZE_V1.json)" = "6a4b606a759d5479bb5ddbdf29426b1a1808b007"
+          test "$(git hash-object canonical/runtime/p1_shared_failure_semantics_batch_preflight_v1.py)" = "13c33adda55f58d1eac913e63daa7f6ae1eb6a63"
+          test "$(git hash-object canonical/runtime/p1_shared_failure_semantics_batch_v1.py)" = "695cfe3f283723a52bafb6299236a2d0378dc79e"
+          test "$(git hash-object canonical/runtime/p1_shared_failure_semantics_normalizer_v1.py)" = "b6ba06fc6a35fa132eb19389ee256e74a63a4849"
+          test "$(git hash-object canonical/runtime/contract_native_proof_suites.py)" = "0210790c7dd705ef328e1b55d529a30c5c6c3337"
+          test "$(git hash-object canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py)" = "28940387bd6c11671035ad9201e37bba13fd9bc9"
+          test "$(git hash-object canonical/runtime/trajectory_failure_typed_ir_proof_v6.py)" = "0f41a36e6ad16722ce05b180e036fb921a2ef886"
+
+      - name: Re-run spent preflight only
+        run: |
+          set -euo pipefail
+          python -m unittest -v canonical.tests.test_p1_shared_failure_semantics_batch_preflight_v1
+          python -m canonical.runtime.p1_shared_failure_semantics_batch_preflight_v1 > P1_SPENT_PREFLIGHT.json
+          python - <<'PY'
+          import json
+          x=json.load(open("P1_SPENT_PREFLIGHT.json"))
+          assert x["pass"] is True, x
+          assert x["fresh_reality_units_consumed"]==0, x
+          assert x["execution_authority"] is False, x
+          assert x["promotion_authority"] is False, x
+          PY
+
+      - name: Consume exactly one fresh P1 reality unit
+        run: |
+          set -euo pipefail
+          BEACON="GITHUB_ACTIONS_RUN_ID=${GITHUB_RUN_ID};ATTEMPT=${GITHUB_RUN_ATTEMPT}"
+          python -m canonical.runtime.p1_shared_failure_semantics_batch_v1 --beacon "$BEACON" > P1_RAW_BATCH_RESULT.json
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          raw=json.load(open("P1_RAW_BATCH_RESULT.json"))
+          auth=json.loads(Path("canonical/governance/P1_ONE_USE_FAILURE_SEMANTICS_EXECUTION_AUTHORITY_V1.json").read_text())
+          assert raw["cases"]==192, raw
+          assert raw["passes"]+raw["failures"]==192, raw
+          assert raw["terminal_v3_replayed"]==0, raw
+          assert raw["incremental_spend_usd"]==0, raw
+          assert raw["fresh_reality_units_consumed"]==0, raw
+          assert raw["reality_unit_candidate_if_separately_authorized_and_independently_adjudicated"]==1, raw
+          assert raw["execution_authority"] is False, raw
+          assert raw["promotion_authority"] is False, raw
+          out={
+            "schema":"PROJECT_BRAIN_P1_ONE_USE_FAILURE_SEMANTICS_EXECUTION_RESULT_V1",
+            "status":"FINALIZED_EVIDENCE_ONLY__INDEPENDENT_ADJUDICATION_REQUIRED",
+            "authorized_observation":auth["authorized_observation"],
+            "github_run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "github_run_attempt":int(os.environ["GITHUB_RUN_ATTEMPT"]),
+            "github_head_sha":os.environ["GITHUB_SHA"],
+            "beacon_sha256":raw["beacon_sha256"],
+            "cases":raw["cases"],
+            "passes":raw["passes"],
+            "failures":raw["failures"],
+            "wilson_95_lower_all":raw["wilson_95_lower_all"],
+            "by_surface":raw["by_surface"],
+            "fresh_reality_units_consumed":1,
+            "terminal_v3_replayed":0,
+            "incremental_spend_usd":0,
+            "execution_authority_consumed":True,
+            "rerun_credit":False,
+            "capability_credit_delta":0,
+            "family_credit_delta":0,
+            "promotion_authority":False,
+            "raw_result_path":"P1_RAW_BATCH_RESULT.json",
+          }
+          Path("P1_AUTHORIZED_BATCH_RESULT.json").write_text(json.dumps(out,indent=2,sort_keys=True)+"\n")
+          PY
+
+      - name: Preserve one-use evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p1-one-use-failure-semantics-batch-v1
+          path: |
+            P1_SPENT_PREFLIGHT.json
+            P1_RAW_BATCH_RESULT.json
+            P1_AUTHORIZED_BATCH_RESULT.json
+          if-no-files-found: warn
