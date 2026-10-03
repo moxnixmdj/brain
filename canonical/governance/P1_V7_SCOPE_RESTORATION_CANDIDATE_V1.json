@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V7_SCOPE_RESTORATION_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__FRESH_TRANSPORT_PLUS_CURRENT_V7_COMPOSITE_RESTORATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prove P1 whole-scope quarantine-lift eligibility without replay by combining the independently adjudicated one-use failure-semantics transport fact, current independently verified V7 mechanism/provenance hardening, preserved T0/T2 terminal intervention receipts, and executable closure of prior composite counterexamples.",
+  "exact_candidate_blobs": {
+    "runtime": {
+      "path": "canonical/runtime/p1_v7_scope_restoration_reducer_v1.py",
+      "git_blob_sha": "e5499d8a986356930c618ae0ae91c9b7bf6ec324"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p1_v7_scope_restoration_reducer_v1.py",
+      "git_blob_sha": "393a5252a2f952d1e8a61d47ef74b85bb5d63de7"
+    },
+    "recovery_receipt": {
+      "path": "canonical/verification/P1_PUBLIC_RECOVERY_RESULT_INDEPENDENT_ADJUDICATION_20261003_V1.json",
+      "git_blob_sha": "7ef47e19e1ee9db3c95c91eb22e33c5e8a7be21c"
+    }
+  },
+  "load_bearing_inputs": [
+    "canonical/verification/P1_V7_CURRENT_MAIN_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/P1_V7_PROVENANCE_AND_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+    "canonical/governance/P1_TERMINAL_EXECUTION_SCOPE_MISMATCH_QUARANTINE_V1.json"
+  ],
+  "proof_shape": {
+    "pre_recovery_exact_information_residual": "FAILURE_SEMANTICS_TRANSPORT_TO_THREE_FROZEN_DIRECT_SURFACES",
+    "selected_minimum_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+    "new_reality_units_consumed_by_observation": 1,
+    "recovery_result": "192_OF_192__64_PER_SURFACE__DUAL_SCORER_PASS__BOTH_SEMANTICS_CLASSES_EVERY_CASE",
+    "restoration_roles": {
+      "CURRENT_V7_TYPED_PROOF": [
+        "FAILURE_MECHANISM_CLASSIFICATION_SUPPORTED_BY_VISIBLE_RECEIPTS",
+        "NONIDENTIFIABLE_OR_CAUSALLY_EQUIVALENT_CASE_DOES_NOT_FORCE_UNIQUE_CAUSE",
+        "AUTHORITY_SCOPE_TOOL_STATE_PROVENANCE_AND_DEPENDENCY_FAILURE_CLASSES_ARE_LOAD_BEARING_WHEN_PRESENT",
+        "MULTISTEP_OR_DELAYED_CAUSAL_INTERACTIONS_ARE_NOT_REDUCED_TO_FIRST_VISIBLE_SYMPTOM"
+      ],
+      "PRESERVED_T0_T2_TERMINAL_INTERVENTION": [
+        "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE",
+        "NOMINATED_REPAIR_IS_FALSIFIABLE",
+        "NOMINATED_REPAIR_RESCUES_TERMINAL_OUTCOME_WHEN_CAUSE_IS_IDENTIFIABLE",
+        "SYMPTOM_ONLY_OR_COMPETING_REPAIR_DOES_NOT_RECEIVE_CAUSAL_CREDIT"
+      ]
+    }
+  },
+  "executable_counterexample_closure": [
+    "DROP_PROVENANCE_OR_DEPENDENCY_EDGE_FAILS_CLOSED_UNDER_CURRENT_V7",
+    "UNFALSIFIABLE_DIAGNOSIS_EXTRA_FIELD_REJECTED_BY_EXACT_V6_SCORER_SCHEMA",
+    "FORCED_UNIQUE_CAUSE_ON_AMBIGUOUS_CASE_REJECTED",
+    "DROPPED_INTERACTION_ROOT_REJECTED",
+    "DOWNSTREAM_DELAYED_SYMPTOM_AS_ROOT_REJECTED",
+    "PARTIAL_NONRESCUING_REPAIR_REJECTED",
+    "AUTHORITY_AND_SCOPE_MECHANISM_CLASSIFICATION_EXACT"
+  ],
+  "hard_rules": [
+    "DO_NOT_REWRITE_OR_DELETE_HISTORICAL_QUARANTINE",
+    "DO_NOT_REPLAY_TERMINAL_V3",
+    "DO_NOT_COUNT_THE_ONE_FRESH_REALITY_UNIT_TWICE",
+    "RESTORATION_REDUCER_CANNOT_SELF_LIFT_QUARANTINE",
+    "SEPARATE_INDEPENDENT_EXACT_BYTE_VERIFICATION_REQUIRED",
+    "SEPARATE_MONOTONIC_QUARANTINE_LIFT_REDUCER_REQUIRED_AFTER_VERIFICATION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_TERMINAL_CREDIT_FROM_RESTORATION_CANDIDATE_ALONE"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_TEST_AND_RECOVERY_RECEIPT_WITH_ALL_LOAD_BEARING_INPUTS__IF_PASS__RUN_SEPARATE_MONOTONIC_P1_QUARANTINE_LIFT_AND_RECOMPUTE_FAMILY_ACCEPTANCE_FIXED_POINT"
+}
