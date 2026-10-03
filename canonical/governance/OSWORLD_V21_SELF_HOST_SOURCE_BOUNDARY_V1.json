@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_SELF_HOST_SOURCE_BOUNDARY_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_REALITY_SOURCE_GRAPH_COMPRESSION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "objective": "Remove solved OSWorld-v2.1 source-identity ambiguity without consuming benchmark cases, while preserving account-bound and deployment/protocol residuals.",
+  "release_authority": {
+    "repository": "xlang-ai/OSWorld-V2",
+    "release": "osworld-v2.1",
+    "manifest_path": "benchmark_releases/osworld-v2.1.json",
+    "manifest_git_blob_sha": "6d37c6f4c6c4f6daa5077d4e4c828f68360b7e36",
+    "readme_git_blob_sha": "1dc05f1acee1412c92e7f103a518fc128f7d14cb"
+  },
+  "website_source": {
+    "repository": "Task-Web/OSWorld-web",
+    "tag": "osworld-v2.1",
+    "commit": "60c89fe6a8ed934668619d8d26132848239eb8ee",
+    "gitmodules_git_blob_sha": "36c0e0bb2436909c4285d3d8c793c7b2f5c663a9",
+    "readme_git_blob_sha": "1369eaacd86b0f54164c7b655653f8d2d7ecd466",
+    "gitlink_count": 25,
+    "source_identity": "EXACTLY_PINNED",
+    "deployment_state": "OPEN",
+    "required_runtime_binding": "SELF_HOST_EXACT_TAG_AND_SET_WEBSITE_HOST_SUFFIX"
+  },
+  "gated_population_and_assets": {
+    "tasks_repository": "xlangai/osworld_v2_tasks",
+    "tasks_revision": "0a1aadad95aa79b00b3783e717d865089ab06e26",
+    "assets_repository": "xlangai/osworld_v2_assets_gated",
+    "assets_revision": "384b3834faba5700a7b589e6cc181490c9808949",
+    "upstream_access_semantics": "LOGGED_IN_USER_ACCEPTS_GATED_ACCESS_REQUEST__UPSTREAM_README_STATES_REQUEST_AUTOMATICALLY_APPROVED",
+    "material_account_access": "UNPROVED",
+    "consequence": "GENERIC_ASSET_DISCOVERY_IS_NOT_THE_BLOCKER__ACCOUNT_AUTHENTICATION_AND_MATERIAL_DOWNLOAD_ACCESS_REMAIN"
+  },
+  "gitlab": {
+    "repository": "Task-Web/gitlab",
+    "upstream_requirement": "SELF_HOST_GITLAB_FOR_GITLAB_BACKED_TASKS_AND_BIND_GITLAB_URL_PLUS_PRIVATE_TOKEN",
+    "upstream_release_pinned_revision_found": false,
+    "observed_repository_head_for_diagnostic_only": "8655d651722f4254e59e813de9f68a6732ea525c",
+    "observed_readme_git_blob_sha": "64af03525d5ce423b67827af5407b39272b1f225",
+    "hard_rule": "DO_NOT_TREAT_CURRENT_TASK_WEB_GITLAB_HEAD_AS_OSWORLD_V2_1_RELEASE_PIN_WITHOUT_FIRST_PARTY_EQUIVALENCE_OR_PINNING_EVIDENCE",
+    "reproducibility_state": "REVISION_IDENTITY_OPEN",
+    "deployment_state": "OPEN"
+  },
+  "delta": {
+    "removed": [
+      "MOCKED_WEBSITE_SOURCE_IDENTITY_DISCOVERY",
+      "MOCKED_WEBSITE_SUBMODULE_IDENTITY_DISCOVERY",
+      "GENERIC_GATED_DATASET_LOCATION_DISCOVERY"
+    ],
+    "remaining": [
+      "MATERIAL_HUGGINGFACE_ACCOUNT_ACCESS_TO_EXACT_TASK_AND_ASSET_REVISIONS",
+      "GITLAB_EXACT_REVISION_OR_INDEPENDENT_EQUIVALENCE_BINDING",
+      "SELF_HOST_WEBSITE_DEPLOYMENT_AND_REACHABILITY",
+      "SELF_HOST_GITLAB_DEPLOYMENT_TOKEN_AND_REACHABILITY",
+      "END_TO_END_PROTOCOL_EQUIVALENCE",
+      "BRAIN_SCORE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_GATED_TASK_OR_ASSET_CONTENT_READ",
+    "NO_OSWORLD_TERMINAL_CASE_EXECUTED",
+    "NO_CLAIM_USER_ACCOUNT_CURRENTLY_HAS_HUGGINGFACE_ACCESS",
+    "NO_CLAIM_TASK_WEB_GITLAB_CURRENT_HEAD_IS_RELEASE_EQUIVALENT",
+    "NO_DEPLOYMENT_OR_PROTOCOL_EQUIVALENCE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_PUBLIC_SOURCE_GRAPH__THEN_RECOMPUTE_OSWORLD_ROUTE_TO_ACCOUNT_ACCESS__GITLAB_REVISION__DEPLOYMENT_PROTOCOL_EQUIVALENCE__BRAIN_SCORE_ONLY",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
