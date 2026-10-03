@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_P1_UNIVERSAL_GENERATOR_TRANSPORT_SCOPE_REDUCTION_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_REALITY_SCOPE_REDUCTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "theorem_receipt": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "frozen_authorities": {
+    "freeze_path": "canonical/governance/P1_SHARED_FAILURE_SEMANTICS_BATCH_FREEZE_V1.json",
+    "freeze_blob": "6a4b606a759d5479bb5ddbdf29426b1a1808b007",
+    "minimum_cut_path": "canonical/governance/P1_MINIMUM_REALITY_CUT_INPUT_V1.json",
+    "minimum_cut_blob": "cbcb2faff8404623846e77e19fcc5b0ad00e81d9"
+  },
+  "exact_scope_relation": {
+    "freeze_generator": "canonical/runtime/contract_native_proof_suites.py::generate_case",
+    "theorem_generator_blob": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "freeze_binder": "canonical/runtime/p1_shared_failure_semantics_batch_v1.py::bind_public_source_case",
+    "theorem_batch_blob": "695cfe3f283723a52bafb6299236a2d0378dc79e",
+    "freeze_surfaces": [
+      "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+      "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+    ],
+    "theorem_surface_count": 3,
+    "freeze_case_index_range": "0..63",
+    "theorem_case_indices_per_surface": 64,
+    "freeze_difficulty_schedule": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "freeze_difficulty_assignment": "DIFFICULTIES[CASE_INDEX_MOD_5]",
+    "theorem_structural_equivalence_classes": 30,
+    "source_native_dual_scorer": true
+  },
+  "requirements": [
+    "P1_FAILURE_SEMANTICS_TRANSPORT_FRONTIERCODE",
+    "P1_FAILURE_SEMANTICS_TRANSPORT_CURSORBENCH",
+    "P1_FAILURE_SEMANTICS_TRANSPORT_RECOVERY_SCOPE_COMPOSITION"
+  ],
+  "proposed_derivation": [
+    "THE_FROZEN_REALITY_BATCH_DRAWS_ONLY_FROM_THE_EXACT_FROZEN_SOURCE_GENERATOR",
+    "THE_GENERATOR_RANDOM_SEED_AFFECTS_SEMANTIC_TRAJECTORY_ONLY_THROUGH_CAUSE_POSITION;REPAIR_SHUFFLE_IS_BINDER_IRRELEVANT",
+    "THE_THEOREM_EXHAUSTS_EVERY_REACHABLE_DIFFICULTY_CAUSE_CLASS_FOR_EVERY_FROZEN_INDEX_AND_ALL_THREE_FROZEN_SURFACES",
+    "THE_THEOREM_RUNS_THE_EXACT_PUBLIC_ONLY_BINDER_V7_CANDIDATE_V6_INTERVENTION_SCORER_AND_SOURCE_NATIVE_RESCUE_SCORER",
+    "THEREFORE_NO_POST_FREEZE_RANDOM_SELECTION_CAN_PRODUCE_A_TRANSPORT_CASE_OUTSIDE_THE_PROVED_QUOTIENT"
+  ],
+  "quarantined_run_37108111537_used_as_proof": false,
+  "proposed_all_three_transport_requirements_discharged": true,
+  "proposed_remaining_p1_failure_semantics_information_residual": 0,
+  "proposed_p1_scope_quarantine_lift_eligible": true,
+  "hard_rules": [
+    "DO_NOT_USE_THE_QUARANTINED_192_CASE_RESULT_AS_A_PREMISE",
+    "DO_NOT_LIFT_QUARANTINE_UNTIL_THIS_SCOPE_REDUCTION_IS_INDEPENDENTLY_VERIFIED",
+    "FAIL_CLOSED_IF_ANY_FREEZE_THEOREM_OR_PIPELINE_BLOB_DIFFERS"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FULL_FROZEN_GENERATOR_STRUCTURAL_QUOTIENT__ZERO_REALITY__QUARANTINED_RUN_NOT_USED",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/p1-universal-generator-transport-v1-20261003",
+    "head_sha": "ffde5aa3e200533bc50caee3d607c0dac01d0cbc",
+    "workflow_run_id": 37109149361,
+    "artifact_id": 11268279752,
+    "artifact_digest": "sha256:edfbd68131fafdbb61f70ea30a51386eaab8129aae15c70026c2a12f6e228dcc",
+    "conclusion": "success"
+  },
+  "exact_brain_bytes": {
+    "theorem_runtime_blob": "cbd638b2e7eb649a45f5fa1fe0124a11f8410594",
+    "theorem_test_blob": "05f63b7d0169395ce8b470426531553de4cd69c3",
+    "theorem_candidate_blob": "a69af85b013b14dff02fedb035a07d51f76e595e",
+    "source_generator_blob": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "batch_runtime_blob": "695cfe3f283723a52bafb6299236a2d0378dc79e",
+    "normalizer_blob": "b6ba06fc6a35fa132eb19389ee256e74a63a4849",
+    "candidate_v7_blob": "28940387bd6c11671035ad9201e37bba13fd9bc9",
+    "scorer_v6_blob": "0f41a36e6ad16722ce05b180e036fb921a2ef886"
+  },
+  "verified": {
+    "structural_equivalence_classes": 30,
+    "frozen_surface_count": 3,
+    "frozen_case_indices_per_surface": 64,
+    "deterministic_proof_executions": 2292,
+    "both_shuffle_extremes_checked": true,
+    "all_v7_intervention_scorer_pass": true,
+    "all_source_native_rescue_scorer_pass": true,
+    "quarantined_execution_used_as_proof": false,
+    "quarantined_execution_run_id": 37108111537,
+    "terminal_results_replayed": 0,
+    "new_reality_units_consumed": 0
+  },
+  "hard_nonclaims": [
+    "THIS_RECEIPT_ALONE_DOES_NOT_LIFT_P1_QUARANTINE",
+    "SCOPE_RELATION_TO_THE_THREE_FROZEN_TRANSPORT_REQUIREMENTS_MUST_BE_INDEPENDENTLY_VERIFIED",
+    "NO_CREDIT_FROM_RUN_37108111537"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
