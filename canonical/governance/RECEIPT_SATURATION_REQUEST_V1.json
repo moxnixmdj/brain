@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RECEIPT_SATURATION_REQUEST_V1",
   "date": "2026-10-03",
-  "status": "PARTIAL_EXECUTION__NORMALIZED_WITNESS_LITERAL_PATH_SATURATED__GLOBAL_MINER_WORKFLOW_FAILED__ZERO_CREDIT",
+  "status": "PARTIAL_EXECUTION__NORMALIZED_WITNESS_LITERAL_PATH_SATURATED__GITHUB_ACTIONS_PRESTEP_FAILURE__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_epoch": {
     "requested_from_main_commit": "293da1d472079ee745ce12fdc8fa03cfda0cf852",
@@ -42,7 +42,19 @@
       "workflow_job_id": 111214684011,
       "conclusion": "failure",
       "output_materialized": false
+    },
+    "proof_atom_receipt_saturation_workflow": {
+      "workflow": ".github/workflows/saturate-existing-proof-atom-receipts-v1.yml",
+      "triggering_commit": "c61b71c3aebec444bd11bff7b12ca64c35b0d5fb",
+      "workflow_run_id": 37127440762,
+      "workflow_job_id": 111215520711,
+      "status": "completed",
+      "conclusion": "failure",
+      "steps_exposed": false,
+      "log_blob_available": false,
+      "failure_class": "PRESTEP_OR_INFRASTRUCTURE_FAILURE__EXACT_CAUSE_UNRESOLVED",
+      "do_not_retry_identical_execution": true
     }
   },
-  "next": "REPAIR_OR_REPLACE_ONLY_THE_FAILED_GLOBAL_MINER_EXECUTION_PATH__DO_NOT_REPEAT_THE_COMPLETED_NORMALIZED_WITNESS_LITERAL_SCAN__PRESERVE_ZERO_REALITY"
+  "next": "DO_NOT_RETRY_IDENTICAL_GITHUB_ACTIONS_SATURATION_EXECUTION__USE_ALREADY_AVAILABLE_ZERO_REALITY_CONNECTOR_READS_OR_A_MATERIALLY_DIFFERENT_EXECUTION_SUBSTRATE__PRESERVE_ZERO_REALITY"
 }
