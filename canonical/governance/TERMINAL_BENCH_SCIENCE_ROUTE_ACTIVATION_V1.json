@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "REPAIR_STAGED__DEDICATED_PLANNER_AND_OBSERVED_EXACT_ALIAS_FIX__INDEPENDENT_REVERIFICATION_REQUIRED__TERMINAL_EXECUTION_BLOCKED",
+  "status": "REPAIR_STAGED__DEDICATED_PLANNER_EXACT_ALIAS_AND_SYNTAX_FIX__INDEPENDENT_REVERIFICATION_REQUIRED__TERMINAL_EXECUTION_BLOCKED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "predicate": "TB_SCIENCE_GE_58_7",
@@ -10,7 +10,7 @@
     "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
     "dataset_content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
     "brain_controller": "canonical/runtime/harbor_science_agent_v1.py",
-    "brain_controller_git_blob_sha": "08862621cfe6ff6915a98120db36686ae5a08dab",
+    "brain_controller_git_blob_sha": "8967f84a8f8537dad17b677329ed17e7b4ff0fad",
     "source_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
     "source_gate_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de",
     "harbor_version": "0.23.0",
