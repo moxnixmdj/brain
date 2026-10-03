@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V12_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V12_POST_DUAL_17_REQUIREMENTS__31_ZERO_REALITY_WORK_UNITS__V4_RETRIEVAL_BOUND__ZERO_CREDIT",
+  "verified_candidate": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_V12_ACTIVE_AUTHORITY_CANDIDATE_V1.json",
+    "git_blob_sha": "e9f0b028eeb6b1a36384bfc4f814f38a5ca79aa2",
+    "brain_pull_request": 1342,
+    "verified_head_sha": "eba4c19fea6316d2fc05c02e6c24393d3c650756"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1339,
+    "merge_commit": "f0472ddcf753af036960d3196b762c2e560110e7",
+    "workflow_run_id": 37122979137,
+    "workflow_name": "Verify terminal scheduling V12",
+    "conclusion": "success",
+    "verifier_git_blob_sha": "dcdcee51abdfe367ad6ddc0224558311f30c45e6",
+    "workflow_git_blob_sha": "d6da3a52e14bd87a276e9b706082c3e37e78a663"
+  },
+  "verified": {
+    "active_zero_reality_requirements": 17,
+    "active_nondominated_certificates": 14,
+    "zero_reality_covered_predicates": 25,
+    "primitive_zero_reality_work_units": 31,
+    "matched_priority_child_facts": 16,
+    "direct_reality_blocked_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "tool_discovery_retrieval_authority": "V4_OVER_VERIFIED_V3_OVER_VERIFIED_V2_BASE",
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "fresh_reality_authority": false
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "hard_nonclaims": [
+    "SCHEDULING_VERIFICATION_DOES_NOT_CLOSE_ACCEPTANCE",
+    "SCHEDULING_VERIFICATION_DOES_NOT_GRANT_OWNERSHIP",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ]
+}
