@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_P1_SHARED_FAILURE_SEMANTICS_ONE_USE_EXECUTION_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE__ONE_FIRST_ATTEMPT_SHARED_BATCH_AUTHORIZED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "selected_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+  "authority": {
+    "preexecution_verification": {
+      "path": "canonical/verification/P1_SHARED_FAILURE_SEMANTICS_PREFLIGHT_INDEPENDENT_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "39b95b1cc1de2abfe0c5e586fe47b4c22f69f225",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS"
+    },
+    "minimum_reality_cut": {
+      "path": "canonical/verification/P1_V7_PROVENANCE_AND_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "01ca625add4db7035224f0d4cb9efb406d17362d",
+      "minimum_new_reality_units": 1
+    }
+  },
+  "exact_execution_bytes": {
+    "freeze": "6a4b606a759d5479bb5ddbdf29426b1a1808b007",
+    "preflight": "13c33adda55f58d1eac913e63daa7f6ae1eb6a63",
+    "batch_harness": "695cfe3f283723a52bafb6299236a2d0378dc79e",
+    "normalizer": "b6ba06fc6a35fa132eb19389ee256e74a63a4849",
+    "source_generator": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "candidate_v7": "28940387bd6c11671035ad9201e37bba13fd9bc9",
+    "intervention_scorer_v6": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "batch_tests": "7512a920c72d7bdeb2b072788e4c4bc8d2ff2d08",
+    "preflight_tests": "2b0b7a8b3fe7017e1be0fa85bed0f10b72802337"
+  },
+  "carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "repository_visibility": "public",
+    "branch": "critical/p1-terminal-batch-v1-20261003",
+    "workflow_path": ".github/workflows/execute-p1-terminal-shared-batch-v1.yml",
+    "runner": "ubuntu-latest",
+    "incremental_spend_usd": 0
+  },
+  "one_use_contract": {
+    "execution_count_allowed": 1,
+    "execution_count_used": 0,
+    "fresh_reality_units_authorized": 1,
+    "fresh_reality_units_consumed": 0,
+    "cases_per_surface": 64,
+    "surface_count": 3,
+    "total_cases": 192,
+    "post_freeze_beacon_source": "GITHUB_RUN_ID_COLON_GITHUB_RUN_ATTEMPT",
+    "required_run_attempt": 1,
+    "first_attempt_only_for_terminal_credit": true,
+    "retries_allowed_for_terminal_credit": 0,
+    "result_feedback_may_not_change_cases_or_configuration": true,
+    "same_selected_cases_may_not_be_used_for_tuning": true,
+    "terminal_v3_replay": false,
+    "post_result_case_replacement": false,
+    "post_result_tuning": false
+  },
+  "result_contract": {
+    "require_all_192_cases_pass": true,
+    "require_all_three_surfaces_all_pass": true,
+    "require_both_semantics_classes_present_every_case": true,
+    "require_zero_terminal_v3_replay": true,
+    "require_zero_incremental_spend": true,
+    "batch_result_alone_lifts_p1_quarantine": false,
+    "separate_independent_transport_adjudication_required": true,
+    "separate_acceptance_reduction_required": true
+  },
+  "hard_rules": [
+    "WORKFLOW_MUST_HASH_BIND_THIS_ACTIVATION_AND_ALL_EXACT_EXECUTION_BYTES_BEFORE_CASE_GENERATION",
+    "RUN_ATTEMPT_MUST_EQUAL_1",
+    "ANY_PRIOR_CASE_GENERATION_FOR_THE_SAME_ACTIVATION_CONSUMES_THE_ONE_USE_SLOT",
+    "NO_RETRY_TERMINAL_CREDIT_AFTER_CASE_EXPOSURE",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_EXECUTION_ACTIVATION",
+    "NO_P1_QUARANTINE_LIFT_BEFORE_SEPARATE_INDEPENDENT_TRANSPORT_ADJUDICATION"
+  ],
+  "execution_authority": true,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "TRIGGER_EXACTLY_ONE_FIRST_ATTEMPT_PUBLIC_RUNNER_SHARED_BATCH__THEN_FREEZE_RESULT_DIGEST_AND_INDEPENDENTLY_ADJUDICATE_TRANSPORT__NO_RERUN_CREDIT"
+}
