@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_CAUSAL_CUT_ADMISSION_GATE_V2_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_PROMOTION__INDEPENDENT_PUBLIC_RUNNER_PASS__FAIL_CLOSED_CAUSAL_CUT_POLICY__ZERO_CREDIT",
+  "objective": "Supersede Terminal-Delta Gate V1 for architecture admission by requiring independently verified blocker-linked causal bindings to primitive facts on the current terminal cut.",
+  "verified_candidate": {
+    "governance_path": "canonical/governance/CAUSAL_CUT_ADMISSION_GATE_V2.json",
+    "governance_git_blob_sha": "9dc07a1f6081b7c5027706ed21e0c3838033d54a",
+    "runtime_path": "canonical/runtime/causal_cut_admission_gate_v2.py",
+    "runtime_git_blob_sha": "e281638769136466aa3b8711f33658478444c9db",
+    "tests_path": "canonical/tests/test_causal_cut_admission_gate_v2.py",
+    "tests_git_blob_sha": "6b09e5d1d04d4665c1725019924d25b32331c86d",
+    "verification_path": "canonical/verification/CAUSAL_CUT_ADMISSION_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  },
+  "supersedes_if_promoted": "canonical/governance/TERMINAL_DELTA_ADMISSION_GATE_ACTIVE_AUTHORITY_V1.json",
+  "hard_rule": "META_GOVERNANCE_ONLY__NO_TERMINAL_CREDIT__TRUTH_PRESERVING_BUGFIXES_REMAIN_EXEMPT_ONLY_WHEN NEEDED_TO_RESTORE_CANONICAL_STATE",
+  "protected_truth": {
+    "accepted_families": "2_OF_19",
+    "atomic_acceptance": "7_OF_38_PROVED__31_UNRESOLVED",
+    "primitive_residual_cut": "40_FACTS_UNDER_CURRENT_VERIFIED_EDGE_GRAPH",
+    "p1_quarantine": "REMAINS",
+    "terminal_goal_achieved": false
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "RECONCILE_CURRENT_TERMINAL_AUTHORITY_TO_V2_ONLY_AFTER_BRANCH_BASE_IS_CONFIRMED_NONSTALE__PRESERVE_2_OF_19_AND_7_OF_38__NO_FRESH_REALITY"
+}
