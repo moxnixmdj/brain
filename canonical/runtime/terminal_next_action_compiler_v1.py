@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 REGISTRY = ROOT / "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"
 EVIDENCE = ROOT / "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
 HYPERGRAPH = ROOT / "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"
+TOOL_DISCOVERY_SCOPE_CUT = ROOT / "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json"
 
 SCHEMA = "PROJECT_BRAIN_TERMINAL_NEXT_ACTION_COMPILED_V1"
 
@@ -37,6 +38,7 @@ def compile_next_frontier(
     registry: Mapping[str, Any],
     evidence: Mapping[str, Any],
     hypergraph: Mapping[str, Any],
+    tool_discovery_scope_cut: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     ir = compile_ir(registry, evidence, hypergraph)
     if ir.get("status") == "FAIL_CLOSED":
@@ -48,6 +50,37 @@ def compile_next_frontier(
             "promotion_authority": False,
             "new_reality_units_consumed": 0,
         }
+
+    active_action_cuts: dict[str, str] = {}
+    if tool_discovery_scope_cut is not None:
+        expected_status = "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_ROUTE_BLOCKED__TARGET_PRESERVED__ZERO_CREDIT"
+        expected_target = "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+        aid = "BUILD_TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE"
+        if tool_discovery_scope_cut.get("status") != expected_status or tool_discovery_scope_cut.get("target_predicate") != expected_target:
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL_CLOSED",
+                "errors": ["TOOL_DISCOVERY_SCOPE_CUT_AUTHORITY_MISMATCH"],
+                "execution_authority": False,
+                "promotion_authority": False,
+                "new_reality_units_consumed": 0,
+            }
+        matched = False
+        for action in ir["actions"]:
+            if action["id"] == aid:
+                matched = True
+                action["available_now"] = False
+                action["unsatisfied_preconditions"] = sorted(set(action["unsatisfied_preconditions"] + ["ACTIVE_ROUTE_CUT:TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_20261003"]))
+                active_action_cuts[aid] = "TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_20261003"
+        if not matched:
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL_CLOSED",
+                "errors": ["TOOL_DISCOVERY_SCOPE_CUT_ACTION_NOT_FOUND"],
+                "execution_authority": False,
+                "promotion_authority": False,
+                "new_reality_units_consumed": 0,
+            }
 
     live = [a for a in ir["actions"] if a["unresolved_target_predicates"]]
     ranked = sorted(live, key=_rank_key)
@@ -97,6 +130,7 @@ def compile_next_frontier(
         "highest_leverage_blocked_action_preconditions": highest_blocked["unsatisfied_preconditions"] if highest_blocked else [],
         "available_zero_reality_critical_actions": [a["id"] for a in critical_available_zero_reality],
         "available_zero_reality_actions": [a["id"] for a in available_zero_reality],
+        "active_action_cuts": dict(sorted(active_action_cuts.items())),
         "blocked_critical_actions": [
             {
                 "id": a["id"],
@@ -122,7 +156,8 @@ def main() -> int:
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
     evidence = json.loads(EVIDENCE.read_text(encoding="utf-8"))
     hypergraph = json.loads(HYPERGRAPH.read_text(encoding="utf-8"))
-    out = compile_next_frontier(registry, evidence, hypergraph)
+    tool_discovery_scope_cut = json.loads(TOOL_DISCOVERY_SCOPE_CUT.read_text(encoding="utf-8"))
+    out = compile_next_frontier(registry, evidence, hypergraph, tool_discovery_scope_cut)
     print(json.dumps(out, indent=2, sort_keys=True))
     return 0 if out["status"].startswith("PASS") else 1
 
