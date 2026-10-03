@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RETRIEVAL_CROSS_ECOSYSTEM_MANIFEST_BRIDGES_CANDIDATE_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__EXACT_REPO_COMMIT_AND_MANIFEST_BRIDGES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__THREE_DIRECT_MANIFEST_BRIDGES__TYPESCRIPT_REQUIRES_REGISTRY_REVERSE_METADATA__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "bridges": [
     {
       "episode_id": "PACKAGE_TYPED_JS",
@@ -37,11 +37,12 @@
       "episode_id": "PACKAGE_RUST_CLI",
       "repository": "clap-rs/clap",
       "repository_commit": "4be56132cf7a5ef6e237409a13225a5829cb24e4",
-      "manifest_path": null,
-      "manifest_git_blob_sha": null,
-      "manifest_observation": "PUBLISHABLE_CLAP_PACKAGE_MANIFEST_PATH_NOT_YET_RESOLVED",
+      "manifest_path": "Cargo.toml",
+      "manifest_git_blob_sha": "84c434558aef1224e8967ab12ecdb71534a4ae79",
+      "manifest_observation": "WORKSPACE_ROOT_IS_ALSO_THE_PUBLISHED_CLAP_PACKAGE_MANIFEST",
       "expected_package": "clap",
-      "bridge_status": "NEEDS_MANIFEST_OR_REGISTRY_PROOF"
+      "bridge_status": "MANIFEST_DIRECT_MATCH",
+      "manifest_package_name": "clap"
     }
   ],
   "hard_rules": [
