@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from canonical.runtime import astra_runtime
+from canonical.runtime import harbor_science_planner_v1 as science_planner
 from canonical.runtime.harbor_command_policy import validate_environment_command
 from canonical.runtime.harbor_environment_transport import HarborEnvironmentTransport
 
@@ -128,8 +128,10 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
             "Recent observations: " + json.dumps(observations[-4:], sort_keys=True)[:12000]
         )
-        planned = astra_runtime._planner_post(prompt, timeout_s=20)
-        raw = astra_runtime._extract_json_object(planned.get("text", ""))
+        planned = science_planner.plan(prompt, timeout_s=20)
+        raw = science_planner.normalize_proposal_object(
+            science_planner.extract_json_object(planned.get("text", ""))
+        )
         if not isinstance(raw, dict):
             raise RuntimeError("SCIENCE_PLANNER_OBJECT_REQUIRED")
         requirements, candidates, finish_summary = _extract_contract(raw, requirements)

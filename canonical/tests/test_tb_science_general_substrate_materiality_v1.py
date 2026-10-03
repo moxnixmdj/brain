@@ -55,7 +55,7 @@ class MaterialityTests(unittest.TestCase):
         raw=fixed_outputs()[0]
         # The substrate interface returns data only. Parsing the identical proposal
         # without the Brain controller cannot call the Harbor environment.
-        parsed=science.astra_runtime._extract_json_object(json.dumps(raw))
+        parsed=science.science_planner.extract_json_object(json.dumps(raw))
         self.assertEqual(parsed["candidates"][0]["command"],"brain-action")
         self.assertEqual(env.commands,[])
         self.assertEqual(env.state,{})
@@ -63,7 +63,7 @@ class MaterialityTests(unittest.TestCase):
     def test_brain_controller_materially_executes_verifies_and_authorizes_finish(self):
         env=StatefulEnv()
         outputs=fixed_outputs()
-        with patch.object(science.astra_runtime,"_planner_post",planner(outputs)):
+        with patch.object(science.science_planner,"plan",planner(outputs)):
             result=asyncio.run(science.run_science_goal("synthetic science goal",env,max_cycles=2))
         self.assertEqual(env.commands,["brain-action","brain-verify"])
         self.assertEqual(env.state,{"R1":"done"})
@@ -77,7 +77,7 @@ class MaterialityTests(unittest.TestCase):
             {"material_requirements":["R1"],"finish_summary":"premature"},
             {"finish_summary":"still-premature"},
         ]
-        with patch.object(science.astra_runtime,"_planner_post",planner(outputs)):
+        with patch.object(science.science_planner,"plan",planner(outputs)):
             result=asyncio.run(science.run_science_goal("synthetic science goal",env,max_cycles=2))
         self.assertNotEqual(result["status"],"FINISHED")
         self.assertEqual(result["resolved_requirements"],[])
