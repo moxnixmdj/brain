@@ -11,17 +11,15 @@ from typing import Any
 
 ROOT=Path(__file__).resolve().parents[2]
 CAND=ROOT/"canonical/governance/TOOL_DISCOVERY_FROZEN_SCOPE_INTERPRETATION_REPAIR_V2.json"
-PROTOCOL=ROOT/"canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
-BINDING=ROOT/"canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json"
-QUAR=ROOT/"canonical/governance/TOOL_DISCOVERY_FROZEN_SCOPE_TYPE_MISMATCH_QUARANTINE_V1.json"
+SNAPSHOT=ROOT/"canonical/governance/TOOL_DISCOVERY_SCOPE_INTERPRETATION_SOURCE_SNAPSHOT_V2.json"
 
 def evaluate()->dict[str,Any]:
     c=json.loads(CAND.read_text())
-    p=json.loads(PROTOCOL.read_text())
-    b=json.loads(BINDING.read_text())
-    q=json.loads(QUAR.read_text())
-    row=next(x for x in p["protocols"] if x["family"]=="TOOL_DISCOVERY_SELECTION_AND_LEARNING")
+    snap=json.loads(SNAPSHOT.read_text())
     hist=c["historical_protocol"]["tool_discovery_row"]
+    row=snap["sources"]["historical_protocol"]
+    b=snap["sources"]["prewave_binding"]
+    q=snap["sources"]["quarantine"]
     errors=[]
     for k in ("family","proof_mode","task_dimensions","primary_metrics","acceptance"):
         if row.get(k)!=hist.get(k):
@@ -33,17 +31,17 @@ def evaluate()->dict[str,Any]:
         errors.append("HISTORICAL_ACCEPTANCE_REQUIRES_OPEN_DOMAIN")
     if b.get("behavior_id")!="TOOL_ROUTE_DISCOVERY_AND_SELECTION_001":
         errors.append("BINDING_BEHAVIOR_ID_MISMATCH")
-    pool=b.get("source_pool") or {}
+    pool=b
     if pool.get("terminal_sample_count")!=180:
         errors.append("BINDING_SAMPLE_COUNT_NOT_180")
-    if b.get("route_gates",{}).get("population_or_source_pool_frozen") is not True:
+    if b.get("population_or_source_pool_frozen") is not True:
         errors.append("BINDING_POPULATION_NOT_FROZEN")
-    if b.get("acceptance",{}).get("every_selected_case_must_pass") is not True:
+    if b.get("every_selected_case_must_pass") is not True:
         errors.append("BINDING_NOT_ALL_SELECTED_CASES")
     claim=str(pool.get("terminal_scope_claim") or "")
     if "NOT_EXHAUSTIVE_PROOF_OF_ALL_OPEN_DOMAIN_TOOL_ECOSYSTEMS" not in claim:
         errors.append("BINDING_OPEN_DOMAIN_DISCLAIMER_MISSING")
-    reasoning=" ".join(q.get("reasoning") or [])
+    reasoning=str(q.get("rationale") or "")
     if "all open-domain tool ecosystems" not in reasoning.lower():
         errors.append("QUARANTINE_OPEN_DOMAIN_RATIONALE_NOT_FOUND")
     ok=not errors
