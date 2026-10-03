@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__V12_V4_POST_DUAL_ADAPTIVE_PARALLEL_ZERO_REALITY_CONTROLLER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "bound_current_scheduling_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "bc578e6db4eedcefbed61f6860e1cc5192cf05f4",
+    "required_status_prefix": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V12_CURRENT"
+  },
+  "inputs": {
+    "current_zero_reality_frontier": {
+      "path": "canonical/governance/CURRENT_27_ZERO_REALITY_FRONTIER_V2.json",
+      "git_blob_sha": "bab3876a1c4bd6a065d20d42b320df4b4b3fa519"
+    },
+    "current_zero_reality_frontier_verification": {
+      "path": "canonical/verification/CURRENT_27_ZERO_REALITY_FRONTIER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "ac56cdefc44aa9a9b649945d10e84c84ee9945be"
+    },
+    "post_dual_frontier": {
+      "path": "canonical/governance/POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_V1.json",
+      "git_blob_sha": "3b62096fdba09a41096f9aba12f9ec04d810cac8"
+    },
+    "post_dual_frontier_verification": {
+      "path": "canonical/verification/POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f7f60a5932ac305aa0db8aef2643119dd10b33d9"
+    },
+    "matched_scope_abductive_residual_v2": {
+      "path": "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json",
+      "git_blob_sha": "438e2775b64bee5ed6e792522ab35ebd0d6e1771"
+    },
+    "matched_scope_verification": {
+      "path": "canonical/verification/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_EXECUTION_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "git_blob_sha": "9915c55fe6a9da6d47c0e58476722a116d7cb0ec"
+    },
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "3cbbcd1ddabde7dbf4c3f4d118bdb9d78d0c8605"
+    }
+  },
+  "controller": {
+    "path": "canonical/runtime/adaptive_terminal_closure_controller_v2.py",
+    "git_blob_sha": "3d3c3c788593a5bf55e76b6e5f15f61f886e641b"
+  },
+  "tests": {
+    "path": "canonical/tests/test_adaptive_terminal_closure_controller_v2.py",
+    "git_blob_sha": "9ec7c9eedb42a92b6b4a0646b24e0d40b60b987a"
+  },
+  "supersession": {
+    "historical_controller": "canonical/runtime/adaptive_terminal_closure_controller_v1.py",
+    "historical_activation": "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json",
+    "rule": "V1_REMAINS_IMMUTABLE_HISTORICAL_V10_V3_VERIFIED_SUBJECT__V2_OWNS_CURRENT_V12_V4_SCHEDULING"
+  },
+  "policy": {
+    "run_all_zero_reality_work_units_concurrently": true,
+    "primitive_zero_reality_work_units": 31,
+    "matched_scope_first_resource_priority_without_serialization": true,
+    "matched_child_fact_count": 16,
+    "direct_nonmatched_zero_reality_work_units": 15,
+    "zero_reality_covered_predicates": 25,
+    "direct_reality_blocked_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "recompute_after_every_independently_verified_delta": true,
+    "cancel_newly_dominated_branches": true,
+    "ownership_reconciliation_parallel_with_acceptance": true,
+    "empirical_probabilities_scheduling_only": true,
+    "missing_probabilities": "UNKNOWN_NOT_INVENTED",
+    "fresh_reality_authority": false,
+    "tool_discovery_retrieval": "V4_OVER_VERIFIED_V3_OVER_VERIFIED_V2_BASE_MANDATORY"
+  },
+  "expected_live_world": {
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "current_acceptance": "4/19_PASS__15/19_OPEN",
+    "nondominated_certificates": 14,
+    "unique_zero_reality_requirements": 17,
+    "zero_reality_covered_predicates": 25,
+    "direct_reality_blocked_predicate_count": 2,
+    "matched_targets": 8,
+    "matched_primitive_child_facts": 16,
+    "primitive_acceptance_work_units": 31,
+    "ownership_reconciliation_work_units": 2
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_CREDIT_FROM_SCHEDULING",
+    "NO_FAMILY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_BEFORE_VERIFIED_ZERO_REALITY_FIXED_POINT",
+    "TOOL_DISCOVERY_MUST_USE_CURRENT_V12_BOUND_V4_OVER_VERIFIED_V3_OVER_VERIFIED_V2_BASE_RETRIEVAL_AUTHORITY",
+    "DIRECT_FINANCE_AND_UNKNOWN_DOMAIN_REALITY_REMAINS_GLOBALLY_BLOCKED",
+    "EMPIRICAL_PROBABILITIES_MAY_ORDER_RESOURCES_BUT_CAN_NEVER_SUBSTITUTE_FOR_PROOF",
+    "UNKNOWN_PROBABILITIES_MUST_NOT_BE_INVENTED",
+    "RECOMPUTE_AND_CANCEL_DOMINATED_BRANCHES_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
