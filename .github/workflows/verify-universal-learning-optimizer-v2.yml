@@ -1,0 +1,65 @@
+name: Verify universal learning optimizer v2
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/UNIVERSAL_LEARNING_OPTIMIZER_V2.json"
+      - "canonical/runtime/universal_learning_optimizer_v2.py"
+      - "canonical/tests/test_universal_learning_optimizer_v2.py"
+      - "canonical/tests/test_universal_learning_optimizer_binding_v2.py"
+      - ".github/workflows/verify-universal-learning-optimizer-v2.yml"
+  push:
+    paths:
+      - "canonical/governance/UNIVERSAL_LEARNING_OPTIMIZER_V2.json"
+      - "canonical/runtime/universal_learning_optimizer_v2.py"
+      - "canonical/tests/test_universal_learning_optimizer_v2.py"
+      - "canonical/tests/test_universal_learning_optimizer_binding_v2.py"
+      - ".github/workflows/verify-universal-learning-optimizer-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run optimizer V2 tests
+        id: tests
+        shell: bash
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_universal_learning_optimizer_v2 canonical.tests.test_universal_learning_optimizer_binding_v2 -v > v2-test-output.txt 2>&1
+          code=$?
+          cat v2-test-output.txt
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit "$code"
+      - name: Upload optimizer V2 test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universal-learning-optimizer-v2-test-output
+          path: v2-test-output.txt
+      - name: Verify optimizer boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime import universal_learning_optimizer_v2 as opt
+          root=Path('.')
+          gov=json.loads((root/'canonical/governance/UNIVERSAL_LEARNING_OPTIMIZER_V2.json').read_text())
+          out=opt.prove_optimizer_invariants()
+          assert out['pass'] is True, out
+          assert out['v1_required_as_safety_gate'] is True, out
+          assert out['semantic_success_rate_proved'] is False, out
+          assert out['unknown_domain_acceptance_proved'] is False, out
+          assert out['acceptance_credit_delta']==0, out
+          assert gov['status'].startswith('CANDIDATE__'), gov['status']
+          PY
