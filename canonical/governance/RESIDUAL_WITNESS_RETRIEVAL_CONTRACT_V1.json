@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_WITNESS_RETRIEVAL_CONTRACT_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_INTERFACE_CONTRACT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "VERIFIED_CONTROL_CONTRACT__REAL_BACKEND_COMPLETENESS_OPEN__ZERO_CREDIT",
   "objective": "For each exact unresolved acceptance residual, find the minimum sufficient independently verified witness without treating incomplete retrieval as evidence of nonexistence.",
   "input_contract": {
     "required": [
@@ -64,5 +64,6 @@
   "family_credit_delta": 0,
   "capability_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification": "canonical/verification/RESIDUAL_WITNESS_RETRIEVAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
 }
