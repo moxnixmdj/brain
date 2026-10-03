@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_EXTERNAL_BENCHMARK_DOMINANCE_GATE_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__PRE_EXECUTION_DELETION_GATE__ZERO_CREDIT",
+  "objective": "Force exact existing Opus 5.5 benchmark reuse and verified external exact-or-superset substitution before bespoke evaluation or fresh reality.",
+  "candidate": {
+    "path": "canonical/governance/EXTERNAL_BENCHMARK_DOMINANCE_CANDIDATE_V1.json",
+    "git_blob_sha": "338fb50828825afd6c12eecebe192532543c616b"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/EXTERNAL_BENCHMARK_DOMINANCE_V1_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1383,
+    "verifier_merge_commit": "bcf010b62ec52af34e11948971026351186e281e",
+    "workflow_run_id": 37150278950,
+    "workflow_job_id": 111282524848,
+    "conclusion": "success"
+  },
+  "active_policy": {
+    "public_fixed_bar_route": "REUSE_EXACT_EXISTING_BENCHMARK",
+    "matched_or_direct_scope_route": "SEARCH_EXISTING_EXTERNAL_BENCHMARKS__ADMIT_ONLY_VERIFIED_EXACT_OR_SUPERSET__OTHERWISE_PRESERVE_RESIDUAL",
+    "custom_benchmark_route": "LAST_RESORT_ONLY_AFTER_FAIL_CLOSED_EXTERNAL_DOMINANCE_SWEEP",
+    "fresh_reality_route": "FORBIDDEN_UNTIL_BENCHMARK_DOMINANCE_AND_EXISTING_RECEIPT_SATURATION_FIXED_POINT"
+  },
+  "current_result": {
+    "public_fixed_bars_reuse_only": 15,
+    "matched_targets_external_adjudication_complete": 8,
+    "verified_external_full_substitutions": 0,
+    "predicates_closed_by_this_gate": 0,
+    "families_closed_by_this_gate": 0
+  },
+  "hard_rules": [
+    "EXACT_EXISTING_OPUS55_BENCHMARK_DOMINATES_CUSTOM_REPLACEMENT",
+    "PARTIAL_EXTERNAL_COVERAGE_NEVER_COUNTS_AS_EXACT_OR_SUPERSET",
+    "NO_HARNESS_OR_POPULATION_MISMATCH_WITHOUT_ALIGNMENT_PROOF",
+    "NO_PRIVATE_DATA_ACCESS_ASSUMPTION",
+    "NO_FRESH_REALITY_FROM_THIS_GATE",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT"
+  ],
+  "next": "RECOMPUTE_CURRENT_ZERO_REALITY_FRONTIER_WITH_BENCHMARK_DOMINANCE_PRECEDENCE__SATURATE_EXISTING_RECEIPTS__THEN_AUTHORIZE_ONLY_IRREDUCIBLE_FRESH_EVALUATION",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
