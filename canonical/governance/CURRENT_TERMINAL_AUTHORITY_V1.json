@@ -888,8 +888,8 @@
     },
     "root2_root3_minimum_execution_frontier_v1": {
       "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
-      "git_blob_sha": "b8dd84fbe2c7ba5cddf6d9fb6baad32a7ca91038",
-      "status": "ACTIVE__ROOT3_ZERO_RUNNABLE_ACTIONS__ROOT2_ROUTE_BINDING_ACTIVE__HLE_FULL_2500_CORRECTED__ZERO_CREDIT"
+      "git_blob_sha": "4adb0e9642e26566e4e413e8a1951603b9013168",
+      "status": "ACTIVE__ROOT2_LIVE_ZERO_REALITY_FRONTIER_COMPRESSED__ROOT3_ZERO_RUNNABLE_EVENTS__ZERO_CREDIT"
     },
     "current_witness_target_totalization_v2_candidate": {
       "path": "canonical/governance/CURRENT_WITNESS_TARGET_TOTALIZATION_V2_CANDIDATE.json",
@@ -898,8 +898,8 @@
     },
     "root2_fixed_bar_route_inventory_v1": {
       "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-      "git_blob_sha": "16f82fed36c184b9630fedddebf9d8c52aa67d2d",
-      "status": "ACTIVE__15_ROOT2_PREDICATES__14_UNIQUE_SURFACES__HLE_FULL_2500_VENDOR_ROUTE_CORRECTED__TB_SCIENCE_AND_LIVEBENCH_SCORE_ONLY__ZERO_CREDIT"
+      "git_blob_sha": "b273b4313d329e962ac749151d086e2b1e93c5ca",
+      "status": "ACTIVE__15_ROOT2_PREDICATES__14_UNIQUE_SURFACES__SEARCH_COMPRESSED__HLE_ADAPTER_DISCHARGED__ZERO_CREDIT"
     },
     "root3_residual_compression_v1": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
@@ -918,8 +918,8 @@
     },
     "current_zero_reality_minimum_cut_v8": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
-      "git_blob_sha": "c0486fd7430255e1376d7f1f179c1621861d89ec",
-      "status": "CANDIDATE__TB_SCIENCE_CARRIER_ATTAINABILITY_DISCHARGED__CURRENT_BOUND_ZERO_REALITY_SEARCH_COMPRESSED__ZERO_CREDIT"
+      "git_blob_sha": "8aba43f58cbf9b14aacc1aa259b2a63c32044fbb",
+      "status": "ACTIVE_CANDIDATE__ROOT2_ROUTE_SEARCH_COMPRESSED__HLE_ADAPTER_DISCHARGED__NO_FRESH_REALITY__ZERO_CREDIT"
     },
     "current_v8_post_compression_verification_binding": {
       "path": "canonical/governance/CURRENT_V8_POST_COMPRESSION_VERIFICATION_BINDING_V1.json",
@@ -989,6 +989,27 @@
       "structural_residual_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V5_STRUCTURAL_RESIDUAL_REDUCTION_V1.json",
       "structural_residual_reduction_git_blob_sha": "339e58163573785ef217fbd59df7790c576a2777",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__OPERATIVE_UNKNOWN_DOMAIN_LEARNING_OVERLAY_V5__TWO_FROZEN_LEAVES_PRESERVED__ZERO_CREDIT"
+    },
+    "root2_route_compression_v2": {
+      "path": "canonical/governance/ROOT2_ROUTE_COMPRESSION_V2_20261004.json",
+      "git_blob_sha": "dc826cd30a26ed76e8af487dbf722ef872098fbc",
+      "verification_path": "canonical/verification/ROOT2_ROUTE_COMPRESSION_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "288f0924157b0c0af0ff6bf302a56944f69f2fba",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_REALITY_SEARCH_DELETION__ZERO_CREDIT"
+    },
+    "osworld_v21_self_host_source_boundary": {
+      "path": "canonical/governance/OSWORLD_V21_SELF_HOST_SOURCE_BOUNDARY_V1.json",
+      "git_blob_sha": "f58c12d5c42e1e6b7cdda05d52f978469f3aa300",
+      "verification_path": "canonical/verification/OSWORLD_V21_SELF_HOST_SOURCE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "4290221e46c05af4c4cb4bc479c800564d9a41c2",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SOURCE_GRAPH_COMPRESSED__ZERO_CREDIT"
+    },
+    "hle_opus55_tool_adapter_activation_v1": {
+      "path": "canonical/governance/HLE_OPUS55_TOOL_ADAPTER_ACTIVATION_V1.json",
+      "git_blob_sha": "95b5b520a8eb9b288e6818bf591a7ab9de379fd5",
+      "verification_path": "canonical/verification/HLE_OPUS55_TOOL_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "942cd3032f8e1c53555f2df0810f82c86273f9ae",
+      "status": "ACTIVE__INDEPENDENTLY_VERIFIED__ZERO_CREDIT"
     }
   },
   "residual": [
@@ -1628,7 +1649,7 @@
     "execution_authority": false,
     "promotion_authority": false
   },
-  "next_terminal_action": "VERIFY_ONLY_REMAINING_ROOT2_SCORER_CARRIER_ACCESS_ADAPTER_GAPS__HLE_FULL_2500_NOT_DIAMOND__NO_GENERIC_ROOT1_OR_ROOT3_SEARCH__NO_TERMINAL_CASE_EXECUTION_BEFORE_FIXED_POINT",
+  "next_terminal_action": "ROOT2_ONLY_LIVE_ZERO_REALITY_FRONTIER__NO_ROOT1_WORK__ROOT3_ZERO_CURRENT_RUNNABLE_EVENTS__HLE_FULL_2500_ACCOUNT_ACCESS_OPUS4_6_GRADER__CHARTOGRAPHY_PROJECT_CAPACITY_FOR_1000_CALLS__OSWORLD_HF_ACCOUNT_GITLAB_SELF_HOST_PROTOCOL__GDPVAL_FINANCE_AND_MATERIAL_STRONGER_PROOFS__NO_AUTOMATIONBENCH_PUBLIC600_REPEAT__NO_HLE_ADAPTER_REPEAT__NO_TERMINAL_CASE_EXECUTION_BEFORE_FIXED_POINT",
   "ownership_state": {
     "verified_owned_families": 5,
     "total_families": 19,
