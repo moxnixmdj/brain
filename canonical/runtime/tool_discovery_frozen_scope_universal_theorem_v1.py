@@ -19,7 +19,7 @@ EXPECTED={
 }
 def blob(path:str)->str:
     b=(ROOT/path).read_bytes()
-    return hashlib.sha1(f"blob {len(b)}".encode()+b"\\x00"+b).hexdigest()
+    return hashlib.sha1(f"blob {len(b)}".encode()+b"\x00"+b).hexdigest()
 def load(path:str)->dict[str,Any]:
     return json.loads((ROOT/path).read_text(encoding="utf-8"))
 def find_behavior(obj:Any,bid:str)->Mapping[str,Any]|None:
