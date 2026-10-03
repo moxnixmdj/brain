@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_ACCOUNTING_INDEX_IDENTITY_RECONCILIATION_V1",
+  "date": "2026-10-03",
+  "status": "PRIMARY_SOURCE_IDENTITY_RESOLVED__EXACT_REPRODUCIBLE_BRAIN_SCORE_ROUTE_OPEN__ZERO_CREDIT",
+  "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+  "resolved_identity": {
+    "owner": "Artificial Analysis",
+    "surface": "Finance & Accounting Index",
+    "opus55_target": 61,
+    "higher_is_better": true,
+    "primary_source": "https://artificialanalysis.ai/models/capabilities/finance-and-accounting",
+    "methodology": "https://artificialanalysis.ai/methodology/capability-indices",
+    "benchmark_methodology": "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+  },
+  "published_composition": [
+    {"capability":"Business Knowledge","weight":0.30,"evaluations":["AA-Omniscience Business Accuracy"]},
+    {"capability":"Agentic Knowledge Work","weight":0.30,"evaluations":["GDPval-AA v2.1","AA-Briefcase v1.1"]},
+    {"capability":"Reasoning","weight":0.20,"evaluations":["Humanity's Last Exam"]},
+    {"capability":"Agentic Tool Use","weight":0.10,"evaluations":["AutomationBench-AA Finance"]},
+    {"capability":"Long-Context","weight":0.05,"evaluations":["AA-LCR v1.1","GDP.pdf"]},
+    {"capability":"Non-Hallucination","weight":0.05,"evaluations":["AA-Omniscience Business Non-Hallucination"]}
+  ],
+  "primary_source_facts": [
+    "INDEX_IS_A_WEIGHTED_COMPOSITE_OF_FINANCE_AND_ACCOUNTING_CAPABILITY_SUBSCORES",
+    "ALL_UNDERLYING_BENCHMARKS_ARE_RUN_INDEPENDENTLY_BY_ARTIFICIAL_ANALYSIS",
+    "OPUS_5_5_MAX_DEFAULT_FALLBACK_IS_PUBLISHED_AT_61",
+    "FREE_ARTIFICIAL_ANALYSIS_API_EXISTS_FOR_PRIMARY_MODEL_BENCHMARK_METRICS_BUT_THIS_RECONCILIATION_DOES_NOT_ASSUME_IT_EXPOSES_ALL_TASK_LEVEL_INPUTS_OR_A_REPRODUCIBLE_CAPABILITY_INDEX_EXECUTION_HARNESS"
+  ],
+  "remaining_route_blocker": "EXACT_BRAIN_SCORE_PRODUCTION_ROUTE_NOT_YET_CONTENT_ADDRESSED__NEED_COMPONENT_INPUT_HARNESS_SCORER_NORMALIZATION_AND_AGGREGATION_SEMANTICS_SUFFICIENT_TO_PRODUCE_A_COMPARABLE_INDEX_VALUE_OR_AN_INDEPENDENTLY_PROVED_EQUIVALENT_ROUTE",
+  "hard_nonclaims": [
+    "IDENTITY_RESOLUTION_IS_NOT_BRAIN_SCORE_PROOF",
+    "PUBLISHED_COMPONENT_WEIGHTS_DO_NOT_BY_THEMSELVES_PROVE_TASK_LEVEL_REPRODUCIBILITY",
+    "DO_NOT_INFER_PRIVATE_OR_INTERNAL_EVALUATION_INPUTS_FROM_PUBLIC_INDEX_DOCUMENTATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": "ENUMERATE_COMPONENT_BY_COMPONENT_PUBLIC_REPRODUCIBILITY_AND_NORMALIZATION_REQUIREMENTS__REUSE_ALREADY_BOUND_GDPVAL_AA_BRIEFCASE_HLE_AUTOMATIONBENCH_AND_GDP_PDF_ROUTE_WORK__SEARCH_ONLY_FOR_THE_INCREMENTAL_AA_OMNISCIENCE_AND_LCR_PLUS_INDEX_AGGREGATION_DELTA",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
