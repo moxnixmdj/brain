@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_DUAL_JUDGMENT_CURRENT_ROUTE_SELECTION_V1",
+  "date": "2026-10-03",
+  "status": "CURRENT_BASE_CANDIDATE__DEPENDENCY_BYTES_IDENTICAL__INDEPENDENT_VERIFICATION_PENDING__ZERO_CREDIT",
+  "target_predicates": [
+    "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+  ],
+  "source_candidate_pull_request": 1037,
+  "current_base_commit": "6f3a7dd8a5c989efff67a7e4d33882179ee99ab9",
+  "envelope": "canonical/capabilities/opus55/DUAL_JUDGMENT_CONTROL_ENVELOPE_V1.json",
+  "runtime": "canonical/runtime/judgment_control_envelope_v1.py",
+  "tests": "canonical/tests/test_judgment_control_envelope_v1.py",
+  "dependency_identity": {
+    "source_traceable_semantic_ir": "cf40b0b4d8f71f15f0140f009b602ff913db6750",
+    "semantic_identifiability_gate": "74facea74f6590bed57a916a9f6cebc10d6d614a",
+    "finite_identifiability": "c2bf32dd1e22f00a2fa08b043aa8275a07c05bed",
+    "semantic_operator_counterfactuals": "494d72ed2d5d10e0a3b3f421d0f5de81fb1e5730",
+    "evidence_decision_synthesis": "d7c73c24d2038c40bfb38ea6f10749a15a2d5415"
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1037,
+    "repaired_workflow_commit": "5a84784bfad9b1ef8db900792fd796be9164d931",
+    "prior_result": "ENVELOPE_TESTS_PASS__SOURCE_GATE_V2_TESTS_PASS__FINAL_EMIT_FAILED_ONLY_DUE_DIRECT_FILE_IMPORT_MODE",
+    "current_state": "RERUN_QUEUED_AFTER_PACKAGE_MODULE_INVOCATION_FIX"
+  },
+  "hard_rules": [
+    "NO_FINANCE_OR_UNKNOWN_DIRECT_LEAF_CREDIT_BEFORE_INDEPENDENT_VERIFICATION_AND_SOURCE_GATE",
+    "NO_MODEL_STANDALONE_OWNERSHIP_CLAIM",
+    "NO_HIDDEN_ORACLE_OR_BENCHMARK_CASE_CONTENT_CONSUMED_BY_ZERO_CASE_MATERIALITY_VERIFICATION",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_PROMOTION_OR_EXECUTION_AUTHORITY_FROM_CONFIGURATION_ALONE"
+  ],
+  "next": "ON_INDEPENDENT_VERIFIER_PASS__PROMOTE_ONLY_OPERATIVE_ROUTE_SOURCE_GATE_ELIGIBILITY__THEN_AUTHORIZE_ONLY_TWO_FROZEN_FINANCE_AND_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_ORACLE_LEAVES",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
