@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "POSTWAVE_SCOPE_QUARANTINE_RECONCILED__RAW_TERMINAL_3352_OF_3352_PASS__11_OF_19_UNAFFECTED_BEHAVIORAL_FAMILY_ROWS_PASS__8_P1_DEPENDENT_ROWS_QUARANTINED__2_ACCEPTANCE_CLOSED__2_VERIFIED_OWNED__17_ACCEPTANCE_OPEN",
+  "status": "POSTWAVE_SCOPE_QUARANTINE_RECONCILED__RAW_TERMINAL_3352_OF_3352_PASS__11_OF_19_UNAFFECTED_BEHAVIORAL_FAMILY_ROWS_PASS__8_P1_DEPENDENT_ROWS_QUARANTINED__3_ACCEPTANCE_CLOSED__2_VERIFIED_OWNED__16_ACCEPTANCE_OPEN",
   "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -391,11 +391,11 @@
         "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json"
       ],
       "internalization_required": false,
-      "ownership_note": "Scoped mechanical delegation/coordination remains Brain-owned and reusable. Full Opus55 family acceptance is REOPENED: the prior 132-case absolute-dominance witness lacks an independently verified protocol-wide exact, exhaustive-finite, or universal scope-completeness certificate.",
+      "ownership_note": "Scoped delegation/coordination remains Brain-owned and reusable. The frozen Opus55 acceptance protocol is now independently closed by universal formal scope completeness plus the existing theoretical-ceiling witness. This acceptance closure does not by itself promote whole-family ownership beyond the separately verified owned component.",
       "internalized_configuration": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json"
       ],
-      "next_required_action": "SEARCH_EXISTING_IMMUTABLE_PROOFS_FOR_DELEGATION_SCOPE_COMPLETE_CERTIFICATE__NO_REPLAY__ONLY_IRREDUCIBLE_UNCERTAINTY_MAY_AUTHORIZE_NEW_REALITY",
+      "next_required_action": "PRESERVE_ACCEPTANCE_PASS__NO_REPLAY__OWNERSHIP_PROMOTION_REMAINS_SEPARATE_FROM_ACCEPTANCE_ACCOUNTING",
       "candidate_internalization_routes": [
         {
           "repo": "Alibaba-NLP/DeepResearch",
@@ -404,12 +404,12 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "SEARCH_EXISTING_IMMUTABLE_PROOFS_FOR_DELEGATION_SCOPE_COMPLETE_CERTIFICATE__NO_REPLAY__ONLY_IRREDUCIBLE_UNCERTAINTY_MAY_AUTHORIZE_NEW_REALITY",
+      "campaign_next_action": "PRESERVE_ACCEPTANCE_PASS__NO_REPLAY__DO_NOT_REOPEN_WITHOUT_CONTENT_ADDRESSED_COUNTEREVIDENCE",
       "postwave_terminal_behavioral_status": "PASS",
-      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN__REOPENED_ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
+      "postwave_opus55_acceptance_status": "PASS_VIA_ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
       "postwave_ownership_credit": "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE",
-      "postwave_acceptance_evidence": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
-      "postwave_acceptance_witness": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "postwave_acceptance_evidence": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "postwave_acceptance_witness": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
@@ -697,7 +697,7 @@
     "whole_scope_contracts_quarantined": 1,
     "quarantined_behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
     "verified_owned_equal_or_better_count": 2,
-    "acceptance_protocol_result_open_count": 17,
+    "acceptance_protocol_result_open_count": 16,
     "verified_owned_equal_or_better_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
       "LONG_HORIZON_MEMORY_AND_CONTINUITY"
@@ -713,7 +713,6 @@
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
       "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "SUBAGENT_DELEGATION_AND_COORDINATION",
       "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "ARTIFACT_CREATION",
       "COMMUNICATION_AND_SYNTHESIS",
@@ -724,21 +723,21 @@
     "rule": "ROW_MECHANISM_STATUS_IS_HISTORICAL_ROUTE_CONTEXT__CURRENT_BEHAVIORAL_SCOPE_CREDIT_OBEYS_INDEPENDENT_P1_QUARANTINE_PROPAGATION__CURRENT_OPUS55_ACCEPTANCE_OBEYS_SCOPE_COMPLETE_ACCEPTANCE_AUTHORITY"
   },
   "postwave_acceptance_summary": {
-    "calibrated_family_count": 2,
+    "calibrated_family_count": 3,
     "verified_owned_family_count": 2,
-    "pending_acceptance_family_count": 17,
+    "pending_acceptance_family_count": 16,
     "calibrated_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
-      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
-    ],
-    "reopened_scope_incomplete_families": [
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
       "SUBAGENT_DELEGATION_AND_COORDINATION"
     ],
-    "authority": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+    "reopened_scope_incomplete_families": [
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "authority": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "atomic_acceptance": {
-      "proved": 7,
-      "unresolved": 31,
+      "proved": 8,
+      "unresolved": 30,
       "total": 38
     },
     "promotion_authority": false,
