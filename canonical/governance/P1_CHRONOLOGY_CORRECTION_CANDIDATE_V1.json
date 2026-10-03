@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_P1_CHRONOLOGY_CORRECTION_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "brain_authority_pr": 1256,
+  "brain_authority_merge_sha": "0a90772212ecb92d6405476a6795be20b50086df",
+  "brain_authority_merged_at": "2026-10-03T07:56:23Z",
+  "authority_file": "canonical/governance/P1_PUBLIC_RECOVERY_CARRIER_EXECUTION_AUTHORITY_V1.json",
+  "authority_blob_at_merge": "365c098d4763ddfacf660f77457cbac08f5ac72e",
+  "authority_execution_flag_at_merge": true,
+  "frozen_activation_condition": "THIS_FILE_MUST_BE_PRESENT_ON BRAIN MAIN BEFORE VERIFIER PR_1245 IS MERGED TO VERIFIER MAIN; ONLY THE FIRST PUBLIC CARRIER RUN MAY CONSUME THE ONE AUTHORIZED REALITY_UNIT",
+  "verifier_execution_pr": 1245,
+  "verifier_execution_merge_sha": "e489b191363c52c838b720cd759c99f638170c67",
+  "verifier_execution_merged_at": "2026-10-03T07:58:07Z",
+  "execution_run_id": 37108111537,
+  "execution_created_at": "2026-10-03T07:58:11Z",
+  "execution_started_at": "2026-10-03T07:58:17Z",
+  "chronology_seconds_authority_before_verifier_merge": 104,
+  "chronology_seconds_authority_before_execution_start": 114,
+  "later_pr_1258_role": "REDUNDANT_LATER_ACTIVATION_ATTEMPT__NOT_REFERENCED_BY_FROZEN_ACTIVATION_CONDITION",
+  "derived_if_independently_verified": {
+    "activation_condition_satisfied": true,
+    "prior_sequence_violation_verdict_false": true,
+    "execution_order_admissible": true
+  },
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
