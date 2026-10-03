@@ -1,5 +1,4 @@
 from __future__ import annotations
-import copy
 import json
 import unittest
 from pathlib import Path
@@ -25,70 +24,62 @@ class DelegationTemporalCeilingTransmutationTests(unittest.TestCase):
     def row(self, out, family):
         return next(r for r in out["families"] if r["family"] == family)
 
-    def test_exact_live_integration_closes_delegation_as_fourth_family(self):
+    def test_historical_delegation_transport_remains_verified_but_current_protocol_is_already_pass(self):
         self.assertIn("INDEPENDENT_PUBLIC_RUNNER_PASS", self.transport_verification["status"])
         self.assertTrue(self.witness["verified"])
         self.assertTrue(self.witness["independent"])
+
         out = evaluate(self.protocols, self.input)
         self.assertEqual(out["status"], "PASS")
         self.assertEqual(
             (out["family_count"], out["closed_family_count"], out["open_family_count"]),
             (19, 4, 15),
         )
+
         closed = {r["family"] for r in out["families"] if r["result_status"] == "PASS"}
         self.assertEqual(
             closed,
             {
                 "EXACT_SYMBOLIC_COMPUTATION",
                 "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-                "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
                 "SUBAGENT_DELEGATION_AND_COORDINATION",
+                "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
             },
         )
-        row = self.row(out, "SUBAGENT_DELEGATION_AND_COORDINATION")
-        self.assertEqual(row["closure_mode"], "ABSOLUTE_DOMINANCE")
-        self.assertEqual(
-            row["witness_id"],
-            "DELEGATION_TEMPORAL_TERMINAL_CEILING_ABSOLUTE_DOMINANCE_20261002_V1",
-        )
-        self.assertEqual(row["witness_reason"], "THEORETICAL_CEILING_DOMINANCE")
 
-    def test_remove_delegation_witness_reverts_to_three_of_nineteen(self):
-        x = copy.deepcopy(self.input)
+        delegation = self.row(out, "SUBAGENT_DELEGATION_AND_COORDINATION")
+        self.assertEqual(delegation["closure_mode"], "ALREADY_PASS")
+        self.assertIsNone(delegation["witness_id"])
+
+        recovery = self.row(out, "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY")
+        self.assertEqual(recovery["closure_mode"], "ABSOLUTE_DOMINANCE")
+        self.assertEqual(recovery["witness_id"], "RECOVERY_UNIVERSAL_SCOPE_OBJECTIVE_BOUND_20261003_V2")
+
+        tool_discovery = self.row(out, "TOOL_DISCOVERY_SELECTION_AND_LEARNING")
+        self.assertEqual(tool_discovery["result_status"], "DEFINED_RESULT_OPEN")
+
+    def test_removing_recovery_witness_returns_to_three_of_nineteen_without_reopening_delegation(self):
+        x = json.loads(json.dumps(self.input))
         x["evidence"] = [
             e for e in x["evidence"]
-            if e["family"] != "SUBAGENT_DELEGATION_AND_COORDINATION"
+            if e["family"] != "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
         ]
         out = evaluate(self.protocols, x)
         self.assertEqual((out["closed_family_count"], out["open_family_count"]), (3, 16))
         self.assertEqual(
             self.row(out, "SUBAGENT_DELEGATION_AND_COORDINATION")["result_status"],
+            "PASS",
+        )
+        self.assertEqual(
+            self.row(out, "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY")["result_status"],
             "DEFINED_RESULT_OPEN",
         )
 
-    def test_weaken_full_protocol_flag_reverts_delegation_to_open(self):
-        x = copy.deepcopy(self.input)
-        d = next(e for e in x["evidence"] if e["family"] == "SUBAGENT_DELEGATION_AND_COORDINATION")
-        d["closes_entire_protocol"] = False
-        out = evaluate(self.protocols, x)
-        self.assertEqual((out["closed_family_count"], out["open_family_count"]), (3, 16))
-        row = self.row(out, "SUBAGENT_DELEGATION_AND_COORDINATION")
+    def test_tool_discovery_is_not_reintroduced_by_historical_delegation_transport(self):
+        out = evaluate(self.protocols, self.input)
+        row = self.row(out, "TOOL_DISCOVERY_SELECTION_AND_LEARNING")
         self.assertEqual(row["result_status"], "DEFINED_RESULT_OPEN")
-        reasons = [reason for rej in row["rejections"] for reason in rej["reasons"]]
-        self.assertIn("DOES_NOT_CLOSE_ENTIRE_PROTOCOL", reasons)
-
-    def test_unverified_witness_reverts_delegation_to_open(self):
-        x = copy.deepcopy(self.input)
-        d = next(e for e in x["evidence"] if e["family"] == "SUBAGENT_DELEGATION_AND_COORDINATION")
-        d["verified"] = False
-        out = evaluate(self.protocols, x)
-        self.assertEqual((out["closed_family_count"], out["open_family_count"]), (3, 16))
-        reasons = [
-            reason
-            for rej in self.row(out, "SUBAGENT_DELEGATION_AND_COORDINATION")["rejections"]
-            for reason in rej["reasons"]
-        ]
-        self.assertIn("NOT_VERIFIED", reasons)
+        self.assertIsNone(row["witness_id"])
 
 
 if __name__ == "__main__":
