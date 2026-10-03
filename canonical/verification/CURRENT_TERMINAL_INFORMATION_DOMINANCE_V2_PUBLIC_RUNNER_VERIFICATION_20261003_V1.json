@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_INFORMATION_DOMINANCE_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_18_BRAIN_BLOBS__LIVE_27_DOMINANCE__FOUR_FAIL_CLOSED_MUTATIONS__ZERO_REALITY__ZERO_CREDIT",
+  "brain_pull_request": 1313,
+  "verified_runtime": {
+    "path": "canonical/runtime/current_terminal_information_dominance_v2.py",
+    "git_blob_sha": "c98466c0dc66016a898f8d2044cdbb849e7b0f3b"
+  },
+  "verified_tests": {
+    "path": "canonical/tests/test_current_terminal_information_dominance_v2.py",
+    "git_blob_sha": "8e67b17ddc084235cad491e7c42ba0f076ccffc5"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/live27-info-20261003-sol",
+    "head_sha": "92450199f265b02b996fbb869364e9ae24427430",
+    "workflow_run_id": 37117804333,
+    "workflow_job_id": 111187883649,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_blob_count": 18,
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "live_certificate_count": 16,
+    "live_action_count": 21,
+    "live_action_coverage_count": 27,
+    "dominated_certificate_count": 0,
+    "nondominated_certificate_count": 16,
+    "unique_zero_reality_requirement_count": 19,
+    "highest_direct_coverage_certificate": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+    "highest_direct_coverage_count": 8,
+    "full_frontier_covered_predicates": 27,
+    "full_frontier_new_reality_units": 0,
+    "tool_discovery_retrieval_gate_required": true,
+    "tool_discovery_retrieval_gate_pass": true,
+    "recovery_and_delegation_proved_targets_removed": true,
+    "tool_discovery_target_remains_open": true,
+    "mutation_fail_closed_count": 4
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_CLOSED_BY_DOMINANCE",
+    "NO_FAMILY_OR_CAPABILITY_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_PROOF_DIFFICULTY_OR_PROBABILITY_INFERRED_FROM_REQUIREMENT_COUNT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
