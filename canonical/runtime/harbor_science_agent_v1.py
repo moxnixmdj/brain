@@ -93,8 +93,13 @@ def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None)
             raise RuntimeError("SCIENCE_FINISH_SUMMARY_INVALID")
         summary = summary.strip()
     candidates = []
-    if raw.get("candidates") is not None:
-        candidates = _candidate_rows(raw.get("candidates"), set(requirements))
+    primary_candidates = raw.get("candidates")
+    alias_candidates = raw.get("candidate_actions")
+    if primary_candidates is not None and alias_candidates is not None and primary_candidates != alias_candidates:
+        raise RuntimeError("SCIENCE_CANDIDATE_ALIAS_CONFLICT")
+    candidate_rows = primary_candidates if primary_candidates is not None else alias_candidates
+    if candidate_rows is not None:
+        candidates = _candidate_rows(candidate_rows, set(requirements))
     return requirements, candidates, summary
 
 async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycles: int = 8) -> dict[str, Any]:
