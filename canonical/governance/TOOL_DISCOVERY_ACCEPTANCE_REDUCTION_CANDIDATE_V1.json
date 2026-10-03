@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__EXACT_SCOPE_RECEIPT_PLUS_PRESERVED_CEILING_WITNESS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_NEW_REALITY",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "scope_receipt": "canonical/verification/TOOL_DISCOVERY_FROZEN_SCOPE_COMPLETENESS_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "scope_receipt_blob_sha": "1dc22fb6a0816963b5349ed6a55763b2c42a1cb8",
+  "ceiling_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+  "ceiling_witness_blob_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7",
+  "transmuter": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+  "transmuter_blob_sha": "39b5611e53485674b29e2a05da91b89801bc5aa6",
+  "protocols": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+  "protocols_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+  "expected_reduction": {
+    "family_count": 19,
+    "prior_closed_family_count": 3,
+    "resulting_closed_family_count": 4,
+    "resulting_open_family_count": 15,
+    "only_newly_closed_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "basis": "ABSOLUTE_DOMINANCE__THEORETICAL_CEILING__PLUS_EXACT_COMPLETE_TARGET_CASE_UNIVERSE"
+  },
+  "hard_rules": [
+    "NO_NEW_TERMINAL_CASES",
+    "NO_OPUS_CALL_OR_PROXY",
+    "NO_DYNAMIC_V3_PROMOTION_REQUIRED",
+    "NO_OPEN_DOMAIN_SCOPE_CLAIM",
+    "INDEPENDENTLY_VERIFY_REDUCTION_BEFORE_CANONICAL_ACCEPTANCE_PROMOTION"
+  ],
+  "terminal_cases_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
