@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_RECEIPT_SATURATION_REQUEST_V1",
+  "date": "2026-10-03",
+  "status": "REQUESTED__ZERO_REALITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_epoch": {
+    "requested_from_main_commit": "293da1d472079ee745ce12fdc8fa03cfda0cf852",
+    "residual_compiler": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V3_RECONCILIATION_V1.json",
+    "receipt_indexer": "canonical/runtime/proof_atom_receipt_index_v2.py",
+    "proof_atom_basis": "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json"
+  },
+  "action": "SATURATE_EXISTING_RECEIPTS",
+  "required_output": "canonical/reasoning/EXISTING_RECEIPT_SEMANTIC_CANDIDATE_MINING_20261002_V1.json",
+  "hard_rules": [
+    "ZERO_NEW_REALITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_REQUEST",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "REVIEW_ONLY_ORIGINAL_CONTENT_ADDRESSED_CANDIDATES",
+    "STOP_IF_CURRENT_MAIN_SUPERSEDES_THIS_SOURCE_EPOCH"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
