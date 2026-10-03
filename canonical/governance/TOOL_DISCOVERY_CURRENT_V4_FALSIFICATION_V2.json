@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_CURRENT_V4_FALSIFICATION_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_EXACT_CURRENT_V4_COUNTEREXAMPLES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "current_active_v4": {
+    "path": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "git_blob_sha": "e614d0bed8e291e31f57189cd6f0f75aa39b0f74"
+  },
+  "current_authority_claim": "PROGRAM_SIDE_LEAST_COST_ORDERING_REPAIRED",
+  "counterexamples": [
+    {
+      "id": "STALE_RECEIPT_SUPPRESSES_REDISCOVERY",
+      "fact": "_queried_sources counts any DISCOVERY_RESULT source_id with no current decision epoch, completeness, exact query, source epoch, source digest, or source-set binding.",
+      "consequence": "A stale or partial receipt can suppress current discovery and permit selection while a cheaper identity remains undiscovered."
+    },
+    {
+      "id": "DISCOVERED_IDENTITIES_NOT_POLICY_MERGED",
+      "fact": "V4 scans visible_tools only and never merges discovery_receipts[].tools.",
+      "consequence": "A completed receipt can contain a cheaper discovered identity while V4 still selects a more expensive visible identity unless an external mutator performs an unproved merge."
+    },
+    {
+      "id": "PROBE_SAFETY_PERMISSION_NOT_ENFORCED",
+      "fact": "V4 returns PROBE for an unknown required capability without checking explicit safe-probe permission.",
+      "consequence": "The frozen safe-probe-choice obligation is not established by the active V4 bytes."
+    }
+  ],
+  "required_truth_repair": "DO_NOT_TREAT_CURRENT_V4_AS_COMPLETE_PROGRAM_SIDE_CLOSURE__INDEPENDENTLY_VERIFY_THESE_COUNTEREXAMPLES_AND_A_CONVERGED_REPAIR",
+  "repair_candidate": "canonical/runtime/tool_discovery_dynamic_candidate_v5.py",
+  "repair_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V3.json",
+  "current_acceptance_preserved": "3_OF_19__8_OF_38",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
