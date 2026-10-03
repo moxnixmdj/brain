@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_ACTIVATION_V7",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_FAIL_CLOSED__LIVE_30_PREDICATE_WORLD__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Bind live authority to a 30-predicate scheduling world and fail closed on any authority/frontier/action-coverage mismatch before fresh reality execution.",
+  "authority_main_sha": "1789fd5313989875b34e0c6d0325cb1e507ffc1d",
+  "live_authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "expected_acceptance": "3/19_PASS__16/19_OPEN",
+    "expected_atomic": "8_PROVED__30_UNRESOLVED"
+  },
+  "frontier": {
+    "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V6.json",
+    "unresolved_predicates": 30,
+    "certificate_candidates": 16
+  },
+  "action_hypergraph": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V3.json",
+    "expected_unresolved_predicate_coverage": 30
+  },
+  "guard": {
+    "runtime": "canonical/runtime/terminal_live_universe_guard_v1.py",
+    "tests": "canonical/tests/test_terminal_live_universe_guard_v1.py",
+    "rule": "NO_EXECUTION_IF_LIVE_AUTHORITY_COUNT_FRONTIER_SET_OR_ACTION_COVERAGE_DISAGREE"
+  },
+  "information_dominance": {
+    "prior_projection": "STALE_AFTER_31_TO_30_DELEGATION_CLOSURE_AND_P1_RESTORATION",
+    "rule": "RECOMPUTE_ONLY_AFTER_V7_INDEPENDENT_VERIFICATION"
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_SCHEDULER_RECONCILIATION",
+    "NO_FRESH_REALITY_AUTHORIZED_BY_CANDIDATE_V7",
+    "PROVED_DELEGATION_PREDICATE_MUST_NOT_BE_SCHEDULED",
+    "P1_RESTORATION_CHANGES_BEHAVIORAL_SCOPE_ONLY_AND_GRANTS_ZERO_OPUS55_ACCEPTANCE_CREDIT",
+    "FAIL_CLOSED_ON_ANY_UNIVERSE_MISMATCH",
+    "AFTER_ACTIVATION_RECOMPUTE_INFORMATION_DOMINANCE_BEFORE_OBEYING_PREVIOUS_NEXT_ACTION"
+  ],
+  "next": "INDEPENDENT_VERIFY_LIVE_UNIVERSE_GUARD_V1_AND_EXACT_V6_V3_BINDINGS__THEN_ACTIVATE__RECOMPUTE_INFORMATION_DOMINANCE__ONLY_THEN_SELECT_MINIMUM_REALITY_ACTION",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
