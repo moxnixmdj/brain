@@ -9,7 +9,8 @@ assert out["open_world_completeness_claim"] is False
 assert out["case_count"]==13, out["case_count"]
 union=out["best_known_strategy_union"]
 assert union["hit_case_count"]==13, union
-assert union["hit_rate"]==1.0, union\nassert union["miss_case_ids"]==[], union
+assert union["hit_rate"]==1.0, union
+assert union["miss_case_ids"]==[], union
 
 stats=out["route_strategy_stats"]
 assert stats["GITHUB_REPOSITORY_SEARCH::RAW_BEHAVIOR_V1"]["target_hit_count"]==0
