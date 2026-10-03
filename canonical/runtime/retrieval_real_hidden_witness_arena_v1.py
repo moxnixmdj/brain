@@ -72,6 +72,17 @@ def load_catalog(root: Path) -> dict[str, Any]:
     return obj
 
 
+def load_tree_fingerprints(root: Path) -> dict[str, Mapping[str, Any]]:
+    p=root/"canonical/governance/RETRIEVAL_REAL_TREE_FINGERPRINTS_V1.json"
+    obj=json.loads(p.read_text(encoding="utf-8"))
+    if obj.get("schema")!="PROJECT_BRAIN_RETRIEVAL_REAL_TREE_FINGERPRINTS_V1":
+        raise ValueError("TREE_FINGERPRINT_SCHEMA_INVALID")
+    rows=obj.get("fingerprints")
+    if not isinstance(rows,dict):
+        raise ValueError("TREE_FINGERPRINTS_MAPPING_REQUIRED")
+    return rows
+
+
 def _identity_terms(row: Mapping[str, Any]) -> set[str]:
     repo=canon(row.get("repository"))
     name=repo.rsplit("/",1)[-1] if repo else ""
@@ -94,12 +105,13 @@ def _redact_identity(text: str, row: Mapping[str, Any]) -> str:
     return " ".join(kept)
 
 
-def surface_text(row: Mapping[str, Any], *, profile: str, route: str) -> str:
+def surface_text(row: Mapping[str, Any], *, profile: str, route: str, tree_tokens: Sequence[str] | None=None) -> str:
     if profile not in PROFILES or route not in ROUTES:
         raise ValueError("ARENA_PROFILE_OR_ROUTE_INVALID")
     description=canon(row.get("description"))
     topics=" ".join(canon(x) for x in (row.get("topics") or []))
     paths=" ".join(canon(x) for x in (row.get("root_paths") or []))
+    deep_tree=" ".join(canon(x) for x in (tree_tokens or []))
     language=canon(row.get("language"))
     # Repository/id fields are never scored. NO_IDENTITY additionally redacts
     # project-name tokens that leak through descriptions/topics/path names.
@@ -110,7 +122,7 @@ def surface_text(row: Mapping[str, Any], *, profile: str, route: str) -> str:
     elif profile=="STRUCTURAL_ONLY":
         description=""; topics=""
     metadata=" ".join(x for x in (description,topics,language) if x)
-    structure=" ".join(x for x in (paths,language) if x)
+    structure=" ".join(x for x in (paths,deep_tree,language) if x)
     if profile=="NO_IDENTITY":
         metadata=_redact_identity(metadata,row)
         structure=_redact_identity(structure,row)
@@ -156,8 +168,16 @@ def rank(
     *,
     profile: str,
     route: str,
+    tree_fingerprints: Mapping[str,Mapping[str,Any]] | None=None,
 ) -> list[dict[str,Any]]:
-    docs=[surface_text(x,profile=profile,route=route) for x in catalog]
+    tree_fingerprints=tree_fingerprints or {}
+    docs=[
+        surface_text(
+            x,profile=profile,route=route,
+            tree_tokens=(tree_fingerprints.get(str(x.get("id"))) or {}).get("tree_tokens") or [],
+        )
+        for x in catalog
+    ]
     idf=_idf([set(tokens(x)) for x in docs])
     rows=[]
     for target,doc in zip(catalog,docs):
@@ -172,6 +192,15 @@ def rank(
 def evaluate(root: Path) -> dict[str,Any]:
     catalog_obj=load_catalog(root)
     catalog=catalog_obj["targets"]
+    tree_fingerprints=load_tree_fingerprints(root)
+    for target in catalog:
+        fp=tree_fingerprints.get(str(target.get("id")))
+        if not isinstance(fp,Mapping):
+            raise ValueError("TREE_FINGERPRINT_MISSING:"+str(target.get("id")))
+        if fp.get("repository")!=target.get("repository") or fp.get("commit")!=target.get("commit"):
+            raise ValueError("TREE_FINGERPRINT_TARGET_DRIFT:"+str(target.get("id")))
+        if fp.get("truncated") is not False:
+            raise ValueError("TREE_FINGERPRINT_TRUNCATED:"+str(target.get("id")))
     cases=[]
     route_hits={route:set() for route in ROUTES}
     route_top3={route:set() for route in ROUTES}
@@ -185,7 +214,7 @@ def evaluate(root: Path) -> dict[str,Any]:
                 route_results={}
                 for route in ROUTES:
                     started=time.perf_counter_ns()
-                    ranked=rank(catalog,str(query),profile=profile,route=route)
+                    ranked=rank(catalog,str(query),profile=profile,route=route,tree_fingerprints=tree_fingerprints)
                     elapsed=(time.perf_counter_ns()-started)/1_000_000.0
                     latencies[route].append(elapsed)
                     ids=[x["id"] for x in ranked]
@@ -282,6 +311,7 @@ def evaluate(root: Path) -> dict[str,Any]:
         "schema":SCHEMA,
         "status":"MEASURED__FINITE_REAL_TARGET_REPLAY",
         "catalog_target_count":len(catalog),
+        "query_independent_tree_fingerprint_count":len(tree_fingerprints),
         "case_count":n,
         "profiles":list(PROFILES),
         "routes":list(ROUTES),
