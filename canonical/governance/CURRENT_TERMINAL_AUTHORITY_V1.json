@@ -15,12 +15,12 @@
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
       "git_blob_sha": "48bb21479da4bd7e49bd0e1d3324cce34aa8f9a3",
-      "status": "FAIL_CLOSED__P1_SCOPE_QUARANTINE_PROPAGATED__2_OF_19_ACCEPTANCE_PASS__TERMINAL_FALSE"
+      "status": "HISTORICAL_PRE_DELEGATION_BASELINE__P1_SCOPE_QUARANTINE_PROPAGATED__2_OF_19_ACCEPTANCE_PASS__CURRENT_AUTHORITY_USES_VERIFIED_DELTAS"
     },
     "ownership_matrix": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
       "git_blob_sha": "f0fed8856b17f06912ac715b8710d6c0b778291e",
-      "status": "RECONCILED__P1_SCOPE_QUARANTINE__2_OF_19_CURRENT_ACCEPTANCE"
+      "status": "HISTORICAL_PRE_DELEGATION_BASELINE__P1_SCOPE_QUARANTINE__2_OF_19_ACCEPTANCE__CURRENT_AUTHORITY_USES_VERIFIED_DELTAS"
     },
     "acceptance_calibration": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
@@ -292,8 +292,8 @@
     },
     "acceptance_predicate_evidence_bindings_reconciled": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "af83f4899169e81017767c3316ddcf6b61da5ef6",
-      "status": "AUTHORITY_RECONCILED__7_PROVED__31_UNRESOLVED__TWO_SCOPE_INCOMPLETE_ABSOLUTE_CEILING_CLAIMS_REOPENED"
+      "git_blob_sha": "7885a827b1483bfb38315c1f492848f7e4680285",
+      "status": "CURRENT_POST_DELEGATION_AUTHORITY__8_PROVED__30_UNRESOLVED__DELEGATION_SCOPE_COMPLETE"
     },
     "protocol_implication_batch_scope_v2": {
       "path": "canonical/verification/PROTOCOL_IMPLICATION_BATCH_SCOPE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -540,6 +540,15 @@
       "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__DELEGATION_ONLY_NEW_FAMILY_CLOSURE__3_OF_19"
+    },
+    "terminal_projection_consistency_v3": {
+      "runtime_path": "canonical/runtime/terminal_projection_consistency_v3.py",
+      "runtime_git_blob_sha": "1b481df18dec09c16314a677b043725ad24f8ddb",
+      "tests_path": "canonical/tests/test_terminal_projection_consistency_v3.py",
+      "tests_git_blob_sha": "7219727e2605e6bae6b4eee0be09519d46ec118e",
+      "workflow_path": ".github/workflows/verify-terminal-projection-consistency.yml",
+      "workflow_git_blob_sha": "99405021e8be38acb943b2cb94625e74f43a680d",
+      "status": "CANDIDATE_POST_DELEGATION_PROJECTION__BASELINE_PLUS_CONTENT_ADDRESSED_VERIFIED_DELTA__INDEPENDENT_WORKFLOW_VERIFICATION_REQUIRED__ZERO_CREDIT"
     }
   },
   "residual": [
@@ -776,7 +785,7 @@
     "current_effective_canonical_leaf_atoms": 39
   },
   "last_reconciled_control_plane_head": "2747d00fc69c211d02239519dae7045512348992",
-  "last_reconciled_reason": "TOOL_DISCOVERY_DYNAMIC_V3_CONDITIONAL_REFINEMENT_INDEPENDENT_PUBLIC_RUNNER_PASS__PROGRAM_SIDE_FORMALISM_RESIDUAL_REDUCED_TO_ONE_EXTERNAL_COMPLETE_INTERFACE_INSTANCE_FACT__ACCEPTANCE_UNCHANGED",
+  "last_reconciled_reason": "POST_DELEGATION_PROJECTION_CONSISTENCY_V3_CANDIDATE__REPAIRS_STALE_2_OF_19_7_OF_38_CONTROL_PLANE_COUNTERS_WITH_VERIFIED_BASELINE_PLUS_DELEGATION_DELTA__ZERO_CREDIT",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
