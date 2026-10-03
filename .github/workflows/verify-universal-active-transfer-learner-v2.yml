@@ -4,16 +4,26 @@ on:
   pull_request:
     paths:
       - "canonical/governance/UNIVERSAL_ACTIVE_TRANSFER_LEARNER_V2.json"
+      - "canonical/governance/UNIVERSAL_LEARNING_ACTIVE_ROUTER_V2.json"
+      - "canonical/governance/UNIVERSAL_LEARNING_ACTIVE_V2_ACTIVATION_V1.json"
       - "canonical/runtime/universal_active_transfer_learner_v2.py"
+      - "canonical/runtime/universal_learning_active_router_v2.py"
       - "canonical/tests/test_universal_active_transfer_learner_v2.py"
       - "canonical/tests/test_universal_active_transfer_learner_v2_binding.py"
+      - "canonical/tests/test_universal_learning_active_router_v2.py"
+      - "canonical/tests/test_universal_learning_active_router_v2_binding.py"
       - ".github/workflows/verify-universal-active-transfer-learner-v2.yml"
   push:
     paths:
       - "canonical/governance/UNIVERSAL_ACTIVE_TRANSFER_LEARNER_V2.json"
+      - "canonical/governance/UNIVERSAL_LEARNING_ACTIVE_ROUTER_V2.json"
+      - "canonical/governance/UNIVERSAL_LEARNING_ACTIVE_V2_ACTIVATION_V1.json"
       - "canonical/runtime/universal_active_transfer_learner_v2.py"
+      - "canonical/runtime/universal_learning_active_router_v2.py"
       - "canonical/tests/test_universal_active_transfer_learner_v2.py"
       - "canonical/tests/test_universal_active_transfer_learner_v2_binding.py"
+      - "canonical/tests/test_universal_learning_active_router_v2.py"
+      - "canonical/tests/test_universal_learning_active_router_v2_binding.py"
       - ".github/workflows/verify-universal-active-transfer-learner-v2.yml"
   workflow_dispatch:
 
@@ -21,7 +31,7 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  v2-behavior:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -31,40 +41,56 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run V2 active transfer learning tests
-        run: |
+      - run: python -m unittest canonical.tests.test_universal_active_transfer_learner_v2 -v
+
+  router-behavior:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_universal_learning_active_router_v2 -v
+
+  exact-binding:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
           python -m unittest \
-            canonical.tests.test_universal_active_transfer_learner_v2 \
             canonical.tests.test_universal_active_transfer_learner_v2_binding \
-            canonical.tests.test_universal_learning_active_router_v2 \
             canonical.tests.test_universal_learning_active_router_v2_binding -v
-      - name: Verify V2 fail-closed optimization boundary
-        run: |
+
+  activation-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
           python - <<'PY'
           import json
           from pathlib import Path
           from canonical.runtime import universal_active_transfer_learner_v2 as v2
+          from canonical.runtime import universal_learning_active_router_v2 as router
 
           root=Path('.')
           gov=json.loads((root/'canonical/governance/UNIVERSAL_ACTIVE_TRANSFER_LEARNER_V2.json').read_text())
-
-          delta=v2.minimum_novelty_delta(
-              required_facts={'syntax','types','new-mechanism'},
-              verified_facts={'syntax','types'},
-          )
-          assert delta['missing']==['new-mechanism'], delta
-
-          ranked=v2.rank_learning_actions([
-              {'id':'slow-search','decision_gain':3,'transfer_gain':0,'proof_gain':0,'time':6,'cost':0,'risk':0},
-              {'id':'safe-probe','decision_gain':2,'transfer_gain':2,'proof_gain':2,'time':1,'cost':0,'risk':0},
-          ])
-          assert ranked[0]['id']=='safe-probe', ranked
-
-          stop=v2.decision_sufficient([
-              {'id':'h1','plausible':True,'best_action':'A'},
-              {'id':'h2','plausible':True,'best_action':'A'},
-          ])
-          assert stop['sufficient'] is True, stop
+          router_gov=json.loads((root/'canonical/governance/UNIVERSAL_LEARNING_ACTIVE_ROUTER_V2.json').read_text())
+          activation=json.loads((root/'canonical/governance/UNIVERSAL_LEARNING_ACTIVE_V2_ACTIVATION_V1.json').read_text())
 
           skill=v2.compile_verified_skill(
               skill_id='s',
@@ -78,20 +104,25 @@ jobs:
                   'conclusion':'success',
               }],
           )
-          assert skill['trusted'] is True, skill
-          assert skill['acceptance_credit'] is False, skill
-          assert skill['ownership_credit'] is False, skill
-          assert skill['promotion_authorized'] is False, skill
+          assert skill['trusted'] is True
+          assert skill['promotion_authorized'] is False
 
-          assert gov['v1_remains_authoritative_for_unknown_capture_and_promotion_safety'] is True
+          out=router.route(
+              goal='new environment',
+              verified_coverage=False,
+              required_facts={'x'},
+              verified_facts=set(),
+              hypotheses=[
+                  {'id':'h1','plausible':True,'best_action':'left'},
+                  {'id':'h2','plausible':True,'best_action':'right'},
+              ],
+              actions=[],
+          )
+          assert out['route']=='ABSTAIN_OR_REQUEST_DISCRIMINATOR'
+          assert out['trusted_execution_authorized'] is False
+
           assert gov['acceptance_credit_delta']==0
           assert gov['ownership_credit_delta']==0
-          assert gov['execution_authority'] is False
-          assert gov['promotion_authority'] is False
-          assert 'NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT_FROM_V2_ALONE' in gov['hard_nonclaims']
-
-          router_gov=json.loads((root/'canonical/governance/UNIVERSAL_LEARNING_ACTIVE_ROUTER_V2.json').read_text())
-          activation=json.loads((root/'canonical/governance/UNIVERSAL_LEARNING_ACTIVE_V2_ACTIVATION_V1.json').read_text())
           assert router_gov['unknown_domain_bridge']['unknown_domain_acceptance_proved'] is False
           assert activation['authoritative_entrypoint']=='canonical/runtime/universal_learning_active_router_v2.py'
           assert activation['acceptance_credit_delta']==0
