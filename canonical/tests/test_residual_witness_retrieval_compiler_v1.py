@@ -105,20 +105,21 @@ class ResidualWitnessRetrievalCompilerTests(unittest.TestCase):
         self.assertEqual(out["status"], "DECLARED_SCOPE_EXHAUSTIVELY_CLOSED", out)
         self.assertTrue(out["scope_limited"], out)
 
-    def test_social_surface_cannot_self_verify(self):
+    def test_candidate_only_surfaces_cannot_self_verify(self):
         p = r.compile_residual(self.residual())
         s = r.initial_state(p)
-        with self.assertRaisesRegex(
-            ValueError,
-            "CANDIDATE_ONLY_SURFACE_CANNOT_VERIFY",
-        ):
-            r.add_verified_witness(
-                s,
-                witness_id="forum-post",
-                residual_id=p["residual_id"],
-                source_surface="SOCIAL_TECHNICAL_DISCUSSION",
-                independent_receipt="receipt://nope",
-            )
+        for surface in ("SOCIAL_TECHNICAL_DISCUSSION", "REPOSITORY_METADATA"):
+            with self.assertRaisesRegex(
+                ValueError,
+                "CANDIDATE_ONLY_SURFACE_CANNOT_VERIFY",
+            ):
+                r.add_verified_witness(
+                    s,
+                    witness_id="candidate-only",
+                    residual_id=p["residual_id"],
+                    source_surface=surface,
+                    independent_receipt="receipt://nope",
+                )
 
     def test_first_action_does_not_default_to_repository_metadata(self):
         p = r.compile_residual(self.residual())
@@ -126,6 +127,40 @@ class ResidualWitnessRetrievalCompilerTests(unittest.TestCase):
         a = r.next_action(p, s)
         self.assertNotEqual(a["surface"], "REPOSITORY_METADATA", a)
         self.assertEqual(a["action"], "QUERY", a)
+
+    def test_scheduler_diversifies_after_one_surface_miss(self):
+        p = r.compile_residual(self.residual())
+        s = r.initial_state(p)
+        first = r.next_action(p, s)
+        s = r.update_cell(
+            s,
+            query_id=first["query_id"],
+            surface=first["surface"],
+            cell_state="QUERIED_NO_CANDIDATE",
+        )
+        second = r.next_action(p, s)
+        self.assertNotEqual(first["surface"], second["surface"], (first, second))
+
+    def test_scope_can_close_only_its_independently_complete_matrix(self):
+        x = self.residual()
+        x["declared_scope"] = {
+            "scope_id": "FROZEN-CODE-SYMBOL-SNAPSHOT",
+            "independently_verified_complete": True,
+            "required_surfaces": ["CODE_CONTENT", "SYMBOLS"],
+            "required_query_ids": ["Q000"],
+        }
+        p = r.compile_residual(x)
+        s = r.initial_state(p)
+        for surface in ("CODE_CONTENT", "SYMBOLS"):
+            s = r.update_cell(
+                s,
+                query_id="Q000",
+                surface=surface,
+                cell_state="EXHAUSTIVELY_CLOSED",
+                independently_complete=True,
+            )
+        out = r.terminal_status(s)
+        self.assertEqual(out["status"], "DECLARED_SCOPE_EXHAUSTIVELY_CLOSED", out)
 
     def test_capture_recapture_is_never_a_completeness_proof(self):
         out = r.capture_recapture_unseen(10, 5)
