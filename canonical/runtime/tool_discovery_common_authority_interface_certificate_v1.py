@@ -33,8 +33,8 @@ BINDINGS="canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.
 
 EXPECTED={
     CONTRACT:"49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7",
-    INTERFACE:"4b69aeb7b3d66ee3f7950ff202f2c492dcb033e2",
-    INTERFACE_TESTS:"b93ed898ba681808851ab92f4bb35ac00c1f047a",
+    INTERFACE:"6d2c056be88716457aa2c7a4cfdad91baaca0b03",
+    INTERFACE_TESTS:"d37706911606a89ad10eb19474bcde8e7aed1f1c",
     V4:"e614d0bed8e291e31f57189cd6f0f75aa39b0f74",
     V4_VERIFICATION:"10cb18355d247a05177230d0dd345e161e84111d",
     PROTOCOL:"62394e5b7d221ec9f69c3458f669e40e253a9d09",
@@ -64,6 +64,8 @@ REQUIRED_FACTS=(
     "DISCOVERY_RECEIPT_BINDS_AUTHORITY_AND_INSTANCE_DIGESTS",
     "DISCOVERY_APPLICATION_IS_MONOTONIC_AND_CONFLICT_FAIL_CLOSED",
     "PUBLIC_METADATA_EXCLUDES_HIDDEN_CAPABILITY_TRUTH",
+    "ARBITRARY_PUBLIC_CONSTRAINT_METADATA_PRESERVED",
+    "BRAIN_AND_OPUS_BOUND_TO_SAME_EXACT_AUTHORITY_DIGEST",
     "SAFE_PROBE_SUPPORT_DERIVED_FROM_HIDDEN_TRUTH",
     "SAFE_PROBE_IS_CURRENT_EPOCH_AND_INSTANCE_BOUND",
     "VERSION_CHANGE_CREATES_NEW_GENERATION",
@@ -129,7 +131,7 @@ def derive_interface_facts(source:str)->dict[str,bool]:
         )),
         "DISCOVERY_APPLICATION_IS_MONOTONIC_AND_CONFLICT_FAIL_CLOSED": all(x in source for x in (
             "def apply_discovery(",
-            'list(episode.get("visible_tools") or [])+list(receipt.get("tools") or [])',
+            'list(episode.get("visible_tools") or [])+receipt_rows',
             "CONFLICTING_PUBLIC_TOOL_METADATA:",
             "DISCOVERY_SOURCE_ALREADY_QUERIED",
             "DISCOVERY_PAYLOAD_NOT_EXACT_COMPLETE_AUTHORITY",
@@ -137,7 +139,23 @@ def derive_interface_facts(source:str)->dict[str,bool]:
         "PUBLIC_METADATA_EXCLUDES_HIDDEN_CAPABILITY_TRUTH": all(x in source for x in (
             'forbidden={"hidden_capabilities","capabilities","supported_capabilities","_oracle"}',
             "PUBLIC_METADATA_CONTAINS_HIDDEN_CAPABILITY_FIELD:",
-            "PUBLIC_KEYS=(",
+            "out=deepcopy(dict(raw))",
+        )),
+        "ARBITRARY_PUBLIC_CONSTRAINT_METADATA_PRESERVED": all(x in source for x in (
+            "out=deepcopy(dict(raw))",
+            'out["tool_id"]=tid',
+            'out["cost"]=float(raw.get("cost",0.0))',
+            'out["available"]=bool(raw["available"])',
+            'out["authorized"]=bool(raw["authorized"])',
+            'out["epoch"]=epoch',
+        )),
+        "BRAIN_AND_OPUS_BOUND_TO_SAME_EXACT_AUTHORITY_DIGEST": all(x in source for x in (
+            "def matched_route_binding(",
+            '"brain":{',
+            '"opus":{',
+            '"public_authority_sha256":digest',
+            '"interface_instance_sha256":instance_digest',
+            '"same_frozen_tool_authority":True',
         )),
         "SAFE_PROBE_SUPPORT_DERIVED_FROM_HIDDEN_TRUTH": all(x in source for x in (
             "def safe_probe(",
