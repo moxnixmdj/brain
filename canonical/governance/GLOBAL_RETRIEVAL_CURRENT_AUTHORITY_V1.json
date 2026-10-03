@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V6_CURRENT__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V6_CURRENT__MECHANICAL_ENTRYPOINT_V1_BOUND__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_global_retrieval_authority": {
     "path": "canonical/governance/GLOBAL_RETRIEVAL_V6_ACTIVATION_V1.json",
@@ -47,7 +47,9 @@
     "DO_NOT_TREAT_FAILED_PARTIAL_OR_EMPTY_OPEN_WORLD_RETRIEVAL_AS_NONEXISTENCE",
     "DO_NOT_REPEAT_CONSUMED_SOURCE_EPOCHS_WITHOUT_MATERIAL_WAKE",
     "NEW_REAL_FALSE_NEGATIVES_BECOME_PERMANENT_REGRESSION_CASES",
-    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT_FROM_RETRIEVAL_AUTHORITY"
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT_FROM_RETRIEVAL_AUTHORITY",
+    "AUTHORIZED_GLOBAL_RETRIEVAL_PLAN_COMPILATION_MUST_PASS_THE_FAIL_CLOSED_CURRENT_AUTHORITY_GUARD",
+    "DO_NOT_CALL_STALE_RETRIEVAL_PRIMITIVES_AS_IF_THEY_WERE_CURRENT_GLOBAL_AUTHORITY"
   ],
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
@@ -62,5 +64,17 @@
     "workflow_run_id": 37132126456,
     "workflow_job_id": 111229148590,
     "conclusion": "success"
+  },
+  "mechanical_entrypoint": {
+    "authority_guard_path": "canonical/runtime/global_retrieval_authority_guard_v1.py",
+    "authority_guard_git_blob_sha": "7b4cfd559d68c272f241cd2a6354dcf22f1b6957",
+    "entrypoint_path": "canonical/runtime/global_retrieval_entrypoint_v1.py",
+    "entrypoint_git_blob_sha": "c206fa36942fd178953434e80ad7ccf51f815e09",
+    "verification_path": "canonical/verification/GLOBAL_RETRIEVAL_V7_MECHANICAL_ENTRYPOINT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verification_git_blob_sha": "3573f2771ae9a7e2b805c66db277448265066fd4",
+    "workflow_run_id": 37132763584,
+    "workflow_job_id": 111231002021,
+    "conclusion": "success",
+    "mandatory_for_authorized_global_retrieval_plan_compilation": true
   }
 }
