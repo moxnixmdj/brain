@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V3_LEAST_COST_COUNTEREXAMPLE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_COUNTEREXAMPLE__V3_CONDITIONAL_LEAST_COST_IMPLICATION_FALSIFIED__ZERO_CREDIT",
+  "target_contract": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+  "violated_clause": "select the least-cost admissible route that can satisfy the subproblem",
+  "state": {
+    "required_capabilities": ["CAP_A"],
+    "visible_tools": [
+      {"tool_id": "EXPENSIVE", "cost": 10.0, "available": true, "authorized": true, "epoch": 0}
+    ],
+    "discovery_sources": [
+      {"source_id": "S0", "cost": 0.1, "available": true, "authoritative": true, "contains": ["CHEAP"]}
+    ],
+    "hidden_discovered_tool": {"tool_id": "CHEAP", "cost": 1.0, "available": true, "authorized": true, "epoch": 0, "supports": ["CAP_A"]},
+    "prior_probe_receipts": [
+      {"kind": "SAFE_CAPABILITY_PROBE", "tool_id": "EXPENSIVE", "capability": "CAP_A", "epoch": 0, "supported": true}
+    ],
+    "discovery_receipts": []
+  },
+  "v3_observed_action": {"action": "SELECT", "tool_id": "EXPENSIVE"},
+  "required_sound_action_class": "DISCOVER_BEFORE_SELECT_WHILE_AN_UNQUERIED_AUTHORITATIVE_SOURCE_CAN_REVEAL_A_CHEAPER_SUFFICIENT_ROUTE",
+  "v4_expected_first_action": {"action": "DISCOVER", "source_id": "S0", "query": "CAP_A"},
+  "falsifies": [
+    "TOOL_DISCOVERY_DYNAMIC_REFINEMENT_V1::LEAST_COST_EVIDENCE_SUPPORTED_SELECTION_CONDITIONAL_GUARANTEE",
+    "ANY_PROMOTION_OF_DYNAMIC_V3_FROM_COMPLETE_INTERFACE_CONTRACT_ALONE"
+  ],
+  "does_not_falsify": [
+    "THE_FROZEN_TOOL_DISCOVERY_TARGET",
+    "THE_EXISTENCE_OF_A_CORRECT_DYNAMIC_DISCOVERY_POLICY",
+    "THE_RAW_180_OF_180_HISTORICAL_SAMPLE_FOR_ITS_EXECUTED_CANDIDATE_AND_SCOPE"
+  ],
+  "permanent_invariant": "NO_SELECT_OR_PROBE_BEFORE_AUTHORITATIVE_DISCOVERY_SOURCE_EXHAUSTION_WHEN_GLOBAL_LEAST_COST_SELECTION_IS_CLAIMED",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
