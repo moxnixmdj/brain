@@ -68,6 +68,13 @@ class ToolDiscoveryCommonAuthorityInterfaceV1Tests(unittest.TestCase):
         self.assertFalse(verdict["valid"])
         self.assertTrue(any("OUTSIDE_COMMON_AUTHORITY" in x for x in verdict["errors"]))
 
+    def test_nonfinite_costs_fail_closed(self):
+        for bad in (float("nan"), float("inf"), float("-inf")):
+            rows = authority()
+            rows[0]["cost"] = bad
+            with self.assertRaisesRegex(Exception, "AUTHORITY_COST_FINITE_REQUIRED"):
+                build_complete_interface(rows, source_count=2)
+
     def test_metadata_mutation_kills_truthful_discovery_premise(self):
         interface = build_complete_interface(authority(), source_count=1)
         sid = interface["public"]["discovery_sources"][0]["source_id"]
