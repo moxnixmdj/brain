@@ -2,7 +2,7 @@ import copy, json, unittest
 from pathlib import Path
 from canonical.runtime.composition_receipt_reactivation_v1 import evaluate
 
-ROOT=Path(__file__).resolve().parents[2]
+ROOT=Path(__file__).resolve().parents[1]
 def j(rel): return json.loads((ROOT/rel).read_text(encoding="utf-8"))
 
 class T(unittest.TestCase):
