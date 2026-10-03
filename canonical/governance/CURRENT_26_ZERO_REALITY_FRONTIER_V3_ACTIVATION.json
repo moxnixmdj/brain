@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_26_ZERO_REALITY_FRONTIER_V3_ACTIVATION",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_SCHEDULING_FRONTIER__ZERO_CREDIT",
+  "frontier": {
+    "path": "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V3.json",
+    "git_blob_sha": "f052083c867f16d19cb04a1fe52e71fb813d396d"
+  },
+  "verification": {
+    "path": "canonical/verification/CURRENT_26_ZERO_REALITY_FRONTIER_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1386,
+    "merge_commit": "1de302c545168a2b72d9ec542a48b0dabb602808",
+    "workflow_run_id": 37150514703,
+    "workflow_job_id": 111283280872,
+    "conclusion": "success"
+  },
+  "active_counts": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_predicates": 12,
+    "unresolved_predicates": 26,
+    "primitive_zero_reality_work_units": 30
+  },
+  "active_precedence": [
+    "EXACT_EXISTING_OPUS55_BENCHMARK_REUSE",
+    "VERIFIED_EXTERNAL_EXACT_OR_SUPERSET_SUBSTITUTION",
+    "EXISTING_BRAIN_RECEIPT_SATURATION",
+    "FORMAL_OR_DEDUCTIVE_DISCHARGE",
+    "IRREDUCIBLE_FRESH_EVALUATION_ONLY_AFTER_VERIFIED_FIXED_POINT"
+  ],
+  "next": "SATURATE_EXISTING_RECEIPTS_UNDER_ACTIVE_BENCHMARK_DOMINANCE_PRECEDENCE__RECOMPUTE_FIXED_POINT__NO_FRESH_REALITY_YET",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0
+}
