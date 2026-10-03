@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_EXTERNAL_TASK_ADAPTER_REGISTRY_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__FIRST_INFERENCE_CAPABLE_ADAPTER_BOUND__LIVEBENCH_IF_ONLY__ZERO_CREDIT",
+  "status": "ACTIVE__FIRST_INFERENCE_CAPABLE_ADAPTER_INDEPENDENT_PUBLIC_RUNNER_PASS__LIVEBENCH_IF_ONLY__ZERO_CREDIT",
   "adapters": [
     {
       "benchmark_id": "LIVEBENCH_IF_2026_06_25",
@@ -14,6 +14,14 @@
       "downstream_response_formatter": {
         "path": "canonical/runtime/livebench_if_response_adapter.py",
         "git_blob_sha": "eb497ae5585f4f22b06b8088609b6d17714ebc53"
+      },
+      "verification": {
+        "path": "canonical/verification/ROOT2_LIVEBENCH_IF_ASTRA_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "pull_request": 1450,
+        "workflow_run_id": 37160029152,
+        "workflow_job_id": 111311381031,
+        "conclusion": "success"
       }
     }
   ],
