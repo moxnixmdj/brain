@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-03",
+  "intent_id": "P1_ONE_SHARED_FAILURE_SEMANTICS_BATCH_FREEZE_V1",
+  "objective": "Freeze the exact one-batch P1 minimum-reality experiment before any post-freeze beacon value is observed.",
+  "target_behavior": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "allowed_changes": [
+    "ADD_BATCH_RUNTIME",
+    "ADD_FAIL_CLOSED_FREEZE_VERIFIER",
+    "ADD_ADVERSARIAL_TESTS",
+    "ADD_ZERO_CREDIT_FREEZE_SPEC"
+  ],
+  "forbidden_changes": [
+    "NO_BEACON_RESULT_IN_FREEZE",
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_EXECUTION_BEFORE_INDEPENDENT_FREEZE_VERIFICATION",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT",
+    "NO_POST_RESULT_TUNING",
+    "NO_PAID_ROUTE"
+  ],
+  "incremental_spend_usd": 0
+}
