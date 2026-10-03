@@ -14,7 +14,7 @@
     {"id":"T3_FINITE_PROBE_PROGRESS","statement":"Each Dynamic V3 PROBE targets one missing required capability on the first non-falsified admissible route; a truthful current-epoch receipt removes that missing pair from the finite progress measure."},
     {"id":"T4_LEAST_COST_SELECTION","statement":"Cost/id ordering plus skip-on-false, probe-on-unknown, select-on-all-true makes the first SELECT the least-cost admissible sufficient route under the declared tie-break."},
     {"id":"T5_SOUND_NO_ROUTE_ESCALATION","statement":"After complete discovery and probe exhaustion, absence of SELECT means every admissible registered route has a truthful negative required-capability witness, so escalation is sound."},
-    {"id":"T6_CHANGE_EPOCH_INDUCTION","statement":"Atomic registry replacement increments the universe epoch; stale episodes fail closed. Induction over finite registry changes reduces each episode to T1-T5."},
+    {"id":"T6_CHANGE_EPOCH_INDUCTION","statement":"Atomic registry replacement increments the universe epoch; both PROBE and SELECT are routed through the owned epoch gate, so stale episodes fail closed before tool interaction. Induction over finite registry changes reduces each episode to T1-T5."},
     {"id":"T7_LEGACY_TERMINAL_TRANSPORT","statement":"On every valid state of the frozen V1/V2 terminal public schema, Dynamic V3 and the terminal-tested candidate have identical scorer-relevant decision semantics."},
     {"id":"T8_SEPARATE_ACCEPTANCE_ATOMS","statement":"Second-task transfer and no-unsupported-promotion remain independently proved scope-complete atoms and are composed later; this scope certificate does not self-credit them."}
   ],
