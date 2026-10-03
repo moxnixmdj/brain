@@ -1,0 +1,20 @@
+{
+  "schema":"PROJECT_BRAIN_RETRIEVAL_V6_LIVE_GATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date":"2026-10-03",
+  "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__FULL_V2_TO_V6_GATE_STACK__LIVE_SCHEDULER_IMPORTS_V6_GATE__ZERO_CREDIT",
+  "verified_subjects":{
+    "canonical/runtime/tool_discovery_retrieval_authority_gate_v2.py":"3b90982d80ab017118a10802a3f8f0ed1f00fd41",
+    "canonical/runtime/current_terminal_scheduling_world_v1.py":"5728fd7c1250acff8616a0670a25f9bff21ea514",
+    "canonical/governance/RETRIEVAL_CURRENT_AUTHORITY_V1.json":"46b2fc41854b68b0c994504443c9c3d361773c40"
+  },
+  "independent_runner":{"repository":"moxnixmdj/verification-capsule-runner","pull_request":1365,"merge_commit":"7bcbc1c8b09399588b27fe2f8ee80c407e55581a","workflow_run_id":37130381768,"workflow_job_id":111224142647,"conclusion":"success"},
+  "verified":{"v1_to_v5_base_gate_pass":true,"global_v6_authority_mandatory":true,"v6_generated_torture_tests_pass":true,"v6_gate_mutation_tests_pass":true,"scheduler_point_of_use_imports_gate_v2":true,"open_world_unknown_preserved":true,"zero_credit_preserved":true},
+  "hard_nonclaims":["NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT","NO_OPEN_WORLD_COMPLETENESS_CLAIM","NO_FRESH_REALITY_EXECUTION_OR_PROMOTION_AUTHORITY"],
+  "incremental_spend_usd":0,
+  "acceptance_credit_delta":0,
+  "capability_credit_delta":0,
+  "family_credit_delta":0,
+  "ownership_credit_delta":0,
+  "execution_authority":false,
+  "promotion_authority":false
+}
