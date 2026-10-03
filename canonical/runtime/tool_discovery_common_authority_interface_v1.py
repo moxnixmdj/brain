@@ -219,7 +219,8 @@ def discover(
         "tools":deepcopy(frozen["public_tools"]),
     }
 
-def apply_discovery(episode:Mapping[str,Any],receipt:Mapping[str,Any])->dict[str,Any]:
+def apply_discovery(instance:Mapping[str,Any],episode:Mapping[str,Any],receipt:Mapping[str,Any])->dict[str,Any]:
+    frozen=_assert_episode_current(instance,episode)
     if receipt.get("kind")!="DISCOVERY_RESULT" or receipt.get("complete") is not True:
         raise InterfaceError("DISCOVERY_RECEIPT_INVALID")
     if receipt.get("source_id")!=SOURCE_ID:
@@ -230,12 +231,18 @@ def apply_discovery(episode:Mapping[str,Any],receipt:Mapping[str,Any])->dict[str
         raise InterfaceError("DISCOVERY_INSTANCE_MISMATCH")
     if receipt.get("generation")!=episode.get("interface_generation"):
         raise InterfaceError("DISCOVERY_GENERATION_MISMATCH")
+    receipt_rows=[]
+    for raw in list(receipt.get("tools") or []):
+        receipt_rows.append(_public_tool(raw))
+    receipt_rows.sort(key=lambda x:x["tool_id"])
+    if _canonical(receipt_rows)!=_canonical(frozen["public_tools"]):
+        raise InterfaceError("DISCOVERY_PAYLOAD_NOT_EXACT_COMPLETE_AUTHORITY")
     prior=list(episode.get("discovery_receipts") or [])
     if any(isinstance(x,Mapping) and x.get("source_id")==SOURCE_ID for x in prior):
         raise InterfaceError("DISCOVERY_SOURCE_ALREADY_QUERIED")
 
     visible:dict[str,dict[str,Any]]={}
-    for raw in list(episode.get("visible_tools") or [])+list(receipt.get("tools") or []):
+    for raw in list(episode.get("visible_tools") or [])+receipt_rows:
         row=_public_tool(raw)
         tid=row["tool_id"]
         if tid in visible and _canonical(visible[tid])!=_canonical(row):
@@ -271,13 +278,24 @@ def safe_probe(
         "generation":frozen["generation"],
     }
 
-def apply_probe(episode:Mapping[str,Any],receipt:Mapping[str,Any])->dict[str,Any]:
+def apply_probe(instance:Mapping[str,Any],episode:Mapping[str,Any],receipt:Mapping[str,Any])->dict[str,Any]:
+    frozen=_assert_episode_current(instance,episode)
     if receipt.get("kind")!="SAFE_CAPABILITY_PROBE":
         raise InterfaceError("PROBE_RECEIPT_INVALID")
     if receipt.get("instance_sha256")!=episode.get("interface_instance_sha256"):
         raise InterfaceError("PROBE_INSTANCE_MISMATCH")
     if receipt.get("generation")!=episode.get("interface_generation"):
         raise InterfaceError("PROBE_GENERATION_MISMATCH")
+    tid=str(receipt.get("tool_id") or ""); cap=str(receipt.get("capability") or "")
+    tools={x["tool_id"]:x for x in frozen["public_tools"]}
+    if tid not in tools or not cap:
+        raise InterfaceError("PROBE_RECEIPT_TARGET_INVALID")
+    epoch=tools[tid]["epoch"]
+    if receipt.get("epoch")!=epoch:
+        raise InterfaceError("PROBE_RECEIPT_EPOCH_MISMATCH")
+    expected=cap in frozen["hidden_truth"][tid][str(epoch)]
+    if receipt.get("supported") is not expected:
+        raise InterfaceError("PROBE_RECEIPT_TRUTH_MISMATCH")
     out=deepcopy(dict(episode))
     receipts=list(out.get("prior_probe_receipts") or [])
     key=(receipt.get("tool_id"),receipt.get("capability"),receipt.get("epoch"))
