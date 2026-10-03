@@ -14,6 +14,7 @@ text. Misses are first-class evidence and remain UNKNOWN for the open world.
 from __future__ import annotations
 import hashlib,json,time,urllib.parse
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any,Callable,Mapping
 
 from canonical.runtime import retrieval_live_provider_arena_v1 as base
@@ -117,10 +118,9 @@ def validate_tasks()->None:
         if len(basename)>=4 and basename in q:
             raise ValueError("TARGET_BASENAME_LEAKED_IN_QUERY:"+row["episode_id"])
 
-def run(*,limit:int=20,timeout:float=20.0)->dict[str,Any]:
-    validate_tasks()
+def _run_provider_group(rows:list[tuple[int,Mapping[str,Any]]],*,limit:int,timeout:float)->list[dict[str,Any]]:
     events=[]
-    for seq,row in enumerate(TASKS,1):
+    for seq,row in rows:
         provider=PROVIDERS[row["provider"]]
         start=time.perf_counter()
         try:
@@ -144,6 +144,22 @@ def run(*,limit:int=20,timeout:float=20.0)->dict[str,Any]:
             "expected_target_answer_key":target,"target_hit":hit,"target_rank":rank,
             "latency_seconds":latency,"request_count":1,"error":error,
         })
+    return events
+
+def run(*,limit:int=20,timeout:float=20.0)->dict[str,Any]:
+    validate_tasks()
+    grouped=defaultdict(list)
+    for seq,row in enumerate(TASKS,1):
+        grouped[row["provider"]].append((seq,row))
+    events=[]
+    with ThreadPoolExecutor(max_workers=max(1,min(8,len(grouped)))) as pool:
+        futures=[
+            pool.submit(_run_provider_group,rows,limit=limit,timeout=timeout)
+            for _,rows in sorted(grouped.items())
+        ]
+        for fut in as_completed(futures):
+            events.extend(fut.result())
+    events.sort(key=lambda x:x["sequence"])
 
     successful=[x for x in events if x["status"]=="SUCCESS"]
     hits=[x for x in successful if x["target_hit"]]
@@ -180,6 +196,7 @@ def run(*,limit:int=20,timeout:float=20.0)->dict[str,Any]:
         "failed_episode_ids":[x["episode_id"] for x in events if x["status"]!="SUCCESS"],
         "events":events,
         "answer_key_identity_used_for_query_generation":False,
+        "execution_model":"PROVIDER_GROUPS_PARALLEL__WITHIN_PROVIDER_SEQUENTIAL",
         "open_world_completeness_claim":False,
         "incremental_spend_usd":0,
         "acceptance_credit_delta":0,
