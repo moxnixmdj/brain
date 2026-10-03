@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V4_ROUTER_EPOCH_EXECUTOR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__MINIMUM_V2_FEDERATION_TO_VERIFIED_ROUTER_EXECUTION_ADAPTER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Make the independently verified Retrieval V4 federation executable without changing V4 selection, router, or epoch-admission semantics.",
+  "canonical_base_commit": "28fd3c70d164a81dcb43c882843bf65e9dc46df6",
+  "exact_reused_authorities": {
+    "federation_v2": "canonical/runtime/public_source_federation_v2.py",
+    "epoch_gate": "canonical/runtime/federated_retrieval_epoch_gate_v1.py",
+    "verified_router": "canonical/runtime/residual_witness_backend_router_v1.py",
+    "v4_activation": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V4_ACTIVATION_V1.json"
+  },
+  "added_semantics": "DROP_OFF_DOMAIN_CANDIDATES_BEFORE_VERIFIED_ROUTER_NORMALIZATION__QUERY_ATTEMPT_RECEIPT_STILL_PRESERVED",
+  "hard_rules": [
+    "NO_NEW_QUERY_SELECTION_SEMANTICS",
+    "NO_BYPASS_OF_VERIFIED_V4_PLAN_OR_EPOCH_GATE",
+    "NO_OFF_DOMAIN_CANDIDATE_RETENTION",
+    "EMPTY_OR_FAILED_ATTEMPT_REMAINS_UNKNOWN",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
