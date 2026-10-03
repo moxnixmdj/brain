@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "canonical/runtime/existing_receipt_semantic_candidate_miner_v1.py"
-      - ".github/workflows/mine-existing-receipt-semantic-candidates.yml"
+      - ".github/workflows/mine-existing-receipt-semantic-candidates.yml"\n      - "canonical/governance/RECEIPT_SATURATION_REQUEST_V1.json"
   workflow_dispatch:
 
 jobs:
