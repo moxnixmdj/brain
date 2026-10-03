@@ -4,26 +4,24 @@ on:
   push:
     paths:
       - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
-      - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
-      - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
       - "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json"
       - "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
+      - "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
       - "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
-      - "canonical/runtime/terminal_projection_consistency_v1.py"
-      - "canonical/tests/test_terminal_projection_consistency_v1.py"
-      - "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json"
+      - "canonical/runtime/terminal_projection_consistency_v3.py"
+      - "canonical/tests/test_terminal_projection_consistency_v3.py"
       - ".github/workflows/verify-terminal-projection-consistency.yml"
   pull_request:
     paths:
       - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
-      - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
-      - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
       - "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json"
       - "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
+      - "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
       - "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
-      - "canonical/runtime/terminal_projection_consistency_v1.py"
-      - "canonical/tests/test_terminal_projection_consistency_v1.py"
-      - "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json"
+      - "canonical/runtime/terminal_projection_consistency_v3.py"
+      - "canonical/tests/test_terminal_projection_consistency_v3.py"
       - ".github/workflows/verify-terminal-projection-consistency.yml"
   workflow_dispatch:
 
@@ -37,7 +35,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run projection consistency adversarial tests
-        run: python -m unittest canonical.tests.test_terminal_projection_consistency_v1 -v
-      - name: Verify live current projection
-        run: python canonical/runtime/terminal_projection_consistency_v1.py
+      - name: Run post-delegation projection adversarial tests
+        run: python -m unittest canonical.tests.test_terminal_projection_consistency_v3 -v
+      - name: Verify live post-delegation projection
+        run: python canonical/runtime/terminal_projection_consistency_v3.py
