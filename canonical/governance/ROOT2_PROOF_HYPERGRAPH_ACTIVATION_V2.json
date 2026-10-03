@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PROOF_HYPERGRAPH_ACTIVATION_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_INVENTORY_REBIND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "REACTIVATE_THE_UNCHANGED_VERIFIED_ROOT2_OPTIMIZER_ON_THE_CURRENT_CONTENT_ADDRESSED_ROUTE_INVENTORY_AFTER_HLE_AND_OSWORLD_ZERO_REALITY_DELTAS",
+  "verified_algorithm_basis": {
+    "prior_activation_path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_ACTIVATION_V1.json",
+    "prior_verification_path": "canonical/verification/ROOT2_PROOF_HYPERGRAPH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "runtime_path": "canonical/runtime/root2_proof_hypergraph_v1.py",
+    "runtime_git_blob_sha": "dd2094c4845239a0be4cfd34af4d8f3a7e411060",
+    "tests_path": "canonical/tests/test_root2_proof_hypergraph_v1.py",
+    "tests_git_blob_sha": "235db2f21fe4b0f70096be69ae28af87a5ce31dd",
+    "algorithm_changed": false
+  },
+  "current_binding": {
+    "governance_path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_V2.json",
+    "governance_git_blob_sha": "dad8f23b1b31c372eaaa051887137606ac13a3c0",
+    "comparator_vector_path": "canonical/governance/ROOT2_FROZEN_COMPARATOR_VECTOR_V2.json",
+    "comparator_vector_git_blob_sha": "1e8e05a7df391056fbff7d2a69a899c7c886f7cd",
+    "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+    "route_inventory_git_blob_sha": "8427bcfce4891a7656ddd0c3fd283723bafc410f",
+    "osworld_source_boundary_path": "canonical/governance/OSWORLD_V21_SELF_HOST_SOURCE_BOUNDARY_V1.json",
+    "osworld_source_boundary_git_blob_sha": "f58c12d5c42e1e6b7cdda05d52f978469f3aa300",
+    "osworld_source_boundary_verification_path": "canonical/verification/OSWORLD_V21_SELF_HOST_SOURCE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "osworld_source_boundary_verification_git_blob_sha": "8cd75e0eee0c671e092ebea31ceb6c3be2d92120"
+  },
+  "required_independent_verification": [
+    "ALL_EXACT_BOUND_BLOBS_MATCH",
+    "VECTOR_HAS_14_SURFACES_AND_15_UNIQUE_PREDICATES_WITH_ONLY_AA_BRIEFCASE_SHARED",
+    "VECTOR_ROUTE_INVENTORY_BLOB_EQUALS_CURRENT_BOUND_INVENTORY",
+    "HLE_ROUTE_CLASS_REFLECTS_VERIFIED_OPUS46_GRADER_TRUTH",
+    "OSWORLD_ROUTE_CLASS_PRESERVES_MATERIAL_ACCESS_GITLAB_REVISION_DEPLOYMENT_PROTOCOL_AND_SCORE",
+    "UNCHANGED_OPTIMIZER_UNIT_AND_ADVERSARIAL_TESTS_PASS",
+    "ZERO_SPEND_AND_NO_FRESH_REALITY_INVARIANTS_PASS"
+  ],
+  "activation_effect_if_verified": [
+    "SUPERSEDE_ROOT2_PROOF_HYPERGRAPH_ACTIVATION_V1_FOR_CURRENT_ACTION_SELECTION",
+    "USE_V2_VECTOR_AND_CURRENT_ROUTE_INVENTORY",
+    "PRESERVE_UNCHANGED_OPTIMIZER_ALGORITHM",
+    "RECOMPUTE_NONDOMINATED_ZERO_REALITY_ACTIONS",
+    "NO_ACCEPTANCE_OR_FRESH_REALITY_CREDIT_FROM_REBIND"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_BINDING__THEN_PROMOTE_V2_AS_CURRENT_ROOT2_ACTION_SELECTION_AUTHORITY",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
