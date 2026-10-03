@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V7_FINITE_COST_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_TRUTH_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "base_candidate": {
+    "path": "canonical/runtime/tool_discovery_dynamic_candidate_v6.py",
+    "git_blob_sha": "2020b7c2dc750009a9cc363d0703184b9115cfa6"
+  },
+  "counterexample": {
+    "id": "V6_NONFINITE_COST_BREAKS_LEAST_COST_TOTAL_ORDER",
+    "construction": [
+      "ONE_VISIBLE_AVAILABLE_AUTHORIZED_T0_WITH_CURRENT_POSITIVE_CAP_A_EVIDENCE",
+      "NO_DISCOVERY_SOURCES_AND_NO_VERSION_EVENT",
+      "T0_COST_IS_NAN_OR_POSITIVE_INFINITY",
+      "V6_DELEGATES_TO_V5__V5_ACCEPTS_THE_VALUE_AS_A_FLOAT_AND_CAN_SELECT_T0",
+      "NAN_OR_INFINITY_IS_NOT_AN_ADMISSIBLE_FINITE_NONNEGATIVE_COST_IN_THE_REQUIRED_TOTAL_ORDER"
+    ],
+    "violated_contract_rule": "FINITE_TOTAL_ORDER_COSTS"
+  },
+  "repair": {
+    "runtime": "canonical/runtime/tool_discovery_dynamic_candidate_v7.py",
+    "tests": "canonical/tests/test_tool_discovery_dynamic_candidate_v7.py",
+    "rule": "ALL_DECISION_RELEVANT_DISCOVERY_SOURCE_AND_TOOL_COSTS_MUST_BE_FINITE_NONNEGATIVE_REALS_BEFORE_ORDERING_OR_SELECTION",
+    "preserves": "V6_TOOL_VERSION_CHANGE_RESTART_IS_THE_FIRST_CAUSAL_BOUNDARY"
+  },
+  "hard_nonclaims": [
+    "NO_COMPLETE_INTERFACE_INSTANCE_CLAIM",
+    "NO_COMMON_AUTHORITY_SCOPE_COMPLETENESS_CLAIM",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "INDEPENDENT_EXACT_BYTE_VERIFICATION_REQUIRED"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
