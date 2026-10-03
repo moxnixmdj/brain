@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_V6_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__GLOBAL_RETRIEVAL_V6_OVER_VERIFIED_V5_SUBSTRATE__INDEPENDENT_ACTIVATION_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Make finding the right thing a reusable Brain-wide capability: maximize time-to-first independently verified sufficient witness while systematically preventing avoidable false negatives.",
+  "verified_v5_substrate": {
+    "residual_compiler": {
+      "path": "canonical/runtime/residual_witness_retrieval_compiler_v1.py",
+      "git_blob_sha": "9daa8d590f3356b3fc51eccf75c56cbf515239e4"
+    },
+    "adaptive_query_expansion": {
+      "path": "canonical/runtime/adaptive_retrieval_query_expansion_v1.py",
+      "git_blob_sha": "180cce242914a0b7c0925c50579dd1e336b9ef35"
+    },
+    "federation_selector": {
+      "path": "canonical/runtime/public_source_federation_v2.py",
+      "git_blob_sha": "32f0443bfb1859168e14f7266a3b5b3c99a40f45"
+    },
+    "federation_executor": {
+      "path": "canonical/runtime/public_source_federation_executor_v2.py",
+      "git_blob_sha": "96497b15a9c096b8e5cc471313ae165fceaedd07"
+    },
+    "v5_activation": {
+      "path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V5_ACTIVATION_V1.json",
+      "git_blob_sha": "8b8b80d43972bb7113b193baaf21dbda292d595e"
+    },
+    "v5_activation_verification": {
+      "path": "canonical/verification/RETRIEVAL_V5_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "acd898bdea67ef0337e33b4335426fbe0dd7320d"
+    }
+  },
+  "v6_extension": {
+    "global_controller": {
+      "path": "canonical/runtime/global_retrieval_controller_v1.py",
+      "git_blob_sha": "211a34f2bc22f531b895b0c7a26187b176875e9f"
+    },
+    "torture_universe": {
+      "path": "canonical/runtime/retrieval_torture_universe_v2.py",
+      "git_blob_sha": "86a7796f2a08e63e0d073cae8bc7a6b66febe98b"
+    },
+    "controller_tests": {
+      "path": "canonical/tests/test_global_retrieval_controller_v1.py",
+      "git_blob_sha": "1fcb55a3c8ba792d93b05fbae5918dcb030fb7da"
+    },
+    "torture_tests": {
+      "path": "canonical/tests/test_retrieval_torture_universe_v2.py",
+      "git_blob_sha": "35b6e0132d21149844f8842528f4cfc9bf9795da"
+    },
+    "independent_core_verification": {
+      "path": "canonical/verification/GLOBAL_RETRIEVAL_V6_CORE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "47b43d15919172b1752e8658bff3194c4491a132"
+    }
+  },
+  "mandatory_global_policy": [
+    "USE_MULTIPLE_EXTERNAL_INDEXES_AND_DIRECT_SOURCE_INTERFACES_AS_CANDIDATE_GENERATORS__NEVER_AS_NEGATIVE_COMPLETENESS_AUTHORITY",
+    "PREFER_AUTHORITATIVE_BOUNDED_ENUMERATION_OVER_KEYWORD_GUESSING_WHEN_SUCH_AN_INTERFACE_EXISTS",
+    "ZERO_LEXICAL_BRIDGE_OR_INDEX_LAG_REQUIRES_QUERYLESS_BOUNDED_ENUMERATION_WHERE_AVAILABLE",
+    "DISCOVERED_CANDIDATES_ARE_MONOTONIC__RERANKING_MAY_CHANGE_PRIORITY_BUT_MUST_NOT_DELETE_OR_DEACTIVATE_DISCOVERED_IDENTITIES",
+    "EVERY_DISCOVERED_CANDIDATE_MAY_EXPAND_DEPENDENCIES_FORKS_MIRRORS_CITATIONS_IMPORTS_SUBMODULES_RELEASES_BRANCHES_TAGS_AND_RELATED_GRAPH_EDGES_WITH_BOUNDED_DEPTH",
+    "NEXT_RETRIEVAL_ACTION_IS_SELECTED_BY_EMPIRICAL_CONDITIONAL_NOVELTY_AND_EXPECTED_SUFFICIENCY_PER_LATENCY_REQUEST_AND_RISK",
+    "CHANNELS_SHARING_AN_UPSTREAM_INDEX_OR_PROVIDER_ARE_DISCOUNTED_AS_CORRELATED",
+    "FAILED_TRANSIENT_OR_PARTIAL_ACTIONS_REMAIN_RETRYABLE_AND_DO_NOT_COUNT_AS_EXHAUSTED",
+    "OPEN_WORLD_NO_RESULT_REMAINS_UNKNOWN__NEVER_NONEXISTENT",
+    "STOP_IMMEDIATELY_ON_FIRST_INDEPENDENTLY_VERIFIED_SUFFICIENT_WITNESS",
+    "EVERY_REAL_FALSE_NEGATIVE_OR_NEW_FAILURE_CLASS_BECOMES_A_PERMANENT_TORTURE_UNIVERSE_REGRESSION_CASE"
+  ],
+  "adversarial_coverage": {
+    "finite_generated_case_count": 4096,
+    "coverage_kind": "ARCHITECTURAL_FAILURE_CLASS_MECHANISM_COVERAGE",
+    "coverage": 1,
+    "includes_pairwise_and_deterministic_three_way_interactions": true,
+    "includes_deliberate_compound_cases": true,
+    "open_world_recall_claim": false
+  },
+  "search_engine_strategy": {
+    "full_web_index_rebuild": "DOMINATED_UNDER_ZERO_SPEND_AND_MINIMUM_WALL_CLOCK",
+    "single_external_search_engine": "INSUFFICIENT_DUE_TO_CORRELATED_INDEXING_RANKING_AND_COVERAGE_BLIND_SPOTS",
+    "selected_architecture": "BRAIN_OWNED_RETRIEVAL_CONTROLLER_OVER_MULTIPLE_EXTERNAL_INDEXES_DIRECT_ENUMERATION_GRAPH_EXPANSION_AND_TARGETED_BOUNDED_INDEXES",
+    "reason": "MAXIMIZES_CONDITIONAL_RECALL_AND_TIME_TO_FIRST_SUFFICIENT_WITNESS_WITHOUT_REBUILDING_WEB_SCALE_INFRASTRUCTURE"
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_COMPLETENESS_PROOF",
+    "NO_ALL_LANGUAGES_OR_ALL_TERMINOLOGY_PROVED_COMPLETE",
+    "NO_PRIVATE_DELETED_INACCESSIBLE_OR_OFFLINE_SOURCE_COMPLETENESS",
+    "NO_CLAIM_THAT_4096_SYNTHETIC_CASES_ENUMERATE_ALL_POSSIBLE_REAL_FAILURES",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

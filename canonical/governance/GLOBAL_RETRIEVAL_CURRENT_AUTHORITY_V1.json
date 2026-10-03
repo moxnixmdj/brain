@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V6_CURRENT__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_global_retrieval_authority": {
+    "path": "canonical/governance/GLOBAL_RETRIEVAL_V6_ACTIVATION_V1.json",
+    "git_blob_sha": "335b285d27faa16913c9ec661cdf0b6a25057726"
+  },
+  "independent_activation_verification": {
+    "path": "canonical/verification/GLOBAL_RETRIEVAL_V6_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "9d0e031501a68f3a009b371cf9bde4d86fe34656",
+    "workflow_run_id": 37131934995,
+    "workflow_job_id": 111228592452,
+    "conclusion": "success"
+  },
+  "independent_core_verification": {
+    "path": "canonical/verification/GLOBAL_RETRIEVAL_V6_CORE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "47b43d15919172b1752e8658bff3194c4491a132"
+  },
+  "policy": {
+    "external_search_engines": "CANDIDATE_GENERATORS_ONLY__NOT_NEGATIVE_COMPLETENESS_AUTHORITIES",
+    "bounded_authoritative_enumeration": "PREFERRED_WHEN_AVAILABLE",
+    "zero_lexical_bridge": "QUERYLESS_BOUNDED_ENUMERATION_REQUIRED_WHERE_AVAILABLE__OTHERWISE_UNKNOWN",
+    "candidate_memory": "MONOTONIC__RERANKING_CANNOT_DELETE_DISCOVERED_IDENTITIES",
+    "candidate_graph": "BOUNDED_SNOWBALL_EXPANSION",
+    "source_selection": "EMPIRICAL_CONDITIONAL_NOVELTY_AND_EXPECTED_SUFFICIENCY_PER_LATENCY_REQUEST_AND_RISK",
+    "correlated_sources": "DISCOUNT_SHARED_UPSTREAM_INDEX_OR_PROVIDER",
+    "open_world_miss": "UNKNOWN__NEVER_NONEXISTENT",
+    "real_false_negative": "COMPILE_TO_PERMANENT_TORTURE_REGRESSION",
+    "stop": "FIRST_INDEPENDENTLY_VERIFIED_SUFFICIENT_WITNESS"
+  },
+  "finite_adversarial_coverage": {
+    "case_count": 4096,
+    "architectural_failure_class_mechanism_coverage": 1,
+    "open_world_recall_claim": false
+  },
+  "search_engine_architecture": {
+    "selected": "HYBRID__BRAIN_CONTROLLER_PLUS_MULTIPLE_EXTERNAL_INDEXES_PLUS_DIRECT_ENUMERATION_PLUS_GRAPH_EXPANSION_PLUS_TARGETED_BOUNDED_INDEXES",
+    "full_web_index_rebuild": "REJECTED_AS_DOMINATED_UNDER_ZERO_SPEND_AND_MINIMUM_WALL_CLOCK",
+    "single_engine": "REJECTED_AS_STRUCTURALLY_INSUFFICIENT"
+  },
+  "hard_rules": [
+    "THIS_FILE_IS_THE_SINGLE_CURRENT_GLOBAL_RETRIEVAL_AUTHORITY_POINTER",
+    "DO_NOT_TREAT_ANY_SINGLE_EXTERNAL_SEARCH_ENGINE_AS_COMPLETENESS_AUTHORITY",
+    "DO_NOT_RERANK_DISCOVERED_CANDIDATES_OUT_OF_EXISTENCE",
+    "DO_NOT_TREAT_FAILED_PARTIAL_OR_EMPTY_OPEN_WORLD_RETRIEVAL_AS_NONEXISTENCE",
+    "DO_NOT_REPEAT_CONSUMED_SOURCE_EPOCHS_WITHOUT_MATERIAL_WAKE",
+    "NEW_REAL_FALSE_NEGATIVES_BECOME_PERMANENT_REGRESSION_CASES",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT_FROM_RETRIEVAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "final_pointer_candidate_verification": {
+    "path": "canonical/verification/GLOBAL_RETRIEVAL_CURRENT_POINTER_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "094f31c1c22e12961d86dc93fca06a695f6bb33a",
+    "workflow_run_id": 37132126456,
+    "workflow_job_id": 111229148590,
+    "conclusion": "success"
+  }
+}
