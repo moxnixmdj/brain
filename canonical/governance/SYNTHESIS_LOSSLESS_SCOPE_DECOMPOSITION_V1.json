@@ -1,0 +1,162 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__LOSSLESS_PROTOCOL_TO_BEHAVIOR_SCOPE_RELATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "target_scope_id": "scope://opus55/SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "witness_scope_id": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+  "basis": "LOSSLESS_DECOMPOSITION",
+  "scope_relation": "PROVEN_STRONGER",
+  "authority": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "synthesis_residual": {
+      "path": "canonical/governance/OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_INPUT_V2.json",
+      "git_blob_sha": "4e5b944c86b8745083cc9d97fe186aa4b1322747"
+    },
+    "synthesis_atoms_verification": {
+      "path": "canonical/verification/SYNTHESIS_OVERLAY_V3_REBIND_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "1a67bc568944212c4d235a463c8bd7bea21b3993"
+    }
+  },
+  "target_dimensions": [
+    "claim-to-source fidelity",
+    "required evidence coverage",
+    "uncertainty/disagreement preservation",
+    "audience adaptation",
+    "format/style constraints",
+    "compression without decision-relevant loss"
+  ],
+  "witness_behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+  "dimension_bindings": [
+    {
+      "target_dimension": "claim-to-source fidelity",
+      "contract_witnesses": [
+        {
+          "field": "inputs",
+          "fragment": "Verified evidence units with provenance"
+        },
+        {
+          "field": "required_output_or_action",
+          "fragment": "required claims are supported"
+        },
+        {
+          "field": "success_condition",
+          "fragment": "no unsupported material claims"
+        }
+      ]
+    },
+    {
+      "target_dimension": "required evidence coverage",
+      "contract_witnesses": [
+        {
+          "field": "inputs",
+          "fragment": "required claims"
+        },
+        {
+          "field": "success_condition",
+          "fragment": "required coverage is complete"
+        }
+      ]
+    },
+    {
+      "target_dimension": "uncertainty/disagreement preservation",
+      "contract_witnesses": [
+        {
+          "field": "required_output_or_action",
+          "fragment": "material uncertainty/disagreement is preserved"
+        },
+        {
+          "field": "failure_condition",
+          "fragment": "distorted disagreement/uncertainty"
+        }
+      ]
+    },
+    {
+      "target_dimension": "audience adaptation",
+      "contract_witnesses": [
+        {
+          "field": "inputs",
+          "fragment": "user objective/audience"
+        },
+        {
+          "field": "success_condition",
+          "fragment": "audience/format constraints pass"
+        }
+      ]
+    },
+    {
+      "target_dimension": "format/style constraints",
+      "contract_witnesses": [
+        {
+          "field": "inputs",
+          "fragment": "output constraints"
+        },
+        {
+          "field": "success_condition",
+          "fragment": "audience/format constraints pass"
+        }
+      ]
+    },
+    {
+      "target_dimension": "compression without decision-relevant loss",
+      "contract_witnesses": [
+        {
+          "field": "required_output_or_action",
+          "fragment": "irrelevant detail is omitted"
+        },
+        {
+          "field": "success_condition",
+          "fragment": "compression does not delete decision-relevant evidence"
+        }
+      ]
+    }
+  ],
+  "decomposition_claim": {
+    "coverage_complete": true,
+    "coverage_relation": "EXACT_UNION",
+    "coverage_proof_verified": false,
+    "exact_target_dimension_count": 6,
+    "exact_bound_dimension_count": 6,
+    "duplicate_or_unbound_dimensions": 0,
+    "witness_contract_scope": "Grounded evidence synthesis under audience and format constraints"
+  },
+  "preexisting_operational_evidence": {
+    "seven_operational_atoms_current": true,
+    "verification_path": "canonical/verification/SYNTHESIS_OVERLAY_V3_REBIND_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "root3_scope_relation_previously_open": true
+  },
+  "consequence_if_independently_verified": {
+    "root3_scope_relation": "CLOSED",
+    "remaining_synthesis_root2_residuals": [
+      "metric:matched_quality",
+      "matched_quality_noninferiority",
+      "required_claim_coverage_noninferiority"
+    ],
+    "synthesis_acceptance": "OPEN"
+  },
+  "hard_rules": [
+    "THIS_CERTIFICATE_PROVES_ONLY_TARGET_SCOPE_SUBSET_OF_THE_EXISTING_VERIFIED_SYNTHESIS_WITNESS_SCOPE",
+    "NO_MATCHED_QUALITY_ATOM_OR_NUMERIC_NONINFERIORITY_BOUND_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY",
+    "ANY_TARGET_DIMENSION_DRIFT_OR_CONTRACT_TEXT_DRIFT_FAILS_CLOSED",
+    "ACCOUNTING_LABEL_CARDINALITY_IS_NOT_USED_AS_SCOPE_EVIDENCE"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
