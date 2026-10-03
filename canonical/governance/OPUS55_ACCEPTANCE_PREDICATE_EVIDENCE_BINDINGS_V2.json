@@ -185,25 +185,14 @@
     },
     {
       "predicate_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
-      "state": "PROVED",
-      "proof_kind": "ABSOLUTE_CEILING",
-      "source_path": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
-      "source_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7",
-      "independent_or_objective": true,
-      "scope_complete": true,
-      "objective_ceiling": true,
-      "brain_value": 1,
-      "objective_ceiling_value": 1,
+      "state": "EXTERNAL_BLOCKED",
+      "blocker": "ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
+      "blocker_class": "SCOPE_COMPLETENESS",
+      "discharge_condition": "PROVIDE_INDEPENDENTLY_VERIFIED_EXACT_COMPLETE_TARGET_CASE_UNIVERSE__EXHAUSTIVE_FINITE_SUPERSET__OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_THE_CLAIMED_PROTOCOL_POPULATION",
+      "source_path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+      "source_sha": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
       "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "basis": "PRIOR_INDEPENDENT_ABSOLUTE_CEILING_WITNESS_PLUS_INDEPENDENT_EXACT_FROZEN_SCOPE_COMPLETENESS_DISCHARGE",
-      "scope_completion_source": {
-        "path": "canonical/verification/TOOL_DISCOVERY_FROZEN_SCOPE_COMPLETENESS_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-        "sha": "6699bd89db663b98c836d3203bc6ebb558a29e04",
-        "public_verifier_pr": 1126,
-        "workflow_run_id": 37086692264,
-        "workflow_job_id": 111098372766,
-        "merge_commit": "bc67c03671469a289f022722b6579c0a0608e985"
-      },
+      "basis": "INDEPENDENT_SCOPE_FIREWALL_REVOKES_FINITE_SAMPLE_ABSOLUTE_DOMINANCE_AS_WHOLE_PROTOCOL_PROOF__RAW_FROZEN_SAMPLE_RESULT_REMAINS_VALID_BUT_SCOPE_INCOMPLETE",
       "prior_sample_evidence": {
         "prior_state": "PROVED",
         "prior_proof_kind": "ABSOLUTE_CEILING",
@@ -213,13 +202,12 @@
         "prior_objective_ceiling_value": 1,
         "preserved_as_sample_evidence_only": true
       },
-      "reopening_discharge": {
-        "prior_blocker": "ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
-        "discharge_basis": "INDEPENDENT_EXACT_SCOPE_SEMANTICS_PROVING_PREENUMERATED_TOOL_IDS_ARE_COMPLETE_FOR_THE_FROZEN_TARGET",
-        "fresh_acceptance_cases_consumed": 0,
-        "terminal_results_replayed": 0,
-        "new_reality_units_consumed": 0
-      }
+      "reopened_by": {
+        "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+        "reason": "FINITE_PERFECT_SAMPLE_IS_NOT_PROTOCOL_WIDE_ABSOLUTE_BOUND_WITHOUT_SCOPE_COMPLETENESS"
+      },
+      "scope_complete": false,
+      "objective_ceiling": false
     },
     {
       "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
