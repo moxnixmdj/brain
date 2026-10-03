@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -121,9 +122,14 @@ def evaluate(
     selector_row = reductions.get("FREEZE_TERMINAL_ACCEPTANCE_ACCOUNTING_AND_SELECTOR") or {}
     selector = selector_row.get("selector") or {}
     accounting = selector_row.get("accounting") or {}
-    threshold = int(accounting.get("minimum_integer_brain_passes_to_meet_or_exceed_reported_bar", -1))
-    bar = float(accounting.get("reported_opus55_pass_at_1_percent_from_existing_freeze", -1.0))
+    threshold = int(accounting.get("minimum_integer_brain_passes_for_bound_at_or_above_77_8_percent", -1))
+    bar = float(accounting.get("reported_opus55_pass_at_1_percent_from_existing_freeze", -1.0)) / 100.0
+    alpha = float(accounting.get("alpha", -1.0))
     denominator = int(selector.get("denominator", -1))
+    valid_stat_inputs = denominator > 0 and 0.0 < alpha < 1.0
+    epsilon = math.sqrt(math.log(1.0 / alpha) / (2.0 * denominator)) if valid_stat_inputs else math.inf
+    lower = (threshold / denominator) - epsilon if valid_stat_inputs else -math.inf
+    prior_lower = ((threshold - 1) / denominator) - epsilon if valid_stat_inputs else -math.inf
     selector_accounting_proved = (
         selector.get("task_population") == "ALL_108_FROZEN_TOOLATHLON_VERIFIED_TASK_DIRECTORIES"
         and selector.get("adaptive_task_selection") is False
@@ -131,9 +137,13 @@ def evaluate(
         and selector.get("post_result_tuning") is False
         and selector.get("pass_at_1_attempts_per_task") == 1
         and denominator == 108
-        and threshold == 85
-        and (threshold / denominator * 100.0) >= bar
-        and ((threshold - 1) / denominator * 100.0) < bar
+        and accounting.get("proof_mode") == "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_WITH_BRAIN_LOWER_BOUND_AT_OR_ABOVE_OPUS_5_5_ACCEPTANCE_BOUND"
+        and accounting.get("bound") == "HOEFFDING_ONE_SIDED_LOWER_CONFIDENCE_BOUND_FOR_X_IN_0_1"
+        and alpha == 0.05
+        and threshold == 97
+        and lower >= bar
+        and prior_lower < bar
+        and accounting.get("valid_route_metric_rule") == "TOOLATHLON_PASS_AT_1_BINDS_TERMINAL_SUCCESS_ONLY__IT_MUST_NOT_BE_RELABELED_AS_VALID_ROUTE_TOP1"
     )
     if not selector_accounting_proved:
         errors.append("FULL_POPULATION_SELECTOR_OR_MINIMUM_THRESHOLD_NOT_PROVED")
