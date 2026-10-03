@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_FROZEN_SCOPE_COMPLETENESS_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_COMPLETE_TARGET_CASE_UNIVERSE__ZERO_REALITY__ZERO_CREDIT",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "basis_kind": "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+  "proof_domain": "EXACT_FROZEN_TOOL_DISCOVERY_TERMINAL_TARGET_ONLY",
+  "source_brain_context": "PR_1099_REPLACEMENT_SCOPE_DISCHARGE_MIRRORED_AND_INDEPENDENTLY_EXECUTED",
+  "exact_verified_blobs": {
+    "canonical/runtime/tool_discovery_frozen_scope_completeness_discharge_v1.py": "dc2d88528ae9f6569d24d8611d780579480602f4",
+    "canonical/tests/test_tool_discovery_frozen_scope_completeness_discharge_v1.py": "32893342d94635a07baa6722c416927aaf7f56c5",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
+    "canonical/runtime/tool_discovery_information_safe_proof.py": "2450a9644119c9fdf9c43307a1d115098d6ba592",
+    "canonical/runtime/tool_discovery_information_safe_proof_v2.py": "5e8a953864e13ec76768c3e8920644107c65a644",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py": "64c02edd568d95ec5ed54b7b8122183ce5b82e17",
+    "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json": "48ba33998e73b8eec2731be51a7ec78077ed0d4a",
+    "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_FORMALISM_CUT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "e628d8d5b63c2020400129fcc9e0bc6fde6101b2",
+    "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1126,
+    "trigger_head": "f9e3886e1c645eb9607ff8c82f898421fd5fe1f3",
+    "merge_commit": "bc67c03671469a289f022722b6579c0a0608e985",
+    "workflow_run_id": 37086692264,
+    "workflow_job_id": 111098372766,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_DEPENDENCY_CONE_CONTENT_ADDRESSED",
+    "V1_PUBLIC_STATE_EXPOSES_COMPLETE_CASE_TOOL_IDENTITY_LIST",
+    "V1_ORACLE_RANGES_OVER_THE_SAME_CASE_TOOL_IDENTITY_LIST",
+    "HIDDEN_CAPABILITY_TRUTH_REMAINS_SEPARATE_ORACLE_STATE",
+    "V2_PRESERVES_V1_IDENTITY_UNIVERSE_AND_PUBLIC_INFORMATION_BOUNDARY",
+    "ADVERSARIAL_REMOVAL_OF_PUBLIC_TOOL_UNIVERSE_FAILS",
+    "ADVERSARIAL_IDENTITY_UNIVERSE_REPLACEMENT_FAILS",
+    "ADVERSARIAL_HIDDEN_CAPABILITY_SEPARATION_REMOVAL_FAILS",
+    "SCOPE_SEMANTICS_DISCHARGED_FOR_EXACT_FROZEN_TARGET",
+    "ZERO_TERMINAL_REPLAY_ZERO_NEW_REALITY_ZERO_ACCEPTANCE_CREDIT"
+  ],
+  "scope_semantics_discharged": true,
+  "missing_source_facts": [],
+  "hard_nonclaims": [
+    "NO_CLAIM_OF_EXHAUSTIVE_ALL_OPEN_DOMAIN_TOOL_ECOSYSTEMS",
+    "NO_PROMOTION_OF_DYNAMIC_V3",
+    "NO_NEW_TOOL_DISCOVERY_INTERFACE_ASSUMED",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_SCOPE_RECEIPT_ALONE",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY"
+  ],
+  "terminal_cases_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
