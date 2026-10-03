@@ -1,0 +1,611 @@
+{
+  "schema": "PROJECT_BRAIN_V4_PRIVATE_SCAN_ATOMS_WORK_V1",
+  "base_commit": "2747d00fc69c211d02239519dae7045512348992",
+  "frontier_blob": "4b5517dbd12978f8ffe481fb775e85592c7790c8",
+  "overlay_blob": "898e450c62c06cf6d1a4a3f826a255da9161a229",
+  "atom_count": 40,
+  "atoms": [
+    {
+      "atom_id": "PA1:0b9f34ebce70e66e81a36b7426a5a916a41a4aeb488663614c74fb080e85c958",
+      "proposition": "SAME_HARNESS_COMPARABLE_OSWORLD_2_1_PARTIAL_ROUTE_BOUND",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "OSWORLD_PUBLIC_ROUTE_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "OSWORLD_2_1_PARTIAL_GE_81_8"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:0dad8728b525f98766e08acec25e47ab0f10f3334d4162077d980a12d785727f",
+      "proposition": "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+      ],
+      "associated_target_predicates": [
+        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:0f51e635803ba7491336b20e8d9edabbf836fc90d24b1d33c381cdafd62ebb84",
+      "proposition": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:10f0f5fb64fe4af4121af46976dacc2a4725df7542c00a5b2c3af9fd01e8a8dc",
+      "proposition": "CURSORBENCH_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "CODING_PRIVATE_BAR_CHILD::CODING_CURSORBENCH_GE_57_8"
+      ],
+      "associated_target_predicates": [
+        "CODING_CURSORBENCH_GE_57_8"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:124cfae799a3cf5371688efec96662cfe2e94ac6364ee13f01a6d3fa2fb6876c",
+      "proposition": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_DELEGATION_PROTOCOL",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:2154e07fbdfdb4dff2fbf2dacbd19c37661a08d2e412b10d4043879e6e6d36b9",
+      "proposition": "FRONTIERCODE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "CODING_PRIVATE_BAR_CHILD::CODING_FRONTIERCODE_GE_54_4"
+      ],
+      "associated_target_predicates": [
+        "CODING_FRONTIERCODE_GE_54_4"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:34f45c3134d5a09d1d2f815273f2d773df073321a990a6edcd31faf894ecde2b",
+      "proposition": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:3847e5a14d97e38a03f5700f305fe9d1675d01b241e16948cfd0548f601f5179",
+      "proposition": "VISION_DENSE_NONCHART_SCOPE::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::VISION_DENSE_NONCHART_SCOPE"
+      ],
+      "associated_target_predicates": [
+        "VISION_DENSE_NONCHART_SCOPE"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:3b72f2029cb4e2f038e5a50cd599f40f196a7a4fa52a76a1ff2ee631d8a305e8",
+      "proposition": "VISION_DENSE_NONCHART_SCOPE::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::VISION_DENSE_NONCHART_SCOPE"
+      ],
+      "associated_target_predicates": [
+        "VISION_DENSE_NONCHART_SCOPE"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:3bed7b9c12948586cd2ac0214c2d47513d31fed9daee38979a3f2d7ae3711768",
+      "proposition": "MACHINE_VERIFIED_TB4_ROUTE_UPPER_BOUND_GE_220",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "TB4_ATTAINABLE_ROUTE_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "CODING_TB4_GE_66_4"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:501c91a9768c0fccf1a931b68cc57e5262f556ba8de3dc6bcf68f777ebd773cd",
+      "proposition": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:50e711f297e9d832fcc632383c9b175fc61aa9be081066818d350d5b67ccd681",
+      "proposition": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:535b2d0c4528425b76e04346e17025cb0f600184aaf1414652cbd8388622b8f0",
+      "proposition": "FINANCE_ACCOUNTING_INDEX_ROUTE_BOUND",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "FINANCE_ACCOUNTING_INDEX_PUBLIC_ROUTE_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "FINANCE_ACCOUNTING_INDEX_GE_61"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:54d1afdc58bbc4fa5f51ab55211a89a24aa4d3b7a85de03d679431029b5389ea",
+      "proposition": "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_FINANCE_JUDGMENT_SOURCE_GATE_PASS",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "FINANCE_JUDGMENT_SOURCE_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:5dfb5d6d1a33994378bf2d6ab90d76d7343cdb279c13c01bb71ecf567461fa8b",
+      "proposition": "TWELVE_LITERAL_INTERFACES_BOUND_TO_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_RECEIPTS",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "COMPOSITION_INTERFACE_RECEIPT_BINDING_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:60ca9ab45b640afb2b97b9922670939aaff33621f91c2d4f95641e9eebf6d12d",
+      "proposition": "AGENCY_MATCHED_SUCCESS_NONINFERIOR::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:86905ebcc3a63fa789ae213fce1fde550b6d6666cb6c5dd3cd0cdd5c8486a467",
+      "proposition": "CHARTOGRAPHY_DATASET_SCORER_ROUTE_CARRIER_THRESHOLD_CONTAMINATION_ATTAINABILITY_BOUND",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "CHARTOGRAPHY_PUBLIC_ROUTE_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "CHARTOGRAPHY_TOOLS_GE_89"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:8a8769975a49bc4af609d0074edac07112da0b8eb75ad8378ae0507b173a86f1",
+      "proposition": "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_UNKNOWN_DOMAIN_JUDGMENT_SOURCE_GATE_PASS",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "UNKNOWN_DOMAIN_JUDGMENT_SOURCE_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:8da67647263688c7c8bd72caed5ddb6c2a44ebdebe0a807712e88054ad694e8f",
+      "proposition": "IF_SCOPE_BOUNDARY_NONINFERIOR::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::IF_SCOPE_BOUNDARY_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "IF_SCOPE_BOUNDARY_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:8e7c19f22a37cee329a8ee93c92973cabf04f83d9f0f239b33f27155997b41cc",
+      "proposition": "IF_SCOPE_BOUNDARY_NONINFERIOR::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::IF_SCOPE_BOUNDARY_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "IF_SCOPE_BOUNDARY_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:947aec5a8d78256a179c24b39e1c7c045bdd1420c0a2d71c61fb9d7570e4ae6a",
+      "proposition": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+      ],
+      "associated_target_predicates": [
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:994da3c177a27f22456abd6c52badde6f6e9ba8a7e0b7cc2e680052d92235bbc",
+      "proposition": "FINANCE_AGENT_V2_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "FINANCE_AGENT_V2_STRONGER_PROOF_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "FINANCE_AGENT_V2_GE_58_59"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:9a858d786819d0a98aabdcbe03f76d7061b85f0cbeda9ddfd87eaf8fead4f877",
+      "proposition": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+      ],
+      "associated_target_predicates": [
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:9d320f209d2021a32966a8e148a7b59fe40d23d4f6c4734fc3c7c7c8e81b52a8",
+      "proposition": "AGENCY_MATCHED_SUCCESS_NONINFERIOR::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:a087eaf50168436600a04b6eae31bee86861782948ed6a5ea812c37cc36dc825",
+      "proposition": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+      ],
+      "associated_target_predicates": [
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:aa2485b61b571605cec27de825a188340ad0b63c4a1491d0b250c349f3794b8d",
+      "proposition": "COMPLETE_COMPARABLE_SCORE_PRODUCING_ROUTE_PER_FROZEN_PREDICATE",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "SHARED_PUBLIC_BENCHMARK_ABI_ROUTE_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "AUTOMATIONBENCH_GE_40",
+        "LIVEBENCH_IF_GE_65_7",
+        "TB_SCIENCE_GE_58_7"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 3
+    },
+    {
+      "atom_id": "PA1:be6de8e66c16be4c221cac039e9e852c0f28388fec3bb4852852887664b777cd",
+      "proposition": "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+      ],
+      "associated_target_predicates": [
+        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:bfef9628c9ca998e711d2e2550949d8502ba87b9c716b71d3fedf2b003ec869b",
+      "proposition": "RECOVERY_TERMINAL_NONINFERIOR::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::RECOVERY_TERMINAL_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "RECOVERY_TERMINAL_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:ca8fd360a2d862666cb4b8202e7afe97cc5121ca6068eb0093c2578a0bfb3fdb",
+      "proposition": "GDPVAL_AA_ROUTE_BOUND",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "GDPVAL_PUBLIC_ROUTE_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "PROWORK_GDPVAL_GE_1846"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:d04315ae7b31a32d86ff24cc49bd4f39242dbb3e0f9c66cc7851e6d46c912928",
+      "proposition": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+      ],
+      "associated_target_predicates": [
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:d094bd90677e221ce7b86b77e4fbcb5e202f190432e9c29aed102774e804e5e2",
+      "proposition": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+      ],
+      "associated_target_predicates": [
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:d6abfbd982664100af5605f1c5fe334246de6d02aa65db8987d29fab40a23553",
+      "proposition": "MYSTERYMECHANISM_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "MYSTERYMECHANISM_STRONGER_PROOF_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "MYSTERYMECHANISM_GE_49_55"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:da919115efc30672e13bfec120316f55759df6fb6f586ce2a6c6ba5f49dc5a84",
+      "proposition": "HLE_CANONICAL_ROUTE_OR_UNCHANGED_PROTOCOL_SCOPE_COMPLETE_STRONGER_WITNESS",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "HLE_PUBLIC_ROUTE_OR_SCOPE_COMPLETE_PROOF_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:dc057ec71714b119591efa8238f107d0df300a2a5a4a8a67547a8788373541c9",
+      "proposition": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:e3146ebfcb508cf0dbaa52a92de4cf72e009eee03131fcc06c0437a390e31325",
+      "proposition": "ARTIFACT_AA_BRIEFCASE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "AA_BRIEFCASE_CHILD::ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "associated_target_predicates": [
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:ea1d0f1b40a02e406e4821b05483680a5210b5416511e4eb789fcae3c9b2646f",
+      "proposition": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:eb6fc5451661543855050a7f5a32c0c7624d1bc31f751ab7ebc6428e86c238a0",
+      "proposition": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+      "layers": [
+        "GLOBAL_LEAF"
+      ],
+      "certificate_ids": [
+        "TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE"
+      ],
+      "associated_target_predicates": [
+        "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:f04a730981366198c155caadc674b3138647f612e065b90a28ebd78f06f0947b",
+      "proposition": "PROWORK_AA_BRIEFCASE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "AA_BRIEFCASE_CHILD::PROWORK_AA_BRIEFCASE_GE_1822"
+      ],
+      "associated_target_predicates": [
+        "PROWORK_AA_BRIEFCASE_GE_1822"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:f4e980bc2c7c622419299f07ea233c5d0c7ef42db4905ad53c4f65434b88849e",
+      "proposition": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES::WITNESS_TARGET_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+      ],
+      "associated_target_predicates": [
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    },
+    {
+      "atom_id": "PA1:fffc23fc4f895ebb948c14b01a8df242b5e3c4fb69a142f24f72f3e1856c7e4a",
+      "proposition": "RECOVERY_TERMINAL_NONINFERIOR::WITNESS_TARGET_SEMANTIC_BINDING_INDEPENDENT_PASS",
+      "layers": [
+        "REFINEMENT_CHILD_LEAF"
+      ],
+      "certificate_ids": [
+        "MATCHED_TARGET_CERTIFICATE::RECOVERY_TERMINAL_NONINFERIOR"
+      ],
+      "associated_target_predicates": [
+        "RECOVERY_TERMINAL_NONINFERIOR"
+      ],
+      "occurrence_count": 1,
+      "associated_target_count": 1
+    }
+  ]
+}
