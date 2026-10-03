@@ -86,7 +86,7 @@ class PlannerTests(unittest.TestCase):
             })
             return Response(tool_response(args))
         with patch.object(p.urllib.request,"urlopen",fake):
-            out=p.plan("synthetic",timeout_s=180)
+            out=p.plan("synthetic")
         self.assertEqual(out["endpoint"],p.ENDPOINT)
         self.assertEqual(out["transport"],"PINNED_LOCAL_QWEN_LLAMA_CPP_TOOL_CALL")
         self.assertEqual(out["model"],"brain-qwen3.5-9b")
@@ -97,6 +97,9 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(body["tool_choice"],"required")
         self.assertFalse(body["parallel_tool_calls"])
         self.assertEqual(body["temperature"],0)
+        self.assertEqual(body["chat_template_kwargs"],{"enable_thinking":False})
+        self.assertEqual(body["max_tokens"],p.MAX_GENERATION_TOKENS)
+        self.assertEqual(seen[0]["timeout"],p.DEFAULT_TIMEOUT_S)
         self.assertFalse(body["stream"])
         self.assertEqual(len(body["tools"]),1)
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
