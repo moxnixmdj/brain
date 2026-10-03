@@ -1,0 +1,182 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_FAIL_CLOSED__15_ROOT2_PREDICATES__14_UNIQUE_BENCHMARK_SURFACES__ZERO_CREDIT",
+  "objective": "Collapse the 15 Root-2-only public fixed-bar predicates into the minimum 14 unique benchmark-route obligations, while preserving the distinction between historical execution-route deletion and strict Opus 5.5 acceptance proof.",
+  "authority": {
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "bb38521bf7dd4a8d404a1a62cfd326769eb075ea"
+    },
+    "route_matrix": {
+      "path": "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
+      "git_blob_sha": "03e818af38f57df2531cfeb11dbf95cbfb60281d"
+    },
+    "benchmark_dominance": {
+      "path": "canonical/governance/EXTERNAL_BENCHMARK_DOMINANCE_GATE_V1.json",
+      "git_blob_sha": "d5eba104f28f6ba0bb400967057dc02029e2353e"
+    },
+    "livebench_if_route": {
+      "path": "canonical/governance/LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2.json",
+      "git_blob_sha": "7067a849585d9020f3d78aa374c0eeecb5078c8b"
+    },
+    "tb4_attainability": {
+      "path": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+      "git_blob_sha": "a7b0c692251b92819007c581b9fe84b75960cab7"
+    }
+  },
+  "deduplication": {
+    "root2_only_predicate_count": 15,
+    "unique_benchmark_surface_count": 14,
+    "shared_surface": {
+      "surface": "AA-Briefcase v1.1",
+      "predicate_ids": [
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "rule": "ONE_VALID_SCORE_ROUTE_MAY_DISCHARGE_BOTH_ONLY_IF_EACH_FROZEN_PREDICATE_SCOPE_IS_SEPARATELY_SATISFIED"
+    }
+  },
+  "routes": [
+    {
+      "surface": "Terminal-Bench 4.0",
+      "predicate_ids": ["CODING_TB4_GE_66_4"],
+      "target": ">=66.4%",
+      "state": "CURRENT_ROUTE_MATHEMATICALLY_UNATTAINABLE",
+      "exact_blocker": "CURRENT_MACHINE_VERIFIED_ROUTE_MAXIMUM_180_SUCCESSES__PASS_REQUIRES_220__180_LT_220",
+      "next": "RAISE_ADMISSIBLE_ATTAINABILITY_UPPER_BOUND_TO_AT_LEAST_220_VIA_CARRIER_ROUTE_OR_PROTOCOL_EQUIVALENCE_WITHOUT_CASE_EXPOSURE"
+    },
+    {
+      "surface": "FrontierCode v1.1 Main",
+      "predicate_ids": ["CODING_FRONTIERCODE_GE_54_4"],
+      "target": ">=54.4%",
+      "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_BLOCKED_EXECUTION_ROUTE_DELETED_ONLY",
+      "next": "BIND_EXACT_EXISTING_FRONTIERCODE_COMPARABLE_ROUTE_OR_OTHERWISE_KEEP_PREDICATE_OPEN"
+    },
+    {
+      "surface": "CursorBench 4.0",
+      "predicate_ids": ["CODING_CURSORBENCH_GE_57_8"],
+      "target": ">=57.8%",
+      "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_BLOCKED_EXECUTION_ROUTE_DELETED_ONLY",
+      "next": "BIND_EXACT_EXISTING_CURSORBENCH_COMPARABLE_ROUTE_OR_OTHERWISE_KEEP_PREDICATE_OPEN"
+    },
+    {
+      "surface": "GDPval-AA v2.1",
+      "predicate_ids": ["PROWORK_GDPVAL_GE_1846"],
+      "target": ">=1846 Elo",
+      "state": "EXACT_OFFICIAL_ROUTE_OPEN__PUBLIC_SCOPE_EQUIVALENT_CANDIDATE_ONLY",
+      "next": "OBTAIN_EXACT_AA_V2_1_ROUTE_OR_INDEPENDENTLY_PROVE_A_SCOPE_EQUIVALENT_ABSOLUTE_ROUTE_ADMISSIBLE_UNDER_THE_FROZEN_PREDICATE"
+    },
+    {
+      "surface": "AA-Briefcase v1.1",
+      "predicate_ids": ["PROWORK_AA_BRIEFCASE_GE_1822","ARTIFACT_AA_BRIEFCASE_GE_1822"],
+      "target": ">=1822 Elo",
+      "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_PRIVATE_EXECUTION_ROUTE_DELETED_ONLY",
+      "next": "BIND_COMPARABLE_AA_BRIEFCASE_ROUTE_OR_KEEP_BOTH_PREDICATES_OPEN__NO_CREDIT_FROM_OLD_ROUTE_DELETION"
+    },
+    {
+      "surface": "AutomationBench",
+      "predicate_ids": ["AUTOMATIONBENCH_GE_40"],
+      "target": ">=40%",
+      "state": "EXACT_OFFICIAL_PRIVATE_HOLDOUT_ROUTE_OPEN__PUBLIC_600_SCOPE_EQUIVALENT_ONLY",
+      "next": "PROVE_PUBLIC_600_ABSOLUTE_ROUTE_SCOPE_SUFFICIENT_OR_BIND_EXACT_OFFICIAL_COMPARABLE_ROUTE"
+    },
+    {
+      "surface": "Humanity's Last Exam with tools",
+      "predicate_ids": ["HLE_TOOLS_GE_67_7"],
+      "target": ">=67.7%",
+      "state": "PUBLIC_DATA_AND_BASE_EVAL_AVAILABLE__TOOLS_HARNESS_AND_ZERO_COST_GRADING_ROUTE_OPEN",
+      "next": "FREEZE_EXACT_WITH_TOOLS_HARNESS_AND_ZERO_COST_SHORT_ANSWER_GRADING_ROUTE"
+    },
+    {
+      "surface": "Terminal-Bench-Science 0.1",
+      "predicate_ids": ["TB_SCIENCE_GE_58_7"],
+      "target": ">=58.7%",
+      "state": "PUBLIC_HARNESS_AVAILABLE__HARD_ZERO_COST_EXECUTION_ROUTE_NOT_TERMINALLY_CLOSED",
+      "next": "USE_ONLY_CURRENT_VERIFIED_PORTABLE_ROUTE_STATE__NO_NEW_CASES_BEFORE_ZERO_REALITY_FIXED_POINT"
+    },
+    {
+      "surface": "Chartography with tools",
+      "predicate_ids": ["CHARTOGRAPHY_TOOLS_GE_89"],
+      "target": ">=89%",
+      "state": "PUBLIC_INPUTS_AND_HARNESS_AVAILABLE__ZERO_COST_EQUIVALENT_SCORER_OR_MODEL_JUDGE_ROUTE_OPEN",
+      "next": "FREEZE_INDEPENDENT_ZERO_COST_EQUIVALENT_SCORER_OR_PROVE_EXISTING_DETERMINISTIC_GOLD_SCORING_SUFFICIENT"
+    },
+    {
+      "surface": "OSWorld 2.1 partial",
+      "predicate_ids": ["OSWORLD_2_1_PARTIAL_GE_81_8"],
+      "target": ">=81.8%",
+      "state": "PUBLIC_RELEASE_AVAILABLE__ZERO_COST_COMPARABLE_ENVIRONMENT_ROUTE_OPEN",
+      "next": "FREEZE_SELF_HOSTED_OR_INCLUDED_QUOTA_ENVIRONMENT_WITH_MATCHED_VERSION_AND_HARD_SPEND_STOP"
+    },
+    {
+      "surface": "Finance & Accounting Index",
+      "predicate_ids": ["FINANCE_ACCOUNTING_INDEX_GE_61"],
+      "target": ">=61 represented scope",
+      "state": "AUTHORITATIVE_BENCHMARK_IDENTITY_OR_ACCESS_UNRESOLVED",
+      "next": "RESOLVE_EXACT_BENCHMARK_IDENTITY_SCOPE_HARNESS_AND_SCORER_BEFORE_ANY_EXECUTION"
+    },
+    {
+      "surface": "Finance Agent v2",
+      "predicate_ids": ["FINANCE_AGENT_V2_GE_58_59"],
+      "target": ">=58.59%",
+      "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_GATED_EXECUTION_ROUTE_DELETED_ONLY",
+      "next": "BIND_EXACT_COMPARABLE_ROUTE_OR_KEEP_PREDICATE_OPEN__NO_CREDIT_FROM_OLD_ROUTE_DELETION"
+    },
+    {
+      "surface": "LiveBench Instruction Following",
+      "predicate_ids": ["LIVEBENCH_IF_GE_65_7"],
+      "target": ">=65.7%",
+      "state": "COMPARATOR_POPULATION_SCORER_AND_INPUT_ROUTE_PREQUALIFIED__BRAIN_SCORE_ONLY_OPEN",
+      "next": "DO_NOT_EXECUTE_CASES_UNTIL_ZERO_REALITY_FIXED_POINT__THEN_RUN_ONLY_THE_MINIMUM_AUTHORIZED_BRAIN_SCORE_EVALUATION"
+    },
+    {
+      "surface": "Vals MysteryMechanism",
+      "predicate_ids": ["MYSTERYMECHANISM_GE_49_55"],
+      "target": ">=49.55%",
+      "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_BLOCKED_EXECUTION_ROUTE_DELETED_ONLY",
+      "next": "BIND_EXACT_COMPARABLE_ROUTE_OR_KEEP_PREDICATE_OPEN__OLD_DOMINANCE_DELETED_ONLY_A_REQUIRED_EXECUTION_ROUTE_AND_GRANTED_ZERO_ACCEPTANCE_CAPABILITY_FAMILY_CREDIT"
+    }
+  ],
+  "route_classes": {
+    "brain_score_only_open": ["LIVEBENCH_IF_GE_65_7"],
+    "current_route_mathematically_unattainable": ["CODING_TB4_GE_66_4"],
+    "public_inputs_or_harness_but_execution_or_grading_route_open": [
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "public_scope_equivalent_but_exact_comparability_open": [
+      "PROWORK_GDPVAL_GE_1846",
+      "AUTOMATIONBENCH_GE_40"
+    ],
+    "identity_or_access_unresolved": ["FINANCE_ACCOUNTING_INDEX_GE_61"],
+    "historical_execution_route_deleted_but_strict_predicate_still_open": [
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_GE_49_55"
+    ]
+  },
+  "hard_rules": [
+    "DELETING_A_BLOCKED_EXECUTION_ROUTE_IS_NOT_ACCEPTANCE_PREDICATE_CLOSURE",
+    "ZERO_CREDIT_ROUTE_DOMINANCE_HISTORY_MUST_NOT_BE_REINTERPRETED_AS_BRAIN_GE_OPUS_SCORE_PROOF",
+    "NO_CUSTOM_BENCHMARK_WHEN_THE_FROZEN_PREDICATE_NAMES_AN_EXISTING_OPUS55_SURFACE",
+    "NO_CASE_EXPOSURE_BEFORE_ZERO_REALITY_FIXED_POINT",
+    "NO_SCORE_INHERITANCE_ACROSS_SURFACES",
+    "NO_DUPLICATE_EXECUTION_FOR_THE_SHARED_AA_BRIEFCASE_SURFACE_IF_ONE_VALID_RUN_CAN_SEPARATELY_SATISFY_BOTH_PREDICATE_SCOPES"
+  ],
+  "next": "PARALLEL_ROUTE_BINDING_OVER_THE_14_UNIQUE_SURFACES__PRIORITIZE_ZERO_REALITY_ROUTE_IDENTITY_SCORER_AND_CARRIER_BINDINGS__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
