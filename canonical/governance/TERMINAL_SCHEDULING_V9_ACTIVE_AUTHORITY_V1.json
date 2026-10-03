@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V9_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CURRENT_AUTHORITY__V9_INDEPENDENT_PASS__FINAL_POINTER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_scheduling_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V9.json",
+    "git_blob_sha": "d3cec8d1c2b2d7343bd41883bb2557eca3fe2511"
+  },
+  "independent_activation_verification": {
+    "path": "canonical/verification/TERMINAL_SCHEDULING_V9_RETRIEVAL_GATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "2d9b221ddfff2b8c0c04a3c7121c1650e5f6ea8c",
+    "workflow_run_id": 37116233783,
+    "workflow_job_id": 111183483222,
+    "conclusion": "success"
+  },
+  "live_scheduler": {
+    "runtime_path": "canonical/runtime/current_terminal_scheduling_world_v1.py",
+    "runtime_git_blob_sha": "9ae2b990578b042dd24074fd5013378b72e64b6b",
+    "action_hypergraph_path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+    "action_hypergraph_git_blob_sha": "e29ce3a7c782c7b9ab1097dd3124a917d3fea9d2",
+    "retrieval_gate_path": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py",
+    "retrieval_gate_git_blob_sha": "9af1bd62048277cc8c4fabab8efe5d217c367bac"
+  },
+  "live_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "tool_learning_success_route_noninferior": "OPEN"
+  },
+  "tool_discovery_retrieval_authority": {
+    "mandatory": true,
+    "activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e",
+    "direct_or_stale_bypass_allowed": false,
+    "same_consumed_source_epoch_replay_allowed": false,
+    "no_result_means_nonexistence": false
+  },
+  "supersession": {
+    "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json": "HISTORICAL_ONLY__NOT_CURRENT_AFTER_V9_POINTER_PROMOTION",
+    "CURRENT_TERMINAL_SCHEDULING_WORLD_V2_AND_TERMINAL_SCHEDULING_ACTIVATION_V8": "ABANDONED_UNMERGED_STALE_3_OF_19_CANDIDATES"
+  },
+  "hard_rules": [
+    "DO_NOT_SCHEDULE_TOOL_DISCOVERY_RETRIEVAL_OUTSIDE_THE_MANDATORY_GATE",
+    "DO_NOT_USE_V7_AS_CURRENT_SCHEDULING_AUTHORITY_AFTER_FINAL_POINTER_PASS",
+    "DO_NOT_REPEAT_CONSUMED_RETRIEVAL_SOURCE_EPOCHS",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "PRESERVE_RECOVERY_4_OF_19_PROMOTION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_THIS_POINTER_EXACT_BYTES__THEN_TREAT_V9_AS_CURRENT_SCHEDULING_AUTHORITY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

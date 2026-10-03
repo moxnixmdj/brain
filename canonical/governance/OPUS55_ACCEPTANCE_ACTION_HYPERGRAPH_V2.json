@@ -448,7 +448,24 @@
           "evidence": "canonical/verification/FUTURE_MATCHED_SCOPE_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         }
       ],
-      "notes": "Finite historical samples cannot transport into the future matched scope. Search only for independent universal formal scope proof, exhaustive finite superset, or later valid frozen target instantiation."
+      "notes": "Finite historical samples cannot transport into the future matched scope. All live retrieval for this predicate is mechanically gated by mandatory_retrieval_authority and must use the exact independently verified V2 residual-witness retrieval stack. Search only for independent universal formal scope proof, exhaustive finite superset, or admissible matched evidence for any irreducible remainder. No direct, stale, or same-source-epoch replay path.",
+      "mandatory_retrieval_authority": {
+        "activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1.json",
+        "activation_blob": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e",
+        "activation_verification_path": "canonical/verification/TOOL_DISCOVERY_RETRIEVAL_FRONTIER_V2_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "activation_verification_blob": "bbbd34e192aa65ba94c4bda19a1a1eb9c2b5b406",
+        "compiler_path": "canonical/runtime/residual_witness_retrieval_compiler_v1.py",
+        "compiler_blob": "9daa8d590f3356b3fc51eccf75c56cbf515239e4",
+        "compiler_verification_path": "canonical/verification/RESIDUAL_WITNESS_RETRIEVAL_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "compiler_verification_blob": "f0a68c8219d704875535543060f63b9ecaca6dd5",
+        "router_path": "canonical/runtime/residual_witness_backend_router_v1.py",
+        "router_blob": "578c5f87901a458b12d7df984e0a6a525d367456",
+        "github_provider_path": "canonical/runtime/github_public_retrieval_provider_v1.py",
+        "github_provider_blob": "29b808935559382ab7ddc81aaa08fe0611a05df8",
+        "backend_verification_path": "canonical/verification/GITHUB_PUBLIC_RETRIEVAL_SURFACES_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "backend_verification_blob": "ca5acd7afbf14b7cce568ec482c160c3795e57ba",
+        "rule": "ALL_LIVE_TOOL_DISCOVERY_RETRIEVAL_MUST_PASS_THIS_EXACT_VERIFIED_V2_AUTHORITY__NO_DIRECT_OR_STALE_SEARCH_PATH"
+      }
     },
     {
       "id": "BUILD_DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
