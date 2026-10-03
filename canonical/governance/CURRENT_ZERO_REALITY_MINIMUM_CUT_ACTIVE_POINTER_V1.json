@@ -1,18 +1,19 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__V12_LOCAL_CONE_PUBLIC_RUNNER_PASS__TWO_SCORE_ONLY_PREDICATES_SCOPED_AUTHORIZED__ZERO_CREDIT",
+  "status": "ACTIVE__V12_EXACT_TRANSACTION_INDEPENDENT_PUBLIC_RUNNER_PASS__TWO_SCORE_ONLY_PREDICATES_SCOPED_AUTHORIZED__ZERO_CREDIT",
   "active_cut": {
     "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json",
     "git_blob_sha": "755bf5efce7e7e5f6b1c0462eb824755ab8c3138"
   },
   "verification": {
-    "path": "canonical/verification/LOCAL_ZERO_REALITY_FIXED_POINT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-    "git_blob_sha": "52cb662d94d176800529d11b6d9181014c8f442d",
+    "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "a1a057fd200d3cdcb4ab54f9d8a9f6615d0eb273",
     "conclusion": "success",
-    "verifier_pr": 1436,
-    "workflow_run_id": 37158244145,
-    "workflow_job_id": 111306055369
+    "verifier_pr": 1440,
+    "verifier_merge_commit": "00a4b0a604d4e77deac59a5f25bc315000abfc09",
+    "workflow_run_id": 37158592587,
+    "workflow_job_id": 111307065840
   },
   "supersedes": {
     "cut": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V11.json",
@@ -25,8 +26,8 @@
     "unresolved_atomic": 26,
     "terminal": false
   },
-  "current_delta": "PREDICATE_LOCAL_ZERO_REALITY_CONE_PASS__LIVEBENCH_IF_AND_TB_SCIENCE_SCOPED_SCORE_AUTHORITY__GLOBAL_FRESH_REALITY_FALSE",
-  "next": "EXECUTE_ONLY_LIVEBENCH_IF_GE_65_7_AND_TB_SCIENCE_GE_58_7_FROZEN_SCORE_ROUTES__CONTINUE_UNRELATED_ZERO_REALITY_WORK__NO_OTHER_FRESH_REALITY",
+  "current_delta": "V12_EXACT_TRANSACTION_INDEPENDENT_PASS__PREDICATE_LOCAL_SERIALIZATION_REMOVED_FOR_LIVEBENCH_IF_AND_TB_SCIENCE_ONLY",
+  "next": "EXECUTE_ONLY_LIVEBENCH_IF_GE_65_7_AND_TB_SCIENCE_GE_58_7_FROZEN_SCORE_ROUTES_IN_PARALLEL__CONTINUE_UNRELATED_ZERO_REALITY_WORK__NO_OTHER_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
   "incremental_spend_usd": 0,
@@ -42,5 +43,9 @@
   "scoped_authorized_predicates": [
     "LIVEBENCH_IF_GE_65_7",
     "TB_SCIENCE_GE_58_7"
-  ]
+  ],
+  "activation": {
+    "path": "canonical/governance/LOCAL_ZERO_REALITY_FIXED_POINT_ACTIVATION_V1.json",
+    "git_blob_sha": "af0bd9cf557b5b2628d9183e4bda1b2b90eabce4"
+  }
 }

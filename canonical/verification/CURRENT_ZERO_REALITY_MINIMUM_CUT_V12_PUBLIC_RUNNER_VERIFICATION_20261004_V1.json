@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V12_TRANSACTION__SCOPED_TWO_PREDICATE_AUTHORITY__OWNERSHIP_SUMMARY_ROW_PROJECTION__ZERO_ACCEPTANCE_CREDIT",
+  "subject_brain_commit": "63d3afcaacab1332754f9e191451d4c4e6e1b05e",
+  "exact_brain_blobs": {
+    "canonical/governance/LOCAL_ZERO_REALITY_FIXED_POINT_CANDIDATE_V1.json": "d488701114d9a6e8f9ecbbac151765886fcbe296",
+    "canonical/verification/LOCAL_ZERO_REALITY_FIXED_POINT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json": "52cb662d94d176800529d11b6d9181014c8f442d",
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json": "755bf5efce7e7e5f6b1c0462eb824755ab8c3138",
+    "canonical/governance/LOCAL_ZERO_REALITY_FIXED_POINT_ACTIVE_AUTHORITY_V1.json": "f385863cc9953310fc3e5566917cd1434ae56f2a",
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json": "0943e1886ac3fb26a2abf7d7f3aa52d2faf5f443",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "8825d47c0f4e633265cf2a7aa926c6bac4b8ec5c",
+    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json": "f690c5d99f9e9c43d36fbe47c6cc921f776f3bb5"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1440,
+    "head_sha": "c77cbfb724a8b2c69ca1f9c9a9421527ee02a121",
+    "merge_commit": "00a4b0a604d4e77deac59a5f25bc315000abfc09",
+    "workflow_run_id": 37158592587,
+    "workflow_job_id": 111307065840,
+    "conclusion": "success",
+    "verifier_manifest_git_blob_sha": "5c1290b42fd28ae71b731ab6d934409836f733a3",
+    "verifier_script_git_blob_sha": "021bc6dcfbd260d12711da3e0f3ae830393770ee",
+    "workflow_git_blob_sha": "88933e3ddcaaeb8cd9d1d7cbced73065c85c4b9e"
+  },
+  "verified": {
+    "acceptance_state": "5_OF_19__12_OF_38__UNCHANGED",
+    "verified_owned_state": "5_OF_19",
+    "global_fresh_reality_authority": false,
+    "scoped_fresh_reality_authority": true,
+    "scoped_authorized_predicates": [
+      "LIVEBENCH_IF_GE_65_7",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "all_other_unresolved_predicates_authorized": false,
+    "ownership_summary_exact_row_projection": true
+  },
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "promotion_authority": false
+}
