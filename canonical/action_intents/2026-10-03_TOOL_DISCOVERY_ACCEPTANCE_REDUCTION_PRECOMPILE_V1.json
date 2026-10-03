@@ -1,0 +1,12 @@
+{
+ "schema":"PROJECT_BRAIN_ACTION_INTENT_V1",
+ "action_id":"TOOL-DISCOVERY-ACCEPTANCE-REDUCTION-PRECOMPILE-20261003-V1",
+ "status":"PRECOMPILED__BLOCKED_ONLY_ON_INDEPENDENT_SCOPE_RECEIPT__ZERO_CREDIT",
+ "canonical_base_commit":"43449559ea5e3eddf17a5a36263d0218c2b82eda",
+ "target_predicate":"TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+ "target_family":"TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+ "required_receipt":"canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+ "expected_reduction":"IF_AND_ONLY_IF_RECEIPT_BINDS_BRAIN_PR_1133_EXACT_BYTES_AND_INDEPENDENT_UNIVERSAL_SCOPE_PASS__COMPILE_EXACTLY_4_OF_19_WITH_TOOL_DISCOVERY_ONLY_NEW_CLOSURE",
+ "new_reality_units_consumed":0,"terminal_results_replayed":0,"incremental_spend_usd":0,
+ "capability_credit_delta":0,"family_credit_delta":0,"execution_authority":false,"promotion_authority":false
+}
