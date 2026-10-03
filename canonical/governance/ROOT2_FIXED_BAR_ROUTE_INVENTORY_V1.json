@@ -6,7 +6,7 @@
   "authority": {
     "root_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "bb38521bf7dd4a8d404a1a62cfd326769eb075ea"
+      "git_blob_sha": "815038c358d31b8b0abade1352bb09d8096a51e5"
     },
     "route_matrix": {
       "path": "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
@@ -23,6 +23,11 @@
     "tb4_attainability": {
       "path": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
       "git_blob_sha": "a7b0c692251b92819007c581b9fe84b75960cab7"
+    },
+    "public_access_refresh": {
+      "path": "canonical/governance/ROOT2_PUBLIC_ACCESS_REFRESH_20261003_V1.json",
+      "git_blob_sha": "905d4ac3e186b7f69c4dc6eaf83a82b7a7044a75",
+      "status": "CURRENT_PUBLIC_ROUTE_ACCESS_REFRESH__PRIVATE_HELDOUT_AND_PUBLIC_ROUTE_BOUNDARIES_RECONCILED__ZERO_CREDIT"
     }
   },
   "deduplication": {
@@ -220,7 +225,7 @@
     "NO_SCORE_INHERITANCE_ACROSS_SURFACES",
     "NO_DUPLICATE_EXECUTION_FOR_THE_SHARED_AA_BRIEFCASE_SURFACE_IF_ONE_VALID_RUN_CAN_SEPARATELY_SATISFY_BOTH_PREDICATE_SCOPES"
   ],
-  "next": "PARALLEL_ROUTE_BINDING_OVER_THE_14_UNIQUE_SURFACES__FINANCE_INDEX_IDENTITY_NOW_RESOLVED__PRIORITIZE_ONLY_INCREMENTAL_ROUTE_SCORER_CARRIER_AND_SCOPE_GAPS__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY",
+  "next": "WORK_ONLY_INCREMENTAL_PUBLIC_SCORER_AND_ZERO_COST_CARRIER_DELTAS__PRIVATE_SURFACES_WAIT_FOR_ACCESS_OR_STRONGER_PROOF_CHANGE__TB4_WAIT_FOR_REOPEN_CONDITION__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
@@ -229,5 +234,8 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "stop_rules": {
+    "private_heldout_public_access_search": "STOP_UNTIL_ACCESS_OR_STRONGER_PROOF_STATE_CHANGES"
+  }
 }
