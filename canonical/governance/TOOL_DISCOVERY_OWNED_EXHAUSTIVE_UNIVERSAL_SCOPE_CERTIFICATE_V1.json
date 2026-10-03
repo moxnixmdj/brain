@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_OWNED_EXHAUSTIVE_UNIVERSAL_SCOPE_CERTIFICATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__UNIVERSAL_FORMAL_SCOPE_PROOF__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "canonical_base_commit": "2996d01471169f520d6686af42f3d351a19ce690",
+  "why_prior_verified_refinement_is_not_reused": "Dynamic V3 can SELECT an already-proved expensive visible tool before querying an unqueried source that contains a cheaper sufficient tool. Therefore the prior conditional least-cost implication is false even with a complete discovery interface.",
+  "exact_inputs": {
+    "canonical/runtime/tool_discovery_dynamic_candidate_v3.py": "bbbee4d6baf8df937543644397abba38a67dce62",
+    "canonical/runtime/tool_discovery_dynamic_candidate_v4.py": "394cbc2e3092ef0bb870ccad9b092343275ca73e",
+    "canonical/runtime/tool_universe_gateway_v1.py": "fd27f6f49e6a1ca6d47dc053f229c30492380b70",
+    "canonical/runtime/tool_discovery_owned_exhaustive_v1.py": "b496803c3e32cffc22b4e679a5730223a8de9cd0",
+    "canonical/runtime/tool_discovery_owned_exhaustive_scope_proof_v1.py": "4d7d2ae13451dd801ef3b2df75f0de8604e15a1f",
+    "canonical/tests/test_tool_discovery_dynamic_v4.py": "23f0add178ca0c731d15e0645ee9b8841317efee",
+    "canonical/tests/test_tool_universe_gateway_v1.py": "cb4e0728c6bdf444a58e19bd1f854fbe2b6efc61",
+    "canonical/tests/test_tool_discovery_owned_exhaustive_v1.py": "a64051324497c6489e9310dbc4d2fc94a64d1482",
+    "canonical/tests/test_tool_discovery_owned_exhaustive_scope_proof_v1.py": "15f22b781bd788bd43920c8d09dc7fc94bfbe8dc",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json": "48ba33998e73b8eec2731be51a7ec78077ed0d4a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "7885a827b1483bfb38315c1f492848f7e4680285"
+  },
+  "proof_domain": "ALL_FINITE_BRAIN_OWNED_TOOL_REGISTRY_STATES_WITH_FINITE_REQUIRED_CAPABILITY_SETS__GENERIC_PUBLIC_CONSTRAINTS__TRUTHFUL_SAFE_PROBE_RECEIPTS__AND_REGISTRY_EPOCH_CHANGES",
+  "formal_lemmas": [
+    {
+      "id": "L1_OWNED_IDENTITY_COMPLETENESS",
+      "statement": "For any registry state R, gate_invoke accepts only identities in R and discover enumerates exactly R. Therefore every Brain-invocable tool identity is discoverable."
+    },
+    {
+      "id": "L2_DISCOVERY_PRECEDES_SELECTION",
+      "statement": "The composed route exposes exactly the owned gateway as the discovery source and V4 emits DISCOVER while it is unqueried. Therefore no PROBE or SELECT precedes complete identity enumeration."
+    },
+    {
+      "id": "L3_FINITE_DISCOVERY_AND_PROBE_PROGRESS",
+      "statement": "One owned-gateway discovery receipt closes identity enumeration for a stable registry epoch. Thereafter each successful PROBE resolves one previously unknown pair in the finite product of eligible tools and required capabilities."
+    },
+    {
+      "id": "L4_GLOBAL_LEAST_COST_SELECTION",
+      "statement": "After complete identity enumeration, eligible tools are traversed by nondecreasing declared cost then opaque identity. A later route is considered only after every earlier route is disproved, so the first selected sufficient route is globally least-cost in the owned invocable universe."
+    },
+    {
+      "id": "L5_NO_UNSUPPORTED_PROMOTION",
+      "statement": "SELECT is emitted only when every required capability for that tool has current positive probe evidence. Hidden capability truth is never read directly."
+    },
+    {
+      "id": "L6_EPOCH_SOUNDNESS",
+      "statement": "Registry replacement increments the owned registry epoch. The composition refuses a stale episode before any discovery, probe, selection, or invocation reuse."
+    },
+    {
+      "id": "L7_UNKNOWN_AND_CHANGING_TOOLS",
+      "statement": "A new tool becomes Brain-invocable only by entering a new owned registry epoch. The next episode must rediscover the exact changed registry before selection, preserving unknown/changing-tool support without an external completeness oracle."
+    },
+    {
+      "id": "L8_POINTWISE_SUCCESS_ROUTE_CEILING",
+      "statement": "For every valid finite owned-registry episode, if an admissible sufficient tool exists the route reaches the globally least-cost such tool after finite evidence acquisition; otherwise it escalates only after no evidence-supported sufficient route remains. Thus terminal-success/valid-route correctness reaches its pointwise ceiling over the declared protocol population."
+    }
+  ],
+  "falsification": {
+    "prior_route": "DYNAMIC_V3",
+    "counterexample": "EXPENSIVE_VISIBLE_AND_ALREADY_POSITIVE__UNQUERIED_SOURCE_CONTAINS_CHEAPER_SUFFICIENT_IDENTITY",
+    "prior_action": "SELECT_EXPENSIVE_BEFORE_DISCOVER",
+    "replacement_first_action": "DISCOVER",
+    "effect": "REVOKE_PRIOR_V3_GLOBAL_LEAST_COST_CONDITIONAL_IMPLICATION"
+  },
+  "verification_plan": [
+    "MIRROR_EXACT_CONTENT_ADDRESSED_INPUTS_TO_INDEPENDENT_PUBLIC_RUNNER",
+    "RUN_V3_COUNTEREXAMPLE_AND_V4_REPAIR_TESTS",
+    "RUN_OWNED_GATEWAY_IDENTITY_COMPLETENESS_TESTS",
+    "RUN_OWNED_COMPOSITION_TESTS",
+    "RUN_SCOPE_PROOF_COMPILER",
+    "RUN_INDEPENDENT_EXHAUSTIVE_SMALL_FINITE_STATE_FALSIFICATION_SWEEP",
+    "PROMOTE_ZERO_CREDIT_SCOPE_PROOF_ONLY_IF_ALL_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_FINITE_TEST_SWEEP_IS_TREATED_AS_THE_UNIVERSAL_PROOF",
+    "NO_EXTERNAL_COMPLETE_INTERFACE_BOOLEAN_IS_TRUSTED",
+    "NO_OPEN_DOMAIN_TOOL_IS_CLAIMED_INVOCABLE_UNLESS_REGISTERED",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_BEFORE_INDEPENDENT_VERIFICATION_AND_SEPARATE_REDUCTION",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "NO_TARGET_WEAKENING"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
