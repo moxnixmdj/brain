@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TOOLATHLON_BRAIN_HOST_INTEGRATION_CURRENT_MAIN_BINDING_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_MAIN_EXACT_BRAIN_HOST_INTEGRATION__ZERO_CREDIT",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "current_main_merge": "310cfed81ae7c54e4f14737d91e4d1c10d38ca52",
+  "verified_candidate": {
+    "governance_path": "canonical/governance/TOOLATHLON_BRAIN_HOST_INTEGRATION_V1.json",
+    "governance_git_blob_sha": "60d4663f70ea5545ce0ffeb36f07fe3fe4526764",
+    "runtime_path": "canonical/runtime/toolathlon_brain_host_integration_v1.py",
+    "runtime_git_blob_sha": "c996ad810fd75446f7b5b61761b5258ebbfaf0bb",
+    "tests_path": "canonical/tests/test_toolathlon_brain_host_integration_v1.py",
+    "tests_git_blob_sha": "92f197b2d4392c2b7ee4c29d2397a02955b6d40a",
+    "adapter_git_blob_sha": "64c66a56a681b2919fbfcaf09c325c5db55f5f81",
+    "source_gate_v2_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1200,
+    "verifier_merge_sha": "cc4bbb2ca25ec96d98d09541d1334fac784de9e4",
+    "workflow_run_id": 37095221300,
+    "workflow_job_id": 111123655093,
+    "conclusion": "success",
+    "passed_steps": [
+      "REUSE_INDEPENDENTLY_MIRRORED_EXACT_DEPENDENCIES",
+      "VERIFY_EXACT_BRAIN_PR1204_BYTES",
+      "RUN_HOST_INTEGRATION_ADVERSARIAL_TESTS",
+      "PROMOTION_PREFLIGHT_SOURCE_GATE"
+    ]
+  },
+  "closes": [
+    "REAL_TOOLATHLON_DECOUPLED_HOST_INTEGRATION_BINDS_GATEWAY_TO_BRAIN_OWNED_SELECTION_ADAPTER"
+  ],
+  "promotion_preflight": {
+    "current_blocker_when_harness_zero_cost_false": [
+      "HARNESS_ZERO_COST_NOT_PROVEN"
+    ],
+    "hypothetical_source_gate_pass_if_harness_zero_cost_true": true,
+    "note": "This is a schema/admissibility preflight only; the point-of-use carrier fact must still be independently observed."
+  },
+  "remains_open": [
+    "POINT_OF_USE_LOCAL_OPENAI_TOOL_CALL_COMPATIBILITY",
+    "POINT_OF_USE_OFFICIAL_SERVICE_ADMISSION_RECHECK",
+    "NO_PAID_PROVIDER_CONFIGURATION",
+    "SAME_HARNESS_AND_COMMON_TOOL_AUTHORITY_COMPARABILITY_TO_OPUS55_REFERENCE",
+    "BRAIN_MATCHED_TOOLATHLON_TERMINAL_RESULT",
+    "VALID_ROUTE_TOP1_COMPARATOR_OR_SCOPE_COMPLETE_STRONGER_PROOF"
+  ],
+  "terminal_results_observed": 0,
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
