@@ -18,7 +18,7 @@
     "agent_path": "canonical/runtime/harbor_science_agent_v2.py",
     "agent_blob": "e11d7116f344dc907ab12baee404f8b97c569208",
     "planner_tests_path": "canonical/tests/test_harbor_science_planner_v2.py",
-    "planner_tests_blob": "64a0ee3834d28026e586416e174372a658dc9ee6",
+    "planner_tests_blob": "c959754f790ac2d4adb322647a16e2f2dabfcda1",
     "agent_tests_path": "canonical/tests/test_harbor_science_agent_v2.py",
     "agent_tests_blob": "a4a655bb96d51b015248d32a8f34041cb4409d24"
   },
