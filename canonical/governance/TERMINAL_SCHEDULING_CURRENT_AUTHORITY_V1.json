@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_CANDIDATE_PENDING_INDEPENDENT_POINTER_VERIFICATION__V10_CURRENT__RECOVERY_4_OF_19__MANDATORY_TOOL_DISCOVERY_V3_RETRIEVAL_GATE__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_CANDIDATE_PASS__V10_CURRENT__RECOVERY_4_OF_19__MANDATORY_TOOL_DISCOVERY_V3_RETRIEVAL_GATE__FINAL_ACTIVE_POINTER_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "current_authority": {
     "path": "canonical/governance/TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_V1.json",
     "git_blob_sha": "b1d37d015d93eb71fba1742a498b793b5a2a4ea0"
@@ -57,5 +57,12 @@
   "family_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "final_pointer_candidate_verification": {
+    "path": "canonical/verification/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V10_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "746111757bf0c7b8c0c3e6e70a7172d798141c4c",
+    "workflow_run_id": 37120345704,
+    "workflow_job_id": 111195072424,
+    "conclusion": "success"
+  }
 }
