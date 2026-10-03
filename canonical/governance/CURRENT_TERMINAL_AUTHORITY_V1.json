@@ -838,7 +838,7 @@
     "total": 38,
     "authorized_acceptance_case_actions": [],
     "source": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-    "source_git_blob_sha": "7885a827b1483bfb38315c1f492848f7e4680285",
+    "source_git_blob_sha": "e62c732937d4dae4eb5297dff96d354dcc52236e",
     "state": "AUTHORITY_RECONCILED_AFTER_INDEPENDENT_RECOVERY_ZERO_REALITY_CLOSURE"
   },
   "tb4_threshold_execution": {
