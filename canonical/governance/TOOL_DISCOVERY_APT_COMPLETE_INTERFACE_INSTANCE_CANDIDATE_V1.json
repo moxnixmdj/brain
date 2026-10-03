@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_APT_COMPLETE_INTERFACE_INSTANCE_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_LIVE_EXTERNAL_INTERFACE_INSTANCE__INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Instantiate TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1 on a real changing zero-cost ecosystem using the complete enabled public APT package-index epoch of an independent Ubuntu runner.",
+  "frozen_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json",
+  "runtime": "canonical/runtime/tool_discovery_apt_complete_interface_instance_v1.py",
+  "tests": "canonical/tests/test_tool_discovery_apt_complete_interface_instance_v1.py",
+  "declared_target_scope": "ALL_BINARY_PACKAGE_TOOL_IDENTITIES_EXPOSED_BY_EVERY_ENABLED_PUBLIC_APT_PACKAGES_INDEX_ON_THE_VERIFIED_RUNNER_EPOCH__WITH_CAPABILITY_CONFIRMATION_BY_EPOCH_BOUND_SAFE_EXECUTABLE_PROBES",
+  "instance_design": {
+    "source_enumeration": "apt-get indextargets over every enabled Packages index",
+    "source_identity": "site+release+component+architecture+SHA256(index bytes)",
+    "discovery_result": "every Package/Version/Architecture stanza in the queried source index",
+    "completeness_crosscheck": "union of source Package names must equal apt-cache dumpavail package-name universe",
+    "metadata": {
+      "availability": "identity is present in epoch Packages index",
+      "authorization": "source is public HTTP(S) without embedded credentials",
+      "cost": "0 USD for metadata discovery/public package acquisition",
+      "constraints": [
+        "Architecture",
+        "Depends",
+        "Pre-Depends",
+        "Conflicts",
+        "Provides"
+      ]
+    },
+    "safe_probe": "download coreutils from the same APT epoch, extract it without installation, execute sha256sum --version, bind receipt to epoch root",
+    "epoch": "SHA256 of all enabled APT source-config hashes plus all Packages-index source identities and content hashes",
+    "change_rule": "if epoch root changes, restart selection episode and discard prior epoch probe authority"
+  },
+  "hard_rules": [
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT_FROM_CANDIDATE_OR_INSTANCE_ALONE",
+    "NO_ASSERTION_THAT_APT_IS_THE_SET_OF_ALL_REAL_WORLD_TOOLS",
+    "NO_SEMANTIC_CAPABILITY_PROMOTION_FROM_PACKAGE_NAME_OR_DESCRIPTION_WITHOUT_SAFE_PROBE",
+    "ALL_SEVEN_FROZEN_INTERFACE_PROPERTIES_MUST_PASS_INDEPENDENTLY",
+    "PUBLIC_RUNNER_LIVE_EPOCH_REPORT_MUST_BE_CONTENT_ADDRESSED",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "new_reality_units_authorized": 1,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": true,
+  "execution_authority_scope": "ONE_INDEPENDENT_LIVE_INTERFACE_INSTANCE_QUALIFICATION_ONLY__NO_ACCEPTANCE_CASES",
+  "promotion_authority": false
+}
