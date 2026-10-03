@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V4_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__V3_BASE_PLUS_DIVERSITY_PRESERVING_FEDERATION_EXECUTION_GATE__INDEPENDENT_ACTIVATION_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "base_retrieval_authority": {
+    "path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V3_ACTIVATION_V1.json",
+    "git_blob_sha": "4fde285b62a3a84e7f12852d8600aecfc01bab81",
+    "rule": "V3_REMAINS_MANDATORY_AND_IS_NOT_WEAKENED"
+  },
+  "v4_verified_extension": {
+    "verification_path": "canonical/verification/RETRIEVAL_V4_FEDERATION_EPOCH_GATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verification_git_blob_sha": "4473b60853e1584bae8933099256c92c9e1676e4",
+    "diversity_preserving_federation": {
+      "path": "canonical/runtime/public_source_federation_v2.py",
+      "git_blob_sha": "32f0443bfb1859168e14f7266a3b5b3c99a40f45"
+    },
+    "epoch_gate": {
+      "path": "canonical/runtime/federated_retrieval_epoch_gate_v1.py",
+      "git_blob_sha": "0a36836c8f0428338a9931b757090a26f73c2672"
+    },
+    "verified_router": {
+      "path": "canonical/runtime/residual_witness_backend_router_v1.py",
+      "git_blob_sha": "578c5f87901a458b12d7df984e0a6a525d367456"
+    }
+  },
+  "mandatory_epoch_protocol": [
+    "RUN_THE_EXACT_VERIFIED_V3_MULTILINGUAL_ADAPTIVE_EXPANSION",
+    "SELECT_FEDERATION_QUERIES_WITH_EXACT_TECHNICAL_ANCHORS_AND_CROSS_SCRIPT_DIVERSITY_BEFORE_REDUNDANT_BASE_QUERIES",
+    "COMPILE_SELECTED_SOURCE_QUERIES_INTO_OPEN_WEB_ACTIONS_FOR_THE_EXACT_VERIFIED_BACKEND_ROUTER",
+    "REQUIRE_ONE_ROUTER_ATTEMPT_RECEIPT_PER_SELECTED_SOURCE_QUERY_CELL_BEFORE_SOURCE_EPOCH_CONSUMPTION",
+    "BACKEND_UNBOUND_DOES_NOT_COUNT_AS_AN_ATTEMPT",
+    "FAILED_OR_EMPTY_ATTEMPTS_REMAIN_UNKNOWN",
+    "SOURCE_EPOCH_CONSUMPTION_NEVER_AUTHORIZES_OPEN_WORLD_NONEXISTENCE",
+    "STOP_IMMEDIATELY_ON_FIRST_INDEPENDENTLY_VERIFIED_SUFFICIENT_WITNESS"
+  ],
+  "selection_guarantees": {
+    "source_group_count": 14,
+    "default_per_source_budget": 8,
+    "exact_technical_anchor_priority": true,
+    "mixed_native_plus_latin_queries_preserve_native_script_identity": true,
+    "cross_script_classes_verified": [
+      "CJK",
+      "ARABIC",
+      "CYRILLIC",
+      "DEVANAGARI"
+    ]
+  },
+  "stop_rules": {
+    "verified_sufficient_witness": "STOP_AND_RUN_ACCEPTANCE_REDUCER",
+    "declared_finite_scope_independently_exhausted": "ALLOW_SCOPE_COMPLETE_CLOSURE_ONLY_FOR_THAT_DECLARED_SCOPE",
+    "all_selected_federation_cells_attempted_without_witness": "CONSUME_ONLY_THE_CONTENT_ADDRESSED_SOURCE_EPOCH__PRESERVE_UNKNOWN",
+    "missing_or_unbound_router_receipt": "FAIL_CLOSED__DO_NOT_CONSUME_EPOCH",
+    "no_witness_and_open_world_scope_not_complete": "UNKNOWN__DO_NOT_INFER_NONEXISTENCE"
+  },
+  "hard_rules": [
+    "V4_EXTENDS_V3_AND_CANNOT_BYPASS_OR_WEAKEN_V3",
+    "NO_FIRST_N_QUERY_TRUNCATION_MAY_SILENTLY_DROP_AVAILABLE_CROSS_SCRIPT_DIVERSITY",
+    "NO_SOURCE_EPOCH_CONSUMPTION_WITH_MISSING_ROUTER_RECEIPTS",
+    "NO_BACKEND_UNBOUND_RECEIPT_COUNTS_AS_SEARCH_ATTEMPT",
+    "NO_EPOCH_CONSUMPTION_TO_SOURCE_COMPLETENESS_OR_NONEXISTENCE_INFERENCE",
+    "FEDERATED_RESULTS_ARE_CANDIDATE_ONLY_UNTIL_INDEPENDENTLY_VERIFIED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
