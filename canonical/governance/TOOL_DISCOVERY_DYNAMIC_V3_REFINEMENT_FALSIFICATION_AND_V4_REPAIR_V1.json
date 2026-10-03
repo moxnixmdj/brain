@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V3_REFINEMENT_FALSIFICATION_AND_V4_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_FALSIFICATION_AND_SOUNDNESS_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "prior_activation": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1.json",
+  "prior_verification": "canonical/verification/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "falsified_claim": "LEAST_COST_EVIDENCE_SUPPORTED_SELECTION_UNDER_COMPLETE_DISCOVERY_INTERFACE_V1",
+  "counterexample": {
+    "visible_verified_route": {
+      "tool_id": "EXPENSIVE",
+      "cost": 10
+    },
+    "available_unqueried_authoritative_source": "S0",
+    "source_may_reveal_verified_route": {
+      "tool_id": "CHEAP",
+      "cost": 1
+    },
+    "v3_behavior": "SELECT_EXPENSIVE_BEFORE_QUERYING_S0",
+    "consequence": "FIRST_SELECTED_ROUTE_NEED_NOT_BE_GLOBAL_LEAST_COST_IN_DECLARED_COMPLETE_DISCOVERY_SCOPE"
+  },
+  "root_cause": "V3_EVALUATES_VISIBLE_TOOLS_BEFORE_UNQUERIED_DISCOVERY_SOURCES__PR1100_VERIFIER_CHECKED_ACTION_VOCABULARY_AND_LOCAL_VISIBLE_COST_ORDER_BUT_NOT_GLOBAL_DISCOVERY_BEFORE_SELECTION",
+  "repair": {
+    "runtime": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "tests": "canonical/tests/test_tool_discovery_dynamic_candidate_v4.py",
+    "soundness_runtime": "canonical/runtime/tool_discovery_v4_soundness_repair_v1.py",
+    "soundness_tests": "canonical/tests/test_tool_discovery_v4_soundness_repair_v1.py",
+    "interface_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json",
+    "changes": [
+      "EXHAUST_AVAILABLE_AUTHORITATIVE_DISCOVERY_SOURCES_BEFORE_PROBE_SELECT_OR_FINAL_ESCALATE",
+      "REQUIRE_EXPLICIT_SAFE_PROBE_PERMISSION_PER_TOOL_CAPABILITY",
+      "PRESERVE_CURRENT_EPOCH_EVIDENCE_INVALIDATION_AND_GENERIC_CONSTRAINT_FILTERING"
+    ]
+  },
+  "scheduler_effect": [
+    "QUARANTINE_PRIOR_DYNAMIC_V3_RESIDUAL_REDUCTION_PENDING_INDEPENDENT_FALSIFICATION_VERIFICATION",
+    "DO_NOT_SEARCH_ONLY_FOR_A_V1_INTERFACE_INSTANCE_AS_IF_PROGRAM_SIDE_SOUNDNESS_WERE_CLOSED",
+    "INDEPENDENTLY_VERIFY_V4_REPAIR_BYTES_AND_COUNTEREXAMPLE",
+    "ONLY_AFTER_V4_PASS_SEARCH_OR_BUILD_A_V2_COMPLETE_INTERFACE_INSTANCE",
+    "NO_NEW_ACCEPTANCE_CASES"
+  ],
+  "terminal_goal_achieved": false,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
