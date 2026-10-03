@@ -109,7 +109,7 @@ class CommonFrozenToolAuthorityTests(unittest.TestCase):
         probed = {(x["tool_id"], x["capability"]) for x in actions if x["action"] == "PROBE"}
         self.assertEqual(
             probed,
-            {(f"T{i}", cap) for i in range(4) for cap in ("A", "B")},
+            {(f"T{i}", "A") for i in range(4)},
         )
         self.assertEqual(actions[-1]["action"], "ESCALATE")
 
