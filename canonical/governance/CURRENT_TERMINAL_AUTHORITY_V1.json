@@ -19,7 +19,7 @@
     },
     "ownership_matrix": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "git_blob_sha": "2ca2e5f1ab706b7b8f0bd40f958e3b903a352b72",
+      "git_blob_sha": "40690a3f2e1cd5a0f7d90d0564efc4383b8bdbdd",
       "status": "CURRENT_SCOPE_RESTORED__4_OF_19_ACCEPTANCE__2_VERIFIED_OWNED"
     },
     "acceptance_calibration": {
