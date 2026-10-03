@@ -109,7 +109,7 @@ class ScienceAgentTests(unittest.TestCase):
     def test_requirements_cannot_mutate_after_first_cycle(self):
         env=Env()
         outputs=[
-            {"material_requirements":["R1"],"candidates":[{"action_id":"a","covers":["R1"],"command":"echo ok","verify_command":"echo ok"}]},
+            {"material_requirements":["R1"],"candidates":[{"action_id":"a","covers":["R1"],"command":"echo ok","verify_command":"verify-bad"}]},
             {"material_requirements":["R2"],"finish_summary":"done"},
         ]
         with patch.object(s.science_planner, "plan", planner(outputs)):
