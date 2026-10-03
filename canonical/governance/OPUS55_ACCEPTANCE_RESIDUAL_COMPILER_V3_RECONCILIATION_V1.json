@@ -6,7 +6,7 @@
   "exact_inputs": {
     "runtime": {
       "path": "canonical/runtime/opus55_acceptance_residual_compiler_v3.py",
-      "git_blob_sha": "254160767359efaa2d24407f2d5171d02a5128ae"
+      "git_blob_sha": "6eaea32aedc88591091000557a15189eff2ab911"
     },
     "tests": {
       "path": "canonical/tests/test_opus55_acceptance_residual_compiler_v3.py",
