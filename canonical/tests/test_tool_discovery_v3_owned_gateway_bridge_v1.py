@@ -15,6 +15,8 @@ class Tests(unittest.TestCase):
     def test_v3_discovers_owned_gateway_then_sees_exact_registry(self):
         g=ToolUniverseGateway(BASE); p=initial_public(g,["x"])
         a=v3.next_action(p); self.assertEqual(a["action"],"DISCOVER")
+        self.assertEqual(p["visible_tools"],[])
+        self.assertEqual(p["discovery_sources"],[g.discovery_source()])
         p=apply_gateway_discovery(p,g,a)
         self.assertEqual(sorted(x["tool_id"] for x in p["visible_tools"]),["a","b"])
         probe=v3.next_action(p)
@@ -48,6 +50,8 @@ class Tests(unittest.TestCase):
             validate_select(p,g,{"action":"SELECT","tool_id":"hidden"})
     def test_bridge_candidate_zero_credit(self):
         out=prove_bridge_instance(BASE); self.assertTrue(out["status"].startswith("PASS"),out)
+        self.assertTrue(out["initial_visible_tools_empty"])
+        self.assertTrue(out["gateway_is_only_declared_discovery_source"])
         self.assertTrue(out["probe_must_pass_gateway"])
         self.assertEqual(out["capability_credit_delta"],0); self.assertFalse(out["promotion_authority"])
 
