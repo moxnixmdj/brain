@@ -166,10 +166,11 @@ class CommonFrozenToolAuthorityV3:
         self._epoch=new_epoch
         return self._epoch
 
-def execute_v5(authority,route,*,required_capabilities,constraint=None,initial_visible_ids=(),max_actions=100):
+def execute_v5(authority,route,*,required_capabilities,constraint=None,initial_visible_ids=(),prior_probe_receipts=(),max_actions=100):
     epoch=authority.epoch
     public=authority.initial_public(route,required_capabilities=required_capabilities,constraint=constraint,
                                     initial_visible_ids=initial_visible_ids,episode_epoch=epoch)
+    public["prior_probe_receipts"]=[deepcopy(dict(x)) for x in prior_probe_receipts]
     log=[]
     for _ in range(max_actions):
         action=v5.next_action(public); log.append(deepcopy(action))
