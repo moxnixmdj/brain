@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMMON_AUTHORITY_SCOPE_RELATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_UNIVERSAL_COMMON_AUTHORITY_SCOPE_RELATION__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "objective": "Replace the impossible open-world census interpretation with an exact matched-authority relation: every tool that can be a valid matched route is inside the identical frozen Brain/Opus external action authority; tool identities may remain candidate-hidden and are revealed only through a complete discovery interface whose union is machine-checked against that common authority.",
+  "exact_inputs": {
+    "canonical/runtime/tool_discovery_dynamic_candidate_v4.py": "e614d0bed8e291e31f57189cd6f0f75aa39b0f74",
+    "canonical/tests/test_tool_discovery_dynamic_v4.py": "23f0add178ca0c731d15e0645ee9b8841317efee",
+    "canonical/governance/TOOL_DISCOVERY_DYNAMIC_V4_REPAIR_ACTIVATION_V1.json": "36a7a97f3d68066337bb2cf45778d4100c22c185",
+    "canonical/verification/TOOL_DISCOVERY_DYNAMIC_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "10cb18355d247a05177230d0dd345e161e84111d",
+    "canonical/runtime/tool_discovery_common_authority_interface_v1.py": "1c86903fed59790672de2285c9e7b3f6f46dff25",
+    "canonical/tests/test_tool_discovery_common_authority_interface_v1.py": "d54a447e19b32b2daa4b4f9b1855142b34671f39",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json": "49181a12362ba3d640fc18d0251901dd49dce929",
+    "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json": "d9ac894594ebcd2883520f7b7977a3548420541c",
+    "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
+    "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_FORMALISM_CUT_V1.json": "e485b9729e8aea6bee2d75453167912023167fe8"
+  },
+  "proof_domain": {
+    "population": "ALL_FINITE_FROZEN_MATCHED_TOOL_ECOSYSTEM_EPISODES_WITH_ONE_IDENTICAL_BRAIN_OPUS_EXTERNAL_ACTION_AUTHORITY_AND_TOOL_BOUNDARY__ANY_FINITE_TOOL_IDENTITY_SET__ANY_FINITE_DISCOVERY_SOURCE_PARTITION__ANY_INITIAL_VISIBLE_SUBSET_INCLUDING_EMPTY__ANY_HIDDEN_BOOLEAN_CAPABILITY_MATRIX__ANY_NONNEGATIVE_DECLARED_COSTS__ANY_AVAILABILITY_AUTHORIZATION_METADATA__ANY_FINITE_CURRENT_EPOCH_SAFE_PROBE_HISTORY",
+    "common_authority": "THE_EXACT_FINITE_SET_OF_TOOL_IDENTITIES_INVOCABLE_UNDER_THE_FROZEN_MATCHED_EXTERNAL_ACTION_AUTHORITY_AND_TOOL_BOUNDARY",
+    "candidate_information": "INITIAL_VISIBLE_PUBLIC_METADATA_PLUS_DISCOVERY_SOURCE_IDENTITIES_PLUS_DISCOVERY_RESULTS_AFTER_DISCOVER_PLUS_BOUNDED_SAFE_PROBE_RECEIPTS__NO_HIDDEN_CAPABILITY_MATRIX",
+    "outside_authority": "AN_IDENTITY_OUTSIDE_THE_COMMON_EXTERNAL_ACTION_AUTHORITY_IS NOT_INVOCABLE BY BRAIN OR OPUS AND CANNOT BE A VALID_MATCHED_ROUTE",
+    "unknown_identity_semantics": "TOOL_IDENTITY_NEED_NOT_BE_INITIAL_VISIBLE__DISCOVERY_RESULTS_MAY REVEAL IT ONLY AFTER DISCOVER__INITIAL_VISIBLE_SET_MAY_BE_EMPTY",
+    "terminal_case_replay_required": false
+  },
+  "scope_relation": {
+    "environment_relation": "EXACT_COMMON_MATCHED_TOOL_AUTHORITY",
+    "information_relation": "EXACT_OR_HARDER_FOR_BRAIN__CAPABILITY_TRUTH_ORACLE_ONLY__UNKNOWN_IDENTITIES_PERMITTED",
+    "action_relation": "EXACT_IDENTICAL_EXTERNAL_ACTION_AUTHORITY_FOR_BRAIN_AND_OPUS",
+    "tool_class_relation": "EXACT_IDENTICAL_TOOL_CLASSES_FOR_BRAIN_AND_OPUS",
+    "cost_constraint_relation": "DECLARED_PUBLIC_METADATA_IS_COPIED_EXACTLY_FROM_COMMON_AUTHORITY",
+    "discovery_relation": "SOURCE_UNION_EQUALS_COMMON_AUTHORITY_EXACTLY__EACH_IDENTITY_EXACTLY_ONCE__NO_OUTSIDE_IDENTITIES",
+    "scope_narrowing": false,
+    "brain_only_registry_substitution": false
+  },
+  "formal_lemmas": [
+    {
+      "id": "L1_FROZEN_MATCHED_COMMON_AUTHORITY",
+      "statement": "The canonical matched parity protocol requires the same visible information, same tool classes and same external action authority for Brain and Opus; the superportfolio additionally requires identical case payloads and tool boundaries."
+    },
+    {
+      "id": "L2_VALID_ROUTE_SUBSET_OF_COMMON_AUTHORITY",
+      "statement": "A valid matched route must be invocable under the shared external action authority. Therefore every valid route identity is an element of the common authority set; a hypothetical tool outside that set cannot be selected or executed by either side and is not a missing valid route."
+    },
+    {
+      "id": "L3_UNKNOWN_IDENTITY_PRESERVED",
+      "statement": "The common authority remains evaluator-held. Candidate initial visibility may be any subset including empty. Tool identity is revealed only through DISCOVER results, while hidden capability truth remains oracle-only and can be learned only from bounded safe probe receipts."
+    },
+    {
+      "id": "L4_COMPLETE_INTERFACE_BY_CONSTRUCTION",
+      "statement": "For every finite common authority A and every positive finite source count, the deterministic interface partitions the public projection of every identity in A across finite sources exactly once; validation requires the discovery-result union to equal A and rejects omissions, outside identities, duplicates, unavailable declared sources, metadata mutation and capability-truth leakage."
+    },
+    {
+      "id": "L5_V4_DISCOVERY_CLOSURE_BEFORE_COMMITMENT",
+      "statement": "The independently verified V4 program queries every available unqueried declared discovery source before any PROBE or SELECT, so under L4 every common-authority identity is visible before route commitment."
+    },
+    {
+      "id": "L6_V4_GLOBAL_LEAST_COST_EVIDENCE_ORDER",
+      "statement": "After discovery closure V4 filters availability, authorization and the active constraint, sorts admissible tools by declared cost and identity, rejects current negative evidence, probes the first unresolved cheaper route, and selects only when every required capability has current positive evidence."
+    },
+    {
+      "id": "L7_OPEN_WORLD_COUNTERFACTUAL_ELIMINATION",
+      "statement": "Adding an unobservable identity outside the frozen common action authority creates no new valid action for Brain or Opus and cannot change the matched valid-route set. Therefore completeness is required over the common invocable authority, not over non-invocable hypothetical world tools."
+    },
+    {
+      "id": "L8_UNIVERSAL_SCOPE_COMPOSITION",
+      "statement": "L1-L7 compose the already independently verified V4 conditional program theorem with an exact complete interface over the common matched authority for every finite valid episode, discharging the prior unknown-identity formalism gap without empirical extrapolation or Brain-only registry narrowing."
+    }
+  ],
+  "relation_to_prior_cut": {
+    "prior_cut": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_FORMALISM_CUT_V1.json",
+    "prior_missing_fact": "INDEPENDENT_EXACT_SCOPE_SEMANTICS_PROVING_PREENUMERATED_TOOL_IDS_ARE_COMPLETE_FOR_THE_FROZEN_TARGET__OR_A_VERIFIED_DISCOVERY_INTERFACE_AND_UNIVERSAL_PROOF_COVERING_UNKNOWN_TOOL_IDENTITIES",
+    "repair": "IDENTITIES_ARE_NOT_PREENUMERATED_TO_THE_CANDIDATE__THE_EVALUATOR_COMMON_AUTHORITY_IS COMPLETE_BY_MATCHED_ACTION_AUTHORITY_DEFINITION__DISCOVERY_INTERFACE_EXPOSES_IDENTITIES_ONLY_AFTER_DISCOVER_AND_IS_MACHINE_CHECKED_EXACT_COMPLETE",
+    "target_preserved": true
+  },
+  "expected_independent_projection": {
+    "universal_scope_proved": true,
+    "scope_atom_satisfied_candidate": true,
+    "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "uses_empirical_generalization": false,
+    "terminal_cases_replayed": 0,
+    "new_reality_units_consumed": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT_FROM_THIS_RELATION",
+    "NO_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_THAT_ALL_TOOLS_IN_EXISTENCE_ARE_ENUMERATED",
+    "NO_BRAIN_ONLY_REGISTRY_COMPLETENESS_SUBSTITUTION",
+    "NO_CAPABILITY_TRUTH_EXPOSED_TO_CANDIDATE",
+    "NO_EMPIRICAL_GENERALIZATION_FROM_THE_180_CASE_TERMINAL_SAMPLE",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "SEPARATE_INDEPENDENT_PUBLIC_VERIFICATION_AND_SEPARATE_ACCEPTANCE_REDUCTION_REQUIRED"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
