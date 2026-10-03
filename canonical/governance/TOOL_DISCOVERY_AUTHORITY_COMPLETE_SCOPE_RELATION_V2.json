@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_AUTHORITY_COMPLETE_SCOPE_RELATION_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_STRONGER_SCOPE_RELATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Eliminate the remaining caller-asserted discovery-registry completeness premise by deriving every discovery source from the same finite tool-authority action set shared by Brain and the matched comparator.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "stronger_than": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_SCOPE_RELATION_V1.json",
+  "exact_candidate": {
+    "path": "canonical/runtime/tool_discovery_authority_complete_candidate_v5.py",
+    "blob_sha": "b916c5dd0ff3c21604705f38aa3c47c75955e4d6"
+  },
+  "downstream_verified_candidate": {
+    "path": "canonical/runtime/tool_discovery_complete_interface_candidate_v4.py",
+    "blob_sha": "d8e7c43e3f5f4252441622805f161e3a6f9a8402",
+    "scope_relation": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_SCOPE_RELATION_V1.json",
+    "scope_relation_blob_sha": "b27cf5a5f6a1b163b54abdd76ae618bfc85a08ea",
+    "universal_certificate": "canonical/runtime/tool_discovery_universal_scope_certificate_v2.py",
+    "universal_certificate_blob_sha": "a245d2007acb1eef79deddc4a3fea19ebc440a27"
+  },
+  "frozen_protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "same_scope_rule": "Brain and Opus 5.5 must be evaluated on the same frozen task population/harness/tool authority unless an absolute/theoretical ceiling is the proof mode."
+  },
+  "authority_semantics": {
+    "tool_authority": "TOOL_AUTHORITY.actions is the complete finite candidate-visible action set exposed by the frozen matched harness at the current authority epoch.",
+    "same_authority": "Because the matched protocol requires the same harness/tool authority, neither route may invoke an action absent from this authority or receive an extra hidden discovery action.",
+    "discovery_source_derivation": "V5 inspects every authority action; every DISCOVERY_SOURCE action is copied into the derived discovery registry. Caller-supplied discovery_registry state is overwritten and therefore cannot hide a source.",
+    "source_admissibility": "A DISCOVERY_SOURCE is accepted only when its schema declares EXHAUSTIVE_CURRENT_TOOL_LIST result semantics. Partial/paginated source actions require an exhaustive adapter before admission and otherwise fail closed.",
+    "integrity": "action_manifest_sha256 binds every normalized authority action, including non-discovery actions, while the V4 source manifest binds every derived discovery source identity, epoch, cost, availability and authorization.",
+    "external_world_nonclaim": "The authority need not enumerate every tool in the external world. It must enumerate every action available under the matched harness. External tools inaccessible through any authority action are unavailable to both routes and are outside the selectable action universe.",
+    "source_truth_nonclaim": "The theorem does not make a discovery source omniscient. It treats an admitted exhaustive-list source result as the observation returned by that action, exactly as both matched routes must treat the same tool observation."
+  },
+  "proof_chain": [
+    "V5 structurally derives the registry from all authority actions and overwrites injected subsets.",
+    "Every admitted discovery source has exhaustive-current-list semantics and is bound to the current authority/source epoch.",
+    "V4 exhausts every current available authorized derived source before any probe or selection.",
+    "V4 materializes arbitrary returned tool identities, enforces safe-probe authority/current-epoch evidence, and selects the least-cost evidence-proved sufficient admissible route.",
+    "If no tool_authority is supplied, V5 delegates to V4 unchanged, and V4 delegates frozen legacy inputs to the exact prior verified candidate."
+  ],
+  "universal_proof_obligations": [
+    "FULL_AUTHORITY_ACTION_ENUMERATION",
+    "CALLER_REGISTRY_SUBSET_CANNOT_HIDE_SOURCE",
+    "ONLY_EXHAUSTIVE_SOURCE_ACTIONS_ADMITTED",
+    "AUTHORITY_MANIFEST_BINDS_ALL_ACTIONS",
+    "SAME_MATCHED_TOOL_AUTHORITY",
+    "DOWNSTREAM_V4_UNIVERSAL_ROUTING_PROOF",
+    "LEGACY_EXACT_PROJECTION_PRESERVED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_EVERY_EXTERNAL_WORLD_TOOL_IS_VISIBLE",
+    "NO_CLAIM_THAT_A_SOURCE_CAN_REVEAL_INFORMATION_ITS_ACTION_DOES_NOT_RETURN",
+    "NO_SELF_CERTIFICATION_FROM_A_COMPLETE_BOOLEAN",
+    "NO_FINITE_SAMPLE_GENERALIZATION",
+    "NO_TERMINAL_REPLAY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_THIS_RELATION"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
