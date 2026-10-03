@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-03",
+  "id": "BUILD_TOOL_DISCOVERY_COMPLETE_INTERFACE_V1",
+  "status": "EXECUTED_ON_CANDIDATE_BRANCH__INDEPENDENT_VERIFICATION_PENDING",
+  "terminal_goal": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "mission_lock": "TOOL_DISCOVERY_SELECTION_AND_LEARNING_SCOPE_COMPLETENESS_ONLY",
+  "trigger": {
+    "authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "next_action": "SEARCH_EXISTING_CONTENT_ADDRESSED_EVIDENCE_FOR_THE_TOOL_DISCOVERY_MINIMUM_MISSING_SCOPE_FACT_OR_A_VERIFIED_COMPLETE_DISCOVERY_INTERFACE",
+    "blocker": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+  },
+  "action": "BUILD_PROOF_PRESERVING_COMPLETE_DISCOVERY_INTERFACE_THEOREM",
+  "outputs": [
+    "canonical/runtime/tool_discovery_complete_interface_v1.py",
+    "canonical/tests/test_tool_discovery_complete_interface_v1.py",
+    "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_ACTIVATION_CANDIDATE_V1.json"
+  ],
+  "result": "STRUCTURAL_FORMALISM_GAP_REDUCED_TO_ONE_EXPLICIT_COMPLETE_INTERFACE_INSTANTIATION_OBLIGATION__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "prohibitions": [
+    "NO_TERMINAL_REPLAY",
+    "NO_PRIVATE_CARRIER_RETRIGGER",
+    "NO_FINITE_SAMPLE_TO_UNIVERSAL_SCOPE_PROMOTION",
+    "NO_UNVERIFIED_REGISTRY_COMPLETENESS",
+    "NO_TARGET_WEAKENING"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
