@@ -123,7 +123,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "Recent observations: " + json.dumps(observations[-4:], sort_keys=True)[:12000]
         )
         planned = science_planner.plan(prompt, timeout_s=20)
-        raw = science_planner.extract_json_object(planned.get("text", ""))
+        raw = science_planner.normalize_proposal_object(\n            science_planner.extract_json_object(planned.get("text", ""))\n        )
         if not isinstance(raw, dict):
             raise RuntimeError("SCIENCE_PLANNER_OBJECT_REQUIRED")
         requirements, candidates, finish_summary = _extract_contract(raw, requirements)
