@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PATCHED_HARBOR_E2E_V2_INDEPENDENT_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_HARBOR_0_23_0_PATCHED_LOCAL_QWEN_E2E__ZERO_TERMINAL_CONTENT__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "exact_brain_bytes": {
+    "base_commit": "7405c0e1d07c7e386a071b33aafa4b703ed92437",
+    "planner": {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "fe7c0ce885197217774638df382aeb6f68ff38dd"
+    },
+    "agent": {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "git_blob_sha": "5557efd21f1a433ad16766def3775a79c459784b"
+    },
+    "command_policy": {
+      "path": "canonical/runtime/harbor_command_policy.py",
+      "git_blob_sha": "a525773417291c7a4841bf35e1baff5370350d0d"
+    },
+    "environment_transport": {
+      "path": "canonical/runtime/harbor_environment_transport.py",
+      "git_blob_sha": "ec46f648214a37bb16025d5ef2593efdf59f0d79"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1248,
+    "pull_request_head": "39be0b04b835f0a55321c9e1608850098de2a231",
+    "merge_commit": "2a76fc6fbb1f41485ab406149666f5c0125b729f",
+    "workflow_run_id": 37108098259,
+    "workflow_job_id": 111160474132,
+    "conclusion": "success",
+    "artifact_id": 11268907317,
+    "artifact_digest": "sha256:f4b8d6a7d36af09d89392a364cb58ee503638336a2e6dfa7071d60756c8c2105"
+  },
+  "pinned_substrate": {
+    "harbor_version": "0.23.0",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "model_alias": "brain-qwen3.5-9b",
+    "qwen_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "qwen_bytes": 5060174144
+  },
+  "verified_result": {
+    "status": "PASS",
+    "reward": 1,
+    "brain_status": "FINISHED",
+    "finish_authority": "BRAIN_VERIFIED_STATE",
+    "model_has_terminal_authority": false,
+    "planner_model_last": "brain-qwen3.5-9b",
+    "resolved_requirements": [
+      "file_write"
+    ],
+    "harbor_trials": 1,
+    "harbor_exceptions": 0,
+    "harbor_mean": 1,
+    "real_harbor_runtime_seconds": 71,
+    "terminal_benchmark_case_content_read": 0,
+    "terminal_benchmark_trials_executed": 0,
+    "incremental_spend_usd": 0
+  },
+  "consequence": "THE_OBSERVED_180S_FIRST_PLANNER_TIMEOUT_SEAM_IS_NOW_VERIFIED_REPAIRED_THROUGH_REAL_HARBOR_ORCHESTRATION_ON_THE_EXACT_PATCHED_SUBSTRATE__THIS_DOES_NOT_PREDICT_OR_PROVE_TB_SCIENCE_TASK_SUCCESS",
+  "terminal_results_observed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "next": "FREEZE_AND_INDEPENDENTLY_VERIFY_ONE_NEXT_UNUSED_MANIFEST_SLOT_AUTHORITY__MERGE_AUTHORITY_TO_BRAIN_MAIN_BEFORE_ANY_EXECUTION_WORKFLOW_CAN_TRIGGER"
+}
