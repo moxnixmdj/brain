@@ -42,7 +42,7 @@ class Tests(unittest.TestCase):
         out=planner.plan(environment_id=ENV,goal_id=GOAL,hypotheses=HS,hypothesis_coverage_receipt=cov(),probes=probes())
         self.assertEqual(out["status"],"VERIFIED_MINIMUM_WORST_CASE_ADAPTIVE_PLAN")
         self.assertIn(out["recommended_probe"],{"x","y"})
-        self.assertEqual(out["worst_case_cost"],"2")
+        self.assertEqual(out["worst_case_wall_clock"],"2")
         self.assertEqual(out["worst_case_steps"],2)
 
     def test_closed_hypothesis_space_required(self):
@@ -64,7 +64,7 @@ class Tests(unittest.TestCase):
         out=router.route(goal=GOAL,environment_id=ENV,verified_coverage=False,goal_facts=["solve"],fallback_required_facts=["solve"],verified_facts=[],dependencies={},dependency_receipt=None,transfer_mappings=[],hypotheses=HS,hypothesis_coverage_receipt=cov(),residual_action_receipt=None,probes=probes())
         self.assertEqual(out["route"],"LEARN")
         self.assertIn(out["next_action"]["id"],{"x","y"})
-        self.assertEqual(out["adaptive_plan"]["worst_case_cost"],"2")
+        self.assertEqual(out["adaptive_plan"]["worst_case_wall_clock"],"2")
         self.assertEqual(out["acceptance_credit_delta"],0)
 
 if __name__=="__main__": unittest.main(verbosity=2)
