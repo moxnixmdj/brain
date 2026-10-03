@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANCHE1_EXECUTION_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_PENDING_INDEPENDENT_AUTHORITY_VERIFICATION__EXECUTION_FALSE",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__THREE_FROZEN_SLOTS_ONLY",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "predicate": "TB_SCIENCE_GE_58_7",
@@ -51,7 +51,9 @@
   "terminal_results_observed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "execution_authority": false,
+  "execution_authority": true,
   "promotion_authority": false,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "independent_verification": "canonical/verification/TB_SCIENCE_TRANCHE1_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "activation_rule": "ONLY_AUTHORIZED_SLOT_IDS_MAY_RUN__AUTHORITY_AUTO_REVOKES_AFTER_ALL_THREE_FINALIZE"
 }
