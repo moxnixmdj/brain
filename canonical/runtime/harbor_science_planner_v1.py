@@ -8,13 +8,16 @@ Those remain Brain-controller authority.
 from __future__ import annotations
 
 import json
+import os
 import time
 import urllib.request
 from typing import Any
 
-ENDPOINT = "https://text.pollinations.ai/"
-MODEL_ALIASES = ("openai-fast", "openai", "mistral")
-MAX_RESPONSE_BYTES = 30_000
+ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions"
+MODEL = "brain-qwen3.5-9b"
+BACKEND = "LOCAL_LLAMA_SERVER"
+MAX_RESPONSE_BYTES = 60_000
+MAX_COMPLETION_TOKENS = 1400
 
 
 class SciencePlannerError(RuntimeError):
@@ -55,52 +58,82 @@ def normalize_proposal_object(obj: dict[str, Any]) -> dict[str, Any]:
         out["candidates"] = out.pop("safe_candidates")
     return out
 
-def plan(prompt: str, *, timeout_s: int = 20) -> dict[str, Any]:
+def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
+    """Return one untrusted JSON proposal from the pinned local Qwen endpoint.
+
+    Terminal Science has no hosted fallback.  If the local endpoint or exact
+    model identity is unavailable, fail closed before any environment action.
+    """
     prompt = str(prompt or "")
     if not prompt.strip():
         raise SciencePlannerError("SCIENCE_PLANNER_PROMPT_REQUIRED")
-    if not isinstance(timeout_s, int) or isinstance(timeout_s, bool) or not 1 <= timeout_s <= 60:
+    if not isinstance(timeout_s, int) or isinstance(timeout_s, bool) or not 1 <= timeout_s <= 300:
         raise SciencePlannerError("SCIENCE_PLANNER_TIMEOUT_INVALID")
 
-    errors: list[dict[str, Any]] = []
-    for model in MODEL_ALIASES:
-        body = json.dumps({
-            "messages": [{"role": "user", "content": prompt}],
-            "model": model,
-            "jsonMode": True,
-        }).encode("utf-8")
-        req = urllib.request.Request(
-            ENDPOINT,
-            data=body,
-            headers={"Content-Type": "application/json", "User-Agent": "ProjectBrain/1.0"},
-            method="POST",
-        )
-        started = time.monotonic()
-        try:
-            with urllib.request.urlopen(req, timeout=timeout_s) as response:
-                status = int(getattr(response, "status", 200))
-                if status != 200:
-                    raise SciencePlannerError(f"SCIENCE_PLANNER_HTTP_STATUS:{status}")
-                raw = response.read(MAX_RESPONSE_BYTES + 1)
-            if len(raw) > MAX_RESPONSE_BYTES:
-                raise SciencePlannerError("SCIENCE_PLANNER_RESPONSE_TOO_LARGE")
-            text = raw.decode("utf-8", "replace")
-            # Validate object shape at the transport boundary, but keep the object untrusted.
-            extract_json_object(text)
-            return {
-                "text": text,
-                "model": model,
-                "duration_s": round(time.monotonic() - started, 3),
-                "errors": errors,
-                "transport": "FROZEN_GENERAL_COGNITION_PROPOSAL_ENDPOINT",
-                "endpoint": ENDPOINT,
-            }
-        except Exception as exc:
-            errors.append({
-                "model": model,
-                "error": type(exc).__name__ + ":" + str(exc),
-                "duration_s": round(time.monotonic() - started, 3),
-            })
-    raise SciencePlannerError(
-        "SCIENCE_PLANNER_ALL_ROUTES_FAILED:" + json.dumps(errors, sort_keys=True)[:1800]
+    configured = os.environ.get("PROJECT_BRAIN_SCIENCE_PLANNER_ENDPOINT", ENDPOINT).strip()
+    if configured != ENDPOINT:
+        raise SciencePlannerError("SCIENCE_PLANNER_ENDPOINT_IDENTITY_MISMATCH")
+
+    body = json.dumps({
+        "model": MODEL,
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "Return exactly one JSON object and no prose. "
+                    "You are only an untrusted proposal source; Project Brain owns "
+                    "action selection, execution, verification, and finish authority."
+                ),
+            },
+            {"role": "user", "content": prompt},
+        ],
+        "temperature": 0,
+        "max_tokens": MAX_COMPLETION_TOKENS,
+        "stream": False,
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        ENDPOINT,
+        data=body,
+        headers={"Content-Type": "application/json"},
+        method="POST",
     )
+    started = time.monotonic()
+    try:
+        with urllib.request.urlopen(req, timeout=timeout_s) as response:
+            status = int(getattr(response, "status", 200))
+            if status != 200:
+                raise SciencePlannerError(f"SCIENCE_PLANNER_HTTP_STATUS:{status}")
+            raw = response.read(MAX_RESPONSE_BYTES + 1)
+        if len(raw) > MAX_RESPONSE_BYTES:
+            raise SciencePlannerError("SCIENCE_PLANNER_RESPONSE_TOO_LARGE")
+        envelope = json.loads(raw.decode("utf-8", "replace"))
+        if not isinstance(envelope, dict):
+            raise SciencePlannerError("SCIENCE_PLANNER_ENVELOPE_INVALID")
+        reported_model = str(envelope.get("model") or "")
+        if reported_model != MODEL:
+            raise SciencePlannerError("SCIENCE_PLANNER_MODEL_IDENTITY_MISMATCH")
+        choices = envelope.get("choices")
+        if not isinstance(choices, list) or len(choices) != 1 or not isinstance(choices[0], dict):
+            raise SciencePlannerError("SCIENCE_PLANNER_CHOICES_INVALID")
+        message = choices[0].get("message")
+        if not isinstance(message, dict):
+            raise SciencePlannerError("SCIENCE_PLANNER_MESSAGE_INVALID")
+        text = message.get("content")
+        if not isinstance(text, str) or not text.strip():
+            raise SciencePlannerError("SCIENCE_PLANNER_CONTENT_EMPTY")
+        extract_json_object(text)
+        return {
+            "text": text,
+            "model": reported_model,
+            "duration_s": round(time.monotonic() - started, 3),
+            "errors": [],
+            "transport": "PINNED_LOCAL_OPENAI_CHAT_COMPLETIONS",
+            "endpoint": ENDPOINT,
+            "backend": BACKEND,
+        }
+    except SciencePlannerError:
+        raise
+    except Exception as exc:
+        raise SciencePlannerError(
+            "SCIENCE_LOCAL_PLANNER_FAILED:" + type(exc).__name__ + ":" + str(exc)
+        ) from exc
