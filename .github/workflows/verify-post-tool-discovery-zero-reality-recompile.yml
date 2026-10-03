@@ -1,0 +1,26 @@
+name: Verify post-Tool-Discovery zero-reality recompile
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/post_tool_discovery_zero_reality_recompile_v1.py"
+      - "canonical/tests/test_post_tool_discovery_zero_reality_recompile_v1.py"
+      - "canonical/governance/POST_TOOL_DISCOVERY_ZERO_REALITY_RECOMPILE_V1.json"
+      - ".github/workflows/verify-post-tool-discovery-zero-reality-recompile.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run exact recompile verifier
+        run: |
+          python -m unittest canonical.tests.test_post_tool_discovery_zero_reality_recompile_v1
+          python canonical/runtime/post_tool_discovery_zero_reality_recompile_v1.py
