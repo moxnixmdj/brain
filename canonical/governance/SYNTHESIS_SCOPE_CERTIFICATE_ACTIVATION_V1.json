@@ -49,7 +49,7 @@
   "fresh_reality_authority": false,
   "independent_verification": {
     "path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-    "git_blob_sha": "4f25ed739f9ac8d19026dcc8b8b53c4e9e09e6c9",
+    "git_blob_sha": "1528485a15c98e89c9fb4dc50d691b6682e08542",
     "conclusion": "success",
     "verified_effect": "ROOT2_AND_ROOT3_TO_ROOT2_ONLY__ROOT3_INVOLVED_11_TO_10__ZERO_ACCEPTANCE_CREDIT"
   },
