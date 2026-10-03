@@ -117,7 +117,7 @@ def evaluate(docs: Mapping[str, Mapping[str,Any]]) -> dict[str,Any]:
     unresolved=set(((invariant_evidence.get("causal_scope") or {}).get("still_unresolved") or []))
     if "GENERAL_ROOT_CAUSE_REASONING" not in unresolved:
         errors.append("INVARIANT_EVIDENCE_SCOPE_DRIFT")
-    if not str(info_v2.get("status") or "").startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
+    if not str(info_v2.get("status") or "").startswith("INDEPENDENT_PASS__1024_OF_1024_FRESH_GENERATED_REPAIR_CASES"):
         errors.append("INFO_SAFE_V2_NOT_INDEPENDENT_PASS")
 
     receipts=_p1_receipts(wave)
