@@ -227,6 +227,27 @@ class ResearchQueryFocusTests(unittest.TestCase):
         self.assertTrue(by_index[1]["decision_role_admitted"],out)
         self.assertEqual(out["top_candidate_original_index"],1,out)
 
+    def test_unicode_focus_preserves_chinese_arabic_and_cyrillic_subjects(self):
+        objective="比较 中文 编解码器 与 العربية ترميز و кодек formats"
+        out=self.focus.focus(objective)
+        self.assertEqual(out["status"],"FOCUSED",out)
+        q=out["query"]
+        self.assertIn("中文",q,out)
+        self.assertIn("编解码器",q,out)
+        self.assertIn("العربية",q,out)
+        self.assertIn("ترميز",q,out)
+        self.assertIn("кодек",q,out)
+
+    def test_unicode_relevance_can_rank_non_latin_candidate(self):
+        objective="中文 编解码器 UBJSON"
+        candidates=[
+            {"url":"https://wrong.example","title":"unrelated serializer","snippet":"english only"},
+            {"url":"https://right.example","title":"中文 UBJSON 编解码器","snippet":"二进制 编码"},
+        ]
+        out=self.rank.rank(objective,candidates)
+        self.assertEqual(out["status"],"LEXICAL_RELEVANCE_RANKED",out)
+        self.assertEqual(out["top_candidate_original_index"],1,out)
+
     def test_focus_is_deterministic_and_model_free(self):
         objective="Compare sodium battery energy density with lithium battery energy density."
         a=self.focus.focus(objective)
