@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMPLETE_AUTHORITY_SCOPE_RELATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_UNIVERSAL_FORMAL_SCOPE_RELATION__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge only the Tool Discovery scope-completeness residual by proving that V4 is globally correct over every finite hidden-tool ecosystem exposed through an exact content-addressed complete-authority partition interface, without replaying terminal cases or weakening the frozen matched hidden-tool-ecosystem target.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+  "proof_domain": {
+    "population": "ALL_FINITE_VALID_HIDDEN_TOOL_ECOSYSTEMS_WITH_PUBLIC_ID_COST_AVAILABILITY_AUTHORIZATION_EPOCH_AND_CONSTRAINT_METADATA__ANY_FINITE_REQUIRED_CAPABILITY_SET__ANY_HIDDEN_CAPABILITY_SUPPORT_RELATION__ANY_FINITE_EXACT_PARTITION_OF_PUBLIC_TOOL_IDENTITIES_ACROSS_INITIAL_VISIBILITY_AND_AVAILABLE_DISCOVERY_SOURCES__ANY_FINITE_ORDERED_CURRENT_EPOCH_SAFE_PROBE_RECEIPT_HISTORY__ANY_PUBLIC_VERSION_CHANGE_EVENTS",
+    "hidden_information": "ACTUAL_TOOL_CAPABILITY_SUPPORT_REMAINS_OUTSIDE_THE_AUTHORITY_MANIFEST_AND_IS_REVEALED_ONLY_BY_TRUTHFUL_SAFE_CAPABILITY_PROBE_RECEIPTS",
+    "complete_authority": "INITIAL_VISIBLE_IDENTITIES_PLUS_ALL_DISCOVERY_SOURCE_MEMBERS_FORM_AN_EXACT_DISJOINT_COVER_OF_THE_FINITE_AUTHORITATIVE_PUBLIC_TOOL_SET",
+    "content_addressing": "AUTHORITY_PUBLIC_METADATA_AND_EXACT_PARTITION_ARE_SEPARATELY_SHA256_COMMITTED_AND_EVERY_DISCOVERY_RECEIPT_BINDS_EPOCH_AUTHORITY_PARTITION_AND_SOURCE",
+    "candidate_information": "REQUIRED_CAPABILITIES_CONSTRAINT_CURRENT_VISIBLE_PUBLIC_TOOL_METADATA_DISCOVERY_SOURCE_IDENTITIES_COSTS_AVAILABILITY_EARNED_DISCOVERY_RECEIPTS_EARNED_SAFE_PROBE_RECEIPTS_PUBLIC_VERSION_EVENTS",
+    "unknown_identity_semantics": "TOOL_IDENTITIES_ASSIGNED_TO_DISCOVERY_SOURCES_ARE_NOT PRESENT IN INITIAL CANDIDATE VISIBLE STATE",
+    "same_scope_binding": "FROZEN_OPUS55_PROTOCOL_IS MATCHED_HIDDEN_TOOL_ECOSYSTEM_TRANSFER; THE INTERFACE CHANGES ONLY HOW UNKNOWN PUBLIC TOOL IDENTITIES ARE REVEALED AND DOES NOT REVEAL HIDDEN CAPABILITY SUPPORT OR ORACLE BEST ROUTE",
+    "terminal_case_replay_required": false
+  },
+  "exact_inputs": {
+    "canonical/runtime/tool_discovery_dynamic_candidate_v4.py": "e614d0bed8e291e31f57189cd6f0f75aa39b0f74",
+    "canonical/tests/test_tool_discovery_dynamic_v4.py": "23f0add178ca0c731d15e0645ee9b8841317efee",
+    "canonical/verification/TOOL_DISCOVERY_DYNAMIC_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "10cb18355d247a05177230d0dd345e161e84111d",
+    "canonical/runtime/tool_discovery_complete_authority_manifest_v1.py": "a7060e25461000a1aa313a0c363e22807db70bc8",
+    "canonical/tests/test_tool_discovery_complete_authority_manifest_v1.py": "2cab93f3213ea0a025a84041418db5f5fd180405",
+    "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json": "49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7",
+    "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json": "48ba33998e73b8eec2731be51a7ec78077ed0d4a",
+    "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "7885a827b1483bfb38315c1f492848f7e4680285",
+    "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d"
+  },
+  "formal_lemmas": [
+    {
+      "id": "L1_CONTENT_ADDRESSED_EXACT_PARTITION",
+      "statement": "For every accepted manifest instance, authority tool IDs are finite and unique; initial-visible IDs and every discovery-source membership list are pairwise disjoint; their union equals the authority ID set exactly; authority public metadata and the partition are hash committed."
+    },
+    {
+      "id": "L2_NO_HIDDEN_CAPABILITY_LEAKAGE",
+      "statement": "The manifest admits only tool_id, cost, availability, authorization, epoch and generic constraint metadata. Capability-support fields are rejected. Initial candidate state omits authority membership lists for undiscovered sources."
+    },
+    {
+      "id": "L3_DISCOVERY_SATURATION_INDUCTION",
+      "statement": "V4 checks available unqueried discovery sources before any probe or selection. Each DISCOVER receipt uniquely marks one source queried. Since the source set is finite, after finitely many DISCOVER steps no source remains unqueried."
+    },
+    {
+      "id": "L4_POST_SATURATION_GLOBAL_PUBLIC_VISIBILITY",
+      "statement": "Each valid source receipt returns exactly the authority rows assigned to that source and is bound to epoch, authority hash, partition hash and source hash. Exact-partition cover plus discovery saturation implies that every authoritative public tool identity is visible before the first PROBE or SELECT."
+    },
+    {
+      "id": "L5_CURRENT_EPOCH_EVIDENCE_SOUNDNESS",
+      "statement": "V4 accepts only SAFE_CAPABILITY_PROBE receipts whose epoch equals the current tool epoch after public version events. Under the frozen truthful safe-probe premise, positive and negative capability evidence is sound for the current epoch and stale evidence is ignored."
+    },
+    {
+      "id": "L6_GLOBAL_LEAST_COST_SUFFICIENT_SELECTION",
+      "statement": "After saturation, V4 filters exactly by public availability, authorization and active constraint, sorts the entire admissible authority by (declared cost, tool_id), and for each route either skips it after a current negative required-capability receipt, probes a still-unknown required capability, or selects only after every required capability has current positive evidence. Therefore the first selected route is the globally least-cost admissible sufficient route under the declared objective."
+    },
+    {
+      "id": "L7_COMPLETE_NO_ROUTE_ESCALATION",
+      "statement": "If no admissible sufficient route exists, truthful probes eventually give every admissible route a negative required-capability witness; finite ordered traversal then exhausts all routes and V4 escalates. If any admissible sufficient route exists, its required probes become positive and V4 selects it before escalation."
+    },
+    {
+      "id": "L8_TRANSFER_AND_VERSION_CHANGE",
+      "statement": "Earned probe receipts and discovered identities may be carried to later tasks in the same interface epoch. Unchanged current-epoch evidence is reused without rediscovery; public version changes advance the affected epoch and make prior receipts stale, forcing only the affected evidence to be reacquired."
+    },
+    {
+      "id": "L9_POINTWISE_TERMINAL_CEILING",
+      "statement": "For every finite valid ecosystem in this frozen target domain, valid-route-top1 and terminal-success have objective ceiling 1 when a sufficient admissible route exists; L1-L8 imply V4 reaches that ceiling. When no sufficient admissible route exists, correct fail-closed escalation is the frozen success action. Thus the direct objective route is pointwise ceiling-complete rather than an empirical extrapolation from the 180-case sample."
+    }
+  ],
+  "relation_to_prior_sample": {
+    "raw_180_of_180_preserved": true,
+    "sample_is_not_used_as_universal_scope_proof": true,
+    "universal_basis": "FORMAL_EXACT_PARTITION_PLUS_FINITE_DISCOVERY_AND_ROUTE_INDUCTION"
+  },
+  "expected_independent_projection": {
+    "universal_scope_proved": true,
+    "scope_atom_satisfied_candidate": true,
+    "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "uses_empirical_generalization": false,
+    "terminal_cases_replayed": 0,
+    "new_reality_units_consumed": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_FAMILY_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY",
+    "NO_HIDDEN_CAPABILITY_OR_ORACLE_LEAKAGE",
+    "NO_SCOPE_CLAIM_OUTSIDE_THE_FROZEN_MATCHED_HIDDEN_TOOL_ECOSYSTEM_CONTRACT",
+    "NO_CLAIM_THAT_PUBLIC_PACKAGE_REGISTRIES_ARE_EXHAUSTIVE_TOOL_AUTHORITIES"
+  ],
+  "promotion_rule": "ONLY_AN_INDEPENDENT_PUBLIC_RUNNER_PASS_OVER_THE_EXACT_CONTENT_ADDRESSED_INPUTS_MAY_SATISFY_THE_TOOL_DISCOVERY_SCOPE_ATOM__ACCEPTANCE_REDUCTION_MUST_REMAIN_A_SEPARATE_ATOMIC_STEP",
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_replayed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
