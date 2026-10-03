@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "action_id": "POST-DELEGATION-V4-39-ATOM-PRIVATE-SCAN-20261003-V1",
-  "status": "CURRENT_39_ATOM_PRIVATE_V4_SCAN__LOCAL_CANDIDATE_ONLY__ZERO_CREDIT__COMPOSITION_NOT_INDEPENDENTLY_VERIFIED",
+  "status": "COMPLETED_LOCAL_39_ATOM_V4_SCAN__CANDIDATE_ONLY__COMPOSITION_NOT_INDEPENDENTLY_VERIFIED__ZERO_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "fde07ef620f061272b07b986a6c1d64bb2c48617",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
@@ -75,7 +75,7 @@
       "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V2.json",
       "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json"
     ],
-    "conclusion": "Create a current, content-addressed local candidate index and complete eligible-file manifest using the exact 39-atom projection; leave proof adjudication and family reranking unresolved until candidates are reviewed against scope-complete acceptance evidence.",
+    "conclusion": "The current 39-atom V4 local candidate index and complete 1411-file manifest were generated and digest-checked. It found literal pointers for 3 atoms (8 matches); no adjudication or acceptance delta occurred. Tool Discovery is the top review-queue candidate but current authority still says its common-authority scope proof is blocked; no promotion-safe route is selected.",
     "selected_route": "DIRECT_LOCAL_INVOCATION_OF_EXACT_VERIFIED_COMPONENTS_WITH_EXPLICIT_39_ATOM_AND_MANIFEST_ASSERTIONS__NO_UNVERIFIED_ADAPTER__CANDIDATE_ONLY",
     "rejected_material_alternatives": [
       "Run V4 default entrypoint on its stale 40-atom basis.",
@@ -89,7 +89,7 @@
       "The local composition of independently verified recompiler and indexer is not independently verified; output is a local candidate only.",
       "Literal matching can miss semantically equivalent evidence and can include stale/open restatements; every candidate requires review.",
       "No current shortest promotion-safe one-predicate family is selected by this scan.",
-      "The accidental 40-atom default scan output is invalid and disqualified; no 39-atom current scan has yet run."
+      "The local recompiler/indexer composition has no independent verification receipt; all V4 hits remain candidates, and Tool Discovery remains blocked by the independently verified common-authority interface/formalism gap."
     ],
     "assumptions": [
       "The exact source tree at 0257761299d0201688c3358760d21fcc623155cf is the current content-addressed private corpus for this scan.",
@@ -259,7 +259,7 @@
         "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V2.json",
         "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json"
       ],
-      "conclusion": "Create a current, content-addressed local candidate index and complete eligible-file manifest using the exact 39-atom projection; leave proof adjudication and family reranking unresolved until candidates are reviewed against scope-complete acceptance evidence.",
+      "conclusion": "The current 39-atom V4 local candidate index and complete 1411-file manifest were generated and digest-checked. It found literal pointers for 3 atoms (8 matches); no adjudication or acceptance delta occurred. Tool Discovery is the top review-queue candidate but current authority still says its common-authority scope proof is blocked; no promotion-safe route is selected.",
       "selected_route": "DIRECT_LOCAL_INVOCATION_OF_EXACT_VERIFIED_COMPONENTS_WITH_EXPLICIT_39_ATOM_AND_MANIFEST_ASSERTIONS__NO_UNVERIFIED_ADAPTER__CANDIDATE_ONLY",
       "rejected_material_alternatives": [
         "Run V4 default entrypoint on its stale 40-atom basis.",
@@ -273,7 +273,7 @@
         "The local composition of independently verified recompiler and indexer is not independently verified; output is a local candidate only.",
         "Literal matching can miss semantically equivalent evidence and can include stale/open restatements; every candidate requires review.",
         "No current shortest promotion-safe one-predicate family is selected by this scan.",
-        "The accidental 40-atom default scan output is invalid and disqualified; no 39-atom current scan has yet run."
+        "The local recompiler/indexer composition has no independent verification receipt; all V4 hits remain candidates, and Tool Discovery remains blocked by the independently verified common-authority interface/formalism gap."
       ],
       "assumptions": [
         "The exact source tree at 0257761299d0201688c3358760d21fcc623155cf is the current content-addressed private corpus for this scan.",
@@ -339,7 +339,7 @@
   "continuous_obs": {
     "schema": "PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
     "status": "CURRENT",
-    "checked_at_utc": "2026-10-03T05:26:49.340002+00:00",
+    "checked_at_utc": "2026-10-03T05:31:34.176917+00:00",
     "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
     "canonical_state_dependencies": [
       {
@@ -449,6 +449,14 @@
       {
         "path": "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json",
         "sha256": "47ac9fa6405ff818d5cc8f964ab94ab1f05f0c59b164de9ceb3bfdc93bc101a4"
+      },
+      {
+        "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V3.json",
+        "sha256": "05213b334eae7ca486f809d84e72c3bcf854ba0c957071e1dd248c36835bd5e2"
+      },
+      {
+        "path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V3.json",
+        "sha256": "1347b7ba7678a4476d3d2bf995abfc97fe03560ff1b1b8b0f26ca2767aa894eb"
       }
     ],
     "dependency_inventory_complete": true,
@@ -495,7 +503,9 @@
         "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CLOSURE_20261003_V2.json",
         "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_INDEPENDENT_SESSION_REVIEW_20261003_V2.json",
         "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json",
-        "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json"
+        "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json",
+        "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V3.json",
+        "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V3.json"
       ],
       "allowed_external_tool_kinds": []
     },
@@ -774,6 +784,28 @@
         "evidence": [
           "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json:9c28951ab3c86a5104b4eec3628c105de79bd761"
         ]
+      },
+      {
+        "dependency_id": "current_v4_candidate_index",
+        "class": "VERIFICATION_RECEIPT",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V3.json:3caf0d7f8acf363ff67c312e60f6bf7205b2eca1"
+        ]
+      },
+      {
+        "dependency_id": "current_v4_complete_corpus_manifest",
+        "class": "VERIFICATION_RECEIPT",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "LOCAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V3.json:31f3dd9d4ef8c288d3b70805680b5b3610133ea4"
+        ]
       }
     ]
   },
@@ -829,5 +861,35 @@
   "execution_authority": false,
   "promotion_authority": false,
   "ownership_test_applicability": "NOT_APPLICABLE__CANDIDATE_INDEX_ONLY__ZERO_CREDIT",
-  "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json"
+  "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
+  "execution_result": {
+    "status": "LOCAL_CANDIDATE_EXECUTION__39_ATOM_INDEX_PASS__COMPOSITION_NOT_INDEPENDENTLY_VERIFIED__ZERO_CREDIT",
+    "source_commit_sha": "0257761299d0201688c3358760d21fcc623155cf",
+    "source_tree_sha": "d47c6ba4cec6dca30c6c41718952feddeff5d27f",
+    "recompile_after": {
+      "unresolved_predicates": 30,
+      "certificates": 16,
+      "actions": 21,
+      "leaf_requirement_occurrences": 39,
+      "canonical_leaf_atoms": 39,
+      "exact_duplicate_savings": 0
+    },
+    "canonical_atom_count": 39,
+    "scanned_file_count": 1411,
+    "basis_manifest_sha256": "ad7e85bef9a9d27780c4597a25feff34f4a49eb9a7650d28320b8fe212c2a140",
+    "scanned_corpus_manifest_sha256": "a51c17b864f9b4c5aa60a3c08ff54158b9da3fe8e6aa807f29886367bfbf71ef",
+    "atoms_with_candidate_matches": 3,
+    "atoms_without_candidate_matches": 36,
+    "candidate_match_count": 8,
+    "review_queue_length": 3,
+    "candidate_adjudication": "NOT_PERFORMED__MATCHES_ARE_POINTERS_ONLY",
+    "credit": 0,
+    "terminal_results_replayed": 0,
+    "result_path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_FULL_CORPUS_20261003_V3.json",
+    "result_git_blob_sha": "3caf0d7f8acf363ff67c312e60f6bf7205b2eca1",
+    "manifest_path": "canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V4_CORPUS_MANIFEST_20261003_V3.json",
+    "manifest_git_blob_sha": "31f3dd9d4ef8c288d3b70805680b5b3610133ea4",
+    "private_corpus_exposed_publicly": false,
+    "composition_independent_verification": "NOT_PRESENT__LOCAL_COMPONENT_COMPOSITION_ONLY"
+  }
 }
