@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_SCHEDULING_WORLD_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE__RECEIPT_DERIVED_30_PREDICATE_WORLD__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
-  "objective": "Eliminate stale scheduling state by deriving the live Opus 5.5 acceptance work frontier directly from the frozen 38-predicate registry minus current PROVED/REFUTED evidence claims.",
+  "status": "CANDIDATE__RECEIPT_DERIVED_27_PREDICATE_WORLD__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Eliminate stale scheduling state by deriving the live Opus 5.5 acceptance work frontier directly from the frozen 38-predicate registry minus current PROVED/REFUTED evidence claims, with authority atomic-count cross-checking and no hard-coded historical unresolved count.",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "source_main_commit": "c13d69d949dd2fcee8cd6c1d5677642a1de0181e",
+  "source_main_commit": "8e5e5b4d089809cad850a6d55eed30d85ba60573",
   "exact_inputs": {
     "current_terminal_authority": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-      "git_blob_sha": "ad482ff264d5cdd6286aaf2ffd32db47acd447f0"
+      "git_blob_sha": "2560dbf990a4f39f006884a2c0d1fa7950e15795"
     },
     "predicate_registry": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
@@ -16,7 +16,7 @@
     },
     "evidence_bindings": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "7885a827b1483bfb38315c1f492848f7e4680285"
+      "git_blob_sha": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163"
     },
     "historical_frontier": {
       "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
@@ -31,38 +31,50 @@
       "git_blob_sha": "e56719b8c63078273a6974104d413aa1b643da3b"
     }
   },
-  "compiler": "canonical/runtime/current_terminal_scheduling_world_v1.py",
-  "tests": "canonical/tests/test_current_terminal_scheduling_world_v1.py",
+  "compiler": {
+    "path": "canonical/runtime/current_terminal_scheduling_world_v1.py",
+    "git_blob_sha": "12f2b94dc19215445c8babd07506cc28dbdada78"
+  },
+  "tests": {
+    "path": "canonical/tests/test_current_terminal_scheduling_world_v1.py",
+    "git_blob_sha": "473b908d4f408f66d0ada8a20cf2a6602e1f7362"
+  },
   "expected_live_world": {
     "registry_predicates": 38,
-    "proved_predicates": 8,
-    "unresolved_predicates": 30,
-    "opus55_acceptance_families": "3/19_PASS__16/19_OPEN",
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance_families": "4/19_PASS__15/19_OPEN",
     "whole_scope_contracts": "12/12_PASS",
     "provisional_behavioral_families": "19/19_PASS",
-    "closed_predicate_removed_from_old_world": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "proved_targets_removed_from_historical_world": [
+      "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "RECOVERY_TERMINAL_NONINFERIOR",
+      "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+    ],
     "reopened_predicate_preserved_live": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
   },
   "supersession": {
-    "historical_scheduler": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json",
-    "reason": "V6 encodes a 31-predicate world while current evidence proves Delegation terminal success and current authority has 30 unresolved predicates.",
-    "activation_rule": "THIS_CANDIDATE_MAY_SUPERSEDE_V6_FOR_SCHEDULING ONLY AFTER EXACT-BLOB INDEPENDENT VERIFICATION",
+    "historical_scheduler": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V7.json",
+    "reason": "V7 binds the independently verified pre-Recovery 30-predicate world; current authority now proves Recovery and has 27 unresolved predicates.",
+    "activation_rule": "THIS_CANDIDATE_MAY_SUPERSEDE_V7_FOR_SCHEDULING_ONLY_AFTER EXACT-BLOB INDEPENDENT VERIFICATION",
     "historical_verification_receipts_remain_valid_for_their_original_bytes": true
   },
   "hard_rules": [
     "LIVE_UNRESOLVED_SET_EQUALS_FROZEN_REGISTRY_MINUS_CURRENT_PROVED_OR_REFUTED_RECEIPTS",
-    "HISTORICAL_FRONTIER_COUNTS_NEVER_GRANT_EXECUTION_AUTHORITY",
+    "AUTHORITY_ATOMIC_TOTAL_PROVED_AND_UNRESOLVED_COUNTS_MUST_EQUAL_RECEIPT_DERIVED_COUNTS",
+    "NO_HARD_CODED_HISTORICAL_PROVED_OR_UNRESOLVED_COUNT_MAY AUTHORIZE CURRENT WORK",
     "PROVED_OR_REFUTED_PREDICATES_MUST_BE_REMOVED_FROM_LIVE_CERTIFICATES_AND_ACTION_EDGES",
     "EVERY_LIVE_UNRESOLVED_PREDICATE_MUST_RETAIN_AT_LEAST_ONE_ACTION_EDGE",
-    "ANY_COUNT_SET_OR_HASH_MISMATCH_FAILS_CLOSED",
     "ZERO_FRESH_REALITY_BEFORE_RECEIPT_DERIVED_WORLD_IS_INDEPENDENTLY_VERIFIED_AND_INFORMATION_DOMINANCE_IS_RECOMPUTED",
     "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_CANDIDATE_BYTES__THEN_ACTIVATE_RECEIPT_DERIVED_30_PREDICATE_WORLD__RECOMPUTE_ZERO_REALITY_INFORMATION_DOMINANCE_AND_PROOF_FIRST_FRONTIER__ONLY_THEN_REEVALUATE_THE_CURRENT_SCIENCE_ONE_SLOT_AUTHORITY",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_CANDIDATE_BYTES__THEN_ACTIVATE_RECEIPT_DERIVED_27_PREDICATE_WORLD__RECOMPUTE_ZERO_REALITY_INFORMATION_DOMINANCE__ONLY_THEN_REEVALUATE_ANY FRESH_REALITY AUTHORITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "fresh_reality_authority": false
 }
