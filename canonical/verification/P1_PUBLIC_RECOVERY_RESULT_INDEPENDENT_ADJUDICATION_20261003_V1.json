@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_RESULT_INDEPENDENT_ADJUDICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ONE_FRESH_P1_REALITY_UNIT__192_OF_192_DUAL_SCORER_PASS__THREE_FAILURE_SEMANTICS_TRANSPORT_REQUIREMENTS_DISCHARGED",
+  "source_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "execution_run_id": 37108111537,
+    "execution_job_id": 111160509570,
+    "execution_head_sha": "e489b191363c52c838b720cd759c99f638170c67",
+    "execution_artifact_id": 11268841992,
+    "execution_artifact_digest": "sha256:e25bcf3fcab61b1fa00882c202a00714ecb81772378005e4934edc712a22d038",
+    "authorized_result_sha256": "24eec602e4f8bc2762b7c48f1652b97149ba0c995ee8448d3a59b41ed9fcee4f",
+    "raw_result_sha256": "768fa639b7e4c5e611945362a3ceddc43dc272f1d882629cba7b688709850a1f",
+    "execution_workflow_blob": "547f57f43a71f289b006602c1067a962171f38d4"
+  },
+  "independent_adjudication": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1251,
+    "pull_request_head": "2b1feab3d03c47117604decd3d3a18839ff9d481",
+    "merge_commit": "1623cae09633f206f6efee30421054215946ba0f",
+    "workflow_run_id": 37108347744,
+    "workflow_job_id": 111161159755,
+    "conclusion": "success",
+    "artifact_id": 11268243756,
+    "artifact_digest": "sha256:dc02eb0c0d98d5e7703c60db860240d0ca6c473755806b1883a4d4e31a957a39"
+  },
+  "verified": {
+    "active_authority_blob": "365c098d4763ddfacf660f77457cbac08f5ac72e",
+    "minimum_reality_cut_blob": "cbcb2faff8404623846e77e19fcc5b0ad00e81d9",
+    "beacon_sha256": "887b0f45d7651eaeb0ff1be8872352f12ee32e212a3607c2a205810a15dfa83d",
+    "cases": 192,
+    "passes": 192,
+    "failures": 0,
+    "surface_count": 3,
+    "passes_per_surface": 64,
+    "both_failure_semantics_classes_present_every_case": true,
+    "v7_intervention_scorer_all_pass": true,
+    "source_native_rescue_scorer_all_pass": true,
+    "p1_failure_semantics_transport_pass": true,
+    "transport_requirements_discharged": [
+      "P1_FAILURE_SEMANTICS_TRANSPORT_CURSORBENCH",
+      "P1_FAILURE_SEMANTICS_TRANSPORT_FRONTIERCODE",
+      "P1_FAILURE_SEMANTICS_TRANSPORT_RECOVERY_SCOPE_COMPOSITION"
+    ]
+  },
+  "fresh_reality_units_consumed": 1,
+  "terminal_v3_replayed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority_consumed": true,
+  "p1_quarantine_lifted": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "next": "SEPARATE_SCOPE_RESTORATION_REDUCTION_BINDING_THIS_RECEIPT_WITH_PRIOR_V7_PROVENANCE_SCOPE_AND_MUTATION_PROOFS"
+}
