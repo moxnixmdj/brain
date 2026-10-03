@@ -278,6 +278,15 @@
       "reopened_by": {
         "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
         "reason": "FINITE_PERFECT_SAMPLE_IS_NOT_PROTOCOL_WIDE_ABSOLUTE_BOUND_WITHOUT_SCOPE_COMPLETENESS"
+      },
+      "independent_or_objective": true,
+      "independence_basis": {
+        "source_receipt": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "source_receipt_sha": "d04f2a8c5594d261158835db1cae3822411b6b23",
+        "source_receipt_status": "INDEPENDENT_PUBLIC_RUNNER_PASS__DELEGATION_ONLY_NEW_FAMILY_CLOSURE_ELIGIBLE__3_OF_19_COMPILED__ZERO_CREDIT_FROM_VERIFIER",
+        "universal_scope_receipt": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "universal_scope_receipt_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156",
+        "universal_scope_receipt_status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CUMULATIVE_HISTORY_REPAIR_AND_UNIVERSAL_FORMAL_SCOPE_PROOF__ZERO_CREDIT_PENDING_ACCEPTANCE_REDUCTION"
       }
     },
     {
