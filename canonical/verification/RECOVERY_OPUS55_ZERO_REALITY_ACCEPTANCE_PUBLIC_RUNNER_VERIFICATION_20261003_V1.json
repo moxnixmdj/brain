@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_RECOVERY_OPUS55_ZERO_REALITY_ACCEPTANCE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__THREE_RECOVERY_ATOMIC_PREDICATES_SCOPE_COMPLETE_STRONGER_PROOF__ZERO_REALITY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+  "source_candidate": {
+    "path": "canonical/governance/RECOVERY_OPUS55_ZERO_REALITY_ACCEPTANCE_CANDIDATE_V1.json",
+    "git_blob_sha": "89929d767f94052a9d28a958b0eb1b89dd1d6782",
+    "reducer": "canonical/runtime/recovery_opus55_zero_reality_acceptance_reduction_v1.py",
+    "reducer_git_blob_sha": "6c5633d399fdc5caeeac35b5b175572b69165323",
+    "tests": "canonical/tests/test_recovery_opus55_zero_reality_acceptance_reduction_v1.py",
+    "tests_git_blob_sha": "133306b674fbb430cab491ee744be382f36a741a"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1282,
+    "head_sha": "c8f1fdcaeb3a898a5e734eafdfc51535039638c4",
+    "merge_commit": "cff7845394f0307bec601a0748971225968c03c0",
+    "workflow_run_id": 37113277515,
+    "workflow_job_id": 111175147986,
+    "conclusion": "success",
+    "workflow": ".github/workflows/verify-recovery-opus55-zero-reality-v1.yml"
+  },
+  "verified": {
+    "exact_mirrored_blobs": true,
+    "reducer_tests_pass": true,
+    "scope_complete": true,
+    "objective_ceiling_or_floor": true,
+    "proposed_atomic_acceptance_delta": 3,
+    "proposed_family_acceptance_delta": 1,
+    "historical_narrow_terminal_run_used_as_proof": false,
+    "quarantined_public_recovery_run_used_as_proof": false,
+    "new_reality_units_consumed": 0,
+    "terminal_results_replayed": 0
+  },
+  "predicate_verdicts": {
+    "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR": "PROVED_BY_SCOPE_COMPLETE_STRONGER_PROOF_AT_OBJECTIVE_CEILING",
+    "RECOVERY_TERMINAL_NONINFERIOR": "PROVED_BY_SCOPE_COMPLETE_STRONGER_PROOF_AT_OBJECTIVE_CEILING",
+    "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES": "PROVED_BY_SCOPE_COMPLETE_STRONGER_PROOF_AT_OBJECTIVE_FLOOR"
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
