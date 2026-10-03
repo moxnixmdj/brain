@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED__EXECUTION_FALSE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "slots": 210
+  },
+  "current_comparator": {
+    "verification_path": "canonical/verification/TB_SCIENCE_OPUS55_SNAPSHOT_IDENTITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verification_git_blob_sha": "3bff4c8ec68bba45d0538812101fbbfed7b9b2ec",
+    "exact_percent": 63.33333333333333,
+    "required_successes": 133,
+    "fail_lock_failures": 78
+  },
+  "consumed_slots": [
+    "terminal-bench-science/genomic-model-ranking::trial-0",
+    "terminal-bench-science/mri-harmonization::trial-0",
+    "terminal-bench-science/navigation-sensor-calibration::trial-0"
+  ],
+  "reduction": {
+    "finalized_slots": 3,
+    "successes": 0,
+    "finalized_failures": 3,
+    "successes_remaining_for_pass_lock": 133,
+    "failures_remaining_before_fail_lock": 75,
+    "fixed_denominator": 210
+  },
+  "hard_rules": [
+    "THE_V1_MANIFEST_SLOT_UNIVERSE_AND_ORDER_REMAIN_IMMUTABLE",
+    "THE_HISTORICAL_58_7_THRESHOLD_IS_SUPERSEDED_FOR_CURRENT_OPUS55_PARITY_BY_THE_VERIFIED_63_333_PERCENT_COMPARATOR",
+    "ONLY_EXACT_SCORER_REWARD_AT_LEAST_1_COUNTS_SUCCESS",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "CONSUMED_SLOT_IDS_MUST_NEVER_BE_REPLAYED",
+    "THIS_OVERLAY_GRANTS_NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
