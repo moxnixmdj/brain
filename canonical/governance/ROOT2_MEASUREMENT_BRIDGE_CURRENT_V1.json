@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_MEASUREMENT_BRIDGE_CURRENT_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_ZERO_CREDIT__OWNER_FANOUT_RECONCILED__CURSOR_CLOSED__ENTRYPOINT_BOUND_FAIL_CLOSED",
+  "status": "ACTIVE_ZERO_CREDIT__OWNER_FANOUT_RECONCILED__CURSOR_CLOSED__FIRST_INDEPENDENTLY_VERIFIED_INFERENCE_ADAPTER",
   "merge_commit": "f545378d05c9d785995ea52a86129886fd783e9d",
   "exact_blobs": {
     "capsule": "b3c71b238c7358c607ebd2a01cb8601055d33c21",
@@ -10,23 +10,24 @@
     "external_task_entrypoint": "603beefe0db24102b86b7c965e5433bd880392af",
     "generic_inference_seam_boundary": "831ac05e5d57c346a9cd77fc145c73f01d825e28",
     "livebench_if_astra_inference_adapter": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
-    "livebench_if_astra_cleanroom_verification": "05fe911b180e0edae890519670216c589b38e354"
+    "livebench_if_astra_cleanroom_verification": "05fe911b180e0edae890519670216c589b38e354",
+    "livebench_if_astra_public_runner_verification": "7343b20409c5df874bd35c45db46045477d29e08"
   },
   "state": {
     "owner_channels_started": 5,
     "root2_fixed_bar_predicates_targeted": 9,
     "generic_entrypoint_bound": true,
-    "inference_capable_adapter_count": 0,
-    "generic_inference_seam_boundary": "PARTIALLY_CLOSED_BY_LIVEBENCH_IF_CANDIDATE__BROADER_SEAM_OPEN",
+    "inference_capable_adapter_count": 1,
+    "generic_inference_seam_boundary": "PARTIALLY_CLOSED_BY_INDEPENDENTLY_VERIFIED_LIVEBENCH_IF_ADAPTER__BROADER_SEAM_OPEN",
     "inference_capable_adapter_candidate_count": 1,
-    "independently_verified_inference_adapter_count": 0,
+    "independently_verified_inference_adapter_count": 1,
     "cleanroom_verified_inference_adapter_count": 1,
-    "livebench_if_inference_adapter": "CLEAN_ROOM_EXACT_BLOBS_PASS__PUBLIC_RUNNER_ATTESTATION_PENDING",
+    "livebench_if_inference_adapter": "INDEPENDENT_PUBLIC_RUNNER_PASS__FULL_ASTRA_INTEGRATION_AND_SCORE_REMAIN",
     "owner_channels_waiting": 4,
     "owner_channels_closed": 1,
     "cursor_owner_channel": "CLOSED_BY_DIRECT_OWNER_REPLY__STRONGER_PROOF_OR_POLICY_CHANGE_ONLY"
   },
-  "next": "OBTAIN_PUBLIC_RUNNER_ATTESTATION_FOR_LIVEBENCH_IF_ASTRA_ADAPTER__BIND_NON_CURSOR_OWNER_REPLIES__THEN_RECOMPUTE_ROOT2_FIXED_POINT",
+  "next": "BIND_FULL_ASTRA_INTEGRATION_FOR_LIVEBENCH_IF__BIND_NON_CURSOR_OWNER_REPLIES__THEN_RECOMPUTE_ROOT2_FIXED_POINT__NO_BENCHMARK_CASES_BEFORE_AUTHORITY",
   "incremental_spend_usd": 0,
   "terminal_cases_consumed": 0,
   "acceptance_credit_delta": 0,
