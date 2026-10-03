@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_OPUS55_SNAPSHOT_IDENTITY_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__INDEPENDENT_LIVE_SOURCE_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "PROVE_THAT_THE_CURRENT_PUBLIC_OPUS_5_5_63_3_PERCENT_TERMINAL_BENCH_SCIENCE_ROW_IS_BOUND_TO_THE_SAME_IMMUTABLE_V0_1_0_TASK_AND_SCORER_SNAPSHOT_USED_BY_BRAIN",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "frozen_brain_snapshot": {
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
+    "task_count": 70,
+    "trials_per_task": 3,
+    "slots": 210
+  },
+  "public_comparator": {
+    "source": "https://snorkel.ai/leaderboard/terminal-bench-science/",
+    "benchmark_label": "Terminal-Bench-Science 0.1",
+    "task_count": 70,
+    "model": "Opus 5.5",
+    "agent": "Claude Code",
+    "effort": "max",
+    "resolution_rate_percent": 63.3,
+    "standard_error_points": 3.3
+  },
+  "release_identity_chain": [
+    {
+      "fact": "OFFICIAL_GITHUB_LATEST_RELEASE_IS_V0_1_0",
+      "source": "https://github.com/harbor-framework/terminal-bench-science/releases/tag/v0.1.0",
+      "expected_release_commit_prefix": "f81afac",
+      "expected_task_count": 70
+    },
+    {
+      "fact": "V0_1_0_RELEASES_ARE_IMMUTABLE_AND_SCORE_AFFECTING_CHANGES_REQUIRE_NEW_RELEASE",
+      "source": "https://raw.githubusercontent.com/harbor-framework/terminal-bench-science/main/RELEASING.md",
+      "required_semantics": [
+        "RELEASES_ARE_IMMUTABLE_BENCHMARK_SNAPSHOTS",
+        "FREEZE_TASK_SET_AND_REVIEW_SCORE_AFFECTING_CHANGES_BEFORE_RELEASE",
+        "PUBLISHED_RELEASE_CORRECTIONS_USE_NEW_PATCH_RELEASE_NOT_MOVED_TAG"
+      ]
+    },
+    {
+      "fact": "CURRENT_PUBLIC_LEADERBOARD_ROW_IS_ON_THE_70_TASK_V0_1_RELEASE",
+      "source": "https://snorkel.ai/leaderboard/terminal-bench-science/",
+      "expected_task_count": 70,
+      "expected_opus55_percent": 63.3
+    },
+    {
+      "fact": "V0_1_IS_THE_FIRST_RELEASE_AND_EVALUATIONS_USE_THREE_TRIALS_ACROSS_ALL_70_TASKS",
+      "source": "https://www.terminal-bench-science.ai/announcement",
+      "expected_task_count": 70,
+      "expected_trials_per_task": 3
+    },
+    {
+      "fact": "BRAIN_HARBOR_PACKAGE_V0_1_0_RESOLVES_TO_FROZEN_CONTENT_HASH",
+      "source": "HARBOR_CLI_VERSION_METADATA",
+      "expected_dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+      "expected_content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a"
+    }
+  ],
+  "deduction": [
+    "THE_CURRENT_OWNER_PUBLISHED_V0_1_LEADERBOARD_HAS_70_TASKS",
+    "THE_ONLY_CURRENT_LATEST_PUBLISHED_V0_1_RELEASE_IS_IMMUTABLE_V0_1_0_WITH_70_TASKS",
+    "SCORE_AFFECTING_TASK_OR_SCORER_CHANGES_CANNOT_SILENTLY_MUTATE_A_PUBLISHED_RELEASE_AND_REQUIRE_A_NEW_RELEASE",
+    "NO_NEWER_PUBLISHED_RELEASE_SUPERSEDES_V0_1_0_AT_VERIFICATION_TIME",
+    "THEREFORE_CURRENT_V0_1_OWNER_LEADERBOARD_ROWS_ARE_BOUND_TO_THE_V0_1_0_TASK_AND_SCORER_RELEASE_SNAPSHOT",
+    "BRAIN_USES_THE_HARBOR_V0_1_0_PACKAGE_CONTENT_HASH_FOR_ITS_210_SLOT_PROTOCOL",
+    "THEREFORE_THE_CURRENT_OPUS55_63_3_ROW_IS_COMPARATOR_COMPATIBLE_AT_THE_TASK_AND_SCORER_SNAPSHOT_LEVEL"
+  ],
+  "consequence_if_independently_verified": {
+    "snapshot_identity_proved": true,
+    "effective_current_opus55_percent": 63.3,
+    "slots": 210,
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "finalized_failures_already_consumed": 3,
+    "remaining_failures_before_fail_lock": 75,
+    "historical_58_7_disposition": "PRESERVE_AS_OLDER_PUBLISHED_COMPARATOR_ONLY__DO_NOT_USE_AS_CURRENT_TERMINAL_EQUAL_OR_BETTER_BAR"
+  },
+  "nonclaims": [
+    "DOES_NOT_CLAIM_BRAIN_AND_CLAUDE_CODE_USE_THE_SAME_AGENT_HARNESS",
+    "DOES_NOT_INHERIT_OPUS_TRAJECTORIES_OR_CREDIT",
+    "DOES_NOT_GRANT_TB_SCIENCE_EXECUTION_AUTHORITY",
+    "DOES_NOT_GRANT_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
