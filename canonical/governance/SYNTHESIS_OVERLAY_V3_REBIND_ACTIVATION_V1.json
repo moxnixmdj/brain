@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_OVERLAY_V3_REBIND_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__SEVEN_ATOMS_TRANSPORTED__FOUR_RESIDUAL_OBLIGATIONS_OPEN__ZERO_CREDIT",
+  "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "candidate": {
+    "path": "canonical/governance/SYNTHESIS_OVERLAY_V3_REBIND_CANDIDATE_V1.json",
+    "git_blob_sha": "65c68de4a95ebdfd2ba3649c642748b0f9d8f2c7"
+  },
+  "verification": {
+    "path": "canonical/verification/SYNTHESIS_OVERLAY_V3_REBIND_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "57b7fc8df4fd820e3eda426f121b56acfce37a15"
+  },
+  "current_residual": {
+    "proved_atom_count": 7,
+    "missing_scope_relation": true,
+    "missing_atoms": [
+      "metric:matched_quality"
+    ],
+    "missing_metric_bounds": [
+      "matched_quality_noninferiority",
+      "required_claim_coverage_noninferiority"
+    ],
+    "implies_target": false
+  },
+  "scheduling_consequence": "SEARCH_OR_PROVE_ONLY_THE_FOUR_REMAINING_SYNTHESIS_OBLIGATIONS__DO_NOT_REPROVE_THE_SEVEN_TRANSPORTED_ATOMS",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
