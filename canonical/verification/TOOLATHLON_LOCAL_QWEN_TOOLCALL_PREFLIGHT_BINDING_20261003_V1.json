@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_TOOLATHLON_LOCAL_QWEN_TOOLCALL_PREFLIGHT_BINDING_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PINNED_LOCAL_QWEN_OPENAI_TOOL_CALL_COMPATIBILITY_PROVED__ZERO_CREDIT",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "source_repository": "moxnixmdj/verification-capsule-runner",
+  "source_pull_request": 1201,
+  "source_head_sha": "3b8c8f47f17f34f975008c4c68a253d91d7d02d6",
+  "workflow_run_id": 37095419706,
+  "workflow_job_id": 111124223601,
+  "workflow_conclusion": "success",
+  "artifact_id": 11264171873,
+  "artifact_zip_sha256": "906942864b2ab1c4b358ad1f5e0f8e1f3ce67f6553ba78ba4ec820e48b5d016f",
+  "exact_substrate": {
+    "model_repository": "TheStageAI/Qwen3.5-9B-GGUF",
+    "model_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+    "model_bytes": 5060174144,
+    "model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "runner": "ubuntu-24.04",
+    "incremental_spend_usd": 0
+  },
+  "observed_result": {
+    "openai_chat_completions_status": 200,
+    "tool_calls_present": true,
+    "echo_tool_selected": true,
+    "echo_arguments": {
+      "value": "carrier_probe_20261003"
+    },
+    "finish_reason": "tool_calls",
+    "model": "brain-qwen3.5-9b"
+  },
+  "proved_fact": "PINNED_LOCAL_QWEN_OPENAI_CHAT_COMPLETIONS_TOOL_CALL_COMPATIBILITY",
+  "does_not_prove": [
+    "TOOLATHLON_TERMINAL_SUCCESS",
+    "LIVE_SERVICE_ADMISSION_AT_LATER_TERMINAL_LAUNCH",
+    "OPUS55_SAME_HARNESS_COMPARABILITY",
+    "VALID_ROUTE_TOP1_NONINFERIORITY",
+    "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+  ],
+  "terminal_results_observed": 0,
+  "terminal_results_replayed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
