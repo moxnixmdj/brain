@@ -1,0 +1,32 @@
+name: Verify Tool Discovery dynamic V4 least-cost repair
+
+on:
+  push:
+    branches:
+      - tool-discovery-least-cost-repair-20261003-v1
+    paths:
+      - canonical/runtime/tool_discovery_dynamic_candidate_v4.py
+      - canonical/tests/test_tool_discovery_dynamic_v4.py
+      - canonical/runtime/tool_discovery_dynamic_proof_v3.py
+      - .github/workflows/verify-tool-discovery-dynamic-v4.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/tool_discovery_dynamic_candidate_v4.py
+      - canonical/tests/test_tool_discovery_dynamic_v4.py
+      - canonical/runtime/tool_discovery_dynamic_proof_v3.py
+      - .github/workflows/verify-tool-discovery-dynamic-v4.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_tool_discovery_dynamic_v4
