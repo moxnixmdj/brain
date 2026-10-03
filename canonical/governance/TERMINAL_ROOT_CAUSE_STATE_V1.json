@@ -159,5 +159,11 @@
     "event_class_count": 3,
     "currently_runnable_event_count": 0,
     "fresh_reality_authority": false
+  },
+  "root3_scope_certificate_admissibility_refinement": {
+    "path": "canonical/governance/ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V1.json",
+    "git_blob_sha": "8eb97e997c117e102fd115d03cce5793c416a482",
+    "status": "ACTIVE__ZERO_CREDIT__NO_ROOT3_COUNT_CHANGE",
+    "rule": "ACCOUNTING_LABEL_CARDINALITY_OR_SINGLETON_FAMILY_TO_CONTRACT_MAPPING_NEVER_PROVES_SCOPE_COMPLETENESS_WITHOUT_EXPLICIT_INDEPENDENT_LOSSLESS_OR_EXHAUSTIVE_DECOMPOSITION"
   }
 }
