@@ -88,7 +88,9 @@ class Tests(unittest.TestCase):
         ep=root/"canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json"
         if not pp.exists() or not ep.exists(): self.skipTest("integration fixtures absent")
         out=evaluate(json.loads(pp.read_text()),json.loads(ep.read_text()))
-        self.assertEqual((out["family_count"],out["closed_family_count"],out["open_family_count"]),(19,4,15))\n        self.assertEqual(self.row(out,"SELF_VERIFICATION_DEBUGGING_AND_RECOVERY")["result_status"],"PASS")\n        self.assertEqual(self.row(out,"TOOL_DISCOVERY_SELECTION_AND_LEARNING")["result_status"],"DEFINED_RESULT_OPEN")
+        self.assertEqual((out["family_count"],out["closed_family_count"],out["open_family_count"]),(19,4,15))
+        self.assertEqual(self.row(out,"SELF_VERIFICATION_DEBUGGING_AND_RECOVERY")["result_status"],"PASS")
+        self.assertEqual(self.row(out,"TOOL_DISCOVERY_SELECTION_AND_LEARNING")["result_status"],"DEFINED_RESULT_OPEN")
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
