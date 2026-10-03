@@ -10,7 +10,7 @@
     },
     "tests": {
       "path": "canonical/tests/test_opus55_acceptance_residual_compiler_v3.py",
-      "git_blob_sha": "1fcbc82faaff70a600221dba6901a79768cc654c"
+      "git_blob_sha": "72011c22ec497165fa8a6a496be44bb9a338e118"
     },
     "registry": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
@@ -42,7 +42,11 @@
     "proved_predicates": 11,
     "unresolved_predicates": 27,
     "opus55_acceptance": "4/19_PASS__15/19_OPEN",
-    "terminal_promotion_allowed": false
+    "terminal_promotion_allowed": false,
+    "receipt_saturation_complete": false,
+    "authorized_actions": [
+      "ACTION::SATURATE_EXISTING_RECEIPTS"
+    ]
   },
   "hard_rules": [
     "COMPILER_RECONCILIATION_GRANTS_NO_ACCEPTANCE_OR_FAMILY_CREDIT",
