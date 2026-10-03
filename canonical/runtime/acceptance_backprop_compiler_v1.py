@@ -4,16 +4,19 @@ This compiler reverses a frozen binary-rate acceptance threshold into the weakes
 remaining success mass required after independently verified proof/observation
 partitions are applied.
 
-It never treats a semantic similarity, family label, or unverified claim as a
-case-level success. Positive partitions must carry an independently verified,
-content-addressed receipt and explicit frozen population slot IDs. Overlap fails
-closed so a case can never be counted twice.
+Positive partitions must bind explicit frozen population slot IDs to an independently
+verified scope-complete content-addressed receipt. The compiler recomputes the frozen
+population commitment, requires every partition to bind that exact commitment, and
+rejects overlap so a slot can never be counted twice.
 
-The output is scheduling evidence only. It grants no execution, capability,
-family, promotion, or terminal authority.
+The output is scheduling evidence only. It grants no execution, capability, family,
+promotion, acceptance, or terminal authority.
 """
 from __future__ import annotations
 
+import hashlib
+import json
+import re
 from decimal import Decimal, ROUND_CEILING
 from typing import Any, Mapping, Sequence
 
@@ -26,8 +29,7 @@ CREDITING_OUTCOMES = {
     "OBSERVED_PASS",
     "OBSERVED_FAIL",
 }
-PASS_OUTCOMES = {"PROVED_PASS", "OBSERVED_PASS"}
-FAIL_OUTCOMES = {"PROVED_FAIL", "OBSERVED_FAIL"}
+_HEX_RE = re.compile(r"^[0-9a-fA-F]+$")
 
 
 def _fail(*errors: str) -> dict[str, Any]:
@@ -71,6 +73,22 @@ def _string_list(v: Any) -> list[str] | None:
     return out
 
 
+def population_commitment_sha256(population_ids: Sequence[str]) -> str:
+    ids = _string_list(population_ids)
+    if not ids:
+        raise ValueError("population_ids must be unique nonempty strings")
+    raw = json.dumps(sorted(ids), separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _valid_digest(v: Any) -> bool:
+    return (
+        isinstance(v, str)
+        and len(v) in {40, 64}
+        and _HEX_RE.fullmatch(v) is not None
+    )
+
+
 def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(payload, Mapping):
         return _fail("INPUT_NOT_OBJECT")
@@ -90,6 +108,11 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         return _fail("POPULATION_IDS_INVALID")
     population = set(population_ids)
 
+    computed_commitment = population_commitment_sha256(population_ids)
+    declared_commitment = payload.get("population_commitment_sha256")
+    if declared_commitment != computed_commitment:
+        return _fail("POPULATION_COMMITMENT_MISMATCH")
+
     threshold = _dec(payload.get("threshold_percent"))
     if threshold is None or threshold < 0 or threshold > 100:
         return _fail("THRESHOLD_PERCENT_INVALID")
@@ -105,7 +128,6 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
     proved_fail_slots: set[str] = set()
     observed_pass_slots: set[str] = set()
     observed_fail_slots: set[str] = set()
-
     seen_partition_ids: set[str] = set()
 
     for i, row in enumerate(partitions):
@@ -132,20 +154,24 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             errors.append(f"PARTITION_SLOT_IDS_INVALID:{pid}")
             continue
 
-        unknown = sorted(set(slot_ids) - population)
-        if unknown:
-            errors.append(f"PARTITION_OUTSIDE_POPULATION:{pid}:" + ",".join(unknown))
+        outside = sorted(set(slot_ids) - population)
+        if outside:
+            errors.append(f"PARTITION_OUTSIDE_POPULATION:{pid}:" + ",".join(outside))
             continue
 
-        receipt = row.get("receipt")
-        if not isinstance(receipt, str) or not receipt:
-            errors.append(f"CONTENT_ADDRESSED_RECEIPT_REQUIRED:{pid}")
+        if row.get("population_commitment_sha256") != computed_commitment:
+            errors.append(f"PARTITION_POPULATION_COMMITMENT_MISMATCH:{pid}")
+
+        receipt_path = row.get("receipt_path")
+        receipt_sha = row.get("receipt_sha")
+        if not isinstance(receipt_path, str) or not receipt_path:
+            errors.append(f"CONTENT_ADDRESSED_RECEIPT_PATH_REQUIRED:{pid}")
+        if not _valid_digest(receipt_sha):
+            errors.append(f"CONTENT_ADDRESSED_RECEIPT_SHA_REQUIRED:{pid}")
         if row.get("independent_verified") is not True:
             errors.append(f"INDEPENDENT_VERIFICATION_REQUIRED:{pid}")
         if row.get("scope_complete") is not True:
             errors.append(f"SCOPE_COMPLETENESS_REQUIRED:{pid}")
-        if row.get("population_commitment_bound") is not True:
-            errors.append(f"POPULATION_COMMITMENT_BINDING_REQUIRED:{pid}")
 
         overlap = [sid for sid in slot_ids if sid in claimed_slots]
         if overlap:
@@ -156,6 +182,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
                 + ",".join(sorted({claimed_slots[sid] for sid in overlap}))
             )
             continue
+
         for sid in slot_ids:
             claimed_slots[sid] = pid
 
@@ -175,7 +202,9 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
                 "partition_id": pid,
                 "outcome": outcome,
                 "slot_count": len(slot_ids),
-                "receipt": receipt if isinstance(receipt, str) else None,
+                "population_commitment_sha256": computed_commitment,
+                "receipt_path": receipt_path if isinstance(receipt_path, str) else None,
+                "receipt_sha": receipt_sha if isinstance(receipt_sha, str) else None,
             }
         )
 
@@ -206,9 +235,11 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         decision = "UNRESOLVED"
 
     additional_success_mass = max(0, required - lower_successes)
-    maximum_tolerable_additional_failures = max(
-        0, unknown_count - additional_success_mass
-    ) if decision == "UNRESOLVED" else 0
+    maximum_tolerable_additional_failures = (
+        max(0, unknown_count - additional_success_mass)
+        if decision == "UNRESOLVED"
+        else 0
+    )
 
     return {
         "schema": OUT_SCHEMA,
@@ -218,6 +249,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         "metric_type": "BINARY_RATE",
         "decision": decision,
         "population_size": total,
+        "population_commitment_sha256": computed_commitment,
         "threshold_percent": str(threshold),
         "threshold_success_count": required,
         "proved_passes": proved_passes,
@@ -237,12 +269,16 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             "kind": "ADDITIONAL_SUCCESS_MASS",
             "count": additional_success_mass,
             "domain": "CURRENT_UNKNOWN_FROZEN_POPULATION_SLOTS",
-            "note": "May be discharged by stronger formal proof, exact receipt reuse, or fresh observation; this compiler does not authorize which route.",
+            "note": (
+                "May be discharged by stronger formal proof, exact receipt reuse, or fresh observation; "
+                "this compiler does not authorize which route."
+            ),
         },
         "rule": (
-            "EXACT_FROZEN_BINARY_POPULATION_ONLY__PROVED_AND_OBSERVED_SUCCESS_MASS_SHARE_THE_SAME_"
-            "SCORER_SEMANTICS_ONLY_AFTER_INDEPENDENT_SCOPE_COMPLETE_CONTENT_ADDRESSED_BINDING__"
-            "NO_DOUBLE_COUNT__NO_SEMANTIC_GUESSING__NO_EXECUTION_OR_ACCEPTANCE_CREDIT_FROM_COMPILATION_ALONE"
+            "EXACT_FROZEN_BINARY_POPULATION_ONLY__POPULATION_COMMITMENT_RECOMPUTED__"
+            "PROOF_AND_OBSERVATION_PARTITIONS_REQUIRE_EXACT_COMMITMENT_PLUS_INDEPENDENT_SCOPE_COMPLETE_"
+            "CONTENT_ADDRESSED_RECEIPT__NO_DOUBLE_COUNT__NO_SEMANTIC_GUESSING__"
+            "NO_EXECUTION_OR_ACCEPTANCE_CREDIT_FROM_COMPILATION_ALONE"
         ),
         "execution_authority": False,
         "promotion_authority": False,
