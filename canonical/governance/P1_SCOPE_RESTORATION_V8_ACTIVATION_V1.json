@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_P1_SCOPE_RESTORATION_V8_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_SCOPE_RESTORATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_OPUS55_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "reducer": {
+    "path": "canonical/runtime/p1_scope_restoration_v8.py",
+    "git_blob_sha": "30b6eddc52a25682b669ac3161aa8e4b357dc6c5"
+  },
+  "tests": {
+    "path": "canonical/tests/test_p1_scope_restoration_v8.py",
+    "git_blob_sha": "cce54cbc3ed8d13517bae642667949f7162eb47a"
+  },
+  "new_transport_receipt": {
+    "path": "canonical/verification/P1_PUBLIC_RECOVERY_RESULT_INDEPENDENT_ADJUDICATION_20261003_V1.json",
+    "git_blob_sha": "d61f16f09f2ef7f20be6a18cdf5c49d3c9c6479d"
+  },
+  "frozen_inputs": {
+    "p1_binding": [
+      "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+    ],
+    "v7_current": [
+      "canonical/verification/P1_V7_CURRENT_MAIN_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "4e8cf594503a216302a1d61c2009945131d86041"
+    ],
+    "v7_provenance_minimum_reality": [
+      "canonical/verification/P1_V7_PROVENANCE_AND_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "01ca625add4db7035224f0d4cb9efb406d17362d"
+    ],
+    "v6_forward_causal": [
+      "canonical/verification/P1_TYPED_CAUSAL_INTERVENTION_V6_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "1e722621db8f0f1cb3b9689e48d4bfe356dcb36e"
+    ],
+    "original_scope_audit": [
+      "canonical/verification/P1_TERMINAL_EXECUTION_SCOPE_AUDIT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "89836565c384ac95ac426fe88ffb6200f818496f"
+    ],
+    "original_postwave": [
+      "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "51e3e7578e9adbeee2168d2223b84481fea16a09"
+    ],
+    "quarantine_propagation": [
+      "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "8c1a4db776e419ebb263da9f781245dd6491ea2f"
+    ],
+    "behavioral_registry": [
+      "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    ]
+  },
+  "proof_logic": [
+    "ORIGINAL_SCOPE_AUDIT_PROVED_TERMINAL_V3_P1_EXECUTION_WAS_NARROWER_THAN_FROZEN_P1_SCOPE_AND_PRESERVED_RAW_NARROW_EVIDENCE",
+    "V6_AND_V7_INDEPENDENT_PROOFS_CLOSE_FORWARD_CAUSAL_RESCUE_NONIDENTIFIABILITY_DERIVED_ONLY_SERIAL_COFAULT_AND_FAILURE_SEMANTICS_FAIL_CLOSED_MECHANICS",
+    "V7_PROVENANCE_AND_MINIMUM_REALITY_RECEIPT_PROVES_DROP_PROVENANCE_COUNTEREXAMPLE_CLOSED_AND_REMAINING_P1_INFORMATION_RESIDUAL_EXACTLY_FAILURE_SEMANTICS_TRANSPORT_TO_THREE_FROZEN_DIRECT_SURFACES",
+    "NEW_INDEPENDENT_ADJUDICATION_DISCHARGES_EXACTLY_THOSE_THREE_TRANSPORT_REQUIREMENTS_WITH_192_OF_192_DUAL_SCORER_PASS",
+    "THEREFORE_NO_P1_SCOPE_RESIDUAL_REMAINS_UNDER_THE_PREDECLARED_PROOF_DECOMPOSITION",
+    "RESTORATION_REACTIVATES_ONLY_THE_EIGHT_BEHAVIORAL_ROWS_RETRACTED_SOLELY_BY_P1_SCOPE_QUARANTINE"
+  ],
+  "expected_if_independently_verified": {
+    "whole_p1_contract_restored": true,
+    "whole_scope_contract_pass_count": 12,
+    "whole_scope_quarantined_contract_count": 0,
+    "provisional_behavioral_family_pass_count": 19,
+    "p1_quarantined_behavioral_family_count": 0,
+    "opus55_acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_OPUS55_ACCEPTANCE_PREDICATE_IS_CLOSED_BY_THIS_RESTORATION",
+    "NO_FULL_FAMILY_OWNERSHIP_IS_GRANTED_BY_THIS_RESTORATION",
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_SECOND_P1_REALITY_UNIT",
+    "NO_INFERENCE_BEYOND_PREDECLARED_P1_SCOPE_DEPENDENCY_MAP"
+  ],
+  "source_fresh_reality_units_consumed": 1,
+  "restoration_new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_REDUCER_TESTS_AND_SOURCE_BLOBS__ONLY_THEN_RECONCILE_CANONICAL_SCOPE_POINTERS_AND_EIGHT_BEHAVIORAL_ROWS"
+}
