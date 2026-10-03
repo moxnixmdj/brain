@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_SELF_HOST_SOURCE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_RELEASE_SOURCE_GRAPH__WEBSITE_PINNED__GITLAB_REVISION_UNPINNED__GATED_ACCESS_ACCOUNT_BOUND__ZERO_CASE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OSWORLD_V21_SELF_HOST_SOURCE_BOUNDARY_V1.json",
+    "git_blob_sha": "f58c12d5c42e1e6b7cdda05d52f978469f3aa300"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1476,
+    "verifier_head_sha": "0d743d14f43a8d63a656286e74ca65b1071d4186",
+    "merge_commit": "bbc8d2879eb3502ca262457eaa99008448a2d45c",
+    "workflow_run_id": 37161634483,
+    "workflow_job_id": 111316102614,
+    "conclusion": "success",
+    "successful_step": "Verify exact public source graph"
+  },
+  "verified": {
+    "candidate_exact_blob": true,
+    "release_manifest_exact_blob": true,
+    "release_readme_exact_blob": true,
+    "website_commit_exact": true,
+    "website_gitlinks_25": true,
+    "tasks_assets_revisions_exact": true,
+    "gated_access_autoapproval_wording": true,
+    "gitlab_repository_named": true,
+    "gitlab_release_revision_absent": true
+  },
+  "consequence": "OSWORLD_GENERIC_SOURCE_IDENTITY_AND_GATED_DATASET_LOCATION_DISCOVERY_REMOVED__PRESERVE_ONLY_ACCOUNT_ACCESS__GITLAB_REVISION_OR_EQUIVALENCE__DEPLOYMENT__PROTOCOL_EQUIVALENCE__BRAIN_SCORE",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
