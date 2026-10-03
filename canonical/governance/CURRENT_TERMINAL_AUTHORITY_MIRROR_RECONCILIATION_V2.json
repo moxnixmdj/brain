@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_MIRROR_RECONCILIATION_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_TRUTH_REPAIR__DETERMINISTIC_PREFLIGHT_REQUIRED__ZERO_CREDIT",
+  "base_commit": "6f3a7dd8a5c989efff67a7e4d33882179ee99ab9",
+  "source_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+  "repaired_surfaces": [
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+    "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json",
+    ".github/workflows/frontier-state-consistency.yml"
+  ],
+  "after": {
+    "accepted_families": 3,
+    "open_families": 16,
+    "proved_atomic_predicates": 8,
+    "unresolved_atomic_predicates": 30,
+    "composition_scoped_components": "2_OF_12",
+    "tool_discovery": "V6_VERSION_RESTART_PLUS_OBSERVABILITY_PARTITION_V2_PENDING_INDEPENDENT_VERIFICATION_THEN_COMMON_MATCHED_AUTHORITY_SCOPE",
+    "p1": "SOURCE_NATIVE_ONE_SHARED_BATCH_PENDING_INDEPENDENT_VERIFICATION__EXECUTION_NOT_AUTHORIZED",
+    "terminal_goal_achieved": false
+  },
+  "regression_closed": "MIRRORS_CAN_NO_LONGER_PASS_FRONTIER_STATE_CONSISTENCY_WHILE_DISAGREEING_WITH_CURRENT_TERMINAL_AUTHORITY_ON_BLOCKER_NEXT_OR_ACCEPTANCE_COUNTS",
+  "hard_rules": [
+    "TRUTH_REPAIR_ONLY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "CURRENT_TERMINAL_AUTHORITY_CONTROL_PROJECTION_IS_THE_MIRROR_SOURCE",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
