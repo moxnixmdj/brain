@@ -48,7 +48,7 @@
   "family_credit_delta": 0,
   "terminal_authority_projection": {
     "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-    "source_commit_sha": "1cdb7f94f3491e755014a3abfe4a64cf6fae7b5a",
+    "source_commit_sha": "7e039460c7a2ee2fa465ea53a9a500fd145a89ca",
     "rule": "NEXT_AND_ACCEPTANCE_COUNTS_DERIVED_FROM_CURRENT_TERMINAL_AUTHORITY__RECOVERY_V2_PROMOTION_RECONCILED"
   }
 }
