@@ -1,16 +1,18 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_GENERIC_INFERENCE_SEAM_BOUNDARY_V1",
   "date": "2026-10-04",
-  "status": "FAIL_CLOSED__GENERAL_INFERENCE_ENTRYPOINT_UNBOUND__ZERO_CREDIT",
+  "status": "PARTIALLY_CLOSED__LIVEBENCH_IF_INFERENCE_ADAPTER_INDEPENDENTLY_VERIFIED__BROADER_GENERAL_SEAM_OPEN__ZERO_CREDIT",
   "evidence": {
     "capability_planner": "64ff65cb184f50d3336326f33cccfcc0a53301a8",
     "remaining_behavior_candidate": "4d7a5e884df8ee0d74fece07baf87e70f64644d9",
     "contract_native_candidate": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85",
     "external_task_entrypoint": "603beefe0db24102b86b7c965e5433bd880392af",
-    "adapter_registry": "a154fd5e91c340ee81b5243f6409d09558783fe9"
+    "adapter_registry": "afa021a25d2de53e293d10ab6759e55eaabaea21",
+    "livebench_if_astra_inference_adapter": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
+    "livebench_if_public_runner_verification": "canonical/verification/ROOT2_LIVEBENCH_IF_ASTRA_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
   },
-  "conclusion": "CURRENT_BRAIN_HAS_TYPED_SOLVERS_AND_A_FAIL_CLOSED_DISPATCHER_BUT_NO_REGISTERED_GENERAL_INFERENCE_ADAPTER",
-  "next": "BIND_AND_VERIFY_FIRST_GENERAL_INFERENCE_ADAPTER__THEN_REUSE_ACROSS_ROOT2_CHANNELS",
+  "conclusion": "FIRST_REAL_INFERENCE_ADAPTER_IS_INDEPENDENTLY_VERIFIED_FOR_LIVEBENCH_IF__GENERIC_REUSE_ACROSS_OTHER_ROOT2_SURFACES_REMAINS_UNPROVED",
+  "next": "REUSE_OR_GENERALIZE_VERIFIED_ADAPTER_ONLY_WHERE_PROTOCOL_EQUIVALENCE_IS_PROVED__BIND_OWNER_REPLIES__RECOMPUTE_ROOT2_FIXED_POINT",
   "incremental_spend_usd": 0,
   "terminal_cases_consumed": 0,
   "acceptance_credit_delta": 0,
