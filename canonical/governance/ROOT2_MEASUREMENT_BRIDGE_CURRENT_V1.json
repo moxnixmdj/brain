@@ -11,7 +11,7 @@
     "generic_inference_seam_boundary": "831ac05e5d57c346a9cd77fc145c73f01d825e28",
     "livebench_if_astra_inference_adapter": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
     "livebench_if_astra_cleanroom_verification": "05fe911b180e0edae890519670216c589b38e354",
-    "livebench_if_astra_public_runner_verification": "PENDING_CONTENT_SHA_AFTER_WRITE"
+    "livebench_if_astra_public_runner_verification": "15c9540e0f6a8a6bf9bf3bb6ef76a01305ed6719"
   },
   "state": {
     "owner_channels_started": 5,
