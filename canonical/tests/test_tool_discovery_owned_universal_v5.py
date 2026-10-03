@@ -91,6 +91,19 @@ class ToolDiscoveryOwnedUniversalV5Tests(unittest.TestCase):
         self.assertTrue(out["source_union_exact_registry"])
         self.assertTrue(out["hidden_capabilities_absent_from_discovery"])
 
+    def test_public_authority_digest_does_not_encode_hidden_capability_truth(self):
+        yes = OwnedToolAuthorityV5([
+            row("same-public", 1, source="S0", supported=True),
+        ], epoch=3)
+        no = OwnedToolAuthorityV5([
+            row("same-public", 1, source="S0", supported=False),
+        ], epoch=3)
+        self.assertEqual(yes.registry_digest_sha256(), no.registry_digest_sha256())
+        self.assertEqual(
+            yes.discover("S0", episode_epoch=3),
+            no.discover("S0", episode_epoch=3),
+        )
+
     def test_cheaper_identity_hidden_in_later_source_cannot_be_preempted(self):
         a = OwnedToolAuthorityV5([
             row("expensive", 10, source="S0", supported=True),
