@@ -21,7 +21,7 @@ EXPECTED_ORIGINAL = [
 REMAINING = [
     "TOOLATHLON_MATCHED_SCOPE_COMPOSITION_CERTIFICATE",
     "TOOLATHLON_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER",
-    "OPUS55_TOOLATHLON_77_8_DURABLE_FIRST_PARTY_BYTE_BINDING",
+    "OPUS55_TOOLATHLON_MATCHED_REFERENCE_BAR",
 ]
 
 
@@ -89,14 +89,22 @@ def evaluate(
     if not proved_atomic_inputs:
         errors.append("REQUIRED_EXISTING_TOOL_ATOMS_NOT_PROVED")
 
+    candidate_ref = freeze.get("opus55_reference_bar") or {}
+    legacy_reference_not_matched = (
+        candidate_ref.get("benchmark") == "Toolathlon-Verified"
+        and float(candidate_ref.get("pass_at_1_percent", -1)) == 77.8
+        and "DURABLE_LOCAL_EVIDENCE_BINDING_STILL_REQUIRED"
+        in str(candidate_ref.get("source_status") or "")
+    )
+    if not legacy_reference_not_matched:
+        errors.append("LEGACY_REFERENCE_CANDIDATE_STATE_DRIFT")
+
     selector = cut.get("terminal_selector") or {}
-    required_selector = [
-        x + "__INDEPENDENT_PASS" for x in REMAINING
-    ]
+    required_selector = [x + "__INDEPENDENT_PASS" for x in REMAINING]
     selector_frozen = (
         selector.get("matched_route_execution_authorized_when") == required_selector
         and selector.get("otherwise") == "FAIL_CLOSED__NO_MATCHED_TARGET_EXECUTION"
-        and "NO_SCOPE_THRESHOLD_SELECTOR_OR_METRIC_CHANGE_AFTER_ANY_TERMINAL_RESULT_IS_OBSERVED"
+        and "NO_SCOPE_THRESHOLD_HARNESS_TOOL_AUTHORITY_METRIC_SELECTOR_OR_REFERENCE_ADJUSTMENT_AFTER_ANY_TERMINAL_RESULT_IS_OBSERVED"
         == selector.get("post_result_rule")
     )
     if not selector_frozen:
@@ -108,13 +116,14 @@ def evaluate(
     return {
         "schema": "PROJECT_BRAIN_TOOLATHLON_MATCHED_ROUTE_PRECONDITION_CUT_VERDICT_V1",
         "status": (
-            "PASS__SIX_TO_THREE_PRECONDITION_CUT__ZERO_REALITY__ZERO_CREDIT"
+            "PASS__SIX_TO_THREE_PRECONDITION_CUT__REFERENCE_HARNESS_TRUTH_REPAIRED__ZERO_REALITY__ZERO_CREDIT"
             if not errors else "FAIL_CLOSED__PRECONDITION_CUT_INVALID"
         ),
         "errors": errors,
         "original_open_preconditions": 6,
         "checker_and_task_population_frozen": checker_population_frozen,
         "proved_existing_atomic_inputs": proved_atomic_inputs,
+        "legacy_77_8_candidate_is_not_a_matched_reference": legacy_reference_not_matched,
         "terminal_selector_frozen": selector_frozen,
         "closed_zero_reality_count": 2 if not errors else 0,
         "absorbed_original_precondition_count": 2 if not errors else 0,
