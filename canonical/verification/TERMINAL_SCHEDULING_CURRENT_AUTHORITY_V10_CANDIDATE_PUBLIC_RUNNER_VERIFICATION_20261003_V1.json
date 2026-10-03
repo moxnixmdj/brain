@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V10_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_POINTER_REBOUND_TO_V10_CANDIDATE__MANDATORY_RETRIEVAL_V3_GATE__ZERO_CREDIT",
+  "verified_candidate_pointer": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "e17bc339e542e3ae193f88c0680222faba741af9"
+  },
+  "bound_v10_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_V1.json",
+    "git_blob_sha": "b1d37d015d93eb71fba1742a498b793b5a2a4ea0"
+  },
+  "bound_v10_authority_verification": {
+    "path": "canonical/verification/TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "20fb5ddba2ec8ae93ab3b8543ff455236abef672"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1322,
+    "merge_commit": "1602d6599e542ccf805480830bf398a991d7cfcf",
+    "head_sha": "6aeb4f3a79700519b733aebfe98b3cb3da4807be",
+    "workflow_run_id": 37120345704,
+    "workflow_job_id": 111195072424,
+    "conclusion": "success"
+  },
+  "verified": {
+    "single_current_pointer_binding_pass": true,
+    "v10_exact_binding_verified": true,
+    "v10_independent_verification_binding_verified": true,
+    "registry_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "retrieval_v3_mandatory": true,
+    "direct_or_stale_bypass_forbidden": true,
+    "pre_v3_epoch_exhaustion_forbidden": true,
+    "consumed_source_epoch_replay_forbidden": true,
+    "no_result_nonexistence_inference_forbidden": true,
+    "zero_credit_preserved": true
+  },
+  "operational_consequence": "THE_CANDIDATE_CURRENT_POINTER_IS_INDEPENDENTLY_VERIFIED_AND_MAY_BE_STATUS_PROMOTED_TO_ACTIVE_WITH_A_FINAL_EXACT_BYTE_VERIFICATION",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_OPEN_WORLD_RETRIEVAL_COMPLETENESS_CLAIM",
+    "NO_TERMINAL_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
