@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_V11_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CURRENT_AUTHORITY__V11_V5_RETRIEVAL_CHAIN__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_V1.json",
+    "git_blob_sha": "b1d37d015d93eb71fba1742a498b793b5a2a4ea0",
+    "rule": "V10_REMAINS_HISTORICAL_AFTER_INDEPENDENT_V11_POINTER_PASS"
+  },
+  "live_scheduler": {
+    "runtime_path": "canonical/runtime/current_terminal_scheduling_world_v1.py",
+    "runtime_git_blob_sha": "9ae2b990578b042dd24074fd5013378b72e64b6b",
+    "action_hypergraph_path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+    "action_hypergraph_git_blob_sha": "38b53147597b5457859e3b0d031168842560e3e2",
+    "retrieval_gate_path": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py",
+    "retrieval_gate_git_blob_sha": "c3324e574c1fafb6aaab443f49b7a9600966e754"
+  },
+  "live_world": {
+    "frozen_predicates": 38,
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "tool_learning_success_route_noninferior": "OPEN"
+  },
+  "tool_discovery_retrieval_authority": {
+    "mandatory": true,
+    "version": "V5_OVER_V4_OVER_V3_OVER_VERIFIED_V2_BASE",
+    "activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V5_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "8b8b80d43972bb7113b193baaf21dbda292d595e",
+    "activation_verification_path": "canonical/verification/RETRIEVAL_V5_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "activation_verification_git_blob_sha": "acd898bdea67ef0337e33b4335426fbe0dd7320d",
+    "execution_verification_path": "canonical/verification/RETRIEVAL_V5_FEDERATION_EXECUTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "execution_verification_git_blob_sha": "cd1501e167a5429ad0d918e080c527e6d43b8a4d",
+    "live_gate_verification_path": "canonical/verification/RETRIEVAL_V5_LIVE_GATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "live_gate_verification_git_blob_sha": "aa3a1ff960ba0f02ff5ad118053cf1b7d382d91b",
+    "direct_or_stale_bypass_allowed": false,
+    "failed_or_rejected_cell_consumption_allowed": false,
+    "partial_batch_epoch_consumption_allowed": false,
+    "same_consumed_source_epoch_replay_allowed": false,
+    "no_result_means_nonexistence": false,
+    "open_world_epoch_consumption_means_complete": false
+  },
+  "adaptive_closure_controller": {
+    "path": "canonical/runtime/adaptive_terminal_closure_controller_v1.py",
+    "git_blob_sha": "06d16ef1e8caa08835bc4e958c3047833bf52a32",
+    "verification_path": "canonical/verification/ADAPTIVE_TERMINAL_CLOSURE_V10_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "rule": "CONTROLLER_REMAINS_ZERO_CREDIT_AND_MUST_RECOMPUTE_FROM_LIVE_WORLD__V11_RETRIEVAL_REBIND_DOES_NOT_GRANT_ACCEPTANCE"
+  },
+  "hard_rules": [
+    "DO_NOT_SCHEDULE_TOOL_DISCOVERY_RETRIEVAL_OUTSIDE_THE_EXACT_VERIFIED_V2_V3_V4_V5_CHAIN",
+    "ONLY_SUCCESSFULLY_EXECUTED_SOURCE_QUERY_CELLS_MAY_ENTER_THE_CONSUMED_SET",
+    "TRANSIENT_OR_REJECTED_SOURCE_QUERY_CELLS_REMAIN_RETRYABLE_AND_UNCONSUMED",
+    "PARTIAL_BATCH_EXECUTION_CANNOT_CONSUME_A_SOURCE_EPOCH",
+    "ALL_SELECTED_SOURCE_QUERY_CELLS_MUST_BE_SUCCESSFULLY_CONSUMED_BEFORE_EPOCH_CONSUMPTION",
+    "OFF_DOMAIN_RESULTS_CANNOT_SATISFY_DOMAIN_SPECIFIC_SOURCE_CELLS",
+    "DO_NOT_REPEAT_CONSUMED_RETRIEVAL_SOURCE_QUERY_CELLS",
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "SOURCE_EPOCH_CONSUMPTION_IS_NOT_OPEN_WORLD_COMPLETENESS",
+    "PRESERVE_CURRENT_4_OF_19_ACCEPTANCE_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT_FROM_SCHEDULING_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V11_BYTES__THEN_REBIND_TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1_ONLY_IF_PASS",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
