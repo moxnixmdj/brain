@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_CANDIDATE_V4",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_CREDIT__INDEPENDENT_AUTHORITY_VERIFICATION_REQUIRED__EXECUTION_FALSE",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "current_parity": {
+    "comparator_model": "Opus 5.5",
+    "comparator_percent": 63.33333333333333,
+    "fixed_denominator": 210,
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "finalized_failures_before_canary": 5,
+    "remaining_failures_before_fail_lock": 73
+  },
+  "repair_prerequisite": {
+    "path": "canonical/verification/TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "7497bc7249431a832a0e938fcf6d575bfbfaf5f3",
+    "status_required": "INDEPENDENT_PASS__CLEAN_CURRENT_RUNNER_BUILD__HEALTH_AND_SYNTHETIC_COMPLETION_PASS__ZERO_TERMINAL",
+    "compiled_build_cache_reused_required": false,
+    "health_pass_required": true
+  },
+  "exact_route": {
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "manifest_path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "planner_blob": "fe7c0ce885197217774638df382aeb6f68ff38dd",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "qwen_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c"
+  },
+  "authorized_slot": {
+    "slot_id": "terminal-bench-science/koopman-mfg-id::trial-0",
+    "schedule_order": 5,
+    "attempt_index": 0,
+    "task_rank": 5,
+    "task_name": "terminal-bench-science/koopman-mfg-id",
+    "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f"
+  },
+  "permanently_consumed_slots": [
+    "terminal-bench-science/genomic-model-ranking::trial-0",
+    "terminal-bench-science/mri-harmonization::trial-0",
+    "terminal-bench-science/navigation-sensor-calibration::trial-0",
+    "terminal-bench-science/baseline-free-localization::trial-0",
+    "terminal-bench-science/virtual-baseline-localization::trial-0"
+  ],
+  "execution_semantics": {
+    "slots_authorized": 1,
+    "retries_per_slot": 0,
+    "slot_replacement": false,
+    "denominator_shrink": false,
+    "duplicate_slot_credit": false,
+    "exact_success_rule": "reward >= 1.0",
+    "stop_after_canary": true,
+    "auto_revoke_after_slot_finalization": true,
+    "rebuild_llama_cpp_on_current_runner": true,
+    "compiled_llama_cpp_cache_forbidden": true
+  },
+  "hard_rules": [
+    "FIRST_UNTOUCHED_FROZEN_MANIFEST_SLOT_ONLY",
+    "NO_CONSUMED_SLOT_REPLAY",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "CLEAN_CURRENT_RUNNER_LLAMA_CPP_BUILD_REQUIRED",
+    "NO_EXECUTION_UNTIL_SEPARATE_INDEPENDENT_VERIFIER_BINDS_THIS_EXACT_CANDIDATE_AND_CURRENT_CANONICAL_FRONTIER",
+    "EXECUTE_EXACTLY_ONE_SLOT_THEN_AUTO_REVOKE"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
