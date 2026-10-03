@@ -54,28 +54,26 @@ def _qid(case:Mapping[str,str],index:int)->str:
 
 def generate_cases(limit:int=768)->list[dict[str,str]]:
  dims=[SCRIPTS,METADATA,SURFACES,REVISIONS,VOCAB,STRUCTURE,INDEXING,NOISE]
- rows=[]
- for values in itertools.product(*dims):
-  row=dict(zip(("script","metadata","surface","revision","vocabulary","structure","indexing","noise"),values))
-  # deterministic thinning preserving broad interaction coverage
-  h=int(hashlib.sha256("|".join(values).encode()).hexdigest()[:8],16)
-  if h%13 in {0,1,2}:
-   rows.append(row)
-   if len(rows)>=limit: break
- # force nasty compounds
+ names=("script","metadata","surface","revision","vocabulary","structure","indexing","noise")
  forced=[
   {"script":"CJK","metadata":"EMPTY","surface":"TESTS","revision":"NONDEFAULT_BRANCH","vocabulary":"NO_SHARED_TEXT","structure":"DEEP_MONOREPO","indexing":"WEB_UNINDEXED_ENUMERABLE","noise":"DECOY"},
   {"script":"ARABIC","metadata":"MISLEADING","surface":"HISTORY","revision":"OLD_COMMIT","vocabulary":"SYNONYM","structure":"DEPENDENCY_ONLY","indexing":"INDEX_LAG","noise":"DECOY"},
   {"script":"SYMBOL_ONLY","metadata":"EMPTY","surface":"RELEASE","revision":"TAG_ONLY","vocabulary":"NO_SHARED_TEXT","structure":"DEPENDENCY_ONLY","indexing":"WEB_UNINDEXED_ENUMERABLE","noise":"DECOY"},
  ]
- rows.extend(forced)
- # stable dedupe
- out=[]; seen=set()
- for r in rows:
-  key=tuple(r[k] for k in sorted(r))
-  if key not in seen:
-   seen.add(key); out.append(r)
- return out[:limit]
+ scored=[]
+ for values in itertools.product(*dims):
+  row=dict(zip(names,values))
+  h=hashlib.sha256("|".join(values).encode()).hexdigest()
+  scored.append((h,row))
+ scored.sort(key=lambda x:x[0])
+ out=[];seen=set()
+ def add(r):
+  key=tuple(r[k] for k in names)
+  if key in seen or len(out)>=limit:return
+  seen.add(key);out.append(dict(r))
+ for r in forced:add(r)
+ for _,r in scored:add(r)
+ return out
 
 
 def _surface_text(case:Mapping[str,str],secret:str)->str:
