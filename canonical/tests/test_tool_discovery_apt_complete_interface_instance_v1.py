@@ -22,6 +22,26 @@ class Tests(unittest.TestCase):
         self.assertFalse(m._public_source("https://user:pass@example.test/repo"))
         self.assertFalse(m._public_source("file:///private/repo"))
 
+    def test_public_source_resolves_public_mirror_file_fail_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            p=Path(td)/"apt-mirrors.txt"
+            p.write_text(
+                "http://azure.archive.ubuntu.com/ubuntu/\\tpriority:1\\n"
+                "https://archive.ubuntu.com/ubuntu/\\tpriority:2\\n"
+                "https://security.ubuntu.com/ubuntu/\\tpriority:3\\n",
+                encoding="utf-8",
+            )
+            self.assertTrue(m._public_source("mirror+file:"+str(p)))
+            p.write_text(
+                "https://archive.ubuntu.com/ubuntu/\\n"
+                "https://user:pass@example.test/private\\n",
+                encoding="utf-8",
+            )
+            self.assertFalse(m._public_source("mirror+file:"+str(p)))
+            p.write_text("file:///private/repo\\n",encoding="utf-8")
+            self.assertFalse(m._public_source("mirror+file:"+str(p)))
+            self.assertFalse(m._public_source("mirror+file:"+str(Path(td)/"missing")))
+
     def test_epoch_root_changes_with_index_digest(self):
         body1={"source_configs":[],"package_indexes":[{"source_id":"x","site":"s","release":"r","component":"c","architecture":"a","index_sha256":"1"}]}
         body2=json.loads(json.dumps(body1)); body2["package_indexes"][0]["index_sha256"]="2"
