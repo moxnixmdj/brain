@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT3_RESIDUAL_COMPRESSION_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_FAIL_CLOSED__CURRENT_ROOT3_RESIDUALS_COMPRESSED__ZERO_CREDIT",
+  "status": "ACTIVE_FAIL_CLOSED__11_ROOT3_INVOLVED__4_WORK_CLASSES__7_FORMAL_TARGETS_TO_4_POPULATION_IDENTITIES__8_MATCHED_SCOPE_TARGETS_TO_ONE_FUTURE_SUPERPORTFOLIO_WAVE__FOUR_DIRECT_ORACLE_LEAVES__ZERO_CREDIT",
   "objective": "Replace coarse Root-3 labels with the smallest currently justified scope-completeness residuals, reusing only current or independently verified evidence and preserving all unresolved holes.",
   "authority": {
     "current_evidence_ledger": {
@@ -48,6 +48,34 @@
       "verification_path": "canonical/verification/UNIVERSAL_LEARNING_OPEN_WORLD_V4_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "8ed4f50303645921458b8429728ffca2c2ce293a",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__OPERATIVE_UNKNOWN_DOMAIN_LEARNING_OVERLAY_V4__ZERO_CREDIT"
+    },
+    "generic_scope_certificate_compiler": {
+      "path": "canonical/governance/UNIVERSAL_SCOPE_CLOSURE_COMPILER_ACTIVATION_V1.json",
+      "git_blob_sha": "4e6d55ed74e5698b7800a971327724dee8802470",
+      "verification": "canonical/verification/UNIVERSAL_SCOPE_CLOSURE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "27a791738a7dedc2fd9634f2e13356bdc2d8f766",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT"
+    },
+    "root3_frontier_compiler": {
+      "path": "canonical/governance/ROOT3_UNIVERSAL_SCOPE_CLOSURE_ACTIVATION_V1.json",
+      "git_blob_sha": "4cb0d963aa11205063d0119d9ae8fdb625f80e3c",
+      "verification": "canonical/verification/ROOT3_UNIVERSAL_SCOPE_CLOSURE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "539c2702bb6d06151228461db0138a74a732240c",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__11_TO_4_WORK_CLASSES__ZERO_CREDIT"
+    },
+    "target_population_coalescence": {
+      "path": "canonical/governance/ROOT3_TARGET_POPULATION_COALESCENCE_V1.json",
+      "git_blob_sha": "5a908133af0beed0791ae573051917dba5454acd",
+      "verification": "canonical/verification/ROOT3_TARGET_POPULATION_COALESCENCE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "fe2da7ca39e9630bfdd0c1de414c0c3e2543ced9",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__7_TARGETS_TO_4_POPULATION_IDENTITIES__ZERO_CREDIT"
+    },
+    "matched_superportfolio_mincut": {
+      "path": "canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V1.json",
+      "git_blob_sha": "0fa75e451bba19754a4296283c0095e4182ca97d",
+      "verification": "canonical/verification/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "6621a42641a1bc939892c00eaca63b7d4f664d47",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__8_MATCHED_SCOPE_TARGETS_TO_ONE_FUTURE_WAVE__ZERO_CREDIT"
     }
   },
   "compressed_residuals": [
@@ -147,9 +175,12 @@
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_RESIDUAL_COMPRESSION",
     "NO_FRESH_REALITY_BEFORE_ROOT2_ROOT3_ZERO_REALITY_FIXED_POINT",
     "UNIVERSAL_LEARNING_V3_OPERATIVE_OVERLAY_CHANGES_MECHANISM_ONLY__IT_DOES_NOT_CLOSE_UNKNOWN_DOMAIN_DIRECT_LEAVES_OR_GRANT_ACCEPTANCE_OWNERSHIP_OR_FAMILY_CREDIT",
-    "UNIVERSAL_LEARNING_V4_CHANGES_THE_OPERATIVE_UNKNOWN_DOMAIN_MECHANISM_ONLY__TWO_FROZEN_DIRECT_LEAVES_REMAIN_OPEN__ZERO_ACCEPTANCE_OWNERSHIP_OR_FAMILY_CREDIT"
+    "UNIVERSAL_LEARNING_V4_CHANGES_THE_OPERATIVE_UNKNOWN_DOMAIN_MECHANISM_ONLY__TWO_FROZEN_DIRECT_LEAVES_REMAIN_OPEN__ZERO_ACCEPTANCE_OWNERSHIP_OR_FAMILY_CREDIT",
+    "USE_ACTIVE_GENERIC_SCOPE_COMPILER_FOR_EVERY_NEW_SCOPE_CERTIFICATE",
+    "DO_NOT_DUPLICATE_POPULATION_INSTANTIATION_ACROSS_PREDICATES_SHARING_THE_SAME_FROZEN_FAMILY_PORTFOLIO",
+    "IF_EMPIRICAL_MATCHED_SCOPE_REMAINS_IRREDUCIBLE_USE_ONE_SHARED_SUPERPORTFOLIO_WAVE_WITH_INDEPENDENT_PER_FAMILY_VERDICTS"
   ],
-  "next": "WORK_ONLY_SYNTHESIS_SCOPE_RELATION_MATCHED_QUALITY_ATOM_AND_TWO_NUMERIC_BOUNDS__SEARCH_ONLY_LOAD_BEARING_SCOPE_OR_SEMANTIC_CERTIFICATES_FOR_THE_OTHER_SEVEN_TARGETS__RECOMPUTE_COMPOSITION_FROM_UPSTREAM_DELTAS__PRESERVE_FOUR_DIRECT_ORACLE_LEAVES_FOR_MINIMUM_REALITY_CUT",
+  "next": "WORK_ONLY_TARGET_SPECIFIC_UNIVERSAL_EXHAUSTIVE_OR_EXACT_SUPERSET_SCOPE_CERTIFICATES_USING_THE_ACTIVE_GENERIC_SCOPE_COMPILER__SCHEDULE_THE_7_FORMAL_TARGETS_AS_4_POPULATION_IDENTITIES__DO_NOT_REPROVE_SYNTHESIS_SEVEN_ATOMS__RECOMPUTE_COMPOSITION_ONLY_FROM_UPSTREAM_RECEIPTS__AFTER_ZERO_REALITY_FIXED_POINT_IF_SCOPE_RESIDUALS_REMAIN_EXECUTE_ONE_SHARED_MATCHED_SUPERPORTFOLIO_WAVE_PLUS_THE_FOUR_FROZEN_FINANCE_UNKNOWN_DIRECT_ORACLE_LEAVES__NO_FRESH_REALITY_NOW",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
@@ -158,5 +189,24 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "optimized_execution_frontier": {
+    "live_root3_involved_predicates": 11,
+    "root3_only_predicates": 7,
+    "mixed_root2_root3_predicates": 4,
+    "work_classes": 4,
+    "formal_scope_targets": 7,
+    "formal_target_population_identities": 4,
+    "duplicate_population_definition_actions_eliminated": 3,
+    "synthesis_root3_residual": "ONE_MISSING_SCOPE_RELATION",
+    "composition_component_scoped_proofs": "EVENT_DRIVEN__4_OF_12_PROVED__8_OPEN__NO_DIRECT_REALITY",
+    "matched_scope_targets": 8,
+    "future_shared_superportfolio_waves": 1,
+    "direct_oracle_predicates": 2,
+    "frozen_direct_oracle_leaves": 4,
+    "empirical_fallback_batch_classes": 2,
+    "current_root3_predicates_closed_by_these_optimizations": 0,
+    "current_fresh_reality_authority": false,
+    "interpretation": "FIRST_MAXIMIZE_UNIVERSAL_OR_EXHAUSTIVE_SCOPE_CERTIFICATES__IF_IRREDUCIBLE_AFTER_ZERO_REALITY_FIXED_POINT_RUN_ONE_SHARED_MATCHED_SUPERPORTFOLIO_WAVE_PLUS_ONE_FOUR_LEAF_DIRECT_ORACLE_BATCH_CLASS__PRESERVE_INDEPENDENT_PER_FAMILY_VERDICTS"
+  }
 }
