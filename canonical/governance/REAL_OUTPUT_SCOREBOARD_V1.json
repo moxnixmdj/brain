@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "CURRENT_TERMINAL_AUTHORITY_NEXT_PASS_OR_FALSIFICATION__OR_ANOTHER_CAUSALLY_BOUND_ZERO_REALITY_DELTA__NO_TERMINAL_PROMOTION_WITHOUT_SEPARATE_INDEPENDENT_REDUCTION",
+  "next_progress_event_target": "EXISTING_RECEIPT_SATURATION_PASS_OR_FALSIFICATION__THEN_CURRENT_FIXED_POINT_RECOMPILE",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -677,6 +677,23 @@
       "parent_capability_promoted": false,
       "capability_credit_delta": 0,
       "incremental_spend_usd": 0
+    },
+    {
+      "event_id": "ACCEPTED_THREE_ZERO_REALITY_OWNERSHIP_PROMOTION_20261003_V1",
+      "capability_id": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+      "status": "THREE_WHOLE_FAMILIES_PROMOTED_TO_VERIFIED_OWNED_EQUAL_OR_BETTER__ZERO_NEW_REALITY",
+      "evidence_path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+      "families": [
+        "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      ],
+      "ownership_credit_delta": 3,
+      "acceptance_credit_delta": 0,
+      "progress_credit": "THREE_VERIFIED_OPUS55_FAMILY_OWNERSHIP_PROMOTIONS",
+      "parent_capability_promoted": false,
+      "terminal_goal_achieved": false,
+      "incremental_spend_usd": 0
     }
   ],
   "active_frontier_accounting": {
@@ -685,13 +702,13 @@
     "subcapability_status": "BRAIN_CONFIGURED_STAGE1_BREADTH_ACTIVE__ONE_PASS_ONE_CLEAN_FAILURE__SIX_CONTAMINATED_OR_INADMISSIBLE__ONE_SURFACE_SKIP_UNSPENT__RANK9_POLICY_STOPPED__RANK10_LIVE_PRE_VERIFICATION__ZERO_CAPABILITY_CREDIT",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
-    "residual_gap": "TERMINAL_FALSE__15_OF_19_FAMILIES_OPEN__27_OF_38_ATOMIC_PREDICATES_UNRESOLVED__SEE_CURRENT_TERMINAL_AUTHORITY_NEXT_FOR_EXACT_ACTIVE_ROUTE",
-    "next_required_action": "PARALLEL_ZERO_REALITY_DISCHARGE_ON_19_VERIFIED_REQUIREMENTS__FIRST_RESOURCE_PRIORITY_POST_RECOVERY_MATCHED_SCOPE_16_CHILD_FACTS__RUN_FIXED_POINT_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY_YET",
+    "residual_gap": "TERMINAL_FALSE__14_OF_19_FAMILIES_OPEN__26_OF_38_ATOMIC_PREDICATES_UNRESOLVED__TOOL_DISCOVERY_ACCEPTANCE_CLOSED__ROOT_CLASSIFICATION_AND_FIXED_POINT_RECOMPILE_NEXT",
+    "next_required_action": "ZERO_REALITY_EXISTING_RECEIPT_SATURATION_ON_CURRENT_12_OF_38_STATE__NO_FRESH_REALITY__THEN_FIXED_POINT_RECOMPILE",
     "internalization_manifest": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
     "falsified_prior_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
     "falsification_evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
     "envelope_parent_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
-    "current_parent_blocker": "TERMINAL_FALSE__15_OF_19_FAMILIES_OPEN__27_OF_38_ATOMIC_PREDICATES_UNRESOLVED__SEE_CURRENT_TERMINAL_AUTHORITY_NEXT_FOR_EXACT_ACTIVE_ROUTE"
+    "current_parent_blocker": "TERMINAL_FALSE__14_OF_19_FAMILIES_OPEN__26_OF_38_ATOMIC_PREDICATES_UNRESOLVED__TOOL_DISCOVERY_ACCEPTANCE_CLOSED__ROOT_CLASSIFICATION_AND_FIXED_POINT_RECOMPILE_NEXT"
   },
   "events": [
     {
@@ -1009,7 +1026,7 @@
     "whole_envelope_complete": false,
     "evidence_path": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
   },
-  "next_required_action": "PARALLEL_ZERO_REALITY_DISCHARGE_ON_19_VERIFIED_REQUIREMENTS__FIRST_RESOURCE_PRIORITY_POST_RECOVERY_MATCHED_SCOPE_16_CHILD_FACTS__RUN_FIXED_POINT_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY_YET",
+  "next_required_action": "ZERO_REALITY_EXISTING_RECEIPT_SATURATION_ON_CURRENT_12_OF_38_STATE__NO_FRESH_REALITY__THEN_FIXED_POINT_RECOMPILE",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1290,11 +1307,12 @@
     "execution_authority": false
   },
   "terminal_acceptance_state": {
-    "accepted_families": 4,
+    "accepted_families": 5,
     "total_families": 19,
-    "proved_atomic_predicates": 11,
-    "unresolved_atomic_predicates": 27,
+    "proved_atomic_predicates": 12,
+    "unresolved_atomic_predicates": 26,
     "total_atomic_predicates": 38,
+    "verified_owned_families": 5,
     "terminal_goal_achieved": false
   },
   "last_terminal_acceptance_delta": {
@@ -1313,19 +1331,50 @@
     "ownership_credit_delta": 0
   },
   "canonical_acceptance_truth": {
-    "accepted_families": 4,
-    "open_families": 15,
+    "accepted_families": 5,
+    "open_families": 14,
     "total_families": 19,
-    "proved_atomic_predicates": 11,
-    "unresolved_atomic_predicates": 27,
+    "proved_atomic_predicates": 12,
+    "unresolved_atomic_predicates": 26,
     "total_atomic_predicates": 38,
+    "verified_owned_families": 5,
     "source_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
     "capability_credit_delta": 0,
     "family_credit_delta": 0
   },
   "terminal_authority_projection": {
     "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-    "source_commit_sha": "7e039460c7a2ee2fa465ea53a9a500fd145a89ca",
-    "rule": "NEXT_AND_ACCEPTANCE_COUNTS_DERIVED_FROM_CURRENT_TERMINAL_AUTHORITY__RECOVERY_V2_PROMOTION_RECONCILED"
-  }
+    "source_commit_sha": "139963273dfc9250e4ed19fc2042bd21f5ed65ed",
+    "rule": "CURRENT_COUNTS_5_OF_19_ACCEPTED__5_OF_19_VERIFIED_OWNED__12_OF_38_PROVED__14_ACCEPTANCE_OPEN"
+  },
+  "verified_ownership_truth": {
+    "verified_owned_families": 5,
+    "total_families": 19,
+    "newly_promoted": [
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "proof": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+    "theorem": "canonical/governance/EXACT_ACCEPTED_ROUTE_OWNERSHIP_THEOREM_V1.json",
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "last_ownership_delta": {
+    "event_id": "ACCEPTED_THREE_ZERO_REALITY_OWNERSHIP_PROMOTION_20261003_V1",
+    "status": "DEDUCTIVE_PROMOTION__THREE_OF_THREE",
+    "families": [
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "verified_owned_before": 2,
+    "verified_owned_after": 5,
+    "ownership_credit_delta": 3,
+    "acceptance_credit_delta": 0,
+    "evidence_path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "next_ownership_action": "AUTO_APPLY_EXACT_ACCEPTED_ROUTE_OWNERSHIP_THEOREM_TO_EACH_FUTURE_ACCEPTANCE_CLOSURE_WHEN_PROVIDER_CLOSURE_PREMISES_HOLD__OTHERWISE_FALL_BACK_TO_CAUSAL_OR_DONOR_DELETION_PATH"
 }
