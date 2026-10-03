@@ -7,7 +7,7 @@
   "exact_inputs": {
     "current_terminal_authority": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-      "git_blob_sha": "5cabe5c5bde56163ce586fea31e36e23cda456d7"
+      "git_blob_sha": "d39164cc78174b34174cece115728cf0e657aed6"
     },
     "predicate_registry": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
