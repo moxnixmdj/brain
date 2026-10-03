@@ -49,6 +49,15 @@ def apply_gateway_discovery(
     return out
 
 
+def validate_probe(public:Mapping[str,Any],gateway:ToolUniverseGateway,action:Mapping[str,Any]):
+    """Gate PROBE exactly like SELECT so stale episodes cannot touch a tool."""
+    if action.get("action")!="PROBE": raise BridgeError("NOT_PROBE")
+    return gateway.gate_invoke(
+      str(action.get("tool_id") or ""),
+      episode_epoch=int(public.get("gateway_episode_epoch",-1)),
+    )
+
+
 def validate_select(public:Mapping[str,Any],gateway:ToolUniverseGateway,action:Mapping[str,Any]):
     if action.get("action")!="SELECT": raise BridgeError("NOT_SELECT")
     return gateway.gate_invoke(
@@ -64,16 +73,23 @@ def prove_bridge_instance(entries:Sequence[Mapping[str,Any]])->dict[str,Any]:
     a0=v3.next_action(p0)
     p1=apply_gateway_discovery(p0,g,a0)
     discovered=tuple(sorted(str(x["tool_id"]) for x in p1["visible_tools"]))
+    a1=v3.next_action(p1)
+    probe_gate_pass=(
+      a1.get("action")=="PROBE"
+      and validate_probe(p1,g,a1).tool_id==str(a1.get("tool_id") or "")
+    )
     return {
       "schema":SCHEMA,
       "status":"PASS__DYNAMIC_V3_BOUND_TO_OWNED_COMPLETE_IDENTITY_CARRIER"
           if identity["status"].startswith("PASS") and a0.get("action")=="DISCOVER"
-          and discovered==g.registry_ids() else "FAIL_CLOSED",
+          and discovered==g.registry_ids() and probe_gate_pass else "FAIL_CLOSED",
       "initial_action":a0,
+      "post_discovery_action":a1,
       "visible_after_discovery":list(discovered),
       "registry_ids":list(g.registry_ids()),
       "identity_scope_complete":identity["status"].startswith("PASS"),
       "gateway_is_only_declared_discovery_source":p0["discovery_sources"]==[g.discovery_source()],
+      "probe_must_pass_gateway":probe_gate_pass,
       "select_must_pass_gateway":True,
       "new_reality_units_consumed":0,"incremental_spend_usd":0,
       "capability_credit_delta":0,"family_credit_delta":0,
