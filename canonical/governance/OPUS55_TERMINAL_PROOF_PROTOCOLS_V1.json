@@ -180,7 +180,9 @@
         "lost_evidence_rate"
       ],
       "acceptance": "Brain matched portfolio terminal success conservative bound >= Opus matched bound; deterministic coordination invariants must reach zero critical violations; claimed speedup must not trade away correctness.",
-      "status": "DEFINED_RESULT_OPEN"
+      "status": "PASS",
+      "closure_receipt": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "closure_basis": "ABSOLUTE_DOMINANCE_WITH_INDEPENDENT_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS"
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
