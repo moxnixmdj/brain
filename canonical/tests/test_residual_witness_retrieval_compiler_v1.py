@@ -4,6 +4,7 @@ import unittest
 
 from canonical.runtime import residual_witness_retrieval_compiler_v1 as r
 
+# Verification refresh: exercise these exact PR bytes on the current branch.
 
 class ResidualWitnessRetrievalCompilerTests(unittest.TestCase):
     def residual(self):
