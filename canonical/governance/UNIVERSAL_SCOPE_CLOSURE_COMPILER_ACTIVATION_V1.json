@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_UNIVERSAL_SCOPE_CLOSURE_COMPILER_ACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE__GENERIC_ROOT3_SCOPE_CLOSURE_COMPILER__LOCAL_REGRESSION_PASS__INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__GENERIC_ROOT3_SCOPE_CERTIFICATE_PREPROCESSOR__ZERO_CREDIT",
   "objective": "Replace family-specific scope-completeness plumbing with one fail-closed recursive compiler that accepts only independently verified universal, exact finite, exhaustive-superset, or lossless-decomposition scope certificates while keeping semantic performance/noninferiority separate.",
   "source_state": {
     "brain_commit": "c5b283d72524119bf9f8244714cec6ca9682efca",
@@ -55,7 +55,7 @@
   "operational_use": {
     "before": "ELEVEN_ROOT3_BEARING_PREDICATES_CAN_REQUIRE_FAMILY_SPECIFIC_SCOPE_ADJUDICATION",
     "after_candidate": "ALL_ELEVEN_ROUTE_THROUGH_ONE_SCOPE_CERTIFICATE_TYPE_SYSTEM__ONLY_PREDICATE_SPECIFIC_EVIDENCE_OR_THEOREMS_REMAIN",
-    "next": "INDEPENDENTLY_VERIFY_EXACT_BYTES_AND_MUTATION_TESTS__THEN_BIND_AS_GENERIC_ROOT3_PREPROCESSOR__RUN_CURRENT_ROOT3_CERTIFICATES_THROUGH_COMPILER__PROMOTE_ONLY_PREDICATE_SPECIFIC_SCOPE_DELTAS"
+    "next": "BIND_AS_GENERIC_ROOT3_PREPROCESSOR__ALL_CURRENT_AND_FUTURE_SCOPE_CERTIFICATES_MUST_PASS_THIS_COMPILER__PREDICATE_SPECIFIC_EVIDENCE_REMAINS_REQUIRED"
   },
   "hard_nonclaims": [
     "NO_CLAIM_ANY_CURRENT_OPEN_ROOT3_PREDICATE_IS_CLOSED_BY_THIS_INFRASTRUCTURE",
@@ -73,5 +73,15 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "independent_verification": {
+    "path": "canonical/verification/UNIVERSAL_SCOPE_CLOSURE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1425,
+    "verified_head_sha": "ffd200e75e7a51d63d412dfaccd6d5301af85517",
+    "merge_commit": "966cca4c393b32e42ed5331b8089a188bb3f7a9f",
+    "workflow_run_id": 37156756044,
+    "workflow_job_id": 111301607829,
+    "conclusion": "success"
+  }
 }
