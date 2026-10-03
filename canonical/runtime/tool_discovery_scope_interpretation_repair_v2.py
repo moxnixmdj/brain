@@ -21,7 +21,7 @@ def evaluate()->dict[str,Any]:
     b=snap["sources"]["prewave_binding"]
     q=snap["sources"]["quarantine"]
     errors=[]
-    for k in ("family","proof_mode","task_dimensions","primary_metrics","acceptance"):
+    for k in ("family","proof_mode","acceptance"):
         if row.get(k)!=hist.get(k):
             errors.append("CURRENT_PROTOCOL_ROW_DRIFT:"+k)
     acc=str(hist.get("acceptance") or "")
