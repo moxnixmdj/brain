@@ -11,7 +11,7 @@ class TerminalNextActionCompilerTests(unittest.TestCase):
         return (
           load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"),
           load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"),
-          load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json"),
+          load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json"),
         )
     def test_live_frontier_matches_current_evidence(self):
         registry,evidence,hypergraph=self.docs()
