@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_LIVEBENCH_IF_ASTRA_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__REAL_RUN_GOAL_PROVENANCE_BOUNDARY__MODEL_ASSISTED_REJECTED__ZERO_CASE__ZERO_CREDIT",
+  "brain_subject": {
+    "source_commit": "850a6d14c3925f30b8ec818e924ab93d6d4461c7",
+    "adapter_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v1.py",
+    "adapter_git_blob_sha": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
+    "entrypoint_path": "canonical/runtime/root2_external_task_entrypoint_v1.py",
+    "entrypoint_git_blob_sha": "603beefe0db24102b86b7c965e5433bd880392af",
+    "registry_git_blob_sha": "afa021a25d2de53e293d10ab6759e55eaabaea21",
+    "astra_runtime_git_blob_sha": "7f5d16b1db69cb620954bc778e0ba6e15e687b75"
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1450,
+    "verifier_head_sha": "5991093302a28cf83dfc2f696f6196e0fabf45c8",
+    "merge_commit": "cb254dbd2f17cfa2b17d7c2924a7c13e62a2ecc2",
+    "workflow_run_id": 37160029152,
+    "workflow_job_id": 111311381031,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_BLOB_IDENTITIES",
+    "REGISTRY_INFERENCE_BINDING",
+    "EXTERNAL_TASK_ENTRYPOINT_PREFLIGHT",
+    "REAL_ASTRA_RUN_GOAL_COGNITION_PROVENANCE_BOUNDARY",
+    "MODEL_INDEPENDENT_RESULT_ACCEPTED",
+    "MODEL_ASSISTED_RESULT_REJECTED",
+    "EXTERNAL_TOOLS_REJECTED",
+    "CLEANROOM_6_OF_6_TEST_SET_REEXECUTED_ON_PUBLIC_RUNNER"
+  ],
+  "limitations": [
+    "SYNTHETIC_INTEGRATION_STUBBED_ONLY_INTERNAL_UNSTAMPED_TASK_EXECUTION",
+    "NO_LIVEBENCH_CASE_CONTENT_READ",
+    "NO_LIVEBENCH_SCORE",
+    "NO_PROOF_OF_65_7_THRESHOLD"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
