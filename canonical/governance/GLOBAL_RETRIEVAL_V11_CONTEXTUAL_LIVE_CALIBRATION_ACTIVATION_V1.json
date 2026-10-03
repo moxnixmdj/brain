@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_V11_CONTEXTUAL_LIVE_CALIBRATION_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__V6_V7_V8_V9_PRESERVED__ENTITY_RESOLVED_CONTEXTUAL_LIVE_ROUTING_V11__INDEPENDENT_ACTIVATION_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "base_current_authority": {
+    "path": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha": "cb58ff10b7c3ac99da8cbee7b8aa0b76006f8dfe",
+    "rule": "PRESERVE_CURRENT_V6_V7_V8_V9_AUTHORITY_AND_REPLACE_ONLY_THE_EMPIRICAL_ROUTING_LAYER"
+  },
+  "v10_runtime": {
+    "live_event_ledger_v3": {
+      "path": "canonical/runtime/retrieval_live_event_ledger_v3.py",
+      "git_blob_sha": "5008c5d804a511014a803522b713259b6bb16f7d"
+    },
+    "contextual_controller_v3": {
+      "path": "canonical/runtime/global_retrieval_controller_v3.py",
+      "git_blob_sha": "266122c4e893fbcb34784bc01eb859b390dc2cf4"
+    },
+    "authorized_entrypoint_v4": {
+      "path": "canonical/runtime/global_retrieval_entrypoint_v4.py",
+      "git_blob_sha": "b1fd8b92f1aa931b283f242bde7612a3d29b5501"
+    },
+    "live_event_state_v3": {
+      "path": "canonical/state/retrieval_live_events_v3.jsonl",
+      "git_blob_sha": "1d9c1bdf6b7722c07a081eefa00f40b6ee968fc5"
+    },
+    "derivation_manifest": {
+      "path": "canonical/governance/RETRIEVAL_V10_LIVE_STATE_DERIVATION_V1.json",
+      "git_blob_sha": "fcf3db361e26142f5bb1c67913d6fb58dbcde67b"
+    }
+  },
+  "independent_verification": {
+    "entity_context_core": {
+      "path": "canonical/verification/RETRIEVAL_V10_ENTITY_CONTEXT_CORE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "77fc818f6b6ea9bb35dffd449d529fb9a507b8ce"
+    },
+    "live_provider_epoch": {
+      "path": "canonical/verification/RETRIEVAL_V10_CONTEXTUAL_LIVE_PROVIDER_EPOCH_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "2c47dc835efd0142248b08cefc8438370fcbf1f3"
+    },
+    "exact_brain_live_state": {
+      "path": "canonical/verification/RETRIEVAL_V10_BRAIN_LIVE_STATE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "6025779caa5fc839c7bbc9e13c7f009c09e20721"
+    }
+  },
+  "measured_live_state": {
+    "event_count": 31,
+    "episode_count": 13,
+    "task_class_count": 7,
+    "source_route_count": 10,
+    "new_live_event_count": 30,
+    "new_live_successful_event_count": 28,
+    "new_live_retryable_failure_count": 2,
+    "verified_sufficient_event_count": 7,
+    "live_provider_classes_attempted": [
+      "CODEBERG",
+      "CRATES",
+      "CROSSREF",
+      "GITHUB",
+      "GITLAB",
+      "HUGGINGFACE",
+      "NPM",
+      "OPENALEX",
+      "STACKOVERFLOW"
+    ],
+    "live_provider_classes_with_success": [
+      "CRATES",
+      "CROSSREF",
+      "GITHUB",
+      "GITLAB",
+      "HUGGINGFACE",
+      "NPM",
+      "OPENALEX",
+      "STACKOVERFLOW"
+    ],
+    "live_calibration_maturity": "EARLY_MULTI_PROVIDER__30_NEW_LIVE_ACTIONS__6_NEW_TASK_CLASSES__7_EXACT_SUFFICIENT_RECOVERIES",
+    "statistical_maturity_claim": false
+  },
+  "measured_contextual_routing": {
+    "CODE_REPOSITORY": "GITHUB_FIRST",
+    "MODEL_HUB": "HUGGINGFACE_FIRST",
+    "SCHOLARLY_WORK": "CROSSREF_FIRST_BY_MEASURED_EXPECTED_SUFFICIENT_WITNESS_PER_SECOND",
+    "CODEBERG": "DOWNRANKED_BY_TWO_RETRYABLE_FAILURES",
+    "task_class_measured_stats_override_global_average": true,
+    "global_stats_fallback_only_for_unmeasured_task_class_source_pairs": true,
+    "cold_start_prior": "JEFFREYS_BETA_0_5_0_5"
+  },
+  "entity_resolution_policy": {
+    "novelty_and_overlap_use_explicit_resolved_entity_ids_when_verified": true,
+    "unmapped_candidates_remain_source_scoped": true,
+    "heuristic_cross_source_merging": false,
+    "title_only_scholarly_sufficiency": false,
+    "sufficiency_requires_frozen_exact_target_id_and_independent_receipt": true
+  },
+  "mandatory_policy": [
+    "AUTHORIZED_GLOBAL_RETRIEVAL_PLAN_COMPILATION_MUST_USE_GLOBAL_RETRIEVAL_ENTRYPOINT_V4",
+    "GLOBAL_RETRIEVAL_ENTRYPOINT_V4_MUST_FIRST_PASS_THE_EXISTING_V6_V7_FAIL_CLOSED_AUTHORITY_GUARD",
+    "LIVE_ROUTING_MUST_USE_ENTITY_RESOLVED_TASK_CLASS_CONDITIONED_EVENT_STATE_V3",
+    "TASK_CLASS_MEASURED_SOURCE_STATS_OVERRIDE_GLOBAL_SOURCE_AVERAGES",
+    "GLOBAL_SOURCE_STATS_ARE_ONLY_FALLBACK_FOR_UNMEASURED_TASK_CLASS_SOURCE_PAIRS",
+    "FIXED_SOURCE_CORRELATION_OR_INDEPENDENCE_MULTIPLIERS_REMAIN_FORBIDDEN",
+    "FINITE_V8_AND_V9_ARENAS_REMAIN_REGRESSION_EVIDENCE_NOT_LIVE_PROVIDER_ORACLES",
+    "UNRESOLVED_CROSS_SOURCE_CANDIDATES_MUST_NOT_BE_HEURISTICALLY_MERGED",
+    "OPEN_WORLD_MISS_REMAINS_UNKNOWN",
+    "FAILED_OR_RETRYABLE_PROVIDER_ACTIONS_DO_NOT_COUNT_AS_NEGATIVE_COMPLETENESS",
+    "EVERY_REAL_FALSE_NEGATIVE_BECOMES_A_PERMANENT_REGRESSION_CASE"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_COMPLETENESS_CLAIM",
+    "NO_CLAIM_30_NEW_LIVE_ACTIONS_ARE_STATISTICALLY_MATURE_FOR_ALL_DOMAINS",
+    "NO_CLAIM_CURRENT_TASK_CLASS_SET_COVERS_ALL_RETRIEVAL_TASKS",
+    "NO_HEURISTIC_ENTITY_EQUIVALENCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "supersedes_candidate_only": "canonical/governance/GLOBAL_RETRIEVAL_V10_CONTEXTUAL_LIVE_CALIBRATION_ACTIVATION_V1.json"
+}
