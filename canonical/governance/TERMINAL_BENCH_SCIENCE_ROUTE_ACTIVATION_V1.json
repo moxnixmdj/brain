@@ -37,12 +37,7 @@
     "incremental_spend_usd": 0,
     "verdict": "ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION"
   },
-  "remaining_before_terminal_case_exposure": [
-    "MERGE_AND_INDEPENDENTLY_VERIFY_EXACT_210_SLOT_EXECUTION_MANIFEST",
-    "BIND_EXACT_CONTROLLER_PLANNER_SCORER_DATASET_AND_MANIFEST_BLOBS_IN_ONE_EXECUTION_CAPSULE",
-    "FREEZE_ZERO_RETRY_ZERO_REPLACEMENT_AND_CONSERVATIVE_ZERO_CENSORING",
-    "ISSUE_TERMINAL_EXECUTION_AUTHORITY_ONLY_FOR_FROZEN_SLOT_IDS"
-  ],
+  "remaining_before_terminal_case_exposure": [],
   "execution_authority": true,
   "promotion_authority": false,
   "terminal_results_observed": 0,
@@ -63,5 +58,14 @@
   "independent_planner_v2_verification": "canonical/verification/TB_SCIENCE_DEDICATED_PLANNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
   "verified_manifest": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
   "tranche1_execution_authority": "canonical/governance/TB_SCIENCE_TRANCHE1_EXECUTION_AUTHORITY_V1.json",
-  "tranche1_authority_verification": "canonical/verification/TB_SCIENCE_TRANCHE1_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  "tranche1_authority_verification": "canonical/verification/TB_SCIENCE_TRANCHE1_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "activation_preconditions_outside_canonical_state": [
+    "MERGE_THIS_EXACT_PR_HEAD_UNCHANGED_TO_MAIN_ONLY_AFTER_EXACT_ACTIVE_BYTE_INDEPENDENT_VERIFICATION_PASSES",
+    "EXECUTION_REPOSITORY_MUST_REMAIN_AT_EXECUTION_CAPSULE_MERGE_SHA_32248CEB1E6965ABB3EC56B61210590EF6DA0A8D",
+    "ARM_TRANCHE1_JSON_MAY_BE_MATERIALIZED_ONLY_AFTER_MAIN_CONTAINS_THE_EXACT_ACTIVE_AUTHORITY_BLOB",
+    "EXECUTION_WORKFLOW_BLOB_MUST_REMAIN_BF79AC405B0D88D6926383DB2E67E513A95F77D3"
+  ],
+  "active_authority_blob_sha": "89406ed4c8d214dfa81eddbb1f8caeebc33e82b2",
+  "prior_verified_candidate_authority_blob_sha": "14227eba31de060cab3b7906dd15466486e4842c",
+  "active_byte_verification": "PENDING_SEPARATE_INDEPENDENT_EXACT_BYTE_VERIFICATION__DO_NOT_MERGE_UNTIL_PASS"
 }
