@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V1",
   "date": "2026-10-03",
-  "status": "CANDIDATE_ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED__EXECUTION_FALSE",
+  "status": "ACTIVE_RESULT_RECONCILED__CURRENT_TARGET_133_OF_210__FOUR_FAILURES_CONSUMED__EXECUTION_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "target_predicate": "TB_SCIENCE_GE_58_7",
@@ -22,14 +22,16 @@
   "consumed_slots": [
     "terminal-bench-science/genomic-model-ranking::trial-0",
     "terminal-bench-science/mri-harmonization::trial-0",
-    "terminal-bench-science/navigation-sensor-calibration::trial-0"
+    "terminal-bench-science/navigation-sensor-calibration::trial-0",
+    "terminal-bench-science/baseline-free-localization::trial-0"
   ],
   "reduction": {
-    "finalized_slots": 3,
+    "finalized_slots": 4,
     "successes": 0,
-    "finalized_failures": 3,
+    "finalized_failures": 4,
+    "untouched_slots_remaining": 206,
     "successes_remaining_for_pass_lock": 133,
-    "failures_remaining_before_fail_lock": 75,
+    "failures_remaining_before_fail_lock": 74,
     "fixed_denominator": 210
   },
   "hard_rules": [
@@ -38,11 +40,19 @@
     "ONLY_EXACT_SCORER_REWARD_AT_LEAST_1_COUNTS_SUCCESS",
     "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
     "CONSUMED_SLOT_IDS_MUST_NEVER_BE_REPLAYED",
-    "THIS_OVERLAY_GRANTS_NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+    "THIS_OVERLAY_GRANTS_NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "BASELINE_FREE_LOCALIZATION_TRIAL_0_IS_CONSUMED_AND_MUST_NEVER_BE_REPLAYED",
+    "NO_NEW_TB_SCIENCE_TERMINAL_SLOT_UNTIL_REAL_SIZE_ZERO_CASE_PLANNER_LATENCY_PREFLIGHT_PASSES"
   ],
   "execution_authority": false,
   "promotion_authority": false,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "latest_result": {
+    "path": "canonical/verification/TB_SCIENCE_ONE_SLOT_CANARY_RESULT_20261003_V2.json",
+    "status": "FINAL_ZERO__SCIENCE_PLANNER_LOCAL_ROUTE_TIMEOUT",
+    "workflow_run_id": 37106127198,
+    "slot_id": "terminal-bench-science/baseline-free-localization::trial-0"
+  }
 }
