@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_26_POST_SOURCE_GATE_FRONTIER_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__5_OF_19__12_OF_38__26_UNRESOLVED__14_ZERO_REQUIREMENTS__11_ZERO_CERTIFICATES__28_PRIMITIVE_ZERO_UNITS__2_DIRECT_ELIGIBLE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Reconcile the current 26-predicate frontier after independently verified Finance and Unknown-Domain operative-source admission. Remove exactly the two discharged source-gate requirements from zero-reality scheduling while preserving both acceptance predicates as open direct-evidence residuals and preserving the global prohibition on fresh reality.",
+  "authority": {
+    "prior_frontier_reducer": {
+      "path": "canonical/runtime/current_26_zero_reality_frontier_v1.py",
+      "git_blob_sha": "8b84ab5c7dc96337067eb6b8c8cd2fb549468142"
+    },
+    "source_gate_activation": {
+      "path": "canonical/governance/DUAL_JUDGMENT_SOURCE_GATE_ACTIVATION_V1.json",
+      "git_blob_sha": "4211a0eee07c4758035d788c0be897d700c164cb"
+    },
+    "source_gate_independent_verification": {
+      "path": "canonical/verification/DUAL_JUDGMENT_SOURCE_GATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "6ec5f6d808c88bf9ea728fb7f259edc3b4ae5a51"
+    },
+    "matched_scope_input": {
+      "path": "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json",
+      "git_blob_sha": "438e2775b64bee5ed6e792522ab35ebd0d6e1771"
+    }
+  },
+  "exact_reconciliation": {
+    "acceptance": "5/19_PASS__14/19_OPEN",
+    "atomic": "12_PROVED__26_UNRESOLVED",
+    "discharged_zero_reality_requirements": [
+      "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_FINANCE_JUDGMENT_SOURCE_GATE_PASS",
+      "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_UNKNOWN_DOMAIN_JUDGMENT_SOURCE_GATE_PASS"
+    ],
+    "active_zero_reality_requirements": 14,
+    "active_zero_reality_certificates": 11,
+    "zero_reality_covered_predicates": 22,
+    "primitive_zero_reality_work_units": 28,
+    "matched_priority_child_facts": 16,
+    "direct_reality_eligible_predicates": [
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+    ],
+    "direct_reality_execution_authorized_now": false,
+    "global_fresh_reality_authority": false
+  },
+  "hard_rules": [
+    "SOURCE_ADMISSION_REMOVES_ONLY_THE_TWO_OPERATIVE_SOURCE_GATE_REQUIREMENTS",
+    "SOURCE_ADMISSION_DOES_NOT_PROVE_FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "SOURCE_ADMISSION_DOES_NOT_PROVE_UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "DIRECT_ORACLE_LEAVES_REMAIN_UNEXECUTED",
+    "NO_FRESH_REALITY_BEFORE_SEPARATE_MINIMUM_REALITY_AUTHORIZATION",
+    "PRIORITIZE_ZERO_REALITY_FIXED_POINT_AND_THE_16_MATCHED_CHILD_FACTS",
+    "RECOMPUTE_AFTER_EACH_INDEPENDENTLY_VERIFIED_DELTA",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT_FROM_RECONCILIATION"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_REDUCER_AND_COUNTS__THEN_PROMOTE_AS_CURRENT_POST_SOURCE_GATE_SCHEDULING_FRONTIER__DISCHARGE_28_PRIMITIVE_ZERO_REALITY_UNITS_BEFORE_ANY_SEPARATELY_AUTHORIZED_DIRECT_REALITY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
