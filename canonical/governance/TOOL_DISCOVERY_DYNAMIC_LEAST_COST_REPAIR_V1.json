@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_LEAST_COST_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__ADVERSARIAL_COUNTEREXAMPLE_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "frozen_behavior": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+  "counterexample": {
+    "precondition": "A visible route is already current-epoch positively evidenced and sufficient.",
+    "hidden_fact": "An unqueried authoritative discovery source contains a cheaper sufficient route.",
+    "v3_action": "SELECT_VISIBLE_EXPENSIVE_ROUTE_BEFORE_DISCOVERY",
+    "violation": "LEAST_COST_ADMISSIBLE_ROUTE_REQUIREMENT_CAN_BE_FALSE",
+    "fresh_terminal_evidence_consumed": 0
+  },
+  "repair": {
+    "candidate": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "tests": "canonical/tests/test_tool_discovery_dynamic_v4.py",
+    "rule": "WITHOUT_A_CERTIFIED_LOWER_BOUND_FOR_UNDISCOVERED_SOURCES__EXHAUST_FINITE_AVAILABLE_AUTHORITATIVE_DISCOVERY_SOURCES_BEFORE_FIRST_PROBE_OR_SELECT",
+    "effect": "ALL_TOOL_IDENTITIES_AND_DECLARED_COSTS_IN_THE_COMPLETE_INTERFACE_ARE_VISIBLE_BEFORE_COST_ORDERED_PROBE_SELECTION"
+  },
+  "preserved": [
+    "GENERIC_CONSTRAINT_FILTERING",
+    "CURRENT_EPOCH_PROBE_EVIDENCE",
+    "VERSION_INVALIDATION",
+    "CROSS_TASK_DISCOVERY_AND_PROBE_RECEIPT_REUSE",
+    "FAIL_CLOSED_ESCALATION",
+    "V3_1200_CASE_GRID_AS_REGRESSION_SUITE"
+  ],
+  "hard_nonclaims": [
+    "NO_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_IS_ASSERTED_BY_THIS_REPAIR",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT",
+    "NO_TERMINAL_REPLAY",
+    "NO_PROMOTION_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_V4_AND_THE_HIDDEN_CHEAPER_ROUTE_COUNTEREXAMPLE__THEN_REBIND_THE_CONDITIONAL_INTERFACE_REFINEMENT_TO_V4__THEN_DISCHARGE_ONE_CONTENT_ADDRESSED_COMPLETE_INTERFACE_INSTANCE__THEN_RUN_SEPARATE_ACCEPTANCE_REDUCTION",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
