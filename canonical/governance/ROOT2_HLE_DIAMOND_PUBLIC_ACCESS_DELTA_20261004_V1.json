@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_HLE_DIAMOND_PUBLIC_ACCESS_DELTA_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__PUBLIC_ANONYMOUS_DATASET_ACCESS_TO_BE_INDEPENDENTLY_VERIFIED__ZERO_CREDIT",
+  "status": "FALSIFIED__HUGGINGFACE_AUTO_GATE_CONFIRMED__NO_ROOT2_ACCESS_DELTA__ZERO_CREDIT",
   "target_predicate": "HLE_TOOLS_GE_67_7",
   "surface": "Humanity's Last Exam with tools",
   "prior_state": {
@@ -14,9 +14,10 @@
     "https://github.com/centerforaisafety/hle"
   ],
   "claimed_delta_if_verified": {
-    "remove": ["GATED_POPULATION_ACCESS"],
+    "remove": [],
     "remaining": [
-      "ZERO_COST_COMPARABLE_OFFICIAL_OR_PROVED_EQUIVALENT_JUDGE",
+      "GATED_POPULATION_ACCESS",
+      "ZERO_COST_COMPARABLE_OPUS_4_6_GRADER_OR_PROVED_EQUIVALENT_JUDGE",
       "BRAIN_TOOL_ADAPTER",
       "BRAIN_SCORE"
     ]
@@ -24,8 +25,7 @@
   "verification_contract": {
     "anonymous_huggingface_metadata_request_must_succeed": true,
     "dataset_id_must_equal": "cais/hle-diamond",
-    "gated_flag_must_not_require_acceptance": true,
-    "test_split_must_be_advertised": true,
+    "gated_flag_must_equal": "auto",
     "no_terminal_cases_may_be_read_by_verifier": true
   },
   "hard_rules": [
@@ -44,5 +44,11 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "observed_truth": {
+    "huggingface_metadata_gated_value": "auto",
+    "anonymous_metadata_access": true,
+    "dataset_content_access": "REQUIRES_AUTO_GATE_ACCEPTANCE",
+    "consequence": "KEEP_GATED_POPULATION_ACCESS_OPEN"
+  }
 }
