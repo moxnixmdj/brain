@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PATCHED_REAL_HARBOR_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PATCHED_PLANNER_REAL_HARBOR_0_23__FROZEN_DATASET_IDENTITY__ZERO_TERMINAL_EXPOSURE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1249,
+    "verifier_head_sha": "0807132577af011ece8445547af0c901690b9b7f",
+    "merge_sha": "e8574415433bd57079bafbc3d730b1affa6b0ce0",
+    "workflow_run_id": 37108542418,
+    "artifact_id": 11268927411,
+    "artifact_digest": "sha256:e67515100a95ff5dcd73da793516fa3de650dad0a0bf4b8c7f82fe543dc366b5",
+    "conclusion": "success"
+  },
+  "verified": {
+    "brain_head_bound": "0a90772212ecb5e20b61e88077b4e731df5225a8",
+    "harbor_version": "0.23.0",
+    "planner_blob": "fe7c0ce885197217774638df382aeb6f68ff38dd",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "environment_transport_blob": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "planner_candidate_max_items": 1,
+    "planner_max_tokens": 384,
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "dataset_content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
+    "terminal_task_content_read": 0,
+    "terminal_results_observed": 0,
+    "incremental_spend_usd": 0
+  },
+  "consequence": "PATCHED_SCIENCE_ROUTE_IS_ZERO_CASE_INTEGRATION_QUALIFIED__SEPARATE_CONTENT_ADDRESSED_ONE_SLOT_AUTHORITY_REQUIRED_BEFORE_ANY_NEW_TERMINAL_SLOT",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
