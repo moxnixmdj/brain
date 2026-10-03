@@ -9,7 +9,7 @@
     "rule": "NOVELTY_IS_A_LEARNING_EVENT_NOT_A_NEW_CAPABILITY_CLASS__NO_CLAIM_OF_GUARANTEED_SUCCESS"
   },
   "exact_bound_components": {
-    "canonical/runtime/universal_learning_contract_v1.py": "501843401ea260b3158c421ea0bd8630a0a076dc",
+    "canonical/runtime/universal_learning_contract_v1.py": "51a6dde1898eb1b59f21e31d2fbd6e5931914756",
     "canonical/tests/test_universal_learning_contract_v1.py": "52d555728584bb968e7a354c75ad82583d4b575d",
     "canonical/runtime/universal_learning_acceptance_reducer_v1.py": "d92caa9a06c984c48d45995a1e7342126caedd4d",
     "canonical/tests/test_universal_learning_acceptance_reducer_v1.py": "26a146e42470f9e3bca7e56467e04f6285a3faad",
