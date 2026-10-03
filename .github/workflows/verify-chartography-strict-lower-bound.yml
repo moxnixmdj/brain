@@ -1,0 +1,23 @@
+name: Verify Chartography strict lower-bound scorer
+on:
+  push:
+    branches: ["brain/chartography-strict-lower-bound-v1-20261003-sol"]
+    paths:
+      - canonical/runtime/chartography_strict_reference_scorer.py
+      - canonical/tests/test_chartography_strict_reference_scorer.py
+      - canonical/governance/CHARTOGRAPHY_STRICT_SCORER_ROUTE_V1.json
+      - .github/workflows/verify-chartography-strict-lower-bound.yml
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python -m pip install --quiet pytest
+      - run: python canonical/runtime/chartography_strict_reference_scorer.py
+      - run: python -m pytest -q canonical/tests/test_chartography_strict_reference_scorer.py
