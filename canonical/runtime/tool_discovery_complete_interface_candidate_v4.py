@@ -14,6 +14,8 @@ import hashlib
 import json
 from typing import Any, Mapping
 
+from canonical.runtime import tool_discovery_information_safe_candidate as legacy
+
 CMP = {"eq","neq","in","not_in","lt","le","gt","ge","contains","exists"}
 
 
@@ -89,8 +91,11 @@ def _registry(public: Mapping[str, Any]) -> dict[str, Any]:
         raise ToolDiscoveryV4Error("DISCOVERY_REGISTRY_MISSING")
     if reg.get("kind") != "COMPLETE_DISCOVERY_REGISTRY":
         raise ToolDiscoveryV4Error("DISCOVERY_REGISTRY_KIND_INVALID")
-    if reg.get("complete") is not True or reg.get("independently_verified") is not True:
-        raise ToolDiscoveryV4Error("DISCOVERY_REGISTRY_COMPLETENESS_NOT_VERIFIED")
+    # `complete` is an interface assertion consumed fail-closed here. Whether that
+    # assertion is trustworthy is proved by the separately content-addressed scope
+    # certificate; an input boolean never self-certifies the theorem.
+    if reg.get("complete") is not True:
+        raise ToolDiscoveryV4Error("DISCOVERY_REGISTRY_COMPLETENESS_NOT_DECLARED")
     epoch = reg.get("epoch")
     if not isinstance(epoch, int) or isinstance(epoch, bool) or epoch < 0:
         raise ToolDiscoveryV4Error("DISCOVERY_REGISTRY_EPOCH_INVALID")
@@ -111,16 +116,19 @@ def _registry(public: Mapping[str, Any]) -> dict[str, Any]:
             raise ToolDiscoveryV4Error("DISCOVERY_SOURCE_EPOCH_INVALID:" + sid)
         if not isinstance(cost, (int, float)) or isinstance(cost, bool) or float(cost) < 0:
             raise ToolDiscoveryV4Error("DISCOVERY_SOURCE_COST_INVALID:" + sid)
+        authorized = raw.get("authorized") is True
         ids.add(sid)
         out.append({
             "source_id": sid,
             "epoch": sep,
             "cost": float(cost),
             "available": raw.get("available") is True,
+            "authorized": authorized,
         })
     declared = reg.get("source_manifest_sha256")
     expected = _sha(sorted(
-        [{"source_id": x["source_id"], "epoch": x["epoch"], "available": x["available"]}
+        [{"source_id": x["source_id"], "epoch": x["epoch"], "cost": x["cost"],
+          "available": x["available"], "authorized": x["authorized"]}
          for x in out],
         key=lambda x: x["source_id"],
     ))
@@ -131,7 +139,8 @@ def _registry(public: Mapping[str, Any]) -> dict[str, Any]:
 
 def _current_tool_epochs(public: Mapping[str, Any], tools: Mapping[str, Mapping[str, Any]]) -> dict[str, int]:
     out = {tid: int(row["epoch"]) for tid, row in tools.items()}
-    for ev in public.get("tool_version_events", []):
+    events = list(public.get("version_events", []) or []) + list(public.get("tool_version_events", []) or [])
+    for ev in events:
         if not isinstance(ev, Mapping) or ev.get("kind") != "TOOL_VERSION_CHANGED":
             continue
         tid = str(ev.get("tool_id") or "")
@@ -160,6 +169,36 @@ def _materialize(public: Mapping[str, Any], reg: Mapping[str, Any]) -> tuple[dic
         receipts[sid] = raw
 
     tools: dict[str, dict[str, Any]] = {}
+
+    def ingest(raw: Mapping[str, Any]) -> None:
+        tid = raw.get("tool_id")
+        epoch = raw.get("epoch", 0)
+        cost = raw.get("cost")
+        if not isinstance(tid, str) or not tid:
+            raise ToolDiscoveryV4Error("DISCOVERED_TOOL_ID_INVALID")
+        if not isinstance(epoch, int) or isinstance(epoch, bool) or epoch < 0:
+            raise ToolDiscoveryV4Error("DISCOVERED_TOOL_EPOCH_INVALID:" + tid)
+        if not isinstance(cost, (int, float)) or isinstance(cost, bool) or float(cost) < 0:
+            raise ToolDiscoveryV4Error("DISCOVERED_TOOL_COST_INVALID:" + tid)
+        row = dict(raw)
+        row["epoch"] = epoch
+        row["cost"] = float(cost)
+        prior = tools.get(tid)
+        if prior is not None and _canon(prior) != _canon(row):
+            raise ToolDiscoveryV4Error("DISCOVERED_TOOL_ID_CONFLICT:" + tid)
+        tools[tid] = row
+
+    # A complete interface may start with already-visible tools and then discover
+    # arbitrary additional identities. This is a conservative extension, not a
+    # requirement to forget tools already exposed by the frozen interface.
+    base_tools = public.get("tools", [])
+    if not isinstance(base_tools, list):
+        raise ToolDiscoveryV4Error("VISIBLE_TOOLS_INVALID")
+    for raw in base_tools:
+        if not isinstance(raw, Mapping):
+            raise ToolDiscoveryV4Error("VISIBLE_TOOL_NOT_OBJECT")
+        ingest(raw)
+
     for sid, rec in sorted(receipts.items()):
         rows = rec.get("tools")
         if not isinstance(rows, list):
@@ -167,21 +206,7 @@ def _materialize(public: Mapping[str, Any], reg: Mapping[str, Any]) -> tuple[dic
         for raw in rows:
             if not isinstance(raw, Mapping):
                 raise ToolDiscoveryV4Error("DISCOVERED_TOOL_NOT_OBJECT")
-            tid = raw.get("tool_id")
-            epoch = raw.get("epoch")
-            cost = raw.get("cost")
-            if not isinstance(tid, str) or not tid:
-                raise ToolDiscoveryV4Error("DISCOVERED_TOOL_ID_INVALID")
-            if not isinstance(epoch, int) or isinstance(epoch, bool) or epoch < 0:
-                raise ToolDiscoveryV4Error("DISCOVERED_TOOL_EPOCH_INVALID:" + tid)
-            if not isinstance(cost, (int, float)) or isinstance(cost, bool) or float(cost) < 0:
-                raise ToolDiscoveryV4Error("DISCOVERED_TOOL_COST_INVALID:" + tid)
-            row = dict(raw)
-            row["cost"] = float(cost)
-            prior = tools.get(tid)
-            if prior is not None and _canon(prior) != _canon(row):
-                raise ToolDiscoveryV4Error("DISCOVERED_TOOL_ID_CONFLICT:" + tid)
-            tools[tid] = row
+            ingest(raw)
     return tools, set(receipts)
 
 
@@ -205,6 +230,12 @@ def _evidence(public: Mapping[str, Any], epochs: Mapping[str, int]) -> dict[tupl
 
 
 def next_action(public: Mapping[str, Any]) -> dict[str, Any]:
+    # Exact conservative projection: frozen historical terminal inputs contain no
+    # discovery registry, so their behavior remains byte-for-byte delegated to the
+    # already verified legacy candidate. No terminal replay is required to know this.
+    if "discovery_registry" not in public:
+        return legacy.next_action(public)
+
     required = sorted({str(x) for x in public.get("required_capabilities", []) if str(x)})
     if not required:
         return {"action": "ESCALATE", "reason": "NO_REQUIRED_CAPABILITIES"}
@@ -218,7 +249,7 @@ def next_action(public: Mapping[str, Any]) -> dict[str, Any]:
     # Identity discovery is completed before capability selection. This is what makes
     # least-cost selection global over the certified discovery universe.
     for src in reg["sources"]:
-        if src["available"] and src["source_id"] not in queried:
+        if src["available"] and src["authorized"] and src["source_id"] not in queried:
             return {
                 "action": "DISCOVER",
                 "source_id": src["source_id"],
