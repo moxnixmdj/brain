@@ -51,7 +51,7 @@
     "path": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
     "git_blob_sha": "9485d6f791e6d5f53ed66246615f30b938238b4b",
     "tests": "canonical/tests/test_tool_discovery_dynamic_v4.py",
-    "tests_git_blob_sha": "0125582ee4dbef732f2c84b6b70ac180d7f1a91e"
+    "tests_git_blob_sha": "5e38b58e3d9b20fc9bcbedf1a38630afe6aefcb5"
   },
   "new_reality_units_consumed": 0,
   "terminal_results_replayed": 0,
