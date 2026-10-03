@@ -28,11 +28,19 @@ class ToolDiscoveryRetrievalFalseNegativeBenchmarkV1Tests(unittest.TestCase):
             out,
         )
 
-    def test_non_latin_languages_are_present_in_real_query_lattice(self):
+    def test_multilingual_variants_are_present_in_real_query_lattice(self):
         out = bench.evaluate(load_input())
-        hints = set(out["language_hints"])
-        for hint in ("CJK", "ARABIC", "CYRILLIC", "LATIN"):
-            self.assertIn(hint, hints, (hint, hints))
+        keys = set(out["explicit_language_variant_keys"])
+        for key in ("zh", "ar", "ru", "ja", "ko", "es", "fr", "de", "pt", "hi", "tr", "id", "vi"):
+            self.assertIn(key, keys, (key, keys))
+        found_queries = {
+            row["first_match"]["query"]
+            for row in out["found_fixtures"]
+            if row.get("first_match")
+        }
+        self.assertTrue(any("工具" in q for q in found_queries), found_queries)
+        self.assertTrue(any("الأدوات" in q for q in found_queries), found_queries)
+        self.assertTrue(any("инструмент" in q for q in found_queries), found_queries)
 
     def test_open_world_unsupported_boundaries_never_become_nonexistence(self):
         out = bench.evaluate(load_input())
