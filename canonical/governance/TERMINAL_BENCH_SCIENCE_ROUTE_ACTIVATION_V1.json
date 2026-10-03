@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_PRETERMINAL_ROUTE__SOURCE_GATE_HARBOR_PLANNER_INTEROP_AND_DETERMINISTIC_TERMINALIZATION_PASS__CONSERVATIVE_LOWER_BOUND_VERIFIED__TERMINAL_EXECUTION_STILL_FAIL_CLOSED",
+  "status": "ACTIVE_PRETERMINAL_ROUTE__DEDICATED_PLANNER_V2_SOURCE_GATE_HARBOR_AND_DETERMINISTIC_TERMINALIZATION_INDEPENDENT_PASS__CONSERVATIVE_LOWER_BOUND_PASS__TERMINAL_EXECUTION_STILL_FAIL_CLOSED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "predicate": "TB_SCIENCE_GE_58_7",
@@ -10,11 +10,13 @@
     "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
     "dataset_content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
     "brain_controller": "canonical/runtime/harbor_science_agent_v1.py",
-    "brain_controller_git_blob_sha": "8627b0a0a886ed4df60d5839370b4bb2b4e76f1a",
+    "brain_controller_git_blob_sha": "8ab8287fdb6a9b63b9fe2d2addde731486c89d1e",
     "source_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
     "source_gate_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de",
     "harbor_version": "0.23.0",
-    "incremental_spend_usd": 0
+    "incremental_spend_usd": 0,
+    "brain_planner": "canonical/runtime/harbor_science_planner_v1.py",
+    "brain_planner_git_blob_sha": "17472fd2b01b164fbb180aecfc04385b55b11499"
   },
   "independent_binding": "canonical/verification/TB_SCIENCE_INDEPENDENT_PREQUALIFICATION_BINDING_20261003_V1.json",
   "source_gate_reduction": {
@@ -36,11 +38,10 @@
     "verdict": "ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION"
   },
   "remaining_before_terminal_case_exposure": [
-    "FREEZE_EXACT_210_SLOT_EXECUTION_MANIFEST_AND_SLOT_IDS",
-    "FREEZE_NO_RETRY_NO_REPLACEMENT_AND_CONSERVATIVE_ZERO_CENSORING",
-    "BIND_ZERO_INCREMENTAL_SPEND_CARRIER_FOR_EACH_ATTEMPT_OR_FINALIZE_UNRUNNABLE_SLOT_AS_ZERO",
-    "INDEPENDENTLY_VERIFY_EXECUTION_MANIFEST_PROMOTION_PREFLIGHT_AND_EXACT_CONTROLLER_BLOB",
-    "ONLY_THEN_ISSUE_ONE_TERMINAL_EXECUTION_AUTHORITY"
+    "MERGE_AND_INDEPENDENTLY_VERIFY_EXACT_210_SLOT_EXECUTION_MANIFEST",
+    "BIND_EXACT_CONTROLLER_PLANNER_SCORER_DATASET_AND_MANIFEST_BLOBS_IN_ONE_EXECUTION_CAPSULE",
+    "FREEZE_ZERO_RETRY_ZERO_REPLACEMENT_AND_CONSERVATIVE_ZERO_CENSORING",
+    "ISSUE_TERMINAL_EXECUTION_AUTHORITY_ONLY_FOR_FROZEN_SLOT_IDS"
   ],
   "execution_authority": false,
   "promotion_authority": false,
@@ -49,7 +50,7 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "next": "FREEZE_EXACT_210_SLOT_PROMOTION_SAFE_EXECUTION_MANIFEST__ORDER_ONLY_BY_NON_TASK_METADATA_AND_CARRIER_FEASIBILITY__COUNT_ANY_UNRUNNABLE_TIMEOUT_INFRA_OR_RESOURCE_SLOT_ZERO__STOP_AT_124_SUCCESSES_OR_87_FINAL_FAILURES",
+  "next": "VERIFY_AND_ACTIVATE_EXACT_210_SLOT_MANIFEST__THEN_BUILD_ONE_CONTENT_ADDRESSED_EXECUTION_CAPSULE__NO_TERMINAL_SPEND_BEFORE_CAPSULE_PASS",
   "deterministic_terminalization_verification": "canonical/verification/TB_SCIENCE_DETERMINISTIC_TERMINALIZATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
   "conservative_lower_bound": {
     "governance": "canonical/governance/TB_SCIENCE_CONSERVATIVE_CENSORING_LOWER_BOUND_V1.json",
@@ -58,5 +59,6 @@
     "required_successes": 124,
     "fail_lock_failures": 87,
     "rule": "ONLY_EXACT_SCORER_SUCCESS_COUNTS_ONE__ALL_OTHER_FINAL_OR_CENSORED_SLOTS_COUNT_ZERO__DENOMINATOR_FIXED_210"
-  }
+  },
+  "independent_planner_v2_verification": "canonical/verification/TB_SCIENCE_DEDICATED_PLANNER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
 }
