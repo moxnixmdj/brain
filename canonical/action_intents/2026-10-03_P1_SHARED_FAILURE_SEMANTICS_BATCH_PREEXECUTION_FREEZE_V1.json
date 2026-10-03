@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-P1-SHARED-FAILURE-SEMANTICS-BATCH-PREEXECUTION-20261003-V1",
+  "status": "CANDIDATE__PREEXECUTION_FREEZE__ZERO_CREDIT__NO_REALITY_CONSUMED",
+  "canonical_base_commit": "223886b741992cfd9b85e95ad9e6a3ac54feebcd",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "blocker_id": "P1_FAILURE_SEMANTICS_TRANSPORT_TO_THREE_FROZEN_DIRECT_SURFACES",
+  "observed_evidence": {
+    "minimum_reality_verification": "canonical/verification/P1_V7_PROVENANCE_AND_MINIMUM_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "minimum_reality_units": 1,
+    "selected_observation": "P1_SHARED_SOURCE_BOUND_FAILURE_SEMANTICS_BATCH",
+    "candidate_v7_blob": "28940387bd6c11671035ad9201e37bba13fd9bc9",
+    "scorer_v6_blob": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "surface_binding_blob": "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+  },
+  "action_kind": "FREEZE_MINIMUM_REALITY_EXECUTION_CONTRACT_WITHOUT_EXECUTION",
+  "expected_terminal_delta": "REMOVE_PREEXECUTION_UNFROZEN_HARNESS_NORMALIZER_SURFACE_MAPPING_AND_SELECTION_POLICY_AS_BLOCKERS__DO_NOT_CLAIM_P1_CREDIT",
+  "hard_nonclaims": [
+    "NO_FRESH_P1_CASE_EXECUTION",
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_P1_QUARANTINE_LIFT",
+    "NO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT",
+    "NO_CASE_IDENTITIES_SELECTED_BEFORE_FREEZE",
+    "NO_FAILURE_SEMANTICS_INFERENCE"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_PREEXECUTION_FREEZE__THEN_SEPARATELY_RECONCILE_EXECUTION_AUTHORITY_FOR_THE_ONE_MINIMUM_REALITY_UNIT"
+}
