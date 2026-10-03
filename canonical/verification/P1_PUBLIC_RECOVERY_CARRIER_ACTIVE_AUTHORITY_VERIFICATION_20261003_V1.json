@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_P1_PUBLIC_RECOVERY_CARRIER_ACTIVE_AUTHORITY_VERIFICATION_BINDING_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_ACTIVE_AUTHORITY_AND_DISTINCT_CARRIER_VERIFIED__ZERO_REALITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "active_authority": {
+    "path": "canonical/governance/P1_PUBLIC_RECOVERY_CARRIER_EXECUTION_AUTHORITY_V1.json",
+    "git_blob_sha": "365c098d4763ddfacf660f77457cbac08f5ac72e"
+  },
+  "proposal": {
+    "path": "canonical/governance/P1_PUBLIC_RECOVERY_CARRIER_PROPOSAL_V1.json",
+    "git_blob_sha": "4a0146ea409dfad45638b15b279d5a5cc8bf4143"
+  },
+  "recovery_workflow": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "path": ".github/workflows/execute-p1-public-recovery-carrier-v1.yml",
+    "git_blob_sha": "547f57f43a71f289b006602c1067a962171f38d4"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1245,
+    "verifier_head_sha": "b173bd202cb77d46c71990013354d5deca9b1a77",
+    "workflow_run_id": 37108027885,
+    "workflow_job_id": 111160273766,
+    "artifact_id": 11267799880,
+    "artifact_digest": "sha256:b4daaef3fd50bf77e7ba644358a2499a0d9ef97d481895e5e05d9307048b804e",
+    "conclusion": "success",
+    "active_authority_blob_verified": "365c098d4763ddfacf660f77457cbac08f5ac72e",
+    "execution_workflow_blob_verified": "547f57f43a71f289b006602c1067a962171f38d4",
+    "zero_reality_tests_pass": true,
+    "activation_eligible": true
+  },
+  "prior_failure_independent_verification": {
+    "workflow_run_id": 37107461285,
+    "artifact_digest": "sha256:3ecb734c57ee4222a430ffd8c2b7d3fc68c42f250019e01f632bb205a9065dc6",
+    "zero_case_generation": true,
+    "zero_fresh_reality": true
+  },
+  "fresh_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "MERGE_BRAIN_ACTIVE_AUTHORITY_TO_MAIN__THEN_MERGE_VERIFIER_PR_1245_EXACTLY_ONCE_TO_TRIGGER_DISTINCT_PUBLIC_CARRIER__NO_MANUAL_RERUN"
+}
