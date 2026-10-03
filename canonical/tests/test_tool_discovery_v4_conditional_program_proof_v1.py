@@ -12,6 +12,9 @@ class Tests(unittest.TestCase):
         self.assertTrue(out["exhaustive_dynamic_abstraction"]["pass"],out)
         self.assertGreater(out["exhaustive_dynamic_abstraction"]["checked"],1000)
         self.assertTrue(all(out["epoch_and_authority_checks"].values()),out)
+        self.assertTrue(out["predicate_language_semantics"]["pass"],out)
+        self.assertGreater(out["predicate_language_semantics"]["checked"],20)
+        self.assertTrue(all(out["route_filter_checks"].values()),out)
         self.assertTrue(out["conditional_program_sound_under_v2_contract"])
 
     def test_oracle_is_global_not_visible_only(self):
