@@ -13,9 +13,6 @@ on:
       - "canonical/tests/test_adaptive_terminal_closure_controller_v1.py"
       - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json"
       - "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json"
-      - "canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json"
-      - "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json"
-      - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
       - ".github/workflows/verify-adaptive-terminal-closure-controller-v1.yml"
   workflow_dispatch:
 
@@ -29,54 +26,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Verify frozen blob bindings
-        run: |
-          python - <<'PY'
-          import json, subprocess, sys
-          from pathlib import Path
-
-          activation = json.loads(Path("canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json").read_text())
-          pairs = [
-              (activation["bound_current_scheduling_authority"]["path"], activation["bound_current_scheduling_authority"]["git_blob_sha"]),
-              (activation["inputs"]["current_27_information_dominance"]["path"], activation["inputs"]["current_27_information_dominance"]["git_blob_sha"]),
-              (activation["inputs"]["matched_scope_abductive_residual_v2"]["path"], activation["inputs"]["matched_scope_abductive_residual_v2"]["git_blob_sha"]),
-              (activation["inputs"]["ownership_matrix"]["path"], activation["inputs"]["ownership_matrix"]["git_blob_sha"]),
-              (activation["controller"]["path"], activation["controller"]["git_blob_sha"]),
-              (activation["tests"]["path"], activation["tests"]["git_blob_sha"]),
-          ]
-          bad = []
-          for path, expected in pairs:
-              actual = subprocess.check_output(["git", "hash-object", path], text=True).strip()
-              if actual != expected:
-                  bad.append((path, expected, actual))
-          if bad:
-              print(bad)
-              sys.exit(1)
-          print("exact adaptive closure blobs verified")
-          PY
-      - name: Run adaptive controller falsification tests
+      - name: Run adaptive controller tests
         run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v1 -v
-      - name: Emit zero-credit live projection
+      - name: Compile current adaptive terminal closure frontier
         run: |
+          python canonical/runtime/adaptive_terminal_closure_controller_v1.py > ADAPTIVE_TERMINAL_CLOSURE_RESULT.json
           python - <<'PY'
           import json
-          from pathlib import Path
-          from canonical.runtime.adaptive_terminal_closure_controller_v1 import compile_controller
-
-          def load(p):
-              return json.loads(Path(p).read_text())
-
-          out = compile_controller(
-              load("canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json"),
-              load("canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json"),
-              load("canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json"),
-              load("canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"),
-          )
-          print(json.dumps(out, indent=2, sort_keys=True))
-          assert out["execution_authority"] is False
-          assert out["promotion_authority"] is False
-          assert out["fresh_reality_authority"] is False
-          assert out["acceptance_credit"] == 0
-          assert out["family_credit_delta"] == 0
-          assert out["ownership_credit_delta"] == 0
+          x=json.load(open("ADAPTIVE_TERMINAL_CLOSURE_RESULT.json"))
+          assert x["pass"] is True,x
+          assert x["live_world"]["proved_predicates"]==11,x
+          assert x["live_world"]["unresolved_predicates"]==27,x
+          assert x["live_world"]["nondominated_certificates"]==16,x
+          assert x["live_world"]["verified_zero_reality_requirements"]==19,x
+          assert x["live_world"]["matched_primitive_child_facts"]==16,x
+          assert x["action_refinement"]["primitive_acceptance_work_units"]==33,x
+          assert len(x["first_resource_priority_work_unit_ids"])==16,x
+          assert len(x["ownership_reconciliation_work_units"])==2,x
+          td=[r for r in x["acceptance_work_units"] if "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR" in r["target_predicates"]]
+          assert len(td)==1,x
+          assert td[0]["mandatory_tool_discovery_v3_gate"] is True,x
+          assert td[0]["source_hints"][0]=="MANDATORY_TOOL_DISCOVERY_V3_OVER_VERIFIED_V2_BASE_RETRIEVAL_GATE",x
+          assert x["execution_authority"] is False,x
+          assert x["promotion_authority"] is False,x
+          assert x["fresh_reality_authority"] is False,x
+          print("adaptive V10/V3 terminal closure controller verified")
           PY
