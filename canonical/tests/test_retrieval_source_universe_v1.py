@@ -20,8 +20,17 @@ assert by["PYPI_PUBLIC_PROJECTS"]["queryless_default_enabled"] is True
 assert by["HUGGING_FACE_PUBLIC_HUB"]["queryless_default_enabled"] is True
 assert by["GITLAB_PUBLIC_PROJECTS"]["scope_id"]=="GITLAB_PUBLIC_PROJECTS:gitlab.com@2026-10-03T21:00Z"
 assert by["CROSSREF_WORKS"]["queryless_default_enabled"] is False
-assert by["COMMON_CRAWL_CDX_SNAPSHOT"]["queryless_default_enabled"] is False
+assert "COMMON_CRAWL_CDX_SNAPSHOT" not in by
+assert any(x["source_id"]=="COMMON_CRAWL_CDX_SNAPSHOT" and x["reason"]=="MISSING_RUNTIME_SCOPE_BINDING" for x in bound["skipped_sources"])
 assert any(x["source_id"]=="GITHUB_SCOPED_REPOSITORY_LIST" and x["reason"]=="MISSING_RUNTIME_SCOPE_BINDING" for x in bound["skipped_sources"])
+
+cc=su.bind_sources(
+    reg,epoch="E0",
+    include_source_ids=["COMMON_CRAWL_CDX_SNAPSHOT"],
+    runtime_bindings={"COMMON_CRAWL_CDX_SNAPSHOT":{"crawl_id":"CC-MAIN-2026-39"}},
+)
+assert cc["sources"][0]["scope_id"]=="COMMON_CRAWL:CC-MAIN-2026-39"
+assert cc["sources"][0]["queryless_default_enabled"] is False
 
 ctrl=su.controller_sources(bound)
 cb={x["source_id"]:x for x in ctrl}
