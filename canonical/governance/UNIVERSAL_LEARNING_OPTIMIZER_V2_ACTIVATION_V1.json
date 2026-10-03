@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_LEARNING_OPTIMIZER_V2_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_ZERO_CREDIT_LEARNING_OPTIMIZATION_LAYER__V1_SAFETY_AUTHORITY_PRESERVED",
+  "objective": "Activate the independently verified V2 optimizer beneath the V1 universal learning safety/trust contract so new environments are reduced to minimum novelty deltas and learned by conservative, decision-sufficient, reusable paths.",
+  "candidate": {
+    "path": "canonical/governance/UNIVERSAL_LEARNING_OPTIMIZER_V2.json",
+    "git_blob_sha": "df7dc58d01077790d2f4f74a2f2c03694899212a"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/UNIVERSAL_LEARNING_OPTIMIZER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "0abea8957d415cbd3f85826a1c5ddd06a0bec431",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS"
+  },
+  "v1_authority": {
+    "contract_path": "canonical/runtime/universal_learning_contract_v1.py",
+    "contract_git_blob_sha": "51a6dde1898eb1b59f21e31d2fbd6e5931914756",
+    "rule": "V1_REMAINS_LOAD_BEARING_FOR_UNKNOWN_CAPTURE_VERIFICATION_TRUST_PROMOTION_REUSE_AND_INVALIDATION"
+  },
+  "activated_mechanisms": [
+    "MINIMUM_NOVELTY_DELTA",
+    "VERIFIED_TRANSFER_ADMISSION",
+    "CONSERVATIVE_ACTION_VALUE_SELECTION",
+    "DECISION_SUFFICIENT_STOPPING",
+    "DEPENDENCY_CONE_INVALIDATION",
+    "VERIFIED_EPISODE_META_LEARNING"
+  ],
+  "hard_rules": [
+    "V2_MAY_OPTIMIZE_ONLY_BELOW_V1_SAFETY_GATE",
+    "NO_ANALOGY_ONLY_TRANSFER_AS_PROOF",
+    "NO_UNSAFE_OR_POSITIVE_INCREMENTAL_SPEND_LEARNING_ACTION_SELECTION",
+    "NO_META_STRATEGY_SELF_PROMOTION",
+    "NO_FULL_ENVIRONMENT_RELEARNING_WHEN_A_SMALLER_GOAL_RELEVANT_DELTA_IS_PROVABLE",
+    "NO_GLOBAL_INVALIDATION_WHEN_A_SMALLER_DEPENDENCY_CONE_IS_PROVABLE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ACTIVATION"
+  ],
+  "next": "RUN_ZERO_REALITY_UNKNOWN_DOMAIN_V2_RESIDUAL_REDUCTION__PROVE_WHICH_TRANSFER_AND_ABSTENTION_CONTROL_OBLIGATIONS_ARE_NOW_STRUCTURAL__PRESERVE_ONLY_IRREDUCIBLE_SEMANTIC_OR_EMPIRICAL_LEAVES",
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
