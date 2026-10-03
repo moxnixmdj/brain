@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_OPUS55_TARGET_FRESHNESS_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_FAIL_CLOSED_TARGET_FRESHNESS_CONFLICT__NO_NEW_SCIENCE_EXECUTION__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "current_predicate_id": "TB_SCIENCE_GE_58_7",
+  "frozen_protocol": {
+    "benchmark": "Terminal-Bench-Science 0.1",
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "dataset_content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a",
+    "frozen_opus55_bar_percent": 58.7,
+    "slots": 210,
+    "frozen_required_successes": 124,
+    "frozen_fail_lock_failures": 87
+  },
+  "fresh_public_observation": {
+    "observed_on": "2026-10-03",
+    "benchmark_label": "Terminal-Bench-Science 0.1",
+    "task_count": 70,
+    "trials_per_task": 3,
+    "model": "Opus 5.5",
+    "agent": "Claude Code",
+    "effort": "max",
+    "resolution_rate_percent": 63.3,
+    "standard_error_points": 3.3,
+    "model_release_date": "2026-09-22",
+    "source": "https://snorkel.ai/leaderboard/terminal-bench-science/",
+    "supporting_benchmark_announcement": "https://www.terminal-bench-science.ai/announcement",
+    "source_class": "CURRENT_PUBLIC_BENCHMARK_LEADERBOARD"
+  },
+  "arithmetic_if_snapshot_identity_matches": {
+    "slots": 210,
+    "comparator_percent": 63.3,
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "finalized_failures_already_consumed": 3,
+    "remaining_failures_before_fail_lock": 75,
+    "rule": "CEIL(COMPARATOR_PERCENT*210/100)__FAIL_LOCK_EQUALS_210_MINUS_REQUIRED_SUCCESSES_PLUS_1"
+  },
+  "unresolved_identity_fact": "PROVE_WHETHER_THE_CURRENT_63_3_PUBLIC_LEADERBOARD_ROW_USES_THE_EXACT_SAME_IMMUTABLE_V0_1_0_TASK_SCORER_SNAPSHOT_AS_BRAIN_DATASET_HASH_SHA256_91531B...611A",
+  "fail_closed_cases": {
+    "same_snapshot": "REPLACE_EFFECTIVE_OPUS55_COMPARATOR_WITH_63_3_PERCENT__REQUIRE_133_OF_210_SUCCESSES__78_FAILURES_LOCK_FAIL",
+    "different_snapshot": "PRESERVE_58_7_ONLY_AS_HISTORICAL_FROZEN_SNAPSHOT_BAR__DO_NOT_TREAT_IT_AS_SUFFICIENT_FOR_CURRENT_OPUS55_TERMINAL_OBJECTIVE__ADD_CURRENT_SNAPSHOT_PROOF_OBLIGATION",
+    "identity_unknown": "NO_NEW_TB_SCIENCE_TERMINAL_SLOT_AUTHORITY"
+  },
+  "evidence_caveat": "TERMINAL_BENCH_SCIENCE_IS_A_CONTINUOUS_BENCHMARK_WITH_VERSIONED_RELEASES_AND_TASK_UPDATES__SAME_DISPLAY_LABEL_ALONE_IS_NOT_EXACT_SNAPSHOT_IDENTITY",
+  "hard_rules": [
+    "NO_WEAKENING_CURRENT_OPUS55_TARGET_TO_AN_OLDER_LOWER_SCORE",
+    "NO_AUTOMATIC_THRESHOLD_REWRITE_UNTIL_EXACT_SNAPSHOT_IDENTITY_IS_INDEPENDENTLY_VERIFIED",
+    "NO_NEW_TB_SCIENCE_TERMINAL_SLOT_AUTHORITY_WHILE_TARGET_FRESHNESS_IS_UNRESOLVED",
+    "NO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT_FROM_THIS_TRUTH_REPAIR"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
