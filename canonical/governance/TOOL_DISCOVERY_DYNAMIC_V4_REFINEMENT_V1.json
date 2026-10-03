@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V4_REFINEMENT_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__V3_COUNTEREXAMPLE_REPAIRED__CONDITIONAL_UNIVERSAL_PROGRAM_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Repair the V3 least-cost ordering defect and replace the unsound program-side conditional implication with a fail-closed V4 finite-progress proof under the unchanged complete discovery-interface contract.",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_preserved": true,
+  "supersedes_program_side_claim_only": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_V1.json",
+  "counterexample": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_V3_LEAST_COST_COUNTEREXAMPLE_V1.json",
+  "candidate_runtime": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+  "candidate_runtime_blob": "c7726fc77bb4f8c582b1e57c71eeaa0ba8253065",
+  "certificate_runtime": "canonical/runtime/tool_discovery_dynamic_v4_refinement_v1.py",
+  "candidate_tests": "canonical/tests/test_tool_discovery_dynamic_candidate_v4.py",
+  "certificate_tests": "canonical/tests/test_tool_discovery_dynamic_v4_refinement_v1.py",
+  "interface_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json",
+  "proof_basis": [
+    "FINITE_DISCOVERY_SOURCE_SET_PLUS_QUERIED_SOURCE_EXCLUSION_IMPLIES_DISCOVERY_TERMINATION",
+    "DISCOVERY_FIRST_ORDER_PLUS_COMPLETE_UNION_IMPLIES_ALL_IN_SCOPE_IDENTITIES_VISIBLE_BEFORE_RANKING",
+    "GLOBAL_COST_ORDER_PLUS_TRUTHFUL_CURRENT_EPOCH_PROBES_IMPLIES_FIRST_SELECTED_ROUTE_IS_LEAST_COST_SUFFICIENT",
+    "NO_SURVIVING_ROUTE_AFTER_COMPLETE_DISCOVERY_IMPLIES_SOUND_FAIL_CLOSED_ESCALATION"
+  ],
+  "minimum_missing_fact": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+  "universal_target_proved": false,
+  "hard_rules": [
+    "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_REQUIRED_BEFORE_THIS_REFINEMENT_BECOMES_AUTHORITY",
+    "NO_EXTERNAL_INTERFACE_INSTANCE_IS_ASSERTED_BY_THIS_CANDIDATE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_TERMINAL_REPLAY_OR_NEW_ACCEPTANCE_CASES"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
