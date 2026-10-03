@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMPLETE_INTERFACE_V2_HARDENING_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_TRUTH_HARDENING__INDEPENDENT_VERIFICATION_REQUIRED__COMMON_SCOPE_COMPLETENESS_OPEN__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "objective": "Replace the under-explicit complete-interface V1 admission specification with a V2 specification that makes every load-bearing V4 interface precondition explicit without narrowing the common frozen Brain/Opus Tool Discovery authority.",
+  "preserves_active_program_repair": {
+    "runtime": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "runtime_git_blob_sha": "e614d0bed8e291e31f57189cd6f0f75aa39b0f74",
+    "activation": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_V4_REPAIR_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "36a7a97f3d68066337bb2cf45778d4100c22c185"
+  },
+  "candidate_contract": {
+    "path": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2.json",
+    "git_blob_sha": "f03f01a531d0a023173629a7a7f4bc0bb65a3b39",
+    "supersedes_after_independent_verification": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json"
+  },
+  "proof": {
+    "runtime": "canonical/runtime/tool_discovery_interface_contract_v2_hardening_proof.py",
+    "runtime_git_blob_sha": "f235b283f87048e62cbb5d22b938f99be5189e39",
+    "tests": "canonical/tests/test_tool_discovery_interface_contract_v2_hardening.py",
+    "tests_git_blob_sha": "6872cff1c14623c497a9971eaf0e10335bc7136f"
+  },
+  "load_bearing_hardened_preconditions": [
+    "UNIQUE_CANONICAL_DISCOVERY_SOURCE_IDS",
+    "ATOMIC_DISCOVERY_RESULT_INCORPORATION_BEFORE_QUERIED_STATE",
+    "UNIQUE_CANONICAL_VISIBLE_TOOL_IDS",
+    "CROSS_SOURCE_CANONICAL_TOOL_METADATA_CONSISTENCY_OR_RESTART",
+    "FINITE_NUMERIC_TOTAL_ORDER_COSTS",
+    "ACTION_LINEARIZATION_OR_RESTART_ON_MATERIAL_ECOSYSTEM_CHANGE"
+  ],
+  "countermodels_bound": [
+    "DUPLICATE_SOURCE_ID_ALIAS_CAN_HIDE_UNQUERIED_CHEAPER_ROUTE",
+    "SOURCE_MARKED_QUERIED_BEFORE_DISCOVERED_TOOL_BECOMES_VISIBLE",
+    "DUPLICATE_TOOL_ID_ALIASES_PHYSICALLY_DISTINCT_ROUTES",
+    "NONFINITE_COST_HAS_NO_TOTAL_LEAST_COST_SEMANTICS"
+  ],
+  "scope_rule": "NO_BRAIN_ONLY_REGISTRY_COMPLETENESS_SUBSTITUTION__COMMON_FROZEN_BRAIN_OPUS_TOOL_AUTHORITY_UNCHANGED",
+  "remaining_irreducible_facts": [
+    "INDEPENDENT_EVIDENCE_THAT_AVAILABLE_AUTHORITATIVE_DISCOVERY_SOURCE_UNION_IS_COMPLETE_FOR_COMMON_FROZEN_BRAIN_OPUS_TOOL_AUTHORITY_IN_THE_DECISION_EPOCH",
+    "INDEPENDENT_EVIDENCE_OR_FORMAL_GUARANTEE_OF_DISCOVERY_AND_PROBE_METADATA_TRUTHFULNESS_FOR_FIELDS_USED_BY_V4",
+    "ACTION_LINEARIZATION_OR_RESTART_ON_MATERIAL_TOOL_ECOSYSTEM_CHANGE"
+  ],
+  "hard_nonclaims": [
+    "NO_COMPLETE_INTERFACE_INSTANCE_VERIFIED",
+    "NO_UNIVERSAL_TOOL_DISCOVERY_TARGET_PROVED",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_FRESH_TERMINAL_REPLAY",
+    "NO_OPUS_SCOPE_NARROWING"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_HARDENING_BYTES__IF_PASS_ACTIVATE_V2_AS_INTERFACE_ADMISSION_SPEC__THEN_DISCHARGE_ONLY_THE_EXPOSED_COMMON_SCOPE_FACTS__NO_NEW_ACCEPTANCE_CASES",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
