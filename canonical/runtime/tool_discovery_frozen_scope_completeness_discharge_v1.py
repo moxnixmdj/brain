@@ -136,15 +136,25 @@ def derive_frozen_scope_facts(v1_text: str, v2_text: str) -> dict[str, bool]:
         for node in ast.walk(v2_generate)
     )
 
+    def _targets(node: ast.AST) -> list[ast.AST]:
+        if isinstance(node, ast.Assign):
+            return list(node.targets)
+        if isinstance(node, ast.AnnAssign):
+            return [node.target]
+        if isinstance(node, ast.AugAssign):
+            return [node.target]
+        return []
+
     v2_replaces_tool_universe = any(
-        isinstance(node, (ast.Assign, ast.AnnAssign, ast.AugAssign))
-        and any(_case_tools(x) for x in ast.walk(node))
+        any(_case_tools(x) for target in _targets(node) for x in ast.walk(target))
         for node in ast.walk(v2_generate)
+        if isinstance(node, (ast.Assign, ast.AnnAssign, ast.AugAssign))
     )
 
+    compact_v2 = "".join(v2_text.split())
     v2_uses_v1_public_boundary = (
-        "return v1.public_stage(case,stage,receipts)" in v2_text.replace(" ", "")
-        or "public=v1._public_stage(case,stage,receipts)" in v2_text.replace(" ", "")
+        "returnv1.public_stage(case,stage,receipts)" in compact_v2
+        or "public=v1._public_stage(case,stage,receipts)" in compact_v2
     )
 
     return {
