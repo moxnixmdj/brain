@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS55_POPULATION_AND_ACCESS_CORRECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V2",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PRIMARY_ANTHROPIC_PDF_FULL_HLE_2500__CAIS_HLE_AUTO_GATE__ZERO_CREDIT",
+  "primary_source": {
+    "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+    "bytes": 17795106,
+    "pages": 230
+  },
+  "protocol_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1478,
+    "verifier_head_sha": "ffbbf59c7b63a4c6cbc10d8caef3929ddedac99b",
+    "merged_verifier_commit": "36c2b68e2094f51f2a7795c34464d48e52285619",
+    "workflow_run_id": 37162051804,
+    "workflow_job_id": 111317334520,
+    "conclusion": "success"
+  },
+  "access_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1483,
+    "verifier_head_sha": "ba8db13d26cd6144f3fa509a1ad0933a0f9f5147",
+    "workflow_run_id": 37162240768,
+    "workflow_job_id": 111317894720,
+    "conclusion": "success",
+    "pr_merge_state": "UNMERGED_CONNECTOR_MERGE_OPERATION_BLOCKED__CI_RESULT_VALID"
+  },
+  "verified": {
+    "frozen_population_identity": "FULL_HLE_NOT_HLE_DIAMOND",
+    "frozen_population_question_count": 2500,
+    "frozen_target_percent": 67.7,
+    "grader": "Claude Opus 4.6",
+    "tools": [
+      "web_search",
+      "web_fetch",
+      "programmatic_tool_calling",
+      "code_execution"
+    ],
+    "thinking": "auto",
+    "total_context_token_cap": 1000000,
+    "context_compaction_used": false,
+    "correct_huggingface_dataset": "cais/hle",
+    "correct_huggingface_gate": "auto"
+  },
+  "invalidated_inference": [
+    "HLE_DIAMOND_1000_IS_THE_FROZEN_OPUS55_67_7_POPULATION",
+    "HLE_DIAMOND_ACCESS_IS_THE_LOAD_BEARING_POPULATION_ACCESS_BLOCKER"
+  ],
+  "preserved_open_residuals": [
+    "MATERIAL_ACCOUNT_ACCEPTANCE_AND_ACCESS_TO_CAIS_HLE_FULL_2500_POPULATION",
+    "ZERO_COST_COMPARABLE_CLAUDE_OPUS_4_6_GRADER_OR_PROVED_EQUIVALENT_SCORER",
+    "BRAIN_TOOL_ADAPTER_MATCHING_VENDOR_TOOL_AND_CONTAMINATION_SEMANTICS",
+    "BRAIN_SCORE_GE_67_7"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_CASE_CONTENT_READ",
+    "NO_CLAIM_GATE_TERMS_ALREADY_ACCEPTED_BY_USER_ACCOUNT",
+    "NO_CLAIM_HLE_DIAMOND_IS_USELESS_FOR_OTHER_EVALUATION_PURPOSES",
+    "NO_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
