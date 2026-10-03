@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_WITNESS_TARGET_TOTALIZATION_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__8_TARGETS__12_WITNESSES__96_PAIRS__ZERO_DIRECT_REUSE_CLOSURES__ZERO_CREDIT",
+  "subject_commit": "77117e10f00b5f23d507c4cfaaeb24f84ce49ca8",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1394,
+    "merge_commit": "83745a4cbc899fc0b6b225a74437a3b561a90b84",
+    "workflow_run_id": 37151661821,
+    "workflow_job_id": 111286635619,
+    "conclusion": "success"
+  },
+  "exact_subject_blobs": {
+    "candidate": "953161b63ae0fa220cea19ed2b884ab9dd98cc84",
+    "runtime": "831237e37f53c602c3ed7271c55e0889d21ef52b",
+    "tests": "ad3823d3eed89ead37b690d12ac6d2c642c9ea09",
+    "target_normalization": "72a5cd689f55df84de73693371264f02ef4e7226",
+    "witness_normalization": "5526f2c23b6f1eba5362c028f1029a8f15f095e1"
+  },
+  "verified": {
+    "target_count": 8,
+    "witness_count": 12,
+    "pair_count": 96,
+    "target_atom_occurrence_count": 37,
+    "target_metric_occurrence_count": 7,
+    "positive_atom_binding_count": 0,
+    "positive_metric_binding_count": 0,
+    "positive_semantic_edge_count": 0,
+    "closed_target_count": 0,
+    "residual_target_count": 8
+  },
+  "consequence": "DO_NOT_REPEAT_CURRENT_NORMALIZED_WITNESS_DIRECT_REUSE__SEARCH_ONLY_FOR_NEW_LOAD_BEARING_SEMANTIC_OR_EXACT_SUPERSET_SCOPE_CERTIFICATES",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
