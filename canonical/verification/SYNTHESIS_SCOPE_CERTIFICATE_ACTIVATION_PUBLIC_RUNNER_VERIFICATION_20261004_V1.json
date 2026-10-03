@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SYNTHESIS_ROOT2_AND_ROOT3_TO_ROOT2_ONLY__ROOT3_11_TO_10__ZERO_ACCEPTANCE_CREDIT",
+  "source_brain": {
+    "certificate_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+    "certificate_git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+    "activation_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "60d845cf2370854bfd171154cf94946436be2c16",
+    "activation_verifier_path": "canonical/runtime/synthesis_scope_certificate_activation_verifier_v1.py",
+    "activation_verifier_git_blob_sha": "aec9b1d41437b887e4f6bc463b6be23c36dcf6bd",
+    "activation_tests_path": "canonical/tests/test_synthesis_scope_certificate_activation_verifier_v1.py",
+    "activation_tests_git_blob_sha": "ae9b6e4dd5d36da0da3b2edfed801ea339ea30f4",
+    "root_state_input_git_blob_sha": "afe7e055fbad7a04b169d2c0cac91b764ced20a8"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1495,
+    "verified_head_sha": "517dcbf52fc6e2b1aaf3f4654c2f2a799b041112",
+    "merge_commit": "42d339657a17e36e245c721194305c1af025c153",
+    "workflow_run_id": 37163128221,
+    "workflow_job_id": 111320523945,
+    "conclusion": "success"
+  },
+  "verified": {
+    "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "before_root_class": "ROOT2_AND_ROOT3",
+    "after_root_class": "ROOT2_ONLY",
+    "before_root2_only_count": 15,
+    "after_root2_only_count": 16,
+    "root3_only_count": 7,
+    "before_root2_and_root3_count": 4,
+    "after_root2_and_root3_count": 3,
+    "root2_involved_count": 19,
+    "before_root3_involved_count": 11,
+    "after_root3_involved_count": 10,
+    "unresolved_total": 26,
+    "acceptance_credit_delta": 0
+  },
+  "remaining_root2_residuals": [
+    "metric:matched_quality",
+    "matched_quality_noninferiority",
+    "required_claim_coverage_noninferiority"
+  ],
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_ACCEPTANCE_CLOSURE",
+    "NO_PERFORMANCE_BOUND_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
