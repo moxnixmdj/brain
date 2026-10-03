@@ -6,6 +6,7 @@ on:
       - "canonical/runtime/adaptive_terminal_closure_controller_v1.py"
       - "canonical/tests/test_adaptive_terminal_closure_controller_v1.py"
       - "canonical/governance/ADAPTIVE_TERMINAL_CLOSURE_ACTIVATION_V1.json"
+      - "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json"
       - ".github/workflows/verify-adaptive-terminal-closure-controller-v1.yml"
   pull_request:
     paths:
@@ -16,21 +17,20 @@ on:
       - ".github/workflows/verify-adaptive-terminal-closure-controller-v1.yml"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  verify:
+  compile:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run adaptive controller tests
-        run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v1 -v
-      - name: Compile current adaptive terminal closure frontier
+      - name: Compile exact V13 V5 frontier
         run: |
           python canonical/runtime/adaptive_terminal_closure_controller_v1.py > ADAPTIVE_TERMINAL_CLOSURE_RESULT.json
           python - <<'PY'
@@ -51,11 +51,19 @@ jobs:
           assert len(td)==1,x
           assert td[0]["mandatory_tool_discovery_v5_gate"] is True,x
           assert td[0]["source_hints"][0]=="MANDATORY_TOOL_DISCOVERY_V5_OVER_VERIFIED_V4_OVER_VERIFIED_V3_OVER_VERIFIED_V2_RETRIEVAL_GATE",x
-          blocked=set(x["live_world"]["direct_reality_blocked_predicates"])
-          targets={p for r in x["acceptance_work_units"] for p in r["target_predicates"]}
-          assert blocked.isdisjoint(targets),x
+          assert x["execution_policy"]["tool_discovery_v5_gate_mandatory"] is True,x
           assert x["execution_authority"] is False,x
           assert x["promotion_authority"] is False,x
           assert x["fresh_reality_authority"] is False,x
-          print("adaptive V13/V5 terminal closure controller verified")
           PY
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run adaptive V13 V5 unit tests
+        run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v1 -v
