@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V12_GITHUB_MISS_RECOVERY_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_SIX_V11_GITHUB_MISSES__FIVE_RECOVERED__ONE_RESIDUAL__ZERO_CREDIT",
+  "verified_subjects": {
+    "canonical/runtime/retrieval_github_miss_recovery_v12.py": "089fecd51e143751f96c5ac2d3342427f3c61ecc",
+    "canonical/tests/test_retrieval_github_miss_recovery_v12.py": "ec80d025e68ad6d3d450949ed5b8f59a0e299fb6"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1485,
+    "workflow_run_id": 37162254671,
+    "workflow_job_id": 111317931971,
+    "conclusion": "success"
+  },
+  "measured_live_truth": {
+    "baseline_case_count": 6,
+    "usable_case_count": 6,
+    "recovered_case_count": 5,
+    "recovery_rate": 0.8333333333333334,
+    "recovered_episode_ids": [
+      "GITHUB_ZH_SEGMENTATION",
+      "GITHUB_RU_NLP",
+      "GITHUB_AR_TEXT",
+      "GITHUB_PY_LINTER",
+      "GITHUB_PY_CLI"
+    ],
+    "residual_miss_episode_ids": [
+      "GITHUB_ZH_PINYIN"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_COMPLETENESS_CLAIM",
+    "NO_CLAIM_ONE_TRANSLATION_STRATEGY_IS_UNIVERSAL",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
