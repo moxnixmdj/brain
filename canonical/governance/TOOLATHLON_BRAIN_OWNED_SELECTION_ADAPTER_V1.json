@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_TOOLATHLON_BRAIN_OWNED_SELECTION_ADAPTER_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__OWNERSHIP_SEPARATION_ARCHITECTURE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "objective": "Make the frozen Toolathlon matched route causally measure Brain-owned tool discovery/selection while allowing a declared model only as a general cognition substrate under Acceptance Capability Source Gate V2.",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "frozen_toolathlon": {
+    "repository": "hkust-nlp/Toolathlon",
+    "commit": "9be8d8fe07a497b18ee61e3f2ae694e9797f39eb",
+    "decoupled_contract": "DECOUPLED_AGENT_LOOP.md",
+    "entrypoint": "scripts/run_single_decoupled.sh",
+    "gateway_rule": "TASK_ENVIRONMENT_AND_EVALUATOR_REMAIN_IN_CONTAINER__HOST_AGENT_FRAMEWORK_IS_SWAPPABLE"
+  },
+  "brain_runtime": {
+    "path": "canonical/runtime/toolathlon_brain_owned_selection_adapter_v1.py",
+    "tests": "canonical/tests/test_toolathlon_brain_owned_selection_adapter_v1.py"
+  },
+  "causal_partition": {
+    "brain_owned": [
+      "INGEST_COMPLETE_TASK_LOCAL_GATEWAY_CATALOG",
+      "AUTHORIZATION_AND_AVAILABILITY_FILTERING",
+      "DETERMINISTIC_ACTIVE_CONSTRAINT_FILTERING",
+      "GLOBAL_DECLARED_COST_THEN_OPAQUE_ID_ORDER",
+      "CURRENT_EPOCH_EVIDENCE_STATE",
+      "INVALIDATE_STALE_EVIDENCE_ON_VERSION_CHANGE",
+      "DECIDE_WHICH_SINGLE_ANONYMOUS_SCHEMA_REQUIRES_SEMANTIC_JUDGMENT",
+      "ROUTE_SELECTION",
+      "ESCALATION",
+      "TRANSFER_OF_CURRENT_EPOCH_EVIDENCE"
+    ],
+    "general_cognition_substrate_only": [
+      "EMIT_TOOL_AGNOSTIC_SUBPROBLEM_CONTRACT_WITH_REQUIRED_CAPABILITIES",
+      "JUDGE_ONE_ANONYMOUS_SCHEMA_AGAINST_ONE_REQUIRED_CAPABILITY_WITHOUT_SEEING_ALTERNATIVES_COSTS_OR_TOOL_ID",
+      "AFTER_BRAIN_SELECTS_A_ROUTE__SYNTHESIZE_ARGUMENTS_FOR_ONLY_THE_SELECTED_ANONYMOUS_SCHEMA",
+      "GENERAL_TASK_LANGUAGE_UNDERSTANDING_AND_SUMMARY"
+    ],
+    "forbidden": [
+      "SUBSTRATE_RECEIVES_FULL_TOOL_CATALOG",
+      "SUBSTRATE_RECEIVES_ALTERNATIVE_TOOL_IDS_OR_COSTS_DURING_SCHEMA_JUDGMENT",
+      "SUBSTRATE_CHOSES_OR_RANKS_TOOL_ROUTE",
+      "SUBSTRATE_BYPASSES_BRAIN_SELECTION_WITH_DIRECT_GATEWAY_CALL",
+      "POST_RESULT_CONFIGURATION_TUNING"
+    ]
+  },
+  "source_gate_v2_target_projection": {
+    "brain_candidate_bound": true,
+    "brain_owned_operative_configuration": true,
+    "configuration_materially_constrains_execution": true,
+    "capability_package_contains_configuration": true,
+    "promotion_evaluates_brain_configured_system": true,
+    "external_hidden_target_capability_provider": false,
+    "ownership_claim_relies_on_model_standalone_superiority": false,
+    "future_use_requires_capability_rediscovery": false,
+    "model_role": "GENERAL_COGNITION_SUBSTRATE",
+    "model_dependencies_declared": true,
+    "general_substrate_test_pass": "PENDING_INDEPENDENT_COUNTERFACTUAL",
+    "hard_rule": "THE_PROJECTION_IS_A_CANDIDATE_REQUIREMENT_NOT_A_GATE_PASS"
+  },
+  "required_before_any_toolathlon_terminal_case": [
+    "INDEPENDENT_EXACT_BYTE_VERIFICATION_OF_ADAPTER_AND_TESTS",
+    "REAL_TOOLATHLON_DECOUPLED_HOST_INTEGRATION_BINDS_GATEWAY_TO_THIS_ADAPTER",
+    "GENERAL_SUBSTRATE_MATERIALITY_COUNTERFACTUAL_INDEPENDENT_PASS",
+    "ACCEPTANCE_CAPABILITY_SOURCE_GATE_V2_INDEPENDENT_PASS_FOR_THE_EXACT_ROUTE",
+    "TOOLATHLON_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER_INDEPENDENT_PASS",
+    "OPUS55_TOOLATHLON_MATCHED_REFERENCE_BAR_INDEPENDENT_PASS",
+    "FROZEN_MATCHED_SCOPE_COMPOSITION_CERTIFICATE_INDEPENDENT_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_THE_EXISTING_CLAUDE_AGENT_SDK_HOST_LOOP_IS_BRAIN_OWNED_TOOL_DISCOVERY",
+    "NO_CLAIM_THAT_SINGLE_SCHEMA_SEMANTIC_JUDGMENT_ALONE_PROVES_GENERAL_SUBSTRATE_MATERIALITY",
+    "NO_TOOLATHLON_TERMINAL_CASE_EXECUTION_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT",
+    "NO_UNIVERSAL_OPEN_WORLD_TOOL_ENUMERATION_CLAIM"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
