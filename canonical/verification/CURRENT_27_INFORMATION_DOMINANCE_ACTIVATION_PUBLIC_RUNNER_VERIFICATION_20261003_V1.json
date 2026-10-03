@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_27_INFORMATION_DOMINANCE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__LIVE27_ZERO_REALITY_FRONTIER_ACTIVATION_AND_OPERATIVE_POINTERS_CONSISTENT__ZERO_CREDIT",
+  "verified_brain_pull_request": 1322,
+  "exact_brain_blobs": {
+    "canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_ACTIVATION_V1.json": "d68b067344349e014b3ad52da5530a4645d840e4",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "cd0036e17fd9645a97cba001aad194d2203b4728",
+    "canonical/CANONICAL_POINTER.json": "81412faeff8d538f5d5ea3a7714ed6cff9f23c4a",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json": "1c8e2758b917de053b3057ba22418584ca71af15",
+    "canonical/action_intents/2026-10-03_ACTIVATE_LIVE_27_ZERO_REALITY_FRONTIER_V1.json": "b8f9d32905c4eedb71905f0baa1a837fd743e18b"
+  },
+  "immutable_inputs": {
+    "canonical/governance/CURRENT_27_INFORMATION_DOMINANCE_V1.json": "fae786d6051277865ed6ecde69be5da98e2bf509",
+    "canonical/verification/CURRENT_27_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "1931ae5a7edb5dde2021a8a4f7e7a3ad0fd821f1",
+    "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json": "04f0ee3cd64c3f77b29ece159ac9a35eae47a9dc"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1311,
+    "head_sha": "1bae5f5c668affaa2b2c3dcd2dce5996ad64dc91",
+    "merge_commit": "548323f8035bc3e37231720faae8c2d3f0f0f429",
+    "workflow_run_id": 37117833535,
+    "workflow_job_id": 111187965112,
+    "artifact_id": 11271743643,
+    "artifact_digest": "sha256:cf51dbfe6c716b736787b51d032afb4f1ec3105b606309340b47cbeacbdf547e",
+    "conclusion": "success"
+  },
+  "verified": {
+    "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    "proved_predicates": 11,
+    "unresolved_predicates": 27,
+    "certificate_count": 16,
+    "nondominated_certificate_count": 16,
+    "unique_zero_reality_requirements": 19,
+    "highest_direct_certificate": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+    "highest_direct_coverage": 8,
+    "complete_operational_pointer_consistency": true,
+    "tool_discovery_v2_retrieval_authority_mandatory": true,
+    "consumed_tool_discovery_source_epoch_replay_forbidden": true,
+    "fresh_reality_authority": false
+  },
+  "consequence": "OPERATIVE_CONTROL_PLANE_MAY_ADVANCE_TO_PARALLEL_ZERO_REALITY_REQUIREMENT_DISCHARGE__NO_FRESH_REALITY_YET",
+  "hard_nonclaims": [
+    "NO_NEW_ACCEPTANCE_PREDICATE_PROVED_BY_THIS_ACTIVATION_RECEIPT",
+    "NO_NEW_FAMILY_PROMOTED_BY_THIS_ACTIVATION_RECEIPT",
+    "NO_FRESH_TERMINAL_CASE_AUTHORITY",
+    "STRUCTURAL_INFORMATION_DOMINANCE_IS_NOT_SUCCESS_PROBABILITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
