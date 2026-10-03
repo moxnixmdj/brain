@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_PROOF_ROUTER_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_MINIMUM_REALITY_ROUTER__REQUIRES_INDEPENDENT_V6_IDENTITY_SCOPE_LOWER_BOUND_AND_PARTITION_RECEIPTS__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "inputs": [
+    "INDEPENDENTLY_VERIFIED_V6_OR_SUCCESSOR_POLICY",
+    "INDEPENDENTLY_VERIFIED_EXACT_COMMON_BRAIN_OPUS_AUTHORITY_IDENTITY_SCOPE_INSTANCE",
+    "INDEPENDENTLY_VERIFIED_OBSERVABILITY_LOWER_BOUND",
+    "INDEPENDENTLY_VERIFIED_OBSERVABILITY_PARTITION"
+  ],
+  "rule": "UNIVERSAL_REGION_STAYS_ON_FORMAL_PROGRAM_PROOF_PATH__ONLY_INFORMATION_THEORETICALLY_AMBIGUOUS_DECISION_RELEVANT_EQUIVALENCE_CLASSES_REQUEST_MATCHED_OPUS_EVIDENCE",
+  "runtime": "canonical/runtime/tool_discovery_proof_router_v1.py",
+  "tests": "canonical/tests/test_tool_discovery_proof_router_v1.py",
+  "current_live_dependencies": {
+    "v6_candidate_pr": 1163,
+    "observability_partition_pr": 1169,
+    "common_authority_instance_candidate_pr": 1164
+  },
+  "hard_nonclaims": [
+    "NO_CURRENT_DEPENDENCY_IS_SELF_CERTIFIED",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_MATCHED_EVIDENCE_REQUEST_OUTSIDE_AMBIGUOUS_PARTITION"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
