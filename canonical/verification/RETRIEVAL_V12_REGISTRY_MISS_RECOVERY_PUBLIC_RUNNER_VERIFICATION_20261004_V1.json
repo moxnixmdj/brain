@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V12_REGISTRY_MISS_RECOVERY_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_TWELVE_V11_NON_GITHUB_MISSES__THREE_RECOVERED__ZERO_CREDIT",
+  "verified_subjects": {
+    "canonical/runtime/retrieval_registry_miss_recovery_v12.py": "708ad88333b56dbe58de6cd72bc0205be5bd193b",
+    "canonical/tests/test_retrieval_registry_miss_recovery_v12.py": "38b564ea2b54769fd48752fbb43e569ff1bdc544"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1486,
+    "workflow_run_id": 37162357173,
+    "workflow_job_id": 111318234056,
+    "conclusion": "success"
+  },
+  "measured_live_truth": {
+    "baseline_case_count": 12,
+    "usable_case_count": 9,
+    "recovered_case_count": 3,
+    "recovery_rate": 0.3333333333333333,
+    "recovered_episode_ids": [
+      "NPM_PROCESS_EXEC",
+      "CRATE_ERROR",
+      "CRATE_PARSER"
+    ],
+    "residual_miss_episode_ids": [
+      "HF_TEXT2TEXT",
+      "NUGET_JSON",
+      "NUGET_STRUCT_LOG",
+      "RUBY_HTTP",
+      "PHP_HTTP",
+      "PHP_LOGGING"
+    ],
+    "failed_retryable_episode_ids": [
+      "MAVEN_COLLECTIONS",
+      "MAVEN_JSON_BIND",
+      "MAVEN_LOG_FACADE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_COMPLETENESS_CLAIM",
+    "NO_INFERENCE_THAT_MAVEN_TARGETS_ARE_ABSENT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
