@@ -24,7 +24,7 @@
     "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json": "e29ce3a7c782c7b9ab1097dd3124a917d3fea9d2",
     "canonical/runtime/current_terminal_scheduling_world_v1.py": "9ae2b990578b042dd24074fd5013378b72e64b6b",
     "canonical/tests/test_tool_discovery_retrieval_authority_gate_v1.py": "6f8e38356b0a5bebf1815c7d1c199ddc86b4c9de",
-    "canonical/tests/test_current_terminal_scheduling_world_v1.py": "176c722c7dd09bb26e32fa87e8a1d70a5237191c"
+    "canonical/tests/test_current_terminal_scheduling_world_v1.py": "856517ca43bf05cd2888bfeeed5e8aea963c6eed"
   },
   "mandatory_retrieval_authority": {
     "activation_path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1.json",
