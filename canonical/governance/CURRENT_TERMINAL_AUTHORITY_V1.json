@@ -108,15 +108,16 @@
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__COMPLETE_AND_NONSTALE_ACTION_FRONTIER__ZERO_CREDIT"
     },
     "terminal_projection_consistency": {
-      "governance_path": "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json",
-      "governance_git_blob_sha": "935693a0b258348a0253d8fa36edbe37ff81487b",
+      "governance_path": "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V2.json",
       "runtime_path": "canonical/runtime/terminal_projection_consistency_v1.py",
-      "runtime_git_blob_sha": "76d5dc6225bced61ff4da2a6f8de430c7c6a0ed4",
+      "runtime_git_blob_sha": "a05d8e71abd16bb10a63df22cd41888e97fb6ca8",
       "tests_path": "canonical/tests/test_terminal_projection_consistency_v1.py",
-      "tests_git_blob_sha": "afb6abf6041f71c6c3b8e9011382d8b85d743a56",
+      "tests_git_blob_sha": "33f7249fd10ba2079b54f85b2148aa28dea1f643",
       "workflow_path": ".github/workflows/verify-terminal-projection-consistency.yml",
-      "workflow_git_blob_sha": "7c7e03a1e771d5fda0a280a01b042c058fb8eb8a",
-      "status": "ACTIVE_RECEIPT_DERIVED_POST_DELEGATION_FIREWALL__LIVE_COUNTS_NOT_HARDCODED__ZERO_CREDIT"
+      "workflow_git_blob_sha": "ae09025a50653a35d3f06721901db6b849f1b690",
+      "verification_path": "canonical/verification/COUNT_GENERIC_TERMINAL_PROJECTION_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "verification_git_blob_sha": "e74dd56ae251381324336773241d6a2896aea8b1",
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__COUNT_GENERIC_19_FAMILY_38_PREDICATE_PROJECTION__ZERO_CREDIT"
     },
     "acceptance_residual_verdict_v10": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
