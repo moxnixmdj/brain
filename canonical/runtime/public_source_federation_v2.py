@@ -49,9 +49,9 @@ def select_queries(queries:Sequence[str]|Sequence[Mapping[str,Any]],max_queries:
     def add(r,kind):
         if len(selected)>=max_queries or r["text"].casefold() in seen: return
         seen.add(r["text"].casefold()); selected.append({**r,"selection_class":kind})
-    for r in pool:
-        if technical(r): add(r,"TECHNICAL")
-        if len(selected)>=2: break
+    strong=[r for r in pool if r["basis"].upper().startswith("OBSERVABLE_") or "TECHNICAL_ANCHOR" in r["basis"].upper()]
+    for r in strong[:2]:
+        add(r,"EXACT_TECHNICAL_ANCHOR")
     for wanted in ("CJK","ARABIC","CYRILLIC","DEVANAGARI","OTHER"):
         for r in pool:
             if r["script"]==wanted:
@@ -59,6 +59,9 @@ def select_queries(queries:Sequence[str]|Sequence[Mapping[str,Any]],max_queries:
     for r in pool:
         if r["script"]=="LATIN" and ("MULTILINGUAL" in r["basis"].upper() or "LANGUAGE" in r["basis"].upper()):
             add(r,"LATIN_LANGUAGE_VARIANT"); break
+    for r in pool:
+        if technical(r):
+            add(r,"TECHNICAL_FILL")
     for r in pool: add(r,"FILL")
     return selected
 
