@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_LOCAL_ZERO_REALITY_FIXED_POINT_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_MAIN__V12_EXACT_TRANSACTION_INDEPENDENT_PUBLIC_RUNNER_PASS__SCOPED_FRESH_REALITY_TWO_PREDICATES__GLOBAL_FALSE",
+  "active_cut": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json",
+    "git_blob_sha": "755bf5efce7e7e5f6b1c0462eb824755ab8c3138"
+  },
+  "exact_transaction_verification": {
+    "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "a1a057fd200d3cdcb4ab54f9d8a9f6615d0eb273",
+    "verifier_merge_commit": "00a4b0a604d4e77deac59a5f25bc315000abfc09",
+    "workflow_run_id": 37158592587,
+    "workflow_job_id": 111307065840,
+    "conclusion": "success"
+  },
+  "theorem_verification": {
+    "path": "canonical/verification/LOCAL_ZERO_REALITY_FIXED_POINT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "52cb662d94d176800529d11b6d9181014c8f442d",
+    "verifier_merge_commit": "561fbad461aeb71bf80ce4a2909e70a70c559844",
+    "workflow_run_id": 37158244145,
+    "workflow_job_id": 111306055369,
+    "conclusion": "success"
+  },
+  "global_fresh_reality_authority": false,
+  "scoped_fresh_reality_authority": true,
+  "scoped_authorized_predicates": [
+    "LIVEBENCH_IF_GE_65_7",
+    "TB_SCIENCE_GE_58_7"
+  ],
+  "all_other_unresolved_predicates_authorized": false,
+  "rule": "ONLY_THE_TWO_EXACT_PREDICATES_MAY_EXPOSE_FROZEN_TERMINAL_CASES__ALL_OTHER_FRESH_REALITY_REMAINS_FAIL_CLOSED",
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "promotion_authority": false
+}

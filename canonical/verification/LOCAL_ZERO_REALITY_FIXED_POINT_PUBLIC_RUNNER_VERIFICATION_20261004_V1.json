@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_LOCAL_ZERO_REALITY_FIXED_POINT_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PREDICATE_LOCAL_ZERO_REALITY_CONE_SOUND_FOR_EXACTLY_TWO_SCORE_ONLY_ROOT2_PREDICATES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/LOCAL_ZERO_REALITY_FIXED_POINT_CANDIDATE_V1.json",
+    "git_blob_sha": "d488701114d9a6e8f9ecbbac151765886fcbe296",
+    "brain_candidate_commit": "885c93da50063a64370155c5833629cc043cf716"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1436,
+    "head_sha": "97a99afa1312afbc9e7e32c17d4e3815eb91b6cb",
+    "merge_commit": "561fbad461aeb71bf80ce4a2909e70a70c559844",
+    "workflow_run_id": 37158244145,
+    "workflow_job_id": 111306055369,
+    "conclusion": "success",
+    "verifier_manifest_git_blob_sha": "ea509efe579538de418112411100617d5990f156",
+    "independent_verifier_git_blob_sha": "cc2c15c16c86ec50ad7612b958e9f3e547b41aec",
+    "workflow_git_blob_sha": "51ed140998023eac931a0ae52966181caa4a35e4"
+  },
+  "verified": {
+    "exact_authorized_predicates": [
+      "LIVEBENCH_IF_GE_65_7",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "authorized_predicate_count": 2,
+    "both_root2_only": true,
+    "root3_overlap": false,
+    "root2_and_root3_overlap": false,
+    "both_currently_brain_score_only_open": true,
+    "all_other_current_unresolved_predicates_unauthorized": true,
+    "global_fresh_reality_authority": false
+  },
+  "interpretation": "CURRENT_BOUND_ZERO_REALITY_WORK_OUTSIDE_EACH_AUTHORIZED_PREDICATE_DEPENDENCY_CONE_NEED_NOT_SERIALIZE_ITS_ALREADY_FROZEN_SCORE_EXECUTION__NO_OTHER_PREDICATE_RECEIVES_AUTHORITY",
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "global_fresh_reality_authority": false
+}
