@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_CANDIDATE_V4",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_ZERO_CREDIT__NEXT_UNTOUCHED_SLOT_KOOPMAN_MFG_ID_TRIAL_0__INDEPENDENT_EXACT_BYTE_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "authority_basis": {
+    "current_overlay_path": "canonical/governance/TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V3.json",
+    "cpu_portability_verification_path": "canonical/verification/TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "current_comparator_verification_path": "canonical/verification/TB_SCIENCE_OPUS55_SNAPSHOT_IDENTITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "prior_v3_finalization_path": "canonical/governance/TB_SCIENCE_CANARY_V3_FINAL_ZERO_RECONCILIATION_V1.json",
+    "prior_v3_verification_path": "canonical/verification/TB_SCIENCE_CANARY_V3_FINAL_ZERO_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+  },
+  "current_parity": {
+    "comparator_model": "Opus 5.5",
+    "comparator_percent": 63.33333333333333,
+    "fixed_denominator": 210,
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "finalized_failures_before_canary": 5,
+    "remaining_failures_before_fail_lock": 73
+  },
+  "exact_route": {
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "manifest_path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "harbor_version": "0.23.0",
+    "controller_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_blob": "fe7c0ce885197217774638df382aeb6f68ff38dd",
+    "source_gate_path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "command_policy_path": "canonical/runtime/harbor_command_policy.py",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "environment_transport_path": "canonical/runtime/harbor_environment_transport.py",
+    "environment_transport_blob": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "compiled_llama_cpp_cache_allowed": false
+  },
+  "candidate_slot": {
+    "slot_id": "terminal-bench-science/koopman-mfg-id::trial-0",
+    "schedule_order": 5,
+    "attempt_index": 0,
+    "task_rank": 5,
+    "task_name": "terminal-bench-science/koopman-mfg-id",
+    "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f"
+  },
+  "permanently_consumed_slots": [
+    "terminal-bench-science/genomic-model-ranking::trial-0",
+    "terminal-bench-science/mri-harmonization::trial-0",
+    "terminal-bench-science/navigation-sensor-calibration::trial-0",
+    "terminal-bench-science/baseline-free-localization::trial-0",
+    "terminal-bench-science/virtual-baseline-localization::trial-0"
+  ],
+  "hard_rules": [
+    "CANDIDATE_ONLY__NO_EXECUTION_AUTHORITY",
+    "NO_TERMINAL_EXECUTION_BEFORE_SEPARATE_INDEPENDENT_VERIFIER_BINDS_THIS_EXACT_CANDIDATE_BLOB",
+    "NEXT_ACTIVE_AUTHORITY_MUST_BIND_CLEAN_CURRENT_RUNNER_LLAMA_CPP_BUILD_SEMANTICS",
+    "NO_CONSUMED_SLOT_REPLAY",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "EXACTLY_ONE_SLOT_IF_LATER_ACTIVATED"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
