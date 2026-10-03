@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_OSWORLD_HLE_DELTA_20261003_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_FAIL_CLOSED__TWO_ROUTE_DELTAS__ZERO_CREDIT",
+  "authority": {
+    "osworld_boot": {
+      "path": "canonical/verification/OSWORLD_V21_ZERO_CASE_BOOT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "de0c8c3045798e273e7aaba84162a920f89a43ad"
+    },
+    "hle_quarantine": {
+      "path": "canonical/governance/HLE_STRICT_SCORER_LOWER_BOUND_QUARANTINE_V1.json",
+      "git_blob_sha": "7e4375241263c3807c3a2a85c4326a8f86d9f4d9"
+    }
+  },
+  "deltas": {
+    "OSWORLD_2_1_PARTIAL_GE_81_8": {
+      "removed": [
+        "ZERO_COST_KVM_CARRIER",
+        "PINNED_VM_BOOT"
+      ],
+      "remaining": [
+        "GATED_TASK_ASSET_ACCESS",
+        "SELF_HOST_DEPENDENCIES",
+        "PROTOCOL_EQUIVALENCE",
+        "BRAIN_SCORE"
+      ]
+    },
+    "HLE_TOOLS_GE_67_7": {
+      "removed": [
+        "STRICT_REFERENCE_SCORER_AS_PROVED_OFFICIAL_JUDGE_LOWER_BOUND"
+      ],
+      "remaining": [
+        "GATED_POPULATION_ACCESS",
+        "ZERO_COST_COMPARABLE_OFFICIAL_OR_PROVED_EQUIVALENT_JUDGE",
+        "BRAIN_TOOL_ADAPTER",
+        "BRAIN_SCORE"
+      ]
+    }
+  },
+  "hard_rules": [
+    "OSWORLD_BOOT_PASS_IS_NOT_OSWORLD_SCORE",
+    "HLE_STRICT_SCORER_DIAGNOSTIC_IS_NOT_OFFICIAL_JUDGE_LOWER_BOUND",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
