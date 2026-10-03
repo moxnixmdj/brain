@@ -4,15 +4,16 @@
   "status": "CANDIDATE_TRUTH_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "objective": "Converge the discovered Tool Discovery soundness failures into one fail-closed policy without weakening the frozen target.",
   "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
-  "base_commit": "07c4d993c30bde3db4c639864b7376d058dfae5f",
+  "base_commit": "1211510d7af9ed40ba77655638cdc208181ebe2e",
   "candidate_runtime": "canonical/runtime/tool_discovery_dynamic_candidate_v5.py",
   "candidate_tests": "canonical/tests/test_tool_discovery_dynamic_candidate_v5.py",
   "interface_contract": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V3.json",
   "falsified_or_repaired_defects": [
+    "CURRENT_V4_STALE_PARTIAL_WRONG_QUERY_OR_WRONG_SOURCE_RECEIPT_SUPPRESSES_REDISCOVERY",
+    "CURRENT_V4_DISCOVERED_RECEIPT_TOOLS_NOT_MERGED_BY_POLICY",
+    "CURRENT_V4_PROBE_ACTION_HAS_NO_EXPLICIT_SAFE_PROBE_PERMISSION_GATE",
     "V3_PREMATURE_VISIBLE_SELECTION_BEFORE_DISCOVERY",
-    "V4_STALE_PARTIAL_WRONG_QUERY_OR_WRONG_SOURCE_RECEIPT_SUPPRESSES_REDISCOVERY",
-    "V4_DISCOVERED_IDENTITY_METADATA_NOT_POLICY_MERGED_OR_CONFLICT_CHECKED",
-    "V4_UNSAFE_UNRESOLVED_CHEAPER_ROUTE_CAN_BE_SKIPPED_FOR_MORE_EXPENSIVE_ROUTE"
+    "V4_VARIANTS_CAN_SKIP_UNRESOLVED_UNPROBEABLE_CHEAPER_ROUTE"
   ],
   "invariants": [
     "DISCOVERY_FIRST_UNTIL_EXACT_CURRENT_COMPLETE_QUERY_BOUND_SOURCE_RECEIPTS_EXIST",
@@ -35,5 +36,6 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "supersedes_current_v4_blob": "e614d0bed8e291e31f57189cd6f0f75aa39b0f74"
 }
