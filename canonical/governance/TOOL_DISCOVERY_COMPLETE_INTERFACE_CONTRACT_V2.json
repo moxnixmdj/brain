@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CONDITIONAL_INTERFACE_SPEC__NO_EXTERNAL_INSTANCE_CLAIM__ZERO_CREDIT",
+  "supersedes": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json",
+  "objective": "State the exact environment properties sufficient for discovery-exhaustive V4 to cover unknown tool identities and preserve least-cost route selection without weakening the frozen Tool Discovery target.",
+  "scope_ref": "TOOL_DISCOVERY_SELECTION_AND_LEARNING::UNKNOWN_CHANGING_TOOL_ECOSYSTEM_TO_VERIFIED_USABLE_ROUTE",
+  "required_properties": [
+    "FINITE_AUTHORITATIVE_DISCOVERY_SOURCE_SET_PER_DECISION_EPOCH",
+    "DISCOVERY_RECEIPT_IDENTIFIES_QUERIED_SOURCE",
+    "DISCOVERY_RESULTS_MONOTONICALLY_ADD_VISIBLE_TOOL_IDENTITIES_WITHIN_EPOCH",
+    "UNION_OF_AUTHORITATIVE_DISCOVERY_RESULTS_IS_COMPLETE_FOR_DECLARED_TARGET_SCOPE",
+    "DISCOVERED_TOOL_METADATA_CORRECT_FOR_AVAILABILITY_AUTHORIZATION_COST_AND_CONSTRAINT_FIELDS",
+    "SAFE_CAPABILITY_PROBE_RECEIPTS_ARE_TRUTHFUL_AND_EPOCH_BOUND",
+    "DECISION_EPOCH_SOURCE_SET_AND_ROUTE_RANKING_FIELDS_STABLE_UNTIL_SELECT_OR_ESCALATE_OR_CHANGE_RESTARTS_EPISODE",
+    "VERSION_EPOCH_STABLE_DURING_ONE_SELECTION_EPISODE_OR_CHANGE_RESTARTS_EPISODE"
+  ],
+  "instance_verified": false,
+  "instance_evidence": null,
+  "why_v2": "V1 omitted stability of the authoritative source set and route-ranking metadata; without that stability an interface could change after discovery and invalidate a universal least-cost argument.",
+  "hard_rules": [
+    "THIS_SPEC_DOES_NOT_ASSERT_ANY_CURRENT_DISCOVERY_SOURCE_IS_COMPLETE",
+    "NO_UNKNOWN_TOOL_IDENTITY_MAY_BE_ASSUMED_ENUMERATED_WITHOUT_INTERFACE_EVIDENCE",
+    "NO_LEAST_COST_CLAIM_ACROSS_MUTATING_SOURCE_OR_ROUTE_RANKING_STATE_WITHOUT_EPISODE_RESTART",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "AN_EXTERNAL_INSTANCE_MUST_BE_INDEPENDENTLY_VERIFIED_BEFORE_ANY UNIVERSAL_SCOPE CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
