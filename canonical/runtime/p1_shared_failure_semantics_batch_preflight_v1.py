@@ -21,7 +21,7 @@ from canonical.runtime import p1_shared_failure_semantics_batch_v1 as batch
 
 ROOT = Path(__file__).resolve().parents[2]
 FREEZE = "canonical/governance/P1_SHARED_FAILURE_SEMANTICS_BATCH_FREEZE_V1.json"
-EXPECTED_FREEZE_BLOB = "cbf16a1c8d11bc147a972df39b9adb390b64c861"
+EXPECTED_FREEZE_BLOB = "6a4b606a759d5479bb5ddbdf29426b1a1808b007"
 
 EXPECTED_SURFACES = {
     "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
