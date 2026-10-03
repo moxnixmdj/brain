@@ -11,6 +11,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 import json
+import re
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -217,30 +218,59 @@ def evaluate(
             errors.append("DUPLICATE_EVIDENCE_PREDICATE:" + pid)
             continue
         states[pid] = str(state)
-        if state == "PROVED":
+        if state == "PROVED" and row.get("scope_complete") is True:
             proved.add(pid)
 
-    unresolved = [
-        pid
-        for pid in by_predicate
-        if pid not in proved and states.get(pid) != "REFUTED"
-    ]
+    registry_count = len(by_predicate)
+    proved_count = len(proved)
+    unresolved = [pid for pid in by_predicate if pid not in proved]
     unresolved_set = set(unresolved)
-    if len(by_predicate) != 38:
-        errors.append(f"REGISTRY_COUNT_NOT_38:{len(by_predicate)}")
-    if len(proved) != 11:
-        errors.append(f"PROVED_COUNT_NOT_11:{len(proved)}")
-    if len(unresolved) != 27:
-        errors.append(f"UNRESOLVED_COUNT_NOT_27:{len(unresolved)}")
+    unresolved_count = len(unresolved)
+    if proved_count + unresolved_count != registry_count:
+        errors.append("PREDICATE_PARTITION_MISMATCH")
 
     truth = authority.get("truth")
     if not isinstance(truth, Mapping):
         errors.append("AUTHORITY_TRUTH_NOT_OBJECT")
         truth = {}
-    if truth.get("opus55_acceptance") != "4/19_PASS__15/19_OPEN":
-        errors.append("AUTHORITY_ACCEPTANCE_NOT_4_OF_19")
+    acceptance_text = str(truth.get("opus55_acceptance") or "")
+    acceptance_match = re.fullmatch(
+        r"(\d+)/(\d+)_PASS__(\d+)/(\d+)_OPEN", acceptance_text
+    )
+    accepted_count = open_family_count = family_total = None
+    if acceptance_match is None:
+        errors.append("AUTHORITY_ACCEPTANCE_FORMAT_INVALID")
+    else:
+        accepted_count = int(acceptance_match.group(1))
+        family_total = int(acceptance_match.group(2))
+        open_family_count = int(acceptance_match.group(3))
+        second_total = int(acceptance_match.group(4))
+        if family_total != second_total or accepted_count + open_family_count != family_total:
+            errors.append("AUTHORITY_ACCEPTANCE_COUNTS_INVALID")
     if truth.get("achieved") is not False:
         errors.append("AUTHORITY_TERMINAL_MUST_BE_FALSE")
+
+    rows = ownership_matrix.get("rows")
+    if not isinstance(rows, list):
+        errors.append("OWNERSHIP_MATRIX_ROWS_NOT_LIST")
+        rows = []
+    ownership_families = {
+        str(row.get("family"))
+        for row in rows
+        if isinstance(row, Mapping) and isinstance(row.get("family"), str)
+    }
+    if family_total is not None and len(ownership_families) != family_total:
+        errors.append("OWNERSHIP_FAMILY_COUNT_MISMATCH")
+
+    matrix_accepted = 0
+    for row in rows:
+        if not isinstance(row, Mapping):
+            continue
+        acceptance = str(row.get("postwave_opus55_acceptance_status") or "")
+        if acceptance.startswith("PASS") or row.get("status") == "VERIFIED_OWNED_EQUAL_OR_BETTER":
+            matrix_accepted += 1
+    if accepted_count is not None and matrix_accepted != accepted_count:
+        errors.append("OWNERSHIP_ACCEPTANCE_COUNT_MISMATCH")
 
     dv_status = str(dominance_verification.get("status") or "")
     verified_dom = dominance_verification.get("verified")
@@ -249,13 +279,26 @@ def evaluate(
     ):
         errors.append("DOMINANCE_NOT_INDEPENDENTLY_VERIFIED")
         verified_dom = {}
+
+    cert_count = verified_dom.get("nondominated_certificate_count")
+    req_count = verified_dom.get("unique_zero_reality_requirements")
+    if (
+        isinstance(cert_count, bool)
+        or not isinstance(cert_count, int)
+        or cert_count < 0
+        or isinstance(req_count, bool)
+        or not isinstance(req_count, int)
+        or req_count < 0
+    ):
+        errors.append("DOMINANCE_VERIFIED_CARDINALITIES_INVALID")
+        cert_count = 0
+        req_count = 0
+
     if (
         verified_dom.get("frozen_predicates"),
         verified_dom.get("proved_predicates"),
         verified_dom.get("unresolved_predicates"),
-        verified_dom.get("nondominated_certificate_count"),
-        verified_dom.get("unique_zero_reality_requirements"),
-    ) != (38, 11, 27, 16, 19):
+    ) != (registry_count, proved_count, unresolved_count):
         errors.append("DOMINANCE_VERIFIED_COUNTS_MISMATCH")
 
     live_world = dominance.get("live_world")
@@ -268,22 +311,22 @@ def evaluate(
         live_world.get("unresolved_predicates"),
         live_world.get("nondominated_certificate_count"),
         live_world.get("unique_zero_reality_requirements"),
-    ) != (38, 11, 27, 16, 19):
+    ) != (registry_count, proved_count, unresolved_count, cert_count, req_count):
         errors.append("DOMINANCE_CANDIDATE_COUNTS_MISMATCH")
 
     nondominated = dominance.get("nondominated_certificate_ids")
     required = dominance.get("required_propositions")
     if (
         not isinstance(nondominated, list)
-        or len(nondominated) != 16
-        or len(set(nondominated)) != 16
+        or len(nondominated) != cert_count
+        or len(set(nondominated)) != cert_count
     ):
         errors.append("NONDOMINATED_CERTIFICATE_SET_INVALID")
         nondominated = []
     if (
         not isinstance(required, list)
-        or len(required) != 19
-        or len(set(required)) != 19
+        or len(required) != req_count
+        or len(set(required)) != req_count
     ):
         errors.append("ZERO_REALITY_REQUIREMENT_SET_INVALID")
         required = []
@@ -295,24 +338,20 @@ def evaluate(
     ):
         errors.append("MATCHED_RESIDUAL_NOT_INDEPENDENTLY_VERIFIED")
         mv_result = {}
-    if (
-        mv_result.get("target_count"),
-        mv_result.get("primitive_residual_fact_count"),
-        mv_result.get("shared_residual_group_count"),
-    ) != (8, 16, 0):
-        errors.append("MATCHED_RESIDUAL_VERIFIED_COUNTS_MISMATCH")
 
     matched_targets = matched_residual.get("targets")
     implications = matched_residual.get("implications")
-    if (
-        not isinstance(matched_targets, list)
-        or len(matched_targets) != 8
-        or len(set(matched_targets)) != 8
-    ):
+    if not isinstance(matched_targets, list) or len(set(matched_targets)) != len(matched_targets):
         errors.append("MATCHED_TARGET_SET_INVALID")
-    if not isinstance(implications, list) or len(implications) != 8:
+        matched_targets = []
+    if not isinstance(implications, list):
         errors.append("MATCHED_IMPLICATION_SET_INVALID")
         implications = []
+    matched_target_count = len(matched_targets)
+    if len(implications) != matched_target_count:
+        errors.append("MATCHED_IMPLICATION_SET_INVALID")
+    if mv_result.get("target_count") != matched_target_count:
+        errors.append("MATCHED_RESIDUAL_VERIFIED_COUNTS_MISMATCH")
 
     matched_children: list[tuple[str, str]] = []
     for edge in implications:
@@ -343,8 +382,20 @@ def evaluate(
                 errors.append("MATCHED_CHILD_REQUIREMENT_NOT_TARGET_SPECIFIC:" + target)
                 continue
             matched_children.append((req, target))
-    if len(matched_children) != 16 or len({r for r, _ in matched_children}) != 16:
-        errors.append("MATCHED_CHILD_FACT_COUNT_NOT_16")
+
+    matched_child_count = len(matched_children)
+    if len({r for r, _ in matched_children}) != matched_child_count:
+        errors.append("MATCHED_CHILD_FACT_DUPLICATE")
+    if mv_result.get("primitive_residual_fact_count") != matched_child_count:
+        errors.append("MATCHED_CHILD_FACT_COUNT_MISMATCH")
+    shared_residual_group_count = mv_result.get("shared_residual_group_count")
+    if (
+        isinstance(shared_residual_group_count, bool)
+        or not isinstance(shared_residual_group_count, int)
+        or shared_residual_group_count < 0
+    ):
+        errors.append("MATCHED_SHARED_RESIDUAL_COUNT_INVALID")
+        shared_residual_group_count = 0
 
     req_targets: dict[str, set[str]] = defaultdict(set)
     req_certificates: dict[str, set[str]] = defaultdict(set)
@@ -369,9 +420,11 @@ def evaluate(
     missing = sorted(required_set - set(req_targets))
     if missing:
         errors.append("REQUIREMENTS_WITHOUT_LIVE_CERTIFICATE:" + ",".join(missing))
-    if not MATCHED_PARENT_REQUIREMENTS.issubset(required_set):
+
+    present_matched_parents = MATCHED_PARENT_REQUIREMENTS & required_set
+    if matched_target_count > 0 and present_matched_parents != MATCHED_PARENT_REQUIREMENTS:
         errors.append("MATCHED_PARENT_REQUIREMENTS_NOT_BOTH_PRESENT")
-    direct_requirements = sorted(required_set - MATCHED_PARENT_REQUIREMENTS)
+    direct_requirements = sorted(required_set - present_matched_parents)
 
     family_open_counts: dict[str, int] = defaultdict(int)
     for pid in unresolved:
@@ -379,6 +432,7 @@ def evaluate(
 
     history = attempt_history if isinstance(attempt_history, Mapping) else {}
     work_units: list[dict[str, Any]] = []
+    denominator = unresolved_count if unresolved_count > 0 else 1
 
     for req, target in sorted(matched_children):
         family = str(by_predicate[target].get("family") or "UNKNOWN")
@@ -391,10 +445,8 @@ def evaluate(
                 "target_predicates": [target],
                 "target_families": [family],
                 "certificate_ids": ["MATCHED_TARGET_CERTIFICATE::" + target],
-                "structural_target_fraction": 1 / 27,
-                "family_open_predicate_counts": {
-                    family: family_open_counts[family]
-                },
+                "structural_target_fraction": 1 / denominator,
+                "family_open_predicate_counts": {family: family_open_counts[family]},
                 "priority_tier": 0,
                 "first_resource_priority": True,
                 "parallelizable": True,
@@ -422,16 +474,14 @@ def evaluate(
                 "target_predicates": targets,
                 "target_families": families,
                 "certificate_ids": sorted(req_certificates.get(req, set())),
-                "structural_target_fraction": len(targets) / 27 if targets else 0,
+                "structural_target_fraction": len(targets) / denominator if targets else 0,
                 "family_open_predicate_counts": {
-                    f: family_open_counts[f] for f in families
+                    family: family_open_counts[family] for family in families
                 },
                 "priority_tier": 1 if tool_discovery else 2,
                 "first_resource_priority": False,
                 "parallelizable": True,
-                "source_hints": _source_hints(
-                    lane, tool_discovery=tool_discovery
-                ),
+                "source_hints": _source_hints(lane, tool_discovery=tool_discovery),
                 "mandatory_tool_discovery_v2_gate": tool_discovery,
                 "empirical_posterior": _empirical_posterior(history.get(req)),
                 "requires_fixed_point_recompute_on_verified_delta": True,
@@ -439,11 +489,6 @@ def evaluate(
                 "promotion_authority": False,
             }
         )
-
-    rows = ownership_matrix.get("rows")
-    if not isinstance(rows, list):
-        errors.append("OWNERSHIP_MATRIX_ROWS_NOT_LIST")
-        rows = []
 
     ownership_reconcile: list[dict[str, Any]] = []
     ownership_prework: list[dict[str, Any]] = []
@@ -535,24 +580,26 @@ def evaluate(
         ),
         "pass": True,
         "live_world": {
-            "frozen_predicates": 38,
-            "proved_predicates": 11,
-            "unresolved_predicates": 27,
-            "acceptance": "4/19_PASS__15/19_OPEN",
-            "nondominated_certificates": 16,
-            "verified_zero_reality_requirements": 19,
-            "matched_live_targets": 8,
-            "matched_primitive_child_facts": 16,
-            "matched_shared_residual_groups": 0,
+            "frozen_predicates": registry_count,
+            "proved_predicates": proved_count,
+            "unresolved_predicates": unresolved_count,
+            "acceptance": acceptance_text,
+            "nondominated_certificates": cert_count,
+            "verified_zero_reality_requirements": req_count,
+            "matched_live_targets": matched_target_count,
+            "matched_primitive_child_facts": matched_child_count,
+            "matched_shared_residual_groups": shared_residual_group_count,
         },
         "action_refinement": {
-            "coarse_zero_reality_requirements": 19,
-            "matched_parent_requirements_replaced_by_verified_children": 2,
-            "matched_child_work_units": 16,
+            "coarse_zero_reality_requirements": req_count,
+            "matched_parent_requirements_replaced_by_verified_children": len(
+                present_matched_parents
+            ),
+            "matched_child_work_units": matched_child_count,
             "direct_nonmatched_work_units": len(direct_requirements),
             "primitive_acceptance_work_units": len(work_units),
             "rule": (
-                "THE_19_REQUIREMENTS_ARE_PROOF_OBLIGATIONS_NOT_19_SERIAL_ACTIONS"
+                "VERIFIED_REQUIREMENTS_ARE_PROOF_OBLIGATIONS_NOT_SERIAL_ACTIONS"
             ),
         },
         "acceptance_work_units": work_units,
@@ -582,7 +629,7 @@ def evaluate(
         "hard_rules": [
             "SCHEDULING_ONLY_ZERO_CREDIT",
             "NO_INVENTED_SUCCESS_PROBABILITY_OR_PROOF_COST",
-            "NO_MATCHED_PARENT_FLAG_SUBSTITUTION_FOR_16_TARGET_SPECIFIC_CHILD_FACTS",
+            "NO_MATCHED_PARENT_FLAG_SUBSTITUTION_FOR_TARGET_SPECIFIC_CHILD_FACTS",
             "NO_CROSS_TARGET_MATCHED_SCOPE_INHERITANCE",
             "NO_REPEAT_OF_CONSUMED_TOOL_DISCOVERY_SOURCE_EPOCH",
             "NO_RESULT_IS_NOT_NONEXISTENCE",
