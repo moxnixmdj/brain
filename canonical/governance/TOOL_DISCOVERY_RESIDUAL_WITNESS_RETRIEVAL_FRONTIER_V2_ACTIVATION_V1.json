@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V2_SUPERSEDES_V1__UNKNOWN_SCOPE_RELATION_PRESERVED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "active_frontier": {
+    "path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2.json",
+    "git_blob_sha": "854dd675f8454be9e0ac9316fac3eefe407305c0"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "763d57615fbab35259c9733e6bb5c7008eb21bf0",
+    "workflow_run_id": 37113828370,
+    "workflow_job_id": 111176670120,
+    "conclusion": "success"
+  },
+  "supersedes": {
+    "path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V1.json",
+    "reason": "V2_CONSUMES_THE_INDEPENDENTLY_VERIFIED_GITHUB_CODE_HISTORY_SOURCE_EPOCH_AND_PRESERVES_THE_SAME_OPEN_RESIDUAL"
+  },
+  "operational_policy": {
+    "current_state": "UNKNOWN_SCOPE_RELATION__STRICT_ACCEPTANCE_OPEN",
+    "repeat_v1_source_epoch": false,
+    "repeat_v2_github_source_epoch": false,
+    "next_action_without_wake": "DO_NOT_SPEND_ADDITIONAL_RETRIEVAL_ACTIONS_ON_THIS_RESIDUAL",
+    "next_action_on_material_wake": "COMPILE_ONLY_NEW_EVIDENCE__VERIFY_SCOPE_FIRST__STOP_ON_FIRST_INDEPENDENTLY_VERIFIED_SUFFICIENT_WITNESS"
+  },
+  "hard_rules": [
+    "NO_RESULT_IS_NOT_NONEXISTENCE",
+    "NO_GLOBAL_COMPLETENESS_FROM_FINITE_GITHUB_SEARCH",
+    "NO_DERIVATIVE_SOURCE_AS_INDEPENDENT_MATCHED_EVIDENCE",
+    "NO_UNPUBLISHED_VALID_ROUTE_TOP1_SUBSTITUTION",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

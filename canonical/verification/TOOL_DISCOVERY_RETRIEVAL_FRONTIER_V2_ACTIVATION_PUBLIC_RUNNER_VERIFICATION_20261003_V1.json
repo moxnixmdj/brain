@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_RETRIEVAL_FRONTIER_V2_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V2_FRONTIER_ACTIVATION_VERIFIED__ZERO_CREDIT",
+  "verified_activation": {
+    "path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1.json",
+    "git_blob_sha": "c916c095cfb52b4b3d8dd863dfb0be0f05529f2e"
+  },
+  "bound_frontier": {
+    "path": "canonical/governance/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2.json",
+    "git_blob_sha": "854dd675f8454be9e0ac9316fac3eefe407305c0"
+  },
+  "bound_frontier_verification": {
+    "path": "canonical/verification/TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "763d57615fbab35259c9733e6bb5c7008eb21bf0"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1289,
+    "merge_commit": "d03243f6e99608265500a767a66df1a9820d7a4d",
+    "head_sha": "ede5f705c28616aa723aa0a6f30ee9ea40e24f15",
+    "workflow_run_id": 37114080412,
+    "workflow_job_id": 111177377584,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_activation_blob_verified": true,
+    "exact_frontier_binding_verified": true,
+    "exact_frontier_verification_binding_verified": true,
+    "unknown_scope_relation_preserved": true,
+    "v1_source_epoch_repeat_disabled": true,
+    "v2_github_source_epoch_repeat_disabled": true,
+    "zero_credit_preserved": true,
+    "execution_authority_remains_false": true,
+    "promotion_authority_remains_false": true
+  },
+  "operational_consequence": "TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_IS_THE_ACTIVE_RETRIEVAL_FRONTIER__DO_NOT_REPEAT_V1_OR_THE_CONSUMED_GITHUB_SOURCE_EPOCH__WAKE_ONLY_ON_MATERIAL_NEW_SCOPE_COMPLETE_OR_MATCHED_COMPARATOR_EVIDENCE",
+  "hard_nonclaims": [
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT",
+    "NO_OPEN_DOMAIN_SCOPE_COMPLETENESS_CLAIM",
+    "NO_GLOBAL_NONEXISTENCE_CLAIM",
+    "NO_TERMINAL_TOOLATHLON_EXECUTION_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
