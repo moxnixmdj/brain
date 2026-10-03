@@ -1,0 +1,95 @@
+name: Private V4 corpus freeze current
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/private-v4-corpus-freeze-current.yml"
+      - "v4_private_scan_work/current/**"
+permissions:
+  contents: read
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify pinned independently verified V4 inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object canonical/runtime/proof_atom_receipt_index_v4.py)" = "712443ddad23aed8d27df1e4f5372147c00ca57a"
+          test "$(git hash-object canonical/runtime/canonical_proof_atom_basis_v2.py)" = "5b5957f353edab6c86a34f947ef253099822b0d1"
+          test "$(git hash-object canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json)" = "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+          test "$(git hash-object canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json)" = "898e450c62c06cf6d1a4a3f826a255da9161a229"
+          test "$(git hash-object canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V4.json)" = "65d0e860110b0dce40d6f2016003d1612614dc28"
+          test "$(git hash-object canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json)" = "94f17692e7e875cb1ae603b8806e3f07484cbead"
+      - name: Run verified V4 private corpus index
+        shell: bash
+        run: |
+          set -euo pipefail
+          python canonical/runtime/proof_atom_receipt_index_v4.py > /tmp/v4-result.json
+          python - <<'PY'
+          import json, os
+          p="/tmp/v4-result.json"
+          d=json.load(open(p,encoding="utf-8"))
+          assert d["status"].startswith("PASS__CORPUS_BOUND_CONTENT_ADDRESSED_CANDIDATE_INDEX")
+          assert d["canonical_atom_count"]==40
+          assert d["new_reality_units_consumed"]==0
+          assert d["capability_credit_delta"]==0
+          assert d["family_credit_delta"]==0
+          assert d["execution_authority"] is False
+          assert d["promotion_authority"] is False
+          meta={
+            "schema":"PROJECT_BRAIN_PRIVATE_V4_CORPUS_FREEZE_CARRIER_RECEIPT_V2",
+            "base_sha":os.environ["BASE_SHA"],
+            "head_sha":os.environ["HEAD_SHA"],
+            "result_status":d["status"],
+            "canonical_atom_count":d["canonical_atom_count"],
+            "scanned_file_count":d["scanned_file_count"],
+            "scanned_corpus_manifest_sha256":d["scanned_corpus_manifest_sha256"],
+            "scan_policy_sha256":d["scan_policy_sha256"],
+            "basis_manifest_sha256":d["basis_manifest_sha256"],
+            "index_fingerprint_sha256":d["index_fingerprint_sha256"],
+            "candidate_match_count":d["candidate_match_count"],
+            "atoms_with_candidate_matches":d["atoms_with_candidate_matches"],
+            "atoms_without_candidate_matches":d["atoms_without_candidate_matches"],
+            "review_queue_length":d["review_queue_length"],
+            "new_reality_units_consumed":0,
+            "incremental_spend_usd":0,
+            "capability_credit_delta":0,
+            "family_credit_delta":0,
+            "execution_authority":False,
+            "promotion_authority":False
+          }
+          json.dump(meta,open("/tmp/carrier-receipt.json","w",encoding="utf-8"),indent=2,sort_keys=True)
+          PY
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      - name: Emit compact review queue to log
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/v4-result.json",encoding="utf-8"))
+          print(json.dumps({
+            "scanned_file_count":d["scanned_file_count"],
+            "candidate_match_count":d["candidate_match_count"],
+            "atoms_with_candidate_matches":d["atoms_with_candidate_matches"],
+            "atoms_without_candidate_matches":d["atoms_without_candidate_matches"],
+            "review_queue":d["review_queue"]
+          },sort_keys=True))
+          PY
+      - name: Upload private result only
+        uses: actions/upload-artifact@v4
+        with:
+          name: private-v4-current-corpus-freeze-result
+          path: |
+            /tmp/v4-result.json
+            /tmp/carrier-receipt.json
+          if-no-files-found: error
+          retention-days: 7
