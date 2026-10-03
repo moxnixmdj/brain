@@ -1,13 +1,13 @@
 """Compile the live terminal scheduling world from frozen predicates and current receipts.
 
-This is a scheduling-only, zero-credit compiler. It refuses to inherit a stale
-frontier count from historical activation files. The live unresolved predicate
-set is derived as:
+Scheduling only. Zero acceptance/execution/promotion credit.
+
+The live unresolved predicate set is always derived as:
 
     frozen registry - {PROVED, REFUTED current evidence claims}
 
-Historical certificate/action documents may be reused only after terminal
-targets are removed and exact current coverage is rechecked.
+Authority counts are cross-checked against that derived set. No historical
+predicate count is allowed to become an execution assumption.
 """
 from __future__ import annotations
 
@@ -34,7 +34,9 @@ def _fail(*errors: str) -> dict[str, Any]:
     }
 
 
-def _ids_from_registry(registry: Mapping[str, Any]) -> tuple[list[str], dict[str, Mapping[str, Any]], list[str]]:
+def _ids_from_registry(
+    registry: Mapping[str, Any],
+) -> tuple[list[str], dict[str, Mapping[str, Any]], list[str]]:
     errors: list[str] = []
     rows = registry.get("predicates")
     if not isinstance(rows, list):
@@ -126,11 +128,13 @@ def evaluate(
             if pid in unresolved_set:
                 keep.append(pid)
             else:
-                removed_certificate_targets.append({
-                    "certificate_id": str(row.get("id")),
-                    "predicate_id": pid,
-                    "state": states.get(pid, "TERMINAL"),
-                })
+                removed_certificate_targets.append(
+                    {
+                        "certificate_id": str(row.get("id")),
+                        "predicate_id": pid,
+                        "state": states.get(pid, "TERMINAL"),
+                    }
+                )
         if keep:
             row["target_predicates"] = keep
             live_certificates.append(row)
@@ -158,11 +162,13 @@ def evaluate(
             if pid in unresolved_set:
                 keep.append(pid)
             else:
-                removed_action_targets.append({
-                    "action_id": str(row.get("id")),
-                    "predicate_id": pid,
-                    "state": states.get(pid, "TERMINAL"),
-                })
+                removed_action_targets.append(
+                    {
+                        "action_id": str(row.get("id")),
+                        "predicate_id": pid,
+                        "state": states.get(pid, "TERMINAL"),
+                    }
+                )
         if keep:
             row["target_predicates"] = keep
             live_actions.append(row)
@@ -188,28 +194,50 @@ def evaluate(
         errors.append("AUTHORITY_CONTRACT_WORLD_NOT_CURRENT")
     if truth.get("behavioral_families") != "19/19_PROVISIONAL_BEHAVIORAL_PASS__P1_SCOPE_QUARANTINE_CLEARED__STRICT_OPUS55_ACCEPTANCE_SEPARATE":
         errors.append("AUTHORITY_BEHAVIORAL_WORLD_NOT_CURRENT")
-    if truth.get("opus55_acceptance") != "3/19_PASS__16/19_OPEN":
-        errors.append("AUTHORITY_ACCEPTANCE_WORLD_NOT_3_OF_19")
+    if truth.get("achieved") is not False:
+        errors.append("AUTHORITY_TERMINAL_ACHIEVED_STATE_UNEXPECTED")
+
+    atomic = authority.get("atomic_acceptance_frontier")
+    if not isinstance(atomic, Mapping):
+        errors.append("AUTHORITY_ATOMIC_FRONTIER_NOT_OBJECT")
+        atomic = {}
+    expected_total = atomic.get("total")
+    expected_proved = atomic.get("proved")
+    expected_unresolved = atomic.get("unresolved")
+    if expected_total != len(registry_ids):
+        errors.append(f"AUTHORITY_ATOMIC_TOTAL_{expected_total}_NE_LIVE_{len(registry_ids)}")
+    if expected_proved != len(proved):
+        errors.append(f"AUTHORITY_ATOMIC_PROVED_{expected_proved}_NE_LIVE_{len(proved)}")
+    if expected_unresolved != len(unresolved):
+        errors.append(f"AUTHORITY_ATOMIC_UNRESOLVED_{expected_unresolved}_NE_LIVE_{len(unresolved)}")
 
     if len(registry_ids) != 38:
         errors.append(f"REGISTRY_COUNT_NOT_38:{len(registry_ids)}")
-    if len(proved) != 8:
-        errors.append(f"PROVED_COUNT_NOT_8:{len(proved)}")
-    if len(unresolved) != 30:
-        errors.append(f"UNRESOLVED_COUNT_NOT_30:{len(unresolved)}")
 
     scheduled_frontier = scheduling.get("frontier")
     scheduled_hypergraph = scheduling.get("action_hypergraph")
-    scheduled_unresolved = scheduled_frontier.get("unresolved_predicates") if isinstance(scheduled_frontier, Mapping) else None
-    scheduled_coverage = scheduled_hypergraph.get("current_unresolved_predicate_coverage") if isinstance(scheduled_hypergraph, Mapping) else None
+    scheduled_unresolved = (
+        scheduled_frontier.get("unresolved_predicates")
+        if isinstance(scheduled_frontier, Mapping)
+        else None
+    )
+    scheduled_coverage = (
+        scheduled_hypergraph.get("current_unresolved_predicate_coverage")
+        if isinstance(scheduled_hypergraph, Mapping)
+        else None
+    )
 
     stale_reasons: list[str] = []
     if old_front_set != unresolved_set:
         stale_reasons.append("FRONTIER_V5_PREDICATE_SET_DIFFERS_FROM_LIVE_RECEIPT_DERIVED_SET")
     if scheduled_unresolved != len(unresolved):
-        stale_reasons.append(f"SCHEDULING_V6_UNRESOLVED_COUNT_{scheduled_unresolved}_NE_LIVE_{len(unresolved)}")
+        stale_reasons.append(
+            f"SCHEDULING_V6_UNRESOLVED_COUNT_{scheduled_unresolved}_NE_LIVE_{len(unresolved)}"
+        )
     if scheduled_coverage != len(unresolved):
-        stale_reasons.append(f"SCHEDULING_V6_ACTION_COVERAGE_{scheduled_coverage}_NE_LIVE_{len(unresolved)}")
+        stale_reasons.append(
+            f"SCHEDULING_V6_ACTION_COVERAGE_{scheduled_coverage}_NE_LIVE_{len(unresolved)}"
+        )
     if removed_action_targets:
         stale_reasons.append("HYPERGRAPH_V2_CONTAINS_TERMINAL_TARGETS")
     if removed_certificate_targets:
@@ -227,14 +255,16 @@ def evaluate(
     if errors:
         return _fail(*errors)
 
+    count = len(unresolved)
     return {
         "schema": SCHEMA,
-        "status": "PASS__LIVE_30_PREDICATE_WORLD_COMPILED__STALE_31_WORLD_REJECTED",
+        "status": f"PASS__LIVE_{count}_PREDICATE_WORLD_COMPILED__HISTORICAL_WORLD_FILTERED",
         "pass": True,
         "registry_predicate_count": len(registry_ids),
         "proved_predicate_count": len(proved),
         "refuted_predicate_count": len(refuted),
-        "unresolved_predicate_count": len(unresolved),
+        "unresolved_predicate_count": count,
+        "authority_opus55_acceptance": truth.get("opus55_acceptance"),
         "proved_predicates": sorted(proved),
         "unresolved_predicates": unresolved,
         "unresolved_kind_counts": dict(sorted(kind_counts.items())),
@@ -249,14 +279,15 @@ def evaluate(
         "removed_terminal_action_targets": removed_action_targets,
         "source_scheduling_world_stale": bool(stale_reasons),
         "source_scheduling_world_stale_reasons": sorted(stale_reasons),
-        "legacy_authority_next": authority.get("next"),
+        "legacy_authority_next": authority.get("next_terminal_action", authority.get("next")),
         "required_next": (
-            "INDEPENDENTLY_VERIFY_THIS_RECEIPT_DERIVED_30_PREDICATE_WORLD__"
+            f"INDEPENDENTLY_VERIFY_THIS_RECEIPT_DERIVED_{count}_PREDICATE_WORLD__"
             "RECOMPUTE_ZERO_REALITY_INFORMATION_DOMINANCE_AND_PROOF_FIRST_FRONTIER__"
             "ONLY_IF_NO_NONDOMINATED_ZERO_REALITY_ACTION_REMAINS_MAY_CURRENT_FRESH_REALITY_AUTHORITY_EXECUTE"
         ),
         "rule": (
             "LIVE_SCHEDULING_STATE_IS_DERIVED_FROM_FROZEN_REGISTRY_MINUS_CURRENT_TERMINAL_RECEIPTS__"
+            "AUTHORITY_ATOMIC_COUNTS_MUST_EQUAL_DERIVED_COUNTS__"
             "HISTORICAL_FRONTIER_COUNTS_NEVER_GRANT_EXECUTION_AUTHORITY"
         ),
         "new_reality_units_consumed": 0,
@@ -271,8 +302,10 @@ def evaluate(
 
 def main() -> int:
     root = Path(__file__).resolve().parents[2]
+
     def load(rel: str) -> dict[str, Any]:
         return json.loads((root / rel).read_text(encoding="utf-8"))
+
     out = evaluate(
         load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"),
         load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"),
