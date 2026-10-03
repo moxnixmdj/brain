@@ -47,7 +47,7 @@ def test_union_is_monotonic_and_late_hit_counts():
     assert event["answer_key_used_for_query_generation"] is False
 
 def test_failed_one_variant_does_not_fail_episode():
-    row=next(x for x in v12.selected_tasks() if x["episode_id"]=="CRATE_ERROR")
+    row=next(x for x in v12.selected_tasks() if x["episode_id"]=="NPM_PROCESS_EXEC")
     n={"i":0}
     def fake_provider(query,*,limit,timeout):
         n["i"]+=1
