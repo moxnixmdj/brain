@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CURRENT_TARGET_AFTER_FOUR_FINAL_ZEROS_AND_PATCHED_ROUTE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "slots": 210
+  },
+  "current_comparator": {
+    "verification_path": "canonical/verification/TB_SCIENCE_OPUS55_SNAPSHOT_IDENTITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verification_git_blob_sha": "3bff4c8ec68bba45d0538812101fbbfed7b9b2ec",
+    "exact_percent": 63.33333333333333,
+    "required_successes": 133,
+    "fail_lock_failures": 78
+  },
+  "repaired_route": {
+    "planner_blob": "fe7c0ce885197217774638df382aeb6f68ff38dd",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "integration_verification_path": "canonical/verification/TB_SCIENCE_PATCHED_REAL_HARBOR_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "integration_verification_blob": "4512996a6698463be367052b13a891bd0f647f73"
+  },
+  "consumed_slots": [
+    "terminal-bench-science/genomic-model-ranking::trial-0",
+    "terminal-bench-science/mri-harmonization::trial-0",
+    "terminal-bench-science/navigation-sensor-calibration::trial-0",
+    "terminal-bench-science/baseline-free-localization::trial-0"
+  ],
+  "reduction": {
+    "finalized_slots": 4,
+    "successes": 0,
+    "finalized_failures": 4,
+    "successes_remaining_for_pass_lock": 133,
+    "failures_remaining_before_fail_lock": 74,
+    "fixed_denominator": 210
+  },
+  "hard_rules": [
+    "V1_MANIFEST_SLOT_UNIVERSE_AND_ORDER_REMAIN_IMMUTABLE",
+    "CURRENT_OPUS55_PARITY_REMAINS_133_OF_210",
+    "ONLY_EXACT_SCORER_REWARD_AT_LEAST_1_COUNTS_SUCCESS",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "CONSUMED_SLOT_IDS_MUST_NEVER_BE_REPLAYED",
+    "PATCHED_ROUTE_GRANTS_NO_EXECUTION_UNTIL_SEPARATE_ONE_SLOT_AUTHORITY_IS_INDEPENDENTLY_VERIFIED_AND_MERGED"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
