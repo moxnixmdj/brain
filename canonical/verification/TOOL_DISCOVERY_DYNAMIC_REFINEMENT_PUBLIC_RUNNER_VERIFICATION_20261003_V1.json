@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CONDITIONAL_DYNAMIC_REFINEMENT__EXTERNAL_COMPLETE_INTERFACE_INSTANCE_OPEN__ZERO_CREDIT",
+  "source_brain_pr": 1100,
+  "source_brain_head": "249cb1dd68d93ef794b207efe1bdb643f600915d",
+  "exact_brain_blobs": {
+    "canonical/runtime/tool_discovery_dynamic_refinement_v1.py": "991c039c0b405bf77508ce7921abc69460f57332",
+    "canonical/tests/test_tool_discovery_dynamic_refinement_v1.py": "3314f7aa4921246c3c4031d7767a657759048b23",
+    "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json": "49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7",
+    "canonical/governance/TOOL_DISCOVERY_DYNAMIC_REFINEMENT_V1.json": "a09a2ef525fee949d5065329829a465bf97fb8ee",
+    "canonical/action_intents/2026-10-03_TOOL_DISCOVERY_DYNAMIC_REFINEMENT_V1.json": "385c31b5612236801571e9b1abf52dbc5cf6def8"
+  },
+  "bound_dependencies": {
+    "canonical/runtime/tool_discovery_dynamic_candidate_v3.py": "bbbee4d6baf8df937543644397abba38a67dce62",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1.json": "48ba33998e73b8eec2731be51a7ec78077ed0d4a"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1115,
+    "workflow_run_id": 37086170038,
+    "workflow_job_id": 111096827396,
+    "trigger_head": "5816cd2ccd3bf8074dce91d78439c925351c70e3",
+    "merge_commit": "224a689dac82281eeee41df063f93953b76f1a7a",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_PR_1100_CANDIDATE_BLOB_IDENTITIES_PASS",
+    "ADVERSARIAL_FAIL_CLOSED_TESTS_PASS",
+    "FROZEN_UNKNOWN_TOOL_DISCOVERY_AND_DISCOVER_IF_NEEDED_LITERALS_BOUND",
+    "DYNAMIC_V3_DISCOVER_PROBE_SELECT_ESCALATE_ACTION_VOCABULARY_BOUND",
+    "CONDITIONAL_PROGRAM_SIDE_REFINEMENT_OBLIGATIONS_PASS",
+    "CURRENT_EXTERNAL_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_REMAINS_OPEN",
+    "UNIVERSAL_TARGET_NOT_PROMOTED",
+    "ZERO_TERMINAL_REPLAY_ZERO_NEW_REALITY_ZERO_ACCEPTANCE_CREDIT"
+  ],
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "target_preserved": true,
+  "verified_conditional_implication": "IF_AN_INDEPENDENTLY_VERIFIED_DISCOVERY_INTERFACE_INSTANCE_SATISFIES_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1__THEN_DYNAMIC_V3_PROGRAM_SIDE_UNKNOWN_IDENTITY_DISCOVERY_PROGRESS_AND_SELECTION_OBLIGATIONS_ARE_DISCHARGED_UNDER_THE_BOUND_FROZEN_TARGET",
+  "minimum_missing_fact_after_verified_reduction": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+  "universal_target_proved": false,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
