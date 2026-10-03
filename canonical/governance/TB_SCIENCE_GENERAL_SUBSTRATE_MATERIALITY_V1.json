@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_GENERAL_SUBSTRATE_MATERIALITY_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_COUNTERFACTUAL_MATERIALITY_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "exact_inputs": {
+    "controller": "canonical/runtime/harbor_science_agent_v1.py",
+    "controller_git_blob_sha": "5d6685d66ca04cec5e332993329e997f6e9fe272",
+    "source_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "source_gate_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+  },
+  "fixed_substrate_interface": {
+    "output_type": "JSON_PROPOSALS_ONLY",
+    "environment_handle_exposed_to_substrate": false,
+    "direct_execution_authority_exposed_to_substrate": false,
+    "direct_finish_authority_exposed_to_substrate": false,
+    "proposal_fields": [
+      "material_requirements",
+      "candidates[action_id,covers,command,verify_command]",
+      "finish_summary"
+    ]
+  },
+  "counterfactual": {
+    "fixed_substrate_outputs": [
+      "DECLARE_R1",
+      "PROPOSE_ONE_LOCAL_ACTION_AND_ONE_LOCAL_VERIFY_COMMAND",
+      "REQUEST_FINISH_AFTER_OBSERVED_VERIFICATION"
+    ],
+    "brain_present": [
+      "COMMAND_POLICY_ADMITS_OR_REJECTS_COMMANDS",
+      "BRAIN_SELECTS_STRUCTURAL_PROPOSAL",
+      "HARBOR_TRANSPORT_ALONE_EXECUTES_ACTION",
+      "SEPARATE_VERIFY_COMMAND_MUST_RETURN_ZERO",
+      "BRAIN_LOCAL_STATE_ALONE_PROMOTES_REQUIREMENT_RESOLVED",
+      "BRAIN_ALONE_AUTHORIZES_FINISH_AFTER_ALL_FROZEN_REQUIREMENTS_RESOLVE"
+    ],
+    "brain_removed": "THE_SAME_SUBSTRATE_JSON_HAS_NO_ENVIRONMENT_HANDLE_OR_EXECUTION_API_AND THEREFORE PRODUCES_NO TASK_ENVIRONMENT_STATE CHANGE",
+    "implication": "THE_BRAIN_OWNED_RESEARCH_CONTROLLER_IS_CAUSALLY_LOAD_BEARING_FOR SAFE_ACTION_EXECUTION_VERIFICATION_STATE_TRANSITION_AND_FINISH_AUTHORITY WHILE SEMANTIC PROPOSALS REMAIN A GENERAL COGNITION SUBSTRATE ROLE"
+  },
+  "source_gate_projection_if_independently_verified": {
+    "benchmark_harness_zero_cost": true,
+    "scorer_frozen": true,
+    "brain_candidate_bound": true,
+    "brain_owned_operative_configuration": true,
+    "configuration_materially_constrains_execution": true,
+    "capability_package_contains_configuration": true,
+    "promotion_evaluates_brain_configured_system": true,
+    "external_hidden_target_capability_provider": false,
+    "ownership_claim_relies_on_model_standalone_superiority": false,
+    "future_use_requires_capability_rediscovery": false,
+    "model_role": "GENERAL_COGNITION_SUBSTRATE",
+    "model_dependency_count": 1,
+    "model_dependencies_declared": true,
+    "general_substrate_test_pass": true,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SUBSTRATE_SCIENTIFIC_SEMANTICS_ARE_CORRECT",
+    "NO_CLAIM_SUBSTRATE_DECLARED_COVERAGE_IS SEMANTICALLY TRUE",
+    "NO_TERMINAL_BENCH_SCIENCE_TASK_READ_OR_EXECUTED",
+    "NO_TB_SCIENCE_SCORE_CLAIM",
+    "NO_FAMILY_CAPABILITY_OR_ACCEPTANCE_CREDIT",
+    "MATERIAL_CONTROL_PROOF_DOES_NOT ITSELF AUTHORIZE TERMINAL CASE EXPOSURE"
+  ],
+  "terminal_results_observed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
