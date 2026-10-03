@@ -1,0 +1,37 @@
+{
+  "schema":"PROJECT_BRAIN_OSWORLD_V21_GITLAB_PROTOCOL_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date":"2026-10-04",
+  "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_UPSTREAM_BLOBS__GITLAB_NOT_RELEASE_PINNED__SHARED_SERVICE_FUNCTIONAL_CONTRACT__ZERO_CREDIT",
+  "subject":{
+    "path":"canonical/governance/OSWORLD_V21_GITLAB_PROTOCOL_RECONCILIATION_V1.json",
+    "git_blob_sha":"a6142a898df97c8d9691b6a810850fa8c962b035"
+  },
+  "independent_runner":{
+    "repository":"moxnixmdj/verification-capsule-runner",
+    "pull_request":1497,
+    "head_sha":"55d0bba1cad0e1d67a72450d5f0fd976d4cf8dd2",
+    "workflow_run_id":37163196069,
+    "workflow_job_id":111320730605,
+    "conclusion":"success",
+    "successful_step":"Run python capsules/osworld_v21_gitlab_protocol_reconciliation_v1/verify.py"
+  },
+  "verified":{
+    "release_manifest_exact":true,
+    "manifest_component_contract_exact":true,
+    "gitlab_absent_from_release_components":true,
+    "setup_skill_calls_gitlab_shared_service":true,
+    "gitlab_success_contract_is_reachability_plus_valid_token":true,
+    "public_eval_guide_requires_url_and_token_without_revision":true
+  },
+  "consequence":"DELETE_EXACT_TASK_WEB_GITLAB_REVISION_AS_OSWORLD_V21_COMPARABILITY_REQUIREMENT__PRESERVE_FUNCTIONAL_GITLAB_REACHABILITY_TOKEN_AND_PROTOCOL_PREFLIGHT",
+  "terminal_cases_consumed":0,
+  "new_reality_units_consumed":0,
+  "incremental_spend_usd":0,
+  "acceptance_credit_delta":0,
+  "family_credit_delta":0,
+  "capability_credit_delta":0,
+  "ownership_credit_delta":0,
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false
+}
