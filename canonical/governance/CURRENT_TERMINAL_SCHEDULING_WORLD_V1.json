@@ -4,11 +4,11 @@
   "status": "CANDIDATE__RECEIPT_DERIVED_30_PREDICATE_WORLD__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "objective": "Eliminate stale scheduling state by deriving the live Opus 5.5 acceptance work frontier directly from the frozen 38-predicate registry minus current PROVED/REFUTED evidence claims.",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "source_main_commit": "401206f7e3dcbee65acc0c7764cfe520a5876111",
+  "source_main_commit": "c13d69d949dd2fcee8cd6c1d5677642a1de0181e",
   "exact_inputs": {
     "current_terminal_authority": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-      "git_blob_sha": "d3367c9cc372adbd61e410ba5d5f475e8398bbf8"
+      "git_blob_sha": "ad482ff264d5cdd6286aaf2ffd32db47acd447f0"
     },
     "predicate_registry": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
