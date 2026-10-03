@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V6_OPEN_WORLD_HARDENING_ACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__OPEN_WORLD_RECALL_HARDENING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Make finding-the-right-thing robust to language, vocabulary, metadata, ranking, revision, graph, and source failures without turning open-world misses into false nonexistence.",
+  "base_authority": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V1.json",
+    "retrieval_lineage": "V5_OVER_V4_OVER_V3_OVER_VERIFIED_V2_BASE"
+  },
+  "exact_candidate_blobs": {
+    "canonical/runtime/evidence_omniretrieval_planner_v2.py": "959d14f11859467d7d1f010f588e0bad99dd667d",
+    "canonical/runtime/retrieval_monotonic_candidate_ledger_v1.py": "c52a269b599d2b2f9e0e018120a3377165629cc7",
+    "canonical/runtime/retrieval_bounded_enumerator_v1.py": "99b1f20ddd4b8dcceea19cfc57a1c0c5999f4632",
+    "canonical/runtime/retrieval_conditional_novelty_scheduler_v1.py": "025559f285952fa79f1db3b04f1f40cf6927b77f",
+    "canonical/runtime/retrieval_adversarial_universe_v2.py": "d545a453cedfdd0b8318189c4164232b592addb7",
+    "canonical/runtime/retrieval_open_world_controller_v6.py": "c205b31ab2f850973aa52cbf709f9e770ee8dacc",
+    "canonical/tests/test_retrieval_v6_open_world_hardening.py": "1048843c58631f11e83a8521e2509c1d30f4f6bc"
+  },
+  "verified_local_candidate_results": {
+    "tests": "9/9_PASS",
+    "generated_adversarial_cases": 291,
+    "pairwise_failure_dimension_coverage": true,
+    "lexical_only_recall_on_declared_fixture_universe": 0.9347079037800687,
+    "v6_recall_on_declared_finite_fixture_universe": 1.0,
+    "outside_scope_opaque_state": "UNKNOWN"
+  },
+  "mandatory_v6_invariants": [
+    "MONOTONIC_CANDIDATE_RETENTION",
+    "QUERYLESS_ENUMERATION_FOR_DECLARED_FINITE_ENUMERABLE_SCOPES",
+    "CONDITIONAL_NOVELTY_RANKING_OVER_RAW_POPULARITY",
+    "MULTILINGUAL_STRUCTURAL_BEHAVIORAL_HISTORY_GRAPH_ECOSYSTEM_ARCHIVE_CHANNELS",
+    "ZERO_YIELD_ROUNDS_NEVER_PROVE_COMPLETENESS",
+    "FINITE_FIXTURE_RECALL_1_NEVER_PROMOTES_TO_OPEN_WORLD_COMPLETENESS",
+    "VERIFIED_SUFFICIENT_DISPOSITION_REQUIRES_INDEPENDENT_RECEIPT"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_RETRIEVAL_COMPLETENESS_CLAIM",
+    "NO_ALL_LANGUAGE_SEMANTIC_COMPLETENESS_CLAIM",
+    "NO_PRIVATE_DELETED_OFFLINE_OR_INACCESSIBLE_SOURCE_COMPLETENESS_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
