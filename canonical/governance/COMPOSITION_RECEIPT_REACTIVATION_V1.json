@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_RECEIPT_REACTIVATION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__CURRENT_SOURCE_FAMILY_REACTIVATION_PLUS_SCOPED_MEMORY_BINDING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "objective": "Recompute composition component receipt admissibility after the independently verified delegation family closure, and admit the already-declared scoped memory ownership bridge without reviving tool discovery or inferring any new family mapping.",
+  "causal_breakthrough": "The Oct 2 composition quarantine treated delegation as source-family scope-incomplete. The Oct 3 universal delegation proof and acceptance reduction make that exact source-family closure precondition current again. The prior delegation component binding was independently verified; it can therefore be reactivated. The long-horizon memory family is also current PASS with a verified owned scoped package and an explicit frozen memory component bridge.",
+  "inputs": {
+    "frozen_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "historical_bridge": {
+      "path": "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_V1.json",
+      "git_blob_sha": "d6cb17f548493e64ca3d200d51b049412a939ef7"
+    },
+    "historical_bridge_verification": {
+      "path": "canonical/verification/COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "11784ce21ea55506559bc6fb8752b2b1b5585af5"
+    },
+    "memory_bridge": {
+      "path": "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V1.json",
+      "git_blob_sha": "d073b395c3ec335e5aebe45e100a8a9a345905f6"
+    },
+    "memory_package": {
+      "path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470"
+    },
+    "delegation_acceptance_receipt": {
+      "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+    }
+  },
+  "expected_current_projection": {
+    "scoped_proved_interface_count": 2,
+    "admitted_components": [
+      "delegation",
+      "memory"
+    ],
+    "open_interface_count": 10,
+    "quarantined_component": "tool discovery",
+    "parent_composition_predicate_closed": false,
+    "current_atomic_acceptance_change": 0
+  },
+  "hard_rules": [
+    "NO_COMPONENT_MAPPING_BY_ANALOGY",
+    "HISTORICAL_BINDING_MAY_REACTIVATE_ONLY_IF_THAT_EXACT_COMPONENT_BINDING_WAS_INDEPENDENTLY_VERIFIED_AND_ITS_SOURCE_FAMILY_IS_CURRENT_PASS",
+    "TOOL_DISCOVERY_REMAINS_QUARANTINED_WHILE_ITS_SOURCE_FAMILY_IS_OPEN",
+    "MEMORY_BINDING_IS_LIMITED_TO_THE_EXACT_OWNED_LONG_HORIZON_CONTINUITY_CLAIM_SCOPE",
+    "TEN_UNPROVED_COMPONENTS_REMAIN_OPEN",
+    "TWELVE_COMPONENT_PARENT_ATOM_REMAINS_UNPROVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "runtime": "canonical/runtime/composition_receipt_reactivation_v1.py",
+  "tests": "canonical/tests/test_composition_receipt_reactivation_v1.py",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_BYTES_AND_CURRENT_2_OF_12_PROJECTION__IF_PASS_PROMOTE_THE_COMPOSITION_COMPONENT_CURRENT_AUTHORITY_TO_2_OF_12_AND_RECOMPILE_THE_POST_DELEGATION_FRONTIER_WITHOUT_CLOSING_THE_PARENT_ATOM",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
