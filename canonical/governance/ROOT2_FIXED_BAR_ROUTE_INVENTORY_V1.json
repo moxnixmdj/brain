@@ -83,7 +83,14 @@
       ],
       "target": ">=1822 Elo",
       "state": "STRICT_ACCEPTANCE_OPEN__HISTORICAL_PRIVATE_EXECUTION_ROUTE_DELETED_ONLY",
-      "next": "BIND_COMPARABLE_AA_BRIEFCASE_ROUTE_OR_KEEP_BOTH_PREDICATES_OPEN__NO_CREDIT_FROM_OLD_ROUTE_DELETION"
+      "next": "BIND_COMPARABLE_AA_BRIEFCASE_ROUTE_OR_KEEP_BOTH_PREDICATES_OPEN__NO_CREDIT_FROM_OLD_ROUTE_DELETION",
+      "comparator_provenance": {
+        "path": "canonical/governance/AA_BRIEFCASE_OPUS55_COMPARATOR_PROVENANCE_RECONCILIATION_V1.json",
+        "git_blob_sha": "55974d8c5d8e32f276149543959ad88f2c5abb89",
+        "frozen_score": 1822,
+        "live_reference_score": 1808,
+        "rule": "PRESERVE_FROZEN_1822_UNLESS_EXPLICIT_TERMINAL_REBASE"
+      }
     },
     {
       "surface": "AutomationBench",
