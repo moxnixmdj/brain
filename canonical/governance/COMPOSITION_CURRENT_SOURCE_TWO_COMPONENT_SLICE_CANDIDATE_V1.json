@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_CURRENT_SOURCE_TWO_COMPONENT_SLICE_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__INDEPENDENT_COMBINED_SLICE_VERIFICATION_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "objective": "Combine only independently verified current-source memory and delegation component receipts and rerun the already verified frozen 12-interface proof slicer.",
+  "source_slicer": {
+    "path": "canonical/runtime/composition_component_proof_slicer_v1.py",
+    "git_blob_sha": "0e5028d8547bc3e17e7128b6311f734ac30a16d8"
+  },
+  "input_path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V4.json",
+  "expected_output_path": "canonical/verification/COMPOSITION_COMPONENT_PROOF_SLICE_20261003_V4.json",
+  "expected_result": {
+    "scoped_proved_count": 2,
+    "open_count": 10,
+    "scoped_proved_components": [
+      "memory",
+      "delegation"
+    ],
+    "parent_composition_predicate_closed": false,
+    "acceptance_change": 0
+  },
+  "hard_rules": [
+    "CURRENT_SOURCE_RECEIPTS_ONLY",
+    "NO_HISTORICAL_QUARANTINED_RECEIPT_REUSE",
+    "NO_TOOL_DISCOVERY_COMPONENT_CREDIT",
+    "NO_ADJACENT_PLUS_JOINED_COMPONENT_INHERITANCE",
+    "NO_PARENT_COMPOSITION_ACCEPTANCE_UNLESS_ALL_12_COMPONENTS_AND_INTERACTION_PROTOCOL_CLOSE",
+    "NO_FAMILY_OR_ATOMIC_ACCEPTANCE_CREDIT_FROM_COMPONENT_SLICE",
+    "NO_NEW_REALITY_OR_TERMINAL_REPLAY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
