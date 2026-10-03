@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_DYNAMIC_V4_REPAIR_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_REPAIR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Repair the Dynamic V3 global-optimality verifier blind spot while preserving the frozen Tool Discovery target and keeping the external complete-interface instance as the only remaining environmental fact.",
+  "base_main_commit": "1afab11f371b9bea130ad2c931fd35ee106c9f86",
+  "target_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "falsification": {
+    "path": "canonical/governance/TOOL_DISCOVERY_DYNAMIC_V3_GLOBAL_OPTIMALITY_FALSIFICATION_V1.json",
+    "git_blob_sha": "1b220547530022d96f146295f7579735b66150ae"
+  },
+  "repair_candidate": {
+    "path": "canonical/runtime/tool_discovery_dynamic_candidate_v4.py",
+    "git_blob_sha": "394cbc2e3092ef0bb870ccad9b092343275ca73e",
+    "tests": "canonical/tests/test_tool_discovery_dynamic_candidate_v4.py",
+    "tests_git_blob_sha": "3a4ebca8b261ebe8581db18dc638cec29adeebf4"
+  },
+  "conditional_universal_certificate": {
+    "path": "canonical/runtime/tool_discovery_dynamic_v4_conditional_universal_certificate_v1.py",
+    "git_blob_sha": "6cd7f4bbd4efb8cbc826142da58e19df5c849ad2",
+    "tests": "canonical/tests/test_tool_discovery_dynamic_v4_conditional_universal_certificate_v1.py",
+    "tests_git_blob_sha": "dcdde42e06c59bd6786a7fc50898bacdc1f6f349"
+  },
+  "interface_contract": {
+    "path": "canonical/governance/TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1.json",
+    "git_blob_sha": "49cc878eccc0fbc8fdd83d35e5fbd614c973ffa7",
+    "instance_verified": false
+  },
+  "repair_invariants": [
+    "ALL_AVAILABLE_UNQUERIED_DISCOVERY_SOURCES_ARE_EXHAUSTED_BEFORE_ANY_PROBE_OR_SELECT",
+    "DISCOVERY_RECEIPT_TOOLS_ARE_MERGED_INTO_THE_VISIBLE_CATALOG",
+    "ADMISSIBLE_TOOLS_ARE_EVALUATED_IN_DECLARED_COST_THEN_TOOL_ID_ORDER",
+    "SELECT_REQUIRES_CURRENT_EPOCH_POSITIVE_EVIDENCE_FOR_EVERY_REQUIRED_CAPABILITY",
+    "KNOWN_FALSE_ROUTE_IS_SKIPPED",
+    "STALE_VERSION_EVIDENCE_IS_IGNORED",
+    "ESCALATE_OCCURS_ONLY_AFTER_COMPLETE_DISCOVERY_AND_NO_EVIDENCE_SUPPORTED_SUFFICIENT_ROUTE"
+  ],
+  "compatibility_obligations": [
+    "LEGACY_PREENUMERATED_V2_POPULATION_REMAINS_PASSING",
+    "DYNAMIC_V3_1200_CASE_FALSIFICATION_GRID_REMAINS_PASSING",
+    "V3_GLOBAL_OPTIMALITY_COUNTEREXAMPLE_IS_REPAIRED"
+  ],
+  "conditional_theorem": "For every finite stable-epoch tool ecosystem satisfying TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1, V4 first saturates the authoritative identity universe, then cost-ordered current-epoch probing selects the globally least-cost admissible sufficient route with positive evidence for all required capabilities, or escalates only when no such route exists.",
+  "minimum_missing_fact_after_program_repair": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1",
+  "hard_rules": [
+    "DO_NOT_CLAIM_THE_EXTERNAL_INTERFACE_INSTANCE_EXISTS_FROM_PROGRAM_STRUCTURE",
+    "DO_NOT_GRANT_ACCEPTANCE_CAPABILITY_FAMILY_OR_PROMOTION_CREDIT_BEFORE_INDEPENDENT_VERIFICATION_AND_SEPARATE_ACCEPTANCE_REDUCTION",
+    "FINITE_SAMPLE_TESTS_SUPPORT_FALSIFICATION_AND_COMPATIBILITY_ONLY__THE_CONDITIONAL_THEOREM_IS_THE_SCOPE_ARGUMENT",
+    "IF_V4_VERIFICATION_FAILS__REJECT_THE_REPAIR_AND_PRESERVE_CURRENT_FAIL_CLOSED_ACCEPTANCE"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
