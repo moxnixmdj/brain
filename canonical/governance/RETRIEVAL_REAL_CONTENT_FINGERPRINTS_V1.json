@@ -1,0 +1,23 @@
+{
+  "schema":"PROJECT_BRAIN_RETRIEVAL_REAL_CONTENT_FINGERPRINTS_V1",
+  "date":"2026-10-03",
+  "selection_rule":"FULL_TEXT_TOKEN_FINGERPRINT_FOR_PINNED_PUBLIC_REPOSITORIES_WITH_RECURSIVE_TREE_PATH_COUNT_LE_8",
+  "fingerprints":{
+    "RW_CADRIP":{
+      "repository":"zackska/cadRip",
+      "commit":"6d59a510f7e72d0b5956f7d47dc3b730aaacdef0",
+      "path_count":3,
+      "files":[
+        {"path":"CadRip.py","git_blob_sha":"d86029d7aebcb887b3a7ad0b8c3cd4f0a51949c7"},
+        {"path":"README.md","git_blob_sha":"47b1717e6abce3b5d4e05a4c4a246755547ede6d"}
+      ],
+      "content_tokens":["line","text","words","symbol","symbol_size","cv2","matches","font_size","image","roi","template","distance","grouped_lines","label","page","pdf","result","sift","tolerance","chars","cluster_words","dbscan","dpi_pdf","grouping","numeric","ocr","pdfplumber","strings","angle","cluster_eps","clusters","decimal","description_keyword","diameters","min_conf","numeric_ratio","ocr_langs","reader","scale_factor","confidence","bbox","dimension","dimensions","drawing","drawings","extract","extraction","engineering","feature","matching","easyocr","fraction","fractions","symbols","visualization","diameter_template","dimensional"]
+    }
+  },
+  "hard_rules":[
+    "SELECTION_THRESHOLD_IS_DEFINED_BEFORE_CONTENT_SCORING",
+    "CONTENT_TOKENS_DERIVE_ONLY_FROM_EXACT_PINNED_FILES",
+    "CONTENT_FINGERPRINTS_ARE_CANDIDATE_EVIDENCE_NOT_SUFFICIENCY_AUTHORITY",
+    "NO_CONTENT_FINGERPRINT_TO_OPEN_WORLD_COMPLETENESS_INFERENCE"
+  ]
+}
