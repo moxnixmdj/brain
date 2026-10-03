@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_V01_PUBLIC_GITHUB_CARRIER_ATTAINABILITY_V1",
+  "date": "2026-10-03",
+  "status": "ZERO_REALITY_CARRIER_ATTAINABILITY__INDEPENDENT_PUBLIC_RUNNER_PASS__BRAIN_SCORE_NOT_EXECUTED__ZERO_CREDIT",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "frozen_target": {
+    "surface": "Terminal-Bench-Science 0.1",
+    "target_score": 0.587,
+    "trials_per_task": 3
+  },
+  "upstream_release": {
+    "repository": "harbor-framework/terminal-bench-science",
+    "tag": "v0.1.0",
+    "commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "tree": "d880cb1969f28eb0f7f85df681232e26b2a3e7e3",
+    "task_count": 70,
+    "release_scope": "70_EXPERT_CURATED_RESEARCH_WORKFLOW_TASKS"
+  },
+  "zero_reality_method": {
+    "read_surface": "TASK_TOML_RESOURCE_METADATA_ONLY",
+    "forbidden_surface": [
+      "TASK_INSTRUCTIONS",
+      "TASK_TESTS",
+      "TASK_SOLUTIONS",
+      "TASK_GRADERS",
+      "MODEL_OUTPUTS"
+    ],
+    "benchmark_tasks_executed": 0,
+    "model_calls": 0,
+    "incremental_spend_usd": 0
+  },
+  "read_only_resource_census": {
+    "task_count": 70,
+    "nominal_public_runner_envelope_used_for_preflight": {
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 14336,
+      "gpus": 0
+    },
+    "compatible_tasks_observed_in_metadata_audit": 57,
+    "incompatible_tasks_observed_in_metadata_audit": 13,
+    "max_full_score_if_compatible_tasks_score_1_and_incompatible_score_0": 0.8142857142857143,
+    "required_mean_on_57_compatible_tasks_to_reach_0_587_if_13_incompatible_score_0": 0.7208771929824561,
+    "interpretation": "SUPPORTING_PREFLIGHT_ONLY__INDEPENDENT_LIVE_RUNNER_VERIFICATION_IS_LOAD_BEARING_FOR_CARRIER_ATTAINABILITY"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1402,
+    "verifier_head_sha": "03802ae3e4dfcafe77064b9904712dfda54c9a9d",
+    "merge_commit": "3ec92e81f763646c56bdb83e62a22bd08081d9d0",
+    "workflow_run_id": 37153570660,
+    "workflow_job_id": 111292228902,
+    "conclusion": "success",
+    "verifier_blobs": {
+      "verify_tb_science_public_carrier_v1.py": "c576f058206940b2c4f89f91d3fa0da8b1416411",
+      "test_verify_tb_science_public_carrier_v1.py": "8093c98614a920b18405ae38867db146ecf03756",
+      ".github/workflows/verify-tb-science-public-carrier-v1.yml": "be9eac0f58c20e6c849c56c0764e60e2700aa3a3"
+    },
+    "verified_scope": [
+      "EXACT_V01_70_TASK_METADATA_POPULATION_BOUND",
+      "LIVE_PUBLIC_GITHUB_HOSTED_RUNNER_RESOURCE_MEASUREMENT",
+      "DOCKER_AVAILABLE",
+      "DOCKER_COMPOSE_AVAILABLE",
+      "THRESHOLD_ATTAINABILITY_MATHEMATICALLY_PASS",
+      "NO_TASK_CASE_CONTENT_CONSUMED"
+    ]
+  },
+  "consequence": "TB_SCIENCE_ZERO_COST_CARRIER_ATTAINABILITY_BLOCKER_DISCHARGED__EXACT_BRAIN_SCORE_REMAINS_IRREDUCIBLE_ROOT2_FACT_AFTER_ZERO_REALITY_FIXED_POINT",
+  "hard_nonclaims": [
+    "ATTAINABILITY_IS_NOT_BRAIN_SCORE",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_OPUS_PARITY_CLAIM",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
