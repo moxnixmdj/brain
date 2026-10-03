@@ -1,0 +1,57 @@
+name: Account bound route preflight
+on:
+  push:
+    branches:
+      - preflight/account-bound-routes-20261003
+    paths:
+      - ".github/workflows/preflight-account-bound-routes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+    steps:
+      - name: Check Hugging Face gated access without reading cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          token="${HF_TOKEN:-${HUGGINGFACE_TOKEN:-}}"
+          if [ -z "$token" ]; then
+            echo "HF_CREDENTIAL=ABSENT"
+            exit 0
+          fi
+          for repo in osworld_v2_tasks osworld_v2_assets_gated; do
+            code="$(curl -sS -o "/tmp/${repo}.json" -w '%{http_code}'               -H "Authorization: Bearer $token"               "https://huggingface.co/api/datasets/xlangai/${repo}/revision/osworld-v2.1" || true)"
+            if [ "$code" = "200" ]; then
+              echo "HF_${repo}=ACCESSIBLE"
+            else
+              echo "HF_${repo}=HTTP_${code}"
+            fi
+          done
+          rm -f /tmp/osworld_v2_tasks.json /tmp/osworld_v2_assets_gated.json
+
+      - name: Check Gemini model metadata without generation
+        shell: bash
+        run: |
+          set -euo pipefail
+          key="${GEMINI_API_KEY:-${GOOGLE_API_KEY:-}}"
+          if [ -z "$key" ]; then
+            echo "GEMINI_CREDENTIAL=ABSENT"
+            exit 0
+          fi
+          code="$(curl -sS -o /tmp/gemini.json -w '%{http_code}'             "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash?key=$key" || true)"
+          if [ "$code" = "200" ]; then
+            echo "GEMINI_3_5_FLASH_METADATA=ACCESSIBLE"
+          else
+            echo "GEMINI_3_5_FLASH_METADATA=HTTP_${code}"
+          fi
+          rm -f /tmp/gemini.json
