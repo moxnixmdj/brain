@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V7_SANITIZED_DIAGNOSTIC_EPOCH_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_IFF_EXACT_BINDINGS_AND_POINT_OF_USE_ROOT_MATCH_PASS__REPLAY72_DIAGNOSTIC_ONLY__ZERO_CREDIT",
+  "active": true,
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Authorize exactly one sanitized causal-classification replay of the already-exposed 72-case prefix. No case IDs, prompts, responses, raw exception text, scoring, case 73+, promotion, or acceptance credit.",
+  "exact_binding": {
+    "candidate_path": "canonical/governance/LIVEBENCH_V7_SANITIZED_DIAGNOSTIC_EPOCH_CANDIDATE_V1.json",
+    "candidate_git_blob_sha": "26bd7a5ef24b85b1d57a38d6656876affa036e69",
+    "diagnostic_repository": "moxnixmdj/verification-capsule-runner",
+    "diagnostic_path": "diagnose_livebench_replay72_v7_sanitized.py",
+    "diagnostic_git_blob_sha": "e9a5a5937b19e76bf04444c288e3a75113874ed7",
+    "classifier_path": "livebench_v7_sanitized_classifier.py",
+    "classifier_git_blob_sha": "44df7313c83914204299953dda81900fae85ab68",
+    "base_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "root_git_blob_sha": "822d7a0e64b2e919a873526d111e7202c40e1f5b",
+    "replay_case_count": 72
+  },
+  "independent_subject_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1803,
+    "workflow_run_id": 37192412598,
+    "workflow_job_id": 111407201252,
+    "merged_commit": "a8ab207fa2a6ed1c6e4ed5b846e032dd440327ed",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "terminal_cases_consumed": 0,
+    "sanitized_static_code_only": true,
+    "no_case_ids_prompts_responses_or_raw_exceptions_emitted": true
+  },
+  "point_of_use_gates": [
+    "CURRENT_ROOT_GIT_BLOB_EQUALS_822d7a0e64b2e919a873526d111e7202c40e1f5b",
+    "EXACT_DIAGNOSTIC_CLASSIFIER_AND_BASE_EXECUTOR_BLOBS_MATCH",
+    "PUBLIC_STANDARD_GITHUB_RUNNER",
+    "ZERO_INCREMENTAL_SPEND",
+    "REPLAY_LIMIT_EQUALS_72",
+    "NO_CASE_73_OR_LATER",
+    "OUTPUT_CONTRACT_ENFORCED"
+  ],
+  "authority": {
+    "execution": true,
+    "replay_existing_prefix": true,
+    "predicate_local_diagnostic_reality": true,
+    "new_case_exposure": false,
+    "global_fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "hard_rules": [
+    "ONE_DIAGNOSTIC_REPLAY_EPOCH_ONLY",
+    "NO_CASE_73_OR_LATER",
+    "NO_CASE_IDS_EMITTED",
+    "NO_PROMPT_TEXT_EMITTED",
+    "NO_RESPONSE_TEXT_EMITTED",
+    "NO_RAW_EXCEPTION_TEXT_EMITTED",
+    "NO_CASE_TO_CLASS_MAPPING_EMITTED",
+    "NO_PROMPT_OR_RESPONSE_CONTENT_USED_TO_DESIGN_REPAIR",
+    "NO_POST_PROMPT_CAPABILITY_ACQUISITION",
+    "NO_POST_PROMPT_EXTERNAL_NETWORK",
+    "NO_POST_PROMPT_PACKAGE_INSTALLATION",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "FAIL_CLOSED_ON_ANY_BINDING_ROOT_OR_OUTPUT_CONTRACT_DRIFT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "promotion_authority": false
+}
