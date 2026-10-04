@@ -1,0 +1,174 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V4",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CIRCLECI_FREE_XLARGE_ROUTE_DELETED__FINANCE_AGENT_V2_PUBLIC_RUNNER_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT__NO_FRESH_REALITY",
+  "supersedes_for_scheduling_if_verified": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json",
+  "source_bindings": {
+    "action_intent": {
+      "path": "canonical/action_intents/2026-10-04_ROOT2_FRONTIER_V4_TRUTH_REPAIR_V1.json",
+      "git_blob_sha": "f093a5c9354186b2e3f53b329d61dbf3bbe4f96a"
+    },
+    "prior_frontier_v3": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json",
+      "git_blob_sha": "681123ef6cff3506d66af6b31b61c8bc14a8a913"
+    },
+    "circleci_contradiction_reconciliation": {
+      "path": "canonical/governance/TB4_CIRCLECI_FREE_XLARGE_CONTRADICTION_RECONCILIATION_20261004_V1.json",
+      "git_blob_sha": "0c5d16da02e7a71c5583f7c1a743adf389fc47b1"
+    },
+    "buildkite_documentary_reduction": {
+      "path": "canonical/governance/TB4_BUILDKITE_DOCUMENTARY_PREFLIGHT_REDUCTION_20261004_V1.json",
+      "git_blob_sha": "2997d7f95227d024a55aa201b3fced53f85a01e8"
+    },
+    "finance_agent_v2_public_runner": {
+      "path": "canonical/governance/FINANCE_AGENT_V2_PUBLIC_RUNNER_ROUTE_RECONCILIATION_20261004_V1.json",
+      "git_blob_sha": "126ff389982aab89f810388b1adbe402c25a7a59"
+    },
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "cc87fffba6b7a967fa89fd8c8c828b2b6d842ad7"
+    }
+  },
+  "exact_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "root2_touching_predicates": 19
+  },
+  "causal_action_order": [
+    "DELETE_ALREADY_DISCHARGED_OR_DOMINATED_ROUTES",
+    "EXECUTE_NAMED_ACCOUNT_OR_PROTOCOL_FACTS",
+    "EXECUTE_ONLY_INFORMATION_POSITIVE_OWNER_OR_CARRIER_WAKE_EDGES",
+    "RECOMPUTE_ZERO_REALITY_FIXED_POINT_AFTER_EACH_VERIFIED_DELTA",
+    "AUTHORIZE_ONE_MINIMUM_REALITY_TRANSACTION_ONLY_AFTER_FIXED_POINT"
+  ],
+  "verified_or_primary_source_deltas": [
+    {
+      "target": "CODING_TB4_GE_66_4",
+      "delete": "TB4_CIRCLECI_FREE_PLAN_XLARGE_GEN2_PREFLIGHT_ROUTE",
+      "preserve": "TB4_BUILDKITE_ACCOUNT_AND_ZERO_CASE_PREFLIGHT",
+      "reason": "CURRENT_CIRCLECI_PLAN_TABLE_EXCLUDES_XLARGE_FOR_FREE__TB4_MINIMUM_RECOVERY_REQUIRES_8_VCPU_PER_TASK"
+    },
+    {
+      "target": "FINANCE_AGENT_V2_GE_58_59",
+      "delete": "UNSPECIFIED_EXACT_ROUTE_OR_OWNER_RESULT_ONLY_WAIT",
+      "replace_with": [
+        "VALS_PLATFORM_APPROVAL_AND_EXACT_SUITE_ID_ROUTE_WITH_PUBLIC_CUSTOM_HARNESS",
+        "OWNER_RUN_RECEIPT_AS_ALTERNATIVE"
+      ],
+      "reason": "FIRST_PARTY_VALS_FINANCE_AGENT_V2_REPO_PUBLISHES_RUNNER_AND_CUSTOM_MODEL_HOOK__EXACT_SCORED_SUITE_ACCESS_REMAINS_GATED"
+    },
+    {
+      "target": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "preserve_remaining": [
+        "metric:matched_quality",
+        "matched_quality_noninferiority"
+      ],
+      "reason": "REQUIRED_CLAIM_COVERAGE_ALREADY_DELETED_BY_PRIOR_VERIFIED_V2_DELTA"
+    }
+  ],
+  "runnable_zero_reality": [
+    "TB4_BUILDKITE_ACCOUNT_AND_ZERO_CASE_PREFLIGHT_WHEN_TRIAL_ACCOUNT_ACCESS_IS_AVAILABLE",
+    "HLE_FULL_2500_ACCOUNT_ACCESS_AND_GRADER_EQUIVALENCE",
+    "CHARTOGRAPHY_PROJECT_SPECIFIC_QUOTA_OBSERVATION",
+    "OSWORLD_GATED_ASSET_ACCESS_AND_END_TO_END_PROTOCOL_EQUIVALENCE",
+    "GDPVAL_EXACT_PAIRWISE_ROUTE_OR_STRONGER_PROOF",
+    "FINANCE_COMPONENTWISE_PREMISES_AND_NORMALIZATION_AGGREGATION",
+    "FINANCE_AGENT_V2_VALS_PLATFORM_APPROVAL_SUITE_ID_CUSTOM_HARNESS_AND_ZERO_COST_TOOL_DEPENDENCY_PREFLIGHT",
+    "SYNTHESIS_MATCHED_QUALITY_METRIC_AND_NONINFERIORITY_ONLY",
+    "BIND_OWNER_RECEIPTS_ON_ARRIVAL",
+    "SEARCH_ONLY_NEW_LOAD_BEARING_CEILING_OR_DOMINANCE_CERTIFICATES"
+  ],
+  "waiting_external_facts": [
+    "BUILDKITE_RUNTIME_DISK_DOCKER_HARD_STOP_AND_PROTOCOL_PREFLIGHT",
+    "HUGGING_FACE_HLE_ACCOUNT_ACCESS",
+    "GOOGLE_AI_STUDIO_PROJECT_QUOTA",
+    "HUGGING_FACE_OSWORLD_GATED_ASSET_ACCESS",
+    "VALS_PLATFORM_FINANCE_AGENT_V2_APPROVAL_AND_EXACT_SUITE_ID",
+    "FINANCE_AGENT_V2_ZERO_COST_TOOL_DEPENDENCY_READINESS",
+    "ARTIFICIAL_ANALYSIS_OWNER_RESULT",
+    "VALS_MYSTERYMECHANISM_OWNER_OR_EXACT_ROUTE_RESULT",
+    "COGNITION_OWNER_RESULT",
+    "ZAPIER_OWNER_RESULT",
+    "CURSOR_POLICY_CHANGE_OR_STRONGER_PROOF"
+  ],
+  "exhausted_or_deleted": [
+    {
+      "route": "TB4_CIRCLECI_FREE_XLARGE_GEN2",
+      "state": "DELETED_BY_CURRENT_PRIMARY_SOURCE_PLAN_TABLE",
+      "resume": "MATERIAL_PRIMARY_SOURCE_OR_ACCOUNT_SPECIFIC_ZERO_SPEND_8CPU_CHANGE"
+    },
+    {
+      "route": "CURSORBENCH_OWNER_ACCESS",
+      "state": "CLOSED_BY_DIRECT_OWNER_REPLY",
+      "resume": "MATERIAL_POLICY_CHANGE_OR_STRONGER_SCOPE_COMPLETE_PROOF"
+    },
+    {
+      "route": "AUTOMATIONBENCH_PUBLIC600_EQUIVALENCE",
+      "state": "SATURATED_NON_SUBSTITUTABLE",
+      "resume": "EXACT_PRIVATE_ROUTE_OWNER_EVIDENCE_OR_STRONGER_SCOPE_COMPLETE_PROOF"
+    },
+    {
+      "route": "GENERIC_ROOT3_SEARCH",
+      "state": "SATURATED_UNDER_CURRENT_EVIDENCE",
+      "resume": "NEW_SCOPE_CERTIFICATE_OR_UPSTREAM_SCOPE_RECEIPT_OR_FRESH_REALITY_AUTHORITY"
+    }
+  ],
+  "fresh_reality_preserved_not_authorized": [
+    "LIVEBENCH_IF_BRAIN_SCORE",
+    "TB_SCIENCE_BRAIN_SCORE",
+    "ANY_NEW_FIXED_BAR_BRAIN_SCORE_AFTER_ROUTE_COMPLETION",
+    "MATCHED_SUPERPORTFOLIO_EMPIRICAL_WAVE",
+    "ROOT3_DIRECT_ORACLE_RESIDUAL"
+  ],
+  "probability_policy": {
+    "rule": "DO_NOT_INVENT_POINT_PROBABILITIES_WITHOUT_CALIBRATED_ROUTE_HISTORY",
+    "ranking": "MAXIMIZE_EXPECTED_TERMINAL_INFORMATION_VALUE_PER_CRITICAL_PATH_SECOND",
+    "formula": "priority(a)=P(useful_delta|evidence)*terminal_fanout(a)*information_gain(a)*downstream_action_deletion(a)/(critical_path_time(a)+epsilon)",
+    "correlation_rule": "PARALLELIZE_ORTHOGONAL_FAILURE_MODES__DO_NOT_DOUBLE_COUNT_CORRELATED_OR_UNCALIBRATED_ROUTES",
+    "update_rule": "USE_JEFFREYS_BETA_POSTERIOR_ONLY_FOR_ACTUAL_REPEATED_BERNOULLI_ROUTE_OBSERVATIONS__OTHERWISE_PRESERVE_INTERVAL_OR_UNKNOWN"
+  },
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_TERMINAL_CASE_EXPOSURE_BEFORE_ZERO_REALITY_FIXED_POINT",
+    "NO_PUBLIC_PRIVATE_SUBSTITUTION_WITHOUT_EXACT_OR_SUPERSET_PROOF",
+    "NO_ACCEPTANCE_CREDIT_FROM_ROUTE_DISCOVERY_OR_SCHEDULING",
+    "RECOMPUTE_AFTER_EACH_VERIFIED_DELTA",
+    "NO_CIRCLECI_FREE_XLARGE_ROUTE_UNLESS_REOPEN_CONDITION_IS_VERIFIED",
+    "NO_FINANCE_AGENT_V2_SCORE_EXECUTION_BEFORE_PLATFORM_SUITE_AND_ZERO_COST_TOOL_DEPENDENCIES_ARE_BOUND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "tb4_carrier_portfolio": {
+    "policy": "PROMOTE_FIRST_FULLY_ADMISSIBLE_ZERO_COST_ROUTE__CURRENT_LIVE_DOCUMENTED_CANDIDATE_SET_EXCLUDES_CIRCLECI_FREE_XLARGE",
+    "candidates": [
+      {
+        "provider": "Buildkite",
+        "path": "canonical/governance/TB4_BUILDKITE_ALL_ACCESS_TRIAL_CARRIER_CANDIDATE_20261004_V1.json",
+        "state": "DOCUMENTARY_REQUIREMENTS_REDUCED__ACCOUNT_ZERO_CASE_RUNTIME_PREFLIGHT_OPEN"
+      }
+    ],
+    "deleted": [
+      {
+        "provider": "CircleCI",
+        "reason": "CURRENT_FREE_PLAN_RESOURCE_TABLE_EXCLUDES_XLARGE__4_VCPU_LARGE_DOES_NOT_MEET_8_VCPU_PER_TASK_ENVELOPE"
+      }
+    ]
+  }
+}
