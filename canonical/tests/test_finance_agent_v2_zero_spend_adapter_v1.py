@@ -179,5 +179,52 @@ class Tests(unittest.IsolatedAsyncioTestCase):
         self.out = {"restore": lambda: None}
 
 
+class OriginalTavilyTool:
+    name = "web_search"
+    def __init__(self):
+        self.client = FakeTavilyClient()
+
+
+class PreGetAgentIntegrationTests(unittest.IsolatedAsyncioTestCase):
+    async def test_pre_get_agent_patch_preserves_construction_and_guards_calls(self):
+        mod = tools_module()
+        get_agent_mod = types.SimpleNamespace(TavilyWebSearch=OriginalTavilyTool)
+        original_cls = get_agent_mod.TavilyWebSearch
+        out = a.install_before_get_agent(
+            get_agent_module=get_agent_mod,
+            tools_module=mod,
+            snapshots={p: snap(p) for p in ("tavily", "sec_api", "tiingo")},
+            outcome_observer=safe_outcome,
+        )
+        try:
+            tool = get_agent_mod.TavilyWebSearch()
+            self.assertIsInstance(tool, OriginalTavilyTool)
+            await tool.client.search(query="x")
+            await tool.client.search(query="y")
+            self.assertEqual(out["state"].ledger("tavily").attempted_calls, 2)
+            self.assertEqual(out["state"].ledger("tavily").observed_calls, 2)
+
+            sess = mod.aiohttp.ClientSession()
+            async with sess.post("https://api.sec-api.io/full-text-search") as _:
+                pass
+            async with sess.get("https://api.tiingo.com/tiingo/daily/AAPL/prices") as _:
+                pass
+            self.assertEqual(out["state"].ledger("sec_api").attempted_calls, 1)
+            self.assertEqual(out["state"].ledger("tiingo").attempted_calls, 1)
+        finally:
+            out["restore"]()
+        self.assertIs(get_agent_mod.TavilyWebSearch, original_cls)
+
+    async def test_pre_get_agent_missing_class_fails_closed(self):
+        mod = tools_module()
+        with self.assertRaises(g.ZeroSpendBlocked):
+            a.install_before_get_agent(
+                get_agent_module=types.SimpleNamespace(),
+                tools_module=mod,
+                snapshots={p: snap(p) for p in ("tavily", "sec_api", "tiingo")},
+                outcome_observer=safe_outcome,
+            )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
