@@ -146,3 +146,55 @@ def test_required_forbidden_exact_overlap_uses_boundary_destroying_carrier():
     assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
     assert "response" in out["response"].lower()
     assert re.search(r"\\bresponse\\b", out["response"], re.I) is None
+
+
+def test_section_forbidden_literal_is_proved_unsat_not_solver_failure():
+    prompt = (
+        "Do not include keywords ['section'] in the response. "
+        "Your response must have 2 sections. Mark the beginning of each section with Section X, such as:\n"
+        "Section 1\n[content of section 1]\nSection 2\n[content of section 2]"
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PROVED_UNSAT_PUBLIC_CHECKER_CONJUNCTION"
+    assert out["unsat_certificate"] == "MANDATORY_SECTION_SPLITTER_FORBIDDEN:section"
+
+
+def test_end_phrase_forbidden_literal_is_proved_unsat():
+    prompt = (
+        "Do not include keywords ['other'] in the response. "
+        "Finish your response with this exact phrase Any other questions?. No other words should follow this phrase."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PROVED_UNSAT_PUBLIC_CHECKER_CONJUNCTION"
+    assert out["unsat_certificate"] == "MANDATORY_END_PHRASE_FORBIDDEN:other"
+
+
+def test_nth_first_word_forbidden_literal_is_proved_unsat():
+    prompt = (
+        "Do not include keywords ['anchor'] in the response. "
+        "There should be 2 paragraphs. Paragraphs and only paragraphs are separated with each other by two "
+        "new lines as if it was '\\n\\n' in python. Paragraph 2 must start with word anchor."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PROVED_UNSAT_PUBLIC_CHECKER_CONJUNCTION"
+    assert out["unsat_certificate"] == "MANDATORY_NTH_FIRST_WORD_FORBIDDEN:anchor"
+
+
+def test_less_than_one_sentence_with_required_content_is_proved_unsat():
+    prompt = (
+        "Your response should contain less than 1 sentences. "
+        "Include keywords ['signal'] in the response."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PROVED_UNSAT_PUBLIC_CHECKER_CONJUNCTION"
+    assert out["unsat_certificate"] == "SENTENCE_LT1_CONFLICTS_WITH_MANDATORY_NONEMPTY_OUTPUT"
+
+
+def test_less_than_one_sentence_with_quotation_has_zero_content_witness():
+    prompt = (
+        "Your response should contain less than 1 sentences. "
+        "Wrap your entire response with double quotation marks."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["response"] == '""'
