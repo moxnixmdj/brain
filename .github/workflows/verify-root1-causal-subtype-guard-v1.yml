@@ -1,0 +1,31 @@
+name: Verify Root1 causal subtype guard V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/root1_causal_subtype_guard_v1.py"
+      - "canonical/tests/test_root1_causal_subtype_guard_v1.py"
+      - "canonical/governance/ROOT1_CAUSAL_SUBTYPE_GUARD_V1.json"
+      - "canonical/action_intents/2026-10-04_ROOT1_CAUSAL_SUBTYPE_GUARD_V1.json"
+      - ".github/workflows/verify-root1-causal-subtype-guard-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile causal subtype guard
+        run: |
+          python -m py_compile canonical/runtime/root1_causal_subtype_guard_v1.py
+      - name: Run causal subtype guard tests
+        run: |
+          export PYTHONPATH=.
+          python -m unittest canonical.tests.test_root1_causal_subtype_guard_v1 -v
