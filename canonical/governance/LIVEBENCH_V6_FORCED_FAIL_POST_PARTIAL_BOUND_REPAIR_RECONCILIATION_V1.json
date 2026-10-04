@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V6_FORCED_FAIL_POST_PARTIAL_BOUND_REPAIR_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "TRUTH_RECONCILIATION__V6_EXACT_ZERO_RECEIPTS_REMAIN_SUFFICIENT__GENERIC_LOWER_BOUND_FORCED_FAIL_BUG_DOES_NOT_INVALIDATE_THIS_EXACT_REPLAY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "generic_truth_repair": {
+    "path": "canonical/governance/LIVEBENCH_PARTIAL_CREDIT_UPPER_BOUND_TRUTH_REPAIR_20261004_V1.json",
+    "rule": "A_PROVED_SCORE_LOWER_BOUND_DOES_NOT_ITSELF_PROVE_A_MATCHING_SCORE_UPPER_BOUND",
+    "consequence": "GENERIC_FORCED_FAIL_MUST_DEFAULT_UNPROVED_CASE_UPPER_BOUND_TO_1_0"
+  },
+  "v6_exact_replay": {
+    "binding_path": "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_BINDING_V1.json",
+    "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "independent_verifier_commit": "f3c439f329c7b481a8448a0619e7696111e05ecc",
+    "verified_case_count": 72,
+    "verified_unique_question_ids": 72,
+    "all_case_receipt_scores_exactly": 0.0,
+    "all_case_response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "all_case_scoring_errors_null": true,
+    "response_interpretation": "SHA256_IS_THE_STANDARD_EMPTY_BYTE_STRING_HASH__THE_FROZEN_CANDIDATE_PRODUCED_EMPTY_RESPONSES_ON_ALL_72_REPLAYED_CASES",
+    "observed_score_mass": 0.0,
+    "remaining_unseen_count": 128,
+    "population_count": 200,
+    "threshold_percent": 65.7
+  },
+  "proof": {
+    "why_generic_bug_does_not_apply": "THE_72_V6_CASES_ARE_NOT MERELY CASES_WITH_LOWER_BOUND_ZERO__THE_INDEPENDENT RECEIPTS RECORD THE ACTUAL FROZEN SCORER RESULT score=0.0 FOR EACH CASE WITH scoring_error=null",
+    "proved_case_upper_bound": 0.0,
+    "remaining_case_upper_bound": 1.0,
+    "maximum_total_score_mass": 128.0,
+    "maximum_full_population_percent": 64.0,
+    "inequality": "64.0 < 65.7",
+    "conclusion": "THE_FROZEN_V6_CANDIDATE_REMAINS_MATHEMATICALLY_UNABLE_TO_PASS__NO_CASE_73_OR_LATER_IS_REQUIRED_FOR_THIS_CANDIDATE"
+  },
+  "scheduler_effect": [
+    "KEEP_THE_FROZEN_V6_CANDIDATE_DEAD",
+    "DO_NOT_REUSE_THE_UNSOUND_GENERIC_LOWER_BOUND_AS_UPPER_BOUND_PATTERN_FOR_ANY_OTHER_CANDIDATE",
+    "CONTINUE_ONLY_WITH_A_PRECOMMITTED_SUCCESSOR_OR_SEPARATELY_PROVED_ROUTE"
+  ],
+  "hard_nonclaims": [
+    "THIS_DOES_NOT_PROVE_A_SUCCESSOR_PASSES",
+    "THIS_DOES_NOT_GRANT_ROOT1_SEMANTIC_CAPABILITY_CREDIT",
+    "THIS_DOES_NOT AUTHORIZE_NEW_TERMINAL_CASES",
+    "THIS_ADDS_NO_ACCEPTANCE_OR_FAMILY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
