@@ -1,19 +1,19 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2",
   "date": "2026-10-02",
-  "status": "AUTHORITY_RECONCILED__12_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_FALSE_V2_UNIVERSAL_CREDIT_REVOKED__LIVEBENCH_DIRTY_TARGET_REPLAY_QUARANTINED__ROOT1_INACTIVE",
+  "status": "AUTHORITY_RECONCILED__13_PROVED__25_UNRESOLVED__UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PROVED__LIVEBENCH_DIRTY_TARGET_REPLAY_QUARANTINED__ROOT1_INACTIVE",
   "objective": "Bind only content-addressed atomic acceptance evidence. Until saturation is complete, benchmark and matched-case execution remains forbidden.",
   "saturation": {
-    "status": "CURRENT_ZERO_REALITY_RECEIPT_RECONCILIATION__12_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_FALSE_V2_UNIVERSAL_CREDIT_REVOKED__LIVEBENCH_EXACT200_CREDIT_REVOKED",
+    "status": "CURRENT_ZERO_REALITY_RECEIPT_RECONCILIATION__13_PROVED__25_UNRESOLVED__UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PROVED__LIVEBENCH_EXACT200_CREDIT_REVOKED",
     "source_snapshot_sha": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "receipt": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "proved_predicate_count": 12,
-    "bound_blocker_count": 3,
-    "unresolved_predicate_count": 26,
+    "proved_predicate_count": 13,
+    "bound_blocker_count": 2,
+    "unresolved_predicate_count": 25,
     "new_reality_units_consumed": 0,
-    "rule": "UNKNOWN_DOMAIN_V2_UNIVERSAL_PROMOTION_REVOKED_BY_REACHABLE_ADD2_EXACT_FLOAT_COUNTEREXAMPLE__COMBINED_IDENTIFIER_TOTALITY_PLUS_EXACT_FLOAT_SUCCESSOR_REQUIRES_INDEPENDENT_VERIFICATION_AND_SEPARATE_REDUCTION__LIVEBENCH_EXACT200_REMAINS_DIRTY_AND_FAIL_CLOSED_NOT_PROVEN",
-    "latest_delta_receipt": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_REVOCATION_20261005_V1.json",
-    "latest_delta_receipt_sha": "cf1cb494a13fb19d84894e4b58137083e28fb70e"
+    "rule": "UNKNOWN_DOMAIN_V6_INDEPENDENT_CONTENT_BOUND_TOTAL_STRING_STRUCTURAL_ID_AND_EXACT_ADD2_UNIVERSAL_SCOPE_PROOF_PROMOTED_ATOMIC_PREDICATE__UNKNOWN_DOMAIN_FAMILY_REMAINS_OPEN_ON_MYSTERYMECHANISM__LIVEBENCH_EXACT200_REMAINS_DIRTY_AND_FAIL_CLOSED_NOT_PROVEN",
+    "latest_delta_receipt": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "latest_delta_receipt_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596"
   },
   "claims": [
     {
@@ -198,29 +198,34 @@
     },
     {
       "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
-      "state": "EXTERNAL_BLOCKED",
-      "blocker": "FALSE_V2_UNIVERSAL_PROMOTION_REVOKED__TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_LEAVES_REMAIN_UNPROVED",
-      "blocker_class": "ROOT3_DIRECT_SCOPE_EVIDENCE_RESIDUAL",
-      "discharge_condition": "INDEPENDENTLY_VERIFY_ONE_CONTENT_BOUND_SUCCESSOR_THAT_SIMULTANEOUSLY_PROVES_STRUCTURAL_IDENTIFIER_TOTALITY_AND_EXACT_ADD2_IEEE754_GOLD_EQUALITY__THEN_RUN_SEPARATE_FAIL_CLOSED_ROOT3_AND_ACCEPTANCE_REDUCTION",
-      "source_path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_REVOCATION_20261005_V1.json",
-      "source_sha": "cf1cb494a13fb19d84894e4b58137083e28fb70e",
+      "state": "PROVED",
+      "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "source_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "source_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "basis": "INDEPENDENT_V6_PUBLIC_RUNNER_CONTENT_BINDS_TOTAL_PYTHON_STRING_CANONICALIZATION__STRUCTURAL_IDENTIFIER_TOTALITY__EXACT_ADD2_IEEE754_ROLE_ORDER__ALL_SIX_TRANSFER_FAMILIES__ALL_THREE_ABSTENTION_CLASSES__432_NONPRODUCTION_CASES_PASS__ZERO_PRODUCTION_OR_TERMINAL_CONSUMPTION",
       "supporting_sources": [
         {
-          "path": "canonical/verification/DUAL_JUDGMENT_SOURCE_GATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-          "sha": "6ec5f6d808c88bf9ea728fb7f259edc3b4ae5a51"
+          "path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+          "sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d"
         },
         {
-          "path": "canonical/tests/test_unknown_domain_v2_universal_promotion_revocation_v1.py",
-          "sha": "cd6acdb9f749bbdd5af2be8f046f53215ccf23df"
+          "path": "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py",
+          "sha": "58410966e17c1bc546db8cab039891f3ab2bf8a8"
+        },
+        {
+          "path": "canonical/tests/test_unknown_domain_direct_v5.py",
+          "sha": "81cd6ecabec51029175f6036a13eac7667fccd03"
         }
       ],
       "root_class": "ROOT3",
-      "revoked_false_proof": {
-        "path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_20261005_V1.json",
-        "sha": "941e62de59e4c528e8afbb95482f6707bc62104e",
-        "reason": "REACHABLE_ADD2_EXACT_FLOAT_COUNTEREXAMPLE__PLUS_UNPROVED_V2_IDENTIFIER_TOTALITY"
-      }
+      "historical_revocation": {
+        "path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_REVOCATION_20261005_V1.json",
+        "reason": "V2_FALSE_ADD2_EXACT_FLOAT_COUNTEREXAMPLE_AND_IDENTIFIER_TOTALITY_GAP__SUPERSEDED_ONLY_AFTER_INDEPENDENT_V6_TOTAL_STRING_EXACT_PROOF"
+      },
+      "family_status_after_atomic_promotion": "OPEN__MYSTERYMECHANISM_GE_49_55_SEPARATE_AND_UNCHANGED"
     },
     {
       "predicate_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
