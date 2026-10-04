@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RETRY_EXECUTION_EPOCH_V3_CANDIDATE",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAIL_CLOSED__NEW_EPOCH_AFTER_VERIFIED_SCORER_ONLY_REPAIR__INDEPENDENT_PACKAGE_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "current_root": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "601e82d00104b4ed36ee5968ad966a0c02e627c1"
+  },
+  "prior_predicate_local_authority": {
+    "path": "canonical/governance/LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_ACTIVATION_V2.json",
+    "git_blob_sha": "d410d6952cb34f2fd3fb4dc48bf2a613d11c57d1"
+  },
+  "original_precommit": {
+    "path": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2.json",
+    "git_blob_sha": "66554061f204d8a86b37a30c84d0cf07a525a786"
+  },
+  "first_attempt_truth": {
+    "path": "canonical/verification/LIVEBENCH_FIRST_DIRECT_ATTEMPT_TRUTH_RECEIPT_20261004_V1.json",
+    "git_blob_sha": "0ddffd52cd05b880964cf034527aabddb255baef",
+    "terminal_population_loaded": true,
+    "terminal_candidate_inferences": 0,
+    "terminal_candidate_responses": 0,
+    "score_exists": false
+  },
+  "scorer_repair": {
+    "supplement_path": "canonical/governance/LIVEBENCH_LEGACY_SCORER_SUPPLEMENT_V1.json",
+    "supplement_git_blob_sha": "13105f751550ea89646bb82bd4c1d8325afe2840",
+    "supplement_verification_path": "canonical/verification/LIVEBENCH_LEGACY_SCORER_SUPPLEMENT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "supplement_verification_git_blob_sha": "8282b4fe307020fef13ac6421262c18ce7f8c0e8",
+    "admissibility_verification_path": "canonical/verification/LIVEBENCH_SCORER_ONLY_REPAIR_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "admissibility_verification_git_blob_sha": "b847a6a533ebce1575c5e9ed6fe5f49928104918"
+  },
+  "immutable_candidate": {
+    "repository": "moxnixmdj/brain",
+    "commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+    "astra_runtime_git_blob_sha": "7f5d16b1db69cb620954bc778e0ba6e15e687b75",
+    "inference_adapter_git_blob_sha": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
+    "mutation_since_first_attempt": false
+  },
+  "frozen_evaluation": {
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "population_count": 200,
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "threshold_percent": 65.7,
+    "case_order": "QUESTION_ID_ASCENDING_FIXED_PREEXECUTION",
+    "batch_size": 8,
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "threshold_rebase": false
+  },
+  "corrected_executor": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "livebench-corrected-threshold-executor-v2",
+    "path": "execute_livebench_if_threshold_v2_candidate.py",
+    "git_blob_sha": "09643b818a4d929b8907cd3222271abde804e9e3",
+    "direct_execution_fail_closed": true,
+    "verified_launcher_required": true,
+    "scorer_dispatch": "PUBLIC_UPSTREAM_RELEASE_DATE_SPLIT__LEGACY_IFEVAL_BEFORE_2025_11_25__IFBENCH_OTHERWISE"
+  },
+  "requirements_before_activation": [
+    "INDEPENDENT_STATIC_AND_SYNTHETIC_VERIFICATION_OF_CORRECTED_EXECUTOR",
+    "VERIFY_CURRENT_ROOT_STILL_601E82D00104B4ED36EE5968AD966A0C02E627C1",
+    "VERIFY_EXACT_CANDIDATE_POPULATION_THRESHOLD_ORDER_AND_SCORER_BINDINGS",
+    "VERIFY_EXECUTOR_DIRECT_RUN_FAILS_CLOSED_WITHOUT_LAUNCHER",
+    "CREATE_EXACT_CONTENT_ADDRESSED_V3_ACTIVATION",
+    "INDEPENDENTLY_VERIFY_V3_ACTIVATION_AND_LAUNCHER",
+    "POINT_OF_USE_ZERO_CASE_PREFLIGHT_BEFORE_ANY_NEW_TERMINAL_INFERENCE"
+  ],
+  "authority": {
+    "execution": false,
+    "predicate_local_fresh_reality": false,
+    "global_fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
