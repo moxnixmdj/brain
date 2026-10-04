@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_COMPOSITION_SHAPE_REDUCTION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_TERMINAL_COMPOSITION_SEARCH_SPACE_COLLAPSE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Replace open-ended multi-constraint composition search with the exact conflict-compatible identity-shape domain implied by the existing 15-ID commitment and the pinned historical legacy generator conflict graph.",
+  "source_bindings": {
+    "active_legacy15": {
+      "commit": "09d742d83f6f2878ad07bff2454cef554c9589e4",
+      "existing_commitment_sha256": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d",
+      "active_distinct_ids": 15,
+      "independent_verification_required": true
+    },
+    "pinned_livebench": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "registry_path": "livebench/if_runner/instruction_following_eval/instructions_registry.py"
+    },
+    "recovered_historical_generator": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+      "path": "livebench/if_runner/live_data.py",
+      "rule": "DRAW_2_TO_5_DISTINCT_REGISTERED_IDS_THEN_DELETE_MEMBERS_OF_CONFLICTING_PAIRS"
+    }
+  },
+  "exact_reduction": {
+    "active_ids": 15,
+    "max_draw_size": 5,
+    "conflict_compatible_identity_shapes_by_size": {
+      "1": 15,
+      "2": 68,
+      "3": 179,
+      "4": 310,
+      "5": 356
+    },
+    "total_conflict_compatible_identity_shapes": 928,
+    "branch_partition": {
+      "GENERAL": 912,
+      "JSON": 4,
+      "TWO": 8,
+      "REPEAT": 4
+    },
+    "special_branch_total": 16,
+    "interpretation": "JSON_TWO_RESPONSES_AND_REPEAT_PROMPT_HAVE_ONLY_16_TOTAL_COMPATIBLE_IDENTITY_SHAPES_COMBINED__THE_REMAINING_912_USE_THE_GENERAL_STRUCTURAL_COMPOSER_BRANCH"
+  },
+  "scheduler_delta": [
+    "DO_NOT_SEARCH_ARBITRARY_15_ID_CARTESIAN_COMPOSITIONS",
+    "IMPLEMENT_FOUR_BRANCH_COMPOSER__JSON__TWO__REPEAT__GENERAL",
+    "VERIFY_COMPOSITION_OVER_PUBLIC_HISTORICAL_OR_SYNTHETIC_PARAMETERIZED_INSTANCES_BEFORE_ANY_ACTIVE_TERMINAL_PROMPT",
+    "PRESERVE_FAIL_CLOSED_FOR_PARAMETER_COMBINATIONS_NOT_PROVED_GENERATABLE_OR_SATISFIABLE",
+    "DO_NOT_INFER_CASE_FREQUENCIES_FROM_IDENTITY_SET_COMMITMENT"
+  ],
+  "hard_nonclaims": [
+    "NO_ACTIVE_TERMINAL_CASE_FREQUENCIES_OR_COMBINATIONS_ARE_KNOWN",
+    "NO_ACTIVE_TERMINAL_PROMPT_KWARG_RESPONSE_OR_QUESTION_ID_READ",
+    "NO_CLAIM_ALL_928_SHAPES_OCCUR",
+    "NO_CLAIM_EVERY_PARAMETERIZATION_IS_SATISFIABLE",
+    "NO_LIVEBENCH_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
