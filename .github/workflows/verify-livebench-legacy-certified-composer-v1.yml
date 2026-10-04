@@ -5,16 +5,8 @@ on:
       - breakthrough/livebench-legacy-certified-composer-v1-20261004-sol
   pull_request:
     branches: [main]
-    paths:
-      - "canonical/runtime/livebench_legacy_ifeval_certified_composer_v1.py"
-      - "canonical/runtime/livebench_legacy_ifeval_exact_oracle_v1.py"
-      - "canonical/runtime/livebench_legacy_ifeval_single_checker_synthesizer_v1.py"
-      - "canonical/vendor/instruction_following_eval/**"
-      - "canonical/tests/test_livebench_legacy_ifeval_certified_composer_v1.py"
-      - ".github/workflows/verify-livebench-legacy-certified-composer-v1.yml"
 permissions:
   contents: read
-  pull-requests: write
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -23,35 +15,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install exact-checker dependencies
-        run: |
-          set -euxo pipefail
-          python -m pip install --disable-pip-version-check pytest nltk langdetect immutabledict
-          python - <<'PY'
-          import nltk
-          assert nltk.download("punkt", quiet=True)
-          assert nltk.download("punkt_tab", quiet=True)
-          PY
-      - name: Run certified-composer tests
-        id: tests
+      - name: Run verifier and capture trace
+        id: verify
         shell: bash
         run: |
           set +e
-          python -m pytest -q canonical/tests/test_livebench_legacy_ifeval_certified_composer_v1.py 2>&1 | tee /tmp/certified-composer-test.log
-          status=${PIPESTATUS[0]}
+          (
+            set -euxo pipefail
+            python -m pip install --disable-pip-version-check pytest nltk langdetect immutabledict
+            python - <<'PY'
+          import nltk
+          print("punkt", nltk.download("punkt", quiet=True))
+          print("punkt_tab", nltk.download("punkt_tab", quiet=True))
+          PY
+            python -m pytest -q canonical/tests/test_livebench_legacy_ifeval_certified_composer_v1.py
+          ) > /tmp/certified-composer-verify.log 2>&1
+          status=$?
+          cat /tmp/certified-composer-verify.log
           echo "status=$status" >> "$GITHUB_OUTPUT"
           exit "$status"
-      - name: Publish failure trace to PR
-        if: failure() && github.event_name == 'pull_request'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          {
-            echo '### Certified composer verifier failure'
-            echo
-            echo '~~~text'
-            tail -c 50000 /tmp/certified-composer-test.log 2>/dev/null || true
-            echo
-            echo '~~~'
-          } > /tmp/pr-comment.md
-          gh pr comment "${{ github.event.pull_request.number }}" --body-file /tmp/pr-comment.md
+      - name: Upload verifier trace
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: certified-composer-verifier-trace
+          path: /tmp/certified-composer-verify.log
+          if-no-files-found: error
