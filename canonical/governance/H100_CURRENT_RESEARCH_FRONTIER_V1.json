@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_H100_RESEARCH_FRONTIER_STATE_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_RESEARCH_FRONTIER__PHASE1_INDEPENDENT_RESULT_BOUND__PHASE2_ZERO_LEARNED_PRIMITIVE_REPAIR_PENDING__ZERO_CREDIT",
+  "hypothesis": "FULL_FROZEN_BRAIN_CAPABILITY_ENVELOPE_WITH_LE_100000000_PERSISTENT_LEARNED_BYTES_AND_ZERO_EXTERNAL_LEARNED_CAPABILITY_PROVIDER_DURING_SCORED_EXECUTION",
+  "current_evidence": {
+    "measurement_layer": {
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "verification": "canonical/verification/H100_PROPOSAL_MEASUREMENT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+    },
+    "phase1_zero_learned_novelty_stress": {
+      "status": "INDEPENDENT_PUBLIC_RUNNER_COMPLETE",
+      "result": "canonical/verification/H100_ZERO_LEARNED_NOVELTY_STRESS_PUBLIC_RUNNER_RESULT_20261004_V1.json",
+      "within_operator": "9_OF_9_SOLVED",
+      "outside_operator": "0_OF_3_SOLVED",
+      "persistent_learned_bytes": 0,
+      "deduction": "NO_SEARCH_OR_COMPOSITION_RESIDUAL_OBSERVED_ON_THE_9_PREEXPOSED_IN_OPERATOR_TASKS__MISSING_PRIMITIVE_OR_GRAMMAR_RESIDUAL_OBSERVED_ON_ALL_3_PREEXPOSED_OUTSIDE_OPERATOR_TASKS"
+    },
+    "phase2": {
+      "status": "EXACT_BYTES_FROZEN__INDEPENDENT_VERIFICATION_PENDING",
+      "preexposure": "canonical/governance/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_PREEXPOSURE_V1.json",
+      "candidate": "canonical/governance/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_CANDIDATE_V1.json",
+      "learned_bytes": 0
+    }
+  },
+  "decision_policy": [
+    "DO_NOT_ADD_LEARNED_STATE_WHILE_A_ZERO_LEARNED_REPAIR_FOR_THE_CURRENT_OBSERVED_RESIDUAL_IS_UNFALSIFIED",
+    "IF_PHASE2_3_OF_3_PASS__PROMOTE_THE_THREE_PRIMITIVE_FAMILIES_AS_REUSABLE_H100_GATE1_CANDIDATE_GENERATION_MECHANISMS_AND_MOVE_TO_SCHEMA_OR_OPEN_WORLD_NOVELTY_RESIDUAL",
+    "IF_PHASE2_PARTIAL_OR_FAIL__CLASSIFY_EXACTLY_AS_PARAMETER_FIT_IDENTIFIABILITY_OR_MISSING_OPERATOR_AND_REPAIR_NONLEARNED_FIRST",
+    "ONLY_CONSTRUCTIVE_FAILURE_OF_NONLEARNED_ROUTES_CAN_JUSTIFY_MOVING_TO_THE_NEXT_LEARNED_BYTE_RUNG"
+  ],
+  "current_learned_byte_rung": 0,
+  "next_learned_byte_rung_if_constructively_required": 1000000,
+  "terminal_truth": {
+    "h100_closed": false,
+    "full_19_family_contract_closed": false,
+    "runtime_ram_below_100mb_not_claimed": true,
+    "total_compute_small_not_claimed": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
