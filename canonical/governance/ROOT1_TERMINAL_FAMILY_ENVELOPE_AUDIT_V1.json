@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V1",
+  "date": "2026-10-04",
+  "status": "CURRENT_CANDIDATE__DECLARED_19_FAMILY_ENVELOPE_BOUND__5_VERIFIED_OWNED__14_ROUTE_COVERAGE_UNPROVED_NOT_MISSING__ROOT1_ZERO",
+  "scope": "ROOT1_CAPABILITY_MISSING_ONLY",
+  "authority": {
+    "terminal_manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "fae1bc5338993911f1078680996aa48e677d7a15"
+    },
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "11498bd194c8018617767918edec020268239bc1"
+    }
+  },
+  "declared_terminal_family_envelope": {
+    "expected_family_count": 19,
+    "actual_family_count": 19,
+    "lossless_claim_scope": "DECLARED_TERMINAL_FAMILY_BOUNDARY_ONLY",
+    "complete_primitive_causal_basis_claimed": false
+  },
+  "verified_owned_families": [
+    "EXACT_SYMBOLIC_COMPUTATION",
+    "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+  ],
+  "verified_owned_count": 5,
+  "route_coverage_unproved_families": [
+    "ADVANCED_AGENTIC_CODING",
+    "AGENTIC_SCIENTIFIC_RESEARCH",
+    "ARTIFACT_CREATION",
+    "BUSINESS_WORKFLOW_AUTOMATION",
+    "COMMUNICATION_AND_SYNTHESIS",
+    "COMPLEX_MULTI_TOOL_AGENCY",
+    "COMPUTER_AND_BROWSER_USE",
+    "FINANCIAL_ANALYSIS",
+    "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "MULTI_CAPABILITY_COMPOSITION",
+    "PROFESSIONAL_KNOWLEDGE_WORK",
+    "UNKNOWN_DOMAIN_ADAPTATION",
+    "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+  ],
+  "route_coverage_unproved_count": 14,
+  "classification": {
+    "root1_positive_gap_count": 0,
+    "root1_currently_active": false,
+    "route_coverage_unproved_is_capability_missing": false,
+    "unknown_is_not_missing": true
+  },
+  "next_root1_closure_action": "MINE_AND_VERIFY_EXISTING_INTERNALIZED_OR_EXECUTABLE_ZERO_COST_ROUTE_RECEIPTS_FOR_THE_14_UNPROVED_FAMILIES__DO_NOT_RUN_CAPABILITY_ACQUISITION_UNLESS_CONSTRUCTIVE_ROOT1_GAP_REOPENS",
+  "hard_rules": [
+    "NO_ROOT1_REOPENING_FROM_ROUTE_COVERAGE_UNCERTAINTY",
+    "NO_ROOT2_OR_ROOT3_ACCEPTANCE_WORK_CREDIT",
+    "NO_UNIVERSAL_SEMANTIC_LEARNING_SUCCESS_CLAIM",
+    "NO_FROZEN_ROOT1_SEAL_UNTIL_ALL_19_FAMILIES_HAVE_VERIFIED_OWNED_OR_VERIFIED_EXECUTABLE_INTERNALIZABLE_ZERO_COST_ROUTE_COVERAGE"
+  ],
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

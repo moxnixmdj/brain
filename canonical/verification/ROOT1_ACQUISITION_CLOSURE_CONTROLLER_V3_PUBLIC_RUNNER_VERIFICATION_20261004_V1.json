@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__ROOT1_BOUNDARY__JEFFREYS_POSTERIOR__CORRELATION_PENALTY__ORTHOGONAL_PORTFOLIO__EXACT_ZERO_SPEND_ROUTE_COVER__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "pull_request": 1501,
+    "head_sha": "dcfd431222d16842130bc6d181719a992d0edc47",
+    "exact_blobs": {
+      "canonical/runtime/root1_acquisition_closure_controller_v3.py": "7c9ba29c6ba32df782d5d0322dc06b53ea447391",
+      "canonical/tests/test_root1_acquisition_closure_controller_v3.py": "0b0f2bb84563eecf3eabc52109a6e068dc9550e3",
+      "canonical/governance/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V3.json": "e74c994a01e7b8cf93eb4f463beb6e33cda56e94",
+      "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V1.json": "1318af58b44ea733421aded33b56144875e0a3e3",
+      "canonical/runtime/root1_acquisition_closure_controller_v2.py": "9683d993a99da27dffbb45a30e941e04094e1046",
+      "canonical/runtime/structural_transfer_v3.py": "2c5d854ba88493edcd843ae4ac2994e727319fa7"
+    }
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1524,
+    "pull_request_head_sha": "ae152ecfcb62776b20689c6fb7a0ff4d23625177",
+    "merge_commit": "3456f143c8ca3e6b6b2b49e5e87438ae597926f0",
+    "workflow_run_id": 37164893100,
+    "workflow_job_id": 111325696191,
+    "conclusion": "success"
+  },
+  "verified": {
+    "subject_tests_passed": "9/9",
+    "exact_brain_blob_identities": true,
+    "root1_inactive_zero_action": true,
+    "route_coverage_unproved_not_missing": true,
+    "declared_19_family_partition_exact_5_plus_14": true,
+    "jeffreys_prior_no_false_certainty": true,
+    "paid_routes_rejected": true,
+    "correlation_penalty_load_bearing": true,
+    "source_dependency_orthogonalization": true,
+    "exact_minimum_weight_route_cover": true,
+    "root1_seal_remains_false": true,
+    "zero_terminal_credit": true
+  },
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
