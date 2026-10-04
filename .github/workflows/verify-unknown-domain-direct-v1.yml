@@ -28,13 +28,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run frozen family and candidate tests
-        run: |
-          python -m unittest             canonical.tests.test_unknown_domain_direct_family_freeze_v1             canonical.tests.test_unknown_domain_direct_candidate_v1 -v
-      - name: Verify exact bound blobs
+      - name: Run tests with capture
         shell: bash
         run: |
-          python - <<'PY'
+          set +e
+          python -m unittest             canonical.tests.test_unknown_domain_direct_family_freeze_v1             canonical.tests.test_unknown_domain_direct_candidate_v1 -v > ud_tests.log 2>&1
+          echo $? > ud_tests.exit
+          set -e
+      - name: Verify exact blobs with capture
+        shell: bash
+        run: |
+          set +e
+          python - <<'PY' > ud_blobs.log 2>&1
           import json, subprocess
           p='canonical/governance/UNKNOWN_DOMAIN_DIRECT_CANDIDATE_REQUALIFICATION_V1.json'
           d=json.load(open(p))
@@ -43,4 +48,42 @@ jobs:
               assert got==expected,(path,got,expected)
           assert d['candidate_properties']['persistent_learned_bytes']==0
           assert d['authority']['fresh_reality'] is False
+          print('EXACT_BLOBS_PASS')
           PY
+          echo $? > ud_blobs.exit
+          set -e
+      - name: Build diagnostics
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          def read(p):
+              q=pathlib.Path(p)
+              return q.read_text() if q.exists() else '<missing>'
+          out={
+            'tests_exit':read('ud_tests.exit').strip(),
+            'blobs_exit':read('ud_blobs.exit').strip(),
+            'tests_log':read('ud_tests.log'),
+            'blobs_log':read('ud_blobs.log'),
+          }
+          pathlib.Path('unknown_domain_direct_diagnostic_v1.json').write_text(json.dumps(out,indent=2,sort_keys=True))
+          print(json.dumps(out,indent=2,sort_keys=True))
+          PY
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unknown-domain-direct-diagnostic-v1
+          path: |
+            unknown_domain_direct_diagnostic_v1.json
+            ud_tests.log
+            ud_tests.exit
+            ud_blobs.log
+            ud_blobs.exit
+          if-no-files-found: warn
+      - name: Enforce verification
+        shell: bash
+        run: |
+          test "$(cat ud_tests.exit)" = "0"
+          test "$(cat ud_blobs.exit)" = "0"
