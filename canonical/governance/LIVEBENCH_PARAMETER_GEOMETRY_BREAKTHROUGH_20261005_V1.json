@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PARAMETER_GEOMETRY_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__ONE_FALSE_COLLISION_CONSTRUCTIVELY_REMOVED__IRREDUCIBLE_PARAMETER_COLLISIONS_ISOLATED__EXACT_PINNED_VERIFICATION_ATTACHED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "predecessor_frontier": "canonical/governance/LIVEBENCH_CONTAMINATION_SAFE_RESCUE_FRONTIER_V1.json",
+  "source_bindings": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+  },
+  "constructive_delta": {
+    "finding": "SECTION_SPLITTER_FORBIDDEN_WORD_IS_NOT_AN_IRREDUCIBLE_COLLISION",
+    "exact_semantics": "SectionChecker uses optional whitespace between splitter and numeric index while ForbiddenWords uses whole-word boundaries",
+    "witness": "Section1",
+    "consequence": "When forbidden_words contains section, compact SectionN markers preserve exact section-checker acceptance while eliminating the forbidden whole-word boundary",
+    "patched_runtime": "canonical/runtime/livebench_legacy15_general_composer_v1.py",
+    "patched_runtime_blob": "ab8f3c4704b4d8e1faa114ec40e61651a91acbc5"
+  },
+  "parameter_geometry": {
+    "runtime": "canonical/runtime/livebench_legacy15_parameter_geometry_v1.py",
+    "runtime_blob": "5e566191f8faa1b83ac430bf6c3d41c095cd663f",
+    "irreducible_classes": [
+      {
+        "class": "EXACT_END_PHRASE_CONTAINS_FORBIDDEN_WHOLE_WORD",
+        "proof_sketch": "EndChecker requires the exact phrase as a terminal substring. If that forced phrase contains a forbidden whole word, every EndChecker-passing response necessarily contains the ForbiddenWords-rejected token."
+      },
+      {
+        "class": "NTH_PARAGRAPH_EXACT_FIRST_WORD_EQUALS_FORBIDDEN_WHOLE_WORD",
+        "proof_sketch": "ParagraphFirstWordCheck requires the parsed first lexical word to equal the target. If the same target is forbidden as a whole word, the required lexical occurrence is itself rejected."
+      }
+    ],
+    "hard_boundary": "THE_928_IDENTITY_SET_PARTITION_DOES_NOT_BY_ITSELF_IMPLY_UNIVERSAL_PARAMETER_DOMAIN_FULL_SCORE",
+    "target_population_occurrence_claim": false
+  },
+  "exact_verification_candidate": {
+    "workflow": ".github/workflows/verify-livebench-parameter-geometry-v1.yml",
+    "workflow_blob": "fcb243a4d55655631533bee67cf3796e482e072d",
+    "tests": "canonical/tests/test_livebench_legacy15_parameter_geometry_v1.py",
+    "tests_blob": "d3d88f5c05b45c3a5c2ca9e45a8f1585f68029b0",
+    "required_result": "PASS__EXACT_PINNED_PARAMETER_GEOMETRY"
+  },
+  "scheduler_delta": [
+    "KEEP_SEVEN_ARCHETYPE_IDENTITY_REDUCTION",
+    "DELETE_THE_FALSE_ASSUMPTION_THAT_ALL_PARAMETER_COLLISIONS_ARE_MANDATORY_LITERAL_COLLISIONS",
+    "USE_CHECKER_EQUIVALENCE_TRANSFORMS_SUCH_AS_SECTIONN_BEFORE_DECLARING_FAIL_CLOSED",
+    "DO_NOT_ATTEMPT_A_UNIVERSAL_ALL_PUBLIC_PARAMETER_FULL_SCORE_THEOREM_UNLESS_IRREDUCIBLE_COLLISIONS_ARE_PROVED_EXCLUDED_FROM_THE_HISTORICAL_GENERATOR_SUPPORT",
+    "NEXT_LOAD_BEARING_GATE__BIND_EXACT_HISTORICAL_PARAMETER_SUPPORT_OR_A_CASE_INDEPENDENT_SCORE_LOWER_BOUND_AT_OR_ABOVE_65_73775_WITHOUT_READING_TARGET_ROWS"
+  ],
+  "hard_nonclaims": [
+    "NO_TARGET_TERMINAL_ROW_PROMPT_KWARG_RESPONSE_SCORE_OR_FREQUENCY_WAS_READ",
+    "NO_CLAIM_THAT_IRREDUCIBLE_PARAMETER_COLLISIONS_OCCUR_IN_THE_FROZEN_200_ROW_TARGET_POPULATION",
+    "NO_LIVEBENCH_THRESHOLD_PASS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_PROMOTION_AUTHORITY_BEFORE_INDEPENDENT_WORKFLOW_SUCCESS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "new_terminal_case_metadata_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
