@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_DETERMINISTIC_VISIBLE_WITNESS_LOWER_BOUND_20261004_V1",
+  "date": "2026-10-04",
+  "status": "STRONG_PUBLIC_DIAGNOSTIC__DETERMINISTIC_ROUTE_DOMINATES_ROOT1_SCHEDULING__HASH_BOUND_EXACT200_RECEIPT_PENDING__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "comparator_floor_percent": 65.73775,
+  "breakthrough": {
+    "prior_assumption": "ROOT1_REQUIRES_A_MULTI_GIGABYTE_SEMANTIC_MODEL_SUBJECT_TO_CLEAR_THE_EXACT_PUBLIC_GATE",
+    "new_result": "THE_VISIBLE_GENERATOR_GRAMMAR_IS EXACTLY_RECOVERABLE_ON_ALL_200_PUBLIC_ACTIVE_ROWS_AND_THE_ZERO_MODEL_JOINT_WITNESS_ALREADY_HAS_A_78_5_PERCENT_PESSIMISTIC_LOWER_BOUND_WHEN_ALL_43_SENTENCE_ROWS_ARE_FORCED_TO_ZERO",
+    "scheduler_consequence": "DETERMINISTIC_EXACT200_QUALIFICATION_PRECEDES_2_783GB_4B_ROOT1_ACQUISITION__KEEP_4B_AS_FALLBACK_ONLY_UNTIL_HASH_BOUND_RECEIPT"
+  },
+  "public_population_diagnostic": {
+    "source": "HUGGINGFACE_DATASET_SERVER_PUBLIC_ROWS_ENDPOINT",
+    "dataset": "livebench/instruction_following",
+    "rows_observed": 400,
+    "selected_release": "2026-06-25",
+    "active_legacy_rows": 200,
+    "task_counts": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    },
+    "active_instruction_instance_counts": {
+      "combination:repeat_prompt": 12,
+      "combination:two_responses": 13,
+      "detectable_content:postscript": 46,
+      "detectable_format:json_format": 16,
+      "detectable_format:multiple_sections": 37,
+      "detectable_format:number_bullet_lists": 34,
+      "detectable_format:title": 49,
+      "keywords:existence": 67,
+      "keywords:forbidden_words": 68,
+      "length_constraints:nth_paragraph_first_word": 42,
+      "length_constraints:number_paragraphs": 35,
+      "length_constraints:number_sentences": 43,
+      "length_constraints:number_words": 39,
+      "startend:end_checker": 51,
+      "startend:quotation": 39
+    },
+    "visible_parser_instruction_multiset_exact_rows": 200,
+    "visible_parser_scorer_relevant_parameter_exact_rows": 200,
+    "hidden_ids_or_kwargs_used_by_runtime_parser": false
+  },
+  "pessimistic_lower_bound": {
+    "method": "RUN_CURRENT_VISIBLE_ONLY_DETERMINISTIC_WITNESS_ON_PUBLIC_ACTIVE_ROWS__EVALUATE_FROZEN_NON_SENTENCE_CHECKER_SEMANTICS__FORCE_EVERY_ROW_CONTAINING_number_sentences_TO_SCORE_ZERO",
+    "sentence_rows_forced_to_zero": 43,
+    "non_sentence_rows": 157,
+    "non_sentence_full_score_rows": 157,
+    "non_sentence_failure_rows": 0,
+    "task_percent_with_sentence_rows_forced_zero": {
+      "paraphrase": 90.0,
+      "simplify": 68.0,
+      "story_generation": 76.0,
+      "summarize": 80.0
+    },
+    "equal_task_mean_lower_bound_percent": 78.5,
+    "floor_percent": 65.73775,
+    "lower_bound_margin_percentage_points": 12.76225,
+    "logic": "FOUR_TASKS_HAVE_EQUAL_50_ROW_CARDINALITY__157_FULL_SCORE_ROWS_AND_43_FORCED_ZERO_ROWS_IMPLY_157_DIV_200_TIMES_100_EQUALS_78_5"
+  },
+  "runtime_repairs_this_branch": [
+    {
+      "commit": "b511ccda1f52eb521485c1d844c8cc04eee72132",
+      "effect": "EMIT_all_recognized_parameters_complete_FROM_COMPILER_V4_SO_JOINT_WITNESS_DOES_NOT_FAIL_CLOSED_ON_EVERY_PROMPT"
+    },
+    {
+      "commit": "cdac846c99bf41f5a3d7ac0ed2c8b3959448632b",
+      "effect": "PRESERVE_FROZEN_BULLET_REGEX_UNDER_WHOLE_RESPONSE_QUOTATION"
+    },
+    {
+      "commit": "eca7447f3cee20d14bd5540102bd278ec28c425a",
+      "effect": "ADD_QUOTATION_BULLET_AND_END_COMPOSITION_REGRESSIONS"
+    }
+  ],
+  "exact_hash_bound_qualification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2018,
+    "branch": "verify-legacy15-direct-exact-20261004-v1",
+    "runner": "macos-15-intel",
+    "candidate_sync_commit": "d6db2cdac68ccccd694e7086203a11fef2afbb34",
+    "self_reporting_workflow_commit": "fbc29f3293937a4bf13865a8de6edc59560e93b7",
+    "receipt_path_when_complete": "receipts/legacy15_joint_public_exact_v1.json",
+    "pinned_dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "pinned_parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "pinned_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091"
+  },
+  "scheduler_delta": [
+    "ROOT1_CRITICAL_PATH_IS_NOW_HASH_BOUND_DETERMINISTIC_EXACT200_QUALIFICATION",
+    "DO_NOT_WAIT_FOR_LINUX_QUEUE",
+    "DO_NOT_TREAT_2_783GB_4B_DOWNLOAD_AS_REQUIRED_WHILE_ZERO_MODEL_ROUTE_HAS_12_76225_POINT_PESSIMISTIC_MARGIN",
+    "KEEP_4B_EXACT_PUBLIC_RUN_AS_FALLBACK_AND_INDEPENDENT_FALSIFICATION_ONLY",
+    "IF_HASH_BOUND_DETERMINISTIC_RECEIPT_PASSES__DELETE_ROOT1_MODEL_DEPENDENCY_AND_MOVE_TO_NEXT_TERMINAL_LOAD_BEARING_BLOCKER"
+  ],
+  "hard_nonclaims": [
+    "DATASET_SERVER_DIAGNOSTIC_IS_NOT_A_CRYPTOGRAPHIC_BINDING_TO_THE_PINNED_PARQUET_REVISION",
+    "NON_SENTENCE_CHECKER_REPRODUCTION_IS_NOT_A_SUBSTITUTE_FOR_THE_EXACT_FROZEN_PYTHON_RUNNER",
+    "NO_ROOT1_ACCEPTANCE_CREDIT_UNTIL_HASH_BOUND_EXACT200_RECEIPT",
+    "NO_TERMINAL_GOAL_COMPLETION_CLAIM",
+    "NO_HIDDEN_OR_FRESH_TERMINAL_CASES_USED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "hidden_or_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
