@@ -1,0 +1,161 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_SUB100MB_SEMANTIC_FACTORING_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ARCHITECTURE_REDUCTION__ZERO_TERMINAL_EXPOSURE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "base_commit": "75c9f3ffb7cefe53f7d9c7a8c5e6e813980e0163",
+  "source_bindings": {
+    "semantic_seed_frontier": {
+      "path": "canonical/governance/LIVEBENCH_ROOT1_SEMANTIC_SEED_REPAIR_FRONTIER_V1.json",
+      "git_blob_sha": "844eb26e1ddefb49240c1ad61d7e5466b58e45c2"
+    },
+    "open_weight_existence_breakthrough": {
+      "path": "canonical/governance/LIVEBENCH_ROOT1_OPEN_WEIGHT_SEMANTIC_CORE_BREAKTHROUGH_V1.json",
+      "git_blob_sha": "d6e50eedddca25493e0a8af29c657634eabc27fa"
+    },
+    "h100_contract": {
+      "path": "canonical/governance/SUB100MB_LEARNED_CORE_EXPERIMENT_CONTRACT_V1.json",
+      "git_blob_sha": "94b74f1e2f4b5663d0ff490cd4d2b23363299a5e"
+    },
+    "constraint_compiler": {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    },
+    "seed_preserving_postprocessor": {
+      "path": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+      "git_blob_sha": "8cdb308941dbd6711279cbd1d505aca6aabdd376"
+    }
+  },
+  "breakthrough": {
+    "previous_bad_optimization_target": "REQUIRE_THE_SUB100MB_LEARNED_KERNEL_TO_MATCH_THE_FULL_STANDALONE_INSTRUCTION_FOLLOWING_SCORE_BY_ITSELF",
+    "corrected_optimization_target": "REQUIRE_THE_LEARNED_KERNEL_TO_SUPPLY_ONLY_THE_IRREDUCIBLE_SEMANTIC_SEED_EFFECTS_WHILE_EXISTING_NONLEARNED_MACHINERY_OWNS_EXACT_CONSTRAINT_EXTRACTION_VALIDATION_SAFE_POSTPROCESSING_AND_SEARCH",
+    "consequence": "STANDALONE_SMALL_MODEL_INSTRUCTION_FOLLOWING_SCORE_IS_NOT_A_LOWER_BOUND_ON_THE_COMPOSED_BRAIN_PIPELINE_SCORE_AND_MUST_NOT_BE_USED_TO_FALSIFY_H100_BY_ITSELF"
+  },
+  "factorization": {
+    "learned_component_S": [
+      "text.paraphrase.semantic_preserving",
+      "text.simplify.semantic_preserving",
+      "text.summarize.faithful",
+      "text.story.generate_instruction_grounded"
+    ],
+    "deterministic_component_C": [
+      "formal.constraint.extract",
+      "formal.constraint.validate"
+    ],
+    "deterministic_component_P": [
+      "seed_preserving.literal_prefix",
+      "seed_preserving.literal_suffix",
+      "already_satisfied_constraint_postvalidation"
+    ],
+    "deterministic_component_R": [
+      "parallel_candidate_generation_schedule",
+      "exact_constraint_rejection",
+      "fail_closed_selection"
+    ],
+    "learned_state_identity": "LEARNED_BYTES(S+C+P+R)=LEARNED_BYTES(S)_WHEN_C_P_R_CONTAIN_NO_DATA_FIT_OR_OPTIMIZED_STATE",
+    "hard_boundary": "THIS_IDENTITY_IS_RESOURCE_ACCOUNTING_ONLY; IT_DOES_NOT_PROVE_S_IS_CAPABLE_ENOUGH_OR_THAT_C_P_COVER_ALL_CONSTRAINT_CLASSES"
+  },
+  "conditional_search_law": {
+    "statement": "IF_N_CANDIDATES_ARE_IID_AND_EACH_HAS_TRUE_FULL_VALIDITY_PROBABILITY_P_THEN_P_AT_LEAST_ONE_VALID_EQUALS_1_MINUS_(1_MINUS_P)^N",
+    "use": "SEARCH_CAN_EXCHANGE_RUNTIME_COMPUTE_AND_PARALLELISM_FOR_SUCCESS_PROBABILITY_WITHOUT_INCREASING_PERSISTENT_LEARNED_BYTES",
+    "hard_nonclaim": "NO_IID_ASSUMPTION_OR_NONZERO_P_IS_CURRENTLY_PROVED_FOR_THE_SUB100MB_KERNEL; MEASURE_THEM_INSTEAD_OF_ASSUMING_THEM"
+  },
+  "why_this_changes_the_frontier": [
+    "THE_27B_OPEN_WEIGHT_RESULT_PROVES_THE_REQUIRED_FOUR_TASK_SEMANTIC_CAPABILITY_EXISTS_BUT_IS_FAR_OUTSIDE_H100_STATE_SCALE",
+    "THE_EXISTING_COMPILER_ALREADY_EXTRACTS_AND_EXACTLY_VALIDATES_A_NONTRIVIAL_STRUCTURAL_CONSTRAINT_SUBSET_WITH_ZERO_MODEL_DEPENDENCY",
+    "THE_EXISTING_POSTPROCESSOR_CAN_PRESERVE_A_REAL_SEMANTIC_SEED_VERBATIM_WHILE_APPLYING_A_SAFE_SUBSET_OF_LITERAL_WRAPPERS",
+    "THEREFORE_THE_MINIMUM_H100_EXPERIMENT_IS_NOT_TINY_MODEL_VS_OPUS; IT_IS_TINY_SEMANTIC_SEED_CORE_PLUS_DETERMINISTIC_CONSTRAINT_STACK_PLUS_SEARCH_VS_THE_FROZEN_ACCEPTANCE_GEOMETRY"
+  ],
+  "provisional_sub100mb_baseline": {
+    "source_status": "OPEN_PR_1616_RESEARCH_BASELINE_ONLY__NOT_MAIN_AUTHORITY__NOT_QUALIFIED",
+    "source_pr": 1616,
+    "source_pr_head_sha": "017883b9a69cf5f0826816c7fe4180f68dc41a41",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "quantized_artifact": "SmolLM2-135M-Instruct-Q3_K_M.gguf",
+    "artifact_sha256": "61c69fc5ce91982e26c625d43be5c3c7f0f774da22f4fa4e45c37a80a22ddad4",
+    "artifact_bytes": 93511232,
+    "role": "FALSIFICATION_BASELINE_NOT_PREFERRED_SOLUTION",
+    "public_prior_only": {
+      "source": "HuggingFaceTB/SmolLM2-135M-Instruct model card",
+      "reported_ifeval_average_percent": 29.9,
+      "interpretation": "WEAK_STANDALONE_INSTRUCTION_FOLLOWING_PRIOR",
+      "hard_nonclaim": "IFEVAL_IS_NOT_THE_FROZEN_LIVEBENCH_IF_TARGET_AND_THIS_SCORE_DOES_NOT FALSIFY_THE_COMPOSED_PIPELINE"
+    }
+  },
+  "preexposure_experiment": {
+    "objective": "MEASURE_WHETHER_FACTORING_SEMANTIC_SEED_PRODUCTION_FROM_FORMAL_CONSTRAINT_HANDLING_RAISES_FULL_PIPELINE_SUCCESS_ENOUGH_TO_KEEP_H100_ALIVE_WITH_FIXED_LEARNED_BYTES",
+    "terminal_prompt_use": 0,
+    "development_population": "PUBLIC_NONTERMINAL_PARAPHRASE_SIMPLIFY_SUMMARIZE_AND_STORY_TASKS_FROZEN_BEFORE_OUTPUT_GENERATION",
+    "candidate_counts": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "same_exact_learned_artifact_across_conditions": true,
+    "freeze_before_outcomes": [
+      "MODEL_AND_ARTIFACT_HASH",
+      "TOKENIZER_AND_ANY_OTHER_COUNTED_LEARNED_STATE",
+      "DECODING_POLICIES_AND_RANDOM_SEEDS",
+      "PUBLIC_NONTERMINAL_TASK_IDS",
+      "SEMANTIC_SEED_CHECKS",
+      "FORMAL_CONSTRAINT_CHECKS",
+      "CANDIDATE_COUNTS",
+      "SELECTION_POLICY"
+    ],
+    "measurements": [
+      "P_SEMANTIC_SEED_VALID",
+      "P_FORMAL_CONSTRAINT_VALID_GIVEN_SEMANTIC_SEED",
+      "P_FULL_PIPELINE_VALID_AT_EACH_N",
+      "CORRELATION_BETWEEN_CANDIDATE_FAILURES_TO_TEST_IID_ASSUMPTION",
+      "LEARNED_STATE_BYTES",
+      "WALL_CLOCK_LATENCY",
+      "TOTAL_GENERATED_TOKENS",
+      "FAILURE_CLASS"
+    ],
+    "falsification_conditions": [
+      "SEMANTIC_SEED_VALIDITY_REMAINS_NEAR_ZERO_ON_PUBLIC_NONTERMINAL_NOVEL_INPUTS",
+      "SEARCH_DOES_NOT_IMPROVE_FULL_VALIDITY_BECAUSE_FAILURES_ARE_SYSTEMATICALLY_CORRELATED",
+      "REQUIRED_SEMANTICALLY_SAFE_CONSTRAINT_TRANSFORMS_CANNOT_BE_MOVED_OUT_OF_LEARNED_STATE_WITHOUT_DESTROYING_CONTENT",
+      "EXACT_COUNTED_LEARNED_STATE_EXCEEDS_H100_BOUND"
+    ],
+    "success_to_next_gate": "ONLY_IF_THE_EXACT_LOCAL_FORM_AND_COMPOSED_PIPELINE_HAVE_INDEPENDENT_PUBLIC_NONTERMINAL_EVIDENCE_SUFFICIENT_TO_JUSTIFY_A_CONTAMINATION_SAFE_FRESH_TERMINAL_PRECOMMIT"
+  },
+  "scheduler_rewrite": {
+    "delete_as_wasteful": [
+      "SELECT_SUB100MB_CANDIDATE_BY_STANDALONE_IFEVAL_OR_CHAT_SCORE",
+      "REIMPLEMENT_EXACT_STRUCTURAL_CONSTRAINT_LOGIC_INSIDE_LEARNED_WEIGHTS",
+      "TRAIN_BEFORE_MEASURING_FIXED_KERNEL_PLUS_SEARCH_PLUS_COMPILER_BASELINE"
+    ],
+    "next_ranked_actions": [
+      "FREEZE_THE_ROOT1_PUBLIC_NONTERMINAL_SEMANTIC_SEED_QUALIFICATION_SET_AND_MECHANICAL_CHECKS",
+      "RUN_THE_EXACT_FIXED_SUB100MB_BASELINE_THROUGH_S_PLUS_C_PLUS_P_PLUS_R_AT_N_1_2_4_8_16",
+      "LOCALIZE_RESIDUAL_FAILURES_INTO_SEMANTIC_SEED_VS_UNSUPPORTED_SAFE_TRANSFORM_VS_SYSTEMATIC_SEARCH_FAILURE",
+      "TRAIN_OR_DISTILL_ONLY_THE_RESIDUAL_THAT_REMAINS_AFTER_THIS_FACTORIZATION",
+      "REPEAT_WITH_LEARNED_BYTES_HELD_FIXED_OR_REDUCED"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_93_511_232_BYTE_BASELINE_MEETS_LIVEBENCH_IF",
+    "NO_CLAIM_STANDALONE_IFEVAL_AND_LIVEBENCH_IF_ARE_COMPARABLE_METRICS",
+    "NO_CLAIM_CANDIDATE_SEARCH_FAILURES_ARE_INDEPENDENT",
+    "NO_CLAIM_EXISTING_POSTPROCESSOR_COVERS_ALL_REQUIRED_CONSTRAINTS",
+    "NO_TERMINAL_PROMPT_OR_RESPONSE_CONTENT_CONSUMED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
