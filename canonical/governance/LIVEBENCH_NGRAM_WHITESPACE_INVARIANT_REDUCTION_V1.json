@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_WHITESPACE_INVARIANT_REDUCTION_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__CONSTRUCTIVE_PUBLIC_12_OF_12_PASS__EXACT_RAW_REFERENCE_REQUIREMENT_REDUCED_TO_NORMALIZED_REFERENCE_SEGMENTATION__ZERO_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "status": "CANDIDATE__PUBLIC_PROMPT_ONLY_SEGMENTATION_12_OF_12__CONSTRUCTIVE_RAW_EXACT_SCORE_12_OF_12__ZERO_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "target_instruction": "ratio:overlap",
-  "objective": "Delete the exact-raw-reference-text requirement for NGramOverlapChecker by constructing responses whose trigrams contain no whitespace, making their overlap score invariant to hidden whitespace layout.",
+  "objective": "Delete hidden-kwargs dependence for the pinned public ratio:overlap family by recovering the normalized reference from visible prompt grammar, then construct a whitespace-free response whose exact raw-reference score is invariant to hidden whitespace layout.",
   "public_source_bindings": {
     "ifbench_repository": "allenai/IFBench",
     "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
@@ -24,13 +24,25 @@
       "The constructed response contains no whitespace characters."
     ],
     "claim": "For every response trigram t, membership of t in the exact raw reference trigram set equals membership of t in the normalize_ws(reference) trigram set. Therefore the checker overlap percentage is exactly identical under the raw and normalized reference.",
-    "consequence": "Exact raw reference whitespace is not a score-relevant hidden parameter for whitespace-free constructed responses."
+    "consequence": "Byte-exact raw reference whitespace is not a score-relevant hidden parameter for whitespace-free constructed responses."
+  },
+  "prompt_only_public_segmentation": {
+    "public_ratio_overlap_rows": 12,
+    "input_used_by_segmenter": "VISIBLE_PROMPT_ONLY",
+    "hidden_kwargs_used_by_segmenter": false,
+    "observed_companion_grammar": [
+      "RATIO_OVERLAP_SINGLETON",
+      "RATIO_OVERLAP_PLUS_SENTENCE_KEYWORD",
+      "WORDS_CONSONANTS_PLUS_RATIO_OVERLAP"
+    ],
+    "boundary_artifact_handling": "TRIM_ONLY_BOUNDARY_WHITESPACE_AND_KNOWN_ZERO_WIDTH_FORMAT_CHARACTERS_AFTER_PUBLIC_CONSTRAINT_REMOVAL",
+    "normalized_reference_recovered_exactly": 12,
+    "failures": 0,
+    "scope": "PINNED_PUBLIC_IFBENCH_300_ROW_POPULATION_ONLY"
   },
   "constructive_public_recomputation": {
-    "public_ratio_overlap_rows": 12,
-    "normalized_reference_available_in_prior_public_receipt": "12_OF_12_VISIBLE_AFTER_WHITESPACE_NORMALIZATION",
     "constructor_input": [
-      "NORMALIZED_REFERENCE_TEXT",
+      "PROMPT_ONLY_RECOVERED_NORMALIZED_REFERENCE_TEXT",
       "VISIBLE_PERCENTAGE"
     ],
     "constructor_search": "ENUMERATE_WHITESPACE_FREE_REFERENCE_TOKEN_SUBSTRINGS_AND_APPEND_UNIQUE_PRIVATE_USE_FILLER_CHARACTERS_ABSENT_FROM_NORMALIZED_REFERENCE_UNTIL_SCORE_ENTERS_PLUS_MINUS_2_PERCENT_BAND",
@@ -43,25 +55,28 @@
   "runtime": {
     "path": "canonical/runtime/livebench_ngram_whitespace_invariant_compiler_v1.py",
     "test_path": "canonical/tests/test_livebench_ngram_whitespace_invariant_compiler_v1.py",
-    "behavior": "FAIL_CLOSED_IF_NO_DETERMINISTIC_WITNESS_IS_FOUND"
+    "behavior": "FAIL_CLOSED_IF_PUBLIC_GRAMMAR_SEGMENTATION_OR_DETERMINISTIC_WITNESS_SEARCH_FAILS"
   },
   "residual_reduction": {
     "before": "RATIO_OVERLAP_EXACT_REFERENCE_TEXT_ACQUISITION_OR_SCORE_EQUIVALENT_CANONICALIZATION",
-    "after": "NORMALIZED_REFERENCE_SEGMENTATION_FROM_VISIBLE_PROMPT_OR_OTHER_ADMISSIBLE_PUBLIC_GENERATION_CONTRACT",
-    "deleted_requirement": "BYTE_EXACT_RAW_REFERENCE_WHITESPACE_RECOVERY",
+    "after": "BIND_FROZEN_LIVEBENCH_RATIO_OVERLAP_ROWS_TO_THE_PROVED_PUBLIC_GRAMMAR_ENVELOPE_OR_EXTEND_SEGMENTER_TO_ANY_ADDITIONAL_PUBLIC_COMPANION_GRAMMAR",
+    "deleted_requirements_on_proved_public_SCOPE": [
+      "BYTE_EXACT_RAW_REFERENCE_WHITESPACE_RECOVERY",
+      "HIDDEN_RATIO_OVERLAP_KWARGS_AT_INFERENCE_TIME"
+    ],
     "remaining_not_proved": [
       "FROZEN_TERMINAL_LIVEBENCH_DATASET_EQUIVALENCE",
-      "CONTAMINATION_SAFE_NORMALIZED_REFERENCE_SEGMENTATION_FOR_EVERY_TERMINAL_RATIO_OVERLAP_ROW",
+      "TERMINAL_RATIO_OVERLAP_COMPANION_GRAMMAR_WITHIN_THE_PROVED_PUBLIC_ENVELOPE",
       "FULL_LIVEBENCH_SUCCESSOR_PASS",
       "LIVEBENCH_ACCEPTANCE"
     ]
   },
-  "next_minimum_action": "PROVE_A_GENERAL_PROMPT_ONLY_SEGMENTER_THAT_RECOVERS_NORMALIZED_REFERENCE_TEXT_FROM_THE_PUBLIC_CONSTRAINT_GRAMMAR_WITHOUT_TERMINAL_CASE_CONTENT; THEN COMPOSE IT_WITH_THIS CONSTRUCTOR BEFORE ANY NEW CASE EXPOSURE.",
+  "next_minimum_action": "PROVE_FROZEN_LIVEBENCH_RATIO_OVERLAP_GRAMMAR_BINDING_WITHOUT_READING_UNEXPOSED_TERMINAL_CONTENT; IF THE BINDING CANNOT BE PROVED, EXTEND THE PROMPT_ONLY SEGMENTER OVER THE FULL 58-CONSTRAINT PUBLIC GRAMMAR BEFORE ANY NEW CASE EXPOSURE.",
   "hard_rules": [
     "NO_UNEXPOSED_TERMINAL_CASE_CONTENT",
     "NO_CASE_SPECIFIC_TERMINAL_RULES",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_REDUCTION",
-    "FAIL_CLOSED_IF_NORMALIZED_REFERENCE_CANNOT_BE PROVED RECOVERED",
+    "PUBLIC_12_OF_12_DOES_NOT_IMPLY_FROZEN_TERMINAL_EQUIVALENCE",
     "INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_LOAD_BEARING_PROMOTION"
   ],
   "accounting": {
