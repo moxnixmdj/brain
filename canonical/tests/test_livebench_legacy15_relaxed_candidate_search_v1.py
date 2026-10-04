@@ -66,3 +66,30 @@ def test_candidate_generation_never_claims_pointwise_optimality():
     assert out["terminal_data_used"] is False
     assert out["hidden_kwargs_used"] is False
     assert out["acceptance_credit"] is False
+
+
+def test_relaxed_search_rejects_incomplete_visible_parameters():
+    bad = {
+        "instruction_id": "keywords:existence",
+        "slots": {"keywords": ["signal"]},
+        "parameter_complete": False,
+    }
+    try:
+        relaxed.generate_relaxed([bad])
+    except ValueError as exc:
+        assert str(exc) == "PARAMETER_INCOMPLETE"
+    else:
+        raise AssertionError("expected fail-closed incomplete parameter rejection")
+
+
+def test_relaxed_search_rejects_conflicting_identity_sets():
+    contracts = [
+        c("detectable_format:json_format"),
+        c("length_constraints:number_words", num_words=100, relation="at least"),
+    ]
+    try:
+        relaxed.generate_relaxed(contracts)
+    except ValueError as exc:
+        assert str(exc) == "ACTIVE15_CONFLICT_GRAPH_REJECTED"
+    else:
+        raise AssertionError("expected fail-closed conflict rejection")
