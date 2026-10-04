@@ -1,0 +1,146 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_TOTALIZED_UNIVERSAL_SUCCESSOR_DESIGN_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_DESIGN__CLOSES_BOTH_KNOWN_V2_UNIVERSAL_HOLES__IMPLEMENTATION_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "falsified_predecessor": {
+    "revocation_commit": "085e262b6c47b8f82dd4b3259fea25d6b2104b30",
+    "holes": [
+      "ADD2_EXACT_IEEE754_ROLE_ORDER__CORRECT_SUPPORT_CAN_STILL_PRODUCE_ONE_ULP_WRONG_TERMINAL_VALUE",
+      "TRUNCATED_HMAC_IDENTIFIERS_HAVE_NO_STRUCTURAL_INJECTIVITY_PROOF_OVER_ALL_VALID_INPUTS"
+    ]
+  },
+  "successor": {
+    "candidate": "EXACT_FLOAT_REPAIRED_V3_OR_SEMANTIC_EQUIVALENT",
+    "generator": "IDENTIFIER_TOTALIZED_V3",
+    "proof": "ONE_CONTENT_BOUND_UNIVERSAL_THEOREM_OVER_EVERY_VALID_BEACON_AND_EVALUATOR_SECRET",
+    "rule": "BOTH_HOLES_MUST_CLOSE_IN_THE_SAME_BOUND_SUBJECT"
+  },
+  "identifier_totality_construction": {
+    "principle": "USE_HMAC_ONLY_TO_SELECT_A_PERMUTATION__NEVER_AS_THE_UNIQUENESS_SOURCE",
+    "keyed_permutation": {
+      "method": "FOR_EACH_FINITE_IDENTIFIER_NAMESPACE__DERIVE_ENTROPY_FROM_HMAC_AND_RUN_DETERMINISTIC_FISHER_YATES_OVER_THE_COMPLETE_LOCAL_SLOT_SET",
+      "structural_property": "FISHER_YATES_OUTPUT_IS_A_BIJECTION_FOR_EVERY_POSSIBLE_ENTROPY_STREAM__INCLUDING_REPEATED_OR_COLLIDING_HMAC_VALUES",
+      "cryptographic_property_needed_for_totality": false
+    },
+    "namespaces": [
+      {
+        "id": "CASE",
+        "slots": 27,
+        "coordinates": "12_TRANSFER_PLUS_15_ABSTENTION_GLOBAL_CASE_ORDINALS",
+        "visible": "CASE_LOCAL_OPAQUE_PERMUTED_SLOT"
+      },
+      {
+        "id": "DOMAIN_A_FEATURE",
+        "slots": "ROLES_PLUS_2_DISTRACTORS_PER_TRANSFER_CASE",
+        "coordinates": "LOCAL_SEMANTIC_FEATURE_SLOTS",
+        "visible": "A_LOCAL_PERMUTED_FEATURE_SLOT"
+      },
+      {
+        "id": "DOMAIN_B_FEATURE",
+        "slots": "ROLES_PLUS_2_DISTRACTORS_PER_TRANSFER_CASE",
+        "coordinates": "LOCAL_SEMANTIC_FEATURE_SLOTS",
+        "visible": "B_LOCAL_PERMUTED_FEATURE_SLOT"
+      },
+      {
+        "id": "TRANSFER_PROBE",
+        "slots": 2,
+        "coordinates": "PROBE_ORDINALS",
+        "visible": "LOCAL_PERMUTED_PROBE_SLOT"
+      },
+      {
+        "id": "ABSTENTION_HYPOTHESIS",
+        "slots": 2,
+        "coordinates": "HYPOTHESIS_ORDINALS",
+        "visible": "LOCAL_PERMUTED_HYPOTHESIS_SLOT"
+      },
+      {
+        "id": "ABSTENTION_DISCRIMINATOR",
+        "slots": "0_TO_2_BY_CLASS",
+        "coordinates": "DISCRIMINATOR_ORDINALS",
+        "visible": "LOCAL_PERMUTED_DISCRIMINATOR_SLOT"
+      },
+      {
+        "id": "RECEIPT",
+        "slots": 1,
+        "coordinates": "TRANSFER_CASE_ORDINAL",
+        "visible": "CASE_LOCAL_RECEIPT_ID"
+      }
+    ],
+    "disjointness": [
+      "DOMAIN_A_AND_DOMAIN_B_IDENTIFIER_NAMESPACES_ARE_STRUCTURALLY_DISJOINT",
+      "CASE_LEAF_AND_LOCAL_NAMESPACE_TAGS_ARE_STRUCTURALLY_DISJOINT",
+      "LOCAL_SLOT_NUMBERS_ARE_ASSIGNED_ONLY_AFTER_SECRET_KEYED_PERMUTATION__THEY_DO_NOT_ENCODE_LATENT_ROLE_NAMES"
+    ],
+    "proof_obligation": "PROVE_ALL_REQUIRED_VISIBLE_AND_HIDDEN_IDENTIFIER_SETS_HAVE_EXPECTED_CARDINALITY_WITHOUT_ANY_HASH_COLLISION_ASSUMPTION"
+  },
+  "exact_float_construction": {
+    "add2_public_signature": {
+      "r0": [
+        -1,
+        1,
+        -1
+      ],
+      "r1": [
+        1,
+        -1,
+        1
+      ],
+      "indices": [
+        4,
+        10
+      ],
+      "nonzero_magnitude_lower_bound": 0.25
+    },
+    "rule": "AFTER_THE_FIRST_PROBE_LEAVES_ONE_TRUE_SUPPORT__ORIENT_R0_R1_FROM_THE_PUBLIC_SIGN_SIGNATURE_BEFORE_EXACT_QUERY_EVALUATION",
+    "required_regression": "THE_DETERMINISTIC_SECRET0_INDEX4_V2_ONE_ULP_COUNTEREXAMPLE_MUST_FAIL_V2_AND_PASS_SUCCESSOR_WITH_EXACT_GOLD_EQUALITY"
+  },
+  "universal_proof_obligations": [
+    "GENERATOR_TOTALITY_FOR_EVERY_VALID_BEACON_AND_EVALUATOR_SECRET",
+    "EXACTLY_27_CASES_ALWAYS_EMITTED",
+    "ALL_CASE_FEATURE_PROBE_HYPOTHESIS_AND_REQUIRED_ACTION_IDENTIFIERS_STRUCTURALLY_VALID_WITHOUT_HASH_INJECTIVITY_ASSUMPTION",
+    "STRICT_WRONG_SUPPORT_REJECTION_FOR_AFFINE_COMPLEMENT_SAT_MONO_SIGN_STEP",
+    "ADD2_WRONG_SUPPORT_MINIMUM_GAP_1_5_ON_FIRST_PROBE",
+    "ADD2_EXACT_ROLE_ORIENTATION_AND_EXACT_IEEE754_GOLD_EQUALITY",
+    "ALL_THREE_ABSTENTION_CLASSES",
+    "MAX_TRANSFER_PROBES_2_LT_FULL_REDISCOVERY_FLOOR_3",
+    "ZERO_LEARNED_BYTES_ZERO_EXTERNAL_FRONTIER_MODEL_CALLS_ZERO_INCREMENTAL_SPEND"
+  ],
+  "independent_falsification_plan": {
+    "mandatory_attacks": [
+      "MONKEYPATCH_OR_ABSTRACT_THE_ENTROPY_SOURCE_TO_CONSTANT_VALUES_AND_PROVE_IDENTIFIER_CARDINALITIES_STILL_HOLD",
+      "REPRODUCE_THE_REVOKED_V2_ADD2_ONE_ULP_COUNTEREXAMPLE",
+      "EXHAUST_EVERY_FINITE_PERMUTATION_INDEX_FOR_LOCAL_FEATURE_NAMESPACES",
+      "SWEEP_MANY_BEACON_SECRET_PAIRS_ONLY_AS_FALSIFICATION_NOT_AS_THE_UNIVERSAL_BASIS"
+    ],
+    "acceptance_rule": "THE FORMAL STRUCTURAL ARGUMENT_IS_LOAD_BEARING__FINITE_SWEEPS_ARE_ONLY_COUNTEREXAMPLE_SEARCH"
+  },
+  "root3_consequence_if_independently_verified": {
+    "new_scope_certificate_event_eligible": true,
+    "target_scope_relation": "EXACT_OR_PROVEN_STRONGER_TO_THE_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_LEAVES",
+    "one_use_27_case_production_information_gain": 0,
+    "acceptance_credit_before_separate_reduction": 0,
+    "family_credit_before_separate_reduction": 0
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_FROM_THIS_FROZEN_DIRECT_SCOPE_PROOF",
+    "NO_MYSTERYMECHANISM_THRESHOLD_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_BEFORE_SEPARATE_FIXED_POINT_REDUCTION",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_RETIRED_V2_UNIVERSAL_PROMOTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
