@@ -346,6 +346,78 @@ def _shortlist_features(
     return out[:global_limit]
 
 
+def _slice_shortlist_features(
+    data: Sequence[Mapping[str, float]],
+    *,
+    target: str,
+    variable: str,
+    other_variable: str,
+    explicit_bounds: Sequence[Any] | None,
+    limit: int = 8,
+) -> list[dict[str, Any]]:
+    """Rank a feature by within-slice shape, not confounded marginal correlation.
+
+    If at least three observations share the other variable, a separable
+    bilinear mechanism makes target affine in f(variable) on that slice.  This
+    creates a high-leverage structural test from the same sparse observations.
+    """
+    values = [float(row[variable]) for row in data]
+    groups: dict[float, list[int]] = {}
+    for i, row in enumerate(data):
+        groups.setdefault(round(float(row[other_variable]), 12), []).append(i)
+    informative = [idx for idx in groups.values() if len(idx) >= 3]
+    if not informative:
+        return []
+
+    ranked: list[tuple[float, float, tuple[Any, ...], dict[str, Any]]] = []
+    for spec in _feature_specs(values, explicit_bounds):
+        fv = [_eval_feature(spec, x) for x in values]
+        if any(x is None for x in fv):
+            continue
+        vec = [float(x) for x in fv if x is not None]
+        weighted_error = 0.0
+        total_weight = 0
+        valid = True
+        for idx in informative:
+            basis = [[1.0, vec[i]] for i in idx]
+            actual = [float(data[i][target]) for i in idx]
+            coef = _fit_linear_features(basis, actual)
+            if coef is None:
+                valid = False
+                break
+            predicted = _predict_linear(coef, basis)
+            err = _nrmse(actual, predicted)
+            if not math.isfinite(err):
+                valid = False
+                break
+            weighted_error += err * len(idx)
+            total_weight += len(idx)
+        if not valid or total_weight == 0:
+            continue
+        score = weighted_error / total_weight
+        row = dict(spec)
+        row["values"] = vec
+        row["slice_nrmse"] = score
+        ranked.append((score, float(spec["complexity"]), _feature_key(spec), row))
+    ranked.sort(key=lambda x: (x[0], x[1], x[2]))
+    return [row for _, _, _, row in ranked[:limit]]
+
+
+def _all_valid_features(
+    values: Sequence[float],
+    explicit_bounds: Sequence[Any] | None,
+) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    for spec in _feature_specs(values, explicit_bounds):
+        fv = [_eval_feature(spec, float(x)) for x in values]
+        if any(x is None for x in fv):
+            continue
+        row = dict(spec)
+        row["values"] = [float(x) for x in fv if x is not None]
+        out.append(row)
+    return out
+
+
 def _tree_rows(f: Sequence[float], g: Sequence[float]) -> list[list[float]]:
     return [[1.0, a, b, a * b] for a, b in zip(f, g)]
 
@@ -458,15 +530,21 @@ def discover(
 
     raw: list[dict[str, Any]] = []
     left, right = variables
-    for f, g in itertools.product(shortlist[left], shortlist[right]):
+    pair_seen: set[tuple[Any, ...]] = set()
+
+    def append_pair(f: Mapping[str, Any], g: Mapping[str, Any]) -> None:
+        pair_key = (_feature_key(f), _feature_key(g))
+        if pair_key in pair_seen:
+            return
+        pair_seen.add(pair_key)
         basis = _tree_rows(f["values"], g["values"])
         train_basis = [basis[i] for i in fit_indices]
         coef = _fit_linear_features(train_basis, [targets[i] for i in fit_indices])
         if coef is None:
-            continue
+            return
         predicted = _predict_linear(coef, basis)
         if not all(math.isfinite(x) for x in predicted):
-            continue
+            return
         err = _nrmse(targets, predicted)
         complexity = float(f["complexity"]) + float(g["complexity"]) + 4.0
         raw.append({
@@ -484,6 +562,40 @@ def discover(
             ),
             "expression": _tree_expression(coef, f, g, variables),
         })
+
+    # Fast marginal shortlist path keeps the public frozen examples cheap.
+    for f, g in itertools.product(shortlist[left], shortlist[right]):
+        append_pair(f, g)
+
+    # Break the interaction-confounding failure mode: if the observations contain
+    # a repeated-coordinate slice with >=3 levels on one axis, identify that
+    # axis structurally and then condition on it while scanning the complete
+    # bounded grammar of the other axis.  This avoids dropping the true feature
+    # merely because its marginal correlation is poor under a strong interaction.
+    left_explicit = None if bounds is None else bounds.get(left)
+    right_explicit = None if bounds is None else bounds.get(right)
+    left_slice = _slice_shortlist_features(
+        data, target=target, variable=left, other_variable=right,
+        explicit_bounds=left_explicit, limit=8,
+    )
+    right_slice = _slice_shortlist_features(
+        data, target=target, variable=right, other_variable=left,
+        explicit_bounds=right_explicit, limit=8,
+    )
+    if left_slice:
+        all_right = _all_valid_features(
+            [float(row[right]) for row in data], right_explicit
+        )
+        for f in left_slice:
+            for g in all_right:
+                append_pair(f, g)
+    if right_slice:
+        all_left = _all_valid_features(
+            [float(row[left]) for row in data], left_explicit
+        )
+        for g in right_slice:
+            for f in all_left:
+                append_pair(f, g)
 
     # Compute the more expensive leave-one-out score only on the strongest
     # full-data candidates.  This keeps runtime bounded while punishing brittle
@@ -557,6 +669,8 @@ def discover(
         "search_mode": "SEPARABLE_EXPRESSION_TREE_V2",
         "robust_fit_row_count": len(fit_indices),
         "feature_shortlist_sizes": {k: len(v) for k, v in shortlist.items()},
+        "slice_shortlist_sizes": {left: len(left_slice), right: len(right_slice)},
+        "interaction_confounded_axis_rescue": bool(left_slice or right_slice),
         "tree_candidates_considered": len(raw),
         "candidates": kept,
         "learned_parameter_bytes": 0,
