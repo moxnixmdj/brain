@@ -24,35 +24,75 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run preexposure integrity tests
-        run: python -m unittest canonical.tests.test_h100_zero_learned_novelty_stress_v1 -v
-      - name: Run frozen zero-learned novelty census
-        run: python canonical/runtime/h100_zero_learned_novelty_stress_v1.py > h100_zero_learned_novelty_stress_v1.json
-      - name: Show compact result
+      - name: Run preexposure integrity tests with capture
+        shell: bash
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_h100_zero_learned_novelty_stress_v1 -v > h100_tests.log 2>&1
+          echo $? > h100_tests.exit
+          set -e
+      - name: Run frozen zero-learned novelty census with capture
+        shell: bash
+        run: |
+          set +e
+          python canonical/runtime/h100_zero_learned_novelty_stress_v1.py > h100_zero_learned_novelty_stress_v1.json 2> h100_runtime.err
+          echo $? > h100_runtime.exit
+          set -e
+      - name: Build diagnostic summary
+        if: always()
+        shell: bash
         run: |
           python - <<'PY'
-          import json
-          p='h100_zero_learned_novelty_stress_v1.json'
-          d=json.load(open(p))
-          print(json.dumps({
-            'tasks_solved':d['tasks_solved'],
-            'task_count':d['task_count'],
-            'within_operator_tasks_solved':d['within_operator_tasks_solved'],
-            'within_operator_task_count':d['within_operator_task_count'],
-            'outside_operator_tasks_solved':d['outside_operator_tasks_solved'],
-            'outside_operator_task_count':d['outside_operator_task_count'],
-            'false_exact_count':d['false_exact_count'],
-            'max_persistent_learned_bytes':d['max_persistent_learned_bytes'],
-            'external_learned_capability_calls':d['external_learned_capability_calls'],
-            'task_summary':[
-              {'task_id':x['task_id'],'solved':x['task_solved'],'classification':x['classification'],
-               'routes':[{'route_id':r['route_id'],'ok':r['useful_candidate'],'holdout_nrmse':r['holdout_nrmse']} for r in x['routes']]}
-              for x in d['tasks']
-            ]
-          },indent=2))
+          import json, pathlib
+          def read(p):
+              q=pathlib.Path(p)
+              return q.read_text() if q.exists() else "<missing>"
+          out={
+            "tests_exit":read("h100_tests.exit").strip(),
+            "runtime_exit":read("h100_runtime.exit").strip(),
+            "tests_log":read("h100_tests.log"),
+            "runtime_stderr":read("h100_runtime.err"),
+          }
+          p=pathlib.Path("h100_zero_learned_novelty_stress_v1.json")
+          if p.exists() and p.stat().st_size:
+              try:
+                  d=json.loads(p.read_text())
+                  out["result_summary"]={
+                    "tasks_solved":d.get("tasks_solved"),
+                    "task_count":d.get("task_count"),
+                    "within_operator_tasks_solved":d.get("within_operator_tasks_solved"),
+                    "within_operator_task_count":d.get("within_operator_task_count"),
+                    "outside_operator_tasks_solved":d.get("outside_operator_tasks_solved"),
+                    "outside_operator_task_count":d.get("outside_operator_task_count"),
+                    "false_exact_count":d.get("false_exact_count"),
+                    "max_persistent_learned_bytes":d.get("max_persistent_learned_bytes"),
+                    "external_learned_capability_calls":d.get("external_learned_capability_calls"),
+                    "task_summary":[
+                      {"task_id":x["task_id"],"solved":x["task_solved"],"classification":x["classification"],
+                       "routes":[{"route_id":r["route_id"],"ok":r["useful_candidate"],"holdout_nrmse":r["holdout_nrmse"]} for r in x["routes"]]}
+                      for x in d.get("tasks",[])
+                    ]
+                  }
+              except Exception as e:
+                  out["result_parse_error"]=repr(e)
+          pathlib.Path("h100_diagnostic_summary.json").write_text(json.dumps(out,indent=2,sort_keys=True))
+          print(json.dumps(out.get("result_summary",out),indent=2,sort_keys=True))
           PY
-      - uses: actions/upload-artifact@v4
+      - name: Upload full diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: h100-zero-learned-novelty-stress-v1
-          path: h100_zero_learned_novelty_stress_v1.json
-          if-no-files-found: error
+          path: |
+            h100_zero_learned_novelty_stress_v1.json
+            h100_diagnostic_summary.json
+            h100_tests.log
+            h100_runtime.err
+            h100_tests.exit
+            h100_runtime.exit
+          if-no-files-found: warn
+      - name: Enforce experiment success
+        shell: bash
+        run: |
+          test "$(cat h100_tests.exit)" = "0"
+          test "$(cat h100_runtime.exit)" = "0"
