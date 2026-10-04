@@ -183,6 +183,15 @@ class ExperimentSynthesizerV6Tests(unittest.TestCase):
                 environment_id=ENV,goal_id=GOAL,candidates=CANDIDATES,probes=[p]
             )
 
+    def test_mechanism_prediction_and_probe_model_must_agree(self):
+        # Receipt matches the supplied map, but the map contradicts the
+        # mechanism candidate's own prediction for probe p.
+        p=probe("p",{"m1":"x","m2":"x","m3":"x"},1)
+        with self.assertRaises(synth.ExperimentSynthesisError):
+            synth.synthesize(
+                environment_id=ENV,goal_id=GOAL,candidates=CANDIDATES,probes=[p]
+            )
+
     def test_multi_step_plan_can_beat_direct_expensive_probe(self):
         candidates=[
             {"id":"m1","best_action":"A","predictions":{"x":"0","y":"0"},"invariants":[],"provenance":[]},
