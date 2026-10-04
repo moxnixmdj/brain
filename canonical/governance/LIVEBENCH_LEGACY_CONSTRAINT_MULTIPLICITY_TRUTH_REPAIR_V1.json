@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_CONSTRAINT_MULTIPLICITY_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_TRUTH_REPAIR__SAME_FAMILY_MULTIPLICITY_IS_VALID__PARSER_REPAIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem": "LEGACY_VISIBLE_COMPILER_TREATED_REPEATED_INSTRUCTION_IDS_AS_AMBIGUOUS_AND_FAILED_CLOSED",
+  "public_evidence": {
+    "repository": "google-research/google-research",
+    "commit": "e49bbfe381c9c0e564b937f1c4e163a2273c65cc",
+    "path": "instruction_following_eval/data/input_data.jsonl",
+    "rows": 541,
+    "instruction_instances": 834,
+    "repeated_prompt_family_pairs_with_multiple_kwargs": 16,
+    "examples": [
+      {
+        "key": 19,
+        "family": "length_constraints:number_words",
+        "visible": "600 to 700 words",
+        "instances": [
+          {
+            "relation": "at least",
+            "num_words": 600
+          },
+          {
+            "relation": "less than",
+            "num_words": 701
+          }
+        ]
+      },
+      {
+        "key": 1837,
+        "family": "length_constraints:number_sentences",
+        "visible": "20 to 25 sentences",
+        "instances": [
+          {
+            "relation": "at least",
+            "num_sentences": 20
+          },
+          {
+            "relation": "less than",
+            "num_sentences": 26
+          }
+        ]
+      },
+      {
+        "key": 1203,
+        "family": "keywords:frequency",
+        "visible": "war at least 8 times ... peace at least 10 times",
+        "instances": [
+          {
+            "relation": "at least",
+            "keyword": "war",
+            "frequency": 8
+          },
+          {
+            "relation": "at least",
+            "keyword": "peace",
+            "frequency": 10
+          }
+        ]
+      }
+    ]
+  },
+  "deduction": [
+    "INSTRUCTION_ID_IS_NOT_A_UNIQUE_KEY_WITHIN_A_PROMPT",
+    "SAME_FAMILY_MULTIPLICITY_CAN_ENCODE_A_RANGE_OR_MULTIPLE_INDEPENDENT_CONSTRAINTS",
+    "DUPLICATE_FAMILY_PRESENCE_ALONE_IS_NOT_AMBIGUITY",
+    "PARSER_MUST_PRESERVE_EACH_VISIBLE_CONSTRAINT_INSTANCE_AND_DEFER_CONSISTENCY_TO_COMPOSITION"
+  ],
+  "repaired_subject": {
+    "path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py",
+    "branch": "mission/livebench-legacy-multiplicity-repair-20261004-sol",
+    "source_commit": "09b4a84478d818bca060309f8e7b9b897130c2e3",
+    "test_commit": "14761f3779a1b087ff5743699476bff0a3b94d34",
+    "behavior": [
+      "STATUS_FAILS_ONLY_ON_PARSE_ERRORS_NOT_REPEAT_FAMILY_ID",
+      "REPEATED_INSTRUCTION_IDS_REPORTED_AS_METADATA",
+      "CONSTRAINT_INSTANCE_COUNT_EXPLICIT",
+      "EVERY_MATCHED_INSTANCE_PRESERVED"
+    ]
+  },
+  "remaining_root1_blockers": [
+    "PARAPHRASE_TOLERANT_VISIBLE_GRAMMAR_COVERAGE_REMAINS_OPEN",
+    "repeat_prompt_EXACT_TARGET_RECOVERY_REMAINS_NONUNIVERSAL_FROM_VISIBLE_TEXT",
+    "CONSTRAINT_COMPOSITION_AND_WITNESS_SYNTHESIS_REMAIN_TO_BE_PROVED",
+    "NO_FRESH_TERMINAL_EXECUTION_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_541_OF_541_PUBLIC_ROWS_ARE_PARSED",
+    "NO_CLAIM_REPEAT_PROMPT_HIDDEN_TARGET_IS_UNIVERSALLY_RECOVERABLE",
+    "NO_LIVEBENCH_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_PROMPT_KWARGS_RESPONSE_OR_SCORE_CONTENT_READ"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
