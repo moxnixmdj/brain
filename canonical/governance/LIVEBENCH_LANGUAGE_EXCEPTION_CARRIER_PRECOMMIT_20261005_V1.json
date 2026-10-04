@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LANGUAGE_EXCEPTION_CARRIER_PRECOMMIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__ZERO_CREDIT__INDEPENDENT_EXACT_RUNTIME_VERIFICATION_PENDING",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "purpose": "Test whether one deterministic private-use carrier can make pinned response-language and English-case language detection succeed through the checkers' explicit LangDetectException-success path, deleting the 30-language template axis.",
+  "frozen_subjects": {
+    "carrier_path": "canonical/runtime/livebench_union25_language_exception_carrier_v1.py",
+    "carrier_git_blob_sha": "b4908c1a02563719029001aeba15f08dd0029b73"
+  },
+  "pinned_runtime": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "langdetect_version": "1.0.9",
+    "detector_source_commit": "5071871742170034557c0e6ec8d6e410f3d9652f",
+    "detector_blob": "cc831a0e7530d49fa9b544c9b779ba075ffdbe5c",
+    "detector_factory_blob": "aa5a7b24b46b460d6faece5e4afcd23f7178a578"
+  },
+  "exact_success_gate": [
+    "SUBJECT_AND_PINNED_SOURCE_BYTES_MATCH",
+    "PRIVATE_USE_U_E000_IS_NONWORD_NONASCII_NONCASED_AND_HAS_NO_LIVEBENCH_STRUCTURAL_PUNCTUATION",
+    "FOR_EVERY_DECLARED_ASCII_PAYLOAD_CLASS_THE_CONSTRUCTOR_ADDS_MORE_THAN_TWICE_THE_ASCII_LATIN_COUNT_AS_U_E000",
+    "PINNED_LANGDETECT_CLEANING_REMOVES_ALL_ASCII_LATIN_FROM_EVERY_TEST_RESPONSE",
+    "PINNED_LANGDETECT_EXTRACTS_ZERO_PROFILE_NGRAM_FEATURES_AFTER_CLEANING",
+    "langdetect.detect_RAISES_LangDetectException_CantDetectError_FOR_EVERY_TEST_RESPONSE",
+    "PINNED_ResponseLanguageChecker_RETURNS_TRUE_FOR_ALL_30_LANGUAGE_CODES_ON_THE_SAME_EXCEPTION_CARRIER_RESPONSE",
+    "PINNED_CapitalLettersEnglishChecker_RETURNS_TRUE_FOR_UPPERCASE_ASCII_PAYLOAD_PLUS_CARRIER",
+    "PINNED_LowercaseLettersEnglishChecker_RETURNS_TRUE_FOR_LOWERCASE_ASCII_PAYLOAD_PLUS_CARRIER",
+    "CARRIER_DOES_NOT_CHANGE_REGEXP_WORD_COUNT_KEYWORD_LETTER_COMMA_SENTENCE_OR_CASE_SEMANTICS",
+    "ZERO_TERMINAL_ROWS_ZERO_HIDDEN_KWARGS_ZERO_TARGET_RESPONSES_ZERO_TARGET_SCORES"
+  ],
+  "adversarial_payloads": [
+    "EMPTY",
+    "ASCII_LOWER",
+    "ASCII_UPPER",
+    "MIXED_ASCII_WITH_DIGITS_AND_PUNCTUATION",
+    "LIVEBENCH_SECTION_POSTSCRIPT_END_TITLE_STYLE_SCAFFOLD",
+    "ASCII_KEYWORD_AND_LETTER_FREQUENCY_STYLE_PAYLOAD",
+    "NEAR_DETECTOR_WINDOW_WITHIN_CONSTRUCTOR_BOUND"
+  ],
+  "failure_rule": "ANY_FEATURE_SURVIVAL_DETECTION_INSTEAD_OF_EXCEPTION_CHECKER_FALSE_OR_MAX_TEXT_TRUNCATION_COUNTEREXAMPLE_FAILS_CLOSED__NO_CREDIT",
+  "promotion_rule": "ONLY_AN_INDEPENDENT_POST_FREEZE_EXACT_RUNTIME_PASS_MAY_PROMOTE_THIS_AS_A_COMPOSITION_PRIMITIVE__ACCEPTANCE_REMAINS_SEPARATE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_LANGDETECT_EXCEPTION_BEHAVIOR_CLAIM_YET",
+    "NO_UNION25_POINTWISE_OPTIMALITY_CLAIM",
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_GOAL_COMPLETION_CLAIM"
+  ]
+}
