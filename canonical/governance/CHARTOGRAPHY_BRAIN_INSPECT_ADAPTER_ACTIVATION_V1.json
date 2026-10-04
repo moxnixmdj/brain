@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__INSPECT_ADAPTER_DISCHARGED__INTERNAL_MULTIMODAL_BACKEND_OPEN__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "candidate": {
+    "path": "canonical/governance/CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_V1.json",
+    "git_blob_sha": "f0352c187eb921d6e736608825005df887449488"
+  },
+  "verification": {
+    "path": "canonical/verification/CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "841fc40bd2f54b451e01d32afd9a79a32aaafa0b",
+    "workflow_run_id": 37165446413,
+    "workflow_job_id": 111327285044,
+    "conclusion": "success"
+  },
+  "removed_blocker": "BRAIN_EVALUATION_ADAPTER_IMPLEMENTATION",
+  "remaining": [
+    "SEPARATELY_VERIFIED_INTERNAL_MULTIMODAL_BACKEND_BINDING",
+    "PROJECT_SPECIFIC_GEMINI_3_5_FLASH_FREE_TIER_ACCESS_AND_CAPACITY_RECEIPT",
+    "BRAIN_SCORE_GE_89"
+  ],
+  "root_effect": {
+    "root1": "UNCHANGED_INACTIVE",
+    "root2": "OPEN__ADAPTER_IMPLEMENTATION_REMOVED__BACKEND_BINDING_ACCOUNT_CAPACITY_AND_SCORE_REMAIN",
+    "root3": "UNCHANGED"
+  },
+  "hard_nonclaims": [
+    "NO_PRODUCTION_MULTIMODAL_BACKEND_BOUND",
+    "NO_CHARTOGRAPHY_TERMINAL_CASES_EXECUTED",
+    "NO_SCORE_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
