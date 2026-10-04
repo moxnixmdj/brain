@@ -1,0 +1,90 @@
+name: Verify LiveBench generator-support route falsification V2
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_generator_support_universal_route_falsifier_v2.py"
+      - "canonical/tests/test_livebench_generator_support_universal_route_falsifier_v2.py"
+      - "canonical/governance/LIVEBENCH_GENERATOR_SUPPORT_UNIVERSAL_ROUTE_FALSIFICATION_V2.json"
+      - ".github/workflows/verify-livebench-generator-support-universal-route-falsification-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run local theorem tests
+        run: |
+          python -m pip install -q pytest
+          pytest -q canonical/tests/test_livebench_generator_support_universal_route_falsifier_v2.py
+
+      - name: Clone exact frozen LiveBench sources
+        run: |
+          git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/livebench
+          git -C /tmp/livebench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
+
+      - name: Verify exact source bindings and counterexample reachability
+        run: |
+          python - <<'PY'
+          import hashlib
+          import re
+          from pathlib import Path
+
+          root = Path("/tmp/livebench")
+          def blob(path):
+              b = (root / path).read_bytes()
+              return hashlib.sha1(b"blob " + str(len(b)).encode() + b"\0" + b).hexdigest()
+
+          assert blob("livebench/if_runner/instruction_following_eval/instructions.py") == "4997bab885a676d92545fd91a9a20b48d234a2b2"
+          assert blob("livebench/if_runner/instruction_following_eval/instructions_util.py") == "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+          assert blob("livebench/if_runner/instruction_following_eval/instructions_registry.py") == "903ed738398648c7cfac61d5ffa478c22f1f0891"
+          assert blob("livebench/process_results/instruction_following/utils.py") == "8ce01747887ec0792c8f024e1972e34ece781676"
+
+          historical = Path("/tmp/historical")
+          historical.mkdir(exist_ok=True)
+          # Read the exact historical generator from Git without changing the
+          # frozen scorer checkout.
+          import subprocess
+          data = subprocess.check_output([
+              "git", "-C", str(root), "show",
+              "686be1e78a0ba8036d7e355bc406e1a265da5292:livebench/if_runner/live_data.py"
+          ])
+          h = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+          assert h == "6ff390d6885cf90f88d9d36959735cb327613edc"
+          text = data.decode()
+          assert "np.random.randint(2, max_instructions+1" in text
+          assert "np.random.choice(all_constraints, draw, replace=False)" in text
+          assert "build_instruction.build_description()" in text
+
+          instructions = (root / "livebench/if_runner/instruction_following_eval/instructions.py").read_text()
+          util = (root / "livebench/if_runner/instruction_following_eval/instructions_util.py").read_text()
+          registry = (root / "livebench/if_runner/instruction_following_eval/instructions_registry.py").read_text()
+          score = (root / "livebench/process_results/instruction_following/utils.py").read_text()
+
+          assert '"other"' in util
+          assert '"Any other questions?"' in instructions
+          assert 'r"\\b" + word + r"\\b"' in instructions
+          assert "value.endswith(self._end_phrase)" in instructions
+          assert 'score_1 = 1 if follow_all_instructions else 0' in score
+          assert 'score_2 = sum(score_2) / len(score_2)' in score
+          assert 'avg_score = (score_1 + score_2) / 2' in score
+
+          # Exact registry has no cross-conflict between these two IDs.
+          # Also verify through current Brain's independently reduced conflict
+          # projection, which is what the 928-set constructor uses.
+          from canonical.runtime import livebench_legacy15_composition_archetypes_v1 as a
+          ids = {"keywords:forbidden_words", "startend:end_checker"}
+          assert a.compatible(tuple(ids))
+
+          phrase = "Any other questions?"
+          assert re.search(r"\bother\b", phrase, re.I)
+          print("exact-source reachability and pure-string mutual exclusion PASS")
+          PY
