@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1",
   "date": "2026-10-05",
-  "status": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_SCOPE_PROOF_PASS__ATOMIC_PREDICATE_PROMOTION_ELIGIBLE__ZERO_FAMILY_CAPABILITY_OWNERSHIP_CREDIT",
+  "status": "REVOKED__INDEPENDENT_FINITE_AND_BOUND_INTERNAL_PROOF_PASSED_BUT_TOP_LEVEL_ACCEPTED_STRING_UNIVERSALITY_FALSIFIED__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
   "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
@@ -47,24 +47,25 @@
   },
   "deduction": {
     "prior_state": "EXTERNAL_BLOCKED",
-    "discharge_condition_satisfied": true,
-    "new_state": "PROVED",
-    "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "discharge_condition_satisfied": false,
+    "new_state": "EXTERNAL_BLOCKED",
+    "proof_kind": "REVOKED_CANDIDATE",
     "independent_or_objective": true,
-    "scope_complete": true,
-    "atomic_predicate_proved_delta": 1,
-    "unresolved_predicate_delta": -1,
-    "bound_blocker_delta": -1,
+    "scope_complete": false,
+    "atomic_predicate_proved_delta": 0,
+    "unresolved_predicate_delta": 0,
+    "bound_blocker_delta": 0,
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
-    "reason_family_remains_open": "MYSTERYMECHANISM_GE_49_55_IS_SEPARATE_AND_UNCHANGED"
+    "required_successor": "TOTAL_INJECTIVE_CANONICAL_ENCODING_FOR_EVERY_ACCEPTED_PYTHON_STR_BEACON_AND_DECLARED_SECRET_INTERFACE__THEN_REVERIFY_STRUCTURAL_IDS_EXACT_ADD2_ALL_TRANSFER_AND_ABSTENTION_CLASSES"
   },
   "hard_nonclaims": [
+    "NO_ACCEPTANCE_PROMOTION",
     "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION",
     "NO_MYSTERYMECHANISM_THRESHOLD_CREDIT",
-    "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_CREDIT_FROM_THIS_ATOM_ALONE",
-    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOM_ALONE",
+    "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
     "NO_PRODUCTION_OR_TERMINAL_CASE_CONSUMPTION"
   ],
   "accounting": {
@@ -73,8 +74,13 @@
     "terminal_cases_consumed": 0,
     "production_cases_generated": 0,
     "acceptance_family_credit_delta": 0,
-    "atomic_predicate_proved_delta": 1,
+    "atomic_predicate_proved_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "superseded_by": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V4_STRING_DOMAIN_TOTALITY_REVOCATION_20261005_V1.json",
+    "commit": "38eb172fb9553541d0a1c6d9371751e0eecf6996",
+    "reason": "REACHABLE_ACCEPTED_BEACON_WITH_UNPAIRED_HIGH_SURROGATE_PASSES_LENGTH_GATE_BUT_RAISES_UNICODEENCODEERROR_BEFORE_EMISSION"
   }
 }
