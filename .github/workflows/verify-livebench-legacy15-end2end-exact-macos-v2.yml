@@ -1,0 +1,51 @@
+name: Verify LiveBench legacy15 exact V2 macOS
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_legacy15_joint_witness_v1.py"
+      - "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py"
+      - "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py"
+      - "canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: macos-15-intel
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install exact legacy checker dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install nltk==3.9.2 langdetect==1.0.9 immutabledict==4.2.1
+          python - <<'PY'
+          import nltk
+          for name in ["punkt", "punkt_tab"]:
+              nltk.download(name, quiet=True)
+          PY
+
+      - name: Checkout exact frozen LiveBench scorer
+        run: |
+          git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/livebench
+          git -C /tmp/livebench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
+
+      - name: Run 7424-case active15 exact audit
+        run: |
+          mkdir -p /tmp/receipt
+          python canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py \
+            --livebench-root /tmp/livebench \
+            --output /tmp/receipt/livebench-legacy15-end2end-exact-v2.json
+
+      - name: Upload exact audit receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: livebench-legacy15-end2end-exact-v2-macos
+          path: /tmp/receipt/livebench-legacy15-end2end-exact-v2.json
+          if-no-files-found: error
