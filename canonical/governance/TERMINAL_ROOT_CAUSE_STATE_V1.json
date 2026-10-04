@@ -110,7 +110,20 @@
         "current_frontier_verification_git_blob_sha": "2475a8583e2ed2889c3e9e0613ae3bcf269ffc82",
         "effective_scheduling_authority": true,
         "current_frontier_activation_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5_ACTIVATION_V1.json",
-        "current_frontier_activation_git_blob_sha": "2d15df0daab51c5cc61c4194197da7f7fcd5a1b0"
+        "current_frontier_activation_git_blob_sha": "2d15df0daab51c5cc61c4194197da7f7fcd5a1b0",
+        "predicate_overlays": {
+          "FINANCE_ACCOUNTING_INDEX_GE_61": {
+            "activation_path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_ACTIVATION_V1.json",
+            "activation_git_blob_sha": "9b9d4a41d19a5e58e8967027e1d1837790287dc2",
+            "verification_path": "canonical/verification/FINANCE_INDEX_DIRECT_THRESHOLD_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+            "verification_git_blob_sha": "f7c1127834aee3c70dc4634e8273e3a887e45c66",
+            "status": "ACTIVE__WEIGHTED_LOWER_BOUND_DEFICIT_ROUTE__ZERO_CREDIT",
+            "effective_scheduling_authority": true,
+            "supersedes_frontier_action": "FINANCE_COMPONENTWISE_PREMISES_AND_NORMALIZATION_AGGREGATION",
+            "replacement_action": "MINIMIZE_VERIFIED_WEIGHTED_BRAIN_COMPONENT_LOWER_BOUND_DEFICIT_TO_61",
+            "fresh_reality_authority": false
+          }
+        }
       }
     },
     "root_3_scope_completeness": {
@@ -141,7 +154,9 @@
     "root1_currently_active": false,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
     "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5.json",
-    "root2_effective_scheduling_authority": true
+    "root2_effective_scheduling_authority": true,
+    "finance_index_direct_threshold_overlay_active": true,
+    "finance_index_direct_threshold_route": "MINIMIZE_VERIFIED_WEIGHTED_BRAIN_COMPONENT_LOWER_BOUND_DEFICIT_TO_61"
   },
   "accounting": {
     "acceptance_credit_delta": 0,
