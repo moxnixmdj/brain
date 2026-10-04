@@ -6,8 +6,9 @@ It never consumes instruction_id_list, hidden kwargs, question ids, active row
 metadata, prior responses, or scores. Unsupported/contradictory compositions
 fail closed.
 
-This is a candidate until independently replayed against the exact frozen legacy
-checker bytes on the removed 200-row predecessor population.
+This is a contamination-safe constructive candidate. Verification must use
+public frozen checker semantics plus synthetic/source-generated prompts only;
+quarantined terminal rows are not an admissible tuning or proof source.
 """
 from __future__ import annotations
 
@@ -43,22 +44,35 @@ def _required(constraints: list[dict[str, Any]]) -> list[str]:
             out.extend(str(x) for x in (_slots(c).get("keywords") or []))
     return out
 
-def _safe_token(forbidden: list[str], seed: str = "zxqv") -> str:
-    for candidate in (seed, "brnt", "clmp", "dgfk", "hjwy", "vvzz", "0000"):
-        if all(re.search(r"\b" + re.escape(w) + r"\b", candidate, re.I) is None for w in forbidden):
+def _whole_word_forbidden(text: str, forbidden: list[str]) -> bool:
+    return any(re.search(r"\b" + re.escape(w) + r"\b", text, re.I) is not None for w in forbidden)
+
+def _safe_token(forbidden: list[str]) -> str:
+    # Frozen public keyword generation draws alphabetic WORD_LIST entries. A
+    # token containing a digit cannot equal any such whole-word forbidden token.
+    # Keep a defensive finite search for non-historical direct inputs too.
+    for candidate in ("q0", "q1", "q2", "q3", "q4", "q5", "q6", "q7"):
+        if not _whole_word_forbidden(candidate, forbidden):
             return candidate
     raise JointWitnessError("NO_SAFE_FILLER")
 
 def _required_fragments(required: list[str], forbidden: list[str]) -> list[str]:
     out: list[str] = []
     for kw in required:
-        # Existence is substring/regex search while forbidden is whole-word search.
-        # If an identical generated word appears in both sets, append a letter:
-        # the required regex still matches but the forbidden whole-word checker does not.
-        if any(kw.lower() == w.lower() for w in forbidden):
-            out.append(kw + "x")
-        else:
-            out.append(kw)
+        # KeywordChecker is substring-regex based, while ForbiddenWords is
+        # whole-word based. Digit suffixes keep the required substring visible
+        # but destroy the trailing word boundary. The frozen WORD_LIST is
+        # alphabetic, so these carriers are lexically sterile for all generated
+        # forbidden words. Defensive search also handles non-historical inputs.
+        found = None
+        for digit in "0123456789":
+            candidate = kw + digit
+            if not _whole_word_forbidden(candidate, forbidden):
+                found = candidate
+                break
+        if found is None:
+            raise JointWitnessError("NO_SAFE_REQUIRED_CARRIER:" + kw)
+        out.append(found)
     return out
 
 def _get_one(constraints: list[dict[str, Any]], iid: str) -> dict[str, Any] | None:
@@ -73,7 +87,7 @@ def _special_json(constraints: list[dict[str, Any]]) -> str:
     required = _required_fragments(_required(constraints), forbidden)
     filler = _safe_token(forbidden)
     payload = " ".join([filler, *required]).strip()
-    response = json.dumps({"response": payload}, ensure_ascii=False)
+    response = json.dumps({"v0": payload}, ensure_ascii=False)
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
             raise JointWitnessError("JSON_FORBIDDEN_COLLISION")
@@ -90,7 +104,7 @@ def _special_repeat(constraints: list[dict[str, Any]], repeat: dict[str, Any]) -
     required = _required_fragments(_required(constraints), [])
     pieces = [base]
     if _get_one(constraints, "detectable_format:title"):
-        pieces.append("<<x>>")
+        pieces.append("<<0>>")
     if required:
         pieces.append(" ".join(required))
     pieces.append("answer")
@@ -100,10 +114,10 @@ def _special_two(constraints: list[dict[str, Any]]) -> str:
     forbidden = _forbidden(constraints)
     required = _required_fragments(_required(constraints), forbidden)
     filler = _safe_token(forbidden)
-    title = "<<x>> " if _get_one(constraints, "detectable_format:title") else ""
+    title = "<<0>> " if _get_one(constraints, "detectable_format:title") else ""
     common = (title + " ".join([filler, *required])).strip()
-    a = common + " alpha"
-    b = common + " beta"
+    a = common + " 0"
+    b = common + " 1"
     response = a + "******" + b
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
@@ -131,7 +145,7 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
 
     body_parts: list[str] = []
     if title:
-        body_parts.append("<<x>>")
+        body_parts.append("<<0>>")
     body_parts.extend(required)
 
     if sections:
