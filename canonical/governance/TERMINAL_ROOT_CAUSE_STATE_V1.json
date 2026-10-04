@@ -115,7 +115,7 @@
           "activation_path": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2_ACTIVATION_V1.json",
           "activation_git_blob_sha": "400cf1fa6516d384b8781201841c3359851b070b",
           "verification_path": "canonical/verification/ROOT2_V10_ACTIVATION_ROUTING_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-          "verification_git_blob_sha": "e1ba71068479f81c4b004b44ae89010ac2796b7b",
+          "verification_git_blob_sha": "5e5bf1082a8d7ce5b1fcd2c7b16a4d9d8acdc76d",
           "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__V10_18_FACT_ROUTING__ANTI_WISHFUL_OUTREACH__SCHEDULING_ONLY__ZERO_CREDIT",
           "self_service_fact_count": 9,
           "owner_exclusive_fact_count": 6,
