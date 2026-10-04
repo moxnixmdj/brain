@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_CONTRASTIVE_SEMANTIC_GATE_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__MEANING_SENSITIVE_NONTERMINAL_GATE_COMPILED__LOCAL_AUTHORING_TESTS_PASS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem_deleted": "LIVEBENCH_IF_FORMAL_ADHERENCE_CANNOT_BY_ITSELF_JUSTIFY_A_SEMANTIC_CORE_OR_OPUS_LEVEL_SEMANTIC_CAPABILITY_CLAIM",
+  "breakthrough": {
+    "new_gate": "CONTRASTIVE_COUNTERFACTUAL_SEMANTIC_TRANSFORMATION_GATE",
+    "runtime_path": "canonical/runtime/root1_contrastive_semantic_gate_v1.py",
+    "test_path": "canonical/tests/test_root1_contrastive_semantic_gate_v1.py",
+    "principle": "PAIR_NEAR_IDENTICAL_TASKS_WITH_LOAD_BEARING_FACT_RELATION_QUANTITY_ORDER_OR_OUTCOME_FLIPS__REQUIRE_EACH_OUTPUT_TO_PRESERVE_ITS_OWN_FACTS_REJECT_THE_OPPOSITE_PAIR_FACTS_AND_PERFORM_THE_REQUESTED_TRANSFORMATION",
+    "why_it_is_stronger_than_FORMAT_ONLY_SCORING": [
+      "A_STRUCTURAL_WITNESS_WITHOUT_THE_TASK_FACTS_FAILS",
+      "A_RESPONSE_THAT_IGNORES_THE_COUNTERFACTUAL_INPUT_AND_REUSES_THE_PAIR_OUTPUT_FAILS",
+      "A_FACT_FLIP_FAILS_EVEN_IF_FORMAT_IS_PERFECT",
+      "A_PARAPHRASE_THAT_COPIES_THE_SOURCE_VERBATIM_FAILS",
+      "A_GROUNDED_STORY_WITH_REVERSED_EVENT_ORDER_FAILS"
+    ]
+  },
+  "frozen_gate": {
+    "probe_count": 8,
+    "contrastive_pairs": 4,
+    "effects": [
+      "text.paraphrase.semantic_preserving",
+      "text.simplify.semantic_preserving",
+      "text.summarize.faithful",
+      "text.story.generate_instruction_grounded"
+    ],
+    "semantic_dimensions_exercised": [
+      "ENTITY_BINDING",
+      "QUANTITY",
+      "ATTRIBUTE",
+      "TEMPORAL_RELATION",
+      "POLARITY_OR_OUTCOME",
+      "LOCATION",
+      "EVENT_ORDER",
+      "TRANSFORMATION_NONIDENTITY"
+    ],
+    "generic_model_judge_required": false,
+    "network_required_for_scoring": false,
+    "learned_verifier_state_bytes": 0
+  },
+  "authoring_verification": {
+    "environment": "ISOLATED_PYTHON_AUTHORING_SANDBOX",
+    "syntax_compile": "PASS",
+    "unit_tests": {
+      "passed": 6,
+      "failed": 0
+    },
+    "adversarial_cases": [
+      "GOOD_FULL_SUITE_PASS",
+      "COUNTERFACTUAL_FACT_FLIP_REJECTED",
+      "VERBATIM_PARAPHRASE_REJECTED",
+      "REVERSED_STORY_EVENT_ORDER_REJECTED",
+      "STRUCTURAL_NONSENSE_REJECTED",
+      "MISSING_PROBE_FAILS_CLOSED"
+    ],
+    "authority": "AUTHORING_EVIDENCE_ONLY__NOT_INDEPENDENT_PROMOTION"
+  },
+  "scheduler_change": {
+    "formal_livebench_route": "UNCHANGED__CONTINUE_DETERMINISTIC_OBSERVABILITY_CUT_FOR_THE_FORMAL_ACCEPTANCE_PREDICATE",
+    "semantic_core_route": "QUALIFY_SMALLEST_ALREADY_EXECUTED_LOCAL_CORE_ON_THIS_MEANING_SENSITIVE_GATE_BEFORE_ESCALATING_BYTES",
+    "candidate_order": [
+      "QWEN3_5_4B_Q4_K_M_EXISTING_CARRIER",
+      "QWEN3_5_9B_Q4_K_M_EXISTING_CARRIER",
+      "QWEN3_8_4B_DISTILL_Q4_K_M_PRECOMMITTED_CANDIDATE",
+      "QWEN3_8_27B_OR_SMAUG_ONLY_AFTER_SMALLER_ROUTE_FALSIFICATION"
+    ],
+    "promotion_rule": "A_GATE_PASS_QUALIFIES_ONLY_A_BOUNDED_SEMANTIC_SEED_CANDIDATE__IT_DOES_NOT_GRANT_LIVEBENCH_TERMINAL_SCORE_OR_OPUS_PARITY"
+  },
+  "minimum_next_execution": [
+    "INDEPENDENTLY_VERIFY_THE_EXACT_GATE_BYTES_AND_ADVERSARIAL_TESTS",
+    "RUN_THE_SMALLEST_AVAILABLE_EXACT_LOCAL_CORE_ON_ALL_8_FROZEN_PROBES_WITH_ONE_PRECOMMITTED_ATTEMPT",
+    "IF_PASS_FREEZE_RUNTIME_MODEL_HASH_PROMPT_AND_OUTPUT_RECEIPTS_AS_BOUNDED_SEMANTIC_SEED_EVIDENCE",
+    "IF_FAIL_ADVANCE_ONE_RUNG_ONLY__DO_NOT_TUNE_ON_THE_FROZEN_GATE",
+    "KEEP_FORMAL_LIVEBENCH_SCORE_PROOF_AND_SEMANTIC_CORE_PROOF_SEPARATE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_GATE_PROVES_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_EQUIVALENCE",
+    "NO_CLAIM_THE_GATE_ALONE_PROVES_OPUS_5_5_PARITY",
+    "NO_CLAIM_ANY_QWEN_OR_SMAUG_CANDIDATE_HAS_PASSED_THIS_GATE_YET",
+    "NO_TERMINAL_CASE_CONTENT_USED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_TERMINAL_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
