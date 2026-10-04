@@ -9,6 +9,7 @@ from canonical.runtime import meta_learning_policy_v9 as mp
 SCHEMA="PROJECT_BRAIN_UNIVERSAL_LEARNING_CROSS_CONTEXT_ROUTER_V10"
 
 def route(*,v9_args:Mapping[str,Any],target_context_features=(),exact_target_episodes=(),
+          target_evidence_state_receipt:Mapping[str,Any]|None=None,
           transfer_candidates:Sequence[Mapping[str,Any]]=())->dict[str,Any]:
     base=v9.route(**dict(v9_args))
     transfer=None
@@ -16,6 +17,7 @@ def route(*,v9_args:Mapping[str,Any],target_context_features=(),exact_target_epi
         transfer=cc.recommend(
             target_context_features=target_context_features,
             exact_target_episodes=exact_target_episodes,
+            target_evidence_state_receipt=target_evidence_state_receipt,
             transfer_candidates=transfer_candidates)
     return {
         "schema":SCHEMA,"status":"V10_CROSS_CONTEXT_META_TRANSFER_APPLIED",
@@ -23,7 +25,7 @@ def route(*,v9_args:Mapping[str,Any],target_context_features=(),exact_target_epi
         "trusted_execution_authorized":base.get("trusted_execution_authorized",False),
         "empirical_information_action_authorized":base.get("empirical_information_action_authorized",False),
         "cross_context_meta_policy":transfer,
-        "reason":"V10_MAY_RECOMMEND_A_COLD_START_LEARNING_STRATEGY_ONLY_WHEN_PROOF_GATED_CONTEXT_TRANSPORT_EXISTS__V9_AND_LOWER_LAYERS_REMAIN_LOAD_BEARING",
+        "reason":"V10_MAY_RECOMMEND_A_COLD_START_LEARNING_STRATEGY_ONLY_WHEN_TARGET_EVIDENCE_STATE_AND_PROOF_GATED_CONTEXT_TRANSPORT_ARE_BOTH_VERIFIED__V9_AND_LOWER_LAYERS_REMAIN_LOAD_BEARING",
         "execution_authority":False,"promotion_authority":False,"fresh_reality_authority":False,
         "acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0
     }
@@ -62,36 +64,69 @@ def prove_v10_invariants()->dict[str,Any]:
             "strategy_applicability_preserved":True,"performance_metric_semantics_preserved":True,
             "no_new_strategy_invalidators":True,"conservative_performance_transport_valid":True,
             "source_episodes_executed_bound_strategy":True,
+            "canonical_strategy_semantics_complete_for_transport":True,
+            "source_policy_evidence_complete_for_bound_strategy":True,
+            "source_episodes_distinct_evidence_instances":True,
+            "source_context_strategy_relevant_scope_complete":True,
+            "target_context_strategy_relevant_scope_complete":True,
             "source_context_sha256":ssha,"target_context_sha256":dsha,"strategy_id":"inspect-first",
             "strategy_sha256":strategy_sha,"source_episode_set_sha256":episode_set_sha,
             "morphism_sha256":md}}
     candidate={"source_context_features":src,"strategy_id":"inspect-first",
                "strategy_semantics":semantics,"source_episodes":episodes,"context_morphism":morph}
 
-    out=cc.recommend(target_context_features=dst,transfer_candidates=[candidate])
+    epoch="epoch-1"
+    zero_state_sha=cc.target_evidence_state_digest(
+        target_context_sha256=dsha,episode_bindings=[],evidence_epoch=epoch)
+    target_state={
+        "receipt_id":"target-state-1","independent_verified":True,"exact_byte_bound":True,
+        "conclusion":"success","exact_target_evidence_complete":True,
+        "target_context_sha256":dsha,"evidence_epoch":epoch,
+        "exact_target_episode_count":0,"zero_exact_target_evidence_verified":True,
+        "evidence_state_sha256":zero_state_sha}
+
+    out=cc.recommend(
+        target_context_features=dst,target_evidence_state_receipt=target_state,
+        transfer_candidates=[candidate])
     if out.get("recommended_strategy_id")!="inspect-first" or out.get("evidence_mode")!="PROOF_GATED_ONE_WAY_CONTEXT_MORPHISM":
         errors.append("CROSS_CONTEXT_COLD_START_TRANSFER_BROKEN")
 
+    no_target_state=cc.recommend(target_context_features=dst,transfer_candidates=[candidate])
+    if no_target_state.get("recommended_strategy_id") is not None or no_target_state.get("status")!="TARGET_EVIDENCE_STATE_UNVERIFIED":
+        errors.append("MISSING_TARGET_EVIDENCE_STATE_NOT_BLOCKED")
+
+    tampered_state={**target_state,"exact_target_episode_count":1}
+    if cc.recommend(
+        target_context_features=dst,target_evidence_state_receipt=tampered_state,
+        transfer_candidates=[candidate]).get("recommended_strategy_id") is not None:
+        errors.append("TAMPERED_TARGET_EVIDENCE_STATE_NOT_BLOCKED")
+
     tampered={**candidate,"strategy_semantics":{**semantics,"ordered_steps":["inspect","execute"]}}
-    if cc.recommend(target_context_features=dst,transfer_candidates=[tampered]).get("recommended_strategy_id") is not None:
+    if cc.recommend(
+        target_context_features=dst,target_evidence_state_receipt=target_state,
+        transfer_candidates=[tampered]).get("recommended_strategy_id") is not None:
         errors.append("STRATEGY_SEMANTICS_TAMPER_NOT_BLOCKED")
 
     changed=ep("e1",1)
     tampered_evidence={**candidate,"source_episodes":[changed,episodes[1]]}
-    if cc.recommend(target_context_features=dst,transfer_candidates=[tampered_evidence]).get("recommended_strategy_id") is not None:
+    if cc.recommend(
+        target_context_features=dst,target_evidence_state_receipt=target_state,
+        transfer_candidates=[tampered_evidence]).get("recommended_strategy_id") is not None:
         errors.append("SOURCE_EPISODE_EVIDENCE_TAMPER_NOT_BLOCKED")
 
     duplicate={**candidate,"source_episodes":[episodes[0],episodes[0]]}
-    if cc.recommend(target_context_features=dst,transfer_candidates=[duplicate]).get("recommended_strategy_id") is not None:
+    if cc.recommend(
+        target_context_features=dst,target_evidence_state_receipt=target_state,
+        transfer_candidates=[duplicate]).get("recommended_strategy_id") is not None:
         errors.append("DUPLICATE_SOURCE_EVIDENCE_NOT_BLOCKED")
 
     bad=dict(morph); bad["verification_receipt"]=dict(morph["verification_receipt"])
-    bad["verification_receipt"]["no_new_strategy_invalidators"]=False
+    bad["verification_receipt"]["source_policy_evidence_complete_for_bound_strategy"]=False
     if cc.recommend(
-        target_context_features=dst,
+        target_context_features=dst,target_evidence_state_receipt=target_state,
         transfer_candidates=[{**candidate,"context_morphism":bad}]
     ).get("recommended_strategy_id") is not None:
-        errors.append("UNPROVED_CONTEXT_TRANSFER_NOT_BLOCKED")
+        errors.append("INCOMPLETE_SOURCE_HISTORY_NOT_BLOCKED")
 
     base=v9.prove_v9_invariants()
     if base.get("pass") is not True:
@@ -101,7 +136,9 @@ def prove_v10_invariants()->dict[str,Any]:
     return {
         "schema":SCHEMA,"status":"UNIVERSAL_LEARNING_V10_INVARIANTS_PASS" if passed else "FAIL_CLOSED",
         "pass":passed,"errors":errors,"v9_base_preserved":base.get("pass") is True,
-        "proof_gated_cold_start_transfer":passed,"unproved_context_transfer_blocked":passed,
+        "proof_gated_cold_start_transfer":passed,
+        "target_evidence_state_completeness_preserved":passed,
+        "source_policy_history_completeness_preserved":passed,
         "exact_strategy_semantics_binding_preserved":passed,
         "exact_source_episode_evidence_binding_preserved":passed,
         "duplicate_source_evidence_blocked":passed,
