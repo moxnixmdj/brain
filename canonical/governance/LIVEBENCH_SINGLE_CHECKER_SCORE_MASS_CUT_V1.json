@@ -1,0 +1,228 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SINGLE_CHECKER_SCORE_MASS_CUT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_PUBLIC_SINGLE_CHECKER_THRESHOLD_CUT__MULTI_CHECKER_COMPOSITION_NOT_NECESSARY_FOR_PUBLIC_65_7_IF_198_SINGLE_ROWS_PROVED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Minimize the constructive proof surface needed to exceed the 65.7 LiveBench instruction-following threshold without relying on any two-checker composition.",
+  "pinned_public_population": {
+    "repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "data/IFBench_test.jsonl",
+    "git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "rows": 300,
+    "single_checker_rows": 256,
+    "two_checker_rows": 44
+  },
+  "score_rule": {
+    "formula": "score=(I[all]+true_fraction)/2",
+    "single_checker_pass_score": 1,
+    "single_checker_fail_score": 0,
+    "consequence": "A proved pass on a one-checker row contributes exactly one full score unit; two-checker rows may be conservatively assigned zero for this cut."
+  },
+  "arithmetic": {
+    "threshold_percent": 65.7,
+    "threshold_score_mass": 197.1,
+    "integer_full_single_row_passes_required": 198,
+    "single_checker_only_ceiling_score_mass": 256,
+    "single_checker_only_ceiling_percent": 85.33333333333333,
+    "top_35_whole_family_single_rows": 197,
+    "top_35_public_percent": 65.66666666666667,
+    "top_35_below_threshold_percentage_points": 0.03333333333333,
+    "example_top_36_whole_family_single_rows": 202,
+    "example_top_36_public_percent": 67.33333333333333,
+    "example_top_36_margin_above_threshold_percentage_points": 1.63333333333333
+  },
+  "theorem": [
+    "TWO_CHECKER_COMPOSITION_IS_NOT_LOGICALLY_NECESSARY_TO_EXCEED_65_7_ON_THE_PINNED_PUBLIC_POPULATION",
+    "PROVING_ANY_198_SINGLE_CHECKER_ROWS_SUFFICIENTLY_CLOSES_THE_PUBLIC_SCORE_THRESHOLD_WITH_ALL_44_TWO_CHECKER_ROWS_SET_TO_ZERO",
+    "UNDER_WHOLE_FAMILY_PERFECT_COVERAGE_AND_DESCENDING_SINGLE_ROW_FREQUENCY_NO_SET_OF_35_FAMILIES_CAN_REACH_198_ROWS_BECAUSE_THE_MAXIMUM_35_FAMILY_UNION_IS_197_SINGLE_ROWS",
+    "AN_EXAMPLE_36_FAMILY_HIGH_YIELD_SET_REACHES_202_SINGLE_ROWS_AND_67_3333_PERCENT",
+    "THE_PUBLIC_MINIMUM_PROOF_PROGRAM_CAN_PRIORITIZE_SINGLE_CHECKER_WITNESS_VERIFICATION_AND_DEFER_COMPOSITION_UNLESS_TERMINAL_SCOPE_BINDING_INVALIDATES_THIS_PUBLIC_CUT"
+  ],
+  "ranked_single_family_counts": [
+    [
+      "count:unique_word_count",
+      8
+    ],
+    [
+      "format:line_indent",
+      7
+    ],
+    [
+      "format:parentheses",
+      7
+    ],
+    [
+      "format:quotes",
+      7
+    ],
+    [
+      "format:sub-bullets",
+      7
+    ],
+    [
+      "ratio:stop_words",
+      7
+    ],
+    [
+      "words:palindrome",
+      7
+    ],
+    [
+      "words:vowel",
+      7
+    ],
+    [
+      "count:punctuation",
+      6
+    ],
+    [
+      "format:emoji",
+      6
+    ],
+    [
+      "ratio:sentence_type",
+      6
+    ],
+    [
+      "words:consonants",
+      6
+    ],
+    [
+      "words:paragraph_last_first",
+      6
+    ],
+    [
+      "count:conjunctions",
+      5
+    ],
+    [
+      "count:keywords_multiple",
+      5
+    ],
+    [
+      "count:numbers",
+      5
+    ],
+    [
+      "count:person_names",
+      5
+    ],
+    [
+      "count:pronouns",
+      5
+    ],
+    [
+      "count:word_count_range",
+      5
+    ],
+    [
+      "count:words_japanese",
+      5
+    ],
+    [
+      "format:list",
+      5
+    ],
+    [
+      "format:newline",
+      5
+    ],
+    [
+      "format:no_bullets_bullets",
+      5
+    ],
+    [
+      "format:options",
+      5
+    ],
+    [
+      "format:quote_unquote",
+      5
+    ],
+    [
+      "format:thesis",
+      5
+    ],
+    [
+      "ratio:overlap",
+      5
+    ],
+    [
+      "ratio:sentence_balance",
+      5
+    ],
+    [
+      "ratio:sentence_words",
+      5
+    ],
+    [
+      "sentence:alliteration_increment",
+      5
+    ],
+    [
+      "sentence:increment",
+      5
+    ],
+    [
+      "sentence:keyword",
+      5
+    ],
+    [
+      "words:alphabet",
+      5
+    ],
+    [
+      "words:last_first",
+      5
+    ],
+    [
+      "words:no_consecutive",
+      5
+    ],
+    [
+      "words:odd_even_syllables",
+      5
+    ]
+  ],
+  "example_36_family_cut": {
+    "family_count": 36,
+    "covered_single_rows": 202,
+    "public_score_percent_if_all_covered_single_rows_pass": 67.33333333333333,
+    "two_checker_score_assumed": 0,
+    "note": "The final five-row families are tied; this is an example minimum-cardinality whole-family cut, not a unique identity set."
+  },
+  "scheduling_effect": [
+    "DEMOTE_MULTI_CHECKER_COMPOSITION_FROM_MANDATORY_PUBLIC_THRESHOLD_PATH_TO_OPTIONAL_MARGIN_OR_FALLBACK_WORK",
+    "VERIFY_EXACT_CHECKER_PASSES_ON_HIGH_YIELD_SINGLE_CHECKER_ROWS_FIRST",
+    "STOP_AFTER_AT_LEAST_198_PROVED_SINGLE_ROW_PASSES_IF_TERMINAL_SCOPE_BINDING_SUPPORTS_THE_SAME_SCORE_MASS_ARGUMENT",
+    "PREFER_LOWEST_VERIFICATION_COST_FAMILIES_WITHIN_EQUAL_SCORE_MASS_TIERS"
+  ],
+  "remaining_load_bearing_obligations": [
+    "EXACT_PUBLIC_CHECKER_WITNESS_VERIFICATION_FOR_ENOUGH_SINGLE_ROWS_TO_REACH_198",
+    "CONTAMINATION_SAFE_BINDING_FROM_THE_PINNED_PUBLIC_SCORE_MASS_THEOREM_TO_THE_FROZEN_TERMINAL_LIVEBENCH_IF_POPULATION_OR_A_SEPARATELY_ADMISSIBLE_STRONGER_PROOF",
+    "FRESH_SUCCESSOR_PRECOMMIT_BEFORE_ANY_NEW_TERMINAL_COMPARATOR_EVIDENCE",
+    "INDEPENDENT_RECOMPUTATION_OF_THIS_CUT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_198_SINGLE_ROWS_ARE_ALREADY_PROVED_PASSING",
+    "NO_CLAIM_FROZEN_TERMINAL_LIVEBENCH_POPULATION_EQUALS_THE_PINNED_PUBLIC_IFBENCH_POPULATION",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
