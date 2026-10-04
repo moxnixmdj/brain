@@ -17,25 +17,25 @@ on:
 permissions:
   contents: read
 jobs:
-  verify:
+  import-smoke:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with: {python-version: "3.12"}
-      - name: Execute proof and preserve exact failure evidence
-        shell: bash
-        run: |
-          set +e
-          : > /tmp/unknown-domain-v2-universal-proof.log
-          python -m pytest -q canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py >> /tmp/unknown-domain-v2-universal-proof.log 2>&1
-          s1=$?
-          python -m canonical.runtime.unknown_domain_direct_v2_universal_proof_v1 > /tmp/unknown-domain-v2-universal-proof.json 2>> /tmp/unknown-domain-v2-universal-proof.log
-          s2=$?
-          python - <<'PY' >> /tmp/unknown-domain-v2-universal-proof.log 2>&1
+      - run: python3 -c "from canonical.runtime import unknown_domain_direct_v2_universal_proof_v1 as p; print(p.SCHEMA)"
+  proof-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pytest -q canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py
+  proof-module:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m canonical.runtime.unknown_domain_direct_v2_universal_proof_v1 > /tmp/proof.json
+      - run: |
+          python3 - <<'PY'
           import json
-          p="/tmp/unknown-domain-v2-universal-proof.json"
-          d=json.load(open(p,encoding="utf-8"))
+          d=json.load(open("/tmp/proof.json",encoding="utf-8"))
           assert d["status"]=="PASS__UNIVERSAL_OVER_EXACT_FROZEN_V2_GENERATOR_DOMAIN"
           assert d["scope"]["terminal_or_production_cases_generated"]==0
           assert d["fresh_reality_required_for_THIS_frozen_generator_claim"] is False
@@ -44,23 +44,3 @@ jobs:
           assert d["accounting"]["ownership_credit_delta"]==0
           print("INDEPENDENT_RUNNER_EXECUTED_CONTENT_BOUND_UNIVERSAL_PROOF")
           PY
-          s3=$?
-          printf '%s\n' "$s1 $s2 $s3" > /tmp/unknown-domain-v2-universal-proof.status
-          exit 0
-      - name: Upload proof diagnostic
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: unknown-domain-v2-universal-proof-diagnostic
-          path: |
-            /tmp/unknown-domain-v2-universal-proof.log
-            /tmp/unknown-domain-v2-universal-proof.json
-            /tmp/unknown-domain-v2-universal-proof.status
-          if-no-files-found: error
-      - name: Enforce proof pass
-        shell: bash
-        run: |
-          read s1 s2 s3 < /tmp/unknown-domain-v2-universal-proof.status
-          test "$s1" = "0"
-          test "$s2" = "0"
-          test "$s3" = "0"
