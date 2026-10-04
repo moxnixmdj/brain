@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_REFERENCE_BLIND_SCORE_CONTROL_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_IFBENCH_12_OF_12_CONSTRUCTIVE_PASS__FROZEN_LIVEBENCH_PRESERVED_RUN_BINDING_STILL_REQUIRED__ZERO_CREDIT",
+  "objective": "Eliminate exact hidden reference_text acquisition as a necessary condition for ratio:overlap score control by replacing it with a weaker preserved-substring plus sentinel-absence certificate.",
+  "checker_binding": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "path": "livebench/if_runner/ifbench/instructions.py",
+    "checker": "NGramOverlapChecker",
+    "semantics": "n=3; response unique character trigrams; overlap=len(response_trigrams ∩ reference_trigrams)/len(response_trigrams); pass iff percentage±2"
+  },
+  "theorem": {
+    "premises": [
+      "R_IS_A_VISIBLE_CONTIGUOUS_RUN_WHOSE_EVERY_UNIQUE_CHARACTER_TRIGRAM_OCCURS_IN_HIDDEN_REFERENCE",
+      "M_EQUALS_CARDINALITY_OF_UNIQUE_TRIGRAMS_OF_R_AND_M_GT_0",
+      "S_1_TO_S_K_ARE_PAIRWISE_DISTINCT_UNICODE_CODEPOINTS_ABSENT_FROM_HIDDEN_REFERENCE_AND_FROM_R",
+      "OUTPUT_EQUALS_R_CONCAT_S_1_TO_S_K",
+      "TRANSPORT_PRESERVES_UNICODE_CODEPOINTS_EXACTLY"
+    ],
+    "deduction": [
+      "THE_K_NEW_TRIGRAM_POSITIONS_CREATED_BY_APPENDING_K_DISTINCT_SENTINELS_ARE_PAIRWISE_DISTINCT",
+      "EVERY_NEW_TRIGRAM_CONTAINS_AT_LEAST_ONE_SENTINEL_AND_THEREFORE CANNOT OCCUR_IN_HIDDEN_REFERENCE",
+      "NO_NEW_TRIGRAM_CAN_DUPLICATE_A_TRIGRAM_OF_R",
+      "OUTPUT_UNIQUE_TRIGRAM_CARDINALITY_EQUALS_M_PLUS_K",
+      "MATCHING_UNIQUE_TRIGRAM_CARDINALITY_EQUALS_M",
+      "CHECKER_SCORE_EQUALS_EXACTLY_M_DIVIDED_BY_M_PLUS_K"
+    ],
+    "control": "CHOOSE_INTEGER_K_SUCH_THAT_ABS(100*M/(M+K)-TARGET_PERCENT)<=2",
+    "consequence": "EXACT_REFERENCE_TEXT_BYTES_ARE_NOT_REQUIRED_FOR_SCORE_CONTROL_IF_THE_WEAKER_PRESERVED_RUN_AND_SENTINEL_ABSENCE_PRECONDITIONS_ARE_PROVED"
+  },
+  "public_family_audit": {
+    "source_repository": "allenai/IFBench",
+    "source_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "test_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "ratio_overlap_rows": 12,
+    "constructive_passes": 12,
+    "constructive_failures": 0,
+    "note": "Verifier may inspect public reference_text only to validate the theorem. The constructor itself requires only a separately certified preserved run, target percentage, and sentinel-absence binding."
+  },
+  "residual_reduction": {
+    "prior_residual": "RECOVER_EXACT_REFERENCE_TEXT_OR_PROVE_SCORE_EQUIVALENT_CANONICALIZATION",
+    "new_residual": "PROVE_FROZEN_LIVEBENCH_PROMPT_CONSTRUCTION_PRESERVES_AT_LEAST_ONE_USABLE_NONWHITESPACE_RUN_FROM_THE_REFERENCE_AND_PROVE_CHOSEN_SENTINEL_CODEPOINTS_CANNOT_APPEAR_IN_REFERENCE; THEN INTEGRATE_WITH_COMPANION_CONSTRAINT_SOLVER",
+    "why_stronger": "The new obligation is strictly weaker than reconstructing every hidden reference character and whitespace boundary."
+  },
+  "runtime": {
+    "path": "canonical/runtime/livebench_ngram_reference_blind_constructor_v1.py"
+  },
+  "contamination_firewall": [
+    "NO_UNEXPOSED_LIVEBENCH_TERMINAL_PROMPT_CONTENT",
+    "NO_CASE_SPECIFIC_TERMINAL_RULES",
+    "PUBLIC_IFBENCH_ROWS_USED_ONLY_AS_PUBLIC_FAMILY_FALSIFICATION_AND_CONSTRUCTION_TESTS",
+    "NO_ACCEPTANCE_PROMOTION_UNTIL_EXACT_FROZEN_FAMILY_BINDING_AND_COMPANION_CONSTRAINT_COMPOSITION_PASS"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_CLOSE_LIVEBENCH",
+    "DOES_NOT_PROVE_FROZEN_LIVEBENCH_REFERENCE_PRESERVATION",
+    "DOES_NOT_PROVE_SENTINEL_ABSENCE_FOR_FROZEN_LIVEBENCH",
+    "DOES_NOT_PROVE_COMPOSITION_WITH_ALL_COLOCATED_CONSTRAINTS",
+    "DOES_NOT_GRANT_EXECUTION_PROMOTION_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
