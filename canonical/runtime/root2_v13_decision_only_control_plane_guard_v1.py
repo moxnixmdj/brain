@@ -53,7 +53,7 @@ def verify()->dict:
     assert proj["execution_authority"] is False
     assert proj["promotion_authority"] is False
     assert proj["fresh_reality_authority"] is False
-    assert "V14_THROUGH_V18" in proj["higher_frontiers_v14_through_v18"]
+    assert proj["higher_frontiers_v14_through_v18"]=="NOT_ACTIVE_BY_THIS_PROJECTION__SEPARATE_WHOLE_FRONTIER_VERIFICATION_AND_ACTIVATION_REQUIRED"
 
     assert va["frontier"]["git_blob_sha"]==EXPECTED["v13"]
     assert va["verification"]["git_blob_sha"]==EXPECTED["v13_verify"]
