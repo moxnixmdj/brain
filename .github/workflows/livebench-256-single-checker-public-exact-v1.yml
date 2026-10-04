@@ -1,0 +1,38 @@
+name: Public IFBench 256 single-checker exact scorer
+
+on:
+  push:
+    branches:
+      - research/livebench-256-exact-scorer-sol-20261004
+    paths:
+      - 'canonical/runtime/livebench_if_single_checker_solver_v1.py'
+      - 'canonical/runtime/livebench_if_single_checker_public_verify_v1.py'
+      - '.github/workflows/livebench-256-single-checker-public-exact-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch pinned public IFBench
+        run: |
+          git clone --filter=blob:none https://github.com/allenai/IFBench.git /tmp/ifbench
+          git -C /tmp/ifbench checkout 1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d
+      - name: Install exact public scorer dependencies
+        run: python -m pip install --disable-pip-version-check /tmp/ifbench
+      - name: Run aggregate exact scorer audit
+        run: |
+          python canonical/runtime/livebench_if_single_checker_public_verify_v1.py --ifbench-root /tmp/ifbench | tee /tmp/livebench_single_checker_audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: livebench-single-checker-public-audit
+          path: /tmp/livebench_single_checker_audit.json
+          if-no-files-found: error
