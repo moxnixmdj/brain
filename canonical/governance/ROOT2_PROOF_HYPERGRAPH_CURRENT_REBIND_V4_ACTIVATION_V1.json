@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V4_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_CANDIDATE__INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_FIXED_BAR_HYPERGRAPH_REBOUND__ZERO_CREDIT",
+  "current_inputs": {
+    "route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294",
+    "comparator_vector_git_blob_sha": "b28af5176550aba9e44ffd8ac9fde4fa7ba388bf",
+    "rebind_git_blob_sha": "8d3f20c8b8379b282f9b03fc73ba82f6f8946fa5",
+    "verification_git_blob_sha": "b0449e7ba797a0084f6a3c74aa12a29c42f32c2d"
+  },
+  "optimizer": {
+    "governance_git_blob_sha": "2793081a62a99cb69c9ae3e37323205e756cbebb",
+    "runtime_git_blob_sha": "dd2094c4845239a0be4cfd34af4d8f3a7e411060",
+    "tests_git_blob_sha": "235db2f21fe4b0f70096be69ae28af87a5ce31dd",
+    "optimizer_logic_changed": false
+  },
+  "effect": [
+    "REACTIVATE_EXISTING_VERIFIED_ROOT2_FIXED_BAR_HYPERGRAPH_ON_CURRENT_ROUTE_STATE",
+    "SCHEDULE_ONLY_ZERO_REALITY_ACTIONS_ALLOWED_BY_CURRENT_ROUTE_STATE",
+    "KEEP_SYNTHESIS_ROOT2_ONLY_NON_FIXED_BAR_RESIDUAL_SEPARATE",
+    "FAIL_CLOSED_ON_ROUTE_OR_VECTOR_BLOB_DRIFT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
