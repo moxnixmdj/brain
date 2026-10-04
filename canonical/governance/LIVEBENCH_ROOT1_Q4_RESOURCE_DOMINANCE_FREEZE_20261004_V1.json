@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_Q4_RESOURCE_DOMINANCE_FREEZE_20261004_V1",
+  "date": "2026-10-04",
+  "status": "EXACT_TRANSFORMED_SUCCESSOR_FROZEN__Q4_FIRST_RESOURCE_DOMINANT_QUALIFICATION_ROUTE__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "causal_blocker_before_this_receipt": "ROOT1_SEMANTIC_CORE_EXISTS_BUT_FULL_PRECISION_SUCCESSOR_REQUIRES_55_563_006_776_BYTES_AND_ZERO_INCREMENTAL_SPEND_EXECUTION_FIT_IS_UNPROVED",
+  "breakthrough": {
+    "exact_q4_subject_is_now_content_addressed": true,
+    "consequence": "DO_NOT_ACQUIRE_OR_EXECUTE_55_6GB_BF16_FIRST__QUALIFY_THE_16_547_400_480_BYTE_Q4_SUBJECT_FIRST__ESCALATE_ONLY_ON_VERIFIED_FAILURE",
+    "reason": "Q4_REDUCES_WEIGHT_PAYLOAD_BY_70_PERCENT_CLASS_WHILE_BF16_PUBLIC_SCORE_HAS_8_17875_PERCENTAGE_POINT_MARGIN_OVER_OPUS55_TARGET"
+  },
+  "public_reference_geometry": {
+    "source": "canonical/governance/LIVEBENCH_ROOT1_OPEN_WEIGHT_DOMINANCE_UPDATE_V1.json",
+    "smaug_mini_bf16_public_equal_task_mean_percent": 73.9165,
+    "opus_5_5_public_equal_task_mean_percent": 65.73775,
+    "maximum_quantization_score_loss_budget_percentage_points": 8.17875,
+    "exact_pass_floor_percent": 65.73775,
+    "tasks": [
+      "paraphrase",
+      "simplify",
+      "story_generation",
+      "summarize"
+    ],
+    "rule": "COMPRESSED_SUBJECT_MUST_BE_MEASURED_AS_ITS_OWN_EXECUTION_SUBJECT__NO_BF16_SCORE_INHERITANCE"
+  },
+  "transformed_subjects": [
+    {
+      "priority": 1,
+      "repository": "prithivMLmods/Smaug-Mini-GGUF",
+      "repository_revision": "72e19c6d6302bbb3610e966d58eb2ddcbd62c524",
+      "file": "Smaug-Mini.Q4_K_M.gguf",
+      "quantization": "Q4_K_M",
+      "bytes": 16547400480,
+      "sha256": "2fa6ef34b67820d21ce0819a8dc66c80f8fb1f33d6d8b9fca3c9bb84e39d8ac1",
+      "xet_hash": "4a5c63f8610939620a53804e771c64d8a4447cef2a8f7dfcf99681d2827ddcd1",
+      "payload_reduction_vs_qwen38_27b_bf16_percent": 70.218673,
+      "qualification_state": "UNMEASURED_ON_PRECOMMITTED_PUBLIC_FOUR_TASK_GEOMETRY__ZERO_CREDIT"
+    },
+    {
+      "priority": 2,
+      "repository": "prithivMLmods/Smaug-Mini-GGUF",
+      "repository_revision": "72e19c6d6302bbb3610e966d58eb2ddcbd62c524",
+      "file": "Smaug-Mini.Q5_K_M.gguf",
+      "quantization": "Q5_K_M",
+      "bytes": 19231099680,
+      "sha256": "e4118c7c60241c27800c296a7b4f181abf4ebd1bcc26b69ada523f0dafdf5c75",
+      "xet_hash": "7a3b80d92946c6a7a6ea5dc22749e981fdd7b846651e348a3884ac29391290d8",
+      "payload_reduction_vs_qwen38_27b_bf16_percent": 65.388663,
+      "qualification_state": "FALLBACK_ONLY_IF_Q4_VERIFIED_FAILS_OR_CANNOT_EXECUTE__ZERO_CREDIT"
+    }
+  ],
+  "precommitted_qualification_contract": {
+    "terminal_case_reads": 0,
+    "fresh_terminal_reality": false,
+    "subject_order": [
+      "Q4_K_M",
+      "Q5_K_M",
+      "BF16"
+    ],
+    "advance_rule": "ADVANCE_TO_LARGER_SUBJECT_ONLY_AFTER_CONTENT_ADDRESSED_SMALLER_SUBJECT_VERIFIED_FAILS_THE_EXACT_PUBLIC_PASS_FLOOR_OR_IS_PROVEN_EXECUTION_INFEASIBLE",
+    "score_rule": "ARITHMETIC_MEAN_OF_THE_SAME_FOUR_PUBLIC_LIVEBENCH_2026_06_25_TASK_SCORES_MUST_BE_GE_65_73775",
+    "provenance_rule": "RUN_RECEIPT_MUST_BIND_EXACT_FILE_SHA256_RUNTIME_VERSION_PROMPT_SET_COMMIT_AND_INFERENCE_CONFIGURATION",
+    "semantic_rule": "FORMAL_CHECKER_WITNESSES_OR_PROMPT_ONLY_CONSTRUCTORS_CANNOT_SUBSTITUTE_FOR_SEMANTIC_TASK_OUTPUT",
+    "contamination_rule": "NO_UNSEEN_TERMINAL_CASE_OR_TERMINAL_RESPONSE_CONTENT_BEFORE_SEPARATE_AUTHORITY",
+    "promotion_rule": "PASSING_PUBLIC_QUALIFICATION_IS_ROUTE_EVIDENCE_ONLY_UNTIL_DURABLE_BRAIN_CONTROLLED_BYTES_ZERO_COST_EXECUTION_FIT_AND_CURRENT_ACCEPTANCE_AUTHORITY_ARE_ALL_PROVED"
+  },
+  "resource_dominance": {
+    "q4_vs_bf16_payload_ratio": 0.297813265,
+    "q5_vs_bf16_payload_ratio": 0.346113373,
+    "q4_bytes_saved_vs_bf16": 39015606296,
+    "q5_bytes_saved_vs_bf16": 36331907096,
+    "decision": "Q4_DOMINATES_Q5_AND_BF16_FOR_FIRST_QUALIFICATION_ATTEMPT_BECAUSE_IT_HAS_THE_LOWEST_ACQUISITION_AND_EXECUTION_RESOURCE_BURDEN__QUALITY_UNKNOWN_REMAINS_FAIL_CLOSED"
+  },
+  "source_bindings": [
+    {
+      "url": "https://huggingface.co/prithivMLmods/Smaug-Mini-GGUF/blob/72e19c6d6302bbb3610e966d58eb2ddcbd62c524/Smaug-Mini.Q4_K_M.gguf",
+      "observed_fact": "Q4_K_M_FILE_REVISION_SIZE_XET_HASH_AND_SHA256"
+    },
+    {
+      "url": "https://huggingface.co/prithivMLmods/Smaug-Mini-GGUF/blob/72e19c6d6302bbb3610e966d58eb2ddcbd62c524/Smaug-Mini.Q5_K_M.gguf",
+      "observed_fact": "Q5_K_M_FILE_REVISION_SIZE_XET_HASH_AND_SHA256"
+    },
+    {
+      "url": "https://huggingface.co/prithivMLmods/Smaug-Mini-GGUF",
+      "observed_fact": "APACHE_2_0__27B_QWEN35__LLAMA_CPP_Q4_ROUTE__Q4_16_5GB__Q5_19_2GB"
+    }
+  ],
+  "deleted_work": [
+    "DOWNLOAD_OR_INTERNALIZE_FULL_BF16_BEFORE_TESTING_Q4",
+    "TREAT_Q5_AS_DEFAULT_BEFORE_Q4_FAILURE",
+    "INFER_QUANTIZED_CAPABILITY_FROM_BF16_SCORE",
+    "SEARCH_LARGER_OPEN_WEIGHT_LIVEBENCH_WINNERS_AS_A_ROOT1_RESOURCE_REPAIR_WHILE_Q4_REMAINS_UNQUALIFIED"
+  ],
+  "remaining_load_bearing_residuals": [
+    "ESTABLISH_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER_THAT_CAN_RUN_EXACT_Q4_SUBJECT",
+    "RUN_PRECOMMITTED_PUBLIC_FOUR_TASK_QUALIFICATION_ON_EXACT_Q4_SHA256",
+    "IF_Q4_PASSES__ESTABLISH_BRAIN_CONTROLLED_DURABLE_COPY_OR_OTHER_CANONICALLY_ADMISSIBLE_BYTE_OWNERSHIP",
+    "VERIFY_SEMANTIC_SEED_PRESERVING_COMPOSITION_WITH_EXISTING_FORMAL_CONSTRAINT_COMPILER",
+    "OBTAIN_SEPARATE_CURRENT_AUTHORITY_BEFORE_ANY_FRESH_TERMINAL_REALITY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_Q4_RETains_BF16_LIVEBENCH_SCORE",
+    "NO_CLAIM_Q4_ALREADY_PASSES_65_73775",
+    "NO_CLAIM_Q4_BYTES_ARE_ALREADY_BRAIN_CONTROLLED_OR_DURABLY_INTERNALIZED",
+    "NO_CLAIM_CURRENT_ZERO_COST_COMPUTE_CAN_RUN_Q4",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
