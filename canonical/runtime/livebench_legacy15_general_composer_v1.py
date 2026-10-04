@@ -63,14 +63,17 @@ def _keyword_lists(constraints: list[dict[str, Any]]) -> tuple[list[str], list[s
 
 
 def _required_carriers(required: list[str], forbidden: list[str]) -> list[str]:
+    # Historical generated keyword arguments are alphabetic WORD_LIST entries.
+    # Appending a digit is stronger than appending another letter: the raw
+    # existence regex still matches the required substring, while no alphabetic
+    # forbidden token can equal the resulting whole \\w+ carrier.
     out = []
     for word in required:
-        token = word + "x"
-        if any(re.search(r"\b" + re.escape(bad) + r"\b", token, re.I) for bad in forbidden):
+        token = word + "0"
+        if any(re.search(r"\\b" + re.escape(bad) + r"\\b", token, re.I) for bad in forbidden):
             raise ComposeError("KEYWORD_CARRIER_FORBIDDEN_COLLISION")
         out.append(token)
     return out
-
 
 def _forbidden_collision(text: str, forbidden: list[str]) -> str | None:
     for bad in forbidden:
