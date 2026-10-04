@@ -404,7 +404,8 @@
         "OUTPUT_ONLY_THRESHOLD_DAG_MINIMUM_ZERO_REALITY_CERTIFICATE_CUT",
         "MINIMUM_AUTHORIZED_EMPIRICAL_RESIDUAL",
         "FULL_BENCHMARK_ONLY_IF_IRREDUCIBLE"
-      ]
+      ],
+      "root_projection_verification_path": "canonical/verification/ROOT2_DECISION_ONLY_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
     }
   },
   "accounting": {
