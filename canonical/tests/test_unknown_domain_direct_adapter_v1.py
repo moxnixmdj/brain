@@ -7,54 +7,63 @@ from canonical.runtime import structural_mapping_prover_v1 as p
 from canonical.runtime import unknown_domain_direct_adapter_v1 as a
 
 
-def graph(nodes, edges):
+def graph(nodes, edges, *, domain):
     return {
-        "nodes": [{"id": nid, "kind": kind, "label": "IGNORED_"+nid} for nid, kind in nodes],
-        "edges": [{"source": s, "target": d, "type": t} for s, d, t in edges],
-        "metadata": {"distractor": "must_not_matter"},
+        "nodes": [
+            {"id": nid, "kind": f"{domain}_KIND_{i}", "label": f"{domain}_LABEL_{nid}", "metadata": {"noise": i*17}}
+            for i, nid in enumerate(nodes)
+        ],
+        "edges": [
+            {"source": s, "target": d, "type": f"{domain}_EDGE_{i}", "metadata": {"noise": i*31}}
+            for i, (s, d) in enumerate(edges)
+        ],
+        "metadata": {"domain": domain, "distractor": "must_not_matter"},
     }
 
 
 SOURCE = graph(
-    [("s0","INPUT"),("s1","PROCESS"),("s2","PROCESS"),("s3","OUTPUT")],
-    [("s0","s1","FLOW"),("s0","s2","CONTROL"),("s1","s2","FLOW"),("s2","s3","FLOW")],
+    ["s0","s1","s2","s3"],
+    [("s0","s1"),("s0","s2"),("s1","s2"),("s2","s3")],
+    domain="ALPHA",
 )
 TARGET = graph(
-    [("q9","PROCESS"),("q2","OUTPUT"),("q7","INPUT"),("q4","PROCESS")],
-    [("q7","q4","FLOW"),("q7","q9","CONTROL"),("q4","q9","FLOW"),("q9","q2","FLOW")],
+    ["q9","q2","q7","q4"],
+    [("q7","q4"),("q7","q9"),("q4","q9"),("q9","q2")],
+    domain="OMEGA",
 )
 
 
 class StructuralMappingProverTests(unittest.TestCase):
-    def test_unique_mapping_ignores_surface_labels(self):
+    def test_unique_mapping_survives_cross_ontology_vocabulary_change(self):
         out=p.propose(SOURCE,TARGET)
         self.assertEqual(out["status"],"UNIQUE_STRUCTURAL_MAPPING")
         self.assertFalse(out["surface_labels_used"])
+        self.assertFalse(out["node_kind_names_used"])
+        self.assertFalse(out["edge_type_names_used"])
         self.assertEqual(out["mapping"],{"s0":"q7","s1":"q4","s2":"q9","s3":"q2"})
 
-    def test_surface_metadata_change_does_not_change_mapping(self):
+    def test_surface_types_labels_and_metadata_are_non_load_bearing(self):
         target=copy.deepcopy(TARGET)
-        for node in target["nodes"]:
-            node["label"]="completely different " + node["id"]
-        target["metadata"]={"distractor":"changed"}
+        for i,node in enumerate(target["nodes"]):
+            node["kind"]="ALIEN_ROLE_"+str(100+i)
+            node["label"]="unrelated-token-"+str(i)
+            node["metadata"]={"noise":"changed"}
+        for i,edge in enumerate(target["edges"]):
+            edge["type"]="ALIEN_REL_"+str(i)
+            edge["metadata"]={"noise":"changed"}
+        target["metadata"]={"completely":"different"}
         self.assertEqual(p.propose(SOURCE,target)["mapping"],p.propose(SOURCE,TARGET)["mapping"])
 
-    def test_nonisomorphic_rejected(self):
+    def test_nonisomorphic_rejected_even_with_plausible_surface_noise(self):
         target=copy.deepcopy(TARGET)
-        target["edges"][0]={"source":"q7","target":"q2","type":"FLOW"}
+        target["edges"][0]={"source":"q7","target":"q2","type":"misleading"}
         out=p.propose(SOURCE,target)
         self.assertEqual(out["status"],"NO_STRUCTURAL_MAPPING")
         self.assertIsNone(out["mapping"])
 
-    def test_symmetric_graph_abstains(self):
-        source=graph(
-            [("a","CENTER"),("b","LEAF"),("c","LEAF")],
-            [("a","b","FLOW"),("a","c","FLOW")],
-        )
-        target=graph(
-            [("x","CENTER"),("y","LEAF"),("z","LEAF")],
-            [("x","y","FLOW"),("x","z","FLOW")],
-        )
+    def test_symmetric_topology_abstains_instead_of_using_names(self):
+        source=graph(["a","b","c"],[("a","b"),("a","c")],domain="RED")
+        target=graph(["x","y","z"],[("x","y"),("x","z")],domain="BLUE")
         out=p.propose(source,target)
         self.assertEqual(out["status"],"AMBIGUOUS_STRUCTURAL_MAPPING")
         route=a.propose_cross_domain_mapping(source_graph=source,target_graph=target)
@@ -85,7 +94,6 @@ class StructuralMappingProverTests(unittest.TestCase):
         self.assertEqual(out["route"],"USE_VERIFIED_CAPABILITY")
 
     def test_wrong_hidden_mapping_receipt_fails_closed(self):
-        proposal=p.propose(SOURCE,TARGET)
         receipt={
             "receipt_id":"hidden-evaluator-case-bad",
             "independent_verified":True,
