@@ -57,7 +57,7 @@ def verify_precommit(m: Mapping[str,Any])->dict[str,Any]:
       "component_sha256":dict(EXPECTED),
       "candidate_unchanged":passed,
       "legacy_dispatch_bound":passed,
-      "legacy_environment_prefight_proved":False,
+      "legacy_environment_preflight_proved":False,
       "terminal_cases_consumed_this_epoch":0,
       "execution_authority":False,
       "promotion_authority":False,
