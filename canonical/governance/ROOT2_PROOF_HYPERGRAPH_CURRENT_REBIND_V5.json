@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V5",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_ROUTE_IDENTITY_REBIND__CHARTOGRAPHY_ADAPTER_DELTA__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "REESTABLISH_FAIL_CLOSED_FIXED_BAR_HYPERGRAPH_INPUT_IDENTITY_AFTER_GDPVAL_PROVENANCE_OSWORLD_SEMANTICS_AND_VERIFIED_CHARTOGRAPHY_INSPECT_ADAPTER_DELTAS",
+  "scope": "15_ROOT2_FIXED_BAR_PREDICATES__14_SURFACES__SYNTHESIS_ROOT2_ONLY_NON_FIXED_BAR_RESIDUAL_SEPARATE",
+  "prior_verified_hypergraph": {
+    "candidate_path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V4.json",
+    "candidate_git_blob_sha": "8d3f20c8b8379b282f9b03fc73ba82f6f8946fa5",
+    "activation_path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V4_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "3aa44e5febf5df1a5254082c7778a176b2eaebb8",
+    "optimizer_logic_changed": false
+  },
+  "current_inputs": {
+    "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+    "route_inventory_git_blob_sha": "ca7d7442ba226608057e662455462e922e6af918",
+    "comparator_vector_path": "canonical/governance/ROOT2_FROZEN_COMPARATOR_VECTOR_V1.json",
+    "comparator_vector_git_blob_sha": "e4cd92546a6e8cf5ea018daba315eacc95a9c0d0",
+    "zero_reality_cut_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
+    "zero_reality_cut_git_blob_sha": "e35158f61078abd5c93e948a39c373f2873d63a3"
+  },
+  "route_deltas_bound": [
+    "GDPVAL_FROZEN_1846_PROVENANCE_VERIFIED__LIVE_1867_DIAGNOSTIC_ONLY",
+    "OSWORLD_V21_PARTIAL_METRIC_SEMANTICS_RECONCILED",
+    "CHARTOGRAPHY_HARD_ZERO_SPEND_GUARD_DISCHARGED",
+    "CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_IMPLEMENTATION_DISCHARGED",
+    "CHARTOGRAPHY_INTERNAL_MULTIMODAL_BACKEND_BINDING_REMAINS_OPEN"
+  ],
+  "invariants": {
+    "fixed_bar_predicates": 15,
+    "unique_fixed_bar_surfaces": 14,
+    "total_root2_involved_predicates": 19,
+    "comparator_targets_changed": false,
+    "predicate_set_changed": false,
+    "surface_set_changed": false,
+    "chartography_target_percent": 89,
+    "gdpval_target_elo": 1846,
+    "osworld_partial_target_percent": 81.8,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "fresh_reality_authority": false
+  },
+  "allowed_effect": "REACTIVATE_EXISTING_VERIFIED_FIXED_BAR_HYPERGRAPH_ON_EXACT_CURRENT_ROUTE_STATE_AFTER_INDEPENDENT_INPUT_AND_TARGET_INVARIANT_PASS",
+  "hard_rules": [
+    "NO_OPTIMIZER_LOGIC_CHANGE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TARGET_REBASE",
+    "NO_CASE_EXPOSURE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "FAIL_CLOSED_ON_INPUT_BLOB_DRIFT",
+    "CHARTOGRAPHY_ADAPTER_PASS_DOES_NOT_IMPLY_MULTIMODAL_BACKEND_OR_SCORE"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
