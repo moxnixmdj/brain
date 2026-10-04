@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_OPEN_WEIGHT_DOMINANCE_UPDATE_V1",
   "date": "2026-10-04",
-  "status": "PUBLIC_SOURCE_BOUND__SMALLER_SEARCH_FRONTIER__ZERO_ACCEPTANCE_CREDIT",
+  "status": "PUBLIC_SOURCE_BOUND__NVFP4_FIRST_QUALIFICATION_FRONTIER__ZERO_ACCEPTANCE_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
@@ -30,7 +30,7 @@
     "livebench_2026_06_25_if_task_scores_percent": {
       "paraphrase": 76.183,
       "simplify": 65.383,
-      "story_generation": 78.0,
+      "story_generation": 78,
       "summarize": 76.1
     },
     "exact_if_mean_percent": 73.9165,
@@ -71,22 +71,29 @@
     "current_credit": 0
   },
   "new_critical_path": [
-    "CONTENT_ADDRESS_AND_DURABLY_INTERNALIZE_EXACT_SMAUG_MINI_CAPABILITY_BYTES_OR_AN_INDEPENDENTLY_VERIFIED_EQUIVALENT_EXECUTION_SUBJECT",
-    "PROVE_ZERO_INCREMENTAL_SPEND_STORAGE_AND_EXECUTION_FIT",
-    "REPRODUCE_OR_STRONGLY_DOMINATE_ROOT1_SEMANTIC_INSTRUCTION_FOLLOWING_ON_ADMISSIBLE_NONTERMINAL_EVIDENCE",
+    "QUALIFY_THE_PINNED_NVIDIA_QWEN3_8_27B_NVFP4_SUBJECT_ON_THE_EXACT_PUBLIC_NONTERMINAL_LIVEBENCH_PARAPHRASE_SIMPLIFY_STORY_GENERATION_AND_SUMMARIZE_GEOMETRY",
+    "IF_AND_ONLY_IF_NVFP4_MEETS_65_73775__CONTENT_ADDRESS_AND_DURABLY_INTERNALIZE_THAT_21_9_GB_EXECUTION_SUBJECT_INSTEAD_OF_55_6_GB_BF16",
+    "PROVE_ZERO_INCREMENTAL_SPEND_EXECUTION_FIT_FOR_THE_PROMOTED_EXACT_SUBJECT",
+    "COMPOSE_THE_PROMOTED_SEMANTIC_CORE_WITH_THE_EXISTING_FORMAL_CONSTRAINT_COMPILER_AND_SEED_PRESERVING_POSTPROCESSOR",
     "ONLY_THEN_FREEZE_A_SUCCESSOR_BEFORE_ANY_NEW_TERMINAL_CASE"
   ],
   "deleted_work": [
     "INVENT_A_GENERAL_SEMANTIC_TEXT_PRODUCER_FROM_SCRATCH_BEFORE_TESTING_EXISTING_OPEN_WEIGHT_ACQUISITION",
     "USE_QWEN3_8_27B_AS_FIRST_FULL_PRECISION_ROOT1_ACQUISITION_CANDIDATE",
-    "TREAT_SCORE_ONLY_RATIO_OVERLAP_WITNESSES_AS_SEMANTIC_CAPABILITY"
+    "TREAT_SCORE_ONLY_RATIO_OVERLAP_WITNESSES_AS_SEMANTIC_CAPABILITY",
+    "DOWNLOAD_OR_INTERNALIZE_55_6_GB_BF16_BEFORE_TESTING_THE_PUBLICLY_BENCHMARKED_21_9_GB_NVFP4_SUBJECT",
+    "TREAT_UNBENCHMARKED_19_5_GB_INT4_OR_COMMUNITY_GGUF_AS_EQUIVALENT_TO_BF16_WITHOUT_EXACT_REQUALIFICATION"
   ],
   "hard_nonclaims": [
     "NO_CLAIM_SMAUG_MINI_BYTES_ARE_ALREADY_INTERNALIZED_OR_OWNED_BY_BRAIN",
     "NO_CLAIM_55_6_GB_BF16_EXECUTION_FITS_CURRENT_ZERO_COST_COMPUTE",
     "NO_CLAIM_COMMUNITY_Q4_OR_Q5_QUANTIZATION_PRESERVES_73_9165",
     "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
-    "NO_FRESH_TERMINAL_CASE_EXPOSURE"
+    "NO_FRESH_TERMINAL_CASE_EXPOSURE",
+    "NO_CLAIM_NVIDIA_NVFP4_ALREADY_MEETS_THE_EXACT_LIVEBENCH_FOUR_TASK_65_73775_BAR",
+    "NO_CLAIM_NVFP4_BYTES_ARE_ALREADY_BRAIN_INTERNALIZED",
+    "NO_CLAIM_CURRENT_ZERO_COST_COMPUTE_CAN_EXECUTE_THE_21_9_GB_SUBJECT",
+    "NO_SCORE_TRANSFER_FROM_STANDALONE_IFBENCH_TO_THE_EXACT_LIVEBENCH_FOUR_TASK_GEOMETRY"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -103,5 +110,70 @@
     "fresh_reality": false,
     "promotion": false,
     "acceptance_credit": false
+  },
+  "compressed_frontier_breakthrough": {
+    "status": "PUBLIC_PAIRED_QUANTIZATION_EVIDENCE__EXACT_LIVEBENCH_FOUR_TASK_QUALIFICATION_PENDING",
+    "candidate": {
+      "model": "nvidia/Qwen3.8-27B-NVFP4",
+      "base_model": "Qwen/Qwen3.8-27B",
+      "precision": "MIXED_NVFP4_FP8",
+      "license": "apache-2.0",
+      "published_repository_size_bytes_approx": 21900000000,
+      "published_repository_size_gb_decimal": 21.9,
+      "initial_weight_commit": "9340e99f9c8a7f2c2d7df7b7e0dbd3af3fb6a038",
+      "benchmark_card_commit": "0a8ff72b25681e50ac747a291c5a1c357dff325b",
+      "source_repository": "https://huggingface.co/nvidia/Qwen3.8-27B-NVFP4"
+    },
+    "storage_geometry": {
+      "bf16_reference_bytes": 55563006776,
+      "nvfp4_candidate_bytes_approx": 21900000000,
+      "reduction_percent": 60.5853,
+      "bf16_to_nvfp4_storage_factor": 2.5371
+    },
+    "paired_public_quality_evidence": {
+      "source": "NVIDIA model card at benchmark_card_commit",
+      "settings": "temperature=1.0__top_p=0.95__context_limit=262144",
+      "ifbench": {
+        "bf16": 80.07,
+        "nvfp4": 78.93,
+        "delta_percentage_points": -1.14
+      },
+      "gpqa_diamond": {
+        "bf16": 88.92,
+        "nvfp4": 88.01,
+        "delta_percentage_points": -0.91
+      },
+      "terminal_bench": {
+        "bf16": 75.56,
+        "nvfp4": 74.02,
+        "delta_percentage_points": -1.54
+      },
+      "aa_lcr": {
+        "bf16": 72.63,
+        "nvfp4": 73.38,
+        "delta_percentage_points": 0.75
+      },
+      "mmmu_pro": {
+        "bf16": 75.14,
+        "nvfp4": 74.86,
+        "delta_percentage_points": -0.28
+      },
+      "scicode": {
+        "bf16": 47.93,
+        "nvfp4": 48.41,
+        "delta_percentage_points": 0.48
+      }
+    },
+    "exact_target_context": {
+      "livebench_four_task_opus55_mean_percent": 65.73775,
+      "qwen38_27b_bf16_livebench_four_task_mean_percent": 72.65825,
+      "bf16_margin_over_opus55_percentage_points": 6.9205,
+      "paired_ifbench_drop_if_naively_transferred_only_as_a_heuristic_percent": 71.51825,
+      "heuristic_margin_if_same_drop_transferred_percentage_points": 5.7805,
+      "hard_nonclaim": "THE_CROSS_BENCHMARK_HEURISTIC_IS_NOT_LIVEBENCH_FOUR_TASK_PROOF_AND_GRANTS_ZERO_SCORE_CAPABILITY_OR_OWNERSHIP_CREDIT"
+    },
+    "dominance_decision": "QUALIFY_NVIDIA_NVFP4_BEFORE_ANY_55_6_GB_BF16_INTERNALIZATION__THE_COMPRESSED_SUBJECT_HAS_DIRECT_PAIRED_INSTRUCTION_FOLLOWING_EVIDENCE_AND_CUTS_WEIGHT_STORAGE_BY_ABOUT_60_6_PERCENT",
+    "stop_rule": "IF_PINNED_NVFP4_SUBJECT_MEETS_OR_EXCEEDS_65_73775_ON_THE_PUBLIC_NONTERMINAL_FOUR_TASK_GEOMETRY__PROMOTE_IT_AS_ROOT1_INTERNALIZATION_SUBJECT_AND_DELETE_BF16_FIRST_ACQUISITION_WORK",
+    "fail_rule": "IF_EXACT_FOUR_TASK_QUALIFICATION_FAILS__DO_NOT_INHERIT_BF16_OR_STANDALONE_IFBENCH_CREDIT__RETURN_TO_NEXT_EVIDENCE_ADJUSTED_EXECUTION_SUBJECT"
   }
 }
