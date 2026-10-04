@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_ZERO_SPEND_HARNESS_ADAPTER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PINNED_VALS_PROVIDER_CALL_INTERCEPTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "objective": "Bind the verified zero-spend runtime guard to every actual billable provider request made by the pinned Finance Agent v2 tool layer, including retries, while refusing source drift and leaving account access, exact suite identity, launcher binding, full-run receipt, and score open.",
+  "source_identity": {
+    "repository": "vals-ai/finance-agent-v2",
+    "ref": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "tools_path": "finance_agent/tools.py",
+    "tools_git_blob_sha": "19b85ce4e110e39f410c52b2efa0e33f651fa6d1",
+    "get_agent_path": "finance_agent/get_agent.py",
+    "get_agent_git_blob_sha": "22c012241a430975266fb7f8d2fe7af8e9f1b8d4",
+    "run_agent_path": "finance_agent/run_agent.py",
+    "run_agent_git_blob_sha": "49d08c50990ef1ca296f4d690216fc4cc4c53c85"
+  },
+  "verified_guard_dependency": {
+    "governance_path": "canonical/governance/FINANCE_AGENT_V2_ZERO_SPEND_RUNTIME_GUARD_V1.json",
+    "governance_git_blob_sha": "278a3317564138088fd8af83a8734a84fe09b158",
+    "verification_path": "canonical/verification/FINANCE_AGENT_V2_ZERO_SPEND_RUNTIME_GUARD_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "342740561634a86d0c55876ee126e8122b21af0f"
+  },
+  "current_root2": {
+    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V6.json",
+    "frontier_git_blob_sha": "fcbdb818b63b4986b026db29c400a47373a26fdb",
+    "current_waiting_fact": "FINANCE_AGENT_V2_1350_EXECUTION_TAVILY_SEC_API_TIINGO_FREE_USAGE_FEASIBILITY"
+  },
+  "adapter": {
+    "runtime_path": "canonical/runtime/finance_agent_v2_zero_spend_harness_adapter_v1.py",
+    "runtime_git_blob_sha": "fac39c42cc9da28481da12f479f81a848e041ab0",
+    "tests_path": "canonical/tests/test_finance_agent_v2_zero_spend_harness_adapter_v1.py",
+    "tests_git_blob_sha": "c61a2f3b6632a004971492f01dd91376f7288110"
+  },
+  "provider_binding": [
+    {
+      "provider": "tavily",
+      "tool_class": "TavilyWebSearch",
+      "interception": "WRAP_PINNED_ASYNC_TAVILY_CLIENT_SEARCH",
+      "retry_semantics": "EACH_RETRY_REENTERS_WRAPPED_CLIENT_SEARCH_AND_IS_SEPARATELY_GUARD_AUTHORIZED_AND_OBSERVED"
+    },
+    {
+      "provider": "sec_api",
+      "tool_class": "EDGARSearch",
+      "interception": "WRAP_AIOHTTP_REQUEST_CONTEXT_WHEN_EXACT_HOST_API_SEC_API_IO",
+      "retry_semantics": "EACH_RETRY_REENTERS_PINNED_SESSION_POST_AND_IS_SEPARATELY_GUARD_AUTHORIZED_AND_OBSERVED"
+    },
+    {
+      "provider": "tiingo",
+      "tool_class": "PriceHistory",
+      "interception": "WRAP_AIOHTTP_REQUEST_CONTEXT_WHEN_EXACT_HOST_API_TIINGO_COM",
+      "retry_semantics": "EACH_RETRY_REENTERS_PINNED_SESSION_GET_AND_IS_SEPARATELY_GUARD_AUTHORIZED_AND_OBSERVED"
+    }
+  ],
+  "fail_closed_properties": [
+    "INSTALL_REFUSES_TO_RUN_IF_PINNED_TOOLS_OR_GET_AGENT_SOURCE_BLOB_DRIFTS",
+    "ACCOUNT_SNAPSHOT_PROVIDER_IS_REINVOKED_BEFORE_EVERY_ACTUAL_PROVIDER_REQUEST",
+    "NON_PROVIDER_AIOHTTP_FETCHES_REMAIN_UNCHANGED",
+    "PROVIDER_HOST_MATCHING_USES_EXACT_PARSED_HOSTNAME_NOT_SUBSTRING",
+    "HTTP_429_IS_QUOTA_EXHAUSTION_AND_FAILS_CLOSED",
+    "HTTP_402_IS_PAYMENT_REQUIRED_AND_FAILS_CLOSED",
+    "UNKNOWN_OR_PAID_ACCOUNT_STATE_FAILS_BEFORE_NETWORK_REQUEST",
+    "EVERY_ATTEMPTED_PROVIDER_REQUEST_MUST_HAVE_AN_OBSERVED_COMPLETION_OR_FULL_RUN_FINALIZATION_FAILS",
+    "COMPLETE_EVALUATION_WITH_ZERO_GUARD_TRIPS_AND_ZERO_COST_IS_REQUIRED_FOR_ZERO_SPEND_SCORE_ELIGIBILITY"
+  ],
+  "proposed_scheduler_delta_after_independent_adapter_and_launcher_verification": {
+    "replace": "FINANCE_AGENT_V2_1350_EXECUTION_TAVILY_SEC_API_TIINGO_FREE_USAGE_FEASIBILITY_AS_A_PRIORI_PRECONDITION",
+    "with": [
+      "CURRENT_VERIFIED_FREE_ONLY_ACCOUNT_STATE_FOR_TAVILY_SEC_API_TIINGO",
+      "PINNED_LAUNCHER_INSTALLS_THIS_ADAPTER_BEFORE_ANY_FINANCE_AGENT_TOOL_CONSTRUCTION",
+      "FULL_RUN_ZERO_GUARD_TRIP_ZERO_SPEND_RECEIPT",
+      "VALS_PLATFORM_APPROVAL_AND_EXACT_OFFICIAL_TEST_SUITE_ID",
+      "BRAIN_SCORE_GE_58_59"
+    ]
+  },
+  "preserve": [
+    "VALS_PLATFORM_APPROVAL",
+    "EXACT_OFFICIAL_TEST_SUITE_ID",
+    "CURRENT_VERIFIED_FREE_ONLY_PROVIDER_ACCOUNT_AND_API_KEY_STATE",
+    "LAUNCHER_INSTALL_AND_FINALIZE_BINDING",
+    "FULL_1350_EXECUTION_COMPLETION",
+    "ZERO_GUARD_TRIP_ZERO_SPEND_RECEIPT",
+    "BRAIN_SCORE_GE_58_59"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_PROVIDER_ACCOUNTS_OR_API_KEYS_EXIST",
+    "NO_CLAIM_CURRENT_FREE_QUOTAS_ARE_SUFFICIENT",
+    "NO_CLAIM_VALS_PLATFORM_APPROVAL_OR_EXACT_SUITE_ID",
+    "NO_CLAIM_LAUNCHER_BINDING_IS_ALREADY_INSTALLED",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
