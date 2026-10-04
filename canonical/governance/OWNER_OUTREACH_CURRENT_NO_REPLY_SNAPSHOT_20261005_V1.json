@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_OWNER_OUTREACH_CURRENT_NO_REPLY_SNAPSHOT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_CURRENT_MAILBOX_OBSERVATION__SCHEDULING_ONLY__ZERO_CREDIT",
+  "objective": "Bind current authenticated-mailbox truth for already-sent high-value owner-result/access races so the scheduler does not duplicate outreach or spend active attention on inbox rechecks without a new-message event.",
+  "observations": [
+    {
+      "owner": "Artificial Analysis",
+      "gmail_thread_id": "1a103c7447eb0cf8",
+      "sent_message_ids": [
+        "1a103c7447eb0cf8"
+      ],
+      "current_thread_message_count": 1,
+      "owner_reply_present": false,
+      "predicates": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822",
+        "FINANCE_ACCOUNTING_INDEX_GE_61"
+      ]
+    },
+    {
+      "owner": "Vals",
+      "gmail_thread_id": "1a103dddfe748f84",
+      "sent_message_ids": [
+        "1a103dddfe748f84",
+        "1a1049b612b153b5",
+        "1a104b8166a12aee"
+      ],
+      "current_thread_message_count": 3,
+      "owner_reply_present": false,
+      "predicates": [
+        "FINANCE_AGENT_V2_GE_58_59",
+        "MYSTERYMECHANISM_GE_49_55"
+      ]
+    },
+    {
+      "owner": "Zapier",
+      "gmail_thread_id": "1a103e065cc7e8d2",
+      "sent_message_ids": [
+        "1a103e065cc7e8d2"
+      ],
+      "current_thread_message_count": 1,
+      "owner_reply_present": false,
+      "predicates": [
+        "AUTOMATIONBENCH_GE_40"
+      ]
+    },
+    {
+      "owner": "Cognition",
+      "gmail_thread_id": "1a103e05df977e8e",
+      "sent_message_ids": [
+        "1a103e05df977e8e"
+      ],
+      "current_thread_message_count": 1,
+      "owner_reply_present": false,
+      "predicates": [
+        "CODING_FRONTIERCODE_GE_54_4"
+      ]
+    },
+    {
+      "owner": "Cursor",
+      "gmail_thread_id": "1a103dde59e2a653",
+      "owner_reply_message_id": "1a103e0ae4bd73ad",
+      "owner_reply_present": true,
+      "owner_boundary_already_canonicalized_by_commit": "209c53187361d766460f4bcafb7ee15cf895b8c7",
+      "predicates": [
+        "CODING_CURSORBENCH_GE_57_8"
+      ]
+    }
+  ],
+  "scheduler_delta": {
+    "no_duplicate_outreach": [
+      "ARTIFICIAL_ANALYSIS",
+      "VALS",
+      "ZAPIER",
+      "COGNITION",
+      "CURSOR"
+    ],
+    "passive_resume_event": "NEW_AUTHENTICATED_INBOUND_MESSAGE_IN_BOUND_THREAD_OR_MATERIAL_PUBLIC_POLICY_CHANGE",
+    "active_work_rule": "CONTINUE_ORTHOGONAL_ZERO_REALITY_AND_STRONGER_PROOF_ROUTES_WHILE_OWNER_THREADS_ARE_QUIET"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OWNERS_WILL_NOT_REPLY",
+    "NO_CLAIM_EMAIL_DELIVERY_OR_HUMAN_REVIEW_OCCURRED_BEYOND_GMAIL_SENT_THREAD_STATE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
