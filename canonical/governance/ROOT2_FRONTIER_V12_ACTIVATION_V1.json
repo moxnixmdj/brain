@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V12_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__INDEPENDENT_FRONTIER_PASS__CURRENT_AUTHORITY_REBIND_PENDING__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
+    "git_blob_sha": "75ca9127a73ca2dd52a49f2f09e2e0ccc384129a"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_FRONTIER_V12_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "c13903bb6b0f2b03f934664e2af77fdc4cc0696b",
+    "verifier_pr": 1693,
+    "workflow_run_id": 37179392646,
+    "workflow_job_id": 111368684287,
+    "conclusion": "success"
+  },
+  "effects": [
+    "SUPERSEDE_ROOT2_V11_FOR_SCHEDULING_ONLY_AFTER_CURRENT_AUTHORITY_AND_META_SCHEDULER_REBIND",
+    "PRUNE_PURE_ABSOLUTE_NON_RELATIVE_FIXED_ELO_PROOF_FORMS_FOR_GDPVAL_AND_AA_BRIEFCASE",
+    "DELETE_SYNTHESIS_FIVE_DIMENSION_SCORER_AND_CONSERVATIVE_REDUCER_UNDERSPECIFICATION",
+    "PRESERVE_ALL_ACCEPTANCE_COUNTS",
+    "PRESERVE_EXTERNAL_FACT_SET",
+    "PRESERVE_FRESH_REALITY_BLOCK"
+  ],
+  "authority": {
+    "scheduling": true,
+    "effective_scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_activation_projection_verification_required": true
+}
