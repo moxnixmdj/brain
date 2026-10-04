@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_ZERO_COST_TOOL_PROVIDER_PREFLIGHT_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_REQUIRED_PROVIDER_IDENTITIES_BOUND__ZERO_DOLLAR_ENTRY_ROUTES_DOCUMENTED__SUITE_CAPACITY_AND_ACCOUNT_READINESS_OPEN__ZERO_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "frozen_target": ">=58.59%",
+  "source_bindings": {
+    "route_reconciliation": {
+      "path": "canonical/governance/FINANCE_AGENT_V2_PUBLIC_RUNNER_ROUTE_RECONCILIATION_20261004_V1.json",
+      "git_blob_sha": "126ff389982aab89f810388b1adbe402c25a7a59"
+    },
+    "first_party_runner": {
+      "repository": "vals-ai/finance-agent-v2",
+      "commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+      "readme_git_blob_sha": "6e18ea1e7149ba696e59c80e52890878aca8f096",
+      "tools_py_git_blob_sha": "19b85ce4e110e39f410c52b2efa0e33f651fa6d1",
+      "pyproject_git_blob_sha": "6c8c5520fa560f99eb01a6ec8888480fbf529150"
+    }
+  },
+  "exact_required_external_tool_providers": [
+    {
+      "benchmark_tool": "web_search",
+      "provider": "Tavily",
+      "first_party_implementation": "AsyncTavilyClient.search",
+      "required_secret": "TAVILY_API_KEY",
+      "pricing_source": "https://www.tavily.com/pricing",
+      "documented_zero_dollar_entry": {
+        "exists": true,
+        "plan": "Researcher",
+        "monthly_api_credits": 1000,
+        "credit_card_required": false,
+        "exhaustion_behavior": "REQUESTS_STOP_UNTIL_RESET_OR_UPGRADE"
+      },
+      "exact_suite_sufficiency_proved": false,
+      "unresolved": [
+        "CURRENT_FREE_ACCOUNT_AND_KEY_ACCESS",
+        "EXACT_FAST_SEARCH_CREDIT_COST_AND_SUITE_TOTAL_CREDIT_DEMAND",
+        "SUITE_DEMAND_LE_1000_MONTHLY_CREDITS"
+      ]
+    },
+    {
+      "benchmark_tool": "edgar_search",
+      "provider": "sec-api.io",
+      "first_party_endpoint": "https://api.sec-api.io/full-text-search",
+      "required_secret": "SEC_EDGAR_API_KEY",
+      "pricing_source": "https://sec-api.io/pricing",
+      "api_reference": "https://sec-api.io/api-reference/full-text-search",
+      "documented_zero_dollar_entry": {
+        "exists": true,
+        "free_calls_total": 100,
+        "exhaustion_behavior": "HTTP_429_AFTER_FREE_TRIAL_LIMIT"
+      },
+      "exact_suite_sufficiency_proved": false,
+      "unresolved": [
+        "CURRENT_FREE_ACCOUNT_AND_KEY_ACCESS",
+        "FREE_TIER_FULL_TEXT_SEARCH_ELIGIBILITY_ON_ACTUAL_ACCOUNT",
+        "SUITE_FULL_TEXT_SEARCH_CALL_DEMAND_LE_100_TOTAL_CALLS",
+        "LICENSE_OR_TERMS_APPLICABILITY_TO_THIS_BENCHMARK_CONTEXT"
+      ]
+    },
+    {
+      "benchmark_tool": "price_history",
+      "provider": "Tiingo",
+      "required_secret": "PRICING_DATA_API_KEY",
+      "pricing_source": "https://www.tiingo.com/pricing",
+      "documented_zero_dollar_entry": {
+        "exists": true,
+        "plan": "Starter",
+        "price_usd_per_month": 0,
+        "unique_symbols_per_month": 500,
+        "max_requests_per_hour": 50,
+        "max_requests_per_day": 1000,
+        "max_bandwidth_per_month_gb": 1,
+        "license_label": "INTERNAL_USE_ONLY"
+      },
+      "exact_suite_sufficiency_proved": false,
+      "unresolved": [
+        "CURRENT_FREE_ACCOUNT_AND_KEY_ACCESS",
+        "SUITE_SYMBOL_COUNT_LE_500",
+        "SUITE_REQUEST_RATE_LE_50_PER_HOUR",
+        "SUITE_DAILY_CALLS_LE_1000",
+        "SUITE_BANDWIDTH_LE_1_GB_PER_MONTH",
+        "LICENSE_APPLICABILITY_TO_THIS_BENCHMARK_CONTEXT"
+      ]
+    }
+  ],
+  "benchmark_tools_without_separate_paid_data_provider": [
+    {
+      "tool": "parse_html_page",
+      "evidence": "FIRST_PARTY_IMPLEMENTATION_USES_DIRECT_AIOHTTP_GET_TO_REQUESTED_URL",
+      "separate_paid_data_api_required": false,
+      "network_site_access_and_rate_limits_remain_context_dependent": true
+    },
+    {
+      "tool": "calculator",
+      "evidence": "FIRST_PARTY_IMPLEMENTATION_USES_LOCAL_SIMPLEEVAL",
+      "separate_paid_data_api_required": false
+    },
+    {
+      "tool": "retrieve_information",
+      "evidence": "FIRST_PARTY_IMPLEMENTATION_CALLS_THE_BOUND_BENCHMARK_LLM_HARNESS_OVER_STORED_DOCUMENT_TEXT",
+      "separate_paid_data_api_required": false,
+      "note": "THIS_DOES_NOT_PROVE_ZERO_COST_MODEL_EXECUTION; MODEL_OR_HARNESS_COST_IS_GOVERNED_SEPARATELY"
+    }
+  ],
+  "narrow_conclusion": {
+    "exact_required_external_provider_identity_closed": true,
+    "documented_zero_dollar_entry_route_exists_for_each_external_data_provider": true,
+    "zero_cost_provider_existence_blocker_closed": true,
+    "zero_cost_tool_dependency_readiness_proved": false,
+    "exact_suite_quota_sufficiency_proved": false,
+    "current_account_key_readiness_proved": false,
+    "legal_or_license_applicability_proved": false,
+    "finance_agent_v2_score_proved": false
+  },
+  "minimum_remaining_zero_reality_route": [
+    "OBTAIN_OR_OBSERVE_VALS_PLATFORM_APPROVAL",
+    "BIND_EXACT_FINANCE_AGENT_V2_TEST_SUITE_ID_WITHOUT_EXPOSING_HELDOUT_CONTENT",
+    "OBTAIN_OR_OBSERVE_ZERO_SPEND_API_KEYS_FOR_TAVILY_SEC_API_AND_TIINGO",
+    "DERIVE_OR_OBSERVE_SUITE_LEVEL_TOOL_CALL_SYMBOL_RATE_AND_BANDWIDTH_UPPER_BOUNDS_WITHOUT_HELDOUT_CONTENT_EXFILTRATION",
+    "PROVE_EACH_SUITE_DEMAND_BOUND_FITS_PROVIDER_FREE_ALLOWANCE_OR_BIND_AN_EXACT_COMPATIBLE_ZERO_SPEND_ALTERNATIVE",
+    "VERIFY_PROVIDER_LICENSE_OR_TERMS_APPLICABILITY_TO_THE_ACTUAL_BENCHMARK_EXECUTION_CONTEXT",
+    "BIND_BRAIN_AS_CUSTOM_MODEL_OR_HARNESS_IN_PUBLIC_RUNNER",
+    "PRESERVE_SCORE_EXECUTION_UNTIL_GLOBAL_ZERO_REALITY_FIXED_POINT"
+  ],
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_HELDOUT_CONTENT_EXFILTRATION",
+    "NO_PUBLIC_QUESTION_FILE_AS_OFFICIAL_SCORED_POPULATION_WITHOUT_EXACT_OR_SUPERSET_PROOF",
+    "NO_SUITE_QUOTA_SUFFICIENCY_CLAIM_FROM_PROVIDER_FREE_TIER_EXISTENCE_ALONE",
+    "NO_LICENSE_APPLICABILITY_INFERENCE_FROM_PRICE_TABLE_ALONE",
+    "NO_SCORE_EXECUTION_BEFORE_GLOBAL_ZERO_REALITY_FIXED_POINT",
+    "ZERO_ACCEPTANCE_CREDIT_FROM_PROVIDER_ROUTE_DISCOVERY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
