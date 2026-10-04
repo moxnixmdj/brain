@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_VISIBLE_DESCRIPTION_INVERSION_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SOURCE_DERIVED_25_OF_25_LEGACY_DESCRIPTION_INVERSION__ZERO_TERMINAL_METADATA__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Delete hidden instruction_id_list and visible-parameter kwargs as necessary inputs for a frozen legacy IFEval successor by inverting the public build_description grammar from prompt text only.",
+  "trigger": {
+    "candidate_scope_reduction": "canonical/governance/LIVEBENCH_ACTIVE_POPULATION_LEGACY_DISPATCH_COLLAPSE_V1.json",
+    "state": "LEGACY_ONLY_COMPOSITION_VERIFIER_PENDING_AT_TIME_OF_THIS_COMMIT",
+    "reason_for_work_now": "THIS COMPONENT IS SOURCE_ONLY AND REMAINS USEFUL WHETHER OR NOT THE PENDING POPULATION_DISPATCH COMPOSITION IS PROMOTED"
+  },
+  "pinned_public_sources": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_registry_path": "livebench/if_runner/instruction_following_eval/instructions_registry.py",
+    "legacy_registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "legacy_instructions_path": "livebench/if_runner/instruction_following_eval/instructions.py",
+    "legacy_instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2"
+  },
+  "breakthrough": {
+    "registered_legacy_instruction_ids": 25,
+    "source_derived_description_patterns": 25,
+    "static_registry_coverage_fraction": "25/25",
+    "visible_parameter_families_recovered": [
+      "keyword lists and keyword frequency",
+      "forbidden word lists",
+      "letter frequency",
+      "language name",
+      "sentence paragraph and word counts",
+      "nth paragraph first word",
+      "placeholder count and postscript marker",
+      "bullet highlight and section counts",
+      "constrained option list",
+      "end phrase",
+      "capital-word frequency"
+    ],
+    "fixed_description_families_recognized": [
+      "json format",
+      "title",
+      "two responses",
+      "repeat prompt",
+      "english uppercase",
+      "english lowercase",
+      "no comma",
+      "quotation wrapper"
+    ],
+    "consequence": "A SUCCESSOR CAN PRECOMMIT THE LEGACY CHECKER SURFACE AND RECOVER CHECKER_RELEVANT VISIBLE PARAMETERS WITHOUT READING HIDDEN instruction_id_list OR kwargs. THE REMAINING HARD PARAMETER IS repeat_prompt.prompt_to_repeat, FOR WHICH A SEPARATE PROMPT_ONLY RECOVERY CANDIDATE ALREADY EXISTS."
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/livebench_legacy_visible_description_inverter_v1.py",
+    "runtime_commit": "55ae2d43300d0e4fa7139e8c885ed90757655d98",
+    "tests": "canonical/tests/test_livebench_legacy_visible_description_inverter_v1.py",
+    "tests_commit": "5270f75b54e2a57c0081d24a582719b8455d83c7",
+    "design": "FAIL_CLOSED_ON_OVERLAPPING_DESCRIPTION_MATCHES__SOURCE_TEMPLATE_REGEXES_ONLY__NO_SEMANTIC_GUESSING"
+  },
+  "next_minimum_cut": [
+    "INDEPENDENTLY_VERIFY_RENDERED_TEMPLATE_COVERAGE_AGAINST_THE_PINNED_LEGACY_SOURCE_WITHOUT_READING_TERMINAL_PROMPTS",
+    "COMPOSE_THE_INVERTER_WITH_A_DETERMINISTIC_LEGACY_CHECKER_WITNESS_SYNTHESIZER",
+    "VALIDATE_EACH_SYNTHESIZED_WITNESS_AGAINST_AN_EXACT_LOCAL_COPY_OF_THE_PINNED_PUBLIC_CHECKER",
+    "ONLY_THEN_USE_VISIBLE_MATCH_COUNT_AS_SCORE_RESULTS_DENOMINATOR_EVIDENCE__FAIL_CLOSED_ON_ANY_UNMATCHED_OR_AMBIGUOUS_CONTRACT"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_PROMPT_POPULATION_WAS_READ_OR_AUDITED",
+    "NO_CLAIM_HISTORICAL_FROZEN_ROWS_LACK_WORDING_VARIANTS",
+    "NO_RESPONSE_SYNTHESIS_OR_CHECKER_PASS_IS_CLAIMED",
+    "NO_LIVEBENCH_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "contamination_firewall": [
+    "NO_QUESTION_IDS",
+    "NO_instruction_id_list",
+    "NO_HIDDEN_kwargs",
+    "NO_RESPONSES",
+    "NO_SCORER_FEEDBACK",
+    "PUBLIC_PINNED_SOURCE_GRAMMAR_PLUS_SYNTHETIC_DESCRIPTIONS_ONLY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
