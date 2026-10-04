@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FROZEN_LEGACY16_SURFACE_COLLAPSE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_CONSTRUCTION_SPEC_COLLAPSE__ZERO_TERMINAL_ROW_USE__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": {
+    "prior_assumed_surfaces": {
+      "union_public_checkers": 83,
+      "legacy_registry_checkers": 25
+    },
+    "frozen_2024_livebench_construction_checkers": 16,
+    "type_surface_removed_vs_83": 67,
+    "percent_surface_removed_vs_83": 80.72289156626506,
+    "terminal_relevance": "If the exact frozen population is entirely pre-2025-11-25, the legacy scorer is active; the original LiveBench construction spec then further narrows the load-bearing instruction grammar from the full 25-type IFEval registry to the 16 types explicitly selected for LiveBench."
+  },
+  "public_proof_basis": {
+    "livebench_paper": {
+      "arxiv": "2406.19314",
+      "table": 4,
+      "claim": "LiveBench uses a subset of 16 of IFEval's 25 verifiable instructions.",
+      "construction_details": [
+        "instructions are sampled uniformly in sets of 2 to 5",
+        "conflicting instructions are deconflicted",
+        "the four tasks are paraphrase, summarize, simplify, and story generation",
+        "scoring is purely instruction adherence"
+      ]
+    },
+    "livebench_changelog": {
+      "2024-11-25": [
+        "instruction-following tasks refreshed with new Guardian articles",
+        "average instructions per task increased from 2 to 3"
+      ],
+      "2025-11-25": [
+        "newer articles added",
+        "new more difficult instruction types introduced"
+      ],
+      "deduction": "The 2024 refresh changed articles and instruction-count density, not the published 16-type family; new instruction types are first explicitly introduced in the 2025-11-25 refresh."
+    },
+    "pinned_legacy_registry": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+      "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2"
+    },
+    "frozen_dataset_schema": {
+      "repository": "livebench/instruction_following",
+      "revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+      "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+      "schema_observation": "The frozen public schema exposes only parameter fields used by the 2024 LiveBench legacy construction plus static no-kwarg checker families; no modern IFBench parameter family is present."
+    }
+  },
+  "exact_16_instruction_ids": [
+    "keywords:existence",
+    "keywords:forbidden_words",
+    "length_constraints:number_paragraphs",
+    "length_constraints:number_words",
+    "length_constraints:number_sentences",
+    "length_constraints:nth_paragraph_first_word",
+    "detectable_content:postscript",
+    "detectable_format:number_bullet_lists",
+    "detectable_format:title",
+    "detectable_format:multiple_sections",
+    "detectable_format:json_format",
+    "combination:repeat_prompt",
+    "combination:two_responses",
+    "startend:end_checker",
+    "startend:quotation",
+    "punctuation:no_comma"
+  ],
+  "scheduler_delta": [
+    "STOP_TREATING_MODERN_58_CHECKER_IFBENCH_GRAMMAR_AS_LOAD_BEARING_FOR_THE_FROZEN_2024_TARGET",
+    "STOP_TREATING_THE_9_LEGACY_IFEVAL_TYPES_EXCLUDED_BY_LIVEBENCH_TABLE4_AS_LOAD_BEARING_FOR_THE_FROZEN_2024_TARGET",
+    "BUILD_ONE_MODEL_INDEPENDENT_MULTI_CONSTRAINT_SOLVER_FOR_THE_EXACT_16_TYPE_LIVEBENCH_GRAMMAR",
+    "VERIFY_ON_PUBLIC_SYNTHETIC_TEMPLATE_CARTESIAN_CASES_AND_THE_ALREADY_EXPOSED_72_CASE_PREFIX_ONLY",
+    "FREEZE_SUCCESSOR_BEFORE_ANY_NEW_TERMINAL_COMPARATOR_RESULT"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_SCORE_CLAIM",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_NEW_TERMINAL_ROW_PROMPT_KWARGS_OR_CASE_ID_READ",
+    "NO_CLAIM_THAT_ALL_FROZEN_ROWS_USE_ONLY_THE_16_UNTIL_THE_PRE_2025_11_25_DISPATCH_COMPOSITION_IS_INDEPENDENTLY_BOUND",
+    "NO_CLAIM_BENCHMARK_SCORE_ALONE_PROVES_GENERAL_SEMANTIC_CAPABILITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
