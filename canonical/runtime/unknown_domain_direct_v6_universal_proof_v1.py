@@ -37,10 +37,10 @@ EXPECTED_BLOBS={
  "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py":"f974a4594c78e74693c7ba5a19f131dfa481b937",
  "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py":"d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
  "canonical/runtime/unknown_domain_direct_hidden_generator_v4.py":"e52858b9fef2d795f72b45cd3ae82ad04344aa91",
- "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py":"60373126f3ee27368ae06e6d7d559f1b826d90d4",
+ "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py":"d3b5e7279ca1068d1532046f35e6752107e42e24",
  "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py":"e8cf5d1b5d311644725a751c15e6235958fb587d",
  "canonical/runtime/unknown_domain_direct_execution_harness_v1.py":"04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
- "canonical/tests/test_unknown_domain_direct_v5.py":"5bc00ff6f7671ad43acb04a6fe4c3b6d1893c380",
+ "canonical/tests/test_unknown_domain_direct_v5.py":"e2ade4b713bb8103ae577de35a35b1caa03bc5a9",
 }
 
 
@@ -89,10 +89,10 @@ def _string_totality()->dict[str,Any]:
     assert g5._secret_bytes_total("\udfff"+"T"*31)
     assert g5._secret_bytes_total(b"U"*32)==b"U"*32
 
-    # isinstance accepts subclasses. The totality theorem must therefore cover
-    # subclasses whose instance methods are adversarially overridden. V5 calls
-    # the built-in str descriptors and immutable buffer protocol directly, so
-    # those overrides cannot make an admitted value partial.
+    # The load-bearing boundary uses the actual runtime type hierarchy, not
+    # spoofable isinstance() behavior. Genuine subclasses remain admitted while
+    # fake object-level __class__ proxies are rejected before descriptor calls.
+    # Built-in descriptors then bypass genuine subclass instance hooks.
     class AdversarialStr(str):
         def strip(self,*args,**kwargs):
             raise RuntimeError("OVERRIDDEN_STRIP_MUST_NOT_RUN")
@@ -117,15 +117,46 @@ def _string_totality()->dict[str,Any]:
     assert g5._secret_bytes_total(subclass_secret)
     assert g5._secret_bytes_total(AdversarialBytes(b"U"*32))==b"U"*32
 
+    class FakeStrViaClassProperty:
+        @property
+        def __class__(self):
+            return str
+
+    class FakeBytesViaClassProperty:
+        @property
+        def __class__(self):
+            return bytes
+
+    fake_str=FakeStrViaClassProperty()
+    fake_bytes=FakeBytesViaClassProperty()
+    assert isinstance(fake_str,str) is True
+    assert isinstance(fake_bytes,bytes) is True
+    assert issubclass(type(fake_str),str) is False
+    assert issubclass(type(fake_bytes),bytes) is False
+
+    try:
+        g5._canonical_beacon(fake_str)
+    except g1.UnknownDomainGeneratorError:
+        pass
+    else:
+        raise AssertionError("FAKE_CLASS_STR_PROXY_WAS_ADMITTED")
+
+    try:
+        g5._secret_bytes_total(fake_bytes)
+    except g1.UnknownDomainGeneratorError:
+        pass
+    else:
+        raise AssertionError("FAKE_CLASS_BYTES_PROXY_WAS_ADMITTED")
+
     return {
-        "beacon_domain":"EVERY_FINITE_PYTHON_STR_WITH_LEN_STRIP_GE_16",
+        "beacon_domain":"EVERY_FINITE_VALUE_WHOSE_ACTUAL_RUNTIME_TYPE_IS_STR_OR_A_STR_SUBCLASS_AND_LEN_STRIP_GE_16",
         "utf8_surrogatepass_total":True,
         "hex_byte_mapping_injective":True,
         "canonical_beacon_ascii":True,
         "surrogate_codepoints_exhausted":2048,
-        "secret_domain":"BYTES_OR_PYTHON_STR_WITH_CANONICAL_BYTE_LENGTH_GE_32",
+        "secret_domain":"EVERY_VALUE_WHOSE_ACTUAL_RUNTIME_TYPE_IS_BYTES_OR_STR_OR_A_GENUINE_SUBCLASS_WITH_CANONICAL_BYTE_LENGTH_GE_32",
         "legacy_strict_utf8_partiality_removed":True,
-        "isinstance_accepted_subclass_override_hooks_bypassed":True,
+        "genuine_runtime_subclass_override_hooks_bypassed":True,\n        "fake_class_proxy_spoof_rejected":True,
         "bytes_subclass_buffer_protocol_override_bypassed":True,
     }
 
@@ -264,15 +295,15 @@ def prove(root:Path|None=None)->dict[str,Any]:
         "transfer_proof":transfer,
         "abstention_proof":abstention,
         "scope":{
-            "beacon":"EVERY_FINITE_PYTHON_STR_WITH_LEN_STRIP_GE_16",
-            "evaluator_secret":"EVERY_BYTES_OR_PYTHON_STR_WITH_CANONICAL_BYTE_LENGTH_GE_32",
+            "beacon":"EVERY_FINITE_VALUE_WHOSE_ACTUAL_RUNTIME_TYPE_IS_STR_OR_A_STR_SUBCLASS_AND_LEN_STRIP_GE_16",
+            "evaluator_secret":"EVERY_VALUE_WHOSE_ACTUAL_RUNTIME_TYPE_IS_BYTES_OR_STR_OR_A_GENUINE_SUBCLASS_WITH_CANONICAL_BYTE_LENGTH_GE_32",
             "population_cases":27,
             "transfer_cases":12,
             "abstention_cases":15,
             "terminal_or_production_cases_generated":0,
         },
         "theorem":(
-            "FOR_EVERY_INPUT_ACCEPTED_BY_THE_DECLARED_TOTAL_STRING_INTERFACE__"
+            "FOR_EVERY_INPUT_ACCEPTED_BY_THE_NON_SPOOFABLE_ACTUAL_RUNTIME_TYPE_INTERFACE__"
             "GENERATOR_V5_CANONICALIZES_BEFORE_ALL_LEGACY_RANDOMNESS__"
             "GENERATOR_V4_STRUCTURALLY_PRESERVES_SEMANTIC_IDENTIFIER_DISTINCTNESS__"
             "CANDIDATE_V3_PASSES_ALL_12_TRANSFER_AND_15_ABSTENTION_CASES_THROUGH_THE_EXACT_SCORER"
