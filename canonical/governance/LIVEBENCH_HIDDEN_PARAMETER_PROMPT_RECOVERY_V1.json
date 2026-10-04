@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_HIDDEN_PARAMETER_PROMPT_RECOVERY_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__THREE_KNOWN_NONRENDERED_PARAMETER_FAMILIES_PROMPT_ONLY_RECOVERED_ON_PINNED_PUBLIC_POPULATIONS__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Eliminate hidden-scorer-parameter dependence for the three known LiveBench instruction families whose checker-relevant parameter is not directly rendered in the natural-language description.",
+  "families": {
+    "ratio:overlap": {
+      "public_population": "allenai/IFBench@1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d:data/IFBench_test.jsonl",
+      "public_source_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+      "rows": 12,
+      "prompt_only_normalized_reference_recovery": "12_OF_12",
+      "constructive_exact_raw_score_pass": "12_OF_12",
+      "mechanism": "VISIBLE_PROMPT_SEGMENTATION_PLUS_WHITESPACE_INVARIANT_CHARACTER_TRIGRAM_CONSTRUCTOR",
+      "bound_reduction": "canonical/governance/LIVEBENCH_NGRAM_WHITESPACE_INVARIANT_REDUCTION_V1.json"
+    },
+    "repeat:repeat_span": {
+      "public_population": "allenai/IFBench@1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d:data/IFBench_test.jsonl",
+      "public_source_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+      "rows": 4,
+      "checker_relevant_word_slice_recovery": "4_OF_4",
+      "mechanism": "PARSE_VISIBLE_START_END_AND_SLICE_VISIBLE_BASE_PROMPT_WITH_CHECKER_EXCLUSIVE_END_SEMANTICS",
+      "prior_independent_truth_receipt": "canonical/verification/LIVEBENCH_PUBLIC_PARAMETER_TRUTH_INDEPENDENT_VERIFICATION_20261004_V1.json"
+    },
+    "combination:repeat_prompt": {
+      "public_population": "google-research/google-research@e49bbfe381c9c0e564b937f1c4e163a2273c65cc:instruction_following_eval/data/input_data.jsonl",
+      "public_source_git_blob_sha": "cbe52f6eecf3986fdac745b4acba4da1408eb146",
+      "rows": 41,
+      "prompt_only_exact_prompt_to_repeat_recovery": "41_OF_41",
+      "mechanism": "DELETE_REPEAT_META_INSTRUCTION_LINES_AND_PRESERVE_VISIBLE_REQUEST_BLOCK"
+    }
+  },
+  "runtime": {
+    "path": "canonical/runtime/livebench_hidden_parameter_prompt_recovery_v1.py",
+    "test_path": "canonical/tests/test_livebench_hidden_parameter_prompt_recovery_v1.py"
+  },
+  "semantic_effect": {
+    "known_nonrendered_parameter_family_count": 3,
+    "known_nonrendered_parameter_families_with_constructive_public_prompt_only_route": 3,
+    "hidden_metadata_required_on_proved_public_rows": false,
+    "remaining_parameter_obligation": "BIND_FROZEN_LIVEBENCH_POPULATION_TO_THE_PROVED_PUBLIC_DESCRIPTION_GRAMMARS_OR_PROVE_A_STRONGER_GENERATABLE_TEMPLATE_LANGUAGE_COVERAGE_THEOREM"
+  },
+  "important_scoring_reduction": {
+    "ifbench_score_formula": "(ALL_INSTRUCTIONS_PASS_INDICATOR + FRACTION_OF_INSTRUCTIONS_PASSED) / 2",
+    "underlying_user_request_semantic_quality_directly_scored": false,
+    "consequence": "LIVEBENCH_IF_REPAIR_CAN_BE_A_DETERMINISTIC_CHECKER_CONSTRAINT_COMPILER_RATHER_THAN_A_GENERAL_REASONING_UPGRADE"
+  },
+  "next_critical_path": [
+    "COMPILE_VISIBLE_DESCRIPTION_RECOGNIZERS_FOR_ALL_83_ACTIVE_CHECKER_TYPES",
+    "COMPILE_DETERMINISTIC_WITNESS_CONSTRUCTORS",
+    "PROVE_ALLOWED_COMBINATION_SOUNDNESS_UNDER_PUBLIC_CONFLICT_RULES",
+    "BIND_FROZEN_200_ROW_POPULATION_TO_THE_PUBLIC_GRAMMAR_WITHOUT_READING_UNEXPOSED_TERMINAL_PROMPTS",
+    "ONLY_THEN_FREEZE_SUCCESSOR_AND_USE_FRESH_REALITY_IF_STILL_IRREDUCIBLE"
+  ],
+  "hard_nonclaims": [
+    "PUBLIC_POPULATION_RECOVERY_DOES_NOT_PROVE_FROZEN_TERMINAL_POPULATION_EQUIVALENCE",
+    "DOES_NOT_YET_PROVE_ALL_83_DESCRIPTION_FORMS_OR_COMBINATIONS",
+    "DOES_NOT_CLOSE_LIVEBENCH_IF_GE_65_7",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
