@@ -146,7 +146,7 @@ def verify() -> dict[str, Any]:
         raise AssertionError(f"REGIME_COUNT_DRIFT:{regimes!r}")
 
     extra_sets = [ids for ids in sets if set(ids) & u.EXTRA10]
-    if sum(regimes.values()) != len(extra_sets) != 13631:
+    if sum(regimes.values()) != len(extra_sets) or len(extra_sets) != 13631:
         raise AssertionError("EXTRA_PARTITION_TOTAL_DRIFT")
 
     extra_signatures = {
