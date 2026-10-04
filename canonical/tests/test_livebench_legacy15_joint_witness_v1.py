@@ -1,3 +1,5 @@
+import re
+
 from canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
 
 
@@ -108,3 +110,23 @@ def test_quotation_bullets_and_end_all_compose():
     response = out["response"]
     assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")
+
+
+def test_less_than_one_sentence_uses_exact_empty_witness():
+    out = solve(_env("Your response should contain less than 1 sentences."))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["route"] == "GENERAL"
+    assert out["response"] == ""
+
+
+def test_nth_paragraph_and_less_than_two_sentences_compose_without_terminal_punctuation():
+    prompt = (
+        "There should be 3 paragraphs. Paragraphs and only paragraphs are separated with each other by two "
+        "new lines as if it was '\\n\\n' in python. Paragraph 2 must start with word anchor. "
+        "Your response should contain less than 2 sentences."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["route"] == "GENERAL"
+    assert len(out["response"].split("\n\n")) == 3
+    assert not re.search(r"[.?!]", out["response"])
