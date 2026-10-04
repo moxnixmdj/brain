@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V6_FINANCE_COMPRESSION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V6_BLOB__COUNTS_STABLE__FINANCE_ROUTES_COMPRESSED__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subject": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V6.json",
+    "git_blob_sha": "fcbdb818b63b4986b026db29c400a47373a26fdb",
+    "parent_v5_git_blob_sha": "e948022f0a4e8d91b949a5155d850d56aa137c87"
+  },
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1607,
+    "head_sha": "d1d69b225b02b4b421fe47b594ae62052b96f66c",
+    "merge_commit": "5ffddf6f94e5d0e1529d076790fa09c2df97c623",
+    "workflow_run_id": 37170541130,
+    "workflow_job_id": 111342432338,
+    "conclusion": "success"
+  },
+  "verified": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "root2_touching": 19,
+    "finance_index_direct_threshold_route_bound": true,
+    "finance_agent_heldout_mass_450_x3_1350_bound": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
