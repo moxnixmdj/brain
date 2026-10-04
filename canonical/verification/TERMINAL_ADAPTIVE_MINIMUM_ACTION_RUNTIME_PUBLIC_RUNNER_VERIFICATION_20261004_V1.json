@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_MINIMUM_ACTION_RUNTIME_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_RUNTIME_BLOB__FAIL_CLOSED_SCHEDULING_SEMANTICS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/terminal_adaptive_minimum_action_policy_v1.py",
+    "git_blob_sha": "bfffe6dff32f5445a0c52657f7d9ec8d544b1f79"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1649,
+    "verifier_head_sha": "86822f167c4870a8c0ce5a454685d1a423ff586b",
+    "merge_commit": "da329499c39a49e5dc035b6b7ae6b4a20f458793",
+    "workflow_run_id": 37173818750,
+    "workflow_job_id": 111352149387,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_runtime_blob": true,
+    "zero_probability_route_deletion": true,
+    "unknown_probability_preserved_without_invented_point_estimate": true,
+    "fresh_reality_filtered_without_explicit_authority": true,
+    "conservative_structural_dominance": true,
+    "priority_rewards_fanout_information_and_downstream_action_deletion_per_critical_path_second": true,
+    "scheduling_only": true
+  },
+  "scope_limit": "THE_PUBLIC_RUN ALSO BOUND A HISTORICAL GOVERNANCE_FIXTURE__ONLY_THE_RUNTIME SEMANTICS AND EXACT RUNTIME BLOB ARE CARRIED FORWARD HERE__CURRENT POLICY AUTHORITY REQUIRES SEPARATE CURRENT-MAIN BINDING",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_AUTHORITY_BINDINGS_EXACT__ADAPTIVE_POLICY_V2__ZERO_CREDIT",
+  "policy": {
+    "path": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V2.json",
+    "git_blob_sha": "c5b9a287b51c0594f7925770f0f22fbbbb2738dc",
+    "compiled_from_main": "eaaa39503d6daf3fb2761c3b79a6dfb0bd2aa1a6"
+  },
+  "current_main_at_final_verification": "caa75d1ccfa6f6bc446810157deed2d04705b013",
+  "drift_reconciliation": {
+    "state": "NONSEMANTIC_TO_BOUND_POLICY_AUTHORITIES",
+    "change": "CURRENT_TERMINAL_AUTHORITY coherence repair to already-active Root2 V10",
+    "load_bearing_authority_blobs_unchanged": true,
+    "checked": {
+      "terminal_root_state": "59711b491e5f4c94661f78401e66ea1f546f96c7",
+      "root2_v10_final_activation": "f5eda02fcc104bc8a5e13a82bfc8ec3d9515dcb2",
+      "root3_v2_cut": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+      "retrieval_v19_authority": "55b1d411561f720fcd9d66c127cecd63ef0b5f5e"
+    }
+  },
+  "verified_runtime": {
+    "path": "canonical/runtime/terminal_adaptive_minimum_action_policy_v1.py",
+    "git_blob_sha": "bfffe6dff32f5445a0c52657f7d9ec8d544b1f79",
+    "prior_independent_verification": "canonical/verification/TERMINAL_ADAPTIVE_MINIMUM_ACTION_RUNTIME_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1655,
+    "verifier_head_sha": "9ea16d82621e4eca6d4f68ab3d8104f728ebf12d",
+    "merge_commit": "ae45b4f5d71b22269424f582af9af3c62e4151ac",
+    "workflow_run_id": 37174178395,
+    "workflow_job_id": 111353230597,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_policy_blob": true,
+    "terminal_root_state_blob_exact": true,
+    "root2_v10_final_activation_blob_exact": true,
+    "root3_v2_cut_blob_exact": true,
+    "retrieval_v19_authority_blob_exact": true,
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gaps": 0,
+    "root2_effective_scheduling_authority": true,
+    "root2_execution_authority": false,
+    "root2_fresh_reality_authority": false,
+    "root3_currently_runnable_event_count": 0,
+    "retrieval_entrypoint_v4_mandatory": true,
+    "fresh_reality_blocked": true,
+    "unknown_probability_preserved": true,
+    "invented_point_probabilities_forbidden": true,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "POLICY_OPTIMIZES_AND_FAILS_CLOSED__IT_DOES_NOT ITSELF CLOSE ANY OF THE 26 PREDICATES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
