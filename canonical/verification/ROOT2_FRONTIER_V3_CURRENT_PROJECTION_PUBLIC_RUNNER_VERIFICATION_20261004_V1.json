@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V3_CURRENT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_CURRENT_MAIN_V3_POINTER_PROJECTION__COUNTS_PRESERVED__FAIL_CLOSED__ZERO_CREDIT",
+  "brain_projection": {
+    "repository": "moxnixmdj/brain",
+    "pull_request": 1522,
+    "verified_head_sha": "bccafe1fd2e8a1b96590be80c4aecec90379d697",
+    "replayed_head_sha": "8a7089259aa141f64a436d58cb7c2efcd7cbd7c7",
+    "merged_commit": "cad4d71ddcc66b3ea0a0cc636687d71dfc94cac2",
+    "exact_projected_blobs": {
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "691f1d6f9d51fc49d281216264dbe33f41958995",
+      "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "cc87fffba6b7a967fa89fd8c8c828b2b6d842ad7",
+      "canonical/governance/ROOT2_MEASUREMENT_BRIDGE_CURRENT_V1.json": "1d3eccffe5c15914ac1d25bec56ce4d6a3f3cc8b",
+      "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json": "681123ef6cff3506d66af6b31b61c8bc14a8a913",
+      "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_ACTIVATION_V1.json": "76d36bc34947e726502d0c8fc1dbb961d6442c88",
+      "canonical/verification/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json": "8436a9eb30312b959ba094394e60f26b4833a3a2"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1561,
+    "verifier_head_sha": "4f3ff71ea736c9de1feff2fc1ee94e6b9e6e5f7a",
+    "verifier_merge_commit": "aca3d2166876c401711bc083dc9eb4ea83ffee65",
+    "workflow_run_id": 37167775499,
+    "workflow_job_id": 111334245344,
+    "conclusion": "success",
+    "successful_step": "Verify current Root2 V3 projection"
+  },
+  "verified": {
+    "exact_current_main_v3_projection": true,
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "effective_scheduling_was_false_during_projection": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "consequence": "V3_POINTER_PROJECTION_IS_ADMISSIBLE__EFFECTIVE_SCHEDULING_MAY_BE_ACTIVATED_IN_A_SEPARATE_EXACTLY_VERIFIED_TRANSACTION",
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
