@@ -262,7 +262,12 @@ def _build_core_skeleton(
         n = int(_slots(bullets)["num_bullets"])
         components.extend(f"* {safe}b{i}" for i in range(n))
 
-    components.extend(f"{safe}sentence{i}." for i in range(sentence_fillers))
+    # Sentence lower bounds must not consume the word budget. The frozen
+    # NumberOfSentences checker uses Punkt; '!' is an unconditional sentence
+    # break, while the frozen word counter counts only \\w+ tokens. A bare
+    # punctuation sentence therefore costs zero words and is independent of
+    # Punkt's trained abbreviation model.
+    components.extend("!" for _ in range(sentence_fillers))
 
     # Reserve a stable insertion point for word padding before tail material.
     components.append("__PB_END_SLOT__")
