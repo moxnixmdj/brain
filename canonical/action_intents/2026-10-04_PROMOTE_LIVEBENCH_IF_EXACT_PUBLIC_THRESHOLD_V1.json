@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "PROMOTE-LIVEBENCH-IF-EXACT-PUBLIC-THRESHOLD-20261004-V1",
-  "status": "INDEPENDENT_EXACT_BYTE_VERIFICATION_PASS__PROMOTION_GATE_SATISFIED",
+  "status": "EXACT_BYTE_INTEGRITY_PASS__ACCEPTANCE_PROMOTION_BLOCKED_BY_ACTIVE_CONTAMINATION_TRUTH_REPAIR",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "causal_blocker": "LIVEBENCH_IF_GE_65_7_REMAINS_ROOT2_ONLY_DESPITE_EXACT_PUBLIC_POPULATION_THRESHOLD_PASS",
@@ -55,7 +55,7 @@
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "execution_authority": false,
-  "promotion_authority": true,
+  "promotion_authority": false,
   "independent_promotion_verification": {
     "path": "canonical/verification/LIVEBENCH_IF_EXACT_PUBLIC_THRESHOLD_PROMOTION_EXACT_BYTE_VERIFICATION_20261004_V1.json",
     "git_blob_sha": "8b2071fb31f359b2f990d8c7da1fe6feeabfcb31",
@@ -63,5 +63,9 @@
     "workflow_run_id": 37239021521,
     "workflow_job_id": 111543787531,
     "conclusion": "success"
+  },
+  "contamination_override": {
+    "path": "canonical/governance/LIVEBENCH_EXACT200_CONTAMINATION_CREDIT_REVOCATION_20261004_V1.json",
+    "effect": "EXACT_BYTE_IDENTITY_IS_VALID_INTEGRITY_EVIDENCE_ONLY__DOES_NOT_DISCHARGE_PREQUALIFICATION_PARTITION_OR_DIRTY_EVIDENCE_RULE__PREDICATE_REMAINS_NOT_PROVED"
   }
 }
