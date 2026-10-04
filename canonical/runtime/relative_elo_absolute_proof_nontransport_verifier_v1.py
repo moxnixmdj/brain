@@ -18,6 +18,9 @@ def check():
         "ARTIFACT_AA_BRIEFCASE_GE_1822",
     }
 
+    # Countermodel for a Bradley-Terry style relative strength fit with a fixed anchor.
+    # Same absolute-certificate state C, different unbound pairwise outcomes.
+    # Strength difference is logit(win probability). The sign flips across 0.5.
     absolute_certificate={"all_declared_absolute_obligations": True}
     anchor_strength=0.0
     low_p=0.20
@@ -28,6 +31,8 @@ def check():
     assert low_strength < anchor_strength < high_strength
     assert low_strength != high_strength
 
+    # Therefore absolute state alone does not determine even relative ordering,
+    # much less a fixed anchored Elo threshold.
     th=x["theorem"]
     assert "CANNOT_LOGICALLY_ENTAIL_A_FIXED_ELO_THRESHOLD" in th["statement"]
     assert len(th["escape_hatches"])>=3
