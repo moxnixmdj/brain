@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_EVALUATOR_FAMILY_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_GENERATIVE_FAMILY_AND_SCORER_SEMANTICS_BEFORE_CANDIDATE_QUALIFICATION__ZERO_CASES__ZERO_CREDIT",
+  "authority": {
+    "protocol_path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+    "protocol_git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab"
+  },
+  "objective": "GENERATE_POST_FREEZE_HIDDEN_CASES_FOR_ONLY_THE_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_LEAVES_WITH_SURFACE_RANDOMIZATION_NEGATIVE_TRANSFER_DISTRACTORS_IDENTIFIABILITY_VARIANTS_AND_EXACT_DETERMINISTIC_SCORING",
+  "case_id_rule": "CASE_IDS_MUST_BE_DERIVED_ONLY_FROM_A_POST_FREEZE_BEACON_AND_FAMILY_LOCAL_INDEX__NO_CASE_ID_EXISTS_AT_THIS_FREEZE",
+  "hidden_generation_rule": {
+    "generator_runs_only_after_family_scorer_freeze_and_candidate_qualification": true,
+    "latent_case_seed_not_candidate_visible": true,
+    "no_case_replacement": true,
+    "no_tuning_replay": true,
+    "surface_tokens_are_opaque_and_CASE_LOCAL": true,
+    "domain_a_and_domain_b_surface_vocabularies_are_disjoint": true
+  },
+  "leaves": [
+    {
+      "leaf_id": "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "case_count": 12,
+      "design": {
+        "paired_hidden_domains": true,
+        "shared_latent_structural_primitive": true,
+        "surface_ontology_tools_and_labels_differ": true,
+        "independent_case_local_label_permutations": true,
+        "candidate_visible": [
+          "DOMAIN_A_PUBLIC_TASKS_AND_EARNED_RECEIPTS",
+          "DOMAIN_B_PUBLIC_TASKS",
+          "ALLOWED_PUBLIC_TOOL_METADATA"
+        ],
+        "hidden_evaluator": [
+          "LATENT_SHARED_PRIMITIVE",
+          "DOMAIN_MAPPING",
+          "TRANSFER_RELEVANT_VS_DISTRACTOR_FEATURES",
+          "GOLD_TERMINAL_CONSEQUENCE",
+          "FULL_REDISCOVERY_PROBE_FLOOR"
+        ],
+        "primitive_families": [
+          "ORDER_PRESERVING_TRANSFORM",
+          "PARITY_OR_SIGN_INVARIANT",
+          "CONSERVATION_RELATION",
+          "MONOTONE_CAUSAL_EDGE",
+          "COMPOSITIONAL_REWRITE",
+          "THRESHOLD_OR_PARTITION_INVARIANT"
+        ],
+        "negative_transfer": "EACH_DOMAIN_B_CASE_INCLUDES_AT_LEAST_TWO_STRUCTURALLY_PLAUSIBLE_BUT_CAUSALLY_IRRELEVANT_DISTRACTOR_FEATURES"
+      },
+      "acceptance": [
+        "DOMAIN_B_TERMINAL_CONSEQUENCE_EXACT",
+        "AT_LEAST_ONE_DOMAIN_A_EARNED_RECEIPT_IS_LOAD_BEARING_IN_DOMAIN_B_TRACE",
+        "DOMAIN_B_PROBE_COUNT_STRICTLY_BELOW_HIDDEN_FULL_REDISCOVERY_PROBE_FLOOR",
+        "TRANSFER_MAPPING_SUPPORT_MATCHES_HIDDEN_RELEVANT_FEATURE_SET",
+        "HIDDEN_DISTRACTOR_FEATURES_DO_NOT_APPEAR_AS_POSITIVE_SUPPORT",
+        "NEGATIVE_TRANSFER_CHECKS_EXPLICITLY_REJECT_ALL_HIDDEN_DISTRACTORS",
+        "PROVENANCE_CHAIN_IS_NONEMPTY_AND_EACH_LOAD_BEARING_EVIDENCE_ITEM_HAS_SOURCE_AND_RECEIPT"
+      ]
+    },
+    {
+      "leaf_id": "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS",
+      "case_count": 15,
+      "class_balance": {
+        "IDENTIFIABLE": 5,
+        "NONIDENTIFIABLE": 5,
+        "UNDERSPECIFIED": 5
+      },
+      "design": {
+        "candidate_visible": [
+          "PUBLIC_OBSERVATIONS",
+          "ALLOWED_PROBES",
+          "TASK_DECISION_REQUIREMENT"
+        ],
+        "hidden_evaluator": [
+          "IDENTIFIABILITY_STATUS",
+          "CAUSAL_OR_SEMANTIC_EQUIVALENCE_CLASS",
+          "MINIMUM_DISCRIMINATOR_IF_ONE_EXISTS",
+          "GOLD_TERMINAL_CONSEQUENCE_IF_IDENTIFIABLE"
+        ],
+        "identifiable_cases_have_unique_supported_conclusion": true,
+        "nonidentifiable_cases_have_at_least_two_decision_distinct_survivors_under_all_allowed_observations": true,
+        "underspecified_cases_have_a_valid_minimum_discriminator": true
+      },
+      "acceptance": [
+        "IDENTIFIABLE_CASES_MUST_CONCLUDE_EXACT_GOLD_AND_MAY_NOT_ABSTAIN",
+        "NONIDENTIFIABLE_CASES_MUST_NOT_FORCE_A_UNIQUE_CONCLUSION_AND_REQUIRE_A_NONEMPTY_NONIDENTIFIABILITY_WITNESS",
+        "UNDERSPECIFIED_CASES_MUST_REQUEST_THE_HIDDEN_VALID_MINIMUM_DISCRIMINATOR_OR_ABSTAIN_WITH_A_NONEMPTY_WITNESS",
+        "BLANKET_ABSTENTION_ON_IDENTIFIABLE_CASES_FAILS"
+      ]
+    }
+  ],
+  "scoring": {
+    "path": "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py",
+    "aggregation": "ALL_CASES_AND_ALL_ACCEPTANCE_CLAUSES_CONJUNCTIVE__NO_AVERAGING",
+    "candidate_self_reported_VERIFIED_OR_PASS_BOOLEANS_HAVE_ZERO_AUTHORITY": true,
+    "scorer_sees_hidden_fields_candidate_does_not": true,
+    "one_failure_blocks_leaf_pass": true
+  },
+  "hard_rules": [
+    "NO_ACTUAL_CASES_EXIST_IN_THIS_FREEZE",
+    "NO_CANDIDATE_BYTES_BOUND_IN_THIS_FREEZE",
+    "NO_HIDDEN_ORACLE_OR_LATENT_MAPPING_EXPOSED_TO_CANDIDATE",
+    "NO_FINITE_SYNTHETIC_SELF_TEST_SUBSTITUTION_FOR_THIS_HIDDEN_EVALUATOR",
+    "NO_CASE_REPLACEMENT_OR_TUNING_REPLAY",
+    "ZERO_INCREMENTAL_SPEND",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "generated_case_count": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
