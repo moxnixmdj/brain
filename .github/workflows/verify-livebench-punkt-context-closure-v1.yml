@@ -1,0 +1,46 @@
+name: Verify LiveBench Punkt context closure v1
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/livebench_punkt_context_closure_v1.py'
+      - 'canonical/tests/test_livebench_punkt_context_closure_v1.py'
+      - 'canonical/verification/verify_livebench_punkt_context_closure_v1.py'
+      - '.github/workflows/verify-livebench-punkt-context-closure-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: macos-14
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12.10'
+      - name: Install exact scorer dependency
+        run: python -m pip install --disable-pip-version-check pytest nltk==3.10.3
+      - name: Checkout pinned Punkt data
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/nltk_data_repo /tmp/nltk_data
+          git clone --filter=blob:none --no-checkout https://github.com/nltk/nltk_data.git /tmp/nltk_data_repo
+          git -C /tmp/nltk_data_repo checkout 550b6625bcef1f2abff2ff770a5a0d272c9c6b2a -- packages/tokenizers/punkt.zip packages/tokenizers/punkt_tab.zip
+          mkdir -p /tmp/nltk_data/tokenizers
+          unzip -q /tmp/nltk_data_repo/packages/tokenizers/punkt.zip -d /tmp/nltk_data/tokenizers
+          unzip -q /tmp/nltk_data_repo/packages/tokenizers/punkt_tab.zip -d /tmp/nltk_data/tokenizers
+      - name: Run source tests
+        run: python -m pytest -q canonical/tests/test_livebench_punkt_context_closure_v1.py
+      - name: Exhaust exact Punkt contexts
+        env:
+          NLTK_DATA: /tmp/nltk_data
+        run: python canonical/verification/verify_livebench_punkt_context_closure_v1.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: livebench-punkt-context-closure-v1
+          path: livebench_punkt_context_closure_v1_receipt.json
+          if-no-files-found: error
