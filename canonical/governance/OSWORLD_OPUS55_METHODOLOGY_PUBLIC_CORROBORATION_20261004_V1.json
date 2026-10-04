@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_OPUS55_METHODOLOGY_PUBLIC_CORROBORATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PRIMARY_LAUNCH_PLUS_SYSTEM_CARD_MIRROR_AND_UPSTREAM_RELEASE_CORROBORATED__EXACT_RELEASE_IDENTITY_OPEN__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "sources": [
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "authority": "ANTHROPIC_PRIMARY_LAUNCH",
+      "facts": [
+        "CURRENT_ROW_LABEL_OSWORLD_2_1",
+        "OPUS55_PARTIAL_SCORE_81_8"
+      ]
+    },
+    {
+      "url": "https://malob.github.io/ai-system-cards/anthropic/claude-opus-5-5/",
+      "authority": "INDEPENDENT_HTML_MIRROR_OF_OPUS55_SYSTEM_CARD",
+      "facts": [
+        "TASK_COUNT_108",
+        "PARTIAL_MEAN_PER_TASK_WEIGHTED_CHECKPOINT_CREDIT",
+        "STRICT_PASS_RATE_ALL_CHECKPOINTS",
+        "PASS_AT_1_AVERAGED_OVER_FIVE_INDEPENDENT_RUNS",
+        "1080P",
+        "MAX_500_ACTION_STEPS",
+        "MAX_REASONING_EFFORT",
+        "CLAUDE_OPUS_4_8_MODEL_GRADER",
+        "SEPTEMBER_10_2026_TASK_FILES_TASK_ASSETS_AND_COMPANION_WEB_APPS",
+        "RETAIN_ALL_SCREENSHOTS",
+        "SERVER_SIDE_CONTEXT_COMPACTION_AFTER_100K_TOKENS",
+        "OPUS55_PARTIAL_81_8",
+        "OPUS55_STRICT_48_7"
+      ]
+    },
+    {
+      "url": "https://github.com/xlang-ai/OSWorld-V2/releases/tag/osworld-v2.1",
+      "authority": "UPSTREAM_OSWORLD_RELEASE",
+      "facts": [
+        "OSWORLD_V2_1_ACTIVE_RELEASE",
+        "MATCHING_TASK_FILES_COMPLETE_GATED_ASSETS_AND_MOCKED_WEBSITES_PINNED",
+        "108_TASK_FILES_VALIDATED",
+        "RELEASE_PUBLISHED_2026_09_16"
+      ]
+    }
+  ],
+  "deletable_methodology_unknowns": [
+    "UNKNOWN_ANTHROPIC_TASK_COUNT",
+    "UNKNOWN_PARTIAL_SCORING_DEFINITION",
+    "UNKNOWN_STRICT_SCORING_DEFINITION",
+    "UNKNOWN_NUMBER_OF_RUNS",
+    "UNKNOWN_SCREEN_RESOLUTION",
+    "UNKNOWN_MAX_ACTION_STEPS",
+    "UNKNOWN_MODEL_GRADER_IDENTITY",
+    "UNKNOWN_SCREENSHOT_RETENTION_POLICY",
+    "UNKNOWN_CONTEXT_COMPACTION_THRESHOLD"
+  ],
+  "still_open": [
+    "EXACT_SEPTEMBER_10_ANTHROPIC_COMPONENT_SNAPSHOT_EQUALS_UPSTREAM_OSWORLD_V2_1_PINNED_COMPONENT_HASHES",
+    "MATERIAL_HUGGINGFACE_ACCESS_TO_PINNED_TASKS_AND_ASSETS",
+    "SELF_HOST_WEBSITE_AND_GITLAB_FUNCTIONAL_REACHABILITY",
+    "BRAIN_HARNESS_EQUIVALENCE_TO_1080P_500_STEP_FIVE_RUN_SCREENSHOT_RETENTION_CONTEXT_COMPACTION_SEMANTICS",
+    "ZERO_COST_OR_PROVED_EQUIVALENT_CLAUDE_OPUS_4_8_MODEL_GRADER_ROUTE",
+    "BRAIN_SCORE_GE_81_8_PARTIAL"
+  ],
+  "identity_rule": "SAME_DATE_OR_RELEASE_LABEL_IS_NOT_HASH_IDENTITY__DO_NOT_COLLAPSE_COMPONENT_IDENTITY_WITHOUT_EXACT_SOURCE_RELATION",
+  "hard_nonclaims": [
+    "NO_CLAIM_ANTHROPIC_USED_EXACT_OSWORLD_V2_1_TASK_ASSET_WEBSITE_HASHES",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
