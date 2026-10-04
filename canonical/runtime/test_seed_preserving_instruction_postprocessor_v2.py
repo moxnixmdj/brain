@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from canonical.runtime.seed_preserving_instruction_postprocessor_v2 import (
     PUBLIC_IFBENCH_INSTRUCTIONS_BLOB,
+    PRESERVATION_CONTRACT,
     _check_nested_parentheses,
     _check_nested_quotes,
     _check_newline_words,
@@ -13,17 +14,17 @@ def test_public_source_is_content_addressed():
     assert PUBLIC_IFBENCH_INSTRUCTIONS_BLOB == "7f167018e0c5472b04e13cbf847e5988c04ecb11"
 
 
-def test_nested_parentheses_public_contract():
+def test_nested_parentheses_preserves_seed_verbatim():
     instruction = "Nest parentheses (and [brackets {and braces}]) at least 5 levels deep."
     seed = "The semantic answer remains intact."
     out = transform(seed, instruction)
     assert out["status"] == "PASS"
     assert seed in out["response"]
+    assert out["seed_verbatim_preserved"] is True
     assert _check_nested_parentheses(out["response"])
-    assert "IFBENCH_NESTED_PARENTHESES_5" in out["applied_transforms"]
 
 
-def test_nested_quotes_public_contract():
+def test_nested_quotes_preserves_seed_verbatim():
     instruction = (
         "Include quotes within quotes within quotes, at least 3 levels deep, "
         "alternating between double quotes and single quotes."
@@ -32,11 +33,11 @@ def test_nested_quotes_public_contract():
     out = transform(seed, instruction)
     assert out["status"] == "PASS"
     assert seed in out["response"]
+    assert out["seed_verbatim_preserved"] is True
     assert _check_nested_quotes(out["response"])
-    assert "IFBENCH_NESTED_QUOTES_3_ALTERNATING" in out["applied_transforms"]
 
 
-def test_punctuation_cover_public_contract():
+def test_punctuation_cover_preserves_seed_verbatim():
     instruction = (
         "Use every standard punctuation mark at least once, including semicolons, "
         "colons, and the interrobang (?!)."
@@ -44,62 +45,86 @@ def test_punctuation_cover_public_contract():
     seed = "The semantic answer remains intact"
     out = transform(seed, instruction)
     assert out["status"] == "PASS"
-    assert out["response"].startswith(seed)
+    assert seed in out["response"]
+    assert out["seed_verbatim_preserved"] is True
     assert _check_punctuation_cover(out["response"])
-    assert "IFBENCH_PUNCTUATION_COVER" in out["applied_transforms"]
 
 
-def test_newline_words_public_contract_preserves_token_order():
-    instruction = "Write each word on a new line."
+def test_newline_words_noncompliant_seed_fails_closed_instead_of_rewriting():
     seed = "alpha beta gamma delta"
-    out = transform(seed, instruction)
+    out = transform(seed, "Write each word on a new line.")
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["error"] == "NEWLINE_WORDS_REQUIRES_SEED_WHITESPACE_MUTATION"
+    assert out["response"] is None
+
+
+def test_newline_words_already_compliant_seed_passes_verbatim():
+    seed = "alpha\nbeta\ngamma\ndelta"
+    out = transform(seed, "Write each word on a new line.")
     assert out["status"] == "PASS"
-    assert out["response"] == "alpha\nbeta\ngamma\ndelta"
-    assert out["response"].split() == seed.split()
+    assert out["response"] == seed
     assert _check_newline_words(out["response"])
-    assert "IFBENCH_WORD_PER_LINE" in out["applied_transforms"]
 
 
-def test_composed_public_structural_constraints():
+def test_composed_additive_public_structural_constraints():
     instruction = (
         "Nest parentheses (and [brackets {and braces}]) at least 5 levels deep. "
         "Use every standard punctuation mark at least once, including semicolons, "
-        "colons, and the interrobang (?!). "
-        "Write each word on a new line."
+        "colons, and the interrobang (?!)."
     )
     seed = "alpha beta gamma"
     out = transform(seed, instruction)
     assert out["status"] == "PASS"
+    assert seed in out["response"]
     assert _check_nested_parentheses(out["response"])
     assert _check_punctuation_cover(out["response"])
-    assert _check_newline_words(out["response"])
-    assert all(word in out["response"] for word in seed.split())
 
 
-def test_v1_case_constraint_still_works():
-    out = transform("Mixed Case Answer", "Write the entire response in lowercase only.")
+def test_required_prefix_suffix_survive_marker_insertion():
+    seed = "core answer"
+    instruction = (
+        'Response must start with "BEGIN" and response must end with "END". '
+        "Nest parentheses (and [brackets {and braces}]) at least 5 levels deep. "
+        "Use every standard punctuation mark at least once, including semicolons, "
+        "colons, and the interrobang (?!)."
+    )
+    out = transform(seed, instruction)
     assert out["status"] == "PASS"
-    assert out["response"] == "mixed case answer"
+    assert out["response"].startswith("BEGIN")
+    assert out["response"].endswith("END")
+    assert seed in out["response"]
 
 
-def test_v1_word_floor_that_requires_semantic_invention_still_fails_closed():
+def test_lossy_case_conversion_is_blocked_by_corrected_v1_firewall():
+    out = transform("Mixed Case Answer", "Write the entire response in lowercase only.")
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["error"] == "V1_PRESERVATION_FIREWALL_BLOCKED"
+    assert "LOWERCASE_ONLY" in out["upstream"]["validation_errors"]
+
+
+def test_word_floor_requiring_invention_is_blocked():
     out = transform("one two", "Answer with at least 5 words.")
     assert out["status"] == "FAIL_CLOSED"
-    assert "MIN_WORDS" in out["validation_errors"]
+    assert out["error"] == "V1_PRESERVATION_FIREWALL_BLOCKED"
+    assert "MIN_WORDS" in out["upstream"]["validation_errors"]
 
 
-def test_exact_response_conflicting_with_structural_wrapper_fails_closed():
-    out = transform(
-        "semantic seed",
-        'Reply with exactly "OK". Nest parentheses (and [brackets {and braces}]) at least 5 levels deep.',
-    )
+def test_exact_response_replacement_is_blocked():
+    out = transform("semantic seed", 'Reply with exactly "OK"')
     assert out["status"] == "FAIL_CLOSED"
-    assert "EXACT_RESPONSE" in out["validation_errors"]
+    assert out["error"] == "V1_PRESERVATION_FIREWALL_BLOCKED"
+    assert out["upstream"]["error"] == "EXACT_RESPONSE_CONFLICTS_WITH_SEED_PRESERVATION"
 
 
-def test_no_terminal_authority_or_credit_claim():
-    out = transform("alpha beta", "Write each word on a new line.")
+def test_mechanical_preservation_contract_and_zero_authority():
+    seed = "alpha beta"
+    out = transform(
+        seed,
+        "Nest parentheses (and [brackets {and braces}]) at least 5 levels deep.",
+    )
     assert out["status"] == "PASS"
+    assert out["seed_preservation_contract"] == PRESERVATION_CONTRACT
+    assert seed in out["response"]
     assert out["terminal_authority"] is False
     assert out["terminal_cases_used"] == 0
     assert out["incremental_spend_usd"] == 0
