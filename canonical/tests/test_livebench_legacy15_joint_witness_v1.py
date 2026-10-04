@@ -110,3 +110,16 @@ def test_quotation_bullets_and_end_all_compose():
     response = out["response"]
     assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")
+
+
+def test_existence_forbidden_overlap_uses_boundary_safe_carrier():
+    prompt = (
+        "Include keywords ['ta'] in the response. "
+        "Do not include keywords ['ta', 'tax'] in the response."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    response = out["response"].lower()
+    assert "ta" in response
+    assert re.search(r"\\bta\\b", response) is None
+    assert re.search(r"\\btax\\b", response) is None
