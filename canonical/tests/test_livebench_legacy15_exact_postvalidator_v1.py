@@ -106,3 +106,27 @@ def test_none_visible_slot_fails_closed():
     }
     with pytest.raises(p.ExactPostvalidationError, match="VISIBLE_SLOT_VALUE_NONE"):
         p.evaluate_with_registry("", [row], {"startend:end_checker": ContainsInstruction})
+
+
+def test_strict_scorer_rejects_empty_response_before_checker_truth():
+    registry = {"keywords:forbidden_words": ForbidInstruction}
+    out = p.evaluate_with_registry(
+        "",
+        [contract("keywords:forbidden_words", forbidden_words=["omega"])],
+        registry,
+    )
+    # ForbiddenWords.check_following("") would be True in isolation, but the
+    # frozen strict evaluator gates every checker with response.strip().
+    assert out["checker_results"] == [False]
+    assert out["true_checker_count"] == 0
+    assert out["strict_nonempty_response_gate_applied"] is True
+
+
+def test_whitespace_only_response_is_also_strictly_rejected():
+    registry = {"keywords:forbidden_words": ForbidInstruction}
+    out = p.evaluate_with_registry(
+        " \n\t ",
+        [contract("keywords:forbidden_words", forbidden_words=["omega"])],
+        registry,
+    )
+    assert out["checker_results"] == [False]
