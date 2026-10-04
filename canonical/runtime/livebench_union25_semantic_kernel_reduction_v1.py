@@ -6,9 +6,9 @@ extra10 signatures. This module removes another layer of fake combinatorics.
 
 Two extra families admit zero-lexeme carriers:
   * number_placeholders -> "[]"
-  * number_highlighted_sections -> "*-*"
+  * number_highlighted_sections -> "+*-*"
 
-When inserted at an interior general-route augmentation site, these carriers:
+At any general-route augmentation site, these carriers:
   * add zero RegexpTokenizer(r"\w+") words;
   * add zero ASCII letters, so they cannot change keyword or letter counts;
   * add zero commas and zero .?! sentence terminators;
@@ -59,7 +59,7 @@ HARD_EXTRAS = (
 )
 
 PLACEHOLDER_CARRIER = "[]"
-HIGHLIGHT_CARRIER = "*-*"
+HIGHLIGHT_CARRIER = "+*-*"
 
 EXPECTED_STRUCTURAL_SIGNATURES = 156
 EXPECTED_CONSERVATIVE_KERNELS = 64
@@ -119,7 +119,7 @@ def _decorator_invariants() -> dict[str, Any]:
         "sentence_terminator_delta_each": 0,
         "cased_character_delta_each": 0,
         "special_route_compatible": False,
-        "general_route_interior_insertion_required": True,
+        "general_route_interior_insertion_required": False,
         "language_detector_neutrality_proved_here": False,
     }
 
@@ -240,7 +240,7 @@ def verify() -> dict[str, Any]:
             "decorator_only_kernel_count": 1,
             "isolated_constrained_kernel_count": 1,
             "required_gate": (
-                "INDEPENDENTLY_VERIFY_LANGDETECT_INVARIANCE_FOR_[]_AND_*-*_"
+                "INDEPENDENTLY_VERIFY_LANGDETECT_INVARIANCE_FOR_[]_AND_+*-*_"
                 "INSERTIONS_OVER_ALL_30_PINNED_LANGUAGE_CARRIERS"
             ),
         },
