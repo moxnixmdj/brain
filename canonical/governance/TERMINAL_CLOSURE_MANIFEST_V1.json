@@ -431,7 +431,7 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_OPUS55_ACCEPTANCE_PASS__14_OPEN__13_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__25_UNRESOLVED__OWNERSHIP_PROMOTION_SEPARATE",
+    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_OPUS55_ACCEPTANCE_PASS__14_OPEN__12_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_V6_REVOKED_PENDING_V2_INDEPENDENT_REPROMOTION_GATE__OWNERSHIP_PROMOTION_SEPARATE",
     "override_allowed": false
   },
   "specification_closure": {
@@ -533,8 +533,8 @@
     ],
     "authority": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "atomic_predicates": {
-      "proved": 13,
-      "unresolved": 25,
+      "proved": 12,
+      "unresolved": 26,
       "total": 38
     },
     "ownership_promotion_authority": false,
@@ -551,15 +551,17 @@
     },
     "unknown_domain_v6_delta": {
       "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
-      "state": "PROVED",
-      "evidence_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
-      "evidence_git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
-      "independent_verification_path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
-      "independent_verification_git_blob_sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d",
+      "state": "EXTERNAL_BLOCKED__REVOKED_PENDING_BUFFER_SAFE_INDEPENDENT_REPROMOTION",
+      "revocation_path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
+      "revocation_git_blob_sha": "a30a19aa0ab9ac18eaf0d005cf1f71b636660fb4",
+      "repromotion_gate_path": "canonical/governance/UNKNOWN_DOMAIN_V6_SUBCLASS_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V2.json",
+      "repromotion_gate_git_blob_sha": "0f831e1a56b85d48740ccb8639015ddde4d31b07",
+      "previous_acceptance_reduction_state": "REVOKED",
+      "previous_independent_verification_state": "REVOKED_FOR_DECLARED_SUBCLASS_TOTALITY",
       "family_acceptance_delta": 0,
       "capability_credit_delta": 0,
       "ownership_credit_delta": 0,
-      "remaining_family_gate": "MYSTERYMECHANISM_GE_49_55"
+      "remaining_family_gate_after_repromotion": "MYSTERYMECHANISM_GE_49_55"
     },
     "mysterymechanism_reality_gate": {
       "predicate_id": "MYSTERYMECHANISM_GE_49_55",
