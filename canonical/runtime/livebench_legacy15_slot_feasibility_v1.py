@@ -24,6 +24,7 @@ PINNED_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 HISTORICAL_GENERATOR_BLOB = "6ff390d6885cf90f88d9d36959735cb327613edc"
 
 NTH = "length_constraints:nth_paragraph_first_word"
+EXISTENCE = "keywords:existence"
 FORBIDDEN = "keywords:forbidden_words"
 END = "startend:end_checker"
 
@@ -63,6 +64,13 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
 
     forbidden = by_id.get(FORBIDDEN, {}).get("forbidden_words", ())
     forbidden_words = [str(x) for x in forbidden]
+
+    if EXISTENCE in by_id and FORBIDDEN in by_id:
+        required = [str(x) for x in by_id[EXISTENCE].get("keywords", ())]
+        forbidden_by_fold = {word.casefold(): word for word in forbidden_words}
+        for keyword in required:
+            if keyword.casefold() in forbidden_by_fold:
+                reasons.append("REQUIRED_KEYWORD_IS_FORBIDDEN_WORD:" + keyword.casefold())
 
     if NTH in by_id and FORBIDDEN in by_id:
         first_word = str(by_id[NTH].get("first_word", ""))
