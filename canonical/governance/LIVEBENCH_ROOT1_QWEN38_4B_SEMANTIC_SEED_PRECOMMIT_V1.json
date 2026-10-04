@@ -1,0 +1,332 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_QWEN38_4B_SEMANTIC_SEED_PRECOMMIT_V1",
+  "date": "2026-10-04",
+  "status": "PRECOMMITTED__NONTERMINAL_SEMANTIC_SEED_QUALIFICATION__ZERO_TERMINAL_EXPOSURE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "causal_target": {
+    "root1_gap": "NO_ROUTABLE_VERIFIED_GENERAL_SEMANTIC_TEXT_PRODUCER_FOR_PARAPHRASE_SIMPLIFY_SUMMARIZE_OR_INSTRUCTION_GROUNDED_STORY",
+    "role": "QUALIFY_A_SMALL_LOCAL_SEMANTIC_SEED_PRODUCER_ONLY__NOT_A_THRESHOLD_SUCCESSOR_BY_ITSELF",
+    "prior_falsification_boundary": "PRIOR_QWEN3_5_4B_FAILURE_WAS_ON_A_DIFFERENT_OPEN_ENDED_AGENTIC_TASK_B_AND_DOES_NOT_TRANSFER_CREDIT_OR_FAILURE_TO_THIS_DISTINCT_2026_DISTILLED_SUBJECT_OR_NARROWER_SEMANTIC_SEED_CONTRACT"
+  },
+  "execution_subject": {
+    "repository": "empero-ai/Qwen3.8-4B-Distill-GGUF",
+    "revision": "391fc7d103e3942a408def3e4f51c2f85d464417",
+    "file": "Qwen3.8-4B-Q4_K_M.gguf",
+    "bytes": 2783446304,
+    "sha256": "dec96e8cf2e11b613bb46513dec485377f9ca5a351e71712ee0e244f287c6790",
+    "license": "apache-2.0",
+    "source_relationship": "UPSTREAM_PUBLISHER_QUANTIZATION_REPOSITORY_FOR_QWEN3_8_4B_DISTILL",
+    "inherited_livebench_credit": 0
+  },
+  "runtime": {
+    "repository": "ggml-org/llama.cpp",
+    "commit": "0504396140d1c882f5f6ee34466a42db7ae90114",
+    "server_target": "llama-server",
+    "runner": "ubuntu-24.04",
+    "threads": 4,
+    "context_tokens": 4096,
+    "parallel": 1,
+    "api": "OPENAI_COMPATIBLE_LOCALHOST_ONLY",
+    "paid_external_api": false
+  },
+  "generation_policy": {
+    "attempts_per_case": 1,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "max_tokens": 192,
+    "fixed_seed_base": 424200,
+    "reasoning_display": "PROMPT_REQUESTS_FINAL_ONLY__VERIFIER_STRIPS_OPTIONAL_THINK_TAGS_BEFORE_SCORING",
+    "adaptive_retry": false,
+    "case_specific_tuning": false
+  },
+  "frozen_nonterminal_suite": [
+    {
+      "id": "PARA_1",
+      "effect": "text.paraphrase.semantic_preserving",
+      "instruction": "Paraphrase the sentence without changing any facts. Use one sentence and no more than 24 words. Return only the answer.",
+      "source": "Neris delivered seven amber parcels to Corin before sunrise on Tuesday.",
+      "required_groups": [
+        [
+          "neris"
+        ],
+        [
+          "corin"
+        ],
+        [
+          "seven",
+          "7"
+        ],
+        [
+          "amber"
+        ],
+        [
+          "tuesday"
+        ]
+      ],
+      "forbidden_exact": true,
+      "max_words": 24,
+      "max_sentences": 1,
+      "min_source_change": true
+    },
+    {
+      "id": "PARA_2",
+      "effect": "text.paraphrase.semantic_preserving",
+      "instruction": "Paraphrase the sentence without changing any facts. Use one sentence and no more than 28 words. Return only the answer.",
+      "source": "The observatory postponed the Lumen-4 launch by three days because high winds crossed the ridge.",
+      "required_groups": [
+        [
+          "lumen-4",
+          "lumen 4"
+        ],
+        [
+          "three",
+          "3"
+        ],
+        [
+          "wind"
+        ],
+        [
+          "ridge"
+        ],
+        [
+          "postpon",
+          "delay"
+        ]
+      ],
+      "forbidden_exact": true,
+      "max_words": 28,
+      "max_sentences": 1,
+      "min_source_change": true
+    },
+    {
+      "id": "SIMPLE_1",
+      "effect": "text.simplify.semantic_preserving",
+      "instruction": "Rewrite this in simple everyday English in no more than 14 words. Preserve who did what and where. Return only the answer.",
+      "source": "Following the cessation of precipitation, Mira initiated pedestrian transit toward the eastern laboratory.",
+      "required_groups": [
+        [
+          "mira"
+        ],
+        [
+          "east",
+          "eastern"
+        ],
+        [
+          "lab",
+          "laboratory"
+        ],
+        [
+          "walk",
+          "went",
+          "go",
+          "headed",
+          "moved",
+          "travel"
+        ]
+      ],
+      "max_words": 14,
+      "min_source_change": true
+    },
+    {
+      "id": "SIMPLE_2",
+      "effect": "text.simplify.semantic_preserving",
+      "instruction": "Rewrite this in simple everyday English in no more than 18 words. Preserve the cause and action. Return only the answer.",
+      "source": "Because the photovoltaic array ceased generating energy after dusk, Tovan activated the reserve battery.",
+      "required_groups": [
+        [
+          "tovan"
+        ],
+        [
+          "battery"
+        ],
+        [
+          "solar",
+          "photovoltaic"
+        ],
+        [
+          "dusk",
+          "night",
+          "dark"
+        ],
+        [
+          "because",
+          "so",
+          "when",
+          "after"
+        ]
+      ],
+      "max_words": 18,
+      "min_source_change": true
+    },
+    {
+      "id": "SUM_1",
+      "effect": "text.summarize.faithful",
+      "instruction": "Summarize the report in one sentence of no more than 22 words. Keep the mission result and return event. Return only the answer.",
+      "source": "The Alba rover traveled twelve kilometers across the plain. Its battery fell to 41 percent. At Site K it collected a basalt sample. Alba returned to base at 18:20 without damage.",
+      "required_groups": [
+        [
+          "alba"
+        ],
+        [
+          "basalt"
+        ],
+        [
+          "site k",
+          "site-k"
+        ],
+        [
+          "return",
+          "base"
+        ],
+        [
+          "without damage",
+          "undamaged",
+          "safe"
+        ]
+      ],
+      "max_words": 22,
+      "max_sentences": 1
+    },
+    {
+      "id": "SUM_2",
+      "effect": "text.summarize.faithful",
+      "instruction": "Summarize the report in one sentence of no more than 22 words. Keep the decision, reason, and new time. Return only the answer.",
+      "source": "The Delta team inspected Bridge 6 at 09:00. Engineers found ice on the north joints. The team postponed the load test for safety. The replacement test is scheduled for Friday at 14:00.",
+      "required_groups": [
+        [
+          "delta"
+        ],
+        [
+          "bridge 6",
+          "bridge-6"
+        ],
+        [
+          "ice"
+        ],
+        [
+          "postpon",
+          "delay"
+        ],
+        [
+          "friday"
+        ],
+        [
+          "14:00",
+          "2:00",
+          "2 pm",
+          "2pm"
+        ]
+      ],
+      "max_words": 22,
+      "max_sentences": 1
+    },
+    {
+      "id": "STORY_1",
+      "effect": "text.story.generate_instruction_grounded",
+      "instruction": "Write exactly three short sentences. In order: Nara finds a brass key; she opens a green box with it; she gives the map inside to Ivo. Return only the story.",
+      "source": "",
+      "required_groups": [
+        [
+          "nara"
+        ],
+        [
+          "brass"
+        ],
+        [
+          "key"
+        ],
+        [
+          "green"
+        ],
+        [
+          "box"
+        ],
+        [
+          "map"
+        ],
+        [
+          "ivo"
+        ]
+      ],
+      "ordered_groups": [
+        [
+          "nara",
+          "key"
+        ],
+        [
+          "green",
+          "box"
+        ],
+        [
+          "map",
+          "ivo"
+        ]
+      ],
+      "exact_sentences": 3,
+      "max_words": 45
+    },
+    {
+      "id": "STORY_2",
+      "effect": "text.story.generate_instruction_grounded",
+      "instruction": "Write exactly three short sentences. In order: Aris lights a lantern; he crosses the old bridge; he uses the lantern to guide a lost dog home. Return only the story.",
+      "source": "",
+      "required_groups": [
+        [
+          "aris"
+        ],
+        [
+          "lantern"
+        ],
+        [
+          "bridge"
+        ],
+        [
+          "dog"
+        ],
+        [
+          "home"
+        ]
+      ],
+      "ordered_groups": [
+        [
+          "aris",
+          "lantern"
+        ],
+        [
+          "bridge"
+        ],
+        [
+          "dog",
+          "home"
+        ]
+      ],
+      "exact_sentences": 3,
+      "max_words": 45
+    }
+  ],
+  "pass_rule": {
+    "case_pass": "ALL_DECLARED_OBJECTIVE_CHECKS_FOR_THE_CASE_PASS",
+    "effect_pass": "BOTH_PRECOMMITTED_CASES_FOR_THE_EFFECT_PASS",
+    "suite_pass": "ALL_8_CASES_PASS_IN_ONE_PRECOMMITTED_ATTEMPT_EACH",
+    "semantic_seed_credit_if_pass": "BOUNDED_NONTERMINAL_ROOT1_SEMANTIC_SEED_PRODUCER_CANDIDATE_ONLY",
+    "semantic_seed_credit_if_fail": "ZERO__ROUTE_FALSIFIED_FOR_THIS_EXACT_SUBJECT_RUNTIME_AND_CONTRACT"
+  },
+  "independent_verification_required": true,
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_THRESHOLD_SCORE_INHERITANCE",
+    "NO_TERMINAL_CASE_CONTENT_OR_METADATA_USED",
+    "NO_GENERAL_SEMANTIC_EQUIVALENCE_THEOREM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "PASS_WOULD_NOT_AUTHORIZE_CASE_73_OR_LATER",
+    "PASS_WOULD_NOT_PROVE_SMAUG_OR_QWEN27B_UNNECESSARY_FOR_THE_FINAL_THRESHOLD"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
