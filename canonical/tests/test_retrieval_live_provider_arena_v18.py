@@ -20,10 +20,13 @@ def test_paginated_tags_stops_on_short_page():
     old=v18.v17.v13._github_json
     calls=[]
     def fake(url,timeout=1):
+        import urllib.parse
         calls.append(url)
-        if "page=1" in url:
-            return [{"name":"v3.0.0","commit":{"sha":"a"}}]*100
-        if "page=2" in url:
+        q=urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)
+        page=int(q["page"][0])
+        if page==1:
+            return [{"name":f"v3.0.{i}","commit":{"sha":str(i)}} for i in range(100)]
+        if page==2:
             return [{"name":"v2.0.0","commit":{"sha":"b"}}]
         return []
     v18.v17.v13._github_json=fake
