@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_PREIMMUTABLE_CLAIM_TOMBSTONE_20261005_V2",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__OBSOLETE_5C62_LEASE_CLAIM_KEY_SPENT_FAIL_CLOSED_BEFORE_QUEUED_PRODUCTION__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "obsolete_execution": {
+    "execution_lease_sha256": "5c62d42a792a72330535b07cd5f0722ad6e33417bd0179b7d9a01594da8c543d",
+    "execution_lease_git_blob_sha": "e83a79d4ffb7e5912ece02b9d4cddc5da1a5a800",
+    "launch_ref": "refs/heads/unknown-domain-direct-launch/5c62d42a792a72330535b07cd5f0722ad6e33417bd0179b7d9a01594da8c543d",
+    "queued_production_run_id": 37241217775,
+    "create_event_head_sha": "1f848e1d3edab4da63a995a7724c45b7d6ba2587",
+    "superseding_defect": "CREATE_EVENT_JOB_CHECKED_OUT_MUTABLE_BRANCH_REF_INSTEAD_OF_IMMUTABLE_EVENT_SHA"
+  },
+  "atomic_safety_tombstone": {
+    "claim_ref": "refs/heads/unknown-domain-direct-claims/5c62d42a792a72330535b07cd5f0722ad6e33417bd0179b7d9a01594da8c543d",
+    "claim_ref_created": true,
+    "claim_ref_target_commit": "1f848e1d3edab4da63a995a7724c45b7d6ba2587",
+    "queued_job_state_before_tombstone": "QUEUED",
+    "effect": "WHEN_THE_OBSOLETE_JOB_REACHES_ATOMIC_CLAIM_CREATE_IT_MUST_RECEIVE_NON_201_AND_ABORT_BEFORE_BEACON_SECRET_OR_CASE_GENERATION"
+  },
+  "superseding_frontier": {
+    "runner_pull_request": 2075,
+    "head_sha": "3fed8711a507aef740e92b51415f817a3cb26d69",
+    "required_production_workflow_blob": "990b4fe712ca509f3e01c8e632c75416a3cd0b98",
+    "required_property": "CHECKOUT_CREATE_EVENT_GITHUB_SHA_NOT_MUTABLE_GITHUB_REF",
+    "execution_authority": false
+  },
+  "hard_nonclaims": [
+    "TOMBSTONE_IS_NOT_PRODUCTION",
+    "NO_PRODUCTION_CASES_WERE_GENERATED_BY_THE_TOMBSTONE",
+    "NO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "DO_NOT_REUSE_THE_5C62D4_CLAIM_KEY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "production_cases_generated_by_tombstone": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
