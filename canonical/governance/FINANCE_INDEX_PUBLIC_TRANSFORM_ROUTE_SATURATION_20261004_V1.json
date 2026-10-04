@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_ZERO_COST_TRANSFORM_ROUTE_SATURATED__OWNER_OR_STRONGER_PROOF_REMAINS__ZERO_CREDIT",
+  "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+  "parent_frontier": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V10.json",
+    "git_blob_sha": "2012926814d0d06405da56da64e589b06fef1756"
+  },
+  "prior_boundary": {
+    "path": "canonical/governance/FINANCE_INDEX_COMPONENT_FLOOR_BOUNDARY_20261004_V1.json",
+    "git_blob_sha": "277feb222baaa87526a17ac846d16413b31df44a"
+  },
+  "primary_sources": [
+    {
+      "url": "https://artificialanalysis.ai/models/capabilities/finance-and-accounting",
+      "observed": [
+        "FINANCE_INDEX_IS_WEIGHTED_AVERAGE_OF_SIX_CAPABILITY_SUBSCORES",
+        "WEIGHTS_30_30_20_10_5_5",
+        "CAPABILITY_BREAKDOWN_DISPLAY_EXISTS",
+        "PUBLIC_PAGE_DOES_NOT_PUBLISH_NUMERIC_CAPABILITY_BREAKDOWN_VALUES_IN_ANONYMOUS_RENDERED_VIEW"
+      ]
+    },
+    {
+      "url": "https://artificialanalysis.ai/data-api/docs",
+      "observed": [
+        "FREE_LANGUAGE_MODELS_ENDPOINT_EXPOSES_HEADLINE_INDICES_AND_SIX_CAPABILITY_INDEXES",
+        "PRO_TIER_ADDS_PER_BENCHMARK_SCORES",
+        "FREE_TIER_EXCLUDES_FULL_EVALUATION_SET",
+        "SINGLE_MODEL_DETAIL_ENDPOINT_IS_PRO_OR_COMMERCIAL_ONLY",
+        "NO_DOCUMENTED_FREE_ENDPOINT_FOR_FINANCE_CAPABILITY_SUBSCORE_BREAKDOWN_OR_INNER_TRANSFORM"
+      ]
+    }
+  ],
+  "exact_deduction": {
+    "public_free_api_can_return_final_finance_index": true,
+    "public_free_api_can_return_six_headline_capability_indexes": true,
+    "public_free_api_per_benchmark_scores": false,
+    "public_free_api_documented_finance_capability_subscores": false,
+    "public_free_api_documented_inner_capability_transform": false,
+    "current_public_page_documented_inner_capability_transform": false,
+    "finance_subscore_zero_floor_proved": false,
+    "direct_threshold_predicate_closed": false
+  },
+  "scheduler_effect_if_independently_verified": {
+    "delete": [
+      "REPEAT_GENERIC_PUBLIC_SEARCH_FOR_FINANCE_CAPABILITY_INNER_TRANSFORM",
+      "EXPECT_FREE_ARTIFICIAL_ANALYSIS_API_TO_EXPOSE_FINANCE_COMPONENT_BENCHMARK_SCORES",
+      "CREATE_DUPLICATE_ARTIFICIAL_ANALYSIS_OUTREACH_FOR_FINANCE_INDEX_OR_COMPONENT_SCORES"
+    ],
+    "preserve": [
+      "EXISTING_ARTIFICIAL_ANALYSIS_OWNER_CHANNEL_RESULT",
+      "OWNER_RUN_OR_OWNER_ACCEPTED_EXACT_FINANCE_INDEX_RESULT",
+      "INDEPENDENTLY_VERIFIED_BRAIN_COMPONENT_LOWER_BOUNDS",
+      "MATERIAL_NEW_PUBLIC_SCHEMA_OR_METHODOLOGY_CHANGE",
+      "SEPARATELY_ADMISSIBLE_FORMAL_LOWER_BOUND_ON_CAPABILITY_SUBSCORES",
+      "DIRECT_THRESHOLD_WEIGHTED_LOWER_BOUND_GE_61"
+    ]
+  },
+  "wake_conditions": [
+    "ARTIFICIAL_ANALYSIS_OWNER_REPLY",
+    "MATERIAL_PUBLIC_METHODOLOGY_OR_API_SCHEMA_CHANGE",
+    "NEW_INDEPENDENT_FORMAL_PROOF_OF_CAPABILITY_SUBSCORE_LOWER_BOUNDS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PRO_API_WOULD_REVEAL_THE_INNER_TRANSFORM",
+    "NO_CLAIM_HIDDEN_TRANSFORM_DOES_NOT_EXIST",
+    "NO_ZERO_FLOOR_INFERENCE",
+    "NO_FINANCE_INDEX_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "existing_owner_channel_binding": {
+    "path": "canonical/governance/ROOT2_OWNER_CHANNEL_FANOUT_V2.json",
+    "git_blob_sha": "9b59f951f5b7135bb167f2aaebc35e9960172fa4",
+    "owner": "Artificial Analysis",
+    "required_surface": "Finance & Accounting Index/components",
+    "state": "OUTREACH_SENT",
+    "duplicate_outreach_required": false
+  }
+}
