@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_ROOT1_CAUSAL_SUBTYPE_GUARD_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXECUTION_ON_ISOLATED_BRANCH__ZERO_CREDIT",
+  "exact_base_commit": "bdd20ac74bc1d38074671527d5339cfa20dfff2e",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_blocker": {
+    "predicate": "LIVEBENCH_IF_GE_65_7",
+    "current_root1_gap_scope": "EXACT_FROZEN_BRAIN_SYSTEM_CANNOT_REACH_ACCEPTANCE_BAR",
+    "observed_prefix": {
+      "cases": 72,
+      "valid_candidate_responses": 0,
+      "policy_blocks": 43,
+      "runtime_or_composition_failures": 29
+    }
+  },
+  "necessity": {
+    "exact_unproven_point": "Current Root1 scheduling distinguishes positive operative gap from measurement uncertainty but does not mechanically distinguish an operative route/composition gap from a demonstrated missing underlying useful capability.",
+    "canonical_evidence": [
+      "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+      "canonical/verification/LIVEBENCH_V6_REPLAY72_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "canonical/governance/LIVEBENCH_V8_CAUSAL_REPAIR_FRONTIER_V2.json",
+      "canonical/runtime/root1_acquisition_closure_controller_v2.py",
+      "canonical/runtime/root1_acquisition_closure_controller_v3.py"
+    ],
+    "duplication_check": [
+      "Searched canonical tree for Root1 causal subtype, operative route/capability distinction, and LiveBench causal frontier.",
+      "Existing Root1 controller gates positive operational gaps but has no explicit underlying-capability-vs-route subtype guard.",
+      "Existing LiveBench causal artifacts explicitly say pipeline classes are not proof of semantic capability failure."
+    ],
+    "highest_leverage_reason": "Prevents expensive or logically invalid capability acquisition when existing Brain integration/routing repair is the only causally justified action."
+  },
+  "recursive_obs": {
+    "discovery_required": false,
+    "reason": "This action is a governance/runtime truth guard over already-canonical evidence. It does not select or acquire an external capability route.",
+    "deletion_first_result": "DELETE_UNJUSTIFIED_UNDERLYING_CAPABILITY_ACQUISITION_FROM_ROUTE_ONLY_FAILURES",
+    "reused_components": [
+      "ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2_V3_EVIDENCE_GATE",
+      "LIVEBENCH_V6_V8_CAUSAL_CLASSIFICATION"
+    ]
+  },
+  "planned_delta": [
+    "Add generic Root1 causal-subtype classifier.",
+    "Project current LiveBench 72-case evidence through the classifier.",
+    "Fail closed unless a valid execution route reaches independent semantic adjudication before authorizing underlying capability acquisition."
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_THAT_INSTRUCTION_FOLLOWING_SEMANTIC_CAPABILITY_IS_ALREADY_OWNED",
+    "NO_CHANGE_TO_CURRENT_5_OF_19_ACCEPTED_OR_12_OF_38_PROVED_COUNTS",
+    "NO_FRESH_TERMINAL_CASE_EXPOSURE",
+    "NO_CASE_73_PLUS",
+    "NO_MAIN_ACTIVATION_WITHOUT_INDEPENDENT_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
