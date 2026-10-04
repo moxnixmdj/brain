@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_ACCEPTANCE_PROOF_REPLACEMENT_PLANNER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT__NO_AUTHORITY",
+  "compiled_from_main": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_live_state_at_compile": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false
+  },
+  "objective": "Attack private and matched benchmark blockers by proving stronger exact-or-superset implications before spending time on empirical routes, while preserving all frozen acceptance semantics.",
+  "runtime": {
+    "path": "canonical/runtime/acceptance_proof_replacement_planner_v1.py",
+    "git_blob_sha": "ebd9c74ef1b7dcbabd60a3368f6e070ed1e21df6"
+  },
+  "tests": {
+    "path": "canonical/tests/test_acceptance_proof_replacement_planner_v1.py",
+    "git_blob_sha": "2d574752b378133f69f902ed95a35dce7c0d8503"
+  },
+  "dependencies": [
+    {
+      "path": "canonical/runtime/proof_obligation_delta_compiler_v1.py",
+      "role": "EXPLICIT_CONTENT_ADDRESSED_BINDING_CLOSURE_ONLY"
+    },
+    {
+      "path": "canonical/runtime/protocol_implication_scope_algebra_v2.py",
+      "role": "INDEPENDENT_EXACT_OR_SUPERSET_SCOPE_SAFE_IMPLICATION_ONLY"
+    },
+    {
+      "path": "canonical/governance/EXTERNAL_BENCHMARK_DOMINANCE_GATE_V1.json",
+      "role": "EXISTING_EXACT_BENCHMARK_PRECEDENCE_AND_CUSTOM_REPLACEMENT_LAST_RESORT"
+    }
+  ],
+  "proof_precedence": [
+    "FORMAL_IMPLICATION",
+    "OBJECTIVE_CEILING",
+    "EXHAUSTIVE_FINITE_UNIVERSE",
+    "VERIFIED_SCOPE_SUPERSET",
+    "METAMORPHIC_INVARIANT",
+    "EXISTING_COMPARATOR_RECEIPT",
+    "MATCHED_EMPIRICAL"
+  ],
+  "interaction_with_current_shadow_reality_lease": {
+    "current_main_component": "canonical/runtime/shadow_reality_lease_v1.py",
+    "rule": "PROOF_REPLACEMENT_RACES_IN_PARALLEL_WITH_CURRENT_ROOT2_V11_AND_SHADOW_LEASE_PREPARATION__IF_A_STRONGER_PROOF CLOSES_A_PREDICATE_THEN_ANY_DOMINATED_EMPIRICAL_SHADOW_ROUTE_MUST_BE_DELETED_AT_RECOMPUTE",
+    "no_duplicate_isolation_mechanism_added": true
+  },
+  "hard_rules": [
+    "NO_EQUIVALENCE_FROM_NAMES_PROSE_FAMILY_LABELS_OR_BENCHMARK_SIMILARITY",
+    "NO_PUBLIC_PRIVATE_SUBSTITUTION_WITHOUT_EXPLICIT_INDEPENDENT_EXACT_OR_STRONGER_IMPLICATION",
+    "NO_ACCEPTANCE_CREDIT_FROM_PLANNER_OUTPUT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY",
+    "FRESH_EMPIRICAL_ROUTES_REMAIN_BLOCKED_UNLESS_SEPARATELY_AUTHORIZED",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+    "DELETE_EMPIRICAL_ROUTE_ONLY_AFTER_PROVED_REPLACEMENT_OR_OTHER_CANONICAL_DOMINANCE"
+  ],
+  "verification_required": [
+    "RUN_FOCUSED_UNIT_TEST_MODULE",
+    "CONFIRM_TARGET_IDENTITY_DRIFT_FAILS_CLOSED",
+    "CONFIRM_NAME_ONLY_SIMILARITY_NEVER_CLOSES_A_TARGET",
+    "CONFIRM_FRESH_EMPIRICAL_ROUTE_REMAINS_BLOCKED_WITHOUT_AUTHORITY",
+    "CONFIRM_ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
