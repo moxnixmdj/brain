@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_ROOT_CAUSE_POINTER_PUBLIC_VERIFICATION_20261004_V2",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT_CAUSE_AND_TERMINAL_AUTHORITY_ALIGNED_ON_ROOT3_V2__ZERO_CREDIT",
+  "brain_candidate": {
+    "branch": "reconcile-root3-root-cause-state-v2",
+    "root_state_blob": "1e01f31eac3695e9729b40f5b5a0f9e5e6b70779",
+    "terminal_authority_blob": "691f1d6f9d51fc49d281216264dbe33f41958995",
+    "root3_cut_blob": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+    "root3_admissibility_blob": "a9bff5074dbb456d673131c60f30efa88a337670"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1571,
+    "verified_head_sha": "1bb0b2ec92b238511818d1f1d2659afadbe09291",
+    "merge_commit": "73d087aa201ed40f8b879bf98c5050b8e7dd4d29",
+    "workflow_run_id": 37168503920,
+    "conclusion": "success",
+    "post_run_change": "ONLY_WORKFLOW_RUNNER_LABEL_UBUNTU_TO_MACOS__VERIFIER_AND_FIXTURES_UNCHANGED"
+  },
+  "verified": {
+    "root3_predicates": 10,
+    "matched_scope_targets": 7,
+    "event_classes": 3,
+    "runnable_events": 0,
+    "fresh_reality_authority": false,
+    "root_and_terminal_cut_pointer_match": true,
+    "root_and_terminal_admissibility_pointer_match": true
+  },
+  "hard_nonclaims": [
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_NEW_SCOPE_CERTIFICATE",
+    "NO_UPSTREAM_SCOPE_RECEIPT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "fresh_reality_authority": false
+}
