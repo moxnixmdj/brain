@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_QWEN38_27B_Q2_EXACT_EXECUTION_SUBJECT_MANIFEST_V1",
+  "date": "2026-10-04",
+  "status": "EXACT_CURRENT_QUANTIZED_SUBJECT_CONTENT_ADDRESSED__SOURCE_REVISION_BOUND__RUNTIME_SMOKE_VALIDATED_EXTERNALLY__LIVEBENCH_REQUALIFICATION_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_73775_EXACT_EQUAL_TASK_MEAN",
+  "subject": {
+    "repository": "Chungulus/Qwen3.8-27B-Q2_K-GGUF",
+    "repository_url": "https://huggingface.co/Chungulus/Qwen3.8-27B-Q2_K-GGUF",
+    "file": "Qwen3.8-27B-Q2_K.gguf",
+    "bytes": 10864583712,
+    "sha256": "185bc2aa1f15a34ef9d2b14f51f9edda69f4e43b5ee9e39e3c2ae8c439ddd1a5",
+    "quantization": "Q2_K",
+    "license": "apache-2.0",
+    "source_model": "Qwen/Qwen3.8-27B",
+    "source_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "llama_cpp_revision": "5f754ea0e2fd21e1213db7ebebfd65d938d9d69c",
+    "validation_lineage_commit": "f519a212d6c15cd3292b6ca835dd8ebf235642c0",
+    "vision_projector_required_for_root1_text_acceptance": false
+  },
+  "external_validation": {
+    "source": "Hugging Face model card and validation lineage published with exact split artifact",
+    "observed_2026_10_04": true,
+    "reported_exact_byte_gates": {
+      "text_generation": "PASS",
+      "native_tool_call_cases": "5_OF_5_PASS",
+      "thinking_controls_and_chat_template": "PRESERVED_AND_CHECKED",
+      "hybrid_gated_deltanet_full_attention_structure": "RETAINED",
+      "mtp_tensors_and_metadata": "RETAINED",
+      "per_file_runtime_smoke": "PASS",
+      "reported_validation_tokens_per_second": 18.920043894501834
+    },
+    "benchmark_credit": 0,
+    "reason_no_benchmark_credit": "THE_PUBLISHER_EXPLICITLY_DOES_NOT_CLAIM_A_NEW_BENCHMARK_RUN_FOR_THE_SPLIT REPOSITORY"
+  },
+  "acceptance_math": {
+    "opus55_exact_four_task_mean_percent": 65.73775,
+    "qwen38_27b_bf16_exact_four_task_mean_percent": 72.65825,
+    "maximum_absolute_degradation_before_target_failure_pp": 6.9205,
+    "qualification_rule": "RUN_THIS_EXACT_SHA256_SUBJECT_ON_THE_PINNED_PUBLIC_PARAPHRASE_SIMPLIFY_STORY_GENERATION_AND_SUMMARIZE_GEOMETRY_AND_REQUIRE_EQUAL_TASK_MEAN_GTE_65_73775"
+  },
+  "resource_geometry": {
+    "bf16_published_bytes": 55615875685,
+    "q2_subject_bytes": 10864583712,
+    "byte_reduction_fraction": 0.804657,
+    "byte_reduction_percent": 80.4657,
+    "text_only_internalization_note": "ROOT1_PUBLIC_ACCEPTANCE_TASKS_ARE_TEXT_ONLY__THE_SEPARATE_VISION_PROJECTOR_IS_NOT_REQUIRED_FOR_THIS QUALIFICATION STEP",
+    "publisher_memory_guidance_with_vision": "ALLOW_APPROXIMATELY_15_GB_FOR_MODEL_PLUS_VISION_PROJECTOR_PLUS_MODEST_RUNTIME_OVERHEAD__KV_CACHE_EXTRA",
+    "hard_nonclaim": "NO_CURRENT_MEASURED_PEAK_MEMORY_CLAIM_FOR_TEXT_ONLY_ROOT1_EXECUTION"
+  },
+  "acquisition_contract": {
+    "minimum_required_bytes": ["Qwen3.8-27B-Q2_K.gguf"],
+    "verify_before_execution": [
+      "FILE_SIZE_EQUALS_10864583712",
+      "SHA256_EQUALS_185bc2aa1f15a34ef9d2b14f51f9edda69f4e43b5ee9e39e3c2ae8c439ddd1a5"
+    ],
+    "runtime_precommit": {
+      "llama_cpp_revision": "5f754ea0e2fd21e1213db7ebebfd65d938d9d69c",
+      "network_dependency_after_internalization": false,
+      "paid_api_dependency": false
+    },
+    "fail_closed": true
+  },
+  "critical_path": [
+    "ACQUIRE_THIS_EXACT_10_864_583_712_BYTE_SUBJECT_INTO_A_BRAIN_CONTROLLED_DURABLE_ZERO_INCREMENTAL_SPEND_LOCATION",
+    "HASH_VERIFY_BEFORE_FIRST_INFERENCE",
+    "QUALIFY_THIS_EXACT_SUBJECT_ON_THE_PINNED_PUBLIC_FOUR_TASK_LIVEBENCH_GEOMETRY",
+    "IF_MEAN_GTE_65_73775_FREEZE_AS_ROOT1_MINIMUM_EXECUTABLE_SEMANTIC_CORE",
+    "IF_MEAN_LT_65_73775_ESCALATE_TO_NEXT_PRECISION_RUNG_WITHOUT_CONSUMING_TERMINAL_CASES"
+  ],
+  "breakthrough": [
+    "ROOT1_MINIMUM_INTERNALIZATION_IS_NOW_BOUND_TO_ONE_EXACT_DOWNLOADABLE_FILE_INSTEAD_OF_A_QUANTIZATION_CLASS",
+    "THE_FILE_DERIVES_FROM_THE_EXACT_BF16_REVISION_ALREADY_BOUND_IN_BRAIN",
+    "THE_FILE_IS_ABOUT_80_5_PERCENT_SMALLER_THAN_THE_BF16 CHECKPOINT BY BYTE COUNT",
+    "TEXT_ONLY_ROOT1_QUALIFICATION_DOES_NOT_REQUIRE_THE_SEPARATE_VISION_PROJECTOR",
+    "THE_REMAINING_LOAD_BEARING_UNKNOWN_IS_NOW NARROW: EXACT_FOUR_TASK_SCORE_RETENTION_OF_THIS_SHA256 SUBJECT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THIS_Q2_SUBJECT_ALREADY_MEETS_THE_LIVEBENCH_65_73775_TARGET",
+    "NO_CLAIM_EXTERNAL_RUNTIME_SMOKE_EQUALS_SEMANTIC_BENCHMARK_QUALIFICATION",
+    "NO_CLAIM_BYTES_ARE_ALREADY_INTERNALIZED_IN_BRAIN_CONTROLLED_STORAGE",
+    "NO_FRESH_TERMINAL_CASE_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "acquisition_subject": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
