@@ -1,0 +1,158 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_POST_PROMOTION_SEMANTIC_BRIDGE_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__DETERMINISTIC_POST_PROMOTION_FROZEN_PROTOCOL_TO_EVALUATOR_SEMANTIC_EQUIVALENCE__NO_NEW_CREDIT__NOT_PREOUTCOME_AUTHORITY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "audit_trigger": "POST_PROMOTION_REVIEW_FOUND_THAT_THE_V1_REDUCTION_USED_BROAD_ALL_SIX_TRANSFER_FAMILIES_AND_ALL_THREE_ABSTENTION_CLASSES_FLAGS_WITHOUT_EXPLICITLY_ENUMERATING_THE_EIGHT_FROZEN_PROTOCOL_ACCEPTANCE_CLAUSES",
+  "promoted_state_under_audit": {
+    "reduction": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d"
+    },
+    "acceptance_ledger_at_promotion": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
+      "proved_predicates": 13,
+      "unresolved_predicates": 25
+    }
+  },
+  "frozen_semantic_authority": {
+    "protocol": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+      "git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab"
+    },
+    "evaluator_family": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EVALUATOR_FAMILY_V1.json",
+      "git_blob_sha": "52090daf78d12020af48c1b6ffaea056d9029e1b"
+    },
+    "scorer": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py",
+      "git_blob_sha": "e8cf5d1b5d311644725a751c15e6235958fb587d"
+    },
+    "candidate_v3": {
+      "path": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+      "git_blob_sha": "8df7f13455b710623806a8219174b397a2c3c442"
+    },
+    "generator_v5": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py",
+      "git_blob_sha": "a97459fe407ea4852f57f12f504fbc0121db9824"
+    },
+    "v6_universal_proof": {
+      "path": "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py",
+      "git_blob_sha": "58410966e17c1bc546db8cab039891f3ab2bf8a8"
+    }
+  },
+  "acceptance_decomposition": {
+    "new_tool_discovery": {
+      "frozen_protocol_literal": "NEW_TOOL_DISCOVERY_PROVED_BY_FROZEN_TOOL_DISCOVERY_ROUTE",
+      "result": "PASS__SEPARATELY_ACCOUNTED_IN_PREEXISTING_FROZEN_PROTOCOL__NOT_REINTERPRETED_AS_A_V6_RESULT"
+    },
+    "mysterymechanism": "SEPARATE_PUBLIC_FIXED_BAR__UNCHANGED__NO_CREDIT_FROM_THIS_AUDIT"
+  },
+  "clause_bridge": [
+    {
+      "leaf_id": "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "mappings": [
+        {
+          "protocol_clause": "DOMAIN_B_SUCCESS_REUSES_DOMAIN_A_LEARNED_PRIMITIVE_WITHOUT_FULL_REDISCOVERY",
+          "evaluator_witnesses": [
+            "DOMAIN_B_TERMINAL_CONSEQUENCE_EXACT",
+            "AT_LEAST_ONE_DOMAIN_A_EARNED_RECEIPT_IS_LOAD_BEARING_IN_DOMAIN_B_TRACE",
+            "REUSED_DOMAIN_A_RECEIPT_IS_BOUND_TO_THE_HIDDEN_SHARED_PRIMITIVE_FINGERPRINT",
+            "CANDIDATE_TRANSFERRED_PRIMITIVE_FINGERPRINT_MATCHES_HIDDEN_SHARED_PRIMITIVE",
+            "DOMAIN_B_PROBE_COUNT_STRICTLY_BELOW_HIDDEN_FULL_REDISCOVERY_PROBE_FLOOR"
+          ]
+        },
+        {
+          "protocol_clause": "TRANSFER_IS_NOT_LABEL_OR_IDENTIFIER_MEMORIZATION",
+          "evaluator_witnesses": [
+            "TRANSFER_MAPPING_SUPPORT_MATCHES_HIDDEN_RELEVANT_FEATURE_SET",
+            "HIDDEN_SURFACE_RANDOMIZATION_AND_DISJOINT_DOMAIN_VOCABULARIES_ARE_VERIFIED"
+          ]
+        },
+        {
+          "protocol_clause": "NEGATIVE_TRANSFER_DISTRACTORS_DO_NOT_RECEIVE CREDIT",
+          "evaluator_witnesses": [
+            "HIDDEN_DISTRACTOR_FEATURES_DO_NOT_APPEAR_AS_POSITIVE_SUPPORT",
+            "NEGATIVE_TRANSFER_CHECKS_EXPLICITLY_REJECT_ALL_HIDDEN_DISTRACTORS"
+          ]
+        },
+        {
+          "protocol_clause": "EVIDENCE_PROVENANCE_PRESERVED",
+          "evaluator_witnesses": [
+            "PROVENANCE_CHAIN_IS_NONEMPTY_AND_EACH_LOAD_BEARING_EVIDENCE_ITEM_HAS_SOURCE_AND_RECEIPT"
+          ]
+        }
+      ]
+    },
+    {
+      "leaf_id": "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS",
+      "mappings": [
+        {
+          "protocol_clause": "IDENTIFIABLE_CASES_REACH_CORRECT_SUPPORTED_CONCLUSION",
+          "evaluator_witnesses": [
+            "IDENTIFIABLE_CASES_MUST_CONCLUDE_EXACT_GOLD_AND_MAY_NOT_ABSTAIN"
+          ]
+        },
+        {
+          "protocol_clause": "NONIDENTIFIABLE_CASES_DO_NOT_FORCE_UNIQUE_UNSUPPORTED_CONCLUSION",
+          "evaluator_witnesses": [
+            "NONIDENTIFIABLE_CASES_MUST_NOT_FORCE_A_UNIQUE_CONCLUSION_AND_REQUIRE_A_NONEMPTY_NONIDENTIFIABILITY_WITNESS"
+          ]
+        },
+        {
+          "protocol_clause": "UNDERSPECIFIED_CASES_REQUEST_A_VALID_DISCRIMINATOR_OR_ABSTAIN",
+          "evaluator_witnesses": [
+            "UNDERSPECIFIED_CASES_MUST_REQUEST_THE_HIDDEN_VALID_MINIMUM_DISCRIMINATOR_OR_ABSTAIN_WITH_A_NONEMPTY_WITNESS"
+          ]
+        },
+        {
+          "protocol_clause": "ABSTENTION_NOT_USED_AS_BLANKET_ESCAPE_ON_IDENTIFIABLE_CASES",
+          "evaluator_witnesses": [
+            "BLANKET_ABSTENTION_ON_IDENTIFIABLE_CASES_FAILS"
+          ]
+        }
+      ]
+    }
+  ],
+  "deterministic_checks": {
+    "protocol_blob_exact": true,
+    "evaluator_family_blob_exact": true,
+    "direct_leaf_sets_exact": true,
+    "all_eight_protocol_acceptance_clauses_mapped_exactly_once": true,
+    "every_bridge_witness_is_exact_evaluator_acceptance_literal": true,
+    "separate_new_tool_discovery_accounting_literal_present": true,
+    "mysterymechanism_credit_imported": false,
+    "result": "PASS"
+  },
+  "deduction": {
+    "semantic_predicate_substitution_found": false,
+    "promotion_semantically_falsified_by_this_audit": false,
+    "reason": "THE_PREEXISTING_FROZEN_EVALUATOR_ACCEPTANCE_SURFACE_IS_A_LOSSLESS_REFINEMENT_OF_ALL_EIGHT_PREEXISTING_FROZEN_DIRECT_PROTOCOL_ACCEPTANCE_CLAUSES__AND_NEW_TOOL_DISCOVERY_WAS_ALREADY_SEPARATELY_ACCOUNTED_IN_THE_FROZEN_PROTOCOL",
+    "current_13_of_38_state_delta_from_this_audit": 0,
+    "recommendation": "PRESERVE_CURRENT_PROMOTION_UNLESS_A_SEPARATE_FALSIFIER_ATTACKS_THE_V6_UNIVERSAL_THEOREM_OR_THE_INDEPENDENT_RECEIPT__FOR_FUTURE_PROMOTIONS_REQUIRE_EXPLICIT_FROZEN_PROTOCOL_CLAUSE_BINDING_PREOUTCOME"
+  },
+  "hard_nonclaims": [
+    "THIS_AUDIT_WAS_AUTHORED_AFTER_THE_V6_PROMOTION_AND_IS_NOT_A_PREOUTCOME_PRECOMMIT",
+    "THIS_AUDIT_DOES_NOT_REPLACE_THE_EXISTING_INDEPENDENT_V6_VERIFICATION",
+    "THIS_AUDIT_DOES_NOT_INDEPENDENTLY_REPROVE_THE_V6_UNIVERSAL_THEOREM",
+    "THIS_AUDIT_GRANTS_ZERO_NEW_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_MYSTERYMECHANISM_THRESHOLD_CREDIT",
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_BEYOND_THE_BOUND_FROZEN_EVALUATOR_CONTRACT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
