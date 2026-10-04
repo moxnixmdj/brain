@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_CAUSAL_SUBTYPE_GUARD_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CAUSAL_TRUTH_GUARD__CURRENT_LIVEBENCH_PROJECTS_TO_OPERATIVE_ROUTE_GAP_NOT_UNDERLYING_CAPABILITY_GAP__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Prevent a proved system-level acceptance failure from being silently promoted into evidence that the underlying useful capability mechanism is missing.",
+  "exact_base_commit": "bdd20ac74bc1d38074671527d5339cfa20dfff2e",
+  "subject": {
+    "runtime": "canonical/runtime/root1_causal_subtype_guard_v1.py",
+    "tests": "canonical/tests/test_root1_causal_subtype_guard_v1.py",
+    "action_intent": "canonical/action_intents/2026-10-04_ROOT1_CAUSAL_SUBTYPE_GUARD_V1.json"
+  },
+  "theorem": {
+    "premise_1": "A positive operational gap proves only that the exact operative system cannot currently satisfy the target contract.",
+    "premise_2": "Underlying capability failure is a stronger causal claim requiring the target behavior to be exercised on a valid execution route.",
+    "premise_3": "If zero valid candidate responses reach semantic adjudication and all observed failures are policy, runtime, composition, or control failures, the evidence contains no observed semantic failure event.",
+    "conclusion": "Such evidence establishes an operative route/composition gap but does not authorize acquisition of a new underlying useful capability mechanism."
+  },
+  "current_livebench_projection": {
+    "source_evidence": [
+      {
+        "path": "canonical/verification/LIVEBENCH_V6_REPLAY72_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "facts": {
+          "terminal_cases_consumed": 72,
+          "policy_blocked_count": 43,
+          "runtime_exit_count": 29,
+          "valid_candidate_response_count": 0,
+          "predicate_failure_admissible": false,
+          "root1_reopen_authorized": false
+        }
+      },
+      {
+        "path": "canonical/governance/LIVEBENCH_V8_CAUSAL_REPAIR_FRONTIER_V2.json",
+        "facts": {
+          "policy_block_post_prompt_capability_acquisition_forbidden": 43,
+          "composition_producer_unresolved_grounded_clauses": 27,
+          "architectural_gap_control_or_fanout": 2,
+          "unclassified_runtime_count": 0
+        }
+      },
+      {
+        "path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+        "fact": "Its exact proved gap statement is system-level and explicitly does not prove universal semantic reasoning capability missing."
+      }
+    ],
+    "projected_status": "ROOT1_OPERATIVE_ROUTE_GAP_ONLY",
+    "causal_subtype": "OPERATIVE_ROUTE_OR_COMPOSITION_GAP",
+    "valid_candidate_response_count": 0,
+    "underlying_capability_acquisition_authorized": false,
+    "integration_repair_authorized": true,
+    "semantic_capability_failure_observed": false
+  },
+  "breakthrough_effect": [
+    "NARROWS_ROOT1_FROM_AN_UNTYPED_POSITIVE_OPERATIVE_GAP_TO_A_CAUSAL_SUBTYPE",
+    "DELETES_EXTERNAL_CAPABILITY_ACQUISITION_AND_PARAMETER_HARVESTING_AS_CURRENTLY_UNJUSTIFIED_FOR_LIVEBENCH",
+    "PRESERVES_THE_EXISTING_SYSTEM_LEVEL_ROOT1_GAP_WITHOUT_PRETENDING_IT_IS_ONLY_MEASUREMENT_UNCERTAINTY",
+    "ROUTES_CURRENT_WORK_TO_EXISTING_BRAIN_INTEGRATION_COMPOSITION_AND_CONTROL_REPAIR",
+    "REOPENS_UNDERLYING_CAPABILITY_ACQUISITION_ONLY_AFTER_VALID_RESPONSES_REACH_INDEPENDENT_SEMANTIC_ADJUDICATION_AND_CAUSALLY_FAIL_THE_TARGET_BEHAVIOR"
+  ],
+  "acquisition_gate_for_underlying_capability": [
+    "VALID_CANDIDATE_RESPONSE_COUNT_GT_ZERO",
+    "UNDERLYING_BEHAVIOR_EXERCISED",
+    "EXECUTION_SURFACE_INDEPENDENTLY_VERIFIED_READY",
+    "INDEPENDENT_SEMANTIC_ACCEPTANCE",
+    "INDEPENDENTLY_ADJUDICATED_SEMANTIC_FAILURE_COUNT_GT_ZERO",
+    "FAILURE_CAUSALLY_ATTRIBUTED_TO_UNDERLYING_BEHAVIOR"
+  ],
+  "scheduling_if_verified": {
+    "current_livebench": "PRIORITIZE_EXISTING_BRAIN_ROUTE_COMPOSITION_CONTROL_AND_CONSTRAINT_INTEGRATION__DO_NOT_LAUNCH_NEW_UNDERLYING_CAPABILITY_ACQUISITION_FROM_THE_72_CASE_FAILURE",
+    "capability_acquisition": "FAIL_CLOSED_UNTIL_CAUSAL_SEMANTIC_FAILURE_GATE_PASSES",
+    "score_only_helpers": "MAY_SUPPORT_SCORER_OR_FORMATTING_REPAIR_BUT_CANNOT_CREATE_SEMANTIC_CAPABILITY_CREDIT"
+  },
+  "relationship_to_recent_terminal_scope_reduction": {
+    "source": "canonical/governance/LIVEBENCH_IF_2026_TERMINAL_SCOPE_TRUTH_REPAIR_V1.json",
+    "status": "ORTHOGONAL_AND_COMPOSABLE",
+    "effect": "The candidate reduction from 83 public checkers to 25 load-bearing legacy checkers reduces route-repair surface; this causal guard separately prevents that route-repair problem from being mislabeled as missing cognition."
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_LIVEBENCH_IF_GE_65_7_IS_CLOSED",
+    "NO_CLAIM_THAT_THE_SEMANTIC_INSTRUCTION_FOLLOWING_CAPABILITY_IS_ALREADY_OWNED",
+    "NO_CLAIM_THAT_FUTURE_VALID_RESPONSES_CANNOT_REVEAL_A_REAL_UNDERLYING_CAPABILITY_GAP",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CHANGE_TO_TERMINAL_COUNTS",
+    "NO_CASE_73_OR_LATER",
+    "NO_MAIN_ACTIVATION_WITHOUT_INDEPENDENT_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
