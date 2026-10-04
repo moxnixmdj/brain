@@ -1083,14 +1083,14 @@
       "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT"
     },
     "root2_closure_v2_current_frontier": {
-      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V7.json",
-      "git_blob_sha": "35e8b578aca1290bcf469d6350ae085ba8a86c64",
-      "verification": "canonical/verification/ROOT2_FRONTIER_V7_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-      "verification_git_blob_sha": "c2b96c9d48b7ef6508ea77dc6983da12eaf099c3",
-      "activation": "canonical/governance/ROOT2_FRONTIER_V7_ACTIVATION_V1.json",
-      "activation_git_blob_sha": "ccfc97ca8f5586d583990f0e37277b88c12227e9",
-      "status": "ACTIVE__ROOT2_FRONTIER_V7_INDEPENDENT_PASS__CURRENT_AUTHORITY_BOUND__ZERO_CREDIT__NO_FRESH_REALITY",
-      "effective_scheduling_authority": true
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V8.json",
+      "git_blob_sha": "2eaeb74fe306ee2507145e26eb731f69f46e6153",
+      "verification": "canonical/verification/ROOT2_V8_FINANCE_DUAL_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "7e2d71144853c41fadab55f4074d484edf46e651",
+      "activation": "canonical/governance/ROOT2_FRONTIER_V8_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "0ab521eae842f65bcf17b62ec15f40bdc00ccfcb",
+      "status": "CANDIDATE__ROOT2_FRONTIER_V8_INDEPENDENT_SUBJECT_PASS__POINTER_PROJECTION_REVERIFY_PENDING__ZERO_CREDIT__NO_FRESH_REALITY",
+      "effective_scheduling_authority": false
     },
     "synthesis_coverage_ceiling_v2": {
       "path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
@@ -1779,7 +1779,7 @@
     "execution_authority": false,
     "promotion_authority": false
   },
-  "next_terminal_action": "EXECUTE_ONLY_ACTIVE_ROOT2_V7_NONDOMINATED_ZERO_REALITY_ROUTE_DELTAS__NO_FRESH_REALITY__NO_TERMINAL_CASES",
+  "next_terminal_action": "ROOT2_V8_POINTER_PROJECTION_INDEPENDENT_REVERIFY_PENDING__ROOT3_V2_ZERO_RUNNABLE__NO_FRESH_SCORE_BEFORE_ZERO_REALITY_FIXED_POINT",
   "ownership_state": {
     "verified_owned_families": 5,
     "total_families": 19,
