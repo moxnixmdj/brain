@@ -54,7 +54,8 @@ def resolve_source_relations(term:Any, records:Any)->dict[str,Any]:
         row_term=_norm(row.get("term"),f"RECORD_TERM:{i}")
         if row_term!=term_n:
             raise LexicalSourceFallbackError(f"RECORD_TERM_MISMATCH:{i}")
-        source_value = row.get("source_id") if row.get("source_id") is not None else row.get("source")\n        source=_norm(source_value,f"SOURCE:{i}")
+        source_value = row.get("source_id") if row.get("source_id") is not None else row.get("source")
+        source=_norm(source_value,f"SOURCE:{i}")
         if source in seen_sources:
             raise LexicalSourceFallbackError("SOURCE_DUPLICATE:"+source)
         seen_sources.add(source)
