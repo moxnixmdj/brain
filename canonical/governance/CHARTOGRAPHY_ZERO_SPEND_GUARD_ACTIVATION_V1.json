@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_ZERO_SPEND_GUARD_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_CANDIDATE__INDEPENDENT_PUBLIC_RUNNER_PASS__HARD_ZERO_SPEND_GUARD_DISCHARGED__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "control": {
+    "governance_path": "canonical/governance/CHARTOGRAPHY_ZERO_SPEND_GUARD_V1.json",
+    "governance_git_blob_sha": "567c10202bb94a116ef5dcc396608d1eb15747cd",
+    "runtime_path": "canonical/runtime/chartography_zero_spend_guard_v1.py",
+    "runtime_git_blob_sha": "babc797980d52afd79d9e8e655ecce078b041ac2",
+    "tests_path": "canonical/tests/test_chartography_zero_spend_guard_v1.py",
+    "tests_git_blob_sha": "125172532a02dd99498085e679f9310a4671ac9b",
+    "verification_path": "canonical/verification/CHARTOGRAPHY_ZERO_SPEND_GUARD_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "d97fd0e5bae8fb103a539187b2cadf9b25457e5d"
+  },
+  "effect": [
+    "HARD_ZERO_SPEND_GUARD_REQUIREMENT_DISCHARGED",
+    "PAID_FALLBACK_AND_OVERAGE_REFUSED_FAIL_CLOSED",
+    "CAPACITY_RECHECK_REQUIRED_BEFORE_EACH_JUDGE_CALL",
+    "PROJECT_SPECIFIC_FREE_TIER_ACCESS_AND_CAPACITY_RECEIPT_REMAINS_OPEN",
+    "BRAIN_EVALUATION_ADAPTER_REMAINS_OPEN",
+    "BRAIN_SCORE_GE_89_REMAINS_OPEN"
+  ],
+  "hard_nonclaims": [
+    "NO_PROJECT_ACCOUNT_ACCESS_CLAIM",
+    "NO_QUOTA_SUFFICIENCY_CLAIM",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
