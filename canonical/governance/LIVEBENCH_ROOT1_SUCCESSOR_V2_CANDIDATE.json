@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_SUCCESSOR_V2_CANDIDATE",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__COMPOSED_CONSTRUCTIVE_ROOT1_REPAIR__PUBLIC_GRAMMAR_PLUS_VERIFIED_SEED_PRESERVING_POSTPROCESSOR__ZERO_UNSEEN_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "root1_gap": "EXACT_FROZEN_PREDECESSOR_FORCED_FAIL__SUCCESSOR_REQUIRED",
+  "base_main_commit": "64288c8e76f548b7d1018979ddfff27c17f8204b",
+  "public_upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "modern_instructions_path": "livebench/if_runner/ifbench/instructions.py",
+    "modern_instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "evaluation_path": "livebench/if_runner/ifbench/evaluation_lib.py",
+    "evaluation_blob": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+    "score_path": "livebench/process_results/instruction_following/utils.py",
+    "score_blob": "8ce01747887ec0792c8f024e1972e34ece781676"
+  },
+  "successor": {
+    "public_grammar_compiler": {
+      "path": "canonical/runtime/livebench_public_grammar_compiler_v2.py",
+      "blob": "f5a5204bd3bd5cdfd9ba666e78e07b6e41d74d3c"
+    },
+    "seed_preserving_postprocessor": {
+      "path": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+      "blob": "6762868d0954102e996ab240c85fdfee22e3f219",
+      "state": "CURRENT_MAIN_INDEPENDENTLY_VERIFIED_INPUT"
+    },
+    "adapter": {
+      "path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v4.py",
+      "blob": "d48cdfe997f708d80bd9417060b16fa11aa55d44"
+    },
+    "tests": {
+      "path": "canonical/tests/test_livebench_public_grammar_compiler_v2.py",
+      "blob": "edcac6dd3b9661a14839e7dca4318998c9635498"
+    }
+  },
+  "architecture": {
+    "lane_a": "PUBLIC_CHECKER_FULLY_DETERMINES_VALID_WITNESS__NO_SEMANTIC_SEED__EMIT_ONLY_AFTER_ALL_RECOGNIZED_RULE_MIRRORS_PASS",
+    "lane_b": "EXISTING_VERIFIED_MODEL_INDEPENDENT_SEMANTIC_ROUTE__THEN_ONLY_CURRENT_VERIFIED_SEED_PRESERVING_TRANSFORMS__FAILED_TRANSFORM_PRESERVES_PREDECESSOR_OUTPUT",
+    "fallback": "UNPROVED_PUBLIC_GRAMMAR_OR_TRANSFORM_CASES_FALL_THROUGH_UNCHANGED",
+    "hidden_metadata_dependency": false
+  },
+  "supported_public_checker_routes": [
+    "OutputTemplateChecker",
+    "NoWhitespaceChecker",
+    "TitleCaseChecker",
+    "NewLineWordsChecker",
+    "NestedParenthesesChecker",
+    "NestedQuotesChecker",
+    "AlphabetLoopChecker",
+    "ThreeVowelChecker",
+    "ConsonantClusterChecker",
+    "PrimeLengthsChecker",
+    "PunctuationCoverChecker",
+    "RepeatSimpleChecker",
+    "OptionsResponseChecker",
+    "SpecialBulletPointsChecker",
+    "NumbersCountChecker",
+    "RepeatChangeChecker"
+  ],
+  "contamination_firewall": [
+    "NO_CASE_73_OR_LATER",
+    "NO_UNEXPOSED_TERMINAL_PROMPT_CONTENT",
+    "NO_TERMINAL_CASE_IDS",
+    "NO_HIDDEN_INSTRUCTION_ID_LIST",
+    "NO_HIDDEN_KWARGS",
+    "NO_V6_OR_V10_PER_CASE_PATTERN_SPECIAL_CASES",
+    "NO_POST_PROMPT_NETWORK_OR_PACKAGE_ACQUISITION",
+    "NO_POLICY_WEAKENING"
+  ],
+  "verification_plan": [
+    "PY_COMPILE_SUCCESSOR",
+    "RUN_FOCUSED_UNIT_TESTS",
+    "INDEPENDENTLY_COMPARE_SUPPORTED_LOCAL_RULE_MIRRORS_TO_PINNED_PUBLIC_CHECK_FOLLOWING_SOURCE",
+    "FREEZE_EXACT_SUCCESSOR_BLOBS",
+    "REPLAY_ONLY_ALREADY_EXPOSED_72_AND_EMIT_AGGREGATE_STRUCTURAL_HISTOGRAM",
+    "NO_UNSEEN_TERMINAL_CASES_UNTIL_SEPARATE_PRECOMMIT_AND_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_YET_PROVE_LIVEBENCH_65_7",
+    "DOES_NOT_YET_PROVE_ALL_83_PUBLIC_INSTRUCTION_TYPES",
+    "DOES_NOT_RETROACTIVELY_REPAIR_FAILED_PREDECESSOR",
+    "DOES_NOT_GRANT_NEW_TERMINAL_CASE_AUTHORITY",
+    "DOES_NOT_REOPEN_ROOT2_FOR_FAILED_PREDECESSOR"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
