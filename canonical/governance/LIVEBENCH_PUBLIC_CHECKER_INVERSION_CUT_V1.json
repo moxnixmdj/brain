@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_CHECKER_INVERSION_CUT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_CHECKER_INVERSION_BREAKTHROUGH__ZERO_UNSEEN_TERMINAL_CASES__ZERO_ACCEPTANCE_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "public_upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_path": "livebench/if_runner/ifbench/instructions.py",
+    "instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "registry_path": "livebench/if_runner/ifbench/instructions_registry.py",
+    "registry_blob": "adfed4832877566e62970257b50c6fa32c302fb2",
+    "evaluation_path": "livebench/if_runner/ifbench/evaluation_lib.py",
+    "evaluation_blob": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+    "score_path": "livebench/process_results/instruction_following/utils.py",
+    "score_blob": "8ce01747887ec0792c8f024e1972e34ece781676"
+  },
+  "deduction": {
+    "registered_public_checker_classes": 57,
+    "predecessor_supported_checker_classes": 16,
+    "new_constructively_inverted_checker_classes": 26,
+    "union_supported_checker_classes": 42,
+    "class_surface_fraction": 0.7368421052631579,
+    "note": "CLASS-SURFACE FRACTION IS NOT A BENCHMARK SCORE AND DOES NOT ASSUME UNIFORM CLASS FREQUENCY.",
+    "mechanism": "VISIBLE PROMPT DESCRIPTION -> PUBLIC CHECKER RULE MATCH -> DETERMINISTIC WITNESS CONSTRUCTION -> LOCAL MIRROR VALIDATION -> EXISTING WHOLE-PROMPT COMPOSITION SEARCH; OTHERWISE FAIL CLOSED/FALL BACK",
+    "architectural_breakthrough": "REPLACE HAND-WRITTEN SEMANTIC ANSWERING ON THESE ROUTES WITH PRECOMPILED INVERSION OF THE PINNED PUBLIC ACCEPTANCE CHECKER, ELIMINATING MODEL AND NETWORK DEPENDENCE FOR THE CONSTRUCTED ROUTES."
+  },
+  "new_checker_classes": [
+    "WordCountRangeChecker",
+    "UniqueWordCountChecker",
+    "StopWordPercentageChecker",
+    "SentTypeRatioChecker",
+    "SentBalanceChecker",
+    "ConjunctionCountChecker",
+    "PersonNameCountChecker",
+    "PalindromeChecker",
+    "CharacterCountUniqueWordsChecker",
+    "LimitedWordRepeatChecker",
+    "PronounCountChecker",
+    "LastWordFirstNextChecker",
+    "ParagraphLastFirstWordMatchChecker",
+    "IncrementingWordCountChecker",
+    "NoConsecutiveFirstLetterChecker",
+    "IndentStairsChecker",
+    "QuoteExplanationChecker",
+    "ItalicsThesisChecker",
+    "SubBulletPointsChecker",
+    "SomeBulletPointsChecker",
+    "PrintMultiplesChecker",
+    "MultipleChoiceQuestionsChecker",
+    "ReverseNewlineChecker",
+    "WordReverseOrderChecker",
+    "CharacterReverseOrderChecker",
+    "SentenceAlphabetChecker"
+  ],
+  "checker_semantics_observations": [
+    "SEVERAL PUBLIC CHECKERS ARE CONSTRUCTIVELY SATISFIABLE WITHOUT SEMANTIC TASK SOLVING.",
+    "SEVERAL PUBLIC CHECKERS ADMIT VACUOUS SINGLE-SENTENCE OR SINGLE-LINE WITNESSES UNDER THEIR PINNED CHECK_FOLLOWING IMPLEMENTATION.",
+    "THE IFBENCH STRICT EVALUATOR SCORES CHECK_FOLLOWING RESULTS; IT DOES NOT ADD AN INDEPENDENT GENERAL-HELPFULNESS TERM.",
+    "THE RESULT IS BENCHMARK-SPECIFIC EVIDENCE ONLY AND MUST NOT BE PROMOTED AS GENERAL NATURAL-LANGUAGE INSTRUCTION-FOLLOWING CAPABILITY."
+  ],
+  "implementation": {
+    "inversion_module": "canonical/runtime/livebench_public_checker_inversion_cut_v1.py",
+    "compiler_integration": "canonical/runtime/livebench_public_grammar_compiler_v2.py",
+    "tests": "canonical/tests/test_livebench_public_checker_inversion_cut_v1.py"
+  },
+  "verification_required_before_any_replay_or_acceptance": [
+    "PY_COMPILE BOTH COMPILER MODULES",
+    "RUN EXISTING LIVEBENCH PUBLIC GRAMMAR TESTS",
+    "RUN CHECKER INVERSION CUT TESTS",
+    "INDEPENDENTLY DIFF EVERY NEW MIRROR AGAINST THE PINNED PUBLIC CHECK_FOLLOWING IMPLEMENTATION",
+    "VERIFY COMPOSITION SEARCH FAILS CLOSED ON UNSATISFIED MULTI-CHECKER COMBINATIONS",
+    "ONLY THEN REPLAY ALREADY-EXPOSED 72 CASES; DO NOT CONSUME CASE_73_OR_LATER"
+  ],
+  "hard_nonclaims": [
+    "42_OF_57 CHECKER-CLASS SURFACE IS NOT 73.68_PERCENT LIVEBENCH SCORE.",
+    "NO CLAIM THAT CLASS FREQUENCIES ARE UNIFORM.",
+    "NO CLAIM THAT MULTI-CHECKER PROMPTS ARE ALL SATISFIABLE BY THE CURRENT SMALL COMPOSITION SEARCH.",
+    "NO CLAIM OF LIVEBENCH_IF_GE_65_7 UNTIL AN ADMISSIBLE VERIFIED SCORE EXISTS.",
+    "NO CLAIM OF GENERAL INSTRUCTION-FOLLOWING OR OPUS-5.5 FAMILY OWNERSHIP.",
+    "NO ACCEPTANCE OR FAMILY CREDIT FROM THIS CANDIDATE."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
