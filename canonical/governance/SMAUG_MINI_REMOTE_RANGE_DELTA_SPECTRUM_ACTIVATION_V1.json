@@ -1,13 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_SMAUG_MINI_REMOTE_RANGE_DELTA_SPECTRUM_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_EXECUTION_LAUNCHED__BOUNDED_REMOTE_RANGE_PROBE_QUEUED__ZERO_CREDIT",
+  "status": "ACTIVE_EXECUTION_LAUNCHED__ROOT2_SUPPORTING_EXECUTION_SUBJECT_COMPRESSION__BOUNDED_REMOTE_RANGE_PROBE_QUEUED__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "causal_target": {
-    "root": "ROOT1",
+    "root": "ROOT2_MEASUREMENT_OR_COMPARATOR_UNCERTAINTY",
     "predicate": "LIVEBENCH_IF_GE_65_7",
-    "parent_route": "canonical/governance/SMAUG_MINI_REVERSE_LORA_COMPRESSED_DELTA_ROUTE_V1.json",
-    "problem": "DO_NOT_DOWNLOAD_FULL_BASE_PLUS_FINETUNE_CHECKPOINTS_BEFORE_ESTABLISHING_WHETHER_THE_MERGED_LANGUAGE_TRUNK_DELTA_HAS_A_USEFUL_LOW_RANK_SPECTRUM"
+    "current_root_seal": "canonical/governance/POST_LIVEBENCH_ROOT1_REVOCATION_CURRENT_ROOT_SEAL_V1.json",
+    "current_root_seal_git_blob_sha": "8429fdbf97f0b045a6ea54e3cae3e2413b9acdae",
+    "supporting_route": "canonical/governance/SMAUG_MINI_REVERSE_LORA_COMPRESSED_DELTA_ROUTE_V1.json",
+    "problem": "REDUCE_THE_COST_OF_ACQUIRING_AND_REQUALIFYING_A_STRONG_LIVEBENCH_EXECUTION_SUBJECT_WITHOUT_MISCLASSIFYING_UNKNOWN_PERFORMANCE_AS_A_PROVED_CAPABILITY_GAP"
   },
   "exact_subjects": {
     "base": {
@@ -59,23 +61,8 @@
     "negative_consequence": "DEMOTE_REVERSE_LORA_AS_PRIMARY_STORAGE_COMPRESSION_ROUTE_AND_REFOCUS_ON_SMALLEST_MEANING_SENSITIVE_EXECUTION_SUBJECT",
     "caveat": "ROW_BLOCK_SPECTRA_ARE_A_PREFLIGHT_SIGNAL_NOT_A_GLOBAL_MATRIX_RANK_PROOF"
   },
-  "parallel_root1_lanes": {
-    "flan_t5_small_int8": {
-      "learned_bytes": 95374884,
-      "workflow_run_id": 37199735031,
-      "observed_status": "queued"
-    },
-    "qwen38_4b_q4": {
-      "learned_bytes": 2783446304,
-      "workflow_run_id": 37199964362,
-      "observed_status": "queued"
-    },
-    "smaug_full_internalization": {
-      "workflow_run_id": 37199908593,
-      "observed_status": "pending"
-    }
-  },
   "hard_nonclaims": [
+    "LIVEBENCH_CURRENT_CLASS_IS_ROOT2_ONLY__NOT_ROOT1",
     "NO_LIVEBENCH_PASS_CLAIM",
     "NO_AUTOMATIONBENCH_PASS_CLAIM",
     "NO_LOW_RANK_RECOVERY_CLAIM_BEFORE_RECEIPT",
@@ -97,5 +84,21 @@
     "promotion": false,
     "fresh_reality": false,
     "acceptance_credit": false
+  },
+  "supporting_livebench_lanes": {
+    "flan_t5_small_int8": {
+      "learned_bytes": 95374884,
+      "workflow_run_id": 37199735031,
+      "observed_status": "queued"
+    },
+    "qwen38_4b_q4": {
+      "learned_bytes": 2783446304,
+      "workflow_run_id": 37199964362,
+      "observed_status": "queued"
+    },
+    "smaug_full_internalization": {
+      "workflow_run_id": 37199908593,
+      "observed_status": "pending"
+    }
   }
 }
