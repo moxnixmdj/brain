@@ -3,11 +3,11 @@
 
 This module repairs a proof-scope error: conflict-compatible instruction IDs do
 not imply satisfiable concrete checker contracts. It uses only public frozen
-checker semantics and visible contract slots. It reads no terminal row content,
+checker semantics, strict evaluator semantics, and visible contract slots. It reads no terminal row content,
 hidden kwargs, case IDs, responses, frequencies, or scores.
 
 The functions here intentionally certify only hard UNSAT classes that follow
-directly from the pinned checker semantics. Absence of a reported contradiction
+directly from the pinned checker/evaluator semantics. Absence of a reported contradiction
 is NOT a satisfiability proof.
 """
 from __future__ import annotations
@@ -22,6 +22,10 @@ PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 PINNED_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
 PINNED_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 HISTORICAL_GENERATOR_BLOB = "6ff390d6885cf90f88d9d36959735cb327613edc"
+PINNED_EVALUATION_MAIN_BLOB = "4a341984936c4d609644a3b77f8c030ac5aa7269"
+PINNED_INSTRUCTIONS_UTIL_BLOB = "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+PINNED_NLTK_VERSION = "3.9.2"
+PINNED_NLTK_PUNKT_BLOB = "877b79dd29103464d13c967cc74e030a92c7cfbc"
 
 NTH = "length_constraints:nth_paragraph_first_word"
 FORBIDDEN = "keywords:forbidden_words"
@@ -90,6 +94,24 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
         hit = _literal_forbidden_hit(splitter, forbidden_words)
         if hit is not None:
             reasons.append("MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:" + hit.casefold())
+
+    if SENTENCE in by_id:
+        sentence = by_id[SENTENCE]
+        relation = str(sentence.get("relation", "")).strip().casefold()
+        try:
+            threshold = int(sentence.get("num_sentences"))
+        except (TypeError, ValueError):
+            threshold = -1
+        if relation == "less than" and threshold == 1:
+            # Exact strict-evaluator theorem:
+            # 1. evaluation_main only marks an instruction true if response.strip()
+            #    is nonempty.
+            # 2. NLTK Punkt 3.9.2 _slices_from_text unconditionally yields a final
+            #    slice ending at len(text.rstrip()); _realign_boundaries emits it
+            #    whenever that slice is nonempty.
+            # Therefore every evaluator-admissible nonblank response has at least
+            # one sentence, while blank responses are rejected before the checker.
+            reasons.append("STRICT_EVALUATOR_SENTENCE_LT_ONE_UNSAT")
 
     if SENTENCE in by_id and END in by_id:
         sentence = by_id[SENTENCE]
