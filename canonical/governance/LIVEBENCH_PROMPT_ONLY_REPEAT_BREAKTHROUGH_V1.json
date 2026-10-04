@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PROMPT_ONLY_REPEAT_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PROMPT_ONLY_REPEAT_FAMILY__PUBLIC_8_OF_8_DETERMINISTIC_ROWS_EXACT__ONE_PUBLIC_ROW_FAIL_CLOSED_AS_FROZEN_SCORER_NONDETERMINISTIC__ZERO_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Remove hidden prompt_to_repeat and hidden repeat-span kwargs from the deterministic repeat-family path while truth-repairing a source-version/scorer mismatch that makes one public repeat-span row nondeterministic under the frozen LiveBench executable checker.",
+  "runtime": {
+    "path": "canonical/runtime/livebench_prompt_only_repeat_compiler_v1.py",
+    "git_blob_sha": "332fbb1fac1cdee2632dc454b497376d319e2287",
+    "test_path": "canonical/tests/test_livebench_prompt_only_repeat_compiler_v1.py",
+    "test_git_blob_sha": "680aafafd09c657a0f4fb2d105d76770efb3242e",
+    "hidden_prompt_to_repeat_argument": false,
+    "hidden_kwargs_argument": false,
+    "terminal_row_identity_argument": false,
+    "fail_closed": true
+  },
+  "frozen_sources": {
+    "public_ifbench_repository": "allenai/IFBench",
+    "public_ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "public_ifbench_test_blob": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "public_ifbench_instructions_blob": "7f167018e0c5472b04e13cbf847e5988c04ecb11",
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "livebench_frozen_instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "source_divergence_truth_repair": {
+    "repeat_span_public_ifbench_semantics": {
+      "zero_index_default_check": "n_start is None",
+      "slice": "words[n_start:n_end+1]",
+      "end_semantics": "inclusive",
+      "rendered_index_description": "word indices, split by whitespace"
+    },
+    "repeat_span_frozen_livebench_semantics": {
+      "zero_index_default_check": "if not n_start",
+      "slice": "words[n_start:n_end]",
+      "end_semantics": "exclusive",
+      "rendered_index_description": "character indices",
+      "explicit_zero_start_effect": "RANDOMIZED_START_INDEX"
+    },
+    "consequence": "PUBLIC_IFBENCH_REPEAT_SPAN_SOURCE_SEMANTICS_CANNOT_BE_SUBSTITUTED_FOR_THE_FROZEN_LIVEBENCH_EXECUTABLE_SCORER",
+    "hard_rule": "BENCHMARK_PREDICATE_FOLLOWS_PINNED_EXECUTABLE_SCORER_BYTES__NOT_NEWER_UPSTREAM_INTENT"
+  },
+  "public_recomputation": {
+    "repeat_rows_total": 9,
+    "repeat_change_rows": 3,
+    "repeat_simple_rows": 2,
+    "repeat_span_rows": 4,
+    "deterministic_under_frozen_livebench_checker": 8,
+    "prompt_only_exact_deterministic_pass": 8,
+    "frozen_scorer_nondeterministic_rows": 1,
+    "nondeterminism_cause": "REPEAT_SPAN_N_START_ZERO_IS_FALSEY_AND_RANDOMIZED_BY_FROZEN_BUILD_DESCRIPTION",
+    "deterministic_failures": 0,
+    "terminal_cases_consumed": 0
+  },
+  "constructive_routes": [
+    "repeat:repeat_change => recover visible request carrier; change only first whitespace token; preserve all later tokens exactly",
+    "repeat:repeat_simple => emit the frozen exact fixed literal",
+    "repeat:repeat_span with nonzero start/end => recover visible base request and emit frozen LiveBench end-exclusive Python slice",
+    "repeat:repeat_span with start zero => fail closed; do not fabricate deterministic ownership where frozen scorer randomizes hidden state"
+  ],
+  "remaining_obligations": [
+    "INDEPENDENTLY_VERIFY_RUNTIME_TESTS_AND_PUBLIC_8_OF_8_DETERMINISTIC_RECOMPUTATION",
+    "BIND_WHICH_REPEAT_GRAMMARS_EXIST_IN_THE_FROZEN_TERMINAL_POPULATION_WITHOUT_READING_UNEXPOSED_CASE_CONTENT",
+    "COMPOSE_WITH_VISIBLE_CONSTRAINT_DETECTOR_AND_SUCCESSOR_ADAPTER_ONLY_AFTER_SCOPE_BINDING",
+    "TREAT_ANY_ZERO_START_REPEAT_SPAN_TERMINAL_ROW_AS_STOCHASTIC_SCORER_STATE_UNLESS A SEPARATE VALID PROOF ELIMINATES THE RANDOMIZATION",
+    "DO_NOT_INFER_LIVEBENCH_ACCEPTANCE_FROM_THIS_COMPONENT"
+  ],
+  "contamination_firewall": [
+    "NO_UNEXPOSED_TERMINAL_PROMPT_OR_RESPONSE_CONTENT",
+    "NO_TERMINAL_CASE_IDS",
+    "NO_HIDDEN_TERMINAL_KWARGS",
+    "PUBLIC_PINNED_IFBENCH_ROWS_ONLY_FOR_RECOMPUTATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
