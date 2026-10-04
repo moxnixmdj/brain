@@ -1,16 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_ACTIVATION_V2_RECEIPT",
   "date": "2026-10-04",
-  "status": "ACTIVE_CONDITIONAL__ONE_EPOCH_REPLAY_ALREADY_EXPOSED_72_ONLY__ZERO_CREDIT",
+  "status": "ACTIVE_CONDITIONAL__ONE_EPOCH_REPLAY_ALREADY_EXPOSED_72_ONLY__VERIFIED_CURRENT_LAUNCHER_BOUND__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "root": {
     "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-    "git_blob_sha": "3f678ff5f419abaaa00cca84d392b685d8332bfd",
+    "git_blob_sha": "36ac53134b123cfed7e63c31a871a30f9b4579e4",
     "required_status": "CONDITIONAL_RELEASE__ATOMIC_FIRST_CREATE_REQUIRED"
   },
   "activation_candidate": {
     "path": "canonical/governance/LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_ACTIVATION_V2.json",
-    "git_blob_sha": "00cac718909d9d311189efb7cadcbc75dfad84dc"
+    "git_blob_sha": "32de7988ced50d5a17cc57dabaa8b055f5b9cb55"
   },
   "environment_equivalence_verification": {
     "path": "canonical/verification/LIVEBENCH_V7_ENVIRONMENT_EQUIVALENT_SANITIZED_DIAGNOSTIC_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
@@ -30,7 +30,7 @@
     "repository": "moxnixmdj/verification-capsule-runner",
     "branch": "execute/livebench-v7-sanitized-classification-20261004",
     "launcher_path": "launch_livebench_v7_sanitized_atomic.py",
-    "launcher_git_blob_sha": "d977690efd97e093b28474d23b37ee6e4520ed0f",
+    "launcher_git_blob_sha": "5470223c39f78af008eb90bafd5d780a35230895",
     "diagnostic_git_blob_sha": "55d4b961f58dc45c1513f9c9282a63773444773d",
     "classifier_git_blob_sha": "44df7313c83914204299953dda81900fae85ab68",
     "verifier_git_blob_sha": "0c63704ba4e462c957516bc0f1ee0bdbdea8465c",
@@ -61,5 +61,12 @@
     "incremental_spend_usd": 0,
     "new_reality_units_authorized": 0,
     "acceptance_credit_delta": 0
+  },
+  "atomic_launcher_verification": {
+    "path": "canonical/verification/LIVEBENCH_V7_ATOMIC_LAUNCHER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "0b6f32c6ef239877725869194052c00ff549d28d",
+    "run_id": 37193437313,
+    "job_id": 111410251686,
+    "conclusion": "success"
   }
 }
