@@ -115,3 +115,14 @@ def test_unknown_or_structurally_conflicting_ids_fail_closed():
         {"instruction_id": "length_constraints:number_words", "slots": {"num_words": 100, "relation": "at least"}},
     ])
     assert conflict["status"] == "FAIL_CLOSED_ID_CONFLICT"
+
+
+def test_support_wide_comparator_floor_is_falsified_by_reachable_unsat_shape():
+    out = f.prove_support_wide_threshold_floor_impossible()
+    assert out["status"] == "PASS__SUPPORT_WIDE_COMPARATOR_FLOOR_FALSIFIED"
+    assert out["counterexample"]["slot_status"] == "PROVED_UNSAT"
+    assert out["counterexample"]["maximum_simultaneously_true"] == 1
+    assert out["score"]["maximum_case_score_fraction"] == "1/4"
+    assert out["score"]["below_comparator"] is True
+    assert out["actual_terminal_population_contains_counterexample"] == "NOT_CLAIMED"
+    assert out["acceptance_credit"] is False
