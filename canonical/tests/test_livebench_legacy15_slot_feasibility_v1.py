@@ -25,10 +25,8 @@ def test_required_keyword_forbidden_overlap_is_not_false_unsat():
         },
     ]
     out = f.classify_visible_contracts(contracts)
-    assert out["status"] == "PROVED_UNSAT"
-    assert out["hard_unsat_reasons"] == [
-        "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
-    ]
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
 
     # Exact checker asymmetry: existence is raw regex substring search while
     # forbidden wraps the generated alphabetic word in word boundaries.
@@ -184,7 +182,7 @@ def test_sentence_less_than_one_rejects_every_active_nonempty_requirement():
         ]
 
 
-def test_sentence_less_than_one_allows_empty_compatible_contracts():
+def test_sentence_less_than_one_remains_unsat_with_empty_compatible_raw_checkers():
     out = f.classify_visible_contracts([
         {
             "instruction_id": f.SENTENCE,
@@ -199,8 +197,10 @@ def test_sentence_less_than_one_allows_empty_compatible_contracts():
             "slots": {"num_words": 100, "relation": "less than"},
         },
     ])
-    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
-    assert out["hard_unsat_reasons"] == []
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["hard_unsat_reasons"] == [
+        "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
+    ]
 
 
 def test_sentence_less_than_one_does_not_overcertify_nonpublic_end_phrase():
