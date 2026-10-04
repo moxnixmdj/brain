@@ -121,3 +121,21 @@ def test_unknown_or_structurally_conflicting_ids_fail_closed():
         {"instruction_id": "length_constraints:number_words", "slots": {"num_words": 100, "relation": "at least"}},
     ])
     assert conflict["status"] == "FAIL_CLOSED_ID_CONFLICT"
+
+
+def test_mandatory_section_splitter_forbidden_collision_is_certified():
+    contracts = [
+        {
+            "instruction_id": f.SECTIONS,
+            "slots": {"section_spliter": "Section", "num_sections": 3},
+        },
+        {
+            "instruction_id": f.FORBIDDEN,
+            "slots": {"forbidden_words": ["section"]},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["hard_unsat_reasons"] == [
+        "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:section"
+    ]
