@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_SCHEMA_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__8_OF_8_PREEXPOSED_SCHEMA_TASKS__ZERO_LEARNED_BYTES__ZERO_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_SCHEMA_STRESS_PREEXPOSURE_V1.json",
+      "git_blob_sha": "4c0e2b160f04a75baf9825534530ade440f6b127"
+    },
+    "runtime": {
+      "path": "canonical/runtime/h100_zero_learned_schema_compiler_v1.py",
+      "git_blob_sha": "7a0bf9b4a249ec807ba34a7c3c323b1603d39dd9"
+    },
+    "tests": {
+      "path": "canonical/tests/test_h100_zero_learned_schema_compiler_v1.py",
+      "git_blob_sha": "c4ce8ec8155b46accbc79a284ae192b3d37198b5"
+    },
+    "candidate": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_SCHEMA_COMPILER_CANDIDATE_V1.json",
+      "git_blob_sha": "460d4f76d149fa95f42430ea115862fd42a481a9"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1750,
+    "verifier_head_sha": "fdca378dab017284a57696ddd96e92f7f2a11e6f",
+    "merge_commit": "3723be206cdb2a88b4aa833b4955dbe2ddf88dd4",
+    "workflow_run_id": 37187214960,
+    "workflow_job_id": 111391603832,
+    "conclusion": "success",
+    "verifier_path": "verify_h100_zero_learned_schema_compiler_v1.py",
+    "verifier_git_blob_sha": "0f1ff469e0f6bc5654c48c5d182d1d0ee6c8aeba",
+    "workflow_path": ".github/workflows/verify-h100-zero-learned-schema-compiler-v1.yml",
+    "workflow_git_blob_sha": "c883205e057bd7547659ef1bf869f11fbadd5085"
+  },
+  "independently_verified": {
+    "exact_subject_blobs": true,
+    "copied_subject_tests": "PASS",
+    "frozen_schema_tasks_solved": 8,
+    "frozen_schema_task_count": 8,
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "bounded_formats": [
+      "FREE_TEXT_KEY_VALUE",
+      "FREE_TEXT_RELATIONAL",
+      "CSV",
+      "MARKDOWN_TABLE",
+      "JSON_ROWS",
+      "JSONL_TOOL_TRACE",
+      "TOOL_TRACE",
+      "SCIENTIFIC_NUMERIC_LITERALS"
+    ]
+  },
+  "deduction": "BOUNDED_OBSERVATION_FORMAT_COMPILATION_TO_DECLARED_TYPED_NUMERIC_SCHEMA_DOES_NOT_REQUIRE_PERSISTENT_LEARNED_STATE_ON_THE_PREEXPOSED_POPULATION",
+  "residual_after_verification": [
+    "SEMANTIC_ROLE_INDUCTION_WITHOUT_DECLARED_INPUT_TARGET_FIELDS",
+    "OPEN_WORLD_FREE_FORM_LANGUAGE_AND_TOOL_TRACE_VARIATION",
+    "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+    "DIRECT_UNKNOWN_DOMAIN_ABSTENTION_AND_TRANSFER_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_NATURAL_LANGUAGE_UNDERSTANDING_CLAIM",
+    "NO_SEMANTIC_ROLE_INDUCTION_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
