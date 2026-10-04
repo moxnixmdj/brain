@@ -20,9 +20,14 @@ def _f(x,name):
 
 def _verified_strategy_rows(*,source_context_sha256,strategy_id,episodes):
     rows=[]
+    seen_ids=set()
+    seen_receipts=set()
+    seen_digests=set()
     for raw in episodes:
         if _s(raw.get("strategy_id"))!=strategy_id: continue
         eid=_s(raw.get("episode_id"))
+        if not eid or eid in seen_ids:
+            raise CrossContextTransferError("SOURCE_EPISODE_ID_INVALID_OR_DUPLICATE:"+eid)
         if _s(raw.get("context_sha256"))!=source_context_sha256:
             raise CrossContextTransferError("SOURCE_EPISODE_CONTEXT_MISMATCH:"+eid)
         success=raw.get("success")
@@ -33,11 +38,17 @@ def _verified_strategy_rows(*,source_context_sha256,strategy_id,episodes):
         r=raw.get("verification_receipt")
         if not isinstance(r,Mapping) or r.get("independent_verified") is not True or r.get("exact_byte_bound") is not True or r.get("conclusion")!="success":
             raise CrossContextTransferError("SOURCE_EPISODE_RECEIPT_INVALID:"+eid)
+        rid=_s(r.get("receipt_id"))
+        if not rid or rid in seen_receipts:
+            raise CrossContextTransferError("SOURCE_EPISODE_RECEIPT_ID_INVALID_OR_DUPLICATE:"+eid)
         if _s(r.get("episode_id"))!=eid or r.get("episode_sha256")!=dig:
             raise CrossContextTransferError("SOURCE_EPISODE_RECEIPT_BINDING_MISMATCH:"+eid)
+        if dig in seen_digests:
+            raise CrossContextTransferError("SOURCE_EPISODE_DIGEST_DUPLICATE:"+eid)
         if vals["incremental_spend_usd"]>0:
             raise CrossContextTransferError("POSITIVE_INCREMENTAL_SPEND_FORBIDDEN:"+eid)
-        rows.append({"episode_id":eid,"success":success,**vals})
+        seen_ids.add(eid); seen_receipts.add(rid); seen_digests.add(dig)
+        rows.append({"episode_id":eid,"episode_sha256":dig,"receipt_id":rid,"success":success,**vals})
     if len(rows)<MIN_SOURCE_EPISODES:
         raise CrossContextTransferError("INSUFFICIENT_SOURCE_EPISODES")
     if not all(x["success"] for x in rows):
@@ -87,7 +98,9 @@ def recommend(*,target_context_features,exact_target_episodes=(),transfer_candid
                 expected_target_context_sha256=target_sha,
                 expected_strategy_id=sid,
                 expected_strategy_semantics=semantics,
-                expected_source_episode_ids=[x["episode_id"] for x in rows])
+                expected_source_episode_bindings=[
+                    {"episode_id":x["episode_id"],"episode_sha256":x["episode_sha256"]}
+                    for x in rows])
             reduction_lcb=min(x["burden_before"]-x["burden_after"] for x in rows)
             wall_ub=max(x["wall_clock"] for x in rows)
             risk_ub=max(x["risk"] for x in rows)
@@ -95,6 +108,8 @@ def recommend(*,target_context_features,exact_target_episodes=(),transfer_candid
                 "strategy_id":sid,"source_context_sha256":source_sha,
                 "source_episode_count":len(rows),"burden_reduction_lcb":reduction_lcb,
                 "wall_clock_ub":wall_ub,"risk_ub":risk_ub,
+                "strategy_sha256":proof["strategy_sha256"],
+                "source_episode_set_sha256":proof["source_episode_set_sha256"],
                 "morphism_sha256":proof["morphism_sha256"],
             })
         except Exception as exc:
@@ -120,6 +135,8 @@ def recommend(*,target_context_features,exact_target_episodes=(),transfer_candid
         "source_episode_count":best["source_episode_count"],
         "burden_reduction_lcb":str(best["burden_reduction_lcb"]),
         "wall_clock_ub":str(best["wall_clock_ub"]),"risk_ub":str(best["risk_ub"]),
+        "strategy_sha256":best["strategy_sha256"],
+        "source_episode_set_sha256":best["source_episode_set_sha256"],
         "morphism_sha256":best["morphism_sha256"],
         "admissible_candidate_count":len(admissible),"rejected_candidates":rejected,
         "selection_rule":["BURDEN_REDUCTION_LCB_DESC","WALL_CLOCK_UB_ASC","RISK_UB_ASC","STRATEGY_ID_ASC"],
