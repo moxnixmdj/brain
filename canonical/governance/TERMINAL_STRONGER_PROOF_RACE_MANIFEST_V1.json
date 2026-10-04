@@ -1,0 +1,25 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_STRONGER_PROOF_RACE_MANIFEST_V1",
+  "date":"2026-10-04",
+  "status":"COMPILED_CURRENT_26__SCHEDULING_ONLY__ZERO_CREDIT",
+  "source_main":"39b934e2d17aa9f54f7afa7089f02a368652d12b",
+  "target_source":"canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json#current_residual_root_partition",
+  "target_count":26,
+  "partition":"16_ROOT2_ONLY__7_ROOT3_ONLY__3_MIXED",
+  "compiler":{"path":"canonical/runtime/terminal_stronger_proof_replacement_compiler_v1.py","git_blob_sha":"3b2f617f56df10cb1ca663effd3f58089a570d90"},
+  "raw_candidate_route_count":156,
+  "route_order":["FORMAL_ENTAILMENT","OBJECTIVE_CEILING_OR_FLOOR","EXHAUSTIVE_FINITE_UNIVERSE","SCOPE_SAFE_STRONGER_PROOF","EXISTING_CONTENT_ADDRESSED_COMPARATOR_EVIDENCE","MATCHED_EMPIRICAL_COMPARISON"],
+  "domain_filter":{
+    "zero_reality_routes_enabled":["FORMAL_ENTAILMENT","OBJECTIVE_CEILING_OR_FLOOR","EXHAUSTIVE_FINITE_UNIVERSE","SCOPE_SAFE_STRONGER_PROOF","EXISTING_CONTENT_ADDRESSED_COMPARATOR_EVIDENCE"],
+    "matched_empirical_comparison":"BLOCKED_BY_CURRENT_FRESH_REALITY_GATE",
+    "root2":"V11_GATES_AND_SEARCH_DELETIONS_PRECEDE_THIS_OVERLAY",
+    "root3":"V2_EVENT_DRIVEN__ZERO_CURRENT_RUNNABLE_REALITY_ACTIONS"
+  },
+  "promotion_gate":"EXACT_OR_SUPERSET_SCOPE_PLUS_SEMANTIC_AND_METRIC_IMPLICATION_PLUS_INDEPENDENT_VERIFICATION_REQUIRED",
+  "recompute":"AFTER_EVERY_VERIFIED_DELTA__DELETE_ZERO_PROBABILITY_AND_DOMINATED_ACTIONS",
+  "probability":"UNCALIBRATED_SUCCESS_REMAINS_UNKNOWN",
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0},
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false
+}
