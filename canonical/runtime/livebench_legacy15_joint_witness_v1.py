@@ -16,6 +16,7 @@ from typing import Any
 
 from canonical.runtime import livebench_legacy_visible_constraint_compiler_v4 as compiler
 from canonical.runtime.livebench_frozen_active_legacy15_v1 import ACTIVE_IDS
+from canonical.runtime import livebench_legacy15_general_composer_v1 as general_composer
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_JOINT_WITNESS_V1"
 
@@ -297,8 +298,13 @@ def solve(prompt: str) -> dict[str, Any]:
             response = _special_two(constraints)
             route = "TWO_RESPONSES"
         else:
-            response = _build_general(constraints)
-            route = "GENERAL"
+            delegated = general_composer.compose_visible_prompt(str(prompt or ""))
+            if delegated.get("status") != "PASS_CANDIDATE_GENERAL_BRANCH":
+                raise JointWitnessError(
+                    "GENERAL_COMPOSER_FAIL:" + str(delegated.get("error") or delegated.get("status"))
+                )
+            response = str(delegated["response"])
+            route = str(delegated.get("archetype") or "GENERAL")
     except (JointWitnessError, KeyError, TypeError, ValueError) as exc:
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "error": str(exc), "response": None, "instruction_ids": ids}
 
