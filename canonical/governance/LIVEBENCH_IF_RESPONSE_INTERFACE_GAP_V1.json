@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_RESPONSE_INTERFACE_GAP_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__POSITIVE_ROOT1_EVIDENCE_IF_INDEPENDENTLY_VERIFIED__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "frozen_candidate": {
+    "commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f"
+  },
+  "claim": "Under the exact frozen LiveBench adapter policy, every successful MODEL_INDEPENDENT answer exposed to the benchmark is one of three input-independent completion tokens: PLAIN_GOAL_COMPLETE, COMPOUND_GOAL_COMPLETE, or GROUNDED_CAPABILITY_COMPOSITION_COMPLETE. The adapter disables the only free-form optional-model finalizer and injects no preplanned controller/capability/proposal surface. Auto-acquisition recompiles and returns through the same literal-finish interface, so acquisition cannot repair this exposed-answer boundary within the frozen candidate epoch.",
+  "proved_if_runtime_verifier_passes": {
+    "successful_answer_set": [
+      "COMPOUND_GOAL_COMPLETE",
+      "GROUNDED_CAPABILITY_COMPOSITION_COMPLETE",
+      "PLAIN_GOAL_COMPLETE"
+    ],
+    "answer_set_cardinality": 3,
+    "input_conditioned_freeform_response_surface": false,
+    "optional_model_finalizer_reachable": false,
+    "auto_acquisition_repairs_exposed_answer_interface": false,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0
+  },
+  "root_classification_consequence": {
+    "candidate_root": "ROOT1_ACTUAL_CAPABILITY_MISSING",
+    "reason": "The frozen candidate lacks an operative input-conditioned natural-language response interface on a terminal instruction-following surface. This is positive code-level evidence of an operative capability gap, not inference from an unexecuted benchmark score.",
+    "scope": "FROZEN_LIVEBENCH_MODEL_INDEPENDENT_RESPONSE_INTERFACE_ONLY",
+    "does_not_claim": [
+      "LIVEBENCH_SCORE_VALUE",
+      "NUMBER_OF_LIVEBENCH_CASES_PASSED_OR_FAILED",
+      "ALL_BRAIN_CAPABILITIES_MISSING",
+      "FUTURE_SUCCESSOR_CANDIDATE_HAS_THE_SAME_GAP"
+    ]
+  },
+  "repair_minimum": [
+    "ADD_OR_ROUTE_AN_INPUT_CONDITIONED_RESPONSE_SURFACE_WHOSE_EXPOSED_ANSWER_CAN_DEPEND_ON_THE_TASK_AND_CAPABILITY_OUTPUT",
+    "PRESERVE_ZERO_INCREMENTAL_SPEND_AND_MODEL_INDEPENDENCE_IF_THAT_IS_THE_TERMINAL_POLICY",
+    "FREEZE_A_SUCCESSOR_CANDIDATE_AND_REPROVE_PRECOMMIT_ISOLATION_BEFORE_ANY_CASE_EXPOSURE"
+  ],
+  "source_bindings": {
+    "adapter_git_blob_sha": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
+    "astra_runtime_git_blob_sha": "7f5d16b1db69cb620954bc778e0ba6e15e687b75",
+    "goal_compiler_git_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "capability_planner_git_blob_sha": "64ff65cb184f50d3336326f33cccfcc0a53301a8",
+    "capability_proposal_generators_git_blob_sha": "71f2bbfda66a65d8d75e035b9ae073671ebd56e2",
+    "grounded_composition_git_blob_sha": "8328e12804f64cab1c0d9509966cb1d2d8fb1f82"
+  },
+  "hard_rules": [
+    "NO_ROOT1_RECLASSIFICATION_UNTIL_INDEPENDENT_VERIFICATION_BINDS_THE_EXACT_RUNTIME_VERIFIER",
+    "NO_LIVEBENCH_CASE_CONTENT_READ",
+    "NO_SCORE_INFERENCE_FROM_THIS_THEOREM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_GAP_PROOF",
+    "DO_NOT_SPEND_REALITY_UNITS_TO_CONFIRM_A_CODE_LEVEL_GAP_ALREADY_PROVED",
+    "IF_A_SUCCESSOR_REPAIRS_THE_INTERFACE_THE_FROZEN_CANDIDATE_PROOF_REMAINS_HISTORICAL_AND_DOES_NOT_TRANSFER_AUTOMATICALLY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
