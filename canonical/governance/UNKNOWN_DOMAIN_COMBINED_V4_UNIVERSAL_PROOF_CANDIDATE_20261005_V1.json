@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_COMBINED_V4_UNIVERSAL_PROOF_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_COMBINED_ROOT_REPAIR__COLLISION_TOTAL__EXACT_FLOAT_SAFE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND OWN ALL USEFUL OPUS 5.5 CAPABILITIES AT EQUAL OR BETTER LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "repairs": {
+    "identifier_universal_quantifier": {
+      "component": "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py",
+      "git_blob_sha": "8b855851b8a0fec3a0811c5033cc4ea6d2436954",
+      "method": "STRUCTURAL_KEYED_PERMUTATION_OVER_DISTINCT_OPAQUE_SLOTS__SIZE_INDEPENDENT_SWAP_INVARIANT__NO_HASH_UNIQUENESS_ASSUMPTION"
+    },
+    "add2_exact_float": {
+      "component": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+      "git_blob_sha": "8df7f13455b710623806a8219174b397a2c3c442",
+      "method": "VISIBLE_PUBLIC_SIGN_SIGNATURE_ORIENTS_TRUE_ADD2_SUPPORT_BEFORE_UNCHANGED_EXACT_BINARY64_EVALUATION"
+    }
+  },
+  "unchanged_evaluator": {
+    "scorer_v1_git_blob_sha": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "harness_v1_git_blob_sha": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "numeric_tolerance_added": false
+  },
+  "proof": {
+    "runtime": "canonical/runtime/unknown_domain_direct_combined_v4_universal_proof_v1.py",
+    "git_blob_sha": "fb5cec3efff41597cb5e64e4de982c697b73ac84",
+    "tests": "canonical/tests/test_unknown_domain_direct_combined_v4_universal_proof_v1.py",
+    "claim": "FOR_EVERY_VALID_BEACON_AND_EVALUATOR_SECRET__EVERY_27_CASE_POPULATION_EMITTED_BY_EXACT_COLLISION_TOTAL_GENERATOR_V3_IS_PASSED_BY_EXACT_FLOAT_SAFE_CANDIDATE_V3_THROUGH_UNCHANGED_HARNESS_V1_AND_SCORER_V1"
+  },
+  "critical_improvement_over_parallel_v3_proof": "IDENTIFIER_TOTALITY_IS_JUSTIFIED_BY_A_SIZE_INDEPENDENT_SWAP_INVARIANT_AND_RUNTIME_FAIL_CLOSED_POSTCONDITION__NOT_BY_ENUMERATION_ONLY_THROUGH_N_7__THEREFORE_ACTUAL_CASE_TAG_PERMUTATION_SIZES_12_AND_15_ARE_COVERED",
+  "independent_verification_required": [
+    "REBIND_EVERY_EXACT_SUBJECT_BLOB",
+    "EXECUTE_STRUCTURAL_PROOF",
+    "RUN_GENERATOR_V3_PLUS_CANDIDATE_V3_THROUGH_UNCHANGED_HARNESS_V1_SCORER_V1",
+    "FALSIFY_ACROSS_MANY_DETERMINISTIC_NONPRODUCTION_SECRET_BEACON_POPULATIONS",
+    "VERIFY_ZERO_PRODUCTION_OR_TERMINAL_CASE_GENERATION",
+    "RUN_SEPARATE_FAIL_CLOSED_ACCEPTANCE_REDUCTION_ONLY_AFTER_PASS"
+  ],
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
