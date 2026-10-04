@@ -5,7 +5,7 @@
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "current_root": {
     "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-    "git_blob_sha": "f1c96d7924341e9c95a390cccf90d74109f10189"
+    "git_blob_sha": "54021118b1b1f299cf0191d1e413a3009d95d76c"
   },
   "immutable_candidate": {
     "repository": "moxnixmdj/brain",
@@ -64,11 +64,12 @@
     "replay_result_must_distinguish_valid_candidate_response_from_policy_blocked_or_runtime_error": true
   },
   "requirements_before_activation": [
+    "VERIFY_ROOT_COMPATIBILITY_CLASS_FROM_CURRENT_540211_ROOT",
     "VERIFY_V6_COMPOSITION_BINDS_EXACT_V5_ROOT_REBIND_PROOF",
     "VERIFY_V6_COMPOSITION_BINDS_EXACT_DOMINANT_EXECUTOR_PROOF",
-    "VERIFY_CURRENT_ROOT_HASH_AND_LIVEBENCH_ROOT2_ONLY_STATE",
     "CREATE_ONE_EPOCH_REPLAY72_ACTIVATION",
-    "INDEPENDENTLY_VERIFY_EXACT_ACTIVATION_AND_LAUNCHER_BINDINGS",
+    "INDEPENDENTLY_VERIFY_EXACT_ACTIVATION_LAUNCHER_AND_ROOT_COMPATIBILITY_PREDICATE",
+    "OWNER_SIDE_POINT_OF_USE_ROOT_SNAPSHOT_AND_COMPATIBILITY_CHECK_BEFORE_TRIGGER",
     "POINT_OF_USE_ZERO_CASE_PREFLIGHT_BEFORE_REPLAY"
   ],
   "authority": {
@@ -89,7 +90,7 @@
     "path": "canonical/governance/LIVEBENCH_RETRY_EXECUTION_EPOCH_V4_CANDIDATE.json",
     "git_blob_sha": "2b9dcdc466ae3519a4378011394d1f4145840638",
     "prior_root_git_blob_sha": "601e82d00104b4ed36ee5968ad966a0c02e627c1",
-    "current_root_git_blob_sha": "f1c96d7924341e9c95a390cccf90d74109f10189",
+    "current_root_git_blob_sha": "54021118b1b1f299cf0191d1e413a3009d95d76c",
     "required_rebind_invariant": "ONLY_SCHEDULER_POLICY_CHANGED__ACCEPTANCE_PARTITION_AND_LIVEBENCH_ROOT_CLASSIFICATION_IDENTICAL"
   },
   "executor_verification": {
@@ -133,5 +134,25 @@
       "subprocess_install_defense_in_depth": true,
       "post_prompt_acquisition_loader_denied": true
     }
+  },
+  "root_compatibility_class": {
+    "base_root_git_blob_sha": "54021118b1b1f299cf0191d1e413a3009d95d76c",
+    "prior_verified_root_git_blob_sha": "f1c96d7924341e9c95a390cccf90d74109f10189",
+    "observed_delta_from_prior": [
+      "scheduler_policy"
+    ],
+    "acceptance_state_identical": true,
+    "residual_partition_identical": true,
+    "root3_state_identical": true,
+    "livebench_remains_root2_only_unresolved": true,
+    "point_of_use_rule": [
+      "LATEST_ROOT_MAY_DIFFER_ONLY_IN_SCHEDULER_POLICY",
+      "CURRENT_ACCEPTANCE_MUST_EQUAL_BASE",
+      "CURRENT_RESIDUAL_ROOT_PARTITION_MUST_EQUAL_BASE",
+      "ROOT3_CURRENT_EXECUTION_STATE_MUST_EQUAL_BASE",
+      "LIVEBENCH_IF_GE_65_7_MUST_REMAIN_ROOT2_ONLY_UNRESOLVED",
+      "ANY_NEW_SCHEDULER_OVERLAY_MUST_NOT_GRANT_EXECUTION_FRESH_REALITY_PROMOTION_OR_ACCEPTANCE_CREDIT"
+    ],
+    "incompatible_delta_action": "FAIL_CLOSED_AND_REBIND_BEFORE_REPLAY"
   }
 }
