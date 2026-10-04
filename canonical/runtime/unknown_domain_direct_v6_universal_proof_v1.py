@@ -156,7 +156,8 @@ def _string_totality()->dict[str,Any]:
         "surrogate_codepoints_exhausted":2048,
         "secret_domain":"EVERY_VALUE_WHOSE_ACTUAL_RUNTIME_TYPE_IS_BYTES_OR_STR_OR_A_GENUINE_SUBCLASS_WITH_CANONICAL_BYTE_LENGTH_GE_32",
         "legacy_strict_utf8_partiality_removed":True,
-        "genuine_runtime_subclass_override_hooks_bypassed":True,\n        "fake_class_proxy_spoof_rejected":True,
+        "genuine_runtime_subclass_override_hooks_bypassed":True,
+        "fake_class_proxy_spoof_rejected":True,
         "bytes_subclass_buffer_protocol_override_bypassed":True,
     }
 
