@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V4_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_CURRENT_ROUTE_REBIND__15_FIXED_BAR_PREDICATES__14_SURFACES__19_ROOT2_INVOLVED__TARGETS_UNCHANGED__ZERO_CREDIT",
+  "subject": {
+    "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+    "route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294",
+    "comparator_vector_path": "canonical/governance/ROOT2_FROZEN_COMPARATOR_VECTOR_V1.json",
+    "comparator_vector_git_blob_sha": "b28af5176550aba9e44ffd8ac9fde4fa7ba388bf",
+    "rebind_path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V4.json",
+    "rebind_git_blob_sha": "8d3f20c8b8379b282f9b03fc73ba82f6f8946fa5",
+    "zero_reality_cut_git_blob_sha": "c6c8353e740cbcde9649512c5b922148617d934a",
+    "minimum_frontier_git_blob_sha": "dbe0bf4984d9e3ddaa8de52ed2ebb5ccfee55141",
+    "terminal_authority_git_blob_sha": "d568125d8fe03641c3ba654a12fb1f1b2bccf42a"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1514,
+    "verifier_head_sha": "114ed761a56e208d6377e2f84cde2c805b31336a",
+    "verifier_merge_commit": "97c690ed4f9bf89032d43c3f6623b1f0dbcaacdc",
+    "workflow_run_id": 37163976469,
+    "workflow_job_id": 111323011656,
+    "conclusion": "success"
+  },
+  "verified": {
+    "fixed_bar_predicates": 15,
+    "unique_fixed_bar_surfaces": 14,
+    "total_root2_involved_predicates": 19,
+    "comparator_targets_changed": false,
+    "predicate_set_changed": false,
+    "surface_set_changed": false,
+    "chartography_zero_spend_guard_discharged": true,
+    "project_quota_not_invented": true,
+    "strict_acceptance": "5/19",
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_only": 16,
+    "root2_and_root3": 3,
+    "zero_credit_preserved": true
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
