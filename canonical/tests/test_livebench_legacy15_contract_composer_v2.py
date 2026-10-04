@@ -62,13 +62,15 @@ def test_end_internal_word_forbidden_is_proved_unsat():
     ]
 
 
-def test_sentence_zero_case_fails_closed_instead_of_guessing():
+def test_sentence_zero_case_is_proved_unsat_from_strict_evaluator_semantics():
     out = c.compose_contracts([
         C(c.SENTENCES, num_sentences=1, relation="less than"),
         C(c.FORBIDDEN, forbidden_words=["brain"]),
     ])
-    assert out["status"] == "FAIL_CLOSED"
-    assert out["error"] == "LESS_THAN_ONE_SENTENCE_STRICT_FEASIBILITY_UNRESOLVED"
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["hard_unsat_reasons"] == [
+        "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
+    ]
 
 
 def test_word_lower_bound_is_constructed_monotonically():
