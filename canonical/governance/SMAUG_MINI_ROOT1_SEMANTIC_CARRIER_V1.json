@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_SMAUG_MINI_ROOT1_SEMANTIC_CARRIER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SAME_RELEASE_PUBLIC_LIVEBENCH_ROOT1_CARRIER_IMPROVEMENT__OPEN_WEIGHT_BINDING_PROVED__EXECUTION_AND_OWNERSHIP_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "public_livebench_binding": {
+    "repository": "LiveBench/new-livebench",
+    "commit": "caa4253c8a3aa93b5c7ec234e681d4f120a20240",
+    "table_path": "public/table_2026_06_25.csv",
+    "table_blob_sha": "73ab7d8d9752b4d7cc1bc8c574ab0eb80c36c84b",
+    "categories_path": "public/categories_2026_06_25.json",
+    "categories_blob_sha": "50b5672fe14023f5ba14efc1ce16e221e6573056",
+    "model_links_path": "src/Table/modelLinks.js",
+    "model_links_blob_sha": "0e53912dd56a0778f6eddf22998ecde1a73c4aca",
+    "model_id": "smaug-mini",
+    "huggingface_repository": "abacusai/Smaug-Mini",
+    "openweight": true,
+    "reasoner": true,
+    "finetune_base": "qwen3.8-27b"
+  },
+  "huggingface_subject": {
+    "repository": "abacusai/Smaug-Mini",
+    "observed_revision": "2750fd9f1e67e004111a53a6d9a39c15fbbd33ef",
+    "license": "apache-2.0",
+    "architecture": "Qwen3_5ForConditionalGeneration",
+    "parameter_scale": "27B",
+    "precision": "bfloat16",
+    "base_model": "Qwen/Qwen3.8-27B",
+    "adaptation": "on-policy RL / GRPO, merged language-trunk delta",
+    "caveat": "THE_OBSERVED_HF_REVISION_IS_CONTENT_ADDRESSING_FOR_ACQUISITION; THE_LIVEBENCH_REPORTED_RUN_HAS_NOT_YET_BEEN_PROVED_TO_USE_THIS_EXACT_REVISION_AND_RUNTIME_CONFIGURATION"
+  },
+  "exact_same_release_scores": {
+    "smaug_mini": {
+      "IF": 73.9165,
+      "overall_equal_category_mean": 76.93090476190477,
+      "categories": {
+        "Reasoning": 82.80775,
+        "Coding": 75.429,
+        "Agentic Coding": 60.808,
+        "Mathematics": 89.74275,
+        "Data Analysis": 78.813,
+        "Language": 76.99933333333333,
+        "IF": 73.9165
+      }
+    },
+    "qwen38_27b": {
+      "IF": 72.65825,
+      "overall_equal_category_mean": 75.26910714285714,
+      "categories": {
+        "Reasoning": 80.02875,
+        "Coding": 75.689,
+        "Agentic Coding": 61.36366666666667,
+        "Mathematics": 86.21275,
+        "Data Analysis": 76.58566666666667,
+        "Language": 74.34566666666667,
+        "IF": 72.65825
+      }
+    },
+    "opus55": {
+      "IF": 65.73775,
+      "overall_equal_category_mean": 83.21657142857143
+    },
+    "root1_margin_vs_opus55_percentage_points": 8.17875,
+    "root1_margin_vs_qwen38_27b_percentage_points": 1.25825
+  },
+  "truth_classification": {
+    "proved": [
+      "ON_THE_EXACT_PUBLIC_2026_06_25_LIVEBENCH_TABLE_SMAUG_MINI_HAS_HIGHER_INSTRUCTION_FOLLOWING_MEAN_THAN_QWEN3_8_27B",
+      "ON_THAT_TABLE_SMAUG_MINI_EXCEEDS_OPUS55_RAW_IF_MEAN_BY_8_17875_PERCENTAGE_POINTS",
+      "LIVEBENCH_PUBLIC_MODEL_LINKS_BINDS_SMAUG_MINI_TO_ABACUSAI_SMAUG_MINI_AND_MARKS_IT_OPENWEIGHT",
+      "SMAUG_MINI_DOES_NOT_STRICTLY_DOMINATE_QWEN3_8_27B_ON_EVERY_LIVEBENCH_CATEGORY"
+    ],
+    "implication": "SMAUG_MINI_IS_A_STRONGER_ROOT1_SEMANTIC_CARRIER_CANDIDATE_THAN_BASE_QWEN3_8_27B_AT_THE_SAME_27B_MODEL_SCALE; KEEP_BASE_QWEN_AS_A_DISTINCT_CANDIDATE_FOR_CODING_AND_AGENTIC_CODING_WHERE_ITS_PUBLIC_CATEGORY_MEANS_ARE_SLIGHTLY_HIGHER",
+    "nonclaim": "THIS_DOES_NOT_PROVE_TERMINAL_OPUS55_SUPERSET_CAPABILITY; OPUS55_REMAINS_MUCH_HIGHER_ON_MULTIPLE_OTHER_LIVEBENCH_CATEGORIES"
+  },
+  "scheduling_delta": [
+    "DO_NOT_TREAT_QWEN3_8_27B_AS_THE_UNIQUE_SEMANTIC_CARRIER_FOR_ROOT1",
+    "PREFER_SMAUG_MINI_FOR_ROOT1_SEMANTIC_ACQUISITION_IF_STORAGE_AND_EXECUTION_COST_ARE_EQUAL",
+    "DO_NOT_DELETE_QWEN3_8_27B_BECAUSE_SMAUG_MINI_IS_SLIGHTLY_LOWER_ON_LIVEBENCH_CODING_AND_AGENTIC_CODING",
+    "KEEP_SCORE_ONLY_LEGACY_CHECKER_CLOSURE_SEPARATE_FROM_SEMANTIC_CAPABILITY_OWNERSHIP"
+  ],
+  "remaining_load_bearing_residuals": [
+    "CONTENT_ADDRESS_EXACT_SMAUG_MINI_WEIGHT_SHARDS_OR_AN_EQUIVALENT_RECONSTRUCTIBLE_DELTA",
+    "PROVE_DURABLE_BRAIN_CONTROLLED_COPY",
+    "PROVE_ZERO_INCREMENTAL_SPEND_EXECUTION_FIT",
+    "VERIFY_NONTERMINAL_SEMANTIC_CAPABILITY_AND_COMPOSITION",
+    "BIND_OR_REPRODUCE_TERMINAL_SCORE_ON_A_FROZEN_SUCCESSOR_ONLY_UNDER_VALID_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE",
+    "NO_CLAIM_PUBLIC_LEADERBOARD_SCORE_ALONE_EQUALS_OWNED_CAPABILITY",
+    "NO_CLAIM_SMAUG_MINI_DOMINATES_OPUS55_GLOBALLY",
+    "NO_CLAIM_THE_VENDOR_AGENTIC_BENCHMARKS_ARE_INDEPENDENT_TERMINAL_EVIDENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
