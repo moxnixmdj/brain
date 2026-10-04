@@ -5,8 +5,8 @@
   "scope": "ROOT2_ONLY_FIXED_BAR_PREDICATES",
   "authority": {
     "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-    "route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294",
-    "rebind_reason": "TARGETS_UNCHANGED__ROUTE_STATE_ONLY__CHARTOGRAPHY_HARD_ZERO_SPEND_GUARD_DISCHARGED__PROJECT_CAPACITY_REMAINS",
+    "route_inventory_git_blob_sha": "ca7d7442ba226608057e662455462e922e6af918",
+    "rebind_reason": "TARGETS_UNCHANGED__ROUTE_STATE_ONLY__GDPVAL_PROVENANCE_OSWORLD_SEMANTICS_AND_CHARTOGRAPHY_INSPECT_ADAPTER_DELTAS_BOUND__INTERNAL_MULTIMODAL_BACKEND_AND_PROJECT_CAPACITY_REMAIN",
     "gdpval_opus55_fixed_bar_provenance": {
       "activation_path": "canonical/governance/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_ACTIVATION_V1.json",
       "activation_git_blob_sha": "1c2ead2e8c5cd14e109ab9361bc4962bcc1e0c8e",
@@ -15,6 +15,15 @@
       "verification_path": "canonical/verification/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "cc3492fc112155ad78c49d3c4b40c8b63467b906",
       "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__FROZEN_1846_PRESERVED__LIVE_1867_DIAGNOSTIC__ZERO_CREDIT"
+    },
+    "chartography_brain_inspect_adapter": {
+      "activation_path": "canonical/governance/CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "5e756d2e2e564bc9a7c15838876c2dec1400a19f",
+      "verification_path": "canonical/verification/CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "841fc40bd2f54b451e01d32afd9a79a32aaafa0b",
+      "workflow_run_id": 37165446413,
+      "workflow_job_id": 111327285044,
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__INSPECT_ADAPTER_DISCHARGED__BACKEND_BINDING_OPEN__ZERO_CREDIT"
     }
   },
   "surfaces": [
@@ -95,7 +104,8 @@
         "CHARTOGRAPHY_TOOLS_GE_89"
       ],
       "target": ">=89%",
-      "route_class": "PROJECT_ACCOUNT_CAPACITY_AND_BRAIN_ADAPTER_THEN_SCORE__ZERO_SPEND_GUARD_DISCHARGED"
+      "route_class": "PROJECT_ACCOUNT_CAPACITY_INTERNAL_MULTIMODAL_BACKEND_THEN_SCORE__INSPECT_ADAPTER_AND_ZERO_SPEND_GUARD_DISCHARGED",
+      "adapter_state": "INDEPENDENT_PUBLIC_RUNNER_PASS__BACKEND_BINDING_OPEN"
     },
     {
       "surface": "OSWorld 2.1 partial",
