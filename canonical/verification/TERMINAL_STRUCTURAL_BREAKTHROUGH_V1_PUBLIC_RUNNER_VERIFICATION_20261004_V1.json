@@ -1,0 +1,33 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_STRUCTURAL_BREAKTHROUGH_V1_VERIFICATION",
+  "date":"2026-10-04",
+  "status":"INDEPENDENT_PUBLIC_PASS__ZERO_CREDIT__NO_FRESH_REALITY",
+  "brain_pr":1605,
+  "verified_blobs":{
+    "stronger_proof_compiler":"3b2f617f56df10cb1ca663effd3f58089a570d90",
+    "precommit_guard":"caf2b06071cfd121a27eafde651c401825fc5c81",
+    "minimum_action_cut":"7cb7684c928e20c58cd3de1bac9b395548f39439",
+    "precommit_theorem_candidate":"7b29ef43e041040736b8adc7b92a94f3d4cfec43"
+  },
+  "verifier":{
+    "repository":"moxnixmdj/verification-capsule-runner",
+    "pr":1680,
+    "merge_commit":"3b1c4fbda3254325dcb13c570392948d00808091",
+    "run_id":37177265151,
+    "job_id":111362381642,
+    "conclusion":"success"
+  },
+  "proved":[
+    "EXACT_FOUR_BLOB_IDENTITY",
+    "STRONGER_PROOF_COMPILER_FAIL_CLOSED",
+    "PRECOMMIT_GUARD_FAIL_CLOSED",
+    "SUBSET_OR_MISSING_IMPLICATION_PROOF_REJECTED",
+    "CANDIDATE_DRIFT_AND_BAD_REVEAL_ORDER_REJECTED",
+    "MECHANICAL_PASS_NEVER_GRANTS_ACCEPTANCE_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "private_runner":"FAILED_BEFORE_ANY_STEP__NOT_A_CODE_FAILURE",
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0},
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false
+}
