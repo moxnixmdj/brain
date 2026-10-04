@@ -1,4 +1,5 @@
 import json
+import re
 
 from canonical.runtime import livebench_legacy15_joint_candidate_generator_v1 as g
 
@@ -67,6 +68,8 @@ def test_core_mode_emits_bounded_candidates():
     assert out["mode"] == "CORE"
     assert 1 <= out["candidate_count"] <= 96
     assert all(x.startswith('"') and x.endswith('"') for x in out["candidates"])
+    assert all(x[1:-1].rstrip().endswith("Any other questions?") for x in out["candidates"])
+    assert all(len(re.findall(r"\\w+", x)) >= 100 for x in out["candidates"])
     assert all("omega" not in x.lower() for x in out["candidates"])
 
 
