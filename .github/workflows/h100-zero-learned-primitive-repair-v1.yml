@@ -1,6 +1,17 @@
 name: H100 zero-learned primitive repair V1
 
 on:
+  push:
+    branches:
+      - research/h100-proposal-measurement-current-v1
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_parametric_unary_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_parametric_unary_v1.py'
+      - 'canonical/runtime/h100_zero_learned_primitive_repair_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_primitive_repair_v1.py'
+      - '.github/workflows/h100-zero-learned-primitive-repair-v1.yml'
   pull_request:
     branches: [main]
     paths:
@@ -17,54 +28,24 @@ permissions:
   contents: read
 
 concurrency:
-  group: h100-zero-learned-primitive-repair-${{ github.event.pull_request.number || github.ref }}
+  group: h100-zero-learned-primitive-repair-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  candidate-test:
-    name: candidate-${{ matrix.id }}
+  verify-and-replay:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - id: sine-fresh
-            selector: canonical.tests.test_h100_zero_learned_parametric_unary_v1.H100ZeroLearnedParametricUnaryTests.test_unseen_frequency_linear_trend_sinusoid
-          - id: exp-fresh
-            selector: canonical.tests.test_h100_zero_learned_parametric_unary_v1.H100ZeroLearnedParametricUnaryTests.test_unseen_exp_abs_rate
-          - id: step-fresh
-            selector: canonical.tests.test_h100_zero_learned_parametric_unary_v1.H100ZeroLearnedParametricUnaryTests.test_observed_threshold_step
-          - id: cubic-negative
-            selector: canonical.tests.test_h100_zero_learned_parametric_unary_v1.H100ZeroLearnedParametricUnaryTests.test_nonmatching_cubic_fails_closed
-          - id: zero-accounting
-            selector: canonical.tests.test_h100_zero_learned_parametric_unary_v1.H100ZeroLearnedParametricUnaryTests.test_accounting_is_zero_learned
-          - id: phase2-freeze
-            selector: canonical.tests.test_h100_zero_learned_primitive_repair_v1.H100ZeroLearnedPrimitiveRepairTests.test_phase2_is_frozen_to_exact_three_phase1_failures
-          - id: unary-guard
-            selector: canonical.tests.test_h100_zero_learned_primitive_repair_v1.H100ZeroLearnedPrimitiveRepairTests.test_route_rejects_multivariable_input
-          - id: phase2-accounting
-            selector: canonical.tests.test_h100_zero_learned_primitive_repair_v1.H100ZeroLearnedPrimitiveRepairTests.test_phase2_route_is_zero_learned_by_contract
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m unittest "${{ matrix.selector }}" -v
-
-  phase2:
-    name: phase2-${{ matrix.task }}
-    needs: candidate-test
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        task: [PERIODIC_SINE, EXPONENTIAL, SIGN_STEP]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: >
-          python canonical/runtime/h100_zero_learned_primitive_repair_v1.py
-          --task "${{ matrix.task }}"
-          --require-useful
+      - name: Run fresh-parameter and contract tests
+        run: |
+          python -m unittest canonical.tests.test_h100_zero_learned_parametric_unary_v1 -v
+          python -m unittest canonical.tests.test_h100_zero_learned_primitive_repair_v1 -v
+      - name: Replay PERIODIC_SINE
+        run: python canonical/runtime/h100_zero_learned_primitive_repair_v1.py --task PERIODIC_SINE --require-useful
+      - name: Replay EXPONENTIAL
+        run: python canonical/runtime/h100_zero_learned_primitive_repair_v1.py --task EXPONENTIAL --require-useful
+      - name: Replay SIGN_STEP
+        run: python canonical/runtime/h100_zero_learned_primitive_repair_v1.py --task SIGN_STEP --require-useful
