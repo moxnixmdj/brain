@@ -42,6 +42,10 @@
     "unknown_domain_v6_reduction": {
       "path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
       "git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596"
+    },
+    "private_route_deletion_reconciliation": {
+      "path": "canonical/governance/PRIVATE_SURFACE_ROUTE_DELETION_VS_SUBSTITUTION_RECONCILIATION_V1.json",
+      "git_blob_sha": "a12e23ca249918f94175a31882c3cba57cc0d0ae"
     }
   },
   "frozen_facts": {
