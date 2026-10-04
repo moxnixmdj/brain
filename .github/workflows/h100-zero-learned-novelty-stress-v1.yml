@@ -1,0 +1,58 @@
+name: H100 zero-learned novelty stress V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_NOVELTY_STRESS_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_NOVELTY_STRESS_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_novelty_stress_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_novelty_stress_v1.py'
+      - 'canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py'
+      - 'canonical/runtime/h100_expression_tree_symbolic_regression_v1.py'
+      - '.github/workflows/h100-zero-learned-novelty-stress-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  stress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run preexposure integrity tests
+        run: python -m unittest canonical.tests.test_h100_zero_learned_novelty_stress_v1 -v
+      - name: Run frozen zero-learned novelty census
+        run: python canonical/runtime/h100_zero_learned_novelty_stress_v1.py > h100_zero_learned_novelty_stress_v1.json
+      - name: Show compact result
+        run: |
+          python - <<'PY'
+          import json
+          p='h100_zero_learned_novelty_stress_v1.json'
+          d=json.load(open(p))
+          print(json.dumps({
+            'tasks_solved':d['tasks_solved'],
+            'task_count':d['task_count'],
+            'within_operator_tasks_solved':d['within_operator_tasks_solved'],
+            'within_operator_task_count':d['within_operator_task_count'],
+            'outside_operator_tasks_solved':d['outside_operator_tasks_solved'],
+            'outside_operator_task_count':d['outside_operator_task_count'],
+            'false_exact_count':d['false_exact_count'],
+            'max_persistent_learned_bytes':d['max_persistent_learned_bytes'],
+            'external_learned_capability_calls':d['external_learned_capability_calls'],
+            'task_summary':[
+              {'task_id':x['task_id'],'solved':x['task_solved'],'classification':x['classification'],
+               'routes':[{'route_id':r['route_id'],'ok':r['useful_candidate'],'holdout_nrmse':r['holdout_nrmse']} for r in x['routes']]}
+              for x in d['tasks']
+            ]
+          },indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h100-zero-learned-novelty-stress-v1
+          path: h100_zero_learned_novelty_stress_v1.json
+          if-no-files-found: error
