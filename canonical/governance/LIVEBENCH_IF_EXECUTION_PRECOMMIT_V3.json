@@ -175,22 +175,67 @@
     "prior_failed_attempt_score_exists": false,
     "repair_design_terminal_prompt_content_used": false,
     "repair_design_candidate_response_used": false,
-    "repair_design_score_used": false
+    "repair_design_score_used": false,
+    "failed_attempts": [
+      {
+        "attempt": 1,
+        "truth_receipt": "canonical/verification/LIVEBENCH_FIRST_DIRECT_ATTEMPT_TRUTH_RECEIPT_20261004_V1.json",
+        "workflow_run_id": 37188253705,
+        "workflow_job_id": 111394777574,
+        "runner_head_sha": "d8e6edd61fb1fbeedd856aa31cc202348e52529c",
+        "terminal_population_loaded": true,
+        "candidate_inferences": 0,
+        "candidate_responses": 0,
+        "score_exists": false,
+        "predicate_result_exists": false,
+        "failure_code": "UNKNOWN_INSTRUCTION_IDS",
+        "terminal_prompt_content_used_to_design_repair": false,
+        "candidate_response_used_to_design_repair": false,
+        "score_used_to_design_repair": false
+      },
+      {
+        "attempt": 2,
+        "workflow_run_id": 37188749730,
+        "workflow_job_id": 111396262344,
+        "runner_head_sha": "2df9ebbf3b7c7b9e0b42916a576d6e1232415f7e",
+        "terminal_population_loaded": true,
+        "observed_scorer_partition": {
+          "legacy_ifeval": 200,
+          "current_ifbench": 0
+        },
+        "candidate_inferences": 0,
+        "candidate_responses": 0,
+        "score_exists": false,
+        "predicate_result_exists": false,
+        "failure_code": "SCORER_DISPATCH_PARTITION_200_0",
+        "failure_position": "BEFORE_BUILD_RUNTIME_TEMPLATE_AND_BEFORE_CANDIDATE_INFERENCE_LOOP",
+        "terminal_prompt_content_used_to_design_repair": false,
+        "candidate_response_used_to_design_repair": false,
+        "score_used_to_design_repair": false,
+        "independent_truth_receipt_required": true
+      }
+    ],
+    "prior_failed_attempt_count": 2
   },
   "remaining_before_shadow_collection": [
-    "INDEPENDENTLY_VERIFY_V3_PRECOMMIT_EXACT_COMPONENT_DIGESTS",
+    "INDEPENDENTLY_VERIFY_V3_PRECOMMIT_EXACT_COMPONENT_DIGESTS_AND_BOTH_PRIOR_ZERO_INFERENCE_EXPOSURES",
     "INDEPENDENTLY_VERIFY_LEGACY_PLUS_IFBENCH_SCORER_SUPPLEMENT_ON_PUBLIC_UBUNTU_24_04_PYTHON_3_12",
     "PASS_V3_POINT_OF_USE_ZERO_CASE_DUAL_SCORER_AND_RUNTIME_PREFLIGHT",
-    "REBIND_PREDICATE_LOCAL_DIRECT_EXECUTION_AUTHORITY_TO_V3_EXACT_BYTES",
-    "ONLY_THEN_RERUN_FROZEN_200_CASE_ROUTE_WITH_THRESHOLD_EARLY_STOP"
+    "INDEPENDENTLY_RUN_OUTPUT_ONLY_THRESHOLD_DAG_PREPASS_BEFORE_ANY_NEW_TERMINAL_CASE_READ",
+    "IF_PREPASS_IS_OPEN_REBIND_PREDICATE_LOCAL_DIRECT_EXECUTION_AUTHORITY_TO_V3_EXACT_BYTES_AND_PREPASS_RECEIPT",
+    "ONLY_THEN_RERUN_FROZEN_ROUTE_WITH_THRESHOLD_EARLY_STOP"
   ],
   "hard_rules": [
-    "CANDIDATE_COMMIT_AND_TREE_IDENTICAL_TO_V2_AND_FIRST_FAILED_ATTEMPT",
     "SCORER_REPAIR_MAY_CHANGE_ONLY_PUBLIC_UPSTREAM_DISPATCH_SCORER_CLOSURE_AND_REQUIRED_ZERO_COST_RUNTIME_DEPENDENCIES",
     "NO_REPAIR_LOGIC_DERIVED_FROM_TERMINAL_PROMPT_CONTENT_CANDIDATE_RESPONSES_OR_SCORE",
     "NO_CASE_SELECTION_REPLACEMENT_OR_THRESHOLD_CHANGE",
     "NO_DIRECT_EXECUTION_UNDER_V2_AUTHORITY_AFTER_SCORER_CLOSURE_DEFECT_DISCOVERED",
     "V3_REQUIRES_NEW_INDEPENDENT_SCORER_ENVIRONMENT_PREFLIGHT_AND_NEW_EXACT_AUTHORITY_REBIND",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "BOTH_PRIOR_FAILED_ATTEMPTS_MUST_BE_ACCOUNTED_AND_MUST_HAVE_ZERO_CANDIDATE_INFERENCES_ZERO_CANDIDATE_RESPONSES_AND_NO_SCORE",
+    "SECOND_ATTEMPT_AGGREGATE_200_LEGACY_0_IFBENCH_PARTITION_IS_EVALUATOR_PROTOCOL_METADATA_ONLY_AND_MUST_NOT_CHANGE_CANDIDATE_CASE_SELECTION_OR_THRESHOLD",
+    "OUTPUT_ONLY_THRESHOLD_DAG_PREPASS_MUST_EXECUTE_AND_BE_RECEIPTED_BEFORE_ANY_NEW_TERMINAL_CASE_READ",
+    "V3_AUTHORITY_REBIND_MUST_BIND_THE_INDEPENDENT_PREPASS_RECEIPT_AND_CURRENT_MAIN_STATE",
     "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
   ],
   "accounting": {
@@ -211,6 +256,37 @@
     "failure_receipt": "canonical/verification/LIVEBENCH_FIRST_DIRECT_ATTEMPT_TRUTH_RECEIPT_20261004_V1.json",
     "supplement_candidate": "canonical/governance/LIVEBENCH_LEGACY_SCORER_SUPPLEMENT_V1.json",
     "supplement_candidate_git_blob_sha": "13105f751550ea89646bb82bd4c1d8325afe2840",
-    "rule": "REPAIR_DERIVED_ONLY_FROM_PINNED_PUBLIC_UPSTREAM_EVALUATOR_CONTROL_FLOW__NO_TERMINAL_PROMPT_RESPONSE_OR_SCORE_USED"
+    "rule": "REPAIR_DERIVED_ONLY_FROM_PINNED_PUBLIC_UPSTREAM_EVALUATOR_CONTROL_FLOW__NO_TERMINAL_PROMPT_RESPONSE_OR_SCORE_USED",
+    "second_failed_attempt": {
+      "workflow_run_id": 37188749730,
+      "workflow_job_id": 111396262344,
+      "runner_head_sha": "2df9ebbf3b7c7b9e0b42916a576d6e1232415f7e",
+      "observed_partition": "200_LEGACY_IFEVAL__0_CURRENT_IFBENCH",
+      "candidate_inferences": 0,
+      "score_exists": false,
+      "consequence": "REMOVES_INVENTED_NONEMPTY_IFBENCH_PARTITION_REQUIREMENT_ONLY__DOES_NOT_CHANGE_OFFICIAL_DISPATCH_RULE"
+    }
+  },
+  "output_only_threshold_prepass": {
+    "required_before_any_terminal_case_read": true,
+    "activation_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "7ea4dd4edb59c8526bd3993e02f4a8fb53c65085",
+    "runtime_path": "canonical/runtime/threshold_proof_dag_v1.py",
+    "runtime_git_blob_sha": "7a0c715d931dbba05bc9e5ae344e1ead787ea5b8",
+    "target": "LIVEBENCH_IF_GE_65_7",
+    "conservative_zero_reality_input": {
+      "metric_kind": "ADDITIVE_THRESHOLD",
+      "total_mass": "200",
+      "threshold_mass": "131.4",
+      "current_lower_mass": "0",
+      "current_upper_mass": "200",
+      "allow_fresh_reality": false,
+      "actions": []
+    },
+    "expected_zero_reality_verdict": "OPEN",
+    "interpretation": "ZERO_REALITY_PREPASS_CANNOT_FORCE_PASS_OR_FAIL_FROM_CURRENT_ADMITTED_MASS_BOUNDS__IF_INDEPENDENTLY_RECOMPUTED_OPEN_THEN_ONLY_THE_FROZEN_IRREDUCIBLE_ROUTE_MAY_PROCEED_UNDER_NEW_V3_AUTHORITY",
+    "independent_pre_read_receipt_required": true,
+    "grants_execution_authority": false,
+    "grants_acceptance_credit": false
   }
 }
