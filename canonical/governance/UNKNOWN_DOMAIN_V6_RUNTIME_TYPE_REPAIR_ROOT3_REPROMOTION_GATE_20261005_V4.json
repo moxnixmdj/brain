@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_RUNTIME_TYPE_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V4",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__SUPERSEDES_FALSIFIED_V3__EXACT_NON_SPOOFABLE_BEACON_AND_SECRET_TYPE_GATES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "supersedes": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_RUNTIME_TYPE_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V3.json",
+    "falsifier_path": "canonical/verification/UNKNOWN_DOMAIN_V6_RUNTIME_TYPE_GATE_V3_BINDING_FALSIFIER_20261005_V1.json",
+    "reason": "V3_REQUIRED_ACTUAL_RUNTIME_TYPE_GATE_BUT_BOUND_GENERATOR_BLOB_STILL_USED_SPOOFABLE_ISINSTANCE_ON_BEACON"
+  },
+  "freeze_timing": {
+    "independent_v4_verdict_observed": false,
+    "verifier_pr_created": true,
+    "verifier_pr": 2212,
+    "consequence": "ALL_REQUIRED_PROPERTIES_AND_EXACT_SUBJECT_HASHES_FROZEN_BEFORE_INDEPENDENT_V4_OUTCOME"
+  },
+  "repaired_candidate": {
+    "source_branch": "breakthrough/unknown-domain-v6-subclass-revocation-20261005",
+    "observed_branch_head": "d83331f4d82e5bbd43a9a2590218eaccb702eba3",
+    "exact_subject_blobs": {
+      "canonical/runtime/unknown_domain_direct_candidate_v1.py": "a2a77269a8175ce315b466035049da0f761b8734",
+      "canonical/runtime/unknown_domain_direct_candidate_v2.py": "4470716f95a559a700e461262df909ae19a41651",
+      "canonical/runtime/unknown_domain_direct_candidate_v3.py": "8df7f13455b710623806a8219174b397a2c3c442",
+      "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+      "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+      "canonical/runtime/unknown_domain_direct_hidden_generator_v4.py": "e52858b9fef2d795f72b45cd3ae82ad04344aa91",
+      "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py": "e92dfde05672a249f2dcb71c7ce87fc783142816",
+      "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+      "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+      "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py": "70bbb5a09b1225b60915cc74bf81593516e26f16",
+      "canonical/tests/test_unknown_domain_direct_v5.py": "e2ade4b713bb8103ae577de35a35b1caa03bc5a9"
+    },
+    "load_bearing_source_fact": "_beacon_gate now rejects unless issubclass(type(beacon), str), matching the already non-spoofable secret-side issubclass(type(secret), bytes/str) gate.",
+    "repair_properties": [
+      "BEACON_GATE_USES_ISSUBCLASS_OF_ACTUAL_RUNTIME_TYPE_AGAINST_BUILTIN_STR",
+      "SECRET_GATE_USES_ISSUBCLASS_OF_ACTUAL_RUNTIME_TYPE_AGAINST_BUILTIN_BYTES_OR_STR",
+      "OBJECT_LEVEL___CLASS___PROXIES_CANNOT_ENTER_BUILTIN_STR_OR_BYTES_DESCRIPTORS",
+      "GENUINE_STR_AND_BYTES_SUBCLASSES_REMAIN_ADMITTED",
+      "BASE_STR_STRIP_AND_ENCODE_DESCRIPTORS_BYPASS_INSTANCE_OVERRIDES",
+      "BASE_BYTES_GETITEM_FULL_SLICE_BYPASSES_INSTANCE_BYTES_BUFFER_LEN_GETITEM_ITER_OVERRIDES_AND_RETURNS_PLAIN_BYTES",
+      "SURROGATEPASS_CANONICALIZATION_REMAINS_TOTAL_OVER_GENUINE_STR_HIERARCHY",
+      "V4_STRUCTURAL_IDENTIFIER_COLLISION_REPAIR_AND_V3_ADD2_FLOAT_ORDER_REPAIR_REMAIN_HASH_BOUND"
+    ]
+  },
+  "independent_verifier_contract": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2212,
+    "branch": "verify/unknown-domain-v6-runtime-type-repair-v4",
+    "head_sha": "98316e45c55d112e8a0530cb29de6e6177fb9894",
+    "workflow_name": "Verify Unknown-Domain V6 runtime-type repair V4",
+    "required_python_versions": [
+      "3.12.10",
+      "3.13"
+    ],
+    "required_properties": [
+      "ALL_ELEVEN_SUBJECT_BLOBS_MATCH_EXACTLY",
+      "FAKE_STR___CLASS___SPOOF_REPRODUCES_ISINSTANCE_TRUE_AND_ACTUAL_TYPE_GATE_REJECTS",
+      "FAKE_BYTES___CLASS___SPOOF_REPRODUCES_ISINSTANCE_TRUE_AND_ACTUAL_TYPE_GATE_REJECTS",
+      "HOSTILE_GENUINE_STR_SUBCLASS_GETATTRIBUTE_STRIP_ENCODE_LEN_HOOKS_DO_NOT_BREAK_CANONICALIZATION",
+      "HOSTILE_GENUINE_BYTES_SUBCLASS_BYTES_BUFFER_LEN_GETITEM_ITER_HOOKS_DO_NOT_BREAK_MATERIALIZATION",
+      "BASE_BYTES_FULL_SLICE_RETURNS_EXACT_PLAIN_BYTES",
+      "ALL_2048_SURROGATE_CODEPOINTS_RECHECKED",
+      "FORCED_TOTAL_TOKEN_COLLISION_RECHECKED",
+      "EXACT_27_CASE_HARNESS_AND_SCORER_PASS_FOR_HOSTILE_STR_AND_BYTES_SECRET_PATHS",
+      "UNIVERSAL_PROOF_EXECUTES_AGAINST_EXACT_REPAIRED_HASHES",
+      "ZERO_PRODUCTION_OR_TERMINAL_CASES_CONSUMED",
+      "ZERO_SELF_PROMOTION_CREDIT"
+    ],
+    "required_conclusion": "success_on_both_python_versions"
+  },
+  "promotion_predicate": {
+    "all_required": [
+      "V3_BINDING_FALSIFIER_REMAINS_CURRENT",
+      "ALL_V4_EXACT_SUBJECT_BLOBS_MATCH",
+      "INDEPENDENT_PR2212_WORKFLOW_SUCCEEDS_ON_BOTH_REQUIRED_PYTHON_VERSIONS",
+      "RECEIPT_BINDS_THE_EXACT_V4_SUBJECT_HASHES",
+      "EVERY_FAKE_PROXY_AND_GENUINE_SUBCLASS_ATTACK_PASSES",
+      "UNIVERSAL_PROOF_STATUS_MATCHES",
+      "FROZEN_UNKNOWN_DOMAIN_PROTOCOL_AND_EVALUATOR_SEMANTICS_UNCHANGED",
+      "ZERO_PRODUCTION_OR_TERMINAL_CASES_CONSUMED"
+    ],
+    "on_all_true": {
+      "predicate_state": "PROVED",
+      "proved_predicate_count_transition": "12_TO_13",
+      "unresolved_predicate_count_transition": "26_TO_25",
+      "root3_only_predicate_removed": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0,
+      "family_remains_open_on": "MYSTERYMECHANISM_GE_49_55"
+    },
+    "on_any_false_missing_or_hash_mismatch": {
+      "predicate_state": "EXTERNAL_BLOCKED",
+      "proved_predicate_count_delta": 0,
+      "unresolved_predicate_count_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
+    }
+  },
+  "hard_rules": [
+    "V1_V2_V3_MUST_NOT_AUTHORIZE_REPROMOTION",
+    "NO_REPROMOTION_FROM_LOCAL_TESTS_OR_REPAIR_BRANCH_ALONE",
+    "NO_POST_OUTCOME_RELAXATION_OF_V4",
+    "ANY_NEW_COUNTEREXAMPLE_FAILS_CLOSED",
+    "NO_MYSTERYMECHANISM_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
