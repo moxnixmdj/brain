@@ -72,3 +72,86 @@ def test_v5_large_nonproduction_sweep():
         secret=hashlib.sha256(f"v5-secret-{k}".encode()).digest()
         beacon="V5-VERIFY-"+hashlib.sha256(f"beacon-{k}".encode()).hexdigest()[:24]
         _run(g5._generate(beacon=beacon,evaluator_secret=secret,namespace=f"V5T{k}"))
+
+
+class _AdversarialStr(str):
+    def __getattribute__(self,name):
+        if name in {"strip","encode"}:
+            raise RuntimeError("OVERRIDDEN_GETATTRIBUTE_MUST_NOT_RUN")
+        return str.__getattribute__(self,name)
+
+    def strip(self,*args,**kwargs):
+        raise RuntimeError("OVERRIDDEN_STRIP_MUST_NOT_RUN")
+
+    def encode(self,*args,**kwargs):
+        raise RuntimeError("OVERRIDDEN_ENCODE_MUST_NOT_RUN")
+
+    def __len__(self):
+        raise RuntimeError("OVERRIDDEN_LEN_MUST_NOT_RUN")
+
+
+class _AdversarialBytes(bytes):
+    def __bytes__(self):
+        raise RuntimeError("OVERRIDDEN_BYTES_MUST_NOT_RUN")
+
+    def __buffer__(self,*args,**kwargs):
+        raise RuntimeError("OVERRIDDEN_BUFFER_MUST_NOT_RUN")
+
+    def __len__(self):
+        raise RuntimeError("OVERRIDDEN_LEN_MUST_NOT_RUN")
+
+    def __getitem__(self,*args,**kwargs):
+        raise RuntimeError("OVERRIDDEN_GETITEM_MUST_NOT_RUN")
+
+    def __iter__(self):
+        raise RuntimeError("OVERRIDDEN_ITER_MUST_NOT_RUN")
+
+
+class _FakeStrViaClass:
+    @property
+    def __class__(self):
+        return str
+
+
+class _FakeBytesViaClass:
+    @property
+    def __class__(self):
+        return bytes
+
+
+def test_v5_totality_includes_genuine_str_and_bytes_subclasses():
+    beacon=_AdversarialStr("A"*16+"\ud800")
+    secret_text=_AdversarialStr("S"*31+"\udfff")
+    packet=g5._generate(
+        beacon=beacon,
+        evaluator_secret=secret_text,
+        namespace="V5SUBCLASS",
+    )
+    assert packet["case_count"]==27
+    _run(packet)
+
+    secret_bytes=_AdversarialBytes(b"B"*32)
+    assert g5._secret_bytes_total(secret_bytes)==b"B"*32
+
+
+def test_v5_rejects_class_spoof_proxies_before_builtin_descriptors():
+    fake_str=_FakeStrViaClass()
+    fake_bytes=_FakeBytesViaClass()
+    assert isinstance(fake_str,str)
+    assert isinstance(fake_bytes,bytes)
+    assert g5._genuine_runtime_subclass(fake_str,str) is False
+    assert g5._genuine_runtime_subclass(fake_bytes,bytes) is False
+
+    try:
+        g5._canonical_beacon(fake_str)
+    except g1.UnknownDomainGeneratorError as exc:
+        assert str(exc)=="POST_FREEZE_BEACON_INVALID"
+    else:
+        raise AssertionError("FAKE_STR_CLASS_SPOOF_WAS_ACCEPTED")
+
+    try:
+        g5._secret_bytes_total(fake_bytes)
+    except g1.UnknownDomainGeneratorError as exc:
+        assert str(exc)=="EVALUATOR_SECRET_INVALID"
+    else:
+        raise AssertionError("FAKE_BYTES_CLASS_SPOOF_WAS_ACCEPTED")
