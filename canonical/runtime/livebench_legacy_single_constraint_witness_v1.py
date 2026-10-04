@@ -3,7 +3,7 @@
 
 Scope:
 - consumes only constraints recovered from visible prompt text by
-  livebench_legacy_visible_constraint_compiler_v2;
+  livebench_legacy_visible_constraint_compiler_v4;
 - supplies a constructive witness for each of the 25 registered legacy IFEval
   checker families;
 - does not read instruction_id_list, hidden kwargs, question ids, terminal
@@ -20,7 +20,7 @@ from __future__ import annotations
 import re
 from typing import Any
 
-from canonical.runtime import livebench_legacy_visible_constraint_compiler_v2 as compiler
+from canonical.runtime import livebench_legacy_visible_constraint_compiler_v4 as compiler
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY_SINGLE_CONSTRAINT_WITNESS_V1"
 FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
