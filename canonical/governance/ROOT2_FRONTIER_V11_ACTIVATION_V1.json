@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V11_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__INDEPENDENT_FRONTIER_PASS__CURRENT_AUTHORITY_REBIND_PENDING__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V11.json",
+    "git_blob_sha": "6857750dea3a0af48a5acc545b6f66b619d4335b"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_FRONTIER_V11_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "89884cc421eb8c7aff3e2bf9a17666478a31db94",
+    "verifier_pr": 1664,
+    "workflow_run_id": 37174641101,
+    "workflow_job_id": 111354617503,
+    "conclusion": "success"
+  },
+  "effects": [
+    "SUPERSEDE_ROOT2_V10_FOR_SCHEDULING_ONLY_AFTER_CURRENT_AUTHORITY_AND_META_SCHEDULER_REBIND",
+    "DELETE_REPEAT_GENERIC_FINANCE_INDEX_INNER_TRANSFORM_SEARCH",
+    "DELETE_REPEAT_GENERIC_OSWORLD_TASK_WEB_GITLAB_REVISION_DISCOVERY",
+    "PRESERVE_ALL_ACCEPTANCE_COUNTS",
+    "PRESERVE_FRESH_REALITY_BLOCK"
+  ],
+  "authority": {
+    "scheduling_authority": true,
+    "effective_scheduling_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_activation_verification_required": true
+}
