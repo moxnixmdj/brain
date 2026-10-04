@@ -76,3 +76,33 @@ def test_unknown_or_conflicting_ids_fail_closed_before_checker_execution():
     ]
     with pytest.raises(p.ExactPostvalidationError, match="CONFLICT_GRAPH"):
         p.evaluate_with_registry("", conflict, {})
+
+
+def test_missing_visible_slot_fails_closed_before_checker_defaults():
+    row = {
+        "instruction_id": "startend:end_checker",
+        "slots": {},
+        "parameter_complete": True,
+    }
+    with pytest.raises(p.ExactPostvalidationError, match="VISIBLE_SLOT_SHAPE_MISMATCH"):
+        p.evaluate_with_registry("", [row], {"startend:end_checker": ContainsInstruction})
+
+
+def test_extra_visible_slot_fails_closed():
+    row = {
+        "instruction_id": "detectable_format:title",
+        "slots": {"invented": 1},
+        "parameter_complete": True,
+    }
+    with pytest.raises(p.ExactPostvalidationError, match="VISIBLE_SLOT_SHAPE_MISMATCH"):
+        p.evaluate_with_registry("", [row], {"detectable_format:title": ContainsInstruction})
+
+
+def test_none_visible_slot_fails_closed():
+    row = {
+        "instruction_id": "startend:end_checker",
+        "slots": {"end_phrase": None},
+        "parameter_complete": True,
+    }
+    with pytest.raises(p.ExactPostvalidationError, match="VISIBLE_SLOT_VALUE_NONE"):
+        p.evaluate_with_registry("", [row], {"startend:end_checker": ContainsInstruction})
