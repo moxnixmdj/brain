@@ -45,11 +45,17 @@ def verify()->dict:
     assert p["inherited_v1_binding"]["preserve_v1_immutability"] is True
     assert v1["plan"]["git_blob_sha"]=="3c203a1c2060b333a2e13417ab3a3a2880c94f2c"
 
-    assert root["current_acceptance"]==p["terminal_state"]
+    for key in ("accepted_families","open_families","proved_atomic","unresolved_atomic","total_families","total_atomic","terminal"):
+        assert root["current_acceptance"][key]==p["terminal_state"][key]
     assert root["current_acceptance"]["accepted_families"]==5
     assert root["current_acceptance"]["proved_atomic"]==12
     assert root["current_acceptance"]["unresolved_atomic"]==26
     assert root["current_acceptance"]["terminal"] is False
+    partition=root["current_residual_root_partition"]
+    assert p["terminal_state"]["root1_positive_gaps"]==partition["root1_positive_gap_count"]
+    assert p["terminal_state"]["root2_only"]==partition["root2_only_count"]
+    assert p["terminal_state"]["root3_only"]==partition["root3_only_count"]
+    assert p["terminal_state"]["root2_and_root3"]==partition["root2_and_root3_count"]
     assert cur["atomic_acceptance_frontier"]["proved"]==12
     assert cur["atomic_acceptance_frontier"]["unresolved"]==26
     assert cur["ownership_state"]["verified_owned_families"]==5
