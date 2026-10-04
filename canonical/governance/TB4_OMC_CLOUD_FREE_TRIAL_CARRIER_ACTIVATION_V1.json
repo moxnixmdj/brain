@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_OMC_CLOUD_FREE_TRIAL_CARRIER_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_DOCUMENTARY_CANDIDATE__INDEPENDENT_PUBLIC_RUNNER_PASS__RUNTIME_PREFLIGHT_OPEN__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "candidate": {
+    "path": "canonical/governance/TB4_OMC_CLOUD_FREE_TRIAL_CARRIER_CANDIDATE_20261004_V1.json",
+    "git_blob_sha": "b26e3c3cb46cca224aeef9de3d965f4507f72c5d"
+  },
+  "verification": {
+    "path": "canonical/verification/TB4_OMC_CLOUD_FREE_TRIAL_CARRIER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1631,
+    "verifier_merge_commit": "a95d4d0fef4bf719a45445075e6f3f50b7ccd280",
+    "workflow_run_id": 37171937929,
+    "workflow_job_id": 111346488525,
+    "conclusion": "success"
+  },
+  "effect": [
+    "REOPEN_TB4_ZERO_COST_CARRIER_FRONTIER_WITH_ONE_INDEPENDENTLY_VERIFIED_DOCUMENTARY_CANDIDATE",
+    "PRESERVE_RUNTIME_PREFLIGHT_AS_REQUIRED",
+    "PRESERVE_USABLE_MEMORY_OBSERVATION_AS_REQUIRED",
+    "PRESERVE_PROTOCOL_EQUIVALENCE_AS_REQUIRED",
+    "PRESERVE_ATTAINABILITY_RECOMPILE_BEFORE_ANY_CASE_EXECUTION"
+  ],
+  "remaining_preflight": [
+    "MATERIAL_OMC_TRIAL_ACCOUNT_ACCESS",
+    "EXACT_8A_16GB_OR_STRONGER_TRIAL_SHAPE",
+    "NPROC_GE_8",
+    "USABLE_MEMORY_MB_GE_16384",
+    "FREE_STORAGE_MB_GE_51200",
+    "DOCKER_RUN_LOCAL_PASS",
+    "DOCKER_COMPOSE_LOCAL_PASS",
+    "NO_PAYMENT_METHOD_AND_NO_PAID_OVERAGE",
+    "HARBOR_ZERO_CASE_RESOURCE_PREFLIGHT",
+    "PROTOCOL_EQUIVALENCE_INDEPENDENT_PASS"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
