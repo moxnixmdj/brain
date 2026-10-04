@@ -6,6 +6,9 @@ def transfer_hidden():
     return {
       "leaf_id":TRANSFER,"case_id":"T-X","gold_terminal_consequence":"GO",
       "domain_a_earned_receipt_ids":["R1"],"full_rediscovery_probe_floor":3,
+      "latent_primitive_fingerprint":"prim:abc",
+      "domain_a_receipt_primitive_bindings":{"R1":"prim:abc"},
+      "surface_label_permutation_verified":True,"domain_vocabularies_disjoint":True,
       "transfer_relevant_feature_ids":["F1","F2"],"distractor_feature_ids":["D1","D2"],
     }
 
