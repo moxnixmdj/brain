@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_ROUTE_IDENTITY_REBIND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "REESTABLISH_FAIL_CLOSED_INPUT_IDENTITY_FOR_THE_ALREADY_VERIFIED_ROOT2_PROOF_HYPERGRAPH_AFTER_ROUTE_ONLY_COMPRESSION_WITHOUT_CHANGING_TARGETS_OR_OPTIMIZER_LOGIC",
+  "prior_independent_verification": {
+    "path": "canonical/verification/ROOT2_PROOF_HYPERGRAPH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "24f6e3949c39daf92dfb065cfe687690f984ce4f",
+    "runtime_git_blob_sha": "dd2094c4845239a0be4cfd34af4d8f3a7e411060",
+    "tests_git_blob_sha": "235db2f21fe4b0f70096be69ae28af87a5ce31dd",
+    "governance_git_blob_sha": "2793081a62a99cb69c9ae3e37323205e756cbebb"
+  },
+  "current_inputs": {
+    "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+    "route_inventory_git_blob_sha": "71495ebcf456119f4df694203631aeeb3048c81a",
+    "comparator_vector_path": "canonical/governance/ROOT2_FROZEN_COMPARATOR_VECTOR_V1.json",
+    "comparator_vector_git_blob_sha": "350efbbce8e47b39fec52329e5b0770f9439fadd"
+  },
+  "invariants": {
+    "root2_fixed_bar_predicates": 15,
+    "unique_surfaces": 14,
+    "comparator_targets_changed": false,
+    "predicate_set_changed": false,
+    "surface_set_changed": false,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "fresh_reality_authority": false
+  },
+  "current_route_delta": [
+    "AUTOMATIONBENCH_PUBLIC600_SEARCH_SATURATED",
+    "HLE_BRAIN_TOOL_ADAPTER_DISCHARGED",
+    "CHARTOGRAPHY_PROJECT_ACCOUNT_CAPACITY_RESIDUAL",
+    "OSWORLD_SOURCE_DISCOVERY_DISCHARGED",
+    "OSWORLD_FALSE_GITLAB_EXACT_REVISION_REQUIREMENT_DELETED"
+  ],
+  "allowed_effect": "REACTIVATE_EXISTING_VERIFIED_HYPERGRAPH_ON_CURRENT_FIXED_BAR_ROUTE_STATE_ONLY_AFTER_INDEPENDENT_EXACT_INPUT_REBIND_PASS",
+  "hard_rules": [
+    "NO_ACCEPTANCE_CREDIT_FROM_REBIND",
+    "NO_OPTIMIZER_LOGIC_CHANGE",
+    "NO_TARGET_REBASE",
+    "NO_NEW_BENCHMARK_CASES",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "FAIL_CLOSED_ON_ROUTE_OR_VECTOR_BLOB_DRIFT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
