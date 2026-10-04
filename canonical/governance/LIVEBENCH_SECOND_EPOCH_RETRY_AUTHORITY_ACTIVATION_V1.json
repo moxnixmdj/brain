@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SECOND_EPOCH_RETRY_AUTHORITY_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_IFF_EXACT_INDEPENDENT_VERIFICATION_RECEIPT_PRESENT_AND_PASS__ONE_RETRY_EPOCH_ONLY__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "candidate": {
+    "path": "canonical/governance/LIVEBENCH_SECOND_EPOCH_RETRY_AUTHORITY_CANDIDATE_V1.json",
+    "git_blob_sha": "929277c01d2772eb13f5f5d8264a4f869dd018b2"
+  },
+  "required_verification_receipt": {
+    "path": "canonical/verification/LIVEBENCH_SECOND_EPOCH_RETRY_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "must_bind_this_activation_blob": true,
+    "required_fields": {
+      "independent_public_runner_pass": true,
+      "retry_epoch_eligible": true,
+      "failed_attempt_pre_candidate_inference": true,
+      "scorer_repair_independent_zero_case_pass": true,
+      "corrected_driver_exact_binding_pass": true
+    }
+  },
+  "authority": {
+    "active": true,
+    "execution": true,
+    "predicate_local_fresh_reality": true,
+    "authorized_predicates": [
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "execution_epochs_authorized": 1,
+    "candidate_execution_epochs_authorized": 1,
+    "global_fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "exact_execution_binding": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "corrected_driver_git_blob_sha": "e9db4e7553397035aed67186f0065e4a79fa7732",
+    "candidate_commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "candidate_tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "population_count": 200,
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "threshold_percent": 65.7,
+    "case_order": "QUESTION_ID_ASCENDING_FIXED_PREEXECUTION",
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "post_result_tuning": false,
+    "paid_external_model_or_api_allowed": false,
+    "larger_or_paid_runner_allowed": false
+  },
+  "one_epoch_consumption_rule": "AUTHORITY_IS_CONSUMED_WHEN_FIRST_BRAIN_CANDIDATE_INFERENCE_BEGINS_IN_THE_NEW_EPOCH__ANY_LATER_RETRY_REQUIRES_NEW_SEPARATE_INDEPENDENT_AUTHORITY",
+  "hard_rules": [
+    "PRIOR_POPULATION_EXPOSURE_REMAINS_RECORDED",
+    "NO_RETRY_AUTHORITY_IF_PRIOR_ATTEMPT_EXECUTED_ANY_BRAIN_CANDIDATE_INFERENCE",
+    "NO_RETRY_AUTHORITY_IF_SCORER_REPAIR_USED_TERMINAL_PROMPT_CONTENT_CANDIDATE_RESPONSES_OR_SCORE",
+    "NO_CANDIDATE_POPULATION_THRESHOLD_ORDER_OR_POLICY_MUTATION",
+    "ONE_NEW_EXECUTION_EPOCH_ONLY",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_PROMOTION_OR_ACCEPTANCE_CREDIT_FROM_ACTIVATION_OR_EXECUTION_ALONE"
+  ]
+}
