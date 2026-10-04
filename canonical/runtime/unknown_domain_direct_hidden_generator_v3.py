@@ -57,7 +57,7 @@ def _surface_ids_total(
         token = v1._token(
             secret, beacon, "feature-v3", case_index, domain, kind, label
         )
-        ids.append(f"{domain.lower()}_u{slot}_{token}")
+        ids.append(f"{domain.lower()}_c{case_index}_u{slot}_{token}")
 
     if len(ids) != len(set(ids)):
         raise AssertionError("STRUCTURAL_FEATURE_ID_TOTALITY_BROKEN")
