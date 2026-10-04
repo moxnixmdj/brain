@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_NONSELF_REFERENTIAL_VERIFICATION_FRONTIER_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__LEASE_BYTES_FROZEN__EXTERNAL_RECEIPT_VERIFICATION_IN_FLIGHT__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "root_cause_breakthrough": {
+    "defect": "WRITING_VERIFICATION_SUCCESS_BACK_INTO_THE_EXECUTION_LEASE_MUTATES_THE_EXACT_BYTES_AND_INVALIDATES_THE_RECEIPT_THAT_WAS_SUPPOSED_TO_VERIFY_THOSE_BYTES",
+    "solution": "FREEZE_THE_EXECUTION_LEASE_BYTES_AND_STORE_THE_INDEPENDENT_VERIFICATION_RECEIPT_OUTSIDE_THE_LEASE",
+    "termination_property": "THE_VERIFICATION_RECEIPT_CAN_NOW_CERTIFY_AN_IMMUTABLE_SUBJECT_WITHOUT_CHANGING_ITS_SHA256",
+    "self_reference_forbidden": true
+  },
+  "frozen_subject": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EXECUTION_LEASE_V1.json",
+    "git_blob_sha": "049997c1d8ebdb4c07017a2864055109f7238876",
+    "lease_declares_independent_verification_required": true,
+    "receipt_location_rule": "EXTERNAL_TO_LEASE"
+  },
+  "independent_verification": {
+    "pull_request": 2048,
+    "head_sha": "da77d97a4bcbabbf6502e153dea8c49c59118f11",
+    "execution_lease_workflow_run_id": 37240820579,
+    "production_launcher_workflow_run_id": 37240821183,
+    "state_at_record": "QUEUED",
+    "production_cases_generated": 0,
+    "production_cases_consumed": 0
+  },
+  "stale_route_quarantine": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "commit": "ef5aa2d630dad4d5739a26a954ce0b515017be6c",
+    "effect": "OLD_RAW_LEASE_RETRY_WORKFLOW_QUARANTINED",
+    "old_lease_digest": "76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "old_route_must_not_execute": true
+  },
+  "next_action": {
+    "if_both_relevant_checks_pass": "MERGE_PR_2048_WITHOUT_MUTATING_THE_LEASE__TAKE_THE_SHA256_EMITTED_BY_THE_VERIFIER_AS_THE_ONLY_NEW_LAUNCH_AND_CLAIM_KEY__CREATE_EXACTLY_ONE_NEW_LAUNCH_BRANCH_FROM_THE_VERIFIED_MERGED_MAIN",
+    "if_any_check_fails": "REPAIR_ONLY_THE_FAILED_VERIFIER_OR_LOAD_BEARING_DEFECT__DO_NOT_LAUNCH_PRODUCTION",
+    "forbidden": [
+      "DO_NOT_WRITE_VERIFICATION_SUCCESS_INTO_THE_LEASE",
+      "DO_NOT_REUSE_THE_STALE_76E8040D_LEASE_DIGEST",
+      "DO_NOT_COUNT_QUEUED_CHECKS_AS_PASS",
+      "DO_NOT_CREATE_A_PRODUCTION_CLAIM_BEFORE_THE_EXTERNAL_RECEIPT_PASSES"
+    ]
+  },
+  "authority": {
+    "execution_authority": false,
+    "fresh_reality": false,
+    "acceptance_credit": false,
+    "promotion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
