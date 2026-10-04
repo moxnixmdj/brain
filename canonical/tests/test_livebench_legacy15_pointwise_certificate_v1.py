@@ -85,7 +85,7 @@ def test_sentence_end_unsat_makes_one_of_two_pointwise_optimal():
     result = certify(contracts, [False, True])
     assert result["pointwise_optimal"] is True
     assert result["required_next_cardinality_subset_count"] == 1
-    assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in result["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
+    assert "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE" in result["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
 
 
 def test_generalized_zero_sentence_unsat_makes_partial_candidate_optimal():
@@ -102,7 +102,6 @@ def test_generalized_zero_sentence_unsat_makes_partial_candidate_optimal():
     result = certify(contracts, [True, False])
     assert result["pointwise_optimal"] is True
     assert result["required_next_cardinality_subset_count"] == 1
-    assert any(
-        x.startswith("SENTENCE_LT_ONE_REQUIRES_EMPTY_BUT_CHECKER_REQUIRES_OUTPUT:")
-        for x in result["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
-    )
+    assert result["semantic_unsat_evidence"][0]["hard_unsat_reasons"] == [
+        "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
+    ]
