@@ -5594,6 +5594,14 @@ def _run_goal_unstamped(step, mission):
     direct=_run_model_independent_goal(step, mission, goal)
     if direct is not None:
         return direct
+    # Bounded pure-response route. This runs only after explicit controller and
+    # capability-planned routes decline the goal, and before package/external
+    # capability acquisition. Out-of-grammar instructions abstain.
+    literal_response=_load_runtime_helper(
+        "general_literal_response_v1"
+    ).run_literal_response_instruction(goal)
+    if literal_response is not None:
+        return literal_response
     # No hand-authored capability graph or action plan: attempt a bounded,
     # deterministic compilation against capabilities already verified in Brain.
     # Unknown/ambiguous goals fail closed rather than silently becoming guesses.
