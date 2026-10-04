@@ -6,7 +6,7 @@
   "purpose": "Discharge the only runtime-sensitive caveat preventing exact union25 semantic-kernel reduction from 64 to 41 kernels.",
   "frozen_subjects": {
     "semantic_kernel_reduction_path": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
-    "semantic_kernel_reduction_blob": "PLACEHOLDER_BIND_AT_VERIFY_TIME",
+    "semantic_kernel_reduction_blob": "c08812986e1224bcbb910dfff3bc112f57453996",
     "legacy25_single_witness_path": "canonical/runtime/livebench_legacy25_single_contract_witness_v1.py",
     "legacy25_single_witness_blob": "e927c05071bb4342b41fb9d5be07cc32ea82e820",
     "legacy25_compiler_blob": "20421dfa016584b202b194afd3f82c9bd46a1f23"
