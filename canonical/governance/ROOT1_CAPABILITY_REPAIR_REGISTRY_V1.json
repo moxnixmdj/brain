@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_CAPABILITY_REPAIR_REGISTRY_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SCHEDULING_ONLY__POSITIVE_ROOT1_CAPABILITY_REPAIR_FIRST__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Bind every positively established operative Root1 gap to the smallest genuine capability-repair frontier before benchmark-score-only, comparator, or scope-proof work can be treated as discharging that gap.",
+  "authority": {
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_git_blob_sha": "c3d1e25e2268cce90df545a93f107aa24fed8f8b",
+    "current_positive_root1_gap_count": 1
+  },
+  "repairs": [
+    {
+      "predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "repair_id": "ROOT1_LIVEBENCH_GENERAL_SEMANTIC_CORE",
+      "required_capability_layer": "GENERAL_SEMANTIC_SEED_PRODUCTION",
+      "repair_frontier": "canonical/governance/LIVEBENCH_ROOT1_SEMANTIC_SEED_REPAIR_FRONTIER_V1.json",
+      "repair_frontier_git_blob_sha": "844eb26e1ddefb49240c1ad61d7e5466b58e45c2",
+      "score_only_quarantine": "canonical/governance/LIVEBENCH_SCORE_ONLY_WITNESS_CAPABILITY_QUARANTINE_V1.json",
+      "score_only_quarantine_git_blob_sha": "951586401fb9f4b5c30cd83c78bb6d41cc9cc0d5",
+      "score_mass_cut": "canonical/governance/LIVEBENCH_IF_SCORE_MASS_MINIMUM_CUT_V1.json",
+      "score_mass_cut_git_blob_sha": "ad60e8dce539f9f2b1d631ae2c6ced9efb6b1aeb",
+      "required_effects": [
+        "text.paraphrase.semantic_preserving",
+        "text.simplify.semantic_preserving",
+        "text.summarize.faithful",
+        "text.story.generate_instruction_grounded"
+      ],
+      "preferred_compression": "ONE_SHARED_GENERAL_TEXT_TRANSFORMATION_OR_GENERATION_CORE_IF_IT_DOMINATES_FOUR_SEPARATE_PRODUCERS",
+      "constraints": [
+        "PRECOMMITTED_AND_LOCAL_AT_EVALUATION_TIME",
+        "ZERO_INCREMENTAL_SPEND",
+        "NO_EXTERNAL_FRONTIER_MODEL_OR_API_RUNTIME_DEPENDENCY",
+        "NO_TERMINAL_CASE_SPECIFIC_TUNING",
+        "LEARNED_STATE_EXPLICITLY_ACCOUNTED_IF_ANY",
+        "PUBLIC_NONTERMINAL_GENERALIZATION_EVIDENCE",
+        "FAIL_CLOSED_OUTSIDE_VERIFIED_ENVELOPE"
+      ],
+      "next_minimum_action": "SEARCH_REUSE_AND_QUALIFY_ZERO_COST_LOCAL_SEMANTIC_TEXT_CORE_ON_PUBLIC_NONTERMINAL_PARAPHRASE_SIMPLIFY_SUMMARIZE_STORY_TASKS__IF_NONE_MEETS_ENVELOPE_OPEN_STRICTLY_ACCOUNTED_LOCAL_LEARNED_COMPONENT_LANE"
+    }
+  ],
+  "hard_rules": [
+    "A_POSITIVE_ROOT1_GAP_IS_NOT_A_MEASUREMENT_GAP_AND_MUST_NOT_BE_CLOSED_BY_COMPARATOR_EVIDENCE_ALONE",
+    "SCORER_ONLY_OR_CONSTRAINT_ONLY_WITNESSES_MAY_SUPPORT_COMPOSITION_OR_VERIFICATION_BUT_GRANT_ZERO_ROOT1_CAPABILITY_CREDIT_BY_THEMSELVES",
+    "NO_BENCHMARK_SCORE_GAIN_IS_TERMINAL_CAPABILITY_CREDIT_UNLESS_THE_BOUND_REAL_CAPABILITY_REPAIR_IS_SEPARATELY_VERIFIED",
+    "RECOMPUTE_ROOT_PARTITION_AFTER_EVERY_INDEPENDENTLY_VERIFIED_CAPABILITY_DELTA"
+  ],
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0
+}
