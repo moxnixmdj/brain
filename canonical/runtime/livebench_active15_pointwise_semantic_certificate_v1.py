@@ -45,6 +45,27 @@ def certify(
 
     k = len(flags)
     g = sum(flags)
+
+    # Exact postvalidation booleans must not contradict a sound semantic UNSAT
+    # theorem.  A full-score flag vector on a proved-UNSAT subset is inconsistent
+    # evidence, not a license to bypass the proof layer.
+    true_indices = tuple(i for i, flag in enumerate(flags) if flag)
+    true_contracts = tuple(contracts[i] for i in true_indices)
+    true_unsat_reasons = (
+        feasibility.hard_unsat_reasons(true_contracts)
+        if true_contracts
+        else ()
+    )
+    if true_unsat_reasons:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED__CHECKER_RESULTS_CONTRADICT_SEMANTIC_UNSAT",
+            "true_checker_indices": list(true_indices),
+            "hard_unsat_reasons": list(true_unsat_reasons),
+            "terminal_data_used": False,
+            "acceptance_credit": False,
+        }
+
     required = pointwise.required_next_cardinality_subsets(k, g)
 
     supplied: list[tuple[int, ...]] = []
