@@ -1,0 +1,127 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_QUANTIZED_EXECUTION_SUBJECT_DOMINANCE_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ROOT1_EXECUTION_SUBJECT_COMPRESSION_FRONTIER__PUBLIC_EVIDENCE_BOUND__ZERO_ACCEPTANCE_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem": {
+    "current_full_precision_subject": "Qwen/Qwen3.8-27B_BF16",
+    "current_subject_storage_gb": 55.6,
+    "exact_public_four_task_mean_percent": 72.65825,
+    "opus55_exact_four_task_mean_percent": 65.73775,
+    "public_margin_over_opus55_pp": 6.9205,
+    "limiting_factor": "FULL_PRECISION_INTERNALIZATION_AND_EXECUTION_FIT_IS_MUCH_LARGER_THAN_THE_CAPABILITY_ENVELOPE_REQUIRES_IF_A_SMALLER_EXECUTION_FORM_RETAINS_THE_SEMANTIC_EFFECT"
+  },
+  "breakthrough": {
+    "claim": "A_4BIT_QWEN3_8_27B_EXECUTION_SUBJECT_HAS_ALREADY_BEEN_INDEPENDENTLY_PAIRED_AGAINST_A_HIGHER_PRECISION_BASE_ACROSS_MULTIPLE_SUBSTANTIAL_SUITES_WITH_NEAR_COMPLETE_MACRO_RECOVERY_AND_18_TO_21_5_GB_WEIGHT_FOOTPRINTS; THEREFORE_FULL_55_6_GB_INTERNALIZATION_SHOULD_NOT_BE_THE_FIRST_ROOT1_ACQUISITION_ACTION",
+    "scheduler_consequence": "QUALIFY_THE_BEST_PUBLIC_4BIT_EXECUTION_SUBJECT_FIRST_ON_ADMISSIBLE_NONTERMINAL_SEMANTIC_TASKS__ONLY_FALL_BACK_TO_FULL_PRECISION_IF_THE_SMALLER_SUBJECT_FAILS",
+    "terminal_credit": 0
+  },
+  "public_candidates": [
+    {
+      "rank": 1,
+      "id": "NICOSUTER_QWEN38_27B_AWQ_W4A16",
+      "source": "https://github.com/nicosuter/Qwen3.8-27B-AWQ",
+      "published_weight_storage_gb": 21.5,
+      "storage_reduction_vs_55_6gb_percent": 61.3309352518,
+      "paired_quality_evidence": {
+        "comparison_subject": "Qwen/Qwen3.8-27B_FP8",
+        "counted_suites": 5,
+        "baseline_macro_percent": 84.37,
+        "candidate_macro_percent": 84.26,
+        "macro_delta_pp": -0.12,
+        "geometric_mean_recovery_percent": 99.84,
+        "recovery_95ci_percent": [
+          98.86,
+          100.82
+        ],
+        "reported_single_suite_deltas_pp": [
+          0.06,
+          -1.26,
+          1.43,
+          -1.07,
+          0.26
+        ],
+        "exact_livebench_if_four_task_retention_measured": false
+      },
+      "selection_reason": "STRONGEST_CURRENT_PUBLIC_PAIRED_NONINFERIORITY_EVIDENCE_AT_4BIT_WITH_SUBSTANTIAL_STORAGE_REDUCTION",
+      "acceptance_credit": 0
+    },
+    {
+      "rank": 2,
+      "id": "QWEN38_27B_RTN_W4A16",
+      "source": "https://github.com/seek-far/qwen3.8-27b-awq-lab",
+      "published_weight_storage_gb": 18,
+      "storage_reduction_vs_55_6gb_percent": 67.6258992806,
+      "paired_quality_evidence": {
+        "comparison_subject": "Qwen3.8-27B_FP8",
+        "measured_workload": "EXECUTION_VERIFIED_CODING",
+        "temperature_0_2_candidate_pass_percent": 62.5,
+        "temperature_0_2_baseline_pass_percent": 66.1,
+        "temperature_0_6_candidate_pass_percent": 75,
+        "temperature_0_6_baseline_pass_percent": 87.5,
+        "exact_livebench_if_four_task_retention_measured": false
+      },
+      "selection_reason": "LOWEST_CURRENTLY_EVIDENCED_4BIT_STORAGE_SUBJECT__WEAKER_CROSS_DOMAIN_QUALITY_EVIDENCE_THAN_RANK_1",
+      "acceptance_credit": 0
+    }
+  ],
+  "dominance_logic": [
+    "THE_FULL_PRECISION_QWEN3_8_27B_PUBLIC_LIVEBENCH_IF_MARGIN_IS_6_9205_PERCENTAGE_POINTS_OVER_OPUS55.",
+    "THE_RANK_1_4BIT_SUBJECT_REDUCES_WEIGHT_STORAGE_BY_61_3309_PERCENT_RELATIVE_TO_55_6_GB.",
+    "THE_RANK_1_4BIT_SUBJECT_HAS_PAIRED_MACRO_RECOVERY_OF_99_84_PERCENT_ACROSS_FIVE_REPORTED_SUITES_BUT_NO_EXACT_FOUR_TASK_LIVEBENCH_IF_RETENTION_MEASUREMENT.",
+    "THEREFORE_THE_RANK_1_SUBJECT_DOMINATES_FULL_PRECISION_AS_THE_FIRST_QUALIFICATION_ACTION_BUT_NOT_AS_AN_ACCEPTANCE_SUBJECT_YET.",
+    "IF_RANK_1_FAILS_THE_ADMISSIBLE_NONTERMINAL_SEMANTIC_ENVELOPE_THEN_TEST_RANK_2_ONLY_IF_ITS_LOWER_STORAGE_HAS_POSITIVE_EXPECTED_VALUE; OTHERWISE_FALL_BACK_TO_FULL_PRECISION.",
+    "NO_QUANTIZED_SUBJECT_INHERITS_THE_FULL_PRECISION_LIVEBENCH_SCORE."
+  ],
+  "minimum_next_action": {
+    "action": "FREEZE_THE_RANK_1_AWQ_SUBJECT_REVISION_AND_GENERATION_POLICY__RUN_ONLY_PUBLIC_NONTERMINAL_PARAPHRASE_SIMPLIFY_SUMMARIZE_AND_STORY_GENERALIZATION_TESTS_PLUS_SEED_PRESERVING_CONSTRAINT_COMPOSITION__COMPARE_AGAINST_THE_FULL_PRECISION_SUBJECT_UNDER_IDENTICAL_PROMPTS_AND_SETTINGS",
+    "objective": "FALSIFY_OR_QUALIFY_4BIT_SEMANTIC_CAPABILITY_RETENTION_BEFORE_ANY_55_6_GB_INTERNALIZATION",
+    "new_terminal_cases_required": 0,
+    "incremental_spend_target_usd": 0
+  },
+  "evidence_sources": [
+    {
+      "source": "https://github.com/LiveBench/new-livebench/blob/main/public/table_2026_06_25.csv",
+      "fact": "QWEN3_8_27B_FOUR_TASK_MEAN_72_65825_AND_OPUS55_MAX_EFFORT_MEAN_65_73775"
+    },
+    {
+      "source": "https://github.com/nicosuter/Qwen3.8-27B-AWQ/blob/master/MODEL_CARD.md",
+      "fact": "W4A16_AWQ_PAIRED_FIVE_SUITE_MACRO_84_26_VS_FP8_84_37__RECOVERY_99_84_PERCENT_95CI_98_86_TO_100_82"
+    },
+    {
+      "source": "https://github.com/seek-far/qwen3.8-27b-awq-lab",
+      "fact": "18_GB_W4A16_RTN_EXECUTION_SUBJECT_WITH_PAIRED_EXECUTION_VERIFIED_CODING_RESULTS"
+    }
+  ],
+  "falsification_conditions": [
+    "RANK_1_FAILS_PRECOMMITTED_NONTERMINAL_SEMANTIC_GENERALIZATION_OR_SEMANTICALLY_SAFE_CONSTRAINT_COMPOSITION",
+    "THE_REPORTED_RANK_1_CHECKPOINT_CANNOT_BE_CONTENT_ADDRESSED_OR_REPRODUCED",
+    "ZERO_INCREMENTAL_SPEND_EXECUTION_FIT_IS_FALSE_FOR_ALL_AVAILABLE_BRAIN_CONTROLLED_CARRIERS",
+    "A_SMALLER_SUBJECT_WITH_STRONGER_MATCHED_SEMANTIC_RETENTION_EVIDENCE_IS_FOUND"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_AWQ_OR_RTN_SUBJECT_ALREADY_MEETS_LIVEBENCH_IF_GE_65_7",
+    "NO_CLAIM_QUANTIZATION_PRESERVES_THE_PUBLIC_FULL_PRECISION_SCORE",
+    "NO_CLAIM_THE_WEIGHTS_ARE_ALREADY_INTERNALIZED_OR_DURABLY_OWNED_BY_BRAIN",
+    "NO_CLAIM_CURRENT_ZERO_COST_COMPUTE_CAN_EXECUTE_THE_SUBJECT",
+    "NO_FRESH_TERMINAL_CASE_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
