@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RETRY_EXECUTION_EPOCH_V6_LAUNCHER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_ACTIVATION_LAUNCHER_EXECUTOR_BINDINGS__ROOT_COMPATIBILITY_FAIL_CLOSED__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subjects": {
+    "candidate": {
+      "path": "canonical/governance/LIVEBENCH_RETRY_EXECUTION_EPOCH_V6_CANDIDATE.json",
+      "git_blob_sha": "07e857f0a7095838cecbc6a79961fe9580673ee4"
+    },
+    "activation": {
+      "path": "canonical/governance/LIVEBENCH_RETRY_EXECUTION_EPOCH_V6_ACTIVATION_V1.json",
+      "git_blob_sha": "c449329ad9e6e9ac001c5a1cdb2f3fa187fa49b3"
+    },
+    "base_root": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "54021118b1b1f299cf0191d1e413a3009d95d76c"
+    },
+    "executor": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "path": "execute_livebench_if_replay72_v4_candidate.py",
+      "git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e"
+    },
+    "launcher": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "path": "launch_livebench_replay72_v6.py",
+      "git_blob_sha": "e0e2c3581b389efd1c5cab4b4eff78762d1ec61b"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-fast/livebench-retry-v6-launcher-20261004",
+    "trigger_commit": "b1e82a458a20fa50c8c9defb55e5100b14eb279d",
+    "workflow_run_id": 37191632703,
+    "workflow_job_id": 111404857157,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_candidate_binding": true,
+    "exact_activation_binding": true,
+    "exact_executor_binding": true,
+    "exact_base_root_binding": true,
+    "root_compatibility_rule_verified": true,
+    "acceptance_mutation_fail_closed": true,
+    "existing_scheduler_mutation_fail_closed": true,
+    "authority_widening_fail_closed": true,
+    "replay_case_limit": 72,
+    "new_case_exposure_authorized": false,
+    "global_fresh_reality_authority": false,
+    "promotion_authority": false,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
