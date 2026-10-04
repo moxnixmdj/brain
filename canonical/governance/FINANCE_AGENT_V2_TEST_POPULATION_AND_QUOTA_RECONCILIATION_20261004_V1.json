@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_TEST_POPULATION_AND_QUOTA_RECONCILIATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_METHODOLOGY_FIXES_450_TEST_X3_RUNS__SUITE_ID_AND_TOOL_CALL_MASS_OPEN__ZERO_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "frozen_target_percent": 58.59,
+  "first_party_sources": {
+    "methodology_url": "https://www.vals.ai/benchmarks/fabv2",
+    "runner_repository": "vals-ai/finance-agent-v2",
+    "runner_commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "readme_blob": "6e18ea1e7149ba696e59c80e52890878aca8f096",
+    "get_agent_blob": "22c012241a430975266fb7f8d2fe7af8e9f1b8d4",
+    "run_agent_blob": "49d08c50990ef1ca296f4d690216fc4cc4c53c85",
+    "tools_blob": "19b85ce4e110e39f410c52b2efa0e33f651fa6d1"
+  },
+  "public_methodology_facts": {
+    "public_questions": 27,
+    "private_validation_questions": 450,
+    "heldout_test_questions": 450,
+    "runs_per_model": 3,
+    "official_heldout_task_runs": 1350,
+    "reported_scores_use_heldout_test_only": true,
+    "primary_metric": "DEALBREAKER_GATED_SEVERITY_WEIGHTED_PARTIAL_CREDIT",
+    "all_pass_secondary": true,
+    "graders": [
+      "GPT-5.4",
+      "Gemini-3.1-Pro",
+      "Claude Sonnet 4.6"
+    ],
+    "task_time_limit_seconds": 7200
+  },
+  "runner_facts": {
+    "max_time_seconds": 7200,
+    "default_max_turns": null,
+    "text_only_response_stops_agent": false,
+    "clean_stop_requires_submit_final_result_or_limit_or_error": true,
+    "tavily_retry_max_tries": 8,
+    "sec_api_retry_attempts_on_429_503": 20,
+    "tiingo_retry_attempts_on_429_503": 4
+  },
+  "current_free_provider_boundaries": {
+    "tavily": "1000_FREE_API_CREDITS_PER_MONTH__NO_CREDIT_CARD__REQUESTS_STOP_ON_EXHAUSTION",
+    "sec_api": "FIRST_100_API_CALLS_FREE",
+    "tiingo": "STARTER_0_USD__50_REQUESTS_PER_HOUR__1000_PER_DAY__1GB_PER_MONTH"
+  },
+  "deductions": [
+    "DELETE_OFFICIAL_HELDOUT_SUITE_SIZE_UNKNOWN",
+    "OFFICIAL_TEST_EXECUTION_MASS_IS_450_QUESTIONS_X_3_RUNS_EQUALS_1350_TASK_RUNS",
+    "PUBLIC_27_DOES_NOT_SUBSTITUTE_FOR_TEST_450",
+    "TEST_SUITE_ID_REMAINS_GATED_BY_VALS_PLATFORM_OR_EMAIL",
+    "DEFAULT_RUNNER_HAS_NO_FINITE_TURN_CAP_BEYOND_TWO_HOUR_TIME_LIMIT",
+    "NO_STATIC_FINITE_WORST_CASE_EXTERNAL_PROVIDER_CALL_BOUND_FOLLOWS_FROM_THE_UNMODIFIED_RUNNER",
+    "FREE_TIER_EXISTENCE_DOES_NOT_PROVE_TOOL_AVAILABILITY_FOR_ALL_1350_TASK_RUNS",
+    "ZERO_COST_TOOL_READINESS_REQUIRES_ACCOUNT_OBSERVATION_OR_A_PROTOCOL_ADMISSIBLE_HARD_STOP_WITH_NONWEAKENING_PROOF"
+  ],
+  "delete_as_blockers": [
+    "OFFICIAL_HELDOUT_SUITE_SIZE_UNKNOWN"
+  ],
+  "preserve": [
+    "VALS_PLATFORM_APPROVAL",
+    "EXACT_OFFICIAL_TEST_SUITE_ID",
+    "BRAIN_CUSTOM_HARNESS_BINDING",
+    "COMPARATOR_EQUIVALENT_TOOL_AVAILABILITY_ACROSS_OFFICIAL_1350_TASK_RUNS_OR_PROVED_ADMISSIBLE_STRONGER_ROUTE",
+    "BRAIN_SCORE_GE_58_59"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_27_EQUALS_TEST_450",
+    "NO_CLAIM_FREE_PROVIDER_QUOTAS_SUFFICE_FOR_1350_TASK_RUNS",
+    "NO_CLAIM_ANY_ARTIFICIAL_TURN_CAP_IS_COMPARATOR_EQUIVALENT",
+    "NO_HELDOUT_CONTENT_READ",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "INDEPENDENTLY_VERIFY_450_X3_1350_AND_UNBOUNDED_DEFAULT_TURN_LOOP__THEN_DELETE_SUITE_SIZE_UNKNOWN__WAIT_ONLY_FOR_VALS_APPROVAL_SUITE_ID_AND_TOOL_AVAILABILITY_ROUTE"
+}
