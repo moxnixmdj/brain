@@ -64,6 +64,36 @@ class Legacy25WitnessCompilerTests(unittest.TestCase):
         out = self.assertPass(prompt)
         self.assertTrue(out["response"].lower().startswith("write a funny haiku about moms."))
 
+    def test_repeated_family_instances_are_preserved_and_composed(self):
+        prompt = "Answer with at least 5 words. Answer with less than 8 words."
+        specs = parse_specs(prompt)
+        self.assertEqual([s.kind for s in specs], ["number_words", "number_words"])
+        self.assertEqual(len(specs), 2)
+        out = self.assertPass(prompt)
+        words = out["response"].split()
+        self.assertGreaterEqual(len(words), 5)
+        self.assertLess(len(words), 8)
+
+    def test_identical_repeated_instruction_instances_are_not_deduped(self):
+        clause = "In your response, the word apple should appear at least 2 times."
+        specs = parse_specs(clause + " " + clause)
+        self.assertEqual(len(specs), 2)
+        self.assertEqual([s.kind for s in specs], ["keyword_frequency", "keyword_frequency"])
+
+    def test_repeat_prompt_uses_historical_prefix_even_with_later_constraints(self):
+        base = "Write a funny haiku about moms. Include keywords ['alpha'] in the response. "
+        prompt = (
+            base
+            + "First repeat the request word for word without change, then give your answer "
+            "(1. do not say any words or characters before repeating the request; "
+            "2. the request you need to repeat does not include this sentence) "
+            "Your answer must contain a title, wrapped in double angular brackets, such as <<poem of joy>>."
+        )
+        out = self.assertPass(prompt)
+        self.assertTrue(out["response"].startswith(base.rstrip()))
+        self.assertIn("<<", out["response"])
+        self.assertIn("alpha", out["response"].lower())
+
     def test_langdetect_families_are_recognized_but_fail_closed(self):
         cases = [
             ("Your ENTIRE response should be in Spanish language, no other language is allowed.", "response_language"),
