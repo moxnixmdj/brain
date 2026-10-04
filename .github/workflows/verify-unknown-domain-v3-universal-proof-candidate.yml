@@ -1,0 +1,28 @@
+name: Verify Unknown-Domain V3 universal proof candidate
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/unknown_domain_direct_candidate_v3.py'
+      - 'canonical/tests/test_unknown_domain_direct_candidate_v3.py'
+      - 'canonical/runtime/unknown_domain_direct_v3_universal_proof_v1.py'
+      - 'canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py'
+      - 'canonical/governance/UNKNOWN_DOMAIN_DIRECT_V3_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json'
+      - '.github/workflows/verify-unknown-domain-v3-universal-proof-candidate.yml'
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V2 counterexample and V3 repair regression
+        run: python -m pytest -q canonical/tests/test_unknown_domain_direct_candidate_v3.py
+      - name: Run V3 universal proof tests
+        run: python -m pytest -q canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py
+      - name: Execute proof module
+        run: python -m canonical.runtime.unknown_domain_direct_v3_universal_proof_v1
