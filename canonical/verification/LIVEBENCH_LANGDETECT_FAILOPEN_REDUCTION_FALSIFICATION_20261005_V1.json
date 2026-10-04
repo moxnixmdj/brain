@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LANGDETECT_FAILOPEN_REDUCTION_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "TRUTH_REPAIR__64_TO_33_FAILOPEN_REDUCTION_FALSIFIED_BY_UNBOUND_LOGGING_HANDLER__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::LIVEBENCH_IF_GE_65_7::LANGDETECT_EXCEPTION_SUCCESS_SEMANTICS::TRUTH_REPAIR",
+  "falsified_candidate": {
+    "path": "canonical/runtime/livebench_langdetect_failopen_reduction_v1.py",
+    "git_blob_sha": "65fd2d0675ec3db2d4b3dcfdcd6c65cbc5226923",
+    "claimed_reduction": "64_TOTAL_SEMANTIC_KERNELS_TO_33_BY_FORCING_LANGDETECT_CANTDETECTERROR",
+    "exact_false_premise": "PINNED_RESPONSE_LANGUAGE_CHECKER_RETURNS_TRUE_ON_LANGDETECTEXCEPTION"
+  },
+  "preexisting_direct_falsifier_reused": {
+    "path": "canonical/verification/LIVEBENCH_LANGUAGE_EXCEPTION_CARRIER_FALSIFICATION_20261005_V1.json",
+    "reason": "THE_NEW_64_TO_33_REDUCTION_REUSES_THE_SAME_FORCED_EXCEPTION_SUCCESS_ROUTE_ALREADY_FALSIFIED_FOR_THE_V2_CARRIER"
+  },
+  "frozen_checker": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "path": "livebench/if_runner/instruction_following_eval/instructions.py",
+    "git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "source_facts": [
+      "LINE_24_HAS_COMMENTED_OUT_#_from_absl_import_logging",
+      "NO_ACTIVE_logging_IMPORT_OR_MODULE_GLOBAL_BINDING_EXISTS_IN_THE_FROZEN_FILE",
+      "ResponseLanguageChecker.check_following_CATCHES_langdetect.LangDetectException_THEN_CALLS_logging.error_BEFORE_return_True",
+      "CapitalLettersEnglishChecker_AND_LowercaseLettersEnglishChecker_HAVE_THE_SAME_EXCEPTION_HANDLER_PATTERN"
+    ]
+  },
+  "deduction": [
+    "FORCING_langdetect.detect_TO_RAISE_LangDetectException_ENTERS_THE_CHECKERS_except_BRANCH",
+    "THE_FIRST_STATEMENT_IN_THAT_BRANCH_DEREFERENCES_THE_UNBOUND_GLOBAL_NAME_logging",
+    "PYTHON_THEREFORE_RAISES_NameError_BEFORE_THE_SUBSEQUENT_return_True",
+    "THUS_FOR_THE_EXACT_FROZEN_MODULE_BYTES_LANGDETECTEXCEPTION_IS_NOT_A_SUCCESS_CONSTRUCTION",
+    "THE_CANDIDATE_FIELD_pinned_response_language_checker_returns_true_on_exception_EQUALS_TRUE_IS_FALSE_FOR_THE_FROZEN_RUNTIME_ABSENT_AN_EXPLICITLY_VERIFIED_EXTERNAL_GLOBAL_INJECTION",
+    "THE_64_TO_33_KERNEL_COLLAPSE_DOES_NOT_FOLLOW"
+  ],
+  "scheduler_consequence": {
+    "invalidated": [
+      "USE_livebench_langdetect_failopen_reduction_v1_AS_A_33_KERNEL_CRITICAL_PATH_BOUND",
+      "DELETE_TARGET_LANGUAGE_IDENTITY_BY_FORCED_EXCEPTION",
+      "TREAT_LANGUAGE_AS_TRANSPARENT_SCORE_FAMILY_FROM_EXCEPTION_SEMANTICS"
+    ],
+    "preserved": [
+      "THE_PRIOR_64_KERNEL_CONSERVATIVE_REDUCTION_REMAINS_VALID_SUBJECT_TO_ITS_OWN_BINDINGS",
+      "NON_EXCEPTION_LANGUAGE_DECORATOR_NEUTRALITY_OR_DETERMINISTIC_LANGUAGE_WITNESS_ROUTES_REMAIN_ELIGIBLE",
+      "FROZEN_SCHEMA_SCOPE_REDUCTION_MAY_INDEPENDENTLY_REMOVE_LANGUAGE_FROM_THE_ACTUAL_TARGET_IF_ITS_SEPARATE_PROOF_GATE_PASSES"
+    ],
+    "next": "DO_NOT_SPEND_INDEPENDENT_RUNNER_TIME_VERIFYING_THE_FALSIFIED_EXCEPTION_SUCCESS_THEOREM__RERANK_TO_SCHEMA_SCOPE_BRIDGE_OR_NON_EXCEPTION_LANGUAGE_PROOF"
+  },
+  "falsification_strength": {
+    "type": "DIRECT_SOURCE_LEVEL_LOGICAL_CONTRADICTION",
+    "requires_terminal_rows": false,
+    "requires_hidden_kwargs": false,
+    "requires_target_responses": false,
+    "requires_target_scores": false,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "THIS_DOES_NOT_FALSIFY_langdetect_ZERO_FEATURE_EXCEPTION_ITSELF",
+    "THIS_DOES_NOT_FALSIFY_NON_EXCEPTION_LANGUAGE_WITNESSES",
+    "THIS_DOES_NOT_PROVE_LIVEBENCH_ACCEPTANCE",
+    "THIS_DOES_NOT_CHANGE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
