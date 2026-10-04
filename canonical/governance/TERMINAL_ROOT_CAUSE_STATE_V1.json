@@ -284,6 +284,24 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
+    },
+    "terminal_causal_depth_collapse": {
+      "activation_path": "canonical/governance/TERMINAL_CAUSAL_DEPTH_COLLAPSE_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "9c5e22200edb8f6afe853e9bccb447e7c25d845f",
+      "verification_path": "canonical/verification/TERMINAL_CAUSAL_DEPTH_COLLAPSE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "f9423a72ced49ecc2d2928a7c41239994a3a323c",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__SCHEDULING_ONLY__ZERO_CREDIT",
+      "effects": [
+        "TYPED_RELATIVE_ELO_ROUTE_PRUNING",
+        "PARALLEL_ZERO_REALITY_EVIDENCE_AND_ISOLATION_PROOF_LANES",
+        "MANDATORY_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA",
+        "MECHANICAL_DOMINANCE_DELETION_WITH_UNKNOWN_PRESERVATION",
+        "ARENA_ACCOUNT_RECEIPT_SWEEP_NARROWING"
+      ],
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false,
+      "acceptance_credit_delta": 0
     }
   },
   "accounting": {
