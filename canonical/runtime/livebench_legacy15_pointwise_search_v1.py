@@ -16,6 +16,7 @@ from fractions import Fraction
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
 from canonical.runtime import livebench_legacy15_pointwise_certificate_v1 as certificate
+from canonical.runtime import livebench_legacy15_exact_postvalidator_v1 as exact_postvalidator
 from canonical.runtime import livebench_legacy15_relaxed_candidate_search_v1 as relaxed
 from canonical.runtime import livebench_pointwise_optimality_certificate_v1 as structural
 
@@ -151,6 +152,34 @@ def solve_with_checker(
     result["exact_checker_callback_required"] = True
     return result
 
+
+
+def solve_with_pinned_livebench(
+    contracts: Sequence[Mapping[str, Any]],
+    livebench_root: str,
+    *,
+    max_per_subset: int = relaxed.DEFAULT_MAX_PER_SUBSET,
+    max_total: int = relaxed.DEFAULT_MAX_TOTAL,
+) -> dict[str, Any]:
+    """Run the bounded pointwise search against exact pinned legacy checker bytes."""
+    registry, binding = exact_postvalidator.load_pinned_registry(livebench_root)
+
+    def checker(
+        response: str,
+        rows: Sequence[Mapping[str, Any]],
+    ) -> Sequence[bool]:
+        out = exact_postvalidator.evaluate_with_registry(response, rows, registry)
+        return out["checker_results"]
+
+    result = solve_with_checker(
+        contracts,
+        checker,
+        max_per_subset=max_per_subset,
+        max_total=max_total,
+    )
+    result["exact_checker_callback_required"] = False
+    result["exact_checker_binding"] = binding
+    return result
 
 def run(args: dict[str, Any] | None = None, root=None) -> dict[str, Any]:
     """JSON-facing selector over externally exact-postvalidated candidates."""
