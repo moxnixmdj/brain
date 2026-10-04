@@ -25,8 +25,10 @@ def test_required_keyword_forbidden_overlap_is_not_false_unsat():
         },
     ]
     out = f.classify_visible_contracts(contracts)
-    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
-    assert out["hard_unsat_reasons"] == []
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["hard_unsat_reasons"] == [
+        "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
+    ]
 
     # Exact checker asymmetry: existence is raw regex substring search while
     # forbidden wraps the generated alphabetic word in word boundaries.
@@ -155,7 +157,7 @@ def test_sentence_less_than_one_with_public_end_phrase_is_certified():
     ]
     out = f.classify_visible_contracts(contracts)
     assert out["status"] == "PROVED_UNSAT"
-    assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in out["hard_unsat_reasons"]
+    assert "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE" in out["hard_unsat_reasons"]
 
 
 def test_sentence_less_than_one_rejects_every_active_nonempty_requirement():
@@ -177,10 +179,9 @@ def test_sentence_less_than_one_rejects_every_active_nonempty_requirement():
     for extra in cases:
         out = f.classify_visible_contracts([sentence, *extra])
         assert out["status"] == "PROVED_UNSAT"
-        assert any(
-            x.startswith("SENTENCE_LT_ONE_REQUIRES_EMPTY_BUT_CHECKER_REQUIRES_OUTPUT:")
-            for x in out["hard_unsat_reasons"]
-        )
+        assert out["hard_unsat_reasons"] == [
+            "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
+        ]
 
 
 def test_sentence_less_than_one_allows_empty_compatible_contracts():
@@ -214,8 +215,10 @@ def test_sentence_less_than_one_does_not_overcertify_nonpublic_end_phrase():
         },
     ]
     out = f.classify_visible_contracts(contracts)
-    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
-    assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" not in out["hard_unsat_reasons"]
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["hard_unsat_reasons"] == [
+        "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
+    ]
 
 
 def test_strict_less_than_one_sentence_is_proved_unsat():
@@ -245,4 +248,6 @@ def test_sentence_less_than_one_is_unsat_under_strict_nonempty_gate():
     ]
     out = f.classify_visible_contracts(contracts)
     assert out["status"] == "PROVED_UNSAT"
-    assert "STRICT_NONEMPTY_GATE_CONFLICTS_WITH_SENTENCE_LT_ONE" in out["hard_unsat_reasons"]
+    assert out["hard_unsat_reasons"] == [
+        "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
+    ]
