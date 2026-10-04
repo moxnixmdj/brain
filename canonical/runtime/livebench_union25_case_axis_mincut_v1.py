@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Exact case-axis minimum cut for the LiveBench union25 extension.
 
-This proves the only irreducible interaction between the two English whole-case
-checkers and the already-closed Active15 core.
+This proves the exact *syntactic* interaction between the two English whole-case
+checkers and the already-closed Active15 core. Positive satisfaction of the
+English checkers also depends on the pinned langdetect runtime and is therefore
+kept as a separate independently-verifiable residual.
 
 For every compatible Active15 checker other than multiple_sections, applying
 str.upper() or str.lower() to a valid witness preserves the checker's truth:
@@ -20,8 +22,9 @@ case-sensitive splitter.  Therefore:
   every legal splitter contains an uppercase letter;
 - english_capital + splitter='Section' is jointly unsatisfiable, because the
   mandatory splitter contains lowercase letters;
-- english_capital + splitter='SECTION' is satisfiable with an all-uppercase
-  carrier.
+- english_capital + splitter='SECTION' has no syntactic case contradiction and
+  admits an all-uppercase section carrier. The English langdetect condition is
+  intentionally not discharged by this module.
 
 The module is a theorem/carrier layer only and grants zero acceptance credit.
 """
@@ -75,8 +78,9 @@ def section_case_joint_optimum(
     if case_id == u.ENGLISH_LOWERCASE:
         return {
             "jointly_satisfiable": False,
+            "syntactic_case_contradiction": True,
             "maximum_passes_of_two": 1,
-            "mandatory_loss": 1,
+            "mandatory_loss_from_case_syntax": 1,
             "reason": (
                 "EVERY_LEGAL_SECTION_SPLITTER_CONTAINS_UPPERCASE_LETTERS__"
                 "LOWERCASE_CHECKER_REQUIRES_VALUE_ISLOWER"
@@ -86,8 +90,9 @@ def section_case_joint_optimum(
     if section_splitter == "Section":
         return {
             "jointly_satisfiable": False,
+            "syntactic_case_contradiction": True,
             "maximum_passes_of_two": 1,
-            "mandatory_loss": 1,
+            "mandatory_loss_from_case_syntax": 1,
             "reason": (
                 "TITLECASE_SECTION_SPLITTER_CONTAINS_LOWERCASE_LETTERS__"
                 "CAPITAL_CHECKER_REQUIRES_VALUE_ISUPPER"
@@ -126,8 +131,8 @@ def verify() -> dict[str, Any]:
         for case_id in (u.ENGLISH_CAPITAL, u.ENGLISH_LOWERCASE)
     }
 
-    if matrix[u.ENGLISH_CAPITAL]["SECTION"]["maximum_passes_of_two"] != 2:
-        raise CaseAxisError("UPPERCASE_SECTION_SHOULD_BE_JOINTLY_SATISFIABLE")
+    if matrix[u.ENGLISH_CAPITAL]["SECTION"]["syntactic_case_contradiction"]:
+        raise CaseAxisError("UPPERCASE_SECTION_SHOULD_HAVE_NO_CASE_CONTRADICTION")
     if matrix[u.ENGLISH_CAPITAL]["Section"]["maximum_passes_of_two"] != 1:
         raise CaseAxisError("TITLECASE_SECTION_MINCUT_DRIFT")
     if matrix[u.ENGLISH_LOWERCASE]["SECTION"]["maximum_passes_of_two"] != 1:
@@ -160,7 +165,7 @@ def verify() -> dict[str, Any]:
     return {
         "schema": SCHEMA,
         "status": (
-            "PASS__WHOLE_ENGLISH_CASE_AXIS_REDUCED_TO_ONE_SECTION_SLOT_MINCUT"
+            "PASS__WHOLE_ENGLISH_CASE_SYNTAX_REDUCED_TO_SECTION_SLOT_MINCUT__LANGDETECT_RESIDUAL_EXPLICIT"
         ),
         "case_transform_preserved_active15": sorted(
             CASE_TRANSFORM_PRESERVED_ACTIVE15
@@ -184,15 +189,16 @@ def verify() -> dict[str, Any]:
                 "maximum_passes_of_two": 1,
             },
         ],
-        "zero_loss_class": {
+        "no_syntactic_case_contradiction_class": {
             "case": u.ENGLISH_CAPITAL,
             "section_splitter": "SECTION",
-            "maximum_passes_of_two": 2,
+            "maximum_passes_of_two_upper_bound": 2,
+            "remaining_residual": "PINNED_LANGDETECT_ENGLISH_POSITIVE_CHECK",
         },
         "composition_consequence": (
-            "ENGLISH_CAPITAL_AND_ENGLISH_LOWERCASE_DO_NOT_REQUIRE_GENERAL_"
-            "ACTIVE15_CROSS_PRODUCT_PROOFS__ONLY_THE_VISIBLE_SECTION_SPLITTER_"
-            "SLOT_REQUIRES_A_MINCUT_BRANCH"
+            "CASE_SENSITIVE_ACTIVE15_SYNTAX_IS_FULLY_REDUCED_TO_THE_VISIBLE_"
+            "SECTION_SPLITTER_SLOT__POSITIVE_ENGLISH_LANGUAGE_DETECTION_REMAINS_"
+            "A_SEPARATE_RUNTIME_RESIDUAL"
         ),
         "terminal_rows_used": False,
         "hidden_kwargs_used": False,
