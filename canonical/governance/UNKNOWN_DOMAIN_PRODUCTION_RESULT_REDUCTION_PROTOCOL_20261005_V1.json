@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_PRODUCTION_RESULT_REDUCTION_PROTOCOL_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_PRE_RESULT__INDEPENDENT_REDUCTION_CRITERIA__ZERO_RESULT_EXPOSURE_AT_FREEZE__ZERO_CREDIT",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "exact_execution_subject": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "execution_lease_sha256": "5c62d42a792a72330535b07cd5f0722ad6e33417bd0179b7d9a01594da8c543d",
+    "execution_lease_git_blob_sha": "e83a79d4ffb7e5912ece02b9d4cddc5da1a5a800",
+    "launch_ref": "refs/heads/unknown-domain-direct-launch/5c62d42a792a72330535b07cd5f0722ad6e33417bd0179b7d9a01594da8c543d",
+    "expected_claim_ref": "refs/heads/unknown-domain-direct-claims/5c62d42a792a72330535b07cd5f0722ad6e33417bd0179b7d9a01594da8c543d",
+    "expected_result_path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_PRODUCTION_RESULT_5C62D42A792A72330535B07CD5F0722AD6E33417BD0179B7D9A01594DA8C543D_V1.json"
+  },
+  "acceptance_gate": {
+    "result_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_PRODUCTION_RESULT_V1",
+    "result_status": "PRODUCTION_PASS",
+    "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "claim_create_http_status": 201,
+    "claim_uniqueness_source": "ATOMIC_CREATE_RESPONSE",
+    "production_cases_generated": 27,
+    "exact_leaf_case_counts": {
+      "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE": 12,
+      "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS": 15
+    },
+    "max_transfer_probes_per_case": 2,
+    "require_unique_nonempty_case_ids": true,
+    "require_every_case_pass_true": true,
+    "require_every_case_errors_empty": true,
+    "require_every_acceptance_clause_pass": true,
+    "aggregate": {
+      "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_HIDDEN_SCORER_V1",
+      "status": "TWO_FROZEN_LEAVES_PASS",
+      "transfer_leaf_pass": true,
+      "abstention_leaf_pass": true,
+      "all_27_cases_pass": true,
+      "case_count": 27,
+      "class_balance": {
+        "IDENTIFIABLE": 5,
+        "NONIDENTIFIABLE": 5,
+        "UNDERSPECIFIED": 5
+      }
+    },
+    "resources": {
+      "persistent_learned_bytes": 0,
+      "external_frontier_model_calls": 0,
+      "external_learned_capability_calls": 0,
+      "incremental_spend_usd": 0
+    },
+    "privacy_and_replay": {
+      "raw_hidden_records_persisted": false,
+      "raw_evaluator_secret_persisted": false,
+      "raw_beacon_persisted": false,
+      "replay_allowed": false,
+      "replacement_allowed": false
+    },
+    "raw_result_authority": {
+      "acceptance_credit_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0,
+      "promotion_authority": false,
+      "separate_independent_reduction_required": true
+    }
+  },
+  "independent_reduction_rule": "THE_REDUCER_MUST_EVALUATE_ONLY_THE_IMMUTABLE_RESULT_BYTES_AND_THIS PRE_RESULT_PROTOCOL; NO THRESHOLD, CASE FILTER, LEAF RULE, OR ACCEPTANCE CLAUSE MAY BE CHANGED AFTER RESULT EXPOSURE.",
+  "promotion_scope_if_reduction_passes": {
+    "close_candidate_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "direct_leaves_closed": [
+      "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS"
+    ],
+    "preserved_separate_evidence": "NEW_TOOL_DISCOVERY_AND_SECOND_TASK_EVIDENCE_TRANSFER",
+    "no_inheritance_to": [
+      "MYSTERYMECHANISM_GE_49_55",
+      "UNKNOWN_DOMAIN_ADAPTATION_FAMILY_AS_A_WHOLE_IF_OTHER_ATOMIC_PREDICATES_REMAIN",
+      "GLOBAL_TERMINAL_GOAL"
+    ]
+  },
+  "hard_nonclaims": [
+    "THIS_PROTOCOL_DOES_NOT_ASSERT_A_PRODUCTION_RESULT_EXISTS",
+    "THIS_PROTOCOL_DOES_NOT_CONSUME_PRODUCTION_CASES",
+    "THIS_PROTOCOL_DOES_NOT_PROMOTE_ACCEPTANCE_CREDIT",
+    "THIS_PROTOCOL_DOES_NOT_CLOSE_THE_TARGET_PREDICATE_UNTIL_INDEPENDENT_REDUCTION_PASSES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
