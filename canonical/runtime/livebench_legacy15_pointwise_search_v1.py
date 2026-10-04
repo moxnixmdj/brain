@@ -48,15 +48,21 @@ def select_best_postvalidated(
 
     for raw in evaluated_candidates:
         item = dict(raw)
-        flags = tuple(bool(x) for x in (item.get("checker_results") or []))
+        response = str(item.get("response") or "")
+        raw_flags = tuple(bool(x) for x in (item.get("checker_results") or []))
+        # Frozen strict evaluation applies response.strip() before every
+        # instruction checker. Never allow a raw checker callback to turn an
+        # empty/whitespace response into positive benchmark credit.
+        flags = raw_flags if response.strip() else tuple(False for _ in raw_flags)
         if len(flags) != len(rows):
             malformed += 1
             continue
         evaluated += 1
         score = _score(flags)
         candidate = {
-            "response": str(item.get("response") or ""),
+            "response": response,
             "checker_results": list(flags),
+            "strict_nonempty_response_gate_applied": True,
             "true_checker_count": sum(flags),
             "score_numerator": score.numerator,
             "score_denominator": score.denominator,
