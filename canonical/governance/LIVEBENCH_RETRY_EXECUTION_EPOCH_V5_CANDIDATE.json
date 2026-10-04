@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RETRY_EXECUTION_EPOCH_V5_CANDIDATE",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__V4_REBOUND_TO_CURRENT_SCHEDULING_ONLY_ROOT__INDEPENDENT_REBIND_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "current_root": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "f1c96d7924341e9c95a390cccf90d74109f10189"
+  },
+  "immutable_candidate": {
+    "repository": "moxnixmdj/brain",
+    "commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+    "astra_runtime_git_blob_sha": "7f5d16b1db69cb620954bc778e0ba6e15e687b75",
+    "inference_adapter_git_blob_sha": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
+    "mutation_allowed": false
+  },
+  "frozen_evaluation": {
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "population_count": 200,
+    "threshold_percent": 65.7,
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "case_order": "QUESTION_ID_ASCENDING_FIXED_PREEXECUTION",
+    "scorer_dispatch": "PUBLIC_UPSTREAM_RELEASE_DATE_SPLIT__LEGACY_IFEVAL_BEFORE_2025_11_25__IFBENCH_OTHERWISE",
+    "adaptive_case_selection": false,
+    "case_replacement": false
+  },
+  "second_attempt_truth": {
+    "path": "canonical/governance/LIVEBENCH_SECOND_DIRECT_ATTEMPT_TRUTH_RECEIPT_20261004_V1.json",
+    "git_blob_sha": "e5e1aa48046c2f6a95413a0a9f804e36a5cf2f9e",
+    "workflow_run_id": 37188899094,
+    "terminal_cases_consumed": 72,
+    "successful_candidate_responses": 0,
+    "forced_fail_admissible_as_capability_evidence": false,
+    "root1_reopen_authorized": false
+  },
+  "independently_observed_zero_case_repairs": {
+    "missing_runtime_dependency_run_id": 37189221174,
+    "missing_runtime_dependency": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+    "next_missing_runtime_dependency_run_id": 37189324543,
+    "next_missing_runtime_dependency": "canonical/runtime/auto_capability_acquisition.py",
+    "exact_frozen_generic_closure_run_id": 37189992953,
+    "exact_frozen_generic_closure_file_count": 24,
+    "semantic_boundary": "CAPABILITY_ACQUISITION_REQUIRED"
+  },
+  "allowed_repairs": [
+    "MATERIALIZE_ONLY_PUBLICLY_AVAILABLE_BYTES_IDENTICAL_TO_FROZEN_CANDIDATE_RUNTIME_DEPENDENCIES",
+    "FRESH_EPHEMERAL_FILESYSTEM_COPY_PER_CASE_TO_PREVENT_NAMED_MISSION_STATE_AND_CHECKPOINT_COLLISION",
+    "PRESERVE_EXACT_PUBLIC_SCORER_RELEASE_DATE_DISPATCH"
+  ],
+  "forbidden_repairs": [
+    "NO_CANDIDATE_BYTE_MUTATION",
+    "NO_POST_PROMPT_CAPABILITY_ACQUISITION",
+    "NO_EXTERNAL_TOOL_DISCOVERY_OR_INSTALLATION_DURING_CASE_INFERENCE",
+    "NO_OPTIONAL_MODEL_PLANNER",
+    "NO_PROMPT_OR_RESPONSE_USE_TO_DESIGN_REPAIR",
+    "NO_THRESHOLD_OR_CASE_ORDER_CHANGE"
+  ],
+  "retry_scope": {
+    "execution_epochs_authorized_by_this_candidate": 0,
+    "first_required_replay": "EXACT_ALREADY_ATTEMPTED_72_CASE_PREFIX_ONLY",
+    "new_case_exposure_before_replay_validation": false,
+    "replay_result_must_distinguish_valid_candidate_response_from_policy_blocked_or_runtime_error": true
+  },
+  "requirements_before_activation": [
+    "INDEPENDENTLY_VERIFY_V4_TO_V5_ROOT_DELTA_IS_SCHEDULING_ONLY",
+    "INDEPENDENTLY_VERIFY_ACCEPTANCE_AND_ROOT_PARTITION_ARE_IDENTICAL",
+    "INDEPENDENTLY_VERIFY_LIVEBENCH_REMAINS_ROOT2_ONLY_AND_UNRESOLVED",
+    "BIND_EXACT_VERIFIED_REPLAY_EXECUTOR_BLOB",
+    "CREATE_SEPARATE_ONE_EPOCH_PREDICATE_LOCAL_REPLAY_ACTIVATION",
+    "POINT_OF_USE_ZERO_CASE_PREFLIGHT_BEFORE_REPLAY"
+  ],
+  "authority": {
+    "execution": false,
+    "predicate_local_fresh_reality": false,
+    "global_fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "rebind_from_v4": {
+    "path": "canonical/governance/LIVEBENCH_RETRY_EXECUTION_EPOCH_V4_CANDIDATE.json",
+    "git_blob_sha": "2b9dcdc466ae3519a4378011394d1f4145840638",
+    "prior_root_git_blob_sha": "601e82d00104b4ed36ee5968ad966a0c02e627c1",
+    "current_root_git_blob_sha": "f1c96d7924341e9c95a390cccf90d74109f10189",
+    "required_rebind_invariant": "ONLY_SCHEDULER_POLICY_CHANGED__ACCEPTANCE_PARTITION_AND_LIVEBENCH_ROOT_CLASSIFICATION_IDENTICAL"
+  },
+  "executor_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1783,
+    "workflow_run_id": 37190680930,
+    "workflow_job_id": 111402007811,
+    "merged_commit": "0e6121d9d291390d341dd968b31982efb5b0bcb9",
+    "executor_path": "execute_livebench_replay72_v4.py",
+    "executor_git_blob_sha": "d2a4208c20de549fc5d784e504041553aeb4a71e",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "terminal_cases_consumed": 0
+  }
+}

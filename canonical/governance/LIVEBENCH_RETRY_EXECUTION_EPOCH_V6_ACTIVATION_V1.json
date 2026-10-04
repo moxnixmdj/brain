@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RETRY_EXECUTION_EPOCH_V6_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_IFF_EXACT_BINDINGS_AND_POINT_OF_USE_ROOT_COMPATIBILITY_AND_ZERO_CASE_PREFLIGHT_PASS__REPLAY72_ONLY__ZERO_CREDIT",
+  "active": true,
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+  "objective": "Authorize exactly one replay of the already-exposed 72-case prefix using the stronger independently verified runtime-policy executor; no case 73+ exposure.",
+  "exact_binding": {
+    "retry_candidate_path": "canonical/governance/LIVEBENCH_RETRY_EXECUTION_EPOCH_V6_CANDIDATE.json",
+    "retry_candidate_git_blob_sha": "07e857f0a7095838cecbc6a79961fe9580673ee4",
+    "second_attempt_truth_git_blob_sha": "e5e1aa48046c2f6a95413a0a9f804e36a5cf2f9e",
+    "base_root_git_blob_sha": "54021118b1b1f299cf0191d1e413a3009d95d76c",
+    "executor_repository": "moxnixmdj/verification-capsule-runner",
+    "executor_path": "execute_livebench_if_replay72_v4_candidate.py",
+    "executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "replay_case_count": 72,
+    "population_count": 200,
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "case_order": "QUESTION_ID_ASCENDING_FIXED_PREEXECUTION",
+    "threshold_percent": 65.7
+  },
+  "root_binding": {
+    "mode": "BASE_ROOT_PLUS_POINT_OF_USE_SCHEDULER_ONLY_COMPATIBILITY",
+    "base_root_git_blob_sha": "54021118b1b1f299cf0191d1e413a3009d95d76c",
+    "point_of_use_snapshot_required": true,
+    "compatibility_rule_path_in_candidate": "root_compatibility_class.point_of_use_rule",
+    "incompatible_delta_action": "FAIL_CLOSED_AND_REBIND_BEFORE_REPLAY"
+  },
+  "independent_basis": {
+    "root_rebind": {
+      "pull_request": 1787,
+      "workflow_run_id": 37190955929,
+      "workflow_job_id": 111402828369,
+      "merged_commit": "96b340275918bee4d5f2561b13b2e87565ac7057",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "terminal_cases_consumed": 0
+    },
+    "dominant_executor": {
+      "pull_request": 1792,
+      "workflow_run_id": 37191165620,
+      "workflow_job_id": 111403465087,
+      "merged_commit": "7db0fdf369b7b9dbd4f803897f2c39fe578f5400",
+      "executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "terminal_cases_consumed": 0,
+      "runtime_file_count": 24,
+      "post_prompt_acquisition_loader_denied": true,
+      "external_network_defense_in_depth": true,
+      "subprocess_install_defense_in_depth": true
+    }
+  },
+  "launch_contract": {
+    "executor_entrypoint": "main",
+    "required_call": "main(authorized=True, activation_blob=EXACT_ACTIVATION_GIT_BLOB_SHA)",
+    "launcher_must_verify_activation_blob": true,
+    "launcher_must_verify_executor_blob": true,
+    "launcher_must_verify_candidate_blob": true,
+    "launcher_must_verify_point_of_use_root_compatibility": true,
+    "launcher_must_fail_before_executor_call_on_any_mismatch": true
+  },
+  "authority": {
+    "execution": true,
+    "replay_existing_prefix": true,
+    "predicate_local_fresh_reality": true,
+    "new_case_exposure": false,
+    "global_fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "hard_rules": [
+    "ONE_REPLAY_EPOCH_ONLY",
+    "NO_CASE_73_OR_LATER",
+    "NO_NEW_CASE_EXPOSURE",
+    "NO_CANDIDATE_BYTE_MUTATION",
+    "NO_POST_PROMPT_CAPABILITY_ACQUISITION",
+    "NO_POST_PROMPT_EXTERNAL_NETWORK",
+    "NO_POST_PROMPT_PACKAGE_INSTALLATION",
+    "NO_PROMPT_OR_RESPONSE_CONTENT_USED_TO_DESIGN_REPAIR",
+    "POINT_OF_USE_ROOT_COMPATIBILITY_REQUIRED",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_ACTIVATION",
+    "FAIL_CLOSED_ON_ANY_BINDING_ROOT_COMPATIBILITY_OR_ZERO_CASE_PREFLIGHT_FAILURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "promotion_authority": false
+}
