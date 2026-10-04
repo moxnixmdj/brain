@@ -1,62 +1,88 @@
 {
-  "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_WORD_TOKEN_EQUIVALENCE_TRUTH_REPAIR_V1",
+  "schema": "PROJECT_BRAIN_LIVEBENCH_CHARACTER_TRIGRAM_ROBUST_CONSTRUCTION_TRUTH_REPAIR_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE_TRUTH_REPAIR__PUBLIC_SOURCE_DIRECTLY_INSPECTED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE_TRUTH_REPAIR__EXACT_FROZEN_SCORER_BOUND__PUBLIC_12_OF_12_TARGET_EXISTENCE_RECOMPUTED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
-  "objective": "Correct the current overbroad ratio-overlap residual by replacing raw-reference-byte recovery with the exact score-sufficient equivalence relation induced by the public IFBench NGramOverlapChecker.",
-  "supersedes_premise": {
-    "path": "canonical/verification/LIVEBENCH_PUBLIC_PARAMETER_TRUTH_INDEPENDENT_VERIFICATION_20261004_V1.json",
-    "premise": "WHITESPACE_NORMALIZATION_CANNOT_BE_ASSUMED_SCORE_PRESERVING_BECAUSE_NGRAMOVERLAPCHECKER_USES_CHARACTER_TRIGRAMS_OF_EXACT_REFERENCE_TEXT",
-    "state": "FALSE_AS_WRITTEN__PUBLIC_CHECKER_USES_WORD_TOKENIZATION_THEN_WORD_TRIGRAMS"
+  "objective": "Replace an over-strong raw-reference-byte recovery obligation with a scorer-exact construction that needs only a visible stable substring of the reference and fresh characters absent from the reference.",
+  "correction_of_prior_candidate": {
+    "prior_branch_claim": "UPSTREAM_ALLENAI_IFBENCH_USES_WORD_TOKEN_TRIGRAMS",
+    "disposition": "TRUE_FOR_NEWER_UPSTREAM_BUT_IRRELEVANT_TO_FROZEN_LIVEBENCH_TARGET",
+    "frozen_target_truth": "LIVEBENCH_VENDORED_CHECKER_USES_CHARACTER_TRIGRAMS",
+    "rule": "FROZEN_SCORER_IDENTITY_OVERRIDES_NEWER_UPSTREAM_IMPLEMENTATION"
   },
-  "public_source_binding": {
-    "repository": "allenai/IFBench",
-    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
-    "path": "ifbench/instructions.py",
-    "git_blob_sha": "7f167018e0c5472b04e13cbf847e5988c04ecb11",
+  "frozen_scorer_binding": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "path": "livebench/if_runner/ifbench/instructions.py",
+    "git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
     "class": "NGramOverlapChecker",
     "observed_semantics": [
-      "ngrams = set(nltk.ngrams(nltk.word_tokenize(value), 3))",
-      "ref_ngrams = set(nltk.ngrams(nltk.word_tokenize(reference_text), 3))",
-      "overlap = len(ngrams.intersection(ref_ngrams)) / len(ngrams)"
+      "n = 3",
+      "ngrams = set(nltk.ngrams(value, n))",
+      "ref_ngrams = set(nltk.ngrams(self._reference_text, n))",
+      "overlap = len(ngrams.intersection(ref_ngrams)) / len(ngrams)",
+      "pass iff percentage-2 <= 100*overlap <= percentage+2"
     ]
   },
-  "exact_theorem": {
-    "definitions": {
-      "T(x)": "nltk.word_tokenize(x)",
-      "G(x)": "set(nltk.ngrams(T(x), 3))",
-      "S(y,r)": "|G(y) INTERSECT G(r)| / |G(y)| for nonempty G(y)"
+  "exact_theorems": {
+    "score_sufficient_equivalence": {
+      "definition": "G(x)=set of all length-3 character substrings of x",
+      "theorem": "G(r1)=G(r2) implies identical ratio-overlap score and pass/fail for every response",
+      "consequence": "RAW_REFERENCE_BYTE_IDENTITY_IS_SUFFICIENT_BUT_NOT_NECESSARY"
     },
-    "necessary_for_score_identity": "NOT_RAW_STRING_IDENTITY",
-    "sufficient_conditions": [
-      "G(candidate_reference) == G(true_reference)",
-      "STRONGER_SUFFICIENT_CONDITION: T(candidate_reference) == T(true_reference)"
+    "stable_substring_fresh_suffix_constructor": {
+      "premises": [
+        "B is a contiguous substring of the true reference r",
+        "O=|G(B)|>0",
+        "q1..qm are pairwise-distinct characters absent from r"
+      ],
+      "construction": "z = B || q1 || ... || qm",
+      "proof": [
+        "Every trigram in G(B) is in G(r).",
+        "Appending each fresh qj creates exactly one new response trigram.",
+        "Every appended trigram contains at least one qj and therefore is absent from G(r).",
+        "Because qj is pairwise distinct and is the final character of its newly created trigram, the m appended trigrams are pairwise distinct.",
+        "Therefore |G(z)|=O+m and |G(z) intersect G(r)|=O.",
+        "Therefore overlap(z,r)=O/(O+m) exactly."
+      ],
+      "whitespace_robust_corollary": "IF norm_ws(r)=norm_ws(v), ANY B CONTAINED ENTIRELY INSIDE_ONE_NONWHITESPACE_RUN_OF_v_IS_A_LITERAL_SUBSTRING_OF_r; FRESH_NONWHITESPACE_CHARACTERS_ABSENT_FROM_v_ARE_ABSENT_FROM_r."
+    }
+  },
+  "public_family_recomputation": {
+    "dataset_repository": "allenai/IFBench",
+    "dataset_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "dataset_path": "data/IFBench_test.jsonl",
+    "dataset_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "ratio_overlap_rows": 12,
+    "normalized_reference_visible_rows": 12,
+    "constructor_target_existence_rows": 12,
+    "examples": [
+      {"key":"144","target_percent":72,"B":"inducti","O":5,"m":2,"constructed_percent":71.4285714286},
+      {"key":"145","target_percent":93,"B":"3.Theoretical","O":11,"m":1,"constructed_percent":91.6666666667},
+      {"key":"146","target_percent":74,"B":"gover","O":3,"m":1,"constructed_percent":75.0},
+      {"key":"147","target_percent":59,"B":"Write","O":3,"m":2,"constructed_percent":60.0},
+      {"key":"148","target_percent":6,"B":"For","O":1,"m":12,"constructed_percent":7.6923076923},
+      {"key":"149","target_percent":13,"B":"eas","O":1,"m":6,"constructed_percent":14.2857142857},
+      {"key":"150","target_percent":24,"B":"rew","O":1,"m":3,"constructed_percent":25.0},
+      {"key":"151","target_percent":23,"B":"Wri","O":1,"m":3,"constructed_percent":25.0},
+      {"key":"152","target_percent":11,"B":"Des","O":1,"m":7,"constructed_percent":12.5},
+      {"key":"212","target_percent":54,"B":"detaile","O":5,"m":4,"constructed_percent":55.5555555556},
+      {"key":"213","target_percent":50,"B":"Wri","O":1,"m":1,"constructed_percent":50.0},
+      {"key":"214","target_percent":11,"B":"Wha","O":1,"m":7,"constructed_percent":12.5}
     ],
-    "conclusion": "IF_G(candidate_reference)_EQUALS_G(true_reference)_THEN_FOR_EVERY_RESPONSE_Y_THE_NGRAM_OVERLAP_SCORE_AND_PASS_FAIL_RESULT_ARE_IDENTICAL",
-    "proof": "The checker reads the reference only through G(reference). Substituting any reference with the same G set leaves the numerator, denominator, percentage and threshold comparison unchanged for every candidate response."
+    "interpretation": "THE_PUBLIC_FAMILY_NO_LONGER_REQUIRES_RAW_REFERENCE_RECOVERY_TO_SHOW_RATIO_TARGET_REACHABILITY. EXACT_FROZEN_LIVEBENCH_CONSTRUCTION_BINDING_AND_COMPOUND_CONSTRAINT_COMPOSITION_REMAIN_OPEN."
   },
-  "public_family_evidence_already_bound": {
-    "verification_path": "canonical/verification/LIVEBENCH_PUBLIC_PARAMETER_TRUTH_INDEPENDENT_VERIFICATION_20261004_V1.json",
-    "public_ratio_overlap_rows": 12,
-    "raw_reference_visible": 5,
-    "normalized_reference_visible": 12,
-    "corrected_interpretation": "THE_7_NORMALIZED_ONLY_ROWS_REQUIRE_TOKEN_OR_TRIGRAM_SET_EQUIVALENCE_PROOF__NOT_RAW_BYTE_RECOVERY"
-  },
-  "residual_reduction": {
-    "deleted_obligation": "RECOVER_EXACT_REFERENCE_TEXT_BYTES_FOR_ALL_RATIO_OVERLAP_CASES",
-    "replacement_obligation": "PROVE_PROMPT_DERIVED_REFERENCE_HAS_IDENTICAL_NLTK_WORD_TOKEN_TRIGRAM_SET_TO_SCORER_REFERENCE",
-    "next_minimum_public_test": "RECOMPUTE_T_AND_G_FOR_THE_7_NORMALIZED_ONLY_PUBLIC_IFBENCH_ROWS_AND_CHECK_EXACT_EQUALITY",
-    "if_public_7_of_7_pass": "PROMOTE_PUBLIC_FAMILY_RATIO_OVERLAP_PARAMETER_DERIVABILITY_FROM_OPEN_RAW_REFERENCE_ACQUISITION_TO_TOKEN_EQUIVALENT_DERIVABILITY__EXACT_FROZEN_LIVEBENCH_CONSTRUCTION_BINDING_STILL_REQUIRED",
-    "if_any_fail": "LOCALIZE_ONLY_THE_FAILING_TOKENIZATION_DIFFERENCES__DO_NOT_REOPEN_RAW_BYTE_RECOVERY_GLOBALLY"
-  },
-  "integration_relevance": {
-    "seed_postprocessor": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
-    "instruction_compiler": "canonical/runtime/instruction_constraint_compiler_v1.py",
-    "effect": "A_SCORE_EQUIVALENT_REFERENCE_DERIVATION_CAN_BE_COMPOSED_WITH_GENERIC_SEMANTIC_SEEDS_AND_EXACT_POSTVALIDATION_WITHOUT_TERMINAL_CASE_SPECIALIZATION"
-  },
+  "minimum_next_proofs": [
+    "INDEPENDENTLY_RECOMPUTE_THE_12_OF_12_PUBLIC_CONSTRUCTOR_EXISTENCE_FROM_PINNED_BYTES_AND_EXACT_FROZEN_SCORER",
+    "IMPLEMENT_A_GENERIC_VISIBLE_PROMPT_BASE_SEGMENT_EXTRACTOR_FROM_PUBLIC_CONSTRAINT_GRAMMAR_WITHOUT_HIDDEN_KWARGS",
+    "IMPLEMENT_AND_SYNTHETICALLY_VERIFY_CHARACTER_TRIGRAM_RATIO_CONTROLLER",
+    "PROVE_COMPOSITION_WITH_SENTENCE_KEYWORD_AND_CONSONANT_CLUSTER_CONSTRAINTS_WITHOUT_CASE_SPECIFIC_RULES",
+    "ONLY_THEN_BIND_TO_A_FROZEN_LIVEBENCH_SUCCESSOR_AND_MEASURE_ALREADY_EXPOSED_PREFIX_BEFORE_ANY_NEW_TERMINAL_CASE"
+  ],
   "hard_nonclaims": [
-    "NO_CLAIM_THAT_ALL_7_NORMALIZED_ONLY_PUBLIC_ROWS_ALREADY_PASS_TOKEN_EQUIVALENCE",
+    "NO_CLAIM_OF_12_OF_12_FULL_TASK_SUCCESS",
     "NO_CLAIM_OF_EXACT_FROZEN_LIVEBENCH_DATASET_EQUIVALENCE",
+    "NO_CLAIM_THAT_COMPOUND_CONSTRAINTS_ARE_ALREADY_SOLVED",
     "NO_LIVEBENCH_ACCEPTANCE_CLOSURE",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
     "NO_NEW_TERMINAL_CASE_EXPOSURE",
