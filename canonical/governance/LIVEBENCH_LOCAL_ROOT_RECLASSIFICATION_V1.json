@@ -74,5 +74,19 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "authority": {
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_git_blob_sha": "36ac53134b123cfed7e63c31a871a30f9b4579e4",
+    "root_state_snapshot": {
+      "unresolved_total": 26,
+      "root1_positive_gap_count": 0,
+      "root2_only_count": 16,
+      "root3_only_count": 7,
+      "root2_and_root3_count": 3,
+      "livebench_prior_membership": "ROOT2_ONLY"
+    },
+    "forced_fail_binding_path": "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_BINDING_V1.json",
+    "forced_fail_verifier_commit": "f3c439f329c7b481a8448a0619e7696111e05ecc"
+  }
 }
