@@ -123,7 +123,7 @@ def test_unknown_or_structurally_conflicting_ids_fail_closed():
     assert conflict["status"] == "FAIL_CLOSED_ID_CONFLICT"
 
 
-def test_mandatory_section_splitter_forbidden_collision_is_certified():
+def test_section_splitter_forbidden_overlap_is_not_false_unsat():
     contracts = [
         {
             "instruction_id": f.SECTIONS,
@@ -135,10 +135,17 @@ def test_mandatory_section_splitter_forbidden_collision_is_certified():
         },
     ]
     out = f.classify_visible_contracts(contracts)
-    assert out["status"] == "PROVED_UNSAT"
-    assert out["hard_unsat_reasons"] == [
-        "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:section"
-    ]
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
+
+    # Exact pinned checker asymmetry. SectionChecker accepts a digit directly
+    # after the splitter because both surrounding spaces are optional.
+    response = "Section1 zxqv Section2 zxqv Section3 zxqv"
+    parts = re.split(r"\\s?Section\\s?\\d+\\s?", response)
+    assert len(parts) - 1 == 3
+    # ForbiddenWords uses whole-word boundaries; there is no trailing boundary
+    # after "Section" when the next character is the word-character digit.
+    assert re.search(r"\\bsection\\b", response, flags=re.IGNORECASE) is None
 
 
 def test_sentence_less_than_one_with_public_end_phrase_is_certified():
