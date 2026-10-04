@@ -1,0 +1,195 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_MINIMUM_CUT_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ROOT2_V6_CURRENT__WALL_CLOCK_OPTIMAL_EXACT_CUT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Replace stale action-count-first scheduling with exact causal critical-path minimization over the current 26-predicate Root2-V6/Root3-V2 world, while deleting proved-impossible routes and preserving fail-closed authority.",
+  "current_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gaps": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "terminal": false
+  },
+  "implementation": {
+    "exact_cut_solver": {
+      "path": "canonical/runtime/minimum_terminal_cut_solver_v2.py",
+      "git_blob_sha": "da2ae55103f9b8f8bbe10e6316d152027e31854c",
+      "tests": "canonical/tests/test_minimum_terminal_cut_solver_v2.py",
+      "tests_git_blob_sha": "065af38ed6cb6be6680a18dcede3ca65cb5374d1",
+      "objective": [
+        "MAXIMIZE_CURRENT_UNRESOLVED_PREDICATE_COVERAGE",
+        "MINIMIZE_CAUSAL_CRITICAL_PATH_WALL_CLOCK",
+        "MINIMIZE_FRESH_REALITY",
+        "MINIMIZE_ACTION_COUNT",
+        "MAXIMIZE_CONSERVATIVE_CORRELATION_AWARE_INFORMATION_VALUE"
+      ]
+    },
+    "supertransaction": {
+      "path": "canonical/runtime/terminal_adaptive_supertransaction_v2.py",
+      "git_blob_sha": "77a00cc6f71c3ceb0e668217299ce04a5d5b63b6",
+      "tests": "canonical/tests/test_terminal_adaptive_supertransaction_v2.py",
+      "tests_git_blob_sha": "574c4be558049e8085c419274d4bb4abded871a0",
+      "causal_phase_lower_bound": 1,
+      "causal_phase_upper_bound": 2,
+      "phase_z": "ZERO_REALITY_SUPERTRANSACTION",
+      "phase_r": "MINIMUM_REALITY_SUPERTRANSACTION__CONDITIONAL",
+      "finality": "AUTOMATIC_RECEIPT_BACKPROP__NO_SEPARATE_MANUAL_PHASE"
+    }
+  },
+  "authority_inputs": {
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "78f70dc63654b7d4be0917fce9405088177a48b5"
+    },
+    "root2_v6": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V6.json",
+      "git_blob_sha": "fcbdb818b63b4986b026db29c400a47373a26fdb"
+    },
+    "root2_v6_activation": {
+      "path": "canonical/governance/ROOT2_FRONTIER_V6_ACTIVATION_V1.json",
+      "git_blob_sha": "9a0ef849b74faa26c07d94035c8455eee8777cdd"
+    },
+    "root2_v6_verification": {
+      "path": "canonical/verification/ROOT2_FRONTIER_V6_FINANCE_COMPRESSION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "b4cac01e5c1fe32a300607fe89854b4081376c3f"
+    },
+    "root3_v2": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+      "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d"
+    },
+    "retrieval_v19": {
+      "path": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+      "git_blob_sha": "55b1d411561f720fcd9d66c127cecd63ef0b5f5e"
+    },
+    "tb4_attainability": {
+      "path": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+      "git_blob_sha": "a7b0c692251b92819007c581b9fe84b75960cab7"
+    },
+    "finance_zero_spend_guard": {
+      "path": "canonical/governance/FINANCE_AGENT_V2_ZERO_SPEND_RUNTIME_GUARD_V1.json",
+      "git_blob_sha": "278a3317564138088fd8af83a8734a84fe09b158"
+    },
+    "finance_zero_spend_guard_verification": {
+      "path": "canonical/verification/FINANCE_AGENT_V2_ZERO_SPEND_RUNTIME_GUARD_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "342740561634a86d0c55876ee126e8122b21af0f"
+    },
+    "osworld_methodology": {
+      "path": "canonical/governance/OSWORLD_OPUS55_METHODOLOGY_PUBLIC_CORROBORATION_20261004_V1.json",
+      "git_blob_sha": "259a6fa8f7daf744e6e06902d43925419cdd4d9b"
+    }
+  },
+  "deterministic_route_deletions": [
+    {
+      "route": "TB4_FROZEN_CURRENT_NO_REPLAY_THRESHOLD_ROUTE",
+      "probability_upper": 0,
+      "basis": "INDEPENDENT_VERIFIED_180_LT_220",
+      "reopen": "CREDITABILITY_ROUTE_OR_CARRIER_ASSUMPTION_MATERIALLY_CHANGES"
+    },
+    {
+      "route": "TB4_CIRCLECI_FREE_XLARGE_GEN2",
+      "probability_upper": 0,
+      "basis": "CURRENT_FREE_PLAN_RESOURCE_TABLE_EXCLUDES_REQUIRED_XLARGE",
+      "reopen": "NEWER_PRIMARY_SOURCE_OR_ACCOUNT_SPECIFIC_VERIFIED_ZERO_SPEND_8CPU_ROUTE"
+    },
+    {
+      "route": "CURSORBENCH_OWNER_ACCESS_SEARCH",
+      "probability_upper": 0,
+      "basis": "DIRECT_OWNER_REPLY_CLOSED_EXTERNAL_EVALUATION_ROUTE",
+      "reopen": "MATERIAL_POLICY_CHANGE_OR_STRONGER_SCOPE_COMPLETE_PROOF"
+    },
+    {
+      "route": "AUTOMATIONBENCH_PUBLIC600_EQUIVALENCE_SEARCH",
+      "probability_upper": 0,
+      "basis": "PUBLIC_600_NOT_EXACT_PRIVATE_LEADERBOARD_POPULATION",
+      "reopen": "EXACT_PRIVATE_ROUTE_OWNER_EVIDENCE_OR_STRONGER_SCOPE_COMPLETE_PROOF"
+    }
+  ],
+  "phase_policy": {
+    "Z": {
+      "name": "ZERO_REALITY_SUPERTRANSACTION",
+      "parallel": true,
+      "fresh_reality": false,
+      "actions": [
+        "USE_RETRIEVAL_V19_ONLY_FOR_LOAD_BEARING_NEW_OR_UNSATURATED_FACTS",
+        "BIND_EXACT_COMPARATOR_IDENTITY_TUPLES_BEFORE_ANY_SCORE",
+        "APPLY_OBJECTIVE_CEILING_FORMAL_DOMINANCE_AND_STRONGER_SCOPE_PROOFS",
+        "BIND_INFORMATION_POSITIVE_OWNER_OR_ACCESS_RECEIPTS_ON_ARRIVAL",
+        "RUN_ONLY_NAMED_ZERO_CASE_ACCOUNT_PROTOCOL_AND_QUOTA_PREFLIGHTS",
+        "FINANCE_INDEX_MINIMIZE_VERIFIED_NORMALIZED_WEIGHTED_LOWER_BOUND_DEFICIT_TO_61",
+        "FINANCE_AGENT_BIND_VALS_ACCESS_SUITE_ID_FREE_ONLY_ACCOUNT_STATE_AND_GUARDED_HARNESS_ADAPTER",
+        "RECOMPUTE_ROOT2_ROOT3_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA"
+      ],
+      "stop": "VERIFIED_ZERO_REALITY_FIXED_POINT"
+    },
+    "R": {
+      "name": "MINIMUM_REALITY_SUPERTRANSACTION",
+      "conditional": true,
+      "gate": "PHASE_Z_FIXED_POINT_LEAVES_UNRESOLVED_AND_EXPLICIT_FRESH_REALITY_AUTHORITY_IS_GRANTED",
+      "actions": [
+        "EXECUTE_ONLY_MINIMUM_FIXED_BAR_SCORE_RESIDUALS_WITH_PASS_FAIL_LOCKS",
+        "EXECUTE_ONE_SHARED_ROOT3_MATCHED_SUPERPORTFOLIO_WAVE",
+        "EXECUTE_SURVIVING_FOUR_DIRECT_ORACLE_LEAVES_AS_ONE_PARALLEL_MICROBATCH"
+      ],
+      "backprop": "EVERY_VERIFIED_RECEIPT_RECOMPUTES_ACCEPTANCE_AND_RESCHEDULES_IMMEDIATELY"
+    }
+  },
+  "finance_v6_effects": {
+    "finance_index_componentwise_opus_noninferiority_mandatory": false,
+    "finance_agent_scored_execution_mass": 1350,
+    "finance_agent_zero_spend_guard_verified": true,
+    "finance_agent_free_quota_sufficiency_preclaimed": false
+  },
+  "probability_policy": {
+    "deductive_certainty": "P_IS_0_OR_1_ONLY_WHEN_PROVED",
+    "uncalibrated_external_event": "PRESERVE_INTERVAL_UNKNOWN__NO_POINT_ESTIMATE",
+    "repeated_bernoulli": "JEFFREYS_BETA_POSTERIOR_ONLY",
+    "correlated_routes": "GROUP_MAX_OR_EQUIVALENT_NO_DOUBLE_COUNT"
+  },
+  "search_policy": {
+    "authority": "GLOBAL_RETRIEVAL_ENTRYPOINT_V4",
+    "single_engine": "REJECTED_AS_STRUCTURALLY_INSUFFICIENT",
+    "full_web_index_rebuild": "REJECTED_AS_DOMINATED",
+    "stop": "FIRST_INDEPENDENTLY_VERIFIED_SUFFICIENT_WITNESS",
+    "open_world_miss": "UNKNOWN_NOT_NONEXISTENT"
+  },
+  "finality": {
+    "separate_manual_phase": false,
+    "rule": "RECOMPUTE_ALL_38_AFTER_EVERY_RECEIPT__WHEN_UNRESOLVED_ZERO_RUN_FAMILY_REDUCER_OWNERSHIP_PROMOTION_CLEANROOM_AND_FINAL_BUNDLE_ATOMICALLY"
+  },
+  "proposed_authority_if_verified": {
+    "scheduling_authority": true,
+    "zero_reality_execution_scope": "ONLY_ACTIONS_ALREADY_SEPARATELY_AUTHORIZED_BY_THEIR_BOUND_AUTHORITIES",
+    "execution_authority_broadening": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_FRESH_REALITY_BEFORE_VERIFIED_ZERO_REALITY_FIXED_POINT",
+    "NO_PUBLIC_PRIVATE_SUBSTITUTION_WITHOUT_EXACT_OR_SUPERSET_PROOF",
+    "NO_REEXECUTION_OF_ZERO_PROBABILITY_ROUTE_WITHOUT_DECLARED_REOPEN_EVENT",
+    "NO_POINT_PROBABILITY_WITHOUT_CALIBRATION_OR_DEDUCTIVE_CERTAINTY",
+    "NO_EXECUTION_AUTHORITY_INVENTED_BY_SCHEDULER",
+    "FINALITY_IS_AUTOMATIC_BACKPROP_NOT_A_SEPARATE_MANUAL_ACTION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
