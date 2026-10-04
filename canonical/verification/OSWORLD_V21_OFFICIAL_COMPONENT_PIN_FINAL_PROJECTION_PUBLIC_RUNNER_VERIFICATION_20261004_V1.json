@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_OFFICIAL_COMPONENT_PIN_FINAL_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT2_SCHEDULER_AND_TERMINAL_AUTHORITY_PROJECTION__11_TOTAL_PRIMARY_SOURCE_SEARCH_DELETIONS__5_NEW_OSWORLD_IDENTITY_DELETIONS__ZERO_CREDIT",
+  "exact_subjects": {
+    "subject": {
+      "path": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_V1.json",
+      "git_blob_sha": "be3e5952330fd331768405a9dc2c384812415c7d"
+    },
+    "source_verification": {
+      "path": "canonical/verification/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "ddd50cd5fcf7762ebd8ad6b66fff3a6bfc149650"
+    },
+    "activation": {
+      "path": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_ACTIVATION_V1.json",
+      "git_blob_sha": "f6d7cdc2924aaf91ea69fe5afccf584131a66355"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "90dbeaf74cda18edd38d1cc34a003b4fffd236a0"
+    },
+    "terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "9ed6b29ee0fc0f7edb6545dd1312731009e902f7"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1675,
+    "verifier_head_sha": "4b65a41807e0f070806f219bf15a689071e56e86",
+    "merge_commit": "118191e1fadb5d4081921377de375ca7f1533fc6",
+    "workflow_run_id": 37175475862,
+    "workflow_job_id": 111357079324,
+    "conclusion": "success"
+  },
+  "verified": {
+    "source_receipt_bound_exactly": true,
+    "activation_bound_exactly": true,
+    "root2_scheduler_binding_exact": true,
+    "terminal_authority_binding_exact": true,
+    "legacy_primary_source_search_deletion_count": 6,
+    "supplemental_osworld_identity_search_deletion_count": 5,
+    "effective_primary_source_search_deletion_count": 11,
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0
+  },
+  "preserved_residual": [
+    "HUGGING_FACE_OSWORLD_GATED_ASSET_ACCOUNT_ACCESS",
+    "ANTHROPIC_EXACT_GITLAB_IDENTITY_OR_PROTOCOL_EQUIVALENCE",
+    "SELF_HOST_RUNTIME_AND_TOKEN_REACHABILITY",
+    "END_TO_END_PROTOCOL_EQUIVALENCE",
+    "OPUS_4_8_GRADER_ROUTE",
+    "BRAIN_SCORE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
