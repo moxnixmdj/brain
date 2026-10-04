@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_POINTWISE_VECTOR_AUTHORITY_FIREWALL_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__POINTWISE_STRUCTURAL_THEOREM_SEPARATED_FROM_CHECKER_VECTOR_AUTHORITY__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "defect": {
+    "runtime": "canonical/runtime/livebench_legacy15_pointwise_search_v1.py",
+    "prior_public_surface": "select_best_postvalidated_AND_JSON_run_ACCEPT_CALLER_SUPPLIED_checker_results",
+    "prior_status": "COULD_EMIT_PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED_WHEN_THE_SEMANTIC_UNSAT_CERTIFICATE_CLOSED_GIVEN_THE_SUPPLIED_VECTOR",
+    "authority_gap": "THE_UNSAT_THEOREM_PROVES_MAXIMALITY_CONDITIONAL_ON_THE_CHECKER_VECTOR__IT_DOES_NOT_AUTHENTICATE_THAT_THE_CANDIDATE_RESPONSE_ACTUALLY_PRODUCED_THAT_VECTOR",
+    "counterexample_shape": "A_CALLER_CAN_SUPPLY_A_NONSATISFYING_RESPONSE_WITH_A_FABRICATED_PARTIAL_TRUE_VECTOR_ON_A_KNOWN_UNSAT_PAIR_AND_RECEIVE_A_STRUCTURALLY_COMPLETE_POINTWISE_CERTIFICATE"
+  },
+  "repair": {
+    "runtime_git_blob_sha": "a49048d16eca4ef39d342e82198c65cba9a81257",
+    "tests_git_blob_sha": "7fbba4b73d012a6192d8c6283eec30aa8e0d35e4",
+    "public_external_vector_status": "CONDITIONAL__POINTWISE_OPTIMAL_GIVEN_UNVERIFIED_CHECKER_VECTOR",
+    "generic_callback_status": "CONDITIONAL__POINTWISE_OPTIMAL_GIVEN_UNVERIFIED_CHECKER_VECTOR",
+    "authoritative_pass_requires": [
+      "CANDIDATES_POSTVALIDATED_THROUGH_THE_PINNED_LIVEBENCH_ADAPTER",
+      "POSTVALIDATOR_BINDING_CONTAINS_THE_EXACT_FROZEN_STRICT_EVALUATOR_BLOB",
+      "POSTVALIDATOR_BINDING_EXPLICITLY_PROVES_THE_STRICT_NONEMPTY_GATE_IS_BOUND"
+    ],
+    "authoritative_pass_status": "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED",
+    "conditional_fact_preserved": "pointwise_optimal_given_checker_vector",
+    "authoritative_fact": "pointwise_optimal"
+  },
+  "frozen_source_binding": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "path": "livebench/if_runner/instruction_following_eval/evaluation_main.py",
+    "git_blob_sha": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+    "strict_gate_line": "if response.strip() and instruction.check_following(response):"
+  },
+  "composition_with_parallel_truth_repair": {
+    "related_open_prs": [1936, 1937],
+    "relationship": "THEIR_STRICT_POSTVALIDATOR_REPAIR_SUPPLIES_THE_CONTENT_ADDRESSED_STRICT_BINDING_REQUIRED_BY_THIS_FIREWALL__UNTIL_THAT_BINDING_EXISTS_THE_PINNED_PATH_REMAINS_CONDITIONAL",
+    "no_duplicate_checker_patch": true
+  },
+  "security_property": "NO_CALLER_SUPPLIED_BOOLEAN_VECTOR_OR_ARBITRARY_CALLBACK_CAN_CREATE_AN_AUTHORITATIVE_POINTWISE_PASS",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_POINTWISE_SOLVER_IS_COMPLETE_OVER_ALL_ACTIVE15_SLOT_CLASSES",
+    "NO_CLAIM_THE_STRICT_POSTVALIDATOR_REPAIR_IS_ALREADY_MERGED_OR_INDEPENDENTLY_VERIFIED",
+    "NO_TERMINAL_ROWS_HIDDEN_KWARGS_COMPARATOR_RESPONSES_OR_CASE_FREQUENCIES_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
