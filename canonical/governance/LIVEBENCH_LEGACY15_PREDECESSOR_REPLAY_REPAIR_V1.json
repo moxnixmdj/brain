@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY15_PREDECESSOR_REPLAY_REPAIR_V1",
+  "date": "2026-10-05",
+  "status": "REPAIRED_CANDIDATE__INDEPENDENT_FULL_REPLAY_PENDING__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "antecedent_falsification": {
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37201133115,
+    "workflow_job_id": 111432881793,
+    "verified_head_sha": "7f4fbcf0f621f96eaad77578587e95a2d2f591d5",
+    "result": "FAIL",
+    "eligible_rows": 193,
+    "solved_rows": 162,
+    "compile_fail_rows": 26,
+    "generation_fail_rows": 1,
+    "checker_fail_rows": 4,
+    "max_candidates_per_row": 28,
+    "active_terminal_rows_read": 0
+  },
+  "root_causes": [
+    {
+      "id": "NTH_PARAGRAPH_VISIBLE_TEMPLATE_BACKSLASH_OVERESCAPE",
+      "affected_failure_count": 26,
+      "fact": "The V1 recognizer required doubled literal backslashes while the frozen upstream build_description emits the visible text '\\\\n\\\\n' with one literal backslash before each n.",
+      "repaired_blob": "34f4df9f0bd265fc555686bd251a264e446d4c04"
+    },
+    {
+      "id": "OUTER_QUOTE_MASKS_FIRST_MARKDOWN_BULLET",
+      "affected_failure_count": 4,
+      "fact": "The frozen BulletListChecker is line anchored (^\\\\s*\\\\*...), so an opening quotation mark directly before the first '*' hides that bullet. Moving the opening quote to its own line preserves QuotationChecker and restores bullet visibility.",
+      "repaired_blob": "8c8e574af8a275a96e2df2f789ebe18cdbb3b162"
+    },
+    {
+      "id": "FIXED_POSTSCRIPT_FILLER_CAN_COLLIDE_WITH_FORBIDDEN_WORD",
+      "affected_failure_count": 1,
+      "fact": "The candidate generator hard-coded 'note' after the required postscript marker; a visible forbidden-word constraint can reject every candidate. The repair uses the existing forbidden-safe token generator for free postscript payload text.",
+      "repaired_blob": "8c8e574af8a275a96e2df2f789ebe18cdbb3b162"
+    }
+  ],
+  "brain_repair": {
+    "branch": "repair/livebench-legacy15-clean-replay-v2-20261005",
+    "pull_request": 1865,
+    "head_sha": "066f568df47edbb082fcb8aa017507c6eca823cc",
+    "commits": [
+      "0697c55ac90626ec7204e836bbf4793edf175918",
+      "01a213f3483117936607d0a7ed9cc65c4ab7870e",
+      "469c148dc36e36644d297ae9d268f84a0b2fbce0",
+      "066f568df47edbb082fcb8aa017507c6eca823cc"
+    ],
+    "regression_test_blobs": {
+      "visible_compiler_v1": "3ae7f479701a84f1a9755bbb0af9261f7dc476eb",
+      "joint_candidate_generator_v1": "db62eef3b421d494656cd3d4aa80d91076405536"
+    }
+  },
+  "independent_replay_wiring": {
+    "runner_branch": "verify/livebench-legacy15-joint-predecessor-v1",
+    "patched_head_sha": "a2c46b32c264a6ded651a8403fdcb8c0c7f1ba4e",
+    "pinned_compiler_blob": "34f4df9f0bd265fc555686bd251a264e446d4c04",
+    "pinned_generator_blob": "8c8e574af8a275a96e2df2f789ebe18cdbb3b162",
+    "trigger_pull_request": 2070,
+    "default_branch_workflow_commit": "52729e9f63852699eb0ffd69626ad5e96fb3616a",
+    "replay_result": "PENDING__NO_VISIBLE_CHECK_OR_RECEIPT_YET"
+  },
+  "promotion_gate": {
+    "required": "A fresh independent run over the exact 200-row removed predecessor must report eligible_rows=193, compile_fail_rows=0, generation_fail_rows=0, checker_fail_rows=0, solved_rows=193 before this repair can receive clean historical composition credit.",
+    "terminal_acceptance_still_requires": "A stronger case-independent or otherwise admissible proof sufficient for the frozen acceptance predicate; predecessor replay alone does not authorize dirty exact200 score reuse.",
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "active_terminal_rows_consumed": 0
+  }
+}
