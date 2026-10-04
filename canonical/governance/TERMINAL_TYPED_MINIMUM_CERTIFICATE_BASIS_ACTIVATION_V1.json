@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_TYPED_MINIMUM_CERTIFICATE_BASIS_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_ACTIVATION__INDEPENDENT_SUBJECT_PASS_BOUND__SCHEDULING_ONLY__ZERO_CREDIT__ACTIVATION_VERIFICATION_REQUIRED",
+  "objective": "ACTIVATE_TYPED_CERTIFICATE_BASIS_AS_A_PRE_SCHEDULING_FILTER_TO_MINIMIZE_INVALID_OR_REDUNDANT_ZERO_REALITY_PROOF_ACTIONS",
+  "subjects": {
+    "planner": {
+      "path": "canonical/runtime/typed_minimum_certificate_basis_v1.py",
+      "git_blob_sha": "c46dbe13b1ba38fed088272db0d8d89e273efdbd"
+    },
+    "contract": {
+      "path": "canonical/governance/TERMINAL_TYPED_MINIMUM_CERTIFICATE_BASIS_V1.json",
+      "git_blob_sha": "768115e47787a801b972b475675396032c17eeab"
+    },
+    "public_verification": {
+      "path": "canonical/verification/TERMINAL_TYPED_CERTIFICATE_BASIS_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+    }
+  },
+  "scheduler_semantics": [
+    "BEFORE_STRONGER_PROOF_ACTION_SELECTION_CLASSIFY_EACH_TARGET_BY_ADMISSIBLE_PROOF_TYPE",
+    "REJECT_CERTIFICATE_TO_PREDICATE_EDGES_WITH_ILLEGAL_METRIC_OR_SEMANTIC_TRANSPORT",
+    "SOLVE_MINIMUM_DECLARED_COST_TYPED_CERTIFICATE_BASIS_OVER_THE_CURRENT_CANDIDATE_SET",
+    "PASS_SELECTED_CANDIDATES_TO_THE_SEPARATE_PARALLEL_MAKESPAN_SCHEDULER",
+    "AFTER_EVERY_VERIFIED_DELTA_RECOMPUTE_TYPED_BASIS_AND_DELETE_DOMINATED_ACTIONS"
+  ],
+  "relative_elo_rule": {
+    "source": "canonical/governance/RELATIVE_ELO_ABSOLUTE_PROOF_NONTRANSPORT_ACTIVATION_V1.json",
+    "affected": [
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822"
+    ],
+    "forbidden_as_sufficient": "PURE_ABSOLUTE_BEHAVIORAL_CERTIFICATE_WITHOUT_VERIFIED_RELATIVE_SCORE_BRIDGE"
+  },
+  "isolation_binding": {
+    "generic_runtime": "canonical/runtime/generic_precommit_isolation_theorem_v1.py",
+    "shadow_lease_policy": "canonical/governance/SHADOW_REALITY_LEASE_POLICY_V1.json",
+    "rule": "REUSE_EXISTING_INDEPENDENTLY_VERIFIED_MECHANISM__NO_DUPLICATE_ISOLATION_KERNEL"
+  },
+  "arena_effect": {
+    "correction": "canonical/governance/ARENA_COMPARATOR_PUBLIC_EVIDENCE_CORRECTION_20261004_V1.json",
+    "rule": "ACCOUNT_AUTHENTICATED_ARENA_FACT_SWEEP_REMAINS_LOAD_BEARING__LOGIN_GATED_API_SEMANTICS_MUST_NOT_BE_PROMOTED_FROM_PUBLIC_SNIPPETS"
+  },
+  "hard_rules": [
+    "SCHEDULING_ACTIVATION_IS_NOT_ACCEPTANCE_EVIDENCE",
+    "NO_TARGET_THRESHOLD_OR_SCOPE_WEAKENING",
+    "NO_INVENTED_ROUTE_SUCCESS_PROBABILITIES",
+    "NO_FRESH_REALITY_FROM_THIS_ACTIVATION",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "ROOT2_ROOT3_AND_CURRENT_TERMINAL_COUNTS_REMAIN_UNCHANGED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_activation_verification_required": true
+}
