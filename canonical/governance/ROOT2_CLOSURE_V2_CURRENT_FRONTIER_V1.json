@@ -1,11 +1,11 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V1",
   "date": "2026-10-04",
-  "status": "CURRENT_SESSION_COMPILED__FAIL_CLOSED_ON_SOURCE_BLOB_DRIFT__ZERO_CREDIT__NO_FRESH_REALITY",
+  "status": "CURRENT_RECOMPILED_AFTER_AUTHORITY_PROPAGATION__FAIL_CLOSED_ON_SOURCE_BLOB_DRIFT__ZERO_CREDIT__NO_FRESH_REALITY",
   "source_bindings": {
     "root_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "8b8721e0f9b65ab86f193fcf7d19b8a8d286b0a4"
+      "git_blob_sha": "e47c739708c728d0d293e8973e46605b11f90eef"
     },
     "route_inventory": {
       "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
@@ -204,5 +204,6 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
-  }
+  },
+  "recompile_reason": "AUTHORITY_PROPAGATION_CHANGED_ROOT_STATE_BLOB_ONLY__SEMANTIC_ROOT2_PARTITION_AND_FRONTIER_ACTIONS_UNCHANGED__REBOUND_TO_POST_PROPAGATION_EXACT_BLOBS"
 }
