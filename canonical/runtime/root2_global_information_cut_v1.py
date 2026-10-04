@@ -32,8 +32,8 @@ def _parse_action(raw: dict) -> Action:
     aid = str(raw.get("id") or "").strip()
     closes = frozenset(str(x).strip() for x in raw.get("closes") or [] if str(x).strip())
     deps = tuple(str(x).strip() for x in raw.get("dependencies") or [] if str(x).strip())
-    if not aid or not closes:
-        raise CutError("ACTION_ID_AND_CLOSES_REQUIRED")
+    if not aid:
+        raise CutError("ACTION_ID_REQUIRED")
     wall = float(raw.get("wall_clock_s", 0))
     reality = int(raw.get("reality_units", 0))
     count = int(raw.get("action_count", 1))
@@ -59,13 +59,25 @@ def _dependency_closure(selected: frozenset[str], by_id: dict[str, Action]) -> f
     return frozenset(out)
 
 
+def _critical_path_s(aid: str, by_id: dict[str, Action], memo: dict[str, float], visiting: set[str]) -> float:
+    if aid in memo:
+        return memo[aid]
+    if aid in visiting:
+        raise CutError("DEPENDENCY_CYCLE:" + aid)
+    visiting.add(aid)
+    action = by_id[aid]
+    dep_path = max((_critical_path_s(dep, by_id, memo, visiting) for dep in action.dependencies), default=0.0)
+    visiting.remove(aid)
+    memo[aid] = dep_path + action.wall_clock_s
+    return memo[aid]
+
+
 def _cost(action_ids: frozenset[str], by_id: dict[str, Action]) -> tuple[float, int, int, tuple[str, ...]]:
-    # Dependencies are serialized only when explicitly declared. Otherwise actions are assumed
-    # parallelizable, so wall-clock is the longest selected action, not the sum.
     closure = _dependency_closure(action_ids, by_id)
     if not closure:
         return (0.0, 0, 0, ())
-    wall = max(by_id[x].wall_clock_s for x in closure)
+    memo: dict[str, float] = {}
+    wall = max(_critical_path_s(aid, by_id, memo, set()) for aid in action_ids)
     count = sum(by_id[x].action_count for x in closure)
     reality = sum(by_id[x].reality_units for x in closure)
     return (wall, count, reality, tuple(sorted(closure)))
@@ -73,15 +85,21 @@ def _cost(action_ids: frozenset[str], by_id: dict[str, Action]) -> tuple[float, 
 
 def solve(predicates: Iterable[str], actions: Iterable[Action]) -> dict:
     preds = tuple(dict.fromkeys(str(x).strip() for x in predicates if str(x).strip()))
+    action_list = list(actions)
     if not preds:
         raise CutError("PREDICATES_REQUIRED")
+    if not action_list:
+        raise CutError("ACTIONS_REQUIRED")
     index = {p: i for i, p in enumerate(preds)}
     full = (1 << len(preds)) - 1
-    by_id = {a.action_id: a for a in actions}
-    if len(by_id) == 0:
-        raise CutError("ACTIONS_REQUIRED")
-    if len(by_id) != len(list(actions)):
+    by_id = {a.action_id: a for a in action_list}
+    if len(by_id) != len(action_list):
         raise CutError("DUPLICATE_ACTION_ID")
+
+    # Validate the full dependency graph before optimizing any subset.
+    for action in action_list:
+        _dependency_closure(frozenset({action.action_id}), by_id)
+        _critical_path_s(action.action_id, by_id, {}, set())
 
     coverage: dict[str, int] = {}
     for aid, a in by_id.items():
@@ -91,7 +109,8 @@ def solve(predicates: Iterable[str], actions: Iterable[Action]) -> dict:
                 mask |= 1 << index[p]
         coverage[aid] = mask
 
-    # DP state stores the selected root action ids. Cost evaluation expands dependencies.
+    # Exact set-cover DP over the current <=19 predicate Root2 surface.
+    # State stores selected root actions; dependency expansion happens in _cost.
     best: dict[int, frozenset[str]] = {0: frozenset()}
     for aid in sorted(by_id):
         bit = coverage[aid]
@@ -106,8 +125,20 @@ def solve(predicates: Iterable[str], actions: Iterable[Action]) -> dict:
                 best[new_mask] = candidate
 
     selected = best.get(full)
-    covered_mask = full if selected is not None else max(best, key=lambda m: (m.bit_count(), -_cost(best[m], by_id)[0]))
-    selected = best[covered_mask]
+    if selected is None:
+        covered_mask = max(
+            best,
+            key=lambda m: (
+                m.bit_count(),
+                -_cost(best[m], by_id)[0],
+                -_cost(best[m], by_id)[1],
+                -_cost(best[m], by_id)[2],
+            ),
+        )
+        selected = best[covered_mask]
+    else:
+        covered_mask = full
+
     closure = _dependency_closure(selected, by_id)
     covered = [p for p, i in index.items() if covered_mask & (1 << i)]
     unresolved = [p for p, i in index.items() if not covered_mask & (1 << i)]
@@ -123,12 +154,12 @@ def solve(predicates: Iterable[str], actions: Iterable[Action]) -> dict:
         "selected_root_actions": sorted(selected),
         "selected_with_dependencies": sorted(closure),
         "objective": {
-            "wall_clock_s_lower_model": wall,
+            "critical_path_wall_clock_s": wall,
             "action_count": count,
             "reality_units": reality,
-            "lexicographic_order": ["wall_clock_s_lower_model", "action_count", "reality_units"],
+            "lexicographic_order": ["critical_path_wall_clock_s", "action_count", "reality_units"],
         },
-        "hard_nonclaim": "WALL_CLOCK_IS_A_SCHEDULING_LOWER_MODEL_NOT_A_RUNTIME_GUARANTEE",
+        "hard_nonclaim": "DECLARED_ACTION_DURATIONS_ARE_INPUTS_NOT_EMPIRICALLY_GUARANTEED_RUNTIME",
     }
 
 
