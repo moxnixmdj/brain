@@ -1,0 +1,29 @@
+{
+  "schema":"PROJECT_BRAIN_ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_ACTIVATION_V1",
+  "date":"2026-10-04",
+  "status":"CANDIDATE__VERIFIED_SOURCE_SEARCH_DELETIONS_OVER_ACTIVE_V8__PROJECTION_VERIFY_REQUIRED__ZERO_CREDIT",
+  "active_parent":{"path":"canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V8.json","git_blob_sha":"2eaeb74fe306ee2507145e26eb731f69f46e6153"},
+  "source_refresh":{"path":"canonical/governance/ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_20261004_V1.json","git_blob_sha":"85f2a5de5885d158e08db6cceebf0e30cf5d5bb0"},
+  "verification":{"path":"canonical/verification/ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json","git_blob_sha":"a0f46fe3b577c91686b1b8cc5b2436b35556a708","workflow_run_id":37172799883,"workflow_job_id":111349049144,"conclusion":"success"},
+  "delete":[
+    "HLE_EXISTENCE_AND_GENERIC_GATING_SEARCH",
+    "CHARTOGRAPHY_GENERIC_FREE_TIER_AND_JUDGE_IDENTITY_SEARCH",
+    "OSWORLD_V21_RELEASE_IDENTITY_108_TASK_AND_SELF_HOST_REQUIREMENT_SEARCH",
+    "BUILDKITE_LARGE_AS_DURABLE_FREE_PLAN_CARRIER",
+    "AUTOMATIONBENCH_PUBLIC600_PRIVATE_EQUIVALENCE_REPEAT_SEARCH",
+    "CURSORBENCH_COMPARATOR_DRIFT_SEARCH_WHILE_CURRENT_OWNER_PAGE_REMAINS_57_8"
+  ],
+  "preserve":[
+    "HLE_ACCOUNT_ACCESS_AND_GRADER_RELATION",
+    "CHARTOGRAPHY_PROJECT_QUOTA",
+    "OSWORLD_GATED_ACCESS_AND_PROTOCOL_EQUIVALENCE",
+    "BUILDKITE_ZERO_CASE_PREFLIGHT_IF_ELIGIBLE",
+    "OWNER_PRIVATE_RESULTS_OR_STRONGER_PROOFS"
+  ],
+  "compatibility":{"v9_candidate_unchanged":true,"root1_unchanged":true,"root3_unchanged":true,"acceptance_unchanged":true},
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0},
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false,
+  "independent_projection_verification_required":true
+}
