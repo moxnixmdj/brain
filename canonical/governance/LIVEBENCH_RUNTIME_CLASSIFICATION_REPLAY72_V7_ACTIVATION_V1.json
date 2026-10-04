@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "QUARANTINED__SUPERSEDED_DIAGNOSTIC_ENVIRONMENT_EQUIVALENCE_VERIFICATION_PENDING__ZERO_CREDIT",
+  "status": "ACTIVE_CONDITIONAL__POINT_OF_USE_ZERO_CASE_VERIFY_THEN_ONE_EPOCH_SANITIZED_REPLAY72__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "candidate": {
     "path": "canonical/governance/LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_CANDIDATE.json",
@@ -22,10 +22,12 @@
   "executor": {
     "repository": "moxnixmdj/verification-capsule-runner",
     "diagnostic_path": "diagnose_livebench_replay72_v7_sanitized.py",
-    "diagnostic_git_blob_sha": "e9a5a5937b19e76bf04444c288e3a75113874ed7",
+    "diagnostic_git_blob_sha": "55d4b961f58dc45c1513f9c9282a63773444773d",
     "classifier_path": "livebench_v7_sanitized_classifier.py",
     "classifier_git_blob_sha": "44df7313c83914204299953dda81900fae85ab68",
-    "base_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e"
+    "base_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "point_of_use_verifier_path": "verify_livebench_v7_sanitized_diagnostic.py",
+    "point_of_use_verifier_git_blob_sha": "0c63704ba4e462c957516bc0f1ee0bdbdea8465c"
   },
   "one_epoch_contract": {
     "maximum_successful_replays": 1,
@@ -36,17 +38,21 @@
     "case_73_or_later_authorized": false,
     "score_or_acceptance_settlement_authorized": false,
     "output_must_be_aggregate_sanitized_histogram_only": true,
-    "fail_closed_on_any_bound_blob_or_root_drift": true
+    "fail_closed_on_any_bound_blob_or_root_drift": true,
+    "environment_equivalence": "MUST_RUN_V6_INSTALL_SCORER_DEPS_AND_PREPARE_NLTK_BEFORE_TERMINAL_DATASET_READ",
+    "point_of_use_verifier_required": true,
+    "verifier_failure_aborts_before_terminal_dataset_read": true
   },
   "authority": {
-    "execution": false,
-    "replay_existing_prefix": false,
+    "execution": true,
+    "replay_existing_prefix": true,
     "predicate_local_fresh_reality": false,
     "new_case_exposure": false,
     "global_fresh_reality": false,
     "promotion": false,
     "acceptance_credit": false,
-    "root1_reopen": false
+    "root1_reopen": false,
+    "condition": "EFFECTIVE_ONLY_IF_PUBLIC_GITHUB_RUNNER_EXACT_BLOB_CHECKS_PASS_AND_POINT_OF_USE_ZERO_CASE_VERIFIER_EXITS_0_BEFORE_DATASET_READ"
   },
   "post_execution_required": [
     "BIND_EXACT_EXECUTION_RECEIPT",
@@ -75,10 +81,16 @@
     "NO_TERMINAL_CASES_REPLAYED_BY_THIS_AUTHORITY",
     "NO_ACCEPTANCE_PROMOTION_ROOT1_OR_CAPABILITY_CREDIT"
   ],
-  "quarantine_reason": "BOUND_DIAGNOSTIC_BLOB_DOES_NOT_RECREATE_V6_PRE_CASE_DEPENDENCY_ENVIRONMENT__DO_NOT_EXECUTE",
-  "successor_pending": {
-    "diagnostic_git_blob_sha": "55d4b961f58dc45c1513f9c9282a63773444773d",
-    "verification_run_id": 37192715453,
-    "verification_status": "QUEUED"
+  "quarantine_reason": null,
+  "successor_pending": null,
+  "prior_independent_baseline_verification": {
+    "run_id": 37192412598,
+    "job_id": 111407201252,
+    "verified_prior_diagnostic_blob": "e9a5a5937b19e76bf04444c288e3a75113874ed7",
+    "note": "BASE_SANITIZATION_VERIFIED_INDEPENDENTLY; ENVIRONMENT_EQUIVALENCE_DELTA_MUST_PASS EXACT POINT_OF_USE VERIFIER"
+  },
+  "pending_redundant_external_verification_run": {
+    "run_id": 37192715453,
+    "status": "QUEUED_NOT_REQUIRED_FOR_CONDITIONAL_POINT_OF_USE_AUTHORITY"
   }
 }
