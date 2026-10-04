@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_V10_FORMAL_ROUTING_REPLAY72_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE__ONE_USE_REPLAY72_ONLY__CONTENT_ADDRESSED_EXECUTION_BINDING_VERIFIED__ZERO_CREDIT",
+  "status": "CONSUMED_FAIL_CLOSED__CLAIM_PRECEDED_CANONICAL_CONTENT_ADDRESSED_REBIND__DIAGNOSTIC_QUARANTINED__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "candidate": "canonical/governance/LIVEBENCH_V10_FORMAL_ROUTING_REPLAY72_CANDIDATE_V1.json",
   "verification": {
@@ -51,7 +51,10 @@
     "NO_CASE_73_OR_LATER",
     "NO_POLICY_WEAKENING",
     "NO_ACCEPTANCE_OR_PROMOTION_CREDIT",
-    "REVOKED_ACTIVATION_MUST_NOT_BE_USED_FOR_EXECUTION"
+    "REVOKED_ACTIVATION_MUST_NOT_BE_USED_FOR_EXECUTION",
+    "V10_EPOCH_CONSUMED__NO_FURTHER_EXECUTION",
+    "NO_RETROACTIVE_AUTHORITY_FROM_POST_CLAIM_REBIND",
+    "DIAGNOSTIC_REPLAY72_RESULT_QUARANTINED_FOR_LOAD_BEARING_USE"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -62,7 +65,7 @@
     "date": "2026-10-04",
     "reason": "VERIFIED_LAUNCHER_ACCEPTED_ARBITRARY_40_HEX_ACTIVATION_BLOB_WITHOUT_AUTHENTICATING_EXACT_ACTIVATION_ARTIFACT",
     "affected_launcher_git_blob_sha": "d7cd5b5c90f19ef02c1f27afa1629ed6af5500d9",
-    "one_use_claim_observed_before_revocation": false,
+    "one_use_claim_observed_before_revocation": true,
     "replay_observed_before_revocation": false,
     "repaired_launcher_candidate_git_blob_sha": "2d3b9ad4e3f4f02af56f402733a8d8bb04ab79c0",
     "reactivation_requirements": [
@@ -70,6 +73,15 @@
       "INDEPENDENT_VERIFY_EXACT_ACTIVATION_ARTIFACT_BINDING",
       "RECONFIRM_ONE_USE_CLAIM_ABSENT",
       "CREATE_NEW_CONTENT_ADDRESSED_ACTIVATION"
-    ]
+    ],
+    "claim_observed_at_utc": "2026-10-04T10:32:36Z",
+    "canonical_content_addressed_binding_commit": "d19175e818d2cba2701cf4351cda745ad422de2c",
+    "canonical_content_addressed_binding_commit_time_utc": "2026-10-04T10:32:53Z",
+    "canonical_rebind_commit": "28e1f17edc4ec81f89ef6b868a824af40440fc25",
+    "canonical_rebind_commit_time_utc": "2026-10-04T10:33:06Z",
+    "replay_completed_at_utc": "2026-10-04T10:33:24Z",
+    "chronology_reconciliation": "canonical/governance/LIVEBENCH_V10_REPLAY72_CHRONOLOGY_RECONCILIATION_20261004_V1.json",
+    "chronology_reconciliation_commit": "33402f506f6c4a16188bb47f8606284b0532cd49",
+    "consequence": "V10_ONE_USE_EPOCH_IS_CONSUMED_AND_NONEXECUTABLE__REPLAY72_RESULT_HAS_ZERO_ACCEPTANCE_PROMOTION_CAPABILITY_OR_TERMINAL_CREDIT_PENDING_INDEPENDENT_ADMISSIBILITY_VERIFICATION__NO_RETROACTIVE_AUTHORITY"
   }
 }
