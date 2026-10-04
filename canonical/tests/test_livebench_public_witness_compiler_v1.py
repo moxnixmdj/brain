@@ -105,16 +105,48 @@ def test_total_public_description_detector_self_coverage():
 
 
 def test_unsupported_public_checker_fails_closed_before_witness():
-    out = compile_witness("Task. Use at least 7 unique words in the response.")
+    out = compile_witness(
+        "Task. Use at least 2 different coordinating conjunctions in the response."
+    )
     assert out["status"] == "BLOCKED", out
     assert out["reason"] == "UNSUPPORTED_PUBLIC_CHECKER_DETECTED"
-    assert "UniqueWordCountChecker" in out["detected_unsupported_checkers"]
+    assert "ConjunctionCountChecker" in out["detected_unsupported_checkers"]
 
 
 def test_supported_plus_unsupported_public_checker_fails_closed():
     out = compile_witness(
         "Task. Answer with at least 5 words. "
-        "Use at least 7 unique words in the response."
+        "Use at least 2 different coordinating conjunctions in the response."
     )
     assert out["status"] == "BLOCKED", out
     assert out["reason"] == "UNSUPPORTED_PUBLIC_CHECKER_DETECTED"
+
+
+@pytest.mark.parametrize(
+    "prompt,checker",
+    [
+        ('Task. The response must include keyword "signal" in the 3-th sentence.', "modern:IncludeKeywordChecker"),
+        ("Task. Ensure each word in your response has at least one consonant cluster (two or more consonants together).", "modern:ConsonantClusterChecker"),
+        ("Task. Your response must include newline-separated bullet points denoted by * and at least one sub-bullet point denoted by - for each bullet point.", "modern:SubBulletPointsChecker"),
+        ("Task. Ensure that stop words constitute no more than 25% of the total words in your response.", "modern:StopWordPercentageChecker"),
+        ("Task. Your response must contain at most three different vowels.", "modern:ThreeVowelChecker"),
+        ("Task. Use at least 7 unique words in the response.", "modern:UniqueWordCountChecker"),
+        ("Task. Create stairs by incrementally indenting each new line.", "modern:IndentStairsChecker"),
+        ("Task. Each section must begin with a thesis statement in italics, use HTML to indicate the italics.", "modern:ItalicsThesisChecker"),
+        ("Task. Your answer must contain at least two sentences ending in a period followed by at least two newline-separated bullet points denoted by *.", "modern:SomeBulletPointsChecker"),
+        ("Task. Nest parentheses (and [brackets {and braces}]) at least 5 levels deep.", "modern:NestedParenthesesChecker"),
+        ("Task. Include quotes within quotes within quotes, at least 3 levels deep, alternating between double quotes and single quotes.", "modern:NestedQuotesChecker"),
+        ("Task. The response should include at least 4 personal pronouns.", "modern:PronounCountChecker"),
+        ("Task. No two consecutive words can share the same first letter.", "modern:NoConsecutiveFirstLetterChecker"),
+    ],
+)
+def test_expanded_public_single_checker_witnesses(prompt, checker):
+    out = compile_witness(prompt)
+    assert out["status"] == "PASS", out
+    assert out["matched_checkers"] == [checker]
+    assert out["terminal_case_content_used"] is False
+    assert out["hidden_metadata_used"] is False
+    assert out["network_used"] is False
+    assert out["incremental_spend_usd"] == 0
+    assert out["model_dependency_count"] == 0
+    assert out["terminal_authority"] is False
