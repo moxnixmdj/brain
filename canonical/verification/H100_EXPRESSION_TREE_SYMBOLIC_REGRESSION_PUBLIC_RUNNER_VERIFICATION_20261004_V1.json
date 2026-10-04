@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_H100_EXPRESSION_TREE_SYMBOLIC_REGRESSION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_H100_EXPRESSION_TREE_BYTES__ZERO_CAPABILITY_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+    "runtime_git_blob_sha": "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490",
+    "tests_path": "canonical/tests/test_h100_expression_tree_symbolic_regression_v1.py",
+    "tests_git_blob_sha": "c6285bb2bb5be1c65995a226df1761667a69d8e4",
+    "governance_path": "canonical/governance/H100_EXPRESSION_TREE_SYMBOLIC_REGRESSION_CANDIDATE_V1.json",
+    "governance_git_blob_sha": "96ccb6e3dca11d0119c52c973a633098a424baa9"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1719,
+    "verifier_head_sha": "53107cbeb5ac1fe22524423e7051523f4ccad8d7",
+    "merge_commit": "4a58ca9b32fb46d87bf810402858b1d2a4e106f7",
+    "workflow_run_id": 37182865730,
+    "workflow_job_id": 111378761193,
+    "conclusion": "success",
+    "verifier_path": "verify_h100_expression_tree_v1.py",
+    "verifier_git_blob_sha": "20f1a4b88e8117ac3efb07999c17708622f8b591",
+    "workflow_path": ".github/workflows/verify-h100-expression-tree-v1.yml",
+    "workflow_git_blob_sha": "dcbf9a845bf217e5181de95d11ab5b6befbe09f2"
+  },
+  "exact_copy_binding": {
+    "runtime_copy_git_blob_sha": "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490",
+    "tests_copy_git_blob_sha": "c6285bb2bb5be1c65995a226df1761667a69d8e4",
+    "governance_copy_git_blob_sha": "96ccb6e3dca11d0119c52c973a633098a424baa9",
+    "all_subject_blobs_exact": true
+  },
+  "verified": {
+    "copied_subject_test_suite_pass": true,
+    "copied_subject_tests_total": 10,
+    "ast_escape_hatch_audit_pass": true,
+    "allowed_import_roots": [
+      "__future__",
+      "math",
+      "typing"
+    ],
+    "fresh_nested_saturation_semantic_holdout_pass": true,
+    "fresh_cross_variable_correction_semantic_holdout_pass": true,
+    "unseen_nonlinearity_fails_closed": true,
+    "deterministic_replay_pass": true,
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "dynamic_code_execution": false,
+    "random_search": false
+  },
+  "effect": {
+    "named_gate1_residual": "GENERAL_DETERMINISTIC_EXPRESSION_TREE_SYMBOLIC_REGRESSION_FOR_NESTED_SATURATION_AND_CORRECTION_LAWS",
+    "disposition": "VERIFIED_FOR_BOUNDED_CURRENT_GRAMMAR_SCOPE_ONLY",
+    "unknown_domain_acceptance_closed": false,
+    "mysterymechanism_score_proved": false,
+    "h100_terminal_proved": false
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_GRAMMAR_COMPLETENESS",
+    "NO_MYSTERYMECHANISM_SCORE_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_GENERAL_INTELLIGENCE_CLAIM",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_RUNTIME_RAM_OR_TOTAL_COMPUTE_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
