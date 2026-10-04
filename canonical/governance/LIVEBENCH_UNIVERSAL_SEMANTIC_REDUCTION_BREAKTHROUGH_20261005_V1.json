@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_UNIVERSAL_SEMANTIC_REDUCTION_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_CANDIDATE_BREAKTHROUGH__RAW_SLOT_CARTESIAN_PRODUCT_COLLAPSED__ONLY_EXACT_PUNKT_CROSS_INTERACTION_RESIDUAL_REMAINS__ZERO_ACCEPTANCE_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem_deleted_if_verified": [
+    "NEED_TO_EXHAUST_THE_FULL_RAW_PUBLIC_SLOT_CARTESIAN_PRODUCT",
+    "NEED_TO_CROSS_EVERY_WORD_THRESHOLD_WITH_EVERY_OTHER_SLOT",
+    "NEED_TO_TREAT_ALL_NONLEXICAL_PUBLIC_SLOT_VALUES_AS_INDEPENDENT_UNKNOWN_INTERACTIONS"
+  ],
+  "construction": {
+    "runtime": "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py",
+    "test": "canonical/tests/test_livebench_legacy15_universal_semantic_reduction_v1.py",
+    "workflow": ".github/workflows/verify-livebench-semantic-reduction-v1.yml",
+    "structural_scope": "ALL_928_CONFLICT_COMPATIBLE_ACTIVE15_ID_SETS__CARDINALITY_1_TO_5",
+    "special_branch_partition": {
+      "json": "ONLY_JSON_PLUS_EXISTENCE_PLUS_FORBIDDEN",
+      "repeat_prompt": "ONLY_REPEAT_PLUS_EXISTENCE_PLUS_TITLE",
+      "two_responses": "ONLY_TWO_RESPONSES_PLUS_EXISTENCE_PLUS_FORBIDDEN_PLUS_TITLE"
+    }
+  },
+  "breakthrough_theorems": {
+    "word_upper_bound": {
+      "maximum_unpadded_words_over_any_compatible_words_case": 48,
+      "minimum_public_less_than_threshold": 100,
+      "safety_margin_words": 52,
+      "consequence": "EVERY_PUBLIC_WORDS_LESS_THAN_THRESHOLD_IS_SATISFIED_BY_THE_CURRENT_GENERAL_CONSTRUCTOR_WHEN_ITS_OTHER_KEPT_CHECKERS_PASS__NO_THRESHOLD_CROSS_PRODUCT_REQUIRED"
+    },
+    "word_lower_bound": {
+      "consequence": "AT_LEAST_WORD_CONSTRAINTS_ARE_CONSTRUCTED_BY_PADDING_TO_THE_REQUESTED_THRESHOLD_BEFORE_ONLY_TEXT_ADDING_WRAPPERS__SO_ALL_100_TO_500_VALUES_FOLLOW_FROM_ONE_MONOTONICITY_LEMMA"
+    },
+    "lexical_hazard_basis": {
+      "required_keywords": "ONE_ALPHANUMERIC_SHIELD_TOKEN_PRESERVES_RAW_SUBSTRING_EXISTENCE_AND_REMOVES_FORBIDDEN_WORD_BOUNDARIES",
+      "section_word": "9Section_OR_9SECTION_PRESERVES_SECTION_REGEX_WHILE_REMOVING_FORBIDDEN_LEFT_WORD_BOUNDARY",
+      "postscript_generated_word_intersection": [],
+      "forced_standalone_word_sources": [
+        "NTH_FIRST_WORD",
+        "MANDATORY_END_PHRASE"
+      ],
+      "exact_public_end_phrase_intersections": {
+        "Any other questions?": [
+          "other"
+        ],
+        "Is there anything else I can help with?": [
+          "anything",
+          "can",
+          "help"
+        ]
+      },
+      "consequence": "THE_ONLY_GENERATED_FORBIDDEN_COLLISION_CLASSES_LEFT_BY_THE_CURRENT_CONSTRUCTOR_ARE_NTH_FIRST_WORD_COLLISION_AND_END_PHRASE_COLLISION"
+    },
+    "structural_exactness": [
+      "PARAGRAPH_STAR_DIVIDERS_ARE_EXACT_AND_CANNOT_BE_CREATED_BY_ANY_COMPATIBLE_SPECIAL_BRANCH",
+      "NTH_DOUBLE_NEWLINE_PARAGRAPH_MODE_IS_CONFLICT_SEPARATED_FROM_STAR_PARAGRAPHS_BULLETS_AND_SECTIONS",
+      "BULLET_MARKERS_USE_SINGLE_ASTERISKS_AND_STAR_PARAGRAPH_DIVIDERS_ARE_NOT_COUNTED_AS_BULLETS",
+      "SECTION_MARKERS_ARE_CASE_SENSITIVE_AND_CONSTRUCTED_EXACTLY_FROM_THE_TWO_PUBLIC_SPLITTERS",
+      "TITLE_JSON_TWO_RESPONSE_REPEAT_END_QUOTE_CONSTRUCTORS_ARE_DIRECT_REGEX_JSON_PREFIX_SUFFIX_WITNESSES"
+    ]
+  },
+  "exact_remaining_residual": {
+    "family": "FROZEN_NLTK_PUNKT_SENTENCE_TOKENIZATION",
+    "reason": "SENTENCE_COUNT_IS_THE_ONLY_ACTIVE15_CHECKER_SEMANTIC_DEPENDING_ON_A_PINNED_EXTERNAL_RUNTIME_ALGORITHM_RATHER_THAN_DIRECT_REGEX_JSON_COUNT_PREFIX_SUFFIX_OR_MONOTONE_WORD_ARITHMETIC",
+    "next_load_bearing_action": "INDEPENDENTLY_VERIFY_SENTENCE_AT_LEAST_1_TO_20_AND_LESS_THAN_2_TO_20_OVER_EVERY_COMPATIBLE_SENTENCE_IDENTITY_SHAPE_AND_THE_FINITE_POSTSCRIPT_END_QUOTE_NTH_WRAPPER_STATES_USING_EXACT_PINNED_NLTK_3_10_3_AND_PUNKT_BYTES__THEN_BIND_THE_EXISTING_POINTWISE_12489_OF_12489_RECEIPT_AS_A_UNIVERSAL_ACTIVE15_SEMANTIC_RESULT"
+  },
+  "relation_to_latest_independent_receipt": {
+    "receipt": "canonical/verification/LIVEBENCH_POINTWISE_ENVELOPE_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "verified_cases": 12489,
+    "verified_exact_optimum_matches": 12489,
+    "prior_nonclaim": "NOT_YET_A_FORMAL_PROOF_OF_THE_FULL_PUBLIC_GENERATOR_SLOT_CARTESIAN_PRODUCT",
+    "improvement": "REPLACES_THAT_RAW_CARTESIAN_PRODUCT_OBLIGATION_WITH_SYMBOLIC_CONSTRUCTOR_LEMMAS_PLUS_ONE_SMALL_EXACT_RUNTIME_RESIDUAL"
+  },
+  "hard_nonclaims": [
+    "THIS_FILE_DOES_NOT_BY_ITSELF_PROVE_THE_PUNKT_RESIDUAL",
+    "THIS_FILE_DOES_NOT_BY_ITSELF_BIND_ACCEPTED_LIVEBENCH_SCOPE_EQUIVALENCE_TO_THE_FROZEN_ACTIVE15_SURFACE",
+    "NO_TERMINAL_ROWS_HIDDEN_KWARGS_TERMINAL_FREQUENCIES_COMPARATOR_RESPONSES_OR_TARGET_SCORES_WERE_USED",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_YET"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}

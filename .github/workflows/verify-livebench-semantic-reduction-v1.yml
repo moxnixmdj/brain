@@ -1,0 +1,26 @@
+name: Verify LiveBench semantic reduction V1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py"
+      - "canonical/tests/test_livebench_legacy15_universal_semantic_reduction_v1.py"
+      - ".github/workflows/verify-livebench-semantic-reduction-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test runner
+        run: python -m pip install --disable-pip-version-check --quiet pytest==8.4.2
+      - name: Run symbolic reduction guards
+        run: |
+          python -m pytest -q canonical/tests/test_livebench_legacy15_universal_semantic_reduction_v1.py
+          python canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py
