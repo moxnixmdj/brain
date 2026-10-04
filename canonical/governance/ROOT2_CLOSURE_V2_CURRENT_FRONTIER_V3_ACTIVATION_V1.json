@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SUBJECT_INDEPENDENT_PUBLIC_RUNNER_PASS__POINTER_PROJECTION_REVERIFY_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json",
+    "frontier_git_blob_sha": "681123ef6cff3506d66af6b31b61c8bc14a8a913"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "a7495e97c008fb74355af04e56bf75ca5c8ec8e8",
+    "verifier_pull_request": 1551,
+    "workflow_run_id": 37167173550,
+    "workflow_job_id": 111332414632,
+    "conclusion": "success"
+  },
+  "effects": [
+    "DELETE_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY_FROM_ROOT2_RESIDUAL",
+    "PRESERVE_SYNTHESIS_MATCHED_QUALITY_ATOM_AND_NONINFERIORITY_OPEN",
+    "REOPEN_TB4_ONLY_TO_NAMED_BUILDKITE_AND_CIRCLECI_ACCOUNT_ZERO_CASE_PREFLIGHTS",
+    "PRESERVE_ALL_FRESH_REALITY_ACTIONS_BLOCKED"
+  ],
+  "authority": {
+    "scheduling_authority": true,
+    "effective_scheduling_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "activation_condition": "INDEPENDENT_POINTER_PROJECTION_PASS_AND_CURRENT_AUTHORITY_EXPLICITLY_BINDS_THIS_EXACT_ACTIVATION_FRONTIER_AND_VERIFICATION",
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_TERMINAL_CASE_EXPOSURE",
+    "NO_TB4_CARRIER_PROMOTION_BEFORE_ACCOUNT_AND_ZERO_CASE_PREFLIGHT",
+    "NO_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
