@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FROZEN_SCHEMA19_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "BREAKTHROUGH_CANDIDATE__ASSUMPTION_FREE_FROZEN_SCHEMA19_ENVELOPE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "theorem": "THE_EXACT_FROZEN_PARQUET_KWARGS_SCHEMA_CANNOT_SERIALIZE_SIX_ARGUMENT_BEARING_REGISTRY25_FAMILIES__THEREFORE_EVERY_POSSIBLE_FROZEN_ROW_CHECKER_FAMILY_IS_CONTAINED_IN_REGISTRY19_EQUALS_ACTIVE15_PLUS_FOUR_NOARG_EXTRAS",
+  "subject": {
+    "runtime": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py",
+    "runtime_blob": "8259959828398e7b1415e305fd9bbd8ca308dfc5",
+    "test": "canonical/tests/test_livebench_frozen_schema19_envelope_v1.py",
+    "test_blob": "726d4db25d5ab4e3e83a8924b3cac9d65d236aa2"
+  },
+  "source_bindings": {
+    "schema_bridge": "canonical/runtime/livebench_release_schema_scope_bridge_v1.py",
+    "frozen_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "frozen_parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "registry_runtime": "canonical/runtime/livebench_union25_archetypes_v1.py",
+    "pinned_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+  },
+  "excluded_families": [
+    "keywords:frequency",
+    "keywords:letter_frequency",
+    "language:response_language",
+    "detectable_content:number_placeholders",
+    "detectable_format:number_highlighted_sections",
+    "change_case:capital_word_frequency"
+  ],
+  "remaining_extra_families": [
+    "detectable_format:constrained_response",
+    "change_case:english_capital",
+    "change_case:english_lowercase",
+    "punctuation:no_comma"
+  ],
+  "exact_reduction": {
+    "family_count": "25_TO_19",
+    "compatible_structural_sets": "14559_TO_3108",
+    "compatible_sets_deleted": 11451,
+    "extra_signatures": "156_TO_6",
+    "extra_signatures_deleted": 150,
+    "remaining_extra_signatures": [
+      [
+        "detectable_format:constrained_response"
+      ],
+      [
+        "change_case:english_capital"
+      ],
+      [
+        "change_case:english_lowercase"
+      ],
+      [
+        "punctuation:no_comma"
+      ],
+      [
+        "change_case:english_capital",
+        "punctuation:no_comma"
+      ],
+      [
+        "change_case:english_lowercase",
+        "punctuation:no_comma"
+      ]
+    ]
+  },
+  "consequence": "THE_TERMINAL_LIVEBENCH_PROOF_NO_LONGER_NEEDS_LANGUAGE_KEYWORD_FREQUENCY_LETTER_FREQUENCY_PLACEHOLDER_HIGHLIGHT_OR_CAPITAL_FREQUENCY_CONSTRUCTION__ONLY_SIX_EXTRA_SIGNATURES_REMAIN_ABOVE_ALREADY_VERIFIED_ACTIVE15",
+  "assumption_boundary": "NO_PAPER_15_VS_16_FAITHFULNESS_ASSUMPTION__ONLY_EXACT_FROZEN_SCHEMA_AND_PINNED_REGISTRY",
+  "scheduler_rule": "DEMOTE_UNION25_EXTRA_FAMILY_WORK_OUTSIDE_SCHEMA19_FROM_TERMINAL_CRITICAL_PATH_AFTER_INDEPENDENT_CONTENT_BOUND_VERIFICATION",
+  "falsification_conditions": [
+    "FROZEN_PARQUET_SCHEMA_FIELDS_MISMATCH",
+    "ANY_EXCLUDED_CHECKER_CAN_SERIALIZE_WITHOUT_ITS_REQUIRED_MISSING_ARGUMENT_FIELDS",
+    "PINNED_REGISTRY_OR_CONFLICT_GRAPH_MISMATCH",
+    "INDEPENDENT_RECOUNT_DIFFERS_FROM_3108_OR_SIX_SIGNATURES"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_THE_SIX_SIGNATURES_ARE_ALREADY_POINTWISE_SOLVED",
+    "NO_TERMINAL_ROW_VALUES_OR_INSTRUCTION_IDS_READ",
+    "NO_TERMINAL_GOAL_COMPLETION_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
