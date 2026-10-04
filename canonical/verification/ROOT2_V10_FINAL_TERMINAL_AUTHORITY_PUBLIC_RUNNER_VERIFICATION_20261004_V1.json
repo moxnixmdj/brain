@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V10_FINAL_TERMINAL_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT2_V10_EFFECTIVE_SCHEDULING__V10_ROUTING__PRIMARY_SOURCE_DELETIONS__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subject": {
+    "terminal_root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "terminal_root_state_git_blob_sha": "59711b491e5f4c94661f78401e66ea1f546f96c7",
+    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V10.json",
+    "frontier_git_blob_sha": "2012926814d0d06405da56da64e589b06fef1756",
+    "final_activation_path": "canonical/governance/ROOT2_FRONTIER_V10_FINAL_ACTIVATION_V1.json",
+    "final_activation_git_blob_sha": "f5eda02fcc104bc8a5e13a82bfc8ec3d9515dcb2",
+    "overlay_activation_path": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2_ACTIVATION_V1.json",
+    "overlay_activation_git_blob_sha": "400cf1fa6516d384b8781201841c3359851b070b"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1652,
+    "head_sha": "de0e88492ee048f012fb76acde2272b39e73447b",
+    "merge_commit": "863172c0ebd4ac8004e1d8773dc832c1af6fc086",
+    "workflow_run_id": 37173788051,
+    "workflow_job_id": 111352056472,
+    "conclusion": "success"
+  },
+  "verified": [
+    "ROOT2_V10_IS_EXACT_EFFECTIVE_SCHEDULING_AUTHORITY",
+    "V10_FINAL_ACTIVATION_EXACTLY_BOUND",
+    "V10_18_FACT_ACQUISITION_OVERLAY_EXACTLY_BOUND",
+    "EXTERNAL_FACT_COUNTS_9_SELF_SERVICE_6_OWNER_EXCLUSIVE_1_OWNER_OR_DIRECT_2_DORMANT",
+    "LOW_VALUE_FREE_TRIAL_FREE_TIER_FREE_QUOTA_FREE_CREDIT_BASIC_SUPPORT_OUTREACH_FORBIDDEN",
+    "SIX_PRIMARY_SOURCE_SEARCH_DELETIONS_PRESERVED",
+    "ACCEPTED_FAMILIES_5_OF_19",
+    "PROVED_ATOMIC_12_OF_38",
+    "UNRESOLVED_ATOMIC_26",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
