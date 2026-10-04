@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUNKT_NONEMPTY_UNSAT_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__GENERAL_ZERO_SENTENCE_NONEMPTY_LEMMA_ENCODED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "parent_reduction": "canonical/governance/LIVEBENCH_POINTWISE_SCORE_DOMINANCE_REDUCTION_V1.json",
+  "problem_deleted_if_verified": "HAND_ENUMERATION_OF_SENTENCE_LT_ONE_CONTRADICTIONS_ONE_PAIR_AT_A_TIME",
+  "public_source_bindings": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_util_git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "nltk_version": "3.10.3",
+    "nltk_punkt_source_git_blob_sha": "48496d2448c009221d2452c8e928699027b20ebe"
+  },
+  "lemma": {
+    "premise": "PINNED NumberOfSentences(num_sentences=1, relation=less than) REQUIRES Punkt count_sentences(response)=0",
+    "punkt_source_fact": [
+      "_slices_from_text UNCONDITIONALLY YIELDS A FINAL SLICE ENDING AT len(text.rstrip())",
+      "_pair_iter PRESERVES A SINGLE FINAL SLICE AS (slice,None)",
+      "_realign_boundaries YIELDS THAT SLICE WHEN text[slice] IS NONEMPTY",
+      "THEREFORE ANY RESPONSE WITH ANY NON_WHITESPACE CHARACTER HAS AT_LEAST_ONE PUNKT SENTENCE"
+    ],
+    "conclusion": "SENTENCE_LT_ONE_IS_JOINTLY_UNSAT_WITH_ANY_COMPATIBLE_CHECKER_CONTRACT_THAT_FORCES_NON_WHITESPACE_OUTPUT"
+  },
+  "candidate_runtime": {
+    "path": "canonical/runtime/livebench_punkt_nonempty_unsat_v1.py",
+    "tests_path": "canonical/tests/test_livebench_punkt_nonempty_unsat_v1.py",
+    "certifiable_nonempty_checker_ids": [
+      "keywords:existence",
+      "length_constraints:number_words__AT_LEAST_POSITIVE",
+      "length_constraints:nth_paragraph_first_word",
+      "detectable_content:postscript",
+      "detectable_format:number_bullet_lists",
+      "detectable_format:title",
+      "detectable_format:multiple_sections",
+      "startend:end_checker",
+      "startend:quotation"
+    ],
+    "pairwise_classes_collapsed_by_one_lemma": 9
+  },
+  "relation_to_current_unsat_kernel": {
+    "strict_generalization_of": "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE",
+    "integration_target": "SEMANTIC_UNSAT_INPUT_TO_LIVEBENCH_POINTWISE_OPTIMALITY_CERTIFICATE",
+    "does_not_replace": [
+      "NTH_FIRST_WORD_IS_FORBIDDEN_WORD",
+      "MANDATORY_END_PHRASE_CONTAINS_FORBIDDEN_WORD",
+      "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD"
+    ]
+  },
+  "next_action": "INDEPENDENTLY_VERIFY THE GENERAL PUNKT NONEMPTY LEMMA AGAINST EXACT NLTK 3.10.3 SOURCE AND EXECUTION; THEN UNION IT INTO THE POINTWISE SEMANTIC UNSAT KERNEL.",
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROW_CONTENT_READ",
+    "NO_TERMINAL_CASE_FREQUENCY_INFERRED",
+    "NO_CLAIM_OF_COMPLETE_ACTIVE15_UNSAT_CLASSIFICATION",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
