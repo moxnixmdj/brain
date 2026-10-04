@@ -54,7 +54,7 @@ class LiveBenchPreCognitionRouterTests(unittest.TestCase):
         with mock.patch.object(r.fallback_v1, "infer", side_effect=seed):
             out = r.infer(req(text))
         self.assertEqual(seen["instruction"], "Describe a triangle.")
-        self.assertEqual(len(r.re.findall(r"\\b\\d+\\b", out["answer"])), 3)
+        self.assertEqual(len(r.re.findall(r"\b\d+\b", out["answer"])), 3)
         self.assertTrue(out["constraint_postvalidated"])
 
     def test_seed_with_too_many_numbers_falls_back_to_active_v2(self):
