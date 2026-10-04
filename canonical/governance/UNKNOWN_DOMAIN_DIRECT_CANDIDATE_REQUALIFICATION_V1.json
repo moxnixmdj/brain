@@ -22,7 +22,7 @@
     "canonical/runtime/decision_discriminator_v3.py": "3ec9e43a7bbe40a264fa3560a93039461941dbee",
     "canonical/governance/UNIVERSAL_LEARNING_META_POLICY_V9.json": "7b8ca47355f73b0f78e439e407cd632f1ad7d99d",
     "canonical/governance/UNIVERSAL_LEARNING_PROOF_PROGRAM_V7.json": "e26c8f4d8614720c1a45f28bcd2703dbb36bd980",
-    ".github/workflows/verify-unknown-domain-direct-v1.yml": "d80fd3df523853f00db0f6eafeda59b99a4c8ae9"
+    ".github/workflows/verify-unknown-domain-direct-v1.yml": "54062ddd2566f075b6b64cb812c191c6957535ca"
   },
   "candidate_properties": {
     "persistent_learned_bytes": 0,
