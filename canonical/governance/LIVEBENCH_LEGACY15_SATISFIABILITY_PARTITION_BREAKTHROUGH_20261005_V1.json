@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY15_SATISFIABILITY_PARTITION_BREAKTHROUGH_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__UNIVERSAL_WITNESS_OBLIGATION_FALSIFIED__SAT_OR_PROVED_UNSAT_REPLACEMENT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Truth-repair the contamination-safe legacy15 closure target. The 928 conflict-compatible identity-set superset contains generator-reachable parameterizations whose exact public checker conjunction is logically unsatisfiable for every possible response. Replace impossible universal-witness closure with a total SAT-witness-or-UNSAT-certificate partition.",
+  "source_bindings": {
+    "frozen_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "frozen_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "frozen_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "frozen_instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "historical_generator_blob": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "active15_commitment_sha256": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d"
+  },
+  "public_source_facts": {
+    "generated_keyword_word_list_count": 1525,
+    "all_generated_keyword_tokens_match": "^[A-Za-z]+$",
+    "structural_domains": {
+      "sentence_thresholds": "1..20",
+      "comparison_relations": [
+        "less than",
+        "at least"
+      ],
+      "paragraph_counts": "1..5",
+      "word_thresholds": "100..500",
+      "bullet_counts": "1..5",
+      "section_counts": "1..5",
+      "section_splitters": [
+        "Section",
+        "SECTION"
+      ],
+      "postscript_markers": [
+        "P.S.",
+        "P.P.S"
+      ],
+      "end_phrases": [
+        "Any other questions?",
+        "Is there anything else I can help with?"
+      ]
+    },
+    "historical_identity_draw": "2..5 distinct registered IDs followed by conflict-pair deletion"
+  },
+  "falsification": {
+    "old_obligation": "PRODUCE_A_PASSING_RESPONSE_FOR_EVERY_GENERATOR_REACHABLE_PARAMETERIZATION_OF_EVERY_CONFLICT_COMPATIBLE_ACTIVE15_SHAPE",
+    "result": "IMPOSSIBLE",
+    "reason": "The frozen conflict graph removes syntactic family conflicts but does not remove parameter-level literal contradictions. Some generated checker conjunctions require and forbid the same whole-word literal.",
+    "constructive_counterexample_classes": [
+      {
+        "class": "SECTION_SPLITTER_VS_FORBIDDEN_WORD",
+        "required_by": "detectable_format:multiple_sections",
+        "required_literal_casefold": "section",
+        "generator_reachable_forbidden_word": "section",
+        "proof": "SectionChecker requires one or more Section/SECTION numbered labels; ForbiddenWords rejects whole-word section case-insensitively."
+      },
+      {
+        "class": "END_PHRASE_1_VS_FORBIDDEN_WORD",
+        "required_by": "startend:end_checker",
+        "required_phrase": "Any other questions?",
+        "generator_reachable_forbidden_intersection": [
+          "other"
+        ],
+        "proof": "EndChecker requires the exact suffix; ForbiddenWords rejects the forced whole word."
+      },
+      {
+        "class": "END_PHRASE_2_VS_FORBIDDEN_WORD",
+        "required_by": "startend:end_checker",
+        "required_phrase": "Is there anything else I can help with?",
+        "generator_reachable_forbidden_intersection": [
+          "anything",
+          "can",
+          "help"
+        ],
+        "proof": "EndChecker requires the exact suffix; ForbiddenWords rejects any forced whole word."
+      },
+      {
+        "class": "NTH_FIRST_WORD_VS_FORBIDDEN_WORD",
+        "required_by": "length_constraints:nth_paragraph_first_word",
+        "generator_reachable": true,
+        "proof": "ParagraphFirstWordCheck requires the selected generated first_word as a whole paragraph-initial word; ForbiddenWords can independently draw the same WORD_LIST entry."
+      },
+      {
+        "class": "SENTENCE_LT1_VS_MANDATORY_CONTENT",
+        "required_by": "length_constraints:number_sentences",
+        "parameter": {
+          "relation": "less than",
+          "num_sentences": 1
+        },
+        "proof": "Punkt sentence count must be zero. Any checker conjunction that forces lexical content is incompatible with the zero-sentence requirement; content-free compatible conjunctions can use an empty witness or quoted-empty witness."
+      }
+    ]
+  },
+  "lexical_sterility_breakthrough": {
+    "theorem": "For every frozen generated keyword k and every frozen generated forbidden word f, k+digit still contains k for KeywordChecker substring-regex semantics, while no alphabetic f can match as a whole word inside the alphanumeric carrier. Numeric/alphanumeric scaffolding therefore eliminates avoidable forbidden-word collisions.",
+    "implementation": "canonical/runtime/livebench_legacy15_joint_witness_v1.py",
+    "removed_false_failure": "Prior JSON key `response` was itself generator-reachable as a forbidden word.",
+    "replacement_scaffolding": [
+      "JSON key v0",
+      "filler q0..q7",
+      "required keyword digit suffix",
+      "numeric two-response distinction",
+      "numeric title payload"
+    ]
+  },
+  "repaired_universal_contract": {
+    "rule": "FOR_EVERY_PUBLIC_GENERATOR_REACHABLE_ACTIVE15_PARAMETERIZATION__EITHER_EMIT_EXACT_CHECKER_PASSING_WITNESS_OR_EMIT_A_SOUND_PUBLIC_SEMANTIC_UNSAT_CERTIFICATE",
+    "score_consequence_if_total_and_verified": "A SAT row receives full checker credit. A proved-UNSAT row has maximum attainable checker credit zero for every model. Therefore a total sound partition is distribution-independent and row-wise cannot underperform any comparator on this checker surface.",
+    "hidden_terminal_distribution_required_for_theorem": false,
+    "terminal_row_content_required_for_constructor": false
+  },
+  "next_load_bearing_step": "EXTEND_THE_UNSAT_CLASSIFIER_TO_SCOPE_COMPLETE_PUBLIC_CHECKER_SEMANTICS_AND_PROVE_THE_COMPLEMENT_CONSTRUCTIVE_OVER_ALL_SEVEN_ARCHETYPES__THEN_INDEPENDENTLY_VERIFY_THE_TOTAL_PARTITION_AGAINST_PINNED_PUBLIC_SOURCE_GENERATION_WITH_ZERO_TERMINAL_ROW_ACCESS",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CURRENT_UNSAT_CLASSIFIER_IS_SCOPE_COMPLETE",
+    "NO_CLAIM_ALL_SAT_PARAMETERIZATIONS_ARE_YET_CONSTRUCTIVELY_CLOSED",
+    "NO_TERMINAL_ROW_CONTENT_CASE_ID_HIDDEN_KWARG_RESPONSE_OR_SCORE_WAS_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_PROMOTION_FROM_THIS_CANDIDATE_BEFORE_INDEPENDENT_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
