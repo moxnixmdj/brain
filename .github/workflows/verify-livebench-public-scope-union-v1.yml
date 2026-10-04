@@ -1,0 +1,46 @@
+name: verify-livebench-public-scope-union-v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_public_scope_union_v1.py"
+      - "canonical/tests/test_livebench_public_scope_union_v1.py"
+      - "canonical/governance/LIVEBENCH_SCOPE_UNION_BREAKTHROUGH_20261005_V1.json"
+      - ".github/workflows/verify-livebench-public-scope-union-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run scope theorem unit tests
+        run: python -m pytest -q canonical/tests/test_livebench_public_scope_union_v1.py
+
+      - name: Fetch exact historical LiveBench generator
+        run: |
+          git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/LiveBench
+          git -C /tmp/LiveBench checkout 686be1e78a0ba8036d7e355bc406e1a265da5292
+
+      - name: Verify exact source blob and 15<24<25 scope lattice
+        run: |
+          python canonical/runtime/livebench_public_scope_union_v1.py <<'JSON' >/tmp/scope.json
+          {"livebench_root":"/tmp/LiveBench"}
+          JSON
+          cat /tmp/scope.json
+          python - <<'PY'
+          import json
+          with open("/tmp/scope.json", encoding="utf-8") as f:
+              out = json.load(f)
+          assert out["status"] == "PASS__PUBLIC_SCOPE_LATTICE_15_LT_24_LT_25"
+          assert out["historical_generator_count"] == 24
+          assert out["public_union_count"] == 25
+          assert out["public_union25_minus_generator24"] == ["language:response_language"]
+          assert out["terminal_data_used"] is False
+          assert out["acceptance_credit"] is False
+          PY
