@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V8_EXTERNAL_FACT_PARTITION__ANTI_WISHFUL_OUTREACH_GUARD__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subject": {
+    "overlay_path": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V1.json",
+    "overlay_git_blob_sha": "ebbfd05e58abc398a50998f9b9e4bdedacf205e1",
+    "outreach_gate_path": "canonical/governance/EXTERNAL_OUTREACH_VALUE_GATE_V1.json",
+    "outreach_gate_git_blob_sha": "3868d99a7dbddb4a78f9adb5cd083d81cd90241e",
+    "fact_router_path": "canonical/governance/ROOT2_SELF_SERVICE_FACT_ROUTING_V1.json",
+    "fact_router_git_blob_sha": "3833d97f1febbdc1766182778b3c4ba23c9daa85",
+    "owner_fanout_path": "canonical/governance/ROOT2_OWNER_CHANNEL_FANOUT_V2.json",
+    "owner_fanout_git_blob_sha": "9b59f951f5b7135bb167f2aaebc35e9960172fa4"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1642,
+    "head_sha": "fa97c413565255f75ad1f34b7b3b2f17c5f0f797",
+    "merge_commit": "ba1aa91c04b2f41437693582a830e31496dc58c0",
+    "workflow_run_id": 37172822097,
+    "workflow_job_id": 111349112497,
+    "conclusion": "success"
+  },
+  "verified": [
+    "ACTIVE_ROOT2_V8_PARENT_EXACT_BLOBS_BOUND",
+    "ACTIVE_V8_EXTERNAL_FACT_SET_HAS_14_FACTS",
+    "EXACT_PARTITION_6_SELF_SERVICE_6_OWNER_EXCLUSIVE_1_OWNER_OR_DIRECT_PLATFORM_RECEIPT_1_DORMANT",
+    "PARTITION_HAS_NO_OVERLAP_AND_NO_MISSING_FACTS",
+    "BUILDKITE_RUNTIME_FACT_IS_SELF_SERVICE_NOT_OWNER_WAIT",
+    "CURSOR_POLICY_CHANGE_IS_DORMANT_NOT_ACTIVE_WAIT",
+    "LOW_VALUE_FREE_TRIAL_FREE_TIER_FREE_QUOTA_FREE_CREDIT_BASIC_SUPPORT_OUTREACH_IS_NOT_A_SCHEDULING_DEPENDENCY",
+    "ALREADY_SENT_BUILDKITE_SUPPORT_QUERY_IS_HISTORICAL_NONBLOCKING",
+    "OWNER_EXCLUSIVE_CHANNELS_PRESERVED_FOR_ARTIFICIAL_ANALYSIS_VALS_COGNITION_ZAPIER",
+    "TERMINAL_TRUTH_UNCHANGED_5_OF_19_FAMILIES_12_OF_38_PREDICATES_26_UNRESOLVED",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
