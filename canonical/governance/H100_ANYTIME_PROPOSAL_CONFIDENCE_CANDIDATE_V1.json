@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_H100_ANYTIME_PROPOSAL_CONFIDENCE_CANDIDATE_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__ANYTIME_VALID_SEQUENTIAL_STOPPING__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "status": "CANDIDATE__ANYTIME_VALID_SEQUENTIAL_STOPPING__EXACT_BLOB_BOUND__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
   "objective": "MINIMIZE_H100_NOVELTY_STRESS_WALL_CLOCK_WITHOUT_OPTIONAL_STOPPING_BIAS",
   "parent": {
     "fixed_sample_estimator": "canonical/governance/H100_PROPOSAL_PROBABILITY_ESTIMATOR_CANDIDATE_V1.json",
@@ -25,8 +25,8 @@
     "NO_OPEN_WORLD_INFERENCE_FROM_FINITE_PREEXPOSED_TASKS"
   ],
   "exact_bound_components": {
-    "canonical/runtime/h100_anytime_proposal_confidence_v1.py": "PENDING_GIT_BLOB_SHA",
-    "canonical/tests/test_h100_anytime_proposal_confidence_v1.py": "PENDING_GIT_BLOB_SHA"
+    "canonical/runtime/h100_anytime_proposal_confidence_v1.py": "f8e4bf51f758c7c4c89c5e5d899d8f7e756c767f",
+    "canonical/tests/test_h100_anytime_proposal_confidence_v1.py": "03384f1c71d5211d06ae3194b820884d3ae04d82"
   },
   "authority": {
     "execution": false,
