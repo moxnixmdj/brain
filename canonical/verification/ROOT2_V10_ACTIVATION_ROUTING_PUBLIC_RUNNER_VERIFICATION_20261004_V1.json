@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V10_ACTIVATION_ROUTING_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V10_COMPOSITION_PLUS_18_FACT_ROUTING__ANTI_WISHFUL_OUTREACH__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subject": {
+    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V10.json",
+    "frontier_git_blob_sha": "2012926814d0d06405da56da64e589b06fef1756",
+    "frontier_verification_path": "canonical/verification/ROOT2_V10_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "frontier_verification_git_blob_sha": "226832c5e9d5f4121f26d93bd645ed51dce474fe",
+    "router_path": "canonical/governance/ROOT2_SELF_SERVICE_FACT_ROUTING_V2.json",
+    "router_git_blob_sha": "4f8a547f1ade8231a705d3d028966c107e805a90",
+    "overlay_path": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2.json",
+    "overlay_git_blob_sha": "e41024fc8588ee5e4292ad38c758c202b1d31d38",
+    "activation_candidate_path": "canonical/governance/ROOT2_FRONTIER_V10_ACTIVATION_CANDIDATE_V1.json",
+    "activation_candidate_git_blob_sha": "0de6c383030501e5141c754ce821e17a3709bcd7"
+  },
+  "existing_v10_pointer_projection": {
+    "staged_activation_path": "canonical/governance/ROOT2_FRONTIER_V10_ACTIVATION_V1.json",
+    "staged_activation_git_blob_sha": "dc2605176a10982d4d700faea951f8e11d043a1f",
+    "verification_path": "canonical/verification/ROOT2_V10_POINTER_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "73fce958517f0467666bc9e70f8411fa618b5210"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1650,
+    "head_sha": "41b4543bc361809b2c569415f0cd8550be3719f5",
+    "merge_commit": "6641477ba74d58eba70e884c7968f2b5ecf3d0be",
+    "workflow_run_id": 37173584980,
+    "workflow_job_id": 111351438718,
+    "conclusion": "success"
+  },
+  "verified": [
+    "V10_EXACT_COMPOSITION_INDEPENDENT_PASS",
+    "V10_STATE_UNCHANGED_5_ACCEPTED_14_OPEN_12_PROVED_26_UNRESOLVED",
+    "ALL_18_V10_EXTERNAL_FACTS_EXACTLY_PARTITIONED_9_SELF_SERVICE_6_OWNER_EXCLUSIVE_1_OWNER_OR_DIRECT_2_DORMANT",
+    "THREE_OMC_TRIAL_RUNTIME_PROTOCOL_FACTS_SELF_SERVICE_ONLY",
+    "NO_OMC_FREE_TRIAL_FREE_QUOTA_OR_BASIC_SUPPORT_OUTREACH",
+    "CURSOR_AND_GENERIC_FINANCE_CUSTOM_COMPARABILITY_SEARCH_DORMANT",
+    "EXISTING_VALS_OWNER_COMPARABILITY_QUESTION_IS_ONLY_ACTIVE_OWNER_WAKE",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
