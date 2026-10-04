@@ -372,6 +372,15 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
+    },
+    "arena_public_semantics_truth_repair": {
+      "path": "canonical/governance/ARENA_PUBLIC_SEMANTICS_TRUTH_REPAIR_V1.json",
+      "git_blob_sha": "d7a7165630bd2963c78d5e7f4fbd2f286e57334a",
+      "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__TRUTH_REPAIR__ZERO_CREDIT",
+      "scheduling_authority": true,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false
     }
   },
   "accounting": {
