@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_ROOT3_ACCEPTANCE_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PROMOTED__PRECOMMITTED_GATE_SATISFIED__UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_PROVED__ZERO_FAMILY_CAPABILITY_OWNERSHIP_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "precommit": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_ROOT3_ACCEPTANCE_REDUCTION_PRECOMMIT_20261005_V1.json",
+    "git_blob_sha": "12d1696c250dbfb4bee486abce6684a0290022fd",
+    "commit": "95eeeeb12a206d5cd635ee70a2e8961e5b2c231d",
+    "status": "FROZEN_OUTCOME_BLIND__INDEPENDENT_V6_RUN_PENDING__ZERO_CREDIT"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d",
+    "commit": "b441114b2617ff16f6674a4639f37715e93e3abe",
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2132,
+    "head_sha": "40972c47277b87135d1054a0669cdfaa45bf1f08",
+    "workflow_run_id": 37243390754,
+    "workflow_job_id": 111556412538,
+    "workflow_conclusion": "success",
+    "artifact_id": 11318231607,
+    "artifact_zip_sha256": "50ff23a2fad53dd1076d66cabdb90453a241718d484b66e155ae42a05e2af8a1",
+    "receipt_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_TOTAL_EXACT_INDEPENDENT_VERIFICATION_V1",
+    "receipt_status": "PASS__INDEPENDENT_CONTENT_BOUND_TOTAL_STRING_STRUCTURAL_ID_EXACT_FLOAT_AND_432_CASE_FALSIFICATION__ZERO_CREDIT"
+  },
+  "frozen_gate_evaluation": {
+    "workflow_success": true,
+    "exact_schema_status_and_subject_blobs_match": true,
+    "canonical_main_all_load_bearing_blobs_rechecked_equal": true,
+    "v4_accepted_string_counterexample_reproduced": true,
+    "v5_total_string_interface_surrogate_codepoints_exhausted": 2048,
+    "structural_identifier_totality_survives_forced_total_token_collision": true,
+    "exact_add2_float_operation_order_repaired": true,
+    "all_six_transfer_families_covered_by_bound_universal_argument": true,
+    "all_three_abstention_classes_covered_by_bound_universal_argument": true,
+    "nonproduction_exact_scorer_falsification": {
+      "populations": 16,
+      "cases": 432,
+      "all_pass": true
+    },
+    "production_or_terminal_cases_consumed": 0,
+    "all_precommitted_conditions_satisfied": true
+  },
+  "promotion": {
+    "predicate_state_before": "EXTERNAL_BLOCKED",
+    "predicate_state_after": "PROVED",
+    "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "independent_or_objective": true,
+    "scope_complete": true,
+    "proved_predicate_count_delta": 1,
+    "unresolved_predicate_count_delta": -1,
+    "root3_direct_scope_residual_delta": -1,
+    "fresh_reality_required": false,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "family_remains_open": true,
+    "family_remaining_reason": "MYSTERYMECHANISM_GE_49_55_IS_SEPARATE_AND_UNCHANGED"
+  },
+  "basis": "THE_OUTCOME_BLIND_PRECOMMIT_REQUIRED_AN_INDEPENDENT_CONTENT_BOUND_SUCCESSOR_PROVING_TOTAL_DECLARED_STRING_INPUTS_STRUCTURAL_IDENTIFIER_TOTALITY_EXACT_ADD2_IEEE754_GOLD_EQUALITY_ALL_SIX_TRANSFER_FAMILIES_ALL_THREE_ABSTENTION_CLASSES_AND_ZERO_TERMINAL_CONSUMPTION__THE_BOUND_PUBLIC_RUNNER RECEIPT SATISFIES EVERY CONDITION__FINITE_432_CASE_FALSIFICATION_IS SUPPORTING EVIDENCE ONLY AND THE UNIVERSAL FORMAL ARGUMENT IS LOAD_BEARING",
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_BEYOND_THE_FROZEN_BOUND_EVALUATOR_CONTRACT",
+    "NO_MYSTERYMECHANISM_GE_49_55_CREDIT",
+    "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_FROM_THIS_ATOMIC_PROMOTION_ALONE",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOMIC_PROMOTION",
+    "NO_TERMINAL_TRUE_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_predicate_credit_delta": 1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
