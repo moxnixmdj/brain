@@ -1,3 +1,5 @@
+import re
+
 from canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
 
 
@@ -29,7 +31,7 @@ def test_repeat_prompt_plus_title_and_existence():
     assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
     assert out["route"] == "REPEAT_PROMPT"
     assert out["response"].startswith(_env(prefix).strip())
-    assert "<<x>>" in out["response"]
+    assert "<<0>>" in out["response"]
     assert "alpha" in out["response"]
 
 def test_two_responses_with_keyword_title_forbidden():
@@ -108,3 +110,39 @@ def test_quotation_bullets_and_end_all_compose():
     response = out["response"]
     assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")
+
+
+def test_json_forbidden_response_scaffold_is_lexically_sterile():
+    prompt = (
+        "Do not include keywords ['response'] in the response. "
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as code fences."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["route"] == "JSON"
+    assert re.search(r"\\bresponse\\b", out["response"], re.I) is None
+
+
+def test_two_response_scaffold_avoids_ordinary_word_sentinels():
+    prompt = (
+        "Do not include keywords ['alpha', 'beta'] in the response. "
+        "Give two different responses. Responses and only responses should be separated by 6 asterisk symbols: ******."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["route"] == "TWO_RESPONSES"
+    assert re.search(r"\\b(?:alpha|beta)\\b", out["response"], re.I) is None
+    left, right = out["response"].split("******")
+    assert left.strip() != right.strip()
+
+
+def test_required_forbidden_exact_overlap_uses_boundary_destroying_carrier():
+    prompt = (
+        "Include keywords ['response'] in the response. "
+        "Do not include keywords ['response'] in the response. "
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as code fences."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert "response" in out["response"].lower()
+    assert re.search(r"\\bresponse\\b", out["response"], re.I) is None
