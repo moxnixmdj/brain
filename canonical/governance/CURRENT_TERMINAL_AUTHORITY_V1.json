@@ -1011,7 +1011,7 @@
     },
     "terminal_root_cause_state_v1": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "78732250ee5c9b7fa32eb4d84f234252eab379ee",
+      "git_blob_sha": "a040f96ddaa1df0a95e2ceceab40cb3e422487ad",
       "status": "16_ROOT2_ONLY__7_ROOT3_ONLY__3_MIXED__26_UNRESOLVED__ROOT1_ZERO_GAPS__ROOT2_V6_ACTIVE__ZERO_CREDIT"
     },
     "synthesis_scope_reclassification": {
