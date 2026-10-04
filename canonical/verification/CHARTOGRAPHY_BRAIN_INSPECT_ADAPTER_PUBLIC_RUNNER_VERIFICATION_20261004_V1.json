@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__INSPECT_AI_0_3_276__11_OF_11_ADAPTER_TESTS__EXACT_QUESTION_IMAGE_BYTES__FAIL_CLOSED_BACKEND__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "candidate": {
+    "governance_path": "canonical/governance/CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_V1.json",
+    "governance_git_blob_sha": "f0352c187eb921d6e736608825005df887449488",
+    "runtime_path": "canonical/runtime/eval_adapters/chartography_brain_model_api_v1.py",
+    "runtime_git_blob_sha": "2d58a2937e8d5a6b41c29f7f92fff3d10f88e025",
+    "tests_path": "canonical/tests/test_chartography_brain_model_api_v1.py",
+    "tests_git_blob_sha": "21bcebc8aa3059fe6f4d1d2eb9fffb609aea99e1"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1533,
+    "verifier_head_sha": "3b1064cd1f6b3788908142afbfb793a384a1a451",
+    "merge_commit": "bfca450d15043a17f3b9cf5271bd55d8ff73b36a",
+    "workflow_run_id": 37165446413,
+    "workflow_job_id": 111327285044,
+    "conclusion": "success"
+  },
+  "verified": {
+    "inspect_ai_version": "0.3.276",
+    "tests_passed": 11,
+    "tests_failed": 0,
+    "exact_question_preservation": true,
+    "exact_image_byte_preservation": true,
+    "verified_backend_binding_required": true,
+    "internalized_configured_backend_required": true,
+    "brain_controlled_backend_required": true,
+    "external_model_dependency_count_required": 0,
+    "network_required_false": true,
+    "incremental_spend_zero_required": true,
+    "fallback_forbidden": true,
+    "remote_image_fetch_forbidden": true,
+    "tools_forbidden": true,
+    "program_hash_drift_fails_closed": true
+  },
+  "consequence": "BRAIN_INSPECT_ADAPTER_IMPLEMENTATION_BLOCKER_REMOVED__SEPARATELY_VERIFIED_INTERNAL_MULTIMODAL_BACKEND_BINDING_PROJECT_ACCOUNT_CAPACITY_AND_SCORE_REMAIN",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
