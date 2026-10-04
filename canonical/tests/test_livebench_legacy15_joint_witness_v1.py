@@ -1,3 +1,5 @@
+import re
+
 from canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
 
 
