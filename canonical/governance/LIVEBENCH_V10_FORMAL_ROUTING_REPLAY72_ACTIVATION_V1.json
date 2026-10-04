@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_V10_FORMAL_ROUTING_REPLAY72_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "REVOKED_FAIL_CLOSED__ACTIVATION_BINDING_INCOMPLETE__ZERO_CREDIT",
+  "status": "ACTIVE__ONE_USE_REPLAY72_ONLY__CONTENT_ADDRESSED_EXECUTION_BINDING_VERIFIED__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "candidate": "canonical/governance/LIVEBENCH_V10_FORMAL_ROUTING_REPLAY72_CANDIDATE_V1.json",
   "verification": {
@@ -9,7 +9,11 @@
     "git_blob_sha": "b36a87e8ab9416735d2e40f399bfc3aed6260f11",
     "workflow_run_id": 37195421272,
     "workflow_job_id": 111416161049,
-    "conclusion": "success"
+    "conclusion": "success",
+    "content_addressed_binding_path": "canonical/verification/LIVEBENCH_V10_CONTENT_ADDRESSED_EXECUTION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "content_addressed_binding_workflow_run_id": 37195683427,
+    "content_addressed_binding_workflow_job_id": 111416933067,
+    "content_addressed_binding_conclusion": "success"
   },
   "execution": {
     "repository": "moxnixmdj/verification-capsule-runner",
@@ -17,7 +21,9 @@
     "wrapper_path": "diagnose_livebench_replay72_v10_formal_routing.py",
     "wrapper_git_blob_sha": "56ea114d59f0309bc14ef0504a44bec1f808e876",
     "launcher_path": "launch_livebench_v10_formal_routing_atomic.py",
-    "launcher_git_blob_sha": "d7cd5b5c90f19ef02c1f27afa1629ed6af5500d9"
+    "launcher_git_blob_sha": "2d3b9ad4e3f4f02af56f402733a8d8bb04ab79c0",
+    "runner_activation_path": "LIVEBENCH_V10_REPLAY72_ACTIVATION_V1.json",
+    "runner_activation_git_blob_sha": "7a2c2fdc3cc08862850a13667ee2cd2b2e2aae91"
   },
   "one_use_epoch": {
     "epoch_digest_sha256": "a71f24f79df6b6be6e910efb1299776ac9fede9e78539577695d6e386fc2eb52",
