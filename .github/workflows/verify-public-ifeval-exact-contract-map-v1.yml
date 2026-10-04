@@ -1,0 +1,64 @@
+name: verify-public-ifeval-exact-contract-map-v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_public_ifeval_contract_map_v1.py"
+      - "canonical/tests/test_livebench_public_ifeval_contract_map_v1.py"
+      - "canonical/governance/LIVEBENCH_PUBLIC_IFEVAL_EXACT_CONTRACT_MAP_BREAKTHROUGH_V1.json"
+      - ".github/workflows/verify-public-ifeval-exact-contract-map-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Unit tests
+        run: python -m unittest -v canonical.tests.test_livebench_public_ifeval_contract_map_v1
+
+      - name: Fetch pinned public classic IFEval corpus
+        run: |
+          curl -fsSL             https://raw.githubusercontent.com/google-research/google-research/e49bbfe381c9c0e564b937f1c4e163a2273c65cc/instruction_following_eval/data/input_data.jsonl             -o /tmp/input_data.jsonl
+          test "$(git hash-object /tmp/input_data.jsonl)" = "cbe52f6eecf3986fdac745b4acba4da1408eb146"
+
+      - name: Compile exact public contract map
+        run: |
+          python canonical/runtime/livebench_public_ifeval_contract_map_v1.py             --input /tmp/input_data.jsonl             --output public-ifeval-contract-map-v1.json             --require-pinned-counts
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = json.loads(Path("public-ifeval-contract-map-v1.json").read_text())
+          assert p["row_count"] == 541
+          assert p["instruction_instance_count"] == 834
+          assert len(p["entries"]) == 541
+          assert all(len(k) == 64 for k in p["entries"])
+          assert all("prompt" not in json.dumps(v).lower() for v in p["entries"].values())
+          print("541_ROW_834_INSTANCE_HASH_ONLY_CONTRACT_MAP_PASS")
+          PY
+
+      - name: Verify pinned LiveBench legacy formatter provenance
+        run: |
+          curl -fsSL             https://raw.githubusercontent.com/LiveBench/LiveBench/8f8e5c381a16e3f24257776edd53471fe86f8091/livebench/if_runner/instruction_following_eval/json_formatter.py             -o /tmp/json_formatter.py
+          test "$(git hash-object /tmp/json_formatter.py)" = "36a58716f87f313f74c27ef59557882acd48d8a3"
+          grep -F 'pd.read_json("LiveBench/question_generation/instruction_following/instruction_following_eval/data/input_data.jsonl", lines=True)' /tmp/json_formatter.py
+          grep -F "df.rename(columns={'prompt': 'turns'}, inplace=True)" /tmp/json_formatter.py
+          grep -F "df.rename(columns={'key': 'question_id'}, inplace=True)" /tmp/json_formatter.py
+          grep -F "df['turns'] = df['turns'].apply(lambda x: [x])" /tmp/json_formatter.py
+          grep -F 'df['"'"'category'"'"'] = "instruction_following"' /tmp/json_formatter.py
+
+      - name: Upload hash-only public contract map
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-ifeval-exact-contract-map-v1
+          path: public-ifeval-contract-map-v1.json
+          if-no-files-found: error
