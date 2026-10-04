@@ -65,6 +65,10 @@ class MysteryMechanismActiveControllerTests(unittest.TestCase):
         )
         self.assertEqual(final["status"],"EXECUTABLE_CANDIDATE_READY__UNVERIFIED")
         self.assertTrue(final["expression"])
+        self.assertLess(final["candidate"]["nrmse"],1e-8)
+        self.assertLess(final["candidate"]["loo_nrmse"],1e-6)
+        self.assertEqual(final["candidate"]["left_feature"]["family"],"corrected_power_up")
+        self.assertEqual(final["candidate"]["right_feature"]["family"],"corrected_power_down")
         self.assertEqual(final["acceptance_credit_delta"],0)
         self.assertFalse(final["fresh_reality_authority"])
 
