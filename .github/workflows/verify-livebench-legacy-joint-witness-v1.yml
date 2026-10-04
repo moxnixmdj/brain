@@ -38,18 +38,53 @@ jobs:
           git -C /tmp/livebench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
 
       - name: Run focused unit tests
+        id: unit
+        shell: bash
         run: |
+          set +e
           pytest -q canonical/tests/test_livebench_legacy15_joint_witness_v1.py
+          code=$?
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
 
       - name: Run exhaustive public synthetic composition audit
+        id: audit
+        shell: bash
         run: |
+          set +e
           mkdir -p /tmp/receipt
           python canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py \
             --livebench-root /tmp/livebench \
             --output /tmp/receipt/livebench-legacy15-end2end-exact-synthetic-audit-v2.json
+          code=$?
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          if [ -f /tmp/receipt/livebench-legacy15-end2end-exact-synthetic-audit-v2.json ]; then
+            python - <<'PY'
+          import json
+          p="/tmp/receipt/livebench-legacy15-end2end-exact-synthetic-audit-v2.json"
+          d=json.load(open(p,encoding="utf-8"))
+          print(json.dumps({
+              "status":d.get("status"),
+              "results":d.get("results"),
+              "runtime_errors":d.get("runtime_errors"),
+              "exact_failed_instruction_ids":d.get("exact_failed_instruction_ids"),
+              "failure_samples":(d.get("failure_samples") or [])[:20],
+          },sort_keys=True))
+          PY
+          fi
+          exit 0
 
       - name: Upload exact audit receipt
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: livebench-legacy15-end2end-exact-synthetic-audit-v2
           path: /tmp/receipt/livebench-legacy15-end2end-exact-synthetic-audit-v2.json
+          if-no-files-found: ignore
+
+      - name: Enforce verification result
+        if: always()
+        shell: bash
+        run: |
+          test "${{ steps.unit.outputs.code }}" = "0"
+          test "${{ steps.audit.outputs.code }}" = "0"
