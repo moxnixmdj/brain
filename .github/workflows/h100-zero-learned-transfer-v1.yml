@@ -1,0 +1,61 @@
+name: H100 zero-learned paired transfer V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_TRANSFER_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_TRANSFER_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_transfer_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_transfer_v1.py'
+      - '.github/workflows/h100-zero-learned-transfer-v1.yml'
+  push:
+    branches:
+      - research/h100-zero-learned-transfer-v1
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_TRANSFER_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_TRANSFER_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_transfer_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_transfer_v1.py'
+      - '.github/workflows/h100-zero-learned-transfer-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run paired transfer tests
+        run: python -m unittest canonical.tests.test_h100_zero_learned_transfer_v1 -v
+      - name: Run paired transfer census
+        run: python canonical/runtime/h100_zero_learned_transfer_v1.py > h100_zero_learned_transfer_v1.json
+      - name: Show compact transfer result
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("h100_zero_learned_transfer_v1.json"))
+          print(json.dumps({
+            "status":d["status"],
+            "all_families_transfer_pass":d["all_families_transfer_pass"],
+            "persistent_learned_bytes":d["persistent_learned_bytes"],
+            "families":[{
+              "family_id":x["family_id"],
+              "transfer_baseline_p":x["transfer_task"]["baseline"]["p_exact"],
+              "transfer_post_compile_p":x["transfer_task"]["post_compile"]["p_exact"],
+              "transfer_post_compile_n95":x["transfer_task"]["post_compile"]["n95_proposals"],
+              "reuse_effect":x["reuse_effect"],
+            } for x in d["families"]],
+          },indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h100-zero-learned-transfer-v1
+          path: h100_zero_learned_transfer_v1.json
+          if-no-files-found: error
