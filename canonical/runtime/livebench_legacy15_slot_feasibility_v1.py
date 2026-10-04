@@ -107,6 +107,13 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
             threshold = -1
 
         if relation == "less than" and threshold == 1:
+            # Frozen strict evaluation gates every checker with response.strip().
+            # Punkt yields at least one sentence for every non-whitespace
+            # response. Therefore this checker is scorer-level UNSAT even by
+            # itself: empty/whitespace fails the strict gate, while every
+            # strict-eligible response has sentence count >= 1.
+            reasons.append("STRICT_NONEMPTY_GATE_CONFLICTS_WITH_SENTENCE_LT_ONE")
+
             # Frozen Punkt sentence tokenization yields zero sentences only for
             # an empty/whitespace-only response; every non-whitespace response
             # yields at least the terminal slice. Therefore any simultaneously
