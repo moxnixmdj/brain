@@ -40,9 +40,11 @@ def _canonical_beacon(beacon: Any)->str:
 
 def _secret_bytes_total(secret: Any)->bytes:
     if isinstance(secret,bytes):
-        # bytes subclasses may override __bytes__; memoryview reads the inherited
-        # immutable buffer directly and materializes a plain bytes value.
-        out=memoryview(secret).tobytes()
+        # bytes subclasses may override __bytes__, __buffer__, and __getitem__.
+        # Invoke the base bytes descriptor directly on a full slice: this reads
+        # the inherited immutable bytes payload, bypasses subclass Python hooks,
+        # and materializes an exact plain bytes value.
+        out=bytes.__getitem__(secret,slice(None))
     elif isinstance(secret,str):
         out=str.encode(secret,"utf-8","surrogatepass")
     else:
