@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "UNKNOWN-DOMAIN-V6-SUBCLASS-REPAIR-CLEAN-20261005-V1",
+  "date": "2026-10-05",
+  "status": "PROPOSED__CRITICAL_PATH__ZERO_REALITY__ZERO_CREDIT",
+  "canonical_base_commit": "bd21979930cc10208d64355caff55ff4ca47fb5a",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "action_kind": "REPAIR_REVOKED_UNIVERSAL_STRING_TOTALITY_AND_INDEPENDENTLY_REVERIFY",
+  "current_truth": {
+    "atomic_predicates_proved": 12,
+    "atomic_predicates_unresolved": 26,
+    "predicate_state": "EXTERNAL_BLOCKED_AFTER_SUBCLASS_TOTALITY_FALSIFIER",
+    "revocation_path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json"
+  },
+  "repair": {
+    "generator_expected_blob": "60373126f3ee27368ae06e6d7d559f1b826d90d4",
+    "proof_expected_blob": "58d3a61f5e2cb24b4387ddd817b64f897f62fe06",
+    "regression_expected_blob": "5bc00ff6f7671ad43acb04a6fe4c3b6d1893c380",
+    "mechanism": "BYPASS_OVERRIDABLE_STR_AND_BYTES_SUBCLASS_METHODS_WITH_BUILTIN_STR_DESCRIPTORS_AND_BASE_BYTES_GETITEM_FULL_SLICE__INCLUDING_PYTHON_3_12_PLUS___BUFFER___OVERRIDES"
+  },
+  "falsification_condition": "ANY_ISINSTANCE_ACCEPTED_STR_OR_BYTES_SUBCLASS_CAN_STILL_TRIGGER_STRIP_ENCODE_BYTES_BUFFER_LEN_GETITEM_ITER_OR_OTHER_LOAD_BEARING_OVERRIDE_HOOK__OR_BREAK_THE_BOUND_EVALUATOR_PROOF",
+  "required_independent_verification": "CONTENT_BOUND_REPLAY_OF_REPAIRED_BLOBS_WITH_EXPLICIT_ADVERSARIAL_STR_AND_BYTES_SUBCLASSES_INCLUDING___BUFFER_____LEN_____GETITEM_____ITER___AND_FULL_27_CASE_EXECUTION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0
+  }
+}

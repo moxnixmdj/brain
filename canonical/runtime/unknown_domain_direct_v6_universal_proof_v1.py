@@ -37,10 +37,10 @@ EXPECTED_BLOBS={
  "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py":"f974a4594c78e74693c7ba5a19f131dfa481b937",
  "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py":"d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
  "canonical/runtime/unknown_domain_direct_hidden_generator_v4.py":"e52858b9fef2d795f72b45cd3ae82ad04344aa91",
- "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py":"a97459fe407ea4852f57f12f504fbc0121db9824",
+ "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py":"60373126f3ee27368ae06e6d7d559f1b826d90d4",
  "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py":"e8cf5d1b5d311644725a751c15e6235958fb587d",
  "canonical/runtime/unknown_domain_direct_execution_harness_v1.py":"04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
- "canonical/tests/test_unknown_domain_direct_v5.py":"81cd6ecabec51029175f6036a13eac7667fccd03",
+ "canonical/tests/test_unknown_domain_direct_v5.py":"5bc00ff6f7671ad43acb04a6fe4c3b6d1893c380",
 }
 
 
@@ -89,6 +89,34 @@ def _string_totality()->dict[str,Any]:
     assert g5._secret_bytes_total("\udfff"+"T"*31)
     assert g5._secret_bytes_total(b"U"*32)==b"U"*32
 
+    # isinstance accepts subclasses. The totality theorem must therefore cover
+    # subclasses whose instance methods are adversarially overridden. V5 calls
+    # the built-in str descriptors and immutable buffer protocol directly, so
+    # those overrides cannot make an admitted value partial.
+    class AdversarialStr(str):
+        def strip(self,*args,**kwargs):
+            raise RuntimeError("OVERRIDDEN_STRIP_MUST_NOT_RUN")
+        def encode(self,*args,**kwargs):
+            raise RuntimeError("OVERRIDDEN_ENCODE_MUST_NOT_RUN")
+
+    class AdversarialBytes(bytes):
+        def __bytes__(self):
+            raise RuntimeError("OVERRIDDEN_BYTES_MUST_NOT_RUN")
+        def __buffer__(self,*args,**kwargs):
+            raise RuntimeError("OVERRIDDEN_BUFFER_MUST_NOT_RUN")
+        def __len__(self):
+            raise RuntimeError("OVERRIDDEN_LEN_MUST_NOT_RUN")
+        def __getitem__(self,*args,**kwargs):
+            raise RuntimeError("OVERRIDDEN_GETITEM_MUST_NOT_RUN")
+        def __iter__(self):
+            raise RuntimeError("OVERRIDDEN_ITER_MUST_NOT_RUN")
+
+    subclass_beacon=AdversarialStr("A"*16+"\ud800")
+    subclass_secret=AdversarialStr("S"*31+"\udfff")
+    assert g5._canonical_beacon(subclass_beacon).isascii()
+    assert g5._secret_bytes_total(subclass_secret)
+    assert g5._secret_bytes_total(AdversarialBytes(b"U"*32))==b"U"*32
+
     return {
         "beacon_domain":"EVERY_FINITE_PYTHON_STR_WITH_LEN_STRIP_GE_16",
         "utf8_surrogatepass_total":True,
@@ -97,6 +125,8 @@ def _string_totality()->dict[str,Any]:
         "surrogate_codepoints_exhausted":2048,
         "secret_domain":"BYTES_OR_PYTHON_STR_WITH_CANONICAL_BYTE_LENGTH_GE_32",
         "legacy_strict_utf8_partiality_removed":True,
+        "isinstance_accepted_subclass_override_hooks_bypassed":True,
+        "bytes_subclass_buffer_protocol_override_bypassed":True,
     }
 
 
