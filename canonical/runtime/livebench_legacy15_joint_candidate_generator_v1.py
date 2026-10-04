@@ -16,6 +16,7 @@ import re
 from typing import Any, Iterable
 
 from canonical.runtime import livebench_legacy15_composition_partition_v1 as partition
+from canonical.runtime import livebench_legacy15_slot_feasibility_v1 as slot_feasibility
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_JOINT_CANDIDATE_GENERATOR_V1"
 
@@ -152,53 +153,38 @@ def _keyword_payload(required: list[str], forbidden: list[str] | None = None) ->
 
 
 def prove_visible_unsat(constraints: Iterable[dict[str, Any]]) -> dict[str, Any]:
-    """Prove narrow visible contradictions from frozen checker semantics.
-
-    This is deliberately conservative. It returns proved=True only when the
-    exact required end phrase necessarily contains a whole-word expression
-    forbidden by the same visible constraint set. EndChecker requires that
-    literal phrase at the response tail (after outer-quote stripping), while
-    ForbiddenWords rejects the same whole-word regex anywhere in the original
-    response, so no response can satisfy both.
-    """
+    """Delegate semantic UNSAT decisions to the canonical slot-feasibility kernel."""
     rows = list(constraints)
-    forbidden = _forbidden(rows)
-    end_checker = _one(rows, "startend:end_checker")
-    if not forbidden or not end_checker:
+    result = slot_feasibility.classify_visible_contracts(rows)
+    if result.get("status") != "PROVED_UNSAT":
         return {"proved": False}
 
-    end_phrase = str(_slots(end_checker).get("end_phrase") or "").strip()
-    if not end_phrase:
-        return {"proved": False}
-
-    collisions: list[str] = []
-    for word in forbidden:
-        try:
-            if re.search(r"\b" + word + r"\b", end_phrase, flags=re.IGNORECASE):
-                collisions.append(word)
-        except re.error:
-            # The exact frozen checker would also receive this expression.
-            # Do not claim a proof from malformed regex syntax here.
-            return {"proved": False}
-
-    if not collisions:
-        return {"proved": False}
-    return {
+    reasons = list(result.get("hard_unsat_reasons") or [])
+    out = {
         "proved": True,
-        "reason": "EXACT_END_PHRASE_FORBIDDEN_WHOLE_WORD_COLLISION",
-        "end_phrase": end_phrase,
-        "colliding_forbidden_words": sorted(collisions),
-        "proof_basis": (
-            "EndChecker requires response.strip().strip(\"\\\"\").lower() "
-            "to end with end_phrase; ForbiddenWords rejects the same whole-word "
-            "regex anywhere in the unstripped response."
-        ),
+        "reason": "CANONICAL_SLOT_FEASIBILITY_UNSAT",
+        "hard_unsat_reasons": reasons,
+        "slot_feasibility_schema": result.get("schema"),
         "hidden_instruction_ids_used": False,
         "hidden_kwargs_used": False,
         "terminal_case_metadata_used": False,
         "terminal_data_used": False,
     }
 
+    # Preserve the existing end/forbidden diagnostic surface for downstream
+    # receipts while making the canonical feasibility kernel the sole authority.
+    end_reasons = [
+        x for x in reasons
+        if str(x).startswith("MANDATORY_END_PHRASE_CONTAINS_FORBIDDEN_WORD:")
+    ]
+    if end_reasons:
+        out["reason"] = "EXACT_END_PHRASE_FORBIDDEN_WHOLE_WORD_COLLISION"
+        out["colliding_forbidden_words"] = sorted(
+            str(x).split(":", 1)[1] for x in end_reasons
+        )
+        end_checker = _one(rows, "startend:end_checker")
+        out["end_phrase"] = str(_slots(end_checker).get("end_phrase") or "").strip()
+    return out
 
 def _special_json(constraints: list[dict[str, Any]]) -> list[str]:
     required = _required_keywords(constraints)
