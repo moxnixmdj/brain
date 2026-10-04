@@ -853,7 +853,7 @@
     },
     "terminal_root_cause_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "2e747250c0fb243f7cc9ae9fcd0fd71732761b8f",
+      "git_blob_sha": "0e56e97fafbb9199c2bc6b700c76c2fb3c40ebca",
       "status": "ACTIVE_FAIL_CLOSED__ROOT1_INACTIVE__V2_ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT"
     },
     "opus55_acceptance_residual_v4": {
@@ -1011,7 +1011,7 @@
     },
     "terminal_root_cause_state_v1": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "8b8721e0f9b65ab86f193fcf7d19b8a8d286b0a4",
+      "git_blob_sha": "0e56e97fafbb9199c2bc6b700c76c2fb3c40ebca",
       "status": "16_ROOT2_ONLY__7_ROOT3_ONLY__3_MIXED__26_UNRESOLVED__ROOT1_V3_ACTIVE_ZERO_GAPS__ZERO_CREDIT"
     },
     "synthesis_scope_reclassification": {
