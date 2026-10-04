@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_UNION25_INTERACTION_CUT_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "BREAKTHROUGH_CANDIDATE__14559_STRUCTURAL_SETS_LOSSLESSLY_FACTORED_TO_157_NEW10_SIGNATURES_PLUS_INHERITED_ACTIVE15_RESIDUAL__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "canonical_base_commit": "e6e79de876fd4d3f44aef332a23a82c23a2c9b85",
+  "trigger": {
+    "verified_scope": "PUBLIC_TABLE4_UNION_25_EQUALS_FULL_PINNED_REGISTRY",
+    "active15_promotion_blocked": true,
+    "raw_compatible_registry25_sets": 14559,
+    "inherited_active15_sets": 928
+  },
+  "breakthroughs": [
+    {
+      "name": "LOSSLESS_NEW10_FACTOR",
+      "result": "EVERY_REGISTRY25_COMPATIBLE_SET_FACTORS_UNIQUELY_INTO_NEW10_SUBSET_PLUS_ACTIVE15_COMPATIBLE_RESIDUAL",
+      "new10_reachable_signatures": 157,
+      "raw_structural_sets": 14559,
+      "raw_to_signature_compression_ratio_approx": 92.73
+    },
+    {
+      "name": "INHERIT_ACTIVE15",
+      "result": "THE_928_ZERO_NEW_FAMILY_SETS_ARE_EXACTLY_THE_INHERITED_ACTIVE15_STRUCTURAL_DOMAIN",
+      "active15_only_sets": 928,
+      "union25_extension_sets": 13631
+    },
+    {
+      "name": "CONSTRAINED_RESPONSE_DELETION",
+      "result": "CONSTRAINED_RESPONSE_IS_STRUCTURALLY_ISOLATED",
+      "compatible_sets_containing_family": 1,
+      "only_set": ["detectable_format:constrained_response"],
+      "checker_success_witness_options": [
+        "My answer is yes.",
+        "My answer is no.",
+        "My answer is maybe."
+      ],
+      "consequence": "PROVE_THIS_FAMILY_IN_ISOLATION_AND_REMOVE_IT_FROM_MULTI_CHECKER_INTERACTION_REASONING"
+    }
+  ],
+  "exact_census": {
+    "sets_by_new_family_count": {
+      "0": 928,
+      "1": 4317,
+      "2": 5892,
+      "3": 2906,
+      "4": 495,
+      "5": 21
+    },
+    "per_new_family_structural_set_count": {
+      "keywords:frequency": 3690,
+      "keywords:letter_frequency": 3938,
+      "language:response_language": 809,
+      "detectable_content:number_placeholders": 3938,
+      "detectable_format:constrained_response": 1,
+      "detectable_format:number_highlighted_sections": 2858,
+      "change_case:capital_word_frequency": 2738,
+      "change_case:english_capital": 2490,
+      "change_case:english_lowercase": 2490,
+      "punctuation:no_comma": 3952
+    },
+    "max_simultaneously_reachable_new_families": 5
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/livebench_union25_interaction_cut_v1.py",
+    "tests": "canonical/tests/test_livebench_union25_interaction_cut_v1.py"
+  },
+  "critical_next_action": "INDEPENDENTLY_CONTENT_BIND_THE_CONFLICT_GRAPH_CENSUS__THEN_CLOSE_CONSTRAINED_RESPONSE_AS_A_TRIVIAL_ISOLATED_FAMILY_AND_EXTEND_THE_ACTIVE15_CONSTRUCTOR_BY_THE_REMAINING_156_NEW10_SIGNATURES",
+  "hard_nonclaims": [
+    "THE_157_SIGNATURES_ARE_NOT_YET_A_CHECKER_SEMANTIC_QUOTIENT",
+    "UNION25_POINTWISE_OPTIMALITY_IS_NOT_YET_PROVED",
+    "LIVEBENCH_ACCEPTANCE_CREDIT_REMAINS_ZERO",
+    "THE_TERMINAL_GOAL_REMAINS_FALSE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
