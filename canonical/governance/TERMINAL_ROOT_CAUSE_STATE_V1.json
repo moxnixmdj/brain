@@ -33,8 +33,8 @@
       },
       "active_acquisition_control": {
         "path": "canonical/governance/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V3_ACTIVATION_V1.json",
-        "git_blob_sha": "9a0a55e12bf7a1057a19faacd50a3482c7517b2c",
-        "status": "ACTIVE_MAIN_CANDIDATE__CORE_INDEPENDENT_PUBLIC_RUNNER_PASS__ACTIVATION_PROJECTION_VERIFICATION_PENDING__ROOT1_INACTIVE__ZERO_CREDIT",
+        "git_blob_sha": "d48cb0f608675256cdd57402288f1a045f8414e6",
+        "status": "ACTIVE_MAIN_CANDIDATE__CORE_INDEPENDENT_PUBLIC_RUNNER_PASS__FINAL_ACTIVATION_PROJECTION_VERIFICATION_PENDING__ROOT1_INACTIVE__ZERO_CREDIT",
         "operative_runtime": "canonical/runtime/root1_acquisition_closure_controller_v3.py",
         "operative_runtime_git_blob_sha": "7c9ba29c6ba32df782d5d0322dc06b53ea447391",
         "controller_governance": "canonical/governance/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V3.json",
@@ -46,8 +46,8 @@
         "current_envelope_sealed": false,
         "current_declared_family_partition": "5_VERIFIED_OWNED__14_ROUTE_COVERAGE_UNPROVED_NOT_MISSING",
         "activation_verification": {
-          "status": "PENDING_INDEPENDENT_PUBLIC_RUNNER",
-          "rule": "DO_NOT_MARK_V3_CURRENT_UNTIL_EXACT_ACTIVATION_PROJECTION_PASSES"
+          "status": "PENDING_FINAL_INDEPENDENT_PUBLIC_RUNNER",
+          "rule": "DO_NOT_MARK_V3_CURRENT_UNTIL_FINAL_EXACT_ACTIVATION_PROJECTION_PASSES"
         },
         "previous_control": {
           "path": "canonical/governance/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2_ACTIVATION_V1.json",
