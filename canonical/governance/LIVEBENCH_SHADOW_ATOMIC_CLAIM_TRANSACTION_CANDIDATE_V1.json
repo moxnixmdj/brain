@@ -1,18 +1,38 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_SHADOW_ATOMIC_CLAIM_TRANSACTION_CANDIDATE_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__REMOVE_CHECK_THEN_ACT_RACE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CASES__ZERO_CREDIT",
+  "status": "CANDIDATE__TRUTH_REPAIRED_EXECUTION_TUPLE__REMOVE_CHECK_THEN_ACT_RACE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CASES__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "benchmark_id": "LIVEBENCH_IF_2026_06_25",
-  "objective": "Collapse the final LiveBench shadow preflight-to-claim boundary so atomic Git-ref creation is the sole uniqueness linearization point and no prior claim-ref absence read is required.",
+  "objective": "Repair the frozen LiveBench environment from independently verified zero-case evidence, bind Shadow Lease V2, and collapse the final preflight-to-claim boundary so atomic Git-ref creation is the sole uniqueness linearization point.",
   "subjects": {
+    "execution_precommit_v2": {
+      "path": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2.json",
+      "git_blob_sha": "cf6c665b1284dac53e91aaba3c52e4752a274293"
+    },
+    "execution_precommit_v2_verifier": {
+      "path": "canonical/runtime/livebench_if_execution_precommit_v2.py",
+      "git_blob_sha": "26b950caddc129cb4a3dd240a7cdc078e7c6ee77"
+    },
+    "execution_precommit_v2_tests": {
+      "path": "canonical/tests/test_livebench_if_execution_precommit_v2.py",
+      "git_blob_sha": "8885bd0e8397221197d29b1a574d2f2268bad90b"
+    },
+    "pre_exposure_plan_v3": {
+      "path": "canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json",
+      "git_blob_sha": "ec82b43b6dcbe9d9ee85cd78bc0ca1996f3b88fa"
+    },
+    "resource_fit_verification": {
+      "path": "canonical/verification/LIVEBENCH_ZERO_CASE_RESOURCE_FIT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "667943c418a434988d915bfb2ac736679af3bf7b"
+    },
     "point_of_use_preflight": {
       "path": "canonical/runtime/livebench_shadow_point_of_use_preflight_v1.py",
-      "git_blob_sha": "f1b72a36576d5b3fd0f5b8a5b73b1b67526f8b7f"
+      "git_blob_sha": "3fe1e114b1c6998f2eded1a95924f5f44a6c1ba1"
     },
     "point_of_use_preflight_tests": {
       "path": "canonical/tests/test_livebench_shadow_point_of_use_preflight_v1.py",
-      "git_blob_sha": "1f32981a2306be6631cf69ec6897d8adbd0a641d"
+      "git_blob_sha": "4bd840843301ab3afd9e04aaecf437ba46614ae0"
     },
     "atomic_transaction": {
       "path": "canonical/runtime/livebench_shadow_atomic_claim_transaction_v1.py",
@@ -20,10 +40,19 @@
     },
     "atomic_transaction_tests": {
       "path": "canonical/tests/test_livebench_shadow_atomic_claim_transaction_v1.py",
-      "git_blob_sha": "4364afbd8aa9bfdd4079f944d2548836d9b8daff"
+      "git_blob_sha": "b6be155ea68bad4dd121e8fb55ab018b9819cebf"
     }
   },
+  "verified_prior_fact": {
+    "resource_fit_public_runner_pass": true,
+    "workflow_run_id": 37184530130,
+    "workflow_job_id": 111383591914,
+    "terminal_cases_consumed": 0
+  },
   "changes": [
+    "SUPERSEDE_V1_FUTURE_EXECUTION_ENVIRONMENT_WITH_REPAIRED_V2_TUPLE",
+    "BIND_SHADOW_REALITY_LEASE_V2_INSTEAD_OF_V1",
+    "PIN_SPACY_3_8_16_AND_EN_CORE_WEB_SM_3_8_0_REQUIRED_BY_FROZEN_SCORER",
     "REMOVE_CLAIM_REF_PRIOR_ABSENCE_READ_FROM_POINT_OF_USE_PREFLIGHT",
     "BIND_CLAIM_TO_EXACT_PREFLIGHT_INPUT_DIGEST",
     "REQUIRE_SEPARATELY_VERIFIED_V2_SHADOW_ACTIVATION",
@@ -36,6 +65,12 @@
     "deleted_race_class": "CHECK_THEN_ACT_BETWEEN_ABSENCE_PROBE_AND_CREATE",
     "same_runner_transaction_target": "PREFLIGHT_THEN_ATOMIC_CREATE_THEN_REVEAL_WITHOUT_SCHEDULER_ROUND_TRIP"
   },
+  "remaining_before_terminal_case_reveal": [
+    "INDEPENDENTLY_VERIFY_THIS_EXACT_REPAIRED_PACKAGE",
+    "OBTAIN_SEPARATE_V2_SHADOW_COLLECTION_ACTIVATION",
+    "RUN_POINT_OF_USE_ZERO_CASE_PREFLIGHT_ON_PRODUCTION_RUNNER",
+    "ATOMICALLY_CREATE_ONE_USE_CLAIM_REF"
+  ],
   "hard_rules": [
     "NO_TERMINAL_CASE_CONTENT_READ_BY_THIS_CANDIDATE",
     "NO_CASE_REVEAL_WITHOUT_SEPARATE_VERIFIED_ACTIVATION",
