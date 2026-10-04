@@ -1,0 +1,61 @@
+name: Verify LiveBench legacy15 witness-or-UNSAT V3
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_legacy15_witness_or_unsat_v1.py"
+      - "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py"
+      - "canonical/runtime/livebench_legacy15_general_composer_v1.py"
+      - "canonical/runtime/livebench_legacy15_special_composer_v1.py"
+      - "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py"
+      - "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py"
+      - "canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py"
+      - "canonical/runtime/livebench_legacy15_end2end_witness_or_unsat_audit_v3.py"
+      - "canonical/tests/test_livebench_legacy15_witness_or_unsat_v1.py"
+      - ".github/workflows/verify-livebench-legacy15-witness-or-unsat-v3.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen legacy checker dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest nltk==3.9.2 langdetect==1.0.9 immutabledict==4.2.1
+          python - <<'PY'
+          import nltk
+          for name in ["punkt", "punkt_tab"]:
+              nltk.download(name, quiet=True)
+          PY
+
+      - name: Run witness-or-UNSAT unit tests
+        run: |
+          pytest -q canonical/tests/test_livebench_legacy15_witness_or_unsat_v1.py
+
+      - name: Checkout exact frozen LiveBench scorer
+        run: |
+          git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/livebench
+          git -C /tmp/livebench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
+
+      - name: Run exact witness-or-UNSAT synthetic audit
+        run: |
+          mkdir -p /tmp/receipt
+          python canonical/runtime/livebench_legacy15_end2end_witness_or_unsat_audit_v3.py \
+            --livebench-root /tmp/livebench \
+            --output /tmp/receipt/livebench-legacy15-witness-or-unsat-v3.json
+
+      - name: Upload exact audit receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: livebench-legacy15-witness-or-unsat-v3
+          path: /tmp/receipt/livebench-legacy15-witness-or-unsat-v3.json
+          if-no-files-found: error
