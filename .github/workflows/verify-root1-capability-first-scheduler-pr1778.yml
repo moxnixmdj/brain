@@ -49,3 +49,4 @@ jobs:
           validate_live_state(future)
           print("ROOT1_POLICY_INVARIANTS_PASS")
           PY
+# trigger-after-workflow-exists
