@@ -11,9 +11,9 @@ Scope:
 - is deliberately single-constraint V1. Multi-constraint composition remains
   fail-closed until separately proved.
 
-The language witnesses intentionally exercise the frozen checker's documented
-LangDetectException behavior. That is benchmark/scorer capability only and must
-not be promoted as semantic-language capability evidence.
+Language witnesses use explicit per-language seed text and are pending exact
+frozen-scorer verification. This module never relies on the frozen checker's
+broken LangDetectException fallback path.
 """
 from __future__ import annotations
 
@@ -25,6 +25,40 @@ from canonical.runtime import livebench_legacy_visible_constraint_compiler_v2 as
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY_SINGLE_CONSTRAINT_WITNESS_V1"
 FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 LEGACY_REGISTERED_TYPE_COUNT = 25
+
+
+_LANGUAGE_SEEDS = {
+    "en": "this is a simple english sentence about people work places and everyday life",
+    "es": "esta es una frase sencilla en español sobre personas trabajo lugares y la vida cotidiana",
+    "pt": "esta é uma frase simples em português sobre pessoas trabalho lugares e a vida cotidiana",
+    "ar": "هذه جملة عربية بسيطة عن الناس والعمل والأماكن والحياة اليومية",
+    "hi": "यह लोगों काम स्थानों और दैनिक जीवन के बारे में एक सरल हिंदी वाक्य है",
+    "fr": "ceci est une phrase française simple sur les gens le travail les lieux et la vie quotidienne",
+    "ru": "это простое русское предложение о людях работе местах и повседневной жизни",
+    "de": "dies ist ein einfacher deutscher satz über menschen arbeit orte und das tägliche leben",
+    "ja": "これは人々と仕事と場所と日常生活についての簡単な日本語の文章です",
+    "it": "questa è una semplice frase italiana sulle persone il lavoro i luoghi e la vita quotidiana",
+    "bn": "এটি মানুষ কাজ স্থান এবং দৈনন্দিন জীবন সম্পর্কে একটি সহজ বাংলা বাক্য",
+    "uk": "це просте українське речення про людей роботу місця і повсякденне життя",
+    "th": "นี่คือประโยคภาษาไทยง่ายๆ เกี่ยวกับผู้คน งาน สถานที่ และชีวิตประจำวัน",
+    "ur": "یہ لوگوں کام جگہوں اور روزمرہ زندگی کے بارے میں ایک سادہ اردو جملہ ہے",
+    "ta": "இது மக்கள் வேலை இடங்கள் மற்றும் அன்றாட வாழ்க்கையைப் பற்றிய எளிய தமிழ் வாக்கியம்",
+    "te": "ఇది ప్రజలు పని ప్రదేశాలు మరియు దైనందిన జీవితం గురించి సరళమైన తెలుగు వాక్యం",
+    "bg": "това е просто българско изречение за хората работата местата и ежедневието",
+    "ko": "이것은 사람들 일 장소 그리고 일상생활에 관한 간단한 한국어 문장입니다",
+    "pl": "to jest proste polskie zdanie o ludziach pracy miejscach i codziennym życiu",
+    "he": "זה משפט פשוט בעברית על אנשים עבודה מקומות וחיי היומיום",
+    "fa": "این یک جمله ساده فارسی درباره مردم کار مکان‌ها و زندگی روزمره است",
+    "vi": "đây là một câu tiếng việt đơn giản về con người công việc địa điểm và cuộc sống hằng ngày",
+    "ne": "यो मानिसहरू काम स्थानहरू र दैनिक जीवनको बारेमा सरल नेपाली वाक्य हो",
+    "sw": "hii ni sentensi rahisi ya kiswahili kuhusu watu kazi maeneo na maisha ya kila siku",
+    "kn": "ಇದು ಜನರು ಕೆಲಸ ಸ್ಥಳಗಳು ಮತ್ತು ದೈನಂದಿನ ಜೀವನದ ಬಗ್ಗೆ ಸರಳ ಕನ್ನಡ ವಾಕ್ಯ",
+    "mr": "हे लोक काम ठिकाणे आणि दैनंदिन जीवनाबद्दलचे एक साधे मराठी वाक्य आहे",
+    "gu": "આ લોકો કામ સ્થળો અને દૈનિક જીવન વિશેનું એક સરળ ગુજરાતી વાક્ય છે",
+    "pa": "ਇਹ ਲੋਕਾਂ ਕੰਮ ਥਾਵਾਂ ਅਤੇ ਰੋਜ਼ਾਨਾ ਜੀਵਨ ਬਾਰੇ ਇੱਕ ਸਧਾਰਨ ਪੰਜਾਬੀ ਵਾਕ ਹੈ",
+    "ml": "ഇത് ആളുകൾ ജോലി സ്ഥലങ്ങൾ ദൈനംദിന ജീവിതം എന്നിവയെ കുറിച്ചുള്ള ലളിതമായ മലയാള വാക്യമാണ്",
+    "fi": "tämä on yksinkertainen suomenkielinen lause ihmisistä työstä paikoista ja arkielämästä",
+}
 
 
 class WitnessError(ValueError):
@@ -105,9 +139,12 @@ def witness_for_constraint(constraint: dict[str, Any]) -> str:
         raise WitnessError("UNKNOWN_RELATION")
 
     if iid == "language:response_language":
-        # Frozen ResponseLanguageChecker returns True on LangDetectException.
-        # Digits carry no detectable natural-language features.
-        return "1234567890"
+        language = str(slots.get("language") or "")
+        seed = _LANGUAGE_SEEDS.get(language)
+        if seed is None:
+            raise WitnessError("UNVERIFIED_LANGUAGE_CODE:" + language)
+        # Repetition improves detector margin without adding another language.
+        return " ".join([seed] * 3)
 
     if iid == "length_constraints:number_sentences":
         count = _n(slots.get("num_sentences"), "num_sentences")
