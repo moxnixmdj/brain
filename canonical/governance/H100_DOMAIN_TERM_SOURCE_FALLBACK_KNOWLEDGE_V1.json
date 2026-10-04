@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DOMAIN_TERM_SOURCE_FALLBACK_KNOWLEDGE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_RAW_EXTERNAL_KNOWLEDGE__ZERO_LEARNED_STATE",
+  "objective": "PROVIDE_PROVENANCE_BOUND_NONLEARNED_FALLBACK_FOR_REAL_DOMAIN_TERMS_MISSING_FROM_OEWN_WITH_MULTI_SOURCE_ROLE_AGREEMENT_AND_FAIL_CLOSED_CONFLICT_HANDLING",
+  "sources": {
+    "MGH_FREESURFER_GLM": {
+      "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/GlmReview",
+      "organization": "Massachusetts General Hospital / Harvard-associated FreeSurfer",
+      "normalized_claim": "Each design-matrix explanatory variable is also called a regressor or covariate.",
+      "relation": "EXPLANATORY_VARIABLE_EQUIVALENT"
+    },
+    "UCD_BIVARIATE_REGRESSION": {
+      "url": "https://faculty.econ.ucdavis.edu/faculty/cameron/e240a/reviewbivariate.pdf",
+      "organization": "University of California, Davis",
+      "normalized_claim": "In regression, x is the independent or explanatory variable and may also be called a regressor or covariate.",
+      "relation": "PREDICTOR_INPUT_EQUIVALENT"
+    },
+    "WISC_REGRESSION_TERMINOLOGY": {
+      "url": "https://users.ssc.wisc.edu/~ewfrees/ActuarialRegression2009/regression-and-the-normal-distribution.html",
+      "organization": "University of Wisconsin",
+      "normalized_claim": "Regression terminology places regressor and predictor variable on the x-variable side of the model.",
+      "relation": "PREDICTOR_INPUT_EQUIVALENT"
+    },
+    "NIST_NLS_GLOSSARY": {
+      "url": "https://www.itl.nist.gov/div898/strd/nls/data/LINKS/c-nelson.shtml",
+      "organization": "NIST",
+      "normalized_claim": "The regression model uses x for predictor (independent) variables and y for the response variable.",
+      "relation": "PREDICTOR_INPUT_ANCHOR"
+    }
+  },
+  "terms": {
+    "covariate": {
+      "evidence": [
+        {
+          "source": "MGH_FREESURFER_GLM",
+          "normalized_role": "INPUT"
+        },
+        {
+          "source": "UCD_BIVARIATE_REGRESSION",
+          "normalized_role": "INPUT"
+        }
+      ]
+    },
+    "regressor": {
+      "evidence": [
+        {
+          "source": "MGH_FREESURFER_GLM",
+          "normalized_role": "INPUT"
+        },
+        {
+          "source": "UCD_BIVARIATE_REGRESSION",
+          "normalized_role": "INPUT"
+        },
+        {
+          "source": "WISC_REGRESSION_TERMINOLOGY",
+          "normalized_role": "INPUT"
+        }
+      ]
+    }
+  },
+  "consensus_rule": {
+    "minimum_independent_sources": 2,
+    "accepted_roles": [
+      "INPUT",
+      "TARGET"
+    ],
+    "require_unanimous_supported_role": true,
+    "conflict_behavior": "ABSTAIN_SOURCE_CONFLICT",
+    "insufficient_behavior": "ABSTAIN_SOURCE_SUPPORT_INSUFFICIENT",
+    "missing_behavior": "ABSTAIN_SOURCE_TERM_UNPINNED"
+  },
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0
+  },
+  "hard_rules": [
+    "RAW_SOURCE_ASSERTIONS_ARE_EXTERNAL_KNOWLEDGE_NOT_LEARNED_STATE",
+    "ROLE_MAY_ONLY_BE_EMITTED_FROM_AT_LEAST_TWO_DISTINCT_PINNED_SOURCE_IDS",
+    "ANY_CONFLICTING_SUPPORTED_ROLE_FOR_THE_SAME_TERM_FORCES_ABSTENTION",
+    "SOURCE_FALLBACK_MAY_NOT_OVERRIDE_AN_OEWN_AMBIGUOUS_OR_UNSUPPORTED_SENSE_RESULT",
+    "FINITE_PINNED_TERM_SET_IS_NOT_OPEN_WORLD_LEXICAL_COMPLETENESS"
+  ]
+}
