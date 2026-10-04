@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_SEMANTIC_SEED_REPAIR_FRONTIER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__MINIMUM_REAL_CAPABILITY_REPAIR_FRONTIER__ZERO_TERMINAL_EXPOSURE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "established_root1_gap": {
+    "state": "POSITIVE_OPERATIVE_GAP__EXACT_FROZEN_CANDIDATE_FORCED_FAIL",
+    "forced_fail_upper_percent": 64,
+    "required_percent": 65.7,
+    "frozen_candidate_commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "independent_forced_fail_verifier_commit": "f3c439f329c7b481a8448a0619e7696111e05ecc"
+  },
+  "operative_capability_graph_audit": {
+    "registry_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "registry_git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782",
+    "operative_capability_count": 42,
+    "verified_semantic_generation_effects_matching_paraphrase_summarize_simplify_rewrite_story_or_general_text_generation": 0,
+    "interpretation": "THE_CURRENT_VERIFIED_BOUND_CAPABILITY_GRAPH_HAS_NO_ROUTABLE_GENERAL_SEMANTIC_TEXT_PRODUCER_FOR_THE_FOUR_LIVEBENCH_IF_TASK_CLASSES",
+    "hard_nonclaim": "THIS_DOES_NOT_PROVE_NO_UNREGISTERED_HELPER_OR_NO_POSSIBLE_DETERMINISTIC_ALGORITHM_EXISTS; IT_PROVES THE_OPERATIVE_VERIFIED_GRAPH CURRENTLY LACKS THE EFFECT."
+  },
+  "observed_failure_localization": {
+    "replayed_already_exposed_cases": 72,
+    "valid_responses": 0,
+    "classes": {
+      "post_prompt_capability_acquisition_forbidden": 43,
+      "unresolved_grounded_composition": 27,
+      "control_or_fanout": 2
+    },
+    "consequence": "THE_DOMINANT REPAIR MUST CREATE OR PRECOMMIT USEFUL SEMANTIC EFFECTS AND MAKE THEM COMPOSABLE BEFORE EVALUATION; RANDOM PACKAGE PREINSTALLATION IS NOT EVIDENCE OF SEMANTIC CAPABILITY."
+  },
+  "current_repair_assets": {
+    "formal_constraint_compiler": {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "role": "FORMAL_CONSTRAINT_PARSE_AND_POSTVALIDATION_ONLY"
+    },
+    "seed_preserving_postprocessor": {
+      "path": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+      "git_blob_sha": "8cdb308941dbd6711279cbd1d505aca6aabdd376",
+      "role": "VERBATIM_SEED_PRESERVING_LITERAL_WRAPPERS_AND_ALREADY_SATISFIED_CONSTRAINTS_ONLY",
+      "hard_nonclaim": "DOES_NOT_CREATE_A_SEMANTIC_SEED"
+    },
+    "score_only_witness_quarantine": {
+      "path": "canonical/governance/LIVEBENCH_SCORE_ONLY_WITNESS_CAPABILITY_QUARANTINE_V1.json",
+      "role": "PREVENT_SCORER_SURFACE_OPTIMIZATION_FROM_BEING_COUNTED_AS_CAPABILITY_REPAIR"
+    }
+  },
+  "minimum_repair_layers": [
+    {
+      "rank": 1,
+      "id": "GENERAL_SEMANTIC_SEED_PRODUCTION",
+      "required_effects": [
+        "text.paraphrase.semantic_preserving",
+        "text.simplify.semantic_preserving",
+        "text.summarize.faithful",
+        "text.story.generate_instruction_grounded"
+      ],
+      "preferred_compression": "ONE_SHARED_GENERAL_TEXT_TRANSFORMATION_OR_GENERATION_CORE_IF_IT_DOMINATES_FOUR_SEPARATE_PRODUCERS",
+      "requirements": [
+        "PRECOMMITTED_AND_LOCAL_AT_EVALUATION_TIME",
+        "ZERO_INCREMENTAL_SPEND",
+        "NO_EXTERNAL_FRONTIER_MODEL_OR_API_RUNTIME_DEPENDENCY",
+        "NO_TERMINAL_CASE_SPECIFIC_TUNING",
+        "LEARNED_STATE_EXPLICITLY_ACCOUNTED_IF_ANY",
+        "PUBLIC_NONTERMINAL_GENERALIZATION_EVIDENCE",
+        "FAIL_CLOSED_OUTSIDE_VERIFIED_ENVELOPE"
+      ]
+    },
+    {
+      "rank": 2,
+      "id": "SEMANTICALLY_SAFE_CONSTRAINT_APPLICATION",
+      "state": "PARTIAL",
+      "requirements": [
+        "PRESERVE_REQUIRED_SEMANTIC_CONTENT_WHILE_SATISFYING_FORMAT_CONSTRAINTS",
+        "USE_SCORE_ONLY_CONSTRUCTORS_ONLY_WHEN_THE_INSTRUCTION_CLASS_PROVABLY_DEFINES_THE_ENTIRE_VALID_RESPONSE_SURFACE",
+        "EXACT_PUBLIC_CHECKER_POSTVALIDATION_WHERE_APPLICABLE"
+      ]
+    },
+    {
+      "rank": 3,
+      "id": "GROUNDED_COMPOSITION",
+      "evidence_mass": "27_OF_72_REPLAYED_CASES_CLASSIFIED_AS_UNRESOLVED_GROUNDED_CLAUSES",
+      "requirement": "COMPOSE_SEMANTIC_PRODUCER_PLUS_FORMAL_CONSTRAINT_CAPABILITIES_WITHOUT_POST_PROMPT_ACQUISITION"
+    },
+    {
+      "rank": 4,
+      "id": "CONTROL_OR_FANOUT",
+      "evidence_mass": "2_OF_72_REPLAYED_CASES",
+      "requirement": "REPAIR_ONLY_AFTER_HIGHER_MASS_PRODUCER_AND_COMPOSITION_LAYERS_OR_IF_NEW_EVIDENCE_PROMOTES_IT"
+    }
+  ],
+  "learned_state_policy": {
+    "rule": "DO_NOT_ASSUME_NEURAL_OR_LEARNED_PARAMETERS_ARE_NECESSARY; FIRST_SEARCH_REUSE_AND_FALSIFY_WHITE_BOX_NONLEARNED_ROUTES. IF GENERAL_SEMANTIC_PRODUCTION_REMAINS_UNAVAILABLE, A_LOCAL_LEARNED_COMPONENT_BECOMES_AN_ADMISSIBLE_ROOT1_REPAIR_CANDIDATE PROVIDED_ITS_STATE_IS_FULLY_ACCOUNTED_AND_ITS_CAPABILITY_IS_INDEPENDENTLY_VERIFIED.",
+    "existing_accounting_research": "PR_1616_SUB100MB_LEARNED_STATE_IS_ACCOUNTING_INFRASTRUCTURE_ONLY_NOT_SUFFICIENCY_PROOF"
+  },
+  "next_minimum_action": {
+    "action": "SEARCH_AND_COMPARE_EXISTING_ZERO_COST_WHITE_BOX_LOCAL_SEMANTIC_TEXT_PRODUCERS_THAT_CAN_BE_PRECOMMITTED; PREFER_REUSE_OVER_NEW_TRAINING. EVALUATE_CANDIDATES_ON_PUBLIC_NONTERMINAL_PARAPHRASE_SIMPLIFY_SUMMARIZE_STORY_TASKS. IF_NO_CANDIDATE_MEETS_THE_REQUIRED_ENVELOPE, OPEN_A_STRICTLY_ACCOUNTED_LOCAL_LEARNED_COMPONENT_LANE.",
+    "terminal_cases_required": 0
+  },
+  "hard_rules": [
+    "NO_CASE_73_OR_LATER",
+    "NO_TERMINAL_PROMPT_TUNING",
+    "NO_SCORE_ONLY_WITNESS_AS_ROOT1_CAPABILITY_CREDIT",
+    "NO_CLAIM_LEARNED_PARAMETERS_NECESSARY_BEFORE_WHITE_BOX_ROUTE_FALSIFICATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_FRONTIER"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
