@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_IFF_EXACT_CURRENT_ROOT_PARTITION_MATCHES_BOUND_PROJECTION__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_V1.json",
+    "git_blob_sha": "8ccf5c09357e0d644a90af67dbcd18c3b5ce5925"
+  },
+  "verification": {
+    "path": "canonical/verification/POST_LIVEBENCH_ROOT2_REBIND_CONNECTOR_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": null
+  },
+  "public_load_bearing_inputs": [
+    {
+      "kind": "LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION",
+      "run_id": 37196376134,
+      "job_id": 111419008329,
+      "conclusion": "success"
+    },
+    {
+      "kind": "LIVEBENCH_ROOT_PARTITION_PROJECTION",
+      "run_id": 37196472583,
+      "job_id": 111419310250,
+      "conclusion": "success"
+    }
+  ],
+  "bound_partition": {
+    "root1_only": 1,
+    "root2_only": 15,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "root2_touching": 18,
+    "unresolved_total": 26
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "scheduler_contract": [
+    "OUTPUT_ONLY_THRESHOLD_CERTIFICATE_PRECEDENCE_APPLIES_TO_EXACT_18_ROOT2_TOUCHING_PREDICATES",
+    "LIVEBENCH_IF_GE_65_7_IS_NOT_A_ROOT2_TARGET_FOR_THE_FAILED_FROZEN_CANDIDATE",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+    "FAIL_CLOSED_IF_CURRENT_ROOT_PARTITION_NO_LONGER_EQUALS_1_15_7_3_OR_IF_ANY_BOUND_BLOB_DRIFTS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
