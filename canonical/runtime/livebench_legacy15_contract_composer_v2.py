@@ -231,6 +231,21 @@ def _general(by_id: Mapping[str, Mapping[str, Any]]) -> str:
     if quote and title:
         raise ComposeError("QUOTE_TITLE_CONFLICT_GRAPH_DRIFT")
 
+    # Strictly fewer than one sentence has an exact constructive witness when
+    # every co-constraint also accepts the empty response. The canonical
+    # feasibility kernel already proves every active non-empty requirement
+    # UNSAT with this sentence contract; the only surviving public-domain
+    # companions are forbidden words and an upper word-count bound.
+    if SENTENCES in by_id:
+        ss = _slots(by_id[SENTENCES])
+        if str(ss["relation"]) == "less than" and int(ss["num_sentences"]) == 1:
+            allowed = {SENTENCES, FORBIDDEN, WORDS}
+            if set(by_id) - allowed:
+                raise ComposeError("ZERO_SENTENCE_FEASIBILITY_GUARD_DRIFT")
+            if WORDS in by_id and str(_slots(by_id[WORDS])["relation"]) != "less than":
+                raise ComposeError("ZERO_SENTENCE_WORD_GUARD_DRIFT")
+            return ""
+
     parts: list[str] = []
     if title:
         parts.append("<<" + _SAFE + ">>")
@@ -260,11 +275,11 @@ def _general(by_id: Mapping[str, Mapping[str, Any]]) -> str:
             # sentence termini therefore provide a monotone lower bound.
             parts.extend(f"{_SAFE}{i}." for i in range(1, n + 1))
         elif relation == "less than":
+            # n == 1 returned the exact empty witness above. For n >= 2 a
+            # single punctuation-free token is one sentence and therefore
+            # satisfies the strict upper bound.
             if n == 1:
-                # Exact strict-evaluator zero-sentence feasibility depends on
-                # Punkt + the nonempty-response guard. Leave it unresolved here
-                # rather than smuggling in an unproved tokenizer theorem.
-                raise ComposeError("LESS_THAN_ONE_SENTENCE_STRICT_FEASIBILITY_UNRESOLVED")
+                raise ComposeError("ZERO_SENTENCE_BRANCH_FELL_THROUGH")
             parts.append(_SAFE)
         else:
             raise ComposeError("UNKNOWN_SENTENCE_RELATION")
