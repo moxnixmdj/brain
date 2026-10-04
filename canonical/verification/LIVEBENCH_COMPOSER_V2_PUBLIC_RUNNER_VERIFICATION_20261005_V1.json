@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_COMPOSER_V2_PUBLIC_RUNNER_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_PINNED_CHECKERS__ZERO_TERMINAL_ROWS__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2102,
+    "merged_commit": "60ca74775d64c4b8c88f3f9eb5c57d80c52b1af6",
+    "workflow_run_id": 37242531058,
+    "workflow_job_id": 111553921729,
+    "conclusion": "success",
+    "artifact_sha256": "dd7923e31a5a468f43443fc38638d7a75204c4e0688b7d1c37bb64fae5d4a5f4"
+  },
+  "subject_blobs": {
+    "archetypes": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
+    "slot_feasibility": "a0885303a9c7088c4eb6f0510963069e35750f02",
+    "composer_v2": "d73ec366b32252996258eae6d10d67d4d6a5e042"
+  },
+  "pinned_livebench": {
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "nltk_version": "3.10.3"
+  },
+  "verified_coverage": {
+    "total_cases": 12488,
+    "structural_id_sets": 928,
+    "structural_profiles": 4,
+    "public_word_list_count": 1525,
+    "public_word_list_unique": 1525,
+    "word_threshold_cases": 802,
+    "paragraph_bullet_section_cross_cases": 250,
+    "nth_cross_cases": 60,
+    "candidate_witness_cases": 10959,
+    "proved_unsat_cases": 1529,
+    "witness_all_checker_pass": 10959,
+    "exact_checker_failures": 0
+  },
+  "breakthrough": [
+    "POSTSCRIPT_SENTENCE_INTERACTION_REPAIRED_BY_SENTENCE_NEUTRAL_P_S_PLUS_SCAFFOLD",
+    "ALL_10959_EMITTED_WITNESSES_PASS_THE_EXACT_PINNED_CHECKERS_INSIDE_THE_VERIFIED_ENVELOPE",
+    "THE_PREVIOUS_107_LOW_SENTENCE_POSTSCRIPT_FAILURES_ARE_CLOSED",
+    "ZERO_TERMINAL_ROWS_KWARGS_INSTRUCTION_LISTS_OR_TARGET_SCORES_WERE_READ"
+  ],
+  "hard_nonclaims": [
+    "THIS_RECEIPT_IS_NOT_A_FORMAL_PROOF_OF_THE_FULL_SLOT_CARTESIAN_PRODUCT",
+    "THIS_RECEIPT_ALONE_DOES_NOT_PROVE_POINTWISE_MAXIMALITY",
+    "THIS_RECEIPT_ALONE_GRANTS_NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "next_load_bearing_proof": {
+    "verifier_pull_request": 2128,
+    "obligation": "EXACT_POSTVALIDATE_CURRENT_POINTWISE_PLANNER_AND_REQUIRE_ACTUAL_CHECKER_PASS_COUNT_EQUALS_CLAIMED_THEORETICAL_MAXIMUM_OVER_THE_SAME_FINITE_ENVELOPE",
+    "distribution_free_consequence_if_completed_and_generalized": "POINTWISE_EXACT_SCORE_OPTIMALITY_DOMINATES_THE_OPUS_RESPONSE_ON_EVERY_IDENTICAL_FROZEN_ROW_AND_THEREFORE_MEETS_OR_EXCEEDS_THE_65_73775_PERCENT_COMPARATOR_MEAN_WITHOUT_TERMINAL_FREQUENCY_DISCOVERY"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_read": 0,
+    "terminal_kwargs_read": 0,
+    "terminal_instruction_lists_read": 0,
+    "target_scores_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
