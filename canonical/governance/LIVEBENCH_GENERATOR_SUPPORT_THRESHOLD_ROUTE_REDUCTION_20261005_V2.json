@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_GENERATOR_SUPPORT_THRESHOLD_ROUTE_REDUCTION_20261005_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__MINIMAL_GENERATOR_ADMITTED_END_FORBIDDEN_UNSAT_CORE__UNIVERSAL_SUPPORT_THRESHOLD_ROUTE_FALSIFIED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": {
+    "counterexample_ids": [
+      "keywords:forbidden_words",
+      "startend:end_checker"
+    ],
+    "collision_word": "help",
+    "mandatory_end_phrase": "Is there anything else I can help with?",
+    "forbidden_sample": [
+      "help",
+      "rock",
+      "western",
+      "sentence",
+      "signal"
+    ],
+    "generator_reachability": [
+      "FORBIDDEN_WORDS_DEFAULT_DRAWS_EXACTLY_FIVE_DISTINCT_WORD_LIST_ENTRIES",
+      "ALL_FIVE_SELECTED_WORDS_ARE_IN_THE_PINNED_WORD_LIST",
+      "END_CHECKER_DEFAULT_DRAWS_FROM_THE_PINNED_ENDING_OPTIONS",
+      "THE_REQUIRED_HELP_ENDING_IS_ONE_OF_THOSE_OPTIONS",
+      "THE_TWO_INSTRUCTION_IDS_ARE_CONFLICT_COMPATIBLE",
+      "THEREFORE_THIS_CONCRETE_SLOT_TUPLE_HAS_POSITIVE_HISTORICAL_GENERATOR_SUPPORT"
+    ],
+    "joint_unsat": [
+      "END_CHECKER_REQUIRES_THE_RESPONSE_TO_END_WITH_THE_MANDATORY_PHRASE",
+      "THAT_SUFFIX_CONTAINS_STANDALONE_HELP",
+      "FORBIDDEN_WORDS_REJECTS_STANDALONE_HELP_ANYWHERE",
+      "NO_RESPONSE_CAN_PASS_BOTH_CHECKERS"
+    ],
+    "score_consequence": "WITH_TWO_CHECKERS_AND_AT_MOST_ONE_TRUE_THE_FROZEN_CASE_SCORE_IS_AT_MOST_1_OVER_4",
+    "threshold_consequence": "1_OVER_4_IS_STRICTLY_BELOW_657_OVER_1000",
+    "proof_scope": "GENERATOR_SUPPORT_UNIVERSAL_PER_ROW_THRESHOLD_FLOOR_IS_FALSIFIED__FIXED_200_ROW_POPULATION_SCORE_IS_NOT_INFERRED"
+  },
+  "proof_reduction": {
+    "superseded_candidate": "NTH_PARAGRAPH_FIRST_WORD_EQUALS_FORBIDDEN_WORD",
+    "reason": "END_FORBIDDEN_USES_FEWER_PARAMETER_PREMISES_AND_ALREADY_HAS_AN_INDEPENDENT_PUBLIC_SOURCE_VERIFIER",
+    "retained_truth": "THE_NTH_FORBIDDEN_COLLISION_REMAINS_A_VALID_CHECKER_DOMAIN_UNSAT_CLASS_BUT_IS_NO_LONGER_LOAD_BEARING_FOR_THIS_SCHEDULER_THEOREM"
+  },
+  "source_bindings": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_util_git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "historical_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "score_process_git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676"
+  },
+  "candidate_subjects": {
+    "falsifier_runtime": {
+      "path": "canonical/runtime/livebench_generator_support_threshold_route_falsifier_v2.py",
+      "git_blob_sha": "5e6a6bf016ab2ba41c882981d1ab9e488f0d5f19"
+    },
+    "tests": {
+      "path": "canonical/tests/test_livebench_generator_support_threshold_route_falsifier_v2.py",
+      "git_blob_sha": "a7676edf8cb672a8fa8149d82f979773942e1191"
+    },
+    "score_bound_runtime": {
+      "path": "canonical/runtime/livebench_if_score_bound_v1.py",
+      "git_blob_sha": "f8e4f2bb0d537bfd4646c4037cf74238f7b0d4df"
+    }
+  },
+  "independent_public_source_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_path": "verify_livebench_generator_support_universality_refutation_v1.py",
+    "truth_repair_commit": "7240505954233705239af9a3aa0e240fac11f080",
+    "verified_premise": "END_FORBIDDEN_GENERATOR_SUPPORT_UNSAT_COUNTEREXAMPLE",
+    "acceptance_credit": false
+  },
+  "scheduler_reduction": {
+    "demote_as_acceptance_path": "UNIVERSAL_GENERATOR_SUPPORT_SATISFIABILITY_OR_PER_ROW_THRESHOLD_FLOOR",
+    "retain_as_candidate_hardening": [
+      "928_TO_7_STRUCTURAL_ARCHETYPE_REDUCTION",
+      "EXACT_PUBLIC_SYNTHETIC_CHECKER_AUDITS",
+      "SLOT_LEVEL_WITNESS_OR_UNSAT_CLASSIFICATION",
+      "POINTWISE_OPTIMALITY_CERTIFICATION"
+    ],
+    "corrected_minimum_cut": [
+      "STABILIZE_AND_FAIL_CLOSE_THE_VISIBLE_PROMPT_SOLVER_WITH_PUBLIC_SYNTHETIC_CHECKS",
+      "FREEZE_AND_CONTENT_ADDRESS_THE_FINAL_CANDIDATE_SCORER_AND_NONLEAKING_EXECUTION_PROTOCOL_BEFORE_FIXED_POPULATION_EXPOSURE",
+      "OBTAIN_ONE_FIXED_POPULATION_SPECIFIC_SCORE_MASS_RECEIPT",
+      "OR_PROVE_A_CONTENT_INDEPENDENT_FIXED_POPULATION_SCORE_MASS_BRIDGE",
+      "DO_NOT_REQUIRE_A_UNIVERSAL_PER_ROW_FLOOR_OVER_ALL_GENERATOR_SUPPORTED_KWARGS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_ACTUAL_FROZEN_ROW_CONTENT_READ",
+    "NO_ACTUAL_FROZEN_ROW_METADATA_READ",
+    "NO_ACTUAL_FROZEN_SLOT_FREQUENCY_INFERRED",
+    "NO_CLAIM_THE_COUNTEREXAMPLE_OCCURS_IN_THE_FIXED_200_ROW_POPULATION",
+    "NO_CURRENT_LIVEBENCH_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
