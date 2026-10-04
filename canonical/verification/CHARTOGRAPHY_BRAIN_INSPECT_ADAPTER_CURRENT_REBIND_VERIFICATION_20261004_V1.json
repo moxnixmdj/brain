@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_CURRENT_REBIND_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "CURRENT_MAIN_REBIND__REUSES_INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT",
+  "exact_verified_blobs": {
+    "governance": "f0352c187eb921d6e736608825005df887449488",
+    "runtime": "2d58a2937e8d5a6b41c29f7f92fff3d10f88e025",
+    "tests": "21bcebc8aa3059fe6f4d1d2eb9fffb609aea99e1"
+  },
+  "prior_independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1533,
+    "merge_commit": "bfca450d15043a17f3b9cf5271bd55d8ff73b36a",
+    "workflow_run_id": 37165446413,
+    "workflow_job_id": 111327285044,
+    "conclusion": "success",
+    "verified_tests": 11
+  },
+  "consequence": "CHARTOGRAPHY_INSPECT_ADAPTER_IMPLEMENTATION_DISCHARGED__INTERNAL_MULTIMODAL_BACKEND_BINDING_PROJECT_CAPACITY_AND_SCORE_REMAIN",
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "fresh_reality_authority": false
+}
