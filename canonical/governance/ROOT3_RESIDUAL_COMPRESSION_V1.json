@@ -88,7 +88,7 @@
       "verification_path": "canonical/verification/UNIVERSAL_LEARNING_PROOF_PROGRAM_V7_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "87f8660095b9a9d71eb160bf23616a46d4c3e1cf",
       "structural_residual_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V7_STRUCTURAL_RESIDUAL_REDUCTION_V1.json",
-      "structural_residual_reduction_git_blob_sha": "eec64426584b54946dd4d6c8d2c749eabf2159f2",
+      "structural_residual_reduction_git_blob_sha": "26704949fa0d6b4db74a5701758a07569e8268c3",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__OPERATIVE_UNKNOWN_DOMAIN_LEARNING_OVERLAY_V7__POINTER_VERIFICATION_PENDING__ZERO_CREDIT"
     }
   },
