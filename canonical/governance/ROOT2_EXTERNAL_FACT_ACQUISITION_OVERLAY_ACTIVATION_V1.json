@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__SCHEDULING_ONLY__ANTI_WISHFUL_OUTREACH__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "path": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V1.json",
+    "git_blob_sha": "ebbfd05e58abc398a50998f9b9e4bdedacf205e1"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "3ef8a2cb343c2748f3da31c4aea43f6664d80d90",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1642,
+    "verifier_merge_commit": "ba1aa91c04b2f41437693582a830e31496dc58c0",
+    "workflow_run_id": 37172822097,
+    "workflow_job_id": 111349112497,
+    "conclusion": "success"
+  },
+  "effects": [
+    "SELF_SERVICE_FACTS_EXECUTE_DIRECTLY_OR_REMAIN_ACCOUNT_GATED__THEY_DO_NOT_WAIT_ON_SUPPORT_REPLIES",
+    "OWNER_EXCLUSIVE_FACTS_MAY_WAIT_IN_PARALLEL_WITHOUT_BLOCKING_ORTHOGONAL_WORK",
+    "DORMANT_CLOSED_ROUTES_CONSUME_ZERO_ACTIVE_SCHEDULER_ATTENTION",
+    "NO_NEW_EMAIL_FOR_FREE_TRIAL_FREE_TIER_FREE_QUOTA_FREE_CREDIT_OR_BASIC_SUPPORT_FACTS",
+    "PRESERVE_ACTIVE_ROOT2_V8_ACCEPTANCE_THRESHOLDS_AND_ROUTES",
+    "PRESERVE_5_ACCEPTED_14_OPEN_12_PROVED_26_UNRESOLVED",
+    "PRESERVE_ZERO_SPEND_AND_FRESH_REALITY_BLOCK"
+  ],
+  "authority": {
+    "scheduling": true,
+    "effective_scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
