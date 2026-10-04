@@ -73,7 +73,10 @@ def _special_json(constraints: list[dict[str, Any]]) -> str:
     required = _required_fragments(_required(constraints), forbidden)
     filler = _safe_token(forbidden)
     payload = " ".join([filler, *required]).strip()
-    response = json.dumps({"response": payload}, ensure_ascii=False)
+    # Avoid fixed alphabetic JSON keys: any invented word can collide with a
+    # generated forbidden-word constraint. A one-element array carries the
+    # payload without adding scorer-visible alphabetic scaffolding.
+    response = json.dumps([payload], ensure_ascii=False)
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
             raise JointWitnessError("JSON_FORBIDDEN_COLLISION")
@@ -102,8 +105,10 @@ def _special_two(constraints: list[dict[str, Any]]) -> str:
     filler = _safe_token(forbidden)
     title = "<<x>> " if _get_one(constraints, "detectable_format:title") else ""
     common = (title + " ".join([filler, *required])).strip()
-    a = common + " alpha"
-    b = common + " beta"
+    # Distinguish the two responses with digits only. Fixed alphabetic labels
+    # can themselves collide with generated forbidden-word constraints.
+    a = common + " 0"
+    b = common + " 1"
     response = a + "******" + b
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
@@ -154,10 +159,17 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
         if relation == "at least":
             body_parts.extend(f"{filler}{i}." for i in range(max(1, n)))
         elif relation == "less than":
-            if n <= 0:
-                raise JointWitnessError("STRICT_LESS_THAN_ZERO_SENTENCES")
-            # Keep our own additions punctuation-free. Other visible constraints
-            # can still introduce punctuation; exact predecessor replay decides.
+            # Any non-empty ordinary witness is at least one Punkt sentence, so
+            # <1 requires a separate zero-sentence construction. Do not fake it.
+            if n <= 1:
+                raise JointWitnessError("LESS_THAN_ONE_SENTENCE_REQUIRES_ZERO_SENTENCE_SPECIAL_CASE")
+            # P.S./P.P.S. and the frozen end phrases contain sentence punctuation.
+            # Their exact interaction with Punkt must be proved before claiming a
+            # strict upper bound. Fail closed instead of emitting a false PASS.
+            if post or end:
+                raise JointWitnessError("LESS_THAN_SENTENCE_WITH_POST_OR_END_REQUIRES_EXACT_TOKENIZER_PROOF")
+            # All remaining active structural additions are punctuation-free here;
+            # paragraph/nth composition is excluded by the frozen conflict graph.
             body_parts.append(filler)
         else:
             raise JointWitnessError("UNKNOWN_SENTENCE_RELATION")
