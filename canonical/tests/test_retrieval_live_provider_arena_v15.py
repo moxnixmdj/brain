@@ -55,7 +55,7 @@ def test_lineage_dedupes_artifact_queries():
     v15.v13.base._url_json=fake
     try:
         v15.maven_artifact_lineage(
-            ["g1:a","g2:a","g3:b"],timeout=1,max_queries=10,limit=20
+            ["g1:alpha","g2:alpha","g3:beta"],timeout=1,max_queries=10,limit=20
         )
     finally:
         v15.v13.base._url_json=old
