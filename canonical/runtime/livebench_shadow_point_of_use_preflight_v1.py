@@ -3,6 +3,10 @@
 Zero-case only. This verifier may establish that the exact precommitted LiveBench
 execution tuple is ready to attempt a durable one-use claim. It never grants
 case-reveal authority; that remains exclusively the V2 one-use claim stage.
+
+Important: claim uniqueness is established only by the later atomic Git-ref
+create. Preflight MUST NOT perform or require a read-before-create absence
+check; that would introduce a check-then-act race without adding authority.
 """
 from __future__ import annotations
 from typing import Any, Mapping
@@ -17,9 +21,6 @@ HEX=set("0123456789abcdef")
 
 def _sha256(x: Any) -> bool:
     return isinstance(x,str) and len(x)==64 and set(x.lower()) <= HEX
-
-def _sha40(x: Any) -> bool:
-    return isinstance(x,str) and len(x)==40 and set(x.lower()) <= HEX
 
 def expected_claim_ref(lease_digest_sha256: str) -> str:
     if not _sha256(lease_digest_sha256):
@@ -46,8 +47,6 @@ def verify_point_of_use_preflight(
 
     if receipt.get("claim_ref") != expected_ref:
         reasons.append("CLAIM_REF_NOT_DERIVED_FROM_LEASE_DIGEST")
-    if receipt.get("claim_ref_absent_observed") is not True:
-        reasons.append("CLAIM_REF_PRIOR_ABSENCE_NOT_OBSERVED")
 
     required_false=(
       "case_reveal_has_occurred",
@@ -96,6 +95,8 @@ def verify_point_of_use_preflight(
       "point_of_use_preflight_pass":passed,
       "reasons":sorted(set(reasons)),
       "expected_claim_ref":expected_ref,
+      "claim_uniqueness_test":"ATOMIC_GIT_REF_CREATE_ONLY",
+      "preflight_absence_probe_required":False,
       "terminal_cases_consumed":0,
       "case_reveal_authority":False,
       "shadow_collection_authority":False,
