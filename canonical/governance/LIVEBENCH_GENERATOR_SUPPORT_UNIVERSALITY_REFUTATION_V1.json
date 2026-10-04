@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_GENERATOR_SUPPORT_UNIVERSALITY_REFUTATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_PUBLIC_SOURCE_FORMAL_COUNTEREXAMPLE__UNIVERSAL_ALL_KWARGS_CONSTRUCTIVE_TARGET_REFUTED__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "claim_refuted": "A single response constructor can satisfy every conflict-compatible active legacy identity set for every kwarg tuple reachable from the historical LiveBench generator.",
+  "frozen_public_source": {
+    "livebench_checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "historical_live_data_blob": "6ff390d6885cf90f88d9d36959735cb327613edc"
+  },
+  "source_facts": {
+    "generator_builds_kwargs_by_calling_each_selected_checkers_build_description_without_explicit_kwargs": true,
+    "generator_deconflicts_only_identity_pairs_declared_in_INSTRUCTION_CONFLICTS": true,
+    "forbidden_words_and_multiple_sections_are_identity_compatible": true,
+    "forbidden_words_and_end_checker_are_identity_compatible": true,
+    "forbidden_word_count": 5,
+    "keyword_pool_size_in_pinned_source": 1647,
+    "keyword_pool_unique_string_count": 1628,
+    "keyword_pool_contains_section": true,
+    "keyword_pool_contains_other": true,
+    "keyword_pool_contains_anything": true,
+    "keyword_pool_contains_can": true,
+    "keyword_pool_contains_help": true,
+    "section_splitter_support": [
+      "Section",
+      "SECTION"
+    ],
+    "ending_support": [
+      "Any other questions?",
+      "Is there anything else I can help with?"
+    ]
+  },
+  "formal_counterexamples": [
+    {
+      "id": "FORBIDDEN_SECTION_VS_REQUIRED_SECTION",
+      "identity_set": [
+        "keywords:forbidden_words",
+        "detectable_format:multiple_sections"
+      ],
+      "reachable_kwargs": {
+        "forbidden_words_contains": "section",
+        "section_spliter": "Section",
+        "num_sections": ">=1"
+      },
+      "proof": [
+        "SectionChecker can pass only if the response contains a splitter matching literal Section followed by a section index.",
+        "ForbiddenWords rejects any case-insensitive whole-word occurrence matching section.",
+        "The required Section occurrence is therefore forbidden.",
+        "No response can satisfy both checkers for this reachable kwarg tuple."
+      ],
+      "contradiction": "REQUIRED_WHOLE_WORD_SECTION_AND_FORBIDDEN_WHOLE_WORD_SECTION"
+    },
+    {
+      "id": "FORBIDDEN_HELP_VS_REQUIRED_END_PHRASE",
+      "identity_set": [
+        "keywords:forbidden_words",
+        "startend:end_checker"
+      ],
+      "reachable_kwargs": {
+        "forbidden_words_contains": "help",
+        "end_phrase": "Is there anything else I can help with?"
+      },
+      "proof": [
+        "EndChecker requires the stripped response to end with the exact configured phrase.",
+        "That phrase contains the whole word help.",
+        "ForbiddenWords rejects any case-insensitive whole-word occurrence matching help.",
+        "No response can satisfy both checkers for this reachable kwarg tuple."
+      ],
+      "contradiction": "REQUIRED_END_PHRASE_CONTAINS_FORBIDDEN_WHOLE_WORD_HELP"
+    }
+  ],
+  "quantitative_context_non_load_bearing": {
+    "probability_forbidden_sample_contains_section_given_a_forbidden_words_constraint": 0.0030358227079538553,
+    "probability_end_phrase_collides_with_at_least_one_forbidden_pool_word_given_forbidden_words_plus_end_checker": 0.006060585960659781,
+    "note": "These probabilities are context only. They do not prove any fact about the fixed target population and carry zero acceptance credit."
+  },
+  "consequence": {
+    "seven_archetype_identity_reduction_remains_valid_as_an_identity_level_reduction": true,
+    "representative_7424_case_audit_remains_useful_as_falsification": false,
+    "universal_all_generator_kwargs_theorem_possible": false,
+    "reason": "The public generator support itself contains satisfiability contradictions not represented in the identity-only conflict graph.",
+    "invalid_next_action": "PROVE_ONE_WITNESS_FOR_EVERY_IDENTITY_SET_AND_EVERY_REACHABLE_KWARG_TUPLE",
+    "admissible_replacement": [
+      "PROVE_A_VISIBLE_PARAMETER_SATISFIABILITY_CLASSIFIER_AND_CONSTRUCTOR_FOR_ALL_SATISFIABLE_PUBLIC_CONTRACTS",
+      "USE_A_PRECOMMITTED_CLEAN_UNEXPOSED_EQUIVALENT_POPULATION_WITH_A_VERIFIED_SCOPE_BRIDGE_AS_ALLOWED_BY_THE_CONTAMINATION_REVOCATION",
+      "KEEP_THE_QUARANTINED_EXACT200_OBSERVATION_DIAGNOSTIC_ONLY"
+    ]
+  },
+  "accounting": {
+    "terminal_rows_read_in_this_refutation": 0,
+    "terminal_instruction_ids_read_in_this_refutation": 0,
+    "terminal_kwargs_read_in_this_refutation": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal": false
+  }
+}
