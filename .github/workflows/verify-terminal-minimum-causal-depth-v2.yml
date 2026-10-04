@@ -1,0 +1,28 @@
+name: verify-terminal-minimum-causal-depth-v2
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_PLAN_V2.json'
+      - 'canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_V2_CANDIDATE.json'
+      - 'canonical/governance/ROOT2_BLIND_THRESHOLD_RECEIPT_ACTIVATION_V1.json'
+      - 'canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1.json'
+      - 'canonical/governance/ARENA_COMPARATOR_PUBLIC_SEMANTICS_RECONCILIATION_V1.json'
+      - 'canonical/runtime/terminal_minimum_causal_depth_guard_v2.py'
+      - 'canonical/tests/test_terminal_minimum_causal_depth_guard_v2.py'
+      - '.github/workflows/verify-terminal-minimum-causal-depth-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python canonical/runtime/terminal_minimum_causal_depth_guard_v2.py
+      - run: python -c "from canonical.tests.test_terminal_minimum_causal_depth_guard_v2 import test_guard_passes; test_guard_passes()"
