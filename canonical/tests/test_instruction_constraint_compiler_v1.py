@@ -38,6 +38,28 @@ class InstructionConstraintCompilerTests(unittest.TestCase):
         self.assertEqual(out["status"], "FORMAL_CONSTRAINTS_SATISFIED_SEMANTIC_SEED_STILL_REQUIRED")
         self.assertEqual(len(out["response"].split()), 5)
 
+    def test_unquoted_exact_response_atom(self):
+        cases = [
+            ("Reply with exactly SYNTHETIC_OK.", "SYNTHETIC_OK"),
+            ("Answer exactly BETA_7.", "BETA_7"),
+            ("Output exactly TOKEN-3.", "TOKEN-3"),
+            ("Say exactly ns:value.", "ns:value"),
+        ]
+        for instruction, expected in cases:
+            with self.subTest(instruction=instruction):
+                out = synthesize_formal_only(instruction)
+                self.assertEqual(out["status"], "PASS")
+                self.assertEqual(out["response"], expected)
+                self.assertFalse(out["semantic_seed_required"])
+
+    def test_unquoted_multiword_exact_response_fails_closed(self):
+        out = synthesize_formal_only("Reply with exactly two words.")
+        self.assertNotEqual(out["status"], "PASS")
+
+    def test_unquoted_atom_with_extra_instruction_does_not_overmatch(self):
+        out = synthesize_formal_only("Reply with exactly ALPHA. Then explain why.")
+        self.assertNotEqual(out["status"], "PASS")
+
     def test_no_constraint_route_blocks(self):
         out = synthesize_formal_only("Explain photosynthesis.")
         self.assertEqual(out["status"], "BLOCKED")
