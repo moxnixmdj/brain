@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V2_UNIVERSAL_FORMAL_REDUCTION_REVOCATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "TRUTH_REPAIR_CANDIDATE__MERGED_V2_UNIVERSAL_THEOREM_HAS_CONCRETE_ADD2_IEEE754_COUNTEREXAMPLE__FAIL_CLOSED_REVOKE_ATOMIC_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "revoked_reduction": {
+    "path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_20261005_V1.json",
+    "git_blob_sha": "941e62de59e4c528e8afbb95482f6707bc62104e",
+    "invalid_claim": "FOR_EVERY_VALID_POST_FREEZE_BEACON_AND_EVALUATOR_SECRET__EVERY_27_CASE_POPULATION_EMITTED_BY_THE_EXACT_FROZEN_V2_GENERATOR_IS_PASSED_BY_CANDIDATE_V2"
+  },
+  "concrete_falsifier": {
+    "kind": "DETERMINISTIC_ADD2_EXACT_IEEE754_ROLE_ORDER_COUNTEREXAMPLE",
+    "exact_subject_blobs": {
+      "candidate_v2": "4470716f95a559a700e461262df909ae19a41651",
+      "generator_v2": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+      "scorer_v1": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+      "harness_v1": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+    },
+    "deterministic_inputs": {
+      "evaluator_secret_derivation": "SHA256_ASCII_secret0",
+      "beacon": "beacon-qualification-0000000000000000",
+      "transfer_index": 4,
+      "namespace": "QUALONLY"
+    },
+    "failure": "CANDIDATE_V2_IDENTIFIES_THE_CORRECT_TWO_FEATURE_SUPPORT_BUT_LEXICOGRAPHIC_R0_R1_ROLE_ORDER_CAN_CHANGE_THE_EXACT_FLOAT_RESULT_BY_ONE_ULP__SCORER_REQUIRES_EXACT_TERMINAL_CONSEQUENCE_EQUALITY",
+    "expected_error": "DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG",
+    "support_still_correct": true,
+    "regression_origin": {
+      "brain_pull_request": 1909,
+      "note": "COUNTEREXAMPLE_TEST_IS_CONTENT_BOUND_TO_THE_EXACT_FROZEN_V2_SUBJECTS__SEPARATE_INDEPENDENT_REPLAY_IS_REQUIRED_BEFORE_THIS_RECEIPT_IS_UPGRADED_FROM_CANDIDATE_TO_VERIFIED"
+    }
+  },
+  "separate_identifier_proof_gap": {
+    "classification": "INCOMPLETENESS_NOT_USED_AS_THE_CONCRETE_FALSIFIER",
+    "issue": "V1_V2_SEMANTIC_IDENTIFIERS_USE_TRUNCATED_HMAC_TOKENS_AND_THE_UNIVERSAL_PROOF_DID_NOT_ESTABLISH_WITHIN_GROUP_INJECTIVITY_FOR_EVERY_VALID_SECRET_AND_BEACON",
+    "correction_rule": "A_REPLACEMENT_UNIVERSAL_ROUTE_SHOULD_MAKE_IDENTIFIER_INJECTIVITY_STRUCTURAL_RATHER_THAN_ASSUMING_COLLISION_RESISTANCE",
+    "hard_correction": "PIGEONHOLE_OVER_THE_INPUT_DOMAIN_DOES_NOT_BY_ITSELF_PROVE_A_HARMFUL_SAME_SECRET_SAME_BEACON_INTERNAL_COLLISION"
+  },
+  "fail_closed_effect": {
+    "atomic_predicate_before": "PROVED",
+    "atomic_predicate_after": "UNRESOLVED_ROOT3_PENDING_VALID_SCOPE_PROOF_OR_FROZEN_DIRECT_EXECUTION",
+    "proved_atomic_delta": -1,
+    "unresolved_atomic_delta": 1,
+    "family_acceptance_delta": 0,
+    "terminal": false
+  },
+  "replacement_target": [
+    "STRUCTURALLY_COLLISION_TOTAL_IDENTIFIER_GENERATOR",
+    "EXACT_FLOAT_ADD2_ROLE_ORIENTATION_FROM_VISIBLE_INVARIANT",
+    "CONTENT_BOUND_UNIVERSAL_PROOF_OVER_THE_COMBINED_SYSTEM",
+    "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
+    "SEPARATE_SCOPE_AND_ACCEPTANCE_REDUCTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
