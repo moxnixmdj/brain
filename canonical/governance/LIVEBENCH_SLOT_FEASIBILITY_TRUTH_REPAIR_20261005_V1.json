@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_SLOT_FEASIBILITY_TRUTH_REPAIR_V1",
   "date": "2026-10-05",
-  "status": "TRUTH_REPAIR__STRUCTURAL_928_TO_7_REDUCTION_PRESERVED__SLOT_FEASIBILITY_LAYER_NOW_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "status": "TRUTH_REPAIR__STRUCTURAL_928_TO_7_REDUCTION_PRESERVED__SLOT_FEASIBILITY_LAYER_REQUIRED__PUBLIC_WORD_DOMAIN_SOURCE_BINDING_CORRECTED__ZERO_ACCEPTANCE_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "problem": "The existing 928 conflict-compatible active15 ID sets and seven archetypes compress the public conflict graph, but ID-level compatibility is not logically equivalent to satisfiability of the concrete visible checker slots.",
@@ -55,13 +55,38 @@
     "historical_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
     "pinned_instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
     "pinned_registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
-    "word_list_entry_count": 1646,
-    "word_list_unique_value_count": 1626,
-    "nth_plus_forbidden_exact_value_collision_probability_conditional_on_pair": 0.003191693961155612,
-    "end_plus_forbidden_collision_probability_conditional_on_pair_and_first_end_phrase": 0.0030376670716891763,
-    "end_plus_forbidden_collision_probability_conditional_on_pair_and_second_end_phrase": 0.009090855420472499,
-    "end_plus_forbidden_collision_probability_conditional_on_pair_mean_over_two_public_end_phrases": 0.006064261246080838,
-    "credit_rule": "THESE_ARE_PUBLIC_GENERATOR_DIAGNOSTICS_ONLY; THEY DO_NOT INFER TERMINAL_PAIR_FREQUENCIES OR SUPPLY ACCEPTANCE_CREDIT"
+    "word_list_entry_count": 1525,
+    "word_list_unique_value_count": 1525,
+    "nth_plus_forbidden_exact_value_collision_probability_conditional_on_pair": 0.003278688524590164,
+    "end_plus_forbidden_collision_probability_conditional_on_pair_and_first_end_phrase": 0.003278688524590123,
+    "end_plus_forbidden_collision_probability_conditional_on_pair_and_second_end_phrase": 0.009810266079742336,
+    "end_plus_forbidden_collision_probability_conditional_on_pair_mean_over_two_public_end_phrases": 0.0065444773021662295,
+    "credit_rule": "THESE_ARE_PUBLIC_GENERATOR_DIAGNOSTICS_ONLY; THEY DO_NOT INFER TERMINAL_PAIR_FREQUENCIES OR SUPPLY ACCEPTANCE_CREDIT",
+    "pinned_instructions_util_git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "end_phrase_word_list_intersections": {
+      "Any other questions?": [
+        "other"
+      ],
+      "Is there anything else I can help with?": [
+        "anything",
+        "can",
+        "help"
+      ]
+    },
+    "required_carrier_suffix_x_collision_audit": {
+      "rule": "CARRIER_EQUALS_REQUIRED_WORD_PLUS_LITERAL_x",
+      "word_list_pairs_where_required_plus_x_is_another_word_list_value": 0,
+      "consequence": "FOR_THE_EXACT_PINNED_WORD_LIST__THE_EXISTING_PLUS_X_REQUIRED_CARRIER_CANNOT_EQUAL_ANY_GENERATED_FORBIDDEN_WORD"
+    },
+    "source_binding_correction": {
+      "prior_entry_count": 1646,
+      "prior_unique_count": 1626,
+      "prior_probability_diagnostics_revoked": true,
+      "reason": "THE_EXACT_INSTRUCTIONS_UTIL_BLOB_BOUND_BY_BOTH_THE_HISTORICAL_GENERATOR_COMMIT_AND_PINNED_CHECKER_COMMIT_CONTAINS_1525_ENTRIES_AND_1525_UNIQUE_VALUES",
+      "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+      "pinned_checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "same_instructions_util_blob_at_both_commits": true
+    }
   },
   "corrected_proof_target": {
     "statement": "FOR_EVERY_GENERATOR_ADMITTED_VISIBLE_CONTRACT_TUPLE_IN_THE_ACTIVE15_SURFACE, PRODUCE_EITHER_A_RESPONSE_THAT_POSTVALIDATES_TRUE_AGAINST_EVERY_PINNED_CHECKER_OR_A_CHECKER_SEMANTICS_CERTIFICATE_THAT_THE_TUPLE_IS_UNSATISFIABLE",
@@ -76,7 +101,7 @@
       "INDEPENDENT_PUBLIC_RUNNER_EXACT_BYTE_VERIFICATION"
     ]
   },
-  "next_action": "IMPLEMENT_A_DETERMINISTIC_WITNESS_OR_UNSAT_COMPOSER_FOR_THE_SEVEN_ARCHETYPES_AND_VERIFY_IT_OVER_THE_PUBLIC_GENERATOR_ADMITTED_SLOT_DOMAIN; DO_NOT_ATTEMPT_TO_PROVE_RAW_928_ID_SET_SATISFIABILITY",
+  "next_action": "BUILD_THE_SEVEN_ARCHETYPE_WITNESS_OR_UNSAT_COMPOSER_AGAINST_THE_CORRECTED_1525_VALUE_PUBLIC_DOMAIN__QUOTIENT_WORD_IDENTITY_BY_CHECKER_RELEVANT_COLLISIONS__VERIFY_EXACT_PINNED_CHECKERS__NO_RAW_WORD_COMBINATION_ENUMERATION",
   "hard_nonclaims": [
     "NO_TERMINAL_ROW_CONTENT_READ",
     "NO_TERMINAL_CASE_FREQUENCY_INFERRED",
