@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ROLE_BRAIN_CI_INTEGRATION_ANOMALY_20261004_V1",
+  "date": "2026-10-04",
+  "status": "RECORDED__BRAIN_LOCAL_CHECK_FAILURE_WITH_NO_EXPOSED_STEPS_OR_LOG_BLOB__INDEPENDENT_EXACT_SUBJECT_PASS_REMAINS_LOAD_BEARING__ZERO_CREDIT",
+  "brain_pr": 1649,
+  "brain_merge_ref": "24956af0e1050190063b1d4d0653d057ae99b45a",
+  "brain_local_workflow": {
+    "name": "H100 zero-learned role induction V1",
+    "run_id": 37188086716,
+    "job_id": 111394260615,
+    "conclusion": "failure",
+    "exposed_steps": 0,
+    "log_fetch": "BLOB_NOT_FOUND",
+    "semantic_failure_identified": false
+  },
+  "exact_merge_ref_subject_blobs": {
+    "preexposure": "1d8049556eb073007e1f4686a3034726aeb27698",
+    "runtime": "f18cbb1a1d9e1f1184a06df536a09ba99f3fdfed",
+    "tests": "bfabb4171b207a36d2a2916e74e9d873b0acf9d1",
+    "candidate": "e0c4d334af10f51ec3f28ba1eb356d3fd7297ae9"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1755,
+    "merge_commit": "dd60e67b8cba6d27badf7af688ce6136d96afad2",
+    "workflow_run_id": 37187716323,
+    "workflow_job_id": 111393121754,
+    "conclusion": "success",
+    "exact_subject_blobs": true,
+    "copied_subject_tests": "PASS",
+    "replay": "5_OF_5_IDENTIFIED_PLUS_1_OF_1_MANDATORY_ABSTENTION"
+  },
+  "rule": "DO_NOT_RECLASSIFY_INFRASTRUCTURE_OR_UNOBSERVABLE_LOCAL_CHECK_FAILURE_AS_CAPABILITY_FAILURE_WHEN_EXACT_SUBJECT_BYTES_HAVE_AN_INDEPENDENT_CONTENT_ADDRESSED_PASS__PRESERVE_ANOMALY_FOR_LATER_CI_REPAIR",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

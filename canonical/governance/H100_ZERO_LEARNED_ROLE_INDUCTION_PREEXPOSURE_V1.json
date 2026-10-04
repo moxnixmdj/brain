@@ -1,0 +1,162 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_ROLE_INDUCTION_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_ROLE_INDUCTION_OUTCOMES__PUBLIC_SYNTHETIC_NONTERMINAL__ZERO_CREDIT",
+  "objective": "TEST_WHETHER_INPUT_TARGET_ROLES_CAN_BE_INDUCED_FROM_EXPLICIT_STRUCTURAL_SEMANTICS_WITH_ZERO_PERSISTENT_LEARNED_BYTES_WHILE_ABSTAINING_ON_DIRECTIONALLY_AMBIGUOUS_OBSERVATIONAL_TABLES",
+  "tasks": [
+    {
+      "task_id": "TOOL_ARGUMENT_RESULT",
+      "format": "TOOL_TRACE",
+      "payload": [
+        {
+          "tool": "probe",
+          "arguments": {
+            "temperature": 10,
+            "pressure": 2
+          },
+          "result": {
+            "flow": 5
+          }
+        },
+        {
+          "tool": "probe",
+          "arguments": {
+            "temperature": 20,
+            "pressure": 3
+          },
+          "result": {
+            "flow": 7.5
+          }
+        }
+      ],
+      "expected_inputs": [
+        "pressure",
+        "temperature"
+      ],
+      "expected_target": "flow",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "INPUT_OUTPUT_OBJECTS",
+      "format": "ROLE_OBJECTS",
+      "payload": [
+        {
+          "inputs": {
+            "voltage": 1,
+            "current": 2
+          },
+          "outputs": {
+            "power": 2
+          }
+        },
+        {
+          "inputs": {
+            "voltage": 2,
+            "current": 3
+          },
+          "outputs": {
+            "power": 6
+          }
+        }
+      ],
+      "expected_inputs": [
+        "current",
+        "voltage"
+      ],
+      "expected_target": "power",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "SET_MEASURE_TEXT",
+      "format": "ROLE_TEXT",
+      "payload": [
+        "Set angle=10 and speed=2; measured distance=4.1.",
+        "Set angle=20 and speed=3; measured distance=8.6."
+      ],
+      "expected_inputs": [
+        "angle",
+        "speed"
+      ],
+      "expected_target": "distance",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "GIVEN_OBSERVED_TEXT",
+      "format": "ROLE_TEXT",
+      "payload": [
+        "Given dose=1.5 and time=2, observed response=3.2.",
+        "Given dose=2.0 and time=4, observed response=5.9."
+      ],
+      "expected_inputs": [
+        "dose",
+        "time"
+      ],
+      "expected_target": "response",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "PREFIXED_HEADERS",
+      "format": "PREFIXED_TABLE",
+      "payload": [
+        {
+          "input_mass": 1,
+          "input_velocity": 2,
+          "output_energy": 2
+        },
+        {
+          "input_mass": 3,
+          "input_velocity": 4,
+          "output_energy": 24
+        }
+      ],
+      "expected_inputs": [
+        "mass",
+        "velocity"
+      ],
+      "expected_target": "energy",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "AMBIGUOUS_OBSERVATIONAL_TABLE",
+      "format": "UNLABELED_TABLE",
+      "payload": [
+        {
+          "a": 1,
+          "b": 2
+        },
+        {
+          "a": 2,
+          "b": 4
+        },
+        {
+          "a": 3,
+          "b": 6
+        }
+      ],
+      "expected_inputs": [],
+      "expected_target": null,
+      "expected_status": "ABSTAIN_DIRECTION_NOT_IDENTIFIED"
+    }
+  ],
+  "outcome_definition": {
+    "exact_identification_required_on_identifiable_tasks": true,
+    "exact_abstention_required_on_ambiguous_task": true,
+    "no_partial_credit": true
+  },
+  "hard_rules": [
+    "NO_LANGUAGE_MODEL_OR_EXTERNAL_LEARNED_PARSER",
+    "NO_CORRELATION_TO_CAUSATION_INFERENCE",
+    "AMBIGUOUS_DIRECTION_MUST_ABSTAIN",
+    "NO_RANDOM_SEARCH",
+    "NO_POST_HOC_TASK_CHANGE",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
