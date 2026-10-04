@@ -87,3 +87,37 @@ def test_selector_fails_closed_when_unsat_coverage_is_missing():
     assert out["status"] == "FAIL_CLOSED__BEST_CANDIDATE_OPTIMALITY_NOT_CERTIFIED"
     assert out["pointwise_optimal"] is False
     assert out["certificate"]["unresolved_subset_indices"] == [[0, 1]]
+
+
+def test_blank_prevalidated_flags_are_forced_false_by_frozen_strict_semantics():
+    contracts = [c("keywords:forbidden_words", forbidden_words=["omega"])]
+    out = search.select_best_postvalidated(
+        contracts,
+        [{"response": "", "checker_results": [True]}],
+    )
+    assert out["status"] == "FAIL_CLOSED__BEST_CANDIDATE_OPTIMALITY_NOT_CERTIFIED"
+    assert out["best_candidate"]["response"] == ""
+    assert out["best_candidate"]["checker_results"] == [False]
+    assert out["best_candidate"]["true_checker_count"] == 0
+    assert out["strict_blank_guarded_candidate_count"] == 1
+    assert out["strict_blank_guard_source_blob"] == search.PINNED_STRICT_EVALUATOR_BLOB
+
+
+def test_blank_raw_checker_cannot_beat_nonblank_strict_candidate():
+    contracts = [c("keywords:forbidden_words", forbidden_words=["omega"])]
+
+    def sloppy_raw_checker(response, _contracts):
+        # Raw ForbiddenWords.check_following("") would return True, but the
+        # frozen strict wrapper must reject the blank response before credit.
+        return [True]
+
+    out = search.solve_with_checker(
+        contracts,
+        sloppy_raw_checker,
+        max_per_subset=1,
+        max_total=16,
+    )
+    assert out["status"] == "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED"
+    assert out["best_candidate"]["response"].strip() != ""
+    assert out["best_candidate"]["checker_results"] == [True]
+    assert out["strict_blank_guarded_candidate_count"] >= 1
