@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_QWEN38_27B_Q2K_ZERO_DOLLAR_EXECUTION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONTENT_ADDRESSED_Q2K_EXECUTION_FIT_LANE__NO_BENCHMARK_INHERITANCE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source_subject": {
+    "repository": "Qwen/Qwen3.8-27B",
+    "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "bf16_manifest_path": "canonical/governance/QWEN38_27B_EXACT_OPEN_WEIGHT_MANIFEST_V1.json",
+    "bf16_livebench_if_percent": 72.65825
+  },
+  "transformed_subject": {
+    "repository": "Chungulus/Qwen3.8-27B-Q2_K-GGUF",
+    "file": "Qwen3.8-27B-Q2_K.gguf",
+    "file_size_decimal_gb": 10.865,
+    "sha256": "185bc2aa1f15a34ef9d2b14f51f9edda69f4e43b5ee9e39e3c2ae8c439ddd1a5",
+    "quantization": "Q2_K",
+    "source_revision_claimed": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "llama_cpp_revision": "5f754ea0e2fd21e1213db7ebebfd65d938d9d69c",
+    "license": "apache-2.0",
+    "public_validation": {
+      "text_generation": "PASS_ON_PUBLISHER_VALIDATION_HOST",
+      "tool_calling": "PASS_5_NATIVE_FORMAT_CASES",
+      "thinking_controls": "PRESERVED_AND_CHECKED",
+      "runtime_smoke_generated_tokens_per_second": 18.920043894501834,
+      "explicit_benchmark_nonclaim": "PUBLISHER_SPLIT_REPOSITORY_DOES_NOT_CLAIM_A_NEW_BENCHMARK_RUN"
+    }
+  },
+  "zero_dollar_runner_target": {
+    "provider": "GitHub-hosted public repository standard Linux runner",
+    "os": "ubuntu-latest",
+    "advertised_vcpu": 4,
+    "advertised_ram_gb": 16,
+    "advertised_ssd_gb": 14,
+    "incremental_spend_usd": 0,
+    "source": "https://docs.github.com/actions/reference/runners/github-hosted-runners"
+  },
+  "execution_experiment_contract": {
+    "purpose": "PROVE_OR_FALSIFY_TEXT_ONLY_LOAD_AND_GENERATION_FIT_ON_ZERO_DOLLAR_PUBLIC_RUNNER",
+    "terminal_benchmark_content_allowed": false,
+    "terminal_cases_consumed": 0,
+    "runtime_revision_must_equal": "5f754ea0e2fd21e1213db7ebebfd65d938d9d69c",
+    "model_sha256_must_equal": "185bc2aa1f15a34ef9d2b14f51f9edda69f4e43b5ee9e39e3c2ae8c439ddd1a5",
+    "vision_projector_download": false,
+    "small_context_only": true,
+    "receipt_required": [
+      "MODEL_SHA256",
+      "LLAMA_CPP_COMMIT",
+      "RUNNER_MEMORY_AND_DISK_PRESTATE",
+      "EXIT_CODE",
+      "MAXIMUM_RESIDENT_SET_SIZE",
+      "NONTERMINAL_GENERATED_OUTPUT",
+      "POSTSTATE"
+    ]
+  },
+  "quantization_firewall": [
+    "Q2_K_IS_A_DISTINCT_EXECUTION_SUBJECT_FROM_BF16",
+    "BF16_LIVEBENCH_SCORE_DOES_NOT_TRANSFER_TO_Q2_K",
+    "BF16_SEMANTIC_CAPABILITY_CREDIT_DOES_NOT_TRANSFER_TO_Q2_K",
+    "EXECUTION_FIT_ONLY_PROVES_EXECUTION_FIT",
+    "Q2_K_MUST_EARN_SEPARATE_NONTERMINAL_SEMANTIC_AND_THRESHOLD_EVIDENCE_BEFORE_CAPABILITY_OR_ACCEPTANCE_CREDIT"
+  ],
+  "breakthrough_if_pass": "A_27B_SCALE_CONTENT_ADDRESSED_LANGUAGE_SUBJECT_CAN_EXECUTE_AT_ZERO_INCREMENTAL_SPEND_ON_OWNED_PUBLIC_COMPUTE__DELETING_THE_ASSUMPTION_THAT_MODEL_SCALE_ALONE_REQUIRES_PAID_COMPUTE",
+  "hard_nonclaims": [
+    "NO_CLAIM_Q2_K_RETAINS_72_65825_LIVEBENCH_IF",
+    "NO_CLAIM_Q2_K_EQUALS_OR_BEATS_OPUS55",
+    "NO_CLAIM_16_GB_RUNNER_FIT_BEFORE_REAL_EXECUTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "nonterminal_execution": true,
+    "terminal_execution": false,
+    "promotion": false,
+    "fresh_terminal_reality": false,
+    "acceptance_credit": false
+  }
+}
