@@ -13,6 +13,7 @@ is NOT a satisfiability proof.
 from __future__ import annotations
 
 import re
+from fractions import Fraction
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import livebench_legacy15_composition_archetypes_v1 as archetypes
@@ -22,6 +23,7 @@ PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 PINNED_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
 PINNED_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 HISTORICAL_GENERATOR_BLOB = "6ff390d6885cf90f88d9d36959735cb327613edc"
+OPUS55_COMPARATOR = Fraction(262951, 400000)  # 0.6573775
 
 NTH = "length_constraints:nth_paragraph_first_word"
 EXISTENCE = "keywords:existence"
@@ -163,6 +165,85 @@ def prove_id_compatibility_is_not_satisfiability() -> dict[str, Any]:
             "FOR_EACH_VISIBLE_GENERATOR_ADMITTED_CONTRACT_TUPLE_EITHER_PRODUCE_"
             "A_POSTVALIDATED_WITNESS_OR_A_CHECKER_SEMANTICS_UNSAT_CERTIFICATE"
         ),
+        "terminal_data_used": False,
+        "hidden_kwargs_used": False,
+        "acceptance_credit": False,
+    }
+
+
+def prove_support_wide_threshold_floor_impossible() -> dict[str, Any]:
+    """Falsify a uniform comparator floor over the full generator support.
+
+    The public generator domain can emit the conflict-compatible two-checker
+    tuple ForbiddenWords(["other"]) + EndChecker("Any other questions?").
+    Slot feasibility certifies that tuple UNSAT: satisfying the required ending
+    necessarily emits the whole word "other", which the forbidden checker
+    rejects. Thus at most one of two checkers can pass.
+
+    The frozen strict score is (all_true + true_fraction)/2, so the maximum
+    score is (0 + 1/2)/2 = 1/4. Since 1/4 < 0.6573775, no theorem claiming a
+    >= comparator per-case floor over every generator-supported parameterization
+    can be true.
+
+    This is a scheduler theorem only. It does not claim the fixed terminal
+    population contains this parameterization.
+    """
+    contracts = [
+        {
+            "instruction_id": END,
+            "slots": {"end_phrase": "Any other questions?"},
+        },
+        {
+            "instruction_id": FORBIDDEN,
+            "slots": {"forbidden_words": ["other"]},
+        },
+    ]
+    classified = classify_visible_contracts(contracts)
+    expected = "MANDATORY_END_PHRASE_CONTAINS_FORBIDDEN_WORD:other"
+    if classified.get("status") != "PROVED_UNSAT":
+        raise RuntimeError("SUPPORT_COUNTEREXAMPLE_NOT_UNSAT")
+    if expected not in classified.get("hard_unsat_reasons", []):
+        raise RuntimeError("SUPPORT_COUNTEREXAMPLE_REASON_DRIFT")
+
+    maximum_true = 1
+    instruction_count = 2
+    maximum_score = (
+        Fraction(0, 1) + Fraction(maximum_true, instruction_count)
+    ) / 2
+    if maximum_score != Fraction(1, 4):
+        raise RuntimeError("SUPPORT_COUNTEREXAMPLE_SCORE_DRIFT")
+    if not maximum_score < OPUS55_COMPARATOR:
+        raise RuntimeError("SUPPORT_COUNTEREXAMPLE_NO_LONGER_BELOW_COMPARATOR")
+
+    return {
+        "schema": SCHEMA,
+        "status": "PASS__SUPPORT_WIDE_COMPARATOR_FLOOR_FALSIFIED",
+        "counterexample": {
+            "instruction_ids": sorted([END, FORBIDDEN]),
+            "visible_slots": {
+                END: {"end_phrase": "Any other questions?"},
+                FORBIDDEN: {"forbidden_words": ["other"]},
+            },
+            "conflict_compatible": True,
+            "slot_status": "PROVED_UNSAT",
+            "maximum_simultaneously_true": maximum_true,
+        },
+        "score": {
+            "maximum_case_score_fraction": "1/4",
+            "maximum_case_score": float(maximum_score),
+            "opus55_comparator_fraction": "262951/400000",
+            "opus55_comparator": float(OPUS55_COMPARATOR),
+            "below_comparator": True,
+        },
+        "scheduler_consequence": (
+            "FULL_GENERATOR_SUPPORT_CONSTRUCTOR_TOTALITY_MAY_REMAIN_A_FALSIFICATION_"
+            "TARGET_BUT_CANNOT_BY_ITSELF_PROVE_A_UNIFORM_OPUS55_THRESHOLD_FLOOR"
+        ),
+        "acceptance_consequence": (
+            "THRESHOLD_CREDIT_REQUIRES_POPULATION_SPECIFIC_CONTAMINATION_SAFE_"
+            "SCORE_MASS_EVIDENCE_OR_A_VERIFIED_CLEAN_EQUIVALENT_ROUTE"
+        ),
+        "actual_terminal_population_contains_counterexample": "NOT_CLAIMED",
         "terminal_data_used": False,
         "hidden_kwargs_used": False,
         "acceptance_credit": False,
