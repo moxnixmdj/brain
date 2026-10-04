@@ -30,6 +30,7 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime import livebench_legacy15_pointwise_optimal_v1 as active_planner
 from canonical.runtime import livebench_legacy15_contract_composer_v2 as active_composer
+from canonical.runtime import livebench_union25_extension_structural_quotient_v1 as structural
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_UNION25_EASY_EXTENSION_POINTWISE_V1"
 
@@ -164,6 +165,14 @@ def solve_contracts(contracts: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
             "schema": SCHEMA,
             "status": "FAIL_CLOSED",
             "error": "OUTSIDE_EASY_EXTENSION_SCOPE:" + ",".join(unknown),
+            "response": None,
+            "acceptance_credit": False,
+        }
+    if len(ids) > structural.MAX_PUBLIC_INSTRUCTIONS or not structural.compatible(ids):
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "error": "UNION25_STRUCTURAL_CONFLICT_OR_CARDINALITY_VIOLATION",
             "response": None,
             "acceptance_credit": False,
         }
