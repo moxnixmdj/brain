@@ -16,18 +16,59 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  theorem:
+    name: theorem-content-bind
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Run exact theorem regression suite
-        run: python -m unittest canonical.tests.test_unknown_domain_direct_v4_universal_proof_v1 -v
-      - name: Run zero-reality theorem
-        run: |
+        with: {python-version: '3.12'}
+      - run: python -m unittest canonical.tests.test_unknown_domain_direct_v4_universal_proof_v1.UnknownDomainV4UniversalProofTests.test_content_bound_total_exact_theorem -v
+
+  identifier-totality:
+    name: identifier-totality
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m unittest canonical.tests.test_unknown_domain_direct_v4_universal_proof_v1.UnknownDomainV4UniversalProofTests.test_totalized_generator_is_injective_for_adversarial_digest_inputs -v
+
+  combined-regression:
+    name: combined-route-regression
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m unittest canonical.tests.test_unknown_domain_direct_v4_universal_proof_v1.UnknownDomainV4UniversalProofTests.test_float_safe_candidate_passes_totalized_generator_regressions -v
+
+  v2-falsification:
+    name: v2-float-falsification-v3-repair
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m unittest canonical.tests.test_unknown_domain_direct_v4_universal_proof_v1.UnknownDomainV4UniversalProofTests.test_v2_float_counterexample_stays_falsified_and_v3_repairs_it -v
+
+  quantifier:
+    name: original-quantifier-preserved
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m unittest canonical.tests.test_unknown_domain_direct_v4_universal_proof_v1.UnknownDomainV4UniversalProofTests.test_original_quantifier_is_not_weakened -v
+
+  executable-proof:
+    name: executable-zero-reality-proof
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: |
           python -m canonical.runtime.unknown_domain_direct_v4_universal_proof_v1 > /tmp/udir_v4.json
           python - <<'PY'
           import json
@@ -37,5 +78,4 @@ jobs:
           assert d["identifier_totality_proof"]["hash_collision_resistance_required"] is False
           assert d["transfer_proof"]["add2_exact_float_order_repaired"] is True
           assert d["accounting"]["acceptance_credit_delta"]==0
-          print("Unknown-Domain V4 total+exact theorem PASS")
           PY
