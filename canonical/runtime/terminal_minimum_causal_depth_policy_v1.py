@@ -52,16 +52,54 @@ ZERO_REALITY = {
 "ACCOUNT_OR_PROTOCOL_FACT","SCOPE_CERTIFICATE","UPSTREAM_SCOPE_RECEIPT",
 }
 
+COUNT_KEYS = (
+    "accepted_families", "open_families", "proved_atomic", "unresolved_atomic",
+    "total_families", "total_atomic", "root1_positive_gaps", "root2_only",
+    "root3_only", "root2_and_root3",
+)
+
+
+def _count(state: Mapping[str, Any], key: str) -> int:
+    value = state.get(key)
+    if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+        raise ValueError(f"INVALID_LIVE_STATE_COUNT:{key}:{value!r}")
+    return value
+
+
 def validate_live_state(state: Mapping[str, Any]) -> None:
-    expected = {
-        "accepted_families":5,"open_families":14,"proved_atomic":12,
-        "unresolved_atomic":26,"total_families":19,"total_atomic":38,
-        "root1_positive_gaps":0,"root2_only":16,"root3_only":7,
-        "root2_and_root3":3,"terminal":False,
-    }
-    for k,v in expected.items():
-        if state.get(k) != v:
-            raise ValueError(f"STALE_LIVE_STATE:{k}:{state.get(k)!r}!={v!r}")
+    """Validate current-state invariants instead of pinning one historical snapshot.
+
+    The capability envelope remains 19 families / 38 atomic predicates. Within
+    that envelope, verified deltas are allowed to move acceptance and root
+    partitions without requiring a code edit. Any internally inconsistent
+    projection fails closed.
+    """
+    counts = {key: _count(state, key) for key in COUNT_KEYS}
+    if counts["total_families"] != 19:
+        raise ValueError(f"UNEXPECTED_FAMILY_ENVELOPE:{counts['total_families']}")
+    if counts["total_atomic"] != 38:
+        raise ValueError(f"UNEXPECTED_ATOMIC_ENVELOPE:{counts['total_atomic']}")
+    if counts["accepted_families"] + counts["open_families"] != counts["total_families"]:
+        raise ValueError("INCONSISTENT_FAMILY_PARTITION")
+    if counts["proved_atomic"] + counts["unresolved_atomic"] != counts["total_atomic"]:
+        raise ValueError("INCONSISTENT_ATOMIC_PARTITION")
+    root_total = (
+        counts["root1_positive_gaps"]
+        + counts["root2_only"]
+        + counts["root3_only"]
+        + counts["root2_and_root3"]
+    )
+    if root_total != counts["unresolved_atomic"]:
+        raise ValueError(
+            f"INCONSISTENT_ROOT_PARTITION:{root_total}!={counts['unresolved_atomic']}"
+        )
+    terminal = state.get("terminal")
+    if not isinstance(terminal, bool):
+        raise ValueError(f"INVALID_TERMINAL_FLAG:{terminal!r}")
+    derived_terminal = counts["open_families"] == 0 and counts["unresolved_atomic"] == 0
+    if terminal != derived_terminal:
+        raise ValueError(f"INCONSISTENT_TERMINAL_FLAG:{terminal}!={derived_terminal}")
+
 
 def route_admissible(predicate_id: str, route_kind: str, *, explicit_relative_bridge: bool=False) -> bool:
     if predicate_id not in UNRESOLVED:
@@ -72,6 +110,7 @@ def route_admissible(predicate_id: str, route_kind: str, *, explicit_relative_br
         raise ValueError("UNKNOWN_ROUTE_KIND")
     return True
 
+
 def filter_routes(routes: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
     out=[]
     for raw in routes:
@@ -80,6 +119,7 @@ def filter_routes(routes: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
         if route_admissible(p,k,explicit_relative_bridge=bool(r.get("explicit_relative_bridge"))):
             out.append(r)
     return out
+
 
 def compile_waves(
     state: Mapping[str, Any],
@@ -118,6 +158,7 @@ def compile_waves(
         "promotion_authority":False,
         "acceptance_credit_authorized":False,
     }
+
 
 def dominance_prune(actions: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
     """Delete only mechanically proven dominance: same phase, known costs,
