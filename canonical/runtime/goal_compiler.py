@@ -4917,60 +4917,20 @@ def _validate_compiled_clause_coverage(compiled):
 
 
 def _compile_exact_literal_response_goal(goal):
-    """Compile a narrow, domain-free instruction whose whole required effect is
-    to emit one explicit literal exactly.
-
-    This is control glue, not capability acquisition.  The grammar is
-    intentionally tiny and fail-closed: quoted/backticked literals may contain
-    spaces; unquoted literals are restricted to one safe token.  The terminal
-    sentence period on an unquoted instruction is not part of the literal.
+    """Compile a narrow domain-free instruction whose entire required effect
+    is to emit one explicit literal exactly. This is routing glue, not
+    capability acquisition, and intentionally fails closed outside the tiny
+    grammar below.
     """
     raw=str(goal or "").strip()
     if not raw or "\n" in raw or "\r" in raw:
         return None
-    prefix=r"(?:(?:reply|respond)(?:\\s+with)?|output|return|print)\\s+exactly\\s+"
+    prefix=r"(?:(?:reply|respond)(?:\s+with)?|output|return|print)\s+exactly\s+"
     patterns=(
-        (prefix+r'"([^"\\r\\n]{1,512})"\\s*\\.?
-    goal=str(goal or "").strip()
-    if not goal:
-        raise GoalCompilationFailure("GOAL_REQUIRED")
-    browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
-    if browser_interaction is not None:
-        return _validate_compiled_clause_coverage(browser_interaction)
-    clauses=decompose_goal(goal)
-    authority_source=_compile_domain_free_authority_source_goal(goal,clauses,registry,root)
-    if authority_source is not None:
-        return _validate_compiled_clause_coverage(authority_source)
-    bounded_loop=_compile_bounded_loop_goal(goal,clauses,registry,root)
-    if bounded_loop is not None:
-        return _validate_compiled_clause_coverage(bounded_loop)
-    multi_source_reduce=_compile_multi_source_reduce_goal(goal,clauses,registry,root)
-    if multi_source_reduce is not None:
-        return _validate_compiled_clause_coverage(multi_source_reduce)
-    multi_source_join=_compile_multi_source_join_goal(goal,clauses,registry,root)
-    if multi_source_join is not None:
-        return _validate_compiled_clause_coverage(multi_source_join)
-    per_item_fallback=_compile_per_item_fallback_goal(goal,clauses,registry,root)
-    if per_item_fallback is not None:
-        return _validate_compiled_clause_coverage(per_item_fallback)
-    multi_action_fanout=_compile_multi_action_fanout_goal(goal,clauses,registry,root)
-    if multi_action_fanout is not None:
-        return _validate_compiled_clause_coverage(multi_action_fanout)
-    dynamic_fanout=_compile_dynamic_fanout_goal(goal,clauses,registry,root)
-    if dynamic_fanout is not None:
-        return _validate_compiled_clause_coverage(dynamic_fanout)
-    runtime_fallback=_compile_runtime_fallback_goal(goal,clauses,registry,root)
-    if runtime_fallback is not None:
-        return _validate_compiled_clause_coverage(runtime_fallback)
-    if len(clauses)>1:
-        return _validate_compiled_clause_coverage(
-            _compile_compound_goal(goal,clauses,registry,root)
-        )
-    return _compile_single_goal(goal,registry,root)
-, 1),
-        (prefix+r"'([^'\\r\\n]{1,512})'\\s*\\.?$", 1),
-        (prefix+r"`([^`\\r\\n]{1,512})`\\s*\\.?$", 1),
-        (prefix+r"([A-Za-z0-9_./:+-]{1,256})\\s*\\.$", 1),
+        (prefix+r'"([^"\r\n]{1,512})"\s*\.?$',1),
+        (prefix+r"\'([^\'\r\n]{1,512})\'\s*\.?$",1),
+        (prefix+r"\x60([^\x60\r\n]{1,512})\x60\s*\.?$",1),
+        (prefix+r"([A-Za-z0-9_./:+-]{1,256})\s*\.$",1),
     )
     literal=None
     for pattern,group in patterns:
@@ -4995,7 +4955,6 @@ def _compile_exact_literal_response_goal(goal):
       ],
       "finish_summary":literal,
     }
-
 
 def compile_goal(goal, registry, root):
     goal=str(goal or "").strip()
