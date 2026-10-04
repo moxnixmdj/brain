@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_V3_SUCCESSOR_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__KNOWN_V2_UNIVERSAL_HOLES_REPAIRED__INDEPENDENT_RUNNER_VERIFICATION_IN_PROGRESS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "supersedes_as_candidate_only": "canonical/runtime/unknown_domain_direct_candidate_v2.py",
+  "known_v2_failures_repaired": {
+    "exact_add2_ieee754_role_order": {
+      "repair": "TRANSFER_SOURCE_ROLE_SIGN_SIGNATURES_TO_THE_TARGET_SUPPORT_BEFORE_QUERY_EVALUATION",
+      "candidate_path": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+      "candidate_git_blob_sha": "cb030de5a7f96bac7667b7fbb3be38a1cc55e3ea",
+      "mechanism": "SOURCE_ROLE_BINDING_IDENTIFIES_R0_R1_IN_DOMAIN_A__V2_GENERATOR_ROLE_SIGN_SCHEDULE_IS_DOMAIN_INVARIANT__TARGET_PUBLIC_ROWS_EXPOSE_THE_SAME_DISTINCT_ROLE_SIGN_SIGNATURES__V3_ORIENTS_TARGET_SUPPORT_TO_R0_R1_BEFORE_CALLING_THE_UNCHANGED_FLOAT_EVALUATOR",
+      "scorer_relaxed": false
+    },
+    "opaque_identifier_totality": {
+      "repair": "SECRET_RANDOMIZED_STRUCTURALLY_UNIQUE_SLOT_LABELS",
+      "generator_path": "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py",
+      "generator_git_blob_sha": "3c8b75db986739004bee5b206be5033989d25e9a",
+      "mechanism": "SEMANTIC_ITEMS_ARE_SECRET_HMAC_RANKED_INTO_UNIQUE_SLOT_ORDINALS__THE_SLOT_ORDINAL_IS_PART_OF_EACH_OPAQUE_LABEL__THEREFORE_SUFFIX_HASH_COLLISIONS_CANNOT_COLLAPSE_FEATURE_IDS__DOMAIN_PREFIXES_MAKE_A_AND_B_DISJOINT",
+      "role_identity_exposed_by_slot": false
+    }
+  },
+  "unchanged_load_bearing_subjects": {
+    "candidate_v1": "a2a77269a8175ce315b466035049da0f761b8734",
+    "candidate_v2": "4470716f95a559a700e461262df909ae19a41651",
+    "generator_v1": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "generator_v2": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "hidden_scorer_v1": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "execution_harness_v1": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+  },
+  "local_regression_tests": {
+    "path": "canonical/tests/test_unknown_domain_direct_v3.py",
+    "git_blob_sha": "23f55a0d4a948de7f533d7721d0c9f84cdb7106e",
+    "claims": [
+      "REPAIRS_THE_EXACT_REACHABLE_V2_ADD2_COUNTEREXAMPLE_WITH_UNCHANGED_EXACT_SCORER",
+      "STRUCTURALLY_UNIQUE_AND_CROSS_DOMAIN_DISJOINT_OPAQUE_IDS_ON_SYNTHETIC_SWEEP",
+      "ALL_27_CASES_PASS_ON_64_SYNTHETIC_V3_POPULATIONS"
+    ]
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2119,
+    "head_sha": "976217ae923b935574540f31830ce5482b119ab3",
+    "ubuntu_run_id": 37242467159,
+    "macos_run_id": 37242467024,
+    "state_at_record": "IN_PROGRESS_OR_QUEUED",
+    "planned_falsification_populations": 1024,
+    "planned_exact_hidden_scorer_cases": 27648,
+    "production_cases_consumed": 0,
+    "terminal_cases_consumed": 0
+  },
+  "promotion_gate": [
+    "AT_LEAST_ONE_INDEPENDENT_EXACT_BYTE_RUNNER_JOB_MUST_PASS",
+    "THE_PASS_LOG_MUST_BIND_THE_EXACT_V3_CANDIDATE_AND_GENERATOR_BLOBS",
+    "THE_EXACT_V2_REACHABLE_COUNTEREXAMPLE_MUST_PASS_WITH_UNCHANGED_SCORER",
+    "FORCED_OPAQUE_LABEL_SUFFIX_COLLISION_MUST_PRESERVE_STRUCTURAL_ID_UNIQUENESS",
+    "A_SEPARATE_CONTENT_BOUND_UNIVERSAL_ARGUMENT_MUST_COVER_ALL_SIX_TRANSFER_FAMILIES_AND_ALL_THREE_ABSTENTION_CLASSES",
+    "ROOT3_AND_ACCEPTANCE_REDUCTION_MUST_RUN_SEPARATELY"
+  ],
+  "hard_nonclaims": [
+    "NO_CURRENT_ACCEPTANCE_CREDIT",
+    "NO_CURRENT_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "FINITE_SYNTHETIC_FALSIFICATION_IS_NOT_THE_UNIVERSAL_PROOF",
+    "NO_OPEN_WORLD_GENERALIZATION_BEYOND_THE_BOUND_GENERATOR_FAMILY",
+    "NO_PRODUCTION_EXECUTION_AUTHORIZED_BY_THIS_RECORD"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "ownership_credit": false
+  }
+}
