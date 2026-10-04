@@ -53,3 +53,16 @@ def test_static_and_fail_closed():
     assert repeat['unresolved_parameters']==['prompt_to_repeat']
     dup=compile_visible_constraints('Answer with at least 5 words. Answer with less than 20 words.')
     assert dup['status']=='FAIL_CLOSED'
+
+
+def test_exact_nth_paragraph_source_template():
+    text = (
+        "There should be 3 paragraphs. Paragraphs and only paragraphs are separated "
+        "with each other by two new lines as if it was '\\n\\n' in python. "
+        "Paragraph 2 must start with word Anchor."
+    )
+    c = one(text)
+    assert c["instruction_id"] == "length_constraints:nth_paragraph_first_word"
+    assert c["slots"]["num_paragraphs"] == 3
+    assert c["slots"]["nth_paragraph"] == 2
+    assert c["slots"]["first_word"] == "anchor"
