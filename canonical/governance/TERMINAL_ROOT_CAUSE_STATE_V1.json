@@ -77,8 +77,8 @@
         "verification_path": "canonical/verification/ROOT2_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
         "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V1.json",
-        "current_frontier_git_blob_sha": "c194e038cba8d819a088f985e68ba6d0078fc73f",
-        "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__MINIMUM_ACTION_SCHEDULING_AUTHORITY__ZERO_CREDIT",
+        "current_frontier_git_blob_sha": "a58aa3513449ec5e56f66204fd33f3916d1bc09c",
+        "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__MINIMUM_ACTION_SCHEDULING_AUTHORITY__STABLE_FRONTIER_INPUT_BINDING__ZERO_CREDIT",
         "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2",
         "fresh_reality_authority": false
       }
