@@ -22,6 +22,26 @@ PINNED_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
 PINNED_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 PINNED_UTIL_BLOB = "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
 
+SLOT_KEYS: dict[str, tuple[str, ...]] = {
+    "keywords:existence": ("keywords",),
+    "keywords:forbidden_words": ("forbidden_words",),
+    "length_constraints:number_paragraphs": ("num_paragraphs",),
+    "length_constraints:number_words": ("num_words", "relation"),
+    "length_constraints:number_sentences": ("num_sentences", "relation"),
+    "length_constraints:nth_paragraph_first_word": (
+        "num_paragraphs", "nth_paragraph", "first_word",
+    ),
+    "detectable_content:postscript": ("postscript_marker",),
+    "detectable_format:number_bullet_lists": ("num_bullets",),
+    "detectable_format:title": (),
+    "detectable_format:multiple_sections": ("section_spliter", "num_sections"),
+    "detectable_format:json_format": (),
+    "combination:repeat_prompt": ("prompt_to_repeat",),
+    "combination:two_responses": (),
+    "startend:end_checker": ("end_phrase",),
+    "startend:quotation": (),
+}
+
 
 class ExactPostvalidationError(ValueError):
     pass
@@ -58,6 +78,23 @@ def _normalize_contracts(
             raise ExactPostvalidationError(
                 "SLOTS_MAPPING_REQUIRED:" + str(row.get("instruction_id") or "")
             )
+        iid = str(row["instruction_id"])
+        slots = dict(row["slots"])
+        expected = set(SLOT_KEYS[iid])
+        actual = set(slots)
+        if actual != expected:
+            missing = ",".join(sorted(expected - actual))
+            extra = ",".join(sorted(actual - expected))
+            raise ExactPostvalidationError(
+                "VISIBLE_SLOT_SHAPE_MISMATCH:"
+                + iid
+                + ":missing="
+                + missing
+                + ":extra="
+                + extra
+            )
+        if any(value is None for value in slots.values()):
+            raise ExactPostvalidationError("VISIBLE_SLOT_VALUE_NONE:" + iid)
         try:
             _iid, normalized_slots = contract_checker.validate_contract(row)
         except contract_checker.ExactContractCheckerError as exc:
