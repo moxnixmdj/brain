@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_SEMANTIC_PARAPHRASE_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__8_IDENTIFIED_PLUS_2_MANDATORY_ABSTENTIONS__ZERO_LEARNED_BYTES__ZERO_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_SEMANTIC_PARAPHRASE_PREEXPOSURE_V1.json",
+      "git_blob_sha": "490ae449877af813d8e8d1f071afb46a5190b02a"
+    },
+    "runtime": {
+      "path": "canonical/runtime/h100_zero_learned_semantic_paraphrase_v1.py",
+      "git_blob_sha": "db4e836b4104a9b311c2c08ab2d8675bfc0d0760"
+    },
+    "tests": {
+      "path": "canonical/tests/test_h100_zero_learned_semantic_paraphrase_v1.py",
+      "git_blob_sha": "9976fd8a160582fc0ce3e1c79bfa496f35b593bf"
+    },
+    "candidate": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_SEMANTIC_PARAPHRASE_CANDIDATE_V1.json",
+      "git_blob_sha": "34adb64e9c775af6ac5a1507cc15dd8c111dddb5"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1763,
+    "verifier_head_sha": "f88e20f691fa07ef635a03cec8c41e5dc1dc1d1a",
+    "merge_commit": "9b98feb1da8f2585d1991a52d489c44258defe06",
+    "workflow_run_id": 37188451848,
+    "workflow_job_id": 111395382925,
+    "conclusion": "success",
+    "verifier_path": "verify_h100_zero_learned_semantic_paraphrase_v1.py",
+    "verifier_git_blob_sha": "9766aa8c1923e91bf153d59e3edaa90da8cca56b",
+    "workflow_path": ".github/workflows/verify-h100-zero-learned-semantic-paraphrase-v1.yml",
+    "workflow_git_blob_sha": "ad3fcf132de725aa8907e331acd68ee5a3d8234d"
+  },
+  "independently_verified": {
+    "exact_subject_blobs": true,
+    "copied_subject_tests": "PASS",
+    "identifiable_tasks_correct": "8_OF_8",
+    "ambiguous_tasks_abstained": "2_OF_2",
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0
+  },
+  "deduction": "A_FINITE_EXPLICIT_ROLE_ONTOLOGY_CAN_NORMALIZE_MULTIPLE_DOMAIN_PARAPHRASES_WITH_ZERO_PERSISTENT_LEARNED_STATE_WHILE_ABSTAINING_WHEN_DIRECTIONAL_SEMANTICS_ARE_ABSENT",
+  "residual_after_verification": [
+    "UNSEEN_LEXICAL_ROLE_SEMANTICS_OUTSIDE_THE_FROZEN_ONTOLOGY",
+    "COMPOSITIONAL_FREE_FORM_LANGUAGE_WITH_MULTIPLE_CLAUSES_NEGATION_AND_REFERENCE",
+    "OPEN_WORLD_TOOL_TRACE_SEMANTICS_OUTSIDE_KNOWN_STRUCTURES",
+    "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+    "DIRECT_UNKNOWN_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "FINITE_ONTOLOGY_PASS_IS_NOT_OPEN_WORLD_SEMANTIC_UNDERSTANDING",
+    "NO_CORRELATION_TO_CAUSATION_INFERENCE",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
