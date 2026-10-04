@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V6",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_ROUTE_IDENTITY_REBIND__CHARTOGRAPHY_ADAPTER_DELTA__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "RESTORE_FAIL_CLOSED_ROOT2_HYPERGRAPH_CURRENTNESS_AFTER_VERIFIED_CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_ACTIVATION_WHILE_PRESERVING_OSWORLD_V5_AND_CURRENT_SYNTHESIS_REDUCTION",
+  "scope": "15_FIXED_BAR_ROOT2_PREDICATES__14_SURFACES__SYNTHESIS_ROOT2_ONLY_NON_FIXED_BAR_RESIDUAL_SEPARATE",
+  "prior_verified_hypergraph": {
+    "candidate_path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V5.json",
+    "candidate_git_blob_sha": "7471f872d4cddc9851347992b0a230294b64f337",
+    "activation_path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V5_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "6c1d751577af749261b23ece4d4cb8dfab7f6037",
+    "optimizer_logic_changed": false
+  },
+  "current_inputs": {
+    "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+    "route_inventory_git_blob_sha": "1938a8715387d22be8f8825a5779951e27993f11",
+    "comparator_vector_path": "canonical/governance/ROOT2_FROZEN_COMPARATOR_VECTOR_V1.json",
+    "comparator_vector_git_blob_sha": "77357de9d84113cba4e5e6ce2a7cabffe2e8e7f0",
+    "zero_reality_cut_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
+    "zero_reality_cut_git_blob_sha": "ca921a834b3ad59c24b793ae94bf732f9b1957eb"
+  },
+  "route_deltas_bound": [
+    "OSWORLD_PARTIAL_SCORING_SEMANTICS_PRESERVED_FROM_VERIFIED_V5",
+    "GDPVAL_FROZEN_1846_PROVENANCE_PRESERVED",
+    "SYNTHESIS_REQUIRED_CLAIM_COVERAGE_REDUCTION_PRESERVED_IN_CURRENT_CUT",
+    "CHARTOGRAPHY_HARD_ZERO_SPEND_GUARD_DISCHARGED",
+    "CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_IMPLEMENTATION_DISCHARGED",
+    "CHARTOGRAPHY_INTERNAL_MULTIMODAL_BACKEND_BINDING_REMAINS_OPEN"
+  ],
+  "invariants": {
+    "fixed_bar_predicates": 15,
+    "unique_fixed_bar_surfaces": 14,
+    "root2_only_predicates": 16,
+    "root2_and_root3_predicates": 3,
+    "total_root2_involved_predicates": 19,
+    "comparator_targets_changed": false,
+    "predicate_set_changed": false,
+    "surface_set_changed": false,
+    "optimizer_logic_changed": false,
+    "chartography_target_percent": 89,
+    "gdpval_target_elo": 1846,
+    "osworld_partial_target_percent": 81.8,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "fresh_reality_authority": false
+  },
+  "allowed_effect": "REACTIVATE_EXISTING_VERIFIED_ROOT2_OPTIMIZER_ON_CURRENT_EXACT_ROUTE_VECTOR_AND_CUT_BYTES_ONLY",
+  "hard_rules": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_OPTIMIZER_LOGIC_CHANGE",
+    "NO_TARGET_REBASE",
+    "NO_CASE_EXPOSURE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "FAIL_CLOSED_ON_ANY_INPUT_BLOB_DRIFT",
+    "CHARTOGRAPHY_ADAPTER_PASS_DOES_NOT_IMPLY_INTERNAL_MULTIMODAL_BACKEND_OR_SCORE",
+    "PRESERVE_OSWORLD_PARTIAL_SEMANTICS_AND_SYNTHESIS_REDUCTION"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
