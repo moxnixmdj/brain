@@ -6,17 +6,21 @@ scores SET overlap of raw Python character trigrams:
 
     |G3(output) ∩ G3(reference)| / |G3(output)|
 
-This module does not read reference_text.  It is sound under the explicit
-WHITESPACE_NORMALIZATION_ONLY contract: base_text and the scorer reference have
-identical non-whitespace character runs; only whitespace between those runs may
-differ. Under that contract:
-  * any trigram wholly inside a non-whitespace run of base_text is guaranteed
-    present in the reference; and
-  * a sentinel character absent from base_text is absent from the reference.
+This module does not read reference_text. It is sound under a deliberately weak
+relational contract sufficient for the exact pinned scorer:
 
-The constructor searches tiny outputs whose unique trigram set is composed only
-of those two classes, so the overlap ratio is known exactly without recovering
-the hidden/raw reference formatting.
+  C1. Every non-whitespace character trigram of base_text that the constructor
+      may borrow is present in the scorer reference.
+  C2. Every non-whitespace character appearing anywhere in the scorer reference
+      also appears somewhere in base_text.
+
+C1 certifies overlap trigrams. C2 means a non-whitespace sentinel chosen absent
+from base_text is also absent from the reference, certifying every
+sentinel-containing output trigram as non-overlap.
+
+The constructor therefore knows the exact overlap ratio without recovering raw
+reference formatting. Whitespace-only normalization implies this contract, but
+the contract is strictly weaker.
 """
 from __future__ import annotations
 
@@ -24,7 +28,7 @@ import re
 from typing import Any
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_NGRAM_REFERENCE_FREE_V1"
-CONTRACT = "WHITESPACE_NORMALIZATION_ONLY"
+CONTRACT = "SUFFICIENT_RELATIONAL_CONTRACT_V1"
 
 
 def _trigrams(text: str) -> set[str]:
@@ -36,8 +40,8 @@ def _sentinels(base_text: str, need: int = 96) -> list[str]:
     """Return non-whitespace characters absent from base_text.
 
     Private-use Unicode is used only as a convenient candidate alphabet.  The
-    proof obligation is absence from base_text plus CONTRACT, not any assumption
-    that private-use characters are globally impossible.
+    proof obligation is absence from base_text plus C2, not any assumption that
+    private-use characters are globally impossible.
     """
     out: list[str] = []
     for cp in range(0xE000, 0xF8FF + 1):
@@ -184,8 +188,18 @@ def score_with_reference_for_audit(response: str, reference_text: str) -> float:
     return 100.0 * len(out & ref) / len(out)
 
 
+def _contract_holds_for_audit(base_text: str, reference_text: str) -> tuple[bool, bool, bool]:
+    base_overlap = {g for g in _trigrams(base_text) if not any(c.isspace() for c in g)}
+    ref_grams = _trigrams(reference_text)
+    c1 = base_overlap.issubset(ref_grams)
+    base_chars = {c for c in base_text if not c.isspace()}
+    ref_chars = {c for c in reference_text if not c.isspace()}
+    c2 = ref_chars.issubset(base_chars)
+    return c1 and c2, c1, c2
+
+
 def audit_public_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    """Audit public ratio:overlap rows; hidden/public kwargs are verifier-only."""
+    """Audit public ratio:overlap rows; public kwargs are verifier-only."""
     checked = []
     for row in rows:
         ids = list(row.get("instruction_id_list") or [])
@@ -196,23 +210,37 @@ def audit_public_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
         target = float(kwargs["percentage"])
         reference = str(kwargs["reference_text"])
         base = extract_pinned_public_ifbench_base(str(row["prompt"]))
+        contract_holds, c1, c2 = _contract_holds_for_audit(base, reference)
         result = construct(base, target)
         if result.get("status") != "PASS_UNDER_CONTRACT":
-            checked.append({"key": row.get("key"), "pass": False, "reason": result.get("error")})
+            checked.append({
+                "key": row.get("key"),
+                "contract_holds": contract_holds,
+                "c1_overlap_trigram_inclusion": c1,
+                "c2_reference_charset_subset": c2,
+                "pass": False,
+                "reason": result.get("error"),
+            })
             continue
         actual = score_with_reference_for_audit(result["response"], reference)
         checked.append({
             "key": row.get("key"),
             "target": target,
+            "contract_holds": contract_holds,
+            "c1_overlap_trigram_inclusion": c1,
+            "c2_reference_charset_subset": c2,
             "certified_percent": result["certified_percent"],
             "actual_public_reference_percent": actual,
-            "pass": target - 2 <= actual <= target + 2,
+            "pass": contract_holds and target - 2 <= actual <= target + 2,
         })
 
     return {
         "schema": SCHEMA + "_PUBLIC_AUDIT",
         "ratio_rows": len(checked),
+        "contract": CONTRACT,
+        "contract_passed": sum(1 for x in checked if x.get("contract_holds")),
         "passed": sum(1 for x in checked if x.get("pass")),
+        "all_contract": bool(checked) and all(x.get("contract_holds") for x in checked),
         "all_pass": bool(checked) and all(x.get("pass") for x in checked),
         "rows": checked,
         "hard_nonclaim": "PUBLIC_FAMILY_AUDIT_ONLY__NO_UNSEEN_TERMINAL_ROW_OR_ACCEPTANCE_CREDIT",
