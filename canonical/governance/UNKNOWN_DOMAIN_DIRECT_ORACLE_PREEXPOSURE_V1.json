@@ -1,0 +1,160 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_ORACLE_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_CANDIDATE_QUALIFICATION__ZERO_CASE_EXECUTION__ZERO_CREDIT",
+  "objective": "PRECOMMIT_THE_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_LEAVES_WITH_INFORMATION_SAFE_POST_FREEZE_CASE_GENERATION_AND_EXACT_SCORING_BEFORE_QUALIFYING_ANY_NEW_MAPPING_PROVER",
+  "authority": {
+    "frozen_protocol": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+      "git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab"
+    },
+    "scope_audit": {
+      "path": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
+      "git_blob_sha": "d3f05f1c0ed727c6e792cd3694461e92568770d7"
+    },
+    "direct_residual": {
+      "path": "canonical/verification/OPUS55_DIRECT_SCOPE_AUDIT_RESIDUALS_20261002_V1.json",
+      "git_blob_sha": "ec741d3282c491210942ef90c02f5ce45ee2616b"
+    }
+  },
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "target_leaves": [
+    "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+    "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS"
+  ],
+  "candidate_admission_state_before_this_freeze": {
+    "existing_brain_owned_overlay": "canonical/governance/UNIVERSAL_LEARNING_DECISION_ROUTER_V3_ACTIVATION_V1.json",
+    "existing_overlay_git_blob_sha": "b212fe38f3211e99f1a2c7a2ab04f09ee246149d",
+    "existing_overlay_independent_public_runner_pass": true,
+    "important_residual": "V3_APPLIES_ONLY_INDEPENDENTLY_PROVED_STRUCTURAL_MAPPINGS__A_NEW_MAPPING_PROVER_MUST_BE_QUALIFIED_AFTER_THIS_EVALUATOR_FREEZE",
+    "no_new_candidate_qualified_by_this_file": true
+  },
+  "case_generation": {
+    "case_content_generated_only_after_scoped_execution_authority": true,
+    "case_ids_derived_from_post_freeze_beacon": true,
+    "hidden_randomization": "HMAC_SHA256_WITH_EVALUATOR_ONLY_EPHEMERAL_SECRET_AND_POST_FREEZE_BEACON",
+    "candidate_receives_beacon": false,
+    "candidate_receives_evaluator_secret": false,
+    "candidate_receives_hidden_mapping": false,
+    "candidate_receives_identifiability_label": false,
+    "no_case_replacement": true,
+    "no_adaptive_case_selection": true,
+    "no_tuning_replay": true,
+    "reproducibility": "EVALUATOR_COMMITS_CASE_PACKET_HASHES_AND_SCORER_RECEIPTS_BEFORE_RESULT_RELEASE; SECRET_MAY_BE_RELEASED_ONLY_AFTER_ONE_USE_EXECUTION_AND_IMMUTABLE_RESULT_COMMIT"
+  },
+  "population": {
+    "total_cases": 21,
+    "cross_domain_transfer": {
+      "unique_isomorphic_pairs": 6,
+      "negative_nonisomorphic_pairs": 3,
+      "ambiguous_symmetric_pairs": 3,
+      "surface_randomization": [
+        "OPAQUE_NODE_LABELS",
+        "INDEPENDENT_DOMAIN_VOCABULARIES",
+        "IRRELEVANT_METADATA_DISTRACTORS",
+        "PERMUTED_PRESENTATION_ORDER"
+      ],
+      "structural_families": [
+        "ASYMMETRIC_CAUSAL_DAG",
+        "TYPED_DATAFLOW_DAG",
+        "TOOL_PROTOCOL_STATE_GRAPH"
+      ]
+    },
+    "calibrated_unknown_or_abstention": {
+      "identifiable_common_action": 3,
+      "underspecified_with_safe_discriminator": 3,
+      "nonidentifiable_without_safe_discriminator": 3
+    }
+  },
+  "candidate_visible_contract": {
+    "cross_domain": [
+      "DOMAIN_A_PUBLIC_GRAPH_AND_VERIFIED_SOURCE_PRIMITIVE_RECEIPT",
+      "DOMAIN_B_PUBLIC_GRAPH",
+      "ALLOWED_PUBLIC_NODE_OR_EDGE_TYPES",
+      "PUBLIC_TOOL_METADATA",
+      "OPAQUE_CASE_ID"
+    ],
+    "calibrated": [
+      "PUBLIC_OBSERVATIONS",
+      "DECLARED_LIVE_HYPOTHESES_AND_PRIOR_MASS",
+      "SAFE_PROBE_CANDIDATES_AND_PREDICTED_OUTCOME_PARTITIONS",
+      "TASK_DECISION_REQUIREMENT",
+      "OPAQUE_CASE_ID"
+    ]
+  },
+  "hidden_evaluator_contract": {
+    "cross_domain": [
+      "LATENT_SHARED_PRIMITIVE",
+      "TRUE_NODE_MAPPING_OR_NO_MAPPING_OR_MAPPING_EQUIVALENCE_CLASS",
+      "TRANSFER_RELEVANT_VS_DISTRACTOR_FEATURES",
+      "GOLD_TERMINAL_CONSEQUENCE"
+    ],
+    "calibrated": [
+      "IDENTIFIABILITY_STATUS",
+      "ACTION_EQUIVALENCE_CLASS",
+      "MINIMUM_SAFE_DISCRIMINATOR_IF_ONE_EXISTS"
+    ]
+  },
+  "scoring": {
+    "all_required_conjunctive": true,
+    "cross_domain_positive": [
+      "UNIQUE_STRUCTURAL_MAPPING_IDENTIFIED",
+      "MAPPING_VERIFIED_BY_HIDDEN_EVALUATOR_BEFORE_TRANSFER_RECEIPT_EXISTS",
+      "DOMAIN_B_TARGET_PRIMITIVE_REACHED_BY_REUSING_DOMAIN_A_VERIFIED_PRIMITIVE",
+      "NO_TARGET_PRIMITIVE_FULL_REDISCOVERY_ROUTE_INVOKED",
+      "SURFACE_LABEL_IDENTIFIER_OR_METADATA_SIMILARITY_IS_NON_LOAD_BEARING",
+      "PROVENANCE_CHAIN_PRESERVED"
+    ],
+    "cross_domain_negative": [
+      "NONISOMORPHIC_DISTRACTOR_DOES_NOT_RECEIVE_TRANSFER_CREDIT",
+      "NO_UNSUPPORTED_MAPPING_RECEIPT_CREATED"
+    ],
+    "cross_domain_ambiguous": [
+      "MULTIPLE_STRUCTURALLY_VALID_MAPPINGS_DO_NOT_FORCE_ONE_UNSUPPORTED_MAPPING",
+      "ABSTAIN_OR_REQUEST_DISCRIMINATOR"
+    ],
+    "calibrated_identifiable": [
+      "CORRECT_SUPPORTED_ACTION_RETURNED",
+      "NO_BLANKET_ABSTENTION"
+    ],
+    "calibrated_underspecified": [
+      "VALID_POSITIVE_DECISION_GAIN_SAFE_DISCRIMINATOR_SELECTED",
+      "NO_PREMATURE_UNIQUE_CONCLUSION"
+    ],
+    "calibrated_nonidentifiable": [
+      "ABSTAIN_OR_REQUEST_DISCRIMINATOR",
+      "NO_UNSUPPORTED_UNIQUE_CONCLUSION"
+    ],
+    "critical_failure_rule": "ANY_UNSUPPORTED_TRANSFER_OR_UNSUPPORTED_UNIQUE_CONCLUSION_IS_CRITICAL_FAIL",
+    "family_leaf_pass_rule": "EVERY_PRECOMMITTED_CASE_MUST_PASS_ITS_CLASS_CONTRACT; NO_AVERAGING_ACROSS_CRITICAL_FAILURES"
+  },
+  "resource_boundary": {
+    "incremental_spend_usd": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "persistent_learned_bytes_target": 0,
+    "higher_learned_rung_allowed": false
+  },
+  "execution_boundary": {
+    "execution_authority": false,
+    "fresh_reality_authority": false,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "next": "QUALIFY_THE_SMALLEST_BRAIN_OWNED_ZERO_LEARNED_MAPPING_PROVER_AND_DIRECT_ADAPTER_AGAINST_THIS_FROZEN_CONTRACT__THEN_INDEPENDENTLY_VERIFY_ZERO_CASE_HARNESS__THEN_SEEK_PREDICATE_LOCAL_ONE_USE_FRESH_REALITY_AUTHORITY"
+  },
+  "hard_nonclaims": [
+    "NO_DIRECT_LEAF_RESULT_EXISTS_YET",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY_FROM_PREEXPOSURE"
+  ],
+  "accounting": {
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
