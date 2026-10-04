@@ -14,12 +14,17 @@
   "construction": {
     "relaxed_candidate_search": {
       "path": "canonical/runtime/livebench_legacy15_relaxed_candidate_search_v1.py",
-      "git_blob_sha": "bf2e6c466599757eb1f31ec0fb5babf7d97d4a63",
-      "commit": "6ee1f44b8d45d0f225f831b2770c2ac34185a209",
+      "git_blob_sha": "9c712ee221021fabe2467cadc241312f50f6c712",
+      "commit": "112e2bea6d88681f2aa354ada2ae430a75e99f13",
       "test_path": "canonical/tests/test_livebench_legacy15_relaxed_candidate_search_v1.py",
-      "test_git_blob_sha": "04a1e8efee0e70b4af57db191343a4b6e7b27b68",
-      "test_commit": "08fcfaf8035d6bb372632f1ab981c0ab12b5e861",
-      "rule": "ENUMERATE_ALL_NONEMPTY_SUBSETS_DESCENDING_BY_CARDINALITY__RUN_THE_EXISTING_VISIBLE_ONLY_CANDIDATE_GENERATOR_ON_EACH__DEDUPLICATE_RESPONSES__ADD_MINIMAL_BASELINES__CAP_TOTAL_POOL"
+      "test_git_blob_sha": "52bb6ffdfe220c5e34b67f8902fa4a5a5d2e187e",
+      "test_commit": "712576020678f871e3da5703b42512e1da4e2ee3",
+      "rule": "ENUMERATE_ALL_NONEMPTY_SUBSETS_DESCENDING_BY_CARDINALITY__RUN_THE_EXISTING_VISIBLE_ONLY_CANDIDATE_GENERATOR_ON_EACH__DEDUPLICATE_RESPONSES__ADD_MINIMAL_BASELINES__CAP_TOTAL_POOL",
+      "domain_guards": [
+        "ALL_VISIBLE_PARAMETERS_COMPLETE",
+        "UNIQUE_ACTIVE15_IDS",
+        "FULL_ID_SET_PASSES_FROZEN_CONFLICT_GRAPH"
+      ]
     },
     "pointwise_search_bridge": {
       "path": "canonical/runtime/livebench_legacy15_pointwise_search_v1.py",
