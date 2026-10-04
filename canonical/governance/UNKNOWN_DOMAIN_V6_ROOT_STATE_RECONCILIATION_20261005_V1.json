@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_ROOT_STATE_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_LOGICAL_RECONCILIATION__VERIFIED_ROOT3_ONLY_ATOM_REMOVED__ROOT1_ZERO_PRESERVED__ROOT2_DOMAIN_UNCHANGED__ZERO_NEW_REALITY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_acceptance_ledger": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
+    "proved_predicates": 13,
+    "unresolved_predicates": 25
+  },
+  "promoted_atom": {
+    "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "prior_root_class": "ROOT3_ONLY",
+    "new_state": "PROVED",
+    "reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "reduction_git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
+    "independent_verification_path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "independent_verification_git_blob_sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d"
+  },
+  "prior_partition": {
+    "unresolved_total": 26,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "theorem": "26 = 16 + 7 + 3"
+  },
+  "current_partition": {
+    "unresolved_total": 25,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 16,
+    "root3_only_count": 6,
+    "root2_and_root3_count": 3,
+    "root2_touching_count": 19,
+    "root3_touching_count": 9,
+    "theorem": "25 = 16 + 6 + 3"
+  },
+  "derivation": [
+    "THE_ONLY_ACCEPTANCE_DELTA_IS_UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_FROM_ROOT3_ONLY_TO_PROVED",
+    "REMOVING_ONE_MEMBER_FROM_ROOT3_ONLY_SUBTRACTS_EXACTLY_ONE_FROM_UNRESOLVED_TOTAL_AND_ROOT3_ONLY_COUNT",
+    "ROOT2_ONLY_AND_ROOT2_AND_ROOT3_SETS_ARE_UNCHANGED__THEREFORE_ROOT2_TOUCHING_REMAINS_19",
+    "NO_NEW_POSITIVE_OPERATIVE_CAPABILITY_GAP_WAS INTRODUCED__ROOT1_POSITIVE_GAP_COUNT_REMAINS_ZERO"
+  ],
+  "hard_nonclaims": [
+    "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_CREDIT__MYSTERYMECHANISM_GE_49_55_REMAINS_OPEN",
+    "NO_ROOT2_PREDICATE_PROMOTION",
+    "NO_TERMINAL_GOAL_COMPLETION",
+    "NO_NEW_REALITY_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
