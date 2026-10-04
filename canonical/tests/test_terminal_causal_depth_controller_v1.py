@@ -65,7 +65,7 @@ class TerminalCausalDepthControllerTests(unittest.TestCase):
         self.assertFalse(plan["execution_authority"])
         self.assertFalse(plan["promotion_authority"])
 
-    def test_barrier_order_is_causal(self):
+    def test_barrier_order_is_backward_compatible_without_root_state(self):
         authority = {
             "truth": {"achieved": False},
             "atomic_acceptance_frontier": {"proved": 8, "unresolved": 30, "total": 38},
@@ -79,6 +79,73 @@ class TerminalCausalDepthControllerTests(unittest.TestCase):
                 "BARRIER_3_ATOMIC_FINALITY",
             ],
         )
+
+    def test_positive_root1_gap_gets_first_capability_repair_barrier(self):
+        authority = {
+            "truth": {"achieved": False},
+            "atomic_acceptance_frontier": {"proved": 12, "unresolved": 26, "total": 38},
+        }
+        root_state = {
+            "roots": {
+                "root_1_capability_missing": {
+                    "current_positive_root1_blockers": [
+                        {"predicate_id": "LIVEBENCH_IF_GE_65_7"}
+                    ]
+                }
+            }
+        }
+        registry = {
+            "repairs": [
+                {
+                    "predicate_id": "LIVEBENCH_IF_GE_65_7",
+                    "repair_id": "ROOT1_LIVEBENCH_GENERAL_SEMANTIC_CORE",
+                    "required_capability_layer": "GENERAL_SEMANTIC_SEED_PRODUCTION",
+                    "repair_frontier": "frontier.json",
+                    "score_only_quarantine": "quarantine.json",
+                    "next_minimum_action": "QUALIFY_LOCAL_SEMANTIC_CORE",
+                }
+            ]
+        }
+        plan = compile_causal_depth_plan(
+            authority, {"actions": []}, {"claims": []}, root_state, registry
+        )
+        self.assertEqual(plan["barriers"][0]["id"], "BARRIER_0_POSITIVE_ROOT1_CAPABILITY_REPAIR")
+        self.assertEqual(
+            plan["barriers"][0]["repair_actions"][0]["repair_id"],
+            "ROOT1_LIVEBENCH_GENERAL_SEMANTIC_CORE",
+        )
+        self.assertTrue(plan["barriers"][0]["scheduler_ready"])
+        self.assertEqual(plan["positive_root1_predicate_ids"], ["LIVEBENCH_IF_GE_65_7"])
+        self.assertEqual(
+            [b["id"] for b in plan["barriers"][1:]],
+            [
+                "BARRIER_1_ZERO_REALITY_MEGABATCH",
+                "BARRIER_2_MINIMUM_REALITY_TRANSACTION",
+                "BARRIER_3_ATOMIC_FINALITY",
+            ],
+        )
+
+    def test_unbound_positive_root1_gap_fails_closed(self):
+        authority = {
+            "truth": {"achieved": False},
+            "atomic_acceptance_frontier": {"proved": 12, "unresolved": 26, "total": 38},
+        }
+        root_state = {
+            "roots": {
+                "root_1_capability_missing": {
+                    "current_positive_root1_blockers": [
+                        {"predicate_id": "LIVEBENCH_IF_GE_65_7"}
+                    ]
+                }
+            }
+        }
+        plan = compile_causal_depth_plan(
+            authority, {"actions": []}, {"claims": []}, root_state, {"repairs": []}
+        )
+        root1 = plan["barriers"][0]
+        self.assertFalse(root1["scheduler_ready"])
+        self.assertEqual(root1["blocking_unbound_predicates"], ["LIVEBENCH_IF_GE_65_7"])
+        self.assertEqual(root1["repair_actions"], [])
 
 
 if __name__ == "__main__":
