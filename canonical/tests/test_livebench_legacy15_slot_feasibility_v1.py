@@ -139,3 +139,35 @@ def test_mandatory_section_splitter_forbidden_collision_is_certified():
     assert out["hard_unsat_reasons"] == [
         "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:section"
     ]
+
+
+def test_sentence_less_than_one_with_public_end_phrase_is_certified():
+    contracts = [
+        {
+            "instruction_id": f.SENTENCE,
+            "slots": {"num_sentences": 1, "relation": "less than"},
+        },
+        {
+            "instruction_id": f.END,
+            "slots": {"end_phrase": "Any other questions?"},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "PROVED_UNSAT"
+    assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in out["hard_unsat_reasons"]
+
+
+def test_sentence_less_than_one_does_not_overcertify_nonpublic_end_phrase():
+    contracts = [
+        {
+            "instruction_id": f.SENTENCE,
+            "slots": {"num_sentences": 1, "relation": "less than"},
+        },
+        {
+            "instruction_id": f.END,
+            "slots": {"end_phrase": "custom suffix"},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" not in out["hard_unsat_reasons"]
