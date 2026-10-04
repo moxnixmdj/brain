@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_CLOSURE_V2_STABLE_FRONTIER_DELTA_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__DELTA_OVERLAY_ON_STABLE_V1__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT__NO_FRESH_REALITY",
+  "objective": "Apply only independently supported Root2 scheduling deltas to the stable V1 frontier without rebinding or duplicating the entire frontier.",
+  "base_frontier": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V1.json",
+    "git_blob_sha": "a58aa3513449ec5e56f66204fd33f3916d1bc09c",
+    "status_required": "CURRENT_RECOMPILED__CIRCULAR_AUTHORITY_HASH_DEPENDENCY_REMOVED__FAIL_CLOSED_ON_SEMANTIC_INPUT_DRIFT__ZERO_CREDIT__NO_FRESH_REALITY"
+  },
+  "deltas": [
+    {
+      "id": "SYNTHESIS_REQUIRED_CLAIM_COVERAGE_DELETE",
+      "target": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "delete_residual": "required_claim_coverage_noninferiority",
+      "remaining_exact_residuals": ["metric:matched_quality","matched_quality_noninferiority"],
+      "proof": {
+        "candidate_path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
+        "candidate_git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
+        "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "independent_verifier_pr": 1526,
+        "independent_verifier_merge_commit": "f9bd3737a3ddc23df4e19922c1f04fec3e163cce"
+      }
+    },
+    {
+      "id": "TB4_BUILDKITE_NAMED_MATERIAL_WAKE",
+      "target": "CODING_TB4_GE_66_4",
+      "delete_state": "WAIT_UNSPECIFIED_NEW_ZERO_COST_CARRIER",
+      "replace_with": "ONE_NAMED_BUILDKITE_ALL_ACCESS_TRIAL_ACCOUNT_AND_ZERO_CASE_PREFLIGHT",
+      "carrier_candidate": {
+        "path": "canonical/governance/TB4_BUILDKITE_ALL_ACCESS_TRIAL_CARRIER_CANDIDATE_20261004_V1.json",
+        "git_blob_sha": "2725cf6820fb7ce6025213d474b9acf2937282ee",
+        "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "independent_verifier_pr": 1547,
+        "independent_verifier_merge_commit": "8febc622ffa6896d0b5d909d8be1a48cfa78c3f6",
+        "workflow_run_id": 37166431994,
+        "workflow_job_id": 111330169951,
+        "conclusion": "success"
+      },
+      "carrier_admissibility": false,
+      "required_before_promotion": [
+        "TRIAL_ACCOUNT_LARGE_SHAPE_ACCESS",
+        "USABLE_MEMORY_AND_FREE_DISK_MEASUREMENT",
+        "DOCKER_RUN_AND_DOCKER_COMPOSE_RUNTIME_PASS",
+        "NO_AUTOMATIC_PAID_OVERAGE_OR_OTHER_NONZERO_SPEND_PATH",
+        "ZERO_TERMINAL_CASE_HARBOR_PREFLIGHT"
+      ]
+    }
+  ],
+  "resulting_scheduling_changes": {
+    "synthesis": "WORK_ONLY_MATCHED_QUALITY_ATOM_AND_MATCHED_QUALITY_NONINFERIORITY",
+    "tb4": "EXECUTE_ONLY_BUILDKITE_NAMED_ACCOUNT_AND_ZERO_CASE_PREFLIGHT_WHEN_ACCOUNT_ACCESS_EXISTS__DO_NOT_RESUME_GENERIC_CARRIER_SEARCH"
+  },
+  "probability_and_value_policy": {
+    "priority": "P(useful_delta|evidence)*terminal_fanout*information_gain/(critical_path_seconds+epsilon)",
+    "point_probability_rule": "NO_UNCALIBRATED_POINT_PROBABILITIES",
+    "bernoulli_update_rule": "JEFFREYS_BETA_ONLY_AFTER_ACTUAL_REPEATABLE_ROUTE_OBSERVATIONS",
+    "correlation_rule": "DO_NOT_DOUBLE_COUNT_CORRELATED_ROUTES"
+  },
+  "hard_rules": [
+    "BASE_FRONTIER_BLOB_MUST_MATCH_EXACTLY",
+    "NO_TB4_CARRIER_PROMOTION_FROM_DOCUMENTATION_OR_EMAIL_OUTREACH",
+    "NO_SYNTHESIS_MATCHED_QUALITY_CREDIT_FROM_REQUIRED_CLAIM_COVERAGE_CEILING",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_TERMINAL_CASE_EXECUTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_DELTA"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
