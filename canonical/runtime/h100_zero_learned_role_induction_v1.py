@@ -14,7 +14,7 @@ SCHEMA = "PROJECT_BRAIN_H100_ZERO_LEARNED_ROLE_INDUCTION_V1"
 _IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 _PAIR = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*=\s*[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?")
 _ROLE_TEXT = re.compile(
-    r"^\s*(?:Set|Given)\s+(.+?)\s*;\s*(?:measured|observed)\s+([A-Za-z_][A-Za-z0-9_]*)\s*=",
+    r"^\s*(?:Set|Given)\s+(.+?)\s*[;,]\s*(?:measured|observed)\s+([A-Za-z_][A-Za-z0-9_]*)\s*=",
     re.IGNORECASE,
 )
 
