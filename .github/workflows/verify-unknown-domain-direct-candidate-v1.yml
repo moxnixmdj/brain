@@ -1,0 +1,61 @@
+name: Verify unknown-domain direct zero-learned candidate V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/UNKNOWN_DOMAIN_DIRECT_ORACLE_PREEXPOSURE_V1.json'
+      - 'canonical/governance/UNKNOWN_DOMAIN_DIRECT_CANDIDATE_V1.json'
+      - 'canonical/runtime/structural_mapping_prover_v1.py'
+      - 'canonical/runtime/unknown_domain_direct_adapter_v1.py'
+      - 'canonical/tests/test_unknown_domain_direct_adapter_v1.py'
+      - '.github/workflows/verify-unknown-domain-direct-candidate-v1.yml'
+  push:
+    branches:
+      - research/h100-unknown-domain-direct-v1
+    paths:
+      - 'canonical/governance/UNKNOWN_DOMAIN_DIRECT_ORACLE_PREEXPOSURE_V1.json'
+      - 'canonical/governance/UNKNOWN_DOMAIN_DIRECT_CANDIDATE_V1.json'
+      - 'canonical/runtime/structural_mapping_prover_v1.py'
+      - 'canonical/runtime/unknown_domain_direct_adapter_v1.py'
+      - 'canonical/tests/test_unknown_domain_direct_adapter_v1.py'
+      - '.github/workflows/verify-unknown-domain-direct-candidate-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run direct candidate tests
+        run: python -m unittest canonical.tests.test_unknown_domain_direct_adapter_v1 -v
+      - name: Verify exact candidate bindings and zero-credit boundary
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path('.')
+          gov=json.loads((root/'canonical/governance/UNKNOWN_DOMAIN_DIRECT_CANDIDATE_V1.json').read_text())
+          pre=gov['preexposure']
+          got=subprocess.check_output(['git','hash-object',pre['path']],text=True).strip()
+          assert got==pre['git_blob_sha'],(pre['path'],got,pre['git_blob_sha'])
+          for path,expected in gov['new_exact_bound_components'].items():
+              got=subprocess.check_output(['git','hash-object',path],text=True).strip()
+              assert got==expected,(path,got,expected)
+          assert gov['resource_boundary']['persistent_learned_bytes']==0
+          assert gov['resource_boundary']['external_frontier_model_calls']==0
+          assert gov['resource_boundary']['external_learned_capability_calls']==0
+          assert gov['qualification_boundary']['fresh_case_execution'] is False
+          assert gov['qualification_boundary']['fresh_reality_authority'] is False
+          assert gov['accounting']['acceptance_credit_delta']==0
+          PY
