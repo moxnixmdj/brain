@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_CONTRADICTION_AWARE_SCORE_FRONTIER_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_PROOF_TARGET_REDUCTION__ZERO_TERMINAL_ROWS__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "candidate": {
+    "brain_pull_request": 1868,
+    "joint_witness_path": "canonical/runtime/livebench_legacy15_joint_witness_v1.py",
+    "joint_witness_git_blob_sha": "ec0760696f67fa5c631a949bbf64e572243a8736",
+    "frozen_before_new_equivalent_evaluation": true,
+    "terminal_rows_read_to_construct_candidate": 0
+  },
+  "theorem_target_correction": {
+    "prior_overstrong_target": "ALL_CONFLICT_COMPATIBLE_ACTIVE15_PARAMETERIZATIONS_MUST_FULL_SCORE",
+    "source_level_counterexample_candidate": {
+      "instruction_ids": [
+        "length_constraints:number_sentences",
+        "startend:end_checker"
+      ],
+      "parameterization": {
+        "length_constraints:number_sentences": {
+          "num_sentences": 1,
+          "relation": "less than"
+        },
+        "startend:end_checker": {
+          "end_phrase": "Any other questions?"
+        }
+      },
+      "public_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+      "public_generator_blob": "6ff390d6885cf90f88d9d36959735cb327613edc",
+      "frozen_scorer_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "conflict_compatible": true,
+      "implication": "ANY_RESPONSE_SATISFYING_THE_NONEMPTY_EXACT_END_PHRASE_HAS_AT_LEAST_ONE_SENTENCE__THEREFORE_CANNOT_ALSO_SATISFY_SENTENCE_COUNT_LESS_THAN_ONE",
+      "independent_verification_candidate": {
+        "repository": "moxnixmdj/verification-capsule-runner",
+        "pull_request": 2047,
+        "status": "EXISTS__NOT_BOUND_HERE_AS_ACCEPTANCE_EVIDENCE"
+      }
+    },
+    "corrected_target": "PROVE_OR_MEASURE_A_CLEAN_SCORE_LOWER_BOUND_AT_OR_ABOVE_THE_ACCEPTANCE_COMPARATOR__DO_NOT_REQUIRE_IMPOSSIBLE_FULL_SATISFACTION"
+  },
+  "score_math": {
+    "frozen_case_score": "0.5*ALL_INSTRUCTIONS_TRUE + 0.5*(TRUE_INSTRUCTIONS/TOTAL_INSTRUCTIONS)",
+    "exact_comparator": 0.6573775,
+    "two_instruction_single_unavoidable_miss_score": 0.25,
+    "satisfiable_full_score": 1,
+    "contradiction_fraction_symbol": "q",
+    "population_lower_bound_under_binary_partition": "1 - 0.75*q",
+    "sufficient_bound_on_q": 0.45683,
+    "derivation": "1 - 0.75*q >= 0.6573775  =>  q <= (1-0.6573775)/0.75 = 0.45683",
+    "scope_limit": "THIS_BOUND_IS_A_REDUCTION_ONLY__IT_DOES_NOT_ESTABLISH_THE_ACTUAL_CONTRADICTION_FRACTION_OF_ANY ACCEPTANCE POPULATION"
+  },
+  "contamination_safe_next_proof": {
+    "allowed_policy_route": "PRECOMMITTED_CLEAN_EQUIVALENT_EVALUATION",
+    "protocol": [
+      "KEEP_CANDIDATE_BLOB_FROZEN",
+      "PIN_EXACT_HISTORICAL_GENERATOR_AND_FROZEN_SCORER_BYTES",
+      "DERIVE_RANDOM_SEED_ONLY_AFTER_CANDIDATE_FREEZE_FROM_INDEPENDENT_VERIFIER_COMMIT_IDENTITY",
+      "GENERATE_FRESH_ACTIVE_LEGACY_CONSTRAINT_POPULATION_WITHOUT_READING_TERMINAL_ROWS",
+      "SCORE_WITH_EXACT_FROZEN_CHECKERS_AND_FROZEN_SCORE_FORMULA",
+      "INDEPENDENTLY_VERIFY_DISTRIBUTIONAL_EQUIVALENCE_BEFORE_ANY ACCEPTANCE_PROMOTION"
+    ],
+    "terminal_rows_read": 0,
+    "dirty_exact200_score_reused_for_credit": false,
+    "adaptive_terminal_tuning_forbidden": true
+  },
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "UNIVERSAL_FULL_SCORE_NOT_PROVED",
+    "COUNTEREXAMPLE_INDEPENDENT_VERIFICATION_NOT_BOUND_HERE",
+    "CLEAN_EQUIVALENT_EVALUATION_NOT_YET_EXECUTED",
+    "LIVEBENCH_ACCEPTANCE_NOT_YET_PROVED",
+    "TERMINAL_GOAL_NOT_YET_ACHIEVED"
+  ]
+}
