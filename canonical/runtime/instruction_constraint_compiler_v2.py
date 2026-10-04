@@ -112,7 +112,7 @@ def compile_program(instruction: str) -> Program:
     bullet=None
     m=re.search(r"newline-separated list of items.*?use\s+(.+?)\s*(?:instead|as the marker|\.)",text,re.I|re.S)
     if m:
-        candidate=" ".join(m.group(1).split()).strip(" '"")
+        candidate=" ".join(m.group(1).split()).strip().strip("\\'").strip('"')
         if candidate and len(candidate)<=32:
             bullet=candidate
 
