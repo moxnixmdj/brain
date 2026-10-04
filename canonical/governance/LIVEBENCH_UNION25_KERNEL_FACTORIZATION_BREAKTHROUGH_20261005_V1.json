@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_UNION25_KERNEL_FACTORIZATION_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__UNION25_DELTA10_156_SIGNATURES_FACTORED_TO_1_ISOLATED_PLUS_9_NONEMPTY_AXIS_STATES_PLUS_4_COMMUTING_MODIFIERS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "input_authority": {
+    "structural_quotient": "canonical/runtime/livebench_union25_archetypes_v1.py",
+    "verified_union25_scope": "canonical/verification/LIVEBENCH_PUBLIC_SCOPE_UNION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+    "verified_single_contracts": "canonical/verification/LIVEBENCH_LEGACY25_SINGLE_CONTRACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "active15_semantic_reduction": "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py"
+  },
+  "breakthrough": {
+    "prior_problem": "156_DISTINCT_EXTRA10_SIGNATURES",
+    "exact_factorization": {
+      "isolated": [
+        "detectable_format:constrained_response"
+      ],
+      "commuting4": [
+        "keywords:letter_frequency",
+        "detectable_content:number_placeholders",
+        "detectable_format:number_highlighted_sections",
+        "punctuation:no_comma"
+      ],
+      "semantic_axis5": [
+        "keywords:frequency",
+        "language:response_language",
+        "change_case:capital_word_frequency",
+        "change_case:english_capital",
+        "change_case:english_lowercase"
+      ],
+      "semantic_axis_states_including_empty": 10,
+      "semantic_axis_nonempty_states": 9,
+      "compatible_two_axis_states": 4,
+      "compatible_three_axis_states": 0
+    },
+    "closed_form_count": "15 + 80 + 60 + 1 = 156",
+    "deleted_obligation": "DO_NOT_PROVE_156_SIGNATURES_AS_INDEPENDENT_CASES",
+    "replacement_obligation": "PROVE_9_NONEMPTY_AXIS_STATES_PLUS_4_MODIFIER_LEMMAS_PLUS_ONE_ISOLATED_SINGLETON_OVER_THE_ALREADY_CLOSED_ACTIVE15_CORE"
+  },
+  "additional_bound": {
+    "active15_unpadded_less_than_word_global_bound": 48,
+    "max_numeric_placeholder_words": 4,
+    "max_numeric_highlight_words": 4,
+    "combined_bound": 56,
+    "minimum_public_less_than_word_threshold": 100,
+    "margin": 44,
+    "consequence": "PLACEHOLDER_AND_HIGHLIGHT_NUMERIC_CARRIERS_HAVE_44_WORDS_OF_GLOBAL_SAFETY_MARGIN_BEFORE_THE_SMALLEST_PUBLIC_LESS_THAN_WORD_THRESHOLD"
+  },
+  "hard_nonclaims": [
+    "GRAPH_FACTORIZATION_IS_NOT_YET_MULTI_CONTRACT_CHECKER_COMPOSITION",
+    "THE_9_AXIS_STATES_ARE_NOT_YET_INDEPENDENTLY_VERIFIED_OVER_ALL_ACTIVE15_CONTEXTS",
+    "LETTER_FREQUENCY_AND_NO_COMMA_STILL_REQUIRE_CONTEXT_DEPENDENT_COLLISION_LEMMAS",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
