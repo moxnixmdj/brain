@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_LEARNING_MECHANISM_DISCOVERY_V6_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_ACTIVATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "scope": "NEW_ENVIRONMENT_AND_NEW_THING_LEARNING_ONLY",
+  "target_blocker": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "frozen_protocol": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+    "git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab"
+  },
+  "v6_candidate": {
+    "path": "canonical/governance/UNIVERSAL_LEARNING_MECHANISM_DISCOVERY_V6.json",
+    "git_blob_sha": "65e291e3afebbf3547771ee580104361d1920788"
+  },
+  "v6_independent_verification": {
+    "path": "canonical/verification/UNIVERSAL_LEARNING_MECHANISM_DISCOVERY_V6_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "ff590a8f40b891d3c53bb2c50cd679bb0dd42c72",
+    "conclusion": "success"
+  },
+  "verified_v5_base": {
+    "activation_path": "canonical/governance/UNIVERSAL_LEARNING_RECURSIVE_ABSTRACTION_V5_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "ee5d7e2a989df687e19f6be95c7d25600d1a32ec",
+    "activation_verification_path": "canonical/verification/UNIVERSAL_LEARNING_RECURSIVE_ABSTRACTION_V5_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "activation_verification_git_blob_sha": "1001e25ca59c57b13049a22f305e487eb01f693a"
+  },
+  "activation_effect": [
+    "PRESERVE_V1_TO_V5_TRUST_TRANSFER_OPEN_WORLD_SAFETY_AND_RECURSIVE_ABSTRACTION",
+    "ADD_M_OPEN_MECHANISM_CLASS_FALSIFICATION_AND_EXPANSION",
+    "ADD_GOAL_CONDITIONED_DECISION_QUOTIENT_COMPRESSION",
+    "ADD_CANDIDATE_INVARIANT_EXTRACTION_WITH_SEPARATE_VERIFICATION",
+    "ADD_EXACT_FINITE_RECEIPT_BOUND_SAFE_ADAPTIVE_EXPERIMENT_TREE_SYNTHESIS",
+    "PRESERVE_CONDITIONAL_VS_OPEN_WORLD_OPTIMALITY_BOUNDARY"
+  ],
+  "preserved_residual": {
+    "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "leaves_open": 2,
+    "leaves_closed_by_activation": 0,
+    "leaf_ids": [
+      "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS"
+    ],
+    "acceptance_proved": false
+  },
+  "hard_rules": [
+    "THIS_ACTIVATION_CHANGES_THE_OPERATIVE_LEARNING_MECHANISM_NOT_ACCEPTANCE_TRUTH",
+    "V6_MAY_NOT_WEAKEN_V1_TO_V5_GUARDS",
+    "MODEL_CLASS_EXHAUSTION_MEANS_EXPAND_LANGUAGE_NOT_ENVIRONMENT_UNSOLVABLE",
+    "DECISION_QUOTIENT_DOES_NOT_PROVE_OPEN_WORLD_COMPLETENESS",
+    "INVARIANTS_REMAIN_CANDIDATE_UNTIL_SEPARATELY_VERIFIED",
+    "OPEN_WORLD_TERMINAL_DECISION_REQUIRES_EXACT_MECHANISM_CLASS_COVERAGE_BINDING",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
