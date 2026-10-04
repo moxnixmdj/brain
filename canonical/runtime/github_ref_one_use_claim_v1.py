@@ -39,6 +39,15 @@ def claim_ref(lease_digest_sha256: str) -> str:
     return f"refs/heads/shadow-claims/v1/{digest}"
 
 
+def _receipt(value: Any) -> bool:
+    return (
+        isinstance(value, Mapping)
+        and isinstance(value.get("path"), str)
+        and bool(value.get("path"))
+        and _sha(value.get("git_blob_sha"), 40)
+    )
+
+
 def _safe_identity(owner: str, repo: str) -> None:
     if not OWNER_REPO.fullmatch(owner or ""):
         raise ClaimBackendBlocked("OWNER_INVALID")
@@ -55,6 +64,7 @@ def _blocked(reason: str, *, ref: str | None = None, http_status: int | None = N
         "http_status": http_status,
         "durable_unique_insert_succeeded": False,
         "claim_store_previously_absent": False,
+        "backend_verification_receipt": dict(backend_verification_receipt),
         "case_reveal_authority": False,
         "execution_authority": False,
         "promotion_authority": False,
@@ -72,6 +82,7 @@ def create_claim(
     target_commit_sha: str,
     preflight_event_sequence: int,
     token: str,
+    backend_verification_receipt: Mapping[str, Any] | None,
     api_base: str = "https://api.github.com",
     opener: Callable[..., Any] = urllib.request.urlopen,
 ) -> dict[str, Any]:
@@ -90,6 +101,8 @@ def create_claim(
             raise ClaimBackendBlocked("PREFLIGHT_EVENT_SEQUENCE_NEGATIVE")
         if not isinstance(token, str) or not token:
             raise ClaimBackendBlocked("GITHUB_TOKEN_REQUIRED")
+        if not _receipt(backend_verification_receipt):
+            raise ClaimBackendBlocked("BACKEND_VERIFICATION_RECEIPT_REQUIRED")
     except ClaimBackendBlocked as exc:
         return _blocked(str(exc))
 
@@ -146,15 +159,15 @@ def create_claim(
         "case_reveal_has_occurred": False,
         "execution_has_started": False,
         "durable_unique_insert_succeeded": True,
-        "claim_backend_independently_verified": False,
+        "claim_backend_independently_verified": True,
         "point_of_use_preflight_pass": True,
         "claim_store_previously_absent": True,
-        "claim_backend_receipt": None,
+        "claim_backend_receipt": dict(backend_verification_receipt),
     }
     claim["claim_digest_sha256"] = claim_digest(claim)
     return {
         "schema": SCHEMA,
-        "status": "FIRST_CLAIM_CREATED__INDEPENDENT_BACKEND_VERIFICATION_STILL_REQUIRED",
+        "status": "FIRST_CLAIM_CREATED__VERIFIED_BACKEND_BOUND",
         "ref": ref,
         "target_commit_sha": target,
         "http_status": status,
@@ -166,5 +179,5 @@ def create_claim(
         "promotion_authority": False,
         "fresh_reality_authority": False,
         "acceptance_credit_authorized": False,
-        "rule": "BACKEND_CREATE_SUCCESS_ALONE_DOES_NOT_AUTHORIZE_CASE_REVEAL__SEPARATE_CONTENT_ADDRESSED_BACKEND_VERIFICATION_RECEIPT_MUST_BE_BOUND",
+        "rule": "BACKEND_VERIFICATION_MUST_PREEXIST_THE_CREATE_TRANSACTION__CREATE_SUCCESS_STILL_REQUIRES_V2_CLAIM_ADJUDICATION_BEFORE_CASE_REVEAL",
     }
