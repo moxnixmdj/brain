@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ROOT2-SYNTHESIS-COVERAGE-V2-RECONCILIATION-20261004",
+  "status": "ZERO_REALITY_CURRENT_AUTHORITY_RECONCILIATION__ZERO_CREDIT_PENDING_INDEPENDENT_REVERIFY",
+  "base_commit_sha": "ac57fe916d0cab9427e51697f599b9a32b2d99d1",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "blocker_id": "SYNTHESIS_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY",
+  "selected_route": "RECONCILE_ACTIVE_ROOT2_CONTROLLER_AND_CURRENT_FRONTIER_TO_INDEPENDENTLY_VERIFIED_COVERAGE_V2_PASS",
+  "evidence": {
+    "brain_merge_commit": "7722a43f23c7bc4564357a049626f26be71b1788",
+    "verifier_pr": 1526,
+    "verifier_merge_commit": "f9bd3737a3ddc23df4e19922c1f04fec3e163cce",
+    "workflow_run_id": 37164910933,
+    "workflow_job_id": 111325748211
+  },
+  "expected_terminal_delta": "REMOVE_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY_FROM_SYNTHESIS_ROOT2_RESIDUAL__LEAVE_MATCHED_QUALITY_ATOM_AND_NONINFERIORITY_OPEN__COUNTS_UNCHANGED__RECOMPILE_FRONTIER_BINDING",
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
