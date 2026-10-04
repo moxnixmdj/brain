@@ -104,57 +104,13 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
             threshold = -1
 
         if relation == "less than" and threshold == 1:
-            # Frozen Punkt sentence tokenization yields zero sentences only for
-            # an empty/whitespace-only response; every non-whitespace response
-            # yields at least the terminal slice. Therefore any simultaneously
-            # active checker that requires non-whitespace output is jointly UNSAT.
-            nonempty_reasons: list[str] = []
-
-            if by_id.get(EXISTENCE, {}).get("keywords"):
-                nonempty_reasons.append(EXISTENCE)
-            if NTH in by_id and str(by_id[NTH].get("first_word", "")).strip():
-                nonempty_reasons.append(NTH)
-            if POSTSCRIPT in by_id and str(by_id[POSTSCRIPT].get("postscript_marker", "")).strip():
-                nonempty_reasons.append(POSTSCRIPT)
-            if BULLETS in by_id:
-                try:
-                    if int(by_id[BULLETS].get("num_bullets")) > 0:
-                        nonempty_reasons.append(BULLETS)
-                except (TypeError, ValueError):
-                    pass
-            if TITLE in by_id:
-                nonempty_reasons.append(TITLE)
-            if SECTIONS in by_id:
-                try:
-                    if (
-                        int(by_id[SECTIONS].get("num_sections")) > 0
-                        and str(by_id[SECTIONS].get("section_spliter", "")).strip()
-                    ):
-                        nonempty_reasons.append(SECTIONS)
-                except (TypeError, ValueError):
-                    pass
-            if END in by_id and str(by_id[END].get("end_phrase", "")).strip():
-                nonempty_reasons.append(END)
-            if QUOTATION in by_id:
-                # QuotationChecker requires len(value.strip()) > 1.
-                nonempty_reasons.append(QUOTATION)
-            if WORDS in by_id:
-                ws = by_id[WORDS]
-                try:
-                    if (
-                        str(ws.get("relation", "")).strip().casefold() == "at least"
-                        and int(ws.get("num_words")) > 0
-                    ):
-                        nonempty_reasons.append(WORDS)
-                except (TypeError, ValueError):
-                    pass
-
-            for iid in sorted(set(nonempty_reasons)):
-                reasons.append("SENTENCE_LT_ONE_REQUIRES_EMPTY_BUT_CHECKER_REQUIRES_OUTPUT:" + iid)
-
-            # Preserve the established diagnostic key for downstream receipts.
-            if END in nonempty_reasons:
-                reasons.append("SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE")
+            # Frozen LiveBench evaluates strict only and gates every checker by
+            # response.strip(). NLTK 3.9.2 Punkt always retains a terminal
+            # nonempty slice for every non-whitespace input, so every response
+            # eligible for checker execution has count_sentences >= 1.
+            reasons.append(
+                "SENTENCE_LT_ONE_IMPOSSIBLE_UNDER_STRICT_NONEMPTY_EVALUATOR"
+            )
 
     return tuple(reasons)
 
