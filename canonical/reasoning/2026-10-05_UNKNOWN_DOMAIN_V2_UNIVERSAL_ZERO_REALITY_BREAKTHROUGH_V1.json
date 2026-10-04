@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "receipt_id": "UNKNOWN-DOMAIN-V2-UNIVERSAL-ZERO-REALITY-BREAKTHROUGH-20261005-V1",
+  "date": "2026-10-05",
+  "status": "DURABLE_REASONING_RECEIPT__CANDIDATE_BREAKTHROUGH__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "real_objective": "Advance the Opus 5.5 capability-ownership terminal objective by eliminating a dominated fresh-reality dependency on the Unknown-Domain critical path without weakening evidence standards.",
+  "governing_invariants": [
+    "CORRECTNESS_FIRST",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_DUPLICATE_EXECUTION",
+    "DELETE_BEFORE_BUILD",
+    "NO_PROXY_GOAL_SUBSTITUTION",
+    "FAIL_CLOSED_PROMOTION",
+    "EXACT_CONTENT_BINDING",
+    "NO_OPEN_WORLD_CLAIM_FROM_FROZEN_DOMAIN_PROOF"
+  ],
+  "material_premises": [
+    "The exact frozen Unknown-Domain V2 generator emits 12 transfer and 15 abstention cases per population.",
+    "The exact harness permits at most 2 transfer probes while the hidden rediscovery floor is 3.",
+    "V2 probe construction shifts distractors by at least 4.75 while true role magnitudes and primitive parameters lie in exact bounded intervals fixed by the bound source blobs.",
+    "For AFFINE_POS, COMPLEMENT, SAT_MONO, SIGN, STEP, and ADD2, the proposed proof derives a strict separation or output-equivalence argument sufficient to eliminate every wrong support after at most two probes.",
+    "The three abstention classes are deterministically generated and the candidate policy aligns with the frozen scorer requirements.",
+    "All six load-bearing candidate/generator/scorer/harness Git blobs bound by Brain PR1858 were rechecked unchanged on live main after the PR was opened.",
+    "The prior production attempt failed before main/import completion and consumed zero production cases.",
+    "Runner PR2034 repaired the import transport while preserving the one-use lease, so the production fallback remains available if the universal theorem is falsified.",
+    "Runner PR2040 is the existing independent verification carrier; creating another verifier would violate dedupe leverage."
+  ],
+  "evidence_refs": [
+    "moxnixmdj/brain#1858",
+    "moxnixmdj/verification-capsule-runner#2034",
+    "moxnixmdj/verification-capsule-runner#2040",
+    "canonical/runtime/unknown_domain_direct_candidate_v1.py@a2a77269a8175ce315b466035049da0f761b8734",
+    "canonical/runtime/unknown_domain_direct_candidate_v2.py@4470716f95a559a700e461262df909ae19a41651",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py@f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py@d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py@e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py@04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+  ],
+  "conclusion": "The highest-leverage current Unknown-Domain move is to verify and promote the universal zero-reality theorem before any production retry. If independently verified, the theorem strictly dominates the one-shot 27-case production population for the exact frozen evaluator domain and deletes that fresh-reality action from the critical path.",
+  "selected_route": "INDEPENDENTLY_VERIFY_PR1858_UNIVERSAL_THEOREM_VIA_EXISTING_RUNNER_PR2040__THEN_SEPARATE_SCOPE_AND_ACCEPTANCE_REDUCTION",
+  "rejected_material_alternatives": [
+    {
+      "route": "IMMEDIATELY_RETRY_27_CASE_PRODUCTION",
+      "reason": "Dominated if the universal theorem is sound; it consumes fresh reality while proving less."
+    },
+    {
+      "route": "CREATE_SECOND_INDEPENDENT_VERIFIER",
+      "reason": "Runner PR2040 already occupies the exact verification lease; duplication adds queue pressure and no new information."
+    },
+    {
+      "route": "SWITCH_TO_LIVEBENCH",
+      "reason": "LiveBench already has multiple active closure PRs; Unknown-Domain currently offers a clean theorem that can delete an entire reality dependency."
+    }
+  ],
+  "uncertainties": [
+    "Runner PR2040 verification was queued at receipt creation and therefore had not yet produced canonical independent PASS authority.",
+    "PR1858 predates newer main commits; exact bound subject blobs were unchanged when rechecked, but any later mutation of those blobs requires revalidation.",
+    "A separate acceptance/scope reducer is still required even after theorem verification."
+  ],
+  "assumptions": [
+    "Git blob equality is sufficient to identify the exact Python source subjects under the repository's current verification policy.",
+    "Python 3.12 floating behavior is the execution semantics of the frozen verifier/harness route.",
+    "No hidden mutation outside the six bound subject blobs changes the exact frozen generator/candidate/scorer/harness semantics used by the theorem."
+  ],
+  "non_goals": [
+    "Do not claim open-world unknown-domain generalization.",
+    "Do not grant family, capability, ownership, or terminal-goal credit from the theorem PR alone.",
+    "Do not generate or inspect production/terminal cases.",
+    "Do not weaken scorer or acceptance thresholds."
+  ],
+  "next_action": "Use runner PR2040 as the sole independent verifier. On PASS, content-bind its receipt into the Brain and run the separate acceptance reducer. On FAIL, preserve the counterexample and fall back to the already-repaired one-use production route only if fresh reality regains positive information value.",
+  "supersession_conditions": [
+    "Any of the six bound subject blobs changes.",
+    "Runner PR2040 produces a counterexample.",
+    "A stronger already-verified proof discharges the same predicate with equal or broader admissible scope.",
+    "Canonical authority changes the exact target predicate or acceptance semantics."
+  ],
+  "supersedes": null,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
