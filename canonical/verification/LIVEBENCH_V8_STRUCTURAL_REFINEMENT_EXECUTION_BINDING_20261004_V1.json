@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V8_STRUCTURAL_REFINEMENT_EXECUTION_BINDING_20261004_V1",
+  "date": "2026-10-04",
+  "status": "BOUND_IMMUTABLE_ONE_USE_REPLAY72_RESULT__ZERO_NEW_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "diagnose/livebench-v8-structural-refinement-20261004",
+    "workflow_run_id": 37194573632,
+    "workflow_job_id": 111413655775,
+    "workflow_sha": "c66c3ebffd3f0516ac7e29d62c3b88c800798c5d",
+    "persisted_receipt_commit": "c195e85948a029a5ee5adfb36e5cffa3857c7eb5",
+    "persisted_receipt_path": "evidence/LIVEBENCH_V8_STRUCTURAL_REFINEMENT_EXECUTION_RECEIPT.json",
+    "persisted_receipt_git_blob_sha": "4422b08997bbcd8d64a2157249e9c1f094dcdf6e",
+    "artifact_id": 11299774697,
+    "artifact_sha256": "f403abdac4a743bcfeafca6d724ff02d8dad89be2384607ef5bdfb19dccf0ad2"
+  },
+  "one_use_claim": {
+    "epoch_digest_sha256": "78f7e799c3e1edf70516c02badebde0adbad7c5846aec8fbff53f8db2152f192",
+    "claim_ref": "refs/heads/livebench-v8-claims/78f7e799c3e1edf70516c02badebde0adbad7c5846aec8fbff53f8db2152f192",
+    "create_http_status": 201,
+    "response_object_sha": "c66c3ebffd3f0516ac7e29d62c3b88c800798c5d",
+    "dataset_read_before_claim": false
+  },
+  "result": {
+    "replayed_already_exposed_cases": 72,
+    "new_case_exposure": false,
+    "case_73_or_later": false,
+    "unclassified_runtime_count": 0,
+    "classification_histogram": {
+      "POLICY_BLOCK:POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN": 43,
+      "COMPOSITION_PRODUCER:UNRESOLVED_GROUNDED_CLAUSES": 27,
+      "ARCHITECTURAL_GAP:CONTROL_OR_FANOUT": 2
+    }
+  },
+  "causal_interpretation": {
+    "COMPOSITION_PRODUCER:UNRESOLVED_GROUNDED_CLAUSES": "Existing bound-capability grounding was available, but producer composition could not close all grounded clauses. Repair composition/grounding closure before any external acquisition.",
+    "POLICY_BLOCK:POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN": "Frozen candidate lacked a sufficient pre-bound route and attempted prohibited post-prompt acquisition. Policy remains correct; repair must pre-bind a prompt-agnostic already-owned capability route before future untouched exposure.",
+    "ARCHITECTURAL_GAP:CONTROL_OR_FANOUT": "Goal compiler classified the residual as control/fanout architecture rather than a missing external capability."
+  },
+  "repair_priority": [
+    "REPAIR_UNRESOLVED_GROUNDED_CLAUSES_WITHOUT_PROMPT_SPECIFIC_SPECIAL_CASES",
+    "DERIVE_PROMPT_AGNOSTIC_PREBOUND_ROUTE_FOR_ACQUISITION_BLOCKED_CLASS_OR_PROVE_CAPABILITY_GAP",
+    "REPAIR_GENERIC_CONTROL_OR_FANOUT_COMPILATION"
+  ],
+  "hard_rules": [
+    "NO_POLICY_WEAKENING",
+    "NO_CASE_73_OR_LATER_UNTIL_SEPARATELY_AUTHORIZED",
+    "NO_PROMPT_OR_RESPONSE_RECOVERY_FOR_REPAIR_DESIGN",
+    "NO_ROOT1_REOPEN_FROM_PIPELINE_FAILURE_ALONE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_PROMOTION_CREDIT_FROM_DIAGNOSTIC"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
