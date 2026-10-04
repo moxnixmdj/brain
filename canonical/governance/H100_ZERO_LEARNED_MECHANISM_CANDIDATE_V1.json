@@ -20,8 +20,8 @@
     "preserved_rule": "V7_REMAINS_LOAD_BEARING_TRUST_EXECUTION_DEDUCTION_AND_PROGRAM_REUSE_AUTHORITY__V8_V9_REMAIN_PLANNING_OVERLAYS"
   },
   "exact_bound_components": {
-    "canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py": "7d6fd66436ade8cec974e01dbe909865f6c3129f",
-    "canonical/tests/test_h100_zero_learned_mechanism_synthesizer_v1.py": "fbb66814d73e5e43559c56f669ac7d92caeab39a"
+    "canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py": "fa77c6a0f4edf214c4237cf1e204b640261622fe",
+    "canonical/tests/test_h100_zero_learned_mechanism_synthesizer_v1.py": "0e5e7ab361d495cb76e6e8644cf2cdd46c733ed8"
   },
   "current_gap_addressed": {
     "source": "canonical/runtime/universal_learning_mechanism_router_v6.py",
@@ -33,7 +33,8 @@
   "frozen_grammar_v1": {
     "families": [
       "AFFINE_LINEAR_COMBINATIONS_OF_VISIBLE_NUMERIC_INPUTS",
-      "AFFINE_FUNCTION_OF_MULTIVARIABLE_MONOMIALS"
+      "AFFINE_FUNCTION_OF_MULTIVARIABLE_MONOMIALS",
+      "CONTINUOUS_REAL_EXPONENT_MULTIVARIABLE_POWER_LAWS"
     ],
     "monomial_exponents": [-3,-2,-1,-0.5,0,0.5,1,2,3],
     "target_transforms": ["IDENTITY","LOG_ABS","RECIPROCAL"],
@@ -41,6 +42,8 @@
     "selection": "DETERMINISTIC_HOLDOUT_NRMSE_PLUS_SMALL_DESCRIPTION_COMPLEXITY_TIEBREAK",
     "surface_name_invariance": "STRUCTURAL_SIGNATURE_IGNORES_VISIBLE_VARIABLE_NAMES_AND_RETAINS_OPERATOR_EXPONENT_STRUCTURE",
     "ambiguity_action": "PROPOSE_BOUNDED_GRID_POINT_MAXIMIZING_NORMALIZED_PREDICTION_DISAGREEMENT",
+    "initial_experiment_design": "USE_FULL_2D_PLUS_1_BUDGET__D2_FOUR_CORNERS_PLUS_GEOMETRIC_OR_ARITHMETIC_CENTER__HIGHER_D_CENTER_PLUS_AXIS_EXTREMES",
+    "continuous_power_fit": "ROBUST_LOG_LINEAR_REGRESSION_WITH_DETERMINISTIC_NEAR_ZERO_SIGN_NOISE_REJECTION",
     "out_of_grammar_action": "EXPAND_MECHANISM_LANGUAGE"
   },
   "zero_learned_accounting": {
@@ -56,6 +59,8 @@
     "RECOVER_MULTIVARIABLE_RATIO_POWER_LAW",
     "RECOVER_AFFINE_LINEAR_LAW",
     "RECOVER_FRACTIONAL_POWER_LAW",
+    "RECOVER_CONTINUOUS_REAL_EXPONENT_POWER_LAW_FROM_PUBLIC_MYSTERYMECHANISM_STREAM_POWER_SHAPE",
+    "GENERATE_FULL_2D_PLUS_1_BOUND_PROBE_DESIGN",
     "PRESERVE_STRUCTURAL_SIGNATURE_UNDER_SURFACE_VARIABLE_RENAMING",
     "IGNORE_AN_IRRELEVANT_DISTRACTOR_WHEN_A_SIMPLER_EXACT_RELATION_EXISTS",
     "FAIL_CLOSED_ON_OUT_OF_GRAMMAR_SINE_RELATION",
