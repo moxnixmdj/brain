@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_EFFECTIVE_SCHEDULING_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ACTIVATION_CONDITION_SATISFIED__INDEPENDENT_FINAL_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json",
+    "frontier_git_blob_sha": "681123ef6cff3506d66af6b31b61c8bc14a8a913",
+    "activation_candidate_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_ACTIVATION_V1.json",
+    "activation_candidate_git_blob_sha": "76d36bc34947e726502d0c8fc1dbb961d6442c88",
+    "frontier_verification_path": "canonical/verification/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "frontier_verification_git_blob_sha": "8436a9eb30312b959ba094394e60f26b4833a3a2"
+  },
+  "pointer_projection": {
+    "brain_pull_request": 1522,
+    "brain_merge_commit": "cad4d71ddcc66b3ea0a0cc636687d71dfc94cac2",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1561,
+    "verifier_head_sha": "4f3ff71ea736c9de1feff2fc1ee94e6b9e6e5f7a",
+    "verifier_merge_commit": "aca3d2166876c401711bc083dc9eb4ea83ffee65",
+    "workflow_run_id": 37167775499,
+    "workflow_job_id": 111334245344,
+    "conclusion": "success",
+    "verified_projection_blobs": {
+      "root2_measurement_bridge": "1d3eccffe5c15914ac1d25bec56ce4d6a3f3cc8b",
+      "terminal_root_cause_state": "cc87fffba6b7a967fa89fd8c8c828b2b6d842ad7",
+      "current_terminal_authority": "691f1d6f9d51fc49d281216264dbe33f41958995"
+    }
+  },
+  "activation_condition_evaluation": {
+    "frontier_subject_independent_pass": true,
+    "pointer_projection_independent_pass": true,
+    "current_authority_binds_exact_frontier_and_activation": true,
+    "condition_satisfied": true
+  },
+  "authority": {
+    "scheduling_authority": true,
+    "effective_scheduling_authority": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "comparator_rebase_authority": false
+  },
+  "effect": "ACTIVATE_ROOT2_V3_ZERO_REALITY_SCHEDULING_ONLY__EXECUTE_ONLY_ACTIONS_ALREADY_CLASSIFIED_AS_ZERO_REALITY_AND_SEPARATELY_AUTHORIZED_BY_THEIR_REQUIRED_ACCOUNT_OR_PROTOCOL_FACTS__NO_TERMINAL_CASES",
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_TERMINAL_CASE_EXPOSURE_BEFORE_ZERO_REALITY_FIXED_POINT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_ACCEPTANCE_CREDIT_FROM_SCHEDULING",
+    "RECOMPUTE_AFTER_EACH_VERIFIED_DELTA"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_final_verification_required": true
+}
