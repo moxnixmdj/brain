@@ -1,0 +1,114 @@
+{
+  "schema": "PROJECT_BRAIN_H100_EXPRESSION_TREE_SYMBOLIC_REGRESSION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_LEARNED_BYTES__DETERMINISTIC_EXPRESSION_TREE_SEARCH__LOCAL_TEST_PASS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "EXPAND_H100_GATE1_FROM_SIMPLE_POWER_AND_AFFINE_MECHANISMS_TO_BOUNDED_NESTED_SATURATION_CORRECTION_AND_STABLE_RATIO_EXPRESSION_TREES_WITH_ZERO_PERSISTENT_LEARNED_BYTES",
+  "parent": {
+    "activation_path": "canonical/governance/H100_ZERO_LEARNED_MECHANISM_ACTIVATION_V1.json",
+    "parent_runtime": "canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py",
+    "preserved_next_residual": "GENERAL_DETERMINISTIC_EXPRESSION_TREE_SYMBOLIC_REGRESSION_FOR_NESTED_SATURATION_AND_CORRECTION_LAWS"
+  },
+  "exact_bound_components": {
+    "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py": "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490",
+    "canonical/tests/test_h100_expression_tree_symbolic_regression_v1.py": "c6285bb2bb5be1c65995a226df1761667a69d8e4"
+  },
+  "search_design": {
+    "learned_state_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "dynamic_code_execution": false,
+    "random_search": false,
+    "maximum_input_variables": 4,
+    "maximum_expression_depth": 4,
+    "bounded_beam_width": [
+      4,
+      64
+    ],
+    "unary_grammar": [
+      "NEG",
+      "ABS",
+      "SQUARE",
+      "SQRT_ABS",
+      "LOG1P_ABS",
+      "SAT_X_DIV_1_PLUS_ABS_X"
+    ],
+    "binary_grammar": [
+      "ADD",
+      "SUB",
+      "MUL",
+      "STABLE_DIV_LEFT_DIV_1_PLUS_ABS_RIGHT"
+    ],
+    "correction_composition": "FIT_INTERCEPT_PLUS_UP_TO_TWO_ENUMERATED_FEATURES; NEVER_PRUNE_COMPLEXITY_LE_3_PRIMITIVES_BEFORE_COMPOSITION",
+    "exactness_gate": "ALL_DATA_NRMSE_AND_HELDOUT_NRMSE_MUST_BOTH_BE_LE_CONFIGURED_EXACT_THRESHOLD_DEFAULT_1E_MINUS_8",
+    "dedupe": "NORMALIZED_OUTPUT_VECTOR_PLUS_CANONICAL_STRUCTURAL_SIGNATURE",
+    "fail_closed": "IF_NO_EXACT_CANDIDATE_SURVIVES_RETURN_GRAMMAR_NOT_EXACT__EXPAND_OR_EXPERIMENT"
+  },
+  "local_validation": {
+    "command": "python -m unittest -v",
+    "tests_passed": 10,
+    "tests_total": 10,
+    "covered": [
+      "NESTED_SATURATION_EXACT_RECOVERY",
+      "LINEAR_PLUS_SATURATION_CORRECTION_EXACT_RECOVERY",
+      "MULTIVARIABLE_STABLE_RATIO_EXACT_RECOVERY",
+      "SURFACE_RENAMING_INVARIANCE",
+      "OUT_OF_GRAMMAR_SINE_FAIL_CLOSED",
+      "DETERMINISTIC_REPLAY",
+      "NONFINITE_INPUT_REJECTION",
+      "INPUT_DIMENSION_BOUND",
+      "CROSS_VARIABLE_LINEAR_PLUS_STABLE_RATIO_CORRECTION_EXACT_RECOVERY",
+      "TWO_CROSS_VARIABLE_CORRECTIONS_EXACT_RECOVERY"
+    ],
+    "authority": "LOCAL_DEVELOPMENT_SIGNAL_ONLY__NOT_INDEPENDENT_VERIFICATION"
+  },
+  "reuse_audit": {
+    "searched_classes": [
+      "PYTHON_SYMBOLIC_REGRESSION_LIBRARIES",
+      "EXPRESSION_TREE_SEARCH",
+      "UNIVERSAL_OPERATOR_SYMBOLIC_REGRESSION"
+    ],
+    "decision": "DO_NOT_BIND_EXTERNAL_LIBRARY_AS_GATE1_OPERATIVE_DEPENDENCY",
+    "reason": "CURRENT_H100_GATE_REWARDS_ZERO_LEARNED_BYTES_DETERMINISTIC_REPLAY_AND_MINIMAL_ESCAPE_SURFACE; STRONG_PUBLIC_OPTIONS ADD LEARNED_PYTORCH_STATE LARGE_RUNTIME_DEPENDENCIES OR STOCHASTIC_EVOLUTIONARY_SEARCH",
+    "nonclaim": "THIS_DOES_NOT_CLAIM_THE_INTERNAL_ENUMERATOR_IS GLOBALLY_STRONGER_THAN GENERAL_SYMBOLIC_REGRESSION_LIBRARIES"
+  },
+  "h100_effect_if_independently_verified": {
+    "persistent_learned_bytes_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "structural_progress": "REMOVES_THE_CURRENT_NAMED_GATE1_RESIDUAL_FOR_BOUNDED_NESTED_SATURATION_CORRECTION_AND_STABLE_RATIO_LAWS",
+    "next_residual": [
+      "GENERAL_GRAMMAR_EXPANSION_BEYOND_CURRENT_BOUNDED_OPERATORS",
+      "RAW_NATURAL_LANGUAGE_OR_ARBITRARY_TOOL_TRACE_TO_TYPED_NUMERIC_SCHEMA_COMPILATION",
+      "OPEN_WORLD_PROPOSAL_PROBABILITY_MEASUREMENT_ON_FROZEN_UNKNOWN_DOMAIN_TASKS",
+      "DIRECT_MYSTERYMECHANISM_AND_TRANSFER_ABSTENTION_EVIDENCE_REMAINS_OPEN"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_MYSTERYMECHANISM_SCORE_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_OPEN_WORLD_GRAMMAR_COMPLETENESS",
+    "NO_GENERAL_INTELLIGENCE_CLAIM",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_RUNTIME_RAM_OR_TOTAL_COMPUTE_CLAIM",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "authority": {
+    "candidate_generation": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
