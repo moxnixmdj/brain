@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_HOLDOUT_REQUEST_V1",
+  "episode_id": "H20_GITHUB_JA_MORPH",
+  "difficulty": "MULTILINGUAL",
+  "query_action": {
+    "action_id": "H20Q01",
+    "source_id": "GITHUB_REPOSITORY_SEARCH",
+    "query_family": "FRESH_HOLDOUT_BEHAVIOR_V20",
+    "query": "Japanese morphological analysis Python MeCab wrapper",
+    "script": "CJK",
+    "language_variants": [
+      {
+        "language": "ja",
+        "text": "日本語 形態素解析 Python MeCab ラッパー"
+      }
+    ]
+  },
+  "source": {
+    "source_id": "GITHUB_REPOSITORY_SEARCH",
+    "provider": "github",
+    "upstream_group": "GITHUB_PUBLIC_API",
+    "source_class": "repository",
+    "script": "CJK"
+  },
+  "target_identity_present": false
+}
