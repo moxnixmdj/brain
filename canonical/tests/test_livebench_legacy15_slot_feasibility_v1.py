@@ -11,7 +11,10 @@ def test_id_compatibility_is_not_slot_satisfiability():
     assert out["acceptance_credit"] is False
 
 
-def test_required_keyword_forbidden_collision_is_certified():
+def test_required_keyword_forbidden_overlap_is_not_falsely_certified_unsat():
+    # Pinned semantics differ deliberately: existence is substring matching,
+    # forbidden is whole-word matching. "harborx" is therefore a valid escape
+    # carrier for the overlapping generated keyword "harbor".
     contracts = [
         {
             "instruction_id": f.EXISTENCE,
@@ -23,10 +26,8 @@ def test_required_keyword_forbidden_collision_is_certified():
         },
     ]
     out = f.classify_visible_contracts(contracts)
-    assert out["status"] == "PROVED_UNSAT"
-    assert out["hard_unsat_reasons"] == [
-        "REQUIRED_KEYWORD_IS_FORBIDDEN_WORD:harbor"
-    ]
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
 
 
 def test_required_and_forbidden_disjoint_stays_unknown():
@@ -34,6 +35,41 @@ def test_required_and_forbidden_disjoint_stays_unknown():
         {
             "instruction_id": f.EXISTENCE,
             "slots": {"keywords": ["signal", "harbor", "world"]},
+        },
+        {
+            "instruction_id": f.FORBIDDEN,
+            "slots": {"forbidden_words": ["delta", "ember"]},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
+
+
+def test_mandatory_section_splitter_forbidden_collision_is_certified():
+    contracts = [
+        {
+            "instruction_id": f.SECTIONS,
+            "slots": {"section_spliter": "SECTION", "num_sections": 3},
+        },
+        {
+            "instruction_id": f.FORBIDDEN,
+            "slots": {"forbidden_words": ["delta", "section"]},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["archetype"] == "PLAIN"
+    assert out["hard_unsat_reasons"] == [
+        "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:section"
+    ]
+
+
+def test_section_splitter_with_disjoint_forbidden_words_stays_unknown():
+    contracts = [
+        {
+            "instruction_id": f.SECTIONS,
+            "slots": {"section_spliter": "Section", "num_sections": 2},
         },
         {
             "instruction_id": f.FORBIDDEN,
