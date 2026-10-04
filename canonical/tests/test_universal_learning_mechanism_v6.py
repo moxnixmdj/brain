@@ -29,6 +29,8 @@ def coverage(candidates=CANDIDATES):
         "environment_id":ENV,
         "goal_id":GOAL,
         "hypothesis_space_sha256":guard4.hypothesis_digest(hs),
+        "mechanism_class_semantics_bound":True,
+        "mechanism_class_sha256":class_digest(candidates),
     }
 
 def class_digest(candidates=CANDIDATES):
@@ -158,6 +160,26 @@ class ExperimentSynthesizerV6Tests(unittest.TestCase):
         )
         self.assertEqual(out["status"],"OPEN_WORLD_EXACT_ADAPTIVE_PLAN")
         self.assertTrue(out["open_world_terminal_decision_authorized"])
+
+    def test_stale_hypothesis_coverage_without_mechanism_semantics_binding_rejected(self):
+        cov=coverage()
+        cov["mechanism_class_semantics_bound"]=False
+        probes=[probe("direct",{"m1":"a","m2":"a","m3":"b"},2)]
+        with self.assertRaises(synth.ExperimentSynthesisError):
+            synth.synthesize(
+                environment_id=ENV,goal_id=GOAL,candidates=CANDIDATES,probes=probes,
+                hypothesis_coverage_receipt=cov,
+            )
+
+    def test_wrong_mechanism_class_digest_in_coverage_rejected(self):
+        cov=coverage()
+        cov["mechanism_class_sha256"]="sha256:"+"0"*64
+        probes=[probe("direct",{"m1":"a","m2":"a","m3":"b"},2)]
+        with self.assertRaises(synth.ExperimentSynthesisError):
+            synth.synthesize(
+                environment_id=ENV,goal_id=GOAL,candidates=CANDIDATES,probes=probes,
+                hypothesis_coverage_receipt=cov,
+            )
 
     def test_positive_spend_rejected(self):
         p=probe("p",{"m1":"a","m2":"a","m3":"b"},1)
