@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__PREEXPOSURE_SCORERS_AND_REDUCER_FROZEN__ZERO_CREDIT",
+  "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json",
+    "git_blob_sha": "8206cb013b5cd0d653ffa70d1e867f8c4d4630b8"
+  },
+  "verification": {
+    "path": "canonical/verification/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+  },
+  "effects": {
+    "delete": [
+      "FIVE_CASE_SPECIFIC_QUALITY_DIMENSION_SCORER_BINDINGS_UNSPECIFIED",
+      "PORTFOLIO_LEVEL_CONSERVATIVE_MATCHED_NONINFERIORITY_REDUCER_UNSPECIFIED"
+    ],
+    "preserve": [
+      "EXACT_OPUS_5_5_COMPARATOR_ADMISSIBILITY_OR_SEPARATELY_VERIFIED_STRONGER_PROOF",
+      "FROZEN_MATCHED_CASE_POPULATION_AND_EXPLICIT_FRESH_REALITY_AUTHORITY",
+      "BRAIN_AND_OPUS_IDENTICAL_CASE_EXECUTION",
+      "MATCHED_QUALITY_RESULT"
+    ],
+    "sufficient_route": "STRICT_PAIRED_POINTWISE_DOMINANCE_V1",
+    "failure_semantics": "FAILURE_OF_STRICT_ROUTE_DOES_NOT_PROVE_INFERIORITY"
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
