@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_POINTWISE_STRICT_BLANK_GUARD_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_SOUNDNESS_REPAIR__STRICT_EVALUATOR_BLANK_RESPONSE_INVARIANT_ENFORCED_IN_POINTWISE_SELECTOR__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem": "THE_RELAXED_CANDIDATE_POOL_INTENTIONALLY_CONTAINS_EMPTY_STRING__RAW_INDIVIDUAL_CHECKERS_CAN_RETURN_TRUE_ON_EMPTY_STRING__BUT_THE_FROZEN_STRICT_EVALUATOR_UNCONDITIONALLY_RETURNS_FALSE_FOR_EVERY_CHECKER_WHEN_response.strip_IS_EMPTY",
+  "frozen_source_binding": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "path": "livebench/if_runner/ifbench/evaluation_lib.py",
+    "git_blob_sha": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+    "exact_wrapper_rule": "if response.strip() and instruction.check_following(response): TRUE else FALSE"
+  },
+  "repair": {
+    "runtime": "canonical/runtime/livebench_legacy15_pointwise_search_v1.py",
+    "runtime_git_blob_sha": "ea88973d5497d771bf414f1a4d4500837e258e26",
+    "tests": "canonical/tests/test_livebench_legacy15_pointwise_search_v1.py",
+    "tests_git_blob_sha": "33d82fe23878b8f468d087d13797ed5ce0007d9b",
+    "rule": "ANY_BLANK_RESPONSE_IS_NORMALIZED_TO_AN_ALL_FALSE_CHECKER_VECTOR_INSIDE_select_best_postvalidated_REGARDLESS_OF_SUPPLIED_OR_CALLBACK_FLAGS",
+    "coverage": [
+      "EXTERNALLY_PREPOSTVALIDATED_CANDIDATE_ROWS",
+      "solve_with_checker_CALLBACK_PATH",
+      "RELAXED_POOL_EMPTY_BASELINE"
+    ]
+  },
+  "soundness_consequence": [
+    "RAW_CHECKER_CALLBACKS_CANNOT_MANUFACTURE_FALSE_STRICT_SCORE_FROM_EMPTY_RESPONSE",
+    "POINTWISE_OPTIMALITY_CERTIFICATES_RECEIVE_CHECKER_VECTORS_CONSISTENT_WITH_THE_FROZEN_STRICT_WRAPPER_FOR_BLANK_RESPONSES",
+    "NONBLANK_RESPONSES_REMAIN_DELEGATED_TO_EXACT_PINNED_CHECKER_POSTVALIDATION"
+  ],
+  "hard_nonclaims": [
+    "THIS_DOES_NOT_VERIFY_NONBLANK_CALLBACK_CORRECTNESS",
+    "THIS_DOES_NOT_COMPLETE_THE_SEMANTIC_UNSAT_KERNEL",
+    "THIS_DOES_NOT_GRANT_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_EXECUTION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
