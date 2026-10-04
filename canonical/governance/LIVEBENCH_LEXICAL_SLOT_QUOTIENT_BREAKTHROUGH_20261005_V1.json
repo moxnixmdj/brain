@@ -42,13 +42,13 @@
     ],
     "existence_keywords_removed_from_collision_state_reason": "CURRENT_REQUIRED_KEYWORD_CARRIER_APPENDS_LITERAL_x__ALL_1525_WORDS_ARE_ASCII_ALPHA__AND_NO_WORD_PLUS_x_IS_ITSELF_IN_THE_1525_VALUE_WORD_LIST__SO_NO_GENERATED_FORBIDDEN_WORD_CAN_EQUAL_A_REQUIRED_CARRIER_AS_A_WHOLE_WORD",
     "conservative_signature_upper_bound": 320,
-    "upper_bound_derivation": "5_NTH_LEXICAL_CATEGORIES__TIMES_2_END_PHRASES__TIMES_2_POW_5_BOOLEAN_COLLISION_BITS__THE_BOUND_IS_INTENTIONALLY_NOT_MINIMIZED",
+    "upper_bound_derivation": "5_NTH_CATEGORIES__TIMES_2_FIXED_END_PHRASES__TIMES_2_POW_5_BOOLEAN_BITS_FOR_NTH_IN_FORBIDDEN_PLUS_MEMBERSHIP_OF_OTHER_ANYTHING_CAN_HELP__INTENTIONALLY_NOT_MINIMIZED",
     "nth_lexical_categories": [
       "other",
       "anything",
-      "can_or_help",
-      "one_of_remaining_end_irrelevant_values",
-      "end_relevant_category_split_may_be_refined"
+      "can",
+      "help",
+      "all_other_word_list_values"
     ],
     "note": "THE_320_BOUND_IS_A_SAFE_SCHEDULING_UPPER_BOUND_NOT_A_CLAIM_OF_320_REACHABLE_DISTINCT_SIGNATURES"
   },
