@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__SCHEDULING_AND_CANDIDATE_GENERATION_ONLY__ZERO_CREDIT",
+  "plan": {
+    "path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_PLAN_V1.json",
+    "git_blob_sha": "3c203a1c2060b333a2e13417ab3a3a2880c94f2c"
+  },
+  "arena_reconciliation": {
+    "path": "canonical/governance/ARENA_COMPARATOR_PUBLIC_SEMANTICS_RECONCILIATION_V1.json",
+    "git_blob_sha": "d9bbedb43e8b5da66331d9cdd7254718a7ab23db"
+  },
+  "verification": {
+    "path": "canonical/verification/TERMINAL_MINIMUM_CAUSAL_DEPTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "runner_pull_request": 1777,
+    "runner_merge_commit": "cc900e76e7a2b6971d2c38ed899ac087d0b9edd6",
+    "workflow_run_id": 37190119446,
+    "conclusion": "success"
+  },
+  "effective_scheduler_order": [
+    "EVIDENCE_COLLAPSE__TYPED_CERTIFICATES_FEDERATED_RETRIEVAL_AUTHENTICATED_FACTS_OWNER_RACES_IN_PARALLEL",
+    "ISOLATION_COLLAPSE__GENERIC_PRECOMMIT_THEOREM_PLUS_THIN_BENCHMARK_INTERFACES",
+    "EXACT_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA",
+    "ONE_MINIMUM_TERMINAL_REALITY_WAVE_ONLY_AFTER_EXPLICIT_FRESH_REALITY_AUTHORITY"
+  ],
+  "arena_scheduler_reduction": {
+    "delete_as_public_semantics_unknown": [
+      "ARENA_MACHINE_API_EXISTENCE_UNKNOWN",
+      "ARENA_DIRECT_MODEL_ROUTING_SEMANTICS_UNKNOWN",
+      "ARENA_FALLBACK_CONTROL_SEMANTICS_UNKNOWN",
+      "ARENA_ACTUAL_SERVED_MODEL_OBSERVABILITY_UNKNOWN"
+    ],
+    "preserve_as_load_bearing": [
+      "ARENA_ACCOUNT_EXACT_MODEL_AVAILABILITY",
+      "ARENA_ZERO_INCREMENTAL_SPEND_ENTITLEMENT",
+      "ARENA_HARNESS_AND_EFFORT_COMPARABILITY"
+    ]
+  },
+  "relative_elo_scheduler_rule": "GDPVAL_AND_AA_BRIEFCASE_RELATIVE_ELO_PREDICATES_MUST_NOT_RECEIVE_ABSOLUTE_BEHAVIORAL_PROOF_CREDIT_WITHOUT_A_VERIFIED_RELATIVE_SCORE_BRIDGE",
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_GOAL_SUBSTITUTION",
+    "NO_INVENTED_POINT_PROBABILITIES",
+    "NO_ACCEPTANCE_CREDIT_FROM_THIS_ACTIVATION",
+    "NO_FRESH_REALITY_AUTHORITY_FROM_THIS_ACTIVATION",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY_FROM_THIS_ACTIVATION",
+    "RECOMPUTE_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
