@@ -101,16 +101,14 @@
         "activation_git_blob_sha": "4cbc1b9f478654b2dc671a8b54f91b5c4b91c019",
         "verification_path": "canonical/verification/ROOT2_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
-        "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5.json",
-        "current_frontier_git_blob_sha": "e948022f0a4e8d91b949a5155d850d56aa137c87",
-        "status": "ACTIVE__ROOT2_FRONTIER_V5_INDEPENDENT_PROJECTION_PASS__CURRENT_AUTHORITY_BOUND__ZERO_CREDIT",
+        "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V6.json",
+        "current_frontier_git_blob_sha": "fcbdb818b63b4986b026db29c400a47373a26fdb",
+        "status": "CANDIDATE__ROOT2_FRONTIER_V6_SUBJECT_COMPILED__POINTER_PROJECTION_REVERIFY_PENDING__ZERO_CREDIT__NO_FRESH_REALITY",
         "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2",
         "fresh_reality_authority": false,
-        "current_frontier_verification_path": "canonical/verification/ROOT2_V5_PROJECTION_VERIFICATION_20261004_V1.json",
-        "current_frontier_verification_git_blob_sha": "2475a8583e2ed2889c3e9e0613ae3bcf269ffc82",
-        "effective_scheduling_authority": true,
-        "current_frontier_activation_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5_ACTIVATION_V1.json",
-        "current_frontier_activation_git_blob_sha": "2d15df0daab51c5cc61c4194197da7f7fcd5a1b0"
+        "current_frontier_verification_path": null,
+        "current_frontier_verification_git_blob_sha": null,
+        "effective_scheduling_authority": false
       }
     },
     "root_3_scope_completeness": {
@@ -140,8 +138,8 @@
     "no_credit_from_classification_itself": true,
     "root1_currently_active": false,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
-    "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5.json",
-    "root2_effective_scheduling_authority": true
+    "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V6.json",
+    "root2_effective_scheduling_authority": false
   },
   "accounting": {
     "acceptance_credit_delta": 0,
