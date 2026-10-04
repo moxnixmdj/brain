@@ -6,7 +6,7 @@ from canonical.runtime.livebench_shadow_point_of_use_preflight_v1 import (
 )
 
 ROOT=Path(__file__).resolve().parents[2]
-PLAN=ROOT/"canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V2.json"
+PLAN=ROOT/"canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json"
 
 def plan():
     return json.loads(PLAN.read_text())
@@ -16,7 +16,6 @@ def receipt():
     return {
       "lease_digest_sha256":digest,
       "claim_ref":expected_claim_ref(digest),
-      "claim_ref_absent_observed":True,
       "case_reveal_has_occurred":False,
       "execution_has_started":False,
       "evaluation_output_exists":False,
@@ -43,14 +42,24 @@ def receipt():
       },
     }
 
-def test_exact_zero_case_preflight_passes_without_reveal_authority():
+def test_current_v3_preflight_passes_without_reveal_authority():
     out=verify_point_of_use_preflight(plan(),receipt())
     assert out["point_of_use_preflight_pass"] is True
     assert out["terminal_cases_consumed"] == 0
     assert out["case_reveal_authority"] is False
     assert out["shadow_collection_authority"] is False
     assert out["one_use_claim_still_required"] is True
+    assert out["claim_ref_absence_precheck_required"] is False
     assert out["acceptance_credit_authorized"] is False
+
+def test_claim_absence_precheck_is_not_required():
+    r=receipt()
+    assert "claim_ref_absent_observed" not in r
+    assert verify_point_of_use_preflight(plan(),r)["point_of_use_preflight_pass"] is True
+
+def test_legacy_absence_observation_does_not_control_readiness():
+    r=receipt(); r["claim_ref_absent_observed"]=False
+    assert verify_point_of_use_preflight(plan(),r)["point_of_use_preflight_pass"] is True
 
 def test_claim_ref_must_be_digest_derived():
     r=receipt(); r["claim_ref"]="refs/heads/shadow-claims/wrong"
@@ -60,13 +69,11 @@ def test_claim_ref_must_be_digest_derived():
 
 def test_any_case_exposure_blocks_preflight():
     r=receipt(); r["case_reveal_has_occurred"]=True
-    out=verify_point_of_use_preflight(plan(),r)
-    assert out["point_of_use_preflight_pass"] is False
+    assert verify_point_of_use_preflight(plan(),r)["point_of_use_preflight_pass"] is False
 
 def test_failed_zero_case_smoke_blocks_preflight():
     r=receipt(); r["synthetic_zero_case_smoke_pass"]=False
-    out=verify_point_of_use_preflight(plan(),r)
-    assert out["point_of_use_preflight_pass"] is False
+    assert verify_point_of_use_preflight(plan(),r)["point_of_use_preflight_pass"] is False
 
 def test_wrong_claim_backend_blob_blocks_preflight():
     r=receipt(); r["claim_backend_receipt"]["git_blob_sha"]="0"*40
