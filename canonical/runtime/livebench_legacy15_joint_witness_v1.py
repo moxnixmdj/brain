@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Deterministic joint witness synthesizer for the frozen active legacy-15 LiveBench surface.
 
-Reads visible prompt text only through the verified-source-lineage compiler V2.
+Reads visible prompt text only through the historical-envelope compiler V4.
 It never consumes instruction_id_list, hidden kwargs, question ids, active row
 metadata, prior responses, or scores. Unsupported/contradictory compositions
 fail closed.
@@ -14,7 +14,7 @@ from __future__ import annotations
 import re
 from typing import Any
 
-from canonical.runtime import livebench_legacy_visible_constraint_compiler_v2 as compiler
+from canonical.runtime import livebench_legacy_visible_constraint_compiler_v4 as compiler
 from canonical.runtime.livebench_frozen_active_legacy15_v1 import ACTIVE_IDS
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_JOINT_WITNESS_V1"
