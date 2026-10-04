@@ -18,6 +18,10 @@ from dataclasses import asdict, dataclass
 import re
 from typing import Any, Callable
 
+from canonical.runtime.livebench_legacy_repeat_prompt_self_detector_v1 import (
+    detect_and_recover_legacy_repeat_prompt,
+)
+
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY_VISIBLE_CONSTRAINT_COMPILER_V1"
 FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 FROZEN_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
@@ -203,6 +207,42 @@ def compile_visible_constraints(prompt: str) -> dict[str, Any]:
                 matches.append(_constraint(instruction_id, m))
             except Exception as exc:
                 errors.append({"instruction_id": instruction_id, "error": type(exc).__name__})
+    # The legacy repeat_prompt scorer parameter is not rendered by the canonical
+    # build_description template. The public IFEval corpus nevertheless exposes
+    # the request as the complementary leading/trailing block around a repeat
+    # meta-instruction. Detect that structure without instruction_id_list/kwargs,
+    # cross-check it against the pinned public-corpus recovery, and promote the
+    # family to parameter-complete only when both routes agree.
+    repeat_recovery = detect_and_recover_legacy_repeat_prompt(prompt)
+    repeat_indexes = [
+        i for i, item in enumerate(matches)
+        if item.instruction_id == "combination:repeat_prompt"
+    ]
+    if repeat_recovery.get("status") == "PASS":
+        recovered = Constraint(
+            instruction_id="combination:repeat_prompt",
+            start=int(repeat_recovery["meta_start"]),
+            end=int(repeat_recovery["meta_end"]),
+            matched_text=str(repeat_recovery["meta_text"]),
+            slots={"prompt_to_repeat": str(repeat_recovery["prompt_to_repeat"])},
+            parameter_complete=True,
+            unresolved_parameters=(),
+        )
+        if len(repeat_indexes) > 1:
+            errors.append({
+                "instruction_id": "combination:repeat_prompt",
+                "error": "MULTIPLE_CANONICAL_REPEAT_PROMPT_MATCHES",
+            })
+        elif len(repeat_indexes) == 1:
+            matches[repeat_indexes[0]] = recovered
+        else:
+            matches.append(recovered)
+    elif repeat_recovery.get("status") == "FAIL_CLOSED":
+        errors.append({
+            "instruction_id": "combination:repeat_prompt",
+            "error": str(repeat_recovery.get("reason") or "REPEAT_PROMPT_RECOVERY_FAILED"),
+        })
+
     matches.sort(key=lambda x: (x.start, x.end, x.instruction_id))
 
     # Duplicate instances of the same public instruction family are forbidden by
@@ -241,6 +281,8 @@ def source_surface() -> dict[str, Any]:
         "fully_visible_parameter_type_count": sum(1 for _, _, u in _SPECS.values() if not u),
         "parameter_incomplete_type_count": sum(1 for _, _, u in _SPECS.values() if u),
         "parameter_incomplete_types": sorted(k for k, (_, _, u) in _SPECS.items() if u),
+        "structural_prompt_recovery_types": ["combination:repeat_prompt"],
+        "runtime_parameter_complete_type_upper_bound": LEGACY_REGISTERED_TYPE_COUNT,
         "terminal_data_used": False,
     }
 
