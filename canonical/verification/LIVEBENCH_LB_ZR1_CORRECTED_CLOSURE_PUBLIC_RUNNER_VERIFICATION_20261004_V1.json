@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LB_ZR1_CORRECTED_CLOSURE_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "VERIFIED__CORRECTED_LB_ZR_1_ZERO_CASE_INFERENCE_CLOSURE",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "falsification": {
+    "prior_hypothesis": "MISSING_EXACT_GOAL_COMPILER_HELPER_ONLY",
+    "prior_helper_git_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "result": "FALSIFIED_BY_STATIC_RUNTIME_TRACE",
+    "reason": "The prior exact compiler has no deterministic compilation path for the unchanged synthetic exact-literal response request; packaging the helper alone cannot produce the required answer."
+  },
+  "corrected_architecture": {
+    "primitive": "DETERMINISTIC_EXACT_LITERAL_RESPONSE",
+    "canonical_path": "canonical/runtime/goal_compiler.py",
+    "exact_git_blob_sha": "c895df9898bc97e4017f9e42bf6b27357ab1f315",
+    "brain_pull_request": 1831,
+    "brain_merge_commit": "70416f7157d8f38a7e603abc18f0786254df0ff0",
+    "controller_action_count": 1,
+    "controller_action_type": "finish",
+    "model_required": false,
+    "external_tool_required": false
+  },
+  "independent_public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1998,
+    "merge_commit": "2fa582f3d8027878fabc653a12f3cb0e2f17efc3",
+    "workflow_run_id": 37200697971,
+    "workflow_job_id": 111431607495,
+    "diagnostic_git_blob_sha": "c3b4c89a8d07aa72a06dac0a1aa25e19335d3563",
+    "verified_compiler_git_blob_sha": "c895df9898bc97e4017f9e42bf6b27357ab1f315",
+    "synthetic_request": "Reply with exactly SYNTHETIC_OK.",
+    "status": "PASS",
+    "adapter_status": "PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE",
+    "answer": "SYNTHETIC_OK",
+    "answer_exact": true,
+    "cognition_dependency_class": "MODEL_INDEPENDENT",
+    "model_dependency_count": 0,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "paid_external_model_or_api_used": false
+  },
+  "canonical_post_merge_observation": {
+    "compiler_git_blob_sha": "c895df9898bc97e4017f9e42bf6b27357ab1f315",
+    "exact_verified_compiler_live": true
+  },
+  "semantic_effect": [
+    "THE_ONE_FILE_PACKAGING_HYPOTHESIS_IS_REJECTED",
+    "THE_CORRECTED_MODEL_INDEPENDENT_EXACT_LITERAL_INFERENCE_PATH_IS_PUBLICLY_VERIFIED",
+    "THE_VERIFIED_COMPILER_BYTES_ARE_LIVE_IN_CANONICAL_BRAIN",
+    "ZERO_TERMINAL_CASES_WERE_CONSUMED",
+    "NO_PAID_MODEL_OR_API_WAS_USED",
+    "PROCEED_TO_THE_NEXT_ORDERED_ZERO_CASE_BLOCKER_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_TERMINAL_CASE_REVEAL",
+    "NO_LIVEBENCH_SCORE",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_GOAL_COMPLETION_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "next_ordered_blocker": "LB-ZR-2__ATOMIC_CREATE_AS_OWNERSHIP_PROOF"
+}
