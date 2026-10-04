@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V1",
+  "action_id": "ROOT2-FRONTIER-V5-CURRENT-MAIN-TRUTH-REPAIR-20261004",
+  "status": "CURRENT_BASE_TRUTH_RECONCILIATION__ZERO_CREDIT",
+  "canonical_generation": "6405c322026a21896c3fcbc2cb88e0244773145c",
+  "canonical_base_commit": "6405c322026a21896c3fcbc2cb88e0244773145c",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "ZERO_REALITY_FRONTIER_SUPERSESSION",
+  "blocker_lease_key": "6405c322026a21896c3fcbc2cb88e0244773145c::ROOT2::V4_CIRCLECI_CONTRADICTION_AND_FINANCE_AGENT_ROUTE",
+  "expected_parent_frontier_change": "SUPERSEDE_CURRENT_MAIN_V4__DELETE_CIRCLECI_FREE_XLARGE_ROUTE__BIND_VALS_FINANCE_AGENT_PUBLIC_RUNNER_ROUTE__PRESERVE_ALL_ACCEPTANCE_COUNTS",
+  "selected_route": "REUSE_INDEPENDENT_COMPONENT_VERIFICATION__COMPILE_V5__INDEPENDENTLY_VERIFY_V5_PROJECTION",
+  "rejected_material_alternatives": [
+    "MUTATE_OR_DELETE_HISTORICAL_V4",
+    "KEEP_CIRCLECI_XLARGE_FREE_ROUTE",
+    "TREAT_FINANCE_AGENT_V2_AS_OWNER_ONLY_WAIT",
+    "RUN_FRESH_TERMINAL_CASES"
+  ],
+  "uncertainties": [
+    "BUILDKITE_ACCOUNT_RUNTIME_PREFLIGHT",
+    "VALS_PLATFORM_APPROVAL_AND_SUITE_ID",
+    "OTHER_ACCOUNT_SCOPED_ZERO_REALITY_FACTS"
+  ],
+  "assumptions": [],
+  "non_goals": [
+    "NO_ACCEPTANCE_PROMOTION",
+    "NO_FRESH_REALITY",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "recursive_obs": {
+    "goal": "REMOVE_FALSE_OR_OVERCOARSE_ROOT2_ROUTES_FROM_CURRENT_SCHEDULING_FRONTIER",
+    "capability": "REUSE_EXISTING_ROOT2_CONTROLLER_AND_VERIFIED_COMPONENT_RECEIPTS",
+    "blocker": "CURRENT_MAIN_V4_RETAINS_CIRCLECI_FREE_XLARGE_AND_VALS_OWNER_ONLY_WAIT",
+    "solution": "SUPERSEDE_WITH_V5__DELETE_CONTRADICTED_ROUTE__NARROW_VALS_ROUTE",
+    "verification": "VERIFY_EXACT_V5_BYTES_AND_CURRENT_MAIN_PARENT_BINDING_IN_INDEPENDENT_RUNNER",
+    "inherited_system": "PRESERVE_V4_HISTORY_AND_ALL_UNAFFECTED_PROOFS",
+    "obs": "STOP_ONCE_V5_PROJECTION_IS_VERIFIED_AND_BOUND"
+  },
+  "reasoning_durability": {
+    "real_objective": "MINIMUM_WALL_CLOCK_TO_VERIFIED_TERMINAL_GOAL",
+    "governing_invariants": [
+      "TRUTH_FIRST",
+      "ZERO_INCREMENTAL_SPEND",
+      "NO_DUPLICATE_EXECUTION",
+      "NO_FRESH_REALITY_BEFORE_ZERO_REALITY_FIXED_POINT"
+    ],
+    "material_premises": [
+      "CURRENT_MAIN_V4_BLOB_8c90a1dc4903f9b895788ff2864822d6ebc26ac9",
+      "CIRCLECI_COMPONENT_BLOB_0c5d16da02e7a71c5583f7c1a743adf389fc47b1_INDEPENDENTLY_VERIFIED",
+      "VALS_COMPONENT_BLOB_126ff389982aab89f810388b1adbe402c25a7a59_INDEPENDENTLY_VERIFIED"
+    ],
+    "evidence_refs": [
+      "moxnixmdj/verification-capsule-runner#1566",
+      "workflow:37168128393",
+      "job:111335299373"
+    ],
+    "conclusion": "V5_SHOULD_SUPERSEDE_V4_WITHOUT_ACCEPTANCE_DELTA",
+    "selected_route": "CURRENT_MAIN_SUPERSESSION",
+    "rejected_material_alternatives": [
+      "DUPLICATE_GENERIC_SEARCH",
+      "FRESH_SCORE_EXECUTION"
+    ],
+    "uncertainties": [
+      "ACCOUNT_SCOPED_FACTS_REMAIN"
+    ],
+    "assumptions": [],
+    "non_goals": [
+      "TERMINAL_CREDIT_FROM_ROUTE_REPAIR"
+    ],
+    "next_action": "COMPILE_AND_VERIFY_V5",
+    "supersession_conditions": [
+      "NEW_PRIMARY_SOURCE_OR_CANONICAL_STATE_DRIFT"
+    ],
+    "supersedes": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V4.json"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
