@@ -10,7 +10,8 @@ from canonical.runtime.sub100mb_learned_state_guard_v1 import (
     audit,
 )
 
-SHA = "a" * 64
+SHA256 = "a" * 64
+GIT_SHA = "b" * 40
 
 
 def base() -> dict:
@@ -23,7 +24,13 @@ def base() -> dict:
                 "id": "kernel",
                 "path": "artifacts/kernel.bin",
                 "bytes": 80_000_000,
-                "sha256": SHA,
+                "sha256": SHA256,
+                "byte_count_verified": True,
+                "independent": True,
+                "verification_receipt": {
+                    "path": "canonical/verification/kernel-byte-count.json",
+                    "git_blob_sha": GIT_SHA,
+                },
             }
         ],
         "runtime_dependencies": [
@@ -61,6 +68,7 @@ class Sub100MBLearnedStateGuardTests(unittest.TestCase):
         self.assertTrue(out["pass"], out)
         self.assertEqual(out["status"], "H100_CLOSED")
         self.assertEqual(out["learned_bytes_total"], 80_000_000)
+        self.assertEqual(len(out["learned_artifact_verification_receipts"]), 1)
 
     def test_exact_100mb_is_allowed(self):
         d = base()
@@ -76,6 +84,26 @@ class Sub100MBLearnedStateGuardTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(out["status"], "CANDIDATE_REJECTED")
         self.assertFalse(out["budget_pass"])
+
+    def test_unverified_byte_count_fails_closed(self):
+        d = base()
+        d["learned_artifacts"][0]["byte_count_verified"] = False
+        out = audit(d)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn(
+            "LEARNED_ARTIFACT_BYTE_COUNT_NOT_INDEPENDENTLY_VERIFIED:kernel",
+            out["errors"],
+        )
+
+    def test_non_content_addressed_size_receipt_fails_closed(self):
+        d = base()
+        d["learned_artifacts"][0]["verification_receipt"]["git_blob_sha"] = "bad"
+        out = audit(d)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn(
+            "LEARNED_ARTIFACT_VERIFICATION_RECEIPT_INVALID:kernel",
+            out["errors"],
+        )
 
     def test_external_frontier_model_dependency_is_forbidden(self):
         d = base()
