@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUNKT_CONTEXT_CLOSURE_PRECOMMIT_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__PUNKT_CONTEXT_CLOSURE_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "purpose": "DISCHARGE_THE_ONLY_ENVIRONMENT_SENSITIVE_REMAINDER_OF_POST_SACRIFICE_ACTIVE15_UNIVERSAL_CONSTRUCTION_WITHOUT_TERMINAL_ROWS_OR_RAW_SLOT_CARTESIAN_ENUMERATION",
+  "exact_subject_blobs": {
+    "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
+    "canonical/runtime/livebench_legacy15_contract_composer_v2.py": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+    "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py": "71e637c70edf1c582e28ea38b3b798965c803a06",
+    "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+    "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py": "5803c31e3972c6d40415f319e808c48420bc0388",
+    "canonical/runtime/livebench_legacy15_numeric_quotient_v1.py": "72189bb8adb12ad36a52ee666a1f79fbb201b06b",
+    "canonical/runtime/livebench_pointwise_minimum_cut_v1.py": "0d4e563b618f8fd7f37396a88738cefb50979ff3",
+    "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py": "a9ab9064b447ed669d2404a7a65f6c429c51ae85"
+  },
+  "pinned_public_runtime": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "evaluation_main_blob": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+    "python_major_minor": "3.12",
+    "nltk_version": "3.10.3",
+    "nltk_wheel_sha256": "ff9598a8e20518ee0d557745890cc4435b9578489e2dcbc69c4f81fa060caf7c",
+    "nltk_data_commit": "550b6625bcef1f2abff2ff770a5a0d272c9c6b2a",
+    "punkt_zip_git_blob": "da7ffbd1e6fd6cc5c2f6879c2d4da23c7691944c",
+    "punkt_tab_zip_git_blob": "5e5ff6137d5ee6025e400d1c3a7b21914c48b635"
+  },
+  "quotient": {
+    "sentence_classes": {
+      "less_than_one": "PROVED_UNSAT_AND_SACRIFICED_UPSTREAM",
+      "less_than_2_to_20": "ONE_SHARED_CONSTRUCTION_CLASS__PROVE_PINNED_PUNKT_COUNT_LT_2",
+      "at_least_1_to_20": "TWENTY_EXACT_LOWER_BOUND_CLASSES__PROVE_PINNED_PUNKT_COUNT_GE_THRESHOLD"
+    },
+    "word_thresholds": "100_TO_500_FACTOR_THROUGH_NO_PADDING_VS_PUNCTUATION_FREE_PADDING__PADDING_CANNOT_INTRODUCE_SENTENCE_TERMINATORS",
+    "punkt_relevant_wrappers": [
+      "POSTSCRIPT_NONE_OR_P.S._NEUTRALIZED_AS_P.S.+_OR_P.P.S",
+      "END_NONE_OR_ANY_OTHER_QUESTIONS_OR_IS_THERE_ANYTHING_ELSE_I_CAN_HELP_WITH",
+      "QUOTATION_PRESENT_OR_ABSENT",
+      "PUNCTUATION_FREE_TOKEN_MAY_FOLLOW_LAST_EXPLICIT_PERIOD_OR_NOT"
+    ],
+    "punctuation_neutral_families": [
+      "keywords:existence",
+      "keywords:forbidden_words",
+      "detectable_format:title",
+      "detectable_format:number_bullet_lists",
+      "detectable_format:multiple_sections",
+      "length_constraints:nth_paragraph_first_word",
+      "length_constraints:number_words"
+    ]
+  },
+  "independent_pass_gate": [
+    "VERIFY_EXACT_PINNED_LIVEBENCH_SOURCE_BLOBS",
+    "VERIFY_EXACT_NLTK_3_10_3_AND_PINNED_PUNKT_DATA",
+    "EXHAUST_THE_DECLARED_PUNKT_CONTEXT_QUOTIENT",
+    "FOR_EVERY_LESS_THAN_2_CONTEXT_PINNED_COUNT_SENTENCES_LT_2",
+    "FOR_EVERY_AT_LEAST_N_CONTEXT_PINNED_COUNT_SENTENCES_GE_N_FOR_N_1_TO_20",
+    "ZERO_TERMINAL_ROWS_KWARGS_FREQUENCIES_COMPARATOR_RESPONSES_OR_TARGET_SCORES",
+    "FAIL_CLOSED_ON_ANY_SUBJECT_OR_RUNTIME_DRIFT"
+  ],
+  "promotion_rule": "A_PASS_DISCHARGES_ONLY_THE_POST_SACRIFICE_PUNKT_CONSTRUCTION_REMAINDER__LIVEBENCH_ACCEPTANCE_STILL_REQUIRES_BINDING_THIS_WITH_THE_POINTWISE_MINCUT_VISIBLE_PROMPT_COMPILER_AND_CLEAN_SCOPE_EQUIVALENCE__NO_AUTOMATIC_PREDICATE_CREDIT",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
