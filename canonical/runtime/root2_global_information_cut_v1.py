@@ -83,6 +83,14 @@ def _cost(action_ids: frozenset[str], by_id: dict[str, Action]) -> tuple[float, 
     return (wall, count, reality, tuple(sorted(closure)))
 
 
+def _effective_closes(aid: str, by_id: dict[str, Action]) -> frozenset[str]:
+    closure = _dependency_closure(frozenset({aid}), by_id)
+    out = set()
+    for x in closure:
+        out.update(by_id[x].closes)
+    return frozenset(out)
+
+
 def solve(predicates: Iterable[str], actions: Iterable[Action]) -> dict:
     preds = tuple(dict.fromkeys(str(x).strip() for x in predicates if str(x).strip()))
     action_list = list(actions)
@@ -90,58 +98,98 @@ def solve(predicates: Iterable[str], actions: Iterable[Action]) -> dict:
         raise CutError("PREDICATES_REQUIRED")
     if not action_list:
         raise CutError("ACTIONS_REQUIRED")
+
     index = {p: i for i, p in enumerate(preds)}
     full = (1 << len(preds)) - 1
     by_id = {a.action_id: a for a in action_list}
     if len(by_id) != len(action_list):
         raise CutError("DUPLICATE_ACTION_ID")
 
-    # Validate the full dependency graph before optimizing any subset.
+    # Validate the entire dependency graph first.
     for action in action_list:
         _dependency_closure(frozenset({action.action_id}), by_id)
         _critical_path_s(action.action_id, by_id, {}, set())
 
     coverage: dict[str, int] = {}
-    for aid, a in by_id.items():
+    for aid in sorted(by_id):
         mask = 0
-        for p in a.closes:
+        for p in _effective_closes(aid, by_id):
             if p in index:
                 mask |= 1 << index[p]
         coverage[aid] = mask
 
-    # Exact set-cover DP over the current <=19 predicate Root2 surface.
-    # State stores selected root actions; dependency expansion happens in _cost.
-    best: dict[int, frozenset[str]] = {0: frozenset()}
-    for aid in sorted(by_id):
-        bit = coverage[aid]
-        if bit == 0:
-            continue
-        snapshot = list(best.items())
-        for mask, selected in snapshot:
-            new_mask = mask | bit
-            candidate = frozenset(set(selected) | {aid})
-            incumbent = best.get(new_mask)
-            if incumbent is None or _cost(candidate, by_id) < _cost(incumbent, by_id):
-                best[new_mask] = candidate
+    reachable = 0
+    for mask in coverage.values():
+        reachable |= mask
+    target = reachable & full
+    impossible_mask = full & ~target
 
-    selected = best.get(full)
-    if selected is None:
-        covered_mask = max(
-            best,
-            key=lambda m: (
-                m.bit_count(),
-                -_cost(best[m], by_id)[0],
-                -_cost(best[m], by_id)[1],
-                -_cost(best[m], by_id)[2],
-            ),
-        )
-        selected = best[covered_mask]
+    if target == 0:
+        selected = frozenset()
     else:
-        covered_mask = full
+        candidates_by_bit: dict[int, list[str]] = {}
+        for bit_index in range(len(preds)):
+            bit = 1 << bit_index
+            if not target & bit:
+                continue
+            candidates_by_bit[bit] = [
+                aid for aid, mask in coverage.items() if mask & bit
+            ]
+
+        incumbent_actions: frozenset[str] | None = None
+        incumbent_cost: tuple[float, int, int, tuple[str, ...]] | None = None
+        memo_best_cost: dict[tuple[int, frozenset[str]], tuple[float, int, int, tuple[str, ...]]] = {}
+
+        def search(mask: int, selected_roots: frozenset[str]) -> None:
+            nonlocal incumbent_actions, incumbent_cost
+            current_cost = _cost(selected_roots, by_id)
+            if incumbent_cost is not None and current_cost >= incumbent_cost:
+                return
+
+            closure = _dependency_closure(selected_roots, by_id)
+            key = (mask, closure)
+            prior = memo_best_cost.get(key)
+            if prior is not None and current_cost >= prior:
+                return
+            memo_best_cost[key] = current_cost
+
+            if mask & target == target:
+                incumbent_actions = selected_roots
+                incumbent_cost = current_cost
+                return
+
+            uncovered_bits = [
+                bit for bit in candidates_by_bit
+                if not (mask & bit)
+            ]
+            # Most constrained predicate first minimizes the search tree.
+            bit = min(uncovered_bits, key=lambda b: (len(candidates_by_bit[b]), b))
+            ordered = sorted(
+                candidates_by_bit[bit],
+                key=lambda aid: (
+                    _cost(frozenset(set(selected_roots) | {aid}), by_id),
+                    -((coverage[aid] & ~mask).bit_count()),
+                    aid,
+                ),
+            )
+            for aid in ordered:
+                if aid in selected_roots:
+                    continue
+                new_roots = frozenset(set(selected_roots) | {aid})
+                search(mask | coverage[aid], new_roots)
+
+        search(0, frozenset())
+        if incumbent_actions is None:
+            raise CutError("EXACT_SEARCH_FAILED")
+        selected = incumbent_actions
 
     closure = _dependency_closure(selected, by_id)
+    covered_mask = 0
+    for aid in selected:
+        covered_mask |= coverage[aid]
     covered = [p for p, i in index.items() if covered_mask & (1 << i)]
     unresolved = [p for p, i in index.items() if not covered_mask & (1 << i)]
+    impossible = [p for p, i in index.items() if impossible_mask & (1 << i)]
     wall, count, reality, _ = _cost(selected, by_id)
 
     return {
@@ -151,6 +199,7 @@ def solve(predicates: Iterable[str], actions: Iterable[Action]) -> dict:
         "unresolved_predicate_count": len(unresolved),
         "covered_predicates": covered,
         "unresolved_predicates": unresolved,
+        "predicates_with_no_declared_closure_action": impossible,
         "selected_root_actions": sorted(selected),
         "selected_with_dependencies": sorted(closure),
         "objective": {
@@ -159,6 +208,7 @@ def solve(predicates: Iterable[str], actions: Iterable[Action]) -> dict:
             "reality_units": reality,
             "lexicographic_order": ["critical_path_wall_clock_s", "action_count", "reality_units"],
         },
+        "optimization": "EXACT_BRANCH_AND_BOUND_OVER_DEPENDENCY_EXPANDED_ACTIONS",
         "hard_nonclaim": "DECLARED_ACTION_DURATIONS_ARE_INPUTS_NOT_EMPIRICALLY_GUARANTEED_RUNTIME",
     }
 
