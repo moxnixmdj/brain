@@ -1,0 +1,46 @@
+name: Verify Unknown-Domain direct candidate V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/UNKNOWN_DOMAIN_DIRECT_ORACLE_FAMILY_FREEZE_V1.json'
+      - 'canonical/governance/UNKNOWN_DOMAIN_DIRECT_CANDIDATE_REQUALIFICATION_V1.json'
+      - 'canonical/runtime/unknown_domain_direct_generator_v1.py'
+      - 'canonical/runtime/unknown_domain_direct_scorer_v1.py'
+      - 'canonical/runtime/unknown_domain_direct_candidate_v1.py'
+      - 'canonical/tests/test_unknown_domain_direct_family_freeze_v1.py'
+      - 'canonical/tests/test_unknown_domain_direct_candidate_v1.py'
+      - '.github/workflows/verify-unknown-domain-direct-v1.yml'
+  push:
+    branches:
+      - research/unknown-domain-direct-oracle-v1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run frozen family and candidate tests
+        run: |
+          python -m unittest             canonical.tests.test_unknown_domain_direct_family_freeze_v1             canonical.tests.test_unknown_domain_direct_candidate_v1 -v
+      - name: Verify exact bound blobs
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          p='canonical/governance/UNKNOWN_DOMAIN_DIRECT_CANDIDATE_REQUALIFICATION_V1.json'
+          d=json.load(open(p))
+          for path,expected in d['exact_bound_components'].items():
+              got=subprocess.check_output(['git','hash-object',path],text=True).strip()
+              assert got==expected,(path,got,expected)
+          assert d['candidate_properties']['persistent_learned_bytes']==0
+          assert d['authority']['fresh_reality'] is False
+          PY
