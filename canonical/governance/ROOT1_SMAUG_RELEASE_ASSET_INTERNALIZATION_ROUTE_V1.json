@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_SMAUG_RELEASE_ASSET_INTERNALIZATION_ROUTE_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_ZERO_SPEND_INTERNALIZATION_ROUTE__NO_CAPABILITY_OR_ACCEPTANCE_CREDIT_UNTIL_BYTES_AND_RECONSTRUCTION_VERIFIED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "learned_state_subject": {
+    "repo_id": "abacusai/Smaug-Mini",
+    "revision": "2750fd9f1e67e004111a53a6d9a39c15fbbd33ef",
+    "base_model": "Qwen/Qwen3.8-27B",
+    "architecture": "Qwen3_5ForConditionalGeneration",
+    "parameter_class": "27B_DENSE",
+    "license": "apache-2.0",
+    "public_livebench_if_mean_percent": 73.9165,
+    "opus55_exact_comparator_mean_percent": 65.73775,
+    "public_margin_pp": 8.17875
+  },
+  "carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "repository_visibility": "public",
+    "repository_control_observed": "ADMIN_PUSH",
+    "release_tag": "project-brain-smaug-mini-2750fd9-v1",
+    "role": "CONTENT_ADDRESSED_LEARNED_STATE_CARRIER",
+    "canonical_authority_remains": "moxnixmdj/brain"
+  },
+  "storage_contract": {
+    "asset_chunk_bytes": 1800000000,
+    "asset_chunk_limit_rule": "EVERY_ASSET_STRICTLY_BELOW_GITHUB_2_GIB_RELEASE_ASSET_LIMIT",
+    "release_asset_count_limit": 1000,
+    "expected_full_precision_repository_size_gb_approx": 55.6,
+    "expected_chunk_order_of_magnitude": "ABOUT_31_WEIGHT_SIZED_CHUNKS_PLUS_SMALL_METADATA_ASSETS",
+    "no_git_history_weight_blobs": true,
+    "manifest_required": true,
+    "content_hash": "SHA256",
+    "source_revision_pinned": true,
+    "publish_rule": "RELEASE_STAYS_DRAFT_UNTIL_ALL_SOURCE_FILES_STREAMED_HASHED_UPLOADED_AND_ASSET_SET_VERIFIED"
+  },
+  "producer_verification": [
+    "ENUMERATE_EXACT_PINNED_HUGGINGFACE_REVISION",
+    "STREAM_EACH_SOURCE_FILE_WITH_BOUNDED_LOCAL_DISK",
+    "COMPUTE_WHOLE_FILE_SHA256",
+    "WHEN_HUGGINGFACE_LFS_SHA256_EXISTS_REQUIRE_EXACT_MATCH",
+    "SPLIT_IN_ORDER_INTO_DETERMINISTIC_ASSET_NAMES",
+    "COMPUTE_EACH_ASSET_SHA256_AND_BYTE_COUNT",
+    "UPLOAD_WITH_CLOBBER_SAFE_DETERMINISTIC_NAMES",
+    "UPLOAD_COMPLETE_MANIFEST_ONLY_AFTER_ALL_FILES_SUCCEED",
+    "VERIFY_REMOTE_RELEASE_ASSET_NAME_AND_SIZE_SET_BEFORE_PUBLISH"
+  ],
+  "independent_reconstruction_gate": [
+    "SECOND_FRESH_RUN_READS_PUBLISHED_MANIFEST",
+    "STREAM_RELEASE_ASSETS_IN_MANIFEST_ORDER",
+    "RECOMPUTE_EACH_CHUNK_SHA256",
+    "RECOMPUTE_CONCATENATED_ORIGINAL_FILE_SHA256_WITHOUT_STORING_FULL_CHECKPOINT",
+    "REQUIRE_MATCH_TO_PRODUCER_FILE_SHA256",
+    "REQUIRE_MATCH_TO_PUBLIC_LFS_SHA256_WHERE_AVAILABLE",
+    "FAIL_CLOSED_ON_MISSING_DUPLICATE_SIZE_OR_HASH_MISMATCH"
+  ],
+  "zero_spend_basis": {
+    "github_hosted_standard_runner_repository_class": "PUBLIC",
+    "paid_runner_required": false,
+    "incremental_spend_authorized_usd": 0,
+    "hard_stop": "DO_NOT_USE_LARGER_PAID_RUNNERS_OR_EXTERNAL_PAID_STORAGE"
+  },
+  "capability_boundary": {
+    "public_benchmark_score_is_candidate_selection_evidence_only": true,
+    "storage_completion_is_not_capability_acceptance": true,
+    "quantized_derivatives_inherit_score_credit": false,
+    "exact_stored_inference_form_requires_separate_semantic_qualification": true,
+    "terminal_cases_consumed_by_this_route": 0
+  },
+  "next_gate_after_internalization": "QUALIFY_EXACT_STORED_SMAUG_EXECUTION_FORM_ON_ADMISSIBLE_NONTERMINAL_PARAPHRASE_SIMPLIFY_STORY_GENERATION_AND_SUMMARIZE_EVIDENCE_THEN_COMPOSE_WITH_LEGACY_25_CHECKER_CONSTRAINT_LAYER",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_cases_consumed": 0
+  },
+  "authority": {
+    "internalization_execution": true,
+    "fresh_terminal_reality": false,
+    "terminal_promotion": false,
+    "acceptance_credit": false
+  }
+}
