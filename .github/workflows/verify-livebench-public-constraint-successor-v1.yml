@@ -24,7 +24,7 @@ jobs:
       - name: Install small frozen checker dependencies
         run: |
           python -m pip install --disable-pip-version-check \
-            nltk==3.10.3 emoji==2.16.0 syllapy==0.7.2
+            nltk emoji "syllapy>=0.8.0"
           python -m nltk.downloader -q punkt punkt_tab averaged_perceptron_tagger_eng
       - name: Fetch exact frozen public LiveBench scorer source
         run: |
