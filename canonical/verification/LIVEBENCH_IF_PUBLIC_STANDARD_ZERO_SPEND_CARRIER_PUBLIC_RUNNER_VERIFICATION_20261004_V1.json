@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_PUBLIC_STANDARD_ZERO_SPEND_CARRIER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PUBLIC_STANDARD_RUNNER_ZERO_SPEND__LIVEBENCH_THIN_ADAPTER_8_OF_8__ZERO_CREDIT",
+  "subject": {
+    "governance_path": "canonical/governance/LIVEBENCH_IF_PUBLIC_STANDARD_ZERO_SPEND_CARRIER_BINDING_V1.json",
+    "governance_git_blob_sha": "093ec45bd3889fc3a8edd4f50f41c93a9de2cd10",
+    "runtime_path": "canonical/runtime/livebench_if_public_zero_spend_carrier_v1.py",
+    "runtime_git_blob_sha": "ef658254e1cf285ff882a239e4f57026cf267a6f",
+    "tests_path": "canonical/tests/test_livebench_if_public_zero_spend_carrier_v1.py",
+    "tests_git_blob_sha": "c918454915ad908dcfefad6798edfd4b461edbd0",
+    "thin_adapter_runtime_git_blob_sha": "f0d30b287027e62970849305cac867e891b3af85",
+    "generic_isolation_runtime_git_blob_sha": "58f2ae9c3f0ef0ac55da2e58d0ed81ae88560296"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1709,
+    "verifier_head_sha": "fc42f21da1f34246bfc7a8520f80a82e7a7bbae9",
+    "verifier_merge_commit": "fd226a34fae048237b015910424e8bf2a4c4e64e",
+    "workflow_run_id": 37181928035,
+    "workflow_job_id": 111376061166,
+    "workflow_name": "Verify LiveBench public zero-spend carrier",
+    "conclusion": "success"
+  },
+  "verified": {
+    "verification_repository_visibility": "public",
+    "runner_label": "ubuntu-24.04",
+    "runner_class": "STANDARD_GITHUB_HOSTED",
+    "current_first_party_public_standard_runner_zero_spend_rule": true,
+    "larger_or_paid_runner_forbidden": true,
+    "paid_external_model_or_api_forbidden": true,
+    "zero_incremental_spend_or_entitlement_verified": true,
+    "livebench_thin_adapter_before": "7_OF_8_FAIL_CLOSED",
+    "livebench_thin_adapter_after_binding": "8_OF_8_PASS",
+    "resource_fit_proved": false,
+    "execution_success_proved": false,
+    "generic_isolation_instantiation_proved": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE",
+    "NO_RESOURCE_FIT_OR_END_TO_END_SUCCESS_CLAIM",
+    "NO_GENERIC_ISOLATION_INSTANTIATION_RECEIPT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
