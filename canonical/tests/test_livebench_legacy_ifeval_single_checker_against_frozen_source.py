@@ -47,7 +47,9 @@ class FrozenLegacySingleCheckerWitnessVerification(unittest.TestCase):
         self.assertEqual(set(CASES), inv.LEGACY_IDS)
 
     def test_each_source_rendered_description_inverts_and_witness_passes_exact_checker(self):
-        for instruction_id, kwargs in CASES.items():
+        only_id = os.environ.get("ONLY_ID")
+        cases = CASES.items() if not only_id else [(only_id, CASES[only_id])]
+        for instruction_id, kwargs in cases:
             with self.subTest(instruction_id=instruction_id):
                 cls = instructions_registry.INSTRUCTION_DICT[instruction_id]
                 checker = cls(instruction_id)
