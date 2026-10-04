@@ -1,0 +1,37 @@
+{
+  "schema":"PROJECT_BRAIN_TB4_CIRCLECI_DOCUMENTARY_PREFLIGHT_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date":"2026-10-04",
+  "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOB__ARITHMETIC__FAIL_CLOSED_RESIDUALS__ZERO_CREDIT",
+  "subject":{
+    "path":"canonical/governance/TB4_CIRCLECI_DOCUMENTARY_PREFLIGHT_REDUCTION_20261004_V1.json",
+    "git_blob_sha":"a4fa8277482bfec8127b44682b5de2246e78259a"
+  },
+  "independent_runner":{
+    "repository":"moxnixmdj/verification-capsule-runner",
+    "pull_request":1558,
+    "merge_commit":"58c7b6c38536d67cfb517c8801f920ecb75b3624",
+    "workflow_run_id":37167574685,
+    "workflow_job_id":111333645779,
+    "verified_head_sha":"7defd393e7151f99eaf5a31ca3f44e3cea83dfb3",
+    "conclusion":"success",
+    "load_bearing_output":"PASS__EXACT_BLOB__ARITHMETIC__FAIL_CLOSED_RESIDUALS__ZERO_CREDIT"
+  },
+  "verified":[
+    "EXACT_SUBJECT_BLOB",
+    "NOMINAL_WALL_MINUTE_ARITHMETIC_BOUND",
+    "ZERO_INCREMENTAL_SPEND",
+    "ZERO_TERMINAL_CASES",
+    "ZERO_ACCEPTANCE_CREDIT",
+    "EIGHT_ACCOUNT_RUNTIME_RESIDUALS_PRESERVED",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY"
+  ],
+  "incremental_spend_usd":0,
+  "terminal_cases_consumed":0,
+  "acceptance_credit_delta":0,
+  "family_credit_delta":0,
+  "capability_credit_delta":0,
+  "ownership_credit_delta":0,
+  "fresh_reality_authority":false,
+  "promotion_authority":false
+}
