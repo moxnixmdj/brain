@@ -140,7 +140,7 @@ def _verify_independent_inputs() -> dict[str, Any]:
     if envelope.get("accounting", {}).get("acceptance_credit_delta") != 0:
         raise AssertionError("ENVELOPE_RECEIPT_MUST_NOT_SELF_PROMOTE")
 
-    coverage = envelope.get("exact_counters", {})
+    coverage = envelope.get("exact_result", {})
     if int(coverage.get("total_cases", -1)) != 12489:
         raise AssertionError("POINTWISE_CASE_COUNT_DRIFT")
     if int(coverage.get("pointwise_exact_optimum_match", -1)) != 12489:
