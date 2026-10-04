@@ -134,6 +134,11 @@ def synthesize(*,environment_id:str,goal_id:str,candidates:Sequence[Mapping[str,
         hypotheses=hypotheses,
         coverage_receipt=hypothesis_coverage_receipt,
     )
+    if coverage["closed"]:
+        if hypothesis_coverage_receipt.get("mechanism_class_semantics_bound") is not True:
+            raise ExperimentSynthesisError("MECHANISM_CLASS_SEMANTICS_NOT_BOUND_BY_COVERAGE")
+        if hypothesis_coverage_receipt.get("mechanism_class_sha256")!=_candidate_digest(cs):
+            raise ExperimentSynthesisError("MECHANISM_CLASS_COVERAGE_DIGEST_MISMATCH")
 
     admitted=[];seen=set()
     for raw in probes:
