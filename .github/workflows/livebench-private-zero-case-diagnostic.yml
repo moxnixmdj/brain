@@ -111,29 +111,22 @@ jobs:
           print("LIVEBENCH_PRIVATE_DIAGNOSTIC_BLOCKER="+str(receipt.get("blocker_message") or "NONE"))
           PY
 
-      - name: Persist diagnostic receipt
+      - name: Persist diagnostic receipt to non-authority branch
         shell: bash
         run: |
           set -euo pipefail
+          RECEIPT="canonical/astra_runtime/evidence/LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json"
+          cp "$RECEIPT" /tmp/livebench-private-zero-case-receipt.json
           git config user.name "Project Brain LiveBench Diagnostic"
           git config user.email "project-brain-livebench-diagnostic@users.noreply.github.com"
-          git add canonical/astra_runtime/evidence/LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json
+          git fetch origin livebench-diagnostic-receipts
+          git switch -C livebench-diagnostic-receipts origin/livebench-diagnostic-receipts
+          mkdir -p "$(dirname "$RECEIPT")"
+          cp /tmp/livebench-private-zero-case-receipt.json "$RECEIPT"
+          git add "$RECEIPT"
           if ! git diff --cached --quiet; then
             git commit -m "Persist LiveBench private transitive runtime diagnostic V3"
-            PUSHED=0
-            for attempt in 1 2 3 4 5; do
-              git fetch origin main
-              git rebase origin/main
-              if git push origin HEAD:main; then
-                PUSHED=1
-                break
-              fi
-              sleep $((attempt * 2))
-            done
-            if [ "$PUSHED" -ne 1 ]; then
-              echo "Failed to persist diagnostic receipt after 5 attempts" >&2
-              exit 52
-            fi
+            git push origin HEAD:livebench-diagnostic-receipts
           fi
 
       - name: Enforce diagnostic result
