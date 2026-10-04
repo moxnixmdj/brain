@@ -284,6 +284,29 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
+    },
+    "terminal_causal_depth_collapse": {
+      "activation_path": "canonical/governance/TERMINAL_CAUSAL_DEPTH_COLLAPSE_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "1c4400af63533e236847189b17b11e8dd7f80107",
+      "policy_verification_path": "canonical/verification/TERMINAL_CAUSAL_DEPTH_COLLAPSE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "policy_verification_git_blob_sha": "bf6e682b8c55eab3bfafe424c830657c6ffdbcd9",
+      "projection_verification_path": "canonical/verification/TERMINAL_CAUSAL_DEPTH_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V2.json",
+      "status": "ACTIVE_IFF_EXACT_ROOT_PROJECTION_RECEIPT_EXISTS_AND_PASSES__SCHEDULING_ONLY__ZERO_CREDIT",
+      "authority_source": "READ_EFFECTIVE_ROOT2_FRONTIER_AND_FRESH_REALITY_FLAGS_FROM_THIS_CURRENT_CANONICAL_ROOT_STATE_AT_SCHEDULING_TIME",
+      "effects": [
+        "TYPED_RELATIVE_ELO_ROUTE_PRUNING",
+        "PARALLEL_ZERO_REALITY_EVIDENCE_AND_GENERIC_ISOLATION_PROOF_LANES",
+        "MANDATORY_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA",
+        "MECHANICAL_DOMINANCE_DELETION_WITH_UNKNOWN_PRESERVATION",
+        "ARENA_ACCOUNT_RECEIPT_SWEEP_NARROWING"
+      ],
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false,
+      "acceptance_credit_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
     }
   },
   "accounting": {
