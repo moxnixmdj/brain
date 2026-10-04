@@ -136,7 +136,11 @@ def _apply_word_constraint(
     raise ComposeError("UNKNOWN_WORD_RELATION")
 
 
-def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> list[str]:
+def _common_lines(
+    constraints: list[dict[str, Any]],
+    required: list[str],
+    forbidden: list[str],
+) -> list[str]:
     lines: list[str] = []
     if _one(constraints, "detectable_format:title") is not None:
         lines.append("<<qz>>")
@@ -148,8 +152,12 @@ def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> lis
         n = int(s.get("num_sections"))
         if splitter not in {"Section", "SECTION"} or n < 1 or n > 5:
             raise ComposeError("SECTION_PARAMETER_DRIFT")
+        # Exact SectionChecker permits zero whitespace before the index.
+        # Compact the marker when the splitter itself would be a forbidden
+        # whole word: "Section1" still passes while "\\bsection\\b" does not.
+        compact = _forbidden_collision(splitter, forbidden) is not None
         for i in range(1, n + 1):
-            lines.append(f"{splitter} {i}")
+            lines.append(f"{splitter}{'' if compact else ' '}{i}")
             lines.append("zxqv")
 
     bullets = _one(constraints, "detectable_format:number_bullet_lists")
@@ -242,7 +250,7 @@ def _compose_plain_or_sentence(
             raise ComposeError("LESS_THAN_ONE_SENTENCE_WORD_LOWER_BOUND")
         return ""
 
-    lines = _common_lines(constraints, required)
+    lines = _common_lines(constraints, required, forbidden)
     if not lines:
         lines.append("zxqv")
 
@@ -288,7 +296,7 @@ def _compose_star_paragraph(
     if n < 1 or n > 5:
         raise ComposeError("PARAGRAPH_PARAMETER_DRIFT")
 
-    common = _common_lines(constraints, required)
+    common = _common_lines(constraints, required, forbidden)
     paragraphs = ["zxqv" for _ in range(n)]
     if common:
         paragraphs[0] += "\n" + "\n".join(common)
@@ -335,7 +343,7 @@ def _compose_nth_paragraph(
     paragraphs = ["zxqv" for _ in range(n)]
     paragraphs[nth - 1] = first + " zxqv"
 
-    common = _common_lines(constraints, required)
+    common = _common_lines(constraints, required, forbidden)
     if common:
         paragraphs[-1] += "\n" + "\n".join(common)
 
