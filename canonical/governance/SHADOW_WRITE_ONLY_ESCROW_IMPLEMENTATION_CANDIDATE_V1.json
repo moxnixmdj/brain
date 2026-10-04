@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_WRITE_ONLY_ESCROW_IMPLEMENTATION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_IMPLEMENTATION__LB_ZR_3__INDEPENDENT_SYNTHETIC_VERIFICATION_REQUIRED__ZERO_CASES__ZERO_CREDIT",
+  "objective": "Replace the LiveBench result-nonvisibility contract-only state with an executable fixed-size public-key escrow whose execution-side process cannot decrypt or reveal benchmark results.",
+  "runtime": {
+    "path": "canonical/runtime/shadow_write_only_escrow_v1.py",
+    "transport": "OPENSSL_CMS_PUBLIC_CERTIFICATE_ENCRYPTION",
+    "cipher": "AES_256_CBC_INSIDE_CMS",
+    "plaintext_transport": "STDIN_ONLY",
+    "ciphertext_artifact_name": "LEASE_DIGEST_SHA256.cms",
+    "decrypt_api_in_execution_runtime": false
+  },
+  "leakage_controls": {
+    "body": "NEVER_RETURNED",
+    "score": "NEVER_PARSED_OR_RETURNED",
+    "summary": "NEVER_COMPUTED",
+    "filename": "LEASE_ONLY__RESULT_INDEPENDENT",
+    "plaintext_length": "HIDDEN_BY_FIXED_SIZE_RANDOM_PADDING",
+    "logs": "RAW_OPENSSL_STDERR_SUPPRESSED",
+    "annotations": "NONE",
+    "candidate_mutation": false,
+    "policy_mutation": false,
+    "release": "SEPARATE_POST_FIXED_POINT_AUTHORITY_REQUIRED"
+  },
+  "preexecution_requirement": {
+    "rule": "A_DETERMINISTIC_UPSTREAM_MAX_RESULT_BYTE_BOUND_MUST_BE_BOUND_BEFORE_REVEAL_AND_MUST_FIT_INSIDE_THE_FIXED_ESCROW_ENVELOPE",
+    "reason": "PREVENT_RESULT_LENGTH_FROM_BECOMING_A_RUNTIME_FAILURE_OR_EXIT_CODE_CHANNEL",
+    "actual_result_over_bound": "FAIL_CLOSED__NOT_A_VALID_PRODUCTION_DOMAIN"
+  },
+  "synthetic_independent_verification_required": [
+    "GENERATE_PRIVATE_KEY_AND_PUBLIC_CERTIFICATE_OUTSIDE_THE_ESCROW_WRITER_PROCESS",
+    "PASS_ONLY_PUBLIC_CERTIFICATE_TO_WRITER",
+    "SEAL_TWO_DIFFERENT_SYNTHETIC_RESULTS_WITH_DIFFERENT_PLAINTEXT_LENGTHS_USING_THE_SAME_FIXED_ENVELOPE_SIZE",
+    "REQUIRE_IDENTICAL_CIPHERTEXT_LENGTHS_AND_RESULT_INDEPENDENT_FILENAMES",
+    "REQUIRE_STDOUT_TO_CONTAIN_ONLY_THE_OPAQUE_RECEIPT_AND_STDERR_TO_BE_EMPTY",
+    "REQUIRE_PLAINTEXT_MARKERS_ABSENT_FROM_CIPHERTEXT_RECEIPT_FILENAMES_AND_LOGS",
+    "DECRYPT_ONLY_IN_THE_SEPARATE_VERIFIER_AFTER_WRITER_EXIT_AND_REQUIRE_EXACT_ROUND_TRIP",
+    "REQUIRE_TAMPER_OR_WRONG_KEY_TO_FAIL",
+    "REQUIRE_ZERO_TERMINAL_CASES"
+  ],
+  "relationship_to_ordered_blockers": {
+    "LB_ZR_1": "INDEPENDENTLY_VERIFIED_CLOSED",
+    "LB_ZR_2": "INDEPENDENTLY_VERIFIED_CLOSED",
+    "LB_ZR_3": "THIS_CANDIDATE",
+    "production_shadow_execution": "STILL_BLOCKED"
+  },
+  "hard_nonclaims": [
+    "NO_PRODUCTION_ESCROW_KEY_OR_CERTIFICATE_IS_CREATED",
+    "NO_TERMINAL_CASE_CONTENT_IS_READ",
+    "NO_RESULT_NONVISIBILITY_CLOSURE_UNTIL_INDEPENDENT_SYNTHETIC_EXECUTION_PASSES",
+    "NO_CASE_REVEAL_SHADOW_COLLECTION_FRESH_REALITY_EXECUTION_PROMOTION_OR_ACCEPTANCE_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
