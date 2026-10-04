@@ -1,0 +1,27 @@
+name: Run retrieval V20 fresh holdout
+on:
+  push:
+    branches:
+      - v20-holdout-executor
+permissions:
+  contents: read
+jobs:
+  holdout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: PYTHONPATH=. python canonical/tests/test_retrieval_fresh_holdout_v20.py
+      - run: PYTHONPATH=. python canonical/runtime/retrieval_fresh_holdout_v20.py > retrieval_v20_holdout.json
+      - run: python - <<'PY'
+          import json
+          x=json.load(open("retrieval_v20_holdout.json"))
+          print(json.dumps({k:x[k] for k in ["task_count","successful_task_count","target_hit_count","target_miss_count","raw_top20_recall","miss_case_ids","failed_case_ids"]},indent=2))
+          assert x["successful_task_count"]>0
+        PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: retrieval-v20-holdout
+          path: retrieval_v20_holdout.json
