@@ -1,3 +1,5 @@
+import re
+
 from canonical.runtime import livebench_legacy15_slot_feasibility_v1 as f
 
 
@@ -11,7 +13,7 @@ def test_id_compatibility_is_not_slot_satisfiability():
     assert out["acceptance_credit"] is False
 
 
-def test_required_keyword_forbidden_collision_is_certified():
+def test_required_keyword_forbidden_overlap_is_not_false_unsat():
     contracts = [
         {
             "instruction_id": f.EXISTENCE,
@@ -23,10 +25,14 @@ def test_required_keyword_forbidden_collision_is_certified():
         },
     ]
     out = f.classify_visible_contracts(contracts)
-    assert out["status"] == "PROVED_UNSAT"
-    assert out["hard_unsat_reasons"] == [
-        "REQUIRED_KEYWORD_IS_FORBIDDEN_WORD:harbor"
-    ]
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
+
+    # Exact checker asymmetry: existence is raw regex substring search while
+    # forbidden wraps the generated alphabetic word in word boundaries.
+    carrier = "harbor0"
+    assert re.search("harbor", carrier, flags=re.IGNORECASE)
+    assert re.search(r"\bharbor\b", carrier, flags=re.IGNORECASE) is None
 
 
 def test_required_and_forbidden_disjoint_stays_unknown():
