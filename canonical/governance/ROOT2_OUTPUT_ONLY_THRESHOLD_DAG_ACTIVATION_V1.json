@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SCHEDULING_ONLY_OUTPUT_CERTIFICATE_ACTIVATION__ROOT2_V13_POINTER_TRUTH_REPAIR__ZERO_CREDIT__INDEPENDENT_PROJECTION_VERIFICATION_REQUIRED",
+  "objective": "Make the independently verified output-only threshold proof DAG a mandatory Root2 scheduling prepass and reconcile the stale Root2 control-plane pointer from V12/V10 language to the already independently verified V13 frontier, without granting fresh reality, execution, promotion, or acceptance credit.",
+  "subject": {
+    "manifest_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1.json",
+    "manifest_git_blob_sha": "1fba51d15bcfdf6accd90948155517f7c9b98bbb",
+    "runtime_path": "canonical/runtime/threshold_proof_dag_v1.py",
+    "runtime_git_blob_sha": "7a0c715d931dbba05bc9e5ae344e1ead787ea5b8",
+    "verification_path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "553602570334f39003708e52d781b8c59f27eb7c"
+  },
+  "root2_pointer_truth_repair": {
+    "from": {
+      "root_state_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
+      "root_state_frontier_git_blob_sha": "75ca9127a73ca2dd52a49f2f09e2e0ccc384129a",
+      "current_authority_next_language": "ROOT2_V10"
+    },
+    "to": {
+      "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V13.json",
+      "frontier_git_blob_sha": "bb631b80eea5a183728fb27e2aff99bbe63f1757",
+      "verification_path": "canonical/verification/ROOT2_FRONTIER_V13_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "dd810106cf30f101453da07e2ef37cb81d7faddd",
+      "activation_path": "canonical/governance/ROOT2_FRONTIER_V13_FINAL_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "08c84d8f0a46ff0f13943388306195fea79ca6d7"
+    },
+    "nonclaim": "DO_NOT_PROMOTE_ROOT2_V14_V15_V16_OR_V17_FROM_THIS_ACTIVATION"
+  },
+  "control_plane_preimages": {
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "e353d54f4608d25b7f0ea06fba5d8fbf2ddfbb59"
+    },
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "59632d81b723c4840ed599005490e28341e81054"
+    }
+  },
+  "scheduling_semantics": [
+    "FOR_EACH_ROOT2_TOUCHING_PREDICATE_COMPILE_CURRENT_CONTENT_ADDRESSED_EVIDENCE_INTO_THE_EXACT_OUTPUT_ALGEBRA_BEFORE_ANY_NEW_EMPIRICAL_ROUTE",
+    "IF_VERIFIED_LOWER_BOUND_FORCES_PASS_STOP_THE_BENCHMARK_ROUTE",
+    "IF_VERIFIED_UPPER_BOUND_FORCES_FAIL_STOP_THE_BENCHMARK_ROUTE_AND_RETURN_FAIL_CLOSED",
+    "IF_OPEN_EXECUTE_ONLY_THE_DEPENDENCY_CLOSED_NONOVERLAPPING_MINIMUM_ZERO_REALITY_CERTIFICATE_CUT",
+    "RELATIVE_RATING_TARGETS_REQUIRE_OWNER_SCORE_RECEIPT_OR_VERIFIED_RELATIVE_SCORE_BRIDGE",
+    "MATCHED_NONINFERIORITY_REQUIRES_BRAIN_LOWER_BOUND_GE_COMPARATOR_UPPER_BOUND_AND_PRESERVES_ANY_ROOT3_SCOPE_PRECONDITIONS",
+    "FULL_BENCHMARK_EXECUTION_IS_LAST_RESORT_ONLY_AFTER_ZERO_REALITY_FIXED_POINT_AND_SEPARATE_FRESH_REALITY_AUTHORITY"
+  ],
+  "effects": {
+    "root2_current_frontier": "V13",
+    "threshold_dag_scheduling_overlay_active_if_projection_verified": true,
+    "root2_touching_predicates": 19,
+    "fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "acceptance_counts_unchanged": true
+  },
+  "accounting": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_rules": [
+    "NO_ROOT2_FRONTIER_NEWER_THAN_V13_ACTIVATED_BY_THIS_TRANSACTION",
+    "NO_ACCEPTANCE_CREDIT_FROM_SCHEDULING_OR_THRESHOLD_COMPILATION",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_FULL_BENCHMARK_WHEN_A_SOUND_THRESHOLD_CERTIFICATE_ALREADY_SETTLES_THE_TARGET",
+    "NO_RELATIVE_SCORE_TRANSPORT_FROM_ABSOLUTE_PROOF_WITHOUT_VERIFIED_BRIDGE",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_projection_verification_required": true
+}
