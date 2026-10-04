@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_AUTHORITY_RECONCILIATION_20261005_V2",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__STALE_RAW_LEASE_RETIRED_BEFORE_ATOMIC_CLAIM__REPAIRED_TRANSITIVE_CLOSURE_CANDIDATE_IS_SOLE_LIVE_FRONTIER__INDEPENDENT_EXACT_BYTE_VERIFICATION_PENDING",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "supersedes": [
+    "canonical/governance/UNKNOWN_DOMAIN_PRODUCTION_PRECLAIM_IMPORT_FAILURE_20261005_V1.json",
+    "canonical/governance/UNKNOWN_DOMAIN_VERIFIER_MAIN_DIVERGENCE_QUARANTINE_20261005_V1.json"
+  ],
+  "breakthrough": {
+    "problem": "The preserved raw lease 76e8040d... did not content-address Generator V1 even though Generator V2 imports it. Brain subsequently proved that Generator V1 is load-bearing. Preserving the old lease merely because a retry had been armed would therefore preserve a known-invalid execution identity.",
+    "deduction": "One-use uniqueness constrains successful atomic claims over valid frozen execution tuples. The stale lease never created its atomic claim and consumed zero production cases, so it can and must be retired when a preclaim correctness defect is discovered.",
+    "consequence": "The old launch and claim key lose production authority. The repaired lease that binds the corrected module entrypoint and complete local runtime dependency closure is the only admissible successor candidate, but it receives no execution or acceptance authority until a separate exact-byte public-runner verification passes."
+  },
+  "retired_attempt": {
+    "execution_lease_sha256": "76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "execution_lease_git_blob_sha": "26f98012ecf01c6a3f20e855bdebf60cf70d1c1f",
+    "launch_ref": "refs/heads/unknown-domain-direct-launch/76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "claim_ref": "refs/heads/unknown-domain-direct-claims/76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "runner_quarantine_commit": "ef5aa2d630dad4d5739a26a954ce0b515017be6c",
+    "atomic_claim_created": false,
+    "production_cases_consumed": 0,
+    "retirement_reason": "KNOWN_TRANSITIVE_DEPENDENCY_OMISSION__GENERATOR_V1_NOT_BOUND_IN_OLD_LEASE"
+  },
+  "sole_live_candidate": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "observed_main_commit": "ef5aa2d630dad4d5739a26a954ce0b515017be6c",
+    "execution_lease_path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EXECUTION_LEASE_V1.json",
+    "execution_lease_git_blob_sha": "049997c1d8ebdb4c07017a2864055109f7238876",
+    "repaired_workflow_git_blob_sha": "a4315a0ee28ae82145594b7a9abbd00bae61ceb9",
+    "generator_v1_git_blob_sha": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "verification_pull_request": 2053,
+    "verification_head_sha": "8f33a47217e9036251b175c16b89f74c5f2743ee",
+    "verification_state_at_record": "PENDING",
+    "production_authority": false,
+    "acceptance_credit": false
+  },
+  "precommitted_reduction_rule": {
+    "old_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCTION_PRECOMMIT_V1.json",
+    "old_reduction_transferable_to_repaired_candidate": false,
+    "reason": "THE_OLD_REDUCTION_IS_CONTENT_AND_CLAIM_KEY_BOUND_TO_THE_RETIRED_76e8040d_LEASE",
+    "required_before_any_successor_launch": "FREEZE_A_NEW_OUTCOME_BLIND_REDUCTION_BOUND_TO_THE_EXACT_VERIFIED_REPAIRED_LEASE_SHA256_AND_NEW_ATOMIC_CLAIM_REF"
+  },
+  "next_gate": [
+    "PUBLIC_RUNNER_PASS_FOR_PR_2053_EXACT_REPAIRED_CANDIDATE_BYTES_AND_TRANSITIVE_CLOSURE",
+    "RECORD_VERIFIED_RAW_LEASE_SHA256_AND_RUN_JOB_IDS",
+    "FREEZE_NEW_OUTCOME_BLIND_PRODUCTION_REDUCTION_FOR_THAT_EXACT_DIGEST",
+    "ONLY_THEN_CREATE_ONE_NEW_LAUNCH_REF_AND_ALLOW_ONE_ATOMIC_CLAIM_ATTEMPT"
+  ],
+  "hard_rules": [
+    "NO_EXECUTION_FROM_RETIRED_76e8040d_LEASE",
+    "NO_CREDIT_FROM_QUARANTINED_RETRY",
+    "NO_REUSE_OF_OLD_REDUCTION_PRECOMMIT_FOR_NEW_DIGEST",
+    "NO_SUCCESSOR_LAUNCH_BEFORE_EXACT_BYTE_PUBLIC_RUNNER_PASS_AND_NEW_REDUCTION_FREEZE",
+    "ONLY_ATOMIC_CLAIM_HTTP_201_MAY_LINEARIZE_THE_REPAIRED_EXECUTION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "ownership_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
