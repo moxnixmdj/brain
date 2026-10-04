@@ -136,7 +136,10 @@ def evaluate(records: dict[str, dict[str, str]]) -> dict[str, Any]:
 
         composed = composer.transform(seed, overlay)
         composed_text = str(composed.get("response") or "")
-        brain_sem = semantic_case_check(case, composed_text) if composed.get("status") == "PASS" else {
+        # Semantic truth is evaluated on the original seed nucleus. The composer
+        # is separately required to preserve that seed byte-for-byte. Structural
+        # punctuation wrappers must never perturb semantic scoring.
+        brain_sem = seed_sem if composed.get("status") == "PASS" else {
             "pass": False,
             "errors": ["COMPOSER_FAIL_CLOSED"],
         }
