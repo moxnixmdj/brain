@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_NUMERIC_DOMINANCE_QUOTIENT_BREAKTHROUGH_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__PUBLIC_NUMERIC_DOMAIN_DOMINANCE_QUOTIENT__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source_binding": {
+    "pinned_checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "historical_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "current_candidate_generator_path": "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py",
+    "current_candidate_generator_git_blob_sha": "b6ace46a0887321c4c8c8354d88169be1fdbf582",
+    "numeric_quotient_runtime_path": "canonical/runtime/livebench_legacy15_numeric_dominance_quotient_v1.py",
+    "numeric_quotient_tests_path": "canonical/tests/test_livebench_legacy15_numeric_dominance_quotient_v1.py"
+  },
+  "breakthrough": {
+    "word_domain": "802_RAW_SETTINGS_TO_2_EXTREMAL_PASS_CLOSES_WEAKER_VALUES_CLASSES",
+    "sentence_domain": "40_RAW_SETTINGS_TO_3_ADAPTIVE_DOMINANCE_CLASSES",
+    "sections_domain": "10_RAW_SETTINGS_TO_2_STRONGEST_COUNT_CASE_PRESERVING_REPRESENTATIVES",
+    "structural_word_budget": "CONSERVATIVE_OVER_COMPOSED_MAXIMUM_UNAVOIDABLE_WORD_TOKENS_37__HISTORICAL_WORD_UPPER_BOUND_MINIMUM_100__MARGIN_63",
+    "scalar_state_sum": "881_TO_36",
+    "nonreachable_cartesian_envelope": "481200000_TO_18000__26733_AND_ONE_THIRD_FOLD_SCHEDULING_ENVELOPE_REDUCTION__DIAGNOSTIC_ONLY"
+  },
+  "proof_rules": [
+    "NUMBER_WORDS_LT_100_IS_THE_HARDEST_HISTORICAL_LESS_THAN_THRESHOLD__A_PASSING_LT_100_WITNESS_PASSES_EVERY_LT_N_FOR_100_TO_500",
+    "NUMBER_WORDS_GE_500_IS_THE_HARDEST_HISTORICAL_AT_LEAST_THRESHOLD__A_PASSING_GE_500_WITNESS_PASSES_EVERY_GE_N_FOR_100_TO_500",
+    "SENTENCES_GE_20_IS_THE_HARDEST_HISTORICAL_AT_LEAST_THRESHOLD__PASS_CLOSES_ALL_LOWER_AT_LEAST_THRESHOLDS",
+    "SENTENCES_LT_1_IS_THE_UNIQUE_ZERO_SENTENCE_CORNER__SENTENCES_LT_2_IS_THE_HARDEST_POSITIVE_UPPER_BOUND_FOR_ALL_THRESHOLDS_2_TO_20",
+    "SECTION_CHECKER_IS_MINIMUM_COUNT_NOT_EXACT_COUNT__FIVE_SECTIONS_CLOSE_COUNTS_1_TO_5_FOR_THE_SAME_SPLITTER",
+    "REPRESENTATIVE_FAILURE_NEVER_AUTHORIZES_CLASS_WIDE_UNSAT__FAILURE_EXPANDS_ONLY_THE_FAILED_CLASS"
+  ],
+  "structural_word_bound_components": {
+    "title": 1,
+    "five_existence_keywords_or_carriers": 5,
+    "five_sections_sectionN_plus_payload": 10,
+    "five_bullets": 5,
+    "paragraph_or_nth_scaffold": 5,
+    "longest_postscript_marker": 3,
+    "longest_fixed_end_phrase": 8,
+    "total": 37
+  },
+  "next_action": "COMPOSE_THIS_QUOTIENT_WITH_THE_320_LEXICAL_SIGNATURE_QUOTIENT_AND_EXACT_PINNED_POINTWISE_SEARCH__RUN_EXTREMAL_REPRESENTATIVES_FIRST__EXPAND_ONLY_FAILED_DOMINANCE_CLASSES",
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROW_CONTENT_CASE_ID_FREQUENCY_HIDDEN_KWARG_COMPARATOR_RESPONSE_OR_SCORE_USED",
+    "NO_CLAIM_THE_NONREACHABLE_CARTESIAN_ENVELOPE_IS_A_CASE_COUNT",
+    "NO_CLAIM_REPRESENTATIVE_FAILURE_IMPLIES_CLASS_WIDE_FAILURE_OR_UNSAT",
+    "NO_CLAIM_ALL_EXACT_COUNT_STRUCTURAL_PARAMETERS_ARE_EQUIVALENT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
