@@ -15,7 +15,6 @@ on:
 
 permissions:
   contents: read
-  issues: write
 
 jobs:
   verify:
@@ -25,10 +24,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run V2 guard and test with persistent failure diagnostic
+      - name: Run V2 guard and test with artifact diagnostic
+        id: diag
         shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           set +e
           python canonical/runtime/terminal_minimum_causal_depth_guard_v2.py >/tmp/v2-guard.out 2>&1
@@ -54,6 +52,18 @@ jobs:
           } >/tmp/v2-diagnostic.md
           cat /tmp/v2-diagnostic.md
           if [ "$GUARD_CODE" -ne 0 ] || [ "$TEST_CODE" -ne 0 ]; then
-            gh issue create --repo "$GITHUB_REPOSITORY" --title "Terminal minimum causal depth V2 diagnostic ${GITHUB_RUN_ID}" --body-file /tmp/v2-diagnostic.md
-            exit 1
+            echo "failed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "failed=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Upload V2 diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terminal-minimum-causal-depth-v2-diagnostic
+          path: /tmp/v2-diagnostic.md
+
+      - name: Enforce V2 diagnostic
+        if: steps.diag.outputs.failed == 'true'
+        run: exit 1
