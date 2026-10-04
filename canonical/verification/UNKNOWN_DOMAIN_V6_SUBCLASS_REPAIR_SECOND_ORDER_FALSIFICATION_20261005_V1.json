@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_SUBCLASS_REPAIR_SECOND_ORDER_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SECOND_ORDER_FALSIFIER_FOUND_BEFORE_REPROMOTION__BUFFER_PROTOCOL_REPAIR_STAGED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "context": {
+    "revocation_path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
+    "original_v6_promotion_revoked": true,
+    "current_acceptance_credit": false
+  },
+  "falsified_first_repair": {
+    "branch": "breakthrough/unknown-domain-v6-subclass-revocation-20261005",
+    "generator_blob": "d087601a62a0b8ec9ab264487fb0b27a6246b977",
+    "regression_blob": "c98733407d594c3fa5713de5742022325463f390",
+    "proof_blob": "4a3e72b365ffa7e163abc63d197fcd386bdd104d",
+    "defect": "PYTHON_3_12_PLUS_BYTES_SUBCLASS_CAN_OVERRIDE___BUFFER____MEMORYVIEW_SECRET_TOBYTES_CAN_INVOKE_ATTACKER_CONTROLLED_BUFFER_HOOK",
+    "counterexample": "class EvilBytes(bytes): define __buffer__ to raise RuntimeError; memoryview(EvilBytes(b'X'*32)).tobytes() raises instead of materializing the declared isinstance-accepted bytes value",
+    "consequence": "FIRST_SUBCLASS_REPAIR_REMAINS_PARTIAL_OVER_ITS_DECLARED_BYTES_SUBCLASS_DOMAIN"
+  },
+  "staged_second_repair": {
+    "branch": "breakthrough/unknown-domain-v6-subclass-revocation-20261005",
+    "pull_request": 2001,
+    "generator_blob": "60373126f3ee27368ae06e6d7d559f1b826d90d4",
+    "regression_blob": "5bc00ff6f7671ad43acb04a6fe4c3b6d1893c380",
+    "proof_blob": "58d3a61f5e2cb24b4387ddd817b64f897f62fe06",
+    "mechanism": "BASE_BYTES_DESCRIPTOR_FULL_SLICE__bytes.__getitem__(secret,slice(None))",
+    "intended_property": "BYPASS_PYTHON_LEVEL___BYTES_____BUFFER_____LEN_____GETITEM_____ITER___OVERRIDES_AND_MATERIALIZE_EXACT_PLAIN_BYTES_CONTENT",
+    "local_adversarial_check": "PASS_ON_PYTHON_3_13_WITH_ALL_LISTED_HOOKS_OVERRIDDEN_TO_RAISE",
+    "independent_verification_required": true
+  },
+  "promotion_rule": "NO_REPROMOTION_UNTIL_EXACT_SECOND_REPAIR_BLOBS_PASS_INDEPENDENT_CONTENT_BOUND_VERIFICATION_WITH_HOSTILE_STR_AND_BYTES_SUBCLASSES_INCLUDING___BUFFER___",
+  "hard_nonclaims": [
+    "NO_UNKNOWN_DOMAIN_ATOMIC_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_SECOND_REPAIR_IS_UNIVERSALLY_PROVED_BEFORE_INDEPENDENT_VERIFICATION",
+    "NO_PRODUCTION_OR_TERMINAL_CASE_CONSUMPTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
