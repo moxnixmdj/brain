@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V3_FINAL_POINTER_PROJECTION_CERTIFICATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PRIVATE_CONNECTOR_EXACT_SEMANTIC_DIFF_BOUND__INDEPENDENT_TRANSFORMATION_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "base_commit": "67ac14aa165c234c8d675d5c88197f0aa0c7edce",
+  "target_branch": "activate-root2-v3-final-pointer-20261004",
+  "target_head": "df5d69f77c156032e0b314df7041a8a80bf09f59",
+  "subject": {
+    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json",
+    "frontier_git_blob_sha": "681123ef6cff3506d66af6b31b61c8bc14a8a913",
+    "activation_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "76d36bc34947e726502d0c8fc1dbb961d6442c88",
+    "verification_path": "canonical/verification/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "8436a9eb30312b959ba094394e60f26b4833a3a2"
+  },
+  "private_connector_bindings": [
+    {
+      "path": "canonical/governance/ROOT2_MEASUREMENT_BRIDGE_CURRENT_V1.json",
+      "base_blob": "f5528f296aec0baf138971d4d0d50565acf0db60",
+      "target_blob": "c4e8b108d4329f380c918d10f417468fdf4f4e03",
+      "changed_paths": [
+        "next",
+        "root2_closure_controller_v2.frontier_activation_git_blob_sha",
+        "root2_closure_controller_v2.frontier_activation_path",
+        "root2_closure_controller_v2.frontier_git_blob_sha",
+        "root2_closure_controller_v2.frontier_path",
+        "root2_closure_controller_v2.frontier_verification_git_blob_sha",
+        "root2_closure_controller_v2.frontier_verification_path",
+        "root2_closure_controller_v2.status"
+      ]
+    },
+    {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "base_blob": "0ca03a6954f09744525d832911fe8ae277e9e123",
+      "target_blob": "59a2e7e0f67e5da6086d7f4de3d6bda299891762",
+      "changed_paths": [
+        "roots.root_2_measurement_or_comparator.active_closure_controller.current_frontier_activation_git_blob_sha",
+        "roots.root_2_measurement_or_comparator.active_closure_controller.current_frontier_activation_path",
+        "roots.root_2_measurement_or_comparator.active_closure_controller.current_frontier_git_blob_sha",
+        "roots.root_2_measurement_or_comparator.active_closure_controller.current_frontier_path",
+        "roots.root_2_measurement_or_comparator.active_closure_controller.current_frontier_verification_git_blob_sha",
+        "roots.root_2_measurement_or_comparator.active_closure_controller.current_frontier_verification_path",
+        "roots.root_2_measurement_or_comparator.active_closure_controller.status",
+        "scheduler_policy.root2_current_frontier"
+      ]
+    },
+    {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "base_blob": "a8b929995531f3165bc2c591a2d4b1330fd1b504",
+      "target_blob": "bfe12a424164149b4c07ffc140df307797783888",
+      "changed_paths": [
+        "next_terminal_action",
+        "sources.root2_closure_v2_current_frontier.activation",
+        "sources.root2_closure_v2_current_frontier.activation_git_blob_sha",
+        "sources.root2_closure_v2_current_frontier.git_blob_sha",
+        "sources.root2_closure_v2_current_frontier.path",
+        "sources.root2_closure_v2_current_frontier.status",
+        "sources.root2_closure_v2_current_frontier.verification",
+        "sources.root2_closure_v2_current_frontier.verification_git_blob_sha"
+      ]
+    }
+  ],
+  "verified_private_diff_properties": {
+    "changed_file_count": 3,
+    "changed_leaf_count": 24,
+    "only_root2_pointer_or_next_action_paths_changed": true,
+    "acceptance_counts_changed": false,
+    "ownership_counts_changed": false,
+    "root1_state_changed": false,
+    "root3_state_changed": false,
+    "execution_authority_changed": false,
+    "promotion_authority_changed": false,
+    "fresh_reality_authority_changed": false,
+    "comparator_targets_changed": false
+  },
+  "intended_effect": "MAKE_ALREADY_INDEPENDENTLY_VERIFIED_ROOT2_FRONTIER_V3_THE_EFFECTIVE_ZERO_REALITY_SCHEDULING_FRONTIER_ONLY",
+  "preserved_truth": {
+    "acceptance": "5/19_PASS__14/19_OPEN",
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "owned": "5/19",
+    "root1_positive_gap_count": 0,
+    "fresh_reality_authority": false,
+    "terminal": false
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_COMPARATOR_TARGET_REBASE",
+    "NO_TERMINAL_CASE_EXPOSURE",
+    "FAIL_CLOSED_IF_ANY_PRIVATE_SOURCE_OR_TARGET_BLOB_DIFFERS"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
