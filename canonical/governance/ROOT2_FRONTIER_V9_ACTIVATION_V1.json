@@ -1,0 +1,23 @@
+{
+  "schema":"PROJECT_BRAIN_ROOT2_FRONTIER_V9_ACTIVATION_V1",
+  "date":"2026-10-04",
+  "status":"CANDIDATE__INDEPENDENT_V9_PASS__SCHEDULING_ONLY__ZERO_CREDIT",
+  "frontier_path":"canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V9.json",
+  "frontier_git_blob_sha":"ea5923e8a90ca115c8149266c4c37cc7e6c40a2a",
+  "verification_path":"canonical/verification/ROOT2_V9_FINANCE_CUSTOM_ROUTE_CUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+  "verification_git_blob_sha":"45d26264aab8a22f79db68c231d1d69dc1f5bbe3",
+  "parent_activation_path":"canonical/governance/ROOT2_FRONTIER_V8_ACTIVATION_V1.json",
+  "parent_activation_git_blob_sha":"e0c0b2a25e764c875e4af4cffb3a61f05a7a58bc",
+  "authority":{
+    "scheduling":true,
+    "effective_scheduling":true,
+    "execution":false,
+    "promotion":false,
+    "fresh_reality":false
+  },
+  "accounting":{
+    "incremental_spend_usd":0,
+    "terminal_cases_consumed":0,
+    "acceptance_credit_delta":0
+  }
+}
