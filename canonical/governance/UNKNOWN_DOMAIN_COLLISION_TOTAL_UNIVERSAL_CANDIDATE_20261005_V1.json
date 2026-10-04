@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_COLLISION_TOTAL_UNIVERSAL_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_ZERO_REALITY_UNIVERSAL_CLOSURE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "breakthrough": {
+    "found_unsound_assumption": "THE_PRIOR_V2_UNIVERSAL_CANDIDATE_QUANTIFIED_OVER_ALL_ACCEPTED_EVALUATOR_SECRETS_WHILE 56_BIT_TRUNCATED_OPAQUE_IDS_WERE_NOT PROVED INJECTIVE FOR EVERY WITHIN_CASE_NAMESPACE",
+    "repair": "V3 PRESERVES V2 NUMERIC TASK SCORER HARNESS AND CANDIDATE SEMANTICS BUT DETERMINISTICALLY DISAMBIGUATES ONLY ACTUAL OPAQUE_ID COLLISIONS",
+    "why_it_matters": "THE UNIVERSAL ARGUMENT NO LONGER DEPENDS ON A CRYPTOGRAPHIC NO_COLLISION ASSUMPTION",
+    "production_information_gain_if_verified": 0
+  },
+  "exact_candidate_bytes": {
+    "generator_v3": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py",
+      "git_blob_sha": "b789d48ac1cad877e59158e6b8843bf4b902446a"
+    },
+    "universal_proof_v2": {
+      "path": "canonical/runtime/unknown_domain_direct_v3_universal_proof_v2.py",
+      "git_blob_sha": "488a25fafaefa857000961d748827893e9dd80b3"
+    },
+    "generator_tests": {
+      "path": "canonical/tests/test_unknown_domain_direct_hidden_generator_v3.py",
+      "git_blob_sha": "3073f211ff4dad17a3c465b8109e80c164ec8f7c"
+    },
+    "proof_tests": {
+      "path": "canonical/tests/test_unknown_domain_direct_v3_universal_proof_v2.py",
+      "git_blob_sha": "c1bb2a7ae8073cdd0f63eff57f74e1b698fd081c"
+    }
+  },
+  "unchanged_load_bearing_bytes": {
+    "candidate_v1": "a2a77269a8175ce315b466035049da0f761b8734",
+    "candidate_v2": "4470716f95a559a700e461262df909ae19a41651",
+    "generator_v1": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "generator_v2_numeric_semantics": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "hidden_scorer": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "execution_harness": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+  },
+  "proof_surface": {
+    "transfer_cases": 12,
+    "abstention_cases": 15,
+    "primitive_families": 6,
+    "maximum_transfer_probes": 2,
+    "full_rediscovery_probe_floor": 3,
+    "opaque_namespace_collision_assumption": false,
+    "valid_beacon_scope": "ALL_STRINGS_ACCEPTED_BY_THE_EXACT_GATE",
+    "valid_evaluator_secret_scope": "ALL_BYTE_OR_STRING_VALUES_ACCEPTED_BY_THE_EXACT_GATE"
+  },
+  "adversarial_falsification": {
+    "test": "FORCE_THE_RAW_OPAQUE_TOKEN_FUNCTION_TO_RETURN_ONE_IDENTICAL_VALUE_FOR_EVERY_LABEL",
+    "required_result": "ALL_27_QUALIFICATION_CASES_STILL_PASS_THE_UNCHANGED_CANDIDATE_HARNESS_AND_SCORER",
+    "purpose": "TEST_THE_NAMESPACE_REPAIR_AT_THE_MAXIMAL_COLLISION_EXTREME_NOT_JUST RANDOM_SAMPLES"
+  },
+  "promotion_rule": "NO CREDIT UNTIL AN INDEPENDENT CONTENT_BOUND VERIFIER RECOMPUTES EXACT_BLOB_BINDINGS RUNS THE COLLISION_EXTREME 27_CASE EXECUTION AND FALSIFIES THE UNIVERSAL INEQUALITIES AND CONTROL_FLOW CLAIMS",
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_BEYOND_THE_FROZEN_EVALUATOR_CONTRACT",
+    "NO_PRODUCTION_OR_TERMINAL_CASE_WAS_GENERATED_READ_OR_CONSUMED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_YET",
+    "THE_QUEUED_ONE_USE_V2_PRODUCTION_RUN_IS_NOT_USED_AS_EVIDENCE_FOR_THIS_CANDIDATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
