@@ -56,6 +56,16 @@ class UnknownDomainExecutionLeaseV1Tests(unittest.TestCase):
         altered["exact_execution_subject"]["candidate_v2"] = "0" * 40
         self.assertNotEqual(lease.lease_digest_sha256(altered), lease.lease_digest_sha256())
 
+    def test_transitive_generator_v1_is_load_bearing(self):
+        self.assertEqual(
+            lease.EXACT_SUBJECTS["generator_v1"],
+            "f974a4594c78e74693c7ba5a19f131dfa481b937",
+        )
+        altered = lease.canonical_lease_payload()
+        altered["exact_execution_subject"] = dict(altered["exact_execution_subject"])
+        altered["exact_execution_subject"]["generator_v1"] = "0" * 40
+        self.assertNotEqual(lease.lease_digest_sha256(altered), lease.lease_digest_sha256())
+
     def test_replay_or_prior_generation_fails_closed(self):
         for field, value in (
             ("production_cases_consumed", 1),
