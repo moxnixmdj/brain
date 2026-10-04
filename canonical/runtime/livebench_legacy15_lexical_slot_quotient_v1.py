@@ -294,6 +294,12 @@ def verify() -> dict[str, Any]:
         raise RuntimeError("END_PARTITION_DRIFT")
     if per_nth != expected_per_nth:
         raise RuntimeError("NTH_PARTITION_DRIFT")
+    if nth_collision_count != 96:
+        raise RuntimeError("NTH_COLLISION_COUNT_DRIFT")
+    if end_collision_count != 132:
+        raise RuntimeError("END_COLLISION_COUNT_DRIFT")
+    if any_collision_count != 155:
+        raise RuntimeError("ANY_LEXICAL_COLLISION_COUNT_DRIFT")
 
     return {
         "schema": SCHEMA,
