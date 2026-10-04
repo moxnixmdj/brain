@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_NOVELTY_OBSERVATION_ADAPTER_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_IF_MERGED__OBSERVATION_ONLY__NO_EXPERIMENT_SEMANTIC_CHANGE__ZERO_CREDIT",
+  "objective": "MAKE_EACH_FROZEN_H100_ZERO_LEARNED_TASK_ROUTE_CELL_DIRECTLY_OBSERVABLE_AS_A_CI_JOB_CONCLUSION_WITHOUT_CHANGING_TASKS_ROUTES_DATA_HOLDOUTS_THRESHOLDS_OR_SOLVER_BEHAVIOR",
+  "experiment": "canonical/governance/H100_ZERO_LEARNED_NOVELTY_STRESS_CANDIDATE_V1.json",
+  "exact_bound_components": {
+    "canonical/runtime/h100_zero_learned_novelty_cell_v1.py": "5fde0a0fe93de0bab368ae972e17d191682538a4",
+    ".github/workflows/h100-zero-learned-novelty-stress-v1.yml": "c4e99c2a2aede4956d05497af78365b4f2347f92"
+  },
+  "semantics": {
+    "cell_count": 36,
+    "success": "FROZEN_ROUTE_TASK_CELL_MEETS_THE_ALREADY_FROZEN_USEFUL_CANDIDATE_CRITERION",
+    "failure": "FROZEN_ROUTE_TASK_CELL_DOES_NOT_MEET_THE_ALREADY_FROZEN_USEFUL_CANDIDATE_CRITERION_OR_HARNESS_FAILS_CLOSED",
+    "fail_fast": false,
+    "job_name_binds_task_and_route": true
+  },
+  "hard_rules": [
+    "ADAPTER_MAY_NOT_CHANGE_PREEXPOSED_TASKS",
+    "ADAPTER_MAY_NOT_CHANGE_ROUTES_OR_CONFIGURATIONS",
+    "ADAPTER_MAY_NOT_CHANGE_HOLDOUTS_OR_THRESHOLDS",
+    "JOB_CONCLUSION_IS_OBSERVATION_NOT_ACCEPTANCE_CREDIT",
+    "NO_HIDDEN_OR_TERMINAL_CASES"
+  ],
+  "authority": {
+    "observation": true,
+    "experiment_semantics": false,
+    "promotion": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
