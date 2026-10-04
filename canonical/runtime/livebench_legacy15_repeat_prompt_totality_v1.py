@@ -37,6 +37,8 @@ EXPECTED_BLOBS = {
         "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
     "canonical/runtime/livebench_legacy15_contract_composer_v2.py":
         "d73ec366b32252996258eae6d10d67d4d6a5e042",
+    "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py":
+        "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
     "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py":
         "8c34701f5a63acf5aef88e8ea060be2d70571c23",
     "canonical/runtime/livebench_legacy15_visible_prompt_compiler_v1.py":
@@ -148,8 +150,14 @@ def prove_prompt(prompt_to_repeat: str) -> dict[str, Any]:
         rows.append({
             "instruction_ids": sorted(ids),
             "response_prefix_exact_after_strip": True,
-            "existence_witness_present": comp.EXIST not in ids or True,
-            "title_witness_present": comp.TITLE not in ids or True,
+            "existence_witness_present": (
+                comp.EXIST not in ids
+                or all(word.lower() in response.lower() for word in _PUBLIC_EXISTENCE_WORDS)
+            ),
+            "title_witness_present": (
+                comp.TITLE not in ids
+                or re.search(r"<<[^\\n]+>>", response) is not None
+            ),
         })
 
     return {
