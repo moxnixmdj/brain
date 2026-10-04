@@ -6,6 +6,7 @@ on:
       - "canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py"
       - "canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py"
       - "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json"
+      - "canonical/governance/UNKNOWN_DOMAIN_UNIVERSAL_SCOPE_REDUCTION_CANDIDATE_20261005_V1.json"
       - "canonical/runtime/unknown_domain_direct_candidate_v1.py"
       - "canonical/runtime/unknown_domain_direct_candidate_v2.py"
       - "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py"
@@ -22,10 +23,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: "3.12"}
-      - run: python -m pytest -q canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py
-      - run: python canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py > /tmp/unknown-domain-v2-universal-proof.json
-      - run: |
-          python - <<'PY'
+      - name: Execute proof and preserve exact failure evidence
+        shell: bash
+        run: |
+          set +e
+          : > /tmp/unknown-domain-v2-universal-proof.log
+          python -m pytest -q canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py >> /tmp/unknown-domain-v2-universal-proof.log 2>&1
+          s1=$?
+          python canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py > /tmp/unknown-domain-v2-universal-proof.json 2>> /tmp/unknown-domain-v2-universal-proof.log
+          s2=$?
+          python - <<'PY' >> /tmp/unknown-domain-v2-universal-proof.log 2>&1
           import json
           p="/tmp/unknown-domain-v2-universal-proof.json"
           d=json.load(open(p,encoding="utf-8"))
@@ -37,3 +44,23 @@ jobs:
           assert d["accounting"]["ownership_credit_delta"]==0
           print("INDEPENDENT_RUNNER_EXECUTED_CONTENT_BOUND_UNIVERSAL_PROOF")
           PY
+          s3=$?
+          printf '%s\n' "$s1 $s2 $s3" > /tmp/unknown-domain-v2-universal-proof.status
+          exit 0
+      - name: Upload proof diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unknown-domain-v2-universal-proof-diagnostic
+          path: |
+            /tmp/unknown-domain-v2-universal-proof.log
+            /tmp/unknown-domain-v2-universal-proof.json
+            /tmp/unknown-domain-v2-universal-proof.status
+          if-no-files-found: error
+      - name: Enforce proof pass
+        shell: bash
+        run: |
+          read s1 s2 s3 < /tmp/unknown-domain-v2-universal-proof.status
+          test "$s1" = "0"
+          test "$s2" = "0"
+          test "$s3" = "0"
