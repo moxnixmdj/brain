@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_PUBLIC_OPERATOR_COVERAGE_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PUBLIC_CORPUS_OPERATOR_GAP_AUDIT__ZERO_PRIVATE_CASES__ZERO_CREDIT",
+  "objective": "EXPAND_GENERIC_SYMBOLIC_CAPABILITY_ONLY_WHERE_PUBLIC_MECHANISM_CORPUS_EXPOSES_A_REAL_OPERATOR_GAP",
+  "source": {
+    "repository": "tsinghua-fib-lab/MechBench",
+    "branch": "main",
+    "task_tree_sha": "d5d25850d0991f75bff4f5e2cb3549829dced42f",
+    "public_yaml_task_files": 1026,
+    "original_blueprints_inspected": 32
+  },
+  "observed_existing_coverage": [
+    "AFFINE_AND_POLYNOMIAL_TERMS",
+    "INTEGER_AND_FRACTIONAL_POWERS",
+    "MONOMIAL_NEGATIVE_POWERS",
+    "SATURATING_RATIONAL_FORMS",
+    "BILINEAR_SEPARABLE_INTERACTIONS",
+    "ABSOLUTE_VALUE_IN_TRANSFORM_LAYER"
+  ],
+  "load_bearing_missing_generic_primitives": [
+    {
+      "primitive": "SAFE_EXACT_DIVISION",
+      "evidence": "MULTIPLE_PUBLIC_ORIGINALS_USE_RATIONAL_DENOMINATORS_NOT_OF_STABLE_DIV_1_PLUS_ABS_FORM",
+      "action": "ADD_BINARY_SAFE_DIV_THAT_FAILS_ON_NEAR_ZERO_DENOMINATORS"
+    },
+    {
+      "primitive": "EXPONENTIAL",
+      "evidence": "PUBLIC_MEMBRANE_CHANNEL_AND_VACANCY_DIFFUSION_ORIGINALS_CONTAIN_EXPONENTIAL_FACTORS",
+      "action": "ADD_UNARY_EXP_WITH_STRICT_FINITE_DOMAIN_GUARD"
+    },
+    {
+      "primitive": "TRIGONOMETRIC_SIN_COS",
+      "evidence": "PUBLIC_INCLINED_ROLLING_ORIGINAL_CONTAINS_SIN_OF_AN_INPUT_ANGLE",
+      "action": "ADD_UNARY_SIN_AND_COS"
+    },
+    {
+      "primitive": "RECIPROCAL",
+      "evidence": "RATIONAL_LAWS_REPEATEDLY_REQUIRE_EXPLICIT_INVERSION_AS_A_COMPOSABLE_FEATURE",
+      "action": "ADD_UNARY_RECIPROCAL_WITH_FAIL_CLOSED_ZERO_GUARD"
+    }
+  ],
+  "non_goals": [
+    "NO_COPYING_OR_STORING_COMPLETE_PUBLIC_TASK_FORMULAS_IN_RUNTIME",
+    "NO_PRIVATE_MYSTERYMECHANISM_CASE_ACCESS",
+    "NO_FORMULA_LOOKUP_BY_DOMAIN_OR_TASK_NAME",
+    "NO_SCORE_PROMOTION_FROM_PUBLIC_CORPUS"
+  ],
+  "next_candidate": "canonical/runtime/mysterymechanism_sparse_symbolic_adapter_v2.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
