@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TARGET_SEMANTICS_DRIFT_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PUBLIC_SOURCE_DRIFT_DETECTED__NO_TARGET_REBASE__ZERO_CREDIT",
+  "objective": "Prevent terminal proof against a stale or semantically different public measurement surface by distinguishing the frozen canonical target from current leaderboard observations.",
+  "observations": [
+    {
+      "surface": "LiveBench 2026-06-25 Instruction Following",
+      "canonical_target": 65.7,
+      "current_public_observation": 65.7,
+      "state": "NUMERICALLY_STABLE_ON_CURRENT_LIVEBENCH_RELEASE",
+      "source": "https://livebench.ai/"
+    },
+    {
+      "surface": "AA-Briefcase v1.1",
+      "canonical_target": 1822,
+      "current_public_observation": 1808,
+      "current_label": "Claude Opus 5.5 (Max, Default Fallback)",
+      "state": "DRIFT_OR_CONFIGURATION_MISMATCH_DETECTED__DO_NOT_REBASE_WITHOUT_EXACT_MEASUREMENT_IDENTITY_PROOF",
+      "source": "https://artificialanalysis.ai/evaluations/aa-briefcase"
+    },
+    {
+      "surface": "OSWorld 2.1",
+      "state": "CURRENT_OFFICIAL_RELEASE_PINS_TASKS_ASSETS_PUBLIC_RUNTIME_AND_TASK_WEB_COMPONENTS__GATED_TASK_REQUEST_DOCUMENTED_AS_AUTOMATIC_APPROVAL",
+      "source": "https://github.com/xlang-ai/OSWorld-V2"
+    },
+    {
+      "surface": "Vals Finance Agent v2",
+      "state": "PLATFORM_ACCESS_REMAINS_GATED_AND_REQUIRES_APPROVAL__EXACT_TEST_SUITE_ID_IS ACCOUNT_PLATFORM_OR_EMAIL_FACT",
+      "source": "https://github.com/vals-ai/finance-agent-v2"
+    }
+  ],
+  "measurement_identity_fields": [
+    "BENCHMARK_VERSION",
+    "TASK_POPULATION_IDENTITY",
+    "HARNESS_IDENTITY",
+    "TOOL_AUTHORITY",
+    "EFFORT_OR_THINKING_SETTING",
+    "FALLBACK_POLICY",
+    "GRADER_OR_JURY_IDENTITY",
+    "ENVIRONMENT_IDENTITY",
+    "SCORE_TRANSFORM_OR_RELATIVE_RATING_POPULATION"
+  ],
+  "rule": "CANONICAL_FROZEN_THRESHOLD_REMAINS_UNCHANGED_UNLESS_AN INDEPENDENTLY VERIFIED MEASUREMENT_IDENTITY RECONCILIATION PROVES THE TERMINAL OBJECTIVE ITSELF REQUIRES REBASING; CURRENT LEADERBOARD DRIFT IS INFORMATION, NOT AUTOMATIC AUTHORITY.",
+  "scheduler_effect": [
+    "REQUIRE_EXACT_MEASUREMENT_IDENTITY_BEFORE_REUSING_CURRENT_EXTERNAL_SCORE_AS_CANONICAL_OPUS55_BAR",
+    "DO_NOT_TREAT_CURRENT_AA_BRIEFCASE_1808_AS_REPLACING_FROZEN_1822",
+    "PRESERVE_LIVEBENCH_65_7_AS CURRENTLY CORROBORATED",
+    "PROMOTE_OSWORLD_GATED_ACCESS_FROM OWNER-WAIT TO SELF-SERVICE ACCESS ACTION SUBJECT TO AUTHENTICATED SESSION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
