@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_QUANTIZED_EXECUTION_FRONTIER_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANONICAL_SCHEDULER_BREAKTHROUGH__MINIMUM_EXECUTABLE_QUANTIZED_FRONTIER_IDENTIFIED__EXACT_SUBJECT_REQUALIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_73775_EXACT_EQUAL_TASK_MEAN",
+  "breakthrough": {
+    "previous_overconstraint": "A_QUANTIZED_SUCCESSOR_WAS_TREATED_AS_IF_IT_NEEDED_TO_PRESERVE_THE_FULL_PRECISION_SCORE_EXACTLY_BEFORE_IT_COULD_BE_USEFUL",
+    "corrected_decision_rule": "A_QUANTIZED_SUBJECT_ONLY_NEEDS_TO_RETAIN_ENOUGH_CAPABILITY_TO_MEET_OR_EXCEED_THE_FIXED_OPUS_5_5_TARGET_ON_THE_EXACT_ACCEPTANCE_GEOMETRY",
+    "consequence": "QWEN3_8_27B_HAS_A_6_9205_PERCENTAGE_POINT_QUANTIZATION_LOSS_BUDGET_ON_THE_FOUR_TASK_LIVEBENCH_IF_MEAN_BEFORE_IT_CEASES_TO_MEET_THE_TARGET",
+    "scheduler_consequence": "TEST_THE_SMALLEST_CONTENT_ADDRESSED_QWEN3_8_27B_QUANTIZED_SUBJECT_FIRST_AND_ESCALATE_BITS_ONLY_ON_VERIFIED_FAILURE__DO_NOT_BEGIN_WITH_55_6_GB_BF16_OR_SMAUG_BF16_FOR_MINIMUM_EXECUTABLE_INTERNALIZATION"
+  },
+  "exact_target_geometry": {
+    "source_repository": "LiveBench/new-livebench",
+    "source_path": "public/table_2026_06_25.csv",
+    "source_git_blob_sha": "73ab7d8d9752b4d7cc1bc8c574ab0eb80c36c84b",
+    "tasks": ["paraphrase", "simplify", "story_generation", "summarize"],
+    "opus55_max_effort_task_scores_percent": {
+      "paraphrase": 64.267,
+      "simplify": 58.667,
+      "story_generation": 70.917,
+      "summarize": 69.1
+    },
+    "opus55_exact_equal_task_mean_percent": 65.73775,
+    "qwen38_27b_bf16_task_scores_percent": {
+      "paraphrase": 74.9,
+      "simplify": 66.7,
+      "story_generation": 73.1,
+      "summarize": 75.933
+    },
+    "qwen38_27b_bf16_exact_equal_task_mean_percent": 72.65825,
+    "qwen38_27b_absolute_loss_budget_pp": 6.9205,
+    "pass_rule": "CANDIDATE_EXACT_EQUAL_TASK_MEAN_PERCENT_GTE_65_73775"
+  },
+  "external_quantization_evidence": {
+    "source": "Engineered.at / Quesma independent Qwen3.8 quantization study",
+    "source_url": "https://engineered.at/qwen3.8-27b-quantization/",
+    "observed_2026_10_04": true,
+    "reported_subject_family": "Qwen3.8-27B llama.cpp quantizations",
+    "reported_rungs": {
+      "Q4_K_M": {
+        "approx_weight_size_gb": 17.0,
+        "reported_result": "NO_NOTICEABLE_DIFFERENCE_ON_GPQA_IFBENCH_TERMINAL_BENCH_2_1_VERSUS_BF16_IN_THE_STUDY"
+      },
+      "UD_Q2_K_XL": {
+        "approx_weight_size_gb": 10.7,
+        "reported_result": "IFBENCH_REPORTED_UNCHANGED_VERSUS_BF16_IN_THE_STUDY__OTHER_BENCHMARKS_SHOW_SOME_DEGRADATION"
+      }
+    },
+    "critical_reproducibility_caveat": "THE_STUDY_STATES_THE_EXACT_UNSLOTH_V2_QUANT_FILES_IT_TESTED_WERE_LATER_REPLACED__THEREFORE_THE_RESULT_JUSTIFIES_THE_BIT_RUNG_SEARCH_ORDER_BUT DOES_NOT BIND CAPABILITY CREDIT TO ANY CURRENT DOWNLOAD",
+    "credit": 0
+  },
+  "minimum_execution_frontier": {
+    "search_policy": "ASCENDING_RESOURCE_COST_WITH_FAIL_CLOSED_EXACT_SUBJECT_QUALIFICATION",
+    "ordered_rungs": [
+      {
+        "rank": 1,
+        "subject_class": "QWEN3_8_27B_CURRENT_CONTENT_ADDRESSED_APPROX_2BIT",
+        "target_size_gb": "ABOUT_10_TO_11",
+        "reason": "SMALLEST_RUNG_WITH_DIRECT_EXTERNAL_EVIDENCE_OF_UNCHANGED_IFBENCH_IN_THE_INDEPENDENT_STUDY",
+        "required_before_credit": [
+          "PIN_EXACT_CURRENT_MODEL_AND_QUANTIZATION_BYTES",
+          "VERIFY_BASE_REVISION_PROVENANCE",
+          "VERIFY_TEXT_ONLY_LOAD_AND_INFERENCE_AT_ZERO_INCREMENTAL_SPEND",
+          "RUN_THE_EXACT_PUBLIC_FOUR_TASK_LIVEBENCH_ACCEPTANCE_GEOMETRY_ON_THIS_EXACT_SUBJECT",
+          "REQUIRE_EQUAL_TASK_MEAN_GTE_65_73775"
+        ]
+      },
+      {
+        "rank": 2,
+        "subject_class": "QWEN3_8_27B_CURRENT_CONTENT_ADDRESSED_Q3_CLASS",
+        "reason": "ESCALATION_ONLY_IF_THE_2BIT_SUBJECT_FAILS_EXACT_ACCEPTANCE_OR_RUNTIME_FIT"
+      },
+      {
+        "rank": 3,
+        "subject_class": "QWEN3_8_27B_CURRENT_CONTENT_ADDRESSED_Q4_K_M_CLASS",
+        "target_size_gb": "ABOUT_16_TO_17",
+        "reason": "STRONGEST_INDEPENDENT_SMALL_FORM_EVIDENCE_RUNG_BEFORE_FULL_PRECISION"
+      },
+      {
+        "rank": 4,
+        "subject_class": "SMAUG_MINI_QUANTIZED_OR_FULL_PRECISION",
+        "reason": "KEEP_AS_HIGHER_MARGIN PERFORMANCE FRONTIER__NOT_FIRST MINIMUM_INTERNALIZATION PROBE UNTIL ITS EXACT QUANTIZED SUBJECT IS INDEPENDENTLY QUALIFIED"
+      }
+    ]
+  },
+  "storage_reduction": {
+    "qwen_bf16_bytes_published": 55615875685,
+    "approx_2bit_study_size_gb": 10.7,
+    "approx_reduction_vs_bf16_percent": 80.8,
+    "approx_q4_study_size_gb": 17.0,
+    "approx_q4_reduction_vs_bf16_percent": 69.4,
+    "note": "APPROXIMATE_SIZE_ARITHMETIC_ONLY__NOT_A_CONTENT_HASH_OR_EXECUTION_CLAIM"
+  },
+  "scheduler_rewrite": {
+    "delete_as_overstrong": [
+      "SMAUG_MINI_FULL_PRECISION_MUST_BE_THE_FIRST_ROOT1_INTERNALIZATION_SUBJECT",
+      "A_QUANTIZED_SUCCESSOR_MUST_PRESERVE_THE_BF16_SCORE_EXACTLY",
+      "DOWNLOAD_OR_EXECUTE_THE_55_6_GB_BF16_SUBJECT_BEFORE_TESTING_A_SMALLER_SUBJECT"
+    ],
+    "replace_with": [
+      "PIN_THE_SMALLEST_CURRENT_REPRODUCIBLE_QWEN3_8_27B_QUANTIZED_SUBJECT",
+      "QUALIFY_THAT_EXACT_SUBJECT_ON_THE_FIXED_PUBLIC_FOUR_TASK_GEOMETRY",
+      "ESCALATE_PRECISION_ONLY_IF_SCORE_BELOW_65_73775_OR_EXECUTION_FAILS",
+      "PROMOTE_NOTHING_WITHOUT_EXACT_BYTE_PROVENANCE_AND_INDEPENDENT_VERIFICATION"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_CURRENT_2BIT_OR_4BIT_FILE_ALREADY_PASSES_THE_LIVEBENCH_FOUR_TASK_TARGET",
+    "NO_CLAIM_IFBENCH_IS_IDENTICAL_TO_THE_LIVEBENCH_FOUR_TASK_ACCEPTANCE_GEOMETRY",
+    "NO_CLAIM_THE_REPLACED_FILES_FROM_THE_EXTERNAL_STUDY_ARE_REPRODUCIBLE_BYTE_FOR_BYTE",
+    "NO_CLAIM_QUANTIZED_BYTES_ARE_ALREADY_DURABLY_INTERNALIZED",
+    "NO_TERMINAL_CASE_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
