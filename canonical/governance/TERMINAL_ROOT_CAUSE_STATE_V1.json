@@ -143,7 +143,25 @@
             "AUTOMATIONBENCH_PUBLIC600_PRIVATE_EQUIVALENCE_REPEAT_SEARCH",
             "CURSORBENCH_COMPARATOR_DRIFT_SEARCH_WHILE_CURRENT_OWNER_PAGE_REMAINS_57_8"
           ],
-          "fresh_reality_authority": false
+          "fresh_reality_authority": false,
+          "supplemental_activations": [
+            {
+              "activation_path": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_ACTIVATION_V1.json",
+              "activation_git_blob_sha": "f6d7cdc2924aaf91ea69fe5afccf584131a66355",
+              "verification_path": "canonical/verification/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+              "verification_git_blob_sha": "ddd50cd5fcf7762ebd8ad6b66fff3a6bfc149650",
+              "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_GENERIC_IDENTITY_SEARCH_DELETIONS__ZERO_CREDIT",
+              "supplemental_scheduler_deletion_count": 5,
+              "deleted": [
+                "GENERIC_OSWORLD_V21_RELEASE_IDENTITY_SEARCH",
+                "GENERIC_OSWORLD_V21_TASK_COUNT_AND_TASK_REVISION_SEARCH",
+                "GENERIC_OSWORLD_V21_GATED_ASSET_REVISION_SEARCH",
+                "GENERIC_OSWORLD_V21_WEBSITE_REVISION_SEARCH",
+                "GENERIC_OSWORLD_V21_PROVIDER_IMAGE_IDENTITY_SEARCH"
+              ]
+            }
+          ],
+          "effective_scheduler_deletion_count": 11
         }
       }
     },
@@ -196,7 +214,9 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
-    }
+    },
+    "root2_osworld_v21_official_component_pin_reduction": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_ACTIVATION_V1.json",
+    "repeat_search_for_verified_osworld_v21_official_component_identity_forbidden": true
   },
   "accounting": {
     "acceptance_credit_delta": 0,
