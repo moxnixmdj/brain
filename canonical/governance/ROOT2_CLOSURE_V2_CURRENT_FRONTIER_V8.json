@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V8",
   "date": "2026-10-04",
-  "status": "CANDIDATE__V7_DEFAULT_ZERO_SPEND_COMPRESSION_PLUS_VERIFIED_CONDITIONAL_CUSTOM_FUNCTION_ROUTE__INDEPENDENT_PROJECTION_VERIFICATION_REQUIRED__ZERO_CREDIT__NO_FRESH_REALITY",
-  "supersedes_for_scheduling_if_verified": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V6.json",
+  "status": "CANDIDATE__ACTIVE_V7_PLUS_VERIFIED_CONDITIONAL_CUSTOM_FUNCTION_ROUTE__CURRENT_PARENT_REBIND__INDEPENDENT_PROJECTION_VERIFICATION_REQUIRED__ZERO_CREDIT__NO_FRESH_REALITY",
+  "supersedes_for_scheduling_if_verified": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V7.json",
   "source_bindings": {
     "prior_frontier_v4": {
       "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V4.json",
@@ -68,17 +68,21 @@
       "verification_git_blob_sha": "31ed06c9469c9a915108ac970b4790a5f5f77e75",
       "effect": "EXACT_VALS_PROVIDER_BOUNDARIES_GUARDED_BELOW_RETRY_LAYER__PRE_GET_AGENT_INTEGRATION_VERIFIED"
     },
-    "prior_frontier_v7_candidate": {
-      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V7.json",
-      "git_blob_sha": "35e8b578aca1290bcf469d6350ae085ba8a86c64",
-      "state": "UNACTIVATED_CANDIDATE__SEMANTICS_SUBSUMED_BY_V8"
-    },
     "finance_agent_v2_custom_function_alternative_route": {
       "path": "canonical/governance/FINANCE_AGENT_V2_CUSTOM_FUNCTION_ALTERNATIVE_ROUTE_20261004_V1.json",
       "git_blob_sha": "79a60cb1c407fdabe68643ca91fcc2836ea000b1",
       "verification_path": "canonical/verification/FINANCE_AGENT_V2_CUSTOM_FUNCTION_ALTERNATIVE_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "01eeac7d1d096d7dcbb1e401e013d85d8d4aaaa3",
       "effect": "BINDS_ORTHOGONAL_CONDITIONAL_VALS_CUSTOM_FUNCTION_ROUTE__DOES_NOT_PROVE_COMPARABILITY_OR_PLATFORM_ZERO_SPEND"
+    },
+    "active_parent_v7": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V7.json",
+      "git_blob_sha": "35e8b578aca1290bcf469d6350ae085ba8a86c64",
+      "verification_path": "canonical/verification/ROOT2_FRONTIER_V7_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "c2b96c9d48b7ef6508ea77dc6983da12eaf099c3",
+      "activation_path": "canonical/governance/ROOT2_FRONTIER_V7_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "ccfc97ca8f5586d583990f0e37277b88c12227e9",
+      "state": "ACTIVE_CURRENT_PARENT"
     }
   },
   "exact_state": {
@@ -274,11 +278,6 @@
       "BRAIN_SCORE_GE_58_59"
     ],
     "fresh_reality_authority": false
-  },
-  "subsumes_unactivated_candidate": {
-    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V7.json",
-    "git_blob_sha": "35e8b578aca1290bcf469d6350ae085ba8a86c64",
-    "effect": "PRESERVE_ALL_V7_DEFAULT_HARNESS_ZERO_SPEND_COMPRESSIONS"
   },
   "finance_agent_v2_dual_route": {
     "shared_prerequisites": [
