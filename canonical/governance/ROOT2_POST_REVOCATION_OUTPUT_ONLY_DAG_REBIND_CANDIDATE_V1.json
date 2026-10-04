@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_POST_REVOCATION_OUTPUT_ONLY_DAG_REBIND_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_CURRENT_19_PREDICATE_SET_EQUALS_INDEPENDENTLY_VERIFIED_OUTPUT_ONLY_DAG_DOMAIN__ZERO_CREDIT__INDEPENDENT_TRANSPORT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Delete a needless 19-route recomputation after the LiveBench Root1 revocation by proving that the repaired current Root2-touching predicate set is exactly the same set already covered by the independently verified output-only threshold DAG.",
+  "bound_current_state": {
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_git_blob_sha": "e8371418ed39b83b14df874c8eb5e0bdb6a2e603",
+    "current_root_seal_path": "canonical/governance/POST_LIVEBENCH_ROOT1_REVOCATION_CURRENT_ROOT_SEAL_V1.json",
+    "current_root_seal_git_blob_sha": "8429fdbf97f0b045a6ea54e3cae3e2413b9acdae",
+    "accepted_families": 5,
+    "unresolved_atomic": 26,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 16,
+    "root2_and_root3_count": 3,
+    "root2_touching_count": 19
+  },
+  "verified_reusable_subject": {
+    "dag_manifest_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1.json",
+    "dag_manifest_git_blob_sha": "1fba51d15bcfdf6accd90948155517f7c9b98bbb",
+    "prior_independent_verification_path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "prior_independent_verification_git_blob_sha": "553602570334f39003708e52d781b8c59f27eb7c",
+    "prior_verification_status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_THRESHOLD_DAG_SUBJECT_BLOBS__11_OF_11_TESTS__THREE_ADVERSARIAL_CHECKS__ZERO_CREDIT"
+  },
+  "exact_domain_identity": {
+    "current_root2_touching_predicates": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "LIVEBENCH_IF_GE_65_7",
+      "MYSTERYMECHANISM_GE_49_55",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "PROWORK_GDPVAL_GE_1846",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "verified_dag_predicates": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "LIVEBENCH_IF_GE_65_7",
+      "MYSTERYMECHANISM_GE_49_55",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "PROWORK_GDPVAL_GE_1846",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "current_count": 19,
+    "verified_dag_count": 19,
+    "exact_sorted_set_equality": true,
+    "missing_from_verified_dag": [],
+    "stale_in_verified_dag": []
+  },
+  "theorem": [
+    "LIVEBENCH_REVOCATION_CHANGED_CLASSIFICATION_CURRENTNESS_BUT_DID_NOT_CHANGE_THE_19_PREDICATE_ROOT2_TOUCHING_DOMAIN_RELATIVE_TO_THE_PREVIOUSLY_VERIFIED_OUTPUT_ONLY_DAG_DOMAIN",
+    "THEREFORE_THE_ROUTE_ALGEBRA_AND_METRIC_CLASS_COMPILER_DO_NOT_REQUIRE_19_ROUTE_REDESIGN",
+    "ONLY_CURRENT_STATE_TRANSPORT_AND_ANY_PREDICATE_SPECIFIC_EVIDENCE_DELTAS_REQUIRE_REBINDING",
+    "IF_INDEPENDENT_TRANSPORT_VERIFICATION_PASSES_WHILE_THE_BOUND_ROOT_STATE_BLOB_REMAINS_CURRENT__THE_OUTPUT_ONLY_DAG_CAN_BE_REACTIVATED_AS_THE_CURRENT_ROOT2_SCHEDULING_COMPILER_WITH_ZERO_ACCEPTANCE_CREDIT"
+  ],
+  "scheduling_delta_if_verified": [
+    "DELETE_FULL_19_PREDICATE_ROUTE_RECOMPUTATION",
+    "REUSE_INDEPENDENTLY_VERIFIED_THRESHOLD_PROOF_DAG_RUNTIME_AND_METRIC_ALGEBRAS",
+    "COMPILE_ONLY_EVIDENCE_DELTAS_AND_MINIMUM_PASS_OR_FAIL_CERTIFICATE_CUTS",
+    "PRESERVE_FRESH_REALITY_BLOCK_UNTIL_SEPARATELY_AUTHORIZED"
+  ],
+  "hard_nonclaims": [
+    "NO_ROOT2_PREDICATE_IS_CLOSED_BY_SET_IDENTITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_CLAIM_CURRENT_EVIDENCE_BOUNDS_EQUAL_THE_OLDER_FRONTIER_BOUNDS",
+    "ACTIVATION_REQUIRES_INDEPENDENT_TRANSPORT_VERIFICATION_AND_CURRENTNESS_RECHECK"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
