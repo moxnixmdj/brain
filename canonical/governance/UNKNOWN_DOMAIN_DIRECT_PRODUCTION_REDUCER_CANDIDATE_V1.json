@@ -1,11 +1,14 @@
 {
-  "schema":"PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCER_CANDIDATE_V1",
-  "date":"2026-10-05",
-  "status":"FROZEN_BEFORE_PRODUCTION_OUTCOME__REDUCER_CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
-  "target_predicate":"UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
-  "precommit":{"path":"canonical/governance/UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCTION_PRECOMMIT_V1.json","git_blob_sha":"7a43b9023e19e1d43629b88b5a68f8ac26b1e9c7"},
-  "objective":"COMPILE_THE_ALREADY_FROZEN_PRODUCTION_REDUCTION_INTO_FAIL_CLOSED_CODE_BEFORE_THE_ONE_USE_OUTCOME_IS_OBSERVED",
-  "rules":[
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCER_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_BEFORE_PRODUCTION_OUTCOME__EXACT_BLOB_BOUND_REDUCER_CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "precommit": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCTION_PRECOMMIT_V1.json",
+    "git_blob_sha": "49647d0b83d4ac8acfba1980d7cf0d8e8a5db260"
+  },
+  "objective": "COMPILE_THE_ALREADY_FROZEN_PRODUCTION_REDUCTION_INTO_FAIL_CLOSED_CODE_BEFORE_THE_ONE_USE_OUTCOME_IS_OBSERVED",
+  "rules": [
     "NO_THRESHOLD_CHANGE_AFTER_RESULT",
     "NO_CASE_REPLACEMENT",
     "NO_POST_RESULT_TUNING",
@@ -17,8 +20,25 @@
     "PASS_CREATES_ONLY_PREDICATE_LOCAL_PROOF_CANDIDATE",
     "SEPARATE_INDEPENDENT_REDUCTION_AND_ACCEPTANCE_PROMOTION_REQUIRED"
   ],
-  "runtime":"canonical/runtime/unknown_domain_direct_production_reducer_v1.py",
-  "tests":"canonical/tests/test_unknown_domain_direct_production_reducer_v1.py",
-  "authority":{"execution":false,"fresh_reality":false,"acceptance_credit":false,"promotion":false},
-  "accounting":{"incremental_spend_usd":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0}
+  "runtime": "canonical/runtime/unknown_domain_direct_production_reducer_v1.py",
+  "tests": "canonical/tests/test_unknown_domain_direct_production_reducer_v1.py",
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "acceptance_credit": false,
+    "promotion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "exact_bound_components": {
+    "canonical/runtime/unknown_domain_direct_production_reducer_v1.py": "855c9d3b6428ac6686142c4f8e8c3b7f7b09c856",
+    "canonical/tests/test_unknown_domain_direct_production_reducer_v1.py": "e7915bb45472e137f1d234195aa6ed61884ce25c",
+    "canonical/governance/UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCTION_PRECOMMIT_V1.json": "49647d0b83d4ac8acfba1980d7cf0d8e8a5db260"
+  }
 }
