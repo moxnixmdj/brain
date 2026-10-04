@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY25_PROMPT_INVERTER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ALL_25_PINNED_LEGACY_REGISTRY_DESCRIPTION_TYPES_RECOGNIZED_FROM_VISIBLE_TEXT__PUBLIC_CORPUS_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "runtime": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py",
+  "tests": "canonical/tests/test_livebench_legacy25_prompt_inverter_v1.py",
+  "pinned_source": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "legacy_registry_type_count": 25
+  },
+  "breakthrough": [
+    "EVERY_REGISTERED_LEGACY_IFEVAL_DESCRIPTION_FAMILY_NOW_HAS_A_VISIBLE_PROMPT_RECOGNIZER",
+    "DIRECTLY_RENDERED_CHECKER_PARAMETERS_ARE_RECOVERED_WITHOUT_INSTRUCTION_ID_LIST_OR_HIDDEN_KWARGS",
+    "LANGUAGE_DISPLAY_NAMES_ARE_INVERTED_TO_THE_PINNED_30_CODE_LANGUAGE_MAP",
+    "COMBINATION_REPEAT_PROMPT_IS_RECOGNIZED_BUT_ITS_NONRENDERED_PROMPT_TO_REPEAT_VALUE_REMAINS_DELEGATED_TO_THE_EXISTING_VISIBLE_PROMPT_RECOVERY_ROUTE",
+    "DUPLICATE_SAME_TYPE_DESCRIPTIONS_FAIL_CLOSED_AS_AMBIGUOUS"
+  ],
+  "dependency_effect_if_independently_verified": {
+    "legacy_hidden_instruction_id_list_runtime_dependency": "DELETABLE_FOR_RECOGNIZED_VISIBLE_DESCRIPTIONS",
+    "legacy_directly_rendered_kwargs_runtime_dependency": "DELETABLE",
+    "remaining_nonrendered_legacy_parameter_family": "combination:repeat_prompt",
+    "existing_recovery": "canonical/runtime/livebench_hidden_parameter_prompt_recovery_v1.py"
+  },
+  "composition_boundary": [
+    "RECOGNITION_DOES_NOT_YET_SYNTHESIZE_A_RESPONSE",
+    "RECOGNITION_DOES_NOT_PROVE_ARBITRARY_MULTI_CHECKER_COMPOSITION",
+    "LEGACY_ONLY_TERMINAL_BINDING_DEPENDS_ON_SEPARATE_DISPATCH_COLLAPSE_VERIFICATION",
+    "NO_TERMINAL_PROMPT_OR_METADATA_READ"
+  ],
+  "next": [
+    "INDEPENDENTLY_AUDIT_RECOGNITION_AND_KWARG_RECOVERY_ON_PINNED_PUBLIC_GOOGLE_IFEVAL_ROWS",
+    "COMPOSE_RECOGNIZER_WITH_DETERMINISTIC_LEGACY_CHECKER_WITNESS_CONSTRUCTORS",
+    "FREEZE_SUCCESSOR_BEFORE_ANY_NEW_TERMINAL_EXECUTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
