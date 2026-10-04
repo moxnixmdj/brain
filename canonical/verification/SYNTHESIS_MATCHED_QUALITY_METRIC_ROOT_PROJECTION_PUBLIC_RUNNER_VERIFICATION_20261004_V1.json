@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_MATCHED_QUALITY_METRIC_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_ROOT_PROJECTION__SYNTHESIS_AGGREGATION_AMBIGUITY_DELETED__ZERO_CREDIT",
+  "subject": {
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_git_blob_sha": "60b70daf25f47d12d7a9522990769c0200acbfa9",
+    "activation_path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "1ca2de029b02ca8518e59e0d66a973e3e26e251b",
+    "metric_verification_path": "canonical/verification/SYNTHESIS_MATCHED_QUALITY_METRIC_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "metric_verification_git_blob_sha": "8a5be1224383dccfbd917729df285eeb96004825",
+    "contract_path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+    "contract_git_blob_sha": "0886f7592875a5b750cdd401aa783351ab2f0854",
+    "root2_v11_git_blob_sha": "6857750dea3a0af48a5acc545b6f66b619d4335b",
+    "adaptive_v3_final_git_blob_sha": "cf6d3c92134ee7cb2e75ae7f82e144aa71a8ecba"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1679,
+    "head_sha": "e43aeea196a7042828af6b8a37880f8e3b1f7a72",
+    "merge_commit": "0d57b190e33a0dce3e0066a6737776a64958dbd5",
+    "workflow_name": "Verify synthesis metric root projection",
+    "workflow_run_id": 37176737215,
+    "workflow_job_id": 111360799846,
+    "conclusion": "success"
+  },
+  "verified": [
+    "ROOT_STATE_EXACT_BLOB_VERIFIED",
+    "SYNTHESIS_METRIC_ACTIVATION_EXACT_BLOB_VERIFIED",
+    "ROOT2_V11_REMAINS_ACTIVE_EFFECTIVE_SCHEDULING_AUTHORITY",
+    "ADAPTIVE_V3_REMAINS_ACTIVE_META_SCHEDULER",
+    "ROOT3_REMAINS_10_LIVE_PREDICATES_3_EVENT_CLASSES_ZERO_CURRENT_RUNNABLE_ACTIONS",
+    "ACCEPTANCE_REMAINS_5_OF_19",
+    "ATOMIC_PROOF_REMAINS_12_OF_38",
+    "UNRESOLVED_REMAINS_26",
+    "ONLY_SYNTHESIS_DELTA_IS_DELETION_OF_CASE_LEVEL_AGGREGATION_UNDERSPECIFICATION",
+    "FOUR_SYNTHESIS_RESIDUALS_PRESERVED",
+    "ZERO_SPEND_ZERO_TERMINAL_CASES_ZERO_ACCEPTANCE_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "synthesis_remaining": [
+    "FIVE_CASE_SPECIFIC_QUALITY_DIMENSION_SCORER_BINDINGS",
+    "PORTFOLIO_LEVEL_CONSERVATIVE_MATCHED_NONINFERIORITY_REDUCER",
+    "EXACT_OPUS_5_5_COMPARATOR_ADMISSIBILITY_OR_STRONGER_PROOF",
+    "MATCHED_QUALITY_RESULT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
