@@ -22,11 +22,12 @@ def test_union25_semantic_kernel_reduction_is_exact():
 def test_zero_lexeme_decorator_carriers():
     facts = r.verify()["decorator_invariants"]
     assert facts["placeholder_carrier"] == "[]"
-    assert facts["highlight_carrier"] == "*-*"
+    assert facts["highlight_carrier"] == "+*-*"
     assert facts["regexp_word_delta_each"] == 0
     assert facts["ascii_letter_delta_each"] == 0
     assert facts["comma_delta_each"] == 0
     assert facts["sentence_terminator_delta_each"] == 0
     assert facts["cased_character_delta_each"] == 0
     assert facts["special_route_compatible"] is False
+    assert facts["general_route_interior_insertion_required"] is False
     assert facts["language_detector_neutrality_proved_here"] is False
