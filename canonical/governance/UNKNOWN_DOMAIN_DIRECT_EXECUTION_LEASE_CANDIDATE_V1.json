@@ -1,20 +1,24 @@
 {
   "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_EXECUTION_LEASE_CANDIDATE_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__DETERMINISTIC_NONCE_FREE_ONE_USE_LEASE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CASES__ZERO_CREDIT",
+  "status": "CANDIDATE__DETERMINISTIC_NONCE_FREE_ONE_USE_LEASE__TRANSITIVE_DEPENDENCY_CLOSED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CASES__ZERO_CREDIT",
   "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
   "objective": "Close the final ambiguity between verified predicate-local activation and the irreversible one-use production claim by making claim identity a deterministic function of the exact frozen execution tuple.",
   "breakthrough": {
     "problem": "A one-use claim keyed by an underspecified execution lease can be replayed if mutable nonce, timestamp, run label, or other incidental fields are allowed to change the lease digest.",
     "solution": "Freeze a nonce-free canonical lease payload. Exactly one qualified and activated execution tuple maps to exactly one SHA-256 digest and exactly one refs/heads/unknown-domain-direct-claims/<digest> claim ref.",
-    "effect": "Changing any load-bearing execution blob changes identity; changing incidental run metadata is impossible because such metadata is excluded from the schema."
+    "effect": "Changing any load-bearing execution blob changes identity; changing incidental run metadata is impossible because such metadata is excluded from the schema.",
+    "transitive_dependency_repair": "Generator V2 imports Generator V1; Generator V1 was not content-addressed by the earlier production precommit. The lease now binds Generator V1 so the executed generator closure cannot drift under an unchanged V2 blob."
   },
   "subjects": {
     "runtime": "canonical/runtime/unknown_domain_direct_execution_lease_v1.py",
     "tests": "canonical/tests/test_unknown_domain_direct_execution_lease_v1.py",
     "activation_git_blob_sha": "337bb7ee777e8b0f7f6340f395ca6c50e466594c",
     "qualification_receipt_git_blob_sha": "36452412fb60ce38405f139111eba98b5cebc040",
-    "production_precommit_git_blob_sha": "ddf55f3e54ef6af89a95395075441742cb124258"
+    "production_precommit_git_blob_sha": "ddf55f3e54ef6af89a95395075441742cb124258",
+    "runtime_git_blob_sha": "61487ed479e08c3f9f2cd19977e7fe7d2ca0230e",
+    "tests_git_blob_sha": "1bb1a6d9fd09dbc3a4673ffeb372bc4b7d57239b",
+    "generator_v1_git_blob_sha": "f974a4594c78e74693c7ba5a19f131dfa481b937"
   },
   "claim_backend": {
     "repository": "moxnixmdj/verification-capsule-runner",
@@ -30,7 +34,8 @@
     "NO_CASE_GENERATION_BEFORE_CLAIM_SUCCESS",
     "NO_REPLAY_REPLACEMENT_OR_POST_RESULT_TUNING",
     "GLOBAL_FRESH_REALITY_FALSE",
-    "ZERO_INCREMENTAL_SPEND"
+    "ZERO_INCREMENTAL_SPEND",
+    "TRANSITIVE_GENERATOR_V1_DEPENDENCY_CONTENT_ADDRESSED"
   ],
   "authority": {
     "execution": false,
