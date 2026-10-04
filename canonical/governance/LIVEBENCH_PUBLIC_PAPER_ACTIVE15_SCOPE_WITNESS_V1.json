@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_PAPER_ACTIVE15_SCOPE_WITNESS_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PUBLIC_PAPER_TABLE4_EXACT_15_CHECKMARK_SCOPE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source": {
+    "url": "https://livebench.ai/livebench.pdf",
+    "table": "Table 4",
+    "pdf_printed_page": 31,
+    "caption_claimed_livebench_subset_count": 16,
+    "observed_livebench_checkmark_count": 15,
+    "source_kind": "PUBLIC_PRIMARY_PAPER"
+  },
+  "observed_livebench_rows": [
+    "keywords:existence",
+    "keywords:forbidden_words",
+    "length_constraints:number_paragraphs",
+    "length_constraints:number_words",
+    "length_constraints:number_sentences",
+    "length_constraints:nth_paragraph_first_word",
+    "detectable_content:postscript",
+    "detectable_format:number_bullet_lists",
+    "detectable_format:title",
+    "detectable_format:multiple_sections",
+    "detectable_format:json_format",
+    "combination:repeat_prompt",
+    "combination:two_responses",
+    "startend:end_checker",
+    "startend:quotation"
+  ],
+  "excluded_table_rows": [
+    "keywords:frequency",
+    "keywords:letter_frequency",
+    "language:response_language",
+    "detectable_content:number_placeholders",
+    "detectable_format:constrained_response",
+    "detectable_format:number_highlighted_sections",
+    "change_case:english_capital",
+    "change_case:english_lowercase",
+    "change_case:capital_word_frequency",
+    "punctuation:no_comma"
+  ],
+  "relation_to_target_derived_commitment": {
+    "active15_runtime_path": "canonical/runtime/livebench_frozen_active_legacy15_v1.py",
+    "active15_runtime_git_blob_sha": "34440ee69322e9d519cbe656cb03c55683a8b9c6",
+    "target_derived_hash_opening_is_not_load_bearing_for_this_candidate": true,
+    "public_table_matches_runtime_active15_exactly": true
+  },
+  "consequence_if_independently_verified": [
+    "ACTIVE15_IDENTITY_SURFACE_HAS_PUBLIC_PREEXISTING_PRIMARY_SOURCE_BASIS",
+    "CLEAN_CONSTRUCTIVE_PROOF_MAY_TARGET_THE_15_PUBLICLY_MARKED_LIVEBENCH_LEGACY_FAMILIES_WITHOUT_USING_TARGET_ROW_CONTENT",
+    "CAPTION_16_COUNT_MUST_NOT_OVERRIDE_VISIBLE_ROW_LEVEL_TABLE_WHEN_ROW_MAPPING_IS_EXACT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_15_ID_SET_ALONE_PROVES_CASE_FREQUENCIES_OR_COMBINATIONS",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_ROW_CONTENT_USED",
+    "NO_PROMOTION_UNTIL_INDEPENDENT_SOURCE_VERIFICATION"
+  ],
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "acceptance_credit": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
