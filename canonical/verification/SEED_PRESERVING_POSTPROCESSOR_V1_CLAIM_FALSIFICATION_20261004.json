@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_SEED_PRESERVING_POSTPROCESSOR_V1_CLAIM_FALSIFICATION_20261004",
+  "date": "2026-10-04",
+  "status": "DETERMINISTIC_COUNTEREXAMPLE__PRIOR_SEED_PRESERVATION_INTERPRETATION_FALSIFIED__ZERO_CREDIT",
+  "subject": {
+    "merged_runtime_commit": "64288c8e76f548b7d1018979ddfff27c17f8204b",
+    "merged_runtime_path": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+    "prior_verification_receipt": "canonical/verification/SEED_PRESERVING_INSTRUCTION_POSTPROCESSOR_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "prior_verification_commit": "2fec78d36d1fb8a87bddea9f1dd2c2e5469886f1",
+    "prior_verified_runtime_blob": "6762868d0954102e996ab240c85fdfee22e3f219"
+  },
+  "falsified_interpretations": [
+    "THE_MERGED_V1_POSTPROCESSOR_PRESERVES_A_REAL_SEMANTIC_SEED_ON_EVERY_PASS_ROUTE",
+    "UNSAFE_SEMANTIC_DELETION_FAILS_CLOSED_FOR_THE_EXACT_RESPONSE_ROUTE",
+    "CASE_CONVERSION_IS_UNIVERSALLY_SEMANTICS_PRESERVING"
+  ],
+  "deterministic_counterexamples": [
+    {
+      "seed": "irrelevant semantic draft",
+      "instruction": "Reply with exactly \"OK\"",
+      "merged_v1_behavior": {
+        "status": "PASS",
+        "response": "OK",
+        "seed_occurs_verbatim_in_response": false
+      },
+      "reason": "constraints.exact_response replaces candidate before validation, deleting the seed"
+    },
+    {
+      "seed": "Mixed Case Answer",
+      "instruction": "Write the entire response in lowercase only.",
+      "merged_v1_behavior": {
+        "status": "PASS",
+        "response": "mixed case answer",
+        "seed_occurs_verbatim_in_response": false
+      },
+      "reason": "lower() rewrites seed bytes and is not invertible or universally semantics preserving"
+    }
+  ],
+  "what_the_prior_public_runner_actually_proved": [
+    "THE_PINNED_BLOBS_EXECUTED_AND_THE_SEVEN_SYNTHETIC_TESTS_PASSED",
+    "THE_RUN_USED_NO_NETWORK_OR_INCREMENTAL_SPEND_AS_RECORDED",
+    "IT_DID_NOT_PROVE_THE_SEMANTIC_INTERPRETATION_THAT_ALL_PASS_ROUTES_PRESERVE_THE_SEED"
+  ],
+  "required_truth_repair": {
+    "pull_request": 1707,
+    "branch": "repair/seed-preservation-truth-v2-20261004",
+    "candidate_runtime_blob": "8cdb308941dbd6711279cbd1d505aca6aabdd376",
+    "candidate_test_blob": "df3ac20c7fdf97f9a5ef4cbee727578b12d96a35",
+    "new_mechanical_invariant": "ANY_PASS_RESPONSE_CONTAINS_THE_ORIGINAL_SEMANTIC_SEED_VERBATIM_AS_ONE_CONTIGUOUS_SUBSTRING",
+    "promotion_condition": "INDEPENDENTLY_VERIFY_THE_CORRECTED_BLOBS_AND_ADVERSARIAL_TESTS_BEFORE_REUSING_SEED_PRESERVATION_AS_ROOT1_EVIDENCE"
+  },
+  "scheduler_effect": [
+    "DO_NOT_REUSE_THE_PRIOR_RECEIPT_AS_PROOF_OF_SEED_PRESERVATION",
+    "DO_NOT_COUNT_THE_MERGED_V1_POSTPROCESSOR_AS_A_TRUSTED_ROOT1_SEED_PRESERVING_BRIDGE",
+    "USE_THE_CORRECTED_V2_INVARIANT_ONLY_AFTER_INDEPENDENT_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
