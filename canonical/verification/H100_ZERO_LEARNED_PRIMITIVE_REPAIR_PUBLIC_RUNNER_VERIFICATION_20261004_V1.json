@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_PRIMITIVE_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FRESH_PARAMETRIC_GENERALIZATION_PASS__PHASE2_3_OF_3_REPAIRED__ZERO_LEARNED_BYTES__ZERO_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_PREEXPOSURE_V1.json",
+      "git_blob_sha": "faddeb9bff2c5a317c25f963c3f267ab993f7a22"
+    },
+    "runtime": {
+      "path": "canonical/runtime/h100_zero_learned_parametric_unary_v1.py",
+      "git_blob_sha": "6a77f80e2cf01b079fcf7b688689d08a11b47c32"
+    },
+    "runtime_tests": {
+      "path": "canonical/tests/test_h100_zero_learned_parametric_unary_v1.py",
+      "git_blob_sha": "b2e04c9ee497ed51a54d9982ca6b9bf47f75c465"
+    },
+    "repair_runtime": {
+      "path": "canonical/runtime/h100_zero_learned_primitive_repair_v1.py",
+      "git_blob_sha": "2c05b8f7aaf4d8c4c66fe2cf163da858832c4f8b"
+    },
+    "repair_tests": {
+      "path": "canonical/tests/test_h100_zero_learned_primitive_repair_v1.py",
+      "git_blob_sha": "aded2cae8e32f8634502c7a41df9a0b9e7160cd4"
+    },
+    "candidate": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_CANDIDATE_V1.json",
+      "git_blob_sha": "e818777cf2075202edee0c73eaaff60101923144"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1745,
+    "verifier_head_sha": "d8446fd1c4df96199023a428fc844518db2afcdd",
+    "merge_commit": "a082271ed1d57ef53c8f7df27a5cc4fdbd3e0a59",
+    "workflow_run_id": 37186784210,
+    "workflow_job_id": 111390279300,
+    "conclusion": "success",
+    "verifier_path": "verify_h100_zero_learned_primitive_repair_v1.py",
+    "verifier_git_blob_sha": "bc390d8b3af9732112076a3e87b08157fb6c1410",
+    "workflow_path": ".github/workflows/verify-h100-zero-learned-primitive-repair-v1.yml",
+    "workflow_git_blob_sha": "180598e11f5f0a1e68654e6a45daf109ea4c690e"
+  },
+  "independently_verified": {
+    "copied_subject_tests": "PASS",
+    "fresh_parameter_verifier": "PASS",
+    "fresh_sinusoid_parameter_generalization": "PASS",
+    "fresh_exponential_parameter_generalization": "PASS",
+    "fresh_threshold_step_generalization": "PASS",
+    "nonmatching_cubic_fail_closed": "PASS",
+    "phase2_periodic_sine": "PASS",
+    "phase2_exponential": "PASS",
+    "phase2_sign_step": "PASS",
+    "phase2_tasks_solved": 3,
+    "phase2_task_count": 3,
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "random_search": false,
+    "dynamic_code_execution": false
+  },
+  "cumulative_stress_result": {
+    "phase1_within_operator": "9_OF_9_SOLVED",
+    "phase1_outside_operator_before_repair": "0_OF_3_SOLVED",
+    "phase2_residual_repair": "3_OF_3_SOLVED",
+    "cumulative_frozen_tasks_solved": "12_OF_12",
+    "cumulative_persistent_learned_bytes": 0,
+    "interpretation": "THE_ENTIRE_PREEXPOSED_NUMERIC_MECHANISM_STRESS_POPULATION_IS_NOW_COVERED_BY_ZERO_LEARNED_DETERMINISTIC_RUNTIME_MECHANISMS__THIS_IS_FINITE_STRESS_EVIDENCE_ONLY"
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_GENERALIZATION_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_MYSTERYMECHANISM_SCORE_CLAIM",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_CLAIM_ZERO_LEARNED_BYTES_ARE_SUFFICIENT_FOR_ALL_CAPABILITY_FAMILIES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
