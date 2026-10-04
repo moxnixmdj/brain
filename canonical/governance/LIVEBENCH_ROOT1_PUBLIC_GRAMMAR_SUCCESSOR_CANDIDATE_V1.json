@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_PUBLIC_GRAMMAR_SUCCESSOR_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONSTRUCTIVE_ROOT1_REPAIR__PUBLIC_GRAMMAR_ONLY__ZERO_UNSEEN_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "root1_gap": "EXACT_FROZEN_PREDECESSOR_FORCED_FAIL__SUCCESSOR_REQUIRED",
+  "public_upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "modern_instructions_path": "livebench/if_runner/ifbench/instructions.py",
+    "modern_instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "evaluation_path": "livebench/if_runner/ifbench/evaluation_lib.py",
+    "evaluation_blob": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+    "score_path": "livebench/process_results/instruction_following/utils.py",
+    "score_blob": "8ce01747887ec0792c8f024e1972e34ece781676"
+  },
+  "successor": {
+    "compiler_path": "canonical/runtime/livebench_public_grammar_compiler_v2.py",
+    "compiler_blob": "f5a5204bd3bd5cdfd9ba666e78e07b6e41d74d3c",
+    "adapter_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py",
+    "adapter_blob": "22e8bb39457e342032b96871ff545db90d338544",
+    "tests_path": "canonical/tests/test_livebench_public_grammar_compiler_v2.py",
+    "tests_blob": "984cc5c4681696ce47be49558c2ecfb3c0e624f6"
+  },
+  "supported_public_checker_routes": [
+    "OutputTemplateChecker",
+    "NoWhitespaceChecker",
+    "TitleCaseChecker",
+    "NewLineWordsChecker",
+    "NestedParenthesesChecker",
+    "NestedQuotesChecker",
+    "AlphabetLoopChecker",
+    "ThreeVowelChecker",
+    "ConsonantClusterChecker",
+    "PrimeLengthsChecker",
+    "PunctuationCoverChecker",
+    "RepeatSimpleChecker",
+    "OptionsResponseChecker",
+    "SpecialBulletPointsChecker",
+    "NumbersCountChecker",
+    "RepeatChangeChecker"
+  ],
+  "construction_rule": "USE_ONLY_VISIBLE_PROMPT_TEXT_AND_PINNED_PUBLIC_BUILD_DESCRIPTION_CHECKER_SEMANTICS__SEARCH_SMALL_DETERMINISTIC_WITNESS_POOL__EMIT_ONLY_WHEN_ALL_RECOGNIZED_PUBLIC_RULE_MIRRORS_PASS__OTHERWISE_FALL_BACK_UNCHANGED",
+  "contamination_firewall": [
+    "NO_CASE_73_OR_LATER",
+    "NO_UNEXPOSED_TERMINAL_PROMPT_CONTENT",
+    "NO_TERMINAL_CASE_IDS",
+    "NO_HIDDEN_INSTRUCTION_ID_LIST",
+    "NO_HIDDEN_KWARGS",
+    "NO_V6_OR_V10_PER_CASE_PATTERN_SPECIAL_CASES",
+    "NO_POST_PROMPT_NETWORK_OR_PACKAGE_ACQUISITION",
+    "NO_POLICY_WEAKENING"
+  ],
+  "proof_state": {
+    "constructive_code_written": true,
+    "independent_verification": false,
+    "replay72_authority": false,
+    "new_case_authority": false,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "next": [
+    "RUN_UNIT_AND_PUBLIC_SYNTHETIC_TESTS_IN_ISOLATED_RUNNER",
+    "VERIFY_LOCAL_MIRRORS_MATCH_PINNED_PUBLIC_CHECK_FOLLOWING_SEMANTICS_FOR_SUPPORTED_CLASSES",
+    "IF_PASS_FREEZE_CONTENT_ADDRESSED_SUCCESSOR",
+    "ONLY_THEN_REPLAY_ALREADY_EXPOSED_72_WITH_AGGREGATE_STRUCTURAL_OUTPUT",
+    "DO_NOT_CONSUME_UNSEEN_TERMINAL_CASES"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_YET_PROVE_65_7",
+    "DOES_NOT_YET_PROVE_ALL_83_PUBLIC_INSTRUCTION_TYPES",
+    "DOES_NOT_RETROACTIVELY_REPAIR_FAILED_PREDECESSOR",
+    "DOES_NOT_AUTHORIZE_NEW_TERMINAL_CASE_EXPOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
