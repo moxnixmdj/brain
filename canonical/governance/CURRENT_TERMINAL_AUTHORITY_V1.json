@@ -1140,6 +1140,16 @@
       "activation_verifier_merge_commit": "a7289c9b0f7b207cb061047e0dd7778b8db920ee",
       "load_bearing_authority": "UNIVERSAL_LEARNING_PROOF_PROGRAM_V7",
       "status": "INDEPENDENT_VERIFICATION_PASS__OPERATIVE_UNKNOWN_DOMAIN_META_POLICY_PLANNING_OVERLAY__ZERO_CREDIT"
+    },
+    "finance_index_public_transform_saturation": {
+      "subject_path": "canonical/governance/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_20261004_V1.json",
+      "subject_git_blob_sha": "2a831b8632b18fe9e10ed423f131b6ae93d99b77",
+      "verification_path": "canonical/verification/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "8aea6757479980c9f2e2538a4f2651ad23653c10",
+      "activation_path": "canonical/governance/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "d286b55e361194a77acd21def918d12e07227964",
+      "status": "CANDIDATE__INDEPENDENT_SUBJECT_PASS__POINTER_PROJECTION_REVERIFY_PENDING__ZERO_CREDIT",
+      "effective_scheduling_authority": false
     }
   },
   "residual": [
@@ -1779,7 +1789,7 @@
     "execution_authority": false,
     "promotion_authority": false
   },
-  "next_terminal_action": "EXECUTE_ONLY_ACTIVE_ROOT2_V10_NONDOMINATED_ZERO_REALITY_ROUTE_DELTAS__V10_EXTERNAL_FACT_ROUTING_ACTIVE__PRIMARY_SOURCE_DELETIONS_ACTIVE__ROOT3_V2_ZERO_RUNNABLE__NO_FRESH_SCORE_BEFORE_ZERO_REALITY_FIXED_POINT",
+  "next_terminal_action": "ROOT2_V10_ACTIVE_ZERO_REALITY_FRONTIER__FINANCE_INDEX_PUBLIC_TRANSFORM_SEARCH_STOP_POINTER_REVERIFY_PENDING__EXECUTE_ONLY_REMAINING_NONDominated_FACTS__NO_FRESH_REALITY",
   "ownership_state": {
     "verified_owned_families": 5,
     "total_families": 19,
