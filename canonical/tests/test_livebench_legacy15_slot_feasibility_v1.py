@@ -234,3 +234,15 @@ def test_strict_less_than_one_sentence_is_proved_unsat():
     assert out["hard_unsat_reasons"] == [
         "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
     ]
+
+
+def test_sentence_less_than_one_is_unsat_under_strict_nonempty_gate():
+    contracts = [
+        {
+            "instruction_id": f.SENTENCE,
+            "slots": {"num_sentences": 1, "relation": "less than"},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "PROVED_UNSAT"
+    assert "STRICT_NONEMPTY_GATE_CONFLICTS_WITH_SENTENCE_LT_ONE" in out["hard_unsat_reasons"]
