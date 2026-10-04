@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_SUBCLASS_REPAIR_SEMANTIC_INVARIANCE_PRECOMMIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__DETERMINISTIC_REPAIR_INVARIANCE_PASS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "frozen_repromotion_gate": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_SUBCLASS_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V1.json",
+    "git_blob_sha": "9cde2347b50b9a397c8428571d8c7306be8e5c06"
+  },
+  "immutable_semantic_authority": {
+    "protocol": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+      "git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab"
+    },
+    "evaluator": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EVALUATOR_FAMILY_V1.json",
+      "git_blob_sha": "52090daf78d12020af48c1b6ffaea056d9029e1b"
+    },
+    "candidate": {
+      "path": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+      "git_blob_sha": "8df7f13455b710623806a8219174b397a2c3c442"
+    },
+    "scorer": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py",
+      "git_blob_sha": "e8cf5d1b5d311644725a751c15e6235958fb587d"
+    },
+    "execution_harness": {
+      "path": "canonical/runtime/unknown_domain_direct_execution_harness_v1.py",
+      "git_blob_sha": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+    }
+  },
+  "repaired_subject": {
+    "source_branch": "breakthrough/unknown-domain-v6-subclass-repair-clean-v1",
+    "generator_v5": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py",
+      "git_blob_sha": "60373126f3ee27368ae06e6d7d559f1b826d90d4"
+    },
+    "regression": {
+      "path": "canonical/tests/test_unknown_domain_direct_v5.py",
+      "git_blob_sha": "5bc00ff6f7671ad43acb04a6fe4c3b6d1893c380"
+    },
+    "universal_proof": {
+      "path": "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py",
+      "git_blob_sha": "58d3a61f5e2cb24b4387ddd817b64f897f62fe06"
+    }
+  },
+  "deterministic_delta_classification": {
+    "pre_repair_generator_blob": "a97459fe407ea4852f57f12f504fbc0121db9824",
+    "changed_runtime_surface": [
+      "_beacon_gate: instance strip dispatch -> built-in str.strip descriptor",
+      "_canonical_beacon: instance encode dispatch -> built-in str.encode descriptor",
+      "_secret_bytes_total: bytes-subclass identity/buffer materialization -> base bytes.__getitem__(full_slice); str encode -> built-in str.encode descriptor"
+    ],
+    "unchanged_load_bearing_semantics": [
+      "frozen transfer/abstention protocol",
+      "frozen evaluator family",
+      "candidate V3 decision semantics",
+      "hidden scorer",
+      "execution harness",
+      "27-case population cardinality and family partition"
+    ],
+    "repair_purpose": "REMOVE_PYTHON_SUBCLASS_VIRTUAL_DISPATCH_PARTIALITY_WITHOUT_CHANGING_THE_ACCEPTANCE_FUNCTION",
+    "acceptance_function_changed": false,
+    "threshold_changed": false,
+    "task_population_changed": false,
+    "comparator_changed": false
+  },
+  "preoutcome_deduction": {
+    "semantic_bridge_condition": "SATISFIED_IF_AND_ONLY_IF_THE_EXACT_REPAIRED_BLOBS_PASS_THE_ALREADY_FROZEN_INDEPENDENT_VERIFIER_GATE",
+    "independent_verifier_result_assumed": false,
+    "predicate_state_change_from_this_artifact": false
+  },
+  "hard_nonclaims": [
+    "NO_REPROMOTION_FROM_THIS_PRECOMMIT",
+    "NO_INDEPENDENT_VERIFIER_OUTCOME_ASSUMED",
+    "NO_MYSTERYMECHANISM_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "ANY_HASH_DRIFT_INVALIDATES_THIS_CERTIFICATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
