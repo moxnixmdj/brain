@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V10_REPLAY72_CHRONOLOGY_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAIL_CLOSED_CHRONOLOGY_RECONCILIATION__V10_EPOCH_CONSUMED__DIAGNOSTIC_RESULT_QUARANTINED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Reconcile the exact claim, canonical authority, content-addressed launcher, revocation, rebind, and replay chronology without retroactive authority inference.",
+  "immutable_events": [
+    {
+      "event": "CONTENT_ADDRESSED_RUNNER_BINDING_VERIFIED",
+      "time_utc": "2026-10-04T10:32:28Z",
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 37195683427,
+      "workflow_job_id": 111416933067,
+      "conclusion": "success",
+      "runner_activation_git_blob_sha": "7a2c2fdc3cc08862850a13667ee2cd2b2e2aae91",
+      "launcher_git_blob_sha": "2d3b9ad4e3f4f02af56f402733a8d8bb04ab79c0"
+    },
+    {
+      "event": "V10_ONE_USE_CLAIM_CREATED",
+      "time_utc": "2026-10-04T10:32:36Z",
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 37195688717,
+      "workflow_job_id": 111416950471,
+      "claim_ref": "refs/heads/livebench-v10-claims/a71f24f79df6b6be6e910efb1299776ac9fede9e78539577695d6e386fc2eb52",
+      "claim_http_status": 201,
+      "response_object_sha": "d784c3bff5f83672a6a1923fce00e395f3c5d413"
+    },
+    {
+      "event": "BRAIN_CONTENT_ADDRESSED_BINDING_COMMITTED",
+      "time_utc": "2026-10-04T10:32:53Z",
+      "commit_sha": "d19175e818d2cba2701cf4351cda745ad422de2c"
+    },
+    {
+      "event": "BRAIN_UNSAFE_V10_AUTHORITY_REVOKED",
+      "time_utc": "2026-10-04T10:32:56Z",
+      "commit_sha": "da4cff7a3aee918c16c8bd451c624355950d6315"
+    },
+    {
+      "event": "BRAIN_V10_REBOUND_TO_CONTENT_ADDRESSED_LAUNCHER",
+      "time_utc": "2026-10-04T10:33:06Z",
+      "commit_sha": "28e1f17edc4ec81f89ef6b868a824af40440fc25"
+    },
+    {
+      "event": "V10_REPLAY72_DIAGNOSTIC_COMPLETED",
+      "time_utc": "2026-10-04T10:33:24Z",
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 37195688717,
+      "workflow_job_id": 111416950471,
+      "replayed_already_exposed_cases": 72,
+      "new_case_exposure": false,
+      "classification_histogram": {
+        "POLICY_BLOCK:POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN": 43,
+        "COMPOSITION_PRODUCER:UNRESOLVED_GROUNDED_CLAUSES": 27,
+        "ARCHITECTURAL_GAP:CONTROL_OR_FANOUT": 2
+      },
+      "unclassified_runtime_count": 0
+    }
+  ],
+  "causal_reconciliation": {
+    "exact_tuple_authorized_before_claim": false,
+    "reason": "THE_201_ONE_USE_CLAIM_PRECEDED_THE_BRAIN CONTENT_ADDRESSED BINDING COMMIT AND THE LATER CANONICAL REBIND TO THE CORRECTED LAUNCHER; THE CLAIM THEREFORE MUST NOT RECEIVE RETROACTIVE AUTHORITY.",
+    "old_epoch_claim_consumed": true,
+    "diagnostic_result_admissible_for_acceptance": false,
+    "diagnostic_result_admissible_for_promotion": false,
+    "diagnostic_result_admissible_for_capability_failure": false,
+    "new_terminal_case_exposure": false,
+    "safe_information_preserved": "ONLY THE FACT THAT THE ALREADY-EXPOSED 72-CASE PREFIX WAS REPLAYED AND THE AGGREGATE HISTOGRAM WAS OBSERVED; LOAD-BEARING USE REQUIRES SEPARATE INDEPENDENT ADMISSIBILITY VERIFICATION."
+  },
+  "required_next": [
+    "FAIL_CLOSE_V10_EPOCH_AS_CONSUMED_AND_NONEXECUTABLE",
+    "INDEPENDENTLY_VERIFY_THIS_CHRONOLOGY_AGAINST_GITHUB_RUN_JOB_LOG_AND_COMMIT_TIMESTAMPS",
+    "IF_REPLAY72_IS_STILL_INFORMATION_POSITIVE_CREATE_A_NEW_CONTENT_ADDRESSED_EPOCH_WITH_CANONICAL_BRAIN_AUTHORITY_COMMITTED_BEFORE_THE_ONE_USE_CLAIM",
+    "DO_NOT_EXPOSE_CASE_73_OR_LATER_FROM_THIS RECONCILIATION",
+    "NO_CANDIDATE_ADAPTATION_FROM_RAW_TERMINAL_PROMPTS_RESPONSES_OR_CASE_IDS"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE",
+    "NO_LIVEBENCH_PASS_OR_FAIL",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_ROOT1_REOPEN_FROM_AGGREGATE_HISTOGRAM",
+    "NO_RETROACTIVE_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
