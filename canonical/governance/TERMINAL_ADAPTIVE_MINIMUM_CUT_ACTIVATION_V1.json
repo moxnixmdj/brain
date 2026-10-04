@@ -1,0 +1,182 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_MINIMUM_CUT_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_26_ADAPTIVE_TWO_PHASE_CUT__INDEPENDENT_PR_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Minimize expected terminal wall-clock under correctness-first, zero-incremental-spend, fail-closed evidence, while deleting zero-probability and dominated routes and recomputing after every verified receipt.",
+  "current_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gaps": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "terminal": false
+  },
+  "implementation": {
+    "adaptive_cut_solver": {
+      "path": "canonical/runtime/minimum_terminal_cut_solver_v2.py",
+      "git_blob_sha": "da2ae55103f9b8f8bbe10e6316d152027e31854c",
+      "tests": "canonical/tests/test_minimum_terminal_cut_solver_v2.py",
+      "tests_git_blob_sha": "065af38ed6cb6be6680a18dcede3ca65cb5374d1",
+      "objective": [
+        "MAXIMIZE_CURRENT_UNRESOLVED_PREDICATE_COVERAGE",
+        "MINIMIZE_CAUSAL_CRITICAL_PATH_WALL_CLOCK",
+        "MINIMIZE_FRESH_REALITY",
+        "MINIMIZE_ACTION_COUNT",
+        "MAXIMIZE_CONSERVATIVE_CORRELATION_AWARE_INFORMATION_VALUE"
+      ],
+      "probability_rule": "CALLER_SUPPLIES_ONLY_EVIDENCE_JUSTIFIED_INTERVALS__P_UPPER_EQ_0_DELETES_ROUTE__NO_INVENTED_POINT_PROBABILITIES"
+    },
+    "supertransaction": {
+      "path": "canonical/runtime/terminal_adaptive_supertransaction_v1.py",
+      "git_blob_sha": "e3060affa87b15a5c29246125783702be65061f6",
+      "tests": "canonical/tests/test_terminal_adaptive_supertransaction_v1.py",
+      "tests_git_blob_sha": "dd545793b06d48a5f983b2be3d8bea16b1e333a9",
+      "causal_phase_lower_bound": 1,
+      "causal_phase_upper_bound": 2,
+      "phase_z": "ZERO_REALITY_SUPERTRANSACTION",
+      "phase_r": "MINIMUM_REALITY_SUPERTRANSACTION__CONDITIONAL",
+      "finality": "AUTOMATIC_AFTER_EVERY_RECEIPT__NO_SEPARATE_MANUAL_PHASE"
+    }
+  },
+  "source_bindings": {
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "d2e1827a40e1e547f17b61913f7c66f1ebce634c"
+    },
+    "root2_frontier_v5": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5.json",
+      "git_blob_sha": "e948022f0a4e8d91b949a5155d850d56aa137c87"
+    },
+    "root3_minimum_cut_v2": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+      "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d"
+    },
+    "retrieval_v19_current": {
+      "path": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+      "git_blob_sha": "55b1d411561f720fcd9d66c127cecd63ef0b5f5e"
+    },
+    "tb4_attainability": {
+      "path": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+      "git_blob_sha": "a7b0c692251b92819007c581b9fe84b75960cab7"
+    },
+    "finance_direct_threshold": {
+      "path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_ACTIVATION_V1.json",
+      "git_blob_sha": "9b9d4a41d19a5e58e8967027e1d1837790287dc2"
+    },
+    "finance_agent_zero_cost": {
+      "path": "canonical/governance/FINANCE_AGENT_V2_ZERO_COST_TOOL_BOUNDARY_20261004_V1.json",
+      "git_blob_sha": "032caa374280983945321f0a5706c0c665c097a6"
+    },
+    "osworld_methodology": {
+      "path": "canonical/governance/OSWORLD_OPUS55_METHODOLOGY_PUBLIC_CORROBORATION_20261004_V1.json",
+      "git_blob_sha": "259a6fa8f7daf744e6e06902d43925419cdd4d9b"
+    }
+  },
+  "deterministic_route_deletions": [
+    {
+      "route": "TB4_FROZEN_CURRENT_NO_REPLAY_THRESHOLD_ROUTE",
+      "probability_upper": 0,
+      "basis": "INDEPENDENT_VERIFIED_ATTAINABILITY_UPPER_BOUND_180_LT_REQUIRED_220",
+      "reopen": "CREDITABILITY_ROUTE_OR_CARRIER_ASSUMPTION_MATERIALLY_CHANGES"
+    },
+    {
+      "route": "TB4_CIRCLECI_FREE_XLARGE_GEN2",
+      "probability_upper": 0,
+      "basis": "CURRENT_FREE_PLAN_RESOURCE_TABLE_EXCLUDES_REQUIRED_XLARGE",
+      "reopen": "NEWER_PRIMARY_SOURCE_OR_ACCOUNT_SPECIFIC_VERIFIED_ZERO_SPEND_8CPU_ROUTE"
+    },
+    {
+      "route": "CURSORBENCH_OWNER_ACCESS_SEARCH",
+      "probability_upper": 0,
+      "basis": "DIRECT_OWNER_REPLY_CLOSED_EXTERNAL_EVALUATION_ROUTE",
+      "reopen": "MATERIAL_POLICY_CHANGE_OR_STRONGER_SCOPE_COMPLETE_PROOF"
+    },
+    {
+      "route": "AUTOMATIONBENCH_PUBLIC600_EQUIVALENCE_SEARCH",
+      "probability_upper": 0,
+      "basis": "PUBLIC_600_NOT_EXACT_PRIVATE_LEADERBOARD_POPULATION",
+      "reopen": "EXACT_PRIVATE_ROUTE_OWNER_EVIDENCE_OR_STRONGER_SCOPE_COMPLETE_PROOF"
+    }
+  ],
+  "phase_policy": {
+    "Z": {
+      "name": "ZERO_REALITY_SUPERTRANSACTION",
+      "parallel": true,
+      "fresh_reality": false,
+      "actions": [
+        "USE_RETRIEVAL_V19_ONLY_FOR_LOAD_BEARING_NEW_OR_UNSATURATED_FACTS",
+        "BIND_EXACT_COMPARATOR_IDENTITY_TUPLES_BEFORE_ANY_SCORE",
+        "APPLY_OBJECTIVE_CEILING_FORMAL_DOMINANCE_AND_STRONGER_SCOPE_PROOFS",
+        "BIND_INFORMATION_POSITIVE_OWNER_OR_ACCESS_RECEIPTS_ON_ARRIVAL",
+        "RUN_ONLY_NAMED_ZERO_CASE_ACCOUNT_PROTOCOL_AND_QUOTA_PREFLIGHTS",
+        "BIND_VERIFIED_FINANCE_DIRECT_WEIGHTED_THRESHOLD_ROUTE_TO_CURRENT_ROOT2_AUTHORITY",
+        "RECOMPUTE_ROOT2_ROOT3_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA"
+      ],
+      "stop": "VERIFIED_ZERO_REALITY_FIXED_POINT"
+    },
+    "R": {
+      "name": "MINIMUM_REALITY_SUPERTRANSACTION",
+      "conditional": true,
+      "gate": "PHASE_Z_FIXED_POINT_LEAVES_UNRESOLVED_AND_EXPLICIT_FRESH_REALITY_AUTHORITY_IS_GRANTED",
+      "parallel": true,
+      "actions": [
+        "EXECUTE_ONLY_MINIMUM_FIXED_BAR_SCORE_RESIDUALS_WITH_PASS_FAIL_LOCKS",
+        "EXECUTE_ONE_SHARED_ROOT3_MATCHED_SUPERPORTFOLIO_WAVE",
+        "EXECUTE_SURVIVING_FOUR_DIRECT_ORACLE_LEAVES_AS_ONE_PARALLEL_MICROBATCH"
+      ],
+      "backprop": "EVERY_VERIFIED_RECEIPT_RECOMPUTES_ACCEPTANCE_AND_RESCHEDULES_IMMEDIATELY"
+    }
+  },
+  "finality": {
+    "separate_manual_phase": false,
+    "rule": "WHEN_UNRESOLVED_ATOMIC_REACHES_ZERO_RUN_FAMILY_REDUCER_OWNERSHIP_PROMOTION_CLEANROOM_AND_FINAL_PROOF_BUNDLE_ATOMICALLY"
+  },
+  "probability_policy": {
+    "deductive_certainty": "USE_0_OR_1_ONLY_WHEN_PROVED",
+    "uncalibrated_external_event": "PRESERVE_INTERVAL_UNKNOWN__NO_POINT_ESTIMATE",
+    "repeated_bernoulli": "JEFFREYS_BETA_POSTERIOR_ONLY",
+    "correlated_routes": "DO_NOT_DOUBLE_COUNT"
+  },
+  "search_policy": {
+    "authority": "GLOBAL_RETRIEVAL_ENTRYPOINT_V4",
+    "architecture": "HYBRID_BRAIN_CONTROLLER_PLUS_MULTIPLE_EXTERNAL_INDEXES_PLUS_DIRECT_ENUMERATION_PLUS_GRAPH_EXPANSION",
+    "single_engine": "REJECTED_AS_STRUCTURALLY_INSUFFICIENT",
+    "full_index_rebuild": "REJECTED_AS_DOMINATED_UNDER_ZERO_SPEND_AND_MINIMUM_WALL_CLOCK",
+    "stop": "FIRST_INDEPENDENTLY_VERIFIED_SUFFICIENT_WITNESS",
+    "open_world_miss": "UNKNOWN_NOT_NONEXISTENT"
+  },
+  "finance_direct_threshold_effect": {
+    "current_status": "VERIFIED_THEOREM_CANDIDATE_REQUIRES_CURRENT_ROOT2_AUTHORITY_BINDING",
+    "new_primary_route": "MINIMIZE_VERIFIED_WEIGHTED_BRAIN_COMPONENT_LOWER_BOUND_DEFICIT_TO_61",
+    "separate_index_run_required": false,
+    "acceptance_credit_delta": 0
+  },
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_FRESH_REALITY_BEFORE_VERIFIED_ZERO_REALITY_FIXED_POINT",
+    "NO_PUBLIC_PRIVATE_SUBSTITUTION_WITHOUT_EXACT_OR_SUPERSET_PROOF",
+    "NO_REEXECUTION_OF_ZERO_PROBABILITY_ROUTE_WITHOUT_DECLARED_REOPEN_EVENT",
+    "NO_POINT_PROBABILITY_WITHOUT_CALIBRATION_OR_DEDUCTIVE_CERTAINTY",
+    "FINALITY_IS_AUTOMATIC_BACKPROP_NOT_A_SEPARATE_MANUAL_ACTION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING"
+  ],
+  "authority": {
+    "scheduling_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
