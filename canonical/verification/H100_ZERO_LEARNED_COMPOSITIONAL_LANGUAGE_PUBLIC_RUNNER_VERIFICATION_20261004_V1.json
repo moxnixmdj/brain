@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_COMPOSITIONAL_LANGUAGE_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FROZEN_12_OF_12_PLUS_5_FRESH_CHALLENGES__ZERO_LEARNED_BYTES__ZERO_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_COMPOSITIONAL_LANGUAGE_PREEXPOSURE_V1.json",
+      "git_blob_sha": "2d2af5020bc30bc322d4285b54c0d979a5c0b882"
+    },
+    "candidate": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_COMPOSITIONAL_LANGUAGE_CANDIDATE_V1.json",
+      "git_blob_sha": "786b487b9d55a02de970d0092e3c879d44acab9a"
+    },
+    "runtime": {
+      "path": "canonical/runtime/h100_zero_learned_compositional_language_v1.py",
+      "git_blob_sha": "fd5f16e4ac4187a98f7824b68879871a82eece6a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_h100_zero_learned_compositional_language_v1.py",
+      "git_blob_sha": "1c5095eca2ecd43eca0940662b69f5de8fb3cc19"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1809,
+    "verifier_head_sha": "083cac35e437850ef2947e87ec6b826d2f9a7c36",
+    "merge_commit": "40304ce25a57b948f0a96c2e08894c694aa89a2a",
+    "workflow_run_id": 37192828256,
+    "workflow_job_id": 111408439258,
+    "conclusion": "success",
+    "verifier_path": "verify_h100_compositional_language_v1.py",
+    "verifier_git_blob_sha": "12108aea9e1e3ad33739c157ee48c8a3243b3f13",
+    "workflow_path": ".github/workflows/verify-h100-compositional-language-v1.yml",
+    "workflow_git_blob_sha": "7735efe488bb328545c85c95dabb57350e8d62a8"
+  },
+  "independently_verified": {
+    "exact_subject_blobs": true,
+    "copied_subject_tests": "PASS",
+    "frozen_preexposed_tasks": "12_OF_12_EXACT",
+    "fresh_compositional_challenges": "5_OF_5_PASS",
+    "runtime_import_surface": [
+      "__future__",
+      "re",
+      "dataclasses",
+      "typing"
+    ],
+    "learned_or_network_imports_detected": false,
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0
+  },
+  "deduction": "BOUNDED_MULTI_CLAUSE_ROLE_COMPOSITION_NEGATION_CONTRADICTION_HANDLING_AND_BOUNDED_REFERENCES_CAN_BE_COMPILED_WITH_ZERO_PERSISTENT_LEARNED_STATE_ON_THE_FROZEN_POPULATION_AND_FIVE_INDEPENDENT_FRESH_CHALLENGES",
+  "residual_after_verification": [
+    "OPEN_WORLD_TOOL_TRACE_SEMANTICS_OUTSIDE_KNOWN_STRUCTURES",
+    "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+    "DIRECT_UNKNOWN_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION_EVIDENCE",
+    "OPEN_WORLD_LEXICAL_COVERAGE_COMPLETENESS"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_LANGUAGE_UNDERSTANDING_CLAIM",
+    "NO_GENERAL_PRONOUN_RESOLUTION_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
