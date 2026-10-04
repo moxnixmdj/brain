@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_RELEASE_ASSET_INTERNALIZATION_ROUTE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__DURABLE_LEARNED_STATE_STORAGE_ROUTE_COMPILED__UPLOAD_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": {
+    "prior_blocker": "LARGE_OPEN_WEIGHT_CAPABILITY_STATE_LACKED_A_BRAIN_CONTROLLED_DURABLE_ZERO_LFS_QUOTA_STORAGE_ROUTE",
+    "new_route": "SPLIT_EXACT_LEARNED_STATE_INTO_CONTENT_ADDRESSED_GITHUB_RELEASE_ASSETS_AND_RECONSTRUCT_VERIFY_BEFORE_SCORED_EXECUTION",
+    "why_it_matters": "THE_STORAGE_PROBLEM_IS_NOW_BOUNDED_BY_AN_EXACT_CHUNKING_AND_HASH_VERIFICATION PROTOCOL RATHER THAN BY GIT_REPOSITORY_OR_LFS_SIZE"
+  },
+  "public_provider_contract": {
+    "provider": "GitHub Releases",
+    "official_documentation": "https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases",
+    "observed_2026_10_04": {
+      "maximum_assets_per_release": 1000,
+      "per_asset_limit": "STRICTLY_UNDER_2_GIB",
+      "total_release_size_limit": "NONE_STATED_BY_GITHUB",
+      "bandwidth_limit": "NONE_STATED_BY_GITHUB"
+    },
+    "separation_from_git_lfs": "RELEASE_ASSETS_ARE_DISTRIBUTION_ASSETS_NOT_GIT_TRACKED_MODEL_BLOBS"
+  },
+  "compiled_runtime": {
+    "path": "canonical/runtime/release_chunk_archive_v1.py",
+    "default_chunk_bytes": 1900000000,
+    "properties": [
+      "STREAMING_SPLIT",
+      "PER_CHUNK_SHA256",
+      "WHOLE_ARTIFACT_SHA256",
+      "EXACT_BYTE_ACCOUNTING",
+      "PATH_TRAVERSAL_REJECTION",
+      "ATOMIC_RECONSTRUCTION",
+      "FAIL_CLOSED_ON_ANY_HASH_SIZE_INDEX_OR_SCHEMA_MISMATCH"
+    ]
+  },
+  "current_open_weight_root1_context": {
+    "preferred_full_precision_candidate": "Qwen/Qwen3.8-27B_OR_VERIFIED_DERIVATIVE",
+    "exact_base_checkpoint_bytes_from_existing_brain_evidence": 55563006776,
+    "default_chunk_plan_for_exact_base_checkpoint": 30,
+    "note": "A_SMALLER_QUANTIZED_FORM_IS_PREFERRED_ONLY_AFTER_SEPARATE_PUBLIC_NONTERMINAL_CAPABILITY_REQUALIFICATION"
+  },
+  "execution_boundary": [
+    "MODEL_BYTES_ARE_NOT_INTERNALIZED_BY_THIS_COMMIT",
+    "THE_RELEASE_MUST_BE_BRAIN_CONTROLLED_AND_THE_COMPLETE_CHUNK_SET_UPLOADED",
+    "THE_RELEASE_MANIFEST_AND_ALL_ASSET_DIGESTS_MUST_BE_BOUND_IN_CANONICAL_EVIDENCE",
+    "RECONSTRUCTION_MUST_PASS_BEFORE_EVALUATION",
+    "NO_NETWORK_OR_RELEASE_DOWNLOAD_DEPENDENCY_IS_ALLOWED_DURING_SCORED_EXECUTION",
+    "CAPABILITY_QUALITY_MUST_BE_REQUALIFIED_FOR_THE_EXACT_STORED_INFERENCE_FORM"
+  ],
+  "minimum_next_actions": [
+    "SELECT_SMALLEST_LOCAL_FORM_WITH_A_PRECOMMITTED_PUBLIC_NONTERMINAL_QUALIFICATION_PROTOCOL",
+    "MATERIALIZE_AND_HASH_THE_EXACT_MODEL_FILE",
+    "SPLIT_WITH_RELEASE_CHUNK_ARCHIVE_V1",
+    "UPLOAD_CHUNKS_TO_A_BRAIN_CONTROLLED_GITHUB_RELEASE",
+    "INDEPENDENTLY_DOWNLOAD_RECONSTRUCT_AND_HASH_VERIFY",
+    "QUALIFY_THE_RECONSTRUCTED_FORM_ON_PUBLIC_NONTERMINAL_PARAPHRASE_SIMPLIFY_STORY_AND_SUMMARIZE_TASKS",
+    "ONLY_THEN_BIND_AS_A_LOCAL_SEMANTIC_SEED_PRODUCER"
+  ],
+  "hard_nonclaims": [
+    "NO_MODEL_BYTES_UPLOADED_YET",
+    "NO_QUANTIZED_FORM_HAS_BEEN_PROVED_TO_RETAIN_THE_LIVEBENCH_MARGIN",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_TERMINAL_EXECUTION_AUTHORITY",
+    "STORAGE_INTEGRITY_IS_NOT_MODEL_CAPABILITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
