@@ -158,12 +158,25 @@ def solve_with_pinned_livebench(
     contracts: Sequence[Mapping[str, Any]],
     livebench_root: str,
     *,
+    nltk_wheel_path: str | None = None,
+    nltk_data_root: str | None = None,
     max_per_subset: int = relaxed.DEFAULT_MAX_PER_SUBSET,
     max_total: int = relaxed.DEFAULT_MAX_TOTAL,
 ) -> dict[str, Any]:
-    """Run the bounded pointwise search against exact pinned legacy checker bytes."""
-    binding = exact_postvalidator.verify_pinned_source(livebench_root)
-    checker = exact_postvalidator.checker_for_root(livebench_root)
+    """Run bounded search against source- and runtime-bound legacy checkers."""
+    registry, binding = exact_postvalidator.load_proofgrade_registry(
+        livebench_root,
+        contracts,
+        nltk_wheel_path=nltk_wheel_path,
+        nltk_data_root=nltk_data_root,
+    )
+
+    def checker(
+        response: str,
+        rows: Sequence[Mapping[str, Any]],
+    ) -> Sequence[bool]:
+        out = exact_postvalidator.evaluate_with_registry(response, rows, registry)
+        return out["checker_results"]
 
     result = solve_with_checker(
         contracts,
