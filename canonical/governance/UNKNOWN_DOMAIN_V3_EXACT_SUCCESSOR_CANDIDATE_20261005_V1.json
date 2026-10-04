@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V3_EXACT_SUCCESSOR_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_SUCCESSOR__CLOSES_KNOWN_ADD2_IEEE754_AND_IDENTIFIER_TOTALITY_HOLES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "repaired_holes": {
+    "add2_exact_ieee754": {
+      "old_failure": "V2 could select the role-swapped true ADD2 support and compute a one-ULP-different terminal value while the scorer requires exact equality.",
+      "repair": "V3 orients r0/r1 from visible source-to-target sign signatures before concluding.",
+      "frozen_v2_add2_indexes": [4, 10],
+      "source_and_target_public_signatures": {
+        "r0": [-1, 1, -1],
+        "r1": [1, -1, 1]
+      },
+      "exactness_reason": "Once the hidden true role orientation is reconstructed from visible structural signatures, candidate and generator evaluate the identical Python expression order (bias+r0)+r1 over identical floats."
+    },
+    "identifier_totality": {
+      "old_failure": "V2 did not structurally reject every intra-domain truncated-HMAC identifier collision class.",
+      "repair": "V3 validates mapping, relevant, distractor, source binding and every surface input cardinality before returning a population; any collision fails closed before emission.",
+      "claim_scope": "EVERY_SUCCESSFULLY_EMITTED_V3_TRANSFER_PACKET_HAS_STRUCTURALLY_INJECTIVE_SURFACE_IDENTIFIERS"
+    }
+  },
+  "runtime": {
+    "candidate": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+    "generator": "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py",
+    "tests": "canonical/tests/test_unknown_domain_direct_v3_exact_successor_v1.py"
+  },
+  "decisive_regression": {
+    "qualification_beacon": "CEX-00006-ABCDEFGHIJKLMNOP",
+    "production_or_terminal_case": false,
+    "old_v2_result": "FAIL__DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG__ONE_ULP_ROLE_ORDER_ERROR",
+    "required_v3_result": "PASS_EXACT_FROZEN_SCORER"
+  },
+  "qualification_falsification_sweep": {
+    "population_count": 32,
+    "cases_per_population": 27,
+    "total_nonproduction_cases": 864,
+    "credit": 0,
+    "purpose": "FALSIFICATION_ONLY_NOT_UNIVERSAL_PROOF"
+  },
+  "promotion_requirements": [
+    "INDEPENDENT_CONTENT_BOUND_VERIFICATION_OF_V3_CANDIDATE_GENERATOR_AND_TESTS",
+    "CONTENT_BOUND_UNIVERSAL_PROOF_OVER_EVERY_SUCCESSFULLY_EMITTED_V3_POPULATION",
+    "SEPARATE_FAIL_CLOSED_ROOT3_REDUCTION",
+    "SEPARATE_ACCEPTANCE_REDUCTION"
+  ],
+  "hard_nonclaims": [
+    "NO_PRODUCTION_OR_TERMINAL_CASE_CONSUMED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_OPEN_WORLD_GENERALIZATION_BEYOND_THE_CONTENT_BOUND_SUCCESSOR_DOMAIN",
+    "THE_32_POPULATION_SWEEP_IS_NOT_USED_AS_A_UNIVERSAL_PROOF"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
