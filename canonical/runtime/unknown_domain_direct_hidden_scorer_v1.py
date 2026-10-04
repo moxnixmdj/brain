@@ -1,7 +1,7 @@
 """Deterministic hidden scorer for the two frozen Unknown-Domain direct leaves.
 
-The scorer receives hidden evaluator truth plus a candidate trace.  Candidate
-self-reported pass/verified flags are ignored.  It grants no acceptance credit;
+The scorer receives hidden evaluator truth plus a candidate trace. Candidate
+self-reported pass/verified flags are ignored. It grants no acceptance credit;
 it only returns exact leaf-level case verdicts for later independent reduction.
 """
 from __future__ import annotations
@@ -38,12 +38,14 @@ def _provenance_ok(rows: Any, required_evidence: set[str]) -> tuple[bool,list[st
     seen=set()
     for i,row in enumerate(rows):
         if not isinstance(row,Mapping):
-            errors.append(f"PROVENANCE_NOT_OBJECT:{i}"); continue
+            errors.append(f"PROVENANCE_NOT_OBJECT:{i}")
+            continue
         eid=str(row.get("evidence_id") or "").strip()
         src=str(row.get("source") or "").strip()
         receipt=str(row.get("receipt") or "").strip()
         if not eid or not src or not receipt:
-            errors.append(f"PROVENANCE_INCOMPLETE:{i}"); continue
+            errors.append(f"PROVENANCE_INCOMPLETE:{i}")
+            continue
         seen.add(eid)
     missing=sorted(required_evidence-seen)
     errors.extend("PROVENANCE_MISSING:"+x for x in missing)
@@ -64,6 +66,20 @@ def score_transfer(hidden: Mapping[str,Any], trace: Mapping[str,Any]) -> dict[st
     load_bearing=allowed_receipts & used_receipts
     if not load_bearing:
         errors.append("NO_DOMAIN_A_EARNED_RECEIPT_REUSED")
+
+    primitive=str(hidden.get("latent_primitive_fingerprint") or "").strip()
+    bindings=hidden.get("domain_a_receipt_primitive_bindings")
+    if not primitive or not isinstance(bindings,Mapping):
+        raise UnknownDomainScorerError("HIDDEN_PRIMITIVE_BINDING_INVALID")
+    bound_receipts={str(rid) for rid,value in bindings.items() if str(value)==primitive}
+    if not (load_bearing & bound_receipts):
+        errors.append("REUSED_RECEIPT_NOT_BOUND_TO_SHARED_PRIMITIVE")
+    if str(trace.get("transferred_primitive_fingerprint") or "").strip()!=primitive:
+        errors.append("TRANSFERRED_PRIMITIVE_FINGERPRINT_MISMATCH")
+    if hidden.get("surface_label_permutation_verified") is not True:
+        raise UnknownDomainScorerError("HIDDEN_SURFACE_PERMUTATION_NOT_VERIFIED")
+    if hidden.get("domain_vocabularies_disjoint") is not True:
+        raise UnknownDomainScorerError("HIDDEN_DOMAIN_VOCABULARIES_NOT_DISJOINT")
 
     probe_count=trace.get("domain_b_discovery_probe_count")
     floor=hidden.get("full_rediscovery_probe_floor")
@@ -88,7 +104,8 @@ def score_transfer(hidden: Mapping[str,Any], trace: Mapping[str,Any]) -> dict[st
         errors.append("NEGATIVE_TRANSFER_DISTRACTORS_NOT_ALL_REJECTED")
 
     mapping=str(trace.get("mapping_basis") or "").strip()
-    if mapping not in {"STRUCTURAL_EQUIVALENCE","CAUSAL_ISOMORPHISM","FORMAL_REDUCTION","PROTOCOL_EQUIVALENCE"}:
+    admissible_mapping=mapping in {"STRUCTURAL_EQUIVALENCE","CAUSAL_ISOMORPHISM","FORMAL_REDUCTION","PROTOCOL_EQUIVALENCE"}
+    if not admissible_mapping:
         errors.append("TRANSFER_MAPPING_BASIS_NOT_ADMISSIBLE")
 
     required_evidence=set(load_bearing)|support|distractors
@@ -103,11 +120,11 @@ def score_transfer(hidden: Mapping[str,Any], trace: Mapping[str,Any]) -> dict[st
         "pass":passed,
         "errors":sorted(set(errors)),
         "acceptance_clauses":{
-            "domain_b_terminal_success": "PASS" if "DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG" not in errors and "DOMAIN_B_DID_NOT_CONCLUDE" not in errors else "FAIL",
-            "reuses_domain_a_without_full_rediscovery": "PASS" if "NO_DOMAIN_A_EARNED_RECEIPT_REUSED" not in errors and "FULL_REDISCOVERY_NOT_AVOIDED" not in errors else "FAIL",
-            "not_label_or_identifier_memorization": "PASS" if support==relevant and mapping in {"STRUCTURAL_EQUIVALENCE","CAUSAL_ISOMORPHISM","FORMAL_REDUCTION","PROTOCOL_EQUIVALENCE"} else "FAIL",
-            "negative_transfer_distractors_rejected": "PASS" if not (support & distractors) and distractors.issubset(rejected) else "FAIL",
-            "evidence_provenance_preserved": "PASS" if not prov_errors else "FAIL"
+            "domain_b_terminal_success":"PASS" if not ({"DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG","DOMAIN_B_DID_NOT_CONCLUDE"} & set(errors)) else "FAIL",
+            "reuses_domain_a_without_full_rediscovery":"PASS" if not ({"NO_DOMAIN_A_EARNED_RECEIPT_REUSED","REUSED_RECEIPT_NOT_BOUND_TO_SHARED_PRIMITIVE","TRANSFERRED_PRIMITIVE_FINGERPRINT_MISMATCH","FULL_REDISCOVERY_NOT_AVOIDED"} & set(errors)) else "FAIL",
+            "not_label_or_identifier_memorization":"PASS" if support==relevant and admissible_mapping and hidden.get("surface_label_permutation_verified") is True and hidden.get("domain_vocabularies_disjoint") is True else "FAIL",
+            "negative_transfer_distractors_rejected":"PASS" if not (support & distractors) and distractors.issubset(rejected) else "FAIL",
+            "evidence_provenance_preserved":"PASS" if not prov_errors else "FAIL"
         },
         "acceptance_credit_delta":0,
         "family_credit_delta":0,
@@ -159,10 +176,10 @@ def score_abstention(hidden: Mapping[str,Any], trace: Mapping[str,Any]) -> dict[
         "pass":passed,
         "errors":sorted(set(errors)),
         "acceptance_clauses":{
-            "identifiable_correct_supported_conclusion": "PASS" if status!="IDENTIFIABLE" or passed else "FAIL",
-            "nonidentifiable_no_forced_unique_conclusion": "PASS" if status!="NONIDENTIFIABLE" or passed else "FAIL",
-            "underspecified_valid_discriminator_or_abstain": "PASS" if status!="UNDERSPECIFIED" or passed else "FAIL",
-            "no_blanket_abstention_on_identifiable": "PASS" if status!="IDENTIFIABLE" or decision=="CONCLUDE" else "FAIL"
+            "identifiable_correct_supported_conclusion":"PASS" if status!="IDENTIFIABLE" or passed else "FAIL",
+            "nonidentifiable_no_forced_unique_conclusion":"PASS" if status!="NONIDENTIFIABLE" or passed else "FAIL",
+            "underspecified_valid_discriminator_or_abstain":"PASS" if status!="UNDERSPECIFIED" or passed else "FAIL",
+            "no_blanket_abstention_on_identifiable":"PASS" if status!="IDENTIFIABLE" or decision=="CONCLUDE" else "FAIL"
         },
         "acceptance_credit_delta":0,
         "family_credit_delta":0,
@@ -189,6 +206,14 @@ def aggregate(results: Sequence[Mapping[str,Any]]) -> dict[str,Any]:
     ids=[str(r.get("case_id") or "") for r in results]
     if any(not x for x in ids) or len(ids)!=len(set(ids)):
         raise UnknownDomainScorerError("CASE_IDS_INVALID_OR_DUPLICATE")
+    classes={"IDENTIFIABLE":0,"NONIDENTIFIABLE":0,"UNDERSPECIFIED":0}
+    for row in abstain:
+        cls=str(row.get("case_class") or "")
+        if cls not in classes:
+            raise UnknownDomainScorerError("ABSTENTION_CASE_CLASS_INVALID")
+        classes[cls]+=1
+    if classes!={"IDENTIFIABLE":5,"NONIDENTIFIABLE":5,"UNDERSPECIFIED":5}:
+        raise UnknownDomainScorerError("ABSTENTION_CLASS_BALANCE_MISMATCH")
     transfer_pass=all(r.get("pass") is True for r in transfer)
     abstention_pass=all(r.get("pass") is True for r in abstain)
     return {
@@ -198,6 +223,7 @@ def aggregate(results: Sequence[Mapping[str,Any]]) -> dict[str,Any]:
         "abstention_leaf_pass":abstention_pass,
         "all_27_cases_pass":transfer_pass and abstention_pass,
         "case_count":27,
+        "class_balance":classes,
         "acceptance_credit_delta":0,
         "family_credit_delta":0,
         "promotion_authority":False,
