@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_SMAUG_INTERNALIZATION_EXECUTION_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_EXECUTION_LAUNCHED__PUBLIC_ZERO_SPEND_RUNNER_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_route": {
+    "path": "canonical/governance/ROOT1_SMAUG_RELEASE_ASSET_INTERNALIZATION_ROUTE_V1.json",
+    "git_blob_sha": "4f05b1a92612501a9f981383f6c15c6fc3ad7b49"
+  },
+  "execution_lane": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "execute/smaug-mini-internalization-20261004-v1",
+    "script_commit": "368c52d0aa2217e9cd3ab9701c2c12b9a6e55d75",
+    "launch_commit": "f207c7350c6aa02d9ceb931800054b5b22a8c0a7",
+    "workflow": ".github/workflows/execute-smaug-mini-internalization-v1.yml",
+    "workflow_run_id": 37199908593,
+    "observed_status": "pending",
+    "carrier_release_tag": "project-brain-smaug-mini-2750fd9-v1",
+    "source_repo_id": "abacusai/Smaug-Mini",
+    "source_revision": "2750fd9f1e67e004111a53a6d9a39c15fbbd33ef",
+    "chunk_bytes": 1800000000
+  },
+  "execution_contract": [
+    "STREAM_WITH_BOUNDED_LOCAL_DISK",
+    "SHA256_EACH_CHUNK_AND_WHOLE_SOURCE_FILE",
+    "MATCH_PUBLIC_LFS_SHA256_WHERE_AVAILABLE",
+    "DRAFT_RELEASE_ONLY_UNTIL_PRODUCER_SET_VERIFIED",
+    "NO_TERMINAL_CASE_ACCESS",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_CAPABILITY_CREDIT_FROM_STORAGE"
+  ],
+  "next_required_receipts": [
+    "PRODUCER_MANIFEST_AND_REMOTE_ASSET_NAME_SIZE_SET_PASS",
+    "INDEPENDENT_FRESH_RECONSTRUCTION_HASH_PASS",
+    "EXACT_STORED_EXECUTION_FORM_NONTERMINAL_SEMANTIC_QUALIFICATION",
+    "FROZEN_SUCCESSOR_ACCEPTANCE_ONLY_AFTER_SEPARATE_FRESH_REALITY_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "RUN_PENDING_IS_NOT_INTERNALIZATION_COMPLETION",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_LIVEBENCH_PASS_CLAIM",
+    "NO_AUTOMATIONBENCH_PASS_CLAIM",
+    "NO_FRESH_TERMINAL_REALITY_AUTHORIZED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "internalization_execution": true,
+    "fresh_terminal_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
