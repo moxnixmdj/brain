@@ -178,17 +178,29 @@ def synthesize(prompt: str) -> dict[str, Any]:
         elif rel == "less than" and actual >= freq:
             return _blocked("KEYWORD_LESS_THAN_ALREADY_VIOLATED")
 
-    # Sentence lower/upper bound. Registry conflicts exclude paragraph families.
+    # Sentence lower/upper bound. Never replace the response here: earlier
+    # transformations may already carry independent obligations such as title,
+    # keywords, placeholders, or bullet structure. The previous implementation
+    # overwrote them and therefore produced invalid compatible-pair witnesses
+    # (for example number_sentences + title).
     if "length_constraints:number_sentences" in ids:
         s = _slots(c["length_constraints:number_sentences"]); k = int(s["num_sentences"]); rel = str(s["relation"])
-        # Build explicit short sentences only when the dominant shape is generic-like.
         if dom not in {"GENERIC","detectable_format:number_bullet_lists"}:
             return _blocked("SENTENCE_BOUND_WITH_UNSUPPORTED_DOMINANT_SHAPE")
-        target = k if rel == "at least" else max(1, k-1)
-        if rel == "less than" and k <= 1:
-            return _blocked("NONEMPTY_RESPONSE_CANNOT_PROVE_LESS_THAN_ONE_SENTENCE")
-        sentence = filler.capitalize() if not lower else filler
-        response = " ".join((sentence + ".") for _ in range(target))
+        if rel == "less than":
+            if k <= 1:
+                return _blocked("NONEMPTY_RESPONSE_CANNOT_PROVE_LESS_THAN_ONE_SENTENCE")
+            # Preserve the current compatible obligations. The exact pinned
+            # checker replay remains the authority for whether this compact
+            # non-periodic shape is below the requested bound.
+        elif rel == "at least":
+            sentence = filler.capitalize() if not lower else filler
+            # Append k explicit sentences rather than trying to infer how many
+            # sentences earlier required material contributes. This guarantees
+            # a lower bound without deleting any prior obligation.
+            response = _append_tokens(response, [(sentence + ".") for _ in range(max(0, k))])
+        else:
+            return _blocked("UNKNOWN_SENTENCE_RELATION")
 
     # Word lower/upper bound comes after fixed-shape construction so counts are conservative.
     if "length_constraints:number_words" in ids:
