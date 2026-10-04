@@ -37,7 +37,8 @@
     "article_semantics_acceptance_credit": false,
     "target_dataset_rows_used": 0,
     "target_dataset_metadata_used_for_case_generation": false,
-    "generator_note": "Exact frozen constraint-list sampling/deconfliction/build_description semantics; clean synthetic article bytes are observationally non-load-bearing to the IFEval checker except repeat_prompt, which checks literal prefix copying."
+    "generator_note": "Exact frozen constraint-list sampling/deconfliction/build_description semantics; clean synthetic article bytes are observationally non-load-bearing to the IFEval checker except repeat_prompt, which checks literal prefix copying.",
+    "reproducibility_rule": "Set PYTHONHASHSEED=0 before interpreter start; then seed numpy and Python random exactly as frozen."
   },
   "scoring": {
     "scorer_family": "LEGACY_IFEVAL_STRICT_PLUS_LOOSE_MEAN",
@@ -66,6 +67,7 @@
     "nltk": "3.10.3",
     "langdetect": "1.0.9",
     "nltk_data_commit": "550b6625bcef1f2abff2ff770a5a0d272c9c6b2",
-    "allowed_network_role": "FETCH_PINNED_PUBLIC_SOURCE_AND_NLTK_ASSETS_BEFORE_CASE_GENERATION_ONLY"
+    "allowed_network_role": "FETCH_PINNED_PUBLIC_SOURCE_AND_NLTK_ASSETS_BEFORE_CASE_GENERATION_ONLY",
+    "python_hash_seed": "0"
   }
 }
