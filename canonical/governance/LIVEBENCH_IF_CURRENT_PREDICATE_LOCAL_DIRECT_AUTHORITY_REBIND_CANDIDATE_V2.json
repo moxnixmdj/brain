@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_REBIND_CANDIDATE_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_STATE_LOCAL_ZERO_REALITY_CONE_REBIND__RUNTIME_CLOSURE_PREMISE_COMPILED__INDEPENDENT_VERIFICATION_REQUIRED__NO_AUTHORITY__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Rebind the historically verified predicate-local zero-reality cone commutativity theorem to current exact LiveBench state after the exact frozen public inference route passed its synthetic zero-case runtime closure, thereby deleting shadow escrow and shadow claim from the incumbent LiveBench critical path if independently verified.",
+  "current_exact_inputs": {
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "e353d54f4608d25b7f0ea06fba5d8fbf2ddfbb59"
+    },
+    "root2_frontier_v17": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V17.json",
+      "git_blob_sha": "8c1325dd652b65a7d5c24e041ac06556a84f569c"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "precommit_v2": {
+      "path": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2.json",
+      "git_blob_sha": "66554061f204d8a86b37a30c84d0cf07a525a786"
+    },
+    "thin_adapter_activation": {
+      "path": "canonical/governance/LIVEBENCH_IF_THIN_ADAPTER_COMPLETION_ACTIVATION_V1.json",
+      "git_blob_sha": "04505bc3fca23c448b35cd5ad546bac770f5cb34"
+    },
+    "zero_spend_carrier": {
+      "path": "canonical/governance/LIVEBENCH_IF_PUBLIC_STANDARD_ZERO_SPEND_CARRIER_BINDING_V1.json",
+      "git_blob_sha": "093ec45bd3889fc3a8edd4f50f41c93a9de2cd10"
+    },
+    "runtime_closure_binding": {
+      "path": "canonical/governance/LIVEBENCH_PUBLIC_RUNTIME_CLOSURE_FROZEN_BINDING_V2.json"
+    }
+  },
+  "historical_theorem_chain": {
+    "theorem": {
+      "verifier_repository": "moxnixmdj/verification-capsule-runner",
+      "pr": 1436,
+      "head": "97a99afa1312afbc9e7e32c17d4e3815eb91b6cb",
+      "merge": "561fbad461aeb71bf80ce4a2909e70a70c559844",
+      "workflow_run_id": 37158244145,
+      "workflow_job_id": 111306055369
+    },
+    "proved_rule": "PREDICATE_LOCAL_ZERO_REALITY_CONE_COMMUTATIVITY_FOR_ROOT2_ONLY_BRAIN_SCORE_ONLY_PREDICATES",
+    "symbolic": "Deps0(p)∩Pending0=∅ => Reduce_p(Score_p,Z_pending)=Reduce_p(Score_p)",
+    "scope": "CURRENT_BOUND_EVIDENCE_AND_FROZEN_ACCEPTANCE_SEMANTICS_ONLY"
+  },
+  "current_premises_to_verify": [
+    "TARGET_REMAINS_UNRESOLVED",
+    "TARGET_REMAINS_ROOT2_ONLY_AND_NOT_ROOT3_OR_MIXED",
+    "THIN_ADAPTER_8_OF_8_REMAINS_BOUND",
+    "ZERO_INCREMENTAL_SPEND_PUBLIC_STANDARD_CARRIER_REMAINS_BOUND",
+    "EXACT_FIVE_COMPONENT_PRECOMMIT_REMAINS_BOUND",
+    "FROZEN_POPULATION_COUNT_200_AND_THRESHOLD_65_7_REMAIN_UNCHANGED",
+    "FROZEN_CANDIDATE_COMMIT_AND_TREE_MATCH_PRECOMMIT",
+    "ALL_LOAD_BEARING_RUNTIME_BLOBS_MATCH_FROZEN_CANDIDATE_COMMIT",
+    "SYNTHETIC_ZERO_CASE_FULL_ADAPTER_PATH_PASSED_INDEPENDENT_PUBLIC_RUNNER",
+    "COGNITION_DEPENDENCY_CLASS_MODEL_INDEPENDENT",
+    "TERMINAL_CASE_CONTENT_READ_FALSE_AND_TERMINAL_CASES_CONSUMED_ZERO",
+    "NO_PAID_EXTERNAL_MODEL_OR_API_AND_ZERO_INCREMENTAL_SPEND",
+    "NO_CURRENT_ZERO_REALITY_ACTION_REMAINS_IN_LIVEBENCH_OWN_DEPENDENCY_CONE_EXCEPT_THIS_REBIND_VERIFICATION",
+    "NO_ADAPTIVE_CASE_SELECTION_TUNING_OR_REPLACEMENT"
+  ],
+  "conditional_effect_if_independently_verified": {
+    "predicate_local_fresh_reality_authority": true,
+    "authorized_predicates": [
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "global_fresh_reality_authority": false,
+    "execution_route": "EXACT_FROZEN_LIVEBENCH_DIRECT_EXECUTION_ONLY",
+    "shadow_escrow_required": false,
+    "shadow_one_use_claim_required": false,
+    "acceptance_credit_delta": 0,
+    "promotion_authority": false,
+    "all_other_unresolved_predicates_unauthorized": true
+  },
+  "execution_constraints": [
+    "NO_CASE_EXPOSURE_BEFORE_SEPARATE_ACTIVE_CURRENT_STATE_REBIND_ACTIVATION",
+    "USE_EXACT_PRECOMMITTED_CANDIDATE_HARNESS_SCORER_ENVIRONMENT_POLICY_BYTES",
+    "SAME_RUNNER_POINT_OF_USE_ZERO_CASE_RESOURCE_AND_DEPENDENCY_PREFLIGHT_PASS",
+    "VERIFY_EXACT_FROZEN_COMPONENT_HASHES_UNCHANGED",
+    "NO_TUNING_ON_TERMINAL_CASES",
+    "NO_CASE_REPLACEMENT",
+    "NO_ADAPTIVE_CASE_SELECTION",
+    "CAPTURE_IMMUTABLE_CASE_LEVEL_RECEIPTS",
+    "ZERO_INCREMENTAL_SPEND",
+    "POST_RESULT_REDUCTION_AND_PROMOTION_REQUIRE_SEPARATE_INDEPENDENT_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "THIS_CANDIDATE_GRANTS_NO_FRESH_REALITY_OR_EXECUTION_AUTHORITY",
+    "HISTORICAL_AUTHORITY_IS_NOT_CURRENT_AUTHORITY",
+    "NO_TERMINAL_CASE_REVEAL",
+    "NO_LIVEBENCH_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
