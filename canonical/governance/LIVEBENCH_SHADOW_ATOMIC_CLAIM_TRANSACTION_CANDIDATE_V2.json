@@ -1,11 +1,11 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_SHADOW_ATOMIC_CLAIM_TRANSACTION_CANDIDATE_V2",
   "date": "2026-10-04",
-  "status": "CANDIDATE__CURRENT_MAIN_V3_PLAN__REMOVE_CHECK_THEN_ACT_RACE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CASES__ZERO_CREDIT",
-  "compiled_from_main": "8641fbc37ba43a5364056271ddfab2a7cda04f33",
+  "status": "CANDIDATE__CURRENT_MAIN_V3_PLAN_VERIFIED__REMOVE_CHECK_THEN_ACT_RACE__INDEPENDENT_PACKAGE_VERIFICATION_REQUIRED__ZERO_CASES__ZERO_CREDIT",
+  "compiled_from_main": "947626745b7fc8f7120ae9cb8b0cce767fa4834e",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "benchmark_id": "LIVEBENCH_IF_2026_06_25",
-  "objective": "Rebind point-of-use preflight to the current repaired V3 plan, delete the redundant claim-ref absence probe, and make the atomic Git-ref create response the sole uniqueness linearization point before any terminal-case reveal.",
+  "objective": "Delete the redundant claim-ref absence probe and make the atomic Git-ref create response the sole uniqueness linearization point after the independently verified current V3 pre-exposure plan.",
   "current_verified_foundation": {
     "execution_precommit_v2": {
       "path": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2.json",
@@ -14,6 +14,10 @@
     "execution_precommit_v2_verification": {
       "path": "canonical/verification/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "git_blob_sha": "f123064a5ebed27c8636a2ebc031fb9a31067a13"
+    },
+    "pre_exposure_v3_verification": {
+      "path": "canonical/verification/LIVEBENCH_IF_SHADOW_PREEXPOSURE_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "7aee430ee0de0fdf3347526a5cb592caaac64bb7"
     },
     "shadow_control_plane_verification": {
       "path": "canonical/verification/LIVEBENCH_SHADOW_CONTROL_PLANE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
@@ -44,7 +48,6 @@
     }
   },
   "changes": [
-    "REBIND_POINT_OF_USE_PREFLIGHT_FROM_STALE_V2_PLAN_TO_CURRENT_V3_PLAN",
     "DELETE_CLAIM_REF_PRIOR_ABSENCE_READ",
     "USE_ATOMIC_CREATE_RESPONSE_AS_ONLY_CLAIM_UNIQUENESS_AUTHORITY",
     "BIND_ATOMIC_CLAIM_TO_EXACT_POINT_OF_USE_PREFLIGHT_INPUT",
@@ -58,7 +61,7 @@
     "same_transaction_target": "POINT_OF_USE_PREFLIGHT__ATOMIC_CREATE__CASE_REVEAL"
   },
   "remaining_before_any_terminal_case_reveal": [
-    "INDEPENDENTLY_VERIFY_THIS_EXACT_V2_PACKAGE",
+    "INDEPENDENTLY_VERIFY_THIS_EXACT_ATOMIC_CLAIM_PACKAGE",
     "OBTAIN_SEPARATE_SHADOW_COLLECTION_ACTIVATION_V2",
     "RUN_REAL_POINT_OF_USE_ZERO_CASE_PREFLIGHT",
     "ATOMICALLY_CREATE_THE_PRODUCTION_ONE_USE_CLAIM_REF"
