@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V1_UNIVERSAL_PROOF_FLOAT_ORDER_REVOCATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH_CANDIDATE__V1_UNIVERSAL_THEOREM_FALSIFIED__ZERO_PRODUCTION_CASES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "revokes_for_credit": [
+    "canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py",
+    "canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py",
+    "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json"
+  ],
+  "defect": {
+    "class": "BINARY64_EVALUATION_ORDER_FALSE_NEGATIVE",
+    "operation": "ADD2",
+    "cause": "GENERATOR_GOLD_EVALUATES_(BIAS_PLUS_TRUE_R0)_PLUS_TRUE_R1__CANDIDATE_MAY_CHOOSE_THE_STRUCTURALLY_EQUIVALENT_ROLE_PERMUTATION_AND_EVALUATE_(BIAS_PLUS_TRUE_R1)_PLUS_TRUE_R0__SCORER_V1_REQUIRES_EXACT_FLOAT_EQUALITY",
+    "why_candidate_cannot_identify_hidden_order": "ADD2_IS_SYMMETRIC_AND_THE_TWO_TRUE_FEATURES_HAVE_IDENTICAL_STRUCTURAL_STATUS__OPAQUE_FEATURE_LABEL_ORDER_IS_NOT_SEMANTIC_EVIDENCE",
+    "consequence": "THE_V1_CLAIM_THAT_TRUE_SUPPORT_ROLE_SWAP_IS_UNCONDITIONALLY_SCORER_SAFE_IS_FALSE"
+  },
+  "executable_counterexample": {
+    "generator": "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py",
+    "generator_git_blob_sha": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "qualification_beacon_argument": "BEACON-000049-VALID",
+    "effective_beacon": "QUALIFICATION-ONLY|BEACON-000049-VALID",
+    "qualification_secret": "QUALIFICATION_ONLY_FIXED_SECRET_IN_GENERATOR_V2",
+    "transfer_index": 4,
+    "primitive": "ADD2",
+    "bias": 1.0698554103477367,
+    "query_true_r0": 2.105858379499813,
+    "query_true_r1": 1.58555450126128,
+    "generator_order_result": 4.76126829110883,
+    "swapped_order_result": 4.761268291108829,
+    "absolute_difference": 8.881784197001252e-16,
+    "true_r0_feature": "qualonly_b_c7b66c69a5f5e8",
+    "true_r1_feature": "qualonly_b_83239e194f25a0",
+    "candidate_lexicographic_mapping_choice": "SWAPPED_ROLE_ORDER",
+    "old_scorer_expected_error": "DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG",
+    "regression_test": "canonical/tests/test_unknown_domain_add2_float_order_truth_repair_v1.py"
+  },
+  "repair": {
+    "scorer_v2": "canonical/runtime/unknown_domain_direct_hidden_scorer_v2.py",
+    "scorer_v2_git_blob_sha": "668f41a8b619e4a8ac52388be35d834c8afd67e3",
+    "harness_v2": "canonical/runtime/unknown_domain_direct_execution_harness_v2.py",
+    "harness_v2_git_blob_sha": "6cdb1f39d6646025f7a5a8fccb2091b164471e5e",
+    "numeric_semantics": "MATH_ISCLOSE_REL_1E_12_ABS_1E_12_FOR_TRANSFER_TERMINAL_CONSEQUENCE_ONLY",
+    "nonnumeric_gates_changed": false,
+    "abstention_semantics_changed": false,
+    "candidate_changed": false,
+    "generator_changed": false,
+    "minimum_known_wrong_support_margin": 0.027479338842975206,
+    "tolerance_to_min_margin_ratio_upper_bound": 3.64e-11
+  },
+  "hard_rules": [
+    "DO_NOT_PROMOTE_OR_USE_V1_UNIVERSAL_THEOREM_FOR_ACCEPTANCE",
+    "DO_NOT_RUN_PRODUCTION_UNDER_SCORER_V1_AFTER_THIS_PREPRODUCTION_DEFECT_IS_KNOWN",
+    "DO_NOT_CREDIT_SCORER_V2_OR_HARNESS_V2_BEFORE_INDEPENDENT_CONTENT_BOUND_VERIFICATION",
+    "REQUALIFY_AND_REPROVE_THE_EXACT_REPAIRED_PROTOCOL_BEFORE_ANY_PRODUCTION_ATTEMPT",
+    "ZERO_PRODUCTION_CASES_CONSUMED_BY_THIS_FALSIFICATION_OR_REPAIR"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "production_cases_generated": 0,
+    "production_cases_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
