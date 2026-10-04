@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_VISIBLE_PROMPT_FORMAL_WITNESS_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__BENCHMARK_SPECIFIC_FORMAL_WITNESS_ROUTE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "root_cause_attacked": "V2_DISCARDS_LOCALLY_VALID_STRUCTURAL_WITNESSES_WHEN_SEMANTIC_SEED_REQUIRED_IS_TRUE",
+  "public_scorer_fact": "For each declared instruction, the pinned LiveBench IF scorer builds the public checker and credits check_following(response); it does not separately score semantic correctness of the base request.",
+  "repair": {
+    "runtime_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py",
+    "test_path": "canonical/tests/test_root2_livebench_if_astra_inference_adapter_v3.py",
+    "input_surface": "VISIBLE_RENDERED_PROMPT_ONLY",
+    "hidden_instruction_ids_used": false,
+    "hidden_kwargs_used": false,
+    "model_dependency_count": 0,
+    "external_tools_used": false,
+    "fallback": "EXACT_EXISTING_V1_INFER_CALL_WHEN_NO_POSTVALIDATED_WITNESS_EXISTS"
+  },
+  "proof_boundary": [
+    "A V3 witness is returned only when instruction_constraint_compiler_v1 both synthesizes a nonempty response and postvalidates it.",
+    "V3 intentionally treats the generic compiler's semantic_seed_required flag as irrelevant only for this benchmark-specific mechanical checker route.",
+    "Recognition of one or more supported visible constraints does not prove that every hidden scorer instruction for the case was recognized.",
+    "Therefore this candidate can create real nonzero instruction-following capability without yet proving the 65.7 percent population threshold."
+  ],
+  "next_minimum_reality_cut": [
+    "INDEPENDENT_PUBLIC_SYNTHETIC_VERIFICATION_OF_EXACT_V3_BYTES",
+    "REBIND_A_ZERO_NEW_CASE_REPLAY72_DIAGNOSTIC_TO_V3",
+    "MEASURE_SCORE_MASS_UPLIFT_ON_THE_ALREADY_EXPOSED_72_CASE_PREFIX_ONLY",
+    "EXPAND_VISIBLE_PROMPT_GRAMMAR_ONLY_IF_THE_REPLAY72_RESIDUAL_JUSTIFIES_IT"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_PROMOTION",
+    "NO_NEW_TERMINAL_CASE_AUTHORITY",
+    "NO_CLAIM_THAT_RECOGNIZED_VISIBLE_CONSTRAINTS_EQUAL_THE_COMPLETE_HIDDEN_INSTRUCTION_SET",
+    "NO_CLAIM_THAT_THE_TERMINAL_THRESHOLD_IS_NOW_MET"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
