@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V3_POINTER_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V3_POINTER_PROJECTION__COUNTS_PRESERVED__ZERO_CREDIT",
+  "brain_candidate": {
+    "repository": "moxnixmdj/brain",
+    "pull_request": 1521,
+    "candidate_head_sha": "86aa2793470b30f6021bc055a939b3cf4909446c",
+    "exact_blobs": {
+      "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json": "681123ef6cff3506d66af6b31b61c8bc14a8a913",
+      "canonical/governance/TB4_CIRCLECI_GEN2_FREE_PLAN_CARRIER_CANDIDATE_20261004_V1.json": "b855ce5c4d8f192cb806be468a8d5c1e7c2f2a93",
+      "canonical/governance/TB4_BUILDKITE_ALL_ACCESS_TRIAL_CARRIER_CANDIDATE_20261004_V1.json": "2725cf6820fb7ce6025213d474b9acf2937282ee",
+      "canonical/verification/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json": "a7495e97c008fb74355af04e56bf75ca5c8ec8e8",
+      "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_ACTIVATION_V1.json": "6b38665671f36096d54fd68eff95b41fea6e7bc7",
+      "canonical/governance/ROOT2_MEASUREMENT_BRIDGE_CURRENT_V1.json": "6deba2774ab82f6aafad85e3adc6026fa3593355",
+      "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "9c34399f8d10f62cc08859e16fd2c866a14f91bf",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "05cb93a964222c0b983a4d6a35d2860ead7cd5d4"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1557,
+    "verifier_head_sha": "7adb3e2503c73dbf69e28f1166ef14f8e3759f5f",
+    "verifier_merge_commit": "837b2615f8f035bcdb57fbe4e9a0495318f3ded4",
+    "workflow_run_id": 37167548341,
+    "workflow_job_id": 111333564790,
+    "conclusion": "success",
+    "successful_step": "Verify Root2 V3 pointer projection"
+  },
+  "verified": {
+    "exact_v3_pointer_projection": true,
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "effective_scheduling_was_false_during_staging": true,
+    "zero_fresh_reality": true,
+    "zero_terminal_cases": true,
+    "zero_acceptance_credit": true
+  },
+  "interpretation": "POINTER_PROJECTION_VERIFIED__V3_MAY_NOW_BE_MARKED_EFFECTIVE_ROOT2_SCHEDULING_AUTHORITY_WITHOUT_CHANGING_ACCEPTANCE_OR_EXECUTION_AUTHORITY",
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
