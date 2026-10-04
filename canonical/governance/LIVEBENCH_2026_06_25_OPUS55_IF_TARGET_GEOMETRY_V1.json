@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_2026_06_25_OPUS55_IF_TARGET_GEOMETRY_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_SOURCE_BOUND__EXACT_IF_TARGET_GEOMETRY__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "public_source": {
+    "repository": "LiveBench/new-livebench",
+    "files": {
+      "categories_2026_06_25": {
+        "path": "public/categories_2026_06_25.json",
+        "git_blob_sha": "50b5672fe14023f5ba14efc1ce16e221e6573056"
+      },
+      "table_2026_06_25": {
+        "path": "public/table_2026_06_25.csv",
+        "git_blob_sha": "73ab7d8d9752b4d7cc1bc8c574ab0eb80c36c84b"
+      },
+      "cost_2026_06_25": {
+        "path": "public/cost_2026_06_25.csv",
+        "git_blob_sha": "6f6271ed5497706e290675a1ad92a716a0f45b6b"
+      }
+    }
+  },
+  "exact_geometry": {
+    "if_tasks": [
+      "paraphrase",
+      "simplify",
+      "story_generation",
+      "summarize"
+    ],
+    "questions_per_task": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    },
+    "total_questions": 200,
+    "comparator_model": "claude-opus-5-5-max-effort",
+    "comparator_task_scores_percent": {
+      "paraphrase": 64.267,
+      "simplify": 58.667,
+      "story_generation": 70.917,
+      "summarize": 69.1
+    },
+    "exact_equal_weight_mean_percent": 65.73775,
+    "one_decimal_display_percent": 65.7,
+    "pooled_question_mean_equivalent": true,
+    "pooled_question_mean_reason": "ALL_FOUR_TASKS_HAVE_EXACTLY_50_QUESTIONS"
+  },
+  "breakthrough": [
+    "THE_CANONICAL_65_7_BAR_IS_NO_LONGER_AN_OPAQUE_SCALAR; IT IS THE EQUAL_WEIGHT MEAN OF FOUR NAMED 50_QUESTION IF TASKS.",
+    "A SUCCESSOR MAY BE ANALYZED AS A 200_QUESTION SCORE-MASS PROBLEM OR AS FOUR EQUAL 50_QUESTION TASK MASSES WITHOUT CHANGING THE AGGREGATE.",
+    "TASK-LOCAL IMPROVEMENTS HAVE IDENTICAL QUESTION WEIGHT; THERE IS NO HIDDEN TASK-SIZE WEIGHTING TO OPTIMIZE AROUND."
+  ],
+  "arithmetic": {
+    "numerator_task_score_sum": 262.951,
+    "task_count": 4,
+    "calculation": "262.951 / 4 = 65.73775"
+  },
+  "contamination_firewall": [
+    "NO_TERMINAL_PROMPT_TEXT_READ",
+    "NO_TERMINAL_RESPONSE_TEXT_READ",
+    "PUBLIC_RELEASE_AGGREGATES_AND_CATEGORY_METADATA_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_SUCCESSOR_SCORE_CLAIM",
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_THE_FROZEN_TERMINAL_CASE CONTENT HAS BEEN EXPOSED",
+    "NO_GENERAL_CAPABILITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
