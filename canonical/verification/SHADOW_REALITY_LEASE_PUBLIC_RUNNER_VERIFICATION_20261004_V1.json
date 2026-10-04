@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_REALITY_LEASE_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PROOF_CARRYING_WRITE_ONLY_ESCROW_LEASE__ZERO_CREDIT",
+  "subjects": {
+    "runtime_path": "canonical/runtime/shadow_reality_lease_v1.py",
+    "runtime_git_blob_sha": "db7c77d21ce410c29754e029910d774c890e9780",
+    "policy_path": "canonical/governance/SHADOW_REALITY_LEASE_POLICY_V1.json",
+    "policy_git_blob_sha": "55f749a0a586e0b178195b62b7dae154910f0cbc",
+    "generic_isolation_dependency_path": "canonical/runtime/generic_precommit_isolation_theorem_v1.py",
+    "generic_isolation_dependency_git_blob_sha": "58f2ae9c3f0ef0ac55da2e58d0ed81ae88560296"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1708,
+    "verifier_merge_commit": "66ad53bac20598a33ff627348755f008af7bb99f",
+    "workflow_run_id": 37181921134,
+    "workflow_job_id": 111376042531,
+    "conclusion": "success"
+  },
+  "verified": {
+    "candidate_cannot_self_activate": true,
+    "separate_independent_activation_required": true,
+    "generic_isolation_instantiation_required": true,
+    "benchmark_thin_adapter_required": true,
+    "candidate_mutation_blocked": true,
+    "unrelated_work_mutation_blocked": true,
+    "write_only_escrow_required": true,
+    "result_visibility_before_fixed_point": false,
+    "one_use_replay_blocked": true,
+    "global_fresh_reality_authority": false,
+    "acceptance_credit_authorized": false,
+    "promotion_authority": false,
+    "post_fixed_point_predicate_specific_activation_required": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
