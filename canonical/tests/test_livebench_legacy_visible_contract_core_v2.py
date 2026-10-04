@@ -77,3 +77,31 @@ def test_non_repeat_prompt_abstains():
     out = recover_repeat_prompt_target("Write a normal paragraph about a tree.")
     assert out["status"].startswith("ABSTAIN")
     assert out["prompt_to_repeat"] is None
+
+
+def test_multiline_trailing_directive_does_not_create_ambiguity():
+    target = (
+        "Write a plot for a story about two people who swap fingerprints. "
+        "Include a title wrapped in double angular brackets, i.e. <<title>>."
+    )
+    prompt = (
+        target
+        + "\n\nFirst, repeat the request above word for word without change.\n"
+          "Do not say any words or characters before repeating the request above.\n"
+          "After you repeated the request, you can give your response next."
+    )
+    out = recover_repeat_prompt_target(prompt)
+    assert out["status"] == "RECOVERED"
+    assert out["prompt_to_repeat"] == target
+
+
+def test_multiline_leading_directive_uses_blank_line_boundary():
+    target = "Write a good name for a black dog."
+    prompt = (
+        "First repeat the request below word for word without change, then give your answer.\n"
+        "Do not say any words or characters before repeating the request.\n\n"
+        + target
+    )
+    out = recover_repeat_prompt_target(prompt)
+    assert out["status"] == "RECOVERED"
+    assert out["prompt_to_repeat"] == target
