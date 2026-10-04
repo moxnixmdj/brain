@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_SUB100MB_H100_GUARD_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_H100_GUARD_AND_CONTRACT_BYTES__ZERO_CREDIT",
+  "subject": {
+    "contract_path": "canonical/governance/SUB100MB_LEARNED_CORE_EXPERIMENT_CONTRACT_V1.json",
+    "contract_git_blob_sha": "94b74f1e2f4b5663d0ff490cd4d2b23363299a5e",
+    "runtime_path": "canonical/runtime/sub100mb_learned_state_guard_v1.py",
+    "runtime_git_blob_sha": "7663016998fbfd4cd6b848fd18fd515308fa5baa",
+    "tests_path": "canonical/tests/test_sub100mb_learned_state_guard_v1.py",
+    "tests_git_blob_sha": "9803461d7ee76173132d4565002fec1ded9bcaa5"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1682,
+    "verifier_head_sha": "95bd7a0240bea5b06397424d31ed834f5d5343ba",
+    "merge_commit": "caeae57f26e5169753081cf7c9830e36b8d8ddea",
+    "workflow_run_id": 37177811255,
+    "workflow_job_id": 111364015165,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_candidate_blobs": true,
+    "exact_100000000_byte_boundary": true,
+    "100000001_bytes_rejected": true,
+    "independent_learned_artifact_byte_count_receipts_required": true,
+    "external_frontier_model_dependency_rejected": true,
+    "external_learned_capability_calls_rejected": true,
+    "hidden_uncounted_learned_components_rejected": true,
+    "family_denominator_frozen_at_19": true,
+    "atomic_denominator_frozen_at_38": true,
+    "current_5_of_19_12_of_38_baseline_remains_open": true
+  },
+  "hard_nonclaims": [
+    "NO_SUB100MB_KERNEL_RESULT",
+    "NO_CAPABILITY_RESULT",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_PROMOTION",
+    "NO_RUNTIME_RAM_OR_TOTAL_COMPUTE_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
