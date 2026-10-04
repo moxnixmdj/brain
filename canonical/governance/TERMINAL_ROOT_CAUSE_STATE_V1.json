@@ -360,6 +360,17 @@
       "promotion_authority": false,
       "fresh_reality_authority": false,
       "acceptance_credit_delta": 0
+    },
+    "livebench_v2_direct_authority_revocation": {
+      "path": "canonical/governance/LIVEBENCH_V2_DIRECT_AUTHORITY_REVOCATION_V1.json",
+      "git_blob_sha": "177f48b6a6af6e83dab194fb6d52d26c9db3806e",
+      "status": "ACTIVE__V2_DIRECT_EXECUTION_AND_PREDICATE_LOCAL_FRESH_REALITY_REVOKED_AFTER_CONSTRUCTIVE_SCORER_DISPATCH_FALSIFIER__ZERO_CREDIT",
+      "target_predicate": "LIVEBENCH_IF_GE_65_7",
+      "successor_requirement": "INDEPENDENTLY_VERIFIED_DUAL_SCORER_EXECUTION_EPOCH_AND_NEW_EXACT_PREDICATE_LOCAL_AUTHORITY",
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false,
+      "acceptance_credit_delta": 0
     }
   },
   "accounting": {
