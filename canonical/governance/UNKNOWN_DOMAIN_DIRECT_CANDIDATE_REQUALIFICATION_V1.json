@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_CANDIDATE_REQUALIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAMILY_FROZEN_BEFORE_REQUALIFICATION__ZERO_LEARNED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "REQUALIFY_THE_ZERO_LEARNED_UNKNOWN_DOMAIN_DIRECT_CANDIDATE_AFTER_THE_GENERATOR_SCORER_FAMILY_FREEZE_AND_BEFORE_ANY_POST_FREEZE_CASE_BEACON",
+  "target_leaves": [
+    "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+    "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS"
+  ],
+  "ordering_proof": {
+    "family_freeze_commit": "9f7f553a3f76e415f716bb8704547e008de97fba",
+    "candidate_first_commit": "a528808f73b0ce1a43cca9976418571d9da9a18a",
+    "rule": "FAMILY_FREEZE_PRECEDES_CANDIDATE_IMPLEMENTATION"
+  },
+  "exact_bound_components": {
+    "canonical/governance/UNKNOWN_DOMAIN_DIRECT_ORACLE_FAMILY_FREEZE_V1.json": "7a9fccc52df48d4b0088f653db38d902fe1450fc",
+    "canonical/runtime/unknown_domain_direct_generator_v1.py": "091504068eb70591a4bcb555f2b4760bee847c5d",
+    "canonical/runtime/unknown_domain_direct_scorer_v1.py": "4e2fcbb4fc6a76b605c08788faa0c723df38d551",
+    "canonical/tests/test_unknown_domain_direct_family_freeze_v1.py": "8d2f97ab83d7cc9b72dcf5a51a66f7201ab0cdca",
+    "canonical/runtime/unknown_domain_direct_candidate_v1.py": "32c5fade3f53c3a43c2c5e091ed5f1580851344b",
+    "canonical/tests/test_unknown_domain_direct_candidate_v1.py": "5e0709613bc3865391eb514acddb87a278a14f34",
+    "canonical/runtime/decision_discriminator_v3.py": "3ec9e43a7bbe40a264fa3560a93039461941dbee",
+    "canonical/governance/UNIVERSAL_LEARNING_META_POLICY_V9.json": "7b8ca47355f73b0f78e439e407cd632f1ad7d99d",
+    "canonical/governance/UNIVERSAL_LEARNING_PROOF_PROGRAM_V7.json": "e26c8f4d8614720c1a45f28bcd2703dbb36bd980"
+  },
+  "candidate_properties": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "cross_domain_method": "EXACT_SURFACE_TRANSFORMATION_CONSTRAINT_SOLVING_OVER_VERIFIED_SOURCE_PRIMITIVES",
+    "abstention_method": "VERIFIED_V3_CONDITIONAL_DECISION_DISCRIMINATOR",
+    "hidden_generator_or_scorer_imported_by_candidate": false
+  },
+  "prequalification": {
+    "public_fixture_beacons_only": true,
+    "future_terminal_beacon_generated": false,
+    "fresh_reality_consumed": false,
+    "required": [
+      "ALL_48_PUBLIC_FIXTURES_PASS",
+      "24_IDENTIFIABLE_TRANSFER_CORRECT",
+      "12_NONIDENTIFIABLE_ABSTAIN",
+      "12_UNDERSPECIFIED_REQUEST_VALID_DISCRIMINATOR",
+      "TAMPERED_SOURCE_RECEIPT_FAILS_CLOSED",
+      "ZERO_LEARNED_AND_ZERO_EXTERNAL_MODEL_BOUNDARY"
+    ]
+  },
+  "conditional_next_if_independently_verified": "CREATE_PREDICATE_LOCAL_DIRECT_AUTHORITY_ACTIVATION_FOR_EXACTLY_THE_TWO_FROZEN_UNKNOWN_DOMAIN_LEAVES__GLOBAL_FRESH_REALITY_REMAINS_FALSE",
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
