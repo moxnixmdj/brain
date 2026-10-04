@@ -1,5 +1,8 @@
 name: Verify Root2 decision-only evaluation V1
 on:
+  push:
+    branches:
+      - "research/root2-decision-only-evaluation-v1"
   pull_request:
     paths:
       - "canonical/runtime/root2_decision_only_evaluation_v1.py"
