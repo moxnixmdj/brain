@@ -57,6 +57,14 @@ def _guard(needle: str, checker_id: str):
     return _constant(needle, "guard:" + checker_id, "")
 
 
+def _regex_guard(pattern: str, checker_id: str):
+    def rule(prompt: str):
+        if not _match(pattern, prompt):
+            return None
+        return "guard:" + checker_id, ""
+    return rule
+
+
 def _word_range(prompt: str):
     m = _match(r"\bresponse must contain between\s+(\d+)\s+and\s+(\d+)\s+words?\b", prompt)
     if not m:
@@ -239,8 +247,14 @@ def _rules() -> list[Callable[[str], tuple[str, str] | None]]:
         # merely because the other public checker lacks a constructor here.
         _guard("Maintain a trigram overlap of", "ratio:overlap"),
         _guard("Answer with one of the following options:", "format:options"),
-        _guard("Include keyword", "count:keywords_multiple"),
-        _guard("as the", "words:keywords_specific_position"),
+        _regex_guard(
+            r"Include keyword\s+.+?\s+once in your response,\s*keyword\s+.+?\s+twice in your response",
+            "count:keywords_multiple",
+        ),
+        _regex_guard(
+            r"Include keyword\s+.+?\s+in the\s+\d+-(?:st|nd|rd|th)\s+sentence,\s*as the\s+\d+-(?:st|nd|rd|th)\s+word",
+            "words:keywords_specific_position",
+        ),
         _guard("The second word in your response and the second to last word", "words:words_position"),
         _guard("Copy the span of words that lies between", "repeat:repeat_span"),
         _guard("reverse alphabetical order, each on a new line", "custom:reverse_newline"),
