@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V4_FINAL_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "STAGED_FINAL__INDEPENDENT_PACKAGE_PASS__CURRENT_MAIN_PROJECTION_REQUIRED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "policy": {
+    "path": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V4.json",
+    "git_blob_sha": "10aa59870c12b330ca72a2b3e6eac3c41386b2af"
+  },
+  "candidate_activation": {
+    "path": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V4_ACTIVATION_V1.json",
+    "git_blob_sha": "392b392c5d3417552584b10a4c10c7471d7d0965"
+  },
+  "root2_final_activation": {
+    "path": "canonical/governance/ROOT2_FRONTIER_V12_FINAL_ACTIVATION_V1.json",
+    "git_blob_sha": "f3b97a8a2a54d4d0571911691677ae9046413103"
+  },
+  "package_verification": {
+    "path": "canonical/verification/ROOT2_V12_ADAPTIVE_V4_PACKAGE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "dc14c99706257f42d2af7837fb439b330fa9f708"
+  },
+  "authority": {
+    "scheduling": true,
+    "meta_scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
