@@ -74,12 +74,25 @@ def test_v5_large_nonproduction_sweep():
         _run(g5._generate(beacon=beacon,evaluator_secret=secret,namespace=f"V5T{k}"))
 
 
-class _AdversarialStr(str):
+class _AdversarialMeta(type):
+    def __getattribute__(cls,name):
+        if name=="__mro__":
+            raise RuntimeError("OVERRIDDEN_METACLASS_MRO_MUST_NOT_RUN")
+        return type.__getattribute__(cls,name)
+
+
+class _AdversarialStr(str,metaclass=_AdversarialMeta):
     def strip(self,*args,**kwargs):
         raise RuntimeError("OVERRIDDEN_STRIP_MUST_NOT_RUN")
 
     def encode(self,*args,**kwargs):
         raise RuntimeError("OVERRIDDEN_ENCODE_MUST_NOT_RUN")
+
+    def __len__(self):
+        raise RuntimeError("OVERRIDDEN_LEN_MUST_NOT_RUN")
+
+    def __getattribute__(self,name):
+        raise RuntimeError("OVERRIDDEN_GETATTRIBUTE_MUST_NOT_RUN")
 
 
 class _AdversarialBytes(bytes):
@@ -99,7 +112,30 @@ class _AdversarialBytes(bytes):
         raise RuntimeError("OVERRIDDEN_ITER_MUST_NOT_RUN")
 
 
-def test_v5_totality_includes_isinstance_accepted_str_and_bytes_subclasses():
+class _FakeStr:
+    @property
+    def __class__(self):
+        return str
+
+
+class _FakeBytes:
+    @property
+    def __class__(self):
+        return bytes
+
+
+class _LyingMROMeta(type):
+    def __getattribute__(cls,name):
+        if name=="__mro__":
+            return (cls,str,object)
+        return type.__getattribute__(cls,name)
+
+
+class _FakeMRO(metaclass=_LyingMROMeta):
+    pass
+
+
+def test_v5_totality_includes_genuine_str_and_bytes_subclasses():
     beacon=_AdversarialStr("A"*16+"\ud800")
     secret_text=_AdversarialStr("S"*31+"\udfff")
     packet=g5._generate(
@@ -112,3 +148,31 @@ def test_v5_totality_includes_isinstance_accepted_str_and_bytes_subclasses():
 
     secret_bytes=_AdversarialBytes(b"B"*32)
     assert g5._secret_bytes_total(secret_bytes)==b"B"*32
+
+
+def test_v5_rejects_spoofed_class_proxies_and_virtual_mro():
+    fake_str=_FakeStr()
+    fake_bytes=_FakeBytes()
+    # CPython isinstance may consult a spoofed __class__ attribute.
+    assert isinstance(fake_str,str) is True
+    assert isinstance(fake_bytes,bytes) is True
+    assert g5._genuine_runtime_subclass_instance(fake_str,str) is False
+    assert g5._genuine_runtime_subclass_instance(fake_bytes,bytes) is False
+    assert g5._genuine_runtime_subclass_instance(_FakeMRO(),str) is False
+
+    for fake,kind in ((fake_str,"beacon"),(fake_bytes,"secret")):
+        try:
+            if kind=="beacon":
+                g5._beacon_gate(fake)
+            else:
+                g5._secret_bytes_total(fake)
+        except g1.UnknownDomainGeneratorError:
+            pass
+        else:
+            raise AssertionError("CLASS_SPOOF_PROXY_MUST_BE_REJECTED")
+
+
+def test_v5_genuine_hierarchy_gate_bypasses_hostile_metaclass_mro_lookup():
+    value=_AdversarialStr("A"*16+"\ud800")
+    assert g5._genuine_runtime_subclass_instance(value,str) is True
+    assert g5._canonical_beacon(value).isascii()
