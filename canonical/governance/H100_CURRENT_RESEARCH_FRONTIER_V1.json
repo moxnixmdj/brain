@@ -1,48 +1,56 @@
 {
   "schema": "PROJECT_BRAIN_H100_RESEARCH_FRONTIER_STATE_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_RESEARCH_FRONTIER__PHASE2_INDEPENDENT_PASS__CUMULATIVE_12_OF_12_ZERO_LEARNED__NEXT_SCHEMA_OPEN_WORLD_RESIDUAL__ZERO_CREDIT",
+  "status": "ACTIVE_RESEARCH_FRONTIER__ZERO_LEARNED_NUMERIC_AND_BOUNDED_SCHEMA_GATES_INDEPENDENT_PASS__NEXT_SEMANTIC_ROLE_OPEN_WORLD_RESIDUAL__ZERO_CREDIT",
   "hypothesis": "FULL_FROZEN_BRAIN_CAPABILITY_ENVELOPE_WITH_LE_100000000_PERSISTENT_LEARNED_BYTES_AND_ZERO_EXTERNAL_LEARNED_CAPABILITY_PROVIDER_DURING_SCORED_EXECUTION",
   "current_evidence": {
     "measurement_layer": {
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
       "verification": "canonical/verification/H100_PROPOSAL_MEASUREMENT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
     },
-    "phase1_zero_learned_novelty_stress": {
-      "status": "INDEPENDENT_PUBLIC_RUNNER_COMPLETE",
-      "result": "canonical/verification/H100_ZERO_LEARNED_NOVELTY_STRESS_PUBLIC_RUNNER_RESULT_20261004_V1.json",
-      "within_operator": "9_OF_9_SOLVED",
-      "outside_operator_before_repair": "0_OF_3_SOLVED",
-      "persistent_learned_bytes": 0,
-      "deduction": "NO_SEARCH_OR_COMPOSITION_RESIDUAL_OBSERVED_ON_THE_9_PREEXPOSED_IN_OPERATOR_TASKS__MISSING_PRIMITIVE_OR_GRAMMAR_RESIDUAL_OBSERVED_ON_ALL_3_PREEXPOSED_OUTSIDE_OPERATOR_TASKS"
-    },
-    "phase2_zero_learned_primitive_repair": {
+    "numeric_novelty_and_primitive_repair": {
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
-      "verification": "canonical/verification/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-      "verification_git_blob_sha": "b896c24883c05d9386b858f148109d90a2eaa587",
-      "residual_tasks_repaired": "3_OF_3",
+      "phase1_result": "canonical/verification/H100_ZERO_LEARNED_NOVELTY_STRESS_PUBLIC_RUNNER_RESULT_20261004_V1.json",
+      "phase2_verification": "canonical/verification/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "phase1_within_operator": "9_OF_9_SOLVED",
+      "phase1_outside_operator_before_repair": "0_OF_3_SOLVED",
+      "phase2_residual_repair": "3_OF_3_SOLVED",
       "cumulative_frozen_tasks_solved": "12_OF_12",
       "persistent_learned_bytes": 0,
       "external_frontier_model_calls": 0,
       "external_learned_capability_calls": 0,
-      "deduction": "THE_OBSERVED_NUMERIC_MECHANISM_RESIDUAL_WAS_PRIMITIVE_GRAMMAR_COVERAGE_NOT_LEARNED_REPRESENTATION"
+      "deduction": "THE_OBSERVED_NUMERIC_RESIDUAL_WAS_PRIMITIVE_GRAMMAR_COVERAGE_NOT_LEARNED_REPRESENTATION"
+    },
+    "bounded_schema_compilation": {
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "verification": "canonical/verification/H100_ZERO_LEARNED_SCHEMA_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "preexposed_tasks_solved": "8_OF_8",
+      "persistent_learned_bytes": 0,
+      "external_frontier_model_calls": 0,
+      "external_learned_capability_calls": 0,
+      "deduction": "BOUNDED_TEXT_TABLE_JSON_AND_TOOL_TRACE_OBSERVATIONS_CAN_BE_COMPILED_TO_AN_ALREADY_DECLARED_TYPED_NUMERIC_SCHEMA_WITH_ZERO_PERSISTENT_LEARNED_STATE"
     }
   },
   "next_structural_residuals_ranked": [
     {
       "rank": 1,
-      "residual": "RAW_NATURAL_LANGUAGE_OR_ARBITRARY_TOOL_TRACE_TO_TYPED_SCHEMA_COMPILATION",
-      "reason": "CURRENT_ZERO_LEARNED_SOLVERS_REQUIRE_TYPED_NUMERIC_OBSERVATIONS__SCHEMA_FORMATION_IS_NOW_THE_EARLIEST_UNDISCHARGED_GATE_BEFORE_MORE_NUMERIC_SEARCH"
+      "residual": "SEMANTIC_ROLE_INDUCTION_WITHOUT_DECLARED_INPUT_TARGET_FIELDS",
+      "reason": "BOUNDED_SYNTAX_COMPILATION_IS_NOW_VERIFIED__THE_EARLIEST_UNDISCHARGED_GATE_IS_IDENTIFYING_WHICH_OBSERVED_FIELDS_ARE_INPUTS_TARGETS_OR_NONCAUSAL_METADATA_WITHOUT_BEING_TOLD"
     },
     {
       "rank": 2,
-      "residual": "OPEN_WORLD_PROPOSAL_PROBABILITY_ON_PREEXPOSED_NOVELTY_POPULATIONS",
-      "reason": "FINITE_12_TASK_SUCCESS_DOES_NOT_ESTABLISH_NONCOLLAPSING_PROPOSAL_PROBABILITY_UNDER_STRUCTURAL_NOVELTY"
+      "residual": "OPEN_WORLD_FREE_FORM_LANGUAGE_AND_TOOL_TRACE_VARIATION",
+      "reason": "THE_VERIFIED_SCHEMA_COMPILER_IS_EXPLICITLY_BOUNDED_TO_PREEXPOSED_FORMAT_CLASSES"
     },
     {
       "rank": 3,
+      "residual": "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+      "reason": "FINITE_12_TASK_NUMERIC_AND_8_TASK_SCHEMA_SUCCESS_DO_NOT_ESTABLISH_NONCOLLAPSING_PROPOSAL_PROBABILITY_UNDER_OPEN_WORLD_STRUCTURAL_NOVELTY"
+    },
+    {
+      "rank": 4,
       "residual": "DIRECT_UNKNOWN_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION_EVIDENCE",
-      "reason": "REMAINS_REQUIRED_FOR_UNKNOWN_DOMAIN_ACCEPTANCE_AND_CANNOT_BE_INFERRED_FROM_NUMERIC_SYNTHESIS"
+      "reason": "REMAINS_REQUIRED_FOR_UNKNOWN_DOMAIN_ACCEPTANCE_AND_CANNOT_BE_INFERRED_FROM_PUBLIC_SYNTHETIC_STRESS"
     }
   ],
   "decision_policy": [
@@ -50,7 +58,7 @@
     "COMPILE_EACH_VERIFIED_SUCCESS_INTO_REUSABLE_NONLEARNED_CAPABILITY_BEFORE_ANY_LEARNED_STATE_ESCALATION",
     "MEASURE_PER_TASK_PROPOSAL_PROBABILITY_AND_WALL_CLOCK__POOLED_SUCCESS_MAY_NOT_HIDE_ZERO_SUCCESS_TASKS",
     "ONLY_CONSTRUCTIVE_FAILURE_OF_NONLEARNED_SCHEMA_RETRIEVAL_VERIFICATION_AND_PROGRAM_REPAIR_CAN_JUSTIFY_A_LEARNED_BYTE_RUNG",
-    "EVERY_LEARNED_BYTE_RUNG_MUST_BE FROZEN_BEFORE_OUTCOMES_AND_MUST_SHOW MATERIAL_DELTA_T95_PER_ADDED_BYTE"
+    "EVERY_LEARNED_BYTE_RUNG_MUST_BE_FROZEN_BEFORE_OUTCOMES_AND_MUST_SHOW_MATERIAL_DELTA_T95_PER_ADDED_BYTE"
   ],
   "learned_byte_ladder": {
     "current_rung_bytes": 0,
@@ -67,6 +75,8 @@
     "h100_closed": false,
     "full_19_family_contract_closed": false,
     "numeric_novelty_stress_12_of_12_zero_learned": true,
+    "bounded_schema_stress_8_of_8_zero_learned": true,
+    "semantic_role_induction_not_claimed": true,
     "open_world_generalization_not_claimed": true,
     "runtime_ram_below_100mb_not_claimed": true,
     "total_compute_small_not_claimed": true
