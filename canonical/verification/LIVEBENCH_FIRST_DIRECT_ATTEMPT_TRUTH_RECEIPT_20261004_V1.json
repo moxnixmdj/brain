@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FIRST_DIRECT_ATTEMPT_TRUTH_RECEIPT_V1",
+  "date": "2026-10-04",
+  "status": "FAIL_CLOSED__TERMINAL_POPULATION_LOADED__ZERO_BRAIN_INFERENCES__SCORER_DISPATCH_DEFECT__NO_SCORE",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1761,
+    "head_sha": "d8e6edd61fb1fbeedd856aa31cc202348e52529c",
+    "workflow_run_id": 37188253705,
+    "workflow_job_id": 111394777574,
+    "conclusion": "failure",
+    "runner": "ubuntu-24.04",
+    "python": "3.12.14"
+  },
+  "observed": {
+    "zero_case_carrier_preflight_pass": true,
+    "exact_frozen_runtime_blobs_pass": true,
+    "terminal_dataset_downloaded": true,
+    "terminal_population_loaded": true,
+    "frozen_population_expected": 200,
+    "candidate_inference_count": 0,
+    "candidate_response_count": 0,
+    "livebench_score_exists": false,
+    "predicate_result_exists": false,
+    "terminal_prompts_emitted_to_logs": false,
+    "candidate_responses_emitted_to_logs": false,
+    "unmatched_instruction_ids_emitted_to_logs": false,
+    "unmatched_instruction_id_set_sha256": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d"
+  },
+  "failure": {
+    "code": "UNKNOWN_INSTRUCTION_IDS",
+    "cause": "EXECUTION_DRIVER_INCORRECTLY_APPLIED_IFBENCH_REGISTRY_TO_FULL_FROZEN_POPULATION_INSTEAD_OF_LIVEBENCHS_RELEASE_DATE_DISPATCH_BETWEEN_LEGACY_IFEVAL_AND_IFBENCH",
+    "repair_boundary": "SCORER_DISPATCH_AND_SCORER_RUNTIME_DEPENDENCIES_ONLY",
+    "candidate_mutation_permitted": false,
+    "threshold_rebase_permitted": false,
+    "case_selection_change_permitted": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "brain_inferences": 0,
+    "candidate_responses": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE",
+    "NO_PREDICATE_PASS_OR_FAIL",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_THAT_TERMINAL_POPULATION_WAS_UNREAD"
+  ]
+}
