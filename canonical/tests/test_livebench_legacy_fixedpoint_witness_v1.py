@@ -82,7 +82,7 @@ def test_nth_paragraph_title_end_and_no_comma():
 def test_json_can_compose_with_existence_and_forbidden():
     _assert_pass(
         "Explain a process. "
-        "Entire output should be wrapped in JSON format. You can use markdown ticks such as \`\`\`. "
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as ```. "
         "Include keywords ['alpha', 'omega'] in the response. "
         "Do not include keywords ['danger', 'failure'] in the response."
     )
