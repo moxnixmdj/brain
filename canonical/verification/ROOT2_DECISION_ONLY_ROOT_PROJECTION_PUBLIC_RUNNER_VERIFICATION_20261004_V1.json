@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_DECISION_ONLY_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_ROOT_PROJECTION__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subjects": {
+    "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "822d7a0e64b2e919a873526d111e7202c40e1f5b",
+    "canonical/governance/ROOT2_DECISION_ONLY_EVALUATION_ACTIVATION_V1.json": "4086abe4559e30ade7bb7fa5be5571eaf40e94ee",
+    "canonical/verification/ROOT2_DECISION_ONLY_EVALUATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json": "345ad6ce5d5ba5105c82e5663fa9a97e99ccec05"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1794,
+    "verified_head_sha": "7385cf432b0afd405bccec216b8bb49f11c3907a",
+    "merge_commit": "5718652b3a6bb2f25c694d68210d62ea4518d416",
+    "workflow_run_id": 37191419798,
+    "workflow_job_id": 111404224140,
+    "conclusion": "success"
+  },
+  "verified": {
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "activation_blob_bound": true,
+    "subject_verification_blob_bound": true,
+    "scheduling_authority": true,
+    "decision_certificate_compilation": true,
+    "execution_authority": false,
+    "fresh_reality_authority": false,
+    "promotion_authority": false,
+    "acceptance_credit_delta": 0,
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "semantic_effect": "ROOT2_DECISION_ONLY_EVALUATION_OVERLAY_IS_ELIGIBLE_AS_ACTIVE_SCHEDULING_AUTHORITY_ON_THE_EXACT_VERIFIED_ROOT_STATE__NO_ACCEPTANCE_EXECUTION_FRESH_REALITY_OR_PROMOTION_CREDIT",
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  }
+}
