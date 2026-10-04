@@ -6,6 +6,7 @@ import string
 from typing import Any
 
 from canonical.runtime import instruction_constraint_compiler_v1 as v1
+from canonical.runtime import livebench_public_checker_inversion_cut_v1 as inversion
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_PUBLIC_GRAMMAR_COMPILER_V2"
 
@@ -57,6 +58,7 @@ def _match_rules(text: str) -> list[tuple[str, Any]]:
         if m:
             raw = m.group(1).strip()
             rules.append((key, conv(raw)))
+    rules.extend(inversion.match_rules(text))
     return rules
 
 
@@ -91,6 +93,8 @@ def _witness(rule: str, arg: Any) -> str:
     if rule == "repeat_change":
         words = str(arg).split()
         return "Changed" if len(words) <= 1 else "Changed " + " ".join(words[1:])
+    if rule.startswith("x_"):
+        return inversion.witness(rule, arg)
     raise ValueError(f"UNSUPPORTED_RULE:{rule}")
 
 
@@ -197,6 +201,8 @@ def _validate(rule: str, arg: Any, value: str) -> bool:
     if rule == "repeat_change":
         original = str(arg)
         return original != value and " ".join(original.split()[1:]) == " ".join(value.split()[1:])
+    if rule.startswith("x_"):
+        return inversion.validate(rule, arg, value)
     return False
 
 
