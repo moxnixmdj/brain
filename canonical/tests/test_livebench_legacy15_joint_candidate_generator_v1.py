@@ -73,6 +73,15 @@ def test_core_mode_emits_bounded_candidates():
     assert all("omega" not in x.lower() for x in out["candidates"])
 
 
+def test_sentence_threshold_twenty_survives_single_candidate_budget():
+    out = g.generate([
+        c("length_constraints:number_sentences", num_sentences=20, relation="at least"),
+    ], max_candidates=1)
+    assert out["status"] == "PASS_CANDIDATES"
+    assert out["candidate_count"] == 1
+    assert out["candidates"][0].count("!") >= 20
+
+
 def test_sentence_lower_bound_can_be_zero_word_cost():
     out = g.generate([
         c("length_constraints:number_sentences", num_sentences=4, relation="at least"),
