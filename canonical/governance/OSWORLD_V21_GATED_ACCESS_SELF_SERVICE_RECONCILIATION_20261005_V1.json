@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_GATED_ACCESS_SELF_SERVICE_RECONCILIATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PRIMARY_SOURCE_SELF_SERVICE_ACCESS_RECLASSIFICATION__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "objective": "Delete stale owner-wait semantics for OSWorld 2.1 gated task/assets access and bind the current official self-service release-pinned route.",
+  "public_primary_sources": [
+    {
+      "source": "xlang-ai/OSWorld-V2 README",
+      "claim": "Official osworld_v2_tasks gated request is automatically approved after the logged-in user accepts the access request; task classes are downloaded with the osworld-v2.1 benchmark release pin."
+    },
+    {
+      "source": "xlang-ai/OSWorld-V2 release osworld-v2.1",
+      "claim": "Release pins gated task files, gated assets, public runtime assets, and Task-Web/OSWorld-web components for reproducible evaluation."
+    }
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "HUGGING_FACE_OSWORLD_GATED_ASSET_OWNER_APPROVAL_WAIT_AS_A_DISTINCT_EXTERNAL_OWNER_DEPENDENCY"
+    ],
+    "replace_with": [
+      "SELF_SERVICE_HUGGING_FACE_LOGIN_AND_GATED_TERMS_ACCEPTANCE",
+      "DOWNLOAD_EXACT_OSWORLD_V2_1_PINNED_TASK_AND_ASSET_RELEASES",
+      "VERIFY_EXACT_COMPONENT_IDENTITIES_AND_ANTHROPIC_COMPARABILITY_OR_PROTOCOL_EQUIVALENCE",
+      "VERIFY_ZERO_INCREMENTAL_SPEND_RUNTIME_AND_EXECUTION_ROUTE",
+      "OBTAIN_MINIMUM_ADMISSIBLE_BRAIN_THRESHOLD_CERTIFICATE"
+    ],
+    "preserved_blockers": [
+      "USER_OR_AGENT_AUTHENTICATED_HUGGING_FACE_SESSION_OR_TOKEN_REQUIRED",
+      "ANTHROPIC_EXACT_SETUP_OR_PROTOCOL_EQUIVALENCE_UNPROVED",
+      "BRAIN_SCORE_OR_STRONGER_CERTIFICATE_UNPROVED"
+    ]
+  },
+  "nonclaims": [
+    "AUTOMATIC_GATE_APPROVAL_DOES_NOT_PROVE_THE_USER_ACCOUNT_HAS_ALREADY_ACCEPTED_THE_TERMS",
+    "ACCESS_DOES_NOT_PROVE_ANTHROPIC_USED_THE_SAME_RELEASE_OR_SETUP",
+    "ACCESS_DOES_NOT_PROVE_ZERO_COST_RUNTIME",
+    "ACCESS_DOES_NOT_PROVE_THE_OSWORLD_ACCEPTANCE_PREDICATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
