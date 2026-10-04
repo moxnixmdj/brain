@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_UNPLANNED_PUBLIC_SEARCH_EXPOSURE_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_CONTAMINATION_LEDGER__THREE_NEW_ACTIVE_TERMINAL_PROMPT_SNIPPETS_EXPOSED__NO_CASE_CONTENT_ADMITTED_FOR_REPAIR",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "event": {
+    "cause": "PUBLIC_WEB_SEARCH_RESULT_RETURNED_DATASET_VIEWER_SNIPPETS_WHILE_TRACING_DATASET_LINEAGE",
+    "intent": "METADATA_AND_LINEAGE_RESEARCH_ONLY",
+    "prompt_content_requested": false,
+    "active_terminal_prompt_snippets_exposed": 3,
+    "active_terminal_question_ids": [
+      "d2adc0a1fad83dc359b9b10550d05c3b551685dbd85ca6f9f68721a7ecdc4785",
+      "f4cbfc58a683894a66b028420969bb75a35fe4acda1bd3dce0024062c11b2041",
+      "91b1079c3dd6f0c003bb20f34f3783141cbc55926e6e3001ba18eaba3acc169e"
+    ],
+    "active_release_date": "2024-11-25",
+    "source": "PUBLIC_HUGGINGFACE_DATASET_VIEWER_SEARCH_RESULT",
+    "source_dataset": "livebench/instruction_following",
+    "frozen_dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb"
+  },
+  "deduplication_against_prior_72": {
+    "prior_execution_log_git_blob_sha": "6c9c89cd2f7e977405017cb5ddfa8033126f4bf2",
+    "prior_verified_unique_question_ids": 72,
+    "all_three_ids_absent_from_prior_execution_log": true,
+    "new_unique_active_terminal_exposures": 3,
+    "known_unique_exposure_lower_bound_after_event": 75,
+    "order_positions_not_inferred": true
+  },
+  "firewall": {
+    "do_not_use_exposed_prompt_text_for_successor_design": true,
+    "do_not_use_case_specific_instruction_combinations_as_coverage_targets": true,
+    "do_not_embed_exposed_question_ids_or_content_in_runtime_logic": true,
+    "future_successor_must_be_derived_from_checker_source_public_nonterminal_grammar_and_case_independent_algorithms": true,
+    "independent_verifier_must_check_no_question_id_literal_dependency": true,
+    "independent_verifier_must_check_no_case_specific_content_literal_dependency": true,
+    "contaminated_cases_may_not_supply_clean_generalization_credit": true
+  },
+  "supersession": {
+    "prior_plan": "canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json",
+    "prior_plan_claim_invalidated_for_future_execution": "case_reveal_has_occurred=false",
+    "prior_plan_historical_verification_remains_true_at_its_timestamp": true,
+    "new_precommit_required_before_any_new_terminal_execution": true
+  },
+  "scope_nonimpact": {
+    "verified_legacy_only_scorer_scope_affected": false,
+    "reason": "SCORER_FAMILY_PROOF_USED_ONLY_METADATA_COLUMNS_AND_INDEPENDENT_RUNNER",
+    "frozen_v6_forced_fail_affected": false,
+    "reason_v6": "THESE_THREE_IDS_WERE_NOT_USED_IN_THE_72_CASE_V6_PROOF"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_active_terminal_prompt_exposures": 3,
+    "prior_unique_terminal_exposures": 72,
+    "known_unique_terminal_exposures_after_event": 75,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
