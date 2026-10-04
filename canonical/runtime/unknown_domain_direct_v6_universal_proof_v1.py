@@ -37,7 +37,7 @@ EXPECTED_BLOBS={
  "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py":"f974a4594c78e74693c7ba5a19f131dfa481b937",
  "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py":"d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
  "canonical/runtime/unknown_domain_direct_hidden_generator_v4.py":"e52858b9fef2d795f72b45cd3ae82ad04344aa91",
- "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py":"d3b5e7279ca1068d1532046f35e6752107e42e24",
+ "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py":"e92dfde05672a249f2dcb71c7ce87fc783142816",
  "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py":"e8cf5d1b5d311644725a751c15e6235958fb587d",
  "canonical/runtime/unknown_domain_direct_execution_harness_v1.py":"04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
  "canonical/tests/test_unknown_domain_direct_v5.py":"e2ade4b713bb8103ae577de35a35b1caa03bc5a9",
