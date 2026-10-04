@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SEED_POSTPROCESSOR_V2_TRUTH_REPAIR_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__DETERMINISTIC_INTERNAL_CONTRADICTION_REPAIRED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "unsafe_main_commit": "39995d1fe5e058515fed32de878943401d5dc8ee",
+    "unsafe_runtime_path": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py",
+    "unsafe_runtime_git_blob_sha": "184364692f11c21fb016d85b9014893162078e05",
+    "prior_v1_truth_repair_commit": "19b8e8291fa3508209837cb327c29b685dd9a6e7",
+    "prior_v1_falsification_receipt": "canonical/verification/SEED_PRESERVING_POSTPROCESSOR_V1_CLAIM_FALSIFICATION_20261004.json"
+  },
+  "falsification": {
+    "defect": "V2_REINTRODUCED_TRANSFORMATIONS_ALREADY_FALSIFIED_AS_SEED_PRESERVING",
+    "counterexamples": [
+      {"seed": "semantic seed", "instruction": "Reply with exactly \"OK\".", "unsafe_behavior": "REPLACE_SEED_WITH_EXACT_RESPONSE", "preservation_failure": "SEED_NONWHITESPACE_CONTENT_DELETED"},
+      {"seed": "Mixed Case Answer", "instruction": "Write the entire response in lowercase only.", "unsafe_behavior": "CASE_FOLD_SEED", "preservation_failure": "SEED_NONWHITESPACE_CHARACTERS_SUBSTITUTED"}
+    ],
+    "contradictory_old_claim": "seed_lexical_content_deleted=false",
+    "conclusion": "THE_OLD_V2_PASS_CONTRACT_WAS_NOT_SOUND_FOR_SEED_PRESERVATION"
+  },
+  "repair": {
+    "branch": "repair/livebench-seed-postprocessor-v2-truth-20261004-sol",
+    "runtime_path": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py",
+    "runtime_git_blob_sha": "e6226255937443e2f4fe39dd2ccf24a29b6a0020",
+    "test_path": "canonical/runtime/test_seed_preserving_instruction_postprocessor_v2.py",
+    "test_git_blob_sha": "44e493c29425ea53fbcc609ec3eadb1a63a31414",
+    "mechanical_invariant": "REMOVE_WHITESPACE_SEED_OCCURS_VERBATIM_AND_CONTIGUOUSLY_INSIDE_REMOVE_WHITESPACE_RESPONSE",
+    "allowed_transform_classes": ["EXPLICIT_PREFIX_OR_SUFFIX_INSERTION", "PUBLIC_IFBENCH_PUNCTUATION_ONLY_OUTER_SCAFFOLDS", "WHITESPACE_ONLY_REFLOW"],
+    "forbidden_transform_classes": ["SEED_REPLACEMENT", "CASE_FOLDING_OR_CASE_SUBSTITUTION", "NONWHITESPACE_SEED_DELETION", "NONWHITESPACE_SEED_REORDERING"]
+  },
+  "semantic_effect": "REMOVES_A_FALSE_ROOT1_REPAIR_ROUTE_AND_PRESERVES_ONLY_MECHANICALLY_PROVABLE_SEED_TRANSFORMATIONS",
+  "hard_nonclaims": ["NO_LIVEBENCH_SCORE_CLAIM", "NO_GENERAL_SEMANTIC_EQUIVALENCE_CLAIM", "NO_ACCEPTANCE_OR_FAMILY_CREDIT", "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY", "NO_UNEXPOSED_TERMINAL_CASE_CONTENT_USED"],
+  "accounting": {"incremental_spend_usd": 0, "terminal_cases_consumed": 0, "new_terminal_cases_exposed": 0, "acceptance_credit_delta": 0, "family_credit_delta": 0, "capability_credit_delta": 0, "ownership_credit_delta": 0},
+  "authority": {"execution": false, "promotion": false, "fresh_reality": false, "acceptance_credit": false}
+}
