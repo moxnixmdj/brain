@@ -173,8 +173,9 @@ def _build_core_skeleton(
     nth = _one(constraints, "length_constraints:nth_paragraph_first_word")
     bullets = _one(constraints, "detectable_format:number_bullet_lists")
     sections = _one(constraints, "detectable_format:multiple_sections")
-    postscript = _one(constraints, "detectable_content:postscript")
-    end_checker = _one(constraints, "startend:end_checker")
+    # Tail material and outer quotation are finalized only after word padding.
+    # Otherwise lower-bound padding can be appended after an exact end phrase or
+    # outside the closing quote, invalidating an otherwise satisfiable witness.
 
     safe = _safe_token(forbidden)
     components: list[str] = []
@@ -221,11 +222,39 @@ def _build_core_skeleton(
     else:
         body = "\n".join(components).strip()
 
-    body = _apply_end_material(body, postscript, end_checker)
-    body = _apply_quote(body, quotation)
+    # Preserve __PB_END_SLOT__ through the padding phase. Finalization happens
+    # in generate(), after the word constraint has been satisfied.
     if not _forbidden_ok(body, forbidden):
         raise ValueError("STRUCTURE_HITS_FORBIDDEN_WORD")
     return body
+
+
+def _finalize_core_candidate(
+    text: str,
+    constraints: list[dict[str, Any]],
+) -> str:
+    postscript = _one(constraints, "detectable_content:postscript")
+    end_checker = _one(constraints, "startend:end_checker")
+    quotation = _one(constraints, "startend:quotation") is not None
+    text = _apply_end_material(text, postscript, end_checker)
+    return _apply_quote(text, quotation)
+
+
+def _word_constraint_ok(
+    text: str,
+    word_constraint: dict[str, Any] | None,
+) -> bool:
+    if not word_constraint:
+        return True
+    s = _slots(word_constraint)
+    threshold = int(s["num_words"])
+    relation = str(s["relation"])
+    count = _word_count(text)
+    if relation == "at least":
+        return count >= threshold
+    if relation == "less than":
+        return count < threshold
+    return False
 
 
 def generate(constraints: Iterable[dict[str, Any]], max_candidates: int = 96) -> dict[str, Any]:
@@ -281,7 +310,13 @@ def generate(constraints: Iterable[dict[str, Any]], max_candidates: int = 96) ->
                 except ValueError:
                     continue
                 candidate = _pad_for_word_constraint(candidate, word_constraint, forbidden)
-                if candidate is None or not _forbidden_ok(candidate, forbidden):
+                if candidate is None:
+                    continue
+                candidate = _finalize_core_candidate(candidate, rows)
+                if (
+                    not _forbidden_ok(candidate, forbidden)
+                    or not _word_constraint_ok(candidate, word_constraint)
+                ):
                     continue
                 if candidate not in seen:
                     seen.add(candidate)
