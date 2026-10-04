@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V6_FORCED_FAIL_BINDING_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__INDEPENDENT_FORCED_FAIL_EVIDENCE_BOUND__SCHEDULER_DELETION_ONLY__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "frozen_candidate": {
+    "commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "commit": "f3c439f329c7b481a8448a0619e7696111e05ecc",
+    "reconciliation_path": "subject/livebench_v6_forced_fail_20261004/reconciliation.json",
+    "reconciliation_git_blob_sha": "b1e14f11d97673a499f2d9a5e2c708d9aba969fb",
+    "execution_log_path": "subject/livebench_v6_forced_fail_20261004/execution.log",
+    "execution_log_git_blob_sha": "6c9c89cd2f7e977405017cb5ddfa8033126f4bf2",
+    "exit_code_git_blob_sha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+    "verified_case_count": 72,
+    "verified_unique_question_ids": 72,
+    "verified_observed_score_mass": 0,
+    "verified_remaining_unseen": 128,
+    "verified_best_case_full_population_upper_percent": 64.0,
+    "frozen_threshold_percent": 65.7,
+    "predicate_false_for_frozen_candidate": true,
+    "additional_case_exposure_needed": false
+  },
+  "mathematical_certificate": {
+    "population_count": 200,
+    "observed_zero_score_cases": 72,
+    "unseen_cases": 128,
+    "maximum_possible_remaining_score_mass": 128,
+    "maximum_full_population_percent": 64.0,
+    "threshold_percent": 65.7,
+    "inequality": "128/200*100=64.0<65.7",
+    "conclusion": "PASS_IS_MATHEMATICALLY_IMPOSSIBLE_FOR_THIS_FROZEN_CANDIDATE"
+  },
+  "scheduler_effect_if_verified": [
+    "DELETE_ALL_FURTHER_LIVEBENCH_CASE_EXPOSURE_FOR_THIS_FROZEN_CANDIDATE",
+    "DELETE_FULL_BENCHMARK_COMPLETION_FOR_THIS_FROZEN_CANDIDATE",
+    "REQUIRE_SUCCESSOR_CANDIDATE_OR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF_BEFORE_ANY_FURTHER_LIVEBENCH_ACCEPTANCE_ATTEMPT",
+    "DO_NOT_TREAT_MORE_MEASUREMENT_AS_THE_CURRENT_BLOCKER_FOR_THIS_FROZEN_CANDIDATE"
+  ],
+  "root_classification_boundary": {
+    "root2_for_frozen_candidate": "MEASUREMENT_UNCERTAINTY_RESOLVED_NEGATIVELY",
+    "global_root1_reclassification": "NOT_GRANTED_BY_THIS_BINDING",
+    "reason": "THE_INDEPENDENT_FORCED_FAIL_PROOF ESTABLISHES THE CURRENT CANDIDATE CANNOT PASS, BUT A SEPARATE VERIFIED CLASSIFICATION IS REQUIRED BEFORE CHANGING GLOBAL ROOT1 STATE OR LOCALIZING THE MINIMUM OPERATIVE GAP"
+  },
+  "hard_rules": [
+    "NO_CASE_73_OR_LATER_FOR_THIS_FROZEN_CANDIDATE",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_A_PROVED_FALSE_PREDICATE",
+    "NO_GLOBAL_ROOT1_REOPEN_FROM_THIS_BINDING_ALONE",
+    "NO_TERMINAL_PROMPT_CONTENT_USED_TO DESIGN_REPAIR",
+    "SUCCESSOR_REPAIR_MUST_GENERALIZE_ON NONTERMINAL_OR_ALREADY_EXPOSED EVIDENCE AND REQUIRE A NEW PRECOMMIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "newly_exposed_terminal_cases": 0,
+    "replayed_already_exposed_terminal_cases": 72,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_authority": false,
+  "independent_binding_verification_required": true
+}
