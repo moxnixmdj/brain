@@ -1,0 +1,41 @@
+name: Verify Unknown-Domain V4 total exact proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/unknown_domain_direct_candidate_v3.py'
+      - 'canonical/runtime/unknown_domain_direct_hidden_generator_v3.py'
+      - 'canonical/runtime/unknown_domain_direct_v4_universal_proof_v1.py'
+      - 'canonical/tests/test_unknown_domain_direct_v4_universal_proof_v1.py'
+      - 'canonical/governance/UNKNOWN_DOMAIN_DIRECT_V4_TOTAL_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json'
+      - 'canonical/action_intents/2026-10-05_UNKNOWN_DOMAIN_V4_TOTAL_UNIVERSAL_CLOSURE_V1.json'
+      - '.github/workflows/verify-unknown-domain-v4-total-exact.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run exact theorem regression suite
+        run: python -m unittest canonical.tests.test_unknown_domain_direct_v4_universal_proof_v1 -v
+      - name: Run zero-reality theorem
+        run: |
+          python -m canonical.runtime.unknown_domain_direct_v4_universal_proof_v1 > /tmp/udir_v4.json
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/udir_v4.json"))
+          assert d["status"]=="PASS__UNIVERSAL_OVER_ALL_VALID_TOTALIZED_V3_INPUTS_WITH_EXACT_FLOAT_V3_CANDIDATE"
+          assert d["scope"]["terminal_or_production_cases_generated"]==0
+          assert d["identifier_totality_proof"]["hash_collision_resistance_required"] is False
+          assert d["transfer_proof"]["add2_exact_float_order_repaired"] is True
+          assert d["accounting"]["acceptance_credit_delta"]==0
+          print("Unknown-Domain V4 total+exact theorem PASS")
+          PY
