@@ -400,10 +400,20 @@ def generate(constraints: Iterable[dict[str, Any]], max_candidates: int = 96) ->
             sentence_constraint = _one(rows, "length_constraints:number_sentences")
             if sentence_constraint:
                 target = int(_slots(sentence_constraint)["num_sentences"])
-                # Exact scorer postvalidation decides which count works. The
-                # range brackets the generator's public 1..20 threshold and
-                # allows structural punctuation to contribute extra sentences.
-                sentence_counts = list(range(0, max(26, target + 8)))
+                relation = str(_slots(sentence_constraint)["relation"]).strip().casefold()
+                # The solver retains only a bounded prefix of candidates per
+                # relaxation. Put a constructive relation-satisfying count first
+                # so public threshold 20 cannot be truncated behind counts 0..15.
+                # Exact postvalidation still decides the final checker vector.
+                upper = max(26, target + 8)
+                if relation == "at least":
+                    preferred = list(range(target, upper))
+                    fallback = list(range(0, target))
+                    sentence_counts = preferred + fallback
+                elif relation == "less than":
+                    sentence_counts = list(range(0, upper))
+                else:
+                    raise ValueError("UNSUPPORTED_SENTENCE_RELATION")
             else:
                 sentence_counts = [0, 1, 2]
             candidates = []
