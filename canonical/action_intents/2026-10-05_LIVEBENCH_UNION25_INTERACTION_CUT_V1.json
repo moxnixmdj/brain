@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "LIVEBENCH-UNION25-INTERACTION-CUT-20261005-V1",
+  "date": "2026-10-05",
+  "status": "PROPOSED__CRITICAL_PATH__ZERO_REALITY__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "e6e79de876fd4d3f44aef332a23a82c23a2c9b85",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "action_kind": "COMPRESS_FULL_REGISTRY25_POINTWISE_CLOSURE_TO_NEW_FAMILY_INTERACTION_ARCHETYPES",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::LIVEBENCH_IF_GE_65_7::UNION25_POINTWISE_CLOSURE",
+  "highest_leverage_now": true,
+  "current_truth": {
+    "acceptance_predicates_proved": 13,
+    "acceptance_predicates_unresolved": 25,
+    "active15_promotion_blocked_by_verified_union25_scope": true,
+    "public_registry_family_count": 25,
+    "active15_family_count": 15,
+    "new_family_count": 10,
+    "compatible_registry25_structural_sets_1_to_5": 14559,
+    "active15_compatible_structural_sets_1_to_5": 928,
+    "union25_pointwise_optimality_proved": false
+  },
+  "recursive_obs": {
+    "real_outcome": "Delete structural proof multiplicity before extending the constructor.",
+    "obs_goal": {
+      "surviving_necessity": "POINTWISE_OPTIMALITY_OVER_ALL_25_PINNED_CHECKER_FAMILIES"
+    },
+    "obs_capability": {
+      "inherited_verified_route": "ACTIVE15_POINTWISE_AND_CONSTRUCTION_EVIDENCE",
+      "new_surface": [
+        "keywords:frequency",
+        "keywords:letter_frequency",
+        "language:response_language",
+        "detectable_content:number_placeholders",
+        "detectable_format:constrained_response",
+        "detectable_format:number_highlighted_sections",
+        "change_case:capital_word_frequency",
+        "change_case:english_capital",
+        "change_case:english_lowercase",
+        "punctuation:no_comma"
+      ]
+    },
+    "obs_blocker": {
+      "surviving_causal_blocker": "RAW_14559_STRUCTURAL_SET_ENUMERATION_HIDES_THAT_ONLY_THE_NEW10_INTERACTION_SIGNATURE_NEEDS_NEW_REASONING"
+    },
+    "obs_solution": {
+      "selected_surviving_route": "EXACT_CONFLICT_GRAPH_QUOTIENT_BY_NEW10_SUBSET",
+      "expected_compression": "14559_STRUCTURAL_SETS_TO_A_SMALL_EXACT_SET_OF_NEW10_INTERACTION_SIGNATURES_PLUS_INHERITED_ACTIVE15_RESIDUAL"
+    },
+    "obs_verification": {
+      "falsification_condition": "ANY_REGISTRY25_COMPATIBLE_SET_NOT_PARTITIONED__ANY_QUOTIENT_SIGNATURE_NOT_PRESERVING_ITS_NEW10_SUBSET__ANY_COUNT_DRIFT_FROM_THE_INDEPENDENTLY_VERIFIED_14559_TOTAL"
+    }
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "Exact structural quotient for the full pinned registry25 that isolates only genuinely new checker-family interactions.",
+    "hole_type": "DEDUCTIVE_STRUCTURAL_COMPRESSION",
+    "expected_certificate_or_receipt": "Exact counts, total partition, inherited Active15 residual proof, isolated-family deletions.",
+    "maximum_cheap_test_cost": "ZERO_TERMINAL_CASES__ZERO_INCREMENTAL_SPEND",
+    "contamination_risk": "NONE__PINNED_PUBLIC_REGISTRY_SEMANTICS_ONLY",
+    "reversibility": "FULL",
+    "critical_path_relation": "Directly attacks the explicit union25 pointwise-closure blocker."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
