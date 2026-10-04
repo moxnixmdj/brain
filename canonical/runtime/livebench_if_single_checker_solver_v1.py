@@ -17,6 +17,7 @@ import string
 from typing import Any
 
 from canonical.runtime import livebench_ngram_reference_free_v1 as ngram_free
+from canonical.runtime import livebench_prompt_only_repeat_compiler_v1 as repeat_prompt_only
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_IF_SINGLE_CHECKER_SOLVER_V1"
 FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
@@ -342,26 +343,13 @@ def _build_dynamic(iid: str, prompt: str) -> str | None:
         k = m.group(1)
         return f"a {k} b {k} c"
 
-    if iid == "repeat:repeat_change":
-        marker = re.search(r"\s*Repeat the request, but change the first word of the repeated request,.*$", prompt, re.I | re.S)
-        if not marker:
+    if iid in {"repeat:repeat_change", "repeat:repeat_span"}:
+        try:
+            out = repeat_prompt_only.construct_from_prompt(prompt)
+        except repeat_prompt_only.PromptOnlyRepeatError:
             return None
-        base = prompt[:marker.start()].strip()
-        words = base.split()
-        if len(words) < 2:
-            return None
-        return "CHANGED " + " ".join(words[1:])
-
-    if iid == "repeat:repeat_span":
-        m = re.search(r"\s*Copy the span of words that lies between \(and including\) index\s+(\d+)\s+and\s+(\d+),\s+the indices are word indices, split by whitespace!?", prompt, re.I)
-        if not m:
-            return None
-        start, end = int(m.group(1)), int(m.group(2))
-        base = prompt[:m.start()].strip()
-        words = base.split()
-        if not (0 <= start < end <= len(words)):
-            return None
-        return " ".join(words[start:end])
+        response = str(out.get("response") or "")
+        return response if response else None
 
     return None
 
