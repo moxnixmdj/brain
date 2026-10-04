@@ -62,6 +62,18 @@ def test_exact_visible_slots_feed_registry_without_defaults():
     ) == (False, True)
 
 
+def test_exact_checker_matches_strict_nonempty_outer_gate():
+    contract = [{
+        "instruction_id": "keywords:forbidden_words",
+        "slots": {"forbidden_words": ["omega"]},
+    }]
+    # The checker alone accepts empty text, but frozen LiveBench strict
+    # evaluation rejects it before checker execution.
+    assert c.evaluate_with_registry("", contract, REGISTRY) == (False,)
+    assert c.evaluate_with_registry("   \n\t", contract, REGISTRY) == (False,)
+    assert c.evaluate_with_registry("alpha", contract, REGISTRY) == (True,)
+
+
 def test_missing_slot_fails_closed_instead_of_randomizing():
     with pytest.raises(c.ExactContractCheckerError, match="VISIBLE_SLOT_SHAPE_MISMATCH"):
         c.evaluate_with_registry(
