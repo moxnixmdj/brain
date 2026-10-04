@@ -4882,6 +4882,45 @@ def _compile_domain_free_authority_source_goal(goal,clauses,registry,root):
     }
 
 
+def _compile_exact_literal_response_goal(goal):
+    """Lower a strict exact-literal response instruction to one native finish action.
+
+    This is intentionally narrow. Unquoted literals must be a single safe atom;
+    multi-word or punctuation-sensitive literals must be quoted. The compiler
+    never guesses where an unquoted literal ends.
+    """
+    text=" ".join(str(goal or "").strip().split())
+    if not text:
+        return None
+    match=re.fullmatch(
+        r"""(?:reply|respond)\s+with\s+exactly\s+(?:"([^"\r\n]{1,4096})"|'([^'\r\n]{1,4096})'|([A-Za-z0-9_:+/@#%=-]{1,512}))\.?""",
+        text,
+        re.IGNORECASE,
+    )
+    if not match:
+        return None
+    literal=next((x for x in match.groups() if x is not None),None)
+    if literal is None or not literal:
+        return None
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_EXACT_LITERAL_RESPONSE_V1",
+      "compiler_mode":"DETERMINISTIC_EXACT_LITERAL_RESPONSE",
+      "clauses":[text],
+      "compiled_parts":[{
+        "index":0,
+        "subgoal":text,
+        "mode":"NATIVE_EXACT_LITERAL_RESPONSE",
+        "literal_sha256":hashlib.sha256(literal.encode("utf-8")).hexdigest(),
+        "literal_length":len(literal),
+      }],
+      "controller_actions":[{
+        "type":"finish",
+        "args":{"summary":literal},
+      }],
+      "finish_summary":literal,
+    }
+
+
 def _validate_compiled_clause_coverage(compiled):
     if not isinstance(compiled,dict):
         raise GoalCompilationFailure("COMPILED_PLAN_INVALID")
@@ -4920,6 +4959,9 @@ def compile_goal(goal, registry, root):
     goal=str(goal or "").strip()
     if not goal:
         raise GoalCompilationFailure("GOAL_REQUIRED")
+    exact_literal=_compile_exact_literal_response_goal(goal)
+    if exact_literal is not None:
+        return _validate_compiled_clause_coverage(exact_literal)
     browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
