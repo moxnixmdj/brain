@@ -347,7 +347,7 @@ def discover(
         if not beam:
             break
 
-    primitive = [rec for rec in features if rec["complexity"] <= 2]
+    primitive = [rec for rec in features if rec["complexity"] <= 3]
     scored = sorted(
         features,
         key=lambda r: (r["single_feature_validation_nrmse"], r["complexity"], r["signature"]),
@@ -359,7 +359,7 @@ def discover(
             continue
         seen_signatures.add(rec["signature"])
         pair_candidates.append(rec)
-        if len(pair_candidates) >= 48:
+        if len(pair_candidates) >= 96:
             break
 
     combos = []
