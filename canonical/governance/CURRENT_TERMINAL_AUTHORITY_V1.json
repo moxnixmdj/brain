@@ -1092,6 +1092,24 @@
       "activation": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5_ACTIVATION_V1.json",
       "activation_git_blob_sha": "2d15df0daab51c5cc61c4194197da7f7fcd5a1b0"
     },
+    "finance_index_direct_threshold_overlay": {
+      "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "activation_path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "9b9d4a41d19a5e58e8967027e1d1837790287dc2",
+      "activation_verification_path": "canonical/verification/FINANCE_INDEX_DIRECT_THRESHOLD_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "activation_verification_git_blob_sha": "f7c1127834aee3c70dc4634e8273e3a887e45c66",
+      "theorem_path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_THEOREM_V1.json",
+      "theorem_git_blob_sha": "37f47143f62fe2f59e56d8eca4a64bae18a1ce8b",
+      "theorem_verification_path": "canonical/verification/FINANCE_INDEX_DIRECT_THRESHOLD_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "theorem_verification_git_blob_sha": "d138989a38fadba75e7dc538a80a34201c97ed04",
+      "residual_path": "canonical/governance/FINANCE_INDEX_COMPONENTWISE_RESIDUAL_VECTOR_V1.json",
+      "residual_git_blob_sha": "1f8b7ebd377ba06548d46399f62ed883c49dc0c3",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__PREDICATE_LOCAL_ROOT2_SCHEDULING_OVERLAY__ZERO_CREDIT",
+      "effective_scheduling_authority": true,
+      "supersedes_v5_action_for_target": "FINANCE_COMPONENTWISE_PREMISES_AND_NORMALIZATION_AGGREGATION",
+      "replacement_action": "MINIMIZE_VERIFIED_WEIGHTED_BRAIN_COMPONENT_LOWER_BOUND_DEFICIT_TO_61",
+      "fresh_reality_authority": false
+    },
     "synthesis_coverage_ceiling_v2": {
       "path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
       "git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
@@ -1761,7 +1779,7 @@
     "execution_authority": false,
     "promotion_authority": false
   },
-  "next_terminal_action": "ROOT2_V5_ACTIVE_ZERO_REALITY_FRONTIER__EXECUTE_ONLY_NAMED_ACCOUNT_PROTOCOL_AND_OWNER_FACTS__ROOT3_V2_ZERO_RUNNABLE__NO_FRESH_SCORE_BEFORE_ZERO_REALITY_FIXED_POINT",
+  "next_terminal_action": "ROOT2_V5_ACTIVE_ZERO_REALITY_FRONTIER__FINANCE_INDEX_USE_ACTIVE_WEIGHTED_LOWER_BOUND_DEFICIT_ROUTE__EXECUTE_ONLY_NAMED_ACCOUNT_PROTOCOL_OWNER_OR_STRONGER_PROOF_FACTS__ROOT3_V2_ZERO_RUNNABLE__NO_FRESH_SCORE_BEFORE_ZERO_REALITY_FIXED_POINT",
   "ownership_state": {
     "verified_owned_families": 5,
     "total_families": 19,
