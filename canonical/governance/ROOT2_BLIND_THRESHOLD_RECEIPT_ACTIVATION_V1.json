@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_BLIND_THRESHOLD_RECEIPT_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__ONE_BIT_THRESHOLD_CERTIFICATE_VALIDATION__ZERO_CREDIT",
+  "objective": "Activate a fail-closed structural validator for authenticated owner/platform threshold verdicts so private benchmark closure can consume only the terminal PASS/FAIL bit instead of datasets or exact scores.",
+  "runtime": {
+    "path": "canonical/runtime/blind_threshold_receipt_v1.py",
+    "git_blob_sha": "324e9c236fed50d150082ebcca6078a2921ed65a"
+  },
+  "governance": {
+    "path": "canonical/governance/ROOT2_BLIND_THRESHOLD_RECEIPT_V1.json",
+    "git_blob_sha": "ad699b6e5e9a0268b18cabe39588f9a0a401016f"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/ROOT2_BLIND_THRESHOLD_RECEIPT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+  },
+  "eligible_root2_routes": [
+    "CODING_FRONTIERCODE_GE_54_4",
+    "CODING_CURSORBENCH_GE_57_8",
+    "PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "FINANCE_AGENT_V2_GE_58_59",
+    "ARTIFACT_AA_BRIEFCASE_GE_1822",
+    "MYSTERYMECHANISM_GE_49_55"
+  ],
+  "scheduling_effect": [
+    "PREFER_AUTHENTICATED_ONE_BIT_THRESHOLD_RECEIPT_OVER_PRIVATE_DATASET_DISCLOSURE_OR_FULL_SCORE_DISCLOSURE_WHEN_THE_FROZEN_PREDICATE_NEEDS_ONLY_GE_THRESHOLD",
+    "FOR_RELATIVE_RATING_REQUIRE_OFFICIAL_RELATIVE_RATING_THRESHOLD_VERDICT__ABSOLUTE_BEHAVIORAL_PROOF_REMAINS_NONTRANSPORTABLE",
+    "AA_BRIEFCASE_SINGLE_EXACT_RECEIPT_MAY_FEED_BOTH_PREDICATES_ONLY_AFTER_EACH_SCOPE_BINDING_INDEPENDENTLY_PASSES"
+  ],
+  "authority": {
+    "receipt_structural_validation": true,
+    "benchmark_execution": false,
+    "fresh_reality": false,
+    "acceptance_reduction": false,
+    "promotion": false,
+    "ownership": false
+  },
+  "hard_rules": [
+    "VALIDATOR_DOES_NOT_AUTHENTICATE_AN_ISSUER_BY_ACCEPTING_INPUT_FIELDS__SOURCE_AUTHENTICITY_MUST_HAVE_SEPARATE_CONTENT_ADDRESSED_VERIFICATION",
+    "NO_SELF_ASSERTED_PASS_FAIL_BIT",
+    "NO_MATCHED_NONINFERIORITY_COLLAPSE_TO_ONE_FIXED_BAR_BIT",
+    "NO_ACCEPTANCE_CREDIT_FROM_ACTIVATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
