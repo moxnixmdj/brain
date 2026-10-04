@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_IF_AUTHORITY_CAUSAL_CUT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_CAUSAL_DECOMPOSITION_AND_DETERMINISTIC_ENFORCEMENT_SLICE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicates": [
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR"
+  ],
+  "motivation": {
+    "current_root3_work_class": "ROOT3_FORMAL_SCOPE_SHARED_V1",
+    "frozen_dimensions": [
+      "multi-constraint instruction compliance",
+      "authorization/scope boundaries",
+      "routine ambiguity",
+      "requirement change",
+      "explicit abstention/fail-closed cases"
+    ],
+    "existing_behavioral_contract_mapping": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    ],
+    "truth_boundary": "THE_EXISTING_TWO_CONTRACT_MAPPING_IS_NOT_LOSSLESS_PROOF_OF_THE_NEWER_FIVE_DIMENSION_SCOPE_BOUNDARY_PROTOCOL__NO_PASS_INHERITANCE"
+  },
+  "causal_theorem": {
+    "statement": "FOR_ANY_CRITICAL_AUTHORITY_VIOLATION_ON_A CONSEQUENTIALLY EXECUTED ACTION__AT_LEAST_ONE_OF SEMANTIC_EXTRACTION_ERROR OR DETERMINISTIC_ENFORCEMENT_ERROR OR ENFORCEMENT_BYPASS MUST HAVE OCCURRED",
+    "classes": {
+      "semantic_extraction_error": "NATURAL_LANGUAGE_OR_VISIBLE_STATE_WAS_NORMALIZED_TO AN INCOMPLETE OR INCORRECT REQUIREMENT/AUTHORITY STATE OR ACTION REQUIRED-SCOPE SET",
+      "deterministic_enforcement_error": "GIVEN A CORRECT NORMALIZED STATE AND REQUIRED-SCOPE SET__THE AUTHORITY DECISION ALLOWED STALE AMBIGUOUS FORBIDDEN SUPERSEDED OR UNDERAUTHORIZED EXECUTION",
+      "enforcement_bypass": "A CONSEQUENTIALLY EXECUTED ACTION DID NOT PASS THROUGH THE CURRENT AUTHORITY KERNEL"
+    },
+    "proof_role": "EXACT_CAUSAL_PARTITION_OF THE AUTHORITY-ENFORCEMENT PIPELINE__NOT A CLAIM THAT EXTRACTION OR ROUTE COVERAGE IS ALREADY CORRECT"
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/instruction_authority_invariant_v1.py",
+    "tests": "canonical/tests/test_instruction_authority_invariant_v1.py",
+    "composes_with": {
+      "requirement_graph_kernel": "canonical/runtime/requirement_graph_kernel.py",
+      "requirement_graph_independent_evidence": "canonical/capabilities/opus55/REQUIREMENT_GRAPH_KERNEL_001.json",
+      "canonical_authority_envelope": "canonical/governance/OPERATOR_OBS_AUTHORITY_ENVELOPE_V1.json"
+    },
+    "normalized_invariants": [
+      "ACTION_PLAN_EPOCH_EQUALS_CURRENT_REQUIREMENT_EPOCH",
+      "PROPOSAL_REFERENCES_ONLY_ACTIVE_NONSUPERSEDED_REQUIREMENTS",
+      "NO_UNRESOLVED_AUTHORITY_AMBIGUITY",
+      "EVERY_EXERCISED_SCOPE_IS_EXPLICITLY_AUTHORIZED",
+      "NO_EXERCISED_SCOPE_IS_FORBIDDEN",
+      "NORMALIZED_REQUIREMENT_GRAPH_FAILS_CLOSED_ON_STRUCTURAL_AMBIGUITY_OR_OMISSION"
+    ],
+    "requirement_change_rule": "ANY REQUIREMENT CHANGE ADVANCES EPOCH__OLD ACTION PROPOSALS FAIL CLOSED",
+    "failure_rule": "ANY INVARIANT FAILURE RETURNS ABSTAIN WITH ZERO EXECUTION AUTHORITY"
+  },
+  "expected_root3_reduction_if_independently_verified": {
+    "solved_component": "DETERMINISTIC_ENFORCEMENT_ERROR_CLASS_FOR ALL ACTIONS ACTUALLY ROUTED THROUGH THE KERNEL OVER CORRECT NORMALIZED INPUTS",
+    "exact_remaining_residuals": [
+      "SEMANTIC_EXTRACTION_COMPLETENESS_AND_CORRECTNESS_FOR THE FROZEN INSTRUCTION SCOPE",
+      "UNIVERSAL_BYPASS_COVERAGE_PROOF THAT EVERY CONSEQUENTIAL ACTION SURFACE IS ROUTED THROUGH THE KERNEL"
+    ],
+    "scheduling_consequence": "STOP TREATING DETERMINISTIC AUTHORITY ENFORCEMENT AS AN UNSTRUCTURED ROOT3 UNKNOWN__WORK ONLY EXTRACTION AND BYPASS COVERAGE AFTER INDEPENDENT KERNEL VERIFICATION"
+  },
+  "independent_verification_contract": {
+    "required": [
+      "EXACT_RUNTIME_BLOB_BOUND",
+      "EXACT_TEST_BLOB_BOUND",
+      "ALL_UNIT_TESTS_PASS",
+      "EXHAUSTIVE_SMALL_NORMALIZED_AUTHORITY_UNIVERSE_PASS",
+      "MUTATIONS THAT DROP EPOCH AUTHORITY FORBIDDEN AMBIGUITY OR SUPERSESSION CHECKS MUST BE KILLED",
+      "NO CLAIM OF NATURAL_LANGUAGE_EXTRACTION CORRECTNESS",
+      "NO CLAIM OF UNIVERSAL ROUTE COVERAGE UNTIL SEPARATELY PROVED"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS_PREDICATE_CLOSURE_YET",
+    "NO_IF_SCOPE_BOUNDARY_NONINFERIOR_PREDICATE_CLOSURE",
+    "NO_MATCHED_OPUS55_NONINFERIORITY_CREDIT",
+    "NO_NATURAL_LANGUAGE_REQUIREMENT_EXTRACTION_CREDIT",
+    "NO_BYPASS_COVERAGE_CREDIT",
+    "NO_FAMILY_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_OR_TERMINAL_CASE_CONSUMPTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
