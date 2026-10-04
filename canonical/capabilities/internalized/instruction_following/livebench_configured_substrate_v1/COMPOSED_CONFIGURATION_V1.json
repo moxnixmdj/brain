@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_INTERNALIZED_INSTRUCTION_FOLLOWING_CONFIGURATION_V1",
+  "date": "2026-10-04",
+  "capability_candidate_id": "LIVEBENCH_IF_CONFIGURED_GENERAL_SUBSTRATE_V1",
+  "status": "CANDIDATE__BRAIN_OWNED_CONFIGURATION_FROZEN__MATERIALITY_VERIFICATION_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "composition_class": "GENERAL_COGNITION_SUBSTRATE_PLUS_BRAIN_OWNED_SEED_PRESERVING_INSTRUCTION_CONTROL",
+  "underlying_capability_invention": false,
+  "brain_owned_components": {
+    "configured_kernel": {
+      "path": "canonical/runtime/livebench_configured_substrate_kernel_v1.py",
+      "git_blob_sha": "06d45ec19d0a09abd56102b6d6835a91f43a62a2"
+    },
+    "materiality_counterfactual": {
+      "path": "canonical/runtime/livebench_configured_substrate_materiality_v1.py",
+      "git_blob_sha": "d38d405546ebe6a52882d3af667c412e1dd895da"
+    },
+    "seed_preserving_postprocessor_v2": {
+      "path": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py",
+      "git_blob_sha": "b766cefd5e7f23d2533ff49d1c259eb83a0a53f0"
+    },
+    "seed_preserving_postprocessor_v1": {
+      "path": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+      "git_blob_sha": "8cdb308941dbd6711279cbd1d505aca6aabdd376"
+    },
+    "formal_constraint_compiler": {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    }
+  },
+  "substrate_contract": {
+    "role": "GENERAL_COGNITION_SUBSTRATE",
+    "model_dependency_count": 1,
+    "model_dependencies_declared": true,
+    "required_effect": "PROPOSE_SEMANTIC_RESPONSE_TO_THE_USER_TASK",
+    "forbidden_role": "DO_NOT_TREAT_STANDALONE_MODEL_BENCHMARK_SUPERIORITY_AS_BRAIN_OWNERSHIP",
+    "provider_identity_is_not_capability_definition": true,
+    "provider_substitution_permitted": true,
+    "future_capability_configuration_requires_rediscovery": false
+  },
+  "execution_contract": [
+    "OBTAIN_ONE_GENERAL_COGNITION_SEMANTIC_PROPOSAL",
+    "APPLY_CONTENT_ADDRESSED_BRAIN_OWNED_SEED_PRESERVING_CONSTRAINT_CONFIGURATION",
+    "EMIT_ONLY_IF_RECOGNIZED_CONSTRAINTS_PASS_AND_ORIGINAL_SEMANTIC_PROPOSAL_IS_PRESERVED_VERBATIM",
+    "FAIL_CLOSED_WHEN_COMPLIANCE_WOULD_REQUIRE_LOSSY_REWRITE_INVENTION_OR_UNPROVED_TRANSFORMATION"
+  ],
+  "materiality_theorem_candidate": {
+    "same_proposal_stream": true,
+    "bare_arm": "SEMANTIC_PROPOSAL_UNCHANGED",
+    "configured_arm": "SAME_PROPOSAL_THROUGH_BRAIN_CONFIGURATION",
+    "success_condition": "AT_LEAST_ONE_SAFE_PUBLIC_STRUCTURAL_CONSTRAINT_CLASS_FAILS_BARE_AND_PASSES_CONFIGURED_WITH_SEED_VERBATIM_PRESERVED__LOSSY_ROUTE_BLOCKS",
+    "benchmark_case_content_required": false,
+    "model_quality_comparison_required": false,
+    "independent_verification_required": true
+  },
+  "ownership_state": {
+    "brain_artifact_test": "PASS_CONFIGURATION_EXISTS",
+    "configuration_materiality_test": "PENDING_INDEPENDENT_VERIFICATION",
+    "general_substrate_test": "PENDING_MATERIALITY_AND_EXECUTION_BINDING",
+    "external_hidden_target_capability_provider_test": "PENDING",
+    "reexecution_without_rediscovery_test": "PASS_FOR_CONFIGURATION_BYTES__SUBSTRATE_EXECUTION_BINDING_SEPARATE",
+    "acceptance_source_gate_v2": "NOT_YET_RUN"
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE",
+    "NO_GENERAL_SEMANTIC_QUALITY_PROOF",
+    "NO_CLEAN_TERMINAL_CASE_EXECUTION_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_THE_GENERAL_SUBSTRATE_IS_OWNED_BY_BRAIN",
+    "NO_CASE_73_OR_LATER_USED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
