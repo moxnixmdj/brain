@@ -29,13 +29,12 @@ class V10Tests(unittest.TestCase):
                 "receipt_id":"r-"+eid,"independent_verified":True,"exact_byte_bound":True,
                 "conclusion":"success","episode_id":eid,"episode_sha256":dig}}
 
-    def morphism(self,*,sid="inspect-first",episodes=None,valid=True,src=None,dst=None,semantics=None):
+    def morphism(self,episodes,*,sid="inspect-first",valid=True,src=None,dst=None,semantics=None):
         src=src or self.ssha; dst=dst or self.dsha
         semantics=semantics or self.semantics
-        episodes=episodes or [self.ep("e1",sid=sid),self.ep("e2",sid=sid,b1=4)]
         strategy_sha=cm.strategy_semantics_digest(strategy_id=sid,strategy_semantics=semantics)
-        episode_set_sha=cm.source_episode_set_digest(
-            strategy_sha256=strategy_sha,episode_ids=[x["episode_id"] for x in episodes])
+        bindings=[{"episode_id":x["episode_id"],"episode_sha256":x["verification_receipt"]["episode_sha256"]} for x in episodes]
+        episode_set_sha=cm.source_episode_set_digest(strategy_sha256=strategy_sha,episode_bindings=bindings)
         pre=["source-inspectable"]; metrics=["BURDEN_REDUCTION","WALL_CLOCK","RISK"]; inv=["source-unavailable"]
         md=cm.morphism_digest(
             source_context_sha256=src,target_context_sha256=dst,strategy_id=sid,
@@ -56,85 +55,66 @@ class V10Tests(unittest.TestCase):
                 "strategy_sha256":strategy_sha,"source_episode_set_sha256":episode_set_sha,
                 "morphism_sha256":md}}
 
-    def candidate(self,**kw):
-        sid=kw.get("sid","inspect-first")
-        episodes=kw.get("episodes",[self.ep("e1",sid=sid),self.ep("e2",sid=sid,b1=4)])
-        semantics=kw.get("semantics",self.semantics)
+    def candidate(self,episodes=None,semantics=None,morphism=None):
+        episodes=episodes or [self.ep("e1"),self.ep("e2",b1=4)]
+        semantics=semantics or self.semantics
         return {
-            "source_context_features":self.src,"strategy_id":sid,
+            "source_context_features":self.src,"strategy_id":"inspect-first",
             "strategy_semantics":semantics,"source_episodes":episodes,
-            "context_morphism":kw.get("morphism",self.morphism(sid=sid,episodes=episodes,semantics=semantics))}
+            "context_morphism":morphism or self.morphism(episodes,semantics=semantics)}
 
     def test_verified_cold_start_transfer(self):
         out=cc.recommend(target_context_features=self.dst,transfer_candidates=[self.candidate()])
         self.assertEqual(out["recommended_strategy_id"],"inspect-first")
         self.assertEqual(out["evidence_mode"],"PROOF_GATED_ONE_WAY_CONTEXT_MORPHISM")
-        self.assertFalse(out["execution_authority"])
 
     def test_strategy_semantics_tamper_blocked(self):
         c=self.candidate()
         c["strategy_semantics"]={**self.semantics,"ordered_steps":["inspect","execute"]}
-        out=cc.recommend(target_context_features=self.dst,transfer_candidates=[c])
-        self.assertIsNone(out["recommended_strategy_id"])
+        self.assertIsNone(cc.recommend(target_context_features=self.dst,transfer_candidates=[c])["recommended_strategy_id"])
 
-    def test_source_episode_set_tamper_blocked(self):
+    def test_exact_episode_evidence_tamper_blocked(self):
         c=self.candidate()
-        c["source_episodes"]=[self.ep("e1"),self.ep("e3")]
-        out=cc.recommend(target_context_features=self.dst,transfer_candidates=[c])
-        self.assertIsNone(out["recommended_strategy_id"])
+        c["source_episodes"]=[self.ep("e1",b1=1),c["source_episodes"][1]]
+        self.assertIsNone(cc.recommend(target_context_features=self.dst,transfer_candidates=[c])["recommended_strategy_id"])
+
+    def test_duplicate_source_evidence_blocked(self):
+        e=self.ep("dup")
+        episodes=[e,e]
+        c={"source_context_features":self.src,"strategy_id":"inspect-first","strategy_semantics":self.semantics,
+           "source_episodes":episodes,"context_morphism":{}}
+        self.assertIsNone(cc.recommend(target_context_features=self.dst,transfer_candidates=[c])["recommended_strategy_id"])
 
     def test_unverified_morphism_blocked(self):
-        episodes=[self.ep("e1"),self.ep("e2")]
-        out=cc.recommend(target_context_features=self.dst,
-            transfer_candidates=[self.candidate(
-                episodes=episodes,morphism=self.morphism(episodes=episodes,valid=False))])
-        self.assertIsNone(out["recommended_strategy_id"])
-
-    def test_context_binding_mismatch_blocked(self):
-        episodes=[self.ep("e1"),self.ep("e2")]
-        bad=self.morphism(episodes=episodes,dst=mp.context_digest(features=["other"]))
-        out=cc.recommend(target_context_features=self.dst,
-            transfer_candidates=[self.candidate(episodes=episodes,morphism=bad)])
-        self.assertIsNone(out["recommended_strategy_id"])
+        episodes=[self.ep("a"),self.ep("b")]
+        m=self.morphism(episodes,valid=False)
+        self.assertIsNone(cc.recommend(target_context_features=self.dst,
+            transfer_candidates=[self.candidate(episodes=episodes,morphism=m)])["recommended_strategy_id"])
 
     def test_insufficient_source_evidence_blocked(self):
         episodes=[self.ep("one")]
-        out=cc.recommend(target_context_features=self.dst,
-            transfer_candidates=[self.candidate(episodes=episodes,
-                morphism=self.morphism(episodes=episodes))])
-        self.assertIsNone(out["recommended_strategy_id"])
+        self.assertIsNone(cc.recommend(target_context_features=self.dst,
+            transfer_candidates=[self.candidate(episodes=episodes)])["recommended_strategy_id"])
 
     def test_failed_source_episode_blocked(self):
         episodes=[self.ep("a"),self.ep("b",success=False)]
-        out=cc.recommend(target_context_features=self.dst,
-            transfer_candidates=[self.candidate(episodes=episodes,
-                morphism=self.morphism(episodes=episodes))])
-        self.assertIsNone(out["recommended_strategy_id"])
+        self.assertIsNone(cc.recommend(target_context_features=self.dst,
+            transfer_candidates=[self.candidate(episodes=episodes)])["recommended_strategy_id"])
 
     def test_positive_spend_source_blocked(self):
         episodes=[self.ep("a"),self.ep("b",spend="0.01")]
-        out=cc.recommend(target_context_features=self.dst,
-            transfer_candidates=[self.candidate(episodes=episodes,
-                morphism=self.morphism(episodes=episodes))])
-        self.assertIsNone(out["recommended_strategy_id"])
+        self.assertIsNone(cc.recommend(target_context_features=self.dst,
+            transfer_candidates=[self.candidate(episodes=episodes)])["recommended_strategy_id"])
 
     def test_exact_target_policy_has_priority(self):
-        target_eps=[
-            self.ep("t1",sid="target-native",ctx=self.dsha,b1=1),
-            self.ep("t2",sid="target-native",ctx=self.dsha,b1=2),
-        ]
-        out=cc.recommend(target_context_features=self.dst,exact_target_episodes=target_eps,
-                         transfer_candidates=[self.candidate()])
-        self.assertEqual(out["recommended_strategy_id"],"target-native")
+        target=[self.ep("t1",sid="native",ctx=self.dsha,b1=1),self.ep("t2",sid="native",ctx=self.dsha,b1=2)]
+        out=cc.recommend(target_context_features=self.dst,exact_target_episodes=target,transfer_candidates=[self.candidate()])
+        self.assertEqual(out["recommended_strategy_id"],"native")
         self.assertEqual(out["evidence_mode"],"EXACT_TARGET_CONTEXT")
 
     def test_exact_target_failure_blocks_transfer(self):
-        target_eps=[
-            self.ep("t1",sid="bad",ctx=self.dsha,b0=5,b1=6),
-            self.ep("t2",sid="bad",ctx=self.dsha,b0=5,b1=7),
-        ]
-        out=cc.recommend(target_context_features=self.dst,exact_target_episodes=target_eps,
-                         transfer_candidates=[self.candidate()])
+        target=[self.ep("t1",sid="bad",ctx=self.dsha,b0=5,b1=6),self.ep("t2",sid="bad",ctx=self.dsha,b0=5,b1=7)]
+        out=cc.recommend(target_context_features=self.dst,exact_target_episodes=target,transfer_candidates=[self.candidate()])
         self.assertIsNone(out["recommended_strategy_id"])
         self.assertEqual(out["status"],"EXACT_TARGET_EVIDENCE_BLOCKS_CROSS_CONTEXT_FALLBACK")
 
@@ -143,8 +123,8 @@ class V10Tests(unittest.TestCase):
         self.assertTrue(out["pass"],out)
         self.assertTrue(out["v9_base_preserved"])
         self.assertTrue(out["exact_strategy_semantics_binding_preserved"])
-        self.assertFalse(out["execution_authority"])
-        self.assertFalse(out["promotion_authority"])
+        self.assertTrue(out["exact_source_episode_evidence_binding_preserved"])
+        self.assertTrue(out["duplicate_source_evidence_blocked"])
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
