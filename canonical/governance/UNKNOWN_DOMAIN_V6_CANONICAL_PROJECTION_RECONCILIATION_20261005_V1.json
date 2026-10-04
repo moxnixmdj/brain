@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_CANONICAL_PROJECTION_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CURRENT_PROJECTION_RECONCILED__13_PROVED__25_UNRESOLVED__ROOT3_ONLY_6__ZERO_ADDITIONAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source": {
+    "acceptance_binding_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "acceptance_binding_git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_git_blob_sha": "df985b596db132347ecd754f9d38b66856146e53",
+    "reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "reduction_git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
+    "independent_verification_path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "independent_verification_git_blob_sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d"
+  },
+  "current_truth": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "total_families": 19,
+    "proved_atomic": 13,
+    "unresolved_atomic": 25,
+    "total_atomic": 38,
+    "root1_positive_gap_count": 0,
+    "root1_only": 0,
+    "root2_only": 16,
+    "root3_only": 6,
+    "root2_and_root3": 3,
+    "root2_touching": 19,
+    "root3_touching": 9,
+    "terminal": false
+  },
+  "promoted_atom": {
+    "predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "state": "PROVED",
+    "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "family": "UNKNOWN_DOMAIN_ADAPTATION",
+    "family_remains_open": true,
+    "remaining_family_gate": "MYSTERYMECHANISM_GE_49_55"
+  },
+  "accounting": {
+    "additional_acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0
+  }
+}
