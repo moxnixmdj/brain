@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_SLOT_FEASIBILITY_TRUTH_REPAIR_V1",
   "date": "2026-10-05",
-  "status": "TRUTH_REPAIR__STRUCTURAL_928_TO_7_REDUCTION_PRESERVED__SLOT_FEASIBILITY_LAYER_REQUIRED__PUBLIC_WORD_DOMAIN_SOURCE_BINDING_CORRECTED__ZERO_ACCEPTANCE_CREDIT",
+  "status": "TRUTH_REPAIR__STRUCTURAL_REDUCTION_PRESERVED__SLOT_FEASIBILITY_LAYER_REQUIRED__FALSE_REQUIRED_FORBIDDEN_UNSAT_REVOKED__PUBLIC_WORD_DOMAIN_BOUND__ZERO_ACCEPTANCE_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "problem": "The existing 928 conflict-compatible active15 ID sets and seven archetypes compress the public conflict graph, but ID-level compatibility is not logically equivalent to satisfiability of the concrete visible checker slots.",
@@ -42,9 +42,9 @@
   },
   "new_runtime": {
     "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
-    "git_blob_sha": "70af00025df343398ef3b1e4302208ef93ba7872",
+    "git_blob_sha": "bd5964838930cd3c88783490bf4e424958e2edde",
     "tests_path": "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py",
-    "tests_git_blob_sha": "ec929ba757b49cccf30509ea8438768718cf4bdc",
+    "tests_git_blob_sha": "b249137b2fd888a7ab4165b1e040022379b024d3",
     "certified_hard_unsat_classes": [
       "NTH_PARAGRAPH_FIRST_WORD_EQUALS_A_FORBIDDEN_WORD",
       "MANDATORY_END_PHRASE_CONTAINS_A_GENERATED_LITERAL_FORBIDDEN_WORD"
@@ -77,6 +77,20 @@
       "rule": "CARRIER_EQUALS_REQUIRED_WORD_PLUS_LITERAL_x",
       "word_list_pairs_where_required_plus_x_is_another_word_list_value": 0,
       "consequence": "FOR_THE_EXACT_PINNED_WORD_LIST__THE_EXISTING_PLUS_X_REQUIRED_CARRIER_CANNOT_EQUAL_ANY_GENERATED_FORBIDDEN_WORD"
+    },
+    "required_forbidden_overlap_truth_repair": {
+      "prior_false_unsat_certificate_revoked": true,
+      "pinned_existence_semantics": "RAW_REGEX_SUBSTRING_SEARCH_IGNORECASE",
+      "pinned_forbidden_semantics": "WORD_BOUNDARY_REGEX_SEARCH_IGNORECASE",
+      "constructive_counterexample": {
+        "required_word": "rock",
+        "forbidden_word": "rock",
+        "response_fragment": "rock0",
+        "existence_passes": true,
+        "forbidden_passes": true
+      },
+      "general_rule": "FOR_GENERATED_ALPHABETIC_WORDS__APPENDING_A_DIGIT_PRESERVES_REQUIRED_SUBSTRING_MATCH_AND_DESTROYS_THE_TRAILING_WORD_BOUNDARY",
+      "consequence": "REQUIRED_KEYWORD_EQUAL_TO_FORBIDDEN_WORD_IS_NOT_A_HARD_UNSAT_CLASS"
     },
     "source_binding_correction": {
       "prior_entry_count": 1646,
