@@ -16,11 +16,11 @@
   },
   "successor": {
     "compiler_path": "canonical/runtime/livebench_public_grammar_compiler_v2.py",
-    "compiler_blob": "f5a5204bd3bd5cdfd9ba666e78e07b6e41d74d3c",
+    "compiler_blob": "83238e37db2fa812efe70dca807be492804597ff",
     "adapter_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py",
     "adapter_blob": "22e8bb39457e342032b96871ff545db90d338544",
     "tests_path": "canonical/tests/test_livebench_public_grammar_compiler_v2.py",
-    "tests_blob": "984cc5c4681696ce47be49558c2ecfb3c0e624f6"
+    "tests_blob": "be55986c25ff841835e5b4144229679d07328ee6"
   },
   "supported_public_checker_routes": [
     "OutputTemplateChecker",
