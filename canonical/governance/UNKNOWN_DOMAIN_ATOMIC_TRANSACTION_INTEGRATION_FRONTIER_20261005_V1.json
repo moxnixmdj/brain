@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_ATOMIC_TRANSACTION_INTEGRATION_FRONTIER_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__INTEGRATED_ONE_USE_TRANSACTION_CANDIDATE_IN_PUBLIC_VERIFICATION__ZERO_PRODUCTION_CASES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "breakthrough": {
+    "defect": "FOUR_LOAD_BEARING_ONE_USE_SAFETY_REPAIRS_EXISTED_ON_DIVERGENT_BRANCHES__PARTIAL_VERIFICATION_WOULD_NOT_CERTIFY_THE_FINAL_COMPOSED_EXECUTION_SURFACE",
+    "repair": "COLLAPSE_DETERMINISTIC_EXECUTION_IDENTITY__IMMUTABLE_CREATE_EVENT_SHA_CHECKOUT__POST_201_FAIL_CLOSED_RESULT_SEALING__AND_DURABLE_EXACT_RESULT_RECOVERY_INTO_ONE_CONTENT_ADDRESSED_CANDIDATE",
+    "consequence": "ONE_INDEPENDENT_RECEIPT_CAN_CERTIFY_THE_WHOLE_IRREVERSIBLE_TRANSACTION_SURFACE"
+  },
+  "candidate": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2081,
+    "head_sha": "7803607eb14de71676f9503b0ab9b34a5bf38a26",
+    "branch": "hardening/unknown-domain-atomic-transaction-v1",
+    "execution_lease_git_blob_sha": "a988e296767c954792c71430e06e995652e4631f",
+    "launcher_git_blob_sha": "b40859b4ba770433d9e1382920f086d76dd0cfbe",
+    "production_workflow_git_blob_sha": "f05f16251a1567a85ebfd2ca8a1a4ccf75a5d38e",
+    "launcher_test_git_blob_sha": "5257cf0f1081f0a5091797dd8020b83991c65039",
+    "verifier_git_blob_sha": "7042ddf0713beeafb7ed73420c345303d6c9bbec",
+    "exact_component_count": 14,
+    "verification_runs": {
+      "execution_lease": 37241476550,
+      "production_launcher": 37241476753,
+      "state_at_record": "QUEUED",
+      "atomic_transaction_fastlane": 37241682655
+    },
+    "fastlane_workflow": ".github/workflows/verify-unknown-domain-atomic-transaction-v1.yml",
+    "execution_identity_sha256": "5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e"
+  },
+  "integrated_invariants": [
+    "CLAIM_KEY_SHA256_OF_CANONICAL_QUALIFIED_EXECUTION_TUPLE__INCIDENTAL_METADATA_INVARIANT",
+    "ALL_EXACT_COMPONENT_BLOBS_RECHECKED_AT_POINT_OF_USE",
+    "TRANSITIVE_GENERATOR_V1_DEPENDENCY_BOUND",
+    "PRODUCTION_CHECKOUT_PINNED_TO_IMMUTABLE_CREATE_EVENT_GITHUB_SHA",
+    "ONLY_ATOMIC_CLAIM_CREATE_HTTP_201_MAY_ADVANCE",
+    "POST_201_INVALID_RESPONSE_OR_EXECUTION_EXCEPTION_SEALS_FAIL_CLOSED_NONREPLAYABLE_RESULT",
+    "SANITIZED_EXACT_RESULT_RECOVERY_ENVELOPE_EMITTED_BEFORE_REMOTE_PERSISTENCE",
+    "AMBIGUOUS_RESULT_WRITE_ACCEPTED_ONLY_AFTER_EXACT_REMOTE_BYTE_EQUALITY",
+    "ONE_PRODUCTION_POPULATION__27_CASES_MAX__NO_REPLAY_OR_REPLACEMENT",
+    "ZERO_PERSISTENT_LEARNED_BYTES__ZERO_EXTERNAL_FRONTIER_MODEL_CALLS__ZERO_INCREMENTAL_SPEND"
+  ],
+  "reduction_reconciliation": {
+    "prior_path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCTION_PRECOMMIT_V2.json",
+    "prior_raw_lease_digest": "9dd08aab9d79e6bbf2552d15c405b8de526478c3a505e2397455150d372164cb",
+    "transferable_to_integrated_semantic_identity": false,
+    "required_before_production": "FREEZE_A_NEW_OUTCOME_BLIND_REDUCTION_BOUND_TO_THE_VERIFIED_CANONICAL_EXECUTION_IDENTITY_AND_EXACT_MERGED_CONTROL_PLANE_BLOBS",
+    "new_outcome_blind_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_ATOMIC_TRANSACTION_REDUCTION_PRECOMMIT_V1.json",
+    "new_outcome_blind_reduction_frozen": true
+  },
+  "next_gate": [
+    "REQUIRE_BOTH_PR_2081_EXECUTION_LEASE_AND_PRODUCTION_LAUNCHER_CHECKS_TO_COMPLETE_SUCCESSFULLY",
+    "MERGE_ONLY_THE_EXACT_VERIFIED_HEAD_OR_REVERIFY_ANY_NEW_HEAD",
+    "FREEZE_MERGED_BYTES_WITH_VERIFICATION_RECEIPT_EXTERNAL_TO_THE_LEASE",
+    "FREEZE_NEW_OUTCOME_BLIND_REDUCTION_FOR_THE_VERIFIED_SEMANTIC_EXECUTION_IDENTITY",
+    "TOMBSTONE_OR_DISABLE_ALL_SUPERSEDED_RAW_DIGEST_LAUNCH_ROUTES_BEFORE_ANY_NEW_LAUNCH",
+    "CREATE_EXACTLY_ONE_NEW_LAUNCH_REF__ONLY_ATOMIC_201_MAY_CONSUME_THE_ONE_USE_POPULATION"
+  ],
+  "forbidden": [
+    "DO_NOT_COUNT_QUEUED_CHECKS_AS_PASS",
+    "DO_NOT_LAUNCH_FROM_RAW_9DD08AAB_ROUTE",
+    "DO_NOT_REUSE_THE_RAW_DIGEST_V2_REDUCTION_FOR_THE_SEMANTIC_IDENTITY",
+    "DO_NOT_SPLIT_VERIFICATION_CREDIT_ACROSS_MUTUALLY_MUTATING_PARTIAL_BRANCHES",
+    "DO_NOT_WRITE_VERIFICATION_RECEIPTS_BACK_INTO_THE_IDENTITY_SUBJECT"
+  ],
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "ownership_credit": false,
+    "promotion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "production_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
