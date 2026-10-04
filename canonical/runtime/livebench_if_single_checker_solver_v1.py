@@ -297,7 +297,7 @@ def _build_dynamic(iid: str, prompt: str) -> str | None:
         return _sentences(n, n, word)
 
     if iid == "count:pronouns":
-        n = _int(r"at least\\s+(\\d+)\\s+(?:personal\\s+)?pronouns\\b", prompt)
+        n = _int(r"at least\s+(\d+)\s+(?:personal\s+)?pronouns\b", prompt)
         return " ".join(["I"] * n) if n is not None else None
 
     if iid == "sentence:increment":
