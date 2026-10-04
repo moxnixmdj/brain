@@ -1,0 +1,42 @@
+name: Verify LiveBench balanced decorator invariance v1
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py"
+      - "canonical/tests/test_livebench_langdetect_balanced_decorator_invariance_v1.py"
+      - "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py"
+      - ".github/workflows/verify-livebench-balanced-decorator-invariance-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned verifier dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pytest==8.3.5 langdetect==1.0.9 nltk==3.9.1 immutabledict==4.2.1 absl-py==2.1.0
+
+      - name: Fetch exact frozen LiveBench checker source
+        run: |
+          git clone --quiet https://github.com/LiveBench/LiveBench.git /tmp/livebench
+          git -C /tmp/livebench checkout --quiet 8f8e5c381a16e3f24257776edd53471fe86f8091
+          test "$(git -C /tmp/livebench hash-object livebench/if_runner/instruction_following_eval/instructions.py)" = "4997bab885a676d92545fd91a9a20b48d234a2b2"
+
+      - name: Run algebraic proof-kernel tests
+        run: |
+          python -m pytest -q canonical/tests/test_livebench_langdetect_balanced_decorator_invariance_v1.py
+
+      - name: Run exact pinned langdetect and LiveBench differential tests
+        run: |
+          PYTHONPATH="/tmp/livebench/livebench/if_runner:$GITHUB_WORKSPACE" python -m pytest -q canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py
