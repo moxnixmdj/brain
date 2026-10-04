@@ -145,6 +145,7 @@ def install_adapter(
         guard.validate_account_snapshot(snapshots[provider_id], provider_id=provider_id)
 
     tavily_wrapped = 0
+    tavily_restores: list[tuple[Any, Any]] = []
     for tool in tool_instances:
         if getattr(tool, "name", None) != "web_search":
             continue
@@ -165,6 +166,7 @@ def install_adapter(
             return result
 
         client.search = guarded_search
+        tavily_restores.append((client, original_search))
         tavily_wrapped += 1
 
     if tavily_wrapped != 1:
@@ -192,7 +194,7 @@ def install_adapter(
         "schema": SCHEMA,
         "status": "PASS__FINANCE_AGENT_PROVIDER_BOUNDARIES_GUARDED",
         "state": state,
-        "restore": lambda: _restore(session_cls, original_get, original_post),
+        "restore": lambda: _restore_all(session_cls, original_get, original_post, tavily_restores),
         "covered_boundaries": [
             "TavilyWebSearch.client.search",
             "aiohttp.ClientSession.post@api.sec-api.io",
@@ -204,6 +206,13 @@ def install_adapter(
     }
 
 
-def _restore(session_cls: Any, original_get: Any, original_post: Any) -> None:
+def _restore_all(
+    session_cls: Any,
+    original_get: Any,
+    original_post: Any,
+    tavily_restores: Sequence[tuple[Any, Any]],
+) -> None:
     session_cls.get = original_get
     session_cls.post = original_post
+    for client, original_search in tavily_restores:
+        client.search = original_search
