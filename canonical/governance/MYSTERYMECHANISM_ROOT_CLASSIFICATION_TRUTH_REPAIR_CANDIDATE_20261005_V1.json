@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_ROOT_CLASSIFICATION_TRUTH_REPAIR_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TARGET_PRESERVING_PRIVATE_ROUTE_DELETION_RECLASSIFICATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate_id": "MYSTERYMECHANISM_GE_49_55",
+  "family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "exact_authority_inputs": {
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "private_route_deletion_reconciliation": {
+      "path": "canonical/governance/PRIVATE_SURFACE_ROUTE_DELETION_VS_SUBSTITUTION_RECONCILIATION_V1.json",
+      "git_blob_sha": "a12e23ca249918f94175a31882c3cba57cc0d0ae"
+    },
+    "private_surface_dependency_map": {
+      "path": "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json",
+      "git_blob_sha": "addea62fec6113747bce0f578863e400374f4b2a"
+    },
+    "private_surface_dominance_v2": {
+      "path": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+      "git_blob_sha": "d656952a509f7e9f375cc817bee1bb20eee06b78"
+    },
+    "private_surface_dominance_v2_verification": {
+      "path": "canonical/verification/PRIVATE_SURFACE_DOMINANCE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "e1cf166b322668a087aa42a47a9ad1c6951b4b14"
+    },
+    "unbarred_family_protocol": {
+      "path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+      "git_blob_sha": "49181a12362ba3d640fc18d0251901dd49dce929"
+    },
+    "unknown_domain_v6_reduction": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596"
+    },
+    "current_acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8"
+    },
+    "current_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "919da676976043e5b501f207d3cf420dc4fb50b1"
+    }
+  },
+  "frozen_facts": {
+    "registry_atom_is_public_fixed_bar": true,
+    "private_mysterymechanism_execution_route_deleted": true,
+    "deletion_independently_verified": true,
+    "deletion_target_weakening": false,
+    "proxy_benchmark_substitution_admitted": false,
+    "deletion_grants_family_credit": false,
+    "deletion_grants_private_score_equivalence": false,
+    "represented_contracts": [
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+    ],
+    "unknown_domain_transfer_audit_state": "PROVED",
+    "unknown_domain_family_state": "OPEN"
+  },
+  "contradiction": {
+    "stale_scheduler_interpretation": "MYSTERYMECHANISM_GE_49_55_IS_ROOT2_BECAUSE_THE_PRIVATE_SCORE_ITSELF_MUST_BE_MEASURED",
+    "canonical_route_law": "THE_PRIVATE_BENCHMARK_IS_AN_EVIDENCE_ROUTE_NOT_A_TERMINAL_REQUIREMENT__ITS_EXECUTION_ROUTE_IS_DELETED_WHEN_REPRESENTED_CONTRACTS_HAVE_TARGET_PRESERVING_DIRECT_PROOF_ROUTES",
+    "resolution": "PRESERVE_THE_FROZEN_ATOM_AS_ACCOUNTING_IDENTITY_BUT_CHANGE_ITS_DISCHARGE_ROUTE_TO_A_SCOPE_COMPLETE_STRONGER_CONTRACT_NATIVE_PROOF__DO_NOT_SCHEDULE_OR_REQUIRE_THE_PRIVATE_SCORE"
+  },
+  "replacement_obligation": {
+    "kind": "TARGET_PRESERVING_STRONGER_PROOF_FOR_DELETED_PRIVATE_SURFACE",
+    "required_behavior_ids": [
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+    ],
+    "required_proof": "INDEPENDENT_SCOPE_COMPLETE_STRICT_ACCEPTANCE_OVER_ALL_THREE_FROZEN_BEHAVIORAL_CONTRACTS_USING_PREDECLARED_CONTRACT_NATIVE_OR_EXHAUSTIVE_FORMAL_PROOF__NO_OPAQUE_TARGET_CAPABILITY_PROVIDER__NO_PRIVATE_SCORE_CLAIM",
+    "v6_relation": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_IS_ALREADY_SEPARATELY_PROVED_AND_REMAINS_REQUIRED_FOR_OUTSIDE_PRIVATE_SURFACE_TRANSFER_AND_ABSTENTION_SCOPE",
+    "pass_effect": "SATISFY_MYSTERYMECHANISM_ACCOUNTING_ATOM_BY_STRONGER_TARGET_PRESERVING_PROOF_WITHOUT_CLAIMING_49_55_SCORE_REPRODUCTION",
+    "current_state": "OPEN__SCOPE_COMPLETE_STRICT_ACCEPTANCE_NOT_YET_BOUND"
+  },
+  "root_reclassification": {
+    "before": "ROOT2_ONLY",
+    "after": "ROOT3_ONLY",
+    "rationale": "THE_LIVE_RESIDUAL_IS_SCOPE_COMPLETE_DIRECT_PROOF_OF_THE_REPRESENTED_CONTRACTS__NOT_ACCESS_TO_OR_MEASUREMENT_OF_THE_DELETED_PRIVATE_SCORE",
+    "unresolved_total_before": 25,
+    "unresolved_total_after": 25,
+    "root1_positive_gap_count": 0,
+    "root2_only_count_before": 16,
+    "root2_only_count_after": 15,
+    "root3_only_count_before": 6,
+    "root3_only_count_after": 7,
+    "root2_and_root3_count_before": 3,
+    "root2_and_root3_count_after": 3,
+    "root2_touching_before": 19,
+    "root2_touching_after": 18,
+    "root3_touching_before": 9,
+    "root3_touching_after": 10
+  },
+  "scheduling_effect": {
+    "forbid": [
+      "DIRECT_MYSTERYMECHANISM_PRIVATE_SCORE_EXECUTION",
+      "REPEAT_SEARCH_FOR_A_PUBLIC_EXACT_MYSTERYMECHANISM_ROUTE",
+      "PROXY_BENCHMARK_SCORE_SUBSTITUTION"
+    ],
+    "prioritize": "ZERO_REALITY_SCOPE_COMPLETE_CONTRACT_NATIVE_STRICT_ACCEPTANCE_PROOF_FOR_THE_THREE_REPRESENTED_BEHAVIORS",
+    "fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_MYSTERYMECHANISM_49_55_SCORE_REPRODUCTION_CLAIM",
+    "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ATOMIC_PREDICATE_PROOF_FROM_RECLASSIFICATION_ALONE",
+    "NO_TARGET_WEAKENING"
+  ],
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "proved_predicate_delta": 0,
+    "unresolved_predicate_delta": 0,
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0
+  }
+}
