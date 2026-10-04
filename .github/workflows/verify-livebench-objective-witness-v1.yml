@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - breakthrough/livebench-objective-witness-v1-20261004
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -82,4 +85,6 @@ jobs:
         env:
           PYTHONPATH: .
         run: |
-          python -m unittest             canonical.tests.test_root2_livebench_if_objective_witness_adapter_v3             -v
+          python -m unittest \
+            canonical.tests.test_root2_livebench_if_objective_witness_adapter_v3 \
+            -v
