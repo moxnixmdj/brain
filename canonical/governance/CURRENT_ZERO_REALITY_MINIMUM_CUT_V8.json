@@ -112,6 +112,13 @@
       "workflow_run_id": 37163196069,
       "workflow_job_id": 111320730605,
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FUNCTIONAL_GITLAB_CONTRACT__ZERO_CREDIT"
+    },
+    "chartography_zero_spend_guard": {
+      "path": "canonical/governance/CHARTOGRAPHY_ZERO_SPEND_GUARD_V1.json",
+      "verification_path": "canonical/verification/CHARTOGRAPHY_ZERO_SPEND_GUARD_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "workflow_run_id": 37163725050,
+      "workflow_job_id": 111322279817,
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT"
     }
   },
   "exhausted_or_waiting": [
@@ -162,7 +169,7 @@
     },
     {
       "surface": "Chartography with tools",
-      "work": "OBSERVE_PROJECT_SPECIFIC_GEMINI_3_5_FLASH_FREE_TIER_ACCESS_AND_ACTIVE_LIMITS_SUFFICIENT_FOR_AT_LEAST_1000_JUDGE_CALLS_WITH_SAFE_RETRIES__BIND_HARD_ZERO_SPEND_GUARD__BIND_BRAIN_ADAPTER"
+      "work": "OBSERVE_PROJECT_SPECIFIC_GEMINI_3_5_FLASH_FREE_TIER_ACCESS_AND ACTIVE LIMITS FOR 1000 CALLS PLUS RETRY RESERVE__BRAIN EVALUATION ADAPTER__ZERO_SPEND_GUARD ALREADY VERIFIED__NO CASES"
     },
     {
       "surface": "Terminal-Bench-Science 0.1",
@@ -259,6 +266,12 @@
       "target": "HLE_TOOLS_GE_67_7",
       "delta": "BRAIN_VENDOR_SEMANTICS_TOOL_ADAPTER_INDEPENDENT_PASS",
       "consequence": "BRAIN_TOOL_ADAPTER_BLOCKER_REMOVED__FULL_CAIS_HLE_2500_ACCOUNT_ACCESS_GRADER_RELATION_AND_SCORE_REMAIN",
+      "new_reality_units": 0
+    },
+    {
+      "target": "CHARTOGRAPHY_TOOLS_GE_89",
+      "delta": "HARD_ZERO_SPEND_GUARD_INDEPENDENT_PUBLIC_RUNNER_PASS_11_OF_11_TESTS",
+      "consequence": "ZERO_SPEND_GUARD_VERIFICATION_REMOVED__PROJECT_ACCOUNT_CAPACITY_BRAIN_ADAPTER_AND_SCORE_REMAIN",
       "new_reality_units": 0
     }
   ],
