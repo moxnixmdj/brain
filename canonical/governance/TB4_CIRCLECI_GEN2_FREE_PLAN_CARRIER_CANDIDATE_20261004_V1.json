@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB4_CIRCLECI_GEN2_FREE_PLAN_CARRIER_CANDIDATE_20261004_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__NEW_MATERIAL_ZERO_COST_CARRIER_WAKE__PRIMARY_SOURCE_ROUTE_FOUND__ACCOUNT_PREFLIGHT_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__PRIMARY_SOURCE_DOCUMENTARY_PREFLIGHT_REDUCED__ACCOUNT_AND_ZERO_CASE_RUNTIME_PREFLIGHT_REQUIRED__ZERO_CREDIT",
   "objective": "Add one orthogonal named Terminal-Bench 4 carrier candidate from CircleCI's current Free-plan Gen2 Docker policy without claiming admissibility before account-level and zero-case verification.",
   "target_predicate": "CODING_TB4_GE_66_4",
   "authority": {
@@ -56,6 +56,46 @@
         "XLARGE_GEN2_COST_48_CREDITS_PER_MINUTE"
       ],
       "role": "ALLOWANCE_BUDGET_INPUT_ONLY"
+    },
+    {
+      "source": "https://circleci.com/changelog/gen2-linux-vm-x86-remote-docker-resource-classes-now-generally-available/",
+      "observed": [
+        "GEN2_LINUX_VM_AVAILABLE_FOR_ALL_USERS",
+        "XLARGE_GEN2_8_CPU_32_GIB",
+        "XLARGE_GEN2_COST_72_CREDITS_PER_MINUTE"
+      ],
+      "role": "FREE_PLAN_COMPATIBLE_MACHINE_ROUTE_AND_ALLOWANCE_INPUT"
+    },
+    {
+      "source": "https://circleci.com/docs/guides/execution-managed/using-linuxvm/",
+      "observed": [
+        "XLARGE_GEN2_8_VCPU_32_GIB_150_GB_DISK"
+      ],
+      "role": "NOMINAL_CPU_MEMORY_DISK_MATCH"
+    },
+    {
+      "source": "https://circleci.com/docs/guides/execution-managed/docker-compose/",
+      "observed": [
+        "MACHINE_EXECUTOR_SUPPORTS_DOCKER_COMPOSE",
+        "DOCKER_COMPOSE_PREINSTALLED_ON_MACHINE_EXECUTOR_IMAGES"
+      ],
+      "role": "COMPOSE_RUNTIME_SEMANTICS_PRIMARY_SOURCE"
+    },
+    {
+      "source": "https://circleci.com/docs/guides/execution-managed/private-images/",
+      "observed": [
+        "DOCKER_PREINSTALLED_ON_MACHINE_EXECUTOR",
+        "DOCKER_COMPOSE_PREINSTALLED_ON_MACHINE_EXECUTOR"
+      ],
+      "role": "LOCAL_DOCKER_TOOLING_PRIMARY_SOURCE"
+    },
+    {
+      "source": "https://circleci.com/docs/guides/plans-pricing/credits/",
+      "observed": [
+        "FREE_PLAN_30000_CREDITS_PER_MONTH",
+        "FREE_PLAN_JOBS_FAIL_TO_RUN_AT_ZERO_CREDITS"
+      ],
+      "role": "ZERO_SPEND_HARD_STOP_PRIMARY_SOURCE"
     }
   ],
   "narrow_conclusion": {
@@ -65,22 +105,26 @@
     "free_plan_gen2_policy_proved_by_primary_source": true,
     "nominal_cpu_requirement_met": true,
     "nominal_memory_requirement_met": true,
-    "nominal_free_disk_requirement_proved": false,
+    "nominal_free_disk_requirement_proved": true,
     "xlarge_gen2_free_plan_account_access_proved": false,
     "docker_runtime_semantics_for_tb4_proved": false,
     "docker_compose_runtime_semantics_for_tb4_proved": false,
     "allowance_sufficient_for_minimum_recovery_transaction_proved": false,
-    "tb4_carrier_admissibility_proved": false
+    "tb4_carrier_admissibility_proved": false,
+    "xlarge_gen2_plan_eligibility_documented": true,
+    "local_docker_and_compose_documented": true,
+    "free_plan_hard_stop_documented": true,
+    "free_plan_monthly_credits": 30000,
+    "xlarge_gen2_machine_credits_per_minute": 72,
+    "nominal_monthly_wall_minutes_at_xlarge_gen2": "416.6666666667"
   },
   "required_preflight_before_any_terminal_case": [
-    "VERIFY_FREE_PLAN_ORGANIZATION_CAN_SELECT_XLARGE_GEN2_WITH_ZERO_INCREMENTAL_SPEND",
-    "MEASURE_USABLE_MEMORY_MB_GE_16384",
+    "VERIFY_ACTUAL_FREE_PLAN_ORGANIZATION_CAN_SELECT_XLARGE_GEN2_WITH_ZERO_INCREMENTAL_SPEND",
     "MEASURE_FREE_STORAGE_MB_GE_51200_AT_JOB_START",
     "VERIFY_DOCKER_DAEMON_CAN_RUN_ORDINARY_CONTAINERS",
     "VERIFY_DOCKER_COMPOSE_CAN_START_MULTI_CONTAINER_WORKLOAD",
     "VERIFY_8_CPU_DOCKER_LIMIT_IS_ACCEPTED",
-    "VERIFY_FREE_PLAN_CREDIT_EXHAUSTION_HAS_NO_AUTOMATIC_PAID_OVERAGE_PATH",
-    "VERIFY_AVAILABLE_FREE_CREDITS_ARE_SUFFICIENT_FOR_AT_LEAST_THE_MINIMUM_RECOVERY_TRANSACTION",
+    "VERIFY_CURRENT_ACCOUNT_HAS_SUFFICIENT_FREE_CREDITS_FOR_THE_MINIMUM_RECOVERY_TRANSACTION",
     "RUN_ZERO_TERMINAL_CASE_HARBOR_RESOURCE_AND_CONTAINER_PREFLIGHT"
   ],
   "decision_rule": "IF_AND_ONLY_IF_ALL_ACCOUNT_AND_ZERO_CASE_PREFLIGHT_REQUIREMENTS_PASS__PROMOTE_AS_ADMISSIBLE_TB4_RECOVERY_CARRIER_CANDIDATE; OTHERWISE RECORD_EXACT_FAILED_PREMISE_AND_KILL_ONLY_THIS_ROUTE",
@@ -91,7 +135,10 @@
     "NO_CLAIM_FREE_MONTHLY_CREDITS_ARE_SUFFICIENT_FOR_THE_MINIMUM_TB4_RECOVERY_TRANSACTION",
     "NO_TB4_TERMINAL_CASE_EXECUTION",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
-    "ZERO_INCREMENTAL_SPEND"
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_CLAIM_150_GB_NOMINAL_DISK_IMPLIES_51200_MB_FREE_AT_JOB_START",
+    "NO_CLAIM_DOCUMENTED_DOCKER_TOOLING_REPLACES_ZERO_CASE_RUNTIME_PREFLIGHT",
+    "NO_CLAIM_416_67_NOMINAL_WALL_MINUTES_PROVES_RECOVERY_TRANSACTION_SUFFICIENCY_WITHOUT_A_RUNTIME_BOUND"
   ],
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
