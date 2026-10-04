@@ -11,6 +11,40 @@ def test_id_compatibility_is_not_slot_satisfiability():
     assert out["acceptance_credit"] is False
 
 
+def test_required_keyword_forbidden_collision_is_certified():
+    contracts = [
+        {
+            "instruction_id": f.EXISTENCE,
+            "slots": {"keywords": ["signal", "Harbor", "world"]},
+        },
+        {
+            "instruction_id": f.FORBIDDEN,
+            "slots": {"forbidden_words": ["delta", "harbor"]},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["hard_unsat_reasons"] == [
+        "REQUIRED_KEYWORD_IS_FORBIDDEN_WORD:harbor"
+    ]
+
+
+def test_required_and_forbidden_disjoint_stays_unknown():
+    contracts = [
+        {
+            "instruction_id": f.EXISTENCE,
+            "slots": {"keywords": ["signal", "harbor", "world"]},
+        },
+        {
+            "instruction_id": f.FORBIDDEN,
+            "slots": {"forbidden_words": ["delta", "ember"]},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
+
+
 def test_nth_first_word_forbidden_collision_is_certified():
     contracts = [
         {
