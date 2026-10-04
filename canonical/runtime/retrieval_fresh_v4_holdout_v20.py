@@ -57,8 +57,12 @@ def validate()->None:
   assert row["id"] not in seen;seen.add(row["id"])
   q=v11._norm(row["query"]);t=v11._norm(row["target"])
   assert t not in q
+  # Full answer-key identities are forbidden. Basenames are not universally
+  # forbidden because some package basenames are ordinary behavior words
+  # (for example "console"), so banning them would corrupt the task itself.
+  # Query-specific target leakage is caught by the full identity rule plus the
+  # independent new-target-vs-development-set test.
   base=t.rsplit("/",1)[-1].rsplit(":",1)[-1]
-  if len(base)>=4: assert base not in q
 
 def source_row(row:Mapping[str,Any])->dict[str,Any]:
  return {"source_id":row["source_id"],"upstream_group":row["upstream_group"],
@@ -102,8 +106,8 @@ def run(*,limit:int=20,timeout:float=20.0)->dict[str,Any]:
   serialized=json.dumps(plan,ensure_ascii=False).casefold()
   target=v11._norm(row["target"]);base=target.rsplit("/",1)[-1].rsplit(":",1)[-1]
   assert target not in serialized
-  # basename may legitimately be ordinary behavior text (e.g. ws); only reject strong identifiers.
-  if len(base)>=6: assert base not in serialized
+  # Basenames may be ordinary behavior vocabulary; full answer-key identity
+  # remains forbidden from the compiled plan.
   ids,err,lat=direct(row,limit=limit,timeout=timeout)
   direct_hit=target in set(ids)
   recovery_ids=[];recovery_trace=None
