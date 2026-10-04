@@ -1203,7 +1203,8 @@
     },
     "unknown_domain_v6_canonical_projection_reconciliation": {
       "path": "canonical/governance/UNKNOWN_DOMAIN_V6_CANONICAL_PROJECTION_RECONCILIATION_20261005_V1.json",
-      "status": "CURRENT__PROJECTION_RECONCILIATION_ONLY__ZERO_ADDITIONAL_CREDIT"
+      "status": "CURRENT__PROJECTION_RECONCILIATION_ONLY__ZERO_ADDITIONAL_CREDIT",
+      "git_blob_sha": "d8ad394a7d95de19e27c4b0cdff496d931aa629e"
     }
   },
   "residual": [
