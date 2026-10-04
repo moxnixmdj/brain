@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_H100_OEWN_REAL_LEXICAL_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_RUNTIME_IMPLEMENTATION_AND_OUTCOMES__ZERO_CREDIT",
+  "objective": "TEST_REAL_SOURCE_ZERO_LEARNED_LEXICAL_ACQUISITION_AND_CONTEXT_SENSE_DISAMBIGUATION_FROM_A_PINNED_OEWN_2025_SLICE",
+  "knowledge_pack": "canonical/governance/H100_OEWN_REAL_LEXICAL_KNOWLEDGE_V1.json",
+  "tasks": [
+    {
+      "task_id": "INPUT_COMPONENT",
+      "cue": "input",
+      "context": "a component goes into production before the output is produced",
+      "expected_role": "INPUT",
+      "expected_status": "ROLE_IDENTIFIED"
+    },
+    {
+      "task_id": "OUTPUT_PRODUCT",
+      "cue": "output",
+      "context": "the final product and things produced by the process",
+      "expected_role": "TARGET",
+      "expected_status": "ROLE_IDENTIFIED"
+    },
+    {
+      "task_id": "OUTCOME_CONSENSUS",
+      "cue": "outcome",
+      "context": "the final consequence caused by the preceding process",
+      "expected_role": "TARGET",
+      "expected_status": "ROLE_IDENTIFIED"
+    },
+    {
+      "task_id": "UPSHOT_SINGLE_SENSE",
+      "cue": "upshot",
+      "context": "the consequence that follows from what happened",
+      "expected_role": "TARGET",
+      "expected_status": "ROLE_IDENTIFIED"
+    },
+    {
+      "task_id": "RESULT_ANSWER",
+      "cue": "result",
+      "context": "the computed answer that solves the problem to several decimal places",
+      "expected_role": "TARGET",
+      "expected_status": "ROLE_IDENTIFIED"
+    },
+    {
+      "task_id": "COMMENT_AS_INPUT",
+      "cue": "comment",
+      "context": "a personal opinion or belief from a user that adds information",
+      "expected_role": "INPUT",
+      "expected_status": "ROLE_IDENTIFIED"
+    },
+    {
+      "task_id": "COMMENT_BOOK_NOTE",
+      "cue": "comment",
+      "context": "a written explanation criticism or illustration added to a book",
+      "expected_role": null,
+      "expected_status": "ABSTAIN_LEXICAL_SENSE_UNSUPPORTED"
+    },
+    {
+      "task_id": "COMMENT_NO_CONTEXT",
+      "cue": "comment",
+      "context": "",
+      "expected_role": null,
+      "expected_status": "ABSTAIN_LEXICAL_SENSE_AMBIGUOUS"
+    },
+    {
+      "task_id": "MISSING_QUERY",
+      "cue": "issue",
+      "context": "a phenomenon that follows from a previous event",
+      "expected_role": null,
+      "expected_status": "ABSTAIN_LEXICAL_QUERY_NOT_PINNED"
+    }
+  ],
+  "hard_rules": [
+    "TASK_ORDER_MUST_NOT_AFFECT_ROLE",
+    "NO_POST_HOC_TASK_DELETION",
+    "CONTEXT_MAY_SELECT_A_SENSE_BUT_MAY_NOT_CREATE_A_ROLE",
+    "UNMAPPED_SELECTED_SENSE_MUST_ABSTAIN",
+    "NONQUERIED_LEMMA_MUST_ABSTAIN_EVEN_IF_IT_APPEARS_AS_A_MEMBER_OF_ANOTHER_SYNSET",
+    "NO_LANGUAGE_MODEL_OR_EXTERNAL_LEARNED_SEMANTIC_PROVIDER",
+    "PASS_DOES_NOT_ESTABLISH_OPEN_WORLD_LEXICAL_COMPLETENESS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
