@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: livebench-private-zero-case-diagnostic
@@ -110,6 +111,26 @@ jobs:
           print("LIVEBENCH_PRIVATE_DIAGNOSTIC_STATUS="+receipt["status"])
           print("LIVEBENCH_PRIVATE_DIAGNOSTIC_BLOCKER="+str(receipt.get("blocker_message") or "NONE"))
           PY
+
+      - name: Publish failed diagnostic receipt
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          RECEIPT="canonical/astra_runtime/evidence/LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json"
+          STATUS="$(python - <<'PY'
+          import json
+          p="canonical/astra_runtime/evidence/LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json"
+          print(json.load(open(p,encoding="utf-8")).get("status","UNKNOWN"))
+          PY
+          )"
+          if [ "$STATUS" != "PASS" ]; then
+            gh issue create \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "LiveBench private zero-case diagnostic failure ${GITHUB_RUN_ID}" \
+              --body-file "$RECEIPT"
+          fi
 
       - name: Persist diagnostic receipt to non-authority branch
         shell: bash
