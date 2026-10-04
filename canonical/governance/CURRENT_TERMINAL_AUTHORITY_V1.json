@@ -1660,8 +1660,8 @@
     "current_effective_leaf_requirement_occurrences": 39,
     "current_effective_canonical_leaf_atoms": 39
   },
-  "last_reconciled_control_plane_head": "627492dd3a9adfdbd4c50146335bc1a92aca4eee",
-  "last_reconciled_reason": "UNIVERSAL_LEARNING_V9_OPERATIVE_PLANNING_OVERLAY_REBOUND_OVER_VERIFIED_V8_WITH_V7_LOAD_BEARING_AUTHORITY_PRESERVED__TWO_FROZEN_UNKNOWN_DOMAIN_LEAVES_OPEN__ZERO_TERMINAL_CREDIT",
+  "last_reconciled_control_plane_head": "eb662bc78f851249aacbee1bd6b209cc5a171042",
+  "last_reconciled_reason": "PROJECT_VERIFIED_ROOT2_V13_STAGED_ACTIVATION_AND_ACTIVE_DECISION_ONLY_ROOT_SCHEDULER_INTO_CURRENT_AUTHORITY__DELETE_STALE_V10_INSTRUCTION__PRESERVE_ARENA_TRUTH_REPAIR_AND_ACCEPTANCE_COUNTS",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
@@ -1821,7 +1821,7 @@
     "execution_authority": false,
     "promotion_authority": false
   },
-  "next_terminal_action": "EXECUTE_ONLY_ACTIVE_ROOT2_V10_NONDOMINATED_ZERO_REALITY_ROUTE_DELTAS__V10_EXTERNAL_FACT_ROUTING_ACTIVE__PRIMARY_SOURCE_DELETIONS_ACTIVE__ROOT3_V2_ZERO_RUNNABLE__NO_FRESH_SCORE_BEFORE_ZERO_REALITY_FIXED_POINT",
+  "next_terminal_action": "EXECUTE_ONLY_ROOT2_V13_DECISION_ONLY_MINIMUM_CERTIFICATE_CUTS_AND_NONDOMINATED_ZERO_REALITY_DELTAS__AUTHENTICATED_ONE_BIT_THRESHOLD_RECEIPT_FIRST_WHEN_SUFFICIENT__OUTPUT_ONLY_THRESHOLD_DAG_SECOND__MINIMUM_AUTHORIZED_EMPIRICAL_RESIDUAL_THIRD__FULL_BENCHMARK_ONLY_IF_IRREDUCIBLE__ROOT3_ZERO_RUNNABLE_UNLESS_WAKE_EVENT__NO_FRESH_REALITY_WITHOUT_SEPARATE_EXPLICIT_AUTHORITY",
   "ownership_state": {
     "verified_owned_families": 5,
     "total_families": 19,
@@ -1852,5 +1852,43 @@
     "execution_authority": false,
     "promotion_authority": false,
     "fresh_reality_authority": false
+  },
+  "root2_frontier_authority": {
+    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V13.json",
+    "frontier_git_blob_sha": "bb631b80eea5a183728fb27e2aff99bbe63f1757",
+    "frontier_verification_path": "canonical/verification/ROOT2_FRONTIER_V13_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "frontier_verification_git_blob_sha": "dd810106cf30f101453da07e2ef37cb81d7faddd",
+    "staged_activation_path": "canonical/governance/ROOT2_FRONTIER_V13_FINAL_ACTIVATION_V1.json",
+    "staged_activation_git_blob_sha": "08c84d8f0a46ff0f13943388306195fea79ca6d7",
+    "control_plane_verification_path": "canonical/verification/ROOT2_V13_DECISION_ONLY_CONTROL_PLANE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "status": "ACTIVE_IFF_EXACT_CONTROL_PLANE_RECEIPT_EXISTS_AND_PASSES__ROOT2_V13_SCHEDULING_ONLY__ZERO_CREDIT",
+    "scheduling_authority": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_delta": 0,
+    "higher_frontiers_v14_through_v18": "NOT_ACTIVE_BY_THIS_PROJECTION__SEPARATE_WHOLE_FRONTIER_VERIFICATION_AND_ACTIVATION_REQUIRED"
+  },
+  "root2_decision_only_evaluation": {
+    "activation_path": "canonical/governance/ROOT2_DECISION_ONLY_EVALUATION_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "4086abe4559e30ade7bb7fa5be5571eaf40e94ee",
+    "verification_path": "canonical/verification/ROOT2_DECISION_ONLY_EVALUATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "345ad6ce5d5ba5105c82e5663fa9a97e99ccec05",
+    "subject_runtime_path": "canonical/runtime/root2_decision_only_evaluation_v1.py",
+    "subject_runtime_git_blob_sha": "bb70267e0bb44830a0c73708e3d4a07daecfdfa0",
+    "status": "ACTIVE_IFF_EXACT_CONTROL_PLANE_RECEIPT_EXISTS_AND_PASSES__DECISION_ONLY_ROOT2_SETTLEMENT__SCHEDULING_ONLY__ZERO_CREDIT",
+    "scheduling_authority": true,
+    "decision_certificate_compilation": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_delta": 0,
+    "route_precedence": [
+      "AUTHENTICATED_ONE_BIT_THRESHOLD_RECEIPT_WHEN_SUFFICIENT",
+      "OUTPUT_ONLY_THRESHOLD_DAG_MINIMUM_ZERO_REALITY_CERTIFICATE_CUT",
+      "MINIMUM_AUTHORIZED_EMPIRICAL_RESIDUAL",
+      "FULL_BENCHMARK_ONLY_IF_IRREDUCIBLE"
+    ],
+    "root_projection_verification_path": "canonical/verification/ROOT2_V13_DECISION_ONLY_CONTROL_PLANE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
   }
 }
