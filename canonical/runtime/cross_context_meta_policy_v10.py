@@ -80,11 +80,14 @@ def recommend(*,target_context_features,exact_target_episodes=(),transfer_candid
                 raise CrossContextTransferError("STRATEGY_NOT_SOURCE_POLICY_WINNER")
             rows=_verified_strategy_rows(
                 source_context_sha256=source_sha,strategy_id=sid,episodes=source_episodes)
+            semantics=c.get("strategy_semantics") or {}
             proof=cm.verify(
                 raw=c.get("context_morphism") or {},
                 expected_source_context_sha256=source_sha,
                 expected_target_context_sha256=target_sha,
-                expected_strategy_id=sid)
+                expected_strategy_id=sid,
+                expected_strategy_semantics=semantics,
+                expected_source_episode_ids=[x["episode_id"] for x in rows])
             reduction_lcb=min(x["burden_before"]-x["burden_after"] for x in rows)
             wall_ub=max(x["wall_clock"] for x in rows)
             risk_ub=max(x["risk"] for x in rows)
