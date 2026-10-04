@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_OVERLAP_VISIBLE_WITNESS_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__CONSTRUCTIVE_HIDDEN_REFERENCE_BYPASS__PINNED_PUBLIC_FAMILY_INDEPENDENT_VERIFICATION_PENDING__ZERO_CREDIT",
+  "status": "VERIFIED__PINNED_PUBLIC_RATIO_OVERLAP_HIDDEN_REFERENCE_ACQUISITION_BARRIER_ELIMINATED__ZERO_ACCEPTANCE_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "scope": "PINNED_PUBLIC_IFBENCH_RATIO_OVERLAP_FAMILY_ONLY",
   "problem_repaired": "The frozen LiveBench NGramOverlapChecker uses exact character-trigram sets, so whitespace-normalized reference reconstruction is not generally score-equivalent.",
@@ -19,13 +19,14 @@
   "independent_verification": {
     "repository": "moxnixmdj/verification-capsule-runner",
     "pull_request": 1851,
-    "status": "PENDING"
+    "merged_commit": "601ae303814648d369ad7b49352b1b9925a6b874",
+    "workflow_run_id": 37198823299,
+    "workflow_job_id": 111426114852,
+    "head_sha": "eeceea3c3ec358ab0ae6ddacf9696da133573b87",
+    "artifact_id": 11301793049,
+    "artifact_digest_sha256": "2fac0361b9f2b397a218823ab5deb3a52b61e4e90164a36406d5f2e5528f22b5",
+    "status": "PASS"
   },
-  "expected_if_independently_verified": [
-    "REMOVE_EXACT_REFERENCE_TEXT_ACQUISITION_AS_THE_RATIO_OVERLAP_PARAMETER_BARRIER_FOR_THE_12_PINNED_PUBLIC_ROWS",
-    "RETAIN_SEPARATE_OBLIGATION_FOR_MULTI_CONSTRAINT_COMPOSITION_SOUNDNESS",
-    "RETAIN_SEPARATE_OBLIGATION_FOR_TERMINAL_LIVEBENCH_POPULATION_BINDING_AND_ACCEPTANCE"
-  ],
   "hard_nonclaims": [
     "NO_CLAIM_ALL_83_INSTRUCTION_TYPES_ARE_CLOSED",
     "NO_CLAIM_ALL_ALLOWED_MULTI_CONSTRAINT_COMBINATIONS_ARE_CLOSED",
@@ -47,5 +48,18 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
-  }
+  },
+  "verified_result": {
+    "pinned_public_ratio_overlap_rows": 12,
+    "visible_base_mapping_verified": 12,
+    "witnesses_generated_without_reference_text": 12,
+    "exact_frozen_checker_passes": 12,
+    "raw_reference_literal_visible_rows": 5,
+    "raw_reference_literal_not_visible_rows": 7
+  },
+  "verified_consequence": [
+    "EXACT_REFERENCE_TEXT_ACQUISITION_IS_NOT_REQUIRED_TO_SATISFY_THE_FROZEN_CHARACTER_TRIGRAM_OVERLAP_CHECKER_ON_THE_12_PINNED_PUBLIC_RATIO_OVERLAP_ROWS",
+    "THE_7_RAW_WHITESPACE_MISMATCH_ROWS_ARE_NO_LONGER_A_PARAMETER_ACQUISITION_BLOCKER_FOR_THIS_PINNED_PUBLIC_FAMILY",
+    "NEXT_LOAD_BEARING_OBLIGATION_IS_MULTI_CONSTRAINT_COMPOSITION_AND_SCOPE_BINDING_NOT_REFERENCE_TEXT_RECOVERY"
+  ]
 }

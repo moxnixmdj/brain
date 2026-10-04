@@ -65,14 +65,15 @@ def test_consonant_conjunction_witness_hits_target():
     assert abs(out["predicted_overlap_percent"] - 50) <= 2
 
 
-def test_unsupported_extra_constraint_fails_closed():
+def test_constraint_blocks_on_both_edges_fail_closed_as_ambiguous():
     prompt = (
         "Maintain a trigram overlap of 50% (±2%) with the provided reference text. "
-        "Use exactly seven bananas. Explain orbital mechanics."
+        "Explain orbital mechanics. "
+        "Maintain a trigram overlap of 50% (±2%) with the provided reference text."
     )
     try:
         parse_public_ratio_overlap_prompt(prompt)
     except Exception as exc:
         assert "AMBIGUOUS_OR_UNSUPPORTED" in str(exc)
     else:
-        raise AssertionError("unsupported conjunction must fail closed")
+        raise AssertionError("two plausible edge blocks must fail closed")

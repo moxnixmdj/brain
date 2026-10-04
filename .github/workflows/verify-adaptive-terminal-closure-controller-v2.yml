@@ -25,7 +25,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-        with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
+        with:
+          ref: "${{ github.event.pull_request.head.sha || github.sha }}"
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: |
@@ -39,7 +40,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-        with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
+        with:
+          ref: "${{ github.event.pull_request.head.sha || github.sha }}"
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: |
@@ -60,7 +62,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-        with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
+        with:
+          ref: "${{ github.event.pull_request.head.sha || github.sha }}"
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: |
@@ -79,7 +82,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-        with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
+        with:
+          ref: "${{ github.event.pull_request.head.sha || github.sha }}"
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: |
@@ -97,7 +101,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-        with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
+        with:
+          ref: "${{ github.event.pull_request.head.sha || github.sha }}"
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: |
@@ -124,7 +129,8 @@ jobs:
     needs: [pins, v13, post-dual, dual-source, inner-v1]
     steps:
       - uses: actions/checkout@v4
-        with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
+        with:
+          ref: "${{ github.event.pull_request.head.sha || github.sha }}"
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: python -m unittest canonical.tests.test_adaptive_terminal_closure_controller_v2 -v

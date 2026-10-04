@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V11_V3_REPLAY72_SUPERSESSION_V1",
+  "date": "2026-10-04",
+  "status": "SUPERSEDED_BEFORE_EXECUTION__NO_ATOMIC_CLAIM_CREATED__NO_DATASET_READ__ZERO_CREDIT",
+  "superseded_candidate": "canonical/governance/LIVEBENCH_V11_V3_REPLAY72_CANDIDATE_V1.json",
+  "superseded_candidate_git_blob_sha": "70e22fa3c494711ddc00e7c36d98b9be0239cbb9",
+  "epoch_digest_sha256": "24a0f299a73a095e678bbf81840226d949de02ac3b17809a2e6d6f96493c5a7d",
+  "claim_ref": "refs/heads/livebench-v11-claims/24a0f299a73a095e678bbf81840226d949de02ac3b17809a2e6d6f96493c5a7d",
+  "supersession_reason": [
+    "CURRENT_BRAIN_FRONTIER_ADVANCED_BEFORE_V11_EXECUTION",
+    "INDEPENDENTLY_VERIFIED_SCORE_MASS_MINIMUM_CUT_REDUCED_THE_OBJECTIVE",
+    "PUBLIC_HIDDEN_PARAMETER_RECOVERY_AND_RATIO_OVERLAP_ROUTES REMOVED_OLDER_RESIDUALS",
+    "A_58_FAMILY_SOURCE_DERIVED_DETECTOR_AND_SINGLE_CHECKER_SOLVER_NOW_DOMINATE_THE_OLDER_GENERIC_V3_REPLAY",
+    "A_PUBLIC_OPEN_WEIGHT_SEMANTIC_CORE_NOW_EXISTS_AS_A_SEPARATE_TRUE_CAPABILITY_ROUTE"
+  ],
+  "execution_accounting": {
+    "atomic_claim_created": false,
+    "terminal_dataset_read": false,
+    "replay72_executed": false,
+    "new_terminal_cases_exposed": 0,
+    "incremental_spend_usd": 0
+  },
+  "authority": {
+    "supersession": true,
+    "execution": false,
+    "replay72": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "next": "VERIFY_THE_CURRENT_58_FAMILY_PUBLIC_WITNESS_FRONTIER_AND_COMPOSITION_LAYER_BEFORE_ANY_TERMINAL_REPLAY"
+}
