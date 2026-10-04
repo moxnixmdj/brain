@@ -149,7 +149,7 @@ def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> lis
         if splitter not in {"Section", "SECTION"} or n < 1 or n > 5:
             raise ComposeError("SECTION_PARAMETER_DRIFT")
         for i in range(1, n + 1):
-            lines.append(f"{splitter} {i}")
+            lines.append(f"{splitter}{i}")
             lines.append("zxqv")
 
     bullets = _one(constraints, "detectable_format:number_bullet_lists")
