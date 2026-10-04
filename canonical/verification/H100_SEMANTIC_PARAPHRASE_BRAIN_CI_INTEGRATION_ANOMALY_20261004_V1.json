@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_H100_SEMANTIC_PARAPHRASE_BRAIN_CI_INTEGRATION_ANOMALY_20261004_V1",
+  "date": "2026-10-04",
+  "status": "RECORDED__BRAIN_LOCAL_CHECK_FAILURE__INDEPENDENT_EXACT_SUBJECT_PASS_REMAINS_LOAD_BEARING__ZERO_CREDIT",
+  "brain_pr": 1652,
+  "brain_merge_ref": "bf38a11e62cf07685e2aecb9d4d1e268450c5108",
+  "brain_local_workflow": {
+    "name": "H100 zero-learned semantic paraphrase V1",
+    "run_id": 37188536771,
+    "conclusion": "failure",
+    "semantic_failure_identified": false
+  },
+  "exact_merge_ref_subject_blobs": {
+    "preexposure": "490ae449877af813d8e8d1f071afb46a5190b02a",
+    "runtime": "db4e836b4104a9b311c2c08ab2d8675bfc0d0760",
+    "tests": "9976fd8a160582fc0ce3e1c79bfa496f35b593bf",
+    "candidate": "34adb64e9c775af6ac5a1507cc15dd8c111dddb5"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1763,
+    "merge_commit": "9b98feb1da8f2585d1991a52d489c44258defe06",
+    "workflow_run_id": 37188451848,
+    "workflow_job_id": 111395382925,
+    "conclusion": "success",
+    "exact_subject_blobs": true,
+    "replay": "8_OF_8_IDENTIFIED_PLUS_2_OF_2_MANDATORY_ABSTENTIONS"
+  },
+  "rule": "DO_NOT_RECLASSIFY_BRAIN_LOCAL_INFRASTRUCTURE_CHECK_FAILURE_AS_SEMANTIC_FAILURE_WHEN_THE_EXACT_MERGE_REF_SUBJECT_BYTES_HAVE_AN_INDEPENDENT_CONTENT_ADDRESSED_PASS",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
