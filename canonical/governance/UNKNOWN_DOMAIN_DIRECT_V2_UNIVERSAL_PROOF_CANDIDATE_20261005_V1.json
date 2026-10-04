@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_UNIVERSAL_ZERO_REALITY_BREAKTHROUGH__INDEPENDENT_CONTENT_BOUND_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "problem_deleted_if_verified": "THE_PREVIOUS_PLAN_REQUIRED_ONE_FRESH_27_CASE_PRODUCTION_POPULATION_TO_ESTABLISH_BEHAVIOR_OVER_A_GENERATOR_DOMAIN_THAT_IS_ALREADY_FULLY_SPECIFIED_AND_CONTENT_BOUND",
+  "proof": {
+    "runtime": "canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py",
+    "tests": "canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py",
+    "claim": "FOR_EVERY_VALID_POST_FREEZE_BEACON_AND_EVALUATOR_SECRET__EVERY_27_CASE_POPULATION_EMITTED_BY_THE_EXACT_FROZEN_V2_GENERATOR_IS_PASSED_BY_THE_EXACT_FROZEN_V2_CANDIDATE_THROUGH_THE_EXACT_FROZEN_HARNESS_AND_SCORER",
+    "method": [
+      "CONTENT_BIND_THE_EXACT_CANDIDATE_GENERATORS_SCORER_AND_HARNESS",
+      "PROVE_STRICT_DISTRACTOR_REJECTION_MARGINS_FOR_ALL_SIX_TRANSFER_PRIMITIVE_FAMILIES",
+      "PROVE_ADD2_WRONG_SUPPORT_REJECTION_ON_THE_FIRST_ALLOWED_PROBE_AND_ROLE_SWAP_OUTPUT_EQUIVALENCE_ON_THE_TRUE_SUPPORT",
+      "PROVE_SIGN_AND_STEP_DISAMBIGUATION_FROM_THE_FROZEN_PROBE_SIGN_STRUCTURE",
+      "PROVE_ALL_THREE_ABSTENTION_CLASSES_DIRECTLY_FROM_VISIBLE_GENERATOR_CONSTRUCTION_AND_SCORER_REQUIREMENTS",
+      "CONSUME_ZERO_PRODUCTION_OR_TERMINAL_CASES"
+    ]
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/unknown_domain_direct_candidate_v1.py": "a2a77269a8175ce315b466035049da0f761b8734",
+    "canonical/runtime/unknown_domain_direct_candidate_v2.py": "4470716f95a559a700e461262df909ae19a41651",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+  },
+  "derived_structural_margins": {
+    "affine_min_wrong_support_output_gap": 2.85,
+    "complement_min_wrong_support_output_gap": 4.75,
+    "sat_mono_conservative_min_wrong_support_output_gap": 0.027479338842975205,
+    "sat_mono_max_candidate_close_tolerance": 4.5e-9,
+    "sign_negative_probe_min_shifted_distractor_value": 1.25,
+    "step_min_wrong_side_margin": 2.55,
+    "add2_min_wrong_support_first_probe_gap": 1.5,
+    "max_transfer_probes": 2,
+    "full_rediscovery_probe_floor": 3
+  },
+  "scheduler_delta_if_independently_verified": [
+    "DELETE_UNKNOWN_DOMAIN_ONE_USE_PRODUCTION_POPULATION_AS_A_REQUIRED_INFORMATION_ACQUISITION_STEP_FOR_THIS_EXACT_FROZEN_GENERATOR_CLAIM",
+    "TREAT_THE_27_CASE_PRODUCTION_EXECUTION_AS_ZERO_EXPECTED_INFORMATION_GAIN_FOR_THIS_FROZEN_DOMAIN",
+    "SEND_THE_CONTENT_BOUND_UNIVERSAL_THEOREM_TO_THE_SEPARATE_SCOPE_AND_ACCEPTANCE_REDUCERS",
+    "DO_NOT_INFER_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_BEYOND_THE_FROZEN_EVALUATOR_DOMAIN"
+  ],
+  "why_this_is_stronger_than_81_OF_81_QUALIFICATION": "THE_81_CASE_RECEIPT_SAMPLES_THREE_POST_FREEZE_POPULATIONS__THIS_CANDIDATE_THEOREM_QUANTIFIES_OVER_EVERY_POPULATION_THE_FROZEN_GENERATOR_CAN_EMIT",
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false,
+    "independent_verification_required": true
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_UNTIL_SEPARATE_INDEPENDENT_CONTENT_BOUND_VERIFICATION_AND_REDUCTION",
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_CLAIM",
+    "NO_PRODUCTION_CASE_WAS_GENERATED_READ_OR_CONSUMED",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
