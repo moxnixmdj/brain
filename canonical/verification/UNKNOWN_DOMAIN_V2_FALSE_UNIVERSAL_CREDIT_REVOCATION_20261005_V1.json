@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V2_FALSE_UNIVERSAL_CREDIT_REVOCATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "TRUTH_REPAIR__V2_UNIVERSAL_PROOF_FALSIFIED__PR1911_CREDIT_REVOKED_PENDING_REPLACEMENT_PROOF",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "invalid_promotion": {
+    "pull_request": 1911,
+    "merge_commit_sha": "0e1d6200e12fe7ae097170701f3651db87aabe35",
+    "source_reduction_path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_20261005_V1.json",
+    "source_reduction_git_blob_sha": "941e62de59e4c528e8afbb95482f6707bc62104e",
+    "invalidated_claim": "FOR_EVERY_VALID_POST_FREEZE_BEACON_AND_EVALUATOR_SECRET__FOR_EVERY_27_CASE_POPULATION_EMITTED_BY_THE_EXACT_FROZEN_V2_GENERATOR__THE_EXACT_FROZEN_V2_CANDIDATE_PASSES_THE_EXACT_FROZEN_SCORER_ON_ALL_27_CASES",
+    "credit_to_revoke": 1
+  },
+  "independent_executable_falsification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/unknown-domain-v2-universal-zero-reality-v1-20261005-sol",
+    "verified_checkout_sha": "1f5c8ece6acaaa2b78f851bc306d8fac8195df30",
+    "workflow_run_id": 37241384832,
+    "workflow_job_id": 111550636411,
+    "runner": "GITHUB_HOSTED_MACOS",
+    "python": "3.12.10",
+    "result": "FAIL__GENERATOR_REACHABLE_V2_COUNTEREXAMPLE",
+    "production_cases_generated": 0,
+    "counterexample": {
+      "population_index": 1,
+      "case_id": "VERIFY0001-T-d37b27eb7a82a72944f5",
+      "primitive_family": "COMPOSITIONAL_REWRITE",
+      "operation": "ADD2",
+      "bias": 1.4405436185747194,
+      "gold_terminal_consequence": 3.169642121038785,
+      "candidate_terminal_consequence": 3.1696421210387853,
+      "absolute_difference": 4.440892098500626e-16,
+      "candidate_support_equals_hidden_relevant_set": true,
+      "negative_transfer_distractors_rejected": true,
+      "receipt_reuse_clause": "PASS",
+      "evidence_provenance_clause": "PASS",
+      "only_scorer_error": "DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG",
+      "root_cause": "ADD2_IS_MATHEMATICALLY_ROLE_SYMMETRIC_BUT_IEEE754_ADDITION_ORDER_IS_NOT_BIT_IDENTICAL__V2_CAN_SELECT_THE_OPPOSITE_TRUE_SUPPORT_ROLE_ORIENTATION_WHILE_SCORER_V1_REQUIRES_EXACT_FLOAT_EQUALITY"
+    }
+  },
+  "second_independent_logical_falsifier": {
+    "class": "OPAQUE_IDENTIFIER_COLLISION_TOTALITY",
+    "reason": "V2_USES_TRUNCATED_HMAC_IDENTIFIERS_OVER_AN_UNBOUNDED_VALID_INPUT_DOMAIN__A_FOR_EVERY_INPUT_THEOREM_CANNOT_ASSUME_COLLISION_NONOCCURRENCE",
+    "replacement_lane": "COLLISION_TOTAL_GENERATOR_V3",
+    "active_candidate_pull_request": 1894
+  },
+  "replacement_requirements": [
+    "PRESERVE_FROZEN_SCORER_SEMANTICS_OR_JUSTIFY_ANY_EVALUATOR_CHANGE_SEPARATELY",
+    "REMOVE_V2_EXACT_FLOAT_ROLE_ORIENTATION_COUNTEREXAMPLE",
+    "REMOVE_IDENTIFIER_COLLISION_ASSUMPTION_FOR_THE_QUANTIFIED_INPUT_DOMAIN",
+    "CONTENT_BIND_THE_COMBINED_REPAIRED_GENERATOR_CANDIDATE_SCORER_AND_HARNESS",
+    "INDEPENDENTLY_FALSIFY_THE_COMBINED_REPAIR_BEFORE_RESTORING_ANY_ACCEPTANCE_CREDIT"
+  ],
+  "known_live_repair_lanes": {
+    "exact_float_candidate_repair_pr": 1909,
+    "collision_total_generator_repair_pr": 1894,
+    "required_integration": "COMBINE_BOTH_BEFORE_ANY_UNIVERSAL_PROMOTION"
+  },
+  "deduction": {
+    "predicate_state": "EXTERNAL_BLOCKED",
+    "proved_predicate_count_delta": -1,
+    "unresolved_predicate_count_delta": 1,
+    "production_execution_information_gain": "UNDECIDED_UNTIL_REPLACEMENT_PROOF_IS_VERIFIED",
+    "fresh_reality_authority": false
+  },
+  "hard_rules": [
+    "NO_CREDIT_FROM_THE_FALSIFIED_V2_UNIVERSAL_REDUCTION",
+    "NO_PROMOTION_FROM_PR1909_ALONE_BECAUSE_V2_IDENTIFIER_TOTALITY_REMAINS_FALSE",
+    "NO_PROMOTION_FROM_PR1894_ALONE_BECAUSE_SCORER_V1_EXACT_FLOAT_COUNTEREXAMPLE_REMAINS",
+    "NO_PRODUCTION_CASE_WAS_GENERATED_OR_CONSUMED_BY_THIS_TRUTH_REPAIR",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "atomic_predicate_proved_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
