@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: livebench-private-zero-case-diagnostic
@@ -26,11 +27,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run exact frozen zero-case inference and persist receipt
+      - name: Run exact frozen zero-case inference and capture all failures
+        id: diagnostic
         shell: bash
         run: |
-          set -euo pipefail
-          python - <<'PY'
+          set +e
+          RECEIPT="canonical/astra_runtime/evidence/LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json"
+          python - <<'PY' >/tmp/livebench-diagnostic.stdout 2>/tmp/livebench-diagnostic.stderr
           import json, pathlib, subprocess, traceback
 
           receipt_path=pathlib.Path(
@@ -85,7 +88,6 @@ jobs:
                   )
               if not str(out.get("answer") or "").strip():
                   raise RuntimeError("EMPTY_ANSWER")
-
               receipt.update(
                   status="PASS",
                   adapter_status=out.get("status"),
@@ -110,12 +112,69 @@ jobs:
           print("LIVEBENCH_PRIVATE_DIAGNOSTIC_STATUS="+receipt["status"])
           print("LIVEBENCH_PRIVATE_DIAGNOSTIC_BLOCKER="+str(receipt.get("blocker_message") or "NONE"))
           PY
+          CODE=$?
+          cat /tmp/livebench-diagnostic.stdout || true
+          cat /tmp/livebench-diagnostic.stderr >&2 || true
+
+          if [ -f "$RECEIPT" ]; then
+            STATUS="$(python - <<'PY'
+          import json
+          p="canonical/astra_runtime/evidence/LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json"
+          print(json.load(open(p,encoding="utf-8")).get("status","UNKNOWN"))
+          PY
+            )"
+          else
+            STATUS="HARNESS_FAILURE"
+          fi
+
+          {
+            echo "# LiveBench private zero-case diagnostic"
+            echo
+            echo "- workflow_run: ${GITHUB_RUN_ID}"
+            echo "- python_exit_code: $CODE"
+            echo "- status: $STATUS"
+            echo
+            echo "## stdout"
+            echo '~~~text'
+            cat /tmp/livebench-diagnostic.stdout || true
+            echo '~~~'
+            echo
+            echo "## stderr"
+            echo '~~~text'
+            cat /tmp/livebench-diagnostic.stderr || true
+            echo '~~~'
+            if [ -f "$RECEIPT" ]; then
+              echo
+              echo "## receipt"
+              echo '~~~json'
+              cat "$RECEIPT"
+              echo '~~~'
+            fi
+          } >/tmp/livebench-diagnostic-report.md
+
+          echo "status=$STATUS" >> "$GITHUB_OUTPUT"
+          echo "python_exit_code=$CODE" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Publish failed diagnostic receipt
+        if: steps.diagnostic.outputs.status != 'PASS'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh issue create \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "LiveBench private zero-case diagnostic failure ${GITHUB_RUN_ID}" \
+            --body-file /tmp/livebench-diagnostic-report.md
 
       - name: Persist diagnostic receipt to non-authority branch
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
           RECEIPT="canonical/astra_runtime/evidence/LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json"
+          [ -f "$RECEIPT" ] || exit 0
           cp "$RECEIPT" /tmp/livebench-private-zero-case-receipt.json
           git config user.name "Project Brain LiveBench Diagnostic"
           git config user.email "project-brain-livebench-diagnostic@users.noreply.github.com"
@@ -134,16 +193,10 @@ jobs:
           fi
 
       - name: Enforce diagnostic result
+        if: always()
         shell: bash
         run: |
-          python - <<'PY'
-          import json
-          p="canonical/astra_runtime/evidence/LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json"
-          x=json.load(open(p,encoding="utf-8"))
-          print("status="+str(x.get("status")))
-          if x.get("status")!="PASS":
-              raise SystemExit(
-                  "LiveBench private zero-case diagnostic failed: "
-                  +str(x.get("blocker_message") or x.get("blocker_type"))
-              )
-          PY
+          if [ "${{ steps.diagnostic.outputs.status }}" != "PASS" ]; then
+            echo "LiveBench private zero-case diagnostic failed: ${{ steps.diagnostic.outputs.status }}" >&2
+            exit 1
+          fi
