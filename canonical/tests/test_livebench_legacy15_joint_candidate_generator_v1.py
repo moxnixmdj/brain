@@ -132,3 +132,25 @@ def test_postscript_payload_avoids_visible_forbidden_word():
         assert re.search(r"\\bnote\\b", x, re.I) is None
         assert "P.S." in x
         assert x.rstrip().endswith("Any other questions?")
+
+
+def test_exact_end_forbidden_whole_word_collision_is_proved_unsat():
+    out = g.generate([
+        c("startend:end_checker", end_phrase="Is there anything else I can help with?"),
+        c("keywords:forbidden_words", forbidden_words=["agency", "can", "hope", "office", "scene"]),
+        c("detectable_content:postscript", postscript_marker="P.P.S"),
+    ])
+    assert out["status"] == "PROVED_UNSAT_VISIBLE_CONSTRAINTS"
+    assert out["candidates"] == []
+    proof = out["unsat_proof"]
+    assert proof["proved"] is True
+    assert proof["reason"] == "EXACT_END_PHRASE_FORBIDDEN_WHOLE_WORD_COLLISION"
+    assert proof["colliding_forbidden_words"] == ["can"]
+
+
+def test_end_forbidden_noncollision_is_not_false_positive():
+    proof = g.prove_visible_unsat([
+        c("startend:end_checker", end_phrase="Any other questions?"),
+        c("keywords:forbidden_words", forbidden_words=["agency", "can"]),
+    ])
+    assert proof == {"proved": False}
