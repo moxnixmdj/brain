@@ -32,4 +32,4 @@ jobs:
         with:
           python-version: '3.12'
       - name: Run role induction tests
-        run: python -m unittest canonical.tests.test_h100_zero_learned_role_induction_v1 -v
+        run: PYTHONPATH="$PWD" python -m unittest canonical.tests.test_h100_zero_learned_role_induction_v1 -v
