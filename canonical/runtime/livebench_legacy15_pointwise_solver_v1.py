@@ -76,14 +76,13 @@ def solve_prompt(
         return _fail("OUTSIDE_FROZEN_ACTIVE15:" + ",".join(outside))
 
     try:
-        source_binding = exact_checker.verify_pinned_source(livebench_root)
-        checker = exact_checker.checker_for_root(livebench_root)
-        search = pointwise.solve_with_checker(
+        search = pointwise.solve_with_pinned_livebench(
             contracts,
-            checker,
+            str(livebench_root),
             max_per_subset=max_per_subset,
             max_total=max_total,
         )
+        source_binding = dict(search.get("exact_checker_binding") or {})
     except (
         exact_checker.ExactPostvalidationError,
         pointwise.PointwiseSearchError,
