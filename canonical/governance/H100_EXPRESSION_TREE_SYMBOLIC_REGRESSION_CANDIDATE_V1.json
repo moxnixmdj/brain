@@ -9,8 +9,8 @@
     "preserved_next_residual": "GENERAL_DETERMINISTIC_EXPRESSION_TREE_SYMBOLIC_REGRESSION_FOR_NESTED_SATURATION_AND_CORRECTION_LAWS"
   },
   "exact_bound_components": {
-    "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py": "ce3ecd01db970674afaf1d6825b9331ce1782104",
-    "canonical/tests/test_h100_expression_tree_symbolic_regression_v1.py": "a8e1c4487517a172b89d4627c6f577deb2ea9104"
+    "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py": "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490",
+    "canonical/tests/test_h100_expression_tree_symbolic_regression_v1.py": "c6285bb2bb5be1c65995a226df1761667a69d8e4"
   },
   "search_design": {
     "learned_state_bytes": 0,
@@ -38,15 +38,15 @@
       "MUL",
       "STABLE_DIV_LEFT_DIV_1_PLUS_ABS_RIGHT"
     ],
-    "correction_composition": "FIT_INTERCEPT_PLUS_UP_TO_TWO_ENUMERATED_FEATURES_BY_DETERMINISTIC_LINEAR_SYSTEM",
+    "correction_composition": "FIT_INTERCEPT_PLUS_UP_TO_TWO_ENUMERATED_FEATURES; NEVER_PRUNE_COMPLEXITY_LE_3_PRIMITIVES_BEFORE_COMPOSITION",
     "exactness_gate": "ALL_DATA_NRMSE_AND_HELDOUT_NRMSE_MUST_BOTH_BE_LE_CONFIGURED_EXACT_THRESHOLD_DEFAULT_1E_MINUS_8",
     "dedupe": "NORMALIZED_OUTPUT_VECTOR_PLUS_CANONICAL_STRUCTURAL_SIGNATURE",
     "fail_closed": "IF_NO_EXACT_CANDIDATE_SURVIVES_RETURN_GRAMMAR_NOT_EXACT__EXPAND_OR_EXPERIMENT"
   },
   "local_validation": {
     "command": "python -m unittest -v",
-    "tests_passed": 8,
-    "tests_total": 8,
+    "tests_passed": 10,
+    "tests_total": 10,
     "covered": [
       "NESTED_SATURATION_EXACT_RECOVERY",
       "LINEAR_PLUS_SATURATION_CORRECTION_EXACT_RECOVERY",
@@ -55,7 +55,9 @@
       "OUT_OF_GRAMMAR_SINE_FAIL_CLOSED",
       "DETERMINISTIC_REPLAY",
       "NONFINITE_INPUT_REJECTION",
-      "INPUT_DIMENSION_BOUND"
+      "INPUT_DIMENSION_BOUND",
+      "CROSS_VARIABLE_LINEAR_PLUS_STABLE_RATIO_CORRECTION_EXACT_RECOVERY",
+      "TWO_CROSS_VARIABLE_CORRECTIONS_EXACT_RECOVERY"
     ],
     "authority": "LOCAL_DEVELOPMENT_SIGNAL_ONLY__NOT_INDEPENDENT_VERIFICATION"
   },
