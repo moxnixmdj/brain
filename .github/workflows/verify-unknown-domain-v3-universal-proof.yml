@@ -1,0 +1,38 @@
+name: Verify Unknown-Domain V3 universal proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/unknown_domain_direct_hidden_generator_v3.py'
+      - 'canonical/runtime/unknown_domain_direct_v3_universal_proof_v1.py'
+      - 'canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py'
+      - 'canonical/governance/UNKNOWN_DOMAIN_V2_UNIVERSAL_PROOF_FALSIFICATION_20261005_V1.json'
+      - 'canonical/governance/UNKNOWN_DOMAIN_V3_TOTALIZED_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json'
+      - '.github/workflows/verify-unknown-domain-v3-universal-proof.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V3 universal proof tests
+        run: python -m unittest canonical.tests.test_unknown_domain_direct_v3_universal_proof_v1 -v
+      - name: Execute zero-reality theorem only
+        run: |
+          python -m canonical.runtime.unknown_domain_direct_v3_universal_proof_v1 > /tmp/unknown_domain_v3_proof.json
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/unknown_domain_v3_proof.json"))
+          assert d["status"]=="PASS__UNIVERSAL_OVER_EXACT_COLLISION_TOTALIZED_V3_GENERATOR_DOMAIN"
+          assert d["scope"]["terminal_or_production_cases_generated"]==0
+          assert d["accounting"]["acceptance_credit_delta"]==0
+          assert d["identifier_totality_proof"]["uniqueness_depends_on_hash_collision_resistance"] is False
+          print("Unknown-Domain V3 zero-reality theorem PASS")
+          PY
