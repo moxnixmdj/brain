@@ -80,13 +80,41 @@ def _legacy_repeat_meta_line(line: str) -> bool:
 
 
 def recover_legacy_repeat_prompt(prompt: str) -> dict[str, Any]:
-    """Recover legacy IFEval prompt_to_repeat from visible prompt only.
+    """Recover legacy LiveBench/IFEval prompt_to_repeat from visible prompt only.
 
-    Scope is the pinned public Google IFEval population. Repeat-meta lines are
-    deleted while the actual request block, including its other constraints,
-    is preserved exactly modulo outer whitespace.
+    The historical LiveBench generator set hidden prompt_to_repeat with:
+      generated_prompt.split(
+        "First repeat the request word for word without change,"
+      )[0]
+
+    Reproduce that exact public generation rule first. This matters because the
+    repeat description is concatenated on the same line as the task and other
+    checker descriptions; line-deletion heuristics can delete checker-relevant
+    prefix text and are therefore not equivalent.
+
+    A conservative line-based fallback is retained only for public IFEval-style
+    phrasings that do not use the exact LiveBench generation marker.
     """
     raw = _norm_newlines(prompt)
+    livebench_marker = "First repeat the request word for word without change,"
+    marker_index = raw.find(livebench_marker)
+
+    if marker_index >= 0:
+        recovered = raw[:marker_index].rstrip()
+        if not recovered:
+            raise HiddenParameterRecoveryError(
+                "LEGACY_REPEAT_PROMPT_RECOVERY_EMPTY_BEFORE_LIVEBENCH_MARKER"
+            )
+        return {
+            "schema": SCHEMA,
+            "family": "combination:repeat_prompt",
+            "prompt_to_repeat": recovered,
+            "response_prefix": recovered,
+            "source": "VISIBLE_PROMPT_PREFIX_BEFORE_PINNED_LIVEBENCH_REPEAT_MARKER",
+            "scope": "PINNED_LIVEBENCH_LEGACY_GENERATION_RULE_V1",
+            "hidden_prompt_to_repeat_required": False,
+        }
+
     kept = [
         line.strip()
         for line in raw.split("\n")
@@ -100,11 +128,10 @@ def recover_legacy_repeat_prompt(prompt: str) -> dict[str, Any]:
         "family": "combination:repeat_prompt",
         "prompt_to_repeat": recovered,
         "response_prefix": recovered,
-        "source": "VISIBLE_PROMPT_ONLY",
+        "source": "VISIBLE_PROMPT_ONLY_FALLBACK",
         "scope": "PINNED_PUBLIC_GOOGLE_IFEVAL_REPEAT_PROMPT_V1",
         "hidden_prompt_to_repeat_required": False,
     }
-
 
 def compile_known_hidden_parameter_family(prompt: str, family: str) -> Mapping[str, Any]:
     if family == "ratio:overlap":
