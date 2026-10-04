@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_ROLE_INDUCTION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_LEARNED_STRUCTURAL_ROLE_INDUCTION__EXACT_BLOB_BOUND__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "IDENTIFY_INPUT_AND_TARGET_ROLES_FROM_EXPLICIT_STRUCTURAL_SEMANTICS_WITH_ZERO_PERSISTENT_LEARNED_BYTES_WHILE_MANDATORILY_ABSTAINING_ON_DIRECTIONALLY_AMBIGUOUS_OBSERVATIONAL_TABLES",
+  "preexposure": {
+    "path": "canonical/governance/H100_ZERO_LEARNED_ROLE_INDUCTION_PREEXPOSURE_V1.json",
+    "git_blob_sha": "1d8049556eb073007e1f4686a3034726aeb27698"
+  },
+  "exact_bound_components": {
+    "canonical/runtime/h100_zero_learned_role_induction_v1.py": "d2cfb2119a77f632267fe93d4df95fb1ed51e05c",
+    "canonical/tests/test_h100_zero_learned_role_induction_v1.py": "bfabb4171b207a36d2a2916e74e9d873b0acf9d1"
+  },
+  "operative_scope": [
+    "TOOL_ARGUMENT_RESULT_ROLE_STRUCTURE",
+    "INPUT_OUTPUT_OBJECT_ROLE_STRUCTURE",
+    "SET_MEASURE_TEXT_ROLE_CUES",
+    "GIVEN_OBSERVED_TEXT_ROLE_CUES",
+    "INPUT_OUTPUT_PREFIXED_FIELDS",
+    "MANDATORY_ABSTENTION_ON_UNLABELED_OBSERVATIONAL_TABLES"
+  ],
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "random_search": false,
+    "dynamic_code_execution": false,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "residual_after_success": [
+    "OPEN_WORLD_ROLE_SEMANTICS_BEYOND_EXPLICIT_STRUCTURAL_CUES",
+    "OPEN_WORLD_FREE_FORM_LANGUAGE_AND_TOOL_TRACE_VARIATION",
+    "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+    "DIRECT_UNKNOWN_DOMAIN_ABSTENTION_AND_TRANSFER_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_CORRELATION_TO_CAUSATION_INFERENCE",
+    "NO_OPEN_WORLD_SEMANTIC_UNDERSTANDING_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "independent_verification_required": true
+}
