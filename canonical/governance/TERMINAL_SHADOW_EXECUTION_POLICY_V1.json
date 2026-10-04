@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SHADOW_EXECUTION_POLICY_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAIL_CLOSED__SHADOW_COLLECTION_ONLY__ZERO_CREDIT__INDEPENDENT_VERIFICATION_AND_ROOT_PROJECTION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "REMOVE_GLOBAL_ZERO_REALITY_TO_EMPIRICAL_SERIALIZATION_WHERE_GENERIC_PRECOMMIT_ISOLATION_AND_BENCHMARK_SPECIFIC_THIN_ADAPTERS_PROVE_NONINTERFERENCE__WITHOUT RELEASING RESULTS OR GRANTING ACCEPTANCE CREDIT BEFORE THE GLOBAL FIXED POINT",
+  "parent_main": "624039391b288c4e6e6d32786f649b2c7c6f5e91",
+  "preconditions": {
+    "generic_isolation_activation": "canonical/governance/GENERIC_PRECOMMIT_ISOLATION_THEOREM_ACTIVATION_V1.json",
+    "generic_isolation_status_required": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__GENERIC_CONDITIONAL_THEOREM_ONLY__ZERO_CREDIT",
+    "typed_basis": "canonical/runtime/terminal_typed_minimum_certificate_basis_v1.py",
+    "typed_obligations": 29,
+    "current_terminal_state": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 12,
+      "unresolved_atomic": 26,
+      "terminal": false
+    }
+  },
+  "proposed_semantic_change": {
+    "old_global_rule": "NO_FRESH_REALITY_BEFORE_ZERO_REALITY_FIXED_POINT",
+    "replacement_if_and_only_if_independently_verified_and_root_activated": [
+      "NO_NONESCROWED_RESULT_RELEASE_BEFORE_ZERO_REALITY_FIXED_POINT",
+      "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT_FROM_SHADOW_COLLECTION",
+      "BENCHMARK_SPECIFIC_SHADOW_COLLECTION_MAY_RUN_ONLY_WITH_A_PASSING_PROOF_CARRYING_LEASE",
+      "SHADOW_RESULT_BYTES_MUST_BE_UNREADABLE_TO_THE_FROZEN_CANDIDATE_AND_PLANNER_UNTIL_GLOBAL_FIXED_POINT",
+      "ANY_ROUTE_DELETED_BY_ZERO_REALITY_PROOF_CAUSES_ITS_ESCROWED_RESULT_TO_BE_DISCARDED_WITH_ZERO_CREDIT",
+      "ONLY_SURVIVING_MINIMUM_REALITY_CUT_RESULTS_MAY_BE_RELEASED_TO_THE_ATOMIC_TERMINAL_REDUCER"
+    ]
+  },
+  "lease_runtime": {
+    "path": "canonical/runtime/terminal_shadow_execution_lease_v1.py",
+    "required_gates": [
+      "GENERIC_PRECOMMIT_ISOLATION_PASS",
+      "BENCHMARK_THIN_ADAPTER_PASS",
+      "ZERO_SPEND_GUARD_PASS",
+      "RESULT_ESCROWED",
+      "NO_CANDIDATE_ESCROW_READ_PATH",
+      "NO_PLANNER_ESCROW_READ_PATH",
+      "BENCHMARK_SPECIFIC_SHADOW_AUTHORITY"
+    ]
+  },
+  "critical_path_claim": {
+    "conditional_only": true,
+    "serial_form": "T_ZERO_REALITY_PLUS_T_EMPIRICAL",
+    "shadow_form": "MAX_T_ZERO_REALITY_T_EMPIRICAL_FOR_CAUSALLY_INDEPENDENT_ELIGIBLE_RUNS",
+    "nonclaim": "NO_NUMERIC_SPEEDUP_IS_ASSERTED_WITHOUT MEASURED DURATIONS AND ELIGIBLE BENCHMARK INSTANTIATIONS"
+  },
+  "initial_candidate_targets": [
+    {
+      "predicate": "TB_SCIENCE_GE_58_7",
+      "reason": "BRAIN_SCORE_ONLY_OPEN__ZERO_COST_PUBLIC_GITHUB_CARRIER_ATTAINABILITY_ALREADY_INDEPENDENT_PASS",
+      "shadow_authority": false,
+      "thin_adapter_instantiation": "OPEN"
+    },
+    {
+      "predicate": "LIVEBENCH_IF_GE_65_7",
+      "reason": "COMPARATOR_POPULATION_SCORER_AND_INPUT_ROUTE_PREQUALIFIED__BRAIN_SCORE_ONLY_OPEN",
+      "shadow_authority": false,
+      "thin_adapter_instantiation": "OPEN"
+    }
+  ],
+  "hard_rules": [
+    "THIS_CANDIDATE_DOES_NOT_ITSELF_AUTHORIZE_ANY_CASE_EXECUTION",
+    "CURRENT_ROOT_FRESH_REALITY_FALSE_REMAINS AUTHORITATIVE UNTIL EXACT INDEPENDENT ROOT PROJECTION ACTIVATION",
+    "NO_SHADOW_EXECUTION_WITHOUT BENCHMARK_SPECIFIC_SHADOW_AUTHORITY",
+    "NO_RESULT_RELEASE_BEFORE GLOBAL ZERO_REALITY FIXED POINT",
+    "NO_RESULT_VISIBILITY_TO_CANDIDATE_OR_PLANNER_BEFORE RELEASE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT_FROM SHADOW COLLECTION",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_PUBLIC_PRIVATE_SUBSTITUTION",
+    "EXECUTED_HASHES_MUST_EQUAL_PRECOMMITTED_HASHES",
+    "FAIL_CLOSED_ON_ANY_MISSING_GATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "shadow_collection_authority": false,
+  "independent_verification_required": true,
+  "root_projection_activation_required": true
+}
