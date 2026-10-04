@@ -123,7 +123,7 @@ def test_unknown_or_structurally_conflicting_ids_fail_closed():
     assert conflict["status"] == "FAIL_CLOSED_ID_CONFLICT"
 
 
-def test_mandatory_section_splitter_forbidden_collision_is_certified():
+def test_section_splitter_forbidden_overlap_is_not_false_unsat():
     contracts = [
         {
             "instruction_id": f.SECTIONS,
@@ -135,10 +135,14 @@ def test_mandatory_section_splitter_forbidden_collision_is_certified():
         },
     ]
     out = f.classify_visible_contracts(contracts)
-    assert out["status"] == "PROVED_UNSAT"
-    assert out["hard_unsat_reasons"] == [
-        "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:section"
-    ]
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
+
+    # Exact SectionChecker shape permits zero whitespace before the index,
+    # while ForbiddenWords requires a whole-word match.
+    witness = "Section1"
+    assert re.fullmatch(r"\s?Section\s?\d+\s?", witness)
+    assert re.search(r"\bsection\b", witness, flags=re.IGNORECASE) is None
 
 
 def test_sentence_less_than_one_with_public_end_phrase_is_certified():
