@@ -1087,10 +1087,10 @@
       "git_blob_sha": "2012926814d0d06405da56da64e589b06fef1756",
       "verification": "canonical/verification/ROOT2_V10_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "226832c5e9d5f4121f26d93bd645ed51dce474fe",
-      "activation": "canonical/governance/ROOT2_FRONTIER_V10_ACTIVATION_V1.json",
-      "activation_git_blob_sha": "dc2605176a10982d4d700faea951f8e11d043a1f",
-      "status": "CANDIDATE__ROOT2_FRONTIER_V10_COMPOSITION_PASS__POINTER_PROJECTION_REVERIFY_PENDING__ZERO_CREDIT__NO_FRESH_REALITY",
-      "effective_scheduling_authority": false
+      "activation": "canonical/governance/ROOT2_FRONTIER_V10_FINAL_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "f5eda02fcc104bc8a5e13a82bfc8ec3d9515dcb2",
+      "status": "ACTIVE__ROOT2_FRONTIER_V10_COMPOSITION_PASS__POINTER_PROJECTION_PASS__V10_ACQUISITION_ROUTING_PASS__CURRENT_AUTHORITY_BOUND__ZERO_CREDIT__NO_FRESH_REALITY",
+      "effective_scheduling_authority": true
     },
     "synthesis_coverage_ceiling_v2": {
       "path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
@@ -1779,7 +1779,7 @@
     "execution_authority": false,
     "promotion_authority": false
   },
-  "next_terminal_action": "ROOT2_V10_POINTER_PROJECTION_INDEPENDENT_REVERIFY_PENDING__PRESERVE_ACTIVE_EXTERNAL_FACT_OVERLAY_AND_PRIMARY_SOURCE_SEARCH_DELETIONS__ROOT3_V2_ZERO_RUNNABLE__NO_FRESH_SCORE_BEFORE_ZERO_REALITY_FIXED_POINT",
+  "next_terminal_action": "EXECUTE_ONLY_ACTIVE_ROOT2_V10_NONDOMINATED_ZERO_REALITY_ROUTE_DELTAS__V10_EXTERNAL_FACT_ROUTING_ACTIVE__PRIMARY_SOURCE_DELETIONS_ACTIVE__ROOT3_V2_ZERO_RUNNABLE__NO_FRESH_SCORE_BEFORE_ZERO_REALITY_FIXED_POINT",
   "ownership_state": {
     "verified_owned_families": 5,
     "total_families": 19,
