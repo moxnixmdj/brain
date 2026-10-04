@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SHADOW_PREEXPOSURE_V3_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V3_PLAN__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "path": "canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json",
+    "git_blob_sha": "2663f794033cf779fdecb8806a95e932f6084004",
+    "plan_sha256": "9608157e7ef52fab08bc387bb19ccfb10001cbb5367849a9806d6b0e7df34b31",
+    "brain_observed_main_commit": "8641fbc37ba43a5364056271ddfab2a7cda04f33"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1733,
+    "head_sha": "7cf7ca94a61d4d217dd6ea6ee301d85607f21bfb",
+    "merge_commit": "bec95842b286b4853e5452e50539b466bc6f54b9",
+    "workflow_run_id": 37185143435,
+    "workflow_job_id": 111385405507,
+    "conclusion": "success",
+    "workflow_git_blob_sha": "1799058b478d847cdb690185d9794989c4d32f7a",
+    "verifier_git_blob_sha": "0218993fb7431a606169c5cf7f87ed94d6ff1065",
+    "mirrored_plan_git_blob_sha": "2663f794033cf779fdecb8806a95e932f6084004"
+  },
+  "verified": {
+    "exact_plan_blob_match": true,
+    "pre_exposure_plan_pass": true,
+    "component_count": 5,
+    "component_hashes_match_verified_successor_precommit_v2": true,
+    "commitment_sha256": "58ee189b9c035e3e7e96897193c2b6b9fa5b612a0394ca70d55bd0c562be5bca",
+    "terminal_cases_consumed": 0,
+    "case_reveal_authority": false,
+    "execution_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_authorized": false
+  },
+  "hard_nonclaims": [
+    "NO_PRODUCTION_ONE_USE_CLAIM",
+    "NO_TERMINAL_CASE_REVEAL",
+    "NO_LIVEBENCH_SCORE",
+    "NO_SHADOW_COLLECTION_AUTHORITY_FROM_THIS_RECEIPT",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
