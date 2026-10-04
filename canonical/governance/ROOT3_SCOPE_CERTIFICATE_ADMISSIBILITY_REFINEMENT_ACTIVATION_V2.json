@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V2",
   "date": "2026-10-04",
-  "status": "CANDIDATE__POST_SYNTHESIS_RECONCILIATION__ADMISSIBILITY_RULE_PRESERVED__SYNTHESIS_SCOPE_CLOSED_BY_COMPLIANT_CERTIFICATE__ZERO_CREDIT",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__POST_SYNTHESIS_RECONCILIATION__ADMISSIBILITY_RULE_PRESERVED__ZERO_CREDIT",
   "base_minimum_cut": {
     "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
     "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
@@ -45,5 +45,14 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "independent_verification": {
+    "path": "canonical/verification/ROOT3_SCOPE_ADMISSIBILITY_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "46f51ec2a2ce1dfb859adfa420f6b8c362ef0ad1",
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1530,
+    "workflow_run_id": 37165294031,
+    "workflow_job_id": 111326841730,
+    "conclusion": "success"
+  }
 }
