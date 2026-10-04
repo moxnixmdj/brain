@@ -232,7 +232,7 @@ def _build_dynamic(iid: str, prompt: str) -> str | None:
         return "quantum zebra"
 
     if iid == "count:conjunctions":
-        n = _int(r"(\d+)(?:\.0+)?\s+different coordinating conjunctions", prompt)
+        n = _int(r"(?<![\d.])(\d+)(?:\.0+)?\s+different coordinating conjunctions", prompt)
         if n is None or not (1 <= n <= 7):
             return None
         conj = ["and","but","or","so","for","nor","yet"][:n]
