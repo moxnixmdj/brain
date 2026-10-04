@@ -107,10 +107,15 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
             threshold = -1
 
         if relation == "less than" and threshold == 1:
-            # Frozen Punkt sentence tokenization yields zero sentences only for
-            # an empty/whitespace-only response; every non-whitespace response
-            # yields at least the terminal slice. Therefore any simultaneously
-            # active checker that requires non-whitespace output is jointly UNSAT.
+            # Frozen evaluation_main refuses to credit any checker on a blank
+            # response. Frozen Punkt yields zero sentences only for blank or
+            # whitespace-only input and >=1 sentence for every nonblank input.
+            # Therefore sentence<1 is UNSAT as a singleton under the scorer.
+            reasons.append(
+                "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
+            )
+
+            # Keep narrower pair diagnostics for existing evidence receipts.
             nonempty_reasons: list[str] = []
 
             if by_id.get(EXISTENCE, {}).get("keywords"):
