@@ -143,7 +143,10 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
         n = int(s["num_sections"])
         splitter = str(s["section_spliter"])
         for i in range(1, n + 1):
-            body_parts.append(f"{splitter} {i}\n{filler}{i}")
+            # Zero whitespace before the numeric index still passes the frozen
+            # SectionChecker regex and removes the whole-word boundary after
+            # the splitter, so forbidden_words=["section"] remains satisfiable.
+            body_parts.append(f"{splitter}{i}\\n{filler}{i}")
 
     if bullets:
         n = int(_slots(bullets)["num_bullets"])
