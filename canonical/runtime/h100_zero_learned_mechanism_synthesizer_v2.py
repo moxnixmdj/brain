@@ -456,6 +456,43 @@ def _tree_expression(
     )
 
 
+def _v1_python_expression(candidate: Mapping[str, Any]) -> str | None:
+    family = str(candidate.get("family") or "")
+    variables = [str(x) for x in candidate.get("variables", [])]
+    if family == "linear":
+        terms = [f"({_fmt(float(candidate['intercept']))})"]
+        for coef, variable in zip(candidate.get("coefficients", []), variables):
+            terms.append(f"({_fmt(float(coef))})*({variable})")
+        return "(" + "+".join(terms) + ")"
+    if family == "log_power":
+        terms = [f"({_fmt(float(candidate['scale']))})"]
+        for exponent, variable in zip(candidate.get("exponents", []), variables):
+            terms.append(f"({variable}**{_fmt(float(exponent))})")
+        return "(" + "*".join(terms) + ")"
+    if family == "monomial":
+        feature_terms = []
+        for exponent, variable in zip(candidate.get("exponents", []), variables):
+            exponent = float(exponent)
+            if abs(exponent) <= _EPS:
+                continue
+            feature_terms.append(f"({variable}**{_fmt(exponent)})")
+        feature = "*".join(feature_terms) if feature_terms else "1"
+        transformed = (
+            f"(({_fmt(float(candidate['intercept']))})+"
+            f"({_fmt(float(candidate['scale']))})*({feature}))"
+        )
+        transform = str(candidate.get("target_transform") or "identity")
+        if transform == "identity":
+            return transformed
+        if transform == "reciprocal":
+            return f"(1/{transformed})"
+        # V1's log_abs inverse requires an exp primitive whose evaluator spelling
+        # is not part of the public task contract.  Fail closed rather than emit
+        # a decorative string that may not execute.
+        return None
+    return None
+
+
 def _candidate_key(candidate: Mapping[str, Any]) -> tuple[Any, ...]:
     return (
         round(float(candidate["selection_score"]), 14),
@@ -645,7 +682,11 @@ def discover(
     for base in baseline.get("candidates", []):
         row = dict(base)
         row["search_origin"] = "V1_BASELINE"
-        row.setdefault("expression", str(row.get("feature_expression", row.get("family"))))
+        executable = _v1_python_expression(row)
+        if executable is not None:
+            row["expression"] = executable
+        else:
+            row.pop("expression", None)
         row.setdefault("loo_nrmse", math.inf)
         row.setdefault(
             "selection_score",
