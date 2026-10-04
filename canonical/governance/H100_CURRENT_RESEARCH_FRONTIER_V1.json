@@ -116,13 +116,14 @@
     "bounded_schema_stress_8_of_8_zero_learned": true,
     "bounded_structural_role_stress_5_identified_plus_1_abstention_zero_learned": true,
     "bounded_semantic_paraphrase_stress_8_identified_plus_2_abstentions_zero_learned": true,
-    "unseen_lexical_semantics_not_claimed": false,
+    "unseen_lexical_semantics_not_claimed": true,
     "open_world_semantics_not_claimed": true,
     "open_world_generalization_not_claimed": true,
     "runtime_ram_below_100mb_not_claimed": true,
     "total_compute_small_not_claimed": true,
     "jit_unseen_token_relation_consumption_zero_learned": true,
-    "real_world_lexical_acquisition_not_claimed": true
+    "real_world_lexical_acquisition_not_claimed": true,
+    "conditional_unseen_token_relation_consumption_proved": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
