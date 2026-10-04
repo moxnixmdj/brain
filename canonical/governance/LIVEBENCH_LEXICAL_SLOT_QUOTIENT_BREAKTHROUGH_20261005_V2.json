@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEXICAL_SLOT_QUOTIENT_BREAKTHROUGH_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__CURRENT_UNSAT_KERNEL_LEXICAL_QUOTIENT_TRUTH_REPAIRED__EXACT_REACHABLE_SIGNATURE_COUNT_446__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "supersedes_for_scheduling": "canonical/governance/LIVEBENCH_LEXICAL_SLOT_QUOTIENT_BREAKTHROUGH_20261005_V1.json",
+  "problem_repaired": "V1 tracked end-phrase forbidden words and nth-word collision but became incomplete after section-forbidden was promoted into the semantic UNSAT kernel. A quotient that omits forbidden membership of the mandatory literal Section cannot be a sound upper bound for the current checker-relevant lexical state.",
+  "source_binding": {
+    "pinned_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_util_git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "word_domain_size": 1525,
+    "word_domain_unique": true,
+    "word_domain_ascii_alpha_only": true,
+    "forbidden_sample_size": 5,
+    "forbidden_sampling_without_replacement": true
+  },
+  "current_lexical_semantic_dimensions": {
+    "fixed_forbidden_relevant_words": [
+      "other",
+      "anything",
+      "can",
+      "help",
+      "section"
+    ],
+    "why": {
+      "other": "whole word in fixed end phrase 0",
+      "anything": "whole word in fixed end phrase 1",
+      "can": "whole word in fixed end phrase 1",
+      "help": "whole word in fixed end phrase 1",
+      "section": "mandatory literal section label in detectable_format:multiple_sections"
+    },
+    "nth_categories": [
+      "other",
+      "anything",
+      "can",
+      "help",
+      "section",
+      "generic"
+    ],
+    "nth_is_forbidden": "additional collision bit, but equal to the corresponding fixed forbidden bit when nth is one of the five fixed words",
+    "end_phrase_values": 2
+  },
+  "exact_quotient": {
+    "runtime": "canonical/runtime/livebench_legacy15_lexical_collision_signature_v2.py",
+    "tests": "canonical/tests/test_livebench_legacy15_lexical_collision_signature_v2.py",
+    "fixed_nth_category_signature_count": 320,
+    "fixed_nth_derivation": "5_fixed_nth_categories * 2_end_phrases * 2^5_fixed_forbidden_membership_bits",
+    "generic_nth_signature_count": 126,
+    "generic_nth_derivation": "2_end_phrases * (32_signatures_with_generic_nth_not_forbidden + 31_signatures_with_generic_nth_forbidden_and_not_all_five_fixed_words_already_occupying_the_five_forbidden_slots)",
+    "exact_reachable_signature_count": 446,
+    "conservative_cartesian_bound_after_repair": 768,
+    "conservative_bound_derivation": "6_nth_categories * 2_end_phrases * 2^6_boolean_dimensions_before_reachability_constraints",
+    "prior_v1_upper_bound": 320,
+    "prior_v1_upper_bound_valid_for_current_kernel": false
+  },
+  "proof_value": [
+    "RAW_1525_WORD_IDENTITY_ENUMERATION_REMAINS_DELETED",
+    "CURRENT_LEXICAL_HARD_UNSAT_STATE_IS_EXACTLY_ENUMERABLE_IN_446_REACHABLE_SIGNATURES",
+    "SECTION_FORBIDDEN_COLLISIONS_ARE_NO_LONGER_INVISIBLE_TO_THE_QUOTIENT",
+    "FIXED_NTH_WORD_DEPENDENCIES_AND_THE_FIVE_FORBIDDEN_SLOT_CAPACITY_ARE_EXPLICITLY_ENFORCED",
+    "THE_QUOTIENT_CAN_NOW_BE_COMPOSED_WITH_NUMERIC_AND_STRUCTURAL_SLOT_DOMAINS_FOR_THE_POINTWISE_OPTIMALITY_PROOF"
+  ],
+  "next_action": "INDEPENDENTLY_VERIFY_THE_446_SIGNATURE_ENUMERATOR__THEN_CROSS_PRODUCT_ONLY_WITH_CHECKER_RELEVANT_NUMERIC_AND_STRUCTURAL_EQUIVALENCE_CLASSES__FOR_EACH_CLASS_REQUIRE_EXACT_POSTVALIDATED_WITNESS_OR_SOUND_UNSAT_CERTIFICATE__FEED_RESULTS_INTO_POINTWISE_OPTIMALITY_KERNEL",
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROW_CONTENT_READ",
+    "NO_TERMINAL_CASE_FREQUENCY_INFERRED",
+    "NO_CLAIM_446_ALONE_CLOSES_NONLEXICAL_SLOT_INTERACTIONS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
