@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_SEED_PRESERVING_INSTRUCTION_POSTPROCESSOR_PUBLIC_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__GENERIC_ROOT1_REPAIR_BUILDING_BLOCK__ZERO_ACCEPTANCE_CREDIT",
+  "subject": {
+    "brain_pull_request": 1705,
+    "brain_head_sha": "99fbe6c868cc58a47381d57ffbdedbef41b5dd93",
+    "postprocessor_path": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+    "postprocessor_git_blob_sha": "6762868d0954102e996ab240c85fdfee22e3f219",
+    "test_path": "canonical/runtime/test_seed_preserving_instruction_postprocessor_v1.py",
+    "test_git_blob_sha": "39881bd8fc9f6390b84a572bd01fa51a5a0b1039",
+    "compiler_path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+    "compiler_git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1836,
+    "corrected_head_sha": "6a0c979fd41bbd4e803968a7bb173de09676ffa2",
+    "merge_commit": "537732603ff86dc534743c3a57317e86687b46e1",
+    "workflow_run_id": 37198124043,
+    "workflow_job_id": 111424096976,
+    "conclusion": "success",
+    "artifact_id": 11302220465,
+    "artifact_zip_sha256": "65fd95a485521ef6e8a42b6fe34467502fe2389fa146e11c8af31b605edf3eb3"
+  },
+  "verified": {
+    "exact_subject_blobs": true,
+    "synthetic_test_count": 7,
+    "synthetic_tests": [
+      "test_already_satisfies_word_floor",
+      "test_case_conversion",
+      "test_empty_seed_fails_closed",
+      "test_exact_response",
+      "test_forbidden_literal_needing_deletion_fails_closed",
+      "test_prefix_suffix",
+      "test_word_floor_needing_invention_fails_closed"
+    ],
+    "safe_structural_transforms_pass": true,
+    "unsafe_semantic_invention_or_deletion_fails_closed": true,
+    "exact_postvalidation_used": true,
+    "network_path_absent": true,
+    "subprocess_path_absent": true,
+    "incremental_spend_usd": 0,
+    "terminal_authority": false
+  },
+  "root1_relevance": [
+    "PROVIDES_A_VERIFIED_GENERIC_BRIDGE_FROM_REAL_SEMANTIC_SEED_TO_FORMAL_RESPONSE_CONSTRAINTS",
+    "PRESERVES_FAIL_CLOSED_BEHAVIOR_WHEN_CONSTRAINT_SATISFACTION_WOULD_REQUIRE_UNPROVED_SEMANTIC_MUTATION",
+    "CAN_BE_COMPOSED_WITH_BRAIN_SEMANTIC_PRODUCERS_AND_PUBLIC_INSTRUCTION_GRAMMAR_PARSERS"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_INSTRUCTION_FOLLOWING_PROOF",
+    "NO_LIVEBENCH_IF_GE_65_7_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CASE_DATA_USED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
