@@ -1,12 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_FROZEN_COMPARATOR_VECTOR_V1",
   "date": "2026-10-04",
-  "status": "CURRENT_CANDIDATE__FROZEN_15_FIXED_BAR_PREDICATES_14_SURFACES__CURRENT_ROUTE_INVENTORY_REBOUND__ZERO_CREDIT",
+  "status": "CURRENT_CANDIDATE__FROZEN_15_FIXED_BAR_PREDICATES_14_SURFACES__OSWORLD_PARTIAL_SCORING_SEMANTICS_BOUND__ZERO_CREDIT",
   "scope": "ROOT2_ONLY_FIXED_BAR_PREDICATES",
   "authority": {
     "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-    "route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294",
-    "rebind_reason": "TARGETS_UNCHANGED__ROUTE_STATE_ONLY__CHARTOGRAPHY_HARD_ZERO_SPEND_GUARD_DISCHARGED__PROJECT_CAPACITY_REMAINS",
+    "route_inventory_git_blob_sha": "dfa7a46cd0131443750dd57f42d06e4ed2447c2a",
+    "rebind_reason": "TARGETS_UNCHANGED__ROUTE_STATE_ONLY__OSWORLD_PARTIAL_SCORING_SEMANTICS_RECONCILED__ANTHROPIC_EXACT_RUN_POPULATION_STILL_OPEN",
     "gdpval_opus55_fixed_bar_provenance": {
       "activation_path": "canonical/governance/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_ACTIVATION_V1.json",
       "activation_git_blob_sha": "1c2ead2e8c5cd14e109ab9361bc4962bcc1e0c8e",
@@ -103,7 +103,7 @@
         "OSWORLD_2_1_PARTIAL_GE_81_8"
       ],
       "target": ">=81.8%",
-      "route_class": "ACCOUNT_SELF_HOST_FUNCTIONAL_PROTOCOL_THEN_SCORE__SOURCE_AND_EXACT_GITLAB_REVISION_BLOCKERS_DISCHARGED"
+      "route_class": "ACCOUNT_SELF_HOST_FUNCTIONAL_PROTOCOL_THEN_SCORE__PARTIAL_IS_SCORING_QUALIFIER__ANTHROPIC_RUN_POPULATION_STILL_OPEN"
     },
     {
       "surface": "Finance & Accounting Index",
@@ -159,6 +159,8 @@
     "predicate_set_changed": false,
     "surface_set_changed": false,
     "route_state_only": true,
-    "current_route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294"
+    "current_route_inventory_git_blob_sha": "dfa7a46cd0131443750dd57f42d06e4ed2447c2a",
+    "osworld_partial_metric_semantics_reconciled": true,
+    "anthropic_osworld_exact_run_population_open": true
   }
 }
