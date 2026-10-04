@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_FRESH_HOLDOUT_MANIFEST_V1",
+  "date": "2026-10-04",
+  "status": "REQUESTS_FROZEN_AFTER_EXECUTOR_VERIFICATION__ANSWER_KEY_SEPARATE",
+  "frozen_executor": {
+    "path": "canonical/runtime/retrieval_verified_route_executor_v1.py",
+    "git_blob_sha": "dd1b4dfb8f2412867650c8a546285e38f3b1b9ee",
+    "verification_path": "canonical/verification/RETRIEVAL_V20_FROZEN_EXECUTOR_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "01b7dca21385fa1055cb16e37401baf9977d9378",
+    "entrypoint_v4_git_blob_sha": "2ad2fb952b3c361e74cb083b335d39b04a7c130b",
+    "route_portfolio_git_blob_sha": "855a6cba59fff8c079f61212acadc254c4e9e736",
+    "controller_v3_git_blob_sha": "44cb29b284f7ff069a68bf21e221f15d17ee94fa"
+  },
+  "requests": [
+    {
+      "episode_id": "H20_GITHUB_JA_MORPH",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_GITHUB_JA_MORPH.json",
+      "git_blob_sha": "041724d446c6e4d60b2560e328957d5ad42a6ab6"
+    },
+    {
+      "episode_id": "H20_GITHUB_RUST_SEARCH",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_GITHUB_RUST_SEARCH.json",
+      "git_blob_sha": "998c4961be0be4e5b391406a1e24053a1130bc56"
+    },
+    {
+      "episode_id": "H20_GITHUB_AR_NLP",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_GITHUB_AR_NLP.json",
+      "git_blob_sha": "02feed483c75df6ea1c220463dc187ba0e5e8cf3"
+    },
+    {
+      "episode_id": "H20_NPM_CONCURRENT_MAP",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_NPM_CONCURRENT_MAP.json",
+      "git_blob_sha": "95673c79142e953c7c6f922d9db81e5b1727e641"
+    },
+    {
+      "episode_id": "H20_CRATE_JSON",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_CRATE_JSON.json",
+      "git_blob_sha": "6ecf17f69532fa56e5fac59fe0873576b2042325"
+    },
+    {
+      "episode_id": "H20_HF_SENTENCE_SIM",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_HF_SENTENCE_SIM.json",
+      "git_blob_sha": "7017b1efffb5b636fa30b58f88866e64de6f87b8"
+    },
+    {
+      "episode_id": "H20_HF_TEXT_CLASS",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_HF_TEXT_CLASS.json",
+      "git_blob_sha": "33efbcdea308b457a1a60839065cd6ea89c4c0d1"
+    },
+    {
+      "episode_id": "H20_MAVEN_LANG_UTIL",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_MAVEN_LANG_UTIL.json",
+      "git_blob_sha": "182e5945896b64137f96df3b695c71c48bb4e5ab"
+    },
+    {
+      "episode_id": "H20_MAVEN_HTML",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_MAVEN_HTML.json",
+      "git_blob_sha": "10cb777469b08f06e02c59336c133a2cb9218d44"
+    },
+    {
+      "episode_id": "H20_NUGET_MICRO_ORM",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_NUGET_MICRO_ORM.json",
+      "git_blob_sha": "bd805fb615a73951f1a17ee76ac35f090084cd7d"
+    },
+    {
+      "episode_id": "H20_RUBY_JOBS",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_RUBY_JOBS.json",
+      "git_blob_sha": "de3358df3bd67a6591b018d6b8ed999aa470c824"
+    },
+    {
+      "episode_id": "H20_PHP_HTTP",
+      "path": "canonical/governance/retrieval_v20_holdout_requests/H20_PHP_HTTP.json",
+      "git_blob_sha": "d53acdd57979796631ace115d0e0558825c9406d"
+    }
+  ],
+  "request_count": 12,
+  "hard_rules": [
+    "THE_EXECUTOR_WAS_INDEPENDENTLY_VERIFIED_BEFORE_THESE_REQUESTS_WERE_FROZEN",
+    "REQUEST_FILES_CONTAIN_NO_TARGET_IDENTITY",
+    "THE_ANSWER_KEY_IS_NOT_AN_EXECUTOR_INPUT",
+    "NO_ROUTE_OR_EXECUTOR_CHANGE_IS_PERMITTED_BEFORE_THE_FIRST_HOLDOUT_RESULT_IS_FROZEN"
+  ]
+}
