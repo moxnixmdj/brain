@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_2026_TERMINAL_SCOPE_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_SOURCE_CONJUNCTION_REDUCES_CURRENT_LIVEBENCH_IF_TERMINAL_SCORER_SCOPE_TO_LEGACY_25__EXACT_OPUS55_RAW_COMPARATOR_BOUND__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "breakthrough": {
+    "prior_working_surface": "PUBLIC_FROZEN_LIVEBENCH_GRAMMAR_AUDIT_ENUMERATES_25_LEGACY_PLUS_58_MODERN_IFBENCH_CHECKERS_EQUALS_83_TOTAL",
+    "corrected_terminal_scope": "THE_CURRENT_2026_06_25_LIVEBENCH_INSTRUCTION_FOLLOWING_COMPARATOR_IS_THE_FOUR_TASK_LIVEBENCH_POPULATION__PARAPHRASE_SIMPLIFY_STORY_GENERATION_SUMMARIZE__WITH_50_ACTIVE_QUESTIONS_PER_TASK",
+    "evaluator_dispatch_fact": "FROZEN_LIVEBENCH_ROUTES_INSTRUCTION_FOLLOWING_ROWS_WITH_LIVEBENCH_RELEASE_DATE_BEFORE_2025_11_25_TO_THE_OLD_BATCH_INSTRUCTION_FOLLOWING_EVALUATOR__NEWER_ROWS_USE_IFBENCH_PROCESS_RESULTS",
+    "public_dataset_fact": "THE_PUBLIC_LIVEBENCH_INSTRUCTION_FOLLOWING_DATASET_CURRENTLY_REPORTS_400_ROWS_WITH LIVEBENCH_RELEASE_DATE RANGE 2024_06_24 THROUGH 2024_11_25__THEREFORE ITS CURRENT ACTIVE SUBSET IS ENTIRELY PRE_2025_11_25",
+    "consequence": "FOR_THE_CURRENT_200_CASE_LIVEBENCH_IF_TERMINAL COMPARATOR__THE_LOAD_BEARING_SCORER_GRAMMAR IS THE LEGACY 25 CHECKER REGISTRY__THE 58 MODERN IFBENCH CHECKERS ARE NOT ON THIS PREDICATE'S CURRENT TERMINAL CRITICAL PATH"
+  },
+  "pinned_public_sources": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "common_loader_blob": "95373cc6a82bc935013e2c23d2a183022f802f5c",
+    "incremental_judge_blob": "40e352e3cf440c9643e44f3ad11d3b2ffb999ccf",
+    "legacy_evaluation_main_blob": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+    "legacy_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "legacy_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "modern_instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "new_livebench_repository": "LiveBench/new-livebench",
+    "new_livebench_observed_commit": "caa4253c8a3aa93b5c7ec234e681d4f120a20240",
+    "categories_2026_06_25_blob": "50b5672fe14023f5ba14efc1ce16e221e6573056",
+    "table_2026_06_25_blob": "73ab7d8d9752b4d7cc1bc8c574ab0eb80c36c84b",
+    "cost_2026_06_25_blob": "6f6271ed5497706e290675a1ad92a716a0f45b6b",
+    "generate_model_rows_blob": "44b01ffac16adfceb96bd2786846918d0720d94b",
+    "huggingface_dataset": "livebench/instruction_following",
+    "huggingface_public_metadata_observed": "400_ROWS__LIVEBENCH_RELEASE_DATE_MIN_2024_06_24__MAX_2024_11_25"
+  },
+  "current_comparator_identity": {
+    "model": "claude-opus-5-5-max-effort",
+    "public_release": "2026_06_25",
+    "instruction_following_tasks": [
+      "paraphrase",
+      "simplify",
+      "story_generation",
+      "summarize"
+    ],
+    "task_scores_percent": {
+      "paraphrase": 64.267,
+      "simplify": 58.667,
+      "story_generation": 70.917,
+      "summarize": 69.1
+    },
+    "active_question_counts": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    },
+    "total_active_questions": 200,
+    "raw_equal_task_mean_percent": 65.73775,
+    "public_display_one_decimal_percent": 65.7,
+    "strict_equal_or_better_margin_above_displayed_bar_percent": 0.03775,
+    "terminal_truth_rule": "STRICT_OPUS_NONINFERIORITY_SHOULD_COMPARE_AGAINST_65_73775_OR_EXPLICITLY_DECLARE_ONE_DECIMAL_LEADERBOARD_EQUIVALENCE__65_7_ALONE_IS_A_ROUNDED_PROXY"
+  },
+  "forced_fail_consistency": {
+    "prior_population_count": 200,
+    "prior_observed_zero_score_cases": 72,
+    "prior_unseen_cases": 128,
+    "prior_best_case_upper_percent": 64,
+    "conclusion": "FORCED_FAIL_REMAINS_VALID_UNDER_BOTH_THE_ROUNDED_65_7_BAR_AND_THE_STRICT_RAW_65_73775_OPUS_MEAN_BECAUSE_64_0_IS_BELOW_BOTH",
+    "root1_reclassification_effect": "UNCHANGED__THE_EXACT_FROZEN_CANDIDATE_REMAINS_FORCED_FALSE"
+  },
+  "critical_path_reduction": {
+    "audited_public_checker_surface_before": 83,
+    "current_terminal_load_bearing_legacy_checkers": 25,
+    "modern_checkers_removed_from_current_predicate_critical_path": 58,
+    "fraction_removed": 0.6987951807228916,
+    "percent_removed": 69.87951807228916,
+    "current_terminal_grammar_fraction_remaining": 0.30120481927710846,
+    "explicit_deprioritized_modern_examples": [
+      "ratio:overlap",
+      "repeat:repeat_span",
+      "count:unique_word_count",
+      "format:no_whitespace"
+    ],
+    "scheduling_consequence": [
+      "STOP_TREATING_MODERN_IFBENCH_58_COVERAGE_AS_A_LOAD_BEARING_PREREQUISITE_FOR_LIVEBENCH_IF_GE_65_7",
+      "KEEP_MODERN_IFBENCH_WORK_ONLY_AS_GENERIC_CAPABILITY_OR_FUTURE_FORMAT_RESEARCH_UNLESS_A_SEPARATE_CURRENT_TERMINAL_BINDING_IS_PROVED",
+      "FOCUS_CURRENT_LIVEBENCH_REPAIR_ON_THE_25_LEGACY_CHECKERS_AND_THEIR_ALLOWED_COMBINATIONS",
+      "PRESERVE_SCORE_ONLY_VS_SEMANTIC_CAPABILITY_CREDIT_SEPARATION"
+    ]
+  },
+  "scorer_semantics_boundary": {
+    "legacy_evaluator": "instruction_following_process_results -> instruction_following_eval.evaluation_main",
+    "legacy_scoring": "REGISTERED_INSTRUCTION_PREDICATES_OVER_RESPONSE__PROMPT_LEVEL_STRICT_RESULT",
+    "modern_evaluator": "ifbench_process_results",
+    "terminal_capability_nonclaim": "PASSING_THE_LEGACY_SCORER_DOES_NOT_BY_ITSELF_PROVE_PARAPHRASE_SIMPLIFY_SUMMARIZE_OR_STORY_SEMANTIC_QUALITY__SEMANTIC_CAPABILITY_OWNERSHIP_REQUIRES_SEPARATE_EVIDENCE"
+  },
+  "next_minimum_actions": [
+    "INDEPENDENTLY_VERIFY_THE_PUBLIC_SOURCE_CONJUNCTION_AND_200_EQUALS_4_TIMES_50_COMPARATOR_BINDING",
+    "REBASE_LIVEBENCH_ROOT1_REPAIR_SCHEDULER_FROM_83_CHECKERS_TO_THE_25_LEGACY_CHECKERS",
+    "CLASSIFY_THE_25_LEGACY_CHECKERS_BY_VISIBLE_PARAMETER_RECOVERY_AND_CONSTRUCTIVE_WITNESS_DIFFICULTY_WITHOUT_READING_ANY_NEW_TERMINAL_CASE",
+    "KEEP_SEMANTIC_TEXT_PRODUCTION_AS_A_SEPARATE_CAPABILITY_OWNERSHIP_OBLIGATION_RATHER_THAN_PRETENDING_THE_LEGACY_SCORER_MEASURES_IT"
+  ],
+  "hard_rules": [
+    "NO_NEW_TERMINAL_CASE_CONTENT_READ",
+    "NO_CASE_73_OR_LATER_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_SCOPE_REDUCTION",
+    "NO_MODERN_IFBENCH_PUBLIC_ROW_LOOKUP_AS_TERMINAL_EVIDENCE_WITHOUT_A_SEPARATE_VALID_BINDING",
+    "NO_SEMANTIC_CAPABILITY_CREDIT_FROM_SCORE_ONLY_WITNESSES",
+    "FAIL_CLOSED_IF_THE_PUBLIC_DATASET_SOURCE_OR_EVALUATOR_DISPATCH_BINDING_IS_NOT_INDEPENDENTLY_REPRODUCED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
