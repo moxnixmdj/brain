@@ -119,3 +119,21 @@ def test_pinned_checker_bridge_removes_external_callback_gap(monkeypatch):
     assert out["pointwise_optimal"] is True
     assert out["exact_checker_callback_required"] is False
     assert out["exact_checker_binding"]["livebench_commit"] == "pinned-test"
+
+
+def test_empty_response_cannot_receive_full_strict_score_even_if_callback_says_true():
+    contracts = [
+        c("keywords:forbidden_words", forbidden_words=["omega"]),
+    ]
+    out = search.select_best_postvalidated(
+        contracts,
+        [{"response": "", "checker_results": [True]}],
+    )
+    assert out["best_candidate"]["checker_results"] == [False]
+    assert out["best_candidate"]["true_checker_count"] == 0
+    assert out["best_candidate"]["strict_nonempty_response_gate_applied"] is True
+    # The singleton can only be certified optimal if its contract is itself
+    # scorer-level UNSAT. ForbiddenWords is satisfiable by nonempty responses,
+    # so this must fail closed rather than mint false full-score credit.
+    assert out["status"] == "FAIL_CLOSED__BEST_CANDIDATE_OPTIMALITY_NOT_CERTIFIED"
+    assert out["pointwise_optimal"] is False
