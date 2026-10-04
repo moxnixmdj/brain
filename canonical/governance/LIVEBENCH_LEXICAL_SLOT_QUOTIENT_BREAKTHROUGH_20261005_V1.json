@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEXICAL_SLOT_QUOTIENT_BREAKTHROUGH_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__EXACT_PUBLIC_LEXICAL_DOMAIN_QUOTIENT__RAW_WORD_COMBINATION_ENUMERATION_DELETED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source_binding": {
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "historical_generator_path": "livebench/if_runner/live_data.py",
+    "historical_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "pinned_checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_util_path": "livebench/if_runner/instruction_following_eval/instructions_util.py",
+    "instructions_util_git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+  },
+  "exact_public_domain_facts": {
+    "word_list_entry_count": 1525,
+    "word_list_unique_value_count": 1525,
+    "all_word_list_values_ascii_alpha_only": true,
+    "generated_existence_keyword_count": 5,
+    "generated_forbidden_keyword_count_before_checker_dedup": 5,
+    "generated_nth_first_word_count": 1,
+    "word_plus_literal_x_is_another_word_list_value_pair_count": 0,
+    "fixed_end_phrases": [
+      "Any other questions?",
+      "Is there anything else I can help with?"
+    ],
+    "word_list_values_occurring_as_whole_words_in_fixed_end_phrases": [
+      "other",
+      "anything",
+      "can",
+      "help"
+    ]
+  },
+  "lexical_interaction_theorem": {
+    "statement": "FOR_THE_CURRENT_ACTIVE15_CONSTRUCTORS_AND_EXACT_PINNED_PUBLIC_WORD_DOMAIN__LEXICAL_SLOT_INTERACTIONS_RELEVANT_TO_WITNESS_FEASIBILITY_FACTOR_THROUGH_A_FINITE_COLLISION_SIGNATURE_INSTEAD_OF_RAW_WORD_IDENTITIES",
+    "proof_obligations_reduced_to": [
+      "NTH_FIRST_WORD_IS_OR_IS_NOT_A_MEMBER_OF_THE_FIVE_FORBIDDEN_WORDS",
+      "FORBIDDEN_SET_CONTAINS_OR_DOES_NOT_CONTAIN_EACH_OF_OTHER_ANYTHING_CAN_HELP",
+      "SELECTED_END_PHRASE_IS_ONE_OF_TWO_FIXED_PUBLIC_VALUES"
+    ],
+    "existence_keywords_removed_from_collision_state_reason": "CURRENT_REQUIRED_KEYWORD_CARRIER_APPENDS_LITERAL_x__ALL_1525_WORDS_ARE_ASCII_ALPHA__AND_NO_WORD_PLUS_x_IS_ITSELF_IN_THE_1525_VALUE_WORD_LIST__SO_NO_GENERATED_FORBIDDEN_WORD_CAN_EQUAL_A_REQUIRED_CARRIER_AS_A_WHOLE_WORD",
+    "conservative_signature_upper_bound": 320,
+    "upper_bound_derivation": "5_NTH_LEXICAL_CATEGORIES__TIMES_2_END_PHRASES__TIMES_2_POW_5_BOOLEAN_COLLISION_BITS__THE_BOUND_IS_INTENTIONALLY_NOT_MINIMIZED",
+    "nth_lexical_categories": [
+      "other",
+      "anything",
+      "can_or_help",
+      "one_of_remaining_end_irrelevant_values",
+      "end_relevant_category_split_may_be_refined"
+    ],
+    "note": "THE_320_BOUND_IS_A_SAFE_SCHEDULING_UPPER_BOUND_NOT_A_CLAIM_OF_320_REACHABLE_DISTINCT_SIGNATURES"
+  },
+  "exact_probability_diagnostics": {
+    "nth_plus_forbidden_collision_conditional_on_pair": 0.003278688524590164,
+    "first_end_phrase_plus_forbidden_collision_conditional_on_pair": 0.003278688524590123,
+    "second_end_phrase_plus_forbidden_collision_conditional_on_pair": 0.009810266079742336,
+    "equal_end_phrase_mean_conditional_collision": 0.0065444773021662295,
+    "authority": "DIAGNOSTIC_ONLY__NO_TERMINAL_FREQUENCY_INFERENCE"
+  },
+  "scheduler_delta": [
+    "DELETE_RAW_ENUMERATION_OVER_1525_WORD_IDENTITIES_AND_FIVE_WORD_COMBINATIONS_FROM_THE_UNIVERSAL_PROOF_PLAN",
+    "ENUMERATE_ONLY_CHECKER_RELEVANT_LEXICAL_COLLISION_SIGNATURES_PLUS_NUMERIC_AND_STRUCTURAL_SLOT_DOMAINS",
+    "FOR_EACH_SIGNATURE_REQUIRE_EITHER_AN_EXACT_PINNED_CHECKER_POSTVALIDATED_WITNESS_OR_A_CHECKER_SEMANTICS_UNSAT_CERTIFICATE",
+    "KEEP_ZERO_CREDIT_UNTIL_INDEPENDENT_PUBLIC_RUNNER_EXACT_BYTE_VERIFICATION"
+  ],
+  "next_action": "IMPLEMENT_THE_COLLISION_SIGNATURE_ENUMERATOR_AND_COMPOSE_IT_WITH_THE_EXISTING_SEVEN_ARCHETYPE_CONSTRUCTORS_AND_EXACT_PINNED_CHECKER_POSTVALIDATOR",
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROW_CONTENT_READ",
+    "NO_TERMINAL_CASE_FREQUENCY_INFERRED",
+    "NO_CLAIM_ALL_NONLEXICAL_SLOT_INTERACTIONS_ARE_SOLVED",
+    "NO_CLAIM_THE_320_UPPER_BOUND_IS_MINIMAL",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
