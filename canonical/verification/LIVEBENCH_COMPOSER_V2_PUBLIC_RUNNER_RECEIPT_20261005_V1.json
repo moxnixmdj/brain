@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_COMPOSER_V2_PUBLIC_RUNNER_RECEIPT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__INDEPENDENT_EXACT_PINNED_CHECKER_VERIFICATION__ZERO_TERMINAL_ROWS__ZERO_ACCEPTANCE_CREDIT_BY_ITSELF",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "composer_path": "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+    "composer_git_blob_sha": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+    "archetype_git_blob_sha": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
+    "verified_slot_feasibility_git_blob_sha": "a0885303a9c7088c4eb6f0510963069e35750f02"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2102,
+    "head_sha": "304ea161a3c365c5c53d842ea67fe87b6843dc05",
+    "merge_test_sha": "b913289565b85c361885bff25fcd0aa7bc6d5625",
+    "workflow_name": "Verify LiveBench composer V2",
+    "workflow_run_id": 37242531058,
+    "job_id": 111553921729,
+    "job_conclusion": "success",
+    "runner_os": "macOS 14.8.9",
+    "python": "3.12.10",
+    "artifact_id": 11317108771,
+    "artifact_name": "livebench-composer-v2-verification",
+    "artifact_zip_sha256": "dd7923e31a5a468f43443fc38638d7a75204c4e0688b7d1c37bb64fae5d4a5f4",
+    "artifact_expired": false
+  },
+  "pinned_public_semantics": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "nltk_version": "3.10.3"
+  },
+  "coverage": {
+    "exact_checker_cases": 12488,
+    "structural_id_sets": 928,
+    "structural_profiles_per_id_set": 4,
+    "public_word_identities_exhausted": 1525,
+    "word_threshold_cases": 802,
+    "paragraph_bullet_section_cross_cases": 250,
+    "nth_cross_cases": 60,
+    "candidate_witness_cases": 10959,
+    "candidate_witness_all_checker_pass": 10959,
+    "proved_unsat_cases": 1529,
+    "less_than_one_sentence_cases_in_this_frozen_receipt": 1
+  },
+  "receipt_status": "PASS__EXACT_PINNED_CHECKERS__ZERO_TERMINAL_ROWS",
+  "terminal_data_accounting": {
+    "terminal_rows_read": 0,
+    "terminal_kwargs_read": 0,
+    "terminal_instruction_id_lists_read": 0,
+    "target_scores_read": 0
+  },
+  "meaning": [
+    "THE_CURRENT_COMPOSER_BLOB_PASSED_10959_OF_10959_INDEPENDENT_EXACT_CHECKER_WITNESS_CASES_IN_THE_AUDITED_PUBLIC_DOMAIN_BASIS",
+    "THE_AUDIT_COVERS_ALL_928_CONFLICT_COMPATIBLE_ACTIVE15_ID_SETS_UNDER_FOUR_SLOT_PROFILES_AND_EXHAUSTIVE_PUBLIC_LEXICAL_WORD_IDENTITY_SWEEPS",
+    "THE_AUDIT_IS_CASE_INDEPENDENT_AND_DID_NOT_READ_THE_CONTAMINATED_TERMINAL_200_ROWS"
+  ],
+  "hard_nonclaims": [
+    "THIS_RECEIPT_ALONE_IS_NOT_A_FORMAL_PROOF_OF_THE_FULL_SLOT_CARTESIAN_PRODUCT",
+    "THE_FROZEN_RECEIPT_PREDATES_THE_SEPARATE_STRICT_SENTENCE_LT_ONE_UNSAT_CLOSURE",
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT_FROM_THIS_RECEIPT_ALONE",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_RECEIPT_ALONE"
+  ],
+  "next_proof": "BIND_THE_EXACT_192_LEXICAL_QUOTIENT_PLUS_NUMERIC_MONOTONICITY_PLUS_POINTWISE_NEXT_CARDINALITY_UNSAT_CERTIFICATES_TO_TURN_THIS_INDEPENDENT_CONSTRUCTOR_RECEIPT_INTO_A_DISTRIBUTION_FREE_POINTWISE_OPTIMALITY_CERTIFICATE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
