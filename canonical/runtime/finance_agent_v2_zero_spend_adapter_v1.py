@@ -216,3 +216,93 @@ def _restore_all(
     session_cls.post = original_post
     for client, original_search in tavily_restores:
         client.search = original_search
+
+
+def install_before_get_agent(
+    *,
+    get_agent_module: Any,
+    tools_module: Any,
+    snapshots: Mapping[str, Mapping[str, Any]],
+    outcome_observer: OutcomeObserver,
+) -> dict[str, Any]:
+    """
+    Install the zero-spend guard before invoking the unmodified first-party
+    finance_agent.get_agent.get_agent function.
+
+    The get_agent module constructs TavilyWebSearch from its module-global class.
+    Replacing only that class with a behavior-preserving guarded subclass lets the
+    original harness create the tool normally while ensuring every underlying
+    Tavily client.search attempt is guarded. SEC API and Tiingo remain covered at
+    their aiohttp request boundaries, below retry decorators.
+    """
+    state = AdapterState(snapshots=snapshots, outcome_observer=outcome_observer)
+    for provider_id in ("tavily", "sec_api", "tiingo"):
+        if provider_id not in snapshots:
+            raise guard.ZeroSpendBlocked("PROVIDER_ACCOUNT_SNAPSHOT_MISSING:" + provider_id)
+        guard.validate_account_snapshot(snapshots[provider_id], provider_id=provider_id)
+
+    original_tavily_cls = getattr(get_agent_module, "TavilyWebSearch", None)
+    if original_tavily_cls is None:
+        raise guard.ZeroSpendBlocked("GET_AGENT_TAVILY_CLASS_MISSING")
+
+    class GuardedTavilyWebSearch(original_tavily_cls):  # type: ignore[misc,valid-type]
+        def __init__(self, *args: Any, **kwargs: Any):
+            super().__init__(*args, **kwargs)
+            original_search = getattr(self.client, "search", None)
+            if original_search is None or not callable(original_search):
+                raise guard.ZeroSpendBlocked("TAVILY_SEARCH_BOUNDARY_MISSING")
+
+            async def guarded_search(*a: Any, **kw: Any) -> Any:
+                call_id = state.new_call_id("tavily")
+                state.authorize("tavily", call_id)
+                try:
+                    result = await original_search(*a, **kw)
+                except BaseException as exc:
+                    await state.observe("tavily", call_id, None, exc)
+                    raise
+                await state.observe("tavily", call_id, result, None)
+                return result
+
+            self.client.search = guarded_search
+
+    GuardedTavilyWebSearch.__name__ = getattr(original_tavily_cls, "__name__", "TavilyWebSearch")
+    GuardedTavilyWebSearch.__qualname__ = getattr(original_tavily_cls, "__qualname__", "TavilyWebSearch")
+    get_agent_module.TavilyWebSearch = GuardedTavilyWebSearch
+
+    session_cls = tools_module.aiohttp.ClientSession
+    original_get = session_cls.get
+    original_post = session_cls.post
+
+    def wrap_http(original: Callable[..., Any]) -> Callable[..., Any]:
+        def wrapped(session_self: Any, url: Any, *args: Any, **kwargs: Any) -> Any:
+            provider_id = _provider_for_url(url)
+            if provider_id is None:
+                return original(session_self, url, *args, **kwargs)
+            call_id = state.new_call_id(provider_id)
+            state.authorize(provider_id, call_id)
+            inner = original(session_self, url, *args, **kwargs)
+            return _GuardedRequestContext(inner, state, provider_id, call_id)
+        return wrapped
+
+    session_cls.get = wrap_http(original_get)
+    session_cls.post = wrap_http(original_post)
+
+    def restore() -> None:
+        session_cls.get = original_get
+        session_cls.post = original_post
+        get_agent_module.TavilyWebSearch = original_tavily_cls
+
+    return {
+        "schema": SCHEMA,
+        "status": "PASS__PRE_GET_AGENT_PROVIDER_BOUNDARIES_GUARDED",
+        "state": state,
+        "restore": restore,
+        "covered_boundaries": [
+            "get_agent_module.TavilyWebSearch->client.search",
+            "aiohttp.ClientSession.post@api.sec-api.io",
+            "aiohttp.ClientSession.get@api.tiingo.com",
+        ],
+        "incremental_spend_usd": 0,
+        "fresh_reality_authority": False,
+        "acceptance_credit_delta": 0,
+    }
