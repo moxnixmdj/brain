@@ -53,10 +53,11 @@ def _required_fragments(required: list[str], forbidden: list[str]) -> list[str]:
     out: list[str] = []
     for kw in required:
         # Existence is substring/regex search while forbidden is whole-word search.
-        # If an identical generated word appears in both sets, append a letter:
-        # the required regex still matches but the forbidden whole-word checker does not.
+        # If an identical generated word appears in both sets, append a digit.
+        # Generated forbidden terms are alphabetic, and a digit remains a regex word
+        # character, so the required substring survives without creating a boundary.
         if any(kw.lower() == w.lower() for w in forbidden):
-            out.append(kw + "x")
+            out.append(kw + "0")
         else:
             out.append(kw)
     return out
