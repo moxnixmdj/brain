@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_POST_LIVEBENCH_SCORE_PASS_DOMAIN_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__CURRENT_18_EQUALS_PRIOR_INDEPENDENTLY_VERIFIED_18_DOMAIN__SCHEDULING_ONLY__ZERO_NEW_REALITY",
+  "objective": "Prove that after objective closure of LIVEBENCH_IF_GE_65_7, the exact remaining Root2-touching domain equals the already independently verified 18-predicate post-LiveBench rebind domain, so route redesign is dominated.",
+  "inputs": {
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "prior_git_blob_sha": "3fd35b7865f7827a5a7b4202bc625fe0f980dcda"
+    },
+    "evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "52ae6bf931d124c641ea326c47f924136cb2aa67"
+    },
+    "livebench_qualification": {
+      "path": "canonical/verification/LIVEBENCH_EXACT200_DETERMINISTIC_PUBLIC_QUALIFICATION_20261004_V1.json",
+      "git_blob_sha": "22ac08ad456b440ddfb9b40dd38781aa70ea2579"
+    },
+    "prior_18_rebind": {
+      "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_V1.json",
+      "git_blob_sha": "8ccf5c09357e0d644a90af67dbcd18c3b5ce5925"
+    }
+  },
+  "recomputation": {
+    "proved_atomic": 13,
+    "unresolved_atomic": 25,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 15,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "root2_touching_count": 18,
+    "removed_predicate": "LIVEBENCH_IF_GE_65_7",
+    "removed_predicate_state": "PROVED__OBJECTIVE_PUBLIC_FIXED_BAR__84.40416666666667_GE_65.73775",
+    "exact_current_18": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "MYSTERYMECHANISM_GE_49_55",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "PROWORK_GDPVAL_GE_1846",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "exact_set_equality_with_prior_verified_18": true,
+    "current_minus_prior_verified_18": [],
+    "prior_verified_18_minus_current": []
+  },
+  "consequence": [
+    "DELETE_ROOT2_18_ROUTE_REDESIGN",
+    "REUSE_PRIOR_INDEPENDENTLY_VERIFIED_18_PREDICATE_ROUTE_DOMAIN_UNDER_NEW_CURRENT_BINDING",
+    "RECOMPUTE_MINIMUM_ZERO_REALITY_PASS_OR_FAIL_CERTIFICATE_CUT_OVER_ONLY_THE_REMAINING_18",
+    "PRESERVE_ROOT3_GATES_FOR_THREE_MIXED_PREDICATES",
+    "PRESERVE_FRESH_REALITY_BLOCK"
+  ],
+  "hard_nonclaims": [
+    "NO_ADDITIONAL_ACCEPTANCE_PREDICATE_IS_CLOSED_BY_DOMAIN_IDENTITY",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

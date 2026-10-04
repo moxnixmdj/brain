@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROOT_CAUSE_STATE_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__LIVEBENCH_FORCED_FAIL_REVOKED__ROOT1_ZERO__LIVEBENCH_REOPENED_ROOT2",
+  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__LIVEBENCH_FIXED_BAR_PROVED__ROOT1_ZERO__ROOT2_18_TOUCHING__13_OF_38_PROVED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_acceptance": {
     "accepted_families": 5,
     "open_families": 14,
-    "proved_atomic": 12,
-    "unresolved_atomic": 26,
+    "proved_atomic": 13,
+    "unresolved_atomic": 25,
     "total_families": 19,
     "total_atomic": 38,
     "terminal": false
@@ -496,7 +496,7 @@
       "root1_only_after": 0,
       "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json"
     },
-    "root2_current_touching_predicate_count": 19,
+    "root2_current_touching_predicate_count": 18,
     "root2_post_livebench_18_rebind": {
       "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
       "git_blob_sha": "f778e8eeb1295a03465a4cc6d49c3efab2ff80bb",
@@ -504,9 +504,14 @@
       "verification_git_blob_sha": "569fad34651f724d0746a09a3413a8ca7258d928",
       "status": "SUPERSEDED__LIVEBENCH_RETURNED_TO_ROOT2__19_PREDICATE_RECOMPUTE_REQUIRED"
     },
-    "root2_effective_scheduling_authority_source": "PENDING_19_PREDICATE_RECOMPUTE_AFTER_LIVEBENCH_FORCED_FAIL_REVOCATION",
-    "root2_effective_scheduling_scope": "PENDING_EXACT_CURRENT_19_ROOT2_TOUCHING_RECOMPUTE",
-    "root2_current_scheduling_compiler": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json"
+    "root2_effective_scheduling_authority_source": "canonical/governance/ROOT2_18_POST_LIVEBENCH_SCORE_PASS_REBIND_ACTIVATION_V1.json",
+    "root2_effective_scheduling_scope": "EXACT_CURRENT_18_ROOT2_TOUCHING_PREDICATES_AFTER_LIVEBENCH_FIXED_BAR_CLOSURE",
+    "root2_current_scheduling_compiler": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json",
+    "root2_post_livebench_score_pass_18_rebind": {
+      "activation_path": "canonical/governance/ROOT2_18_POST_LIVEBENCH_SCORE_PASS_REBIND_ACTIVATION_V1.json",
+      "verification_path": "canonical/verification/ROOT2_18_POST_LIVEBENCH_SCORE_PASS_DOMAIN_CONNECTOR_VERIFICATION_20261004_V1.json",
+      "status": "CURRENT_18_PREDICATE_SCHEDULING_REBIND_AFTER_OBJECTIVE_LIVEBENCH_PASS"
+    }
   },
   "accounting": {
     "acceptance_credit_delta": 0,
@@ -523,16 +528,17 @@
     },
     "evidence": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5",
+      "git_blob_sha": "52ae6bf931d124c641ea326c47f924136cb2aa67",
       "pointer_reconciliation": {
-        "status": "RECONCILED_TO_CURRENT_12_PROVED_26_UNRESOLVED_LEDGER",
-        "previous_stale_git_blob_sha": "f99b00e6dca735ffa7a790a414155b4f69856cf0",
-        "acceptance_credit_delta": 0
+        "status": "RECONCILED_TO_CURRENT_13_PROVED_25_UNRESOLVED_LEDGER__LIVEBENCH_FIXED_BAR_PROVED",
+        "previous_stale_git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5",
+        "acceptance_predicate_credit_delta": 1,
+        "family_credit_delta": 0
       }
     },
-    "unresolved_total": 26,
+    "unresolved_total": 25,
     "root1_positive_gap_count": 0,
-    "root2_only_count": 16,
+    "root2_only_count": 15,
     "root3_only_count": 7,
     "root2_and_root3_count": 3,
     "root2_only": [
@@ -545,7 +551,6 @@
       "FINANCE_ACCOUNTING_INDEX_GE_61",
       "FINANCE_AGENT_V2_GE_58_59",
       "HLE_TOOLS_GE_67_7",
-      "LIVEBENCH_IF_GE_65_7",
       "MYSTERYMECHANISM_GE_49_55",
       "OSWORLD_2_1_PARTIAL_GE_81_8",
       "PROWORK_AA_BRIEFCASE_GE_1822",
@@ -581,12 +586,14 @@
     "root1_only_count": 0,
     "root1_only": [],
     "livebench_root_transition": {
-      "before": "ROOT1_ONLY_POSITIVE_OPERATIVE_GAP",
-      "after": "ROOT2_ONLY__MEASUREMENT_OR_COMPARATOR_UNCERTAINTY",
-      "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
-      "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
-      "reason": "UNSOUND_64_PERCENT_UPPER_BOUND_REVOKED",
-      "acceptance_credit_delta": 0
+      "before": "ROOT2_ONLY__MEASUREMENT_OR_COMPARATOR_UNCERTAINTY",
+      "after": "PROVED__OBJECTIVE_PUBLIC_FIXED_BAR__REMOVED_FROM_UNRESOLVED_FRONTIER",
+      "qualification_path": "canonical/verification/LIVEBENCH_EXACT200_DETERMINISTIC_PUBLIC_QUALIFICATION_20261004_V1.json",
+      "qualification_git_blob_sha": "22ac08ad456b440ddfb9b40dd38781aa70ea2579",
+      "exact_score_percent": 84.40416666666667,
+      "comparator_floor_percent": 65.73775,
+      "acceptance_predicate_credit_delta": 1,
+      "family_credit_delta": 0
     }
   },
   "root3_current_execution_state": {
@@ -641,23 +648,37 @@
     "workflow_run_id": 37168503920
   },
   "root_partition_transport": {
-    "status": "ACTIVE_POST_REVOCATION_19_ROOT2_DAG_REBIND__EXACT_DOMAIN_IDENTITY_PASS__ZERO_ACCEPTANCE_CREDIT",
-    "source_root_git_blob_sha": "c3d1e25e2268cce90df545a93f107aa24fed8f8b",
-    "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
-    "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
-    "acceptance_counts_unchanged": true,
-    "new_acceptance_credit": 0,
+    "status": "ACTIVE_POST_LIVEBENCH_SCORE_PASS_18_ROOT2_REBIND__EXACT_DOMAIN_IDENTITY_PASS",
+    "prior_root_git_blob_sha": "3fd35b7865f7827a5a7b4202bc625fe0f980dcda",
+    "evidence_ledger_git_blob_sha": "52ae6bf931d124c641ea326c47f924136cb2aa67",
+    "acceptance_counts_changed": true,
+    "acceptance_predicate_credit_delta": 1,
+    "family_credit_delta": 0,
     "effective_partition": {
       "root1_positive_gap_count": 0,
-      "root2_only_count": 16,
+      "root2_only_count": 15,
       "root3_only_count": 7,
       "root2_and_root3_count": 3,
-      "root2_touching_count": 19,
-      "unresolved_total": 26
+      "root2_touching_count": 18,
+      "unresolved_total": 25
     },
     "scheduling_authority": true,
-    "next_required": "COMPILE_CURRENT_EVIDENCE_DELTAS_INTO_REACTIVATED_OUTPUT_ONLY_DAG_AND_SOLVE_MINIMUM_ZERO_REALITY_PASS_OR_FAIL_CERTIFICATE_CUT",
-    "verification_path": "canonical/verification/ROOT2_19_POST_REVOCATION_DAG_CONNECTOR_VERIFICATION_20261004_V1.json",
-    "activation_path": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json"
+    "next_required": "SOLVE_EXACT_MINIMUM_ZERO_REALITY_PASS_OR_FAIL_CERTIFICATE_CUT_OVER_REMAINING_18_ROOT2_TOUCHING_PREDICATES",
+    "verification_path": "canonical/verification/ROOT2_18_POST_LIVEBENCH_SCORE_PASS_DOMAIN_CONNECTOR_VERIFICATION_20261004_V1.json",
+    "activation_path": "canonical/governance/ROOT2_18_POST_LIVEBENCH_SCORE_PASS_REBIND_ACTIVATION_V1.json",
+    "current_seal_path": "canonical/governance/POST_LIVEBENCH_SCORE_PASS_CURRENT_ROOT_SEAL_V1.json"
+  },
+  "livebench_fixed_bar_closure": {
+    "status": "PROVED__OBJECTIVE_PUBLIC_FIXED_BAR__ZERO_MODEL__ZERO_HIDDEN_OR_FRESH_TERMINAL_CASES",
+    "predicate_id": "LIVEBENCH_IF_GE_65_7",
+    "evidence_path": "canonical/verification/LIVEBENCH_EXACT200_DETERMINISTIC_PUBLIC_QUALIFICATION_20261004_V1.json",
+    "evidence_git_blob_sha": "22ac08ad456b440ddfb9b40dd38781aa70ea2579",
+    "exact_score_percent": 84.40416666666667,
+    "comparator_floor_percent": 65.73775,
+    "family_still_open": true,
+    "family_remaining_predicates": [
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+    ]
   }
 }

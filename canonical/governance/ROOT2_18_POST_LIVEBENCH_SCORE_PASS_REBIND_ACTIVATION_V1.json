@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_POST_LIVEBENCH_SCORE_PASS_REBIND_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__EXACT_CURRENT_18_DOMAIN_IDENTITY_PASS__REUSES_PRIOR_VERIFIED_18_ROUTES__SCHEDULING_ONLY__ZERO_NEW_REALITY",
+  "objective": "Make the exact 18 Root2-touching predicates remaining after LiveBench fixed-bar closure the current scheduling domain without recomputing already verified route semantics.",
+  "current_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 13,
+    "unresolved_atomic": 25,
+    "root1_positive_gap_count": 0,
+    "root2_only": 15,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "root2_touching": 18
+  },
+  "removed": {
+    "predicate": "LIVEBENCH_IF_GE_65_7",
+    "state": "PROVED",
+    "qualification_path": "canonical/verification/LIVEBENCH_EXACT200_DETERMINISTIC_PUBLIC_QUALIFICATION_20261004_V1.json",
+    "score_percent": 84.40416666666667,
+    "comparator_floor_percent": 65.73775
+  },
+  "reused_route_authority": {
+    "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_V1.json",
+    "git_blob_sha": "8ccf5c09357e0d644a90af67dbcd18c3b5ce5925",
+    "exact_domain": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "MYSTERYMECHANISM_GE_49_55",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "PROWORK_GDPVAL_GE_1846",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "TB_SCIENCE_GE_58_7"
+    ]
+  },
+  "current_domain_verification": {
+    "path": "canonical/verification/ROOT2_18_POST_LIVEBENCH_SCORE_PASS_DOMAIN_CONNECTOR_VERIFICATION_20261004_V1.json",
+    "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__EXACT_SET_EQUALITY"
+  },
+  "scheduling_effect": [
+    "LIVEBENCH_IF_GE_65_7_REMOVED_FROM_ROOT2_WORK",
+    "SCHEDULE_ONLY_THE_REMAINING_18",
+    "STOP_EACH_AT_FIRST_SOUND_PASS_OR_FAIL_CERTIFICATE",
+    "RECOMPUTE_MINIMUM_CUT_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "next": "SOLVE_AND_EXECUTE_THE_MINIMUM_ZERO_REALITY_PASS_OR_FAIL_CERTIFICATE_CUT_OVER_THE_REMAINING_18__ROOT3_EVENT_DRIVEN_ONLY__FRESH_REALITY_STILL_BLOCKED",
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

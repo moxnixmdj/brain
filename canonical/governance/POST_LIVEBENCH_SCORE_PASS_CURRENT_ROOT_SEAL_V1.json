@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_POST_LIVEBENCH_SCORE_PASS_CURRENT_ROOT_SEAL_V1",
+  "date": "2026-10-04",
+  "status": "CURRENT__LIVEBENCH_FIXED_BAR_PROVED__ROOT1_ZERO__ROOT2_18_TOUCHING__13_OF_38_PROVED__ZERO_FAMILY_OR_OWNERSHIP_CREDIT_FROM_SCORE_ONLY_RESULT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes_for_current_scheduling": [
+    "canonical/governance/POST_LIVEBENCH_ROOT1_REVOCATION_CURRENT_ROOT_SEAL_V1.json",
+    "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json"
+  ],
+  "exact_current_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 13,
+    "unresolved_atomic": 25,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false,
+    "root1_positive_gap_count": 0,
+    "root1_only": 0,
+    "root2_only": 15,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "root2_touching": 18
+  },
+  "livebench": {
+    "predicate": "LIVEBENCH_IF_GE_65_7",
+    "state": "PROVED__REMOVED_FROM_UNRESOLVED_FRONTIER",
+    "score_percent": 84.40416666666667,
+    "exact_opus_comparator_floor_percent": 65.73775,
+    "qualification_path": "canonical/verification/LIVEBENCH_EXACT200_DETERMINISTIC_PUBLIC_QUALIFICATION_20261004_V1.json",
+    "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "family_still_open_on": [
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+    ]
+  },
+  "root2_rebind": {
+    "activation_path": "canonical/governance/ROOT2_18_POST_LIVEBENCH_SCORE_PASS_REBIND_ACTIVATION_V1.json",
+    "verification_path": "canonical/verification/ROOT2_18_POST_LIVEBENCH_SCORE_PASS_DOMAIN_CONNECTOR_VERIFICATION_20261004_V1.json",
+    "remaining_predicates": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "MYSTERYMECHANISM_GE_49_55",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "PROWORK_GDPVAL_GE_1846",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "TB_SCIENCE_GE_58_7"
+    ]
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_predicate_credit_delta": 1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
