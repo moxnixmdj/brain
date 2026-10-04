@@ -25,9 +25,11 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout exact frozen Brain candidate tree
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          ref: d5de4f5808dced840da34d051e3f9a5ff06e2e54
+          fetch-depth: 1
 
       - uses: actions/setup-python@v5
         with:
@@ -53,6 +55,9 @@ jobs:
               "paid_external_model_or_api_used":False,
               "runner":"ubuntu-24.04",
               "python_version":"3.12",
+              "candidate_commit":"d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+              "candidate_tree":"fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+              "checkout_policy":"EXACT_FROZEN_CANDIDATE_TREE__NO_CURRENT_MAIN_RUNTIME_BYTES",
           }
           expected={
               "canonical/runtime/astra_runtime.py":"7f5d16b1db69cb620954bc778e0ba6e15e687b75",
@@ -61,6 +66,14 @@ jobs:
           }
           observed={}
           try:
+              head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+              tree=subprocess.check_output(["git","rev-parse","HEAD^{tree}"],text=True).strip()
+              receipt["observed_candidate_commit"]=head
+              receipt["observed_candidate_tree"]=tree
+              if head!="d5de4f5808dced840da34d051e3f9a5ff06e2e54":
+                  raise RuntimeError("FROZEN_CANDIDATE_COMMIT_MISMATCH:"+head)
+              if tree!="fd39e966d4686c7317b9a1558b360eb0c58ad76f":
+                  raise RuntimeError("FROZEN_CANDIDATE_TREE_MISMATCH:"+tree)
               for path,want in expected.items():
                   got=subprocess.check_output(
                       ["git","rev-parse","HEAD:"+path],text=True
