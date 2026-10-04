@@ -30,7 +30,7 @@ jobs:
           : > /tmp/unknown-domain-v2-universal-proof.log
           python -m pytest -q canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py >> /tmp/unknown-domain-v2-universal-proof.log 2>&1
           s1=$?
-          python canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py > /tmp/unknown-domain-v2-universal-proof.json 2>> /tmp/unknown-domain-v2-universal-proof.log
+          python -m canonical.runtime.unknown_domain_direct_v2_universal_proof_v1 > /tmp/unknown-domain-v2-universal-proof.json 2>> /tmp/unknown-domain-v2-universal-proof.log
           s2=$?
           python - <<'PY' >> /tmp/unknown-domain-v2-universal-proof.log 2>&1
           import json
