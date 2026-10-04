@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_CONDITIONAL__POINT_OF_USE_ZERO_CASE_VERIFY_THEN_ONE_EPOCH_SANITIZED_REPLAY72__ZERO_CREDIT",
+  "status": "FAIL_CLOSED__ENVIRONMENT_EQUIVALENCE_REPAIRED__ATOMIC_ONE_USE_CLAIM_NOT_YET_BOUND__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "candidate": {
     "path": "canonical/governance/LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_CANDIDATE.json",
@@ -44,15 +44,15 @@
     "verifier_failure_aborts_before_terminal_dataset_read": true
   },
   "authority": {
-    "execution": true,
-    "replay_existing_prefix": true,
+    "execution": false,
+    "replay_existing_prefix": false,
     "predicate_local_fresh_reality": false,
     "new_case_exposure": false,
     "global_fresh_reality": false,
     "promotion": false,
     "acceptance_credit": false,
     "root1_reopen": false,
-    "condition": "EFFECTIVE_ONLY_IF_PUBLIC_GITHUB_RUNNER_EXACT_BLOB_CHECKS_PASS_AND_POINT_OF_USE_ZERO_CASE_VERIFIER_EXITS_0_BEFORE_DATASET_READ"
+    "condition": "NO_EXECUTION_UNTIL_CURRENT_ROOT_ATOMIC_ONE_USE_HOLD_IS_DISCHARGED_BY_EXACT_V7_LAUNCHER_BINDING_AND_FIRST_CREATE_HTTP_201"
   },
   "post_execution_required": [
     "BIND_EXACT_EXECUTION_RECEIPT",
@@ -92,5 +92,21 @@
   "pending_redundant_external_verification_run": {
     "run_id": 37192715453,
     "status": "QUEUED_NOT_REQUIRED_FOR_CONDITIONAL_POINT_OF_USE_AUTHORITY"
+  },
+  "authority_reconciliation": {
+    "root_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_git_blob_sha": "39151186bafcea39154dbb5a2b5c37814e706f7b",
+    "root_hold_status": "ACTIVE_FAIL_CLOSED__V7_EXECUTION_SUSPENDED_PENDING_GLOBALLY_LINEARIZED_ATOMIC_ONE_USE_CLAIM",
+    "conflict_detected": "ACTIVATION_EXECUTION_TRUE_CONTRADICTED_ROOT_EXECUTION_FALSE",
+    "precedence_rule": "CURRENT_TERMINAL_ROOT_FAIL_CLOSED_HOLD_DOMINATES_LOCAL_ACTIVATION",
+    "requirements_before_reenable": [
+      "INDEPENDENT_PUBLIC_RUNNER_PASS_FOR_GENERIC_ATOMIC_ONE_USE_EXECUTION_CLAIM",
+      "V7_LAUNCHER_BINDS_EXACT_ATOMIC_CLAIM_RECEIPT",
+      "FIRST_CREATE_HTTP_201_BEFORE_CASE_READ_OR_EXECUTION",
+      "DUPLICATE_OR_ANY_NON_201_FAILS_CLOSED",
+      "POINT_OF_USE_ENVIRONMENT_EQUIVALENCE_VERIFIER_PASS"
+    ],
+    "terminal_cases_consumed_by_this_reconciliation": 0,
+    "acceptance_credit_delta": 0
   }
 }
