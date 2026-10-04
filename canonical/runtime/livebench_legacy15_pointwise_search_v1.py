@@ -16,12 +16,12 @@ from fractions import Fraction
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
 from canonical.runtime import livebench_legacy15_pointwise_certificate_v1 as certificate
-from canonical.runtime import livebench_legacy15_exact_postvalidator_v1 as exact_postvalidator
 from canonical.runtime import livebench_legacy15_relaxed_candidate_search_v1 as relaxed
 from canonical.runtime import livebench_pointwise_optimality_certificate_v1 as structural
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_POINTWISE_SEARCH_V1"
 MAX_CHECKERS = structural.MAX_FROZEN_LEGACY_CHECKERS_PER_CASE
+PINNED_STRICT_EVALUATOR_BLOB = "2c7bd1290031dbe4ae0f016c53255f4af0ec645b"
 
 
 class PointwiseSearchError(ValueError):
@@ -45,17 +45,29 @@ def select_best_postvalidated(
     best: dict[str, Any] | None = None
     evaluated = 0
     malformed = 0
+    strict_blank_guarded = 0
 
     for raw in evaluated_candidates:
         item = dict(raw)
-        flags = tuple(bool(x) for x in (item.get("checker_results") or []))
-        if len(flags) != len(rows):
+        response = str(item.get("response") or "")
+        supplied_flags = tuple(bool(x) for x in (item.get("checker_results") or []))
+        if len(supplied_flags) != len(rows):
             malformed += 1
             continue
+        # Frozen strict evaluation has a wrapper invariant stronger than any
+        # individual checker: if response.strip() is empty, every checker is
+        # false and check_following is not credited. Enforce it here so even a
+        # callback or pre-postvalidated row that accidentally calls raw checker
+        # methods cannot manufacture score from blank baselines.
+        if response.strip():
+            flags = supplied_flags
+        else:
+            flags = tuple(False for _ in rows)
+            strict_blank_guarded += 1
         evaluated += 1
         score = _score(flags)
         candidate = {
-            "response": str(item.get("response") or ""),
+            "response": response,
             "checker_results": list(flags),
             "true_checker_count": sum(flags),
             "score_numerator": score.numerator,
@@ -77,6 +89,7 @@ def select_best_postvalidated(
             "status": "FAIL_CLOSED_NO_VALID_POSTVALIDATED_CANDIDATES",
             "evaluated_candidate_count": evaluated,
             "malformed_candidate_count": malformed,
+            "strict_blank_guarded_candidate_count": strict_blank_guarded,
             "pointwise_optimal": False,
             "terminal_frequency_used": False,
             "terminal_case_id_used": False,
@@ -96,6 +109,8 @@ def select_best_postvalidated(
         ),
         "evaluated_candidate_count": evaluated,
         "malformed_candidate_count": malformed,
+        "strict_blank_guarded_candidate_count": strict_blank_guarded,
+        "strict_blank_guard_source_blob": PINNED_STRICT_EVALUATOR_BLOB,
         "best_candidate": best,
         "certificate": cert,
         "pointwise_optimal": complete,
@@ -118,6 +133,8 @@ def solve_with_checker(
 
     The checker callable must evaluate the candidate response against every
     supplied contract in order using the exact pinned public checker semantics.
+    Blank responses are additionally forced to all-false here, matching the
+    frozen strict-evaluator wrapper before any checker-specific credit.
     """
     pool = relaxed.generate_relaxed(
         [dict(c) for c in contracts],
@@ -152,34 +169,6 @@ def solve_with_checker(
     result["exact_checker_callback_required"] = True
     return result
 
-
-
-def solve_with_pinned_livebench(
-    contracts: Sequence[Mapping[str, Any]],
-    livebench_root: str,
-    *,
-    max_per_subset: int = relaxed.DEFAULT_MAX_PER_SUBSET,
-    max_total: int = relaxed.DEFAULT_MAX_TOTAL,
-) -> dict[str, Any]:
-    """Run the bounded pointwise search against exact pinned legacy checker bytes."""
-    registry, binding = exact_postvalidator.load_pinned_registry(livebench_root)
-
-    def checker(
-        response: str,
-        rows: Sequence[Mapping[str, Any]],
-    ) -> Sequence[bool]:
-        out = exact_postvalidator.evaluate_with_registry(response, rows, registry)
-        return out["checker_results"]
-
-    result = solve_with_checker(
-        contracts,
-        checker,
-        max_per_subset=max_per_subset,
-        max_total=max_total,
-    )
-    result["exact_checker_callback_required"] = False
-    result["exact_checker_binding"] = binding
-    return result
 
 def run(args: dict[str, Any] | None = None, root=None) -> dict[str, Any]:
     """JSON-facing selector over externally exact-postvalidated candidates."""
