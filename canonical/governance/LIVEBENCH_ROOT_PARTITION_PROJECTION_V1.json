@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT_PARTITION_PROJECTION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_ROOT_PARTITION_DELTA__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "source_root_state": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "36ac53134b123cfed7e63c31a871a30f9b4579e4"
+  },
+  "source_reclassification": {
+    "path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+    "git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684"
+  },
+  "independent_classification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/livebench-local-root1-20261004",
+    "head_sha": "5c4faae20a94ceeac2447c8a4f389087d59b454f",
+    "workflow_run_id": 37196376134,
+    "workflow_job_id": 111419008329,
+    "conclusion": "success"
+  },
+  "before": {
+    "unresolved_total": 26,
+    "root1_only_count": 0,
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "root2_only": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "LIVEBENCH_IF_GE_65_7",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "MYSTERYMECHANISM_GE_49_55",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+    ],
+    "root3_only": [
+      "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "VISION_DENSE_NONCHART_SCOPE",
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+    ],
+    "root2_and_root3": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+    ],
+    "root1_positive_gap_count": 0
+  },
+  "after": {
+    "unresolved_total": 26,
+    "root1_only_count": 1,
+    "root2_only_count": 15,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "root1_only": [
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "root2_only": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "MYSTERYMECHANISM_GE_49_55",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+    ],
+    "root3_only": [
+      "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "VISION_DENSE_NONCHART_SCOPE",
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+    ],
+    "root2_and_root3": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+    ],
+    "root1_positive_gap_count": 1
+  },
+  "invariants": {
+    "unresolved_total_unchanged": true,
+    "accepted_families_unchanged": true,
+    "proved_atomic_unchanged": true,
+    "terminal_remains_false": true,
+    "partition_sum_after": 26,
+    "livebench_removed_from_root2_only": true,
+    "livebench_added_to_root1_only": true,
+    "root3_partition_unchanged": true,
+    "no_acceptance_credit": true
+  },
+  "semantic_effect": "MEASUREMENT_UNCERTAINTY_FOR_THE_EXACT_FROZEN_LIVEBENCH_CANDIDATE_IS_RESOLVED_NEGATIVELY; THE UNSATISFIED PREDICATE REMAINS AN ACCEPTANCE BLOCKER BUT IS NOW A POSITIVE OPERATIVE ROOT1 GAP.",
+  "hard_rules": [
+    "DO_NOT_DECREMENT_UNRESOLVED_ACCEPTANCE_COUNT",
+    "DO_NOT_INCREMENT_PROVED_ACCEPTANCE_COUNT",
+    "DO_NOT_GRANT_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "ROOT1_GAP_SCOPE_IS_LIVEBENCH_EXACT_FROZEN_SYSTEM_ONLY",
+    "FAIL_CLOSED_IF_SOURCE_ROOT_STATE_BLOB_DRIFTS_BEFORE_TRANSPORT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
