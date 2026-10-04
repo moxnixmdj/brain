@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PROMPT_ONLY_OVERLAP_COMPOSER_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PROMPT_ONLY_PUBLIC_12_OF_12_EXACT_SCORE_PASS__MIXED_CONSTRAINT_COMPOSITION_INCLUDED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_instruction": "ratio:overlap",
+  "objective": "Eliminate both exact raw reference lookup and a separate pre-extracted normalized-reference input for the pinned public ratio-overlap family by parsing the visible public constraint grammar and constructing a whitespace-free exact-score witness directly from the prompt.",
+  "builds_on": {
+    "whitespace_invariant_reduction": "canonical/governance/LIVEBENCH_NGRAM_WHITESPACE_INVARIANT_REDUCTION_V1.json",
+    "whitespace_invariant_runtime": "canonical/runtime/livebench_ngram_whitespace_invariant_compiler_v1.py",
+    "public_parameter_truth_repair": "canonical/governance/LIVEBENCH_PUBLIC_PROMPT_PARAMETER_DERIVABILITY_TRUTH_REPAIR_V1.json"
+  },
+  "pinned_public_sources": {
+    "ifbench_repository": "allenai/IFBench",
+    "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "ifbench_test_path": "data/IFBench_test.jsonl",
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "livebench_checker_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "constructive_result": {
+    "constructor_input": ["VISIBLE_PROMPT_ONLY"],
+    "public_ratio_overlap_rows": 12,
+    "prompt_only_witnesses_found": 12,
+    "official_raw_reference_scores_inside_requested_plus_minus_2_band": 12,
+    "robust_predicted_score_exactly_equal_to_official_raw_reference_score": 12,
+    "supported_public_mixed_constraint_rows": {
+      "ratio_overlap_only": 5,
+      "ratio_overlap_plus_sentence_keyword": 4,
+      "ratio_overlap_plus_consonant_cluster": 3
+    },
+    "mixed_constraint_passes": 7,
+    "failures": 0,
+    "new_terminal_cases_exposed": 0
+  },
+  "construction_theorem": {
+    "reference_surface": "Remove only recognized public constraint-description templates from the visible prompt, delete format-only zero-width separators, then collapse whitespace.",
+    "response_design": "Concatenate non-whitespace substrings of the recovered reference surface with unique private-use separators; encode sentence scaffolding and filler with unique private-use characters absent from the reference surface.",
+    "score_invariance": "Every response trigram containing a private-use character is a guaranteed miss. Every remaining response trigram is whitespace-free, so membership in the raw reference is invariant under whitespace-run variation and equals membership in the normalized reference surface.",
+    "ratio_control": "Increase guaranteed-hit seed trigrams with reference substrings and increase guaranteed-miss denominator mass with unique private-use filler until the exact score falls inside the visible plus-minus-2-percent interval."
+  },
+  "delta_over_prior_candidate": [
+    "REMOVES_SEPARATE_NORMALIZED_REFERENCE_ARGUMENT_FOR_THE_SUPPORTED_PUBLIC_RATIO_OVERLAP_GRAMMAR",
+    "HANDLES_THE_PUBLIC_SENTENCE_KEYWORD_COMBINATIONS_INSTEAD_OF_RATIO_OVERLAP_IN_ISOLATION",
+    "HANDLES_THE_PUBLIC_CONSONANT_CLUSTER_COMBINATIONS_INSTEAD_OF_RATIO_OVERLAP_IN_ISOLATION",
+    "PUBLIC_12_OF_12_RECOMPUTATION_USES_PROMPT_ONLY_FOR_CONSTRUCTION_AND_USES_HIDDEN_PUBLIC_KWARGS_ONLY_AFTERWARD_AS_A_FALSIFICATION_GRADER"
+  ],
+  "runtime": {
+    "path": "canonical/runtime/livebench_prompt_only_overlap_composer_v1.py",
+    "test_path": "canonical/tests/test_livebench_prompt_only_overlap_composer_v1.py",
+    "behavior": "FAIL_CLOSED_IF_VISIBLE_PROMPT_DOES_NOT_MATCH_THE_EXACT_SUPPORTED_PUBLIC_SUBGRAMMAR_OR_NO_DETERMINISTIC_WITNESS_EXISTS"
+  },
+  "remaining_load_bearing_obligations": [
+    "INDEPENDENTLY_RECOMPUTE_THE_12_OF_12_PROMPT_ONLY_RESULT_FROM_PINNED_PUBLIC_BYTES",
+    "PROVE_THE_FROZEN_TERMINAL_LIVEBENCH_RATIO_OVERLAP_ROWS_USE_A_PROMPT_CONSTRUCTION_SEMANTICS_COVERED_BY_THIS_PUBLIC_SUBGRAMMAR_OR_A_SCOPE_SAFE_STRONGER_BINDING",
+    "GENERALIZE_OR_FAIL_CLOSED_FOR_ANY TERMINAL_RATIO_OVERLAP COMBINATION OUTSIDE THE THREE SUPPORTED PUBLIC FORMS",
+    "COMPOSE_WITH_THE_REST_OF_THE_83_TYPE_PUBLIC_GRAMMAR BEFORE CLAIMING FULL LIVEBENCH SUCCESSOR COVERAGE",
+    "FREEZE_AND_INDEPENDENTLY_VERIFY_A FULL SUCCESSOR BEFORE ANY NEW TERMINAL CASE EXPOSURE"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_CLOSE_LIVEBENCH_IF_GE_65_7",
+    "DOES_NOT_PROVE_THE_FROZEN_200_TERMINAL_CASE_POPULATION_EQUALS_THE_PUBLIC_300_ROW_IFBENCH_POPULATION",
+    "DOES_NOT_GRANT_EXECUTION_PROMOTION_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "DOES_NOT_USE_UNEXPOSED_TERMINAL_PROMPT_CONTENT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
