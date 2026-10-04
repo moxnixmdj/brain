@@ -69,3 +69,37 @@ def test_full_score_needs_no_unsat_certificate():
     result = certify(contracts, [True, True])
     assert result["pointwise_optimal"] is True
     assert result["required_next_cardinality_subset_count"] == 0
+
+
+def test_sentence_end_unsat_makes_one_of_two_pointwise_optimal():
+    contracts = [
+        {
+            "instruction_id": "length_constraints:number_sentences",
+            "slots": {"num_sentences": 1, "relation": "less than"},
+        },
+        {
+            "instruction_id": "startend:end_checker",
+            "slots": {"end_phrase": "Any other questions?"},
+        },
+    ]
+    result = certify(contracts, [False, True])
+    assert result["pointwise_optimal"] is True
+    assert result["required_next_cardinality_subset_count"] == 1
+    assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in result["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
+
+
+def test_section_forbidden_unsat_makes_one_of_two_pointwise_optimal():
+    contracts = [
+        {
+            "instruction_id": "detectable_format:multiple_sections",
+            "slots": {"section_spliter": "Section", "num_sections": 3},
+        },
+        {
+            "instruction_id": "keywords:forbidden_words",
+            "slots": {"forbidden_words": ["section"]},
+        },
+    ]
+    result = certify(contracts, [True, False])
+    assert result["pointwise_optimal"] is True
+    assert result["required_next_cardinality_subset_count"] == 1
+    assert "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:section" in result["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
