@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_UNIVERSAL_SCOPE_REDUCTION_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_STRONGER_ZERO_REALITY_DISCHARGE__INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "current_authority": {
+    "acceptance_binding_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "acceptance_binding_git_blob_sha": "c16ba4071525afb12e3d025d056c8bb2bd182019",
+    "current_state": "EXTERNAL_BLOCKED",
+    "current_discharge_condition": "RUN_AND_INDEPENDENTLY_VERIFY_ONLY_THE_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_ORACLE_LEAVES__NO_SOURCE_ADMISSION_WORK_REMAINS",
+    "scope_authority_path": "canonical/governance/POST_SOURCE_GATE_ROOT1_RECLASSIFICATION_V1.json",
+    "scope_authority_git_blob_sha": "963127da19fae1f6dd7478d43076d8d9bd026c9a",
+    "frozen_scope": "TWO_FROZEN_INFORMATION_SAFE_DIRECT_ORACLE_LEAVES"
+  },
+  "stronger_discharge": {
+    "proof_path": "canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py",
+    "proof_git_blob_sha": "2400dba7f763fc16dc65c31512ccd9eee8be82fb",
+    "proof_test_path": "canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py",
+    "proof_test_git_blob_sha": "e0a0436cf7bdb190a8228ca511e0a37d5a6947f0",
+    "verifier_workflow_path": ".github/workflows/verify-unknown-domain-direct-v2-universal-proof-v1.yml",
+    "verifier_workflow_git_blob_sha": "ca6f9a47589976883f8e8d765d4b7ed4c0526e57",
+    "theorem": "FOR_EVERY_POPULATION_THE_EXACT_FROZEN_V2_GENERATOR_CAN_EMIT_UNDER_ITS_VALID_INPUT_DOMAIN__THE_EXACT_FROZEN_V2_CANDIDATE_THROUGH_THE_EXACT_FROZEN_HARNESS_RECEIVES_PASS_FROM_THE_EXACT_FROZEN_SCORER_ON_ALL_27_CASES",
+    "logical_effect": "A_SUCCESSFUL_CONTENT_BOUND_PUBLIC_RUNNER_VERIFICATION_SUPPLIES_UNIVERSAL_FORMAL_SCOPE_EVIDENCE_STRONGER_THAN_ONE_FINITE_FRESH_PRODUCTION_POPULATION_FOR_THIS_EXACT_FROZEN_PROTOCOL",
+    "production_execution_information_gain_if_verified": 0,
+    "predicate_local_fresh_reality_required_if_verified": false
+  },
+  "exact_execution_subject_blobs": {
+    "candidate_v1": "a2a77269a8175ce315b466035049da0f761b8734",
+    "candidate_v2": "4470716f95a559a700e461262df909ae19a41651",
+    "generator_v1": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "generator_v2": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "hidden_scorer": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "execution_harness": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+  },
+  "reduction_rule": [
+    "DO_NOT_PROMOTE_FROM_THIS_CANDIDATE_ALONE",
+    "IF_AND_ONLY_IF_THE_DEDICATED_PUBLIC_RUNNER_VERIFIES_THE_EXACT_PROOF_TEST_WORKFLOW_AND_BOUND_EXECUTION_SUBJECTS__RECLASSIFY_THE_PREDICATE_USING_UNIVERSAL_FORMAL_SCOPE_PROOF_INSTEAD_OF_FINITE_FRESH_EXECUTION",
+    "KEEP_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_OUTSIDE_THE_FROZEN_PROTOCOL_EXPLICITLY_OUT_OF_SCOPE",
+    "DO_NOT_CONSUME_THE_ARMED_ONE_USE_PRODUCTION_POPULATION_WHILE_A_ZERO_REALITY_STRONGER_PROOF_CAN_DISCHARGE_THE_SAME_FROZEN_SCOPE"
+  ],
+  "proposed_verified_consequence": {
+    "predicate_state": "PROVED",
+    "proof_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "independent_or_objective": true,
+    "scope_complete": true,
+    "family": "UNKNOWN_DOMAIN_ADAPTATION",
+    "acceptance_credit_delta": 1,
+    "fresh_reality_units_consumed": 0,
+    "production_cases_consumed": 0
+  },
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false,
+    "independent_verification_required": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
