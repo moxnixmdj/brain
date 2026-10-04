@@ -1,5 +1,6 @@
 """Cold-start cross-context meta-policy transfer for Universal Learning V10."""
 from __future__ import annotations
+import hashlib, json
 from fractions import Fraction
 from typing import Any, Mapping, Sequence
 from canonical.runtime import meta_learning_policy_v9 as mp
@@ -18,37 +19,94 @@ def _f(x,name):
     if v<0: raise CrossContextTransferError(name.upper()+"_NEGATIVE")
     return v
 
+def _verified_episode_binding(raw:Mapping[str,Any],expected_context_sha256:str)->dict[str,Any]:
+    eid=_s(raw.get("episode_id")); sid=_s(raw.get("strategy_id"))
+    if not eid or not sid:
+        raise CrossContextTransferError("EPISODE_ID_OR_STRATEGY_ID_REQUIRED")
+    if _s(raw.get("context_sha256"))!=expected_context_sha256:
+        raise CrossContextTransferError("EPISODE_CONTEXT_MISMATCH:"+eid)
+    success=raw.get("success")
+    vals={k:_f(raw.get(k,0),k) for k in ("burden_before","burden_after","wall_clock","risk","incremental_spend_usd")}
+    dig=mp.episode_digest(
+        episode_id=eid,context_sha256=expected_context_sha256,strategy_id=sid,
+        success=success,**vals)
+    r=raw.get("verification_receipt")
+    if not isinstance(r,Mapping) or r.get("independent_verified") is not True or r.get("exact_byte_bound") is not True or r.get("conclusion")!="success":
+        raise CrossContextTransferError("EPISODE_RECEIPT_INVALID:"+eid)
+    rid=_s(r.get("receipt_id"))
+    if not rid or _s(r.get("episode_id"))!=eid or r.get("episode_sha256")!=dig:
+        raise CrossContextTransferError("EPISODE_RECEIPT_BINDING_MISMATCH:"+eid)
+    if vals["incremental_spend_usd"]>0:
+        raise CrossContextTransferError("POSITIVE_INCREMENTAL_SPEND_FORBIDDEN:"+eid)
+    return {
+        "episode_id":eid,"episode_sha256":dig,"receipt_id":rid,
+        "strategy_id":sid,"success":success,**vals}
+
+def _verified_target_bindings(*,target_context_sha256:str,episodes)->list[dict[str,Any]]:
+    rows=[_verified_episode_binding(x,target_context_sha256) for x in episodes]
+    if len({x["episode_id"] for x in rows})!=len(rows):
+        raise CrossContextTransferError("TARGET_EPISODE_ID_DUPLICATE")
+    if len({x["receipt_id"] for x in rows})!=len(rows):
+        raise CrossContextTransferError("TARGET_EPISODE_RECEIPT_DUPLICATE")
+    if len({x["episode_sha256"] for x in rows})!=len(rows):
+        raise CrossContextTransferError("TARGET_EPISODE_DIGEST_DUPLICATE")
+    return rows
+
+def target_evidence_state_digest(*,target_context_sha256:str,episode_bindings,evidence_epoch:str)->str:
+    target=_s(target_context_sha256); epoch=_s(evidence_epoch)
+    if not target or not epoch:
+        raise CrossContextTransferError("TARGET_CONTEXT_AND_EVIDENCE_EPOCH_REQUIRED")
+    xs=sorted(
+        [{"episode_id":_s(x.get("episode_id")),"episode_sha256":_s(x.get("episode_sha256"))} for x in episode_bindings],
+        key=lambda x:(x["episode_id"],x["episode_sha256"]))
+    if any(not x["episode_id"] or not x["episode_sha256"] for x in xs):
+        raise CrossContextTransferError("TARGET_EPISODE_BINDING_INVALID")
+    body=json.dumps(
+        {"target_context_sha256":target,"evidence_epoch":epoch,"episode_bindings":xs},
+        sort_keys=True,separators=(",",":")).encode()
+    return "sha256:"+hashlib.sha256(body).hexdigest()
+
+def _verify_target_evidence_state(*,target_context_sha256:str,episodes,receipt:Mapping[str,Any]|None)->dict[str,Any]:
+    rows=_verified_target_bindings(
+        target_context_sha256=target_context_sha256,episodes=episodes)
+    if not isinstance(receipt,Mapping):
+        raise CrossContextTransferError("TARGET_EVIDENCE_STATE_RECEIPT_REQUIRED")
+    if receipt.get("independent_verified") is not True or receipt.get("exact_byte_bound") is not True or receipt.get("conclusion")!="success":
+        raise CrossContextTransferError("TARGET_EVIDENCE_STATE_RECEIPT_INVALID")
+    if receipt.get("exact_target_evidence_complete") is not True:
+        raise CrossContextTransferError("TARGET_EVIDENCE_STATE_NOT_COMPLETE")
+    if _s(receipt.get("target_context_sha256"))!=target_context_sha256:
+        raise CrossContextTransferError("TARGET_EVIDENCE_STATE_CONTEXT_MISMATCH")
+    epoch=_s(receipt.get("evidence_epoch"))
+    digest=target_evidence_state_digest(
+        target_context_sha256=target_context_sha256,
+        episode_bindings=rows,evidence_epoch=epoch)
+    if int(receipt.get("exact_target_episode_count",-1))!=len(rows):
+        raise CrossContextTransferError("TARGET_EVIDENCE_STATE_COUNT_MISMATCH")
+    if receipt.get("evidence_state_sha256")!=digest:
+        raise CrossContextTransferError("TARGET_EVIDENCE_STATE_DIGEST_MISMATCH")
+    if not rows and receipt.get("zero_exact_target_evidence_verified") is not True:
+        raise CrossContextTransferError("ZERO_TARGET_EVIDENCE_NOT_VERIFIED")
+    return {
+        "target_context_sha256":target_context_sha256,
+        "evidence_epoch":epoch,"episode_count":len(rows),
+        "evidence_state_sha256":digest,"episode_bindings":rows}
+
 def _verified_strategy_rows(*,source_context_sha256,strategy_id,episodes):
     rows=[]
-    seen_ids=set()
-    seen_receipts=set()
-    seen_digests=set()
+    seen_ids=set(); seen_receipts=set(); seen_digests=set()
     for raw in episodes:
         if _s(raw.get("strategy_id"))!=strategy_id: continue
-        eid=_s(raw.get("episode_id"))
-        if not eid or eid in seen_ids:
-            raise CrossContextTransferError("SOURCE_EPISODE_ID_INVALID_OR_DUPLICATE:"+eid)
-        if _s(raw.get("context_sha256"))!=source_context_sha256:
-            raise CrossContextTransferError("SOURCE_EPISODE_CONTEXT_MISMATCH:"+eid)
-        success=raw.get("success")
-        vals={k:_f(raw.get(k,0),k) for k in ("burden_before","burden_after","wall_clock","risk","incremental_spend_usd")}
-        dig=mp.episode_digest(
-            episode_id=eid,context_sha256=source_context_sha256,strategy_id=strategy_id,
-            success=success,**vals)
-        r=raw.get("verification_receipt")
-        if not isinstance(r,Mapping) or r.get("independent_verified") is not True or r.get("exact_byte_bound") is not True or r.get("conclusion")!="success":
-            raise CrossContextTransferError("SOURCE_EPISODE_RECEIPT_INVALID:"+eid)
-        rid=_s(r.get("receipt_id"))
-        if not rid or rid in seen_receipts:
-            raise CrossContextTransferError("SOURCE_EPISODE_RECEIPT_ID_INVALID_OR_DUPLICATE:"+eid)
-        if _s(r.get("episode_id"))!=eid or r.get("episode_sha256")!=dig:
-            raise CrossContextTransferError("SOURCE_EPISODE_RECEIPT_BINDING_MISMATCH:"+eid)
+        x=_verified_episode_binding(raw,source_context_sha256)
+        eid=x["episode_id"]; rid=x["receipt_id"]; dig=x["episode_sha256"]
+        if eid in seen_ids:
+            raise CrossContextTransferError("SOURCE_EPISODE_ID_DUPLICATE:"+eid)
+        if rid in seen_receipts:
+            raise CrossContextTransferError("SOURCE_EPISODE_RECEIPT_ID_DUPLICATE:"+eid)
         if dig in seen_digests:
             raise CrossContextTransferError("SOURCE_EPISODE_DIGEST_DUPLICATE:"+eid)
-        if vals["incremental_spend_usd"]>0:
-            raise CrossContextTransferError("POSITIVE_INCREMENTAL_SPEND_FORBIDDEN:"+eid)
         seen_ids.add(eid); seen_receipts.add(rid); seen_digests.add(dig)
-        rows.append({"episode_id":eid,"episode_sha256":dig,"receipt_id":rid,"success":success,**vals})
+        rows.append(x)
     if len(rows)<MIN_SOURCE_EPISODES:
         raise CrossContextTransferError("INSUFFICIENT_SOURCE_EPISODES")
     if not all(x["success"] for x in rows):
@@ -57,8 +115,23 @@ def _verified_strategy_rows(*,source_context_sha256,strategy_id,episodes):
         raise CrossContextTransferError("SOURCE_BURDEN_REGRESSION")
     return rows
 
-def recommend(*,target_context_features,exact_target_episodes=(),transfer_candidates:Sequence[Mapping[str,Any]]=()):
+def recommend(*,target_context_features,exact_target_episodes=(),
+              target_evidence_state_receipt:Mapping[str,Any]|None=None,
+              transfer_candidates:Sequence[Mapping[str,Any]]=()):
     target_sha=mp.context_digest(features=target_context_features)
+    try:
+        target_state=_verify_target_evidence_state(
+            target_context_sha256=target_sha,
+            episodes=exact_target_episodes,
+            receipt=target_evidence_state_receipt)
+    except Exception as exc:
+        return {
+            "schema":SCHEMA,"status":"TARGET_EVIDENCE_STATE_UNVERIFIED",
+            "recommended_strategy_id":None,"target_context_sha256":target_sha,
+            "reason":str(exc),"planning_only":True,
+            "execution_authority":False,"promotion_authority":False,
+            "fresh_reality_authority":False,
+        }
 
     if exact_target_episodes:
         exact=mp.recommend(context_features=target_context_features,episodes=exact_target_episodes)
@@ -67,18 +140,19 @@ def recommend(*,target_context_features,exact_target_episodes=(),transfer_candid
                 "schema":SCHEMA,"status":"EXACT_TARGET_META_POLICY_HAS_PRIORITY",
                 "recommended_strategy_id":exact["recommended_strategy_id"],
                 "evidence_mode":"EXACT_TARGET_CONTEXT","exact_target_policy":exact,
+                "target_evidence_state":target_state,
                 "planning_only":True,"execution_authority":False,"promotion_authority":False,
                 "fresh_reality_authority":False,
             }
         return {
             "schema":SCHEMA,"status":"EXACT_TARGET_EVIDENCE_BLOCKS_CROSS_CONTEXT_FALLBACK",
             "recommended_strategy_id":None,"evidence_mode":"EXACT_TARGET_CONTEXT_NO_SAFE_POLICY",
+            "target_evidence_state":target_state,
             "planning_only":True,"execution_authority":False,"promotion_authority":False,
             "fresh_reality_authority":False,
         }
 
-    admissible=[]
-    rejected=[]
+    admissible=[]; rejected=[]
     for i,c in enumerate(transfer_candidates):
         try:
             source_features=c.get("source_context_features") or ()
@@ -119,6 +193,7 @@ def recommend(*,target_context_features,exact_target_episodes=(),transfer_candid
         return {
             "schema":SCHEMA,"status":"NO_VERIFIED_CROSS_CONTEXT_STRATEGY",
             "recommended_strategy_id":None,"target_context_sha256":target_sha,
+            "target_evidence_state":target_state,
             "rejected_candidates":rejected,"planning_only":True,
             "execution_authority":False,"promotion_authority":False,"fresh_reality_authority":False,
         }
@@ -131,6 +206,7 @@ def recommend(*,target_context_features,exact_target_episodes=(),transfer_candid
         "schema":SCHEMA,"status":"VERIFIED_COLD_START_CROSS_CONTEXT_META_POLICY",
         "target_context_sha256":target_sha,"recommended_strategy_id":best["strategy_id"],
         "evidence_mode":"PROOF_GATED_ONE_WAY_CONTEXT_MORPHISM",
+        "target_evidence_state":target_state,
         "source_context_sha256":best["source_context_sha256"],
         "source_episode_count":best["source_episode_count"],
         "burden_reduction_lcb":str(best["burden_reduction_lcb"]),
