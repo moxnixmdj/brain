@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_SEMANTIC_SEED_QUALIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_ZERO_CREDIT_QUALIFICATION__EXACT_REUSED_4B_PROBE_LAUNCHED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": "LIVEBENCH_IF_IS_FORMAL_INSTRUCTION_ADHERENCE_AND_CANNOT_BY_ITSELF_PROVE_MEANING_PRESERVING_SEMANTIC_CAPABILITY",
+  "breakthrough": "SEPARATE_FORMAL_SCORE_CLOSURE_FROM_SEMANTIC_CORE_QUALIFICATION_AND_TEST_THE_SMALLEST_ALREADY_EXECUTED_INTERNALIZABLE_CORE_BEFORE_ANY_LARGER_ACQUISITION",
+  "exact_subject": {
+    "id": "QWEN3_5_4B_Q4_K_M_EXISTING_CARRIER",
+    "model": "Qwen/Qwen3.5-4B",
+    "quantization_repo": "bartowski/Qwen_Qwen3.5-4B-GGUF",
+    "revision": "ba06320255db2dbec194dad738d066be90dabf29",
+    "file": "Qwen_Qwen3.5-4B-Q4_K_M.gguf",
+    "bytes": 3013027808,
+    "sha256": "13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983",
+    "prior_execution_evidence": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1.json",
+    "prior_failure_not_semantic_disqualification": true,
+    "prior_first_causal_blocker": "GOAL_MAX_CYCLES_WITHOUT_FINISH",
+    "current_runtime_has_forced_finalization_repair": true
+  },
+  "qualification_gate": {
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1987,
+    "verifier_branch": "verify/root1-semantic-seed-qwen4b-v1-20261004-sol",
+    "verifier_head_sha": "05568043d13e57ace211dceb3359aa0fb9d4bc6b",
+    "gate_script": "root1_semantic_seed_gate_v1.py",
+    "terminal_case_content_used": false,
+    "task_families": [
+      "paraphrase",
+      "simplify",
+      "summarize",
+      "story_generation"
+    ],
+    "meaning_invariants": [
+      "ENTITY_IDENTITY",
+      "QUANTITY",
+      "NEGATION",
+      "DESTINATION",
+      "CAUSAL_DIRECTION",
+      "TEMPORAL_DIRECTION",
+      "EVENT_ORDER"
+    ],
+    "case_count": 8,
+    "thresholds": {
+      "fact_mean_gte": 0.95,
+      "mean_gte": 0.88,
+      "case_min_gte": 0.7,
+      "task_mean_min_gte": 0.82
+    },
+    "exact_model_runtime": "llama.cpp@7fe450e19305b828c199d602c23a8337aaa1f03b",
+    "incremental_spend_usd": 0
+  },
+  "decision_ladder": [
+    {
+      "rank": 1,
+      "subject": "QWEN3_5_4B_Q4_K_M_EXISTING_CARRIER",
+      "bytes": 3013027808,
+      "action": "QUALIFY_NOW"
+    },
+    {
+      "rank": 2,
+      "subject": "QWEN3_5_9B_Q4_K_M_EXISTING_CARRIER",
+      "bytes": 5060174144,
+      "action": "ONLY_IF_4B_FAILS_MEANING_GATE"
+    },
+    {
+      "rank": 3,
+      "subject": "QWEN3_8_27B_UD_Q2_K_XL",
+      "bytes": 9828981664,
+      "action": "ONLY_IF_BOTH_REUSED_CORES_FAIL_OR_STRONGER_GATE_REQUIRES_IT"
+    },
+    {
+      "rank": 4,
+      "subject": "QWEN3_8_27B_Q2_K",
+      "bytes": 10864583712,
+      "action": "FAILOVER_AFTER_EXACT_SMALLER_Q2_FAILURE_WHEN_INFORMATION_GAIN_JUSTIFIES"
+    }
+  ],
+  "promotion_rule": {
+    "on_pass": "QUALIFY_AS_MINIMUM_REUSABLE_SEMANTIC_SEED_ONLY__DELETE_LARGER_ACQUISITION_FROM_IMMEDIATE_SEED_PATH",
+    "on_fail": "RECORD_EXACT_FAILED_INVARIANTS__ADVANCE_ONE_RUNG_WITHOUT_RETUNING_TO_GATE_CASES",
+    "opus55_equivalence_credit": 0,
+    "terminal_acceptance_credit": 0,
+    "family_credit": 0,
+    "capability_credit": 0,
+    "ownership_credit": 0
+  },
+  "anti_proxy_rules": [
+    "DO_NOT_USE_LIVEBENCH_IF_SCORE_AS_SEMANTIC_CORE_PROOF",
+    "DO_NOT_TREAT_OLD_GOAL_TERMINATION_FAILURE_AS_MODEL_SEMANTIC_FAILURE",
+    "DO_NOT_DOWNLOAD_9_83GB_OR_10_86GB_SUBJECT_BEFORE_4B_AND_9B_SEED_GATES_FALSIFY_SMALLER_REUSE",
+    "DO_NOT_USE_FROZEN_TERMINAL_PROMPT_CONTENT_FOR_SEMANTIC_GATE_DESIGN",
+    "DO_NOT_PROMOTE_MINIMUM_SEMANTIC_SEED_PASS_TO_OPUS_EQUIVALENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
