@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SLOT_FEASIBILITY_EXPANSION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_EXTENSION__THIRD_PUBLIC_HARD_UNSAT_CLASS_ENCODED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "parent_truth_repair": {
+    "path": "canonical/governance/LIVEBENCH_SLOT_FEASIBILITY_TRUTH_REPAIR_V1.json",
+    "commit": "c79dda8eeaf27640f7cf90af387953c1c3bff18e"
+  },
+  "new_candidate_runtime": {
+    "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v2.py",
+    "tests_path": "canonical/tests/test_livebench_legacy15_slot_feasibility_v2.py",
+    "semantic_change": "ADDITIVE_FAIL_CLOSED_CERTIFICATE_FOR_SENTENCE_LT_1_PLUS_FROZEN_PUBLIC_END_PHRASE",
+    "inherits_v1_certificates": true
+  },
+  "public_source_bindings": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "historical_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "score_utils_git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676"
+  },
+  "deduction": {
+    "instruction_ids": [
+      "length_constraints:number_sentences",
+      "startend:end_checker"
+    ],
+    "registry_pair_conflict_compatible": true,
+    "generator_admitted_slots": {
+      "length_constraints:number_sentences": {
+        "num_sentences": 1,
+        "relation": "less than"
+      },
+      "startend:end_checker": {
+        "end_phrase_domain": [
+          "Any other questions?",
+          "Is there anything else I can help with?"
+        ]
+      }
+    },
+    "proof": [
+      "PINNED_SENTENCE_CHECKER_REQUIRES_PUNKT_SENTENCE_COUNT_STRICTLY_LESS_THAN_1",
+      "PINNED_END_CHECKER_REQUIRES_RESPONSE_TO_END_WITH_ONE_OF_TWO_NONEMPTY_PUBLIC_GENERATOR_QUESTION_PHRASES",
+      "EACH_FROZEN_PUBLIC_END_PHRASE_TOKENIZES_TO_AT_LEAST_ONE_ENGLISH_PUNKT_SENTENCE",
+      "THEREFORE_NO_RESPONSE_CAN_SATISFY_BOTH_CHECKERS_FOR_THIS_GENERATOR_ADMITTED_SLOT_CLASS"
+    ],
+    "new_certified_hard_unsat_class": "LESS_THAN_ONE_SENTENCE_WITH_MANDATORY_PUBLIC_END_PHRASE"
+  },
+  "consequence": "THE_CORRECTED LIVEBENCH WITNESS_OR_UNSAT COMPOSER MUST ROUTE THIS SLOT CLASS TO A SEMANTIC UNSAT CERTIFICATE INSTEAD OF TREATING JOINT-WITNESS FAILURE AS A CAPABILITY FAILURE.",
+  "next_action": "INDEPENDENTLY_VERIFY_EXACT_V2_BYTES_AGAINST_PINNED PUBLIC CHECKER SEMANTICS; THEN USE V2 INSIDE THE DETERMINISTIC WITNESS_OR_UNSAT COMPOSER.",
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROW_CONTENT_READ",
+    "NO_TERMINAL_CASE_FREQUENCY_INFERRED",
+    "NO_TARGET_SCORE_REUSED",
+    "NO_CLAIM_THAT_THE_CURRENT_THREE_HARD_UNSAT_CLASSES_ARE COMPLETE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
