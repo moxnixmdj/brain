@@ -1,0 +1,147 @@
+{
+  "schema": "PROJECT_BRAIN_QWEN38_27B_FIT_FIRST_QUANT_PRECOMMIT_V1",
+  "date": "2026-10-04",
+  "status": "PRECOMMITTED__FIT_FIRST_QUANT_LADDER__ZERO_TERMINAL_EXPOSURE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "parent_authority": {
+    "exact_bf16_manifest": "canonical/governance/QWEN38_27B_EXACT_OPEN_WEIGHT_MANIFEST_V1.json",
+    "open_weight_route": "canonical/governance/LIVEBENCH_OPEN_WEIGHT_SEMANTIC_ACQUISITION_ROUTE_V1.json",
+    "base_livebench_if_percent": 72.65825,
+    "opus55_bar_percent": 65.73775,
+    "base_margin_percentage_points": 6.9205,
+    "rule": "QUANTIZED_WEIGHTS_ARE_DISTINCT_EXECUTION_SUBJECTS_AND_INHERIT_ZERO_SCORE_OR_CAPABILITY_CREDIT"
+  },
+  "optimization_problem": {
+    "objective": "MAXIMIZE_PROBABILITY_OF_ROOT1_SEMANTIC_CAPABILITY_CLOSURE_PER_ACTION_AND_PER_DOWNLOADED_BYTE_SUBJECT_TO_ZERO_SPEND_AND_EXECUTION_FIT",
+    "decision_rule": "TRY_THE_HIGHEST_QUALITY_PLAUSIBLE_FIT_SUBJECT_FIRST__DESCEND_ONLY_ON_A_HARD_FIT_FAILURE_OR_FAILED_NONTERMINAL_QUALITY_GATE",
+    "reason": [
+      "THE_BASE_SUBJECT_HAS_ONLY_6.9205_PERCENTAGE_POINTS_OF_LIVEBENCH_IF_MARGIN_OVER_THE_OPUS55_BAR",
+      "OVERQUANTIZING_BEFORE_FIT_IS_MEASURED_UNNECESSARILY_SPENDS_QUALITY_MARGIN",
+      "A_LOAD_ONLY_FIT_PROBE_IS_CHEAPER_THAN_A_FULL_QUALITY_EVALUATION_AND_CAN_ELIMINATE_OVERSIZED_SUBJECTS_WITHOUT_TERMINAL_EXPOSURE"
+    ]
+  },
+  "exact_candidate_ladder": [
+    {
+      "rank": 1,
+      "subject": "unsloth/Qwen3.8-27B-GGUF::Qwen3.8-27B-UD-Q3_K_XL.gguf",
+      "bytes_display": "13.1 GB",
+      "sha256": "8c2a45ff85e7674ca185ec8eb6cdeab0e617ed9d8018caed0b64380eb2a67a5e",
+      "source_url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/blob/main/Qwen3.8-27B-UD-Q3_K_XL.gguf",
+      "license": "apache-2.0",
+      "role": "PRIMARY__MAXIMUM_QUALITY_PLAUSIBLE_FIT",
+      "score_inheritance": false
+    },
+    {
+      "rank": 2,
+      "subject": "unsloth/Qwen3.8-27B-GGUF::Qwen3.8-27B-UD-Q2_K_XL.gguf",
+      "bytes_display": "9.83 GB",
+      "sha256": "fd4730dd8aad070517978752b63d530aeb1740d2283cab9fa24f1e404032ddb0",
+      "source_url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/blob/main/Qwen3.8-27B-UD-Q2_K_XL.gguf",
+      "license": "apache-2.0",
+      "role": "FALLBACK__ONLY_IF_Q3_K_XL_HARD_FIT_FAILS_OR_NONTERMINAL_QUALITY_FAILS",
+      "score_inheritance": false
+    },
+    {
+      "rank": 3,
+      "subject": "unsloth/Qwen3.8-27B-GGUF::Qwen3.8-27B-UD-IQ2_XXS.gguf",
+      "bytes_display": "7.27 GB",
+      "sha256": "e792d8fb3142fe6d9171876d6da0f71f05a71028718debc72dbec93ff645e67d",
+      "source_url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/blob/main/Qwen3.8-27B-UD-IQ2_XXS.gguf",
+      "license": "apache-2.0",
+      "role": "LAST_RESORT_FIT_SUBJECT__NOT_PRIMARY",
+      "score_inheritance": false
+    }
+  ],
+  "quality_priors_non_load_bearing": {
+    "nvidia_same_model_quantization_anchor": {
+      "source_url": "https://huggingface.co/nvidia/Qwen3.8-27B-NVFP4/blob/main/README.md",
+      "bf16_ifbench_percent": 80.07,
+      "nvfp4_ifbench_percent": 78.93,
+      "absolute_drop_percentage_points": 1.14,
+      "interpretation": "STRONG_EVIDENCE_THAT_THIS_MODEL_CAN_SURVIVE_ONE_AGGRESSIVE_QUANTIZATION_ROUTE_WITH_SMALL_IFBENCH_LOSS__NOT_TRANSFERABLE_PROOF_FOR_GGUF_Q3_OR_Q2"
+    },
+    "independent_q3_measurement": {
+      "source_url": "https://chinkeong.github.io/qwen-27b/index.html",
+      "report": "UD_Q3_K_XL_TIED_4_BIT_REFERENCE_ON_75_PAIRED_ITEMS_AND_WAS_THE_CHEAPEST_QUALITY_STEP_DOWN_IN_THAT_MEASUREMENT",
+      "authority": "THIRD_PARTY_PRIOR_ONLY"
+    },
+    "low_bit_warning": {
+      "source_url": "https://www.youtube.com/watch?v=ztX_sWmdMAw",
+      "report": "ONE_CONTROLLED_SIX_QUANT_STUDY_REPORTS_Q3_K_XL_STATISTICALLY_INDISTINGUISHABLE_FROM_Q4__Q2_K_XL_PRACTICAL__STRUCTURAL_QUALITY_CLIFF_BELOW_THAT_REGION",
+      "authority": "THIRD_PARTY_PRIOR_ONLY"
+    }
+  },
+  "frozen_prequalification_sequence": [
+    {
+      "step": 1,
+      "action": "ACQUIRE_ONLY_THE_RANK_1_Q3_K_XL_SUBJECT_AND_VERIFY_SHA256",
+      "stop_if": "HASH_MISMATCH",
+      "terminal_cases_consumed": 0
+    },
+    {
+      "step": 2,
+      "action": "RUN_LOAD_ONLY_RESOURCE_PROBE_WITH_LLAMA_CPP_USING_CONSERVATIVE_CONTEXT_AND_PARTIAL_GPU_OFFLOAD",
+      "purpose": "ESTABLISH_HARD_EXECUTION_FIT_BEFORE_SPENDING_TIME_ON_QUALITY_EVALUATION",
+      "success_required": [
+        "MODEL_LOADS_WITHOUT_OOM",
+        "ONE_DETERMINISTIC_SHORT_GENERATION_COMPLETES",
+        "PEAK_MEMORY_AND_RUNTIME_CONFIGURATION_RECORDED",
+        "ZERO_INCREMENTAL_MONETARY_SPEND"
+      ],
+      "terminal_cases_consumed": 0
+    },
+    {
+      "step": 3,
+      "action": "IF_AND_ONLY_IF_STEP_2_PASSES__FREEZE_RUNTIME_CHAT_TEMPLATE_SAMPLING_CONTEXT_AND_RUN_PUBLIC_NONTERMINAL_IFBENCH_PLUS_SEMANTIC_VALIDITY_SET_FOR_PARAPHRASE_SIMPLIFY_SUMMARIZE_STORY",
+      "rule": "NO_SCORE_ONLY_WITNESS_COUNTS_AS_SEMANTIC_CAPABILITY",
+      "terminal_cases_consumed": 0
+    },
+    {
+      "step": 4,
+      "action": "IF_Q3_K_XL_HARD_FIT_FAILS_OR_NONTERMINAL_QUALITY_IS_INADEQUATE__REPEAT_STEPS_1_TO_3_WITH_Q2_K_XL__DO_NOT_DOWNLOAD_MULTIPLE_QUANTS_PREEMPTIVELY",
+      "terminal_cases_consumed": 0
+    },
+    {
+      "step": 5,
+      "action": "ONLY_AFTER_A_QUANTIZED_SUBJECT_HAS_INDEPENDENT_NONTERMINAL_SEMANTIC_AND_FORMATTING_QUALIFICATION__FREEZE_EXACT_SUCCESSOR_AND_RECONSIDER_NEW_TERMINAL_REALITY",
+      "terminal_cases_consumed_before_gate": 0
+    }
+  ],
+  "mathematical_budget": {
+    "livebench_if_absolute_degradation_budget_from_base_to_bar_percentage_points": 6.9205,
+    "formula": "72.65825 - 65.73775 = 6.9205",
+    "interpretation": "ANY_QUANTIZED_SUCCESSOR_THAT_LOSES_MORE_THAN_6.9205_POINTS_ON_THE_MATCHED_LIVEBENCH_IF_METRIC_WOULD_FAIL_THE_TERMINAL_BAR__CROSS_BENCHMARK_PRIORS_CANNOT_CERTIFY_THIS_LOSS"
+  },
+  "breakthrough": [
+    "REPLACED_SMALLEST_FILE_FIRST_WITH_QUALITY_MAXIMIZING_FIT_FIRST_SEARCH",
+    "REDUCED_THE_IMMEDIATE_SEARCH_TO_ONE_CONTENT_ADDRESSED_13_1_GB_SUBJECT_AND_ONE_9_83_GB_FALLBACK",
+    "SEPARATED_CHEAP_HARD_FIT_FALSIFICATION_FROM_EXPENSIVE_QUALITY_QUALIFICATION",
+    "PRESERVED_ZERO_TERMINAL_EXPOSURE_AND_ZERO_SCORE_INHERITANCE",
+    "TURNED_ROOT1_NEXT_ACTION_FROM_OPEN_ENDED_MODEL_SEARCH_INTO_A_TWO_SUBJECT_SEQUENTIAL_EXPERIMENT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_Q3_K_XL_FITS_THE_TARGET_MACHINE_UNTIL_MEASURED",
+    "NO_CLAIM_Q3_K_XL_OR_Q2_K_XL_PRESERVES_72_65825_LIVEBENCH_IF",
+    "NO_CLAIM_NVIDIA_NVFP4_RESULTS_TRANSFER_TO_GGUF",
+    "NO_CLAIM_THIRD_PARTY_QUANT_BENCHMARKS_ARE_ACCEPTANCE_EVIDENCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
