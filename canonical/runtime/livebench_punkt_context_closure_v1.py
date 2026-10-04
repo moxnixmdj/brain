@@ -29,7 +29,7 @@ EXPECTED_BLOBS = {
     "canonical/runtime/livebench_legacy15_contract_composer_v2.py":
         "d73ec366b32252996258eae6d10d67d4d6a5e042",
     "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py":
-        "4aae8811428221472179049989154bc3e06616e8",
+        "fd1ad043fb9fe461b6593f5b8130093be0028c22",
 }
 
 PINNED_PYTHON = (3, 12)
