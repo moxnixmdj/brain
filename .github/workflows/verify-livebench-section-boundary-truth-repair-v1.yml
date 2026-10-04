@@ -1,0 +1,63 @@
+name: Verify LiveBench section boundary truth repair V1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py"
+      - "canonical/runtime/livebench_legacy15_general_composer_v1.py"
+      - "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py"
+      - "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py"
+      - "canonical/tests/test_livebench_section_boundary_truth_repair_v1.py"
+      - "canonical/governance/LIVEBENCH_SLOT_FEASIBILITY_TRUTH_REPAIR_20261005_V1.json"
+      - ".github/workflows/verify-livebench-section-boundary-truth-repair-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install exact checker dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest==8.4.2 nltk==3.9.2 langdetect==1.0.9 immutabledict==4.2.1
+
+      - name: Checkout exact frozen LiveBench scorer
+        run: |
+          git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/livebench
+          git -C /tmp/livebench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
+          test "$(git -C /tmp/livebench hash-object livebench/if_runner/instruction_following_eval/instructions.py)" = "4997bab885a676d92545fd91a9a20b48d234a2b2"
+          test "$(git -C /tmp/livebench hash-object livebench/if_runner/instruction_following_eval/instructions_registry.py)" = "903ed738398648c7cfac61d5ffa478c22f1f0891"
+
+      - name: Run Brain regressions
+        run: |
+          python -m pytest -q             canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py             canonical/tests/test_livebench_section_boundary_truth_repair_v1.py
+
+      - name: Verify constructive counterexample against exact pinned checkers
+        env:
+          PYTHONPATH: /tmp/livebench/livebench/if_runner
+        run: |
+          python - <<'PY'
+          from instruction_following_eval import instructions_registry as registry
+
+          section = registry.INSTRUCTION_DICT["detectable_format:multiple_sections"](
+              "detectable_format:multiple_sections"
+          )
+          section.build_description(section_spliter="Section", num_sections=2)
+
+          forbidden = registry.INSTRUCTION_DICT["keywords:forbidden_words"](
+              "keywords:forbidden_words"
+          )
+          forbidden.build_description(forbidden_words=["section"])
+
+          response = "Section1\nzxqv\nSection2\nzxqv"
+          assert section.check_following(response) is True
+          assert forbidden.check_following(response) is True
+          print("PASS__SECTION_FORBIDDEN_IS_SAT__FALSE_UNSAT_REVOKED")
+          PY
