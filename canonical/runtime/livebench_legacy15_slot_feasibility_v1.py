@@ -107,6 +107,13 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
             threshold = -1
 
         if relation == "less than" and threshold == 1:
+            # Benchmark-level theorem: frozen LiveBench strict evaluation
+            # rejects empty/whitespace responses before checker execution, and
+            # frozen Punkt yields at least one terminal sentence slice for every
+            # non-whitespace response. Therefore < 1 sentence is impossible for
+            # every benchmark-admissible response, independent of other checkers.
+            reasons.append("STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE")
+
             # Frozen Punkt sentence tokenization yields zero sentences only for
             # an empty/whitespace-only response; every non-whitespace response
             # yields at least the terminal slice. Therefore any simultaneously
