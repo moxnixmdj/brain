@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_PARAMETER_VISIBILITY_COLLAPSE_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__SOURCE_DERIVED_24_OF_25_DESCRIPTION_LOCAL_PARAMETER_COLLAPSE__ONE_REPEAT_PROMPT_BOUNDARY_RESIDUAL__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "TRUTH_REPAIRED_CANDIDATE__CANONICAL_DESCRIPTION_PARAMETER_SURFACE_COLLAPSED_24_OF_25__TERMINAL_PROMPT_PARAPHRASE_RECOVERY_UNPROVED__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
-  "objective": "Reduce the exact legacy-IFEval successor problem to the minimum prompt-visible uncertainty surface without reading any new terminal case, hidden kwargs, instruction IDs, scorer outputs, or responses.",
+  "objective": "Separate what the pinned legacy scorer source proves about canonical instruction descriptions from the stronger and currently unproved claim that every frozen terminal prompt exposes those parameters in the same wording.",
   "pinned_public_source": {
     "repository": "LiveBench/LiveBench",
     "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
@@ -21,77 +21,84 @@
       "git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
     }
   },
-  "registered_surface": {
-    "keywords:existence": "DESCRIPTION_LOCAL_PARAMETERS",
-    "keywords:frequency": "DESCRIPTION_LOCAL_PARAMETERS",
-    "keywords:forbidden_words": "DESCRIPTION_LOCAL_PARAMETERS",
-    "keywords:letter_frequency": "DESCRIPTION_LOCAL_PARAMETERS",
-    "language:response_language": "DESCRIPTION_LOCAL_VALUE_PLUS_PUBLIC_LANGUAGE_MAP",
-    "length_constraints:number_sentences": "DESCRIPTION_LOCAL_PARAMETERS",
-    "length_constraints:number_paragraphs": "DESCRIPTION_LOCAL_PARAMETERS",
-    "length_constraints:number_words": "DESCRIPTION_LOCAL_PARAMETERS",
-    "length_constraints:nth_paragraph_first_word": "DESCRIPTION_LOCAL_PARAMETERS",
-    "detectable_content:number_placeholders": "DESCRIPTION_LOCAL_PARAMETERS",
-    "detectable_content:postscript": "DESCRIPTION_LOCAL_PARAMETERS",
-    "detectable_format:number_bullet_lists": "DESCRIPTION_LOCAL_PARAMETERS",
-    "detectable_format:constrained_response": "NO_HIDDEN_PARAMETERS",
-    "detectable_format:number_highlighted_sections": "DESCRIPTION_LOCAL_PARAMETERS",
-    "detectable_format:multiple_sections": "DESCRIPTION_LOCAL_PARAMETERS",
-    "detectable_format:json_format": "NO_HIDDEN_PARAMETERS",
-    "detectable_format:title": "NO_HIDDEN_PARAMETERS",
-    "combination:two_responses": "NO_HIDDEN_PARAMETERS",
-    "combination:repeat_prompt": "VISIBLE_BASE_REQUEST_BOUNDARY_REQUIRED",
-    "startend:end_checker": "DESCRIPTION_LOCAL_PARAMETERS",
-    "change_case:capital_word_frequency": "DESCRIPTION_LOCAL_PARAMETERS",
-    "change_case:english_capital": "NO_HIDDEN_PARAMETERS",
-    "change_case:english_lowercase": "NO_HIDDEN_PARAMETERS",
-    "punctuation:no_comma": "NO_HIDDEN_PARAMETERS",
-    "startend:quotation": "NO_HIDDEN_PARAMETERS"
+  "canonical_description_surface": {
+    "keywords:existence": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "keywords:frequency": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "keywords:forbidden_words": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "keywords:letter_frequency": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "language:response_language": "DESCRIPTION_EMBEDS_PUBLIC_LANGUAGE_NAME__CODE_RECOVERABLE_THROUGH_PINNED_PUBLIC_MAP",
+    "length_constraints:number_sentences": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "length_constraints:number_paragraphs": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "length_constraints:number_words": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "length_constraints:nth_paragraph_first_word": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "detectable_content:number_placeholders": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "detectable_content:postscript": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "detectable_format:number_bullet_lists": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "detectable_format:constrained_response": "NO_BUILD_DESCRIPTION_PARAMETERS",
+    "detectable_format:number_highlighted_sections": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "detectable_format:multiple_sections": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "detectable_format:json_format": "NO_BUILD_DESCRIPTION_PARAMETERS",
+    "detectable_format:title": "NO_BUILD_DESCRIPTION_PARAMETERS",
+    "combination:two_responses": "NO_BUILD_DESCRIPTION_PARAMETERS",
+    "combination:repeat_prompt": "PROMPT_TO_REPEAT_NOT_RENDERED_INSIDE_CANONICAL_DESCRIPTION",
+    "startend:end_checker": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "change_case:capital_word_frequency": "DESCRIPTION_EMBEDS_PARAMETERS",
+    "change_case:english_capital": "NO_BUILD_DESCRIPTION_PARAMETERS",
+    "change_case:english_lowercase": "NO_BUILD_DESCRIPTION_PARAMETERS",
+    "punctuation:no_comma": "NO_BUILD_DESCRIPTION_PARAMETERS",
+    "startend:quotation": "NO_BUILD_DESCRIPTION_PARAMETERS"
   },
-  "counts": {
+  "source_level_counts": {
     "registered_checker_types": 25,
-    "description_or_public_map_recoverable_types": 16,
-    "parameter_free_types": 8,
-    "description_local_or_parameter_free_total": 24,
-    "remaining_special_case_types": 1,
-    "surface_fraction_closed_before_terminal_cases": 0.96
+    "canonical_description_parameterized_and_visible_types": 16,
+    "canonical_description_parameter_free_types": 8,
+    "canonical_description_local_or_parameter_free_total": 24,
+    "canonical_description_special_case_types": 1,
+    "canonical_description_surface_fraction": 0.96
   },
-  "source_composition_theorem": [
-    "FOR_16_PARAMETERIZED_LEGACY_TYPES_THE_BUILD_DESCRIPTION_RETURN_STRING_EMBEDS_EVERY_SCORER_PARAMETER_NEEDED_BY_CHECK_FOLLOWING_OR_EMBEDS_A_PUBLIC_LANGUAGE_NAME_INVERTIBLE_THROUGH_THE_PINNED_LANGUAGE_MAP",
-    "FOR_8_ADDITIONAL_LEGACY_TYPES_CHECK_FOLLOWING_REQUIRES_NO HIDDEN BUILD_DESCRIPTION_PARAMETER",
-    "COMBINATION_REPEAT_PROMPT_IS_THE_ONLY_REGISTERED_LEGACY_TYPE_WHOSE_PROMPT_TO_REPEAT_ARGUMENT_IS_NOT RENDERED_INSIDE_ITS OWN DESCRIPTION",
-    "THEREFORE_HIDDEN_KWARGS_RECOVERY_IS_NOT_A_25_FAMILY_PROBLEM__THE_ONLY_SPECIAL_PARAMETER_BOUNDARY_IS_REPEAT_PROMPT",
-    "THIS_DOES_NOT_YET_PROVE_ARBITRARY_MULTI_CONSTRAINT_WITNESS_COMPOSITION_OR_TERMINAL_SCORE"
+  "proved_from_pinned_source": [
+    "THE_LEGACY_REGISTRY_HAS_EXACTLY_25_ACTIVE_CHECKER_TYPES",
+    "FOR_16_PARAMETERIZED_TYPES_THE_CANONICAL_BUILD_DESCRIPTION_RETURN_VALUE_CONTAINS_THE_SCORER_PARAMETERS_OR_A_PUBLIC_LANGUAGE_NAME_MAPPED_BY_PINNED_PUBLIC_SOURCE",
+    "FOR_8_TYPES_BUILD_DESCRIPTION_HAS_NO_SCORER_PARAMETER",
+    "COMBINATION_REPEAT_PROMPT_IS_THE_ONLY_REGISTERED_TYPE_WHOSE_PROMPT_TO_REPEAT_SCORER_ARGUMENT_IS_NOT_RENDERED_INSIDE_ITS_CANONICAL_DESCRIPTION",
+    "THE_CANONICAL_DESCRIPTION_GRAMMAR_CAN_SEED_A_FAIL_CLOSED_VISIBLE_PROMPT_RECOGNIZER"
   ],
+  "truth_repair": {
+    "invalidated_inference": "CANONICAL_BUILD_DESCRIPTION_PARAMETER_VISIBILITY_DOES_NOT_BY_ITSELF_PROVE_THAT_EVERY_BENCHMARK_PROMPT_USES_THE_CANONICAL_DESCRIPTION_STRING_OR_AN_ALREADY_SUPPORTED_ALIAS",
+    "public_counterexample_class": "PUBLIC_IFEVAL_STYLE_CORPORA_CONTAIN_NATURAL_LANGUAGE_PARAPHRASES_OF_CONSTRAINT_DESCRIPTIONS_WHILE_RETAINING_THE_SAME_INSTRUCTION_IDS_AND_KWARGS",
+    "effect": "TERMINAL_PROMPT_PARAMETER_RECOVERY_REMAINS_A_SEPARATE_GRAMMAR_COVERAGE_PROBLEM__NO_24_OF_25_TERMINAL_RECOVERY_CREDIT_IS_CLAIMED",
+    "reason_caught": "THE_SOURCE_EVALUATOR_REBUILDS_CHECKERS_FROM_HIDDEN_KWARGS_FOR_SCORING; BUILD_DESCRIPTION_IS_NOT_A_PROOF_OF_THE_ORIGINAL_PROMPT_GENERATION_WORDING"
+  },
   "repeat_prompt_residual": {
     "instruction_id": "combination:repeat_prompt",
-    "public_description": "First repeat the request word for word without change, then give your answer (1. do not say any words or characters before repeating the request; 2. the request you need to repeat does not include this sentence)",
     "scorer_parameter": "prompt_to_repeat",
-    "parameter_rendered_inside_description": false,
-    "minimum_remaining_problem": "RECOVER_THE_VISIBLE_BASE_REQUEST_BOUNDARY_FROM_THE_FULL_VISIBLE_PROMPT_WITH_A_SOURCE_DERIVED_FAIL_CLOSED_SEGMENTER",
-    "prohibited_shortcut": "DO_NOT_READ_HIDDEN_KWARGS_OR_NEW_TERMINAL_METADATA"
+    "parameter_rendered_inside_canonical_description": false,
+    "structural_fact": "THE_CHECKER_TESTS_RESPONSE_PREFIX_AGAINST_PROMPT_TO_REPEAT",
+    "possible_visible_route": "RECOVER_BASE_REQUEST_BOUNDARY_FROM_THE_VISIBLE_PROMPT_ONLY",
+    "status": "UNPROVED_FOR_THE_EXACT_FROZEN_200_WITHOUT_AN_ADMISSIBLE_GRAMMAR_OR_BOUNDARY_CERTIFICATE"
   },
-  "scheduler_delta_if_verified": [
-    "DELETE_GENERIC_HIDDEN_KWARGS_LOOKUP_FROM_THE_LEGACY_25_CRITICAL_PATH",
-    "GENERATE_RECOGNIZERS_DIRECTLY_FROM_THE_PINNED_LEGACY_BUILD_DESCRIPTION_GRAMMAR",
-    "SOLVE_REPEAT_PROMPT_AS_ONE_FAIL_CLOSED_VISIBLE_PROMPT_SEGMENTATION RULE",
-    "THEN_SPEND WORK ON_MULTI_CONSTRAINT_WITNESS_COMPOSITION_AND_PROVED_SCORE_MASS_ONLY",
-    "DO_NOT SPEND CURRENT ROOT1 WORK ON_MODERN_IFBENCH_ONLY_PARAMETER_FAMILIES"
+  "next_minimum_cut": [
+    "DERIVE_A_LEGACY_PROMPT_RECOGNIZER_FROM_PINNED_SOURCE_PLUS_PUBLIC_PRETERMINAL_PARAPHRASE_GRAMMARS",
+    "VERIFY_RECOGNIZER_FAILS_CLOSED_ON_AMBIGUITY_AND_NEVER_CONSUMES_HIDDEN_KWARGS",
+    "PROVE_OR_OBTAIN_AN_ADMISSIBLE_BINDING_FROM_THAT_GRAMMAR_TO_THE_FROZEN_TARGET_BEFORE_TERMINAL_SCORE_CREDIT",
+    "THEN_COMPOSE_RECOGNIZED_CONSTRAINTS_INTO_SHARED_WITNESSES_AND_STOP_AS_SOON_AS_PROVED_SCORE_MASS_EXCEEDS_THE_EXACT_COMPARATOR",
+    "KEEP_REPEAT_PROMPT_AS_A_DISTINCT_BASE_REQUEST_BOUNDARY_PROBLEM"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_24_OF_25_TERMINAL_PROMPTS_ARE_CURRENTLY_RECOVERABLE",
+    "NO_CLAIM_THE_PUBLIC_GOOGLE_IFEVAL_CORPUS_IS_ROW_IDENTICAL_TO_THE_FROZEN_LIVEBENCH_200",
+    "NO_BRAIN_LIVEBENCH_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_MULTI_CONSTRAINT_COMPOSITION_IS_ALREADY_SOLVED",
+    "NO_SEMANTIC_CAPABILITY_CREDIT_FROM_VERIFIER_WITNESS_CONSTRUCTION",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
   ],
   "verification_plan": [
     "PARSE_THE_EXACT_PINNED_25_ENTRY_REGISTRY",
     "MAP_EACH_REGISTRY_CLASS_TO_BUILD_DESCRIPTION_AND_GET_INSTRUCTION_ARGS",
-    "ASSERT_24_TYPES_EITHER_HAVE_NO_ARGS_OR_RENDER_ALL_REQUIRED_ARGS_IN_DESCRIPTION_WITH_PUBLIC_MAP_RECOVERY_ALLOWED",
-    "ASSERT_REPEAT_PROMPT_IS_THE_ONLY_DESCRIPTION_LOCAL_PARAMETER_EXCEPTION",
-    "ASSERT_NO_TERMINAL_DATASET_ROW_PROMPT_KWARGS_INSTRUCTION_ID_OR_RESPONSE_CONTENT_IS_READ"
-  ],
-  "hard_nonclaims": [
-    "NO_BRAIN_LIVEBENCH_SCORE_CLAIM",
-    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
-    "NO_CLAIM_ALL_25_TYPES_ARE_NEEDED_ON_THE_ACTIVE_200",
-    "NO_CLAIM_MULTI_CONSTRAINT_COMPOSITION_IS_ALREADY_SOLVED",
-    "NO_SEMANTIC_CAPABILITY_CREDIT_FROM_VERIFIER_WITNESS_CONSTRUCTION",
-    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+    "VERIFY_THE_24_OF_25_CANONICAL_DESCRIPTION_SOURCE_PROPERTY_ONLY",
+    "SEPARATELY_AUDIT_PUBLIC_PRETERMINAL_PROMPT_PARAPHRASE_COVERAGE_WITHOUT_TREATING_IT_AS_TERMINAL_ROW_IDENTITY",
+    "ASSERT_NO_NEW_FROZEN_TERMINAL_PROMPT_KWARGS_INSTRUCTION_ID_OR_RESPONSE_CONTENT_IS_READ"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
