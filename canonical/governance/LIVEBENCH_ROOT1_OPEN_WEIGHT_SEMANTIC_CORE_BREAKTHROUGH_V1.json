@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_OPEN_WEIGHT_SEMANTIC_CORE_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_EVIDENCE_CANDIDATE__SEMANTIC_CORE_EXISTENCE_PROVED__INTERNALIZATION_AND_LOCAL_FORM_QUALIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "breakthrough": {
+    "previous_frontier": "NO_ROUTABLE_VERIFIED_GENERAL_SEMANTIC_TEXT_PRODUCER_IN_BOUND_CAPABILITY_GRAPH",
+    "new_fact": "A_PUBLIC_OPEN_WEIGHT_27B_SEMANTIC_CORE_ALREADY_EXCEEDS_THE_EXACT_OPUS_5_5_LIVEBENCH_IF_TARGET_ON_THE_SAME_2026_06_25_FOUR_TASK_GEOMETRY",
+    "consequence": "ROOT1_NO_LONGER_REQUIRES_INVENTING_OR_TRAINING_GENERAL_SEMANTIC_TEXT_GENERATION_FROM_SCRATCH; THE_MINIMUM_REPAIR_CAN_REUSE_INTERNALIZE_AND_QUALIFY_EXISTING_LEARNED_STATE"
+  },
+  "exact_target_geometry": {
+    "source_repository": "LiveBench/new-livebench",
+    "source_path": "public/table_2026_06_25.csv",
+    "source_git_blob_sha": "73ab7d8d9752b4d7cc1bc8c574ab0eb80c36c84b",
+    "comparator_model": "claude-opus-5-5-max-effort",
+    "tasks": [
+      "paraphrase",
+      "simplify",
+      "story_generation",
+      "summarize"
+    ],
+    "comparator_task_scores_percent": {
+      "paraphrase": 64.267,
+      "simplify": 58.667,
+      "story_generation": 70.917,
+      "summarize": 69.1
+    },
+    "comparator_equal_weight_mean_percent": 65.73775
+  },
+  "preferred_open_weight_core": {
+    "leaderboard_model_id": "smaug-mini",
+    "public_model_id": "abacusai/Smaug-Mini",
+    "base_model": "Qwen/Qwen3.8-27B",
+    "parameter_class": "27B_DENSE",
+    "task_scores_percent": {
+      "paraphrase": 76.183,
+      "simplify": 65.383,
+      "story_generation": 78,
+      "summarize": 76.1
+    },
+    "equal_weight_mean_percent": 73.9165,
+    "absolute_margin_over_opus55_pp": 8.17875,
+    "relative_score_ratio_vs_opus55": 1.124416,
+    "open_weight_evidence": {
+      "huggingface_revision": "2750fd9f1e67e004111a53a6d9a39c15fbbd33ef",
+      "huggingface_model_url": "https://huggingface.co/abacusai/Smaug-Mini",
+      "license_declared": "apache-2.0",
+      "architecture_declared": "Qwen3_5ForConditionalGeneration",
+      "context_declared_tokens": 262144
+    }
+  },
+  "independently_corrobated_base_core": {
+    "model_id": "Qwen/Qwen3.8-27B",
+    "official_repository": "QwenLM/Qwen3.8",
+    "official_repository_commit": "2ea10dc725823bf7c3e21ce8557cbe15245132ae",
+    "official_readme_git_blob_sha": "a7896ca771e13546c9eb62b67d6e65c3dba680bf",
+    "official_license_git_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+    "official_license": "Apache-2.0",
+    "task_scores_percent": {
+      "paraphrase": 74.9,
+      "simplify": 66.7,
+      "story_generation": 73.1,
+      "summarize": 75.933
+    },
+    "equal_weight_mean_percent": 72.65825,
+    "absolute_margin_over_opus55_pp": 6.9205
+  },
+  "deployment_state_geometry": {
+    "public_recipe_repository": "vllm-project/recipes",
+    "public_recipe_path": "models/Qwen/Qwen3.8-27B.yaml",
+    "public_recipe_git_blob_sha": "dcf3bd2026dba0595efe335b2db7148087d70733",
+    "base_bf16_checkpoint_bytes": 55563006776,
+    "base_bf16_recipe_vram_minimum_gb": 67,
+    "listed_smaller_base_variants": {
+      "fp8_bytes": 30866866928,
+      "nvfp4_bytes": 26381249312,
+      "nvfp4_nvidia_bytes": 21904998400,
+      "int4_description_size_gb": 19.5
+    },
+    "hard_nonclaim": "THESE_BASE_QUANTIZED_VARIANTS_DO_NOT_PROVE_SMAUG_MINI_OR_ANY_QUANTIZED_FORM_RETAINS_THE_LIVEBENCH_IF_MARGIN"
+  },
+  "proof_logic": [
+    "The acceptance target is the equal-weight mean of the same four 50-question LiveBench IF tasks.",
+    "The pinned public leaderboard records Smaug Mini on those same four tasks.",
+    "The arithmetic mean of 76.183, 65.383, 78.0, and 76.1 is 73.9165.",
+    "73.9165 exceeds 65.73775 by 8.17875 percentage points.",
+    "Therefore a public open-weight learned semantic core with sufficient benchmark capability exists; absence of semantic generation capability is an integration/internalization gap, not an unsolved capability-existence problem."
+  ],
+  "scheduler_rewrite": {
+    "delete_as_overstrong": [
+      "INVENT_GENERAL_SEMANTIC_TEXT_PRODUCER_FROM_SCRATCH_BEFORE_ROOT1_CAN_CLOSE",
+      "PROVE_WHITE_BOX_NONLEARNED_TEXT_GENERATION_IS_SUFFICIENT_BEFORE_REUSING_EXISTING_OPEN_LEARNED_STATE"
+    ],
+    "replace_with_ranked_actions": [
+      "PIN_AND_INTERNALIZE_EXACT_LEARNED_STATE_FOR_THE_PREFERRED_CORE_OR_A_SMALLER_FORM_THAT_IS_SEPARATELY_QUALIFIED",
+      "PRECOMMIT_LOCAL_INFERENCE_CONFIGURATION_WITH_ZERO_PAID_API_DEPENDENCY",
+      "QUALIFY_THE_EXACT_STORED_INFERENCE_FORM_ON_PUBLIC_NONTERMINAL_PARAPHRASE_SIMPLIFY_STORY_AND_SUMMARIZE_TASKS",
+      "COMPOSE_SEMANTIC_SEED_WITH_THE_EXISTING_FORMAL_CONSTRAINT_COMPILER_AND_SEED_PRESERVING_POSTPROCESSOR",
+      "ONLY_CONSUME_NEW_TERMINAL_REALITY_AFTER_SEPARATE_EXECUTION_AUTHORITY_AND_CONTAMINATION_SAFE_PRECOMMIT"
+    ]
+  },
+  "remaining_blockers": [
+    "LEARNED_STATE_BYTES_NOT_YET_INTERNALIZED_IN_A_DURABLE_BRAIN_CONTROLLED_ZERO_INCREMENTAL_SPEND_LOCATION",
+    "EXACT_LOCAL_INFERENCE_FORM_NOT_YET_QUALIFIED_AGAINST_THE_PUBLIC_FOUR_TASK_ENVELOPE",
+    "QUANTIZATION_OR_OTHER_COMPRESSION_MAY_CHANGE_CAPABILITY_AND_REQUIRES_INDEPENDENT_REQUALIFICATION",
+    "SEMANTICALLY_SAFE_CONSTRAINT_COMPOSITION_REMAINS_PARTIAL",
+    "NO_FRESH_TERMINAL_EXECUTION_OR_ACCEPTANCE_PROMOTION_AUTHORITY"
+  ],
+  "contamination_firewall": [
+    "NO_TERMINAL_PROMPT_TEXT_READ",
+    "NO_TERMINAL_RESPONSE_TEXT_READ",
+    "NO_CASE_73_OR_LATER",
+    "PUBLIC_RELEASE_AGGREGATES_MODEL_METADATA_AND_OPEN_WEIGHT_METADATA_ONLY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
