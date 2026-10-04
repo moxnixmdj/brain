@@ -23,12 +23,12 @@
     },
     "successor_preexposure_plan": {
       "path": "canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json",
-      "git_blob_sha": "081732ce3ea9cb914d6e373e94d2b1671ee69206",
-      "plan_sha256": "7d7d8c088dcc17081490724e2548467604f0304291751d38a2a8662d32cdf46a"
+      "git_blob_sha": "2663f794033cf779fdecb8806a95e932f6084004",
+      "plan_sha256": "9608157e7ef52fab08bc387bb19ccfb10001cbb5367849a9806d6b0e7df34b31"
     },
     "point_of_use_preflight_v2": {
       "path": "canonical/runtime/livebench_shadow_point_of_use_preflight_v2.py",
-      "git_blob_sha": "c9127a9ca7b50a04b0935d15d0a816777678182d"
+      "git_blob_sha": "21edbb9ab8af24374010a66e9d971c8bbb994eb6"
     },
     "claim_backend": {
       "path": "canonical/governance/SHADOW_GIT_REF_ONE_USE_CLAIM_BACKEND_V1.json",
