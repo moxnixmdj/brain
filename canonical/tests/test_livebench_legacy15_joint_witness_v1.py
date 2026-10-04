@@ -80,3 +80,31 @@ def test_nth_paragraph_first_word():
     ps = out["response"].split("\n\n")
     assert len(ps) == 3
     assert ps[1].split()[0].lower() == "anchor"
+
+
+def test_quotation_preserves_exact_bullet_count():
+    prompt = (
+        "Your answer must contain exactly 5 bullet points. Use the markdown bullet points such as:\n"
+        "* This is point 1. \n* This is point 2 "
+        "Wrap your entire response with double quotation marks."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    response = out["response"]
+    assert response[0] == response[-1] == '"'
+    bullets = re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)
+    assert len(bullets) == 5
+
+
+def test_quotation_bullets_and_end_all_compose():
+    prompt = (
+        "Your answer must contain exactly 2 bullet points. Use the markdown bullet points such as:\n"
+        "* This is point 1. \n* This is point 2 "
+        "Finish your response with this exact phrase Any other questions?. No other words should follow this phrase. "
+        "Wrap your entire response with double quotation marks."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    response = out["response"]
+    assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
+    assert response.strip().strip('"').lower().endswith("any other questions?")
