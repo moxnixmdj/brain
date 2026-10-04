@@ -1,0 +1,145 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V3",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_MAIN_D8ACBC0__V2_SEMANTICS_PRESERVED__FINANCE_PUBLIC_TRANSFORM_ROUTE_SATURATION_ADDED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "MINIMIZE_EXPECTED_WALL_CLOCK_TO_TERMINAL_TRUE_WITH_CORRECTNESS_FIRST_ZERO_INCREMENTAL_SPEND_AND_FAIL_CLOSED_ACCEPTANCE",
+  "compiled_from_main": "d8acbc0c04e38b57e2f870759c104af3ff0752c8",
+  "exact_live_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false,
+    "root1_positive_gaps": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3
+  },
+  "verified_runtime": {
+    "path": "canonical/runtime/terminal_adaptive_minimum_action_policy_v1.py",
+    "git_blob_sha": "bfffe6dff32f5445a0c52657f7d9ec8d544b1f79",
+    "verification_path": "canonical/verification/TERMINAL_ADAPTIVE_MINIMUM_ACTION_RUNTIME_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+  },
+  "authority_bindings": {
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "2c64185e39d7f5e8fe5773e420e0c1b9f56458e5"
+    },
+    "root2": {
+      "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V10.json",
+      "frontier_git_blob_sha": "2012926814d0d06405da56da64e589b06fef1756",
+      "final_activation_path": "canonical/governance/ROOT2_FRONTIER_V10_FINAL_ACTIVATION_V1.json",
+      "final_activation_git_blob_sha": "f5eda02fcc104bc8a5e13a82bfc8ec3d9515dcb2",
+      "effective_scheduling_authority": true,
+      "execution_authority": false,
+      "fresh_reality_authority": false,
+      "external_fact_overlay": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2_ACTIVATION_V1.json",
+      "self_service_fact_count": 9,
+      "owner_exclusive_fact_count": 6,
+      "owner_or_direct_platform_receipt_count": 1,
+      "dormant_fact_count": 2,
+      "low_value_support_waits": 0
+    },
+    "root3": {
+      "cut_path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+      "cut_git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+      "live_predicates": 10,
+      "matched_scope_targets": 7,
+      "event_classes": 3,
+      "currently_runnable_event_count": 0,
+      "fresh_reality_authority": false
+    },
+    "retrieval": {
+      "current_authority_path": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+      "current_authority_git_blob_sha": "55b1d411561f720fcd9d66c127cecd63ef0b5f5e",
+      "mandatory_entrypoint": "canonical/runtime/global_retrieval_entrypoint_v4.py",
+      "mandatory_entrypoint_git_blob_sha": "2ad2fb952b3c361e74cb083b335d39b04a7c130b",
+      "verified_route_portfolio_git_blob_sha": "855a6cba59fff8c079f61212acadc254c4e9e736"
+    },
+    "finance_index_public_transform_saturation": {
+      "subject_path": "canonical/governance/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_20261004_V1.json",
+      "subject_git_blob_sha": "2a831b8632b18fe9e10ed423f131b6ae93d99b77",
+      "verification_path": "canonical/verification/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "8aea6757479980c9f2e2538a4f2651ad23653c10",
+      "state": "INDEPENDENT_PUBLIC_RUNNER_PASS__SEARCH_DELETION_ONLY__ZERO_FLOOR_NOT_PROVED__PREDICATE_OPEN"
+    }
+  },
+  "optimization": {
+    "bellman": "V(S)=min_a[t(a)+sum_o P(o|a,S)*V(T(S,a,o))]",
+    "priority": "J(a)=p_lower(a)*predicate_weight(a)*fanout(a)*downstream_action_deletion(a)*information_gain(a)/(critical_path_seconds(a)*(1+correlation_penalty(a)))",
+    "probability_rules": [
+      "DETERMINISTIC_ENTAILMENT_MAY_USE_P_LOWER_1",
+      "FALSIFIED_OR_OWNER_CLOSED_ROUTE_USES_P_LOWER_0_UNTIL_REOPEN_CONDITION",
+      "UNCALIBRATED_OPEN_WORLD_OR_OWNER_EVENT_PRESERVES_UNKNOWN_PROBABILITY",
+      "JEFFREYS_BETA_POSTERIOR_ONLY_FOR_ACTUAL_REPEATED_BERNOULLI_ROUTE_OBSERVATIONS"
+    ]
+  },
+  "current_execution_policy": [
+    {
+      "phase": "ZERO_REALITY",
+      "action": "RUN_EFFECTIVE_ROOT2_V10_SCHEDULING_ONLY",
+      "rule": "EXECUTE_SELF_SERVICE_FACTS_DIRECTLY_WHEN ACCOUNT ACCESS EXISTS__OWNER_EXCLUSIVE FACTS WAIT IN PARALLEL__NO LOW VALUE SUPPORT OUTREACH"
+    },
+    {
+      "phase": "ZERO_REALITY",
+      "action": "RUN_RETRIEVAL_V19_ONLY_FOR_NEW_LOAD_BEARING_STRONGER_PROOF_OR MATERIAL_WAKE",
+      "rule": "DO_NOT REPEAT SIX PRIMARY SOURCE SEARCH CLASSES ALREADY DELETED__OPEN WORLD MISS REMAINS UNKNOWN"
+    },
+    {
+      "phase": "ZERO_REALITY",
+      "action": "ROOT3_EVENT_DRIVEN_ONLY",
+      "rule": "ZERO CURRENT RUNNABLE ROOT3 EVENTS__RESUME ONLY ON NEW SCOPE CERTIFICATE UPSTREAM SCOPE RECEIPT OR EXPLICIT FRESH REALITY EVENT"
+    },
+    {
+      "phase": "CONTINUOUS",
+      "action": "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+      "rule": "DELETE PROVED ZERO PROBABILITY AND STRICTLY DOMINATED ACTIONS__BACKPROPAGATE ACCEPTANCE DEPENDENCIES"
+    },
+    {
+      "phase": "FRESH_REALITY",
+      "action": "BLOCKED",
+      "rule": "NO FRESH SCORE OR MATCHED WAVE BEFORE ZERO REALITY FIXED POINT AND SEPARATE EXPLICIT AUTHORITY"
+    }
+  ],
+  "preserved_search_deletions": [
+    "HLE_EXISTENCE_AND_GENERIC_GATING_SEARCH",
+    "CHARTOGRAPHY_GENERIC_FREE_TIER_AND_JUDGE_IDENTITY_SEARCH",
+    "OSWORLD_V21_RELEASE_IDENTITY_108_TASK_AND_SELF_HOST_REQUIREMENT_SEARCH",
+    "BUILDKITE_LARGE_AS_DURABLE_FREE_PLAN_CARRIER",
+    "AUTOMATIONBENCH_PUBLIC600_PRIVATE_EQUIVALENCE_REPEAT_SEARCH",
+    "CURSORBENCH_COMPARATOR_DRIFT_SEARCH_WHILE_CURRENT_OWNER_PAGE_REMAINS_57_8",
+    "FINANCE_INDEX_REPEAT_GENERIC_PUBLIC_INNER_TRANSFORM_SEARCH",
+    "FINANCE_INDEX_EXPECT_FREE_AA_API_COMPONENT_BENCHMARK_SCORES",
+    "FINANCE_INDEX_DUPLICATE_AA_OWNER_OUTREACH_FOR_INDEX_OR_COMPONENT_SCORES"
+  ],
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO FRESH REALITY BEFORE ZERO REALITY FIXED POINT",
+    "NO ACCEPTANCE CREDIT FROM SCHEDULING RETRIEVAL ROUTE DISCOVERY OR ACCOUNT ACCESS",
+    "NO PUBLIC PRIVATE SUBSTITUTION WITHOUT EXACT OR SUPERSET PROOF",
+    "NO INVENTED POINT PROBABILITIES",
+    "UNKNOWN IS NOT MISSING",
+    "SEARCH FAILURE IS NOT NONEXISTENCE",
+    "DELETE DOMINATED ACTIONS",
+    "PRESERVE CURRENT ROOT2 V10 ANTI WISHFUL OUTREACH CONTROLS",
+    "PRESERVE ROOT3 V2 ZERO RUNNABLE STATE UNTIL MATERIAL EVENT",
+    "FINANCE_INDEX_ZERO_FLOOR_REMAINS_UNPROVED__SEARCH_DELETION_MUST_NOT_BECOME_SCORE_OR_ACCEPTANCE_CREDIT",
+    "REOPEN_FINANCE_PUBLIC_TRANSFORM_ROUTE_ONLY_ON_MATERIAL_PUBLIC_SCHEMA_OR_METHODOLOGY_CHANGE_OR_STRONGER_FORMAL_PROOF"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_policy_binding_verification_required": true,
+  "supersedes_if_verified": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V2.json"
+}
