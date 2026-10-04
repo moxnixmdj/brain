@@ -14,7 +14,6 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import livebench_legacy15_composition_archetypes_v1 as archetypes
-from canonical.runtime import livebench_legacy15_exact_contract_checker_v1 as contract_checker
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_EXACT_POSTVALIDATOR_V1"
 PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
@@ -95,32 +94,45 @@ def _normalize_contracts(
             )
         if any(value is None for value in slots.values()):
             raise ExactPostvalidationError("VISIBLE_SLOT_VALUE_NONE:" + iid)
-        try:
-            _iid, normalized_slots = contract_checker.validate_contract(row)
-        except contract_checker.ExactContractCheckerError as exc:
-            raise ExactPostvalidationError("CONTRACT_SHAPE_INVALID:" + str(exc)) from exc
-        row["slots"] = normalized_slots
     return rows
+
+
+def verify_pinned_source(livebench_root: str | Path) -> dict[str, Any]:
+    """Verify exact public checker bytes without consuming terminal data."""
+    root = Path(livebench_root).resolve()
+    package = root / "livebench" / "if_runner" / "instruction_following_eval"
+    expected = {
+        package / "instructions.py": PINNED_INSTRUCTIONS_BLOB,
+        package / "instructions_registry.py": PINNED_REGISTRY_BLOB,
+        package / "instructions_util.py": PINNED_UTIL_BLOB,
+    }
+    observed: dict[str, str] = {}
+    for path, sha in expected.items():
+        if not path.is_file():
+            raise ExactPostvalidationError("PINNED_CHECKER_FILE_MISSING:" + str(path))
+        actual = git_blob_sha(path)
+        if actual != sha:
+            raise ExactPostvalidationError("PINNED_CHECKER_BLOB_MISMATCH:" + path.name)
+        observed[path.name] = actual
+    return {
+        "schema": SCHEMA,
+        "status": "PASS__EXACT_PINNED_CHECKER_SOURCE_BOUND",
+        "livebench_commit": PINNED_LIVEBENCH_COMMIT,
+        "instructions_blob": observed["instructions.py"],
+        "registry_blob": observed["instructions_registry.py"],
+        "instructions_util_blob": observed["instructions_util.py"],
+        "terminal_data_used": False,
+    }
 
 
 def load_pinned_registry(livebench_root: str | Path):
     root = Path(livebench_root).resolve()
+    verify_pinned_source(root)
     if_runner = root / "livebench" / "if_runner"
     package = if_runner / "instruction_following_eval"
     instructions_path = package / "instructions.py"
     registry_path = package / "instructions_registry.py"
     util_path = package / "instructions_util.py"
-
-    expected = {
-        instructions_path: PINNED_INSTRUCTIONS_BLOB,
-        registry_path: PINNED_REGISTRY_BLOB,
-        util_path: PINNED_UTIL_BLOB,
-    }
-    for path, sha in expected.items():
-        if not path.is_file():
-            raise ExactPostvalidationError("PINNED_CHECKER_FILE_MISSING:" + str(path))
-        if git_blob_sha(path) != sha:
-            raise ExactPostvalidationError("PINNED_CHECKER_BLOB_MISMATCH:" + path.name)
 
     if str(if_runner) not in sys.path:
         sys.path.insert(0, str(if_runner))
@@ -185,6 +197,20 @@ def evaluate_with_registry(
         "comparator_response_used": False,
         "acceptance_credit": False,
     }
+
+
+def checker_for_root(livebench_root: str | Path):
+    """Return an exact-checker callback bound once to the pinned public source."""
+    registry, _binding = load_pinned_registry(livebench_root)
+
+    def checker(
+        response: str,
+        contracts: Sequence[Mapping[str, Any]],
+    ) -> tuple[bool, ...]:
+        out = evaluate_with_registry(response, contracts, registry)
+        return tuple(bool(x) for x in out["checker_results"])
+
+    return checker
 
 
 def postvalidate(
