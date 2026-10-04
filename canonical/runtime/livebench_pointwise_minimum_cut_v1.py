@@ -47,7 +47,7 @@ EXPECTED_BLOBS = {
     "canonical/runtime/livebench_legacy15_contract_composer_v2.py":
         "d73ec366b32252996258eae6d10d67d4d6a5e042",
     "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py":
-        "5803c31e3972c6d40415f319e808c48420bc0388",
+        "09a5d7810fd46713aaf06cf1d204fe140d1d8045",
     "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py":
         "71e637c70edf1c582e28ea38b3b798965c803a06",
     "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py":
