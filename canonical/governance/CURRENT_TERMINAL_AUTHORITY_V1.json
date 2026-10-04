@@ -888,7 +888,7 @@
     },
     "root2_root3_minimum_execution_frontier_v1": {
       "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
-      "git_blob_sha": "dbe0bf4984d9e3ddaa8de52ed2ebb5ccfee55141",
+      "git_blob_sha": "f1a3f5e1b545a89d5e37feff74c31d48500f338d",
       "status": "CURRENT_ROOT2_FRONTIER__ZERO_CREDIT"
     },
     "current_witness_target_totalization_v2_candidate": {
@@ -903,7 +903,7 @@
     },
     "root3_residual_compression_v1": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
-      "git_blob_sha": "22ee9392b19b63b50f8d94cba4d28147b9b15f2f",
+      "git_blob_sha": "dc559795cae54c2c496e7a56758c3529a986333f",
       "status": "SYNTHESIS_SCOPE_RECLASSIFIED_TO_ROOT2_ONLY__ZERO_CREDIT"
     },
     "current_zero_reality_minimum_cut_v7": {
@@ -918,7 +918,7 @@
     },
     "current_zero_reality_minimum_cut_v8": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
-      "git_blob_sha": "c6c8353e740cbcde9649512c5b922148617d934a",
+      "git_blob_sha": "6e8de8c3ade40ab8f878e524b08500f89b597de5",
       "status": "CHARTOGRAPHY_GUARD_DISCHARGED__NO_FRESH_REALITY"
     },
     "current_v8_post_compression_verification_binding": {
@@ -1055,6 +1055,19 @@
       "verification_path": "canonical/verification/ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V4_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "04dc6d22d6c51e725d68c4977104183bd8ce431c",
       "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT"
+    },
+    "universal_learning_mechanism_discovery_v6": {
+      "governance_path": "canonical/governance/UNIVERSAL_LEARNING_MECHANISM_DISCOVERY_V6.json",
+      "governance_git_blob_sha": "65e291e3afebbf3547771ee580104361d1920788",
+      "verification_path": "canonical/verification/UNIVERSAL_LEARNING_MECHANISM_DISCOVERY_V6_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "ff590a8f40b891d3c53bb2c50cd679bb0dd42c72",
+      "activation_path": "canonical/governance/UNIVERSAL_LEARNING_MECHANISM_DISCOVERY_V6_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "7b50c418265deb93b54e6934093cb184901c17b0",
+      "structural_residual_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V6_STRUCTURAL_RESIDUAL_REDUCTION_V1.json",
+      "structural_residual_reduction_git_blob_sha": "fc82f7040f6d3c184f74cc55360f3f04aca833af",
+      "verified_v5_base_activation_path": "canonical/governance/UNIVERSAL_LEARNING_RECURSIVE_ABSTRACTION_V5_ACTIVATION_V1.json",
+      "verified_v5_base_activation_git_blob_sha": "ee5d7e2a989df687e19f6be95c7d25600d1a32ec",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CANDIDATE_OPERATIVE_UNKNOWN_DOMAIN_LEARNING_OVERLAY_V6__TWO_FROZEN_LEAVES_PRESERVED__ZERO_CREDIT"
     }
   },
   "residual": [
@@ -1534,7 +1547,7 @@
     "current_effective_canonical_leaf_atoms": 39
   },
   "last_reconciled_control_plane_head": "627492dd3a9adfdbd4c50146335bc1a92aca4eee",
-  "last_reconciled_reason": "UNIVERSAL_LEARNING_V5_PROMOTED_AND_OPERATIVE_UNKNOWN_DOMAIN_POINTER_CHAIN_REBOUND__TWO_FROZEN_DIRECT_LEAVES_PRESERVED__ZERO_ACCEPTANCE_OWNERSHIP_CREDIT",
+  "last_reconciled_reason": "UNIVERSAL_LEARNING_V6_PROMOTED_AND_REBASED_ON_CURRENT_ROOT2_STATE__UNKNOWN_DOMAIN_OPERATIVE_POINTER_CHAIN_REBOUND_V5_TO_V6__TWO_FROZEN_DIRECT_LEAVES_PRESERVED__ZERO_ACCEPTANCE_OWNERSHIP_CREDIT",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
