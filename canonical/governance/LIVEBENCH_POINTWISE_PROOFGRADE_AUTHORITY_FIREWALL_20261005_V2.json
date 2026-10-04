@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_POINTWISE_PROOFGRADE_AUTHORITY_FIREWALL_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__CHECKER_VECTOR_AND_RUNTIME_AUTHORITY_SEPARATED_FROM_POINTWISE_THEOREM__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": [
+    "POINTWISE_OPTIMALITY_IS_A_TWO_PART_PROOF__SEMANTIC_MAXIMALITY_GIVEN_A_VECTOR__PLUS_AUTHENTICATION_OF_THE_VECTOR",
+    "CALLER_SUPPLIED_BOOLEAN_VECTORS_AND_ARBITRARY_CALLBACKS_CANNOT_AUTHENTICATE_THEMSELVES",
+    "SOURCE_PINNING_ALONE_IS_INSUFFICIENT_FOR_NUMBER_WORDS_AND_NUMBER_SENTENCES_BECAUSE_NLTK_PACKAGE_AND_PUNKT_DATA_CHANGE_CHECKER_SEMANTICS",
+    "AUTHORITATIVE_PASS_NOW_REQUIRES_THE_EXACT_STRICT_EVALUATOR_BINDING_AND_PROOF_GRADE_RUNTIME_DEPENDENCY_BINDING"
+  ],
+  "prior_authority_holes": {
+    "external_vector_surface": "JSON_run_AND_select_best_postvalidated_ACCEPTED_checker_results_AND_COULD_EMIT_AUTHORITATIVE_PASS",
+    "generic_callback_surface": "solve_with_checker_COULD_EMIT_AUTHORITATIVE_PASS_FROM_ANY_CALLBACK",
+    "pinned_source_surface": "solve_with_pinned_livebench_USED_SOURCE_PINNED_checker_for_root_WITHOUT_REQUIRING_HERMETIC_NLTK_FOR_WORD_OR_SENTENCE_CHECKERS"
+  },
+  "repair": {
+    "runtime": "canonical/runtime/livebench_legacy15_pointwise_search_v1.py",
+    "runtime_git_blob_sha": "5da80fbcfabf0a1de65df27a0219a050284b80eb",
+    "tests": "canonical/tests/test_livebench_legacy15_pointwise_search_v1.py",
+    "tests_git_blob_sha": "d4eb7eb56b7b3eeb016c8e1ac544108f50868a91",
+    "conditional_status": "CONDITIONAL__POINTWISE_OPTIMAL_GIVEN_UNVERIFIED_CHECKER_VECTOR",
+    "authoritative_status": "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED",
+    "authoritative_requirements": [
+      "CANDIDATE_VECTORS_ARE_GENERATED_BY_THE_EXACT_PINNED_LIVEBENCH_POSTVALIDATOR",
+      "SOURCE_BINDING_CONTENT_ADDRESSES_THE_FROZEN_STRICT_EVALUATOR",
+      "SOURCE_BINDING_PROVES_THE_response.strip_STRICT_GATE_IS_BOUND",
+      "load_proofgrade_registry_REPORTS_proofgrade_runtime_dependencies_bound_TRUE",
+      "WHEN_WORD_OR_SENTENCE_CHECKERS_ARE_PRESENT__THE_PINNED_NLTK_WHEEL_AND_PUNKT_DATA_MUST_VERIFY_AND_BIND"
+    ]
+  },
+  "exact_public_semantics": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "strict_evaluator_path": "livebench/if_runner/instruction_following_eval/evaluation_main.py",
+    "strict_evaluator_git_blob_sha": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+    "strict_gate": "if response.strip() and instruction.check_following(response):"
+  },
+  "hermetic_runtime_dependency": {
+    "runtime": "canonical/runtime/livebench_legacy15_hermetic_nltk_binding_v1.py",
+    "dependent_active_ids": [
+      "length_constraints:number_words",
+      "length_constraints:number_sentences"
+    ],
+    "required_semantics": "PINNED_PYTHON_PLUS_NLTK_WHEEL_PLUS_PUNKT_ARCHIVE_AND_EXTRACTED_DATA_BYTES"
+  },
+  "proof_accounting": {
+    "pointwise_optimal_given_checker_vector": "MAY_BE_TRUE_ON_CONDITIONAL_PATHS",
+    "checker_vector_authoritative": "TRUE_ONLY_ON_COMPLETE_PROOFGRADE_PATH",
+    "pointwise_optimal": "TRUE_ONLY_WHEN_BOTH_CONDITIONAL_THEOREM_AND_VECTOR_AUTHORITY_HOLD"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_ACTIVE15_POINTWISE_SOLVER_IS_COMPLETE_OVER_ALL_GENERATOR_ADMITTED_SLOT_CLASSES",
+    "NO_CLAIM_CURRENT_GITHUB_ACTIONS_INFRASTRUCTURE_HAS_INDEPENDENTLY_VERIFIED_THIS_BRANCH",
+    "NO_TERMINAL_ROWS_HIDDEN_KWARGS_COMPARATOR_OUTPUTS_OR_CASE_FREQUENCIES_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
