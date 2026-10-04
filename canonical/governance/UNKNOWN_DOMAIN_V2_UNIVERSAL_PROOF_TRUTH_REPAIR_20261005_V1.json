@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V2_UNIVERSAL_PROOF_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH_REPAIR__EXACT_COUNTEREXAMPLE_FALSIFIES_V2_UNIVERSAL_PASS__ACCEPTANCE_PROMOTION_REVOKED__V3_ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "falsified_claim": {
+    "reduction_path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_20261005_V1.json",
+    "reduction_git_blob_sha": "941e62de59e4c528e8afbb95482f6707bc62104e",
+    "proof_runtime_path": "canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py",
+    "proof_runtime_git_blob_sha_at_false_promotion": "2400dba7f763fc16dc65c31512ccd9eee8be82fb",
+    "false_lemma": "ADD2_TRUE_SUPPORT_ROLE_SWAP_OUTPUT_EQUIVALENT",
+    "why_false": "ADD2_IS_REAL_ARITHMETIC_SYMMETRIC_BUT_THE_FROZEN_GENERATOR_AND_CANDIDATE_USE_LEFT_ASSOCIATIVE_BINARY64_AND_THE_FROZEN_SCORER_REQUIRES_EXACT_FLOAT_EQUALITY__SWAPPING_r0_r1_CAN_CHANGE_THE_LAST_BIT"
+  },
+  "exact_counterexample": {
+    "runtime_path": "canonical/runtime/unknown_domain_direct_v2_add2_float_counterexample_v1.py",
+    "runtime_git_blob_sha": "b8c5e3a613d42fdc2313da4bdbf77d00d3795e97",
+    "synthetic_beacon": "COUNTEREXAMPLE-BEACON-00000000",
+    "synthetic_secret_sha256": "COMPUTED_BY_COUNTEREXAMPLE_RUNTIME",
+    "transfer_index": 4,
+    "primitive": "ADD2",
+    "true_r0_feature_id": "udir_b_c45fa39ebb3052",
+    "true_r1_feature_id": "udir_b_0e54d03c56ba67",
+    "candidate_lexicographic_role_order": {
+      "r0": "udir_b_0e54d03c56ba67",
+      "r1": "udir_b_c45fa39ebb3052"
+    },
+    "candidate_terminal_consequence": 7.335613344468422,
+    "gold_terminal_consequence": 7.335613344468421,
+    "binary64_delta": 8.881784197001252e-16,
+    "frozen_scorer_rule": "trace.terminal_consequence != hidden.gold_terminal_consequence => DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG",
+    "deduction": "EXISTS_VALID_FROZEN_GENERATOR_INPUT_FOR_WHICH_EXACT_V2_CANDIDATE_FAILS_EXACT_FROZEN_SCORER__THEREFORE_FOR_ALL_V2_UNIVERSAL_THEOREM_IS_FALSE"
+  },
+  "immediate_authority_repair": {
+    "predicate_state": "EXTERNAL_BLOCKED",
+    "proved_predicate_count": 12,
+    "unresolved_predicate_count": 26,
+    "acceptance_credit_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "production_execution_authority": false,
+    "reason": "FAIL_CLOSED_AFTER_LOGICAL_FALSIFICATION_OF_LOAD_BEARING_PROOF"
+  },
+  "v3_repair_candidate": {
+    "runtime_path": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+    "runtime_git_blob_sha": "522f551eb73035bf18379131c83202f6673e04d1",
+    "proof_candidate_path": "canonical/runtime/unknown_domain_direct_v3_universal_proof_v1.py",
+    "proof_candidate_git_blob_sha": "7ec58848f264c75ba8ae9552349d43f836f00d6c",
+    "tests_path": "canonical/tests/test_unknown_domain_direct_v3_float_order_repair_v1.py",
+    "tests_git_blob_sha": "42047d2a23007a4b5da04d31ede41cd455c66d84",
+    "repair": "RECOVER_ORDERED_ROLE_IDENTITY_FROM_VISIBLE_DOMAIN_A_RECEIPT_ROLE_BINDING_AND_MATCHING_PUBLIC_A_B_SIGN_SIGNATURES__FAIL_CLOSED_IF_NOT_UNIQUE",
+    "add2_frozen_signatures": {
+      "r0": [-1, 1, -1],
+      "r1": [1, -1, 1]
+    },
+    "extra_hidden_data_used": false,
+    "extra_probe_required_for_exact_counterexample": false,
+    "model_dependency_count": 0,
+    "network_dependency_count": 0,
+    "persistent_learned_bytes": 0,
+    "status": "CANDIDATE_ONLY__INDEPENDENT_CONTENT_BOUND_VERIFICATION_REQUIRED__ZERO_CREDIT"
+  },
+  "hard_rules": [
+    "DO_NOT_REPROMOTE_V2_UNIVERSAL_FORMAL_REDUCTION",
+    "DO_NOT_TREAT_81_OF_81_SAMPLE_PASS_AS_UNIVERSAL_COMPLETENESS",
+    "DO_NOT_LAUNCH_PRODUCTION_TO_PATCH_A_DEDUCTIVELY_IDENTIFIED_CANDIDATE_DEFECT",
+    "VERIFY_V3_COUNTEREXAMPLE_REPAIR_AND_CONTENT_BOUND_UNIVERSAL_PROOF_BEFORE_ANY_REPROMOTION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_predicate_credit_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
