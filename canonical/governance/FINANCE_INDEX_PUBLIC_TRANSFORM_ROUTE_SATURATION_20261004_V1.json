@@ -32,19 +32,6 @@
       ]
     }
   ],
-  "existing_owner_channel": {
-    "gmail_thread_id": "1a103c7447eb0cf8",
-    "subject": "Research access request: no-cost evaluation route for multiple Artificial Analysis benchmarks",
-    "already_requests": [
-      "GDPVAL_AA_V2_1_PAIRWISE_ELO",
-      "AA_BRIEFCASE_V1_1",
-      "AA_OMNISCIENCE_ACCURACY_AND_NON_HALLUCINATION",
-      "AA_LCR_V1_1",
-      "AUTOMATIONBENCH_AA_FINANCE_COMPONENT_WHERE_APPLICABLE",
-      "FINANCE_AND_ACCOUNTING_CAPABILITY_INDEX_OR_COMPONENT_SCORES"
-    ],
-    "duplicate_outreach_required": false
-  },
   "exact_deduction": {
     "public_free_api_can_return_final_finance_index": true,
     "public_free_api_can_return_six_headline_capability_indexes": true,
@@ -95,5 +82,13 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "existing_owner_channel_binding": {
+    "path": "canonical/governance/ROOT2_OWNER_CHANNEL_FANOUT_V2.json",
+    "git_blob_sha": "9b59f951f5b7135bb167f2aaebc35e9960172fa4",
+    "owner": "Artificial Analysis",
+    "required_surface": "Finance & Accounting Index/components",
+    "state": "OUTREACH_SENT",
+    "duplicate_outreach_required": false
+  }
 }
