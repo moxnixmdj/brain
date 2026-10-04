@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_GITLAB_SEPT10_PUBLIC_STATE_REDUCTION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__UNIQUE_PUBLIC_SEPT10_STATE_BOUND__ANTHROPIC_IDENTITY_OPEN__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "public_state": {
+    "repository": "Task-Web/gitlab",
+    "latest_commit_at_or_before_2026_09_10": "8655d651722f4254e59e813de9f68a6732ea525c",
+    "commit_date": "2026-08-11T11:16:45Z",
+    "commits_2026_09_10_through_2026_09_20": 0,
+    "tree_sha": "adeb18dc055b85267c19fbd39a239b47d791d6db",
+    "docker_compose_blob": "748ff3d90556ccf17600c08fbaaa65cae9138172",
+    "readme_blob": "64af03525d5ce423b67827af5407b39272b1f225",
+    "images": [
+      "gitlab/gitlab-ce:18.7.0-ce.0",
+      "docker:29.7.2-cli",
+      "gitlab/gitlab-runner:alpine-v18.7.0"
+    ]
+  },
+  "osworld_setup_reference": {
+    "ref": "acdd3493808e716825975b0f0208194bb2faf3c3",
+    "path": ".codex/skills/setup-osworld/references/gitlab.md",
+    "blob": "bf05ba17938692ed9393dec5cc879e0bd4b78090",
+    "revision_pin_present": false
+  },
+  "verified_if_passes": {
+    "delete": "GENERIC_TASK_WEB_GITLAB_REVISION_DISCOVERY_SEARCH",
+    "replace_with": "ANTHROPIC_EXACT_GITLAB_IDENTITY_OR_PROTOCOL_EQUIVALENCE_AGAINST_FROZEN_PUBLIC_SEPT10_CANDIDATE"
+  },
+  "still_open": [
+    "ANTHROPIC_USED_THIS_EXACT_REVISION_OR_EQUIVALENT_STATE",
+    "IMAGE_DIGEST_IDENTITY_IF_REQUIRED",
+    "SELF_HOST_RUNTIME_AND_TOKEN_REACHABILITY",
+    "END_TO_END_PROTOCOL_EQUIVALENCE",
+    "OPUS_4_8_GRADER_ROUTE",
+    "BRAIN_SCORE"
+  ],
+  "hard_nonclaims": [
+    "NO_ANTHROPIC_REVISION_IDENTITY_CLAIM",
+    "NO_RUNTIME_EQUIVALENCE_CLAIM",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
