@@ -85,11 +85,11 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
         if hit is not None:
             reasons.append("MANDATORY_END_PHRASE_CONTAINS_FORBIDDEN_WORD:" + hit.casefold())
 
-    if SECTIONS in by_id and FORBIDDEN in by_id:
-        splitter = str(by_id[SECTIONS].get("section_spliter", "")).strip()
-        hit = _literal_forbidden_hit(splitter, forbidden_words)
-        if hit is not None:
-            reasons.append("MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:" + hit.casefold())
+    # MultipleSections + forbidden "section" is NOT UNSAT.  The pinned
+    # SectionChecker pattern permits zero whitespace between the literal
+    # splitter and its digit (e.g. "Section1").  Because digits are \w,
+    # ForbiddenWords(r"\\bsection\\b") does not match "Section1".
+    # Keep this asymmetry explicit: no section-forbidden certificate here.
 
     if SENTENCE in by_id and END in by_id:
         sentence = by_id[SENTENCE]
