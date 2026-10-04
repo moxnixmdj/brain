@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ACCEPTANCE_PROOF_REPLACEMENT_PLANNER_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FAIL_CLOSED_PROOF_REPLACEMENT_PLANNER__ZERO_CREDIT",
+  "subjects": {
+    "runtime_path": "canonical/runtime/acceptance_proof_replacement_planner_v1.py",
+    "runtime_git_blob_sha": "ebd9c74ef1b7dcbabd60a3368f6e070ed1e21df6",
+    "test_path": "canonical/tests/test_acceptance_proof_replacement_planner_v1.py",
+    "test_git_blob_sha": "2d574752b378133f69f902ed95a35dce7c0d8503",
+    "proof_dependency_path": "canonical/runtime/proof_obligation_delta_compiler_v1.py",
+    "proof_dependency_git_blob_sha": "dea41dc780c92efdd7c8b4b8551129197ab8cca8",
+    "scope_dependency_path": "canonical/runtime/protocol_implication_scope_algebra_v2.py",
+    "scope_dependency_git_blob_sha": "6aba64c26433b4a8646d5d96bb07e5ba5b46ca1b",
+    "candidate_governance_path": "canonical/governance/ACCEPTANCE_PROOF_REPLACEMENT_PLANNER_CANDIDATE_V1.json",
+    "candidate_governance_git_blob_sha": "a653a4ccce58f3fbe85b414dc57f60ca3ae00923"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1715,
+    "head_sha": "7ef6f502921be76697916e03c7a3b91d72970b83",
+    "merge_commit": "4d48707ce12ad2537fe3817e3c5fc8cc6fc58ce4",
+    "workflow_run_id": 37182675832,
+    "workflow_job_id": 111378225009,
+    "conclusion": "success"
+  },
+  "verified": {
+    "subject_blob_identities_exact": true,
+    "explicit_binding_positive_route_passes": true,
+    "scope_safe_superset_positive_route_passes": true,
+    "target_identity_drift_fails_closed": true,
+    "name_similarity_grants_no_credit": true,
+    "missing_scope_remains_open": true,
+    "fresh_empirical_route_blocked_without_authority": true,
+    "closure_candidate_is_zero_credit": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_CLOSED_BY_THIS_VERIFICATION",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_ANY_CURRENT_PRIVATE_BENCHMARK_ALREADY_HAS_A_STRONGER_PROOF_REPLACEMENT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
