@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_EXACT_TARGET_DISPATCH_REDUCTION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_TARGET_SURFACE_REDUCED__ZERO_ACCEPTANCE_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "exact_execution_binding": {
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "active_population_count": 200,
+    "frozen_threshold_percent": 65.7,
+    "source_execution_log": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "commit": "f3c439f329c7b481a8448a0619e7696111e05ecc",
+      "path": "subject/livebench_v6_forced_fail_20261004/execution.log"
+    }
+  },
+  "public_dataset_provenance": {
+    "exact_revision_total_rows": 400,
+    "prior_revision_total_rows": 200,
+    "exact_revision_release_date_max": "2024-11-25",
+    "exact_revision_lfs_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "loader_rule": "KEEP_RELEASE_MEMBERSHIP_THEN_DROP_ROWS_WITH_NONEMPTY_REMOVAL_DATE_LE_CURRENT_RELEASE",
+    "loader_source": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "path": "livebench/common.py",
+      "function": "load_questions"
+    }
+  },
+  "scorer_dispatch": {
+    "frozen_rule": "LEGACY_IFEVAL_BEFORE_2025_11_25__IFBENCH_OTHERWISE",
+    "deduction": [
+      "THE_EXACT_DATASET_REVISION_CONTAINS_RELEASE_DATES_NO_LATER_THAN_2024_11_25",
+      "2024_11_25_IS_STRICTLY_BEFORE_2025_11_25",
+      "THEREFORE_EVERY_ACTIVE_TARGET_ROW_DISPATCHES_TO_LEGACY_IFEVAL",
+      "MODERN_IFBENCH_CHECKERS_ARE_NOT_LOAD_BEARING_FOR_LIVEBENCH_IF_2026_06_25"
+    ]
+  },
+  "exact_public_checker_surface": {
+    "legacy_ifeval_active_type_count": 25,
+    "previously_audited_combined_type_count": 83,
+    "deleted_noncritical_type_count": 58,
+    "checker_surface_reduction_fraction": "58/83",
+    "checker_surface_reduction_percent": 69.87951807228916,
+    "registry_source": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "path": "livebench/if_runner/instruction_following_eval/instructions_registry.py"
+    },
+    "properties": [
+      "ALL_25_CHECKERS_ARE_PUBLIC_DETERMINISTIC_PROGRAMMATIC_PREDICATES",
+      "THE_LEGACY_EVALUATOR_CHECKS_CONSTRAINT_FOLLOWING_ONLY",
+      "THE_LEGACY_EVALUATOR_DOES_NOT_SEPARATELY_GRADE_UNDERLYING_TASK_SEMANTICS"
+    ]
+  },
+  "scheduler_delta_if_verified": [
+    "REMOVE_MODERN_IFBENCH_RATIO_OVERLAP_AND_OTHER_58_TYPE_WORK_FROM_EXACT_LIVEBENCH_CRITICAL_PATH",
+    "FOCUS_SUCCESSOR_REPAIR_ON_25_LEGACY_VISIBLE_CONSTRAINT_TYPES",
+    "PREBIND_CONSTRAINT_PARSING_AND_VERIFICATION_BEFORE_TERMINAL_PROMPT",
+    "DO_NOT_USE_RAW_TERMINAL_PROMPT_CONTENT_TO_IMPLEMENT_OR_TUNE_REPAIR"
+  ],
+  "capability_truth_boundary": {
+    "benchmark_predicate_closure_is_not_by_itself_semantic_capability_proof": true,
+    "forbidden_shortcut": "DO_NOT_PROMOTE_TERMINAL_CAPABILITY_CREDIT_FROM_A_SCORER_ONLY_WITNESS_THAT_IGNORES_THE_UNDERLYING_REQUEST",
+    "required_repair_property": "PRESERVE_OR_SEPARATELY_PROVE_SEMANTIC_SEED_QUALITY_WHILE_COMPILING_VISIBLE_FORMAL_CONSTRAINTS"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "newly_exposed_terminal_cases": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "execution_authority": false,
+  "acceptance_credit_authority": false,
+  "independent_verification_required": true
+}
