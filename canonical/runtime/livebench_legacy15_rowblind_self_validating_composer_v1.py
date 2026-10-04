@@ -14,7 +14,6 @@ import json
 import re
 from typing import Any
 
-import nltk
 
 from canonical.runtime import livebench_legacy_visible_constraint_compiler_v4 as compiler
 from canonical.runtime.livebench_legacy15_composition_archetypes_v1 import ACTIVE_IDS, compatible, archetype
@@ -66,6 +65,7 @@ def _count_words(text: str) -> int:
 
 
 def _count_sentences(text: str) -> int:
+    import nltk
     tok = nltk.data.load("tokenizers/punkt/english.pickle")
     return len(tok.tokenize(text))
 
@@ -149,11 +149,11 @@ def validate_visible(response: str, constraints: list[dict[str, Any]]) -> tuple[
             ok = len(re.split(pat, response)) - 1 >= int(s["num_sections"])
         elif iid == "detectable_format:json_format":
             x = response.strip()
-            for prefix in ("\`\`\`json", "\`\`\`Json", "\`\`\`JSON", "\`\`\`"):
+            for prefix in ("```json", "```Json", "```JSON", "```"):
                 if x.startswith(prefix):
                     x = x[len(prefix):]
                     break
-            if x.endswith("\`\`\`"):
+            if x.endswith("```"):
                 x = x[:-3]
             try:
                 json.loads(x.strip())
