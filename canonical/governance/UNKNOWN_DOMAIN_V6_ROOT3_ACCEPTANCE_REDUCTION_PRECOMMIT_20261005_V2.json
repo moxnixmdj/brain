@@ -1,0 +1,186 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_ROOT3_ACCEPTANCE_REDUCTION_PRECOMMIT_20261005_V2",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__LOSSLESS_FROZEN_PROTOCOL_SEMANTIC_BRIDGE_REQUIRED__INDEPENDENT_V6_RUN_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "supersedes": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_ROOT3_ACCEPTANCE_REDUCTION_PRECOMMIT_20261005_V1.json",
+    "git_blob_sha": "12d1696c250dbfb4bee486abce6684a0290022fd",
+    "reason": "V1_BINDS_THE_V6_THEOREM_AND_INDEPENDENT_RECEIPT_GATE_BUT_DOES_NOT_EXPLICITLY_REQUIRE_A_LOSSLESS_CLAUSE_BY_CLAUSE_BRIDGE_FROM_THE_FROZEN_DIRECT_PROOF_PROTOCOL_TO_THE_EXACT_HIDDEN_EVALUATOR_ACCEPTANCE_CLAUSES"
+  },
+  "frozen_semantic_authority": {
+    "protocol": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+      "git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab"
+    },
+    "evaluator_family": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EVALUATOR_FAMILY_V1.json",
+      "git_blob_sha": "52090daf78d12020af48c1b6ffaea056d9029e1b"
+    },
+    "scorer": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py",
+      "git_blob_sha": "e8cf5d1b5d311644725a751c15e6235958fb587d"
+    },
+    "candidate_v3": {
+      "path": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+      "git_blob_sha": "8df7f13455b710623806a8219174b397a2c3c442"
+    },
+    "generator_v5": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py",
+      "git_blob_sha": "a97459fe407ea4852f57f12f504fbc0121db9824"
+    },
+    "v6_universal_proof": {
+      "path": "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py",
+      "git_blob_sha": "58410966e17c1bc546db8cab039891f3ab2bf8a8"
+    }
+  },
+  "acceptance_decomposition": {
+    "new_tool_discovery": {
+      "protocol_accounting_literal": "NEW_TOOL_DISCOVERY_PROVED_BY_FROZEN_TOOL_DISCOVERY_ROUTE",
+      "state": "SEPARATELY_ACCOUNTED__MUST_REMAIN_PRESENT_IN_EXACT_FROZEN_PROTOCOL_BYTES",
+      "v6_role": "NONE__V6_MUST_NOT_REPLACE_OR_WEAKEN_THE_SEPARATE_TOOL_DISCOVERY_PROOF"
+    },
+    "direct_residual_leaves": [
+      "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS"
+    ],
+    "mysterymechanism": "SEPARATE_PUBLIC_FIXED_BAR__UNCHANGED_BY_THIS_ATOMIC_PREDICATE"
+  },
+  "lossless_semantic_bridge": [
+    {
+      "leaf_id": "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "protocol_to_evaluator": [
+        {
+          "protocol_clause": "DOMAIN_B_SUCCESS_REUSES_DOMAIN_A_LEARNED_PRIMITIVE_WITHOUT_FULL_REDISCOVERY",
+          "evaluator_witnesses": [
+            "DOMAIN_B_TERMINAL_CONSEQUENCE_EXACT",
+            "AT_LEAST_ONE_DOMAIN_A_EARNED_RECEIPT_IS_LOAD_BEARING_IN_DOMAIN_B_TRACE",
+            "REUSED_DOMAIN_A_RECEIPT_IS_BOUND_TO_THE_HIDDEN_SHARED_PRIMITIVE_FINGERPRINT",
+            "CANDIDATE_TRANSFERRED_PRIMITIVE_FINGERPRINT_MATCHES_HIDDEN_SHARED_PRIMITIVE",
+            "DOMAIN_B_PROBE_COUNT_STRICTLY_BELOW_HIDDEN_FULL_REDISCOVERY_PROBE_FLOOR"
+          ]
+        },
+        {
+          "protocol_clause": "TRANSFER_IS_NOT_LABEL_OR_IDENTIFIER_MEMORIZATION",
+          "evaluator_witnesses": [
+            "TRANSFER_MAPPING_SUPPORT_MATCHES_HIDDEN_RELEVANT_FEATURE_SET",
+            "HIDDEN_SURFACE_RANDOMIZATION_AND_DISJOINT_DOMAIN_VOCABULARIES_ARE_VERIFIED"
+          ]
+        },
+        {
+          "protocol_clause": "NEGATIVE_TRANSFER_DISTRACTORS_DO_NOT_RECEIVE_CREDIT",
+          "evaluator_witnesses": [
+            "HIDDEN_DISTRACTOR_FEATURES_DO_NOT_APPEAR_AS_POSITIVE_SUPPORT",
+            "NEGATIVE_TRANSFER_CHECKS_EXPLICITLY_REJECT_ALL_HIDDEN_DISTRACTORS"
+          ]
+        },
+        {
+          "protocol_clause": "EVIDENCE_PROVENANCE_PRESERVED",
+          "evaluator_witnesses": [
+            "PROVENANCE_CHAIN_IS_NONEMPTY_AND_EACH_LOAD_BEARING_EVIDENCE_ITEM_HAS_SOURCE_AND_RECEIPT"
+          ]
+        }
+      ]
+    },
+    {
+      "leaf_id": "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS",
+      "protocol_to_evaluator": [
+        {
+          "protocol_clause": "IDENTIFIABLE_CASES_REACH_CORRECT_SUPPORTED_CONCLUSION",
+          "evaluator_witnesses": [
+            "IDENTIFIABLE_CASES_MUST_CONCLUDE_EXACT_GOLD_AND_MAY_NOT_ABSTAIN"
+          ]
+        },
+        {
+          "protocol_clause": "NONIDENTIFIABLE_CASES_DO_NOT_FORCE_UNIQUE_UNSUPPORTED_CONCLUSION",
+          "evaluator_witnesses": [
+            "NONIDENTIFIABLE_CASES_MUST_NOT_FORCE_A_UNIQUE_CONCLUSION_AND_REQUIRE_A_NONEMPTY_NONIDENTIFIABILITY_WITNESS"
+          ]
+        },
+        {
+          "protocol_clause": "UNDERSPECIFIED_CASES_REQUEST_A_VALID_DISCRIMINATOR_OR_ABSTAIN",
+          "evaluator_witnesses": [
+            "UNDERSPECIFIED_CASES_MUST_REQUEST_THE_HIDDEN_VALID_MINIMUM_DISCRIMINATOR_OR_ABSTAIN_WITH_A_NONEMPTY_WITNESS"
+          ]
+        },
+        {
+          "protocol_clause": "ABSTENTION_NOT_USED_AS_BLANKET_ESCAPE_ON_IDENTIFIABLE_CASES",
+          "evaluator_witnesses": [
+            "BLANKET_ABSTENTION_ON_IDENTIFIABLE_CASES_FAILS"
+          ]
+        }
+      ]
+    }
+  ],
+  "semantic_bridge_rule": {
+    "required_properties": [
+      "EXACT_PROTOCOL_BYTES_MATCH_FROZEN_HASH",
+      "EXACT_EVALUATOR_FAMILY_BYTES_MATCH_FROZEN_HASH",
+      "EVERY_FROZEN_PROTOCOL_DIRECT_LEAF_APPEARS_EXACTLY_ONCE_IN_THE_BRIDGE",
+      "EVERY_FROZEN_PROTOCOL_ACCEPTANCE_CLAUSE_APPEARS_EXACTLY_ONCE_AS_A_PROTOCOL_CLAUSE",
+      "EVERY_EVALUATOR_WITNESS_IS_AN_EXACT_LITERAL_ACCEPTANCE_CLAUSE_OF_THE_MATCHED_FROZEN_EVALUATOR_LEAF",
+      "NEW_TOOL_DISCOVERY_SEPARATE_ACCOUNTING_LITERAL_REMAINS_PRESENT",
+      "NO_MYSTERYMECHANISM_CREDIT_IS_IMPORTED",
+      "BRIDGE_ITSELF_GRANTS_ZERO_ACCEPTANCE_CREDIT"
+    ],
+    "meaning": "THE_BOUND_V6_EVALUATOR_CLAIM_MAY_ONLY_DISCHARGE_THE_TWO_FROZEN_DIRECT_RESIDUAL_LEAVES_IF_THE_EXACT_EVALUATOR_ACCEPTANCE_SURFACE_IS_A_LOSSLESS_REFINEMENT_OF_EVERY_FROZEN_PROTOCOL_ACCEPTANCE_CLAUSE"
+  },
+  "independent_verification_gate": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2132,
+    "pull_request_head_sha": "40972c47277b87135d1054a0669cdfaa45bf1f08",
+    "workflow_run_id": 37243390754,
+    "expected_receipt_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_TOTAL_EXACT_INDEPENDENT_VERIFICATION_V1",
+    "expected_status": "PASS__INDEPENDENT_CONTENT_BOUND_TOTAL_STRING_STRUCTURAL_ID_EXACT_FLOAT_AND_432_CASE_FALSIFICATION__ZERO_CREDIT",
+    "v6_receipt_is_necessary_but_not_sufficient_without_semantic_bridge": true
+  },
+  "separate_reduction_rule": {
+    "all_conditions_required": [
+      "WORKFLOW_RUN_37243390754_CONCLUDES_SUCCESS",
+      "INDEPENDENT_V6_RECEIPT_MATCHES_EXACT_SCHEMA_STATUS_AND_FROZEN_SUBJECT_BLOBS",
+      "CANONICAL_MAIN_RECHECKS_ALL_LOAD_BEARING_V6_BLOBS_EQUAL_THE_FROZEN_HASHES",
+      "V4_ACCEPTED_STRING_COUNTEREXAMPLE_REPRODUCED_AND_V5_TOTAL_STRING_REPAIR_PROVED",
+      "STRUCTURAL_IDENTIFIER_TOTALITY_SURVIVES_FORCED_TOTAL_TOKEN_COLLISION",
+      "EXACT_ADD2_FLOAT_OPERATION_ORDER_REPAIRED",
+      "ALL_SIX_TRANSFER_FAMILIES_AND_ALL_THREE_ABSTENTION_CLASSES_COVERED_BY_BOUND_UNIVERSAL_ARGUMENT",
+      "FROZEN_PROTOCOL_TO_EVALUATOR_SEMANTIC_BRIDGE_PASSES_LOSSLESS_TOTALITY_CHECK",
+      "NEW_TOOL_DISCOVERY_SEPARATE_ACCOUNTING_LITERAL_REMAINS_BOUND",
+      "ZERO_PRODUCTION_OR_TERMINAL_CASES_CONSUMED"
+    ],
+    "on_all_true": {
+      "predicate_state": "PROVED",
+      "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF_PLUS_LOSSLESS_FROZEN_PROTOCOL_SEMANTIC_BRIDGE",
+      "proved_predicate_count_delta": 1,
+      "unresolved_predicate_count_delta": -1,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0,
+      "reason_family_remains_open": "MYSTERYMECHANISM_GE_49_55_IS_SEPARATE_AND_UNCHANGED"
+    },
+    "on_any_false_or_missing": {
+      "predicate_state": "EXTERNAL_BLOCKED",
+      "proved_predicate_count_delta": 0,
+      "unresolved_predicate_count_delta": 0
+    }
+  },
+  "hard_rules": [
+    "NO_PREDICATE_PROMOTION_FROM_BROAD_FAMILY_COUNT_FLAGS_WITHOUT_EXACT_FROZEN_PROTOCOL_CLAUSE_BINDING",
+    "NO_PROMOTION_FROM_FINITE_FALSIFICATION_WITHOUT_THE_BOUND_UNIVERSAL_ARGUMENT",
+    "NO_PROMOTION_IF_ANY_FROZEN_PROTOCOL_EVALUATOR_SCORER_CANDIDATE_GENERATOR_OR_PROOF_BLOB_DIFFERS",
+    "NO_REINTERPRETATION_OF_NEW_TOOL_DISCOVERY_AS_PROVED_BY_V6",
+    "NO_MYSTERYMECHANISM_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOMIC_REDUCTION",
+    "NO_POST_OUTCOME_THRESHOLD_RULE_OR_SEMANTIC_BRIDGE_CHANGES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
