@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_POST_UNKNOWN_DOMAIN_V6_ROOT_AUTHORITY_RECONCILIATION_V1",
+  "date": "2026-10-05",
+  "status": "RECONCILED_CURRENT_CONTROL_PLANE_TO_13_PROVED_25_UNRESOLVED__ZERO_NEW_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "basis": {
+    "acceptance_binding_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "acceptance_binding_git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
+    "acceptance_binding_status": "AUTHORITY_RECONCILED__13_PROVED__25_UNRESOLVED__UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PROVED__LIVEBENCH_DIRTY_TARGET_REPLAY_QUARANTINED__ROOT1_INACTIVE",
+    "promoted_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "promoted_predicate_source": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "promoted_predicate_source_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
+    "prior_root_git_blob_sha": "3fd35b7865f7827a5a7b4202bc625fe0f980dcda",
+    "prior_authority_git_blob_sha": "95fae2b37a42c0cf1bb2d4b8beba722cd29b0036"
+  },
+  "delta": {
+    "proved_atomic": [
+      12,
+      13
+    ],
+    "unresolved_atomic": [
+      26,
+      25
+    ],
+    "root3_only": [
+      7,
+      6
+    ],
+    "live_root3_predicates": [
+      10,
+      9
+    ],
+    "matched_scope_targets": [
+      7,
+      6
+    ],
+    "root1_positive_gap_count": [
+      0,
+      0
+    ],
+    "root2_only": [
+      16,
+      16
+    ],
+    "root2_and_root3": [
+      3,
+      3
+    ],
+    "root2_touching": [
+      19,
+      19
+    ],
+    "accepted_families": [
+      5,
+      5
+    ],
+    "open_families": [
+      14,
+      14
+    ]
+  },
+  "scheduler_effect": "REMOVE_ALREADY_PROVED_UNKNOWN_DOMAIN_SCOPE_ATOM_FROM_ROOT3_WORKSET__KEEP_19_ROOT2_TOUCHING_WORKSET_UNCHANGED__PREVENT_STALE_12_26_CONTROL_PLANE_FROM_RESCHEDULING_CLOSED_WORK",
+  "invariants": [
+    "NO_NEW_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_REALITY",
+    "NO_TERMINAL_CASE_CONSUMPTION",
+    "FAIL_CLOSED_IF_BINDING_FRONTIER_IS_NOT_EXACTLY_13_PROVED_25_UNRESOLVED",
+    "FAIL_CLOSED_IF_UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_IS_NOT_PROVED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
