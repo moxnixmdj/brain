@@ -1,0 +1,39 @@
+name: Verify Unknown-Domain V2 universal proof V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py"
+      - "canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py"
+      - "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json"
+      - "canonical/runtime/unknown_domain_direct_candidate_v1.py"
+      - "canonical/runtime/unknown_domain_direct_candidate_v2.py"
+      - "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py"
+      - "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py"
+      - "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py"
+      - "canonical/runtime/unknown_domain_direct_execution_harness_v1.py"
+      - ".github/workflows/verify-unknown-domain-direct-v2-universal-proof-v1.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python -m pytest -q canonical/tests/test_unknown_domain_direct_v2_universal_proof_v1.py
+      - run: python canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py > /tmp/unknown-domain-v2-universal-proof.json
+      - run: |
+          python - <<'PY'
+          import json
+          p="/tmp/unknown-domain-v2-universal-proof.json"
+          d=json.load(open(p,encoding="utf-8"))
+          assert d["status"]=="PASS__UNIVERSAL_OVER_EXACT_FROZEN_V2_GENERATOR_DOMAIN"
+          assert d["scope"]["terminal_or_production_cases_generated"]==0
+          assert d["fresh_reality_required_for_THIS_frozen_generator_claim"] is False
+          assert d["production_execution_information_gain"]==0
+          assert d["accounting"]["acceptance_credit_delta"]==0
+          assert d["accounting"]["ownership_credit_delta"]==0
+          print("INDEPENDENT_RUNNER_EXECUTED_CONTENT_BOUND_UNIVERSAL_PROOF")
+          PY
