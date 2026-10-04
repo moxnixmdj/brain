@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_LOCAL_SEMANTIC_TEXT2TEXT_FLAN_T5_SMALL_INT8_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONTENT_ADDRESSED_PUBLIC_ARTIFACT_SET__H100_RESOURCE_FEASIBLE__EXECUTION_AND_SEMANTIC_QUALITY_NOT_YET_VERIFIED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_root_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "purpose": "Test one precommittable local semantic seed producer for paraphrase, simplify, summarize, and instruction-grounded story generation without any external learned provider during scored execution.",
+  "selection_reason": {
+    "current_verified_registry_semantic_generation_effects": 0,
+    "required_effects": [
+      "text.paraphrase.semantic_preserving",
+      "text.simplify.semantic_preserving",
+      "text.summarize.faithful",
+      "text.story.generate_instruction_grounded"
+    ],
+    "compression_strategy": "ONE_SHARED_LOCAL_TEXT2TEXT_CORE",
+    "benchmark_specific_prompt_tuning": false
+  },
+  "public_model_identity": {
+    "base_repository": "google/flan-t5-small",
+    "base_tokenizer_revision": "e48659520aaf0069046c3413e9835d214fefa83c",
+    "onnx_repository": "onnx-community/flan-t5-small-ONNX",
+    "onnx_revision": "76988c16f73cadb2c2e13e2d7d85608944223105",
+    "architecture": "T5ForConditionalGeneration",
+    "license": "Apache-2.0"
+  },
+  "learned_artifacts": [
+    {
+      "id": "encoder_int8",
+      "repository": "onnx-community/flan-t5-small-ONNX",
+      "revision": "76988c16f73cadb2c2e13e2d7d85608944223105",
+      "path": "onnx/encoder_model_int8.onnx",
+      "bytes": 35720521,
+      "sha256": "691c4b521a2aad8ff0d1a94e578f507bbfb7b3d939b5b4d233c4a8043a2388dc"
+    },
+    {
+      "id": "decoder_no_past_int8",
+      "repository": "onnx-community/flan-t5-small-ONNX",
+      "revision": "76988c16f73cadb2c2e13e2d7d85608944223105",
+      "path": "onnx/decoder_model_int8.onnx",
+      "bytes": 58862707,
+      "sha256": "54e7e2e606115068b979fe83cd64f23ee48b7cfde750f3ca9c48ea493bee5c86"
+    },
+    {
+      "id": "sentencepiece_vocab",
+      "repository": "google/flan-t5-small",
+      "revision": "e48659520aaf0069046c3413e9835d214fefa83c",
+      "path": "spiece.model",
+      "bytes": 791656,
+      "sha256": "d60acb128cf7b7f2536e8f38a5b18a05535c9e14c7a355904270e15b0945ea86"
+    }
+  ],
+  "learned_state_accounting": {
+    "max_persistent_learned_bytes": 100000000,
+    "exact_candidate_learned_bytes": 95374884,
+    "exact_headroom_bytes": 4625116,
+    "counted_components": [
+      "INT8_ENCODER_ONNX_BYTES",
+      "INT8_DECODER_NO_PAST_ONNX_BYTES",
+      "SENTENCEPIECE_LEARNED_VOCAB_BYTES"
+    ],
+    "not_counted_under_frozen_h100_contract": [
+      "DETERMINISTIC_RUNTIME_CODE",
+      "ONNXRUNTIME_EXECUTOR_BYTES",
+      "SENTENCEPIECE_EXECUTOR_LIBRARY_BYTES",
+      "NONLEARNED_MODEL_CONFIG"
+    ],
+    "accounting_status": "ARITHMETIC_AND_PUBLIC_CONTENT_ADDRESSES_BOUND__INDEPENDENT_BYTE_RECOMPUTATION_PENDING"
+  },
+  "proposed_execution_contract": {
+    "network_during_scored_execution": false,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "artifacts_must_be_prefetched_and_hash_verified_before_scored_execution": true,
+    "tokenizer": "SentencePiece model above",
+    "encoder": "INT8 ONNX encoder",
+    "decoder": "INT8 ONNX decoder without past cache",
+    "generation": "AUTOREGRESSIVE_FULL_DECODER_PREFIX_RECOMPUTATION__DETERMINISTIC_GREEDY_BASELINE_FIRST",
+    "decoder_start_token_id": 0,
+    "eos_token_id": 1,
+    "pad_token_id": 0,
+    "reason_for_no_past_decoder": "Avoid storing a second learned decoder-with-past artifact; runtime recomputation may cost more FLOPs but preserves the learned-state budget."
+  },
+  "mandatory_falsification_gates": [
+    "INDEPENDENTLY_DOWNLOAD_EACH_EXACT_REVISION_AND_RECOMPUTE_SHA256_AND_BYTE_COUNT",
+    "PROVE_ONNX_FILES_REQUIRE_NO_UNCOUNTED_EXTERNAL_LEARNED_DATA_FILES",
+    "PROVE_SENTENCEPIECE_IDS_AND_ONNX_VOCAB_ABI_ARE_COMPATIBLE",
+    "PROVE_ENCODER_PLUS_NO_PAST_DECODER_EXECUTES_END_TO_END_ON_CPU_WITH_NETWORK_DISABLED_AFTER_PREFETCH",
+    "RUN_PUBLIC_NONTERMINAL_PARAPHRASE_SIMPLIFY_SUMMARIZE_AND_STORY_GENERATION_PROBES",
+    "SEPARATELY_VERIFY_SEMANTIC_UTILITY__NONEMPTY_OUTPUT_IS_NOT_QUALITY_EVIDENCE",
+    "COMPOSE_ONLY_AFTER_SEMANTIC_SEED_PASS_WITH_VERIFIED_CONSTRAINT_POSTPROCESSOR",
+    "RUN_BLIND_EXACT_LIVEBENCH_ROUTE_ONLY_AFTER_SUCCESSOR_FREEZE_AND_FRESH_REALITY_AUTHORITY"
+  ],
+  "promotion_rule": "NO_REGISTRY_CAPABILITY_FAMILY_OWNERSHIP_OR_ACCEPTANCE_CREDIT_UNTIL_EXECUTION_AND_PUBLIC_NONTERMINAL_SEMANTIC_GENERALIZATION_ARE_INDEPENDENTLY_VERIFIED_AND_THE_FINAL_BLIND_ACCEPTANCE_ROUTE_PASSES.",
+  "hard_nonclaims": [
+    "RESOURCE_FEASIBILITY_DOES_NOT_PROVE_SEMANTIC_QUALITY",
+    "NO_CLAIM_FLAN_T5_SMALL_EQUALS_OPUS_5_5",
+    "NO_CLAIM_LIVEBENCH_65_7_IS_REACHED",
+    "NO_CLAIM_STORY_PARAPHRASE_SIMPLIFY_OR_SUMMARY_QUALITY_YET",
+    "NO_TERMINAL_CASE_73_OR_LATER_READ",
+    "NO_TERMINAL_CASE_SPECIFIC_TUNING",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "H100_IS_AN_EXPERIMENTAL_RESOURCE_LANE_NOT_A_WEAKENING_OF_THE_19_FAMILY_38_ATOM_TERMINAL_CONTRACT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "next": "INDEPENDENT_PUBLIC_RUNNER_SMOKE__EXACT_BYTES__NO_EXTERNAL_DATA__END_TO_END_GREEDY_GENERATION_ON_FOUR_PUBLIC_NONTERMINAL_TEXT2TEXT_PROBES"
+}
