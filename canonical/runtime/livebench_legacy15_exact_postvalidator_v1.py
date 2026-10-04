@@ -21,6 +21,7 @@ PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 PINNED_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
 PINNED_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 PINNED_UTIL_BLOB = "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+PINNED_EVALUATION_MAIN_BLOB = "4a341984936c4d609644a3b77f8c030ac5aa7269"
 
 SLOT_KEYS: dict[str, tuple[str, ...]] = {
     "keywords:existence": ("keywords",),
@@ -110,11 +111,13 @@ def load_pinned_registry(livebench_root: str | Path):
     instructions_path = package / "instructions.py"
     registry_path = package / "instructions_registry.py"
     util_path = package / "instructions_util.py"
+    evaluation_main_path = package / "evaluation_main.py"
 
     expected = {
         instructions_path: PINNED_INSTRUCTIONS_BLOB,
         registry_path: PINNED_REGISTRY_BLOB,
         util_path: PINNED_UTIL_BLOB,
+        evaluation_main_path: PINNED_EVALUATION_MAIN_BLOB,
     }
     for path, sha in expected.items():
         if not path.is_file():
@@ -147,6 +150,8 @@ def load_pinned_registry(livebench_root: str | Path):
         "instructions_blob": PINNED_INSTRUCTIONS_BLOB,
         "registry_blob": PINNED_REGISTRY_BLOB,
         "instructions_util_blob": PINNED_UTIL_BLOB,
+        "evaluation_main_blob": PINNED_EVALUATION_MAIN_BLOB,
+        "strict_nonempty_guard": "response.strip() must be truthy before any checker can pass",
     }
 
 
@@ -156,6 +161,10 @@ def evaluate_with_registry(
     registry: Mapping[str, Any],
 ) -> dict[str, Any]:
     rows = _normalize_contracts(contracts)
+    response_text = str(response)
+    # Frozen legacy evaluation_main.test_instruction_following_strict applies
+    # `if response.strip() and instruction.check_following(response)`.
+    strict_nonempty = bool(response_text.strip())
     flags: list[bool] = []
     for row in rows:
         iid = str(row["instruction_id"])
@@ -166,7 +175,7 @@ def evaluate_with_registry(
         slots = dict(row["slots"])
         try:
             instruction.build_description(**slots)
-            flags.append(bool(instruction.check_following(str(response))))
+            flags.append(strict_nonempty and bool(instruction.check_following(response_text)))
         except Exception as exc:
             raise ExactPostvalidationError(
                 "CHECKER_EXECUTION_FAILED:" + iid + ":" + type(exc).__name__ + ":" + str(exc)
@@ -179,6 +188,8 @@ def evaluate_with_registry(
         "checker_results": flags,
         "true_checker_count": sum(flags),
         "checker_count": len(flags),
+        "strict_nonempty_guard_applied": True,
+        "response_nonempty": strict_nonempty,
         "terminal_data_used": False,
         "hidden_kwargs_used": False,
         "terminal_case_id_used": False,
