@@ -101,16 +101,16 @@
         "activation_git_blob_sha": "4cbc1b9f478654b2dc671a8b54f91b5c4b91c019",
         "verification_path": "canonical/verification/ROOT2_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
-        "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V8.json",
-        "current_frontier_git_blob_sha": "2eaeb74fe306ee2507145e26eb731f69f46e6153",
-        "status": "ACTIVE__ROOT2_FRONTIER_V8_INDEPENDENT_PASS__CURRENT_AUTHORITY_BOUND__ZERO_CREDIT",
+        "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V9.json",
+        "current_frontier_git_blob_sha": "5894eb38bdb72e922bed2d1e54f16a38a7adec11",
+        "status": "ACTIVE__ROOT2_FRONTIER_V9_INDEPENDENT_PASS__CURRENT_AUTHORITY_BOUND__ZERO_CREDIT",
         "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2",
         "fresh_reality_authority": false,
-        "current_frontier_verification_path": "canonical/verification/ROOT2_V8_FINANCE_DUAL_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-        "current_frontier_verification_git_blob_sha": "7e2d71144853c41fadab55f4074d484edf46e651",
+        "current_frontier_verification_path": "canonical/verification/ROOT2_V9_OMC_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "current_frontier_verification_git_blob_sha": "eceaf7cec5906558b2672b9ff6240551c8822f07",
         "effective_scheduling_authority": true,
-        "current_frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V8_ACTIVATION_V1.json",
-        "current_frontier_activation_git_blob_sha": "e0c0b2a25e764c875e4af4cffb3a61f05a7a58bc"
+        "current_frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V9_ACTIVATION_V1.json",
+        "current_frontier_activation_git_blob_sha": "5e786f3eeab6c11782bd7529d0e8c75560777f81"
       }
     },
     "root_3_scope_completeness": {
@@ -140,7 +140,7 @@
     "no_credit_from_classification_itself": true,
     "root1_currently_active": false,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
-    "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V8.json",
+    "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V9.json",
     "root2_effective_scheduling_authority": true
   },
   "accounting": {
