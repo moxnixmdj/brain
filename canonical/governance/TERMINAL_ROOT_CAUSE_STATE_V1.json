@@ -213,29 +213,24 @@
     }
   },
   "root3_current_execution_state": {
-    "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V1.json",
-    "git_blob_sha": "10a28a403dae6df94f8fe58b1d9d3f9e0b60c11b",
-    "verification_path": "canonical/verification/ROOT3_MINIMUM_ACTION_CUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-    "verification_git_blob_sha": "e24058eab431a1643dae340a8ff564490f992097",
-    "status": "BASE_MINIMUM_CUT_PLUS_VERIFIED_SYNTHESIS_SCOPE_OVERLAY__10_LIVE_ROOT3_PREDICATES__3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
+    "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+    "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+    "verification_path": "canonical/verification/ROOT3_POST_SYNTHESIS_PUBLIC_RUNNER_VERIFICATION_20261004_V2.json",
+    "verification_git_blob_sha": "7a5e32351cd20c6ef15d50283e2753186e04e77d",
+    "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__10_LIVE_ROOT3_PREDICATES__7_MATCHED_SCOPE_TARGETS__3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
     "live_root3_predicates": 10,
+    "matched_scope_targets": 7,
     "event_class_count": 3,
     "currently_runnable_event_count": 0,
     "fresh_reality_authority": false,
-    "synthesis_scope_overlay": {
-      "activation_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_V1.json",
-      "activation_git_blob_sha": "60d845cf2370854bfd171154cf94946436be2c16",
-      "certificate_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
-      "certificate_git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
-      "verification_path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-      "verification_git_blob_sha": "1528485a15c98e89c9fb4dc50d691b6682e08542",
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT2_AND_ROOT3_TO_ROOT2_ONLY__ZERO_CREDIT"
-    }
+    "synthesis_scope_closed": true
   },
   "root3_scope_certificate_admissibility_refinement": {
-    "path": "canonical/governance/ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V1.json",
-    "git_blob_sha": "8eb97e997c117e102fd115d03cce5793c416a482",
-    "status": "ACTIVE__ZERO_CREDIT__NO_ROOT3_COUNT_CHANGE",
+    "path": "canonical/governance/ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V2.json",
+    "git_blob_sha": "a9bff5074dbb456d673131c60f30efa88a337670",
+    "verification_path": "canonical/verification/ROOT3_SCOPE_ADMISSIBILITY_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "46f51ec2a2ce1dfb859adfa420f6b8c362ef0ad1",
+    "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__POST_SYNTHESIS_RECONCILIATION__ZERO_CREDIT",
     "rule": "ACCOUNTING_LABEL_CARDINALITY_OR_SINGLETON_FAMILY_TO_CONTRACT_MAPPING_NEVER_PROVES_SCOPE_COMPLETENESS_WITHOUT_EXPLICIT_INDEPENDENT_LOSSLESS_OR_EXHAUSTIVE_DECOMPOSITION"
   },
   "synthesis_scope_reclassification": {
