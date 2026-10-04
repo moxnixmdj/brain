@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SCORE_ONLY_STRUCTURAL_WITNESS_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V3_STRUCTURAL_WITNESS_ROUTING__SYNTHETIC_ONLY__ZERO_CREDIT",
+  "subject": {
+    "v1_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v1.py",
+    "v1_git_blob_sha": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
+    "v2_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v2.py",
+    "v2_git_blob_sha": "dbc895a0e458e411aafd3c96e0ddc2c01e657375",
+    "v3_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py",
+    "v3_git_blob_sha": "ff977b2e34d551e5a2751852bb77d23c7c503647",
+    "compiler_path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+    "compiler_git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+    "test_path": "canonical/tests/test_root2_livebench_if_astra_inference_adapter_v3.py",
+    "test_git_blob_sha": "647a216d934c939a4d10fcbab0e39e66369e195a"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/livebench-score-witness-v3-20261004",
+    "trigger_commit": "8c4376535145dbc00ce3bfc296effd6f76bb3340",
+    "workflow_run_id": 37198697949,
+    "workflow_job_id": 111425741683,
+    "conclusion": "success"
+  },
+  "verified": {
+    "structural_unique_word_witness_bypasses_semantic_runtime": true,
+    "composed_structural_witness_satisfies_all_recovered_constraints": true,
+    "exact_formal_route_preserves_v2": true,
+    "unrecognized_semantic_request_preserves_v2": true,
+    "contradictory_constraint_preserves_v2_fail_closed_route": true,
+    "external_tools_remain_forbidden": true,
+    "model_dependency_count_zero_on_v3_fast_path": true,
+    "terminal_cases_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE_CLAIM",
+    "NO_UNMODELLED_CHECKER_COVERAGE_CLAIM",
+    "NO_GENERAL_SEMANTIC_ANSWER_QUALITY_CLAIM",
+    "NO_CASE_73_PLUS",
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT"
+  ],
+  "authority": {
+    "routing_verification": true,
+    "execution": false,
+    "replay72": false,
+    "new_case_exposure": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
