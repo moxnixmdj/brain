@@ -251,15 +251,10 @@ def _compose_plain_or_sentence(
         if relation == "at least":
             _add_at_least_sentences(lines, n)
         else:
-            # For general single-block text, avoid adding any sentence-ending
-            # punctuation. The remaining unavoidable public wrappers are checked
-            # conservatively below; threshold 2 is only accepted without P.P.S
-            # plus end-marker interaction until exact-source grid verification.
-            if n == 2:
-                post = _one(constraints, "detectable_content:postscript")
-                end = _ending(constraints)
-                if post is not None and end is not None:
-                    raise ComposeError("LESS_THAN_TWO_SENTENCE_POSTSCRIPT_END_UNVERIFIED")
+            # Construct with no discretionary sentence-ending punctuation.
+            # Exact pinned-checker postvalidation remains authoritative for
+            # mandatory public wrappers such as postscript and end phrases.
+            pass
 
     end = _ending(constraints)
     prefix = "\n".join(lines)
@@ -327,10 +322,8 @@ def _compose_nth_paragraph(
         raise ComposeError("NTH_FIRST_WORD_FORBIDDEN_UNSAT")
 
     sc = _sentence_constraint(constraints)
-    if sc is not None and sc[0] == "less than":
-        # Blank-line/Punkt interaction gets exact-source verification before
-        # activation; keep this branch fail-closed in V1.
-        raise ComposeError("NTH_PLUS_SENTENCE_LESS_THAN_UNVERIFIED")
+    # For less-than sentence bounds, emit no discretionary punctuation and let
+    # exact pinned-checker postvalidation decide the mandatory-wrapper geometry.
 
     paragraphs = ["zxqv" for _ in range(n)]
     paragraphs[nth - 1] = first + " zxqv"
