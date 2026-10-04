@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_PREIMMUTABLE_CLAIM_TOMBSTONE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__OBSOLETE_9DD_LEASE_CLAIM_KEY_SPENT_FAIL_CLOSED_BEFORE_QUEUED_PRODUCTION__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "obsolete_execution": {
+    "execution_lease_sha256": "9dd08aab9d79e6bbf2552d15c405b8de526478c3a505e2397455150d372164cb",
+    "execution_lease_git_blob_sha": "049997c1d8ebdb4c07017a2864055109f7238876",
+    "launch_ref": "refs/heads/unknown-domain-direct-launch/9dd08aab9d79e6bbf2552d15c405b8de526478c3a505e2397455150d372164cb",
+    "queued_production_run_id": 37240937809,
+    "queued_production_job_id": 111549358161,
+    "superseding_defect": "CREATE_EVENT_JOB_CHECKED_OUT_MUTABLE_BRANCH_REF_INSTEAD_OF_IMMUTABLE_EVENT_SHA"
+  },
+  "atomic_safety_tombstone": {
+    "claim_ref": "refs/heads/unknown-domain-direct-claims/9dd08aab9d79e6bbf2552d15c405b8de526478c3a505e2397455150d372164cb",
+    "claim_ref_observed_present": true,
+    "claim_ref_target_commit": "1f848e1d3edab4da63a995a7724c45b7d6ba2587",
+    "target_equal_to_observed_main_at_tombstone": true,
+    "queued_job_state_after_claim_presence": "QUEUED",
+    "effect": "WHEN_THE_OBSOLETE_JOB_REACHES_ATOMIC_CLAIM_CREATE_IT_MUST_RECEIVE_NON_201_AND_ABORT_BEFORE_BEACON_SECRET_OR_CASE_GENERATION"
+  },
+  "superseding_frontier": {
+    "runner_pull_request": 2068,
+    "head_sha": "857c31cd4e554c8bf8a7b840a76ef1429d3b2c83",
+    "required_production_workflow_blob": "990b4fe712ca509f3e01c8e632c75416a3cd0b98",
+    "required_property": "CHECKOUT_CREATE_EVENT_GITHUB_SHA_NOT_MUTABLE_GITHUB_REF",
+    "execution_authority": false
+  },
+  "hard_nonclaims": [
+    "TOMBSTONE_IS_NOT_PRODUCTION",
+    "NO_PRODUCTION_CASES_WERE_GENERATED_BY_THE_TOMBSTONE",
+    "NO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "DO_NOT_REUSE_THE_9DD08A_CLAIM_KEY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "production_cases_generated_by_tombstone": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
