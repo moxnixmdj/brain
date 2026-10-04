@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SUCCESSOR_FIVE_COMPONENT_PRECOMMIT__RESOURCE_TRUTH_REPAIR_BOUND__SHADOW_V2_BOUND__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "manifest_path": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2.json",
+    "manifest_git_blob_sha": "66554061f204d8a86b37a30c84d0cf07a525a786",
+    "runtime_path": "canonical/runtime/livebench_if_execution_precommit_v2.py",
+    "runtime_git_blob_sha": "f959a10bb7bfd91a4f01317b3e4afd957237ede2",
+    "resource_truth_repair_path": "canonical/verification/LIVEBENCH_ZERO_CASE_RESOURCE_FIT_TRUTH_REPAIR_20261004_V1.json",
+    "resource_truth_repair_git_blob_sha": "8a603c1f48aad6e0fc79c2c76d2db437efde3893"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1731,
+    "head_sha": "918928fe3dbb90fdd6f695a070e8a6d18d7bd11e",
+    "merge_commit": "25dff13f096a1fd98b780f4d7f897b0f6cace8a8",
+    "workflow_run_id": 37184811053,
+    "workflow_job_id": 111384422543,
+    "conclusion": "success",
+    "verifier_git_blob_sha": "8f9a4c04157f3c0b7ac468891305f89b6d43bf04",
+    "workflow_git_blob_sha": "7c4d62b706261771f3bd4670baaf42d83c3c9a7f"
+  },
+  "verified": {
+    "component_digest_count": 5,
+    "all_component_digests_exact": true,
+    "historical_environment_failure_bound": true,
+    "spacy_3_8_16_bound": true,
+    "en_core_web_sm_3_8_0_bound": true,
+    "resource_fit_positive_run_bound": true,
+    "shadow_reality_lease_v2_bound": true,
+    "shadow_reality_lease_v1_reentry_rejected": true,
+    "per_component_mutation_rejected": true,
+    "terminal_cases_consumed": 0,
+    "case_reveal_authority": false,
+    "shadow_collection_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_authorized": false
+  },
+  "semantic_effect": "SUCCESSOR_PRECOMMIT_IS_INDEPENDENTLY_VERIFIED_FOR_FUTURE_V2_SHADOW_COLLECTION__PREEXPOSURE_PLAN_MUST_NOW_BE_REBOUND_TO_SUCCESSOR_COMPONENT_HASHES__ZERO_TERMINAL_CREDIT",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
