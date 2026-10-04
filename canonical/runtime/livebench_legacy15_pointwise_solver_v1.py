@@ -50,6 +50,8 @@ def solve_prompt(
     prompt: str,
     livebench_root: str | Path,
     *,
+    nltk_wheel_path: str | Path | None = None,
+    nltk_data_root: str | Path | None = None,
     max_per_subset: int = 16,
     max_total: int = 512,
 ) -> dict[str, Any]:
@@ -79,6 +81,8 @@ def solve_prompt(
         search = pointwise.solve_with_pinned_livebench(
             contracts,
             str(livebench_root),
+            nltk_wheel_path=None if nltk_wheel_path is None else str(nltk_wheel_path),
+            nltk_data_root=None if nltk_data_root is None else str(nltk_data_root),
             max_per_subset=max_per_subset,
             max_total=max_total,
         )
@@ -142,6 +146,8 @@ def run(args: dict[str, Any] | None = None, root=None) -> dict[str, Any]:
     return solve_prompt(
         str(args.get("prompt") or ""),
         livebench_root,
+        nltk_wheel_path=args.get("nltk_wheel_path"),
+        nltk_data_root=args.get("nltk_data_root"),
         max_per_subset=int(args.get("max_per_subset") or 16),
         max_total=int(args.get("max_total") or 512),
     )
