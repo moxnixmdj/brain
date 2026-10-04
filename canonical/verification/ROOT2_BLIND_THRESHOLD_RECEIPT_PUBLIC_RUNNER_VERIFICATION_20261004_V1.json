@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_BLIND_THRESHOLD_RECEIPT_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_SUBJECT_BLOBS__12_OF_12_TESTS__ADVERSARIAL_CHECKS_PASS__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/blind_threshold_receipt_v1.py",
+      "git_blob_sha": "324e9c236fed50d150082ebcca6078a2921ed65a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_blind_threshold_receipt_v1.py",
+      "git_blob_sha": "80c634be25fb2ffaef3aa156b13eaefdde010d3d"
+    },
+    "governance": {
+      "path": "canonical/governance/ROOT2_BLIND_THRESHOLD_RECEIPT_V1.json",
+      "git_blob_sha": "ad699b6e5e9a0268b18cabe39588f9a0a401016f"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1766,
+    "verified_pr_merge_ref_sha": "036331653d6713b2d4d0d86bb2b3f8c25d165703",
+    "merged_main_commit": "9d412c7d25288144b6d17837460ea45ce9b8392b",
+    "workflow_run_id": 37189060699,
+    "workflow_job_id": 111397221714,
+    "verifier_git_blob_sha": "8823c205916ccdc74c84f9ac7b1cfbf03837f4da",
+    "workflow_git_blob_sha": "d06f94a5cc5cc5da24e52acb94b09848164744ee",
+    "conclusion": "success",
+    "python": "3.12.14"
+  },
+  "verified": {
+    "copied_subject_tests_passed": 12,
+    "copied_subject_tests_total": 12,
+    "blind_pass_without_exact_score": true,
+    "relative_rating_requires_direct_relative_semantics": true,
+    "forged_source_authenticity_rejected": true,
+    "matched_noninferiority_rejected": true,
+    "zero_authority_preserved": true
+  },
+  "interpretation": "THE_VALIDATOR_CAN_STRUCTURALLY_ACCEPT_AN_AUTHENTICATED_OWNER_OR_PLATFORM_PASS_FAIL_THRESHOLD_CERTIFICATE_WITHOUT_EXACT_SCORE_DISCLOSURE__SEPARATE_SOURCE_AUTHENTICATION_AND_ACCEPTANCE_REDUCTION_REMAIN_REQUIRED",
+  "hard_nonclaims": [
+    "NO_BENCHMARK_RESULT_OBTAINED",
+    "NO_OWNER_OR_PLATFORM_AUTHENTICITY_CREATED_BY_THIS_VALIDATOR",
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_FRESH_REALITY_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false
+}
