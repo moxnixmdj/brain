@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_CLOSURE_CONTROLLER_V2",
   "date": "2026-10-04",
-  "status": "CANDIDATE__SESSION_TESTED__RECONCILED_TO_SYNTHESIS_SCOPE_RECLASSIFICATION__INDEPENDENT_REVERIFY_PENDING__ZERO_CREDIT",
+  "status": "CANDIDATE__SESSION_TESTED__SYNTHESIS_COVERAGE_V2_RECONCILED__INDEPENDENT_REVERIFY_PENDING__ZERO_CREDIT",
   "base_terminal_authority_head": "deb61749c171ee04e7f97bb4cbcb0b7d583599da",
   "objective": "MINIMIZE_ROOT2_WORST_CASE_WALL_CLOCK_ACTION_COUNT_AND_IRREVERSIBLE_EVALUATIONS_WITHOUT_FALSE_COMPARATOR_EQUIVALENCE",
   "exact_state": {
@@ -75,10 +75,20 @@
       "scope_side": "CLOSED_BY_VERIFIED_SCOPE_CERTIFICATE",
       "root2_residuals": [
         "metric:matched_quality",
-        "matched_quality_noninferiority",
-        "required_claim_coverage_noninferiority"
+        "matched_quality_noninferiority"
       ],
-      "rule": "DO_NOT_REOPEN_SCOPE_SIDE__WORK_ONLY_ROOT2_METRIC_AND_NUMERIC_NONINFERIORITY_RESIDUALS"
+      "rule": "DO_NOT_REOPEN_SCOPE_OR_REQUIRED_CLAIM_COVERAGE__WORK_ONLY_MATCHED_QUALITY_ATOM_AND_MATCHED_QUALITY_NONINFERIORITY",
+      "required_claim_coverage": {
+        "state": "PROVED_BY_INDEPENDENT_CEILING_PLUS_SUPERSET_SCOPE",
+        "candidate_path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
+        "candidate_git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "verifier_pull_request": 1526,
+        "verifier_merge_commit": "f9bd3737a3ddc23df4e19922c1f04fec3e163cce",
+        "workflow_run_id": 37164910933,
+        "workflow_job_id": 111325748211,
+        "conclusion": "success"
+      }
     }
   },
   "dead_or_sleeping_branches": [
@@ -141,6 +151,8 @@
     "terminal_root_state_blob_sha": "8b8721e0f9b65ab86f193fcf7d19b8a8d286b0a4",
     "change": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_RECLASSIFIED_ROOT2_AND_ROOT3_TO_ROOT2_ONLY_AFTER_VERIFIED_SCOPE_CERTIFICATE",
     "counts": "16_ROOT2_ONLY__7_ROOT3_ONLY__3_ROOT2_AND_ROOT3__26_UNRESOLVED",
-    "acceptance_delta": 0
+    "acceptance_delta": 0,
+    "synthesis_coverage_delta": "REQUIRED_CLAIM_COVERAGE_NONINFERIORITY_DISCHARGED__MATCHED_QUALITY_ATOM_AND_BOUND_REMAIN_OPEN",
+    "synthesis_coverage_verification": "verification-capsule-runner#1526/run-37164910933/job-111325748211"
   }
 }
