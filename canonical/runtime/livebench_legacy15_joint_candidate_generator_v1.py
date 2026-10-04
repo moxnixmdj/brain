@@ -77,7 +77,11 @@ def _pad_for_word_constraint(
     s = _slots(word_constraint)
     threshold = int(s["num_words"])
     relation = str(s["relation"])
-    current = _word_count(text)
+    # The structural sentinel is not part of the emitted response. Counting it
+    # can under-pad a lower-bound witness by one word when no tail material is
+    # present, after which finalization deletes the sentinel.
+    marker = "__PB_END_SLOT__"
+    current = _word_count(text.replace(marker, ""))
     if relation == "less than":
         return text if current < threshold else None
     if relation != "at least":
@@ -197,9 +201,6 @@ def _build_core_skeleton(
 
     components.extend(f"{safe}sentence{i}." for i in range(sentence_fillers))
 
-    # Reserve a stable insertion point for word padding before tail material.
-    components.append("__PB_END_SLOT__")
-
     if nth:
         s = _slots(nth)
         n = int(s["num_paragraphs"])
@@ -221,6 +222,12 @@ def _build_core_skeleton(
         body = "***".join(paras)
     else:
         body = "\n".join(components).strip()
+
+    # The tail slot must be global, not embedded in the first structural
+    # paragraph. A single newline preserves both paragraph encodings while
+    # guaranteeing EndChecker material is finalized at the true response end.
+    body = body.rstrip()
+    body = (body + "\n" if body else "") + "__PB_END_SLOT__"
 
     # Preserve __PB_END_SLOT__ through the padding phase. Finalization happens
     # in generate(), after the word constraint has been satisfied.
