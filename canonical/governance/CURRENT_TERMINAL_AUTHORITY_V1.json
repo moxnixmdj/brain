@@ -889,7 +889,7 @@
     },
     "root2_root3_minimum_execution_frontier_v1": {
       "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
-      "git_blob_sha": "bed37ae9254ca3a4f207da8fe04ac0db287bea99",
+      "git_blob_sha": "7c27d7289654f9fbf6bbfc02bc2fac9e0062ff09",
       "status": "CURRENT_ROOT2_FRONTIER__ZERO_CREDIT"
     },
     "current_witness_target_totalization_v2_candidate": {
@@ -904,7 +904,7 @@
     },
     "root3_residual_compression_v1": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
-      "git_blob_sha": "66babe959f0a159c450dc49cba520189288515ff",
+      "git_blob_sha": "5ba670880174cf8d3698583a6430ebd89d2b711a",
       "status": "SYNTHESIS_SCOPE_RECLASSIFIED_TO_ROOT2_ONLY__ZERO_CREDIT"
     },
     "current_zero_reality_minimum_cut_v7": {
@@ -919,7 +919,7 @@
     },
     "current_zero_reality_minimum_cut_v8": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
-      "git_blob_sha": "078242d57ad0d224a8a6f3e45f8ef353222503ec",
+      "git_blob_sha": "18ae6d557fd15b226c286017e93d437a6ed8bdbc",
       "status": "CHARTOGRAPHY_GUARD_DISCHARGED__NO_FRESH_REALITY"
     },
     "current_v8_post_compression_verification_binding": {
@@ -1600,7 +1600,7 @@
     "current_effective_canonical_leaf_atoms": 39
   },
   "last_reconciled_control_plane_head": "627492dd3a9adfdbd4c50146335bc1a92aca4eee",
-  "last_reconciled_reason": "UNIVERSAL_LEARNING_V7_ACTIVATION__V6_LOAD_BEARING_PREDECESSOR__ROOT3_CUT_FRONTIER_TERMINAL_POINTER_CHAIN_REBOUND__TWO_FROZEN_DIRECT_LEAVES_PRESERVED__INDEPENDENT_POINTER_VERIFICATION_PASS__ZERO_ACCEPTANCE_OWNERSHIP_CREDIT",
+  "last_reconciled_reason": "UNIVERSAL_LEARNING_V7_ACTIVATION_FINALIZED__V6_LOAD_BEARING_PREDECESSOR__ROOT3_CUT_FRONTIER_TERMINAL_POINTER_CHAIN_INDEPENDENTLY_VERIFIED__TWO_FROZEN_DIRECT_LEAVES_PRESERVED__ZERO_ACCEPTANCE_OWNERSHIP_CREDIT",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
