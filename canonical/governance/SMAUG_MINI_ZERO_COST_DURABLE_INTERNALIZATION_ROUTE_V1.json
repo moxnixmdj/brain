@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_SMAUG_MINI_ZERO_COST_DURABLE_INTERNALIZATION_ROUTE_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_QUOTA_PROVED__BRAIN_CONTROLLED_RELEASE_VAULT_ROUTE__EXECUTION_BLOCKED_IN_THIS_SESSION_BY_PRIVILEGED_WORKFLOW_MUTATION_GUARD__ZERO_CAPABILITY_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "model": "abacusai/Smaug-Mini",
+    "revision": "2750fd9f1e67e004111a53a6d9a39c15fbbd33ef",
+    "license": "Apache-2.0",
+    "published_repository_size_gb": 55.6,
+    "weight_shards": 18,
+    "largest_published_weight_shard_gb_approx": 3.99,
+    "architecture": "Qwen3_5ForConditionalGeneration",
+    "precision": "bfloat16"
+  },
+  "destination": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "visibility": "public",
+    "authenticated_owner_control": true,
+    "role": "BRAIN_CONTROLLED_PUBLIC_CAPABILITY_BYTE_VAULT",
+    "canonical_authority_remains": "moxnixmdj/brain"
+  },
+  "current_public_quota_facts": {
+    "github_public_standard_runner": {
+      "cost": "FREE_AND_UNLIMITED_FOR_STANDARD_RUNNERS_IN_PUBLIC_REPOSITORIES",
+      "linux_storage_gb": 14,
+      "source": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners"
+    },
+    "github_release": {
+      "max_assets_per_release": 1000,
+      "max_bytes_per_asset": "UNDER_2_GIB",
+      "total_release_size_limit": "NONE_DOCUMENTED",
+      "release_bandwidth_limit": "NONE_DOCUMENTED",
+      "source": "https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases"
+    },
+    "policy_caveat": {
+      "statement": "GITHUB_MAY_THROTTLE_OR_LIMIT_SIGNIFICANTLY_EXCESSIVE_BANDWIDTH_RELATIVE_TO_SIMILAR_USE",
+      "source": "https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies"
+    }
+  },
+  "capacity_proof": [
+    "EACH_PUBLISHED_SOURCE_SHARD_IS_BELOW_APPROXIMATELY_4_GB_AND_THEREFORE_FITS_IN_A_14_GB_RUNNER_WITH_ROOM_FOR_SPLIT_OUTPUT.",
+    "SPLITTING_EACH_SHARD_INTO_1900_MIB_PIECES_PRODUCES_AT_MOST_THREE_RELEASE_ASSETS_PER_SOURCE_SHARD.",
+    "18_SHARDS_TIMES_3_IS_AT_MOST_54_WEIGHT_PART_ASSETS.",
+    "ADDING_18_PER_SHARD_REASSEMBLY_MANIFESTS_PLUS_RUNTIME_CONFIGURATION_FILES_AND_ONE_AGGREGATE_MANIFEST_REMAINS_FAR_BELOW_1000_RELEASE_ASSETS.",
+    "NO_ACTIONS_ARTIFACT_STORAGE_IS_REQUIRED_BECAUSE_DURABILITY_IS_PROVIDED_BY_RELEASE_ASSETS.",
+    "A_MATRIX_JOB_CAN_DOWNLOAD_ONE_IMMUTABLE_HUGGINGFACE_SHARD_AT_A_TIME_VERIFY_ITS_SOURCE_SHA256_SPLIT_IT_UPLOAD_PARTS_AND_DELETE_SCRATCH_BYTES.",
+    "THE_USER_OWNED_PUBLIC_VERIFICATION_REPOSITORY_IS_CONTROLLED_BY_THE_SAME_GITHUB_PRINCIPAL_AS_CANONICAL_BRAIN_AND_CAN_SERVE_AS_A_SUBORDINATE_CAPABILITY_BYTE_VAULT."
+  ],
+  "acquisition_protocol": [
+    "PIN_SOURCE_REPOSITORY_AND_IMMUTABLE_REVISION.",
+    "FOR_EACH_OF_18_WEIGHT_SHARDS_RESOLVE_HUGGINGFACE_LFS_SHA256_AND_SIZE_FROM_IMMUTABLE_REVISION_METADATA.",
+    "DOWNLOAD_ONE_SHARD_PER_PUBLIC_RUNNER_JOB.",
+    "FAIL_CLOSED_UNLESS_SIZE_AND_SHA256_MATCH_SOURCE_METADATA.",
+    "SPLIT_TO_LT_2_GIB_PARTS.",
+    "SHA256_EACH_PART_AND_EMIT_PER_SHARD_REASSEMBLY_MANIFEST.",
+    "UPLOAD_PARTS_AND_MANIFEST_TO_A_SINGLE_IMMUTABLE_GITHUB_RELEASE_TAG.",
+    "MIRROR_RUNTIME_CONFIGURATION_AND_TOKENIZER_FILES_FROM_THE_SAME_REVISION.",
+    "SEAL_AN_AGGREGATE_MANIFEST_IN_CANONICAL_BRAIN_WITH_RELEASE_ID_ASSET_NAMES_SIZES_PART_HASHES_SOURCE_SHARD_HASHES_AND_REASSEMBLY_COMMAND.",
+    "VERIFY_REASSEMBLY_OF_AT_LEAST_ONE_SHARD_INDEPENDENTLY_BEFORE_DECLARING_STORAGE_INTERNALIZATION_COMPLETE."
+  ],
+  "immediate_effect": {
+    "eliminated_as_conceptual_blocker": "NO_ZERO_COST_DURABLE_STORE_LARGE_ENOUGH_FOR_55_6_GB_CAPABILITY_BYTES",
+    "remaining_execution_blocker": "CURRENT_CHAT_GITHUB_CONNECTOR_REJECTED_PRIVILEGED_ACTIONS_WORKFLOW_MUTATION_THAT_WOULD_CREATE_AND_UPLOAD_RELEASE_ASSETS",
+    "remaining_after_storage": [
+      "EXECUTE_THE_ACQUISITION_PROTOCOL_THROUGH_AN_AUTHORIZED_GITHUB_ACTIONS_WRITE_PATH",
+      "BIND_AND_VERIFY_THE_EXACT_SMAUG_MINI_WEIGHT_SHARD_HASH_MANIFEST",
+      "QUALIFY_AN_EXACT_ZERO_COST_INFERENCE_FORM",
+      "REPRODUCE_OR_DOMINATE_THE_ROOT1_THRESHOLD_ON_ADMISSIBLE_EVIDENCE",
+      "FREEZE_SUCCESSOR_BEFORE_ANY_FRESH_TERMINAL_REALITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "THE_55_6_GB_BYTES_ARE_NOT_YET_MIRRORED_IN_THE_BRAIN_CONTROLLED_RELEASE",
+    "DOCUMENTED_NO_TOTAL_RELEASE_SIZE_LIMIT_DOES_NOT_OVERRIDE_GITHUB_EXCESSIVE_BANDWIDTH_POLICY",
+    "STORAGE_INTERNALIZATION_DOES_NOT_PROVE_RUNTIME_EXECUTION_FIT",
+    "STORAGE_INTERNALIZATION_DOES_NOT_PROVE_BENCHMARK_OR_SEMANTIC_CAPABILITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
