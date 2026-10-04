@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_PUBLIC_QUOTA_SEARCH_SATURATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__GENERIC_PUBLIC_QUOTA_SEARCH_SATURATED__ACCOUNT_SPECIFIC_AI_STUDIO_LIMIT_OBSERVATION_REMAINS__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "frozen_judge_model": "gemini-3.5-flash",
+  "known_required_judge_mass": {
+    "primary_calls": 1000,
+    "worst_case_with_four_retries_per_sample": 5000
+  },
+  "primary_source": {
+    "authority": "Google AI for Developers",
+    "url": "https://ai.google.dev/gemini-api/docs/rate-limits",
+    "observed": [
+      "RATE_LIMITS_ARE_APPLIED_PER_PROJECT",
+      "RATE_LIMITS_DEPEND_ON_MODEL_USAGE_TIER_AND_ACCOUNT_STATUS",
+      "ACTIVE_RATE_LIMITS_ARE_VIEWED_IN_GOOGLE_AI_STUDIO",
+      "SPECIFIED_RATE_LIMITS_ARE_NOT_GUARANTEED_AND_ACTUAL_CAPACITY_MAY_VARY"
+    ]
+  },
+  "effect": {
+    "delete": "GENERIC_PUBLIC_SEARCH_FOR_A_UNIVERSAL_FREE_TIER_REQUEST_FLOOR_SUFFICIENT_FOR_CHARTOGRAPHY",
+    "preserve": [
+      "ACCOUNT_SPECIFIC_GOOGLE_AI_STUDIO_PROJECT_RATE_LIMIT_OBSERVATION",
+      "OWNER_RUN_CHARTOGRAPHY_EVALUATION_ROUTE_IF_SURGE_ACCEPTS",
+      "EVENTUAL_BRAIN_SCORE_GE_89"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_PROJECT_HAS_1000_CALL_CAPACITY",
+    "NO_CLAIM_GOOGLE_FREE_TIER_IS_INSUFFICIENT",
+    "NO_CLAIM_OWNER_RUN_ROUTE_EXISTS",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_ACCEPTANCE_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
