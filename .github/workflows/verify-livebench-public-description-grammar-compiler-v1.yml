@@ -20,63 +20,118 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Unit tests
-        run: python -m unittest canonical.tests.test_ifbench_public_description_grammar_compiler_v1
+        id: unit
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python -m unittest canonical.tests.test_ifbench_public_description_grammar_compiler_v1 2>&1 | tee unit-test.log
 
       - name: Fetch exact pinned public upstream source
+        id: fetch
+        continue-on-error: true
         shell: bash
         run: |
-          set -euo pipefail
-          mkdir -p /tmp/livebench-public-grammar
+          set -o pipefail
+          mkdir -p livebench-public-grammar
           base="https://raw.githubusercontent.com/LiveBench/LiveBench/8f8e5c381a16e3f24257776edd53471fe86f8091"
-          curl -fsSL "$base/livebench/if_runner/ifbench/instructions.py" -o /tmp/livebench-public-grammar/modern_instructions.py
-          curl -fsSL "$base/livebench/if_runner/ifbench/instructions_registry.py" -o /tmp/livebench-public-grammar/modern_registry.py
-          curl -fsSL "$base/livebench/if_runner/instruction_following_eval/instructions.py" -o /tmp/livebench-public-grammar/legacy_instructions.py
-          curl -fsSL "$base/livebench/if_runner/instruction_following_eval/instructions_registry.py" -o /tmp/livebench-public-grammar/legacy_registry.py
+          curl -fsSL "$base/livebench/if_runner/ifbench/instructions.py" -o livebench-public-grammar/modern_instructions.py
+          curl -fsSL "$base/livebench/if_runner/ifbench/instructions_registry.py" -o livebench-public-grammar/modern_registry.py
+          curl -fsSL "$base/livebench/if_runner/instruction_following_eval/instructions.py" -o livebench-public-grammar/legacy_instructions.py
+          curl -fsSL "$base/livebench/if_runner/instruction_following_eval/instructions_registry.py" -o livebench-public-grammar/legacy_registry.py
 
-          test "$(git hash-object /tmp/livebench-public-grammar/modern_instructions.py)" = "02b2dfeb50f036b89bec3df34522c73f756d8f44"
-          test "$(git hash-object /tmp/livebench-public-grammar/modern_registry.py)" = "adfed4832877566e62970257b50c6fa32c302fb2"
-          test "$(git hash-object /tmp/livebench-public-grammar/legacy_instructions.py)" = "4997bab885a676d92545fd91a9a20b48d234a2b2"
-          test "$(git hash-object /tmp/livebench-public-grammar/legacy_registry.py)" = "903ed738398648c7cfac61d5ffa478c22f1f0891"
+          {
+            echo "modern_instructions=$(git hash-object livebench-public-grammar/modern_instructions.py)"
+            echo "modern_registry=$(git hash-object livebench-public-grammar/modern_registry.py)"
+            echo "legacy_instructions=$(git hash-object livebench-public-grammar/legacy_instructions.py)"
+            echo "legacy_registry=$(git hash-object livebench-public-grammar/legacy_registry.py)"
+          } | tee source-hashes.txt
+
+          test "$(git hash-object livebench-public-grammar/modern_instructions.py)" = "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+          test "$(git hash-object livebench-public-grammar/modern_registry.py)" = "adfed4832877566e62970257b50c6fa32c302fb2"
+          test "$(git hash-object livebench-public-grammar/legacy_instructions.py)" = "4997bab885a676d92545fd91a9a20b48d234a2b2"
+          test "$(git hash-object livebench-public-grammar/legacy_registry.py)" = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 
       - name: Exact 83 to 80 plus 3 source-only proof
+        id: proof
+        continue-on-error: true
         run: |
           python - <<'PY'
+          import json, traceback
           from pathlib import Path
-          from canonical.runtime.ifbench_public_description_grammar_compiler_v1 import compile_grammar, combine_grammars
 
-          root = Path("/tmp/livebench-public-grammar")
-          modern = compile_grammar(
-              (root / "modern_instructions.py").read_text(encoding="utf-8"),
-              (root / "modern_registry.py").read_text(encoding="utf-8"),
-          )
-          legacy = compile_grammar(
-              (root / "legacy_instructions.py").read_text(encoding="utf-8"),
-              (root / "legacy_registry.py").read_text(encoding="utf-8"),
-          )
-          combined = combine_grammars(modern, legacy)
-
-          assert modern["active_checker_count"] == 58, modern["active_checker_count"]
-          assert legacy["active_checker_count"] == 25, legacy["active_checker_count"]
-          assert combined["active_checker_count"] == 83, combined["active_checker_count"]
-          assert combined["visible_complete_count"] == 80, combined["visible_complete_count"]
-          assert combined["hidden_parameter_checker_count"] == 3, combined["hidden_parameter_checker_count"]
-
-          residual = {
-              (x["instruction_id"], tuple(x["hidden_parameter_keys"]))
-              for x in combined["checkers"]
-              if not x["visible_complete"]
-          }
-          expected = {
-              ("ratio:overlap", ("reference_text",)),
-              ("repeat:repeat_span", ("prompt_to_repeat",)),
-              ("combination:repeat_prompt", ("prompt_to_repeat",)),
-          }
-          assert residual == expected, (residual, expected)
-          print({
-              "modern": modern["active_checker_count"],
-              "legacy": legacy["active_checker_count"],
-              "total": combined["active_checker_count"],
-              "visible_complete": combined["visible_complete_count"],
-              "hidden_semantic_residuals": sorted(residual),
-          })
+          report = {"schema": "PROJECT_BRAIN_IF_GRAMMAR_COMPILER_CI_DIAGNOSTIC_V1"}
+          try:
+              from canonical.runtime.ifbench_public_description_grammar_compiler_v1 import compile_grammar, combine_grammars
+              root = Path("livebench-public-grammar")
+              modern = compile_grammar(
+                  (root / "modern_instructions.py").read_text(encoding="utf-8"),
+                  (root / "modern_registry.py").read_text(encoding="utf-8"),
+              )
+              legacy = compile_grammar(
+                  (root / "legacy_instructions.py").read_text(encoding="utf-8"),
+                  (root / "legacy_registry.py").read_text(encoding="utf-8"),
+              )
+              combined = combine_grammars(modern, legacy)
+              residual = {
+                  (x["instruction_id"], tuple(x["hidden_parameter_keys"]))
+                  for x in combined["checkers"]
+                  if not x["visible_complete"]
+              }
+              expected = {
+                  ("ratio:overlap", ("reference_text",)),
+                  ("repeat:repeat_span", ("prompt_to_repeat",)),
+                  ("combination:repeat_prompt", ("prompt_to_repeat",)),
+              }
+              report.update({
+                  "modern_count": modern["active_checker_count"],
+                  "legacy_count": legacy["active_checker_count"],
+                  "total_count": combined["active_checker_count"],
+                  "visible_complete_count": combined["visible_complete_count"],
+                  "hidden_parameter_checker_count": combined["hidden_parameter_checker_count"],
+                  "residuals": [
+                      {"instruction_id": x["instruction_id"], "class_name": x["class_name"],
+                       "hidden_parameter_keys": list(x["hidden_parameter_keys"]),
+                       "templates": list(x["templates"])}
+                      for x in combined["checkers"] if not x["visible_complete"]
+                  ],
+                  "expected_residuals": sorted([list(x) for x in expected]),
+              })
+              ok = (
+                  modern["active_checker_count"] == 58
+                  and legacy["active_checker_count"] == 25
+                  and combined["active_checker_count"] == 83
+                  and combined["visible_complete_count"] == 80
+                  and combined["hidden_parameter_checker_count"] == 3
+                  and residual == expected
+              )
+              report["pass"] = ok
+              if not ok:
+                  raise AssertionError("EXACT_83_80_3_INVARIANT_FAILED")
+          except Exception as exc:
+              report["pass"] = False
+              report["error"] = type(exc).__name__ + ":" + str(exc)
+              report["traceback"] = traceback.format_exc()
+          Path("grammar-diagnostic.json").write_text(json.dumps(report, indent=2, sort_keys=True)+"\n", encoding="utf-8")
+          print(json.dumps(report, indent=2, sort_keys=True))
+          raise SystemExit(0 if report["pass"] else 1)
           PY
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: livebench-public-grammar-compiler-v1-diagnostic
+          path: |
+            grammar-diagnostic.json
+            unit-test.log
+            source-hashes.txt
+          if-no-files-found: warn
+
+      - name: Enforce all gates
+        if: always()
+        shell: bash
+        run: |
+          echo "unit=${{ steps.unit.outcome }} fetch=${{ steps.fetch.outcome }} proof=${{ steps.proof.outcome }}"
+          test "${{ steps.unit.outcome }}" = "success"
+          test "${{ steps.fetch.outcome }}" = "success"
+          test "${{ steps.proof.outcome }}" = "success"
