@@ -1,0 +1,37 @@
+{
+  "schema":"PROJECT_BRAIN_RETRIEVAL_V19_CURRENT_POINTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date":"2026-10-04",
+  "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__ENTRYPOINT_V4_CURRENT__VERIFIED_RECOVERY_PORTFOLIO_BOUND__ZERO_CREDIT",
+  "verified_pointer":{
+    "path":"canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+    "git_blob_sha":"55b1d411561f720fcd9d66c127cecd63ef0b5f5e"
+  },
+  "verified_route_portfolio_receipt":{
+    "path":"canonical/verification/RETRIEVAL_V19_ROUTE_PORTFOLIO_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha":"4604a93bf220edcf9691ad9cb059df38f8674c48"
+  },
+  "independent_runner":{
+    "repository":"moxnixmdj/verification-capsule-runner",
+    "pull_request":1594,
+    "merge_commit":"e548c964cec77eb152bd45ab6439201dec74ddbd",
+    "workflow_run_id":37169464174,
+    "workflow_job_id":111339267965,
+    "conclusion":"success"
+  },
+  "verified":{
+    "entrypoint_v4_mandatory":true,
+    "answer_key_identity_forbidden_from_recovery_route_generation":true,
+    "v3_empirical_controller_remains_underlying_ranker":true,
+    "v18_finite_live_30_of_30_preserved":true,
+    "fresh_holdout_must_use_frozen_entrypoint_v4_bytes":true,
+    "open_world_unknown_preserved":true,
+    "zero_credit_preserved":true
+  },
+  "incremental_spend_usd":0,
+  "acceptance_credit_delta":0,
+  "family_credit_delta":0,
+  "capability_credit_delta":0,
+  "ownership_credit_delta":0,
+  "execution_authority":false,
+  "promotion_authority":false
+}
