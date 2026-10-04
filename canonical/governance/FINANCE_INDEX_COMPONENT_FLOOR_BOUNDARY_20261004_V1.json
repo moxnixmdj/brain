@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_COMPONENT_FLOOR_BOUNDARY_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ALL_UNDERLYING_EVALUATION_SCALES_NONNEGATIVE__CAPABILITY_SUBSCORE_FLOOR_NOT_PROVED__ZERO_CREDIT",
+  "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+  "parent_theorem": {
+    "path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_THEOREM_V1.json",
+    "git_blob_sha": "37f47143f62fe2f59e56d8eca4a64bae18a1ce8b"
+  },
+  "public_methodology": {
+    "capability_index": "https://artificialanalysis.ai/methodology/capability-indices",
+    "intelligence_benchmarking": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "automationbench": "https://artificialanalysis.ai/evaluations/automationbench-aa",
+    "hle": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
+    "lcr": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
+    "gdp_pdf": "https://artificialanalysis.ai/evaluations/gdp-pdf",
+    "omniscience": "https://artificialanalysis.ai/evaluations/omniscience",
+    "briefcase": "https://artificialanalysis.ai/evaluations/aa-briefcase"
+  },
+  "underlying_evaluation_floor_facts": [
+    {
+      "capability": "BUSINESS_KNOWLEDGE",
+      "evaluation": "AA-Omniscience Business Accuracy",
+      "published_scale": "PROPORTION_CORRECT",
+      "proved_floor": 0
+    },
+    {
+      "capability": "AGENTIC_KNOWLEDGE_WORK",
+      "evaluation": "GDPval-AA v2.1",
+      "published_scale": "clamp((Elo-500)/2000)",
+      "proved_floor": 0
+    },
+    {
+      "capability": "AGENTIC_KNOWLEDGE_WORK",
+      "evaluation": "AA-Briefcase v1.1",
+      "published_scale": "clamp((Elo-500)/2000)",
+      "proved_floor": 0
+    },
+    {
+      "capability": "REASONING",
+      "evaluation": "Humanity's Last Exam",
+      "published_scale": "ACCURACY_PASS_AT_1",
+      "proved_floor": 0
+    },
+    {
+      "capability": "AGENTIC_TOOL_USE",
+      "evaluation": "AutomationBench-AA Finance",
+      "published_scale": "SHARE_OF_OBJECTIVES_COMPLETED_WITH_GUARDRAIL_TASK_ZEROING",
+      "proved_floor": 0
+    },
+    {
+      "capability": "LONG_CONTEXT",
+      "evaluation": "AA-LCR v1.1",
+      "published_scale": "AVERAGE_PASS_RATE",
+      "proved_floor": 0
+    },
+    {
+      "capability": "LONG_CONTEXT",
+      "evaluation": "GDP.pdf",
+      "published_scale": "ALL_PASS_OR_CRITERION_PASS_RATE",
+      "proved_floor": 0
+    },
+    {
+      "capability": "NON_HALLUCINATION",
+      "evaluation": "AA-Omniscience Business Non-Hallucination",
+      "published_scale": "1_MINUS_HALLUCINATION_RATE",
+      "proved_floor": 0
+    }
+  ],
+  "exact_missing_theorem": {
+    "statement": "FOR_EACH_FINANCE_CAPABILITY_C_i__THE_UNPUBLISHED_MAPPING_FROM_ITS_LISTED_EVALUATION_METRICS_TO_CAPABILITY_SUBSCORE_C_i_IS_NONNEGATIVE_PRESERVING_OR_OTHERWISE_HAS_A_VERIFIED_LOWER_BOUND",
+    "why_required": "THE_DIRECT_THRESHOLD_THEOREM_FORBIDS_DEFAULT_COMPONENT_FLOORS__EVALUATION_LEVEL_NONNEGATIVITY_DOES_NOT_LOGICALLY_IMPLY_CAPABILITY_SUBSCORE_NONNEGATIVITY_IF_THE_INNER_TRANSFORM_IS_UNPUBLISHED",
+    "current_public_state": "CAPABILITY_INDEX_METHODOLOGY_LISTS_COMPONENTS_WEIGHTS_AND_EVALUATIONS_BUT_DOES_NOT_PUBLISH_THE_INNER_AGGREGATION_OR_NORMALIZATION_FORMULA"
+  },
+  "scheduling_effect_if_verified": {
+    "delete": [
+      "GENERIC_SEARCH_FOR_NEGATIVE_RANGES_OF_FINANCE_UNDERLYING_EVALUATIONS",
+      "REPROVE_NONNEGATIVITY_OF_THE_EIGHT_LISTED_EVALUATION_SCALES"
+    ],
+    "preserve": [
+      "CAPABILITY_SUBSCORE_AGGREGATION_OR_NORMALIZATION_TRANSFORM",
+      "INDEPENDENTLY_VERIFIED_BRAIN_COMPONENT_LOWER_BOUNDS",
+      "OWNER_RUN_OR_OWNER_ACCEPTED_EXACT_INDEX_RESULT",
+      "DIRECT_THRESHOLD_SUM_GE_61"
+    ],
+    "zero_floor_substitution_authorized": false
+  },
+  "hard_nonclaims": [
+    "NO_FINANCE_CAPABILITY_SUBSCORE_ZERO_FLOOR_CLAIM",
+    "NO_DEFAULT_ZERO_FLOORS",
+    "NO_COMPONENT_SCORE_FOR_BRAIN",
+    "NO_FINANCE_INDEX_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
