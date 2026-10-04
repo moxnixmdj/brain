@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V3_FINAL_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "STAGED_FINAL__V11_PACKAGE_INDEPENDENT_PASS__CURRENT_MAIN_PROJECTION_REQUIRED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "candidate_activation": {
+    "path": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V3_ACTIVATION_V1.json",
+    "git_blob_sha": "ea10d3f8ef25add304dbc4b19c4f5ce712e3d7ce"
+  },
+  "package_verification": {
+    "path": "canonical/verification/ROOT2_V11_ADAPTIVE_V3_PACKAGE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "da6ef8d46f1fdb644878004cd2e846d2766a0ecf",
+    "workflow_run_id": 37175130253,
+    "workflow_job_id": 111356069818,
+    "conclusion": "success"
+  },
+  "active_subject": {
+    "policy_path": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V3.json",
+    "policy_git_blob_sha": "e3d4bb102d8825798cb42b5f45382420fef41fbf",
+    "runtime_path": "canonical/runtime/terminal_adaptive_minimum_action_policy_v1.py",
+    "runtime_git_blob_sha": "bfffe6dff32f5445a0c52657f7d9ec8d544b1f79"
+  },
+  "preserved_authority": {
+    "root2_v11": true,
+    "root3_v2": true,
+    "retrieval_v19_entrypoint_v4": true,
+    "root2_v10_external_fact_overlay": true,
+    "osworld_component_pin_supplement": true,
+    "arena_comparator_audit_separate_wake_artifact": true,
+    "fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "effects": [
+    "MARK_ADAPTIVE_V3_META_SCHEDULER_EFFECTIVE_ONLY_WITH_SAME_CURRENT_MAIN_POINTER_PROJECTION",
+    "REBIND_ROOT2_DOMAIN_V10_TO_V11",
+    "PRESERVE_ROOT3_V2_AND_RETRIEVAL_V19",
+    "PRESERVE_ZERO_SPEND_NO_CASES_NO_ACCEPTANCE_CREDIT"
+  ],
+  "authority": {
+    "scheduling": true,
+    "meta_scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_final_projection_verification_required": true
+}
