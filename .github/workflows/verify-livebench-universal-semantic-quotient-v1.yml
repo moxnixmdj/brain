@@ -1,0 +1,21 @@
+name: Verify LiveBench universal semantic quotient v1
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/livebench_legacy15_universal_semantic_quotient_v1.py'
+      - 'canonical/tests/test_livebench_legacy15_universal_semantic_quotient_v1.py'
+      - '.github/workflows/verify-livebench-universal-semantic-quotient-v1.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip pytest
+      - run: python -m pytest -q canonical/tests/test_livebench_legacy15_universal_semantic_quotient_v1.py
+      - run: python canonical/runtime/livebench_legacy15_universal_semantic_quotient_v1.py
