@@ -1,0 +1,130 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_OVERLAP_WHITESPACE_INVARIANT_CONSTRUCTION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__MATHEMATICAL_BREAKTHROUGH__PUBLIC_12_OF_12_LOCAL_RECOMPUTATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Remove exact hidden reference-text recovery as a necessary condition for the public NGramOverlapChecker route.",
+  "theorem": {
+    "premise": "norm_ws(R_exact) == norm_ws(R_proxy)",
+    "candidate_restriction": "candidate contains no whitespace characters",
+    "invariant": "For every candidate character trigram g, g is in trigrams(R_exact) iff g is in trigrams(R_proxy), because whitespace normalization leaves every maximal non-whitespace run byte-for-byte unchanged.",
+    "consequence": "NGramOverlapChecker score for a whitespace-free candidate can be computed exactly from the normalized visible reference proxy; exact newline/space placement in the hidden reference is unnecessary.",
+    "checker_binding": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "path": "livebench/if_runner/ifbench/instructions.py",
+      "semantics": "set(nltk.ngrams(value,3)) intersect set(nltk.ngrams(reference_text,3)) divided by candidate trigram-set size"
+    }
+  },
+  "implementation": "canonical/runtime/ifbench_ratio_overlap_prompt_only_solver_v1.py",
+  "public_recomputation": {
+    "dataset_repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "data/IFBench_test.jsonl",
+    "ratio_overlap_rows": 12,
+    "prompt_only_candidates_within_frozen_checker_tolerance": 12,
+    "exact_reference_used_only_as_posthoc_public_oracle": true,
+    "terminal_rows_consumed": 0,
+    "row_results": [
+      {
+        "row": 144,
+        "target": 72,
+        "score": 71.42857142857143
+      },
+      {
+        "row": 145,
+        "target": 93,
+        "score": 91.66666666666667
+      },
+      {
+        "row": 146,
+        "target": 74,
+        "score": 75
+      },
+      {
+        "row": 147,
+        "target": 59,
+        "score": 60
+      },
+      {
+        "row": 148,
+        "target": 6,
+        "score": 7.6923076923076925
+      },
+      {
+        "row": 149,
+        "target": 13,
+        "score": 14.285714285714286,
+        "aux": "sentence:keyword"
+      },
+      {
+        "row": 150,
+        "target": 24,
+        "score": 23.529411764705884,
+        "aux": "sentence:keyword"
+      },
+      {
+        "row": 151,
+        "target": 23,
+        "score": 21.428571428571427,
+        "aux": "sentence:keyword"
+      },
+      {
+        "row": 152,
+        "target": 11,
+        "score": 12.5,
+        "aux": "sentence:keyword"
+      },
+      {
+        "row": 212,
+        "target": 54,
+        "score": 55.55555555555556,
+        "aux": "words:consonants"
+      },
+      {
+        "row": 213,
+        "target": 50,
+        "score": 50,
+        "aux": "words:consonants"
+      },
+      {
+        "row": 214,
+        "target": 11,
+        "score": 12.5,
+        "aux": "words:consonants"
+      }
+    ]
+  },
+  "breakthrough_effect": [
+    "EXACT_REFERENCE_WHITESPACE_RECOVERY_IS_NO_LONGER_REQUIRED_FOR_RATIO_OVERLAP_SCORING_IF_A_NORMALIZED_REFERENCE_PROXY_IS RECOVERED",
+    "THE_7_OF_12_RAW_REFERENCE_VISIBILITY_FAILURES_DO_NOT_BY_THEMSELVES_BLOCK_A_CONSTRUCTIVE_SOLVER",
+    "PUBLIC_RATIO_OVERLAP_ROWS_WITH_THE_OBSERVED_KEYWORD_AND_CONSONANT_COMPOSITIONS_HAVE_A_PROMPT_ONLY_CONSTRUCTIVE_WITNESS"
+  ],
+  "residuals": [
+    "INDEPENDENTLY_VERIFY_THE_12_OF_12_RECOMPUTATION_FROM_PINNED_PUBLIC_BYTES",
+    "GENERALIZE_REFERENCE_PROXY_BOUNDARY_EXTRACTION_TO_ALL_PUBLISHED_IFBENCH_COMPOSITION_FORMS_WITHOUT_HIDDEN_IDS_OR_KWARGS",
+    "COMPOSE_WITH_THE_REMAINING_PUBLIC_CHECKER_FAMILIES",
+    "PRECOMMIT_A_SUCCESSOR_BEFORE_ANY_UNSEEN_TERMINAL_LIVEBENCH_CASE_EXPOSURE"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_TERMINAL_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_THAT_ALL_83_PUBLIC_INSTRUCTION_TYPES_ARE_SOLVED",
+    "NO_CLAIM_THAT_THE_CURRENT_FAILED_FROZEN_CANDIDATE_IS_REPAIRED",
+    "NO_TERMINAL_CASE_73_OR_LATER_USED",
+    "NO_HIDDEN_TERMINAL_REFERENCE_TEXT_USED"
+  ],
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
