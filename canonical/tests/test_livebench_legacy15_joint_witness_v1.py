@@ -108,3 +108,18 @@ def test_quotation_bullets_and_end_all_compose():
     response = out["response"]
     assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")
+
+
+def test_json_forbidden_response_word_does_not_self_collide():
+    prompt = (
+        "Do not include keywords ['response', 'dog'] in the response. "
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as code fences."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["route"] == "JSON"
+    assert "response" not in out["response"].lower()
+    import json
+    decoded = json.loads(out["response"])
+    assert isinstance(decoded, str)
+    assert decoded
