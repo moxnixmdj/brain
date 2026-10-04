@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_PARAMETER_TRUTH_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PUBLIC_IFBENCH_PARAMETER_TRUTH_REPAIR__ZERO_TERMINAL_DATA__ZERO_CREDIT",
+  "target": "LIVEBENCH_PUBLIC_PROMPT_PARAMETER_DERIVABILITY_V1",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1834,
+    "pr_head_sha": "92656f8d9fdc2211271f9053bb17c9ff9c9726f9",
+    "merged_commit": "781e36c91c457b170c95211b36eed3b58a68192a",
+    "workflow_run_id": 37197721146,
+    "workflow_job_id": 111422929019,
+    "conclusion": "success",
+    "artifact_id": 11300854043,
+    "artifact_zip_sha256": "33b19dbd9efb6e5aa8c6124de2337cbe8703c4fd2c2bdabf49fc4f18150fbd72"
+  },
+  "pinned_public_sources": {
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_ifbench_instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "recomputed": {
+    "public_ifbench_rows": 300,
+    "ratio_overlap": {
+      "instruction_rows": 12,
+      "raw_reference_visible": 5,
+      "normalized_reference_visible": 12
+    },
+    "repeat_span": {
+      "instruction_rows": 4,
+      "raw_prompt_visible": 3,
+      "score_relevant_slice_equal": 4
+    },
+    "legacy_repeat_prompt_rows": 0
+  },
+  "verified_deductions": [
+    "EXACT_REFERENCE_TEXT_LITERAL_VISIBILITY_FAILS_ON_7_OF_12_PINNED_PUBLIC_RATIO_OVERLAP_ROWS",
+    "WHITESPACE_NORMALIZATION_CANNOT_BE_ASSUMED_SCORE_PRESERVING_BECAUSE_NGRAMOVERLAPCHECKER_USES_CHARACTER_TRIGRAMS_OF_EXACT_REFERENCE_TEXT",
+    "REPEAT_SPAN_SCORE_RELEVANT_WORD_SLICE_IS_RECOVERABLE_ON_4_OF_4_PINNED_PUBLIC_ROWS",
+    "PINNED_PUBLIC_IFBENCH_OOD_POPULATION_HAS_ZERO_LEGACY_REPEAT_PROMPT_ROWS"
+  ],
+  "hard_nonclaims": [
+    "NO_FROZEN_TERMINAL_LIVEBENCH_DATASET_EQUIVALENCE",
+    "NO_LIVEBENCH_ACCEPTANCE_OR_EXECUTION_CREDIT",
+    "NO_CLAIM_THAT_EXACT_NGRAM_REFERENCE_CANNOT_BE_RECOVERED_BY_ANOTHER_ADMISSIBLE_PUBLIC_ROUTE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
