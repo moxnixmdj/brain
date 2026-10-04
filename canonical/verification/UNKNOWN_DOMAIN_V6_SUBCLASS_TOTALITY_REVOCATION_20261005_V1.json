@@ -83,5 +83,11 @@
     "acceptance_predicate_credit_delta": -1,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "post_promotion_semantic_audit_relation": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_POST_PROMOTION_SEMANTIC_BRIDGE_AUDIT_20261005_V1.json",
+    "audit_status": "PASS__SEMANTIC_BRIDGE_ONLY__NO_NEW_CREDIT",
+    "audit_preservation_condition": "PRESERVE_CURRENT_PROMOTION_UNLESS_A_SEPARATE_FALSIFIER_ATTACKS_THE_V6_UNIVERSAL_THEOREM_OR_THE_INDEPENDENT_RECEIPT",
+    "this_revocation_relation": "THE_ISINSTANCE_ACCEPTED_SUBCLASS_COUNTEREXAMPLE_IS_A_SEPARATE_FALSIFIER_OF_THE_LOAD_BEARING_V6_UNIVERSAL_TOTALITY_THEOREM_AND_THEREFORE_SATISFIES_THE_AUDIT'S_EXPLICIT_REVOCATION_ESCAPE_CONDITION"
   }
 }
