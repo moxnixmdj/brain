@@ -58,3 +58,4 @@ jobs:
         with:
           name: livebench-legacy-predecessor-compiler-v1
           path: /tmp/receipt/livebench-legacy-predecessor-compiler-v1.json
+# Trigger exact public predecessor replay after legacy-generator-lineage recovery; no semantic workflow change. 2026-10-04
