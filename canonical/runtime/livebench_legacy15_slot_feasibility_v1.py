@@ -65,12 +65,11 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
     forbidden = by_id.get(FORBIDDEN, {}).get("forbidden_words", ())
     forbidden_words = [str(x) for x in forbidden]
 
-    if EXISTENCE in by_id and FORBIDDEN in by_id:
-        required = [str(x) for x in by_id[EXISTENCE].get("keywords", ())]
-        forbidden_by_fold = {word.casefold(): word for word in forbidden_words}
-        for keyword in required:
-            if keyword.casefold() in forbidden_by_fold:
-                reasons.append("REQUIRED_KEYWORD_IS_FORBIDDEN_WORD:" + keyword.casefold())
+    # Existence/forbidden overlap is NOT an UNSAT class. The pinned existence
+    # checker performs raw regex substring search while ForbiddenWords wraps the
+    # generated alphabetic word in word boundaries. A carrier such as "rock0"
+    # therefore satisfies required "rock" while avoiding \\brock\\b. Keep this
+    # asymmetry explicit so the feasibility layer never emits a false certificate.
 
     if NTH in by_id and FORBIDDEN in by_id:
         first_word = str(by_id[NTH].get("first_word", ""))
