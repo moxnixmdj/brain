@@ -95,5 +95,17 @@
     "family_credit": false,
     "capability_credit": false,
     "ownership_credit": false
+  },
+  "content_bound_universal_proof": {
+    "path": "canonical/runtime/unknown_domain_direct_v3_universal_proof_v2.py",
+    "git_blob_sha": "db3e3c56f8ee604551a1cc316239c4efbcf8ca65",
+    "status": "SELF_BOUND_PROOF_CANDIDATE__INDEPENDENT_EXACT_BYTE_VERIFICATION_REQUIRED",
+    "covers": [
+      "ALL_HARNESS_AND_SCORER_CRITICAL_IDENTIFIER_SCOPES",
+      "ALL_SIX_TRANSFER_PRIMITIVE_FAMILIES",
+      "EXACT_ADD2_IEEE754_ROLE_ORIENTATION",
+      "ALL_THREE_ABSTENTION_CLASSES"
+    ],
+    "production_or_terminal_cases_consumed": 0
   }
 }
