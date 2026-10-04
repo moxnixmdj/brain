@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_QUANTIZATION_DEGRADATION_BUDGET_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_SCORE_ARITHMETIC_CANDIDATE__ZERO_QUANTIZED_CAPABILITY_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "comparator": {
+    "model": "claude-opus-5-5-max-effort",
+    "exact_four_task_mean_percent": 65.73775
+  },
+  "full_precision_candidate": {
+    "model": "abacusai/Smaug-Mini",
+    "exact_four_task_mean_percent": 73.9165,
+    "margin_over_comparator_pp": 8.17875,
+    "task_count": 4
+  },
+  "quantization_survival_theorem": {
+    "exact_condition": "QUANTIZED_FOUR_TASK_MEAN_PERCENT >= 65.73775",
+    "equivalent_mean_degradation_budget_pp": 8.17875,
+    "equivalent_total_task_score_degradation_budget_points": 32.715,
+    "relative_mean_score_degradation_budget": 0.11065189949723638,
+    "proof": "73.9165 - 65.73775 = 8.17875; with four equally weighted tasks, allowable aggregate drop is 4*8.17875 = 32.715.",
+    "scheduler_consequence": "QUALIFICATION_ONLY_NEEDS_TO_BOUND_MATCHED_FOUR_TASK_DEGRADATION_BELOW_THE_BUDGET; BITWISE_OR_SCORE_IDENTITY_WITH_BF16_IS_UNNECESSARY."
+  },
+  "public_quantized_candidate": {
+    "repository": "prithivMLmods/Smaug-Mini-GGUF",
+    "format": "GGUF",
+    "quantization": "Q4_K_M",
+    "published_file_size_gb": 16.5,
+    "parameter_count_billion": 27,
+    "current_matched_livebench_credit": 0
+  },
+  "falsification_rule": {
+    "pass": "INDEPENDENT_MATCHED_SCOPE_EVALUATION_SHOWS_MEAN >= 65.73775",
+    "fail": "MEAN < 65.73775",
+    "no_posthoc_threshold_relaxation": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_Q4_K_M_RETAINS_THE_BF16_LIVEBENCH_SCORE",
+    "NO_CLAIM_PUBLIC_GENERAL_BENCHMARKS_SUBSTITUTE_FOR_MATCHED_LIVEBENCH_QUALIFICATION",
+    "NO_CLAIM_THE_QUANTIZED_BYTES_ARE_INTERNALIZED",
+    "NO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
