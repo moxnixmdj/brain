@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_4B_ZERO_COST_CARRIER_ACTIVATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_EXECUTION_STARTED__PUBLIC_ZERO_COST_CARRIER_FIT_BY_STATIC_GEOMETRY__CAPABILITY_UNPROVED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "discovery": {
+    "prior_first_qualification_subject": "prithivMLmods/Smaug-Mini-GGUF@72e19c6d6302bbb3610e966d58eb2ddcbd62c524:Smaug-Mini.Q4_K_M.gguf",
+    "prior_bytes": 16547400480,
+    "newly_recovered_existing_route": "empero-ai/Qwen3.8-4B-Distill-GGUF@391fc7d103e3942a408def3e4f51c2f85d464417:Qwen3.8-4B-Q4_K_M.gguf",
+    "principle": "SEARCH_BEFORE_INVENTION__EXECUTE_SMALLEST_CONTENT_ADDRESSED_SUBJECT_CAPABLE_OF_FALSIFYING_THE_SEMANTIC_CORE_REQUIREMENT"
+  },
+  "execution_subject": {
+    "repository": "empero-ai/Qwen3.8-4B-Distill-GGUF",
+    "revision": "391fc7d103e3942a408def3e4f51c2f85d464417",
+    "file": "Qwen3.8-4B-Q4_K_M.gguf",
+    "bytes": 2783446304,
+    "sha256": "dec96e8cf2e11b613bb46513dec485377f9ca5a351e71712ee0e244f287c6790",
+    "declared_license": "Apache-2.0",
+    "runtime_repository": "ggml-org/llama.cpp",
+    "runtime_commit": "0504396140d1c882f5f6ee34466a42db7ae90114",
+    "generation_policy": {
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "max_tokens": 192,
+      "fixed_seed_base": 424200,
+      "adaptive_retry": false
+    }
+  },
+  "resource_breakthrough": {
+    "payload_reduction_vs_smaug_mini_q4_percent": 83.178951,
+    "payload_reduction_vs_qwen38_27b_bf16_percent": 94.990469,
+    "github_public_standard_runner_static_geometry": {
+      "ram_gb": 16,
+      "ssd_gb": 14,
+      "cpu_vcpu": 4
+    },
+    "static_weight_fit": true,
+    "static_storage_headroom_bytes": 11216553696,
+    "rule": "STATIC_FIT_ONLY__ACTUAL_RUNTIME_MEMORY_AND_DISK_FIT_MUST_BE_PROVED_BY_THE_ACTIVE_RUN"
+  },
+  "active_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "trigger_commit": "29146e6282a11672cfc4a056abbe2f6638138bc0",
+    "workflow": ".github/workflows/verify-qwen38-4b-root1-semantic-seed-v1.yml",
+    "workflow_run_id": 37200197249,
+    "workflow_run_number": 1,
+    "state_when_frozen": "QUEUED",
+    "stages": [
+      "VERIFY_RUNNER_RESOURCE_GEOMETRY",
+      "DOWNLOAD_AND_SHA256_VERIFY_EXACT_Q4_SUBJECT",
+      "BUILD_PINNED_LLAMA_CPP",
+      "START_LOCAL_CPU_INFERENCE_SERVER",
+      "EXECUTE_FROZEN_EIGHT_CASE_SEMANTIC_SEED_SUITE",
+      "ONLY_ON_PASS_CREATE_BRAIN_CONTROLLED_DURABLE_RELEASE_VAULT",
+      "STREAM_REASSEMBLE_AND_SHA256_VERIFY_DURABLE_RELEASE_BYTES"
+    ],
+    "terminal_cases_consumed": 0,
+    "fresh_terminal_reality": false
+  },
+  "frozen_semantic_seed_scope": {
+    "cases": 8,
+    "effects": [
+      "text.paraphrase.semantic_preserving",
+      "text.simplify.semantic_preserving",
+      "text.summarize.faithful",
+      "text.story.generate_instruction_grounded"
+    ],
+    "purpose": "FALSIFY_OR_SUPPORT_MINIMUM_GENERAL_SEMANTIC_SEED_CAPABILITY_ON_NONTERMINAL_SYNTHETIC_CASES",
+    "hard_nonclaim": "PASS_DOES_NOT_PROVE_LIVEBENCH_GE_65_7_OR_OPUS55_EQUAL_OR_BETTER_ACCEPTANCE"
+  },
+  "scheduling_rewrite": {
+    "first_action": "COMPLETE_ACTIVE_4B_RUN_37200197249_AND_BIND_RECEIPT",
+    "on_semantic_seed_pass": "KEEP_4B_AS_RESOURCE_MINIMUM_SUCCESSOR_CANDIDATE__USE_EXACT_PUBLIC_LIVEBENCH_NONTERMINAL_GEOMETRY_OR_STRONGEST_ADMISSIBLE_MATCHED_SCOPE_QUALIFICATION_BEFORE_ANY_TERMINAL_REALITY",
+    "on_semantic_seed_fail": "ESCALATE_TO_NEXT_SMALLEST_CONTENT_ADDRESSED_EXECUTABLE_SUBJECT__PREFER_9B_MIMO_Q4_IF_LICENSE_PROVENANCE_AND_FROZEN_RUNTIME_ARE_BOUND__THEN_27B_SMAUG_Q4",
+    "deleted_work": [
+      "EXECUTE_16_55GB_SMAUG_Q4_BEFORE_TESTING_ALREADY_FROZEN_2_783GB_4B_SUBJECT",
+      "USE_USER_LAPTOP_WHILE_REMOTE_DEVICE_IS_OFFLINE",
+      "TREAT_SYNTHETIC_SEMANTIC_SEED_PASS_AS_LIVEBENCH_ACCEPTANCE",
+      "DUPLICATE_AN_EXISTING_4B_ZERO_COST_PIPELINE"
+    ]
+  },
+  "remaining_load_bearing_residuals": [
+    "ACTIVE_4B_RUN_MUST_LEAVE_QUEUE_AND_PROVE_ACTUAL_CPU_RAM_DISK_RUNTIME_FIT",
+    "FROZEN_EIGHT_CASE_SEMANTIC_SEED_MUST_PASS_WITHOUT_ADAPTIVE_RETRY",
+    "DURABLE_RELEASE_REASSEMBLY_MUST_MATCH_EXACT_WHOLE_SHA256",
+    "MATCHED_SCOPE_PUBLIC_LIVEBENCH_QUALIFICATION_REMAINS_REQUIRED",
+    "SEMANTIC_SEED_PRESERVING_FORMAL_CONSTRAINT_COMPOSITION_REMAINS_REQUIRED",
+    "SEPARATE_CURRENT_AUTHORITY_REQUIRED_BEFORE_FRESH_TERMINAL_REALITY_OR_PROMOTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": "PUBLIC_NONTERMINAL_RUN_ACTIVE",
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
