@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TARGET_MEASUREMENT_IDENTITY_AUDIT_20261004_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_SOURCE_TRUTH_REPAIR__ZERO_CREDIT__NO_AUTOMATIC_TARGET_REBASE",
+  "objective": "Prevent benchmark-name or leaderboard-drift substitution by recording current owner/primary-source observations against the frozen terminal bars. Any target change requires an explicit exact measurement-identity proof before Brain results are used.",
+  "current_observations": [
+    {
+      "predicate": "LIVEBENCH_IF_GE_65_7",
+      "frozen_bar": "65.7 on LiveBench 2026-06-25 Instruction Following",
+      "current_owner_observation": "65.7 for Claude 5.5 Opus Thinking Max Effort on latest 2026-06-25 release",
+      "source": "https://livebench.ai/",
+      "effect": "NO_DRIFT_OBSERVED_ON_SCALAR__EXACT_HARNESS_IDENTITY_STILL_REQUIRED"
+    },
+    {
+      "predicate": "CODING_CURSORBENCH_GE_57_8",
+      "frozen_bar": "57.8 on CursorBench 4.0",
+      "current_owner_observation": "57.8 for Opus 5.5 Max",
+      "source": "https://prod.cursor.com/evals",
+      "effect": "NO_DRIFT_OBSERVED_ON_SCALAR"
+    },
+    {
+      "predicate": "PROWORK_AA_BRIEFCASE_GE_1822__ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "frozen_bar": "1822 Elo",
+      "current_owner_observation": "1808 Elo for Claude Opus 5.5 Max, Default Fallback; 1768 Xhigh",
+      "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "effect": "SCALAR_OR_CONFIGURATION_DRIFT_OBSERVED__DO_NOT_REBASE_WITHOUT_FROZEN_MEASUREMENT_IDENTITY_RECONCILIATION"
+    },
+    {
+      "predicate": "PROWORK_GDPVAL_GE_1846",
+      "frozen_bar": "1846 Elo",
+      "current_owner_observation": "1867 Elo for Claude Opus 5.5 Max, Default Fallback; 1837 Xhigh",
+      "source": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+      "effect": "SCALAR_OR_CONFIGURATION_DRIFT_OBSERVED__DO_NOT_REBASE_WITHOUT_FROZEN_MEASUREMENT_IDENTITY_RECONCILIATION"
+    },
+    {
+      "predicate": "FINANCE_AGENT_V2_GE_58_59__MYSTERYMECHANISM_GE_49_55",
+      "frozen_bar": "58.59 and 49.55",
+      "current_owner_observation": "Vals currently reports Finance Agent v2 58.59 and MysteryMechanism 49.55; Vals also documents server-side fallback-assisted scoring effects on some benchmarks",
+      "source": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+      "effect": "SCALARS_PRESERVED__FALLBACK_POLICY_IS_LOAD_BEARING_MEASUREMENT_IDENTITY"
+    },
+    {
+      "predicate": "ANTHROPIC_LAUNCH_PUBLIC_BARS",
+      "frozen_bar": "launch-table bars",
+      "current_owner_observation": "Anthropic states most Opus 5.5 results use adaptive thinking at max effort and production safeguards may route some task classes to fallback Claude models",
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "effect": "EFFORT_AND_FALLBACK_POLICY_MUST_BE_BOUND_IN_MEASUREMENT_IDENTITY"
+    }
+  ],
+  "measurement_identity_fields": [
+    "benchmark_version",
+    "population_identity",
+    "harness_identity",
+    "tool_authority",
+    "effort_semantics",
+    "fallback_policy",
+    "grader_identity",
+    "environment_identity",
+    "score_transform"
+  ],
+  "hard_rules": [
+    "NO_TARGET_REBASE_FROM_LIVE_LEADERBOARD_DRIFT_ALONE",
+    "NO_BENCHMARK_NAME_ONLY_EQUIVALENCE",
+    "NO_WEAKER_OR_STRONGER_BAR_SUBSTITUTION_WITHOUT_EXPLICIT_TERMINAL_OBJECTIVE_SEMANTICS",
+    "FREEZE_TARGET_BEFORE_OBSERVING_NEW_BRAIN_RESULT",
+    "UNKNOWN_IDENTITY_IS_NOT_EQUIVALENT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

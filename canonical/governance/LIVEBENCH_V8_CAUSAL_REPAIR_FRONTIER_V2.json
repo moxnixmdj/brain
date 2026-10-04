@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V8_CAUSAL_REPAIR_FRONTIER_V2",
+  "date": "2026-10-04",
+  "status": "ACTIVE_DIAGNOSTIC_FRONTIER__FORMAL_FAST_PATH_ACTIVE__V9_REPLAY72_CANDIDATE_FROZEN__ZERO_CREDIT__NO_CASE_73_PLUS",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "evidence": {
+    "binding_path": "canonical/verification/LIVEBENCH_V8_STRUCTURAL_REFINEMENT_EXECUTION_BINDING_20261004_V1.json",
+    "replayed_already_exposed_cases": 72,
+    "new_case_exposure": false,
+    "histogram": {
+      "POLICY_BLOCK:POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN": 43,
+      "COMPOSITION_PRODUCER:UNRESOLVED_GROUNDED_CLAUSES": 27,
+      "ARCHITECTURAL_GAP:CONTROL_OR_FANOUT": 2
+    },
+    "unclassified_runtime_count": 0
+  },
+  "verified_delta": {
+    "activation": "canonical/governance/LIVEBENCH_FORMAL_ROUTING_V2_ACTIVATION_V1.json",
+    "adapter": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v2.py",
+    "adapter_git_blob_sha": "dbc895a0e458e411aafd3c96e0ddc2c01e657375",
+    "verification": "canonical/verification/LIVEBENCH_FORMAL_ROUTING_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "effect": "GENERIC_EXACT_FORMAL_CONSTRAINT_FAST_PATH_ACTIVE__SEMANTIC_OR_UNSATISFIED_CASES_FALL_THROUGH_UNCHANGED_TO_V1__NO_POLICY_WEAKENING"
+  },
+  "current_minimum_actions": [
+    "INDEPENDENTLY_VERIFY_LIVEBENCH_V9_FORMAL_ROUTING_REPLAY72_CANDIDATE_AND_ONE_USE_LAUNCHER_WITH_ZERO_TERMINAL_CASES",
+    "IF_VERIFIED_AUTHORIZE_EXACTLY_ONE_REPLAY_OF_ALREADY_EXPOSED_CASES_1_TO_72_AND_BIND_ONLY_AGGREGATE_SANITIZED_DELTA",
+    "IN_PARALLEL_REPAIR_GENERIC_UNRESOLVED_GROUNDED_CLAUSE_COMPOSITION_ON_SYNTHETIC_CASES",
+    "IN_PARALLEL_REPAIR_GENERIC_CONTROL_OR_FANOUT_COMPILATION_ON_SYNTHETIC_ADVERSARIAL_CASES",
+    "AFTER_EACH_VERIFIED_DELTA_RECOMPUTE_THE_ROOT2_GLOBAL_INFORMATION_CUT"
+  ],
+  "closed_or_deleted_actions": [
+    "DO_NOT_BUILD_ANOTHER_INSTRUCTION_CONSTRAINT_COMPILER__V1_ALREADY_INDEPENDENTLY_VERIFIED",
+    "DO_NOT_INTEGRATE_FORMAL_ROUTING_AGAIN__V2_ALREADY_ACTIVE",
+    "DO_NOT_FREEZE_A_DUPLICATE_REPLAY72_DELTA_CANDIDATE__V9_ALREADY_FROZEN",
+    "DO_NOT_WEAKEN_POST_PROMPT_ACQUISITION_POLICY",
+    "DO_NOT_READ_CASE_73_PLUS",
+    "DO_NOT_RECOVER_PROMPT_RESPONSE_CASE_ID_OR_RAW_EXCEPTION_CONTENT"
+  ],
+  "interpretation": "V8 proves three pipeline classes, not a capability failure. V2 may delete a subset of the 43 policy blocks, but the size of that subset is unknown until a separately authorized replay of the already-exposed prefix. The 27 and 2 classes remain generic repair targets.",
+  "authority": {
+    "scheduling": true,
+    "replay72": false,
+    "new_case_exposure": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed_by_this_frontier": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "v9_delta_measurement": {
+    "candidate": "canonical/governance/LIVEBENCH_V9_FORMAL_ROUTING_REPLAY72_CANDIDATE_V1.json",
+    "state": "FROZEN__INDEPENDENT_VERIFICATION_REQUIRED__EXECUTION_FALSE",
+    "epoch_digest_sha256": "5bc110694f940f04014542c9660b98983fc178ae8489fee6db4e1e3b822c9c05",
+    "purpose": "Measure only the causal effect of formal-routing V2 on the already-exposed 72-case prefix."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_ACCESS_ROUTING_TRUTH_REPAIR_20261004_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_PRIMARY_SOURCE_ROUTING_REPAIR__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "source": "https://github.com/xlang-ai/OSWorld-V2/blob/main/README.md",
+  "verified_public_facts": [
+    "OSWORLD_V2_1_IS_CURRENT_RECOMMENDED_RELEASE",
+    "TASK_CLASSES_ARE_DISTRIBUTED_THROUGH_XLANGAI_OSWORLD_V2_TASKS_AT_OSWORLD_V2_1",
+    "OFFICIAL_README_SAYS_TASK_CLASS_GATED_ACCESS_REQUEST_IS_AUTOMATICALLY_APPROVED",
+    "COMPLETE_GATED_ASSET_SNAPSHOT_IS_XLANGAI_OSWORLD_V2_ASSETS_GATED_AT_OSWORLD_V2_1",
+    "REPRODUCIBLE_RUNS_MUST_USE_MATCHING_RELEASE_PINS_FOR_CODE_TASKS_ASSETS_WEBSITE_AND_PROVIDER_IMAGE"
+  ],
+  "scheduling_effect": {
+    "remove_owner_wait_for_task_class_access": true,
+    "classify_huggingface_acceptance_and_download_as_self_service": true,
+    "exact_anthropic_evaluated_identity_or_protocol_equivalence_remains_open": true,
+    "brain_comparable_score_remains_open": true
+  },
+  "next": "SELF_SERVICE_ACCEPT_AND_BIND_OSWORLD_V2_1_GATED_TASK_AND_ASSET_RELEASES__THEN_PROVE_EXACT_TARGET_PROTOCOL_IDENTITY_OR_SCOPE_SAFE_EQUIVALENCE__NO_GENERIC_RELEASE_SEARCH",
+  "hard_rules": [
+    "NO_CLAIM_ANTHROPIC_USED_CURRENT_OSWORLD_V2_1_RELEASE_FROM_THIS ACCESS_FACT",
+    "NO_ACCEPTANCE_CREDIT_FROM_ACCESS_ROUTING",
+    "NO_MIXING_RELEASE_TAGS_OR_MAIN_LATEST"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
