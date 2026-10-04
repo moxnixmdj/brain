@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_ROOT3_ACCEPTANCE_REDUCTION_PRECOMMIT_20261005_V2",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__TRANSPORT_REPAIRED_RUN_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "supersedes": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V4_ROOT3_ACCEPTANCE_REDUCTION_PRECOMMIT_20261005_V1.json",
+    "reason": "V1_BOUND_WORKFLOW_RUN_37242352158_FAILED_BEFORE_VERIFIER_EXECUTION_WITH_MODULE_NOT_FOUND_CANONICAL__TRANSPORT_ONLY__NO_SEMANTIC_ASSERTION_EXECUTED"
+  },
+  "current_authority_before_reduction": {
+    "acceptance_binding_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "acceptance_binding_git_blob_sha_at_freeze": "25bc947e9f4b71b46dff13405cf231602cdeff1f",
+    "proved_predicate_count": 12,
+    "unresolved_predicate_count": 26,
+    "predicate_state": "EXTERNAL_BLOCKED",
+    "discharge_condition": "INDEPENDENTLY_VERIFY_ONE_CONTENT_BOUND_SUCCESSOR_THAT_SIMULTANEOUSLY_PROVES_STRUCTURAL_IDENTIFIER_TOTALITY_AND_EXACT_ADD2_IEEE754_GOLD_EQUALITY__THEN_RUN_SEPARATE_FAIL_CLOSED_ROOT3_AND_ACCEPTANCE_REDUCTION"
+  },
+  "canonical_main_subject_at_freeze": {
+    "candidate_v3": {
+      "path": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+      "git_blob_sha": "8df7f13455b710623806a8219174b397a2c3c442"
+    },
+    "generator_v3": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py",
+      "git_blob_sha": "8b855851b8a0fec3a0811c5033cc4ea6d2436954"
+    },
+    "universal_proof_v4": {
+      "path": "canonical/runtime/unknown_domain_direct_v4_universal_proof_v1.py",
+      "git_blob_sha": "72bbed393ac1bcaccb4cf33cd37835662c421f6c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_unknown_domain_direct_v4_universal_proof_v1.py",
+      "git_blob_sha": "792a6294f2e984ac61173776f8dd4ff608a716b9"
+    },
+    "governance_candidate": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V4_TOTAL_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json",
+      "git_blob_sha": "46d9571fc3c66f86f24a62870e3b65da662e1c5b"
+    },
+    "all_required_subject_bytes_present_on_canonical_main": true
+  },
+  "independent_verification_gate": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2115,
+    "pull_request_head_sha": "ac1ec6703d4c0c0adc23474a86cc3e01d2f5b429",
+    "workflow_run_id": 37242318016,
+    "transport_repair_base_commit": "842b89faf3fbb38d64fc09d8149911f68cddb177",
+    "transport_repair": "PYTHONPATH_DOT_ADDED_TO_VERIFIER_INVOCATION__VERIFIER_AND_SUBJECT_SEMANTICS_UNCHANGED",
+    "expected_receipt_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_TOTAL_EXACT_INDEPENDENT_VERIFICATION_V1",
+    "expected_status": "PASS__INDEPENDENT_CONTENT_BOUND_TOTALITY_EXACTNESS_AND_6912_CASE_FALSIFICATION__ZERO_CREDIT",
+    "required_fisher_yates_exhaustive_choice_paths_n_le_7": 5913,
+    "required_identifier_totality_depends_on_hash_collision_resistance": false,
+    "required_v2_exact_float_counterexample_present": true,
+    "required_nonproduction_falsification": {
+      "populations": 256,
+      "cases": 6912,
+      "all_pass": true
+    },
+    "required_production_or_terminal_cases_generated": 0,
+    "required_acceptance_credit_delta": 0
+  },
+  "separate_reduction_rule": {
+    "all_conditions_required": [
+      "WORKFLOW_RUN_37242318016_CONCLUDES_SUCCESS",
+      "INDEPENDENT_RECEIPT_MATCHES_EXACT_SCHEMA_STATUS_AND_CONTENT_BOUND_SUBJECT_BLOBS",
+      "CANONICAL_MAIN_RECHECKS_ALL_LOAD_BEARING_BLOBS_EQUAL_THE_FROZEN_HASHES",
+      "STRUCTURAL_IDENTIFIER_TOTALITY_PROVED_WITHOUT_HASH_COLLISION_ASSUMPTION",
+      "REACHABLE_V2_ADD2_ONE_ULP_COUNTEREXAMPLE_REPRODUCED",
+      "EXACT_V3_REPAIR_PASSES_THE_SAME_COUNTEREXAMPLE",
+      "ALL_SIX_TRANSFER_FAMILIES_AND_ALL_THREE_ABSTENTION_CLASSES_COVERED_BY_BOUND_UNIVERSAL_ARGUMENT",
+      "ZERO_PRODUCTION_OR_TERMINAL_CASES_CONSUMED"
+    ],
+    "on_all_true": {
+      "predicate_state": "PROVED",
+      "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "proved_predicate_count_delta": 1,
+      "unresolved_predicate_count_delta": -1,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
+    },
+    "on_any_false_or_missing": {
+      "predicate_state": "EXTERNAL_BLOCKED",
+      "proved_predicate_count_delta": 0,
+      "unresolved_predicate_count_delta": 0
+    }
+  },
+  "hard_rules": [
+    "NO_PROMOTION_FROM_THE_FAILED_V1_TRANSPORT_RUN",
+    "NO_PROMOTION_FROM_FINITE_6912_CASE_PASS_WITHOUT_BOUND_UNIVERSAL_ARGUMENT",
+    "NO_PROMOTION_IF_ANY_FROZEN_BLOB_DIFFERS",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOMIC_PREDICATE",
+    "NO_POST_OUTCOME_THRESHOLD_CHANGES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
