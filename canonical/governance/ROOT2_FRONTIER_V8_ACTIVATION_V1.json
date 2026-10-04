@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V8_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__ROOT2_FRONTIER_V8_INDEPENDENT_PASS__CURRENT_AUTHORITY_CANDIDATE__ZERO_CREDIT__NO_FRESH_REALITY",
+  "frontier": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V8.json",
+    "git_blob_sha": "1f86fe713ed22d46d8ed339857e77de339567df8"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_V8_OMC_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "0bb01e2b316fac9d52a9436bf3582fe3c3684dc1",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1632,
+    "verifier_merge_commit": "78d9e23cb6ebadc511261210af140e3fb14d1028",
+    "workflow_run_id": 37172271413,
+    "workflow_job_id": 111347482431,
+    "conclusion": "success"
+  },
+  "supersedes_for_root2_scheduling": "canonical/governance/ROOT2_FRONTIER_V7_ACTIVATION_V1.json",
+  "effect": [
+    "PRESERVE_ROOT2_V7_TRUTH_AND_ALL_VERIFIED_FINANCE_V8_DELTAS",
+    "ADD_INDEPENDENTLY_VERIFIED_OMC_DOCUMENTARY_TB4_CARRIER_CANDIDATE",
+    "PRESERVE_BUILDKITE_CANDIDATE",
+    "PRESERVE_CIRCLECI_DELETION",
+    "PRESERVE_5_OF_19_ACCEPTANCE_12_OF_38_PROVED_26_UNRESOLVED",
+    "PRESERVE_ZERO_INCREMENTAL_SPEND",
+    "PRESERVE_NO_FRESH_REALITY"
+  ],
+  "hard_rules": [
+    "OMC_DOCUMENTARY_FIT_IS_NOT_RUNTIME_FIT",
+    "NOMINAL_16GB_IS_NOT_16384MB_USABLE_MEMORY_PROOF",
+    "NO_TB4_CASE_EXECUTION_BEFORE_RUNTIME_PREFLIGHT_PROTOCOL_EQUIVALENCE_AND_ATTAINABILITY_RECOMPILE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
