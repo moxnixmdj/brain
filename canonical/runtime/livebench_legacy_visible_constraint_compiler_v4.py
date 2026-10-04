@@ -103,6 +103,7 @@ def compile_visible_constraints(prompt: str) -> dict[str, Any]:
         "recognized_instruction_type_count": len(set(ids)),
         "parameter_complete_count": sum(1 for c in constraints if c.get("parameter_complete")),
         "parameter_incomplete": incomplete,
+        "all_recognized_parameters_complete": not incomplete,
         "duplicate_instruction_ids": duplicates,
         "parse_errors": parse_errors,
         "suffix_start": suffix_start,
