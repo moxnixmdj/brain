@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_OUTPUT_OVERLAY_AUTHORITY_REBIND_PUBLIC_RUNNER_VERIFICATION_V2",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_ROOT_DELTA_ONLY_OUTPUT_ONLY_SCHEDULER_OVERLAY__SCOPED_AUTHORITY_PRESERVED__ZERO_CREDIT",
+  "subjects": {
+    "activation_v1_path": "canonical/governance/LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_ACTIVATION_V1.json",
+    "activation_v1_git_blob_sha": "08929577573866dc2bead65a19a856a6b4e152d2",
+    "activation_v2_path": "canonical/governance/LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_ACTIVATION_V2.json",
+    "activation_v2_git_blob_sha": "39da9be4a63c4688a4ecc8a876b094b6e211ce97",
+    "prior_root_git_blob_sha": "e353d54f4608d25b7f0ea06fba5d8fbf2ddfbb59",
+    "current_root_git_blob_sha": "601e82d00104b4ed36ee5968ad966a0c02e627c1"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1759,
+    "verified_head_sha": "c5e1a395cdb09be3059fe1737770911aadc940ce",
+    "merge_commit": "d4d1d2d669c67e4ca0d41e9dfd4562c2fc652ce9",
+    "workflow_run_id": 37188027792,
+    "workflow_job_id": 111394082464,
+    "conclusion": "success"
+  },
+  "verified": {
+    "root_delta_exactly_one_scheduler_overlay": true,
+    "current_acceptance_unchanged": true,
+    "current_residual_partition_unchanged": true,
+    "livebench_remains_unresolved_root2_only": true,
+    "exact_execution_binding_unchanged": true,
+    "point_of_use_gates_unchanged": true,
+    "scope_firewall_unchanged": true,
+    "predicate_local_execution_authority_preserved": true,
+    "global_fresh_reality_authority": false,
+    "promotion_authority": false,
+    "acceptance_credit_authority": false,
+    "terminal_cases_consumed": 0
+  },
+  "semantic_effect": "REBINDS_ONLY_LIVEBENCH_IF_GE_65_7_SCOPED_DIRECT_EXECUTION_AUTHORITY_ACROSS_THE_VERIFIED_ZERO_CREDIT_OUTPUT_ONLY_SCHEDULER_ROOT_DELTA",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "global_fresh_reality_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_authority": false
+}
