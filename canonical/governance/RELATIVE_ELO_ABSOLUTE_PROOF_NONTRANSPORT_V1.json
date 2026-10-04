@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_RELATIVE_ELO_ABSOLUTE_PROOF_NONTRANSPORT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__GENERAL_RELATIVE_SCORE_NONTRANSPORT_THEOREM__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "PRUNE_INVALID_STRONGER_PROOF_ROUTES_FOR_RELATIVE_CROWD_BT_ELO_TARGETS_WITHOUT_WEAKENING_ANY_FROZEN_THRESHOLD",
+  "source_facts": [
+    {
+      "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "fact": "GDPval-AA v2.1 ratings are fitted with a Crowd-BT model and anchored to DeepSeek V4.1 Flash (max) at 1600."
+    },
+    {
+      "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "fact": "AA-Briefcase v1.1 pairwise scopes are fitted with Crowd-BT; the anchor remains GPT-5.5 (medium) at 1000."
+    },
+    {
+      "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "fact": "AA-Briefcase headline Elo aggregates rubric pass rate, analytical-quality Elo, and presentation Elo; analytical and presentation quality are pairwise comparisons."
+    },
+    {
+      "source": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+      "fact": "GDPval-AA v2.1 Elo is derived from blind pairwise comparisons on the same task."
+    }
+  ],
+  "theorem": {
+    "statement": "FOR_A_RELATIVE_PAIRWISE_FITTED_SCORE__AN_ABSOLUTE_CAPABILITY_OR_BEHAVIORAL_CERTIFICATE_THAT_DOES_NOT_BIND_A_SUFFICIENT_RELATIVE_COMPARISON_GRAPH_OUTCOME_OR_VERIFIED_SCORE_BRIDGE_CANNOT_LOGICALLY_ENTAIL_A_FIXED_ELO_THRESHOLD",
+    "proof_basis": [
+      "LET_C_BE_ANY_CERTIFICATE_CONSTRAINING_ONLY_ABSOLUTE_BEHAVIOR_OR_TASK_PROPERTIES",
+      "LET_E_BE_A_RELATIVE_SCORE_FITTED_FROM_PAIRWISE_OUTCOMES_J_COMPARISON_GRAPH_G_AND_ANCHOR_A",
+      "IF_C_DOES_NOT_DETERMINE_ENOUGH_OF_J_G_A_TO_LOWER_BOUND_E_AT_THRESHOLD_T__THEN_TWO_MODELS_OF_THE_UNBOUND_RELATIVE_VARIABLES_CAN_SHARE_THE_SAME_C_WHILE_ONE_HAS_E_GE_T_AND_ONE_HAS_E_LT_T",
+      "THEREFORE_C_DOES_NOT_ENTAIL_E_GE_T",
+      "THE_CONCLUSION_IS_LOGICAL_NONTRANSPORT_NOT_A_CLAIM_THAT_NO_STRONGER_PROOF_CAN_EXIST"
+    ],
+    "countermodel_condition": "VERIFIER_CONSTRUCTS_TWO_PAIRWISE_OUTCOME_WORLDS_WITH_IDENTICAL_ABSOLUTE_CERTIFICATE_STATE_AND_FIXED_ANCHOR__ONE_HIGH_WIN_RATE_AND_ONE_LOW_WIN_RATE__WHICH_YIELD_OPPOSITE_RELATIVE_STRENGTH_ORDERINGS",
+    "escape_hatches": [
+      "EXACT_OR_SUPERSET_RELATIVE_SCORE_BRIDGE_THAT_PROVES_SUFFICIENT_PAIRWISE_OUTCOMES_OR_A_DIRECT_LOWER_BOUND_ON_THE_FITTED_SCORE",
+      "EXISTING_CONTENT_ADDRESSED_COMPARATOR_EVIDENCE_THAT_DIRECTLY_LOWER_BOUNDS_THE_TARGET_SCORE",
+      "OWNER_RUN_OR_MATCHED_EMPIRICAL_COMPARISON_ON_THE_FROZEN_SCORING_PROTOCOL",
+      "A_DIFFERENT_INDEPENDENT_FORMAL_THEOREM_THAT_EXPLICITLY_PROVES_THE_RELATIVE_SCORE_THRESHOLD"
+    ]
+  },
+  "affected_predicates": [
+    {
+      "predicate_id": "PROWORK_GDPVAL_GE_1846",
+      "surface": "GDPval-AA v2.1",
+      "frozen_threshold": 1846,
+      "scheduler_effect": "DELETE_PURE_ABSOLUTE_BEHAVIORAL_CEILING_FLOOR_OR_SCOPE_ONLY_CERTIFICATES_AS_SUFFICIENT_REPLACEMENTS_UNLESS_THEY_INCLUDE_A_VERIFIED_RELATIVE_SCORE_BRIDGE"
+    },
+    {
+      "predicate_id": "PROWORK_AA_BRIEFCASE_GE_1822",
+      "surface": "AA-Briefcase v1.1",
+      "frozen_threshold": 1822,
+      "scheduler_effect": "DELETE_PURE_ABSOLUTE_BEHAVIORAL_CEILING_FLOOR_OR_SCOPE_ONLY_CERTIFICATES_AS_SUFFICIENT_REPLACEMENTS_UNLESS_THEY_INCLUDE_A_VERIFIED_RELATIVE_SCORE_BRIDGE"
+    },
+    {
+      "predicate_id": "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "surface": "AA-Briefcase v1.1",
+      "frozen_threshold": 1822,
+      "scheduler_effect": "DELETE_PURE_ABSOLUTE_BEHAVIORAL_CEILING_FLOOR_OR_SCOPE_ONLY_CERTIFICATES_AS_SUFFICIENT_REPLACEMENTS_UNLESS_THEY_INCLUDE_A_VERIFIED_RELATIVE_SCORE_BRIDGE"
+    }
+  ],
+  "route_pruning": {
+    "not_globally_deleted": [
+      "FORMAL_ENTAILMENT",
+      "EXHAUSTIVE_FINITE_UNIVERSE",
+      "SCOPE_SAFE_STRONGER_PROOF"
+    ],
+    "conditionally_deleted_form": [
+      "PURE_ABSOLUTE_FORMAL_ENTAILMENT_WITHOUT_RELATIVE_SCORE_BRIDGE",
+      "OBJECTIVE_CEILING_OR_FLOOR_ON_NON_RELATIVE_BEHAVIORAL_METRICS_WITHOUT_RELATIVE_SCORE_BRIDGE",
+      "EXHAUSTIVE_TASK_UNIVERSE_PROOF_WITHOUT_RELATIVE_PAIRWISE_SCORE_BRIDGE",
+      "SCOPE_SAFE_BEHAVIORAL_DOMINANCE_WITHOUT_RELATIVE_SCORE_BRIDGE"
+    ],
+    "preserved": [
+      "EXISTING_CONTENT_ADDRESSED_COMPARATOR_EVIDENCE",
+      "MATCHED_EMPIRICAL_COMPARISON",
+      "OWNER_RESULT",
+      "RELATIVE_SCORE_BRIDGE_STRONGER_PROOF"
+    ]
+  },
+  "relationship_to_private_surface_dominance": {
+    "dominance_path": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+    "rule": "BEHAVIORAL_ROUTE_REDUNDANCY_DOES_NOT_TRANSPORT_TO_THE_FROZEN_RELATIVE_ELO_THRESHOLD_WITHOUT_A_VERIFIED_RELATIVE_SCORE_BRIDGE",
+    "target_weakening": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
