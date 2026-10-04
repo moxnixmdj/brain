@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_PARTIAL_METRIC_SEMANTICS_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PARTIAL_IS_SCORING_SEMANTIC_NOT_SUBSET_AUTHORITY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "objective": "Delete the unsupported interpretation that the word partial in the frozen 81.8 percent comparator identifies an unknown partial task population, while preserving all unresolved exact Anthropic harness and population-comparability obligations.",
+  "brain_authority": {
+    "terminal_protocol_path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "terminal_protocol_git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "osworld_route_boundary_path": "canonical/governance/OSWORLD_V21_SELF_HOST_SOURCE_BOUNDARY_V1.json",
+    "osworld_route_boundary_git_blob_sha": "5beda629c266889b8d384f60ce89b7e7ec86c8f7"
+  },
+  "primary_sources": {
+    "anthropic_launch": {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "required_semantics": [
+        "BENCHMARK_LABEL_OSWORLD_2_1",
+        "OPUS55_VALUE_81_8_PERCENT",
+        "VALUE_QUALIFIER_PARTIAL"
+      ],
+      "limitation": "THE_LAUNCH_TABLE_DOES_NOT_DEFINE_PARTIAL_AS_A_TASK_SUBSET_OR PUBLISH_A_CASE_LIST"
+    },
+    "osworld_release_manifest": {
+      "repository": "xlang-ai/OSWorld-V2",
+      "ref": "osworld-v2.1",
+      "path": "benchmark_releases/osworld-v2.1.json",
+      "git_blob_sha": "6d37c6f4c6c4f6daa5077d4e4c828f68360b7e36",
+      "task_count": 108,
+      "tasks_revision": "0a1aadad95aa79b00b3783e717d865089ab06e26"
+    },
+    "osworld_partial_reward_implementation": {
+      "repository": "xlang-ai/OSWorld-V2",
+      "ref": "osworld-v2.1",
+      "path": "desktop_env/evaluators/metrics/basic_os.py",
+      "git_blob_sha": "56288f1e1412af507d440dc8c25051c2c41bb74d",
+      "semantic": "PARTIAL_REWARD_IS_AN_EVALUATOR_SCORING_MODE_PRODUCING_VALUES_IN_ZERO_TO_ONE_RATHER_THAN_A_POPULATION_SELECTOR"
+    },
+    "osworld_official_site": {
+      "url": "https://osworld-v2.xlang.ai/",
+      "required_semantics": [
+        "LEADERBOARD_HAS_SEPARATE_BINARY_REWARD_AND_PARTIAL_REWARD_METRICS",
+        "RELEASE_VERSION_IS_A_SEPARATE_SELECTOR_FROM_SCORE_METRIC"
+      ]
+    }
+  },
+  "proved_narrow_conclusion": {
+    "delete_interpretation": "PARTIAL_MEANS_AN_UNIDENTIFIED_TASK_SUBSET",
+    "replacement": "PARTIAL_IS_A_REWARD_OR_SCORING_QUALIFIER",
+    "release_population_identity": "OSWORLD_V2_1_RELEASE_MANIFEST_HAS_108_PINNED_TASK_FILES",
+    "anthropic_exact_run_population": "OPEN",
+    "anthropic_exact_harness_equivalence": "OPEN",
+    "brain_same_harness_score": "OPEN"
+  },
+  "scheduler_consequence": {
+    "forbid": [
+      "SEARCH_FOR_A_MYSTERIOUS_PARTIAL_TASK_SUBSET_MERELY_BECAUSE_THE_SCORE_IS_LABELLED_PARTIAL",
+      "TREAT_81_8_AS_PROOF_ANTHROPIC_RAN_ALL_108_TASKS_WITHOUT_SEPARATE_EVIDENCE"
+    ],
+    "preserve": [
+      "BIND_EXACT_ANTHROPIC_OR_EQUIVALENT_OSWORLD_V21_HARNESS_AND_POPULATION_SEMANTICS",
+      "VERIFY_MATERIAL_HUGGINGFACE_ACCESS_TO_PINNED_V21_TASKS_AND_ASSETS",
+      "SELF_HOST_REQUIRED_WEBSITE_AND_GITLAB_SERVICES",
+      "VERIFY_END_TO_END_PROTOCOL_EQUIVALENCE",
+      "BRAIN_SCORE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANTHROPIC_EVALUATED_ALL_108_TASKS",
+    "NO_CLAIM_BRAIN_ROUTE_IS_SCORE_READY",
+    "NO_CLAIM_HUGGINGFACE_ACCOUNT_ACCESS_EXISTS",
+    "NO_TERMINAL_CASE_EXECUTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
