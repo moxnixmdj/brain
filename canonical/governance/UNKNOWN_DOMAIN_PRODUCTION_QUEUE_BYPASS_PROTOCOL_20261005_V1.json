@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_PRODUCTION_QUEUE_BYPASS_PROTOCOL_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_PRE_RESULT_TRANSPORT_ONLY_BYPASS__ZERO_RESULT_EXPOSURE_AT_FREEZE__ZERO_CREDIT",
+  "trigger": {
+    "github_actions_production_run_id": 37241217775,
+    "observed_run_state": "QUEUED",
+    "observed_repository_queued_workflow_count": 2500,
+    "reason": "CONTROL_PLANE_QUEUE_SATURATION_ONLY"
+  },
+  "exact_subject": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "execution_lease_sha256": "5c62d42a792a72330535b07cd5f0722ad6e33417bd0179b7d9a01594da8c543d",
+    "execution_lease_git_blob_sha": "e83a79d4ffb7e5912ece02b9d4cddc5da1a5a800",
+    "launch_ref": "refs/heads/unknown-domain-direct-launch/5c62d42a792a72330535b07cd5f0722ad6e33417bd0179b7d9a01594da8c543d",
+    "launch_head_sha": "1f848e1d3edab4da63a995a7724c45b7d6ba2587",
+    "candidate_generator_scorer_harness_mutation_allowed": false
+  },
+  "transport": {
+    "atomic_linearization": {
+      "operation": "GITHUB_CREATE_REFERENCE_VIA_CONNECTED_GITHUB_CREATE_BRANCH",
+      "claim_ref": "refs/heads/unknown-domain-direct-claims/5c62d42a792a72330535b07cd5f0722ad6e33417bd0179b7d9a01594da8c543d",
+      "target_sha": "1f848e1d3edab4da63a995a7724c45b7d6ba2587",
+      "rule": "SUCCESSFUL_FIRST_CREATE_IS_THE_ONLY_AUTHORITY_TO_ADVANCE; ANY_FAILURE_OR_CONFLICT_ABORTS_BEFORE_BEACON_OR_CASE_GENERATION"
+    },
+    "after_claim_only": [
+      "CHECK_OUT_EXACT_LAUNCH_REF_IN_SEPARATE_REMOTE_CLOUD_ENVIRONMENT",
+      "REVERIFY_FINAL_EXECUTION_LEASE_AND_TRANSITIVE_LOCAL_RUNTIME_DEPENDENCY_CLOSURE",
+      "RECHECK_POINT_OF_USE_PREFLIGHT",
+      "CALL_EXACT_FROZEN_execute_after_claim_EXACTLY_ONCE",
+      "APPEND_ONLY_CLAIM_LEASE_AND_LAUNCH_METADATA",
+      "PERSIST_SANITIZED_RESULT_TO_THE_CLAIM_BRANCH_EXACTLY_ONCE"
+    ],
+    "remote_environment_id": "brain-heldout003-one-shot",
+    "retry_rule": "IF_EXECUTION_RESULT_IS_UNCERTAIN_AFTER_THE_SINGLE_CALL_DO_NOT_RERUN; FAIL_CLOSED_AND_PRESERVE_EVIDENCE"
+  },
+  "invariant_preservation": [
+    "BEACON_AND_EVALUATOR_SECRET_DO_NOT_EXIST_BEFORE_ATOMIC_CLAIM_SUCCESS",
+    "EXACTLY_ONE_27_CASE_PRODUCTION_POPULATION",
+    "NO_REPLAY_REPLACEMENT_OR_POST_RESULT_TUNING",
+    "RAW_HIDDEN_RECORDS_SECRET_AND_BEACON_NOT_PERSISTED",
+    "PERSISTENT_LEARNED_BYTES_ZERO",
+    "EXTERNAL_FRONTIER_MODEL_CALLS_ZERO",
+    "EXTERNAL_LEARNED_CAPABILITY_CALLS_ZERO",
+    "SAME_PRE_RESULT_REDUCTION_PROTOCOL",
+    "SEPARATE_INDEPENDENT_RESULT_REDUCTION",
+    "SEPARATE_ACCEPTANCE_PROMOTION"
+  ],
+  "queued_actions_interaction": "ONCE_THE_CLAIM_REF_EXISTS, THE_QUEUED_GITHUB_ACTIONS_LAUNCHER MUST FAIL ITS ATOMIC CLAIM CREATE AND ABORT BEFORE GENERATING A SECOND POPULATION.",
+  "reduction_protocol": "canonical/governance/UNKNOWN_DOMAIN_PRODUCTION_RESULT_REDUCTION_PROTOCOL_20261005_V1.json",
+  "authority": {
+    "transport_execution": true,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "terminal_credit": false
+  },
+  "hard_nonclaims": [
+    "THIS_PROTOCOL_DOES_NOT_CHANGE_THE_EXECUTION_SUBJECT",
+    "THIS_PROTOCOL_DOES_NOT_CHANGE_ACCEPTANCE_CRITERIA",
+    "THIS_PROTOCOL_DOES_NOT_ASSERT_A_PRODUCTION_PASS",
+    "THIS_PROTOCOL_DOES_NOT_BY_ITSELF_CLOSE_ANY_PREDICATE"
+  ]
+}
