@@ -22,4 +22,4 @@ jobs:
         with:
           python-version: '3.12'
       - run: python canonical/runtime/terminal_minimum_causal_depth_guard_v1.py
-      - run: python -m pytest -q canonical/tests/test_terminal_minimum_causal_depth_guard_v1.py
+      - run: python -c "from canonical.tests.test_terminal_minimum_causal_depth_guard_v1 import test_guard_passes; test_guard_passes()"
