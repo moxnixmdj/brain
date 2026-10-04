@@ -85,11 +85,11 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
         if hit is not None:
             reasons.append("MANDATORY_END_PHRASE_CONTAINS_FORBIDDEN_WORD:" + hit.casefold())
 
-    if SECTIONS in by_id and FORBIDDEN in by_id:
-        splitter = str(by_id[SECTIONS].get("section_spliter", "")).strip()
-        hit = _literal_forbidden_hit(splitter, forbidden_words)
-        if hit is not None:
-            reasons.append("MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:" + hit.casefold())
+    # SectionChecker does NOT force the splitter to be a standalone word.
+    # Its exact pinned regex permits zero whitespace before the numeric index,
+    # so "Section1" satisfies splitter="Section" while avoiding the whole-word
+    # boundary rejected by ForbiddenWords(["section"]). Therefore a
+    # section-splitter/forbidden-word overlap is repairable, not hard UNSAT.
 
     if SENTENCE in by_id and END in by_id:
         sentence = by_id[SENTENCE]
