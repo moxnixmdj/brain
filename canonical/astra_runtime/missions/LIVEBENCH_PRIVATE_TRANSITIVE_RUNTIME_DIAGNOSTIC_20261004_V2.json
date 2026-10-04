@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "LIVEBENCH-PRIVATE-TRANSITIVE-RUNTIME-DIAGNOSTIC-20261004-V2",
+  "purpose": "Persist the exact private zero-case LiveBench inference outcome, including any transitive runtime exception, without reading terminal cases.",
+  "steps": [
+    {
+      "id": "diagnose-synthetic-livebench-inference",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json, traceback, subprocess\nreceipt={\n  \"schema\":\"PROJECT_BRAIN_LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_V1\",\n  \"terminal_case_content_read\":False,\n  \"terminal_cases_consumed\":0,\n  \"paid_external_model_or_api_used\":False,\n}\nexpected={\n \"canonical/runtime/astra_runtime.py\":\"7f5d16b1db69cb620954bc778e0ba6e15e687b75\",\n \"canonical/runtime/root2_livebench_if_astra_inference_adapter_v1.py\":\"7e3885fa7a6e56df656c066e0a8f17cfa21424e7\",\n \"canonical/runtime/goal_compiler.py\":\"4b61fe911471854ec15c7900816f61e9e55f602e\",\n}\nobserved={}\nfor path,want in expected.items():\n    got=subprocess.check_output([\"git\",\"rev-parse\",\"HEAD:\"+path],text=True).strip()\n    observed[path]=got\n    if got!=want:\n        receipt.update(status=\"BLOCKED\", blocker=\"FROZEN_BLOB_MISMATCH\", path=path, expected=want, observed=got)\n        print(\"LIVEBENCH_PRIVATE_DIAGNOSTIC_RECEIPT=\"+json.dumps(receipt,sort_keys=True))\n        print(\"LIVEBENCH_PRIVATE_DIAGNOSTIC_COMPLETE\")\n        raise SystemExit(0)\nreceipt[\"observed_git_blobs\"]=observed\ntry:\n    from canonical.runtime import root2_livebench_if_astra_inference_adapter_v1 as a\n    req={\n      \"benchmark_id\":\"LIVEBENCH_IF_2026_06_25\",\n      \"task_id\":\"SYNTHETIC_ZERO_CASE_INFERENCE\",\n      \"allowed_tools\":[],\n      \"task_payload\":{\"instruction\":\"Reply with exactly SYNTHETIC_OK.\"},\n    }\n    out=a.infer(req)\n    receipt.update(\n      status=\"PASS\" if out.get(\"status\")==\"PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE\" and out.get(\"cognition_dependency_class\")==\"MODEL_INDEPENDENT\" and out.get(\"model_dependency_count\")==0 else \"BLOCKED\",\n      adapter_status=out.get(\"status\"),\n      cognition_dependency_class=out.get(\"cognition_dependency_class\"),\n      model_dependency_count=out.get(\"model_dependency_count\"),\n      answer=out.get(\"answer\"),\n      provenance=out.get(\"provenance\"),\n    )\nexcept BaseException as exc:\n    receipt.update(\n      status=\"BLOCKED\",\n      blocker_type=type(exc).__name__,\n      blocker_message=str(exc),\n      traceback=traceback.format_exc()[-10000:],\n    )\nprint(\"LIVEBENCH_PRIVATE_DIAGNOSTIC_RECEIPT=\"+json.dumps(receipt,sort_keys=True))\nprint(\"LIVEBENCH_PRIVATE_DIAGNOSTIC_COMPLETE\")\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "LIVEBENCH_PRIVATE_DIAGNOSTIC_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "terminal_case_content_forbidden": true,
+    "terminal_cases_consumed": 0,
+    "paid_external_model_or_api_forbidden": true,
+    "user_laptop_forbidden": true,
+    "allow_registry_mutation": false
+  }
+}
