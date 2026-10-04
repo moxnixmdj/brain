@@ -89,33 +89,35 @@ def test_selector_fails_closed_when_unsat_coverage_is_missing():
     assert out["certificate"]["unresolved_subset_indices"] == [[0, 1]]
 
 
-def test_pinned_checker_bridge_removes_external_callback_gap(monkeypatch):
-    class FakeForbidden:
-        def __init__(self, iid):
-            self.word = ""
-
-        def build_description(self, *, forbidden_words):
-            self.word = str(forbidden_words[0])
-
-        def check_following(self, response):
-            return self.word not in response
-
-    monkeypatch.setattr(
-        search.exact_postvalidator,
-        "load_pinned_registry",
-        lambda root: (
-            {"keywords:forbidden_words": FakeForbidden},
-            {"livebench_commit": "pinned-test"},
-        ),
-    )
+def test_blank_prevalidated_flags_are_forced_false_by_frozen_strict_semantics():
     contracts = [c("keywords:forbidden_words", forbidden_words=["omega"])]
-    out = search.solve_with_pinned_livebench(
+    out = search.select_best_postvalidated(
         contracts,
-        "/synthetic/pinned/root",
-        max_per_subset=2,
-        max_total=32,
+        [{"response": "", "checker_results": [True]}],
+    )
+    assert out["status"] == "FAIL_CLOSED__BEST_CANDIDATE_OPTIMALITY_NOT_CERTIFIED"
+    assert out["best_candidate"]["response"] == ""
+    assert out["best_candidate"]["checker_results"] == [False]
+    assert out["best_candidate"]["true_checker_count"] == 0
+    assert out["strict_blank_guarded_candidate_count"] == 1
+    assert out["strict_blank_guard_source_blob"] == search.PINNED_STRICT_EVALUATOR_BLOB
+
+
+def test_blank_raw_checker_cannot_beat_nonblank_strict_candidate():
+    contracts = [c("keywords:forbidden_words", forbidden_words=["omega"])]
+
+    def sloppy_raw_checker(response, _contracts):
+        # Raw ForbiddenWords.check_following("") would return True, but the
+        # frozen strict wrapper must reject the blank response before credit.
+        return [True]
+
+    out = search.solve_with_checker(
+        contracts,
+        sloppy_raw_checker,
+        max_per_subset=1,
+        max_total=16,
     )
     assert out["status"] == "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED"
-    assert out["pointwise_optimal"] is True
-    assert out["exact_checker_callback_required"] is False
-    assert out["exact_checker_binding"]["livebench_commit"] == "pinned-test"
+    assert out["best_candidate"]["response"].strip() != ""
+    assert out["best_candidate"]["checker_results"] == [True]
+    assert out["strict_blank_guarded_candidate_count"] >= 1
