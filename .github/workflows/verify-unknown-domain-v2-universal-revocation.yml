@@ -1,0 +1,55 @@
+name: Verify Unknown-Domain V2 universal revocation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/verification/UNKNOWN_DOMAIN_V2_UNIVERSAL_FORMAL_REDUCTION_REVOCATION_20261005_V1.json'
+      - 'canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json'
+      - '.github/workflows/verify-unknown-domain-v2-universal-revocation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reproduce deterministic V2 ADD2 falsifier
+        run: |
+          python - <<'PY'
+          import hashlib
+          from canonical.runtime import unknown_domain_direct_candidate_v2 as c2
+          from canonical.runtime import unknown_domain_direct_execution_harness_v1 as harness
+          from canonical.runtime import unknown_domain_direct_hidden_generator_v2 as g2
+          secret=hashlib.sha256(b"secret0").digest()
+          beacon="beacon-qualification-0000000000000000"
+          visible,hidden=g2._transfer_case(secret,beacon,4,namespace="QUALONLY")
+          out=harness.execute_case(candidate_step=c2.step,case_visible=visible,hidden_record=hidden)
+          assert out["scorer_result"]["pass"] is False, out["scorer_result"]
+          assert "DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG" in out["scorer_result"]["errors"]
+          got=out["candidate_terminal_action"]["terminal_consequence"]
+          gold=hidden["gold_terminal_consequence"]
+          assert got != gold
+          assert 0 < abs(got-gold) < 1e-12
+          assert set(out["candidate_terminal_action"]["support_feature_ids"]) == set(hidden["transfer_relevant_feature_ids"])
+          print("V2 universal theorem falsified; abs float delta =",abs(got-gold))
+          PY
+      - name: Verify fail-closed ledger accounting
+        run: |
+          python - <<'PY'
+          import json
+          p="canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
+          d=json.load(open(p))
+          assert d["saturation"]["proved_predicate_count"]==12
+          assert d["saturation"]["unresolved_predicate_count"]==26
+          c=next(x for x in d["claims"] if x["predicate_id"]=="UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT")
+          assert c["state"]=="EXTERNAL_BLOCKED"
+          assert c["root_class"]=="ROOT3"
+          assert "EXACT_IEEE754" in c["revoked_proof"]["reason"]
+          print("fail-closed ledger repair PASS")
+          PY
