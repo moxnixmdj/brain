@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_VERIFIER_MAIN_DIVERGENCE_QUARANTINE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__CURRENT_ONE_USE_AUTHORITY_PINNED_TO_PRESERVED_LEASE_RETRY__NEWER_VERIFIER_MAIN_CANDIDATE_HAS_ZERO_PRODUCTION_AUTHORITY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "authorized_current_attempt": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "execution_lease_sha256": "76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "execution_lease_git_blob_sha": "26f98012ecf01c6a3f20e855bdebf60cf70d1c1f",
+    "launch_ref": "refs/heads/unknown-domain-direct-launch/76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "claim_ref": "refs/heads/unknown-domain-direct-claims/76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "armed_launch_head": "680d98343bd41f6bc489d968cc1f096b2fea99b0",
+    "verified_retry_pr": 2034,
+    "verified_retry_merge_commit": "f666b5b512e035fe4bcda30058644f606e231a45",
+    "retry_workflow_run_id": 37240563767,
+    "retry_state_at_freeze": "QUEUED"
+  },
+  "newer_verifier_main_candidate": {
+    "observed_main_commit": "346ca594c155505e5d594a1da390ae4f0ee4bd3d",
+    "semantic_role": "REPAIRED_FUTURE_CANDIDATE_ONLY",
+    "may_supersede_current_one_use_attempt": false,
+    "may_create_new_launch_key_during_current_attempt": false,
+    "may_create_new_claim_key_during_current_attempt": false,
+    "production_authority": false,
+    "acceptance_credit": false
+  },
+  "precommitted_reduction": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCTION_PRECOMMIT_V1.json",
+    "brain_commit": "3493caf18490398e236433bcee9df20223daeda0",
+    "outcome_observed_before_freeze": false
+  },
+  "hard_rules": [
+    "DO_NOT_DERIVE_PRODUCTION_AUTHORITY_FROM_VERIFIER_MAIN_RECENCY",
+    "ONLY_THE_PINNED_PRESERVED_LEASE_RETRY_MAY ATTEMPT THE CURRENT ONE_USE_POPULATION",
+    "DO_NOT_CREATE_A_SECOND_LAUNCH_OR_CLAIM_KEY_WHILE_RETRY_RUN_37240563767_IS_UNRESOLVED",
+    "DO_NOT_TREAT_NEWER_VERIFIER_MAIN_AS_ACCEPTANCE_OR_PRODUCTION_CREDIT",
+    "AFTER_THE_PINNED_ATTEMPT_RESOLVES__RECONCILE_MAIN_SEPARATELY_BEFORE_ANY_FUTURE_EXECUTION"
+  ],
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "ownership_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
