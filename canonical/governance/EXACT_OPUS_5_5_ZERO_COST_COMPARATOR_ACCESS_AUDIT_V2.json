@@ -34,6 +34,12 @@
       "Exact-model human Direct route remains publicly plausible",
       "Machine-reproducible zero-cost channel not bound",
       "PRESERVE_MANUAL_AUDITABLE_ROUTE_OR_FUTURE_MACHINE_CHANNEL"
+    ],
+    [
+      "ARENA_API",
+      "Arena now publishes an OpenAI-compatible and Anthropic-compatible machine API gateway with explicit model selection, fallback disable, and X-Arena-Resolved-Model provenance",
+      "Old audit assumption that Arena has no machine channel is obsolete; account/key, exact Opus 5.5 availability, zero-cost entitlement, and harness equivalence remain unbound",
+      "MACHINE_CHANNEL_DISCOVERED__WAKE_ON_ACCOUNT_KEY_MODEL_LIST_AND_ZERO_COST_ALLOWANCE"
     ]
   ],
   "implications": {
@@ -41,9 +47,12 @@
     "exact_identity_required": true,
     "auto_model_selection_admissible": false,
     "proxy_substitution_admissible": false,
-    "generic_free_opus_search": "SATURATED_UNDER_CURRENT_PUBLIC_AND_CONNECTED_ACCOUNT_EVIDENCE"
+    "generic_free_opus_search": "SATURATED_UNDER_CURRENT_PUBLIC_AND_CONNECTED_ACCOUNT_EVIDENCE",
+    "arena_machine_channel_exists": true,
+    "arena_machine_route_currently_admissible": false
   },
   "next": [
+    "CHECK_ARENA_API_ACCOUNT_KEY_EXACT_OPUS55_MODEL_LIST_ZERO_COST_ALLOWANCE_AND_HARNESS_EQUIVALENCE",
     "OBSERVE_ONLY_MATERIAL_ENTITLEMENT_OR_BALANCE_WAKE_EVENTS",
     "PRESERVE_ARENA_MANUAL_EXACT_CAPTURE_AS_HUMAN_ROUTE_IF_PROVENANCE_CAN_BE_FROZEN",
     "CONTINUE_ROOT2_SELF_SERVICE_AND_STRONGER_PROOFS_IN_PARALLEL",
