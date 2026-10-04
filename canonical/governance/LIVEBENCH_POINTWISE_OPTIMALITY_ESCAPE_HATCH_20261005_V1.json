@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_POINTWISE_OPTIMALITY_ESCAPE_HATCH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "BREAKTHROUGH_CANDIDATE__DISTRIBUTION_FREE_POINTWISE_DOMINANCE__ZERO_ACCEPTANCE_CREDIT_UNTIL_UNIVERSAL_PROOF_BOUND",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "theorem": {
+    "statement": "FOR_EACH_VISIBLE_ACTIVE15_CASE_C, IF THE SOLVER_RESPONSE_ATTAINS_THE_MAXIMUM_FROZEN_STRICT_SCORE_OVER_ALL_RESPONSES_FOR_C, THEN FOR_ANY_FINITE_POPULATION_OR_DISTRIBUTION_D_OVER_SUCH_CASES THE_SOLVER_MEAN_SCORE_IS_AT_LEAST_THE_MEAN_SCORE_OF_ANY_COMPETING_MODEL_ON_D",
+    "proof": [
+      "POINTWISE_FOR_EVERY_CASE_C: SCORE_SOLVER(C) >= SCORE_MODEL(C)",
+      "FINITE_SUMS_AND_EXPECTATIONS_PRESERVE_POINTWISE_INEQUALITY",
+      "THEREFORE_MEAN_D_SCORE_SOLVER >= MEAN_D_SCORE_MODEL_FOR_EVERY_D",
+      "NO_TARGET_ROW_CONTENT_OR_CASE_FREQUENCY_IS_REQUIRED_FOR_THIS_IMPLICATION"
+    ],
+    "acceptance_consequence": "ONCE_ACTIVE15_SCOPE_EQUIVALENCE_AND_POINTWISE_OPTIMALITY_ARE_INDEPENDENTLY_PROVED, THE_ACCEPTED_OPUS_COMPARATOR_MEAN_ON_THE_SAME_SCOPE_IS_A_LOWER_BOUND_ON_THE_SOLVER_MEAN_WITHOUT_READING_THE_CONTAMINATED_TERMINAL_ROWS"
+  },
+  "structural_certificate": {
+    "path": "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py",
+    "git_blob_sha": "f0e1faae5b5d1a90a1184fe6cca409591acbbb27",
+    "lemma": "IF_A_CANDIDATE_PASSES_G_OF_K_CHECKERS_AND_EVERY_G_PLUS_1_SUBSET_IS_JOINTLY_UNSAT_THEN_NO_RESPONSE_CAN_PASS_MORE_THAN_G",
+    "frozen_checker_bound_per_case": 5,
+    "worst_required_next_cardinality_subset_count": 10
+  },
+  "active15_semantic_certificate": {
+    "path": "canonical/runtime/livebench_legacy15_pointwise_certificate_v1.py",
+    "git_blob_sha": "b8f9d0c9a0b0c9f78769cb9534ee4e2c61481fd8",
+    "slot_feasibility_path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+    "slot_feasibility_git_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0"
+  },
+  "search_and_solver": {
+    "search_path": "canonical/runtime/livebench_legacy15_pointwise_search_v1.py",
+    "search_git_blob_sha": "d4ca404b98888acc79d0a24ba61201433131eaee",
+    "direct_planner_path": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py",
+    "direct_planner_git_blob_sha": "71e637c70edf1c582e28ea38b3b798965c803a06",
+    "exact_postvalidator_path": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+    "exact_postvalidator_git_blob_sha": "8c34701f5a63acf5aef88e8ea060be2d70571c23"
+  },
+  "finite_reductions": {
+    "structural_id_sets": 928,
+    "structural_archetypes": 7,
+    "exact_reachable_lexical_collision_signatures": 192,
+    "lexical_quotient_path": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+    "lexical_quotient_git_blob_sha": "5803c31e3972c6d40415f319e808c48420bc0388",
+    "lexical_signature_path": "canonical/runtime/livebench_legacy15_lexical_collision_signatures_v2.py",
+    "lexical_signature_git_blob_sha": "4144a0e4375fffc414d20d012797736dc52be4ac"
+  },
+  "independent_constructor_evidence": {
+    "receipt_path": "canonical/verification/LIVEBENCH_COMPOSER_V2_PUBLIC_RUNNER_RECEIPT_20261005_V1.json",
+    "workflow_run_id": 37242531058,
+    "job_id": 111553921729,
+    "artifact_id": 11317108771,
+    "artifact_zip_sha256": "dd7923e31a5a468f43443fc38638d7a75204c4e0688b7d1c37bb64fae5d4a5f4",
+    "audited_cases": 12488,
+    "witness_all_checker_pass": 10959,
+    "witness_failures": 0,
+    "terminal_rows_read": 0
+  },
+  "remaining_obligations": [
+    "PROVE_VISIBLE_PROMPT_COMPILER_COMPLETE_FOR_THE_FROZEN_HISTORICAL_ACTIVE15_GRAMMAR",
+    "PROVE_OR_EXHAUST_THE_REMAINING_NUMERIC_STRUCTURAL_SLOT_QUOTIENT_WITH_EXACT_PINNED_CHECKERS",
+    "BIND_STRICT_SENTENCE_LT_ONE_UNSAT_TO_THE_EXACT_EVALUATOR_AND_HERMETIC_PUNKT_RUNTIME_IN_AN_INDEPENDENT_RECEIPT",
+    "VERIFY_POINTWISE_CANDIDATE_PLUS_NEXT_CARDINALITY_UNSAT_CERTIFICATE_FOR_EVERY_STATE_IN_THE_COMPLETE_FINITE_QUOTIENT",
+    "BIND_SCOPE_EQUIVALENCE_FROM_THE_ACCEPTED_LIVEBENCH_PREDICATE_TO_THIS_FROZEN_ACTIVE15_SCORER_SURFACE"
+  ],
+  "hard_nonclaims": [
+    "THE_TERMINAL_GOAL_IS_NOT_YET_PROVED",
+    "LIVEBENCH_ACCEPTANCE_CREDIT_REMAINS_ZERO_UNTIL_THE_REMAINING_OBLIGATIONS_CLOSE",
+    "NO_CONTAMINATED_TERMINAL_ROW_CONTENT_FREQUENCY_KWARGS_OR_SCORE_IS_USED_BY_THIS_THEOREM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
