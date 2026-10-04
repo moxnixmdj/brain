@@ -1,0 +1,24 @@
+name: Verify Root2 decision-only evaluation V1
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/root2_decision_only_evaluation_v1.py"
+      - "canonical/tests/test_root2_decision_only_evaluation_v1.py"
+      - "canonical/governance/ROOT2_DECISION_ONLY_EVALUATION_V1.json"
+      - ".github/workflows/verify-root2-decision-only-evaluation-v1.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12.14"
+      - name: Run decision-only composition tests
+        run: python -m unittest -v canonical.tests.test_root2_decision_only_evaluation_v1
+      - name: Re-run dependency tests
+        run: |
+          python -m unittest -v canonical.tests.test_blind_threshold_receipt_v1
+          python -m unittest -v canonical.tests.test_threshold_proof_dag_v1
