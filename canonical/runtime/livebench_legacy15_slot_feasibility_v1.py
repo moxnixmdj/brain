@@ -30,7 +30,7 @@ NTH = "length_constraints:nth_paragraph_first_word"
 FORBIDDEN = "keywords:forbidden_words"
 EXISTENCE = "keywords:existence"
 END = "startend:end_checker"
-SENTENCE = "length_constraints:number_sentences"
+SENTENCE = "length_constraints:number_sentences"\n# Backward-compatible alias used by existing proof receipts/tests.\nSENTENCES = SENTENCE
 WORDS = "length_constraints:number_words"
 POSTSCRIPT = "detectable_content:postscript"
 BULLETS = "detectable_format:number_bullet_lists"
@@ -107,64 +107,13 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
             threshold = -1
 
         if relation == "less than" and threshold == 1:
-            # Frozen strict evaluation gates every checker with response.strip().
-            # Punkt yields at least one sentence for every non-whitespace
-            # response. Therefore this checker is scorer-level UNSAT even by
-            # itself: empty/whitespace fails the strict gate, while every
-            # strict-eligible response has sentence count >= 1.
-            reasons.append("STRICT_NONEMPTY_GATE_CONFLICTS_WITH_SENTENCE_LT_ONE")
-
-            # Frozen Punkt sentence tokenization yields zero sentences only for
-            # an empty/whitespace-only response; every non-whitespace response
-            # yields at least the terminal slice. Therefore any simultaneously
-            # active checker that requires non-whitespace output is jointly UNSAT.
-            nonempty_reasons: list[str] = []
-
-            if by_id.get(EXISTENCE, {}).get("keywords"):
-                nonempty_reasons.append(EXISTENCE)
-            if NTH in by_id and str(by_id[NTH].get("first_word", "")).strip():
-                nonempty_reasons.append(NTH)
-            if POSTSCRIPT in by_id and str(by_id[POSTSCRIPT].get("postscript_marker", "")).strip():
-                nonempty_reasons.append(POSTSCRIPT)
-            if BULLETS in by_id:
-                try:
-                    if int(by_id[BULLETS].get("num_bullets")) > 0:
-                        nonempty_reasons.append(BULLETS)
-                except (TypeError, ValueError):
-                    pass
-            if TITLE in by_id:
-                nonempty_reasons.append(TITLE)
-            if SECTIONS in by_id:
-                try:
-                    if (
-                        int(by_id[SECTIONS].get("num_sections")) > 0
-                        and str(by_id[SECTIONS].get("section_spliter", "")).strip()
-                    ):
-                        nonempty_reasons.append(SECTIONS)
-                except (TypeError, ValueError):
-                    pass
-            if END in by_id and str(by_id[END].get("end_phrase", "")).strip():
-                nonempty_reasons.append(END)
-            if QUOTATION in by_id:
-                # QuotationChecker requires len(value.strip()) > 1.
-                nonempty_reasons.append(QUOTATION)
-            if WORDS in by_id:
-                ws = by_id[WORDS]
-                try:
-                    if (
-                        str(ws.get("relation", "")).strip().casefold() == "at least"
-                        and int(ws.get("num_words")) > 0
-                    ):
-                        nonempty_reasons.append(WORDS)
-                except (TypeError, ValueError):
-                    pass
-
-            for iid in sorted(set(nonempty_reasons)):
-                reasons.append("SENTENCE_LT_ONE_REQUIRES_EMPTY_BUT_CHECKER_REQUIRES_OUTPUT:" + iid)
-
-            # Preserve the established diagnostic key for downstream receipts.
-            if END in nonempty_reasons:
-                reasons.append("SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE")
+            # Pinned strict evaluation requires response.strip() before invoking
+            # any checker. Empty/whitespace responses therefore earn no credit.
+            # Every strict-eligible non-whitespace response yields at least one
+            # English Punkt sentence. Thus this checker is UNSAT by itself.
+            reasons.append(
+                "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
+            )
 
     return tuple(reasons)
 
