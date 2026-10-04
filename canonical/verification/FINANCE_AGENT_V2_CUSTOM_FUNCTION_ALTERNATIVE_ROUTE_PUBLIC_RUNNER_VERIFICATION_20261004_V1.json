@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_CUSTOM_FUNCTION_ALTERNATIVE_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ALTERNATIVE_ROUTE_EXISTS__COMPARABILITY_OPEN__PLATFORM_ZERO_SPEND_OPEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/FINANCE_AGENT_V2_CUSTOM_FUNCTION_ALTERNATIVE_ROUTE_20261004_V1.json",
+    "git_blob_sha": "79a60cb1c407fdabe68643ca91fcc2836ea000b1",
+    "intent_path": "canonical/action_intents/2026-10-04_FINANCE_AGENT_V2_CUSTOM_FUNCTION_ALTERNATIVE_ROUTE_V1.json",
+    "intent_git_blob_sha": "cd212b6474c90ff7191e677cd3e4a23c11ff66c5"
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1621,
+    "head_sha": "423cd9f9babad6ffa02533d3c96f22dc1390baec",
+    "merge_commit": "e60a37ba72d5108590e0a975f6c49f6508cd9ec0",
+    "workflow_run_id": 37171092268,
+    "workflow_job_id": 111344030740,
+    "conclusion": "success"
+  },
+  "verified": [
+    "VALS_SDK_SUPPORTS_ARBITRARY_CUSTOM_FUNCTION_SUITE_EXECUTION",
+    "CUSTOM_FUNCTION_MAY_CONTAIN_RAG_PROMPT_CHAINS_AND_AGENTIC_BEHAVIOR",
+    "VALS_SDK_SUPPORTS_PRECOMPUTED_OUTPUT_EVALUATION",
+    "PINNED_FINANCE_AGENT_REPO_EXPLICITLY_ALLOWS_OWN_HARNESS_OR_MODEL",
+    "PUBLISHED_FINANCE_AGENT_V2_58_59_COMPARATOR_REMAINS_SHARED_DEFAULT_HARNESS_EVIDENCE",
+    "CUSTOM_FUNCTION_EXISTENCE_ALONE_DOES_NOT_PROVE_COMPARABILITY",
+    "DEFAULT_HARNESS_ROUTE_REMAINS_OPEN",
+    "CUSTOM_FUNCTION_ROUTE_IS_CONDITIONAL_ON_COMPARABILITY_AND_PLATFORM_ZERO_SPEND",
+    "NO_DEFAULT_PROVIDER_QUOTA_BLOCKER_DELETION_YET"
+  ],
+  "preserve": [
+    "VALS_PLATFORM_APPROVAL",
+    "EXACT_OFFICIAL_TEST_SUITE_ID",
+    "CUSTOM_FUNCTION_OR_CUSTOM_HARNESS_COMPARABILITY_PROOF",
+    "VALS_PLATFORM_AND_EVALUATOR_JURY_ZERO_INCREMENTAL_SPEND_RECEIPT_OR_OWNER_NO_COST_ROUTE",
+    "BRAIN_SCORE_GE_58_59",
+    "DEFAULT_HARNESS_ROUTE_AS_VALID_FALLBACK"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CUSTOM_FUNCTION_SCORE_IS_CURRENTLY_COMPARABLE",
+    "NO_CLAIM_VALS_PLATFORM_EXECUTION_IS_FREE",
+    "NO_CLAIM_DEFAULT_TOOL_PROVIDER_QUOTAS_ARE_DELETED",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_SCORE_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
