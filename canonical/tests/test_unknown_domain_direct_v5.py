@@ -77,7 +77,6 @@ def test_v5_large_nonproduction_sweep():
 class _AdversarialStr(str):
     def strip(self,*args,**kwargs):
         raise RuntimeError("OVERRIDDEN_STRIP_MUST_NOT_RUN")
-
     def encode(self,*args,**kwargs):
         raise RuntimeError("OVERRIDDEN_ENCODE_MUST_NOT_RUN")
 
@@ -85,30 +84,85 @@ class _AdversarialStr(str):
 class _AdversarialBytes(bytes):
     def __bytes__(self):
         raise RuntimeError("OVERRIDDEN_BYTES_MUST_NOT_RUN")
-
     def __buffer__(self,*args,**kwargs):
         raise RuntimeError("OVERRIDDEN_BUFFER_MUST_NOT_RUN")
-
     def __len__(self):
         raise RuntimeError("OVERRIDDEN_LEN_MUST_NOT_RUN")
-
     def __getitem__(self,*args,**kwargs):
         raise RuntimeError("OVERRIDDEN_GETITEM_MUST_NOT_RUN")
-
     def __iter__(self):
         raise RuntimeError("OVERRIDDEN_ITER_MUST_NOT_RUN")
 
 
-def test_v5_totality_includes_isinstance_accepted_str_and_bytes_subclasses():
-    beacon=_AdversarialStr("A"*16+"\ud800")
-    secret_text=_AdversarialStr("S"*31+"\udfff")
+class _SpoofStr:
+    @property
+    def __class__(self):
+        return str
+
+
+class _SpoofBytes:
+    @property
+    def __class__(self):
+        return bytes
+
+
+def _assert_rejected(fn,code):
+    try:
+        fn()
+    except g1.UnknownDomainGeneratorError as exc:
+        assert code in str(exc)
+    else:
+        raise AssertionError("EXPECTED_FAIL_CLOSED_REJECTION:"+code)
+
+
+def test_v7_reachable_domain_is_exact_builtin_types_not_spoofable_isinstance_domain():
+    fake_str=_SpoofStr()
+    fake_bytes=_SpoofBytes()
+    assert isinstance(fake_str,str) is True
+    assert isinstance(fake_bytes,bytes) is True
+    assert type(fake_str) is not str
+    assert type(fake_bytes) is not bytes
+
+    _assert_rejected(
+        lambda: g5._canonical_beacon(fake_str),
+        "POST_FREEZE_BEACON_INVALID",
+    )
+    _assert_rejected(
+        lambda: g5._secret_bytes_total(fake_str),
+        "EVALUATOR_SECRET_INVALID",
+    )
+    _assert_rejected(
+        lambda: g5._secret_bytes_total(fake_bytes),
+        "EVALUATOR_SECRET_INVALID",
+    )
+
+
+def test_v7_rejects_real_subclass_widening_and_preserves_exact_builtin_production_domain():
+    subclass_beacon=_AdversarialStr("A"*16+"\ud800")
+    subclass_secret_text=_AdversarialStr("S"*31+"\udfff")
+    subclass_secret_bytes=_AdversarialBytes(b"B"*32)
+
+    _assert_rejected(
+        lambda: g5._canonical_beacon(subclass_beacon),
+        "POST_FREEZE_BEACON_INVALID",
+    )
+    _assert_rejected(
+        lambda: g5._secret_bytes_total(subclass_secret_text),
+        "EVALUATOR_SECRET_INVALID",
+    )
+    _assert_rejected(
+        lambda: g5._secret_bytes_total(subclass_secret_bytes),
+        "EVALUATOR_SECRET_INVALID",
+    )
+
+    beacon="UDIR-PROD-"+"a"*48
+    secret=b"B"*32
+    assert type(beacon) is str
+    assert type(secret) is bytes
     packet=g5._generate(
         beacon=beacon,
-        evaluator_secret=secret_text,
-        namespace="V5SUBCLASS",
+        evaluator_secret=secret,
+        namespace="V7-REACHABLE",
     )
     assert packet["case_count"]==27
     _run(packet)
-
-    secret_bytes=_AdversarialBytes(b"B"*32)
-    assert g5._secret_bytes_total(secret_bytes)==b"B"*32
