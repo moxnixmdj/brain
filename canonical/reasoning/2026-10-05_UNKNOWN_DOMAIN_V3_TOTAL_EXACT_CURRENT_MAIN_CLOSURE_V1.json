@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "receipt_id": "UNKNOWN-DOMAIN-V3-TOTAL-EXACT-CURRENT-MAIN-CLOSURE-20261005-V1",
+  "date": "2026-10-05",
+  "status": "DURABLE_REASONING_RECEIPT__CURRENT_MAIN_TOTAL_EXACT_CANDIDATE__ZERO_CREDIT",
+  "real_objective": "Remove the Unknown-Domain fresh-reality dependency without weakening the evaluator or the universal input scope.",
+  "governing_invariants": [
+    "CORRECTNESS_FIRST",
+    "NO_SCOPE_WEAKENING",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_DUPLICATE_EXECUTION",
+    "FAIL_CLOSED_PROMOTION"
+  ],
+  "material_premises": [
+    "V2 universal proof is false because ADD2 role swaps can differ by one IEEE-754 ulp while the frozen scorer uses exact equality.",
+    "Truncated opaque identifiers cannot support universal injectivity over every accepted secret.",
+    "Current main merged an exact-float V3 candidate but its first structural generator repair did not totalize every load-bearing namespace.",
+    "PR1955 replaces every finite load-bearing identifier scope with a secret-dependent finite bijection onto unique ordinal slots, including case IDs, receipts, probes, hypotheses, actions, discriminators, and feature IDs.",
+    "PR1955 V3 candidate orients ADD2 roles from visible sign structure before exact bias+r0+r1 evaluation and leaves scorer/harness unchanged.",
+    "Forced all-ranking-digest ties remain injective because digest values determine permutation order but uniqueness comes from ordinal rank assignment."
+  ],
+  "evidence_refs": [
+    "moxnixmdj/brain#1955",
+    "candidate_v3@22559a9daa6f6c22c1d373565989a95e9c3b9f7f",
+    "generator_v3@03a40a88801d1a7871e2b239ca00fee415ffb000",
+    "proof_v3@d2303d16e810b5da5632ecbe63078f65eb6a14f7"
+  ],
+  "conclusion": "PR1955 is the current-main minimum conjunction that closes both known V2 universal-proof holes without relaxing the evaluator or shrinking the total valid-input scope.",
+  "selected_route": "PR1955_CURRENT_MAIN_V3_TOTAL_EXACT",
+  "rejected_material_alternatives": [
+    {
+      "route": "V2 theorem",
+      "reason": "Falsified by exact ADD2 binary64 role-order counterexample."
+    },
+    {
+      "route": "current-main partial structural generator",
+      "reason": "Did not structurally totalize every load-bearing identifier namespace."
+    },
+    {
+      "route": "older PR1934 carrier",
+      "reason": "Exact subject bytes became stale after V3 merged to main."
+    }
+  ],
+  "uncertainties": [
+    "Independent exact-byte verification has not yet been promoted into Brain authority.",
+    "Separate Root3 and acceptance reduction remain required after verifier PASS."
+  ],
+  "assumptions": [
+    "Exact Python 3.12 semantics and bound frozen harness/scorer define this evaluator contract."
+  ],
+  "non_goals": [
+    "No open-world unknown-domain generalization.",
+    "No production execution.",
+    "No acceptance/capability/ownership credit in this PR."
+  ],
+  "next_action": "Use exactly one independent verifier for PR1955; on PASS bind its receipt and run separate fail-closed Root3/scope/acceptance reduction. On FAIL preserve the counterexample and repair only the falsified seam.",
+  "supersession_conditions": [
+    "Any bound subject blob changes.",
+    "Independent verifier produces a counterexample.",
+    "A stronger current-main verified scope proof subsumes this exact predicate."
+  ],
+  "supersedes": "UNKNOWN-DOMAIN-V4-TOTAL-EXACT-UNIVERSAL-CLOSURE-20261005-V1",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
