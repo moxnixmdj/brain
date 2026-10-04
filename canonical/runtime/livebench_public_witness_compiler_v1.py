@@ -52,13 +52,13 @@ def _paragraphs(n: int) -> str:
 
 
 def _word_count(value: str) -> int:
-    return len(re.findall(r"\\b\\w+\\b", value, flags=re.UNICODE))
+    return len(re.findall(r"\b\w+\b", value, flags=re.UNICODE))
 
 
 def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
     matches: list[dict[str, Any]] = []
 
-    for m in re.finditer(r"Answer with (less than|at least) (\\d+) words\\.", prompt, re.I):
+    for m in re.finditer(r"Answer with (less than|at least) (\d+) words\.", prompt, re.I):
         relation, n = m.group(1).lower(), int(m.group(2))
         if relation == "less than":
             if n <= 1:
@@ -71,7 +71,7 @@ def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
         matches.append({"checker": "legacy:NumberOfWords", "response": response, "valid": valid})
 
     for m in re.finditer(
-        r"Your response should contain (less than|at least) (\\d+) sentences\\.",
+        r"Your response should contain (less than|at least) (\d+) sentences\.",
         prompt,
         re.I,
     ):
@@ -87,7 +87,7 @@ def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
         matches.append({"checker": "legacy:NumberOfSentences", "response": response, "valid": valid})
 
     for m in re.finditer(
-        r"There should be (\\d+) paragraphs\\. Paragraphs are separated with the markdown divider: \\*\\*\\*",
+        r"There should be (\d+) paragraphs\. Paragraphs are separated with the markdown divider: \*\*\*",
         prompt,
         re.I,
     ):
@@ -95,7 +95,7 @@ def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
         if n < 1:
             continue
         response = _paragraphs(n)
-        paragraphs = re.split(r"\\s?\\*\\*\\*\\s?", response)
+        paragraphs = re.split(r"\s?\*\*\*\s?", response)
         valid = len([p for p in paragraphs if p.strip()]) == n and all(p.strip() for p in paragraphs)
         matches.append({"checker": "legacy:ParagraphChecker", "response": response, "valid": valid})
 
@@ -108,7 +108,7 @@ def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
             valid = False
         matches.append({"checker": "legacy:JsonFormat", "response": response, "valid": valid})
 
-    for m in re.finditer(r"Answer with one of the following options:\\s*(\\[[^\\n]*?\\])", prompt, re.I):
+    for m in re.finditer(r"Answer with one of the following options:\s*(\[[^\n]*?\])", prompt, re.I):
         try:
             options = ast.literal_eval(m.group(1))
         except Exception:
@@ -129,7 +129,7 @@ def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
             "valid": len(response.strip()) > 1 and response.strip()[0] == '"' and response.strip()[-1] == '"',
         })
 
-    for m in re.finditer(r"The response must contain between (\\d+) and (\\d+) words\\.", prompt, re.I):
+    for m in re.finditer(r"The response must contain between (\d+) and (\d+) words\.", prompt, re.I):
         lo, hi = int(m.group(1)), int(m.group(2))
         if lo < 1 or hi < lo:
             continue
@@ -141,7 +141,7 @@ def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
         })
 
     for m in re.finditer(
-        r"Include exactly (\\d+) numbers in the response; do not use commas within the numbers\\.",
+        r"Include exactly (\d+) numbers in the response; do not use commas within the numbers\.",
         prompt,
         re.I,
     ):
@@ -149,11 +149,11 @@ def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
         if n < 1:
             continue
         response = " ".join(str(i + 1) for i in range(n))
-        scrubbed = re.sub(r"[^\\w\\s]", "", response)
+        scrubbed = re.sub(r"[^\w\s]", "", response)
         matches.append({
             "checker": "modern:NumbersCountChecker",
             "response": response,
-            "valid": len(re.findall(r"\\d+", scrubbed)) == n,
+            "valid": len(re.findall(r"\d+", scrubbed)) == n,
         })
 
     if "The output should not contain any whitespace." in prompt:
@@ -178,14 +178,14 @@ def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
         matches.append({"checker": "modern:OutputTemplateChecker", "response": response, "valid": valid})
 
     for m in re.finditer(
-        r"Answer with a newline-separated list of items, instead of bullet points use (.+?)\\.",
+        r"Answer with a newline-separated list of items, instead of bullet points use (.+?)\.",
         prompt,
         re.I,
     ):
         sep = m.group(1).strip()
         if not sep or len(sep) > 64:
             continue
-        response = f"{sep} Alpha\\n{sep} Beta"
+        response = f"{sep} Alpha\n{sep} Beta"
         matches.append({
             "checker": "modern:SpecialBulletPointsChecker",
             "response": response,
