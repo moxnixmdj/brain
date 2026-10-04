@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__CURRENT_STATE_REBOUND__OUTPUT_ONLY_THRESHOLD_PROOF_DAG__19_ROOT2_TOUCHING_PREDICATES__13_PROVED_25_UNRESOLVED__ZERO_CREDIT__INDEPENDENT_REVERIFICATION_REQUIRED",
+  "status": "CANDIDATE__REVOCATION_AWARE_CURRENT_STATE_REBOUND__OUTPUT_ONLY_THRESHOLD_PROOF_DAG__19_ROOT2_TOUCHING_PREDICATES__12_PROVED_26_UNRESOLVED__ZERO_CREDIT__INDEPENDENT_REVERIFICATION_REQUIRED",
   "objective": "Replace benchmark-first scheduling with the minimum admissible certificate that settles each frozen Root2 acceptance predicate while preserving exact target semantics and fail-closed evidence rules.",
   "source_bindings": {
     "predicate_registry": {
@@ -10,11 +10,11 @@
     },
     "evidence_ledger": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8"
+      "git_blob_sha": "0d4d78928ffd9b1979e5d38c074c6d5c86cfdeab"
     },
     "root_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "919da676976043e5b501f207d3cf420dc4fb50b1"
+      "git_blob_sha": "916f0b1dd4196473bbfe3246ab861f85c6d89d6e"
     },
     "replacement_planner": {
       "path": "canonical/governance/ACCEPTANCE_PROOF_REPLACEMENT_PLANNER_CANDIDATE_V1.json",
@@ -36,10 +36,10 @@
   "exact_state": {
     "accepted_families": 5,
     "open_families": 14,
-    "proved_atomic": 13,
-    "unresolved_atomic": 25,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
     "root2_only": 16,
-    "root3_only": 6,
+    "root3_only": 7,
     "root2_and_root3": 3,
     "root2_touching": 19
   },
@@ -200,6 +200,6 @@
     "tests_passed": 11,
     "tests_total": 11,
     "result": "PASS",
-    "note": "Prior local runtime validation preserved; manifest state rebinding requires independent repository reverification before reactivation."
+    "note": "Prior runtime validation preserved; revocation-aware manifest state rebinding requires independent repository reverification before reactivation."
   }
 }
