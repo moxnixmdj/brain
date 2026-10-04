@@ -246,6 +246,23 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
+    },
+    "relative_elo_absolute_proof_nontransport": {
+      "activation_path": "canonical/governance/RELATIVE_ELO_ABSOLUTE_PROOF_NONTRANSPORT_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "5edaf436becf45c8d8f3477ac7a53a1e8ac3a63a",
+      "verification_path": "canonical/verification/RELATIVE_ELO_ABSOLUTE_PROOF_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "b6daf8b1892a8dc11020b6c5a4102b1fed256240",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__CONDITIONAL_STRONGER_PROOF_ROUTE_PRUNING__ZERO_CREDIT",
+      "affected_predicate_count": 3,
+      "affected_predicates": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "rule": "PURE_ABSOLUTE_BEHAVIORAL_OR_SCOPE_CERTIFICATES_DO_NOT_IMPLY_FIXED_RELATIVE_ELO_WITHOUT_A_VERIFIED_RELATIVE_SCORE_BRIDGE",
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false
     }
   },
   "accounting": {
