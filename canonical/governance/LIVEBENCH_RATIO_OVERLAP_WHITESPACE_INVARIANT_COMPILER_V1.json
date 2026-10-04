@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_OVERLAP_WHITESPACE_INVARIANT_COMPILER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__VISIBLE_ONLY_ROBUST_CONSTRUCTION_12_OF_12_PINNED_PUBLIC_RATIO_OVERLAP_ROWS__INDEPENDENT_VERIFICATION_PENDING__ZERO_CREDIT",
+  "objective": "Delete the exact-raw-reference-text dependency for frozen LiveBench NGramOverlapChecker whenever the visible prompt recovers the whitespace-normalized reference, without reading hidden kwargs or unexposed terminal cases.",
+  "bound_sources": {
+    "public_ifbench_repository": "allenai/IFBench",
+    "public_ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "public_ifbench_test_blob": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "frozen_livebench_repository": "LiveBench/LiveBench",
+    "frozen_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "frozen_checker_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "runtime": {
+    "path": "canonical/runtime/livebench_ratio_overlap_whitespace_invariant_compiler_v1.py",
+    "mode": "VISIBLE_PROMPT_ONLY__FAIL_CLOSED__NO_HIDDEN_IDS_KWARGS_REFERENCE_TEXT_OR_CASE_IDS"
+  },
+  "constructive_theorem": [
+    "LET_R_BE_THE_HIDDEN_RAW_REFERENCE_AND_S_ITS_WHITESPACE_NORMALIZATION_RECOVERED_FROM_VISIBLE_PROMPT.",
+    "EVERY_CHARACTER_TRIGRAM_WHOSE_THREE_CHARACTERS_LIE_WITHIN_ONE_NONWHITESPACE_TOKEN_OF_S_IS_PRESENT_IN_R_REGARDLESS_OF_WHITESPACE_RUN_LENGTH.",
+    "A_PRIVATE_USE_SENTINEL_CHOSEN_ABSENT_FROM_S_IS_ALSO_ABSENT_FROM_R_BECAUSE_WHITESPACE_NORMALIZATION_PRESERVES_ALL_NONWHITESPACE_CHARACTERS.",
+    "THEREFORE_ANY_OUTPUT_TRIGRAM_CONTAINING_THAT_SENTINEL_IS_PROVABLY_NOT_IN_R.",
+    "THE_FROZEN_SCORER_USES_SET_CARDINALITY_NOT_MULTIPLICITY_SO_REPEATING_AN_IDENTICAL_SENTENCE_SCAFFOLD_CAN_RAISE_SENTENCE_COUNT_WITHOUT_LINEAR_DISTINCT_TRIGRAM_COST.",
+    "SEARCHING_A_VISIBLE_TOKEN_SUBSTRING_FOR_GUARANTEED_HITS_AND_A_BOUNDED_FRESH_SENTINEL_SUFFIX_FOR_GUARANTEED_MISSES_CONSTRUCTS_AN_EXACT_ROBUST_TARGET_RATIO_WITHIN_THE_PUBLIC_PLUS_MINUS_2_PERCENT_TOLERANCE."
+  ],
+  "public_population_recomputation": {
+    "public_rows": 300,
+    "ratio_overlap_rows": 12,
+    "normalized_reference_recovered_from_visible_prompt": 12,
+    "constructively_solved": 12,
+    "exact_raw_reference_score_equals_robust_score": 12,
+    "co_constraints_passed": 12,
+    "co_constraint_classes_seen": [
+      "sentence:keyword",
+      "words:consonants"
+    ],
+    "targets_percent": [
+      72,
+      93,
+      74,
+      59,
+      6,
+      13,
+      24,
+      23,
+      11,
+      54,
+      50,
+      11
+    ]
+  },
+  "qualitative_breakthrough": {
+    "before": "SEVEN_OF_TWELVE_PUBLIC_RATIO_OVERLAP_ROWS_LACK_LITERAL_RAW_REFERENCE_VISIBILITY_AND_EXACT_REFERENCE_ACQUISITION_WAS_AN_OPEN_RESIDUAL.",
+    "after": "RAW_WHITESPACE_RECOVERY_IS_NOT_REQUIRED_FOR_THE_PINNED_PUBLIC_RATIO_OVERLAP_POPULATION_IF_THE_NORMALIZED_REFERENCE_BINDING_HOLDS; SCORE_CAN_BE_CONSTRUCTED_TO_BE_INVARIANT_TO_THE_HIDDEN_WHITESPACE.",
+    "leverage": "REPLACES_A_HIDDEN_METADATA_ACQUISITION_PROBLEM_WITH_A_VISIBLE_ONLY_DETERMINISTIC_CONSTRUCTION_AND_BOUNDED_INTEGER_SEARCH."
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1869,
+    "head_sha": "2c8fa449ed0cbd4106885e5702e4f7d4d9baf0ff",
+    "workflow_run_id": 37199131962,
+    "state": "QUEUED_AT_TIME_OF_CANDIDATE_FREEZE",
+    "required_before_authoritative_activation": true
+  },
+  "terminal_effect_if_independently_verified": [
+    "SUPERSEDE_THE_RATIO_OVERLAP_BRANCH_OF_LIVEBENCH_PUBLIC_PROMPT_PARAMETER_TRUTH_REPAIR_FROM_EXACT_REFERENCE_ACQUISITION_OPEN_TO_VISIBLE_ONLY_ROBUST_CONSTRUCTION_PROVED_ON_PINNED_PUBLIC_FAMILY.",
+    "KEEP_EXACT_FROZEN_TERMINAL_DATASET_OR_FAMILY_BINDING_AS_A_SEPARATE_RESIDUAL.",
+    "DO_NOT_TREAT_THIS_SCORER_CONSTRUCTION_AS_SEMANTIC_OPUS_CAPABILITY_PROOF.",
+    "INTEGRATE_AS_ONE_COMPONENT_OF_THE_GENERAL_PUBLIC_SCORER_GRAMMAR_SUCCESSOR."
+  ],
+  "hard_nonclaims": [
+    "NO_FROZEN_TERMINAL_LIVEBENCH_DATASET_EQUIVALENCE",
+    "NO_UNEXPOSED_TERMINAL_CASE_CONTENT_USED",
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_THAT_SCORER_OPTIMIZATION_ALONE_ESTABLISHES_USEFUL_SEMANTIC_INSTRUCTION_FOLLOWING",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
