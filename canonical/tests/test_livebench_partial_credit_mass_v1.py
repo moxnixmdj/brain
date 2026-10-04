@@ -38,11 +38,25 @@ class LiveBenchPartialCreditMassTests(unittest.TestCase):
         self.assertTrue(cert["forced_pass"])
         self.assertTrue(cert["unresolved_case_count"] > 0)
 
-    def test_forced_fail_upper_bound(self):
+    def test_lower_bound_zero_does_not_prove_case_score_zero(self):
         rows = [CaseBound(1, 0, False) for _ in range(72)]
+        cert = aggregate_certificate(rows)
+        self.assertFalse(cert["forced_fail"])
+        self.assertEqual(cert["full_population_score_mass_upper_bound"], 200.0)
+
+    def test_forced_fail_requires_explicit_upper_bound_evidence(self):
+        rows = [CaseBound(1, 0, False, proved_score_upper_bound=0.0) for _ in range(72)]
         cert = aggregate_certificate(rows)
         self.assertTrue(cert["forced_fail"])
         self.assertEqual(cert["full_population_score_mass_upper_bound"], 128.0)
+
+    def test_upper_bound_cannot_be_below_proved_lower_bound(self):
+        with self.assertRaises(ValueError):
+            CaseBound(2, 1, False, proved_score_upper_bound=0.1).upper_bound()
+
+    def test_threshold_out_of_range_fails_closed(self):
+        with self.assertRaises(ValueError):
+            aggregate_certificate([], threshold_percent=100.1)
 
 
 if __name__ == "__main__":
