@@ -16,15 +16,34 @@ from canonical.runtime import unknown_domain_direct_hidden_generator_v4 as v4
 SCHEMA="PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_HIDDEN_GENERATOR_V5"
 BEACON_CANONICALIZATION="UTF8_SURROGATEPASS_BYTES_TO_LOWER_HEX_WITH_V5_PREFIX"
 SECRET_CANONICALIZATION="UTF8_SURROGATEPASS_FOR_STR__BYTES_IDENTITY"
-STRING_DOMAIN_TOTALITY="TOTAL_FOR_EVERY_FINITE_PYTHON_STR_ACCEPTED_BY_DECLARED_GATES"
+STRING_DOMAIN_TOTALITY="TOTAL_FOR_EVERY_FINITE_GENUINE_STR_HIERARCHY_VALUE_ACCEPTED_BY_DECLARED_GATES"
 IDENTIFIER_TOTALITY="INHERITS_V4_STRUCTURAL_SLOT_ORDINAL_UNIQUENESS"
 
 
+def _genuine_runtime_subclass(value: Any, base: type)->bool:
+    """True only when the value's actual runtime type hierarchy contains base.
+
+    isinstance(value, base) is intentionally not used: Python can consult a
+    user-visible __class__ attribute and admit a proxy that is not a genuine
+    base instance. type(value) is the actual runtime type, and invoking the
+    base type descriptor for __mro__ bypasses a custom metaclass
+    __getattribute__. Identity comparison against the frozen built-in base then
+    makes the gate non-spoofable by instance or metaclass attributes.
+    """
+    cls=type(value)
+    try:
+        mro=type.__getattribute__(cls,"__mro__")
+    except (AttributeError,TypeError):
+        return False
+    return any(parent is base for parent in mro)
+
+
 def _beacon_gate(beacon: Any)->str:
-    # Preserve the existing isinstance-accepted domain, including str subclasses,
-    # but bypass overridable subclass methods so accepted values cannot make the
-    # supposedly total interface partial.
-    if not isinstance(beacon,str) or len(str.strip(beacon))<16:
+    # Accept genuine str objects and genuine str subclasses, while rejecting
+    # __class__-spoof proxies before a built-in str descriptor sees them.
+    if not _genuine_runtime_subclass(beacon,str):
+        raise v1.UnknownDomainGeneratorError("POST_FREEZE_BEACON_INVALID")
+    if len(str.strip(beacon))<16:
         raise v1.UnknownDomainGeneratorError("POST_FREEZE_BEACON_INVALID")
     return beacon
 
@@ -39,13 +58,13 @@ def _canonical_beacon(beacon: Any)->str:
 
 
 def _secret_bytes_total(secret: Any)->bytes:
-    if isinstance(secret,bytes):
+    if _genuine_runtime_subclass(secret,bytes):
         # bytes subclasses may override __bytes__, __buffer__, and __getitem__.
         # Invoke the base bytes descriptor directly on a full slice: this reads
         # the inherited immutable bytes payload, bypasses subclass Python hooks,
         # and materializes an exact plain bytes value.
         out=bytes.__getitem__(secret,slice(None))
-    elif isinstance(secret,str):
+    elif _genuine_runtime_subclass(secret,str):
         out=str.encode(secret,"utf-8","surrogatepass")
     else:
         raise v1.UnknownDomainGeneratorError("EVALUATOR_SECRET_INVALID")
