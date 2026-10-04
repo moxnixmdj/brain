@@ -32,15 +32,15 @@ _PUBLIC_SUFFIXES = (
     (
         "UNIQUE_WORD_COUNT",
         re.compile(
-            r"(?P<clause>Use at least (?P<n>\\d+) unique words in the response\\.)\\s*$",
+            r"(?P<clause>Use at least (?P<n>\d+) unique words in the response\.)\s*$",
             re.IGNORECASE,
         ),
     ),
     (
         "EXACT_NUMBER_COUNT",
         re.compile(
-            r"(?P<clause>Include exactly (?P<n>\\d+) numbers in the response; "
-            r"do not use commas within the numbers\\.)\\s*$",
+            r"(?P<clause>Include exactly (?P<n>\d+) numbers in the response; "
+            r"do not use commas within the numbers\.)\s*$",
             re.IGNORECASE,
         ),
     ),
