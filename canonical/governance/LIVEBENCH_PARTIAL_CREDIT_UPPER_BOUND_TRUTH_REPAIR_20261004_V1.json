@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PARTIAL_CREDIT_UPPER_BOUND_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_TRUTH_REPAIR__UNSOUND_FORCED_FAIL_INFERENCE_REMOVED__FORCED_PASS_LOWER_BOUND_PRESERVED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "affected_runtime": "canonical/runtime/livebench_partial_credit_mass_v1.py",
+  "bug": {
+    "prior_behavior": "FOR_CASES_WITH_ONLY_A_PROVED_SCORE_LOWER_BOUND__AGGREGATE_CERTIFICATE_USED_THAT_LOWER_BOUND_AS_THE_CASE_SCORE_UPPER_BOUND_WHEN_COMPUTING_FORCED_FAIL",
+    "counterexample": "72_CASES_WITH_PROVED_LOWER_BOUND_ZERO_AND_128_UNRESOLVED_CASES_WERE_REPORTED_FORCED_FAIL_AT_MAX_MASS_128__BUT_THE_72_LOWER_BOUND_ZERO_CASES_COULD_EACH_ACTUALLY_SCORE_1__TRUE_CONSERVATIVE_UPPER_MASS_IS_200",
+    "logical_error": "LOWER_BOUND_EVIDENCE_DOES_NOT_IMPLY_EXACTNESS_OR_AN_UPPER_BOUND"
+  },
+  "repair": {
+    "default_case_score_upper_bound": 1.0,
+    "explicit_upper_bound_field": "proved_score_upper_bound",
+    "forced_fail_rule": "ONLY_USE_A_CASE_UPPER_BOUND_BELOW_1_WHEN_SEPARATE_UPPER_BOUND_EVIDENCE_IS_EXPLICITLY_SUPPLIED",
+    "threshold_range_validation_added": true,
+    "tests": "canonical/tests/test_livebench_partial_credit_mass_v1.py"
+  },
+  "preserved": [
+    "FORCED_PASS_USES_ONLY_PROVED_LOWER_SCORE_MASS_AND_REMAINS_SOUND",
+    "INDEPENDENTLY_VERIFIED_132_FULL_SCORE_CASE_SUFFICIENT_CUT_REMAINS_VALID",
+    "PARTIAL_CHECKER_CREDIT_LOWER_BOUND_FORMULA_REMAINS_VALID",
+    "UNRESOLVED_CASES_REMAIN_ZERO_ONLY_IN_THE_PASS_LOWER_BOUND"
+  ],
+  "not_claimed": [
+    "NO_NEW_LIVEBENCH_SCORE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CASE_CONTENT_READ",
+    "NO_INDEPENDENT_VERIFICATION_OF_THIS_REPAIR_YET"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
