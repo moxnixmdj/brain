@@ -45,13 +45,21 @@ def certify(
 
     verified_cores: list[tuple[int, ...]] = []
     semantic_evidence: list[dict[str, Any]] = []
+    semantic_subset_checks = 0
+    inherited_unsat_subset_skips = 0
 
-    # Search smaller semantic UNSAT cores first. Any verified core discharges
-    # every required next-cardinality superset containing it by monotonicity of
-    # conjunction: adding checker constraints cannot make an UNSAT set SAT.
+    # Search by increasing cardinality. Once a smaller verified core C is
+    # known UNSAT, every superset containing C is UNSAT by upward closure and
+    # can be skipped without another semantic-kernel call. The retained cores
+    # therefore form an inclusion-minimal antichain for this search.
     if g < len(flags):
         for size in range(1, g + 2):
             for core in combinations(range(len(flags)), size):
+                core_set = set(core)
+                if any(set(known) <= core_set for known in verified_cores):
+                    inherited_unsat_subset_skips += 1
+                    continue
+                semantic_subset_checks += 1
                 subcontracts = [contracts[i] for i in core]
                 reasons = feasibility.hard_unsat_reasons(subcontracts)
                 if reasons:
@@ -100,6 +108,9 @@ def certify(
             "minimum_unsat_core_cover"
         ],
         "semantic_unsat_evidence": semantic_evidence,
+        "semantic_subset_checks": semantic_subset_checks,
+        "inherited_unsat_subset_skips": inherited_unsat_subset_skips,
+        "semantic_unsat_cores_are_inclusion_minimal_under_search": True,
         "unresolved_subset_indices": [list(x) for x in unresolved],
         "pointwise_optimal": complete,
         "assumption": (
