@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_IFF_EXACT_INDEPENDENT_SUBJECT_VERIFICATION_AND_CURRENT_ROOT_PROJECTION_PASS__SCHEDULING_ONLY__ZERO_CREDIT",
+  "objective": "MAKE_OUTPUT_ONLY_THRESHOLD_CERTIFICATES_THE_DEFAULT_ROOT2_SCHEDULING_PRECEDENCE_FOR_ALL_CURRENT_19_ROOT2_TOUCHING_PREDICATES__WITHOUT_CHANGING_ACCEPTANCE_TRUTH_OR_FRESH_REALITY_AUTHORITY",
+  "subject": {
+    "manifest_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1.json",
+    "manifest_git_blob_sha": "1fba51d15bcfdf6accd90948155517f7c9b98bbb",
+    "runtime_path": "canonical/runtime/threshold_proof_dag_v1.py",
+    "runtime_git_blob_sha": "7a0c715d931dbba05bc9e5ae344e1ead787ea5b8"
+  },
+  "independent_subject_verification": {
+    "path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "553602570334f39003708e52d781b8c59f27eb7c",
+    "status_required": "INDEPENDENT_PUBLIC_RUNNER_PASS"
+  },
+  "current_root_precondition": {
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "pre_activation_git_blob_sha": "e353d54f4608d25b7f0ea06fba5d8fbf2ddfbb59",
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_touching_predicates": 19
+  },
+  "scheduler_effects": [
+    "FOR_EACH_CURRENT_ROOT2_TOUCHING_PREDICATE_ASK_ONLY_WHETHER_THE_FROZEN_ACCEPTANCE_PREDICATE_CAN_BE_FORCED_PASS_OR_FORCED_FAIL",
+    "STOP_AT_FIRST_SOUND_THRESHOLD_CERTIFICATE",
+    "PREFER_FORMAL_IMPLICATION_OR_OBJECTIVE_BOUND_THEN_EXISTING_RECEIPT_THEN_DETERMINISTIC_CERTIFIED_MASS_THEN_OWNER_BLIND_SCORE_THEN_MINIMUM_EMPIRICAL_RESIDUAL_THEN_FULL_BENCHMARK",
+    "USE_DEPENDENCY_AWARE_MINIMUM_CRITICAL_PATH_CUT",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+    "ALLOW_CROSS_PREDICATE_RECEIPT_REUSE_ONLY_WHEN_EACH_SCOPE_BINDING_INDEPENDENTLY_PASSES",
+    "PRESERVE_RELATIVE_RATING_NONTRANSPORT",
+    "PRESERVE_PUBLIC_PRIVATE_NON_SUBSTITUTION",
+    "PRESERVE_FRESH_REALITY_BLOCK"
+  ],
+  "preserved_truth": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gaps": 0,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_ACTIVATION",
+    "NO_FULL_BENCHMARK_REQUIREMENT_WHEN_SOUND_THRESHOLD_CERTIFICATE_SETTLES_THE_FROZEN_PREDICATE",
+    "NO_RELATIVE_RATING_INFERENCE_FROM_ABSOLUTE_BEHAVIOR_WITHOUT_VERIFIED_RELATIVE_SCORE_BRIDGE",
+    "NO_PUBLIC_PRIVATE_SUBSTITUTION_WITHOUT_EXACT_OR_SCOPE_SAFE_STRONGER_IMPLICATION",
+    "NO_DOUBLE_COUNTING_OVERLAPPING_COVERAGE",
+    "NO_TARGET_SCORER_OR_THRESHOLD_REBASE_AFTER_BRAIN_RESULTS",
+    "NO_FRESH_REALITY_BEFORE_SEPARATE_EXPLICIT_AUTHORITY",
+    "FAIL_CLOSED_IF_CURRENT_ROOT_PARTITION_DIFFERS_FROM_THE_BOUND_19_ROOT2_TOUCHING_PREDICATES"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "projection_verification_required": true
+}
