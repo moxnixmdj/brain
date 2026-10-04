@@ -93,3 +93,25 @@ def test_duplicate_id_fails_closed():
 def test_outside_active15_fails_closed():
     with pytest.raises(c.ExactContractCheckerError, match="OUTSIDE_FROZEN_ACTIVE15"):
         c.validate_contract({"instruction_id": "punctuation:no_comma", "slots": {}})
+
+
+def test_verify_pinned_source_rejects_util_drift(tmp_path, monkeypatch):
+    pkg = tmp_path / "livebench" / "if_runner" / "instruction_following_eval"
+    pkg.mkdir(parents=True)
+    registry = pkg / "instructions_registry.py"
+    instructions = pkg / "instructions.py"
+    util = pkg / "instructions_util.py"
+    registry.write_bytes(b"registry")
+    instructions.write_bytes(b"instructions")
+    util.write_bytes(b"util")
+
+    monkeypatch.setattr(c, "PINNED_REGISTRY_BLOB", c.git_blob_sha(registry.read_bytes()))
+    monkeypatch.setattr(c, "PINNED_INSTRUCTIONS_BLOB", c.git_blob_sha(instructions.read_bytes()))
+    monkeypatch.setattr(c, "PINNED_UTIL_BLOB", c.git_blob_sha(util.read_bytes()))
+    out = c.verify_pinned_source(tmp_path)
+    assert out["status"] == "PASS__EXACT_PINNED_CHECKER_SOURCE_BOUND"
+    assert out["instructions_util_git_blob_sha"] == c.git_blob_sha(b"util")
+
+    util.write_bytes(b"drift")
+    with pytest.raises(c.ExactContractCheckerError, match="INSTRUCTIONS_UTIL_BLOB_DRIFT"):
+        c.verify_pinned_source(tmp_path)
