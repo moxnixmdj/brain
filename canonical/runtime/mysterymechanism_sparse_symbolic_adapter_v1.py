@@ -534,6 +534,25 @@ def solve(rows: Sequence[Mapping[str, Any]], *, bounds: Mapping[str, Sequence[An
     except SparseSymbolicError:
         pass
 
+    # Frozen generic 2-D extension. Import locally to avoid a module cycle:
+    # the separable learner deliberately reuses this module's numeric helpers.
+    if len(b) == 2 and len(rows) >= 7:
+        try:
+            from canonical.runtime import mysterymechanism_separable_transform_v1 as separable
+            dd = separable.discover(rows, bounds=b, target=target)
+            dc = dd.get("candidate")
+            if dc is not None:
+                err = max(float(dc["loo_nrmse"]), float(dc["all_row_nrmse"]))
+                options.append((
+                    "SEPARABLE_BILINEAR_TRANSFORM",
+                    err,
+                    int(dc["complexity"]),
+                    dc,
+                    str(dd["expression"]),
+                ))
+        except (ValueError, OverflowError, ArithmeticError):
+            pass
+
     options.sort(key=lambda x: (x[1], x[2], x[0]))
     if not options or options[0][1] > fit_threshold:
         return {
