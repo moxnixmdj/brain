@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_DOMINANCE_SCOPE_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__PREMATURE_ACTIVE15_TO_FULL_SCOPE_DOMINANCE_TRANSPORT_REVOKED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "repaired_artifact": "canonical/governance/LIVEBENCH_CASE_INDEPENDENT_POINTWISE_DOMINANCE_THEOREM_20261005_V1.json",
+  "authoritative_scope": {
+    "scope_theorem_path": "canonical/runtime/livebench_public_scope_union_v1.py",
+    "scope_theorem_git_blob_sha": "8af85028ca49a2abd4561a915927b8f67fa9a069",
+    "lattice": "ACTIVE15_15_LT_GENERATOR24_24_LT_PUBLIC_REGISTRY25_25",
+    "registry25_compatible_structural_sets_1_to_5": 14559
+  },
+  "logical_defect": "THE_STAGED_DOMINANCE_CHAIN_USED_ACTIVE15_CONSTRUCTION_EVIDENCE_TO_QUANTIFY_OVER_EVERY_GENERATOR_ADMITTED_CASE_DESPITE_INDEPENDENTLY_VERIFIED_GENERATOR24_AND_REGISTRY25_SUPERSETS",
+  "repair": "BLOCK_P5_P6_P7_AND_ZERO_PROMOTION_AUTHORITY_UNTIL_REGISTRY25_POINTWISE_CLOSURE",
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_rows_read": 0,
+  "incremental_spend_usd": 0
+}
