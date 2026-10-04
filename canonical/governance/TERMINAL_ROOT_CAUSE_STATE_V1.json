@@ -120,12 +120,12 @@
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
         "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
         "current_frontier_git_blob_sha": "75ca9127a73ca2dd52a49f2f09e2e0ccc384129a",
-        "status": "CURRENTNESS_INVALIDATED_BY_LIVEBENCH_FORCED_FAIL_REVOCATION__19_TOUCHING_ROOT2_RECOMPUTE_OR_REBIND_REQUIRED",
+        "status": "OUTPUT_ONLY_19_PREDICATE_SCHEDULING_COMPILER_REACTIVATED__CURRENT_EVIDENCE_FRONTIER_BOUNDS_STILL_REQUIRE_DELTA_RECOMPILE__ZERO_CREDIT",
         "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2__LIVEBENCH_REOPENED",
         "fresh_reality_authority": false,
         "current_frontier_verification_path": "canonical/verification/ROOT2_FRONTIER_V12_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
         "current_frontier_verification_git_blob_sha": "c13903bb6b0f2b03f934664e2af77fdc4cc0696b",
-        "effective_scheduling_authority": false,
+        "effective_scheduling_authority": true,
         "current_frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V12_FINAL_ACTIVATION_V1.json",
         "current_frontier_activation_git_blob_sha": "f3b97a8a2a54d4d0571911691677ae9046413103",
         "external_fact_acquisition_overlay": {
@@ -185,7 +185,17 @@
           "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
           "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443"
         },
-        "current_effective_state": "RECOMPUTE_REQUIRED_FOR_19_ROOT2_TOUCHING"
+        "current_effective_state": "ACTIVE_SCHEDULING_COMPILER__COMPILE_CURRENT_EVIDENCE_DELTAS_BEFORE_ANY_PREDICATE_CREDIT",
+        "post_revocation_19_dag_reactivation": {
+          "activation_path": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json",
+          "activation_git_blob_sha": "fb382cfa111b16dc4466e6a8ac6948cff920a17d",
+          "verification_path": "canonical/verification/ROOT2_19_POST_REVOCATION_DAG_CONNECTOR_VERIFICATION_20261004_V1.json",
+          "verification_git_blob_sha": "d21832b9fc9640878ab88867dad9e61666e1701f",
+          "status": "ACTIVE__EXACT_19_DOMAIN_IDENTITY_PASS__REUSES_PRIOR_INDEPENDENTLY_VERIFIED_DAG__SCHEDULING_ONLY__ZERO_CREDIT",
+          "exact_touching_predicates": 19,
+          "current_evidence_delta_recompile_required": true,
+          "fresh_reality_authority": false
+        }
       },
       "livebench_negative_resolution": {
         "predicate_id": "LIVEBENCH_IF_GE_65_7",
@@ -226,7 +236,7 @@
     "root1_currently_active": false,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
     "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
-    "root2_effective_scheduling_authority": false,
+    "root2_effective_scheduling_authority": true,
     "root2_external_fact_acquisition_overlay": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2_ACTIVATION_V1.json",
     "low_value_free_tier_trial_quota_support_outreach_forbidden": true,
     "self_service_facts_are_owner_waits": false,
@@ -495,7 +505,8 @@
       "status": "SUPERSEDED__LIVEBENCH_RETURNED_TO_ROOT2__19_PREDICATE_RECOMPUTE_REQUIRED"
     },
     "root2_effective_scheduling_authority_source": "PENDING_19_PREDICATE_RECOMPUTE_AFTER_LIVEBENCH_FORCED_FAIL_REVOCATION",
-    "root2_effective_scheduling_scope": "PENDING_EXACT_CURRENT_19_ROOT2_TOUCHING_RECOMPUTE"
+    "root2_effective_scheduling_scope": "PENDING_EXACT_CURRENT_19_ROOT2_TOUCHING_RECOMPUTE",
+    "root2_current_scheduling_compiler": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json"
   },
   "accounting": {
     "acceptance_credit_delta": 0,
@@ -630,7 +641,7 @@
     "workflow_run_id": 37168503920
   },
   "root_partition_transport": {
-    "status": "LIVEBENCH_FORCED_FAIL_REVOKED__19_ROOT2_TOUCHING__ROOT1_ZERO__TRANSPORT_RECOMPUTE_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+    "status": "ACTIVE_POST_REVOCATION_19_ROOT2_DAG_REBIND__EXACT_DOMAIN_IDENTITY_PASS__ZERO_ACCEPTANCE_CREDIT",
     "source_root_git_blob_sha": "c3d1e25e2268cce90df545a93f107aa24fed8f8b",
     "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
     "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
@@ -644,7 +655,9 @@
       "root2_touching_count": 19,
       "unresolved_total": 26
     },
-    "scheduling_authority": false,
-    "next_required": "INDEPENDENTLY_RECOMPUTE_AND_BIND_EXACT_19_PREDICATE_ROOT2_FRONTIER"
+    "scheduling_authority": true,
+    "next_required": "COMPILE_CURRENT_EVIDENCE_DELTAS_INTO_REACTIVATED_OUTPUT_ONLY_DAG_AND_SOLVE_MINIMUM_ZERO_REALITY_PASS_OR_FAIL_CERTIFICATE_CUT",
+    "verification_path": "canonical/verification/ROOT2_19_POST_REVOCATION_DAG_CONNECTOR_VERIFICATION_20261004_V1.json",
+    "activation_path": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json"
   }
 }
