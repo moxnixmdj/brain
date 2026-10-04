@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_UNPLANNED_PUBLIC_SEARCH_EXPOSURE_RECONCILIATION_V2",
+  "date": "2026-10-04",
+  "status": "ACTIVE_CONTAMINATION_LEDGER__ADDITIONAL_PUBLIC_DATASET_SEARCH_SNIPPETS_EXPOSED__EXACT_NEW_UNIQUE_CARDINALITY_NOT_SAFELY_DEDUPED__NO_CASE_CONTENT_ADMITTED_FOR_DESIGN",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "event": {
+    "cause": "PUBLIC_WEB_SEARCH_RESULT_FOR_DATASET_LINEAGE_METADATA_EMITTED_ACTIVE_2024_11_25_DATASET_VIEWER_ROW_SNIPPETS",
+    "intent": "DATASET_COMMIT_LINEAGE_AND_PARENT_REVISION_RESEARCH_ONLY",
+    "prompt_content_requested": false,
+    "search_queries": [
+      "\"0868379\" \"livebench/instruction_following\"",
+      "\"4f7ab12f0d47848da31de92bd7cc3d7d4acfe695\" \"livebench/instruction_following\"",
+      "\"2024-11-25\" \"livebench/instruction_following\" Guardian"
+    ],
+    "source": "PUBLIC_WEB_SEARCH_RESULT__HUGGINGFACE_DATASET_VIEWER_SNIPPETS",
+    "source_dataset": "livebench/instruction_following",
+    "active_release_date": "2024-11-25",
+    "exact_new_unique_exposure_count": "UNKNOWN__FAIL_CLOSED__RESULT_INCLUDED_AT_LEAST_ONE_PRIOR_KNOWN_ID_AND_ADDITIONAL_SNIPPETS_WITHOUT_COMPLETE_SAFE_DEDUPLICATION"
+  },
+  "relation_to_v1": {
+    "prior_ledger": "canonical/governance/LIVEBENCH_UNPLANNED_PUBLIC_SEARCH_EXPOSURE_RECONCILIATION_V1.json",
+    "prior_known_unique_exposure_lower_bound": 75,
+    "one_prior_known_id_observed_again": true,
+    "new_search_result_expanded_contamination_surface": true,
+    "do_not_increase_numeric_unique_lower_bound_without_complete_deduplication": true
+  },
+  "firewall": {
+    "do_not_use_exposed_prompt_text_for_successor_design": true,
+    "do_not_use_case_specific_instruction_combinations_as_coverage_targets": true,
+    "do_not_use_exposed_kwargs_or_row_fields_for_parameterization": true,
+    "do_not_embed_exposed_question_ids_or_content_in_runtime_logic": true,
+    "source_derived_solver_work_completed_before_this_search_event_may_remain_valid_if_it_has_no_literal_or_case_specific_dependency": true,
+    "public_predecessor_and_synthetic_nonterminal_replays_remain_admissible": true
+  },
+  "supersession": {
+    "v1_remains_historical_truth": true,
+    "fresh_terminal_execution_precommit_must_be_rebased_after_this_event": true,
+    "fresh_terminal_authority": false,
+    "acceptance_credit_delta": 0
+  },
+  "safe_metadata_learned_from_search": {
+    "hf_commit_history_fact": "0868379_IS_A_VERIFIED_DATASET_UPLOAD_WITH_PARENT_4f7ab12",
+    "predecessor_parent_relation_source": "HUGGINGFACE_COMMIT_METADATA_ONLY",
+    "active_prompt_content_used_for_lineage_conclusion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "active_terminal_prompt_exposure_event_delta": "POSITIVE_BUT_EXACT_NEW_UNIQUE_COUNT_UNRESOLVED",
+    "known_unique_terminal_exposure_lower_bound_preserved_at": 75,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
