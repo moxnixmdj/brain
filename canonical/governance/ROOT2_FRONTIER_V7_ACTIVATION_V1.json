@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V7_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PASS__SCHEDULING_ONLY__ZERO_CREDIT",
+  "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V7.json",
+  "frontier_git_blob_sha": "35e8b578aca1290bcf469d6350ae085ba8a86c64",
+  "verification_path": "canonical/verification/ROOT2_FRONTIER_V7_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+  "verification_git_blob_sha": "c2b96c9d48b7ef6508ea77dc6983da12eaf099c3",
+  "authority": {
+    "scheduling": true,
+    "effective_scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
