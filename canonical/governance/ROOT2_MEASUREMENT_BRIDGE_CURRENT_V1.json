@@ -39,7 +39,7 @@
     "root2_partition": "16_ROOT2_ONLY__3_MIXED__19_TOUCHING",
     "zero_reality_frontier_bound": true
   },
-  "next": "VERIFY_CURRENT_ROOT2_V3_POINTER_PROJECTION__THEN_EXECUTE_ONLY_ZERO_REALITY_FRONTIER__NO_FRESH_SCORE_BEFORE_FIXED_POINT",
+  "next": "ROOT2_FRONTIER_V3_ACTIVE__EXECUTE_ONLY_ZERO_REALITY_ACCOUNT_PROTOCOL_OWNER_FACTS__TB4_BUILDKITE_AND_CIRCLECI_PREFLIGHTS_WHEN_ACCESS_EXISTS__RECOMPUTE_FIXED_POINT_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_SCORE_BEFORE_FIXED_POINT",
   "incremental_spend_usd": 0,
   "terminal_cases_consumed": 0,
   "acceptance_credit_delta": 0,
@@ -53,10 +53,12 @@
     "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
     "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json",
     "frontier_git_blob_sha": "681123ef6cff3506d66af6b31b61c8bc14a8a913",
-    "status": "CANDIDATE__ROOT2_FRONTIER_V3_SUBJECT_VERIFIED__POINTER_PROJECTION_REVERIFY_PENDING__ZERO_CREDIT",
+    "status": "ACTIVE__ROOT2_FRONTIER_V3_SUBJECT_AND_POINTER_PROJECTION_INDEPENDENT_PASS__EFFECTIVE_SCHEDULING__ZERO_CREDIT",
     "frontier_activation_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_ACTIVATION_V1.json",
-    "frontier_activation_git_blob_sha": "76d36bc34947e726502d0c8fc1dbb961d6442c88",
+    "frontier_activation_git_blob_sha": "e950f1a2c69b52347a3eb94416f3fae253eeb8a6",
     "frontier_verification_path": "canonical/verification/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-    "frontier_verification_git_blob_sha": "8436a9eb30312b959ba094394e60f26b4833a3a2"
+    "frontier_verification_git_blob_sha": "8436a9eb30312b959ba094394e60f26b4833a3a2",
+    "pointer_projection_verification_path": "canonical/verification/ROOT2_FRONTIER_V3_CURRENT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "pointer_projection_verification_git_blob_sha": "fb5c03d0780ac09a349381fbd1916200be9a1259"
   }
 }
