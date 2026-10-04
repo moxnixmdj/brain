@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__TOTAL_STRING_STRUCTURAL_ID_EXACT_ADD2_AND_BOUND_UNIVERSAL_SCOPE__ZERO_FAMILY_CAPABILITY_OWNERSHIP_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "source_proof": {
+    "commit": "704a60674e30de927bafaacecaf8a840d4632dbd",
+    "path": "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py",
+    "git_blob_sha": "58410966e17c1bc546db8cab039891f3ab2bf8a8"
+  },
+  "frozen_reduction_precommit": {
+    "commit": "95eeeeb12a206d5cd635ee70a2e8961e5b2c231d",
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_ROOT3_ACCEPTANCE_REDUCTION_PRECOMMIT_20261005_V1.json"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2132,
+    "head_sha": "40972c47277b87135d1054a0669cdfaa45bf1f08",
+    "workflow_run_id": 37243390754,
+    "workflow_job_id": 111556412538,
+    "workflow_conclusion": "success",
+    "python": "3.12.10",
+    "artifact_id": 11318231607,
+    "artifact_zip_sha256": "50ff23a2fad53dd1076d66cabdb90453a241718d484b66e155ae42a05e2af8a1"
+  },
+  "verified_receipt": {
+    "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_TOTAL_EXACT_INDEPENDENT_VERIFICATION_V1",
+    "status": "PASS__INDEPENDENT_CONTENT_BOUND_TOTAL_STRING_STRUCTURAL_ID_EXACT_FLOAT_AND_432_CASE_FALSIFICATION__ZERO_CREDIT",
+    "brain_subject_commit": "704a60674e30de927bafaacecaf8a840d4632dbd",
+    "surrogate_codepoints_exhausted": 2048,
+    "v4_string_domain_counterexample_reproduced": true,
+    "structural_identifier_totality": true,
+    "exact_add2_float_order_repaired": true,
+    "all_six_transfer_families_universal": true,
+    "all_three_abstention_classes_universal": true,
+    "nonproduction_falsification": {
+      "populations": 16,
+      "cases": 432,
+      "all_pass": true
+    },
+    "production_or_terminal_cases_generated": 0,
+    "acceptance_credit_delta": 0
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/unknown_domain_direct_candidate_v1.py": "a2a77269a8175ce315b466035049da0f761b8734",
+    "canonical/runtime/unknown_domain_direct_candidate_v2.py": "4470716f95a559a700e461262df909ae19a41651",
+    "canonical/runtime/unknown_domain_direct_candidate_v3.py": "8df7f13455b710623806a8219174b397a2c3c442",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v4.py": "e52858b9fef2d795f72b45cd3ae82ad04344aa91",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py": "a97459fe407ea4852f57f12f504fbc0121db9824",
+    "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py": "58410966e17c1bc546db8cab039891f3ab2bf8a8",
+    "canonical/tests/test_unknown_domain_direct_v5.py": "81cd6ecabec51029175f6036a13eac7667fccd03"
+  },
+  "deduction": {
+    "frozen_discharge_condition_satisfied": true,
+    "structural_identifier_totality": true,
+    "exact_add2_ieee754_gold_equality": true,
+    "total_declared_python_string_interface": true,
+    "universal_bound_evaluator_scope": true,
+    "fresh_reality_required": false,
+    "separate_acceptance_reduction_required": true
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_BEYOND_THE_BOUND_EVALUATOR_CONTRACT",
+    "NO_MYSTERYMECHANISM_THRESHOLD_CREDIT",
+    "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_CREDIT_FROM_THIS_RECEIPT_ALONE",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_RECEIPT_ALONE",
+    "NO_PRODUCTION_OR_TERMINAL_CASE_CONSUMPTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
