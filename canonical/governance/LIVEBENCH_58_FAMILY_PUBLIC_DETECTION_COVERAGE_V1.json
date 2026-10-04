@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_58_FAMILY_PUBLIC_DETECTION_COVERAGE_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_PINNED_CORPUS_RECOMPUTED__300_OF_300_EXACT_INSTRUCTION_SET_RECOGNITION__WITNESS_SCORER_VERIFICATION_PENDING__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "runtime_path": "canonical/runtime/livebench_if_single_checker_solver_v1.py",
+    "runtime_git_blob_sha": "b74d986fae033ac94827c5f1eb2db655a99ae4cc",
+    "test_path": "canonical/tests/test_livebench_if_single_checker_solver_v1.py"
+  },
+  "public_population": {
+    "repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "data/IFBench_test.jsonl",
+    "git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "row_count": 300,
+    "instruction_family_count": 58,
+    "single_checker_rows": 256,
+    "two_checker_rows": 44
+  },
+  "recomputation": {
+    "exact_detected_instruction_set_equals_public_instruction_id_list": "300_OF_300",
+    "single_checker_exact_set_match": "256_OF_256",
+    "two_checker_exact_set_match": "44_OF_44",
+    "dangerous_multi_checker_rows_detected_as_exactly_one_family": 0,
+    "wrong_single_family_matches": 0,
+    "unrecognized_rows": 0,
+    "repair_applied": "COUNT_PRONOUNS_PUBLIC_DESCRIPTION_SUPPORTS_PRONOUNS_AND_PERSONAL_PRONOUNS_WITH_FULL_CHECKER_SHAPED_REGEX",
+    "terminal_case_content_read": false
+  },
+  "semantic_effect": [
+    "THE_PUBLIC_58_FAMILY_DESCRIPTION_RECOGNITION_PROBLEM_IS_CLOSED_ON_THE_PINNED_300_ROW_IFBENCH_CORPUS",
+    "THE_SOLVER_CAN_FAIL_CLOSED_ON_ALL_PUBLIC_TWO_CHECKER_ROWS_BECAUSE_BOTH_FAMILIES_ARE_RECOGNIZED",
+    "THIS_REMOVES_DETECTOR_AMBIGUITY_AS_A PUBLIC_SINGLE_CHECKER_WITNESS_BLOCKER"
+  ],
+  "remaining_gates": [
+    "VERIFY_CONSTRUCTED_WITNESS_AGAINST_EXACT_PUBLIC_CHECKER_FOR_EACH_256_SINGLE_CHECKER_ROW",
+    "BUILD_AND_VERIFY_COMPOSITION_FOR_THE_44_TWO_CHECKER_ROWS_OR USE_CONSERVATIVE_PARTIAL_SCORE_MASS",
+    "BIND_ANY_TERMINAL_POPULATION CLAIM_WITH_SEPARATE_CONTAMINATION_SAFE AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_WITNESS_SCORE_PASS_CLAIM_FROM_DETECTION_ALONE",
+    "NO_FROZEN_TERMINAL_POPULATION_EQUIVALENCE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_TERMINAL_CASE_EXPOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
