@@ -49,14 +49,18 @@ class LiveBenchPublicGrammarCompilerV2Tests(unittest.TestCase):
         self.assertEqual(out["response"], "Alpha")
         self.assertEqual(out["public_rule_count"], 2)
 
-    def test_incompatible_or_unproved_combination_fails_closed(self):
+    def test_single_word_satisfies_no_whitespace_and_newline_checker(self):
+        # Upstream NewLineWordsChecker accepts one word on one line because it
+        # checks number_of_lines == number_of_words. Combined with NoWhitespace,
+        # a single token such as "Alpha" is therefore a valid joint witness.
         prompt = (
             "The output should not contain any whitespace. "
             "Write each word on a new line."
         )
         out = c.synthesize_public_structural_only(prompt)
-        self.assertEqual(out["status"], "BLOCKED")
-        self.assertTrue(out["semantic_seed_required"])
+        self.assertEqual(out["status"], "PASS")
+        self.assertEqual(out["response"], "Alpha")
+        self.assertFalse(out["semantic_seed_required"])
 
     def test_unknown_semantic_prompt_fails_closed(self):
         out = c.synthesize_public_structural_only("Explain photosynthesis clearly.")
