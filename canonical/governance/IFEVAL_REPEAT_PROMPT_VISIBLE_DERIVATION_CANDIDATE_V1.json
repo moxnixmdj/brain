@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_IFEVAL_REPEAT_PROMPT_VISIBLE_DERIVATION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_41_OF_41_PROMPT_ONLY_EXACT_RECOVERY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_instruction": "combination:repeat_prompt",
+  "objective": "Eliminate legacy RepeatPromptThenAnswer hidden-kwargs dependence by recovering the exact prompt_to_repeat from visible public IFEval prompt structure.",
+  "public_source_binding": {
+    "repository": "google-research/google-research",
+    "commit": "e49bbfe381c9c0e564b937f1c4e163a2273c65cc",
+    "path": "instruction_following_eval/data/input_data.jsonl",
+    "git_blob_sha": "cbe52f6eecf3986fdac745b4acba4da1408eb146",
+    "row_count": 541
+  },
+  "public_audit": {
+    "combination_repeat_prompt_rows": 41,
+    "exact_prompt_to_repeat_visible_as_literal_substring": 41,
+    "literal_occurrence_unique": 40,
+    "target_contains_newline": 0,
+    "layout": {
+      "VISIBLE_REQUEST_PREFIX_THEN_REPEAT_DIRECTIVE": 33,
+      "REPEAT_DIRECTIVE_THEN_VISIBLE_REQUEST_SUFFIX": 8
+    },
+    "generic_line_structural_segmenter_exact_recovery": 41,
+    "failures": 0,
+    "hidden_kwargs_used_by_runtime_segmenter": false,
+    "hidden_kwargs_role_in_audit": "POSTHOC_PUBLIC_ORACLE_ONLY"
+  },
+  "implementation": {
+    "path": "canonical/runtime/ifeval_repeat_prompt_visible_segmenter_v1.py",
+    "test_path": "canonical/tests/test_ifeval_repeat_prompt_visible_segmenter_v1.py",
+    "algorithm": [
+      "FIND_FIRST_VISIBLE_LINE_CONTAINING_REPEAT_OR_PUBLIC_REPLEAT_VARIANT",
+      "IF_REPEAT_DIRECTIVE_FOLLOWS_REQUEST_REQUIRE_EXACTLY_ONE_NONEMPTY_REQUEST_LINE_BEFORE_IT",
+      "IF_REPEAT_DIRECTIVE_LEADS_SELECT_FINAL_NONEMPTY_VISIBLE_REQUEST_LINE",
+      "FAIL_CLOSED_ON_OTHER_LAYOUTS"
+    ],
+    "checker_semantic_hinge": "RepeatPromptThenAnswer.check_following only requires response.strip().lower().startswith(prompt_to_repeat.strip().lower())."
+  },
+  "breakthrough_effect": [
+    "PUBLIC_LEGACY_REPEAT_PROMPT_PROMPT_TO_REPEAT_IS_NOT_INTRINSICALLY_HIDDEN",
+    "STATIC_SOURCE_80_OF_83_FRONTIER_PLUS_PUBLIC_CORPUS_DERIVATION_REDUCES_CHECKER_SPECIFIC_HIDDEN_SEMANTIC_FRONTIER_FROM_THREE_TO_TWO_ON_THE_PROVED_PUBLIC_ENVELOPE",
+    "NO_TERMINAL_PROMPT_CONTENT_REQUIRED"
+  ],
+  "remaining_true_hidden_semantics_on_PROVED_PUBLIC_FRONTIERS": [
+    "ratio:overlap/reference_text__SEPARATE_WHITESPACE_INVARIANT_REPAIR_EXISTS",
+    "repeat:repeat_span/prompt_to_repeat__SCORE_RELEVANT_WORD_SLICE_PUBLIC_4_OF_4_REPAIR_EXISTS"
+  ],
+  "hard_nonclaims": [
+    "PUBLIC_IFEVAL_41_OF_41_DOES_NOT_BY_ITSELF_PROVE_FROZEN_LIVEBENCH_TERMINAL_ROW_EQUIVALENCE",
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_CASE_SPECIFIC_TERMINAL_RULES",
+    "NO_UNEXPOSED_TERMINAL_PROMPT_OR_KWARGS_USED",
+    "INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_LOAD_BEARING_PROMOTION"
+  ],
+  "next_minimum_action": "INDEPENDENTLY_VERIFY_41_OF_41_EXACT_RECOVERY_FROM_THE_PINNED_PUBLIC_BLOB__THEN_PROVE_OR_BIND_LEGACY_LIVEBENCH_REPEAT_PROMPT_ROWS_TO_THIS_PUBLIC_LAYOUT_ENVELOPE_WITHOUT_READING_UNEXPOSED_TERMINAL_CONTENT",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
