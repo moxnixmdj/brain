@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROOT_CAUSE_STATE_V1",
-  "date": "2026-10-03",
-  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__ROOT1_CURRENTLY_INACTIVE",
+  "date": "2026-10-04",
+  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__SYNTHESIS_ROOT3_SCOPE_CLOSED__ROOT1_CURRENTLY_INACTIVE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_acceptance": {
     "accepted_families": 5,
@@ -69,7 +69,9 @@
         "SCOPE_SAFE_STRONGER_PROOF",
         "ADDITIONAL_ADMISSIBLE_EVIDENCE_ONLY_FOR_IRREDUCIBLE_RESIDUAL"
       ],
-      "hard_rule": "FINITE_SAMPLE_SUCCESS_NEVER_IMPLIES_OPEN_WORLD_SCOPE_COMPLETENESS"
+      "hard_rule": "FINITE_SAMPLE_SUCCESS_NEVER_IMPLIES_OPEN_WORLD_SCOPE_COMPLETENESS",
+      "current_involved_predicate_count": 10,
+      "synthesis_scope_relation": "CLOSED__INDEPENDENT_LOSSLESS_DECOMPOSITION"
     }
   },
   "tool_discovery_case": {
@@ -149,34 +151,25 @@
     "derivation_rule": "PUBLIC_FIXED_BAR=>ROOT2__DIRECT_OR_MATCHED_SCOPE_AUDIT_OR_DEPENDENCY_PROOF=>ROOT3__MATCHED_NONINFERIORITY=>ROOT2_AND_ROOT3_UNLESS_A_STRONGER_SCOPE_COMPLETE_PROOF_COLLAPSES_SCOPE_SIDE__SYNTHESIS_SCOPE_SIDE_NOW_CLOSED",
     "accounting": "CLASSIFICATION_ONLY__ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
     "synthesis_scope_reclassification": {
-      "activation_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_V1.json",
-      "activation_git_blob_sha": "60d845cf2370854bfd171154cf94946436be2c16",
+      "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "before": "ROOT2_AND_ROOT3",
+      "after": "ROOT2_ONLY",
       "certificate_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
       "certificate_git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
       "verification_path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "1528485a15c98e89c9fb4dc50d691b6682e08542",
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT2_AND_ROOT3_TO_ROOT2_ONLY__ZERO_CREDIT"
+      "acceptance_credit_delta": 0
     }
   },
   "root3_current_execution_state": {
     "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V1.json",
-    "git_blob_sha": "10a28a403dae6df94f8fe58b1d9d3f9e0b60c11b",
-    "verification_path": "canonical/verification/ROOT3_MINIMUM_ACTION_CUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-    "verification_git_blob_sha": "e24058eab431a1643dae340a8ff564490f992097",
-    "status": "BASE_MINIMUM_CUT_PLUS_VERIFIED_SYNTHESIS_SCOPE_OVERLAY__10_LIVE_ROOT3_PREDICATES__3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
+    "git_blob_sha": "6cfc9d1365e879637261e6c14d6cd09f21719d26",
+    "status": "POST_SYNTHESIS_RECONCILIATION_CANDIDATE__10_ROOT3_PREDICATES__3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
     "live_root3_predicates": 10,
     "event_class_count": 3,
     "currently_runnable_event_count": 0,
     "fresh_reality_authority": false,
-    "synthesis_scope_overlay": {
-      "activation_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_V1.json",
-      "activation_git_blob_sha": "60d845cf2370854bfd171154cf94946436be2c16",
-      "certificate_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
-      "certificate_git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
-      "verification_path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-      "verification_git_blob_sha": "1528485a15c98e89c9fb4dc50d691b6682e08542",
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT2_AND_ROOT3_TO_ROOT2_ONLY__ZERO_CREDIT"
-    }
+    "independent_reconciliation_verification": "PENDING"
   },
   "root3_scope_certificate_admissibility_refinement": {
     "path": "canonical/governance/ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V1.json",
@@ -199,6 +192,12 @@
       "matched_quality_noninferiority",
       "required_claim_coverage_noninferiority"
     ],
+    "acceptance_credit_delta": 0
+  },
+  "synthesis_scope_certificate_activation": {
+    "certificate": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+    "verification": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "effect": "SYNTHESIS_ROOT2_AND_ROOT3_TO_ROOT2_ONLY__ROOT3_11_TO_10__ROOT2_REMAINS_19__UNRESOLVED_REMAINS_26",
     "acceptance_credit_delta": 0
   }
 }
