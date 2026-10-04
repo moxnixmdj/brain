@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROOT_CAUSE_STATE_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__ROOT1_CURRENTLY_INACTIVE",
+  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__ROOT1_REOPENED_BY_VERIFIED_LIVEBENCH_FORCED_FAIL",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_acceptance": {
     "accepted_families": 5,
@@ -14,7 +14,7 @@
   },
   "roots": {
     "root_1_capability_missing": {
-      "status": "CURRENTLY_INACTIVE__ZERO_POSITIVELY_ESTABLISHED_CAPABILITY_GAPS__REOPEN_ONLY_ON_CONSTRUCTIVE_EVIDENCE",
+      "status": "ACTIVE__ONE_POSITIVELY_ESTABLISHED_OPERATIVE_GAP__LIVEBENCH_EXACT_FROZEN_CANDIDATE_FORCED_FAIL",
       "verified_learning_control": {
         "path": "canonical/verification/UNIVERSAL_LEARNING_CONTRACT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
         "git_blob_sha": "2bff1082b81755ff5f8e8f0e97587090cc873283",
@@ -22,7 +22,28 @@
         "not_proved": "UNIVERSAL_SEMANTIC_LEARNING_SUCCESS"
       },
       "classification_rule": "UNKNOWN_OR_UNPROVED_CAPABILITY_MUST_NOT_BE_CLASSIFIED_AS_MISSING__ROOT1_REQUIRES_POSITIVE_EVIDENCE_OF_AN_OPERATIVE_CAPABILITY_GAP_AFTER_AVAILABLE_ACQUISITION_ROUTES_ARE_ACCOUNTED_FOR",
-      "current_positive_root1_blockers": [],
+      "current_positive_root1_blockers": [
+        {
+          "predicate_id": "LIVEBENCH_IF_GE_65_7",
+          "state": "POSITIVE_OPERATIVE_GAP__EXACT_FROZEN_CANDIDATE_FORCED_FAIL",
+          "exact_gap": "THE_EXACT_FROZEN_BRAIN_SYSTEM_CANNOT_REACH_THE_LIVEBENCH_IF_65_7_ACCEPTANCE_BAR_UNDER_ITS_FROZEN_EXECUTION_CONTRACT",
+          "frozen_candidate_commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+          "frozen_candidate_tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+          "forced_fail_binding": "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_BINDING_V1.json",
+          "independent_forced_fail_verifier_commit": "f3c439f329c7b481a8448a0619e7696111e05ecc",
+          "local_reclassification_path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+          "local_reclassification_git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684",
+          "independent_classification": {
+            "repository": "moxnixmdj/verification-capsule-runner",
+            "branch": "verify/livebench-local-root1-20261004",
+            "head_sha": "5c4faae20a94ceeac2447c8a4f389087d59b454f",
+            "workflow_run_id": 37196376134,
+            "workflow_job_id": 111419008329,
+            "conclusion": "success"
+          },
+          "hard_nonclaim": "DOES_NOT_PROVE_UNIVERSAL_SEMANTIC_REASONING_MISSING_OR_ANY_FUTURE_SUCCESSOR_FAILS"
+        }
+      ],
       "reclassified_prior_candidates": [
         "FINANCE_UNCOVERED_SCOPE_AUDIT__ROOT3_DIRECT_SCOPE_EVIDENCE_RESIDUAL__OPERATIVE_SOURCE_ADMITTED",
         "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT__ROOT3_DIRECT_SCOPE_EVIDENCE_RESIDUAL__OPERATIVE_SOURCE_ADMITTED"
@@ -63,7 +84,7 @@
       "current_blocker_classification_seal": {
         "path": "canonical/governance/ROOT1_CURRENT_BLOCKER_CLASSIFICATION_SEAL_V1.json",
         "git_blob_sha": "d8346fec4326ee3fed32f08dcd29782bbc3647d2",
-        "status": "MERGED_CURRENT_MAIN__LIVE_RECOMPUTATION_PASS__ZERO_ROOT1_RESIDUAL__ZERO_CREDIT",
+        "status": "HISTORICAL_SUPERSEDED_BY_VERIFIED_LIVEBENCH_LOCAL_ROOT1_RECLASSIFICATION__PRESERVED_AS_PRIOR_SNAPSHOT",
         "theorem": "CURRENT_UNRESOLVED_26_EQUALS_16_ROOT2_ONLY_PLUS_7_ROOT3_ONLY_PLUS_3_MIXED__DISJOINT__ROOT1_RESIDUAL_ZERO",
         "independent_verifier": {
           "repository": "moxnixmdj/verification-capsule-runner",
@@ -83,7 +104,25 @@
           "root1_positive_gaps": 0,
           "root1_current_residual": 0
         },
-        "hard_nonclaim": "DOES_NOT_SEAL_FUTURE_ROOT1_IMPOSSIBILITY_OR_14_FAMILY_ROUTE_COVERAGE"
+        "hard_nonclaim": "DOES_NOT_SEAL_FUTURE_ROOT1_IMPOSSIBILITY_OR_14_FAMILY_ROUTE_COVERAGE",
+        "superseded_by": {
+          "reclassification_path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+          "reclassification_git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684",
+          "projection_path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json",
+          "projection_git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99",
+          "classification_run_id": 37196376134,
+          "classification_job_id": 111419008329,
+          "projection_run_id": 37196472583,
+          "projection_job_id": 111419310250
+        },
+        "historical_snapshot_note": "THE_PRIOR_ZERO_ROOT1_THEOREM_WAS TRUE FOR ITS BOUND SNAPSHOT BUT IS NO LONGER CURRENT AFTER CONSTRUCTIVE LIVEBENCH FORCED-FAIL EVIDENCE."
+      },
+      "current_operating_state": {
+        "root1_active": true,
+        "positive_gap_count": 1,
+        "repair_target": "LIVEBENCH_IF_GE_65_7",
+        "repair_rule": "REPAIR_GENERAL_SYSTEM_CAPABILITY_OR_CONFIGURATION_WITHOUT_TUNING_ON_UNEXPOSED_TERMINAL_CASES__FREEZE_SUCCESSOR_BEFORE_ANY_NEW_COMPARATOR_EVIDENCE",
+        "acceptance_credit_delta": 0
       }
     },
     "root_2_measurement_or_comparator": {
@@ -103,12 +142,12 @@
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
         "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
         "current_frontier_git_blob_sha": "75ca9127a73ca2dd52a49f2f09e2e0ccc384129a",
-        "status": "ACTIVE__ROOT2_FRONTIER_V12_INDEPENDENT_PASS__CURRENT_MAIN_POINTER_PROJECTION_ACTIVE__ZERO_CREDIT",
-        "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2",
+        "status": "CURRENTNESS_INVALIDATED_BY_VERIFIED_LIVEBENCH_ROOT_TRANSITION__RECOMPUTE_OR_REBIND_REQUIRED__HISTORICAL_CONTROLLER_ARTIFACTS_PRESERVED",
+        "current_partition": "15_ROOT2_ONLY__3_ROOT2_AND_ROOT3__18_TOUCHING_ROOT2__POST_LIVEBENCH_NEGATIVE_RESOLUTION",
         "fresh_reality_authority": false,
         "current_frontier_verification_path": "canonical/verification/ROOT2_FRONTIER_V12_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
         "current_frontier_verification_git_blob_sha": "c13903bb6b0f2b03f934664e2af77fdc4cc0696b",
-        "effective_scheduling_authority": true,
+        "effective_scheduling_authority": false,
         "current_frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V12_FINAL_ACTIVATION_V1.json",
         "current_frontier_activation_git_blob_sha": "f3b97a8a2a54d4d0571911691677ae9046413103",
         "external_fact_acquisition_overlay": {
@@ -162,7 +201,22 @@
             }
           ],
           "effective_scheduler_deletion_count": 11
+        },
+        "currentness_invalidation": {
+          "reason": "LIVEBENCH_IF_GE_65_7_REMOVED_FROM_ROOT2_AFTER_VERIFIED_FORCED_FAIL_AND_RECLASSIFIED_ROOT1",
+          "projection_path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json",
+          "projection_git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99"
         }
+      },
+      "livebench_negative_resolution": {
+        "predicate_id": "LIVEBENCH_IF_GE_65_7",
+        "state": "ROOT2_MEASUREMENT_UNCERTAINTY_RESOLVED_NEGATIVELY__REMOVED_FROM_CURRENT_ROOT2_PARTITION",
+        "full_population_upper_percent": 64,
+        "threshold_percent": 65.7,
+        "further_case_exposure_for_failed_candidate": false,
+        "reclassified_to": "ROOT1_POSITIVE_OPERATIVE_GAP",
+        "projection_path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json",
+        "projection_git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99"
       }
     },
     "root_3_scope_completeness": {
@@ -184,13 +238,13 @@
     "implication": "THIS_CLOSES_TOOL_DISCOVERY_ACCEPTANCE_AND_DEMONSTRATES_THAT_A_PRIOR_APPARENT_EMPIRICAL_LEARNING_BLOCKER_CAN_COLLAPSE_INTO_FORMAL_ROOT2_ROOT3_REASONING__IT_DOES_NOT_PROVE_UNIVERSAL_CAPABILITY_ACQUISITION"
   },
   "scheduler_policy": {
-    "before_any_work": "CLASSIFY_EACH_CURRENT_UNRESOLVED_TARGET_AS_ROOT2_OR_ROOT3_UNLESS_NEW_POSITIVE_CONTENT_ADDRESSED_EVIDENCE_REOPENS_ROOT1",
+    "before_any_work": "CLASSIFY_EACH_CURRENT_UNRESOLVED_TARGET_BY_CURRENT CONTENT-ADDRESSED EVIDENCE__ROOT1 FOR CONSTRUCTIVELY PROVED OPERATIVE GAP__ROOT2 FOR PERFORMANCE OR COMPARATOR UNCERTAINTY__ROOT3 FOR SCOPE INCOMPLETENESS__RECOMPUTE AFTER EVERY VERIFIED DELTA",
     "unknown_is_not_missing": true,
     "stale_scheduler_execution_forbidden": true,
     "recompute_fixed_point_after_each_verified_delta": true,
     "fresh_reality_before_zero_reality_fixed_point": false,
     "no_credit_from_classification_itself": true,
-    "root1_currently_active": false,
+    "root1_currently_active": true,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
     "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
     "root2_effective_scheduling_authority": true,
@@ -347,7 +401,7 @@
       "runtime_git_blob_sha": "7a0c715d931dbba05bc9e5ae344e1ead787ea5b8",
       "verification_path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "553602570334f39003708e52d781b8c59f27eb7c",
-      "status": "ACTIVE_IFF_EXACT_ROOT_PROJECTION_RECEIPT_EXISTS_AND_PASSES__19_ROOT2_TOUCHING_PREDICATES__OUTPUT_ONLY_THRESHOLD_SCHEDULING__ZERO_CREDIT",
+      "status": "STALE_BINDING__19_ROOT2_TOUCHING_PREDICATES_SUPERSEDED_BY_VERIFIED_18_TOUCHING_PROJECTION__FAIL_CLOSED_PENDING_REBIND",
       "scheduler_precedence": [
         "FORMAL_IMPLICATION_OR_OBJECTIVE_CEILING",
         "EXISTING_CONTENT_ADDRESSED_RECEIPT",
@@ -359,7 +413,9 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false,
-      "acceptance_credit_delta": 0
+      "acceptance_credit_delta": 0,
+      "scheduling_authority": false,
+      "currentness_invalidation": "LIVEBENCH_IF_GE_65_7_RESOLVED_NEGATIVELY_AND_RECLASSIFIED_ROOT1"
     },
     "terminal_minimum_causal_depth": {
       "activation_path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1.json",
@@ -442,6 +498,14 @@
       "replay_scope": "ALREADY_EXPOSED_CASES_1_TO_72_ONLY",
       "case_73_or_later": false,
       "acceptance_credit_delta": 0
+    },
+    "livebench_local_root_transition": {
+      "status": "INDEPENDENT_CLASSIFICATION_AND_PARTITION_PROJECTION_PASS__PENDING_EXACT_ROOT_STATE_TRANSPORT_VERIFICATION",
+      "root1_active": true,
+      "root2_touching_after": 18,
+      "root1_only_after": 1,
+      "path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+      "projection_path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json"
     }
   },
   "accounting": {
@@ -467,8 +531,8 @@
       }
     },
     "unresolved_total": 26,
-    "root1_positive_gap_count": 0,
-    "root2_only_count": 16,
+    "root1_positive_gap_count": 1,
+    "root2_only_count": 15,
     "root3_only_count": 7,
     "root2_and_root3_count": 3,
     "root2_only": [
@@ -484,7 +548,6 @@
       "OSWORLD_2_1_PARTIAL_GE_81_8",
       "FINANCE_ACCOUNTING_INDEX_GE_61",
       "FINANCE_AGENT_V2_GE_58_59",
-      "LIVEBENCH_IF_GE_65_7",
       "ARTIFACT_AA_BRIEFCASE_GE_1822",
       "MYSTERYMECHANISM_GE_49_55",
       "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
@@ -503,7 +566,7 @@
       "IF_SCOPE_BOUNDARY_NONINFERIOR",
       "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
     ],
-    "derivation_rule": "PUBLIC_FIXED_BAR=>ROOT2__DIRECT_OR_MATCHED_SCOPE_AUDIT_OR_DEPENDENCY_PROOF=>ROOT3__MATCHED_NONINFERIORITY=>ROOT2_AND_ROOT3_UNLESS_A_STRONGER_SCOPE_COMPLETE_PROOF_COLLAPSES_SCOPE_SIDE__SYNTHESIS_SCOPE_SIDE_NOW_CLOSED",
+    "derivation_rule": "UNKNOWN_OR_UNMEASURED_FIXED_BAR=>ROOT2__PROVED_FALSE_FIXED_BAR_WITH_CONSTRUCTIVE_OPERATIVE_SYSTEM_FAILURE=>ROOT1__DIRECT_OR_MATCHED_SCOPE_AUDIT_OR_DEPENDENCY_PROOF=>ROOT3__MATCHED_NONINFERIORITY=>ROOT2_AND_ROOT3_UNLESS_A_STRONGER_SCOPE_COMPLETE_PROOF_COLLAPSES_SCOPE_SIDE",
     "accounting": "CLASSIFICATION_ONLY__ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
     "synthesis_scope_reclassification": {
       "activation_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_V1.json",
@@ -513,6 +576,23 @@
       "verification_path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "1528485a15c98e89c9fb4dc50d691b6682e08542",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT2_AND_ROOT3_TO_ROOT2_ONLY__ZERO_CREDIT"
+    },
+    "root1_only_count": 1,
+    "root1_only": [
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "livebench_root_transition": {
+      "before": "ROOT2_ONLY",
+      "after": "ROOT1_ONLY_POSITIVE_OPERATIVE_GAP",
+      "reclassification_path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+      "reclassification_git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684",
+      "projection_path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json",
+      "projection_git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99",
+      "independent_classification_run_id": 37196376134,
+      "independent_classification_job_id": 111419008329,
+      "independent_projection_run_id": 37196472583,
+      "independent_projection_job_id": 111419310250,
+      "acceptance_credit_delta": 0
     }
   },
   "root3_current_execution_state": {
@@ -565,5 +645,19 @@
     "verifier_pull_request": 1571,
     "verifier_merge_commit": "73d087aa201ed40f8b879bf98c5050b8e7dd4d29",
     "workflow_run_id": 37168503920
+  },
+  "root_partition_transport": {
+    "status": "CANDIDATE_APPLIED__INDEPENDENT_EXACT_ROOT_STATE_TRANSPORT_VERIFICATION_REQUIRED",
+    "source_root_git_blob_sha": "36ac53134b123cfed7e63c31a871a30f9b4579e4",
+    "reclassification_git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684",
+    "projection_git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99",
+    "projection_verification": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 37196472583,
+      "workflow_job_id": 111419310250,
+      "conclusion": "success"
+    },
+    "acceptance_counts_unchanged": true,
+    "new_acceptance_credit": 0
   }
 }
