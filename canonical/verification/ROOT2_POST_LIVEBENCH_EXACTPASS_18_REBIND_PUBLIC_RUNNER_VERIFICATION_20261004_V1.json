@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_POST_LIVEBENCH_EXACTPASS_18_REBIND_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_18_ROOT2_DOMAIN_AFTER_LIVEBENCH_PASS__SCHEDULING_ELIGIBLE__ZERO_ACCEPTANCE_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_POST_LIVEBENCH_EXACTPASS_18_PREDICATE_REBIND_V1.json",
+    "git_blob_sha": "46411d83217b23c74ba700a6f065be49e20557df",
+    "creation_commit": "23b9df68a423547a6e246883a06feb1f739b4486"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-livebench-exact-brain-bytes-20261004-sol",
+    "head_sha": "66ec60de411d592696dd364c41aa93a440f12cfb",
+    "workflow_run_id": 37239254248,
+    "workflow_job_id": 111544455306,
+    "conclusion": "success",
+    "verifier_script_git_blob_sha": "a207b3988a84feff7cd25c6966f7d09baaf9a320",
+    "workflow_git_blob_sha": "61be42901f38b8bced7ad279706d29babe5b996f"
+  },
+  "verified": {
+    "exact_subject_blob_gate": true,
+    "root1_only_count": 0,
+    "root2_only_count": 15,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "root2_touching_count": 18,
+    "unresolved_total": 25,
+    "livebench_absent_from_root2": true,
+    "livebench_state": "PROVED__REMOVED_FROM_RESIDUAL_PARTITION",
+    "exact_target_set_equals_predicate_routes": true,
+    "proof_precedence_preserved": true,
+    "relative_rating_nontransport_preserved": true,
+    "fresh_reality_block_preserved": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "scheduling_activation_eligible": true
+}
