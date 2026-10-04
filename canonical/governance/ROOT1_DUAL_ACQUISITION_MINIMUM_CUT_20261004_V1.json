@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_DUAL_ACQUISITION_MINIMUM_CUT_V1",
+  "date": "2026-10-04",
+  "status": "SCHEDULER_BREAKTHROUGH__RESOURCE_AND_CAPABILITY_LANES_SEPARATED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": {
+    "prior_conflation": "ROOT1_BENCHMARK_CONSTRUCTION_AND_TERMINAL_SEMANTIC_CAPABILITY_OWNERSHIP_WERE_AT_RISK_OF_SHARING_ONE_LARGE_ACQUISITION_BLOCKER",
+    "new_cut": [
+      "ROOT1_CONSTRUCTIVE_EXECUTION_MAY_USE_A_SEPARATELY_QUALIFIED_SMALL_LOCAL_SEMANTIC_SEED_PLUS_FORMAL_CONSTRAINT_RUNTIME",
+      "TERMINAL_CAPABILITY_OWNERSHIP_MUST_STILL_BE_ANCHORED_TO_A_SEPARATELY_PROVED_EQUAL_OR_BETTER_SEMANTIC_CORE; A_SMALL_SEED_CANNOT INHERIT THAT CREDIT"
+    ],
+    "consequence": "FAIL_OR_PASS_THE_SMALL_RESOURCE_LANE_CHEAPLY_WITHOUT_WEAKENING_THE_TERMINAL_OBJECTIVE_OR_BLOCKING_THE_FULL_CAPABILITY_ACQUISITION_LANE"
+  },
+  "full_capability_anchor": {
+    "model": "abacusai/Smaug-Mini",
+    "base_model": "Qwen/Qwen3.8-27B",
+    "license": "apache-2.0",
+    "parameter_class_billion": 27,
+    "published_full_precision_repository_size_gb": 55.6,
+    "livebench_2026_06_25_instruction_following_mean_percent": 73.9165,
+    "opus_5_5_comparator_mean_percent": 65.73775,
+    "margin_pp": 8.17875,
+    "status": "PUBLIC_CAPABILITY_EXISTENCE_BOUND__BYTES_NOT_YET_INTERNALIZED_OR_LOCALLY_QUALIFIED"
+  },
+  "small_resource_falsification_lane": {
+    "candidate": "FLAN_T5_SMALL_INT8_ONNX",
+    "learned_bytes": 95374884,
+    "learned_megabytes_decimal": 95.374884,
+    "storage_reduction_factor_vs_55_6GB": 582.9627,
+    "storage_reduction_percent_vs_55_6GB": 99.82846,
+    "verification_runner": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1913,
+      "head_sha": "0615c95d41034fc4b5d7a77c89efcd9187ec9817",
+      "workflow_run_id": 37199749485,
+      "status": "QUEUED"
+    },
+    "verification_scope": [
+      "RECOMPUTE_EXACT_PUBLIC_ARTIFACT_HASHES_AND_BYTE_COUNTS",
+      "PROVE_ENCODER_DECODER_SENTENCEPIECE_ABI_EXECUTES_END_TO_END",
+      "RUN_CPU_GREEDY_GENERATION_ON_PUBLIC_NONTERMINAL_PARAPHRASE_SIMPLIFY_SUMMARIZE_AND_STORY_PROBES",
+      "PROVE_NO_SECOND_DECODER_WITH_PAST_LEARNED_ARTIFACT_IS_REQUIRED_FOR_BASIC_GENERATION"
+    ],
+    "credit_boundary": "EXECUTION_SMOKE_OR_NONEMPTY_OUTPUT_CAN_NEVER_BY_ITSELF_CREATE_SEMANTIC_CAPABILITY_ACCEPTANCE_FAMILY_OR_OWNERSHIP_CREDIT"
+  },
+  "benchmark_reduction_inputs": {
+    "score_mass_threshold_percent": 65.7,
+    "population": 200,
+    "independently_verified_full_score_sufficient_count": 132,
+    "legacy_dispatch_candidate": "ALL_EXACT_ACTIVE_200_ROUTE_TO_LEGACY_IFEVAL_UNDER_PINNED_2025_11_25_CUTOFF",
+    "legacy_checker_registry_count": 25,
+    "modern_ifbench_58_checker_route": "NON_LOAD_BEARING_IF_EXACT_LEGACY_DISPATCH_COMPOSITION_VERIFIES"
+  },
+  "decision_rule": [
+    "IF_PR_1913_FAILS_BYTE_ABI_OR_EXECUTION__DELETE_THE_SUB_100MB_LANE_WITH_ZERO_TERMINAL_CREDIT_LOSS",
+    "IF_PR_1913_PASSES_EXECUTION_SMOKE__ADVANCE_ONLY_TO_INDEPENDENT_PUBLIC_SEMANTIC_QUALITY_FALSIFICATION",
+    "IF_SMALL_SEED_EVENTUALLY_CLOSES_ROOT1_BENCHMARK_CONSTRUCTION__DO_NOT_PROMOTE_GENERAL_SEMANTIC_CAPABILITY_FROM_THAT_FACT",
+    "KEEP_SMAUG_MINI_OR_A_STRICTLY_BETTER_SEPARATELY_QUALIFIED_OPEN_WEIGHT_CORE_AS_THE_CAPABILITY_OWNERSHIP_ANCHOR",
+    "DO_NOT_WAIT_FOR_FULL_55_6GB_ACQUISITION_BEFORE_FALSIFYING_THE_SMALL_ROOT1_EXECUTION_LANE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_FLAN_T5_SMALL_EQUALS_OR_APPROACHES_OPUS_5_5",
+    "NO_CLAIM_PR_1913_HAS_PASSED",
+    "NO_CLAIM_SMAUG_MINI_BYTES_ARE_INTERNALIZED",
+    "NO_CLAIM_LIVEBENCH_65_7_IS_REACHED",
+    "NO_FRESH_TERMINAL_CASE_CONTENT_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
