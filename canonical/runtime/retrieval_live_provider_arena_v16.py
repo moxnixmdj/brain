@@ -65,13 +65,18 @@ def behavior_link_candidates(
 )->list[dict[str,Any]]:
     concepts=behavior_concepts(query)
     by_repo={}
-    for match in GH_LINK.finditer(markdown or ""):
+    matches=list(GH_LINK.finditer(markdown or ""))
+    for idx,match in enumerate(matches):
         repo=match.group(1).rstrip(".,;:")
         if repo.lower().endswith(".git"):
             repo=repo[:-4]
-        lo=max(0,match.start()-context_radius)
-        hi=min(len(markdown),match.end()+context_radius)
-        context=markdown[lo:hi]
+        # Score only the candidate's own forward entry. A symmetric character
+        # window lets neighboring projects donate behavior words and produces
+        # false relevance. Stop at the next GitHub project link, with a bounded
+        # cap for unusually long entries.
+        next_start=matches[idx+1].start() if idx+1<len(matches) else len(markdown)
+        hi=min(next_start,match.end()+max(320,context_radius*3))
+        context=markdown[match.start():hi]
         ctx={_stem(t) for t in WORD.findall(context) if len(t)>=3}
         overlap=sorted(concepts & ctx)
         if not overlap:
