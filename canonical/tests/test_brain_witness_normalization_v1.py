@@ -17,7 +17,8 @@ class WitnessNormalizationTests(unittest.TestCase):
         s,n,sha=self.docs()
         out=evaluate(s,n,sha)
         self.assertTrue(out["pass"],out)
-        self.assertEqual(out["witness_count"],9)
+        expected = sum(1 for x in s["claims"] if x.get("state") == "PROVED")
+        self.assertEqual(out["witness_count"], expected)
         self.assertFalse(out["semantic_implication_verified"])
 
     def test_target_atom_inference_fails(self):
