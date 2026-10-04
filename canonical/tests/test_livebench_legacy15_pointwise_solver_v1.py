@@ -80,7 +80,7 @@ def test_source_binding_failure_fails_closed(monkeypatch):
     )
 
     def drift(root):
-        raise solver.exact_checker.ExactContractCheckerError("REGISTRY_BLOB_DRIFT")
+        raise solver.exact_checker.ExactPostvalidationError("REGISTRY_BLOB_DRIFT")
 
     monkeypatch.setattr(solver.exact_checker, "verify_pinned_source", drift)
     out = solver.solve_prompt("visible prompt", "/fake/livebench")
