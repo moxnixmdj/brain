@@ -101,7 +101,7 @@ _SPECS: dict[str, tuple[str, dict[str, Callable[[str], Any]], tuple[str, ...]]] 
         {"relation": _identity, "num_words": _int}, (),
     ),
     "length_constraints:nth_paragraph_first_word": (
-        r"There should be (?P<num_paragraphs>\d+) paragraphs\. Paragraphs and only paragraphs are separated with each other by two new lines as if it was '\\\\n\\\\n' in python\. Paragraph (?P<nth_paragraph>\d+) must start with word (?P<first_word>[^.\s]+)\.",
+        r"There should be (?P<num_paragraphs>\d+) paragraphs\. Paragraphs and only paragraphs are separated with each other by two new lines as if it was '\\n\\n' in python\. Paragraph (?P<nth_paragraph>\d+) must start with word (?P<first_word>[^.\s]+)\.",
         {"num_paragraphs": _int, "nth_paragraph": _int, "first_word": lambda v: v.lower()}, (),
     ),
     "detectable_content:number_placeholders": (
