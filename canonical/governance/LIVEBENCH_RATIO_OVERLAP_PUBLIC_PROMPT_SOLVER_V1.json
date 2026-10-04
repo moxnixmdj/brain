@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_OVERLAP_PUBLIC_PROMPT_SOLVER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PINNED_PUBLIC_IFBENCH_RATIO_FAMILY_12_OF_12_FULL_CONJUNCTIONS_CONSTRUCTED_FROM_VISIBLE_PROMPT_ONLY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "role": "ROOT1_SUCCESSOR_COMPONENT",
+  "breakthrough": {
+    "prior_residuals": [
+      "EXACT_RAW_REFERENCE_TEXT_OPEN_FOR_7_OF_12_PUBLIC_RATIO_OVERLAP_ROWS",
+      "PROMPT_TO_REFERENCE_SEGMENTATION_OPEN",
+      "RATIO_OVERLAP_CONJUNCTION_COMPOSITION_OPEN"
+    ],
+    "reduced_to": [
+      "EXACT_FROZEN_LIVEBENCH_POPULATION_BINDING_TO_THE_PROVED_PUBLIC_PROMPT_GRAMMAR",
+      "INDEPENDENT_RECOMPUTATION_AND_SUCCESSOR_INTEGRATION"
+    ],
+    "method": [
+      "RECOGNIZE_ONLY_PINNED_PUBLIC_CONSTRAINT_BLOCK_GRAMMAR_AT_ONE_PROMPT_EDGE",
+      "RECOVER_NORMALIZED_REFERENCE_AND_TARGET_FROM_VISIBLE_PROMPT_ONLY",
+      "USE_WHITESPACE_INVARIANT_TRIGRAM_THEOREM",
+      "CONSTRUCT_WHITESPACE_FREE_WITNESS",
+      "COMPOSE_SENTENCE_KEYWORD_AND_CONSONANT_CLUSTER_PUBLIC_CONJUNCTIONS",
+      "FAIL_CLOSED_ON_UNSUPPORTED_OR_AMBIGUOUS_GRAMMAR"
+    ]
+  },
+  "pinned_public_recomputation": {
+    "ifbench_repository": "allenai/IFBench",
+    "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "public_rows": 300,
+    "ratio_overlap_rows": 12,
+    "prompt_parse_exact_reference_and_target": 12,
+    "full_supported_conjunction_witnesses_within_checker_tolerance": 12,
+    "exact_raw_vs_normalized_overlap_equality": 12,
+    "conjunction_classes": {
+      "ratio_only": 5,
+      "ratio_plus_sentence_keyword": 4,
+      "consonants_plus_ratio": 3
+    },
+    "worst_absolute_target_error_percent": 2,
+    "terminal_livebench_cases_consumed": 0
+  },
+  "implementation": {
+    "theorem_runtime": "canonical/runtime/livebench_ngram_overlap_whitespace_invariant_constructor_v1.py",
+    "solver_runtime": "canonical/runtime/livebench_ratio_overlap_public_prompt_solver_v1.py",
+    "tests": "canonical/tests/test_livebench_ratio_overlap_public_prompt_solver_v1.py"
+  },
+  "current_effect": [
+    "DELETE_EXACT_RAW_REFERENCE_ACQUISITION_AS_A_NECESSARY_PUBLIC_RATIO_OVERLAP_SOLVER_DEPENDENCY",
+    "DELETE_HIDDEN_INSTRUCTION_ID_LIST_AND_KWARGS_AS_NECESSARY_INPUTS_FOR_THE_PINNED_PUBLIC_RATIO_OVERLAP_ROWS",
+    "DELETE_PUBLIC_RATIO_OVERLAP_PROMPT_SEGMENTATION_AS_AN_UNSOLVED_ENGINEERING_DEPENDENCY_FOR_THE_OBSERVED_PUBLIC_GRAMMAR",
+    "DO_NOT_YET_PROMOTE_LIVEBENCH_ACCEPTANCE"
+  ],
+  "next_minimum_actions": [
+    "INDEPENDENTLY_RECOMPUTE_THIS_12_OF_12_FULL_CONJUNCTION_RESULT_FROM_PINNED_PUBLIC_BYTES",
+    "BIND_THE_FROZEN_LIVEBENCH_IF_POPULATION_TO_THE_PROVED_PUBLIC_GRAMMAR_WITHOUT_READING_UNEXPOSED_TERMINAL_CASE_CONTENT",
+    "INTEGRATE_ONLY_AFTER_THAT_BINDING_INTO_A_FRESH_SUCCESSOR_ADAPTER_AND_FREEZE_BEFORE_NEW_COMPARATOR_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_UNEXPOSED_LIVEBENCH_TERMINAL_CASE_CONTENT_USED",
+    "NO_CLAIM_ALL_83_PUBLIC_CHECKER_TYPES_ARE_SOLVED",
+    "NO_CLAIM_LIVEBENCH_FROZEN_200_CASE_POPULATION_EQUALS_THE_PUBLIC_IFBENCH_300_ROW_POPULATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
