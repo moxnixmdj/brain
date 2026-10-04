@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V5_POINTER_COHERENCE_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ALL_THREE_ROOT2_POINTER_SURFACES_COHERENT_ON_VERIFIED_V5__SCHEDULING_INEFFECTIVE__ZERO_CREDIT",
+  "subject": {
+    "brain_original_pull_request": 1542,
+    "replay_base_commit": "583f43f47ae40ebbfef10e25ab0da5f3d8385c10",
+    "exact_pointer_blobs": {
+      "root2_measurement_bridge": "b0233d55388c576b3392a428448c6465c569e4f8",
+      "terminal_root_cause_state": "6850a203481d3cab4ceba5c225d24b29082b7b04",
+      "current_terminal_authority": "b2ccdcece0fd978794bda0540770ba0fc2032017"
+    }
+  },
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1577,
+    "head_sha": "f1e9d8e41a91400dd990488e1ee1d65fe9a7e9d7",
+    "merge_commit": "99a87cf312d3cbc79d5af031b3c5f63eafa34783",
+    "workflow_run_id": 37168730870,
+    "workflow_job_id": 111337100092,
+    "conclusion": "success"
+  },
+  "verified": {
+    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5.json",
+    "frontier_git_blob_sha": "e948022f0a4e8d91b949a5155d850d56aa137c87",
+    "v5_projection_verification_git_blob_sha": "2475a8583e2ed2889c3e9e0613ae3bcf269ffc82",
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_touching_predicates": 19,
+    "effective_scheduling_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "dangling_activation_pointer": false,
+    "root3_v2_preserved": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
