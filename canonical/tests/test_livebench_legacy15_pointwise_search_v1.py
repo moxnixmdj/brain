@@ -28,8 +28,10 @@ def test_postvalidated_partial_candidate_gets_semantic_optimality_certificate():
             {"response": "q0", "checker_results": [False, True]},
         ],
     )
-    assert out["status"] == "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED"
-    assert out["pointwise_optimal"] is True
+    assert out["status"] == "CONDITIONAL__POINTWISE_OPTIMAL_GIVEN_UNVERIFIED_CHECKER_VECTOR"
+    assert out["pointwise_optimal_given_checker_vector"] is True
+    assert out["checker_vector_authoritative"] is False
+    assert out["pointwise_optimal"] is False
     assert out["best_candidate"]["true_checker_count"] == 1
     assert out["best_candidate"]["score_numerator"] == 1
     assert out["best_candidate"]["score_denominator"] == 4
@@ -55,8 +57,10 @@ def test_relaxed_search_plus_checker_executes_unsat_pair_end_to_end():
         return [nth_ok, forbidden_ok]
 
     out = search.solve_with_checker(contracts, checker, max_per_subset=4, max_total=64)
-    assert out["status"] == "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED"
-    assert out["pointwise_optimal"] is True
+    assert out["status"] == "CONDITIONAL__POINTWISE_OPTIMAL_GIVEN_UNVERIFIED_CHECKER_VECTOR"
+    assert out["pointwise_optimal_given_checker_vector"] is True
+    assert out["checker_vector_authoritative"] is False
+    assert out["pointwise_optimal"] is False
     assert out["candidate_pool_count"] > 0
     assert out["best_candidate"]["true_checker_count"] == 1
 
@@ -70,7 +74,10 @@ def test_full_score_candidate_needs_no_unsat_certificates():
         return [re.search(r"\bomega\b", response, re.I) is None]
 
     out = search.solve_with_checker(contracts, checker, max_per_subset=2, max_total=32)
-    assert out["status"] == "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED"
+    assert out["status"] == "CONDITIONAL__POINTWISE_OPTIMAL_GIVEN_UNVERIFIED_CHECKER_VECTOR"
+    assert out["pointwise_optimal_given_checker_vector"] is True
+    assert out["checker_vector_authoritative"] is False
+    assert out["pointwise_optimal"] is False
     assert out["best_candidate"]["checker_results"] == [True]
     assert out["certificate"]["required_next_cardinality_subset_count"] == 0
 
@@ -105,7 +112,11 @@ def test_pinned_checker_bridge_removes_external_callback_gap(monkeypatch):
         "load_pinned_registry",
         lambda root: (
             {"keywords:forbidden_words": FakeForbidden},
-            {"livebench_commit": "pinned-test"},
+            {
+                "livebench_commit": "pinned-test",
+                "evaluation_main_blob": search.PINNED_STRICT_EVALUATOR_BLOB,
+                "strict_nonempty_guard": "response.strip() must be truthy before any checker can pass",
+            },
         ),
     )
     contracts = [c("keywords:forbidden_words", forbidden_words=["omega"])]
@@ -119,3 +130,66 @@ def test_pinned_checker_bridge_removes_external_callback_gap(monkeypatch):
     assert out["pointwise_optimal"] is True
     assert out["exact_checker_callback_required"] is False
     assert out["exact_checker_binding"]["livebench_commit"] == "pinned-test"
+    assert out["checker_vector_authoritative"] is True
+    assert out["checker_vector_authority"] == "EXACT_PINNED_LIVEBENCH_STRICT_POSTVALIDATOR"
+
+
+def test_fabricated_external_vector_cannot_emit_authoritative_pointwise_pass():
+    contracts = [
+        c(
+            "length_constraints:nth_paragraph_first_word",
+            num_paragraphs=2,
+            nth_paragraph=1,
+            first_word="alpha",
+        ),
+        c("keywords:forbidden_words", forbidden_words=["alpha"]),
+    ]
+    out = search.run({
+        "contracts": contracts,
+        "evaluated_candidates": [
+            {
+                "response": "this response satisfies neither asserted fact",
+                "checker_results": [True, False],
+            }
+        ],
+    })
+    assert out["status"] == "CONDITIONAL__POINTWISE_OPTIMAL_GIVEN_UNVERIFIED_CHECKER_VECTOR"
+    assert out["pointwise_optimal_given_checker_vector"] is True
+    assert out["checker_vector_authoritative"] is False
+    assert out["pointwise_optimal"] is False
+
+
+def test_pinned_path_without_strict_wrapper_binding_stays_conditional(monkeypatch):
+    class FakeForbidden:
+        def __init__(self, iid):
+            pass
+
+        def build_description(self, *, forbidden_words):
+            self.word = str(forbidden_words[0])
+
+        def check_following(self, response):
+            return self.word not in response
+
+    monkeypatch.setattr(
+        search.exact_postvalidator,
+        "load_pinned_registry",
+        lambda root: (
+            {"keywords:forbidden_words": FakeForbidden},
+            {
+                "livebench_commit": "pinned-test",
+                # Intentionally missing exact strict evaluator binding.
+            },
+        ),
+    )
+    contracts = [c("keywords:forbidden_words", forbidden_words=["omega"])]
+    out = search.solve_with_pinned_livebench(
+        contracts,
+        "/synthetic/pinned/root",
+        max_per_subset=2,
+        max_total=32,
+    )
+    assert out["status"] == "CONDITIONAL__POINTWISE_OPTIMAL_GIVEN_UNVERIFIED_CHECKER_VECTOR"
+    assert out["pointwise_optimal_given_checker_vector"] is True
+    assert out["checker_vector_authoritative"] is False
+    assert out["pointwise_optimal"] is False
+    assert out["checker_vector_authority"] == "PINNED_CHECKERS_WITHOUT_BOUND_STRICT_WRAPPER"
