@@ -1,0 +1,146 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_EXTERNAL_EVIDENCE_TRUTH_REPAIR_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PRIMARY_SOURCE_EXTERNAL_FACT_RECLASSIFICATION_AND_MEASUREMENT_IDENTITY_DRIFT_GUARD__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Reduce false external waits and prevent silent target rebasing by binding current primary/benchmark-owner source facts to existing Root2 routes without changing acceptance predicates, frozen thresholds, execution authority, or fresh-reality authority.",
+  "canonical_state_at_derivation": {
+    "repository": "moxnixmdj/brain",
+    "base_commit": "05c8a3e0aae39dae1e9eccee4db9e43796508b79",
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false
+  },
+  "source_observations": [
+    {
+      "id": "OSWORLD_V21_SELF_SERVICE_GATE",
+      "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "source": "https://github.com/xlang-ai/OSWorld-V2/blob/main/README.md",
+      "source_class": "PRIMARY_BENCHMARK_REPOSITORY",
+      "observed": [
+        "OSWORLD_V2_1_IS_CURRENT_RECOMMENDED_RELEASE",
+        "TASK_CLASSES_ARE_GATED_AT_XLANGAI_OSWORLD_V2_TASKS",
+        "TASK_GATE_REQUEST_IS_STATED_TO_BE_AUTOMATICALLY_APPROVED",
+        "COMPLETE_ASSETS_ARE_GATED_AT_XLANGAI_OSWORLD_V2_ASSETS_GATED",
+        "RELEASE_REQUIRES_CODE_TASKS_ASSETS_WEBSITE_AND_PROVIDER_IMAGES_FROM_MATCHING_RELEASE",
+        "OFFICIAL_RELEASE_MANIFESTS_PIN_COMPARABLE_COMPONENTS"
+      ],
+      "scheduler_effect": [
+        "RECLASSIFY_TASK_CLASS_GATE_FROM_OWNER_WAIT_TO_SELF_SERVICE_ACCOUNT_ACTION",
+        "RECLASSIFY_ASSET_GATE_TO_SELF_SERVICE_GATED_ACCESS_PATH__PRESERVE_ACCOUNT_OBSERVATION_UNTIL ACTUAL ACCESS IS CONFIRMED",
+        "PRESERVE_ANTHROPIC_EXACT_IDENTITY_OR_PROTOCOL_EQUIVALENCE",
+        "PRESERVE_SELF_HOST_RUNTIME_AND_TOKEN_REACHABILITY",
+        "PRESERVE_END_TO_END_PROTOCOL_EQUIVALENCE",
+        "PRESERVE_BRAIN_SCORE"
+      ],
+      "hard_nonclaims": [
+        "NO_CLAIM_USER_ACCOUNT_HAS_ALREADY_ACCEPTED_EITHER_GATE",
+        "NO_CLAIM_ASSET_GATE_APPROVAL_IS_AUTOMATIC__README_ONLY_EXPLICITLY_STATES_AUTO_APPROVAL_FOR_TASK_CLASSES",
+        "NO_CLAIM_ANTHROPIC_USED_CURRENT_OSWORLD_V2_1_RELEASE",
+        "NO_ACCEPTANCE_CREDIT"
+      ]
+    },
+    {
+      "id": "HLE_GATED_CONSENT_SELF_SERVICE",
+      "target_predicate": "HLE_TOOLS_GE_67_7",
+      "source": "https://huggingface.co/datasets/cais/hle",
+      "corroborating_source": "https://github.com/centerforaisafety/hle",
+      "source_class": "PRIMARY_DATASET_AND_BENCHMARK_REPOSITORY",
+      "observed": [
+        "HLE_HAS_2500_QUESTIONS",
+        "HLE_DATASET_IS_HOSTED_AT_CAIS_HLE",
+        "HUGGING_FACE_REQUIRES_LOGIN_AND_ACCEPTANCE_OF_CONTACT_INFORMATION_SHARING_CONDITIONS_TO_ACCESS_FILES",
+        "OFFICIAL_REPOSITORY_PUBLISHES_EVALUATION_CODE_AND_AUTOMATED_GRADING_PATH"
+      ],
+      "scheduler_effect": [
+        "RECLASSIFY_HLE_ACCOUNT_ACCESS_AS_SELF_SERVICE_GATED_CONSENT_ACTION__NOT_GENERIC_OWNER_OUTREACH",
+        "PRESERVE_ACTUAL_AUTHENTICATED_ACCESS_OBSERVATION",
+        "PRESERVE_HLE_WITH_TOOLS_HARNESS_AND_GRADER_EQUIVALENCE",
+        "PRESERVE_THRESHOLD_CERTIFICATE_OR_MINIMUM_EMPIRICAL_RESIDUAL"
+      ],
+      "hard_nonclaims": [
+        "NO_CLAIM_ACCOUNT_CONSENT_ALREADY COMPLETED",
+        "NO_CLAIM_PLAIN_HLE_EVAL_EQUALS_FROZEN_HLE_WITH_TOOLS_PROTOCOL",
+        "NO_ACCEPTANCE_CREDIT"
+      ]
+    },
+    {
+      "id": "OPUS55_RELATIVE_SCORE_MEASUREMENT_IDENTITY_DRIFT",
+      "target_predicates": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "frozen_reference_sources": [
+        "https://www.anthropic.com/claude/opus",
+        "https://www.anthropic.com/claude-sonnet-5-5"
+      ],
+      "current_owner_sources": [
+        "https://artificialanalysis.ai/evaluations/gdpval-aa",
+        "https://artificialanalysis.ai/evaluations/aa-briefcase"
+      ],
+      "observed": {
+        "frozen_reference": {
+          "gdpval_aa_v2_1_elo": 1846,
+          "aa_briefcase_v1_1_elo": 1822
+        },
+        "current_artificial_analysis_default_fallback_max": {
+          "gdpval_aa_v2_1_elo": 1867,
+          "aa_briefcase_v1_1_elo": 1808
+        }
+      },
+      "interpretation": [
+        "SAME_BENCHMARK_NAME_DOES_NOT_FORCE_SAME_MEASUREMENT_IDENTITY",
+        "CURRENT_OWNER_LEADERBOARD_VALUES_DIFFER_FROM_FROZEN_REFERENCE_VALUES_IN_BOTH_DIRECTIONS",
+        "FALLBACK_POLICY_EFFORT_HARNESS_POPULATION_AND_RATING_POOL_MUST_BE_BOUND_BEFORE ANY TARGET REBASE OR SCORE TRANSPORT"
+      ],
+      "scheduler_effect": [
+        "PRESERVE_EXISTING_FROZEN_THRESHOLDS_PENDING_EXACT_MEASUREMENT_IDENTITY_RECONCILIATION",
+        "DO_NOT_STRENGTHEN_GDPVAL_TARGET_TO_1867_FROM LEADERBOARD DRIFT ALONE",
+        "DO_NOT_WEAKEN_AA_BRIEFCASE_TARGET_TO_1808_FROM LEADERBOARD DRIFT ALONE",
+        "REQUIRE_CONTENT_ADDRESSED_MEASUREMENT_IDENTITY_FINGERPRINT_OR VERIFIED RELATIVE SCORE BRIDGE FOR TRANSPORT"
+      ],
+      "hard_nonclaims": [
+        "NO_CLAIM_FROZEN_1846_OR_1822_TARGETS_ARE WRONG",
+        "NO_CLAIM_CURRENT_1867_OR_1808_VALUES_ARE COMPARABLE TO THE FROZEN CONFIGURATION",
+        "NO_TARGET_REBASE",
+        "NO_ACCEPTANCE_CREDIT"
+      ]
+    }
+  ],
+  "measurement_identity_fingerprint": {
+    "required_fields": [
+      "BENCHMARK_VERSION",
+      "TASK_POPULATION_OR_RATING_POOL",
+      "HARNESS",
+      "TOOL_AUTHORITY",
+      "EFFORT_OR_REASONING_SETTING",
+      "FALLBACK_POLICY",
+      "GRADER_OR_JUDGE",
+      "ENVIRONMENT",
+      "SCORE_OR_RATING_TRANSFORM"
+    ],
+    "rule": "NO_SCORE_TRANSPORT_TARGET_REBASE_OR COMPARABILITY CREDIT WHEN A LOAD_BEARING FIELD IS UNKNOWN OR MISMATCHED"
+  },
+  "aggregate_scheduler_delta": [
+    "HLE_AND_OSWORLD_GATED_ACCESS_ARE SELF_SERVICE ROUTES FIRST__DO_NOT WAIT ON LOW_VALUE OWNER OUTREACH",
+    "MEASUREMENT_DRIFT IS A TARGET_IDENTITY QUESTION__NOT ACCEPTANCE CREDIT",
+    "RECOMPUTE_ROOT2_MINIMUM CUT AFTER VERIFIED ACCESS OR IDENTITY DELTA"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false
+  },
+  "independent_verification_required": true
+}
