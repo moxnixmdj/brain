@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_POST_LIVEBENCH_CURRENT_TERMINAL_AUTHORITY_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONNECTOR_RECOMPUTATION_PASS__CURRENTNESS_ONLY__ZERO_CREDIT",
+  "objective": "Repair stale current-terminal control pointers after the independently verified LiveBench fixed-bar forced fail moved LIVEBENCH_IF_GE_65_7 from Root2-only to Root1-only.",
+  "source_head": "25dd1de62a4f532fe0170a01ad2eb41e646c7dee",
+  "bindings": {
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "c3d1e25e2268cce90df545a93f107aa24fed8f8b"
+    },
+    "post_livebench_root_seal": {
+      "path": "canonical/governance/POST_LIVEBENCH_CURRENT_ROOT_SEAL_V1.json",
+      "git_blob_sha": "6dbd4d19bbc432e3927968113658637057a3ee94"
+    },
+    "root2_18_activation": {
+      "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
+      "git_blob_sha": "f778e8eeb1295a03465a4cc6d49c3efab2ff80bb"
+    },
+    "livebench_root1_reclassification": {
+      "path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+      "git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684"
+    },
+    "livebench_forced_fail": {
+      "path": "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_BINDING_V1.json",
+      "git_blob_sha": "98659983c43ac37508177b4003a08cfd5d1e9447"
+    }
+  },
+  "exact_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false,
+    "root1_only": 1,
+    "root2_only": 15,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "root2_touching": 18,
+    "root1_positive_gap_predicates": [
+      "LIVEBENCH_IF_GE_65_7"
+    ]
+  },
+  "scheduler": {
+    "root1": "REPAIR_LIVEBENCH_IF_SUCCESSOR_FROM_VERIFIED_CONSTRUCTIVE_GAP__USE_ONLY_PREEXPOSED_FAILURE_CLASSES_AND_PUBLIC_GENERAL_INSTRUCTION_SEMANTICS__NO_MORE_MEASUREMENT_OF_FAILED_FROZEN_CANDIDATE__NO_UNSEEN_CASES_BEFORE_SUCCESSOR_PRECOMMIT_AND_SEPARATE_AUTHORITY",
+    "root2": "EXECUTE_ACTIVE_POST_LIVEBENCH_18_PREDICATE_ZERO_REALITY_SCHEDULER_IN_PARALLEL__RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+    "root3": "EVENT_DRIVEN_ONLY_UNDER_CURRENT_ROOT3_MINIMUM_ACTION_CUT__NO_DIRECT_REALITY_WITHOUT_SEPARATE_AUTHORITY",
+    "combined": "ROOT1_LIVEBENCH_SUCCESSOR_REPAIR_PARALLEL_ROOT2_18_ZERO_REALITY__ROOT3_EVENT_DRIVEN"
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_POINTER_REPAIR",
+    "NO_MORE_ROOT2_MEASUREMENT_WORK_FOR_FAILED_FROZEN_LIVEBENCH_CANDIDATE",
+    "NO_CASE_73_OR_LATER_FOR_FAILED_FROZEN_LIVEBENCH_CANDIDATE",
+    "NO_UNSEEN_LIVEBENCH_CASE_EXPOSURE_FOR_A_SUCCESSOR_BEFORE_PRECOMMIT_ISOLATION_AND_SEPARATE_EXPLICIT_AUTHORITY",
+    "ROOT2_CURRENT_UNIVERSE_IS_EXACTLY_18_TOUCHING_PREDICATES",
+    "RECOMPUTE_IF_ANY_BOUND_BLOB_DRIFTS"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
