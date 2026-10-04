@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SCORE_ONLY_WITNESS_CAPABILITY_QUARANTINE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__TRUTH_QUARANTINE__SCORE_ONLY_WITNESSES_ZERO_ROOT1_CAPABILITY_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": "A deterministic response can satisfy one or more public LiveBench checker predicates while ignoring or discarding the underlying paraphrase, simplify, story-generation, or summarize request. Such a witness may be valid evidence about the scorer surface but is not by itself evidence that Brain owns the semantic instruction-following capability represented by the family.",
+  "current_score_only_surfaces": [
+    {
+      "path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py",
+      "example_routes": [
+        "LIVEBENCH_IF_SCORE_ONLY_STRUCTURAL_WITNESS_V3"
+      ],
+      "classification": "BENCHMARK_SCORE_SURFACE_ONLY_UNLESS_SEMANTIC_REQUEST_PRESERVATION_IS_SEPARATELY_PROVED"
+    },
+    {
+      "path": "canonical/runtime/livebench_ngram_whitespace_invariant_compiler_v1.py",
+      "classification": "CHECKER_CONSTRAINT_CONSTRUCTOR_ONLY"
+    },
+    {
+      "path": "canonical/runtime/livebench_ngram_reference_free_v1.py",
+      "git_blob_sha": "998e60eaca9748863c779713f0165236276a60d4",
+      "classification": "CHECKER_CONSTRAINT_CONSTRUCTOR_ONLY"
+    }
+  ],
+  "theorem": {
+    "premise_1": "THE_TERMINAL_OBJECTIVE_REQUIRES_OWNERSHIP_OF_USEFUL_OPUS_5_5_CAPABILITIES_NOT_MERELY_NUMERIC_BENCHMARK_SCORE",
+    "premise_2": "LIVEBENCH_IF_CASES_COMBINE_AN_UNDERLYING_SEMANTIC_REQUEST_WITH_FORMAT_OR_INSTRUCTION_CONSTRAINTS",
+    "premise_3": "A_CONSTRUCTOR_WHOSE_OUTPUT_IS_DERIVED_ONLY_FROM_CHECKER_CONSTRAINTS_CAN_BE_INVARIANT_TO_THE_UNDERLYING_SEMANTIC_REQUEST",
+    "conclusion": "CHECKER_ONLY_PASS_OR_SCORE_EVIDENCE_DOES_NOT_BY_ITSELF_PROVE_THE_ROOT1_SEMANTIC_CAPABILITY_GAP_REPAIRED"
+  },
+  "capability_credit_gate": {
+    "required_for_root1_repair_credit": [
+      "THE_SUCCESSOR_PRODUCES_OR_PRESERVES_A_SEMANTICALLY_VALID_RESPONSE_TO_THE_UNDERLYING_REQUEST",
+      "FORMAL_CONSTRAINT_TRANSFORMATION_PRESERVES_THE_REQUIRED_SEMANTIC_CONTENT_OR_THE_INSTRUCTION_EXPLICITLY_DEFINES_THE_ENTIRE_RESPONSE_SURFACE",
+      "THE_COMPOSITION_IS_VERIFIED_ON_NONTERMINAL_OR_SCOPE_COMPLETE_EVIDENCE_WITHOUT_CASE_SPECIFIC_TERMINAL_TUNING",
+      "ANY_SCORE_ONLY_HELPER_IS_ACCOUNTED_AS_MEASUREMENT_OR_FORMATTING_SUPPORT_NOT_AS_SEMANTIC_CAPABILITY"
+    ],
+    "exception": "AN_INSTRUCTION_THAT_BY_ITS_PUBLIC_SEMANTICS_EXPLICITLY_DEFINES_THE_ENTIRE_VALID_RESPONSE_SURFACE_MAY_NOT_REQUIRE_AN_ADDITIONAL_SEMANTIC_SEED; THAT_EXCEPTION_MUST_BE_PROVED_PER_INSTRUCTION_CLASS_OR_BY_A_SCOPE_COMPLETE_RULE."
+  },
+  "scheduler_effect_if_verified": [
+    "DO_NOT_COUNT_SCORE_ONLY_STRUCTURAL_OR_TRIGRAM_WITNESS_ROUTES_AS_ROOT1_CAPABILITY_CLOSURE",
+    "KEEP_THEM_AVAILABLE_FOR_SCORER_ANALYSIS_FORMATTING_OR_OBJECTIVE_THRESHOLD_PROOF_WHERE_ADMISSIBLE",
+    "PRIORITIZE_GENERAL_SEMANTIC_SEED_PRODUCTION_AND_SEMANTICALLY_SAFE_COMPOSITION",
+    "FAIL_CLOSED_ON_ANY_CLAIM_THAT_A_HIGHER_LIVEBENCH_SCORE_ALONE_PROVES_TERMINAL_CAPABILITY_OWNERSHIP"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_ASSERT_SCORE_ONLY_HELPERS_ARE_USELESS",
+    "DOES_NOT_ASSERT_A_FUTURE_SEMANTICALLY_COMPOSED_SUCCESSOR_CANNOT_USE_THESE_HELPERS",
+    "DOES_NOT_CHANGE_THE_FROZEN_65_7_ACCEPTANCE_BAR",
+    "DOES_NOT_GRANT_OR_REMOVE_ACCEPTANCE_CREDIT_BY_ITSELF"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
