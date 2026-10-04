@@ -144,6 +144,16 @@
             "CURSORBENCH_COMPARATOR_DRIFT_SEARCH_WHILE_CURRENT_OWNER_PAGE_REMAINS_57_8"
           ],
           "fresh_reality_authority": false
+        },
+        "finance_index_public_transform_saturation": {
+          "subject_path": "canonical/governance/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_20261004_V1.json",
+          "subject_git_blob_sha": "2a831b8632b18fe9e10ed423f131b6ae93d99b77",
+          "verification_path": "canonical/verification/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+          "verification_git_blob_sha": "8aea6757479980c9f2e2538a4f2651ad23653c10",
+          "activation_path": "canonical/governance/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_ACTIVATION_V1.json",
+          "activation_git_blob_sha": "d286b55e361194a77acd21def918d12e07227964",
+          "status": "CANDIDATE__INDEPENDENT_SUBJECT_PASS__POINTER_PROJECTION_REVERIFY_PENDING__ZERO_CREDIT",
+          "effective_scheduling_authority": false
         }
       }
     },
@@ -180,7 +190,8 @@
     "low_value_free_tier_trial_quota_support_outreach_forbidden": true,
     "self_service_facts_are_owner_waits": false,
     "root2_primary_source_search_deletions": "canonical/governance/ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_ACTIVATION_V1.json",
-    "repeat_search_for_deleted_primary_source_classes_forbidden": true
+    "repeat_search_for_deleted_primary_source_classes_forbidden": true,
+    "finance_index_public_transform_saturation_effective": false
   },
   "accounting": {
     "acceptance_credit_delta": 0,
