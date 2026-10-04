@@ -96,6 +96,19 @@ PROFILES = (
         "sections": ("SECTION", 1),
         "end": "Is there anything else I can help with?",
     },
+    {
+        "name": "SPECIAL_SELF_COLLISION_ADVERSARY",
+        "existence": ["response", "alpha", "beta", "system", "brain"],
+        "forbidden": ["response", "alpha", "beta", "market", "glass"],
+        "paragraphs": 3,
+        "words": (180, "at least"),
+        "sentences": (6, "at least"),
+        "nth": (3, 2, "response"),
+        "postscript": "P.S.",
+        "bullets": 3,
+        "sections": ("Section", 3),
+        "end": "Any other questions?",
+    },
 )
 
 
