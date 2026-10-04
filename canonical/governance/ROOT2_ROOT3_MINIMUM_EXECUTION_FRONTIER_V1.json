@@ -23,7 +23,7 @@
     },
     "root2_fixed_bar_route_inventory": {
       "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-      "git_blob_sha": "71495ebcf456119f4df694203631aeeb3048c81a",
+      "git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294",
       "consequence": "15_ROOT2_ONLY_PREDICATES__14_UNIQUE_SURFACES__AUTOMATIONBENCH_PUBLIC600_SEARCH_SATURATED__CHARTOGRAPHY_EXACT_1000_CALL_ACCOUNT_RESIDUAL__HLE_ADAPTER_DISCHARGED__OSWORLD_SOURCE_GRAPH_DISCOVERY_DISCHARGED__TB_SCIENCE_AND_LIVEBENCH_SCORE_ONLY"
     },
     "finance_accounting_index_identity_reconciliation": {
@@ -97,8 +97,8 @@
     },
     "current_zero_reality_minimum_cut_v8": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
-      "git_blob_sha": "62197933c4ee97f23a51662a5176f9a4c78e8803",
-      "consequence": "CURRENT_ROOT2_CLASSIFICATION_AND_ROUTE_RESIDUALS_RECONCILED"
+      "git_blob_sha": "c6c8353e740cbcde9649512c5b922148617d934a",
+      "consequence": "CHARTOGRAPHY_GUARD_DISCHARGED__OTHER_CURRENT_ROOT2_RESIDUALS_PRESERVED"
     },
     "synthesis_scope_reclassification": {
       "activation_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_V1.json",
@@ -118,6 +118,14 @@
       "workflow_job_id": 111320730605,
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FUNCTIONAL_GITLAB_CONTRACT__ZERO_CREDIT",
       "consequence": "EXACT_GITLAB_REVISION_REQUIREMENT_DELETED__FUNCTIONAL_PROTOCOL_PREFLIGHT_REMAINS"
+    },
+    "chartography_zero_spend_guard": {
+      "activation_path": "canonical/governance/CHARTOGRAPHY_ZERO_SPEND_GUARD_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "43eabccd6c5533b76834ad96d5b9947c03df1c52",
+      "verification_path": "canonical/verification/CHARTOGRAPHY_ZERO_SPEND_GUARD_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "d2eb956d6534bd4748010ee3fec8b12d93795793",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT",
+      "consequence": "HARD_ZERO_SPEND_GUARD_DISCHARGED__PROJECT_CAPACITY_RECEIPT_ADAPTER_SCORE_REMAIN"
     }
   },
   "exact_state": {
@@ -214,7 +222,7 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "next": "ROOT2_CURRENT__16_ROOT2_ONLY_PLUS_3_MIXED__SYNTHESIS_PERFORMANCE_ONLY__TB_SCIENCE_LIVEBENCH_SCORE_ONLY__HLE_ACCOUNT_GRADER__CHARTOGRAPHY_PROJECT_CAPACITY__OSWORLD_HF_SELF_HOST_FUNCTIONAL_PROTOCOL__GDPVAL_FINANCE_STRONGER_PROOFS__NO_FRESH_REALITY",
+  "next": "ROOT2_CURRENT__CHARTOGRAPHY_PROJECT_CAPACITY_ADAPTER_SCORE_ONLY_AFTER_VERIFIED_ZERO_SPEND_GUARD__FIXED_BAR_HYPERGRAPH_REBIND_V4_PENDING__SYNTHESIS_PERFORMANCE_ONLY__HLE_ACCOUNT_GRADER__OSWORLD_HF_SELF_HOST_PROTOCOL__GDPVAL_FINANCE_STRONGER_PROOFS__NO_FRESH_REALITY",
   "hard_rules": [
     "UNKNOWN_DOMAIN_V4_OVERLAY_HARDENS_EXECUTION_PATH_ONLY__ROOT3_COUNTS_AND_ACCEPTANCE_TRUTH_UNCHANGED"
   ],
@@ -226,5 +234,10 @@
       "required_claim_coverage_noninferiority"
     ],
     "scope_relation_closed": true
+  },
+  "root2_fixed_bar_hypergraph_rebind": {
+    "path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V4.json",
+    "git_blob_sha": "8d3f20c8b8379b282f9b03fc73ba82f6f8946fa5",
+    "status": "PENDING_INDEPENDENT_VERIFICATION"
   }
 }

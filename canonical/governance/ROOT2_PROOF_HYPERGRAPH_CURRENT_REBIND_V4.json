@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V4",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_ROUTE_IDENTITY_REBIND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "REESTABLISH_FAIL_CLOSED_FIXED_BAR_HYPERGRAPH_INPUT_IDENTITY_AFTER_VERIFIED_CHARTOGRAPHY_ZERO_SPEND_GUARD_ACTIVATION",
+  "scope": "15_ROOT2_FIXED_BAR_PREDICATES__14_SURFACES__SYNTHESIS_ROOT2_ONLY_NON_FIXED_BAR_RESIDUAL_SEPARATE",
+  "prior_optimizer": {
+    "governance_git_blob_sha": "2793081a62a99cb69c9ae3e37323205e756cbebb",
+    "runtime_git_blob_sha": "dd2094c4845239a0be4cfd34af4d8f3a7e411060",
+    "tests_git_blob_sha": "235db2f21fe4b0f70096be69ae28af87a5ce31dd",
+    "independent_verification_git_blob_sha": "24f6e3949c39daf92dfb065cfe687690f984ce4f"
+  },
+  "current_inputs": {
+    "route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294",
+    "comparator_vector_git_blob_sha": "b28af5176550aba9e44ffd8ac9fde4fa7ba388bf"
+  },
+  "route_deltas_bound": [
+    "AUTOMATIONBENCH_PUBLIC600_SEARCH_SATURATED",
+    "HLE_BRAIN_TOOL_ADAPTER_DISCHARGED",
+    "OSWORLD_SOURCE_AND_EXACT_GITLAB_REVISION_BLOCKERS_DISCHARGED",
+    "CHARTOGRAPHY_HARD_ZERO_SPEND_GUARD_DISCHARGED"
+  ],
+  "invariants": {
+    "fixed_bar_predicates": 15,
+    "unique_fixed_bar_surfaces": 14,
+    "total_root2_involved_predicates": 19,
+    "comparator_targets_changed": false,
+    "predicate_set_changed": false,
+    "surface_set_changed": false,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "fresh_reality_authority": false
+  },
+  "allowed_effect": "REACTIVATE_EXISTING_VERIFIED_FIXED_BAR_HYPERGRAPH_ON_CURRENT_ROUTE_STATE_AFTER_INDEPENDENT_EXACT_INPUT_REBIND_PASS",
+  "hard_rules": [
+    "SYNTHESIS_NON_FIXED_BAR_ROOT2_RESIDUAL_SCHEDULED_SEPARATELY",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_OPTIMIZER_LOGIC_CHANGE",
+    "NO_TARGET_REBASE",
+    "NO_CASE_EXPOSURE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "FAIL_CLOSED_ON_INPUT_BLOB_DRIFT"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
