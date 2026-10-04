@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__8_MATCHED_SCOPE_ROOT3_TARGETS_TO_ONE_FUTURE_SUPERPORTFOLIO_WAVE__ZERO_CREDIT",
+  "status": "ACTIVE__SYNTHESIS_ROOT3_SCOPE_CLOSED__7_MATCHED_SCOPE_ROOT3_TARGETS_TO_ONE_FUTURE_SUPERPORTFOLIO_WAVE__ZERO_CREDIT",
   "objective": "Bind every current matched/scope Root3 target that may require empirical matched evidence to the already frozen Opus55 shared superportfolio, preserving independent per-family verdicts while eliminating separate case-generation and comparator-execution campaigns.",
   "authority": {
     "superportfolio": {
@@ -26,11 +26,6 @@
     {
       "predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
-      "superportfolio_role": "CORE"
-    },
-    {
-      "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
-      "family": "COMMUNICATION_AND_SYNTHESIS",
       "superportfolio_role": "CORE"
     },
     {
@@ -60,8 +55,8 @@
     }
   ],
   "execution_compression": {
-    "matched_scope_target_count": 8,
-    "separate_family_campaigns_avoided": 4,
+    "matched_scope_target_count": 7,
+    "separate_family_campaigns_avoided": 3,
     "shared_future_superportfolio_wave_count": 1,
     "per_family_verdicts_remain_independent": true,
     "case_generation_shared": true,
@@ -73,7 +68,7 @@
     "batch_classes": [
       {
         "id": "ROOT3_MATCHED_SUPERPORTFOLIO_WAVE",
-        "targets": 8,
+        "targets": 7,
         "current_state": "BLOCKED_BEFORE_GENERATION__EXACT_OPUS55_COMPARATOR_ADMISSIBILITY_OPEN",
         "activation": "ZERO_REALITY_FIXED_POINT_REACHED__EXACT_COMPARATOR_ADMISSIBLE__FREEZE_EXACT_BRAIN_AND_OPUS55_HARNESSES__THEN_GENERATE_ONCE"
       },
@@ -114,5 +109,6 @@
     "workflow_run_id": 37160070571,
     "workflow_job_id": 111311502241,
     "conclusion": "success"
-  }
+  },
+  "synthesis_disposition": "ROOT3_SCOPE_RELATION_CLOSED__SYNTHESIS_MAY_STILL_USE_SHARED_SUPERPORTFOLIO_FOR_ROOT2_MATCHED_PERFORMANCE_ONLY__NO_ROOT3_VERDICT_REQUIRED"
 }
