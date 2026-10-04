@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_SEMANTIC_PARAPHRASE_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_LEARNED_BOUNDED_SEMANTIC_PARAPHRASE_ONTOLOGY__EXACT_BLOB_BOUND__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "TEST_AND_BIND_A_ZERO_LEARNED_DETERMINISTIC_ROLE_ONTOLOGY_ACROSS_THE_FROZEN_SEMANTIC_PARAPHRASE_POPULATION_WITH_MANDATORY_ABSTENTION_WHEN_DIRECTION_IS_NOT_IDENTIFIED",
+  "preexposure": {
+    "path": "canonical/governance/H100_ZERO_LEARNED_SEMANTIC_PARAPHRASE_PREEXPOSURE_V1.json",
+    "git_blob_sha": "490ae449877af813d8e8d1f071afb46a5190b02a"
+  },
+  "exact_bound_components": {
+    "canonical/runtime/h100_zero_learned_semantic_paraphrase_v1.py": "db4e836b4104a9b311c2c08ab2d8675bfc0d0760",
+    "canonical/tests/test_h100_zero_learned_semantic_paraphrase_v1.py": "9976fd8a160582fc0ce3e1c79bfa496f35b593bf"
+  },
+  "operative_scope": [
+    "EXPERIMENTAL_VARY_RESPONSE",
+    "ENGINEERING_KNOBS_READOUT",
+    "STATISTICS_PREDICTORS_DEPENDENT_VARIABLE",
+    "ML_FEATURES_LABEL",
+    "CONTROLLED_FACTORS_ENDPOINT",
+    "MANIPULATED_VARIABLES_OUTCOME",
+    "PARAMETERS_RESULT",
+    "INPUTS_SENSOR_REPORTS",
+    "MANDATORY_ABSTENTION_ON_ASSOCIATION_ONLY_OR_COLUMN_ONLY_TEXT"
+  ],
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "random_search": false,
+    "dynamic_code_execution": false,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "residual_after_success": [
+    "UNSEEN_LEXICAL_ROLE_SEMANTICS_OUTSIDE_THE_FROZEN_ONTOLOGY",
+    "COMPOSITIONAL_FREE_FORM_LANGUAGE_WITH_MULTIPLE_CLAUSES_NEGATION_AND_REFERENCE",
+    "OPEN_WORLD_TOOL_TRACE_SEMANTICS_OUTSIDE_KNOWN_STRUCTURES",
+    "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+    "DIRECT_UNKNOWN_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "FINITE_ONTOLOGY_PASS_IS_NOT_OPEN_WORLD_SEMANTIC_UNDERSTANDING",
+    "NO_CORRELATION_TO_CAUSATION_INFERENCE",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "independent_verification_required": true
+}
