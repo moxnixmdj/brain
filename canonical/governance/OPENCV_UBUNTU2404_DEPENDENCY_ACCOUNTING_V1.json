@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_OPENCV_UBUNTU2404_DEPENDENCY_ACCOUNTING_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_RUNNER_PASS__ZERO_CREDIT",
+  "runner": {
+    "repo": "moxnixmdj/verification-capsule-runner",
+    "commit": "5c4befb25c3a556cd4f280cf92f8a86b97fc11f9",
+    "run": 37166676814,
+    "job": 111330900982,
+    "conclusion": "success"
+  },
+  "package": {
+    "name": "python3-opencv",
+    "version": "4.6.0+dfsg-13.1ubuntu1",
+    "archive_sha256": "9c48ee7941408fea74a25832986d21ec86f7f094bf9a863752e94409b48c0820",
+    "cv2_version": "4.6.0"
+  },
+  "runtime": {
+    "path": "canonical/runtime/chart_visual_primitives_v1.py",
+    "blob": "8f3a4df9facec40cafa2693f5f3972d43ce70ef4",
+    "fail_closed_version": "4.6.0"
+  },
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "credit_delta": 0
+}
