@@ -15,8 +15,37 @@ import json
 import re
 from typing import Any
 
+try:
+    from canonical.runtime.livebench_public_description_detector_v1 import detect_public_descriptions
+except ModuleNotFoundError:
+    from livebench_public_description_detector_v1 import detect_public_descriptions
+
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_PUBLIC_WITNESS_COMPILER_V1"
 PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
+
+SUPPORTED_PUBLIC_CHECKER_CLASSES = {
+    "NumberOfWords",
+    "NumberOfSentences",
+    "ParagraphChecker",
+    "JsonFormat",
+    "ConstrainedResponseChecker",
+    "QuotationChecker",
+    "WordCountRangeChecker",
+    "NumbersCountChecker",
+    "NoWhitespaceChecker",
+    "TitleCaseChecker",
+    "OutputTemplateChecker",
+    "SpecialBulletPointsChecker",
+    "EndChecker",
+    "CommaChecker",
+    "TitleChecker",
+    "KeywordChecker",
+    "ForbiddenWords",
+    "KeywordFrequencyChecker",
+    "BulletListChecker",
+    "HighlightSectionChecker",
+    "PostscriptChecker",
+}
 
 
 def _result(status: str, **extra: Any) -> dict[str, Any]:
@@ -326,7 +355,34 @@ def compile_witness(prompt: str) -> dict[str, Any]:
     if not prompt.strip():
         return _result("BLOCKED", reason="PROMPT_REQUIRED")
 
+    detections = detect_public_descriptions(prompt)
+    detected_classes = {d["checker"] for d in detections}
+    unsupported = sorted(detected_classes - SUPPORTED_PUBLIC_CHECKER_CLASSES)
+    if unsupported:
+        return _result(
+            "BLOCKED",
+            reason="UNSUPPORTED_PUBLIC_CHECKER_DETECTED",
+            detected_unsupported_checkers=unsupported,
+            detected_public_checkers=sorted(detected_classes),
+        )
+
     matches = _candidate_matches(prompt)
+    matched_classes = {m["checker"].split(":", 1)[1] for m in matches}
+    detector_misses = sorted(matched_classes - detected_classes)
+    if detector_misses:
+        return _result(
+            "BLOCKED",
+            reason="PUBLIC_DESCRIPTION_DETECTOR_MISMATCH",
+            matched_but_undetected_checkers=detector_misses,
+        )
+    unparsed_supported = sorted((detected_classes & SUPPORTED_PUBLIC_CHECKER_CLASSES) - matched_classes)
+    if unparsed_supported:
+        return _result(
+            "BLOCKED",
+            reason="SUPPORTED_PUBLIC_DESCRIPTION_UNPARSED",
+            detected_but_unparsed_checkers=unparsed_supported,
+        )
+
     if any(m.get("valid") is not True for m in matches):
         return _result(
             "BLOCKED",
