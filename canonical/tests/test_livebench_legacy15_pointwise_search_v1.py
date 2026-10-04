@@ -87,3 +87,27 @@ def test_selector_fails_closed_when_unsat_coverage_is_missing():
     assert out["status"] == "FAIL_CLOSED__BEST_CANDIDATE_OPTIMALITY_NOT_CERTIFIED"
     assert out["pointwise_optimal"] is False
     assert out["certificate"]["unresolved_subset_indices"] == [[0, 1]]
+
+
+def test_sentence_lt_one_plus_forbidden_partial_candidate_is_pointwise_optimal():
+    contracts = [
+        c("length_constraints:number_sentences", num_sentences=1, relation="less than"),
+        c("keywords:forbidden_words", forbidden_words=["omega"]),
+    ]
+    # Under strict evaluation, blank scores [False, False]. A safe nonblank
+    # response scores [False, True]. The full pair is UNSAT because sentence<1
+    # cannot ever receive strict credit.
+    out = search.select_best_postvalidated(
+        contracts,
+        [
+            {"response": "", "checker_results": [False, False]},
+            {"response": "alpha", "checker_results": [False, True]},
+        ],
+    )
+    assert out["status"] == "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED"
+    assert out["pointwise_optimal"] is True
+    assert out["best_candidate"]["checker_results"] == [False, True]
+    assert out["best_candidate"]["score_numerator"] == 1
+    assert out["best_candidate"]["score_denominator"] == 4
+    reasons = out["certificate"]["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
+    assert "STRICT_EVALUATOR_SENTENCE_LT_ONE_UNSAT" in reasons
