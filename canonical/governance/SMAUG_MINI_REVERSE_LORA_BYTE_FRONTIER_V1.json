@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_SMAUG_MINI_REVERSE_LORA_BYTE_FRONTIER_V1",
+  "date": "2026-10-04",
+  "status": "MATHEMATICAL_RESOURCE_FRONTIER__CONSERVATIVE_ALL_MAJOR_LANGUAGE_PROJECTIONS_ENVELOPE__TARGET_MODULE_SET_AND_REQUIRED_RANK_STILL_UNPROVED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "parent_route": "canonical/governance/SMAUG_MINI_REVERSE_LORA_COMPRESSED_DELTA_ROUTE_V1.json",
+  "public_architecture_facts": {
+    "base": "Qwen/Qwen3.8-27B",
+    "main_language_layers": 64,
+    "full_attention_layers": 16,
+    "gated_deltanet_layers": 48,
+    "hidden_size": 5120,
+    "intermediate_size": 17408,
+    "linear_num_key_heads": 16,
+    "linear_key_head_dim": 128,
+    "linear_num_value_heads": 48,
+    "linear_value_head_dim": 128,
+    "full_attention_q_proj_out": 12288,
+    "full_attention_k_proj_out": 1024,
+    "full_attention_v_proj_out": 1024,
+    "full_attention_o_proj_in": 6144,
+    "smaug_adaptation": "LORA_MERGED_AS_FULL_DELTA__LANGUAGE_TRUNK_ONLY",
+    "mtp_state": "INHERITED_FROM_BASE_AND_NOT_RETRAINED_AGAINST_UPDATED_TRUNK"
+  },
+  "conservative_projection_envelope": {
+    "interpretation": "RESOURCE_BOUND_IF_EVERY_MAJOR_MAIN_TRUNK_PROJECTION_LISTED_BELOW_REQUIRED_A_RANK_R_LORA_FACTOR_PAIR__NOT_A_CLAIM_THIS_WAS_THE_ORIGINAL_TARGET_MODULE_SET",
+    "mlp": {
+      "modules_per_layer": ["gate_proj","up_proj","down_proj"],
+      "layers": 64,
+      "sum_in_plus_out_per_rank": 4325376
+    },
+    "full_attention": {
+      "modules_per_layer": ["q_proj","k_proj","v_proj","o_proj"],
+      "layers": 16,
+      "sum_in_plus_out_per_rank": 655360
+    },
+    "gated_deltanet": {
+      "modules_per_layer": ["in_proj_qkv","in_proj_z","out_proj","in_proj_a","in_proj_b"],
+      "layers": 48,
+      "derived_linear_qk": 2048,
+      "derived_linear_v": 6144,
+      "sum_in_plus_out_per_rank": 2314752
+    },
+    "total_adapter_parameters_per_rank": 7295488,
+    "bf16_bytes_per_rank": 14590976,
+    "formula": "BF16_ADAPTER_BYTES_APPROX = 14590976 * RANK__PLUS_SMALL_SERIALIZATION_METADATA"
+  },
+  "rank_frontier": [
+    {"rank":8,"bf16_adapter_bytes":116727808,"bf16_adapter_gb_decimal":0.116728},
+    {"rank":16,"bf16_adapter_bytes":233455616,"bf16_adapter_gb_decimal":0.233456},
+    {"rank":32,"bf16_adapter_bytes":466911232,"bf16_adapter_gb_decimal":0.466911},
+    {"rank":64,"bf16_adapter_bytes":933822464,"bf16_adapter_gb_decimal":0.933822},
+    {"rank":96,"bf16_adapter_bytes":1400733696,"bf16_adapter_gb_decimal":1.400734},
+    {"rank":128,"bf16_adapter_bytes":1867644928,"bf16_adapter_gb_decimal":1.867645},
+    {"rank":192,"bf16_adapter_bytes":2801467392,"bf16_adapter_gb_decimal":2.801467},
+    {"rank":256,"bf16_adapter_bytes":3735289856,"bf16_adapter_gb_decimal":3.73529}
+  ],
+  "composition_with_current_small_base_candidate": {
+    "qwen_q2_exact_candidate_bytes": 9828981664,
+    "qwen_q2_subject": "Qwen3.8-27B-UD-Q2_K_XL.gguf",
+    "conditional_combined_bytes_if_adapter_rank_64_passes": 10762804128,
+    "conditional_combined_gb_decimal_if_rank_64": 10.762804,
+    "conditional_combined_bytes_if_adapter_rank_128_passes": 11696626592,
+    "conditional_combined_gb_decimal_if_rank_128": 11.696627,
+    "smaug_q4_candidate_bytes": 16547400480,
+    "conditional_reduction_vs_smaug_q4_rank64_percent": 34.955,
+    "conditional_reduction_vs_smaug_q4_rank128_percent": 29.314,
+    "more_important_system_effect": "IF_THE_QWEN_BASE_IS_ALREADY_INTERNALIZED_FOR_OTHER_CAPABILITIES__THE_INCREMENTAL_DURABLE_STATE_FOR_THE_SMAUG_BEHAVIORAL_DELTA_IS_THE_ADAPTER_ONLY__ABOUT_0_934_GB_AT_R64_OR_1_868_GB_AT_R128"
+  },
+  "minimum_action_policy": [
+    "DO_NOT_ASSUME_ORIGINAL_LORA_RANK",
+    "RECOVER_CHANGED_TENSOR_SET_FIRST",
+    "FIT_ASCENDING_RANKS_AND_RECORD_PER_TENSOR_RESIDUAL_ENERGY",
+    "QUALIFY_THE_SMALLEST_COMBINED_EXECUTION_SUBJECT_THAT_MEETS_FIXED_CAPABILITY_THRESHOLDS",
+    "ESCALATE_RANK_ONLY_ON_VERIFIED_FAILURE",
+    "AFTER_A_PASS__OPTIONALLY_QUANTIZE_ADAPTER_FACTORS_AND_REQUALIFY__NEVER_TRANSFER_BF16_ADAPTER_CREDIT"
+  ],
+  "breakthrough": {
+    "statement": "THE MERGED 55_6_GB SMAUG RELEASE IS NOT THE CORRECT DURABLE_STATE UNIT FOR THIS TERMINAL_ARCHITECTURE_IF_A_SHARED_QWEN_BASE_ALREADY_EXISTS__THE LOAD_BEARING SMAUG_DELTA MAY BE SUB_GB_TO_LOW_SINGLE_DIGIT_GB AT PRACTICAL LOW_RANKS",
+    "why_it_matters": "IT TURNS THE ACQUISITION PROBLEM FROM REPLICATING_ANOTHER_FULL_27B_MODEL INTO RECOVERING_AND_QUALIFYING_A_SMALL_INCREMENTAL_CAPABILITY_DELTA_OVER_A_SHARED_BASE",
+    "strongest_current_numeric_example": "RANK64_ALL_MAJOR_PROJECTION_ENVELOPE_IS_933822464_BF16_BYTES__ABOUT_17_7_TIMES_SMALLER_THAN_THE_16547400480_BYTE_SMAUG_Q4_CHECKPOINT_AS_INCREMENTAL_STATE"
+  },
+  "hard_nonclaims": [
+    "ORIGINAL_LORA_RANK_IS_NOT_PUBLICLY_ESTABLISHED",
+    "ORIGINAL_TARGET_MODULE_SET_IS_NOT_PUBLICLY_ESTABLISHED",
+    "RANK64_OR_RANK128_PASSING_IS_NOT_ESTABLISHED",
+    "THE_ALL_MAJOR_PROJECTION_ENVELOPE_IS_A RESOURCE_FORMULA_NOT_AN_ASSERTION_OF_ORIGINAL_TRAINING_CONFIGURATION",
+    "COMPOSITION_WITH_Q2_REQUIRES FRESH EXACT_SUBJECT REQUALIFICATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
