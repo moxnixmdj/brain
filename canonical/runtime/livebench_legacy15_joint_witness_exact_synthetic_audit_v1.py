@@ -150,6 +150,9 @@ def _case_id(ids: tuple[str, ...], profile_name: str, prompt: str) -> str:
 
 def run_audit(livebench_root: Path) -> dict[str, Any]:
     registry = _install_frozen_import(livebench_root)
+    missing_registry_ids = sorted(set(shapes.ACTIVE_IDS) - set(registry.INSTRUCTION_DICT))
+    if missing_registry_ids:
+        raise RuntimeError("PINNED_REGISTRY_MISSING_ACTIVE_IDS:" + ",".join(missing_registry_ids))
     id_sets = shapes.enumerate_compatible_sets()
     if len(id_sets) != 928:
         raise RuntimeError("IDENTITY_SET_COUNT_DRIFT")
