@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_REPAIRED_CLASS_SPOOF_FALSIFIER_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FALSIFIED__REPAIRED_V6_ISINSTANCE_DOMAIN_STILL_NOT_TOTAL__CLASS_SPOOF_PROXY_COUNTEREXAMPLE__NO_ADDITIONAL_ACCEPTANCE_DELTA",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "already_revoked_current_state": "12_PROVED__26_UNRESOLVED__ZERO_UNKNOWN_DOMAIN_ATOMIC_CREDIT",
+  "falsified_candidate": {
+    "branch": "breakthrough/unknown-domain-v6-subclass-revocation-20261005",
+    "generator_path": "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py",
+    "generator_git_blob_sha": "d087601a62a0b8ec9ab264487fb0b27a6246b977",
+    "proof_path": "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py",
+    "proof_git_blob_sha": "4a3e72b365ffa7e163abc63d197fcd386bdd104d",
+    "regression_path": "canonical/tests/test_unknown_domain_direct_v5.py",
+    "regression_git_blob_sha": "c98733407d594c3fa5713de5742022325463f390"
+  },
+  "exact_counterexamples": [
+    {
+      "name": "FAKE_STR_VIA_CLASS_PROPERTY",
+      "construction": "class FakeStr: @property def __class__(self): return str",
+      "facts": [
+        "isinstance(FakeStr(), str) == True",
+        "FakeStr() is not an actual str instance in the runtime type hierarchy",
+        "str.strip(FakeStr()) raises TypeError because the built-in descriptor requires a genuine str object"
+      ],
+      "consequence": "The repaired _beacon_gate can admit a non-str proxy through isinstance and then fail in str.strip, so totality over the stated isinstance-accepted domain is false."
+    },
+    {
+      "name": "FAKE_BYTES_VIA_CLASS_PROPERTY",
+      "construction": "class FakeBytes: @property def __class__(self): return bytes",
+      "facts": [
+        "isinstance(FakeBytes(), bytes) == True",
+        "FakeBytes() is not an actual bytes instance in the runtime type hierarchy",
+        "memoryview(FakeBytes()) raises TypeError because no real buffer protocol is present"
+      ],
+      "consequence": "The repaired _secret_bytes_total can admit a non-bytes proxy through isinstance and then fail during memoryview materialization."
+    }
+  ],
+  "scope_truth": [
+    "THE_PRODUCTION_BEACON_IS_GOVERNANCE_FROZEN_AS_A_LITERAL_TEXT_ENCODING_OF_A_GITHUB_ACTIONS_RUN_ID__NOT_AN_ARBITRARY_PROXY_OBJECT",
+    "THE_FROZEN_EVALUATOR_DESIGN_REQUIRES_AN_EVALUATOR_ONLY_SECRET__THE_PRIOR_UNIVERSAL_PROOF_NEEDLESSLY_OVERQUANTIFIED_THE_PYTHON_OBJECT_API_DOMAIN",
+    "A_VALID_SUCCESSOR_MUST_EITHER_PROVE_THE_REACHABLE_PRODUCTION_INPUT_DOMAIN_IS_GENUINE_STR_OR_BYTES_TYPE_HIERARCHY_ONLY_AND_GATE_ON_THAT_DOMAIN__OR_TOTALIZE_EVERY_ISINSTANCE_SPOOFABLE_PROXY_WITHOUT_CHANGING_EVALUATOR_SEMANTICS"
+  ],
+  "required_repair": [
+    "RETIRE_ISINSTANCE_ACCEPTED_OBJECTS_AS_THE_LOAD_BEARING_TOTALITY_DOMAIN",
+    "BIND_THE_SUCCESSOR_THEOREM_TO_THE_ACTUAL_REACHABLE_PRODUCTION_BEACON_AND_SECRET_TYPE_DOMAIN",
+    "USE_A_NON_SPOOFABLE_GENUINE_RUNTIME_TYPE_HIERARCHY_GATE",
+    "REGRESS_REAL_ADVERSARIAL_STR_BYTES_SUBCLASSES_AND_FAKE___CLASS___PROXIES_SEPARATELY",
+    "INDEPENDENTLY_VERIFY_EXACT_SUCCESSOR_BYTES_BEFORE_ANY_REPROMOTION"
+  ],
+  "hard_nonclaims": [
+    "THIS_FALSIFIER_DOES_NOT_REDUCE_ACCEPTANCE_BELOW_THE_ALREADY_REVOKED_12_OF_38_STATE",
+    "THIS_FALSIFIER_DOES_NOT_CLAIM_THE_REACHABLE_PRODUCTION_DOMAIN_PROOF_IS_ALREADY COMPLETE",
+    "NO_FRESH_REALITY_OR_TERMINAL_CASES_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
