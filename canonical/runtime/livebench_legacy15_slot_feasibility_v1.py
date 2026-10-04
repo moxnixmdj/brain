@@ -25,7 +25,7 @@ HISTORICAL_GENERATOR_BLOB = "6ff390d6885cf90f88d9d36959735cb327613edc"
 
 NTH = "length_constraints:nth_paragraph_first_word"
 FORBIDDEN = "keywords:forbidden_words"
-END = "startend:end_checker"
+END = "startend:end_checker"\nSECTIONS = "detectable_format:multiple_sections"
 
 
 def _slots_by_id(contracts: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
