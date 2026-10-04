@@ -506,6 +506,14 @@
       "root1_only_after": 1,
       "path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
       "projection_path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json"
+    },
+    "root2_current_touching_predicate_count": 18,
+    "root2_post_livebench_18_rebind": {
+      "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
+      "git_blob_sha": "f778e8eeb1295a03465a4cc6d49c3efab2ff80bb",
+      "verification_path": "canonical/verification/POST_LIVEBENCH_ROOT2_REBIND_CONNECTOR_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "569fad34651f724d0746a09a3413a8ca7258d928",
+      "status": "CURRENT_18_PREDICATE_SCHEDULING_REBIND"
     }
   },
   "accounting": {
@@ -647,7 +655,7 @@
     "workflow_run_id": 37168503920
   },
   "root_partition_transport": {
-    "status": "CANDIDATE_APPLIED__INDEPENDENT_EXACT_ROOT_STATE_TRANSPORT_VERIFICATION_REQUIRED",
+    "status": "ACTIVE_POST_LIVEBENCH_PARTITION__18_ROOT2_TOUCHING__ZERO_ACCEPTANCE_CREDIT",
     "source_root_git_blob_sha": "36ac53134b123cfed7e63c31a871a30f9b4579e4",
     "reclassification_git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684",
     "projection_git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99",
@@ -658,6 +666,13 @@
       "conclusion": "success"
     },
     "acceptance_counts_unchanged": true,
-    "new_acceptance_credit": 0
+    "new_acceptance_credit": 0,
+    "rebind_activation": {
+      "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
+      "git_blob_sha": "f778e8eeb1295a03465a4cc6d49c3efab2ff80bb",
+      "verification_path": "canonical/verification/POST_LIVEBENCH_ROOT2_REBIND_CONNECTOR_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "569fad34651f724d0746a09a3413a8ca7258d928",
+      "status": "CURRENT_18_PREDICATE_SCHEDULING_REBIND"
+    }
   }
 }
