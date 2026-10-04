@@ -511,5 +511,52 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertEqual(out["inputs"]["text"],"PROJECT BRAIN")
         self.assertEqual(out["inputs"]["output_path"],"canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png")
 
+
+    def test_exact_literal_response_compiles_without_capability_acquisition(self):
+        out=compiler.compile_goal(
+            "Reply with exactly SYNTHETIC_OK.",
+            self.registry(),ROOT,
+        )
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_EXACT_LITERAL_RESPONSE")
+        self.assertTrue(out["clause_coverage_verified"])
+        self.assertEqual(out["controller_actions"],[
+            {"type":"finish","args":{"summary":"SYNTHETIC_OK"}}
+        ])
+        self.assertEqual(out["finish_summary"],"SYNTHETIC_OK")
+
+    def test_exact_literal_response_generalizes_to_unrelated_safe_token(self):
+        out=compiler.compile_goal(
+            "Respond with exactly ROUTE_42.",
+            self.registry(),ROOT,
+        )
+        self.assertEqual(out["finish_summary"],"ROUTE_42")
+
+    def test_exact_literal_response_preserves_quoted_spaces(self):
+        out=compiler.compile_goal(
+            'Output exactly "hello neutral world".',
+            self.registry(),ROOT,
+        )
+        self.assertEqual(out["finish_summary"],"hello neutral world")
+
+    def test_exact_literal_response_rejects_ambiguous_unquoted_phrase(self):
+        with self.assertRaisesRegex(
+            compiler.GoalCompilationFailure,
+            "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+        ):
+            compiler.compile_goal(
+                "Reply with exactly hello neutral world.",
+                {},ROOT,
+            )
+
+    def test_exact_literal_response_does_not_capture_explanatory_goal(self):
+        with self.assertRaisesRegex(
+            compiler.GoalCompilationFailure,
+            "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+        ):
+            compiler.compile_goal(
+                "Explain exactly why the neutral example works.",
+                {},ROOT,
+            )
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
