@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_IFEVAL_EXACT_CONTRACT_MAP_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_541_ROW_EXACT_CONTRACT_COMPILER__ZERO_TERMINAL_EXPOSURE__LINEAGE_COVERAGE_UNPROVED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_73775_EXACT_EQUAL_TASK_MEAN",
+  "verified_context": {
+    "frozen_population_dispatch": "ALL_200_FROZEN_ROWS_USE_LEGACY_IFEVAL__MODERN_IFBENCH_ROWS_ZERO",
+    "verification_path": "canonical/verification/LIVEBENCH_FROZEN_POPULATION_DISPATCH_METADATA_VERIFICATION_20261004_V1.json"
+  },
+  "public_sources": {
+    "classic_ifeval": {
+      "repository": "google-research/google-research",
+      "commit": "e49bbfe381c9c0e564b937f1c4e163a2273c65cc",
+      "path": "instruction_following_eval/data/input_data.jsonl",
+      "git_blob_sha": "cbe52f6eecf3986fdac745b4acba4da1408eb146",
+      "rows": 541,
+      "instruction_instances": 834
+    },
+    "livebench_formatter_provenance": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "path": "livebench/if_runner/instruction_following_eval/json_formatter.py",
+      "git_blob_sha": "36a58716f87f313f74c27ef59557882acd48d8a3",
+      "observed_transform": "READ_LEGACY_input_data_jsonl__RENAME_prompt_TO_turns__RENAME_key_TO_question_id__WRAP_turns_IN_SINGLE_ELEMENT_LIST__ADD_instruction_following_CATEGORY"
+    }
+  },
+  "breakthrough": {
+    "mechanism": "PUBLIC_CLASSIC_IFEVAL_PROMPT_UTF8_SHA256_TO_EXACT_PUBLIC_instruction_id_list_AND_kwargs",
+    "effect": "FOR_ANY_VISIBLE_SUCCESSOR_PROMPT_THAT_IS_BYTE_IDENTICAL_TO_A_PINNED_PUBLIC_CLASSIC_IFEVAL_PROMPT__RECOVER_THE_COMPLETE_SCORE_RELEVANT_PUBLIC_CONTRACT_WITHOUT_NLP_PARSING_OR_TERMINAL_FEEDBACK",
+    "unknown_prompt_behavior": "FAIL_CLOSED__NO_FUZZY_MATCH__NO_SEMANTIC_GUESS",
+    "why_it_matters": "THIS ELIMINATES THE PARAPHRASE_TOLERANT_PARSER AS A REQUIREMENT FOR THE EXACT-MATCH SUBSET_AND_TURNS_LINEAGE_COVERAGE_INTO_THE_ONLY OPEN QUESTION FOR THAT SUBSET"
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/livebench_public_ifeval_contract_map_v1.py",
+    "tests": "canonical/tests/test_livebench_public_ifeval_contract_map_v1.py",
+    "compiled_asset_contains_prompt_text": false,
+    "compiled_asset_contains_only_prompt_hashes_and_public_contractS": true
+  },
+  "activation_preconditions": [
+    "INDEPENDENTLY_VERIFY_THE_PINNED_541_ROW_834_INSTRUCTION_PUBLIC_CORPUS_COMPILATION",
+    "INDEPENDENTLY_VERIFY_THE_PINNED_LIVEBENCH_FORMATTER_PROVENANCE_SOURCE",
+    "DO_NOT_ASSUME_ANY_FROZEN_200_PROMPT_EXACTLY_MATCHES_THE_PUBLIC_CORPUS_BEFORE_AN_ADMISSIBLE_NONCONTAMINATING_BINDING_EXISTS",
+    "PRECOMMIT_THE_LOOKUP_BYTES_AND_FAILURE_POLICY_BEFORE_ANY_FRESH_TERMINAL_SUCCESSOR_EXECUTION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FROZEN_200_PROMPTS_ARE_BYTE_IDENTICAL_TO_GOOGLE_IFEVAL_PROMPTS",
+    "NO_CLAIM_OF_TERMINAL_COVERAGE_PERCENT",
+    "NO_TERMINAL_PROMPT_KWARGS_INSTRUCTION_ID_RESPONSE_OR_SCORE_READ",
+    "NO_LIVEBENCH_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
