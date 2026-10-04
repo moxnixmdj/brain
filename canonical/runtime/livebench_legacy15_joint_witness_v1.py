@@ -23,6 +23,11 @@ SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_JOINT_WITNESS_V1"
 class JointWitnessError(ValueError):
     pass
 
+
+class ProvedUnsat(JointWitnessError):
+    """The visible public checker conjunction has a literal contradiction."""
+    pass
+
 def _slots(c: dict[str, Any]) -> dict[str, Any]:
     return dict(c.get("slots") or {})
 
@@ -80,6 +85,61 @@ def _get_one(constraints: list[dict[str, Any]], iid: str) -> dict[str, Any] | No
     if len(xs) > 1:
         raise JointWitnessError("DUPLICATE_ACTIVE_CONSTRAINT:" + iid)
     return xs[0] if xs else None
+
+
+def _alpha_tokens(text: str) -> set[str]:
+    return set(re.findall(r"[A-Za-z]+", str(text or "").lower()))
+
+
+def _prove_unsat(constraints: list[dict[str, Any]]) -> str | None:
+    """Return a source-semantic contradiction certificate, else None.
+
+    These are not solver failures. Each certificate is a direct conjunction of
+    two exact public checker obligations that no response can satisfy.
+    """
+    forbidden = {w.lower() for w in _forbidden(constraints)}
+
+    sections = _get_one(constraints, "detectable_format:multiple_sections")
+    if sections is not None:
+        splitter = str(_slots(sections).get("section_spliter") or "")
+        collision = sorted(_alpha_tokens(splitter) & forbidden)
+        if collision:
+            return "MANDATORY_SECTION_SPLITTER_FORBIDDEN:" + ",".join(collision)
+
+    end = _get_one(constraints, "startend:end_checker")
+    if end is not None:
+        phrase = str(_slots(end).get("end_phrase") or "")
+        collision = sorted(_alpha_tokens(phrase) & forbidden)
+        if collision:
+            return "MANDATORY_END_PHRASE_FORBIDDEN:" + ",".join(collision)
+
+    nth = _get_one(constraints, "length_constraints:nth_paragraph_first_word")
+    if nth is not None:
+        first = str(_slots(nth).get("first_word") or "").lower()
+        if first and first in forbidden:
+            return "MANDATORY_NTH_FIRST_WORD_FORBIDDEN:" + first
+
+    sentence = _get_one(constraints, "length_constraints:number_sentences")
+    if sentence is not None:
+        ss = _slots(sentence)
+        if str(ss.get("relation") or "") == "less than" and int(ss.get("num_sentences")) == 1:
+            ids = {str(row.get("instruction_id") or "") for row in constraints}
+            nonempty_ids = {
+                "keywords:existence",
+                "length_constraints:nth_paragraph_first_word",
+                "detectable_content:postscript",
+                "detectable_format:number_bullet_lists",
+                "detectable_format:title",
+                "detectable_format:multiple_sections",
+                "startend:end_checker",
+            }
+            if ids & nonempty_ids:
+                return "SENTENCE_LT1_CONFLICTS_WITH_MANDATORY_NONEMPTY_OUTPUT"
+            words = _get_one(constraints, "length_constraints:number_words")
+            if words is not None and str(_slots(words).get("relation") or "") == "at least":
+                return "SENTENCE_LT1_CONFLICTS_WITH_WORD_LOWER_BOUND"
+
+    return None
 
 def _special_json(constraints: list[dict[str, Any]]) -> str:
     import json
@@ -142,6 +202,15 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
     end = _get_one(constraints, "startend:end_checker")
     sentence = _get_one(constraints, "length_constraints:number_sentences")
     words = _get_one(constraints, "length_constraints:number_words")
+
+    if sentence is not None:
+        ss = _slots(sentence)
+        if str(ss.get("relation") or "") == "less than" and int(ss.get("num_sentences")) == 1:
+            # _prove_unsat already rejected every generated conjunction that
+            # forces semantic content. Empty text has zero Punkt sentences;
+            # two quotes preserve QuotationChecker while retaining no lexical
+            # content. A less-than word bound remains satisfied at zero words.
+            return '""' if quote else ""
 
     body_parts: list[str] = []
     if title:
@@ -293,6 +362,20 @@ def solve(prompt: str) -> dict[str, Any]:
     outside = sorted(set(ids) - set(ACTIVE_IDS))
     if outside:
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "error": "OUTSIDE_FROZEN_ACTIVE15:" + ",".join(outside), "response": None}
+
+    unsat = _prove_unsat(constraints)
+    if unsat is not None:
+        return {
+            "schema": SCHEMA,
+            "status": "PROVED_UNSAT_PUBLIC_CHECKER_CONJUNCTION",
+            "unsat_certificate": unsat,
+            "response": None,
+            "instruction_ids": ids,
+            "terminal_case_content_used": False,
+            "terminal_case_metadata_used": False,
+            "model_dependency_count": 0,
+            "acceptance_credit": False,
+        }
 
     try:
         json_c = _get_one(constraints, "detectable_format:json_format")
