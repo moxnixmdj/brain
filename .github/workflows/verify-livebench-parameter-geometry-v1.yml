@@ -1,0 +1,85 @@
+name: Verify LiveBench parameter geometry V1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_legacy15_general_composer_v1.py"
+      - "canonical/runtime/livebench_legacy15_parameter_geometry_v1.py"
+      - "canonical/tests/test_livebench_legacy15_general_composer_section_boundary_v1.py"
+      - "canonical/tests/test_livebench_legacy15_parameter_geometry_v1.py"
+      - ".github/workflows/verify-livebench-parameter-geometry-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install verifier dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest==8.4.2 nltk==3.9.2 langdetect==1.0.9 immutabledict==4.2.1
+
+      - name: Checkout exact frozen LiveBench scorer
+        run: |
+          git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/livebench
+          git -C /tmp/livebench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
+          test "$(git -C /tmp/livebench hash-object livebench/if_runner/instruction_following_eval/instructions.py)" = "4997bab885a676d92545fd91a9a20b48d234a2b2"
+          test "$(git -C /tmp/livebench hash-object livebench/if_runner/instruction_following_eval/instructions_util.py)" = "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+          test "$(git -C /tmp/livebench hash-object livebench/if_runner/instruction_following_eval/instructions_registry.py)" = "903ed738398648c7cfac61d5ffa478c22f1f0891"
+
+      - name: Run Brain unit proofs
+        run: |
+          python -m pytest -q             canonical/tests/test_livebench_legacy15_parameter_geometry_v1.py             canonical/tests/test_livebench_legacy15_general_composer_section_boundary_v1.py
+
+      - name: Verify geometry against exact pinned checker classes
+        env:
+          PYTHONPATH: /tmp/livebench/livebench/if_runner
+        run: |
+          python - <<'PY'
+          from instruction_following_eval import instructions_registry as registry
+
+          section = registry.INSTRUCTION_DICT["detectable_format:multiple_sections"](
+              "detectable_format:multiple_sections"
+          )
+          section.build_description(section_spliter="Section", num_sections=2)
+          forbidden = registry.INSTRUCTION_DICT["keywords:forbidden_words"](
+              "keywords:forbidden_words"
+          )
+          forbidden.build_description(forbidden_words=["section"])
+          response = "Section1\nzxqv\nSection2\nzxqv"
+          assert section.check_following(response)
+          assert forbidden.check_following(response)
+
+          end = registry.INSTRUCTION_DICT["startend:end_checker"](
+              "startend:end_checker"
+          )
+          end.build_description(end_phrase="Any other questions?")
+          end_forbidden = registry.INSTRUCTION_DICT["keywords:forbidden_words"](
+              "keywords:forbidden_words"
+          )
+          end_forbidden.build_description(forbidden_words=["other"])
+          forced_end = "Any other questions?"
+          assert end.check_following(forced_end)
+          assert not end_forbidden.check_following(forced_end)
+
+          nth = registry.INSTRUCTION_DICT["length_constraints:nth_paragraph_first_word"](
+              "length_constraints:nth_paragraph_first_word"
+          )
+          nth.build_description(num_paragraphs=1, nth_paragraph=1, first_word="river")
+          nth_forbidden = registry.INSTRUCTION_DICT["keywords:forbidden_words"](
+              "keywords:forbidden_words"
+          )
+          nth_forbidden.build_description(forbidden_words=["river"])
+          forced_first = "river"
+          assert nth.check_following(forced_first)
+          assert not nth_forbidden.check_following(forced_first)
+
+          print("PASS__EXACT_PINNED_PARAMETER_GEOMETRY")
+          PY
