@@ -11,7 +11,7 @@
     "proof_path": "canonical/runtime/unknown_domain_direct_v3_universal_proof_v1.py",
     "proof_git_blob_sha": "33e97833f6bbe1c3c2a9c91090afdad3e55c134e",
     "tests_path": "canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py",
-    "tests_git_blob_sha": "dd38751d1631efe58c297d157e4c278ca33b27b3"
+    "tests_git_blob_sha": "bfe9ac244418fe30bcc9a0e34644ecf22846bd9c"
   },
   "theorem_candidate": "FOR_EVERY_VALID_SECRET_AND_BEACON__EVERY_27_CASE_POPULATION_EMITTED_BY_THE_EXACT_COLLISION_TOTALIZED_V3_GENERATOR_IS_PASSED_BY_THE_EXACT_FROZEN_V2_CANDIDATE_THROUGH_THE_EXACT_FROZEN_HARNESS_AND_SCORER",
   "proof_components": [
