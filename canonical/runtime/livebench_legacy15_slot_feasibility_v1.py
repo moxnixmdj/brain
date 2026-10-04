@@ -24,7 +24,6 @@ PINNED_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 HISTORICAL_GENERATOR_BLOB = "6ff390d6885cf90f88d9d36959735cb327613edc"
 
 NTH = "length_constraints:nth_paragraph_first_word"
-EXISTENCE = "keywords:existence"
 FORBIDDEN = "keywords:forbidden_words"
 END = "startend:end_checker"
 
