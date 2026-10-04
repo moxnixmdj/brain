@@ -89,16 +89,37 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
     # (e.g. "Section1"), which preserves its regex match while destroying the
     # trailing word boundary required by ForbiddenWords for "section".
 
-    if SENTENCE in by_id and END in by_id:
+    if SENTENCE in by_id:
         sentence = by_id[SENTENCE]
         relation = str(sentence.get("relation", "")).strip().casefold()
         try:
             threshold = int(sentence.get("num_sentences"))
         except (TypeError, ValueError):
             threshold = -1
-        end_phrase = str(by_id[END].get("end_phrase", "")).strip()
-        if relation == "less than" and threshold == 1 and end_phrase in PUBLIC_END_PHRASES:
-            reasons.append("SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE")
+
+        if relation == "less than" and threshold == 1:
+            # Exact NLTK 3.9.2 Punkt geometry used by the frozen checker:
+            # its final slice is text.rstrip(), and the slice is emitted when
+            # nonempty. Hence count_sentences(text) == 0 implies whitespace-only.
+            # Any checker that requires non-whitespace output is jointly UNSAT.
+            if END in by_id:
+                end_phrase = str(by_id[END].get("end_phrase", "")).strip()
+                if end_phrase in PUBLIC_END_PHRASES:
+                    reasons.append("SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE")
+
+            for iid in (EXISTENCE, NTH, POSTSCRIPT, BULLETS, TITLE, SECTIONS, QUOTATION):
+                if iid in by_id:
+                    reasons.append("SENTENCE_LT_ONE_WITH_NONEMPTY_REQUIREMENT:" + iid)
+
+            if WORDS in by_id:
+                word_slots = by_id[WORDS]
+                if str(word_slots.get("relation", "")).strip().casefold() == "at least":
+                    try:
+                        word_target = int(word_slots.get("num_words"))
+                    except (TypeError, ValueError):
+                        word_target = -1
+                    if word_target > 0:
+                        reasons.append("SENTENCE_LT_ONE_WITH_POSITIVE_WORD_LOWER_BOUND")
 
     return tuple(reasons)
 
