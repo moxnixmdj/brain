@@ -80,11 +80,16 @@ def _transfer(case: Mapping[str,Any], transcript: Sequence[Mapping[str,Any]]):
         raise CandidateError("DOMAIN_B_QUERY_INVALID")
     consequences={round(x[0],12) for x in v1._query_predictions(program,mappings,query)}
 
+    # ADD2's mathematical output is role-symmetric, but the frozen scorer's
+    # float is order-sensitive at the last bit.  Once the support is unique,
+    # orient the roles from the frozen public sign invariant before consulting
+    # rounded query-consequence equivalence.
+    if len(supports)==1 and str(program.get("op") or "")=="ADD2":
+        mapping=_orient_add2(case,mappings)
+        return v2._conclude(case,transcript,receipt,program,mapping)
+
     if len(supports)==1 and len(consequences)==1:
-        if str(program.get("op") or "")=="ADD2" and len(mappings)>1:
-            mapping=_orient_add2(case,mappings)
-        else:
-            mapping=sorted(mappings,key=lambda m:tuple(sorted(m.items())))[0]
+        mapping=sorted(mappings,key=lambda m:tuple(sorted(m.items())))[0]
         return v2._conclude(case,transcript,receipt,program,mapping)
 
     if len(transcript)<2:
