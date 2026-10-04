@@ -4,9 +4,12 @@ on:
   pull_request:
     paths:
       - 'canonical/runtime/livebench_public_grammar_compiler_v2.py'
+      - 'canonical/runtime/livebench_public_checker_inversion_cut_v1.py'
       - 'canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py'
       - 'canonical/tests/test_livebench_public_grammar_compiler_v2.py'
+      - 'canonical/tests/test_livebench_public_checker_inversion_cut_v1.py'
       - 'canonical/governance/LIVEBENCH_ROOT1_PUBLIC_GRAMMAR_SUCCESSOR_CANDIDATE_V1.json'
+      - 'canonical/governance/LIVEBENCH_PUBLIC_CHECKER_INVERSION_CUT_V1.json'
       - '.github/workflows/verify-livebench-root1-public-grammar-v1.yml'
   workflow_dispatch:
 
@@ -23,7 +26,7 @@ jobs:
           python-version: '3.11'
       - name: Compile successor
         run: |
-          python -m py_compile             canonical/runtime/livebench_public_grammar_compiler_v2.py             canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py
+          python -m py_compile canonical/runtime/livebench_public_grammar_compiler_v2.py canonical/runtime/livebench_public_checker_inversion_cut_v1.py canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py
       - name: Run focused successor tests
         run: |
-          python -m unittest -v canonical.tests.test_livebench_public_grammar_compiler_v2
+          python -m unittest -v canonical.tests.test_livebench_public_grammar_compiler_v2 canonical.tests.test_livebench_public_checker_inversion_cut_v1
