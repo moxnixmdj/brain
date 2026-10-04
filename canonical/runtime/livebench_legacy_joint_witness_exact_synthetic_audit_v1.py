@@ -2,7 +2,7 @@
 """Exact frozen-checker synthetic audit for legacy joint witness V1.
 
 Enumerates every conflict-compatible family set of size 1..5 from the recovered
-historical generator pool, renders public build_description() text with
+exact frozen active-15 family set, renders public build_description() text with
 deterministic parameters, solves from visible prompt only, then invokes the exact
 frozen legacy check_following predicates as postconditions.
 
@@ -128,7 +128,7 @@ def main() -> int:
     from instruction_following_eval import instructions_registry as registry
 
     ids = tuple(sorted(solver.HISTORICAL_GENERATOR_IDS))
-    assert len(ids) == 24
+    assert len(ids) == 15
     assert "language:response_language" not in ids
 
     conflicts = {k: set(v) for k, v in registry.INSTRUCTION_CONFLICTS.items()}
@@ -202,7 +202,7 @@ def main() -> int:
         },
         "scope": {
             "terminal_rows_read": 0,
-            "historical_generator_family_count": len(ids),
+            "exact_frozen_active15_family_count": len(ids),
             "family_ids": list(ids),
             "compatible_family_sets_size_1_to_5": len(combos),
             "orders_per_family_set": 2,
@@ -228,9 +228,11 @@ def main() -> int:
             "SYNTHETIC_PUBLIC_SOURCE_COMPOSITION_EVIDENCE_ONLY",
         ],
     }
+    proof_pass = blocked == 0 and exact_pass == total
+    result["results"]["proof_pass"] = proof_pass
     Path(args.output).write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     print(json.dumps(result["results"], sort_keys=True))
-    return 0
+    return 0 if proof_pass else 1
 
 
 if __name__ == "__main__":
