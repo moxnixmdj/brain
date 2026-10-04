@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_FAIL_CLOSED__ZERO_REALITY_REPAIR_READY_FOR_INDEPENDENT_VERIFICATION",
+  "real_objective": "Preserve the literal accepted-input quantifier of the Unknown-Domain universal zero-reality proof so it can safely advance UNKNOWN_DOMAIN_ADAPTATION toward strict Opus 5.5 acceptance without consuming terminal or production evidence.",
+  "governing_invariants": [
+    "TERMINAL_OBJECTIVE_IS_PERMANENT_BRAIN_OWNERSHIP_OF_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL",
+    "CORRECTNESS_BEFORE_CREDIT",
+    "NO_FRESH_REALITY_WHEN_DEDUCTIVE_REPAIR_SUFFICES",
+    "CLAIM_SCOPE_MUST_NOT_EXCEED_EVIDENCE_SCOPE",
+    "ZERO_ACCEPTANCE_OR_OWNERSHIP_CREDIT_BEFORE_INDEPENDENT_CONTENT_BOUND_VERIFICATION_AND_SEPARATE_ACCEPTANCE_REDUCTION"
+  ],
+  "material_premises": [
+    "Generator V5 admits values with isinstance(beacon,str) and isinstance(secret,str|bytes).",
+    "Python str and bytes subclasses can override instance methods while still satisfying isinstance.",
+    "The pre-repair V5 path invoked beacon.strip(), text.encode(), and secret.encode() through overridable instance dispatch.",
+    "Therefore a subclass can satisfy the declared type gate yet throw before canonicalization, falsifying the literal every-accepted-Python-str totality theorem.",
+    "Calling built-in str descriptors directly and materializing bytes through the immutable buffer protocol preserves value semantics while bypassing those subclass overrides."
+  ],
+  "evidence_refs": [
+    {
+      "kind": "canonical_commit",
+      "sha": "704a60674e30de927bafaacecaf8a840d4632dbd",
+      "meaning": "Original Unknown-Domain V6 universal-totality proof claim."
+    },
+    {
+      "kind": "canonical_base_commit",
+      "sha": "9d48e6703ade9f5d2d26855d0fcd08f975e97a8b",
+      "meaning": "Refreshed main head used for the replacement branch."
+    },
+    {
+      "kind": "branch",
+      "name": "breakthrough/unknown-domain-subclass-totality-20261005-v2"
+    },
+    {
+      "kind": "blob",
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py",
+      "sha": "d087601a62a0b8ec9ab264487fb0b27a6246b977"
+    },
+    {
+      "kind": "blob",
+      "path": "canonical/tests/test_unknown_domain_direct_v5.py",
+      "sha": "c98733407d594c3fa5713de5742022325463f390"
+    },
+    {
+      "kind": "blob",
+      "path": "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py",
+      "sha": "4a3e72b365ffa7e163abc63d197fcd386bdd104d"
+    }
+  ],
+  "conclusion": "The original V6 universal-totality claim is not promotion-safe over its literal isinstance-accepted Python-string domain. The isolated replacement branch repairs that exact proof hole without narrowing the declared domain or spending fresh reality.",
+  "selected_route": "REUSE_EXISTING_V5_V6_ROUTE__REPLACE_OVERRIDABLE_INSTANCE_DISPATCH_WITH_BUILTIN_STR_AND_BUFFER_OPERATIONS__ADD_ADVERSARIAL_SUBCLASS_REGRESSION__REBIND_V6_EXACT_BLOBS",
+  "rejected_material_alternatives": [
+    {
+      "route": "NARROW_DOMAIN_TO_EXACT_TYPE_STR_AND_BYTES",
+      "reason": "Would weaken the original accepted-input quantifier instead of repairing it."
+    },
+    {
+      "route": "IGNORE_SUBCLASS_VALUES_AS_NONPRACTICAL",
+      "reason": "Contradicts fail-closed universal-proof semantics."
+    },
+    {
+      "route": "SPEND_FRESH_PRODUCTION_OR_TERMINAL_CASES",
+      "reason": "No information gain is needed; the blocker is deductive and locally falsifiable."
+    }
+  ],
+  "uncertainties": [
+    "Independent CI/content-bound verification has not yet passed for the repaired blobs.",
+    "Separate Root3/acceptance reduction remains required even after this repair verifies."
+  ],
+  "assumptions": [
+    "Python built-in str descriptors operate on str subclasses' inherited immutable string value without invoking overridden instance methods.",
+    "The immutable buffer protocol for bytes subclasses exposes the inherited byte sequence independently of an overridden __bytes__ method."
+  ],
+  "non_goals": [
+    "No claim of open-world unknown-domain general intelligence.",
+    "No acceptance-family, capability, ownership, or terminal credit from this repair alone.",
+    "No production or terminal case generation, read, or execution."
+  ],
+  "next_action": "Run independent PR verification on the exact repaired blobs; on pass, feed the content-bound receipt into the existing Unknown-Domain Root3/acceptance reduction rather than replaying fresh reality.",
+  "supersession_conditions": [
+    "Any counterexample on an admitted value.",
+    "Any exact-subject blob mismatch.",
+    "Any independent verifier failure.",
+    "A stronger already-merged canonical repair that subsumes this exact proof hole."
+  ],
+  "supersedes": "THE_TOTALITY_PORTION_OF_COMMIT_704a60674e30de927bafaacecaf8a840d4632dbd_PENDING_REPLACEMENT_VERIFICATION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
