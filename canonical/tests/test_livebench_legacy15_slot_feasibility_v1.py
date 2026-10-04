@@ -81,3 +81,13 @@ def test_unknown_or_structurally_conflicting_ids_fail_closed():
         {"instruction_id": "length_constraints:number_words", "slots": {"num_words": 100, "relation": "at least"}},
     ])
     assert conflict["status"] == "FAIL_CLOSED_ID_CONFLICT"
+
+
+def test_sentence_one_end_phrase_contradiction():
+    contracts = [
+        {"instruction_id": f.SENTENCE, "slots": {"num_sentences": 1, "relation": "less than"}},
+        {"instruction_id": f.END, "slots": {"end_phrase": "Any other questions?"}},
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "PROVED_UNSAT"
+    assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in out["hard_unsat_reasons"]
