@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PARTIAL_CREDIT_MASS_THEOREM_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PINNED_PUBLIC_SCORER_ALGEBRA__UNIVERSAL_SOLVER_REQUIREMENT_DELETED__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Replace the unnecessarily strong universal-checker-coverage prerequisite with the exact additive partial-credit mass condition implemented by the pinned LiveBench instruction-following scorer.",
+  "frozen_public_scorer": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "path": "livebench/process_results/instruction_following/utils.py",
+    "git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676",
+    "ifbench_evaluator_path": "livebench/if_runner/ifbench/evaluation_lib.py",
+    "ifbench_evaluator_git_blob_sha": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b"
+  },
+  "frozen_target": {
+    "population_count": 200,
+    "threshold_percent": 65.7,
+    "threshold_score_mass": 131.4,
+    "source": "canonical/governance/LIVEBENCH_FROZEN_V1_FORCED_FAIL_PROOF_V1.json"
+  },
+  "exact_scorer_algebra": {
+    "per_case_variables": {
+      "k": "number of registered instructions on the case, k >= 1",
+      "s": "number of those instructions whose exact check_following predicate returns true, 0 <= s <= k"
+    },
+    "formula": "score = (I[s=k] + s/k) / 2",
+    "equivalent_piecewise": {
+      "if_s_lt_k": "score = s/(2k)",
+      "if_s_eq_k": "score = 1"
+    },
+    "consequence": "Every independently proved followed instruction contributes positive score mass even when another instruction on the same case fails; full-case closure contributes an additional 1/2 bonus beyond the instruction-fraction half."
+  },
+  "theorem": {
+    "claim": "For the pinned scorer, proving every active instruction type and every allowed conjunction is sufficient but not necessary for LIVEBENCH_IF_GE_65_7. Any precommitted successor whose exact blind benchmark score mass is at least 131.4 closes the predicate, including successors that intentionally leave some instruction predicates unsolved.",
+    "proof": [
+      "The pinned score_results computes score_1 = 1 iff all instructions are followed.",
+      "It computes score_2 = s/k.",
+      "It returns (score_1 + score_2)/2.",
+      "Therefore cases with 0 < s < k receive nonzero score s/(2k).",
+      "The benchmark predicate is an aggregate threshold, so acceptance depends on total score mass, not universal checker coverage."
+    ]
+  },
+  "scheduler_rewrite": {
+    "delete_as_overstrong": [
+      "DESCRIPTION_LANGUAGE_COVERAGE_FOR_EVERY_GENERATABLE_FORM_BEFORE_ANY_SUCCESSOR_CAN_BE_USEFUL",
+      "WITNESS_SOUNDNESS_FOR_ALL_83_ACTIVE_TYPES_BEFORE_THRESHOLD_REPAIR_CAN_PROCEED",
+      "COMBINATION_SOUNDNESS_FOR_EVERY_ALLOWED_COMBINATION_AS_A_PREREQUISITE_TO_ANY_SCORE_GAIN"
+    ],
+    "replace_with": [
+      "PRECOMMIT_CONTAMINATION_SAFE_SUCCESSOR",
+      "MAXIMIZE_EXACTLY_VALIDATED_FOLLOWED_INSTRUCTION_MASS_PER_CASE",
+      "PRESERVE_OR_IMPROVE_EXISTING_RESPONSE_ROUTE_WHERE_NO_VERIFIED_STRUCTURAL_GAIN_EXISTS",
+      "RUN_EXACT_PINNED_SCORER_BLIND",
+      "STOP_IMMEDIATELY_IF_TOTAL_SCORE_MASS_GE_131_4",
+      "ONLY_EXPAND_CHECKER_COVERAGE_IF_THE_THRESHOLD_RESIDUAL_REMAINS_POSITIVE"
+    ],
+    "priority": "CHEAP_HIGH_FREQUENCY_PUBLIC_CHECKERS_FIRST__UNIVERSAL_COVERAGE_ONLY_IF_THRESHOLD_RESIDUAL_FORCES_IT"
+  },
+  "root1_repair_effect": {
+    "previous_problem": "UNIVERSAL_PUBLIC_GRAMMAR_COMPILER_PLUS_ALL_COMBINATION_SOUNDNESS",
+    "new_problem": "MINIMUM_VERIFIED_INSTRUCTION_MASS_CUT_TO_FORCE_AGGREGATE_SCORE_GE_65_7",
+    "why_stronger": "It is logically equivalent to the actual acceptance scorer and strictly weakens unnecessary proof obligations without weakening the target threshold."
+  },
+  "contamination_firewall": [
+    "NO_TERMINAL_PROMPT_TEXT",
+    "NO_TERMINAL_CASE_IDS",
+    "NO_TERMINAL_KWARGS",
+    "NO_PER_CASE_FAILURE_SPECIAL_CASING",
+    "PUBLIC_PINNED_SCORER_ALGEBRA_ONLY"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT ASSERT_THE_CURRENT_V3_SUCCESSOR_ALREADY_REACHES_65_7",
+    "DOES_NOT INFER ANY TERMINAL_CASE DISTRIBUTION",
+    "DOES_NOT GRANT ACCEPTANCE FAMILY CAPABILITY OWNERSHIP OR TERMINAL CREDIT",
+    "DOES_NOT AUTHORIZE FRESH TERMINAL EXECUTION",
+    "DOES_NOT RETROACTIVELY REPAIR THE FAILED FROZEN_V1 CANDIDATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
