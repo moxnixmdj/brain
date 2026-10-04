@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FROZEN_POPULATION_SCORER_SCOPE_COLLAPSE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FROZEN_POPULATION_DISPATCH_SCOPE_COLLAPSES_TO_LEGACY_IFEVAL__INDEPENDENT_METADATA_ONLY_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Delete irrelevant modern-IFBench successor work from the exact frozen 200-question terminal critical path without reading or using unexposed terminal prompt content.",
+  "frozen_execution_contract": {
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "population_count": 200,
+    "threshold_percent": 65.7,
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "dataset_bytes": 537024,
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "executor_repository": "moxnixmdj/verification-capsule-runner",
+    "executor_path": "execute_livebench_if_replay72_v4_candidate.py",
+    "executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "dispatch_boundary": "2025-11-25",
+    "dispatch_rule": "release < 2025-11-25 => legacy instruction_following_eval; otherwise => modern ifbench"
+  },
+  "content_addressed_public_dataset": {
+    "source": "https://huggingface.co/datasets/livebench/instruction_following/commit/0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "commit_date": "2025-04-07",
+    "row_count_before_frozen_removal_filter": 400,
+    "lfs_oid_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "lfs_size_bytes": 537024,
+    "viewer_metadata_observation": {
+      "source": "https://huggingface.co/datasets/livebench/instruction_following",
+      "livebench_release_date_min": "2024-06-24",
+      "livebench_release_date_max": "2024-11-25",
+      "note": "Independent verification must bind this date range to the exact frozen LFS object using parquet footer metadata only; it must not decode prompt, kwargs, question_id, or row-level case content."
+    }
+  },
+  "theorem": {
+    "premises": [
+      "THE_FROZEN_EXECUTOR_ACCEPTS_ONLY_200_ROWS_SELECTED_FROM_THE_CONTENT_ADDRESSED_400_ROW_DATASET_OBJECT",
+      "THE_MAXIMUM_LIVEBENCH_RELEASE_DATE_OF_ANY_ROW_IN_THAT_EXACT_OBJECT_IS_2024-11-25",
+      "2024-11-25_IS_STRICTLY_BEFORE_THE_MODERN_IFBENCH_DISPATCH_BOUNDARY_2025-11-25"
+    ],
+    "deduction": "EVERY_POSSIBLE_ROW_SURVIVING_THE_2026-06-25_REMOVAL_FILTER_IS_DISPATCHED_TO_THE_LEGACY_IFEVAL_SCORER; SUBSET_SELECTION_CANNOT_CREATE_A_LATER_RELEASE_DATE_THAN_EXISTS_IN_THE_SUPERSET.",
+    "consequence": "MODERN_IFBENCH_SCORER_TYPES_ARE_OUT_OF_SCOPE_FOR_THE_EXACT_FROZEN_200_QUESTION ACCEPTANCE POPULATION.",
+    "relevant_registry": {
+      "path": "livebench/if_runner/instruction_following_eval/instructions_registry.py",
+      "git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+      "active_instruction_type_count": 25
+    },
+    "deleted_from_current_root1_repair_critical_path": [
+      "ALL_58_MODERN_IFBENCH_REGISTERED_TYPES",
+      "RATIO_OVERLAP_EXACT_REFERENCE_RECOVERY",
+      "MODERN_REPEAT_SPAN",
+      "MODERN_IFBENCH_PUBLIC_KWARGS_RECOVERY",
+      "MODERN_IFBENCH_REFERENCE_FREE_TRIGRAM_CONSTRUCTORS"
+    ],
+    "successor_scope_upper_bound": "AT_MOST_25_LEGACY_REGISTERED_INSTRUCTION_TYPES_PLUS_SEMANTIC_CONTENT_PRODUCTION_REQUIRED_BY_THE_BASE_TASKS"
+  },
+  "contamination_firewall": {
+    "terminal_prompt_content_read": false,
+    "terminal_kwargs_read": false,
+    "terminal_question_ids_read": false,
+    "row_level_case_content_used": false,
+    "verification_allowed": "PARQUET_FOOTER_OR_EQUIVALENT_AGGREGATE_METADATA_ONLY",
+    "case_73_or_later_semantic_exposure": false
+  },
+  "scheduler_effect_if_verified": [
+    "SUPERSEDE_83_TYPE_UNIVERSAL_SCORER_GRAMMAR_AS_THE_CURRENT_FROZEN_TERMINAL_REPAIR_SCOPE",
+    "KEEP_83_TYPE_WORK_ONLY_AS_OPTIONAL_FUTURE_GENERALIZATION_NOT_CURRENT_ACCEPTANCE_CRITICAL_PATH",
+    "REBASE_ROOT1_SUCCESSOR_ON_25_TYPE_LEGACY_IFEVAL_REGISTRY",
+    "FOCUS_NEXT_ON_PREBOUND_SEMANTIC_PRODUCTION_PLUS_LEGACY_CONSTRAINT_COMPOSITION",
+    "DO_NOT_SPEND_MORE_CRITICAL_PATH_WORK_ON_MODERN_RATIO_OVERLAP_OR_OTHER_MODERN_ONLY_CHECKERS"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_BY_ITSELF_PROVE_LIVEBENCH_IF_GE_65_7",
+    "DOES_NOT_ADD_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "DOES_NOT_PROVE_ALL_25_LEGACY_TYPES_OCCUR_IN_THE_SELECTED_200",
+    "DOES_NOT AUTHORIZE_NEW_TERMINAL_CASE_EXPOSURE",
+    "DOES_NOT RETROACTIVELY CHANGE_THE_FAILED_FROZEN_CANDIDATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "independent_verification_required": true
+}
