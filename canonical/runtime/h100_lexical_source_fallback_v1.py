@@ -54,7 +54,7 @@ def resolve_source_relations(term:Any, records:Any)->dict[str,Any]:
         row_term=_norm(row.get("term"),f"RECORD_TERM:{i}")
         if row_term!=term_n:
             raise LexicalSourceFallbackError(f"RECORD_TERM_MISMATCH:{i}")
-        source=_norm(row.get("source"),f"SOURCE:{i}")
+        source_value = row.get("source_id") if row.get("source_id") is not None else row.get("source")\n        source=_norm(source_value,f"SOURCE:{i}")
         if source in seen_sources:
             raise LexicalSourceFallbackError("SOURCE_DUPLICATE:"+source)
         seen_sources.add(source)
@@ -73,9 +73,9 @@ def resolve_source_relations(term:Any, records:Any)->dict[str,Any]:
                 unsupported.append(phrase)
 
     if len(mapped_roles)>1:
-        return _abstain(term_n,"ABSTAIN_SOURCE_ROLE_CONFLICT",mapped_phrases,unsupported)
+        return _abstain(term_n,"ABSTAIN_SOURCE_ROLE_CONFLICT",mapped_phrases,unsupported,len(seen_sources))
     if len(mapped_roles)==0:
-        return _abstain(term_n,"ABSTAIN_SOURCE_RELATION_UNSUPPORTED",mapped_phrases,unsupported)
+        return _abstain(term_n,"ABSTAIN_SOURCE_RELATION_UNSUPPORTED",mapped_phrases,unsupported,len(seen_sources))
     role=next(iter(mapped_roles))
     return {
         "schema":SCHEMA,
@@ -91,7 +91,7 @@ def resolve_source_relations(term:Any, records:Any)->dict[str,Any]:
         "hard_nonclaim":"FINITE_SOURCE_RELATION_BRIDGE_IS_NOT_OPEN_WORLD_LEXICAL_COVERAGE",
     }
 
-def _abstain(term:str,status:str,mapped:list[str],unsupported:list[str])->dict[str,Any]:
+def _abstain(term:str,status:str,mapped:list[str],unsupported:list[str],source_count:int)->dict[str,Any]:
     return {
         "schema":SCHEMA,
         "status":status,
@@ -99,7 +99,7 @@ def _abstain(term:str,status:str,mapped:list[str],unsupported:list[str])->dict[s
         "role":None,
         "mapped_relation_phrases":sorted(set(mapped)),
         "unsupported_relation_phrases":sorted(set(unsupported)),
-        "source_count":0,
+        "source_count":source_count,
         "persistent_learned_bytes":0,
         "external_frontier_model_calls":0,
         "external_learned_capability_calls":0,
