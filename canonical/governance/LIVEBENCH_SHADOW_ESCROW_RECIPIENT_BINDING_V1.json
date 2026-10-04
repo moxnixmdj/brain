@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SHADOW_ESCROW_RECIPIENT_BINDING_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PRODUCTION_PUBLIC_RECIPIENT_BOUND__PRIVATE_KEY_CUSTODY_OUTSIDE_GITHUB__INDEPENDENT_PUBLIC_CERT_VERIFICATION_REQUIRED__ZERO_CASES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "recipient": {
+    "certificate_path": "canonical/escrow/livebench_shadow_escrow_v1_public.crt",
+    "certificate_git_blob_sha": "99dea0cf31467df8051ba745d74d8768c7d218a4",
+    "certificate_sha256": "f11521c6e83d3394a79df41963992c01507121787c503989cc503c1b31dfb2a5",
+    "public_key_der_sha256": "aec0a39931a202874626bf40b9fe5d86dee4920a2ed2de7ef2bde4f647fcf666",
+    "certificate_subject": "CN=Project Brain LiveBench Shadow Escrow V1,O=Project Brain",
+    "self_signed_certificate": true,
+    "private_key_in_github": false,
+    "evaluation_runner_private_key_access": false,
+    "production_recipient_bound": true
+  },
+  "private_key_custody": {
+    "provider": "CHATGPT_USER_LIBRARY",
+    "library_path": "/Project Brain Escrow/livebench-shadow-escrow-v1-private.pem",
+    "library_file_id": "libfile_a1f95b84df0c81918e8248ff0a060c7e",
+    "upload_status": "SUCCEEDED",
+    "outside_github": true,
+    "release_before_fixed_point_forbidden": true
+  },
+  "independent_verification_requirements": [
+    "CERTIFICATE_GIT_BLOB_MATCHES",
+    "CERTIFICATE_SHA256_MATCHES",
+    "PUBLIC_KEY_DER_SHA256_MATCHES",
+    "CERTIFICATE_SELF_SIGNATURE_VERIFIES",
+    "CERTIFICATE_SUBJECT_MATCHES_TARGET_BINDING",
+    "CERTIFICATE_VALIDITY_COVERS_CURRENT_EPOCH",
+    "PUBLIC_BUNDLE_CONTAINS_NO_PRIVATE_KEY"
+  ],
+  "hard_nonclaims": [
+    "GITHUB_RUNNER_CANNOT_INDEPENDENTLY_INSPECT_CHATGPT_LIBRARY_CUSTODY",
+    "RECIPIENT_BINDING_ALONE_DOES_NOT_PROVE_ESCROW_WRITER_IMPLEMENTATION",
+    "RECIPIENT_BINDING_ALONE_DOES_NOT_GRANT_CASE_REVEAL_OR_SHADOW_COLLECTION_AUTHORITY"
+  ],
+  "hard_rules": [
+    "PRIVATE_KEY_MUST_NEVER_BE_COMMITTED_TO_GITHUB",
+    "PRIVATE_KEY_MUST_NOT_BE_MATERIALIZED_IN_EVALUATION_RUNNER",
+    "RESULT_RELEASE_REQUIRES_SEPARATE_POST_FIXED_POINT_REDUCER_AUTHORITY",
+    "NO_TERMINAL_CASE_REVEAL_FROM_RECIPIENT_BINDING",
+    "NO_EXECUTION_PROMOTION_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
