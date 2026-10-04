@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_OPUS_5_5_ZERO_COST_COMPARATOR_ACCESS_AUDIT_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__AUTH_GATED_ARENA_PORTAL_AND_DIRECT_SELECTOR_BOUND__MACHINE_COMPARATOR_STILL_UNBOUND__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/EXACT_OPUS_5_5_ZERO_COST_COMPARATOR_ACCESS_AUDIT_V2.json",
+    "git_blob_sha": "1e8ba20f18671537f1d6f52d9ab7362ac5a761f2"
+  },
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1673,
+    "head_sha": "9c3aa2ecc53df72f0ec5aa61b593600feab2cd21",
+    "merge_commit": "9f998b1a5e94e60d67a7726f8c7e28b982375714",
+    "workflow_run_id": 37175594965,
+    "workflow_job_id": 111357429758,
+    "conclusion": "success"
+  },
+  "verified": {
+    "arena_authenticated_api_portal_exists": true,
+    "arena_public_direct_specific_model_selection": true,
+    "arena_machine_comparator_admitted": false,
+    "matched_superportfolio_unblocked": false,
+    "exact_opus55_account_model_availability_bound": false,
+    "zero_incremental_cost_entitlement_bound": false,
+    "harness_and_effort_equivalence_bound": false
+  },
+  "scheduling_consequence": "OLD_ASSUMPTION_THAT_NO_ARENA_API_SURFACE_EXISTS_IS_OBSOLETE_AS_A_SEARCH PREMISE__BUT_MACHINE_COMPARATOR_ADMISSION_REMAINS_BLOCKED_UNTIL_AUTHENTICATED_ACCOUNT_AND_EXACT_ROUTE_RECEIPTS",
+  "hard_nonclaims": [
+    "NO_MACHINE_COMPARATOR_EXECUTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT",
+    "NO_ZERO_COST_ENTITLEMENT_CLAIM",
+    "NO_EXACT_OPUS55_API_MODEL_AVAILABILITY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

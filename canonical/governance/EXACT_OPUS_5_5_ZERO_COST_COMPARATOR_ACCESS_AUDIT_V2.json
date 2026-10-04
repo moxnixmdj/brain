@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_OPUS_5_5_ZERO_COST_COMPARATOR_ACCESS_AUDIT_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_COST_EXACT_MACHINE_COMPARATOR_STILL_UNBOUND__ACCOUNT_ROUTES_RECONCILED__ZERO_CREDIT",
+  "supersedes": "canonical/governance/EXACT_OPUS_5_5_ZERO_COST_COMPARATOR_ACCESS_AUDIT_V1.json",
+  "objective": "Bind an exact Claude Opus 5.5 case-level comparator at zero incremental spend without proxy substitution or uncontrolled model selection.",
+  "observations": [
+    [
+      "ANTHROPIC_DIRECT",
+      "Claude account exists; no paid entitlement receipt found",
+      "Opus 5.5 not available on Claude Free; API is paid",
+      "OPEN_ONLY_ON_VERIFIED_ALREADY_ENTITLED_PRO_MAX_TEAM_ENTERPRISE_OR_CREDITS"
+    ],
+    [
+      "GITHUB_COPILOT",
+      "Connected GitHub account is personal GitHub Free; no Copilot paid entitlement receipt found",
+      "Copilot Free/Student expose Auto only; exact Opus 5.5 selectable on eligible paid plans/clients",
+      "AUTO_NOT_ADMISSIBLE_FOR_EXACT_COMPARATOR__WAKE_ON_EXACT_SELECTABLE_ENTITLEMENT"
+    ],
+    [
+      "VENICE",
+      "Account is explicitly Free",
+      "Premium proprietary models are pay-per-use credits",
+      "INADMISSIBLE_UNDER_ZERO_SPEND_UNLESS_EXISTING_CREDIT_BALANCE_IS_VERIFIED"
+    ],
+    [
+      "OPENROUTER",
+      "Account exists; no credit grant or purchase receipt found",
+      "Exact Opus 5.5 route is priced; current account balance not observable here",
+      "WAKE_ON_VERIFIED_PREEXISTING_CREDIT_BALANCE"
+    ],
+    [
+      "ARENA",
+      "Exact-model human Direct route remains publicly plausible",
+      "Machine-reproducible zero-cost channel not bound",
+      "PRESERVE_MANUAL_AUDITABLE_ROUTE_OR_FUTURE_MACHINE_CHANNEL"
+    ],
+    [
+      "ARENA_API",
+      "Authenticated Arena API portal is current first-party surface; detailed API docs now require sign-in",
+      "Machine API route is a candidate account-gated path; exact endpoint semantics, account key, model list, fallback/provenance controls, zero-cost entitlement, and harness equivalence are not independently reproduced",
+      "CANDIDATE_MACHINE_CHANNEL__NOT_ADMITTED_UNTIL_AUTHENTICATED_ACCOUNT_AND_EXACT_ROUTE_RECEIPTS"
+    ]
+  ],
+  "implications": {
+    "matched_superportfolio_unblocked": false,
+    "exact_identity_required": true,
+    "auto_model_selection_admissible": false,
+    "proxy_substitution_admissible": false,
+    "generic_free_opus_search": "SATURATED_UNDER_CURRENT_PUBLIC_AND_CONNECTED_ACCOUNT_EVIDENCE",
+    "arena_machine_channel_exists": false,
+    "arena_machine_route_currently_admissible": false,
+    "arena_api_public_search_saturated": true,
+    "arena_api_remaining_account_facts": [
+      "ARENA_ACCOUNT_AND_VIRTUAL_API_KEY",
+      "ACCOUNT_V1_MODELS_INCLUDES_EXACT_REQUIRED_OPUS55_VARIANT",
+      "ACCOUNT_CREDIT_OR_PLAN_PROVES_ZERO_INCREMENTAL_SPEND_FOR_FUTURE_MATCHED_WAVE",
+      "HARNESS_AND_EFFORT_RELATION_TO_FROZEN_COMPARATOR"
+    ],
+    "arena_machine_channel_publicly_verified": false,
+    "arena_machine_endpoint_existence_independently_verifiable": false,
+    "arena_machine_channel_candidate_detected": true,
+    "arena_authenticated_api_portal_independently_verifiable": true
+  },
+  "next": [
+    "OBSERVE_ARENA_API_ACCOUNT_KEY_MODEL_LIST_CREDIT_STATE_AND_HARNESS_RELATION__NO_MORE_GENERIC_PRICING_SEARCH",
+    "OBSERVE_ONLY_MATERIAL_ENTITLEMENT_OR_BALANCE_WAKE_EVENTS",
+    "PRESERVE_ARENA_MANUAL_EXACT_CAPTURE_AS_HUMAN_ROUTE_IF_PROVENANCE_CAN_BE_FROZEN",
+    "CONTINUE_ROOT2_SELF_SERVICE_AND_STRONGER_PROOFS_IN_PARALLEL",
+    "DO_NOT_EXPOSE_MATCHED_TERMINAL_CASES"
+  ],
+  "hard_nonclaims": [
+    "ABSENCE_OF_EMAIL_RECEIPT_DOES_NOT_PROVE_ABSENCE_OF_EXTERNAL_BILLING",
+    "NO_CLAIM_OPENROUTER_BALANCE_IS_ZERO",
+    "NO_CLAIM_COPILOT_PAID_ENTITLEMENT_IS IMPOSSIBLE",
+    "NO_COMPARATOR_EXECUTION",
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT",
+    "NO_CLAIM_PUBLIC_ARENA_API_DOCS_PROVE_CLAUDE_OPUS_5_5_IS_IN_THIS_ACCOUNT_V1_MODELS",
+    "NO_CLAIM_ARENA_API_REQUESTS_ARE_ZERO_COST_WITHOUT_ACCOUNT_CREDIT_OR_PLAN_RECEIPT",
+    "NO_CLAIM_LOGIN_GATED_ARENA_ROUTING_DOC_CONTENT_IS_INDEPENDENTLY_PUBLIC_RUNNER_REPRODUCED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "public_primary_source_evidence": {
+    "arena_api_reference": {
+      "url": "https://portal.api.preview.arena.ai/docs/api-reference",
+      "proved": [
+        "ARENA_MAINTAINS_AN_AUTHENTICATED_API_PORTAL",
+        "MACHINE_API_CHANNEL_EXISTENCE_IS_TESTABLE_VIA_UNAUTHENTICATED_API_ENDPOINT_RESPONSE"
+      ],
+      "candidate_not_independently_public_runner_reproduced": [
+        "OPENAI_COMPATIBLE_MULTI_PROVIDER_GATEWAY",
+        "AUTHENTICATED_GET_V1_MODELS_EXISTS",
+        "OPENAI_COMPATIBLE_CHAT_COMPLETIONS_EXISTS",
+        "ANTHROPIC_COMPATIBLE_MESSAGES_EXISTS"
+      ]
+    },
+    "arena_routing": {
+      "url": "https://portal.api.preview.arena.ai/docs/routing",
+      "proved": [
+        "AUTHENTICATED_ROUTING_DOCUMENTATION_PORTAL_EXISTS"
+      ],
+      "candidate_not_independently_public_runner_reproduced": [
+        "REQUEST_MODEL_PARAMETER_DIRECTLY_SELECTS_MODEL",
+        "FALLBACKS_ARE_OPTIONAL_AND_CONTROLLABLE",
+        "X_ARENA_RESOLVED_MODEL_REPORTS_ACTUAL_SERVED_MODEL"
+      ]
+    },
+    "arena_direct_selector": {
+      "url": "https://help.arena.ai/articles/1858200927-lmarena-experiments-new-model-selector",
+      "proved": [
+        "HUMAN_DIRECT_MODE_SUPPORTS_SPECIFIC_MODEL_SELECTION"
+      ]
+    },
+    "arena_agent_leaderboard": {
+      "url": "https://arena.ai/leaderboard/agent/code",
+      "proved": [
+        "CLAUDE_OPUS_5_5_HIGH_IS_CURRENTLY_NAMED_ON_ARENA_AGENT_CODE_LEADERBOARD"
+      ],
+      "nonclaim": "LEADERBOARD_PRESENCE_DOES_NOT_PROVE_API_ACCOUNT_MODEL_AVAILABILITY_OR_ZERO_COST_ENTITLEMENT"
+    }
+  }
+}
