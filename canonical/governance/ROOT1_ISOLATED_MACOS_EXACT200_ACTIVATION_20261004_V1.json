@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_ISOLATED_MACOS_EXACT200_ACTIVATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_PUBLIC_ZERO_SPEND_MACOS_CARRIER__EXACT_200_CASE_ROOT1_RUN_QUEUED_BEHIND_ACTIVE_DIAGNOSTIC__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "queue_breakthrough": {
+    "observed_public_verification_repo_linux_queue_depth_at_activation": 2500,
+    "observed_linux_in_progress_count_at_activation": 0,
+    "observed_macos_in_progress_count_at_activation": 1,
+    "decision": "ROUTE_EXACT_ROOT1_QUALIFICATION_TO_ISOLATED_MACOS_15_INTEL_POOL_USING_THE_ALREADY_HASH_FROZEN_2_783GB_4B_SUBJECT",
+    "deleted_work": [
+      "WAIT_FOR_LINUX_QUEUE_BEFORE_ESTABLISHING_AN_ORTHOGONAL_PUBLIC_CARRIER",
+      "SPAWN_MORE_GENERIC_MAIN_BRANCH_LINUX_VERIFIERS",
+      "REPEAT_SYNTHETIC_PROXY_AS_LOAD_BEARING_ROOT1_EVIDENCE"
+    ]
+  },
+  "diagnostic_run": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "root1-isolated-macos-20261004",
+    "workflow": ".github/workflows/root1-isolated-macos-qwen38-4b-v1.yml",
+    "run_id": 37200657551,
+    "head_sha": "f68ae8c3d48809a4d9021c4eb181f8304e388690",
+    "observed_state": "IN_PROGRESS__EXACT_MODEL_ACQUISITION_BUILD_AND_SERVER_START_ALREADY_PASS__EIGHT_CASE_SEMANTIC_SEED_RUNNING",
+    "role": "DIAGNOSTIC_ONLY__NO_ROOT1_ACCEPTANCE_CREDIT"
+  },
+  "exact_public_run": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "root1-isolated-macos-20261004",
+    "workflow": ".github/workflows/root1-isolated-macos-livebench-exact200-v1.yml",
+    "workflow_commit": "6e7d102ffdeecaf3bf78615e7e7a4331ac38cef2",
+    "run_id": 37201327465,
+    "run_number": 1,
+    "observed_state": "QUEUED",
+    "runner": "macos-15-intel",
+    "timeout_minutes": 360,
+    "incremental_spend_usd": 0
+  },
+  "frozen_subject": {
+    "repository": "empero-ai/Qwen3.8-4B-Distill-GGUF",
+    "revision": "391fc7d103e3942a408def3e4f51c2f85d464417",
+    "file": "Qwen3.8-4B-Q4_K_M.gguf",
+    "bytes": 2783446304,
+    "sha256": "dec96e8cf2e11b613bb46513dec485377f9ca5a351e71712ee0e244f287c6790",
+    "runtime_repository": "ggml-org/llama.cpp",
+    "runtime_commit": "0504396140d1c882f5f6ee34466a42db7ae90114"
+  },
+  "exact_public_gate": {
+    "selected_release": "2026-06-25",
+    "population_count": 200,
+    "task_counts": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    },
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "scorer_source_blobs": {
+      "instructions.py": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+      "instructions_registry.py": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+      "instructions_util.py": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+    },
+    "pass_floor_percent": 65.73775,
+    "aggregation": "ARITHMETIC_MEAN_OF_THE_FOUR_EXACT_TASK_PERCENTAGES",
+    "hidden_or_terminal_cases": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_4B_PASSES_BEFORE_EXACT_200_CASE_RECEIPT",
+    "NO_ROOT1_ACCEPTANCE_CREDIT_FROM_DIAGNOSTIC",
+    "NO_TERMINAL_GOAL_CREDIT",
+    "NO_OWNERSHIP_CREDIT_FROM_REMOTE_RUNTIME_OR_SCORE",
+    "NO_FRESH_TERMINAL_REALITY_CONSUMED"
+  ],
+  "next_state_machine": {
+    "diagnostic_pass": "PRESERVE_AS_RESOURCE_AND_SEMANTIC_SEED_EVIDENCE_ONLY__DO_NOT_PROMOTE",
+    "diagnostic_fail": "DO_NOT_CANCEL_EXACT_PUBLIC_RUN__EXACT_PUBLIC_PREDICATE_REMAINS_LOAD_BEARING",
+    "exact_public_pass": "VERIFY_DURABLE_BRAIN_CONTROLLED_EXACT_BYTE_INTERNALIZATION_AND_COMPOSITION__THEN_SEPARATE_ACCEPTANCE_AUTHORITY",
+    "exact_public_fail": "ESCALATE_TO_NEXT_SMALLEST_HASH_BOUND_ZERO_COST_EXECUTABLE_SEMANTIC_SUBJECT"
+  },
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "public_nonterminal_execution": true,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
