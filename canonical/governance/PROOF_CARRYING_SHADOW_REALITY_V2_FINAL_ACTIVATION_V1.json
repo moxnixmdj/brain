@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_CARRYING_SHADOW_REALITY_V2_FINAL_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_FINAL_ACTIVATION__BOUND_TO_INDEPENDENT_CURRENT_ROOT_PASS__ZERO_CREDIT",
+  "bound_main_commit": "50697f29b56afbf72654ccc9aef548bcb5368ffa",
+  "subject": {
+    "path": "canonical/governance/PROOF_CARRYING_SHADOW_REALITY_V2_ACTIVATION_V1.json",
+    "git_blob_sha": "df8bce24360102395f397b28399e0e8e5fb9f6d4"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1818,
+    "head_sha": "dc5cdcf834a92f06f937b4b26260eab5fe74a343",
+    "workflow_run_id": 37193998355,
+    "workflow_job_id": 111411941098,
+    "conclusion": "success"
+  },
+  "effective_authority": {
+    "per_route_shadow_collection": true,
+    "result_release": false,
+    "terminal_execution": false,
+    "acceptance_credit": false,
+    "promotion": false,
+    "global_fresh_reality_promotion": false
+  },
+  "effective_rule": "A_ROUTE_MAY_COLLECT_ONE_ESCROWED_SHADOW_RESULT_ONLY_IF_THE_EXACT_V2_RUNTIME_VERIFY_SHADOW_REALITY_LEASE_RETURNS_READY_TRUE__ALL_RESULTS_REMAIN_HIDDEN_AND_ZERO_CREDIT_UNTIL_SEPARATE_FIXED_POINT_RELEASE",
+  "revocation": [
+    "MAIN_NO_LONGER_DESCENDS_FROM_BOUND_ROOT_WITHOUT_RECONCILIATION",
+    "V2_RUNTIME_OR_POLICY_BLOB_DRIFT",
+    "GENERIC_ISOLATION_DEPENDENCY_INVALIDATED",
+    "BENCHMARK_THIN_ADAPTER_FAILURE",
+    "LEASE_REPLAY",
+    "RESULT_VISIBILITY_BEFORE_RELEASE",
+    "NONZERO_INCREMENTAL_SPEND",
+    "ROOT_PROJECTION_MISMATCH"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "active_if_exact_subject_and_verification_bindings_hold": true
+}
