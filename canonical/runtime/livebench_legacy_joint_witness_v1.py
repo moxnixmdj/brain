@@ -23,30 +23,21 @@ HISTORICAL_GENERATOR_COMMIT = "686be1e78a0ba8036d7e355bc406e1a265da5292"
 # Historical live_data.py samples these 24 families. response_language is in the
 # registry but absent from that generator pool.
 HISTORICAL_GENERATOR_IDS = frozenset({
-    "length_constraints:number_sentences",
+    "keywords:existence",
+    "keywords:forbidden_words",
     "length_constraints:number_paragraphs",
     "length_constraints:number_words",
+    "length_constraints:number_sentences",
     "length_constraints:nth_paragraph_first_word",
-    "keywords:existence",
-    "keywords:frequency",
-    "keywords:forbidden_words",
-    "keywords:letter_frequency",
-    "detectable_content:number_placeholders",
     "detectable_content:postscript",
     "detectable_format:number_bullet_lists",
-    "detectable_format:constrained_response",
-    "detectable_format:number_highlighted_sections",
+    "detectable_format:title",
     "detectable_format:multiple_sections",
     "detectable_format:json_format",
-    "detectable_format:title",
-    "combination:two_responses",
     "combination:repeat_prompt",
+    "combination:two_responses",
     "startend:end_checker",
     "startend:quotation",
-    "change_case:capital_word_frequency",
-    "change_case:english_capital",
-    "change_case:english_lowercase",
-    "punctuation:no_comma",
 })
 
 _FILLER = (
@@ -389,7 +380,9 @@ def solve(prompt: str) -> dict[str, Any]:
             "response": None,
             "compiler": compiled,
         }
-    if not compiled.get("all_recognized_parameters_complete"):
+    recognized = int(compiled.get("recognized_instruction_instance_count") or 0)
+    complete = int(compiled.get("parameter_complete_count") or 0)
+    if compiled.get("parameter_incomplete") or complete != recognized:
         return {
             "schema": SCHEMA,
             "status": "FAIL_CLOSED",
@@ -443,7 +436,7 @@ def solve(prompt: str) -> dict[str, Any]:
         "response": response,
         "recognized_instruction_ids": sorted(ids),
         "recognized_instruction_count": len(ids),
-        "historical_generator_surface_only": True,
+        "exact_frozen_active15_surface_only": True,
         "hidden_instruction_ids_used": False,
         "hidden_kwargs_used": False,
         "terminal_case_metadata_used": False,
