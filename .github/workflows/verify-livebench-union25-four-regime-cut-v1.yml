@@ -1,0 +1,26 @@
+name: Verify LiveBench union25 four-regime cut v1
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/livebench_union25_archetypes_v1.py'
+      - 'canonical/runtime/livebench_union25_extension_kernel_v1.py'
+      - 'canonical/runtime/livebench_union25_four_regime_cut_v1.py'
+      - 'canonical/tests/test_livebench_union25_four_regime_cut_v1.py'
+      - '.github/workflows/verify-livebench-union25-four-regime-cut-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12.10'
+      - run: python -m pytest -q canonical/tests/test_livebench_union25_four_regime_cut_v1.py
+      - run: python canonical/runtime/livebench_union25_four_regime_cut_v1.py
