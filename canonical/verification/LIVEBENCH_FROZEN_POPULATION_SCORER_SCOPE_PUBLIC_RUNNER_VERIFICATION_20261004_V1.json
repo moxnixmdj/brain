@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FROZEN_POPULATION_SCORER_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CONTENT_ADDRESSED_PARQUET_FOOTER_ONLY__LEGACY_DISPATCH_PROVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/LIVEBENCH_FROZEN_POPULATION_SCORER_SCOPE_COLLAPSE_V1.json",
+    "branch_commit": "24f400bc2bbf0ef6578de24111a36a34e00ad729"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1859,
+    "verified_head_sha": "2521ac34517cbe4d217836b5a16cfddafec43484",
+    "workflow_run_id": 37198973572,
+    "workflow_job_id": 111426548268,
+    "conclusion": "success",
+    "merge_commit": "ece666de63b33d791705f7bacea2471f52546819"
+  },
+  "verified_frozen_contract": {
+    "executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "dataset_bytes": 537024,
+    "parquet_rows": 400,
+    "release_date_min": "2024-06-24",
+    "release_date_max": "2024-11-25",
+    "dispatch_boundary": "2025-11-25",
+    "frozen_population_count": 200
+  },
+  "verified_deduction": [
+    "THE_EXACT_FROZEN_DATASET_OBJECT_HAS_MAX_RELEASE_DATE_2024_11_25",
+    "THE_EXACT_FROZEN_EXECUTOR_DISPATCHES_RELEASES_STRICTLY_BEFORE_2025_11_25_TO_LEGACY_IFEVAL",
+    "ANY_SUBSET_SELECTED_FROM_THE_EXACT_400_ROW_OBJECT_HAS_RELEASE_DATE_AT_MOST_2024_11_25",
+    "THEREFORE_ALL_200_FROZEN_SELECTED_ROWS_DISPATCH_TO_LEGACY_IFEVAL",
+    "MODERN_IFBENCH_ROWS_IN_FROZEN_200_EQUALS_ZERO",
+    "CURRENT_FROZEN_SCORER_TYPE_UPPER_BOUND_EQUALS_25_LEGACY_REGISTERED_TYPES"
+  ],
+  "contamination_firewall": {
+    "decoded_prompt_rows": 0,
+    "decoded_kwargs_rows": 0,
+    "decoded_question_ids": 0,
+    "row_level_terminal_semantics_read": false,
+    "case_73_plus_semantic_exposure": false
+  },
+  "scheduler_effect": [
+    "MODERN_58_IFBENCH_TYPES_ARE_REMOVED_FROM_THE_CURRENT_FROZEN_PREDICATE_CRITICAL_PATH",
+    "ROOT1_LIVEBENCH_SCORE_REPAIR_REBASES_ON_THE_25_TYPE_LEGACY_IFEVAL_REGISTRY",
+    "MODERN_RATIO_OVERLAP_REPEAT_SPAN_AND_OTHER_MODERN_ONLY_REPAIRS_HAVE_ZERO_CURRENT_FROZEN_PREDICATE_LOAD_BEARING_WEIGHT"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_GENERAL_SEMANTIC_CAPABILITY_CREDIT",
+    "NO_FRESH_TERMINAL_EXECUTION_AUTHORITY",
+    "NO_CASE_73_PLUS_CONTENT_READ"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
