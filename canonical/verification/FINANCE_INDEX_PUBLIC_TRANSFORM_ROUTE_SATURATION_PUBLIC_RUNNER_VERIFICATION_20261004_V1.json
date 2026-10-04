@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PUBLIC_FREE_TRANSFORM_ROUTE_SATURATED__ZERO_FLOOR_NOT_PROVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_20261004_V1.json",
+    "git_blob_sha": "2a831b8632b18fe9e10ed423f131b6ae93d99b77"
+  },
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1656,
+    "head_sha": "6f4b86edba88c17eb737523e4d36d95c52bf7ffe",
+    "merge_commit": "7b25425bac72cc36be4896d72dfc39a8f9e071d9",
+    "workflow_run_id": 37174229191,
+    "workflow_job_id": 111353390105,
+    "conclusion": "success"
+  },
+  "verified": {
+    "outer_weighted_average_publicly_documented": true,
+    "free_api_headline_capability_indexes": true,
+    "free_api_per_benchmark_scores": false,
+    "documented_free_finance_capability_subscore_breakdown": false,
+    "documented_free_inner_transform": false,
+    "existing_owner_fanout_bound": true,
+    "zero_floor_proved": false,
+    "predicate_closed": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
