@@ -80,3 +80,30 @@ def test_conflicting_mode_fails_closed():
     ])
     assert out["status"] == "FAIL_CLOSED"
     assert out["candidates"] == []
+
+
+def test_paragraph_mode_keeps_terminal_material_at_true_response_end():
+    out = g.generate([
+        c("length_constraints:number_paragraphs", num_paragraphs=3),
+        c("length_constraints:number_words", num_words=40, relation="at least"),
+        c("detectable_content:postscript", postscript_marker="P.S."),
+        c("startend:end_checker", end_phrase="Any other questions?"),
+        c("startend:quotation"),
+    ])
+    assert out["candidates"]
+    for x in out["candidates"]:
+        assert x.startswith('"') and x.endswith('"')
+        inner = x[1:-1]
+        assert inner.rstrip().endswith("Any other questions?")
+        assert len(re.split(r"\\s?\\*\\*\\*\\s?", inner)) == 3
+        assert len(re.findall(r"\\w+", x)) >= 40
+
+
+def test_required_forbidden_same_word_uses_satisfiable_substring_escape():
+    out = g.generate([
+        c("keywords:existence", keywords=["rock"]),
+        c("keywords:forbidden_words", forbidden_words=["rock"]),
+    ])
+    assert out["candidates"]
+    assert any(re.search("rock", x, re.I) for x in out["candidates"])
+    assert all(re.search(r"\\brock\\b", x, re.I) is None for x in out["candidates"])
