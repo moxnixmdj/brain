@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PRECOGNITION_CONSTRAINT_ROUTER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ROOT1_SUCCESSOR_REPAIR__PUBLIC_ONLY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Remove recognized public IFBench constraint suffixes before semantic cognition, then deterministically enforce and postvalidate them after the existing model-independent semantic route, without weakening the post-prompt capability acquisition policy.",
+  "causal_hypothesis": {
+    "observed_sanitized_failure_class": "POLICY_BLOCK:POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN",
+    "observed_count_in_already_exposed_replay72": 43,
+    "load_bearing_claim": false,
+    "candidate_mechanism": "PRECOGNITION_COMPILATION_CAN_PREVENT_PUBLIC_FORMAT_CONSTRAINTS_FROM_REACHING_THE_SEMANTIC_COGNITION_PATH_AS UNKNOWN_CAPABILITY DEMANDS",
+    "nonclaim": "NO CLAIM THAT ALL_OR_ANY_FIXED_NUMBER_OF_THE_43_CASES_WILL_CLOSE_UNTIL A SEPARATELY AUTHORIZED SANITIZED REPLAY OR STRONGER UNIVERSAL PROOF"
+  },
+  "subject": {
+    "runtime_path": "canonical/runtime/livebench_public_precognition_constraint_router_v1.py",
+    "tests_path": "canonical/tests/test_livebench_public_precognition_constraint_router_v1.py",
+    "base_main_commit": "5eff493cbe6d8be8c4c577f99cf27034c3d327b8",
+    "active_fallback_adapter": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v2.py"
+  },
+  "public_upstream_basis": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "supported_exact_templates": [
+      "Use at least {N} unique words in the response.",
+      "Include exactly {N} numbers in the response; do not use commas within the numbers."
+    ]
+  },
+  "architecture_delta": [
+    "RECOGNIZE_ONLY_EXACT_PUBLIC_SUFFIX_TEMPLATES",
+    "STRIP_RECOGNIZED_CONSTRAINT_BEFORE_SEMANTIC_COGNITION",
+    "PRESERVE_EXISTING_MODEL_INDEPENDENT_SEMANTIC_ROUTE",
+    "PROJECT_SEED_DETERMINISTICALLY_ONLY_WHERE ADDITIVE TRANSFORMATION IS SOUND",
+    "POSTVALIDATE_WITH_CANONICAL_CONSTRAINT_COMPILER",
+    "FALL_BACK_BYTE-FOR-BEHAVIOR_TO_ACTIVE_V2_ON ANY UNSAFE OR UNPROVED CONDITION"
+  ],
+  "why_this_is_new": [
+    "ACTIVE_V2_COMPILES EXACT FORMAL RESPONSES BUT SENDS SEMANTIC_PLUS_CONSTRAINT PROMPTS THROUGH V1 UNCHANGED",
+    "THIS CANDIDATE MOVES PROVED PUBLIC CONSTRAINT HANDLING AHEAD OF COGNITION FOR SEMANTIC PROMPTS",
+    "THE POLICY IS NOT WEAKENED; THE UNKNOWN CAPABILITY DEMAND IS REMOVED FROM THE COGNITION INPUT WHEN THE PUBLIC GRAMMAR IS EXACTLY RECOGNIZED"
+  ],
+  "scope": {
+    "terminal_case_content_consumed": 0,
+    "terminal_case_ids_consumed": 0,
+    "hidden_kwargs_consumed": 0,
+    "public_constraint_families_implemented": 2,
+    "unrecognized_constraints": "FAIL_THROUGH_TO_ACTIVE_V2",
+    "ngram_overlap_route": "OPEN_AND_UNTOUCHED",
+    "legacy_repeat_prompt_route": "OPEN_AND_UNTOUCHED"
+  },
+  "required_before_activation": [
+    "CURRENT_MAIN_REBASE_IF_DRIFTED",
+    "UNIT_TEST_PASS",
+    "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
+    "SYNTHETIC_PUBLIC_GENERATOR_TESTS FOR BOTH IMPLEMENTED TEMPLATES",
+    "EXACT BLOB BINDING IN A SUCCESSOR PRECOMMIT",
+    "NO LIVEBENCH CASE_73_PLUS EXPOSURE"
+  ],
+  "authority": {
+    "execution": false,
+    "replay72": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
