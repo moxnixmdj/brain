@@ -75,14 +75,27 @@ def test_v5_large_nonproduction_sweep():
 
 
 class _AdversarialStr(str):
+    @property
+    def __class__(self):
+        raise RuntimeError("INSTANCE_CLASS_HOOK_MUST_NOT_RUN")
+
     def strip(self,*args,**kwargs):
         raise RuntimeError("OVERRIDDEN_STRIP_MUST_NOT_RUN")
 
     def encode(self,*args,**kwargs):
         raise RuntimeError("OVERRIDDEN_ENCODE_MUST_NOT_RUN")
 
+    def __getattribute__(self,name):
+        if name in {"strip","encode"}:
+            raise RuntimeError("OVERRIDDEN_GETATTRIBUTE_MUST_NOT_RUN")
+        return str.__getattribute__(self,name)
+
 
 class _AdversarialBytes(bytes):
+    @property
+    def __class__(self):
+        raise RuntimeError("INSTANCE_CLASS_HOOK_MUST_NOT_RUN")
+
     def __bytes__(self):
         raise RuntimeError("OVERRIDDEN_BYTES_MUST_NOT_RUN")
 
@@ -99,9 +112,37 @@ class _AdversarialBytes(bytes):
         raise RuntimeError("OVERRIDDEN_ITER_MUST_NOT_RUN")
 
 
-def test_v5_totality_includes_isinstance_accepted_str_and_bytes_subclasses():
+class _FakeStr:
+    @property
+    def __class__(self):
+        return str
+
+    def __str__(self):
+        raise RuntimeError("FAKE_STR_COERCION_MUST_NOT_RUN")
+
+
+class _FakeBytes:
+    @property
+    def __class__(self):
+        return bytes
+
+    def __bytes__(self):
+        raise RuntimeError("FAKE_BYTES_COERCION_MUST_NOT_RUN")
+
+
+def _expect_generator_error(fn,code):
+    try:
+        fn()
+    except g1.UnknownDomainGeneratorError as exc:
+        assert str(exc)==code
+    else:
+        raise AssertionError("EXPECTED_UNKNOWN_DOMAIN_GENERATOR_ERROR:"+code)
+
+
+def test_v5_totality_includes_genuine_str_and_bytes_subclasses_without_instance_hooks():
     beacon=_AdversarialStr("A"*16+"\ud800")
     secret_text=_AdversarialStr("S"*31+"\udfff")
+    assert g5._is_genuine_runtime_instance(beacon,str) is True
     packet=g5._generate(
         beacon=beacon,
         evaluator_secret=secret_text,
@@ -111,4 +152,44 @@ def test_v5_totality_includes_isinstance_accepted_str_and_bytes_subclasses():
     _run(packet)
 
     secret_bytes=_AdversarialBytes(b"B"*32)
+    assert g5._is_genuine_runtime_instance(secret_bytes,bytes) is True
     assert g5._secret_bytes_total(secret_bytes)==b"B"*32
+
+
+def test_v5_rejects_isinstance_class_spoof_proxies_before_payload_descriptors():
+    fake_str=_FakeStr()
+    fake_bytes=_FakeBytes()
+
+    # CPython consults an instance __class__ attribute for isinstance(), which is
+    # exactly why isinstance is not a sound payload-domain authority here.
+    assert isinstance(fake_str,str) is True
+    assert isinstance(fake_bytes,bytes) is True
+
+    assert g5._is_genuine_runtime_instance(fake_str,str) is False
+    assert g5._is_genuine_runtime_instance(fake_bytes,bytes) is False
+
+    _expect_generator_error(
+        lambda:g5._canonical_beacon(fake_str),
+        "POST_FREEZE_BEACON_INVALID",
+    )
+    _expect_generator_error(
+        lambda:g5._secret_bytes_total(fake_str),
+        "EVALUATOR_SECRET_INVALID",
+    )
+    _expect_generator_error(
+        lambda:g5._secret_bytes_total(fake_bytes),
+        "EVALUATOR_SECRET_INVALID",
+    )
+
+
+def test_runtime_type_gate_cannot_be_spoofed_by_instance_class_property():
+    assert g5.RUNTIME_TYPE_GATE=="TYPE_OBJECT_MRO_MEMBERSHIP_VIA_TYPE_BASE_DESCRIPTOR"
+    for value,base in (
+        ("x",str),
+        (_AdversarialStr("x"),str),
+        (b"x",bytes),
+        (_AdversarialBytes(b"x"),bytes),
+    ):
+        assert g5._is_genuine_runtime_instance(value,base) is True
+    assert g5._is_genuine_runtime_instance(_FakeStr(),str) is False
+    assert g5._is_genuine_runtime_instance(_FakeBytes(),bytes) is False
