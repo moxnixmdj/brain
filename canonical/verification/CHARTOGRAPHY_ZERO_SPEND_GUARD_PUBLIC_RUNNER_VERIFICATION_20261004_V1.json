@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_ZERO_SPEND_GUARD_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__EXACT_GEMINI_3_5_FLASH_JUDGE__1000_CALL_FLOOR__FAIL_CLOSED_ZERO_SPEND__ZERO_CREDIT",
+  "subject": {
+    "governance_path": "canonical/governance/CHARTOGRAPHY_ZERO_SPEND_GUARD_V1.json",
+    "governance_git_blob_sha": "567c10202bb94a116ef5dcc396608d1eb15747cd",
+    "runtime_path": "canonical/runtime/chartography_zero_spend_guard_v1.py",
+    "runtime_git_blob_sha": "babc797980d52afd79d9e8e655ecce078b041ac2",
+    "tests_path": "canonical/tests/test_chartography_zero_spend_guard_v1.py",
+    "tests_git_blob_sha": "125172532a02dd99498085e679f9310a4671ac9b"
+  },
+  "official_chartography": {
+    "repository": "surge-ai/chartography",
+    "commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+    "task_path": "src/chartography/task.py",
+    "task_git_blob_sha": "163d910274f06720b601006ef1b6266e7cfd30b6",
+    "judge_model": "google/gemini-3.5-flash",
+    "minimum_judge_calls": 1000
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_infrastructure_pull_request": 1503,
+    "trigger_pull_request": 1508,
+    "trigger_head_sha": "04ae1b38f56a0291c2ee61b9dba0caa3af199586",
+    "trigger_merge_commit": "c77e9e8d5857c64dbf390feada4c06eab76a6835",
+    "workflow_run_id": 37163725050,
+    "workflow_job_id": 111322279817,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_brain_blob_identities": true,
+    "exact_official_judge_model": true,
+    "minimum_judge_calls": 1000,
+    "unverified_account_state_fails_closed": true,
+    "model_drift_fails_closed": true,
+    "paid_fallback_fails_closed": true,
+    "overage_fails_closed": true,
+    "nonzero_incremental_spend_fails_closed": true,
+    "insufficient_free_capacity_fails_closed": true,
+    "retry_capacity_erosion_fails_closed": true,
+    "zero_credit_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_PROJECT_HAS_GEMINI_3_5_FLASH_FREE_TIER_ACCESS",
+    "NO_CLAIM_PROJECT_HAS_1000_CALL_CAPACITY",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_BRAIN_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
