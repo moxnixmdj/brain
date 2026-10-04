@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_SLOT_FEASIBILITY_TRUTH_REPAIR_V1",
   "date": "2026-10-05",
-  "status": "TRUTH_REPAIR__STRUCTURAL_REDUCTION_PRESERVED__SLOT_FEASIBILITY_LAYER_REQUIRED__FALSE_REQUIRED_FORBIDDEN_UNSAT_REVOKED__PUBLIC_WORD_DOMAIN_BOUND__ZERO_ACCEPTANCE_CREDIT",
+  "status": "TRUTH_REPAIR__STRUCTURAL_REDUCTION_PRESERVED__SLOT_FEASIBILITY_LAYER_REQUIRED__FALSE_REQUIRED_FORBIDDEN_AND_SECTION_FORBIDDEN_UNSAT_REVOKED__ZERO_ACCEPTANCE_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "problem": "The existing 928 conflict-compatible active15 ID sets and seven archetypes compress the public conflict graph, but ID-level compatibility is not logically equivalent to satisfiability of the concrete visible checker slots.",
@@ -42,13 +42,13 @@
   },
   "new_runtime": {
     "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
-    "git_blob_sha": "56c39dafa24be235982557bbdf5678bef2ae8fae",
+    "git_blob_sha": "7215b34f72a9da3cef2a9a937f2f168f92134d12",
     "tests_path": "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py",
-    "tests_git_blob_sha": "b2eef299fa9d422b32870bee9cb217a6b7136908",
+    "tests_git_blob_sha": "9bb4f6b659589cd5d38a319141c45fe218cd8c33",
     "certified_hard_unsat_classes": [
       "NTH_PARAGRAPH_FIRST_WORD_EQUALS_A_FORBIDDEN_WORD",
       "MANDATORY_END_PHRASE_CONTAINS_A_GENERATED_LITERAL_FORBIDDEN_WORD",
-      "MANDATORY_SECTION_SPLITTER_EQUALS_A_GENERATED_LITERAL_FORBIDDEN_WORD"
+      "SENTENCE_LESS_THAN_ONE_WITH_A_PUBLIC_MANDATORY_END_PHRASE"
     ],
     "important_semantics": "NO_REPORTED_CONTRADICTION_MEANS_UNKNOWN_NOT_SAT; THE_LAYER_FAILS_CLOSED"
   },
@@ -103,8 +103,14 @@
       "same_instructions_util_blob_at_both_commits": true
     },
     "word_list_domain": "ALL_1525_ENTRIES_ARE_UNIQUE_ASCII_ALPHABETIC_WORDS",
-    "multiple_sections_forbidden_hard_collision_word": "section",
-    "multiple_sections_forbidden_collision_probability_conditional_on_pair": 0.003278688524590123,
+    "multiple_sections_forbidden_truth_repair": {
+      "prior_false_unsat_certificate_revoked": true,
+      "pinned_section_checker_pattern": "\\s?Section\\s?\\d+\\s?",
+      "pinned_forbidden_semantics": "WORD_BOUNDARY_REGEX_SEARCH_IGNORECASE",
+      "constructive_counterexample": "Section1 zxqv Section2 zxqv Section3 zxqv",
+      "reason": "SECTIONCHECKER_ALLOWS_ZERO_WHITESPACE_BEFORE_DIGIT__DIGIT_IS_A_REGEX_WORD_CHARACTER__SO_WORD_BOUNDARY_SECTION_WORD_BOUNDARY_DOES_NOT_MATCH_SECTION1",
+      "consequence": "FORBIDDEN_SECTION_DOES_NOT_BY_ITSELF_MAKE_MULTIPLE_SECTIONS_UNSAT"
+    },
     "parser_repair": "PRIOR_DIAGNOSTIC_PARSER_OVERREAD_THE_WORD_LIST_LITERAL_INTO_LATER_SOURCE; COUNTS_AND_PROBABILITIES_RECOMPUTED_FROM_BALANCED_BRACKET_EXTRACTION"
   },
   "corrected_proof_target": {
@@ -128,7 +134,7 @@
     "NO_ACCEPTANCE_CREDIT",
     "NO_FAMILY_CAPABILITY_CREDIT",
     "NO_OWNERSHIP_CREDIT",
-    "NO_CLAIM_THAT_THE_TWO_CURRENT_HARD_UNSAT_CLASSES_ARE_COMPLETE"
+    "NO_CLAIM_THAT_THE_THREE_CURRENT_HARD_UNSAT_CLASSES_ARE_COMPLETE"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
