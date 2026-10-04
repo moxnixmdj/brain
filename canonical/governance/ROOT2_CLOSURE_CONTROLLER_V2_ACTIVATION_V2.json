@@ -17,7 +17,8 @@
     "verifier_merge_commit": "b7c190c6951fec505ec88467abc3e3c6a3be2c37",
     "workflow_run_id": 37166366078,
     "workflow_job_id": 111329972862,
-    "conclusion": "success"
+    "conclusion": "success",
+    "git_blob_sha": "462d2fdd2f216d5b8726ca0ccbd6818a4afb4585"
   },
   "semantic_delta": {
     "synthesis_required_claim_coverage_noninferiority": "PROVED",
