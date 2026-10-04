@@ -108,3 +108,59 @@ def test_quotation_bullets_and_end_all_compose():
     response = out["response"]
     assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")
+
+
+def test_json_route_avoids_fixed_forbidden_response_token():
+    prompt = (
+        "Include keywords ['cat'] in the response. "
+        "Do not include keywords ['response', 'cat'] in the response. "
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as code fences."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert '"response"' not in out["response"].lower()
+    assert "cat" in out["response"].lower()
+
+
+def test_two_response_route_uses_forbidden_safe_numeric_distinguishers():
+    prompt = (
+        "Do not include keywords ['alpha', 'beta', 'response'] in the response. "
+        "Give two different responses. Responses and only responses should be separated by 6 asterisk symbols: ******."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["response"].count("******") == 1
+    for bad in ("alpha", "beta", "response"):
+        assert bad not in out["response"].lower()
+
+
+def test_required_carrier_escapes_second_order_forbidden_collision():
+    prompt = (
+        "Include keywords ['cat'] in the response. "
+        "Do not include keywords ['cat', 'catx', 'catxx', 'catxxx', 'catxxxx'] in the response."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    response = out["response"].lower()
+    assert "cat" in response
+    import re
+    for bad in ("cat", "catx", "catxx", "catxxx", "catxxxx"):
+        assert re.search(r"\\b" + re.escape(bad) + r"\\b", response) is None
+
+
+def test_less_than_one_sentence_fails_closed_until_zero_sentence_composition_is_proved():
+    prompt = "Your response should contain less than 1 sentences."
+    out = solve(_env(prompt))
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["error"] == "LESS_THAN_ONE_SENTENCE_NOT_PROVED"
+
+
+def test_less_than_two_sentence_postscript_end_interaction_fails_closed_until_exact_proof():
+    prompt = (
+        "Your response should contain less than 2 sentences. "
+        "At the end of your response, please explicitly add a postscript starting with P.S. "
+        "Finish your response with this exact phrase Any other questions?. No other words should follow this phrase."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["error"] == "LESS_THAN_TWO_SENTENCE_POSTSCRIPT_END_NOT_PROVED"
