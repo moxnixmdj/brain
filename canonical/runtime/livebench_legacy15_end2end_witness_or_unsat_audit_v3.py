@@ -7,7 +7,7 @@ must be discharged by either:
   or
 - an explicit checker-semantics UNSAT certificate.
 
-Two adversarial profiles are generator-admitted slot collisions. They ensure an
+Three adversarial profiles are generator-admitted slot collisions. They ensure an
 impossible tuple is counted as a proved UNSAT contract, not as a solver defect.
 No terminal rows, terminal prompts, terminal scores, hidden runtime kwargs, or
 learned model outputs are exposed to the runtime solver.
@@ -54,6 +54,19 @@ ADVERSARIAL_PROFILES = (
         "sections": ("Section", 2),
         "end": "Any other questions?",
     },
+    {
+        "name": "SLOT_UNSAT_SECTION_FORBIDDEN",
+        "existence": ["cedar", "orbit", "meadow", "quartz", "signal"],
+        "forbidden": ["section", "apple", "market", "glass", "shoe"],
+        "paragraphs": 3,
+        "words": (180, "at least"),
+        "sentences": (6, "at least"),
+        "nth": (3, 2, "river"),
+        "postscript": "P.S.",
+        "bullets": 2,
+        "sections": ("Section", 3),
+        "end": "Any other questions?",
+    },
 )
 PROFILES = tuple(v2.PROFILES) + ADVERSARIAL_PROFILES
 
@@ -81,6 +94,21 @@ def verify_unsat_certificate(records: list[dict[str, Any]], reasons: list[str]) 
             first = str(nth.get("first_word") or "")
             words = [str(x) for x in forb.get("forbidden_words") or []]
             if not first or not any(first.casefold() == w.casefold() for w in words):
+                return False
+            continue
+
+        section_prefix = "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:"
+        if reason.startswith(section_prefix):
+            sections = by.get("detectable_format:multiple_sections")
+            forb = by.get("keywords:forbidden_words")
+            if not sections or not forb:
+                return False
+            hit = reason[len(section_prefix):]
+            splitter = str(sections.get("section_spliter") or "")
+            words = [str(x) for x in forb.get("forbidden_words") or []]
+            if splitter.casefold() != hit.casefold():
+                return False
+            if not any(w.casefold() == hit.casefold() for w in words):
                 return False
             continue
 
@@ -246,7 +274,7 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
         "failure_samples": failures,
         "hard_nonclaims": [
             "SYNTHETIC_PUBLIC_GENERATOR_ADMITTED_PROFILE_EVIDENCE_ONLY",
-            "SIX_PARAMETER_PROFILES_DO_NOT_BY_THEMSELVES_PROVE_THE_ENTIRE_SLOT_DOMAIN",
+            "SEVEN_PARAMETER_PROFILES_DO_NOT_BY_THEMSELVES_PROVE_THE_ENTIRE_SLOT_DOMAIN",
             "NO_TERMINAL_CASE_CONTENT_READ",
             "NO_ACTIVE_TERMINAL_SCORE_CLAIM",
             "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
