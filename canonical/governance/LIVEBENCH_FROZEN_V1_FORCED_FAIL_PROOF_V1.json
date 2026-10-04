@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FROZEN_V1_FORCED_FAIL_PROOF_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__DEDUCTIVE_FORCED_FAIL_OF_EXACT_FROZEN_V1_CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "frozen_candidate": {
+    "commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+    "adapter_v1_blob": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
+    "astra_runtime_blob": "7f5d16b1db69cb620954bc778e0ba6e15e687b75"
+  },
+  "benchmark": {
+    "population_count": 200,
+    "threshold_percent": 65.7,
+    "threshold_mass": 131.4,
+    "case_max_score": 1,
+    "replayed_prefix_count": 72,
+    "remaining_case_count": 128
+  },
+  "additive_successor": {
+    "adapter_v2_blob": "dbc895a0e458e411aafd3c96e0ddc2c01e657375",
+    "compiler_blob": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+    "rule": "V2 either returns a compiler-produced valid model-independent response, or calls exact frozen fallback_v1.infer(request) unchanged."
+  },
+  "observed_replay": {
+    "workflow_run_id": 37195688717,
+    "workflow_job_id": 111416950471,
+    "replayed_already_exposed_cases": 72,
+    "new_case_exposure": false,
+    "valid_response_count": 0,
+    "classification_histogram": {
+      "ARCHITECTURAL_GAP:CONTROL_OR_FANOUT": 2,
+      "COMPOSITION_PRODUCER:UNRESOLVED_GROUNDED_CLAUSES": 27,
+      "POLICY_BLOCK:POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN": 43
+    },
+    "unclassified_runtime_count": 0
+  },
+  "deduction": [
+    "No observed case took V2's compiler-success return path, because that path would classify as VALID_RESPONSE.",
+    "All 72 observed cases therefore reached exact fallback_v1 behavior or a downstream blocker reachable only after fallback.",
+    "Each observed class is an inference blocker, so the frozen executor assigns score 0 to that case.",
+    "Thus the exact frozen V1 candidate has score mass 0 on these 72 cases.",
+    "Even if all remaining 128 cases score the per-case maximum 1.0, total score mass is at most 128.",
+    "128 < 131.4, so the exact frozen V1 candidate cannot reach 65.7%."
+  ],
+  "arithmetic": {
+    "prefix_score_upper_bound": 0,
+    "remaining_score_upper_bound": 128,
+    "full_population_score_upper_bound": 128,
+    "full_population_percent_upper_bound": 64,
+    "threshold_percent": 65.7,
+    "margin_below_threshold_percentage_points": 1.7,
+    "predicate_for_frozen_v1": "FAIL_FORCED"
+  },
+  "implications": [
+    "STOP_ANY_ATTEMPT_TO_SPEND_NEW_TERMINAL_CASES_ON_THIS_EXACT_FROZEN_V1_CANDIDATE.",
+    "A_FUTURE_BRAIN_REVISION_MAY_REPAIR_THE_CAPABILITY_GAP_BUT_MUST_NOT_REUSE_THIS_PROOF_AS_A_FAIL_OF_THAT_SUCCESSOR.",
+    "ANY_SUCCESSOR_TUNED_USING_EXPOSED_PREFIX_INFORMATION_REQUIRES_A_NEW_ADMISSIBLE_COMPARATOR_POPULATION_OR_SEPARATELY_VERIFIED_STRONGER_PROOF."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_FUTURE_BRAIN_REVISIONS_FAIL_LIVEBENCH.",
+    "NO_ACCEPTANCE_CREDIT.",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE.",
+    "NO_CLAIM_V10_SUCCESSOR_IS_ADMISSIBLE_FOR_THE_FROZEN_ACCEPTANCE_RUN."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
