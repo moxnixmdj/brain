@@ -6,7 +6,7 @@ from canonical.runtime.livebench_shadow_point_of_use_preflight_v1 import (
 )
 
 ROOT=Path(__file__).resolve().parents[2]
-PLAN=ROOT/"canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V2.json"
+PLAN=ROOT/"canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json"
 
 def plan():
     return json.loads(PLAN.read_text())
@@ -40,11 +40,16 @@ def receipt():
         "path":"canonical/governance/SHADOW_GIT_REF_ONE_USE_CLAIM_BACKEND_V1.json",
         "git_blob_sha":"b660e2ee70f42c7872a9b65c78198c5bdbf03609",
       },
+      "resource_fit_verification_receipt":{
+        "path":"canonical/verification/LIVEBENCH_ZERO_CASE_RESOURCE_FIT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "git_blob_sha":"667943c418a434988d915bfb2ac736679af3bf7b",
+      },
     }
 
 def test_exact_zero_case_preflight_passes_without_reveal_authority():
     out=verify_point_of_use_preflight(plan(),receipt())
     assert out["point_of_use_preflight_pass"] is True
+    assert out["resource_fit_receipt_bound"] is True
     assert out["terminal_cases_consumed"] == 0
     assert out["case_reveal_authority"] is False
     assert out["shadow_collection_authority"] is False
@@ -55,13 +60,11 @@ def test_exact_zero_case_preflight_passes_without_reveal_authority():
 def test_claim_absence_precheck_is_not_required():
     r=receipt()
     assert "claim_ref_absent_observed" not in r
-    out=verify_point_of_use_preflight(plan(),r)
-    assert out["point_of_use_preflight_pass"] is True
+    assert verify_point_of_use_preflight(plan(),r)["point_of_use_preflight_pass"] is True
 
 def test_legacy_absence_observation_does_not_control_readiness():
     r=receipt(); r["claim_ref_absent_observed"]=False
-    out=verify_point_of_use_preflight(plan(),r)
-    assert out["point_of_use_preflight_pass"] is True
+    assert verify_point_of_use_preflight(plan(),r)["point_of_use_preflight_pass"] is True
 
 def test_claim_ref_must_be_digest_derived():
     r=receipt(); r["claim_ref"]="refs/heads/shadow-claims/wrong"
@@ -71,16 +74,20 @@ def test_claim_ref_must_be_digest_derived():
 
 def test_any_case_exposure_blocks_preflight():
     r=receipt(); r["case_reveal_has_occurred"]=True
-    out=verify_point_of_use_preflight(plan(),r)
-    assert out["point_of_use_preflight_pass"] is False
+    assert verify_point_of_use_preflight(plan(),r)["point_of_use_preflight_pass"] is False
 
 def test_failed_zero_case_smoke_blocks_preflight():
     r=receipt(); r["synthetic_zero_case_smoke_pass"]=False
-    out=verify_point_of_use_preflight(plan(),r)
-    assert out["point_of_use_preflight_pass"] is False
+    assert verify_point_of_use_preflight(plan(),r)["point_of_use_preflight_pass"] is False
 
 def test_wrong_claim_backend_blob_blocks_preflight():
     r=receipt(); r["claim_backend_receipt"]["git_blob_sha"]="0"*40
     out=verify_point_of_use_preflight(plan(),r)
     assert out["point_of_use_preflight_pass"] is False
-    assert "CLAIM_BACKEND_BLOB_MISMATCH" in out["reasons"]
+    assert "CLAIM_BACKEND_RECEIPT_MISMATCH" in out["reasons"]
+
+def test_missing_resource_fit_receipt_blocks_preflight():
+    r=receipt(); del r["resource_fit_verification_receipt"]
+    out=verify_point_of_use_preflight(plan(),r)
+    assert out["point_of_use_preflight_pass"] is False
+    assert "RESOURCE_FIT_RECEIPT_MISSING" in out["reasons"]
