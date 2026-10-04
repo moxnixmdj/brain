@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_GENERATOR_LINEAGE_BREAKTHROUGH_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_BREAKTHROUGH__HISTORICAL_SOURCE_RECOVERED__ACTIVE_TERMINAL_CASES_UNREAD__PREDECESSOR_REPLAY_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "trigger": {
+    "verified_dispatch_artifact": "canonical/verification/LIVEBENCH_FROZEN_POPULATION_DISPATCH_METADATA_VERIFICATION_20261004_V1.json",
+    "verified_fact": "ALL_200_ACTIVE_ROWS_ROUTE_TO_LEGACY_IFEVAL__MODERN_IFBENCH_ROWS_ZERO",
+    "consequence": "MODERN_IFBENCH_PUBLIC_SCORE_MASS_CUTS_DO_NOT_BIND_THE_CURRENT_ROOT1_POPULATION"
+  },
+  "truth_repair": {
+    "superseded_for_root1_scheduling": "canonical/governance/LIVEBENCH_ROOT1_OBSERVABILITY_SCHEDULER_SUPERSESSION_20261004_V1.json",
+    "superseded_claim": "PROVE_ANY_198_SINGLE_CHECKER_ROWS_FROM_THE_MODERN_300_ROW_IFBENCH_PUBLIC_POPULATION",
+    "reason": "THE_198_ROW_CUT_IS_DERIVED_FROM_A_DIFFERENT_MODERN_IFBENCH_POPULATION_WHILE_THE_EXACT_FROZEN_ROOT1_POPULATION_IS VERIFIED_200_OF_200_LEGACY",
+    "modern_198_cut_retained_scope": "MODERN_IFBENCH_RESEARCH_ONLY__NOT_LOAD_BEARING_FOR_FROZEN_ROOT1"
+  },
+  "recovered_historical_generator": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "path": "livebench/if_runner/live_data.py",
+    "git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "readme_path": "livebench/if_runner/README.md",
+    "readme_git_blob_sha": "7e5297cdbb259544a0f5df6ea813f90a5cdc13b8",
+    "source_facts": [
+      "GENERATOR_FETCHES_GUARDIAN_ARTICLES",
+      "GENERATOR_TARGETS_200_ARTICLES",
+      "GENERATOR_SPLITS_ACROSS_FOUR_TASKS",
+      "GENERATOR_SAMPLES_NONCONFLICTING_LEGACY_INSTRUCTION_IDS",
+      "GENERATOR_CALLS_EACH_CHECKERS_build_description_TO_OBTAIN_VISIBLE_CONSTRAINT_TEXT",
+      "GENERATOR_CONCATENATES_RETURNED_DESCRIPTION_TEXT_VERBATIM_INTO_THE_VISIBLE_PROMPT",
+      "GENERATOR_SETS_combination_repeat_prompt.prompt_to_repeat_TO_THE_VISIBLE_PREFIX_BEFORE_THE_REPEAT_MARKER"
+    ]
+  },
+  "frozen_population_structural_alignment": {
+    "exact_frozen_raw_rows": 400,
+    "exact_active_rows": 200,
+    "exact_active_task_counts": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    },
+    "exact_active_release_date": "2024-11-25",
+    "alignment": "200_TOTAL__FOUR_EQUAL_TASK_BUCKETS__GUARDIAN_BASED_INSTRUCTION_FOLLOWING_PIPELINE",
+    "hard_boundary": "STRUCTURAL_ALIGNMENT_PLUS_HISTORICAL_SOURCE_IS_NOT_BY_ITSELF_A_BYTE_LEVEL_LINEAGE_PROOF"
+  },
+  "clean_predecessor_verification_target": {
+    "hf_repository": "livebench/instruction_following",
+    "hf_revision": "4f7ab12f0d47848da31de92bd7cc3d7d4acfe695",
+    "parquet_sha256": "57cbc3a738f7a95b234125965929247e7781ce6c5216bdea1d18548f4b10e98c",
+    "rows": 200,
+    "relation_to_frozen_revision": "DIRECT_PARENT_DATASET_STATE_BEFORE_0868379_DOUBLED_200_TO_400",
+    "purpose": "VERIFY_VISIBLE_TEMPLATE_RECOGNITION_AND_PARAMETER_RECONSTRUCTION_ON_THE_REMOVED_HISTORICAL_GENERATOR_FAMILY_WITHOUT_READING_ANY_ACTIVE_2024_11_25_TERMINAL_PROMPT"
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py",
+    "tests": "canonical/tests/test_livebench_legacy_visible_constraint_compiler_v2.py",
+    "improvements_over_v1": [
+      "RECOVER_LEGACY_combination_repeat_prompt.prompt_to_repeat_FROM_VISIBLE_PREFIX_USING_THE_GENERATORS_OWN_RULE",
+      "HARD_BOUND_detectable_content_postscript_TO_THE_ONLY_TWO_PINNED_MARKERS_P_S_AND_P_P_S",
+      "REPORT_25_OF_25_PARAMETER_TYPES_VISIBLE_UNDER_THE_HISTORICAL_GENERATOR_CONTRACT"
+    ]
+  },
+  "new_minimum_cut": [
+    "INDEPENDENTLY_REPLAY_COMPILER_V2_ON_THE_200_ROW_4F7AB12_PREDECESSOR_AND_REQUIRE_EXACT_INSTRUCTION_MULTISET_PLUS_SCORE_RELEVANT_KWARG_RECOVERY",
+    "IF_PREDECESSOR_REPLAY_PASSES__PROVE_NO_REPHRASING_OR_DESCRIPTION_MUTATION_STAGE_BETWEEN_THE_RECOVERED_GENERATOR_FAMILY_AND_THE_FROZEN_2024_11_25_ADDITION_WITHOUT_READING_ACTIVE_PROMPTS",
+    "THEN_BUILD_DETERMINISTIC_JOINT_WITNESS_SYNTHESIS_FOR_THE_25_LEGACY_CHECKERS_AND_VALIDATE_AGAINST_EXACT_PINNED_PUBLIC_CHECKER_BYTES",
+    "ONLY_AFTER_A_FROZEN_SUCCESSOR_PRECOMMIT__SPEND_FRESH_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_ACTIVE_2024_11_25_TERMINAL_PROMPT_WAS_READ_FOR_THIS_ARTIFACT",
+    "NO_CLAIM_COMPILER_V2_ALREADY_PASSES_THE_200_ROW_PREDECESSOR",
+    "NO_CLAIM_LINEAGE_IS_YET_BYTE_LEVEL_PROVED",
+    "NO_LIVEBENCH_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_SEMANTIC_CAPABILITY_CREDIT_FROM_A_SCORER_CONSTRAINT_COMPILER"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_active_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
