@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_QWEN38_Q2_ZERO_COST_EXECUTION_HYPOTHESIS_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_EXECUTION_FIT_EXPERIMENT__RUN_QUEUED__ZERO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "exact_comparator": {
+    "model": "claude-opus-5-5-max-effort",
+    "exact_four_task_mean_percent": 65.73775
+  },
+  "source_model": {
+    "model": "Qwen/Qwen3.8-27B",
+    "exact_four_task_mean_percent": 72.65825,
+    "margin_pp": 6.9205
+  },
+  "execution_subject": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "revision": "27af057ecb382ddfea5d12837360a8980560e3ed",
+    "file": "Qwen3.8-27B-UD-Q2_K_XL.gguf",
+    "bytes": 9828981664,
+    "sha256": "fd4730dd8aad070517978752b63d530aeb1740d2283cab9fa24f1e404032ddb0",
+    "quantization": "UD-Q2_K_XL",
+    "score_inheritance": false
+  },
+  "exact_retention_requirement": {
+    "bf16_mean_percent": 72.65825,
+    "required_quantized_mean_percent": 65.73775,
+    "minimum_score_retention_fraction": 0.9047527293872342,
+    "maximum_relative_score_loss_percent": 9.524727061276582,
+    "theorem": "IF_THE_EXACT_QUANTIZED_SUBJECT_RETAINS_AT_LEAST_90_4752729387_PERCENT_OF_THE_BF16_FOUR_TASK_MEAN_ON_THE_SAME_GEOMETRY_THEN_IT_MEETS_OR_EXCEEDS_OPUS55"
+  },
+  "zero_cost_runner_envelope": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "repository_visibility": "public",
+    "runner": "ubuntu-24.04",
+    "cpu": 4,
+    "ram_gb": 16,
+    "storage_gb": 14,
+    "public_standard_runner_cost_basis": "FREE_AND_UNLIMITED_PER_GITHUB_PUBLIC_RUNNER_DOCUMENTATION",
+    "paid_runner_authorized": false
+  },
+  "launched_probe": {
+    "workflow": ".github/workflows/qwen38-q2-cpu-semantic-smoke-v1.yml",
+    "workflow_commit": "071d25a6bb0fe584704708349875c522ea726d56",
+    "run_id": 37200179631,
+    "current_observed_state": "QUEUED",
+    "model_hash_check_required": true,
+    "terminal_case_content_used": false,
+    "synthetic_surfaces": [
+      "paraphrase",
+      "simplify",
+      "summarize",
+      "story_generation"
+    ]
+  },
+  "evidence_boundary": {
+    "public_quantization_prior": "EXTERNAL_NONMATCHED_TESTS_REPORT_Q2_K_XL_NEAR_HIGHER_BIT_TASK_BEHAVIOR_ON_SOME_SUITES",
+    "transfer_to_livebench": "NOT_PROVED",
+    "smoke_pass_if_observed": "EXECUTION_FIT_AND_BASIC_SEMANTIC_SURFACE_ONLY",
+    "acceptance_requires": "MATCHED_ADMISSIBLE_QUALIFICATION_OF_EXACT_STORED_EXECUTION_FORM",
+    "no_score_inheritance_from_bf16": true
+  },
+  "next_decision_rule": [
+    "IF_PROBE_CANNOT_LOAD_OR_RUN_WITHIN_PUBLIC_RUNNER_ENVELOPE__REJECT_THIS_EXECUTION_FORM_FOR_ZERO_COST_CPU_ROUTE",
+    "IF_PROBE_RUNS_BUT_FAILS_SYNTHETIC_SEMANTIC_SURFACES__REJECT_BEFORE_ANY_TERMINAL_REALITY",
+    "IF_PROBE_PASSES__ADVANCE_EXACT_SUBJECT_TO_ADMISSIBLE_NONTERMINAL_MATCHED_QUALIFICATION_WITH_PRECOMMITTED_THRESHOLDS",
+    "DO_NOT_CONSUME_NEW_TERMINAL_CASES_OR_GRANT_ACCEPTANCE_CREDIT_FROM_SMOKE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
