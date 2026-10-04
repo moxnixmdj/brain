@@ -67,6 +67,7 @@ def test_v3_structural_totality_survives_forced_token_collision(monkeypatch):
     case_ids = [x["case_id"] for x in pop["visible_cases"]]
     assert len(case_ids) == len(set(case_ids)) == 27
 
+    all_feature_ids = set()
     for visible, hidden in zip(pop["visible_cases"], pop["hidden_records"], strict=True):
         if visible["leaf_id"] == g1.TRANSFER:
             relevant = list(hidden["transfer_relevant_feature_ids"])
@@ -74,8 +75,14 @@ def test_v3_structural_totality_survives_forced_token_collision(monkeypatch):
             assert len(relevant) == len(set(relevant))
             assert len(distractors) == len(set(distractors)) == 2
             assert set(relevant).isdisjoint(distractors)
-            assert len(set(visible["domain_a"]["tasks"][0]["inputs"])) in (3, 4)
-            assert len(set(visible["domain_b"]["tasks"][0]["inputs"])) in (3, 4)
+            source_ids = set(visible["domain_a"]["tasks"][0]["inputs"])
+            target_ids = set(visible["domain_b"]["tasks"][0]["inputs"])
+            assert len(source_ids) in (3, 4)
+            assert len(target_ids) in (3, 4)
+            assert source_ids.isdisjoint(target_ids)
+            case_feature_ids = source_ids | target_ids
+            assert all_feature_ids.isdisjoint(case_feature_ids)
+            all_feature_ids.update(case_feature_ids)
         else:
             hyps = visible["hypotheses"]
             assert hyps[0]["hypothesis_id"] != hyps[1]["hypothesis_id"]
