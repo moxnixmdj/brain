@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__QUALIFIED_ONLY_AFTER_EVALUATOR_FREEZE__ZERO_LEARNED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "QUALIFY_THE_SMALLEST_BRAIN_OWNED_ZERO_LEARNED_ROUTE_FOR_THE_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_LEAVES_WITHOUT_EXECUTING_FRESH_CASES",
+  "preexposure": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_ORACLE_PREEXPOSURE_V1.json",
+    "git_blob_sha": "aa6be8dcfec12258ced6532927315b791c205bd1",
+    "frozen_before_candidate_qualification": true
+  },
+  "existing_verified_overlay": {
+    "activation_path": "canonical/governance/UNIVERSAL_LEARNING_DECISION_ROUTER_V3_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "b212fe38f3211e99f1a2c7a2ab04f09ee246149d",
+    "router_path": "canonical/runtime/universal_learning_decision_router_v3.py",
+    "router_git_blob_sha": "a0bdb4d480f8f5391391878626ffebfaae26a61a",
+    "structural_transfer_path": "canonical/runtime/structural_transfer_v3.py",
+    "structural_transfer_git_blob_sha": "2c5d854ba88493edcd843ae4ac2994e727319fa7",
+    "decision_discriminator_path": "canonical/runtime/decision_discriminator_v3.py",
+    "decision_discriminator_git_blob_sha": "3ec9e43a7bbe40a264fa3560a93039461941dbee",
+    "independent_public_runner_pass": true
+  },
+  "new_exact_bound_components": {
+    "canonical/runtime/structural_mapping_prover_v1.py": "ce8956b43471f0d53b3ce897c1a07e3ce5877133",
+    "canonical/runtime/unknown_domain_direct_adapter_v1.py": "7935053825f19daa620f343f2faafbb3a39ae6d8",
+    "canonical/tests/test_unknown_domain_direct_adapter_v1.py": "daf092fcfece0eb9c1fc8b52188f9ce4f1e4b387"
+  },
+  "route": {
+    "cross_domain_transfer": [
+      "PROPOSE_MAPPING_FROM_TYPED_DIRECTED_STRUCTURE_ONLY",
+      "IGNORE_SURFACE_LABELS_AND_ARBITRARY_METADATA",
+      "REJECT_ZERO_MAPPING_CASE",
+      "ABSTAIN_ON_MULTIPLE_MAPPING_CASE",
+      "REQUIRE_HIDDEN_EVALUATOR_RECEIPT_BOUND_TO_EXACT_MAPPING_DIGEST",
+      "ONLY_THEN_REUSE_VERIFIED_SOURCE_PRIMITIVE_THROUGH_V3",
+      "DO_NOT_INVOKE_FULL_TARGET_PRIMITIVE_REDISCOVERY"
+    ],
+    "calibrated_unknown_or_abstention": [
+      "RETURN_COMMON_ACTION_WHEN_ALL_POSITIVE_MASS_LIVE_HYPOTHESES_AGREE",
+      "SELECT_ONLY_SAFE_POSITIVE_DECISION_GAIN_DISCRIMINATOR_WHEN_NEEDED",
+      "ABSTAIN_OR_REQUEST_DISCRIMINATOR_WHEN_NO_SAFE_POSITIVE_GAIN_ROUTE_EXISTS"
+    ]
+  },
+  "resource_boundary": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "incremental_spend_usd": 0
+  },
+  "qualification_boundary": {
+    "fresh_case_execution": false,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "acceptance_credit": false
+  },
+  "next": "INDEPENDENTLY_VERIFY_EXACT_ZERO_CASE_CANDIDATE_BYTES_AND_ADVERSARIAL_PUBLIC_FIXTURES__THEN_COMPILE_PREDICATE_LOCAL_ONE_USE_EXECUTION_AUTHORITY_CANDIDATE_FOR_ONLY_THE_TWO_FROZEN_LEAVES",
+  "hard_nonclaims": [
+    "PUBLIC_FIXTURE_PASS_IS_NOT_DIRECT_LEAF_CLOSURE",
+    "NO_FRESH_UNKNOWN_DOMAIN_CASE_HAS_BEEN_EXECUTED",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
