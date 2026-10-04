@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_COMBINED_ZERO_REALITY_REDUCTIONS_ROOT_PROJECTION_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_ROOT_BLOB_9AC3C636__RELATIVE_ELO_PLUS_SYNTHESIS_REDUCTIONS__ZERO_CREDIT",
+  "exact_root": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "9ac3c636b2ed76c7f4b1c7cfd8e2762bc7230d0c"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1687,
+    "merge_commit": "403b6842ed578fc02a5c679e2dad2d3d0ac86ed3",
+    "workflow_run_id": 37178715137,
+    "workflow_job_id": 111366683001,
+    "conclusion": "success"
+  },
+  "reductions": [
+    {
+      "id": "RELATIVE_ELO_ABSOLUTE_PROOF_NONTRANSPORT",
+      "activation_git_blob_sha": "5edaf436becf45c8d8f3477ac7a53a1e8ac3a63a",
+      "verification_git_blob_sha": "b6daf8b1892a8dc11020b6c5a4102b1fed256240"
+    },
+    {
+      "id": "SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER",
+      "activation_git_blob_sha": "300fb663e6b598b389961ddf663d88abcd206545",
+      "verification_git_blob_sha": "e13360b7aba2756f0eb97cac977515c07f3bcbdc"
+    }
+  ],
+  "terminal_truth": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
