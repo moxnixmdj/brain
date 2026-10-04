@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V10_FORMAL_ROUTING_REPLAY72_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_VERIFIED_FORMAL_ROUTING_DELTA_MEASUREMENT__ALREADY_EXPOSED_72_ONLY__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "supersedes_unclaimed_candidate": "canonical/governance/LIVEBENCH_V9_FORMAL_ROUTING_REPLAY72_CANDIDATE_V1.json",
+  "supersession_reason": "COMPILER_BLOB_SUPERSEDED_BEFORE_V9_ONE_USE_EPOCH_CLAIM__NEW_VERIFIED_UNQUOTED_EXACT_ATOM_EXTENSION_DOMINATES_OLD_COMPILER",
+  "subjects": {
+    "adapter_v2": {
+      "path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v2.py",
+      "git_blob_sha": "dbc895a0e458e411aafd3c96e0ddc2c01e657375"
+    },
+    "compiler": {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    },
+    "fallback_v1": {
+      "path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v1.py",
+      "git_blob_sha": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7"
+    },
+    "base_replay_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e"
+  },
+  "replay_scope": {
+    "already_exposed_prefix_only": true,
+    "replay_prefix_limit": 72,
+    "new_case_exposure": false,
+    "case_73_or_later": false,
+    "aggregate_structural_histogram_only": true
+  },
+  "one_use_epoch": {
+    "epoch_digest_sha256": "a71f24f79df6b6be6e910efb1299776ac9fede9e78539577695d6e386fc2eb52",
+    "claim_ref": "refs/heads/livebench-v10-claims/a71f24f79df6b6be6e910efb1299776ac9fede9e78539577695d6e386fc2eb52"
+  },
+  "hard_rules": [
+    "NO_CASE_73_OR_LATER",
+    "NO_SEMANTIC_SEED_REQUIRED_SHORTCUT",
+    "NO_POLICY_WEAKENING",
+    "NO_PROMPT_RESPONSE_CASE_ID_OR_RAW_EXCEPTION_OUTPUT",
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT"
+  ],
+  "authority": {
+    "execution": false,
+    "replay72": false,
+    "new_case_exposure": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_authorized": 0,
+    "acceptance_credit_delta": 0
+  }
+}
