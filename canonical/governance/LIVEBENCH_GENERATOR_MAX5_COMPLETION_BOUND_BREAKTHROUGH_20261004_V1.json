@@ -23,14 +23,14 @@
     "minimum_final_instruction_completion_score_marginal": "3/5",
     "completion_marginal_formula": "1/2 + 1/(2n)",
     "exact_target_percent": "65.73775",
-    "exact_target_score_mass_for_200": "5259/40",
+    "exact_target_score_mass_for_200": "262951/2000",
     "fully_completed_rows_sufficient": 132
   },
   "scheduler_delta_if_lineage_is_admissibly_bound": [
     "FORBID_CONSTRUCTIVE_SEARCH_OR_PROOF_OBLIGATIONS_REQUIRING_MORE_THAN_FIVE_INSTRUCTION_INSTANCES_PER_CASE",
     "PRIORITIZE_NEAR_COMPLETE_CASES_BECAUSE_EVERY_FINAL_INSTRUCTION_IS_WORTH_AT_LEAST_3/5_CASE_SCORE_MASS",
     "USE_928_AS_A_SAFE_IDENTITY_COMPOSITION_UPPER_BOUND_BEFORE_PARAMETER_DOMAINS_AND_CASE_FREQUENCIES_ARE_KNOWN",
-    "STOP_ON_EXACT_SCORE_MASS_5259/40_OR_HIGHER"
+    "STOP_ON_EXACT_SCORE_MASS_262951/2000_OR_HIGHER"
   ],
   "runtime": "canonical/runtime/livebench_legacy_generator_max5_completion_bound_v1.py",
   "tests": "canonical/tests/test_livebench_legacy_generator_max5_completion_bound_v1.py",
