@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_GITHUB_CODESPACES_TB4_ZERO_COST_CARRIER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PERSONAL_ACCOUNT_FREE_QUOTA_CLASS_VERIFIED__STATIC_8CORE_ENVELOPE_PUBLICLY_SUPPORTED__ACCOUNT_MACHINE_AVAILABILITY_AND_RUNTIME_PREFLIGHT_OPEN__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "objective": "Use the already-connected personal GitHub account's included Codespaces quota as a zero-incremental-spend carrier for the frozen eight-task TB4 attainability recovery cut if and only if repository machine availability, remaining quota, hard billing stop, usable resources, Docker/Compose, and protocol equivalence all pass.",
+  "connected_account": {
+    "authenticated_login": "moxnixmdj",
+    "connector_observation": {
+      "is_user_account": true,
+      "is_organization_account": false
+    },
+    "consequence": "QUALIFIES_FOR_GITHUB_PERSONAL_ACCOUNT_CODESPACES_INCLUDED_USAGE_CLASS__PLAN_TIER_AND_REMAINING_QUOTA_NOT_INFERRED"
+  },
+  "public_sources": [
+    {
+      "authority": "GitHub Docs",
+      "url": "https://docs.github.com/en/billing/reference/product-usage-included",
+      "fact": "Personal GitHub Free accounts include 120 Codespaces core-hours and 15 GB-month storage; GitHub Pro includes 180 core-hours and 20 GB-month storage."
+    },
+    {
+      "authority": "GitHub Docs",
+      "url": "https://docs.github.com/en/codespaces/about-codespaces/what-are-codespaces",
+      "fact": "Personal accounts can use Codespaces without payment details; when no valid payment method is on file, usage is blocked after included quota is exhausted."
+    },
+    {
+      "authority": "GitHub REST Docs",
+      "url": "https://docs.github.com/en/rest/codespaces/machines",
+      "fact": "Repository Codespaces machine examples include an 8-core, 32-GB-RAM, 64-GB-storage premium Linux machine; actual available machine types depend on repository/account/location."
+    }
+  ],
+  "frozen_recovery_cut": {
+    "path": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+    "minimum_additional_creditable_tasks": 8,
+    "minimum_carrier_envelope": {
+      "cpus_at_least": 8,
+      "usable_memory_mb_at_least": 16384,
+      "free_storage_mb_at_least": 51200,
+      "gpus_required": 0,
+      "docker_required": true,
+      "docker_compose_required": true
+    }
+  },
+  "static_envelope_comparison": {
+    "documented_8core_codespaces_example": {
+      "cpus": 8,
+      "memory_gib": 32,
+      "storage_gib": 64
+    },
+    "nominal_cpu_dominates": true,
+    "nominal_memory_dominates": true,
+    "nominal_storage_dominates": true,
+    "usable_memory_and_free_storage_not_proved": true,
+    "free_plan_minimum_wall_hours_if_8core_and_full_120_core_hours_remain": 15,
+    "pro_plan_wall_hours_if_8core_and_full_180_core_hours_remain": 22.5
+  },
+  "connector_limit": {
+    "authenticated_codespaces_machine_endpoint_attempted": true,
+    "result": "BLOCKED_BY_GITHUB_CONNECTOR_ENDPOINT_ALLOWLIST",
+    "consequence": "NO_ACCOUNT_MACHINE_AVAILABILITY_OR_CURRENT_QUOTA_CLAIM"
+  },
+  "account_specific_missing_facts": [
+    "REPO_MOXNIXMDJ_BRAIN_OFFERS_AN_8_CORE_CODESPACES_MACHINE_TO_THIS_ACCOUNT",
+    "CURRENT_INCLUDED_CODESPACES_CORE_HOUR_BALANCE_IS_SUFFICIENT",
+    "NO_VALID_PAYMENT_METHOD_OR_EXPLICIT_ZERO_BUDGET_STOP_PREVENTS_BILLABLE_FALLTHROUGH",
+    "JOB_START_USABLE_MEMORY_GE_16384_MB",
+    "JOB_START_FREE_STORAGE_GE_51200_MB",
+    "DOCKER_DAEMON_RUNS_ORDINARY_CONTAINERS",
+    "DOCKER_COMPOSE_STARTS_MULTI_CONTAINER_WORKLOAD",
+    "EIGHT_CPU_CONTAINER_LIMIT_IS_ACCEPTED",
+    "EXACT_EIGHT_TASK_RECOVERY_RUNTIME_FITS_REMAINING_INCLUDED_CORE_HOURS",
+    "CODESPACES_EXECUTION_IS_PROTOCOL_COMPARABLE_FOR_THE_FROZEN_EIGHT_TASK_SET"
+  ],
+  "decision_rule": "DO_NOT_CREATE_OR_RUN_TERMINAL_CASES_UNTIL_ALL_ACCOUNT_AND_ZERO_CASE_PREFLIGHT_FACTS_ARE VERIFIED__IF_8CORE_MACHINE_OR_HARD_ZERO_BILLING_GUARD_IS_UNAVAILABLE_CLOSE_THIS_ROUTE_WITHOUT_RETRY_SPAM",
+  "hard_nonclaims": [
+    "NO_CLAIM_8CORE_MACHINE_IS_CURRENTLY_AVAILABLE_TO_THIS_REPOSITORY",
+    "NO_CLAIM_CURRENT_CODESPACES_QUOTA_BALANCE",
+    "NO_CLAIM_NO_PAYMENT_METHOD_IS_CONFIGURED",
+    "NO_CLAIM_64_GB_NOMINAL_STORAGE_YIELDS_50_GIB_FREE_AT_JOB_START",
+    "NO_CLAIM_DOCKER_OR_COMPOSE_PREFLIGHT_HAS_RUN",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "OBSERVE_ONLY_CODESPACES_MACHINE_AVAILABILITY_REMAINING_INCLUDED_QUOTA_AND_HARD_BILLING_STOP__THEN_RUN_ZERO_CASE_RESOURCE_DOCKER_PREFLIGHT__NO_TERMINAL_CASES_BEFORE_FIXED_POINT"
+}
