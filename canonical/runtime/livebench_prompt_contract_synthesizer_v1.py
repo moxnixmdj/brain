@@ -214,6 +214,7 @@ def _modern(text: str) -> dict[str, Any] | None:
     if m:
         start, end = int(m.group(1)), int(m.group(2))
         src = text[:m.start()].rstrip()
+        src = re.sub(r"</?instructions\s*>", " ", src, flags=re.IGNORECASE)
         words = src.split()
         span = words[start:end]
         if span:
@@ -249,7 +250,7 @@ def _modern(text: str) -> dict[str, Any] | None:
     if "Respond with three sentences, all containing the same number of characters; the sentences cannot be identical." in text:
         return _pass("Aa. Bb. Cc.", "MODERN_EQUAL_CHARACTER_SENTENCES")
     if "The response must start with a verb." in text:
-        return _pass("Run.", "MODERN_START_VERB")
+        return _pass("is", "MODERN_START_VERB")
     if "Alternate between words with odd and even numbers of syllables." in text:
         return _pass("cat", "MODERN_SYLLABLE_PARITY_SINGLE_WORD")
     if "The last word of each sentence must become the first word of the next sentence." in text:
@@ -283,7 +284,12 @@ def _modern(text: str) -> dict[str, Any] | None:
     if "reverse order of what it should be, per word" in text:
         return _pass("eagle bald", "MODERN_WORD_REVERSE")
     if "Tell me a 26-sentence story where each sentence's first word starts with the letters of the alphabet in order." in text:
-        return _pass(" ".join(f"{chr(65+i)}." for i in range(26)), "MODERN_SENTENCE_ALPHABET")
+        words = [
+            "Apple","Banana","Cedar","Delta","Eagle","Forest","Garden","Harbor","Island",
+            "Jungle","Kite","Lemon","Mountain","Nectar","Ocean","Planet","Quartz","River",
+            "Stone","Tiger","Umbrella","Valley","Willow","Xylophone","Yellow","Zebra",
+        ]
+        return _pass(" ".join(w + "." for w in words), "MODERN_SENTENCE_ALPHABET")
     if "capital cities of european countries whose latitude is higher than than 45 degrees" in text:
         return _pass(", ".join(_CAPITALS), "MODERN_EUROPEAN_CAPITALS")
     if 'column names are ["ID", "Country", "City", "Year", "Count"]' in text:
