@@ -98,5 +98,25 @@ class H100JITLexicalRoleTests(unittest.TestCase):
         self.assertEqual(out["target"],"y")
 
 
+    def test_role_anchors_are_absorbing_not_transit_nodes(self):
+        knowledge={
+            "anchors":{"input":"input","target":"output"},
+            "edges":[
+                ["left","input"],
+                ["ambiguous","input"],
+                ["ambiguous","output"],
+                ["right","output"],
+            ],
+        }
+        out=induce_roles([
+            {"cue":"left","fields":["x"]},
+            {"cue":"right","fields":["y"]},
+        ],knowledge)
+        self.assertEqual(out["status"],"ROLES_IDENTIFIED")
+        self.assertEqual(out["inputs"],["x"])
+        self.assertEqual(out["target"],"y")
+
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
