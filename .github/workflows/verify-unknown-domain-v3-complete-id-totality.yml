@@ -1,0 +1,25 @@
+name: Verify Unknown-Domain V3 complete ID totality
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py"
+      - "canonical/runtime/unknown_domain_direct_candidate_v3.py"
+      - "canonical/tests/test_unknown_domain_direct_v3.py"
+      - "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V3_SUCCESSOR_CANDIDATE_20261005_V2.json"
+      - ".github/workflows/verify-unknown-domain-v3-complete-id-totality.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pytest
+      - name: Run V3 exact counterexample, total-ID, and 27-case scorer regressions
+        run: pytest -q canonical/tests/test_unknown_domain_direct_v3.py
