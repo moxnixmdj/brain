@@ -4,9 +4,12 @@ on:
   pull_request:
     paths:
       - "canonical/runtime/livebench_legacy15_joint_witness_v1.py"
+      - "canonical/runtime/livebench_frozen_active_legacy15_v1.py"
+      - "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py"
       - "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py"
       - "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py"
       - "canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py"
+      - ".github/workflows/verify-livebench-legacy15-end2end-exact-v2.yml"
   workflow_dispatch:
 
 jobs:
