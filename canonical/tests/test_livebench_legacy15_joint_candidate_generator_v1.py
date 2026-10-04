@@ -185,3 +185,15 @@ def test_sentence_lt_one_plus_public_end_is_routed_through_canonical_unsat_kerne
     assert out["status"] == "PROVED_UNSAT_VISIBLE_CONSTRAINTS"
     assert out["candidates"] == []
     assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in out["unsat_proof"]["hard_unsat_reasons"]
+
+
+def test_section_forbidden_word_has_constructive_boundary_escape():
+    out = g.generate([
+        c("detectable_format:multiple_sections", section_spliter="Section", num_sections=3),
+        c("keywords:forbidden_words", forbidden_words=["section"]),
+    ])
+    assert out["status"] == "PASS_CANDIDATES"
+    assert out["candidates"]
+    for response in out["candidates"]:
+        assert len(re.split(r"\\s?Section\\s?\\d+\\s?", response)) - 1 >= 3
+        assert re.search(r"\\bsection\\b", response, flags=re.IGNORECASE) is None
