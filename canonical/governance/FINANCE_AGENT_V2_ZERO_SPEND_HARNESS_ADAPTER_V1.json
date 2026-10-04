@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_ZERO_SPEND_HARNESS_ADAPTER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__RETRY_SAFE_PROVIDER_BOUNDARY_GUARD_INTEGRATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "exact_upstream_source": {
+    "repository": "vals-ai/finance-agent-v2",
+    "tools_py_git_blob_sha": "19b85ce4e110e39f410c52b2efa0e33f651fa6d1",
+    "get_agent_py_git_blob_sha": "22c012241a430975266fb7f8d2fe7af8e9f1b8d4",
+    "load_bearing_boundaries": [
+      "TavilyWebSearch._execute_search invokes self.client.search",
+      "EDGARSearch._execute_search invokes aiohttp.ClientSession.post to https://api.sec-api.io/full-text-search",
+      "PriceHistory._fetch invokes aiohttp.ClientSession.get to https://api.tiingo.com"
+    ],
+    "retry_consequence": "INTERCEPT_LOWER_LEVEL_CLIENT_OR_HTTP_BOUNDARY_SO_RETRY_ATTEMPTS_CANNOT_BYPASS_GUARD"
+  },
+  "brain_subject": {
+    "adapter_runtime": {
+      "path": "canonical/runtime/finance_agent_v2_zero_spend_adapter_v1.py",
+      "git_blob_sha": "c90d2e693621ae0a268e3c4f96bbdbfdcc827ec2"
+    },
+    "adapter_tests": {
+      "path": "canonical/tests/test_finance_agent_v2_zero_spend_adapter_v1.py",
+      "git_blob_sha": "81d49edb2e7d265a14d2780eb8cad7b6adcb6435"
+    },
+    "provider_guard": {
+      "path": "canonical/runtime/zero_spend_provider_guard_v1.py",
+      "git_blob_sha": "356af559fc74ac3eab5532b2d8fee9ddfb98f962"
+    },
+    "provider_guard_verification": {
+      "path": "canonical/verification/FINANCE_AGENT_V2_ZERO_SPEND_RUNTIME_GUARD_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "342740561634a86d0c55876ee126e8122b21af0f"
+    },
+    "root2_v6": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V6.json",
+      "git_blob_sha": "fcbdb818b63b4986b026db29c400a47373a26fdb"
+    }
+  },
+  "integration_modes": [
+    "PATCH_ALREADY_CREATED_TOOL_INSTANCES_FOR_TEST_AND_DIAGNOSTIC_USE",
+    "PATCH_GET_AGENT_MODULE_BEFORE_FIRST_PARTY_AGENT_CONSTRUCTION_WITH_BEHAVIOR_PRESERVING_TAVILY_SUBCLASS_AND_HOST_FILTERED_AIOHTTP_INTERCEPTION"
+  ],
+  "proof_obligation": [
+    "EXACTLY_ONE_TAVILY_TOOL_CONSTRUCTION_BOUNDARY_IS_GUARDED",
+    "EVERY_TAVILY_CLIENT_SEARCH_ATTEMPT_IS_AUTHORIZED_AND_OBSERVED",
+    "EVERY_API_SEC_API_IO_POST_ATTEMPT_IS_AUTHORIZED_AND_OBSERVED",
+    "EVERY_API_TIINGO_COM_GET_ATTEMPT_IS_AUTHORIZED_AND_OBSERVED",
+    "UNRELATED_AIOHTTP_TRAFFIC_IS_NOT_RECLASSIFIED_AS_PROVIDER_USAGE",
+    "RETRY_ATTEMPTS_CROSS_LOWER_LEVEL_GUARD_BOUNDARIES",
+    "MISSING_FREE_ONLY_ACCOUNT_SNAPSHOT_FAILS_CLOSED",
+    "QUOTA_PAYMENT_OVERAGE_OR_COST_SIGNAL_FAILS_CLOSED",
+    "PATCHES_ARE_REVERSIBLE"
+  ],
+  "proposed_root2_delta_if_independently_verified": [
+    "DELETE_FINANCE_AGENT_V2_HARNESS_GUARD_INTEGRATION_AS_UNKNOWN",
+    "DELETE_A_PRIORI_WORST_CASE_TAVILY_DEMAND_PROOF_AS_EXECUTION_PRECONDITION",
+    "DELETE_A_PRIORI_WORST_CASE_SEC_API_DEMAND_PROOF_AS_EXECUTION_PRECONDITION",
+    "DELETE_A_PRIORI_WORST_CASE_TIINGO_DEMAND_PROOF_AS_EXECUTION_PRECONDITION"
+  ],
+  "preserve": [
+    "VALS_PLATFORM_APPROVAL",
+    "EXACT_OFFICIAL_TEST_SUITE_ID",
+    "CURRENT_VERIFIED_FREE_ONLY_ACCOUNT_SNAPSHOTS_FOR_TAVILY_SEC_API_TIINGO",
+    "OUTCOME_OBSERVER_THAT_CAN_ATTEST_ZERO_CHARGE_ZERO_OVERAGE_AND_QUOTA_STATE_PER_CALL",
+    "FULL_1350_EXECUTION_RUN_ZERO_GUARD_TRIP_ZERO_SPEND_RECEIPT",
+    "BRAIN_SCORE_GE_58_59",
+    "GLOBAL_NO_FRESH_REALITY_BEFORE_FIXED_POINT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_PROVIDER_ACCOUNTS_OR_KEYS_EXIST",
+    "NO_CLAIM_FREE_QUOTAS_ARE_SUFFICIENT",
+    "NO_CLAIM_VALS_APPROVAL_OR_SUITE_ID_EXISTS",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_SCORE_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
