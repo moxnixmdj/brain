@@ -88,8 +88,10 @@ def _reachable_roles(
         node, depth = queue.popleft()
         if node == input_anchor:
             found.add("INPUT")
+            continue
         if node == target_anchor:
             found.add("TARGET")
+            continue
         if len(found) == 2 or depth >= _MAX_HOPS:
             continue
         for nxt in sorted(graph.get(node, ())):
