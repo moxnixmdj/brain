@@ -22,7 +22,7 @@ _HEAD=(
 _DOUBLE=r'"(?:\\.|[^"\\])*"'
 _SINGLE=r"'[^'\r\n]*'"
 _BACKTICK=r"`[^`\r\n]*`"
-_TOKEN=r"[^\s"'`]+"
+_TOKEN=r'''[^\s"'`]+'''
 _PATTERN=re.compile(
     r"^\s*"+_PREFIX+_HEAD+
     r"(?P<payload>"+_DOUBLE+r"|"+_SINGLE+r"|"+_BACKTICK+r"|"+_TOKEN+r")\s*$",
