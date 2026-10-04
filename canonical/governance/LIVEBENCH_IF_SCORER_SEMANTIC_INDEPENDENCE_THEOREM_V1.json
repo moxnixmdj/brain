@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_SCORER_SEMANTIC_INDEPENDENCE_THEOREM_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_FROZEN_PUBLIC_SCORER_DEDUCTION__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "frozen_public_source": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "process_results_path": "livebench/process_results/instruction_following/utils.py",
+    "process_results_git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676",
+    "evaluation_path": "livebench/if_runner/ifbench/evaluation_lib.py",
+    "evaluation_git_blob_sha": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+    "modern_registry_path": "livebench/if_runner/ifbench/instructions_registry.py",
+    "modern_registry_git_blob_sha": "adfed4832877566e62970257b50c6fa32c302fb2"
+  },
+  "deduction": {
+    "strict_evaluation_observation": "FOR_EACH_REGISTERED_INSTRUCTION_THE_FROZEN_EVALUATOR_INSTANTIATES_THE_PUBLIC_CHECKER_AND_RECORDS_ONLY_BOOLEAN_CHECK_FOLLOWING_RESPONSE",
+    "score_observation": "PER_PROMPT_SCORE_EQUALS_ONE_HALF_TIMES_PROMPT_ALL_INSTRUCTIONS_BOOLEAN_PLUS_ONE_HALF_TIMES_MEAN_INDIVIDUAL_INSTRUCTION_BOOLEANS",
+    "semantic_quality_term_present": false,
+    "reference_answer_quality_term_present": false,
+    "model_judge_term_present": false,
+    "conclusion": "FOR_THIS_FROZEN_LIVEBENCH_IF_PREDICATE_A_SEMANTIC_ANSWER_SEED_IS_NOT_A_LOGICALLY_NECESSARY_PRECONDITION_FOR_EARNING_SCORE__A_DETERMINISTIC_WITNESS_IS_ADMISSIBLE_WHEN_IT_PASSES_THE_EXACT_REGISTERED_CHECKERS"
+  },
+  "architectural_delta": {
+    "deleted_false_requirement": "ALL_NONEXACT_STRUCTURAL_INSTRUCTIONS_REQUIRE_SEMANTIC_RUNTIME_BEFORE_A_CANDIDATE_RESPONSE_MAY_BE_EMITTED",
+    "replacement": "CONSTRUCT_CHECKER_WITNESS_DETERMINISTICALLY_WHEN_RECOVERED_CONSTRAINTS_ARE_PROVABLY_SATISFIED__EXACT_SCORER_REMAINS_FINAL_AUTHORITY",
+    "expected_effect": [
+      "BYPASS_POST_PROMPT_CAPABILITY_ACQUISITION_FOR_RECOGNIZED_STRUCTURAL_WITNESS_ROUTES",
+      "ALLOW_CONJUNCTIVE_STRUCTURAL_COMPOSITION_WITHOUT_MODEL_OR_NETWORK_DEPENDENCY",
+      "KEEP_UNKNOWN_OR_CONTRADICTORY_ROUTES_FAIL_CLOSED_OR_ON_PREVIOUS_VERIFIED_FALLBACK"
+    ]
+  },
+  "successor_subject": {
+    "adapter_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py",
+    "adapter_git_blob_sha": "ff977b2e34d551e5a2751852bb77d23c7c503647",
+    "compiler_path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+    "compiler_git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+    "test_path": "canonical/tests/test_root2_livebench_if_astra_inference_adapter_v3.py",
+    "test_git_blob_sha": "647a216d934c939a4d10fcbab0e39e66369e195a"
+  },
+  "residuals": [
+    "V3_ONLY_COVERS_CONSTRAINTS_CURRENT_COMPILER_RECOVERS",
+    "EXACT_FROZEN_CHECKER_VALIDATION_IS_STILL_REQUIRED_BEFORE_SCORE_CLAIM",
+    "RATIO_OVERLAP_EXACT_REFERENCE_TEXT_REMAINS_SEPARATE_UNPROVED_PARAMETER_RESIDUAL",
+    "LEGACY_AND_MODERN_UNMODELLED_CHECKERS_REMAIN_OPEN",
+    "NO_GENERAL_SEMANTIC_INSTRUCTION_FOLLOWING_CLAIM"
+  ],
+  "contamination_firewall": [
+    "NO_CASE_73_PLUS",
+    "NO_UNEXPOSED_TERMINAL_PROMPT_CONTENT",
+    "NO_TERMINAL_CASE_IDS_OR_HIDDEN_KWARGS_IN_IMPLEMENTATION",
+    "ONLY_FROZEN_PUBLIC_SCORER_SEMANTICS_AND_SYNTHETIC_TESTS_USED"
+  ],
+  "authority": {
+    "successor_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
