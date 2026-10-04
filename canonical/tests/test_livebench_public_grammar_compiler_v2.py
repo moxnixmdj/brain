@@ -80,7 +80,7 @@ class LiveBenchAdapterV4Tests(unittest.TestCase):
         self.assertEqual(out["model_dependency_count"], 0)
         self.assertIn("no_whitespace", out["matched_public_rules"])
 
-    def test_seed_preserving_postprocess_after_fallback(self):
+    def test_seed_postprocessor_rejects_lossy_case_rewrite_and_preserves_fallback(self):
         expected = {
             "status": "PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE",
             "answer": "Mixed Case Answer",
@@ -89,8 +89,21 @@ class LiveBenchAdapterV4Tests(unittest.TestCase):
         }
         with mock.patch.object(v4.fallback_v2, "infer", return_value=expected) as fallback:
             out = v4.infer(REQ("Write the entire response in lowercase only."))
-        self.assertEqual(out["answer"], "mixed case answer")
+        self.assertEqual(out, expected)
+        fallback.assert_called_once()
+
+    def test_seed_postprocessor_accepts_already_satisfied_case_constraint_without_rewrite(self):
+        expected = {
+            "status": "PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE",
+            "answer": "mixed case answer",
+            "cognition_dependency_class": "MODEL_INDEPENDENT",
+            "model_dependency_count": 0,
+        }
+        with mock.patch.object(v4.fallback_v2, "infer", return_value=expected) as fallback:
+            out = v4.infer(REQ("Write the entire response in lowercase only."))
+        self.assertEqual(out["answer"], expected["answer"])
         self.assertEqual(out["response_route"], "VERIFIED_SEED_PRESERVING_POSTPROCESSOR_V1")
+        self.assertEqual(out["seed_postprocess_applied"], [])
         fallback.assert_called_once()
 
     def test_unknown_route_falls_back_unchanged_when_postprocess_cannot_help(self):
