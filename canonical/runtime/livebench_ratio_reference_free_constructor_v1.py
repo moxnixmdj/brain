@@ -19,11 +19,11 @@ import re
 from typing import Any
 
 RATIO_RE = re.compile(
-    r"Maintain a trigram overlap of (\\d+)% \\(±2%\\) with the provided reference text\\."
+    r"Maintain a trigram overlap of (\d+)% \(±2%\) with the provided reference text\."
 )
 KEYWORD_RE = re.compile(
     r'The response must include keyword "?([A-Za-z0-9_-]+)"? in the '
-    r"(\\d+)-(?:st|nd|rd|th) sentence\\."
+    r"(\d+)-(?:st|nd|rd|th) sentence\."
 )
 CONSONANT_DESCRIPTION = (
     "Ensure each word in your response has at least one consonant cluster "
@@ -36,7 +36,7 @@ def _ngrams(text: str, n: int = 3) -> set[str]:
 
 
 def _norm_ws(text: Any) -> str:
-    return re.sub(r"\\s+", " ", str(text or "")).strip()
+    return re.sub(r"\s+", " ", str(text or "")).strip()
 
 
 def visible_base_from_prompt(prompt: str) -> str:
@@ -44,7 +44,7 @@ def visible_base_from_prompt(prompt: str) -> str:
     text = RATIO_RE.sub("", str(prompt))
     text = KEYWORD_RE.sub("", text)
     text = text.replace(CONSONANT_DESCRIPTION, "")
-    text = text.replace("\\u200b", "")
+    text = text.replace("\u200b", "")
     return _norm_ws(text)
 
 
