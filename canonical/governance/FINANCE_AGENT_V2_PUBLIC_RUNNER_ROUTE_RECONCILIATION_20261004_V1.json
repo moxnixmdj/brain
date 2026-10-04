@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_PUBLIC_RUNNER_ROUTE_RECONCILIATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FIRST_PARTY_PUBLIC_RUNNER_BOUND__GATED_EXACT_SCORE_ROUTE_OPEN__ZERO_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "frozen_target": ">=58.59%",
+  "first_party_repo": {
+    "repository": "vals-ai/finance-agent-v2",
+    "readme_git_blob_sha": "6e18ea1e7149ba696e59c80e52890878aca8f096"
+  },
+  "proved_by_first_party_readme": [
+    "PUBLIC_RUNNER_EXISTS",
+    "DEFAULT_CONFIGURATION_IS_THE_CONFIGURATION_USED_BY_VALS_FOR_THE_BENCHMARK",
+    "CUSTOM_MODEL_OR_HARNESS_CAN_BE_BOUND_VIA_GET_CUSTOM_MODEL",
+    "VALS_PLATFORM_ACCESS_REQUIRES_APPROVAL",
+    "EXACT_TEST_SUITE_IDS_ARE_PROVIDED_BY_EMAIL_OR_VISIBLE_IN_APPROVED_PLATFORM",
+    "PUBLIC_QUESTION_FILE_EXISTS"
+  ],
+  "not_proved": [
+    "PUBLIC_QUESTION_FILE_EQUALS_OFFICIAL_SCORED_POPULATION",
+    "USER_CURRENTLY_HAS_VALS_PLATFORM_APPROVAL",
+    "USER_CURRENTLY_HAS_EXACT_FINANCE_AGENT_V2_TEST_SUITE_IDS",
+    "ALL_REQUIRED_TOOL_API_DEPENDENCIES_ARE_AVAILABLE_AT_ZERO_INCREMENTAL_SPEND",
+    "BRAIN_SCORE_GE_58_59"
+  ],
+  "route_reduction": {
+    "old_wait_state": "VALS_OWNER_RESULT_ONLY_OR_UNSPECIFIED_EXACT_ROUTE",
+    "new_minimum_zero_reality_route": [
+      "OBTAIN_OR_OBSERVE_VALS_PLATFORM_APPROVAL",
+      "BIND_EXACT_FINANCE_AGENT_V2_TEST_SUITE_ID_WITHOUT_EXPOSING_HELDOUT_CONTENT",
+      "BIND_BRAIN_AS_CUSTOM_MODEL_OR_HARNESS_IN_PUBLIC_RUNNER",
+      "VERIFY_ALL_REQUIRED_TOOL_DEPENDENCIES_AND_RATE_LIMITS_AT_ZERO_INCREMENTAL_SPEND",
+      "PRESERVE_SCORE_EXECUTION_UNTIL_GLOBAL_ZERO_REALITY_FIXED_POINT"
+    ],
+    "owner_run_receipt_remains_valid_alternative": true
+  },
+  "consequence": "FINANCE_AGENT_V2_IS_NOT_PURE_OWNER_WAIT__PUBLIC_RUNNER_REMOVES_HARNESS_DISCOVERY_AS_A_BLOCKER__GATED_PLATFORM_ACCESS_SUITE_ID_ZERO_COST_TOOL_DEPENDENCIES_AND_SCORE_REMAIN",
+  "hard_rules": [
+    "NO_PUBLIC_PRIVATE_POPULATION_SUBSTITUTION",
+    "NO_HELDOUT_TASK_EXFILTRATION",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_SCORE_EXECUTION_BEFORE_ZERO_REALITY_FIXED_POINT",
+    "ZERO_ACCEPTANCE_CREDIT_FROM_ROUTE_BINDING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
