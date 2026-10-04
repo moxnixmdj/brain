@@ -5,6 +5,8 @@ on:
     paths:
       - "canonical/runtime/livebench_historical24_scope_superset_v1.py"
       - "canonical/tests/test_livebench_historical24_scope_superset_v1.py"
+      - "canonical/runtime/livebench_historical24_composition_space_v1.py"
+      - "canonical/tests/test_livebench_historical24_composition_space_v1.py"
       - ".github/workflows/verify-livebench-historical24-scope-v1.yml"
   workflow_dispatch:
 
@@ -37,7 +39,20 @@ jobs:
       - name: Run fail-closed unit guards
         run: |
           python -m pip install --disable-pip-version-check --quiet pytest==8.4.2
-          python -m pytest -q canonical/tests/test_livebench_historical24_scope_superset_v1.py
+          python -m pytest -q canonical/tests/test_livebench_historical24_scope_superset_v1.py canonical/tests/test_livebench_historical24_composition_space_v1.py
+
+      - name: Verify exact 13,750-set historical24 structural reduction
+        run: |
+          python canonical/runtime/livebench_historical24_composition_space_v1.py > /tmp/historical24-structure.json
+          python - <<'PY'
+          import json
+          x=json.load(open("/tmp/historical24-structure.json",encoding="utf-8"))
+          assert x["compatible_structural_set_count"] == 13750, x
+          assert x["active15_structural_set_count"] == 928, x
+          assert x["sets_containing_at_least_one_extra9_family"] == 12822, x
+          assert x["counts_by_route"]["GENERAL"] == 13721, x
+          print(json.dumps(x, sort_keys=True))
+          PY
 
       - name: Prove exact source-bound historical24 scope superset
         run: |
