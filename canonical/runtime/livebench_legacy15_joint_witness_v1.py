@@ -254,7 +254,12 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
 def solve(prompt: str) -> dict[str, Any]:
     compiled = compiler.compile_visible_constraints(str(prompt or ""))
     constraints = list(compiled.get("constraints") or [])
-    if compiled.get("status") != "PASS" or not compiled.get("all_recognized_parameters_complete"):
+    compiler_complete = (
+        compiled.get("status") == "PASS"
+        and not list(compiled.get("parameter_incomplete") or [])
+        and all(bool(c.get("parameter_complete")) for c in constraints)
+    )
+    if not compiler_complete:
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "error": "VISIBLE_COMPILER_NOT_COMPLETE", "response": None}
     if not constraints:
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "error": "NO_ACTIVE_CONSTRAINTS", "response": None}
