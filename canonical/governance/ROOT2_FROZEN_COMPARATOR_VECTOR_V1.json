@@ -95,7 +95,9 @@
         "CHARTOGRAPHY_TOOLS_GE_89"
       ],
       "target": ">=89%",
-      "route_class": "PROJECT_ACCOUNT_CAPACITY_AND_BRAIN_ADAPTER_THEN_SCORE__ZERO_SPEND_GUARD_DISCHARGED"
+      "route_class": "WITH_TOOLS_PROTOCOL_VERIFIED__HARNESS_BACKEND_COMPARABILITY_AND_GRADER_CAPACITY_THEN_SCORE__NO_TOOLS_ROUTE_NON_SUBSTITUTABLE",
+      "protocol_condition": "WITH_TOOLS",
+      "no_tools_substitution_allowed": false
     },
     {
       "surface": "OSWorld 2.1 partial",

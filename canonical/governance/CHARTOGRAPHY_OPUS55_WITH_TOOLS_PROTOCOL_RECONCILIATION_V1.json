@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_OPUS55_WITH_TOOLS_PROTOCOL_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FIRST_PARTY_WITH_TOOLS_PROTOCOL_RESTORATION__NO_TOOLS_ADAPTER_RECLASSIFIED_AS_SUBCOMPONENT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+  "frozen_target": {
+    "benchmark": "Chartography",
+    "condition": "WITH_TOOLS",
+    "opus55_score_percent": 89,
+    "task_count": 100,
+    "score_direction": "higher_is_better",
+    "envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "envelope_git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "predicate_registry_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "predicate_registry_git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+  },
+  "primary_source_protocol": {
+    "anthropic_launch_url": "https://www.anthropic.com/claude-opus-5-5",
+    "anthropic_system_card_url": "https://www.anthropic.com/claude-opus-5-5-system-card",
+    "section": "8.13.1 Chartography",
+    "model_configuration": [
+      "adaptive_thinking",
+      "max_effort"
+    ],
+    "task_semantics": "MATCHES_OFFICIAL_CHARTOGRAPHY_TASKS_AND_EXPERT_DETERMINED_ACCEPTABLE_ANSWER_RANGES",
+    "grader": "Gemini 3.5 Flash",
+    "with_tools_environment": [
+      "CONTAINER",
+      "IMAGE_FILE_PRESENT_IN_CONTAINER",
+      "STANDARD_LIBRARIES_INSTALLED",
+      "IMAGE_CROPPING_TOOL"
+    ],
+    "reported_runs": "FIVE_RUN_AVERAGE",
+    "reported_scores": {
+      "no_tools_percent": 64.4,
+      "with_tools_percent": 89
+    },
+    "anthropic_system_card_pdf_url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "anthropic_system_card_pdf_sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378"
+  },
+  "public_owner_harness_boundary": {
+    "repository": "surge-ai/chartography",
+    "commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+    "readme_url": "https://raw.githubusercontent.com/surge-ai/chartography/3f1bf837232d3918c2cc35c6e2418c9e70d2a57b/README.md",
+    "native_model_call": "CHART_ATTACHED_INLINE__NO_TOOLS",
+    "consequence": "PUBLIC_NATIVE_NO_TOOLS_HARNESS_IS_NOT_THE_FROZEN_ANTHROPIC_WITH_TOOLS_CONDITION"
+  },
+  "existing_brain_adapter": {
+    "governance_path": "canonical/governance/CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_V1.json",
+    "governance_git_blob_sha": "f0352c187eb921d6e736608825005df887449488",
+    "verification_path": "canonical/verification/CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "841fc40bd2f54b451e01d32afd9a79a32aaafa0b",
+    "verified_tests_passed": 11,
+    "exact_role": "VERIFIED_INLINE_QUESTION_PLUS_IMAGE_NO_TOOLS_TRANSPORT_SUBCOMPONENT",
+    "frozen_with_tools_discharge": false,
+    "reason": "THE_ADAPTER_EXPLICITLY_REJECTS_TOOLS_AND_THEREFORE_CANNOT_BY_ITSELF_IMPLEMENT_ANTHROPICS_WITH_TOOLS_CHARTOGRAPHY_CONDITION"
+  },
+  "corrected_root2_residual": {
+    "protocol_identity": "PARTIALLY_BOUND__FIRST_PARTY_TOOL_ENVELOPE_KNOWN__LOW_LEVEL_TOOL_API_PACKAGE_AND_EXECUTION_DETAILS_NOT_FULLY_PUBLISHED",
+    "required_before_score": [
+      "BIND_AND_ZERO_CASE_VERIFY_A_BRAIN_WITH_TOOLS_CHARTOGRAPHY_HARNESS_PRESERVING_THE_KNOWN_FIRST_PARTY_TOOL_ENVELOPE",
+      "BIND_A_BRAIN_EXECUTION_BACKEND_CAPABLE_OF_USING_THE_CONTAINER_IMAGE_STANDARD_LIBRARIES_AND_CROP_TOOL_WITHOUT_EXTERNALIZING_THE_TARGET_CAPABILITY",
+      "PROVE_MATERIAL_HARNESS_COMPARABILITY_OR_EXPLICITLY_LOCALIZE_ANY_UNPUBLISHED_VENDOR_DETAILS",
+      "VERIFY_PROJECT_SPECIFIC_GEMINI_3_5_FLASH_FREE_TIER_CAPACITY_FOR_REQUIRED_GRADING_MASS",
+      "THEN_RUN_ONLY_THE_MINIMUM_AUTHORIZED_CHARTOGRAPHY_REALITY_CUT"
+    ],
+    "score_requirement": "BRAIN_WITH_TOOLS_CHARTOGRAPHY_SCORE_GE_89_ON_COMPARABLE_100_TASK_PROTOCOL",
+    "no_tools_score_route": "NON_SUBSTITUTABLE_FOR_FROZEN_WITH_TOOLS_PREDICATE"
+  },
+  "root_effect": {
+    "root1": "UNCHANGED_INACTIVE__THIS_IS_A_PROTOCOL_AND_MEASUREMENT_RECONCILIATION",
+    "root2": "OPEN__WITH_TOOLS_HARNESS_BINDING_AND_COMPARABILITY_RESTORED_AS_LOAD_BEARING",
+    "root3": "UNCHANGED"
+  },
+  "hard_rules": [
+    "PRESERVE_FROZEN_89_WITH_TOOLS_TARGET",
+    "DO_NOT_REBASE_TO_PUBLIC_NO_TOOLS_LEADERBOARD_SCORE",
+    "DO_NOT_CREDIT_NO_TOOLS_ADAPTER_AS_WITH_TOOLS_HARNESS",
+    "DO_NOT_INFER_UNPUBLISHED_LOW_LEVEL_TOOL_APIS_OR_PACKAGE_VERSIONS",
+    "DO_NOT_RUN_TERMINAL_CHARTOGRAPHY_CASES_BEFORE_ZERO_REALITY_PROTOCOL_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_FIRST_PARTY_89_AND_PINNED_SYSTEM_CARD_PDF_SECTION_8_13_1_TOOL_ENVELOPE_PLUS_EXACT_PUBLIC_NO_TOOLS_HARNESS_AND_BRAIN_ADAPTER_TOOL_REJECTION__THEN_REBIND_ROOT2_CHARTOGRAPHY_ROUTE",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
