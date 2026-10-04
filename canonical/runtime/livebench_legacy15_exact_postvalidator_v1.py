@@ -20,7 +20,7 @@ SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_EXACT_POSTVALIDATOR_V1"
 PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 PINNED_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
 PINNED_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
-PINNED_UTIL_BLOB = "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+PINNED_UTIL_BLOB = "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"\nPINNED_EVALUATION_MAIN_BLOB = "4a341984936c4d609644a3b77f8c030ac5aa7269"
 
 SLOT_KEYS: dict[str, tuple[str, ...]] = {
     "keywords:existence": ("keywords",),
@@ -106,6 +106,7 @@ def verify_pinned_source(livebench_root: str | Path) -> dict[str, Any]:
         package / "instructions.py": PINNED_INSTRUCTIONS_BLOB,
         package / "instructions_registry.py": PINNED_REGISTRY_BLOB,
         package / "instructions_util.py": PINNED_UTIL_BLOB,
+        package / "evaluation_main.py": PINNED_EVALUATION_MAIN_BLOB,
     }
     observed: dict[str, str] = {}
     for path, sha in expected.items():
@@ -122,6 +123,8 @@ def verify_pinned_source(livebench_root: str | Path) -> dict[str, Any]:
         "instructions_blob": observed["instructions.py"],
         "registry_blob": observed["instructions_registry.py"],
         "instructions_util_blob": observed["instructions_util.py"],
+        "evaluation_main_blob": observed["evaluation_main.py"],
+        "strict_nonempty_response_gate_bound": True,
         "terminal_data_used": False,
     }
 
@@ -160,6 +163,8 @@ def load_pinned_registry(livebench_root: str | Path):
         "instructions_blob": PINNED_INSTRUCTIONS_BLOB,
         "registry_blob": PINNED_REGISTRY_BLOB,
         "instructions_util_blob": PINNED_UTIL_BLOB,
+        "evaluation_main_blob": PINNED_EVALUATION_MAIN_BLOB,
+        "strict_nonempty_response_gate_bound": True,
     }
 
 
