@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_SYNTHESIS_SCOPE_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SYNTHESIS_ROOT3_SCOPE_CLOSED__ROOT3_11_TO_10__ROOT2_19_UNCHANGED__26_UNRESOLVED__ZERO_CREDIT",
+  "source_brain": {
+    "branch": "reconcile-root3-synthesis-scope-20261004",
+    "exact_blobs": {
+      "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "c19135025f17cdb9acf65aaf7d17d660aae9189d",
+      "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json": "bad32d1e90bf0e54bb1176b67ad677336f40d71d",
+      "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V1.json": "6cfc9d1365e879637261e6c14d6cd09f21719d26",
+      "canonical/governance/ROOT3_UNIVERSAL_SCOPE_CLOSURE_ACTIVATION_V1.json": "28573015115365d76422bddf80520c7d313040df",
+      "canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V1.json": "78615211c9cd40e79afc2c5e5624893b9a503ef7",
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json": "cc1981abb7e80b7d197105fdcb3955a5e54d4e44",
+      "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json": "12e3ff86ad5f4436f1679ec5257d92f7c89f5c08",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "2c759919f8ff640453fccff645bfb4681957e20e",
+      "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+      "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json": "1528485a15c98e89c9fb4dc50d691b6682e08542",
+      "canonical/runtime/root3_synthesis_scope_reconciliation_verifier_v1.py": "ab99aec21747d7ef2edb1f60fea613c0e2a9aca9",
+      "canonical/tests/test_root3_synthesis_scope_reconciliation_verifier_v1.py": "00eaef57a414d10f0f20b1b7a4f28b547d07e98d"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1506,
+    "verified_head_sha": "c35259714b5a7ba056aabc150544bd7afed46251",
+    "merge_commit": "f1747c74530f738510a28f9afa1f1c859943a951",
+    "workflow_run_id": 37163648543,
+    "workflow_job_id": 111322055888,
+    "conclusion": "success"
+  },
+  "verified": {
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "root2_involved_count": 19,
+    "root3_involved_count": 10,
+    "synthesis_before_root_class": "ROOT2_AND_ROOT3",
+    "synthesis_after_root_class": "ROOT2_ONLY",
+    "acceptance_truth_unchanged": true,
+    "top_level_pointer_consistency": true
+  },
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_ACCEPTANCE_CLOSURE",
+    "NO_ROOT2_PERFORMANCE_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
