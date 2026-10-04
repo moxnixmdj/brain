@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_IF_EXACT_PUBLIC_THRESHOLD_PROMOTION_EXACT_BYTE_VERIFICATION_20261004_V1",
   "date": "2026-10-04",
-  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BYTE_IDENTITY_AND_FROZEN_ACCEPTANCE_FACTS_VERIFIED",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BYTE_INTEGRITY_VERIFIED__ACCEPTANCE_PROMOTION_NOT_ADMISSIBLE_UNDER_ACTIVE_CONTAMINATION_RULE",
   "subject": {
     "brain_receipt_path": "canonical/verification/LIVEBENCH_IF_EXACT_PUBLIC_THRESHOLD_RECEIPT_20261004_V1.json",
     "brain_binding_commit": "343c144596d117708fddec49a1735a5be88a139d",
@@ -32,10 +32,13 @@
     ]
   },
   "consequence": {
-    "promotion_gate": "SATISFIED",
+    "exact_byte_integrity_gate": "PASS",
+    "acceptance_promotion_admissible": false,
     "predicate_id": "LIVEBENCH_IF_GE_65_7",
-    "predicate_state": "PROVED",
-    "family_state": "OPEN__TWO_SIBLING_PREDICATES_REMAIN",
+    "predicate_state": "QUARANTINED_DIRTY_EVIDENCE__NOT_PROVED",
+    "contamination_authority": "canonical/governance/LIVEBENCH_EXACT200_CONTAMINATION_CREDIT_REVOCATION_20261004_V1.json",
+    "reason": "BYTE_IDENTITY_AND_NUMERICAL_THRESHOLD_PASS_DO_NOT_REMOVE_PREQUALIFICATION_TARGET_EXPOSURE__CLEAN_CASE_INDEPENDENT_OR_EQUIVALENT_PRECOMMITTED_EVIDENCE_STILL_REQUIRED",
+    "family_state": "OPEN",
     "terminal_goal": false
   },
   "accounting": {
