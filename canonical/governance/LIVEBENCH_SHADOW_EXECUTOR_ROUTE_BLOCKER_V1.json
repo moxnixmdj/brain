@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SHADOW_EXECUTOR_ROUTE_BLOCKER_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_DIAGNOSTIC_BOUNDARY__PUBLIC_EXECUTION_CAPSULE_INCOMPLETE__PRIVATE_ZERO_SPEND_EXECUTOR_ACCOUNT_STATE_UNVERIFIED__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "public_executor_diagnostic": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1732,
+    "merge_commit": "8a25c629e8f0871185ea763ecaf5612dc4ef4d91",
+    "workflow_run_id": 37185086873,
+    "workflow_job_id": 111385239458,
+    "verifier_git_blob_sha": "8ab671ddedc95253752aaa2c059ed732ec52456c",
+    "workflow_git_blob_sha": "6a8d47d71122d4a33b6e54009fdbff290ee3a7ba",
+    "synthetic_request_only": true,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "paid_external_model_or_api_used": false,
+    "result": {
+      "status": "BLOCKED",
+      "error_type": "Root2InferenceBlocked",
+      "first_missing_private_runtime_artifact": "goal_compiler.py",
+      "exact_error": "FileNotFoundError:[Errno 2] No such file or directory: '/home/runner/work/verification-capsule-runner/verification-capsule-runner/subject/livebench_zero_case_resource_fit_20261004/goal_compiler.py'"
+    }
+  },
+  "interpretation": [
+    "PUBLIC_STANDARD_RUNNER_RESOURCE_AND_SCORER_FIT_IS_PROVED",
+    "PUBLIC_STANDARD_RUNNER_DOES_NOT_YET_HAVE_THE_FULL_PRIVATE_BRAIN_RUNTIME_CLOSURE_REQUIRED_BY_REAL_INFERENCE",
+    "COPYING_THE_FULL_PRIVATE_RUNTIME_CLOSURE_TO_A_PUBLIC_REPOSITORY_IS_NOT_AUTHORIZED_AS_A_PRIVACY_PRESERVING_ROUTE",
+    "PRIVATE_GITHUB_HOSTED_RUNNER_CAN_PRESERVE_SOURCE_PRIVACY_BUT_REQUIRES_ACCOUNT_SPECIFIC_INCLUDED_MINUTES_OR_HARD_STOP_BUDGET_RECEIPT_TO_PROVE_ZERO_INCREMENTAL_SPEND",
+    "NO_CONNECTED_GITHUB_BILLING_QUOTA_OR_RUNNER_INVENTORY_ENDPOINT_IS_AVAILABLE_IN_CURRENT_TOOLSET"
+  ],
+  "surviving_executor_routes": [
+    {
+      "id": "PRIVATE_GITHUB_STANDARD_RUNNER",
+      "requirements": [
+        "ACCOUNT_SPECIFIC_INCLUDED_ACTIONS_MINUTES_AVAILABLE_OR_ZERO_DOLLAR_HARD_STOP_BUDGET_PROVED",
+        "STANDARD_RUNNER_ONLY",
+        "NO_ARTIFACT_STORAGE_BEYOND_INCLUDED_ZERO_COST_BOUND",
+        "EXACT_SUCCESSOR_PRECOMMIT_BYTES"
+      ],
+      "state": "OPEN__ACCOUNT_STATE_RECEIPT_MISSING"
+    },
+    {
+      "id": "PRIVACY_PRESERVING_PUBLIC_EXECUTION_CAPSULE",
+      "requirements": [
+        "NO_PRIVATE_SOURCE_OR_CAPABILITY_REGISTRY_DISCLOSURE",
+        "EXACT_BEHAVIORAL_EQUIVALENCE_TO_FROZEN_CANDIDATE",
+        "PUBLIC_STANDARD_RUNNER_ZERO_COST",
+        "INDEPENDENT_VERIFICATION"
+      ],
+      "state": "OPEN__NO_CURRENT_VERIFIED_CAPSULE"
+    },
+    {
+      "id": "VERIFIED_ZERO_COST_REMOTE_SELF_HOSTED_RUNNER",
+      "requirements": [
+        "REMOTE_NOT_USER_LAPTOP",
+        "PRIVATE_REPO_ACCESS",
+        "ZERO_INCREMENTAL_SPEND",
+        "EPHEMERAL_OR_CLEAN_EXECUTION_ENVIRONMENT"
+      ],
+      "state": "OPEN__RUNNER_INVENTORY_NOT_EXPOSED_BY_CONNECTED_GITHUB_TOOLSET"
+    }
+  ],
+  "scheduler_effect": [
+    "DO_NOT_FINAL_ACTIVATE_LIVEBENCH_SHADOW_COLLECTION_UNTIL_ONE_SURVIVING_EXECUTOR_ROUTE_IS_VERIFIED",
+    "DO_NOT_EXPORT_ADDITIONAL_PRIVATE_BRAIN_RUNTIME_FILES_TO_PUBLIC_VERIFIER_AS_AN_IMPLICIT_FIX",
+    "DO_NOT_RUN_PRIVATE_GITHUB_HOSTED_ACTIONS_WITHOUT_ZERO_INCREMENTAL_SPEND_ACCOUNT_RECEIPT",
+    "PRESERVE_V3_PREEXPOSURE_AND_V2_PREFLIGHT_WORK_AS_PREPROOF_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PRIVATE_GITHUB_ACTIONS_WOULD_COST_MONEY",
+    "NO_CLAIM_PRIVATE_GITHUB_ACTIONS_ARE_ZERO_COST_FOR_THIS_ACCOUNT",
+    "NO_CLAIM_NO_REMOTE_SELF_HOSTED_RUNNER_EXISTS",
+    "NO_TERMINAL_CASE_REVEAL",
+    "NO_LIVEBENCH_SCORE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
