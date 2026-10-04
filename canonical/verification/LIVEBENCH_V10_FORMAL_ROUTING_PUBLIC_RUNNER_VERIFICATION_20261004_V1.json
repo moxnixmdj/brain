@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V10_FORMAL_ROUTING_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V10_WRAPPER_AND_ATOMIC_LAUNCHER__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "candidate": "canonical/governance/LIVEBENCH_V10_FORMAL_ROUTING_REPLAY72_CANDIDATE_V1.json",
+  "subject": {
+    "wrapper_path": "diagnose_livebench_replay72_v10_formal_routing.py",
+    "wrapper_git_blob_sha": "56ea114d59f0309bc14ef0504a44bec1f808e876",
+    "launcher_path": "launch_livebench_v10_formal_routing_atomic.py",
+    "launcher_git_blob_sha": "d7cd5b5c90f19ef02c1f27afa1629ed6af5500d9",
+    "adapter_v2_git_blob_sha": "dbc895a0e458e411aafd3c96e0ddc2c01e657375",
+    "compiler_git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+    "base_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/livebench-formal-routing-v2-20261004",
+    "trigger_commit": "0199533e2910c3cc9b0f12a25500e9051c73adb8",
+    "workflow_run_id": 37195421272,
+    "workflow_job_id": 111416161049,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_subject_blobs": true,
+    "current_verified_compiler_bound": true,
+    "v2_import_substitution": true,
+    "epoch_digest_sha256": "a71f24f79df6b6be6e910efb1299776ac9fede9e78539577695d6e386fc2eb52",
+    "atomic_claim_before_replay": true,
+    "duplicate_422_fails_closed": true,
+    "replay_scope_expansion": false,
+    "terminal_cases_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_REPLAY_EXECUTED",
+    "NO_CASE_73_PLUS",
+    "NO_SCORE",
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT"
+  ],
+  "authority": {
+    "execution": false,
+    "replay72": false,
+    "new_case_exposure": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
