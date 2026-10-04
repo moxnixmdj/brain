@@ -12,10 +12,10 @@
   "candidate": {
     "repository": "moxnixmdj/verification-capsule-runner",
     "pull_request": 2081,
-    "head_sha": "920615ce1b14cb44a3dd62c5c69134cf16764720",
+    "head_sha": "7803607eb14de71676f9503b0ab9b34a5bf38a26",
     "branch": "hardening/unknown-domain-atomic-transaction-v1",
-    "execution_lease_git_blob_sha": "2b4984b2768219e8403c3def4a03306e739befe0",
-    "launcher_git_blob_sha": "6b563735310cf91f9384eeacb6af8e87668db93d",
+    "execution_lease_git_blob_sha": "a988e296767c954792c71430e06e995652e4631f",
+    "launcher_git_blob_sha": "b40859b4ba770433d9e1382920f086d76dd0cfbe",
     "production_workflow_git_blob_sha": "f05f16251a1567a85ebfd2ca8a1a4ccf75a5d38e",
     "launcher_test_git_blob_sha": "5257cf0f1081f0a5091797dd8020b83991c65039",
     "verifier_git_blob_sha": "7042ddf0713beeafb7ed73420c345303d6c9bbec",
@@ -23,8 +23,11 @@
     "verification_runs": {
       "execution_lease": 37241476550,
       "production_launcher": 37241476753,
-      "state_at_record": "QUEUED"
-    }
+      "state_at_record": "QUEUED",
+      "atomic_transaction_fastlane": 37241682655
+    },
+    "fastlane_workflow": ".github/workflows/verify-unknown-domain-atomic-transaction-v1.yml",
+    "execution_identity_sha256": "5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e"
   },
   "integrated_invariants": [
     "CLAIM_KEY_SHA256_OF_CANONICAL_QUALIFIED_EXECUTION_TUPLE__INCIDENTAL_METADATA_INVARIANT",
@@ -42,7 +45,9 @@
     "prior_path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCTION_PRECOMMIT_V2.json",
     "prior_raw_lease_digest": "9dd08aab9d79e6bbf2552d15c405b8de526478c3a505e2397455150d372164cb",
     "transferable_to_integrated_semantic_identity": false,
-    "required_before_production": "FREEZE_A_NEW_OUTCOME_BLIND_REDUCTION_BOUND_TO_THE_VERIFIED_CANONICAL_EXECUTION_IDENTITY_AND_EXACT_MERGED_CONTROL_PLANE_BLOBS"
+    "required_before_production": "FREEZE_A_NEW_OUTCOME_BLIND_REDUCTION_BOUND_TO_THE_VERIFIED_CANONICAL_EXECUTION_IDENTITY_AND_EXACT_MERGED_CONTROL_PLANE_BLOBS",
+    "new_outcome_blind_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_ATOMIC_TRANSACTION_REDUCTION_PRECOMMIT_V1.json",
+    "new_outcome_blind_reduction_frozen": true
   },
   "next_gate": [
     "REQUIRE_BOTH_PR_2081_EXECUTION_LEASE_AND_PRODUCTION_LAUNCHER_CHECKS_TO_COMPLETE_SUCCESSFULLY",
