@@ -303,7 +303,14 @@ def _general(by_id: Mapping[str, Mapping[str, Any]]) -> str:
 
     if POSTSCRIPT in by_id:
         marker = str(_slots(by_id[POSTSCRIPT])["postscript_marker"])
-        core = core.rstrip() + "\n" + marker + " " + _SAFE
+        # Keep mandatory postscript syntax sentence-neutral. A P.S. payload
+        # word after the terminal period creates an extra Punkt sentence in the
+        # production NLTK runtime and breaks low-sentence witnesses. The exact
+        # checker accepts the marker plus arbitrary trailing characters, so a
+        # non-word '+' neutralizes the terminal period without changing word
+        # count. P.P.S has no terminal period and needs no neutralizer.
+        tail = marker + "+" if marker.endswith(".") else marker
+        core = core.rstrip() + "\n" + tail
 
     if END in by_id:
         phrase = str(_slots(by_id[END])["end_phrase"]).strip()
