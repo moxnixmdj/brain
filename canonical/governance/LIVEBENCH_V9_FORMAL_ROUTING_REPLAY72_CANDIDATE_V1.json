@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V9_FORMAL_ROUTING_REPLAY72_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__V2_ROUTING_DELTA_MEASUREMENT__ALREADY_EXPOSED_72_ONLY__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Measure only the causal delta from the independently verified generic formal-routing V2 on the already-exposed LiveBench prefix, without case 73+ exposure or acceptance credit.",
+  "subjects": {
+    "adapter_v2": {
+      "path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v2.py",
+      "git_blob_sha": "dbc895a0e458e411aafd3c96e0ddc2c01e657375"
+    },
+    "compiler": {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "1d83dffb7024666cc2202f88a0dca6819165f35a"
+    },
+    "fallback_v1": {
+      "path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v1.py",
+      "git_blob_sha": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7"
+    },
+    "base_replay_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e"
+  },
+  "prior_evidence": {
+    "v8_binding": "canonical/verification/LIVEBENCH_V8_STRUCTURAL_REFINEMENT_EXECUTION_BINDING_20261004_V1.json",
+    "histogram": {
+      "POLICY_BLOCK:POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN": 43,
+      "COMPOSITION_PRODUCER:UNRESOLVED_GROUNDED_CLAUSES": 27,
+      "ARCHITECTURAL_GAP:CONTROL_OR_FANOUT": 2
+    }
+  },
+  "replay_scope": {
+    "already_exposed_prefix_only": true,
+    "replay_prefix_limit": 72,
+    "new_case_exposure": false,
+    "case_73_or_later": false,
+    "aggregate_structural_histogram_only": true
+  },
+  "one_use_epoch": {
+    "epoch_digest_sha256": "5bc110694f940f04014542c9660b98983fc178ae8489fee6db4e1e3b822c9c05",
+    "claim_ref": "refs/heads/livebench-v9-claims/5bc110694f940f04014542c9660b98983fc178ae8489fee6db4e1e3b822c9c05"
+  },
+  "success_measure": "VALID_RESPONSE_COUNT_INCREASE_OR_POLICY_BLOCK_COUNT_DECREASE_WITHOUT_NEW_FAILURE_CLASS",
+  "hard_rules": [
+    "NO_CASE_73_OR_LATER",
+    "NO_USE_OF_SEMANTIC_SEED_REQUIRED_SYNTHESIS_AS_BENCHMARK_ANSWER",
+    "NO_POLICY_WEAKENING",
+    "NO_PROMPT_RESPONSE_CASE_ID_OR_RAW_EXCEPTION_OUTPUT",
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT"
+  ],
+  "authority": {
+    "execution": false,
+    "replay72": false,
+    "new_case_exposure": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_authorized": 0,
+    "acceptance_credit_delta": 0
+  }
+}
