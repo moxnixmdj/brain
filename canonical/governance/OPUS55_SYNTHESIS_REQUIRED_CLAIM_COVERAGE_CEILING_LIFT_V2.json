@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__OLD_SCOPE_FAILURE_REPAIRED_BY_INDEPENDENT_STRONGER_SCOPE_CERTIFICATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge only required_claim_coverage_noninferiority by composing the previously independently checked 100% coverage ceiling proof with the newly independently verified relation that the frozen synthesis target scope is a subset of the verified EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 T1/T3 witness scope. Do not infer matched quality.",
+  "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "target_metric": "required_claim_coverage_noninferiority",
+  "authority": {
+    "historical_candidate": {
+      "path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V1.json",
+      "git_blob_sha": "559e1548790af4fccf19150a81419f1d39fa5b8d"
+    },
+    "historical_independent_failure": {
+      "path": "canonical/verification/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_INDEPENDENT_FAILURE_20261002_V1.json",
+      "git_blob_sha": "f2c8741a9249b4ad0ae4a82b1ac3f061c882e3e0"
+    },
+    "current_semantics_transport": {
+      "path": "canonical/verification/SYNTHESIS_OVERLAY_V3_REBIND_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "1a67bc568944212c4d235a463c8bd7bea21b3993"
+    },
+    "scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "lossless_scope_verification": {
+      "path": "canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "1852516f725f5b72badfc2f65be22e542ed83623"
+    },
+    "scope_activation_verification": {
+      "path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "1528485a15c98e89c9fb4dc50d691b6682e08542"
+    }
+  },
+  "proof_composition": {
+    "historical_non_scope_premises": "INDEPENDENTLY_CHECKED__EXACT_10_OF_10_BLOBS_MATCHED__HISTORICAL_VERIFIER_REPORTED_ONLY_TWO_SCOPE_FAILURES",
+    "historical_failure_set": [
+      "SOURCE_SCOPE_NOT_PROVED_EXACT_OR_SUPERSET_OF_TARGET_SCOPE",
+      "SOURCE_TARGET_SCOPE_RELATION_NOT_INDEPENDENTLY_VERIFIED"
+    ],
+    "current_target_semantics": "V1_TO_V3_TARGET_SEMANTICS_IDENTICAL",
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "source_population": "T1_T3_LOAD_BEARING_TERMINAL_OBSERVATIONS",
+    "source_scope_id": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+    "target_scope_id": "scope://opus55/SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "verified_source_to_target_relation": "SUPERSET",
+    "relation_basis": "SYNTHESIS_SCOPE_CERTIFICATE_V1.scope_relation=PROVEN_STRONGER_AND_LOSSLESS_SCOPE_VERIFICATION_EXACTLY_PROVES_TARGET_SCOPE_SUBSET_OF_EXISTING_VERIFIED_SYNTHESIS_WITNESS_SCOPE",
+    "relation_independent": true,
+    "brain_required_claim_coverage_lower_bound": 1,
+    "admissible_metric_upper_bound": 1,
+    "brain_minus_comparator_lower_bound": 0,
+    "target_direction": "higher",
+    "target_threshold": 0,
+    "theorem": "IF_THE_VERIFIED_BRAIN_WITNESS_SCOPE_IS_A_SUPERSET_OF_THE_FROZEN_TARGET_SCOPE_AND_THE_INDEPENDENTLY_CHECKED_WITNESS_REQUIRED_CLAIM_COVERAGE_LOWER_BOUND_IS_1_WHILE_REQUIRED_CLAIM_COVERAGE_HAS_GLOBAL_UPPER_BOUND_1__THEN_ON_THE_TARGET_SCOPE_BRAIN_MINUS_ANY_ADMISSIBLE_COMPARATOR_REQUIRED_CLAIM_COVERAGE_IS_AT_LEAST_0"
+  },
+  "derived_metric_bounds": {
+    "required_claim_coverage_noninferiority": {
+      "lower": 0,
+      "derivation": "ABSOLUTE_CEILING_DOMINANCE_AFTER_INDEPENDENT_SUPERSET_SCOPE_REPAIR"
+    }
+  },
+  "explicitly_not_proved": [
+    "metric:matched_quality",
+    "matched_quality_noninferiority"
+  ],
+  "expected_residual_after_verification": {
+    "missing_atoms": [
+      "metric:matched_quality"
+    ],
+    "missing_metric_bounds": [
+      "matched_quality_noninferiority"
+    ]
+  },
+  "hard_rules": [
+    "NO_OPUS_RESULT_INFERRED",
+    "NO_MATCHED_QUALITY_ATOM_OR_BOUND_INFERRED",
+    "HISTORICAL_NON_SCOPE_PREMISES_MUST_REMAIN_EXACTLY_THE_PREMISES_CHECKED_BY_THE_INDEPENDENT_FAILURE_RECEIPT",
+    "CURRENT_V1_TO_V3_TARGET_SEMANTICS_IDENTITY_MUST_REMAIN_INDEPENDENTLY_VERIFIED",
+    "CURRENT_SCOPE_CERTIFICATE_MUST_BE_INDEPENDENT_VERIFIED_AND_PROVE_TARGET_SCOPE_SUBSET_OF_WITNESS_SCOPE",
+    "NO_FINITE_SAMPLE_SCOPE_TRANSPORT_WITHOUT_THE_CURRENT_FORMAL_SCOPE_CERTIFICATE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_PARTIAL_SYNTHESIS_BOUND",
+    "NO_FRESH_REALITY"
+  ],
+  "independent_verification_required": true,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
