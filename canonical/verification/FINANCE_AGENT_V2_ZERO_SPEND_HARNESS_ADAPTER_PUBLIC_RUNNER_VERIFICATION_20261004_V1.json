@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_ZERO_SPEND_HARNESS_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_VALS_BOUNDARIES__RETRY_SAFE__UNIT_TESTS_PASS__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/finance_agent_v2_zero_spend_adapter_v1.py",
+      "git_blob_sha": "c90d2e693621ae0a268e3c4f96bbdbfdcc827ec2"
+    },
+    "tests": {
+      "path": "canonical/tests/test_finance_agent_v2_zero_spend_adapter_v1.py",
+      "git_blob_sha": "81d49edb2e7d265a14d2780eb8cad7b6adcb6435"
+    },
+    "governance": {
+      "path": "canonical/governance/FINANCE_AGENT_V2_ZERO_SPEND_HARNESS_ADAPTER_V1.json",
+      "git_blob_sha": "280fc9b41221f6b4fa58ac50b18a0a4d6fceb5ec"
+    },
+    "upstream": {
+      "repository": "vals-ai/finance-agent-v2",
+      "tools_py_git_blob_sha": "19b85ce4e110e39f410c52b2efa0e33f651fa6d1",
+      "get_agent_py_git_blob_sha": "22c012241a430975266fb7f8d2fe7af8e9f1b8d4"
+    }
+  },
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1619,
+    "head_sha": "b31bc56a4f5d6490d195e86a063cd97019718e20",
+    "merge_commit": "cdbaab6ba41d5dd2211abab31d35befda71ec6e0",
+    "workflow_run_id": 37171069989,
+    "workflow_job_id": 111343962175,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_AND_VALS_SOURCE_BLOBS_BOUND",
+    "TAVILY_CLIENT_SEARCH_ATTEMPTS_GUARDED",
+    "SEC_API_HTTP_ATTEMPTS_GUARDED_BELOW_RETRY_LAYER",
+    "TIINGO_HTTP_ATTEMPTS_GUARDED_BELOW_RETRY_LAYER",
+    "UNRELATED_HTTP_TRAFFIC_NOT_RECLASSIFIED",
+    "PRE_GET_AGENT_INTEGRATION_PRESERVES_FIRST_PARTY_CONSTRUCTION",
+    "MISSING_FREE_ONLY_ACCOUNT_SNAPSHOT_FAILS_CLOSED",
+    "QUOTA_PAYMENT_OVERAGE_OR_COST_SIGNAL_FAILS_CLOSED",
+    "PATCH_RESTORATION_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_CURRENT_PROVIDER_ACCOUNT_OR_KEY_CLAIM",
+    "NO_FREE_QUOTA_SUFFICIENCY_CLAIM",
+    "NO_VALS_APPROVAL_OR_EXACT_SUITE_ID_CLAIM",
+    "NO_OUTCOME_TELEMETRY_IMPLEMENTATION_CLAIM",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_SCORE_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
