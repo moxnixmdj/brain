@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_HOLDOUT_REQUEST_V1",
+  "episode_id": "H20_MAVEN_LANG_UTIL",
+  "difficulty": "NEW_ECOSYSTEM",
+  "query_action": {
+    "action_id": "H20Q08",
+    "source_id": "MAVEN_CENTRAL_SEARCH",
+    "query_family": "FRESH_HOLDOUT_BEHAVIOR_V20",
+    "query": "Java utilities strings reflection builders object helpers"
+  },
+  "source": {
+    "source_id": "MAVEN_CENTRAL_SEARCH",
+    "provider": "maven",
+    "upstream_group": "MAVEN_CENTRAL_API",
+    "ecosystem": "maven",
+    "registry": "maven"
+  },
+  "target_identity_present": false
+}
