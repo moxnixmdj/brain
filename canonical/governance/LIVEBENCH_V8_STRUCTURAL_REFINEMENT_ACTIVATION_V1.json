@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V8_STRUCTURAL_REFINEMENT_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_IFF_EXACT_CANDIDATE_AND_INDEPENDENT_VERIFICATION_AND_LAUNCHER_BINDINGS_PASS__REPLAY72_ONLY__ZERO_CREDIT",
+  "active": true,
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+  "objective": "Authorize exactly one sanitized structural replay of the already exposed LiveBench cases 1-72. No case 73 or later may be read.",
+  "exact_binding": {
+    "candidate_path": "canonical/governance/LIVEBENCH_V8_STRUCTURAL_REFINEMENT_CANDIDATE_V1.json",
+    "candidate_git_blob_sha": "301fe04b00c7c7e5073753f839a57572524f5cb5",
+    "independent_verification_path": "canonical/verification/LIVEBENCH_V8_STRUCTURAL_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "independent_verification_git_blob_sha": "d888bfb2d87d25252096aebc52d5f6078f9ce60e",
+    "executor_repository": "moxnixmdj/verification-capsule-runner",
+    "base_executor_path": "execute_livebench_if_replay72_v4_candidate.py",
+    "base_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "diagnostic_path": "diagnose_livebench_replay72_v8_structural.py",
+    "diagnostic_git_blob_sha": "bc5bfd7d791b1343cbcf4d09d8f41c6f73ed9f68",
+    "classifier_path": "livebench_v8_structural_classifier.py",
+    "classifier_git_blob_sha": "0c48d463989f8351e3b0a502a174b59ff391ffe8",
+    "epoch_digest_sha256": "78f7e799c3e1edf70516c02badebde0adbad7c5846aec8fbff53f8db2152f192",
+    "claim_ref": "refs/heads/livebench-v8-claims/78f7e799c3e1edf70516c02badebde0adbad7c5846aec8fbff53f8db2152f192"
+  },
+  "scope": {
+    "replay_prefix_limit": 72,
+    "already_exposed_prefix_only": true,
+    "new_case_exposure": false,
+    "case_73_or_later": false,
+    "prompt_text_output_forbidden": true,
+    "response_text_output_forbidden": true,
+    "case_id_output_forbidden": true,
+    "raw_exception_output_forbidden": true,
+    "raw_composition_detail_output_forbidden": true,
+    "aggregate_structural_histogram_only": true
+  },
+  "authority": {
+    "execution": true,
+    "replay_existing_prefix": true,
+    "new_case_exposure": false,
+    "predicate_local_fresh_reality": false,
+    "global_fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "preconditions": [
+    "EXACT_ACTIVATION_BLOB_MUST_BE_BOUND_BY_LAUNCHER",
+    "EXACT_CANDIDATE_AND_INDEPENDENT_VERIFICATION_BLOBS_MUST_MATCH",
+    "POINT_OF_USE_ZERO_CASE_PREFLIGHT_MUST_PASS",
+    "ATOMIC_ONE_USE_CLAIM_CREATE_MUST_RETURN_201_BEFORE_DATASET_READ",
+    "DUPLICATE_OR_NON201_CLAIM_MUST_ABORT_BEFORE_DATASET_READ",
+    "NO_CASE_73_OR_LATER"
+  ],
+  "hard_rules": [
+    "ONE_EXECUTION_EPOCH_ONLY",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE",
+    "NO_PROMPT_RESPONSE_CASE_ID_OR_RAW_EXCEPTION_OUTPUT",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "ZERO_INCREMENTAL_SPEND",
+    "FAIL_CLOSED_ON_ANY_BINDING_PREFLIGHT_OR_CLAIM_FAILURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_authorized": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_launcher_verification_required": true,
+  "promotion_authority": false
+}
