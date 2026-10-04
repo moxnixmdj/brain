@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_GENUINE_TYPE_REPROMOTION_GATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__GENUINE_RUNTIME_TYPE_DOMAIN__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "current_authority": {
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "predicate_state": "EXTERNAL_BLOCKED",
+    "root_class": "ROOT3_ONLY",
+    "revocation_path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
+    "class_spoof_falsifier_path": "canonical/verification/UNKNOWN_DOMAIN_V6_REPAIRED_CLASS_SPOOF_FALSIFIER_20261005_V1.json"
+  },
+  "supersedes": {
+    "gate": "canonical/governance/UNKNOWN_DOMAIN_V6_SUBCLASS_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V2.json",
+    "reason": "V2_BINDS_A_REPAIR_WHOSE_ISINSTANCE_ACCEPTED_DOMAIN_WAS_FALSIFIED_BY_CLASS_SPOOF_PROXIES"
+  },
+  "candidate": {
+    "branch": "breakthrough/unknown-domain-v7-genuine-type-domain-20261005-sol",
+    "required_blobs": {
+      "canonical/runtime/unknown_domain_direct_candidate_v1.py": "a2a77269a8175ce315b466035049da0f761b8734",
+      "canonical/runtime/unknown_domain_direct_candidate_v2.py": "4470716f95a559a700e461262df909ae19a41651",
+      "canonical/runtime/unknown_domain_direct_candidate_v3.py": "8df7f13455b710623806a8219174b397a2c3c442",
+      "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+      "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+      "canonical/runtime/unknown_domain_direct_hidden_generator_v4.py": "e52858b9fef2d795f72b45cd3ae82ad04344aa91",
+      "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py": "d2f529ed9a006f53e75d06ece6f2acb54211b127",
+      "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+      "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+      "canonical/tests/test_unknown_domain_direct_v5.py": "5b1dc24c7ec65edc32475917349c5d8725b9a655",
+      "canonical/runtime/unknown_domain_direct_v7_genuine_type_proof_v1.py": "3d7171b34a19f2600f9c5bb512d116806deba481"
+    },
+    "proof_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_V7_GENUINE_TYPE_PROOF_V1",
+    "proof_status": "PASS__GENUINE_RUNTIME_TYPE_DOMAIN_TOTALITY_STRUCTURAL_ID_AND_EXACT_FLOAT_BOUND_EVALUATOR",
+    "semantic_change": "INPUT_GATE_DOMAIN_CORRECTION_ONLY__REAL_STR_BYTES_TYPE_HIERARCHY_ACCEPTED__CLASS_SPOOF_PROXIES_REJECTED__FROZEN_EVALUATOR_MEANING_UNCHANGED"
+  },
+  "independent_verifier_contract": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "expected_receipt_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_GENUINE_TYPE_INDEPENDENT_VERIFICATION_V1",
+    "expected_receipt_status": "PASS__INDEPENDENT_CONTENT_BOUND_GENUINE_TYPE_TOTALITY_AND_CLASS_SPOOF_REJECTION__ZERO_CREDIT",
+    "required": [
+      "ALL_ELEVEN_REQUIRED_SUBJECT_BLOBS_MATCH_EXACTLY",
+      "V7_PROOF_EXECUTES_WITH_EXACT_REQUIRED_STATUS",
+      "REAL_STR_SUBCLASSES_WITH_HOSTILE_HOOKS_PASS",
+      "REAL_BYTES_SUBCLASSES_WITH_HOSTILE_HOOKS_PASS",
+      "FAKE_STR_CLASS_SPOOF_PROXY_IS_REJECTED_BEFORE_DESCRIPTOR_USE",
+      "FAKE_BYTES_CLASS_SPOOF_PROXY_IS_REJECTED_BEFORE_DESCRIPTOR_USE",
+      "ALL_2048_SURROGATE_CODEPOINTS_RECHECKED",
+      "FORCED_TOTAL_TOKEN_COLLISION_RECHECKED",
+      "27_CASE_ADVERSARIAL_PATH_PASSES_EXACT_HARNESS_AND_SCORER",
+      "ZERO_PRODUCTION_OR_TERMINAL_CASES_CONSUMED",
+      "FROZEN_PROTOCOL_AND_EVALUATOR_BLOBS_UNCHANGED",
+      "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_AND_OWNERSHIP_CREDIT"
+    ],
+    "workflow_conclusion_required": "success",
+    "artifact_binding_required": true
+  },
+  "frozen_semantics": {
+    "protocol_path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+    "protocol_git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab",
+    "evaluator_path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EVALUATOR_FAMILY_V1.json",
+    "evaluator_git_blob_sha": "52090daf78d12020af48c1b6ffaea056d9029e1b",
+    "rule": "ONLY_PYTHON_API_DOMAIN_OVERQUANTIFICATION_IS_REMOVED__HIDDEN_EVALUATOR_TASK_AND_SCORING_SEMANTICS_MUST_NOT_CHANGE"
+  },
+  "promotion_predicate": {
+    "all_required": [
+      "CURRENT_REVOCATION_AND_CLASS_SPOOF_FALSIFIER_REMAIN_BOUND",
+      "ALL_ELEVEN_V7_SUBJECT_BLOBS_MATCH",
+      "INDEPENDENT_WORKFLOW_SUCCESS",
+      "INDEPENDENT_RECEIPT_SCHEMA_STATUS_AND_ARTIFACT_BINDING_MATCH",
+      "ALL_REQUIRED_REAL_SUBCLASS_AND_FAKE_PROXY_ATTACKS_PASS",
+      "V7_PROOF_STATUS_MATCHES",
+      "FROZEN_PROTOCOL_AND_EVALUATOR_BLOBS_MATCH",
+      "ZERO_PRODUCTION_OR_TERMINAL_CASES_CONSUMED"
+    ],
+    "on_all_true": {
+      "predicate_state": "PROVED",
+      "proved_predicate_count_transition": "12_TO_13",
+      "unresolved_predicate_count_transition": "26_TO_25",
+      "root3_only_predicate_removed": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
+    },
+    "on_any_false_missing_or_hash_mismatch": {
+      "predicate_state": "EXTERNAL_BLOCKED",
+      "proved_predicate_count_delta": 0,
+      "unresolved_predicate_count_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
+    }
+  },
+  "hard_rules": [
+    "V2_MUST_NOT_AUTHORIZE_REPROMOTION_AFTER_CLASS_SPOOF_FALSIFIER",
+    "NO_REPROMOTION_FROM_LOCAL_OR_BRANCH_TESTS_ALONE",
+    "NO_POST_OUTCOME_RELAXATION",
+    "ANY_NEW_COUNTEREXAMPLE_FAILS_CLOSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
