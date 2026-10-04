@@ -12,10 +12,12 @@ from canonical.runtime.livebench_exact_completion_cut_v1 import (
 )
 
 
-def test_frozen_threshold_mass_is_exact_rational():
-    assert threshold_score_mass(200, "65.7") == Fraction(657, 5)
-    assert Fraction(131, 1) < Fraction(657, 5)
-    assert Fraction(132, 1) >= Fraction(657, 5)
+def test_strict_raw_opus_threshold_mass_is_exact_rational():
+    strict_raw = Fraction(262951, 2000)  # 200 * 65.73775 / 100
+    assert threshold_score_mass(200, "65.73775") == strict_raw
+    assert Fraction(131, 1) < strict_raw
+    assert Fraction(132, 1) >= strict_raw
+    assert strict_raw > threshold_score_mass(200, "65.7")
 
 
 def test_completion_bonus_is_large_and_exact():
