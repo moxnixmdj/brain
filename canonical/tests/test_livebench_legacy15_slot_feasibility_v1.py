@@ -91,3 +91,23 @@ def test_sentence_one_end_phrase_contradiction():
     out = f.classify_visible_contracts(contracts)
     assert out["status"] == "PROVED_UNSAT"
     assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in out["hard_unsat_reasons"]
+
+
+def test_section_splitter_forbidden_collision_is_certified():
+    contracts = [
+        {"instruction_id": f.SECTIONS, "slots": {"section_spliter": "SECTION", "num_sections": 2}},
+        {"instruction_id": f.FORBIDDEN, "slots": {"forbidden_words": ["section"]}},
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "PROVED_UNSAT"
+    assert "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD" in out["hard_unsat_reasons"]
+
+
+def test_non_generator_end_phrase_is_not_overcertified():
+    contracts = [
+        {"instruction_id": f.SENTENCE, "slots": {"num_sentences": 1, "relation": "less than"}},
+        {"instruction_id": f.END, "slots": {"end_phrase": "custom suffix"}},
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" not in out["hard_unsat_reasons"]
