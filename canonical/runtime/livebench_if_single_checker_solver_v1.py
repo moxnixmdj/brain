@@ -231,8 +231,16 @@ def _build_dynamic(iid: str, prompt: str) -> str | None:
         return "quantum zebra"
 
     if iid == "count:conjunctions":
-        n = _int(r"(\d+)\s+different coordinating conjunctions", prompt)
-        if n is None or not (1 <= n <= 7):
+        # The released IFBench population contains integer-valued constraints
+        # serialized both as "4" and "4.0". Accept only integer-valued decimals.
+        m = re.search(r"(\d+(?:\.0+)?)\s+different coordinating conjunctions", prompt, re.I)
+        if not m:
+            return None
+        raw_n = float(m.group(1))
+        if not raw_n.is_integer():
+            return None
+        n = int(raw_n)
+        if not (1 <= n <= 7):
             return None
         conj = ["and","but","or","so","for","nor","yet"][:n]
         parts = ["alpha"]
@@ -293,7 +301,9 @@ def _build_dynamic(iid: str, prompt: str) -> str | None:
         return _sentences(n, n, word)
 
     if iid == "count:pronouns":
-        n = _int(r"at least\s+(\d+)\s+personal pronouns", prompt)
+        # Public IFBench prompts omit "personal" while some source revisions
+        # include it. Detection already accepts both; construction must too.
+        n = _int(r"at least\s+(\d+)\s+(?:personal\s+)?pronouns\b", prompt)
         return " ".join(["I"] * n) if n is not None else None
 
     if iid == "sentence:increment":
@@ -306,10 +316,16 @@ def _build_dynamic(iid: str, prompt: str) -> str | None:
         return f"{s1} {s2} {s3}"
 
     if iid == "format:list":
-        m = re.search(r"instead of bullet points use\s+(.+?)\.", prompt, re.I | re.S)
+        # Parse the frozen checker's finite marker vocabulary exactly. Generic
+        # non-greedy dot parsing corrupts punctuation markers such as "!?!?".
+        m = re.search(
+            r"instead of bullet points use\s+(\.\.\.|SEPARATOR|!\?!\?|-)(?=\.)",
+            prompt,
+            re.I,
+        )
         if not m:
             return None
-        sep = m.group(1).strip()
+        sep = m.group(1)
         return f"{sep} one\n{sep} two"
 
     if iid == "count:keywords_multiple":
