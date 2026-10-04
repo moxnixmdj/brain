@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V3_COLLISION_TOTAL_UNIVERSAL_PROOF_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ZERO_REALITY__COLLISION_TOTAL_UNIVERSAL_FROZEN_SCOPE_PROOF__INDEPENDENT_CONTENT_BOUND_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "breakthrough": {
+    "discovered_falsifier_of_v2_theorem_candidate": "The prior universal-proof candidate quantified over all valid evaluator secrets and beacons while relying on truncated HMAC-derived opaque identifiers. The V1/V2 generator did not prove or enforce within-group uniqueness for all load-bearing identifiers, so the universal quantifier was not established.",
+    "root_repair": "V3 makes identifier injectivity structural. Every finite semantic identifier group is mapped through a keyed Fisher-Yates permutation and the resulting unique rank is embedded explicitly in the opaque identifier. HMAC influences the permutation and decoration but is no longer the source of uniqueness.",
+    "finite_totality_proof": "The pure permutation core exhausts all 5913 possible legal Fisher-Yates swap paths across every group size 1 through 7 used by V3. Every path is bijective, therefore arbitrary repeated or colliding HMAC-derived draws cannot collapse semantic slots.",
+    "semantic_proof": "With identifier totality closed, strict analytic margins discharge all six transfer primitive families and direct construction discharges all three abstention classes for every population emitted by V3."
+  },
+  "supersedes_if_verified": [
+    "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json"
+  ],
+  "exact_subjects": {
+    "candidate_v1_git_blob_sha": "a2a77269a8175ce315b466035049da0f761b8734",
+    "candidate_v2_git_blob_sha": "4470716f95a559a700e461262df909ae19a41651",
+    "generator_v1_git_blob_sha": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "generator_v2_git_blob_sha": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "generator_v3_git_blob_sha": "bbf57ec4a66aa7b311308ed34b61325d00674361",
+    "scorer_v1_git_blob_sha": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "harness_v1_git_blob_sha": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "universal_proof_v1_git_blob_sha": "0247c98f0b20c15d591453c7306b778f1f90dd8c",
+    "tests_git_blob_sha": "9230eb9f82e011975364e484fab86f19a9017b64"
+  },
+  "scope": {
+    "leaves": [
+      "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS"
+    ],
+    "transfer_case_count": 12,
+    "abstention_case_count": 15,
+    "primitive_family_count": 6,
+    "abstention_class_count": 3,
+    "valid_beacons": "ALL_STRINGS_ACCEPTED_BY_THE_GENERATOR_GATE",
+    "valid_evaluator_secrets": "ALL_BYTES_OR_STRINGS_ACCEPTED_BY_THE_GENERATOR_GATE",
+    "identifier_collision_cases_excluded": 0,
+    "open_world_unknown_domain": false
+  },
+  "v2_to_v3_scope_relation": {
+    "unchanged_semantics": [
+      "PROGRAM_FAMILY_SELECTION",
+      "PROGRAM_PARAMETER_GENERATION",
+      "NUMERIC_ROLE_ROW_GENERATION",
+      "DISTRACTOR_NUMERIC_OFFSETS",
+      "VISIBLE_TASK_SHAPES",
+      "PROBE_BUDGET",
+      "TASK_COUNTS_AND_CLASS_BALANCE",
+      "CANDIDATE_V2",
+      "SCORER_V1",
+      "HARNESS_V1"
+    ],
+    "changed_mechanism": "OPAQUE_IDENTIFIER_CONSTRUCTOR_ONLY",
+    "collision_free_v2_cases": "V3_IS_A_BIJECTIVE_OPAQUE_RENAMING_OF_THE_SAME_LATENT_TASK",
+    "pathological_v2_identifier_collision_cases": "V3_TOTALIZES_THE_IDENTIFIER_LAYER_WITHOUT_CHANGING_LATENT_TASK_SEMANTICS",
+    "required_reduction": "SEPARATE_INDEPENDENT_SCOPE_EQUIVALENCE_AND_ACCEPTANCE_REDUCTION"
+  },
+  "proof_obligations": [
+    "INDEPENDENTLY_CONTENT_BIND_ALL_EXACT_SUBJECT_BLOBS",
+    "INDEPENDENTLY_EXHAUST_ALL_5913_LEGAL_PERMUTATION_SWAP_PATHS",
+    "INDEPENDENTLY_REDERIVE_TRANSFER_SEPARATION_MARGINS_WITH_EXACT_ARITHMETIC",
+    "INDEPENDENTLY_VERIFY_ABSTENTION_CLASS_CONSTRUCTION_AND_SCORER_CONTRACT",
+    "INDEPENDENTLY_VERIFY_V2_TO_V3_CHANGE_IS_IDENTIFIER_ONLY",
+    "RUN_ZERO_PRODUCTION_OR_TERMINAL_CASES",
+    "KEEP_ACCEPTANCE_PROMOTION_SEPARATE"
+  ],
+  "scheduler_delta_if_verified": [
+    "DELETE_THE_27_CASE_UNKNOWN_DOMAIN_PRODUCTION_POPULATION_AS_REQUIRED_INFORMATION_ACQUISITION_FOR_THIS_EXACT_DIRECT_AUDIT_SCOPE",
+    "QUARANTINE_THE_PRIOR_V2_UNIVERSAL_THEOREM_AS_INCOMPLETE_DUE_TO_UNPROVED_IDENTIFIER_COLLISION_ASSUMPTION",
+    "ROUTE_THE_V3_UNIVERSAL_THEOREM_TO_SCOPE_EQUIVALENCE_AND_ACCEPTANCE_REDUCTION",
+    "PRESERVE_OPEN_WORLD_UNKNOWN_DOMAIN_NONCLAIM"
+  ],
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "ownership_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION",
+    "NO_CLAIM_THE_PRIOR_V2_THEOREM_IS_VALID",
+    "NO_PRODUCTION_CASE_WAS_GENERATED_READ_OR_CONSUMED",
+    "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_IS_REQUIRED"
+  ]
+}
