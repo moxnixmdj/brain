@@ -103,7 +103,7 @@
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
         "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json",
         "current_frontier_git_blob_sha": "681123ef6cff3506d66af6b31b61c8bc14a8a913",
-        "status": "CANDIDATE__ROOT2_FRONTIER_V3_SUBJECT_VERIFIED__POINTER_PROJECTION_REVERIFY_PENDING__ZERO_CREDIT",
+        "status": "ACTIVE__ROOT2_FRONTIER_V3_POINTER_PROJECTION_INDEPENDENT_PASS__EFFECTIVE_SCHEDULING__ZERO_CREDIT",
         "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2",
         "fresh_reality_authority": false,
         "current_frontier_activation_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_ACTIVATION_V1.json",
