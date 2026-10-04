@@ -8,7 +8,7 @@
     "git_blob_sha": "1d8049556eb073007e1f4686a3034726aeb27698"
   },
   "exact_bound_components": {
-    "canonical/runtime/h100_zero_learned_role_induction_v1.py": "d2cfb2119a77f632267fe93d4df95fb1ed51e05c",
+    "canonical/runtime/h100_zero_learned_role_induction_v1.py": "f18cbb1a1d9e1f1184a06df536a09ba99f3fdfed",
     "canonical/tests/test_h100_zero_learned_role_induction_v1.py": "bfabb4171b207a36d2a2916e74e9d873b0acf9d1"
   },
   "operative_scope": [
