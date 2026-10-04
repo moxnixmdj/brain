@@ -384,6 +384,28 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
+    },
+    "root2_decision_only_evaluation": {
+      "activation_path": "canonical/governance/ROOT2_DECISION_ONLY_EVALUATION_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "4086abe4559e30ade7bb7fa5be5571eaf40e94ee",
+      "verification_path": "canonical/verification/ROOT2_DECISION_ONLY_EVALUATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "345ad6ce5d5ba5105c82e5663fa9a97e99ccec05",
+      "subject_runtime_path": "canonical/runtime/root2_decision_only_evaluation_v1.py",
+      "subject_runtime_git_blob_sha": "bb70267e0bb44830a0c73708e3d4a07daecfdfa0",
+      "status": "ACTIVE_IFF_EXACT_ROOT_PROJECTION_RECEIPT_EXISTS_AND_PASSES__DECISION_ONLY_ROOT2_SETTLEMENT__SCHEDULING_ONLY__ZERO_CREDIT",
+      "scheduling_authority": true,
+      "decision_certificate_compilation": true,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false,
+      "acceptance_credit_delta": 0,
+      "route_precedence": [
+        "AUTHENTICATED_ONE_BIT_THRESHOLD_RECEIPT_WHEN_SUFFICIENT",
+        "OUTPUT_ONLY_THRESHOLD_DAG_MINIMUM_ZERO_REALITY_CERTIFICATE_CUT",
+        "MINIMUM_AUTHORIZED_EMPIRICAL_RESIDUAL",
+        "FULL_BENCHMARK_ONLY_IF_IRREDUCIBLE"
+      ],
+      "root_projection_verification_path": "canonical/verification/ROOT2_DECISION_ONLY_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
     }
   },
   "accounting": {
