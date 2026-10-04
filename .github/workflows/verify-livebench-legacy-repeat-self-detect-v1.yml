@@ -1,0 +1,61 @@
+name: Verify legacy repeat prompt self-detection
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_legacy_repeat_prompt_self_detector_v1.py"
+      - "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py"
+      - "canonical/tests/test_livebench_legacy_repeat_prompt_self_detector_v1.py"
+      - ".github/workflows/verify-livebench-legacy-repeat-self-detect-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit tests
+        run: python -m pytest -q canonical/tests/test_livebench_legacy_repeat_prompt_self_detector_v1.py
+      - name: Fetch pinned public Google IFEval corpus
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://raw.githubusercontent.com/google-research/google-research/e49bbfe381c9c0e564b937f1c4e163a2273c65cc/instruction_following_eval/data/input_data.jsonl"
+          curl -fsSL "$url" -o /tmp/ifeval_input_data.jsonl
+          test "$(git hash-object /tmp/ifeval_input_data.jsonl)" = "cbe52f6eecf3986fdac745b4acba4da1408eb146"
+      - name: Exact public repeat_prompt recovery audit
+        run: |
+          python - <<'PY'
+          import json
+          from canonical.runtime.livebench_legacy_repeat_prompt_self_detector_v1 import (
+              detect_and_recover_legacy_repeat_prompt,
+          )
+
+          rows = [json.loads(line) for line in open("/tmp/ifeval_input_data.jsonl", encoding="utf-8") if line.strip()]
+          repeat = [r for r in rows if "combination:repeat_prompt" in r["instruction_id_list"]]
+          assert len(rows) == 541, len(rows)
+          assert len(repeat) == 41, len(repeat)
+
+          failures = []
+          sides = {}
+          for row in repeat:
+              index = row["instruction_id_list"].index("combination:repeat_prompt")
+              expected = row["kwargs"][index]["prompt_to_repeat"]
+              got = detect_and_recover_legacy_repeat_prompt(row["prompt"])
+              if got.get("status") != "PASS" or got.get("prompt_to_repeat") != expected:
+                  failures.append({
+                      "key": row["key"],
+                      "status": got.get("status"),
+                      "reason": got.get("reason"),
+                  })
+              else:
+                  sides[got["target_side"]] = sides.get(got["target_side"], 0) + 1
+
+          assert failures == [], failures
+          assert sides == {"TARGET_PREFIX": 33, "TARGET_SUFFIX": 8}, sides
+          print({"rows": 541, "repeat_rows": 41, "exact": 41, "sides": sides})
+          PY
