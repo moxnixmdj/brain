@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_MECHANISM_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_LEARNED_MECHANISM_CANDIDATE__ZERO_CAPABILITY_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py",
+    "runtime_git_blob_sha": "fa77c6a0f4edf214c4237cf1e204b640261622fe",
+    "tests_path": "canonical/tests/test_h100_zero_learned_mechanism_synthesizer_v1.py",
+    "tests_git_blob_sha": "0e5e7ab361d495cb76e6e8644cf2cdd46c733ed8",
+    "governance_path": "canonical/governance/H100_ZERO_LEARNED_MECHANISM_CANDIDATE_V1.json",
+    "governance_git_blob_sha": "253715727a8cdbaa5bde6d84a2196debbe96e183"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1688,
+    "verifier_head_sha": "1bc0e40ab3d276d810ace6114be89ff4879a11e9",
+    "merge_commit": "cd2a3d17577d03b7c3768efab1f7397ba8f59241",
+    "workflow_run_id": 37178806634,
+    "workflow_job_id": 111366958168,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_candidate_blobs": true,
+    "runtime_standard_library_only": true,
+    "runtime_file_network_process_dynamic_code_escape_hatches_absent_in_ast_audit": true,
+    "persistent_learned_bytes": 0,
+    "external_learned_capability_calls": 0,
+    "single_variable_power_recovery": true,
+    "multivariable_ratio_power_recovery": true,
+    "affine_linear_recovery": true,
+    "fractional_power_recovery": true,
+    "continuous_real_exponent_public_stream_power_recovery": true,
+    "public_2d_plus_1_bound_probe_design": true,
+    "surface_name_invariant_structure": true,
+    "irrelevant_distractor_rejection": true,
+    "out_of_grammar_fail_closed_expansion": true,
+    "disagreement_probe_generation": true,
+    "nonfinite_input_rejection": true
+  },
+  "preserved_boundaries": {
+    "mysterymechanism_hidden_score_proved": false,
+    "unknown_domain_direct_leaf_closed": false,
+    "unknown_domain_acceptance_proved": false,
+    "h100_terminal_proved": false,
+    "expression_tree_grammar_complete": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_MECHANISM_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_LEARNED_BYTES__DETERMINISTIC_MECHANISM_SYNTHESIS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "FILL_THE_CURRENT_V6_GENERATE_NEW_MECHANISM_CANDIDATES_GAP_FOR_A_FROZEN_NUMERIC_MECHANISM_SUBCLASS_WITH_ZERO_PERSISTENT_LEARNED_BYTES",
+  "h100_authority": {
+    "activation_path": "canonical/governance/SUB100MB_H100_EXPERIMENT_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "d302e845499162eab4f733efb24efac7256cb9ed",
+    "rule": "THIS_IS_A_GATE1_MECHANISM_CANDIDATE_ONLY__H100_TERMINAL_STILL_REQUIRES_THE_FULL_FROZEN_19_FAMILY_38_ATOM_CONTRACT"
+  },
+  "unknown_domain_authority": {
+    "frozen_protocol_path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+    "frozen_protocol_git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab",
+    "v7_activation_path": "canonical/governance/UNIVERSAL_LEARNING_PROOF_PROGRAM_V7_ACTIVATION_V1.json",
+    "v7_activation_git_blob_sha": "58cbfecea60e7f4259c5b7c0218ebc15c4e33399",
+    "v8_governance_path": "canonical/governance/UNIVERSAL_LEARNING_EQUIVALENCE_BASIS_V8.json",
+    "v8_governance_git_blob_sha": "095dc93747a64a95feb001f1ecca4714ad666b72",
+    "v9_activation_path": "canonical/governance/UNIVERSAL_LEARNING_META_POLICY_V9_ACTIVATION_V1.json",
+    "v9_activation_git_blob_sha": "17fa19762b6f6970a918b32b7ec0fd30000b3ef2",
+    "preserved_rule": "V7_REMAINS_LOAD_BEARING_TRUST_EXECUTION_DEDUCTION_AND_PROGRAM_REUSE_AUTHORITY__V8_V9_REMAIN_PLANNING_OVERLAYS"
+  },
+  "exact_bound_components": {
+    "canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py": "fa77c6a0f4edf214c4237cf1e204b640261622fe",
+    "canonical/tests/test_h100_zero_learned_mechanism_synthesizer_v1.py": "0e5e7ab361d495cb76e6e8644cf2cdd46c733ed8"
+  },
+  "current_gap_addressed": {
+    "source": "canonical/runtime/universal_learning_mechanism_router_v6.py",
+    "trigger": "ALL_DECLARED_MECHANISMS_FALSIFIED",
+    "v6_next_action": "GENERATE_NEW_MECHANISM_CANDIDATES",
+    "prior_limitation": "THE_BOUND_V6_ROUTER_REQUESTS_NEW_CANDIDATES_BUT_DOES_NOT_ITSELF_SYNTHESIZE_THEIR_MATHEMATICAL_FORM",
+    "candidate_effect": "DETERMINISTICALLY_ENUMERATE_AND_FIT_A_BOUNDED_NUMERIC_MECHANISM_GRAMMAR_THEN_EMIT_STRUCTURAL_SIGNATURES_OR_REQUEST_DISCRIMINATION_OR_EXPLICITLY_EXPAND_THE_GRAMMAR"
+  },
+  "frozen_grammar_v1": {
+    "families": [
+      "AFFINE_LINEAR_COMBINATIONS_OF_VISIBLE_NUMERIC_INPUTS",
+      "AFFINE_FUNCTION_OF_MULTIVARIABLE_MONOMIALS",
+      "CONTINUOUS_REAL_EXPONENT_MULTIVARIABLE_POWER_LAWS"
+    ],
+    "monomial_exponents": [-3,-2,-1,-0.5,0,0.5,1,2,3],
+    "target_transforms": ["IDENTITY","LOG_ABS","RECIPROCAL"],
+    "maximum_active_variables": 3,
+    "selection": "DETERMINISTIC_HOLDOUT_NRMSE_PLUS_SMALL_DESCRIPTION_COMPLEXITY_TIEBREAK",
+    "surface_name_invariance": "STRUCTURAL_SIGNATURE_IGNORES_VISIBLE_VARIABLE_NAMES_AND_RETAINS_OPERATOR_EXPONENT_STRUCTURE",
+    "ambiguity_action": "PROPOSE_BOUNDED_GRID_POINT_MAXIMIZING_NORMALIZED_PREDICTION_DISAGREEMENT",
+    "initial_experiment_design": "USE_FULL_2D_PLUS_1_BUDGET__D2_FOUR_CORNERS_PLUS_GEOMETRIC_OR_ARITHMETIC_CENTER__HIGHER_D_CENTER_PLUS_AXIS_EXTREMES",
+    "continuous_power_fit": "ROBUST_LOG_LINEAR_REGRESSION_WITH_DETERMINISTIC_NEAR_ZERO_SIGN_NOISE_REJECTION",
+    "out_of_grammar_action": "EXPAND_MECHANISM_LANGUAGE"
+  },
+  "zero_learned_accounting": {
+    "persistent_learned_artifacts": [],
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "runtime_kind": "DETERMINISTIC_PROGRAM",
+    "rule": "PROGRAM_CODE_IS_MEASURED_SEPARATELY_UNDER_H100_AND_IS_NOT_RECLASSIFIED_AS_LEARNED_STATE"
+  },
+  "mechanism_validation_targets": [
+    "RECOVER_SINGLE_VARIABLE_POWER_LAW",
+    "RECOVER_MULTIVARIABLE_RATIO_POWER_LAW",
+    "RECOVER_AFFINE_LINEAR_LAW",
+    "RECOVER_FRACTIONAL_POWER_LAW",
+    "RECOVER_CONTINUOUS_REAL_EXPONENT_POWER_LAW_FROM_PUBLIC_MYSTERYMECHANISM_STREAM_POWER_SHAPE",
+    "GENERATE_FULL_2D_PLUS_1_BOUND_PROBE_DESIGN",
+    "PRESERVE_STRUCTURAL_SIGNATURE_UNDER_SURFACE_VARIABLE_RENAMING",
+    "IGNORE_AN_IRRELEVANT_DISTRACTOR_WHEN_A_SIMPLER_EXACT_RELATION_EXISTS",
+    "FAIL_CLOSED_ON_OUT_OF_GRAMMAR_SINE_RELATION",
+    "PROPOSE_A_DISCRIMINATING_EXPERIMENT_WHEN_TWO_CANDIDATES_DISAGREE",
+    "REJECT_NONFINITE_INPUT"
+  ],
+  "expected_integration_if_independently_verified": {
+    "position": "MECHANISM_CANDIDATE_GENERATOR_BEFORE_V6_FALSIFICATION_AND_SAFE_EXPERIMENT_PIPELINE",
+    "flow": [
+      "STRUCTURED_NUMERIC_OBSERVATIONS",
+      "ZERO_LEARNED_CANDIDATE_SYNTHESIS",
+      "V6_MECHANISM_FALSIFICATION_AND_DECISION_QUOTIENT",
+      "V4_V6_OPEN_WORLD_SAFETY_AND_DISCRIMINATION",
+      "V7_DEDUCTION_AND_EXECUTABLE_SKILL_COMPILATION",
+      "V8_EQUIVALENCE_AND_NOVELTY_COMPRESSION",
+      "V9_META_POLICY_PLANNING"
+    ]
+  },
+  "residual_after_candidate_even_if_verified": [
+    "NO_PROOF_THE_FROZEN_GRAMMAR_COVERS_THE_HIDDEN_UNKNOWN_DOMAIN_DISTRIBUTION",
+    "NO_RAW_NATURAL_LANGUAGE_OR_ARBITRARY_TOOL_TRACE_TO_STRUCTURED_NUMERIC_SCHEMA_COMPILER",
+    "NO_GENERAL_PROGRAM_SYNTHESIS_OUTSIDE_THE_FROZEN_GRAMMAR",
+    "NO_DIRECT_HIDDEN_TRANSFER_LEAF_RESULT",
+    "NO_DIRECT_CALIBRATED_ABSTENTION_LEAF_RESULT",
+    "NO_FULL_H100_CAPABILITY_CLOSURE"
+  ],
+  "hard_nonclaims": [
+    "NO_MYSTERYMECHANISM_SCORE_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_ZERO_LEARNED_BYTES_IS_SUFFICIENT_FOR_GENERAL_INTELLIGENCE",
+    "NO_CLAIM_THE_FROZEN_GRAMMAR_IS_COMPLETE",
+    "NO_SYNTHETIC_TEST_TO_FROZEN_DIRECT_LEAF_PROMOTION",
+    "NO_RUNTIME_RAM_OR_TOTAL_COMPUTE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "authority": {
+    "mechanism_candidate_generation": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}

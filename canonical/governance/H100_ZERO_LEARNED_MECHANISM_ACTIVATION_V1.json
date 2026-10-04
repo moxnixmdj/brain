@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_MECHANISM_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_H100_GATE1_MECHANISM_CANDIDATE_GENERATOR__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT",
+  "objective": "USE_THE_VERIFIED_ZERO_LEARNED_DETERMINISTIC_SYNTHESIZER_TO_GENERATE_NUMERIC_MECHANISM_CANDIDATES_BEFORE_V6_FALSIFICATION_AND_SAFE_EXPERIMENT_PLANNING_WITHOUT_CHANGING_UNKNOWN_DOMAIN_OR_TERMINAL_ACCEPTANCE_TRUTH",
+  "candidate": {
+    "path": "canonical/governance/H100_ZERO_LEARNED_MECHANISM_CANDIDATE_V1.json",
+    "git_blob_sha": "253715727a8cdbaa5bde6d84a2196debbe96e183"
+  },
+  "runtime": {
+    "path": "canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py",
+    "git_blob_sha": "fa77c6a0f4edf214c4237cf1e204b640261622fe",
+    "persistent_learned_bytes": 0
+  },
+  "verification": {
+    "path": "canonical/verification/H100_ZERO_LEARNED_MECHANISM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "f81bc6f6a8d8d85ad4c9d46b1b6cd0f05928307f",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1688,
+    "verifier_merge_commit": "cd2a3d17577d03b7c3768efab1f7397ba8f59241",
+    "workflow_run_id": 37178806634,
+    "workflow_job_id": 111366958168,
+    "conclusion": "success"
+  },
+  "operative_position": [
+    "STRUCTURED_NUMERIC_OBSERVATIONS",
+    "H100_ZERO_LEARNED_MECHANISM_CANDIDATE_GENERATOR",
+    "V6_MECHANISM_FALSIFICATION_AND_DECISION_QUOTIENT",
+    "V4_V6_OPEN_WORLD_SAFETY_AND_DISCRIMINATION",
+    "V7_DEDUCTION_AND_EXECUTABLE_SKILL_COMPILATION",
+    "V8_EQUIVALENCE_AND_NOVELTY_COMPRESSION",
+    "V9_META_POLICY_PLANNING"
+  ],
+  "authority": {
+    "mechanism_candidate_generation": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "current_verified_scope": [
+    "AFFINE_LINEAR_NUMERIC_RELATIONS",
+    "GRID_AND_CONTINUOUS_POWER_LAWS",
+    "BOUNDED_2D_PLUS_1_PROBE_DESIGN",
+    "SURFACE_NAME_INVARIANT_STRUCTURE",
+    "DISAGREEMENT_PROBE_PROPOSAL",
+    "OUT_OF_GRAMMAR_FAIL_CLOSED_EXPANSION"
+  ],
+  "next_structural_residual": "GENERAL_DETERMINISTIC_EXPRESSION_TREE_SYMBOLIC_REGRESSION_FOR_NESTED_SATURATION_AND_CORRECTION_LAWS",
+  "hard_rules": [
+    "THIS_ACTIVATION_CHANGES_ONLY_THE_H100_GATE1_CANDIDATE_GENERATION_ROUTE",
+    "V6_V7_V8_V9_TRUST_AND_PLANNING_BOUNDARIES_REMAIN_LOAD_BEARING",
+    "NO_HIDDEN_MYSTERYMECHANISM_SCORE_CLAIM",
+    "NO_UNKNOWN_DOMAIN_DIRECT_LEAF_CLOSURE",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
