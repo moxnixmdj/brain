@@ -52,9 +52,9 @@
     "repository": "moxnixmdj/verification-capsule-runner",
     "pull_request": 1858,
     "branch": "verify/livebench-legacy-dispatch-collapse-20261004-sol",
-    "head_sha": "2c9ffb7b08bd703273c967da8f139684f25b5362",
-    "workflow_run_id": 37198969849,
-    "status": "QUEUED_AT_FREE_PUBLIC_RUNNER",
+    "head_sha": "9dc905856e583b44fc9c44705699d6034d4b85f0",
+    "workflow_run_id": null,
+    "status": "CORRECTED_EXACT_HF_REVISION_HEAD_PUSHED__PUBLIC_RUNNER_PENDING",
     "verifier_reads": [
       "question_id",
       "task",
@@ -62,7 +62,8 @@
       "livebench_release_date",
       "livebench_removal_date"
     ],
-    "prompt_or_turn_columns_read": false
+    "prompt_or_turn_columns_read": false,
+    "hf_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb"
   },
   "truth_repairs_if_verified": [
     "ANY_CURRENT_ARTIFACT_THAT_DESCRIBES_THE_EXACT_ACTIVE_200_AS_MODERN_IFBENCH_MUST_BE_REBOUND_OR_NARROWED",
