@@ -1,0 +1,30 @@
+name: Verify terminal structural breakthrough V1
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/terminal_stronger_proof_replacement_compiler_v1.py'
+      - 'canonical/runtime/precommit_isolation_guard_v1.py'
+      - 'canonical/tests/test_terminal_stronger_proof_replacement_compiler_v1.py'
+      - 'canonical/tests/test_precommit_isolation_guard_v1.py'
+      - 'canonical/governance/TERMINAL_STRUCTURAL_BREAKTHROUGH_MINIMUM_ACTION_CUT_V1.json'
+      - 'canonical/governance/FRESH_REALITY_PRECOMMIT_ISOLATION_THEOREM_CANDIDATE_V1.json'
+      - '.github/workflows/verify-terminal-structural-breakthrough-v1.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile
+        run: |
+          python -m py_compile canonical/runtime/terminal_stronger_proof_replacement_compiler_v1.py
+          python -m py_compile canonical/runtime/precommit_isolation_guard_v1.py
+      - name: Unit tests
+        run: |
+          python -m unittest canonical/tests/test_terminal_stronger_proof_replacement_compiler_v1.py -v
+          python -m unittest canonical/tests/test_precommit_isolation_guard_v1.py -v
