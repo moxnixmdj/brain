@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_FAIL_CLOSED__UNKNOWN_DOMAIN_V6_PROMOTION_REVOKED_ON_NEW_COUNTEREVIDENCE",
+  "real_objective": "Prevent false terminal progress and restore the fastest valid zero-reality route for UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT under the Opus 5.5 capability-ownership terminal objective.",
+  "governing_invariants": [
+    "CORRECTNESS_FIRST",
+    "CLAIM_SCOPE_MUST_NOT_EXCEED_EVIDENCE_SCOPE",
+    "ADVERSARIAL_FALSIFICATION_OVERRIDES_PRIOR_PROMOTION",
+    "NO_FRESH_REALITY_WHEN_DEDUCTIVE_COUNTEREXAMPLE_AND_REPAIR_SUFFICE",
+    "NO_ACCEPTANCE_CREDIT_UNTIL_REPAIRED_EXACT_ROUTE_IS_INDEPENDENTLY_VERIFIED"
+  ],
+  "material_premises": [
+    "The promoted V6 proof declared totality over the isinstance-accepted Python str interface.",
+    "Pre-repair Generator V5 used beacon.strip() and text.encode() after only an isinstance(str) gate.",
+    "A str subclass can override strip or encode to raise while still satisfying isinstance(x,str).",
+    "The independent V6 verifier exhausted surrogate code points and 432 nonproduction cases but did not cover adversarial str subclass method overrides.",
+    "Therefore the load-bearing universal totality claim and derived atomic promotion are invalid at their declared scope.",
+    "A narrow deterministic repair exists using str.strip(value), str.encode(value,...), and memoryview(bytes_subclass).tobytes(), with adversarial subclass regression."
+  ],
+  "evidence_refs": [
+    "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py",
+    "canonical/tests/test_unknown_domain_direct_v5.py",
+    "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py"
+  ],
+  "conclusion": "Revoke the V6 atomic predicate promotion now, restore 12 proved / 26 unresolved, repair the exact route without narrowing the domain, then independently reverify before any re-promotion.",
+  "selected_route": "REVOKE_FALSE_CREDIT__PATCH_SUBCLASS_PARTIALITY__ADD_ADVERSARIAL_REGRESSION__REBIND_UNIVERSAL_PROOF__INDEPENDENTLY_REVERIFY__RUN_SEPARATE_ACCEPTANCE_REDUCTION",
+  "rejected_material_alternatives": [
+    {
+      "route": "KEEP_PROMOTION_AND_TREAT_SUBCLASSES_AS_OUT_OF_SCOPE",
+      "reason": "Contradicts the actual isinstance-accepted interface and silently narrows the promoted quantifier."
+    },
+    {
+      "route": "SPEND_FRESH_PRODUCTION_OR_TERMINAL_CASES",
+      "reason": "The defect is deductive and repaired without new reality."
+    },
+    {
+      "route": "IGNORE_COUNTEREXAMPLE_BECAUSE_NORMAL_STR_VALUES_PASS",
+      "reason": "Universal scope claims are falsified by one admitted counterexample."
+    }
+  ],
+  "uncertainties": [
+    "The repaired route has not yet received independent content-bound verification.",
+    "Unknown-Domain family remains open on other predicates even after this atom is eventually restored."
+  ],
+  "assumptions": [
+    "Built-in str descriptors operate on the inherited immutable str value of subclasses without invoking overridden instance methods.",
+    "memoryview on bytes subclasses exposes the inherited immutable byte buffer."
+  ],
+  "non_goals": [
+    "No open-world unknown-domain claim.",
+    "No family, capability, ownership, or terminal completion claim.",
+    "No fresh terminal or production evidence."
+  ],
+  "next_action": "Open a PR from breakthrough/unknown-domain-v6-subclass-revocation-20261005 and require independent checks on the repaired exact blobs before merge/re-promotion.",
+  "supersession_conditions": [
+    "A stronger independently verified canonical repair lands first.",
+    "Any adversarial subclass counterexample survives the repair.",
+    "Any exact subject binding or regression check fails."
+  ],
+  "supersedes": "UNKNOWN_DOMAIN_V6_ATOMIC_PROMOTION_AT_DECLARED_TOTAL_STRING_SCOPE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_predicate_credit_delta": -1,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
