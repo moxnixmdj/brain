@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_EXACT200_CONTAMINATION_CREDIT_REVOCATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_FAIL_CLOSED_TRUTH_REPAIR__EXACT_NUMERICAL_PASS_PRESERVED__ACCEPTANCE_CREDIT_REVOKED",
+  "predicate_id": "LIVEBENCH_IF_GE_65_7",
+  "preserved_fact": {
+    "qualification_path": "canonical/verification/LIVEBENCH_EXACT200_DETERMINISTIC_PUBLIC_QUALIFICATION_20261004_V1.json",
+    "qualification_git_blob_sha": "22ac08ad456b440ddfb9b40dd38781aa70ea2579",
+    "exact_score_percent": 84.40416666666667,
+    "comparator_floor_percent": 65.73775,
+    "numerical_threshold_pass": true
+  },
+  "controlling_authority": {
+    "protocol_path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "protocol_git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "contamination_rule": "Development evidence, protocol-design evidence, qualification evidence and final confirmation evidence must be partitioned before qualification.",
+    "dirty_evidence_rule": "Missing result, incomparable harness, unresolved scorer disagreement, dirty evidence, or unknown dependency is FAIL_CLOSED_NOT_PROVEN.",
+    "exposure_v1_path": "canonical/governance/LIVEBENCH_UNPLANNED_PUBLIC_SEARCH_EXPOSURE_RECONCILIATION_V1.json",
+    "exposure_v1_git_blob_sha": "450a6a0d6aa96dd25e2f48d6e9643196b71de79b",
+    "exposure_v2_path": "canonical/governance/LIVEBENCH_UNPLANNED_PUBLIC_SEARCH_EXPOSURE_RECONCILIATION_V2.json",
+    "exposure_v2_git_blob_sha": "bcb79e06964dc2e0dd7b153e4f44b936db336e84",
+    "firewall": "CONTAMINATED_CASES_MAY_NOT_SUPPLY_CLEAN_GENERALIZATION_CREDIT"
+  },
+  "defect": "THE_13_OF_38_PROMOTION_TREATED_A_TARGET_REPLAY_DEVELOPED_AFTER_ACTIVE_TARGET_EXPOSURE_AS_SCOPE_COMPLETE_ACCEPTANCE_EVIDENCE_WITHOUT_DISCHARGING_THE_PREQUALIFICATION_PARTITION_AND_DIRTY_EVIDENCE_RULES",
+  "corrected_state": {
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "root2_touching": 19,
+    "accepted_families": 5,
+    "open_families": 14,
+    "root1_positive_gap_count": 0,
+    "terminal": false
+  },
+  "admissible_rescue": [
+    "CASE_INDEPENDENT_FORMAL_OR_UNIVERSAL_PROOF_FROM_FROZEN_CHECKER_SEMANTICS_WITHOUT_TARGET_ROW_DEPENDENCE",
+    "PRECOMMITTED_CLEAN_UNEXPOSED_EQUIVALENT_POPULATION_WITH_VERIFIED_SCOPE_BRIDGE",
+    "SEPARATELY_VERIFIED_STRONGER_PROOF_SATISFYING_CONTAMINATION_PARTITION"
+  ],
+  "hard_nonclaims": [
+    "THE_84_40416666666667_PERCENT_OBSERVATION_REMAINS_TRUE",
+    "NO_CAPABILITY_FAILURE_IS_INFERRED",
+    "NO_ROOT1_REOPEN",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
