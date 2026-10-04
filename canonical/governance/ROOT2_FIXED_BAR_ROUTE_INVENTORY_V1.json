@@ -90,6 +90,15 @@
       "verification_path": "canonical/verification/CHARTOGRAPHY_ZERO_SPEND_GUARD_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "d2eb956d6534bd4748010ee3fec8b12d93795793",
       "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT"
+    },
+    "gdpval_opus55_fixed_bar_provenance": {
+      "activation_path": "canonical/governance/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "1c2ead2e8c5cd14e109ab9361bc4962bcc1e0c8e",
+      "candidate_path": "canonical/governance/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_RECONCILIATION_20261004_V1.json",
+      "candidate_git_blob_sha": "fd854342e2d1a75596d261dfacc2990faf24eee0",
+      "verification_path": "canonical/verification/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "cc3492fc112155ad78c49d3c4b40c8b63467b906",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__FROZEN_1846_PRESERVED__LIVE_1867_DIAGNOSTIC__ZERO_CREDIT"
     }
   },
   "deduplication": {
@@ -159,8 +168,8 @@
         "PROWORK_GDPVAL_GE_1846"
       ],
       "target": ">=1846 Elo",
-      "state": "PUBLIC_220_OPENAI_GOLD_POPULATION_STIRRUP_AND_PRIMARY_METHODOLOGY_INDEPENDENT_PASS__EXACT_PAIRWISE_ELO_RESULT_ROUTE_OPEN",
-      "next": "WORK_ONLY_EXACT_PAIRWISE_ELO_RESULT_ROUTE_OR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF",
+      "state": "PUBLIC_220_OPENAI_GOLD_POPULATION_STIRRUP_AND_PRIMARY_METHODOLOGY_INDEPENDENT_PASS__FROZEN_OPUS55_RELEASE_BAR_1846_PROVENANCE_INDEPENDENT_PASS__LIVE_1867_DIAGNOSTIC_ONLY__EXACT_PAIRWISE_ELO_BRAIN_RESULT_ROUTE_OPEN",
+      "next": "STOP_COMPARATOR_BAR_DRIFT_SEARCH__KEEP_FROZEN_1846_UNLESS_EXPLICIT_VERIFIED_TERMINAL_REBASE__WORK_ONLY_EXACT_COMPARABLE_BRAIN_PAIRWISE_ELO_RESULT_ROUTE_OR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF",
       "public_route_boundary": {
         "path": "canonical/verification/GDPVAL_AA_V21_PUBLIC_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
         "git_blob_sha": "e3d890b0fdfe2c5173cf18efddbc1483b7db6701",
@@ -172,6 +181,19 @@
         "git_blob_sha": "dee93e49f5ecf0bd2b939670931ff27886623a6c",
         "workflow_run_id": 37155634503,
         "workflow_job_id": 111298328921
+      },
+      "comparator_provenance": {
+        "activation_path": "canonical/governance/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_ACTIVATION_V1.json",
+        "activation_git_blob_sha": "1c2ead2e8c5cd14e109ab9361bc4962bcc1e0c8e",
+        "candidate_path": "canonical/governance/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_RECONCILIATION_20261004_V1.json",
+        "candidate_git_blob_sha": "fd854342e2d1a75596d261dfacc2990faf24eee0",
+        "verification_path": "canonical/verification/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "verification_git_blob_sha": "cc3492fc112155ad78c49d3c4b40c8b63467b906",
+        "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__FROZEN_1846_PRESERVED__LIVE_1867_DIAGNOSTIC__ZERO_CREDIT",
+        "frozen_release_bar_elo": 1846,
+        "live_observed_elo": 1867,
+        "live_observed_role": "DIAGNOSTIC_ONLY",
+        "silent_rebase_forbidden": true
       }
     },
     {
