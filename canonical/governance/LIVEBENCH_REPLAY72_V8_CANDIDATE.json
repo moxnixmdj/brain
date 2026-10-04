@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_REPLAY72_V8_CANDIDATE",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "root_binding": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "39151186bafcea39154dbb5a2b5c37814e706f7b"
+  },
+  "diagnostic": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "path": "diagnose_livebench_replay72_v7_sanitized.py",
+    "git_blob_sha": "55d4b961f58dc45c1513f9c9282a63773444773d",
+    "zero_case_verifier_path": "verify_livebench_v7_sanitized_diagnostic.py",
+    "zero_case_verifier_git_blob_sha": "0c63704ba4e462c957516bc0f1ee0bdbdea8465c"
+  },
+  "launcher": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "path": "launch_livebench_v7_sanitized_atomic.py",
+    "git_blob_sha": "5470223c39f78af008eb90bafd5d780a35230895"
+  },
+  "one_use_claim": {
+    "verification_path": "canonical/verification/GENERIC_ATOMIC_EXECUTION_CLAIM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "d5b94c39ac9e8224abef162de314bd047bc249d0",
+    "claim_ref": "refs/heads/livebench-v7-claims/5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
+    "production_first_create_required": true
+  },
+  "scope": {
+    "replay_prefix_limit": 72,
+    "already_exposed_only": true,
+    "new_case_exposure": false,
+    "acceptance_credit": false
+  },
+  "current_authority": {
+    "execution": false,
+    "promotion": false
+  },
+  "activation_preconditions": [
+    "INDEPENDENTLY_VERIFY_THIS_EXACT_CANDIDATE",
+    "POINT_OF_USE_ZERO_CASE_VERIFIER_PASS",
+    "PRODUCTION_ONE_USE_CLAIM_FIRST_CREATE_SUCCESS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
