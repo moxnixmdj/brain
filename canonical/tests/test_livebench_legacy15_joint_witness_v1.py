@@ -1,3 +1,5 @@
+import re
+
 from canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
 
 
@@ -108,3 +110,60 @@ def test_quotation_bullets_and_end_all_compose():
     response = out["response"]
     assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")
+
+
+def test_json_route_does_not_invent_forbidden_response_key():
+    prompt = (
+        "Do not include keywords ['response'] in the response. "
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as code fences."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["route"] == "JSON"
+    assert '"response"' not in out["response"].lower()
+
+
+def test_two_response_route_uses_nonword_distinguishers():
+    prompt = (
+        "Do not include keywords ['alpha', 'beta'] in the response. "
+        "Give two different responses. Responses and only responses should be separated by 6 asterisk symbols: ******."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["route"] == "TWO_RESPONSES"
+    assert "alpha" not in out["response"].lower()
+    assert "beta" not in out["response"].lower()
+    left, right = out["response"].split("******")
+    assert left.strip() != right.strip()
+
+
+def test_less_than_one_sentence_fails_closed():
+    out = solve(_env("Your response should contain less than 1 sentences."))
+    assert out["status"] == "FAIL_CLOSED"
+    assert "LESS_THAN_ONE_SENTENCE" in out["error"]
+
+
+def test_less_than_sentences_with_postscript_fails_closed_without_tokenizer_proof():
+    prompt = (
+        "Your response should contain less than 2 sentences. "
+        "At the end of your response, please explicitly add a postscript starting with P.S."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "FAIL_CLOSED"
+    assert "EXACT_TOKENIZER_PROOF" in out["error"]
+
+
+def test_less_than_sentences_with_end_phrase_fails_closed_without_tokenizer_proof():
+    prompt = (
+        "Your response should contain less than 2 sentences. "
+        "Finish your response with this exact phrase Any other questions?. No other words should follow this phrase."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "FAIL_CLOSED"
+    assert "EXACT_TOKENIZER_PROOF" in out["error"]
+
+
+def test_plain_less_than_two_sentence_candidate_is_punctuation_free():
+    out = solve(_env("Your response should contain less than 2 sentences."))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert re.search(r"[.!?]", out["response"]) is None
