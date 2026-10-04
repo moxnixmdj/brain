@@ -13,7 +13,10 @@
       "id": "SYNTHESIS_REQUIRED_CLAIM_COVERAGE_DELETE",
       "target": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
       "delete_residual": "required_claim_coverage_noninferiority",
-      "remaining_exact_residuals": ["metric:matched_quality","matched_quality_noninferiority"],
+      "remaining_exact_residuals": [
+        "metric:matched_quality",
+        "matched_quality_noninferiority"
+      ],
       "proof": {
         "candidate_path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
         "candidate_git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
@@ -45,11 +48,29 @@
         "NO_AUTOMATIC_PAID_OVERAGE_OR_OTHER_NONZERO_SPEND_PATH",
         "ZERO_TERMINAL_CASE_HARBOR_PREFLIGHT"
       ]
+    },
+    {
+      "id": "OSWORLD_GITLAB_EXACT_REVISION_DELETE",
+      "target": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "delete_residual": "GITLAB_EXACT_REVISION_OR_INDEPENDENT_EQUIVALENCE_BINDING",
+      "replace_with": "GITLAB_FUNCTIONAL_PROTOCOL_PREFLIGHT",
+      "proof": {
+        "reconciliation_path": "canonical/governance/OSWORLD_V21_GITLAB_PROTOCOL_RECONCILIATION_V1.json",
+        "reconciliation_git_blob_sha": "a6142a898df97c8d9691b6a810850fa8c962b035",
+        "verification_path": "canonical/verification/OSWORLD_V21_GITLAB_PROTOCOL_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "verification_git_blob_sha": "12fa87058ba2d7a599f8f410ba99598efd1dff8e",
+        "independent_verifier_pr": 1497,
+        "workflow_run_id": 37163196069,
+        "workflow_job_id": 111320730605,
+        "conclusion": "success"
+      },
+      "reason": "FROZEN_OSWORLD_V21_RELEASE_CONTRACT_DOES_NOT_PIN_GITLAB_SOURCE_REVISION__SHARED_SERVICE_CONTRACT_REQUIRES_REACHABLE_URL_VALID_TOKEN_AND_FUNCTIONAL_PROTOCOL_BEHAVIOR"
     }
   ],
   "resulting_scheduling_changes": {
     "synthesis": "WORK_ONLY_MATCHED_QUALITY_ATOM_AND_MATCHED_QUALITY_NONINFERIORITY",
-    "tb4": "EXECUTE_ONLY_BUILDKITE_NAMED_ACCOUNT_AND_ZERO_CASE_PREFLIGHT_WHEN_ACCOUNT_ACCESS_EXISTS__DO_NOT_RESUME_GENERIC_CARRIER_SEARCH"
+    "tb4": "EXECUTE_ONLY_BUILDKITE_NAMED_ACCOUNT_AND_ZERO_CASE_PREFLIGHT_WHEN_ACCOUNT_ACCESS_EXISTS__DO_NOT_RESUME_GENERIC_CARRIER_SEARCH",
+    "osworld": "DELETE_EXACT_GITLAB_REVISION_REQUIREMENT__WORK_ONLY_HUGGINGFACE_GATED_ACCESS__SELF_HOST_WEBSITE_AND_GITLAB_REACHABILITY__GITLAB_FUNCTIONAL_PROTOCOL_PREFLIGHT__END_TO_END_PROTOCOL_EQUIVALENCE__BRAIN_SCORE"
   },
   "probability_and_value_policy": {
     "priority": "P(useful_delta|evidence)*terminal_fanout*information_gain/(critical_path_seconds+epsilon)",
@@ -63,7 +84,8 @@
     "NO_SYNTHESIS_MATCHED_QUALITY_CREDIT_FROM_REQUIRED_CLAIM_COVERAGE_CEILING",
     "ZERO_INCREMENTAL_SPEND",
     "NO_TERMINAL_CASE_EXECUTION",
-    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_DELTA"
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_DELTA",
+    "DO_NOT_REINTRODUCE_OSWORLD_EXACT_GITLAB_REVISION_AS_COMPARABILITY_REQUIREMENT"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
