@@ -63,3 +63,9 @@ def test_post_unknown_domain_v6_current_frontier_is_exact():
 
     bsrc = authority["sources"]["acceptance_predicate_evidence_bindings_reconciled"]
     assert bsrc["git_blob_sha"] == _git_blob_sha(BINDING)
+
+    frontier = authority["atomic_acceptance_frontier"]
+    assert frontier["proved"] == 13
+    assert frontier["unresolved"] == 25
+    assert frontier["source"] == BINDING
+    assert frontier["source_git_blob_sha"] == _git_blob_sha(BINDING)
