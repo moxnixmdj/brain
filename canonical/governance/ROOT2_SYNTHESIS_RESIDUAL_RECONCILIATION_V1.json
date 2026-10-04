@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_SYNTHESIS_RESIDUAL_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_SYNTHESIS_ROOT2_RESIDUAL_TWO_ITEMS__COVERAGE_BOUND_DISCHARGED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "source_bindings": {
+    "root2_controller_activation": {
+      "path": "canonical/governance/ROOT2_CLOSURE_CONTROLLER_V2_ACTIVATION_V1.json",
+      "git_blob_sha": "4cbc1b9f478654b2dc671a8b54f91b5c4b91c019",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT2_MINIMUM_ACTION_SCHEDULING_AUTHORITY__ZERO_CREDIT"
+    },
+    "root2_controller_verification": {
+      "path": "canonical/verification/ROOT2_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78"
+    },
+    "current_frontier": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V1.json",
+      "git_blob_sha": "c194e038cba8d819a088f985e68ba6d0078fc73f"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "8b8721e0f9b65ab86f193fcf7d19b8a8d286b0a4"
+    },
+    "coverage_ceiling": {
+      "path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
+      "git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f"
+    }
+  },
+  "independent_coverage_ceiling_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1526,
+    "verifier_head_sha": "14a3c02f9281617efe5b41b6ba48a1627d933ac9",
+    "merge_commit": "f9bd3737a3ddc23df4e19922c1f04fec3e163cce",
+    "workflow_run_id": 37164910933,
+    "workflow_job_id": 111325748211,
+    "conclusion": "success",
+    "passed_steps": [
+      "Run adversarial unit tests",
+      "Verify exact proof composition"
+    ]
+  },
+  "old_stale_residual_projection": [
+    "metric:matched_quality",
+    "matched_quality_noninferiority",
+    "required_claim_coverage_noninferiority"
+  ],
+  "discharged": {
+    "item": "required_claim_coverage_noninferiority",
+    "proof_kind": "ABSOLUTE_CEILING_DOMINANCE_AFTER_INDEPENDENT_SUPERSET_SCOPE_REPAIR",
+    "brain_required_claim_coverage_lower_bound": 1,
+    "admissible_comparator_upper_bound": 1,
+    "brain_minus_comparator_lower_bound": 0,
+    "threshold": 0,
+    "direction": "higher"
+  },
+  "current_residual": [
+    "metric:matched_quality",
+    "matched_quality_noninferiority"
+  ],
+  "scheduling_effect": [
+    "SUPERSEDE_ONLY_STALE_THREE_ITEM_SYNTHESIS_RESIDUAL_SUBPROJECTIONS",
+    "DO_NOT_REOPEN_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY",
+    "PRESERVE_ACTIVE_ROOT2_CONTROLLER_RUNTIME_AND_VERIFIED_BYTES",
+    "PRESERVE_16_ROOT2_ONLY__7_ROOT3_ONLY__3_MIXED__26_UNRESOLVED",
+    "SYNTHESIS_PREDICATE_REMAINS_OPEN",
+    "NO_FRESH_REALITY_OR_CASE_EXECUTION_AUTHORITY"
+  ],
+  "superseded_subprojections": [
+    "ROOT2_CLOSURE_CONTROLLER_V2.algebraic_compression.synthesis.root2_residuals__THREE_ITEM_LIST_ONLY",
+    "ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V1.SYNTHESIS_METRIC_NONINFERIORITY_PROOF.state__PLURAL_NUMERIC_BOUNDS_ONLY",
+    "CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.root2_non_fixed_bar_work.SYNTHESIS__THREE_ITEM_WORK_ONLY",
+    "ROOT3_RESIDUAL_COMPRESSION_V1.SYNTHESIS.current_residual.missing_metric_bounds__TWO_ITEM_LIST_ONLY",
+    "TERMINAL_ROOT_CAUSE_STATE_V1.synthesis_scope_reclassification.remaining_root2_residuals__THREE_ITEM_LIST_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_MATCHED_QUALITY_ATOM_PROVED",
+    "NO_MATCHED_QUALITY_NONINFERIORITY_PROVED",
+    "NO_SYNTHESIS_PREDICATE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT_COUNT_CHANGE",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
