@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_PUBLIC_RUNNER_VERIFICATION_20261004_V4",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_ROUTE_IDENTITY_REBOUND__15_FIXED_BAR_PREDICATES__14_SURFACES__TARGETS_UNCHANGED__ZERO_CREDIT",
+  "subject": {
+    "rebind_path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V4.json",
+    "rebind_git_blob_sha": "8d3f20c8b8379b282f9b03fc73ba82f6f8946fa5",
+    "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+    "route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294",
+    "comparator_vector_path": "canonical/governance/ROOT2_FROZEN_COMPARATOR_VECTOR_V1.json",
+    "comparator_vector_git_blob_sha": "b28af5176550aba9e44ffd8ac9fde4fa7ba388bf"
+  },
+  "prior_optimizer": {
+    "governance_git_blob_sha": "2793081a62a99cb69c9ae3e37323205e756cbebb",
+    "runtime_git_blob_sha": "dd2094c4845239a0be4cfd34af4d8f3a7e411060",
+    "tests_git_blob_sha": "235db2f21fe4b0f70096be69ae28af87a5ce31dd",
+    "independent_verification_git_blob_sha": "24f6e3949c39daf92dfb065cfe687690f984ce4f"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1514,
+    "verifier_merge_commit": "97c690ed4f9bf89032d43c3f6623b1f0dbcaacdc",
+    "workflow_run_id": 37163976469,
+    "workflow_job_id": 111323011656,
+    "conclusion": "success"
+  },
+  "verified": [
+    "15_FIXED_BAR_PREDICATES_14_SURFACES_BOUND",
+    "CURRENT_ROUTE_INVENTORY_EXACT_BLOB_BOUND",
+    "CURRENT_COMPARATOR_VECTOR_EXACT_BLOB_BOUND",
+    "COMPARATOR_TARGETS_UNCHANGED",
+    "CHARTOGRAPHY_ZERO_SPEND_GUARD_DISCHARGED_WITHOUT_QUOTA_INFERENCE",
+    "AUTOMATIONBENCH_PUBLIC600_SEARCH_SATURATED",
+    "HLE_BRAIN_TOOL_ADAPTER_DISCHARGED",
+    "OSWORLD_SOURCE_AND_EXACT_GITLAB_REVISION_BLOCKERS_DISCHARGED",
+    "SYNTHESIS_ROOT2_ONLY_NON_FIXED_BAR_RESIDUAL_SEPARATE",
+    "ZERO_SPEND_ZERO_CASES_NO_FRESH_REALITY"
+  ],
+  "hard_nonclaims": [
+    "NO_ROOT2_PREDICATE_CLOSED_BY_OPTIMIZER_REBIND",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CASE_EXECUTION",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
