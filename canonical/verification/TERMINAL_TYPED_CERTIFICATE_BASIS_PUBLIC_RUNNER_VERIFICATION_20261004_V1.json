@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_TYPED_CERTIFICATE_BASIS_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__TYPED_BASIS_AND_ARENA_FAIL_CLOSED_CORRECTION__ZERO_CREDIT",
+  "subjects": {
+    "runtime": {
+      "path": "canonical/runtime/typed_minimum_certificate_basis_v1.py",
+      "git_blob_sha": "c46dbe13b1ba38fed088272db0d8d89e273efdbd"
+    },
+    "governance": {
+      "path": "canonical/governance/TERMINAL_TYPED_MINIMUM_CERTIFICATE_BASIS_V1.json",
+      "git_blob_sha": "768115e47787a801b972b475675396032c17eeab"
+    },
+    "arena_correction": {
+      "path": "canonical/governance/ARENA_COMPARATOR_PUBLIC_EVIDENCE_CORRECTION_20261004_V1.json",
+      "git_blob_sha": "5a2d2b3ac44927bbe7295369b775c46605fe540c"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1713,
+    "verifier_head_sha": "32ae2c280bd2c44bb6e879d91e70205f05246da7",
+    "merge_commit": "df3ea6e778264a4f576d031edcd890f16e5feb5c",
+    "workflow_run_id": 37182710243,
+    "workflow_job_id": 111378324110,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_SUBJECT_GIT_BLOB_HASHES_MATCHED",
+    "SHARED_TYPED_CERTIFICATE_SELECTED_WHEN_LOWER_TOTAL_DECLARED_COST",
+    "PURE_ABSOLUTE_CERTIFICATE_REJECTED_FOR_RELATIVE_ELO_PREDICATE",
+    "RELATIVE_SCORE_BRIDGE_REMAINS_ADMISSIBLE_FOR_RELATIVE_ELO_PREDICATE",
+    "NO_ADMISSIBLE_COVER_FAILS_CLOSED",
+    "ZERO_ACCEPTANCE_EXECUTION_PROMOTION_AND_FRESH_REALITY_AUTHORITY_PRESERVED",
+    "ARENA_DETAILED_API_DOCS_UNAUTHENTICATED_ACCESS_REMAINS_LOGIN_GATED_IN_PUBLIC_RUNNER_OBSERVATION",
+    "ARENA_ACCOUNT_SPECIFIC_MODEL_CREDIT_AND_PROTOCOL_FACTS_REMAIN_UNPROVED"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_FAMILY_ACCEPTED",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_TYPED_SET_COVER_IS_A_PARALLEL_MAKESPAN_OPTIMIZER",
+    "NO_CLAIM_ARENA_EXACT_OPUS55_API_ACCESS_EXISTS_FOR_THE_ACCOUNT",
+    "NO_CLAIM_ARENA_API_USE_IS_ZERO_INCREMENTAL_SPEND",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
