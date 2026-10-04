@@ -3,7 +3,7 @@
   "date": "2026-10-04",
   "status": "CANDIDATE__ADAPTIVE_STOCHASTIC_SET_COVER__ZERO_REALITY_FIRST__ZERO_CREDIT",
   "objective": "MINIMIZE_EXPECTED_WALL_CLOCK_TO_TERMINAL_TRUE_WHILE_PRESERVING_CORRECTNESS_ZERO_INCREMENTAL_SPEND_AND_FAIL_CLOSED_ACCEPTANCE",
-  "base_main_commit": "97aa96271c463a42d9e31efd31da7853ab32fe3f",
+  "base_main_commit": "f050d03440cb50042dae9650b0a06f27ec5a0267",
   "exact_live_state": {
     "accepted_families": 5,
     "open_families": 14,
@@ -16,12 +16,15 @@
   },
   "authority_bindings": {
     "root_state": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-    "root2_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5.json",
+    "root2_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V10.json",
     "root3_cut": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
     "retrieval": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
     "finance_agent_zero_cost_boundary": "canonical/governance/FINANCE_AGENT_V2_ZERO_COST_TOOL_BOUNDARY_20261004_V1.json",
     "finance_index_floor_boundary": "canonical/governance/FINANCE_INDEX_COMPONENT_FLOOR_BOUNDARY_20261004_V1.json",
-    "osworld_methodology": "canonical/governance/OSWORLD_OPUS55_METHODOLOGY_PUBLIC_CORROBORATION_20261004_V1.json"
+    "osworld_methodology": "canonical/governance/OSWORLD_OPUS55_METHODOLOGY_PUBLIC_CORROBORATION_20261004_V1.json",
+    "root2_frontier_activation": "canonical/governance/ROOT2_FRONTIER_V10_ACTIVATION_V1.json",
+    "root2_external_fact_acquisition_overlay": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_ACTIVATION_V1.json",
+    "root2_primary_source_search_deletions": "canonical/governance/ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_ACTIVATION_V1.json"
   },
   "optimization": {
     "value_equation": "V(S)=min_a[t(a)+sum_o P(o|a,S)*V(T(S,a,o))]",
@@ -207,5 +210,26 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "truth_repairs": {
+    "root2_v10": {
+      "status": "POINTER_PROJECTION_VERIFIED_BUT_EFFECTIVE_SCHEDULING_FALSE",
+      "rule": "DO_NOT_TREAT_STAGED_POINTER_PROJECTION_AS EXECUTION OR FRESH REALITY AUTHORITY"
+    },
+    "primary_source_search_deletions": [
+      "HLE_EXISTENCE_AND_GENERIC_GATING_SEARCH",
+      "CHARTOGRAPHY_GENERIC_FREE_TIER_AND_JUDGE_IDENTITY_SEARCH",
+      "OSWORLD_V21_RELEASE_IDENTITY_108_TASK_AND_SELF_HOST_REQUIREMENT_SEARCH",
+      "BUILDKITE_LARGE_AS_DURABLE_FREE_PLAN_CARRIER",
+      "AUTOMATIONBENCH_PUBLIC600_PRIVATE_EQUIVALENCE_REPEAT_SEARCH",
+      "CURSORBENCH_COMPARATOR_DRIFT_SEARCH_WHILE_CURRENT_OWNER_PAGE_REMAINS_57_8"
+    ],
+    "external_fact_policy": {
+      "self_service_fact_count": 6,
+      "owner_exclusive_fact_count": 6,
+      "owner_or_direct_platform_receipt_count": 1,
+      "low_value_support_waits": 0,
+      "rule": "SELF_SERVICE_FACTS_ARE_NOT_OWNER_WAITS__LOW_VALUE_FREE_TIER_TRIAL_QUOTA SUPPORT OUTREACH FORBIDDEN"
+    }
+  }
 }
