@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_PRECOMMIT_ISOLATION_THEOREM_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__GENERIC_CONDITIONAL_THEOREM_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/GENERIC_PRECOMMIT_ISOLATION_THEOREM_V1.json",
+    "git_blob_sha": "0da944ca987ef249557057ed31343c8f26b7f009"
+  },
+  "verification": {
+    "path": "canonical/verification/GENERIC_PRECOMMIT_ISOLATION_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+  },
+  "effects": [
+    "DELETE_PER_BENCHMARK_REPROOF_OF_THE_GENERIC_NO_FEEDBACK_CAUSAL_THEOREM",
+    "PRESERVE_PER_BENCHMARK_INSTANTIATION_RECEIPT_FOR_PRECOMMIT_ORDER_HASH_IDENTITY_INDEPENDENT_EXECUTOR_NO_FEEDBACK_UNRELATED_WORK_NONMUTATION_AND_OUTPUT_BINDING",
+    "PRESERVE_BENCHMARK_THIN_ADAPTER_FOR_POPULATION_SCORER_EFFORT_TOOLS_ENVIRONMENT_COMPARATOR_ZERO_SPEND_AND_ACCEPTANCE_SEMANTICS",
+    "PRESERVE_EXPLICIT_FRESH_REALITY_AUTHORITY_AS_A_SEPARATE_MANDATORY_GATE"
+  ],
+  "supersedes_for_generic_theorem_only": "canonical/governance/FRESH_REALITY_PRECOMMIT_ISOLATION_THEOREM_CANDIDATE_V1.json",
+  "authority": {
+    "generic_conditional_theorem": true,
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
