@@ -183,7 +183,7 @@ def test_sentence_less_than_one_rejects_every_active_nonempty_requirement():
         )
 
 
-def test_sentence_less_than_one_allows_empty_compatible_contracts():
+def test_sentence_less_than_one_is_strict_evaluator_unsat_even_with_empty_compatible_raw_checkers():
     out = f.classify_visible_contracts([
         {
             "instruction_id": f.SENTENCE,
@@ -198,8 +198,19 @@ def test_sentence_less_than_one_allows_empty_compatible_contracts():
             "slots": {"num_words": 100, "relation": "less than"},
         },
     ])
-    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
-    assert out["hard_unsat_reasons"] == []
+    assert out["status"] == "PROVED_UNSAT"
+    assert "STRICT_EVALUATOR_SENTENCE_LT_ONE_UNSAT" in out["hard_unsat_reasons"]
+
+
+def test_sentence_less_than_one_singleton_is_strict_evaluator_unsat():
+    out = f.classify_visible_contracts([
+        {
+            "instruction_id": f.SENTENCE,
+            "slots": {"num_sentences": 1, "relation": "less than"},
+        },
+    ])
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["hard_unsat_reasons"] == ["STRICT_EVALUATOR_SENTENCE_LT_ONE_UNSAT"]
 
 
 def test_sentence_less_than_one_does_not_overcertify_nonpublic_end_phrase():
@@ -214,5 +225,6 @@ def test_sentence_less_than_one_does_not_overcertify_nonpublic_end_phrase():
         },
     ]
     out = f.classify_visible_contracts(contracts)
-    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["status"] == "PROVED_UNSAT"
+    assert "STRICT_EVALUATOR_SENTENCE_LT_ONE_UNSAT" in out["hard_unsat_reasons"]
     assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" not in out["hard_unsat_reasons"]
