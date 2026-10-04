@@ -139,11 +139,14 @@ def _clean_target(text: str) -> str:
 
 
 def recover_repeat_prompt_target(prompt: str) -> dict[str, Any]:
-    """Recover visible repeat target from an edge-separated prompt.
+    """Recover visible repeat target from the public edge-structure grammar.
 
-    The routine does not know instruction ids or kwargs. It searches structural
-    boundaries and accepts only a unique prefix/suffix decomposition in which
-    the other side is recognizably a repeat directive.
+    Public classic IFEval uses two observable forms:
+      A. directive block + blank line + target  -> suffix target
+      B. target + newline + directive line     -> prefix target
+
+    We intentionally require those strong structural cues and otherwise
+    abstain. Hidden ids and kwargs are never consulted.
     """
     p = str(prompt or "")
     if not p.strip():
@@ -154,74 +157,47 @@ def recover_repeat_prompt_target(prompt: str) -> dict[str, Any]:
             "orientation": None,
         }
 
-    candidates: list[tuple[str, str, int]] = []
+    # A. Leading repeat directive block, then a blank line, then the request.
+    blank = re.search(r"\n\s*\n", p)
+    if blank is not None:
+        head = _clean_target(p[: blank.start()])
+        tail = _clean_target(p[blank.end() :])
+        if head and tail and _looks_like_repeat_directive(head):
+            return {
+                "schema": SCHEMA,
+                "status": "RECOVERED",
+                "prompt_to_repeat": tail,
+                "orientation": "SUFFIX_TARGET",
+                "candidate_count": 1,
+                "hidden_kwargs_used": False,
+                "model_dependency_count": 0,
+            }
 
-    # Prefix target + trailing directive. Test line boundaries because the
-    # public corpus uses both one and two newlines before the directive.
-    for m in re.finditer(r"\n+", p):
-        left = _clean_target(p[: m.start()])
-        right = _clean_target(p[m.end() :])
-        if left and right and _looks_like_repeat_directive(right):
-            candidates.append(("PREFIX_TARGET", left, m.start()))
+    # B. Request first. Select the first newline whose immediately following
+    # line itself is a repeat directive. Looking only at that first line avoids
+    # treating later explanatory lines inside a multi-line directive block as
+    # alternative targets.
+    for match in re.finditer(r"\n+", p):
+        left = _clean_target(p[: match.start()])
+        right = p[match.end() :]
+        first_line = right.split("\n", 1)[0].strip()
+        if left and first_line and _looks_like_repeat_directive(first_line):
+            return {
+                "schema": SCHEMA,
+                "status": "RECOVERED",
+                "prompt_to_repeat": left,
+                "orientation": "PREFIX_TARGET",
+                "candidate_count": 1,
+                "hidden_kwargs_used": False,
+                "model_dependency_count": 0,
+            }
 
-    # Leading directive + suffix target. Public forms separate them with a
-    # blank line; permit one-or-more newline boundaries but require the entire
-    # leading block to look like the directive.
-    for m in re.finditer(r"\n+", p):
-        left = _clean_target(p[: m.start()])
-        right = _clean_target(p[m.end() :])
-        if left and right and _looks_like_repeat_directive(left):
-            candidates.append(("SUFFIX_TARGET", right, m.end()))
-
-    # Exact quoted target inside a repeat directive is another fully visible
-    # route. Keep it only when it agrees with an edge candidate or is unique.
-    if _looks_like_repeat_directive(p):
-        for m in re.finditer(
-            r"rep(?:eat|leat)[^\n]{0,100}?[\"“](.+?)[\"”]"
-            r"[^\n]{0,100}?(?:word\s+for\s+word|without\s+change|exact)",
-            p,
-            flags=re.IGNORECASE,
-        ):
-            value = _clean_target(m.group(1))
-            if value and value in p:
-                candidates.append(("QUOTED_VISIBLE_TARGET", value, m.start(1)))
-
-    # Deduplicate by recovered value. Multiple structural boundaries can point
-    # to the same target; that is not ambiguity.
-    by_value: dict[str, set[str]] = {}
-    for orientation, value, _ in candidates:
-        by_value.setdefault(value, set()).add(orientation)
-
-    if not by_value:
-        return {
-            "schema": SCHEMA,
-            "status": "ABSTAIN_REPEAT_TARGET_NOT_UNIQUELY_VISIBLE",
-            "prompt_to_repeat": None,
-            "orientation": None,
-        }
-    if len(by_value) != 1:
-        return {
-            "schema": SCHEMA,
-            "status": "FAIL_CLOSED_AMBIGUOUS_REPEAT_TARGET",
-            "prompt_to_repeat": None,
-            "orientation": None,
-            "candidate_count": len(by_value),
-        }
-
-    value, orientations = next(iter(by_value.items()))
-    orientation = (
-        next(iter(orientations)) if len(orientations) == 1 else "MULTIPLE_VISIBLE_CUES"
-    )
     return {
         "schema": SCHEMA,
-        "status": "RECOVERED",
-        "prompt_to_repeat": value,
-        "orientation": orientation,
-        "candidate_count": 1,
-        "hidden_kwargs_used": False,
-        "model_dependency_count": 0,
+        "status": "ABSTAIN_REPEAT_TARGET_NOT_UNIQUELY_VISIBLE",
+        "prompt_to_repeat": None,
+        "orientation": None,
     }
-
 
 def full_score_quotient_theorem(
     unique_predicate_truths: Iterable[bool],
