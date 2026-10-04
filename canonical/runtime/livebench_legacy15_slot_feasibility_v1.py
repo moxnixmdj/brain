@@ -28,6 +28,7 @@ FORBIDDEN = "keywords:forbidden_words"
 EXISTENCE = "keywords:existence"
 END = "startend:end_checker"
 SENTENCE = "length_constraints:number_sentences"
+SECTIONS = "detectable_format:multiple_sections"
 PUBLIC_END_PHRASES = ("Any other questions?", "Is there anything else I can help with?")
 
 
