@@ -62,7 +62,8 @@
       "conclusion": "failure",
       "steps_observed": 0,
       "runner_id": 0,
-      "interpretation": "INFRASTRUCTURE_ONLY__NO_VERIFICATION_EXECUTED"
+      "interpretation": "INFRASTRUCTURE_ONLY__NO_VERIFICATION_EXECUTED",
+      "job_id": 111420369799
     }
   ],
   "privacy_rule": "PRIVATE_CANONICAL_ROOT_STATE_WAS_NOT_COPIED_TO_THE_PUBLIC_VERIFIER",
