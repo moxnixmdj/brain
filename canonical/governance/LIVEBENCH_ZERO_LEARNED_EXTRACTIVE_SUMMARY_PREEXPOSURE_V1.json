@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_ZERO_LEARNED_EXTRACTIVE_SUMMARY_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION__PUBLIC_NONTERMINAL_SYNTHETIC__ZERO_CREDIT",
+  "tasks": [
+    {"task_id":"SOLAR","text":"Solar panels convert sunlight into electricity. Solar electricity can reduce fossil-fuel use. Clouds can reduce instantaneous solar output. Batteries can store solar electricity for later use.","max_sentences":2},
+    {"task_id":"DATABASE","text":"A database index stores an auxiliary search structure. An index can make selective queries faster. Indexes consume storage and add write overhead. Database indexes should be chosen for actual query patterns.","max_sentences":2},
+    {"task_id":"VACCINE","text":"Vaccines train immune responses before exposure to a pathogen. Vaccination can reduce the risk of severe disease. No vaccine eliminates every infection. Population protection depends on the disease, vaccine, and coverage.","max_sentences":2},
+    {"task_id":"ORBIT","text":"A satellite in low Earth orbit moves fast enough to keep falling around Earth. Atmospheric drag gradually removes orbital energy from low satellites. Higher low-Earth orbits usually experience less drag. Spacecraft can use propulsion to restore lost orbital energy.","max_sentences":2}
+  ],
+  "hard_rules": [
+    "OUTPUT_SENTENCES_MUST_BE_VERBATIM_SOURCE_SENTENCES",
+    "OUTPUT_MUST_BE_SHORTER_THAN_COMPRESSIBLE_INPUT",
+    "NO_EXTERNAL_MODEL_OR_NETWORK",
+    "NO_LEARNED_STATE",
+    "ABSTAIN_WHEN_INPUT_IS_NOT_COMPRESSIBLE"
+  ]
+}
