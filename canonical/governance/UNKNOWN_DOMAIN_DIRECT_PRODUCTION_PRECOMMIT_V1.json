@@ -114,5 +114,16 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "preflight_firewall": {
+    "runtime": {
+      "path": "canonical/runtime/unknown_domain_direct_production_preflight_v1.py",
+      "git_blob_sha": "e1365ccdba308c529f182797cf68075b2f1dc07c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_unknown_domain_direct_production_preflight_v1.py",
+      "git_blob_sha": "c81a5a16b99cbaf4ae5f8d26f173a18f0da20928"
+    },
+    "semantics": "READY_MEANS_READY_ONLY_FOR_ATOMIC_ONE_USE_CLAIM__NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
   }
 }
