@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_CALIBRATED_SETTLEMENT_SCHEDULER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CALIBRATED_EXPECTED_SETTLEMENT_SCHEDULING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Order admissible Root2 decision-certificate attempts by evidence-calibrated expected terminal settlement delta per critical-path second, without changing any acceptance predicate, score, comparator, or fresh-reality authority.",
+  "parent": {
+    "decision_only_policy": "canonical/governance/ROOT2_DECISION_ONLY_EVALUATION_V1.json",
+    "threshold_dag_runtime": "canonical/runtime/threshold_proof_dag_v1.py"
+  },
+  "runtime": "canonical/runtime/root2_calibrated_settlement_scheduler_v1.py",
+  "tests": "canonical/tests/test_root2_calibrated_settlement_scheduler_v1.py",
+  "probability_policy": {
+    "deterministic_route": "P_SETTLEMENT_EQUALS_1_ONLY_WHEN_DECLARED_DETERMINISTIC_SETTLEMENT",
+    "empirical_route": "JEFFREYS_BETA_HALF_HALF_POSTERIOR_MEAN_FROM_CONTENT_ADDRESSED_REPEATED_SETTLEMENT_HISTORY",
+    "uncalibrated_route": "NO_POINT_PROBABILITY_INVENTED__NO_PROBABILISTIC_ADVANTAGE",
+    "usage": "SCHEDULING_ONLY__NEVER_ACCEPTANCE_EVIDENCE"
+  },
+  "priority_index": "E[P_SETTLEMENT] * (DIRECT_PREDICATES_SETTLED + DOWNSTREAM_ACTIONS_DELETED_IF_SETTLED) / CRITICAL_PATH_SECONDS",
+  "tie_breakers": [
+    "LOWER_CRITICAL_PATH_SECONDS",
+    "MORE_DIRECT_PREDICATES_SETTLED",
+    "LEXICOGRAPHIC_ACTION_ID"
+  ],
+  "interaction_with_decision_only_root2": [
+    "USE_ONLY_AFTER_THE_EXISTING_DECISION_ONLY_COMPILER_IDENTIFIES_MULTIPLE_ADMISSIBLE_OPEN_CERTIFICATE_ACTIONS",
+    "DO_NOT_OVERRIDE_EXACT_ALREADY_FORCED_PASS_OR_FAIL",
+    "DO_NOT_OVERRIDE_AUTHENTICATED_ONE_BIT_RECEIPT_PRECEDENCE_WHEN_ALREADY_AVAILABLE",
+    "DO_NOT_UNBLOCK_FRESH_REALITY",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "hard_rules": [
+    "NO_FABRICATED_PROBABILITIES",
+    "NO_PROBABILITY_FROM_NAMES_PROSE_OR_INTUITION",
+    "CONTENT_ADDRESSED_HISTORY_REQUIRED_FOR_EMPIRICAL_CALIBRATION",
+    "NO_CLAIM_GREEDY_EXPECTED_DELTA_RATE_IS_GLOBALLY_OPTIMAL_UNDER_ARBITRARY_DEPENDENCIES",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_FRESH_REALITY_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false
+}
