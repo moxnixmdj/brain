@@ -1,29 +1,39 @@
 {
-  "schema":"PROJECT_BRAIN_H100_LEXICAL_SOURCE_FALLBACK_KNOWLEDGE_V1",
-  "date":"2026-10-04",
-  "status":"FROZEN_SOURCE_RELATION_ASSERTIONS__ZERO_LEARNED_KNOWLEDGE",
-  "records":[
+  "schema": "PROJECT_BRAIN_H100_LEXICAL_SOURCE_FALLBACK_KNOWLEDGE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_SOURCE_RELATION_ASSERTIONS__ZERO_LEARNED_KNOWLEDGE",
+  "records": [
     {
-      "term":"covariate",
-      "source":"NCBI Reference Manual on Scientific Evidence",
-      "source_url":"https://www.ncbi.nlm.nih.gov/books/NBK621591/",
-      "relation_phrases":["explanatory variable"],
-      "source_fact":"Covariate is described as a possibly predictive explanatory variable."
+      "term": "covariate",
+      "source": "NIH AFNI statistics documentation",
+      "source_url": "https://afni.nimh.nih.gov/pub/dist/doc/htmldoc/STATISTICS/center.html",
+      "relation_phrases": [
+        "explanatory variable"
+      ],
+      "source_fact": "AFNI documentation notes covariate can mean an explanatory variable in a model."
     },
     {
-      "term":"regressor",
-      "source":"SAS STAT User Guide",
-      "source_url":"https://support.sas.com/documentation/cdl/en/statug/65328/HTML/default/statug_introreg_sect003.htm",
-      "relation_phrases":["independent variable","predictor","explanatory variable"],
-      "source_fact":"Regressor variables are identified with independent, predictor, and explanatory variables."
+      "term": "regressor",
+      "source": "SAS STAT User Guide",
+      "source_url": "https://support.sas.com/documentation/cdl/en/statug/65328/HTML/default/statug_introreg_sect003.htm",
+      "relation_phrases": [
+        "independent variable",
+        "predictor",
+        "explanatory variable"
+      ],
+      "source_fact": "Regressor variables are identified with independent, predictor, and explanatory variables."
     }
   ],
-  "hard_rules":[
+  "hard_rules": [
     "SOURCE_RELATION_PHRASES_MUST_BE_INDEPENDENTLY_CONFIRMED_AGAINST_THE_PUBLIC_SOURCE",
     "RUNTIME_MUST_NOT_HARDCODE_TERM_NAMES",
     "CONFLICTING_INPUT_AND_TARGET_RELATIONS_MUST_ABSTAIN",
     "UNMAPPED_RELATIONS_MUST_ABSTAIN",
     "FINITE_TWO_TERM_REPAIR_IS_NOT_OPEN_WORLD_LEXICAL_COVERAGE"
   ],
-  "accounting":{"persistent_learned_bytes":0,"external_frontier_model_calls":0,"external_learned_capability_calls":0}
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0
+  }
 }
