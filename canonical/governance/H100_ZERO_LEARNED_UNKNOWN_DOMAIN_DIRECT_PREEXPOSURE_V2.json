@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_UNKNOWN_DOMAIN_DIRECT_PREEXPOSURE_V2",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_V2_TEST_FIXTURE_OUTCOME__DEDUCTIVE_V1_AMBIGUITY_REPAIR__ZERO_LEARNED__ZERO_PRODUCTION_CASES__ZERO_CREDIT",
+  "parent_v1": {
+    "candidate_path": "canonical/runtime/h100_zero_learned_unknown_domain_direct_candidate_v1.py",
+    "candidate_git_blob_sha": "b9d289b29784b434aac9b61eb39450035927ff1e",
+    "preexposure_path": "canonical/governance/H100_ZERO_LEARNED_UNKNOWN_DOMAIN_DIRECT_PREEXPOSURE_V1.json",
+    "preexposure_git_blob_sha": "fb6e128c2bfeebec75beffbd147425f4a98988e0"
+  },
+  "deductive_failure_found_before_runner_result": {
+    "statement": "ONE_OUTPUT_CONSISTENCY_PROBE_DOES_NOT_FORCE_UNIQUE_SUPPORT_FOR_OUTPUT_SATURATING_SIGN_OR_step_primitives",
+    "consequence": "V1_MUST_REMAIN_FROZEN_AND_MAY_FAIL_CLOSED_ON_SUPPORT_AMBIGUITY; DO_NOT_MUTATE_V1"
+  },
+  "candidate": {
+    "path": "canonical/runtime/h100_zero_learned_unknown_domain_direct_candidate_v2.py",
+    "git_blob_sha": "2101b7b8fe6b725d82c518d5abaccee381b4d1f9",
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0
+  },
+  "repair": [
+    "USE_V1_OUTPUT_CONSISTENCY_FIRST",
+    "IF_SUPPORT_SET_AMBIGUOUS_REQUEST_SECOND_ALLOWED_PROBE",
+    "IF_OUTPUT_SATURATION_STILL_LEAVES_MULTIPLE_SUPPORT_SETS_USE_VISIBLE_DOMAIN_A_ROLE_BINDING_AND_OBSERVATIONS_TO_MINIMIZE_SOURCE_TO_TARGET_SCALE_DISTORTION",
+    "FAIL_CLOSED_ON_EQUAL_MINIMUM_DISTORTION",
+    "MAX_TWO_DOMAIN_B_PROBES_REMAINS_BELOW_FROZEN_FULL_REDISCOVERY_FLOOR_THREE"
+  ],
+  "evaluator_blobs": {
+    "generator": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "scorer": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "harness": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "family": "52090daf78d12020af48c1b6ffaea056d9029e1b"
+  },
+  "test_population": {
+    "source": "generate_test_fixture_population",
+    "production": false,
+    "cases": 27,
+    "transfer": 12,
+    "abstention": 15
+  },
+  "success_condition": {
+    "all_27_cases_pass": true,
+    "transfer_leaf_pass": true,
+    "abstention_leaf_pass": true,
+    "max_transfer_probes": 2,
+    "persistent_learned_bytes": 0
+  },
+  "independent_verification_required": true,
+  "hard_nonclaims": [
+    "NO_V1_RUNNER_OUTCOME_USED_TO_DESIGN_V2",
+    "NO_PRODUCTION_CASE_GENERATION",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_OPEN_WORLD_GENERALIZATION_CLAIM",
+    "NO_TERMINAL_GOAL_CLOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "generated_production_case_count": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
