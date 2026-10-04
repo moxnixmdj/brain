@@ -21,7 +21,7 @@ import sys
 from typing import Any
 
 from canonical.runtime import livebench_legacy15_composition_archetypes_v1 as archetypes
-from canonical.runtime import livebench_legacy15_joint_witness_v1 as witness
+from canonical.runtime import livebench_legacy15_joint_router_v2 as witness
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_END2END_EXACT_SYNTHETIC_AUDIT_V2"
 FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
