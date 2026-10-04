@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_REUSED_SEMANTIC_CORE_LADDER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__REUSE_FIRST__ZERO_CREDIT__ROOT1_QUALIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": {
+    "deleted_assumption": "THE_FIRST_ROOT1_SEMANTIC_CORE_MUST_BE_A_NEW_27B_55_6_GB_ACQUISITION",
+    "replacement": "REUSE_ALREADY_EXECUTED_ZERO_COST_LOCAL_SEMANTIC_CORES_IN_ASCENDING_BYTE_SIZE_AND_ESCALATE_ONLY_AFTER_ROOT1_SPECIFIC_FALSIFICATION",
+    "why_this_is_causally_distinct": "THE_PRIOR_4B_AND_9B FALSIFICATIONS TARGETED OPEN_ENDED_AGENTIC END_TO_END TERMINATION. BOTH ROUTES LOADED AND PRODUCED MODEL RESPONSES; THE 9B ROUTE ALSO SELECTED AUTHORITATIVE SOURCES. THOSE RESULTS DO NOT FALSIFY THE NARROWER ROLE OF SEMANTIC SEED GENERATION FOR THE EXISTING ROOT1 FORMAL CONSTRAINT STACK."
+  },
+  "reuse_ladder": [
+    {
+      "rank": 1,
+      "id": "QWEN3_5_4B_Q4_K_M_EXISTING_CARRIER",
+      "model": "Qwen/Qwen3.5-4B",
+      "quantization_repo": "bartowski/Qwen_Qwen3.5-4B-GGUF",
+      "quantization_file": "Qwen_Qwen3.5-4B-Q4_K_M.gguf",
+      "bytes": 3013027808,
+      "sha256": "13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983",
+      "runtime": "llama.cpp",
+      "runtime_commit": "7fe450e19305b828c199d602c23a8337aaa1f03b",
+      "existing_evidence": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1.json",
+      "execution_truth": "MODEL_DOWNLOAD_HASH_LOAD_HEALTH_AND_MODEL_RESPONSES_PREVIOUSLY_VERIFIED_AT_ZERO_INCREMENTAL_SPEND",
+      "prior_failure_scope": "OPEN_ENDED_AGENTIC_TASK_TERMINATION__GOAL_MAX_CYCLES_WITHOUT_FINISH",
+      "root1_semantic_seed_qualification": "UNTESTED__NO_CREDIT"
+    },
+    {
+      "rank": 2,
+      "id": "QWEN3_5_9B_Q4_K_M_EXISTING_CARRIER",
+      "model": "Qwen/Qwen3.5-9B",
+      "quantization_repo": "TheStageAI/Qwen3.5-9B-GGUF",
+      "quantization_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+      "bytes": 5060174144,
+      "sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+      "runtime": "llama.cpp",
+      "existing_evidence": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
+      "execution_truth": "MODEL_DOWNLOAD_HASH_LOAD_HEALTH_MODEL_RESPONSES_AND_AUTHORITATIVE_SOURCE_SELECTION_PREVIOUSLY_VERIFIED_AT_ZERO_INCREMENTAL_SPEND",
+      "prior_failure_scope": "OPEN_ENDED_AGENTIC_TASK_TERMINATION__GOAL_MAX_CYCLES_WITHOUT_FINISH",
+      "root1_semantic_seed_qualification": "UNTESTED__NO_CREDIT"
+    },
+    {
+      "rank": 3,
+      "id": "SMAUG_MINI_BF16_EXTERNAL_ACQUISITION",
+      "model": "abacusai/Smaug-Mini",
+      "bytes_decimal_reported": 55600000000,
+      "existing_evidence": "canonical/governance/LIVEBENCH_ROOT1_OPEN_WEIGHT_DOMINANCE_UPDATE_V1.json",
+      "execution_truth": "PUBLIC_BENCHMARK_AND_OPEN_WEIGHT_ACQUISITION_CANDIDATE__BRAIN_LOCAL_EXECUTION_NOT_YET_PROVED",
+      "root1_semantic_seed_qualification": "PUBLIC_THRESHOLD_PRIOR_ONLY__NO_BRAIN_OWNERSHIP_OR_EXECUTION_CREDIT"
+    }
+  ],
+  "resource_delta": {
+    "4b_vs_smaug_reported_size_ratio": 18.45,
+    "4b_vs_smaug_reported_byte_reduction_percent": 94.58,
+    "9b_vs_smaug_reported_size_ratio": 10.99,
+    "rule": "RESOURCE_NUMBERS ARE ROUTE PRIORITIZATION FACTS ONLY. THEY DO NOT TRANSFER ROOT1 CAPABILITY CREDIT."
+  },
+  "composition_route": [
+    "PUBLIC_PROMPT_AND_REQUEST",
+    "REUSED_LOCAL_SEMANTIC_CORE_GENERATES_SEMANTIC_SEED",
+    "EXISTING_PUBLIC_CONSTRAINT_PARSER_AND_FORMAL_CONSTRAINT_STACK_APPLIES_ONLY SEMANTICALLY_SAFE TRANSFORMS",
+    "SEMANTIC_PRESERVATION_GATE",
+    "PUBLIC_NONTERMINAL_MATCHED_STYLE_ROOT1_QUALIFICATION",
+    "FREEZE_EXACT_CORE_RUNTIME_PROMPT_AND_TRANSFORM_CONFIGURATION",
+    "ONLY_THEN_SEPARATE_AUTHORITY_MAY_CONSUME_FRESH_TERMINAL_REALITY"
+  ],
+  "minimum_action_policy": {
+    "first": "QUALIFY_EXACT_ALREADY_VERIFIED_4B_Q4_CARRIER_AS_ROOT1_SEMANTIC_SEED_WITHOUT REPLAYING ITS OLD OPEN_ENDED TASK",
+    "on_4b_root1_falsification": "QUALIFY_EXACT_ALREADY_VERIFIED_9B_Q4_CARRIER",
+    "on_9b_root1_falsification": "RETURN_TO_SMAUG_MINI_OR_A STRICTLY DOMINATING OPEN_WEIGHT CANDIDATE",
+    "forbidden": [
+      "TREAT_OLD_AGENTIC_TERMINATION_FAILURE_AS_ROOT1_SEMANTIC_SEED_FAILURE",
+      "GRANT_LIVEBENCH_OR_ROOT1_CREDIT_FROM IFEVAL IFBENCH OR OTHER PROXY SCORES",
+      "REPLAY_OLD_4B_OR_9B_OPEN_ENDED_TASKS",
+      "ACQUIRE_55_6_GB_FIRST_WHILE_AN_UNFALSIFIED_ALREADY_EXECUTED_SMALLER_ROOT1_ROUTE_EXISTS",
+      "EXPOSE_NEW_TERMINAL_CASES_BEFORE_PRECOMMIT_AND_SEPARATE_AUTHORITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_4B_OR_9B_MEETS_LIVEBENCH_IF_65_7",
+    "NO_CLAIM_Q4_PRESERVES_ANY_FULL_PRECISION_BENCHMARK SCORE",
+    "NO_CLAIM_OLD_OPEN_ENDED_FAILURES_ARE_REVERSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_FRESH_TERMINAL_REALITY_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
