@@ -9,7 +9,7 @@
     "generator_parent_commit": "262cfc141e65fa9cf80015b9630b54bed2346f43",
     "generator_path": "livebench/if_runner/live_data.py",
     "generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
-    "generator_delete_commit": "c01596b42858840c1cd82e44eddb1df531c375f",
+    "generator_delete_commit": "c01596b4384952fbb38272b22f5c05d087ee810d",
     "pinned_evaluator_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
     "conflict_registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891"
   },
