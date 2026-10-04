@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_STRUCTURAL_RESIDUAL_REDUCTION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_ZERO_REALITY_STRUCTURAL_REDUCTION__V7_OPERATIVE_LEARNER__TWO_FROZEN_LEAVES_PRESERVED__ZERO_CREDIT",
+  "objective": "Recompute the Unknown-Domain learning-mechanism residual after verified V7 without changing frozen acceptance semantics.",
+  "frozen_protocol": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+    "git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab"
+  },
+  "operative_v7_activation": {
+    "path": "canonical/governance/UNIVERSAL_LEARNING_PROOF_PROGRAM_V7_ACTIVATION_V1.json",
+    "git_blob_sha": "58cbfecea60e7f4259c5b7c0218ebc15c4e33399"
+  },
+  "leaf_reductions": [
+    {
+      "leaf_id": "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "closure": false,
+      "structural_work_now_reusable": [
+        "V3_RECEIPT_BOUND_CROSS_ONTOLOGY_TRANSFER",
+        "V5_RECURSIVE_VERIFIED_ABSTRACTION_REUSE",
+        "V6_M_OPEN_MECHANISM_DISCOVERY_AND_DECISION_QUOTIENT",
+        "V7_DEDUCTIVE_CLOSURE_CAN_REMOVE_DERIVABLE_TRANSFER_REQUIREMENTS_BEFORE_OBSERVATION",
+        "V7_VERIFIED_EXECUTABLE_SKILL_PROGRAMS_CAN_REUSE_BEHAVIORAL_PROCEDURES_AFTER_INDEPENDENT_BEHAVIOR_PROOF"
+      ],
+      "irreducible_residual": [
+        "DEMONSTRATE_CORRECT_DOMAIN_B_TERMINAL_SUCCESS_FROM_TRANSFERRED_STRUCTURE",
+        "DEMONSTRATE_TRANSFER_IS_NOT_LABEL_OR_IDENTIFIER_MEMORIZATION",
+        "DEMONSTRATE_NEGATIVE_TRANSFER_DISTRACTORS_DO_NOT_RECEIVE_CREDIT",
+        "PRESERVE_EVIDENCE_PROVENANCE"
+      ],
+      "frozen_acceptance_preserved_exact": [
+        "DOMAIN_B_SUCCESS_REUSES_DOMAIN_A_LEARNED_PRIMITIVE_WITHOUT_FULL_REDISCOVERY",
+        "TRANSFER_IS_NOT_LABEL_OR_IDENTIFIER_MEMORIZATION",
+        "NEGATIVE_TRANSFER_DISTRACTORS_DO_NOT_RECEIVE CREDIT",
+        "EVIDENCE_PROVENANCE_PRESERVED"
+      ]
+    },
+    {
+      "leaf_id": "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS",
+      "closure": false,
+      "structural_work_now_reusable": [
+        "V4_OPEN_WORLD_FALSE_CONSENSUS_GUARD",
+        "V6_DECISION_QUOTIENT_AND_SAFE_ADAPTIVE_EXPERIMENT_SYNTHESIS",
+        "V7_DEDUCTION_BEFORE_OBSERVATION_FOR_VERIFIED_RULES_AND_FACTS",
+        "V7_EMPIRICAL_FRONTIER_RESTRICTED_TO_NON_DERIVABLE_REQUIRED_FACTS"
+      ],
+      "irreducible_residual": [
+        "IDENTIFIABLE_CASES_REACH_CORRECT_SUPPORTED_CONCLUSION",
+        "NONIDENTIFIABLE_CASES_DO_NOT_FORCE_UNIQUE_UNSUPPORTED_CONCLUSION",
+        "UNDERSPECIFIED_CASES_REQUEST_A_VALID_DISCRIMINATOR_OR_ABSTAIN",
+        "ABSTENTION_NOT_USED_AS_BLANKET_ESCAPE_ON_IDENTIFIABLE_CASES"
+      ],
+      "frozen_acceptance_preserved_exact": [
+        "IDENTIFIABLE_CASES_REACH_CORRECT_SUPPORTED_CONCLUSION",
+        "NONIDENTIFIABLE_CASES_DO_NOT_FORCE_UNIQUE_UNSUPPORTED_CONCLUSION",
+        "UNDERSPECIFIED_CASES_REQUEST_A_VALID_DISCRIMINATOR_OR_ABSTAIN",
+        "ABSTENTION_NOT_USED_AS_BLANKET_ESCAPE_ON_IDENTIFIABLE_CASES"
+      ]
+    }
+  ],
+  "summary": {
+    "leaves_before": 2,
+    "leaves_after": 2,
+    "leaves_closed": 0,
+    "new_environment_mechanism_stronger": true,
+    "deduction_before_observation_active": true,
+    "executable_program_reuse_available_only_after_independent_proof": true,
+    "direct_reality_requirement_eliminated": false,
+    "acceptance_truth_changed": false
+  },
+  "hard_rules": [
+    "DO_NOT_INTERPRET_MECHANISM_IMPROVEMENT_AS_DIRECT_LEAF_PASS",
+    "FROZEN_LEAF_ACCEPTANCE_CLAUSES_MUST_REMAIN_BYTE_FOR_BYTE_TEXT_EQUIVALENT_TO_PROTOCOL_CONTENT",
+    "NO_FINITE_OR_SYNTHETIC_SELF_TEST_TO_FROZEN_UNKNOWN_DOMAIN_ACCEPTANCE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_V6_TO_V7_ACTIVATION_CHAIN_AND_FROZEN_LEAF_PRESERVATION__THEN_REBIND_LIVE_ROOT3_POINTER__PRESERVE_TWO_DIRECT_LEAVES",
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
