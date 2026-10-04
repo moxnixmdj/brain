@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SCORER_ONLY_REPAIR_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__NEW_EPOCH_CANDIDATE_ADAPTATION_INDEPENDENCE__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1768,
+    "verified_head_sha": "c520a39d5761a75e753173eb0dff039522cd6191",
+    "merge_commit": "ba339147db212d23ee5310ea95e839e803ba1a8f",
+    "workflow_run_id": 37189444658,
+    "workflow_job_id": 111398380712,
+    "conclusion": "success",
+    "verifier_git_blob_sha": "e72f6a4388d946190518005c21a755cd239f2390",
+    "captured_failed_job_log_git_blob_sha": "57943d43760836398cde13cafbb6e81901c620da"
+  },
+  "verified": {
+    "failed_run_id": 37188253705,
+    "failed_job_id": 111394777574,
+    "failed_driver_git_blob_sha": "05d71d3d06ebac9b5d74eb31b137141e6b8797c2",
+    "failed_guard_marker_sha256": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d",
+    "terminal_population_was_loaded": true,
+    "terminal_candidate_inferences": 0,
+    "terminal_candidate_responses": 0,
+    "terminal_score_exists": false,
+    "candidate_byte_identity_preserved": true,
+    "candidate_commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "candidate_tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+    "repair_scope": "OFFICIAL_PUBLIC_SCORER_DISPATCH_AND_RUNTIME_CLOSURE_ONLY",
+    "repair_derived_from_public_upstream_semantics": true,
+    "terminal_prompt_content_used_to_design_repair": false,
+    "candidate_response_used_to_design_repair": false,
+    "score_used_to_design_repair": false,
+    "population_unchanged": true,
+    "threshold_unchanged": true,
+    "new_epoch_required": true,
+    "original_full_tuple_precommit_revalidated": false,
+    "new_epoch_candidate_adaptation_independence_proved": true
+  },
+  "semantic_effect": "PERMITS_CONSTRUCTION_OF_A_NEW_FAIL_CLOSED_LIVEBENCH_EXECUTION_EPOCH_WITH_THE_EXACT_UNCHANGED_CANDIDATE_AND_VERIFIED_PUBLIC_SCORER_REPAIR__DOES_NOT_ITSELF_GRANT_EXECUTION_FRESH_REALITY_PROMOTION_OR_ACCEPTANCE_AUTHORITY",
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
