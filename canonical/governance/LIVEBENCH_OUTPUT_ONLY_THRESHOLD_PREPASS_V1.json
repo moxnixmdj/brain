@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_OUTPUT_ONLY_THRESHOLD_PREPASS_V1",
+  "date": "2026-10-04",
+  "status": "COMPILED_ZERO_REALITY_OPEN__IRREDUCIBLE_FROZEN_ROUTE_REMAINS__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Run the active output-only threshold DAG before any terminal case read and determine whether current admitted zero-reality evidence alone already forces the frozen LiveBench IF predicate pass or fail.",
+  "authority_bindings": {
+    "livebench_local_authority": {
+      "path": "canonical/governance/LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_ACTIVATION_V2.json",
+      "git_blob_sha": "d410d6952cb34f2fd3fb4dc48bf2a613d11c57d1"
+    },
+    "threshold_dag_activation": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_ACTIVATION_V1.json",
+      "git_blob_sha": "7ea4dd4edb59c8526bd3993e02f4a8fb53c65085"
+    },
+    "threshold_runtime": {
+      "path": "canonical/runtime/threshold_proof_dag_v1.py",
+      "git_blob_sha": "7a0c715d931dbba05bc9e5ae344e1ead787ea5b8"
+    },
+    "frozen_predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "current_root": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "601e82d00104b4ed36ee5968ad966a0c02e627c1"
+    }
+  },
+  "prepass_input": {
+    "schema": "PROJECT_BRAIN_THRESHOLD_PROOF_DAG_INPUT_V1",
+    "target": {
+      "id": "LIVEBENCH_IF_GE_65_7",
+      "metric_kind": "ADDITIVE_THRESHOLD",
+      "receipt": {
+        "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+        "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+      },
+      "total_mass": "200",
+      "threshold_mass": "131.4",
+      "current_lower_mass": "0",
+      "current_upper_mass": "200"
+    },
+    "allow_fresh_reality": false,
+    "actions": []
+  },
+  "compiled_output": {
+    "schema": "PROJECT_BRAIN_THRESHOLD_PROOF_DAG_OUTPUT_V1",
+    "status": "PASS",
+    "target_id": "LIVEBENCH_IF_GE_65_7",
+    "metric_kind": "ADDITIVE_THRESHOLD",
+    "compiled": {
+      "verdict": "OPEN",
+      "lower": "0",
+      "upper": "200",
+      "threshold": "131.4",
+      "pass_deficit": "131.4",
+      "minimum_pass_cut": null,
+      "minimum_fail_cut": null
+    },
+    "blocked_fresh_reality_actions": [],
+    "rules": [
+      "OUTPUT_ONLY__DO_NOT_REQUIRE_FULL_BENCHMARK_WHEN_A_SOUND_THRESHOLD_CERTIFICATE_ALREADY_SETTLES_THE_PREDICATE",
+      "NO_SCORE_INHERITANCE_ACROSS_NON_EQUIVALENT_HARNESSES",
+      "NO_RELATIVE_RATING_FROM_ABSOLUTE_PERFORMANCE_WITHOUT_VERIFIED_RELATIVE_SCORE_BRIDGE",
+      "NO_DOUBLE_COUNTING_OVERLAPPING_COVERAGE",
+      "FRESH_REALITY_ACTIONS_REQUIRE_EXPLICIT_AUTHORITY",
+      "PLANNER_OUTPUT_GRANTS_ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT"
+    ],
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "interpretation": {
+    "zero_reality_verdict": "OPEN",
+    "pass_forced": false,
+    "fail_forced": false,
+    "consequence": "THE_OUTPUT_ONLY_PREPASS_DOES_NOT_SETTLE_LIVEBENCH_IF_GE_65_7__THE_EXACT_FROZEN_PREDICATE_LOCAL_ROUTE_REMAINS_IRREDUCIBLE_SUBJECT_TO_V2_POINT_OF_USE_GATES",
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0
+  },
+  "hard_rules": [
+    "CURRENT_LOWER_MASS_ZERO_IS_A_CONSERVATIVE_BOUND_NOT_A_CLAIM_THAT_NO_RELEVANT_EVIDENCE_EXISTS_ANYWHERE",
+    "CURRENT_UPPER_MASS_200_PRESERVES_FULL_UNCERTAINTY",
+    "NO_TERMINAL_CASE_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "LIVEBENCH_V2_PREDICATE_LOCAL_AUTHORITY_REMAINS_SEPARATE_AND_LOAD_BEARING",
+    "INDEPENDENT_RECOMPUTATION_REQUIRED_BEFORE_THIS_PREPASS_IS_USED_AS_A_POINT_OF_USE_GATE_RECEIPT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "global_fresh_reality_authority": false,
+  "independent_verification_required": true
+}
