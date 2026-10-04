@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_HOLDOUT_REQUEST_V1",
+  "episode_id": "H20_HF_SENTENCE_SIM",
+  "difficulty": "PROVIDER_NATIVE_ENUM",
+  "query_action": {
+    "action_id": "H20Q06",
+    "source_id": "HUGGINGFACE_MODEL_PIPELINE_ENUM",
+    "query_family": "FRESH_HOLDOUT_BEHAVIOR_V20",
+    "query": "sentence-similarity"
+  },
+  "source": {
+    "source_id": "HUGGINGFACE_MODEL_PIPELINE_ENUM",
+    "provider": "huggingface_pipeline",
+    "upstream_group": "HUGGINGFACE_HUB_API",
+    "ecosystem": "huggingface"
+  },
+  "target_identity_present": false
+}
