@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_2026_06_25_IFBENCH58_SCORER_ROUTE_RECONCILIATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PUBLIC_ROUTER_DEDUCTIVE_PROOF__LEGACY25_NON_LOAD_BEARING_FOR_2026_06_25__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "exact_target_release": "2026-06-25",
+  "frozen_comparator_authority": {
+    "route": "canonical/governance/LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2.json",
+    "scoring_semantics": "STRICT_IFBENCH_AVERAGED_SCORE",
+    "active_population_total": 200,
+    "published_bar_percent": 65.7
+  },
+  "pinned_public_runtime": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "files": {
+      "router": {
+        "path": "livebench/gen_ground_truth_judgment.py",
+        "git_blob_sha": "b36561da5b54380c724c507462d0ee65feefeac8"
+      },
+      "process_utils": {
+        "path": "livebench/process_results/instruction_following/utils.py",
+        "git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676"
+      },
+      "ifbench_evaluation": {
+        "path": "livebench/if_runner/ifbench/evaluation_lib.py",
+        "git_blob_sha": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b"
+      },
+      "ifbench_registry": {
+        "path": "livebench/if_runner/ifbench/instructions_registry.py",
+        "git_blob_sha": "adfed4832877566e62970257b50c6fa32c302fb2"
+      }
+    }
+  },
+  "deductive_route": {
+    "legacy_selector": "question.category == 'instruction_following' AND livebench_release_date < '2025-11-25'",
+    "current_release_fact": "2026-06-25 >= 2025-11-25",
+    "consequence_1": "2026_06_25_INSTRUCTION_FOLLOWING_MATCHES_ARE_NOT_OLD_INSTRUCTION_FOLLOWING_MATCHES",
+    "consequence_2": "THEY_ENTER_NORMAL_MATCHES_AND_PLAY_A_MATCH_GT",
+    "normal_if_branch": "play_a_match_gt: question.category == 'instruction_following' -> ifbench_process_results(question,llm_answer,debug)",
+    "scorer_call": "ifbench_process_results -> evaluation_lib.test_instruction_following_strict",
+    "score_formula": "(ALL_INSTRUCTIONS_FOLLOWED_INDICATOR + FRACTION_OF_INSTRUCTIONS_FOLLOWED) / 2",
+    "checker_registry": "livebench.if_runner.ifbench.instructions_registry.INSTRUCTION_DICT",
+    "checker_count": 58,
+    "theorem": "FOR_THE_2026_06_25_LIVEBENCH_IF_RELEASE_THE_LOAD_BEARING_SCORER_SURFACE_IS_IFBENCH58_STRICT_AVERAGED__NOT_THE_PRE_2025_11_25_LEGACY_INSTRUCTION_FOLLOWING_EVAL_25_FAMILY_SURFACE"
+  },
+  "branch_reclassification": {
+    "legacy25_union25_artifacts": "PRESERVE_AS_HISTORICAL_OR_OLD_RELEASE_EVIDENCE__DO_NOT_DELETE",
+    "legacy25_union25_for_target_predicate": "NON_LOAD_BEARING_PENDING_ANY_CONTRADICTORY_EXACT_ROUTER_EVIDENCE",
+    "ifbench58_for_target_predicate": "CORRECT_PUBLIC_RUNTIME_SCORER_SURFACE",
+    "acceptance_credit_delta": 0
+  },
+  "already_available_ifbench58_evidence": [
+    "canonical/verification/LIVEBENCH_IF_58_CHECKER_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/LIVEBENCH_IF_58_CHECKER_HERMETIC_SMOKE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/governance/LIVEBENCH_58_FAMILY_PUBLIC_DETECTION_COVERAGE_V1.json"
+  ],
+  "independent_verification_gate": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "required": [
+      "CLONE_EXACT_PINNED_LIVEBENCH_COMMIT",
+      "ASSERT_EXACT_ROUTER_PROCESS_EVALUATION_AND_REGISTRY_BLOBS",
+      "AST_OR_SOURCE_VERIFY_LEGACY_CUTOFF_IS_STRICTLY_BEFORE_2025_11_25",
+      "VERIFY_RELEASE_2026_06_25_CANNOT_ENTER_LEGACY_BATCH",
+      "VERIFY_NORMAL_INSTRUCTION_FOLLOWING_BRANCH_CALLS_IFBENCH_PROCESS_RESULTS",
+      "VERIFY_IFBENCH_PROCESS_RESULTS_CALLS_TEST_INSTRUCTION_FOLLOWING_STRICT",
+      "VERIFY_SCORE_FORMULA_IS_AVERAGE_OF_ALL_FOLLOWED_AND_FRACTION_FOLLOWED",
+      "VERIFY_IFBENCH_REGISTRY_COUNT_IS_58",
+      "ZERO_TERMINAL_PROMPT_RESPONSE_KWARGS_OR_TARGET_CASE_CONTENT_READ"
+    ]
+  },
+  "scheduler_rule": "DO_NOT_SPEND_CRITICAL_PATH_WORK_ON_LEGACY25_UNION25_FOR_LIVEBENCH_IF_GE_65_7_AFTER_INDEPENDENT_ROUTE_PASS__RE_RANK_ONLY_IFBENCH58_SCORE_CONSTRUCTION_AND_ADMISSIBLE_SCORE_MASS_GAPS",
+  "hard_nonclaims": [
+    "NO_BRAIN_LIVEBENCH_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CASE_EXECUTION_OR_CONTENT_READ",
+    "NO_CLAIM_IFBENCH58_CONSTRUCTION_ALREADY_REACHES_65_7"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
