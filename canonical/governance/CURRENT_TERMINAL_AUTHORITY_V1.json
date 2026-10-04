@@ -889,7 +889,7 @@
     },
     "root2_root3_minimum_execution_frontier_v1": {
       "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
-      "git_blob_sha": "dbe0bf4984d9e3ddaa8de52ed2ebb5ccfee55141",
+      "git_blob_sha": "bed37ae9254ca3a4f207da8fe04ac0db287bea99",
       "status": "CURRENT_ROOT2_FRONTIER__ZERO_CREDIT"
     },
     "current_witness_target_totalization_v2_candidate": {
@@ -904,7 +904,7 @@
     },
     "root3_residual_compression_v1": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
-      "git_blob_sha": "22ee9392b19b63b50f8d94cba4d28147b9b15f2f",
+      "git_blob_sha": "66babe959f0a159c450dc49cba520189288515ff",
       "status": "SYNTHESIS_SCOPE_RECLASSIFIED_TO_ROOT2_ONLY__ZERO_CREDIT"
     },
     "current_zero_reality_minimum_cut_v7": {
@@ -919,7 +919,7 @@
     },
     "current_zero_reality_minimum_cut_v8": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
-      "git_blob_sha": "c6c8353e740cbcde9649512c5b922148617d934a",
+      "git_blob_sha": "078242d57ad0d224a8a6f3e45f8ef353222503ec",
       "status": "CHARTOGRAPHY_GUARD_DISCHARGED__NO_FRESH_REALITY"
     },
     "current_v8_post_compression_verification_binding": {
@@ -1101,6 +1101,26 @@
       "path": "canonical/governance/TB4_BUILDKITE_ALL_ACCESS_TRIAL_CARRIER_CANDIDATE_20261004_V1.json",
       "git_blob_sha": "2725cf6820fb7ce6025213d474b9acf2937282ee",
       "status": "NAMED_MATERIAL_WAKE_ONLY__ACCOUNT_AND_ZERO_CASE_PREFLIGHT_REQUIRED__NO_CARRIER_CREDIT"
+    },
+    "universal_learning_mechanism_discovery_v6": {
+      "activation_path": "canonical/governance/UNIVERSAL_LEARNING_MECHANISM_DISCOVERY_V6_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "d3093f6c624b3c5a0de588e2da5c8c7b49d07238",
+      "governance_path": "canonical/governance/UNIVERSAL_LEARNING_MECHANISM_DISCOVERY_V6.json",
+      "governance_git_blob_sha": "65e291e3afebbf3547771ee580104361d1920788",
+      "verification_path": "canonical/verification/UNIVERSAL_LEARNING_MECHANISM_DISCOVERY_V6_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "ff590a8f40b891d3c53bb2c50cd679bb0dd42c72",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__LOAD_BEARING_PREDECESSOR_FOR_OPERATIVE_V7__ZERO_CREDIT"
+    },
+    "universal_learning_proof_program_v7": {
+      "activation_path": "canonical/governance/UNIVERSAL_LEARNING_PROOF_PROGRAM_V7_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "58cbfecea60e7f4259c5b7c0218ebc15c4e33399",
+      "governance_path": "canonical/governance/UNIVERSAL_LEARNING_PROOF_PROGRAM_V7.json",
+      "governance_git_blob_sha": "e26c8f4d8614720c1a45f28bcd2703dbb36bd980",
+      "verification_path": "canonical/verification/UNIVERSAL_LEARNING_PROOF_PROGRAM_V7_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "87f8660095b9a9d71eb160bf23616a46d4c3e1cf",
+      "structural_residual_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V7_STRUCTURAL_RESIDUAL_REDUCTION_V1.json",
+      "structural_residual_reduction_git_blob_sha": "26704949fa0d6b4db74a5701758a07569e8268c3",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__OPERATIVE_UNKNOWN_DOMAIN_LEARNING_OVERLAY_V7__POINTER_VERIFICATION_PASS__TWO_FROZEN_LEAVES_PRESERVED__ZERO_CREDIT"
     }
   },
   "residual": [
@@ -1580,7 +1600,7 @@
     "current_effective_canonical_leaf_atoms": 39
   },
   "last_reconciled_control_plane_head": "627492dd3a9adfdbd4c50146335bc1a92aca4eee",
-  "last_reconciled_reason": "UNIVERSAL_LEARNING_V5_PROMOTED_AND_OPERATIVE_UNKNOWN_DOMAIN_POINTER_CHAIN_REBOUND__TWO_FROZEN_DIRECT_LEAVES_PRESERVED__ZERO_ACCEPTANCE_OWNERSHIP_CREDIT__ROOT2_CLOSURE_V2_INDEPENDENT_PASS_ACTIVATED_AND_CURRENT_FRONTIER_BOUND__SYNTHESIS_SCOPE_RECLASSIFICATION_PRESERVED__ACCEPTANCE_UNCHANGED_5_OF_19_12_OF_38__ZERO_CREDIT",
+  "last_reconciled_reason": "UNIVERSAL_LEARNING_V7_ACTIVATION__V6_LOAD_BEARING_PREDECESSOR__ROOT3_CUT_FRONTIER_TERMINAL_POINTER_CHAIN_REBOUND__TWO_FROZEN_DIRECT_LEAVES_PRESERVED__INDEPENDENT_POINTER_VERIFICATION_PASS__ZERO_ACCEPTANCE_OWNERSHIP_CREDIT",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
