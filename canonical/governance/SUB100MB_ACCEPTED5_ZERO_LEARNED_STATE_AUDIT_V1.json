@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_SUB100MB_ACCEPTED5_ZERO_LEARNED_STATE_AUDIT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONTENT_ADDRESSED_ACCEPTED_FIVE_LEARNED_STATE_AUDIT__ZERO_ACCEPTANCE_CREDIT",
+  "objective": "TEST_THE_SUB100MB_HYPOTHESIS_BY_ACCOUNTING_FOR_ALL_PERSISTENT_LEARNED_STATE_REQUIRED_BY_THE_CURRENTLY_ACCEPTED_BRAIN_CAPABILITY_ROUTES",
+  "claim_scope": "LEARNED_STATE_ACCOUNTING_ONLY_FOR_THE_FIVE_CURRENTLY_ACCEPTED_FAMILIES__NO_NEW_ACCEPTANCE_OR_SCOPE_CREDIT",
+  "source_authority": {
+    "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+    "git_blob_sha": "11498bd194c8018617767918edec020268239bc1",
+    "accepted_family_count": 5,
+    "total_family_count": 19
+  },
+  "budget": {
+    "persistent_learned_state_bytes_max": 100000000,
+    "definition": "COUNT_EVERY_PERSISTENT_DATA_DRIVEN_PARAMETER_EMBEDDING_ADAPTER_LEARNED_ROUTER_LEARNED_MEMORY_OR_CHECKPOINT_REQUIRED_TO_EXECUTE_THE_SCOPED_CAPABILITY",
+    "excluded_from_this_metric_but_separately_measurable": [
+      "DETERMINISTIC_PROGRAM_CODE",
+      "NONLEARNED_LIBRARY_CODE_AND_TABLES",
+      "EPHEMERAL_RUNTIME_RAM",
+      "SCRATCH_STATE",
+      "RAW_EXTERNAL_JIT_KNOWLEDGE"
+    ],
+    "forbidden_accounting_escape": [
+      "REMOTE_FRONTIER_MODEL_SUPPLYING_THE_SCOPED_CAPABILITY",
+      "UNCOUNTED_EMBEDDINGS_OR_ADAPTERS",
+      "CALLING_A_LEARNED_PROVIDER_A_TOOL_AND_EXCLUDING_ITS_WEIGHTS"
+    ]
+  },
+  "families": [
+    {
+      "family": "EXACT_SYMBOLIC_COMPUTATION",
+      "accepted_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "operative_artifacts": [
+        {
+          "path": "canonical/obsolescence/run_exact_symbolic_v1.py",
+          "git_blob_sha": "8f6f04fee00664b26ddf1a45a65698399c7ca6c3"
+        },
+        {
+          "path": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+          "git_blob_sha": "a691d49ef377fa216bbbeff70183112d65445463"
+        }
+      ],
+      "required_substrate": ["PYTHON", "SYMPY_1_14_0"],
+      "persistent_learned_state_bytes": 0,
+      "external_learned_capability_provider_required": false,
+      "dependency_inventory_complete_for_scoped_capability": true,
+      "reason": "THE_OPERATIVE_ROUTE_IS_DETERMINISTIC_SYMBOLIC_COMPUTATION__WOLFRAM_IS_INDEPENDENT_VERIFICATION_NOT_RUNTIME_CAPABILITY_SUPPLY"
+    },
+    {
+      "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "accepted_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "operative_artifacts": [
+        {
+          "path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+          "git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470"
+        },
+        {
+          "path": "canonical/runtime/same_identity_supervisor.py",
+          "git_blob_sha": "1fb03bd898ee673521799ff6dee6500e246feef6"
+        },
+        {
+          "path": "canonical/runtime/continuous_obs_runtime.py",
+          "git_blob_sha": "e2533a0335c4f6824b9542944d4682aeefb36b2b"
+        }
+      ],
+      "required_substrate": ["PYTHON", "FILESYSTEM", "GIT_OR_EQUIVALENT_DURABLE_STATE"],
+      "persistent_learned_state_bytes": 0,
+      "external_learned_capability_provider_required": false,
+      "dependency_inventory_complete_for_scoped_capability": true,
+      "reason": "THE_ACCEPTED_SCOPE_IS_STATE_IDENTITY_MISSION_AND_EXACTLY_ONCE_CONTINUITY__THE_PAYLOAD_COGNITION_EXECUTOR_IS_OUTSIDE_THIS_SCOPED_CAPABILITY__THE_OWNERSHIP_PACKAGE_EXPLICITLY_PASSES_NO_HIDDEN_CAPABILITY_PROVIDER"
+    },
+    {
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "accepted_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "operative_artifacts": [
+        {
+          "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+          "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+        }
+      ],
+      "required_substrate": ["PYTHON_STANDARD_LIBRARY"],
+      "persistent_learned_state_bytes": 0,
+      "external_learned_capability_provider_required": false,
+      "dependency_inventory_complete_for_scoped_capability": true,
+      "reason": "THE_ACCEPTED_ROUTE_IS_EXPLICIT_FINITE_SEARCH_SCHEDULING_RESOURCE_MATCHING_AND_EVIDENCE_FANIN_WITH_NO_MODEL_DEPENDENCY"
+    },
+    {
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "accepted_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "operative_artifacts": [
+        {
+          "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+          "git_blob_sha": "28940387bd6c11671035ad9201e37bba13fd9bc9"
+        }
+      ],
+      "required_substrate": ["PYTHON_STANDARD_LIBRARY"],
+      "persistent_learned_state_bytes": 0,
+      "external_learned_capability_provider_required": false,
+      "dependency_inventory_complete_for_scoped_capability": true,
+      "reason": "THE_ACCEPTED_ROUTE_IS_TYPED_CAUSAL_GRAPH_ANALYSIS_AND_FAIL_CLOSED_RECOVERY_LOGIC_WITH_NO_MODEL_DEPENDENCY"
+    },
+    {
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "accepted_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "operative_artifacts": [
+        {
+          "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+          "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+        }
+      ],
+      "required_substrate": ["PYTHON_STANDARD_LIBRARY", "EXPLICIT_TOOL_METADATA", "SAFE_PROBE_RECEIPTS"],
+      "persistent_learned_state_bytes": 0,
+      "external_learned_capability_provider_required": false,
+      "dependency_inventory_complete_for_scoped_capability": true,
+      "reason": "THE_ACCEPTED_ROUTE_SELECTS_AND_PROBES_FROM_CANDIDATE_VISIBLE_METADATA_AND_RECEIPTS__THE_OPERATIVE_ACCEPTED_ARTIFACT_IS_SELF_CONTAINED_DETERMINISTIC_CODE"
+    }
+  ],
+  "result": {
+    "accepted_families_audited": 5,
+    "accepted_families_with_zero_persistent_learned_state": 5,
+    "persistent_learned_state_bytes_required_by_audited_accepted_routes": 0,
+    "within_100mb_learned_state_budget": true,
+    "terminal_hypothesis_proved": false,
+    "remaining_open_families": 14,
+    "strongest_valid_conclusion": "THE_CURRENTLY_ACCEPTED_5_OF_19_CAPABILITY_FAMILIES_ALREADY_DEMONSTRATE_FRONTIER_TARGET_SCOPED_CAPABILITIES_WITH_ZERO_PERSISTENT_LEARNED_STATE_IN_THE_OPERATIVE_BRAIN_MECHANISMS"
+  },
+  "next_falsification_target": {
+    "priority": 1,
+    "families": [
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+    ],
+    "reason": "THESE_ARE_THE_MOST_LIKELY_TO_EXPOSE_AN_IRREDUCIBLE_GENERALIZATION_KERNEL_REQUIREMENT__EASY_FAMILY_CLOSURE_HAS_LOWER_INFORMATION_VALUE"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
