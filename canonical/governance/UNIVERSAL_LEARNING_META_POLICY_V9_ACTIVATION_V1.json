@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_LEARNING_META_POLICY_V9_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__V7_TRUST_BASE_PLUS_VERIFIED_V8_COMPRESSION_PLUS_VERIFIED_V9_META_POLICY__INDEPENDENT_ACTIVATION_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "scope": "NEW_ENVIRONMENT_AND_NEW_THING_LEARNING_ONLY",
+  "target_blocker": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "frozen_protocol": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+    "git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab"
+  },
+  "operative_v7_base": {
+    "activation_path": "canonical/governance/UNIVERSAL_LEARNING_PROOF_PROGRAM_V7_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "58cbfecea60e7f4259c5b7c0218ebc15c4e33399",
+    "governance_path": "canonical/governance/UNIVERSAL_LEARNING_PROOF_PROGRAM_V7.json",
+    "governance_git_blob_sha": "e26c8f4d8614720c1a45f28bcd2703dbb36bd980"
+  },
+  "v8_successor": {
+    "governance_path": "canonical/governance/UNIVERSAL_LEARNING_EQUIVALENCE_BASIS_V8.json",
+    "governance_git_blob_sha": "095dc93747a64a95feb001f1ecca4714ad666b72",
+    "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "independent_verifier_merge_commit": "c097af209497b00cf57664473ad44bdd71750eec",
+    "conclusion": "success"
+  },
+  "v9_successor": {
+    "governance_path": "canonical/governance/UNIVERSAL_LEARNING_META_POLICY_V9.json",
+    "governance_git_blob_sha": "7b8ca47355f73b0f78e439e407cd632f1ad7d99d",
+    "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "independent_verifier_pr": 1615,
+    "workflow_run_id": 37170737863,
+    "independent_verifier_merge_commit": "b04e9b138366bb1cb4f13ae478275025ad2d64da",
+    "conclusion": "success"
+  },
+  "activation_effect": [
+    "PRESERVE_V1_TO_V7_TRUST_SAFETY_OPEN_WORLD_MECHANISM_EXPERIMENT_DEDUCTION_AND_EXECUTABLE_PROGRAM_GATES",
+    "ADD_V8_PROOF_GATED_EQUIVALENCE_COMPRESSION_FINITE_NOVELTY_BASIS_AND_RESIDUAL_PRIORITY_AS_PLANNING_COMPRESSION",
+    "ADD_V9_EXACT_CONTEXT_RECEIPT_BOUND_META_POLICY_AS_PLANNING_ONLY",
+    "ADD_V9_ORDERED_META_STRATEGY_ABSTRACTION_CANDIDATE_INDUCTION_WITHOUT_SELF_CERTIFICATION",
+    "V8_V9_MAY_NOT_OVERRIDE_V7_ROUTE_NEXT_ACTION_TRUST_EXECUTION_OR_EMPIRICAL_INFORMATION_AUTHORITY",
+    "PRESERVE_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_LEAVES_OPEN"
+  ],
+  "hard_rules": [
+    "V7_REMAINS_LOAD_BEARING_TRUST_EXECUTION_AND_EMPIRICAL_ACTION_AUTHORITY",
+    "V8_AND_V9_ARE_SUCCESSOR_PLANNING_OVERLAYS_ONLY",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_DIRECT_LEAF_CLOSURE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_ACTIVATION_BINDINGS_AND_ZERO_CREDIT_BOUNDARIES__IF_PASS_PROMOTE_CERTIFICATE__THEN_REBIND_LIVE_ROOT3_POINTER_CHAIN_ON_CURRENT_MAIN"
+}
