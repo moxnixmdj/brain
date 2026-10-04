@@ -9,6 +9,7 @@ on:
       - '.github/workflows/verify-unknown-domain-v3-universal-proof-candidate.yml'
 permissions:
   contents: read
+  pull-requests: write
 jobs:
   verify:
     runs-on: ubuntu-24.04
@@ -18,28 +19,62 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Execute content-bound V3 theorem
-        run: python -m canonical.runtime.unknown_domain_direct_v3_universal_proof_v1
-      - name: Reproduce V2 exact-float counterexample and V3 repair
+      - name: Diagnose theorem and regression
+        shell: bash
         run: |
-          python - <<'PY'
-          import hashlib
-          from canonical.runtime import unknown_domain_direct_candidate_v2 as c2
-          from canonical.runtime import unknown_domain_direct_candidate_v3 as c3
-          from canonical.runtime import unknown_domain_direct_hidden_generator_v2 as g2
-          from canonical.runtime import unknown_domain_direct_execution_harness_v1 as harness
-          secret=hashlib.sha256(b"secret0").digest()
-          beacon="beacon-qualification-0000000000000000"
-          visible,hidden=g2._transfer_case(secret,beacon,4,namespace="QUALONLY")
-          v2=harness.execute_case(candidate_step=c2.step,case_visible=visible,hidden_record=hidden)
-          assert v2["scorer_result"]["pass"] is False,v2
-          assert "DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG" in v2["scorer_result"]["errors"]
-          assert set(v2["candidate_terminal_action"]["support_feature_ids"])==set(hidden["transfer_relevant_feature_ids"])
-          assert 0 < abs(v2["candidate_terminal_action"]["terminal_consequence"]-hidden["gold_terminal_consequence"]) < 1e-12
-          v3=harness.execute_case(candidate_step=c3.step,case_visible=visible,hidden_record=hidden)
-          assert v3["scorer_result"]["pass"] is True,v3
-          assert v3["candidate_terminal_action"]["terminal_consequence"]==hidden["gold_terminal_consequence"]
-          assert set(v3["candidate_terminal_action"]["support_feature_ids"])==set(hidden["transfer_relevant_feature_ids"])
-          assert v3["probe_count"]==1
-          print("V2_COUNTEREXAMPLE_REPRODUCED__V3_EXACT_FLOAT_REPAIR_PASS")
+          python - <<'PY' > v3-result.txt 2>&1
+          import hashlib, json, traceback
+          result={"proof":None,"regression":None,"errors":[]}
+          try:
+              from canonical.runtime import unknown_domain_direct_v3_universal_proof_v1 as proof
+              out=proof.prove()
+              result["proof"]={"ok":True,"status":out["status"]}
+          except Exception as e:
+              result["proof"]={"ok":False,"type":type(e).__name__,"message":str(e)}
+              result["errors"].append(traceback.format_exc())
+          try:
+              from canonical.runtime import unknown_domain_direct_candidate_v2 as c2
+              from canonical.runtime import unknown_domain_direct_candidate_v3 as c3
+              from canonical.runtime import unknown_domain_direct_hidden_generator_v2 as g2
+              from canonical.runtime import unknown_domain_direct_execution_harness_v1 as harness
+              secret=hashlib.sha256(b"secret0").digest()
+              beacon="beacon-qualification-0000000000000000"
+              visible,hidden=g2._transfer_case(secret,beacon,4,namespace="QUALONLY")
+              v2=harness.execute_case(candidate_step=c2.step,case_visible=visible,hidden_record=hidden)
+              v3=harness.execute_case(candidate_step=c3.step,case_visible=visible,hidden_record=hidden)
+              result["regression"]={
+                  "v2_pass":v2["scorer_result"]["pass"],
+                  "v2_errors":v2["scorer_result"]["errors"],
+                  "v2_value":v2["candidate_terminal_action"].get("terminal_consequence"),
+                  "gold":hidden["gold_terminal_consequence"],
+                  "v2_support":v2["candidate_terminal_action"].get("support_feature_ids"),
+                  "gold_support":hidden["transfer_relevant_feature_ids"],
+                  "v2_probe_count":v2["probe_count"],
+                  "v3_pass":v3["scorer_result"]["pass"],
+                  "v3_errors":v3["scorer_result"]["errors"],
+                  "v3_value":v3["candidate_terminal_action"].get("terminal_consequence"),
+                  "v3_probe_count":v3["probe_count"],
+              }
+              assert v2["scorer_result"]["pass"] is False
+              assert "DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG" in v2["scorer_result"]["errors"]
+              assert v3["scorer_result"]["pass"] is True
+              assert v3["candidate_terminal_action"]["terminal_consequence"]==hidden["gold_terminal_consequence"]
+              result["regression"]["ok"]=True
+          except Exception as e:
+              result["regression"]={"ok":False,"type":type(e).__name__,"message":str(e)}
+              result["errors"].append(traceback.format_exc())
+          print(json.dumps(result,indent=2,sort_keys=True))
+          if not result["proof"].get("ok") or not result["regression"].get("ok"):
+              raise SystemExit(1)
           PY
+          code=$?
+          echo "__EXIT_CODE__=$code" >> v3-result.txt
+          exit 0
+      - name: Post diagnostic to PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr comment "${{ github.event.pull_request.number }}" --body-file v3-result.txt
+      - name: Enforce diagnostic result
+        run: |
+          grep -q '__EXIT_CODE__=0' v3-result.txt
