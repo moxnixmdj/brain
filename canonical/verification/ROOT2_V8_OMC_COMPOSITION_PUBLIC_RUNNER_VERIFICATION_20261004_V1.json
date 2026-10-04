@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V8_OMC_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__COMPOSED_V8_FINANCE_PLUS_OMC__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subject": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V8.json",
+    "git_blob_sha": "1f86fe713ed22d46d8ed339857e77de339567df8",
+    "active_parent_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V7.json",
+    "active_parent_git_blob_sha": "35e8b578aca1290bcf469d6350ae085ba8a86c64"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1632,
+    "verifier_head_sha": "a1cea1bdb234d50b7c979ef1395984ec3c0abf4e",
+    "verifier_merge_commit": "78d9e23cb6ebadc511261210af140e3fb14d1028",
+    "workflow_run_id": 37172271413,
+    "workflow_job_id": 111347482431,
+    "conclusion": "success"
+  },
+  "verified": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "v7_exact_state_preserved": true,
+    "finance_custom_function_delta_preserved": true,
+    "omc_tb4_documentary_delta_present": true,
+    "buildkite_candidate_preserved": true,
+    "omc_candidate_added": true,
+    "circleci_deleted_state_preserved": true,
+    "nominal_16gb_not_treated_as_16384mb_usable": true,
+    "omc_runtime_preflight_required": true,
+    "omc_attainability_recompile_required": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
