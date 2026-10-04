@@ -32,9 +32,17 @@ REPEAT_MARKER = (
     " before repeating the request; 2. the request you need to repeat"
     " does not include this sentence)"
 )
-BASE = (
+SOURCE = (
     "The source text describes a verified system that remains stable under "
-    "careful testing. Please summarize the provided source text"
+    "careful testing."
+)
+TASK_PROMPT = "Please summarize based on the sentences provided."
+HISTORICAL_PROMPT = (
+    "The following are the beginning sentences of a news article from the Guardian.\n"
+    "-------\n"
+    "{source}\n"
+    "-------\n"
+    "{task} {constraints}"
 )
 
 
@@ -72,7 +80,11 @@ def _render_case(ids: tuple[str, ...], registry, order_tag: str) -> tuple[str, l
         records.append({"instruction_id": iid, "kwargs": dict(kwargs)})
         descriptions.append(desc)
 
-    prompt = BASE + " " + " ".join(descriptions)
+    prompt = HISTORICAL_PROMPT.format(
+        source=SOURCE,
+        task=TASK_PROMPT,
+        constraints=" ".join(descriptions),
+    )
     if "combination:repeat_prompt" in order:
         prefix = prompt.split(REPEAT_MARKER, 1)[0]
         for record in records:
