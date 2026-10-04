@@ -13,13 +13,30 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  syntax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile changed Python
+        run: |
+          python -m py_compile canonical/runtime/livebench_legacy_repeat_prompt_self_detector_v1.py
+          python -m py_compile canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py
+          python -m py_compile canonical/tests/test_livebench_legacy_repeat_prompt_self_detector_v1.py
+
+  unit-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit and compiler integration tests
+        run: python -m pytest -q canonical/tests/test_livebench_legacy_repeat_prompt_self_detector_v1.py
+
+  public-corpus:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Unit tests
-        run: python -m pytest -q canonical/tests/test_livebench_legacy_repeat_prompt_self_detector_v1.py
       - name: Fetch pinned public Google IFEval corpus
         shell: bash
         run: |
@@ -27,7 +44,7 @@ jobs:
           url="https://raw.githubusercontent.com/google-research/google-research/e49bbfe381c9c0e564b937f1c4e163a2273c65cc/instruction_following_eval/data/input_data.jsonl"
           curl -fsSL "$url" -o /tmp/ifeval_input_data.jsonl
           test "$(git hash-object /tmp/ifeval_input_data.jsonl)" = "cbe52f6eecf3986fdac745b4acba4da1408eb146"
-      - name: Exact public repeat_prompt recovery audit
+      - name: Exact 41 of 41 repeat_prompt recovery
         run: |
           python - <<'PY'
           import json
