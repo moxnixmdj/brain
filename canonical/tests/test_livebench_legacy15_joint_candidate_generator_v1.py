@@ -80,3 +80,47 @@ def test_conflicting_mode_fails_closed():
     ])
     assert out["status"] == "FAIL_CLOSED"
     assert out["candidates"] == []
+
+
+def test_word_lower_bound_does_not_count_deleted_tail_sentinel():
+    out = g.generate([
+        c("length_constraints:number_words", num_words=5, relation="at least"),
+    ])
+    assert out["status"] == "PASS_CANDIDATES"
+    assert out["candidates"]
+    assert all(g._word_count(x) >= 5 for x in out["candidates"])
+
+
+def test_exact_star_paragraphs_keep_end_phrase_at_true_global_end():
+    end = "Any other questions?"
+    out = g.generate([
+        c("length_constraints:number_paragraphs", num_paragraphs=3),
+        c("startend:end_checker", end_phrase=end),
+        c("startend:quotation"),
+    ])
+    assert out["status"] == "PASS_CANDIDATES"
+    assert out["candidates"]
+    for x in out["candidates"]:
+        assert x.startswith('"') and x.endswith('"')
+        assert x.strip().strip('"').lower().endswith(end.lower())
+        assert len(__import__("re").split(r"\s?\*\*\*\s?", x)) == 3
+
+
+def test_nth_paragraph_shape_keeps_global_tail_without_extra_paragraph():
+    end = "Is there anything else I can help with?"
+    out = g.generate([
+        c(
+            "length_constraints:nth_paragraph_first_word",
+            num_paragraphs=3,
+            nth_paragraph=2,
+            first_word="alpha",
+        ),
+        c("startend:end_checker", end_phrase=end),
+    ])
+    assert out["status"] == "PASS_CANDIDATES"
+    assert out["candidates"]
+    for x in out["candidates"]:
+        paragraphs = x.split("\n\n")
+        assert len([p for p in paragraphs if p.strip()]) == 3
+        assert paragraphs[1].strip().split()[0].lower().startswith("alpha")
+        assert x.lower().endswith(end.lower())
