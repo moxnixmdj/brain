@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V10_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__V10_COMPOSITION_INDEPENDENT_PASS__POINTER_PROJECTION_REVERIFY_REQUIRED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V10.json",
+  "frontier_git_blob_sha": "2012926814d0d06405da56da64e589b06fef1756",
+  "verification_path": "canonical/verification/ROOT2_V10_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+  "verification_git_blob_sha": "226832c5e9d5f4121f26d93bd645ed51dce474fe",
+  "effects": [
+    "SUPERSEDE_ACTIVE_ROOT2_V8_FRONTIER_FOR_SCHEDULING_IF_POINTER_PROJECTION_VERIFIED",
+    "PRESERVE_ACTIVE_EXTERNAL_FACT_ACQUISITION_OVERLAY",
+    "PRESERVE_ACTIVE_PRIMARY_SOURCE_SEARCH_DELETIONS",
+    "PRESERVE_FINANCE_V9_CUSTOM_ROUTE_DORMANCY",
+    "ADD_VERIFIED_OMC_CLOUD_DOCUMENTARY_TB4_CARRIER_BESIDE_BUILDKITE",
+    "PRESERVE_ROOT1_ROOT3_ACCEPTANCE_COUNTS_ACCOUNTING_AND_FRESH_REALITY_BLOCK"
+  ],
+  "authority": {
+    "scheduling": true,
+    "effective_scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "activation_condition": "INDEPENDENT_POINTER_PROJECTION_PASS_AND_TERMINAL_ROOT_MEASUREMENT_SURFACES_BIND_THIS_EXACT_FRONTIER_VERIFICATION_AND_ACTIVATION_WHILE_PRESERVING_ACTIVE_EXTERNAL_OVERLAYS",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
