@@ -45,6 +45,19 @@ SUPPORTED_PUBLIC_CHECKER_CLASSES = {
     "BulletListChecker",
     "HighlightSectionChecker",
     "PostscriptChecker",
+    "IncludeKeywordChecker",
+    "ConsonantClusterChecker",
+    "SubBulletPointsChecker",
+    "StopWordPercentageChecker",
+    "ThreeVowelChecker",
+    "UniqueWordCountChecker",
+    "IndentStairsChecker",
+    "ItalicsThesisChecker",
+    "SomeBulletPointsChecker",
+    "NestedParenthesesChecker",
+    "NestedQuotesChecker",
+    "PronounCountChecker",
+    "NoConsecutiveFirstLetterChecker",
 }
 
 
@@ -346,6 +359,156 @@ def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
         else:
             valid = bool(re.search(r"\s*" + re.escape(postscript.lower()) + r".*$", low, flags=re.MULTILINE))
         matches.append({"checker": "legacy:PostscriptChecker", "response": response, "valid": valid})
+
+
+    for m in re.finditer(
+        r'The response must include keyword "([^"\n]+)" in the (\d+)-th sentence\.',
+        prompt,
+        re.I,
+    ):
+        keyword, n = m.group(1), int(m.group(2))
+        if n < 1:
+            continue
+        response = " ".join(
+            [f"Plain{i + 1}." for i in range(n - 1)] + [f"{keyword}."]
+        )
+        matches.append({
+            "checker": "modern:IncludeKeywordChecker",
+            "response": response,
+            "valid": keyword.lower() in response.split(".")[n - 1].lower(),
+        })
+
+    if (
+        "Ensure each word in your response has at least one consonant cluster "
+        "(two or more consonants together)."
+    ) in prompt:
+        response = "crypt"
+        matches.append({
+            "checker": "modern:ConsonantClusterChecker",
+            "response": response,
+            "valid": True,
+        })
+
+    if (
+        "Your response must include newline-separated bullet points denoted by * "
+        "and at least one sub-bullet point denoted by - for each bullet point."
+    ) in prompt:
+        response = "* Alpha\n- Beta"
+        matches.append({
+            "checker": "modern:SubBulletPointsChecker",
+            "response": response,
+            "valid": True,
+        })
+
+    for m in re.finditer(
+        r"Ensure that stop words constitute no more than (\d+)% of the total words in your response\.",
+        prompt,
+        re.I,
+    ):
+        percentage = int(m.group(1))
+        if not 0 <= percentage <= 100:
+            continue
+        response = "crypt"
+        matches.append({
+            "checker": "modern:StopWordPercentageChecker",
+            "response": response,
+            "valid": True,
+        })
+
+    if "Your response must contain at most three different vowels." in prompt:
+        response = "crypt"
+        matches.append({
+            "checker": "modern:ThreeVowelChecker",
+            "response": response,
+            "valid": True,
+        })
+
+    for m in re.finditer(r"Use at least (\d+) unique words in the response\.", prompt, re.I):
+        n = int(m.group(1))
+        if n < 1:
+            continue
+        response = " ".join(f"Token{i + 1}" for i in range(n))
+        normalized = {
+            w.lower().strip(".,!?;:'\"()[]{}")
+            for w in response.split()
+        }
+        matches.append({
+            "checker": "modern:UniqueWordCountChecker",
+            "response": response,
+            "valid": len(normalized) >= n,
+        })
+
+    if "Create stairs by incrementally indenting each new line." in prompt:
+        response = "Alpha\n Beta"
+        matches.append({
+            "checker": "modern:IndentStairsChecker",
+            "response": response,
+            "valid": True,
+        })
+
+    if (
+        "Each section must begin with a thesis statement in italics, "
+        "use HTML to indicate the italics."
+    ) in prompt:
+        response = "<i>Alpha</i> Beta"
+        matches.append({
+            "checker": "modern:ItalicsThesisChecker",
+            "response": response,
+            "valid": True,
+        })
+
+    if (
+        "Your answer must contain at least two sentences ending in a period "
+        "followed by at least two newline-separated bullet points denoted by *."
+    ) in prompt:
+        response = "Alpha. Beta.\n* Gamma\n* Delta"
+        matches.append({
+            "checker": "modern:SomeBulletPointsChecker",
+            "response": response,
+            "valid": True,
+        })
+
+    if "Nest parentheses (and [brackets {and braces}]) at least 5 levels deep." in prompt:
+        response = "([{({x})}])"
+        matches.append({
+            "checker": "modern:NestedParenthesesChecker",
+            "response": response,
+            "valid": True,
+        })
+
+    if (
+        "Include quotes within quotes within quotes, at least 3 levels deep, "
+        "alternating between double quotes and single quotes."
+    ) in prompt:
+        response = "\"'\"x\"'\""
+        matches.append({
+            "checker": "modern:NestedQuotesChecker",
+            "response": response,
+            "valid": True,
+        })
+
+    for m in re.finditer(
+        r"The response should include at least (\d+) personal pronouns\.",
+        prompt,
+        re.I,
+    ):
+        n = int(m.group(1))
+        if n < 1:
+            continue
+        response = " ".join(["I"] * n)
+        matches.append({
+            "checker": "modern:PronounCountChecker",
+            "response": response,
+            "valid": True,
+        })
+
+    if "No two consecutive words can share the same first letter." in prompt:
+        response = "Alpha Beta"
+        matches.append({
+            "checker": "modern:NoConsecutiveFirstLetterChecker",
+            "response": response,
+            "valid": True,
+        })
 
     return matches
 
