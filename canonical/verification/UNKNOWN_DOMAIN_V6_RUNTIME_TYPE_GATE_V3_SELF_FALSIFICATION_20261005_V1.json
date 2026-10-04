@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_RUNTIME_TYPE_GATE_V3_SELF_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FALSIFIED__V3_GATE_BINDS_SUBJECT_THAT_DOES_NOT_SATISFY_ITS_OWN_NON_SPOOFABLE_BEACON_PROPERTY__BOUND_PROOF_SOURCE_MALFORMED__ZERO_ADDITIONAL_ACCEPTANCE_DELTA",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "current_acceptance_state": "12_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_ZERO_ATOMIC_CREDIT",
+  "falsified_gate": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_RUNTIME_TYPE_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V3.json",
+    "git_blob_sha": "15605b3a0734a23422faeb60f040643b4e78f7f2",
+    "frozen_branch_head": "b77fdde005c6f950d666e770cd747b46911c8ead"
+  },
+  "exact_contradictions": [
+    {
+      "property_claim": "BEACON_GATE_USES_ISSUBCLASS_OF_ACTUAL_TYPE_AGAINST_STR",
+      "bound_generator_blob": "d3b5e7279ca1068d1532046f35e6752107e42e24",
+      "observed_source": "if not isinstance(beacon,str) or len(str.strip(beacon))<16:",
+      "consequence": "THE_EXACT_BOUND_GENERATOR_STILL_USES_SPOOFABLE_ISINSTANCE_FOR_THE_BEACON_GATE"
+    },
+    {
+      "property_claim": "FAKE_OBJECT_LEVEL___CLASS___STR_AND_BYTES_PROXIES_ARE_REJECTED",
+      "bound_test_blob": "e2ade4b713bb8103ae577de35a35b1caa03bc5a9",
+      "test_expectation": "FAKE_STR_PROXY_CALL_TO_G5__CANONICAL_BEACON_RAISES_UNKNOWN_DOMAIN_GENERATOR_ERROR",
+      "bound_generator_behavior": "FAKE_STR_PROXY_PASSES_ISINSTANCE_GATE_THEN_BASE_STR_STRIP_DESCRIPTOR_RAISES_TYPE_ERROR",
+      "consequence": "THE_BOUND_TEST_AND_BOUND_GENERATOR_ARE_MUTUALLY_INCONSISTENT__V3_CANNOT_PASS_ITS_REQUIRED_PROPERTY"
+    },
+    {
+      "property_claim": "REPAIRED_V6_PROOF_EXECUTES_AND_RETURNS_EXACT_REQUIRED_STATUS",
+      "bound_proof_blob": "1afe856f327d52c05c0be3b828b2602f0015f389",
+      "observed_source_fragment": "\"genuine_runtime_subclass_override_hooks_bypassed\":True,\\\\n        \"fake_class_proxy_spoof_rejected\":True,",
+      "consequence": "THE_BOUND_PYTHON_SOURCE_CONTAINS_A_LITERAL_BACKSLASH_N_TOKEN_OUTSIDE_A_STRING_AT_THE_LOAD_BEARING_RETURN_MAPPING__IT_IS_NOT_A_VALID_EXECUTABLE_PROOF_SOURCE"
+    }
+  ],
+  "verdict": "V3_MUST_NOT_AUTHORIZE_REPROMOTION_REGARDLESS_OF_ANY_WORKFLOW_LABEL_OR_STALE_RECEIPT",
+  "required_successor": [
+    "BIND_A_GENERATOR_WHOSE_BEACON_AND_SECRET_GATES_BOTH_USE_ISSUBCLASS_OF_ACTUAL_TYPE",
+    "BIND_AN_EXECUTABLE_PROOF_WITHOUT_THE_MALFORMED_LITERAL_ESCAPE",
+    "REGRESS_GENUINE_HOSTILE_SUBCLASSES_AND_FAKE___CLASS___PROXIES",
+    "FREEZE_NEW_GATE_BEFORE_INDEPENDENT_OUTCOME",
+    "VERIFY_EXACT_SUCCESSOR_BYTES_ON_PYTHON_3_12_10_AND_3_13",
+    "REQUIRE_IMMUTABLE_MAIN_VERIFIER_EXECUTION_BEFORE_REPROMOTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
