@@ -63,6 +63,11 @@ def admit_probe(*,environment_id:str,goal_id:str,candidates:Sequence[Mapping[str
         raise ExperimentSynthesisError("OUTCOME_MAP_REQUIRED")
     if ids-set(map(str,outcomes.keys())):
         raise ExperimentSynthesisError("OUTCOME_MAP_INCOMPLETE")
+    normalized_outcomes={str(k):str(v) for k,v in outcomes.items()}
+    for c in cs:
+        predicted=c["predictions"].get(pid)
+        if predicted is not None and predicted!=normalized_outcomes[c["id"]]:
+            raise ExperimentSynthesisError("MECHANISM_AND_OUTCOME_MODEL_DISAGREE:"+c["id"])
 
     safety=probe.get("safety_receipt")
     if not isinstance(safety,Mapping):
@@ -95,7 +100,6 @@ def admit_probe(*,environment_id:str,goal_id:str,candidates:Sequence[Mapping[str
         raise ExperimentSynthesisError("OUTCOME_MODEL_SCOPE_MISMATCH")
     if model.get("mechanism_class_sha256")!=_candidate_digest(cs):
         raise ExperimentSynthesisError("MECHANISM_CLASS_DIGEST_MISMATCH")
-    normalized_outcomes={str(k):str(v) for k,v in outcomes.items()}
     if model.get("outcome_map_sha256")!=outcome_digest(probe_id=pid,outcomes=normalized_outcomes):
         raise ExperimentSynthesisError("OUTCOME_MAP_DIGEST_MISMATCH")
 
