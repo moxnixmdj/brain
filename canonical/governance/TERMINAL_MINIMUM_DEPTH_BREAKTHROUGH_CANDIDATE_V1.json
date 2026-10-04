@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_MINIMUM_DEPTH_BREAKTHROUGH_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT__NO_EXECUTION_OR_PROMOTION_OR_FRESH_REALITY_AUTHORITY",
+  "compiled_from_main": "e6b44874f73bf84a65615935e0ba4346f8b3f202",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_live_state_at_compile": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gaps": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "terminal": false
+  },
+  "objective": "Reduce terminal dependency depth without weakening frozen acceptance semantics by racing stronger zero-reality proof replacements against the current Root2 V11 critical path and separately proving anti-leakage precommit isolation prerequisites.",
+  "components": {
+    "acceptance_proof_replacement_planner": {
+      "path": "canonical/runtime/acceptance_proof_replacement_planner_v1.py",
+      "git_blob_sha": "ebd9c74ef1b7dcbabd60a3368f6e070ed1e21df6",
+      "test_path": "canonical/tests/test_acceptance_proof_replacement_planner_v1.py",
+      "test_git_blob_sha": "2d574752b378133f69f902ed95a35dce7c0d8503",
+      "role": "COMPOSE_EXISTING_EXPLICIT_BINDING_AND_SCOPE_SAFE_IMPLICATION_ENGINES__RETURN_PROVED_REPLACEMENT_CANDIDATES_OR_SMALLEST_PROOF_ATTEMPT_FRONTIER",
+      "proof_precedence": [
+        "FORMAL_IMPLICATION",
+        "OBJECTIVE_CEILING",
+        "EXHAUSTIVE_FINITE_UNIVERSE",
+        "VERIFIED_SCOPE_SUPERSET",
+        "METAMORPHIC_INVARIANT",
+        "EXISTING_COMPARATOR_RECEIPT",
+        "MATCHED_EMPIRICAL"
+      ],
+      "hard_nonclaim": "PLANNER_DOES_NOT_DISCOVER_OR_ASSERT_SEMANTIC_EQUIVALENCE_BY_NAME_PROSE_OR_SIMILARITY_AND_GRANTS_ZERO_ACCEPTANCE_CREDIT"
+    },
+    "precommit_evaluation_isolation_gate": {
+      "path": "canonical/runtime/precommit_evaluation_isolation_gate_v1.py",
+      "git_blob_sha": "00bcddd1aff54db8cdcf53918bf3179d45ee3df8",
+      "test_path": "canonical/tests/test_precommit_evaluation_isolation_gate_v1.py",
+      "test_git_blob_sha": "ffbba57e3d093f8077c803f32a84cecac7479ec0",
+      "role": "PROVE_CRYPTOGRAPHIC_PRECOMMIT_AND_ANTI_LEAKAGE_PRECONDITIONS_FOR_A_FROZEN_EVALUATION_CAPSULE",
+      "hard_nonclaim": "PASS_DOES_NOT_PROVE_BENCHMARK_EQUIVALENCE_DOES_NOT_OVERRIDE_GLOBAL_FRESH_REALITY_GATE_AND_DOES_NOT_AUTHORIZE_EXECUTION"
+    }
+  },
+  "critical_path_semantics": {
+    "current_authority_preserved": "ROOT2_V11_PLUS_ADAPTIVE_V3",
+    "root3_preserved": "ROOT3_V2_EVENT_DRIVEN_ZERO_CURRENT_RUNNABLE_ACTIONS",
+    "fresh_reality_preserved": "BLOCKED_UNTIL_EXISTING_ZERO_REALITY_FIXED_POINT_AND_SEPARATE_EXPLICIT_AUTHORITY",
+    "account_and_owner_facts_preserved": true,
+    "deleted_search_classes_preserved": true,
+    "stronger_proof_rule": "A_REPLACEMENT_CAN_DELETE_AN_EXISTING_BENCHMARK_ROUTE_ONLY_AFTER_EXPLICIT_INDEPENDENT_CONTENT_ADDRESSED_EXACT_OR_STRONGER_IMPLICATION_IS_PROVED",
+    "precommit_rule": "ISOLATION_GATE_PASS_CAN_ONLY_CREATE_A_CANDIDATE_ELIGIBILITY_FACT__A_SEPARATE_BENCHMARK_COMPARABILITY_AND_GLOBAL_AUTHORITY_DECISION_IS_REQUIRED"
+  },
+  "minimum_depth_race": [
+    "CURRENT_ROOT2_V11_SELF_SERVICE_AND_PROTOCOL_FACTS",
+    "OWNER_RESULTS_AS_EVENT_DRIVEN_PARALLEL_INPUTS",
+    "STRONGER_PROOF_REPLACEMENT_ATTEMPTS",
+    "PRECOMMIT_ISOLATION_PRECONDITION_PROOF"
+  ],
+  "recompute_rule": "AFTER_EVERY_VERIFIED_DELTA_RECOMPUTE_TERMINAL_CLOSURE_AND_DELETE_ONLY_PROVED_ZERO_PROBABILITY_OR_STRICTLY_DOMINATED_ACTIONS",
+  "verification_required": [
+    "RUN_BOTH_NEW_UNIT_TEST_MODULES_IN_ISOLATION",
+    "CONFIRM_NO_ACCEPTANCE_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY_CAN_BE_GRANTED_BY_EITHER COMPONENT",
+    "CONFIRM_PROOF_REPLACEMENT_TARGET_IDENTITY_CANNOT_DRIFT",
+    "CONFIRM_PRECOMMIT_PASS_REQUIRES_ALL_FROZEN_DIGESTS_INDEPENDENT_RECEIPTS_AND_ANTI_LEAKAGE_CONTROLS",
+    "CONFIRM_CURRENT_5_OF_19__12_OF_38_COUNTS_UNCHANGED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
