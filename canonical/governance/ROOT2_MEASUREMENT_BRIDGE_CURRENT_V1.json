@@ -39,7 +39,7 @@
     "root2_partition": "16_ROOT2_ONLY__3_MIXED__19_TOUCHING",
     "zero_reality_frontier_bound": true
   },
-  "next": "EXECUTE_ONLY_CURRENT_ROOT2_V10_ZERO_REALITY_FRONTIER__V10_EXTERNAL_FACT_ROUTING_ACTIVE__PRIMARY_SOURCE_DELETIONS_ACTIVE__NO_FRESH_SCORE_BEFORE_FIXED_POINT",
+  "next": "EXECUTE_ONLY_CURRENT_ROOT2_V10_ZERO_REALITY_FRONTIER__FINANCE_INDEX_PUBLIC_TRANSFORM_SEARCH_STOP_POINTER_REVERIFY_PENDING__NO_FRESH_SCORE_BEFORE_FIXED_POINT",
   "incremental_spend_usd": 0,
   "terminal_cases_consumed": 0,
   "acceptance_credit_delta": 0,
@@ -58,6 +58,16 @@
     "frontier_verification_git_blob_sha": "226832c5e9d5f4121f26d93bd645ed51dce474fe",
     "effective_scheduling_authority": true,
     "frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V10_FINAL_ACTIVATION_V1.json",
-    "frontier_activation_git_blob_sha": "f5eda02fcc104bc8a5e13a82bfc8ec3d9515dcb2"
+    "frontier_activation_git_blob_sha": "f5eda02fcc104bc8a5e13a82bfc8ec3d9515dcb2",
+    "finance_index_public_transform_saturation": {
+      "subject_path": "canonical/governance/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_20261004_V1.json",
+      "subject_git_blob_sha": "2a831b8632b18fe9e10ed423f131b6ae93d99b77",
+      "verification_path": "canonical/verification/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "8aea6757479980c9f2e2538a4f2651ad23653c10",
+      "activation_path": "canonical/governance/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "d286b55e361194a77acd21def918d12e07227964",
+      "status": "CANDIDATE__INDEPENDENT_SUBJECT_PASS__POINTER_PROJECTION_REVERIFY_PENDING__ZERO_CREDIT",
+      "effective_scheduling_authority": false
+    }
   }
 }
