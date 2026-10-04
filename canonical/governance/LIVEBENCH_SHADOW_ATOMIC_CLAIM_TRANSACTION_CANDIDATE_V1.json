@@ -5,6 +5,24 @@
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "benchmark_id": "LIVEBENCH_IF_2026_06_25",
   "objective": "Collapse the final LiveBench shadow preflight-to-claim boundary so atomic Git-ref creation is the sole uniqueness linearization point and no prior claim-ref absence read is required.",
+  "subjects": {
+    "point_of_use_preflight": {
+      "path": "canonical/runtime/livebench_shadow_point_of_use_preflight_v1.py",
+      "git_blob_sha": "f1b72a36576d5b3fd0f5b8a5b73b1b67526f8b7f"
+    },
+    "point_of_use_preflight_tests": {
+      "path": "canonical/tests/test_livebench_shadow_point_of_use_preflight_v1.py",
+      "git_blob_sha": "1f32981a2306be6631cf69ec6897d8adbd0a641d"
+    },
+    "atomic_transaction": {
+      "path": "canonical/runtime/livebench_shadow_atomic_claim_transaction_v1.py",
+      "git_blob_sha": "1e99b427cd24d1cd5b277aeb9ca4433af9a267b4"
+    },
+    "atomic_transaction_tests": {
+      "path": "canonical/tests/test_livebench_shadow_atomic_claim_transaction_v1.py",
+      "git_blob_sha": "4364afbd8aa9bfdd4079f944d2548836d9b8daff"
+    }
+  },
   "changes": [
     "REMOVE_CLAIM_REF_PRIOR_ABSENCE_READ_FROM_POINT_OF_USE_PREFLIGHT",
     "BIND_CLAIM_TO_EXACT_PREFLIGHT_INPUT_DIGEST",
