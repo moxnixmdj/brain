@@ -5,6 +5,7 @@ on:
     paths:
       - 'canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_PLAN_V1.json'
       - 'canonical/governance/ARENA_COMPARATOR_PUBLIC_SEMANTICS_RECONCILIATION_V1.json'
+      - 'canonical/governance/ROOT2_BLIND_THRESHOLD_RECEIPT_ACTIVATION_V1.json'
       - 'canonical/runtime/terminal_minimum_causal_depth_guard_v1.py'
       - 'canonical/tests/test_terminal_minimum_causal_depth_guard_v1.py'
       - '.github/workflows/verify-terminal-minimum-causal-depth-v1.yml'
