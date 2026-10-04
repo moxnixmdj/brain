@@ -38,17 +38,34 @@ jobs:
           git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/livebench
           git -C /tmp/livebench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
 
-      - name: Run 7424-case active15 exact audit
+      - name: Run 7424-case active15 exact audit and preserve diagnostics
+        shell: bash
         run: |
           mkdir -p /tmp/receipt
-          python canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py \
-            --livebench-root /tmp/livebench \
-            --output /tmp/receipt/livebench-legacy15-end2end-exact-v2.json
+          set +e
+          set -o pipefail
+          python canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py             --livebench-root /tmp/livebench             --output /tmp/receipt/livebench-legacy15-end2end-exact-v2.json             2>&1 | tee /tmp/receipt/audit.log
+          status=${PIPESTATUS[0]}
+          printf '%s\n' "$status" > /tmp/receipt/exit_code.txt
+          {
+            echo "python=$(python --version 2>&1)"
+            echo "runner_os=${RUNNER_OS:-unknown}"
+            echo "runner_arch=${RUNNER_ARCH:-unknown}"
+            echo "head_sha=${GITHUB_SHA:-unknown}"
+          } > /tmp/receipt/environment.txt
+          exit 0
 
-      - name: Upload exact audit receipt
+      - name: Upload exact audit diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: livebench-legacy15-end2end-exact-v2-macos
-          path: /tmp/receipt/livebench-legacy15-end2end-exact-v2.json
+          path: /tmp/receipt
           if-no-files-found: error
+
+      - name: Enforce audit result after diagnostics upload
+        if: always()
+        shell: bash
+        run: |
+          test -f /tmp/receipt/exit_code.txt
+          test "$(cat /tmp/receipt/exit_code.txt)" = "0"
