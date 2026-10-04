@@ -41,7 +41,7 @@ def _stem(token:str)->str:
         return t[:-3]+"y"
     if len(t)>5 and t.endswith("ing"):
         return t[:-3]
-    if len(t)>4 and t.endswith("es"):
+    if len(t)>4 and (t.endswith("ses") or t.endswith("xes") or t.endswith("zes") or t.endswith("ches") or t.endswith("shes")):
         return t[:-2]
     if len(t)>4 and t.endswith("s"):
         return t[:-1]
