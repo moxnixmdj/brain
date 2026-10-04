@@ -49,6 +49,16 @@ def compile_constraints(instruction: str) -> ConstraintSet:
         raise ConstraintError("INSTRUCTION_REQUIRED")
 
     exact = _quoted(r'(?:respond|reply|answer|output|write|say)\s+(?:with\s+)?exactly\s+{Q}', text)
+    if exact is None:
+        # Safe unquoted exact-literal route: one atom only. Sentence-final
+        # punctuation is syntax, not part of the requested response.
+        m = re.fullmatch(
+            r'(?:respond|reply|answer|output|write|say)\s+(?:with\s+)?exactly\s+([A-Za-z0-9_][A-Za-z0-9_:-]{0,255})[.!?]?',
+            text,
+            flags=re.I,
+        )
+        if m:
+            exact = m.group(1)
     prefix = _quoted(r'(?:response|answer|reply)\s+(?:must\s+)?(?:start|begin)\s+with\s+{Q}', text)
     suffix = _quoted(r'(?:response|answer|reply)\s+(?:must\s+)?(?:end|finish)\s+with\s+{Q}', text)
 
