@@ -123,6 +123,27 @@
           "dormant_fact_count": 1,
           "low_value_support_waits": 0,
           "fresh_reality_authority": false
+        },
+        "primary_source_search_deletions": {
+          "activation_path": "canonical/governance/ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_ACTIVATION_V1.json",
+          "activation_git_blob_sha": "8a5eca1f9426ac015ad38c4c61bcbf8dc7eac5cb",
+          "activation_verification_path": "canonical/verification/ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+          "activation_verification_git_blob_sha": "0105aba61eb58ea2ac069f563999031cabf469fc",
+          "source_refresh_path": "canonical/governance/ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_20261004_V1.json",
+          "source_refresh_git_blob_sha": "85f2a5de5885d158e08db6cceebf0e30cf5d5bb0",
+          "source_verification_path": "canonical/verification/ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+          "source_verification_git_blob_sha": "a0f46fe3b577c91686b1b8cc5b2436b35556a708",
+          "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__SCHEDULING_DELETIONS_ONLY__ZERO_CREDIT",
+          "scheduler_deletion_count": 6,
+          "deleted": [
+            "HLE_EXISTENCE_AND_GENERIC_GATING_SEARCH",
+            "CHARTOGRAPHY_GENERIC_FREE_TIER_AND_JUDGE_IDENTITY_SEARCH",
+            "OSWORLD_V21_RELEASE_IDENTITY_108_TASK_AND_SELF_HOST_REQUIREMENT_SEARCH",
+            "BUILDKITE_LARGE_AS_DURABLE_FREE_PLAN_CARRIER",
+            "AUTOMATIONBENCH_PUBLIC600_PRIVATE_EQUIVALENCE_REPEAT_SEARCH",
+            "CURSORBENCH_COMPARATOR_DRIFT_SEARCH_WHILE_CURRENT_OWNER_PAGE_REMAINS_57_8"
+          ],
+          "fresh_reality_authority": false
         }
       }
     },
@@ -157,7 +178,9 @@
     "root2_effective_scheduling_authority": false,
     "root2_external_fact_acquisition_overlay": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_ACTIVATION_V1.json",
     "low_value_free_tier_trial_quota_support_outreach_forbidden": true,
-    "self_service_facts_are_owner_waits": false
+    "self_service_facts_are_owner_waits": false,
+    "root2_primary_source_search_deletions": "canonical/governance/ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_ACTIVATION_V1.json",
+    "repeat_search_for_deleted_primary_source_classes_forbidden": true
   },
   "accounting": {
     "acceptance_credit_delta": 0,
