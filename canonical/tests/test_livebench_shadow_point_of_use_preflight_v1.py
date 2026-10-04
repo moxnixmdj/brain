@@ -16,7 +16,6 @@ def receipt():
     return {
       "lease_digest_sha256":digest,
       "claim_ref":expected_claim_ref(digest),
-      "claim_ref_absent_observed":True,
       "case_reveal_has_occurred":False,
       "execution_has_started":False,
       "evaluation_output_exists":False,
@@ -50,7 +49,19 @@ def test_exact_zero_case_preflight_passes_without_reveal_authority():
     assert out["case_reveal_authority"] is False
     assert out["shadow_collection_authority"] is False
     assert out["one_use_claim_still_required"] is True
+    assert out["claim_ref_absence_precheck_required"] is False
     assert out["acceptance_credit_authorized"] is False
+
+def test_claim_absence_precheck_is_not_required():
+    r=receipt()
+    assert "claim_ref_absent_observed" not in r
+    out=verify_point_of_use_preflight(plan(),r)
+    assert out["point_of_use_preflight_pass"] is True
+
+def test_legacy_absence_observation_does_not_control_readiness():
+    r=receipt(); r["claim_ref_absent_observed"]=False
+    out=verify_point_of_use_preflight(plan(),r)
+    assert out["point_of_use_preflight_pass"] is True
 
 def test_claim_ref_must_be_digest_derived():
     r=receipt(); r["claim_ref"]="refs/heads/shadow-claims/wrong"
