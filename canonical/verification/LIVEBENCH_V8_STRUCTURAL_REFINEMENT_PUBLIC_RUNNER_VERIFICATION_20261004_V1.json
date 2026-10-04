@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V8_STRUCTURAL_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ADVERSARIAL_REDACTION_AND_V6_EQUIVALENT_PRECASE_ORDER__ZERO_CASES__ZERO_CREDIT",
+  "candidate": {
+    "path": "canonical/governance/LIVEBENCH_V8_STRUCTURAL_REFINEMENT_CANDIDATE_V1.json",
+    "git_blob_sha": "301fe04b00c7c7e5073753f839a57572524f5cb5"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "diagnose/livebench-v8-structural-refinement-20261004",
+    "trigger_commit": "e1059a54a64e2ba948a2b3c517215b94c862311d",
+    "workflow_run_id": 37193989878,
+    "workflow_job_id": 111411914804,
+    "conclusion": "success"
+  },
+  "exact_subjects": {
+    "classifier_git_blob_sha": "0c48d463989f8351e3b0a502a174b59ff391ffe8",
+    "diagnostic_git_blob_sha": "bc5bfd7d791b1343cbcf4d09d8f41c6f73ed9f68",
+    "verifier_git_blob_sha": "d5c9063c98a80efcd40dcb79f028fa2e12ba9586",
+    "base_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e"
+  },
+  "verified": {
+    "synthetic_adversarial_cases": 6,
+    "secret_dynamic_detail_leaks": 0,
+    "replay_prefix_limit": 72,
+    "new_case_exposure": false,
+    "v6_install_scorer_deps_before_dataset_read": true,
+    "v6_prepare_nltk_before_dataset_read": true,
+    "prompt_response_case_id_raw_exception_output_forbidden": true,
+    "terminal_cases_consumed": 0
+  },
+  "semantic_effect": [
+    "AUTHORIZE_CONSIDERATION_OF_SEPARATE_ONE_USE_V8_ACTIVATION",
+    "DOES_NOT_EXECUTE_REPLAY",
+    "DOES_NOT_EXPOSE_CASE_73_PLUS",
+    "DOES_NOT_GRANT_ACCEPTANCE_OR_PROMOTION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
