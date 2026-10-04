@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_HOLDOUT_FRESHNESS_AUDIT_V1",
+  "date": "2026-10-04",
+  "status": "PASS__HOLDOUT_TARGET_IDENTITIES_ABSENT_FROM_V11_TO_V18_ROUTE_TUNING_AND_CALIBRATION",
+  "audited_training_artifacts": {
+    "canonical/runtime/retrieval_live_provider_arena_v11.py": "0e28128d3f67d33ce4058667609e4d513657af55",
+    "canonical/runtime/retrieval_live_provider_arena_v12.py": "0fcdfdcbb3c2c16ed9bc2efe38a950d16525221f",
+    "canonical/runtime/retrieval_live_provider_arena_v13.py": "d36f5f29060db6ad5db5f44b16751099f54873ca",
+    "canonical/runtime/retrieval_live_provider_arena_v14.py": "fc0327ff562d855280617a6e73748d55146c5c8b",
+    "canonical/runtime/retrieval_live_provider_arena_v16.py": "f62c90aaca8e99f16ddb4675ce282a021a85e4da",
+    "canonical/runtime/retrieval_live_provider_arena_v18.py": "6609d186d2928de689758ff268fa3892ef3248f4",
+    "canonical/runtime/retrieval_route_strategy_calibration_v2.py": "018f859959d4a15540e8ee1428f6d3e60fe32d11",
+    "canonical/state/retrieval_live_events_v1.jsonl": "6637540ad0f9da41217fe2614773d78b563d2259"
+  },
+  "target_count": 12,
+  "exact_target_identity_occurrence_count": 0,
+  "audited_target_ids": [
+    "H20_GITHUB_JA_MORPH",
+    "H20_GITHUB_RUST_SEARCH",
+    "H20_GITHUB_AR_NLP",
+    "H20_NPM_CONCURRENT_MAP",
+    "H20_CRATE_JSON",
+    "H20_HF_SENTENCE_SIM",
+    "H20_HF_TEXT_CLASS",
+    "H20_MAVEN_LANG_UTIL",
+    "H20_MAVEN_HTML",
+    "H20_NUGET_MICRO_ORM",
+    "H20_RUBY_JOBS",
+    "H20_PHP_HTTP"
+  ],
+  "hard_nonclaims": [
+    "ABSENCE_OF_EXACT_IDENTITY_FROM_TUNING_ARTIFACTS_DOES_NOT_PROVE_SEMANTIC_NOVELTY",
+    "THIS_AUDIT_DOES_NOT_ESTABLISH_OPEN_WORLD_COMPLETENESS"
+  ]
+}
