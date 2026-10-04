@@ -180,10 +180,10 @@ def representative_forbidden_words(
         raise RuntimeError("REPRESENTATIVE_DUPLICATE_BEFORE_FILL")
 
     for filler in GENERIC_FORBIDDEN_FILLERS:
-        if filler not in selected and filler != nth_word:
-            selected.append(filler)
         if len(selected) == GENERATED_KEYWORD_COUNT:
             break
+        if filler not in selected and filler != nth_word:
+            selected.append(filler)
 
     if len(selected) != GENERATED_KEYWORD_COUNT:
         raise RuntimeError("REPRESENTATIVE_FORBIDDEN_CARDINALITY_FAILURE")
