@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "mission": "PERMANENTLY_OWN_ALL_19_USEFUL_OPUS_5_5_CAPABILITY_FAMILIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "change": "PROPAGATE_ALREADY_VERIFIED_UNKNOWN_DOMAIN_V6_ATOMIC_ACCEPTANCE_DELTA_THROUGH_ROOT_CAUSE_AND_TERMINAL_AUTHORITY__REVOKE_STALE_ROOT3_10_TOUCHING_SCHEDULER__ADD_FAIL_CLOSED_TRUTH_PIPELINE_INVARIANT",
+  "basis": {
+    "acceptance_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "acceptance_git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
+    "proved_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "acceptance_counts": {
+      "proved": 13,
+      "unresolved": 25,
+      "total": 38
+    },
+    "root_commit": "1ad00301ab9d6fe04bf66fc9d8b3eaf69080603e",
+    "root_git_blob_sha": "919da676976043e5b501f207d3cf420dc4fb50b1",
+    "authority_commit": "371babfdf4a821bba70b57be6bf8193df80b05f7",
+    "authority_git_blob_sha": "290a02dd1ce3b1174b9bf678356ea3012541c148"
+  },
+  "effects": [
+    "ROOT3_ONLY_COUNT_7_TO_6",
+    "ROOT3_TOUCHING_COUNT_10_TO_9",
+    "ROOT2_TOUCHING_COUNT_REMAINS_19",
+    "FAMILY_COUNTS_REMAIN_5_ACCEPTED_14_OPEN",
+    "OLD_ROOT3_MINIMUM_ACTION_CUT_REVOKED_PENDING_RECOMPUTE",
+    "NO_DOUBLE_COUNT_OF_UNKNOWN_DOMAIN_V6_ACCEPTANCE"
+  ],
+  "invariants": [
+    "NO_NEW_REALITY",
+    "NO_TERMINAL_OR_PRODUCTION_CASE_EXECUTION",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "TERMINAL_REMAINS_FALSE",
+    "FAIL_CLOSED_IF_ACCEPTANCE_ROOT_OR_AUTHORITY_COUNTS_OR_CONTENT_HASH_POINTERS_DIVERGE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
