@@ -95,5 +95,6 @@ def test_semantic_dedup_prunes_equivalent_paths():
         max_description_length=4,
     )
     assert result["status"] == "EXACT_PROGRAM_FOUND"
-    assert result["program"] == ["DOUBLE", "ADD_1", "ADD_1", "ADD_1"]
+    assert result["program"] == ["ADD_1", "DOUBLE", "ADD_1"]
+    assert result["description_length"] == 3
     assert result["semantic_states_pruned"] > 0
