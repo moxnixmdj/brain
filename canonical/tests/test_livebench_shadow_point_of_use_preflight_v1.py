@@ -16,7 +16,6 @@ def receipt():
     return {
       "lease_digest_sha256":digest,
       "claim_ref":expected_claim_ref(digest),
-      "claim_ref_absent_observed":True,
       "case_reveal_has_occurred":False,
       "execution_has_started":False,
       "evaluation_output_exists":False,
@@ -51,6 +50,8 @@ def test_exact_zero_case_preflight_passes_without_reveal_authority():
     assert out["shadow_collection_authority"] is False
     assert out["one_use_claim_still_required"] is True
     assert out["acceptance_credit_authorized"] is False
+    assert out["claim_uniqueness_test"] == "ATOMIC_GIT_REF_CREATE_ONLY"
+    assert out["preflight_absence_probe_required"] is False
 
 def test_claim_ref_must_be_digest_derived():
     r=receipt(); r["claim_ref"]="refs/heads/shadow-claims/wrong"
@@ -73,3 +74,17 @@ def test_wrong_claim_backend_blob_blocks_preflight():
     out=verify_point_of_use_preflight(plan(),r)
     assert out["point_of_use_preflight_pass"] is False
     assert "CLAIM_BACKEND_BLOB_MISMATCH" in out["reasons"]
+
+def test_preflight_does_not_require_claim_ref_absence_probe():
+    r=receipt()
+    assert "claim_ref_absent_observed" not in r
+    out=verify_point_of_use_preflight(plan(),r)
+    assert out["point_of_use_preflight_pass"] is True
+    assert "CLAIM_REF_PRIOR_ABSENCE_NOT_OBSERVED" not in out["reasons"]
+
+def test_stale_absence_field_cannot_grant_or_remove_authority():
+    r=receipt(); r["claim_ref_absent_observed"]=False
+    out=verify_point_of_use_preflight(plan(),r)
+    assert out["point_of_use_preflight_pass"] is True
+    assert out["case_reveal_authority"] is False
+    assert out["one_use_claim_still_required"] is True
