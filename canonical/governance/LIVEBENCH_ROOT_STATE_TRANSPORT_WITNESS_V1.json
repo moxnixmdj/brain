@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT_STATE_TRANSPORT_WITNESS_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_POST_TRANSITION_ROOT_BLOB_WITNESS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "root_state": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "c624ca84adcc3585c9afeafe4d1c6f3ebbedee3a"
+  },
+  "source_projection": {
+    "path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json",
+    "git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99",
+    "verification_run_id": 37196472583,
+    "verification_job_id": 111419310250
+  },
+  "source_reclassification": {
+    "path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+    "git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684",
+    "verification_run_id": 37196376134,
+    "verification_job_id": 111419008329
+  },
+  "extracted": {
+    "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__ROOT1_REOPENED_BY_VERIFIED_LIVEBENCH_FORCED_FAIL",
+    "current_acceptance": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 12,
+      "unresolved_atomic": 26,
+      "total_families": 19,
+      "total_atomic": 38,
+      "terminal": false
+    },
+    "root1_status": "ACTIVE__ONE_POSITIVELY_ESTABLISHED_OPERATIVE_GAP__LIVEBENCH_EXACT_FROZEN_CANDIDATE_FORCED_FAIL",
+    "root1_positive_gap_count": 1,
+    "root1_only_count": 1,
+    "root1_only": [
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "root2_only_count": 15,
+    "root2_only": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "MYSTERYMECHANISM_GE_49_55",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+    ],
+    "root3_only_count": 7,
+    "root3_only": [
+      "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "VISION_DENSE_NONCHART_SCOPE",
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+    ],
+    "root2_and_root3_count": 3,
+    "root2_and_root3": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+    ],
+    "unresolved_total": 26,
+    "scheduler_root1_currently_active": true,
+    "root2_controller_effective_scheduling_authority": false,
+    "root2_threshold_dag_scheduling_authority": false
+  },
+  "required_invariants": [
+    "CURRENT_ACCEPTANCE_COUNTS_UNCHANGED_5_ACCEPTED_14_OPEN_12_PROVED_26_UNRESOLVED",
+    "LIVEBENCH_EXACTLY_ONE_ROOT1_ONLY_PREDICATE",
+    "LIVEBENCH_ABSENT_FROM_ROOT2_ONLY",
+    "PARTITION_COUNTS_1_ROOT1_ONLY_15_ROOT2_ONLY_7_ROOT3_ONLY_3_MIXED_SUM_26",
+    "ROOT1_CURRENTLY_ACTIVE",
+    "STALE_19_PREDICATE_ROOT2_SCHEDULERS_FAIL_CLOSED_PENDING_18_PREDICATE_REBIND",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
