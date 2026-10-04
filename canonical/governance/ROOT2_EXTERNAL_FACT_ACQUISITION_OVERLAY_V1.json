@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SCHEDULING_ONLY__ACTIVE_V8_FACT_PARTITION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Overlay fail-closed acquisition semantics on the active Root2 external fact set without changing acceptance truth, frontier score requirements, or fresh-reality authority.",
+  "active_parent": {
+    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V8.json",
+    "frontier_git_blob_sha": "2eaeb74fe306ee2507145e26eb731f69f46e6153",
+    "verification_path": "canonical/verification/ROOT2_V8_FINANCE_DUAL_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "7e2d71144853c41fadab55f4074d484edf46e651",
+    "activation_path": "canonical/governance/ROOT2_FRONTIER_V8_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "e0c0b2a25e764c875e4af4cffb3a61f05a7a58bc"
+  },
+  "components": {
+    "outreach_gate": {
+      "path": "canonical/governance/EXTERNAL_OUTREACH_VALUE_GATE_V1.json",
+      "git_blob_sha": "3868d99a7dbddb4a78f9adb5cd083d81cd90241e"
+    },
+    "fact_router": {
+      "path": "canonical/governance/ROOT2_SELF_SERVICE_FACT_ROUTING_V1.json",
+      "git_blob_sha": "3833d97f1febbdc1766182778b3c4ba23c9daa85"
+    },
+    "owner_fanout": {
+      "path": "canonical/governance/ROOT2_OWNER_CHANNEL_FANOUT_V2.json",
+      "git_blob_sha": "9b59f951f5b7135bb167f2aaebc35e9960172fa4"
+    }
+  },
+  "semantic_effects": [
+    "PARTITION_ACTIVE_V8_WAITING_EXTERNAL_FACTS_EXACTLY_INTO_SELF_SERVICE_OWNER_EXCLUSIVE_OWNER_OR_DIRECT_RECEIPT_AND_DORMANT",
+    "DELETE_LOW_VALUE_FREE_TRIAL_FREE_TIER_FREE_QUOTA_BASIC_SUPPORT_OUTREACH_AS_A_SCHEDULING_DEPENDENCY",
+    "PRESERVE_EXISTING_OWNER_EXCLUSIVE_CHANNELS_ALREADY_IN_FLIGHT",
+    "MAKE_ALREADY_SENT_BUILDKITE_SUPPORT_QUERY_NONBLOCKING",
+    "MAKE_CURSOR_POLICY_CHANGE_A_DORMANT_WAKE_CONDITION_NOT_AN_ACTIVE_WAIT",
+    "PRESERVE_ALL_ROOT2_V8_PREDICATES_THRESHOLDS_ROUTES_ACCOUNTING_AND_FRESH_REALITY_BLOCK"
+  ],
+  "scheduler_order": [
+    "PRIMARY_SOURCE_OR_EXISTING_RECEIPT",
+    "SELF_SERVICE_ACCOUNT_UI_API_OR_ZERO_CASE_MEASUREMENT",
+    "OWNER_EXCLUSIVE_RECEIPT_ONLY_WHEN_UNAVOIDABLE",
+    "STRONGER_FORMAL_PROOF_ON_MATERIAL_WAKE",
+    "GLOBAL_ZERO_REALITY_FIXED_POINT",
+    "MINIMUM_FRESH_REALITY_TRANSACTION"
+  ],
+  "invariant_partition_counts": {
+    "active_v8_waiting_external_fact_count": 14,
+    "self_service": 6,
+    "owner_exclusive_or_owner_receipt": 6,
+    "owner_or_direct_platform_receipt": 1,
+    "dormant": 1,
+    "sum": 14
+  },
+  "hard_rules": [
+    "NO_EMAIL_WHOSE_LOAD_BEARING_CONTENT_IS_ONLY_FREE_TRIAL_FREE_TIER_FREE_QUOTA_FREE_CREDIT_OR_BASIC_SUPPORT",
+    "SELF_SERVICE_FACTS_CANNOT_BE_OWNER_WAIT_STATES",
+    "ALREADY_SENT_LOW_VALUE_SUPPORT_EMAILS_CANNOT_BLOCK_SELF_SERVICE_PREFLIGHT",
+    "OWNER_EXCLUSIVE_CHANNELS_MUST_BE_DEDUPLICATED_AND_LOAD_BEARING",
+    "DORMANT_CLOSED_ROUTE_CONSUMES_ZERO_ACTIVE_SCHEDULER_ATTENTION",
+    "NO_ACCEPTANCE_CREDIT_FROM_THIS_OVERLAY",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY_FROM_THIS_OVERLAY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
