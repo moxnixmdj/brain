@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_SUB100MB_LEARNED_CORE_EXPERIMENT_CONTRACT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PREEXPOSURE_H100_CONTRACT__FAIL_CLOSED__ZERO_CREDIT",
+  "hypothesis_id": "H100_FRONTIER_CAPABILITY_WITH_LE_100000000_PERSISTENT_LEARNED_BYTES",
+  "objective": "DEMONSTRATE_THE_FULL_FROZEN_BRAIN_OPUS55_CAPABILITY_ENVELOPE_WITH_NO_MORE_THAN_100000000_BYTES_OF_TOTAL_PERSISTENT_LEARNED_STATE_AND_NO_EXTERNAL_LEARNED_CAPABILITY_PROVIDER_DURING_SCORED_EXECUTION",
+  "baseline": {
+    "source_commit": "e6d0b29bd27d3a2fa4839ccdb838e21037dd66cf",
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "11498bd194c8018617767918edec020268239bc1",
+      "accepted_families": 5,
+      "verified_owned_families": 5,
+      "total_families": 19
+    },
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "60b70daf25f47d12d7a9522990769c0200acbfa9",
+      "proved_atomic": 12,
+      "unresolved_atomic": 26,
+      "total_atomic": 38,
+      "terminal": false
+    }
+  },
+  "frozen_resource_definition": {
+    "max_persistent_learned_bytes": 100000000,
+    "count_all_persistent_learned_state": true,
+    "count_regardless_of_location": true,
+    "counted_examples": [
+      "NEURAL_WEIGHTS",
+      "LEARNED_EMBEDDINGS",
+      "ADAPTERS",
+      "LEARNED_ROUTERS",
+      "LEARNED_VERIFIERS",
+      "LEARNED_VISION_OR_AUDIO_MODULES",
+      "PERSISTENT_LEARNED_MEMORY"
+    ],
+    "not_counted_as_persistent_learned_state_but_measured_separately": [
+      "DETERMINISTIC_PROGRAM_CODE",
+      "RAW_EXTERNAL_KNOWLEDGE",
+      "NONLEARNED_DATABASE_CONTENT",
+      "EPHEMERAL_WORKING_MEMORY",
+      "RUNTIME_RAM",
+      "CPU_GPU_FLOPS",
+      "WALL_CLOCK_TIME"
+    ]
+  },
+  "provider_boundary": {
+    "external_frontier_model_calls_during_scored_execution": 0,
+    "external_learned_capability_calls_during_scored_execution": 0,
+    "raw_knowledge_sources_allowed": true,
+    "raw_knowledge_rule": "KNOWLEDGE_SOURCE_MAY_SUPPLY_FACTS_OR_CONTENT_BUT_MUST_NOT_SUPPLY_TASK_SPECIFIC_REASONING_PLANS_SOLUTIONS_OR_CAPABILITY_SUBSTITUTION",
+    "deterministic_tools_allowed": true,
+    "executors_allowed": true,
+    "storage_allowed": true,
+    "rule": "MOVING_LEARNED_CAPABILITY_BEHIND_A_NETWORK_BOUNDARY_DOES_NOT_REMOVE_IT_FROM_ACCOUNTING"
+  },
+  "terminal_success": {
+    "accepted_families_required": 19,
+    "verified_owned_families_required": 19,
+    "proved_atomic_required": 38,
+    "all_requirements_conjunctive": true,
+    "no_average_score_substitution": true
+  },
+  "guard": {
+    "runtime_path": "canonical/runtime/sub100mb_learned_state_guard_v1.py",
+    "runtime_git_blob_sha": "0e6279ddbaf6c23856d37869fa9e39c1b25fa82c",
+    "tests_path": "canonical/tests/test_sub100mb_learned_state_guard_v1.py",
+    "tests_git_blob_sha": "e1d621c1528b3c33828eefd506ecf9aa185666ae",
+    "semantics": [
+      "EXACT_100000000_BYTES_ALLOWED",
+      "100000001_BYTES_REJECTED",
+      "EXTERNAL_LEARNED_CAPABILITY_PROVIDER_REJECTED",
+      "UNCOUNTED_LEARNED_COMPONENT_REJECTED",
+      "FROZEN_19_FAMILY_DENOMINATOR_REQUIRED",
+      "FROZEN_38_ATOMIC_DENOMINATOR_REQUIRED",
+      "H100_CLOSES_ONLY_AT_19_OF_19_ACCEPTED_19_OF_19_VERIFIED_OWNED_AND_38_OF_38_PROVED"
+    ]
+  },
+  "architecture_search_rule": {
+    "preferred_transformation_order": [
+      "LEARNED_TO_DETERMINISTIC_PROGRAM",
+      "LEARNED_TO_VERIFIED_TOOL",
+      "LEARNED_KNOWLEDGE_TO_RAW_JIT_KNOWLEDGE",
+      "LEARNED_WORKFLOW_TO_COMPILED_CAPABILITY",
+      "ONLY_THEN_KEEP_OR_UPDATE_IRREDUCIBLE_LEARNED_STATE"
+    ],
+    "kernel_role": [
+      "DECOMPOSE_NOVEL_PROBLEM",
+      "SELECT_OR_RETRIEVE_EXISTING_CAPABILITY",
+      "PROPOSE_MISSING_TRANSFORMATION_OR_PROGRAM_EDIT",
+      "ALLOCATE_SEARCH_FROM_VERIFICATION_FEEDBACK"
+    ],
+    "success_ratchet": "SUCCESSFUL_NOVEL_TRAJECTORIES_SHOULD_BE_MINIMIZED_VERIFIED_AND_COMPILED_INTO_REUSABLE_NONLEARNED_CAPABILITY_WHEN_POSSIBLE"
+  },
+  "first_falsification_gate": {
+    "family": "UNKNOWN_DOMAIN_ADAPTATION",
+    "reason": "HIGHEST_INFORMATION_GAIN_ON_WHETHER_PROPOSAL_PROBABILITY_COLLAPSES_ON_GENUINELY_NOVEL_MECHANISMS",
+    "frozen_protocol_path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "represented_public_bar": "VALS_MYSTERYMECHANISM_GE_49_55_ON_COMPARABLE_SETUP",
+    "uncovered_leaves_remain_separate": [
+      "NEW_TOOL_DISCOVERY",
+      "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_STRUCTURE",
+      "CALIBRATED_UNKNOWN_OR_ABSTENTION"
+    ],
+    "measure": [
+      "ONE_PROPOSAL_USEFUL_CANDIDATE_PROBABILITY_P",
+      "N95_EQUALS_CEIL_LN_0_05_DIV_LN_1_MINUS_P",
+      "TERMINAL_SUCCESS",
+      "SEARCH_ATTEMPTS",
+      "VERIFICATION_REJECTIONS",
+      "COMPILED_REUSE_ON_SECOND_TASK"
+    ],
+    "no_result_claim_yet": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_A_SUB100MB_KERNEL_EXISTS_YET",
+    "NO_CLAIM_RUNTIME_RAM_IS_BELOW_100MB",
+    "NO_CLAIM_TOTAL_COMPUTE_IS_SMALL",
+    "NO_CLAIM_CURRENT_5_OF_19_STATE_SATISFIES_H100",
+    "NO_CAPABILITY_OR_FAMILY_OR_OWNERSHIP_CREDIT_FROM_THIS_CONTRACT",
+    "NO_FRESH_REALITY_EXECUTION_AUTHORITY_FROM_THIS_CONTRACT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
