@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
   "receipt_id": "UNKNOWN-DOMAIN-V2-UNIVERSAL-ZERO-REALITY-BREAKTHROUGH-20261005-V1",
   "date": "2026-10-05",
-  "status": "DURABLE_REASONING_RECEIPT__CANDIDATE_BREAKTHROUGH__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "status": "DURABLE_REASONING_RECEIPT__CANDIDATE_BREAKTHROUGH__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION__CURRENT_MAIN_AUTHORITY_RECONCILED",
   "real_objective": "Advance the Opus 5.5 capability-ownership terminal objective by eliminating a dominated fresh-reality dependency on the Unknown-Domain critical path without weakening evidence standards.",
   "governing_invariants": [
     "CORRECTNESS_FIRST",
@@ -22,8 +22,10 @@
     "The three abstention classes are deterministically generated and the candidate policy aligns with the frozen scorer requirements.",
     "All six load-bearing candidate/generator/scorer/harness Git blobs bound by Brain PR1858 were rechecked unchanged on live main after the PR was opened.",
     "The prior production attempt failed before main/import completion and consumed zero production cases.",
-    "Runner PR2034 repaired the import transport while preserving the one-use lease, so the production fallback remains available if the universal theorem is falsified.",
-    "Runner PR2040 is the existing independent verification carrier; creating another verifier would violate dedupe leverage."
+    "Runner PR2040 is the existing independent verification carrier; creating another verifier would violate dedupe leverage.",
+    "Current main reconciliation dabc54e686d7d304b79e9fc4edb501558fc7393c retired the old 76e8040d lease because Generator V1 was a load-bearing transitive dependency not content-bound by that execution identity.",
+    "The stale lease created no atomic claim and consumed zero production cases, so retirement does not spend the one-use production opportunity.",
+    "If the universal theorem is falsified, production fallback is not immediately executable: the sole live successor candidate requires exact public-runner verification in runner PR2053, a new outcome-blind reduction bound to the repaired lease digest, and only then a new launch/atomic claim."
   ],
   "evidence_refs": [
     "moxnixmdj/brain#1858",
@@ -34,14 +36,16 @@
     "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py@f974a4594c78e74693c7ba5a19f131dfa481b937",
     "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py@d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
     "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py@e8cf5d1b5d311644725a751c15e6235958fb587d",
-    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py@04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py@04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "canonical/governance/UNKNOWN_DOMAIN_AUTHORITY_RECONCILIATION_20261005_V2.json@dabc54e686d7d304b79e9fc4edb501558fc7393c",
+    "moxnixmdj/verification-capsule-runner#2053"
   ],
   "conclusion": "The highest-leverage current Unknown-Domain move is to verify and promote the universal zero-reality theorem before any production retry. If independently verified, the theorem strictly dominates the one-shot 27-case production population for the exact frozen evaluator domain and deletes that fresh-reality action from the critical path.",
   "selected_route": "INDEPENDENTLY_VERIFY_PR1858_UNIVERSAL_THEOREM_VIA_EXISTING_RUNNER_PR2040__THEN_SEPARATE_SCOPE_AND_ACCEPTANCE_REDUCTION",
   "rejected_material_alternatives": [
     {
       "route": "IMMEDIATELY_RETRY_27_CASE_PRODUCTION",
-      "reason": "Dominated if the universal theorem is sound; it consumes fresh reality while proving less."
+      "reason": "Currently inadmissible as well as informationally dominated if the theorem is sound: the old lease is retired, repaired successor verification/reduction are pending, and any later production action would still consume fresh reality while proving less than a valid universal theorem."
     },
     {
       "route": "CREATE_SECOND_INDEPENDENT_VERIFIER",
@@ -55,7 +59,8 @@
   "uncertainties": [
     "Runner PR2040 verification was queued at receipt creation and therefore had not yet produced canonical independent PASS authority.",
     "PR1858 predates newer main commits; exact bound subject blobs were unchanged when rechecked, but any later mutation of those blobs requires revalidation.",
-    "A separate acceptance/scope reducer is still required even after theorem verification."
+    "A separate acceptance/scope reducer is still required even after theorem verification.",
+    "If the theorem fails, the repaired production successor itself remains pending exact-byte verification and a new outcome-blind reduction; there is currently no production execution authority."
   ],
   "assumptions": [
     "Git blob equality is sufficient to identify the exact Python source subjects under the repository's current verification policy.",
@@ -68,7 +73,7 @@
     "Do not generate or inspect production/terminal cases.",
     "Do not weaken scorer or acceptance thresholds."
   ],
-  "next_action": "Use runner PR2040 as the sole independent verifier. On PASS, content-bind its receipt into the Brain and run the separate acceptance reducer. On FAIL, preserve the counterexample and fall back to the already-repaired one-use production route only if fresh reality regains positive information value.",
+  "next_action": "Use runner PR2040 as the sole independent verifier of the universal theorem. On PASS, content-bind its receipt into the Brain and run the separate scope/acceptance reducer. On FAIL, preserve the counterexample; only then continue the repaired production successor path through runner PR2053 verification, a new outcome-blind reduction, and a new atomic-claim launch. The retired 76e8040d lease must never execute.",
   "supersession_conditions": [
     "Any of the six bound subject blobs changes.",
     "Runner PR2040 produces a counterexample.",
