@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_CARRYING_SHADOW_REALITY_V2_CONTENT_ADDRESSED_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONTENT_ADDRESSED_LOAD_BEARING_BINDINGS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "observed_main_at_compilation": "28bf765de679a15ba15d4f673829c930af61decd",
+  "load_bearing_bindings": {
+    "terminal_root": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "36ac53134b123cfed7e63c31a871a30f9b4579e4"
+    },
+    "runtime": {
+      "path": "canonical/runtime/terminal_state_compression_scheduler_v1.py",
+      "git_blob_sha": "fd5639e9d503f59913bfbd08e47799ef5132b1e7"
+    },
+    "policy": {
+      "path": "canonical/governance/PROOF_CARRYING_SHADOW_REALITY_POLICY_V2.json",
+      "git_blob_sha": "756a608f0a3acaa72e56abbaa078f1cf0f3df938"
+    },
+    "generic_isolation_activation": {
+      "path": "canonical/governance/GENERIC_PRECOMMIT_ISOLATION_THEOREM_ACTIVATION_V1.json",
+      "git_blob_sha": "89b3d8cbbc3b9e0822870ee803fb99c37a82d209"
+    }
+  },
+  "verified_v2_runtime_policy": {
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_commit": "96e72332a433d576f40bddb0a620cf45e0c49441",
+    "workflow_run_id": 37189267485,
+    "conclusion": "success"
+  },
+  "current_root_truth": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false,
+    "root1_positive_gap_count": 0
+  },
+  "proposed_effect": {
+    "scheduling": true,
+    "per_route_shadow_collection": true,
+    "result_release": false,
+    "acceptance_credit": false,
+    "promotion": false,
+    "global_fresh_reality_promotion": false
+  },
+  "validity_rule": "UNRELATED_MAIN_COMMITS_DO_NOT_INVALIDATE_THIS_CANDIDATE_WHILE_ALL_LOAD_BEARING_BLOBS_MATCH__ANY_LOAD_BEARING_BLOB_DRIFT_INVALIDATES_FAIL_CLOSED",
+  "per_route_requirements": [
+    "CURRENT_LOAD_BEARING_BLOBS_MATCH_THIS_RECEIPT",
+    "V2_LEASE_VERIFIER_RETURNS_READY_TRUE",
+    "UNDERLYING_ISOLATION_AND_BENCHMARK_ADAPTER_RECEIPTS_REVERIFY",
+    "ONE_USE_LEASE",
+    "ZERO_INCREMENTAL_SPEND",
+    "RESULT_ESCROWED_AND_HIDDEN_UNTIL_FIXED_POINT_RELEASE",
+    "INDEPENDENT_RELEASE_VERIFICATION_REQUIRED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "active": false
+}
