@@ -30,7 +30,7 @@
     },
     "required_claim_coverage_ceiling": {
       "path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
-      "git_blob_sha": "f1fe4ed5c37016f98422305803542169bf497126",
+      "git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
       "role": "COVERAGE_REMAINS_A_SEPARATE_METRIC_AND_MUST_NOT_BE_HIDDEN_INSIDE_MATCHED_QUALITY"
     },
     "prewave_protocol": {
