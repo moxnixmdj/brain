@@ -41,4 +41,6 @@ def test_governance_synthesis_residual_is_exact():
     s=g["algebraic_compression"]["synthesis"]
     assert s["root2_residuals"]==["metric:matched_quality","matched_quality_noninferiority"]
     assert s["required_claim_coverage"]["state"]=="PROVED_BY_INDEPENDENT_CEILING_PLUS_SUPERSET_SCOPE"
-    assert g["exact_state"]=={"root2_only":16,"root2_and_root3":3,"root2_touching":19,"unique_fixed_bar_surfaces":14,"accepted_families":5,"proved_atomic":12,"unresolved_atomic":26}
+    assert g["exact_state"]=={
+      "root2_only":16,"root2_and_root3":3,"root2_touching":19,
+      "unique_fixed_bar_surfaces":14,"accepted_families":5,"proved_atomic":12,"unresolved_atomic":26}
