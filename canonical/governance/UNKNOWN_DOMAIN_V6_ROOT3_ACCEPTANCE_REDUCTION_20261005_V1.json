@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_ROOT3_ACCEPTANCE_REDUCTION_20261005_V1",
   "date": "2026-10-05",
-  "status": "PROMOTED__PRECOMMITTED_GATE_SATISFIED__UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_PROVED__ZERO_FAMILY_CAPABILITY_OWNERSHIP_CREDIT",
+  "status": "HISTORICAL_REDUNDANT_NONAUTHORITATIVE__SUPERSEDED_BY_CANONICAL_ACCEPTANCE_REDUCTION",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
   "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
@@ -46,13 +46,13 @@
   },
   "promotion": {
     "predicate_state_before": "EXTERNAL_BLOCKED",
-    "predicate_state_after": "PROVED",
+    "predicate_state_after": "PROVED_BY_CANONICAL_REDUCTION__NO_ADDITIONAL_CREDIT_FROM_THIS_RECEIPT",
     "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
     "independent_or_objective": true,
     "scope_complete": true,
-    "proved_predicate_count_delta": 1,
-    "unresolved_predicate_count_delta": -1,
-    "root3_direct_scope_residual_delta": -1,
+    "proved_predicate_count_delta": 0,
+    "unresolved_predicate_count_delta": 0,
+    "root3_direct_scope_residual_delta": 0,
     "fresh_reality_required": false,
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
@@ -66,16 +66,23 @@
     "NO_MYSTERYMECHANISM_GE_49_55_CREDIT",
     "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_FROM_THIS_ATOMIC_PROMOTION_ALONE",
     "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOMIC_PROMOTION",
-    "NO_TERMINAL_TRUE_CLAIM"
+    "NO_TERMINAL_TRUE_CLAIM",
+    "THIS_REDUNDANT_RECEIPT_IS_NONAUTHORITATIVE_AND_MUST_NOT_BE_DOUBLE_COUNTED"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
     "new_reality_units_consumed": 0,
     "production_cases_generated": 0,
     "terminal_cases_consumed": 0,
-    "acceptance_predicate_credit_delta": 1,
+    "acceptance_predicate_credit_delta": 0,
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "superseded_by": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
+    "canonical_registry_reconciliation_commit": "5d9432ba5d0691ed2c04221ed5d8303e2d018012",
+    "reason": "A_PARALLEL_WORKER_COMMITTED_THE_AUTHORITATIVE_PRECOMMITTED_REDUCTION_AND_RECONCILED_THE_ACCEPTANCE_LEDGER__THIS_DUPLICATE_MUST_NOT_GRANT_SECOND_CREDIT"
   }
 }
