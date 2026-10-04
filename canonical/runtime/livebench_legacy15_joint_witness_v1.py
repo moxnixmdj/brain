@@ -129,6 +129,34 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
     sentence = _get_one(constraints, "length_constraints:number_sentences")
     words = _get_one(constraints, "length_constraints:number_words")
 
+    # The frozen conflict graph does NOT isolate NumberOfSentences from the
+    # nth-paragraph family. Handle the strict zero-sentence corner before any
+    # positive carrier is synthesized. An empty string is an exact constructive
+    # witness for "less than 1 sentence" when the remaining active constraints
+    # are purely negative; otherwise fail closed instead of emitting a known
+    # nonzero-sentence candidate.
+    if sentence:
+        sentence_slots = _slots(sentence)
+        sentence_n = int(sentence_slots["num_sentences"])
+        sentence_relation = str(sentence_slots["relation"])
+        if sentence_relation == "less than" and sentence_n == 1:
+            positive_surface = bool(
+                required
+                or quote
+                or title
+                or paragraph
+                or nth
+                or bullets
+                or sections
+                or post
+                or end
+            )
+            if words and str(_slots(words).get("relation")) != "less than":
+                positive_surface = True
+            if positive_surface:
+                raise JointWitnessError("LESS_THAN_ONE_SENTENCE_POSITIVE_REQUIREMENT")
+            return ""
+
     body_parts: list[str] = []
     if title:
         body_parts.append("<<x>>")
