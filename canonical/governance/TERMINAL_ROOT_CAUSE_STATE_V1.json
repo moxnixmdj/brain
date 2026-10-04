@@ -103,7 +103,7 @@
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
         "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V13.json",
         "current_frontier_git_blob_sha": "bb631b80eea5a183728fb27e2aff99bbe63f1757",
-        "status": "ACTIVE_IFF_CURRENT_ROOT_POINTER_PROJECTION_INDEPENDENTLY_PASSES__ROOT2_FRONTIER_V13__SCHEDULING_ONLY__ZERO_CREDIT",
+        "status": "ACTIVE_IFF_CANONICAL_VERIFICATION_RECEIPT_EXISTS_AND_BINDS_THIS_EXACT_ROOT_BLOB__ROOT2_FRONTIER_V13__SCHEDULING_ONLY__ZERO_CREDIT",
         "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2",
         "fresh_reality_authority": false,
         "current_frontier_verification_path": "canonical/verification/ROOT2_FRONTIER_V13_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
@@ -193,7 +193,7 @@
     "root1_currently_active": false,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
     "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V13.json",
-    "root2_effective_scheduling_authority": false,
+    "root2_effective_scheduling_authority": true,
     "root2_external_fact_acquisition_overlay": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2_ACTIVATION_V1.json",
     "low_value_free_tier_trial_quota_support_outreach_forbidden": true,
     "self_service_facts_are_owner_waits": false,
@@ -359,10 +359,12 @@
       "verification_git_blob_sha": "dd810106cf30f101453da07e2ef37cb81d7faddd",
       "activation_path": "canonical/governance/ROOT2_FRONTIER_V13_FINAL_ACTIVATION_V1.json",
       "activation_git_blob_sha": "08c84d8f0a46ff0f13943388306195fea79ca6d7",
-      "status": "CANDIDATE_CURRENT_ROOT_POINTER_PROJECTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+      "status": "ACTIVE_IFF_CANONICAL_VERIFICATION_RECEIPT_EXISTS_AND_BINDS_THIS_EXACT_ROOT_BLOB__ZERO_CREDIT",
       "execution_authority": false,
       "promotion_authority": false,
-      "fresh_reality_authority": false
+      "fresh_reality_authority": false,
+      "required_projection_verification_path": "canonical/verification/ROOT2_V13_CURRENT_ROOT_POINTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "required_subject_root_blob": "SELF"
     }
   },
   "accounting": {
