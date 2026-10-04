@@ -2,7 +2,7 @@
 import copy
 import hashlib
 
-import pytest
+import unittest
 
 from canonical.runtime import unknown_domain_direct_candidate_v3 as candidate
 from canonical.runtime import unknown_domain_direct_execution_harness_v1 as harness
@@ -59,7 +59,7 @@ def test_v3_identifier_totality_rejects_target_collision():
     h=next(x for x in bad["hidden_records"] if x["leaf_id"]==gen_v2.v1.TRANSFER)
     assert len(h["transfer_relevant_feature_ids"])==2
     h["transfer_relevant_feature_ids"][1]=h["transfer_relevant_feature_ids"][0]
-    with pytest.raises(gen_v3.GeneratorError):
+    with unittest.TestCase().assertRaises(gen_v3.GeneratorError):
         gen_v3._assert_identifier_totality(bad)
 
 
@@ -71,7 +71,7 @@ def test_v3_identifier_totality_rejects_source_binding_collision():
     v=next(x for x in bad["visible_cases"] if x["leaf_id"]==gen_v2.v1.TRANSFER and len(x["domain_a"]["earned_receipts"][0]["source_role_binding"])==2)
     binding=v["domain_a"]["earned_receipts"][0]["source_role_binding"]
     binding["r1"]=binding["r0"]
-    with pytest.raises(gen_v3.GeneratorError):
+    with unittest.TestCase().assertRaises(gen_v3.GeneratorError):
         gen_v3._assert_identifier_totality(bad)
 
 
@@ -85,5 +85,9 @@ def test_v3_identifier_totality_rejects_cross_domain_collision():
     h=bad["hidden_records"][idx]
     source_id=next(iter(v["domain_a"]["earned_receipts"][0]["source_role_binding"].values()))
     h["transfer_relevant_feature_ids"][0]=source_id
-    with pytest.raises(gen_v3.GeneratorError):
+    with unittest.TestCase().assertRaises(gen_v3.GeneratorError):
         gen_v3._assert_identifier_totality(bad)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
