@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "REVOKED__REACHABLE_ISINSTANCE_ACCEPTED_STR_SUBCLASS_COUNTEREXAMPLE__ATOMIC_PREDICATE_CREDIT_MUST_RETURN_TO_ZERO_PENDING_REPAIRED_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "revoked_artifacts": [
+    {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "reason": "Its load-bearing scope_complete=true conclusion depends on totality over the declared isinstance-accepted Python string interface."
+    },
+    {
+      "path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "reason": "The independent verifier covered surrogate code points and finite nonproduction populations but did not test adversarial str subclasses overriding strip/encode."
+    },
+    {
+      "path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "reason": "The receipt repeats total_declared_python_string_interface=true for the same untested subclass domain."
+    }
+  ],
+  "exact_falsifying_subject": {
+    "generator_path": "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py",
+    "pre_repair_blob": "a97459fe407ea4852f57f12f504fbc0121db9824",
+    "proof_path": "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py",
+    "pre_repair_proof_blob": "58410966e17c1bc546db8cab039891f3ab2bf8a8",
+    "regression_path": "canonical/tests/test_unknown_domain_direct_v5.py",
+    "pre_repair_regression_blob": "81cd6ecabec51029175f6036a13eac7667fccd03"
+  },
+  "counterexample": {
+    "construction": "class EvilStr(str): override strip() and encode() to raise RuntimeError; instantiate with a value whose inherited string content has len(strip)>=16.",
+    "gate_fact": "isinstance(EvilStr_value,str) is True.",
+    "pre_repair_behavior": "_beacon_gate invokes beacon.strip(); _canonical_beacon invokes text.encode(); either override can raise before canonicalization.",
+    "consequence": "There exists a value admitted by the declared isinstance type domain for which the supposedly total interface is partial.",
+    "local_reproduction": {
+      "isinstance_str": true,
+      "instance_strip": "RuntimeError",
+      "builtin_str_strip": "SUCCEEDS",
+      "instance_encode": "RuntimeError",
+      "builtin_str_encode_surrogatepass": "SUCCEEDS"
+    },
+    "bytes_subclass_note": "A bytes subclass may override __bytes__; memoryview(value).tobytes() reads the immutable inherited buffer and materializes plain bytes without invoking that override."
+  },
+  "falsified_claims": [
+    "TOTAL_DECLARED_PYTHON_STRING_INTERFACE",
+    "EVERY_FINITE_PYTHON_STR_WITH_LEN_STRIP_GE_16",
+    "SCOPE_COMPLETE_FOR_BOUND_EVALUATOR"
+  ],
+  "unaffected_claims": [
+    "Candidate V3 exact ADD2 operation-order repair",
+    "Generator V4 structural identifier uniqueness under forced token collision",
+    "Surrogatepass handling for ordinary exact str values",
+    "Observed 432 nonproduction cases passing",
+    "Zero production/terminal case consumption"
+  ],
+  "accounting_correction": {
+    "atomic_predicate_proved_delta": -1,
+    "unresolved_predicate_delta": 1,
+    "bound_blocker_delta": 1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "expected_acceptance_counts_after_reconciliation": "12_PROVED__26_UNRESOLVED"
+  },
+  "repaired_candidate": {
+    "branch": "breakthrough/unknown-domain-v6-subclass-revocation-20261005",
+    "generator_blob": "d087601a62a0b8ec9ab264487fb0b27a6246b977",
+    "regression_blob": "c98733407d594c3fa5713de5742022325463f390",
+    "proof_blob": "4a3e72b365ffa7e163abc63d197fcd386bdd104d",
+    "repair": "Use built-in str descriptors and immutable buffer materialization to bypass subclass override hooks; add explicit adversarial subclass regression; exact-bind the repaired blobs in V6 proof."
+  },
+  "promotion_rule": "NO_REPROMOTION_UNTIL_AN_INDEPENDENT_CONTENT_BOUND_VERIFIER_EXECUTES_THE_REPAIRED_BLOBS_AND_EXPLICITLY_COVERS_THE_ISINSTANCE_ACCEPTED_SUBCLASS_COUNTEREXAMPLE_CLASS__THEN_RUN_SEPARATE_FAIL_CLOSED_ACCEPTANCE_REDUCTION",
+  "hard_nonclaims": [
+    "THIS_REVOCATION_DOES_NOT_ASSERT_THE_REPAIRED_CANDIDATE_HAS_PASSED_INDEPENDENT_VERIFICATION",
+    "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_PRODUCTION_OR_TERMINAL_EVIDENCE_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_predicate_credit_delta": -1,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "post_promotion_semantic_audit_relation": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_POST_PROMOTION_SEMANTIC_BRIDGE_AUDIT_20261005_V1.json",
+    "audit_status": "PASS__SEMANTIC_BRIDGE_ONLY__NO_NEW_CREDIT",
+    "audit_preservation_condition": "PRESERVE_CURRENT_PROMOTION_UNLESS_A_SEPARATE_FALSIFIER_ATTACKS_THE_V6_UNIVERSAL_THEOREM_OR_THE_INDEPENDENT_RECEIPT",
+    "this_revocation_relation": "THE_ISINSTANCE_ACCEPTED_SUBCLASS_COUNTEREXAMPLE_IS_A_SEPARATE_FALSIFIER_OF_THE_LOAD_BEARING_V6_UNIVERSAL_TOTALITY_THEOREM_AND_THEREFORE_SATISFIES_THE_AUDIT'S_EXPLICIT_REVOCATION_ESCAPE_CONDITION"
+  }
+}
