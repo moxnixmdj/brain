@@ -23,6 +23,7 @@ from typing import Any
 from canonical.runtime import livebench_legacy15_composition_archetypes_v1 as archetypes
 from canonical.runtime import livebench_legacy15_joint_witness_v1 as witness
 
+# verification trigger: isolated current-main macOS audit
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_END2END_EXACT_SYNTHETIC_AUDIT_V2"
 FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 FROZEN_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
