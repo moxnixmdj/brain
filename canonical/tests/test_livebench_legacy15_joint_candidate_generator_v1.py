@@ -132,3 +132,18 @@ def test_postscript_payload_avoids_visible_forbidden_word():
         assert re.search(r"\\bnote\\b", x, re.I) is None
         assert "P.S." in x
         assert x.rstrip().endswith("Any other questions?")
+
+
+def test_sentence_upper_bound_uses_sentence_quiet_postscript_tail():
+    for marker in ("P.S.", "P.P.S"):
+        out = g.generate([
+            c("length_constraints:number_sentences", num_sentences=2, relation="less than"),
+            c("detectable_content:postscript", postscript_marker=marker),
+            c("startend:end_checker", end_phrase="Any other questions?"),
+        ])
+        assert out["candidates"]
+        for candidate in out["candidates"]:
+            assert marker in candidate
+            assert marker + " " not in candidate
+            assert re.search(re.escape(marker) + r"\\w", candidate)
+            assert candidate.rstrip().endswith("Any other questions?")

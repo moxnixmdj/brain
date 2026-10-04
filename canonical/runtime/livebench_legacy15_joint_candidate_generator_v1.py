@@ -100,15 +100,27 @@ def _apply_end_material(
     postscript: dict[str, Any] | None,
     end_checker: dict[str, Any] | None,
     forbidden: list[str],
+    sentence_constraint: dict[str, Any] | None = None,
 ) -> str:
     end_phrase = str(_slots(end_checker).get("end_phrase") or "") if end_checker else ""
     marker = str(_slots(postscript).get("postscript_marker") or "") if postscript else ""
     tail_parts = []
     if marker:
-        tail_parts.append(marker)
-        # Never let fixed scaffolding collide with a visible forbidden-word
-        # constraint. The marker is required, but the postscript payload is free.
-        tail_parts.append(_safe_token(forbidden, "tail"))
+        # Under a strict sentence upper bound, do not place whitespace after a
+        # P.S./P.P.S marker. The frozen postscript regex still accepts the marker
+        # followed immediately by payload, while Punkt cannot create a sentence
+        # boundary there without following whitespace. This keeps an optional
+        # exact end phrase as the only unavoidable terminal sentence.
+        payload = _safe_token(forbidden, "tail")
+        sentence_quiet = (
+            sentence_constraint is not None
+            and str(_slots(sentence_constraint).get("relation") or "") == "less than"
+        )
+        if sentence_quiet:
+            tail_parts.append(marker + payload)
+        else:
+            tail_parts.append(marker)
+            tail_parts.append(payload)
     if end_phrase:
         tail_parts.append(end_phrase)
     tail = " ".join(tail_parts).strip()
@@ -277,7 +289,14 @@ def _finalize_core_candidate(
     quotation = _one(constraints, "startend:quotation") is not None
     bullets = _one(constraints, "detectable_format:number_bullet_lists") is not None
     forbidden = _forbidden(constraints)
-    text = _apply_end_material(text, postscript, end_checker, forbidden)
+    sentence_constraint = _one(constraints, "length_constraints:number_sentences")
+    text = _apply_end_material(
+        text,
+        postscript,
+        end_checker,
+        forbidden,
+        sentence_constraint=sentence_constraint,
+    )
     return _apply_quote(text, quotation, bullets=bullets)
 
 
