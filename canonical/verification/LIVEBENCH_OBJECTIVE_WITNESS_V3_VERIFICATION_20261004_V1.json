@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_OBJECTIVE_WITNESS_V3_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_VERIFIED_ON_EXACT_SOURCE_AND_ISOLATED_CONTROL_FLOW__CI_CARRIER_UNAVAILABLE__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "breakthrough/livebench-objective-witness-v1-20261004",
+    "runtime_path": "canonical/runtime/root2_livebench_if_objective_witness_adapter_v3.py",
+    "runtime_git_blob_sha": "8db37c4adc76fcd73a80ebfa89153e46e5149828",
+    "compiler_path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+    "compiler_git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+  },
+  "exact_upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_evaluator_git_blob_sha": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+    "ifbench_evaluator_git_blob_sha": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+    "score_reducer_git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676"
+  },
+  "verification": [
+    {
+      "id": "EXACT_SOURCE_STATIC_INVARIANTS",
+      "result": "PASS",
+      "checks": [
+        "ALL_THREE_UPSTREAM_BLOB_PINS_EXACT",
+        "LEGACY_STRICT_PATH_CALLS_INSTRUCTION_CHECK_FOLLOWING_RESPONSE",
+        "IFBENCH_STRICT_PATH_CALLS_INSTRUCTION_CHECK_FOLLOWING_RESPONSE",
+        "LIVEBENCH_SCORE_REDUCER_USES_ONLY_FOLLOW_ALL_AND_PER_INSTRUCTION_BOOLEANS",
+        "COMPILER_STRUCTURAL_WITNESS_IS_LOCALLY_REVALIDATED",
+        "V3_REVALIDATES_BEFORE_RETURN",
+        "V3_PRESERVES_FALLBACK",
+        "V3_EXPLICITLY_SETS_SEMANTIC_CAPABILITY_CLAIM_FALSE"
+      ]
+    },
+    {
+      "id": "ISOLATED_EXACT_V3_CONTROL_FLOW_EXECUTION",
+      "result": "PASS",
+      "checks": [
+        "PYTHON_SOURCE_COMPILES_AND_EXECUTES",
+        "PASS_STATUS_ROUTES_MODEL_INDEPENDENT_WITNESS",
+        "FORMAL_CONSTRAINTS_SATISFIED_SEMANTIC_SEED_STILL_REQUIRED_ROUTES_SCORE_CONTRACT_WITNESS",
+        "UNPARSED_SEMANTIC_REQUEST_FALLS_BACK",
+        "POSTVALIDATION_FAILURE_FAILS_CLOSED",
+        "EXTERNAL_TOOLS_FAIL_CLOSED"
+      ]
+    },
+    {
+      "id": "GITHUB_ACTIONS_CARRIER",
+      "result": "UNAVAILABLE_FOR_EVIDENCE",
+      "observed": {
+        "custom_workflow_runs_conclusion": "failure",
+        "connector_returned_recorded_steps": null,
+        "diagnostic_artifacts_count": 0,
+        "unrelated_frontier_workflow_on_same_commits_also_failed": true
+      },
+      "interpretation": "DO_NOT_TREAT_CARRIER_FAILURE_AS_SUBJECT_FAILURE_OR_PASS__CARRIER_HAS_ZERO_AUTHORITY_UNTIL_DIAGNOSTIC_EVIDENCE_EXISTS"
+    }
+  ],
+  "terminal_implication": {
+    "proven": "THE_SELF_IMPOSED_SEMANTIC_SEED_GUARD_IS_NOT_REQUIRED_BY_THE_FROZEN_SCORE_FUNCTION_FOR_COMPILER_VALID_FORMAL_WITNESSES",
+    "not_proven": "CURRENT_COMPILER_COVERAGE_IS_SUFFICIENT_FOR_LIVEBENCH_IF_GE_65_7",
+    "next_decisive_measurement": "REPLAY_ALREADY_EXPOSED_72_CASE_PREFIX_ONLY__NO_CASE_73_PLUS__MEASURE_SCORE_MASS_DELTA"
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_SEMANTIC_INSTRUCTION_FOLLOWING_CLAIM",
+    "NO_LIVEBENCH_THRESHOLD_PASS_CLAIM",
+    "NO_CASE_73_PLUS_EXPOSURE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "authority": {
+    "routing": false,
+    "replay72": false,
+    "new_case_exposure": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
