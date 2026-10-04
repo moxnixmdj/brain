@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CHARTOGRAPHY_BRAIN_ADAPTER_INTERFACE_BOUNDARY_20261004_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__EXACT_MULTIMODAL_INTERFACE_BINDING_GAP__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__EXACT_MULTIMODAL_INTERFACE_BINDING_GAP__COMPLETE_UPSTREAM_PAYLOAD_PROVENANCE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
   "target_surface": "Chartography with tools",
   "upstream_contract": {
@@ -17,7 +17,15 @@
     ],
     "solver": "inspect_ai.solver.generate",
     "output_role": "MODEL_ANSWER_TO_BE_JUDGED",
-    "judge_separate_from_brain_adapter": true
+    "judge_separate_from_brain_adapter": true,
+    "dataset_path": "src/chartography/dataset.py",
+    "dataset_git_blob_sha": "4d1bc311794527a86019f6ed4cf1efbd9bceb9bb",
+    "payload_constructor": "content = [ContentText(text=prompt), ContentImage(image=str(chart))]",
+    "provenance_chain": [
+      "dataset.py::_make_sample constructs exact prompt+image ChatMessageUser payload",
+      "task.py::chartography binds solver=generate()",
+      "scorer.py::golden_answer_scorer judges the model answer separately"
+    ]
   },
   "current_brain_interface": {
     "registry_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
