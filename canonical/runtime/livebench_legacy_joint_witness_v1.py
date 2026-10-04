@@ -2,7 +2,7 @@
 """Deterministic joint-witness constructor for frozen legacy LiveBench IFEval.
 
 This module consumes only the visible prompt. It relies on the source-lineage
-aware V2 visible compiler, constructs a scorer-facing witness, and fails closed
+aware V4 historical-envelope compiler, constructs a scorer-facing witness, and fails closed
 when visible literals make a supported structural route contradictory.
 
 It does NOT read terminal instruction_id_list, kwargs, responses, case ids, or
@@ -14,7 +14,7 @@ import json
 import re
 from typing import Any
 
-from canonical.runtime import livebench_legacy_visible_constraint_compiler_v2 as compiler
+from canonical.runtime import livebench_legacy_visible_constraint_compiler_v4 as compiler
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY_JOINT_WITNESS_V1"
 FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
