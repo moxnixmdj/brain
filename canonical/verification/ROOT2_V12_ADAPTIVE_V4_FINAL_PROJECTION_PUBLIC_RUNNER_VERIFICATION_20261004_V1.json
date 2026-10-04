@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V12_ADAPTIVE_V4_FINAL_PROJECTION_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FINAL_V12_V4_PROJECTION__ZERO_CREDIT",
+  "subject": {
+    "current_terminal_authority_git_blob_sha": "59632d81b723c4840ed599005490e28341e81054",
+    "terminal_root_cause_state_git_blob_sha": "f61fa58c7bef6dca90758bc0135536b7676386e9"
+  },
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1696,
+    "merge_commit": "53ab68b2e117e43b60e980816222c727d6e3b840",
+    "workflow_run_id": 37179727141,
+    "workflow_job_id": 111369663213,
+    "conclusion": "success"
+  },
+  "verified": {
+    "root2_v12_effective_scheduling": true,
+    "adaptive_v4_active": true,
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0
+  }
+}
