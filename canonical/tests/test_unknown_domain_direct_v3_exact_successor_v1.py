@@ -93,3 +93,19 @@ def test_v3_passes_multiple_zero_reality_qualification_populations():
                 hidden_record=hidden,
             )
             assert out["scorer_result"]["pass"] is True
+
+
+def test_v3_probe_and_abstention_identifier_guards_fail_closed():
+    pop = g3.generate_qualification_fixture_population(beacon=CEX_BEACON)
+
+    visible, hidden = _case(pop, 0)
+    bad_visible = deepcopy(visible)
+    bad_visible["domain_b"]["allowed_probes"][1]["probe_id"] = bad_visible["domain_b"]["allowed_probes"][0]["probe_id"]
+    with pytest.raises(g1.UnknownDomainGeneratorError, match="V3_PROBE_IDS_NOT_INJECTIVE"):
+        g3._allowed_probe_ids(bad_visible)
+
+    visible_a, hidden_a = _case(pop, 12)
+    bad_visible_a = deepcopy(visible_a)
+    bad_visible_a["hypotheses"][1]["hypothesis_id"] = bad_visible_a["hypotheses"][0]["hypothesis_id"]
+    with pytest.raises(g1.UnknownDomainGeneratorError, match="V3_HYPOTHESIS_IDS_NOT_INJECTIVE"):
+        g3._validate_abstention_packet(bad_visible_a, hidden_a)
