@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_POST_LIVEBENCH_ROOT2_REBIND_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "SEPARATE_TOOL_RECOMPUTATION_PASS__PRIVATE_GITHUB_HOSTED_RUNNER_INFRASTRUCTURE_FAILED_BEFORE_STEPS__SCHEDULING_ONLY__ZERO_CREDIT",
+  "objective": "Verify the exact post-LiveBench root partition and 18-predicate Root2 rebind without exposing private Brain state to the public verifier.",
+  "evidence": {
+    "current_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "c624ca84adcc3585c9afeafe4d1c6f3ebbedee3a"
+    },
+    "rebind": {
+      "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_V1.json",
+      "git_blob_sha": "8ccf5c09357e0d644a90af67dbcd18c3b5ce5925"
+    },
+    "prior_manifest": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1.json",
+      "git_blob_sha": "1fba51d15bcfdf6accd90948155517f7c9b98bbb"
+    },
+    "projection": {
+      "path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json",
+      "git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99",
+      "public_verification_run_id": 37196472583,
+      "public_verification_job_id": 111419310250
+    },
+    "reclassification": {
+      "path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+      "git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684",
+      "public_verification_run_id": 37196376134,
+      "public_verification_job_id": 111419008329
+    }
+  },
+  "recomputation": {
+    "exact_root_blob": true,
+    "exact_rebind_blob": true,
+    "exact_projection_blob": true,
+    "exact_reclassification_blob": true,
+    "partition_counts": "1_ROOT1_ONLY__15_ROOT2_ONLY__7_ROOT3_ONLY__3_ROOT2_AND_ROOT3__26_TOTAL",
+    "livebench_root1_only": true,
+    "livebench_absent_from_root2": true,
+    "root2_touching_exact_count": 18,
+    "rebind_exactly_prior_19_minus_livebench": true,
+    "proof_precedence_preserved": true,
+    "cross_predicate_reuse_preserved": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_delta": 0
+  },
+  "private_runner_infrastructure_attempts": [
+    {
+      "workflow": "Verify LiveBench root-state transport",
+      "run_id": 37196755635,
+      "job_id": 111420144015,
+      "conclusion": "failure",
+      "steps_observed": 0,
+      "runner_id": 0,
+      "interpretation": "INFRASTRUCTURE_ONLY__NO_VERIFICATION_EXECUTED"
+    },
+    {
+      "workflow": "Verify Root2 post-LiveBench 18-predicate rebind",
+      "run_id": 37196834506,
+      "conclusion": "failure",
+      "steps_observed": 0,
+      "runner_id": 0,
+      "interpretation": "INFRASTRUCTURE_ONLY__NO_VERIFICATION_EXECUTED"
+    }
+  ],
+  "privacy_rule": "PRIVATE_CANONICAL_ROOT_STATE_WAS_NOT_COPIED_TO_THE_PUBLIC_VERIFIER",
+  "hard_nonclaims": [
+    "NOT_A_PUBLIC_RUNNER_PASS_FOR_THE_PRIVATE_ROOT_BLOB",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
