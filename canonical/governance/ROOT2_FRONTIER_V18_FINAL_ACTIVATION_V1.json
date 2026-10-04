@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V18_FINAL_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__V18_CURRENT_SCHEDULING_FRONTIER__ZERO_CREDIT",
+  "frontier": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V18.json",
+    "git_blob_sha": "57d5ee650d4ee250db455d5818899f32aa304918"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_FRONTIER_V18_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "411089263339c4506b641cf08ba9ac13a50ee4c9",
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1786,
+    "merge_commit": "39440ee495903a24496be72bf99fd26da8d7cee3",
+    "workflow_run_id": 37190949097,
+    "conclusion": "success"
+  },
+  "supersedes_for_scheduling": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
+  "semantic_effect": [
+    "DELETE_EXACT_TRANSITIVE_FROZEN_RUNTIME_PACKAGE_CLOSURE_AS_CURRENT_LIVEBENCH_BLOCKER",
+    "PRESERVE_LIVEBENCH_GENERAL_INSTRUCTION_ROUTING_OR_CAPABILITY_SELECTION_AND_VALID_REPLAY_AS_OPEN",
+    "PRESERVE_5_ACCEPTED_12_PROVED_26_UNRESOLVED_19_ROOT2_TOUCHING"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_reduction": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
