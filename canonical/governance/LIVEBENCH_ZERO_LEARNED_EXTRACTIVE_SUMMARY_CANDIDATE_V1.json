@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ZERO_LEARNED_EXTRACTIVE_SUMMARY_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__BOUNDED_REAL_SEMANTIC_SEED_PRODUCER__LOCAL_TEST_PASS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "parent_frontier": {
+    "path": "canonical/governance/LIVEBENCH_ROOT1_SEMANTIC_SEED_REPAIR_FRONTIER_V1.json",
+    "commit": "7892c5e1c365703155032469fedeb38e90e9e86a",
+    "rank_1_requirement": "GENERAL_SEMANTIC_SEED_PRODUCTION"
+  },
+  "capability": {
+    "id": "text.summarize.extractive.faithful",
+    "effect": "DETERMINISTIC_LEXICAL_CENTRALITY_SELECTION_OF_VERBATIM_SOURCE_SENTENCES",
+    "faithfulness_basis": "EVERY_EMITTED_SENTENCE_IS_VERBATIM_PRESENT_IN_THE_CALLER_SUPPLIED_SOURCE_TEXT",
+    "compression_rule": "ABSTAIN_IF_SOURCE_SENTENCE_COUNT_IS_NOT_GREATER_THAN_MAX_SENTENCES",
+    "semantic_utility": "LEXICAL_CENTRALITY_PREFERS_SENTENCES_SHARING_CONTENT_TERMS_WITH_THE_REST_OF_THE_SOURCE",
+    "scope": "BOUNDED_EXTRACTIVE_SUMMARIZATION_ONLY"
+  },
+  "exact_bound_components": {
+    "canonical/governance/LIVEBENCH_ZERO_LEARNED_EXTRACTIVE_SUMMARY_PREEXPOSURE_V1.json": "abab3af85d5074d498ae2cd5b71f1085066f3cea",
+    "canonical/tests/test_zero_learned_extractive_summary_v1.py": "c27922e9119377ce424cc62164bea437853fbe91",
+    "canonical/runtime/zero_learned_extractive_summary_v1.py": "6d02d938a21da2a015b138478cfdadc26d059b22",
+    ".github/workflows/livebench-zero-learned-extractive-summary-v1.yml": "4a78907bab0c97451bd6980bcf324f66cf26c393"
+  },
+  "local_red_green_evidence": {
+    "pre_implementation_test_result": "FAIL__MODULE_NOT_FOUND",
+    "post_implementation_test_result": "PASS__5_OF_5",
+    "post_implementation_runtime_seconds": 0.001,
+    "environment": "PYTHON_STDLIB_ONLY"
+  },
+  "resource_boundary": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "network_calls_at_runtime": 0,
+    "incremental_spend_usd": 0
+  },
+  "breakthrough_deduction": "ONE_OF_THE_FOUR_LIVEBENCH_SEMANTIC_SEED_EFFECTS_HAS_A_NONLEARNED_CONSTRUCTIVE_SUBROUTE: FAITHFUL_EXTRACTIVE_SUMMARIZATION_CAN_BE PRODUCED LOCALLY WITH VERBATIM_SOURCE_FAITHFULNESS BY CONSTRUCTION. THIS REDUCES THE GENERAL_SEMANTIC_SEED_SEARCH SPACE BUT DOES NOT DISCHARGE PARAPHRASE SIMPLIFICATION STORY GENERATION OR ABSTRACTIVE_SUMMARIZATION.",
+  "required_next_verification": [
+    "RUN_EXACT_BOUND_SUBJECT_IN_REPOSITORY_CI",
+    "INDEPENDENTLY_REPLAY_EXACT_BOUND_BYTES",
+    "ADD_FRESH_NONTERMINAL_CROSS_DOMAIN_CHALLENGES",
+    "ONLY_THEN_CONSIDER_BOUND_CAPABILITY_REGISTRY_PROMOTION"
+  ],
+  "hard_nonclaims": [
+    "NO_ABSTRACTIVE_SUMMARIZATION_CLAIM",
+    "NO_OPEN_WORLD_LANGUAGE_UNDERSTANDING_CLAIM",
+    "NO_SUMMARY_COMPLETENESS_CLAIM",
+    "NO_PARAPHRASE_SIMPLIFICATION_OR_STORY_GENERATION_CLAIM",
+    "NO_LIVEBENCH_TERMINAL_SCORE_CREDIT",
+    "NO_OPUS_FAMILY_OR_TERMINAL_GOAL_CREDIT"
+  ],
+  "accounting": {
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  }
+}
