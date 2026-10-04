@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OFFICIAL_SCORER_LLM_JUDGE_BOUNDARY_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__OFFICIAL_SCORER_APPLIES_LLM_JUDGE_TO_EVERY_PREDICTION__DETERMINISTIC_TYPE_BYPASS_NOT_PRESENT__EQUIVALENT_SCORER_ROUTE_PRESERVED__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "primary_source": {
+    "repository": "centerforaisafety/hle",
+    "path": "hle_eval/run_judge_results.py",
+    "git_blob_sha": "4caca7c5e6eaa9c64ec33e5f1bcc93312e6c5b31",
+    "url": "https://github.com/centerforaisafety/hle/blob/main/hle_eval/run_judge_results.py"
+  },
+  "source_facts": [
+    "JUDGE_PROMPT_DEFINES_EXTRACTED_FINAL_ANSWER_CORRECT_YES_NO_AND_CONFIDENCE",
+    "ADD_JUDGE_RESPONSE_CALLS_EXTRACT_ANSWER_FOR_EACH_UNJUDGED_PREDICTION",
+    "JUDGE_ALL_RESPONSES_MAPS_ADD_JUDGE_RESPONSE_OVER_ALL_SELECTED_QUESTIONS",
+    "NO_QUESTION_TYPE_BRANCH_OR_MULTIPLE_CHOICE_EXACT_MATCH_BYPASS_EXISTS_IN_OFFICIAL_RUN_JUDGE_RESULTS",
+    "METRICS_USE_JUDGE_RESPONSE_CORRECT_FIELD_FOR_ACCURACY"
+  ],
+  "narrow_conclusion": {
+    "official_evaluator_has_deterministic_question_type_bypass": false,
+    "official_evaluator_requires_llm_judge_for_each_scored_prediction": true,
+    "zero_cost_equivalent_scorer_proved": false,
+    "stronger_scorer_relation_proved": false,
+    "brain_score_proved": false
+  },
+  "scheduler_delta": {
+    "delete": [
+      "SEARCH_FOR_AN_EXISTING_OFFICIAL_MULTIPLE_CHOICE_OR_EXACT_MATCH_BYPASS_INSIDE_RUN_JUDGE_RESULTS_PY"
+    ],
+    "preserve": [
+      "MATERIAL_CAIS_HLE_FULL_2500_AUTO_GATE_ACCOUNT_ACCESS_WITHOUT_CONTAMINATION",
+      "ZERO_COST_CLAUDE_OPUS_4_6_COMPARABLE_GRADER_OR_FORMALLY_PROVED_EQUIVALENT_OR_STRONGER_SCORER_RELATION",
+      "BRAIN_SCORE_GE_67_7"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_A_DETERMINISTIC_EQUIVALENT_SCORER_IS_IMPOSSIBLE_IN_PRINCIPLE",
+    "NO_CLAIM_ALL_HLE_ANSWER_SEMANTICS_REQUIRE_SUBJECTIVE_JUDGMENT",
+    "NO_CLAIM_ALTERNATE_JUDGES_ARE_COMPARABLE_TO_FROZEN_CLAUDE_OPUS_4_6",
+    "NO_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
