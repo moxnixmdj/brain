@@ -360,6 +360,18 @@
       "promotion_authority": false,
       "fresh_reality_authority": false,
       "acceptance_credit_delta": 0
+    },
+    "terminal_minimum_causal_depth": {
+      "activation_path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "c184c1aed33c06f6b4307ace79a959c21de96958",
+      "verification_path": "canonical/verification/TERMINAL_MINIMUM_CAUSAL_DEPTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_runner_pr": 1777,
+      "verification_workflow_run_id": 37190119446,
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__SCHEDULING_ONLY__ZERO_CREDIT",
+      "scheduling_authority": true,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false
     }
   },
   "accounting": {
