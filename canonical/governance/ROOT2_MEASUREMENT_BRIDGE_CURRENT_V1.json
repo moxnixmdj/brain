@@ -39,7 +39,7 @@
     "root2_partition": "16_ROOT2_ONLY__3_MIXED__19_TOUCHING",
     "zero_reality_frontier_bound": true
   },
-  "next": "EXECUTE_ONLY_CURRENT_ROOT2_V6_ZERO_REALITY_FRONTIER__OBSERVE_ACCOUNT_FACTS_ONLY_WHEN_CONNECTED__BIND_OWNER_RECEIPTS_ON_ARRIVAL__RECOMPUTE_FIXED_POINT__NO_FRESH_SCORE_BEFORE_FIXED_POINT",
+  "next": "EXECUTE_ONLY_CURRENT_ROOT2_V7_ZERO_REALITY_FRONTIER__NO_FRESH_SCORE_BEFORE_FIXED_POINT",
   "incremental_spend_usd": 0,
   "terminal_cases_consumed": 0,
   "acceptance_credit_delta": 0,
@@ -51,13 +51,13 @@
     "activation_git_blob_sha": "4cbc1b9f478654b2dc671a8b54f91b5c4b91c019",
     "verification_path": "canonical/verification/ROOT2_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
     "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
-    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V6.json",
-    "frontier_git_blob_sha": "fcbdb818b63b4986b026db29c400a47373a26fdb",
-    "status": "ACTIVE__ROOT2_FRONTIER_V6_INDEPENDENT_PASS__CURRENT_AUTHORITY_BOUND__ZERO_CREDIT",
-    "frontier_verification_path": "canonical/verification/ROOT2_FRONTIER_V6_FINANCE_COMPRESSION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-    "frontier_verification_git_blob_sha": "b4cac01e5c1fe32a300607fe89854b4081376c3f",
+    "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V7.json",
+    "frontier_git_blob_sha": "35e8b578aca1290bcf469d6350ae085ba8a86c64",
+    "status": "ACTIVE__ROOT2_FRONTIER_V7_INDEPENDENT_PASS__CURRENT_AUTHORITY_BOUND__ZERO_CREDIT",
+    "frontier_verification_path": "canonical/verification/ROOT2_FRONTIER_V7_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "frontier_verification_git_blob_sha": "c2b96c9d48b7ef6508ea77dc6983da12eaf099c3",
     "effective_scheduling_authority": true,
-    "frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V6_ACTIVATION_V1.json",
-    "frontier_activation_git_blob_sha": "9a0ef849b74faa26c07d94035c8455eee8777cdd"
+    "frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V7_ACTIVATION_V1.json",
+    "frontier_activation_git_blob_sha": "ccfc97ca8f5586d583990f0e37277b88c12227e9"
   }
 }
