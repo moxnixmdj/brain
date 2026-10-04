@@ -64,6 +64,29 @@ def validate()->None:
   # independent new-target-vs-development-set test.
   base=t.rsplit("/",1)[-1].rsplit(":",1)[-1]
 
+def _plain_tokens(text:str)->list[str]:
+    out=[];cur=[]
+    for ch in v11._norm(text):
+        if ch.isalnum() or ch in "_.-":
+            cur.append(ch)
+        elif cur:
+            out.append("".join(cur));cur=[]
+    if cur:out.append("".join(cur))
+    return out
+
+def identity_leaked(value:Any,target:str)->bool:
+    t=v11._norm(target)
+    if isinstance(value,Mapping):
+        return any(identity_leaked(v,t) for v in value.values())
+    if isinstance(value,(list,tuple)):
+        return any(identity_leaked(v,t) for v in value)
+    if not isinstance(value,str) or not t:
+        return False
+    s=v11._norm(value)
+    if any(ch in t for ch in "/:@"):
+        return t in s
+    return t in _plain_tokens(s)
+
 def source_row(row:Mapping[str,Any])->dict[str,Any]:
  return {"source_id":row["source_id"],"upstream_group":row["upstream_group"],
          "ecosystem":row["provider"],"bounded_scope":False}
