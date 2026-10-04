@@ -21,6 +21,7 @@ from itertools import combinations
 from typing import Any, Iterable
 
 from canonical.runtime import livebench_legacy15_joint_candidate_generator_v1 as base
+from canonical.runtime import livebench_legacy15_composition_partition_v1 as partition
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_RELAXED_CANDIDATE_SEARCH_V1"
 MAX_CHECKERS = 5
@@ -42,6 +43,11 @@ def _normalize(constraints: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
         raise ValueError("INSTRUCTION_ID_REQUIRED")
     if len(ids) != len(set(ids)):
         raise ValueError("DUPLICATE_INSTRUCTION_ID")
+    if any(c.get("parameter_complete") is not True for c in rows):
+        raise ValueError("PARAMETER_INCOMPLETE")
+    classification = partition.classify(ids)
+    if classification.get("status") != "PASS":
+        raise ValueError("ACTIVE15_CONFLICT_GRAPH_REJECTED")
     return rows
 
 
