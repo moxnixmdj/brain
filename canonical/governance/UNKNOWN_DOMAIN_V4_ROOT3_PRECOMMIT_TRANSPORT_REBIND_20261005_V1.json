@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_ROOT3_PRECOMMIT_TRANSPORT_REBIND_20261005_V1",
+  "date": "2026-10-05",
+  "status": "TRANSPORT_ONLY_REBIND__PRECOMMITTED_THRESHOLDS_UNCHANGED__ZERO_CREDIT",
+  "supersedes_transport_identity_only": "canonical/governance/UNKNOWN_DOMAIN_V4_ROOT3_ACCEPTANCE_REDUCTION_PRECOMMIT_20261005_V1.json",
+  "preserved_precommit_commit": "19f98cc05ecf201f20344c346763ff9064af704c",
+  "preserved_acceptance_binding_git_blob_sha_at_freeze": "25bc947e9f4b71b46dff13405cf231602cdeff1f",
+  "preserved_thresholds_and_decision_rule_unchanged": true,
+  "old_failed_transport": {
+    "run_id": 37242352158,
+    "job_id": 111553420191,
+    "failure": "MODULE_IMPORT_PATH_BEFORE_VERIFIER_EXECUTION"
+  },
+  "replacement_independent_transport": {
+    "verifier_commit": "9284ec7f2dc62f3d544257ea588f9c2d452b41d3",
+    "run_id": 37242589767,
+    "job_id": 111554089776,
+    "conclusion": "success",
+    "receipt_path": "canonical/verification/UNKNOWN_DOMAIN_V4_TOTAL_EXACT_INDEPENDENT_VERIFICATION_20261005_V1.json"
+  },
+  "exact_v4_subject_blobs": {
+    "canonical/runtime/unknown_domain_direct_candidate_v1.py": "a2a77269a8175ce315b466035049da0f761b8734",
+    "canonical/runtime/unknown_domain_direct_candidate_v2.py": "4470716f95a559a700e461262df909ae19a41651",
+    "canonical/runtime/unknown_domain_direct_candidate_v3.py": "8df7f13455b710623806a8219174b397a2c3c442",
+    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py": "8b855851b8a0fec3a0811c5033cc4ea6d2436954",
+    "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "canonical/runtime/unknown_domain_direct_v4_universal_proof_v1.py": "72bbed393ac1bcaccb4cf33cd37835662c421f6c"
+  },
+  "forbidden": [
+    "NO_THRESHOLD_CHANGES",
+    "NO_SUBJECT_BYTE_SUBSTITUTION",
+    "NO_CREDIT_FROM_TRANSPORT_REBIND",
+    "NO_RESTORATION_OF_REVOKED_V2_UNIVERSAL_PROOF"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
