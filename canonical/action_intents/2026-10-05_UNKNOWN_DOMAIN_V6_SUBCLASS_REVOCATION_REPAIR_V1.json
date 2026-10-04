@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
+  "action_id": "UNKNOWN-DOMAIN-V6-SUBCLASS-REVOCATION-REPAIR-20261005-V1",
+  "status": "CRITICAL_PATH__ZERO_REALITY__FALSE_CREDIT_REVOCATION_AND_REPAIR__INDEPENDENT_VERIFICATION_PENDING",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a3417a4e88dba3b830dc729584fd6f831baab3a9",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "UNKNOWN_DOMAIN_ADAPTATION",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "action_kind": "REVOKE_FALSE_ATOMIC_CREDIT_AND_REPAIR_EXISTING_ZERO_REALITY_UNIVERSAL_PROOF",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::UNKNOWN_DOMAIN_ADAPTATION::V6_ISINSTANCE_SUBCLASS_PARTIALITY_INVALIDATES_UNIVERSAL_TOTALITY",
+  "expected_parent_frontier_change": "IMMEDIATE_TRUTH_REPAIR_TO_12_OF_38__THEN_IF_REPAIRED_BLOBS_INDEPENDENTLY_PASS__RESTORE_THIS_ONE_ATOMIC_PREDICATE_WITH_ZERO_FRESH_REALITY",
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-10-05_UNKNOWN_DOMAIN_V6_SUBCLASS_PROMOTION_REVOCATION_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "obs_goal": {
+      "surviving_necessity": "REMOVE_FALSE_POSITIVE_CREDIT_AND_PRESERVE_THE_ORIGINAL_ACCEPTED_INPUT_QUANTIFIER"
+    },
+    "obs_capability": {
+      "reused": [
+        "V5 surrogate-safe canonicalizer",
+        "V4 structural IDs",
+        "Candidate V3 exact float semantics",
+        "existing scorer/harness"
+      ]
+    },
+    "obs_blocker": {
+      "surviving_causal_blocker": "ISINSTANCE_ACCEPTED_STR_SUBCLASS_CAN_OVERRIDE_INSTANCE_STRIP_OR_ENCODE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE_FALSE_CREDIT",
+        "BYPASS_FRESH_REALITY",
+        "REUSE_EXISTING_ROUTE",
+        "CONFIGURE_BUILTIN_DESCRIPTOR_CALLS"
+      ],
+      "selected_surviving_route": "BUILTIN_STR_DESCRIPTOR_PLUS_BUFFER_PROTOCOL_REPAIR_WITH_ADVERSARIAL_REGRESSION",
+      "fastest_sufficient": true
+    },
+    "obs_verification": {
+      "falsification_condition": "ANY_ADMITTED_SUBCLASS_REMAINS_PARTIAL__ANY_BOUND_REGRESSION_FAILS__ANY_INDEPENDENT_CONTENT_BOUND_CHECK_FAILS"
+    },
+    "obs_inherited_system": {
+      "unchanged_components_reused": true
+    },
+    "obs_obs": {
+      "material_state_change_requires_revalidation_before_merge_or_repromotion": true
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT__TOTAL_EXACT_EVALUATOR__SUBCLASS_SAFE",
+    "inputs": "All values admitted by the existing isinstance-based beacon/secret gates, including str and bytes subclasses.",
+    "environment_state": "Repaired Generator V5 + Generator V4 + Candidate V3 + exact harness/scorer.",
+    "allowed_information": "Existing zero-reality proof inputs only; no terminal/production cases.",
+    "required_output_or_action": "Canonicalization/emission must be total over admitted values and all bound evaluator semantics must remain exact.",
+    "success_condition": "Adversarial subclasses cannot trigger override partiality; exact V6 proof bindings pass; independent verification passes.",
+    "failure_condition": "Any admitted value raises due to overridable subclass hooks or any existing exact evaluator property regresses.",
+    "terminal_consequence": "One atomic predicate may become eligible for re-promotion only after separate independent reduction.",
+    "verification_route": "Adversarial subclass regression + exact V6 proof + independent PR verifier.",
+    "dependency_boundary": "No external learned capability provider.",
+    "scope": "EXACT_BOUND_EVALUATOR_ONLY"
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "Totality over the literal admitted isinstance domain.",
+    "hole_type": "UNIVERSAL_INPUT_DOMAIN_PARTIALITY",
+    "expected_certificate_or_receipt": "Independent content-bound pass on repaired blobs with explicit subclass counterexample coverage.",
+    "validator": "Independent CI/runner plus separate acceptance reduction.",
+    "maximum_cheap_test_cost": "ZERO_FRESH_REALITY",
+    "contamination_risk": "NONE",
+    "reversibility": "FULL",
+    "critical_path_relation": "Corrects a false terminal-progress atom and restores the cheapest valid proof path."
+  },
+  "continuous_obs": {
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      "acceptance ledger",
+      "V5 generator",
+      "V5 tests",
+      "V6 proof",
+      "V6 promotion receipts"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "information_policy": "ZERO_REALITY",
+    "post_receipt_revalidation_required": true
+  },
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "proof_obligation": "V6_SUBCLASS_TOTALITY",
+    "deductive_closure": "COUNTEREXAMPLE_PROVED__REPAIR_IMPLEMENTED__INDEPENDENT_VERIFICATION_PENDING",
+    "candidate_observations": [],
+    "minimum_reality_cut": [],
+    "terminal_decision_value": "ZERO_NEW_REALITY_REQUIRED",
+    "global_cut_membership": false
+  },
+  "global_terminal_proof_cut": {
+    "required": false,
+    "reason": "NO_UNTOUCHED_INFORMATION_OR_TERMINAL_REALITY_IS_CONSUMED",
+    "proposed_action_membership": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_predicate_credit_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
