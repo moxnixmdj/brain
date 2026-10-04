@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_OLD_LEASE_CLAIM_TOMBSTONE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__STALE_LEASE_IRREVERSIBLY_FAIL_CLOSED__ZERO_PRODUCTION_CASES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "stale_lease": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "sha256": "76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "prior_git_blob_sha": "26f98012ecf01c6a3f20e855bdebf60cf70d1c1f",
+    "defect": "GENERATOR_V2_IMPORTS_GENERATOR_V1_BUT_GENERATOR_V1_WAS_NOT_CONTENT_ADDRESSED_BY_THE_STALE_EXECUTION_LEASE"
+  },
+  "fail_closed_actions": {
+    "stale_launch_ref": "refs/heads/unknown-domain-direct-launch/76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "stale_launch_safety_hold_commit": "2e80454bfd5f49efe00f3cb4233ca6c3a26648df",
+    "stale_claim_tombstone_ref": "refs/heads/unknown-domain-direct-claims/76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "tombstone_target_commit": "2e80454bfd5f49efe00f3cb4233ca6c3a26648df",
+    "semantics": "THE_OBSOLETE_CLAIM_KEY_IS_INTENTIONALLY_SPENT_AS_A_SAFETY_TOMBSTONE_WITHOUT_RUNNING_THE_PRODUCTION_GENERATOR; ANY_STALE_LAUNCHER_CLAIM_CREATE_NOW_RETURNS_NON_201_AND_MUST_ABORT_BEFORE_BEACON_OR_CASE_GENERATION"
+  },
+  "observed_before_tombstone": {
+    "original_failed_run_id": 37239903215,
+    "original_failed_job_id": 111546358270,
+    "original_failure": "ModuleNotFoundError: No module named 'canonical'",
+    "original_failure_phase": "MODULE_IMPORT_BEFORE_MAIN",
+    "production_cases_consumed": 0,
+    "production_claim_created_by_launcher": false
+  },
+  "superseding_route": {
+    "runner_pull_request": 2033,
+    "branch": "fix-unknown-domain-production-entrypoint-20261005",
+    "required_properties": [
+      "PACKAGE_MODULE_ENTRYPOINT",
+      "TRANSITIVE_GENERATOR_V1_CONTENT_BINDING",
+      "LOCAL_CANONICAL_RUNTIME_DEPENDENCY_CLOSURE_VERIFIER",
+      "NEW_EXECUTION_LEASE_DIGEST",
+      "NEW_ATOMIC_CLAIM_KEY",
+      "INDEPENDENT_PUBLIC_RUNNER_PASS_BEFORE_LAUNCH"
+    ],
+    "current_credit": "ZERO_UNTIL_VERIFIED_PRODUCTION_RESULT_AND_SEPARATE_INDEPENDENT_REDUCTION"
+  },
+  "hard_nonclaims": [
+    "CLAIM_TOMBSTONE_IS_NOT_A_PRODUCTION_EXECUTION",
+    "NO_BEACON_OR_EVALUATOR_SECRET_WAS_GENERATED_BY_THIS_TOMBSTONE",
+    "NO_HIDDEN_PRODUCTION_CASE_WAS_GENERATED_BY_THIS_TOMBSTONE",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "production_cases_generated_by_tombstone": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
