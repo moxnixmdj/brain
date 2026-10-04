@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_4B_REASONING_CHANNEL_TRUTH_REPAIR_20261004_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_HARNESS_TRUTH_REPAIR__EXACT_PUBLIC_REPLACEMENT_RUN_LAUNCHED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "falsification_receipt": {
+    "diagnostic_run_id": 37200657551,
+    "conclusion": "FAIL",
+    "exact_subject_sha256": "dec96e8cf2e11b613bb46513dec485377f9ca5a351e71712ee0e244f287c6790",
+    "infrastructure": {
+      "public_zero_spend_runner": "PASS",
+      "exact_subject_acquisition_and_sha": "PASS",
+      "pinned_llama_cpp_build": "PASS",
+      "local_server_start": "PASS"
+    },
+    "synthetic_suite": {
+      "case_count": 8,
+      "case_pass_count": 0,
+      "all_final_answers_empty": true,
+      "interpretation": "HARNESS_CONFOUND__SHORT_MAX_TOKEN_BUDGET_EXHAUSTED_IN_REASONING_CHANNEL_WHILE_VERIFIER_READ_ONLY_MESSAGE_CONTENT__NOT_ADMISSIBLE_AS_SEMANTIC_MODEL_FAILURE"
+    }
+  },
+  "pinned_runtime_truth": {
+    "llama_cpp_commit": "0504396140d1c882f5f6ee34466a42db7ae90114",
+    "verified_cli_contract": "--reasoning off",
+    "source_path": "common/arg.cpp",
+    "semantics": "SETS_ENABLE_REASONING_FALSE_AND_TEMPLATE_ENABLE_THINKING_FALSE",
+    "deprecated_equivalent": "--chat-template-kwargs {\"enable_thinking\":false}"
+  },
+  "repair": {
+    "verifier_commit": "4d47598b313067235549cef2bc6ab511956090ac",
+    "workflow_commit": "5e69c633d6b5227a8d48bf75a67fd7240f6c358c",
+    "isolated_branch": "root1-isolated-macos-20261004",
+    "exact_public_replacement_run_id": 37201584218,
+    "replacement_run_number": 2,
+    "inference_contract": "PINNED_LLAMA_CPP__REASONING_OFF__ONE_FINAL_OUTPUT_PER_PUBLIC_CASE",
+    "score_geometry": "UNCHANGED_EXACT_200_PUBLIC_2026_06_25_LEGACY_IFEVAL_ROWS__FOUR_TASK_EQUAL_MEAN__PASS_GE_65_73775"
+  },
+  "deleted_inferences": [
+    "ZERO_OF_EIGHT_SYNTHETIC_PASS_IMPLIES_4B_SEMANTIC_FAILURE",
+    "EMPTY_MESSAGE_CONTENT_IS_A_VALID_MODEL_ANSWER_WHEN_REASONING_CHANNEL_CONSUMED_THE_TOKEN_BUDGET",
+    "RUN_EXACT_200_WITH_AUTO_REASONING_AFTER_REASONING_CHANNEL_CONFOUND_IS_OBSERVED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_4B_PASSES_ROOT1",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_HIDDEN_OR_TERMINAL_CASES_USED",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "public_nonterminal_execution": true,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
