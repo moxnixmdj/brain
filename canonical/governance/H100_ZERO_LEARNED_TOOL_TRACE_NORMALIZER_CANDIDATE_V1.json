@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_TOOL_TRACE_NORMALIZER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PREEXPOSED_10_TASK_STRUCTURAL_TRACE_NORMALIZATION__EXACT_BLOB_BOUND__ZERO_LEARNED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "TEST_WHETHER_THE_CURRENT_H100_TOOL_TRACE_SEMANTICS_RESIDUAL_CAN_BE_REDUCED_BY_ZERO_LEARNED_STRUCTURAL_NORMALIZATION_OVER_WRAPPER_VARIATION_EVENT_CORRELATION_RETRIES_AND_FAIL_CLOSED_CONFLICT_HANDLING",
+  "prerequisite": {
+    "compositional_verification": "canonical/verification/H100_ZERO_LEARNED_COMPOSITIONAL_LANGUAGE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "compositional_verification_git_blob_sha": "b58c0fd2df9313c8a25645a8f0343f17821ef344",
+    "status": "SATISFIED"
+  },
+  "preexposure": {
+    "path": "canonical/governance/H100_ZERO_LEARNED_TOOL_TRACE_VARIATION_PREEXPOSURE_V1.json",
+    "git_blob_sha": "b280663c459d72e3e6081130a3cdb8680a668b64",
+    "task_count": 10,
+    "chronology": "FROZEN_BEFORE_NORMALIZER_IMPLEMENTATION_AND_OUTCOMES"
+  },
+  "exact_bound_components": {
+    "canonical/runtime/h100_zero_learned_tool_trace_normalizer_v1.py": "c5b8018c9a62fcec85de46b0ace1be0bd0ddbd06",
+    "canonical/tests/test_h100_zero_learned_tool_trace_normalizer_v1.py": "d8e61fbd11e377c77df0ee49e593fdad8f7bf53a"
+  },
+  "operative_scope": [
+    "REQUEST_RESPONSE_WRAPPERS",
+    "PARAMS_OUTPUT_WRAPPERS",
+    "NAME_VALUE_ARGUMENT_LISTS",
+    "NESTED_PAYLOAD_DATA",
+    "EVENT_STREAM_CALL_ID_CORRELATION",
+    "ATTEMPT_ID_RETRY_CORRELATION",
+    "ERROR_THEN_IDENTICAL_INPUT_SUCCESS",
+    "CONFLICTING_SUCCESS_RESULT_ABSTENTION",
+    "ORPHAN_OR_INCOMPLETE_CALL_ABSTENTION",
+    "NONNUMERIC_DECLARED_FIELD_ABSTENTION",
+    "UNKNOWN_WRAPPER_ABSTENTION"
+  ],
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "random_search": false,
+    "dynamic_code_execution": false,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "success_effect_if_independently_verified": {
+    "structural_progress": "DISCHARGE_BOUNDED_STRUCTURAL_TOOL_TRACE_VARIATION_GATE",
+    "next_residual": "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+    "learned_byte_rung_change": 0
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_TOOL_TRACE_COMPLETENESS",
+    "NO_GENERAL_TOOL_SEMANTICS_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_LEARNED_KERNEL_JUSTIFICATION"
+  ],
+  "independent_verification_required": true
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_TOOL_TRACE_NORMALIZER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FROZEN_10_OF_10_PLUS_5_FRESH_CHALLENGES__ZERO_LEARNED_BYTES__ZERO_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_TOOL_TRACE_VARIATION_PREEXPOSURE_V1.json",
+      "git_blob_sha": "b280663c459d72e3e6081130a3cdb8680a668b64"
+    },
+    "candidate": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_TOOL_TRACE_NORMALIZER_CANDIDATE_V1.json",
+      "git_blob_sha": "6f9b10c905ba3b33e5c687a1253655ead997747a"
+    },
+    "runtime": {
+      "path": "canonical/runtime/h100_zero_learned_tool_trace_normalizer_v1.py",
+      "git_blob_sha": "c5b8018c9a62fcec85de46b0ace1be0bd0ddbd06"
+    },
+    "tests": {
+      "path": "canonical/tests/test_h100_zero_learned_tool_trace_normalizer_v1.py",
+      "git_blob_sha": "d8e61fbd11e377c77df0ee49e593fdad8f7bf53a"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1816,
+    "verifier_head_sha": "5fe4399084fb53c084b9a7564b8890d03c50a19d",
+    "merge_commit": "b16e4080067c75c269e492c125a47a67cbb76b6b",
+    "workflow_run_id": 37193482392,
+    "workflow_job_id": 111410387302,
+    "conclusion": "success",
+    "verifier_path": "verify_h100_tool_trace_normalizer_v1.py",
+    "verifier_git_blob_sha": "56068991d9252456c65b4ff6c49ea4f55732d756",
+    "workflow_path": ".github/workflows/verify-h100-tool-trace-normalizer-v1.yml",
+    "workflow_git_blob_sha": "9d98f9dda99a7f0ecd4ecab969ad9afe4744b51c"
+  },
+  "independently_verified": {
+    "exact_subject_blobs": true,
+    "copied_subject_tests": "PASS",
+    "frozen_preexposed_tasks": "10_OF_10_EXACT",
+    "fresh_tool_trace_challenges": "5_OF_5_PASS",
+    "runtime_import_surface": [
+      "__future__",
+      "math",
+      "typing"
+    ],
+    "learned_or_network_imports_detected": false,
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0
+  },
+  "deduction": "BOUNDED_STRUCTURAL_TOOL_TRACE_VARIATION_WRAPPER_NORMALIZATION_CALL_ATTEMPT_CORRELATION_SAFE_RETRY_AND_FAIL_CLOSED_CONFLICT_HANDLING_CAN_BE_COMPILED_WITH_ZERO_PERSISTENT_LEARNED_STATE",
+  "residual_after_verification": [
+    "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+    "DIRECT_UNKNOWN_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION_EVIDENCE",
+    "OPEN_WORLD_LEXICAL_COVERAGE_COMPLETENESS"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_TOOL_TRACE_COMPLETENESS",
+    "NO_GENERAL_TOOL_SEMANTICS_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
