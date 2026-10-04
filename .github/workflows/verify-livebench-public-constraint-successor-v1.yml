@@ -33,11 +33,35 @@ jobs:
           test "$(git -C /tmp/LiveBench rev-parse HEAD)" = "8f8e5c381a16e3f24257776edd53471fe86f8091"
       - name: Run local compiler and solver tests
         run: |
+          set +e
           python -m unittest -v \
             canonical.tests.test_instruction_constraint_compiler_v2 \
-            canonical.tests.test_livebench_public_constraint_solver_v1
+            canonical.tests.test_livebench_public_constraint_solver_v1 \
+            > local-tests.log 2>&1
+          echo "$?" > local-tests.status
+          cat local-tests.log
+          exit 0
       - name: Validate witnesses against exact frozen upstream checkers
         env:
           PYTHONPATH: "/tmp/LiveBench:."
         run: |
-          python -m unittest -v canonical.tests.test_livebench_public_upstream_checker_v1
+          set +e
+          python -m unittest -v canonical.tests.test_livebench_public_upstream_checker_v1 \
+            > upstream-tests.log 2>&1
+          echo "$?" > upstream-tests.status
+          cat upstream-tests.log
+          exit 0
+      - name: Upload diagnostic logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: livebench-public-constraint-successor-v1-diagnostics
+          path: |
+            local-tests.log
+            local-tests.status
+            upstream-tests.log
+            upstream-tests.status
+      - name: Enforce test outcomes
+        run: |
+          test "$(cat local-tests.status)" = "0"
+          test "$(cat upstream-tests.status)" = "0"
