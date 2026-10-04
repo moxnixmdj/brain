@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_SMAUG_MINI_EXACT_SHARD_DEDUP_DISCOVERY_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_CONTENT_HASH_DISCOVERY__TWO_OF_EIGHTEEN_FULL_BF16_SHARDS_BIT_IDENTICAL_TO_BASE__DELTA_EXTRACTION_CAN_SKIP_THEM__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subjects": {
+    "base": {
+      "repository": "Qwen/Qwen3.8-27B",
+      "weight_upload_commit": "72a217afab8029b39e4af1c7273a829995a3dbaf"
+    },
+    "finetune": {
+      "repository": "abacusai/Smaug-Mini",
+      "weight_upload_commit": "118dbb615bda182ecc511ea2593cb25bbe978a71",
+      "selected_revision": "2750fd9f1e67e004111a53a6d9a39c15fbbd33ef"
+    }
+  },
+  "comparison": {
+    "shard_count": 18,
+    "same_shard_boundaries_and_sizes": true,
+    "exact_full_shard_matches": [
+      {
+        "shard": "model-00003-of-00018.safetensors",
+        "bytes": 2542796952,
+        "sha256": "2e1bf62cbcd406eaa64b60d10353e1f0ef4039d0976e56f05cabe953454f9968",
+        "known_content_role_evidence": "BASE_LAYOUT_PLACES_MODEL_LANGUAGE_MODEL_EMBED_TOKENS_IN_SHARD_3__WHOLE_SHARD_IDENTITY_PROVES_ALL_SHARD3_BYTES_UNCHANGED"
+      },
+      {
+        "shard": "model-00018-of-00018.safetensors",
+        "bytes": 3392197344,
+        "sha256": "1d3479509e21494658f9b64d317f5ea8e55c4025d28c702d6c4d0b356ce8ea06",
+        "known_content_role_evidence": "PUBLIC_QWEN_QUANTIZATION_METADATA_IDENTIFIES_MTP_SOURCE_STATE_IN_SHARD_18__WHOLE_SHARD_IDENTITY_IS_CONSISTENT_WITH_SMAUG_CARD_STATEMENT_MTP_WAS_INHERITED_AND_NOT_RETRAINED"
+      }
+    ],
+    "exact_identical_bytes": 5934994296,
+    "exact_identical_gb_decimal": 5.934994296,
+    "fraction_of_55_6gb_reference_percent_approx": 10.674,
+    "other_shards_same_sha": false
+  },
+  "breakthrough": {
+    "statement": "SMAUG_IS_NOT_AN_IRREDUCIBLE_SECOND_55_6_GB_STATE_EVEN_BEFORE_LOW_RANK_RECOVERY__AT_LEAST_5_934994296_GB OF_FULL_SHARD_BYTES ARE_PROVABLY_IDENTICAL_TO_BASE_BY_PUBLIC_SHA256",
+    "reverse_lora_effect": "DO_NOT_DOWNLOAD_OR_FACTOR_SHARDS_3_AND_18_DURING_BASE_TO_SMAUG_DELTA_RECOVERY__THEIR_DELTA_IS_EXACTLY_ZERO_AT_WHOLE_SHARD_LEVEL",
+    "ownership_effect": "IF_AN_EXACT_BASE_VAULT_LATER_OWNS_THESE_CONTENT_HASHES__A_CONTENT_ADDRESSED_SMAUG_MANIFEST_CAN_REFERENCE_THE_EXISTING_OBJECTS_INSTEAD_OF_DUPLICATING_THEM"
+  },
+  "public_evidence": {
+    "smaug_weight_commit": "https://huggingface.co/abacusai/Smaug-Mini/commit/118dbb615bda182ecc511ea2593cb25bbe978a71",
+    "qwen_weight_commit": "https://huggingface.co/Qwen/Qwen3.8-27B/commit/72a217afab8029b39e4af1c7273a829995a3dbaf",
+    "smaug_training_card": "https://huggingface.co/abacusai/Smaug-Mini/blob/2750fd9f1e67e004111a53a6d9a39c15fbbd33ef/README.md"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_OTHER_16_SHARDS_HAVE_NO_TENSOR_LEVEL_DEDUPLICATION__ONLY_WHOLE_SHARD_SHA256_WAS_COMPARED_HERE",
+    "NO_CLAIM_THE_BRAIN_ALREADY_OWNS_THE_BASE_BF16_SHARDS",
+    "NO_CLAIM_CONTENT_HASH_REUSE_ACROSS_EXTERNAL_REPOSITORIES_ALONE_SATISFIES_TERMINAL_OWNERSHIP",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
