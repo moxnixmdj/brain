@@ -8,6 +8,9 @@ The critical accounting rule is deliberately hostile to convenient bookkeeping:
 all persistent learned state counts, independent of where it is hosted. External
 learned capability providers are forbidden during scored execution because their
 weights cannot be omitted from the budget by moving them behind a network call.
+
+Every learned artifact byte count must also be independently verified and bound
+to a content-addressed receipt. A self-reported byte count is not load-bearing.
 """
 from __future__ import annotations
 
@@ -40,10 +43,19 @@ def _is_nonnegative_int(value: Any) -> bool:
 
 
 def _is_sha256(value: Any) -> bool:
+    return isinstance(value, str) and len(value) == 64 and set(value.lower()) <= HEX
+
+
+def _is_git_sha(value: Any) -> bool:
+    return isinstance(value, str) and len(value) == 40 and set(value.lower()) <= HEX
+
+
+def _receipt(value: Any) -> bool:
     return (
-        isinstance(value, str)
-        and len(value) == 64
-        and set(value.lower()) <= HEX
+        isinstance(value, Mapping)
+        and isinstance(value.get("path"), str)
+        and bool(value.get("path"))
+        and _is_git_sha(value.get("git_blob_sha"))
     )
 
 
@@ -72,6 +84,7 @@ def audit(doc: Mapping[str, Any]) -> dict[str, Any]:
     Required properties:
     - the budget is frozen at exactly 100,000,000 persistent learned bytes;
     - every persistent learned artifact is content-addressed and byte-counted;
+    - each byte count is independently verified by a content-addressed receipt;
     - learned runtime components must point to a counted artifact;
     - external learned/frontier capability providers are forbidden while scored;
     - terminal capability requires all 19 families, all 19 ownership rows, and
@@ -97,6 +110,7 @@ def audit(doc: Mapping[str, Any]) -> dict[str, Any]:
     artifacts: dict[str, Mapping[str, Any]] = {}
     paths: set[str] = set()
     learned_total = 0
+    receipts: list[str] = []
     for i, row in enumerate(artifacts_raw):
         if not isinstance(row, Mapping):
             errors.append(f"LEARNED_ARTIFACT_NOT_OBJECT:{i}")
@@ -123,9 +137,17 @@ def audit(doc: Mapping[str, Any]) -> dict[str, Any]:
         if not _is_sha256(digest):
             errors.append(f"LEARNED_ARTIFACT_SHA256_INVALID:{aid}")
             continue
+        if row.get("byte_count_verified") is not True or row.get("independent") is not True:
+            errors.append(f"LEARNED_ARTIFACT_BYTE_COUNT_NOT_INDEPENDENTLY_VERIFIED:{aid}")
+            continue
+        if not _receipt(row.get("verification_receipt")):
+            errors.append(f"LEARNED_ARTIFACT_VERIFICATION_RECEIPT_INVALID:{aid}")
+            continue
         artifacts[aid] = row
         paths.add(path)
         learned_total += int(size)
+        receipt = row["verification_receipt"]
+        receipts.append(str(receipt["path"]) + "@" + str(receipt["git_blob_sha"]))
 
     dependencies_raw = doc.get("runtime_dependencies")
     if not isinstance(dependencies_raw, list):
@@ -223,6 +245,7 @@ def audit(doc: Mapping[str, Any]) -> dict[str, Any]:
         "capability_pass": capability_pass,
         "learned_bytes_total": learned_total,
         "learned_bytes_headroom": MAX_LEARNED_BYTES - learned_total,
+        "learned_artifact_verification_receipts": sorted(set(receipts)),
         "forbidden_runtime_dependencies": sorted(forbidden_dependencies),
         "capability_contract": {
             "accepted_families": accepted_families,
