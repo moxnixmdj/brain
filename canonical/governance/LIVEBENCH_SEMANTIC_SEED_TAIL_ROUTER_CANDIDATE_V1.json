@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SEMANTIC_SEED_TAIL_ROUTER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__GENERIC_SEMANTIC_FORMAL_DECOUPLING__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Reduce false capability-acquisition and composition failures caused by appended formal response constraints without weakening policy, reading unexposed terminal cases, or inventing semantic content.",
+  "mechanism": {
+    "router": "canonical/runtime/livebench_semantic_seed_tail_router_v1.py",
+    "baseline": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v2.py",
+    "constraint_compiler": "canonical/runtime/instruction_constraint_compiler_v1.py",
+    "seed_postprocessor": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+    "steps": [
+      "PRESERVE_V2_ZERO_SEMANTIC_DEPENDENCY_FAST_PATH",
+      "FAIL_CLOSED_IDENTIFY_TERMINAL_SUFFIX_WHOSE_EVERY_SEGMENT_COMPILES_TO_A_KNOWN_FORMAL_CONSTRAINT",
+      "REQUIRE_SUFFIX_CONSTRAINT_SIGNATURE_TO_EQUAL_FULL_PROMPT_CONSTRAINT_SIGNATURE",
+      "REQUIRE_SEMANTIC_PREFIX_TO_CONTAIN_ZERO_COMPILER_RECOGNIZED_CONSTRAINTS",
+      "RUN_SEMANTIC_PREFIX_THROUGH_EXISTING_MODEL_INDEPENDENT_V2_BASELINE",
+      "APPLY_VERIFIED_SEED_PRESERVING_POSTPROCESSOR_TO_DETACHED_FORMAL_SUFFIX",
+      "EXACT_POSTVALIDATE_FINAL_RESPONSE",
+      "FALL_BACK_TO_V2_UNCHANGED_WHEN_SPLIT_OR_POSTPROCESS_PROOF_FAILS"
+    ]
+  },
+  "causal_hypothesis": {
+    "prior_livebench_histogram": {
+      "POLICY_BLOCK_POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN": 43,
+      "COMPOSITION_PRODUCER_UNRESOLVED_GROUNDED_CLAUSES": 27,
+      "ARCHITECTURAL_GAP_CONTROL_OR_FANOUT": 2
+    },
+    "hypothesis": "A nonzero subset of blocked prompts contain a semantic base request plus appended verifier-backed formal constraints. Isolating only compiler-proved terminal formal clauses can prevent those clauses from being misclassified as new semantic capability requirements while preserving the original constraints at the response boundary.",
+    "claim_strength": "STRUCTURAL_CANDIDATE_ONLY__NO_TERMINAL_DELTA_INFERRED"
+  },
+  "public_design_basis": {
+    "ifbench_repository": "allenai/IFBench",
+    "fact": "IFBench OOD constraint templates are combined with held-out base prompts and evaluated by public verification functions.",
+    "use": "DESIGN_SHAPE_ONLY__NO_TERMINAL_CASE_CONTENT"
+  },
+  "tests": {
+    "path": "canonical/runtime/test_livebench_semantic_seed_tail_router_v1.py",
+    "coverage": [
+      "MULTI_SENTENCE_FORMAL_SUFFIX_EXTRACTION",
+      "NONFORMAL_TRAILING_TEXT_FAIL_CLOSED",
+      "CONSTRAINT_LIKE_SEMANTIC_TEXT_FAIL_CLOSED",
+      "SEMANTIC_SEED_THEN_POSTPROCESS_SUCCESS",
+      "UNSAFE_POSTPROCESS_PRESERVES_V2_BASELINE",
+      "NO_SAFE_SPLIT_DELEGATES_TO_V2"
+    ]
+  },
+  "hard_rules": [
+    "NO_CASE_73_OR_LATER",
+    "NO_UNEXPOSED_TERMINAL_PROMPT_CONTENT",
+    "NO_HIDDEN_CHECKER_METADATA",
+    "NO_POLICY_WEAKENING",
+    "NO_MODEL_ASSISTED_SEED",
+    "NO_SEMANTIC_INVENTION_BY_POSTPROCESSOR",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_PROMOTION_BEFORE_INDEPENDENT_VERIFICATION_AND_AUTHORIZED_DELTA_MEASUREMENT"
+  ],
+  "next_if_independently_verified": [
+    "FREEZE_EXACT_ROUTER_BYTES_AND_DEPENDENCY_BLOBS",
+    "VERIFY_SYNTHETIC_ADVERSARIAL_BOUNDARY_CORPUS",
+    "RECOMPUTE_LIVEBENCH_ROOT1_MINIMUM_REPAIR_CUT",
+    "ONLY_IF_SEPARATELY_AUTHORIZED_MEASURE_AGGREGATE_DELTA_ON_ALREADY_EXPOSED_PREFIX_WITH_ZERO_CASE_73_PLUS_EXPOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
