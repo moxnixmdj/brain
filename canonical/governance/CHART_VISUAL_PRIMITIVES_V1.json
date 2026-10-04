@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_VISUAL_PRIMITIVES_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_VERIFICATION_PENDING__ZERO_CREDIT",
+  "runtime_blob": "8f3a4df9facec40cafa2693f5f3972d43ce70ef4",
+  "test_blob": "b5b03445973971268541d3fe17b99d2b8c027ecd",
+  "dependency": "canonical/governance/OPENCV_UBUNTU2404_DEPENDENCY_ACCOUNTING_V1.json",
+  "closes_candidate_atom": "RASTER_TO_AUDITABLE_VISUAL_PRIMITIVES",
+  "nonclaims": [
+    "QUESTION_PLUS_IMAGE_BYTES_TO_ANSWER_TEXT",
+    "CHARTOGRAPHY_SCORE",
+    "WHOLE_VISION_FAMILY_PARITY"
+  ],
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "credit_delta": 0,
+  "fresh_reality_authority": false
+}
