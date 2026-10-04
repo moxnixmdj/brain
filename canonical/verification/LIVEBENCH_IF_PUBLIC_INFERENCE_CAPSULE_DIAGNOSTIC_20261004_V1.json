@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_INFERENCE_CAPSULE_DIAGNOSTIC_V1",
+  "date": "2026-10-04",
+  "status": "CONSTRUCTIVE_ZERO_CASE_BLOCKER__PUBLIC_CAPSULE_RUNTIME_CLOSURE_INCOMPLETE",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1732,
+    "head_sha": "bbe0b1556da839ef8b88625562cef7f3b046960c",
+    "merge_commit": "8a25c629e8f0871185ea763ecaf5612dc4ef4d91",
+    "workflow_run_id": 37185086873,
+    "workflow_job_id": 111385239458,
+    "conclusion": "success",
+    "workflow_git_blob_sha": "6a8d47d71122d4a33b6e54009fdbff290ee3a7ba",
+    "diagnostic_git_blob_sha": "8ab671ddedc95253752aaa2c059ed732ec52456c"
+  },
+  "diagnostic": {
+    "request_class": "SYNTHETIC_ZERO_CASE_INFERENCE",
+    "status": "BLOCKED",
+    "error_type": "Root2InferenceBlocked",
+    "error": "FileNotFoundError:[Errno 2] No such file or directory: '/home/runner/work/verification-capsule-runner/verification-capsule-runner/subject/livebench_zero_case_resource_fit_20261004/goal_compiler.py'",
+    "constructive_blocker": "PUBLIC_INFERENCE_CAPSULE_MISSING_GOAL_COMPILER_RUNTIME_HELPER",
+    "canonical_helper_path": "canonical/runtime/goal_compiler.py",
+    "canonical_helper_git_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "paid_external_model_or_api_used": false
+  },
+  "semantic_effect": [
+    "RESOURCE_FIT_AND_V3_PREEXPOSURE_VERIFICATION_ARE_NOT_THE_CURRENT_INFERENCE_BLOCKER",
+    "PUBLIC_INFERENCE_CAPSULE_RUNTIME_CLOSURE_MUST_INCLUDE_OR_LOAD_THE_EXACT_GOAL_COMPILER_HELPER",
+    "RERUN_THE_SAME_SYNTHETIC_ZERO_CASE_INFERENCE_AFTER_RUNTIME_CLOSURE_REPAIR",
+    "DO_NOT_CREATE_PRODUCTION_ONE_USE_CLAIM_OR_REVEAL_TERMINAL_CASES_BEFORE_SYNTHETIC_INFERENCE_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_CASE_REVEAL",
+    "NO_LIVEBENCH_SCORE",
+    "NO_SHADOW_COLLECTION_AUTHORITY",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
