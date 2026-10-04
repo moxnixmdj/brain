@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_PROMPT_PARAMETER_DERIVABILITY_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_CANDIDATE__INDEPENDENT_PUBLIC_RUNNER_PASS__UNIVERSAL_VISIBLE_PROMPT_PARAMETER_DERIVABILITY_FALSIFIED_AS_CURRENTLY_STATED__ZERO_CREDIT",
+  "target": "LIVEBENCH_PUBLIC_SCORER_GRAMMAR_SUCCESSOR_REPAIR",
+  "objective": "Fail-close the public prompt-parameter derivability hypothesis using the complete pinned public IFBench test population, preserving only score-relevant derivations actually supported by public evidence.",
+  "sources": {
+    "public_ifbench": {
+      "repository": "allenai/IFBench",
+      "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+      "path": "data/IFBench_test.jsonl",
+      "git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+      "row_count": 300
+    },
+    "livebench_ifbench_checker": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "path": "livebench/if_runner/ifbench/instructions.py",
+      "git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+    },
+    "superseded_candidate": {
+      "path": "canonical/governance/LIVEBENCH_PUBLIC_PROMPT_PARAMETER_DERIVABILITY_V1.json",
+      "prior_git_blob_sha": "80a47fe9098b732d3f2517f653ed83a42826cf7c"
+    }
+  },
+  "public_population_audit": {
+    "rows": 300,
+    "ratio_overlap": {
+      "instruction_rows": 12,
+      "raw_reference_text_is_literal_visible_prompt_substring": 5,
+      "raw_reference_text_not_literal_visible_prompt_substring": 7,
+      "whitespace_normalized_reference_text_is_visible_prompt_substring": 12,
+      "critical_checker_semantics": "NGramOverlapChecker applies nltk.ngrams directly to the response string and exact stored reference_text string, so raw whitespace and line breaks are score-relevant character sequence input.",
+      "deduction": "VISIBLE_PROMPT_PLUS_WHITESPACE_NORMALIZATION_DOES_NOT_PROVE_EXACT_REFERENCE_TEXT_IDENTITY__UNIVERSAL_EXACT_REFERENCE_RECOVERY_IS_FALSIFIED_ON_THE_PINNED_PUBLIC_POPULATION"
+    },
+    "repeat_span": {
+      "instruction_rows": 4,
+      "raw_prompt_to_repeat_is_literal_visible_prompt_substring": 3,
+      "score_relevant_requested_word_span_recovered_from_visible_prompt": 4,
+      "score_relevant_requested_word_span_total": 4,
+      "deduction": "FULL_RAW_PROMPT_IDENTITY_IS_NOT_REQUIRED_FOR_THE_PUBLIC_REPEAT_SPAN_ROWS__THE_CHECKED_WHITESPACE_WORD_SLICE_IS_PUBLICLY_RECOVERABLE_ON_4_OF_4_PINNED_ROWS"
+    },
+    "legacy_repeat_prompt": {
+      "instruction_rows_in_public_ifbench_ood_population": 0,
+      "deduction": "THIS_PUBLIC_IFBENCH_AUDIT_PROVIDES_NO_EMPIRICAL_SUPPORT_FOR_REPEATPROMPTTHENANSWER_PARAMETER_DERIVABILITY__LEGACY_IFEVAL_PROOF_REMAINS_OPEN"
+    }
+  },
+  "truth_repair": {
+    "delete_as_unproved_or_falsified": [
+      "ALL_CHECKER_PARAMETERS_ARE_EITHER_EXPLICITLY_RENDERED_STATIC_OR_DERIVABLE_FROM_CANDIDATE_VISIBLE_PROMPT",
+      "UNIVERSAL_REVERSE_GRAMMAR_COMPILER_IS_CURRENTLY_SUFFICIENT_FROM_VISIBLE_PROMPT_ALONE",
+      "NGRAMOVERLAPCHECKER_REFERENCE_TEXT_EXACTLY_DERIVABLE_FROM_VISIBLE_PROMPT_BY_WHITESPACE_NORMALIZATION"
+    ],
+    "preserve": [
+      "80_RENDERED_OR_STATIC_PARAMETER_TYPES_REMAIN_A_CANDIDATE_SUBSET_PENDING_SEPARATE_EXACT_AUDIT",
+      "REPEATSPAN_SCORE_RELEVANT_WORD_SLICE_PUBLIC_DERIVABILITY_4_OF_4_ON_PINNED_PUBLIC_IFBENCH_TEST_ROWS",
+      "PUBLIC_UPSTREAM_CHECKER_IMPLEMENTATIONS_REMAIN_VALID_SUCCESSOR_DESIGN_INPUTS",
+      "NO_UNEXPOSED_TERMINAL_LIVEBENCH_CONTENT_WAS_REQUIRED_FOR_THIS_TRUTH_REPAIR"
+    ]
+  },
+  "nondominated_next_routes": {
+    "ngram_overlap_exact_reference": [
+      "PROVE_EXACT_CONTENT_ADDRESSED_REFERENCE_TEXT_RECONSTRUCTION_FROM_PUBLIC_UPSTREAM_SOURCE_WITHOUT_READING_UNEXPOSED_TERMINAL_ROWS",
+      "PROVE_A_SCORE_EQUIVALENCE_THEOREM_FOR_A_TRANSFORMATION_ONLY_IF_EXACT_PASS_FAIL_INVARIANCE_HOLDS_FOR_CHARACTER_TRIGRAM_CHECKER",
+      "CONSTRUCT_AND_VERIFY_AN_UNCERTAINTY_ROBUST_RESPONSE_WHOSE_TRIGRAM_OVERLAP_REMAINS_WITHIN_TARGET_BAND_FOR_EVERY_REFERENCE_VARIANT_CONSISTENT_WITH_VISIBLE_PROMPT",
+      "USE_EXACT_SCORER_METADATA_ONLY_IF_IT_IS AVAILABLE THROUGH A NONTERMINAL PUBLICLY_ADMISSIBLE BINDING"
+    ],
+    "repeat_span": [
+      "COMPILE_SCORE_RELEVANT_WHITESPACE_WORD_SLICE_FROM_VISIBLE_PROMPT_AND_PUBLIC_CONSTRAINT_PARAMETERS",
+      "VERIFY_ON_SYNTHETIC_GENERATOR_CASES_BEFORE_ANY_SUCCESSOR_PROMOTION"
+    ],
+    "legacy_repeat_prompt": [
+      "AUDIT_PINNED_PUBLIC_IFEVAL_POPULATION_AND_CONSTRUCTION_SEMANTICS_SEPARATELY",
+      "FAIL_CLOSED_UNTIL_SCORE_RELEVANT_PROMPT_TO_REPEAT_IDENTITY_OR_STRONGER_EQUIVALENCE_IS_PROVED"
+    ]
+  },
+  "scheduler_effect_if_verified": [
+    "DO_NOT_ROUTE_LIVEBENCH_SUCCESSOR_THROUGH_A_UNIVERSAL_VISIBLE_PROMPT_REVERSE_GRAMMAR_ASSUMPTION",
+    "SPLIT_PUBLIC_PARAMETER_RECOVERY_BY_CHECKER_SEMANTICS",
+    "KEEP_NGRAM_EXACT_REFERENCE_AS_AN_OPEN_ZERO_REALITY_PROOF_OBLIGATION",
+    "PRESERVE_REPEATSPAN_SCORE_RELEVANT_SLICE_RECOVERY_AS_A_PUBLIC_EVIDENCE_CANDIDATE",
+    "KEEP_LEGACY_REPEATPROMPT_PROOF_OPEN",
+    "RECOMPUTE_LIVEBENCH_SUCCESSOR_MINIMUM_REPAIR_CUT_AFTER_THIS_TRUTH_REPAIR"
+  ],
+  "contamination_firewall": [
+    "NO_UNEXPOSED_LIVEBENCH_TERMINAL_CASE_CONTENT",
+    "NO_CASE_SPECIFIC_TERMINAL_PROMPT_RULES",
+    "PUBLIC_UPSTREAM_SOURCE_AND_PUBLIC_IFBENCH_TEST_POPULATION_ONLY",
+    "NO_ACCEPTANCE_INFERENCE_FROM_PUBLIC_IFBENCH_ROWS",
+    "NO_FRESH_REALITY"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_PROVE_THE_FROZEN_LIVEBENCH_TERMINAL_POPULATION_USES_THE_PUBLIC_IFBENCH_ROWS",
+    "DOES_NOT_PROVE_EXACT_FROZEN_DATASET_EQUIVALENCE",
+    "DOES_NOT_PROVE_AN_NGRAM_SUCCESSOR_ROUTE",
+    "DOES_NOT_CLOSE_LIVEBENCH",
+    "DOES_NOT_GRANT_EXECUTION_PROMOTION_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": false,
+  "independent_verification": {
+    "path": "canonical/verification/LIVEBENCH_PUBLIC_PARAMETER_DERIVABILITY_TRUTH_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1834,
+    "merge_commit": "781e36c91c457b170c95211b36eed3b58a68192a",
+    "workflow_run_id": 37197721146,
+    "workflow_job_id": 111422929019,
+    "conclusion": "success",
+    "artifact_digest": "sha256:33b19dbd9efb6e5aa8c6124de2337cbe8703c4fd2c2bdabf49fc4f18150fbd72"
+  }
+}
