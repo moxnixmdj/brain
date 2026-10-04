@@ -112,3 +112,36 @@ def test_v5_totality_includes_isinstance_accepted_str_and_bytes_subclasses():
 
     secret_bytes=_AdversarialBytes(b"B"*32)
     assert g5._secret_bytes_total(secret_bytes)==b"B"*32
+
+
+class _FakeStrProxy:
+    @property
+    def __class__(self):
+        return str
+
+
+class _FakeBytesProxy:
+    @property
+    def __class__(self):
+        return bytes
+
+
+def test_v7_genuine_runtime_type_gate_rejects_class_spoof_proxies():
+    fake_str=_FakeStrProxy()
+    fake_bytes=_FakeBytesProxy()
+    assert isinstance(fake_str,str) is True
+    assert isinstance(fake_bytes,bytes) is True
+    assert issubclass(type(fake_str),str) is False
+    assert issubclass(type(fake_bytes),bytes) is False
+
+    for fn,arg in (
+        (g5._beacon_gate,fake_str),
+        (g5._secret_bytes_total,fake_str),
+        (g5._secret_bytes_total,fake_bytes),
+    ):
+        try:
+            fn(arg)
+        except g1.UnknownDomainGeneratorError:
+            pass
+        else:
+            raise AssertionError("CLASS_SPOOF_PROXY_MUST_BE_REJECTED")
