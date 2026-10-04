@@ -408,27 +408,32 @@
       "root_projection_verification_path": "canonical/verification/ROOT2_DECISION_ONLY_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
     },
     "livebench_v7_execution_hold_pending_atomic_claim": {
-      "status": "ACTIVE_FAIL_CLOSED__V7_EXECUTION_SUSPENDED_PENDING_GLOBALLY_LINEARIZED_ATOMIC_ONE_USE_CLAIM",
-      "reason": "V6_ONE_EPOCH_AUTHORITY_WAS_EXECUTED_TWICE_BECAUSE_POINT_OF_USE_COMPATIBILITY_DID_NOT_ATOMICALLY_LINEARIZE_GLOBAL_LEASE_CONSUMPTION",
-      "evidence": {
-        "authoritative_first_run_id": 37191763314,
-        "non_authoritative_duplicate_run_id": 37191913947,
-        "first_terminal_result_preceded_second_prelaunch": true
+      "status": "CONDITIONAL_RELEASE__ATOMIC_FIRST_CREATE_REQUIRED",
+      "reason": "Independent real Git-ref create-once evidence is bound to one deterministic V7 epoch key.",
+      "prior_duplicate_evidence": {
+        "first_run_id": 37191763314,
+        "duplicate_run_id": 37191913947
       },
-      "affected_activation": "canonical/governance/LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_ACTIVATION_V1.json",
-      "affected_activation_required_root_git_blob_sha": "822d7a0e64b2e919a873526d111e7202c40e1f5b",
-      "required_before_release": [
-        "INDEPENDENT_PUBLIC_RUNNER_PASS_FOR_GENERIC_ATOMIC_ONE_USE_EXECUTION_CLAIM",
-        "V7_LAUNCHER_BINDS_EXACT_ATOMIC_CLAIM_RECEIPT",
-        "FIRST_CREATE_HTTP_201_BEFORE_CASE_READ_OR_EXECUTION",
-        "DUPLICATE_OR_ANY_NON_201_FAILS_CLOSED"
+      "basis": {
+        "verification_path": "canonical/verification/LIVEBENCH_SHADOW_ATOMIC_CLAIM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "verification_git_blob_sha": "e436fa6bcd0c37e1e16c3524e05a876843945904",
+        "verification_run_id": 37185639140,
+        "verification_job_id": 111386844731,
+        "bridge_path": "canonical/governance/LIVEBENCH_V7_GENERIC_ATOMIC_ONE_USE_EXECUTION_CLAIM_BRIDGE_V1.json",
+        "bridge_git_blob_sha": "ab563b537e1b743a98dd460994b9e0952d699220",
+        "launcher_git_blob_sha": "d977690efd97e093b28474d23b37ee6e4520ed0f",
+        "epoch_digest_sha256": "5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
+        "claim_ref": "refs/heads/livebench-v7-claims/5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d"
+      },
+      "conditions": [
+        "PATCHED_DIAGNOSTIC_BLOBS_MATCH",
+        "POINT_OF_USE_ZERO_CASE_VERIFIER_PASS",
+        "EXACT_ATOMIC_CLAIM_CREATE_RETURNS_201"
       ],
-      "execution_authority": false,
-      "replay_authority": false,
-      "new_case_exposure_authority": false,
-      "acceptance_credit_delta": 0,
-      "fresh_reality_authority": false,
-      "promotion_authority": false
+      "on_duplicate_or_non201": "ABORT_BEFORE_DATASET_READ",
+      "replay_scope": "ALREADY_EXPOSED_CASES_1_TO_72_ONLY",
+      "case_73_or_later": false,
+      "acceptance_credit_delta": 0
     }
   },
   "accounting": {
