@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import livebench_legacy15_composition_archetypes_v1 as archetypes
+from canonical.runtime import livebench_legacy15_hermetic_nltk_binding_v1 as hermetic_nltk
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_EXACT_POSTVALIDATOR_V1"
 PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
@@ -162,6 +163,45 @@ def load_pinned_registry(livebench_root: str | Path):
     }
 
 
+def load_proofgrade_registry(
+    livebench_root: str | Path,
+    contracts: Sequence[Mapping[str, Any]],
+    *,
+    nltk_wheel_path: str | Path | None = None,
+    nltk_data_root: str | Path | None = None,
+):
+    """Bind every runtime dependency that can change active15 checker semantics."""
+    runtime_binding: dict[str, Any]
+    if hermetic_nltk.contracts_require_nltk(contracts):
+        if not nltk_wheel_path or not nltk_data_root:
+            raise ExactPostvalidationError(
+                "PROOFGRADE_NLTK_BINDING_REQUIRED_FOR_WORD_OR_SENTENCE_CHECKER"
+            )
+        try:
+            runtime_binding = hermetic_nltk.verify_and_bind(
+                nltk_wheel_path,
+                nltk_data_root,
+            )
+        except hermetic_nltk.HermeticNLTKError as exc:
+            raise ExactPostvalidationError(
+                "HERMETIC_NLTK_BINDING_FAILED:" + str(exc)
+            ) from exc
+    else:
+        runtime_binding = {
+            "schema": hermetic_nltk.SCHEMA,
+            "status": "NOT_REQUIRED__NO_NLTK_DEPENDENT_ACTIVE15_CHECKER",
+            "network_used": False,
+            "terminal_data_used": False,
+        }
+
+    registry, source_binding = load_pinned_registry(livebench_root)
+    return registry, {
+        "source": source_binding,
+        "runtime": runtime_binding,
+        "proofgrade_runtime_dependencies_bound": True,
+    }
+
+
 def evaluate_with_registry(
     response: str,
     contracts: Sequence[Mapping[str, Any]],
@@ -229,7 +269,33 @@ def postvalidate(
     contracts: Sequence[Mapping[str, Any]],
     livebench_root: str | Path,
 ) -> dict[str, Any]:
+    """Source-bound postvalidation. Use postvalidate_proofgrade for certification."""
     registry, binding = load_pinned_registry(livebench_root)
+    out = evaluate_with_registry(response, contracts, registry)
+    out["binding"] = {
+        "source": binding,
+        "runtime": {
+            "status": "NOT_BOUND__SOURCE_EXACTNESS_ONLY",
+        },
+        "proofgrade_runtime_dependencies_bound": False,
+    }
+    return out
+
+
+def postvalidate_proofgrade(
+    response: str,
+    contracts: Sequence[Mapping[str, Any]],
+    livebench_root: str | Path,
+    *,
+    nltk_wheel_path: str | Path | None = None,
+    nltk_data_root: str | Path | None = None,
+) -> dict[str, Any]:
+    registry, binding = load_proofgrade_registry(
+        livebench_root,
+        contracts,
+        nltk_wheel_path=nltk_wheel_path,
+        nltk_data_root=nltk_data_root,
+    )
     out = evaluate_with_registry(response, contracts, registry)
     out["binding"] = binding
     return out
@@ -240,8 +306,10 @@ def run(args: dict[str, Any] | None = None, root=None) -> dict[str, Any]:
     livebench_root = args.get("livebench_root")
     if not livebench_root:
         raise ExactPostvalidationError("LIVEBENCH_ROOT_REQUIRED")
-    return postvalidate(
+    return postvalidate_proofgrade(
         str(args.get("response") or ""),
         args.get("contracts") or [],
         livebench_root,
+        nltk_wheel_path=args.get("nltk_wheel_path"),
+        nltk_data_root=args.get("nltk_data_root"),
     )
