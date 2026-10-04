@@ -96,6 +96,32 @@ PROFILES = (
         "sections": ("SECTION", 1),
         "end": "Is there anything else I can help with?",
     },
+    {
+        "name": "SAT_OR_UNSAT_ZERO_SENTENCE_END1",
+        "existence": ["signal", "proof", "stable", "result", "truth"],
+        "forbidden": ["section", "other", "anything", "can", "help"],
+        "paragraphs": 1,
+        "words": (100, "less than"),
+        "sentences": (1, "less than"),
+        "nth": (2, 1, "section"),
+        "postscript": "P.S.",
+        "bullets": 1,
+        "sections": ("Section", 1),
+        "end": "Any other questions?",
+    },
+    {
+        "name": "SAT_OR_UNSAT_ZERO_SENTENCE_END2",
+        "existence": ["signal", "proof", "stable", "result", "truth"],
+        "forbidden": ["anything", "can", "help", "section", "other"],
+        "paragraphs": 5,
+        "words": (500, "at least"),
+        "sentences": (1, "less than"),
+        "nth": (5, 5, "help"),
+        "postscript": "P.P.S",
+        "bullets": 5,
+        "sections": ("SECTION", 5),
+        "end": "Is there anything else I can help with?",
+    },
 )
 
 
@@ -187,6 +213,62 @@ def exact_check(response: str, records: list[dict[str, Any]], registry):
     return not failed, failed
 
 
+def _alpha_tokens(text: str) -> set[str]:
+    import re
+    return set(re.findall(r"[A-Za-z]+", str(text or "").lower()))
+
+
+def certify_unsat(records: list[dict[str, Any]], certificate: str) -> bool:
+    """Validate a witness-side UNSAT certificate from synthetic oracle labels."""
+    by_id = {str(r["instruction_id"]): dict(r["kwargs"]) for r in records}
+    forbidden = {
+        str(x).lower()
+        for x in by_id.get("keywords:forbidden_words", {}).get("forbidden_words", [])
+    }
+
+    if certificate.startswith("MANDATORY_SECTION_SPLITTER_FORBIDDEN:"):
+        claimed = set(certificate.split(":", 1)[1].split(","))
+        slots = by_id.get("detectable_format:multiple_sections")
+        return bool(slots and claimed and claimed <= forbidden and claimed <= _alpha_tokens(slots.get("section_spliter")))
+
+    if certificate.startswith("MANDATORY_END_PHRASE_FORBIDDEN:"):
+        claimed = set(certificate.split(":", 1)[1].split(","))
+        slots = by_id.get("startend:end_checker")
+        return bool(slots and claimed and claimed <= forbidden and claimed <= _alpha_tokens(slots.get("end_phrase")))
+
+    if certificate.startswith("MANDATORY_NTH_FIRST_WORD_FORBIDDEN:"):
+        claimed = certificate.split(":", 1)[1].lower()
+        slots = by_id.get("length_constraints:nth_paragraph_first_word")
+        return bool(slots and claimed in forbidden and str(slots.get("first_word") or "").lower() == claimed)
+
+    if certificate == "SENTENCE_LT1_CONFLICTS_WITH_MANDATORY_NONEMPTY_OUTPUT":
+        ss = by_id.get("length_constraints:number_sentences")
+        if not ss or ss.get("relation") != "less than" or int(ss.get("num_sentences")) != 1:
+            return False
+        nonempty = {
+            "keywords:existence",
+            "length_constraints:nth_paragraph_first_word",
+            "detectable_content:postscript",
+            "detectable_format:number_bullet_lists",
+            "detectable_format:title",
+            "detectable_format:multiple_sections",
+            "startend:end_checker",
+        }
+        return bool(nonempty & set(by_id))
+
+    if certificate == "SENTENCE_LT1_CONFLICTS_WITH_WORD_LOWER_BOUND":
+        ss = by_id.get("length_constraints:number_sentences")
+        ws = by_id.get("length_constraints:number_words")
+        return bool(
+            ss and ws
+            and ss.get("relation") == "less than"
+            and int(ss.get("num_sentences")) == 1
+            and ws.get("relation") == "at least"
+        )
+
+    return False
+
+
 def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
     legacy = livebench_root / "livebench/if_runner/instruction_following_eval"
     registry_path = legacy / "instructions_registry.py"
@@ -203,6 +285,7 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
     total = 0
     runtime_candidate = 0
     exact_full_pass = 0
+    proved_unsat = 0
     runtime_block = 0
     exact_fail = 0
     by_archetype = defaultdict(Counter)
@@ -221,6 +304,32 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
                 tag = "reverse" if reverse else "forward"
                 prompt, records = render_prompt(ids, profile, registry, reverse)
                 out = witness.solve(prompt)
+
+                if out.get("status") == "PROVED_UNSAT_PUBLIC_CHECKER_CONJUNCTION":
+                    certificate = str(out.get("unsat_certificate") or "")
+                    if certify_unsat(records, certificate):
+                        proved_unsat += 1
+                        for bucket in (
+                            by_archetype[arch],
+                            by_profile[profile["name"]],
+                            by_size[len(ids)],
+                        ):
+                            bucket["proved_unsat"] += 1
+                        continue
+                    runtime_block += 1
+                    reason = "INVALID_UNSAT_CERTIFICATE:" + certificate
+                    runtime_errors[reason] += 1
+                    failed_shapes[tuple(ids)] += 1
+                    if len(failures) < max_failures:
+                        failures.append({
+                            "ids": list(ids),
+                            "archetype": arch,
+                            "profile": profile["name"],
+                            "order": tag,
+                            "stage": "unsat_certificate",
+                            "reason": reason,
+                        })
+                    continue
 
                 if out.get("status") != "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS":
                     runtime_block += 1
@@ -275,11 +384,11 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
                             "failed_ids": failed,
                         })
 
-    all_pass = exact_full_pass == total
+    all_pass = exact_full_pass + proved_unsat == total
     return {
         "schema": SCHEMA,
         "status": (
-            "PASS__ALL_SYNTHETIC_ACTIVE15_CASES_EXACT_FULL_SCORE"
+            "PASS__ALL_SYNTHETIC_ACTIVE15_CASES_EXACT_PASS_OR_PROVED_UNSAT"
             if all_pass
             else "FAIL_CLOSED__REPAIR_LEDGER_EMITTED"
         ),
@@ -304,8 +413,11 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
             "runtime_candidate": runtime_candidate,
             "runtime_block": runtime_block,
             "exact_full_pass": exact_full_pass,
+            "proved_unsat": proved_unsat,
+            "resolved": exact_full_pass + proved_unsat,
             "exact_fail": exact_fail,
             "exact_full_pass_fraction": exact_full_pass / total,
+            "resolved_fraction": (exact_full_pass + proved_unsat) / total,
             "failed_identity_shape_count": len(failed_shapes),
         },
         "by_archetype": {k: dict(v) for k, v in sorted(by_archetype.items())},
@@ -321,6 +433,7 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
         "hard_nonclaims": [
             "SYNTHETIC_PUBLIC_SOURCE_CONTRACT_EVIDENCE_ONLY",
             "NO_TERMINAL_CASE_CONTENT_READ",
+            "UNSAT_CERTIFICATES_ARE_PUBLIC_SYNTHETIC_ORACLE_VALIDATED_NOT_TERMINAL_INFERRED",
             "NO_ACTIVE_TERMINAL_SCORE_CLAIM",
             "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
         ],
