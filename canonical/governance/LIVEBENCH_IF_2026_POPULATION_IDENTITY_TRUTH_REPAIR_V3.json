@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_2026_POPULATION_IDENTITY_TRUTH_REPAIR_V3",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PRIOR_PUBLIC_POPULATION_IDENTITY_CLOSURE_RETRACTED__COUNT_EQUALITY_IS_NOT_ROW_IDENTITY__2026_COMPARATOR_POPULATION_REOPENED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Fail-close the 2026-06-25 LiveBench IF comparator population identity. Preserve only facts proved by first-party/public evidence and prevent substitution of an older public 200-row proxy for the official 2026 comparator population.",
+  "supersedes_or_corrects": [
+    {
+      "path": "canonical/governance/LIVEBENCH_IF_2026_06_25_RELEASE_POPULATION_RECONCILIATION_V2.json",
+      "git_blob_sha": "fa9acadf92826cff424d97f25b4094f60fed3571",
+      "invalidated_conclusion": "RELEASE_IDENTITY_AND_ACTIVE_PUBLIC_POPULATION_IDENTITY_CLOSED",
+      "reason": "The independent verifier proved public-dataset cardinalities and task counts but did not join or equate public question IDs to the question IDs scored in the official 2026-06-25 leaderboard."
+    },
+    {
+      "path": "canonical/governance/LIVEBENCH_IF_2026_TERMINAL_SCOPE_TRUTH_REPAIR_V1.json",
+      "invalidated_conclusion": "CURRENT_2026_06_25_TERMINAL_SCORER_SCOPE_REDUCES_TO_LEGACY_25_BECAUSE_THE_PUBLIC_HF_DATASET_IS_PRE_2025_11_25",
+      "reason": "The age of the public dataset does not prove the age or row identity of the official 2026 comparator population. LiveBench explicitly refreshed instruction-following tasks on 2025-11-25 and historically states that current-release questions may be nonpublic."
+    }
+  ],
+  "pinned_evidence": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "judgment_router": {
+      "path": "livebench/gen_ground_truth_judgment.py",
+      "git_blob_sha": "b36561da5b54380c724c507462d0ee65feefeac8",
+      "rule": "instruction_following rows with livebench_release_date < 2025-11-25 are old/legacy; other instruction-following rows remain on the normal path where current IFBench processing is used"
+    },
+    "changelog": {
+      "path": "changelog.md",
+      "git_blob_sha": "97a0b6ffd845aec29f48f96ca24b96ac100e4162",
+      "fact": "The 2025-11-25 release explicitly refreshed instruction-following tasks with newer articles and new, more difficult instruction types and resolved impossible tasks."
+    },
+    "readme": {
+      "path": "README.md",
+      "fact": "LiveBench explicitly documents that a current release can contain questions that are not public on Hugging Face and instructs use of an older public release when needed."
+    },
+    "public_hf_binding": {
+      "repository": "livebench/instruction_following",
+      "revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+      "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+      "parquet_bytes": 537024,
+      "public_rows": 400,
+      "observed_release_date_min": "2024-06-24",
+      "observed_release_date_max": "2024-11-25",
+      "active_proxy_count_at_2026_06_25": 200,
+      "active_proxy_task_counts": {
+        "paraphrase": 50,
+        "simplify": 50,
+        "story_generation": 50,
+        "summarize": 50
+      }
+    },
+    "official_2026_leaderboard": {
+      "repository": "LiveBench/new-livebench",
+      "commit": "caa4253c8a3aa93b5c7ec234e681d4f120a20240",
+      "categories_blob": "50b5672fe14023f5ba14efc1ce16e221e6573056",
+      "table_blob": "73ab7d8d9752b4d7cc1bc8c574ab0eb80c36c84b",
+      "cost_blob": "6f6271ed5497706e290675a1ad92a716a0f45b6b",
+      "category_tasks": [
+        "paraphrase",
+        "simplify",
+        "story_generation",
+        "summarize"
+      ],
+      "scored_question_counts": {
+        "paraphrase": 50,
+        "simplify": 50,
+        "story_generation": 50,
+        "summarize": 50
+      },
+      "total_scored_questions": 200,
+      "opus55_scores": {
+        "paraphrase": 64.267,
+        "simplify": 58.667,
+        "story_generation": 70.917,
+        "summarize": 69.1
+      },
+      "exact_equal_task_mean_percent": 65.73775,
+      "displayed_one_decimal_percent": 65.7
+    }
+  },
+  "logical_repair": {
+    "proved": [
+      "THE_OFFICIAL_2026_06_25_IF_CATEGORY_HAS_FOUR_TASKS_AND_50_SCORED_QUESTIONS_PER_TASK__N_EQUALS_200",
+      "THE_OPUS55_MAX_EFFORT_EQUAL_TASK_MEAN_IS_65_73775_PERCENT_AND_DISPLAYS_AS_65_7",
+      "THE_FROZEN_PUBLIC_HF_PROXY_HAS_200_ACTIVE_ROWS_WITH_THE_SAME_50_PER_TASK_CARDINALITIES",
+      "THE_PUBLIC_HF_PROXY_ROWS_ARE_PRE_2025_11_25",
+      "THE_PINNED_RUNTIME_DISPATCHES_PRE_2025_11_25_IF_ROWS_TO_THE_LEGACY_EVALUATOR",
+      "LIVEBENCH_REFRESHED_INSTRUCTION_FOLLOWING_ON_2025_11_25",
+      "LIVEBENCH_DOCUMENTS_THAT_CURRENT_RELEASE_QUESTIONS_CAN_BE_NONPUBLIC"
+    ],
+    "not_proved": [
+      "PUBLIC_PROXY_QUESTION_ID_SET_EQUALS_OFFICIAL_2026_COMPARATOR_QUESTION_ID_SET",
+      "OFFICIAL_2026_COMPARATOR_ROWS_ARE_ALL_PRE_2025_11_25",
+      "OFFICIAL_2026_COMPARATOR_USES_ONLY_THE_LEGACY_25_CHECKER_REGISTRY",
+      "OFFICIAL_2026_COMPARATOR_USES_ONLY_THE_MODERN_58_CHECKER_REGISTRY"
+    ],
+    "theorem": "Equality of population size and per-task cardinalities does not imply equality of row identity. With explicit evidence of a later IF refresh and nonpublic-current-release behavior, substituting the older public 200-row proxy for the official 2026 comparator is inadmissible without an identifier/content-addressed binding or a scorer-family proof that is valid for every row consistent with the official release.",
+    "consequence": "COMPARATOR_BAR_IDENTITY_AND_N_EQUALS_200_REMAIN_CLOSED__COMPARATOR_ROW_IDENTITY_AND_TERMINAL_SCORER_MIX_REOPEN__PUBLIC_PROXY_EXECUTION_CANNOT_BY_ITSELF_PROVE_LIVEBENCH_IF_GE_65_7"
+  },
+  "critical_path_after_repair": {
+    "preserve": [
+      "PUBLIC_SCORE_ALGEBRA_AND_132_OF_200_WORST_CASE_SCORE_MASS_ARITHMETIC_WHERE_THE_SCORER_FORMULA_IS_PROVED_APPLICABLE",
+      "LEGACY_25_CHECKER_SOLVER_WORK_AS_A_POSSIBLE_SCORER_BRANCH",
+      "MODERN_58_CHECKER_SOLVER_WORK_AS_A_POSSIBLE_SCORER_BRANCH",
+      "REFERENCE_FREE_AND_PROMPT_PARAMETER_RECOVERY_MECHANISMS_AS_GENERIC_CURRENT_IFBENCH_CAPABILITY"
+    ],
+    "delete_or_quarantine": [
+      "SCHEDULING_ASSUMPTION_THAT_ONLY_LEGACY_25_ARE_LOAD_BEARING",
+      "CLAIM_THAT_THE_PUBLIC_HF_200_ROWS_ARE_THE_OFFICIAL_2026_COMPARATOR_POPULATION",
+      "ANY_ACCEPTANCE_CREDIT_DERIVED_SOLELY_FROM_SCORING_THE_OLDER_PUBLIC_PROXY_POPULATION"
+    ],
+    "nondominated_routes": [
+      "PROVE_OFFICIAL_2026_ROW_IDENTITY_OR_RELEASE_DATE_SET_FROM_FIRST_PARTY_CONTENT_ADDRESSED_METADATA_WITHOUT USING PROMPT CONTENT",
+      "OR BUILD_AND_VERIFY_A_RELEASE_AGNOSTIC_SUCCESSOR_COVERING_BOTH_LEGACY_AND_MODERN_INSTRUCTION_CHECKER_GRAMMARS_SO_POPULATION_IDENTITY_BECOMES_IRRELEVANT",
+      "USE_THE_200_CASE_SCORE_MASS_CUT_ONLY_WITH_CASE_LEVEL_GUARANTEES_THAT_ARE_VALID_FOR_THE_ACTUAL_OR_UNIVERSALLY_QUANTIFIED_COMPARATOR_ROWS"
+    ],
+    "recommended_now": "UNIVERSALIZE_THE_SUCCESSOR_ACROSS_BOTH_SCORER_GRAMMARS_AND_USE_EXACT_SCORE_MASS_LOWER_BOUNDS__THIS REMOVES THE HIDDEN POPULATION IDENTITY DEPENDENCY INSTEAD OF GUESSING IT"
+  },
+  "hard_nonclaims": [
+    "NO_ASSERTION_THAT_THE_OFFICIAL_2026_ROWS_ARE_HIDDEN_MODERN_ROWS",
+    "NO_ASSERTION_THAT_THE_PUBLIC_PROXY_HAS_ZERO_OVERLAP_WITH_THE_OFFICIAL_SET",
+    "NO_NEW_TERMINAL_PROMPT_CONTENT_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
