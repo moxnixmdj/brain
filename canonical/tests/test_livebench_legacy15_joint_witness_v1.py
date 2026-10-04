@@ -1,3 +1,5 @@
+import re
+
 from canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
 
 
@@ -108,3 +110,29 @@ def test_quotation_bullets_and_end_all_compose():
     response = out["response"]
     assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")
+
+
+def test_json_forbidden_response_word_does_not_self_collide():
+    prompt = (
+        "Do not include keywords ['response', 'dog'] in the response. "
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as code fences."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["route"] == "JSON"
+    assert re.search(r"\bresponse\b", out["response"], flags=re.IGNORECASE) is None
+    import json
+    assert isinstance(json.loads(out["response"]), str)
+
+
+def test_sections_compose_with_forbidden_section_word():
+    prompt = (
+        "Do not include keywords ['section', 'dog'] in the response. "
+        "Your response must have 3 sections. Mark the beginning of each section with Section X, such as:\n"
+        "Section 1\n[content of section 1]\nSection 2\n[content of section 2]"
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    response = out["response"]
+    assert len(re.findall(r"\s?Section\s?\d+\s?", response, flags=re.IGNORECASE)) >= 3
+    assert re.search(r"\bsection\b", response, flags=re.IGNORECASE) is None
