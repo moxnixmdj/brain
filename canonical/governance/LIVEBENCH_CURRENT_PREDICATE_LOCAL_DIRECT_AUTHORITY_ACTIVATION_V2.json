@@ -1,0 +1,137 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_ACTIVATION_V2",
+  "date": "2026-10-04",
+  "status": "ACTIVE_IFF_EXACT_TRANSPORT_VERIFICATION_PASSES_AND_CURRENT_ROOT_REMAINS_BOUND_POST_THRESHOLD_DAG_STATE__PREDICATE_LOCAL_ONLY__ZERO_CREDIT",
+  "active": true,
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "authorized_predicates": [
+    "LIVEBENCH_IF_GE_65_7"
+  ],
+  "authority_basis": {
+    "rebind_candidate": {
+      "path": "canonical/governance/LIVEBENCH_IF_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_REBIND_CANDIDATE_V2.json",
+      "git_blob_sha": "8d43368368df6b2b38a4e2d3bb948c6456c4a6cb"
+    },
+    "rebind_verification": {
+      "path": "canonical/verification/LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_REBIND_PUBLIC_RUNNER_VERIFICATION_20261004_V2.json"
+    },
+    "runtime_closure": {
+      "path": "canonical/governance/LIVEBENCH_PUBLIC_RUNTIME_CLOSURE_FROZEN_BINDING_V2.json",
+      "git_blob_sha": "cabf49d6a6fa91639e76a3fe86a76a625a0f3bc1"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "601e82d00104b4ed36ee5968ad966a0c02e627c1"
+    },
+    "root2_frontier": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V17.json",
+      "git_blob_sha": "8c1325dd652b65a7d5c24e041ac06556a84f569c"
+    },
+    "precommit": {
+      "path": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2.json",
+      "git_blob_sha": "66554061f204d8a86b37a30c84d0cf07a525a786"
+    },
+    "prior_activation": {
+      "path": "canonical/governance/LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_ACTIVATION_V1.json",
+      "git_blob_sha": "08929577573866dc2bead65a19a856a6b4e152d2"
+    },
+    "prior_activation_verification": {
+      "path": "canonical/verification/LIVEBENCH_DIRECT_AUTHORITY_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "34e65d54026fd246c76e0dc3ded8f9f8a1b2a4d9"
+    },
+    "threshold_dag_activation": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_ACTIVATION_V1.json",
+      "git_blob_sha": "7ea4dd4edb59c8526bd3993e02f4a8fb53c65085"
+    },
+    "threshold_dag_projection_verification": {
+      "path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "eef494009e47b758a99ab48649e050c332e4988a"
+    }
+  },
+  "exact_execution_binding": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "repository_visibility": "public",
+    "runner_label": "ubuntu-24.04",
+    "candidate_commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "candidate_tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "population_count": 200,
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "threshold_percent": 65.7,
+    "paid_external_model_or_api_allowed": false,
+    "larger_or_paid_runner_allowed": false,
+    "allow_optional_model_planner": false,
+    "external_tools_allowed": false,
+    "required_cognition_dependency_class": "MODEL_INDEPENDENT"
+  },
+  "point_of_use_gates_before_any_terminal_case_read": [
+    "EXACT_PRECOMMITTED_COMPONENT_HASHES_UNCHANGED",
+    "SAME_STANDARD_PUBLIC_RUNNER_CLASS",
+    "SAME_RUNNER_ZERO_CASE_RESOURCE_AND_TRANSITIVE_DEPENDENCY_PREFLIGHT_PASS",
+    "NO_PAID_EXTERNAL_MODEL_OR_API",
+    "NO_CANDIDATE_MUTATION_AFTER_PRECOMMIT",
+    "NO_ADAPTIVE_CASE_SELECTION",
+    "NO_CASE_REPLACEMENT",
+    "NO_TERMINAL_CASE_TUNING"
+  ],
+  "result_handling": [
+    "CAPTURE_IMMUTABLE_CASE_LEVEL_RECEIPTS_IF_EXECUTION_OCCURS",
+    "RUN_OUTPUT_ONLY_THRESHOLD_DAG_PREPASS_BEFORE_ANY_TERMINAL_CASE_READ",
+    "IF_PREPASS_SOUNDLY_FORCES_LIVEBENCH_PASS_OR_FAIL_STOP_WITHOUT_TERMINAL_EXECUTION",
+    "IF_PREPASS_REMAINS_OPEN_THIS_EXACT_PREDICATE_LOCAL_AUTHORITY_MAY_EXECUTE_ONLY_THE_IRREDUCIBLE_FROZEN_LIVEBENCH_ROUTE_AFTER_POINT_OF_USE_GATES",
+    "RESULT_MAY_AFFECT_ONLY_LIVEBENCH_IF_GE_65_7_UNLESS_A_SEPARATE_VERIFIED_DEPENDENCY_RULE_PROPAGATES_IT",
+    "POST_RESULT_PREDICATE_REDUCTION_REQUIRES_SEPARATE_INDEPENDENT_VERIFICATION",
+    "ACCEPTANCE_PROMOTION_REQUIRES_SEPARATE_AUTHORITY"
+  ],
+  "scope_firewall": {
+    "predicate_local_fresh_reality_authority": true,
+    "global_fresh_reality_authority": false,
+    "all_other_unresolved_predicates_authorized": false,
+    "shadow_escrow_required": false,
+    "shadow_one_use_claim_required": false
+  },
+  "authority": {
+    "execution": true,
+    "predicate_local_fresh_reality": true,
+    "global_fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "hard_rules": [
+    "NO_EXECUTION_UNTIL_THIS_EXACT_V2_ACTIVATION_BLOB_HAS_INDEPENDENT_TRANSPORT_VERIFICATION_AND_CURRENT_ROOT_HASH_MATCHES_601E82D00104B4ED36EE5968AD966A0C02E627C1",
+    "OUTPUT_ONLY_THRESHOLD_DAG_PREPASS_MUST_RUN_BEFORE_TERMINAL_CASE_READ",
+    "NO_AUTHORITY_FOR_ANY_PREDICATE_OTHER_THAN_LIVEBENCH_IF_GE_65_7",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_OR_PROMOTION_FROM_ACTIVATION_ALONE",
+    "NO_TERMINAL_CASE_READ_BEFORE_POINT_OF_USE_GATES_PASS",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_activation_verification_required": true,
+  "supersedes": "canonical/governance/LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_ACTIVATION_V1.json",
+  "root_state_transport": {
+    "from_git_blob_sha": "e353d54f4608d25b7f0ea06fba5d8fbf2ddfbb59",
+    "to_git_blob_sha": "601e82d00104b4ed36ee5968ad966a0c02e627c1",
+    "independently_observed_exact_delta": [
+      "scheduler_policy.root2_output_only_threshold_dag"
+    ],
+    "delta_semantics": "SCHEDULING_ONLY__EXECUTION_FALSE__PROMOTION_FALSE__FRESH_REALITY_FALSE__ZERO_ACCEPTANCE_CREDIT",
+    "required_invariants": [
+      "LIVEBENCH_IF_GE_65_7_REMAINS_UNRESOLVED_ROOT2_ONLY",
+      "CURRENT_RESIDUAL_PARTITION_REMAINS_16_ROOT2_ONLY_7_ROOT3_ONLY_3_MIXED",
+      "GLOBAL_FRESH_REALITY_AUTHORITY_REMAINS_FALSE",
+      "EXACT_FROZEN_LIVEBENCH_RUNTIME_HARNESS_SCORER_ENVIRONMENT_POLICY_UNCHANGED",
+      "NO_TERMINAL_CASES_CONSUMED_BY_THRESHOLD_DAG_ACTIVATION"
+    ]
+  },
+  "independent_transport_verification_required": true
+}

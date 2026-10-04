@@ -1,0 +1,24 @@
+name: Verify current terminal authority Root2 output reconciliation V1
+on:
+  pull_request:
+    paths:
+      - 'canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json'
+      - 'canonical/governance/CURRENT_TERMINAL_AUTHORITY_ROOT2_OUTPUT_RECONCILIATION_V1.json'
+      - 'canonical/governance/LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_ACTIVATION_V2.json'
+      - 'canonical/verification/LIVEBENCH_THRESHOLD_ROOT_AUTHORITY_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json'
+      - 'canonical/verification_runtime/verify_current_terminal_authority_root2_output_reconciliation_v1.py'
+      - '.github/workflows/verify-current-terminal-authority-root2-output-reconciliation-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python canonical/verification_runtime/verify_current_terminal_authority_root2_output_reconciliation_v1.py
