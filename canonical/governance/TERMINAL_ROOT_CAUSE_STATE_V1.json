@@ -101,15 +101,15 @@
         "activation_git_blob_sha": "4cbc1b9f478654b2dc671a8b54f91b5c4b91c019",
         "verification_path": "canonical/verification/ROOT2_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
-        "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V2.json",
-        "current_frontier_git_blob_sha": "36013ab1768260cca9dca4dbe1aa11a68dab56cf",
-        "status": "CANDIDATE__ROOT2_FRONTIER_V2_SUBJECT_VERIFIED__POINTER_PROJECTION_REVERIFY_PENDING__ZERO_CREDIT",
+        "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json",
+        "current_frontier_git_blob_sha": "681123ef6cff3506d66af6b31b61c8bc14a8a913",
+        "status": "ACTIVE__ROOT2_FRONTIER_V3_SUBJECT_AND_POINTER_PROJECTION_VERIFIED__ZERO_CREDIT",
         "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2",
         "fresh_reality_authority": false,
-        "current_frontier_activation_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V2_ACTIVATION_V1.json",
-        "current_frontier_activation_git_blob_sha": "a9fa1e00d37c7977c4639b9369fb4eab2831e07d",
-        "current_frontier_verification_path": "canonical/verification/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-        "current_frontier_verification_git_blob_sha": "26ae22c52556c0505105dd5c3f1aa38544ec6387"
+        "current_frontier_activation_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_ACTIVATION_V1.json",
+        "current_frontier_activation_git_blob_sha": "76d36bc34947e726502d0c8fc1dbb961d6442c88",
+        "current_frontier_verification_path": "canonical/verification/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "current_frontier_verification_git_blob_sha": "8436a9eb30312b959ba094394e60f26b4833a3a2"
       }
     },
     "root_3_scope_completeness": {
@@ -139,7 +139,7 @@
     "no_credit_from_classification_itself": true,
     "root1_currently_active": false,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
-    "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V2.json"
+    "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3.json"
   },
   "accounting": {
     "acceptance_credit_delta": 0,
