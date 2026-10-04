@@ -1,0 +1,141 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "UNKNOWN-DOMAIN-V4-TOTAL-EXACT-UNIVERSAL-CLOSURE-20261005",
+  "status": "PROPOSED__CRITICAL_PATH__ZERO_REALITY__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "06f47642b93053699d2e7c037b772f7c8239809f",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "UNKNOWN_DOMAIN_ADAPTATION",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "action_kind": "COMPOSE_ALREADY_DISCOVERED_COMPLEMENTARY_TRUTH_REPAIRS",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::UNKNOWN_DOMAIN_ADAPTATION::UNIVERSAL_PROOF_REQUIRED_TOTAL_IDENTIFIER_DOMAIN_PLUS_EXACT_FLOAT_SEMANTICS",
+  "expected_parent_frontier_change": "IF_INDEPENDENTLY_VERIFIED__REPLACE_ONE_USE_FRESH_PRODUCTION_REQUIREMENT_WITH_A_UNIVERSAL_ZERO_REALITY_SCOPE_CERTIFICATE_FOR_THE_EXACT_TOTALIZED_EVALUATOR",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain PR #1858",
+    "Brain PR #1889",
+    "Brain PR #1894",
+    "Brain PR #1901",
+    "Brain PR #1909",
+    "Runner PR #2040",
+    "Runner PR #2086",
+    "Runner PR #2087",
+    "Runner PR #2089"
+  ],
+  "theory_invariants": {
+    "correctness_first": true,
+    "incremental_spend_usd": 0,
+    "original_quantifier_preserved": true,
+    "no_open_world_claim": true,
+    "no_credit_before_independent_reduction": true
+  },
+  "recursive_obs": {
+    "real_outcome": "Close the two independent universal-proof holes simultaneously without fresh reality.",
+    "obs_goal": {
+      "surviving_necessity": "PROVE_TOTAL_IDENTIFIER_NAMESPACE_AND_EXACT_FLOAT_TERMINAL_SEMANTICS_IN_ONE_BOUND_ROUTE"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Candidate V3 exact-float repair",
+        "structural-permutation Generator V3"
+      ],
+      "surviving_gap": "INDEPENDENT_VERIFICATION_AND_SCOPE_REDUCTION"
+    },
+    "obs_blocker": {
+      "surviving_causal_blocker": "COMPLEMENTARY_REPAIRS_EXISTED_ON_SEPARATE_INCOMPLETE_CARRIERS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE"
+      ],
+      "selected_surviving_route": "COMPOSE_CANDIDATE_V3_PLUS_STRUCTURAL_GENERATOR_V3",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "falsification_condition": "ANY_CONTENT_BINDING_MISMATCH__ANY_VALID_INPUT_WITH_NONINJECTIVE_V3_NAMESPACE__ANY_TRANSFER_COUNTEREXAMPLE__ANY_ADD2_EXACT_FLOAT_MISMATCH__ANY_ABSTENTION_COUNTEREXAMPLE"
+    },
+    "routes_considered": [
+      "PR1901_FAIL_CLOSED_WRAPPER",
+      "PR1894_TOTAL_IDS_WITH_V2_CANDIDATE",
+      "PR1909_FLOAT_SAFE_WITH_V2_GENERATOR",
+      "MINIMUM_CONJUNCTION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PR1901_SCOPE_WEAKENING",
+      "PR1894_FLOAT_REGRESSION",
+      "PR1909_COLLISION_HOLE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "It reuses the two already-existing exact repair blobs and adds only their proof/verification glue.",
+    "stop_condition": "Zero credit until an independent content-bound verifier passes and separate Root3/acceptance reduction passes."
+  },
+  "behavioral_contract": {
+    "behavior_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT__TOTAL_EXACT_EVALUATOR",
+    "inputs": "Every valid beacon and evaluator secret accepted by the bound interface.",
+    "environment_state": "Exact Candidate V3 + structurally total Generator V3 + frozen harness/scorer.",
+    "allowed_information": "Candidate-visible packet/transcript and bound Domain-A receipt only.",
+    "required_output_or_action": "Pass all 12 transfer and 15 abstention cases with <=2 transfer probes.",
+    "success_condition": "Exact scorer passes every case for every valid input.",
+    "failure_condition": "Any valid input fails emission or yields a scorer failure.",
+    "terminal_consequence": "Scope certificate only, pending separate acceptance reduction.",
+    "verification_route": "Independent public-runner content-bound verifier plus theorem regression.",
+    "dependency_boundary": "No external learned-capability provider.",
+    "scope": "EXACT_TOTALIZED_EVALUATOR_CONTRACT_ONLY"
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "Universal exact pass over all valid inputs of the totalized evaluator.",
+    "hole_type": "DEDUCTIVE_TOTALITY_AND_EXACTNESS",
+    "expected_certificate_or_receipt": "Independent content-bound public-runner verification.",
+    "validator": "Independent verifier must reproduce the V2 one-ulp failure, require Candidate V3 repair, prove structural identifier bijection, and run nonproduction regressions.",
+    "maximum_cheap_test_cost": "ZERO_TERMINAL_CASES__ZERO_INCREMENTAL_SPEND",
+    "prerequisites": [
+      "Exact subject blobs unchanged"
+    ],
+    "contamination_risk": "NONE__NO_TERMINAL_OR_PRODUCTION_CASE_READ",
+    "reversibility": "FULL",
+    "falsification_condition": "Any counterexample or blob mismatch.",
+    "critical_path_relation": "Potentially deletes the remaining fresh-reality experiment for this exact predicate."
+  },
+  "continuous_obs": {
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": "TOTAL_EXACT_UNIVERSAL_THEOREM_BEFORE_PRODUCTION",
+    "information_boundary_complete": true,
+    "information_policy": "ZERO_REALITY",
+    "dependencies": [
+      "independent verifier",
+      "separate scope/acceptance reducer"
+    ]
+  },
+  "reality_query_admission": {
+    "proof_obligation": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "existing_evidence_search": "COMPLETE_FOR_KNOWN_OPEN_CARRIERS",
+    "deductive_closure": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION",
+    "candidate_observations": [],
+    "minimum_reality_cut": [],
+    "terminal_decision_value": "ZERO_IF_THEOREM_VERIFIES",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "global_cut_membership": false
+  },
+  "global_terminal_proof_cut": {
+    "required": false,
+    "proposed_action_membership": false,
+    "terminal_decision_value": "ZERO_CREDIT"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
