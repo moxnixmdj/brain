@@ -77,14 +77,21 @@ def compile_constraints(instruction: str) -> ConstraintSet:
 
     required = []
     forbidden = []
-    for pat, target in [
-        (r'(?:must\s+include|include|contain)\s+(?:the\s+)?(?:word|phrase)\s+{Q}', required),
-        (r'(?:must\s+not\s+include|do\s+not\s+include|must\s+not\s+contain|do\s+not\s+contain)\s+(?:the\s+)?(?:word|phrase)\s+{Q}', forbidden),
-    ]:
-        for m in re.finditer(pat.replace("{Q}", _QUOTED), text, flags=re.I | re.S):
-            value = m.group(1).strip()
-            if value and value not in target:
-                target.append(value)
+    forbidden_pattern = r'(?:must\s+not\s+include|do\s+not\s+include|must\s+not\s+contain|do\s+not\s+contain)\s+(?:the\s+)?(?:word|phrase)\s+{Q}'
+    forbidden_spans = []
+    for m in re.finditer(forbidden_pattern.replace("{Q}", _QUOTED), text, flags=re.I | re.S):
+        value = m.group(1).strip()
+        forbidden_spans.append(m.span())
+        if value and value not in forbidden:
+            forbidden.append(value)
+
+    required_pattern = r'(?<!not\s)(?:must\s+include|include|contain)\s+(?:the\s+)?(?:word|phrase)\s+{Q}'
+    for m in re.finditer(required_pattern.replace("{Q}", _QUOTED), text, flags=re.I | re.S):
+        if any(a <= m.start() and m.end() <= b for a, b in forbidden_spans):
+            continue
+        value = m.group(1).strip()
+        if value and value not in required:
+            required.append(value)
 
     if min_words is not None and max_words is not None and min_words > max_words:
         raise ConstraintError("WORD_RANGE_CONTRADICTION")
