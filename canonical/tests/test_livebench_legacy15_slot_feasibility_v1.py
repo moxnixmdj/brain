@@ -123,7 +123,7 @@ def test_unknown_or_structurally_conflicting_ids_fail_closed():
     assert conflict["status"] == "FAIL_CLOSED_ID_CONFLICT"
 
 
-def test_mandatory_section_splitter_forbidden_collision_is_certified():
+def test_section_forbidden_is_satisfiable_via_no_space_boundary_escape():
     contracts = [
         {
             "instruction_id": f.SECTIONS,
@@ -135,10 +135,15 @@ def test_mandatory_section_splitter_forbidden_collision_is_certified():
         },
     ]
     out = f.classify_visible_contracts(contracts)
-    assert out["status"] == "PROVED_UNSAT"
-    assert out["hard_unsat_reasons"] == [
-        "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:section"
-    ]
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
+
+    # Exact frozen checker semantics:
+    # SectionChecker accepts optional whitespace between splitter and index,
+    # while ForbiddenWords requires a trailing word boundary after "section".
+    response = "Section1\n0\nSection2\n0\nSection3\n0"
+    assert len(re.split(r"\\s?Section\\s?\\d+\\s?", response)) - 1 >= 3
+    assert re.search(r"\\bsection\\b", response, flags=re.IGNORECASE) is None
 
 
 def test_sentence_less_than_one_with_public_end_phrase_is_certified():
