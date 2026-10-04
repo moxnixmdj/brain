@@ -44,7 +44,7 @@ def _match_rules(text: str) -> list[tuple[str, Any]]:
 
     patterns = (
         ("options", r"Answer with one of the following options:\s*(.+?)\.\s*Do not give any explanation\.", str),
-        ("special_bullet", r"Answer with a newline-separated list of items, instead of bullet points use\s+(.+?)\.", str),
+        ("special_bullet", r"Answer with a newline-separated list of items, instead of bullet points use\s+(\.\.\.|SEPARATOR|!\?!\?|-)[.]", str),
         ("numbers", r"Include exactly\s+(\d+)\s+numbers in the response; do not use commas within the numbers\.", int),
         (
             "repeat_change",
@@ -212,18 +212,41 @@ def _candidate_pool(rules: list[tuple[str, Any]]) -> list[str]:
 
 
 def synthesize_public_structural_only(prompt: str) -> dict:
-    # Preserve every already-proved V1 route.
-    first = v1.synthesize_formal_only(prompt)
+    # Parse the score-relevant instruction surface first. Never let V1 inspect
+    # base-request text outside an explicit <instructions> wrapper.
+    surface = _instruction_surface(prompt)
+    rules = _match_rules(surface)
+
+    # Preserve V1 only when its exact response also satisfies every recognized
+    # public checker rule. A local V1 PASS is not a proof of whole-prompt PASS.
+    first = v1.synthesize_formal_only(surface)
     if first.get("status") == "PASS" and first.get("semantic_seed_required") is False:
+        candidate = str(first.get("response") or "")
+        failed_public = [
+            rule for rule, arg in rules
+            if not _validate(rule, arg, candidate)
+        ]
+        if failed_public:
+            return {
+                "schema": SCHEMA,
+                "status": "BLOCKED",
+                "response": None,
+                "semantic_seed_required": True,
+                "model_dependency_count": 0,
+                "matched_public_rules": [rule for rule, _ in rules],
+                "public_rule_count": len(rules),
+                "validation_errors": [
+                    "V1_EXACT_ROUTE_CONFLICTS_WITH_PUBLIC_GRAMMAR:" + ",".join(failed_public)
+                ],
+            }
         return {
             **first,
             "schema": SCHEMA,
             "response_route": "V1_PROVED_ROUTE",
-            "public_rule_count": 0,
+            "matched_public_rules": [rule for rule, _ in rules],
+            "public_rule_count": len(rules),
         }
 
-    surface = _instruction_surface(prompt)
-    rules = _match_rules(surface)
     if not rules:
         return {
             "schema": SCHEMA,
