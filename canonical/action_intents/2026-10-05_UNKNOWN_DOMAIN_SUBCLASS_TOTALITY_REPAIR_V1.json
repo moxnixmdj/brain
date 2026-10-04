@@ -1,0 +1,178 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
+  "action_id": "UNKNOWN-DOMAIN-SUBCLASS-TOTALITY-REPAIR-20261005-V1",
+  "status": "PROPOSED__CRITICAL_PATH__ZERO_REALITY__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "9d48e6703ade9f5d2d26855d0fcd08f975e97a8b",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "UNKNOWN_DOMAIN_ADAPTATION",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "action_kind": "REPAIR_EXISTING_ZERO_REALITY_UNIVERSAL_PROOF_INPUT_TOTALITY",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::UNKNOWN_DOMAIN_ADAPTATION::ISINSTANCE_ACCEPTED_SUBCLASS_OVERRIDE_BREAKS_TOTALITY",
+  "expected_parent_frontier_change": "IF_INDEPENDENTLY_VERIFIED__RESTORE_LITERAL_TOTALITY_ELIGIBILITY_OF_UNKNOWN_DOMAIN_V6_EXACT_BOUND_EVALUATOR_WITHOUT_FRESH_REALITY",
+  "theory_invariants": {
+    "correctness_first": true,
+    "incremental_spend_usd": 0,
+    "original_quantifier_preserved": true,
+    "no_underlying_capability_invention": true,
+    "integration_and_verification_glue_only": true,
+    "no_open_world_claim": true,
+    "no_credit_before_independent_reduction": true
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PASS_CANDIDATE__ALL_CHANGED_OPERATIVE_ARTIFACTS_ARE_IN_BRAIN_BRANCH",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS__NO_EXTERNAL_MODEL_OR_SERVICE_IN_TARGET_ROUTE",
+    "GENERAL_SUBSTRATE_TEST": "NOT_APPLICABLE",
+    "SPECIMEN_SEPARATION_TEST": "NOT_APPLICABLE",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_CANDIDATE__DETERMINISTIC_SAVED_ROUTE",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING_INDEPENDENT_PR_VERIFICATION",
+    "OWNERSHIP_PACKAGE_TEST": "NO_OWNERSHIP_PROMOTION_REQUESTED_BY_THIS_ACTION"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-10-05_UNKNOWN_DOMAIN_SUBCLASS_TOTALITY_REPAIR_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "obs_goal": {
+      "terminal_relation": "UNKNOWN_DOMAIN_ADAPTATION_REMAINS_OPEN_AND_T3_M4_IS_PROOF_ONLY; A_FALSE_UNIVERSAL_CERTIFICATE_CANNOT_CLOSE_IT.",
+      "surviving_necessity": "PRESERVE_THE_LITERAL_ACCEPTED_INPUT_DOMAIN_WHILE_MAKING_CANONICALIZATION_TOTAL."
+    },
+    "obs_capability": {
+      "prior_work_search": [
+        "Recent main commits through 9d48e6703ade9f5d2d26855d0fcd08f975e97a8b",
+        "No subclass-totality repair found in commit search",
+        "Existing V5 generator, V5 regression suite, and V6 theorem reused"
+      ],
+      "reusable_assets": [
+        "Generator V5 surrogate-safe canonicalization",
+        "Generator V4 structural identifier totality",
+        "Candidate V3 exact ADD2 float semantics",
+        "Existing exact scorer and execution harness"
+      ]
+    },
+    "obs_blocker": {
+      "causal_blocker": "OVERRIDABLE_INSTANCE_METHOD_DISPATCH_INSIDE_AN_ISINSTANCE_ACCEPTED_UNIVERSAL_INPUT_DOMAIN",
+      "counterexample_class": "STR_SUBCLASS_OVERRIDES_STRIP_OR_ENCODE__BYTES_SUBCLASS_OVERRIDES___BYTES__"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE"
+      ],
+      "selected_surviving_route": "BUILTIN_STR_DESCRIPTOR_AND_BUFFER_PROTOCOL_CANONICALIZATION_PLUS_ADVERSARIAL_REGRESSION",
+      "implementation_still_necessary": true,
+      "why_fastest_sufficient": "Three tiny local changes preserve the existing route and quantifier; no new mechanism, donor, benchmark, or reality query is needed."
+    },
+    "obs_verification": {
+      "expected_certificate": "PR_CHECKS_PLUS_CONTENT_BOUND_REVIEW_OF_EXACT_REPAIRED_BLOBS",
+      "falsification_condition": "ANY_ADMITTED_SUBCLASS_CAN_STILL_THROW_OR_COLLAPSE__ANY_V5_REGRESSION__ANY_V6_BINDING_MISMATCH__ANY_INDEPENDENT_CHECK_FAILURE"
+    },
+    "obs_inherited_system": {
+      "unchanged_components_reused": true,
+      "fresh_reality_required": false
+    },
+    "obs_obs": {
+      "base_commit_bound": "9d48e6703ade9f5d2d26855d0fcd08f975e97a8b",
+      "material_state_change_requires_revalidation_before_merge_or_promotion": true
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT__TOTAL_EXACT_EVALUATOR__PYTHON_SUBCLASS_SAFE",
+    "inputs": "Every beacon satisfying isinstance(beacon,str) and len(str.strip(beacon))>=16; every evaluator secret satisfying bytes-or-str gate and canonical byte length>=32, including subclasses accepted by isinstance.",
+    "environment_state": "Exact repaired Generator V5 + structural Generator V4 + Candidate V3 + frozen harness/scorer.",
+    "allowed_information": "Candidate-visible packet/transcript and bound Domain-A receipt only.",
+    "required_output_or_action": "Generator emits the 27-case packet for every admitted value; Candidate V3 passes all 12 transfer and 15 abstention cases through the exact scorer with <=2 transfer probes.",
+    "success_condition": "No admitted subclass override can make the interface partial, exact blob bindings pass, and independent regression/proof verification passes.",
+    "failure_condition": "Any admitted value fails canonicalization/emission, any evaluator-visible semantic ID collapses, any exact scorer case fails, or exact blob binding differs.",
+    "terminal_consequence": "Restores zero-reality scope-certificate eligibility only; separate Root3/acceptance reduction remains mandatory.",
+    "verification_route": "Adversarial subclass regression + V6 content-bound universal proof + independent PR verification.",
+    "dependency_boundary": "No opaque learned target-capability provider and no terminal/production evidence.",
+    "scope": "EXACT_BOUND_UNKNOWN_DOMAIN_EVALUATOR_CONTRACT_ONLY"
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "NO_UNTOUCHED_QUALIFICATION_EVIDENCE_EXPOSED_OR_SPENT__NO_OWNERSHIP_PROMOTION_REQUESTED",
+    "target_version_lock": "EXACT_SUBJECT_BLOBS_BOUND_IN_V6_PROOF",
+    "contamination_ledger": "ZERO_TERMINAL_OR_PRODUCTION_DATA_ACCESSED",
+    "independent_acceptance_evidence": "PENDING_PR_VERIFICATION",
+    "execution_surface_certificate": "STANDARD_REPOSITORY_PR_CHECKS_ONLY",
+    "donor_deletion_plan_if_applicable": "NOT_APPLICABLE"
+  },
+  "qualification_stage": "ZERO_REALITY_PROOF_REPAIR__NOT_STAGE_C_TERMINAL_EXECUTION",
+  "terminal_proof_control": {
+    "proof_obligation": "Literal totality over the full isinstance-accepted input domain of the bound Unknown-Domain evaluator.",
+    "hole_type": "DEDUCTIVE_INPUT_DOMAIN_TOTALITY",
+    "expected_certificate_or_receipt": "Independent verification of repaired exact blobs and adversarial subclass regression.",
+    "validator": "Exact V6 proof plus independent PR checks.",
+    "maximum_cheap_test_cost": "ZERO_TERMINAL_CASES__ZERO_INCREMENTAL_SPEND",
+    "prerequisites": [
+      "Repaired V5 and V5 regression blobs exactly bound by V6 proof"
+    ],
+    "contamination_risk": "NONE__NO_UNTOUCHED_TASK_READ",
+    "reversibility": "FULL",
+    "falsification_condition": "Any counterexample or exact-blob mismatch.",
+    "critical_path_relation": "Prevents false Unknown-Domain proof promotion and restores the cheapest valid zero-reality closure route."
+  },
+  "continuous_obs": {
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      "main head",
+      "Unknown-Domain V5/V6 exact blobs",
+      "current terminal authority"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "obs_layers_current": "AT_BASE_9d48e6703ade9f5d2d26855d0fcd08f975e97a8b",
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": "CHEAP_DEDUCTIVE_REPAIR_BEFORE_ANY_FRESH_REALITY",
+    "information_boundary_complete": true,
+    "information_policy": "ZERO_REALITY",
+    "dependencies": [
+      "independent verifier",
+      "separate Root3/acceptance reducer"
+    ],
+    "post_receipt_revalidation_required": true
+  },
+  "reality_query_admission": {
+    "proof_obligation": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_TOTALITY",
+    "existing_evidence_search": "COMPLETE_FOR_THIS_COUNTEREXAMPLE_CLASS",
+    "evidence_scope_equivalence": "LOCAL_DEDUCTIVE_PROOF_HOLE",
+    "deductive_closure": "REPAIR_IMPLEMENTED__INDEPENDENT_VERIFICATION_PENDING",
+    "counterfactual_terminal_distinctions": [
+      "REPAIRED_ROUTE_VERIFIES",
+      "REPAIRED_ROUTE_FALSIFIED"
+    ],
+    "dominated_observations_deleted": [
+      "FRESH_PRODUCTION_CASE",
+      "FRESH_TERMINAL_CASE"
+    ],
+    "candidate_observations": [],
+    "minimum_reality_cut": [],
+    "terminal_decision_value": "ZERO_NEW_REALITY_REQUIRED",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "global_cut_snapshot": "UNCHANGED",
+    "global_cut_membership": false
+  },
+  "global_terminal_proof_cut": {
+    "required": false,
+    "reason": "ACTION_GENERATES_NO_NEW_TERMINAL_RELEVANT_REALITY_AND_SPENDS_NO_UNTOUCHED_INFORMATION",
+    "proposed_action_membership": false,
+    "terminal_decision_value": "ZERO_CREDIT_PROOF_REPAIR"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
