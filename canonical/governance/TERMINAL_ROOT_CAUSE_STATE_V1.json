@@ -110,7 +110,7 @@
         "current_frontier_verification_git_blob_sha": "226832c5e9d5f4121f26d93bd645ed51dce474fe",
         "effective_scheduling_authority": true,
         "current_frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V10_ACTIVATION_V1.json",
-        "current_frontier_activation_git_blob_sha": "dc2605176a10982d4d700faea951f8e11d043a1f",
+        "current_frontier_activation_git_blob_sha": "00e6990cbae1399b7dc5e1e3455382aa10ee1cad",
         "external_fact_acquisition_overlay": {
           "activation_path": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_ACTIVATION_V1.json",
           "activation_git_blob_sha": "4e6a60814a097ef6905f487cadfe5e8264f2494a",
