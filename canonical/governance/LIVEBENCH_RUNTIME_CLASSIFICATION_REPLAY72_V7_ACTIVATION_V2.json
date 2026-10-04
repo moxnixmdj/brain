@@ -1,11 +1,11 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_ACTIVATION_V2",
   "date": "2026-10-04",
-  "status": "CANDIDATE__CONDITIONAL_ONE_EPOCH_SANITIZED_REPLAY72__ATOMIC_GLOBAL_CLAIM_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__CONDITIONAL_ONE_EPOCH_SANITIZED_REPLAY72__ATOMIC_GLOBAL_CLAIM_REQUIRED__VERIFIED_LAUNCHER_BOUND__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "root_candidate": {
     "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-    "git_blob_sha": "3f678ff5f419abaaa00cca84d392b685d8332bfd"
+    "git_blob_sha": "36ac53134b123cfed7e63c31a871a30f9b4579e4"
   },
   "candidate": {
     "path": "canonical/governance/LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_CANDIDATE.json",
@@ -28,15 +28,22 @@
   },
   "atomic_one_use": {
     "bridge_path": "canonical/governance/LIVEBENCH_V7_GENERIC_ATOMIC_ONE_USE_EXECUTION_CLAIM_BRIDGE_V1.json",
-    "bridge_git_blob_sha": "ab563b537e1b743a98dd460994b9e0952d699220",
+    "bridge_git_blob_sha": "ecafd9d73e4e736420ce0c46c037b1e4a80ee417",
     "independent_basis_path": "canonical/verification/LIVEBENCH_SHADOW_ATOMIC_CLAIM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
     "independent_basis_git_blob_sha": "e436fa6bcd0c37e1e16c3524e05a876843945904",
     "launcher_path": "launch_livebench_v7_sanitized_atomic.py",
-    "launcher_git_blob_sha": "d977690efd97e093b28474d23b37ee6e4520ed0f",
+    "launcher_git_blob_sha": "5470223c39f78af008eb90bafd5d780a35230895",
     "epoch_digest_sha256": "5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
     "claim_ref": "refs/heads/livebench-v7-claims/5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
     "release_event": "FIRST_ATOMIC_CREATE_HTTP_201",
-    "duplicate_or_non201": "FAIL_CLOSED_BEFORE_TERMINAL_DATASET_READ"
+    "duplicate_or_non201": "FAIL_CLOSED_BEFORE_TERMINAL_DATASET_READ",
+    "launcher_verification": {
+      "path": "canonical/verification/LIVEBENCH_V7_ATOMIC_LAUNCHER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "0b6f32c6ef239877725869194052c00ff549d28d",
+      "workflow_run_id": 37193437313,
+      "workflow_job_id": 111410251686,
+      "conclusion": "success"
+    }
   },
   "one_epoch_contract": {
     "maximum_successful_claims": 1,
