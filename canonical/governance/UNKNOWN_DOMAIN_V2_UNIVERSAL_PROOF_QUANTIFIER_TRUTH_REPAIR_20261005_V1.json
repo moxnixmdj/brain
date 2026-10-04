@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V2_UNIVERSAL_PROOF_QUANTIFIER_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "TRUTH_REPAIR__BEHAVIORAL_THEOREM_PRESERVED_CONDITIONALLY__UNCONDITIONAL_FOR_EVERY_SECRET_QUANTIFIER_REVOKED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "repaired_subject": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json",
+  "finding": {
+    "problem": "THE_FROZEN_GENERATOR_USES_14_HEX_HMAC_SHA256_TOKEN_PREFIXES_FOR_OPAQUE_IDS_BUT_DOES_NOT_REJECT_EVERY_WITHIN_CASE_TOKEN_COLLISION_THAT_CAN_BREAK_THE_FROZEN_HARNESS_OR_SCORER",
+    "token_width_bits": 56,
+    "production_secret_source": "secrets.token_bytes(32)",
+    "production_beacon_source": "secrets.token_hex(24)",
+    "unconditional_claim_rejected": "FOR_EVERY_VALID_BEACON_AND_EVALUATOR_SECRET",
+    "reason": "NO_PROOF_BINDS_HMAC_56_BIT_PREFIXES_AS_INJECTIVE_FOR_ALL_KEYS_AND_THE_EXACT_RUNTIME_HAS_UNGUARDED_CRITICAL_COLLISION_PAIRS"
+  },
+  "critical_unguarded_pairs": {
+    "target_distractor_pair_per_12_transfer_cases": 12,
+    "target_role_pair_per_2_ADD2_transfer_cases": 2,
+    "two_transfer_probe_ids_per_12_transfer_cases": 12,
+    "two_safe_discriminator_ids_per_5_underspecified_cases": 5,
+    "total": 31
+  },
+  "exact_runtime_consequences": [
+    "DUPLICATE_TRANSFER_OR_UNDERSPECIFIED_PROBE_IDS_ARE_REJECTED_BY_HARNESS_ALLOWED_PROBE_INDEXING",
+    "DUPLICATE_TARGET_DISTRACTOR_IDS_ARE_REJECTED_BY_SCORER_HIDDEN_DISTRACTOR_STRING_VALIDATION",
+    "DUPLICATE_ADD2_TARGET_ROLE_IDS_DESTROY_THE_REQUIRED_TWO_FEATURE_SUPPORT_AND_ARE_REJECTED_OR_MISREPRESENTED_DOWNSTREAM"
+  ],
+  "preserved_theorem": {
+    "conditional_statement": "IF_THE_31_CRITICAL_IDENTIFIER_PAIRS_ARE_DISTINCT__THE_EXISTING_STRUCTURAL_TRANSFER_AND_ABSTENTION_ARGUMENTS_REMAIN_CANDIDATE_EVIDENCE_FOR_ALL_NUMERIC_PARAMETER_VALUES_IN_THE_FROZEN_V2_GENERATOR_DOMAIN",
+    "fresh_case_count": 0,
+    "acceptance_credit": false
+  },
+  "cryptographic_probability_statement": {
+    "assumption": "HMAC_SHA256_BEHAVES_AS_A_PRF_ON_THE_DISTINCT_TOKEN_MESSAGES_UNDER_THE_UNIFORMLY_RANDOM_256_BIT_EVALUATOR_SECRET",
+    "union_bound": "31 / 2^56",
+    "upper_bound_float": 4.3021142204224816e-16,
+    "interpretation": "THIS_IS_A_NEGLIGIBLE_FAILURE_PROBABILITY_ARGUMENT__NOT_AN_UNCONDITIONAL_MATHEMATICAL_UNIVERSAL_PROOF"
+  },
+  "scheduler_effect": {
+    "forbid": [
+      "PROMOTE_UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_AS_EXACT_FOR_EVERY_SECRET_WITHOUT_THIS_REPAIR",
+      "DELETE_THE_FRESH_PRODUCTION_ROUTE_SOLELY_BECAUSE_OF_THE_UNREPAIRED_UNIVERSAL_CLAIM"
+    ],
+    "allow": [
+      "INDEPENDENTLY_VERIFY_THE_CONDITIONAL_BEHAVIORAL_THEOREM",
+      "USE_THE_PRF_BOUND_IF_THE_ACCEPTANCE_STANDARD_EXPLICITLY_PERMITS_CRYPTOGRAPHIC_NEGLIGIBLE_FAILURE_ARGUMENTS",
+      "OTHERWISE_RETAIN_ONE_USE_PRODUCTION_AS_THE_DETERMINISTIC_OBSERVED_INSTANCE_CERTIFICATE"
+    ]
+  },
+  "runtime": "canonical/runtime/unknown_domain_v2_token_collision_bound_v1.py",
+  "tests": "canonical/tests/test_unknown_domain_v2_token_collision_bound_v1.py",
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
