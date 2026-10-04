@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_SCOPE_PROOF_PASS__ATOMIC_PREDICATE_PROMOTION_ELIGIBLE__ZERO_FAMILY_CAPABILITY_OWNERSHIP_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37242671651,
+    "workflow_job_id": 111554323377,
+    "runner_commit": "b3c53e4572613b1b72bc456e26285ac7f31fae70",
+    "receipt_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_TOTAL_EXACT_INDEPENDENT_VERIFICATION_V1",
+    "receipt_status": "PASS__INDEPENDENT_CONTENT_BOUND_TOTALITY_EXACTNESS_AND_6912_CASE_FALSIFICATION__ZERO_CREDIT",
+    "artifact_id": 11317734591,
+    "artifact_zip_sha256": "9d009d5fac6c9ecd9e0877b6c89d1a9470cce0370c3746765586fc493f49983f",
+    "fisher_yates_exhaustive_choice_paths_n_le_7": 5913,
+    "nonproduction_falsification": {
+      "populations": 256,
+      "cases": 6912,
+      "all_pass": true
+    },
+    "production_or_terminal_cases_generated": 0
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/unknown_domain_direct_candidate_v1.py": "a2a77269a8175ce315b466035049da0f761b8734",
+    "canonical/runtime/unknown_domain_direct_candidate_v2.py": "4470716f95a559a700e461262df909ae19a41651",
+    "canonical/runtime/unknown_domain_direct_candidate_v3.py": "8df7f13455b710623806a8219174b397a2c3c442",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py": "8b855851b8a0fec3a0811c5033cc4ea6d2436954",
+    "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "canonical/runtime/unknown_domain_direct_v4_universal_proof_v1.py": "72bbed393ac1bcaccb4cf33cd37835662c421f6c"
+  },
+  "verified_falsification": {
+    "v2_exact_float_counterexample": {
+      "beacon": "INDEPENDENT-V4-FLOAT-0002-BEACON",
+      "index": 10,
+      "v2": -0.10691751936785576,
+      "gold": -0.10691751936785587,
+      "v3_probe_count": 1
+    },
+    "v2_failure_preserved": true,
+    "v3_exact_repair_passed": true,
+    "identifier_totality_depends_on_hash_collision_resistance": false
+  },
+  "deduction": {
+    "prior_state": "EXTERNAL_BLOCKED",
+    "discharge_condition_satisfied": true,
+    "new_state": "PROVED",
+    "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "independent_or_objective": true,
+    "scope_complete": true,
+    "atomic_predicate_proved_delta": 1,
+    "unresolved_predicate_delta": -1,
+    "bound_blocker_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "reason_family_remains_open": "MYSTERYMECHANISM_GE_49_55_IS_SEPARATE_AND_UNCHANGED"
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION",
+    "NO_MYSTERYMECHANISM_THRESHOLD_CREDIT",
+    "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_CREDIT_FROM_THIS_ATOM_ALONE",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOM_ALONE",
+    "NO_PRODUCTION_OR_TERMINAL_CASE_CONSUMPTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_family_credit_delta": 0,
+    "atomic_predicate_proved_delta": 1,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
