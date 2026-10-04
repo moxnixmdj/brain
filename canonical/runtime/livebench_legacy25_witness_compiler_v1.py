@@ -96,15 +96,11 @@ def parse_specs(prompt: str) -> list[Spec]:
     if "Wrap your entire response with double quotation marks." in text:
         specs.append(_spec("quotation"))
 
-    # Deduplicate exact repeated descriptions while preserving order.
-    out: list[Spec] = []
-    seen = set()
-    for s in specs:
-        key = (s.kind, s.args)
-        if key not in seen:
-            seen.add(key)
-            out.append(s)
-    return out
+    # Preserve every visible constraint instance. Legacy IFEval legitimately
+    # repeats one family to encode intervals or multiple independent demands.
+    # Family identity, and even identical rendered descriptions, are not safe
+    # dedupe keys because each instruction instance is independently scored.
+    return specs
 
 
 def _word_count(s: str) -> int:
@@ -300,14 +296,16 @@ def _transform(candidate: str, spec: Spec) -> str | None:
 
 
 def _repeat_prompt_prefix(prompt: str) -> str | None:
-    flat = str(prompt or "").replace("\r\n","\n").strip()
-    marker = "First repeat the request word for word without change, then give your answer (1. do not say any words or characters before repeating the request; 2. the request you need to repeat does not include this sentence)"
-    idx=flat.lower().find(marker.lower())
-    if idx < 0: return None
-    before=flat[:idx].rstrip()
-    after=flat[idx+len(marker):].strip()
-    # The public legacy template is normally suffix; fail closed otherwise.
-    if after: return None
+    raw = str(prompt or "").replace("\r\n", "\n").strip()
+    # Historical LiveBench generation populated hidden prompt_to_repeat with
+    # generated_prompt.split(marker)[0]. Reproduce that exact public rule.
+    # Constraints rendered after the repeat instruction still apply to the
+    # response, but they are not part of the required repeated prefix.
+    marker = "First repeat the request word for word without change,"
+    idx = raw.find(marker)
+    if idx < 0:
+        return None
+    before = raw[:idx].rstrip()
     return before or None
 
 
