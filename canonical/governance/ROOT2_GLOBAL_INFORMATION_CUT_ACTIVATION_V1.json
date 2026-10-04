@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_GLOBAL_INFORMATION_CUT_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENTLY_VERIFIED_SCHEDULING_PRIMITIVE__ZERO_CREDIT__NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY",
+  "objective": "Make exact dependency-aware global evidence-cut optimization available as the default meta-planner for current Root2 scheduling, while preserving all frozen acceptance semantics and authority gates.",
+  "subject": {
+    "runtime_path": "canonical/runtime/root2_global_information_cut_v1.py",
+    "runtime_git_blob_sha": "2c2d8ff476f076fc38caf81d3b53f7a2054b83ef"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_GLOBAL_INFORMATION_CUT_AND_INSTRUCTION_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+  },
+  "scheduling_contract": [
+    "COMPILE_CURRENT_ROOT2_PREDICATES_AND_ADMISSIBLE_CLOSURE_ACTIONS_INTO_ONE_DEPENDENCY_GRAPH",
+    "ALLOW_CROSS_PREDICATE_EVIDENCE_REUSE_ONLY_WHEN_SCOPE_BINDINGS_ARE_INDEPENDENTLY_VALID",
+    "MINIMIZE_DECLARED_CRITICAL_PATH_WALL_CLOCK_THEN_ACTION_COUNT_THEN_REALITY_UNITS",
+    "REPORT_ANY_PREDICATE_WITH_NO_DECLARED_CLOSURE_ACTION_EXPLICITLY",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+    "DO_NOT_INVENT_ACTION_DURATIONS__UNKNOWN_DURATION_MUST_BE_DECLARED_UNKNOWN_OR_HANDLED_BY_A_SEPARATE_ORDINAL_MODEL"
+  ],
+  "instruction_compiler_state": {
+    "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+    "git_blob_sha": "1d83dffb7024666cc2202f88a0dca6819165f35a",
+    "verification_status": "INDEPENDENT_SYNTHETIC_PASS",
+    "runtime_routing_activation": false,
+    "next_gate": "SEPARATE_GENERIC_ROUTING_INTEGRATION_AND_SYNTHETIC_ZERO_CASE_VERIFICATION",
+    "semantic_scope": "STRUCTURAL_CONSTRAINT_COMPILATION_ONLY__SEMANTIC_CONTENT_FAILS_CLOSED"
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULER",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_PRIVATE_PUBLIC_SUBSTITUTION",
+    "NO_RELATIVE_SCORE_INFERENCE_FROM_ABSOLUTE_EVIDENCE",
+    "NO_USE_OF_SPECULATIVE_POINT_TIMES_AS_FACT",
+    "NO_LIVEBENCH_TERMINAL_SPECIAL_CASE"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

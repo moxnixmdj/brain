@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_GLOBAL_INFORMATION_CUT_AND_INSTRUCTION_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_GLOBAL_CUT_OPTIMALITY_AND_SYNTHETIC_INSTRUCTION_FAIL_CLOSED__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "subject": {
+    "candidate_path": "canonical/governance/ROOT2_GLOBAL_INFORMATION_CUT_AND_INSTRUCTION_COMPILER_CANDIDATE_V1.json",
+    "candidate_git_blob_sha": "a74f874a37459dbf09164a2f03ba9cfbac7fd987",
+    "global_cut_runtime_path": "canonical/runtime/root2_global_information_cut_v1.py",
+    "global_cut_runtime_git_blob_sha": "2c2d8ff476f076fc38caf81d3b53f7a2054b83ef",
+    "instruction_compiler_path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+    "instruction_compiler_git_blob_sha": "1d83dffb7024666cc2202f88a0dca6819165f35a",
+    "global_cut_test_git_blob_sha": "69721a937d4de682bee407ab62ab3a79f5a72648",
+    "instruction_test_git_blob_sha": "199bbd8071f338f6390932ea42de184f05199c39"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1821,
+    "merge_commit": "426b6d961797890bdc66a1bd249e2fbaee6aeefd",
+    "workflow_run_id": 37194598996,
+    "workflow_job_id": 111413731896,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_subject_blobs": true,
+    "randomized_exact_cut_instances": 120,
+    "shared_dependency_adversarial_case": true,
+    "synthetic_instruction_cases": 7,
+    "semantic_fail_closed": true,
+    "network_used": false,
+    "terminal_cases_consumed": 0
+  },
+  "verification_history": {
+    "failed_runs_before_pass": 2,
+    "first_failure": "VERIFIER_EXPECTATION_BUG__SHARED_DEPENDENCY_ASSERTION_EXPECTED_NONOPTIMAL_ROUTE",
+    "second_failure": "SUBJECT_NEGATIVE_LITERAL_PARSER_BUG",
+    "consequence": "BOTH_REPAIRED_BEFORE_PASS__NO_FAILED_SUBJECT_PROMOTED"
+  },
+  "hard_nonclaims": [
+    "NO_ROOT2_PREDICATE_PROVED_BY_THIS_RECEIPT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_THAT_THE_CURRENT_19_PREDICATE_MINIMUM_CUT_HAS_YET_BEEN_COMPUTED_FROM_A_COMPLETE_ACTION_MANIFEST",
+    "NO_CLAIM_THAT_STRUCTURAL_INSTRUCTION_CONSTRAINT_COMPILATION_EQUALS_GENERAL_SEMANTIC_INSTRUCTION_FOLLOWING",
+    "NO_LIVEBENCH_TERMINAL_CASES_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
