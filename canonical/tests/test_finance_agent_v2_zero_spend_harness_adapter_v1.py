@@ -70,6 +70,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(a._provider_for_url("https://api.tiingo.com/tiingo/daily/AAPL/prices"),"tiingo")
         self.assertIsNone(a._provider_for_url("https://www.sec.gov/Archives/x"))
         self.assertIsNone(a._provider_for_url("https://example.com/api.tiingo.com.evil"))
+        self.assertIsNone(a._provider_for_url("https://example.com/path/api.tiingo.com/prices"))
 
     def test_tavily_success_is_guarded_and_observed(self):
         audit=a.ProviderAudit(lambda p:snap(p))
