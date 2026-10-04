@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_SUB100MB_ARC_HELDOUT_SLICE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_TASK_CONTENT_EXPOSURE__DEVELOPMENT_SIGNAL_ONLY__NO_OPEN_WORLD_OR_FRONTIER_CLAIM",
+  "objective": "MEASURE_ZERO_LEARNED_STATE_PROGRAM_INDUCTION_ON_A_SOLVER_INDEPENDENT_REAL_ARC_AGI_1_EVALUATION_SLICE_WITHOUT_CHERRY_PICKING",
+  "source_subset": {
+    "repository": "iamvxrn/arc-agi-compressed",
+    "path": "subsets/arc1-evaluation-100.json",
+    "git_blob_sha": "13ae2c0107a0d49245f52d1cdf2096f533e24a86",
+    "subset_name": "arc1-evaluation-100",
+    "selection_seed": 0,
+    "source_size": 100,
+    "selection_is_solver_independent": true,
+    "representative_full_set_score_claimed": false
+  },
+  "benchmark_source": {
+    "repository": "fchollet/ARC-AGI",
+    "split": "data/evaluation",
+    "license": "Apache-2.0",
+    "license_git_blob_sha": "68ad4d4198faa02290b125d87ab94e2c23b5227f"
+  },
+  "pre_exposure_selection_rule": "TAKE_THE_FIRST_10_TASK_IDS_AFTER_00576224_FROM_THE_FROZEN_SEED0_SUBSET__00576224_EXCLUDED_ONLY_BECAUSE_ITS_CONTENT_WAS_ALREADY_EXPOSED_DURING_MECHANISM_RESEARCH",
+  "task_ids": [
+    "08573cc6",
+    "0becf7df",
+    "0d87d2a6",
+    "103eff5b",
+    "18419cfa",
+    "19bb5feb",
+    "1acc24af",
+    "1d0a4b61",
+    "1e97544e",
+    "2072aba6"
+  ],
+  "task_count": 10,
+  "information_policy": {
+    "solver_design_before_task_fetch": true,
+    "task_contents_not_used_to_select_ids": true,
+    "after_first_score_tasks_become_spent_heldout_for_this_solver_version": true,
+    "no_tuning_on_this_slice_then_reclaiming_it_as_heldout": true
+  },
+  "primary_metrics": [
+    "EXACT_TASK_SUCCESS_COUNT",
+    "EXACT_TASK_SUCCESS_RATE",
+    "PROGRAMS_EVALUATED",
+    "DESCRIPTION_LENGTH",
+    "WALL_CLOCK",
+    "PERSISTENT_LEARNED_STATE_BYTES"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_10_TASKS_REPRESENT_THE_FULL_400_TASK_EVALUATION_SET",
+    "NO_CLAIM_ARC_EQUALS_UNKNOWN_DOMAIN_ADAPTATION",
+    "NO_CLAIM_OF_OPUS_NONINFERIORITY",
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT_FROM_THIS_SLICE"
+  ],
+  "accounting": {
+    "persistent_learned_state_bytes_budget": 100000000,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
