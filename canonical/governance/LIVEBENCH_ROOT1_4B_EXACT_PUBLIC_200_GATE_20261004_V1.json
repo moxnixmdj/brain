@@ -1,0 +1,139 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_4B_EXACT_PUBLIC_200_GATE_20261004_V1",
+  "date": "2026-10-04",
+  "status": "EXACT_PUBLIC_ROOT1_GATE_FROZEN__4B_ZERO_COST_EXECUTION_QUEUED__NO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": {
+    "prior_problem": "ROOT1_SUCCESSOR_SELECTION_WAS_MEDIATED_BY_SYNTHETIC_OR_RESOURCE_PROXY_TESTS_BEFORE_EXACT_PUBLIC_PREDICATE_EXECUTION",
+    "new_fact": "THE_2026_06_25_ROOT1_POPULATION_IS A FULLY PUBLIC EXACT 200_ROW LEGACY_IFEVAL_SET WITH 50 ACTIVE ROWS IN EACH OF THE FOUR TARGET TASKS",
+    "consequence": "THE_MINIMUM_LOAD_BEARING_TEST_IS NOW DIRECT_EXECUTION_OF_THE_EXACT_PUBLIC_PREDICATE_ON_THE_SMALLEST_FROZEN_ZERO_COST_EXECUTABLE_SUBJECT__SYNTHETIC_SEED_IS_DIAGNOSTIC_ONLY"
+  },
+  "comparator": {
+    "model": "claude-opus-5-5-max-effort",
+    "task_percent": {
+      "paraphrase": 64.267,
+      "simplify": 58.667,
+      "story_generation": 70.917,
+      "summarize": 69.1
+    },
+    "exact_equal_task_mean_percent": 65.73775,
+    "pass_rule": "CANDIDATE_EXACT_EQUAL_TASK_MEAN_PERCENT_GE_65_73775"
+  },
+  "exact_public_population": {
+    "selected_release": "2026-06-25",
+    "dataset_repository": "livebench/instruction_following",
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "parquet_path": "data/test-00000-of-00001.parquet",
+    "parquet_bytes": 537024,
+    "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "active_count": 200,
+    "task_counts": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    },
+    "scorer_family": "LEGACY_IFEVAL_STRICT_ONLY",
+    "modern_ifbench_active_rows": 0,
+    "terminal_or_hidden_case_count": 0
+  },
+  "exact_public_scorer": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "source_blobs": {
+      "livebench/if_runner/instruction_following_eval/instructions.py": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+      "livebench/if_runner/instruction_following_eval/instructions_registry.py": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+      "livebench/if_runner/instruction_following_eval/instructions_util.py": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+    },
+    "per_question_score": "(ALL_INSTRUCTIONS_FOLLOWED_BINARY + FRACTION_OF_INDIVIDUAL_INSTRUCTIONS_FOLLOWED)/2",
+    "per_task_score": "MEAN_OF_50_ACTIVE_ROW_SCORES_X_100",
+    "root1_score": "ARITHMETIC_MEAN_OF_PARAPHRASE_SIMPLIFY_STORY_GENERATION_SUMMARIZE_TASK_PERCENTAGES"
+  },
+  "execution_subject": {
+    "repository": "empero-ai/Qwen3.8-4B-Distill-GGUF",
+    "revision": "391fc7d103e3942a408def3e4f51c2f85d464417",
+    "file": "Qwen3.8-4B-Q4_K_M.gguf",
+    "bytes": 2783446304,
+    "sha256": "dec96e8cf2e11b613bb46513dec485377f9ca5a351e71712ee0e244f287c6790",
+    "license": "Apache-2.0",
+    "runtime_repository": "ggml-org/llama.cpp",
+    "runtime_commit": "0504396140d1c882f5f6ee34466a42db7ae90114"
+  },
+  "generation_precommit": {
+    "attempts_per_case": 1,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "max_tokens": 1536,
+    "fixed_seed_base": 426200,
+    "adaptive_retry": false,
+    "response_transform": "REMOVE_LIVEBENCH_STYLE_THINK_BLOCK_ONLY_BEFORE_STRICT_SCORING"
+  },
+  "implementation": {
+    "public_verification_repository": "moxnixmdj/verification-capsule-runner",
+    "exact_qualifier_path": "verify_qwen38_4b_livebench_public_exact_v1.py",
+    "qualifier_commit": "34c38765695bd3e690ea53d132d3296fd14bc897",
+    "workflow_path": ".github/workflows/verify-qwen38-4b-root1-semantic-seed-v1.yml",
+    "exact_gate_workflow_commit": "5f170528e3e8e3b474713d259548d00e90ba0671",
+    "current_fail_closed_source_commit": "ff3f78a38ed827bc008c090a63eb1588f4cfb0d2",
+    "source_hardening_delta": "CURRENT_SOURCE_COMMIT_REMOVES_NON_FAIL_CLOSED_HASH_ASSERTION_AND_PINS_ALL_THREE_IMPORTED_LEGACY_IFEVAL_BLOBS__QUALIFIER_LOGIC_UNCHANGED"
+  },
+  "active_execution": {
+    "workflow_run_id": 37200604597,
+    "workflow_run_number": 2,
+    "head_sha": "5f170528e3e8e3b474713d259548d00e90ba0671",
+    "observed_state_when_frozen": "QUEUED",
+    "predecessor_run_id": 37200197249,
+    "predecessor_result": "CANCELLED_BY_CONCURRENCY_REPLACEMENT",
+    "accounting": {
+      "incremental_spend_usd": 0,
+      "hidden_or_terminal_cases_consumed": 0,
+      "acceptance_credit_delta": 0,
+      "family_credit_delta": 0,
+      "ownership_credit_delta": 0
+    }
+  },
+  "escalation_law": {
+    "if_4b_exact_public_pass": [
+      "VERIFY_DURABLE_BRAIN_CONTROLLED_RELEASE_REASSEMBLY_EQUALS_THE_FROZEN_WHOLE_SHA256",
+      "VERIFY_SEMANTIC_SEED_PRESERVING_COMPOSITION_WITH_EXISTING_FORMAL_CONSTRAINT_COMPILER",
+      "REQUEST_OR_COMPILE_SEPARATE_CURRENT_AUTHORITY_BEFORE_ANY_FRESH_TERMINAL_REALITY",
+      "DO_NOT_ACQUIRE_A_LARGER_SEMANTIC_CORE_FOR_ROOT1_UNLESS_A_LATER_LOAD_BEARING_REQUIREMENT_FALSIFIES_4B"
+    ],
+    "if_4b_exact_public_fail": [
+      "ESCALATE_TO_NEXT_SMALLEST_CONTENT_ADDRESSED_ZERO_COST_EXECUTABLE_SUBJECT",
+      "PREFER_FROZEN_9B_MIMO_Q4_AFTER_LICENSE_SOURCE_RUNTIME_AND_EXACT_BYTE_BINDING",
+      "ONLY_THEN_ESCALATE_TO_27B_SMAUG_Q4",
+      "NEVER_INHERIT_SCORE_ACROSS_QUANTIZATION_OR_MODEL_SUBJECTS"
+    ]
+  },
+  "deleted_work": [
+    "USE_SYNTHETIC_EIGHT_CASE_SEED_AS_THE_LOAD_BEARING_ROOT1_GATE",
+    "DOWNLOAD_16_55GB_SMAUG_Q4_BEFORE_TESTING_2_783GB_4B_ON_THE_EXACT_PUBLIC_PREDICATE",
+    "USE_USER_LAPTOP_WHILE_REMOTE_DEVICE_IS_OFFLINE",
+    "CONSUME_HIDDEN_OR_FRESH_TERMINAL_CASES_TO_ESTIMATE_ROOT1",
+    "CLAIM_ROOT1_OR_TERMINAL_SUCCESS_FROM_RESOURCE_FIT_ALONE"
+  ],
+  "remaining_load_bearing_residuals": [
+    "EXACT_200_CASE_4B_PUBLIC_RUN_MUST_EXECUTE_AND_RETURN_A_SCORE",
+    "IF_PASS_DURABLE_EXACT_BYTE_OWNERSHIP_MUST_BE_REASSEMBLY_VERIFIED",
+    "SEMANTIC_TO_FORMAL_CONSTRAINT_COMPOSITION_MUST_BE_VERIFIED",
+    "SEPARATE_ACCEPTANCE_AND_FRESH_REALITY_AUTHORITY_REMAINS_REQUIRED",
+    "OTHER_OPUS55_FAMILIES_REMAIN_OPEN_UNCHANGED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_4B_PASSES_65_73775_BEFORE_MEASURED_RECEIPT",
+    "NO_CLAIM_TERMINAL_GOAL_IS_ACHIEVED",
+    "NO_ACCEPTANCE_FAMILY_OR_OWNERSHIP_CREDIT_FROM_QUEUED_EXECUTION",
+    "NO_HIDDEN_OR_FRESH_TERMINAL_CASES_USED"
+  ],
+  "authority": {
+    "scheduling": true,
+    "public_nonterminal_execution": true,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
