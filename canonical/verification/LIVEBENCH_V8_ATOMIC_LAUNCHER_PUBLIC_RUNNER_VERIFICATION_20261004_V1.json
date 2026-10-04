@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V8_ATOMIC_LAUNCHER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_ATOMIC_LAUNCHER__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "diagnose/livebench-v8-structural-refinement-20261004",
+    "launcher_path": "launch_livebench_v8_structural_atomic.py",
+    "launcher_git_blob_sha": "08286046cdb87bcf206d13d520536a4564f6b47f",
+    "diagnostic_path": "diagnose_livebench_replay72_v8_structural.py",
+    "diagnostic_git_blob_sha": "bc5bfd7d791b1343cbcf4d09d8f41c6f73ed9f68",
+    "verifier_path": "verify_livebench_v8_atomic_launcher.py",
+    "trigger_commit": "80693320d9a3e1850b990e403814eda558d81c46"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37194454397,
+    "workflow_job_id": 111413298508,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_launcher_blob": true,
+    "exact_diagnostic_blob": true,
+    "exact_epoch_digest": true,
+    "claim_ref_derived_from_epoch": true,
+    "atomic_create_method_post": true,
+    "duplicate_422_fails_closed": true,
+    "non_201_fails_closed": true,
+    "response_ref_checked": true,
+    "activation_blob_required": true,
+    "point_of_use_order": "ATOMIC_CLAIM_BEFORE_DIAGNOSTIC_IMPORT_AND_EXECUTION",
+    "launcher_terminal_dataset_read": false,
+    "terminal_cases_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_V8_PRODUCTION_CLAIM_CREATED_BY_THIS_VERIFIER",
+    "NO_TERMINAL_CASE_REPLAY",
+    "NO_CASE_73_PLUS",
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
