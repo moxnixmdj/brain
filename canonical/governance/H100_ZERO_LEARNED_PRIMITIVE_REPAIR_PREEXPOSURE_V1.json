@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_PRIMITIVE_REPAIR_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_REPAIR_OUTCOMES__PHASE2__PUBLIC_SYNTHETIC_NONTERMINAL__ZERO_CREDIT",
+  "objective": "TEST_WHETHER_THE_EXACT_PHASE1_RESIDUAL_PERIODIC_EXPONENTIAL_AND_STEP_TASKS_ARE_REMOVED_BY_ONE_GENERAL_ZERO_LEARNED_PARAMETRIC_PRIMITIVE_LAYER_WITHOUT_CHANGING_ANY_PHASE1_TASK_DATA_HOLDOUT_OR_THRESHOLD",
+  "phase1_result": "canonical/verification/H100_ZERO_LEARNED_NOVELTY_STRESS_PUBLIC_RUNNER_RESULT_20261004_V1.json",
+  "residual_basis": {
+    "phase1_within_operator": "9_OF_9_SOLVED",
+    "phase1_outside_operator": "0_OF_3_SOLVED",
+    "residual_class": "MISSING_PRIMITIVE_OR_GRAMMAR_RESIDUAL",
+    "learned_state_need_established": false
+  },
+  "tasks": [
+    {
+      "task_id": "PERIODIC_SINE",
+      "source_phase1_task": true
+    },
+    {
+      "task_id": "EXPONENTIAL",
+      "source_phase1_task": true
+    },
+    {
+      "task_id": "SIGN_STEP",
+      "source_phase1_task": true
+    }
+  ],
+  "immutable_data_source": "canonical/governance/H100_ZERO_LEARNED_NOVELTY_STRESS_PREEXPOSURE_V1.json",
+  "immutable_outcome_definition": {
+    "holdout_nrmse_max": 1e-7,
+    "solver_internal_nrmse_max": 1e-8,
+    "same_training_points_as_phase1": true,
+    "same_holdout_points_as_phase1": true,
+    "same_truth_functions_as_phase1": true
+  },
+  "new_route": {
+    "id": "ZERO_LEARNED_PARAMETRIC_UNARY_V1",
+    "runtime_path": "canonical/runtime/h100_zero_learned_parametric_unary_v1.py",
+    "runtime_git_blob_sha": "6a77f80e2cf01b079fcf7b688689d08a11b47c32",
+    "tests_path": "canonical/tests/test_h100_zero_learned_parametric_unary_v1.py",
+    "tests_git_blob_sha": "b2e04c9ee497ed51a54d9982ca6b9bf47f75c465",
+    "persistent_learned_bytes": 0,
+    "families": [
+      "LINEAR_TREND_PLUS_PARAMETERIZED_SINUSOID_WITH_PHASE",
+      "SCALE_TIMES_EXP_RATE_TIMES_ABS_INPUT",
+      "AFFINE_THRESHOLD_STEP_WITH_OBSERVED_OR_MIDPOINT_BOUNDARY"
+    ],
+    "random_search": false,
+    "external_learned_capability_calls": 0
+  },
+  "success_rule": {
+    "all_three_required": true,
+    "success": "3_OF_3_PHASE1_RESIDUAL_TASKS_HOLDOUT_EXACT",
+    "partial": "ANY_FAILURE_REMAINS_A_ZERO_LEARNED_PRIMITIVE_OR_IDENTIFIABILITY_RESIDUAL__NO_LEARNED_STATE_ESCALATION_YET"
+  },
+  "independent_generalization_checks": [
+    "SINUSOID_FREQUENCY_AND_PHASE_DIFFERENT_FROM_PHASE1_PERIODIC_TASK",
+    "EXP_ABS_RATE_AND_SCALE_DIFFERENT_FROM_PHASE1_EXPONENTIAL_TASK",
+    "STEP_LEVELS_AND_THRESHOLD_DIFFERENT_FROM_PHASE1_SIGN_STEP_TASK",
+    "NONMATCHING_CUBIC_FAILS_CLOSED"
+  ],
+  "hard_rules": [
+    "PHASE1_RESULT_IS_IMMUTABLE",
+    "DO_NOT_REWRITE_PHASE1_ROUTE_SET",
+    "DO_NOT_CHANGE_PHASE1_TASKS_TRAINING_HOLDOUTS_OR_THRESHOLD",
+    "FORMULA_ID_NEVER_PASSED_TO_SOLVER",
+    "ZERO_PERSISTENT_LEARNED_BYTES",
+    "NO_EXTERNAL_LEARNED_CAPABILITY_PROVIDER",
+    "NO_HIDDEN_OR_TERMINAL_CASES",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "authority": {
+    "public_synthetic_research_execution": true,
+    "terminal_execution": false,
+    "promotion": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
