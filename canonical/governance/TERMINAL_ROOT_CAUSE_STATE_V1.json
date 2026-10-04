@@ -523,7 +523,7 @@
     },
     "evidence": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "112f8d836137ca33dd730adf82bfc2d21f18db9d",
+      "git_blob_sha": "0d4d78928ffd9b1979e5d38c074c6d5c86cfdeab",
       "pointer_reconciliation": {
         "status": "RECONCILED_TO_CURRENT_12_PROVED_26_UNRESOLVED_LEDGER",
         "previous_stale_git_blob_sha": "f99b00e6dca735ffa7a790a414155b4f69856cf0",
@@ -664,7 +664,7 @@
     "status": "ACTIVE__ATOMIC_PROMOTION_REVOKED",
     "predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
     "evidence": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
-    "acceptance_binding_blob": "112f8d836137ca33dd730adf82bfc2d21f18db9d",
+    "acceptance_binding_blob": "0d4d78928ffd9b1979e5d38c074c6d5c86cfdeab",
     "state": "ROOT3_ONLY__EXTERNAL_BLOCKED_PENDING_REPAIRED_INDEPENDENT_VERIFICATION",
     "accounting": {
       "proved_atomic": 12,
