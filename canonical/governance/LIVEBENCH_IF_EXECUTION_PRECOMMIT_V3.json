@@ -1,0 +1,243 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_EXECUTION_PRECOMMIT_V3",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__NEW_EXECUTION_EPOCH__PUBLIC_SCORER_DISPATCH_AND_HASH_PINNED_INPUT_DECODER_REPAIR__ZERO_NEW_BRAIN_INFERENCES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "truth_repair": "canonical/verification/LIVEBENCH_ZERO_CASE_RESOURCE_FIT_TRUTH_REPAIR_20261004_V1.json",
+  "candidate": {
+    "repository": "moxnixmdj/brain",
+    "commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+    "astra_runtime_path": "canonical/runtime/astra_runtime.py",
+    "astra_runtime_git_blob_sha": "7f5d16b1db69cb620954bc778e0ba6e15e687b75",
+    "inference_adapter_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v1.py",
+    "inference_adapter_git_blob_sha": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7"
+  },
+  "harness": {
+    "response_adapter_path": "canonical/runtime/livebench_if_response_adapter.py",
+    "response_adapter_git_blob_sha": "eb497ae5585f4f22b06b8088609b6d17714ebc53",
+    "thin_adapter_activation_path": "canonical/governance/LIVEBENCH_IF_THIN_ADAPTER_COMPLETION_ACTIVATION_V1.json",
+    "thin_adapter_activation_git_blob_sha": "04505bc3fca23c448b35cd5ad546bac770f5cb34",
+    "zero_spend_carrier_path": "canonical/governance/LIVEBENCH_IF_PUBLIC_STANDARD_ZERO_SPEND_CARRIER_BINDING_V1.json",
+    "zero_spend_carrier_git_blob_sha": "093ec45bd3889fc3a8edd4f50f41c93a9de2cd10",
+    "hermetic_input_binding_path": "canonical/governance/LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json",
+    "hermetic_input_binding_git_blob_sha": "5d0b876e07901b61f92c89b2257bd07790f53e60",
+    "shadow_lease_runtime_path": "canonical/runtime/shadow_reality_lease_v2.py",
+    "shadow_lease_runtime_git_blob_sha": "8a13e29ddc160ea4af62aed434fb8a1a65afb998"
+  },
+  "scorer": {
+    "upstream_repository": "LiveBench/LiveBench",
+    "upstream_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "verifier_files": [
+      [
+        "livebench/if_runner/ifbench/evaluation_lib.py",
+        "2c7bd1290031dbe4ae0f016c53255f4af0ec645b"
+      ],
+      [
+        "livebench/if_runner/ifbench/instructions.py",
+        "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+      ],
+      [
+        "livebench/if_runner/ifbench/instructions_registry.py",
+        "adfed4832877566e62970257b50c6fa32c302fb2"
+      ],
+      [
+        "livebench/if_runner/ifbench/instructions_util.py",
+        "21b13c7fcfc2c2de01e80c9e7dd222b9bca81342"
+      ],
+      [
+        "livebench/if_runner/ifbench/README.md",
+        "de771a18e7c7625270768fc284e8931cf40f3009"
+      ]
+    ],
+    "dataset_repository": "livebench/instruction_following",
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "population_count": 200,
+    "threshold_percent": 65.7,
+    "dispatch_source": [
+      "livebench/gen_ground_truth_judgment.py",
+      "b36561da5b54380c724c507462d0ee65feefeac8"
+    ],
+    "dispatch_rule": "category == instruction_following AND livebench_release_date < 2025-11-25 => legacy IFEval strict scorer; otherwise current IFBench strict scorer",
+    "legacy_files": [
+      [
+        "livebench/if_runner/instruction_following_eval/evaluation_main.py",
+        "4a341984936c4d609644a3b77f8c030ac5aa7269"
+      ],
+      [
+        "livebench/if_runner/instruction_following_eval/instructions_registry.py",
+        "903ed738398648c7cfac61d5ffa478c22f1f0891"
+      ],
+      [
+        "livebench/if_runner/instruction_following_eval/instructions.py",
+        "4997bab885a676d92545fd91a9a20b48d234a2b2"
+      ],
+      [
+        "livebench/if_runner/instruction_following_eval/instructions_util.py",
+        "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+      ],
+      [
+        "livebench/process_results/instruction_following/utils.py",
+        "8ce01747887ec0792c8f024e1972e34ece781676"
+      ]
+    ]
+  },
+  "environment": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "repository_visibility": "public",
+    "runner_label": "ubuntu-24.04",
+    "python_version": "3.12",
+    "packages": [
+      [
+        "nltk",
+        "3.10.3",
+        "ff9598a8e20518ee0d557745890cc4435b9578489e2dcbc69c4f81fa060caf7c"
+      ],
+      [
+        "emoji",
+        "2.16.0",
+        "c4230d80640def9071599ff56b1b5950fe13a2a94c0da98c5deab12431b24330"
+      ],
+      [
+        "syllapy",
+        "0.7.2",
+        "198a7413033c32d7b31e21962efb3f284bcea80d3346e954b938ca1ebe6bee20"
+      ],
+      [
+        "setuptools",
+        "80.9.0",
+        null
+      ],
+      [
+        "spacy",
+        "3.8.16",
+        null
+      ],
+      [
+        "en-core-web-sm",
+        "3.8.0",
+        null
+      ],
+      [
+        "langdetect",
+        "1.0.9",
+        null
+      ],
+      [
+        "immutabledict",
+        "4.3.1",
+        null
+      ],
+      [
+        "pandas",
+        "2.3.3",
+        null
+      ],
+      [
+        "pyarrow",
+        "21.0.0",
+        "b7ae0bbdc8c6674259b25bef5d2a1d6af5d39d7200c819cf99e07f7dfef1c51e"
+      ]
+    ],
+    "spacy_model_source": "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl",
+    "paid_external_model_or_api_allowed": false,
+    "larger_or_paid_runner_allowed": false,
+    "resource_fit_status": "INDEPENDENT_ZERO_CASE_PUBLIC_RUNNER_PASS",
+    "resource_fit_verification": {
+      "path": "canonical/verification/LIVEBENCH_ZERO_CASE_RESOURCE_FIT_TRUTH_REPAIR_20261004_V1.json",
+      "git_blob_sha": "8a603c1f48aad6e0fc79c2c76d2db437efde3893",
+      "negative_run_id": 37184391507,
+      "positive_run_id": 37184530130
+    },
+    "parquet_reader_probe": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1762,
+      "workflow_run_id": 37188489755,
+      "workflow_job_id": 111395498591,
+      "runner": "ubuntu-24.04",
+      "python": "3.12.14",
+      "pyarrow_preinstalled": false,
+      "wheel": "pyarrow-21.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "wheel_sha256": "b7ae0bbdc8c6674259b25bef5d2a1d6af5d39d7200c819cf99e07f7dfef1c51e",
+      "terminal_cases_consumed": 0
+    },
+    "legacy_scorer_verification": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1764,
+      "merge_commit": "d6c713c9c6d0c20a3e9480af5e008bb49d06fcbd",
+      "workflow_run_id": 37188804615,
+      "workflow_job_id": 111396424971,
+      "conclusion": "success",
+      "terminal_cases_consumed": 0,
+      "candidate_inferences": 0
+    }
+  },
+  "policy": {
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "allow_optional_model_planner": false,
+    "max_controller_actions": 16,
+    "max_cycles": 6,
+    "external_tools_allowed": false,
+    "required_cognition_dependency_class": "MODEL_INDEPENDENT",
+    "result_sink": "WRITE_ONLY_ESCROW",
+    "result_visible_to_candidate_before_fixed_point": false,
+    "result_visible_to_planner_before_fixed_point": false,
+    "result_visible_to_zero_reality_work_before_fixed_point": false,
+    "candidate_mutation_allowed": false,
+    "unrelated_work_mutation_allowed": false,
+    "acceptance_credit_before_predicate_activation": false
+  },
+  "component_sha256": {
+    "candidate": "8f99aa371061160822670fc6f5da2ce3a01cc260063330ed6e5954a2cac68c9a",
+    "harness": "dcb03697e0f38d50933ca38650809fc80343737e4be3105966f2851e510c4b9e",
+    "scorer": "d2ba3bd54964cf842bd9dbe35d5f07239e28f1c6db61b07c72a95234276c0760",
+    "environment": "87f38052cf500e0816b6b2c8f2a7c3b5b6d25efdeead77829f613c72ceb11664",
+    "policy": "3e77340568dce7d6ff8f77f94de7e1fe38b85c705d88ba1067447f716a456e90"
+  },
+  "case_exposure": {
+    "prior_attempt_terminal_population_loaded": true,
+    "prior_attempt_candidate_inferences": 0,
+    "prior_attempt_candidate_responses": 0,
+    "repair_derived_from_terminal_prompt_content": false,
+    "repair_derived_from_candidate_response": false,
+    "repair_derived_from_score": false,
+    "new_terminal_cases_consumed_by_precommit_v3": 0
+  },
+  "hard_rules": [
+    "CANDIDATE_COMPONENT_MUST_EQUAL_V2",
+    "HARNESS_COMPONENT_MUST_EQUAL_V2",
+    "POLICY_COMPONENT_MUST_EQUAL_V2",
+    "SCORER_DELTA_LIMITED_TO_PUBLIC_UPSTREAM_DISPATCH_AND_LEGACY_IFEVAL_FILES",
+    "ENVIRONMENT_DELTA_LIMITED_TO_VERIFIED_LEGACY_SCORER_DEPENDENCIES_AND_HASH_PINNED_PYARROW_21_0_0",
+    "NO_REPAIR_DERIVATION_FROM_TERMINAL_PROMPT_CONTENT_CANDIDATE_RESPONSE_OR_SCORE",
+    "MANDATORY_OUTPUT_ONLY_THRESHOLD_PREPASS_BEFORE_NEW_CANDIDATE_INFERENCE",
+    "NO_POST_COMMIT_CANDIDATE_MUTATION",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_PRECOMMIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "new_candidate_inferences": 0,
+    "new_candidate_responses": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "shadow_collection_authority": false,
+  "supersedes_for_future_direct_execution": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2.json",
+  "prior_failed_attempt": "canonical/verification/LIVEBENCH_FIRST_DIRECT_ATTEMPT_TRUTH_RECEIPT_20261004_V1.json",
+  "legacy_scorer_verification": "canonical/verification/LIVEBENCH_LEGACY_SCORER_SUPPLEMENT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+  "remaining_before_direct_execution": [
+    "INDEPENDENTLY_VERIFY_V3_COMPONENT_HASHES_AND_STRICT_V2_TO_V3_DELTA",
+    "INDEPENDENTLY_VERIFY_LEGACY_AND_CURRENT_SCORER_DISPATCH_IN_V3_ENVIRONMENT",
+    "RUN_OUTPUT_ONLY_THRESHOLD_PREPASS_AT_POINT_OF_USE",
+    "REBIND_PREDICATE_LOCAL_DIRECT_AUTHORITY_TO_V3_NEW_EXECUTION_EPOCH",
+    "PASS_POINT_OF_USE_GATES",
+    "EXECUTE_EXACT_FROZEN_POPULATION_WITH_NO_CANDIDATE_MUTATION"
+  ]
+}
