@@ -1,13 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_VISIBLE_DESCRIPTION_INVERSION_BREAKTHROUGH_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__SOURCE_DERIVED_25_OF_25_LEGACY_DESCRIPTION_INVERSION__ZERO_TERMINAL_METADATA__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "status": "TRUTH_REPAIRED__25_OF_25_STATIC_BUILD_DESCRIPTION_TEMPLATE_COVERAGE_ONLY__PUBLIC_CLASSIC_PARAPHRASE_COMPLETENESS_FALSE__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
-  "objective": "Delete hidden instruction_id_list and visible-parameter kwargs as necessary inputs for a frozen legacy IFEval successor by inverting the public build_description grammar from prompt text only.",
-  "trigger": {
-    "candidate_scope_reduction": "canonical/governance/LIVEBENCH_ACTIVE_POPULATION_LEGACY_DISPATCH_COLLAPSE_V1.json",
-    "state": "LEGACY_ONLY_COMPOSITION_VERIFIER_PENDING_AT_TIME_OF_THIS_COMMIT",
-    "reason_for_work_now": "THIS COMPONENT IS SOURCE_ONLY AND REMAINS USEFUL WHETHER OR NOT THE PENDING POPULATION_DISPATCH COMPOSITION IS PROMOTED"
+  "objective": "Provide a source-template oracle for the 25 frozen legacy IFEval checker descriptions. Do not use this exact-template runtime as a universal visible-prompt parser.",
+  "verified_scope_update": {
+    "legacy_only_terminal_scope_receipt": "canonical/verification/LIVEBENCH_FROZEN_POPULATION_DISPATCH_METADATA_VERIFICATION_20261004_V1.json",
+    "legacy_rows": 200,
+    "modern_ifbench_rows": 0,
+    "consequence": "THE LEGACY 25 CHECKER GRAMMAR IS NOW LOAD_BEARING FOR THE EXACT FROZEN TARGET, MAKING PARAPHRASE-TOLERANT LEGACY PROMPT INVERSION THE ACTIVE OBSERVABILITY CUT."
   },
   "pinned_public_sources": {
     "repository": "LiveBench/LiveBench",
@@ -17,61 +18,55 @@
     "legacy_instructions_path": "livebench/if_runner/instruction_following_eval/instructions.py",
     "legacy_instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2"
   },
-  "breakthrough": {
+  "static_template_result": {
     "registered_legacy_instruction_ids": 25,
     "source_derived_description_patterns": 25,
     "static_registry_coverage_fraction": "25/25",
-    "visible_parameter_families_recovered": [
-      "keyword lists and keyword frequency",
-      "forbidden word lists",
-      "letter frequency",
-      "language name",
-      "sentence paragraph and word counts",
-      "nth paragraph first word",
-      "placeholder count and postscript marker",
-      "bullet highlight and section counts",
-      "constrained option list",
-      "end phrase",
-      "capital-word frequency"
-    ],
-    "fixed_description_families_recognized": [
-      "json format",
-      "title",
-      "two responses",
-      "repeat prompt",
-      "english uppercase",
-      "english lowercase",
-      "no comma",
-      "quotation wrapper"
-    ],
-    "consequence": "A SUCCESSOR CAN PRECOMMIT THE LEGACY CHECKER SURFACE AND RECOVER CHECKER_RELEVANT VISIBLE PARAMETERS WITHOUT READING HIDDEN instruction_id_list OR kwargs. THE REMAINING HARD PARAMETER IS repeat_prompt.prompt_to_repeat, FOR WHICH A SEPARATE PROMPT_ONLY RECOVERY CANDIDATE ALREADY EXISTS."
+    "meaning": "COMPLETE_ONLY_OVER_THE_LITERAL_BUILD_DESCRIPTION_SURFACES_IN_THE_PINNED_SOURCE"
+  },
+  "public_paraphrase_truth_repair": {
+    "evidence": "canonical/governance/LIVEBENCH_LEGACY_PROMPT_INVERTER_PUBLIC_COVERAGE_TRUTH_REPAIR_20261004_V1.json",
+    "public_classic_ifeval_repository": "google-research/google-research",
+    "public_classic_ifeval_commit": "e49bbfe381c9c0e564b937f1c4e163a2273c65cc",
+    "public_classic_ifeval_blob": "cbe52f6eecf3986fdac745b4acba4da1408eb146",
+    "public_rows": 541,
+    "public_instruction_instances": 834,
+    "exact_template_class_recognized_instances": 42,
+    "exact_template_class_instance_coverage_percent": 5.0359712230215825,
+    "exact_template_class_fully_recognized_rows": 10,
+    "exact_template_class_full_row_coverage_percent": 1.8484288354898337,
+    "deduction": "PARAMETER_DERIVABILITY_FROM_build_description_DOES_NOT_IMPLY_DERIVABILITY_FROM_PARAPHRASED_VISIBLE_PROMPTS. THIS RUNTIME IS A SOURCE-TEMPLATE ORACLE, NOT A TERMINAL PROMPT PARSER."
   },
   "implementation": {
     "runtime": "canonical/runtime/livebench_legacy_visible_description_inverter_v1.py",
     "runtime_commit": "55ae2d43300d0e4fa7139e8c885ed90757655d98",
     "tests": "canonical/tests/test_livebench_legacy_visible_description_inverter_v1.py",
     "tests_commit": "5270f75b54e2a57c0081d24a582719b8455d83c7",
-    "design": "FAIL_CLOSED_ON_OVERLAPPING_DESCRIPTION_MATCHES__SOURCE_TEMPLATE_REGEXES_ONLY__NO_SEMANTIC_GUESSING"
+    "design": "FAIL_CLOSED_ON_OVERLAPPING_DESCRIPTION_MATCHES__SOURCE_TEMPLATE_REGEXES_ONLY__NO_SEMANTIC_GUESSING",
+    "allowed_role": "SOURCE_TEMPLATE_ORACLE_AND_REGRESSION_FIXTURE_ONLY",
+    "forbidden_role": "UNIVERSAL_TERMINAL_VISIBLE_PROMPT_PARSER"
   },
-  "next_minimum_cut": [
-    "INDEPENDENTLY_VERIFY_RENDERED_TEMPLATE_COVERAGE_AGAINST_THE_PINNED_LEGACY_SOURCE_WITHOUT_READING_TERMINAL_PROMPTS",
-    "COMPOSE_THE_INVERTER_WITH_A_DETERMINISTIC_LEGACY_CHECKER_WITNESS_SYNTHESIZER",
-    "VALIDATE_EACH_SYNTHESIZED_WITNESS_AGAINST_AN_EXACT_LOCAL_COPY_OF_THE_PINNED_PUBLIC_CHECKER",
-    "ONLY_THEN_USE_VISIBLE_MATCH_COUNT_AS_SCORE_RESULTS_DENOMINATOR_EVIDENCE__FAIL_CLOSED_ON_ANY_UNMATCHED_OR_AMBIGUOUS_CONTRACT"
-  ],
+  "next_minimum_cut": {
+    "name": "PUBLIC_CLASSIC_IFEVAL_PARAPHRASE_COMPLETE_INVERTER",
+    "success_criterion": "541_OF_541_PUBLIC_ROWS_HAVE_ALL_PUBLIC_INSTRUCTION_IDS_RECOGNIZED_AND_ALL_SCORE_RELEVANT_ARGUMENTS_EXACTLY_RECONSTRUCTED_OR_PROVED_UNNECESSARY",
+    "then": [
+      "COMPOSE_WITH_DETERMINISTIC_LEGACY_CHECKER_WITNESS_SYNTHESIS",
+      "VALIDATE_CONSTRUCTED_WITNESSES_AGAINST_EXACT_PINNED_PUBLIC_CHECKERS",
+      "FREEZE_SUCCESSOR_BEFORE_ANY_NEW_TERMINAL_COMPARATOR_EVIDENCE"
+    ]
+  },
   "hard_nonclaims": [
+    "PUBLIC_CLASSIC_COVERAGE_DOES_NOT_ESTIMATE_FROZEN_TERMINAL_COVERAGE",
     "NO_TERMINAL_PROMPT_POPULATION_WAS_READ_OR_AUDITED",
-    "NO_CLAIM_HISTORICAL_FROZEN_ROWS_LACK_WORDING_VARIANTS",
     "NO_RESPONSE_SYNTHESIS_OR_CHECKER_PASS_IS_CLAIMED",
     "NO_LIVEBENCH_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
   ],
   "contamination_firewall": [
-    "NO_QUESTION_IDS",
-    "NO_instruction_id_list",
-    "NO_HIDDEN_kwargs",
-    "NO_RESPONSES",
-    "NO_SCORER_FEEDBACK",
-    "PUBLIC_PINNED_SOURCE_GRAMMAR_PLUS_SYNTHETIC_DESCRIPTIONS_ONLY"
+    "NO_TERMINAL_QUESTION_IDS",
+    "NO_TERMINAL_instruction_id_list",
+    "NO_TERMINAL_HIDDEN_kwargs",
+    "NO_TERMINAL_RESPONSES",
+    "NO_TERMINAL_SCORER_FEEDBACK"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
