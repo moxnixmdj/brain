@@ -16,19 +16,30 @@ from canonical.runtime import unknown_domain_direct_hidden_generator_v4 as v4
 SCHEMA="PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_HIDDEN_GENERATOR_V5"
 BEACON_CANONICALIZATION="UTF8_SURROGATEPASS_BYTES_TO_LOWER_HEX_WITH_V5_PREFIX"
 SECRET_CANONICALIZATION="UTF8_SURROGATEPASS_FOR_STR__BYTES_IDENTITY"
-STRING_DOMAIN_TOTALITY="TOTAL_FOR_EVERY_FINITE_PYTHON_STR_ACCEPTED_BY_DECLARED_GATES"
+STRING_DOMAIN_TOTALITY="TOTAL_FOR_GENUINE_RUNTIME_STR_BYTES_HIERARCHY__CLASS_SPOOF_REJECTED"
 IDENTIFIER_TOTALITY="INHERITS_V4_STRUCTURAL_SLOT_ORDINAL_UNIQUENESS"
 
 
+def _genuine_str(value: Any)->bool:
+    # type(value) is the actual runtime class and cannot be spoofed by an
+    # instance-level __class__ property. With built-in str as the second
+    # argument, issubclass checks the real inheritance chain.
+    return issubclass(type(value),str)
+
+
+def _genuine_bytes(value: Any)->bool:
+    return issubclass(type(value),bytes)
+
+
 def _beacon_gate(beacon: Any)->str:
-    if not isinstance(beacon,str) or len(beacon.strip())<16:
+    if not _genuine_str(beacon) or len(str.strip(beacon))<16:
         raise v1.UnknownDomainGeneratorError("POST_FREEZE_BEACON_INVALID")
     return beacon
 
 
 def _canonical_beacon(beacon: Any)->str:
     text=_beacon_gate(beacon)
-    raw=text.encode("utf-8","surrogatepass")
+    raw=str.encode(text,"utf-8","surrogatepass")
     # surrogatepass is total over Python str code-point sequences; hex is a
     # byte-injective ASCII representation, so no legacy strict-UTF8 helper can
     # reject or collapse an accepted beacon after this point.
@@ -36,10 +47,12 @@ def _canonical_beacon(beacon: Any)->str:
 
 
 def _secret_bytes_total(secret: Any)->bytes:
-    if isinstance(secret,bytes):
-        out=secret
-    elif isinstance(secret,str):
-        out=secret.encode("utf-8","surrogatepass")
+    if _genuine_bytes(secret):
+        # Base-descriptor full slicing materializes exact built-in bytes and
+        # bypasses Python overrides on genuine bytes subclasses.
+        out=bytes.__getitem__(secret,slice(None))
+    elif _genuine_str(secret):
+        out=str.encode(secret,"utf-8","surrogatepass")
     else:
         raise v1.UnknownDomainGeneratorError("EVALUATOR_SECRET_INVALID")
     if len(out)<32:
