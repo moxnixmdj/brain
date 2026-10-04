@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_LEARNING_EQUIVALENCE_BASIS_V8_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V8_BLOBS__ASSEMBLED_V1_TO_V8_STACK__ADVERSARIAL_BOUNDARIES_PASS__ZERO_CREDIT",
+  "source_brain_ref": "feature/universal-learning-v8-equivalence-basis-20261004",
+  "exact_brain_blobs": {
+    "canonical/runtime/equivalence_compression_v8.py": "28cb031c77aab2c760f02ba1ea02b4d06a665a22",
+    "canonical/runtime/novelty_basis_v8.py": "c67fc2eca7512c869aa0bf8932673da523ec0e02",
+    "canonical/runtime/residual_priority_v8.py": "c19822ee563487d7d48842139e54e948fdf90b27",
+    "canonical/runtime/universal_learning_equivalence_basis_router_v8.py": "61ffc7c69aa0d4005a4227ed200f3c2be81fb263",
+    "canonical/tests/test_universal_learning_equivalence_basis_v8.py": "324e173eb69f4bbfbfe8a9e209f0c4276bf08d50",
+    "canonical/tests/test_universal_learning_equivalence_basis_binding_v8.py": "b225be7d9afbbd5a4b76d64ef43f8d786c4cd23d",
+    "canonical/governance/UNIVERSAL_LEARNING_EQUIVALENCE_BASIS_V8.json": "095dc93747a64a95feb001f1ecca4714ad666b72"
+  },
+  "predecessor": {
+    "v7_governance_sha": "e26c8f4d8614720c1a45f28bcd2703dbb36bd980",
+    "v7_verification_sha": "87f8660095b9a9d71eb160bf23616a46d4c3e1cf",
+    "v7_activation_sha": "58cbfecea60e7f4259c5b7c0218ebc15c4e33399"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1593,
+    "verifier_head_sha": "61e085d3e298659dc18e0316444aac58f74410bc",
+    "workflow_run_id": 37169405943,
+    "workflow_job_id": 111339103492,
+    "conclusion": "success",
+    "verifier_merge_commit": "c097af209497b00cf57664473ad44bdd71750eec",
+    "successful_steps": [
+      "Verify exact V8 Brain blob identities",
+      "Assemble verified V1 through V8 stack",
+      "Run V8 unit and binding tests",
+      "Execute V8 invariant theorem",
+      "Run independent adversarial V8 boundaries"
+    ]
+  },
+  "verified": {
+    "exact_v8_blob_identities": true,
+    "v7_predecessor_exact": true,
+    "v1_to_v8_stack_assembles": true,
+    "unit_and_binding_tests_pass": true,
+    "proof_gated_equivalence_compression": true,
+    "surface_similarity_without_proof_rejected": true,
+    "chained_equivalence_without_direct_proof_rejected": true,
+    "exact_finite_basis_optimality": true,
+    "incomplete_target_scope_rejected": true,
+    "exact_basis_bound_fail_closed": true,
+    "decision_critical_residual_priority": true,
+    "tampered_residual_metrics_rejected": true,
+    "v8_router_preserves_v7_task_route_and_trust": true,
+    "universal_novelty_basis_proved": false,
+    "unknown_domain_acceptance_proved": false,
+    "zero_terminal_credit_preserved": true
+  },
+  "interpretation": "V8_VERIFIED_AS_A_ZERO_CREDIT_PLANNING_COMPRESSION_SUCCESSOR_OVER_V7__IT_REDUCES_DUPLICATE_EQUIVALENT_LEARNING_IDENTIFIES_AN_EXACT_MINIMUM_BASIS_ONLY_FOR_A_VERIFIED_FINITE_CORPUS_AND_PRIORITIZES_DECISION_CRITICAL_RESIDUALS__IT_DOES_NOT_CLOSE_UNKNOWN_DOMAIN_LEAVES",
+  "hard_nonclaims": [
+    "NO_UNIVERSAL_SEMANTIC_SUCCESS_CLAIM",
+    "NO_UNIVERSAL_EQUIVALENCE_COMPLETENESS_CLAIM",
+    "NO_UNIVERSAL_NOVELTY_BASIS_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
