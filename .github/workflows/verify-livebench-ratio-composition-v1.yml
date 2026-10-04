@@ -1,0 +1,26 @@
+name: Verify LiveBench ratio composition v1
+on:
+  push:
+    branches: ["breakthrough/livebench-ratio-composition-v1-20261004-sol"]
+    paths:
+      - "canonical/runtime/livebench_ratio_overlap_prompt_composer_v1.py"
+      - "canonical/tests/test_livebench_ratio_overlap_prompt_composer_v1.py"
+      - "canonical/governance/LIVEBENCH_RATIO_OVERLAP_PROMPT_COMPOSITION_BREAKTHROUGH_V1.json"
+      - ".github/workflows/verify-livebench-ratio-composition-v1.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/livebench_ratio_overlap_prompt_composer_v1.py"
+      - "canonical/tests/test_livebench_ratio_overlap_prompt_composer_v1.py"
+      - "canonical/governance/LIVEBENCH_RATIO_OVERLAP_PROMPT_COMPOSITION_BREAKTHROUGH_V1.json"
+      - ".github/workflows/verify-livebench-ratio-composition-v1.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python -m pytest -q canonical/tests/test_livebench_ratio_overlap_prompt_composer_v1.py
