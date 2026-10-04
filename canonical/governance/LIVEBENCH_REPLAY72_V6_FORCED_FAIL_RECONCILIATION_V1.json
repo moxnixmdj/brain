@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_REPLAY72_V6_FORCED_FAIL_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_EXECUTION_EVIDENCE_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "frozen_candidate": {
+    "commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+    "astra_runtime_git_blob_sha": "7f5d16b1db69cb620954bc778e0ba6e15e687b75",
+    "inference_adapter_git_blob_sha": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7"
+  },
+  "execution_evidence": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "execute/livebench-replay72-v6-20261004",
+    "log_path": "LIVEBENCH_REPLAY72_V6.log",
+    "log_git_blob_sha": "6c9c89cd2f7e977405017cb5ddfa8033126f4bf2",
+    "exit_code_path": "LIVEBENCH_REPLAY72_V6_EXIT_CODE",
+    "exit_code_git_blob_sha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+    "exit_code": 0,
+    "activation_git_blob_sha": "c449329ad9e6e9ac001c5a1cdb2f3fa187fa49b3",
+    "executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "prelaunch_status": "PASS__V6_POINT_OF_USE_PRELAUNCH",
+    "point_of_use_root_git_blob_sha": "822d7a0e64b2e919a873526d111e7202c40e1f5b",
+    "new_case_exposure_authorized": false
+  },
+  "observed": {
+    "replay_prefix_count": 72,
+    "unique_question_ids": 72,
+    "observed_score_mass": 0,
+    "valid_nonempty_candidate_responses": 0,
+    "policy_blocked_post_prompt_capability_acquisition": 43,
+    "other_candidate_inference_exit_1": 29,
+    "scoring_error_count": 0,
+    "replay_only_no_new_case_exposure": true,
+    "incremental_spend_usd": 0
+  },
+  "threshold_proof": {
+    "population_count": 200,
+    "threshold_percent": 65.7,
+    "threshold_mass": 131.4,
+    "observed_zero_count": 72,
+    "unobserved_remaining_count": 128,
+    "best_case_remaining_score_mass": 128,
+    "conservative_full_population_upper_percent": 64,
+    "inequality": "128/200*100 = 64.0 < 65.7",
+    "predicate_pass_mathematically_possible_for_frozen_candidate": false,
+    "further_case_exposure_required_to_decide_predicate_for_frozen_candidate": false
+  },
+  "classification_candidate": {
+    "root2_measurement_uncertainty_for_this_frozen_candidate": "RESOLVED_NEGATIVELY",
+    "acceptance_predicate_state_for_this_frozen_candidate": "PROVED_FALSE",
+    "constructive_operational_failure_observed": true,
+    "proposed_root_reclassification": "ROOT1_POSITIVE_OPERATIVE_CAPABILITY_OR_CONFIGURATION_GAP__SUBJECT_TO_INDEPENDENT_CLASSIFICATION_VERIFICATION",
+    "proposed_gap_localization": [
+      "GENERAL_MODEL_INDEPENDENT_INSTRUCTION_ROUTING_OR_CAPABILITY_SELECTION",
+      "RESPONSE_PRODUCTION_UNDER_FROZEN_NO_POST_PROMPT_ACQUISITION_POLICY"
+    ],
+    "hard_nonclaim": "DOES_NOT_IDENTIFY_THE_MINIMUM_REPAIR_OR_PROVE_ALL_UNDERLYING_REASONING_CAPABILITIES_MISSING"
+  },
+  "hard_rules": [
+    "NO_CASE_73_OR_LATER_EXPOSURE_FOR_THIS_FROZEN_CANDIDATE__PREDICATE_ALREADY_FORCED_FALSE",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_A_FALSE_PREDICATE",
+    "NO_PROMOTION_AUTHORITY_FROM_THIS_RECONCILIATION",
+    "NO_GLOBAL_ROOT1_RECLASSIFICATION_UNTIL_INDEPENDENT_EVIDENCE_AND_CLASSIFICATION_VERIFICATION",
+    "NO_USE_OF_TERMINAL_PROMPT_CONTENT_TO_DESIGN_REPAIR",
+    "REPAIR_MUST_GENERALIZE_ON_PREEXPOSED_NONTERMINAL_INSTRUCTION_DISTRIBUTIONS",
+    "SUCCESSOR_CANDIDATE_REQUIRES_NEW_PRECOMMIT_AND_COMPARATOR_ROUTE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "newly_exposed_terminal_cases": 0,
+    "replayed_already_exposed_terminal_cases": 72,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_LOG_BLOBS__72_UNIQUE_CASES__ZERO_SCORE_MASS__64_LT_65_7_THRESHOLD_CEILING__THEN_RECLASSIFY_ROOT_AND_START_GENERAL_SUCCESSOR_REPAIR"
+}
