@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE__ONE_EPOCH_SANITIZED_REPLAY72_CLASSIFICATION_ONLY__ZERO_CREDIT",
+  "status": "REVOKED_PREEXECUTION__V6_ENVIRONMENT_EQUIVALENCE_NOT_PROVED__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "candidate": {
     "path": "canonical/governance/LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_CANDIDATE.json",
@@ -39,8 +39,8 @@
     "fail_closed_on_any_bound_blob_or_root_drift": true
   },
   "authority": {
-    "execution": true,
-    "replay_existing_prefix": true,
+    "execution": false,
+    "replay_existing_prefix": false,
     "predicate_local_fresh_reality": false,
     "new_case_exposure": false,
     "global_fresh_reality": false,
@@ -61,5 +61,18 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
-  }
+  },
+  "active": false,
+  "revocation": {
+    "state": "PREEXECUTION_FAIL_CLOSED",
+    "reason": "V7_DIAGNOSTIC_OMITTED_V6_PRECASE_SCORER_DEPENDENCY_AND_NLTK_SETUP_BEFORE_RUNTIME_TEMPLATE_BUILD__DIAGNOSTIC_ENVIRONMENT_COULD_MANUFACTURE_NON_V6_RUNTIME_EXITS",
+    "diagnostic_execution_observed": false,
+    "replay_epoch_consumed": false,
+    "replacement_requirement": "INDEPENDENTLY_VERIFY_ENVIRONMENT_EQUIVALENT_DIAGNOSTIC_BYTES__THEN_CREATE_NEW_SEPARATE_ONE_EPOCH_ACTIVATION"
+  },
+  "hard_nonclaims": [
+    "NO_V7_DIAGNOSTIC_REPLAY_EXECUTED_UNDER_THIS_REVOKED_AUTHORITY",
+    "NO_TERMINAL_CASES_REPLAYED_BY_THIS_AUTHORITY",
+    "NO_ACCEPTANCE_PROMOTION_ROOT1_OR_CAPABILITY_CREDIT"
+  ]
 }
