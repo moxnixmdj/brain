@@ -103,13 +103,14 @@
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
         "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5.json",
         "current_frontier_git_blob_sha": "e948022f0a4e8d91b949a5155d850d56aa137c87",
-        "status": "ACTIVE__ROOT2_FRONTIER_V5_INDEPENDENT_PROJECTION_PASS__CURRENT_AUTHORITY_BOUND__ZERO_CREDIT",
+        "status": "ACTIVE__ROOT2_FRONTIER_V5_INDEPENDENT_PROJECTION_PASS__EFFECTIVE_SCHEDULING_ONLY__ZERO_CREDIT",
         "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2",
         "fresh_reality_authority": false,
         "current_frontier_activation_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5_ACTIVATION_V1.json",
         "current_frontier_activation_git_blob_sha": "2d15df0daab51c5cc61c4194197da7f7fcd5a1b0",
         "current_frontier_verification_path": "canonical/verification/ROOT2_V5_PROJECTION_VERIFICATION_20261004_V1.json",
-        "current_frontier_verification_git_blob_sha": "2475a8583e2ed2889c3e9e0613ae3bcf269ffc82"
+        "current_frontier_verification_git_blob_sha": "2475a8583e2ed2889c3e9e0613ae3bcf269ffc82",
+        "effective_scheduling_authority": true
       }
     },
     "root_3_scope_completeness": {
@@ -139,7 +140,8 @@
     "no_credit_from_classification_itself": true,
     "root1_currently_active": false,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
-    "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5.json"
+    "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5.json",
+    "root2_effective_scheduling_authority": true
   },
   "accounting": {
     "acceptance_credit_delta": 0,
@@ -262,5 +264,18 @@
     "verifier_pull_request": 1571,
     "verifier_merge_commit": "73d087aa201ed40f8b879bf98c5050b8e7dd4d29",
     "workflow_run_id": 37168503920
+  },
+  "root2_v5_pointer_activation_projection": {
+    "status": "CANDIDATE__THREE_WAY_V5_POINTER_ALIGNMENT__INDEPENDENT_EXACT_BYTE_VERIFICATION_REQUIRED__ZERO_CREDIT",
+    "frontier_git_blob_sha": "e948022f0a4e8d91b949a5155d850d56aa137c87",
+    "activation_git_blob_sha": "2d15df0daab51c5cc61c4194197da7f7fcd5a1b0",
+    "verification_git_blob_sha": "2475a8583e2ed2889c3e9e0613ae3bcf269ffc82",
+    "scheduling_authority": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0
   }
 }
