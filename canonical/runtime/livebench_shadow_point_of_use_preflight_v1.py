@@ -1,8 +1,14 @@
 """LiveBench shadow V2 point-of-use preflight.
 
-Zero-case only. This verifier may establish that the exact precommitted LiveBench
-execution tuple is ready to attempt a durable one-use claim. It never grants
-case-reveal authority; that remains exclusively the V2 one-use claim stage.
+Zero-case only. This verifier establishes whether the exact precommitted
+LiveBench execution tuple is ready to ATTEMPT the durable one-use claim.
+
+Important: it deliberately does not pre-read whether the claim ref exists.
+The Git ref create operation is the atomic uniqueness test. A separate
+check-then-create sequence would introduce a race and an unnecessary API call.
+
+This verifier never grants case-reveal authority. That remains exclusively a
+successful atomic claim under a separately verified activation.
 """
 from __future__ import annotations
 from typing import Any, Mapping
@@ -46,8 +52,6 @@ def verify_point_of_use_preflight(
 
     if receipt.get("claim_ref") != expected_ref:
         reasons.append("CLAIM_REF_NOT_DERIVED_FROM_LEASE_DIGEST")
-    if receipt.get("claim_ref_absent_observed") is not True:
-        reasons.append("CLAIM_REF_PRIOR_ABSENCE_NOT_OBSERVED")
 
     required_false=(
       "case_reveal_has_occurred",
@@ -96,6 +100,7 @@ def verify_point_of_use_preflight(
       "point_of_use_preflight_pass":passed,
       "reasons":sorted(set(reasons)),
       "expected_claim_ref":expected_ref,
+      "claim_ref_absence_precheck_required":False,
       "terminal_cases_consumed":0,
       "case_reveal_authority":False,
       "shadow_collection_authority":False,
