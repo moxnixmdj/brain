@@ -6,7 +6,8 @@ and the pointwise search kernel. It never reconstructs hidden kwargs: every
 checker parameter must already be present in the visible contract record.
 
 When loading the public LiveBench implementation from a checkout, the adapter
-content-addresses the exact pinned registry and checker source before importing
+content-addresses the exact pinned registry, checker source, and strict evaluator
+source before importing
 anything. Any missing/extra slot, unknown active ID, source drift, or import
 path mismatch fails closed.
 """
@@ -22,6 +23,7 @@ SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_EXACT_CONTRACT_CHECKER_V1"
 PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 PINNED_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 PINNED_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
+PINNED_EVALUATION_MAIN_BLOB = "4a341984936c4d609644a3b77f8c030ac5aa7269"
 
 SLOT_KEYS: dict[str, tuple[str, ...]] = {
     "keywords:existence": ("keywords",),
@@ -78,22 +80,24 @@ def validate_contract(contract: Mapping[str, Any]) -> tuple[str, dict[str, Any]]
     return iid, slots
 
 
-def _pinned_paths(livebench_root: str | Path) -> tuple[Path, Path, Path]:
+def _pinned_paths(livebench_root: str | Path) -> tuple[Path, Path, Path, Path]:
     root = Path(livebench_root).resolve()
     pkg = root / "livebench" / "if_runner" / "instruction_following_eval"
     return (
         root,
         pkg / "instructions_registry.py",
         pkg / "instructions.py",
+        pkg / "evaluation_main.py",
     )
 
 
 def verify_pinned_source(livebench_root: str | Path) -> dict[str, Any]:
-    root, registry_path, instructions_path = _pinned_paths(livebench_root)
-    if not registry_path.is_file() or not instructions_path.is_file():
+    root, registry_path, instructions_path, evaluation_path = _pinned_paths(livebench_root)
+    if not registry_path.is_file() or not instructions_path.is_file() or not evaluation_path.is_file():
         raise ExactContractCheckerError("PINNED_LIVEBENCH_SOURCE_FILES_MISSING")
     registry_blob = git_blob_sha(registry_path.read_bytes())
     instructions_blob = git_blob_sha(instructions_path.read_bytes())
+    evaluation_blob = git_blob_sha(evaluation_path.read_bytes())
     if registry_blob != PINNED_REGISTRY_BLOB:
         raise ExactContractCheckerError(
             "REGISTRY_BLOB_DRIFT:" + registry_blob
@@ -102,18 +106,28 @@ def verify_pinned_source(livebench_root: str | Path) -> dict[str, Any]:
         raise ExactContractCheckerError(
             "INSTRUCTIONS_BLOB_DRIFT:" + instructions_blob
         )
+    if evaluation_blob != PINNED_EVALUATION_MAIN_BLOB:
+        raise ExactContractCheckerError(
+            "EVALUATION_MAIN_BLOB_DRIFT:" + evaluation_blob
+        )
+    evaluation_source = evaluation_path.read_text(encoding="utf-8")
+    strict_gate = "if response.strip() and instruction.check_following(response):"
+    if strict_gate not in evaluation_source:
+        raise ExactContractCheckerError("STRICT_EVALUATOR_GATE_NOT_FOUND_IN_PINNED_SOURCE")
     return {
         "schema": SCHEMA,
         "status": "PASS__EXACT_PINNED_CHECKER_SOURCE_BOUND",
         "livebench_root": str(root),
         "registry_git_blob_sha": registry_blob,
         "instructions_git_blob_sha": instructions_blob,
+        "evaluation_main_git_blob_sha": evaluation_blob,
+        "strict_nonempty_gate_bound": True,
         "terminal_data_used": False,
     }
 
 
 def load_pinned_registry(livebench_root: str | Path):
-    root, registry_path, _ = _pinned_paths(livebench_root)
+    root, registry_path, _, _ = _pinned_paths(livebench_root)
     verify_pinned_source(root)
     import_root = str((root / "livebench" / "if_runner").resolve())
     if import_root not in sys.path:
@@ -157,7 +171,11 @@ def evaluate_with_registry(
         checker = cls(iid)
         # Exact visible slots suppress every random/default generation branch.
         checker.build_description(**slots)
-        results.append(bool(checker.check_following(str(response))))
+        # Match frozen evaluation_main strict semantics exactly. Raw checker
+        # truth is never sufficient for blank/whitespace output: the public
+        # evaluator records False before accepting checker truth.
+        value = str(response)
+        results.append(bool(value.strip() and checker.check_following(value)))
     return tuple(results)
 
 
