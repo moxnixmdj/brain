@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFICATION_REQUEST_V1",
+  "date": "2026-10-05",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "purpose": "INDEPENDENTLY_VERIFY_THE_UNION25_INTERACTION_KERNEL_REDUCTION_WITHOUT_TERMINAL_DATA",
+  "subject": {
+    "branch": "sol/livebench-union25-interaction-kernel-v1-20261005",
+    "path": "canonical/runtime/livebench_union25_interaction_kernel_v1.py",
+    "expected_blob": "388ff9cea13013a72bbb5c8d1a8db42eb5da86bd",
+    "base_archetypes_path": "canonical/runtime/livebench_union25_archetypes_v1.py",
+    "base_archetypes_blob": "8c68e63bbc1e1b843f076dbcd8c4bfae11d4cc2a"
+  },
+  "required_checks": [
+    "RECOMPUTE_THE_14559_COMPATIBLE_UNION25_STRUCTURES_FROM_THE_PINNED_25_FAMILY_97_PAIR_CONFLICT_GRAPH",
+    "RECOMPUTE_13631_EXTRA_BEARING_STRUCTURES_AND_156_EXTRA_FAMILY_SIGNATURES",
+    "VERIFY_EXTRA10_PARTITIONS_EXACTLY_INTO_SIX_HARD_IDS_THREE_DECORATOR_IDS_AND_THE_CONSTRAINED_SINGLETON",
+    "VERIFY_EXACTLY_19_COMPATIBLE_NONEMPTY_HARD_CORE_SIGNATURES",
+    "VERIFY_EXACT_REGIME_COUNTS_K0_1_K1_2053_K2_4_K3_11569_K4_4",
+    "VERIFY_THE_ONLY_REPEAT_PROMPT_DECORATOR_CASES_ARE_THE_FOUR_REPEAT_PLUS_NO_COMMA_STRUCTURES",
+    "VERIFY_THE_ONLY_SPECIAL_WRAPPER_HARD_CASES_ARE_FOUR_TWO_RESPONSE_PLUS_LANGUAGE_STRUCTURES",
+    "FAIL_ON_ANY_UNCLASSIFIED_STRUCTURE_OR_SOURCE_BLOB_DRIFT"
+  ],
+  "accounting": {
+    "terminal_rows_allowed": 0,
+    "hidden_kwargs_allowed": 0,
+    "target_scores_allowed": 0,
+    "acceptance_credit_before_success": 0,
+    "capability_credit_before_success": 0,
+    "incremental_spend_usd": 0
+  },
+  "success_effect": "REDUCE_THE_156_UNION25_EXTRA_SIGNATURE_OBLIGATIONS_TO_19_HARD_CORES_PLUS_ONE_DECORATOR_GENERAL_THEOREM_ONE_CONSTRAINED_SINGLETON_AND_EIGHT_LITERAL_SPECIAL_ROUTE_STRUCTURES",
+  "hard_nonclaim": "SUCCESS_DOES_NOT_PROVE_UNION25_COMPOSITION_OR_PROMOTE_LIVEBENCH_ACCEPTANCE"
+}
