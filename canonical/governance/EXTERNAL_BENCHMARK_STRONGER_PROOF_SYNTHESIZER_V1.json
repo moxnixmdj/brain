@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_EXTERNAL_BENCHMARK_STRONGER_PROOF_SYNTHESIZER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAIL_CLOSED__ZERO_CREDIT__NO_FRESH_REALITY",
+  "objective": "Delete private or matched benchmark dependencies only when a stronger independently verified proof entails the frozen acceptance predicate.",
+  "extends": "canonical/governance/EXTERNAL_BENCHMARK_DOMINANCE_GATE_V1.json",
+  "target_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gaps": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3
+  },
+  "route_order": [
+    "EXACT_EXISTING_CONTENT_ADDRESSED_RECEIPT",
+    "OBJECTIVE_CEILING_OR_FLOOR",
+    "FORMAL_DOMINANCE_OR_EQUIVALENCE",
+    "GENUINELY_EXHAUSTIVE_FINITE_UNIVERSE",
+    "VERIFIED_SCOPE_COMPLETE_SUPERSET",
+    "VERIFIED_METAMORPHIC_OR_INVARIANT_PROOF",
+    "MATCHED_EMPIRICAL_COMPARISON",
+    "NEW_CUSTOM_BENCHMARK_ONLY_IF_ALL_STRONGER_ROUTES_FAIL"
+  ],
+  "admission_rule": "A replacement route may discharge a frozen predicate only if independently verified explicit bindings prove witness scope EXACT or SUPERSET, all required atoms and invariants, and all frozen metric bounds. Names, prose similarity, benchmark difficulty claims, or finite sample success are never sufficient.",
+  "required_existing_runtime": [
+    "canonical/runtime/proof_obligation_delta_compiler_v1.py",
+    "canonical/runtime/protocol_implication_scope_algebra_v2.py"
+  ],
+  "current_high_fanout_targets": [
+    "CODING_CURSORBENCH_GE_57_8",
+    "CODING_FRONTIERCODE_GE_54_4",
+    "AUTOMATIONBENCH_GE_40",
+    "PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "ARTIFACT_AA_BRIEFCASE_GE_1822",
+    "MYSTERYMECHANISM_GE_49_55",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+  ],
+  "execution_policy": {
+    "parallel_with_root2_v11": true,
+    "owner_waits_remain_parallel": true,
+    "recompute_after_each_verified_delta": true,
+    "fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "hard_rules": [
+    "NO_BENCHMARK_SELF_CERTIFICATION",
+    "NO_PUBLIC_PRIVATE_SUBSTITUTION_WITHOUT_EXACT_OR_SUPERSET_PROOF",
+    "NO_FINITE_SAMPLE_TO_OPEN_WORLD_SCOPE_INFERENCE",
+    "NO_ACCEPTANCE_CREDIT_FROM_ROUTE_DISCOVERY",
+    "NO_REOPENING_VERIFIED_SEARCH_DELETIONS_WITHOUT_MATERIAL_WAKE",
+    "UNKNOWN_REMAINS_UNKNOWN",
+    "SEARCH_MISS_IS_NOT_NONEXISTENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "next": "RUN_EXISTING_PROOF_OBLIGATION_AND_SCOPE_ALGEBRA_OVER_EACH_CURRENT_UNRESOLVED_PREDICATE_USING_ONLY_CONTENT_ADDRESSED_VERIFIED_WITNESSES__EMIT_SMALLEST_IRREDUCIBLE_RESIDUAL__RACE_AGAINST_ROOT2_V11_ACCOUNT_AND_OWNER_ROUTES",
+  "independent_verification_required": true
+}
