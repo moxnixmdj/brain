@@ -31,6 +31,25 @@ jobs:
           git clone -q https://github.com/LiveBench/LiveBench.git /tmp/LiveBench
           git -C /tmp/LiveBench checkout -q 8f8e5c381a16e3f24257776edd53471fe86f8091
           test "$(git -C /tmp/LiveBench rev-parse HEAD)" = "8f8e5c381a16e3f24257776edd53471fe86f8091"
+      - name: Fetch pinned public IFBench population
+        run: |
+          git clone -q https://github.com/allenai/IFBench.git /tmp/IFBench
+          git -C /tmp/IFBench checkout -q 1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d
+          test "$(git -C /tmp/IFBench rev-parse HEAD)" = "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d"
+
+      - name: Audit all 300 public IFBench rows against exact frozen checkers
+        env:
+          PYTHONPATH: "/tmp/LiveBench:."
+        run: |
+          set +e
+          python canonical/runtime/livebench_public_population_audit_v1.py \
+            --data /tmp/IFBench/data/IFBench_test.jsonl \
+            --output public-coverage.json \
+            > public-coverage.log 2>&1
+          echo "$?" > public-coverage.status
+          cat public-coverage.log
+          exit 0
+
       - name: Run local compiler and solver tests
         run: |
           set +e
@@ -61,7 +80,11 @@ jobs:
             local-tests.status
             upstream-tests.log
             upstream-tests.status
+            public-coverage.json
+            public-coverage.log
+            public-coverage.status
       - name: Enforce test outcomes
         run: |
           test "$(cat local-tests.status)" = "0"
           test "$(cat upstream-tests.status)" = "0"
+          test "$(cat public-coverage.status)" = "0"
