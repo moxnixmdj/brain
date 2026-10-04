@@ -431,7 +431,7 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__4_OF_19_OPUS55_ACCEPTANCE_PASS__15_OPEN__11_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__27_UNRESOLVED__OWNERSHIP_PROMOTION_SEPARATE",
+    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_OPUS55_ACCEPTANCE_PASS__14_OPEN__13_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__25_UNRESOLVED__OWNERSHIP_PROMOTION_SEPARATE",
     "override_allowed": false
   },
   "specification_closure": {
@@ -533,8 +533,8 @@
     ],
     "authority": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "atomic_predicates": {
-      "proved": 12,
-      "unresolved": 26,
+      "proved": 13,
+      "unresolved": 25,
       "total": 38
     },
     "ownership_promotion_authority": false,
@@ -548,6 +548,18 @@
       "comparator_floor_percent": 65.73775,
       "acceptance_credit_delta": 0,
       "reason": "ACTIVE_CONTAMINATION_LEDGER_AND_PREQUALIFICATION_PARTITION_RULE_NOT_DISCHARGED"
+    },
+    "unknown_domain_v6_delta": {
+      "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "state": "PROVED",
+      "evidence_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "evidence_git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
+      "independent_verification_path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "independent_verification_git_blob_sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d",
+      "family_acceptance_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0,
+      "remaining_family_gate": "MYSTERYMECHANISM_GE_49_55"
     }
   },
   "behavioral_quarantined_family_count": 0,
