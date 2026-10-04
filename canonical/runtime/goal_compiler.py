@@ -4882,6 +4882,7 @@ def _compile_domain_free_authority_source_goal(goal,clauses,registry,root):
     }
 
 
+
 def _compile_exact_literal_response_goal(goal):
     """Lower a strict exact-literal response instruction to one native finish action.
 
