@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_BUILDKITE_DOCUMENTARY_PREFLIGHT_REDUCTION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PRIMARY_SOURCE_ZERO_CASE_REDUCTION__RUNTIME_PREFLIGHT_STILL_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "frozen_recovery_cut": {
+    "path": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+    "minimum_additional_creditable_tasks": 8,
+    "minimum_carrier_envelope": {
+      "cpus_at_least": 8,
+      "usable_memory_mb_at_least": 16384,
+      "free_storage_mb_at_least": 51200,
+      "docker_required": true,
+      "docker_compose_required": true
+    }
+  },
+  "primary_source_facts": [
+    {
+      "url": "https://buildkite.com/docs/agent/queues/managing",
+      "fact": "NEW_BUILDKITE_ORGANIZATION_DEFAULT_CLUSTER_INCLUDES_LINUX_LARGE_QUEUE"
+    },
+    {
+      "url": "https://buildkite.com/docs/agent/buildkite-hosted/linux",
+      "fact": "LINUX_AMD64_8X32_IS_8_VCPU_32_GB_MEMORY_158_GB_DISK"
+    },
+    {
+      "url": "https://buildkite.com/docs/platform/limits",
+      "fact": "ALL_ACCESS_TRIAL_LINUX_CONCURRENCY_24_VCPU_AND_4000_INCLUDED_LINUX_VCPU_MINUTES"
+    },
+    {
+      "url": "https://buildkite.com/pricing/",
+      "fact": "ALL_ACCESS_TRIAL_REQUIRES_NO_CREDIT_CARD_AND_INCLUDES_HOSTED_AGENTS"
+    }
+  ],
+  "derived_bounds": {
+    "large_agent_vcpu": 8,
+    "included_linux_vcpu_minutes": 4000,
+    "single_large_agent_wall_minutes_equivalent": 500,
+    "concurrency_supports_at_least_one_large_agent": true
+  },
+  "documentary_requirements_now_closed": [
+    "NAMED_LARGE_SHAPE_EXISTS",
+    "NEW_ORGANIZATION_HAS_LINUX_LARGE_QUEUE_BY_DEFAULT",
+    "TRIAL_LINUX_VCPU_CONCURRENCY_SUFFICIENT_FOR_ONE_8_VCPU_AGENT",
+    "TRIAL_HAS_NONZERO_INCLUDED_LINUX_COMPUTE_ALLOWANCE",
+    "NO_CREDIT_CARD_REQUIRED_TO_START_TRIAL"
+  ],
+  "still_requires_account_or_zero_case_observation": [
+    "USABLE_MEMORY_AT_JOB_START_GE_16384_MB",
+    "FREE_STORAGE_AT_JOB_START_GE_51200_MB",
+    "DOCKER_DAEMON_RUNS_ORDINARY_CONTAINERS",
+    "DOCKER_COMPOSE_STARTS_MULTI_CONTAINER_WORKLOAD",
+    "8_CPU_DOCKER_LIMIT_ACCEPTED",
+    "ALLOWANCE_EXHAUSTION_IS_HARD_STOP_WITHOUT_BILLABLE_OVERAGE_OR_OTHER_CHARGE_PATH",
+    "RECOVERY_TRANSACTION_RUNTIME_FITS_AVAILABLE_INCLUDED_VCPU_MINUTES",
+    "PROTOCOL_EQUIVALENCE_FOR_EIGHT_RECOVERED_TASKS"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCOUNT_ACCESS_CLAIM",
+    "NO_CARRIER_ADMISSIBILITY_CLAIM",
+    "NO_TERMINAL_CASE_EXECUTION",
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
