@@ -1,0 +1,126 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_LITERAL_RESPONSE_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION__PUBLIC_SYNTHETIC_NONTERMINAL__ZERO_CREDIT",
+  "objective": "VERIFY_A_BOUNDED_GENERAL_MODEL_INDEPENDENT_ROUTE_FOR_EXPLICIT_LITERAL_RESPONSE_INSTRUCTIONS_WITHOUT_SPECIAL_CASING_LIVEBENCH_OR_ANY_FROZEN_TERMINAL_CASE",
+  "scope_contract": {
+    "positive_grammar": [
+      "OPTIONAL_POLITE_PREFIX__PLEASE",
+      "VERB__REPLY_RESPOND_RETURN_OUTPUT_EMIT_SAY",
+      "OPTIONAL_WITH_FOR_REPLY_OR_RESPOND",
+      "EXACTLY_KEYWORD_REQUIRED",
+      "PAYLOAD__ONE_UNQUOTED_NONWHITESPACE_TOKEN_OR_ONE_DOUBLE_QUOTED_JSON_STRING_OR_ONE_SINGLE_QUOTED_LITERAL_OR_ONE_BACKTICK_LITERAL"
+    ],
+    "output_rule": "RETURN_ONLY_DECODED_LITERAL_PAYLOAD__NO_PREFIX_SUFFIX_EXPLANATION_OR_TOOL_USE",
+    "fail_closed": "ANY_CONDITIONAL_NEGATED_MULTI_CLAUSE_AMBIGUOUS_EMPTY_OR_OUT_OF_GRAMMAR_INSTRUCTION_MUST_ABSTAIN"
+  },
+  "positive_tasks": [
+    {
+      "id": "P1",
+      "instruction": "Reply with exactly ALPHA.",
+      "expected": "ALPHA."
+    },
+    {
+      "id": "P2",
+      "instruction": "respond with exactly beta_42",
+      "expected": "beta_42"
+    },
+    {
+      "id": "P3",
+      "instruction": "Return exactly 007",
+      "expected": "007"
+    },
+    {
+      "id": "P4",
+      "instruction": "Output exactly \"two words\"",
+      "expected": "two words"
+    },
+    {
+      "id": "P5",
+      "instruction": "Emit exactly 'left right'",
+      "expected": "left right"
+    },
+    {
+      "id": "P6",
+      "instruction": "Say exactly `json:{\\\"ok\\\":true}`",
+      "expected": "json:{\\\"ok\\\":true}"
+    },
+    {
+      "id": "P7",
+      "instruction": "Please reply with exactly TOKEN-9!",
+      "expected": "TOKEN-9!"
+    },
+    {
+      "id": "P8",
+      "instruction": "Please return exactly \" spaced payload \"",
+      "expected": " spaced payload "
+    }
+  ],
+  "negative_tasks": [
+    {
+      "id": "N1",
+      "instruction": "Reply with ALPHA.",
+      "reason": "EXACTLY_REQUIRED"
+    },
+    {
+      "id": "N2",
+      "instruction": "Reply with exactly",
+      "reason": "PAYLOAD_REQUIRED"
+    },
+    {
+      "id": "N3",
+      "instruction": "Do not reply with exactly ALPHA.",
+      "reason": "NEGATION_REJECTED"
+    },
+    {
+      "id": "N4",
+      "instruction": "If the condition holds, reply with exactly ALPHA.",
+      "reason": "CONDITIONAL_REJECTED"
+    },
+    {
+      "id": "N5",
+      "instruction": "Reply with exactly ALPHA BETA",
+      "reason": "UNQUOTED_MULTIWORD_REJECTED"
+    },
+    {
+      "id": "N6",
+      "instruction": "Reply with exactly ALPHA and explain why.",
+      "reason": "MULTICLAUSE_REJECTED"
+    },
+    {
+      "id": "N7",
+      "instruction": "Summarize this text.",
+      "reason": "OUTSIDE_SCOPE"
+    },
+    {
+      "id": "N8",
+      "instruction": "Reply with exactly \"unterminated",
+      "reason": "MALFORMED_QUOTE_REJECTED"
+    }
+  ],
+  "outcome_definition": {
+    "all_positive_exact": true,
+    "all_negative_abstain": true,
+    "no_partial_credit": true
+  },
+  "hard_rules": [
+    "NO_LIVEBENCH_TERMINAL_CASE_CONTENT",
+    "NO_SYNTHETIC_OK_LITERAL_IN_PREEXPOSURE",
+    "NO_BENCHMARK_ID_OR_TASK_ID_SPECIAL_CASE",
+    "NO_LANGUAGE_MODEL_OR_EXTERNAL_LEARNED_PROVIDER",
+    "NO_NETWORK_OR_TOOL_CALLS",
+    "NO_PERSISTENT_LEARNED_STATE",
+    "FINITE_GRAMMAR_PASS_IS_NOT_GENERAL_INSTRUCTION_FOLLOWING",
+    "PASS_DOES_NOT_PROVE_LIVEBENCH_THRESHOLD"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "external_frontier_model_calls": 0,
+    "persistent_learned_bytes": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
