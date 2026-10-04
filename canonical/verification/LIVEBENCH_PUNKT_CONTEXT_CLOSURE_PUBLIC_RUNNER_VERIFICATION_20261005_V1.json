@@ -7,9 +7,7 @@
     "archetypes_git_blob_sha": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
     "composer_git_blob_sha": "d73ec366b32252996258eae6d10d67d4d6a5e042",
     "pointwise_planner_git_blob_sha": "71e637c70edf1c582e28ea38b3b798965c803a06",
-    "slot_feasibility_git_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
-    "parametric_reduction_path": "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py",
-    "parametric_reduction_git_blob_sha": "a9ab9064b447ed669d2404a7a65f6c429c51ae85"
+    "slot_feasibility_git_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0"
   },
   "independent_verifier": {
     "repository": "moxnixmdj/verification-capsule-runner",
@@ -62,5 +60,9 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "composition_dependency": {
+    "path": "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py",
+    "note": "NOT_PART_OF_PR2147_VERIFIER_SUBJECT__BOUND_SEPARATELY_BY_THE_COMPOSITION_THEOREM"
   }
 }
