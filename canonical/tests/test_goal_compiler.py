@@ -503,6 +503,30 @@ class GoalCompilerTests(unittest.TestCase):
             "canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json",
         )
 
+    def test_exact_literal_response_compiles_to_one_native_finish(self):
+        out=compiler.compile_goal("Reply with exactly SYNTHETIC_OK.",{},ROOT)
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_EXACT_LITERAL_RESPONSE")
+        self.assertTrue(out["clause_coverage_verified"])
+        self.assertEqual(out["finish_summary"],"SYNTHETIC_OK")
+        self.assertEqual(out["controller_actions"],[
+            {"type":"finish","args":{"summary":"SYNTHETIC_OK"}}
+        ])
+        self.assertEqual(out["compiled_parts"][0]["mode"],"NATIVE_EXACT_LITERAL_RESPONSE")
+        self.assertEqual(out["compiled_parts"][0]["literal_length"],12)
+
+    def test_exact_literal_response_preserves_quoted_multiword_literal(self):
+        out=compiler.compile_goal('Respond with exactly "alpha beta!".',{},ROOT)
+        self.assertEqual(out["finish_summary"],"alpha beta!")
+        self.assertEqual(out["controller_actions"][0]["args"]["summary"],"alpha beta!")
+
+    def test_exact_literal_response_rejects_ambiguous_unquoted_tail(self):
+        with self.assertRaises(compiler.GoalCompilationFailure):
+            compiler.compile_goal(
+                "Reply with exactly SYNTHETIC_OK and create output.json.",
+                {},
+                ROOT,
+            )
+
     def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
         goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
         out=compiler.compile_goal(goal,self.registry(),ROOT)
