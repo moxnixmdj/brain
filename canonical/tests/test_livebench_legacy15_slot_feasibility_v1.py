@@ -172,3 +172,35 @@ def test_sentence_less_than_one_does_not_overcertify_nonpublic_end_phrase():
     out = f.classify_visible_contracts(contracts)
     assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
     assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" not in out["hard_unsat_reasons"]
+
+
+def test_sentence_lt_one_certifies_all_compatible_nonempty_obligations():
+    sentence = {
+        "instruction_id": f.SENTENCE,
+        "slots": {"num_sentences": 1, "relation": "less than"},
+    }
+    positive = [
+        {"instruction_id": f.EXISTENCE, "slots": {"keywords": ["signal"]}},
+        {"instruction_id": f.NTH, "slots": {"num_paragraphs": 2, "nth_paragraph": 1, "first_word": "signal"}},
+        {"instruction_id": f.POSTSCRIPT, "slots": {"postscript_marker": "P.S."}},
+        {"instruction_id": f.BULLETS, "slots": {"num_bullets": 1}},
+        {"instruction_id": f.TITLE, "slots": {}},
+        {"instruction_id": f.SECTIONS, "slots": {"section_spliter": "Section", "num_sections": 1}},
+        {"instruction_id": f.QUOTATION, "slots": {}},
+        {"instruction_id": f.WORDS, "slots": {"num_words": 100, "relation": "at least"}},
+    ]
+    for row in positive:
+        out = f.classify_visible_contracts([sentence, row])
+        assert out["status"] == "PROVED_UNSAT", row
+        assert out["hard_unsat_reasons"], row
+
+
+def test_sentence_lt_one_keeps_whitespace_satisfiable_constraints_open():
+    contracts = [
+        {"instruction_id": f.SENTENCE, "slots": {"num_sentences": 1, "relation": "less than"}},
+        {"instruction_id": f.FORBIDDEN, "slots": {"forbidden_words": ["signal"]}},
+        {"instruction_id": f.WORDS, "slots": {"num_words": 100, "relation": "less than"}},
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
