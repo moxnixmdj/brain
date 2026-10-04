@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_PREPROMOTION_FALSIFICATION_GATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FAIL_CLOSED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "MAKE_FALSE_BREAKTHROUGH_PROMOTION_STRUCTURALLY_HARD_BY_REQUIRING_CONTENT_ADDRESSED_ADVERSARIAL_FALSIFICATION_PRECONDITIONS_BEFORE_ANY_TARGET_SPECIFIC_ACCEPTANCE_REDUCTION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "motivation": {
+    "observed_failure_classes": [
+      "UNKNOWN_DOMAIN_V2_ADD2_EXACT_IEEE754_ROLE_ORDER_COUNTEREXAMPLE",
+      "UNKNOWN_DOMAIN_V2_OPAQUE_IDENTIFIER_TOTALITY_GAP",
+      "UNKNOWN_DOMAIN_V4_ACCEPTED_STRING_UTF8_TOTALITY_COUNTEREXAMPLE",
+      "LIVEBENCH_FALSE_REQUIRED_FORBIDDEN_UNSAT_CLASSIFICATION",
+      "LIVEBENCH_FALSE_SECTION_UNSAT_CLASSIFICATION",
+      "TRANSITIVE_DEPENDENCY_AND_MUTABLE_REF_PROVENANCE_DEFECTS"
+    ],
+    "rule": "A_CANDIDATE_THEOREM_OR_STRONGER_PROOF_MUST_NOT_CHANGE_CANONICAL_ACCEPTANCE_TRUTH_UNTIL_PREPROMOTION_FALSIFICATION_PRECONDITIONS_PASS_AND_A_SEPARATE_TARGET_SPECIFIC_REDUCTION_IS_INDEPENDENTLY_VERIFIED"
+  },
+  "runtime": {
+    "path": "canonical/runtime/prepromotion_falsification_gate_v1.py",
+    "tests": "canonical/tests/test_prepromotion_falsification_gate_v1.py"
+  },
+  "base_required_obligations": [
+    "SUBJECT_BYTES_BOUND",
+    "QUANTIFIED_DOMAIN_BOUND",
+    "COUNTEREXAMPLE_SEARCH_PASS",
+    "BOUNDARY_SEARCH_PASS",
+    "METAMORPHIC_SEARCH_PASS",
+    "INDEPENDENT_REPLAY_PASS",
+    "SEPARATE_REDUCTION_PRECOMMIT"
+  ],
+  "risk_conditioned_obligations": {
+    "uses_floating_point": "EXACT_FLOAT_SEMANTICS_BOUND",
+    "uses_opaque_identifiers": "IDENTIFIER_TOTALITY_PROVED",
+    "accepts_open_string_domain": "STRING_DOMAIN_TOTALITY_PROVED",
+    "has_transitive_runtime_dependencies": "TRANSITIVE_DEPENDENCY_CLOSURE_BOUND"
+  },
+  "semantics": {
+    "pass_means": "ELIGIBLE_FOR_SEPARATE_TARGET_SPECIFIC_REDUCTION_ONLY",
+    "pass_does_not_mean": [
+      "CLAIM_PROVED",
+      "ACCEPTANCE_CREDIT",
+      "FAMILY_CREDIT",
+      "CAPABILITY_CREDIT",
+      "OWNERSHIP_CREDIT",
+      "EXECUTION_AUTHORITY",
+      "PROMOTION_AUTHORITY"
+    ],
+    "known_counterexample_rule": "ANY_OPEN_REACHABLE_COUNTEREXAMPLE_FORCES_FAIL_CLOSED",
+    "post_outcome_rule_change": "FORBIDDEN"
+  },
+  "integration_candidate": {
+    "placement": "BEFORE_ANY_ACCEPTANCE_LEDGER_MUTATION_FROM_UNIVERSAL_FORMAL_FINITE_EXHAUSTIVE_OR_STRONGER_PROOF_CERTIFICATE",
+    "target_specific_reduction_still_required": true,
+    "independent_verification_required": true,
+    "current_acceptance_ledger_binding": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
+      "state_at_branch": "13_PROVED__25_UNRESOLVED"
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
