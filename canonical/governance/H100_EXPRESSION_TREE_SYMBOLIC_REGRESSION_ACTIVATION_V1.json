@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_H100_EXPRESSION_TREE_SYMBOLIC_REGRESSION_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_H100_GATE1_EXPRESSION_TREE_CANDIDATE_GENERATOR__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT",
+  "objective": "ACTIVATE_THE_INDEPENDENTLY_VERIFIED_ZERO_LEARNED_BOUNDED_EXPRESSION_TREE_SYNTHESIZER_AS_THE_NEXT_H100_GATE1_MECHANISM_CANDIDATE_GENERATOR_WITHOUT_CHANGING_UNKNOWN_DOMAIN_OR_TERMINAL_ACCEPTANCE_TRUTH",
+  "parent": {
+    "activation_path": "canonical/governance/H100_ZERO_LEARNED_MECHANISM_ACTIVATION_V1.json",
+    "preserved_parent_scope": true
+  },
+  "candidate": {
+    "path": "canonical/governance/H100_EXPRESSION_TREE_SYMBOLIC_REGRESSION_CANDIDATE_V1.json",
+    "git_blob_sha": "96ccb6e3dca11d0119c52c973a633098a424baa9"
+  },
+  "runtime": {
+    "path": "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+    "git_blob_sha": "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490",
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "dynamic_code_execution": false,
+    "random_search": false
+  },
+  "verification": {
+    "path": "canonical/verification/H100_EXPRESSION_TREE_SYMBOLIC_REGRESSION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "49353538c07b9b0b2c115004bd6440f5286cf5ea",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1719,
+    "verifier_head_sha": "53107cbeb5ac1fe22524423e7051523f4ccad8d7",
+    "verifier_merge_commit": "4a58ca9b32fb46d87bf810402858b1d2a4e106f7",
+    "workflow_run_id": 37182865730,
+    "workflow_job_id": 111378761193,
+    "conclusion": "success"
+  },
+  "operative_scope": [
+    "BOUNDED_NESTED_SATURATION_LAWS",
+    "BOUNDED_LINEAR_PLUS_SATURATION_CORRECTION_LAWS",
+    "BOUNDED_MULTIVARIABLE_STABLE_RATIO_LAWS",
+    "BOUNDED_CROSS_VARIABLE_CORRECTION_COMPOSITIONS",
+    "SURFACE_VARIABLE_RENAMING_INVARIANCE",
+    "OUT_OF_GRAMMAR_FAIL_CLOSED_EXPANSION"
+  ],
+  "operative_position": [
+    "STRUCTURED_NUMERIC_OBSERVATIONS",
+    "PARENT_ZERO_LEARNED_POWER_AFFINE_SYNTHESIZER",
+    "H100_ZERO_LEARNED_EXPRESSION_TREE_SYNTHESIZER",
+    "V6_MECHANISM_FALSIFICATION_AND_DECISION_QUOTIENT",
+    "V4_V6_OPEN_WORLD_SAFETY_AND_DISCRIMINATION",
+    "V7_DEDUCTION_AND_EXECUTABLE_SKILL_COMPILATION",
+    "V8_EQUIVALENCE_AND_NOVELTY_COMPRESSION",
+    "V9_META_POLICY_PLANNING"
+  ],
+  "discharged_named_residual": "GENERAL_DETERMINISTIC_EXPRESSION_TREE_SYMBOLIC_REGRESSION_FOR_NESTED_SATURATION_AND_CORRECTION_LAWS",
+  "next_structural_residuals": [
+    "GENERAL_GRAMMAR_EXPANSION_BEYOND_CURRENT_BOUNDED_OPERATORS",
+    "RAW_NATURAL_LANGUAGE_OR_ARBITRARY_TOOL_TRACE_TO_TYPED_NUMERIC_SCHEMA_COMPILATION",
+    "OPEN_WORLD_PROPOSAL_PROBABILITY_MEASUREMENT_ON_FROZEN_UNKNOWN_DOMAIN_TASKS",
+    "DIRECT_MYSTERYMECHANISM_AND_TRANSFER_ABSTENTION_EVIDENCE"
+  ],
+  "authority": {
+    "mechanism_candidate_generation": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "hard_rules": [
+    "THIS_ACTIVATION_CHANGES_ONLY_H100_GATE1_BOUNDED_MECHANISM_CANDIDATE_GENERATION",
+    "PARENT_H100_RESOURCE_AND_PROVIDER_BOUNDARY_REMAINS_LOAD_BEARING",
+    "V6_V7_V8_V9_TRUST_AND_PLANNING_BOUNDARIES_REMAIN_LOAD_BEARING",
+    "NO_HIDDEN_MYSTERYMECHANISM_SCORE_CLAIM",
+    "NO_UNKNOWN_DOMAIN_DIRECT_LEAF_CLOSURE",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
