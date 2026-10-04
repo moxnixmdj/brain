@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_THRESHOLD_INTERVAL_QUOTIENT_BREAKTHROUGH_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__EXACT_MONOTONE_THRESHOLD_QUOTIENT__ZERO_TERMINAL_EXPOSURE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source_binding": {
+    "pinned_checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "historical_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc"
+  },
+  "exact_public_domains": {
+    "number_words": {"threshold_min": 100, "threshold_max": 500, "relations": ["at least", "less than"], "raw_states": 802},
+    "number_sentences": {"threshold_min": 1, "threshold_max": 20, "relations": ["at least", "less than"], "raw_states": 40}
+  },
+  "breakthrough": {
+    "statement": "FOR_ANY_FIXED_RESPONSE_WITH_MEASURED_COUNT_c__AT_LEAST_PASSES_EXACTLY_THRESHOLDS_n_LE_c__LESS_THAN_PASSES_EXACTLY_THRESHOLDS_n_GT_c",
+    "consequence": "THE_FULL_842_STATE_THRESHOLD_TRUTH_SURFACE_IS_RECONSTRUCTIBLE_FROM_TWO_MEASURED_COUNTS_WITH_INTERVAL_ARITHMETIC__NO_RAW_THRESHOLD_ENUMERATION_IS_REQUIRED_IN_THE_UNIVERSAL_POSTVALIDATION_PROOF",
+    "word_state_reduction": "802_RAW_RELATION_THRESHOLD_STATES_TO_ONE_WORD_COUNT_SCALAR_PLUS_DOMAIN_BOUNDS",
+    "sentence_state_reduction": "40_RAW_RELATION_THRESHOLD_STATES_TO_ONE_SENTENCE_COUNT_SCALAR_PLUS_DOMAIN_BOUNDS",
+    "approximation": false
+  },
+  "runtime": "canonical/runtime/livebench_threshold_interval_quotient_v1.py",
+  "tests": "canonical/tests/test_livebench_threshold_interval_quotient_v1.py",
+  "integration_rule": [
+    "MEASURE_WORD_AND_SENTENCE_COUNTS_ONCE_PER_CANDIDATE_RESPONSE",
+    "RECONSTRUCT_ALL_FROZEN_THRESHOLD_CHECKER_RESULTS_BY_INTERVAL_ARITHMETIC",
+    "COMPOSE_WITH_LEXICAL_COLLISION_SIGNATURES_AND_SEVEN_STRUCTURAL_ARCHETYPES",
+    "KEEP_SLOT_LEVEL_UNSAT_CERTIFICATES_SEPARATE__THIS_QUOTIENT_DOES_NOT_ASSERT_SAT"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROW_CONTENT_OR_HIDDEN_KWARGS_READ",
+    "NO_CLAIM_EVERY_PARAMETER_TUPLE_IS_SATISFIABLE",
+    "NO_TERMINAL_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
