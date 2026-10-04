@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_CRYPTOGRAPHIC_ESCROW_IMPLEMENTATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FIXED_SIZE_PUBLIC_KEY_RESULT_ESCROW_IMPLEMENTED__PRODUCTION_RECIPIENT_OPEN__ZERO_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Implement result nonvisibility with public-key-only encryption, fixed-size padding, lease-derived opaque filenames, no plaintext disk write, and no private-key capability in the writer.",
+  "target": "LIVEBENCH_IF_GE_65_7",
+  "runtime_path": "canonical/runtime/shadow_cryptographic_escrow_v1.py",
+  "test_path": "canonical/tests/test_shadow_cryptographic_escrow_v1.py",
+  "implementation": {
+    "envelope": "OPENSSL_CMS_ENVELOPED_DATA__AES_256_CBC__RECIPIENT_X509",
+    "padded_plaintext_bytes": 16777216,
+    "output_name": "shadow-result-<lease_digest_sha256>.cms",
+    "writer_private_key_input": false,
+    "plaintext_file_written": false,
+    "stdout_result_payload": false,
+    "stderr_result_payload": false,
+    "existing_object_overwrite": false,
+    "production_recipient_bound": false
+  },
+  "required_independent_checks": [
+    "EXACT_RUNTIME_BYTES",
+    "OPENSSL_ENCRYPTION_SUCCEEDS_WITH_PUBLIC_CERT_ONLY",
+    "PRIVATE_KEY_ABSENT_FROM_WRITER_PROCESS_INPUTS",
+    "TWO_DIFFERENT_PAYLOAD_LENGTHS_PRODUCE_IDENTICAL_CIPHERTEXT_LENGTH",
+    "FILENAME_DEPENDS_ONLY_ON_LEASE_DIGEST",
+    "PLAINTEXT_NOT_PRESENT_IN_CIPHERTEXT",
+    "SEPARATE_REDUCER_WITH_PRIVATE_KEY_CAN_RECOVER_EXACT_PAYLOAD",
+    "DUPLICATE_ESCROW_OBJECT_FAILS_CLOSED",
+    "WRITER_RECEIPT_EXPOSES_NO_RESULT_BODY_SCORE_OR_SUMMARY"
+  ],
+  "remaining_after_implementation_pass": [
+    "BIND_PRODUCTION_RECIPIENT_CERTIFICATE_WITH_PRIVATE_KEY_OUTSIDE_EVALUATION_ENVIRONMENT",
+    "BIND_PRODUCTION_SINK_OR_ARTIFACT_UPLOAD_TO_EXACT_CIPHERTEXT_ONLY",
+    "INSTANTIATE_POINT_OF_USE_NONVISIBILITY_RECEIPT"
+  ],
+  "hard_rules": [
+    "TEST_KEYPAIR_IS_NOT_A_PRODUCTION_RECIPIENT",
+    "NO_PRIVATE_KEY_IN_BRAIN_OR_EVALUATION_RUNNER",
+    "NO_TERMINAL_CASE_REVEAL_FROM_IMPLEMENTATION_PROOF",
+    "NO_RESULT_RELEASE_AUTHORITY",
+    "NO_EXECUTION_PROMOTION_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
