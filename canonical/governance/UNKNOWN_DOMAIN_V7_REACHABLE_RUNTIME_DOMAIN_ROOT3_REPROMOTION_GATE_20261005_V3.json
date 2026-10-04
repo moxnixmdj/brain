@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_REACHABLE_RUNTIME_DOMAIN_ROOT3_REPROMOTION_GATE_20261005_V3",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__V2_FALSIFIED_BY_CLASS_SPOOF__V3_BINDS_REACHABLE_RUNTIME_TYPE_DOMAIN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "supersedes": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_SUBCLASS_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V2.json",
+    "reason": "V2_BOUND_AN_ISINSTANCE_ACCEPTED_OBJECT_DOMAIN_THAT_IS_NOT_A_REAL_STRING_OR_BYTES_PAYLOAD_DOMAIN_AND_WAS_FALSIFIED_BY___CLASS___SPOOF_PROXIES",
+    "falsifier_path": "canonical/verification/UNKNOWN_DOMAIN_V6_REPAIRED_CLASS_SPOOF_FALSIFIER_20261005_V1.json",
+    "falsifier_git_blob_sha": "1552eb871a57de855be8abd09774ee077a7425df"
+  },
+  "freeze_timing": {
+    "independent_verifier_outcome_observed": false,
+    "production_or_terminal_case_observed": false,
+    "consequence": "THRESHOLD_AND_REQUIRED_PROPERTIES_ARE_PREDECLARED_BEFORE_INDEPENDENT_OUTCOME"
+  },
+  "current_authority": {
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "predicate_state": "EXTERNAL_BLOCKED",
+    "root_class": "ROOT3_ONLY"
+  },
+  "successor_candidate": {
+    "source_branch": "breakthrough/unknown-domain-real-type-domain-v1-20261005-gpt56sol",
+    "required_blobs": {
+      "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py": "34b5b78844cef95442c4a640c1ea24378d2fd48c",
+      "canonical/tests/test_unknown_domain_direct_v5.py": "7270b90b9844d9806c0952887aaa328573d98710",
+      "canonical/runtime/unknown_domain_direct_v7_reachable_domain_proof_v1.py": "598e97351cbf233e8fa0bd6061e49579f0835d6f",
+      "canonical/tests/test_unknown_domain_direct_v7_reachable_domain_proof_v1.py": "1e235cafbd1f1400a228d1264763475d003dc085",
+      "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py": "58d3a61f5e2cb24b4387ddd817b64f897f62fe06",
+      "canonical/runtime/unknown_domain_direct_candidate_v3.py": "8df7f13455b710623806a8219174b397a2c3c442",
+      "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+      "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+    },
+    "required_proof_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_V7_REACHABLE_RUNTIME_DOMAIN_PROOF_V1",
+    "required_proof_status": "PASS__GENUINE_RUNTIME_TYPE_DOMAIN_TOTAL__CLASS_SPOOF_EXCLUDED__V6_TRANSFER_IDENTIFIER_ABSTENTION_LEMMAS_RETAINED",
+    "semantic_change": "REPLACE_ACCIDENTAL_ISINSTANCE_SPOOFABLE_PYTHON_OBJECT_OVERQUANTIFICATION_WITH_THE_GENUINE_RUNTIME_STR_BYTES_HIERARCHY_REACHABLE_BY_THE_FROZEN_EVALUATOR",
+    "runtime_type_gate": "TYPE_OBJECT_MRO_MEMBERSHIP_VIA_TYPE_BASE_DESCRIPTOR",
+    "required_properties": [
+      "INSTANCE___CLASS___PROPERTY_CANNOT_AUTHORIZE_STR_OR_BYTES_DOMAIN_MEMBERSHIP",
+      "GENUINE_STR_SUBCLASSES_REMAIN_ACCEPTED",
+      "GENUINE_BYTES_SUBCLASSES_REMAIN_ACCEPTED",
+      "REAL_STR_SUBCLASS_STRIP_ENCODE_AND___CLASS___HOOKS_ARE_NOT_LOAD_BEARING",
+      "REAL_BYTES_SUBCLASS_BYTES_BUFFER_LEN_GETITEM_AND___CLASS___HOOKS_ARE_NOT_LOAD_BEARING",
+      "FAKE_STR___CLASS___PROXY_IS_REJECTED_BEFORE_ANY_STRING_PAYLOAD_DESCRIPTOR",
+      "FAKE_BYTES___CLASS___PROXY_IS_REJECTED_BEFORE_ANY_BYTES_PAYLOAD_DESCRIPTOR",
+      "ALL_2048_SURROGATE_CODEPOINTS_REMAIN_TOTAL_AND_INJECTIVE_AT_THE_BEACON_BOUNDARY",
+      "V6_IDENTIFIER_TRANSFER_AND_ABSTENTION_LEMMAS_ARE_REUSED_ONLY_FROM_EXACT_CONTENT_BOUND_SOURCE",
+      "FALSIFIED_V6_STRING_DOMAIN_THEOREM_IS_NOT_REUSED"
+    ]
+  },
+  "independent_verifier_contract": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "expected_receipt_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_REACHABLE_RUNTIME_DOMAIN_INDEPENDENT_VERIFICATION_V1",
+    "expected_receipt_status": "PASS__INDEPENDENT_CONTENT_BOUND_REACHABLE_RUNTIME_DOMAIN_AND_27_CASE_EXECUTION__ZERO_CREDIT",
+    "required_properties": [
+      "ALL_EIGHT_SUCCESSOR_SUBJECT_BLOBS_MATCH_EXACTLY",
+      "V7_PROOF_EXECUTES_AND_RETURNS_EXACT_REQUIRED_STATUS",
+      "V5_AND_V7_TESTS_PASS",
+      "PRODUCTION_BEACON_ORIGIN_IS_PROVED_TO_MATERIALIZE_A_GENUINE_RUNTIME_STR",
+      "EVALUATOR_SECRET_ORIGIN_IS_PROVED_TO_MATERIALIZE_A_GENUINE_RUNTIME_STR_OR_BYTES",
+      "ORIGIN_PROOF_IS_BOUND_TO_THE_ACTUAL_PRODUCTION_EXECUTOR_PATH_NOT_A_TEST_ONLY_RECONSTRUCTION",
+      "FAKE___CLASS___STR_AND_BYTES_PROXIES_ARE_EXPLICITLY_REJECTED",
+      "REAL_ADVERSARIAL_STR_AND_BYTES_SUBCLASSES_EXECUTE_THE_BOUNDARY_TESTS_WITHOUT_INSTANCE_HOOKS",
+      "ALL_27_NONPRODUCTION_CASES_EXECUTE_THROUGH_EXACT_HARNESS_AND_SCORER",
+      "ZERO_PRODUCTION_OR_TERMINAL_CASES_ARE_GENERATED_READ_OR_CONSUMED",
+      "RECEIPT_CLAIMS_ZERO_ACCEPTANCE_FAMILY_CAPABILITY_AND_OWNERSHIP_CREDIT"
+    ],
+    "workflow_conclusion_required": "success",
+    "artifact_binding_required": true
+  },
+  "frozen_semantics": {
+    "protocol_path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+    "protocol_git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab",
+    "evaluator_path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EVALUATOR_FAMILY_V1.json",
+    "evaluator_git_blob_sha": "52090daf78d12020af48c1b6ffaea056d9029e1b",
+    "semantic_bridge_audit_path": "canonical/governance/UNKNOWN_DOMAIN_V6_POST_PROMOTION_SEMANTIC_BRIDGE_AUDIT_20261005_V1.json",
+    "rule": "SUCCESSOR_MAY_REPAIR_ONLY_THE_ACCIDENTAL_HOST_LANGUAGE_INPUT_OBJECT_DOMAIN__FROZEN_EVALUATOR_CASE_AND_SCORER_SEMANTICS_MUST_NOT_CHANGE"
+  },
+  "promotion_predicate": {
+    "all_required": [
+      "CURRENT_CLASS_SPOOF_FALSIFIER_BLOB_MATCHES",
+      "ALL_EIGHT_SUCCESSOR_SUBJECT_BLOBS_MATCH",
+      "INDEPENDENT_WORKFLOW_SUCCESS",
+      "INDEPENDENT_RECEIPT_SCHEMA_STATUS_AND_ARTIFACT_BINDING_MATCH",
+      "EVERY_REQUIRED_RUNTIME_TYPE_AND_CLASS_SPOOF_PROPERTY_PASSES",
+      "PRODUCTION_INPUT_ORIGIN_BINDINGS_PASS",
+      "V7_PROOF_STATUS_MATCHES",
+      "FROZEN_PROTOCOL_EVALUATOR_AND_SEMANTIC_BRIDGE_BLOBS_MATCH",
+      "ZERO_PRODUCTION_OR_TERMINAL_CASES_CONSUMED"
+    ],
+    "on_all_true": {
+      "predicate_state": "PROVED",
+      "proved_predicate_count_transition": "12_TO_13",
+      "unresolved_predicate_count_transition": "26_TO_25",
+      "root3_only_predicate_removed": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0,
+      "family_remains_open_on": "MYSTERYMECHANISM_GE_49_55"
+    },
+    "on_any_false_missing_or_hash_mismatch": {
+      "predicate_state": "EXTERNAL_BLOCKED",
+      "proved_predicate_count_delta": 0,
+      "unresolved_predicate_count_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
+    }
+  },
+  "hard_rules": [
+    "V1_AND_V2_GATES_ARE_SUPERSEDED_AND_MUST_NOT_AUTHORIZE_REPROMOTION",
+    "NO_REPROMOTION_FROM_BRANCH_OR_LOCAL_TESTS_ALONE",
+    "NO_POST_OUTCOME_RELAXATION_OF_V3",
+    "ANY_NEW_COUNTEREXAMPLE_FAILS_CLOSED",
+    "NO_ARBITRARY_ISINSTANCE_SPOOFABLE_OBJECT_TOTALITY_CLAIM",
+    "NO_MYSTERYMECHANISM_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
