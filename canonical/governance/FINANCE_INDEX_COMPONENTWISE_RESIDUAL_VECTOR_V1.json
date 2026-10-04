@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FINANCE_INDEX_COMPONENTWISE_RESIDUAL_VECTOR_V1",
   "date": "2026-10-03",
-  "status": "CURRENT_FAIL_CLOSED__SIX_COMPONENT_PREMISES_OPEN__AGGREGATION_THEOREM_ALREADY_VERIFIED__ZERO_CREDIT",
+  "status": "ACTIVE_FAIL_CLOSED__SIX_NORMALIZED_COMPONENTS_OPEN__DIRECT_WEIGHTED_THRESHOLD_CANDIDATE_ADDED__COMPONENTWISE_OPUS_DOMINANCE_OPTIONAL__ZERO_CREDIT",
   "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
   "authority": {
     "identity": "canonical/governance/FINANCE_ACCOUNTING_INDEX_IDENTITY_RECONCILIATION_V1.json",
@@ -12,7 +12,7 @@
   "components": [
     {
       "component": "BUSINESS_KNOWLEDGE",
-      "weight": 0.30,
+      "weight": 0.3,
       "published_evaluation": "AA-Omniscience Business Accuracy",
       "state": "OPEN",
       "minimum_missing_fact": "BRAIN_NORMALIZED_COMPONENT_GE_OPUS55_ON_FROZEN_COMPONENT_OR_OWNER_ACCEPTED_EQUIVALENT",
@@ -20,34 +20,47 @@
     },
     {
       "component": "AGENTIC_KNOWLEDGE_WORK",
-      "weight": 0.30,
-      "published_evaluations": ["GDPval-AA v2.1", "AA-Briefcase v1.1"],
+      "weight": 0.3,
+      "published_evaluations": [
+        "GDPval-AA v2.1",
+        "AA-Briefcase v1.1"
+      ],
       "state": "OPEN",
       "minimum_missing_fact": "BRAIN_NORMALIZED_COMPONENT_GE_OPUS55_WITH_EXACT_COMPONENT_NORMALIZATION",
-      "reuse": ["PROWORK_GDPVAL_GE_1846", "PROWORK_AA_BRIEFCASE_GE_1822"]
+      "reuse": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822"
+      ]
     },
     {
       "component": "REASONING",
-      "weight": 0.20,
+      "weight": 0.2,
       "published_evaluation": "Humanity's Last Exam",
       "state": "OPEN",
       "minimum_missing_fact": "BRAIN_NORMALIZED_COMPONENT_GE_OPUS55_ON_FROZEN_HLE_COMPONENT",
-      "reuse": ["HLE_TOOLS_GE_67_7"],
+      "reuse": [
+        "HLE_TOOLS_GE_67_7"
+      ],
       "note": "WITH_TOOLS_ACCEPTANCE_ROUTE_MUST_NOT_BE_ASSUMED_IDENTICAL_TO_INDEX_COMPONENT_WITHOUT_EXACT_NORMALIZATION_BINDING"
     },
     {
       "component": "AGENTIC_TOOL_USE",
-      "weight": 0.10,
+      "weight": 0.1,
       "published_evaluation": "AutomationBench-AA Finance",
       "state": "OPEN",
       "minimum_missing_fact": "BRAIN_NORMALIZED_COMPONENT_GE_OPUS55_ON_EXACT_FINANCE_COMPONENT_OR_PROVED_STRONGER_ROUTE",
-      "reuse": ["AUTOMATIONBENCH_GE_40"],
+      "reuse": [
+        "AUTOMATIONBENCH_GE_40"
+      ],
       "note": "PUBLIC_600_AUTOMATIONBENCH_IS_NOT_THE_PRIVATE_OFFICIAL_POPULATION_WITHOUT_SCOPE_PROOF"
     },
     {
       "component": "LONG_CONTEXT",
       "weight": 0.05,
-      "published_evaluations": ["AA-LCR v1.1", "GDP.pdf"],
+      "published_evaluations": [
+        "AA-LCR v1.1",
+        "GDP.pdf"
+      ],
       "state": "OPEN",
       "minimum_missing_fact": "BRAIN_NORMALIZED_COMPONENT_GE_OPUS55_WITH_EXACT_LCR_GDPPDF_NORMALIZATION",
       "public_boundary": "AA_LCR_INPUTS_PUBLIC__OFFICIAL_EQUALITY_GRADER_DEPENDENCY_OPEN"
@@ -73,7 +86,7 @@
     "RELATED_BENCHMARK_SCORE_DOES_NOT_TRANSFER_WITHOUT_EXACT_NORMALIZATION_OR_SCOPE_PROOF",
     "THE_AGGREGATION_THEOREM_ALONE_GRANTS_ZERO_ACCEPTANCE_CREDIT"
   ],
-  "next": "SATURATE_EXISTING_CONTENT_ADDRESSED_EVIDENCE_AGAINST_THE_SIX_COMPONENT_PREMISES__THEN_COMPUTE_ONLY_THE_IRREDUCIBLE_OWNER_ACCESS_OR_FRESH_SCORE_CUT",
+  "next": "FIRST_MINIMIZE_THE_WEIGHTED_BRAIN_LOWER_BOUND_DEFICIT_TO_61_USING_EXISTING_OR_CHEAPEST_VERIFIED_COMPONENT_BOUNDS__USE_COMPONENTWISE_OPUS_NONINFERIORITY_ONLY_WHEN_IT_IS_THE_CHEAPEST_PROOF_ROUTE__NO_SEPARATE_INDEX_RUN",
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
   "incremental_spend_usd": 0,
@@ -83,5 +96,12 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "direct_threshold_shortcut": {
+    "theorem_path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_THEOREM_V1.json",
+    "rule": "WEIGHTED_VERIFIED_BRAIN_COMPONENT_LOWER_BOUND_GE_61_CLOSES_INDEX_WITHOUT_REQUIRING_EACH_COMPONENT_TO_BE_GE_ITS_OPUS55_COMPONENT",
+    "componentwise_opus_noninferiority": "SUFFICIENT_BUT_NOT_NECESSARY",
+    "opus_component_values_required_for_direct_route": false,
+    "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED"
+  }
 }
