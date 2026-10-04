@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY15_CANDIDATE_GEOMETRY_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_REPAIR__PINNED_CHECKER_SOURCE_AUDITED__INDEPENDENT_EXECUTION_QUEUED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "scope": "DETERMINISTIC_SCORE_LANE__ACTIVE_LEGACY15_CONSTRUCTIVE_CANDIDATE_GENERATION",
+  "pinned_checker_source": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+  },
+  "repaired_subject": {
+    "runtime": "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py",
+    "git_blob_sha": "76a936e7380e169860114c4331043a0214bb8104",
+    "tests": "canonical/tests/test_livebench_legacy15_joint_candidate_generator_v1.py",
+    "tests_git_blob_sha": "74101b1350c912fb8562170a096e51bf3a5e9faf"
+  },
+  "source_level_failures_removed": [
+    {
+      "bug": "WORD_PADDING_AFTER_EXACT_TAIL_OR_OUTSIDE_QUOTATION",
+      "effect": "AT_LEAST_WORD_PADDING_COULD_INVALIDATE_startend:end_checker_OR_startend:quotation_AFTER_CONSTRUCTION",
+      "repair": "PRESERVE_A_TERMINAL_INSERTION_SLOT_THROUGH_WORD_PADDING__FINALIZE_POSTSCRIPT_END_PHRASE_AND_OUTER_QUOTE_ONLY_AFTER_PADDING"
+    },
+    {
+      "bug": "NONOUTPUT_INSERTION_MARKER_COUNTED_AS_A_WORD",
+      "effect": "LOWER_BOUND_WORD_ARITHMETIC_COULD_BE_ONE_WORD_SHORT_AFTER_FINALIZATION_DELETED_THE_MARKER",
+      "repair": "EXCLUDE___PB_END_SLOT___FROM_EXACT_WORD_COUNT_ARITHMETIC_AND_POSTCHECK_FINAL_OUTPUT"
+    },
+    {
+      "bug": "TERMINAL_SLOT_EMBEDDED_IN_FIRST_PARAGRAPH",
+      "effect": "PARAGRAPH_OR_NTH_PARAGRAPH_COMPOSITIONS_COULD_PLACE_POSTSCRIPT_OR_EXACT_END_PHRASE_BEFORE_LATER_PARAGRAPHS",
+      "repair": "CANONICALIZE_ONE_RESERVED_SLOT_AT_TRUE_RESPONSE_END_AFTER_STRUCTURAL_PARAGRAPH_CONSTRUCTION"
+    },
+    {
+      "bug": "REQUIRED_FORBIDDEN_IDENTICAL_WORD_OVERLAP_FAIL_CLOSED",
+      "effect": "A_SATISFIABLE_LEGACY_COMPOSITION_COULD_HAVE_NO_CANDIDATE_WHEN_EXISTENCE_AND_FORBIDDEN_WORD_LISTS_OVERLAP",
+      "repair": "FOR_HISTORICAL_WORD_LIST_ARGUMENTS_APPEND_A_SAFE_LETTER_TO_IDENTICAL_REQUIRED_WORD__EXISTENCE_RAW_REGEX_STILL_MATCHES_SUBSTRING_WHILE_FORBIDDEN_WHOLE_WORD_CHECKER_DOES_NOT"
+    }
+  ],
+  "exact_checker_semantics_used_for_audit": [
+    "NumberOfWords__nltk_RegexpTokenizer_r_BACKSLASH_w_PLUS",
+    "ParagraphChecker__SPLIT_ON_THREE_ASTERISKS",
+    "ParagraphFirstWordCheck__SPLIT_ON_DOUBLE_NEWLINE",
+    "PostscriptChecker__MARKER_REGEX",
+    "EndChecker__STRIP_OUTER_QUOTES_THEN_ENDSWITH_EXACT_PHRASE",
+    "QuotationChecker__FIRST_AND_LAST_CHARACTER_DOUBLE_QUOTE",
+    "KeywordChecker__RAW_REGEX_SEARCH",
+    "ForbiddenWords__WORD_BOUNDARY_WRAPPED_REGEX"
+  ],
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/livebench-legacy15-joint-predecessor-v1",
+    "workflow": "Verify LiveBench legacy15 joint predecessor V1",
+    "latest_bound_head": "7f4fbcf0f621f96eaad77578587e95a2d2f591d5",
+    "workflow_run_id": 37201133115,
+    "current_state_at_freeze": "QUEUED",
+    "verification_target": "CLEAN_200_ROW_PREDECESSOR__FILTER_TO_ACTIVE15_ONLY__VISIBLE_COMPILER_V2__BOUNDED_CANDIDATE_GENERATOR__EXACT_PINNED_CHECKER_POSTVALIDATION",
+    "terminal_active_rows_read": 0
+  },
+  "scheduler_delta": [
+    "USE_BLOB_76a936e7380e169860114c4331043a0214bb8104_OR_NEWER_ONLY_FOR_THE_JOINT_CANDIDATE_BRANCH",
+    "DO_NOT_PROMOTE_FROM_STATIC_AUDIT",
+    "WHEN_PUBLIC_RUNNER_STARTS_REQUIRE_ZERO_COMPILER_FAILURES_ZERO_GENERATION_FAILURES_AND_ZERO_EXACT_CHECKER_FAILURES_ON_ELIGIBLE_PREDECESSOR_ROWS",
+    "IF_ANY_FAILURE_REMAINS_PATCH_CAUSALLY_AND_REVERIFY_BEFORE_ANY_FRESH_TERMINAL_REALITY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_REPAIRED_GENERATOR_ALREADY_PASSES_THE_PREDECESSOR_REPLAY",
+    "NO_ACTIVE_TERMINAL_PROMPT_WAS_READ",
+    "NO_NEW_TERMINAL_CASE_WAS_EXPOSED",
+    "NO_LIVEBENCH_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_SEMANTIC_CAPABILITY_CREDIT_FROM_SCORE_LANE_CONSTRUCTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
