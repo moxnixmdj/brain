@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_FROZEN_COMPARATOR_VECTOR_V1",
   "date": "2026-10-04",
-  "status": "CURRENT_CANDIDATE__FROZEN_15_FIXED_BAR_PREDICATES_14_SURFACES__CURRENT_ROUTE_INVENTORY_REBOUND__ZERO_CREDIT",
+  "status": "CURRENT__FROZEN_TARGETS_UNCHANGED__CHARTOGRAPHY_ADAPTER_ROUTE_DELTA_BOUND__ZERO_CREDIT",
   "scope": "ROOT2_ONLY_FIXED_BAR_PREDICATES",
   "authority": {
     "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
@@ -95,7 +95,7 @@
         "CHARTOGRAPHY_TOOLS_GE_89"
       ],
       "target": ">=89%",
-      "route_class": "PROJECT_ACCOUNT_CAPACITY_AND_BRAIN_ADAPTER_THEN_SCORE__ZERO_SPEND_GUARD_DISCHARGED"
+      "route_class": "PROJECT_ACCOUNT_CAPACITY_AND_INTERNAL_MULTIMODAL_BACKEND_THEN_SCORE__ZERO_SPEND_GUARD_AND_INSPECT_ADAPTER_DISCHARGED"
     },
     {
       "surface": "OSWorld 2.1 partial",
@@ -154,11 +154,5 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "semantic_delta": {
-    "comparator_targets_changed": false,
-    "predicate_set_changed": false,
-    "surface_set_changed": false,
-    "route_state_only": true,
-    "current_route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294"
-  }
+  "semantic_delta": "TARGETS_UNCHANGED__ROUTE_STATE_ONLY__CHARTOGRAPHY_INSPECT_ADAPTER_DISCHARGED__INTERNAL_MULTIMODAL_BACKEND_AND_PROJECT_CAPACITY_REMAIN"
 }
