@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_HOLDOUT_REQUEST_V1",
+  "episode_id": "H20_CRATE_JSON",
+  "difficulty": "REGISTRY_BEHAVIOR",
+  "query_action": {
+    "action_id": "H20Q05",
+    "source_id": "CRATES_IO_SEARCH",
+    "query_family": "FRESH_HOLDOUT_BEHAVIOR_V20",
+    "query": "JSON serialization deserialization strongly typed Rust"
+  },
+  "source": {
+    "source_id": "CRATES_IO_SEARCH",
+    "provider": "crates",
+    "upstream_group": "CRATES_IO_PUBLIC_API",
+    "ecosystem": "cargo"
+  },
+  "target_identity_present": false
+}
