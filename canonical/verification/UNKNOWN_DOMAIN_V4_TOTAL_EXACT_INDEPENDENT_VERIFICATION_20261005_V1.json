@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_TOTAL_EXACT_INDEPENDENT_VERIFICATION_RECEIPT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__INDEPENDENT_CONTENT_BOUND_TOTALITY_EXACTNESS_AND_6912_CASE_FALSIFICATION__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "source_candidate": {
+    "brain_pull_request": 1934,
+    "brain_head_sha": "3c06745f2df4631927c1d3c57040615314be8abc"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_commit": "9284ec7f2dc62f3d544257ea588f9c2d452b41d3",
+    "fastlane_branch": "ud-v4-total-exact-fastlane/independent-v2-20261005-9284ec7f",
+    "workflow_run_id": 37242589767,
+    "workflow_job_id": 111554089776,
+    "runner": "macos-15-intel",
+    "python": "3.12.10",
+    "immutable_checkout_sha": "9284ec7f2dc62f3d544257ea588f9c2d452b41d3",
+    "receipt_artifact_id": 11318240282,
+    "receipt_artifact_sha256": "983c475ce8e46a395d51a316ce9e72dc24067342d7dd808d6b81eeae9006720b"
+  },
+  "verified_receipt": {
+    "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_TOTAL_EXACT_INDEPENDENT_VERIFICATION_V1",
+    "status": "PASS__INDEPENDENT_CONTENT_BOUND_TOTALITY_EXACTNESS_AND_6912_CASE_FALSIFICATION__ZERO_CREDIT",
+    "brain_pr": 1934,
+    "fisher_yates_exhaustive_choice_paths_n_le_7": 5913,
+    "identifier_totality_depends_on_hash_collision_resistance": false,
+    "v2_exact_float_counterexample": {
+      "beacon": "INDEPENDENT-V4-FLOAT-0002-BEACON",
+      "index": 10,
+      "v2": -0.10691751936785576,
+      "gold": -0.10691751936785587,
+      "v3_probe_count": 1
+    },
+    "nonproduction_falsification": {
+      "populations": 256,
+      "cases": 6912,
+      "all_pass": true
+    },
+    "production_or_terminal_cases_generated": 0,
+    "acceptance_credit_delta": 0
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/unknown_domain_direct_candidate_v1.py": "a2a77269a8175ce315b466035049da0f761b8734",
+    "canonical/runtime/unknown_domain_direct_candidate_v2.py": "4470716f95a559a700e461262df909ae19a41651",
+    "canonical/runtime/unknown_domain_direct_candidate_v3.py": "8df7f13455b710623806a8219174b397a2c3c442",
+    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py": "8b855851b8a0fec3a0811c5033cc4ea6d2436954",
+    "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "canonical/runtime/unknown_domain_direct_v4_universal_proof_v1.py": "72bbed393ac1bcaccb4cf33cd37835662c421f6c"
+  },
+  "prior_transport_failure": {
+    "workflow_run_id": 37242352158,
+    "workflow_job_id": 111553420191,
+    "classification": "VERIFIER_TRANSPORT_ONLY__PYTHON_REPOSITORY_ROOT_NOT_ON_IMPORT_PATH",
+    "failure": "ModuleNotFoundError: No module named 'canonical'",
+    "candidate_or_proof_executed": false,
+    "production_or_terminal_cases_generated": 0,
+    "acceptance_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_RECEIPT_ALONE",
+    "SEPARATE_FAIL_CLOSED_ROOT3_AND_ACCEPTANCE_REDUCTION_REQUIRED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
