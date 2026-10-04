@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PROMPT_ONLY_OVERLAP_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PROMPT_ONLY_ROBUST_TRIGRAM_SET_CONSTRUCTION__PUBLIC_12_OF_12_EXACT_RAW_SCORER_PASS__ZERO_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_instruction": "ratio:overlap",
+  "objective": "Remove both exact-reference acquisition and whole-normalized-reference reconstruction from the ratio-overlap successor path by constructing a response from a few prompt-visible carrier tokens plus provably novel private-use characters.",
+  "supersedes_nothing": true,
+  "strict_improvement_over": {
+    "path": "canonical/governance/LIVEBENCH_NGRAM_WHITESPACE_INVARIANT_REDUCTION_V1.json",
+    "reason": "The prior reduction still takes the complete normalized reference as constructor input. This component takes only the visible prompt, visible percentage, and the two co-constraint descriptions observed in the pinned public ratio-overlap family."
+  },
+  "frozen_public_bindings": {
+    "ifbench_test_blob": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_character_trigram_checker_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "mathematical_construction": {
+    "safe_overlap_atoms": "Every character trigram wholly internal to a prompt-visible base token is preserved under arbitrary whitespace-run changes around that token.",
+    "safe_nonoverlap_atoms": "A trigram containing a private-use character selected absent from the visible prompt cannot occur in a reference formed from that prompt's base text under the public combine-with-constraint construction invariant.",
+    "set_control": "Because the frozen scorer uses SET character trigrams, filler length changes the denominator without multiplicity effects; deterministic search chooses A/(A+B) inside the requested plus-or-minus-2 band.",
+    "co_constraint_composition": [
+      "sentence:keyword is satisfied by constructing exactly N punctuation-delimited sentences and placing the visible keyword in sentence N",
+      "words:consonants is satisfied by selecting a visible carrier token with an adjacent consonant cluster; the no-whitespace witness is one checker word"
+    ]
+  },
+  "public_recomputation": {
+    "ratio_overlap_rows": 12,
+    "ratio_only_rows": 5,
+    "ratio_plus_sentence_keyword_rows": 4,
+    "ratio_plus_consonant_cluster_rows": 3,
+    "exact_raw_reference_score_in_band": 12,
+    "all_observed_public_co_constraints_satisfied": 12,
+    "notable_adversarial_case": "30TH_SENTENCE_KEYWORD_ROW_REQUIRED_THREE_SAFE_CARRIER_TOKENS__ONE_TOKEN_ROUTE_WAS_INSUFFICIENT",
+    "terminal_cases_consumed": 0
+  },
+  "runtime": {
+    "path": "canonical/runtime/livebench_prompt_only_overlap_compiler_v1.py",
+    "test_path": "canonical/tests/test_livebench_prompt_only_overlap_compiler_v1.py",
+    "hidden_reference_argument": false,
+    "hidden_kwargs_argument": false,
+    "terminal_row_identity_argument": false,
+    "fail_closed": true
+  },
+  "remaining_obligations": [
+    "INDEPENDENTLY_VERIFY_RUNTIME_AND_PUBLIC_12_OF_12_RECOMPUTATION",
+    "PROVE_THE_FROZEN_TERMINAL_RATIO_OVERLAP_ROWS_OBEY_THE_SAME_PUBLIC_BASE_PROMPT_PLUS_CONSTRAINT_CONSTRUCTION_INVARIANT_WITHOUT_READING_UNEXPOSED_TERMINAL_CONTENT",
+    "COMPOSE_WITH_THE_FULL_VISIBLE_CONSTRAINT_GRAMMAR_OR_FAIL_CLOSED_WHEN_UNSUPPORTED_CO_CONSTRAINTS_ARE_PRESENT",
+    "DO_NOT_INFER_LIVEBENCH_ACCEPTANCE_FROM_THIS COMPONENT ALONE"
+  ],
+  "contamination_firewall": [
+    "NO_UNEXPOSED_TERMINAL_PROMPT_OR_RESPONSE_CONTENT",
+    "NO_TERMINAL_CASE_IDS",
+    "NO_HIDDEN_TERMINAL_KWARGS",
+    "PUBLIC_PINNED_IFBENCH_ROWS_ONLY_FOR_RECOMPUTATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
