@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V9_FINANCE_CUSTOM_ROUTE_CUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V9_FINANCE_BLOB__CUSTOM_ROUTE_DORMANT__DEFAULT_ROUTE_PRESERVED__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subject": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V9.json",
+    "git_blob_sha": "ea5923e8a90ca115c8149266c4c37cc7e6c40a2a",
+    "parent_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V8.json",
+    "parent_git_blob_sha": "2eaeb74fe306ee2507145e26eb731f69f46e6153"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1634,
+    "head_sha": "19397448033d643d8810d5716d499992965bdad8",
+    "merge_commit": "74165d13b5b9e821e2f6fde90465bc9280472751",
+    "workflow_name": "Verify Root2 V9 Finance cut",
+    "workflow_run_id": 37172502618,
+    "workflow_job_id": 111348168777,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_subject_blob": true,
+    "counts_unchanged": true,
+    "generic_public_custom_harness_comparability_search_deleted": true,
+    "custom_function_route_dormant": true,
+    "default_shared_harness_route_preserved": true,
+    "owner_or_methodology_wake_preserved": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
