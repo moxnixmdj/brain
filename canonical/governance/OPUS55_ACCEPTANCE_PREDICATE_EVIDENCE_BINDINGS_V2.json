@@ -1,19 +1,19 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2",
   "date": "2026-10-02",
-  "status": "AUTHORITY_RECONCILED__13_PROVED__25_UNRESOLVED__UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PROVED__LIVEBENCH_DIRTY_TARGET_REPLAY_QUARANTINED__ROOT1_INACTIVE",
+  "status": "AUTHORITY_RECONCILED__12_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_V6_PROMOTION_REVOKED_BY_SUBCLASS_TOTALITY_COUNTEREXAMPLE__LIVEBENCH_DIRTY_TARGET_REPLAY_QUARANTINED__ROOT1_INACTIVE",
   "objective": "Bind only content-addressed atomic acceptance evidence. Until saturation is complete, benchmark and matched-case execution remains forbidden.",
   "saturation": {
-    "status": "CURRENT_ZERO_REALITY_RECEIPT_RECONCILIATION__13_PROVED__25_UNRESOLVED__UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PROVED__LIVEBENCH_EXACT200_CREDIT_REVOKED",
+    "status": "CURRENT_ZERO_REALITY_RECEIPT_RECONCILIATION__12_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_V6_PROMOTION_REVOKED__LIVEBENCH_EXACT200_CREDIT_REVOKED",
     "source_snapshot_sha": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "receipt": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "proved_predicate_count": 13,
-    "bound_blocker_count": 2,
-    "unresolved_predicate_count": 25,
+    "proved_predicate_count": 12,
+    "bound_blocker_count": 3,
+    "unresolved_predicate_count": 26,
     "new_reality_units_consumed": 0,
-    "rule": "UNKNOWN_DOMAIN_V6_INDEPENDENT_CONTENT_BOUND_TOTAL_STRING_STRUCTURAL_ID_AND_EXACT_ADD2_UNIVERSAL_SCOPE_PROOF_PROMOTED_ATOMIC_PREDICATE__UNKNOWN_DOMAIN_FAMILY_REMAINS_OPEN_ON_MYSTERYMECHANISM__LIVEBENCH_EXACT200_REMAINS_DIRTY_AND_FAIL_CLOSED_NOT_PROVEN",
-    "latest_delta_receipt": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
-    "latest_delta_receipt_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596"
+    "rule": "UNKNOWN_DOMAIN_V6_PROMOTION_REVOKED_BY_REACHABLE_ISINSTANCE_ACCEPTED_STR_SUBCLASS_OVERRIDE_COUNTEREXAMPLE__REPAIRED_SUBCLASS_SAFE_BLOBS_REQUIRE_INDEPENDENT_CONTENT_BOUND_VERIFICATION_AND_SEPARATE_REDUCTION__LIVEBENCH_EXACT200_REMAINS_DIRTY_AND_FAIL_CLOSED_NOT_PROVEN",
+    "latest_delta_receipt": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
+    "latest_delta_receipt_sha": "a47accdf0c3a65f0da0e4171b1466cac575bbaa2"
   },
   "claims": [
     {
@@ -198,34 +198,44 @@
     },
     {
       "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
-      "state": "PROVED",
-      "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
-      "source_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
-      "source_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
+      "state": "EXTERNAL_BLOCKED",
+      "source_path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
+      "source_sha": "a47accdf0c3a65f0da0e4171b1466cac575bbaa2",
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
-      "independent_or_objective": true,
-      "scope_complete": true,
-      "basis": "INDEPENDENT_V6_PUBLIC_RUNNER_CONTENT_BINDS_TOTAL_PYTHON_STRING_CANONICALIZATION__STRUCTURAL_IDENTIFIER_TOTALITY__EXACT_ADD2_IEEE754_ROLE_ORDER__ALL_SIX_TRANSFER_FAMILIES__ALL_THREE_ABSTENTION_CLASSES__432_NONPRODUCTION_CASES_PASS__ZERO_PRODUCTION_OR_TERMINAL_CONSUMPTION",
       "supporting_sources": [
         {
-          "path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
-          "sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d"
+          "path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
+          "sha": "a47accdf0c3a65f0da0e4171b1466cac575bbaa2"
         },
         {
-          "path": "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py",
-          "sha": "58410966e17c1bc546db8cab039891f3ab2bf8a8"
+          "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py",
+          "sha": "d087601a62a0b8ec9ab264487fb0b27a6246b977",
+          "status": "REPAIRED_CANDIDATE__INDEPENDENT_VERIFICATION_PENDING"
         },
         {
           "path": "canonical/tests/test_unknown_domain_direct_v5.py",
-          "sha": "81cd6ecabec51029175f6036a13eac7667fccd03"
+          "sha": "c98733407d594c3fa5713de5742022325463f390",
+          "status": "REPAIRED_REGRESSION__INDEPENDENT_VERIFICATION_PENDING"
+        },
+        {
+          "path": "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py",
+          "sha": "4a3e72b365ffa7e163abc63d197fcd386bdd104d",
+          "status": "REPAIRED_PROOF__INDEPENDENT_VERIFICATION_PENDING"
         }
       ],
       "root_class": "ROOT3",
       "historical_revocation": {
         "path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_REVOCATION_20261005_V1.json",
-        "reason": "V2_FALSE_ADD2_EXACT_FLOAT_COUNTEREXAMPLE_AND_IDENTIFIER_TOTALITY_GAP__SUPERSEDED_ONLY_AFTER_INDEPENDENT_V6_TOTAL_STRING_EXACT_PROOF"
+        "reason": "V2_FALSE_ADD2_EXACT_FLOAT_COUNTEREXAMPLE_AND_IDENTIFIER_TOTALITY_GAP"
       },
-      "family_status_after_atomic_promotion": "OPEN__MYSTERYMECHANISM_GE_49_55_SEPARATE_AND_UNCHANGED"
+      "blocker": "V6_UNIVERSAL_TOTALITY_PROMOTION_REVOKED__ISINSTANCE_ACCEPTS_STR_SUBCLASSES_WHOSE_OVERRIDDEN_STRIP_OR_ENCODE_MAKES_PRE_REPAIR_V5_PARTIAL",
+      "blocker_class": "ROOT3_DIRECT_SCOPE_EVIDENCE_RESIDUAL",
+      "discharge_condition": "INDEPENDENTLY_VERIFY_THE_CONTENT_BOUND_SUBCLASS_SAFE_V5_V6_SUCCESSOR_INCLUDING_ADVERSARIAL_ISINSTANCE_ACCEPTED_STR_AND_BYTES_SUBCLASS_CASES__THEN_RUN_SEPARATE_FAIL_CLOSED_ROOT3_AND_ACCEPTANCE_REDUCTION",
+      "revoked_v6_proof": {
+        "acceptance_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+        "independent_verification_path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+        "reason": "DECLARED_ISINSTANCE_ACCEPTED_PYTHON_STRING_DOMAIN_WAS_NOT_TOTAL_BECAUSE_PRE_REPAIR_V5_CALLED_OVERRIDABLE_INSTANCE_STRIP_AND_ENCODE"
+      }
     },
     {
       "predicate_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
