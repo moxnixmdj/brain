@@ -64,8 +64,8 @@ def _identifier_totality()->dict[str,Any]:
  #
  # The runtime then independently checks exactly that invariant:
  # len(result)==n and set(result)==set(range(n)), failing closed otherwise.
- # This covers the actual n values 1,2,4,12,15; it is not a finite n<=7 sample.
- for n in (1,2,4,12,15):
+ # This covers the actual n values 1,2,3,4,12,15; it is not a finite n<=7 sample.
+ for n in (1,2,3,4,12,15):
   for seed in range(17):
    secret=hashlib.sha256(f"perm-{n}-{seed}".encode()).digest()
    p=g3._perm(secret,"B"*16,f"proof-{n}",n)
@@ -79,7 +79,7 @@ def _identifier_totality()->dict[str,Any]:
  assert g3.IDENTIFIER_TOTALITY.startswith("DETERMINISTIC_BIJECTION")
  return {
   "proof_kind":"SIZE_INDEPENDENT_SWAP_INVARIANT_PLUS_RUNTIME_FAIL_CLOSED_POSTCONDITION",
-  "covered_permutation_sizes":[1,2,4,12,15],
+  "covered_permutation_sizes":[1,2,3,4,12,15],
   "all_draw_values_allowed":True,
   "hmac_collision_resistance_required_for_identifier_uniqueness":False,
   "surface_identifier_injectivity":"PERMUTED_DISTINCT_Q_SLOTS",
