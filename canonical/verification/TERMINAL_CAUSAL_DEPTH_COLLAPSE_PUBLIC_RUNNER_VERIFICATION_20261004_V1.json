@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CAUSAL_DEPTH_COLLAPSE_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__DYNAMIC_ROOT2_AUTHORITY__EXACT_CANDIDATE_BYTES__ZERO_CREDIT",
+  "subject": {
+    "policy": {
+      "path": "canonical/governance/TERMINAL_CAUSAL_DEPTH_COLLAPSE_V1.json",
+      "git_blob_sha": "ed50678f56dc873eda5aada1c5509286d216ab94"
+    },
+    "runtime": {
+      "path": "canonical/runtime/terminal_minimum_causal_depth_policy_v1.py",
+      "git_blob_sha": "85fc1b377a63f3f318d9e8f229c9476292ad05d9"
+    },
+    "tests": {
+      "path": "canonical/tests/test_terminal_minimum_causal_depth_policy_v1.py",
+      "git_blob_sha": "fad9fc6fccd0d80dab872cce86750be0e4c78af3"
+    },
+    "arena_binding": {
+      "path": "canonical/governance/ARENA_COMPARATOR_ACCOUNT_SWEEP_BINDING_V1.json",
+      "git_blob_sha": "4f4fc3fc610f043e8328093ef11e7057c319229c"
+    },
+    "activation_contract": {
+      "path": "canonical/governance/TERMINAL_CAUSAL_DEPTH_COLLAPSE_ACTIVATION_V1.json",
+      "git_blob_sha": "1c4400af63533e236847189b17b11e8dd7f80107"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1698,
+    "verifier_head_sha": "48593c97c3ef273609c562bace236e2615ab0faa",
+    "verifier_merge_commit": "ede6819c526deae202b3c3ad6f25de18cb26c0cb",
+    "workflow_run_id": 37179907460,
+    "workflow_job_id": 111370192934,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_5_OF_19_12_OF_38_26_UNRESOLVED_STATE_GUARD",
+    "ROOT2_EFFECTIVE_FRONTIER_VERSION_IS_READ_DURING_SCHEDULING_FROM_CURRENT_CANONICAL_ROOT_STATE_NOT_HARDCODED",
+    "LATEST_OBSERVED_ROOT2_FRONTIER_V12_IS_DIAGNOSTIC_NOT_A_POLICY_CONSTANT",
+    "THREE_RELATIVE_ELO_PREDICATES_REJECT_PURE_ABSOLUTE_NON_RELATIVE_PROOF_FORMS",
+    "RELATIVE_SCORE_BRIDGE_OWNER_RESULT_AND_MATCHED_EMPIRICAL_ROUTES_PRESERVED",
+    "FRESH_REALITY_REMAINS_BLOCKED_UNLESS_GENERIC_ISOLATION_IS_PROVED_AND_CURRENT_CANONICAL_AUTHORITY_EXPLICITLY_ALLOWS_IT",
+    "ACTIVATION_CONTRACT_FAILS_CLOSED_UNLESS_CURRENT_POLICY_RECEIPT_AND_SEPARATE_ROOT_PROJECTION_PASS_EXIST",
+    "ARENA_LOGIN_GATED_MACHINE_ROUTING_ACCOUNT_MODEL_ZERO_COST_AND_EFFORT_FACTS_REMAIN_UNPROVED",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERIC_PRECOMMIT_ISOLATION_THEOREM_IS_PROVED",
+    "NO_CLAIM_EXACT_OPUS55_MACHINE_COMPARATOR_IS_AVAILABLE",
+    "NO_CLAIM_ARENA_API_USE_IS_ZERO_INCREMENTAL_COST",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
