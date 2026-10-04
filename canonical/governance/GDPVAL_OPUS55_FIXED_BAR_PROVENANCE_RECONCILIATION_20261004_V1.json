@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_RECONCILIATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FROZEN_RELEASE_BAR_VS_LIVE_ELO_DRIFT_RECONCILIATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "PROWORK_GDPVAL_GE_1846",
+  "target_surface": "GDPval-AA v2.1",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "canonical_freeze": {
+    "envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "envelope_public_sources_refreshed_utc": "2026-09-30",
+    "frozen_opus55_bar_elo": 1846,
+    "protocol_path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "registry_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "protocol_rule": "SCOPE_HARNESS_SCORING_STOPPING_AND_MULTIPLICITY_ARE_FROZEN_BEFORE_BRAIN_RESULTS"
+  },
+  "source_facts": [
+    {
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "provenance": "FIRST_PARTY_ANTHROPIC_RELEASE_BENCHMARK",
+      "observation": "Claude Opus 5.5 GDPval-AA v2.1 = 1846 Elo",
+      "role": "FROZEN_RELEASE_TIME_COMPARATOR_BAR"
+    },
+    {
+      "source": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+      "provenance": "BENCHMARK_OWNER_LIVE_LEADERBOARD",
+      "observation": "Live GDPval-AA v2.1 leaderboard currently reports Claude Opus 5.5 Max Default Fallback = 1867 Elo",
+      "role": "POST_FREEZE_LIVE_RELATIVE_SCORE_OBSERVATION"
+    },
+    {
+      "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "provenance": "BENCHMARK_OWNER_METHODOLOGY",
+      "observation": "GDPval-AA v2.1 is fit with a Crowd-BT relative model, anchored to DeepSeek V4.1 Flash Max at 1600; Artificial Analysis may update reference parameters as models progress and notes that Elo scores can shift while rank ordering is largely preserved.",
+      "role": "EXPLAINS_WHY_LIVE_ELO_CAN_DRIFT_WITHOUT_MODEL_CAPABILITY_CHANGE"
+    }
+  ],
+  "reconciliation": {
+    "same_model_behavior_claim": "NOT_ESTABLISHED_TO_HAVE_CHANGED",
+    "score_scale_or_fit_drift": "OBSERVED_OR_PLAUSIBLE_FROM_BENCHMARK_OWNER_METHODOLOGY",
+    "frozen_target_mutation_authorized": false,
+    "frozen_bar_for_current_protocol": 1846,
+    "live_1867_use": "DIAGNOSTIC_ONLY_UNLESS_AN_EXPLICIT_TERMINAL_COMPARATOR_REBASE_IS_SEPARATELY_AUTHORIZED_VERIFIED_AND_PROPAGATED_TO_ALL_DEPENDENT PROOFS",
+    "reason": "PREDECLARED_ACCEPTANCE_BARS_MUST_NOT_MOVE AFTER BRAIN RESULTS OR BECAUSE A RELATIVE ELO FIT CHANGES; OTHERWISE THE PROOF TARGET IS NOT FROZEN"
+  },
+  "root_effect": {
+    "root1": "UNCHANGED_INACTIVE",
+    "root2": "OPEN__GDPVAL_COMPARATOR_BAR_PROVENANCE_TIGHTENED__EXACT_BRAIN_COMPARABLE_SCORE_ROUTE_REMAINS",
+    "root3": "UNCHANGED"
+  },
+  "hard_rules": [
+    "DO_NOT SILENTLY REBASE 1846 TO 1867",
+    "DO_NOT SILENTLY IGNORE LIVE 1867 AS IF IT NEVER EXISTED",
+    "DO NOT INTERPRET RELATIVE ELO MOVEMENT AS CAPABILITY MOVEMENT WITHOUT MATCHED EVIDENCE",
+    "ANY FUTURE COMPARATOR REBASE MUST BE EXPLICIT PREDECLARED AND CONSISTENTLY PROPAGATED",
+    "NO ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT",
+    "NO FRESH REALITY"
+  ],
+  "next": "INDEPENDENTLY VERIFY FIRST_PARTY_RELEASE_BAR__LIVE_BENCHMARK_OWNER_SCORE__AND_METRIC_DRIFT_SEMANTICS__IF PASS KEEP 1846 AS CURRENT FROZEN TARGET AND STOP BAR_DRIFT SEARCH__WORK ONLY THE COMPARABLE BRAIN SCORE ROUTE",
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
