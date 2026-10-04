@@ -15,6 +15,7 @@ score is used.
 """
 from __future__ import annotations
 
+from itertools import combinations
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import livebench_legacy15_slot_feasibility_v1 as feasibility
@@ -42,30 +43,44 @@ def certify(
     g = sum(flags)
     required = structural.required_next_cardinality_subsets(len(flags), g)
 
-    verified: list[tuple[int, ...]] = []
+    verified_cores: list[tuple[int, ...]] = []
     semantic_evidence: list[dict[str, Any]] = []
-    unresolved: list[tuple[int, ...]] = []
+    semantic_subset_checks = 0
+    inherited_unsat_subset_skips = 0
 
-    for subset in required:
-        subcontracts = [contracts[i] for i in subset]
-        reasons = feasibility.hard_unsat_reasons(subcontracts)
-        if reasons:
-            verified.append(subset)
-            semantic_evidence.append({
-                "subset_indices": list(subset),
-                "instruction_ids": [str(c["instruction_id"]) for c in subcontracts],
-                "hard_unsat_reasons": list(reasons),
-            })
-        else:
-            unresolved.append(subset)
+    # Search by increasing cardinality. Once a smaller verified core C is
+    # known UNSAT, every superset containing C is UNSAT by upward closure and
+    # can be skipped without another semantic-kernel call. The retained cores
+    # therefore form an inclusion-minimal antichain for this search.
+    if g < len(flags):
+        for size in range(1, g + 2):
+            for core in combinations(range(len(flags)), size):
+                core_set = set(core)
+                if any(set(known) <= core_set for known in verified_cores):
+                    inherited_unsat_subset_skips += 1
+                    continue
+                semantic_subset_checks += 1
+                subcontracts = [contracts[i] for i in core]
+                reasons = feasibility.hard_unsat_reasons(subcontracts)
+                if reasons:
+                    verified_cores.append(core)
+                    semantic_evidence.append({
+                        "core_indices": list(core),
+                        "subset_indices": list(core),
+                        "instruction_ids": [str(c["instruction_id"]) for c in subcontracts],
+                        "hard_unsat_reasons": list(reasons),
+                    })
 
     structural_result = structural.verify_pointwise_optimality_structure(
         flags,
-        verified,
+        verified_cores,
     )
+    unresolved = [
+        tuple(int(i) for i in row)
+        for row in structural_result["missing_unsat_subsets"]
+    ]
     complete = (
-        not unresolved
-        and structural_result["status"] == "PASS__POINTWISE_OPTIMALITY_STRUCTURE_COMPLETE"
+        structural_result["status"] == "PASS__POINTWISE_OPTIMALITY_STRUCTURE_COMPLETE"
     )
 
     return {
@@ -84,8 +99,18 @@ def certify(
             "candidate_exact_score_denominator"
         ],
         "required_next_cardinality_subset_count": len(required),
-        "semantically_verified_unsat_subset_count": len(verified),
+        "semantically_verified_unsat_subset_count": len(verified_cores),
+        "semantically_verified_unsat_core_count": len(verified_cores),
+        "minimum_unsat_core_cover_count": structural_result[
+            "minimum_unsat_core_cover_count"
+        ],
+        "minimum_unsat_core_cover": structural_result[
+            "minimum_unsat_core_cover"
+        ],
         "semantic_unsat_evidence": semantic_evidence,
+        "semantic_subset_checks": semantic_subset_checks,
+        "inherited_unsat_subset_skips": inherited_unsat_subset_skips,
+        "semantic_unsat_cores_are_inclusion_minimal_under_search": True,
         "unresolved_subset_indices": [list(x) for x in unresolved],
         "pointwise_optimal": complete,
         "assumption": (
