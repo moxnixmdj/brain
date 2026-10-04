@@ -1,0 +1,35 @@
+name: Verify H100 expression-tree V2
+
+on:
+  push:
+    branches:
+      - breakthrough/mysterymechanism-expression-tree-v2-20261005-sol
+  workflow_dispatch:
+
+concurrency:
+  group: h100-expression-tree-v2
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Set up Python 3.12.10
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12.10"
+      - name: Run V1 regression suite
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python canonical/tests/test_h100_zero_learned_mechanism_synthesizer_v1.py
+      - name: Run V2 falsification suite
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python canonical/tests/test_h100_zero_learned_mechanism_synthesizer_v2.py
+      - name: Compile V2
+        run: python -m py_compile canonical/runtime/h100_zero_learned_mechanism_synthesizer_v2.py
