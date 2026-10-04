@@ -3,7 +3,7 @@
   "date": "2026-10-04",
   "status": "CANDIDATE__ZERO_REALITY_TYPED_SET_COVER_PLANNER__ZERO_CREDIT",
   "objective": "MINIMIZE_ZERO_REALITY_CERTIFICATE_ACTIONS_WITHOUT_ILLEGAL_CROSS_METRIC_PROOF_TRANSPORT",
-  "source_main": "dda8f4cf8006e9b52157969931b7e0886f9c8a49",
+  "source_main": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
   "runtime": "canonical/runtime/typed_minimum_certificate_basis_v1.py",
   "tests": "canonical/tests/test_typed_minimum_certificate_basis_v1.py",
   "rules": [
@@ -45,5 +45,10 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "existing_isolation_mechanism": {
+    "runtime": "canonical/runtime/generic_precommit_isolation_theorem_v1.py",
+    "shadow_lease_policy": "canonical/governance/SHADOW_REALITY_LEASE_POLICY_V1.json",
+    "note": "USE_EXISTING_INDEPENDENTLY_VERIFIED_ISOLATION_AND_SHADOW_LEASE_MECHANISM__DO_NOT_DUPLICATE"
+  }
 }
