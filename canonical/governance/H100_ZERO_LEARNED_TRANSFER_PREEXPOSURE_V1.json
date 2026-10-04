@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_TRANSFER_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_OUTCOMES__PUBLIC_SYNTHETIC_NONTERMINAL__ZERO_CREDIT",
+  "objective": "MEASURE_WHETHER_COMPILED_ZERO_LEARNED_STRUCTURAL_FAMILY_REUSE_TURNS_A_SEPARATELY_FROZEN_SECOND_TASK_FROM_ZERO_PROPOSAL_MASS_TO_FINITE_T95_WITHOUT_ADDING_PERSISTENT_LEARNED_STATE",
+  "parent_frontier": {
+    "path": "canonical/governance/H100_CURRENT_RESEARCH_FRONTIER_V1.json",
+    "git_blob_sha": "c50b3830b7f1693d31bf763e390bc3fbb6b79128",
+    "rank_1_residual": "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER"
+  },
+  "proposal_distribution": {
+    "sampling": "UNIFORM_WITH_REPLACEMENT_OVER_FROZEN_PROPOSAL_CATALOG",
+    "baseline_catalog": [
+      "ZERO_LEARNED_MONOMIAL_V1",
+      "EXPRESSION_TREE_D2_W16",
+      "EXPRESSION_TREE_D4_W32"
+    ],
+    "post_compile_catalog_addition": "ZERO_LEARNED_PARAMETRIC_UNARY_FAMILY_ROUTE",
+    "probability_definition": "EXACT_FRACTION_OF_FROZEN_PROPOSAL_GENERATORS_THAT_YIELD_A_VERIFIED_USEFUL_CANDIDATE_ON_THE_TASK",
+    "t95_formula": "CEIL(LN(0.05)/LN(1-P_EXACT))",
+    "zero_probability_rule": "T95_UNBOUNDED"
+  },
+  "families": [
+    {
+      "id": "SINUSOID_FAMILY",
+      "compile_seed": {
+        "task_id": "SIN_A",
+        "formula": "0.4 + 0.15*x + 1.3*sin(1.73*x + 0.4)"
+      },
+      "transfer_task": {
+        "task_id": "SIN_B",
+        "formula": "-0.7 + 0.25*x + 0.8*sin(2.41*x - 0.6)"
+      },
+      "compiled_family": "linear_trend_sinusoid"
+    },
+    {
+      "id": "EXP_ABS_FAMILY",
+      "compile_seed": {
+        "task_id": "EXP_A",
+        "formula": "1.2*exp(0.31*abs(x))"
+      },
+      "transfer_task": {
+        "task_id": "EXP_B",
+        "formula": "0.7*exp(0.47*abs(x))"
+      },
+      "compiled_family": "exp_abs"
+    },
+    {
+      "id": "THRESHOLD_STEP_FAMILY",
+      "compile_seed": {
+        "task_id": "STEP_A",
+        "formula": "0.3 + 1.4*(1 if x >= -0.6 else -1)"
+      },
+      "transfer_task": {
+        "task_id": "STEP_B",
+        "formula": "-0.2 + 0.9*(1 if x >= 0.8 else -1)"
+      },
+      "compiled_family": "threshold_step"
+    }
+  ],
+  "training_x": [-4.0,-3.5,-3.0,-2.5,-2.0,-1.5,-1.0,-0.6,-0.2,0.0,0.4,0.8,1.0,1.5,2.0,2.5,3.0,3.5,4.0],
+  "holdout_x": [-3.8,-3.2,-2.8,-2.2,-1.8,-1.2,-0.8,-0.4,0.2,0.6,1.2,1.8,2.2,2.8,3.2,3.8],
+  "useful_candidate_threshold_nrmse": 1e-7,
+  "hard_rules": [
+    "ALL_A_AND_B_TASKS_ARE_FROZEN_BEFORE_ANY_TRANSFER_OUTCOME",
+    "TASK_B_MUST_NOT_CHANGE_AFTER_TASK_A_OR_AFTER_COMPILED_ROUTE_SELECTION",
+    "BASELINE_CATALOG_IS_THE_EXACT_PRE_REPAIR_ZERO_LEARNED_CATALOG",
+    "POST_COMPILE_ADDS_ONLY_ONE_VERIFIED_ZERO_LEARNED_FAMILY_ROUTE",
+    "NO_EXTERNAL_LEARNED_CAPABILITY_CALLS",
+    "NO_PERSISTENT_LEARNED_BYTES",
+    "FINITE_SYNTHETIC_TRANSFER_IS_NOT_OPEN_WORLD_PROOF",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_AND_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

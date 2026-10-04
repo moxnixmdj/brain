@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_TRANSFER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__THREE_OF_THREE_PAIRED_FAMILIES__ZERO_TO_POINT25_PROPOSAL_MASS__ZERO_LEARNED_BYTES__ZERO_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_TRANSFER_PREEXPOSURE_V1.json",
+      "git_blob_sha": "0aedbdff8520e5f1d274b490b274c756532ace4e"
+    },
+    "candidate": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_TRANSFER_CANDIDATE_V1.json",
+      "git_blob_sha": "7bc344c8e086aff6d7564e0b77f7d02cfc4a1d83"
+    },
+    "runtime": {
+      "path": "canonical/runtime/h100_zero_learned_transfer_v1.py",
+      "git_blob_sha": "1bf0ebd74e9d413a9301031d33e619b397484e3c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_h100_zero_learned_transfer_v1.py",
+      "git_blob_sha": "6213195d5c3487a9bde844a78291a76e25b0a29b"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "installer_pull_request": 1823,
+    "execution_pull_request": 1824,
+    "verifier_install_merge_commit": "49a4e7e2ff657eeac23f5847d01f9e0ae180a35d",
+    "execution_merge_commit": "93697bbbc38c232471da7b29956e60eefdb92a09",
+    "verified_head_sha": "638fef84548b247a380c257a3ff2db088d05a5c3",
+    "workflow_run_id": 37195271348,
+    "workflow_job_id": 111415726099,
+    "conclusion": "success",
+    "verifier_path": "verify_h100_zero_learned_transfer_v1.py"
+  },
+  "independently_verified": {
+    "copied_subject_tests": "6_OF_6_PASS",
+    "paired_families": "3_OF_3_PASS",
+    "family_results": [
+      {
+        "family": "SINUSOID_FAMILY",
+        "baseline_p": 0,
+        "post_compile_p": 0.25,
+        "post_compile_n95": 11,
+        "reuse_effect": "UNBOUNDED_TO_FINITE_T95"
+      },
+      {
+        "family": "EXP_ABS_FAMILY",
+        "baseline_p": 0,
+        "post_compile_p": 0.25,
+        "post_compile_n95": 11,
+        "reuse_effect": "UNBOUNDED_TO_FINITE_T95"
+      },
+      {
+        "family": "THRESHOLD_STEP_FAMILY",
+        "baseline_p": 0,
+        "post_compile_p": 0.25,
+        "post_compile_n95": 11,
+        "reuse_effect": "UNBOUNDED_TO_FINITE_T95"
+      }
+    ],
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0
+  },
+  "failure_classification": {
+    "prior_brain_workflow_failure": "CI_OR_IN_REPO_EXECUTION_PATH_ANOMALY",
+    "reason": "THE_EXACT_COPIED_SUBJECT_AND_EXACT_TRANSFER_RESULT_PASSED_IN_THE_INDEPENDENT_VERIFIER",
+    "h100_negative_evidence_from_prior_failure": false
+  },
+  "deduction": "ON_THREE_PREEXPOSED_PAIRED_STRUCTURAL_FAMILIES_A_VERIFIED_ZERO_LEARNED_COMPILED_FAMILY_ROUTE_CHANGED_A_SEPARATELY_FROZEN_TRANSFER_TASK_FROM_ZERO_PROPOSAL_MASS_TO_P_0_25_AND_FINITE_N95_11__FINITE_SYNTHETIC_TRANSFER_ONLY",
+  "residual_after_verification": [
+    "DIRECT_UNKNOWN_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION_EVIDENCE",
+    "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+    "OPEN_WORLD_LEXICAL_COVERAGE_COMPLETENESS"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_TRANSFER_PROOF",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_CLAIM_ZERO_LEARNED_BYTES_SUFFICE_FOR_FULL_19_FAMILY_ENVELOPE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

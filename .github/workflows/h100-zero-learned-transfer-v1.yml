@@ -1,0 +1,101 @@
+name: H100 zero-learned paired transfer V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_TRANSFER_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_TRANSFER_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_transfer_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_transfer_v1.py'
+      - '.github/workflows/h100-zero-learned-transfer-v1.yml'
+  push:
+    branches:
+      - research/h100-zero-learned-transfer-current-v1
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_TRANSFER_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_TRANSFER_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_transfer_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_transfer_v1.py'
+      - '.github/workflows/h100-zero-learned-transfer-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run paired transfer tests with capture
+        shell: bash
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_h100_zero_learned_transfer_v1 -v > transfer_tests.log 2>&1
+          echo $? > transfer_tests.exit
+          set -e
+      - name: Run paired transfer census with capture
+        shell: bash
+        run: |
+          set +e
+          python canonical/runtime/h100_zero_learned_transfer_v1.py > h100_zero_learned_transfer_v1.json 2> transfer_runtime.err
+          echo $? > transfer_runtime.exit
+          set -e
+      - name: Build durable diagnostic summary
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          def read(path):
+              p=pathlib.Path(path)
+              return p.read_text() if p.exists() else "<missing>"
+          out={
+            "tests_exit":read("transfer_tests.exit").strip(),
+            "runtime_exit":read("transfer_runtime.exit").strip(),
+            "tests_log":read("transfer_tests.log"),
+            "runtime_stderr":read("transfer_runtime.err"),
+          }
+          p=pathlib.Path("h100_zero_learned_transfer_v1.json")
+          if p.exists() and p.stat().st_size:
+              try:
+                  d=json.loads(p.read_text())
+                  out["result_summary"]={
+                    "status":d.get("status"),
+                    "all_families_transfer_pass":d.get("all_families_transfer_pass"),
+                    "persistent_learned_bytes":d.get("persistent_learned_bytes"),
+                    "families":[{
+                      "family_id":x.get("family_id"),
+                      "transfer_baseline_p":x.get("transfer_task",{}).get("baseline",{}).get("p_exact"),
+                      "transfer_post_compile_p":x.get("transfer_task",{}).get("post_compile",{}).get("p_exact"),
+                      "transfer_post_compile_n95":x.get("transfer_task",{}).get("post_compile",{}).get("n95_proposals"),
+                      "reuse_effect":x.get("reuse_effect"),
+                    } for x in d.get("families",[])],
+                  }
+              except Exception as e:
+                  out["result_parse_error"]=repr(e)
+          pathlib.Path("h100_zero_learned_transfer_diagnostic_v1.json").write_text(json.dumps(out,indent=2,sort_keys=True))
+          print(json.dumps(out.get("result_summary",out),indent=2,sort_keys=True))
+          PY
+      - name: Upload diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: h100-zero-learned-transfer-v1
+          path: |
+            h100_zero_learned_transfer_v1.json
+            h100_zero_learned_transfer_diagnostic_v1.json
+            transfer_tests.log
+            transfer_runtime.err
+            transfer_tests.exit
+            transfer_runtime.exit
+          if-no-files-found: warn
+      - name: Enforce experiment success
+        shell: bash
+        run: |
+          test "$(cat transfer_tests.exit)" = "0"
+          test "$(cat transfer_runtime.exit)" = "0"

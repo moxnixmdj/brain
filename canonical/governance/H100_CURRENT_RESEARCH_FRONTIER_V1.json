@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_H100_RESEARCH_FRONTIER_STATE_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_RESEARCH_FRONTIER__ZERO_LEARNED_NUMERIC_SCHEMA_ROLE_SEMANTIC_LEXICAL_SOURCE_FALLBACK_COMPOSITIONAL_AND_BOUNDED_TOOL_TRACE_GATES_INDEPENDENT_PASS__NEXT_PROPOSAL_TRANSFER_RESIDUAL__ZERO_CREDIT",
+  "status": "ACTIVE_RESEARCH_FRONTIER__ZERO_LEARNED_BOUNDED_TRANSFER_RATCHET_INDEPENDENT_PASS__NEXT_DIRECT_UNKNOWN_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION__ZERO_CREDIT",
   "hypothesis": "FULL_FROZEN_BRAIN_CAPABILITY_ENVELOPE_WITH_LE_100000000_PERSISTENT_LEARNED_BYTES_AND_ZERO_EXTERNAL_LEARNED_CAPABILITY_PROVIDER_DURING_SCORED_EXECUTION",
   "current_evidence": {
     "measurement_layer": {
@@ -146,23 +146,36 @@
       "external_frontier_model_calls": 0,
       "external_learned_capability_calls": 0,
       "deduction": "THE_OBSERVED_BOUNDED_TOOL_TRACE_VARIATION_RESIDUAL_CAN_BE_NORMALIZED_FROM_EXPLICIT_STRUCTURE_DECLARED_SCHEMA_AND_CORRELATION_IDS_WITH_ZERO_PERSISTENT_LEARNED_STATE__OPEN_WORLD_TOOL_SEMANTICS_REMAINS_UNCLAIMED"
+    },
+    "zero_learned_paired_transfer": {
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+      "verification": "canonical/verification/H100_ZERO_LEARNED_TRANSFER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "paired_families": "3_OF_3_PASS",
+      "baseline_proposal_mass": 0,
+      "post_compile_proposal_mass": 0.25,
+      "post_compile_n95": 11,
+      "reuse_effect": "UNBOUNDED_TO_FINITE_T95",
+      "persistent_learned_bytes": 0,
+      "external_frontier_model_calls": 0,
+      "external_learned_capability_calls": 0,
+      "deduction": "FINITE_PREEXPOSED_PAIRED_TRANSFER_SHOWS_COMPILED_ZERO_LEARNED_REUSE_CAN_CREATE_NONZERO_PROPOSAL_MASS_ON_DISTINCT_SAME_FAMILY_TASKS__OPEN_WORLD_TRANSFER_REMAINS_UNCLAIMED"
     }
   },
   "next_structural_residuals_ranked": [
     {
       "rank": 1,
-      "residual": "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
-      "reason": "NUMERIC_SCHEMA_ROLE_SEMANTIC_LEXICAL_COMPOSITIONAL_AND_TOOL_TRACE STRUCTURAL_GATES_HAVE_ZERO_LEARNED_PASSES__THE_LOAD_BEARING_UNKNOWN_IS WHETHER USEFUL_PROPOSAL_PROBABILITY REMAINS NONCOLLAPSING ON NEW STRUCTURAL FAMILIES AND WHETHER COMPILED REUSE LOWERS T95"
+      "residual": "DIRECT_UNKNOWN_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION_EVIDENCE",
+      "reason": "BOUNDED_PAIRED_TRANSFER_RATCHET_NOW_HAS_INDEPENDENT_ZERO_LEARNED_EVIDENCE__THE_HIGHEST_INFORMATION_NEXT_STEP_IS_DIRECT_UNKNOWN_DOMAIN_TRANSFER_WITH_CORRECT_SUCCESS_OR_ABSTENTION_BEHAVIOR"
     },
     {
       "rank": 2,
-      "residual": "DIRECT_UNKNOWN_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION_EVIDENCE",
-      "reason": "REMAINS_REQUIRED_FOR UNKNOWN_DOMAIN ACCEPTANCE AND CANNOT BE INFERRED FROM PUBLIC FINITE STRESS"
+      "residual": "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+      "reason": "FINITE_PAIRED_TRANSFER_P_0_25_AND_N95_11_DO_NOT_ESTABLISH_NONCOLLAPSING_PROPOSAL_MASS_ACROSS ARBITRARY_NOVEL STRUCTURAL FAMILIES"
     },
     {
       "rank": 3,
       "residual": "OPEN_WORLD_LEXICAL_COVERAGE_COMPLETENESS",
-      "reason": "OBSERVED_OEWN MISSES HAVE VERIFIED EVENT_DRIVEN FALLBACKS__FUTURE MISSES REMAIN EVENT_DRIVEN AND FAIL_CLOSED"
+      "reason": "OBSERVED_OEWN_MISSES_HAVE_VERIFIED_EVENT_DRIVEN_FALLBACKS__FUTURE_MISSES_REMAIN_EVENT_DRIVEN_AND_FAIL_CLOSED"
     }
   ],
   "decision_policy": [
@@ -212,7 +225,11 @@
     "bounded_compositional_language_12_of_12_plus_5_fresh_zero_learned": true,
     "open_world_tool_trace_semantics_not_claimed": false,
     "bounded_tool_trace_10_of_10_plus_5_fresh_zero_learned": true,
-    "open_world_proposal_probability_and_transfer_not_claimed": true
+    "open_world_proposal_probability_and_transfer_not_claimed": true,
+    "bounded_paired_transfer_3_of_3_zero_learned": true,
+    "bounded_paired_transfer_baseline_p": 0,
+    "bounded_paired_transfer_post_compile_p": 0.25,
+    "bounded_paired_transfer_n95": 11
   },
   "accounting": {
     "incremental_spend_usd": 0,
