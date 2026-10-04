@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
+  "action_id": "UNKNOWN-DOMAIN-V6-EMERGENCY-TRUTH-REVOCATION-20261005-V1",
+  "status": "CRITICAL_PATH__FAIL_CLOSED_TRUTH_REPAIR__ZERO_REALITY__ZERO_NEW_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "003a23f724b21292758bae7eedb965f6b27d59e2",
+  "last_live_head_checked": "003a23f724b21292758bae7eedb965f6b27d59e2",
+  "concurrent_change_classification": "REBASED_ONTO_LIVE_MAIN_AFTER_REVIEWING_LATEST_LIVEBENCH_AND_UNKNOWN_DOMAIN_SEMANTIC_AUDIT_WORK__REGISTRY_UNIVERSE_TEST_FIX_PRESERVED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "UNKNOWN_DOMAIN_ADAPTATION",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "action_kind": "IMMEDIATE_REVOCATION_OF_FALSIFIED_ATOMIC_PROMOTION_AND_CONTENT_ADDRESSED_TRUTH_PIPELINE_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::UNKNOWN_DOMAIN_ADAPTATION::V6_SUBCLASS_TOTALITY_FALSIFIER",
+  "expected_parent_frontier_change": "13_OF_38_FALSE_POSITIVE_REMOVED__12_OF_38_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_RETURNED_TO_ROOT3_ONLY_PENDING_REPAIRED_INDEPENDENT_VERIFICATION",
+  "theory_invariants": {
+    "correctness_first": true,
+    "adversarial_counterevidence_revokes_prior_promotion": true,
+    "incremental_spend_usd": 0,
+    "fresh_reality_consumed": false,
+    "no_repromotion_in_this_action": true
+  },
+  "recursive_obs": {
+    "obs_goal": "REMOVE_FALSE_TERMINAL_PROGRESS_BEFORE_ANY_MORE_PROPAGATION",
+    "obs_blocker": "PRE_REPAIR_V5_INSTANCE_METHOD_DISPATCH_MAKES_LITERAL_ISINSTANCE_ACCEPTED_STRING_DOMAIN_PARTIAL",
+    "obs_solution": "REVOKE_CREDIT__RESTORE_LAST_KNOWN_GOOD_ROOT_AUTHORITY_STATE__REBIND_TO_NEW_REVOCATION_AWARE_HASHES__GUARD_PIPELINE",
+    "obs_verification": "REPOSITORY_PR_CHECKS_MUST_VALIDATE_HASH_AND_COUNT_COHERENCE",
+    "post_base_review": "LATEST_SEMANTIC_AUDIT_EXPLICITLY_ALLOWS_REVOCATION_IF_A_SEPARATE_FALSIFIER_ATTACKS_THE_V6_UNIVERSAL_THEOREM__THIS_ACTION_SUPPLIES_EXACTLY_THAT"
+  },
+  "behavioral_contract": {
+    "behavior_id": "ACCEPTANCE_ROOT_AUTHORITY_FAIL_CLOSED_REVOCATION",
+    "required_output_or_action": "Unknown-Domain V6 atom is unresolved and ROOT3_ONLY; proved/unresolved counts are 12/26 consistently through acceptance ledger, root state and terminal authority; all content hashes bind exact current files.",
+    "success_condition": "All coherence guards pass and no current authority grants V6 atomic credit.",
+    "failure_condition": "Any 13/25 current authority survives, any hash binding is stale, or Unknown-Domain remains PROVED.",
+    "terminal_consequence": "Prevents false progress only; zero positive credit.",
+    "scope": "CANONICAL_TRUTH_PIPELINE_ONLY"
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "One admitted counterexample is sufficient to falsify a universal totality claim.",
+    "hole_type": "FALSE_UNIVERSAL_PROMOTION",
+    "expected_certificate_or_receipt": "UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1 plus passing coherence tests.",
+    "contamination_risk": "NONE",
+    "reversibility": "FULL"
+  },
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "reason": "COUNTEREXAMPLE_IS_DEDUCTIVE_AND_LOCALLY_REPRODUCIBLE"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_predicate_credit_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
