@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_UNQUOTED_EXACT_ATOM_LIVEBENCH_V2_PUBLIC_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CANONICAL_PUBLIC_SYNTHETIC_FAST_PATH__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "subject": {
+    "compiler_path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+    "compiler_git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+    "adapter_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v2.py",
+    "adapter_git_blob_sha": "dbc895a0e458e411aafd3c96e0ddc2c01e657375"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1822,
+    "merge_commit": "6474e13f2f04874210e25ccefd8b8968d25dc2b5",
+    "workflow_run_id": 37195102563,
+    "workflow_job_id": 111415223813,
+    "conclusion": "success"
+  },
+  "verified": {
+    "generic_unquoted_atom_cases": 4,
+    "quoted_regression_case": 1,
+    "fail_closed_cases": 3,
+    "canonical_public_synthetic_instruction": "Reply with exactly SYNTHETIC_OK.",
+    "canonical_public_synthetic_fast_path_pass": true,
+    "adapter_fast_path_pass": true,
+    "semantic_fallback_preserved": true,
+    "external_tools_forbidden": true,
+    "model_dependency_count": 0,
+    "network_used": false,
+    "terminal_cases_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE",
+    "NO_CASE_73_PLUS",
+    "NO_GENERAL_SEMANTIC_INSTRUCTION_FOLLOWING_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_RETROACTIVE_MUTATION_OF_ANY_FROZEN_REPLAY_EPOCH"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
