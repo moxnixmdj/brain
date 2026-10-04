@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V8_STRUCTURAL_REFINEMENT_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SANITIZED_STRUCTURAL_REFINEMENT__ALREADY_EXPOSED_72_ONLY__ZERO_CREDIT__INDEPENDENT_VERIFICATION_BOUND",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Refine V7 aggregate blocker classes into precommitted static repair categories without exposing prompt, response, case id, raw exception text, or dynamic composition detail.",
+  "prior_v7_receipt": {
+    "path": "canonical/verification/LIVEBENCH_V7_SANITIZED_CLASSIFICATION_EXECUTION_RECEIPT_20261004_V1.json",
+    "git_blob_sha": "dc7b06408e8619d3c9f259fb4c6bd31951122b4a"
+  },
+  "exact_subjects": {
+    "classifier": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "path": "livebench_v8_structural_classifier.py",
+      "git_blob_sha": "0c48d463989f8351e3b0a502a174b59ff391ffe8"
+    },
+    "diagnostic": {
+      "path": "diagnose_livebench_replay72_v8_structural.py",
+      "git_blob_sha": "bc5bfd7d791b1343cbcf4d09d8f41c6f73ed9f68"
+    },
+    "verifier": {
+      "path": "verify_livebench_v8_structural_refinement.py",
+      "git_blob_sha": "d5c9063c98a80efcd40dcb79f028fa2e12ba9586"
+    },
+    "launcher": {
+      "path": "launch_livebench_v8_structural_atomic.py",
+      "git_blob_sha": "08286046cdb87bcf206d13d520536a4564f6b47f"
+    },
+    "base_executor": {
+      "path": "execute_livebench_if_replay72_v4_candidate.py",
+      "git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e"
+    }
+  },
+  "output_contract": {
+    "aggregate_histogram_only": true,
+    "allowed_kinds": [
+      "COMPOSITION_PRODUCER",
+      "COMPOSITION_PRODUCER_EXCEPTION",
+      "COMPOSITION_VERIFIER",
+      "COMPOSITION_BLOCK",
+      "ARCHITECTURAL_GAP",
+      "POLICY_BLOCK",
+      "STATIC_BLOCKER",
+      "STATIC_ADAPTER_BLOCKER",
+      "VALID_RESPONSE",
+      "UNCLASSIFIED_RUNTIME"
+    ],
+    "dynamic_case_detail_forbidden": true,
+    "case_ids_forbidden": true,
+    "prompt_text_forbidden": true,
+    "response_text_forbidden": true,
+    "raw_exception_text_forbidden": true
+  },
+  "replay_scope": {
+    "already_exposed_prefix_only": true,
+    "replay_prefix_limit": 72,
+    "new_case_exposure": false,
+    "case_73_or_later": false
+  },
+  "epoch_digest_sha256": "78f7e799c3e1edf70516c02badebde0adbad7c5846aec8fbff53f8db2152f192",
+  "claim_ref": "refs/heads/livebench-v8-claims/78f7e799c3e1edf70516c02badebde0adbad7c5846aec8fbff53f8db2152f192",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_authorized": 0,
+    "acceptance_credit_delta": 0
+  }
+}
