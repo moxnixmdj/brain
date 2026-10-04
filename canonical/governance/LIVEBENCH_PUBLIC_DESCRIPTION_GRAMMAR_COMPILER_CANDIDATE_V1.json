@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_DESCRIPTION_GRAMMAR_COMPILER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SOURCE_ONLY_SYMBOLIC_REVERSE_GRAMMAR_COMPILER__80_OF_83_VISIBLE_PARAMETER_FRONTIER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Replace per-checker hand-written prompt regexes with one fail-closed static compiler over the exact pinned public LiveBench/IFBench checker source and active registries.",
+  "public_source_bindings": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "modern_instructions": {
+      "path": "livebench/if_runner/ifbench/instructions.py",
+      "git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+    },
+    "modern_registry": {
+      "path": "livebench/if_runner/ifbench/instructions_registry.py",
+      "git_blob_sha": "adfed4832877566e62970257b50c6fa32c302fb2"
+    },
+    "legacy_instructions": {
+      "path": "livebench/if_runner/instruction_following_eval/instructions.py",
+      "git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2"
+    },
+    "legacy_registry": {
+      "path": "livebench/if_runner/instruction_following_eval/instructions_registry.py",
+      "git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+    }
+  },
+  "implementation": {
+    "path": "canonical/runtime/ifbench_public_description_grammar_compiler_v1.py",
+    "test_path": "canonical/tests/test_ifbench_public_description_grammar_compiler_v1.py",
+    "execution_model": "STATIC_AST_ONLY__UPSTREAM_SOURCE_IS_PARSED_NOT_EXECUTED",
+    "capabilities": [
+      "FILTER_ACTIVE_CHECKERS_FROM_EXACT_PUBLIC_REGISTRY",
+      "RECOVER_BUILD_DESCRIPTION_TEMPLATES_WITHOUT_RUNNING_UPSTREAM_CODE",
+      "SYMBOLICALLY_MAP_FORMAT_PLACEHOLDER_EXPRESSIONS_TO_GET_INSTRUCTION_ARGS_EFFECTIVE_PARAMETER_KEYS",
+      "COMPILE_VISIBLE_DESCRIPTION_TEMPLATES_TO_FAIL_CLOSED_MATCHERS",
+      "REPORT_HIDDEN_PARAMETERS_EXPLICITLY_INSTEAD_OF_GUESSING"
+    ]
+  },
+  "source_only_audit_result": {
+    "active_checker_types": 83,
+    "rendered_or_static_parameter_types": 80,
+    "checker_specific_hidden_parameter_residuals": [
+      {
+        "class": "NGramOverlapChecker",
+        "instruction_id": "ratio:overlap",
+        "hidden_parameter": "reference_text",
+        "current_separate_repair": "WHITESPACE_INVARIANT_PROMPT_ONLY_CONSTRUCTION_FRONTIER"
+      },
+      {
+        "class": "RepeatSpanChecker",
+        "instruction_id": "repeat:repeat_span",
+        "hidden_parameter": "prompt_to_repeat",
+        "current_separate_repair": "SCORE_RELEVANT_WORD_SLICE_DERIVATION_4_OF_4_PUBLIC_ROWS"
+      },
+      {
+        "class": "RepeatPromptThenAnswer",
+        "instruction_id": "combination:repeat_prompt",
+        "hidden_parameter": "prompt_to_repeat",
+        "current_separate_repair": "LEGACY_IFEVAL_PUBLIC_AUDIT_REQUIRED"
+      }
+    ],
+    "claim_boundary": "80_OF_83_IS_A_SOURCE_DERIVABILITY_FRONTIER_NOT_A_LIVEBENCH_PASS_RATE"
+  },
+  "breakthrough_effect": [
+    "COLLAPSES_80_CHECKER_PROMPT_PARAMETER_PARSERS_INTO_ONE_CONTENT_ADDRESSED_COMPILER",
+    "REDUCES_PUBLIC_GRAMMAR_SPECIAL_CASE_FRONTIER_FROM_83_TYPES_TO_THREE_TRUE_HIDDEN_PARAMETER_SEMANTICS",
+    "PROVIDES_A_MECHANICAL_INPUT_FOR_GENERIC_PROMPT_SEGMENTATION_AND_CONSTRUCTOR_COMPOSITION",
+    "DOES_NOT_WEAKEN_POST_PROMPT_ACQUISITION_POLICY_OR_USE_UNEXPOSED_TERMINAL_CASES"
+  ],
+  "next_minimum_action": "INDEPENDENTLY_RUN_THIS_COMPILER_ON_THE_FOUR_PINNED_PUBLIC_SOURCE_BLOBS_AND_BIND_EXACT_83_TOTAL_80_VISIBLE_COMPLETE_3_HIDDEN_RESULT__THEN_USE_THE_COMPILED_VISIBLE_GRAMMAR_TO_REPLACE_NARROW_HAND_WRITTEN_SEGMENTERS_AND_GENERATE_CONSTRUCTOR_OBLIGATIONS",
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_THAT_VISIBLE_PARAMETER_RECOVERY_ALONE_SYNTHESIZES_A_PASSING_RESPONSE",
+    "NO_CLAIM_THAT_THE_THREE_HIDDEN_PARAMETER_CHECKERS_ARE_SOLVED_BY_THIS_COMPILER",
+    "NO_TERMINAL_PROMPT_CONTENT_CASE_IDS_RESPONSES_OR_HIDDEN_KWARGS_USED",
+    "INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_LOAD_BEARING_PROMOTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
