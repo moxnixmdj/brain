@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_TERMINAL_SCORER_SCOPE_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENTLY_VERIFIED_TERMINAL_SCHEDULING_SCOPE__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "verified_basis": {
+    "receipt": "canonical/verification/LIVEBENCH_ACTIVE_SCORER_FAMILY_INDEPENDENT_VERIFICATION_20261004_V1.json",
+    "workflow_run_id": 37199024172,
+    "workflow_job_id": 111426694339,
+    "result": "200_LEGACY_IFEVAL__0_MODERN_IFBENCH"
+  },
+  "activated_scheduler_truth": {
+    "active_scorer_family": "LEGACY_IFEVAL_ONLY",
+    "active_population_count": 200,
+    "load_bearing_checker_registry_count": 25,
+    "modern_ifbench_checker_count_on_exact_frozen_critical_path": 0,
+    "prior_combined_public_checker_surface": 83,
+    "checker_types_deleted_from_exact_frozen_critical_path": 58,
+    "fraction_deleted": 0.6987951807228916
+  },
+  "mission_lock": [
+    "ROOT1_LIVEBENCH_WORK_MUST_TARGET_THE_PINNED_LEGACY_IFEVAL_ROUTE_UNLESS_FROZEN_DATASET_OR_DISPATCH_IDENTITY_CHANGES",
+    "DO_NOT_SPEND_CRITICAL_PATH_WORK_ON_MODERN_IFBENCH_ONLY_CHECKERS",
+    "MAXIMIZE_PROVED_LEGACY_SCORE_MASS_AND_VALID_CANDIDATE_ROUTE_FIRST",
+    "KEEP_SCORE_ONLY_WITNESS_PROOFS_SEPARATE_FROM_SEMANTIC_CAPABILITY_OWNERSHIP"
+  ],
+  "next_load_bearing_obligations": [
+    "PROVE_VISIBLE_PARAMETER_RECOVERY_OR SAFE WITNESS ROUTES FOR THE LEGACY_25_WITHOUT NEW TERMINAL CONTENT",
+    "PROVE_MULTI_CHECKER_COMPOSITION UNDER THE EXACT LEGACY STRICT EVALUATOR",
+    "FREEZE A SUCCESSOR BEFORE ANY FRESH TERMINAL EVIDENCE",
+    "ONLY THEN USE AUTHORIZED FRESH REALITY TO TEST THE PRECOMMITTED SUCCESSOR"
+  ],
+  "supersession_effect": {
+    "modern_ratio_overlap_terminal_role": "DEPRIORITIZED_NONTERMINAL_REUSE_ONLY",
+    "modern_repeat_span_terminal_role": "DEPRIORITIZED_NONTERMINAL_REUSE_ONLY",
+    "modern_58_checker_coverage_terminal_role": "DELETED"
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
