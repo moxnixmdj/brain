@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_SOL_V1",
+  "date": "2026-10-05",
+  "status": "PASS__INDEPENDENT_CONTENT_BOUND_TOTALITY_EXACTNESS_AND_6912_CASE_FALSIFICATION__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_install_commit": "a91cf68b5c8ada93e0ba10cfce0f5a5d7b2643e9",
+    "verifier_script_git_blob_sha": "64c94652dbea80ea23a5c3cbfa007110c0464e45",
+    "transport_repair_commit": "9284ec7f2dc62f3d544257ea588f9c2d452b41d3",
+    "verified_runner_head": "9284ec7f2dc62f3d544257ea588f9c2d452b41d3",
+    "workflow_run_id": 37242595733,
+    "workflow_job_id": 111554104792,
+    "conclusion": "success",
+    "artifact_id": 11317023978,
+    "artifact_zip_sha256": "00ad73f70706cbbca69c593fe92cdcf3e0ec5688dd37ec7034a6025151c141ef",
+    "immutable_event_sha_binding_pass": true,
+    "transport_repairs_changed_verifier_script_bytes": false
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/unknown_domain_direct_candidate_v1.py": "a2a77269a8175ce315b466035049da0f761b8734",
+    "canonical/runtime/unknown_domain_direct_candidate_v2.py": "4470716f95a559a700e461262df909ae19a41651",
+    "canonical/runtime/unknown_domain_direct_candidate_v3.py": "8df7f13455b710623806a8219174b397a2c3c442",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py": "8b855851b8a0fec3a0811c5033cc4ea6d2436954",
+    "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "canonical/runtime/unknown_domain_direct_v4_universal_proof_v1.py": "72bbed393ac1bcaccb4cf33cd37835662c421f6c",
+    "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V4_TOTAL_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json": "46d9571fc3c66f86f24a62870e3b65da662e1c5b"
+  },
+  "canonical_main_recheck": {
+    "all_exact_subject_blobs_present": true,
+    "all_exact_subject_blobs_match": true
+  },
+  "verified": {
+    "structural_identifier_totality_pass": true,
+    "identifier_totality_depends_on_hash_collision_resistance": false,
+    "fisher_yates_exhaustive_choice_paths_n_le_7": 5913,
+    "exact_add2_ieee754_gold_equality_repair_pass": true,
+    "v2_counterexample_reproduced": {
+      "beacon": "INDEPENDENT-V4-FLOAT-0002-BEACON",
+      "index": 10,
+      "v2_terminal": -0.10691751936785576,
+      "gold_terminal": -0.10691751936785587,
+      "v3_probe_count": 1
+    },
+    "nonproduction_falsification_populations": 256,
+    "nonproduction_falsification_cases": 6912,
+    "nonproduction_falsification_all_pass": true,
+    "universal_scope_proved_for_exact_totalized_evaluator": true,
+    "six_transfer_families_bound": true,
+    "three_abstention_classes_bound": true,
+    "uses_empirical_generalization_for_universal_claim": false,
+    "production_or_terminal_cases_generated": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION",
+    "NO_RETROACTIVE_RESTORATION_OF_FALSE_V2_UNIVERSAL_PROOF",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_VERIFICATION_RECEIPT",
+    "SEPARATE_FAIL_CLOSED_ROOT3_AND_ACCEPTANCE_REDUCTION_REQUIRED"
+  ]
+}
