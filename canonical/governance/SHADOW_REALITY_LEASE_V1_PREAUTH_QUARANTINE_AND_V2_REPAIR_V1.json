@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_REALITY_LEASE_V1_PREAUTH_QUARANTINE_AND_V2_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_TRUTH_REPAIR__V1_PRE_EXPOSURE_AUTHORIZATION_QUARANTINED__V2_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "compiled_from_main": "25ca2b3a5b3f615c2138dabfea773e34a94b836b",
+  "objective": "Remove the circular dependency in which V1 shadow readiness consumes an isolation receipt containing case-reveal and execution-start event sequence fields before shadow collection is authorized.",
+  "v1_subjects": {
+    "generic_isolation_runtime": {
+      "path": "canonical/runtime/generic_precommit_isolation_theorem_v1.py",
+      "git_blob_sha": "58f2ae9c3f0ef0ac55da2e58d0ed81ae88560296"
+    },
+    "shadow_lease_runtime": {
+      "path": "canonical/runtime/shadow_reality_lease_v1.py",
+      "git_blob_sha": "db7c77d21ce410c29754e029910d774c890e9780"
+    }
+  },
+  "defect": {
+    "class": "PREAUTHORIZATION_TEMPORAL_CIRCULARITY",
+    "facts": [
+      "V1_SHADOW_READY_CALLS_VERIFY_GENERIC_ISOLATION_BEFORE_CASE_REVEAL_AUTHORITY",
+      "VERIFY_GENERIC_ISOLATION_REQUIRES_CASE_REVEAL_EVENT_SEQUENCE_AND_EXECUTION_START_EVENT_SEQUENCE",
+      "V1_TEST_FIXTURES_SUPPLY_THOSE_FUTURE_EVENT_SEQUENCE_INTEGERS_TO_OBTAIN_READY_TRUE",
+      "THE_INTEGERS_THEMSELVES_DO_NOT_PROVE_THE_FUTURE_EVENTS_OCCURRED_OR_THAT_A_WORKFLOW_WILL_ENFORCE_THE_DECLARED_ORDER"
+    ],
+    "consequence": "V1_MUST_NOT_BE_USED_TO_AUTHORIZE_PRE_EXPOSURE_SHADOW_COLLECTION",
+    "scope_limit": "THE_GENERIC_V1_OBSERVED_RECEIPT_CHECKER_REMAINS_USABLE_POST_EXECUTION_WHEN_THE_EVENT_FIELDS_ARE_ACTUAL_OBSERVED_RECEIPT_DATA"
+  },
+  "repair": {
+    "pre_exposure_plan_runtime": {
+      "path": "canonical/runtime/pre_exposure_isolation_plan_v1.py",
+      "git_blob_sha": "f23d632d2ad315b0c800587cd4bb09376a41f085"
+    },
+    "shadow_lease_v2_runtime": {
+      "path": "canonical/runtime/shadow_reality_lease_v2.py",
+      "git_blob_sha": "8a13e29ddc160ea4af62aed434fb8a1a65afb998"
+    },
+    "tests": {
+      "path": "canonical/tests/test_shadow_reality_lease_v2.py",
+      "git_blob_sha": "9cbcc5e6b0ee108e01bc13f762b966e79498b541"
+    },
+    "protocol": [
+      "PHASE_1_PRE_EXPOSURE_PLAN_RECOMPUTES_EXACT_COMPONENT_AND_WHOLE_PLAN_DIGESTS_AND_REQUIRES_CASE_REVEAL_EXECUTION_AND_OUTPUT_NOT_YET_OCCURRED",
+      "PHASE_2_PRECLAIM_READINESS_REQUIRES_THIN_ADAPTER_AND_SEPARATELY_VERIFIED_V2_ACTIVATION_BUT_GRANTS_ZERO_CASE_REVEAL_AUTHORITY",
+      "PHASE_3_DURABLE_ONE_USE_CLAIM_AFTER_POINT_OF_USE_PREFLIGHT_IS_THE_FIRST_STAGE_ALLOWED_TO_GRANT_SHADOW_CASE_REVEAL_AUTHORITY",
+      "PHASE_4_POST_EXECUTION_USES_GENERIC_V1_AS_AN_OBSERVED_CAUSAL_RECEIPT_AND_KEEPS_RESULT_WRITE_ONLY_UNTIL_FIXED_POINT"
+    ]
+  },
+  "livebench_effect": {
+    "target": "LIVEBENCH_IF_GE_65_7",
+    "existing_precommit_preserved": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V1.json",
+    "terminal_cases_consumed": 0,
+    "shadow_collection_authority": false,
+    "remaining_before_any_case_reveal": [
+      "INDEPENDENTLY_VERIFY_V2_TRUTH_REPAIR",
+      "BIND_LIVEBENCH_EXACT_PRE_EXPOSURE_PLAN",
+      "VERIFY_POINT_OF_USE_PREFLIGHT_MECHANISM",
+      "VERIFY_DURABLE_UNIQUE_CLAIM_BACKEND",
+      "OBTAIN_SEPARATE_V2_SHADOW_COLLECTION_ACTIVATION",
+      "ATOMically_CLAIM_ONE_USE_LEASE_BEFORE_CASE_REVEAL"
+    ]
+  },
+  "hard_rules": [
+    "NO_V1_PRE_EXPOSURE_SHADOW_ACTIVATION",
+    "NO_FUTURE_EVENT_ASSERTION_MAY_COUNT_AS_OBSERVED_EVIDENCE",
+    "NO_CASE_REVEAL_AUTHORITY_FROM_PRE_EXPOSURE_PLAN_OR_PRECLAIM_READINESS",
+    "NO_CASE_REVEAL_BEFORE_POINT_OF_USE_PREFLIGHT_AND_DURABLE_UNIQUE_CLAIM",
+    "NO_SHADOW_RESULT_VISIBILITY_BEFORE_ZERO_REALITY_FIXED_POINT",
+    "NO_ACCEPTANCE_PROMOTION_OR_GLOBAL_FRESH_REALITY_AUTHORITY_FROM_V2",
+    "V1_GENERIC_ISOLATION_MAY_ONLY_SERVE_AS_POST_EXECUTION_OBSERVED_RECEIPT_FOR_V2"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "shadow_collection_authority": false,
+  "independent_verification_required": true
+}
