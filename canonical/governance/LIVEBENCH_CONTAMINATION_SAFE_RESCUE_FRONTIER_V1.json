@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_CONTAMINATION_SAFE_RESCUE_FRONTIER_V1",
+  "date": "2026-10-05",
+  "status": "CURRENT_EVIDENCE_BINDING__TWO_INDEPENDENT_CONTAMINATION_SAFE_PUBLIC_RUNNER_PASSES__ZERO_ACCEPTANCE_CREDIT__GENERAL_MULTI_CONTRACT_CLOSURE_OPEN",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Replace the quarantined target-row-dependent LiveBench replay with case-independent constructive proof over frozen checker semantics, without reading terminal case content, terminal instruction IDs, or terminal kwargs at generation time.",
+  "authority": {
+    "contamination_revocation": {
+      "path": "canonical/governance/LIVEBENCH_EXACT200_CONTAMINATION_CREDIT_REVOCATION_20261004_V1.json",
+      "git_blob_sha": "5b0b73d52b49f036f1e45884110f2a05a9b25364"
+    },
+    "acceptance_binding": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "c16ba4071525afb12e3d025d056c8bb2bd182019"
+    }
+  },
+  "independent_evidence": [
+    {
+      "id": "LEGACY25_PROMPT_ONLY_SINGLE_CONTRACT_CONSTRUCTIVE_PROOF",
+      "runner_repository": "moxnixmdj/verification-capsule-runner",
+      "merge_commit": "6915be0f820e8119ebce3cc3327d87bb26d1ff93",
+      "verified_head_sha": "9d16c74bc64a3b5891cc9a32ae2809cf298de0ea",
+      "workflow_run_id": 37239764049,
+      "workflow_job_id": 111545938741,
+      "conclusion": "success",
+      "artifact_id": 11316499965,
+      "artifact_digest": "sha256:57fdfeb4b0c2692aa86e42127e994952512d2710d8dbd6f70a9239ef1753cc61",
+      "exact_subject_blobs": {
+        "prompt_contract_compiler": "20421dfa016584b202b194afd3f82c9bd46a1f23",
+        "single_contract_witness": "e927c05071bb4342b41fb9d5be07cc32ea82e820",
+        "workflow": "794629323f99de27aa3b27439a600c6d3ddeb784"
+      },
+      "verified": [
+        "25_OF_25_ACTIVE_LEGACY_CHECKER_FAMILIES_RECOGNIZED_FROM_SOURCE_GENERATED_VISIBLE_DESCRIPTIONS",
+        "25_OF_25_SINGLE_CONTRACT_CONSTRUCTIVE_WITNESSES_PASS_PINNED_CHECKERS",
+        "TERMINAL_CASE_CONTENT_NOT_READ",
+        "TERMINAL_INSTRUCTION_IDS_NOT_READ",
+        "TERMINAL_KWARGS_NOT_READ"
+      ],
+      "scope_limit": "SINGLE_CONTRACT_ONLY__MULTI_CONTRACT_COMPOSITION_NOT_PROVED"
+    },
+    {
+      "id": "RATIO_OVERLAP_FULL_ROW_PROMPT_ONLY_COMPOSITION_PROOF",
+      "runner_repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1928,
+      "verified_head_sha": "cd04dc55ed2f45483a327f1e9abe11b32845f63b",
+      "verifier_git_blob_sha": "e77b1a861b55caef317b480707be1cbfc659b96a",
+      "verifier_logic_base_blob_sha": "517b0ddf0a38656b38f60bc3f3ab81a7087ca03c",
+      "workflow_git_blob_sha": "a208570dbc2ac6e36e33dae601455f27060203e8",
+      "workflow_run_id": 37199865952,
+      "workflow_job_id": 111429159200,
+      "conclusion": "success",
+      "artifact_id": 11306082121,
+      "artifact_digest": "sha256:26f952172fe6bc05ffb795b4066f3929297e43787ef2adaef5df3d0cdb78b086",
+      "verified": [
+        "12_OF_12_PINNED_PUBLIC_RATIO_OVERLAP_ROWS_HAVE_PROMPT_ONLY_CONSTRUCTIVE_WITNESSES",
+        "12_OF_12_EXACT_FROZEN_RATIO_CHECKERS_PASS",
+        "4_OF_4_RATIO_PLUS_SENTENCE_KEYWORD_FULL_ROWS_PASS",
+        "3_OF_3_RATIO_PLUS_CONSONANT_CLUSTER_FULL_ROWS_PASS",
+        "HIDDEN_KWARGS_AND_REFERENCE_USED_ONLY_AFTER_GENERATION_FOR_INDEPENDENT_SCORING",
+        "TERMINAL_CASE_CONTENT_NOT_READ"
+      ],
+      "scope_limit": "PINNED_PUBLIC_RATIO_OVERLAP_FAMILY_AND_ITS_OBSERVED_COMPANION_CLASSES_ONLY"
+    }
+  ],
+  "clean_rescue_consequence": {
+    "contamination_safe_progress": true,
+    "dirty_exact200_score_reused_for_credit": false,
+    "individual_legacy_checker_semantics_residual": "CLOSED_FOR_ALL_25_ACTIVE_LEGACY_FAMILIES_AT_SINGLE_CONTRACT_LEVEL",
+    "ratio_overlap_observed_public_composition_residual": "CLOSED_FOR_ALL_12_PINNED_PUBLIC_RATIO_ROWS",
+    "remaining_load_bearing_residual": "GENERAL_CONFLICT_COMPATIBLE_MULTI_CONTRACT_COMPOSITION_FOR_THE_FROZEN_ACTIVE_LEGACY_GENERATOR_SURFACE__THEN_INDEPENDENT_STRONGER_PROOF_TO_ACCEPTANCE_THRESHOLD",
+    "strongest_known_case_independent_reduction": "928_CONFLICT_COMPATIBLE_ACTIVE15_ID_SETS_PARTITION_TO_7_STRUCTURAL_ARCHETYPES__ARchetype_CONSTRUCTIVE_CLOSURE_NOT_YET_BOUND_HERE"
+  },
+  "next_action": {
+    "action": "PROVE_CONSTRUCTIVE_COMPOSITION_FOR_THE_SEVEN_ACTIVE15_ARCHETYPES_OVER_THE_ENTIRE_928_CONFLICT_COMPATIBLE_SET_SUPERSET__THEN_REDUCE_TO_A_SCORE_LOWER_BOUND_WITHOUT_TERMINAL_ROW_DEPENDENCE",
+    "forbidden": [
+      "DO_NOT_REUSE_QUARANTINED_EXACT200_SCORE_FOR_ACCEPTANCE",
+      "DO_NOT_READ_TERMINAL_ROWS_TO_CHOOSE_OR_TUNE_CONSTRUCTIONS",
+      "DO_NOT_PROMOTE_FROM_SINGLE_CONTRACT_OR_RATIO_ONLY_PROOFS"
+    ]
+  },
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority_flags": {
+    "execution_authority": false,
+    "promotion_authority": false,
+    "global_fresh_reality": false
+  }
+}
