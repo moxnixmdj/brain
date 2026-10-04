@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_WITNESS_COMPILER_V1_CANDIDATE",
   "date": "2026-10-04",
-  "status": "CANDIDATE__21_PUBLIC_CHECKER_CLASSES_CONSTRUCTIVE__SYNTHETIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__83_CHECKER_TOTAL_PUBLIC_DESCRIPTION_DETECTOR__21_EXACT_CONSTRUCTIVE_CLASSES__INDEPENDENT_VERIFICATION_QUEUED__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "frozen_public_source": {
     "repository": "LiveBench/LiveBench",
@@ -19,7 +19,11 @@
     "network_used": false,
     "incremental_spend_usd": 0,
     "terminal_case_content_used": false,
-    "hidden_metadata_used": false
+    "hidden_metadata_used": false,
+    "detector_path": "canonical/runtime/livebench_public_description_detector_v1.py",
+    "public_description_checker_coverage": 83,
+    "public_description_pattern_count": 86,
+    "routing_safety": "FAIL_CLOSED_IF_ANY_PINNED_PUBLIC_CHECKER_DESCRIPTION_IS_DETECTED_OUTSIDE_21_CONSTRUCTIVE_CLASSES__FAIL_CLOSED_IF_DETECTED_SUPPORTED_DESCRIPTION_IS_UNPARSED__FAIL_CLOSED_ON_MULTI_MATCH"
   },
   "threshold_cut": {
     "population_count": 200,
@@ -36,12 +40,17 @@
     "hidden_instruction_id_used": false,
     "hidden_kwargs_used": false,
     "multi_checker_conjunctions": "FAIL_CLOSED",
-    "unsupported_descriptions": "FAIL_CLOSED"
+    "unsupported_descriptions": "FAIL_CLOSED",
+    "complete_public_description_detector_candidate": true,
+    "detector_checker_count": 83,
+    "detector_pattern_count": 86,
+    "unsupported_public_checker_behavior": "FAIL_CLOSED"
   },
   "next_minimum_proof_cut": [
-    "RUN_SYNTHETIC_TESTS_AGAINST_EXACT_PINNED_PUBLIC_CHECKER_IMPLEMENTATIONS",
-    "PROVE_PROMPT_ONLY_DETECTOR_COMPLETENESS_OR_KEEP_SINGLE_CHECKER_ROUTE_NONEXECUTABLE",
-    "IF_INDEPENDENTLY_VERIFIED_FREEZE_SUCCESSOR_ADAPTER_BEFORE_ANY_REPLAY",
+    "OBTAIN_INDEPENDENT_PASS_THAT_PINNED_ACTIVE_REGISTRIES_EQUAL_83_DETECTOR_CLASSES_AND_PINNED_BUILD_DESCRIPTION_AST_EQUALS_ALL_86_STORED_PATTERNS",
+    "OBTAIN_INDEPENDENT_EXACT_CHECK_FOLLOWING_PASS_FOR_ALL_21_CONSTRUCTIVE_SINGLE_CHECKER_WITNESSES",
+    "COMPILE_SAFE_JOINT_WITNESS_COMPOSITION_FOR_ALLOWED_MULTI_CHECKER_PROMPTS_OR_PROVE_AT_LEAST_FOUR_RECOVERABLE_SINGLE_CHECKER_CASES_WITHOUT_READING_CASE_73_PLUS",
+    "FREEZE_SUCCESSOR_ADAPTER_BEFORE_ANY_TERMINAL_REPLAY",
     "AUTHORIZE_AT_MOST_ONE_REPLAY_OF_ALREADY_EXPOSED_CASES_1_TO_72",
     "PROMOTE_ONLY_IF_AT_LEAST_FOUR_PREVIOUSLY_FAILED_CASES_BECOME_VALID_WITH_NO_NEW_FAILURE_CLASS"
   ],
@@ -57,5 +66,13 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "description_detector_proof_candidate": {
+    "source_registry": "canonical/governance/LIVEBENCH_PUBLIC_DESCRIPTION_ANCHOR_REGISTRY_V1.json",
+    "derivation": "ALL_83_ACTIVE_CLASSES_HAVE_LITERAL_ONLY_SELF_DESCRIPTION_PATTERN_ASSIGNMENTS__82_HAVE_ONE_PATTERN__NTHWORDJAPANESECHECKER_HAS_FOUR__86_TOTAL",
+    "independent_verifier_repo": "moxnixmdj/verification-capsule-runner",
+    "independent_verifier_pr": 1877,
+    "independent_verifier_head": "baf7c3f263b8471f103cab0564be353142b58dad",
+    "independent_verifier_status": "QUEUED__NO_PASS_CLAIM_YET"
   }
 }
