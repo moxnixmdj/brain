@@ -16,15 +16,14 @@ from canonical.runtime import unknown_domain_direct_hidden_generator_v4 as v4
 SCHEMA="PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_HIDDEN_GENERATOR_V5"
 BEACON_CANONICALIZATION="UTF8_SURROGATEPASS_BYTES_TO_LOWER_HEX_WITH_V5_PREFIX"
 SECRET_CANONICALIZATION="UTF8_SURROGATEPASS_FOR_STR__BYTES_IDENTITY"
-STRING_DOMAIN_TOTALITY="TOTAL_FOR_EVERY_FINITE_PYTHON_STR_ACCEPTED_BY_DECLARED_GATES"
+STRING_DOMAIN_TOTALITY="TOTAL_FOR_GENUINE_RUNTIME_STR_BYTES_HIERARCHY_ACCEPTED_BY_NON_SPOOFABLE_TYPE_GATE"
 IDENTIFIER_TOTALITY="INHERITS_V4_STRUCTURAL_SLOT_ORDINAL_UNIQUENESS"
 
 
 def _beacon_gate(beacon: Any)->str:
-    # Preserve the existing isinstance-accepted domain, including str subclasses,
-    # but bypass overridable subclass methods so accepted values cannot make the
-    # supposedly total interface partial.
-    if not isinstance(beacon,str) or len(str.strip(beacon))<16:
+    # Gate on the actual runtime type hierarchy, not spoofable obj.__class__.
+    # Genuine str subclasses remain accepted; fake __class__ proxies are rejected.
+    if not issubclass(type(beacon),str) or len(str.strip(beacon))<16:
         raise v1.UnknownDomainGeneratorError("POST_FREEZE_BEACON_INVALID")
     return beacon
 
@@ -39,13 +38,13 @@ def _canonical_beacon(beacon: Any)->str:
 
 
 def _secret_bytes_total(secret: Any)->bytes:
-    if isinstance(secret,bytes):
+    if issubclass(type(secret),bytes):
         # bytes subclasses may override __bytes__, __buffer__, and __getitem__.
         # Invoke the base bytes descriptor directly on a full slice: this reads
         # the inherited immutable bytes payload, bypasses subclass Python hooks,
         # and materializes an exact plain bytes value.
         out=bytes.__getitem__(secret,slice(None))
-    elif isinstance(secret,str):
+    elif issubclass(type(secret),str):
         out=str.encode(secret,"utf-8","surrogatepass")
     else:
         raise v1.UnknownDomainGeneratorError("EVALUATOR_SECRET_INVALID")
