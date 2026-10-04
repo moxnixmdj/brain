@@ -76,3 +76,34 @@ def test_unknown_or_conflicting_ids_fail_closed_before_checker_execution():
     ]
     with pytest.raises(p.ExactPostvalidationError, match="CONFLICT_GRAPH"):
         p.evaluate_with_registry("", conflict, {})
+
+
+def test_strict_evaluator_nonempty_guard_forces_all_checkers_false_on_empty_response():
+    registry = {
+        "keywords:forbidden_words": ForbidInstruction,
+    }
+    # The raw ForbiddenWords-style checker would accept empty text, but the
+    # pinned legacy strict evaluator first requires response.strip() to be true.
+    raw = ForbidInstruction("keywords:forbidden_words")
+    raw.build_description(forbidden_words=["omega"])
+    assert raw.check_following("") is True
+
+    out = p.evaluate_with_registry(
+        "",
+        [contract("keywords:forbidden_words", forbidden_words=["omega"])],
+        registry,
+    )
+    assert out["checker_results"] == [False]
+    assert out["true_checker_count"] == 0
+    assert out["strict_nonempty_guard_applied"] is True
+    assert out["response_nonempty"] is False
+
+
+def test_strict_evaluator_nonempty_guard_rejects_whitespace_only_response():
+    out = p.evaluate_with_registry(
+        " \n\t ",
+        [contract("keywords:forbidden_words", forbidden_words=["omega"])],
+        {"keywords:forbidden_words": ForbidInstruction},
+    )
+    assert out["checker_results"] == [False]
+    assert out["response_nonempty"] is False
