@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_STATE_COMPRESSION_SCHEDULER_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FAIL_CLOSED_STATE_COMPRESSION_AND_SHADOW_LEASE_GATE__ZERO_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/terminal_state_compression_scheduler_v1.py",
+    "runtime_git_blob_sha": "20068f6ce8966f0c7d981d678b0ebe2ebfe4acf6"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1752,
+    "verified_head_sha": "6aaf5041fd0a42e31d778744e3206c278a3d01ee",
+    "merge_commit": "d6ce002bec6efd1e9585d72351a888c7ec3ec5da",
+    "workflow_run_id": 37187278755,
+    "workflow_job_id": 111391798254,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_subject_blob": true,
+    "unknown_probability_preserved": true,
+    "decisive_probe_positive_value_without_invented_success_probability": true,
+    "correlation_penalty_monotone": true,
+    "shadow_collection_fails_closed_without_separate_authority": true,
+    "shadow_collection_fails_closed_on_candidate_feedback": true,
+    "shadow_collection_grants_no_acceptance_or_promotion_authority": true,
+    "conditional_overlap_makespan_algebra": true
+  },
+  "semantic_effect": "INSTALLS_A_VERIFIED_SCHEDULING_AND_GOVERNANCE_PREPROOF_PRIMITIVE__DOES_NOT_GRANT_SHADOW_OR_FRESH_REALITY_AUTHORITY",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
