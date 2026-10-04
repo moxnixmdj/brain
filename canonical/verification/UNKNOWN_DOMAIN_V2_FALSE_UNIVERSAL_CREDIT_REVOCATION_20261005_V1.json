@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V2_FALSE_UNIVERSAL_CREDIT_REVOCATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "TRUTH_REPAIR__V2_UNIVERSAL_PROOF_FALSIFIED__PR1911_CREDIT_REVOKED_PENDING_COMBINED_REPLACEMENT_PROOF",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "invalid_promotion": {
+    "pull_request": 1911,
+    "merge_commit_sha": "0e1d6200e12fe7ae097170701f3651db87aabe35",
+    "source_reduction_path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_20261005_V1.json",
+    "source_reduction_git_blob_sha": "941e62de59e4c528e8afbb95482f6707bc62104e",
+    "invalidated_claim": "FOR_EVERY_VALID_POST_FREEZE_BEACON_AND_EVALUATOR_SECRET__FOR_EVERY_27_CASE_POPULATION_EMITTED_BY_THE_EXACT_FROZEN_V2_GENERATOR__THE_EXACT_FROZEN_V2_CANDIDATE_PASSES_THE_EXACT_FROZEN_SCORER_ON_ALL_27_CASES",
+    "credit_to_revoke": 1
+  },
+  "independent_executable_falsification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/unknown-domain-v2-universal-zero-reality-v1-20261005-sol",
+    "verified_checkout_sha": "1f5c8ece6acaaa2b78f851bc306d8fac8195df30",
+    "workflow_run_id": 37241384832,
+    "workflow_job_id": 111550636411,
+    "result": "FAIL__GENERATOR_REACHABLE_ADD2_EXACT_FLOAT_COUNTEREXAMPLE",
+    "production_cases_generated": 0,
+    "counterexample": {
+      "case_id": "VERIFY0001-T-d37b27eb7a82a72944f5",
+      "primitive_family": "COMPOSITIONAL_REWRITE",
+      "operation": "ADD2",
+      "bias": 1.4405436185747194,
+      "gold_terminal_consequence": 3.169642121038785,
+      "candidate_terminal_consequence": 3.1696421210387853,
+      "absolute_difference": 4.440892098500626e-16,
+      "candidate_support_equals_hidden_relevant_set": true,
+      "negative_transfer_distractors_rejected": true,
+      "receipt_reuse_clause": "PASS",
+      "evidence_provenance_clause": "PASS",
+      "only_scorer_error": "DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG",
+      "root_cause": "ADD2_ROLE_SWAP_IS_REAL_NUMBER_SYMMETRIC_BUT_NOT_BIT_IDENTICAL_UNDER_IEEE754_EVALUATION_ORDER"
+    }
+  },
+  "second_logical_falsifier": {
+    "class": "OPAQUE_IDENTIFIER_COLLISION_TOTALITY",
+    "reason": "TRUNCATED_HMAC_IDENTIFIERS_CANNOT_SUPPORT_A_FOR_EVERY_VALID_INPUT_UNIQUENESS_THEOREM",
+    "collision_total_generator_repair_pull_request": 1894
+  },
+  "combined_repair_cut": {
+    "exact_float_candidate_repair_pull_request": 1909,
+    "collision_total_generator_repair_pull_request": 1894,
+    "required": "INTEGRATE_BOTH_REPAIRS_AND_INDEPENDENTLY_FALSIFY_THE_EXACT_COMBINED_BYTES_BEFORE_REPROMOTION"
+  },
+  "deduction": {
+    "predicate_state": "EXTERNAL_BLOCKED",
+    "proved_predicate_count_delta": -1,
+    "unresolved_predicate_count_delta": 1,
+    "fresh_reality_authority": false
+  },
+  "hard_rules": [
+    "NO_CREDIT_FROM_THE_FALSIFIED_V2_UNIVERSAL_REDUCTION",
+    "NO_PROMOTION_FROM_PR1909_ALONE",
+    "NO_PROMOTION_FROM_PR1894_ALONE",
+    "NO_PRODUCTION_CASE_GENERATED_OR_CONSUMED_BY_THIS_TRUTH_REPAIR",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "atomic_predicate_proved_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
