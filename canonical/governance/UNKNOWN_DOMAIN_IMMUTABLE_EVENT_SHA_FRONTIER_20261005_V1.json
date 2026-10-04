@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_IMMUTABLE_EVENT_SHA_FRONTIER_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__PRODUCTION_TOCTOU_DEFECT_REPAIRED_IN_ISOLATED_PR__INDEPENDENT_VERIFICATION_QUEUED__ZERO_PRODUCTION_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "breakthrough": {
+    "defect": "CREATE_EVENT_PRODUCTION_WORKFLOW_CHECKED_OUT_MUTABLE_GITHUB_REF; A QUEUED JOB COULD EXECUTE BYTES FROM A LATER BRANCH HEAD RATHER_THAN THE CREATE_EVENT_COMMIT",
+    "consequence": "EVENT_TIME_VERIFICATION_AND_RUN_TIME_EXECUTION_WERE_NOT_PROVABLY_THE_SAME_WORKTREE",
+    "repair": "CHECKOUT_GITHUB_SHA_FROM_THE_CREATE_EVENT_AND_CONTENT_ADDRESS_THE_REPAIRED_WORKFLOW_IN_THE_EXECUTION_LEASE",
+    "invariant": "THE_PRODUCTION_WORKTREE_MUST_EQUAL_THE_IMMUTABLE_CREATE_EVENT_COMMIT_EVEN_IF_THE_LAUNCH_BRANCH_MOVES_WHILE_QUEUED"
+  },
+  "stale_route": {
+    "old_raw_lease_digest": "76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "tombstone_brain_commit": "1e265238375b590c54b3e21559e135d2c84999ee",
+    "verifier_quarantine_commit": "ef5aa2d630dad4d5739a26a954ce0b515017be6c",
+    "production_cases_consumed": 0,
+    "must_not_execute": true
+  },
+  "isolated_repair": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2068,
+    "head_sha": "857c31cd4e554c8bf8a7b840a76ef1429d3b2c83",
+    "production_workflow_git_blob_sha": "990b4fe712ca509f3e01c8e632c75416a3cd0b98",
+    "repaired_lease_git_blob_sha": "0f6d045633b3cf4e178cb6359cd084ee0581294a",
+    "execution_lease_verification_run_id": 37241154459,
+    "production_launcher_verification_run_id": 37241154537,
+    "state_at_record": "QUEUED",
+    "production_cases_generated": 0
+  },
+  "next_action": {
+    "if_both_exact_checks_pass": "MERGE_PR_2068_ONLY_AFTER_RECONCILING_WITH_ANY_NEWER_LOAD_BEARING_UNKNOWN_DOMAIN_HARDENING; THEN_FREEZE_THE_MERGED_LEASE_BYTES_AND_VERIFY_EXTERNALLY_WITHOUT_SELF_MUTATION_BEFORE_CREATING_ANY_NEW_LAUNCH_REF",
+    "if_any_check_fails": "REPAIR_ONLY_THE_FAILED_LOAD_BEARING_DEFECT_AND_REVERIFY; DO_NOT_LAUNCH_PRODUCTION",
+    "forbidden": [
+      "DO_NOT_COUNT_QUEUED_CHECKS_AS_PASS",
+      "DO_NOT_EXECUTE_THE_STALE_RAW_LEASE_ROUTE",
+      "DO_NOT_CHECKOUT_A_MUTABLE_BRANCH_REF_IN_ONE_USE_PRODUCTION",
+      "DO_NOT_CREATE_A_NEW_PRODUCTION_CLAIM_BEFORE_EXACT_MERGED_BYTES_ARE_INDEPENDENTLY_VERIFIED"
+    ]
+  },
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "ownership_credit": false,
+    "promotion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
