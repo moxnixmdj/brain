@@ -1,53 +1,50 @@
 {
-  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_SEMANTIC_ELISION_THEOREM_V1",
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_SEMANTIC_ELISION_THEOREM_V2",
   "date": "2026-10-04",
-  "status": "CANDIDATE__SCORE_ONLY_SEMANTIC_DEPENDENCY_ELIMINATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__VERIFIED_POPULATION_IS_200_LEGACY_IFEVAL__SCORE_ONLY_SEMANTIC_DEPENDENCY_ELIMINATION__INDEPENDENT_THEOREM_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
-  "objective": "Delete semantic-answer generation from the LiveBench IF acceptance critical path wherever complete prompt-only constraint recognition and exact frozen-checker postvalidation are proved.",
-  "pinned_authority": {
-    "comparator_route": {
-      "path": "canonical/governance/LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2.json",
-      "git_blob_sha": "7067a849585d9020f3d78aa374c0eeecb5078c8b",
-      "state": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_2026_06_25_POPULATION_AND_STRICT_SCORER_CLOSED"
+  "objective": "Delete semantic-answer generation from the frozen LiveBench IF score critical path wherever complete score-relevant legacy IFEval constraint recognition and exact checker postvalidation are proved, without granting semantic capability ownership credit.",
+  "verified_population_dispatch": {
+    "path": "canonical/verification/LIVEBENCH_FROZEN_POPULATION_DISPATCH_METADATA_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "bc6c15e9b7d7f0bc7d6dbe8a2c8710ea61fb7127",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_FROZEN_200_IS_200_LEGACY_0_MODERN__ZERO_TERMINAL_CONTENT__ZERO_CREDIT",
+    "legacy_rows": 200,
+    "modern_rows": 0,
+    "legacy_registry_checker_count": 25,
+    "critical_path_consequence": "MODERN_58_IFBENCH_CHECKERS_HAVE_ZERO_SCORE_MASS_IN_THIS FROZEN PREDICATE"
+  },
+  "pinned_scorer_authority": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "process_results": {
+      "path": "livebench/process_results/instruction_following/utils.py",
+      "git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676"
     },
-    "comparator_alignment": {
-      "path": "canonical/governance/LIVEBENCH_IF_COMPARATOR_ALIGNMENT_RECONCILIATION_V1.json",
-      "git_blob_sha": "da51ec70c390539d5fb949efc341790f16709b9e",
-      "state": "INDEPENDENT_PUBLIC_RUNNER_PASS__STRICT_IFBENCH_AVERAGED_SCORER"
+    "legacy_evaluator": {
+      "path": "livebench/if_runner/instruction_following_eval/evaluation_main.py",
+      "git_blob_sha": "4a341984936c4d609644a3b77f8c030ac5aa7269"
     },
-    "upstream": {
-      "repository": "LiveBench/LiveBench",
-      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
-      "process_results_path": "livebench/process_results/instruction_following/utils.py",
-      "process_results_git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676",
-      "evaluation_lib_path": "livebench/if_runner/ifbench/evaluation_lib.py",
-      "evaluation_lib_git_blob_sha": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
-      "registry_path": "livebench/if_runner/ifbench/instructions_registry.py",
-      "registry_git_blob_sha": "adfed4832877566e62970257b50c6fa32c302fb2",
-      "instructions_path": "livebench/if_runner/ifbench/instructions.py",
-      "instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+    "legacy_registry": {
+      "path": "livebench/if_runner/instruction_following_eval/instructions_registry.py",
+      "git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+    },
+    "legacy_instructions": {
+      "path": "livebench/if_runner/instruction_following_eval/instructions.py",
+      "git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2"
     }
   },
   "theorem": {
-    "scorer_fact": "For each LiveBench IF row, the frozen evaluator computes follow_all_instructions and follow_instruction_list solely by applying registered check_following predicates to the response; the reported row score is derived from those booleans. There is no separate grader term for paraphrase quality, simplification quality, story quality, summary quality, factuality, relevance, or semantic similarity to an ideal answer.",
-    "formal_statement": "Holding the row's registered instruction set and checker parameters fixed, any two nonempty responses with the same checker pass vector receive the same frozen LiveBench IF score regardless of their base-task semantic quality.",
-    "corollary_1": "A response that passes every registered checker for a row receives the maximum row score even if no semantic-seed generator was used.",
-    "corollary_2": "Therefore semantic-seed generation is not a logical prerequisite for LIVEBENCH_IF_GE_65_7; it is optional unless needed instrumentally to satisfy a checker.",
-    "corollary_3": "The Root1 repair can be reduced to prompt-only score-relevant constraint recognition, deterministic witness construction, and exact checker postvalidation. Semantic generation must not be on the critical path by default."
+    "scorer_fact": "For every frozen row, legacy IFEval produces follow_all_instructions and follow_instruction_list solely by applying registered check_following predicates to the response. LiveBench then computes row score from those booleans using score_results = (all_pass_indicator + mean(individual_pass_indicators))/2.",
+    "semantic_independence": "No separate paraphrase-quality, simplification-quality, story-quality, summary-quality, factuality, relevance, or semantic-similarity term enters this frozen score path.",
+    "formal_statement": "Holding a row's registered instruction set and checker parameters fixed, any two nonempty responses with the same checker pass vector receive the same frozen LiveBench IF row score regardless of base-task semantic quality.",
+    "corollary_1": "A response that passes every registered legacy checker for a row receives row score 1 even if no semantic-seed generator was used.",
+    "corollary_2": "Semantic-seed generation is therefore not a logical prerequisite for LIVEBENCH_IF_GE_65_7; it is optional unless needed instrumentally to satisfy a registered checker.",
+    "corollary_3": "The score-closure route can reduce to prompt-only legacy constraint recognition, deterministic witness construction, exact legacy checker postvalidation, and sound aggregate score-mass lower bounds."
   },
-  "causal_impact": {
-    "prior_observed_zero_case_classes": {
-      "policy_block_post_prompt_acquisition_or_network_forbidden": 43,
-      "composition_grounded_clauses_blocked": 27,
-      "architectural_gap": 2,
-      "source": "canonical/governance/ROOT2_GLOBAL_INFORMATION_CUT_AND_INSTRUCTION_COMPILER_CANDIDATE_V1.json"
-    },
-    "consequence": [
-      "THE_27_COMPOSITION_BLOCKS_DO_NOT_ESTABLISH_A_NECESSARY_SEMANTIC_GENERATION_DEPENDENCY_FOR_THE_ACCEPTANCE_SCORE",
-      "THE_43_POLICY_BLOCKS_SHOULD_NOT_TRIGGER_POST_PROMPT_SEMANTIC_CAPABILITY_ACQUISITION_WHEN_A_PREBOUND_DETERMINISTIC_CHECKER_WITNESS_ROUTE_EXISTS",
-      "DO_NOT_CLAIM_THESE_70_CASES_FIXED_UNTIL_A_SUCCESSOR_RESPONSE_PASSES_THE_EXACT_CHECKERS",
-      "REPLACE_SEMANTIC_SEED_AS_DEFAULT_WITH_SCORE_ONLY_CONSTRAINT_SOLVING_AND_FAIL_CLOSED_FALLBACK"
-    ]
+  "terminal_goal_boundary": {
+    "score_predicate": "SEMANTIC_QUALITY_IS_NOT_SEPARATELY_MEASURED_BY_THIS FROZEN LIVEBENCH IF SCORE",
+    "capability_ownership": "THE TERMINAL GOAL STILL REQUIRES ACTUAL USEFUL SEMANTIC CAPABILITY OWNERSHIP WHERE THAT CAPABILITY IS IN SCOPE; A SCORE-ONLY WITNESS EARNS ZERO SEMANTIC CAPABILITY CREDIT",
+    "open_weight_route": "OPEN-WEIGHT SEMANTIC CORES MAY REMAIN HIGH-LEVERAGE FOR BROADER TERMINAL CAPABILITY OWNERSHIP EVEN THOUGH THEY ARE NOT LOGICALLY REQUIRED TO SATISFY THIS SCORE FUNCTION"
   },
   "executable_bridge": {
     "path": "canonical/runtime/livebench_if_score_only_semantic_elision_v1.py",
@@ -62,27 +59,39 @@
       "ZERO_NETWORK_ZERO_MODEL_ZERO_INCREMENTAL_SPEND"
     ]
   },
-  "mathematical_leverage": {
-    "frozen_failed_candidate_observed_zero_cases": 72,
-    "active_population": 200,
-    "threshold_percent": 65.7,
-    "old_upper_bound_percent": 64,
-    "minimum_score_mass_needed_to_remove_the_old_forced_fail_upper_bound": 3.4,
-    "note": "This 3.4 value only removes the prior mathematical impossibility certificate under the best-case remaining-128 bound; it does not itself prove a successor reaches 65.7."
+  "active_truth_repairs": {
+    "partial_credit_upper_bound": {
+      "path": "canonical/governance/LIVEBENCH_PARTIAL_CREDIT_UPPER_BOUND_TRUTH_REPAIR_20261004_V1.json",
+      "git_blob_sha": "359f740191e528f16b30ed6b893dad5caee5698d",
+      "consequence": "THE PRIOR 72-CASE 64-PERCENT FORCED-FAIL UPPER BOUND IS INVALID; THIS THEOREM MAKES NO FORCED-FAIL OR 3.4-MASS CLAIM."
+    },
+    "scorer_scope": {
+      "consequence": "THE VERIFIED FROZEN POPULATION IS LEGACY_25_ONLY; MODERN_IFBENCH CONSTRUCTORS AND RATIO-OVERLAP WORK ARE NON-LOAD-BEARING FOR THIS EXACT PREDICATE."
+    }
+  },
+  "current_main_reuse_candidates": {
+    "legacy_prompt_inverter": {
+      "path": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py",
+      "observed_git_blob_sha": "74904d2a00ed3f0bb2e8ab7787c59c0a8f828f7a",
+      "status": "CANDIDATE__PUBLIC_SOURCE_DERIVED__SEPARATE_TEST_AND_COMPOSITION_VERIFICATION_REQUIRED"
+    },
+    "note": "REUSE AFTER REBASE; DO NOT DUPLICATE OR TREAT AS VERIFIED SCORE CLOSURE."
   },
   "next_minimum_proof_cut": [
-    "INDEPENDENTLY_VERIFY_THIS_THEOREM_AGAINST_EXACT_PINNED_SCORER_SOURCE_AND_RUN_THE_FAIL_CLOSED_BRIDGE_TESTS",
-    "COMPILE_PROMPT_ONLY_RECOGNIZERS_FOR_SCORE_RELEVANT_PUBLIC_DESCRIPTION_GRAMMAR",
-    "CONSTRUCT_WITNESSES_AND EXACT-POSTVALIDATE THEM; DO NOT REQUIRE SEMANTIC_SEED UNLESS A CHECKER ITSELF MAKES IT SCORE_RELEVANT",
-    "FREEZE_SUCCESSOR_BEFORE ANY NEW TERMINAL CASE EXPOSURE"
+    "INDEPENDENTLY_VERIFY THIS THEOREM AGAINST THE EXACT PINNED LEGACY EVALUATOR AND SHARED score_results PATH",
+    "VERIFY THE LEGACY PROMPT INVERTER AGAINST PUBLIC SOURCE-DERIVED DESCRIPTION GRAMMAR WITHOUT TERMINAL CONTENT",
+    "COMPOSE RECOGNITION WITH DETERMINISTIC CONSTRUCTORS AND EXACT LEGACY CHECKER POSTVALIDATION",
+    "ACCUMULATE ONLY SOUND PER-ROW SCORE LOWER BOUNDS; FORCE PASS ONLY WHEN THE AGGREGATE LOWER BOUND CROSSES THE EXACT ACCEPTANCE BAR",
+    "KEEP SEMANTIC CAPABILITY OWNERSHIP AS A SEPARATE TERMINAL-GOAL OBLIGATION"
   ],
   "hard_nonclaims": [
     "NO_LIVEBENCH_SCORE_CLAIMED",
-    "NO_72_CASES_CLAIMED_FIXED",
+    "NO_CASES_CLAIMED_FIXED",
+    "NO_FORCED_FAIL CLAIM",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
-    "NO_UNEXPOSED_TERMINAL_CASE_CONTENT_USED",
-    "NO_CLAIM_THAT_SEMANTIC_CAPABILITY_IS_USELESS_OUTSIDE_THIS_EXACT_ACCEPTANCE_PREDICATE",
-    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+    "NO_UNEXPOSED_TERMINAL_CASE_CONTENT USED",
+    "NO_SEMANTIC_CAPABILITY CREDIT FROM SCORE-ONLY WITNESSES",
+    "NO_EXECUTION OR PROMOTION AUTHORITY"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -93,7 +102,7 @@
     "ownership_credit_delta": 0
   },
   "authority": {
-    "scheduling": true,
+    "scheduling": false,
     "execution": false,
     "promotion": false,
     "fresh_reality": false,
