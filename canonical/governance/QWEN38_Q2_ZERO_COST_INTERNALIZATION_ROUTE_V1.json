@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_QWEN38_Q2_ZERO_COST_INTERNALIZATION_ROUTE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_CURRENT_Q2_SUBJECT_PINNED__ZERO_COST_STORAGE_AND_STANDARD_PUBLIC_RUNNER_FIT_ROUTE_IDENTIFIED__QUALITY_AND_MEASURED_RUNTIME_FIT_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "base_capability_subject": {
+    "model": "Qwen/Qwen3.8-27B",
+    "official_full_precision_manifest": "canonical/governance/QWEN38_27B_EXACT_OPEN_WEIGHT_MANIFEST_V1.json",
+    "public_livebench_if_mean_percent": 72.65825,
+    "opus55_if_mean_percent": 65.73775,
+    "full_precision_margin_pp": 6.9205
+  },
+  "exact_current_quantized_candidate": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "file": "Qwen3.8-27B-UD-Q2_K_XL.gguf",
+    "file_bytes": 9828981664,
+    "sha256": "fd4730dd8aad070517978752b63d530aeb1740d2283cab9fa24f1e404032ddb0",
+    "observed_file_commit": "313447f",
+    "license": "apache-2.0",
+    "base_model": "Qwen/Qwen3.8-27B",
+    "execution_subject_rule": "THIS_QUANTIZED_FILE_IS_A_DISTINCT_EXECUTION_SUBJECT_AND_INHERITS_ZERO_LIVEBENCH_OR_SEMANTIC_CAPABILITY_CREDIT_FROM_BF16"
+  },
+  "public_quality_prior_not_credit": {
+    "source": "https://quesma.com/blog/qwen38-27b-quantizations-benchmarked/",
+    "published_date": "2026-08-26",
+    "reported_test": "IFBENCH_ACROSS_BF16_Q8_Q4_AND_UD_Q2_K_XL_AT_LOW_MEDIUM_XHIGH_EFFORT",
+    "reported_result": "NO_MEASURABLE_IFBENCH_CHANGE_DOWN_TO_THE_TESTED_2_BIT_SUBJECT",
+    "reported_tested_q2_size_gb_at_that_time": 10.7,
+    "critical_limit": "THE_ARTICLE_EXPLICITLY_STATES_UNSLOTH_REPLACED_THE_V2_FILES_ON_2026_08_19__THEREFORE_THIS_RESULT_IS_ONLY_A_SEARCH_PRIOR_AND DOES_NOT TRANSFER SCORE CREDIT TO THE CURRENT 9_828_981_664_BYTE SUBJECT"
+  },
+  "zero_cost_public_runner_candidate_fit": {
+    "source": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+    "public_ubuntu_runner_cpu": 4,
+    "public_ubuntu_runner_ram_gb": 16,
+    "public_ubuntu_runner_storage_gb": 14,
+    "model_file_decimal_gb": 9.828981664,
+    "nominal_storage_headroom_decimal_gb": 4.171018336,
+    "status": "NOMINAL_FIT_ONLY__ACTUAL_FREE_DISK_RAM_MMAP_AND_KV_HEADROOM_MUST_BE_MEASURED_BEFORE_MODEL_DOWNLOAD_OR_INFERENCE_CREDIT"
+  },
+  "durable_brain_controlled_storage_route": {
+    "mechanism": "GITHUB_RELEASE_ASSETS_IN_A_BRAIN_CONTROLLED_REPOSITORY",
+    "source": "https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases",
+    "github_release_asset_count_limit": 1000,
+    "github_release_per_asset_limit": "UNDER_2_GIB",
+    "github_release_total_size_limit": "NONE_STATED_BY_GITHUB",
+    "github_release_bandwidth_limit": "NONE_STATED_BY_GITHUB",
+    "minimum_shard_count": 5,
+    "proof_minimum": "CEIL(9828981664/(2*1024^3-1))=5",
+    "safe_stream_split_plan_bytes": [2000000000,2000000000,2000000000,2000000000,1828981664],
+    "reassembly_plan": "DOWNLOAD_ONE_BRAIN_CONTROLLED_RELEASE_SHARD_AT_A_TIME__APPEND_TO_FINAL_GGUF__DELETE_SHARD__VERIFY_FINAL_SHA256__THIS_AVOIDS_HOLDING_TWO_FULL_MODEL_COPIES",
+    "license_preservation": "MIRROR_ONLY_WITH_APACHE_2_0_LICENSE_AND_SOURCE_ATTRIBUTION"
+  },
+  "dominance_update": {
+    "scope": "CURRENT_STANDARD_PUBLIC_GITHUB_ACTIONS_ZERO_COST_EXECUTION_FIT_FRONTIER",
+    "smaug_full_precision_candidate_path": "canonical/governance/LIVEBENCH_ROOT1_OPEN_WEIGHT_DOMINANCE_UPDATE_V1.json",
+    "observation": "SMAUG_MINI_HAS_HIGHER_FULL_PRECISION_LIVEBENCH_IF_MARGIN_BUT ITS CURRENTLY_BOUND FULL_PRECISION_SIZE_IS_55_6_GB AND THE BOUND COMMUNITY_Q4_ROUTE_IS_16_5_GB__BOTH EXCEED THE STANDARD 14_GB PUBLIC_RUNNER STORAGE ENVELOPE",
+    "qwen_q2_candidate_advantage": "THE_EXACT_CURRENT_QWEN_Q2_FILE_IS_9_83_GB AND THEREFORE IS THE_FIRST_BOUND_OPEN_WEIGHT_ROUTE_WITH_NOMINAL_STANDARD_PUBLIC_RUNNER_STORAGE_FIT",
+    "hard_boundary": "THIS_IS_EXECUTION_FIT_DOMINANCE_ONLY__NOT_CAPABILITY_SCORE_DOMINANCE"
+  },
+  "minimum_next_cut": [
+    "MEASURE_ACTUAL_FREE_DISK_AND_MEMORY_ON_THE_EXACT_PUBLIC_RUNNER_WITHOUT_DOWNLOADING_THE_MODEL",
+    "INDEPENDENTLY_VERIFY_CURRENT_Q2_FILE_METADATA_SHA256_POINTER_LICENSE_AND_BASE_MODEL_BINDING",
+    "IF_MEASURED_FIT_PASSES__RUN_A_TINY_PUBLIC_NONTERMINAL_SEMANTIC_AND_LLAMA_CPP_COMPATIBILITY_SMOKE_ON_THE_EXACT_Q2_SUBJECT",
+    "ONLY_THEN_RUN_THE_MINIMUM_PUBLIC_INSTRUCTION_FOLLOWING_REQUALIFICATION_NEEDED_TO DECIDE WHETHER THE QUANTIZED SUBJECT RETAINS A_MARGIN_OVER_65_7",
+    "ONLY_AFTER_CAPABILITY_QUALIFICATION__MIRROR_THE_EXACT_BYTES_AS_FIVE_BRAIN_CONTROLLED_RELEASE_ASSETS_AND VERIFY_REASSEMBLY_SHA256",
+    "FREEZE_SUCCESSOR_CONFIGURATION_BEFORE_ANY_NEW_TERMINAL_REALITY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_Q2_PRESERVES_THE_72_65825_BF16_LIVEBENCH_SCORE",
+    "NO_CLAIM_CURRENT_Q2_ALREADY_RUNS_ON_STANDARD_GITHUB_ACTIONS",
+    "NO_CLAIM_THE_MODEL_BYTES_ARE_ALREADY_INTERNALIZED",
+    "NO_CLAIM_STORAGE_ROUTE_ALONE_IS_CAPABILITY_OWNERSHIP",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
