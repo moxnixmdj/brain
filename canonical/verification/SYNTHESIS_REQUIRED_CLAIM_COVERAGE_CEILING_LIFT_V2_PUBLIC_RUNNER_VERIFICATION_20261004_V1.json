@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REQUIRED_CLAIM_COVERAGE_NONINFERIORITY_DISCHARGED__MATCHED_QUALITY_REMAINS_OPEN__ZERO_ACCEPTANCE_CREDIT",
+  "subject": {
+    "candidate_path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
+    "candidate_git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
+    "verifier_path": "canonical/runtime/synthesis_required_claim_coverage_ceiling_lift_verifier_v2.py",
+    "verifier_git_blob_sha": "c763ef4b2048da9ff04c3cd7e6593e4e787df522",
+    "tests_path": "canonical/tests/test_synthesis_required_claim_coverage_ceiling_lift_v2.py",
+    "tests_git_blob_sha": "bc52ff4300e51c3a403152c000c3953544356219"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1526,
+    "verifier_head_sha": "14a3c02f9281617efe5b41b6ba48a1627d933ac9",
+    "merge_commit": "f9bd3737a3ddc23df4e19922c1f04fec3e163cce",
+    "workflow_run_id": 37164910933,
+    "workflow_job_id": 111325748211,
+    "workflow_name": "Verify synthesis coverage ceiling v2",
+    "conclusion": "success",
+    "passed_steps": [
+      "Run adversarial unit tests",
+      "Verify exact proof composition"
+    ]
+  },
+  "verified": {
+    "exact_candidate_blob": true,
+    "exact_verifier_blob": true,
+    "exact_tests_blob": true,
+    "historical_failure_was_scope_only": true,
+    "current_v1_to_v3_target_semantics_identical": true,
+    "independent_target_subset_of_witness_scope": true,
+    "source_to_target_relation": "SUPERSET",
+    "brain_required_claim_coverage_lower_bound": 1,
+    "admissible_comparator_upper_bound": 1,
+    "brain_minus_comparator_lower_bound": 0,
+    "required_claim_coverage_noninferiority": true,
+    "matched_quality_atom_proved": false,
+    "matched_quality_noninferiority_proved": false
+  },
+  "residual_after_verification": {
+    "missing_atoms": [
+      "metric:matched_quality"
+    ],
+    "missing_metric_bounds": [
+      "matched_quality_noninferiority"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_PREDICATE_CLOSURE",
+    "NO_MATCHED_QUALITY_ATOM_OR_NONINFERIORITY_BOUND",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_TERMINAL_CASES",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
