@@ -21,7 +21,7 @@ import sys
 from typing import Any
 
 from canonical.runtime import livebench_legacy15_composition_archetypes_v1 as archetypes
-from canonical.runtime import livebench_legacy15_joint_witness_v1 as witness
+from canonical.runtime import livebench_legacy15_joint_router_v2 as witness
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_END2END_EXACT_SYNTHETIC_AUDIT_V2"
 FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
@@ -334,7 +334,26 @@ def main() -> int:
     ap.add_argument("--max-failures", type=int, default=250)
     ns = ap.parse_args()
 
-    result = audit(Path(ns.livebench_root).resolve(), ns.max_failures)
+    try:
+        result = audit(Path(ns.livebench_root).resolve(), ns.max_failures)
+    except Exception as exc:
+        import traceback
+        result = {
+            "schema": SCHEMA,
+            "status": "EXCEPTION__DIAGNOSTIC_ONLY",
+            "exception_type": type(exc).__name__,
+            "exception_message": str(exc),
+            "traceback": traceback.format_exc(),
+            "terminal_rows_read": 0,
+            "acceptance_credit": False,
+        }
+        Path(ns.output).write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+        print(json.dumps({
+            "status": result["status"],
+            "exception_type": result["exception_type"],
+            "exception_message": result["exception_message"],
+        }, sort_keys=True))
+        return 1
     Path(ns.output).write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     print(json.dumps({
         "status": result["status"],
