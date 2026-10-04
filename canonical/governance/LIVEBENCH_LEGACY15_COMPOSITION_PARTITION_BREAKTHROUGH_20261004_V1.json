@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY15_COMPOSITION_PARTITION_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_BREAKTHROUGH__FINITE_CONFLICT_GRAPH_PARTITION__AUTHORING_TESTS_REQUIRED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "inputs": {
+    "active_identity_opening": "canonical/governance/LIVEBENCH_FROZEN_ACTIVE_LEGACY15_HASH_OPENING_V1.json",
+    "active_set_commitment_sha256": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d",
+    "pinned_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_conflict_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+  },
+  "theorem": {
+    "active_identity_count": 15,
+    "naive_identity_subset_count": 32768,
+    "maximal_conflict_valid_mode_count": 9,
+    "maximum_simultaneous_family_count": 9,
+    "claim": "EVERY_CONFLICT_VALID_SUBSET_OF_THE_EXACT_ACTIVE_15_IDENTITIES_IS_CONTAINED_IN_AT_LEAST_ONE_OF_NINE_MAXIMAL_INDEPENDENT_SETS",
+    "proof_method": "EXHAUSTIVE_ENUMERATION_OF_ALL_2_POW_15_SUBSETS_PLUS_MAXIMALITY_CHECKS"
+  },
+  "solver_decomposition": [
+    "MODE_0_JSON_PLUS_OPTIONAL_EXISTENCE_FORBIDDEN",
+    "MODE_1_REPEAT_PROMPT_PLUS_OPTIONAL_TITLE_EXISTENCE",
+    "MODE_2_TWO_RESPONSES_PLUS_OPTIONAL_TITLE_EXISTENCE_FORBIDDEN",
+    "MODES_3_TO_8_CORE_WRAPPER_AND_COUNT_COMPOSITIONS"
+  ],
+  "runtime": "canonical/runtime/livebench_legacy15_composition_partition_v1.py",
+  "tests": "canonical/tests/test_livebench_legacy15_composition_partition_v1.py",
+  "scheduler_delta": [
+    "DELETE_ARBITRARY_15_WAY_COMPOSITION_SEARCH",
+    "IMPLEMENT_AND_VERIFY_AT_MOST_NINE_MAXIMAL_MODE_CONSTRUCTORS",
+    "POSTVALIDATE_EVERY_CONSTRUCTED_RESPONSE_WITH_THE_EXACT_PINNED_LEGACY_CHECKERS",
+    "STOP_AT_FIRST_PROVED_SCORE_MASS_AT_OR_ABOVE_EXACT_OPUS_MEAN_65_73775"
+  ],
+  "hard_nonclaims": [
+    "NO_ACTIVE_TERMINAL_CASE_FREQUENCY_OR_COMBINATION_IS_INFERRED",
+    "NO_ACTIVE_TERMINAL_PROMPT_RESPONSE_KWARG_OR_SCORE_CONTENT_IS_READ",
+    "NO_JOINT_WITNESS_CONSTRUCTOR_IS_PROVED_BY_THIS_PARTITION_ALONE",
+    "NO_LIVEBENCH_PASS_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_SEMANTIC_CAPABILITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
