@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V11_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__COUNTS_STABLE__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subject_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V11.json",
+  "subject_git_blob_sha": "6857750dea3a0af48a5acc545b6f66b619d4335b",
+  "parent_v10_git_blob_sha": "2012926814d0d06405da56da64e589b06fef1756",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1664,
+    "merge_commit": "f8bdf53750110822e8f1798c8436e346a235ffa7",
+    "workflow_run_id": 37174641101,
+    "workflow_job_id": 111354617503,
+    "conclusion": "success"
+  },
+  "verified": {
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_touching": 19,
+    "finance_public_transform_search_deleted": true,
+    "osworld_generic_gitlab_revision_search_deleted": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
