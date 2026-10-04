@@ -17,4 +17,23 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: "3.12"}
       - run: python -m pip install -q pytest
-      - run: python -m pytest -q canonical/tests/test_livebench_prompt_only_overlap_compiler_v1.py
+      - name: Run exact public-family tests
+        id: tests
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -q canonical/tests/test_livebench_prompt_only_overlap_compiler_v1.py --junitxml=prompt-only-overlap-junit.xml
+          code=$?
+          echo "$code" > prompt-only-overlap-exit.txt
+          exit 0
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prompt-only-overlap-verification
+          path: |
+            prompt-only-overlap-junit.xml
+            prompt-only-overlap-exit.txt
+      - name: Enforce test result
+        shell: bash
+        run: test "$(cat prompt-only-overlap-exit.txt)" = "0"
