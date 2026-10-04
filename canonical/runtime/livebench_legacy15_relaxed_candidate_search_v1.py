@@ -22,6 +22,7 @@ from typing import Any, Iterable
 
 from canonical.runtime import livebench_legacy15_joint_candidate_generator_v1 as base
 from canonical.runtime import livebench_legacy15_composition_partition_v1 as partition
+from canonical.runtime import livebench_legacy15_contract_composer_v2 as composer
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_RELAXED_CANDIDATE_SEARCH_V1"
 MAX_CHECKERS = 5
@@ -90,6 +91,21 @@ def generate_relaxed(
         for subset in combinations(range(k), size):
             subset_attempts += 1
             subrows = [rows[i] for i in subset]
+
+            # V2 is a second, theorem-oriented constructor. In particular it
+            # emits the exact empty witness for the satisfiable
+            # sentence<1 + forbidden/word-upper class that the older composer
+            # intentionally left unresolved. Exact full-case postvalidation
+            # remains authoritative.
+            v2 = composer.compose_contracts(subrows)
+            if v2.get("status") == "CANDIDATE_WITNESS":
+                add(str(v2.get("response") or ""), {
+                    "kind": "CONTRACT_COMPOSER_V2_SUBSET",
+                    "subset_indices": list(subset),
+                    "instruction_ids": [str(rows[i]["instruction_id"]) for i in subset],
+                    "mode": v2.get("route"),
+                })
+
             out = base.generate(subrows, max_candidates=max_per_subset)
             if out.get("status") != "PASS_CANDIDATES":
                 continue
