@@ -27,6 +27,7 @@ PRODUCTION_PRECOMMIT_BLOB = "ddf55f3e54ef6af89a95395075441742cb124258"
 EXACT_SUBJECTS = {
     "candidate_v1": "a2a77269a8175ce315b466035049da0f761b8734",
     "candidate_v2": "4470716f95a559a700e461262df909ae19a41651",
+    "generator_v1": "f974a4594c78e74693c7ba5a19f131dfa481b937",
     "generator_v2": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
     "hidden_scorer": "e8cf5d1b5d311644725a751c15e6235958fb587d",
     "execution_harness": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
