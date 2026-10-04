@@ -91,16 +91,63 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
         if hit is not None:
             reasons.append("MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:" + hit.casefold())
 
-    if SENTENCE in by_id and END in by_id:
+    if SENTENCE in by_id:
         sentence = by_id[SENTENCE]
         relation = str(sentence.get("relation", "")).strip().casefold()
         try:
             threshold = int(sentence.get("num_sentences"))
         except (TypeError, ValueError):
             threshold = -1
-        end_phrase = str(by_id[END].get("end_phrase", "")).strip()
-        if relation == "less than" and threshold == 1 and end_phrase in PUBLIC_END_PHRASES:
-            reasons.append("SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE")
+
+        if relation == "less than" and threshold == 1:
+            # Exact NLTK 3.9.2 Punkt geometry used by the frozen checker:
+            # _slices_from_text() always yields the final text.rstrip() slice,
+            # and _realign_boundaries() emits that slice whenever it is
+            # nonempty. Therefore count_sentences(text) == 0 implies
+            # text.rstrip() == "", i.e. the response is whitespace-only.
+            # Any compatible checker below that requires a non-whitespace
+            # response is thus jointly UNSAT with sentence < 1.
+            if END in by_id:
+                end_phrase = str(by_id[END].get("end_phrase", "")).strip()
+                if end_phrase in PUBLIC_END_PHRASES:
+                    reasons.append("SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE")
+
+            positive_ids = (
+                EXISTENCE,
+                NTH,
+                POSTSCRIPT,
+                BULLETS,
+                TITLE,
+                SECTIONS,
+                QUOTATION,
+            )
+            for iid in positive_ids:
+                if iid in by_id:
+                    reasons.append("SENTENCE_LT_ONE_WITH_NONEMPTY_REQUIREMENT:" + iid)
+
+            # Historical NumberOfWords lower bounds are >=100, hence any
+            # at-least word contract requires non-whitespace output.
+            if WORDS in by_id:
+                word_slots = by_id[WORDS]
+                if str(word_slots.get("relation", "")).strip().casefold() == "at least":
+                    try:
+                        word_target = int(word_slots.get("num_words"))
+                    except (TypeError, ValueError):
+                        word_target = -1
+                    if word_target > 0:
+                        reasons.append("SENTENCE_LT_ONE_WITH_POSITIVE_WORD_LOWER_BOUND")
+
+            # ParagraphChecker also requires non-whitespace for every generated
+            # num_paragraphs >=1. It is ID-conflicting with NumberOfSentences in
+            # the pinned registry, but keep the semantic fact explicit so this
+            # kernel remains sound if called directly on an unfiltered subset.
+            if PARAGRAPHS in by_id:
+                try:
+                    para_target = int(by_id[PARAGRAPHS].get("num_paragraphs"))
+                except (TypeError, ValueError):
+                    para_target = -1
+                if para_target > 0:
+                    reasons.append("SENTENCE_LT_ONE_WITH_POSITIVE_PARAGRAPH_REQUIREMENT")
 
     return tuple(reasons)
 
