@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_SUB100MB_KERNEL_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "RESEARCH_BASELINE_CANDIDATE__NOT_QUALIFIED__ZERO_CREDIT",
+  "objective": "ESTABLISH_AN_EXACT_LICENSE_COMPATIBLE_TEXT_CONTROLLER_BASELINE_THAT_FITS_THE_STRICT_H100_LEARNED_STATE_BUDGET_AND_CAN_BE_FALSIFIED_BY_RECURSIVE_PROGRAM_INDUCTION_EXPERIMENTS",
+  "model": {
+    "upstream": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "upstream_license": "Apache-2.0",
+    "upstream_parameters": 135000000,
+    "quantized_repository": "tensorblock/SmolLM2-135M-Instruct-GGUF",
+    "artifact": "SmolLM2-135M-Instruct-Q3_K_M.gguf",
+    "quantization": "Q3_K_M",
+    "download_url": "https://huggingface.co/tensorblock/SmolLM2-135M-Instruct-GGUF/resolve/main/SmolLM2-135M-Instruct-Q3_K_M.gguf",
+    "sha256": "61c69fc5ce91982e26c625d43be5c3c7f0f774da22f4fa4e45c37a80a22ddad4",
+    "exact_bytes": 93511232
+  },
+  "budget": {
+    "strict_max_bytes_exclusive": 100000000,
+    "candidate_learned_bytes": 93511232,
+    "remaining_bytes": 6488768,
+    "under_budget": true
+  },
+  "selection_reason": [
+    "EXACT_ARTIFACT_FITS_STRICT_BYTE_CAP",
+    "UPSTREAM_LICENSE_IS_APACHE_2_0",
+    "LLAMA_COMPATIBLE_GGUF_HAS_STRAIGHTFORWARD_CPU_EXECUTION_ROUTE",
+    "WEAK_STANDALONE_REASONING_MAKES_IT_A_STRONG_ARCHITECTURE_FALSIFICATION_BASELINE_RATHER_THAN_A_HIDDEN_FRONTIER_MODEL"
+  ],
+  "limitations": [
+    "TEXT_ONLY_CONTROLLER__DOES_NOT_SOLVE_IMAGE_PERCEPTION",
+    "STANDALONE_135M_REASONING_IS_FAR_BELOW_FRONTIER_LEVEL",
+    "QUANTIZED_DERIVATIVE_MUST_BE_REVERIFIED_BY_EXACT_SHA256_AT_EVERY_SCORED_RUN",
+    "6488768_BYTES_REMAIN_FOR_ALL_ADDITIONAL_PERSISTENT_LEARNED_STATE_UNDER_THIS_CANDIDATE",
+    "NO_CLAIM_THIS_CANDIDATE_IS_OPTIMAL_OR_SUFFICIENT"
+  ],
+  "scored_use_policy": {
+    "external_general_reasoning_model": false,
+    "same_model_artifact_for_all_trials": true,
+    "model_hash_precommitted": true,
+    "temperature_and_sampling_policy_precommitted": true,
+    "deterministic_tools_and_external_raw_knowledge_allowed_under_H100_contract": true
+  },
+  "first_experiment": {
+    "purpose": "MEASURE_WHETHER_RECURSIVE_PROPOSAL_EXECUTION_VERIFICATION_CAN_RAISE_P_WITH_FIXED_LEARNED_BYTES",
+    "tasks": [
+      "STRUCTURED_GEOMETRY_PRIMITIVES_TO_TYPED_PARTSPEC",
+      "RAW_TEXT_REQUIREMENTS_TO_NORMALIZED_TYPED_REQUIREMENTS",
+      "CANDIDATE_REVISION_FROM_DETERMINISTIC_VALIDATOR_FEEDBACK"
+    ],
+    "conditions": [
+      "DIRECT_SINGLE_SHOT",
+      "SCHEMA_CONSTRAINED",
+      "ITERATIVE_VERIFIER_FEEDBACK",
+      "MULTI_CANDIDATE_SEARCH_PLUS_DETERMINISTIC_SELECTION"
+    ],
+    "terminal_benchmark_credit": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
