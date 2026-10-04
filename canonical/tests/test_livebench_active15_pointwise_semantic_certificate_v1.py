@@ -115,3 +115,10 @@ def test_length_mismatch_and_non_bool_fail_closed_by_exception():
         assert str(exc) == "CHECKER_RESULTS_MUST_BE_BOOL"
     else:
         raise AssertionError("expected type rejection")
+
+
+def test_semantically_impossible_full_score_flags_fail_closed():
+    out = c.certify(nth_forbidden(), [True, True])
+    assert out["status"] == "FAIL_CLOSED__CHECKER_RESULTS_CONTRADICT_SEMANTIC_UNSAT"
+    assert "NTH_FIRST_WORD_IS_FORBIDDEN_WORD" in out["hard_unsat_reasons"]
+    assert out["acceptance_credit"] is False
