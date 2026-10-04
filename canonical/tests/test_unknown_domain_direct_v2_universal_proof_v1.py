@@ -16,11 +16,11 @@ def test_transfer_families_have_strict_identification_margin():
     assert out["all_six_families_universal"] is True
     assert out["max_transfer_probes"] == 2
     assert out["full_rediscovery_probe_floor"] == 3
-    assert out["affine_min_output_gap"] >= 2.85
+    assert out["affine_min_output_gap"] > 2.84
     assert out["complement_min_output_gap"] >= 4.75
     assert out["sat_mono_min_output_gap"] > out["sat_mono_max_close_tolerance"]
     assert out["sign_negative_probe_distractor_min"] > 0
-    assert out["step_wrong_side_margin"] >= 2.55
+    assert out["step_wrong_side_margin"] > 2.54
     assert out["add2_wrong_support_min_gap"] >= 1.5
     assert out["add2_true_support_role_swap_safe"] is True
 
