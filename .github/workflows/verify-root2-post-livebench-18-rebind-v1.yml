@@ -1,0 +1,20 @@
+name: Verify Root2 post-LiveBench 18-predicate rebind
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'VERIFY_ROOT2_POST_LIVEBENCH_18_REBIND'
+      - 'canonical/runtime/verify_root2_post_livebench_18_rebind_v1.py'
+      - 'canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_V1.json'
+      - '.github/workflows/verify-root2-post-livebench-18-rebind-v1.yml'
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python canonical/runtime/verify_root2_post_livebench_18_rebind_v1.py
