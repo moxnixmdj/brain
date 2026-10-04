@@ -51,5 +51,11 @@ def test_static_and_fail_closed():
     repeat=one(cases['combination:repeat_prompt'])
     assert repeat['parameter_complete'] is False
     assert repeat['unresolved_parameters']==['prompt_to_repeat']
-    dup=compile_visible_constraints('Answer with at least 5 words. Answer with less than 20 words.')
-    assert dup['status']=='FAIL_CLOSED'
+    interval=compile_visible_constraints('Answer with at least 5 words. Answer with less than 20 words.')
+    assert interval['status']=='PASS'
+    assert interval['repeated_instruction_ids']==['length_constraints:number_words']
+    assert interval['constraint_instance_count']==2
+    assert [c['slots'] for c in interval['constraints']] == [
+        {'relation':'at least','num_words':5},
+        {'relation':'less than','num_words':20},
+    ]
