@@ -21,8 +21,39 @@ jobs:
         with:
           python-version: '3.12'
       - name: Run V2 counterexample and V3 repair regression
-        run: python -m pytest -q canonical/tests/test_unknown_domain_direct_candidate_v3.py
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -vv canonical/tests/test_unknown_domain_direct_candidate_v3.py > v3-diagnostic.txt 2>&1
+          code=$?
+          echo "candidate_test_exit=$code" >> v3-diagnostic.txt
+          cat v3-diagnostic.txt
+          exit $code
       - name: Run V3 universal proof tests
-        run: python -m pytest -q canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -vv canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py >> v3-diagnostic.txt 2>&1
+          code=$?
+          echo "proof_test_exit=$code" >> v3-diagnostic.txt
+          cat v3-diagnostic.txt
+          exit $code
       - name: Execute proof module
-        run: python -m canonical.runtime.unknown_domain_direct_v3_universal_proof_v1
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          python -m canonical.runtime.unknown_domain_direct_v3_universal_proof_v1 >> v3-diagnostic.txt 2>&1
+          code=$?
+          echo "proof_module_exit=$code" >> v3-diagnostic.txt
+          cat v3-diagnostic.txt
+          exit $code
+      - name: Upload V3 diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unknown-domain-v3-diagnostic
+          path: v3-diagnostic.txt
+          if-no-files-found: error
+          retention-days: 7
