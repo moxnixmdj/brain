@@ -48,7 +48,7 @@ def test_all_25_public_description_grammars_are_recognized():
     assert out["status"] == "PASS"
     assert out["recognized_count"] == 25
     assert tuple(x["instruction_id"] for x in out["contracts"]) == LEGACY_IDS
-    assert out["unresolved_visible_parameter_bindings"] == ["combination:repeat_prompt"]
+    assert out["unresolved_visible_parameter_bindings"] == []
     assert out["terminal_metadata_used"] is False
     assert out["incremental_spend_usd"] == 0
 
@@ -71,20 +71,41 @@ def test_parameter_values_are_recovered_not_merely_labels():
         "capital_relation": "at least", "capital_frequency": 3
     }
 
-def test_repeat_prompt_is_recognized_but_source_payload_fails_closed():
-    out = parse_visible_contracts(
-        "Do a task. " +
+def test_repeat_prompt_source_recovered_when_source_is_first_line():
+    source = "Write a funny haiku about moms, containing keywords mom and mother."
+    prompt = (
+        source + "\n" +
         "First repeat the request word for word without change, then give your answer "
         "(1. do not say any words or characters before repeating the request; "
         "2. the request you need to repeat does not include this sentence)"
     )
-    assert out["recognized_count"] == 1
-    spec = out["contracts"][0]
-    assert spec["instruction_id"] == "combination:repeat_prompt"
+    out = parse_visible_contracts(prompt)
+    spec = next(x for x in out["contracts"] if x["instruction_id"] == "combination:repeat_prompt")
+    assert spec["visible_parameter_recovery_complete"] is True
+    assert spec["args"]["prompt_to_repeat"] == source
+    assert out["unresolved_visible_parameter_bindings"] == []
+
+def test_repeat_prompt_source_recovered_when_meta_is_first_block():
+    source = "Write a song about a corgi named Chester who loves to play fetch."
+    prompt = (
+        "Before you answer it, just repeat the request below. "
+        "You need to repeat it exactly as it is. Do not change any word.\n\n" + source
+    )
+    out = parse_visible_contracts(prompt)
+    spec = next(x for x in out["contracts"] if x["instruction_id"] == "combination:repeat_prompt")
+    assert spec["visible_parameter_recovery_complete"] is True
+    assert spec["args"]["prompt_to_repeat"] == source
+
+def test_repeat_prompt_fails_closed_when_no_public_edge_form_is_present():
+    prompt = (
+        "Do a task. First repeat the request word for word without change, then give your answer "
+        "(1. do not say any words or characters before repeating the request; "
+        "2. the request you need to repeat does not include this sentence)"
+    )
+    out = parse_visible_contracts(prompt)
+    spec = next(x for x in out["contracts"] if x["instruction_id"] == "combination:repeat_prompt")
     assert spec["visible_parameter_recovery_complete"] is False
     assert spec["args"]["prompt_to_repeat"] is None
-    assert spec["args"]["source_binding_required"] is True
-
 def test_empty_or_unrecognized_prompt_does_not_invent_contracts():
     assert parse_visible_contracts("")["status"] == "BLOCKED"
     out = parse_visible_contracts("Discuss the weather.")
