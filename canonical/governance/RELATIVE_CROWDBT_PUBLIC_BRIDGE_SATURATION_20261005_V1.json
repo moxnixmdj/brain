@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_RELATIVE_CROWDBT_PUBLIC_BRIDGE_SATURATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__OFFICIAL_PUBLIC_SURFACE_INSUFFICIENT_FOR_EXACT_CROWDBT_RECONSTRUCTION__ROUTE_DELETION_ONLY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "affected_predicates": [
+    "PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "ARTIFACT_AA_BRIEFCASE_GE_1822"
+  ],
+  "official_public_sources": [
+    {
+      "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "observed": [
+        "GDPval-AA v2.1 anchors DeepSeek V4.1 Flash (max) at 1600",
+        "GDPval-AA v2.1 ratings are fit with Crowd-BT by maximum likelihood after collecting pairwise rankings",
+        "Crowd-BT includes fitted annotator quality and every rating is fitted relative to the anchor",
+        "AA-Briefcase v1.1 keeps GPT-5.5 (medium) anchored at 1000 and each pairwise scope is fit with Crowd-BT",
+        "AA-Briefcase headline metric combines rubric pass rate, analytical-quality Elo, and presentation Elo"
+      ]
+    },
+    {
+      "url": "https://artificialanalysis.ai/data-api/docs",
+      "observed": [
+        "Free tier exposes headline language-model indices/capability indices rather than raw benchmark fitting observations",
+        "Pro exposes model-level V2 data but provider-level and expanded measurement access remain restricted",
+        "Commercial supports negotiated expanded/raw measurement access; the documented public/free surface does not expose the pairwise judgement graph or Crowd-BT fitted latent state required for exact independent reconstruction"
+      ]
+    }
+  ],
+  "theorem": {
+    "statement": "KNOWING_THE_CROWDBT_MODEL_FORM_AND_ONE_FIXED_ELO_ANCHOR_DOES_NOT_IDENTIFY_A_NEW_CANDIDATE_FIXED_ELO_WITHOUT_THE_LOAD_BEARING_PAIRWISE_OBSERVATIONS_OR_AN_EQUIVALENT_SUFFICIENT_STATISTIC_AND_REQUIRED_FITTED_REFERENCE_STATE",
+    "proof_sketch": [
+      "The published rating is the result of a maximum-likelihood fit over a pairwise comparison graph with fitted annotator-quality terms, not a direct transform of one candidate-versus-anchor win rate.",
+      "Holding an anchor rating fixed constrains scale but does not disclose the candidate likelihood contributions from the undisclosed comparison graph, judge assignments/outcomes, or fitted latent state.",
+      "Distinct hidden comparison/fitted states can agree with the same public anchor and methodology description while assigning different ratings to a newly inserted candidate.",
+      "Therefore a scalar candidate-versus-anchor win rate, absolute behavioral certificate, or methodology formula alone cannot force a fixed threshold verdict."
+    ],
+    "consequence": "GENERIC_PUBLIC_FORMULA_HUNT_AND_SIMPLE_ANCHOR_WINRATE_TO_ELO_TRANSFORM_ARE_NOT_ADMISSIBLE_CLOSURE_ROUTES_UNDER_CURRENT_OFFICIAL_PUBLIC_INFORMATION"
+  },
+  "surviving_routes": [
+    "EXISTING_CONTENT_ADDRESSED_RELATIVE_COMPARATOR_RECEIPT",
+    "AUTHENTICATED_ARTIFICIAL_ANALYSIS_OWNER_OR_PLATFORM_THRESHOLD_OR_SCORE_RECEIPT",
+    "OFFICIAL_RELEASE_OF_EXACT_PAIRWISE_OBSERVATION_OR_SUFFICIENT_STATISTIC_PLUS_REQUIRED_REFERENCE_FIT_STATE_ENABLING_INDEPENDENT_EXACT_RECONSTRUCTION",
+    "SEPARATELY_VERIFIED_RELATIVE_SCORE_BRIDGE",
+    "MATCHED_EMPIRICAL_COMPARISON_UNDER_THE_EXACT_FROZEN_OFFICIAL_METHODOLOGY_WHEN_ADMISSIBLE"
+  ],
+  "wake_conditions": [
+    "ARTIFICIAL_ANALYSIS_PUBLISHES_OR_GRANTS_THE_LOAD_BEARING_PAIRWISE_OR_SUFFICIENT_FIT_STATE",
+    "AN_EXISTING_CONTENT_ADDRESSED_OWNER_RESULT_OR_THRESHOLD_RECEIPT_ARRIVES",
+    "A_NEW_FORMAL_BRIDGE_IS_PROVED_FROM_ALREADY_ADMISSIBLE_INFORMATION",
+    "THE_FROZEN_RELATIVE_RATING_ACCEPTANCE_PROTOCOL_CHANGES_BY_SEPARATE_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_RELEVANT_PRIVATE_OR_INACCESSIBLE_DATA_DOES_NOT_EXIST",
+    "NO_CLAIM_THAT_ALL_INTERNET_SURFACES_HAVE_BEEN_EXHAUSTED",
+    "NO_CLAIM_THAT_CROWDBT_IS_UNREPRODUCIBLE_IF_THE_REQUIRED_OBSERVATION_AND_FIT_STATE_BECOME_AVAILABLE",
+    "NO_CHANGE_TO_THE_FROZEN_1846_OR_1822_ACCEPTANCE_TARGETS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "GENERIC_PUBLIC_CROWDBT_FORMULA_SEARCH_AS_IF_MODEL_FORM_ALONE_IDENTIFIES_FIXED_ELO",
+      "SIMPLE_CANDIDATE_VS_ANCHOR_WINRATE_TO_FIXED_ELO_INFERENCE",
+      "PURE_ABSOLUTE_BEHAVIOR_TO_FIXED_RELATIVE_ELO_INFERENCE"
+    ],
+    "preserve": [
+      "OWNER_RESULT_OR_THRESHOLD_RECEIPT_RACE",
+      "EXACT_RELATIVE_FIT_STATE_RELEASE_WATCH",
+      "VERIFIED_RELATIVE_BRIDGE_RACE",
+      "MATCHED_EMPIRICAL_FALLBACK_IF_ADMISSIBLE"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
