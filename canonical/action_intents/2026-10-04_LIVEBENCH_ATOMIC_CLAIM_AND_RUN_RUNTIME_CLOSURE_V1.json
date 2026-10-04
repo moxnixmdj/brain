@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-04",
+  "objective": "Close the remaining zero-case LiveBench execution-path blockers without consuming terminal cases or granting authority.",
+  "priority": "CRITICAL_PATH",
+  "current_truth": {
+    "root2_frontier_candidate": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V14.json",
+    "root2_frontier_candidate_git_blob_sha": "c962ecb8974248d0ce3366775a4bce295e2b45dd",
+    "successor_precommit_v2": "VERIFIED",
+    "shadow_preexposure_v3": "VERIFIED",
+    "zero_case_resource_fit": "VERIFIED_REPAIRED_ENVIRONMENT",
+    "public_inference_capsule": "BLOCKED__MISSING_EXACT_GOAL_COMPILER_RUNTIME_HELPER",
+    "terminal_cases_consumed": 0,
+    "fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false
+  },
+  "ordered_work": [
+    {
+      "id": "LB-ZR-1",
+      "action": "REPAIR_PUBLIC_INFERENCE_CAPSULE_RUNTIME_CLOSURE",
+      "exact_requirement": "Make the frozen public inference capsule load the exact goal compiler helper with Git blob 4b61fe911471854ec15c7900816f61e9e55f602e without changing the frozen candidate semantics.",
+      "verify": "Rerun the exact synthetic zero-case inference request from verification PR 1732 and require status PASS, model-independent cognition provenance, zero terminal cases, and zero paid model/API use.",
+      "terminal_case_exposure_allowed": false
+    },
+    {
+      "id": "LB-ZR-2",
+      "action": "REPAIR_CLAIM_CONTROL_TO_ATOMIC_CREATE_AS_PROOF",
+      "exact_requirement": "Remove pre-claim absence observation as an ownership prerequisite from the successor control path. The production ownership event is first atomic create success; already-existing/ref-create failure aborts before reveal.",
+      "verify": "Independent mutation tests must prove no check-then-act absence dependency remains and duplicate/replay claim fails closed.",
+      "terminal_case_exposure_allowed": false
+    },
+    {
+      "id": "LB-ZR-3",
+      "action": "IMPLEMENT_RESULT_NONVISIBILITY",
+      "exact_requirement": "Replace escrow-contract-only state with an implementation receipt. Prefer cryptographic write-only result escrow where execution has encryption capability but no decryption/reveal capability before post-fixed-point release.",
+      "verify": "Prove no result-derived signal can leak through body, score, summary, logs, annotations, filenames, exit codes, artifact metadata, or candidate/policy mutation channels.",
+      "terminal_case_exposure_allowed": false
+    },
+    {
+      "id": "LB-RUNTIME-1",
+      "action": "COMPILE_ONE_ATOMIC_CLAIM_AND_RUN_TRANSACTION",
+      "prerequisites": [
+        "LB-ZR-1 PASS",
+        "LB-ZR-2 PASS",
+        "LB-ZR-3 PASS",
+        "V14 or successor independent verification/activation",
+        "separately scoped shadow/fresh-reality authority"
+      ],
+      "exact_order": [
+        "VERIFY_EXACT_COMPONENT_HASHES",
+        "RUN_SAME_RUNNER_POINT_OF_USE_ZERO_CASE_RESOURCE_AND_DEPENDENCY_PREFLIGHT",
+        "VERIFY_SCOPED_ACTIVATION_AND_RESULT_NONVISIBILITY_IMPLEMENTATION",
+        "ATOMIC_CREATE_ONE_USE_CLAIM",
+        "ONLY_AFTER_FIRST_CREATE_SUCCESS_REVEAL_TERMINAL_CASES",
+        "EXECUTE_EXACT_FROZEN_CANDIDATE",
+        "ENCRYPT_OR_WRITE_ONLY_STORE_RESULT",
+        "EMIT_OPAQUE_COMPLETION_AND_POST_EXECUTION_ISOLATION_RECEIPT"
+      ],
+      "terminal_case_exposure_allowed": "ONLY_AFTER_ALL_PREREQUISITES_AND_ATOMIC_CLAIM_SUCCESS"
+    }
+  ],
+  "fail_closed_rules": [
+    "NO_TERMINAL_CASE_READ_DURING_ZERO_CASE_REPAIR_OR_VERIFICATION",
+    "NO_PRIOR_ABSENCE_CHECK_AS_ONE_USE_OWNERSHIP_PROOF",
+    "NO_PRODUCTION_CLAIM_BEFORE_SYNTHETIC_INFERENCE_PASS_AND_ESCROW_IMPLEMENTATION_PASS",
+    "NO_RESULT_DERIVED_SIGNAL_BEFORE_AUTHORIZED_RELEASE",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY_FROM_THIS_INTENT",
+    "NO_ACCEPTANCE_PROMOTION_FROM_THIS_INTENT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
