@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROOT_CAUSE_STATE_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__LIVEBENCH_FORCED_FAIL_REVOKED__ROOT1_ZERO__LIVEBENCH_REOPENED_ROOT2",
+  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__LIVEBENCH_IF_EXACT200_PROVED__ROOT1_INACTIVE__ROOT2_18_REBIND_PENDING",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_acceptance": {
     "accepted_families": 5,
     "open_families": 14,
-    "proved_atomic": 12,
-    "unresolved_atomic": 26,
+    "proved_atomic": 13,
+    "unresolved_atomic": 25,
     "total_families": 19,
     "total_atomic": 38,
     "terminal": false
@@ -63,7 +63,7 @@
       "current_blocker_classification_seal": {
         "path": "canonical/governance/ROOT1_CURRENT_BLOCKER_CLASSIFICATION_SEAL_V1.json",
         "git_blob_sha": "d8346fec4326ee3fed32f08dcd29782bbc3647d2",
-        "status": "CURRENT_AGAIN_FOR_ROOT1_ZERO_ONLY__LIVEBENCH_POSITIVE_GAP_REVOKED__ROOT2_PARTITION_REQUIRES_RECOMPUTE",
+        "status": "HISTORICAL_VERIFIED_PRE_LIVEBENCH_EXACT200_SNAPSHOT__SUPERSEDED_FOR_CURRENT_COUNTS",
         "theorem": "CURRENT_UNRESOLVED_26_EQUALS_16_ROOT2_ONLY_PLUS_7_ROOT3_ONLY_PLUS_3_MIXED__DISJOINT__ROOT1_RESIDUAL_ZERO",
         "independent_verifier": {
           "repository": "moxnixmdj/verification-capsule-runner",
@@ -84,10 +84,7 @@
           "root1_current_residual": 0
         },
         "hard_nonclaim": "DOES_NOT_SEAL_FUTURE_ROOT1_IMPOSSIBILITY_OR_14_FAMILY_ROUTE_COVERAGE",
-        "superseded_by": {
-          "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
-          "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443"
-        },
+        "superseded_by": "canonical/verification/LIVEBENCH_IF_EXACT200_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
         "historical_snapshot_note": "THE_ZERO_ROOT1_CLASSIFICATION IS RESTORED FOR CURRENT SCHEDULING BECAUSE THE ONLY LATER POSITIVE GAP PROOF WAS REVOKED."
       },
       "current_operating_state": {
@@ -120,12 +117,12 @@
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
         "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
         "current_frontier_git_blob_sha": "75ca9127a73ca2dd52a49f2f09e2e0ccc384129a",
-        "status": "OUTPUT_ONLY_19_PREDICATE_SCHEDULING_COMPILER_REACTIVATED__CURRENT_EVIDENCE_FRONTIER_BOUNDS_STILL_REQUIRE_DELTA_RECOMPILE__ZERO_CREDIT",
-        "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2__LIVEBENCH_REOPENED",
+        "status": "STALE_19_PREDICATE_DOMAIN_AFTER_LIVEBENCH_EXACT200_PROOF__CURRENT_18_PREDICATE_REBIND_REQUIRED__ZERO_CREDIT",
+        "current_partition": "15_ROOT2_ONLY__3_ROOT2_AND_ROOT3__18_TOUCHING_ROOT2__LIVEBENCH_PROVED",
         "fresh_reality_authority": false,
         "current_frontier_verification_path": "canonical/verification/ROOT2_FRONTIER_V12_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
         "current_frontier_verification_git_blob_sha": "c13903bb6b0f2b03f934664e2af77fdc4cc0696b",
-        "effective_scheduling_authority": true,
+        "effective_scheduling_authority": false,
         "current_frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V12_FINAL_ACTIVATION_V1.json",
         "current_frontier_activation_git_blob_sha": "f3b97a8a2a54d4d0571911691677ae9046413103",
         "external_fact_acquisition_overlay": {
@@ -183,7 +180,9 @@
         "currentness_invalidation": {
           "reason": "LIVEBENCH_IF_GE_65_7_RETURNED_TO_ROOT2_AFTER_UNSOUND_64_PERCENT_FORCED_FAIL_BOUND_WAS_REVOKED",
           "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
-          "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443"
+          "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
+          "historical": true,
+          "superseded_by": "canonical/verification/LIVEBENCH_IF_EXACT200_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
         },
         "current_effective_state": "ACTIVE_SCHEDULING_COMPILER__COMPILE_CURRENT_EVIDENCE_DELTAS_BEFORE_ANY_PREDICATE_CREDIT",
         "post_revocation_19_dag_reactivation": {
@@ -191,7 +190,7 @@
           "activation_git_blob_sha": "3acbf619667fb8db5884069b4721b460f2da322c",
           "verification_path": "canonical/verification/ROOT2_19_POST_REVOCATION_DAG_CONNECTOR_VERIFICATION_20261004_V1.json",
           "verification_git_blob_sha": "a818891bea494078ac423aa92857c96203945433",
-          "status": "ACTIVE__EXACT_19_DOMAIN_IDENTITY_PASS__REUSES_PRIOR_INDEPENDENTLY_VERIFIED_DAG__SCHEDULING_ONLY__ZERO_CREDIT",
+          "status": "HISTORICAL__SUPERSEDED_BY_LIVEBENCH_EXACT200_PROOF__18_PREDICATE_REBIND_REQUIRED",
           "exact_touching_predicates": 19,
           "current_evidence_delta_recompile_required": true,
           "fresh_reality_authority": false
@@ -205,7 +204,25 @@
         "reason": "72_CASE_SCORE_LOWER_BOUNDS_OF_ZERO_DID_NOT_PROVE_EXACT_ZERO_OR_ANY_64_PERCENT_POPULATION_UPPER_BOUND",
         "current_scorer_family": "LEGACY_IFEVAL_ONLY__INDEPENDENTLY_VERIFIED",
         "scorer_scope_activation": "canonical/governance/LIVEBENCH_TERMINAL_SCORER_SCOPE_ACTIVATION_V1.json",
-        "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json"
+        "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
+        "current": false,
+        "status": "HISTORICAL_REVOKED_NEGATIVE_CLAIM__SUPERSEDED_BY_EXACT200_PASS",
+        "superseded_by": "canonical/verification/LIVEBENCH_IF_EXACT200_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+      },
+      "livebench_exact200_positive_resolution": {
+        "predicate_id": "LIVEBENCH_IF_GE_65_7",
+        "state": "PROVED__EXACT_PUBLIC_FIXED_BAR",
+        "brain_percent": 84.40416666666667,
+        "stricter_public_opus_floor_percent": 65.73775,
+        "registry_threshold_percent": 65.7,
+        "verification_path": "canonical/verification/LIVEBENCH_IF_EXACT200_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "verification_git_blob_sha": "82d5e90cb1662013eb452eade7815a04469749c4",
+        "evidence_ledger_git_blob_sha": "56dcdc8a56c20b3ca26cb40fb6053945c3934daf",
+        "family_remains_open": true,
+        "remaining_family_predicates": [
+          "IF_SCOPE_BOUNDARY_NONINFERIOR",
+          "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+        ]
       }
     },
     "root_3_scope_completeness": {
@@ -236,7 +253,7 @@
     "root1_currently_active": false,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
     "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
-    "root2_effective_scheduling_authority": true,
+    "root2_effective_scheduling_authority": false,
     "root2_external_fact_acquisition_overlay": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2_ACTIVATION_V1.json",
     "low_value_free_tier_trial_quota_support_outreach_forbidden": true,
     "self_service_facts_are_owner_waits": false,
@@ -496,17 +513,24 @@
       "root1_only_after": 0,
       "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json"
     },
-    "root2_current_touching_predicate_count": 19,
+    "root2_current_touching_predicate_count": 18,
     "root2_post_livebench_18_rebind": {
       "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
       "git_blob_sha": "f778e8eeb1295a03465a4cc6d49c3efab2ff80bb",
       "verification_path": "canonical/verification/POST_LIVEBENCH_ROOT2_REBIND_CONNECTOR_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "569fad34651f724d0746a09a3413a8ca7258d928",
-      "status": "SUPERSEDED__LIVEBENCH_RETURNED_TO_ROOT2__19_PREDICATE_RECOMPUTE_REQUIRED"
+      "status": "PRIOR_VERIFIED_18_DOMAIN_REBIND__REACTIVATION_PENDING_CURRENT_DOMAIN_IDENTITY_CHECK_AFTER_EXACT200_PASS"
     },
-    "root2_effective_scheduling_authority_source": "PENDING_19_PREDICATE_RECOMPUTE_AFTER_LIVEBENCH_FORCED_FAIL_REVOCATION",
-    "root2_effective_scheduling_scope": "PENDING_EXACT_CURRENT_19_ROOT2_TOUCHING_RECOMPUTE",
-    "root2_current_scheduling_compiler": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json"
+    "root2_effective_scheduling_authority_source": "PENDING_CURRENT_18_PREDICATE_REBIND_AFTER_LIVEBENCH_EXACT200_PASS",
+    "root2_effective_scheduling_scope": "PENDING_EXACT_CURRENT_18_ROOT2_TOUCHING_REBIND",
+    "root2_current_scheduling_compiler": "PENDING_REACTIVATION_OF_canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
+    "livebench_exact200_atomic_reduction": {
+      "verification_path": "canonical/verification/LIVEBENCH_IF_EXACT200_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "82d5e90cb1662013eb452eade7815a04469749c4",
+      "state": "PROVED__REMOVED_FROM_ROOT2_DOMAIN",
+      "root2_touching_before": 19,
+      "root2_touching_after": 18
+    }
   },
   "accounting": {
     "acceptance_credit_delta": 0,
@@ -514,7 +538,8 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "new_reality_units_consumed": 0,
-    "incremental_spend_usd": 0
+    "incremental_spend_usd": 0,
+    "atomic_predicate_credit_delta": 1
   },
   "current_residual_root_partition": {
     "registry": {
@@ -523,16 +548,16 @@
     },
     "evidence": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5",
+      "git_blob_sha": "56dcdc8a56c20b3ca26cb40fb6053945c3934daf",
       "pointer_reconciliation": {
-        "status": "RECONCILED_TO_CURRENT_12_PROVED_26_UNRESOLVED_LEDGER",
-        "previous_stale_git_blob_sha": "f99b00e6dca735ffa7a790a414155b4f69856cf0",
-        "acceptance_credit_delta": 0
+        "status": "RECONCILED_TO_CURRENT_13_PROVED_25_UNRESOLVED_LEDGER",
+        "previous_stale_git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5",
+        "acceptance_credit_delta": 1
       }
     },
-    "unresolved_total": 26,
+    "unresolved_total": 25,
     "root1_positive_gap_count": 0,
-    "root2_only_count": 16,
+    "root2_only_count": 15,
     "root3_only_count": 7,
     "root2_and_root3_count": 3,
     "root2_only": [
@@ -545,7 +570,6 @@
       "FINANCE_ACCOUNTING_INDEX_GE_61",
       "FINANCE_AGENT_V2_GE_58_59",
       "HLE_TOOLS_GE_67_7",
-      "LIVEBENCH_IF_GE_65_7",
       "MYSTERYMECHANISM_GE_49_55",
       "OSWORLD_2_1_PARTIAL_GE_81_8",
       "PROWORK_AA_BRIEFCASE_GE_1822",
@@ -586,7 +610,16 @@
       "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
       "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
       "reason": "UNSOUND_64_PERCENT_UPPER_BOUND_REVOKED",
-      "acceptance_credit_delta": 0
+      "acceptance_credit_delta": 0,
+      "historical": true
+    },
+    "livebench_exact200_resolution": {
+      "before": "ROOT2_ONLY__MEASUREMENT_OR_COMPARATOR_UNCERTAINTY",
+      "after": "PROVED__REMOVED_FROM_RESIDUAL_PARTITION",
+      "verification_path": "canonical/verification/LIVEBENCH_IF_EXACT200_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "reason": "INDEPENDENT_EXACT_BRAIN_BYTE_PUBLIC_200_ROW_SCORE_84_40416666666667_GE_65_73775_GE_65_7",
+      "atomic_predicate_credit_delta": 1,
+      "family_credit_delta": 0
     }
   },
   "root3_current_execution_state": {
@@ -641,23 +674,24 @@
     "workflow_run_id": 37168503920
   },
   "root_partition_transport": {
-    "status": "ACTIVE_POST_REVOCATION_19_ROOT2_DAG_REBIND__EXACT_DOMAIN_IDENTITY_PASS__ZERO_ACCEPTANCE_CREDIT",
+    "status": "CURRENT_TRUTH_15_ROOT2_ONLY_7_ROOT3_ONLY_3_MIXED__18_ROOT2_TOUCHING__SCHEDULER_REBIND_PENDING",
     "source_root_git_blob_sha": "c3d1e25e2268cce90df545a93f107aa24fed8f8b",
     "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
     "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
-    "acceptance_counts_unchanged": true,
-    "new_acceptance_credit": 0,
+    "acceptance_counts_unchanged": false,
+    "new_acceptance_credit": 1,
     "effective_partition": {
       "root1_positive_gap_count": 0,
-      "root2_only_count": 16,
+      "root2_only_count": 15,
       "root3_only_count": 7,
       "root2_and_root3_count": 3,
-      "root2_touching_count": 19,
-      "unresolved_total": 26
+      "root2_touching_count": 18,
+      "unresolved_total": 25
     },
-    "scheduling_authority": true,
-    "next_required": "COMPILE_CURRENT_EVIDENCE_DELTAS_INTO_REACTIVATED_OUTPUT_ONLY_DAG_AND_SOLVE_MINIMUM_ZERO_REALITY_PASS_OR_FAIL_CERTIFICATE_CUT",
+    "scheduling_authority": false,
+    "next_required": "INDEPENDENTLY_REACTIVATE_EXACT_18_PREDICATE_ROOT2_SCHEDULING_DOMAIN_THEN_RECOMPUTE_MINIMUM_ZERO_REALITY_CUT",
     "verification_path": "canonical/verification/ROOT2_19_POST_REVOCATION_DAG_CONNECTOR_VERIFICATION_20261004_V1.json",
-    "activation_path": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json"
+    "activation_path": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json",
+    "livebench_exact200_verification": "canonical/verification/LIVEBENCH_IF_EXACT200_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
   }
 }
