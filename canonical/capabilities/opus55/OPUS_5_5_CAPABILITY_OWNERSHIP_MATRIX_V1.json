@@ -311,7 +311,9 @@
       "evidence": "Existing route is strong and configured conceptually, but no direct Opus-5.5-or-better comparative evidence was found for the full financial-analysis scope.",
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
-        "https://openai.com/index/gpt-6-astra/"
+        "https://openai.com/index/gpt-6-astra/",
+        "https://github.com/caiplayer/financial-research-agent",
+        "https://github.com/baimmm6767/sec-data"
       ],
       "internalization_required": true,
       "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
@@ -319,7 +321,22 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
       "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+      "candidate_internalization_routes": [
+        {
+          "repo": "caiplayer/financial-research-agent",
+          "license": "MIT",
+          "role": "deterministic point-in-time SEC evidence retrieval, provenance-preserving event extraction, evidence review, and offline regression-test shell",
+          "discovery_status": "REUSABLE_CANDIDATE__OFFLINE_CORE__ZERO_CREDIT"
+        },
+        {
+          "repo": "baimmm6767/sec-data",
+          "license": "Apache-2.0",
+          "role": "local SEC/XBRL financial-statement extraction and modelling-ready structured data pipeline with filing-aware mapping and accounting repairs",
+          "discovery_status": "REUSABLE_CANDIDATE__LOCAL_PROCESSING__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Compose only the deterministic SEC provenance/event-review and local XBRL/accounting extraction primitives first; independently verify exact numeric/provenance behavior and isolate any remaining learned financial-judgment residual before acquisition or credit."
     },
     {
       "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
@@ -499,7 +516,8 @@
       "evidence": "Brain owns bounded synthesis components, but no broad Opus 5.5 communication parity evaluation exists.",
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
-        "https://openai.com/index/gpt-6-astra/"
+        "https://openai.com/index/gpt-6-astra/",
+        "https://github.com/tradertanmay/research-agent"
       ],
       "internalization_required": true,
       "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
@@ -507,7 +525,16 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
       "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+      "candidate_internalization_routes": [
+        {
+          "repo": "tradertanmay/research-agent",
+          "license": "MIT",
+          "role": "local-first multi-source evidence discovery, document cross-referencing, citation-grounded synthesis, and report generation with a fully local Ollama path",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_COST_LOCAL_PATH__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Factor model-substrate-independent evidence collection, citation grounding, synthesis, and report-assembly primitives from the MIT local-first candidate; verify donor-independent behavior before any route-coverage or ownership credit."
     },
     {
       "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
