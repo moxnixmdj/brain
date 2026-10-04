@@ -72,13 +72,13 @@
         "NEW_REALITY_ONLY_IF_IRREDUCIBLE"
       ],
       "active_closure_controller": {
-        "activation_path": "canonical/governance/ROOT2_CLOSURE_CONTROLLER_V2_ACTIVATION_V1.json",
-        "activation_git_blob_sha": "4cbc1b9f478654b2dc671a8b54f91b5c4b91c019",
-        "verification_path": "canonical/verification/ROOT2_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-        "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
+        "activation_path": "canonical/governance/ROOT2_CLOSURE_CONTROLLER_V2_ACTIVATION_V2.json",
+        "activation_git_blob_sha": "dd60976bc1488d899864b46d1677ac2a83760aea",
+        "verification_path": "canonical/verification/ROOT2_SYNTHESIS_COVERAGE_V2_PHASE1_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "verification_git_blob_sha": "462d2fdd2f216d5b8726ca0ccbd6818a4afb4585",
         "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V1.json",
         "current_frontier_git_blob_sha": "a58aa3513449ec5e56f66204fd33f3916d1bc09c",
-        "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__MINIMUM_ACTION_SCHEDULING_AUTHORITY__STABLE_FRONTIER_INPUT_BINDING__ZERO_CREDIT",
+        "status": "CANDIDATE_PHASE1_CONTROLLER_PASS__FINAL_STABLE_MIRROR_REVERIFY_PENDING__ZERO_CREDIT",
         "current_partition": "16_ROOT2_ONLY__3_ROOT2_AND_ROOT3__19_TOUCHING_ROOT2",
         "fresh_reality_authority": false
       }
@@ -221,9 +221,16 @@
     "after": "ROOT2_ONLY",
     "remaining_root2_residuals": [
       "metric:matched_quality",
-      "matched_quality_noninferiority",
-      "required_claim_coverage_noninferiority"
+      "matched_quality_noninferiority"
     ],
-    "acceptance_credit_delta": 0
+    "acceptance_credit_delta": 0,
+    "required_claim_coverage_reduction": {
+      "state": "PROVED_BY_INDEPENDENT_CEILING_PLUS_SUPERSET_SCOPE",
+      "candidate_path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
+      "candidate_git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
+      "phase1_verification_path": "canonical/verification/ROOT2_SYNTHESIS_COVERAGE_V2_PHASE1_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "phase1_verification_git_blob_sha": "462d2fdd2f216d5b8726ca0ccbd6818a4afb4585",
+      "acceptance_credit_delta": 0
+    }
   }
 }
