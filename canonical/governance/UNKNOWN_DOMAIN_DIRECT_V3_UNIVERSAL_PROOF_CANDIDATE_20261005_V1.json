@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_V3_UNIVERSAL_PROOF_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_UNIVERSAL_ZERO_REALITY_BREAKTHROUGH__V2_FLOAT_COUNTEREXAMPLE_REPAIRED_BY_V3__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "truth_repair": {
+    "invalidated_candidate": "V2_UNIVERSAL_PROOF",
+    "counterexample": "ADD2_TRUE_SUPPORT_CAN_BE_IDENTIFIED_WHILE_LEXICOGRAPHIC_R0_R1_SWAP_CHANGES_EXACT_IEEE754_QUERY_RESULT_BY_ONE_ULP__FROZEN_SCORER_USES_EXACT_EQUALITY",
+    "counterexample_regression_test": "canonical/tests/test_unknown_domain_direct_candidate_v3.py",
+    "repair": "V3_ORIENTS_THE_ALREADY_IDENTIFIED_ADD2_TRUE_SUPPORT_FROM_THE_FROZEN_VISIBLE_PUBLIC_SIGN_SIGNATURE_BEFORE_QUERY_EVALUATION",
+    "v3_candidate_path": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+    "v3_candidate_git_blob_sha": "8df7f13455b710623806a8219174b397a2c3c442"
+  },
+  "universal_proof": {
+    "path": "canonical/runtime/unknown_domain_direct_v3_universal_proof_v1.py",
+    "git_blob_sha": "ee5f3832fdbad5ae645b0626e9f39ebeaee2b1da",
+    "tests": "canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py",
+    "claim": "FOR_EVERY_VALID_POST_FREEZE_BEACON_AND_EVALUATOR_SECRET__EVERY_27_CASE_POPULATION_EMITTED_BY_THE_EXACT_FROZEN_V2_GENERATOR_IS_PASSED_BY_THE_EXACT_CONTENT_BOUND_V3_CANDIDATE_THROUGH_THE_EXACT_FROZEN_HARNESS_AND_SCORER",
+    "method": [
+      "CONTENT_BIND_V1_V2_V3_CANDIDATES_GENERATOR_V1_V2_SCORER_AND_HARNESS",
+      "PROVE_STRICT_WRONG_SUPPORT_REJECTION_FOR_AFFINE_COMPLEMENT_SAT_MONO_SIGN_STEP",
+      "PROVE_ADD2_WRONG_SUPPORT_REJECTION_ON_FIRST_ALLOWED_PROBE",
+      "PROVE_UNIQUE_ADD2_ROLE_ORIENTATION_FROM_PUBLIC_NONZERO_SIGN_SIGNATURES",
+      "PROVE_THREE_ABSTENTION_CLASSES_DIRECTLY_FROM_FROZEN_GENERATOR_SCORER_CONTRACT",
+      "CONSUME_ZERO_PRODUCTION_OR_TERMINAL_CASES"
+    ]
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/unknown_domain_direct_candidate_v1.py": "a2a77269a8175ce315b466035049da0f761b8734",
+    "canonical/runtime/unknown_domain_direct_candidate_v2.py": "4470716f95a559a700e461262df909ae19a41651",
+    "canonical/runtime/unknown_domain_direct_candidate_v3.py": "8df7f13455b710623806a8219174b397a2c3c442",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+  },
+  "root3_transport": {
+    "direct_proof_protocol": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+      "git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab"
+    },
+    "frozen_evaluator_family": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EVALUATOR_FAMILY_V1.json",
+      "git_blob_sha": "52090daf78d12020af48c1b6ffaea056d9029e1b"
+    },
+    "generator_v2_freeze": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_GENERATOR_FREEZE_V2.json",
+      "git_blob_sha": "6bf6042a7a36c12d6d5ebfc5d16ea23ed2befbb6"
+    },
+    "root3_minimum_cut": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+      "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+      "resume_event": "NEW_SCOPE_CERTIFICATE_EVENT"
+    },
+    "root3_universal_scope_activation": {
+      "path": "canonical/governance/ROOT3_UNIVERSAL_SCOPE_CLOSURE_ACTIVATION_V1.json",
+      "git_blob_sha": "4cb0d963aa11205063d0119d9ae8fdb625f80e3c",
+      "admissible_method": "INDUCTIVE_INVARIANT_OR_UNIVERSAL_THEOREM"
+    },
+    "scope_certificate_admissibility": {
+      "path": "canonical/governance/ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V2.json",
+      "git_blob_sha": "a9bff5074dbb456d673131c60f30efa88a337670",
+      "required": "EXPLICIT_INDEPENDENT_LOSSLESS_EXHAUSTIVE_OR_UNIVERSAL_COMPLETENESS"
+    }
+  },
+  "scheduler_delta_if_independently_verified": [
+    "WAKE_ROOT3_NEW_SCOPE_CERTIFICATE_EVENT_FOR_UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "COMPILE_AS_UNIVERSAL_FORMAL_SCOPE_PROOF_WITH_EXACT_TARGET_SCOPE_RELATION",
+    "DELETE_UNKNOWN_DOMAIN_ONE_USE_27_CASE_PRODUCTION_POPULATION_AS_REQUIRED_INFORMATION_ACQUISITION_FOR_THIS_FROZEN_DIRECT_EVALUATOR_CONTRACT",
+    "TREAT_THAT_PRODUCTION_EXECUTION_AS_ZERO_EXPECTED_INFORMATION_GAIN_FOR_THE_CONTENT_BOUND_FROZEN_CONTRACT",
+    "RUN_SEPARATE_FAIL_CLOSED_ROOT3_AND_ACCEPTANCE_REDUCTION_BEFORE_ANY_CREDIT"
+  ],
+  "why_stronger_than_81_of_81_qualification": "81_CASES_SAMPLE_THREE_POST_FREEZE_QUALIFICATION_POPULATIONS__THIS_THEOREM_QUANTIFIES_OVER_EVERY_POPULATION_THE_FROZEN_GENERATOR_CAN_EMIT_AND_REPAIRS_A_REAL_V2_EXACT_FLOAT_COUNTEREXAMPLE",
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false,
+    "independent_verification_required": true
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_BEYOND_THE_FROZEN_DIRECT_EVALUATOR_CONTRACT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_UNTIL_INDEPENDENT_VERIFICATION_AND_SEPARATE_REDUCTION",
+    "NO_PRODUCTION_CASE_GENERATED_READ_OR_CONSUMED",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
