@@ -345,3 +345,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+# PR trigger: execute exact active15 synthetic audit V2 on frozen checker source.
