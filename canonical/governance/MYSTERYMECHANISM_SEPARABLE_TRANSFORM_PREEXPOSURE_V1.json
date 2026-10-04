@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_SEPARABLE_TRANSFORM_PREEXPOSURE_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_PUBLIC_DEVELOPMENT_EXTENSION__ZERO_PRIVATE_CASES__ZERO_CREDIT",
+  "parent": "canonical/governance/MYSTERYMECHANISM_SPARSE_SYMBOLIC_ADAPTER_PREEXPOSURE_V1.json",
+  "objective": "ADD_GENERIC_SPARABLE_2D_STRUCTURE_DISCOVERY_FROM_THE_BENCHMARK_NATIVE_FOUR_CORNER_PLUS_INTERIOR_EVIDENCE_WITHOUT_STORING_PUBLIC_EXAMPLE_FORMULAS",
+  "insight": "FOR_SEPARABLE_OR_NEAR_SEPARABLE_2D_LAWS__A_BILINEAR_BASIS_1_F_X_G_Z_F_X_TIMES_G_Z_CAN_REPRESENT_PRODUCTS_OF_TWO_UNIVARIATE_FACTORS_WHILE_LEAVE_ONE_OUT_ERROR_PENALIZES_SPARSE_OVERFIT",
+  "candidate": {
+    "runtime": "canonical/runtime/mysterymechanism_separable_transform_v1.py",
+    "tests": "canonical/tests/test_mysterymechanism_separable_transform_v1.py",
+    "input_requirement": "AT_LEAST_7_ROWS__EXACTLY_2_INPUT_VARIABLES",
+    "output": "SAFE_EXPLICIT_BILINEAR_TRANSFORM_EXPRESSION_OR_FAIL_CLOSED"
+  },
+  "univariate_capability_grammar": {
+    "rational_powers": [
+      0.25,
+      0.3333333333333333,
+      0.5,
+      0.625,
+      0.6666666666666666,
+      0.8,
+      1,
+      1.5,
+      2
+    ],
+    "one_plus_power_inverse": true,
+    "power_saturation": true,
+    "boundary_distance_power": true,
+    "boundary_ratio_power": true,
+    "generic_simple_anchors": [
+      -2,
+      -1,
+      0,
+      1,
+      2
+    ],
+    "data_range_anchors": "ONE_SPAN_OUTSIDE_EACH_BOUND",
+    "boundary_exponent_grid": "0.5_TO_3.0_STEP_0.1"
+  },
+  "model": "Y_EQUALS_B0_PLUS_B1_F_X1_PLUS_B2_G_X2_PLUS_B3_F_X1_G_X2",
+  "selection": "LEAVE_ONE_OUT_NRMSE_THEN_ALL_ROW_NRMSE_THEN_COMPLEXITY",
+  "public_development_checks": [
+    "VALS_PUBLIC_HEMATOCRIT_SHEAR_EXAMPLE_COMPATIBILITY_ALLOWED_AS_PUBLIC_DEV_ONLY",
+    "NO_VALIDATION_OR_TEST_MECHANISM_ACCESS",
+    "NO_SCORE_PROMOTION_FROM_PUBLIC_EXAMPLE"
+  ],
+  "hard_nonclaims": [
+    "NO_MYSTERYMECHANISM_GE_49_55_CLAIM",
+    "NO_PRIVATE_222_TASK_SCORE",
+    "NO_FAMILY_OR_TERMINAL_CREDIT",
+    "NO_STORED_PUBLIC_EXAMPLE_FINAL_FORMULA_OR_HIDDEN_TASK_FORMULA_LIBRARY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
