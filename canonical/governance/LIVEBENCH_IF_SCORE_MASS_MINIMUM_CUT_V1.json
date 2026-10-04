@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_SCORE_MASS_MINIMUM_CUT_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENTLY_VERIFIED__EXACT_PUBLIC_SCORER_ARITHMETIC__MINIMUM_REPAIR_CUT_REDUCED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "upstream_semantic_independence_theorem": {
+    "path": "canonical/governance/LIVEBENCH_IF_SCORER_SEMANTIC_INDEPENDENCE_THEOREM_V1.json",
+    "git_blob_sha": "144e62b378a6dac4307ba00a42d16f59c21b0fcc"
+  },
+  "population_and_bar": {
+    "verification": "canonical/verification/LIVEBENCH_IF_2026_06_25_RELEASE_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "population_count": 200,
+    "threshold_percent": 65.7
+  },
+  "exact_score_algebra": {
+    "per_question_score": "0.5*ALL_CHECKERS_TRUE + 0.5*(TRUE_CHECKER_COUNT/TOTAL_CHECKER_COUNT)",
+    "conservative_case_lower_bound": "IF_k_CHECKERS_AND_g_ARE_PROVED_TRUE__LOWER_BOUND_IS_1_IF_g_EQUALS_k__ELSE_g_DIVIDED_BY_2k",
+    "runtime": "canonical/runtime/livebench_if_score_bound_v1.py",
+    "tests": "canonical/tests/test_livebench_if_score_bound_v1.py"
+  },
+  "minimum_repair_cut": {
+    "sufficient_full_score_cases_if_every_other_case_scores_zero": 132,
+    "score_percent": 66.0,
+    "lower_neighbor_full_score_cases": 131,
+    "lower_neighbor_percent": 65.5,
+    "maximum_zero_score_cases_if_all_others_full": 68,
+    "interpretation": "UNIVERSAL_200_CASE_SOLVING_IS_NOT_REQUIRED__132_FULL_SCORE_CASES_IS_A_SUFFICIENT_WORST_CASE_CUT__PARTIAL_CHECKER_CREDIT_CAN_LOWER_THE_REQUIRED_FULL_SCORE_COUNT"
+  },
+  "scheduler_delta": [
+    "OPTIMIZE_SUCCESSOR_IMPLEMENTATION_FOR_PROVED_SCORE_MASS_PER_UNIT_WORK_NOT_FOR_ALL_83_CHECKER_TYPES",
+    "TREAT_UNSOLVED_CHECKERS_AS_ZERO_IN_THE_LOWER_BOUND__NEVER_GUESS",
+    "STOP_CONSTRUCTIVE_EXPANSION_AS_SOON_AS_THE_EXACT_CONSERVATIVE_LOWER_BOUND_REACHES_65_7",
+    "PRIORITIZE_CHECKER_FAMILIES_BY_EXPECTED_OR_PROVED_POPULATION_SCORE_MASS_DIVIDED_BY_IMPLEMENTATION_AND_VERIFICATION_COST",
+    "DO_NOT_CONSUME_NEW_TERMINAL_CASES_TO_ESTIMATE_MASS_BEFORE_SUCCESSOR_FREEZE_AND_SEPARATE_AUTHORITY"
+  ],
+  "independent_verification": {
+    "path": "canonical/verification/LIVEBENCH_IF_SCORER_SURFACE_COLLAPSE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1845,
+    "verified_head_sha": "f9a40237b378b10a922d6e3dfe7092d322817635",
+    "merge_commit": "3601248516caf3a49cc7933873d498e5c48de15a",
+    "workflow_run_id": 37198748968,
+    "workflow_job_id": 111425897246,
+    "conclusion": "success"
+  },
+  "hard_nonclaims": [
+    "132_IS_SUFFICIENT_NOT_NECESSARY",
+    "NO_CURRENT_SUCCESSOR_SCORE_IS_CLAIMED",
+    "NO_TERMINAL_CASE_OR_METADATA_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "next": "COMPUTE_A_PRECOMMITTED_CHECKER_COVERAGE_FRONTIER_AND_IMPLEMENT_ONLY_THE_MINIMUM_SET_NEEDED_TO_FORCE_THE_EXACT_CONSERVATIVE_LOWER_BOUND_ABOVE_65_7"
+}
