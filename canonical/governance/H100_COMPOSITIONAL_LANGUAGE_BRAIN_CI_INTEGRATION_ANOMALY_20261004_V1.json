@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_H100_COMPOSITIONAL_LANGUAGE_BRAIN_CI_INTEGRATION_ANOMALY_20261004_V1",
+  "date": "2026-10-04",
+  "status": "RECORDED__BRAIN_LOCAL_WORKFLOW_FAILURE_WITH_NO_USABLE_STEP_LOGS__INDEPENDENT_EXACT_SUBJECT_PASS_LOAD_BEARING__ZERO_CREDIT",
+  "brain_pull_request": 1681,
+  "brain_subject_head_sha": "4f86e0d427e96bcadd7ecce2fe81a4baf15857ff",
+  "brain_local_workflow": {
+    "name": "H100 zero-learned compositional language V1",
+    "run_id": 37192432366,
+    "job_id": 111407261078,
+    "conclusion": "failure",
+    "usable_step_logs": false,
+    "semantic_failure_identified": false
+  },
+  "exact_subject_blobs": {
+    "preexposure": "2d2af5020bc30bc322d4285b54c0d979a5c0b882",
+    "candidate": "786b487b9d55a02de970d0092e3c879d44acab9a",
+    "runtime": "fd5f16e4ac4187a98f7824b68879871a82eece6a",
+    "tests": "1c5095eca2ecd43eca0940662b69f5de8fb3cc19"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1809,
+    "merge_commit": "40304ce25a57b948f0a96c2e08894c694aa89a2a",
+    "workflow_run_id": 37192828256,
+    "workflow_job_id": 111408439258,
+    "conclusion": "success",
+    "exact_subject_blobs": true,
+    "frozen_replay": "12_OF_12_EXACT",
+    "fresh_challenges": "5_OF_5_PASS"
+  },
+  "rule": "DO_NOT_RECLASSIFY_BRAIN_LOCAL_INFRASTRUCTURE_FAILURE_AS_COMPOSITIONAL_CAPABILITY_FAILURE_WHEN_EXACT_SUBJECT_BYTES_HAVE_AN_INDEPENDENT_CONTENT_ADDRESSED_PASS",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
