@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "UNKNOWN-DOMAIN-V2-UNIVERSAL-ZERO-REALITY-BREAKTHROUGH-20261005",
   "date": "2026-10-05",
-  "status": "PROPOSED__ZERO_REALITY_UNIVERSAL_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "PROPOSED__ZERO_REALITY_UNIVERSAL_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__CURRENT_MAIN_AUTHORITY_RECONCILED__ZERO_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "735ac07f196bb2867ab14de152f97a34098501b2",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
@@ -18,7 +18,9 @@
     "canonical/governance/UNKNOWN_DOMAIN_DIRECT_PRECLAIM_RETRY_V1.json",
     "moxnixmdj/verification-capsule-runner#2034",
     "moxnixmdj/brain#1858",
-    "moxnixmdj/verification-capsule-runner#2040"
+    "moxnixmdj/verification-capsule-runner#2040",
+    "canonical/governance/UNKNOWN_DOMAIN_AUTHORITY_RECONCILIATION_20261005_V2.json",
+    "moxnixmdj/verification-capsule-runner#2053"
   ],
   "theory_invariants": {
     "correctness_first": true,
@@ -67,7 +69,7 @@
       "intrinsic_or_path_specific": "PATH_SPECIFIC_INFORMATION_ACQUISITION_BLOCKER",
       "delete_bypass_substitute_options": [
         "DELETE_FRESH_PRODUCTION_IF_UNIVERSAL_PROOF_IS_SOUND",
-        "KEEP_ONE_SHOT_PRODUCTION_ONLY_IF_THEOREM_IS_FALSIFIED"
+        "IF_THEOREM_IS_FALSIFIED__CONTINUE_ONLY_THROUGH_THE_REPAIRED_SUCCESSOR_LEASE_AFTER_PR2053_EXACT_BYTE_VERIFICATION_AND_A_NEW_OUTCOME_BLIND_REDUCTION"
       ],
       "surviving_causal_blocker": "INDEPENDENT_VERIFICATION_NOT_YET_CANONICALLY_PROMOTED"
     },
@@ -83,16 +85,17 @@
       ],
       "routes_ranked": [
         "INDEPENDENTLY_VERIFY_CONTENT_BOUND_UNIVERSAL_THEOREM__ZERO_CASES",
-        "RETRY_ONE_USE_27_CASE_PRODUCTION_ONLY_IF_THEOREM_FAILS"
+        "ONLY_IF_THEOREM_FAILS__VERIFY_REPAIRED_PRODUCTION_SUCCESSOR_IN_PR2053__FREEZE_NEW_REDUCTION__THEN_ALLOW_ONE_NEW_ATOMIC_CLAIM"
       ],
-      "losing_routes_reason": "A successful universal theorem has strictly greater scope and zero fresh-reality cost, so the one-shot production population has zero expected information gain for the exact frozen claim.",
+      "losing_routes_reason": "The retired 76e8040d lease is invalid and forbidden. A successful universal theorem has broader exact-frozen-domain scope and zero fresh-reality cost; therefore it dominates completing the repaired production successor. Production regains priority only if independent verification falsifies the theorem.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
       "independent_verifier": "moxnixmdj/verification-capsule-runner#2040",
-      "falsification_condition": "ANY_EXACT_BOUND_SOURCE_MISMATCH__ANY_TRANSFER_FAMILY_COUNTEREXAMPLE__ANY_ABSTENTION_CLASS_COUNTEREXAMPLE__OR_ANY_CANDIDATE_HARNESS_SCORER_MISMATCH"
+      "falsification_condition": "ANY_EXACT_BOUND_SOURCE_MISMATCH__ANY_TRANSFER_FAMILY_COUNTEREXAMPLE__ANY_ABSTENTION_CLASS_COUNTEREXAMPLE__OR_ANY_CANDIDATE_HARNESS_SCORER_MISMATCH",
+      "fallback_authority": "NONE_CURRENTLY__OLD_LEASE_RETIRED__REPAIRED_SUCCESSOR_PR2053_PENDING__NEW_REDUCTION_REQUIRED"
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
@@ -122,11 +125,12 @@
     ],
     "deleted_or_bypassed_paths": [
       "DUPLICATE_INDEPENDENT_VERIFIER",
-      "PREMATURE_27_CASE_PRODUCTION"
+      "PREMATURE_27_CASE_PRODUCTION",
+      "ANY_EXECUTION_FROM_RETIRED_76e8040d_LEASE"
     ],
     "selected_surviving_route": "UNIVERSAL_ZERO_REALITY_PROOF",
     "why_selected_route_is_fastest_sufficient": "If sound, it quantifies over every population emitted by the exact frozen generator and makes the fresh 27-case sample informationally dominated.",
-    "stop_condition": "Do not grant acceptance/family/capability/ownership credit in this PR. Stop and revert to the one-use production route if independent verification falsifies the theorem.",
+    "stop_condition": "Do not grant acceptance/family/capability/ownership credit in this PR. If independent verification falsifies the theorem, preserve the counterexample and continue only through the repaired successor production path after PR2053 verification and a new outcome-blind reduction. Never execute the retired lease.",
     "route_frontier": {
       "discovery_required": false,
       "reason": "Exact source bytes and an active independent verifier already exist; additional route discovery would duplicate the current blocker lease."
@@ -179,13 +183,15 @@
     "unknown_material_dependencies": [],
     "obs_layers_current": "CURRENT_AT_ACTION_CREATION__MUST_REVALIDATE_AFTER_MAIN_DRIFT",
     "stale_authority_absent": false,
-    "stale_authority_reason": "PR1858 branch predates newer main commits; merge/promotion requires current-main revalidation even though all six bound subject blobs were rechecked unchanged.",
+    "stale_authority_reason": "PR1858 branch predates newer main commits. Current-main reconciliation retired the old production lease; the universal theorem remains bound to unchanged candidate/generator/scorer/harness blobs, but merge/promotion still requires current-main revalidation.",
     "valid_proof_action_priority": "UNIVERSAL_THEOREM_BEFORE_FRESH_PRODUCTION",
     "information_boundary_complete": true,
     "information_policy": "ZERO_PRODUCTION_OR_TERMINAL_CASES",
     "dependencies": [
-      "runner PR2040 independent verification",
-      "separate acceptance reducer after verification"
+      "runner PR2040 independent universal-proof verification",
+      "current-main Unknown-Domain authority reconciliation dabc54e686d7d304b79e9fc4edb501558fc7393c",
+      "runner PR2053 only as conditional fallback if theorem is falsified",
+      "separate acceptance reducer after universal verification"
     ]
   },
   "reality_query_admission": {
@@ -193,7 +199,7 @@
     "existing_evidence_search": "COMPLETE_FOR_CURRENT_ROUTE",
     "evidence_scope_equivalence": "UNIVERSAL_THEOREM_STRONGER_THAN_ONE_27_CASE_SAMPLE_FOR_EXACT_FROZEN_GENERATOR_DOMAIN_IF_SOUND",
     "deductive_closure": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION",
-    "counterfactual_terminal_distinctions": "A fresh population cannot distinguish anything if the theorem is valid; if theorem is false, production may regain information value.",
+    "counterfactual_terminal_distinctions": "A fresh population has zero decision value for the exact frozen claim if the theorem verifies. If the theorem is falsified, the repaired successor production path may regain information value only after its own exact-byte verification and new outcome-blind reduction.",
     "dominated_observations_deleted": [
       "27_CASE_PRODUCTION_POPULATION_AS_REQUIRED_STEP__CONDITIONAL_ON_VERIFIER_PASS"
     ],
