@@ -153,3 +153,26 @@ def test_sentence_less_than_one_does_not_overcertify_nonpublic_end_phrase():
     out = f.classify_visible_contracts(contracts)
     assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
     assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" not in out["hard_unsat_reasons"]
+
+
+def test_section_forbidden_overlap_is_not_hard_unsat():
+    contracts = [
+        {
+            "instruction_id": "detectable_format:multiple_sections",
+            "slots": {"section_spliter": "Section", "num_sections": 3},
+        },
+        {
+            "instruction_id": f.FORBIDDEN,
+            "slots": {"forbidden_words": ["section"]},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
+
+    # Exact pinned regex witness: optional separator whitespace lets Section1
+    # count as a section marker, and the following digit destroys the trailing
+    # word boundary required by ForbiddenWords.
+    response = "Section1 zxqv Section2 zxqv Section3 zxqv"
+    assert len(re.split(r"\s?Section\s?\d+\s?", response)) - 1 == 3
+    assert re.search(r"\bsection\b", response, flags=re.IGNORECASE) is None
