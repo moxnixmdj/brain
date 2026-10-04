@@ -67,9 +67,36 @@ def _validate_transfer_packet(visible: Mapping[str, Any], hidden: Mapping[str, A
         check_inputs(row, "V3_PROBE_SURFACE_IDENTIFIER_COLLISION")
 
 
+def _allowed_probe_ids(visible: Mapping[str, Any]) -> list[str]:
+    if visible.get("leaf_id") == v1.TRANSFER:
+        rows = visible.get("domain_b", {}).get("allowed_probes", [])
+    else:
+        rows = visible.get("allowed_probes", [])
+    if not isinstance(rows, list):
+        raise v1.UnknownDomainGeneratorError("V3_ALLOWED_PROBES_INVALID")
+    ids = [str(row.get("probe_id") or "") for row in rows if isinstance(row, Mapping)]
+    if len(ids) != len(rows) or any(not x for x in ids) or len(ids) != len(set(ids)):
+        raise v1.UnknownDomainGeneratorError("V3_PROBE_IDS_NOT_INJECTIVE")
+    return ids
+
+
+def _validate_abstention_packet(visible: Mapping[str, Any], hidden: Mapping[str, Any]) -> None:
+    hypotheses = visible.get("hypotheses")
+    if not isinstance(hypotheses, list) or not hypotheses:
+        raise v1.UnknownDomainGeneratorError("V3_HYPOTHESES_INVALID")
+    hids = [str(row.get("hypothesis_id") or "") for row in hypotheses if isinstance(row, Mapping)]
+    if len(hids) != len(hypotheses) or any(not x for x in hids) or len(hids) != len(set(hids)):
+        raise v1.UnknownDomainGeneratorError("V3_HYPOTHESIS_IDS_NOT_INJECTIVE")
+    probe_ids = _allowed_probe_ids(visible)
+    minimum = hidden.get("minimum_discriminator_id")
+    if minimum is not None and str(minimum) not in set(probe_ids):
+        raise v1.UnknownDomainGeneratorError("V3_MINIMUM_DISCRIMINATOR_NOT_VISIBLE")
+
+
 def _transfer_case(secret: bytes, beacon: str, index: int, *, namespace: str):
     visible, hidden = v2._transfer_case(secret, beacon, index, namespace=namespace)
     _validate_transfer_packet(visible, hidden)
+    _allowed_probe_ids(visible)
     return visible, hidden
 
 
@@ -85,6 +112,7 @@ def _generate(*, beacon: str, evaluator_secret: Any, namespace: str):
         hidden.append(b)
     for i in range(v1.PRODUCTION_CASE_COUNTS[v1.ABSTAIN]):
         a, b = v1._abstention_case(secret, beacon, i, namespace=namespace)
+        _validate_abstention_packet(a, b)
         visible.append(a)
         hidden.append(b)
     ids = [x["case_id"] for x in visible]
