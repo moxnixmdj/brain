@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_FORCED_FAIL_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ROOT1_POSITIVE_GAP_REVOKED_IF_INDEPENDENTLY_VERIFIED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Restore sound current root classification after canonical main proved the prior partial-mass forced-fail inference unsound.",
+  "bound_snapshot": {
+    "brain_base_commit": "af390382659efc136a090fdfdac65498367019be",
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "c3d1e25e2268cce90df545a93f107aa24fed8f8b"
+    },
+    "prior_root1_reclassification": {
+      "path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+      "git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684"
+    },
+    "prior_root_partition_projection": {
+      "path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json",
+      "git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99"
+    },
+    "prior_forced_fail_binding": {
+      "path": "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_BINDING_V1.json",
+      "git_blob_sha": "98659983c43ac37508177b4003a08cfd5d1e9447"
+    },
+    "truth_repair": {
+      "path": "canonical/governance/LIVEBENCH_PARTIAL_CREDIT_UPPER_BOUND_TRUTH_REPAIR_20261004_V1.json",
+      "git_blob_sha": "359f740191e528f16b30ed6b893dad5caee5698d"
+    }
+  },
+  "logical_repair": {
+    "prior_inference": "72_CASES_WITH_PROVED_LOWER_BOUND_ZERO_WERE_TREATED_AS_EXACT_ZERO_OR_UPPER_BOUND_ZERO__PLUS_128_UNRESOLVED_AT_SCORE_1__YIELDING_MAX_MASS_128_AND_FORCED_FAIL_64_PERCENT",
+    "canonical_counterexample": "THE_72_CASES_HAVE_ONLY_LOWER_BOUND_ZERO__WITHOUT_SEPARATE UPPER_BOUND EVIDENCE EACH MAY SCORE AS HIGH AS 1__THEREFORE CONSERVATIVE FULL_POPULATION_UPPER_MASS_IS_200_NOT_128",
+    "consequence": "THE_PRIOR_FORCED_FAIL_CERTIFICATE_DOES_NOT PROVE LIVEBENCH_IF_GE_65_7 FALSE FOR THE FROZEN CANDIDATE",
+    "classification_rule_applied": "UNKNOWN_OR_UNPROVED_CAPABILITY_MUST_NOT_BE CLASSIFIED AS MISSING__ROOT1_REQUIRES POSITIVE EVIDENCE OF AN OPERATIVE GAP",
+    "reclassification": {
+      "before": "ROOT1_ONLY_POSITIVE_OPERATIVE_GAP",
+      "after": "ROOT2_ONLY__COMPARATOR_OR_SCORE_UNCERTAINTY_REOPENED",
+      "reason": "THE ONLY BOUND POSITIVE ROOT1 PREMISE IN CURRENT ROOT STATE WAS THE NOW-REVOKED FORCED_FAIL CERTIFICATE"
+    }
+  },
+  "repaired_partition_candidate": {
+    "unresolved_total": 26,
+    "root1_positive_gap_count": 0,
+    "root1_only_count": 0,
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "livebench_location": "ROOT2_ONLY",
+    "acceptance_counts_unchanged": true,
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26
+  },
+  "scheduler_effect_if_verified": [
+    "STOP_TREATING_LIVEBENCH_AS_A_PROVED_CAPABILITY_MISSING_ROOT1_GAP",
+    "REOPEN_LIVEBENCH_SCORE_OR_COMPARATOR UNCERTAINTY UNDER ROOT2",
+    "PRESERVE_SUCCESSOR_REPAIR_WORK THAT IMPROVES GENERAL INSTRUCTION FOLLOWING BUT DO NOT CLAIM IT IS REQUIRED BY A PROVED FAILURE",
+    "RECOMPUTE_ROOT2_CURRENTNESS_AND_ANY POST_LIVEBENCH 18_PREDICATE REBINDS THAT DEPENDED ON REMOVING LIVEBENCH FROM ROOT2",
+    "PRESERVE_THE_SOUND 132_FULL_SCORE_CASE SUFFICIENT PASS CUT AND PARTIAL_CREDIT LOWER_BOUND WORK"
+  ],
+  "legacy_dispatch_interaction": {
+    "note": "A separate current candidate says all exact active 200 rows dispatch to legacy IFEval. That scheduler reduction is orthogonal and must remain independently verified before becoming load-bearing.",
+    "no_dependency_on_pending_legacy_dispatch_verifier": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FROZEN_CANDIDATE_PASSES_65_7",
+    "NO_CLAIM_THE_FROZEN_CANDIDATE_FAILS_65_7",
+    "NO_NEW_LIVEBENCH_SCORE",
+    "NO_UNEXPOSED_TERMINAL_CASE_CONTENT_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "next": "INDEPENDENTLY_VERIFY_CONTENT_ADDRESSED PREMISES AND LOGICAL REVOCATION__THEN ACTIVATE ROOT PARTITION REPAIR AND RECOMPUTE ROOT2 CURRENTNESS"
+}
