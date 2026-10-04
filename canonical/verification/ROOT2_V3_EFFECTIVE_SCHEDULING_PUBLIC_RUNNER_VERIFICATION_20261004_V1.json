@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V3_EFFECTIVE_SCHEDULING_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_THREE_FILE_V3_EFFECTIVE_SCHEDULING_TRANSFORM__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subject": {
+    "base_main_commit": "cad4d71ddcc66b3ea0a0cc636687d71dfc94cac2",
+    "branch": "activate-root2-v3-effective-scheduling-20261004",
+    "exact_target_blobs": {
+      "canonical/governance/ROOT2_MEASUREMENT_BRIDGE_CURRENT_V1.json": "13bc4d661565654bba847f51ce990648d46126b4",
+      "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "e40c74ea4818ac88ccc64a016c0f71f45e62c853",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "bfe12a424164149b4c07ffc140df307797783888"
+    },
+    "verified_staging_blobs": {
+      "canonical/governance/ROOT2_MEASUREMENT_BRIDGE_CURRENT_V1.json": "1d3eccffe5c15914ac1d25bec56ce4d6a3f3cc8b",
+      "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "cc87fffba6b7a967fa89fd8c8c828b2b6d842ad7",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "691f1d6f9d51fc49d281216264dbe33f41958995"
+    }
+  },
+  "root2_v3_identity": {
+    "frontier_git_blob_sha": "681123ef6cff3506d66af6b31b61c8bc14a8a913",
+    "activation_git_blob_sha": "76d36bc34947e726502d0c8fc1dbb961d6442c88",
+    "verification_git_blob_sha": "8436a9eb30312b959ba094394e60f26b4833a3a2"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-r2v3-effective-20261004",
+    "head_sha": "9330de83f0f62dee8558b6d6f2ae7802b47a73be",
+    "workflow_run_id": 37168173233,
+    "workflow_job_id": 111335435261,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_three_target_blobs": true,
+    "exact_three_staging_blobs": true,
+    "only_status_and_next_action_fields_changed": true,
+    "effective_scheduling_enabled": true,
+    "comparator_targets_changed": false,
+    "acceptance_counts_preserved": true,
+    "ownership_counts_preserved": true,
+    "root1_state_preserved": true,
+    "root3_state_preserved": true,
+    "execution_authority_preserved_false": true,
+    "promotion_authority_preserved_false": true,
+    "fresh_reality_authority_preserved_false": true,
+    "terminal_truth_preserved_false": true
+  },
+  "preserved_truth": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "verified_owned_families": 5,
+    "root1_positive_gap_count": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "terminal": false
+  },
+  "consequence": "ROOT2_FRONTIER_V3_MAY_BECOME_EFFECTIVE_ZERO_REALITY_SCHEDULING_AUTHORITY__NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
