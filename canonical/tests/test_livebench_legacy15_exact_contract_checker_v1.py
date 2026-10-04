@@ -62,6 +62,22 @@ def test_exact_visible_slots_feed_registry_without_defaults():
     ) == (False, True)
 
 
+
+def test_blank_output_is_false_even_when_raw_checker_accepts_it():
+    contract = {
+        "instruction_id": "keywords:forbidden_words",
+        "slots": {"forbidden_words": ["omega"]},
+    }
+    raw = Forbidden("keywords:forbidden_words")
+    raw.build_description(forbidden_words=["omega"])
+    assert raw.check_following("") is True
+    assert raw.check_following("   \n\t") is True
+
+    # Frozen evaluation_main requires response.strip() before checker truth.
+    assert c.evaluate_with_registry("", [contract], REGISTRY) == (False,)
+    assert c.evaluate_with_registry("   \n\t", [contract], REGISTRY) == (False,)
+    assert c.evaluate_with_registry("alpha", [contract], REGISTRY) == (True,)
+
 def test_missing_slot_fails_closed_instead_of_randomizing():
     with pytest.raises(c.ExactContractCheckerError, match="VISIBLE_SLOT_SHAPE_MISMATCH"):
         c.evaluate_with_registry(
