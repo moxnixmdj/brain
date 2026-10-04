@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V6_REPLAY72_EXECUTION_TRUTH_RECEIPT_V1",
+  "date": "2026-10-04",
+  "status": "EXECUTED__AUTHORIZED_REPLAY72_COMPLETE__FAIL_FORCED_UNDER_FROZEN_EXECUTION_POLICY__ZERO_VALID_CANDIDATE_RESPONSES__DIAGNOSTIC_ONLY__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "exec/livebench-replay72-v6-20261004-0919",
+    "trigger_commit": "ad616add68ea21dd0e13505f3490638fa01e6cc7",
+    "workflow_run_id": 37191933717,
+    "workflow_job_id": 111405786415,
+    "workflow_conclusion": "success",
+    "activation_git_blob_sha": "c449329ad9e6e9ac001c5a1cdb2f3fa187fa49b3",
+    "candidate_git_blob_sha": "07e857f0a7095838cecbc6a79961fe9580673ee4",
+    "launcher_git_blob_sha": "e0e2c3581b389efd1c5cab4b4eff78762d1ec61b",
+    "executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "base_root_git_blob_sha": "54021118b1b1f299cf0191d1e413a3009d95d76c",
+    "point_of_use_root_git_blob_sha": "822d7a0e64b2e919a873526d111e7202c40e1f5b",
+    "point_of_use_compatibility": {
+      "pass": true,
+      "added_scheduler_overlays": [
+        "root2_decision_only_evaluation"
+      ],
+      "acceptance_state_identical": true,
+      "residual_partition_identical": true,
+      "root3_state_identical": true
+    }
+  },
+  "scope": {
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "population_count": 200,
+    "replay_prefix_limit": 72,
+    "terminal_cases_consumed": 72,
+    "already_exposed_prefix_only": true,
+    "new_case_exposure": false,
+    "case_order": "QUESTION_ID_ASCENDING_FIXED_PREEXECUTION",
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25"
+  },
+  "observed": {
+    "valid_candidate_responses": 0,
+    "policy_blocked_post_prompt_capability_acquisition": 43,
+    "inference_exit_nonzero": 29,
+    "scoring_errors": 0,
+    "observed_score_mass": 0,
+    "observed_mean_percent": 0,
+    "conservative_full_population_lower_percent": 0,
+    "conservative_full_population_upper_percent": 64,
+    "threshold_percent": 65.7,
+    "threshold_mass": 131.4,
+    "arithmetic_threshold_fail_forced_under_this_execution_policy": true,
+    "receipts_sha256": "2f7ab71c76ac27228b6dc57784b72fa8ea4e4032c12b0d7301a1d9ec851333b1",
+    "incremental_spend_usd": 0,
+    "paid_external_model_or_api_used": false,
+    "cognition_dependency_class": "MODEL_INDEPENDENT"
+  },
+  "interpretation": {
+    "route_level_result": "THE_FROZEN_EXECUTION_POLICY_AS_RUN_CANNOT_REACH_THE_65_7_THRESHOLD_BECAUSE_THE_72_REPLAY_CASES_PRODUCED_ZERO_VALID_RESPONSES_AND_ZERO_SCORE_MASS",
+    "capability_level_result": "NOT_ESTABLISHED",
+    "root1_reopen_authorized": false,
+    "reason": "ALL_72_CASES_FAILED_BEFORE_A_VALID_CANDIDATE_RESPONSE__43_WERE_EXPLICIT_POST_PROMPT_ACQUISITION_POLICY_BLOCKS_AND_29_WERE_NONZERO_RUNTIME_EXITS__THIS_LOCALIZES_THE_FAILURE_TO_EXECUTION_ROUTING_POLICY_OR_RUNTIME_BEFORE_CAPABILITY_QUALITY_CAN_BE_ADJUDICATED",
+    "next_zero_reality_target": "GENERAL_MODEL_INDEPENDENT_INSTRUCTION_ROUTING_OR_CAPABILITY_SELECTION_AND_NONZERO_RUNTIME_EXIT_LOCALIZATION_WITHOUT_USING_TERMINAL_PROMPT_OR_RESPONSE_CONTENT_TO_DESIGN_A_REPAIR"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_UNDERLYING_CAPABILITY_IS_BELOW_OPUS_5_5",
+    "NO_ROOT1_REOPEN_FROM_THIS_RECEIPT",
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_AUTHORITY_FOR_ANOTHER_REPLAY_EPOCH",
+    "NO_AUTHORITY_FOR_CASE_73_OR_LATER",
+    "NO_PERMISSION_TO_USE_TERMINAL_PROMPT_OR_RESPONSE_CONTENT_TO_DESIGN_REPAIR",
+    "NO_SCORE_INTERPRETATION_AS_CAPABILITY_QUALITY_WHEN_VALID_CANDIDATE_RESPONSE_COUNT_IS_ZERO"
+  ],
+  "scheduling_effect": [
+    "MARK_LIVEBENCH_RETRY_V6_REPLAY_EPOCH_CONSUMED",
+    "DELETE_ANOTHER_IDENTICAL_V6_REPLAY_WITHOUT_NEW_INDEPENDENT_AUTHORITY",
+    "PRIORITIZE_GENERAL_PREEXPOSED_NONTERMINAL_ROUTING_OR_RUNTIME_REPAIR",
+    "REQUIRE_SUCCESSFUL_GENERAL_SYNTHETIC_ZERO_CASE_INFERENCE_BEFORE_ANY_NEW_TERMINAL_CASE_AUTHORITY",
+    "PRESERVE_LIVEBENCH_IF_AS_ROOT2_UNRESOLVED_UNLESS_SEPARATE_VALID_EVIDENCE_CHANGES_CLASSIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "replayed_terminal_cases": 72,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false
+}
