@@ -126,9 +126,8 @@ def run(*,limit:int=20,timeout:float=20.0)->dict[str,Any]:
   action=query_action(row);src=source_row(row)
   plan=ep.compile_authorized_plan(root=root(),query_actions=[action],sources=[src])
   assert plan["status"].startswith("PASS__")
-  serialized=json.dumps(plan,ensure_ascii=False).casefold()
   target=v11._norm(row["target"]);base=target.rsplit("/",1)[-1].rsplit(":",1)[-1]
-  assert target not in serialized
+  assert not identity_leaked(plan,target)
   # Basenames may be ordinary behavior vocabulary; full answer-key identity
   # remains forbidden from the compiled plan.
   ids,err,lat=direct(row,limit=limit,timeout=timeout)
