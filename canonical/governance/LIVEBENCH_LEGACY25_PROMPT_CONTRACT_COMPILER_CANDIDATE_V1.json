@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY25_PROMPT_CONTRACT_COMPILER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SOURCE_DERIVED_FULL_ACTIVE_LEGACY_REGISTRY_CONTRACT_RECOGNITION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "premise": {
+    "exact_active_dispatch_candidate": "canonical/governance/LIVEBENCH_ACTIVE_POPULATION_LEGACY_DISPATCH_COLLAPSE_V1.json",
+    "pinned_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "pinned_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "pinned_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "active_legacy_checker_types": 25
+  },
+  "breakthrough": {
+    "runtime": "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py",
+    "tests": "canonical/tests/test_livebench_legacy25_prompt_contract_compiler_v1.py",
+    "result": "ONE_PROMPT_ONLY_SOURCE_DERIVED_FRONT_END_RECOGNIZES_ALL_25_ACTIVE_LEGACY_BUILD_DESCRIPTION_FAMILIES_WITHOUT_INSTRUCTION_IDS_OR_KWARGS",
+    "compression": "REPLACES_25_AD_HOC_NATURAL_LANGUAGE_BRANCHES_WITH_ONE_TYPED_CONTRACT_FRONT_END",
+    "hidden_kwargs_required": false,
+    "terminal_case_content_required": false
+  },
+  "score_route_consequence_if_verified": [
+    "LEGACY_CHECKER_PARAMETER_RECOVERY_CAN_BE_TREATED_AS_A_TYPED_COMPILATION_PROBLEM",
+    "NEXT_STAGE_CAN_OPERATE_ON_A_SMALL_CONSTRUCTOR_ALGEBRA_AND_PINNED_CONFLICT_GRAPH_INSTEAD_OF_RAW_PROMPT_LANGUAGE",
+    "MODERN_IFBENCH_ONLY_PARAMETER_FAMILIES_REMAIN_OFF_THE_FROZEN_200_CRITICAL_PATH_IF_LEGACY_DISPATCH_COMPOSITION_VERIFIES"
+  ],
+  "next_reduction": [
+    "INDEPENDENTLY_GENERATE_DESCRIPTIONS_FROM_THE_PINNED_25_CHECKER_CLASSES_AND_REQUIRE_25_OF_25_RECOGNITION",
+    "COMPILE_TYPED_CONTRACTS_TO_MINIMUM_CONSTRUCTOR_ALGEBRA_USING_PINNED_CONFLICT_GRAPH",
+    "USE_EXACT_SCORE_MASS_LOWER_BOUND_AND_STOP_AS_SOON_AS_FORCED_PASS_EXCEEDS_STRICT_COMPARATOR_BAR",
+    "KEEP_SCORE_SURFACE_CLOSURE_SEPARATE_FROM_GENUINE_SEMANTIC_CAPABILITY_OWNERSHIP"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_CASE_PROMPT_RESPONSE_KWARGS_OR_INSTRUCTION_ID_READ",
+    "NO_RESPONSE_SYNTHESIS_CLAIM_YET",
+    "NO_LIVEBENCH_SCORE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_SEMANTIC_PARAPHRASE_SIMPLIFY_SUMMARIZE_OR_STORY_CAPABILITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
