@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SHADOW_ATOMIC_CLAIM_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_V3_PLAN__ATOMIC_CREATE_IS_ONE_USE_LINEARIZATION_POINT__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+  "subject": {
+    "candidate_path": "canonical/governance/LIVEBENCH_SHADOW_ATOMIC_CLAIM_TRANSACTION_CANDIDATE_V2.json",
+    "candidate_git_blob_sha": "ef8924151327bbc3c769bca426fa4027a52642b7",
+    "pre_exposure_plan_path": "canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json",
+    "pre_exposure_plan_git_blob_sha": "2663f794033cf779fdecb8806a95e932f6084004",
+    "point_of_use_preflight_path": "canonical/runtime/livebench_shadow_point_of_use_preflight_v1.py",
+    "point_of_use_preflight_git_blob_sha": "4c12fa8c2a7dcf549a991da470ab50b7faaac399",
+    "atomic_transaction_path": "canonical/runtime/livebench_shadow_atomic_claim_transaction_v1.py",
+    "atomic_transaction_git_blob_sha": "f4a5b0ac63214277befdca79f6cb32e2acedc0c6"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1739,
+    "head_sha": "be733e99349e3e682f339b5a4abe29a45cf203a6",
+    "merge_commit": "ff3b2b1e726fc0a13c28e3e7f060036239ef49be",
+    "workflow_run_id": 37185639140,
+    "workflow_job_id": 111386844731,
+    "conclusion": "success",
+    "verifier_git_blob_sha": "c7bd553c2e2b824eb8039562d11b10100ba0d4ea",
+    "git_ref_transaction_git_blob_sha": "d886da9f4f7d55555e35fecb5231cc150a5724aa",
+    "workflow_git_blob_sha": "825bbd77b2a3220d7cf398cc3eedb4c8926c2897"
+  },
+  "verified": {
+    "exact_subject_blob_count": 4,
+    "v3_plan_bound": true,
+    "claim_absence_precheck_deleted": true,
+    "preflight_binding_enforced": true,
+    "verified_shadow_activation_required": true,
+    "atomic_first_create_http_201_grants_exact_lease_only": true,
+    "duplicate_create_http_422_fails_closed": true,
+    "real_git_ref_first_create_status": 201,
+    "real_git_ref_duplicate_create_status": 422,
+    "case_reveal_before_claim_rejected": true,
+    "terminal_cases_consumed": 0,
+    "global_fresh_reality_authority": false,
+    "acceptance_credit_authorized": false,
+    "promotion_authority": false
+  },
+  "semantic_effect": [
+    "CLOSE_LB_ZR_2_ATOMIC_CLAIM_CONTROL_REPAIR",
+    "DELETE_PRECLAIM_ABSENCE_OBSERVATION_AS_ONE_USE_PREREQUISITE",
+    "BIND_ATOMIC_FIRST_CREATE_SUCCESS_AS_THE_ONE_USE_LINEARIZATION_EVENT",
+    "PRESERVE_SEPARATE_SCOPED_SHADOW_ACTIVATION_AND_OTHER_ZERO_REALITY_BLOCKERS"
+  ],
+  "hard_nonclaims": [
+    "NO_PRODUCTION_ONE_USE_CLAIM",
+    "NO_TERMINAL_CASE_REVEAL",
+    "NO_LIVEBENCH_SCORE",
+    "NO_SHADOW_COLLECTION_AUTHORITY_FROM_THIS_RECEIPT",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

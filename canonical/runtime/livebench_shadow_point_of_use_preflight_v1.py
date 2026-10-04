@@ -1,8 +1,14 @@
 """LiveBench shadow V2 point-of-use preflight.
 
-Zero-case only. This verifier may establish that the exact precommitted LiveBench
-execution tuple is ready to attempt a durable one-use claim. It never grants
-case-reveal authority; that remains exclusively the V2 one-use claim stage.
+Zero-case only. This verifier establishes whether the current repaired LiveBench
+execution tuple is ready to ATTEMPT the durable one-use claim.
+
+It deliberately does not pre-read whether the claim ref exists. The Git ref
+create operation is the atomic uniqueness test. A separate check-then-create
+sequence would introduce a race and an unnecessary API call.
+
+This verifier never grants case-reveal authority. That remains exclusively a
+successful atomic claim under a separately verified activation.
 """
 from __future__ import annotations
 from typing import Any, Mapping
@@ -10,16 +16,13 @@ from typing import Any, Mapping
 from canonical.runtime.pre_exposure_isolation_plan_v1 import verify_pre_exposure_plan
 
 SCHEMA="PROJECT_BRAIN_LIVEBENCH_SHADOW_POINT_OF_USE_PREFLIGHT_V1"
-EXPECTED_PLAN_SHA256="b66dfe413089d4c91a8970e5d5502672025b9d2215cdbb4db2b4c249aed2c711"
+EXPECTED_PLAN_SHA256="9608157e7ef52fab08bc387bb19ccfb10001cbb5367849a9806d6b0e7df34b31"
 CLAIM_BACKEND_PATH="canonical/governance/SHADOW_GIT_REF_ONE_USE_CLAIM_BACKEND_V1.json"
 CLAIM_BACKEND_BLOB="b660e2ee70f42c7872a9b65c78198c5bdbf03609"
 HEX=set("0123456789abcdef")
 
 def _sha256(x: Any) -> bool:
     return isinstance(x,str) and len(x)==64 and set(x.lower()) <= HEX
-
-def _sha40(x: Any) -> bool:
-    return isinstance(x,str) and len(x)==40 and set(x.lower()) <= HEX
 
 def expected_claim_ref(lease_digest_sha256: str) -> str:
     if not _sha256(lease_digest_sha256):
@@ -46,8 +49,6 @@ def verify_point_of_use_preflight(
 
     if receipt.get("claim_ref") != expected_ref:
         reasons.append("CLAIM_REF_NOT_DERIVED_FROM_LEASE_DIGEST")
-    if receipt.get("claim_ref_absent_observed") is not True:
-        reasons.append("CLAIM_REF_PRIOR_ABSENCE_NOT_OBSERVED")
 
     required_false=(
       "case_reveal_has_occurred",
@@ -96,6 +97,7 @@ def verify_point_of_use_preflight(
       "point_of_use_preflight_pass":passed,
       "reasons":sorted(set(reasons)),
       "expected_claim_ref":expected_ref,
+      "claim_ref_absence_precheck_required":False,
       "terminal_cases_consumed":0,
       "case_reveal_authority":False,
       "shadow_collection_authority":False,

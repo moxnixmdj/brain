@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SHADOW_ATOMIC_CLAIM_TRANSACTION_CANDIDATE_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_MAIN_V3_PLAN_VERIFIED__REMOVE_CHECK_THEN_ACT_RACE__INDEPENDENT_PACKAGE_VERIFICATION_REQUIRED__ZERO_CASES__ZERO_CREDIT",
+  "compiled_from_main": "947626745b7fc8f7120ae9cb8b0cce767fa4834e",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+  "objective": "Delete the redundant claim-ref absence probe and make the atomic Git-ref create response the sole uniqueness linearization point after the independently verified current V3 pre-exposure plan.",
+  "current_verified_foundation": {
+    "execution_precommit_v2": {
+      "path": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2.json",
+      "git_blob_sha": "66554061f204d8a86b37a30c84d0cf07a525a786"
+    },
+    "execution_precommit_v2_verification": {
+      "path": "canonical/verification/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "f123064a5ebed27c8636a2ebc031fb9a31067a13"
+    },
+    "pre_exposure_v3_verification": {
+      "path": "canonical/verification/LIVEBENCH_IF_SHADOW_PREEXPOSURE_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "7aee430ee0de0fdf3347526a5cb592caaac64bb7"
+    },
+    "shadow_control_plane_verification": {
+      "path": "canonical/verification/LIVEBENCH_SHADOW_CONTROL_PLANE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "af01458bfb36ede0f494214fd2f240e5aa36b3c5"
+    }
+  },
+  "subjects": {
+    "pre_exposure_plan_v3": {
+      "path": "canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json",
+      "git_blob_sha": "2663f794033cf779fdecb8806a95e932f6084004",
+      "plan_sha256": "9608157e7ef52fab08bc387bb19ccfb10001cbb5367849a9806d6b0e7df34b31"
+    },
+    "point_of_use_preflight": {
+      "path": "canonical/runtime/livebench_shadow_point_of_use_preflight_v1.py",
+      "git_blob_sha": "4c12fa8c2a7dcf549a991da470ab50b7faaac399"
+    },
+    "point_of_use_preflight_tests": {
+      "path": "canonical/tests/test_livebench_shadow_point_of_use_preflight_v1.py",
+      "git_blob_sha": "1ed1c887a432b0b9ceaacb5eacbacc6344e0c128"
+    },
+    "atomic_transaction": {
+      "path": "canonical/runtime/livebench_shadow_atomic_claim_transaction_v1.py",
+      "git_blob_sha": "f4a5b0ac63214277befdca79f6cb32e2acedc0c6"
+    },
+    "atomic_transaction_tests": {
+      "path": "canonical/tests/test_livebench_shadow_atomic_claim_transaction_v1.py",
+      "git_blob_sha": "acefe3c56a21d2af2352e60713c8e1c628414577"
+    }
+  },
+  "changes": [
+    "DELETE_CLAIM_REF_PRIOR_ABSENCE_READ",
+    "USE_ATOMIC_CREATE_RESPONSE_AS_ONLY_CLAIM_UNIQUENESS_AUTHORITY",
+    "BIND_ATOMIC_CLAIM_TO_EXACT_POINT_OF_USE_PREFLIGHT_INPUT",
+    "FAIL_CLOSED_ON_422_OR_ANY_NON_201_CREATE",
+    "GRANT_CASE_REVEAL_AUTHORITY_ONLY_AFTER_VERIFIED_ACTIVATION_AND_SUCCESSFUL_ATOMIC_CREATE"
+  ],
+  "latency_and_correctness_effect": {
+    "deleted_round_trips": ["CLAIM_REF_ABSENCE_PROBE"],
+    "deleted_race_class": "CHECK_THEN_ACT_BETWEEN_ABSENCE_PROBE_AND_CREATE",
+    "stale_plan_reentry_blocked": true,
+    "same_transaction_target": "POINT_OF_USE_PREFLIGHT__ATOMIC_CREATE__CASE_REVEAL"
+  },
+  "remaining_before_any_terminal_case_reveal": [
+    "INDEPENDENTLY_VERIFY_THIS_EXACT_ATOMIC_CLAIM_PACKAGE",
+    "OBTAIN_SEPARATE_SHADOW_COLLECTION_ACTIVATION_V2",
+    "RUN_REAL_POINT_OF_USE_ZERO_CASE_PREFLIGHT",
+    "ATOMICALLY_CREATE_THE_PRODUCTION_ONE_USE_CLAIM_REF"
+  ],
+  "hard_rules": [
+    "NO_TERMINAL_CASE_CONTENT_READ_BY_THIS_CANDIDATE",
+    "NO_CASE_REVEAL_WITHOUT_SEPARATE_VERIFIED_ACTIVATION",
+    "NO_CASE_REVEAL_ON_DUPLICATE_OR_FAILED_ATOMIC_CREATE",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "shadow_collection_authority": false,
+  "independent_verification_required": true
+}
