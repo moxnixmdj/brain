@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_POST_LIVEBENCH_EXACTPASS_18_REBIND_ACTIVATION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_18_ROOT2_SCHEDULING_ONLY__INDEPENDENT_ACTIVATION_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_POST_LIVEBENCH_EXACTPASS_18_PREDICATE_REBIND_V1.json",
+    "git_blob_sha": "46411d83217b23c74ba700a6f065be49e20557df"
+  },
+  "subject_verification": {
+    "path": "canonical/verification/ROOT2_POST_LIVEBENCH_EXACTPASS_18_REBIND_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "16202325c9c43d95ee5f6e07bc9acdcdda740ed1",
+    "public_run_id": 37239254248,
+    "public_job_id": 111544455306,
+    "conclusion": "success"
+  },
+  "exact_preconditions": {
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_git_blob_sha": "7407b6aa35dbf3113fe5f9f4c4b2150b95504b47",
+    "evidence_ledger_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "evidence_ledger_git_blob_sha": "56dcdc8a56c20b3ca26cb40fb6053945c3934daf",
+    "root2_touching_count": 18,
+    "unresolved_total": 25,
+    "livebench_predicate_state": "PROVED"
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "scheduler_contract": [
+    "SCHEDULE_ONLY_THE_EXACT_18_PREDICATES_BOUND_BY_THE_SUBJECT",
+    "OUTPUT_ONLY_THRESHOLD_CERTIFICATE_PRECEDENCE_PRESERVED",
+    "STOP_AT_FIRST_SOUND_PASS_OR_FAIL_CERTIFICATE",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+    "NO_LIVEBENCH_IF_GE_65_7_ROOT2_WORK",
+    "FAIL_CLOSED_ON_ROOT_STATE_EVIDENCE_LEDGER_OR_TARGET_SET_DRIFT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "independent_activation_verification_required": true
+}
