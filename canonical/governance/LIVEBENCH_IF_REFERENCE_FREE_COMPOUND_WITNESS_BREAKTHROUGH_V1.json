@@ -1,0 +1,175 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_REFERENCE_FREE_COMPOUND_WITNESS_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_PINNED_IFBENCH_RATIO_FAMILY_12_OF_12_FULL_CONJUNCTION_PASS__TERMINAL_PREMISE_BINDING_OPEN__ZERO_CREDIT",
+  "objective": "Replace the prior isolated overlap-only construction with a reference-free full-conjunction construction for every ratio:overlap form in the pinned public IFBench family, while preserving the unexposed-terminal firewall.",
+  "bindings": {
+    "runtime": {
+      "path": "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py",
+      "git_blob_sha": "bbeb6c78427a521fbe7178b54175997837c0a3c3",
+      "commit": "a89f958eb7f16309af8e0d6964c232be54708b9f"
+    },
+    "tests": {
+      "path": "canonical/tests/test_livebench_if_reference_free_compound_witness_v1.py",
+      "git_blob_sha": "799f9e1cf5ce547e86d1cc944384f66ee799e6eb",
+      "commit": "cc390caf781cc527430cffcd66d909eb45abc796"
+    },
+    "pinned_livebench_repo_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "pinned_livebench_ifbench_instructions_blob": "02b2dfebde623dc23b1eb68a3282ef2662333481",
+    "pinned_ifbench_public_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "pinned_ifbench_public_dataset_blob": "a8e343ed928d8b4e649b9dba651fed7757ccacc3"
+  },
+  "breakthrough": {
+    "theorem": "Under WHITESPACE_RUN_PRESERVATION, any output containing no whitespace has every character trigram exactly classifiable from the visible base text: a trigram is in the hidden reference iff it occurs wholly inside one of the visible base text's maximal non-whitespace runs.",
+    "consequence": "The denominator and numerator of the pinned SET-character-trigram overlap checker become exactly controllable without reading reference_text.",
+    "set_semantics_leverage": "Repeated identical sentence scaffolding adds almost no unique trigram mass, so arbitrarily deep keyword-sentence positions such as sentence 30 do not impose a linear denominator penalty.",
+    "compound_routes": [
+      "RATIO_OVERLAP_ONLY",
+      "RATIO_OVERLAP_PLUS_SENTENCE_KEYWORD",
+      "RATIO_OVERLAP_PLUS_WORDS_CONSONANT_CLUSTER"
+    ],
+    "model_dependency_count": 0,
+    "network_dependency_at_runtime": 0,
+    "hidden_reference_read_at_runtime": false
+  },
+  "local_clean_room_precheck": {
+    "command": "python -m unittest canonical.tests.test_livebench_if_reference_free_compound_witness_v1 -v",
+    "result": "PASS_5_OF_5",
+    "authority": "AUTHOR_SIDE_LOCAL_PRECHECK_ONLY__NOT_INDEPENDENT"
+  },
+  "public_family_audit": {
+    "method": "Connector-side recomputation from pinned allenai/IFBench public dataset. Construction received prompt only; exact public reference_text was read only after construction for audit scoring.",
+    "ratio_rows": 12,
+    "full_conjunction_passed": 12,
+    "ratio_only_rows": 5,
+    "ratio_plus_sentence_keyword_rows": 4,
+    "ratio_plus_consonant_rows": 3,
+    "exact_certified_equals_actual_public_reference_ratio_all_12": true,
+    "rows": [
+      {
+        "key": "144",
+        "target": 72,
+        "certified": 71.42857142857143,
+        "actual": 71.42857142857143
+      },
+      {
+        "key": "145",
+        "target": 93,
+        "certified": 91.66666666666667,
+        "actual": 91.66666666666667
+      },
+      {
+        "key": "146",
+        "target": 74,
+        "certified": 75,
+        "actual": 75
+      },
+      {
+        "key": "147",
+        "target": 59,
+        "certified": 60,
+        "actual": 60
+      },
+      {
+        "key": "148",
+        "target": 6,
+        "certified": 7.6923076923076925,
+        "actual": 7.6923076923076925
+      },
+      {
+        "key": "149",
+        "target": 13,
+        "certified": 13.333333333333334,
+        "actual": 13.333333333333334,
+        "compound": "sentence:keyword",
+        "compound_pass": true
+      },
+      {
+        "key": "150",
+        "target": 24,
+        "certified": 23.529411764705884,
+        "actual": 23.529411764705884,
+        "compound": "sentence:keyword",
+        "compound_pass": true
+      },
+      {
+        "key": "151",
+        "target": 23,
+        "certified": 23.076923076923077,
+        "actual": 23.076923076923077,
+        "compound": "sentence:keyword",
+        "compound_pass": true
+      },
+      {
+        "key": "152",
+        "target": 11,
+        "certified": 12.5,
+        "actual": 12.5,
+        "compound": "sentence:keyword",
+        "compound_pass": true
+      },
+      {
+        "key": "212",
+        "target": 54,
+        "certified": 55.55555555555556,
+        "actual": 55.55555555555556,
+        "compound": "words:consonants",
+        "compound_pass": true
+      },
+      {
+        "key": "213",
+        "target": 50,
+        "certified": 50,
+        "actual": 50,
+        "compound": "words:consonants",
+        "compound_pass": true
+      },
+      {
+        "key": "214",
+        "target": 11,
+        "certified": 12.5,
+        "actual": 12.5,
+        "compound": "words:consonants",
+        "compound_pass": true
+      }
+    ],
+    "authority": "PUBLIC_FAMILY_AUDIT_ONLY__NO_UNEXPOSED_TERMINAL_CASE_OR_ACCEPTANCE_CREDIT"
+  },
+  "delta_vs_prior_reference_free_v1": [
+    "PRIOR_V1_ONLY_CERTIFIED_SOURCE_SPAN_HITS_AND_SENTINEL_MISSES",
+    "V1_PUBLIC_AUDIT_STRIPPED_SENTENCE_KEYWORD_AND_CONSONANT_CONSTRAINTS",
+    "THIS_V1_COMPOUND_ROUTE_EXACTLY_CLASSIFIES_ALL_NO_WHITESPACE_TRIGRAMS_UNDER_BOUND_CONTRACT",
+    "THIS_V1_COMPOUND_ROUTE_PASSES_THE_FULL_PUBLIC_CONSTRAINT_CONJUNCTION_ON_ALL_12_RATIO_ROWS"
+  ],
+  "remaining_single_load_bearing_premise": {
+    "id": "FROZEN_TERMINAL_RATIO_ROWS_SATISFY_WHITESPACE_RUN_PRESERVATION_OR_EQUIVALENT_STRONGER_BINDING",
+    "why_open": "Public-family 12/12 establishes family behavior but does not by itself authorize reading or inferring hidden kwargs for unexposed frozen terminal rows.",
+    "required_proof": "Public generator/provenance theorem, scope-complete frozen population binding, or another admissible proof that the contract holds for every terminal ratio:overlap row before runtime activation.",
+    "if_proved": "The new constructor can be wired ahead of V3 for the three supported ratio forms without hidden reference access."
+  },
+  "hard_rules": [
+    "NO_RUNTIME_ACTIVATION_FROM_PUBLIC_FAMILY_AUDIT_ALONE",
+    "NO_TERMINAL_CASE_CONTENT_CONSUMPTION",
+    "NO_REFERENCE_TEXT_READ_BY_CONSTRUCTOR",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT_UNTIL_TERMINAL_PREMISE_BINDING_AND_INDEPENDENT_VERIFICATION_PASS",
+    "FAIL_CLOSED_ON_UNRECOGNIZED_RATIO_FORM_OR_UNSATISFIED_CONSTRUCTION",
+    "PRESERVE_EXISTING_V3_ROUTE_UNCHANGED_UNTIL_ACTIVATION_PRECONDITIONS_PASS"
+  ],
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
