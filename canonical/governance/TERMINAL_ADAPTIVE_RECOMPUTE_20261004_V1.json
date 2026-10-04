@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_RECOMPUTE_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FIRST_LIVE_RECOMPUTE_UNDER_ACTIVE_ADAPTIVE_V2__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "CONSUME_ALL_CURRENT_DETERMINISTIC_ACTION_DELETIONS_AFTER_ROOT2_V10_AND_RECOMPUTE_THE_ZERO_REALITY_FRONTIER_WITHOUT_CASE_EXPOSURE",
+  "scheduler_authority": {
+    "final_activation_path": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V2_FINAL_ACTIVATION_V1.json",
+    "git_blob_sha": "637e8802e33856ba6760aaaf4999993f6df8b338"
+  },
+  "prior_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gaps": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "prior_primary_source_deletions": 6,
+    "root2_self_service_facts": 9,
+    "root2_owner_exclusive_facts": 6,
+    "root2_owner_or_direct_platform_facts": 1,
+    "root2_dormant_facts": 2,
+    "root3_current_runnable_events": 0
+  },
+  "deterministic_new_deltas": [
+    {
+      "source": "canonical/governance/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_20261004_V1.json",
+      "source_git_blob_sha": "2a831b8632b18fe9e10ed423f131b6ae93d99b77",
+      "independent_verifier": {
+        "repository": "moxnixmdj/verification-capsule-runner",
+        "pull_request": 1656,
+        "merge_commit": "7b25425bac72cc36be4896d72dfc39a8f9e071d9",
+        "workflow_run_id": 37174229191,
+        "workflow_job_id": 111353390105,
+        "conclusion": "success"
+      },
+      "delete": [
+        "REPEAT_GENERIC_PUBLIC_SEARCH_FOR_FINANCE_CAPABILITY_INNER_TRANSFORM",
+        "EXPECT_FREE_ARTIFICIAL_ANALYSIS_API_TO_EXPOSE_FINANCE_COMPONENT_BENCHMARK_SCORES",
+        "CREATE_DUPLICATE_ARTIFICIAL_ANALYSIS_OUTREACH_FOR_FINANCE_INDEX_OR_COMPONENT_SCORES"
+      ],
+      "preserve": [
+        "EXISTING_ARTIFICIAL_ANALYSIS_OWNER_CHANNEL_RESULT",
+        "OWNER_RUN_OR_OWNER_ACCEPTED_EXACT_FINANCE_INDEX_RESULT",
+        "INDEPENDENTLY_VERIFIED_BRAIN_COMPONENT_LOWER_BOUNDS",
+        "MATERIAL_NEW_PUBLIC_SCHEMA_OR_METHODOLOGY_CHANGE",
+        "SEPARATELY_ADMISSIBLE_FORMAL_LOWER_BOUND_ON_CAPABILITY_SUBSCORES",
+        "DIRECT_THRESHOLD_WEIGHTED_LOWER_BOUND_GE_61"
+      ]
+    },
+    {
+      "source": "canonical/governance/OSWORLD_GITLAB_SEPT10_PUBLIC_STATE_REDUCTION_V1.json",
+      "source_git_blob_sha": "d03a0a6d85148017c073b79ee78895cc94870eb3",
+      "verification_path": "canonical/verification/OSWORLD_GITLAB_SEPT10_PUBLIC_STATE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "ca58b9e09b2e0fa24d7c5781e93c55a6d46e2935",
+      "delete": [
+        "GENERIC_TASK_WEB_GITLAB_REVISION_DISCOVERY_SEARCH"
+      ],
+      "replace_with": [
+        "ANTHROPIC_EXACT_GITLAB_IDENTITY_OR_PROTOCOL_EQUIVALENCE_AGAINST_FROZEN_PUBLIC_SEPT10_CANDIDATE"
+      ]
+    }
+  ],
+  "recomputed_state": {
+    "deterministic_new_deletions": 4,
+    "prior_deletions": 6,
+    "effective_known_action_deletions": 10,
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gaps": 0,
+    "root2_self_service_facts": 9,
+    "root2_owner_exclusive_facts": 6,
+    "root2_owner_or_direct_platform_facts": 1,
+    "root2_dormant_facts": 2,
+    "root3_current_runnable_events": 0,
+    "fresh_reality_authority": false
+  },
+  "next_frontier": [
+    "EXECUTE_ONLY_ACCOUNT_SPECIFIC_SELF_SERVICE_FACTS_WHEN_ACCESS_ALREADY_EXISTS",
+    "BIND_OWNER_EXCLUSIVE_RECEIPTS_ON_ARRIVAL_WITHOUT_DUPLICATE_OUTREACH",
+    "SEARCH_ONLY_ON_MATERIAL_WAKE_FOR_STRONGER_PROOF_OR_NEW_PRIMARY_SCHEMA",
+    "PRESERVE_ROOT3_V2_EVENT_DRIVEN_ZERO_RUNNABLE_STATE",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "hard_rules": [
+    "DO_NOT_REOPEN_ANY_OF_THE_TEN_DELETED_ACTIONS_WITHOUT_A_MATERIAL_WAKE_CONDITION",
+    "DELETION_IS_SCHEDULING_PROGRESS_NOT_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY",
+    "NO_DUPLICATE_OWNER_OUTREACH",
+    "NO_ACCOUNT_SPECIFIC_FACT_INFERENCE_FROM_PUBLIC_DOCUMENTATION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
