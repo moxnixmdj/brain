@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V3",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__V2_RUNTIME_SEMANTICS_PRESERVED__ROOT2_V11_DOMAIN_REBIND__INDEPENDENT_BINDING_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "MINIMIZE_EXPECTED_WALL_CLOCK_TO_TERMINAL_TRUE_WITH_CORRECTNESS_FIRST_ZERO_INCREMENTAL_SPEND_AND_FAIL_CLOSED_ACCEPTANCE",
+  "compiled_from_main": "9cd722f836fed6de212abb4cdd7be8998db4b601",
+  "exact_live_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false,
+    "root1_positive_gaps": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3
+  },
+  "verified_runtime": {
+    "path": "canonical/runtime/terminal_adaptive_minimum_action_policy_v1.py",
+    "git_blob_sha": "bfffe6dff32f5445a0c52657f7d9ec8d544b1f79",
+    "verification_path": "canonical/verification/TERMINAL_ADAPTIVE_MINIMUM_ACTION_RUNTIME_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+  },
+  "authority_bindings": {
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "59711b491e5f4c94661f78401e66ea1f546f96c7"
+    },
+    "root2": {
+      "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V11.json",
+      "frontier_git_blob_sha": "6857750dea3a0af48a5acc545b6f66b619d4335b",
+      "final_activation_path": "canonical/governance/ROOT2_FRONTIER_V11_ACTIVATION_V1.json",
+      "final_activation_git_blob_sha": "3bcd26a57e1b81d0eb5245312e98520b5704febf",
+      "effective_scheduling_authority": false,
+      "execution_authority": false,
+      "fresh_reality_authority": false,
+      "note": "BECOMES_EFFECTIVE_ONLY_AFTER_INDEPENDENT_V3_BINDING_AND_CURRENT_AUTHORITY_PROJECTION_PASS"
+    },
+    "root3": {
+      "cut_path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+      "cut_git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+      "live_predicates": 10,
+      "matched_scope_targets": 7,
+      "event_classes": 3,
+      "currently_runnable_event_count": 0,
+      "fresh_reality_authority": false
+    },
+    "retrieval": {
+      "current_authority_path": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+      "current_authority_git_blob_sha": "55b1d411561f720fcd9d66c127cecd63ef0b5f5e",
+      "mandatory_entrypoint": "canonical/runtime/global_retrieval_entrypoint_v4.py",
+      "mandatory_entrypoint_git_blob_sha": "2ad2fb952b3c361e74cb083b335d39b04a7c130b",
+      "verified_route_portfolio_git_blob_sha": "855a6cba59fff8c079f61212acadc254c4e9e736"
+    }
+  },
+  "optimization": {
+    "bellman": "V(S)=min_a[t(a)+sum_o P(o|a,S)*V(T(S,a,o))]",
+    "priority": "J(a)=p_lower(a)*predicate_weight(a)*fanout(a)*downstream_action_deletion(a)*information_gain(a)/(critical_path_seconds(a)*(1+correlation_penalty(a)))",
+    "probability_rules": [
+      "DETERMINISTIC_ENTAILMENT_MAY_USE_P_LOWER_1",
+      "FALSIFIED_OR_OWNER_CLOSED_ROUTE_USES_P_LOWER_0_UNTIL_REOPEN_CONDITION",
+      "UNCALIBRATED_OPEN_WORLD_OR_OWNER_EVENT_PRESERVES_UNKNOWN_PROBABILITY",
+      "JEFFREYS_BETA_POSTERIOR_ONLY_FOR_ACTUAL_REPEATED_BERNOULLI_ROUTE_OBSERVATIONS"
+    ]
+  },
+  "current_execution_policy": [
+    {
+      "phase": "ZERO_REALITY",
+      "action": "RUN_EFFECTIVE_ROOT2_V11_SCHEDULING_ONLY_AFTER_ACTIVATION_PROJECTION_PASS",
+      "rule": "EXECUTE_SELF_SERVICE_FACTS_DIRECTLY_WHEN ACCOUNT ACCESS EXISTS__OWNER_EXCLUSIVE FACTS WAIT IN PARALLEL__NO LOW VALUE SUPPORT OUTREACH"
+    },
+    {
+      "phase": "ZERO_REALITY",
+      "action": "RUN_RETRIEVAL_V19_ONLY_FOR_NEW_LOAD_BEARING_STRONGER_PROOF_OR MATERIAL_WAKE",
+      "rule": "DO_NOT REPEAT SIX PRIMARY SOURCE SEARCH CLASSES ALREADY DELETED__OPEN WORLD MISS REMAINS UNKNOWN"
+    },
+    {
+      "phase": "ZERO_REALITY",
+      "action": "ROOT3_EVENT_DRIVEN_ONLY",
+      "rule": "ZERO CURRENT RUNNABLE ROOT3 EVENTS__RESUME ONLY ON NEW SCOPE CERTIFICATE UPSTREAM SCOPE RECEIPT OR EXPLICIT FRESH REALITY EVENT"
+    },
+    {
+      "phase": "CONTINUOUS",
+      "action": "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+      "rule": "DELETE PROVED ZERO PROBABILITY AND STRICTLY DOMINATED ACTIONS__BACKPROPAGATE ACCEPTANCE DEPENDENCIES"
+    },
+    {
+      "phase": "FRESH_REALITY",
+      "action": "BLOCKED",
+      "rule": "NO FRESH SCORE OR MATCHED WAVE BEFORE ZERO REALITY FIXED POINT AND SEPARATE EXPLICIT AUTHORITY"
+    }
+  ],
+  "preserved_search_deletions": [
+    "HLE_EXISTENCE_AND_GENERIC_GATING_SEARCH",
+    "CHARTOGRAPHY_GENERIC_FREE_TIER_AND_JUDGE_IDENTITY_SEARCH",
+    "OSWORLD_V21_RELEASE_IDENTITY_108_TASK_AND_SELF_HOST_REQUIREMENT_SEARCH",
+    "BUILDKITE_LARGE_AS_DURABLE_FREE_PLAN_CARRIER",
+    "AUTOMATIONBENCH_PUBLIC600_PRIVATE_EQUIVALENCE_REPEAT_SEARCH",
+    "CURSORBENCH_COMPARATOR_DRIFT_SEARCH_WHILE_CURRENT_OWNER_PAGE_REMAINS_57_8",
+    "FINANCE_INDEX_GENERIC_PUBLIC_INNER_TRANSFORM_SEARCH",
+    "OSWORLD_GENERIC_TASK_WEB_GITLAB_REVISION_DISCOVERY_SEARCH"
+  ],
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO FRESH REALITY BEFORE ZERO REALITY FIXED POINT",
+    "NO ACCEPTANCE CREDIT FROM SCHEDULING RETRIEVAL ROUTE DISCOVERY OR ACCOUNT ACCESS",
+    "NO PUBLIC PRIVATE SUBSTITUTION WITHOUT EXACT OR SUPERSET PROOF",
+    "NO INVENTED POINT PROBABILITIES",
+    "UNKNOWN IS NOT MISSING",
+    "SEARCH FAILURE IS NOT NONEXISTENCE",
+    "DELETE DOMINATED ACTIONS",
+    "PRESERVE CURRENT ROOT2 V10 ANTI WISHFUL OUTREACH CONTROLS",
+    "PRESERVE ROOT3 V2 ZERO RUNNABLE STATE UNTIL MATERIAL EVENT",
+    "PRESERVE_ROOT2_V11_FINANCE_AND_OSWORLD_SEARCH_DELETIONS",
+    "META_SCHEDULER_MUST_NOT_REOPEN_OSWORLD_GENERIC_GITLAB_REVISION_SEARCH_WITHOUT_PRIMARY_IDENTITY_WAKE",
+    "META_SCHEDULER_MUST_NOT_REOPEN_FINANCE_PUBLIC_INNER_TRANSFORM_SEARCH_WITHOUT_METHOD_SCHEMA_OR_OWNER_WAKE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_policy_binding_verification_required": true,
+  "compiled_from_candidate_root2": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V11.json",
+    "git_blob_sha": "6857750dea3a0af48a5acc545b6f66b619d4335b"
+  }
+}

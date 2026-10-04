@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V3_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ROOT2_V11_META_SCHEDULER_REBIND__INDEPENDENT_VERIFICATION_REQUIRED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "parent": {
+    "path": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V2_ACTIVATION_V1.json",
+    "git_blob_sha": "0a70eb7ff3cfbe07e4765f2e490351fbaa505030"
+  },
+  "subject": {
+    "policy_path": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V3.json",
+    "policy_git_blob_sha": "e3d4bb102d8825798cb42b5f45382420fef41fbf",
+    "root2_activation_path": "canonical/governance/ROOT2_FRONTIER_V11_ACTIVATION_V1.json",
+    "root2_activation_git_blob_sha": "3bcd26a57e1b81d0eb5245312e98520b5704febf"
+  },
+  "domain_authorities": {
+    "root2": {
+      "frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V11.json",
+      "activation": "canonical/governance/ROOT2_FRONTIER_V11_ACTIVATION_V1.json",
+      "role": "DOMAIN_SCHEDULING_AUTHORITY_AFTER_CURRENT_POINTER_PROJECTION_PASS"
+    },
+    "root3": {
+      "minimum_cut": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+      "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+      "role": "UNCHANGED_EVENT_GATE"
+    },
+    "retrieval": {
+      "current_authority": "canonical/governance/GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1.json",
+      "git_blob_sha": "55b1d411561f720fcd9d66c127cecd63ef0b5f5e",
+      "role": "UNCHANGED_RETRIEVAL_AUTHORITY"
+    }
+  },
+  "effects": [
+    "REBIND_ADAPTIVE_META_SCHEDULER_ROOT2_DOMAIN_FROM_V10_TO_V11",
+    "PRESERVE_ROOT3_V2_ZERO_RUNNABLE_GATE",
+    "PRESERVE_RETRIEVAL_V19_AUTHORITY",
+    "PRESERVE_UNKNOWN_PROBABILITIES_AS_UNKNOWN",
+    "PRESERVE_ZERO_INCREMENTAL_SPEND",
+    "PRESERVE_FRESH_REALITY_BLOCK"
+  ],
+  "precedence": [
+    "TRUTH_AND_ACCEPTANCE_AUTHORITIES",
+    "ROOT2_V11_AND_ROOT3_V2_DOMAIN_GATES",
+    "ADAPTIVE_V3_META_SCHEDULER",
+    "RETRIEVAL_V19"
+  ],
+  "authority": {
+    "scheduling": true,
+    "meta_scheduling": true,
+    "effective_meta_scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
