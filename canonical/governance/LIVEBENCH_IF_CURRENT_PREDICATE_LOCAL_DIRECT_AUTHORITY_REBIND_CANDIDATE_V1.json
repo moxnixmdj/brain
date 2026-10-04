@@ -1,0 +1,126 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_REBIND_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__HISTORICAL_THEOREM_REUSE_PRECOMPILED__CURRENT_RUNTIME_CLOSURE_PASS_REQUIRED__INDEPENDENT_CURRENT_STATE_VERIFICATION_REQUIRED__NO_AUTHORITY__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Delete shadow escrow from the LiveBench critical path by re-establishing predicate-local direct fresh-reality authority on current exact state once the frozen public inference route passes the same synthetic zero-case inference.",
+  "historical_theorem_chain": {
+    "theorem": {
+      "verifier_repository": "moxnixmdj/verification-capsule-runner",
+      "verifier_pr": 1436,
+      "verifier_head": "97a99afa1312afbc9e7e32c17d4e3815eb91b6cb",
+      "verifier_merge": "561fbad461aeb71bf80ce4a2909e70a70c559844",
+      "workflow_run_id": 37158244145,
+      "workflow_job_id": 111306055369,
+      "proved_rule": "PREDICATE_LOCAL_ZERO_REALITY_CONE_COMMUTATIVITY_FOR_ROOT2_ONLY_BRAIN_SCORE_ONLY_PREDICATES"
+    },
+    "exact_v12_transaction": {
+      "verifier_pr": 1440,
+      "verifier_head": "c77cbfb724a8b2c69ca1f9c9a9421527ee02a121",
+      "verifier_merge": "00a4b0a604d4e77deac59a5f25bc315000abfc09",
+      "workflow_run_id": 37158592587,
+      "workflow_job_id": 111307065840
+    },
+    "final_activation_edge": {
+      "verifier_pr": 1442,
+      "verifier_head": "493590b89472cc866ee20a974f0de12a0b76d8b3",
+      "verifier_merge": "c0e84e138c1ed6678c649524e5e83a5315ea6f9f",
+      "workflow_run_id": 37158819540,
+      "workflow_job_id": 111307733192
+    },
+    "rebase_commutativity": {
+      "verifier_pr": 1444,
+      "verifier_head": "029cc3b4211810e37e25138047d4693cad9df7f8",
+      "verifier_merge": "402a0a75e234ed6d0c3fbf14d0a6d67fab7db6c5",
+      "workflow_run_id": 37159159934,
+      "workflow_job_id": 111308765309
+    },
+    "current_status": "HISTORICAL_VERIFIED_PROOF_CHAIN__NOT_CURRENT_MAIN_AUTHORITY"
+  },
+  "current_exact_inputs": {
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "e353d54f4608d25b7f0ea06fba5d8fbf2ddfbb59"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "root2_frontier_candidate": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V16.json",
+      "git_blob_sha": "f50a28f1916f816b8e7a6bed9e7dace167f35fd1",
+      "verification_state": "CURRENT_CANDIDATE_NOT_INDEPENDENTLY_ACTIVATED"
+    },
+    "livebench_successor_precommit_v2": {
+      "path": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2.json",
+      "git_blob_sha": "66554061f204d8a86b37a30c84d0cf07a525a786",
+      "frozen_candidate_commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54"
+    },
+    "livebench_preexposure_v3": {
+      "path": "canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json",
+      "git_blob_sha": "2663f794033cf779fdecb8806a95e932f6084004",
+      "plan_sha256": "9608157e7ef52fab08bc387bb19ccfb10001cbb5367849a9806d6b0e7df34b31"
+    },
+    "livebench_preexposure_v3_verification": {
+      "path": "canonical/verification/LIVEBENCH_IF_SHADOW_PREEXPOSURE_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "7aee430ee0de0fdf3347526a5cb592caaac64bb7"
+    },
+    "livebench_zero_case_resource_fit": {
+      "path": "canonical/verification/LIVEBENCH_ZERO_CASE_RESOURCE_FIT_TRUTH_REPAIR_20261004_V1.json",
+      "git_blob_sha": "8a603c1f48aad6e0fc79c2c76d2db437efde3893"
+    }
+  },
+  "current_missing_premise": {
+    "id": "LIVEBENCH_PUBLIC_INFERENCE_RUNTIME_CLOSURE_SYNTHETIC_PASS",
+    "requirement": "THE_EXACT_FROZEN_PUBLIC_INFERENCE_CAPSULE_MUST_COMPLETE_THE_SAME_SYNTHETIC_ZERO_CASE_INFERENCE_END_TO_END",
+    "required_receipt_fields": [
+      "STATUS_PASS",
+      "FROZEN_CANDIDATE_COMMIT_MATCH",
+      "MODEL_INDEPENDENT_COGNITION_PROVENANCE",
+      "TERMINAL_CASE_CONTENT_READ_FALSE",
+      "TERMINAL_CASES_CONSUMED_0",
+      "PAID_EXTERNAL_MODEL_OR_API_USED_FALSE",
+      "EXACT_RUNTIME_DEPENDENCY_CLOSURE_PROVEN_BY_CONTENT_IDENTITIES_OR_SUCCESSFUL_EXECUTION"
+    ],
+    "current_evidence": "PR_1738_RUN_37185863561_STILL_BLOCKED_ON_BOUND_CAPABILITIES_PLAIN_GOAL_BOUND_GROUNDING__NOT_SATISFIED"
+  },
+  "conditional_rebind_rule": {
+    "statement": "IF_THE_CURRENT_LIVEBENCH_PREDICATE_REMAINS_ROOT2_ONLY_WITH_FROZEN_COMPARATOR_POPULATION_SCORER_THRESHOLD_AND_ROUTE__AND_ALL_CURRENT_ZERO_REALITY_DEPENDENCIES_IN_ITS_OWN_CONE_ARE_DISCHARGED__THEN_DIRECT_EXECUTION_OF_THE_FROZEN_SCORE_COMMUTES_WITH_UNRELATED_ZERO_REALITY_WORK",
+    "effect_if_independently_verified_after_missing_premise_pass": [
+      "AUTHORIZE_FRESH_REALITY_ONLY_FOR_LIVEBENCH_IF_GE_65_7",
+      "KEEP_GLOBAL_FRESH_REALITY_AUTHORITY_FALSE",
+      "KEEP_ALL_OTHER_UNRESOLVED_PREDICATES_UNAUTHORIZED",
+      "ALLOW_DIRECT_FROZEN_LIVEBENCH_EXECUTION_WITHOUT_SHADOW_ESCROW_OR_SHADOW_ONE_USE_CLAIM",
+      "PRESERVE_SEPARATE_POST_RESULT_PREDICATE_REDUCTION_AND_PROMOTION_AUTHORITY"
+    ]
+  },
+  "route_dominance": {
+    "incumbent_if_current_rebind_verifies": "DIRECT_PREDICATE_LOCAL_EXECUTION",
+    "shadow_route_role": "FALLBACK_ONLY_UNLESS_DIRECT_REBIND_IS_FALSIFIED_OR_BLOCKED",
+    "reason": "DIRECT_ROUTE_DELETES_ESCROW_IMPLEMENTATION_SHADOW_ACTIVATION_AND_SHADOW_CLAIM_RUNTIME_EVENTS_WHILE_PRESERVING_FROZEN_ROUTE_AND_NO_TUNING_CONSTRAINTS"
+  },
+  "hard_rules": [
+    "THIS_CANDIDATE_GRANTS_NO_CURRENT_FRESH_REALITY_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "DO_NOT_USE_HISTORICAL_V12_AUTHORITY_AS_CURRENT_AUTHORITY",
+    "NO_TERMINAL_CASE_REVEAL_BEFORE_CURRENT_RUNTIME_CLOSURE_PASS_AND_INDEPENDENT_CURRENT_STATE_AUTHORITY_VERIFICATION",
+    "NO_TUNING_ON_TERMINAL_CASES",
+    "NO_CASE_REPLACEMENT",
+    "NO_ADAPTIVE_CASE_SELECTION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
