@@ -213,6 +213,54 @@ def _fit_linear_basis(rows: Sequence[Mapping[str, float]], target: str, variable
     return sol[0], sol[1:]
 
 
+def _fit_log_power(rows: Sequence[Mapping[str, float]], target: str, variables: Sequence[str]):
+    """Fit y = scale * product(x_i ** p_i) with robust near-zero sign-noise handling."""
+    if len(rows) < len(variables) + 2:
+        return None
+    if any(float(row[v]) <= 0 for row in rows for v in variables):
+        return None
+    nonzero = [row for row in rows if abs(float(row[target])) > _EPS]
+    if len(nonzero) < len(variables) + 2:
+        return None
+    anchor = max(nonzero, key=lambda row: abs(float(row[target])))
+    dominant_sign = 1.0 if float(anchor[target]) > 0 else -1.0
+    max_abs = abs(float(anchor[target]))
+    usable = []
+    for row in nonzero:
+        y = float(row[target])
+        sign = 1.0 if y > 0 else -1.0
+        if sign != dominant_sign:
+            if abs(y) <= 0.02 * max_abs:
+                continue
+            return None
+        usable.append(row)
+    if len(usable) < len(variables) + 2:
+        return None
+    p = len(variables) + 1
+    xtx = [[0.0] * p for _ in range(p)]
+    xty = [0.0] * p
+    for row in usable:
+        feats = [1.0] + [math.log(float(row[v])) for v in variables]
+        y = math.log(abs(float(row[target])))
+        for i in range(p):
+            xty[i] += feats[i] * y
+            for j in range(p):
+                xtx[i][j] += feats[i] * feats[j]
+    for i in range(p):
+        xtx[i][i] += 1e-12
+    sol = _solve_linear_system(xtx, xty)
+    if sol is None:
+        return None
+    log_scale, *exponents = sol
+    try:
+        scale = dominant_sign * math.exp(log_scale)
+    except OverflowError:
+        return None
+    if not math.isfinite(scale) or not all(math.isfinite(x) for x in exponents):
+        return None
+    return scale, exponents
+
+
 def _candidate_predictions(candidate: Mapping[str, Any], rows: Sequence[Mapping[str, float]], target: str):
     preds = []
     variables = candidate["variables"]
@@ -223,6 +271,20 @@ def _candidate_predictions(candidate: Mapping[str, Any], rows: Sequence[Mapping[
             if not math.isfinite(y):
                 return None
             preds.append(y)
+        return preds
+
+    if candidate.get("family") == "log_power":
+        exponents = [float(x) for x in candidate["exponents"]]
+        for row in rows:
+            value = float(candidate["scale"])
+            for exponent, variable in zip(exponents, variables):
+                term = _pow(float(row[variable]), exponent)
+                if term is None:
+                    return None
+                value *= term
+            if not math.isfinite(value):
+                return None
+            preds.append(value)
         return preds
 
     sign = float(candidate.get("target_sign", 1.0))
@@ -329,6 +391,31 @@ def discover(
             cand["selection_score"] = score
             candidates.append(cand)
 
+    log_power_fit = _fit_log_power(train, target, variables)
+    if log_power_fit is not None:
+        scale, exponents = log_power_fit
+        cand = {
+            "family": "log_power",
+            "target": target,
+            "variables": list(variables),
+            "exponents": list(exponents),
+            "scale": scale,
+            "intercept": 0.0,
+            "structural_signature": f"log_power|{len(variables)}",
+            "complexity": len(variables) + 2,
+        }
+        pred_all = _candidate_predictions(cand, data, target)
+        pred_valid = _candidate_predictions(cand, valid, target)
+        if pred_all is not None and pred_valid is not None:
+            actual_all = [row[target] for row in data]
+            actual_valid = [row[target] for row in valid]
+            all_err = _nrmse(actual_all, pred_all)
+            val_err = _nrmse(actual_valid, pred_valid) if len(valid) >= 2 else all_err
+            cand["nrmse"] = all_err
+            cand["validation_nrmse"] = val_err
+            cand["selection_score"] = val_err + 0.25 * all_err + 1e-5 * cand["complexity"]
+            candidates.append(cand)
+
     linear_fit = _fit_linear_basis(train, target, variables)
     if linear_fit is not None:
         intercept, coefficients = linear_fit
@@ -367,6 +454,8 @@ def discover(
     for cand in candidates:
         if cand.get("family") == "linear":
             params = tuple(round(float(x), 10) for x in cand["coefficients"])
+        elif cand.get("family") == "log_power":
+            params = tuple(round(float(x), 8) for x in cand["exponents"]) + (round(float(cand["scale"]), 10),)
         else:
             params = (round(float(cand["scale"]), 10),)
         key = (
@@ -411,6 +500,16 @@ def predict(candidate: Mapping[str, Any], point: Mapping[str, Any]) -> float:
         if not math.isfinite(y):
             raise MechanismSynthesisError("PREDICTION_NONFINITE")
         return y
+    if candidate.get("family") == "log_power":
+        y = float(candidate["scale"])
+        for exponent, variable in zip(candidate["exponents"], variables):
+            term = _pow(row[variable], float(exponent))
+            if term is None:
+                raise MechanismSynthesisError("PREDICTION_OUTSIDE_CANDIDATE_DOMAIN")
+            y *= term
+        if not math.isfinite(y):
+            raise MechanismSynthesisError("PREDICTION_NONFINITE")
+        return y
     f = _monomial_value(row, variables, candidate["exponents"])
     if f is None:
         raise MechanismSynthesisError("PREDICTION_OUTSIDE_CANDIDATE_DOMAIN")
@@ -421,16 +520,90 @@ def predict(candidate: Mapping[str, Any], point: Mapping[str, Any]) -> float:
     return y
 
 
-def structural_match(a: Mapping[str, Any], b: Mapping[str, Any]) -> dict[str, Any]:
+def structural_match(a: Mapping[str, Any], b: Mapping[str, Any], *, exponent_tolerance: float = 0.05) -> dict[str, Any]:
     sa = str(a.get("structural_signature") or "")
     sb = str(b.get("structural_signature") or "")
+    match = bool(sa) and sa == sb
+    exponent_distance = None
+    if a.get("family") == "log_power" and b.get("family") == "log_power":
+        ea = sorted(float(x) for x in a.get("exponents", []))
+        eb = sorted(float(x) for x in b.get("exponents", []))
+        if len(ea) == len(eb) and ea:
+            exponent_distance = max(abs(x-y) for x,y in zip(ea,eb))
+            match = exponent_distance <= float(exponent_tolerance)
+        else:
+            match = False
     return {
-        "match": bool(sa) and sa == sb,
+        "match": match,
         "source_signature": sa,
         "target_signature": sb,
         "surface_variable_names_ignored": True,
+        "max_sorted_exponent_distance": exponent_distance,
     }
 
+
+def design_initial_probes(bounds: Mapping[str, Sequence[Any]], *, budget: int | None = None) -> dict[str, Any]:
+    """Deterministic 2d+1 bounded experiment design.
+
+    d=2 uses four corners plus a geometric/arithmetic center.
+    d>2 uses center plus low/high axis probes around the center.
+    """
+    if not isinstance(bounds, Mapping) or not bounds:
+        raise MechanismSynthesisError("BOUNDS_REQUIRED")
+    normalized = {}
+    for raw_name, raw_pair in bounds.items():
+        name = str(raw_name).strip()
+        if not name or not isinstance(raw_pair, Sequence) or isinstance(raw_pair, (str, bytes)) or len(raw_pair) != 2:
+            raise MechanismSynthesisError("BOUND_INVALID")
+        lo = _finite_number(raw_pair[0], name+"_lo")
+        hi = _finite_number(raw_pair[1], name+"_hi")
+        if not lo < hi:
+            raise MechanismSynthesisError("BOUND_ORDER_INVALID:"+name)
+        normalized[name] = (lo,hi)
+    names = sorted(normalized)
+    d = len(names)
+    default_budget = 2*d + 1
+    if budget is None:
+        budget = default_budget
+    if not isinstance(budget, int) or isinstance(budget, bool) or budget < 1:
+        raise MechanismSynthesisError("BUDGET_INVALID")
+    budget = min(budget, default_budget)
+
+    center = {}
+    for name,(lo,hi) in normalized.items():
+        center[name] = math.sqrt(lo*hi) if lo > 0 and hi > 0 else (lo+hi)/2.0
+
+    points = []
+    if d == 1:
+        name = names[0]
+        lo,hi = normalized[name]
+        points = [{name:lo},{name:hi},{name:center[name]}]
+    elif d == 2:
+        a,b = names
+        alo,ahi=normalized[a]; blo,bhi=normalized[b]
+        points=[
+            {a:alo,b:blo},
+            {a:ahi,b:blo},
+            {a:alo,b:bhi},
+            {a:ahi,b:bhi},
+            dict(center),
+        ]
+    else:
+        points=[dict(center)]
+        for name in names:
+            lo,hi=normalized[name]
+            p1=dict(center); p1[name]=lo
+            p2=dict(center); p2[name]=hi
+            points.extend([p1,p2])
+    return {
+        "status":"PROBE_DESIGN_READY",
+        "dimension":d,
+        "budget":budget,
+        "default_budget_2d_plus_1":default_budget,
+        "points":points[:budget],
+        "learned_parameter_bytes":0,
+        "external_learned_capability_calls":0,
+    }
 
 def _probe_values(observed: Sequence[float]) -> list[float]:
     lo, hi = min(observed), max(observed)
