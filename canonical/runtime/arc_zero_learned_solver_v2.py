@@ -238,7 +238,13 @@ def motif_substitution_candidate(train: Sequence[Pair]) -> Candidate | None:
 def macrogrid_extract_candidate(train: Sequence[Pair]) -> Candidate | None:
     def apply(g: Grid) -> Grid:
         counts = Counter(cell for row in g for cell in row)
-        dominant = max(sorted(counts), key=lambda x: (counts[x], -x))
+        nonzero = [value for value in counts if value != 0]
+        if not nonzero:
+            return _copy(g)
+        # Canvas/background may be surrounded by large zero margins. Choose the
+        # most common nonzero color so zero does not accidentally become the
+        # "object field" and swallow the real canvas.
+        dominant = max(sorted(nonzero), key=lambda x: (counts[x], -x))
         excluded = {0, dominant}
 
         comps = _components(g, include=lambda value: value not in excluded)
@@ -282,15 +288,19 @@ def marker_line_candidate(train: Sequence[Pair]) -> Candidate | None:
         def apply(g: Grid) -> Grid:
             h, w = _shape(g)
             points = [(r, c) for r in range(h) for c in range(w) if g[r][c] == marker]
+            point_set = set(points)
             line_cells: set[tuple[int, int]] = set()
-            for i, (r1, c1) in enumerate(points):
-                for r2, c2 in points[i + 1:]:
-                    if r1 == r2:
-                        for c in range(min(c1, c2), max(c1, c2) + 1):
-                            line_cells.add((r1, c))
-                    elif c1 == c2:
-                        for r in range(min(r1, r2), max(r1, r2) + 1):
-                            line_cells.add((r, c1))
+            # Only opposite-edge marker pairs define a line. Same-edge pairs
+            # are merely multiple independent line endpoints, not instructions
+            # to draw along the boundary.
+            for r in range(h):
+                if (r, 0) in point_set and (r, w - 1) in point_set:
+                    for c in range(w):
+                        line_cells.add((r, c))
+            for c in range(w):
+                if (0, c) in point_set and (h - 1, c) in point_set:
+                    for r in range(h):
+                        line_cells.add((r, c))
             if not line_cells:
                 return _copy(g)
 
