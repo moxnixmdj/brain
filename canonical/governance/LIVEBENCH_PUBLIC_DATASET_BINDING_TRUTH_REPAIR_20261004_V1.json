@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_DATASET_BINDING_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_TRUTH_REPAIR__CURRENT_PUBLIC_LIVEBENCH_HF_SOURCE_DOES_NOT_DISCHARGE_2026_06_25_IFBENCH_ROW_IDENTITY__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Fail-close only the shortcut that treats the public allenai/IFBench 300-row population as already row-identical to the frozen LiveBench 2026-06-25 instruction-following population. Preserve all reference-free or grammar-universal successor routes.",
+  "pinned_livebench_code": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "common_py_fact": "get_hf_dataset(dataset_name) loads livebench/{dataset_name}; instruction_following therefore resolves to livebench/instruction_following",
+    "release_set_fact": "LIVE_BENCH_RELEASES includes 2026-06-25",
+    "ifbench_scorer_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "ifbench_evaluation_blob": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+    "instruction_following_process_blob": "8ce01747887ec0792c8f024e1972e34ece781676"
+  },
+  "current_public_livebench_dataset": {
+    "repository": "https://huggingface.co/datasets/livebench/instruction_following",
+    "latest_visible_commit": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "commit_date": "2025-04-07",
+    "rows": 400,
+    "visible_livebench_release_date_min": "2024-06-24",
+    "visible_livebench_release_date_max": "2024-11-25",
+    "contains_2026_06_25_rows": false,
+    "source_observation_date": "2026-10-04"
+  },
+  "public_ifbench_population": {
+    "repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "data/IFBench_test.jsonl",
+    "git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "rows": 300
+  },
+  "deduction": {
+    "proved": [
+      "THE_CURRENT_PUBLIC_LIVEBENCH_INSTRUCTION_FOLLOWING_DATASET_EXPOSED_AT_THE_LOADER_TARGET_IS_NOT_THE_300_ROW_PUBLIC_IFBENCH_POPULATION",
+      "THE_CURRENT_PUBLIC_LIVEBENCH_INSTRUCTION_FOLLOWING_DATASET_DOES_NOT_CONTAIN_2026_06_25_ROWS",
+      "THEREFORE_CURRENT_PUBLIC_LIVEBENCH_HF_MAIN_CANNOT_BY_ITSELF_PROVE_ROW_IDENTITY_BETWEEN_FROZEN_2026_06_25_LIVEBENCH_IFBENCH_ROWS_AND_ALLENAI_IFBENCH_TEST_ROWS",
+      "PUBLIC_IFBENCH_KWARGS_MAY_REMAIN_VALID_FOR_PUBLIC_FAMILY_AUDITS_BUT_REQUIRE_AN_ADDITIONAL_IMMUTABLE_ROW_BINDING_CERTIFICATE_BEFORE_TERMINAL_USE"
+    ],
+    "not_proved": [
+      "THE_FROZEN_TERMINAL_LIVEBENCH_POPULATION_IS_NOT_DERIVED_FROM_IFBENCH",
+      "NO_HISTORICAL_PRIVATE_OR_UNPUBLISHED_LIVEBENCH_DATASET_SNAPSHOT_EXISTS",
+      "REFERENCE_FREE_OR_GRAMMAR_UNIVERSAL_SUCCESSOR_ROUTES_FAIL",
+      "LIVEBENCH_ACCEPTANCE_IS_IMPOSSIBLE"
+    ]
+  },
+  "route_effects": {
+    "fail_close": [
+      "PUBLIC_IFBENCH_EXACT_KWARGS_LOOKUP_AS_TERMINAL_PARAMETER_SOURCE_WITHOUT_A_SEPARATE_ROW_IDENTITY_CERTIFICATE",
+      "ANY_PROMOTION_ARGUMENT_THAT_EQUATES_PUBLIC_IFBENCH_300_ROWS_WITH_FROZEN_LIVEBENCH_2026_06_25_ROWS_FROM_NAME_OR_CHECKER_CODE_SIMILARITY_ALONE"
+    ],
+    "preserve": [
+      "LIVEBENCH_NGRAM_REFERENCE_FREE_V1",
+      "LIVEBENCH_NGRAM_OVERLAP_WHITESPACE_INVARIANT_CONSTRUCTOR_V1",
+      "PROMPT_ONLY_OR_GRAMMAR_UNIVERSAL_COMPILERS_THAT_DO_NOT_DEPEND_ON_PUBLIC_ROW_IDENTITY",
+      "OWNER_SIDE_OR_OFFICIAL_FROZEN_DATASET_BINDING_RECEIPTS_IF_LATER_OBTAINED"
+    ]
+  },
+  "next_minimum_cut": [
+    "PREFER_REFERENCE_FREE_OR_FULL_PUBLIC_GRAMMAR_UNIVERSAL_CONSTRUCTION_BECAUSE_IT_CAN_DELETE_DATASET_IDENTITY_AS_A_DEPENDENCY",
+    "OTHERWISE_REQUIRE_ONE_CONTENT_ADDRESSED_OWNER_SIDE_OR_OFFICIAL_RECEIPT_NAMING_THE_EXACT_FROZEN_2026_06_25_QUESTION_DATASET_AND_ITS_RELATION_TO_PUBLIC_IFBENCH"
+  ],
+  "contamination_firewall": [
+    "NO_UNEXPOSED_TERMINAL_CASE_CONTENT_READ",
+    "NO_TERMINAL_CASE_SPECIFIC_RULES",
+    "PUBLIC_SOURCE_METADATA_AND_PINNED_PUBLIC_CODE_ONLY",
+    "NO_ACCEPTANCE_INFERENCE_FROM_PUBLIC_DATASET_NAME_MATCHING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
