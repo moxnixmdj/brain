@@ -76,10 +76,24 @@ def test_composed_public_structural_constraints():
     assert all(word in out["response"] for word in seed.split())
 
 
-def test_v1_case_constraint_still_works():
+def test_case_constraint_needing_seed_rewrite_fails_closed():
     out = transform("Mixed Case Answer", "Write the entire response in lowercase only.")
+    assert out["status"] == "FAIL_CLOSED"
+    assert "LOWERCASE_ONLY" in out["validation_errors"]
+
+
+def test_case_constraint_already_satisfied_preserves_seed():
+    seed = "mixed case answer"
+    out = transform(seed, "Write the entire response in lowercase only.")
     assert out["status"] == "PASS"
-    assert out["response"] == "mixed case answer"
+    assert out["response"] == seed
+
+
+def test_exact_response_cannot_delete_semantic_seed():
+    out = transform("semantic seed", 'Reply with exactly "OK".')
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["error"] == "EXACT_RESPONSE_CONFLICTS_WITH_SEMANTIC_SEED"
+    assert out["response"] is None
 
 
 def test_v1_word_floor_that_requires_semantic_invention_still_fails_closed():
