@@ -73,7 +73,7 @@ def _special_json(constraints: list[dict[str, Any]]) -> str:
     required = _required_fragments(_required(constraints), forbidden)
     filler = _safe_token(forbidden)
     payload = " ".join([filler, *required]).strip()
-    response = json.dumps({"response": payload}, ensure_ascii=False)
+    # A JSON object would introduce a fixed key that can itself collide with a\n    # generated forbidden word (for example "response"). A one-element array\n    # carries the required payload without adding any alphabetic scaffolding.\n    response = json.dumps([payload], ensure_ascii=False)
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
             raise JointWitnessError("JSON_FORBIDDEN_COLLISION")
