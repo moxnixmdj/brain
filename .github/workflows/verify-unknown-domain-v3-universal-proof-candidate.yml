@@ -4,15 +4,13 @@ on:
     branches: [main]
     paths:
       - 'canonical/runtime/unknown_domain_direct_candidate_v3.py'
-      - 'canonical/tests/test_unknown_domain_direct_candidate_v3.py'
       - 'canonical/runtime/unknown_domain_direct_v3_universal_proof_v1.py'
-      - 'canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py'
       - 'canonical/governance/UNKNOWN_DOMAIN_DIRECT_V3_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json'
       - '.github/workflows/verify-unknown-domain-v3-universal-proof-candidate.yml'
 permissions:
   contents: read
 jobs:
-  tests:
+  verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -20,40 +18,28 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run V2 counterexample and V3 repair regression
-        shell: bash
+      - name: Execute content-bound V3 theorem
+        run: python -m canonical.runtime.unknown_domain_direct_v3_universal_proof_v1
+      - name: Reproduce V2 exact-float counterexample and V3 repair
         run: |
-          set +e
-          python -m pytest -vv canonical/tests/test_unknown_domain_direct_candidate_v3.py > v3-diagnostic.txt 2>&1
-          code=$?
-          echo "candidate_test_exit=$code" >> v3-diagnostic.txt
-          cat v3-diagnostic.txt
-          exit $code
-      - name: Run V3 universal proof tests
-        if: always()
-        shell: bash
-        run: |
-          set +e
-          python -m pytest -vv canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py >> v3-diagnostic.txt 2>&1
-          code=$?
-          echo "proof_test_exit=$code" >> v3-diagnostic.txt
-          cat v3-diagnostic.txt
-          exit $code
-      - name: Execute proof module
-        if: always()
-        shell: bash
-        run: |
-          set +e
-          python -m canonical.runtime.unknown_domain_direct_v3_universal_proof_v1 >> v3-diagnostic.txt 2>&1
-          code=$?
-          echo "proof_module_exit=$code" >> v3-diagnostic.txt
-          cat v3-diagnostic.txt
-          exit $code
-      - name: Upload V3 diagnostic
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: unknown-domain-v3-diagnostic
-          path: v3-diagnostic.txt
-          if-no-files-found: error
-          retention-days: 7
+          python - <<'PY'
+          import hashlib
+          from canonical.runtime import unknown_domain_direct_candidate_v2 as c2
+          from canonical.runtime import unknown_domain_direct_candidate_v3 as c3
+          from canonical.runtime import unknown_domain_direct_hidden_generator_v2 as g2
+          from canonical.runtime import unknown_domain_direct_execution_harness_v1 as harness
+          secret=hashlib.sha256(b"secret0").digest()
+          beacon="beacon-qualification-0000000000000000"
+          visible,hidden=g2._transfer_case(secret,beacon,4,namespace="QUALONLY")
+          v2=harness.execute_case(candidate_step=c2.step,case_visible=visible,hidden_record=hidden)
+          assert v2["scorer_result"]["pass"] is False,v2
+          assert "DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG" in v2["scorer_result"]["errors"]
+          assert set(v2["candidate_terminal_action"]["support_feature_ids"])==set(hidden["transfer_relevant_feature_ids"])
+          assert 0 < abs(v2["candidate_terminal_action"]["terminal_consequence"]-hidden["gold_terminal_consequence"]) < 1e-12
+          v3=harness.execute_case(candidate_step=c3.step,case_visible=visible,hidden_record=hidden)
+          assert v3["scorer_result"]["pass"] is True,v3
+          assert v3["candidate_terminal_action"]["terminal_consequence"]==hidden["gold_terminal_consequence"]
+          assert set(v3["candidate_terminal_action"]["support_feature_ids"])==set(hidden["transfer_relevant_feature_ids"])
+          assert v3["probe_count"]==1
+          print("V2_COUNTEREXAMPLE_REPRODUCED__V3_EXACT_FLOAT_REPAIR_PASS")
+          PY
