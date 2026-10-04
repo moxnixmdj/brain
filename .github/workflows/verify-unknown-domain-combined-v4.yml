@@ -1,0 +1,24 @@
+name: Verify combined Unknown-Domain V4 universal proof
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/unknown_domain_direct_hidden_generator_v3.py'
+      - 'canonical/runtime/unknown_domain_direct_candidate_v3.py'
+      - 'canonical/runtime/unknown_domain_direct_combined_v4_universal_proof_v1.py'
+      - 'canonical/tests/test_unknown_domain_direct_combined_v4_universal_proof_v1.py'
+      - 'canonical/governance/UNKNOWN_DOMAIN_COMBINED_V4_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json'
+      - '.github/workflows/verify-unknown-domain-combined-v4.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pytest -q canonical/tests/test_unknown_domain_direct_combined_v4_universal_proof_v1.py
+      - run: python -m canonical.runtime.unknown_domain_direct_combined_v4_universal_proof_v1
