@@ -73,7 +73,13 @@ def _special_json(constraints: list[dict[str, Any]]) -> str:
     required = _required_fragments(_required(constraints), forbidden)
     filler = _safe_token(forbidden)
     payload = " ".join([filler, *required]).strip()
-    response = json.dumps({"response": payload}, ensure_ascii=False)
+    # A JSON object would inject a key chosen by us into the scored surface.
+    # "response" itself belongs to the historical WORD_LIST, so a generated
+    # forbidden_words=["response", ...] contract can be SAT while an object
+    # such as {"response": "..."} fails only because of our key.  A top-level
+    # JSON string is accepted by the pinned JsonFormat checker and introduces
+    # no extra lexical token beyond the controlled payload.
+    response = json.dumps(payload, ensure_ascii=False)
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
             raise JointWitnessError("JSON_FORBIDDEN_COLLISION")
