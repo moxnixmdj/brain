@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_TYPED_MINIMUM_CERTIFICATE_BASIS_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_REALITY_TYPED_SET_COVER_PLANNER__ZERO_CREDIT",
+  "objective": "MINIMIZE_ZERO_REALITY_CERTIFICATE_ACTIONS_WITHOUT_ILLEGAL_CROSS_METRIC_PROOF_TRANSPORT",
+  "source_main": "dda8f4cf8006e9b52157969931b7e0886f9c8a49",
+  "runtime": "canonical/runtime/typed_minimum_certificate_basis_v1.py",
+  "tests": "canonical/tests/test_typed_minimum_certificate_basis_v1.py",
+  "rules": [
+    "EVERY_PREDICATE_DECLARES_EXPLICIT_ADMISSIBLE_PROOF_TYPES",
+    "CERTIFICATE_COVERAGE_IS_REJECTED_IF_PROOF_TYPE_IS_NOT_ADMITTED_BY_EVERY_TARGET",
+    "RELATIVE_ELO_PREDICATES_MUST_NOT_ACCEPT_PURE_ABSOLUTE_BEHAVIORAL_CERTIFICATES",
+    "SEARCH_FOR_SHARED_MAXIMAL_CERTIFICATES_ONLY_AFTER_TYPE_ADMISSIBILITY",
+    "NO_ACCEPTANCE_CREDIT_FROM PLANNING OR COVERAGE SELECTION",
+    "UNKNOWN_SUCCESS_PROBABILITY_REMAINS_UNKNOWN"
+  ],
+  "relative_elo_binding": {
+    "source": "canonical/governance/RELATIVE_ELO_ABSOLUTE_PROOF_NONTRANSPORT_ACTIVATION_V1.json",
+    "affected": [
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822"
+    ],
+    "admissible_route_classes": [
+      "RELATIVE_SCORE_BRIDGE_STRONGER_PROOF",
+      "EXISTING_CONTENT_ADDRESSED_COMPARATOR_EVIDENCE",
+      "OWNER_RESULT",
+      "MATCHED_EMPIRICAL_COMPARISON"
+    ]
+  },
+  "optimization": {
+    "role": "EXACT_TYPED_SET_COVER_OVER_SUPPLIED_ZERO_REALITY_CERTIFICATE_CANDIDATES",
+    "primary_cost": "DECLARED_CRITICAL_PATH_COST",
+    "tie_break": "MINIMUM_ACTION_COUNT_THEN_LEXICOGRAPHIC_CERTIFICATE_IDS",
+    "parallel_schedule_note": "BASIS_SELECTION_IS_NOT_A MAKESPAN SCHEDULER__PARALLEL BATCH SCHEDULING REMAINS A SEPARATE BELLman layer"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
