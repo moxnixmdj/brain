@@ -93,3 +93,18 @@ def test_relaxed_search_rejects_conflicting_identity_sets():
         assert str(exc) == "ACTIVE15_CONFLICT_GRAPH_REJECTED"
     else:
         raise AssertionError("expected fail-closed conflict rejection")
+
+
+def test_relaxed_search_includes_v2_zero_sentence_empty_witness():
+    contracts = [
+        c("length_constraints:number_sentences", num_sentences=1, relation="less than"),
+        c("keywords:forbidden_words", forbidden_words=["brain"]),
+        c("length_constraints:number_words", num_words=100, relation="less than"),
+    ]
+    out = relaxed.generate_relaxed(contracts)
+    empty = next(row for row in out["candidates"] if row["response"] == "")
+    assert any(
+        p.get("kind") == "CONTRACT_COMPOSER_V2_SUBSET"
+        and p.get("subset_indices") == [0, 1, 2]
+        for p in empty["provenance"]
+    )
