@@ -202,7 +202,7 @@ def test_sentence_less_than_one_is_unsat_even_with_raw_empty_compatible_contract
     assert "STRICT_NONEMPTY_GATE_CONFLICTS_WITH_SENTENCE_LT_ONE" in out["hard_unsat_reasons"]
 
 
-def test_sentence_less_than_one_nonpublic_end_keeps_only_general_strict_unsat():
+def test_sentence_less_than_one_nonpublic_end_preserves_strict_unsat_and_end_diagnostic():
     contracts = [
         {
             "instruction_id": f.SENTENCE,
