@@ -64,6 +64,32 @@ class LiveBenchPublicGrammarCompilerV2Tests(unittest.TestCase):
         self.assertTrue(out["semantic_seed_required"])
 
 
+    def test_v1_exact_route_cannot_bypass_public_rule(self):
+        out = c.synthesize_public_structural_only(
+            'Answer exactly "Alpha Beta". The output should not contain any whitespace.'
+        )
+        self.assertEqual(out["status"], "BLOCKED")
+        self.assertIn("V1_EXACT_ROUTE_CONFLICTS_WITH_PUBLIC_GRAMMAR", out["validation_errors"][0])
+
+    def test_instruction_wrapper_blocks_base_request_v1_leak(self):
+        prompt = (
+            'Base request says answer exactly "leak me". '
+            '<instructions>The output should not contain any whitespace.</instructions>'
+        )
+        out = c.synthesize_public_structural_only(prompt)
+        self.assertEqual(out["status"], "PASS")
+        self.assertEqual(out["response"], "Alpha")
+        self.assertIn("no_whitespace", out["matched_public_rules"])
+
+    def test_special_bullet_ellipsis_parameter_is_exact(self):
+        out = c.synthesize_public_structural_only(
+            "Answer with a newline-separated list of items, instead of bullet points use ...."
+        )
+        self.assertEqual(out["status"], "PASS")
+        self.assertGreaterEqual(out["response"].count("..."), 2)
+        self.assertEqual(out["matched_public_rules"], ["special_bullet"])
+
+
 REQ = lambda text: {
     "benchmark_id": "LIVEBENCH_IF_2026_06_25",
     "task_id": "synthetic",
