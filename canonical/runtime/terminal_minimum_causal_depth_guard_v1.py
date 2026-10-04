@@ -11,6 +11,13 @@ REL_ELO = {
     "ARTIFACT_AA_BRIEFCASE_GE_1822",
 }
 
+REL_ELO_FORBIDDEN_WITHOUT_BRIDGE = {
+    "PURE_ABSOLUTE_BEHAVIORAL_DOMINANCE",
+    "OBJECTIVE_CEILING_OR_FLOOR_ON_NONRELATIVE_METRICS",
+    "EXHAUSTIVE_TASK_UNIVERSE_PROOF_WITHOUT_RELATIVE_SCORE_BRIDGE",
+    "SCOPE_SAFE_BEHAVIORAL_DOMINANCE_WITHOUT_RELATIVE_SCORE_BRIDGE",
+}
+
 def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -27,9 +34,8 @@ def verify() -> dict:
     evidence = plan["macro_actions"][0]
     special = evidence["relative_elo_special_case"]
     assert set(special["predicates"]) == REL_ELO
+    assert set(special["inadmissible_as_sufficient_without_bridge"]) == REL_ELO_FORBIDDEN_WITHOUT_BRIDGE
     assert "VERIFIED_RELATIVE_SCORE_BRIDGE" in special["surviving_route_classes"]
-    assert all("ABSOLUTE" in x or "BEHAVIORAL" in x or "EXHAUSTIVE" in x or "SCOPE_SAFE" in x
-               for x in special["inadmissible_as_sufficient_without_bridge"])
 
     isolation = plan["macro_actions"][1]
     assert len(isolation["generic_antecedents"]) >= 5
