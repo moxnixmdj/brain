@@ -31,7 +31,7 @@ EXPECTED_BLOBS = {
     "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py":
         "71e637c70edf1c582e28ea38b3b798965c803a06",
     "canonical/runtime/livebench_pointwise_minimum_cut_v1.py":
-        "PENDING_SELF_BINDING",
+        "0d4e563b618f8fd7f37396a88738cefb50979ff3",
 }
 
 PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
