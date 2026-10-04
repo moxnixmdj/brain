@@ -4,11 +4,12 @@
   "status": "CANDIDATE__PUBLIC_CROSS_BENCH_REUSE_DISCOVERED__LIVEBENCH_DIRECTLY_COMPARABLE__AUTOMATIONBENCH_PUBLIC_PRIVATE_GEOMETRY_MISMATCH_REQUIRES_MATCHED_REQUALIFICATION__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_root_state_binding": {
-    "path": "canonical/governance/POST_LIVEBENCH_CURRENT_ROOT_SEAL_V1.json",
-    "git_blob_sha": "6dbd4d19bbc432e3927968113658637057a3ee94",
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "3fd35b7865f7827a5a7b4202bc625fe0f980dcda",
     "unresolved_atomic": 26,
-    "root1_only": 1,
-    "root2_touching": 18
+    "root1_positive_gap_count": 0,
+    "root2_touching": 19,
+    "terminal": false
   },
   "acquisition_subject": {
     "model": "abacusai/Smaug-Mini",
@@ -23,7 +24,7 @@
   "predicate_reuse": [
     {
       "predicate_id": "LIVEBENCH_IF_GE_65_7",
-      "current_root_class": "ROOT1_ONLY_POSITIVE_OPERATIVE_GAP",
+      "current_root_class": "ROOT2_ONLY__MEASUREMENT_OR_COMPARATOR_UNCERTAINTY_REOPENED",
       "public_score_percent": 73.9165,
       "required_score_percent_raw_opus55": 65.73775,
       "public_margin_percentage_points": 8.17875,
@@ -110,5 +111,17 @@
     "path": "canonical/governance/AUTOMATIONBENCH_OPUS55_TARGET_GEOMETRY_TRUTH_REPAIR_V1.json",
     "state": "PUBLIC600_SMAUG_41_8_IS_NOT_DIRECTLY_COMPARABLE_TO_PRIVATE_OFFICIAL_OPUS55_40_0",
     "consequence": "TWO_PREDICATE_REUSE_REMAINS_A_SHARED_SUBJECT_HYPOTHESIS_ONLY_UNTIL_MATCHED_PRIVATE_OR_FORMALLY_EQUIVALENT_AUTOMATIONBENCH_EVIDENCE_EXISTS"
+  },
+  "current_root_truth_rebind": {
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_git_blob_sha": "3fd35b7865f7827a5a7b4202bc625fe0f980dcda",
+    "livebench_state": "ROOT2_MEASUREMENT_OR_COMPARATOR_UNCERTAINTY_REOPENED",
+    "root1_active": false,
+    "root1_positive_gap_count": 0,
+    "root2_touching_count": 19,
+    "reason": "THE_PRIOR_64_PERCENT_FORCED_FAIL_BOUND_WAS_REVOKED_BECAUSE_72_CASE_SCORE_LOWER_BOUNDS_OF_ZERO_WERE_NOT_EXACT_ZERO_SCORES_OR_A_POPULATION_UPPER_BOUND",
+    "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
+    "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
+    "effect": "ALL_ROOT1_LABELS_IN_THIS_ARTIFACT_ARE_HISTORICAL_CONTEXT_ONLY__THE_COMPRESSION_AND_SHARED_SUBJECT_RESULTS_REMAIN_SCHEDULING_CANDIDATES_FOR_ROOT2"
   }
 }
