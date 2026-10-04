@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_PROMPT_PARAMETER_DERIVABILITY_TRUTH_REPAIR_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__PUBLIC_IFBENCH_COUNTEREXAMPLE_AUDIT__UNIVERSAL_VISIBLE_PROMPT_PARAMETER_DERIVABILITY_FALSIFIED_AS_CURRENTLY_STATED__ZERO_CREDIT",
+  "status": "ACTIVE_CANDIDATE__INDEPENDENT_PUBLIC_RUNNER_PASS__UNIVERSAL_VISIBLE_PROMPT_PARAMETER_DERIVABILITY_FALSIFIED_AS_CURRENTLY_STATED__ZERO_CREDIT",
   "target": "LIVEBENCH_PUBLIC_SCORER_GRAMMAR_SUCCESSOR_REPAIR",
   "objective": "Fail-close the public prompt-parameter derivability hypothesis using the complete pinned public IFBench test population, preserving only score-relevant derivations actually supported by public evidence.",
   "sources": {
@@ -107,5 +107,15 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": false,
+  "independent_verification": {
+    "path": "canonical/verification/LIVEBENCH_PUBLIC_PARAMETER_DERIVABILITY_TRUTH_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1834,
+    "merge_commit": "781e36c91c457b170c95211b36eed3b58a68192a",
+    "workflow_run_id": 37197721146,
+    "workflow_job_id": 111422929019,
+    "conclusion": "success",
+    "artifact_digest": "sha256:33b19dbd9efb6e5aa8c6124de2337cbe8703c4fd2c2bdabf49fc4f18150fbd72"
+  }
 }
