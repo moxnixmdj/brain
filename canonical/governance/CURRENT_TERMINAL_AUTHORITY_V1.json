@@ -889,7 +889,7 @@
     },
     "root2_root3_minimum_execution_frontier_v1": {
       "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
-      "git_blob_sha": "9fe037d807fe733faa5731daa9c089be05864dbd",
+      "git_blob_sha": "7c27d7289654f9fbf6bbfc02bc2fac9e0062ff09",
       "status": "CURRENT_ROOT2_FRONTIER__ZERO_CREDIT"
     },
     "current_witness_target_totalization_v2_candidate": {
@@ -904,7 +904,7 @@
     },
     "root3_residual_compression_v1": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
-      "git_blob_sha": "3358c94f8dcd5edda7aea1d2bb0d61207d1b1867",
+      "git_blob_sha": "5ba670880174cf8d3698583a6430ebd89d2b711a",
       "status": "SYNTHESIS_SCOPE_RECLASSIFIED_TO_ROOT2_ONLY__ZERO_CREDIT"
     },
     "current_zero_reality_minimum_cut_v7": {
@@ -919,7 +919,7 @@
     },
     "current_zero_reality_minimum_cut_v8": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
-      "git_blob_sha": "251362e084f51632fca56ea5da43ea2b3c7b33b7",
+      "git_blob_sha": "77f1d8e997b3dd344d781f88ab38b23b5c00bb31",
       "status": "CHARTOGRAPHY_GUARD_DISCHARGED__NO_FRESH_REALITY"
     },
     "current_v8_post_compression_verification_binding": {
@@ -1120,7 +1120,7 @@
       "verification_git_blob_sha": "87f8660095b9a9d71eb160bf23616a46d4c3e1cf",
       "structural_residual_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V7_STRUCTURAL_RESIDUAL_REDUCTION_V1.json",
       "structural_residual_reduction_git_blob_sha": "26704949fa0d6b4db74a5701758a07569e8268c3",
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__OPERATIVE_UNKNOWN_DOMAIN_LEARNING_OVERLAY_V7__POINTER_VERIFICATION_PENDING__TWO_FROZEN_LEAVES_PRESERVED__ZERO_CREDIT"
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__OPERATIVE_UNKNOWN_DOMAIN_LEARNING_OVERLAY_V7__POINTER_VERIFICATION_PASS__TWO_FROZEN_LEAVES_PRESERVED__ZERO_CREDIT"
     }
   },
   "residual": [
@@ -1600,7 +1600,7 @@
     "current_effective_canonical_leaf_atoms": 39
   },
   "last_reconciled_control_plane_head": "627492dd3a9adfdbd4c50146335bc1a92aca4eee",
-  "last_reconciled_reason": "UNIVERSAL_LEARNING_V7_ACTIVATION_CANDIDATE_ON_CURRENT_MAIN__V6_LOAD_BEARING_PREDECESSOR__CURRENT_NONLEARNING_AUTHORITY_PRESERVED__POINTER_VERIFICATION_PENDING__TWO_FROZEN_DIRECT_LEAVES_PRESERVED__ZERO_ACCEPTANCE_OWNERSHIP_CREDIT",
+  "last_reconciled_reason": "UNIVERSAL_LEARNING_V7_ACTIVATION_FINALIZED_CANDIDATE__V6_LOAD_BEARING_PREDECESSOR__CURRENT_NONLEARNING_AUTHORITY_PRESERVED__ROOT3_CUT_FRONTIER_TERMINAL_POINTER_CHAIN_SUBMITTED_FOR_INDEPENDENT_VERIFICATION__TWO_FROZEN_DIRECT_LEAVES_PRESERVED__ZERO_ACCEPTANCE_OWNERSHIP_CREDIT",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
