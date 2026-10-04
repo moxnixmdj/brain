@@ -1,0 +1,159 @@
+name: Verify LiveBench LB-ZR-3 result nonvisibility V1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/shadow_write_only_result_escrow_v1.py"
+      - "canonical/runtime/shadow_write_only_result_release_v1.py"
+      - "canonical/tests/test_shadow_write_only_result_escrow_v1.py"
+      - ".github/workflows/verify-livebench-lbzr3-result-nonvisibility-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pytest
+      - run: pytest -q canonical/tests/test_shadow_write_only_result_escrow_v1.py
+
+  keygen:
+    runs-on: ubuntu-latest
+    outputs:
+      cert_b64: ${{ steps.pub.outputs.cert_b64 }}
+    steps:
+      - name: Generate verification-only release key
+        run: |
+          set -euo pipefail
+          openssl req -x509 -newkey rsa:2048 -nodes \
+            -keyout /tmp/private.pem -out /tmp/cert.pem \
+            -subj "/CN=pb-lbzr3-verification" -days 1 >/dev/null 2>&1
+      - id: pub
+        name: Export public certificate only
+        run: |
+          echo "cert_b64=$(base64 -w0 /tmp/cert.pem)" >> "$GITHUB_OUTPUT"
+      - name: Hold private key for release-role verification only
+        uses: actions/upload-artifact@v4
+        with:
+          name: lbzr3-release-private-key
+          path: /tmp/private.pem
+          retention-days: 1
+
+  collector:
+    needs: keygen
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: none
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Materialize PUBLIC certificate only
+        env:
+          CERT_B64: ${{ needs.keygen.outputs.cert_b64 }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$CERT_B64" | base64 -d > /tmp/cert.pem
+          grep -q "BEGIN CERTIFICATE" /tmp/cert.pem
+          ! grep -R --exclude-dir=.git -q "BEGIN .*PRIVATE KEY" .
+          if env | grep -Ei '(PRIVATE_KEY|DECRYPT|RELEASE_KEY)' >/dev/null; then
+            echo "private/release key material unexpectedly exposed" >&2
+            exit 1
+          fi
+      - name: Differential nonvisibility collection
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.shadow_write_only_result_escrow_v1 import CASE_COUNT, seal_score_vector
+
+          lease="cd"*32
+          all_pass=[{"checker_count":5,"passed_mask":31} for _ in range(CASE_COUNT)]
+          all_fail=[{"checker_count":5,"passed_mask":0} for _ in range(CASE_COUNT)]
+          a=Path("/tmp/escrow-a"); b=Path("/tmp/escrow-b")
+          ra=seal_score_vector(rows=all_pass, lease_digest_sha256=lease, recipient_cert_path="/tmp/cert.pem", sink_dir=a)
+          rb=seal_score_vector(rows=all_fail, lease_digest_sha256=lease, recipient_cert_path="/tmp/cert.pem", sink_dir=b)
+          assert ra == rb, (ra,rb)
+          pa=a/ra["escrow_object_name"]; pb=b/rb["escrow_object_name"]
+          assert pa.stat().st_size == pb.stat().st_size
+          assert pa.read_bytes() != pb.read_bytes()
+          # Only a constant opaque receipt is emitted; never score/checker state.
+          Path("/tmp/public-receipt.json").write_text(json.dumps(ra,sort_keys=True))
+          print("OPAQUE_ESCROW_COMMITTED")
+          PY
+      - name: Upload opaque ciphertexts
+        uses: actions/upload-artifact@v4
+        with:
+          name: lbzr3-ciphertexts
+          path: |
+            /tmp/escrow-a/*.cms
+            /tmp/escrow-b/*.cms
+          retention-days: 1
+      - name: Prove public receipt contains no result-derived fields
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("/tmp/public-receipt.json"))
+          forbidden=("score","passed","true_checker","result_hash","result_body","summary")
+          text=json.dumps(r,sort_keys=True).lower()
+          # Boolean visibility declarations may name result_* fields; values must
+          # be false and no measured result value may exist.
+          assert r["result_derived_public_field_count"] == 0
+          assert r["result_body_visible"] is False
+          assert r["result_score_visible"] is False
+          assert r["result_summary_visible"] is False
+          assert r["result_hash_visible"] is False
+          assert "full_score_cases" not in r
+          assert "target_met" not in r
+          print("PUBLIC_SURFACE_NONINTERFERENCE_PASS")
+          PY
+
+  release-role-verifier:
+    needs: [keygen, collector]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: lbzr3-release-private-key
+          path: /tmp/release
+      - uses: actions/download-artifact@v4
+        with:
+          name: lbzr3-ciphertexts
+          path: /tmp/cipher
+      - name: Release synthetic results only in separate role
+        env:
+          CERT_B64: ${{ needs.keygen.outputs.cert_b64 }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$CERT_B64" | base64 -d > /tmp/cert.pem
+          mapfile -t CIPHERS < <(find /tmp/cipher -name '*.cms' -type f | sort)
+          test "${#CIPHERS[@]}" -eq 2
+          python - <<'PY'
+          from pathlib import Path
+          from canonical.runtime.shadow_write_only_result_release_v1 import release_score_vector
+          lease="cd"*32
+          vals=[]
+          for p in sorted(Path("/tmp/cipher").rglob("*.cms")):
+              r=release_score_vector(
+                  ciphertext_path=p,
+                  recipient_cert_path="/tmp/cert.pem",
+                  private_key_path="/tmp/release/private.pem",
+                  expected_lease_digest_sha256=lease,
+              )
+              vals.append(r["score_percent"])
+          assert sorted(vals) == [0.0,100.0], vals
+          print("SEPARATE_RELEASE_ROLE_ROUNDTRIP_PASS")
+          PY
