@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FULL_CROSS_PUBLIC_RUNNER_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__712704_OF_712704_EXACT_POINTWISE_MAX_MATCH__ZERO_TERMINAL_ROWS__ZERO_ACCEPTANCE_CREDIT_BY_ITSELF",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2140,
+    "pull_request_head_sha": "a1701820638952ae912e19a6e2176c78d7801900",
+    "merge_commit": "7f5580fb4cb8f79685bc45362cfc70e495ecf2da",
+    "workflow_name": "Verify LiveBench full cross V1",
+    "workflow_run_id": 37243831184,
+    "workflow_job_id": 111557674807,
+    "conclusion": "success",
+    "artifact_id": 11318605986,
+    "artifact_name": "livebench-full-cross-v1-verification",
+    "artifact_digest_sha256": "6db9cccc71404c9a66efe7e4701ff05c96aa5c0de8b287af6910bc4fc747b307"
+  },
+  "subject_blobs": {
+    "archetypes": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
+    "slot_feasibility": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+    "composer_v2": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+    "pointwise_planner": "71e637c70edf1c582e28ea38b3b798965c803a06"
+  },
+  "pinned_livebench": {
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "nltk_version": "3.10.3",
+    "nltk_data_commit": "550b6625bcef1f2abff2ff770a5a0d272c9c6b2a"
+  },
+  "exact_result": {
+    "structural_id_sets": 928,
+    "exact_reachable_lexical_signatures": 192,
+    "boundary_profile_count": 4,
+    "boundary_profiles": [
+      "low",
+      "high",
+      "mixed",
+      "sentence_zero"
+    ],
+    "total_cases": 712704,
+    "exact_pointwise_matches": 712704,
+    "profile_case_count_each": 178176,
+    "sacrifice_count_histogram": {
+      "0": 576630,
+      "1": 130008,
+      "2": 6066
+    },
+    "exact_checker_pass_histogram": {
+      "0/1": 192,
+      "1/1": 11328,
+      "1/2": 2832,
+      "1/3": 228,
+      "2/2": 49392,
+      "2/3": 15284,
+      "2/4": 1559,
+      "3/3": 121960,
+      "3/4": 42554,
+      "3/5": 4279,
+      "4/4": 193967,
+      "4/5": 69146,
+      "5/5": 199983
+    }
+  },
+  "theorem_supported": "OVER_ALL_928_CONFLICT_COMPATIBLE_ACTIVE15_STRUCTURAL_ID_SETS_CROSSED_WITH_ALL_192_REACHABLE_LEXICAL_COLLISION_SIGNATURES_AND_FOUR_NUMERIC_STRUCTURAL_BOUNDARY_PROFILES__THE_CURRENT_POINTWISE_PLANNER_RESPONSE_ATTAINS_ITS_THEORETICAL_MAXIMUM_NUMBER_OF_SIMULTANEOUSLY_PASSING_EXACT_PINNED_LIVEBENCH_CHECKERS",
+  "zero_terminal_boundary": {
+    "terminal_rows_read": 0,
+    "terminal_kwargs_read": 0,
+    "terminal_instruction_id_lists_read": 0,
+    "target_scores_read": 0
+  },
+  "hard_nonclaims": [
+    "THIS_RECEIPT_DOES_NOT_BY_ITSELF_PROVE_PARAMETRIC_EQUIVALENCE_OF_EVERY_INTERMEDIATE_NUMERIC_THRESHOLD",
+    "THIS_RECEIPT_DOES_NOT_BY_ITSELF_BIND_THE_ACCEPTED_LIVEBENCH_PREDICATE_SCOPE_TO_ACTIVE15",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_RECEIPT_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "next": "COMPOSE_THIS_INDEPENDENT_FULL_CROSS_PASS_WITH_THE_ALREADY_FROZEN_PARAMETRIC_NUMERIC_REDUCTION__POINTWISE_MINIMUM_CUT__VISIBLE_COMPILER_V4_SCOPE_RECEIPT__AND_ACCEPTED_LIVEBENCH_SCOPE_BINDING; PROMOTE_ONLY_IF_EVERY_PRECOMMITTED_UNIVERSAL_CLOSURE_GATE_CLAUSE_IS_CONTENT_BOUND_AND_TRUE"
+}
