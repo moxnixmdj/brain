@@ -192,6 +192,132 @@ def _candidate_matches(prompt: str) -> list[dict[str, Any]]:
             "valid": len(re.findall(re.escape(sep), response)) >= 2,
         })
 
+
+    for m in re.finditer(
+        r"Finish your response with this exact phrase (.+?)\. No other words should follow this phrase\.",
+        prompt,
+        re.I,
+    ):
+        ender = m.group(1).strip()
+        if ender:
+            response = ender
+            valid = response.strip().strip('"').lower().endswith(ender.lower())
+            matches.append({"checker": "legacy:EndChecker", "response": response, "valid": valid})
+
+    if "In your entire response, refrain from the use of any commas." in prompt:
+        response = "Alpha"
+        matches.append({"checker": "legacy:CommaChecker", "response": response, "valid": "," not in response})
+
+    if (
+        "Your answer must contain a title, wrapped in double angular brackets, "
+        "such as <<poem of joy>>."
+    ) in prompt:
+        response = "<<Alpha>>"
+        matches.append({
+            "checker": "legacy:TitleChecker",
+            "response": response,
+            "valid": bool(re.search(r"<<[^\n]+>>", response)),
+        })
+
+    for m in re.finditer(r"Include keywords (\[[^\n]*?\]) in the response\.", prompt, re.I):
+        try:
+            keywords = ast.literal_eval(m.group(1))
+        except Exception:
+            keywords = None
+        if isinstance(keywords, (list, tuple)) and keywords and all(isinstance(x, str) for x in keywords):
+            response = " ".join(keywords)
+            try:
+                valid = all(re.search(k, response, flags=re.I) is not None for k in keywords)
+            except re.error:
+                valid = False
+            matches.append({"checker": "legacy:KeywordChecker", "response": response, "valid": valid})
+
+    for m in re.finditer(r"Do not include keywords (\[[^\n]*?\]) in the response\.", prompt, re.I):
+        try:
+            forbidden = ast.literal_eval(m.group(1))
+        except Exception:
+            forbidden = None
+        if isinstance(forbidden, (list, tuple)) and all(isinstance(x, str) for x in forbidden):
+            response = None
+            for candidate in ("Alpha", "Zyzzx", "Quartz", "Nimbus"):
+                try:
+                    if all(re.search(r"\b" + word + r"\b", candidate, flags=re.I) is None for word in forbidden):
+                        response = candidate
+                        break
+                except re.error:
+                    response = None
+                    break
+            if response is not None:
+                matches.append({"checker": "legacy:ForbiddenWords", "response": response, "valid": True})
+
+    for m in re.finditer(
+        r"In your response, the word (.+?) should appear (less than|at least) (\d+) times\.",
+        prompt,
+        re.I,
+    ):
+        keyword, relation, n = m.group(1).strip(), m.group(2).lower(), int(m.group(3))
+        if keyword:
+            try:
+                if relation == "at least":
+                    response = " ".join([keyword] * max(1, n))
+                else:
+                    if n <= 0:
+                        continue
+                    response = "Alpha" if re.search(keyword, "Alpha", flags=re.I) is None else "Zyzzx"
+                actual = len(re.findall(keyword, response, flags=re.I))
+                valid = actual < n if relation == "less than" else actual >= n
+            except re.error:
+                valid = False
+                response = ""
+            matches.append({
+                "checker": "legacy:KeywordFrequencyChecker",
+                "response": response,
+                "valid": valid,
+            })
+
+    for m in re.finditer(r"Your answer must contain exactly (\d+) bullet points\.", prompt, re.I):
+        n = int(m.group(1))
+        if n < 1:
+            continue
+        response = "\n".join(f"* Alpha{i + 1}" for i in range(n))
+        count = len(re.findall(r"^\s*\*[^\*].*$", response, flags=re.MULTILINE))
+        count += len(re.findall(r"^\s*-.*$", response, flags=re.MULTILINE))
+        matches.append({"checker": "legacy:BulletListChecker", "response": response, "valid": count == n})
+
+    for m in re.finditer(
+        r"Highlight at least (\d+) sections in your answer with markdown, i\.e\. \*highlighted section\*\.",
+        prompt,
+        re.I,
+    ):
+        n = int(m.group(1))
+        if n < 1:
+            continue
+        response = " ".join(f"*Alpha{i + 1}*" for i in range(n))
+        highlights = [x for x in re.findall(r"\*[^\n\*]*\*", response) if x.strip("*").strip()]
+        matches.append({
+            "checker": "legacy:HighlightSectionChecker",
+            "response": response,
+            "valid": len(highlights) >= n,
+        })
+
+    for m in re.finditer(
+        r"At the end of your response, please explicitly add a postscript starting with ([A-Za-z.]+)",
+        prompt,
+        re.I,
+    ):
+        postscript = m.group(1).strip()
+        if not postscript:
+            continue
+        response = f"Alpha\n{postscript} Beta"
+        low = response.lower()
+        if postscript == "P.P.S":
+            valid = bool(re.search(r"\s*p\.\s?p\.\s?s.*$", low, flags=re.MULTILINE))
+        elif postscript == "P.S.":
+            valid = bool(re.search(r"\s*p\.\s?s\..*$", low, flags=re.MULTILINE))
+        else:
+            valid = bool(re.search(r"\s*" + re.escape(postscript.lower()) + r".*$", low, flags=re.MULTILINE))
+        matches.append({"checker": "legacy:PostscriptChecker", "response": response, "valid": valid})
+
     return matches
 
 
