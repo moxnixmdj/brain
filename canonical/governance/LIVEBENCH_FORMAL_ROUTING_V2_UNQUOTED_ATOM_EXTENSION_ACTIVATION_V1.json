@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FORMAL_ROUTING_V2_UNQUOTED_ATOM_EXTENSION_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_SYNTHETIC_PASS__GENERIC_UNQUOTED_EXACT_ATOM_EXTENSION__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "supersedes_compiler_binding_only": {
+    "prior_activation": "canonical/governance/LIVEBENCH_FORMAL_ROUTING_V2_ACTIVATION_V1.json",
+    "prior_compiler_git_blob_sha": "1d83dffb7024666cc2202f88a0dca6819165f35a",
+    "current_compiler_git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+    "adapter_git_blob_sha": "dbc895a0e458e411aafd3c96e0ddc2c01e657375"
+  },
+  "verification": {
+    "path": "canonical/verification/UNQUOTED_EXACT_ATOM_LIVEBENCH_V2_PUBLIC_VERIFICATION_20261004_V1.json",
+    "workflow_run_id": 37195102563,
+    "workflow_job_id": 111415223813,
+    "conclusion": "success"
+  },
+  "semantic_effect": [
+    "CANONICAL_PUBLIC_ZERO_CASE_INSTRUCTION_REPLY_WITH_EXACTLY_SYNTHETIC_OK_NOW_TAKES_VERIFIED_MODEL_INDEPENDENT_FORMAL_FAST_PATH",
+    "GENERIC_SINGLE_ATOM_UNQUOTED_EXACT_RESPONSE_CLASS_ADDED",
+    "MULTIWORD_OR_CHAINED_UNQUOTED_REQUESTS_REMAIN_FAIL_CLOSED",
+    "SEMANTIC_REQUESTS_CONTINUE_TO_FALL_THROUGH_TO_UNCHANGED_V1",
+    "POST_PROMPT_ACQUISITION_POLICY_UNCHANGED"
+  ],
+  "epoch_rules": [
+    "NO_RETROACTIVE_EFFECT_ON_LIVEBENCH_V9_OR_ANY_OTHER_ALREADY_FROZEN_EPOCH",
+    "ANY_FUTURE_REPLAY_OR_TERMINAL_EPOCH_USING_THIS_EXTENSION_MUST_BIND_CURRENT_COMPILER_HASH_EXPLICITLY",
+    "NO_NEW_CASE_EXPOSURE_AUTHORITY_FROM_THIS_ACTIVATION"
+  ],
+  "next_gate": "AFTER_CURRENT_FROZEN_V9_DELTA_IS_RESOLVED__RECOMPUTE_CAUSAL_FRONTIER_AND_IF_NONDOMINATED_FREEZE_A_SUCCESSOR_REPLAY72_EPOCH_BOUND_TO_COMPILER_A4A3F87F",
+  "authority": {
+    "routing": true,
+    "replay72": false,
+    "new_case_exposure": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_authorized": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
