@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 jobs:
   verify:
@@ -24,5 +25,35 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python canonical/runtime/terminal_minimum_causal_depth_guard_v2.py
-      - run: python -c "from canonical.tests.test_terminal_minimum_causal_depth_guard_v2 import test_guard_passes; test_guard_passes()"
+      - name: Run V2 guard and test with persistent failure diagnostic
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python canonical/runtime/terminal_minimum_causal_depth_guard_v2.py >/tmp/v2-guard.out 2>&1
+          GUARD_CODE=$?
+          python -c "from canonical.tests.test_terminal_minimum_causal_depth_guard_v2 import test_guard_passes; test_guard_passes()" >/tmp/v2-test.out 2>&1
+          TEST_CODE=$?
+          {
+            echo "# Terminal minimum causal depth V2 diagnostic"
+            echo
+            echo "- run: ${GITHUB_RUN_ID}"
+            echo "- guard_exit: ${GUARD_CODE}"
+            echo "- test_exit: ${TEST_CODE}"
+            echo
+            echo "## guard"
+            echo '~~~text'
+            cat /tmp/v2-guard.out
+            echo '~~~'
+            echo
+            echo "## test"
+            echo '~~~text'
+            cat /tmp/v2-test.out
+            echo '~~~'
+          } >/tmp/v2-diagnostic.md
+          cat /tmp/v2-diagnostic.md
+          if [ "$GUARD_CODE" -ne 0 ] || [ "$TEST_CODE" -ne 0 ]; then
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "Terminal minimum causal depth V2 diagnostic ${GITHUB_RUN_ID}" --body-file /tmp/v2-diagnostic.md
+            exit 1
+          fi
