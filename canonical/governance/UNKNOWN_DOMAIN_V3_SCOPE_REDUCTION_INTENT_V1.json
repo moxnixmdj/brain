@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V3_SCOPE_REDUCTION_INTENT_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_BEFORE_INDEPENDENT_VERIFIER_OUTCOME__ZERO_REALITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_scope_id": "scope://opus55/UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT/exact-frozen-v2-generator-domain",
+  "purpose": "REMOVE_POST_VERIFICATION_LATENCY_WITHOUT_POST_OUTCOME_GOALPOST_TUNING",
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2084,
+    "head_sha": "de3ee589483bdbefbdb6cc784cdb7abc4a04d52c",
+    "workflow": "Isolated Unknown-Domain V3 universal verifier",
+    "run_id": 37241499647,
+    "job_id": 111550962798,
+    "required_conclusion": "success"
+  },
+  "frozen_reducer": {
+    "path": "canonical/runtime/unknown_domain_v3_universal_scope_reducer_v1.py",
+    "git_blob_sha": "ddf6aa89fde1768d2a66abce361a93c3336f0775"
+  },
+  "frozen_tests": {
+    "path": "canonical/tests/test_unknown_domain_v3_universal_scope_reducer_v1.py",
+    "git_blob_sha": "bbb5c63b7f2e7f08ec3fdb13b5f5dba547978f70"
+  },
+  "generic_scope_compiler": {
+    "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039",
+    "required_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF"
+  },
+  "root3_authority": {
+    "minimum_cut_git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+    "universal_scope_activation_git_blob_sha": "4cb0d963aa11205063d0119d9ae8fdb625f80e3c",
+    "scope_admissibility_git_blob_sha": "a9bff5074dbb456d673131c60f30efa88a337670",
+    "resume_event": "NEW_SCOPE_CERTIFICATE_EVENT"
+  },
+  "positive_consequence_if_and_only_if_exact_verifier_receipt_passes": {
+    "scope_certificate_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "scope_relation": "EXACT",
+    "root3_new_scope_certificate_event_eligible": true,
+    "delete_27_case_production_as_required_information_acquisition_for_exact_frozen_scope": true,
+    "production_information_gain_for_exact_frozen_scope": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "required_next_gate_after_scope_reducer_pass": [
+    "REVALIDATE_CURRENT_MAIN_ROOT3_AUTHORITY_BYTES",
+    "COMPILE_EXACT_SCOPE_CERTIFICATE_THROUGH_EXISTING_GENERIC_SCOPE_COMPILER",
+    "APPLY_CURRENT_MAIN_ROOT3_NEW_SCOPE_CERTIFICATE_EVENT_REDUCTION",
+    "RUN_SEPARATE_CURRENT_ACCEPTANCE_FIXED_POINT_RECOMPUTATION",
+    "INFER_FAMILY_CLOSURE_ONLY_IF_CURRENT_ACCEPTANCE_REGISTRY_LOGIC_ENTAILS_IT"
+  ],
+  "hard_rules": [
+    "NO_POST_VERIFIER_THRESHOLD_OR_REDUCER_TUNING",
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION",
+    "NO_SCOPE_TO_PERFORMANCE_SHORTCUT",
+    "NO_FAMILY_CLOSURE_FROM_SCOPE_CERTIFICATE_ALONE",
+    "NO_FRESH_REALITY",
+    "NO_RETIRED_76E8040D_LEASE_EXECUTION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
