@@ -1,4 +1,4 @@
-from canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
+import re\n\nfrom canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
 
 
 def _env(s: str) -> str:
@@ -108,3 +108,28 @@ def test_quotation_bullets_and_end_all_compose():
     response = out["response"]
     assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")
+
+
+def test_json_route_avoids_fixed_key_collision():
+    prompt = (
+        "Do not include keywords ['response'] in the response. "
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as code fences."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["route"] == "JSON"
+    assert '"response"' not in out["response"].lower()
+
+
+def test_two_response_route_avoids_fixed_word_collisions():
+    prompt = (
+        "Do not include keywords ['alpha', 'beta'] in the response. "
+        "Give two different responses. Responses and only responses should be separated by 6 asterisk symbols: ******."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["route"] == "TWO_RESPONSES"
+    assert "alpha" not in out["response"].lower()
+    assert "beta" not in out["response"].lower()
+    left, right = out["response"].split("******")
+    assert left.strip() != right.strip()
