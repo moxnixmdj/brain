@@ -1,0 +1,32 @@
+name: Verify LiveBench Legacy Fixedpoint Witness V1
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_legacy_fixedpoint_witness_v1.py"
+      - "canonical/tests/test_livebench_legacy_fixedpoint_witness_v1.py"
+      - "canonical/vendor/livebench_ifeval_legacy/**"
+      - ".github/workflows/verify-livebench-legacy-fixedpoint-witness-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install exact checker runtime dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pytest langdetect==1.0.9 immutabledict==4.2.1 nltk==3.9.1
+          python -m nltk.downloader punkt punkt_tab
+      - name: Verify vendored public checker blobs
+        run: |
+          test "$(git hash-object canonical/vendor/livebench_ifeval_legacy/instruction_following_eval/instructions.py)" = "4997bab885a676d92545fd91a9a20b48d234a2b2"
+          test "$(git hash-object canonical/vendor/livebench_ifeval_legacy/instruction_following_eval/instructions_registry.py)" = "903ed738398648c7cfac61d5ffa478c22f1f0891"
+          test "$(git hash-object canonical/vendor/livebench_ifeval_legacy/instruction_following_eval/instructions_util.py)" = "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+      - name: Run fixed-point exact-checker tests
+        run: python -m pytest -q canonical/tests/test_livebench_legacy_fixedpoint_witness_v1.py
