@@ -1,0 +1,151 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_NOVELTY_STRESS_PUBLIC_RUNNER_RESULT_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_COMPLETE__INTEGRITY_PASS__9_OF_9_WITHIN_OPERATOR_SOLVED__0_OF_3_OUTSIDE_OPERATOR_SOLVED__EXPECTED_RESIDUAL_LOCALIZED__ZERO_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_NOVELTY_STRESS_PREEXPOSURE_V1.json",
+      "git_blob_sha": "d5fe85f82a40b3eef2231167c6fbe8bed248bb1d"
+    },
+    "candidate": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_NOVELTY_STRESS_CANDIDATE_V1.json",
+      "git_blob_sha": "479d3a3edd0c6cc437c2175aec50220a67113564"
+    },
+    "runtime": {
+      "path": "canonical/runtime/h100_zero_learned_novelty_stress_v1.py",
+      "git_blob_sha": "21f54300b9c2cffe95dd3ff8e845e87b0ce19831"
+    },
+    "cell_adapter": {
+      "path": "canonical/runtime/h100_zero_learned_novelty_cell_v1.py",
+      "git_blob_sha": "5fde0a0fe93de0bab368ae972e17d191682538a4"
+    },
+    "tests": {
+      "path": "canonical/tests/test_h100_zero_learned_novelty_stress_v1.py",
+      "git_blob_sha": "c07529006ad6c67678c201ccc8ef4fac1a63516b"
+    },
+    "simple_solver": {
+      "path": "canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py",
+      "git_blob_sha": "fa77c6a0f4edf214c4237cf1e204b640261622fe"
+    },
+    "expression_solver": {
+      "path": "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+      "git_blob_sha": "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1742,
+    "verifier_head_sha": "e9a3341e9d4b4cc731a85dff3a779f7ab3ee1953",
+    "merge_commit": "b6c6988f63fda667700abb3057a366157e02ce01",
+    "workflow_run_id": 37185979957,
+    "workflow_path": ".github/workflows/verify-h100-zero-learned-stress-v1.yml",
+    "workflow_git_blob_sha": "1028693e39461f6397d1de08f3ef6bf64bcc06dc",
+    "overall_conclusion": "failure",
+    "overall_conclusion_semantics": "EXPECTED_WHEN_ANY_FROZEN_TASK_REMAINS_UNSOLVED__NOT_AN_INTEGRITY_FAILURE"
+  },
+  "integrity": {
+    "job_id": 111387849252,
+    "conclusion": "success",
+    "exact_subject_blobs": true,
+    "frozen_integrity_tests": true
+  },
+  "task_results": [
+    {
+      "task_id": "AFFINE_2D",
+      "job_id": 111387849571,
+      "conclusion": "success",
+      "operator_class": "WITHIN_CURRENT_OPERATOR_CLOSURE"
+    },
+    {
+      "task_id": "POWER_RATIO",
+      "job_id": 111387849420,
+      "conclusion": "success",
+      "operator_class": "WITHIN_CURRENT_OPERATOR_CLOSURE"
+    },
+    {
+      "task_id": "RECIPROCAL_AFFINE",
+      "job_id": 111387849500,
+      "conclusion": "success",
+      "operator_class": "WITHIN_CURRENT_OPERATOR_CLOSURE"
+    },
+    {
+      "task_id": "NESTED_SATURATION",
+      "job_id": 111387849591,
+      "conclusion": "success",
+      "operator_class": "WITHIN_CURRENT_OPERATOR_CLOSURE"
+    },
+    {
+      "task_id": "LINEAR_PLUS_SATURATION",
+      "job_id": 111387849536,
+      "conclusion": "success",
+      "operator_class": "WITHIN_CURRENT_OPERATOR_CLOSURE"
+    },
+    {
+      "task_id": "CROSS_STABLE_RATIO",
+      "job_id": 111387849439,
+      "conclusion": "success",
+      "operator_class": "WITHIN_CURRENT_OPERATOR_CLOSURE"
+    },
+    {
+      "task_id": "DOUBLE_CROSS_STABLE_RATIO",
+      "job_id": 111387849549,
+      "conclusion": "success",
+      "operator_class": "WITHIN_CURRENT_OPERATOR_CLOSURE"
+    },
+    {
+      "task_id": "LOG1P_ABS",
+      "job_id": 111387849544,
+      "conclusion": "success",
+      "operator_class": "WITHIN_CURRENT_OPERATOR_CLOSURE"
+    },
+    {
+      "task_id": "RATIONAL_QUADRATIC",
+      "job_id": 111387849389,
+      "conclusion": "success",
+      "operator_class": "WITHIN_CURRENT_OPERATOR_CLOSURE"
+    },
+    {
+      "task_id": "PERIODIC_SINE",
+      "job_id": 111387849529,
+      "conclusion": "failure",
+      "operator_class": "OUTSIDE_CURRENT_OPERATOR_SET"
+    },
+    {
+      "task_id": "EXPONENTIAL",
+      "job_id": 111387849598,
+      "conclusion": "failure",
+      "operator_class": "OUTSIDE_CURRENT_OPERATOR_SET"
+    },
+    {
+      "task_id": "SIGN_STEP",
+      "job_id": 111387849507,
+      "conclusion": "failure",
+      "operator_class": "OUTSIDE_CURRENT_OPERATOR_SET"
+    }
+  ],
+  "deductions": {
+    "within_operator_tasks_solved": 9,
+    "within_operator_task_count": 9,
+    "outside_operator_tasks_solved": 0,
+    "outside_operator_task_count": 3,
+    "search_or_composition_residual_observed": false,
+    "missing_primitive_or_grammar_residual_observed": true,
+    "learned_state_need_established": false,
+    "next_action": "ADD_THE_SMALLEST_ZERO_LEARNED_GENERAL_PRIMITIVE_FAMILY_CAPABLE_OF_PARAMETERIZED_PERIODIC_EXPONENTIAL_AND_DISCONTINUOUS_STEP_BEHAVIOR__THEN_REPLAY_THE_SAME_FROZEN_12_TASK_POPULATION_WITHOUT_CHANGING_IT"
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_GENERALIZATION_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_MYSTERYMECHANISM_SCORE_CLAIM",
+    "NO_H100_TERMINAL_CREDIT",
+    "FAILURE_OF_THREE_OUTSIDE_OPERATOR_TASKS_IS_NOT_EVIDENCE_THAT_LEARNED_PARAMETERS_ARE_REQUIRED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
