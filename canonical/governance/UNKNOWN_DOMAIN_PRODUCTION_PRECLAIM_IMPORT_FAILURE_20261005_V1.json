@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_PRODUCTION_PRECLAIM_IMPORT_FAILURE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__PRECLAIM_INFRASTRUCTURE_FAILURE__PRODUCTION_POPULATION_UNCONSUMED__RETRY_VERIFICATION_PENDING",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "verified_execution_lease": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "git_blob_sha": "26f98012ecf01c6a3f20e855bdebf60cf70d1c1f",
+    "sha256": "76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "verification_run_id": 37239842759,
+    "verification_job_id": 111546179287,
+    "verification_conclusion": "success"
+  },
+  "attempt": {
+    "launch_ref": "refs/heads/unknown-domain-direct-launch/76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+    "workflow_run_id": 37239903215,
+    "workflow_job_id": 111546358270,
+    "head_sha": "4057d47245354fb0054a056a4ea401506d92a68a",
+    "conclusion": "failure",
+    "observed_error": "ModuleNotFoundError: No module named 'canonical'",
+    "failed_command": "python canonical/runtime/unknown_domain_direct_production_once_v1.py",
+    "failure_phase": "MODULE_IMPORT_BEFORE_MAIN"
+  },
+  "causal_deduction": {
+    "defect": "FILE_PATH_INVOCATION_REMOVES_REPOSITORY_ROOT_FROM_THE_IMPORT_SEARCH_ROOT_FOR_THE_CANONICAL_PACKAGE",
+    "corrected_invocation": "python -m canonical.runtime.unknown_domain_direct_production_once_v1",
+    "atomic_claim_reached": false,
+    "beacon_or_secret_generation_reached": false,
+    "production_case_generation_reached": false,
+    "production_cases_consumed": 0,
+    "reason": "THE LAUNCHER IMPORT FAILED BEFORE MAIN; ATOMIC CLAIM CREATION AND ALL PRODUCTION-SIDE EFFECTS OCCUR ONLY AFTER MAIN BEGINS AND PASSES LEASE/PREFLIGHT CHECKS"
+  },
+  "retry_candidate": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2034,
+    "head_sha": "c28c91ebcbfc13eb494bd882da86005d9c9e190f",
+    "verification_workflow_run_id": 37240343308,
+    "verification_state_at_record": "QUEUED",
+    "semantic_scope": "PRECLAIM_TRANSPORT_RETRY_ONLY__SAME_LEASE__SAME_LAUNCH_KEY__SAME_ATOMIC_CLAIM_KEY"
+  },
+  "hard_rules": [
+    "DO_NOT_CLASSIFY_THE_FAILED_ATTEMPT_AS_A_PRODUCTION_CASE_CONSUMPTION",
+    "DO_NOT_CREATE_A_NEW_LEASE_OR_NEW_CLAIM_KEY",
+    "DO_NOT_RETRY_PRODUCTION_UNTIL_THE_PRECLAIM_RETRY_BYTES_PASS_INDEPENDENT_VERIFICATION",
+    "NO_CLAIM_ABSENCE_PRECHECK",
+    "ATOMIC_CLAIM_HTTP_201_REMAINS_THE_ONLY_LINEARIZATION_POINT",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_THIS_TRUTH_RECORD"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
