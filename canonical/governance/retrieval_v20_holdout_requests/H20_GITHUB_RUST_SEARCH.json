@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_HOLDOUT_REQUEST_V1",
+  "episode_id": "H20_GITHUB_RUST_SEARCH",
+  "difficulty": "BEHAVIOR_ONLY",
+  "query_action": {
+    "action_id": "H20Q02",
+    "source_id": "GITHUB_REPOSITORY_SEARCH",
+    "query_family": "FRESH_HOLDOUT_BEHAVIOR_V20",
+    "query": "fast recursive regular expression text search command line Rust"
+  },
+  "source": {
+    "source_id": "GITHUB_REPOSITORY_SEARCH",
+    "provider": "github",
+    "upstream_group": "GITHUB_PUBLIC_API",
+    "source_class": "repository",
+    "script": "LATIN"
+  },
+  "target_identity_present": false
+}
