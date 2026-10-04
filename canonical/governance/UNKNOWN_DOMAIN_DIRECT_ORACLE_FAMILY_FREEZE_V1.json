@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_ORACLE_FAMILY_FREEZE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_CANDIDATE_REQUALIFICATION__ZERO_CASES__ZERO_CREDIT",
+  "objective": "FREEZE_THE_INFORMATION_SAFE_GENERATIVE_FAMILY_AND_SCORER_FOR_THE_TWO_EXISTING_UNKNOWN_DOMAIN_DIRECT_LEAVES_BEFORE_REQUALIFYING_THE_OPERATIVE_ZERO_LEARNED_CANDIDATE",
+  "frozen_protocol": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json",
+    "git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab"
+  },
+  "target_leaves": [
+    "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+    "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS"
+  ],
+  "generator_contract": {
+    "post_freeze_beacon_required": true,
+    "beacon_not_candidate_visible": true,
+    "case_ids_derived_from_beacon": true,
+    "candidate_visible_only": [
+      "SOURCE_DOMAIN_VERIFIED_PRIMITIVE_TABLES_AND_RECEIPTS",
+      "TARGET_DOMAIN_PUBLIC_OBSERVATIONS",
+      "TARGET_QUERY",
+      "ALLOWED_SAFE_PROBES",
+      "OPAQUE_SURFACE_ONTOLOGY"
+    ],
+    "hidden_evaluator_only": [
+      "RELEVANT_SOURCE_PRIMITIVE",
+      "TARGET_SURFACE_MAPPING",
+      "GOLD_QUERY_OUTPUT",
+      "IDENTIFIABILITY_CLASS",
+      "VALID_DISCRIMINATORS"
+    ],
+    "case_modes": {
+      "IDENTIFIABLE_TRANSFER": 24,
+      "NONIDENTIFIABLE_ABSTAIN": 12,
+      "UNDERSPECIFIED_REQUEST_DISCRIMINATOR": 12
+    },
+    "negative_transfer_distractor_required": true,
+    "target_only_baseline_must_remain_ambiguous_on_identifiable_transfer": true
+  },
+  "scoring_contract": {
+    "IDENTIFIABLE_TRANSFER": [
+      "CORRECT_SUPPORTED_QUERY_OUTPUT",
+      "REUSES_RELEVANT_SOURCE_PRIMITIVE",
+      "DISTRACTOR_SOURCE_PRIMITIVE_NOT_CREDITED",
+      "PROVENANCE_RECEIPT_PRESERVED",
+      "TARGET_ONLY_BASELINE_REMAINS_AMBIGUOUS"
+    ],
+    "NONIDENTIFIABLE_ABSTAIN": [
+      "MUST_ABSTAIN",
+      "MUST_NOT_FORCE_A_UNIQUE_OUTPUT"
+    ],
+    "UNDERSPECIFIED_REQUEST_DISCRIMINATOR": [
+      "MUST_REQUEST_ONE_VALID_SAFE_DISCRIMINATOR",
+      "MUST_NOT_ANSWER_BEFORE_DISCRIMINATION"
+    ],
+    "blanket_abstention_forbidden": true,
+    "all_cases_conjunctive": true
+  },
+  "future_execution_boundary": {
+    "case_generation_authority": false,
+    "fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "rule": "FREEZE_ONLY__CANDIDATE_MUST_BE_REQUALIFIED_AFTER_THIS_FREEZE__THEN_PREDICATE_LOCAL_AUTHORITY_MUST_BE_INDEPENDENTLY_VERIFIED_BEFORE_POST_FREEZE_BEACON_OR_CASE_GENERATION"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
