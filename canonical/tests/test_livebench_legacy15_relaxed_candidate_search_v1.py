@@ -22,7 +22,7 @@ def test_unsat_full_conjunction_still_gets_partial_candidates():
     ]
 
     full_out = full.generate(contracts)
-    assert full_out["status"] == "FAIL_CLOSED"
+    assert full_out["status"] == "PROVED_UNSAT_VISIBLE_CONSTRAINTS"
     assert full_out["candidates"] == []
 
     out = relaxed.generate_relaxed(contracts)
