@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_CLEAN_EQUIVALENT_DEVELOPMENT_PRECOMMIT_V1",
+  "date": "2026-10-04",
+  "status": "PRECOMMITTED__DEVELOPMENT_ONLY__NO_ACCEPTANCE_CREDIT__NO_TARGET_ROWS",
+  "objective": "Measure the source-derived 25-type successor on a clean independently generated population before freezing any acceptance qualification successor.",
+  "candidate": {
+    "path": "canonical/runtime/livebench_legacy25_clean_witness_v1.py",
+    "git_blob_sha": "7d8d2b9d6883a231395a422993f315ad951f5c9b",
+    "target_row_dependency": false,
+    "target_question_id_dependency": false
+  },
+  "frozen_public_sources": {
+    "livebench_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "livebench_generator_path": "livebench/if_runner/live_data.py",
+    "livebench_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_util_git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+  },
+  "development_population": {
+    "count": 200,
+    "numpy_seed": 2026100401,
+    "python_random_seed": 2026100402,
+    "instruction_draw_min": 2,
+    "instruction_draw_max": 5,
+    "exact_historical_constraint_sampling_and_deconfliction": true,
+    "kwargs_generated_only_by_frozen_build_description": true,
+    "task_balance": {
+      "paraphrase": 50,
+      "summarize": 50,
+      "simplify": 50,
+      "story_generation": 50
+    },
+    "article_source": "SYNTHETIC_DETERMINISTIC_NONTERMINAL_TEXT",
+    "article_semantics_acceptance_credit": false,
+    "target_dataset_rows_used": 0,
+    "target_dataset_metadata_used_for_case_generation": false
+  },
+  "scoring": {
+    "scorer_family": "LEGACY_IFEVAL_STRICT_PLUS_LOOSE_MEAN",
+    "per_case": "(ALL_INSTRUCTIONS_TRUE_BINARY + FRACTION_INSTRUCTIONS_TRUE)/2",
+    "portfolio": "ARITHMETIC_MEAN_OVER_200",
+    "development_report_only": true
+  },
+  "contamination_partition": {
+    "this_population_role": "DEVELOPMENT_ONLY",
+    "may_modify_successor_after_results": true,
+    "may_promote_from_this_population": false,
+    "future_qualification_must_use_new_precommitted_seeds_and_population": true,
+    "target_public_200_replay_forbidden_as_clean_credit": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "target_rows_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "execution_authority": "PUBLIC_SYNTHETIC_NONTERMINAL_DEVELOPMENT_ONLY"
+}
