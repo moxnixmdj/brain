@@ -1,0 +1,29 @@
+name: Verify LiveBench Root1 public grammar successor v1
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/livebench_public_grammar_compiler_v2.py'
+      - 'canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py'
+      - 'canonical/tests/test_livebench_public_grammar_compiler_v2.py'
+      - 'canonical/governance/LIVEBENCH_ROOT1_PUBLIC_GRAMMAR_SUCCESSOR_CANDIDATE_V1.json'
+      - '.github/workflows/verify-livebench-root1-public-grammar-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile successor
+        run: |
+          python -m py_compile             canonical/runtime/livebench_public_grammar_compiler_v2.py             canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py
+      - name: Run focused successor tests
+        run: |
+          python -m unittest -v canonical.tests.test_livebench_public_grammar_compiler_v2
