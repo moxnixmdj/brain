@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V7_SANITIZED_CLASSIFICATION_EXECUTION_RECEIPT_20261004_V1",
+  "date": "2026-10-04",
+  "status": "ATOMIC_EXECUTION_STEP_PASS__SANITIZED_CLASSIFICATION_COMPLETE__GIT_PERSIST_STEP_FAILED__GITHUB_ARTIFACT_AND_JOB_LOG_IMMUTABLE_EVIDENCE_BOUND__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "execute/livebench-v7-sanitized-classification-20261004",
+    "trigger_commit": "e5e2a97bfeb2d95839917e01281526c1770a499c",
+    "workflow_run_id": 37193519638,
+    "workflow_job_id": 111410499196,
+    "workflow_name": "Execute LiveBench V7 sanitized classification",
+    "overall_job_conclusion": "failure",
+    "failure_scope": "POST_EXECUTION_GIT_PUSH_ONLY",
+    "exact_byte_verification_step": "success",
+    "point_of_use_zero_case_verification_step": "success",
+    "atomic_claim_and_replay_step": "success",
+    "evidence_git_persist_step": "failure",
+    "artifact_upload_step": "success"
+  },
+  "artifact": {
+    "artifact_id": 11300241500,
+    "name": "livebench-v7-sanitized-classification-evidence",
+    "size_bytes": 1615,
+    "digest": "sha256:150c30a26aa06b3836d8d859bcba2ea7b5bc4d5ee7fdc1eb22b5ca506bfb0609",
+    "expires_at": "2027-01-02T09:52:05Z"
+  },
+  "atomic_claim": {
+    "schema": "PROJECT_BRAIN_LIVEBENCH_V7_ATOMIC_ONE_USE_CLAIM_RECEIPT_V1",
+    "epoch_digest_sha256": "5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
+    "claim_ref": "refs/heads/livebench-v7-claims/5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
+    "create_http_status": 201,
+    "reference_created": true,
+    "response_object_sha": "e5e2a97bfeb2d95839917e01281526c1770a499c",
+    "terminal_dataset_read_before_claim": false,
+    "execution_started_before_claim": false,
+    "uniqueness_linearization_event": "FIRST_ATOMIC_GIT_REF_CREATE_HTTP_201"
+  },
+  "result": {
+    "schema": "PROJECT_BRAIN_LIVEBENCH_V7_SANITIZED_BLOCKER_DIAGNOSTIC_RESULT_V1",
+    "status": "DIAGNOSTIC_COMPLETE",
+    "activation_blob_sha": "e394a1bf48de226c184617980e513e98137ca9ff",
+    "base_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "replay_prefix_limit": 72,
+    "replayed_already_exposed_cases": 72,
+    "new_case_exposure": false,
+    "case_ids_emitted": false,
+    "prompt_text_emitted": false,
+    "response_text_emitted": false,
+    "raw_exception_text_emitted": false,
+    "valid_response_count": 0,
+    "unclassified_runtime_count": 0,
+    "classification_histogram": {
+      "POLICY_BLOCK:POST_PROMPT_ACQUISITION_OR_NETWORK_FORBIDDEN": 43,
+      "STATIC_BLOCKER:BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_BLOCKED": 27,
+      "STATIC_BLOCKER:GOAL_ARCHITECTURAL_GAP": 2
+    }
+  },
+  "deductions": [
+    "ALL_29_PREVIOUSLY_UNCLASSIFIED_RUNTIME_EXITS_ARE_NOW_STRUCTURALLY_CLASSIFIED",
+    "ZERO_UNCLASSIFIED_RUNTIME_REMAINS_IN_ALREADY_EXPOSED_72_PREFIX",
+    "ZERO_VALID_RESPONSES_IN_REPLAYED_PREFIX",
+    "CURRENT_FROZEN_CANDIDATE_FAILURE_CAUSE_IS_POLICY_OR_ARCHITECTURE_PIPELINE_NOT_YET_PROVED_MISSING_UNDERLYING_CAPABILITY",
+    "NO_CASE_73_PLUS_WAS_EXPOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_UNDERLYING_CAPABILITY_ABSENCE_PROVED",
+    "NO_GENERAL_ROOT1_MISSING_CAPABILITY_CLAIM",
+    "NO_ACCEPTANCE_PROMOTION",
+    "NO_CASE_73_PLUS_EXPOSURE",
+    "NO_SCORE_CREDIT_FROM_THIS_DIAGNOSTIC"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "replayed_already_exposed_cases": 72,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
