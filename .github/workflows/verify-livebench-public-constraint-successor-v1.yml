@@ -1,0 +1,43 @@
+name: verify-livebench-public-constraint-successor-v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/instruction_constraint_compiler_v2.py"
+      - "canonical/runtime/livebench_public_constraint_solver_v1.py"
+      - "canonical/runtime/root1_livebench_successor_adapter_v1.py"
+      - "canonical/tests/test_instruction_constraint_compiler_v2.py"
+      - "canonical/tests/test_livebench_public_constraint_solver_v1.py"
+      - "canonical/tests/test_livebench_public_upstream_checker_v1.py"
+      - ".github/workflows/verify-livebench-public-constraint-successor-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install small frozen checker dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            nltk==3.10.3 emoji==2.16.0 syllapy==0.7.2
+          python -m nltk.downloader -q punkt punkt_tab averaged_perceptron_tagger_eng
+      - name: Fetch exact frozen public LiveBench scorer source
+        run: |
+          git clone -q https://github.com/LiveBench/LiveBench.git /tmp/LiveBench
+          git -C /tmp/LiveBench checkout -q 8f8e5c381a16e3f24257776edd53471fe86f8091
+          test "$(git -C /tmp/LiveBench rev-parse HEAD)" = "8f8e5c381a16e3f24257776edd53471fe86f8091"
+      - name: Run local compiler and solver tests
+        run: |
+          python -m unittest -v \
+            canonical.tests.test_instruction_constraint_compiler_v2 \
+            canonical.tests.test_livebench_public_constraint_solver_v1
+      - name: Validate witnesses against exact frozen upstream checkers
+        env:
+          PYTHONPATH: "/tmp/LiveBench:."
+        run: |
+          python -m unittest -v canonical.tests.test_livebench_public_upstream_checker_v1
