@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_COMBINED_V4_UNIVERSAL_FORMAL_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FAIL_CLOSED_REDUCTION_PASS__UNKNOWN_DOMAIN_DIRECT_AUDIT_SCOPE_COMPLETE__ATOMIC_PREDICATE_PROVED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY AND OWN ALL USEFUL OPUS 5.5 CAPABILITIES AT EQUAL OR BETTER LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "proof_kind": "OBJECTIVE_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF_WITH_INDEPENDENT_IMPLEMENTATION_FALSIFICATION",
+  "truth_history": {
+    "v2_false_promotion_revoked": true,
+    "v2_revocation_path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_REVOCATION_20261005_V1.json",
+    "v2_revocation_sha": "cf1cb494a13fb19d84894e4b58137083e28fb70e",
+    "credit_restoration_basis_is_new_combined_subject": true
+  },
+  "combined_subject": {
+    "governance_candidate": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_COMBINED_V4_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json",
+      "sha": "37b03ac1b47d912410f3a4c7be77f2c5e415bb97"
+    },
+    "proof_runtime": {
+      "path": "canonical/runtime/unknown_domain_direct_combined_v4_universal_proof_v1.py",
+      "sha": "fb5cec3efff41597cb5e64e4de982c697b73ac84"
+    },
+    "generator_v3": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py",
+      "sha": "8b855851b8a0fec3a0811c5033cc4ea6d2436954"
+    },
+    "candidate_v3": {
+      "path": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+      "sha": "8df7f13455b710623806a8219174b397a2c3c442"
+    },
+    "unchanged_scorer_v1_sha": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "unchanged_harness_v1_sha": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/UNKNOWN_DOMAIN_COMBINED_V4_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "sha": "49774f17b308d9a268a4fefbb2371b37f66f9581",
+    "public_run_id": 37242235424,
+    "public_job_id": 111553091390,
+    "result": "PASS",
+    "falsifier_populations": 512,
+    "falsifier_cases": 13824,
+    "forced_repeated_draw_populations": 3,
+    "old_float_counterexample_reproduced_and_repaired": true
+  },
+  "scope_complete_derivation": {
+    "identifier_totality": "SIZE_INDEPENDENT_FISHER_YATES_SWAP_INVARIANT_PRESERVES_RANGE_N_BIJECTION_FOR_ARBITRARY_N__NO_HMAC_COLLISION_UNIQUENESS_ASSUMPTION",
+    "transfer_support": "STRICT_WRONG_SUPPORT_MARGINS_FOR_ALL_SIX_FAMILIES__MAX_TWO_PROBES_BELOW_FULL_REDISCOVERY_FLOOR_THREE",
+    "add2_exact_float": "VISIBLE_SIGN_SIGNATURE_UNIQUELY_ORIENTS_TRUE_SUPPORT__CANDIDATE_AND_GENERATOR_USE_IDENTICAL_BIAS_PLUS_R0_PLUS_R1_ORDER__SCORER_V1_EXACT_EQUALITY_PRESERVED",
+    "abstention": "ALL_THREE_FROZEN_CLASSES_DETERMINISTIC_WITH_STRUCTURALLY_UNIQUE_IDENTIFIERS",
+    "independent_execution_role": "FALSIFIES_IMPLEMENTATION_AND_BINDING_ERRORS__UNIVERSALITY_COMES_FROM_CONTENT_BOUND_STRUCTURAL_PROOF_NOT_FROM_FINITE_SAMPLE"
+  },
+  "deduction": {
+    "prior_state": "EXTERNAL_BLOCKED",
+    "new_state": "PROVED",
+    "atomic_predicate_proved_delta": 1,
+    "proved_predicate_count_after": 13,
+    "unresolved_predicate_count_after": 25,
+    "family_acceptance_delta": 0,
+    "reason_family_remains_open": "MYSTERYMECHANISM_GE_49_55_IS_SEPARATE_AND_NOT_DISCHARGED_BY_THIS_DIRECT_AUDIT_PROOF"
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_BEYOND_THE_EXACT_DIRECT_AUDIT_CONTRACT",
+    "NO_MYSTERYMECHANISM_THRESHOLD_CREDIT",
+    "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOM_ALONE",
+    "NO_PRODUCTION_OR_TERMINAL_CASES_GENERATED_OR_CONSUMED",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "atomic_predicate_proved_delta": 1,
+    "acceptance_family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
