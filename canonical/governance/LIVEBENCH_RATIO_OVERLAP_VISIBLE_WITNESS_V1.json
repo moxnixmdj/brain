@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_OVERLAP_VISIBLE_WITNESS_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONSTRUCTIVE_HIDDEN_REFERENCE_BYPASS__PINNED_PUBLIC_FAMILY_INDEPENDENT_VERIFICATION_PENDING__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "scope": "PINNED_PUBLIC_IFBENCH_RATIO_OVERLAP_FAMILY_ONLY",
+  "problem_repaired": "The frozen LiveBench NGramOverlapChecker uses exact character-trigram sets, so whitespace-normalized reference reconstruction is not generally score-equivalent.",
+  "construction": {
+    "runtime_path": "canonical/runtime/livebench_ratio_overlap_visible_witness_v1.py",
+    "rule": "Choose a whitespace-free visible reference token with K distinct character trigrams and append m distinct novel private-use characters absent from the visible reference. Under a separately proved visible-base mapping, all K token trigrams occur in the exact hidden reference and none of the m added trigrams can occur there, so frozen overlap is exactly 100*K/(K+m).",
+    "hidden_reference_required_for_generation": false,
+    "hidden_kwargs_required_for_generation": false,
+    "terminal_case_content_required_for_generation": false
+  },
+  "pinned_public_sources": {
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_ifbench_instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1851,
+    "status": "PENDING"
+  },
+  "expected_if_independently_verified": [
+    "REMOVE_EXACT_REFERENCE_TEXT_ACQUISITION_AS_THE_RATIO_OVERLAP_PARAMETER_BARRIER_FOR_THE_12_PINNED_PUBLIC_ROWS",
+    "RETAIN_SEPARATE_OBLIGATION_FOR_MULTI_CONSTRAINT_COMPOSITION_SOUNDNESS",
+    "RETAIN_SEPARATE_OBLIGATION_FOR_TERMINAL_LIVEBENCH_POPULATION_BINDING_AND_ACCEPTANCE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_83_INSTRUCTION_TYPES_ARE_CLOSED",
+    "NO_CLAIM_ALL_ALLOWED_MULTI_CONSTRAINT_COMBINATIONS_ARE_CLOSED",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
