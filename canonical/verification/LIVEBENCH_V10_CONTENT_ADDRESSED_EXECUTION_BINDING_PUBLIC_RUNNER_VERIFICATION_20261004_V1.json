@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V10_CONTENT_ADDRESSED_EXECUTION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CONTENT_ADDRESSED_ACTIVATION_LAUNCHER_WRAPPER_BINDING__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "runner_activation_path": "LIVEBENCH_V10_REPLAY72_ACTIVATION_V1.json",
+    "runner_activation_git_blob_sha": "7a2c2fdc3cc08862850a13667ee2cd2b2e2aae91",
+    "launcher_git_blob_sha": "2d3b9ad4e3f4f02af56f402733a8d8bb04ab79c0",
+    "wrapper_git_blob_sha": "56ea114d59f0309bc14ef0504a44bec1f808e876",
+    "candidate_git_blob_sha": "7d42814e46abda96eed0fb1929bef5a829bd2236"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/livebench-formal-routing-v2-20261004",
+    "trigger_commit": "ee9c935641fd66c53045708964f9787f8447ebed",
+    "workflow_run_id": 37195683427,
+    "workflow_job_id": 111416933067,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_activation_blob": true,
+    "exact_launcher_blob": true,
+    "exact_wrapper_blob": true,
+    "exact_candidate_blob": true,
+    "replay72_authority_true": true,
+    "new_case_exposure_false": true,
+    "fresh_reality_false": true,
+    "promotion_false": true,
+    "acceptance_credit_false": true,
+    "activation_before_claim": true,
+    "claim_before_replay": true,
+    "duplicate_422_fails_closed": true,
+    "terminal_cases_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_REPLAY_EXECUTED",
+    "NO_CASE_73_PLUS",
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
