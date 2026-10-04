@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_VISIBLE_DOMINANCE_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__VISIBLE_TO_SCORER_IMPLICATION_COMPILER_IMPLEMENTED__PUBLIC_COUNTEREXAMPLES_DELETE_EXACT_KWARG_EQUALITY_AS_A_UNIVERSAL_REQUIREMENT__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "breakthrough": {
+    "deleted_false_requirement": "VISIBLE_PROMPT_MUST_RECONSTRUCT_THE_EXACT_HIDDEN_NUMERIC_KWARG_VALUE_BEFORE_A_CHECKER_PASS_CAN_BE_PROVED",
+    "replacement_theorem": "FOR_MONOTONE_INTEGER_CHECKERS__A_VISIBLE_CONSTRAINT_IS SCORE_SUFFICIENT WHEN ITS ACCEPTANCE_INTERVAL_IS_A_SUBSET_OF_THE_SCORER_ACCEPTANCE_INTERVAL",
+    "formal_rule": "VISIBLE_INTERVAL_SUBSET_OF_SCORER_INTERVAL_IMPLIES_EVERY_RESPONSE_SATISFYING_VISIBLE_CONSTRAINT_ALSO_SATISFIES_SCORER_CONSTRAINT",
+    "importance": "THIS HANDLES EXACT_MATCHES__OFF_BY_ONE_NATURAL_LANGUAGE_EQUIVALENCES__AND_VISIBLE_CONSTRAINTS_STRONGER_THAN THE HIDDEN SCORER WITHOUT REQUIRING NUMERIC IDENTITY"
+  },
+  "pinned_public_evidence": {
+    "repository": "google-research/google-research",
+    "commit": "26d8ccdab6fec61b5c83ad6327ea8bda9e580288",
+    "path": "instruction_following_eval/data/input_data.jsonl",
+    "git_blob_sha": "cbe52f6eecf3986fdac745b4acba4da1408eb146",
+    "rows": 541,
+    "examples": [
+      {
+        "public_key": 337,
+        "checker": "length_constraints:number_words",
+        "visible_constraint": "WORDS_GE_400",
+        "scorer_constraint": "WORDS_GE_336",
+        "relation": "VISIBLE_STRICTLY_STRONGER__SAFE_DOMINANCE",
+        "proof": "[400,+INF] SUBSET [336,+INF]"
+      },
+      {
+        "public_key": 1217,
+        "checker": "length_constraints:number_words",
+        "visible_constraint": "WORDS_LE_150",
+        "scorer_constraint": "WORDS_LT_151",
+        "relation": "EXACT_INTERVAL_EQUIVALENCE",
+        "proof": "[0,150] EQUALS [0,150]"
+      },
+      {
+        "public_key": 1265,
+        "checker": "length_constraints:number_sentences",
+        "visible_constraint": "SENTENCES_GT_30",
+        "scorer_constraint": "SENTENCES_GE_31",
+        "relation": "EXACT_INTERVAL_EQUIVALENCE",
+        "proof": "[31,+INF] EQUALS [31,+INF]"
+      }
+    ]
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/livebench_legacy_visible_dominance_compiler_v1.py",
+    "tests": "canonical/tests/test_livebench_legacy_visible_dominance_compiler_v1.py",
+    "supported_visible_relations": [
+      "AT_LEAST",
+      "N_OR_MORE",
+      "MORE_THAN",
+      "OVER",
+      "LESS_THAN",
+      "FEWER_THAN",
+      "UNDER",
+      "AT_MOST",
+      "NO_MORE_THAN",
+      "N_OR_FEWER",
+      "EXACTLY"
+    ],
+    "supported_quantities_v1": [
+      "words",
+      "sentences",
+      "capital_words",
+      "bullets",
+      "placeholders",
+      "highlights",
+      "sections",
+      "paragraphs"
+    ],
+    "fail_closed": [
+      "NO_VISIBLE_MATCH",
+      "CONTRADICTORY_VISIBLE_INTERVALS",
+      "UNSUPPORTED_QUANTITY",
+      "VISIBLE_INTERVAL_NOT_SUBSET_OF_SCORER_INTERVAL"
+    ],
+    "model_dependency_count": 0
+  },
+  "interaction_with_current_truth_repairs": {
+    "legacy_dispatch": "THE EXACT FROZEN 200 IS INDEPENDENTLY VERIFIED AS 200 LEGACY IFEVAL AND 0 MODERN IFBENCH",
+    "exact_description_inverter": "THE PUBLIC 541 ROW AUDIT FALSIFIED EXACT_BUILD_DESCRIPTION_REGEX_AS UNIVERSAL PROMPT GRAMMAR",
+    "new_effect": "PARAPHRASE_TOLERANT NUMERIC CONSTRAINT NORMALIZATION CAN NOW PROVE SCORE SUFFICIENCY WITHOUT DEMANDING EXACT HIDDEN KWARG SURFACE IDENTITY"
+  },
+  "next_minimum_actions": [
+    "INDEPENDENTLY RUN THE NEW COMPILER TESTS",
+    "AUDIT ALL PUBLIC CLASSIC IFEVAL NUMERIC CONSTRAINT INSTANCES FOR VISIBLE_TO_SCORER IMPLICATION COVERAGE",
+    "EXTEND ONLY THE UNPROVED HIGH_MASS PARAPHRASE FORMS",
+    "COMPOSE WITH STATIC_AND_LITERAL LEGACY CHECKER PARSERS",
+    "VERIFY MULTI_CONSTRAINT CONJUNCTION WITNESSES UNDER THE EXACT LEGACY SCORER",
+    "DO NOT READ NEW FROZEN TERMINAL PROMPTS UNTIL A FRESH SUCCESSOR IS FROZEN"
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM ALL 541 PUBLIC ROWS ARE NOW PARSED",
+    "NO CLAIM ALL 25 LEGACY CHECKER FAMILIES ARE SOLVED",
+    "NO CLAIM PUBLIC CLASSIC IFEVAL PROMPTS EQUAL FROZEN LIVEBENCH PROMPTS",
+    "NO LIVEBENCH SCORE OR PASS CLAIM",
+    "NO ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT",
+    "NO FRESH TERMINAL CASE CONTENT READ"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
