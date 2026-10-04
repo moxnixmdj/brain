@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_UNION25_CASE_AXIS_MINCUT_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__WHOLE_ENGLISH_CASE_AXIS_COLLAPSED_TO_EXACT_SECTION_SPLITTER_MINCUT__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "theorem": {
+    "preserved_active15": "WHOLE_RESPONSE_UPPER_OR_LOWER_CASE_TRANSFORMATION_PRESERVES_EVERY_COMPATIBLE_ACTIVE15_CHECKER_EXCEPT_MULTIPLE_SECTIONS",
+    "sole_interaction": "detectable_format:multiple_sections",
+    "exact_mandatory_loss_classes": [
+      [
+        "change_case:english_lowercase",
+        "Section"
+      ],
+      [
+        "change_case:english_lowercase",
+        "SECTION"
+      ],
+      [
+        "change_case:english_capital",
+        "Section"
+      ]
+    ],
+    "exact_zero_loss_class": [
+      "change_case:english_capital",
+      "SECTION"
+    ],
+    "consequence": "DELETE_GENERAL_ACTIVE15_CROSS_PRODUCT_WORK_FOR_ENGLISH_CAPITAL_AND_ENGLISH_LOWERCASE__KEEP_ONLY_VISIBLE_SECTION_SPLITTER_MINCUT"
+  },
+  "hard_nonclaims": [
+    "LANGDETECT_RUNTIME_BEHAVIOR_IS_STILL_REQUIRED_FOR_POSITIVE_ENGLISH_CASE_WITNESSES",
+    "KEYWORD_FREQUENCY_PLUS_CASE_AXIS_COMPOSITION_NOT_PROVED_BY_THIS FILE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
