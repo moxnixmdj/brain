@@ -5,8 +5,8 @@
   "scope": "ROOT2_ONLY_FIXED_BAR_PREDICATES",
   "authority": {
     "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-    "route_inventory_git_blob_sha": "71495ebcf456119f4df694203631aeeb3048c81a",
-    "rebind_reason": "TARGETS_UNCHANGED__ROUTE_STATE_COMPRESSED__OSWORLD_GITLAB_EXACT_REVISION_REQUIREMENT_DELETED__HLE_ADAPTER_DISCHARGED__AUTOMATIONBENCH_SEARCH_SATURATED__CHARTOGRAPHY_ACCOUNT_CAPACITY_RESIDUAL"
+    "route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294",
+    "rebind_reason": "TARGETS_UNCHANGED__ROUTE_STATE_ONLY__CHARTOGRAPHY_HARD_ZERO_SPEND_GUARD_DISCHARGED__PROJECT_CAPACITY_REMAINS"
   },
   "surfaces": [
     {
@@ -80,7 +80,7 @@
         "CHARTOGRAPHY_TOOLS_GE_89"
       ],
       "target": ">=89%",
-      "route_class": "PROJECT_ACCOUNT_CAPACITY_THEN_SCORE"
+      "route_class": "PROJECT_ACCOUNT_CAPACITY_AND_BRAIN_ADAPTER_THEN_SCORE__ZERO_SPEND_GUARD_DISCHARGED"
     },
     {
       "surface": "OSWorld 2.1 partial",
@@ -143,6 +143,6 @@
     "predicate_set_changed": false,
     "surface_set_changed": false,
     "route_state_only": true,
-    "current_route_inventory_git_blob_sha": "71495ebcf456119f4df694203631aeeb3048c81a"
+    "current_route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294"
   }
 }
