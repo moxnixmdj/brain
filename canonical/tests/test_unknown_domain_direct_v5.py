@@ -86,6 +86,18 @@ class _AdversarialBytes(bytes):
     def __bytes__(self):
         raise RuntimeError("OVERRIDDEN_BYTES_MUST_NOT_RUN")
 
+    def __buffer__(self,*args,**kwargs):
+        raise RuntimeError("OVERRIDDEN_BUFFER_MUST_NOT_RUN")
+
+    def __len__(self):
+        raise RuntimeError("OVERRIDDEN_LEN_MUST_NOT_RUN")
+
+    def __getitem__(self,*args,**kwargs):
+        raise RuntimeError("OVERRIDDEN_GETITEM_MUST_NOT_RUN")
+
+    def __iter__(self):
+        raise RuntimeError("OVERRIDDEN_ITER_MUST_NOT_RUN")
+
 
 def test_v5_totality_includes_isinstance_accepted_str_and_bytes_subclasses():
     beacon=_AdversarialStr("A"*16+"\ud800")
