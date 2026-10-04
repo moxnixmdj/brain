@@ -14,5 +14,5 @@ def test_section_splitter_can_coexist_with_same_forbidden_word():
     out = composer.compose_visible_prompt(prompt)
     assert out["status"] == "PASS_CANDIDATE_GENERAL_BRANCH"
     response = out["response"]
-    assert re.search(r"\\bsection\\b", response, flags=re.IGNORECASE) is None
-    assert len(re.findall(r"Section\\d+", response)) >= 2
+    assert re.search(r"\bsection\b", response, flags=re.IGNORECASE) is None
+    assert len(re.findall(r"Section\d+", response)) >= 2
