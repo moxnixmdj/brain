@@ -8,10 +8,21 @@
     "add2_exact_ieee754": {
       "old_failure": "V2 could select the role-swapped true ADD2 support and compute a one-ULP-different terminal value while the scorer requires exact equality.",
       "repair": "V3 orients r0/r1 from visible source-to-target sign signatures before concluding.",
-      "frozen_v2_add2_indexes": [4, 10],
+      "frozen_v2_add2_indexes": [
+        4,
+        10
+      ],
       "source_and_target_public_signatures": {
-        "r0": [-1, 1, -1],
-        "r1": [1, -1, 1]
+        "r0": [
+          -1,
+          1,
+          -1
+        ],
+        "r1": [
+          1,
+          -1,
+          1
+        ]
       },
       "exactness_reason": "Once the hidden true role orientation is reconstructed from visible structural signatures, candidate and generator evaluate the identical Python expression order (bias+r0)+r1 over identical floats."
     },
@@ -24,7 +35,9 @@
   "runtime": {
     "candidate": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
     "generator": "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py",
-    "tests": "canonical/tests/test_unknown_domain_direct_v3_exact_successor_v1.py"
+    "tests": "canonical/tests/test_unknown_domain_direct_v3_exact_successor_v1.py",
+    "universal_proof": "canonical/runtime/unknown_domain_direct_v3_universal_proof_v1.py",
+    "proof_tests": "canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py"
   },
   "decisive_regression": {
     "qualification_beacon": "CEX-00006-ABCDEFGHIJKLMNOP",
@@ -60,5 +73,12 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "content_bindings": {
+    "candidate_v3_git_blob_sha": "7aafd50b833b9594ded35e4edb6fd41e7e89ce90",
+    "generator_v3_git_blob_sha": "02afbb813119c1aa8b8ff04580dff249639d4739",
+    "universal_proof_v1_git_blob_sha": "21d142c433387f0cf0951da819114b068b9d9755",
+    "successor_tests_git_blob_sha": "9d5abefd241e0c482558a6f5bbbfefe1a341992b",
+    "proof_tests_git_blob_sha": "9dad0dbd3e73e3bddce581e98886cbef9c385578"
   }
 }
