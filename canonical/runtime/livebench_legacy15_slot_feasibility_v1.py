@@ -27,6 +27,8 @@ NTH = "length_constraints:nth_paragraph_first_word"
 FORBIDDEN = "keywords:forbidden_words"
 END = "startend:end_checker"
 SENTENCE = "length_constraints:number_sentences"
+SECTIONS = "detectable_format:multiple_sections"
+PUBLIC_END_PHRASES = ("Any other questions?", "Is there anything else I can help with?")
 
 
 def _slots_by_id(contracts: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -89,8 +91,13 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
         except (TypeError, ValueError):
             threshold = -1
         end_phrase = str(by_id[END].get("end_phrase", "")).strip()
-        if relation == "less than" and threshold == 1 and end_phrase:
+        if relation == "less than" and threshold == 1 and end_phrase in PUBLIC_END_PHRASES:
             reasons.append("SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE")
+
+    if SECTIONS in by_id and FORBIDDEN in by_id:
+        splitter = str(by_id[SECTIONS].get("section_spliter", "")).strip()
+        if splitter and any(splitter.casefold() == w.casefold() for w in forbidden_words):
+            reasons.append("MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD")
 
     return tuple(reasons)
 
