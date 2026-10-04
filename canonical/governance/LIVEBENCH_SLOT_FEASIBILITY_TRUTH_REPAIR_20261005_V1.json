@@ -57,7 +57,7 @@
     "pinned_registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
     "word_list_entry_count": 1525,
     "word_list_unique_value_count": 1525,
-    "nth_plus_forbidden_exact_value_collision_probability_conditional_on_pair": 0.003278688524590164,
+    "nth_plus_forbidden_exact_value_collision_probability_conditional_on_pair": 0.003278688524590123,
     "end_plus_forbidden_collision_probability_conditional_on_pair_and_first_end_phrase": 0.003278688524590123,
     "end_plus_forbidden_collision_probability_conditional_on_pair_and_second_end_phrase": 0.009810266079742336,
     "end_plus_forbidden_collision_probability_conditional_on_pair_mean_over_two_public_end_phrases": 0.0065444773021662295,
@@ -100,7 +100,11 @@
       "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
       "pinned_checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
       "same_instructions_util_blob_at_both_commits": true
-    }
+    },
+    "word_list_domain": "ALL_1525_ENTRIES_ARE_UNIQUE_ASCII_ALPHABETIC_WORDS",
+    "multiple_sections_forbidden_hard_collision_word": "section",
+    "multiple_sections_forbidden_collision_probability_conditional_on_pair": 0.003278688524590123,
+    "parser_repair": "PRIOR_DIAGNOSTIC_PARSER_OVERREAD_THE_WORD_LIST_LITERAL_INTO_LATER_SOURCE; COUNTS_AND_PROBABILITIES_RECOMPUTED_FROM_BALANCED_BRACKET_EXTRACTION"
   },
   "corrected_proof_target": {
     "statement": "FOR_EVERY_GENERATOR_ADMITTED_VISIBLE_CONTRACT_TUPLE_IN_THE_ACTIVE15_SURFACE, PRODUCE_EITHER_A_RESPONSE_THAT_POSTVALIDATES_TRUE_AGAINST_EVERY_PINNED_CHECKER_OR_A_CHECKER_SEMANTICS_CERTIFICATE_THAT_THE_TUPLE_IS_UNSATISFIABLE",
