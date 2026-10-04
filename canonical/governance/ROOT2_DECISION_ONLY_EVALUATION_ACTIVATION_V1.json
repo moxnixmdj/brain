@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_DECISION_ONLY_EVALUATION_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__INDEPENDENT_ACTIVATION_VERIFICATION_REQUIRED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "objective": "MAKE_DECISION_ONLY_CERTIFICATE_COMPOSITION_THE_ACTIVE_ROOT2_PREDICATE_SETTLEMENT_SURFACE_WITHOUT_CHANGING_ACCEPTANCE_TRUTH_OR_REALITY_AUTHORITY",
+  "subject": {
+    "governance_path": "canonical/governance/ROOT2_DECISION_ONLY_EVALUATION_V1.json",
+    "governance_git_blob_sha": "e6a5409e9701bd1e62c39fce54ec4d4de4c22443",
+    "runtime_path": "canonical/runtime/root2_decision_only_evaluation_v1.py",
+    "runtime_git_blob_sha": "bb70267e0bb44830a0c73708e3d4a07daecfdfa0",
+    "tests_path": "canonical/tests/test_root2_decision_only_evaluation_v1.py",
+    "tests_git_blob_sha": "d2bfc3e49d1276a35e6351eda7ecb39945af71f3"
+  },
+  "independent_subject_verification": {
+    "path": "canonical/verification/ROOT2_DECISION_ONLY_EVALUATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "public_runner_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1781,
+    "workflow_run_id": 37190555353,
+    "conclusion": "success"
+  },
+  "dependency_activations": [
+    "canonical/governance/ROOT2_BLIND_THRESHOLD_RECEIPT_ACTIVATION_V1.json",
+    "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_ACTIVATION_V1.json",
+    "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1.json"
+  ],
+  "scheduler_effects": [
+    "USE_AUTHENTICATED_OWNER_OR_PLATFORM_ONE_BIT_THRESHOLD_CERTIFICATE_WHEN_SUFFICIENT",
+    "OTHERWISE_USE_OUTPUT_ONLY_THRESHOLD_DAG_AND_MINIMUM_ZERO_REALITY_CERTIFICATE_CUT",
+    "DO_NOT_REQUIRE_EXACT_SCORE_OR_PRIVATE_DATASET_WHEN_EXACT_FROZEN_PREDICATE_IS_ALREADY_SETTLED",
+    "DO_NOT_FINISH_ADDITIVE_OR_WEIGHTED_BENCHMARK_AFTER_VERIFIED_BOUND_FORCES_PASS_OR_FAIL",
+    "PRESERVE_RELATIVE_RATING_NONTRANSPORT",
+    "PRESERVE_MATCHED_NONINFERIORITY_AS_A_DISTINCT_COMPARATOR_CLASS",
+    "RECOMPUTE_TERMINAL_MINIMUM_CAUSAL_DEPTH_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "preserved_truth": {
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_touching_predicates": 19,
+    "execution_authority": false,
+    "fresh_reality_authority": false,
+    "promotion_authority": false,
+    "acceptance_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "decision_certificate_compilation": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_reduction": false
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_ACTIVATION",
+    "NO_SELF_ASSERTED_OWNER_THRESHOLD_RECEIPT",
+    "NO_RELATIVE_ELO_FROM_ABSOLUTE_BEHAVIOR_WITHOUT_VERIFIED_RELATIVE_SCORE_BRIDGE",
+    "NO_MATCHED_NONINFERIORITY_COLLAPSE_TO_ONE_FIXED_BAR_BIT",
+    "NO_FRESH_REALITY_WITHOUT_SEPARATE_EXPLICIT_AUTHORITY",
+    "FAIL_CLOSED_ON_PREDICATE_HARNESS_THRESHOLD_OR_CANDIDATE_IDENTITY_DRIFT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_activation_verification_required": true
+}
