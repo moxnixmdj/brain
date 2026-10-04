@@ -45,3 +45,23 @@ def test_section_count():
     out=synthesize(p)
     assert out['status'].startswith('CANDIDATE_PASS')
     assert out['response'].count('Section ') >= 3
+
+
+def test_sentence_bound_preserves_title_obligation():
+    p=("Your response should contain at least 4 sentences. "
+       "Your answer must contain a title, wrapped in double angular brackets, such as <<poem of joy>>.")
+    out=synthesize(p)
+    assert out['status'].startswith('CANDIDATE_PASS')
+    assert '<<' in out['response'] and '>>' in out['response']
+    # Regression for the destructive rewrite removed in the sentence stage.
+    assert out['response'].count('.') >= 4
+
+
+def test_sentence_bound_preserves_keyword_obligation():
+    p=("Include keywords ['nebula', 'quartz'] in the response. "
+       "Your response should contain at least 3 sentences.")
+    out=synthesize(p)
+    assert out['status'].startswith('CANDIDATE_PASS')
+    low=out['response'].lower()
+    assert 'nebula' in low and 'quartz' in low
+    assert out['response'].count('.') >= 3
