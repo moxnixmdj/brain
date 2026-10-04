@@ -59,7 +59,7 @@ def force_unknown_open(ledger, roots, authority):
     claim["state"] = "EXTERNAL_BLOCKED"
 
     proved = {x["predicate_id"] for x in ledger["claims"] if x.get("state") == "PROVED"}
-    total = len({x["predicate_id"] for x in ledger["claims"]})
+    total = int(roots["current_acceptance"]["total_atomic"])
     unresolved = total - len(proved)
     ledger["saturation"]["proved_predicate_count"] = len(proved)
     ledger["saturation"]["unresolved_predicate_count"] = unresolved
@@ -96,7 +96,7 @@ def close_unknown(ledger, roots, authority):
     claim["state"] = "PROVED"
 
     proved = {x["predicate_id"] for x in ledger["claims"] if x.get("state") == "PROVED"}
-    total = len({x["predicate_id"] for x in ledger["claims"]})
+    total = int(roots["current_acceptance"]["total_atomic"])
     unresolved = total - len(proved)
     ledger["saturation"]["proved_predicate_count"] = len(proved)
     ledger["saturation"]["unresolved_predicate_count"] = unresolved
