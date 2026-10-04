@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_V8_STRUCTURAL_REFINEMENT_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_IFF_EXACT_CANDIDATE_AND_INDEPENDENT_VERIFICATION_AND_LAUNCHER_BINDINGS_PASS__REPLAY72_ONLY__ZERO_CREDIT",
+  "status": "ACTIVE__EXACT_CANDIDATE_CLASSIFIER_AND_ATOMIC_LAUNCHER_INDEPENDENTLY_VERIFIED__REPLAY72_ONLY__ZERO_CREDIT",
   "active": true,
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "benchmark_id": "LIVEBENCH_IF_2026_06_25",
@@ -19,7 +19,13 @@
     "classifier_path": "livebench_v8_structural_classifier.py",
     "classifier_git_blob_sha": "0c48d463989f8351e3b0a502a174b59ff391ffe8",
     "epoch_digest_sha256": "78f7e799c3e1edf70516c02badebde0adbad7c5846aec8fbff53f8db2152f192",
-    "claim_ref": "refs/heads/livebench-v8-claims/78f7e799c3e1edf70516c02badebde0adbad7c5846aec8fbff53f8db2152f192"
+    "claim_ref": "refs/heads/livebench-v8-claims/78f7e799c3e1edf70516c02badebde0adbad7c5846aec8fbff53f8db2152f192",
+    "launcher_path": "launch_livebench_v8_structural_atomic.py",
+    "launcher_git_blob_sha": "08286046cdb87bcf206d13d520536a4564f6b47f",
+    "launcher_verification_path": "canonical/verification/LIVEBENCH_V8_ATOMIC_LAUNCHER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "launcher_verification_git_blob_sha": "85d83fa9b4a25986678f554a9742c6658a743a24",
+    "launcher_verification_workflow_run_id": 37194454397,
+    "launcher_verification_workflow_job_id": 111413298508
   },
   "scope": {
     "replay_prefix_limit": 72,
@@ -66,6 +72,7 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
   },
-  "independent_launcher_verification_required": true,
-  "promotion_authority": false
+  "independent_launcher_verification_required": false,
+  "promotion_authority": false,
+  "launcher_independent_verification_pass": true
 }
