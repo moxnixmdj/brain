@@ -1,0 +1,35 @@
+name: H100 zero-learned tool-trace normalizer V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_TOOL_TRACE_VARIATION_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_TOOL_TRACE_NORMALIZER_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_tool_trace_normalizer_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_tool_trace_normalizer_v1.py'
+      - '.github/workflows/h100-zero-learned-tool-trace-normalizer-v1.yml'
+  push:
+    branches:
+      - research/h100-tool-trace-v1
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_TOOL_TRACE_VARIATION_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_TOOL_TRACE_NORMALIZER_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_tool_trace_normalizer_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_tool_trace_normalizer_v1.py'
+      - '.github/workflows/h100-zero-learned-tool-trace-normalizer-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run tool-trace normalizer tests
+        run: python -m unittest canonical.tests.test_h100_zero_learned_tool_trace_normalizer_v1 -v
