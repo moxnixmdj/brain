@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_OPUS_5_5_ZERO_COST_COMPARATOR_ACCESS_AUDIT_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_COST_EXACT_MACHINE_COMPARATOR_STILL_UNBOUND__ACCOUNT_ROUTES_RECONCILED__ZERO_CREDIT",
+  "supersedes": "canonical/governance/EXACT_OPUS_5_5_ZERO_COST_COMPARATOR_ACCESS_AUDIT_V1.json",
+  "objective": "Bind an exact Claude Opus 5.5 case-level comparator at zero incremental spend without proxy substitution or uncontrolled model selection.",
+  "observations": [
+    [
+      "ANTHROPIC_DIRECT",
+      "Claude account exists; no paid entitlement receipt found",
+      "Opus 5.5 not available on Claude Free; API is paid",
+      "OPEN_ONLY_ON_VERIFIED_ALREADY_ENTITLED_PRO_MAX_TEAM_ENTERPRISE_OR_CREDITS"
+    ],
+    [
+      "GITHUB_COPILOT",
+      "Connected GitHub account is personal GitHub Free; no Copilot paid entitlement receipt found",
+      "Copilot Free/Student expose Auto only; exact Opus 5.5 selectable on eligible paid plans/clients",
+      "AUTO_NOT_ADMISSIBLE_FOR_EXACT_COMPARATOR__WAKE_ON_EXACT_SELECTABLE_ENTITLEMENT"
+    ],
+    [
+      "VENICE",
+      "Account is explicitly Free",
+      "Premium proprietary models are pay-per-use credits",
+      "INADMISSIBLE_UNDER_ZERO_SPEND_UNLESS_EXISTING_CREDIT_BALANCE_IS_VERIFIED"
+    ],
+    [
+      "OPENROUTER",
+      "Account exists; no credit grant or purchase receipt found",
+      "Exact Opus 5.5 route is priced; current account balance not observable here",
+      "WAKE_ON_VERIFIED_PREEXISTING_CREDIT_BALANCE"
+    ],
+    [
+      "ARENA",
+      "Exact-model human Direct route remains publicly plausible",
+      "Machine-reproducible zero-cost channel not bound",
+      "PRESERVE_MANUAL_AUDITABLE_ROUTE_OR_FUTURE_MACHINE_CHANNEL"
+    ]
+  ],
+  "implications": {
+    "matched_superportfolio_unblocked": false,
+    "exact_identity_required": true,
+    "auto_model_selection_admissible": false,
+    "proxy_substitution_admissible": false,
+    "generic_free_opus_search": "SATURATED_UNDER_CURRENT_PUBLIC_AND_CONNECTED_ACCOUNT_EVIDENCE"
+  },
+  "next": [
+    "OBSERVE_ONLY_MATERIAL_ENTITLEMENT_OR_BALANCE_WAKE_EVENTS",
+    "PRESERVE_ARENA_MANUAL_EXACT_CAPTURE_AS_HUMAN_ROUTE_IF_PROVENANCE_CAN_BE_FROZEN",
+    "CONTINUE_ROOT2_SELF_SERVICE_AND_STRONGER_PROOFS_IN_PARALLEL",
+    "DO_NOT_EXPOSE_MATCHED_TERMINAL_CASES"
+  ],
+  "hard_nonclaims": [
+    "ABSENCE_OF_EMAIL_RECEIPT_DOES_NOT_PROVE_ABSENCE_OF_EXTERNAL_BILLING",
+    "NO_CLAIM_OPENROUTER_BALANCE_IS_ZERO",
+    "NO_CLAIM_COPILOT_PAID_ENTITLEMENT_IS IMPOSSIBLE",
+    "NO_COMPARATOR_EXECUTION",
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
