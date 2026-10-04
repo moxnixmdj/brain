@@ -26,6 +26,8 @@ HISTORICAL_GENERATOR_BLOB = "6ff390d6885cf90f88d9d36959735cb327613edc"
 NTH = "length_constraints:nth_paragraph_first_word"
 FORBIDDEN = "keywords:forbidden_words"
 END = "startend:end_checker"
+SECTION = "detectable_format:multiple_sections"
+POSTSCRIPT = "detectable_content:postscript"
 
 
 def _slots_by_id(contracts: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -74,6 +76,18 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
         hit = _literal_forbidden_hit(end_phrase, forbidden_words)
         if hit is not None:
             reasons.append("MANDATORY_END_PHRASE_CONTAINS_FORBIDDEN_WORD:" + hit.casefold())
+
+    if SECTION in by_id and FORBIDDEN in by_id:
+        splitter = str(by_id[SECTION].get("section_spliter", ""))
+        hit = _literal_forbidden_hit(splitter, forbidden_words)
+        if hit is not None:
+            reasons.append("MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:" + hit.casefold())
+
+    if POSTSCRIPT in by_id and FORBIDDEN in by_id:
+        marker = str(by_id[POSTSCRIPT].get("postscript_marker", ""))
+        hit = _literal_forbidden_hit(marker, forbidden_words)
+        if hit is not None:
+            reasons.append("MANDATORY_POSTSCRIPT_MARKER_CONTAINS_FORBIDDEN_WORD:" + hit.casefold())
 
     return tuple(reasons)
 
