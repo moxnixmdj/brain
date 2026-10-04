@@ -216,3 +216,21 @@ def test_sentence_less_than_one_does_not_overcertify_nonpublic_end_phrase():
     out = f.classify_visible_contracts(contracts)
     assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
     assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" not in out["hard_unsat_reasons"]
+
+
+def test_strict_less_than_one_sentence_is_proved_unsat():
+    contracts = [
+        {
+            "instruction_id": f.SENTENCES,
+            "slots": {"num_sentences": 1, "relation": "less than"},
+        },
+        {
+            "instruction_id": f.FORBIDDEN,
+            "slots": {"forbidden_words": ["brain"]},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["hard_unsat_reasons"] == [
+        "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE"
+    ]
