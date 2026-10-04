@@ -294,6 +294,8 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
             "active_identity_count": len(archetypes.ACTIVE_IDS),
             "compatible_identity_sets": len(sets),
             "parameter_profiles": len(PROFILES),
+            "parameter_profile_scope": "REPRESENTATIVE_PUBLIC_PARAMETER_PROFILES_ONLY__NOT_UNIVERSAL_PARAMETER_DOMAIN_PROOF",
+            "universal_parameter_coverage_claimed": False,
             "orders_per_profile": 2,
             "synthetic_cases": total,
             "terminal_rows_read": 0,
