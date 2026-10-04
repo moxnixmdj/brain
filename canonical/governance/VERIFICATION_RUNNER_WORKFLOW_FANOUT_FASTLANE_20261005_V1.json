@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFICATION_RUNNER_WORKFLOW_FANOUT_FASTLANE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_BREAKTHROUGH__TRANSPORT_FANOUT_ROOT_CAUSE_IDENTIFIED__ISOLATED_FASTLANE_IMPLEMENTED__EXTERNAL_CHECK_QUEUED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "root_cause": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_file_count_observed": 961,
+    "queued_workflow_runs_observed": 840,
+    "mechanism": "PUSH_OR_PULL_REQUEST_TO_A_CANDIDATE_REF_FANS_OUT_ACROSS_HUNDREDS_OF_UNRELATED_WORKFLOW_DEFINITIONS__THE_RESULTING_ACCOUNT_WIDE_QUEUE_DELAYS_THE_FEW_CHECKS_ON_THE_TERMINAL_CRITICAL_PATH",
+    "classification": "CONTROL_PLANE_TRANSPORT_PATHOLOGY__NOT_MODEL_CAPABILITY_DEFECT"
+  },
+  "breakthrough": {
+    "principle": "CONTENT_ADDRESS_THE_EXECUTION_SUBJECT__ISOLATE_THE_TRANSPORT_SURFACE",
+    "construction": "CREATE_A_BRANCH_LOCAL_TREE_DERIVED_FROM_THE_EXACT_CANDIDATE_COMMIT_WHERE_RUNTIME_GOVERNANCE_TEST_AND_LOAD_BEARING_COMPONENT_BYTES_ARE_UNCHANGED_BUT_DOT_GITHUB_WORKFLOWS_IS_REPLACED_BY_AN_EXPLICIT_MINIMAL_ALLOWLIST",
+    "why_truth_is_preserved": [
+      "EXECUTION_LEASE_AND_ALL_LOAD_BEARING_RUNTIME_COMPONENTS_RETAIN_EXACT_GIT_BLOB_IDENTITIES",
+      "PRODUCTION_WORKFLOW_RETAINS_THE_EXACT_LEASE_PINNED_GIT_BLOB",
+      "REMOVED_WORKFLOWS_ARE_UNRELATED_TRANSPORT_AUTOMATIONS_AND_ARE_NOT_LOAD_BEARING_CAPABILITY_SUBJECTS",
+      "FASTLANE_VERIFIER_HAS_READ_ONLY_CONTENT_PERMISSION_AND_CANNOT_CREATE_THE_PRODUCTION_CLAIM",
+      "FASTLANE_RECEIPT_HAS_ZERO_EXECUTION_PROMOTION_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_AUTHORITY"
+    ],
+    "asymptotic_effect": "PER_CANDIDATE_TRIGGER_FANOUT_REDUCED_FROM_O(REPOSITORY_WORKFLOW_COUNT)_TO_O(CRITICAL_WORKFLOW_COUNT)"
+  },
+  "implemented_fastlane": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "source_candidate_pr": 2049,
+    "source_candidate_head": "45449f787ec3f268b530d77a0f1b3cf43215f085",
+    "branch": "fastlane/verify-ud-postclaim-2049-v1",
+    "isolation_commit": "4b8f9c16e1e4db7d2548c7cb606f26e0181c0478",
+    "trigger_commit": "c3e18e4008799eeee6a3b6a383cb43fb0e112a67",
+    "workflow_subtree_sha": "7bd2ebcc9a99ad94e7ea7f8e7907981a4d2b82b2",
+    "allowed_workflows": [
+      {
+        "path": ".github/workflows/unknown-domain-direct-one-use-production.yml",
+        "git_blob_sha": "a4315a0ee28ae82145594b7a9abbd00bae61ceb9",
+        "trigger": "create",
+        "safety": "FASTLANE_BRANCH_NAME_DOES_NOT_MATCH_UNKNOWN_DOMAIN_DIRECT_LAUNCH_PREFIX__PRODUCTION_JOB_NOT_AUTHORIZED"
+      },
+      {
+        "path": ".github/workflows/fastlane-verify-unknown-domain-postclaim.yml",
+        "git_blob_sha": "aa797dba42f52002a9566d22136868c11e79d341",
+        "trigger": "push",
+        "permissions": "contents:read"
+      }
+    ],
+    "isolated_workflow_count": 2,
+    "observed_fastlane_runs": [
+      {
+        "run_id": 37241111736,
+        "head_sha": "4b8f9c16e1e4db7d2548c7cb606f26e0181c0478",
+        "state_at_record": "QUEUED"
+      },
+      {
+        "run_id": 37241128639,
+        "head_sha": "c3e18e4008799eeee6a3b6a383cb43fb0e112a67",
+        "state_at_record": "QUEUED"
+      }
+    ]
+  },
+  "critical_path_rule": {
+    "preproduction": [
+      "VERIFY_POST_201_FAIL_CLOSED_RESULT_RECOVERY_ON_EXACT_CANDIDATE_BYTES",
+      "VERIFY_FROZEN_LEASE_WITH_RECEIPT_EXTERNAL_TO_LEASE_BYTES",
+      "ONLY_AFTER_INDEPENDENT_PASS_MERGE_THE_EXACT_REPAIRS",
+      "DERIVE_NEW_LAUNCH_AND_CLAIM_KEY_FROM_SHA256_OF_FINAL_RAW_EXECUTION_LEASE_BYTES",
+      "CREATE_EXACTLY_ONE_PRODUCTION_LAUNCH_REF"
+    ],
+    "final_launch_transport": "BUILD_THE_PRODUCTION_LAUNCH_REF_FROM_THE_FINAL_VERIFIED_COMMIT_USING_THE_SAME_WORKFLOW_SUBTREE_ISOLATION_PATTERN__KEEP_ONLY_THE_EXACT_PINNED_ONE_USE_PRODUCTION_WORKFLOW_AND_ANY_EXPLICITLY_REQUIRED_LAUNCH_GUARD",
+    "forbidden": [
+      "DO_NOT_REUSE_STALE_76E8040D_LEASE_OR_CLAIM_KEY",
+      "DO_NOT_COUNT_QUEUED_FASTLANE_RUNS_AS_PASS",
+      "DO_NOT_DELETE_OR_MUTATE_LOAD_BEARING_EXACT_COMPONENTS_TO_GAIN_QUEUE_PRIORITY",
+      "DO_NOT_TREAT_CI_QUEUE_LATENCY_AS_CAPABILITY_EVIDENCE",
+      "DO_NOT_CREATE_PRODUCTION_CLAIM_BEFORE_EXTERNAL_VERIFICATION_PASSES"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "production_cases_generated": 0,
+    "production_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
