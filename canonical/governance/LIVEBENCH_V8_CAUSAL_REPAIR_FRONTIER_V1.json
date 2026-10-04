@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V8_CAUSAL_REPAIR_FRONTIER_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_DIAGNOSTIC_FRONTIER__REPAIR_GENERAL_CAUSES_ONLY__ZERO_CREDIT__NO_CASE_73_PLUS",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "evidence": {
+    "binding_path": "canonical/verification/LIVEBENCH_V8_STRUCTURAL_REFINEMENT_EXECUTION_BINDING_20261004_V1.json",
+    "replayed_already_exposed_cases": 72,
+    "new_case_exposure": false,
+    "histogram": {
+      "POLICY_BLOCK:POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN": 43,
+      "COMPOSITION_PRODUCER:UNRESOLVED_GROUNDED_CLAUSES": 27,
+      "ARCHITECTURAL_GAP:CONTROL_OR_FANOUT": 2
+    },
+    "unclassified_runtime_count": 0
+  },
+  "verified_reusable_components": {
+    "instruction_constraint_compiler": {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "1d83dffb7024666cc2202f88a0dca6819165f35a",
+      "verification": "canonical/verification/ROOT2_GLOBAL_INFORMATION_CUT_AND_INSTRUCTION_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "scope": "STRUCTURAL_CONSTRAINTS_ONLY__SEMANTIC_CONTENT_FAILS_CLOSED",
+      "routing_active": false
+    },
+    "global_information_cut": {
+      "activation": "canonical/governance/ROOT2_GLOBAL_INFORMATION_CUT_ACTIVATION_V1.json",
+      "role": "EXACT_DEPENDENCY_AWARE_SCHEDULING_ONLY"
+    }
+  },
+  "repair_program": [
+    {
+      "class": "POLICY_BLOCK:POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN",
+      "count": 43,
+      "next": "INTEGRATE_VERIFIED_STRUCTURAL_INSTRUCTION_COMPILER_AS_PROMPT_AGNOSTIC_PREBOUND_ROUTE_FOR_ITS_PROVED_SCOPE__PRESERVE_FAIL_CLOSED_SEMANTIC_FALLBACK__SYNTHETIC_ZERO_CASE_VERIFY_BEFORE_ANY_TERMINAL_REPLAY"
+    },
+    {
+      "class": "COMPOSITION_PRODUCER:UNRESOLVED_GROUNDED_CLAUSES",
+      "count": 27,
+      "next": "REPAIR_GENERIC_GROUNDED_CLAUSE_CLOSURE_AND_COMPOSITION_PRODUCER_ON_SYNTHETIC_CASES__NO_CASE_SPECIFIC_PATCHING_OR_EXTERNAL_ACQUISITION"
+    },
+    {
+      "class": "ARCHITECTURAL_GAP:CONTROL_OR_FANOUT",
+      "count": 2,
+      "next": "REPAIR_GENERIC_CONTROL_OR_FANOUT_COMPILATION_WITH_SYNTHETIC_ADVERSARIAL_CASES__NO_TERMINAL_SPECIAL_CASE"
+    }
+  ],
+  "parallelism": "THE_THREE_REPAIR_CLASSES_MAY_PROCEED_IN_PARALLEL_IF_SHARED_RUNTIME_MUTATION_IS_ISOLATED__MERGE_ONLY_AFTER JOINT_SYNTHETIC_REGRESSION",
+  "terminal_replay_rule": "NO_CASE_73_PLUS__AFTER_GENERAL_REPAIRS PASS SYNTHETIC AND INDEPENDENT VERIFICATION, REPLAY ONLY THE ALREADY_EXPOSED 72 UNDER A NEW EXPLICIT ONE_USE AUTHORITY IF REQUIRED",
+  "hard_rules": [
+    "NO_POLICY_WEAKENING",
+    "NO_PROMPT_TEXT_CASE_ID_RESPONSE_OR_RAW_EXCEPTION_RECOVERY",
+    "NO_ROOT1_REOPEN_FROM_PIPELINE_FAILURE",
+    "NO_ACCEPTANCE_CREDIT_FROM_REPAIR_DESIGN",
+    "NO_SEMANTIC_SUCCESS_INFERENCE_FROM_STRUCTURAL_COMPILER"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed_by_this_frontier": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
