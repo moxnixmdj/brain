@@ -46,6 +46,12 @@ def commitment_digest(plan: Mapping[str, Any]) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+def plan_digest(plan: Mapping[str, Any]) -> str:
+    obj = {k: v for k, v in plan.items() if k != "plan_sha256"}
+    raw = json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+    return hashlib.sha256(raw).hexdigest()
+
+
 def verify_pre_exposure_plan(plan: Mapping[str, Any]) -> dict[str, Any]:
     reasons: list[str] = []
     if not isinstance(plan, Mapping) or plan.get("schema") != SCHEMA:
@@ -70,6 +76,8 @@ def verify_pre_exposure_plan(plan: Mapping[str, Any]) -> dict[str, Any]:
 
     if str(plan.get("commitment_sha256") or "").lower() != commitment_digest(plan):
         reasons.append("COMMITMENT_DIGEST_MISMATCH")
+    if str(plan.get("plan_sha256") or "").lower() != plan_digest(plan):
+        reasons.append("PLAN_DIGEST_MISMATCH")
 
     commit_seq = plan.get("commit_event_sequence")
     verify_seq = plan.get("pre_reveal_verification_event_sequence")
