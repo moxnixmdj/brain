@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_CHECKER_EXACT_MINCUT_CERTIFICATE_V1",
+  "date": "2026-10-04",
+  "status": "EXACT_PUBLIC_POPULATION_MINIMUM_CARDINALITY_PROOF__CONNECTOR_RECOMPUTED__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Replace the greedy public checker-family frontier with an exact proof of the smallest family count that can cross 65.7 under the same family-perfect abstraction.",
+  "pinned_public_population": {
+    "repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "data/IFBench_test.jsonl",
+    "git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "row_count": 300,
+    "family_count": 58,
+    "instruction_count_distribution": {
+      "1": 256,
+      "2": 44
+    }
+  },
+  "exact_reduction": {
+    "score_multiplier": 4,
+    "singleton_selected_contribution_score4": 4,
+    "pair_one_selected_contribution_score4": 1,
+    "pair_both_selected_contribution_score4": 4,
+    "node_weight_formula": "4*SINGLETON_COUNT + PAIR_INCIDENCE",
+    "edge_bonus_formula": "2*PAIR_ROW_MULTIPLICITY",
+    "pair_graph_component_sizes_desc": [12, 3, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "proof_method": "EXHAUSTIVE_SUBSET_ENUMERATION_WITHIN_EACH_CONNECTED_COMPONENT__THEN_EXACT_CARDINALITY_DYNAMIC_PROGRAMMING_ACROSS_COMPONENTS",
+    "largest_component_subsets_enumerated": 4096,
+    "heuristic_dependency": false
+  },
+  "threshold": {
+    "percent": 65.7,
+    "integer_score4_required": 789,
+    "derivation": "CEIL(300*0.657*4)=789"
+  },
+  "exact_frontier_boundary": {
+    "k26_max_score4": 773,
+    "k26_max_score_mass": 193.25,
+    "k26_max_percent": 64.41666666666667,
+    "k26_threshold_pass": false,
+    "k27_max_score4": 796,
+    "k27_max_score_mass": 199.0,
+    "k27_max_percent": 66.33333333333333,
+    "k27_threshold_pass": true,
+    "minimum_family_count": 27
+  },
+  "one_exact_k27_optimum": [
+    "count:conjunctions",
+    "count:numbers",
+    "count:pronouns",
+    "count:punctuation",
+    "count:unique_word_count",
+    "count:word_count_range",
+    "format:emoji",
+    "format:line_indent",
+    "format:list",
+    "format:parentheses",
+    "format:quotes",
+    "format:sub-bullets",
+    "format:thesis",
+    "ratio:overlap",
+    "ratio:sentence_balance",
+    "ratio:sentence_type",
+    "ratio:sentence_words",
+    "ratio:stop_words",
+    "sentence:increment",
+    "sentence:keyword",
+    "words:alphabet",
+    "words:consonants",
+    "words:no_consecutive",
+    "words:odd_even_syllables",
+    "words:palindrome",
+    "words:paragraph_last_first",
+    "words:vowel"
+  ],
+  "runtime": "canonical/runtime/livebench_public_checker_exact_mincut_v1.py",
+  "tests": "canonical/tests/test_livebench_public_checker_exact_mincut_v1.py",
+  "scheduler_breakthrough": [
+    "DELETE_ALL_SEARCH_FOR_A_26_OR_FEWER_FAMILY_PUBLIC_PERFECT_SOLVER_CUT__IT_IS_PROVABLY_IMPOSSIBLE_UNDER_THE_PINNED_PUBLIC_ABSTRACTION",
+    "TREAT_27_AS_THE_EXACT_PUBLIC_CARDINALITY_FLOOR__NOT_A_GREEDY_HEURISTIC",
+    "OPTIMIZE_IMPLEMENTATION_COST_WITHIN_THE_27_PLUS_FAMILY_SPACE_OR_USE_PARTIAL_CHECKER_CREDIT_AND_CROSS_FAMILY_CONSTRUCTIONS_TO_CHANGE_THE_ABSTRACTION",
+    "DO_NOT_INFER_TERMINAL_DISTRIBUTION_EQUIVALENCE_FROM_THIS_PUBLIC_PROOF"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_DISTRIBUTION_EQUIVALENCE",
+    "NO_TERMINAL_SCORE_CLAIM",
+    "NO_CLAIM_THE_27_FAMILIES_ARE_RUNTIME_SOLVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_TERMINAL_CASE_EXPOSURE",
+    "NO_INDEPENDENT_PUBLIC_RUNNER_RECEIPT_YET"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
