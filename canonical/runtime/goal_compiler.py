@@ -4960,6 +4960,9 @@ def compile_goal(goal, registry, root):
     goal=str(goal or "").strip()
     if not goal:
         raise GoalCompilationFailure("GOAL_REQUIRED")
+    exact_literal=_compile_exact_literal_response_goal(goal)
+    if exact_literal is not None:
+        return _validate_compiled_clause_coverage(exact_literal)
     browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
