@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_ATOMIC_ONE_USE_CLAIM_CONTROL_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ATOMIC_CREATE_AS_ONE_USE_OWNERSHIP_PROOF__NO_PRECLAIM_ABSENCE_DEPENDENCY__ZERO_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Replace check-then-act claim ownership with atomic first-create success keyed by the lease digest.",
+  "target": "LIVEBENCH_IF_GE_65_7",
+  "runtime_path": "canonical/runtime/shadow_atomic_one_use_claim_control_v1.py",
+  "test_path": "canonical/tests/test_shadow_atomic_one_use_claim_control_v1.py",
+  "semantics": {
+    "ownership_event": "FIRST_ATOMIC_CREATE_SUCCESS_OF_refs/heads/shadow-claims/<lease_digest_sha256>",
+    "prior_absence_observation_required": false,
+    "duplicate_or_existing_ref": "FAIL_CLOSED_BEFORE_CASE_REVEAL",
+    "ref_binding": "EXACTLY_DERIVED_FROM_LEASE_DIGEST"
+  },
+  "hard_rules": [
+    "NO_CHECK_THEN_ACT_ABSENCE_PRECONDITION",
+    "NO_TERMINAL_CASE_REVEAL_FROM_THIS_CONTROL",
+    "NO_EXECUTION_PROMOTION_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "SEPARATE_POINT_OF_USE_PREFLIGHT_ESCROW_IMPLEMENTATION_AND_SCOPED_AUTHORITY_STILL_REQUIRED",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "independent_verification_required": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
