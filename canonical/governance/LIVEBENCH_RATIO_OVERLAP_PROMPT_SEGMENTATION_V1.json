@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_OVERLAP_PROMPT_SEGMENTATION_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__PROMPT_ONLY_NORMALIZED_REFERENCE_RECOVERY_12_OF_12_PUBLIC_ROWS__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "status": "INDEPENDENTLY_VERIFIED__PROMPT_ONLY_NORMALIZED_REFERENCE_RECOVERY_12_OF_12_PUBLIC_ROWS__ZERO_TERMINAL_CASES__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "target_instruction": "ratio:overlap",
   "objective": "Remove hidden exact-reference acquisition from the successor path by recovering a score-sufficient normalized reference and target percentage from visible prompt text only.",
@@ -44,11 +44,14 @@
     "repository": "moxnixmdj/verification-capsule-runner",
     "pull_request": 1852,
     "head_sha": "084cddcadb34d91e6938ef38fc854bae795fe64d",
+    "merge_commit": "0e5e0488e0bc8f4bcadf32eb4bfb87a05ee83396",
     "workflow_run_id": 37198842641,
-    "status": "QUEUED"
+    "workflow_job_id": 111426171320,
+    "conclusion": "success",
+    "artifact_digest": "sha256:54599d55a03243c30ffee5a39c46541ddf827fddc351c7c59184f6733917c47c",
+    "receipt_path": "canonical/verification/LIVEBENCH_RATIO_PROMPT_SEGMENTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
   },
   "residual_after_this_candidate": [
-    "INDEPENDENT_PUBLIC_RUNNER_PASS_AND_RECEIPT_BINDING",
     "PROVE_FROZEN_TERMINAL_LIVEBENCH_RATIO_OVERLAP_ROWS_ARE_WITHIN_THIS_PUBLIC_CONSTRUCTION_ENVELOPE_WITHOUT_READING_UNEXPOSED_TERMINAL_CASE_CONTENT",
     "PROVE_OR_FAIL_CLOSED_FOR_ANY_TERMINAL_CO_CONSTRAINT_FORM_OUTSIDE_THE_PUBLIC_V1_SEGMENTER_GRAMMAR",
     "FULL_SUCCESSOR_ACCEPTANCE_REMAINS_SEPARATE"
