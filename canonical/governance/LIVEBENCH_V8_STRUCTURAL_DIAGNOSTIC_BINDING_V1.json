@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V8_STRUCTURAL_DIAGNOSTIC_BINDING_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__AWAITING_ONE_USE_PUBLIC_RUNNER_RESULT__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Bind a second-stage structural diagnosis of the already-exposed 72-case LiveBench prefix so repairs target exact runtime failure classes without prompt, response, case-id, raw exception, or case-73-plus exposure.",
+  "source_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "diag/livebench-v8-structural-20261004",
+    "expected_head_sha": "89c6462184ba622f4ea7a26c8847291b2cf66e48",
+    "workflow_name": "Execute LiveBench V8 structural diagnostic",
+    "replay_prefix_limit": 72
+  },
+  "accepted_output_classes": [
+    "VALID_RESPONSE",
+    "POLICY_BLOCK:EXTERNAL_NETWORK_FORBIDDEN",
+    "POLICY_BLOCK:POST_PROMPT_ACQUISITION_FORBIDDEN",
+    "COMPOSITION_BLOCK:<PREDECLARED_STATIC_CODE>",
+    "ARCHITECTURAL_GAP:UNKNOWN",
+    "ARCHITECTURAL_GAP:CONTROL_OR_FANOUT",
+    "ARCHITECTURAL_GAP:CONTROL_FLOW",
+    "ARCHITECTURAL_GAP:VERIFICATION",
+    "ARCHITECTURAL_GAP:CAUSAL_COMPOSITION",
+    "ARCHITECTURAL_GAP:CAPABILITY_CANDIDATE",
+    "STATIC_BLOCKER:<PREDECLARED_STATIC_CODE>",
+    "STATIC_ADAPTER_BLOCKER:<PREDECLARED_STATIC_CODE>",
+    "UNCLASSIFIED_RUNTIME:<PREDECLARED_CLASSIFIER_CODE>"
+  ],
+  "hard_rules": [
+    "ONLY_ALREADY_EXPOSED_CASES_1_TO_72",
+    "NO_CASE_73_OR_LATER",
+    "NO_PROMPT_RESPONSE_CASE_ID_RAW_EXCEPTION_STDOUT_STDERR_OR_SOURCE_LINE_OUTPUT",
+    "STRUCTURAL_CLASSIFICATION_ONLY",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_PROMOTION_CREDIT",
+    "NO_ROOT1_REOPEN_FROM_CLASSIFICATION_ALONE",
+    "NEXT_REPAIR_MUST_TARGET_HIGHEST_MASS_EXACT_CAUSAL_CLASS_WITHOUT_WEAKENING_FROZEN_BENCHMARK_POLICY"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
