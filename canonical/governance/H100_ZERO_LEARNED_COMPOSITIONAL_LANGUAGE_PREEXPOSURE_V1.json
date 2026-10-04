@@ -1,0 +1,145 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_COMPOSITIONAL_LANGUAGE_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_RUNTIME_IMPLEMENTATION_AND_OUTCOMES__PUBLIC_SYNTHETIC_NONTERMINAL__ZERO_CREDIT",
+  "objective": "TEST_ZERO_LEARNED_COMPOSITION_OF_ROLE_ASSERTIONS_DIRECTIONAL_RELATIONS_NEGATION_AND_BOUNDED_REFERENCES_ACROSS_MULTIPLE_CLAUSES_WITH_MANDATORY_ABSTENTION_ON_CONTRADICTION_OR_UNRESOLVED_REFERENCE",
+  "tasks": [
+    {
+      "task_id": "MULTI_CLAUSE_ROLE_ASSERTIONS",
+      "text": "feature_a is a predictor. feature_b is also a predictor. target_c is the response.",
+      "expected_inputs": [
+        "feature_a",
+        "feature_b"
+      ],
+      "expected_target": "target_c",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "NEGATED_SECOND_PREDICTOR",
+      "text": "feature_a predicts target_c, but feature_b does not predict target_c. target_c is the response.",
+      "expected_inputs": [
+        "feature_a"
+      ],
+      "expected_target": "target_c",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "LATTER_REFERENCE_METADATA",
+      "text": "feature_a and feature_b are predictors. The latter is metadata. score is the response.",
+      "expected_inputs": [
+        "feature_a"
+      ],
+      "expected_target": "score",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "TARGET_CORRECTION_AND_IT_REFERENCE",
+      "text": "pressure is not the target. yield_value is the target. temperature predicts it.",
+      "expected_inputs": [
+        "temperature"
+      ],
+      "expected_target": "yield_value",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "PLURAL_REFERENCE",
+      "text": "alpha and beta are predictors. They predict score. score is the response.",
+      "expected_inputs": [
+        "alpha",
+        "beta"
+      ],
+      "expected_target": "score",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "RELATIVE_REFERENCE",
+      "text": "width and height predict class_score, which is the label.",
+      "expected_inputs": [
+        "height",
+        "width"
+      ],
+      "expected_target": "class_score",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "NEGATED_ROLE_THEN_POSITIVE_TARGET",
+      "text": "x is not the response. y is the response. x predicts y.",
+      "expected_inputs": [
+        "x"
+      ],
+      "expected_target": "y",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "INPUT_CONTRADICTION",
+      "text": "x is a predictor. x is not a predictor. y is the response.",
+      "expected_inputs": [],
+      "expected_target": null,
+      "expected_status": "ABSTAIN_CONTRADICTION"
+    },
+    {
+      "task_id": "TARGET_CONTRADICTION",
+      "text": "x is the response. y is the response. z predicts x.",
+      "expected_inputs": [],
+      "expected_target": null,
+      "expected_status": "ABSTAIN_MULTIPLE_TARGETS"
+    },
+    {
+      "task_id": "UNRESOLVED_IT_REFERENCE",
+      "text": "x and y are variables. it is the response.",
+      "expected_inputs": [],
+      "expected_target": null,
+      "expected_status": "ABSTAIN_REFERENCE_AMBIGUOUS"
+    },
+    {
+      "task_id": "NEGATED_EDGE_ONLY",
+      "text": "a does not predict b. b is the response.",
+      "expected_inputs": [],
+      "expected_target": null,
+      "expected_status": "ABSTAIN_DIRECTION_NOT_IDENTIFIED"
+    },
+    {
+      "task_id": "FORMER_LATTER_REFERENCES",
+      "text": "alpha and beta are variables. The former is a predictor. The latter is the response.",
+      "expected_inputs": [
+        "alpha"
+      ],
+      "expected_target": "beta",
+      "expected_status": "ROLES_IDENTIFIED"
+    }
+  ],
+  "outcome_definition": {
+    "exact_inputs_and_target_required": true,
+    "exact_abstention_status_required": true,
+    "no_partial_credit": true
+  },
+  "bounded_reference_policy": {
+    "supported": [
+      "it",
+      "they",
+      "the former",
+      "the latter",
+      "which"
+    ],
+    "unresolved_or_nonunique_reference": "ABSTAIN_REFERENCE_AMBIGUOUS"
+  },
+  "hard_rules": [
+    "NO_LANGUAGE_MODEL_OR_EXTERNAL_LEARNED_SEMANTIC_PROVIDER",
+    "NEGATED_RELATION_MUST_NOT_CREATE_POSITIVE_DIRECTIONAL_ROLE",
+    "CONTRADICTORY_POSITIVE_AND_NEGATIVE_ROLE_ASSERTIONS_MUST_ABSTAIN",
+    "MULTIPLE_POSITIVE_TARGETS_MUST_ABSTAIN",
+    "NO_POST_HOC_TASK_CHANGE",
+    "FINITE_COMPOSITIONAL_PASS_IS_NOT_OPEN_WORLD_LANGUAGE_UNDERSTANDING"
+  ],
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
