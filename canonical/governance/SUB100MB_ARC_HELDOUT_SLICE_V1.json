@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_SUB100MB_ARC_HELDOUT_SLICE_V1",
   "date": "2026-10-04",
-  "status": "FROZEN_BEFORE_TASK_CONTENT_EXPOSURE__DEVELOPMENT_SIGNAL_ONLY__NO_OPEN_WORLD_OR_FRONTIER_CLAIM",
+  "status": "FROZEN_SOLVER_AND_TASK_IDS_BEFORE_TASK_CONTENT_EXPOSURE__DEVELOPMENT_SIGNAL_ONLY__NO_OPEN_WORLD_OR_FRONTIER_CLAIM",
   "objective": "MEASURE_ZERO_LEARNED_STATE_PROGRAM_INDUCTION_ON_A_SOLVER_INDEPENDENT_REAL_ARC_AGI_1_EVALUATION_SLICE_WITHOUT_CHERRY_PICKING",
   "source_subset": {
     "repository": "iamvxrn/arc-agi-compressed",
@@ -19,6 +19,16 @@
     "license": "Apache-2.0",
     "license_git_blob_sha": "68ad4d4198faa02290b125d87ab94e2c23b5227f"
   },
+  "frozen_solver": {
+    "runtime_path": "canonical/runtime/arc_zero_learned_solver_v1.py",
+    "runtime_git_blob_sha": "22eb3a91cbed0ca75e464e124f7e10ca563ceb89",
+    "tests_path": "canonical/tests/test_arc_zero_learned_solver_v1.py",
+    "tests_git_blob_sha": "4acb9d0a5c7a720e70f41a8ebbe5148935eed58c",
+    "induction_kernel_path": "canonical/runtime/mdl_program_induction_v1.py",
+    "induction_kernel_git_blob_sha": "fa07fbc00a76fefa4441d806e8fc3a4b50d555ff",
+    "persistent_learned_state_bytes": 0,
+    "task_specific_post_exposure_primitive_additions_forbidden": true
+  },
   "pre_exposure_selection_rule": "TAKE_THE_FIRST_10_TASK_IDS_AFTER_00576224_FROM_THE_FROZEN_SEED0_SUBSET__00576224_EXCLUDED_ONLY_BECAUSE_ITS_CONTENT_WAS_ALREADY_EXPOSED_DURING_MECHANISM_RESEARCH",
   "task_ids": [
     "08573cc6",
@@ -34,7 +44,7 @@
   ],
   "task_count": 10,
   "information_policy": {
-    "solver_design_before_task_fetch": true,
+    "solver_and_hypothesis_language_frozen_before_task_fetch": true,
     "task_contents_not_used_to_select_ids": true,
     "after_first_score_tasks_become_spent_heldout_for_this_solver_version": true,
     "no_tuning_on_this_slice_then_reclaiming_it_as_heldout": true
@@ -55,6 +65,7 @@
   ],
   "accounting": {
     "persistent_learned_state_bytes_budget": 100000000,
+    "current_solver_persistent_learned_state_bytes": 0,
     "incremental_spend_usd": 0,
     "acceptance_credit_delta": 0,
     "family_credit_delta": 0,
