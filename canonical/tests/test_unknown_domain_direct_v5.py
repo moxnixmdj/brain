@@ -112,3 +112,42 @@ def test_v5_totality_includes_isinstance_accepted_str_and_bytes_subclasses():
 
     secret_bytes=_AdversarialBytes(b"B"*32)
     assert g5._secret_bytes_total(secret_bytes)==b"B"*32
+
+
+class _FakeStrViaClassProperty:
+    @property
+    def __class__(self):
+        return str
+
+
+class _FakeBytesViaClassProperty:
+    @property
+    def __class__(self):
+        return bytes
+
+
+def test_v5_nonspoofable_runtime_type_gate_rejects_fake_class_proxies():
+    fake_str=_FakeStrViaClassProperty()
+    fake_bytes=_FakeBytesViaClassProperty()
+
+    # Reproduce the counterexample against isinstance itself.
+    assert isinstance(fake_str,str) is True
+    assert isinstance(fake_bytes,bytes) is True
+
+    # The successor boundary uses the actual runtime class hierarchy instead.
+    assert issubclass(type(fake_str),str) is False
+    assert issubclass(type(fake_bytes),bytes) is False
+
+    try:
+        g5._canonical_beacon(fake_str)
+    except g1.UnknownDomainGeneratorError as exc:
+        assert str(exc)=="POST_FREEZE_BEACON_INVALID"
+    else:
+        raise AssertionError("FAKE_CLASS_STR_PROXY_WAS_ADMITTED")
+
+    try:
+        g5._secret_bytes_total(fake_bytes)
+    except g1.UnknownDomainGeneratorError as exc:
+        assert str(exc)=="EVALUATOR_SECRET_INVALID"
+    else:
+        raise AssertionError("FAKE_CLASS_BYTES_PROXY_WAS_ADMITTED")
