@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_POST_LIVEBENCH_CURRENT_ROOT_SEAL_V1",
+  "date": "2026-10-04",
+  "status": "CURRENT_CONNECTOR_RECOMPUTATION_PASS__ROOT1_ONE_GAP__ROOT2_18_TOUCHING_ACTIVE_SCHEDULING__ZERO_CREDIT",
+  "root_state": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "c3d1e25e2268cce90df545a93f107aa24fed8f8b"
+  },
+  "root2_activation": {
+    "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
+    "git_blob_sha": "f778e8eeb1295a03465a4cc6d49c3efab2ff80bb"
+  },
+  "root2_rebind": {
+    "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_V1.json",
+    "git_blob_sha": "8ccf5c09357e0d644a90af67dbcd18c3b5ce5925"
+  },
+  "verification": {
+    "path": "canonical/verification/POST_LIVEBENCH_ROOT2_REBIND_CONNECTOR_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "569fad34651f724d0746a09a3413a8ca7258d928"
+  },
+  "exact_current_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false,
+    "root1_only": 1,
+    "root2_only": 15,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "root2_touching": 18,
+    "root1_positive_gap_predicates": [
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "root2_effective_scheduling_authority": true
+  },
+  "verified_invariants": [
+    "PARTITION_1_PLUS_15_PLUS_7_PLUS_3_EQUALS_26",
+    "LIVEBENCH_IS_ROOT1_ONLY_AND_ABSENT_FROM_ROOT2",
+    "ROOT2_REBIND_EQUALS_CURRENT_15_ROOT2_ONLY_PLUS_3_MIXED",
+    "ROOT2_ACTIVATION_BINDS_EXACT_REBIND_AND_VERIFICATION_BLOBS",
+    "OLD_19_PREDICATE_DAG_IS_SUPERSEDED_FOR_CURRENTNESS",
+    "ACCEPTANCE_COUNTS_UNCHANGED"
+  ],
+  "public_independent_inputs": [
+    {
+      "claim": "LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION",
+      "run_id": 37196376134,
+      "job_id": 111419008329,
+      "conclusion": "success"
+    },
+    {
+      "claim": "LIVEBENCH_ROOT_PARTITION_PROJECTION",
+      "run_id": 37196472583,
+      "job_id": 111419310250,
+      "conclusion": "success"
+    }
+  ],
+  "private_ci_truth": {
+    "attempted": true,
+    "runner_allocated": false,
+    "semantic_effect": "NO_NEGATIVE_EVIDENCE__ONE_SHOT_PROBES_REMOVED_AFTER_INFRASTRUCTURE_ONLY_FAILURE"
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
