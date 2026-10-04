@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_OVERLAP_WHITESPACE_INVARIANT_CONSTRUCTOR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_12_OF_12_RATIO_OVERLAP_ROWS_CONSTRUCTED__WHITESPACE_INVARIANT_REFERENCE_ROUTE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target": "LIVEBENCH_PUBLIC_SCORER_GRAMMAR_SUCCESSOR_REPAIR",
+  "target_checker": "ratio:overlap__NGramOverlapChecker",
+  "breakthrough": {
+    "prior_residual": "EXACT_RAW_REFERENCE_TEXT_NOT_LITERALLY_VISIBLE_IN_7_OF_12_PINNED_PUBLIC_IFBENCH_RATIO_OVERLAP_ROWS",
+    "new_reduction": "EXACT_RAW_REFERENCE_BYTES_ARE_NOT_REQUIRED_FOR_WHITESPACE_FREE_CANDIDATES_WHEN_NORMALIZED_REFERENCE_IS_VISIBLE",
+    "theorem": "FOR_NORM_WS_THAT_COLLAPSES_WHITESPACE_RUNS_TO_ONE_SPACE_AND_STRIPS_OUTER_WHITESPACE__ANY_WHITESPACE_FREE_CANDIDATE_HAS_IDENTICAL_CHARACTER_TRIGRAM_MEMBERSHIP_AGAINST_RAW_REFERENCE_AND_NORM_WS_REFERENCE",
+    "checker_denominator_fact": "OVERLAP_DENOMINATOR_IS_THE_SET_OF_CANDIDATE_CHARACTER_TRIGRAMS",
+    "constructive_effect": "SEARCH_CAN_TARGET_THE_PUBLIC_PERCENTAGE_USING_ONLY_VISIBLE_NORMALIZED_REFERENCE_AND_CERTIFIED_NONOVERLAP_CHARACTERS__THEN_POSTVALIDATE_LOCALLY"
+  },
+  "pinned_public_sources": {
+    "ifbench_repository": "allenai/IFBench",
+    "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "livebench_ifbench_instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "connector_recomputation": {
+    "public_ifbench_rows": 300,
+    "ratio_overlap_rows": 12,
+    "constructed_within_plus_minus_2": 12,
+    "normalized_vs_raw_overlap_exact_equal": 12,
+    "worst_absolute_target_error_percent": 2,
+    "terminal_livebench_cases_consumed": 0
+  },
+  "implementation": {
+    "runtime_path": "canonical/runtime/livebench_ngram_overlap_whitespace_invariant_constructor_v1.py",
+    "tests_path": "canonical/tests/test_livebench_ngram_overlap_whitespace_invariant_constructor_v1.py",
+    "integration_state": "NOT_YET_WIRED_INTO_SUCCESSOR_ADAPTER__SEPARATE_INDEPENDENT_VERIFICATION_REQUIRED"
+  },
+  "remaining_obligations": [
+    "INDEPENDENTLY_RECOMPUTE_12_OF_12_PUBLIC_IFBENCH_RESULT_FROM_PINNED_BYTES",
+    "VERIFY_PROMPT_TO_NORMALIZED_REFERENCE_SEGMENTATION_WITHOUT_HIDDEN_METADATA",
+    "COMPOSE_WITH_OTHER_SIMULTANEOUS_CHECKERS_INSTEAD_OF_TREATING_RATIO_OVERLAP_AS_STANDALONE",
+    "FREEZE_A_NEW_SUCCESSOR_ADAPTER_BEFORE_ANY_NEW_TERMINAL_COMPARATOR_EVIDENCE",
+    "DO_NOT_INFER_LIVEBENCH_ACCEPTANCE_FROM_PUBLIC_IFBENCH_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_TERMINAL_CASE_73_PLUS_EXPOSURE",
+    "NO_CLAIM_ALL_83_CHECKERS_ARE_SOLVED",
+    "NO_CLAIM_ALL_RATIO_OVERLAP_CONJUNCTIONS_ARE_SOLVED",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
