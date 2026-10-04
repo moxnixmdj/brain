@@ -85,3 +85,41 @@ def test_audit_fails_closed_on_missing_expected_class():
     report = inv.audit(SOURCE, expected_classes=["StaticChecker", "AbsentChecker"])
     assert report["all_expected_classes_covered"] is False
     assert report["missing_expected_classes"] == ["AbsentChecker"]
+
+
+LEGACY_REGISTRY = r"""
+_PREFIX = "keywords:"
+INSTRUCTION_DICT = {
+    _PREFIX + "existence": instructions.ParameterChecker,
+    "format:static": instructions.StaticChecker,
+    # "inactive:test": instructions.AbsentChecker,
+}
+"""
+
+
+def test_registry_binding_resolves_prefix_concatenation_and_ignores_comments():
+    bindings = inv.extract_registry_bindings(LEGACY_REGISTRY)
+    assert bindings == {
+        "ParameterChecker": ("keywords:existence",),
+        "StaticChecker": ("format:static",),
+    }
+
+
+def test_registered_prompt_recognition_returns_instruction_id_and_slots():
+    matches = inv.recognize(
+        "Request. Use alpha exactly 3 times; repeat alpha.",
+        SOURCE,
+        LEGACY_REGISTRY,
+    )
+    hit = [x for x in matches if x["instruction_id"] == "keywords:existence"]
+    assert len(hit) == 1
+    assert hit[0]["class_name"] == "ParameterChecker"
+    assert hit[0]["parameters"] == {"keyword": "alpha", "N": "3"}
+    assert hit[0]["registry_binding_proved"] is True
+
+
+def test_registered_coverage_is_fail_closed():
+    report = inv.audit_registered_coverage(SOURCE, LEGACY_REGISTRY)
+    assert report["active_instruction_id_count"] == 2
+    assert report["active_instruction_class_count"] == 2
+    assert report["all_active_classes_have_description_templates"] is True
