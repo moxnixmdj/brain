@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY15_CLEAN_PREDECESSOR_COMPOSITION_VERIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "PASS__ALL_SATISFIABLE_ACTIVE15_PREDECESSOR_ROWS_SOLVED__ALL_VISIBLE_UNSAT_ROWS_INDEPENDENTLY_PROVED__ZERO_TERMINAL_ROW_EXPOSURE__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2070,
+    "head_sha": "15099f61054026e1b83f6b7d9a11b2e2b52a7ef7",
+    "workflow_run_id": 37241612321,
+    "workflow_id": 374567403,
+    "workflow_name": "Verify LiveBench legacy15 joint predecessor V1",
+    "workflow_run_number": 28,
+    "job_id": 111551286595,
+    "conclusion": "success"
+  },
+  "exact_subject_blobs": {
+    "visible_constraint_compiler_v1": "34f4df9f0bd265fc555686bd251a264e446d4c04",
+    "joint_candidate_generator_v1": "287e5a7e320503accf202d634f12b72fa3bbd403",
+    "verifier": "81b5bbdbd3df84a6d03efcf09188a83fd78a785f"
+  },
+  "frozen_sources": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "predecessor_revision": "4f7ab12f0d47848da31de92bd7cc3d7d4acfe695",
+    "predecessor_parquet_sha256": "57cbc3a738f7a95b234125965929247e7781ce6c5216bdea1d18548f4b10e98c",
+    "predecessor_rows": 200
+  },
+  "counters": {
+    "eligible_active15_rows": 193,
+    "solved_satisfiable_rows": 192,
+    "proved_visible_unsat_rows": 1,
+    "compile_fail_rows": 0,
+    "generation_fail_rows": 0,
+    "checker_fail_rows": 0,
+    "total_candidates": 1269,
+    "max_candidates_per_row": 28,
+    "distinct_constraint_sets": 119,
+    "route_hist": {
+      "CORE": 156,
+      "JSON": 16,
+      "PROVED_UNSAT_VISIBLE_CONSTRAINTS": 1,
+      "REPEAT": 10,
+      "TWO_RESPONSES": 10
+    }
+  },
+  "proved_unsat_class": {
+    "reason": "EXACT_END_PHRASE_FORBIDDEN_WHOLE_WORD_COLLISION",
+    "observed_predecessor_row_index": 128,
+    "exact_end_phrase": "Is there anything else I can help with?",
+    "colliding_forbidden_word": "can",
+    "proof": "Any response passing the frozen EndChecker must contain the exact terminal phrase, hence the whole word 'can'. The frozen ForbiddenWords checker rejects any response containing whole-word 'can'. Therefore the conjunction has no satisfying response.",
+    "hidden_terminal_data_used": false
+  },
+  "verifier_output_terminal_markers": {
+    "pass_marker": "LIVEBENCH_LEGACY15_CANDIDATE_PREDECESSOR_REPLAY=PASS__ALL_SAT_ROWS_SOLVED__ALL_UNSAT_ROWS_PROVED",
+    "active_terminal_prompt_rows_read": 0,
+    "incremental_spend_usd": 0
+  },
+  "consequence": {
+    "clean_historical_composition_residual": "CLOSED_FOR_ALL_193_ACTIVE15_ELIGIBLE_ROWS_OF_THE_PINNED_REMOVED_PREDECESSOR__192_CONSTRUCTIVE_ALL_PASS__1_FORMALLY_UNSAT",
+    "previous_state": "162_SOLVED__26_COMPILE_FAIL__1_GENERATION_FAIL__4_CHECKER_FAIL",
+    "reduction": "31_PREVIOUS_FAILURE_ROWS_ELIMINATED_OR_RECLASSIFIED_TRUTHFULLY",
+    "next_load_bearing_residual": "CASE_INDEPENDENT_TERMINAL_GENERALIZATION_AND_SCORE_LOWER_BOUND_WITHOUT_READING_QUARANTINED_TERMINAL_ROW_CONTENT"
+  },
+  "hard_nonclaims": [
+    "NO_QUARANTINED_EXACT200_SCORE_REUSED",
+    "NO_ACTIVE_TERMINAL_PROMPT_RESPONSE_KWARG_OR_QUESTION_ID_READ",
+    "NO_CLAIM_THAT_PREDECESSOR_REPLAY_ALONE_PROVES_THE_FROZEN_200_ROW_TERMINAL_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
