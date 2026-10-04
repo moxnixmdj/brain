@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Fail-closed postprocessor for applying formal response constraints to a real semantic seed.
+"""Fail-closed postprocessor for formal constraints around a real semantic seed.
 
-This module is benchmark-agnostic. It imports the existing instruction constraint
-compiler, applies only transformations that are explicitly semantics-preserving
-under this contract, and verifies the final response. Constraints that would
-require inventing, deleting, or truncating semantic content fail closed.
+A PASS has one mechanically checkable preservation invariant: the original
+semantic seed occurs verbatim as one contiguous substring of the emitted
+response. The postprocessor may add explicitly requested literal wrappers, but
+it never rewrites, deletes, truncates, case-folds, or substitutes seed bytes.
+Any constraint that requires such a mutation fails closed.
 """
 from __future__ import annotations
 
@@ -14,10 +15,10 @@ from typing import Any
 from canonical.runtime import instruction_constraint_compiler_v1 as compiler
 
 SCHEMA = "PROJECT_BRAIN_SEED_PRESERVING_INSTRUCTION_POSTPROCESSOR_V1"
-
-
-class SeedPostprocessError(RuntimeError):
-    pass
+PRESERVATION_CONTRACT = (
+    "ANY_PASS_RESPONSE_CONTAINS_THE_ORIGINAL_SEMANTIC_SEED_VERBATIM_"
+    "AS_ONE_CONTIGUOUS_SUBSTRING"
+)
 
 
 def _result(status: str, **extra: Any) -> dict[str, Any]:
@@ -28,6 +29,7 @@ def _result(status: str, **extra: Any) -> dict[str, Any]:
         "network_used": False,
         "incremental_spend_usd": 0,
         "terminal_authority": False,
+        "seed_preservation_contract": PRESERVATION_CONTRACT,
         **extra,
     }
 
@@ -48,25 +50,23 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
             error="CONSTRAINT_COMPILE_FAILED:" + type(exc).__name__,
         )
 
+    # Exact-output constraints are compatible with a seed-preserving route only
+    # when the seed is already exactly the requested output. Replacing the seed
+    # would delete semantic material and violate this module's contract.
+    if constraints.exact_response is not None and constraints.exact_response != seed:
+        return _result(
+            "FAIL_CLOSED",
+            error="EXACT_RESPONSE_CONFLICTS_WITH_SEED_PRESERVATION",
+            constraints=asdict(constraints),
+            response=None,
+            seed_verbatim_preserved=False,
+        )
+
     candidate = seed
     applied: list[str] = []
 
-    # Exact-output instructions define the whole admissible response surface.
-    if constraints.exact_response is not None:
-        candidate = constraints.exact_response
-        applied.append("EXACT_RESPONSE")
-
-    # Case conversion preserves lexical token identity for the compiler's
-    # supported structural contract.
-    if constraints.lowercase_only:
-        candidate = candidate.lower()
-        applied.append("LOWERCASE")
-    if constraints.uppercase_only:
-        candidate = candidate.upper()
-        applied.append("UPPERCASE")
-
-    # Prefix/suffix insertion is permitted only because the instruction itself
-    # explicitly requires those literal wrappers.
+    # Literal wrappers are the only transformations performed here. They leave
+    # every seed byte intact and in order, so the seed is trivially recoverable.
     if constraints.prefix is not None and not candidate.startswith(constraints.prefix):
         candidate = constraints.prefix + candidate
         applied.append("PREFIX")
@@ -74,19 +74,31 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
         candidate = candidate + constraints.suffix
         applied.append("SUFFIX")
 
-    # Do not invent or delete semantic material merely to satisfy numeric,
-    # length, uniqueness, required-literal, or forbidden-literal constraints.
-    # If the seed already satisfies them, validation below accepts it.
+    # Case conversion is deliberately not performed. It is lossy in general
+    # ("US" vs "us", proper names, identifiers, etc.). If the seed/wrappers
+    # already satisfy a case constraint, validation accepts them unchanged.
     ok, errors = compiler.validate_response(candidate, constraints)
     if not ok:
         return _result(
             "FAIL_CLOSED",
-            error="UNSAFE_TRANSFORMATION_REQUIRED",
+            error="SEED_MUTATION_OR_UNSUPPORTED_TRANSFORMATION_REQUIRED",
             validation_errors=errors,
             applied_transforms=applied,
             constraints=asdict(constraints),
             response=None,
-            seed_preserved=False,
+            seed_verbatim_preserved=(seed in candidate),
+        )
+
+    # Defensive invariant. Future edits cannot accidentally broaden PASS without
+    # tripping this check.
+    if seed not in candidate:
+        return _result(
+            "FAIL_CLOSED",
+            error="INTERNAL_SEED_PRESERVATION_INVARIANT_BROKEN",
+            applied_transforms=applied,
+            constraints=asdict(constraints),
+            response=None,
+            seed_verbatim_preserved=False,
         )
 
     return _result(
@@ -94,11 +106,12 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
         response=candidate,
         applied_transforms=applied,
         constraints=asdict(constraints),
-        seed_preserved=(candidate == seed),
+        seed_verbatim_preserved=True,
         exact_postvalidation=True,
         hard_nonclaim=(
-            "PASS_PROVES_ONLY_THE_EXISTING_COMPILER_CONSTRAINTS; "
-            "IT_DOES_NOT_PROVE_GENERAL_NATURAL_LANGUAGE_INSTRUCTION_FOLLOWING"
+            "PASS_PROVES_ONLY_THE_EXISTING_COMPILER_CONSTRAINTS_AND_VERBATIM_SEED_"
+            "PRESERVATION; IT_DOES_NOT_PROVE_GENERAL_NATURAL_LANGUAGE_INSTRUCTION_"
+            "FOLLOWING_OR_SEMANTIC_EQUIVALENCE_BEYOND_THAT_BYTE_LEVEL_INVARIANT"
         ),
     )
 
