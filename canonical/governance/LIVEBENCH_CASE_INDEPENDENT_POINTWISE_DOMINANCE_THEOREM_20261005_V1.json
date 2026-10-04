@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_CASE_INDEPENDENT_POINTWISE_DOMINANCE_THEOREM_20261005_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__CASE_INDEPENDENT_UNIVERSAL_DOMINANCE_PROOF_CHAIN_COMPLETE__INDEPENDENT_COMPOSITION_VERIFICATION_REQUIRED",
+  "status": "BLOCKED_FAIL_CLOSED__ACTIVE15_PROOF_SCOPE_IS_STRICT_SUBSET_OF_VERIFIED_REGISTRY25_TARGET__NO_PROMOTION",
   "predicate_id": "LIVEBENCH_IF_GE_65_7",
   "objective": "Prove the fixed 65.7 LiveBench IF predicate without reading or replaying any target row by showing the deterministic Brain construction is pointwise maximal on every generator-admitted checker contract.",
   "frozen_dependencies": {
@@ -51,7 +51,7 @@
     },
     {
       "id": "P2_GENERATOR_COMPLETE_VISIBLE_COMPILATION",
-      "statement": "The public legacy generator grammar and visible-parameter compiler are exhaustively bound over all conflict-compatible Active15 structures and public visible parameter grammar without target-row dependence.",
+      "statement": "The current compiler/composer evidence is complete for the Active15 sub-scope only. Independent public-scope verification proves Active15 is a strict subset of historical generator24 and public registry25; therefore this step is insufficient for the acceptance target.",
       "target_rows_read": 0
     },
     {
@@ -66,22 +66,23 @@
     },
     {
       "id": "P5_POINTWISE_DOMINANCE",
-      "statement": "Therefore for every generator-admitted LiveBench IF case, the Brain planner/compiler response attains the maximum score permitted by the exact strict checker contract. No comparator response on that same case can score higher.",
-      "derivation": "P2 AND P3 AND P4"
+      "statement": "BLOCKED: pointwise dominance is established only on the Active15 sub-scope, not every historical-generator or registry25 case.",
+      "derivation": "NOT_CURRENTLY_DERIVABLE__REQUIRES_REGISTRY25_POINTWISE_CLOSURE"
     },
     {
       "id": "P6_AGGREGATE_DOMINANCE",
-      "statement": "Pointwise Brain score >= pointwise Opus score on every member of the exact active 200-question population implies mean Brain score >= mean Opus score. The independently bound Opus mean is 65.73775 percent.",
-      "derivation": "P1 AND P5"
+      "statement": "BLOCKED_BY_SCOPE_GAP: cannot transport Active15-only pointwise dominance to the full target population.",
+      "derivation": "BLOCKED_ON_REGISTRY25_POINTWISE_CLOSURE"
     },
     {
       "id": "P7_FIXED_BAR",
-      "statement": "65.73775 >= 65.7, hence LIVEBENCH_IF_GE_65_7 is forced true without executing or reading Brain responses on the target population.",
+      "statement": "BLOCKED_BY_SCOPE_GAP: cannot transport Active15-only pointwise dominance to the full target population.",
       "arithmetic": {
         "brain_lower_bound_percent": 65.73775,
         "registry_threshold_percent": 65.7,
         "margin_lower_bound_percentage_points": 0.03775
-      }
+      },
+      "derivation": "BLOCKED_ON_REGISTRY25_POINTWISE_CLOSURE"
     }
   ],
   "contamination_resolution": {
@@ -95,22 +96,23 @@
   },
   "candidate_consequence": {
     "predicate": "LIVEBENCH_IF_GE_65_7",
-    "forced_true_if_independent_composition_verification_passes": true,
-    "acceptance_credit_delta_if_verified": 1,
+    "forced_true_if_independent_composition_verification_passes": false,
+    "acceptance_credit_delta_if_verified": 0,
     "family_credit_delta": 0,
-    "family_stays_open_on": [
-      "IF_SCOPE_BOUNDARY_NONINFERIOR",
-      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+    "blocked_on": [
+      "REGISTRY25_POINTWISE_OPTIMAL_CONSTRUCTION_FOR_ALL_14559_COMPATIBLE_ID_SETS",
+      "INDEPENDENT_EXACT_CHECKER_VERIFICATION_OF_THE_TEN_FAMILIES_OUTSIDE_ACTIVE15"
     ]
   },
   "authority": {
-    "scheduling": true,
+    "scheduling": false,
     "execution": false,
     "promotion": false,
     "acceptance_credit": false
   },
   "hard_nonclaims": [
-    "NO_ACCEPTANCE_CREDIT_BEFORE_INDEPENDENT_COMPOSITION_VERIFICATION",
+    "ACTIVE15_IS_A_VERIFIED_SUBLEMMA_NOT_THE_ACCEPTANCE_SCOPE",
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT_BEFORE_REGISTRY25_POINTWISE_CLOSURE",
     "NO_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE",
     "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOMIC_PREDICATE",
     "NO_TERMINAL_GOAL_COMPLETION_CLAIM"
@@ -122,5 +124,15 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "scope_truth_repair": {
+    "public_scope_theorem_path": "canonical/runtime/livebench_public_scope_union_v1.py",
+    "public_scope_theorem_git_blob_sha": "8af85028ca49a2abd4561a915927b8f67fa9a069",
+    "verified_scope_lattice": "ACTIVE15_STRICT_SUBSET_OF_HISTORICAL_GENERATOR24_STRICT_SUBSET_OF_PUBLIC_REGISTRY25",
+    "active15_family_count": 15,
+    "historical_generator_family_count": 24,
+    "public_registry_family_count": 25,
+    "public_registry_compatible_id_sets_1_to_5": 14559,
+    "consequence": "P2_P3_P4_CURRENTLY_ESTABLISH_ONLY_ACTIVE15_SUBLEMMA__P5_CANNOT_QUANTIFY_OVER_EVERY_GENERATOR_ADMITTED_OR_PUBLIC_REGISTRY25_CASE_UNTIL_THE_TEN_MISSING_FAMILIES_ARE_COMPOSED_AND_INDEPENDENTLY_VERIFIED"
   }
 }
