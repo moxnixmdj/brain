@@ -78,22 +78,28 @@ def validate_contract(contract: Mapping[str, Any]) -> tuple[str, dict[str, Any]]
     return iid, slots
 
 
-def _pinned_paths(livebench_root: str | Path) -> tuple[Path, Path, Path]:
+def _pinned_paths(livebench_root: str | Path) -> tuple[Path, Path, Path, Path]:
     root = Path(livebench_root).resolve()
     pkg = root / "livebench" / "if_runner" / "instruction_following_eval"
     return (
         root,
         pkg / "instructions_registry.py",
         pkg / "instructions.py",
+        pkg / "instructions_util.py",
     )
 
 
 def verify_pinned_source(livebench_root: str | Path) -> dict[str, Any]:
-    root, registry_path, instructions_path = _pinned_paths(livebench_root)
-    if not registry_path.is_file() or not instructions_path.is_file():
+    root, registry_path, instructions_path, util_path = _pinned_paths(livebench_root)
+    if (
+        not registry_path.is_file()
+        or not instructions_path.is_file()
+        or not util_path.is_file()
+    ):
         raise ExactContractCheckerError("PINNED_LIVEBENCH_SOURCE_FILES_MISSING")
     registry_blob = git_blob_sha(registry_path.read_bytes())
     instructions_blob = git_blob_sha(instructions_path.read_bytes())
+    util_blob = git_blob_sha(util_path.read_bytes())
     if registry_blob != PINNED_REGISTRY_BLOB:
         raise ExactContractCheckerError(
             "REGISTRY_BLOB_DRIFT:" + registry_blob
@@ -102,18 +108,21 @@ def verify_pinned_source(livebench_root: str | Path) -> dict[str, Any]:
         raise ExactContractCheckerError(
             "INSTRUCTIONS_BLOB_DRIFT:" + instructions_blob
         )
+    if util_blob != PINNED_UTIL_BLOB:
+        raise ExactContractCheckerError("INSTRUCTIONS_UTIL_BLOB_DRIFT:" + util_blob)
     return {
         "schema": SCHEMA,
         "status": "PASS__EXACT_PINNED_CHECKER_SOURCE_BOUND",
         "livebench_root": str(root),
         "registry_git_blob_sha": registry_blob,
         "instructions_git_blob_sha": instructions_blob,
+        "instructions_util_git_blob_sha": util_blob,
         "terminal_data_used": False,
     }
 
 
 def load_pinned_registry(livebench_root: str | Path):
-    root, registry_path, _ = _pinned_paths(livebench_root)
+    root, registry_path, instructions_path, util_path = _pinned_paths(livebench_root)
     verify_pinned_source(root)
     import_root = str((root / "livebench" / "if_runner").resolve())
     if import_root not in sys.path:
@@ -126,6 +135,12 @@ def load_pinned_registry(livebench_root: str | Path):
         raise ExactContractCheckerError(
             "REGISTRY_IMPORT_PATH_MISMATCH:" + str(loaded)
         )
+    instructions_module = getattr(module, "instructions", None)
+    if instructions_module is None or Path(str(instructions_module.__file__)).resolve() != instructions_path.resolve():
+        raise ExactContractCheckerError("INSTRUCTIONS_IMPORT_PATH_MISMATCH")
+    util_module = importlib.import_module("instruction_following_eval.instructions_util")
+    if Path(str(util_module.__file__)).resolve() != util_path.resolve():
+        raise ExactContractCheckerError("INSTRUCTIONS_UTIL_IMPORT_PATH_MISMATCH")
     return module
 
 
