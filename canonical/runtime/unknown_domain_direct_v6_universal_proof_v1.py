@@ -37,10 +37,11 @@ EXPECTED_BLOBS={
  "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py":"f974a4594c78e74693c7ba5a19f131dfa481b937",
  "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py":"d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
  "canonical/runtime/unknown_domain_direct_hidden_generator_v4.py":"e52858b9fef2d795f72b45cd3ae82ad04344aa91",
- "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py":"a97459fe407ea4852f57f12f504fbc0121db9824",
+ "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py":"20161e6e183fe276a2ff1cea0f61798d8a8dc93b",
  "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py":"e8cf5d1b5d311644725a751c15e6235958fb587d",
  "canonical/runtime/unknown_domain_direct_execution_harness_v1.py":"04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
  "canonical/tests/test_unknown_domain_direct_v5.py":"81cd6ecabec51029175f6036a13eac7667fccd03",
+ "canonical/tests/test_unknown_domain_direct_v6_type_gate.py":"3d164cbdf27ce979866d8c2569acd630d7cf3c20",
 }
 
 
@@ -90,13 +91,15 @@ def _string_totality()->dict[str,Any]:
     assert g5._secret_bytes_total(b"U"*32)==b"U"*32
 
     return {
-        "beacon_domain":"EVERY_FINITE_PYTHON_STR_WITH_LEN_STRIP_GE_16",
+        "beacon_domain":"EVERY_GENUINE_RUNTIME_STR_HIERARCHY_VALUE_WITH_BASE_STRIP_LEN_GE_16",
         "utf8_surrogatepass_total":True,
         "hex_byte_mapping_injective":True,
         "canonical_beacon_ascii":True,
         "surrogate_codepoints_exhausted":2048,
-        "secret_domain":"BYTES_OR_PYTHON_STR_WITH_CANONICAL_BYTE_LENGTH_GE_32",
+        "secret_domain":"GENUINE_RUNTIME_BYTES_OR_STR_HIERARCHY_WITH_CANONICAL_BYTE_LENGTH_GE_32",
         "legacy_strict_utf8_partiality_removed":True,
+        "actual_runtime_type_hierarchy_gate":True,
+        "instance_class_reporting_proxy_rejected_by_bound_regression":True,
     }
 
 
@@ -234,15 +237,15 @@ def prove(root:Path|None=None)->dict[str,Any]:
         "transfer_proof":transfer,
         "abstention_proof":abstention,
         "scope":{
-            "beacon":"EVERY_FINITE_PYTHON_STR_WITH_LEN_STRIP_GE_16",
-            "evaluator_secret":"EVERY_BYTES_OR_PYTHON_STR_WITH_CANONICAL_BYTE_LENGTH_GE_32",
+            "beacon":"EVERY_GENUINE_RUNTIME_STR_HIERARCHY_VALUE_WITH_BASE_STRIP_LEN_GE_16",
+            "evaluator_secret":"EVERY_GENUINE_RUNTIME_BYTES_OR_STR_HIERARCHY_VALUE_WITH_CANONICAL_BYTE_LENGTH_GE_32",
             "population_cases":27,
             "transfer_cases":12,
             "abstention_cases":15,
             "terminal_or_production_cases_generated":0,
         },
         "theorem":(
-            "FOR_EVERY_INPUT_ACCEPTED_BY_THE_DECLARED_TOTAL_STRING_INTERFACE__"
+            "FOR_EVERY_INPUT_ACCEPTED_BY_THE_NON_SPOOFABLE_RUNTIME_TYPE_HIERARCHY_INTERFACE__"
             "GENERATOR_V5_CANONICALIZES_BEFORE_ALL_LEGACY_RANDOMNESS__"
             "GENERATOR_V4_STRUCTURALLY_PRESERVES_SEMANTIC_IDENTIFIER_DISTINCTNESS__"
             "CANDIDATE_V3_PASSES_ALL_12_TRANSFER_AND_15_ABSTENTION_CASES_THROUGH_THE_EXACT_SCORER"
