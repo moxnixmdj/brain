@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB4_BUILDKITE_ALL_ACCESS_TRIAL_CARRIER_CANDIDATE_20261004_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__NEW_MATERIAL_ZERO_COST_CARRIER_WAKE__PRIMARY_SOURCE_ROUTE_FOUND__ACCOUNT_PREFLIGHT_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__PRIMARY_SOURCE_TRIAL_CAPACITY_STRENGTHENED__ACCOUNT_AND_ZERO_CASE_PREFLIGHT_REQUIRED__ZERO_CREDIT",
   "objective": "Reopen only the Terminal-Bench 4 carrier edge with a newly discovered Buildkite all-access-trial route that nominally satisfies the frozen minimum resource envelope, without claiming carrier admissibility before account-level and zero-case verification.",
   "target_predicate": "CODING_TB4_GE_66_4",
   "authority": {
@@ -40,6 +40,23 @@
         "NO_COMMITMENT"
       ],
       "role": "ZERO_UPFRONT_SPEND_AND_HARD_STOP_CANDIDATE"
+    },
+    {
+      "source": "https://buildkite.com/docs/platform/limits",
+      "observed": [
+        "ALL_ACCESS_TRIAL_LINUX_VCPU_CONCURRENCY_24",
+        "ALL_ACCESS_TRIAL_LINUX_VCPU_MINUTES_4000_INCLUDED"
+      ],
+      "role": "TRIAL_CAPACITY_PRIMARY_SOURCE"
+    },
+    {
+      "source": "https://www.buildkite.com/pricing/",
+      "observed": [
+        "ALL_ACCESS_TRIAL_INCLUDES_HOSTED_AGENTS",
+        "NO_CREDIT_CARD_REQUIRED",
+        "CHOOSE_PLAN_ONLY_WHEN_TRIAL_ENDS_OR_WALK_AWAY"
+      ],
+      "role": "TRIAL_ACCESS_AND_ZERO_UPFRONT_SPEND_PRIMARY_SOURCE"
     }
   ],
   "narrow_conclusion": {
@@ -50,7 +67,10 @@
     "nominal_total_disk_requirement_met": true,
     "docker_binaries_listed": true,
     "zero_cost_trial_claimed_by_provider": true,
-    "tb4_carrier_admissibility_proved": false
+    "tb4_carrier_admissibility_proved": false,
+    "nominal_trial_vcpu_concurrency_sufficient_for_one_large_agent": true,
+    "nominal_trial_included_vcpu_minutes": 4000,
+    "all_access_trial_includes_hosted_agents": true
   },
   "required_preflight_before_any_terminal_case": [
     "VERIFY_TRIAL_ORGANIZATION_CAN_SELECT_LINUX_AMD64_8X32",
@@ -60,8 +80,8 @@
     "VERIFY_DOCKER_COMPOSE_CAN_START_MULTI_CONTAINER_WORKLOAD",
     "VERIFY_8_CPU_DOCKER_LIMIT_IS_ACCEPTED",
     "VERIFY_NO_CREDIT_CARD_AND_NO_AUTOMATIC_PAID_OVERAGE_PATH",
-    "VERIFY_TRIAL_ALLOWANCE_SUFFICIENT_FOR_AT_LEAST_THE_MINIMUM_RECOVERY_TRANSACTION",
-    "RUN_ZERO_TERMINAL_CASE_HARBOR_RESOURCE_AND_CONTAINER_PREFLIGHT"
+    "RUN_ZERO_TERMINAL_CASE_HARBOR_RESOURCE_AND_CONTAINER_PREFLIGHT",
+    "VERIFY_ACTUAL_TRIAL_ORGANIZATION_REPORTS_INCLUDED_ALLOWANCE_AND_HARD_STOP_OR_NO_AUTOMATIC_PAID_OVERAGE"
   ],
   "support_confirmation": {
     "gmail_thread_id": "1a1046291c6a633f",
@@ -80,7 +100,8 @@
     "NO_CLAIM_158_GB_NOMINAL_DISK_IMPLIES_51200_MB_FREE_AT_JOB_START",
     "NO_TB4_TERMINAL_CASE_EXECUTION",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
-    "ZERO_INCREMENTAL_SPEND"
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_CLAIM_INCLUDED_4000_VCPU_MINUTES_ALONE_PROVES_MINIMUM_RECOVERY_TRANSACTION_DURATION_SUFFICIENCY"
   ],
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
