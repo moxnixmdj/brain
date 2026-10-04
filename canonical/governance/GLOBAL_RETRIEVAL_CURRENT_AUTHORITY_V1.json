@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1",
   "date": "2026-10-03",
-  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V6_CURRENT__EMPIRICAL_V10_ENTRYPOINT_V3_BOUND__V18_FINITE_LIVE_30_OF_30_BOUND__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__GLOBAL_RETRIEVAL_V6_CURRENT__EMPIRICAL_V10_RANKER__V18_FINITE_LIVE_30_OF_30__V19_ENTRYPOINT_V4_BOUND__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_global_retrieval_authority": {
     "path": "canonical/governance/GLOBAL_RETRIEVAL_V6_ACTIVATION_V1.json",
@@ -72,7 +72,12 @@
     "FINITE_LIVE_30_OF_30_IS_REGRESSION_TRUTH_NOT_OPEN_WORLD_COMPLETENESS",
     "VERSIONED_ARTIFACT_IDENTITIES_MUST_PRESERVE_HISTORICAL_MAJOR_LINES_WHEN_REPOSITORY_IDENTITY_PERSISTS",
     "SEMANTIC_VERSION_TAG_PARSING_MUST_IGNORE_PRERELEASE_SUFFIX_DIGITS",
-    "CURRENT_V10_ENTRYPOINT_V3_REMAINS_THE_MANDATORY_AUTHORIZED_PLAN_COMPILER_UNTIL_SEPARATELY_SUPERSEDED"
+    "CURRENT_V10_ENTRYPOINT_V3_REMAINS_THE_MANDATORY_AUTHORIZED_PLAN_COMPILER_UNTIL_SEPARATELY_SUPERSEDED",
+    "AUTHORIZED_GLOBAL_RETRIEVAL_PLAN_COMPILATION_MUST_USE_GLOBAL_RETRIEVAL_ENTRYPOINT_V4",
+    "ENTRYPOINT_V4_MUST_EXPOSE_THE_VERIFIED_V11_TO_V18_RECOVERY_ROUTE_PORTFOLIO",
+    "RECOVERY_ROUTE_GENERATION_MUST_NOT_USE_ANSWER_KEY_IDENTITY",
+    "V10_CONTROLLER_V3_REMAINS_THE_EMPIRICAL_RANKER_UNDER_ENTRYPOINT_V4",
+    "FRESH_HOLDOUT_MEASUREMENT_MUST_USE_THE_FROZEN_ENTRYPOINT_V4_BYTES_WITHOUT_POST_HOC_ROUTE_CHANGES"
   ],
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
@@ -167,7 +172,7 @@
     "calibration_v2_path": "canonical/runtime/retrieval_route_strategy_calibration_v2.py",
     "calibration_v2_git_blob_sha": "018f859959d4a15540e8ee1428f6d3e60fe32d11",
     "controller_verification_git_blob_sha": "83f5e4b28d9b79442a08d1ac22170cfb66c0339c",
-    "mandatory_for_authorized_global_retrieval_plan_compilation": true,
+    "mandatory_for_authorized_global_retrieval_plan_compilation": false,
     "best_known_live_labeled_case_count": 13,
     "best_known_live_hit_count": 13,
     "best_known_live_miss_count": 0,
@@ -181,7 +186,9 @@
     "verified_repository_to_package_bridge_count": 2,
     "deep_window_50_hit_count": 1,
     "deep_window_50_case_count": 5,
-    "open_world_recall_claim": false
+    "open_world_recall_claim": false,
+    "superseded_for_plan_compilation_by": "canonical/runtime/global_retrieval_entrypoint_v4.py",
+    "controller_v3_remains_underlying_ranker": true
   },
   "v10_current_pointer_candidate_verification": {
     "path": "canonical/verification/GLOBAL_RETRIEVAL_V10_CURRENT_POINTER_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
@@ -204,5 +211,19 @@
     "finite_live_union_recall": 1,
     "open_world_completeness_claim": false,
     "mandatory_regression_only": true
+  },
+  "v19_verified_route_portfolio": {
+    "portfolio_path": "canonical/runtime/retrieval_verified_route_portfolio_v1.py",
+    "portfolio_git_blob_sha": "855a6cba59fff8c079f61212acadc254c4e9e736",
+    "entrypoint_v4_path": "canonical/runtime/global_retrieval_entrypoint_v4.py",
+    "entrypoint_v4_git_blob_sha": "2ad2fb952b3c361e74cb083b335d39b04a7c130b",
+    "verification_path": "canonical/verification/RETRIEVAL_V19_ROUTE_PORTFOLIO_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "4604a93bf220edcf9691ad9cb059df38f8674c48",
+    "workflow_run_id": 37169330482,
+    "workflow_job_id": 111338881901,
+    "conclusion": "success",
+    "mandatory_for_authorized_global_retrieval_plan_compilation": true,
+    "underlying_ranker": "canonical/runtime/global_retrieval_controller_v3.py",
+    "answer_key_identity_permitted": false
   }
 }
