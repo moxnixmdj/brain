@@ -99,13 +99,16 @@ def _apply_end_material(
     body: str,
     postscript: dict[str, Any] | None,
     end_checker: dict[str, Any] | None,
+    forbidden: list[str],
 ) -> str:
     end_phrase = str(_slots(end_checker).get("end_phrase") or "") if end_checker else ""
     marker = str(_slots(postscript).get("postscript_marker") or "") if postscript else ""
     tail_parts = []
     if marker:
         tail_parts.append(marker)
-        tail_parts.append("note")
+        # Never let fixed scaffolding collide with a visible forbidden-word
+        # constraint. The marker is required, but the postscript payload is free.
+        tail_parts.append(_safe_token(forbidden, "tail"))
     if end_phrase:
         tail_parts.append(end_phrase)
     tail = " ".join(tail_parts).strip()
@@ -114,8 +117,15 @@ def _apply_end_material(
     return body.replace("__PB_END_SLOT__", tail, 1).rstrip()
 
 
-def _apply_quote(text: str, quotation: bool) -> str:
-    return f'"{text}"' if quotation else text
+def _apply_quote(text: str, quotation: bool, *, bullets: bool = False) -> str:
+    if not quotation:
+        return text
+    # The frozen bullet checker anchors each bullet at the start of a line.
+    # Putting the opening quote directly before the first '*' masks that first
+    # bullet, so isolate the quote on its own line when bullet syntax is active.
+    if bullets:
+        return '"\n' + text + '"'
+    return f'"{text}"'
 
 
 def _required_fragments(required: list[str], forbidden: list[str]) -> list[str]:
@@ -265,8 +275,10 @@ def _finalize_core_candidate(
     postscript = _one(constraints, "detectable_content:postscript")
     end_checker = _one(constraints, "startend:end_checker")
     quotation = _one(constraints, "startend:quotation") is not None
-    text = _apply_end_material(text, postscript, end_checker)
-    return _apply_quote(text, quotation)
+    bullets = _one(constraints, "detectable_format:number_bullet_lists") is not None
+    forbidden = _forbidden(constraints)
+    text = _apply_end_material(text, postscript, end_checker, forbidden)
+    return _apply_quote(text, quotation, bullets=bullets)
 
 
 def _word_constraint_ok(
