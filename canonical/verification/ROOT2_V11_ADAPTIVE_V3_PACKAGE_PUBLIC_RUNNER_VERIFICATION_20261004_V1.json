@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V11_ADAPTIVE_V3_PACKAGE_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_ISOLATED_PUBLIC_RUNNER_PASS__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subjects": {
+    "root2_v11": "6857750dea3a0af48a5acc545b6f66b619d4335b",
+    "root2_v11_verification": "89884cc421eb8c7aff3e2bf9a17666478a31db94",
+    "root2_v11_activation": "3bcd26a57e1b81d0eb5245312e98520b5704febf",
+    "adaptive_policy_v3": "e3d4bb102d8825798cb42b5f45382420fef41fbf",
+    "adaptive_v3_activation": "ea10d3f8ef25add304dbc4b19c4f5ce712e3d7ce",
+    "root3_v2": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+    "retrieval_v19": "55b1d411561f720fcd9d66c127cecd63ef0b5f5e",
+    "scheduler_runtime": "bfffe6dff32f5445a0c52657f7d9ec8d544b1f79"
+  },
+  "isolated_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "fast-clean-root2-v11-meta-v3-20261004-sol",
+    "head_sha": "2b060b432cf69c6615526cef752c3b6a4c26c64c",
+    "workflow_run_id": 37175130253,
+    "workflow_job_id": 111356069818,
+    "conclusion": "success"
+  },
+  "verified": {
+    "scheduler_runtime_semantics_preserved": true,
+    "root2_domain_rebound_v10_to_v11_only": true,
+    "root3_v2_unchanged": true,
+    "retrieval_v19_unchanged": true,
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
