@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__OUTPUT_ONLY_THRESHOLD_PROOF_DAG__19_ROOT2_TOUCHING_PREDICATES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "status": "CANDIDATE__CURRENT_STATE_REBOUND__OUTPUT_ONLY_THRESHOLD_PROOF_DAG__19_ROOT2_TOUCHING_PREDICATES__13_PROVED_25_UNRESOLVED__ZERO_CREDIT__INDEPENDENT_REVERIFICATION_REQUIRED",
   "objective": "Replace benchmark-first scheduling with the minimum admissible certificate that settles each frozen Root2 acceptance predicate while preserving exact target semantics and fail-closed evidence rules.",
   "source_bindings": {
     "predicate_registry": {
@@ -10,19 +10,19 @@
     },
     "evidence_ledger": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5"
+      "git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8"
     },
     "root_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "e353d54f4608d25b7f0ea06fba5d8fbf2ddfbb59"
-    },
-    "root2_frontier_v17": {
-      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V17.json",
-      "git_blob_sha": "8c1325dd652b65a7d5c24e041ac06556a84f569c"
+      "git_blob_sha": "919da676976043e5b501f207d3cf420dc4fb50b1"
     },
     "replacement_planner": {
       "path": "canonical/governance/ACCEPTANCE_PROOF_REPLACEMENT_PLANNER_CANDIDATE_V1.json",
       "git_blob_sha": "a653a4ccce58f3fbe85b414dc57f60ca3ae00923"
+    },
+    "root2_frontier_v18": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V18.json",
+      "git_blob_sha": "57d5ee650d4ee250db455d5818899f32aa304918"
     }
   },
   "runtime": {
@@ -36,10 +36,10 @@
   "exact_state": {
     "accepted_families": 5,
     "open_families": 14,
-    "proved_atomic": 12,
-    "unresolved_atomic": 26,
+    "proved_atomic": 13,
+    "unresolved_atomic": 25,
     "root2_only": 16,
-    "root3_only": 7,
+    "root3_only": 6,
     "root2_and_root3": 3,
     "root2_touching": 19
   },
@@ -200,6 +200,6 @@
     "tests_passed": 11,
     "tests_total": 11,
     "result": "PASS",
-    "note": "Local execution only; independent repository verification remains required before activation."
+    "note": "Prior local runtime validation preserved; manifest state rebinding requires independent repository reverification before reactivation."
   }
 }
