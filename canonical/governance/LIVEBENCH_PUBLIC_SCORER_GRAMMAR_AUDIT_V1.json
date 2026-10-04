@@ -1,0 +1,438 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_SCORER_GRAMMAR_AUDIT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_GRAMMAR_SURFACE_EXACTLY_ENUMERATED__SUCCESSOR_REPAIR_PREPROOF__ZERO_CREDIT",
+  "objective": "Replace case-specific LiveBench repair with a contamination-safe constructive compiler over the exact public frozen instruction grammar and scorer.",
+  "frozen_upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "legacy_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "modern_registry_blob": "adfed4832877566e62970257b50c6fa32c302fb2",
+    "modern_instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "grammar": {
+    "active_legacy_count": 25,
+    "active_modern_count": 58,
+    "active_total": 83,
+    "legacy": [
+      {
+        "id": "keywords:existence",
+        "checker": "KeywordChecker"
+      },
+      {
+        "id": "keywords:frequency",
+        "checker": "KeywordFrequencyChecker"
+      },
+      {
+        "id": "keywords:forbidden_words",
+        "checker": "ForbiddenWords"
+      },
+      {
+        "id": "keywords:letter_frequency",
+        "checker": "LetterFrequencyChecker"
+      },
+      {
+        "id": "language:response_language",
+        "checker": "ResponseLanguageChecker"
+      },
+      {
+        "id": "length_constraints:number_sentences",
+        "checker": "NumberOfSentences"
+      },
+      {
+        "id": "length_constraints:number_paragraphs",
+        "checker": "ParagraphChecker"
+      },
+      {
+        "id": "length_constraints:number_words",
+        "checker": "NumberOfWords"
+      },
+      {
+        "id": "length_constraints:nth_paragraph_first_word",
+        "checker": "ParagraphFirstWordCheck"
+      },
+      {
+        "id": "detectable_content:number_placeholders",
+        "checker": "PlaceholderChecker"
+      },
+      {
+        "id": "detectable_content:postscript",
+        "checker": "PostscriptChecker"
+      },
+      {
+        "id": "detectable_format:number_bullet_lists",
+        "checker": "BulletListChecker"
+      },
+      {
+        "id": "detectable_format:constrained_response",
+        "checker": "ConstrainedResponseChecker"
+      },
+      {
+        "id": "detectable_format:number_highlighted_sections",
+        "checker": "HighlightSectionChecker"
+      },
+      {
+        "id": "detectable_format:multiple_sections",
+        "checker": "SectionChecker"
+      },
+      {
+        "id": "detectable_format:json_format",
+        "checker": "JsonFormat"
+      },
+      {
+        "id": "detectable_format:title",
+        "checker": "TitleChecker"
+      },
+      {
+        "id": "combination:two_responses",
+        "checker": "TwoResponsesChecker"
+      },
+      {
+        "id": "combination:repeat_prompt",
+        "checker": "RepeatPromptThenAnswer"
+      },
+      {
+        "id": "startend:end_checker",
+        "checker": "EndChecker"
+      },
+      {
+        "id": "change_case:capital_word_frequency",
+        "checker": "CapitalWordFrequencyChecker"
+      },
+      {
+        "id": "change_case:english_capital",
+        "checker": "CapitalLettersEnglishChecker"
+      },
+      {
+        "id": "change_case:english_lowercase",
+        "checker": "LowercaseLettersEnglishChecker"
+      },
+      {
+        "id": "punctuation:no_comma",
+        "checker": "CommaChecker"
+      },
+      {
+        "id": "startend:quotation",
+        "checker": "QuotationChecker"
+      }
+    ],
+    "modern": [
+      {
+        "id": "count:word_count_range",
+        "checker": "WordCountRangeChecker"
+      },
+      {
+        "id": "count:unique_word_count",
+        "checker": "UniqueWordCountChecker"
+      },
+      {
+        "id": "ratio:stop_words",
+        "checker": "StopWordPercentageChecker"
+      },
+      {
+        "id": "ratio:sentence_type",
+        "checker": "SentTypeRatioChecker"
+      },
+      {
+        "id": "ratio:sentence_balance",
+        "checker": "SentBalanceChecker"
+      },
+      {
+        "id": "count:conjunctions",
+        "checker": "ConjunctionCountChecker"
+      },
+      {
+        "id": "count:person_names",
+        "checker": "PersonNameCountChecker"
+      },
+      {
+        "id": "ratio:overlap",
+        "checker": "NGramOverlapChecker"
+      },
+      {
+        "id": "count:numbers",
+        "checker": "NumbersCountChecker"
+      },
+      {
+        "id": "words:alphabet",
+        "checker": "AlphabetLoopChecker"
+      },
+      {
+        "id": "words:vowel",
+        "checker": "ThreeVowelChecker"
+      },
+      {
+        "id": "words:consonants",
+        "checker": "ConsonantClusterChecker"
+      },
+      {
+        "id": "sentence:alliteration_increment",
+        "checker": "IncrementingAlliterationChecker"
+      },
+      {
+        "id": "words:palindrome",
+        "checker": "PalindromeChecker"
+      },
+      {
+        "id": "count:punctuation",
+        "checker": "PunctuationCoverChecker"
+      },
+      {
+        "id": "format:parentheses",
+        "checker": "NestedParenthesesChecker"
+      },
+      {
+        "id": "format:quotes",
+        "checker": "NestedQuotesChecker"
+      },
+      {
+        "id": "words:prime_lengths",
+        "checker": "PrimeLengthsChecker"
+      },
+      {
+        "id": "format:options",
+        "checker": "OptionsResponseChecker"
+      },
+      {
+        "id": "format:newline",
+        "checker": "NewLineWordsChecker"
+      },
+      {
+        "id": "format:emoji",
+        "checker": "EmojiSentenceChecker"
+      },
+      {
+        "id": "ratio:sentence_words",
+        "checker": "CharacterCountUniqueWordsChecker"
+      },
+      {
+        "id": "count:words_japanese",
+        "checker": "NthWordJapaneseChecker"
+      },
+      {
+        "id": "words:start_verb",
+        "checker": "StartWithVerbChecker"
+      },
+      {
+        "id": "words:repeats",
+        "checker": "LimitedWordRepeatChecker"
+      },
+      {
+        "id": "sentence:keyword",
+        "checker": "IncludeKeywordChecker"
+      },
+      {
+        "id": "count:pronouns",
+        "checker": "PronounCountChecker"
+      },
+      {
+        "id": "words:odd_even_syllables",
+        "checker": "AlternateParitySyllablesChecker"
+      },
+      {
+        "id": "words:last_first",
+        "checker": "LastWordFirstNextChecker"
+      },
+      {
+        "id": "words:paragraph_last_first",
+        "checker": "ParagraphLastFirstWordMatchChecker"
+      },
+      {
+        "id": "sentence:increment",
+        "checker": "IncrementingWordCountChecker"
+      },
+      {
+        "id": "words:no_consecutive",
+        "checker": "NoConsecutiveFirstLetterChecker"
+      },
+      {
+        "id": "format:line_indent",
+        "checker": "IndentStairsChecker"
+      },
+      {
+        "id": "format:quote_unquote",
+        "checker": "QuoteExplanationChecker"
+      },
+      {
+        "id": "format:list",
+        "checker": "SpecialBulletPointsChecker"
+      },
+      {
+        "id": "format:thesis",
+        "checker": "ItalicsThesisChecker"
+      },
+      {
+        "id": "format:sub-bullets",
+        "checker": "SubBulletPointsChecker"
+      },
+      {
+        "id": "format:no_bullets_bullets",
+        "checker": "SomeBulletPointsChecker"
+      },
+      {
+        "id": "custom:multiples",
+        "checker": "PrintMultiplesChecker"
+      },
+      {
+        "id": "custom:mcq_count_length",
+        "checker": "MultipleChoiceQuestionsChecker"
+      },
+      {
+        "id": "custom:reverse_newline",
+        "checker": "ReverseNewlineChecker"
+      },
+      {
+        "id": "custom:word_reverse",
+        "checker": "WordReverseOrderChecker"
+      },
+      {
+        "id": "custom:character_reverse",
+        "checker": "CharacterReverseOrderChecker"
+      },
+      {
+        "id": "custom:sentence_alphabet",
+        "checker": "SentenceAlphabetChecker"
+      },
+      {
+        "id": "custom:european_capitals_sort",
+        "checker": "EuropeanCapitalsSortChecker"
+      },
+      {
+        "id": "custom:csv_city",
+        "checker": "CityCSVChecker"
+      },
+      {
+        "id": "custom:csv_special_character",
+        "checker": "SpecialCharacterCSVChecker"
+      },
+      {
+        "id": "custom:csv_quotes",
+        "checker": "QuotesCSVChecker"
+      },
+      {
+        "id": "custom:date_format_list",
+        "checker": "DateFormatListChecker"
+      },
+      {
+        "id": "count:keywords_multiple",
+        "checker": "KeywordsMultipleChecker"
+      },
+      {
+        "id": "words:keywords_specific_position",
+        "checker": "KeywordSpecificPositionChecker"
+      },
+      {
+        "id": "words:words_position",
+        "checker": "WordsPositionChecker"
+      },
+      {
+        "id": "repeat:repeat_change",
+        "checker": "RepeatChangeChecker"
+      },
+      {
+        "id": "repeat:repeat_simple",
+        "checker": "RepeatSimpleChecker"
+      },
+      {
+        "id": "repeat:repeat_span",
+        "checker": "RepeatSpanChecker"
+      },
+      {
+        "id": "format:title_case",
+        "checker": "TitleCaseChecker"
+      },
+      {
+        "id": "format:output_template",
+        "checker": "OutputTemplateChecker"
+      },
+      {
+        "id": "format:no_whitespace",
+        "checker": "NoWhitespaceChecker"
+      }
+    ],
+    "public_build_description_present_for_all": true,
+    "public_check_following_present_for_all": true,
+    "missing_registered_classes": [],
+    "published_conflict_logic": {
+      "legacy": "INSTRUCTION_CONFLICTS in frozen legacy registry",
+      "modern": "check_conflicts() hardcoded conflict pairs in frozen modern registry"
+    }
+  },
+  "dependency_audit": {
+    "direct_special_library_checker_count": 16,
+    "direct_special_library_legacy": [
+      "ResponseLanguageChecker",
+      "CapitalWordFrequencyChecker",
+      "CapitalLettersEnglishChecker",
+      "LowercaseLettersEnglishChecker"
+    ],
+    "direct_special_library_modern": [
+      "NGramOverlapChecker",
+      "EmojiSentenceChecker",
+      "StartWithVerbChecker",
+      "AlternateParitySyllablesChecker",
+      "ReverseNewlineChecker",
+      "EuropeanCapitalsSortChecker",
+      "CityCSVChecker",
+      "SpecialCharacterCSVChecker",
+      "QuotesCSVChecker",
+      "KeywordSpecificPositionChecker",
+      "WordsPositionChecker",
+      "TitleCaseChecker"
+    ],
+    "direct_special_libraries": [
+      "langdetect",
+      "nltk",
+      "emoji",
+      "syllapy",
+      "unicodedata",
+      "csv"
+    ],
+    "remaining_checker_count_without_direct_special_library_reference": 67,
+    "note": "Special-library dependency does not imply semantic-model dependency; these are public deterministic libraries and can be pinned/prebound."
+  },
+  "constructive_route": {
+    "stage_1": "Compile exact public build_description template language into recognizers that recover checker identity and public parameters from the natural-language prompt only.",
+    "stage_2": "Translate recognized instructions into checker-level constraints; do not use hidden instruction_id_list or hidden kwargs.",
+    "stage_3": "Synthesize response witnesses using deterministic constructors and pinned lexical oracles only.",
+    "stage_4": "Run exact frozen check_following predicates locally as postvalidation; fail closed on any unrecognized template or unsatisfied conjunction.",
+    "stage_5": "Prove coverage over every active public instruction type and every benchmark-permitted combination under published conflict rules.",
+    "stage_6": "If universal coverage closes, use objective scorer ceiling/dominance proof instead of any exposed terminal cases."
+  },
+  "contamination_firewall": [
+    "NO_TERMINAL_PROMPT_CONTENT_USED_TO_IMPLEMENT_HANDLERS",
+    "NO_TERMINAL_CASE_IDS_OR_KWARGS_USED",
+    "NO_V6_OR_V10_PER_CASE_FAILURE_PATTERN_USED",
+    "PUBLIC_UPSTREAM_SOURCE_AND_NONTERMINAL_SYNTHETIC_GENERATION_ONLY",
+    "AGGREGATE_FAILURE_HISTOGRAM_MAY_MOTIVATE_ROUTE_BUT_MAY_NOT_SPECIAL_CASE_IMPLEMENTATION"
+  ],
+  "proof_obligations": [
+    "DESCRIPTION_LANGUAGE_COVERAGE__EVERY_GENERATABLE_BUILD_DESCRIPTION_FORM_IS_RECOGNIZED",
+    "PARAMETER_RECOVERY_SOUNDNESS__RECOVERED_PARAMETERS_EQUAL_SCORER_PARAMETERS",
+    "WITNESS_SOUNDNESS__GENERATED_RESPONSE_PASSES_EXACT_CHECKER",
+    "COMBINATION_SOUNDNESS__JOINT_CONSTRUCTOR_PASSES_ALL_CHECKERS_FOR_EVERY_ALLOWED_COMBINATION",
+    "PINNED_LEXICAL_ORACLE_REPRODUCIBILITY",
+    "NO_HIDDEN_METADATA_DEPENDENCY",
+    "NO_POST_PROMPT_NETWORK_OR_PACKAGE_ACQUISITION",
+    "SCORER_VERSION_AND_PREPROCESSING_IDENTITY",
+    "OBJECTIVE_CEILING_IMPLICATION_TO_LIVEBENCH_IF_GE_65_7"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_YET_PROVE_A_UNIVERSAL_SOLVER_EXISTS",
+    "DOES_NOT_CLOSE_LIVEBENCH_IF_GE_65_7",
+    "DOES_NOT_REPAIR_THE_FROZEN_FAILED_V1_CANDIDATE_RETROACTIVELY",
+    "DOES_NOT_GRANT_NEW_CASE_EXPOSURE_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
