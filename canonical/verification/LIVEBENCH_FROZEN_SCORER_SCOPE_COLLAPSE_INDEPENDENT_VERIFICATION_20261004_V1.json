@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FROZEN_SCORER_SCOPE_COLLAPSE_INDEPENDENT_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FROZEN_200_ROW_TARGET_DISPATCHES_ONLY_TO_LEGACY_IFEVAL__ZERO_TERMINAL_CONTENT_DECODED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1859,
+    "verifier_head_sha": "2521ac34517cbe4d217836b5a16cfddafec43484",
+    "verifier_merge_sha": "ece666de63b33d791705f7bacea2471f52546819",
+    "workflow_name": "Verify LiveBench frozen scorer scope collapse",
+    "workflow_run_id": 37198973572,
+    "workflow_job_id": 111426548268,
+    "conclusion": "success"
+  },
+  "pinned_inputs": {
+    "livebench_dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "parquet_bytes": 537024,
+    "parquet_rows": 400,
+    "observed_max_release_date": "2024-11-25",
+    "dispatch_boundary": "2025-11-25",
+    "frozen_executor_blob": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "frozen_executor_population": 200
+  },
+  "contamination_firewall": {
+    "decoded_prompt_rows": 0,
+    "decoded_kwargs_rows": 0,
+    "decoded_question_ids": 0,
+    "new_terminal_cases_exposed": 0
+  },
+  "verified_deductions": [
+    "EVERY_ROW_IN_THE_EXACT_FROZEN_DATASET_PRECEDES_THE_MODERN_IFBENCH_DISPATCH_BOUNDARY",
+    "THE_FROZEN_200_ROW_EXECUTOR_CANNOT_SELECT_A_MODERN_IFBENCH_ROW_FROM_THOSE_EXACT_BYTES",
+    "ALL_FROZEN_SELECTED_ROWS_DISPATCH_TO_LEGACY_IFEVAL",
+    "MODERN_IFBENCH_58_CHECKER_WORK_IS_NOT_LOAD_BEARING_FOR_THIS_EXACT_FROZEN_PREDICATE",
+    "THE_LOAD_BEARING_PUBLIC_SCORER_GRAMMAR_COLLAPSES_FROM_83_AUDITED_CHECKER_TYPES_TO_THE_25_LEGACY_TYPES"
+  ],
+  "critical_path_delta": {
+    "audited_checker_types_before": 83,
+    "load_bearing_legacy_types_after": 25,
+    "modern_types_removed": 58,
+    "fraction_removed": 0.6987951807228916,
+    "percent_removed": 69.87951807228916
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_SEMANTIC_CAPABILITY_CREDIT_FROM_SCORER_SCOPE_REDUCTION",
+    "NO_FRESH_TERMINAL_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
