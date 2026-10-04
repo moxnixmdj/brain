@@ -75,5 +75,12 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "environment_equivalence_verification": {
+    "path": "canonical/verification/LIVEBENCH_V7_ENVIRONMENT_EQUIVALENT_SANITIZED_DIAGNOSTIC_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "8ee86249a581e4e19e53b63a8a3cd990074ce842",
+    "workflow_run_id": 37192715453,
+    "workflow_job_id": 111408110863,
+    "conclusion": "success"
   }
 }
