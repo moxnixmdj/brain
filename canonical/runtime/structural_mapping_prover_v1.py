@@ -1,18 +1,16 @@
-"""Deterministic zero-learned structural mapping prover for unknown-domain transfer.
+"""Deterministic zero-learned topology mapping prover for unknown-domain transfer.
 
-The prover deliberately ignores surface labels and arbitrary metadata.  It admits
-only graph mappings that preserve candidate-visible node kinds and typed directed
-edges exactly.  A unique mapping may be proposed for independent verification;
-zero mappings fail closed; multiple mappings are explicitly ambiguous.
+Surface node labels, node-kind names, edge-type names, and arbitrary metadata are
+non-load-bearing.  The prover uses only directed adjacency topology.  A unique
+isomorphism may be proposed for independent verification; zero mappings fail
+closed; multiple mappings are explicitly ambiguous.
 
 This module creates no independent verification receipt and no acceptance credit.
 """
 from __future__ import annotations
 
 import hashlib
-import itertools
 import json
-from collections import Counter
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_ZERO_LEARNED_STRUCTURAL_MAPPING_PROVER_V1"
@@ -49,7 +47,7 @@ def _normalize(graph: Mapping[str, Any]) -> dict[str, Any]:
         nid = _node_id(raw.get("id"))
         if nid in nodes:
             raise StructuralMappingProverError("NODE_ID_DUPLICATE:" + nid)
-        nodes[nid] = {"id": nid, "kind": str(raw.get("kind") or "GENERIC").strip() or "GENERIC"}
+        nodes[nid] = {"id": nid}
 
     edges = []
     seen = set()
@@ -58,10 +56,9 @@ def _normalize(graph: Mapping[str, Any]) -> dict[str, Any]:
             raise StructuralMappingProverError("EDGE_NOT_MAPPING")
         src = _node_id(raw.get("source"))
         dst = _node_id(raw.get("target"))
-        etype = str(raw.get("type") or "EDGE").strip() or "EDGE"
         if src not in nodes or dst not in nodes:
             raise StructuralMappingProverError("EDGE_NODE_UNKNOWN")
-        key = (src, dst, etype)
+        key = (src, dst)
         if key in seen:
             raise StructuralMappingProverError("EDGE_DUPLICATE")
         seen.add(key)
@@ -70,19 +67,22 @@ def _normalize(graph: Mapping[str, Any]) -> dict[str, Any]:
     return {"nodes": nodes, "edges": tuple(sorted(edges))}
 
 
-def _signature(graph: Mapping[str, Any], node_id: str) -> tuple:
-    nodes = graph["nodes"]
+def _signature(graph: Mapping[str, Any], node_id: str) -> tuple[int, int, tuple[int, ...], tuple[int, ...]]:
     edges = graph["edges"]
-    kind = nodes[node_id]["kind"]
-    outgoing = Counter(t for s, d, t in edges if s == node_id)
-    incoming = Counter(t for s, d, t in edges if d == node_id)
-    return (
-        kind,
-        tuple(sorted(outgoing.items())),
-        tuple(sorted(incoming.items())),
-        sum(outgoing.values()),
-        sum(incoming.values()),
+    incoming = sorted(s for s, d in edges if d == node_id)
+    outgoing = sorted(d for s, d in edges if s == node_id)
+    indeg = len(incoming)
+    outdeg = len(outgoing)
+    # One-hop degree profiles strengthen pruning without using any names/types.
+    pred_degrees = sorted(
+        sum(1 for s, d in edges if d == pred) + sum(1 for s, d in edges if s == pred)
+        for pred in incoming
     )
+    succ_degrees = sorted(
+        sum(1 for s, d in edges if d == succ) + sum(1 for s, d in edges if s == succ)
+        for succ in outgoing
+    )
+    return indeg, outdeg, tuple(pred_degrees), tuple(succ_degrees)
 
 
 def _mapping_preserves(source: Mapping[str, Any], target: Mapping[str, Any], mapping: Mapping[str, str]) -> bool:
@@ -90,11 +90,8 @@ def _mapping_preserves(source: Mapping[str, Any], target: Mapping[str, Any], map
         return False
     if len(set(mapping.values())) != len(target["nodes"]):
         return False
-    for sid, tid in mapping.items():
-        if target["nodes"].get(tid, {}).get("kind") != source["nodes"][sid]["kind"]:
-            return False
     target_edges = set(target["edges"])
-    mapped_edges = {(mapping[s], mapping[d], etype) for s, d, etype in source["edges"]}
+    mapped_edges = {(mapping[s], mapping[d]) for s, d in source["edges"]}
     return mapped_edges == target_edges
 
 
@@ -107,15 +104,7 @@ def propose(source_graph: Mapping[str, Any], target_graph: Mapping[str, Any]) ->
     source = _normalize(source_graph)
     target = _normalize(target_graph)
     if len(source["nodes"]) != len(target["nodes"]) or len(source["edges"]) != len(target["edges"]):
-        return {
-            "schema": SCHEMA,
-            "status": "NO_STRUCTURAL_MAPPING",
-            "mapping_count": 0,
-            "mapping": None,
-            "mapping_digest": None,
-            "persistent_learned_bytes": 0,
-            "external_learned_capability_calls": 0,
-        }
+        return _result("NO_STRUCTURAL_MAPPING", None, 0)
 
     source_ids = sorted(source["nodes"])
     target_ids = sorted(target["nodes"])
@@ -126,21 +115,13 @@ def propose(source_graph: Mapping[str, Any], target_graph: Mapping[str, Any]) ->
     for sid in source_ids:
         compatible = [tid for tid in target_ids if target_sigs[tid] == source_sigs[sid]]
         if not compatible:
-            return {
-                "schema": SCHEMA,
-                "status": "NO_STRUCTURAL_MAPPING",
-                "mapping_count": 0,
-                "mapping": None,
-                "mapping_digest": None,
-                "persistent_learned_bytes": 0,
-                "external_learned_capability_calls": 0,
-            }
+            return _result("NO_STRUCTURAL_MAPPING", None, 0)
         candidates[sid] = compatible
 
     order = sorted(source_ids, key=lambda sid: (len(candidates[sid]), sid))
-    valid = []
-    used = set()
-    partial = {}
+    valid: list[dict[str, str]] = []
+    used: set[str] = set()
+    partial: dict[str, str] = {}
 
     def search(index: int) -> None:
         if len(valid) > 1:
@@ -164,23 +145,23 @@ def propose(source_graph: Mapping[str, Any], target_graph: Mapping[str, Any]) ->
     search(0)
 
     if not valid:
-        status = "NO_STRUCTURAL_MAPPING"
-        chosen = None
-    elif len(valid) == 1:
-        status = "UNIQUE_STRUCTURAL_MAPPING"
-        chosen = valid[0]
-    else:
-        status = "AMBIGUOUS_STRUCTURAL_MAPPING"
-        chosen = None
+        return _result("NO_STRUCTURAL_MAPPING", None, 0)
+    if len(valid) > 1:
+        return _result("AMBIGUOUS_STRUCTURAL_MAPPING", None, 2)
+    return _result("UNIQUE_STRUCTURAL_MAPPING", valid[0], 1)
 
+
+def _result(status: str, mapping: Mapping[str, str] | None, count: int) -> dict[str, Any]:
     return {
         "schema": SCHEMA,
         "status": status,
-        "mapping_count": len(valid) if len(valid) <= 1 else 2,
-        "mapping": chosen,
-        "mapping_digest": None if chosen is None else mapping_digest(chosen),
-        "proof_basis": "STRUCTURAL_EQUIVALENCE",
+        "mapping_count": count,
+        "mapping": None if mapping is None else dict(mapping),
+        "mapping_digest": None if mapping is None else mapping_digest(mapping),
+        "proof_basis": "DIRECTED_TOPOLOGY_ISOMORPHISM",
         "surface_labels_used": False,
+        "node_kind_names_used": False,
+        "edge_type_names_used": False,
         "metadata_used": False,
         "persistent_learned_bytes": 0,
         "external_frontier_model_calls": 0,
