@@ -318,7 +318,11 @@ def _general(by_id: Mapping[str, Mapping[str, Any]]) -> str:
 
     if POSTSCRIPT in by_id:
         marker = str(_slots(by_id[POSTSCRIPT])["postscript_marker"])
-        core = core.rstrip() + "\n" + marker + " " + _SAFE
+        # The frozen postscript regex accepts arbitrary trailing characters.
+        # Avoid a payload word and neutralize the terminal period in P.S. so
+        # this mandatory suffix does not create an avoidable Punkt boundary.
+        tail = marker + "+" if marker.endswith(".") else marker
+        core = core.rstrip() + "\n" + tail
 
     if END in by_id:
         phrase = str(_slots(by_id[END])["end_phrase"]).strip()
