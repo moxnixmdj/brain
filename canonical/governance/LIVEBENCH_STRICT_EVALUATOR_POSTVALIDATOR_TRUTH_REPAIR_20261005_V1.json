@@ -5,7 +5,10 @@
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "defect": {
-    "affected_runtime": "canonical/runtime/livebench_legacy15_exact_contract_checker_v1.py",
+    "affected_runtime": [
+      "canonical/runtime/livebench_legacy15_exact_contract_checker_v1.py",
+      "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py"
+    ],
     "prior_behavior": "CALLED_RAW_CHECKER_CHECK_FOLLOWING_DIRECTLY",
     "missing_semantics": "FROZEN_EVALUATION_MAIN_REQUIRES_RESPONSE_STRIP_NONEMPTY_BEFORE_ANY_CHECKER_TRUE_IS_CREDITED",
     "consequence": [
@@ -29,6 +32,11 @@
       "change": "CONTENT_ADDRESS_EVALUATION_MAIN_AND_APPLY_STRICT_NONEMPTY_GATE_TO_EVERY_CHECKER_RESULT"
     },
     {
+      "path": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+      "git_blob_sha": "9eebcd6549f6598a842c8486be0829bf98360ccc",
+      "change": "REPAIR_THE_LIVE_POINTWISE_POSTVALIDATOR__BIND_EVALUATION_MAIN_AND_APPLY_STRICT_NONEMPTY_GATE"
+    },
+    {
       "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
       "git_blob_sha": "68c75f723b3a707d53df2e04df251dde56bce748",
       "change": "PROMOTE_SENTENCE_LT_ONE_TO_SINGLETON_UNSAT_UNDER_STRICT_EVALUATOR"
@@ -41,13 +49,18 @@
       "covers": "RAW_FORBIDDEN_CHECKER_ACCEPTS_BLANK_BUT_EXACT_ADAPTER_MUST_RETURN_FALSE"
     },
     {
+      "path": "canonical/tests/test_livebench_legacy15_exact_postvalidator_strict_gate_v1.py",
+      "git_blob_sha": "c84b7ac3b3cf3bc6298e4d4460dd2412d9dc8d57",
+      "covers": "LIVE_POINTWISE_POSTVALIDATOR_REJECTS_BLANK_RAW_TRUE_CHECKERS_AND_BINDS_EVALUATION_MAIN"
+    },
+    {
       "path": "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py",
       "git_blob_sha": "63466255ec7fed9ec3de096b123868537877966a",
       "covers": "SENTENCE_LT_ONE_SINGLETON_AND_EMPTY_COMPATIBLE_RAW_CHECKER_COMBINATIONS_ARE_STRICT_UNSAT"
     },
     {
-      "path": "canonical/tests/test_livebench_legacy15_pointwise_search_v1.py",
-      "git_blob_sha": "94343091e955c555cd5a298c7125ba4d5feaec18",
+      "path": "canonical/tests/test_livebench_strict_gate_pointwise_regression_v1.py",
+      "git_blob_sha": "29632ca4bfdd614196eb82a2143bdae4d14f444a",
       "covers": "SENTENCE_LT_ONE_PLUS_FORBIDDEN_PARTIAL_RESPONSE_GETS_POINTWISE_OPTIMALITY_CERTIFICATE_WITH_EXACT_SCORE_ONE_QUARTER"
     }
   ],
