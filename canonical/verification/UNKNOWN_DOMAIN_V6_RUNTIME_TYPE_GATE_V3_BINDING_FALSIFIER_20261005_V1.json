@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_RUNTIME_TYPE_GATE_V3_BINDING_FALSIFIER_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FALSIFIED__V3_GATE_REQUIRED_PROPERTY_CONTRADICTS_BOUND_GENERATOR_BLOB__NO_CREDIT_DELTA",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "falsified_gate": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_RUNTIME_TYPE_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V3.json",
+    "git_blob_sha": "15605b3a0734a23422faeb60f040643b4e78f7f2",
+    "frozen_branch_head": "b77fdde005c6f950d666e770cd747b46911c8ead",
+    "required_generator_blob": "d3b5e7279ca1068d1532046f35e6752107e42e24"
+  },
+  "contradiction": {
+    "gate_required_property": "BEACON_GATE_USES_ISSUBCLASS_OF_ACTUAL_TYPE_AGAINST_STR",
+    "bound_generator_actual_source": "if not isinstance(beacon,str) or len(str.strip(beacon))<16:",
+    "consequence": "A FakeStr object whose __class__ property returns str is admitted by the exact bound beacon gate and can reach str.strip despite not being a genuine str hierarchy object.",
+    "secret_side_note": "The same bound generator already uses issubclass(type(secret), bytes/str) for evaluator_secret; the contradiction is specifically the beacon gate."
+  },
+  "exact_counterexample": {
+    "construction": "class FakeStr: @property def __class__(self): return str",
+    "facts": [
+      "isinstance(FakeStr(), str) == True",
+      "issubclass(type(FakeStr()), str) == False",
+      "the V3 gate requires the latter semantics but binds a generator implementing the former"
+    ]
+  },
+  "required_repair": [
+    "V3_MUST_NOT_AUTHORIZE_REPROMOTION",
+    "FREEZE_A_NEW_OUTCOME_BLIND_GATE_BOUND_TO_A_GENERATOR_BLOB_WHOSE_BEACON_AND_SECRET_GATES_BOTH_USE_ACTUAL_RUNTIME_TYPE_HIERARCHY",
+    "INDEPENDENT_VERIFIER_MUST_BIND_THE_EXACT_SUCCESSOR_BLOBS_AND_REPRODUCE_THE_FAKE_CLASS_COUNTEREXAMPLE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
