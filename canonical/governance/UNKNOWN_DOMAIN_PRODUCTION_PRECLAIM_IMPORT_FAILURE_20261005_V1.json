@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_PRODUCTION_PRECLAIM_IMPORT_FAILURE_20261005_V1",
   "date": "2026-10-05",
-  "status": "ACTIVE_TRUTH__PRECLAIM_INFRASTRUCTURE_FAILURE__PRODUCTION_POPULATION_UNCONSUMED__RETRY_VERIFICATION_PENDING",
+  "status": "ACTIVE_TRUTH__PRECLAIM_INFRASTRUCTURE_FAILURE__PRODUCTION_POPULATION_UNCONSUMED__VERIFIED_RETRY_ARMED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
   "verified_execution_lease": {
@@ -36,8 +36,15 @@
     "pull_request": 2034,
     "head_sha": "c28c91ebcbfc13eb494bd882da86005d9c9e190f",
     "verification_workflow_run_id": 37240343308,
-    "verification_state_at_record": "QUEUED",
-    "semantic_scope": "PRECLAIM_TRANSPORT_RETRY_ONLY__SAME_LEASE__SAME_LAUNCH_KEY__SAME_ATOMIC_CLAIM_KEY"
+    "verification_state_at_record": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "semantic_scope": "PRECLAIM_TRANSPORT_RETRY_ONLY__SAME_LEASE__SAME_LAUNCH_KEY__SAME_ATOMIC_CLAIM_KEY",
+    "verification_workflow_job_id": 111547635658,
+    "verification_conclusion": "success",
+    "merged_retry_commit": "f666b5b512e035fe4bcda30058644f606e231a45",
+    "verified_retry_workflow_git_blob_sha": "d2b76185a76fc4584483c223deba085903589df4",
+    "armed_launch_branch_commit": "680d98343bd41f6bc489d968cc1f096b2fea99b0",
+    "retry_workflow_run_id": 37240563767,
+    "retry_state_at_record": "QUEUED"
   },
   "hard_rules": [
     "DO_NOT_CLASSIFY_THE_FAILED_ATTEMPT_AS_A_PRODUCTION_CASE_CONSUMPTION",
