@@ -1,0 +1,163 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "UNKNOWN-DOMAIN-V3-TOTAL-EXACT-CURRENT-MAIN-CLOSURE-20261005",
+  "date": "2026-10-05",
+  "status": "PROPOSED__CURRENT_MAIN_SUCCESSOR__ZERO_REALITY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "2e8bc96204b3c6017268c72949f4cfa456f40753",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "UNKNOWN_DOMAIN_ADAPTATION",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "action_kind": "REPAIR_CURRENT_MAIN_SUCCESSOR_AND_PROVE_TOTAL_EXACT_EVALUATOR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::UNKNOWN_DOMAIN_ADAPTATION::CURRENT_MAIN_V3_MUST_BE_STRUCTURALLY_TOTAL_AND_EXACT_FLOAT_SAFE",
+  "expected_parent_frontier_change": "IF_INDEPENDENTLY_VERIFIED__WAKE_ROOT3_SCOPE_CERTIFICATE_REDUCTION_AND_DELETE_FRESH_27_CASE_PRODUCTION_AS_REQUIRED_INFORMATION_ACQUISITION_FOR_THIS_EXACT_V3_EVALUATOR",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain #1858 V2 universal proof",
+    "Brain #1894 collision-total generator line",
+    "Brain #1901 fail-closed namespace wrapper",
+    "Brain #1934 combined V4 carrier",
+    "Brain #1945 combined total+exact proof",
+    "Brain #1948 total/exact successor",
+    "Brain #1955 current-main total/exact carrier",
+    "Runner merged verifier from #2107 and current V4 trigger line"
+  ],
+  "theory_invariants": {
+    "correctness_first": true,
+    "incremental_spend_usd": 0,
+    "original_total_input_quantifier_preserved": true,
+    "scorer_or_harness_relaxed": false,
+    "production_or_terminal_cases_consumed": 0,
+    "no_credit_before_independent_reduction": true
+  },
+  "recursive_obs": {
+    "real_outcome": "Close the current-main Unknown-Domain audit without fresh reality if and only if structural identifier totality and exact ADD2 binary64 order are both proved.",
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "GREEN_CI_BADGE",
+        "V2_THEOREM_REHABILITATION"
+      ],
+      "surviving_necessity": "TOTAL_IDENTIFIER_SEMANTICS_PLUS_EXACT_FLOAT_ROLE_ORDER"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current-main V3 candidate",
+        "current-main partial V3 generator",
+        "PR1948 full-total generator",
+        "PR1955 total/exact proof"
+      ],
+      "surviving_gap": "INDEPENDENT_CONTENT_BOUND_VERIFICATION_AND_SEPARATE_SCOPE_REDUCTION"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_PROOF_AND_IMPLEMENTATION_GAP",
+      "surviving_causal_blocker": "PROMOTION_NOT_YET_INDEPENDENTLY_VERIFIED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "selected_surviving_route": "PR1955_CURRENT_MAIN_TOTAL_EXACT_V3",
+      "losing_routes_reason": "Older carriers are stale, incomplete on one of the two proof holes, or weaken the total-input quantifier.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "falsification_condition": "ANY_FORCED_RANK_DIGEST_TIE_COLLAPSES_A_LOAD_BEARING_IDENTIFIER__ANY_V2_FLOAT_COUNTEREXAMPLE_SURVIVES_V3__ANY_EXACT_BLOB_MISMATCH__ANY_NONPRODUCTION_POPULATION_SCORER_FAILURE"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "stale PR1934 exact-subject carrier after current-main V3 changed",
+        "V2 production-as-required-information if theorem verifies"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "exact ADD2 role orientation",
+        "structural finite bijection IDs"
+      ],
+      "fresh_reuse_plan": "reuse current-main candidate and PR1955 full-total identifier construction"
+    },
+    "routes_considered": [
+      "PR1934",
+      "PR1945",
+      "PR1948",
+      "PR1955"
+    ],
+    "deleted_or_bypassed_paths": [
+      "stale exact blobs",
+      "fail-closed collision scope restriction",
+      "V2 candidate with total generator"
+    ],
+    "why_selected_route_is_fastest_sufficient": "It is based on actual current main and closes both known theorem holes in one carrier.",
+    "stop_condition": "No acceptance/family/capability/ownership credit until independent exact-byte verification and separate Root3/acceptance reduction pass."
+  },
+  "behavioral_contract": {
+    "behavior_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT__CURRENT_MAIN_V3_TOTAL_EXACT",
+    "inputs": "Every valid beacon and evaluator secret accepted by the bound V3 interface.",
+    "environment_state": "Exact V3 generator/candidate with unchanged frozen V1 harness/scorer.",
+    "allowed_information": "Visible packet/transcript and earned source receipt only.",
+    "required_output_or_action": "Pass 12 transfer and 15 abstention cases; transfer uses fewer than 3 probes.",
+    "success_condition": "All 27 exact scorer results pass for every valid V3 input.",
+    "failure_condition": "Any valid input causes structural collapse, emission failure, wrong support, wrong exact consequence, or abstention error.",
+    "terminal_consequence": "Scope-proof input only; separate acceptance reduction required.",
+    "verification_route": "Independent exact-byte verifier with forced digest ties, exact V2 float falsifier, and multi-population scorer replay.",
+    "dependency_boundary": "No external learned capability provider.",
+    "scope": "EXACT_BOUND_V3_EVALUATOR_ONLY"
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "Universal pass over exact current-main V3 evaluator domain.",
+    "hole_type": "DEDUCTIVE_TOTALITY_PLUS_EXACT_BINARY64_SEMANTICS",
+    "expected_certificate_or_receipt": "Independent content-bound runner receipt.",
+    "validator": "Independent verifier must bind exact blobs and attack both known V2 holes.",
+    "maximum_cheap_test_cost": "ZERO_TERMINAL_CASES__ZERO_INCREMENTAL_SPEND",
+    "prerequisites": [
+      "Exact subject blobs unchanged"
+    ],
+    "contamination_risk": "NONE__NO_PRODUCTION_OR_TERMINAL_CASE_READ",
+    "reversibility": "FULL",
+    "falsification_condition": "Any counterexample or binding mismatch.",
+    "critical_path_relation": "Can remove the remaining one-shot reality requirement for this exact predicate."
+  },
+  "continuous_obs": {
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": "INDEPENDENTLY_VERIFY_CURRENT_MAIN_V3_BEFORE_ANY_PRODUCTION",
+    "information_boundary_complete": true,
+    "information_policy": "ZERO_REALITY",
+    "dependencies": [
+      "independent verifier",
+      "separate Root3/scope/acceptance reducer"
+    ]
+  },
+  "reality_query_admission": {
+    "proof_obligation": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "existing_evidence_search": "COMPLETE_FOR_ACTIVE_CURRENT_MAIN_CARRIERS",
+    "deductive_closure": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION",
+    "candidate_observations": [],
+    "minimum_reality_cut": [],
+    "terminal_decision_value": "ZERO_IF_UNIVERSAL_THEOREM_VERIFIES",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED_BEFORE_THEOREM_ADJUDICATION",
+    "global_cut_membership": false
+  },
+  "global_terminal_proof_cut": {
+    "required": false,
+    "proposed_action_membership": false,
+    "terminal_decision_value": "ZERO_CREDIT"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
