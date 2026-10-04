@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_MINIMUM_CERTIFICATE_BASIS_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__26_PREDICATES__29_TYPED_OBLIGATIONS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/terminal_typed_minimum_certificate_basis_v1.py",
+    "git_blob_sha": "b42c81e04109e1ff081517672b397390bb3749e0"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1700,
+    "verifier_merge_commit": "d4cd7dcbe5179ab83eda2a7fa7881dd1cfc3b414",
+    "workflow_run_id": 37180276989,
+    "workflow_job_id": 111371278393,
+    "conclusion": "success"
+  },
+  "verified": {
+    "unresolved_predicates": 26,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "typed_obligations": 29,
+    "comparator_strength_obligations": 19,
+    "scope_completeness_obligations": 10,
+    "partition_disjoint": true,
+    "relative_elo_absolute_nontransport_preserved": true,
+    "fresh_reality_block_preserved": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_authorized": false
+  },
+  "effect": "REPLACES_UNTYPED_ROUTE_COUNT_AS_THE_MINIMUM_CAUSAL_PROOF_DIMENSION_BASIS__DOES_NOT_CLOSE_ANY_PREDICATE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
