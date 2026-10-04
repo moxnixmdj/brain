@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_UNKNOWN_DOMAIN_DIRECT_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_TEST_FIXTURE_OUTCOME__EXACT_BLOB_BOUND__ZERO_LEARNED__ZERO_PRODUCTION_CASES__ZERO_CREDIT",
+  "objective": "TEST_DIRECT_CROSS_DOMAIN_TRANSFER_AND_CALIBRATED_ABSTENTION_USING_THE_ALREADY_FROZEN_UNKNOWN_DOMAIN_EVALUATOR_WITHOUT_GENERATING_PRODUCTION_CASES",
+  "hypothesis": "VISIBLE_EXACT_RECEIPT_REUSE_PLUS_ONE_SAFE_DOMAIN_B_PROBE_AND_EXHAUSTIVE_ROLE_MAPPING_CAN_SOLVE_TRANSFER; VISIBLE_HYPOTHESIS_DECISION_EQUIVALENCE_AND_DECLARED_SAFE_DISCRIMINATORS_CAN_SOLVE_CALIBRATED_ABSTENTION",
+  "candidate": {
+    "path": "canonical/runtime/h100_zero_learned_unknown_domain_direct_candidate_v1.py",
+    "git_blob_sha": "b9d289b29784b434aac9b61eb39450035927ff1e",
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0
+  },
+  "frozen_evaluator": {
+    "generator": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py",
+      "git_blob_sha": "f974a4594c78e74693c7ba5a19f131dfa481b937"
+    },
+    "scorer": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py",
+      "git_blob_sha": "e8cf5d1b5d311644725a751c15e6235958fb587d"
+    },
+    "harness": {
+      "path": "canonical/runtime/unknown_domain_direct_execution_harness_v1.py",
+      "git_blob_sha": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+    },
+    "family": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EVALUATOR_FAMILY_V1.json",
+      "git_blob_sha": "52090daf78d12020af48c1b6ffaea056d9029e1b"
+    },
+    "generator_freeze": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_GENERATOR_FREEZE_V1.json",
+      "git_blob_sha": "26108d0d06f7a308c3eaf4b9821ff0c4551dcda3"
+    },
+    "harness_freeze": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EXECUTION_HARNESS_FREEZE_V1.json",
+      "git_blob_sha": "3e3a87962c13ad4c76621508763fab74df25cb44"
+    }
+  },
+  "test_population": {
+    "source": "generate_test_fixture_population",
+    "namespace": "TESTONLY",
+    "cases": 27,
+    "transfer_cases": 12,
+    "abstention_cases": 15,
+    "production": false,
+    "terminal": false,
+    "hard_rule": "TEST_FIXTURES_ARE_NOT_PRODUCTION_OR_TERMINAL_CASES"
+  },
+  "precommitted_candidate_logic": [
+    "TRANSFER_REQUEST_EXACTLY_ONE_MIN_COST_ALLOWED_PROBE",
+    "ENUMERATE_ROLE_TO_OPAQUE_FEATURE_PERMUTATIONS",
+    "KEEP_ONLY_MAPPINGS_MATCHING_ALL_VISIBLE_DOMAIN_B_OBSERVATIONS_AND_REQUESTED_PROBE_OUTCOME",
+    "REQUIRE_UNIQUE_SUPPORT_FEATURE_SET_OR_FAIL_CLOSED",
+    "REUSE_EXACT_DOMAIN_A_RECEIPT_PROGRAM_AND_FINGERPRINT",
+    "PREDICT_QUERY_TERMINAL_CONSEQUENCE_FROM_IDENTIFIED_ROLE_MAPPING",
+    "REJECT_ALL_NON_SUPPORT_DOMAIN_B_FEATURES_AS_NEGATIVE_TRANSFER_DISTRACTORS",
+    "IDENTIFIABLE_ABSTENTION_LEAF_CONCLUDES_ONLY_WHEN_ALL_PLAUSIBLE_HYPOTHESES_SHARE_ONE_TERMINAL_CONSEQUENCE",
+    "DECISION_DISTINCT_HYPOTHESES_REQUEST_MIN_COST_VISIBLE_SAFE_BINARY_DISCRIMINATOR_IF_PRESENT",
+    "OTHERWISE_ABSTAIN_WITH_EXPLICIT_NONIDENTIFIABILITY_WITNESS"
+  ],
+  "success_condition": {
+    "aggregate_status": "TWO_FROZEN_LEAVES_PASS",
+    "all_27_cases_pass": true,
+    "transfer_leaf_pass": true,
+    "abstention_leaf_pass": true,
+    "maximum_transfer_probes_per_case": 1,
+    "persistent_learned_bytes": 0
+  },
+  "independent_verification_required": true,
+  "hard_nonclaims": [
+    "NO_PRODUCTION_CASE_GENERATION",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_OPEN_WORLD_GENERALIZATION_CLAIM",
+    "NO_TERMINAL_GOAL_CLOSURE_FROM_TEST_FIXTURE_PASS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "generated_production_case_count": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
