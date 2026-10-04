@@ -1,0 +1,23 @@
+{
+  "schema":"PROJECT_BRAIN_H100_JIT_LEXICAL_ROLE_PREEXPOSURE_V1",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_RUNTIME_IMPLEMENTATION_AND_OUTCOMES__ZERO_CREDIT",
+  "objective":"TEST_ZERO_LEARNED_ROLE_RESOLUTION_FOR_CUE_TOKENS_ABSENT_FROM_RUNTIME_SOURCE_USING_ONLY_A_FROZEN_EXTERNAL_RAW_LEXICAL_GRAPH",
+  "knowledge_pack":"canonical/governance/H100_JIT_LEXICAL_RAW_KNOWLEDGE_V1.json",
+  "tasks":[
+    {"task_id":"A","clauses":[{"cue":"cue_d","fields":["score"]},{"cue":"cue_a","fields":["alpha","beta"]}],"expected_inputs":["alpha","beta"],"expected_target":"score","expected_status":"ROLES_IDENTIFIED"},
+    {"task_id":"B","clauses":[{"cue":"cue_b","fields":["width","height"]},{"cue":"cue_e","fields":["class_score"]}],"expected_inputs":["height","width"],"expected_target":"class_score","expected_status":"ROLES_IDENTIFIED"},
+    {"task_id":"C","clauses":[{"cue":"cue_f","fields":["pressure"]},{"cue":"cue_c","fields":["flow","temperature"]}],"expected_inputs":["flow","temperature"],"expected_target":"pressure","expected_status":"ROLES_IDENTIFIED"},
+    {"task_id":"AMBIGUOUS","clauses":[{"cue":"cue_ambiguous","fields":["x"]},{"cue":"cue_e","fields":["y"]}],"expected_inputs":[],"expected_target":null,"expected_status":"ABSTAIN_LEXICAL_ROLE_AMBIGUOUS"},
+    {"task_id":"UNKNOWN","clauses":[{"cue":"cue_unknown","fields":["a","b"]},{"cue":"cue_d","fields":["score"]}],"expected_inputs":[],"expected_target":null,"expected_status":"ABSTAIN_LEXICAL_ROLE_UNKNOWN"}
+  ],
+  "hard_rules":[
+    "CUE_ORDER_MUST_NOT_DETERMINE_ROLE",
+    "UNKNOWN_CUE_MUST_ABSTAIN",
+    "CUE_REACHING_BOTH_ROLE_ANCHORS_MUST_ABSTAIN",
+    "NO_LANGUAGE_MODEL_OR_EXTERNAL_LEARNED_SEMANTIC_PROVIDER",
+    "NO_POST_HOC_TASK_OR_GRAPH_CHANGE",
+    "FINITE_GRAPH_SUCCESS_IS_NOT_OPEN_WORLD_SEMANTIC_UNDERSTANDING"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0}
+}
