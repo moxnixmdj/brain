@@ -2,7 +2,7 @@ import unittest
 from unittest import mock
 
 from canonical.runtime import livebench_public_grammar_compiler_v2 as c
-from canonical.runtime import root2_livebench_if_astra_inference_adapter_v3 as v3
+from canonical.runtime import root2_livebench_if_astra_inference_adapter_v4 as v4
 
 
 class LiveBenchPublicGrammarCompilerV2Tests(unittest.TestCase):
@@ -72,26 +72,39 @@ REQ = lambda text: {
 }
 
 
-class LiveBenchAdapterV3Tests(unittest.TestCase):
+class LiveBenchAdapterV4Tests(unittest.TestCase):
     def test_public_rule_fast_path(self):
-        out = v3.infer(REQ("The output should not contain any whitespace."))
+        out = v4.infer(REQ("The output should not contain any whitespace."))
         self.assertEqual(out["status"], "PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE")
         self.assertEqual(out["answer"], "Alpha")
         self.assertEqual(out["model_dependency_count"], 0)
         self.assertIn("no_whitespace", out["matched_public_rules"])
 
-    def test_unknown_route_falls_back_unchanged(self):
-        expected = {"status": "FALLBACK"}
-        with mock.patch.object(v3.fallback_v2, "infer", return_value=expected) as fallback:
-            out = v3.infer(REQ("Explain photosynthesis clearly."))
+    def test_seed_preserving_postprocess_after_fallback(self):
+        expected = {
+            "status": "PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE",
+            "answer": "Mixed Case Answer",
+            "cognition_dependency_class": "MODEL_INDEPENDENT",
+            "model_dependency_count": 0,
+        }
+        with mock.patch.object(v4.fallback_v2, "infer", return_value=expected) as fallback:
+            out = v4.infer(REQ("Write the entire response in lowercase only."))
+        self.assertEqual(out["answer"], "mixed case answer")
+        self.assertEqual(out["response_route"], "VERIFIED_SEED_PRESERVING_POSTPROCESSOR_V1")
+        fallback.assert_called_once()
+
+    def test_unknown_route_falls_back_unchanged_when_postprocess_cannot_help(self):
+        expected = {"status": "FALLBACK", "answer": "semantic seed"}
+        with mock.patch.object(v4.fallback_v2, "infer", return_value=expected) as fallback:
+            out = v4.infer(REQ("Explain photosynthesis clearly."))
         self.assertEqual(out, expected)
         fallback.assert_called_once()
 
     def test_external_tools_still_forbidden(self):
         req = REQ("The output should not contain any whitespace.")
         req["allowed_tools"] = ["browser"]
-        with self.assertRaises(v3.Root2InferenceBlocked):
-            v3.infer(req)
+        with self.assertRaises(v4.Root2InferenceBlocked):
+            v4.infer(req)
 
 
 if __name__ == "__main__":
