@@ -24,9 +24,11 @@ PINNED_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 HISTORICAL_GENERATOR_BLOB = "6ff390d6885cf90f88d9d36959735cb327613edc"
 
 NTH = "length_constraints:nth_paragraph_first_word"
-EXISTENCE = "keywords:existence"
 FORBIDDEN = "keywords:forbidden_words"
+EXISTENCE = "keywords:existence"
 END = "startend:end_checker"
+SENTENCE = "length_constraints:number_sentences"
+PUBLIC_END_PHRASES = ("Any other questions?", "Is there anything else I can help with?")
 
 
 def _slots_by_id(contracts: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -81,6 +83,23 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
         hit = _literal_forbidden_hit(end_phrase, forbidden_words)
         if hit is not None:
             reasons.append("MANDATORY_END_PHRASE_CONTAINS_FORBIDDEN_WORD:" + hit.casefold())
+
+    if SECTIONS in by_id and FORBIDDEN in by_id:
+        splitter = str(by_id[SECTIONS].get("section_spliter", "")).strip()
+        hit = _literal_forbidden_hit(splitter, forbidden_words)
+        if hit is not None:
+            reasons.append("MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:" + hit.casefold())
+
+    if SENTENCE in by_id and END in by_id:
+        sentence = by_id[SENTENCE]
+        relation = str(sentence.get("relation", "")).strip().casefold()
+        try:
+            threshold = int(sentence.get("num_sentences"))
+        except (TypeError, ValueError):
+            threshold = -1
+        end_phrase = str(by_id[END].get("end_phrase", "")).strip()
+        if relation == "less than" and threshold == 1 and end_phrase in PUBLIC_END_PHRASES:
+            reasons.append("SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE")
 
     return tuple(reasons)
 
