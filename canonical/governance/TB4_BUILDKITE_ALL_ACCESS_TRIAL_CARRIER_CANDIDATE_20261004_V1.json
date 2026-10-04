@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_BUILDKITE_ALL_ACCESS_TRIAL_CARRIER_CANDIDATE_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__NEW_MATERIAL_ZERO_COST_CARRIER_WAKE__PRIMARY_SOURCE_ROUTE_FOUND__ACCOUNT_PREFLIGHT_REQUIRED__ZERO_CREDIT",
+  "objective": "Reopen only the Terminal-Bench 4 carrier edge with a newly discovered Buildkite all-access-trial route that nominally satisfies the frozen minimum resource envelope, without claiming carrier admissibility before account-level and zero-case verification.",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "authority": {
+    "prior_census": {
+      "path": "canonical/governance/TB4_ZERO_COST_CARRIER_CENSUS_20261003_V1.json",
+      "git_blob_sha": "6ce9cd4f91d048e03b533392f9c3e3a641d6fb98",
+      "reopen_condition": "A_NEW_FREE_CREDIT_BEARING_CARRIER_WITH_HARD_SPEND_STOP_IS_BOUND"
+    }
+  },
+  "frozen_minimum_envelope": {
+    "cpus_at_least": 8,
+    "usable_memory_mb_at_least": 16384,
+    "free_storage_mb_at_least": 51200,
+    "docker_required": true,
+    "docker_compose_required": true,
+    "additional_creditable_tasks_needed": 8
+  },
+  "primary_source_observations": [
+    {
+      "source": "https://buildkite.com/docs/agent/buildkite-hosted/linux",
+      "observed": [
+        "LINUX_AMD64_8X32_IS_LISTED_AS_LARGE",
+        "8_VCPU",
+        "32_GB_MEMORY",
+        "158_GB_DISK_SPACE",
+        "LINUX_HOSTED_IMAGE_LISTS_DOCKER_AND_DOCKER_COMPOSE"
+      ],
+      "role": "NOMINAL_RESOURCE_AND_TOOLING_CANDIDATE"
+    },
+    {
+      "source": "https://www.buildkite.com/pricing/",
+      "observed": [
+        "30_DAY_ALL_ACCESS_TRIAL",
+        "FULL_ACCESS_TO_BUILDKITE_PLATFORM",
+        "NO_CREDIT_CARD_REQUIRED",
+        "NO_COMMITMENT"
+      ],
+      "role": "ZERO_UPFRONT_SPEND_AND_HARD_STOP_CANDIDATE"
+    }
+  ],
+  "narrow_conclusion": {
+    "generic_carrier_search_reopened": false,
+    "named_information_positive_route_exists": true,
+    "nominal_cpu_requirement_met": true,
+    "nominal_memory_requirement_met": true,
+    "nominal_total_disk_requirement_met": true,
+    "docker_binaries_listed": true,
+    "zero_cost_trial_claimed_by_provider": true,
+    "tb4_carrier_admissibility_proved": false
+  },
+  "required_preflight_before_any_terminal_case": [
+    "VERIFY_TRIAL_ORGANIZATION_CAN_SELECT_LINUX_AMD64_8X32",
+    "MEASURE_USABLE_MEMORY_MB_GE_16384",
+    "MEASURE_FREE_STORAGE_MB_GE_51200_AT_JOB_START",
+    "VERIFY_DOCKER_DAEMON_CAN_RUN_ORDINARY_CONTAINERS",
+    "VERIFY_DOCKER_COMPOSE_CAN_START_MULTI_CONTAINER_WORKLOAD",
+    "VERIFY_8_CPU_DOCKER_LIMIT_IS_ACCEPTED",
+    "VERIFY_NO_CREDIT_CARD_AND_NO_AUTOMATIC_PAID_OVERAGE_PATH",
+    "VERIFY_TRIAL_ALLOWANCE_SUFFICIENT_FOR_AT_LEAST_THE_MINIMUM_RECOVERY_TRANSACTION",
+    "RUN_ZERO_TERMINAL_CASE_HARBOR_RESOURCE_AND_CONTAINER_PREFLIGHT"
+  ],
+  "support_confirmation": {
+    "gmail_thread_id": "1a1046291c6a633f",
+    "state": "REQUEST_SENT__AWAITING_OWNER_REPLY",
+    "questions": [
+      "LARGE_SHAPE_AVAILABLE_DURING_TRIAL",
+      "DOCKER_RUN_AND_DOCKER_COMPOSE_ALLOWED_LOCALLY",
+      "TRIAL_INCLUDED_MINUTES_HAVE_NO_AUTOMATIC_PAID_OVERAGE"
+    ]
+  },
+  "decision_rule": "IF_AND_ONLY_IF_ALL_ACCOUNT_AND_ZERO_CASE_PREFLIGHT_REQUIREMENTS_PASS__PROMOTE_AS_ADMISSIBLE_TB4_RECOVERY_CARRIER_CANDIDATE; OTHERWISE RECORD_EXACT_FAILED_PREMISE_AND_KILL_ONLY_THIS_ROUTE",
+  "hard_nonclaims": [
+    "NO_CLAIM_BUILDKITE_TRIAL_ACCOUNT_ACCESS_CURRENTLY_EXISTS",
+    "NO_CLAIM_LARGE_SHAPE_IS_ENABLED_IN_THE_USERS_TRIAL_BEFORE_OBSERVATION",
+    "NO_CLAIM_PREINSTALLED_DOCKER_BINARIES_IMPLY_DOCKER_DAEMON_RUNTIME_SEMANTICS",
+    "NO_CLAIM_158_GB_NOMINAL_DISK_IMPLIES_51200_MB_FREE_AT_JOB_START",
+    "NO_TB4_TERMINAL_CASE_EXECUTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_source_verification_required": true
+}
