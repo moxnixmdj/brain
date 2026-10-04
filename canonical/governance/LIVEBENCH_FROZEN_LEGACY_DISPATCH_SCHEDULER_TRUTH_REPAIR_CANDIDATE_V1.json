@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FROZEN_LEGACY_DISPATCH_SCHEDULER_TRUTH_REPAIR_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_TRUTH_REPAIR__FROZEN_SCOPE_IS_LEGACY_IFEVAL__MODERN_IFBENCH_TERMINAL_BINDING_REVOKED_PENDING_INDEPENDENT_RUNNER__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "frozen_subject": {
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "population_count": 200,
+    "threshold_percent": 65.7,
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "livebench_scorer_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "scorer_boundary": "2025-11-25"
+  },
+  "scope_repair": {
+    "exact_dataset_release_date_range_observed_from_public_dataset_metadata": [
+      "2024-06-24",
+      "2024-11-25"
+    ],
+    "consequence": "EVERY_FROZEN_ACTIVE_ROW_PRECEDES_2025_11_25_AND_THEREFORE_ROUTES_TO_LEGACY_INSTRUCTION_FOLLOWING_EVALUATION",
+    "modern_ifbench_reachable_frozen_rows": 0,
+    "legacy_ifeval_reachable_frozen_rows": 200,
+    "modern_ifbench_reachability_probability": 0
+  },
+  "superseded_or_demoted_for_frozen_terminal_binding": [
+    {
+      "path": "canonical/verification/LIVEBENCH_IF_SCORER_SURFACE_COLLAPSE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "scope": "CLAIM_ACTIVE_2026_INSTRUCTION_FOLLOWING_ROUTE_USES_IFBENCH",
+      "action": "REVOKE_FOR_EXACT_FROZEN_2026_06_25_DATASET_SCOPE__PRESERVE_ONLY_BRANCH_INDEPENDENT_SCORE_ALGEBRA_IF_SEPARATELY_REPROVED"
+    },
+    {
+      "path": "canonical/governance/LIVEBENCH_SINGLE_CHECKER_SCORE_MASS_CUT_V1.json",
+      "scope": "300_ROW_ALLENAI_IFBENCH_PUBLIC_POPULATION_AND_198_SINGLE_ROW_CUT",
+      "action": "NO_TERMINAL_BINDING__DO_NOT_USE_AS_FROZEN_ROOT1_CLOSURE_PATH"
+    },
+    {
+      "path": "canonical/governance/LIVEBENCH_ROOT1_OBSERVABILITY_SCHEDULER_SUPERSESSION_20261004_V1.json",
+      "scope": "198_SINGLE_CHECKER_PUBLIC_ROW_PROGRAM",
+      "action": "REPLACE_WITH_LEGACY_MULTI_CONSTRAINT_CONSTRUCTIVE_PROGRAM_FOR_FROZEN_SCOPE"
+    }
+  ],
+  "preserved_truth": [
+    "LIVEBENCH_IF_SCORE_OBSERVES_VERIFIABLE_INSTRUCTION_ADHERENCE_NOT_GENERAL_SEMANTIC_FIDELITY",
+    "PER_CASE_SCORE_IS_HALF_PROMPT_LEVEL_ALL_PASS_PLUS_HALF_INSTRUCTION_LEVEL_TRUE_FRACTION",
+    "132_FULL_SCORE_CASES_OUT_OF_200_SUFFICE_IF_ALL_OTHER_CASES_SCORE_ZERO",
+    "131_FULL_SCORE_CASES_OUT_OF_200_DO_NOT_SUFFICE_IF_ALL_OTHER_CASES_SCORE_ZERO"
+  ],
+  "public_legacy_construction": {
+    "source": "LIVEBENCH_PAPER_SECTION_A_2_5_AND_TABLE_4",
+    "instruction_family_source": "IFEVAL",
+    "stated_livebench_subset_count": 16,
+    "sampled_instruction_count_per_example_uniform_range": [
+      2,
+      5
+    ],
+    "conflicts_deconflicted": true,
+    "dominant_case_cardinality": "TWO_OR_THREE_INSTRUCTIONS",
+    "four_task_contexts": [
+      "paraphrase",
+      "summarize",
+      "simplify",
+      "story_generation"
+    ],
+    "implication": "SINGLE_CHECKER_ONLY_TERMINAL_PROGRAM_IS_NOT_SUPPORTED_BY_THE_FROZEN_GENERATION_CONTRACT"
+  },
+  "existing_reusable_assets": [
+    {
+      "path": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py",
+      "blob": "de598627156582ca51e2058b3b824208db9293eb",
+      "role": "VISIBLE_LEGACY_DESCRIPTION_AND_PARAMETER_RECOVERY_CANDIDATE"
+    },
+    {
+      "path": "canonical/runtime/livebench_hidden_parameter_prompt_recovery_v1.py",
+      "blob": "7b2c56bf9da9df5ba3dd916719fcf1e991cf5dc9",
+      "role": "LEGACY_REPEAT_PROMPT_VISIBLE_RECOVERY"
+    },
+    {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "blob": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+      "role": "GENERIC_FORMAL_CONSTRAINT_COMPILER__PARTIAL"
+    }
+  ],
+  "new_independent_verification": {
+    "dispatch_pr": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1879,
+      "head_sha": "cf9334d4c1b22598724f3436108238e21b044539",
+      "workflow_run_id": 37199264703,
+      "state_at_binding": "QUEUED",
+      "reads_only_columns": [
+        "livebench_release_date",
+        "livebench_removal_date"
+      ],
+      "terminal_prompt_content_read": false
+    },
+    "visible_parameter_compiler_pr": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1923,
+      "head_sha": "04237b0b05959d0be7e8a0de476d2ec9f6a0a53a",
+      "workflow_run_id": 37199824542,
+      "state_at_binding": "QUEUED",
+      "terminal_rows_read": 0
+    }
+  },
+  "minimum_action_program": [
+    "WAIT_FOR_AND_BIND_INDEPENDENT_FROZEN_DISPATCH_RECOMPUTATION__DO_NOT_BLOCK_CONSTRUCTIVE_WORK_ON_QUEUE",
+    "VERIFY_THE_EXISTING_LEGACY_VISIBLE_PARAMETER_INVERTER_AGAINST_EXACT_PINNED_BUILD_DESCRIPTION_OUTPUTS_AND_ALL_PUBLIC_CONFLICT_COMPATIBLE_COMPOSITIONS",
+    "BUILD_EXACT_LEGACY_WITNESS_CONSTRUCTORS_FOR_THE_LIVEBENCH_USED_SUBSET_AND_RUN_THE_PINNED_CHECKERS_AS_LOCAL_POSTCONDITIONS",
+    "PROVE_MULTI_CONSTRAINT_COMPOSITION_ON_SYNTHETIC_PUBLIC_SOURCE_GENERATIONS_WITH_ZERO_TERMINAL_ROWS",
+    "FREEZE_A_SUCCESSOR_THAT_BYPASSES_GENERIC_CAPABILITY_ACQUISITION_AND_GROUNDED_COMPOSITION_FOR_THIS_FORMAL_BENCHMARK_FAMILY",
+    "ONLY_THEN_USE_SEPARATE_AUTHORITY_FOR_FRESH_TERMINAL_EXECUTION"
+  ],
+  "contamination_firewall": {
+    "accidental_public_dataset_viewer_row_surface_occurred": true,
+    "policy": "QUARANTINE_ALL_SURFACED_ROW_LEVEL_PROMPT_CASE_ID_INSTRUCTION_AND_KWARG_CONTENT__DO_NOT_USE_FOR_REPAIR_DESIGN_OR_VERIFICATION",
+    "row_level_content_used_in_this_artifact": false,
+    "load_bearing_inputs": [
+      "EXACT_DATASET_IDENTITY_AND_HASH",
+      "RELEASE_DATE_METADATA_RANGE",
+      "PINNED_SCORER_ROUTER_SOURCE",
+      "PUBLIC_LIVEBENCH_PAPER_GENERATION_CONTRACT",
+      "PUBLIC_PINNED_LEGACY_CHECKER_SOURCE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_PASS_PROVED",
+    "NO_132_FROZEN_CASES_PROVED_PASSING",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE_AUTHORIZED",
+    "NO_CLAIM_QUEUED_PUBLIC_RUNNER_JOBS_HAVE_PASSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
