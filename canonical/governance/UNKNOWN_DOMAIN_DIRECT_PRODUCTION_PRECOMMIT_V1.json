@@ -1,0 +1,129 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_PRODUCTION_PRECOMMIT_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_PRE_PRODUCTION__QUALIFICATION_PENDING__NO_AUTHORITY__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "authorized_leaves_if_later_activated": [
+    "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+    "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS"
+  ],
+  "exact_subject": {
+    "candidate_v1": {
+      "path": "canonical/runtime/unknown_domain_direct_candidate_v1.py",
+      "git_blob_sha": "a2a77269a8175ce315b466035049da0f761b8734",
+      "credit": 0
+    },
+    "candidate_v2": {
+      "path": "canonical/runtime/unknown_domain_direct_candidate_v2.py",
+      "git_blob_sha": "4470716f95a559a700e461262df909ae19a41651"
+    },
+    "candidate_v2_preexposure": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_CANDIDATE_V2_PREEXPOSURE_V1.json",
+      "git_blob_sha": "77018decd79e13168d14e2e5ed6ee319fa79d83c"
+    },
+    "candidate_v2_qualification": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_CANDIDATE_V2_QUALIFICATION_V1.json",
+      "git_blob_sha": "a3574e1b8b2c33c0265c018dbb4872410e41de24"
+    },
+    "evaluator_family": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EVALUATOR_FAMILY_V1.json",
+      "git_blob_sha": "52090daf78d12020af48c1b6ffaea056d9029e1b"
+    },
+    "hidden_scorer": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py",
+      "git_blob_sha": "e8cf5d1b5d311644725a751c15e6235958fb587d"
+    },
+    "generator_v2_freeze": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_GENERATOR_FREEZE_V2.json",
+      "git_blob_sha": "6bf6042a7a36c12d6d5ebfc5d16ea23ed2befbb6"
+    },
+    "generator_v2": {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py",
+      "git_blob_sha": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8"
+    },
+    "execution_harness_freeze": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EXECUTION_HARNESS_FREEZE_V1.json",
+      "git_blob_sha": "3e3a87962c13ad4c76621508763fab74df25cb44"
+    },
+    "execution_harness": {
+      "path": "canonical/runtime/unknown_domain_direct_execution_harness_v1.py",
+      "git_blob_sha": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+    }
+  },
+  "atomic_one_use_basis": {
+    "verification_receipt_path": "canonical/verification/LIVEBENCH_SHADOW_ATOMIC_CLAIM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_receipt_git_blob_sha": "e436fa6bcd0c37e1e16c3524e05a876843945904",
+    "verification_run_id": 37185639140,
+    "primitive": "GITHUB_CREATE_REFERENCE",
+    "repository_class": "moxnixmdj/verification-capsule-runner",
+    "first_create_success_http_status": 201,
+    "duplicate_create_http_status": 422,
+    "claim_namespace": "refs/heads/unknown-domain-direct-claims/",
+    "claim_key_rule": "sha256_of_exact_execution_lease",
+    "required_behavior": "FIRST_201_IS_GLOBAL_LINEARIZATION_POINT__ANY_NON_201_ABORTS_BEFORE_PRODUCTION_BEACON_OR_CASE_GENERATION"
+  },
+  "required_order": [
+    "INDEPENDENT_V2_QUALIFICATION_RECEIPT_BOUND",
+    "CURRENT_EXACT_SUBJECT_BLOBS_RECHECKED",
+    "PREDICATE_LOCAL_ACTIVATION_CREATED_WITH_GLOBAL_FRESH_REALITY_FALSE",
+    "PREDICATE_LOCAL_ACTIVATION_INDEPENDENTLY_VERIFIED",
+    "POINT_OF_USE_PREFLIGHT_RECHECKS_ALL_EXACT_BLOBS_AND_ZERO_PRODUCTION_CASES",
+    "DERIVE_ONE_EXECUTION_LEASE_DIGEST",
+    "CREATE_ATOMIC_GIT_REF_CLAIM_AND_REQUIRE_HTTP_201",
+    "ONLY_AFTER_201_GENERATE_POST_FREEZE_BEACON_AND_EVALUATOR_SECRET",
+    "GENERATE_EXACTLY_ONE_27_CASE_PRODUCTION_POPULATION",
+    "RUN_V2_CANDIDATE_THROUGH_FROZEN_HARNESS_ON_ALL_27_CASES",
+    "WRITE_IMMUTABLE_CASE_LEVEL_RESULTS",
+    "NO_REPLAY_REPLACEMENT_TUNING_OR_SECOND_PRODUCTION_POPULATION",
+    "SEPARATE_INDEPENDENT_RESULT_REDUCTION",
+    "SEPARATE_ACCEPTANCE_PROMOTION"
+  ],
+  "point_of_use_hard_gates": [
+    "V2_QUALIFICATION_INDEPENDENT_PASS",
+    "PRODUCTION_CASES_CONSUMED_EQUALS_0",
+    "PRODUCTION_BEACON_GENERATED_FALSE",
+    "CANDIDATE_MUTATION_AFTER_QUALIFICATION_FALSE",
+    "EXACT_GENERATOR_SCORER_HARNESS_BYTES_UNCHANGED",
+    "PERSISTENT_LEARNED_BYTES_EQUALS_0",
+    "EXTERNAL_FRONTIER_MODEL_CALLS_EQUALS_0",
+    "EXTERNAL_LEARNED_CAPABILITY_CALLS_EQUALS_0",
+    "INCREMENTAL_SPEND_USD_EQUALS_0",
+    "GLOBAL_FRESH_REALITY_FALSE",
+    "AUTHORIZED_PREDICATE_SET_EXACTLY_UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "AUTHORIZED_LEAF_SET_EXACTLY_TWO_FROZEN_LEAVES"
+  ],
+  "authority": {
+    "execution": false,
+    "predicate_local_fresh_reality": false,
+    "global_fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "hard_nonclaims": [
+    "THIS_PRECOMMIT_DOES_NOT_AUTHORIZE_PRODUCTION_CASE_GENERATION",
+    "THIS_PRECOMMIT_DOES_NOT_CREATE_A_ONE_USE_CLAIM",
+    "THIS_PRECOMMIT_DOES_NOT_CLAIM_V2_QUALIFICATION_HAS_PASSED",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_OR_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "preflight_firewall": {
+    "runtime": {
+      "path": "canonical/runtime/unknown_domain_direct_production_preflight_v1.py",
+      "git_blob_sha": "e1365ccdba308c529f182797cf68075b2f1dc07c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_unknown_domain_direct_production_preflight_v1.py",
+      "git_blob_sha": "c81a5a16b99cbaf4ae5f8d26f173a18f0da20928"
+    },
+    "semantics": "READY_MEANS_READY_ONLY_FOR_ATOMIC_ONE_USE_CLAIM__NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
+  }
+}
