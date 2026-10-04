@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_GITHUB_CODESPACES_ACCOUNT_CLASS_CONNECTOR_OBSERVATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CONNECTOR_OBSERVATION__PERSONAL_GITHUB_FREE_PLAN_CLASS_EVIDENCE__ZERO_CREDIT",
+  "connected_github": {
+    "login": "moxnixmdj",
+    "account_type": "PERSONAL_USER_ACCOUNT",
+    "source": "GitHub connector list_installed_accounts/get_user_login"
+  },
+  "gmail_observation": {
+    "provider": "GitHub",
+    "subject": "[GitHub] You have used 90% of the Actions storage included for the moxnixmdj account",
+    "observed_fact": "EMAIL_STATES_PLAN_INCLUDES_0_5_GB_ACTIONS_STORAGE_PER_MONTH_AT_NO_EXTRA_COST",
+    "interpretation_against_current_github_docs": "MATCHES_GITHUB_FREE_PERSONAL_PLAN__NOT_GITHUB_PRO",
+    "exact_message_id": "1a1041c00a9bdba1"
+  },
+  "current_public_plan_mapping": {
+    "github_free_actions_storage_mb": 500,
+    "github_pro_actions_storage_gb": 1,
+    "github_free_codespaces_core_hours_per_month": 120,
+    "github_pro_codespaces_core_hours_per_month": 180
+  },
+  "deduction": "CONNECTED_ACCOUNT_IS_PERSONAL_AND_CURRENT_PLAN_CLASS_IS_GITHUB_FREE__THEREFORE_INCLUDED_CODESPACES_COMPUTE_ALLOWANCE_CLASS_IS_120_CORE_HOURS_PER_MONTH",
+  "hard_nonclaims": [
+    "NO_CLAIM_REMAINING_CODESPACES_CORE_HOURS",
+    "NO_CLAIM_CODESPACES_8_CORE_MACHINE_IS_AVAILABLE_FOR_MOXNIXMDJ_BRAIN",
+    "NO_CLAIM_PAYMENT_METHOD_IS_ABSENT",
+    "NO_CLAIM_BUDGET_STOP_IS_CONFIGURED",
+    "NO_CLAIM_CODESPACE_CAN_BE_CREATED_NOW",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
