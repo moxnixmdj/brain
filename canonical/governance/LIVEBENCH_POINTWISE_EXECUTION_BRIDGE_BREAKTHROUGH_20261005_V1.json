@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_POINTWISE_EXECUTION_BRIDGE_BREAKTHROUGH_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_CANDIDATE_BREAKTHROUGH__POINTWISE_THEOREM_NOW_HAS_BOUNDED_PARTIAL_CANDIDATE_SEARCH_AND_FAIL_CLOSED_CERTIFICATION_BRIDGE__INDEPENDENT_EXACT_RUNNER_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem_deleted": "THE_POINTWISE_OPTIMALITY_REDUCTION_PREVIOUSLY_ASSUMED_A_CANDIDATE_RESPONSE_WITHOUT_AN_EXECUTABLE_WAY_TO_FIND_THE_BEST_PARTIAL_RESPONSE_WHEN_THE_FULL_CHECKER_CONJUNCTION_IS_UNSAT",
+  "key_observation": {
+    "historical_max_checker_count_per_case": 5,
+    "nonempty_relaxation_upper_bound": 31,
+    "formula": "2^5-1",
+    "implication": "EVERY_CHECKER_SUBSET_CAN_BE_USED_AS_A_VISIBLE_ONLY_CONSTRUCTION_TARGET_AT_SMALL_BOUNDED_COST__THEN_EVERY_EMITTED_RESPONSE_CAN_BE_POSTVALIDATED_AGAINST_THE_FULL_CASE"
+  },
+  "construction": {
+    "relaxed_candidate_search": {
+      "path": "canonical/runtime/livebench_legacy15_relaxed_candidate_search_v1.py",
+      "git_blob_sha": "bf2e6c466599757eb1f31ec0fb5babf7d97d4a63",
+      "commit": "6ee1f44b8d45d0f225f831b2770c2ac34185a209",
+      "test_path": "canonical/tests/test_livebench_legacy15_relaxed_candidate_search_v1.py",
+      "test_git_blob_sha": "04a1e8efee0e70b4af57db191343a4b6e7b27b68",
+      "test_commit": "08fcfaf8035d6bb372632f1ab981c0ab12b5e861",
+      "rule": "ENUMERATE_ALL_NONEMPTY_SUBSETS_DESCENDING_BY_CARDINALITY__RUN_THE_EXISTING_VISIBLE_ONLY_CANDIDATE_GENERATOR_ON_EACH__DEDUPLICATE_RESPONSES__ADD_MINIMAL_BASELINES__CAP_TOTAL_POOL"
+    },
+    "pointwise_search_bridge": {
+      "path": "canonical/runtime/livebench_legacy15_pointwise_search_v1.py",
+      "git_blob_sha": "da7b195a0fcb4aa7ad2b2a44cbf927a2525a8ec8",
+      "commit": "4517189d3ec3c853475e3ada04c5a124521e2b1e",
+      "test_path": "canonical/tests/test_livebench_legacy15_pointwise_search_v1.py",
+      "test_git_blob_sha": "fbcacc4cd1bd51124522b2e436f7d4d839952f3d",
+      "test_commit": "11dad356cdb3cec4a21c45f949d7585f31d80378",
+      "rule": "EXACTLY_POSTVALIDATE_EVERY_CANDIDATE_AGAINST_ALL_VISIBLE_CONTRACTS__SELECT_MAX_EXACT_PUBLIC_SCORE__THEN_REQUIRE_COMPLETE_NEXT_CARDINALITY_SEMANTIC_UNSAT_CERTIFICATION"
+    },
+    "semantic_certificate_kernel": {
+      "path": "canonical/runtime/livebench_legacy15_pointwise_certificate_v1.py",
+      "git_blob_sha": "b8f9d0c9a0b0c9f78769cb9534ee4e2c61481fd8"
+    },
+    "slot_feasibility_kernel": {
+      "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+      "git_blob_sha": "abcd0aac17dc7f0be70c6ac37855d5ef6a87ca1f"
+    }
+  },
+  "concrete_case_closed_structurally": {
+    "contracts": [
+      "length_constraints:nth_paragraph_first_word(first_word=alpha)",
+      "keywords:forbidden_words(alpha)"
+    ],
+    "full_conjunction": "PROVED_UNSAT",
+    "prior_full_conjunction_generator_behavior": "NO_CANDIDATES",
+    "new_search_behavior": "GENERATE_CANDIDATES_FROM_EACH_SINGLE_CHECKER_RELAXATION__FULL_POSTVALIDATION_CAN_ACHIEVE_ONE_TRUE_CHECKER",
+    "pointwise_proof": "THE_ONLY_SIZE_2_SUBSET_IS_THE_FULL_PAIR_AND_THE_SLOT_FEASIBILITY_KERNEL_PROVES_IT_UNSAT__THEREFORE_ONE_TRUE_CHECKER_IS_MAXIMAL",
+    "exact_score": "1/4"
+  },
+  "complexity": {
+    "maximum_relaxations_per_case": 31,
+    "default_candidates_per_relaxation": 16,
+    "default_total_candidate_cap": 512,
+    "maximum_next_cardinality_unsat_subsets_per_pointwise_certificate": 10,
+    "asymptotic_statement": "FIXED_SMALL_FINITE_SEARCH_UNDER_THE_FROZEN_K_LE_5_GENERATOR_BOUND"
+  },
+  "critical_next_step": "RUN_THE_BRIDGE_WITH_EXACT_PINNED_CHECKER_BYTES_OVER_THE_PUBLIC_SYNTHETIC_COLLISION_SIGNATURE_AND_NUMERIC_STRUCTURAL_DOMAIN__COLLECT_ONLY_FAIL_CLOSED_UNRESOLVED_SUBSETS__EXTEND_THE_SOUND_UNSAT_KERNEL_OR_CANDIDATE_CONSTRUCTORS_ONLY_FOR_THOSE_RESIDUALS__THEN_INDEPENDENTLY_REPLAY_EXACT_BYTES",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CURRENT_CANDIDATE_POOL_IS_YET_COMPLETE_FOR_EVERY_SATISFIABLE_SUBSET",
+    "NO_CLAIM_THE_CURRENT_SEMANTIC_UNSAT_KERNEL_IS_COMPLETE",
+    "NO_TERMINAL_ROW_CONTENT_CASE_ID_HIDDEN_KWARG_COMPARATOR_RESPONSE_OR_TERMINAL_FREQUENCY_WAS_USED",
+    "NO_FRESH_TERMINAL_EXECUTION_AUTHORIZED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
