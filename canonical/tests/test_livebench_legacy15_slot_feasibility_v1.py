@@ -81,3 +81,43 @@ def test_unknown_or_structurally_conflicting_ids_fail_closed():
         {"instruction_id": "length_constraints:number_words", "slots": {"num_words": 100, "relation": "at least"}},
     ])
     assert conflict["status"] == "FAIL_CLOSED_ID_CONFLICT"
+
+
+def test_mandatory_section_splitter_forbidden_collision_is_certified():
+    contracts = [
+        {
+            "instruction_id": f.SECTION,
+            "slots": {"section_spliter": "Section", "num_sections": 3},
+        },
+        {
+            "instruction_id": f.FORBIDDEN,
+            "slots": {"forbidden_words": ["section", "delta"]},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["archetype"] == "PLAIN"
+    assert out["hard_unsat_reasons"] == [
+        "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:section"
+    ]
+
+
+def test_mandatory_postscript_marker_forbidden_collision_is_certified():
+    # This is a checker-semantics test for arbitrary visible contracts. The
+    # historical generator does not need to emit the forbidden word "p" for
+    # the implication itself to be valid.
+    contracts = [
+        {
+            "instruction_id": f.POSTSCRIPT,
+            "slots": {"postscript_marker": "P.S."},
+        },
+        {
+            "instruction_id": f.FORBIDDEN,
+            "slots": {"forbidden_words": ["p"]},
+        },
+    ]
+    out = f.classify_visible_contracts(contracts)
+    assert out["status"] == "PROVED_UNSAT"
+    assert out["hard_unsat_reasons"] == [
+        "MANDATORY_POSTSCRIPT_MARKER_CONTAINS_FORBIDDEN_WORD:p"
+    ]
