@@ -107,3 +107,27 @@ def test_required_forbidden_same_word_uses_satisfiable_substring_escape():
     assert out["candidates"]
     assert any(re.search("rock", x, re.I) for x in out["candidates"])
     assert all(re.search(r"\\brock\\b", x, re.I) is None for x in out["candidates"])
+
+
+def test_quoted_bullets_keep_frozen_multiline_anchor_visible():
+    out = g.generate([
+        c("startend:quotation"),
+        c("detectable_format:number_bullet_lists", num_bullets=2),
+    ])
+    assert out["candidates"]
+    for x in out["candidates"]:
+        assert x.startswith('"') and x.endswith('"')
+        assert len(re.findall(r"^\\s*\\*[^\\*].*$", x, flags=re.MULTILINE)) == 2
+
+
+def test_postscript_tail_uses_forbidden_safe_filler():
+    out = g.generate([
+        c("keywords:forbidden_words", forbidden_words=["note"]),
+        c("detectable_content:postscript", postscript_marker="P.S."),
+        c("startend:end_checker", end_phrase="Any other questions?"),
+    ])
+    assert out["candidates"]
+    for x in out["candidates"]:
+        assert re.search(r"\\bnote\\b", x, re.I) is None
+        assert "P.S." in x
+        assert x.rstrip().endswith("Any other questions?")
