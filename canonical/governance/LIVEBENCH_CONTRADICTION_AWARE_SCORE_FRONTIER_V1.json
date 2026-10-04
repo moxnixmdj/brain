@@ -99,15 +99,55 @@
     ],
     "source_mismatch_to_resolve": {
       "public_paper_caption_subset_count": 16,
+      "public_paper_row_checkmark_count": 15,
       "executable_terminal_distinct_union_count": 15,
-      "historical_generator_source_constraint_count": 25,
-      "interpretation": "SUPPORT_IDENTITY_IS_KNOWN__THE_EXACT_TERMINAL_GENERATION_LAW_IS_NOT_YET IDENTIFIED FROM PUBLIC SOURCE BY THIS ARTIFACT"
+      "historical_preselection_generator_source_constraint_count": 25,
+      "current_resolution": "ROW_LEVEL_PUBLISHED_SELECTION_AND_TERMINAL_COMMITMENT AGREE_ON_THE_EXACT_15_SUPPORT__THE_REMAINING_BINDING_TASK_IS_TO_VERIFY_THAT_THE_SELECTED_SUPPORT_WAS_FED_THROUGH_THE_PUBLISHED_2_TO_5_PLUS_DECONFLICTION_GENERATION_LAW"
     },
     "theorem": "POPULATION_SIZE_PLUS_DISTINCT_ACTIVE_UNION_DOES_NOT_IMPLY_THE_REQUIRED_q_BOUND_OR_ANY_ACCEPTANCE_SCORE_FLOOR__AN_ADVERSARIAL_CASE_DISTRIBUTION_CAN CONCENTRATE_MASS_ON_LOW_SCORE_CONFLICT_COMPATIBLE_PARAMETERIZATIONS",
     "minimal_remaining_cut": [
-      "RECOVER_AND_INDEPENDENTLY_BIND_THE_EXACT_SELECTED_LIVEBENCH_GENERATION_LAW_WITHOUT_READING_TERMINAL_ROWS",
-      "OR_EXECUTE_A_PRECOMMITTED_CLEAN_EQUIVALENT_EVALUATION_GENERATED_BY_AN INDEPENDENTLY_JUSTIFIED_EQUIVALENT_LAW"
+      "INDEPENDENTLY_BIND_THE_RECONSTRUCTED_SELECTED15_2_TO_5_DECONFLICTED_GENERATION_LAW",
+      "EXECUTE_THE_ALREADY_PRECOMMITTED_FROZEN_CANDIDATE_ON_A_FRESH_POST_FREEZE_POPULATION_FROM_THAT_LAW",
+      "PROMOTE_ONLY_IF_THE_CLEAN_SCORE_LOWER_BOUND_OR_CLEAN_EQUIVALENT_RESULT_MEETS_THE_EXACT_COMPARATOR"
     ],
     "scheduler_consequence": "STOP_TREATING_7424_OF_7424_FULL_SCORE_AS_THE_ACCEPTANCE_CUT__USE_IT ONLY_AS_A_FALSIFICATION_AND_REPAIR_LEDGER"
+  },
+  "reconstructed_selected_support_generation_law": {
+    "status": "PUBLIC_SOURCE_PLUS_TERMINAL_SUPPORT_RECONSTRUCTION__INDEPENDENT_BINDING_STILL_REQUIRED",
+    "support": {
+      "cardinality": 15,
+      "identity_source": "PUBLISHED_LIVEBENCH_TABLE_ROW_CHECKMARKS_MATCH_EXISTING_TERMINAL_ACTIVE15_COMMITMENT",
+      "caption_inconsistency": "PAPER_CAPTION_SAYS_16_BUT_ROW_LEVEL_CHECKMARKS_AND_TERMINAL_COMMITMENT_BOTH_RESOLVE_TO_15"
+    },
+    "sampling": {
+      "initial_instruction_count": "UNIFORM_INTEGER_2_TO_5",
+      "identities": "UNIFORM_WITHOUT_REPLACEMENT_FROM_SELECTED_SUPPORT",
+      "conflict_handling": "HISTORICAL_LIVEBENCH_RANDOM_CONFLICT_PAIR_REMOVAL",
+      "parameter_generation": "FROZEN_IFEVAL_BUILD_DESCRIPTION_RANDOM_PARAMETER_GENERATION"
+    },
+    "evidence_boundary": "NO_TERMINAL_ROW_FREQUENCIES_OR_COMBINATIONS_USED"
+  },
+  "known_impossibility_mass_bound": {
+    "status": "CONDITIONAL_EXACT_COMBINATORIAL_BOUND_UNDER_RECONSTRUCTED_SELECTED_SUPPORT_LAW",
+    "counterexample": [
+      "length_constraints:number_sentences",
+      "startend:end_checker"
+    ],
+    "derivation": {
+      "pair_in_initial_draw_probability": "AVG_{k in {2,3,4,5}}[C(13,k-2)/C(15,k)] = 1/21",
+      "sentence_less_than_probability": "1/2",
+      "sentence_threshold_one_probability": "1/20",
+      "impossible_parameterization_pre_deconfliction_probability": "1/840",
+      "deconfliction_monotonicity": "CONFLICT_REMOVAL_CAN_DELETE_PAIR_MEMBERS_BUT_CANNOT_CREATE_THE_PAIR__POST_DECONFLICTION_MASS_LE_1/840",
+      "maximum_per_row_deficit_from_full_score": "3/4",
+      "maximum_population_score_penalty": "(3/4)*(1/840)=1/1120"
+    },
+    "numeric": {
+      "impossible_mass_upper_bound": 0.0011904761904761906,
+      "maximum_score_penalty": 0.0008928571428571428,
+      "maximum_score_penalty_percentage_points": 0.08928571428571429
+    },
+    "consequence": "THIS_KNOWN_LOGICAL_CONTRADICTION_INVALIDATES_UNIVERSAL_FULL_SCORE_BUT_IS_ORDERS_OF_MAGNITUDE_TOO_SMALL_TO_BLOCK_THE_0_6573775_ACCEPTANCE_THRESHOLD_BY_ITSELF",
+    "hard_nonclaim": "DOES_NOT_BOUND_OTHER_RUNTIME_OR_CHECKER_FAILURE_CLASSES"
   }
 }
