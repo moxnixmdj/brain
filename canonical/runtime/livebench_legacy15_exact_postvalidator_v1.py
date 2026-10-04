@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import livebench_legacy15_composition_archetypes_v1 as archetypes
+from canonical.runtime import livebench_legacy15_exact_contract_checker_v1 as contract_checker
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_EXACT_POSTVALIDATOR_V1"
 PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
@@ -57,6 +58,11 @@ def _normalize_contracts(
             raise ExactPostvalidationError(
                 "SLOTS_MAPPING_REQUIRED:" + str(row.get("instruction_id") or "")
             )
+        try:
+            _iid, normalized_slots = contract_checker.validate_contract(row)
+        except contract_checker.ExactContractCheckerError as exc:
+            raise ExactPostvalidationError("CONTRACT_SHAPE_INVALID:" + str(exc)) from exc
+        row["slots"] = normalized_slots
     return rows
 
 
