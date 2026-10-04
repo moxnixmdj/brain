@@ -1,4 +1,6 @@
-import re\n\nfrom canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
+import re
+
+from canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
 
 
 def _env(s: str) -> str:
