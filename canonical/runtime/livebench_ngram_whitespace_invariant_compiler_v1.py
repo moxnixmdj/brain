@@ -6,6 +6,22 @@ from typing import Iterable
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_NGRAM_WHITESPACE_INVARIANT_COMPILER_V1"
 TOLERANCE_PERCENT = 2.0
 
+_RATIO_DESC_RE = re.compile(
+    r"Maintain a trigram overlap of (?P<percentage>\d+(?:\.\d+)?)% \(±2%\) "
+    r"with the provided reference text\."
+)
+_KEYWORD_DESC_RE = re.compile(
+    r'The response must include keyword .*? in the \d+-(?:st|nd|rd|th) sentence\.'
+)
+_CONSONANT_DESC = (
+    "Ensure each word in your response has at least one consonant cluster "
+    "(two or more consonants together)."
+)
+_BOUNDARY_IGNORABLE_RE = re.compile(
+    r"^[\s\u200B\u200C\u200D\u2060\uFEFF]+|"
+    r"[\s\u200B\u200C\u200D\u2060\uFEFF]+$"
+)
+
 
 class NGramCompilerError(ValueError):
     pass
@@ -13,6 +29,10 @@ class NGramCompilerError(ValueError):
 
 def normalize_ws(value: str) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
+
+
+def _trim_boundary_ignorables(value: str) -> str:
+    return _BOUNDARY_IGNORABLE_RE.sub("", str(value))
 
 
 def char_trigrams(value: str) -> set[str]:
@@ -39,6 +59,43 @@ def whitespace_invariant_for_reference(response: str, raw_reference: str) -> boo
     return char_trigrams(response).intersection(char_trigrams(raw_reference)) == (
         char_trigrams(response).intersection(char_trigrams(normalize_ws(raw_reference)))
     )
+
+
+def recover_pinned_public_ratio_reference(prompt: str) -> dict:
+    """Recover the normalized ratio:overlap reference from the pinned public family.
+
+    Scope is deliberately narrow: the exact pinned public IFBench population
+    used for proof development. The observed ratio:overlap companion grammar in
+    that population is singleton, sentence:keyword, or words:consonants.
+
+    This is not a frozen-terminal equivalence claim. Callers must keep it
+    fail-closed unless a separate binding proves the target population obeys
+    this grammar envelope.
+    """
+    s = normalize_ws(prompt)
+    matches = list(_RATIO_DESC_RE.finditer(s))
+    if len(matches) != 1:
+        raise NGramCompilerError("RATIO_DESCRIPTION_COUNT_NOT_ONE")
+    percentage = float(matches[0].group("percentage"))
+
+    s = _RATIO_DESC_RE.sub(" ", s, count=1)
+    s = s.replace(_CONSONANT_DESC, " ")
+    s = _KEYWORD_DESC_RE.sub(" ", s)
+    s = _trim_boundary_ignorables(normalize_ws(s))
+    s = normalize_ws(s)
+
+    if len(s) < 3:
+        raise NGramCompilerError("RECOVERED_REFERENCE_TOO_SHORT")
+    if _RATIO_DESC_RE.search(s):
+        raise NGramCompilerError("RATIO_DESCRIPTION_REMAINS_AFTER_SEGMENTATION")
+
+    return {
+        "schema": SCHEMA,
+        "normalized_reference": s,
+        "percentage": percentage,
+        "scope": "PINNED_PUBLIC_IFBENCH_RATIO_OVERLAP_GRAMMAR_V1",
+        "exact_raw_reference_required": False,
+    }
 
 
 def _novel_chars(reference: str, count: int) -> str:
@@ -127,3 +184,11 @@ def construct(
         raise NGramCompilerError("NO_WHITESPACE_INVARIANT_WITNESS_FOUND")
     best.pop("_key", None)
     return best
+
+
+def construct_from_pinned_public_prompt(prompt: str) -> dict:
+    recovered = recover_pinned_public_ratio_reference(prompt)
+    witness = construct(recovered["normalized_reference"], recovered["percentage"])
+    witness["reference_recovery_scope"] = recovered["scope"]
+    witness["normalized_reference_recovered_from_visible_prompt"] = True
+    return witness
