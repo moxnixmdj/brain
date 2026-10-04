@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_HOLDOUT_REQUEST_V1",
+  "episode_id": "H20_RUBY_JOBS",
+  "difficulty": "NEW_ECOSYSTEM",
+  "query_action": {
+    "action_id": "H20Q11",
+    "source_id": "RUBYGEMS_SEARCH",
+    "query_family": "FRESH_HOLDOUT_BEHAVIOR_V20",
+    "query": "Ruby background job processing Redis workers queues"
+  },
+  "source": {
+    "source_id": "RUBYGEMS_SEARCH",
+    "provider": "rubygems",
+    "upstream_group": "RUBYGEMS_PUBLIC_API",
+    "ecosystem": "rubygems"
+  },
+  "target_identity_present": false
+}
