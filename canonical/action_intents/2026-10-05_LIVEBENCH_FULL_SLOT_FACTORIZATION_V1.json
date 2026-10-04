@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "LIVEBENCH-FULL-SLOT-FACTORIZATION-20261005-V1",
+  "date": "2026-10-05",
+  "status": "PROPOSED__CRITICAL_PATH__ZERO_REALITY__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "f5f6ca4ae7285cac0ef10e653a8f89c1ae4ff36c",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "GENERAL_REASONING_AND_INSTRUCTION_FOLLOWING",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "action_kind": "PROVE_FULL_PUBLIC_SLOT_DOMAIN_FACTORS_THROUGH_A_FINITE_CHECKER_SEMANTIC_QUOTIENT",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::LIVEBENCH_IF_GE_65_7::FULL_PUBLIC_GENERATOR_SLOT_QUOTIENT_COMPLETENESS",
+  "highest_leverage_now": true,
+  "current_truth": {
+    "canonical_main_commit": "f5f6ca4ae7285cac0ef10e653a8f89c1ae4ff36c",
+    "independent_pointwise_envelope_cases": 12489,
+    "independent_pointwise_exact_optimum_matches": 12489,
+    "terminal_rows_read": 0,
+    "acceptance_credit": 0,
+    "remaining_load_bearing_gap": "PROVE_THE_VERIFIED_FINITE_ENVELOPE_OR_A_SMALL_SUCCESSOR_BASIS_IS_A_COMPLETE_CHECKER_SEMANTIC_QUOTIENT_OF_EVERY_PUBLIC_GENERATOR_ADMITTED_ACTIVE15_VISIBLE_CONTRACT_TUPLE"
+  },
+  "recursive_obs": {
+    "real_outcome": "Delete the raw slot-Cartesian explosion without weakening the LiveBench predicate.",
+    "obs_goal": {
+      "surviving_necessity": "UNIVERSAL_ACTIVE15_VISIBLE_CONTRACT_COVERAGE"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "928-set exact structural identity partition",
+        "192-state exact reachable lexical quotient",
+        "12489-case independent exact pointwise envelope pass",
+        "case-independent composer V2",
+        "pointwise-optimal planner"
+      ],
+      "surviving_gap": "FORMAL_CROSS-DIMENSION_FACTORING_AND_EXACT_REDUCED_BASIS_VERIFICATION"
+    },
+    "obs_blocker": {
+      "surviving_causal_blocker": "THE_CURRENT_RECEIPT_TESTS_MANY_DIMENSIONS_EXHAUSTIVELY_BUT_DOES_NOT_YET_PROVE_THEIR_CARTESIAN_CROSS_PRODUCT_IS_SEMANTICALLY_REDUNDANT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE_RAW_CARTESIAN_ENUMERATION",
+        "QUOTIENT_BY_CHECKER_SEMANTICS",
+        "USE_MONOTONIC_BOUNDARIES",
+        "PROVE_CONSTRUCTOR_NONINTERFERENCE",
+        "VERIFY_ONLY_THE_REDUCED_BASIS"
+      ],
+      "selected_surviving_route": "FULL_SLOT_FACTORIZATION_V1",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "falsification_condition": "ANY_PUBLIC_GENERATOR_ADMITTED_SLOT_TUPLE_NOT_MAPPED_TO_A_PROVED_EQUIVALENCE_CLASS__ANY_CONSTRUCTOR_LITERAL_OUTSIDE_THE_LEXICAL_COLLISION_MODEL__ANY_REDUCED_BASIS_EXACT_CHECKER_FAILURE"
+    },
+    "why_selected_route_is_fastest_sufficient": "It turns an enormous raw Cartesian product into a finite basis by proving which dimensions are exact finite categories, which are monotone threshold classes, and which arbitrary-text dimensions are checker-equivalent."
+  },
+  "proof_targets": [
+    "PROVE_WORD_LESS_THAN_THRESHOLDS_COLLAPSE_TO_THE_100_WORD_BOUNDARY_BECAUSE_EVERY_UNPADDED_COMPATIBLE_CONSTRUCTION_IS_STRICTLY_BELOW_100_WORDS",
+    "PROVE_WORD_AT_LEAST_THRESHOLDS_ARE_CONSTRUCTIVELY_TOTAL_BY_MONOTONE_PADDING_PLUS_FINAL_EXACT_WORD_COUNT_GUARD",
+    "PROVE_SENTENCE_LESS_THAN_THRESHOLDS_GE_2_COLLAPSE_TO_THE_LT2_BOUNDARY_AND_LT1_IS_INTRINSICALLY_UNSAT_UNDER_STRICT_NONEMPTY_EVALUATION",
+    "PROVE_SENTENCE_AT_LEAST_THRESHOLDS_ARE_MONOTONE_UNDER_THE_PINNED_CONSTRUCTOR",
+    "PROVE_REPEAT_PROMPT_TEXT_IS_ONE_SUCCESS_EQUIVALENCE_CLASS_BECAUSE_REPEAT_PROMPT_CONFLICTS_WITH_EVERY_ACTIVE15_FAMILY_EXCEPT_EXISTENCE_AND_TITLE_AND_THE_CONSTRUCTOR_PREFIXES_THE_EXACT_VISIBLE_BASE",
+    "BIND_THE_192_REACHABLE_LEXICAL_SIGNATURES_AS_COMPLETE_FOR_ALL_GENERATED_FORBIDDEN_LITERAL_INTERACTIONS",
+    "ENUMERATE_THE_REDUCED_STRUCTURAL_NUMERIC_CATEGORICAL_BASIS_FOR_ALL_928_COMPATIBLE_ID_SETS"
+  ],
+  "terminal_proof_control": {
+    "proof_obligation": "Universal checker-semantic quotient coverage of every public-generator-admitted active15 visible contract tuple.",
+    "hole_type": "DEDUCTIVE_FACTORIZATION_AND_FINITE_QUOTIENT_COMPLETENESS",
+    "expected_certificate_or_receipt": "Independent exact-byte public-runner verification of the reduced basis plus theorem invariants.",
+    "maximum_cheap_test_cost": "ZERO_TERMINAL_CASES__ZERO_INCREMENTAL_SPEND",
+    "contamination_risk": "NONE__PUBLIC_GENERATOR_AND_PUBLIC_CHECKER_SOURCE_ONLY",
+    "reversibility": "FULL",
+    "critical_path_relation": "Closes the explicit next_load_bearing_proof recorded by the latest independent LiveBench pointwise-envelope receipt."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
