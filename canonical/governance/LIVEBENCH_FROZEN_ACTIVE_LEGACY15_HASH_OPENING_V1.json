@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FROZEN_ACTIVE_LEGACY15_HASH_OPENING_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXISTING_TERMINAL_SET_DIGEST_OPENED_TO_EXACT_15_LEGACY_IDS__ZERO_NEW_TERMINAL_CASES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Resolve the public-paper 16-versus-15 inconsistency and reduce the exact frozen legacy scorer identity surface without reading any new terminal row content.",
+  "frozen_population": {
+    "population_count": 200,
+    "dispatch_verification": "canonical/verification/LIVEBENCH_FROZEN_POPULATION_DISPATCH_METADATA_VERIFICATION_20261004_V1.json",
+    "dispatch_result": "200_LEGACY_0_MODERN",
+    "new_terminal_cases_read_by_this_proof": 0
+  },
+  "existing_commitment": {
+    "receipt_path": "canonical/verification/LIVEBENCH_FIRST_DIRECT_ATTEMPT_TRUTH_RECEIPT_20261004_V1.json",
+    "receipt_git_blob_sha": "0ddffd52cd05b880964cf034527aabddb255baef",
+    "published_unmatched_instruction_id_set_sha256": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d",
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "runner_commit": "d8e6edd61fb1fbeedd856aa31cc202348e52529c",
+    "runner_path": "execute_livebench_if_threshold_v1.py",
+    "runner_git_blob_sha": "05d71d3d06ebac9b5d74eb31b137141e6b8797c2",
+    "hash_expression": "sha256(json.dumps(sorted(unknown)).encode()).hexdigest()"
+  },
+  "registry_binding": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_registry_path": "livebench/if_runner/instruction_following_eval/instructions_registry.py",
+    "legacy_registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "modern_registry_path": "livebench/if_runner/ifbench/instructions_registry.py",
+    "modern_registry_git_blob_sha": "adfed4832877566e62970257b50c6fa32c302fb2",
+    "legacy_registry_count": 25,
+    "legacy_modern_id_intersection_count": 0,
+    "consequence": "FOR_THE_VERIFIED_200_LEGACY_ROWS__THE_FIRST_RUN_UNKNOWN_SET_EQUALS_THE_DISTINCT_ACTIVE_LEGACY_INSTRUCTION_ID_UNION"
+  },
+  "public_paper_crosscheck": {
+    "source": "https://livebench.ai/livebench.pdf",
+    "table": "Table 4, PDF page 31",
+    "caption_claim": 16,
+    "visibly_checkmarked_livebench_rows": 15,
+    "truth_rule": "DO_NOT_USE_CAPTION_COUNT_AS_AUTHORITY_WHEN_THE_EXISTING_EXECUTABLE_COMMITMENT_OPENS_TO_THE_15_CHECKMARKED_IDENTITIES"
+  },
+  "active_legacy_instruction_ids": [
+    "keywords:existence",
+    "keywords:forbidden_words",
+    "length_constraints:number_paragraphs",
+    "length_constraints:number_words",
+    "length_constraints:number_sentences",
+    "length_constraints:nth_paragraph_first_word",
+    "detectable_content:postscript",
+    "detectable_format:number_bullet_lists",
+    "detectable_format:title",
+    "detectable_format:multiple_sections",
+    "detectable_format:json_format",
+    "combination:repeat_prompt",
+    "combination:two_responses",
+    "startend:end_checker",
+    "startend:quotation"
+  ],
+  "hash_opening": {
+    "serialization": "PYTHON_json.dumps(sorted(ids)).encode()__DEFAULT_SEPARATORS_ASCII",
+    "recomputed_sha256": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d",
+    "matches_existing_terminal_commitment": true,
+    "active_distinct_id_count": 15,
+    "cryptographic_assumption": "SHA256_COLLISION_RESISTANCE"
+  },
+  "scheduler_delta": [
+    "REDUCE_FROZEN_LIVEBENCH_LEGACY_CONSTRUCTIVE_IDENTITY_SURFACE_FROM_25_TO_15",
+    "DO_NOT_IMPLEMENT_THE_10_LEGACY_IDS_EXCLUDED_BY_THE_COMMITMENT_FOR_THIS_EXACT_FROZEN_PREDICATE",
+    "KEEP_PARAPHRASE_TOLERANT_VISIBLE_PARAMETER_RECOVERY_AND_MULTI_CONSTRAINT_COMPOSITION_AS_THE_ACTIVE_CONSTRUCTIVE_CUT",
+    "PRESERVE_SCORE_MASS_STOP_RULE_AT_EXACT_OPUS_RAW_MEAN_65_73775"
+  ],
+  "excluded_for_this_exact_frozen_predicate": [
+    "keywords:frequency",
+    "keywords:letter_frequency",
+    "language:response_language",
+    "detectable_content:number_placeholders",
+    "detectable_format:constrained_response",
+    "detectable_format:number_highlighted_sections",
+    "change_case:english_capital",
+    "change_case:english_lowercase",
+    "change_case:capital_word_frequency",
+    "punctuation:no_comma"
+  ],
+  "hard_nonclaims": [
+    "NO_CASE_FREQUENCIES_OR_CASE_LEVEL_INSTRUCTION_COMBINATIONS_ARE_INFERRED",
+    "NO_TERMINAL_PROMPT_RESPONSE_KWARG_OR_QUESTION_ID_IS READ",
+    "NO_LIVEBENCH_PASS_IS_PROVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "new_terminal_case_metadata_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
