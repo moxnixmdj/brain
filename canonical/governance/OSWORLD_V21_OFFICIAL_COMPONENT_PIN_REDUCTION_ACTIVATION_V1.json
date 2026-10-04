@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_GENERIC_IDENTITY_SEARCH_DELETIONS__SCHEDULING_ONLY__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "path": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_V1.json",
+    "git_blob_sha": "be3e5952330fd331768405a9dc2c384812415c7d"
+  },
+  "verification": {
+    "path": "canonical/verification/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "ddd50cd5fcf7762ebd8ad6b66fff3a6bfc149650",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1672,
+    "workflow_run_id": 37175225327,
+    "workflow_job_id": 111356352631,
+    "conclusion": "success"
+  },
+  "effects": {
+    "delete": [
+      "GENERIC_OSWORLD_V21_RELEASE_IDENTITY_SEARCH",
+      "GENERIC_OSWORLD_V21_TASK_COUNT_AND_TASK_REVISION_SEARCH",
+      "GENERIC_OSWORLD_V21_GATED_ASSET_REVISION_SEARCH",
+      "GENERIC_OSWORLD_V21_WEBSITE_REVISION_SEARCH",
+      "GENERIC_OSWORLD_V21_PROVIDER_IMAGE_IDENTITY_SEARCH"
+    ],
+    "preserve": [
+      "HUGGING_FACE_OSWORLD_GATED_ASSET_ACCOUNT_ACCESS",
+      "ANTHROPIC_EXACT_GITLAB_IDENTITY_OR_PROTOCOL_EQUIVALENCE",
+      "SELF_HOST_RUNTIME_AND_TOKEN_REACHABILITY",
+      "END_TO_END_PROTOCOL_EQUIVALENCE",
+      "OPUS_4_8_GRADER_ROUTE",
+      "BRAIN_SCORE"
+    ]
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "hard_rules": [
+    "OFFICIAL_RELEASE_COMPONENT_IDENTITY_DOES_NOT_PROVE_ANTHROPIC_EXACT_RUNTIME_IDENTITY",
+    "OFFICIAL_RELEASE_COMPONENT_IDENTITY_DOES_NOT_PROVE_BRAIN_SCORE",
+    "DO_NOT_REOPEN_FIVE_DELETED_GENERIC_IDENTITY_SEARCH_CLASSES_WITHOUT_MATERIAL_OFFICIAL_RELEASE_CHANGE",
+    "PRESERVE_EXISTING_OSWORLD_GITLAB_IDENTITY_RESIDUAL",
+    "ZERO_INCREMENTAL_SPEND",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_projection_verification_required": true
+}

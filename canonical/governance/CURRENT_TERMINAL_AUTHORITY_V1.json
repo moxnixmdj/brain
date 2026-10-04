@@ -1602,6 +1602,31 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
+    },
+    "osworld_v21_official_component_pin_reduction": {
+      "activation_path": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "f6d7cdc2924aaf91ea69fe5afccf584131a66355",
+      "subject_path": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_V1.json",
+      "subject_git_blob_sha": "be3e5952330fd331768405a9dc2c384812415c7d",
+      "verification_path": "canonical/verification/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "ddd50cd5fcf7762ebd8ad6b66fff3a6bfc149650",
+      "verifier_repository": "moxnixmdj/verification-capsule-runner",
+      "verifier_pull_request": 1672,
+      "workflow_run_id": 37175225327,
+      "workflow_job_id": 111356352631,
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_GENERIC_IDENTITY_SEARCH_DELETIONS__SCHEDULING_ONLY__ZERO_CREDIT",
+      "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false,
+      "preserved_residual": [
+        "HUGGING_FACE_OSWORLD_GATED_ASSET_ACCOUNT_ACCESS",
+        "ANTHROPIC_EXACT_GITLAB_IDENTITY_OR_PROTOCOL_EQUIVALENCE",
+        "SELF_HOST_RUNTIME_AND_TOKEN_REACHABILITY",
+        "END_TO_END_PROTOCOL_EQUIVALENCE",
+        "OPUS_4_8_GRADER_ROUTE",
+        "BRAIN_SCORE"
+      ]
     }
   },
   "canonical_proof_atom_basis": {

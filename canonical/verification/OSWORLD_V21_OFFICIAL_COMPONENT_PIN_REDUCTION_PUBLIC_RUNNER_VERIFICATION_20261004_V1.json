@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__OFFICIAL_V21_COMPONENT_IDENTITY__FIVE_GENERIC_IDENTITY_SEARCH_CLASSES_DELETABLE__COMPARATOR_RUNTIME_SCORE_OPEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_V1.json",
+    "git_blob_sha": "be3e5952330fd331768405a9dc2c384812415c7d"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1672,
+    "verifier_head_sha": "7098e0110aa9c7a3d7370a4bdf1054294bd97acf",
+    "merge_commit": "8e632077cb304fdb60f84fa9ae180702d98a3074",
+    "workflow_run_id": 37175225327,
+    "workflow_job_id": 111356352631,
+    "conclusion": "success"
+  },
+  "verified": {
+    "osworld_v21_tag_commit": "3d778a3c9a34a079316f70df023b166700445792",
+    "official_base_commit": "325ab352e2ff7410854bf8e3324c391bc60e7526",
+    "task_count": 108,
+    "task_revision": "0a1aadad95aa79b00b3783e717d865089ab06e26",
+    "task_hash_manifest_sha256": "sha256:c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb",
+    "gated_asset_revision": "384b3834faba5700a7b589e6cc181490c9808949",
+    "public_asset_revision": "3a140a3df8f351b22bb5b9526846f078e738777f",
+    "website_commit": "60c89fe6a8ed934668619d8d26132848239eb8ee",
+    "docker_artifact_sha256": "sha256:14b08aa7ba6c023ecb91d46de8df5de32af4d1d6bd75ea925519caf9677fc8b3",
+    "docker_runtime_image": "happysixd/osworld-docker@sha256:0e6497a9295647cf05bf2b2af522fdd79bdeba2737595259cab310a3bcf6baa9",
+    "aws_ami": "ami-01017272139e01feb",
+    "exact_task_hash_manifest_bytes_verified": true,
+    "website_tag_commit_verified": true,
+    "five_generic_identity_search_classes_deletable": true,
+    "comparator_runtime_score_residual_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANTHROPIC_USED_EVERY_OFFICIAL_V21_COMPONENT_BYTE_IDENTITY",
+    "NO_ANTHROPIC_EXACT_GITLAB_REVISION_IDENTITY_CLAIM",
+    "NO_RUNTIME_REACHABILITY_OR_PROTOCOL_EQUIVALENCE_CLAIM",
+    "NO_AWS_DOCKER_GUEST_EQUIVALENCE_CLAIM",
+    "NO_BRAIN_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
