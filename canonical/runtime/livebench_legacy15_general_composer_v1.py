@@ -136,7 +136,7 @@ def _apply_word_constraint(
     raise ComposeError("UNKNOWN_WORD_RELATION")
 
 
-def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> list[str]:
+def _common_lines(\n    constraints: list[dict[str, Any]],\n    required: list[str],\n    forbidden: list[str],\n) -> list[str]:
     lines: list[str] = []
     if _one(constraints, "detectable_format:title") is not None:
         lines.append("<<qz>>")
@@ -148,8 +148,17 @@ def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> lis
         n = int(s.get("num_sections"))
         if splitter not in {"Section", "SECTION"} or n < 1 or n > 5:
             raise ComposeError("SECTION_PARAMETER_DRIFT")
+        splitter_forbidden = any(
+            re.fullmatch(re.escape(word), splitter, flags=re.IGNORECASE)
+            for word in forbidden
+        )
         for i in range(1, n + 1):
-            lines.append(f"{splitter} {i}")
+            # The pinned SectionChecker accepts zero whitespace between the
+            # splitter and numeric index. If the splitter itself is a forbidden
+            # whole word, e.g. "section", "Section1" still counts as a section
+            # while destroying the trailing word boundary required by the
+            # pinned ForbiddenWords checker.
+            lines.append(f"{splitter}{'' if splitter_forbidden else ' '}{i}")
             lines.append("zxqv")
 
     bullets = _one(constraints, "detectable_format:number_bullet_lists")
@@ -242,7 +251,7 @@ def _compose_plain_or_sentence(
             raise ComposeError("LESS_THAN_ONE_SENTENCE_WORD_LOWER_BOUND")
         return ""
 
-    lines = _common_lines(constraints, required)
+    lines = _common_lines(constraints, required, forbidden)
     if not lines:
         lines.append("zxqv")
 
@@ -288,7 +297,7 @@ def _compose_star_paragraph(
     if n < 1 or n > 5:
         raise ComposeError("PARAGRAPH_PARAMETER_DRIFT")
 
-    common = _common_lines(constraints, required)
+    common = _common_lines(constraints, required, forbidden)
     paragraphs = ["zxqv" for _ in range(n)]
     if common:
         paragraphs[0] += "\n" + "\n".join(common)
@@ -335,7 +344,7 @@ def _compose_nth_paragraph(
     paragraphs = ["zxqv" for _ in range(n)]
     paragraphs[nth - 1] = first + " zxqv"
 
-    common = _common_lines(constraints, required)
+    common = _common_lines(constraints, required, forbidden)
     if common:
         paragraphs[-1] += "\n" + "\n".join(common)
 
