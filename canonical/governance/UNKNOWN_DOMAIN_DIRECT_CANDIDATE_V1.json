@@ -22,7 +22,8 @@
   "new_exact_bound_components": {
     "canonical/runtime/structural_mapping_prover_v1.py": "ce8956b43471f0d53b3ce897c1a07e3ce5877133",
     "canonical/runtime/unknown_domain_direct_adapter_v1.py": "7935053825f19daa620f343f2faafbb3a39ae6d8",
-    "canonical/tests/test_unknown_domain_direct_adapter_v1.py": "daf092fcfece0eb9c1fc8b52188f9ce4f1e4b387"
+    "canonical/tests/test_unknown_domain_direct_adapter_v1.py": "daf092fcfece0eb9c1fc8b52188f9ce4f1e4b387",
+    ".github/workflows/verify-unknown-domain-direct-candidate-v1.yml": "e65037115d310af4c2369abd2f872f9bf1f3cc27"
   },
   "route": {
     "cross_domain_transfer": [
