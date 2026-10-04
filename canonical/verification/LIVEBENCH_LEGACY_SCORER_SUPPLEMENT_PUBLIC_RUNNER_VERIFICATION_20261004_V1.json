@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_SCORER_SUPPLEMENT_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_PUBLIC_LEGACY_AND_CURRENT_SCORERS__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "path": "canonical/governance/LIVEBENCH_LEGACY_SCORER_SUPPLEMENT_V1.json",
+    "git_blob_sha": "13105f751550ea89646bb82bd4c1d8325afe2840"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1764,
+    "verified_head_sha": "f0d7d8eb3381043f93e11028221b1f983d620f7c",
+    "merge_commit": "d6c713c9c6d0c20a3e9480af5e008bb49d06fcbd",
+    "workflow_run_id": 37188804615,
+    "workflow_job_id": 111396424971,
+    "conclusion": "success",
+    "verifier_git_blob_sha": "29377b46b3837b8be7ed73cc37847a909a9a96c6"
+  },
+  "verified": {
+    "exact_upstream_blob_count": 6,
+    "exact_dispatch_rule_source_pass": true,
+    "legacy_ifeval_strict_synthetic_pass": true,
+    "current_ifbench_strict_synthetic_pass": true,
+    "package_versions": {
+      "nltk": "3.10.3",
+      "emoji": "2.16.0",
+      "syllapy": "0.7.2",
+      "setuptools": "80.9.0",
+      "spacy": "3.8.16",
+      "en-core-web-sm": "3.8.0",
+      "langdetect": "1.0.9",
+      "immutabledict": "4.3.1",
+      "pandas": "2.3.3"
+    },
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "candidate_inferences": 0,
+    "candidate_mutation": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_delta": 0
+  },
+  "semantic_effect": "CLOSES_ZERO_CASE_SCORER_RUNTIME_AND_DISPATCH_COMPATIBILITY_FOR_A_FUTURE_NEW_LIVEBENCH_EXECUTION_EPOCH_ONLY__DOES_NOT_BY_ITSELF_AUTHORIZE_RETRY_AFTER_PRIOR_POPULATION_EXPOSURE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
