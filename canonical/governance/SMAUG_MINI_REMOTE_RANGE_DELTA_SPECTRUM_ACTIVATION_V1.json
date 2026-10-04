@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_SMAUG_MINI_REMOTE_RANGE_DELTA_SPECTRUM_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_EXECUTION_LAUNCHED__BOUNDED_REMOTE_RANGE_PROBE_QUEUED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "causal_target": {
+    "root": "ROOT1",
+    "predicate": "LIVEBENCH_IF_GE_65_7",
+    "parent_route": "canonical/governance/SMAUG_MINI_REVERSE_LORA_COMPRESSED_DELTA_ROUTE_V1.json",
+    "problem": "DO_NOT_DOWNLOAD_FULL_BASE_PLUS_FINETUNE_CHECKPOINTS_BEFORE_ESTABLISHING_WHETHER_THE_MERGED_LANGUAGE_TRUNK_DELTA_HAS_A_USEFUL_LOW_RANK_SPECTRUM"
+  },
+  "exact_subjects": {
+    "base": {
+      "repository": "Qwen/Qwen3.8-27B",
+      "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
+    },
+    "finetune": {
+      "repository": "abacusai/Smaug-Mini",
+      "revision": "2750fd9f1e67e004111a53a6d9a39c15fbbd33ef"
+    }
+  },
+  "breakthrough": {
+    "method": "REMOTE_SAFETENSORS_HEADER_PLUS_BOUNDED_TENSOR_ROW_HTTP_RANGE_SAMPLING",
+    "consequence": "MEASURE_BASE_TO_SMAUG_DELTA_SINGULAR_SPECTRUM_BEFORE_WHOLE_SHARD_ACQUISITION",
+    "whole_checkpoint_shards_downloaded_by_probe": 0,
+    "sampled_weight_payload_budget_bytes": 96000000,
+    "max_sample_rows_per_tensor": 128,
+    "sampled_module_family_cap": 7,
+    "measured_statistics": [
+      "RELATIVE_DELTA_FROBENIUS_NORM",
+      "SINGULAR_VALUE_SPECTRUM",
+      "ENERGY_RANK_90",
+      "ENERGY_RANK_95",
+      "ENERGY_RANK_99",
+      "ENERGY_RANK_99_9",
+      "BASE_AND_FINETUNE_RANGE_SHA256"
+    ],
+    "fail_closed": [
+      "ABORT_IF_HTTP_RANGE_IS_NOT_HONORED_WITH_EXACT_206_CONTENT_RANGE",
+      "ABORT_ON_BASE_FINETUNE_WEIGHT_NAME_SET_MISMATCH",
+      "ABORT_ON_TENSOR_SHAPE_OR_DTYPE_MISMATCH",
+      "ABORT_IF_SAMPLED_WEIGHT_PAYLOAD_EXCEEDS_96_MB"
+    ]
+  },
+  "independent_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/smaug-range-delta-spectrum-v1-20261004-sol",
+    "pull_request": 1984,
+    "head_sha": "f7014627f7b009cb8fbe99e7639aa8f62f0876ff",
+    "workflow_name": "Probe Smaug remote range delta spectrum V1",
+    "workflow_run_id": 37200353151,
+    "observed_status": "queued",
+    "script": "verify_smaug_remote_range_delta_spectrum_v1.py",
+    "workflow": ".github/workflows/probe-smaug-remote-range-delta-spectrum-v1.yml"
+  },
+  "decision_rule": {
+    "positive_signal": "NONZERO_SAMPLED_DELTAS_AND_MAX_SAMPLED_RANK99_LE_64",
+    "positive_consequence": "ESCALATE_TO_STREAMING_FULL_MATRIX_DELTA_FACTORIZATION_AND_ASCENDING_RANK_REQUALIFICATION_WITHOUT_REQUIRING_FULL_BASE_PLUS_FINETUNE_COHABITATION",
+    "negative_consequence": "DEMOTE_REVERSE_LORA_AS_PRIMARY_STORAGE_COMPRESSION_ROUTE_AND_REFOCUS_ON_SMALLEST_MEANING_SENSITIVE_EXECUTION_SUBJECT",
+    "caveat": "ROW_BLOCK_SPECTRA_ARE_A_PREFLIGHT_SIGNAL_NOT_A_GLOBAL_MATRIX_RANK_PROOF"
+  },
+  "parallel_root1_lanes": {
+    "flan_t5_small_int8": {
+      "learned_bytes": 95374884,
+      "workflow_run_id": 37199735031,
+      "observed_status": "queued"
+    },
+    "qwen38_4b_q4": {
+      "learned_bytes": 2783446304,
+      "workflow_run_id": 37199964362,
+      "observed_status": "queued"
+    },
+    "smaug_full_internalization": {
+      "workflow_run_id": 37199908593,
+      "observed_status": "pending"
+    }
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_PASS_CLAIM",
+    "NO_AUTOMATIONBENCH_PASS_CLAIM",
+    "NO_LOW_RANK_RECOVERY_CLAIM_BEFORE_RECEIPT",
+    "NO_SEMANTIC_CAPABILITY_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CASE_CONTENT_READ",
+    "QUEUED_OR_PENDING_RUNS_ARE_NOT_COMPLETED_EXECUTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution_launched": true,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
