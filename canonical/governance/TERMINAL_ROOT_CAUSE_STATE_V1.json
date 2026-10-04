@@ -188,9 +188,9 @@
         "current_effective_state": "ACTIVE_SCHEDULING_COMPILER__COMPILE_CURRENT_EVIDENCE_DELTAS_BEFORE_ANY_PREDICATE_CREDIT",
         "post_revocation_19_dag_reactivation": {
           "activation_path": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json",
-          "activation_git_blob_sha": "fb382cfa111b16dc4466e6a8ac6948cff920a17d",
+          "activation_git_blob_sha": "3acbf619667fb8db5884069b4721b460f2da322c",
           "verification_path": "canonical/verification/ROOT2_19_POST_REVOCATION_DAG_CONNECTOR_VERIFICATION_20261004_V1.json",
-          "verification_git_blob_sha": "d21832b9fc9640878ab88867dad9e61666e1701f",
+          "verification_git_blob_sha": "a818891bea494078ac423aa92857c96203945433",
           "status": "ACTIVE__EXACT_19_DOMAIN_IDENTITY_PASS__REUSES_PRIOR_INDEPENDENTLY_VERIFIED_DAG__SCHEDULING_ONLY__ZERO_CREDIT",
           "exact_touching_predicates": 19,
           "current_evidence_delta_recompile_required": true,
