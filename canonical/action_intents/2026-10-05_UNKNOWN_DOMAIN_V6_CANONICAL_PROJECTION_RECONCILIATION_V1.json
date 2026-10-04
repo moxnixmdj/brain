@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "mission": "PERMANENTLY_OWN_ALL_19_USEFUL_OPUS_5_5_CAPABILITY_FAMILIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "change": "RECONCILE_UNKNOWN_DOMAIN_V6_PROVED_ATOM_THROUGH_CURRENT_ROOT_AND_TERMINAL_AUTHORITY_PROJECTIONS",
+  "basis": {
+    "base_commit": "8993d2033c45ab0313c21adbde9834103be7a110",
+    "acceptance_binding_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "acceptance_binding_git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
+    "independently_verified_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "independently_verified_reduction_git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596"
+  },
+  "expected_delta": {
+    "accepted_families": "5/19_UNCHANGED",
+    "proved_atomic": "12_TO_13",
+    "unresolved_atomic": "26_TO_25",
+    "root3_only": "7_TO_6",
+    "root2_touching": "19_UNCHANGED",
+    "terminal": false
+  },
+  "invariants": [
+    "NO_NEW_ACCEPTANCE_CREDIT_BEYOND_ALREADY_PROMOTED_UNKNOWN_DOMAIN_ATOM",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "MYSTERYMECHANISM_GE_49_55_REMAINS_OPEN",
+    "ROOT1_REMAINS_ZERO",
+    "LIVEBENCH_REMAINS_ROOT2_ONLY",
+    "ALL_CURRENT_POINTERS_CONTENT_ADDRESS_EXACT_BYTES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0
+  }
+}
