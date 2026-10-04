@@ -154,6 +154,10 @@ def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> lis
 
     bullets = _one(constraints, "detectable_format:number_bullet_lists")
     if bullets is not None:
+        # Whole-response quotation would otherwise prefix the first bullet with
+        # a quote, causing the frozen ^\\s*\\* matcher to miss it.
+        if _one(constraints, "startend:quotation") is not None:
+            lines.append("zxqv")
         n = int(_slots(bullets).get("num_bullets"))
         if n < 1 or n > 5:
             raise ComposeError("BULLET_PARAMETER_DRIFT")
