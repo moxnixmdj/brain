@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SHADOW_V2_ROOT_PROJECTION_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_IF_CURRENT_ROOT_PROJECTION_MATCHES_VERIFIED_CANDIDATE__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/LIVEBENCH_SHADOW_V2_ROOT_PROJECTION_V1.json",
+    "git_blob_sha": "89b0bffeff01f7f8a3664eedf6c6db4396aea3cd"
+  },
+  "verification": {
+    "path": "canonical/verification/LIVEBENCH_SHADOW_V2_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "64c3000f77470f4114a4139ff1fd5f1f63f3d130",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1730,
+    "verifier_merge_commit": "c76e0adcbfc40d46b2c8888ffc962fc668c1dcc7",
+    "workflow_run_id": 37184726240,
+    "workflow_job_id": 111384174564,
+    "conclusion": "success"
+  },
+  "effect": {
+    "target_predicate": "LIVEBENCH_IF_GE_65_7",
+    "exact_next_zero_reality_action": "ACTUAL_LIVEBENCH_ZERO_CASE_POINT_OF_USE_RESOURCE_AND_DEPENDENCY_PREFLIGHT_RECEIPT",
+    "exact_pre_reveal_residual_count": 3,
+    "shadow_collection_authority": false,
+    "case_reveal_authority": false,
+    "global_fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "acceptance_credit_authority": false
+  },
+  "exact_remaining_before_case_reveal": [
+    "ACTUAL_LIVEBENCH_ZERO_CASE_POINT_OF_USE_RESOURCE_AND_DEPENDENCY_PREFLIGHT_RECEIPT",
+    "SEPARATE_V2_SHADOW_COLLECTION_ACTIVATION_BOUND_TO_VERIFIED_CONTROL_PLANE_AND_ACTUAL_PREFLIGHT",
+    "ATOMIC_PRODUCTION_ONE_USE_CLAIM_AFTER_PREFLIGHT_AND_BEFORE_CASE_REVEAL"
+  ],
+  "hard_rules": [
+    "NO_RESOURCE_FIT_INFERENCE_FROM_CONTROL_PLANE_VERIFICATION",
+    "NO_SHADOW_ACTIVATION_BEFORE_ACTUAL_PREFLIGHT_RECEIPT",
+    "NO_PRODUCTION_ONE_USE_CLAIM_BEFORE_VERIFIED_SHADOW_ACTIVATION",
+    "NO_TERMINAL_CASE_REVEAL",
+    "NO_SCORE",
+    "NO_ACCEPTANCE_OR_FAMILY_OR_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
