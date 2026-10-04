@@ -328,7 +328,7 @@ def _seed_candidates(instruction: str, p: Program) -> list[str]:
     if e.punctuation_cover:
         candidates.append("Alpha, beta; gamma: delta?! End.")
     if e.nested_delimiter_depth:
-        candidates.append("([{(alpha)}])")
+        candidates.append("([{((alpha))}])")
     if e.require_output_template:
         candidates.append("My Answer: Alpha My Conclusion: Beta Future Outlook: Gamma")
     if e.bullet_marker:
