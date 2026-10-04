@@ -22,6 +22,7 @@ from canonical.runtime import livebench_pointwise_optimality_certificate_v1 as s
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_POINTWISE_SEARCH_V1"
 MAX_CHECKERS = structural.MAX_FROZEN_LEGACY_CHECKERS_PER_CASE
+PINNED_STRICT_EVALUATOR_BLOB = "4a341984936c4d609644a3b77f8c030ac5aa7269"
 
 
 class PointwiseSearchError(ValueError):
@@ -32,9 +33,12 @@ def _score(flags: Sequence[bool]) -> Fraction:
     return structural.exact_score(len(flags), sum(bool(x) for x in flags))
 
 
-def select_best_postvalidated(
+def _select_best_postvalidated(
     contracts: Sequence[Mapping[str, Any]],
     evaluated_candidates: Iterable[Mapping[str, Any]],
+    *,
+    checker_vector_authoritative: bool,
+    checker_vector_authority: str,
 ) -> dict[str, Any]:
     rows = [dict(c) for c in contracts]
     if not rows:
@@ -91,26 +95,50 @@ def select_best_postvalidated(
         }
 
     cert = certificate.certify(rows, best["checker_results"])
-    complete = cert.get("pointwise_optimal") is True
+    structurally_complete = cert.get("pointwise_optimal") is True
+    authoritative_complete = structurally_complete and checker_vector_authoritative
+
+    if authoritative_complete:
+        status = "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED"
+    elif structurally_complete:
+        status = "CONDITIONAL__POINTWISE_OPTIMAL_GIVEN_UNVERIFIED_CHECKER_VECTOR"
+    else:
+        status = "FAIL_CLOSED__BEST_CANDIDATE_OPTIMALITY_NOT_CERTIFIED"
 
     return {
         "schema": SCHEMA,
-        "status": (
-            "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED"
-            if complete
-            else "FAIL_CLOSED__BEST_CANDIDATE_OPTIMALITY_NOT_CERTIFIED"
-        ),
+        "status": status,
         "evaluated_candidate_count": evaluated,
         "malformed_candidate_count": malformed,
         "best_candidate": best,
         "certificate": cert,
-        "pointwise_optimal": complete,
+        "pointwise_optimal_given_checker_vector": structurally_complete,
+        "checker_vector_authoritative": checker_vector_authoritative,
+        "checker_vector_authority": checker_vector_authority,
+        "pointwise_optimal": authoritative_complete,
         "terminal_frequency_used": False,
         "terminal_case_id_used": False,
         "hidden_kwargs_used": False,
         "comparator_response_used": False,
         "acceptance_credit": False,
     }
+
+
+def select_best_postvalidated(
+    contracts: Sequence[Mapping[str, Any]],
+    evaluated_candidates: Iterable[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Conditional selector for externally supplied checker vectors.
+
+    The pointwise theorem can prove maximality given a vector, but this surface
+    cannot authenticate that the response actually produced that vector.
+    """
+    return _select_best_postvalidated(
+        contracts,
+        evaluated_candidates,
+        checker_vector_authoritative=False,
+        checker_vector_authority="CALLER_SUPPLIED_UNVERIFIED",
+    )
 
 
 def solve_with_checker(
@@ -152,7 +180,12 @@ def solve_with_checker(
             "source": row.get("provenance"),
         })
 
-    result = select_best_postvalidated(contracts, evaluated)
+    result = _select_best_postvalidated(
+        contracts,
+        evaluated,
+        checker_vector_authoritative=False,
+        checker_vector_authority="CALLBACK_UNVERIFIED",
+    )
     result["candidate_pool_count"] = pool["candidate_count"]
     result["subset_attempt_count"] = pool["subset_attempt_count"]
     result["exact_checker_callback_required"] = True
@@ -169,7 +202,12 @@ def solve_with_pinned_livebench(
     max_per_subset: int = relaxed.DEFAULT_MAX_PER_SUBSET,
     max_total: int = relaxed.DEFAULT_MAX_TOTAL,
 ) -> dict[str, Any]:
-    """Run bounded search against source- and runtime-bound legacy checkers."""
+    """Run bounded pointwise search through proof-grade pinned dependencies.
+
+    For word/sentence contracts the exact checker semantics depend on NLTK code
+    and Punkt data. Those artifacts must be hermetically bound before this path
+    can obtain checker-vector authority.
+    """
     registry, binding = exact_postvalidator.load_proofgrade_registry(
         livebench_root,
         contracts,
@@ -177,25 +215,76 @@ def solve_with_pinned_livebench(
         nltk_data_root=nltk_data_root,
     )
 
-    def checker(
-        response: str,
-        rows: Sequence[Mapping[str, Any]],
-    ) -> Sequence[bool]:
-        out = exact_postvalidator.evaluate_with_registry(response, rows, registry)
-        return out["checker_results"]
-
-    result = solve_with_checker(
-        contracts,
-        checker,
+    pool = relaxed.generate_relaxed(
+        [dict(c) for c in contracts],
         max_per_subset=max_per_subset,
         max_total=max_total,
     )
+    if pool.get("status") != "PASS_CANDIDATE_POOL":
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED_CANDIDATE_POOL",
+            "candidate_pool": pool,
+            "pointwise_optimal": False,
+            "checker_vector_authoritative": False,
+            "checker_vector_authority": "PROOFGRADE_POSTVALIDATOR_NOT_REACHED",
+            "terminal_frequency_used": False,
+            "acceptance_credit": False,
+        }
+
+    evaluated = []
+    for row in pool["candidates"]:
+        response = str(row["response"])
+        out = exact_postvalidator.evaluate_with_registry(
+            response,
+            contracts,
+            registry,
+        )
+        flags = tuple(bool(x) for x in out["checker_results"])
+        if len(flags) != len(contracts):
+            raise PointwiseSearchError("CHECKER_RESULT_LENGTH_MISMATCH")
+        evaluated.append({
+            "response": response,
+            "checker_results": list(flags),
+            "source": row.get("provenance"),
+        })
+
+    source_binding = dict(binding.get("source") or {})
+    evaluation_blob = (
+        source_binding.get("evaluation_main_blob")
+        or source_binding.get("evaluation_main_git_blob_sha")
+    )
+    strict_gate_bound = (
+        source_binding.get("strict_nonempty_gate_bound") is True
+        or bool(source_binding.get("strict_nonempty_guard"))
+    )
+    runtime_bound = binding.get("proofgrade_runtime_dependencies_bound") is True
+    proofgrade_authoritative = (
+        evaluation_blob == PINNED_STRICT_EVALUATOR_BLOB
+        and strict_gate_bound
+        and runtime_bound
+    )
+
+    result = _select_best_postvalidated(
+        contracts,
+        evaluated,
+        checker_vector_authoritative=proofgrade_authoritative,
+        checker_vector_authority=(
+            "EXACT_PINNED_LIVEBENCH_PROOFGRADE_RUNTIME"
+            if proofgrade_authoritative
+            else "PINNED_SOURCE_WITHOUT_COMPLETE_PROOFGRADE_AUTHORITY"
+        ),
+    )
+    result["candidate_pool_count"] = pool["candidate_count"]
+    result["subset_attempt_count"] = pool["subset_attempt_count"]
     result["exact_checker_callback_required"] = False
     result["exact_checker_binding"] = binding
+    result["strict_evaluator_binding_required"] = PINNED_STRICT_EVALUATOR_BLOB
+    result["proofgrade_runtime_dependencies_required"] = True
     return result
 
 def run(args: dict[str, Any] | None = None, root=None) -> dict[str, Any]:
-    """JSON-facing selector over externally exact-postvalidated candidates."""
+    """JSON-facing conditional selector over caller-supplied checker vectors."""
     args = args or {}
     return select_best_postvalidated(
         args.get("contracts") or [],
