@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_CRYPTO_ESCROW_IMPLEMENTATION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ENCRYPTION_ONLY_FIXED_SIZE_WRITE_ONCE_ESCROW_WRITER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Implement the write-only cryptographic half of pre-fixed-point shadow result escrow without placing any decryption key or decrypt path in the candidate/scorer execution module.",
+  "contract": {
+    "path": "canonical/governance/SHADOW_WRITE_ONLY_ESCROW_CONTRACT_V1.json",
+    "git_blob_sha": "3fde5a915dec9cadf138650536820c972a9b8fb1"
+  },
+  "runtime": {
+    "path": "canonical/runtime/shadow_crypto_escrow_v1.py"
+  },
+  "tests": {
+    "path": "canonical/tests/test_shadow_crypto_escrow_v1.py"
+  },
+  "properties": [
+    "OUTPUT_FILENAME_EXACTLY_DERIVED_FROM_LEASE_DIGEST",
+    "EXCLUSIVE_CREATE_ONLY",
+    "RSA_X509_OPENSSL_CMS_AES_256_CBC_ENVELOPE",
+    "FIXED_SIZE_RANDOM_PADDED_PLAINTEXT_PREVENTS_RESULT_LENGTH_LEAK",
+    "NO_PLAINTEXT_HASH_LENGTH_SCORE_OR_SUMMARY_IN_RECEIPT",
+    "WRITER_CONTAINS_NO_DECRYPTION_PATH",
+    "RECIPIENT_CERTIFICATE_CONTENT_ADDRESSED",
+    "CIPHERTEXT_CONTENT_ADDRESSED",
+    "PRODUCTION_PRIVATE_KEY_MUST_EXIST_ONLY_OUTSIDE_CANDIDATE_PLANNER_AND_ZERO_REALITY_EXECUTION_PATHS",
+    "SEPARATE_POST_FIXED_POINT_REDUCER_AUTHORITY_REQUIRED"
+  ],
+  "remaining_before_shadow_collection": [
+    "INDEPENDENTLY_VERIFY_EXACT_WRITER_AND_TEST_BYTES",
+    "BIND_PRODUCTION_RECIPIENT_CERTIFICATE_AND_PRIVATE_KEY_ESCROW_RECEIPT",
+    "BIND_SCORER_JOB_TO_ENCRYPT_AND_UPLOAD_CIPHERTEXT_WITH_NO_PLAINTEXT_ARTIFACT",
+    "VERIFY_CANDIDATE_PLANNER_AND_ZERO_REALITY_JOBS_HAVE_NO_PRIVATE_KEY_PATH",
+    "OBTAIN_SEPARATE_SCOPED_SHADOW_COLLECTION_ACTIVATION"
+  ],
+  "hard_nonclaims": [
+    "NO_PRODUCTION_RECIPIENT_BOUND_BY_THIS_CANDIDATE",
+    "NO_PRIVATE_KEY_CREATED_OR_STORED_IN_BRAIN",
+    "NO_SHADOW_COLLECTION_AUTHORITY",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_CASE_REVEAL",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "shadow_collection_authority": false,
+  "independent_verification_required": true
+}
