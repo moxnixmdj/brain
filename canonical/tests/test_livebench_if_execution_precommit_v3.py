@@ -6,7 +6,7 @@ MANIFEST=ROOT/"canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V3.json"
 def load(): return json.loads(MANIFEST.read_text())
 def test_exact_v3_manifest_passes_zero_credit():
     o=verify_precommit(load()); assert o["precommit_pass"] is True
-    assert o["legacy_environment_prefight_proved"] is False
+    assert o["legacy_environment_preflight_proved"] is False
     assert o["terminal_cases_consumed_this_epoch"]==0
     assert o["execution_authority"] is False
 def test_candidate_mutation_fails():
