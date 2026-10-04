@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PROMPT_ONLY_OVERLAP_LOCAL_CLEAN_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "LOCAL_CLEAN_EXECUTION_PASS__PUBLIC_12_OF_12__PRIVATE_GITHUB_ACTIONS_RUNNER_INFRA_FAILURE_SEPARATED__NOT_INDEPENDENT_PROMOTION_AUTHORITY",
+  "subject": {
+    "governance_path": "canonical/governance/LIVEBENCH_PROMPT_ONLY_OVERLAP_BREAKTHROUGH_V1.json",
+    "governance_git_blob_sha": "85e952f011c361259f27719319b8a8335123dc46",
+    "runtime_path": "canonical/runtime/livebench_prompt_only_overlap_compiler_v1.py",
+    "runtime_git_blob_sha": "8f31d7c75eaa1c8d9625738e039c52b69d47c20e",
+    "test_path": "canonical/tests/test_livebench_prompt_only_overlap_compiler_v1.py",
+    "test_git_blob_sha": "44f43de6def55a236b12769a6b6e26915d8d1acb"
+  },
+  "pinned_public_inputs": {
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_character_trigram_checker_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "clean_execution": {
+    "python_compile": "PASS",
+    "public_ratio_overlap_cases": 12,
+    "exact_raw_reference_score_inside_requested_plus_minus_2_band": 12,
+    "sentence_keyword_public_cases": 4,
+    "sentence_keyword_constraints_passed": 4,
+    "consonant_cluster_public_cases": 3,
+    "consonant_cluster_constraints_passed": 3,
+    "exceptions": 0,
+    "notable_case": {
+      "constraint": "23_PERCENT_OVERLAP_PLUS_KEYWORD_IN_30TH_SENTENCE",
+      "result": "PASS",
+      "selected_visible_carrier_tokens": 3,
+      "exact_raw_score_percent": 25.0
+    }
+  },
+  "private_ci_diagnostic": {
+    "workflow": "Verify LiveBench prompt-only overlap compiler v1",
+    "runs": [37198896380, 37199024336, 37199071936],
+    "observed_signature": [
+      "JOB_CONCLUSION_FAILURE",
+      "ZERO_STEP_SUMMARIES",
+      "ZERO_WORKFLOW_ARTIFACTS",
+      "JOB_LOG_REDIRECT_BLOB_NOT_FOUND"
+    ],
+    "classification": "RUNNER_OR_LOGGING_INFRASTRUCTURE_FAILURE__NOT_A_VALID_NEGATIVE_TEST_RECEIPT",
+    "hard_nonclaim": "NO_CI_PASS_CLAIM"
+  },
+  "consequence": [
+    "THE_IMPLEMENTATION_BUG_IN_ZERO_LENGTH_FILLER_WAS_FOUND_AND_REPAIRED",
+    "PROMPT_ONLY_RATIO_OVERLAP_CONSTRUCTION_PASSES_ALL_12_PINNED_PUBLIC_RATIO_ROWS_UNDER_EXACT_RAW_FROZEN_CHARACTER_TRIGRAM_SCORING",
+    "FULL_TERMINAL_LIVEBENCH_ACCEPTANCE_REMAINS_OPEN",
+    "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_REMAINS_DESIRABLE_BEFORE_LOAD_BEARING_PROMOTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
