@@ -106,3 +106,27 @@ def test_none_visible_slot_fails_closed():
     }
     with pytest.raises(p.ExactPostvalidationError, match="VISIBLE_SLOT_VALUE_NONE"):
         p.evaluate_with_registry("", [row], {"startend:end_checker": ContainsInstruction})
+
+
+def test_strict_evaluator_gate_rejects_blank_raw_true_checker():
+    registry = {"keywords:forbidden_words": ForbidInstruction}
+    row = contract("keywords:forbidden_words", forbidden_words=["omega"])
+
+    raw = ForbidInstruction("keywords:forbidden_words")
+    raw.build_description(forbidden_words=["omega"])
+    assert raw.check_following("") is True
+    assert raw.check_following("   \n\t") is True
+
+    blank = p.evaluate_with_registry("", [row], registry)
+    whitespace = p.evaluate_with_registry("   \n\t", [row], registry)
+    nonblank = p.evaluate_with_registry("alpha", [row], registry)
+
+    assert blank["checker_results"] == [False]
+    assert whitespace["checker_results"] == [False]
+    assert nonblank["checker_results"] == [True]
+    assert blank["true_checker_count"] == 0
+    assert nonblank["true_checker_count"] == 1
+
+
+def test_exact_postvalidator_binds_evaluation_main_authority():
+    assert p.PINNED_EVALUATION_MAIN_BLOB == "4a341984936c4d609644a3b77f8c030ac5aa7269"
