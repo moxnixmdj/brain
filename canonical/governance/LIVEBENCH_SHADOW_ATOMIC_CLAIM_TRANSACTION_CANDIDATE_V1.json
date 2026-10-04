@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SHADOW_ATOMIC_CLAIM_TRANSACTION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__REMOVE_CHECK_THEN_ACT_RACE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+  "objective": "Collapse the final LiveBench shadow preflight-to-claim boundary so atomic Git-ref creation is the sole uniqueness linearization point and no prior claim-ref absence read is required.",
+  "changes": [
+    "REMOVE_CLAIM_REF_PRIOR_ABSENCE_READ_FROM_POINT_OF_USE_PREFLIGHT",
+    "BIND_CLAIM_TO_EXACT_PREFLIGHT_INPUT_DIGEST",
+    "REQUIRE_SEPARATELY_VERIFIED_V2_SHADOW_ACTIVATION",
+    "REQUIRE_GIT_REF_CREATE_HTTP_201_AND_EXACT_RESPONSE_REF",
+    "REJECT_422_OR_ANY_NON_201_CREATE_WITH_ZERO_CASE_REVEAL_AUTHORITY",
+    "GRANT_REVEAL_AUTHORITY_ONLY_FOR_THE_EXACT_LEASE_AFTER_SUCCESSFUL_ATOMIC_CREATE"
+  ],
+  "latency_effect": {
+    "deleted_round_trips": ["CLAIM_REF_ABSENCE_PROBE"],
+    "deleted_race_class": "CHECK_THEN_ACT_BETWEEN_ABSENCE_PROBE_AND_CREATE",
+    "same_runner_transaction_target": "PREFLIGHT_THEN_ATOMIC_CREATE_THEN_REVEAL_WITHOUT_SCHEDULER_ROUND_TRIP"
+  },
+  "hard_rules": [
+    "NO_TERMINAL_CASE_CONTENT_READ_BY_THIS_CANDIDATE",
+    "NO_CASE_REVEAL_WITHOUT_SEPARATE_VERIFIED_ACTIVATION",
+    "NO_CASE_REVEAL_ON_DUPLICATE_OR_FAILED_ATOMIC_CREATE",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "shadow_collection_authority": false,
+  "independent_verification_required": true
+}
