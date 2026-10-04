@@ -10,7 +10,8 @@
     "global_postconditions": "INDEPENDENT_PASS",
     "donor_cleanroom": "INDEPENDENT_PASS",
     "achieved": false,
-    "opus55_verified_owned": "5/19_VERIFIED_OWNED_EQUAL_OR_BETTER__14/19_ACCEPTANCE_OPEN"
+    "opus55_verified_owned": "5/19_VERIFIED_OWNED_EQUAL_OR_BETTER__14/19_ACCEPTANCE_OPEN",
+    "opus55_atomic_acceptance": "13/38_PROVED__25/38_OPEN__UNKNOWN_DOMAIN_V6_ATOMIC_PROMOTED"
   },
   "sources": {
     "terminal_closure_manifest": {
@@ -298,8 +299,8 @@
     },
     "acceptance_predicate_evidence_bindings_reconciled": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5",
-      "status": "CURRENT_12_PROVED__26_UNRESOLVED__ROOT1_SOURCE_BLOCKERS_RECLASSIFIED_TO_ROOT3__COMPOSITION_V6_4_OF_12_BOUND__COUNTS_UNCHANGED"
+      "git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
+      "status": "CURRENT_13_PROVED__25_UNRESOLVED__UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PROVED__5_OF_19_FAMILIES_ACCEPTED"
     },
     "protocol_implication_batch_scope_v2": {
       "path": "canonical/verification/PROTOCOL_IMPLICATION_BATCH_SCOPE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -1199,6 +1200,11 @@
     "livebench_exact200_contamination_credit_revocation": {
       "path": "canonical/governance/LIVEBENCH_EXACT200_CONTAMINATION_CREDIT_REVOCATION_20261004_V1.json",
       "status": "ACTIVE_FAIL_CLOSED__EXACT_SCORE_PRESERVED__ACCEPTANCE_CREDIT_REVOKED"
+    },
+    "unknown_domain_v6_atomic_acceptance_reduction": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
+      "status": "ATOMIC_PREDICATE_PROVED__FAMILY_REMAINS_OPEN_ON_MYSTERYMECHANISM__ZERO_FAMILY_CAPABILITY_OWNERSHIP_CREDIT"
     }
   },
   "residual": [
