@@ -1,0 +1,66 @@
+name: Verify LiveBench single-checker public exact V1
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/livebench_if_single_checker_solver_v1.py"
+      - "canonical/runtime/livebench_single_checker_public_exact_audit_v1.py"
+      - "canonical/tests/test_livebench_if_single_checker_solver_v1.py"
+      - ".github/workflows/verify-livebench-single-checker-public-exact-v1.yml"
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_if_single_checker_solver_v1.py"
+      - "canonical/runtime/livebench_single_checker_public_exact_audit_v1.py"
+      - "canonical/tests/test_livebench_if_single_checker_solver_v1.py"
+      - ".github/workflows/verify-livebench-single-checker-public-exact-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen checker runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install nltk spacy emoji syllapy
+          python -m spacy download en_core_web_sm
+          python - <<'PY'
+          import nltk
+          for name in [
+              "punkt",
+              "punkt_tab",
+              "stopwords",
+              "averaged_perceptron_tagger",
+              "averaged_perceptron_tagger_eng",
+              "wordnet",
+          ]:
+              nltk.download(name, quiet=True)
+          PY
+
+      - name: Checkout pinned public sources
+        run: |
+          git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/livebench
+          git -C /tmp/livebench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
+          git clone --filter=blob:none https://github.com/allenai/IFBench.git /tmp/ifbench
+          git -C /tmp/ifbench checkout 1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d
+
+      - name: Run exact frozen scorer audit
+        run: |
+          mkdir -p /tmp/receipt
+          python canonical/runtime/livebench_single_checker_public_exact_audit_v1.py \
+            --livebench-root /tmp/livebench \
+            --ifbench-root /tmp/ifbench \
+            --output /tmp/receipt/livebench-single-checker-public-exact-v1.json
+
+      - name: Upload audit receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: livebench-single-checker-public-exact-v1
+          path: /tmp/receipt/livebench-single-checker-public-exact-v1.json
