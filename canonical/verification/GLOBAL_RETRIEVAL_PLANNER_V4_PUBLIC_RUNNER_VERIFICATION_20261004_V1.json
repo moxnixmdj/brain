@@ -1,0 +1,36 @@
+{
+  "schema":"PROJECT_BRAIN_GLOBAL_RETRIEVAL_PLANNER_V4_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date":"2026-10-04",
+  "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__SCOPE_AWARE_EMPIRICAL_PLANNER_V4__ZERO_CREDIT",
+  "verified_subjects":{
+    "canonical/runtime/global_retrieval_controller_v4.py":"f7b6ad66f5b256eb5166b25971dfc97445834dc8",
+    "canonical/runtime/global_retrieval_entrypoint_v4.py":"e9e457099b13a1eb30c0c52bbedcc6348aef7373",
+    "canonical/tests/test_global_retrieval_controller_v4.py":"141c268b43d70eac5d21dcbb7d02c73f706027f5"
+  },
+  "independent_runner":{
+    "repository":"moxnixmdj/verification-capsule-runner",
+    "pull_request":1560,
+    "merge_commit":"c5cac395dbf1a6371a9f729d5b6a9bf3be65953e",
+    "workflow_run_id":37167617322,
+    "workflow_job_id":111333772640,
+    "conclusion":"success"
+  },
+  "verified":{
+    "v10_plus_v11_first_pass_calibration_used":true,
+    "v12_to_v18_recovery_calibration_used":true,
+    "recovery_mechanisms_scope_locked":true,
+    "maven_graph_route_not_auto_generalized_to_python":true,
+    "maven_version_history_route_not_auto_generalized_to_python":true,
+    "v18_recommended_for_maven_identity_drift_context":true,
+    "current_authority_guard_precedes_plan_compilation":true,
+    "open_world_unknown_preserved":true,
+    "zero_credit_preserved":true
+  },
+  "incremental_spend_usd":0,
+  "acceptance_credit_delta":0,
+  "family_credit_delta":0,
+  "capability_credit_delta":0,
+  "ownership_credit_delta":0,
+  "execution_authority":false,
+  "promotion_authority":false
+}
