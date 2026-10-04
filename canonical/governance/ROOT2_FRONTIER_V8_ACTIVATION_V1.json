@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V8_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__INDEPENDENT_V8_PASS__CURRENT_ROOT2_V7_PARENT__SCHEDULING_ONLY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "parent": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V7.json",
+    "git_blob_sha": "35e8b578aca1290bcf469d6350ae085ba8a86c64",
+    "verification_path": "canonical/verification/ROOT2_FRONTIER_V7_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "c2b96c9d48b7ef6508ea77dc6983da12eaf099c3",
+    "activation_path": "canonical/governance/ROOT2_FRONTIER_V7_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "ccfc97ca8f5586d583990f0e37277b88c12227e9"
+  },
+  "frontier": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V8.json",
+    "git_blob_sha": "2eaeb74fe306ee2507145e26eb731f69f46e6153"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_V8_FINANCE_DUAL_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "7e2d71144853c41fadab55f4074d484edf46e651",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1629,
+    "verifier_merge_commit": "0c7f6675a32a97a07028d3a1855b6dfcae63db9f",
+    "workflow_run_id": 37171651739,
+    "workflow_job_id": 111345631665,
+    "conclusion": "success"
+  },
+  "effects": [
+    "SUPERSEDE_ROOT2_V7_FOR_SCHEDULING",
+    "PRESERVE_ALL_ROOT2_V7_ZERO_SPEND_DEFAULT_HARNESS_COMPRESSIONS",
+    "ADD_CONDITIONAL_FINANCE_AGENT_V2_CUSTOM_FUNCTION_ROUTE",
+    "PRESERVE_DEFAULT_SHARED_HARNESS_ROUTE",
+    "PRESERVE_CUSTOM_ROUTE_COMPARABILITY_AND_VALS_PLATFORM_JURY_ZERO_SPEND_AS_OPEN",
+    "PRESERVE_ALL_ACCEPTANCE_COUNTS",
+    "PRESERVE_FRESH_REALITY_BLOCK"
+  ],
+  "authority": {
+    "scheduling": true,
+    "effective_scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "activation_condition": "MERGED_CURRENT_MAIN_AND_TERMINAL_ROOT_CAUSE_STATE_EXACTLY_BIND_THIS_V8_FRONTIER_VERIFICATION_AND_ACTIVATION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
