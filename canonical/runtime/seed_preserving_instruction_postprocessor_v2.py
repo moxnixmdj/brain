@@ -148,16 +148,21 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
     candidate = seed
     applied: list[str] = []
 
-    # Existing v1-safe transformations.
-    if constraints.exact_response is not None:
-        candidate = constraints.exact_response
-        applied.append("EXACT_RESPONSE")
-    if constraints.lowercase_only:
-        candidate = candidate.lower()
-        applied.append("LOWERCASE")
-    if constraints.uppercase_only:
-        candidate = candidate.upper()
-        applied.append("UPPERCASE")
+    # Whole-response replacement and case-folding are not seed-preserving.
+    # The repaired V1 contract already proved this distinction. V2 must not
+    # silently reintroduce semantic deletion under a formatting label.
+    if constraints.exact_response is not None and constraints.exact_response != seed:
+        return _result(
+            "FAIL_CLOSED",
+            error="EXACT_RESPONSE_CONFLICTS_WITH_SEMANTIC_SEED",
+            constraints=asdict(constraints),
+            public_flags=flags,
+            response=None,
+            seed_lexical_content_deleted=False,
+        )
+
+    # Do not mutate case. If the seed already satisfies a case constraint,
+    # final validation accepts it unchanged; otherwise fail closed.
     if constraints.prefix is not None and not candidate.startswith(constraints.prefix):
         candidate = constraints.prefix + candidate
         applied.append("PREFIX")
@@ -212,6 +217,11 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
         constraints=asdict(constraints),
         exact_postvalidation=True,
         seed_lexical_content_deleted=False,
+        semantic_seed_token_sequence_preserved=(
+            candidate.split() == seed.split()
+            if flags["newline_words"]
+            else seed in candidate
+        ),
         terminal_cases_used=0,
         hard_nonclaim=(
             "PASS_PROVES_ONLY_RECOGNIZED_FORMAL_CONSTRAINTS; "
