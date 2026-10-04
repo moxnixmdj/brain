@@ -18,7 +18,8 @@ def _load(rel: str):
 
 
 def _git_blob_sha(data: bytes) -> str:
-    return hashlib.sha1(f"blob {len(data)}\\0".encode() + data).hexdigest()
+    header = b"blob " + str(len(data)).encode() + b"\0"
+    return hashlib.sha1(header + data).hexdigest()
 
 
 def test_v6_semantic_bridge_is_exactly_bound_to_frozen_protocol_and_evaluator():
