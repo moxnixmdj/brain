@@ -168,6 +168,12 @@ def evaluate_with_registry(
     registry: Mapping[str, Any],
 ) -> dict[str, Any]:
     rows = _normalize_contracts(contracts)
+    # Frozen evaluation_main.py gates every strict checker with response.strip().
+    # This matters for checkers that can accept the empty string in isolation
+    # (notably "number_sentences < 1"): an empty response earns *zero* strict
+    # checker credit in the benchmark and therefore can never trigger the
+    # all-instructions bonus.
+    strict_response_eligible = bool(str(response).strip())
     flags: list[bool] = []
     for row in rows:
         iid = str(row["instruction_id"])
@@ -178,7 +184,10 @@ def evaluate_with_registry(
         slots = dict(row["slots"])
         try:
             instruction.build_description(**slots)
-            flags.append(bool(instruction.check_following(str(response))))
+            flags.append(
+                strict_response_eligible
+                and bool(instruction.check_following(str(response)))
+            )
         except Exception as exc:
             raise ExactPostvalidationError(
                 "CHECKER_EXECUTION_FAILED:" + iid + ":" + type(exc).__name__ + ":" + str(exc)
@@ -191,6 +200,8 @@ def evaluate_with_registry(
         "checker_results": flags,
         "true_checker_count": sum(flags),
         "checker_count": len(flags),
+        "strict_nonempty_response_gate_applied": True,
+        "strict_response_eligible": strict_response_eligible,
         "terminal_data_used": False,
         "hidden_kwargs_used": False,
         "terminal_case_id_used": False,
