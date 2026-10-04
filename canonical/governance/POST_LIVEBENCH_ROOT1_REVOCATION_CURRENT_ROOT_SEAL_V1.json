@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_POST_LIVEBENCH_ROOT1_REVOCATION_CURRENT_ROOT_SEAL_V1",
+  "date": "2026-10-04",
+  "status": "CURRENT_FAIL_CLOSED_TRUTH_REPAIR__ROOT1_ZERO__ROOT2_19_TOUCHING__LIVEBENCH_RESTORED_ROOT2__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes_for_current_scheduling": [
+    "canonical/governance/POST_LIVEBENCH_CURRENT_ROOT_SEAL_V1.json",
+    "LIVEBENCH_ROOT1_POSITIVE_GAP_FIELDS_IN_canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_AS_A_COMPLETE_ROOT2_UNIVERSE"
+  ],
+  "truth_repair": {
+    "path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
+    "git_blob_sha": "bbbe29ec26b1f96ba5538ca159f899e316b167e7",
+    "conclusion": "PRIOR_64_PERCENT_FORCED_FAIL_USED_ZERO_LOWER_BOUNDS_AS_ZERO_UPPER_BOUNDS__ROOT1_BASIS_REVOKED"
+  },
+  "scorer_scope": {
+    "path": "canonical/governance/LIVEBENCH_TERMINAL_SCORER_SCOPE_ACTIVATION_V1.json",
+    "git_blob_sha": "f64fe4a10c3b7f8a8a95819fb79c898d17a2bae4",
+    "result": "EXACT_FROZEN_200_ROWS__LEGACY_IFEVAL_ONLY__25_REGISTERED_TYPES_MAXIMUM__0_MODERN_IFBENCH"
+  },
+  "livebench_score_mass": {
+    "path": "canonical/governance/LIVEBENCH_IF_SCORE_MASS_MINIMUM_CUT_V1.json",
+    "git_blob_sha": "517410e5cf26bd748558c34b0300b1701e999136",
+    "exact_opus_mean_percent": 65.73775,
+    "sufficient_full_score_cases_if_all_others_zero": 132
+  },
+  "exact_current_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false,
+    "root1_positive_gap_count": 0,
+    "root1_only": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "root2_touching": 19,
+    "livebench_class": "ROOT2_ONLY__MEASUREMENT_OR_COMPARATOR_UNCERTAINTY"
+  },
+  "root2_scheduler_composition": {
+    "inherited_18": {
+      "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
+      "role": "PRESERVE_ROUTES_FOR_THE_OTHER_18_PREDICATES_ONLY__NOT_COMPLETE_CURRENT_ROOT2_UNIVERSE"
+    },
+    "livebench_special": {
+      "predicate": "LIVEBENCH_IF_GE_65_7",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "VERIFIED_LEGACY_IFEVAL_SCORER__PROVE_CONSERVATIVE_SCORE_LOWER_BOUND_GE_65_73775_OR_VALID_FAILING_UPPER_BOUND__ZERO_REALITY_FIRST",
+      "no_fresh_reality": true
+    },
+    "effective_touching_count": 19
+  },
+  "hard_rules": [
+    "UNKNOWN_IS_NOT_MISSING",
+    "DO_NOT_SCHEDULE_LIVEBENCH_AS_ROOT1_FROM_REVOKED_64_PERCENT_BOUND",
+    "DO_NOT_USE_MODERN_IFBENCH_58_CHECKERS_AS_LOAD_BEARING_FOR_FROZEN_LIVEBENCH",
+    "NO_NEW_TERMINAL_CONTENT_BEFORE_SUCCESSOR_PRECOMMIT_AND_EXPLICIT_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_CLASSIFICATION_OR_SCHEDULING",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
