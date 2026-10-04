@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_EXACT200_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_BYTES_FIXED_BAR_PASS__ATOMIC_PROMOTION_ELIGIBLE__FAMILY_REMAINS_OPEN",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "candidate": {
+    "path": "canonical/governance/LIVEBENCH_IF_EXACT200_ACCEPTANCE_REDUCTION_CANDIDATE_V1.json",
+    "git_blob_sha": "ca06d966f02048fa4d857c11e8e21c4acda2f907",
+    "creation_commit": "83e5485430f7b4dfc026e2b4912980b377a1862a"
+  },
+  "exact_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-livebench-exact-brain-bytes-20261004-sol",
+    "workflow_run_id": 37238837049,
+    "workflow_job_id": 111543251329,
+    "conclusion": "success",
+    "exact_brain_runtime_blob_gate_pass": true,
+    "receipt_path": "receipts/livebench_exact_brain_bytes_v1.json",
+    "receipt_git_blob_sha": "165192ffa20e052f094371c04d15da6c9147a146",
+    "brain_percent": 84.40416666666667,
+    "stricter_opus_floor_percent": 65.73775,
+    "frozen_registry_threshold_percent": 65.7
+  },
+  "reduction_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-livebench-exact-brain-bytes-20261004-sol",
+    "head_sha": "c00d4ca7d98b878df4bab787763db44c67af29fb",
+    "workflow_run_id": 37238998859,
+    "workflow_job_id": 111543724615,
+    "conclusion": "success",
+    "verifier_script_git_blob_sha": "9c17adbada5a6181f933d9835faef5c8dcc71ecf",
+    "workflow_git_blob_sha": "e024ca370a8361ede85bb231e97207c38fa2175b",
+    "exact_candidate_blob_gate_pass": true,
+    "reduction_arithmetic_and_guards_pass": true
+  },
+  "verified_delta": {
+    "proved_atomic": {
+      "before": 12,
+      "after": 13
+    },
+    "unresolved_atomic": {
+      "before": 26,
+      "after": 25
+    },
+    "root2_only": {
+      "before": 16,
+      "after": 15
+    },
+    "root3_only": {
+      "before": 7,
+      "after": 7
+    },
+    "root2_and_root3": {
+      "before": 3,
+      "after": 3
+    },
+    "root2_touching": {
+      "before": 19,
+      "after": 18
+    },
+    "accepted_families": {
+      "before": 5,
+      "after": 5
+    },
+    "open_families": {
+      "before": 14,
+      "after": 14
+    }
+  },
+  "verified_nonclaims": [
+    "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT_FAMILY_NOT_ACCEPTED",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR_REMAINS_OPEN",
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS_REMAINS_OPEN",
+    "ROOT2_NOT_GLOBALLY_CLOSED",
+    "TERMINAL_OBJECTIVE_NOT_CLOSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_hidden_terminal_cases_consumed": 0,
+    "atomic_predicate_credit_delta": 1,
+    "family_credit_delta": 0
+  },
+  "promotion_eligible": true,
+  "promotion_authority": false
+}
