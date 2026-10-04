@@ -103,7 +103,7 @@ PROFILES = (
         "paragraphs": 3,
         "words": (180, "at least"),
         "sentences": (6, "at least"),
-        "nth": (3, 2, "response"),
+        "nth": (3, 2, "river"),
         "postscript": "P.S.",
         "bullets": 3,
         "sections": ("Section", 3),
