@@ -35,7 +35,6 @@ ANCHORS: dict[str, str] = {
     "count:keywords_multiple": "five times in your response and keyword",
     "count:numbers": "numbers in the response",
     "count:person_names": "from this list of person names",
-    "count:pronouns": "personal pronouns",
     "count:punctuation": "use every standard punctuation mark at least once",
     "count:unique_word_count": "unique words in the response",
     "count:word_count_range": "the response must contain between",
@@ -202,7 +201,18 @@ STATIC_WITNESS: dict[str, str] = {
 
 def detect(prompt: str) -> list[str]:
     n = _norm(prompt)
-    return [iid for iid, anchor in ANCHORS.items() if anchor in n]
+    out = [iid for iid, anchor in ANCHORS.items() if anchor in n]
+    # The pinned public description is "The response should include at least N
+    # pronouns."  Some source revisions used "personal pronouns".  Use the full
+    # checker-shaped phrase rather than the word "pronouns" alone so unrelated
+    # semantic requests discussing pronouns do not become false positives.
+    if re.search(
+        r"the response should include at least\s+\d+\s+(?:personal\s+)?pronouns\b",
+        prompt,
+        flags=re.I,
+    ):
+        out.append("count:pronouns")
+    return out
 
 def _int(pattern: str, prompt: str) -> int | None:
     m = re.search(pattern, prompt, flags=re.I | re.S)
