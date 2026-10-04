@@ -4,12 +4,12 @@
 The proof uses a concrete slot tuple that is actually in the public historical
 generator support, not merely an abstract checker-domain example:
 
-- "rock" is present in the pinned LiveBench WORD_LIST;
-- both ParagraphFirstWordCheck and ForbiddenWords draw their lexical slots from
-  generate_keywords(), which samples that WORD_LIST;
+- "rock" and four companion words are present in the pinned LiveBench WORD_LIST;
+- ParagraphFirstWordCheck draws one first_word through generate_keywords(1);
+- ForbiddenWords draws exactly five distinct words through generate_keywords(5);
 - the two instruction IDs are conflict-compatible in the pinned registry;
-- setting nth-paragraph first_word="rock" and forbidden_words containing
-  "rock" is therefore a reachable generator-support tuple;
+- a draw with first_word="rock" and a five-word forbidden sample containing
+  "rock" therefore has positive probability under the historical generator;
 - the pinned checker semantics make that tuple jointly UNSAT.
 
 For a two-checker row that cannot make both booleans true, the frozen public
@@ -33,6 +33,13 @@ SCHEMA = "PROJECT_BRAIN_LIVEBENCH_GENERATOR_SUPPORT_THRESHOLD_ROUTE_FALSIFIER_V2
 
 TARGET_PREDICATE_FLOOR = Fraction(657, 1000)  # 65.7%
 REACHABLE_COLLISION_WORD = "rock"
+REACHABLE_FORBIDDEN_WORDS = (
+    "rock",
+    "western",
+    "sentence",
+    "signal",
+    "dump",
+)
 COUNTEREXAMPLE_IDS = (
     "keywords:forbidden_words",
     "length_constraints:nth_paragraph_first_word",
@@ -58,7 +65,7 @@ def _reachable_unsat_contracts() -> list[dict]:
         },
         {
             "instruction_id": "keywords:forbidden_words",
-            "slots": {"forbidden_words": [REACHABLE_COLLISION_WORD]},
+            "slots": {"forbidden_words": list(REACHABLE_FORBIDDEN_WORDS)},
         },
     ]
 
@@ -76,6 +83,11 @@ def verify() -> dict:
     if "NTH_FIRST_WORD_IS_FORBIDDEN_WORD" not in reasons:
         raise RuntimeError("COUNTEREXAMPLE_UNSAT_CERTIFICATE_MISSING")
 
+    if len(REACHABLE_FORBIDDEN_WORDS) != 5 or len(set(REACHABLE_FORBIDDEN_WORDS)) != 5:
+        raise RuntimeError("FORBIDDEN_SAMPLE_CARDINALITY_DRIFT")
+    if REACHABLE_COLLISION_WORD not in REACHABLE_FORBIDDEN_WORDS:
+        raise RuntimeError("COLLISION_WORD_MISSING_FROM_FORBIDDEN_SAMPLE")
+
     # Joint UNSAT means at most one of the two checker booleans can be true.
     # The frozen public scorer is monotone in the checker-true count for a
     # non-all-true row, so [True, False] is the maximal possible score state.
@@ -91,13 +103,17 @@ def verify() -> dict:
         "target_predicate": "LIVEBENCH_IF_GE_65_7",
         "counterexample_instruction_ids": list(ids),
         "counterexample_word": REACHABLE_COLLISION_WORD,
+        "counterexample_forbidden_words": list(REACHABLE_FORBIDDEN_WORDS),
+        "counterexample_forbidden_word_count": len(REACHABLE_FORBIDDEN_WORDS),
         "counterexample_archetype": slot.get("archetype"),
         "counterexample_hard_unsat_reason": "NTH_FIRST_WORD_IS_FORBIDDEN_WORD",
         "maximum_counterexample_score": "1/4",
         "target_predicate_floor": "657/1000",
         "public_support_reachability": {
-            "word_is_in_pinned_word_list": True,
+            "all_counterexample_words_are_in_pinned_word_list": True,
             "word": REACHABLE_COLLISION_WORD,
+            "nth_default_keyword_count": 1,
+            "forbidden_default_keyword_count": 5,
             "lexical_slots_share_generate_keywords_word_list": True,
             "instruction_pair_is_conflict_compatible": True,
             "pinned_livebench_commit": PINNED_LIVEBENCH_COMMIT,
@@ -109,8 +125,10 @@ def verify() -> dict:
         "truth_repair": {
             "prior_illustrative_word": "alpha",
             "prior_illustrative_word_is_in_pinned_word_list": False,
+            "intermediate_one_word_forbidden_example_was_generator_cardinality_incomplete": True,
             "replacement_generator_reachable_word": REACHABLE_COLLISION_WORD,
-            "effect": "PRESERVE_SLOT_UNSAT_THEOREM_AND_REPAIR_GENERATOR_SUPPORT_REACHABILITY",
+            "replacement_forbidden_sample_cardinality": 5,
+            "effect": "PRESERVE_SLOT_UNSAT_THEOREM_AND_REPAIR_FULL_GENERATOR_SUPPORT_REACHABILITY",
         },
         "deduction": [
             "RAW_ID_COMPATIBILITY_IS_NOT_CONCRETE_SLOT_SATISFIABILITY",
