@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_OVERLAP_REFERENCE_INDEPENDENCE_THEOREM_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONSTRUCTIVE_REFERENCE_INDEPENDENCE_ROUTE__PUBLIC_12_OF_12_EXISTENCE_CHECK__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_instruction": "ratio:overlap",
+  "frozen_checker": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "path": "livebench/if_runner/ifbench/instructions.py",
+    "checker": "NGramOverlapChecker",
+    "arithmetic": "SET_OF_CHARACTER_TRIGRAMS__INTERSECTION_SIZE_DIVIDED_BY_RESPONSE_TRIGRAM_SET_SIZE__PLUS_MINUS_2_PERCENT"
+  },
+  "breakthrough": {
+    "statement": "EXACT_REFERENCE_TEXT_IS_NOT_INFORMATION_THEORETICALLY_REQUIRED_TO SATISFY_RATIO_OVERLAP_IF_ANY_WHITESPACE_FREE_VISIBLE_TOKEN_HAS_ALL_OF_ITS_TRIGRAMS_IN_THE_EXACT_REFERENCE",
+    "construction": "LET_K_BE_DISTINCT_TRIGRAMS_OF_VISIBLE_TOKEN__APPEND_L_DISTINCT_PRIVATE_USE_CHARACTERS_DISJOINT_FROM_REFERENCE__OVERLAP_IS_EXACTLY_K_DIV_K_PLUS_L__SEARCH_INTEGER_L_FOR_TARGET_BAND",
+    "why_reference_formatting_drops_out": "NEWLINES_OR_OTHER_WHITESPACE_OUTSIDE_THE_VISIBLE_TOKEN_CANNOT_CHANGE_THE_TOKEN_INTERNAL_TRIGRAMS",
+    "why_denominator_is_controllable": "THE_FROZEN_CHECKER_NORMALIZES_BY_RESPONSE_TRIGRAM_SET_SIZE_NOT_REFERENCE_TRIGRAM_SET_SIZE"
+  },
+  "public_family_validation": {
+    "source_repository": "allenai/IFBench",
+    "source_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "source_path": "ifbench/data/IFBench_test.jsonl",
+    "ratio_overlap_rows": 12,
+    "constructive_existential_pass_rows": 12,
+    "result": "12_OF_12",
+    "terminal_rows_used": 0,
+    "note": "THE CHECK SELECTED ONLY TOKENS LITERALLY PRESENT IN THE PUBLIC RENDERED PROMPT AND PUBLIC REFERENCE_TEXT; IT DOES NOT BIND THE FROZEN TERMINAL POPULATION."
+  },
+  "runtime_primitive": "canonical/runtime/livebench_ratio_overlap_visible_token_constructor_v1.py",
+  "next_proof_obligations": [
+    "PROVE_A_CONTAMINATION_SAFE_VISIBLE_BASE_TOKEN_EXTRACTOR_FOR_EVERY_GENERATABLE_RATIO_OVERLAP_PROMPT_FORM",
+    "PROVE_THE_SELECTED_PRIVATE_USE_SUFFIX_RANGE_IS_DISJOINT_FROM_THE EXACT_REFERENCE UNDER THE PUBLIC_GENERATION CONTRACT",
+    "PROVE_COMPOSITION_WITH_CO_OCCURRING_CHECKERS_OR_ROUTE_RATIO_OVERLAP_THROUGH_A COMPOSITION SAFE CONSTRUCTOR",
+    "INDEPENDENTLY_VERIFY_RUNTIME_AND_PUBLIC_12_OF_12_CHECK",
+    "DO_NOT_GRANT ACCEPTANCE OR CAPABILITY CREDIT UNTIL SEMANTIC AND COMBINATION OBLIGATIONS REQUIRED BY THE ACTIVE ACCEPTANCE CONTRACT ARE MET"
+  ],
+  "impact_on_prior_truth_repair": {
+    "prior_residual": "EXACT_REFERENCE_TEXT_ACQUISITION_FOR_RATIO_OVERLAP",
+    "new_residual": "VISIBLE_BASE_TOKEN_EXTRACTION_PLUS_SUFFIX_ALPHABET_DISJOINTNESS_PLUS_COMBINATION_SOUNDNESS",
+    "strictly_weaker_information_requirement": true,
+    "exact_reference_reconstruction_no_longer_necessary_for_THIS_CHECKER_ROUTE": true
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_OPUS55_CAPABILITY_CREDIT",
+    "NO_GENERAL_SEMANTIC_ANSWER_QUALITY_PROOF",
+    "NO_TERMINAL_DATASET_EQUIVALENCE CLAIM",
+    "NO_TERMINAL_CASE CONTENT USED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
