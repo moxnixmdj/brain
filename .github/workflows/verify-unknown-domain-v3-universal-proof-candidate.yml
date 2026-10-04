@@ -1,0 +1,59 @@
+name: Verify Unknown-Domain V3 universal proof candidate
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/unknown_domain_direct_candidate_v3.py'
+      - 'canonical/tests/test_unknown_domain_direct_candidate_v3.py'
+      - 'canonical/runtime/unknown_domain_direct_v3_universal_proof_v1.py'
+      - 'canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py'
+      - 'canonical/governance/UNKNOWN_DOMAIN_DIRECT_V3_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json'
+      - '.github/workflows/verify-unknown-domain-v3-universal-proof-candidate.yml'
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V2 counterexample and V3 repair regression
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -vv canonical/tests/test_unknown_domain_direct_candidate_v3.py > v3-diagnostic.txt 2>&1
+          code=$?
+          echo "candidate_test_exit=$code" >> v3-diagnostic.txt
+          cat v3-diagnostic.txt
+          exit $code
+      - name: Run V3 universal proof tests
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -vv canonical/tests/test_unknown_domain_direct_v3_universal_proof_v1.py >> v3-diagnostic.txt 2>&1
+          code=$?
+          echo "proof_test_exit=$code" >> v3-diagnostic.txt
+          cat v3-diagnostic.txt
+          exit $code
+      - name: Execute proof module
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          python -m canonical.runtime.unknown_domain_direct_v3_universal_proof_v1 >> v3-diagnostic.txt 2>&1
+          code=$?
+          echo "proof_module_exit=$code" >> v3-diagnostic.txt
+          cat v3-diagnostic.txt
+          exit $code
+      - name: Upload V3 diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unknown-domain-v3-diagnostic
+          path: v3-diagnostic.txt
+          if-no-files-found: error
+          retention-days: 7
