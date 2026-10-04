@@ -73,7 +73,9 @@ def _special_json(constraints: list[dict[str, Any]]) -> str:
     required = _required_fragments(_required(constraints), forbidden)
     filler = _safe_token(forbidden)
     payload = " ".join([filler, *required]).strip()
-    response = json.dumps({"response": payload}, ensure_ascii=False)
+    # Avoid fixed alphabetic JSON keys: forbidden-word parameters may contain
+    # words like "response". Arrays add no alphabetic scaffold.
+    response = json.dumps([payload], ensure_ascii=False)
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
             raise JointWitnessError("JSON_FORBIDDEN_COLLISION")
@@ -102,8 +104,8 @@ def _special_two(constraints: list[dict[str, Any]]) -> str:
     filler = _safe_token(forbidden)
     title = "<<x>> " if _get_one(constraints, "detectable_format:title") else ""
     common = (title + " ".join([filler, *required])).strip()
-    a = common + " alpha"
-    b = common + " beta"
+    a = common + " 0"
+    b = common + " 1"
     response = a + "******" + b
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
@@ -220,9 +222,9 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
         # outer quotes. Bullet-list and nth-paragraph constraints conflict in
         # the frozen generator, so this does not perturb nth first-word logic.
         if bullets:
-            core = '"\\n' + core.strip('"') + '"'
+            core = '"\n' + core.strip('"') + '"'
         else:
-            core = '"' + core.strip('"') + '"'
+            core = '"\n' + core.strip('"') + '"'
 
     # Final whole-word forbidden guard. Required/forbidden overlap is handled
     # above, but other generated structure may still collide with a forbidden word.
