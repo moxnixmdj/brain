@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V10_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__V10_COMPOSITION_INDEPENDENT_PASS__POINTER_PROJECTION_REVERIFY_REQUIRED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "status": "ACTIVE__V10_COMPOSITION_AND_POINTER_PROJECTION_INDEPENDENT_PASS__EFFECTIVE_ZERO_REALITY_SCHEDULING__ZERO_CREDIT",
   "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V10.json",
   "frontier_git_blob_sha": "2012926814d0d06405da56da64e589b06fef1756",
   "verification_path": "canonical/verification/ROOT2_V10_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
@@ -16,12 +16,12 @@
   ],
   "authority": {
     "scheduling": true,
-    "effective_scheduling": false,
+    "effective_scheduling": true,
     "execution": false,
     "promotion": false,
     "fresh_reality": false
   },
-  "activation_condition": "INDEPENDENT_POINTER_PROJECTION_PASS_AND_TERMINAL_ROOT_MEASUREMENT_SURFACES_BIND_THIS_EXACT_FRONTIER_VERIFICATION_AND_ACTIVATION_WHILE_PRESERVING_ACTIVE_EXTERNAL_OVERLAYS",
+  "activation_condition": "SATISFIED__INDEPENDENT_POINTER_PROJECTION_PASS__TERMINAL_ROOT_MEASUREMENT_POINTERS_COHERENT__EXTERNAL_FACT_AND_PRIMARY_SOURCE_DELETION_OVERLAYS_PRESERVED",
   "accounting": {
     "incremental_spend_usd": 0,
     "new_reality_units_consumed": 0,
@@ -30,5 +30,19 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
-  }
+  },
+  "pointer_projection_verification": {
+    "path": "canonical/verification/ROOT2_V10_POINTER_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "73fce958517f0467666bc9e70f8411fa618b5210",
+    "workflow_run_id": 37173464316,
+    "workflow_job_id": 111351076362,
+    "conclusion": "success"
+  },
+  "hard_nonclaims": [
+    "SCHEDULING_AUTHORITY_ONLY",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ]
 }
