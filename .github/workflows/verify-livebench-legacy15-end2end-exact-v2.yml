@@ -20,8 +20,15 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Initialize diagnostic breadcrumb
+        if: always()
+        run: |
+          mkdir -p /tmp/receipt
+          printf '%s\n' '{"stage":"AFTER_SETUP_PYTHON"}' > /tmp/receipt/stage.json
+
       - name: Install frozen legacy checker dependencies
         run: |
+          printf '%s\n' '{"stage":"INSTALL_DEPENDENCIES_STARTED"}' > /tmp/receipt/stage.json
           python -m pip install --upgrade pip
           python -m pip install nltk==3.9.2 langdetect==1.0.9 immutabledict==4.2.1
           python - <<'PY'
@@ -29,15 +36,18 @@ jobs:
           for name in ["punkt", "punkt_tab"]:
               nltk.download(name, quiet=True)
           PY
+          printf '%s\n' '{"stage":"INSTALL_DEPENDENCIES_PASSED"}' > /tmp/receipt/stage.json
 
       - name: Checkout exact frozen LiveBench scorer
         run: |
+          printf '%s\n' '{"stage":"LIVEBENCH_CHECKOUT_STARTED"}' > /tmp/receipt/stage.json
           git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/livebench
           git -C /tmp/livebench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
+          printf '%s\n' '{"stage":"LIVEBENCH_CHECKOUT_PASSED"}' > /tmp/receipt/stage.json
 
       - name: Run exhaustive active15 end-to-end exact audit
         run: |
-          mkdir -p /tmp/receipt
+          printf '%s\n' '{"stage":"AUDIT_STARTED"}' > /tmp/receipt/stage.json
           python canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py \
             --livebench-root /tmp/livebench \
             --output /tmp/receipt/livebench-legacy15-end2end-exact-v2.json
@@ -47,5 +57,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: livebench-legacy15-end2end-exact-v2
-          path: /tmp/receipt/livebench-legacy15-end2end-exact-v2.json
+          path: /tmp/receipt/
           if-no-files-found: error
