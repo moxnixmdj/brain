@@ -1,0 +1,51 @@
+name: Verify PR1778 Root1 capability-first scheduler
+
+on:
+  push:
+    branches: ["breakthrough/root1-capability-first-scheduler-20261004-sol-v2"]
+    paths:
+      - "canonical/runtime/terminal_minimum_causal_depth_policy_v1.py"
+      - "canonical/runtime/terminal_causal_depth_controller_v1.py"
+      - "canonical/governance/ROOT1_CAPABILITY_REPAIR_REGISTRY_V1.json"
+      - "canonical/tests/test_terminal_causal_depth_controller_v1.py"
+      - ".github/workflows/verify-root1-capability-first-scheduler-pr1778.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile patched runtime
+        run: python -m py_compile canonical/runtime/terminal_minimum_causal_depth_policy_v1.py canonical/runtime/terminal_causal_depth_controller_v1.py
+      - name: Run controller unit tests
+        run: python -m unittest -v canonical.tests.test_terminal_causal_depth_controller_v1
+      - name: Verify current Root1 partition invariants
+        run: |
+          python - <<'PY'
+          from canonical.runtime.terminal_minimum_causal_depth_policy_v1 import validate_live_state
+          current={
+            "accepted_families":5,"open_families":14,"proved_atomic":12,"unresolved_atomic":26,
+            "total_families":19,"total_atomic":38,"root1_positive_gaps":1,"root2_only":15,
+            "root3_only":7,"root2_and_root3":3,"terminal":False,
+          }
+          validate_live_state(current)
+          bad=dict(current); bad["root2_only"]=16
+          try:
+              validate_live_state(bad)
+          except ValueError as exc:
+              assert "INCONSISTENT_ROOT_PARTITION" in str(exc)
+          else:
+              raise AssertionError("inconsistent root partition was accepted")
+          future=dict(current)
+          future.update({"accepted_families":6,"open_families":13,"proved_atomic":13,
+                         "unresolved_atomic":25,"root1_positive_gaps":0})
+          validate_live_state(future)
+          print("ROOT1_POLICY_INVARIANTS_PASS")
+          PY
