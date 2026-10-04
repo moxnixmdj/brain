@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V6_REPLAY72_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__MIXED_POLICY_AND_RUNTIME_FAILURE__PREDICATE_FAILURE_NOT_ADMISSIBLE__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "canonical_root_at_binding": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "822d7a0e64b2e919a873526d111e7202c40e1f5b"
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37191763314,
+    "workflow_job_id": 111405270609,
+    "evidence_branch": "execute/livebench-replay72-v6-20261004",
+    "evidence_commit": "59c9a029027b7c3eed4bb80f22933e7ddb2ddfb1",
+    "log_path": "LIVEBENCH_REPLAY72_V6.log",
+    "log_git_blob_sha": "6c9c89cd2f7e977405017cb5ddfa8033126f4bf2",
+    "launcher_git_blob_sha": "e0e2c3581b389efd1c5cab4b4eff78762d1ec61b",
+    "executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "activation_git_blob_sha": "c449329ad9e6e9ac001c5a1cdb2f3fa187fa49b3",
+    "candidate_git_blob_sha": "07e857f0a7095838cecbc6a79961fe9580673ee4"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-fast/livebench-v6-result-truth-20261004",
+    "trigger_commit": "42497ddd5d901de6131bac4d26e28e756cdac674",
+    "workflow_run_id": 37191973823,
+    "workflow_job_id": 111405906683,
+    "conclusion": "success"
+  },
+  "verified_truth": {
+    "terminal_cases_consumed": 72,
+    "policy_blocked_count": 43,
+    "runtime_exit_count": 29,
+    "valid_candidate_response_count": 0,
+    "other_failure_count": 0,
+    "distinct_runtime_exit_hash_count": 29,
+    "recorded_score_mass": 0,
+    "arithmetic_fail_forced": true,
+    "predicate_failure_admissible": false,
+    "root1_reopen_authorized": false,
+    "reason": "RUNTIME_EXIT_MASS_REMAINS_CAUSALLY_UNCLASSIFIED"
+  },
+  "next_required_action": "SANITIZE_AND_CLASSIFY_RUNTIME_BLOCKERS_WITHOUT_PROMPT_OR_RESPONSE_CONTENT__REPLAY_ONLY_ALREADY_EXPOSED_PREFIX",
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_CAPABILITY_FAILURE_PROVED",
+    "NO_LIVEBENCH_PASS_PROVED",
+    "NO_ROOT1_REOPEN",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
+    "NO_CASE_73_OR_LATER_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "promotion_authority": false
+}
