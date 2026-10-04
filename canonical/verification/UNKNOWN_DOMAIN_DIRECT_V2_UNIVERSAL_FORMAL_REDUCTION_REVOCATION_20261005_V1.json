@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_REVOCATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "TRUTH_REPAIR__FALSE_V2_UNIVERSAL_PROMOTION_REVOKED__PREDICATE_REOPENED__ZERO_NEW_REALITY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "invalidated_reduction": {
+    "path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_20261005_V1.json",
+    "git_blob_sha": "941e62de59e4c528e8afbb95482f6707bc62104e",
+    "invalidated_claim": "FOR_EVERY_VALID_POST_FREEZE_BEACON_AND_EVALUATOR_SECRET__FOR_EVERY_27_CASE_POPULATION_EMITTED_BY_THE_EXACT_FROZEN_V2_GENERATOR__ALL_27_CASES_PASS",
+    "prior_atomic_credit_delta": 1,
+    "revoked_atomic_credit_delta": -1
+  },
+  "decisive_falsifier": {
+    "class": "REACHABLE_ADD2_EXACT_IEEE754_ROLE_ORDER_COUNTEREXAMPLE",
+    "regression_test": "canonical/tests/test_unknown_domain_v2_universal_promotion_revocation_v1.py",
+    "regression_test_git_blob_sha": "cd6acdb9f749bbdd5af2be8f046f53215ccf23df",
+    "generator": "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py",
+    "generator_git_blob_sha": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "candidate": "canonical/runtime/unknown_domain_direct_candidate_v2.py",
+    "candidate_git_blob_sha": "4470716f95a559a700e461262df909ae19a41651",
+    "mechanism": "V2_CAN_IDENTIFY_THE_CORRECT_ADD2_SUPPORT_YET_LEXICOGRAPHICALLY_SWAP_R0_R1__PYTHON_IEEE754_ADDITION_IS_NOT_ASSOCIATIVE_COMMUTATIVE_AT_THE_LAST_BIT_UNDER_THE_FROZEN_EVALUATION_ORDER__SCORER_REQUIRES_EXACT_TERMINAL_EQUALITY",
+    "consequence": "ONE_REACHABLE_FAILING_CASE_FALSIFIES_THE_UNIVERSAL_FOR_EVERY_POPULATION_CLAIM"
+  },
+  "independent_additional_proof_hole": {
+    "class": "OPAQUE_IDENTIFIER_TOTALITY_NOT_PROVED_FOR_V2",
+    "mechanism": "TRUNCATED_HMAC_DERIVED_IDENTIFIERS_WERE_TREATED_AS_COLLISION_FREE_WITHOUT_A_STRUCTURAL_INJECTIVITY_PROOF",
+    "consequence": "EVEN_WITHOUT_THE_EXACT_FLOAT_COUNTEREXAMPLE__THE_V2_UNIVERSAL_QUANTIFIER_WAS_NOT_ESTABLISHED",
+    "note": "THIS_HOLE_IS_NOT_NEEDED_FOR_REVOCATION_BECAUSE_THE_ADD2_COUNTEREXAMPLE_ALREADY_FALSIFIES_THE_THEOREM"
+  },
+  "required_successor": {
+    "rule": "A_SINGLE_CONTENT_BOUND_SUCCESSOR_MUST_SIMULTANEOUSLY_CLOSE_BOTH_KNOWN_HOLES",
+    "obligations": [
+      "STRUCTURAL_IDENTIFIER_TOTALITY_FOR_EVERY_VALID_EMITTED_POPULATION",
+      "EXACT_ADD2_ROLE_ORIENTATION_OR_OTHER_PROOF_OF_EXACT_IEEE754_GOLD_EQUALITY",
+      "STRICT_WRONG_SUPPORT_REJECTION_FOR_ALL_SIX_TRANSFER_FAMILIES",
+      "ALL_THREE_ABSTENTION_CLASSES",
+      "INDEPENDENT_CONTENT_BOUND_VERIFICATION",
+      "SEPARATE_FAIL_CLOSED_ROOT3_AND_ACCEPTANCE_REDUCTION"
+    ],
+    "current_credit_authority": false
+  },
+  "canonical_truth_after_revocation": {
+    "predicate_state": "EXTERNAL_BLOCKED",
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false,
+    "reason": "CURRENT_TERMINAL_ROOT_CAUSE_STATE_ALREADY_REMAINS_12_PROVED_26_UNRESOLVED__THIS_REVOCATION_RESTORES_ACCEPTANCE_BINDINGS_TO_THAT_FAIL_CLOSED_TRUTH"
+  },
+  "hard_rules": [
+    "DO_NOT_PROMOTE_THE_REVOKED_V2_UNIVERSAL_REDUCTION",
+    "FINITE_QUALIFICATION_PASSES_DO_NOT_REPAIR_A_FALSE_UNIVERSAL_THEOREM",
+    "DO_NOT_ACCEPT_A_SUCCESSOR_THAT_FIXES_IDENTIFIER_TOTALITY_BUT_REINTRODUCES_ADD2_EXACT_FLOAT_ROLE_ORDER",
+    "DO_NOT_ACCEPT_A_SUCCESSOR_THAT_FIXES_ADD2_EXACT_FLOAT_BUT_RETAINS_UNPROVED_IDENTIFIER_TOTALITY",
+    "ZERO_NEW_REALITY_CONSUMED_BY_REVOCATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
