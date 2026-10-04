@@ -14,10 +14,15 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
     def test_live_projection_is_count_generic_and_consistent(self):
         docs,shas=self.live(); out=self.evaluate(docs,shas)
         self.assertTrue(out["pass"],out)
-        self.assertEqual(out["acceptance_closed_families"],4)
-        self.assertEqual(out["acceptance_open_families"],15)
-        self.assertEqual(out["atomic_predicates_proved"],11)
-        self.assertEqual(out["atomic_predicates_unresolved"],27)
+        truth=docs["authority"]["truth"]["opus55_acceptance"]
+        closed,total_pass=truth.split("_PASS__")[0].split("/")
+        opened,total_open=truth.split("_PASS__")[1].removesuffix("_OPEN").split("/")
+        self.assertEqual(total_pass,total_open)
+        self.assertEqual(out["acceptance_closed_families"],int(closed))
+        self.assertEqual(out["acceptance_open_families"],int(opened))
+        frontier=docs["authority"]["atomic_acceptance_frontier"]
+        self.assertEqual(out["atomic_predicates_proved"],frontier["proved"])
+        self.assertEqual(out["atomic_predicates_unresolved"],frontier["unresolved"])
         self.assertEqual(set(out["baseline_families"]),{"EXACT_SYMBOLIC_COMPUTATION","LONG_HORIZON_MEMORY_AND_CONTINUITY"})
         self.assertIn("SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",out["accepted_families"])
         self.assertIn("SUBAGENT_DELEGATION_AND_COORDINATION",out["accepted_families"])
