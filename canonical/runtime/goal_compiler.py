@@ -4916,10 +4916,53 @@ def _validate_compiled_clause_coverage(compiled):
     return compiled
 
 
+def _compile_exact_literal_response_goal(goal):
+    """Compile a narrow domain-free instruction whose entire required effect
+    is to emit one explicit literal exactly. This is routing glue, not
+    capability acquisition, and intentionally fails closed outside the tiny
+    grammar below.
+    """
+    raw=str(goal or "").strip()
+    if not raw or "\n" in raw or "\r" in raw:
+        return None
+    prefix=r"(?:(?:reply|respond)(?:\s+with)?|output|return|print)\s+exactly\s+"
+    patterns=(
+        (prefix+r'"([^"\r\n]{1,512})"\s*\.?$',1),
+        (prefix+r"\'([^\'\r\n]{1,512})\'\s*\.?$",1),
+        (prefix+r"\x60([^\x60\r\n]{1,512})\x60\s*\.?$",1),
+        (prefix+r"([A-Za-z0-9_./:+-]{1,256})\s*\.$",1),
+    )
+    literal=None
+    for pattern,group in patterns:
+        match=re.fullmatch(pattern,raw,re.IGNORECASE)
+        if match is not None:
+            literal=match.group(group)
+            break
+    if literal is None:
+        return None
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_PLAIN_GOAL_V1",
+      "compiler_mode":"DETERMINISTIC_EXACT_LITERAL_RESPONSE",
+      "clauses":[raw],
+      "compiled_parts":[{
+        "index":0,
+        "subgoal":raw,
+        "mode":"DETERMINISTIC_EXACT_LITERAL_RESPONSE",
+        "literal_sha256":hashlib.sha256(literal.encode("utf-8")).hexdigest(),
+      }],
+      "controller_actions":[
+        {"type":"finish","args":{"summary":literal}},
+      ],
+      "finish_summary":literal,
+    }
+
 def compile_goal(goal, registry, root):
     goal=str(goal or "").strip()
     if not goal:
         raise GoalCompilationFailure("GOAL_REQUIRED")
+    exact_literal=_compile_exact_literal_response_goal(goal)
+    if exact_literal is not None:
+        return _validate_compiled_clause_coverage(exact_literal)
     browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
