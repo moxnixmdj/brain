@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SLOT_FEASIBILITY_TRUTH_REPAIR_V1",
+  "date": "2026-10-05",
+  "status": "TRUTH_REPAIR__STRUCTURAL_928_TO_7_REDUCTION_PRESERVED__SLOT_FEASIBILITY_LAYER_NOW_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem": "The existing 928 conflict-compatible active15 ID sets and seven archetypes compress the public conflict graph, but ID-level compatibility is not logically equivalent to satisfiability of the concrete visible checker slots.",
+  "preserved_results": {
+    "archetype_runtime": "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+    "archetype_runtime_git_blob_sha": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
+    "compatible_id_set_count": 928,
+    "archetype_count": 7,
+    "preserved_claim": "EVERY_ENUMERATED_CONFLICT_COMPATIBLE_ACTIVE15_ID_SET_IS_STRUCTURALLY_CLASSIFIED_INTO_ONE_OF_SEVEN_ARCHETYPES",
+    "revoked_claim": "ID_COMPATIBILITY_ALONE_IMPLIES_A_JOINT_WITNESS_EXISTS"
+  },
+  "exact_public_counterexample": {
+    "instruction_ids": [
+      "keywords:forbidden_words",
+      "length_constraints:nth_paragraph_first_word"
+    ],
+    "registry_pair_is_conflict_compatible": true,
+    "visible_slots": {
+      "length_constraints:nth_paragraph_first_word": {
+        "num_paragraphs": 2,
+        "nth_paragraph": 1,
+        "first_word": "alpha"
+      },
+      "keywords:forbidden_words": {
+        "forbidden_words": [
+          "alpha"
+        ]
+      }
+    },
+    "proof": [
+      "PINNED_PARAGRAPH_FIRST_WORD_CHECKER_REQUIRES_THE_SELECTED_PARAGRAPH_FIRST_WORD_TO_EQUAL_ALPHA_CASE_INSENSITIVELY",
+      "THAT_FORCES_ALPHA_TO_OCCUR_AS_A_STANDALONE_WORD_AT_THE_SELECTED_PARAGRAPH_START",
+      "PINNED_FORBIDDEN_WORDS_CHECKER_REJECTS_ANY_RESPONSE_MATCHING_WORD_BOUNDARY_ALPHA_WORD_BOUNDARY_CASE_INSENSITIVELY",
+      "THEREFORE_NO_RESPONSE_CAN_PASS_BOTH_CHECKERS_FOR_THIS_VISIBLE_SLOT_TUPLE"
+    ],
+    "terminal_rows_used": 0,
+    "hidden_kwargs_used": 0
+  },
+  "new_runtime": {
+    "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+    "git_blob_sha": "70af00025df343398ef3b1e4302208ef93ba7872",
+    "tests_path": "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py",
+    "tests_git_blob_sha": "ec929ba757b49cccf30509ea8438768718cf4bdc",
+    "certified_hard_unsat_classes": [
+      "NTH_PARAGRAPH_FIRST_WORD_EQUALS_A_FORBIDDEN_WORD",
+      "MANDATORY_END_PHRASE_CONTAINS_A_GENERATED_LITERAL_FORBIDDEN_WORD"
+    ],
+    "important_semantics": "NO_REPORTED_CONTRADICTION_MEANS_UNKNOWN_NOT_SAT; THE_LAYER_FAILS_CLOSED"
+  },
+  "public_generator_diagnostics": {
+    "historical_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "pinned_instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "pinned_registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "word_list_entry_count": 1646,
+    "word_list_unique_value_count": 1626,
+    "nth_plus_forbidden_exact_value_collision_probability_conditional_on_pair": 0.003191693961155612,
+    "end_plus_forbidden_collision_probability_conditional_on_pair_and_first_end_phrase": 0.0030376670716891763,
+    "end_plus_forbidden_collision_probability_conditional_on_pair_and_second_end_phrase": 0.009090855420472499,
+    "end_plus_forbidden_collision_probability_conditional_on_pair_mean_over_two_public_end_phrases": 0.006064261246080838,
+    "credit_rule": "THESE_ARE_PUBLIC_GENERATOR_DIAGNOSTICS_ONLY; THEY DO_NOT INFER TERMINAL_PAIR_FREQUENCIES OR SUPPLY ACCEPTANCE_CREDIT"
+  },
+  "corrected_proof_target": {
+    "statement": "FOR_EVERY_GENERATOR_ADMITTED_VISIBLE_CONTRACT_TUPLE_IN_THE_ACTIVE15_SURFACE, PRODUCE_EITHER_A_RESPONSE_THAT_POSTVALIDATES_TRUE_AGAINST_EVERY_PINNED_CHECKER_OR_A_CHECKER_SEMANTICS_CERTIFICATE_THAT_THE_TUPLE_IS_UNSATISFIABLE",
+    "why_stronger": "THIS TARGET COVERS_CONCRETE_SLOT_INTERACTIONS_INSTEAD_OF_ONLY_THE_ID_CONFLICT_GRAPH",
+    "required_stages": [
+      "PROMPT_ONLY_VISIBLE_CONTRACT_COMPILATION",
+      "SEVEN_ARCHETYPE_STRUCTURAL_CLASSIFICATION",
+      "SLOT_LEVEL_FEASIBILITY_OR_HARD_UNSAT_CERTIFICATION",
+      "DETERMINISTIC_ARCHETYPE_CONSTRUCTION",
+      "EXACT_PINNED_CHECKER_POSTVALIDATION",
+      "UNIVERSAL_OR_EXHAUSTIVE_PUBLIC_GENERATOR_DOMAIN_PROOF",
+      "INDEPENDENT_PUBLIC_RUNNER_EXACT_BYTE_VERIFICATION"
+    ]
+  },
+  "next_action": "IMPLEMENT_A_DETERMINISTIC_WITNESS_OR_UNSAT_COMPOSER_FOR_THE_SEVEN_ARCHETYPES_AND_VERIFY_IT_OVER_THE_PUBLIC_GENERATOR_ADMITTED_SLOT_DOMAIN; DO_NOT_ATTEMPT_TO_PROVE_RAW_928_ID_SET_SATISFIABILITY",
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROW_CONTENT_READ",
+    "NO_TERMINAL_CASE_FREQUENCY_INFERRED",
+    "NO_TARGET_SCORE_REUSED",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_CLAIM_THAT_THE_TWO_CURRENT_HARD_UNSAT_CLASSES_ARE_COMPLETE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
