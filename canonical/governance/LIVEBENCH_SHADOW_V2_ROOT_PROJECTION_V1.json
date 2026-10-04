@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SHADOW_V2_ROOT_PROJECTION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_MAIN_RECONCILIATION__INDEPENDENT_PROJECTION_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "compiled_from_main": "3406d9bbf29a6706d2f0e84688877414bc481afb",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source_bindings": {
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "e353d54f4608d25b7f0ea06fba5d8fbf2ddfbb59"
+    },
+    "thin_adapter_completion": {
+      "path": "canonical/governance/LIVEBENCH_IF_THIN_ADAPTER_COMPLETION_ACTIVATION_V1.json",
+      "git_blob_sha": "04505bc3fca23c448b35cd5ad546bac770f5cb34"
+    },
+    "execution_precommit_verification": {
+      "path": "canonical/verification/LIVEBENCH_IF_EXECUTION_PRECOMMIT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "7f626e46a0ede42e0f94b6d507b72fa45ce6faf5"
+    },
+    "shadow_lease_v2_verification": {
+      "path": "canonical/verification/SHADOW_REALITY_LEASE_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "c3eaa9aef1b9cc1a6e5d39d478f5490c1660e4fb"
+    },
+    "shadow_preexposure_plan": {
+      "path": "canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V2.json",
+      "git_blob_sha": "1618d6f51bd63d8a2ec969f2cc5dc007f22ca572",
+      "plan_sha256": "b66dfe413089d4c91a8970e5d5502672025b9d2215cdbb4db2b4c249aed2c711"
+    },
+    "shadow_control_plane_verification": {
+      "path": "canonical/verification/LIVEBENCH_SHADOW_CONTROL_PLANE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "af01458bfb36ede0f494214fd2f240e5aa36b3c5"
+    },
+    "one_use_claim_backend": {
+      "path": "canonical/governance/SHADOW_GIT_REF_ONE_USE_CLAIM_BACKEND_V1.json",
+      "git_blob_sha": "b660e2ee70f42c7872a9b65c78198c5bdbf03609"
+    }
+  },
+  "exact_terminal_state_preserved": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false
+  },
+  "livebench_zero_reality_closed": [
+    "FROZEN_200_CASE_POPULATION_IDENTITY",
+    "DETERMINISTIC_IF_SCORER_AND_CHECKER_BOUNDARY",
+    "BRAIN_RESPONSE_ADAPTER",
+    "FIXED_65_7_ACCEPTANCE_BAR_AND_COMPARATOR_PROVENANCE",
+    "THIN_ADAPTER_8_OF_8",
+    "PUBLIC_STANDARD_ZERO_SPEND_CARRIER_BINDING",
+    "FIVE_COMPONENT_EXECUTION_PRECOMMIT",
+    "V2_PREEXPOSURE_PLAN_EXACT_BYTES",
+    "POINT_OF_USE_PREFLIGHT_VERIFIER_LOGIC",
+    "DURABLE_CREATE_ONCE_GIT_REF_BACKEND_BEHAVIOR",
+    "WRITE_ONLY_ESCROW_CONTROL_CONTRACT"
+  ],
+  "exact_remaining_before_case_reveal": [
+    "ACTUAL_LIVEBENCH_ZERO_CASE_POINT_OF_USE_RESOURCE_AND_DEPENDENCY_PREFLIGHT_RECEIPT",
+    "SEPARATE_V2_SHADOW_COLLECTION_ACTIVATION_BOUND_TO_VERIFIED_CONTROL_PLANE_AND_ACTUAL_PREFLIGHT",
+    "ATOMIC_PRODUCTION_ONE_USE_CLAIM_AFTER_PREFLIGHT_AND_BEFORE_CASE_REVEAL"
+  ],
+  "after_case_reveal_requirements": [
+    "EXECUTE_ONLY_EXACT_PRECOMMITTED_BYTES_ON_FROZEN_200_CASE_POPULATION",
+    "WRITE_RESULT_ONLY_TO_BOUND_ESCROW",
+    "EMIT_POST_EXECUTION_GENERIC_ISOLATION_OBSERVED_RECEIPT",
+    "KEEP_RESULT_INVISIBLE_UNTIL_ZERO_REALITY_FIXED_POINT",
+    "SEPARATE_POST_FIXED_POINT_PREDICATE_ACTIVATION_REQUIRED"
+  ],
+  "current_authority": {
+    "case_reveal": false,
+    "shadow_collection": false,
+    "global_fresh_reality": false,
+    "execution": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "scheduler_effect_if_independently_verified": [
+    "DELETE_STALE_LIVEBENCH_THIN_ADAPTER_AND_PRECOMMIT_BLOCKERS_FROM_CURRENT_SCHEDULER",
+    "SET_LIVEBENCH_NEXT_CRITICAL_ZERO_REALITY_ACTION_TO_ACTUAL_ZERO_CASE_POINT_OF_USE_PREFLIGHT",
+    "FORBID_SHADOW_ACTIVATION_BEFORE_ACTUAL_PREFLIGHT_RECEIPT",
+    "PRESERVE_26_UNRESOLVED_AND_ZERO_ACCEPTANCE_CREDIT"
+  ],
+  "hard_rules": [
+    "NO_TERMINAL_CASE_CONTENT_READ",
+    "NO_SCORE",
+    "NO_INFERENCE_FROM_CONTROL_PLANE_VERIFICATION_TO_RESOURCE_FIT",
+    "NO_SHADOW_ACTIVATION_WITHOUT_ACTUAL_POINT_OF_USE_PREFLIGHT",
+    "NO_ONE_USE_CLAIM_BEFORE_VERIFIED_SHADOW_ACTIVATION",
+    "NO_RESULT_VISIBILITY_BEFORE_ZERO_REALITY_FIXED_POINT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
