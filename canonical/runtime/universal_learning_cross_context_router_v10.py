@@ -32,6 +32,7 @@ def prove_v10_invariants()->dict[str,Any]:
     errors=[]
     src=["source-code-rich","interactive"]; dst=["new-sdk","interactive"]
     ssha=mp.context_digest(features=src); dsha=mp.context_digest(features=dst)
+    semantics={"ordered_steps":["inspect","model","verify"],"preconditions":["source-inspectable"],"invalidators":["source-unavailable"]}
     def ep(eid,b1):
         dig=mp.episode_digest(
             episode_id=eid,context_sha256=ssha,strategy_id="inspect-first",success=True,
@@ -41,31 +42,41 @@ def prove_v10_invariants()->dict[str,Any]:
             "burden_before":10,"burden_after":b1,"wall_clock":2,"risk":0,"incremental_spend_usd":0,
             "verification_receipt":{"receipt_id":"r-"+eid,"independent_verified":True,"exact_byte_bound":True,
                 "conclusion":"success","episode_id":eid,"episode_sha256":dig}}
+    episodes=[ep("e1",2),ep("e2",3)]
+    episode_ids=[x["episode_id"] for x in episodes]
+    strategy_sha=cm.strategy_semantics_digest(strategy_id="inspect-first",strategy_semantics=semantics)
+    episode_set_sha=cm.source_episode_set_digest(strategy_sha256=strategy_sha,episode_ids=episode_ids)
     pre=["source-inspectable"]; metrics=["BURDEN_REDUCTION","WALL_CLOCK","RISK"]; inv=["source-unavailable"]
     md=cm.morphism_digest(
         source_context_sha256=ssha,target_context_sha256=dsha,strategy_id="inspect-first",
+        strategy_sha256=strategy_sha,source_episode_set_sha256=episode_set_sha,
         preserved_preconditions=pre,preserved_metric_semantics=metrics,invalidators_checked=inv)
     morph={
         "source_context_sha256":ssha,"target_context_sha256":dsha,"strategy_id":"inspect-first",
+        "strategy_sha256":strategy_sha,"source_episode_set_sha256":episode_set_sha,
         "preserved_preconditions":pre,"preserved_metric_semantics":metrics,"invalidators_checked":inv,
         "verification_receipt":{
             "receipt_id":"m1","independent_verified":True,"exact_byte_bound":True,"conclusion":"success",
             "strategy_applicability_preserved":True,"performance_metric_semantics_preserved":True,
             "no_new_strategy_invalidators":True,"conservative_performance_transport_valid":True,
+            "source_episodes_executed_bound_strategy":True,
             "source_context_sha256":ssha,"target_context_sha256":dsha,"strategy_id":"inspect-first",
+            "strategy_sha256":strategy_sha,"source_episode_set_sha256":episode_set_sha,
             "morphism_sha256":md}}
-    out=cc.recommend(
-        target_context_features=dst,
-        transfer_candidates=[{"source_context_features":src,"strategy_id":"inspect-first",
-            "source_episodes":[ep("e1",2),ep("e2",3)],"context_morphism":morph}])
+    candidate={"source_context_features":src,"strategy_id":"inspect-first",
+               "strategy_semantics":semantics,"source_episodes":episodes,"context_morphism":morph}
+    out=cc.recommend(target_context_features=dst,transfer_candidates=[candidate])
     if out.get("recommended_strategy_id")!="inspect-first" or out.get("evidence_mode")!="PROOF_GATED_ONE_WAY_CONTEXT_MORPHISM":
         errors.append("CROSS_CONTEXT_COLD_START_TRANSFER_BROKEN")
+    tampered={**candidate,"strategy_semantics":{**semantics,"ordered_steps":["inspect","execute"]}}
+    blocked_semantics=cc.recommend(target_context_features=dst,transfer_candidates=[tampered])
+    if blocked_semantics.get("recommended_strategy_id") is not None:
+        errors.append("STRATEGY_SEMANTICS_TAMPER_NOT_BLOCKED")
     bad=dict(morph); bad["verification_receipt"]=dict(morph["verification_receipt"])
     bad["verification_receipt"]["no_new_strategy_invalidators"]=False
     blocked=cc.recommend(
         target_context_features=dst,
-        transfer_candidates=[{"source_context_features":src,"strategy_id":"inspect-first",
-            "source_episodes":[ep("e1",2),ep("e2",3)],"context_morphism":bad}])
+        transfer_candidates=[{**candidate,"context_morphism":bad}])
     if blocked.get("recommended_strategy_id") is not None:
         errors.append("UNPROVED_CONTEXT_TRANSFER_NOT_BLOCKED")
     base=v9.prove_v9_invariants()
@@ -76,6 +87,7 @@ def prove_v10_invariants()->dict[str,Any]:
         "schema":SCHEMA,"status":"UNIVERSAL_LEARNING_V10_INVARIANTS_PASS" if passed else "FAIL_CLOSED",
         "pass":passed,"errors":errors,"v9_base_preserved":base.get("pass") is True,
         "proof_gated_cold_start_transfer":passed,"unproved_context_transfer_blocked":passed,
+        "exact_strategy_semantics_binding_preserved":passed,
         "semantic_success_rate_proved":False,"unknown_domain_acceptance_proved":False,
         "execution_authority":False,"promotion_authority":False,"fresh_reality_authority":False,
         "acceptance_credit_delta":0,"ownership_credit_delta":0
