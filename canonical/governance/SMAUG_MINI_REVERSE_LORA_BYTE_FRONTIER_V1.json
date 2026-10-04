@@ -25,17 +25,32 @@
   "conservative_projection_envelope": {
     "interpretation": "RESOURCE_BOUND_IF_EVERY_MAJOR_MAIN_TRUNK_PROJECTION_LISTED_BELOW_REQUIRED_A_RANK_R_LORA_FACTOR_PAIR__NOT_A_CLAIM_THIS_WAS_THE_ORIGINAL_TARGET_MODULE_SET",
     "mlp": {
-      "modules_per_layer": ["gate_proj","up_proj","down_proj"],
+      "modules_per_layer": [
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
       "layers": 64,
       "sum_in_plus_out_per_rank": 4325376
     },
     "full_attention": {
-      "modules_per_layer": ["q_proj","k_proj","v_proj","o_proj"],
+      "modules_per_layer": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj"
+      ],
       "layers": 16,
       "sum_in_plus_out_per_rank": 655360
     },
     "gated_deltanet": {
-      "modules_per_layer": ["in_proj_qkv","in_proj_z","out_proj","in_proj_a","in_proj_b"],
+      "modules_per_layer": [
+        "in_proj_qkv",
+        "in_proj_z",
+        "out_proj",
+        "in_proj_a",
+        "in_proj_b"
+      ],
       "layers": 48,
       "derived_linear_qk": 2048,
       "derived_linear_v": 6144,
@@ -46,14 +61,46 @@
     "formula": "BF16_ADAPTER_BYTES_APPROX = 14590976 * RANK__PLUS_SMALL_SERIALIZATION_METADATA"
   },
   "rank_frontier": [
-    {"rank":8,"bf16_adapter_bytes":116727808,"bf16_adapter_gb_decimal":0.116728},
-    {"rank":16,"bf16_adapter_bytes":233455616,"bf16_adapter_gb_decimal":0.233456},
-    {"rank":32,"bf16_adapter_bytes":466911232,"bf16_adapter_gb_decimal":0.466911},
-    {"rank":64,"bf16_adapter_bytes":933822464,"bf16_adapter_gb_decimal":0.933822},
-    {"rank":96,"bf16_adapter_bytes":1400733696,"bf16_adapter_gb_decimal":1.400734},
-    {"rank":128,"bf16_adapter_bytes":1867644928,"bf16_adapter_gb_decimal":1.867645},
-    {"rank":192,"bf16_adapter_bytes":2801467392,"bf16_adapter_gb_decimal":2.801467},
-    {"rank":256,"bf16_adapter_bytes":3735289856,"bf16_adapter_gb_decimal":3.73529}
+    {
+      "rank": 8,
+      "bf16_adapter_bytes": 116727808,
+      "bf16_adapter_gb_decimal": 0.116728
+    },
+    {
+      "rank": 16,
+      "bf16_adapter_bytes": 233455616,
+      "bf16_adapter_gb_decimal": 0.233456
+    },
+    {
+      "rank": 32,
+      "bf16_adapter_bytes": 466911232,
+      "bf16_adapter_gb_decimal": 0.466911
+    },
+    {
+      "rank": 64,
+      "bf16_adapter_bytes": 933822464,
+      "bf16_adapter_gb_decimal": 0.933822
+    },
+    {
+      "rank": 96,
+      "bf16_adapter_bytes": 1400733696,
+      "bf16_adapter_gb_decimal": 1.400734
+    },
+    {
+      "rank": 128,
+      "bf16_adapter_bytes": 1867644928,
+      "bf16_adapter_gb_decimal": 1.867645
+    },
+    {
+      "rank": 192,
+      "bf16_adapter_bytes": 2801467392,
+      "bf16_adapter_gb_decimal": 2.801467
+    },
+    {
+      "rank": 256,
+      "bf16_adapter_bytes": 3735289856,
+      "bf16_adapter_gb_decimal": 3.73529
+    }
   ],
   "composition_with_current_small_base_candidate": {
     "qwen_q2_exact_candidate_bytes": 9828981664,
@@ -101,5 +148,17 @@
     "execution": false,
     "promotion": false,
     "acceptance_credit": false
+  },
+  "current_root_truth_rebind": {
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_git_blob_sha": "3fd35b7865f7827a5a7b4202bc625fe0f980dcda",
+    "livebench_state": "ROOT2_MEASUREMENT_OR_COMPARATOR_UNCERTAINTY_REOPENED",
+    "root1_active": false,
+    "root1_positive_gap_count": 0,
+    "root2_touching_count": 19,
+    "reason": "THE_PRIOR_64_PERCENT_FORCED_FAIL_BOUND_WAS_REVOKED_BECAUSE_72_CASE_SCORE_LOWER_BOUNDS_OF_ZERO_WERE_NOT_EXACT_ZERO_SCORES_OR_A_POPULATION_UPPER_BOUND",
+    "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
+    "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
+    "effect": "ALL_ROOT1_LABELS_IN_THIS_ARTIFACT_ARE_HISTORICAL_CONTEXT_ONLY__THE_COMPRESSION_AND_SHARED_SUBJECT_RESULTS_REMAIN_SCHEDULING_CANDIDATES_FOR_ROOT2"
   }
 }
