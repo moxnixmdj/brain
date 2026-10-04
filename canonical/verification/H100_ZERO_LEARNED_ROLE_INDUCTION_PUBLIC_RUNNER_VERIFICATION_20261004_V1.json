@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_ROLE_INDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__5_IDENTIFIED_PLUS_1_MANDATORY_ABSTENTION__ZERO_LEARNED_BYTES__ZERO_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_ROLE_INDUCTION_PREEXPOSURE_V1.json",
+      "git_blob_sha": "1d8049556eb073007e1f4686a3034726aeb27698"
+    },
+    "runtime": {
+      "path": "canonical/runtime/h100_zero_learned_role_induction_v1.py",
+      "git_blob_sha": "f18cbb1a1d9e1f1184a06df536a09ba99f3fdfed"
+    },
+    "tests": {
+      "path": "canonical/tests/test_h100_zero_learned_role_induction_v1.py",
+      "git_blob_sha": "bfabb4171b207a36d2a2916e74e9d873b0acf9d1"
+    },
+    "candidate": {
+      "path": "canonical/governance/H100_ZERO_LEARNED_ROLE_INDUCTION_CANDIDATE_V1.json",
+      "git_blob_sha": "e0c4d334af10f51ec3f28ba1eb356d3fd7297ae9"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1755,
+    "verifier_head_sha": "e0a398f36bcfa5441b7f5b744486ea599f4404ec",
+    "merge_commit": "dd60e67b8cba6d27badf7af688ce6136d96afad2",
+    "workflow_run_id": 37187716323,
+    "workflow_job_id": 111393121754,
+    "conclusion": "success",
+    "verifier_path": "verify_h100_zero_learned_role_induction_v1.py",
+    "verifier_git_blob_sha": "241d9eab8fe968c697dabee27c08e1c8accff590",
+    "workflow_path": ".github/workflows/verify-h100-zero-learned-role-induction-v1.yml",
+    "workflow_git_blob_sha": "07f1e28f87fd5fe2b144d688d3e04d3a46831e8d"
+  },
+  "independently_verified": {
+    "exact_subject_blobs": true,
+    "copied_subject_tests": "PASS",
+    "identifiable_tasks_correct": "5_OF_5",
+    "ambiguous_tasks_abstained": "1_OF_1",
+    "correlation_to_causation_inference": false,
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0
+  },
+  "deduction": "EXPLICIT_STRUCTURAL_ROLE_SEMANTICS_CAN_BE_COMPILED_WITH_ZERO_PERSISTENT_LEARNED_STATE_ON_THE_PREEXPOSED_POPULATION_WHILE_DIRECTIONALLY_AMBIGUOUS_OBSERVATIONAL_DATA_IS_CORRECTLY_ABSTAINED",
+  "residual_after_verification": [
+    "OPEN_WORLD_ROLE_SEMANTICS_BEYOND_EXPLICIT_STRUCTURAL_CUES",
+    "OPEN_WORLD_FREE_FORM_LANGUAGE_AND_TOOL_TRACE_VARIATION",
+    "OPEN_WORLD_PROPOSAL_PROBABILITY_AND_TRANSFER",
+    "DIRECT_UNKNOWN_DOMAIN_ABSTENTION_AND_TRANSFER_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_SEMANTIC_UNDERSTANDING_CLAIM",
+    "NO_CAUSAL_DIRECTION_FROM_CORRELATION_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
