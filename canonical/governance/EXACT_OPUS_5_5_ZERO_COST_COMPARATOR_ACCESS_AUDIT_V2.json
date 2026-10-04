@@ -57,7 +57,8 @@
       "ACCOUNT_CREDIT_OR_PLAN_PROVES_ZERO_INCREMENTAL_SPEND_FOR_FUTURE_MATCHED_WAVE",
       "HARNESS_AND_EFFORT_RELATION_TO_FROZEN_COMPARATOR"
     ],
-    "arena_machine_channel_publicly_verified": true
+    "arena_machine_channel_publicly_verified": false,
+    "arena_machine_endpoint_existence_independently_verifiable": true
   },
   "next": [
     "OBSERVE_ARENA_API_ACCOUNT_KEY_MODEL_LIST_CREDIT_STATE_AND_HARNESS_RELATION__NO_MORE_GENERIC_PRICING_SEARCH",
@@ -73,7 +74,8 @@
     "NO_COMPARATOR_EXECUTION",
     "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT",
     "NO_CLAIM_PUBLIC_ARENA_API_DOCS_PROVE_CLAUDE_OPUS_5_5_IS_IN_THIS_ACCOUNT_V1_MODELS",
-    "NO_CLAIM_ARENA_API_REQUESTS_ARE_ZERO_COST_WITHOUT_ACCOUNT_CREDIT_OR_PLAN_RECEIPT"
+    "NO_CLAIM_ARENA_API_REQUESTS_ARE_ZERO_COST_WITHOUT_ACCOUNT_CREDIT_OR_PLAN_RECEIPT",
+    "NO_CLAIM_LOGIN_GATED_ARENA_ROUTING_DOC_CONTENT_IS_INDEPENDENTLY_PUBLIC_RUNNER_REPRODUCED"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -91,7 +93,11 @@
     "arena_api_reference": {
       "url": "https://portal.api.preview.arena.ai/docs/api-reference",
       "proved": [
-        "ARENA_PUBLISHES_OPENAI_COMPATIBLE_MULTI_PROVIDER_LLM_GATEWAY",
+        "ARENA_MAINTAINS_AN_AUTHENTICATED_API_PORTAL",
+        "MACHINE_API_CHANNEL_EXISTENCE_IS_TESTABLE_VIA_UNAUTHENTICATED_API_ENDPOINT_RESPONSE"
+      ],
+      "candidate_not_independently_public_runner_reproduced": [
+        "OPENAI_COMPATIBLE_MULTI_PROVIDER_GATEWAY",
         "AUTHENTICATED_GET_V1_MODELS_EXISTS",
         "OPENAI_COMPATIBLE_CHAT_COMPLETIONS_EXISTS",
         "ANTHROPIC_COMPATIBLE_MESSAGES_EXISTS"
@@ -100,6 +106,9 @@
     "arena_routing": {
       "url": "https://portal.api.preview.arena.ai/docs/routing",
       "proved": [
+        "AUTHENTICATED_ROUTING_DOCUMENTATION_PORTAL_EXISTS"
+      ],
+      "candidate_not_independently_public_runner_reproduced": [
         "REQUEST_MODEL_PARAMETER_DIRECTLY_SELECTS_MODEL",
         "FALLBACKS_ARE_OPTIONAL_AND_CONTROLLABLE",
         "X_ARENA_RESOLVED_MODEL_REPORTS_ACTUAL_SERVED_MODEL"
