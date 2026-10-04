@@ -88,7 +88,7 @@ def test_sentence_end_unsat_makes_one_of_two_pointwise_optimal():
     assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in result["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
 
 
-def test_section_forbidden_unsat_makes_one_of_two_pointwise_optimal():
+def test_section_forbidden_pair_does_not_fake_pointwise_optimality():
     contracts = [
         {
             "instruction_id": "detectable_format:multiple_sections",
@@ -100,6 +100,8 @@ def test_section_forbidden_unsat_makes_one_of_two_pointwise_optimal():
         },
     ]
     result = certify(contracts, [True, False])
-    assert result["pointwise_optimal"] is True
+    assert result["status"].startswith("FAIL_CLOSED")
+    assert result["pointwise_optimal"] is False
     assert result["required_next_cardinality_subset_count"] == 1
-    assert "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:section" in result["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
+    assert result["semantically_verified_unsat_subset_count"] == 0
+    assert result["unresolved_subset_indices"] == [[0, 1]]
