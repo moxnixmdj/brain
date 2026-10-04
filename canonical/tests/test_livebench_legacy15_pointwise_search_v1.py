@@ -87,3 +87,35 @@ def test_selector_fails_closed_when_unsat_coverage_is_missing():
     assert out["status"] == "FAIL_CLOSED__BEST_CANDIDATE_OPTIMALITY_NOT_CERTIFIED"
     assert out["pointwise_optimal"] is False
     assert out["certificate"]["unresolved_subset_indices"] == [[0, 1]]
+
+
+def test_pinned_checker_bridge_removes_external_callback_gap(monkeypatch):
+    class FakeForbidden:
+        def __init__(self, iid):
+            self.word = ""
+
+        def build_description(self, *, forbidden_words):
+            self.word = str(forbidden_words[0])
+
+        def check_following(self, response):
+            return self.word not in response
+
+    monkeypatch.setattr(
+        search.exact_postvalidator,
+        "load_pinned_registry",
+        lambda root: (
+            {"keywords:forbidden_words": FakeForbidden},
+            {"livebench_commit": "pinned-test"},
+        ),
+    )
+    contracts = [c("keywords:forbidden_words", forbidden_words=["omega"])]
+    out = search.solve_with_pinned_livebench(
+        contracts,
+        "/synthetic/pinned/root",
+        max_per_subset=2,
+        max_total=32,
+    )
+    assert out["status"] == "PASS__POINTWISE_OPTIMAL_CANDIDATE_CERTIFIED"
+    assert out["pointwise_optimal"] is True
+    assert out["exact_checker_callback_required"] is False
+    assert out["exact_checker_binding"]["livebench_commit"] == "pinned-test"
