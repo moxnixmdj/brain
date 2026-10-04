@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_SLOT_FEASIBILITY_TRUTH_REPAIR_V1",
   "date": "2026-10-05",
-  "status": "TRUTH_REPAIR__STRUCTURAL_REDUCTION_PRESERVED__SLOT_FEASIBILITY_LAYER_REQUIRED__FALSE_REQUIRED_FORBIDDEN_UNSAT_REVOKED__PUBLIC_WORD_DOMAIN_BOUND__ZERO_ACCEPTANCE_CREDIT",
+  "status": "TRUTH_REPAIR__STRUCTURAL_REDUCTION_PRESERVED__SLOT_FEASIBILITY_LAYER_REQUIRED__FALSE_REQUIRED_FORBIDDEN_AND_SECTION_FORBIDDEN_UNSAT_REVOKED__PUBLIC_WORD_DOMAIN_BOUND__ZERO_ACCEPTANCE_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "problem": "The existing 928 conflict-compatible active15 ID sets and seven archetypes compress the public conflict graph, but ID-level compatibility is not logically equivalent to satisfiability of the concrete visible checker slots.",
@@ -42,13 +42,12 @@
   },
   "new_runtime": {
     "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
-    "git_blob_sha": "56c39dafa24be235982557bbdf5678bef2ae8fae",
+    "git_blob_sha": "ff4c1bd96b02b43e534ebd4df775262d96ab6442",
     "tests_path": "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py",
-    "tests_git_blob_sha": "b2eef299fa9d422b32870bee9cb217a6b7136908",
+    "tests_git_blob_sha": "e672cd6ae695c27d8116138c924223c5ce7d74ea",
     "certified_hard_unsat_classes": [
       "NTH_PARAGRAPH_FIRST_WORD_EQUALS_A_FORBIDDEN_WORD",
-      "MANDATORY_END_PHRASE_CONTAINS_A_GENERATED_LITERAL_FORBIDDEN_WORD",
-      "MANDATORY_SECTION_SPLITTER_EQUALS_A_GENERATED_LITERAL_FORBIDDEN_WORD"
+      "MANDATORY_END_PHRASE_CONTAINS_A_GENERATED_LITERAL_FORBIDDEN_WORD"
     ],
     "important_semantics": "NO_REPORTED_CONTRADICTION_MEANS_UNKNOWN_NOT_SAT; THE_LAYER_FAILS_CLOSED"
   },
@@ -103,9 +102,30 @@
       "same_instructions_util_blob_at_both_commits": true
     },
     "word_list_domain": "ALL_1525_ENTRIES_ARE_UNIQUE_ASCII_ALPHABETIC_WORDS",
-    "multiple_sections_forbidden_hard_collision_word": "section",
-    "multiple_sections_forbidden_collision_probability_conditional_on_pair": 0.003278688524590123,
-    "parser_repair": "PRIOR_DIAGNOSTIC_PARSER_OVERREAD_THE_WORD_LIST_LITERAL_INTO_LATER_SOURCE; COUNTS_AND_PROBABILITIES_RECOMPUTED_FROM_BALANCED_BRACKET_EXTRACTION"
+    "parser_repair": "PRIOR_DIAGNOSTIC_PARSER_OVERREAD_THE_WORD_LIST_LITERAL_INTO_LATER_SOURCE; COUNTS_AND_PROBABILITIES_RECOMPUTED_FROM_BALANCED_BRACKET_EXTRACTION",
+    "section_forbidden_truth_repair": {
+      "prior_false_unsat_certificate_revoked": true,
+      "pinned_section_checker_regex": "\\\\s?SECTION_SPLITTER\\\\s?\\\\d+\\\\s?",
+      "pinned_forbidden_semantics": "WORD_BOUNDARY_REGEX_SEARCH_IGNORECASE",
+      "constructive_counterexample": {
+        "section_splitter": "Section",
+        "forbidden_word": "section",
+        "response_fragment": "Section1",
+        "section_checker_matches": true,
+        "forbidden_checker_matches": false
+      },
+      "proof": "THE_SECTION_CHECKER_ALLOWS_ZERO_WHITESPACE_BETWEEN_THE_LITERAL_SPLITTER_AND_THE_DIGIT__SO_SECTION1_MATCHES_THE_SECTION_REGEX__BUT_THE_DIGIT_IS_A_WORD_CHARACTER_AND_DESTROYS_THE_TRAILING_WORD_BOUNDARY_REQUIRED_BY_FORBIDDENWORDS",
+      "constructor_rule": "EMIT_SECTION_SPLITTER_PLUS_DECIMAL_INDEX_WITH_NO_SPACE",
+      "consequence": "SECTION_SPLITTER_EQUAL_TO_A_FORBIDDEN_WORD_IS_SATISFIABLE_AND_MUST_NOT_BE_CERTIFIED_UNSAT"
+    },
+    "constructive_repair_binding": {
+      "general_composer_path": "canonical/runtime/livebench_legacy15_general_composer_v1.py",
+      "general_composer_git_blob_sha": "ec98a3d4e7d926410a2546c5321905d397187071",
+      "joint_candidate_generator_path": "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py",
+      "joint_candidate_generator_git_blob_sha": "be651380f1744bdf4059ed657abf6adbc27ab366",
+      "joint_candidate_generator_tests_path": "canonical/tests/test_livebench_legacy15_joint_candidate_generator_v1.py",
+      "joint_candidate_generator_tests_git_blob_sha": "a72b4d2068f020ef4eb093d120fea264b7622e7d"
+    }
   },
   "corrected_proof_target": {
     "statement": "FOR_EVERY_GENERATOR_ADMITTED_VISIBLE_CONTRACT_TUPLE_IN_THE_ACTIVE15_SURFACE, PRODUCE_EITHER_A_RESPONSE_THAT_POSTVALIDATES_TRUE_AGAINST_EVERY_PINNED_CHECKER_OR_A_CHECKER_SEMANTICS_CERTIFICATE_THAT_THE_TUPLE_IS_UNSATISFIABLE",
