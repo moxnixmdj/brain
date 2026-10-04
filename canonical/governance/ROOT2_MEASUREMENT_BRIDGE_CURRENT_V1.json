@@ -39,7 +39,7 @@
     "root2_partition": "16_ROOT2_ONLY__3_MIXED__19_TOUCHING",
     "zero_reality_frontier_bound": true
   },
-  "next": "EXECUTE_ONLY_CURRENT_ROOT2_V5_ZERO_REALITY_FRONTIER__OBSERVE_ACCOUNT_FACTS_ONLY_WHEN_CONNECTED__BIND_OWNER_RECEIPTS_ON_ARRIVAL__RECOMPUTE_FIXED_POINT__NO_FRESH_SCORE_BEFORE_FIXED_POINT",
+  "next": "EXECUTE_CURRENT_ROOT2_V5_WITH_FINANCE_INDEX_WEIGHTED_DEFICIT_OVERLAY__OBSERVE_ACCOUNT_FACTS_ONLY_WHEN_CONNECTED__BIND_OWNER_RECEIPTS_OR_STRONGER_PROOFS__RECOMPUTE_FIXED_POINT__NO_FRESH_SCORE_BEFORE_FIXED_POINT",
   "incremental_spend_usd": 0,
   "terminal_cases_consumed": 0,
   "acceptance_credit_delta": 0,
@@ -58,6 +58,20 @@
     "frontier_verification_git_blob_sha": "2475a8583e2ed2889c3e9e0613ae3bcf269ffc82",
     "effective_scheduling_authority": true,
     "frontier_activation_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5_ACTIVATION_V1.json",
-    "frontier_activation_git_blob_sha": "2d15df0daab51c5cc61c4194197da7f7fcd5a1b0"
+    "frontier_activation_git_blob_sha": "2d15df0daab51c5cc61c4194197da7f7fcd5a1b0",
+    "predicate_overlays": {
+      "FINANCE_ACCOUNTING_INDEX_GE_61": {
+        "activation_path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_ACTIVATION_V1.json",
+        "activation_git_blob_sha": "9b9d4a41d19a5e58e8967027e1d1837790287dc2",
+        "verification_path": "canonical/verification/FINANCE_INDEX_DIRECT_THRESHOLD_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "verification_git_blob_sha": "f7c1127834aee3c70dc4634e8273e3a887e45c66",
+        "residual_git_blob_sha": "1f8b7ebd377ba06548d46399f62ed883c49dc0c3",
+        "status": "ACTIVE__WEIGHTED_LOWER_BOUND_DEFICIT_ROUTE__ZERO_CREDIT",
+        "effective_scheduling_authority": true,
+        "supersedes_frontier_action": "FINANCE_COMPONENTWISE_PREMISES_AND_NORMALIZATION_AGGREGATION",
+        "replacement_action": "MINIMIZE_VERIFIED_WEIGHTED_BRAIN_COMPONENT_LOWER_BOUND_DEFICIT_TO_61",
+        "fresh_reality_authority": false
+      }
+    }
   }
 }
