@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_ZERO_SPEND_RUNTIME_GUARD_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAIL_CLOSED_ZERO_SPEND_RUNTIME_GUARD__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "objective": "Replace a priori proof of worst-case provider demand as an execution prerequisite with a fail-closed runtime witness: every provider call is authorized only under independently verified hard-zero-spend account state, any quota/payment/overage event aborts the route, and a score is zero-spend-eligible only after a complete run with every provider call observed and zero guard trips.",
+  "current_evidence": {
+    "heldout_mass_path": "canonical/governance/FINANCE_AGENT_V2_HELDOUT_EXECUTION_MASS_REDUCTION_20261004_V1.json",
+    "heldout_mass_git_blob_sha": "ec36936e92a6111aed6b1813a45225fb4ca867dc",
+    "heldout_mass_verification_path": "canonical/verification/FINANCE_AGENT_V2_HELDOUT_EXECUTION_MASS_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "heldout_mass_verification_git_blob_sha": "cbdc6b3e773e86a1e57e119a6dd2c690ee1c6b11",
+    "scored_task_executions": 1350,
+    "required_providers": [
+      "tavily",
+      "sec_api",
+      "tiingo"
+    ],
+    "root2_v6_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V6.json",
+    "root2_v6_frontier_git_blob_sha": "fcbdb818b63b4986b026db29c400a47373a26fdb"
+  },
+  "runtime": {
+    "path": "canonical/runtime/zero_spend_provider_guard_v1.py",
+    "git_blob_sha": "356af559fc74ac3eab5532b2d8fee9ddfb98f962"
+  },
+  "tests": {
+    "path": "canonical/tests/test_zero_spend_provider_guard_v1.py",
+    "git_blob_sha": "a789dd4245f46f32bd0f90bdaed9f778491b4df9"
+  },
+  "theorem": [
+    "IF_EACH_PROVIDER_ACCOUNT_STATE_IS_INDEPENDENTLY_VERIFIED_FREE_ONLY_WITH_PAID_FALLBACK_OVERAGE_AND_BILLING_CHARGE_PATHS_DISABLED",
+    "AND_EVERY_PROVIDER_CALL_IS_GUARD_AUTHORIZED_AND_OBSERVED",
+    "AND_ANY_QUOTA_EXHAUSTION_PAYMENT_REQUIRED_OVERAGE_OR_NONZERO_COST_EVENT_FAILS_CLOSED",
+    "AND_THE_FULL_FROZEN_EVALUATION_COMPLETES_WITH_ZERO_GUARD_TRIPS_AND_ZERO_OBSERVED_COST",
+    "THEN_ACTUAL_PROVIDER_DEMAND_WAS_EMPIRICALLY_WITHIN_THE_AVAILABLE_ZERO_SPEND_ROUTE_FOR_THAT_COMPLETED_RUN",
+    "THEREFORE_A_PRIORI_WORST_CASE_PROVIDER_DEMAND_PROOF_IS_NOT_REQUIRED_AS_A_PRECONDITION_TO_ATTEMPT_THE_FUTURE_EVALUATION"
+  ],
+  "proposed_blocker_deletion_if_guard_and_adapter_are_independently_verified": [
+    "A_PRIORI_WORST_CASE_TAVILY_DEMAND_PROOF_AS_EXECUTION_PRECONDITION",
+    "A_PRIORI_WORST_CASE_SEC_API_DEMAND_PROOF_AS_EXECUTION_PRECONDITION",
+    "A_PRIORI_WORST_CASE_TIINGO_DEMAND_PROOF_AS_EXECUTION_PRECONDITION"
+  ],
+  "preserve": [
+    "VALS_PLATFORM_APPROVAL",
+    "EXACT_OFFICIAL_TEST_SUITE_ID",
+    "CURRENT_VERIFIED_FREE_ONLY_ACCOUNT_STATE_FOR_TAVILY_SEC_API_TIINGO",
+    "FINANCE_AGENT_V2_HARNESS_INTEGRATION_THAT_GUARDS_EVERY_PROVIDER_CALL",
+    "FULL_RUN_ZERO_GUARD_TRIP_AND_ZERO_SPEND_RECEIPT",
+    "BRAIN_SCORE_GE_58_59"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_ACCOUNTS_OR_API_KEYS_EXIST",
+    "NO_CLAIM_FREE_QUOTAS_ARE_SUFFICIENT_BEFORE_EXECUTION",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_COMPARABILITY_CREDIT_IF_ANY_GUARD_TRIPS_OR_ANY_PROVIDER_CALL_IS_UNOBSERVED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
