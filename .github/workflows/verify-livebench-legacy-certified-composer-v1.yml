@@ -14,6 +14,7 @@ on:
       - ".github/workflows/verify-livebench-legacy-certified-composer-v1.yml"
 permissions:
   contents: read
+  pull-requests: write
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -24,11 +25,33 @@ jobs:
           python-version: "3.12"
       - name: Install exact-checker dependencies
         run: |
+          set -euxo pipefail
           python -m pip install --disable-pip-version-check pytest nltk langdetect immutabledict
           python - <<'PY'
           import nltk
-          nltk.download("punkt", quiet=True)
-          nltk.download("punkt_tab", quiet=True)
+          assert nltk.download("punkt", quiet=True)
+          assert nltk.download("punkt_tab", quiet=True)
           PY
       - name: Run certified-composer tests
-        run: python -m pytest -q canonical/tests/test_livebench_legacy_ifeval_certified_composer_v1.py
+        id: tests
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -q canonical/tests/test_livebench_legacy_ifeval_certified_composer_v1.py 2>&1 | tee /tmp/certified-composer-test.log
+          status=${PIPESTATUS[0]}
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit "$status"
+      - name: Publish failure trace to PR
+        if: failure() && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo '### Certified composer verifier failure'
+            echo
+            echo '~~~text'
+            tail -c 50000 /tmp/certified-composer-test.log 2>/dev/null || true
+            echo
+            echo '~~~'
+          } > /tmp/pr-comment.md
+          gh pr comment "${{ github.event.pull_request.number }}" --body-file /tmp/pr-comment.md
