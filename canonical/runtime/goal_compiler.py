@@ -489,6 +489,60 @@ def decompose_goal(goal):
     return merged
 
 
+def _compile_exact_literal_response_goal(goal):
+    """Compile a fully explicit exact-literal response without capability search.
+
+    This is a general formal-output route, not a benchmark special case. It
+    activates only when the whole goal is one exact-output instruction and
+    therefore requires no semantic invention or external side effect.
+    """
+    text=str(goal or "").strip()
+    if not text:
+        return None
+
+    verb=r"(?:reply|respond|answer|output|write|say)"
+    prefix=verb+r"(?:\\s+with)?\\s+exactly\\s+"
+
+    # Quoted target: punctuation after the closing quote is grammatical
+    # instruction punctuation, not part of the requested literal.
+    quoted=re.fullmatch(
+        prefix+r'["“](.+?)["”]\\s*[.!?]?\\s*',
+        text,
+        flags=re.IGNORECASE|re.DOTALL,
+    )
+    if quoted:
+        literal=quoted.group(1)
+    else:
+        # Unquoted target: preserve every character after "exactly" because
+        # punctuation may itself be part of the requested response.
+        unquoted=re.fullmatch(prefix+r"(.+)",text,flags=re.IGNORECASE|re.DOTALL)
+        if not unquoted:
+            return None
+        literal=unquoted.group(1).strip()
+
+    if not literal or "\\n" in literal or "\\r" in literal:
+        return None
+
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
+      "compiler_mode":"DETERMINISTIC_EXACT_LITERAL_RESPONSE",
+      "clauses":[text],
+      "compiled_parts":[{
+        "index":0,
+        "subgoal":text,
+        "mode":"EXACT_LITERAL_RESPONSE",
+        "literal":literal,
+        "model_dependency_count":0,
+        "network_used":False,
+        "incremental_spend_usd":0,
+      }],
+      "controller_actions":[
+        {"type":"finish","args":{"summary":literal}},
+      ],
+      "finish_summary":literal,
+    }
+
+
 def _compile_verified_browser_interaction(goal, registry, root):
     """Compile a verified declarative browser-interaction goal.
 
@@ -4920,6 +4974,9 @@ def compile_goal(goal, registry, root):
     goal=str(goal or "").strip()
     if not goal:
         raise GoalCompilationFailure("GOAL_REQUIRED")
+    exact_literal=_compile_exact_literal_response_goal(goal)
+    if exact_literal is not None:
+        return _validate_compiled_clause_coverage(exact_literal)
     browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
