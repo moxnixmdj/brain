@@ -73,6 +73,17 @@ def test_core_mode_emits_bounded_candidates():
     assert all("omega" not in x.lower() for x in out["candidates"])
 
 
+def test_sentence_lower_bound_can_be_zero_word_cost():
+    out = g.generate([
+        c("length_constraints:number_sentences", num_sentences=4, relation="at least"),
+        c("length_constraints:number_words", num_words=1, relation="less than"),
+    ])
+    assert out["status"] == "PASS_CANDIDATES"
+    # Bare '!' markers are unconditional Punkt sentence breaks and contain no
+    # \\w+ tokens, so the two public predicates are jointly satisfiable.
+    assert any(x.count("!") >= 4 and len(re.findall(r"\\w+", x)) == 0 for x in out["candidates"])
+
+
 def test_conflicting_mode_fails_closed():
     out = g.generate([
         c("detectable_format:json_format"),
