@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY25_SINGLE_CONTRACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__25_OF_25_VISIBLE_COMPILATION_AND_SINGLE_CHECKER_CONSTRUCTION__30_OF_30_LANGUAGE_CODES__ZERO_TERMINAL_ROWS__CANONICAL_RUNTIME_IMPORTED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "canonical_runtime": {
+    "compiler_path": "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py",
+    "compiler_git_blob_sha": "20421dfa016584b202b194afd3f82c9bd46a1f23",
+    "witness_path": "canonical/runtime/livebench_legacy25_single_contract_witness_v1.py",
+    "witness_git_blob_sha": "e927c05071bb4342b41fb9d5be07cc32ea82e820"
+  },
+  "pinned_public_source": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_head_sha": "9d16c74bc64a3b5891cc9a32ae2809cf298de0ea",
+    "verifier_merge_commit": "6915be0f820e8119ebce3cc3327d87bb26d1ff93",
+    "workflow_name": "Verify LiveBench legacy25 prompt contract compiler",
+    "workflow_run_id": 37239764049,
+    "workflow_job_id": 111545938741,
+    "conclusion": "success",
+    "artifact_id": 11316499965,
+    "artifact_name": "livebench-legacy25-contract-verification",
+    "artifact_digest_sha256": "57fdfeb4b0c2692aa86e42127e994952512d2710d8dbd6f70a9239ef1753cc61"
+  },
+  "verified": {
+    "registry_family_count": 25,
+    "source_generated_family_descriptions_tested": 25,
+    "source_generated_family_descriptions_recognized": 25,
+    "source_generated_single_contract_witnesses_passed": 25,
+    "language_code_count": 30,
+    "language_descriptions_recognized": 30,
+    "language_single_contract_witnesses_passed": 30,
+    "visible_prompt_only": true,
+    "hidden_instruction_id_list_used": false,
+    "hidden_kwargs_used": false,
+    "terminal_case_content_read": false
+  },
+  "consequence": [
+    "ALL_25_FROZEN_REGISTRY_FAMILIES_NOW_HAVE_CANONICAL_VISIBLE_PROMPT_CONTRACT_COMPILATION",
+    "ALL_25_FAMILIES_HAVE_AN_INDEPENDENTLY_CHECKED_SINGLE_CONTRACT_CONSTRUCTIVE_WITNESS_ROUTE",
+    "THE_UNION25_RESIDUAL_IS_NOW_STRICTLY_MULTI_CONTRACT_COMPOSITION_AND_POINTWISE_OPTIMALITY__NOT_MISSING_FAMILY_SUPPORT"
+  ],
+  "hard_nonclaims": [
+    "MULTI_CONTRACT_COMPOSITION_NOT_PROVED_BY_THIS_RECEIPT",
+    "UNION25_POINTWISE_OPTIMALITY_NOT_PROVED_BY_THIS_RECEIPT",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_RECEIPT_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "next": "PROVE_MULTI_CONTRACT_COMPOSITION_BY_FACTORIZING_THE_13631_DELTA10_TOUCHING_STRUCTURAL_SETS_INTO_THE_EXACT_156_DELTA10_EXTENSION_KERNELS_OVER_THE_ALREADY_CLOSED_ACTIVE15_CORE"
+}
