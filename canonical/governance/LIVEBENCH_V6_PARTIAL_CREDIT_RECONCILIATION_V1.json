@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V6_PARTIAL_CREDIT_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_TRUTH_RECONCILIATION__GENERIC_PARTIAL_CREDIT_BUG_DOES_NOT_REVOKE_V6_EXACT_ZERO_REPLAY__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Prevent conflation of a proved lower bound of zero with an observed exact benchmark score of zero, preserving only conclusions justified by each evidence class.",
+  "inputs": {
+    "generic_partial_credit_truth_repair": {
+      "path": "canonical/governance/LIVEBENCH_PARTIAL_CREDIT_UPPER_BOUND_TRUTH_REPAIR_20261004_V1.json",
+      "git_blob_sha": "359f740191e528f16b30ed6b893dad5caee5698d",
+      "valid_correction": "A case with only proved_score_lower_bound=0 retains score upper bound 1 unless separate upper-bound evidence exists."
+    },
+    "v6_forced_fail_binding": {
+      "path": "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_BINDING_V1.json",
+      "git_blob_sha": "98659983c43ac37508177b4003a08cfd5d1e9447",
+      "verification_repository": "moxnixmdj/verification-capsule-runner",
+      "verification_commit": "f3c439f329c7b481a8448a0619e7696111e05ecc",
+      "reconciliation_git_blob_sha": "b1e14f11d97673a499f2d9a5e2c708d9aba969fb",
+      "execution_log_git_blob_sha": "6c9c89cd2f7e977405017cb5ddfa8033126f4bf2"
+    }
+  },
+  "evidence_classification": {
+    "generic_case_bound": "LOWER_BOUND_ONLY_UNLESS_PROVED_SCORE_UPPER_BOUND_IS_EXPLICIT",
+    "v6_replay72": "DIRECT_EXECUTION_RECEIPTS_WITH_EXPLICIT_SCORE_0_0_FOR_EACH_REPLAYED_CASE",
+    "v6_response_evidence": "72_OF_72_REPLAYED_CASES_HAVE_EMPTY_RESPONSE_SHA256_AND_SCORING_ERROR_NULL",
+    "distinction": "THE_GENERIC_COUNTEREXAMPLE_DOES_NOT MATCH THE V6 EVIDENCE TYPE. V6 OBSERVES SCORE_ZERO FROM FROZEN EXECUTION; IT DOES NOT INFER SCORE_ZERO FROM A ZERO LOWER BOUND."
+  },
+  "theorem": {
+    "replayed_exact_zero_cases": 72,
+    "population_count": 200,
+    "unresolved_cases": 128,
+    "replayed_case_score_upper_bound": 0.0,
+    "per_unresolved_case_score_upper_bound": 1.0,
+    "maximum_full_population_score_mass": 128.0,
+    "maximum_full_population_percent": 64.0,
+    "rounded_display_threshold_percent": 65.7,
+    "strict_raw_opus_mean_percent": 65.73775,
+    "inequalities": ["64.0 < 65.7", "64.0 < 65.73775"],
+    "consequence": "THE_FROZEN_V6_CANDIDATE_REMAINS MATHEMATICALLY INCAPABLE OF MATCHING THE OPUS55 COMPARATOR IF THE EXISTING REPLAY72 EXECUTION RECEIPTS REMAIN ADMISSIBLE."
+  },
+  "scorer_dispatch_robustness": {
+    "active_population_truth_repair": "CURRENT ACTIVE 200 APPEARS TO ROUTE THROUGH LEGACY IFEVAL RATHER THAN MODERN IFBENCH.",
+    "effect_on_v6_zero_receipts": "NONE_FOR_THE_72_EMPTY_RESPONSES. BOTH PINNED STRICT EVALUATORS ASSIGN NO FOLLOWED INSTRUCTIONS TO AN EMPTY RESPONSE; SHARED SCORE_RESULTS THEN RETURNS ZERO.",
+    "nonclaim": "THIS DOES NOT VALIDATE ANY NONEMPTY V6 RESPONSE UNDER THE LEGACY SCORER; V6 HAD ZERO NONEMPTY CANDIDATE RESPONSES IN THE REPLAY72 EVIDENCE."
+  },
+  "scheduler_consequence": [
+    "DO_NOT_REOPEN_THE_FROZEN_V6_CANDIDATE_BECAUSE_OF_THE_GENERIC_PARTIAL_CREDIT_RUNTIME_BUG",
+    "KEEP_GENERIC_PARTIAL_CREDIT_UPPER_BOUND_REPAIR_ACTIVE_FOR_LOWER_BOUND_ONLY_CERTIFICATES",
+    "CONTINUE_SUCCESSOR_REPAIR",
+    "DO_NOT_USE_V6_FAILURE_AS_ACCEPTANCE_OR_CAPABILITY_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SUCCESSOR_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE",
+    "NO_CLAIM_THE_GENERIC_PARTIAL_CREDIT_REPAIR_WAS WRONG",
+    "NO_GLOBAL_TERMINAL_CLOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
