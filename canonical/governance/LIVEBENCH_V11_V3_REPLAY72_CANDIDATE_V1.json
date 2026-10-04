@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V11_V3_REPLAY72_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__V3_SCORE_ONLY_WITNESS_REPLAY72_AGGREGATE__ALREADY_EXPOSED_PREFIX_ONLY__ZERO_CREDIT__PRECLAIM_AUTHORITY_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Measure the frozen V3 successor on only the already-exposed first 72 LiveBench IF cases, emitting aggregate score and route statistics without case IDs, prompts, responses, or raw exceptions.",
+  "subjects": {
+    "adapter_v3": {
+      "path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py",
+      "git_blob_sha": "ff977b2e34d551e5a2751852bb77d23c7c503647"
+    },
+    "adapter_v2_git_blob_sha": "dbc895a0e458e411aafd3c96e0ddc2c01e657375",
+    "compiler_git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+    "base_replay_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "aggregate_measurer_git_blob_sha": "6dcd8f27e8a47258b645bf872c1246b9b8a53efa"
+  },
+  "frozen_external_surface": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25"
+  },
+  "replay_scope": {
+    "already_exposed_prefix_only": true,
+    "replay_prefix_limit": 72,
+    "new_case_exposure": false,
+    "case_73_or_later": false,
+    "aggregate_only": true,
+    "case_ids_emitted": false,
+    "prompt_text_emitted": false,
+    "response_text_emitted": false,
+    "raw_exception_text_emitted": false
+  },
+  "one_use_epoch": {
+    "epoch_digest_sha256": "24a0f299a73a095e678bbf81840226d949de02ac3b17809a2e6d6f96493c5a7d",
+    "claim_ref": "refs/heads/livebench-v11-claims/24a0f299a73a095e678bbf81840226d949de02ac3b17809a2e6d6f96493c5a7d",
+    "maximum_successful_claims": 1,
+    "chronology_rule": "CANONICAL_BRAIN_ACTIVATION_WITH_EXACT_CONTENT_ADDRESSED_RUNNER_MUST_BE_COMMITTED_BEFORE_ATOMIC_CLAIM_CREATE"
+  },
+  "hard_rules": [
+    "NO_CASE_73_OR_LATER",
+    "NO_CANDIDATE_MUTATION_AFTER_REPLAY_CONTENT_IS_READ",
+    "NO_POST_PROMPT_NETWORK_OR_PACKAGE_ACQUISITION",
+    "NO_GENERAL_SEMANTIC_QUALITY_CLAIM",
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT_FROM_REPLAY_PREFIX_ALONE",
+    "DUPLICATE_OR_NON201_ATOMIC_CLAIM_ABORTS_BEFORE_DATASET_READ"
+  ],
+  "authority": {
+    "execution": false,
+    "replay72": false,
+    "new_case_exposure": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_authorized": 0,
+    "acceptance_credit_delta": 0
+  }
+}
