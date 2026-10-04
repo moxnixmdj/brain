@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_WRITE_ONLY_ESCROW_CONTRACT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PREEXPOSURE_RESULT_NONVISIBILITY_CONTRACT__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Bind shadow evaluation outputs to a write-only sink that cannot be read by the frozen candidate, planner, or unrelated zero-reality work before the zero-reality fixed point.",
+  "required_properties": [
+    "OUTPUT_PATH_DERIVED_FROM_LEASE_DIGEST",
+    "WRITER_MAY_CREATE_OR_APPEND_ONLY_THE_BOUND_RESULT_OBJECT",
+    "CANDIDATE_HAS_NO_READ_PATH",
+    "PLANNER_HAS_NO_READ_PATH",
+    "UNRELATED_ZERO_REALITY_WORK_HAS_NO_READ_PATH",
+    "RESULT_RELEASE_REQUIRES_SEPARATE_POST_FIXED_POINT_REDUCER_AUTHORITY",
+    "OUTPUT_HASH_AND_LEASE_DIGEST_BOUND_IN_RECEIPT",
+    "POST_EXECUTION_ISOLATION_RECEIPT_REQUIRED"
+  ],
+  "forbidden_before_fixed_point": [
+    "RESULT_BODY_READ",
+    "RESULT_SCORE_READ",
+    "RESULT_DERIVED_SIGNAL_READ",
+    "RESULT_SUMMARY_READ",
+    "RESULT_BASED_CANDIDATE_MUTATION",
+    "RESULT_BASED_POLICY_MUTATION"
+  ],
+  "hard_rules": [
+    "CONTRACT_IS_NOT_AN_IMPLEMENTATION_RECEIPT",
+    "NO_CASE_REVEAL_AUTHORITY",
+    "NO_SHADOW_COLLECTION_AUTHORITY",
+    "NO_RESULT_RELEASE_AUTHORITY",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "shadow_collection_authority": false,
+  "fresh_reality_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
