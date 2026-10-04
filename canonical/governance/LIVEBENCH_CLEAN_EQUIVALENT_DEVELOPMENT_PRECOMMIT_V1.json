@@ -36,7 +36,8 @@
     "article_source": "SYNTHETIC_DETERMINISTIC_NONTERMINAL_TEXT",
     "article_semantics_acceptance_credit": false,
     "target_dataset_rows_used": 0,
-    "target_dataset_metadata_used_for_case_generation": false
+    "target_dataset_metadata_used_for_case_generation": false,
+    "generator_note": "Exact frozen constraint-list sampling/deconfliction/build_description semantics; clean synthetic article bytes are observationally non-load-bearing to the IFEval checker except repeat_prompt, which checks literal prefix copying."
   },
   "scoring": {
     "scorer_family": "LEGACY_IFEVAL_STRICT_PLUS_LOOSE_MEAN",
@@ -57,5 +58,14 @@
     "acceptance_credit_delta": 0,
     "family_credit_delta": 0
   },
-  "execution_authority": "PUBLIC_SYNTHETIC_NONTERMINAL_DEVELOPMENT_ONLY"
+  "execution_authority": "PUBLIC_SYNTHETIC_NONTERMINAL_DEVELOPMENT_ONLY",
+  "development_runtime": {
+    "runner": "ubuntu-24.04",
+    "python": "3.12",
+    "numpy": "2.3.3",
+    "nltk": "3.10.3",
+    "langdetect": "1.0.9",
+    "nltk_data_commit": "550b6625bcef1f2abff2ff770a5a0d272c9c6b2",
+    "allowed_network_role": "FETCH_PINNED_PUBLIC_SOURCE_AND_NLTK_ASSETS_BEFORE_CASE_GENERATION_ONLY"
+  }
 }
