@@ -41,7 +41,7 @@
     ]
   },
   "lexical_interaction_theorem": {
-    "statement": "FOR_THE_CURRENT_ACTIVE15_CONSTRUCTORS_AND_EXACT_PINNED_PUBLIC_WORD_DOMAIN__LEXICAL_SLOT_INTERACTIONS_RELEVANT_TO_WITNESS_FEASIBILITY_FACTOR_THROUGH_A_FINITE_COLLISION_SIGNATURE_INSTEAD_OF_RAW_WORD_IDENTITIES",
+    "statement": "FOR_THE_REPAIRED_ACTIVE15_CONSTRUCTORS_AND_EXACT_PINNED_PUBLIC_WORD_DOMAIN__LEXICAL_SLOT_INTERACTIONS_RELEVANT_TO_WITNESS_FEASIBILITY_FACTOR_THROUGH_THE_FINITE_COLLISION_SIGNATURE_BOUND_BELOW_INSTEAD_OF_RAW_WORD_IDENTITIES",
     "proof_obligations_reduced_to": [
       "NTH_FIRST_WORD_IS_OR_IS_NOT_A_MEMBER_OF_THE_FIVE_FORBIDDEN_WORDS",
       "FORBIDDEN_SET_CONTAINS_OR_DOES_NOT_CONTAIN_EACH_OF_OTHER_ANYTHING_CAN_HELP_SECTION",
@@ -79,7 +79,8 @@
     "NO_TERMINAL_CASE_FREQUENCY_INFERRED",
     "NO_CLAIM_ALL_NONLEXICAL_SLOT_INTERACTIONS_ARE_SOLVED",
     "NO_CLAIM_THE_640_UPPER_BOUND_IS_MINIMAL",
-    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "CONSTRUCTOR_LITERAL_AUDIT_SUPPORTS_THE_LEXICAL_QUOTIENT_BUT_DOES_NOT_BY_ITSELF_PROVE_ALL_NONLEXICAL_SLOT_INTERACTIONS"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -95,5 +96,31 @@
     "promotion": false,
     "fresh_reality": false,
     "acceptance_credit": false
+  },
+  "constructor_literal_audit": {
+    "exact_word_list_entry_count": 1525,
+    "response_is_in_word_list": true,
+    "json_object_key_response_was_unsafe": true,
+    "json_repair": "TOP_LEVEL_JSON_STRING_REMOVES_UNCONTROLLED_RESPONSE_KEY",
+    "safe_general_filler_literals_absent_from_word_list": [
+      "zxqv",
+      "brnt",
+      "clmp",
+      "dgfk",
+      "hjwy",
+      "vvzz"
+    ],
+    "two_response_suffix_literals_absent_from_word_list": [
+      "alpha",
+      "beta"
+    ],
+    "title_literal_x_absent_from_word_list": true,
+    "postscript_single_letter_tokens_absent_from_word_list": [
+      "p",
+      "s"
+    ],
+    "repeat_path_literal_answer_is_in_word_list": true,
+    "repeat_path_forbidden_collision_excluded_by_registry": "COMBINATION_REPEAT_PROMPT_CONFLICT_SET_EXCLUDES_KEYWORDS_FORBIDDEN_WORDS",
+    "consequence": "AFTER_THE_JSON_REPAIR__CHECKER_RELEVANT_GENERATED_LEXICAL_COLLISIONS_REMAIN_NTH_FIRST_WORD__FIXED_END_PHRASES__AND_SECTION_SPLITTER"
   }
 }
