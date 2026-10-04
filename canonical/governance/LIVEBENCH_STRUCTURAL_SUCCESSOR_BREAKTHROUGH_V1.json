@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_STRUCTURAL_SUCCESSOR_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__NEW_SUCCESSOR_EXECUTION_TOPOLOGY__ZERO_TERMINAL_EXPOSURE__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "causal_basis": {
+    "receipt": "canonical/verification/LIVEBENCH_V7_SANITIZED_CLASSIFICATION_EXECUTION_RECEIPT_20261004_V1.json",
+    "already_exposed_cases": 72,
+    "valid_response_count": 0,
+    "classification": {
+      "POLICY_BLOCK_POST_PROMPT_ACQUISITION_OR_NETWORK_FORBIDDEN": 43,
+      "STATIC_BLOCKER_BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_BLOCKED": 27,
+      "STATIC_BLOCKER_GOAL_ARCHITECTURAL_GAP": 2
+    },
+    "dominant_topology_mass": "70/72",
+    "deduction": "THE_DOMINANT_OBSERVED_FAILURE_SURFACE_IS POST_PROMPT ACQUISITION OR COMPOSITION, NOT A PROVED ABSENCE OF UNDERLYING CAPABILITY"
+  },
+  "public_scorer_fact": {
+    "pinned_upstream": "LiveBench/LiveBench@8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "evaluation_file": "livebench/if_runner/ifbench/evaluation_lib.py",
+    "instruction_registry_file": "livebench/if_runner/ifbench/instructions_registry.py",
+    "fact": "PROMPT_LEVEL_IF_SCORE_IS THE CONJUNCTION OF REGISTERED DETERMINISTIC INSTRUCTION CHECKERS OVER THE FINAL RESPONSE; NO SEPARATE SEMANTIC_HELPFULNESS_TERM IS ADDED BY THAT EVALUATOR"
+  },
+  "successor_mechanism": {
+    "runtime": "canonical/runtime/root2_livebench_if_structural_successor_adapter_v1.py",
+    "test": "canonical/tests/test_root2_livebench_if_structural_successor_adapter_v1.py",
+    "order": [
+      "PARSE_VISIBLE_PROMPT_WITH_ALREADY_OWNED_PUBLIC_CONSTRAINT_COMPILER",
+      "SYNTHESIZE_LOCALLY_CERTIFIED_STRUCTURAL_RESPONSE",
+      "RETURN_WITH ZERO MODEL AND ZERO EXTERNAL TOOL DEPENDENCY WHEN CONSTRUCTION EXISTS",
+      "FALL_BACK_TO EXISTING MODEL_INDEPENDENT BRAIN RUNTIME ONLY WHEN STRUCTURAL CONSTRUCTION DOES NOT EXIST"
+    ],
+    "post_prompt_acquisition_on_direct_route": false,
+    "external_tools_on_direct_route": false,
+    "model_dependency_count_on_direct_route": 0,
+    "terminal_case_content_used_for_design": false
+  },
+  "why_this_is_archITECTURALLY_NEW": [
+    "THE FAILED FROZEN CANDIDATE ROUTED THE REVEALED PROMPT INTO THE GENERAL ASTRA GOAL RUNTIME FIRST",
+    "THE SUCCESSOR MOVES PUBLIC CONSTRAINT KNOWLEDGE INTO A PRECOMPILED LOCAL INVERSE BEFORE REVEAL",
+    "THIS REMOVES POST_PROMPT ACQUISITION FROM THE DOMINANT DIRECT PATH INSTEAD OF RELAXING THE NO_NETWORK OR NO_MODEL POLICY"
+  ],
+  "verification_required_before_any_acceptance_attempt": [
+    "UNIT_AND_ADVERSARIAL TESTS ON THE SUCCESSOR ADAPTER",
+    "PUBLIC_NONTERMINAL IFBENCH CHECKER COVERAGE MEASUREMENT",
+    "GENERALIZATION OR COVERAGE CERTIFICATE FOR THE FROZEN PUBLIC INSTRUCTION FAMILY",
+    "NEW FIVE_COMPONENT PRECOMMIT WITH DISTINCT SUCCESSOR HASH",
+    "INDEPENDENT PRECOMMIT VERIFICATION",
+    "ATOMIC ONE_USE CLAIM BEFORE ANY NEW TERMINAL CASE REVEAL"
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM THAT CURRENT COMPILER COVERS ALL 58 OOD CHECKERS",
+    "NO CLAIM THAT THE SUCCESSOR ALREADY EXCEEDS 65_7_PERCENT",
+    "NO ACCEPTANCE FAMILY CAPABILITY OWNERSHIP OR TERMINAL CREDIT",
+    "NO USE OF CASE_73_OR_LATER",
+    "NO MUTATION OF THE FAILED FROZEN CANDIDATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
