@@ -261,10 +261,26 @@ def _general(by_id: Mapping[str, Mapping[str, Any]]) -> str:
             parts.extend(f"{_SAFE}{i}." for i in range(1, n + 1))
         elif relation == "less than":
             if n == 1:
-                # Exact strict-evaluator zero-sentence feasibility depends on
-                # Punkt + the nonempty-response guard. Leave it unresolved here
-                # rather than smuggling in an unproved tokenizer theorem.
-                raise ComposeError("LESS_THAN_ONE_SENTENCE_STRICT_FEASIBILITY_UNRESOLVED")
+                # The canonical feasibility theorem now proves every compatible
+                # output-requiring co-constraint UNSAT at this threshold.  If
+                # that guard emitted no reason, only zero-output-compatible
+                # constraints may remain: forbidden words and an optional
+                # less-than word upper bound.  Empty text is therefore an exact
+                # constructive witness: 0 sentences, 0 words, no forbidden hit.
+                allowed_zero_output = {SENTENCES, FORBIDDEN, WORDS}
+                unexpected = sorted(set(by_id) - allowed_zero_output)
+                if unexpected:
+                    raise ComposeError(
+                        "ZERO_SENTENCE_FEASIBILITY_GUARD_INCOMPLETE:"
+                        + ",".join(unexpected)
+                    )
+                if WORDS in by_id:
+                    ws = _slots(by_id[WORDS])
+                    if str(ws["relation"]) != "less than":
+                        raise ComposeError(
+                            "ZERO_SENTENCE_WORD_LOWER_BOUND_SHOULD_HAVE_BEEN_UNSAT"
+                        )
+                return ""
             parts.append(_SAFE)
         else:
             raise ComposeError("UNKNOWN_SENTENCE_RELATION")
