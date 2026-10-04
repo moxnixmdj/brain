@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_METADATA_PRESERVATION_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ROOT1_REPAIR_ARCHITECTURE__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "discovery": {
+    "scorer_contract": {
+      "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "ifbench_evaluation_blob": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+      "ifbench_registry_blob": "adfed4832877566e62970257b50c6fa32c302fb2",
+      "ifbench_instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+      "fact": "EACH_CASE_CARRIES_INSTRUCTION_ID_LIST_AND_KWARGS_AND_STRICT_SCORING_INSTANTIATES_PUBLIC_CHECKERS_FROM_THEM"
+    },
+    "frozen_executor_information_loss": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+      "fact": "INFER_ONE_PASSES_ONLY_TASK_PAYLOAD_INSTRUCTION_TEXT_WHILE_CASE_SCORE_LATER_USES_THE_EXACT_INSTRUCTION_ID_LIST_AND_KWARGS",
+      "consequence": "THE_RUNTIME_WAS_FORCED_TO_REINFER_ALREADY_AVAILABLE_ACCEPTANCE_PARAMETERS_FROM_FLATTENED_PROSE"
+    },
+    "acceptance_semantics": {
+      "fact": "STRICT_IFBENCH_SCORING_EVALUATES_PUBLIC_CHECKER_PREDICATES_OVER_THE_RESPONSE_AND_DOES_NOT_ADD_A_GENERAL_SEMANTIC_ANSWER_QUALITY_TERM",
+      "consequence": "A_SEMANTIC_SEED_IS_NOT_UNIVERSALLY_REQUIRED_FOR_THIS_BENCHMARK_PREDICATE"
+    }
+  },
+  "repair": {
+    "metadata_solver_path": "canonical/runtime/livebench_if_metadata_solver_v1.py",
+    "adapter_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py",
+    "test_path": "canonical/runtime/test_livebench_if_metadata_solver_v1.py",
+    "design": [
+      "PRESERVE_EXACT_PUBLIC_INSTRUCTION_ID_LIST_AND_KWARGS_IN_TASK_PAYLOAD",
+      "CONSTRUCT_OUTPUT_DIRECTLY_ONLY_FOR_PUBLIC_CHECKERS_WITH_PROVED_METADATA_ONLY_CONSTRUCTIONS",
+      "FAIL_CLOSED_ON_UNSUPPORTED_CHECKERS_OR_UNPROVED_COMPOSITIONS",
+      "FALL_BACK_TO_PREVIOUS_VERIFIED_V2_ROUTE_WITHOUT_POLICY_WEAKENING",
+      "KEEP_RATIO_OVERLAP_UNSUPPORTED_UNTIL_EXACT_REFERENCE_TEXT_BINDING_IS_PRESENT_AND_VERIFIED"
+    ],
+    "current_supported_singleton_checker_count": 33,
+    "composition_support": false
+  },
+  "impact": [
+    "DELETES_THE_PARAMETER_REINFERENCE_REQUIREMENT_FOR_SUPPORTED_CHECKERS",
+    "DELETES_THE_FALSE_SEMANTIC_SEED_REQUIREMENT_FOR_SUPPORTED_SCORE_ONLY_CHECKER_CONSTRUCTIONS",
+    "CREATES_A_GENERAL_SUCCESSOR_ROUTE_THAT_CAN_BE_FROZEN_AND_TESTED_ON_PUBLIC_NONTERMINAL_IFBENCH_BEFORE_ANY_NEW_LIVEBENCH_CASE_EXPOSURE"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_PASS_CLAIM",
+    "NO_CASE_73_OR_LATER_USED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_THAT_ALL_83_CHECKERS_OR_ARBITRARY_COMPOSITIONS_ARE_SOLVED",
+    "NO_GENERAL_SEMANTIC_REASONING_CLAIM"
+  ],
+  "next_gate": [
+    "INDEPENDENT_PUBLIC_RUNNER_VERIFY_EXACT_SOURCE_BLOBS_AND_SYNTHETIC_CONSTRUCTIONS",
+    "MEASURE_ON_PUBLIC_NONTERMINAL_IFBENCH_ONLY",
+    "EXTEND_COMPOSITION_KERNEL_BY_EXACT_CHECKER_VALIDATION_NOT_BY_PROMPT_SPECIAL_CASES",
+    "FREEZE_SUCCESSOR_BEFORE_ANY_SEPARATELY_AUTHORIZED_NEW_LIVEBENCH_MEASUREMENT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
