@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_H100_PROPOSAL_PROBABILITY_ESTIMATOR_CANDIDATE_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__PREEXPOSURE_ONLY__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "status": "CANDIDATE__PREEXPOSURE_ONLY__EXACT_BLOB_BOUND__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
   "objective": "MEASURE_THE_FIRST_LOAD_BEARING_H100_UNKNOWN__WHETHER_USEFUL_PROPOSAL_PROBABILITY_COLLAPSES_ON_PREEXPOSED_NOVEL_TASKS__WITHOUT_REVEALING_OR_CONSUMING_NEW_TERMINAL_CASES",
   "parent": {
     "h100_contract": "canonical/governance/SUB100MB_LEARNED_CORE_EXPERIMENT_CONTRACT_V1.json",
     "expression_tree_activation": "canonical/governance/H100_EXPRESSION_TREE_SYMBOLIC_REGRESSION_ACTIVATION_V1.json"
   },
   "exact_bound_components": {
-    "canonical/runtime/h100_proposal_probability_estimator_v1.py": "PENDING_GIT_BLOB_SHA",
-    "canonical/tests/test_h100_proposal_probability_estimator_v1.py": "PENDING_GIT_BLOB_SHA"
+    "canonical/runtime/h100_proposal_probability_estimator_v1.py": "ca0d56ac568639009a7b2c2c90ae1d17840d3676",
+    "canonical/tests/test_h100_proposal_probability_estimator_v1.py": "2e48403e2ad949f4f89399fc57b993f78b908da3"
   },
   "statistical_contract": {
     "unit": "ONE_PROPOSAL_YIELDS_A_VERIFIED_USEFUL_CANDIDATE",
@@ -57,4 +57,4 @@
     "acceptance": false
   },
   "independent_verification_required": true
-}\n
+}
