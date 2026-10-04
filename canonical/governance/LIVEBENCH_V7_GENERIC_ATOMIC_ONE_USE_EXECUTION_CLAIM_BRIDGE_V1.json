@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_V7_GENERIC_ATOMIC_ONE_USE_EXECUTION_CLAIM_BRIDGE_V1",
   "date": "2026-10-04",
-  "status": "DERIVED_FROM_INDEPENDENT_REAL_GIT_REF_CREATE_ONCE_VERIFICATION__ZERO_CASES__ZERO_CREDIT",
+  "status": "DERIVED_FROM_INDEPENDENT_REAL_GIT_REF_CREATE_ONCE_VERIFICATION__VERIFIED_CURRENT_LAUNCHER_BOUND__ZERO_CASES__ZERO_CREDIT",
   "objective": "Discharge the V7 global one-use linearization prerequisite by reusing the exact GitHub ref-create primitive already independently verified on the same verification-capsule-runner repository class and binding every V7 launcher to one deterministic epoch ref.",
   "independent_basis": {
     "path": "canonical/verification/LIVEBENCH_SHADOW_ATOMIC_CLAIM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
@@ -25,9 +25,16 @@
     "epoch_digest_sha256": "5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
     "claim_ref": "refs/heads/livebench-v7-claims/5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
     "launcher_path": "launch_livebench_v7_sanitized_atomic.py",
-    "launcher_git_blob_sha": "d977690efd97e093b28474d23b37ee6e4520ed0f",
+    "launcher_git_blob_sha": "5470223c39f78af008eb90bafd5d780a35230895",
     "required_success_status": 201,
-    "duplicate_or_any_non_201_action": "ABORT_BEFORE_TERMINAL_DATASET_READ"
+    "duplicate_or_any_non_201_action": "ABORT_BEFORE_TERMINAL_DATASET_READ",
+    "launcher_verification": {
+      "path": "canonical/verification/LIVEBENCH_V7_ATOMIC_LAUNCHER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "0b6f32c6ef239877725869194052c00ff549d28d",
+      "workflow_run_id": 37193437313,
+      "workflow_job_id": 111410251686,
+      "conclusion": "success"
+    }
   },
   "scope": {
     "maximum_successful_execution_claims": 1,
