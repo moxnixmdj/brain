@@ -107,3 +107,37 @@ def test_required_forbidden_same_word_uses_satisfiable_substring_escape():
     assert out["candidates"]
     assert any(re.search("rock", x, re.I) for x in out["candidates"])
     assert all(re.search(r"\\brock\\b", x, re.I) is None for x in out["candidates"])
+
+
+def test_postscript_does_not_inject_forbidden_note_artifact():
+    out = g.generate([
+        c("detectable_content:postscript", postscript_marker="P.S."),
+        c("keywords:forbidden_words", forbidden_words=["note"]),
+    ])
+    assert out["status"] == "PASS_CANDIDATES"
+    assert out["candidates"]
+    assert all("note" not in x.lower() for x in out["candidates"])
+    assert all("P.S." in x for x in out["candidates"])
+
+
+def test_title_uses_safe_token_instead_of_forbidden_x_artifact():
+    out = g.generate([
+        c("detectable_format:title"),
+        c("keywords:forbidden_words", forbidden_words=["x"]),
+    ])
+    assert out["status"] == "PASS_CANDIDATES"
+    assert out["candidates"]
+    assert all("<<x>>" not in x for x in out["candidates"])
+    assert all("<<" in x and ">>" in x for x in out["candidates"])
+
+
+def test_two_response_title_avoids_forbidden_x_artifact():
+    out = g.generate([
+        c("combination:two_responses"),
+        c("detectable_format:title"),
+        c("keywords:forbidden_words", forbidden_words=["x"]),
+    ])
+    assert out["status"] == "PASS_CANDIDATES"
+    assert out["candidates"]
+    assert all("<<x>>" not in x for x in out["candidates"])
+    assert all(x.count("******") == 1 for x in out["candidates"])
