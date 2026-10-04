@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V5_LIVEBENCH_UNION25_OVERLAY",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_DELTA__UNION25_STRONGER_SCOPE__ZERO_CREDIT",
+  "base_policy": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V5.json",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "verified_delta": {
+    "scope_commit": "9588263f37fd40c3714a2546af2ffe8beb6df81c",
+    "theorem": "ACTIVE15_STRICT_SUBSET_GENERATOR24_STRICT_SUBSET_FULL_PINNED_REGISTRY25",
+    "full_registry_family_count": 25,
+    "compatible_structural_sets_1_to_5": 14559,
+    "active15_full_cross_commit": "670e4912c95491aa2d17db59252ec4ef768cf2c9",
+    "active15_full_cross_cases": 712704,
+    "active15_exact_pointwise_matches": 712704,
+    "active15_acceptance_credit": 0
+  },
+  "scheduler_override": {
+    "supersede_base_livebench_strategy": true,
+    "strategy": "PROVE_POINTWISE_OPTIMALITY_OVER_FULL_PINNED_REGISTRY25__REUSE_ACTIVE15_712704_CASE_RECEIPT_ONLY_AS_STRICT_SUBSET_EVIDENCE__DO_NOT_PROMOTE_ACTIVE15_ONLY_PROOF",
+    "reason": "UNION25_POINTWISE_DOMINANCE_STRICTLY_SUBSUMES_ACTIVE15_GENERATOR24_AND_EVERY_PUBLIC_TABLE_SUBSET__REMOVES_15_VS_16_VS_24_SCOPE_AMBIGUITY",
+    "stop": [
+      "ACTIVE15_ONLY_ACCEPTANCE_REDUCTION",
+      "LOAD_BEARING_15_VS_16_SCOPE_GUESSING"
+    ],
+    "start": [
+      "EXTEND_COMPOSER_POSTVALIDATOR_CERTIFICATE_PIPELINE_TO_25_FAMILIES",
+      "ADVERSARIALLY_FALSIFY_NEW_10_FAMILY_SEMANTICS",
+      "INDEPENDENTLY_VERIFY_UNION25_POINTWISE_CLOSURE"
+    ]
+  },
+  "hard_rules": [
+    "NO_LIVEBENCH_ACCEPTANCE_PROMOTION_FROM_ACTIVE15_ONLY_EVIDENCE_AFTER_UNION25_SCOPE_THEOREM",
+    "ACTIVE15_712704_PASS_REMAINS_VALID_SUBSET_EVIDENCE",
+    "UNION25_CLOSURE_MUST_PASS_PREPROMOTION_FALSIFICATION_GATE_AND_SEPARATE_ACCEPTANCE_REDUCTION",
+    "ZERO_TERMINAL_ROWS_AND_ZERO_TARGET_SCORE_ACCESS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
