@@ -39,16 +39,28 @@ class UnknownDomainV4UniversalProofTests(unittest.TestCase):
             self.assertTrue(scorer.aggregate(results)["all_27_cases_pass"])
 
     def test_v2_float_counterexample_stays_falsified_and_v3_repairs_it(self):
-        secret=hashlib.sha256(b"secret-full-6").digest()
-        beacon="CEFULL-00000006-20261005-LONG"
-        visible,hidden=g3._transfer_case(secret,beacon,4,namespace="V4REG")
-        bad=harness.execute_case(candidate_step=c2.step,case_visible=visible,hidden_record=hidden)
-        good=harness.execute_case(candidate_step=c3.step,case_visible=visible,hidden_record=hidden)
-        self.assertFalse(bad["scorer_result"]["pass"])
-        self.assertIn("DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG",bad["scorer_result"]["errors"])
-        self.assertTrue(good["scorer_result"]["pass"],good["scorer_result"])
-        self.assertEqual(good["candidate_terminal_action"]["terminal_consequence"],hidden["gold_terminal_consequence"])
-        self.assertEqual(good["probe_count"],1)
+        # Structural ID totalization changes opaque lexical ordering, so the
+        # original V2 counterexample's exact beacon need not choose the swapped
+        # orientation. Deterministically search the bound nonproduction domain
+        # for the same semantic one-ulp failure, then require V3 to repair the
+        # exact packet. This is falsification evidence, not the universal proof.
+        secret=hashlib.sha256(b"INDEPENDENT-V4-FLOAT-SEARCH").digest()
+        found=None
+        for k in range(1024):
+            beacon=f"INDEPENDENT-V4-FLOAT-{k:04d}-BEACON"
+            for index in (4,10):
+                visible,hidden=g3._transfer_case(secret,beacon,index,namespace="V4REG")
+                bad=harness.execute_case(candidate_step=c2.step,case_visible=visible,hidden_record=hidden)
+                if not bad["scorer_result"]["pass"] and "DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG" in bad["scorer_result"]["errors"]:
+                    good=harness.execute_case(candidate_step=c3.step,case_visible=visible,hidden_record=hidden)
+                    self.assertTrue(good["scorer_result"]["pass"],good["scorer_result"])
+                    self.assertEqual(good["candidate_terminal_action"]["terminal_consequence"],hidden["gold_terminal_consequence"])
+                    self.assertEqual(good["probe_count"],1)
+                    found=(beacon,index)
+                    break
+            if found is not None:
+                break
+        self.assertIsNotNone(found,"expected a V2 ADD2 exact-float counterexample under totalized opaque IDs")
 
     def test_original_quantifier_is_not_weakened(self):
         out=proof.prove()
