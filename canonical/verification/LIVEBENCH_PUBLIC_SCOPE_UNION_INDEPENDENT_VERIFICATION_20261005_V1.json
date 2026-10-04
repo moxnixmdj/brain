@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_SCOPE_UNION_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_PASS__PUBLIC_SCOPE_LATTICE_15_LT_24_LT_25__UNION25_EQUALS_FULL_PINNED_REGISTRY__14559_STRUCTURAL_SETS__ZERO_TERMINAL_ROWS",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "proof/livebench-scope24-subsumption-20261005-v1",
+    "path": "canonical/runtime/livebench_public_scope_union_v1.py",
+    "git_blob_sha": "8af85028ca49a2abd4561a915927b8f67fa9a069"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2141,
+    "verified_head_sha": "a9950b79f99ae25cbbbc2bb5e76ed754398221cb",
+    "workflow_name": "Verify LiveBench composer V2",
+    "workflow_run_id": 37244025898,
+    "job_id": 111558223489,
+    "job_conclusion": "success"
+  },
+  "pinned_public_sources": {
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "historical_generator_blob": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "pinned_checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "pinned_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "pinned_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2"
+  },
+  "verified_scope_lattice": {
+    "active15_count": 15,
+    "historical_generator_count": 24,
+    "pinned_registry_count": 25,
+    "public_union_count": 25,
+    "active15_strict_subset_of_generator24": true,
+    "generator24_strict_subset_of_union25": true,
+    "public_union_equals_entire_pinned_registry": true,
+    "union25_minus_generator24": [
+      "language:response_language"
+    ],
+    "generator24_minus_active15": [
+      "change_case:capital_word_frequency",
+      "change_case:english_capital",
+      "change_case:english_lowercase",
+      "detectable_content:number_placeholders",
+      "detectable_format:constrained_response",
+      "detectable_format:number_highlighted_sections",
+      "keywords:frequency",
+      "keywords:letter_frequency",
+      "punctuation:no_comma"
+    ]
+  },
+  "verified_structural_quotient": {
+    "pinned_registry_conflict_pair_count": 97,
+    "compatible_structural_sets_by_cardinality_1_to_5": {
+      "1": 25,
+      "2": 203,
+      "3": 1055,
+      "4": 3750,
+      "5": 9526
+    },
+    "compatible_structural_set_total_1_to_5": 14559
+  },
+  "subsumption_theorem": "POINTWISE_OPTIMALITY_OVER_THE_FULL_PINNED_REGISTRY25_IMPLIES_POINTWISE_OPTIMALITY_OVER_ACTIVE15__EVERY_TABLE4_SUBSET__AND_EVERY_HISTORICAL_GENERATOR24_OUTPUT",
+  "critical_path_consequence": "EXACT_15_VS_16_RELEASE_SCOPE_IDENTITY_IS_NO_LONGER_LOAD_BEARING__EXTEND_THE_EXISTING_POINTWISE_COMPOSER_POSTVALIDATOR_CERTIFICATE_PIPELINE_TO_ALL_25_FROZEN_CHECKER_FAMILIES",
+  "existing_active15_evidence_reverified_in_same_job": {
+    "pointwise_cases": 12489,
+    "pointwise_exact_optimum_match": 12489,
+    "candidate_witness_cases": 10959,
+    "proved_unsat_cases": 1530
+  },
+  "hard_nonclaims": [
+    "UNION25_POINTWISE_OPTIMALITY_IS_NOT_YET_PROVED",
+    "THE_14559_STRUCTURAL_SET_COUNT_DOES_NOT_BY_ITSELF_PROVE_ALL_SLOT_TUPLES",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "TERMINAL_GOAL_NOT_YET_PROVED"
+  ],
+  "contamination_accounting": {
+    "terminal_rows_read": 0,
+    "terminal_instruction_id_lists_read": 0,
+    "terminal_kwargs_read": 0,
+    "target_scores_read": 0,
+    "incremental_spend_usd": 0
+  },
+  "authority": {
+    "scope_theorem_verified": true,
+    "execution": true,
+    "promotion_to_acceptance": false,
+    "acceptance_credit": false
+  }
+}
