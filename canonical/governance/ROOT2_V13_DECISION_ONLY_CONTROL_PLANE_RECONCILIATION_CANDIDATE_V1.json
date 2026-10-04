@@ -15,7 +15,7 @@
     },
     "guard": {
       "path": "canonical/runtime/root2_v13_decision_only_control_plane_guard_v1.py",
-      "git_blob_sha": "12abb038ed3352f891521919dbc28742b4b2461a"
+      "git_blob_sha": "1ef9051588e0bfc7bca4a773ed7f6fbd43fe3452"
     },
     "tests": {
       "path": "canonical/tests/test_root2_v13_decision_only_control_plane_guard_v1.py",
