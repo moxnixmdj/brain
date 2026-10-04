@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_SMAUG_MINI_CROSS_ROOT_DUAL_PREDICATE_ACQUISITION_LEVERAGE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_SCORE_REUSE_DISCOVERED__ONE_LEARNED_STATE_CAN_POTENTIALLY_DISCHARGE_ONE_ROOT1_AND_ONE_ROOT2_PREDICATE__INTERNALIZATION_AND_EXACT_REQUALIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_root_state_binding": {
+    "path": "canonical/governance/POST_LIVEBENCH_CURRENT_ROOT_SEAL_V1.json",
+    "git_blob_sha": "6dbd4d19bbc432e3927968113658637057a3ee94",
+    "unresolved_atomic": 26,
+    "root1_only": 1,
+    "root2_touching": 18
+  },
+  "acquisition_subject": {
+    "model": "abacusai/Smaug-Mini",
+    "huggingface_revision": "2750fd9f1e67e004111a53a6d9a39c15fbbd33ef",
+    "base_model": "Qwen/Qwen3.8-27B",
+    "architecture": "Qwen3_5ForConditionalGeneration",
+    "parameter_count_billion": 27,
+    "precision": "bfloat16",
+    "published_repository_size_gb": 55.6,
+    "license": "apache-2.0"
+  },
+  "predicate_reuse": [
+    {
+      "predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "current_root_class": "ROOT1_ONLY_POSITIVE_OPERATIVE_GAP",
+      "public_score_percent": 73.9165,
+      "required_score_percent_raw_opus55": 65.73775,
+      "public_margin_percentage_points": 8.17875,
+      "evidence_scope": "LIVEBENCH_2026_06_25_INSTRUCTION_FOLLOWING_FOUR_TASK_EQUAL_WEIGHT_MEAN",
+      "existing_brain_binding": "canonical/governance/LIVEBENCH_ROOT1_OPEN_WEIGHT_DOMINANCE_UPDATE_V1.json"
+    },
+    {
+      "predicate_id": "AUTOMATIONBENCH_GE_40",
+      "current_root_class": "ROOT2_TOUCHING",
+      "public_score_percent": 41.8,
+      "required_score_percent": 40.0,
+      "public_margin_percentage_points": 1.8,
+      "evidence_scope": "AUTOMATIONBENCH_PUBLIC_600_STRICT_PASS_VENDOR_REPORTED_SAME_MODEL",
+      "terminal_route_binding": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_V1.json"
+    }
+  ],
+  "breakthrough": {
+    "prior_scheduler_shape": "ROOT1_LIVEBENCH_ACQUISITION_AND_ROOT2_AUTOMATIONBENCH_CLOSURE_CAN_BE_TREATED_AS_SEPARATE_WORKSTREAMS",
+    "new_candidate_shape": "THE_SAME_EXACT_OPEN_WEIGHT_LEARNED_STATE_PUBLICLY_CLEARS_BOTH_NUMERIC_THRESHOLDS__THEREFORE_INTERNALIZATION_EXECUTION_FIT_AND_REQUALIFICATION_SHOULD_BE_PLANNED_AS_ONE_SHARED_ACQUISITION_EXPERIMENT",
+    "minimum_action_consequence": "DO_NOT_ACQUIRE_OR_QUALIFY_A_SEPARATE_AUTOMATIONBENCH_CAPABILITY_SUBJECT_BEFORE_TESTING_THE_EXACT_SMAUG_MINI_SUBJECT_ALREADY_SELECTED_FOR_ROOT1",
+    "potential_atomic_reduction_if_ALL_GATES_PASS": 2,
+    "potential_unresolved_atomic_after_reduction": 24,
+    "potential_root1_positive_gap_after_reduction": 0,
+    "potential_root2_touching_after_reduction": 17
+  },
+  "leverage_math": {
+    "smaug_potential_terminal_predicates_per_55_6_gb_full_precision_acquisition": 2,
+    "qwen38_base_publicly_supported_terminal_predicates_per_55_6_gb_under_same_known_evidence": 1,
+    "predicate_reuse_factor_vs_qwen38_base_known_evidence": 2.0,
+    "note": "THIS_IS_SCHEDULING_LEVERAGE_ONLY__NOT_ACCEPTANCE_PROBABILITY_AND_NOT_CAPABILITY_CREDIT"
+  },
+  "public_source_evidence": {
+    "smaug_model_card_revision_url": "https://huggingface.co/abacusai/Smaug-Mini/blob/2750fd9f1e67e004111a53a6d9a39c15fbbd33ef/README.md",
+    "abacus_smaug_page": "https://abacus.ai/smaug",
+    "livebench_release": "2026-06-25",
+    "observed_facts": [
+      "SMAUG_MINI_LIVEBENCH_INSTRUCTION_FOLLOWING_73_9_DISPLAY__73_9165_EXACT_FOUR_TASK_MEAN_IN_EXISTING_BRAIN_BINDING",
+      "SMAUG_MINI_AUTOMATIONBENCH_PUBLIC_600_STRICT_PASS_41_8",
+      "QWEN3_8_27B_BASE_AUTOMATIONBENCH_PUBLIC_600_STRICT_PASS_37_3"
+    ]
+  },
+  "precommit_gates": [
+    "CONTENT_ADDRESS_THE_EXACT_SMAUG_MINI_WEIGHT_AND_CONFIGURATION_BYTES",
+    "ESTABLISH_BRAIN_CONTROLLED_DURABLE_INTERNALIZATION_OR_AN_EXPLICITLY_PROVED_EQUIVALENT_OWNERSHIP_CONSTRUCTION",
+    "PROVE_ZERO_INCREMENTAL_SPEND_STORAGE_AND_EXECUTION_FIT_FOR_THE_EXACT_EXECUTION_SUBJECT",
+    "REPRODUCE_LIVEBENCH_SEMANTIC_INSTRUCTION_FOLLOWING_ON_ADMISSIBLE_NONTERMINAL_OR_SCOPE_COMPLETE_EVIDENCE_WITHOUT_SCORE_ONLY_SUBSTITUTION",
+    "VERIFY_AUTOMATIONBENCH_41_8_SOURCE_USES_THE_EXACT_PUBLIC_600_STRICT_PASS_TARGET_GEOMETRY_EXPECTED_BY_AUTOMATIONBENCH_GE_40",
+    "REPRODUCE_OR_STRONGLY_DOMINATE_AUTOMATIONBENCH_GE_40_WITH_THE_EXACT_INTERNALIZED_EXECUTION_SUBJECT",
+    "FREEZE_RUNTIME_SAMPLING_TOOL_INTERFACE_AND_MODEL_REVISION_BEFORE_ANY_FRESH_TERMINAL_OR_PRIVATE_ACCEPTANCE_EVIDENCE"
+  ],
+  "scheduler_delta": [
+    "PROMOTE_EXACT_SMAUG_MINI_INTERNALIZATION_AND_EXECUTION_FIT_TO_A_SHARED_ROOT1_ROOT2_CRITICAL_PATH_CANDIDATE",
+    "DEPRIORITIZE_QWEN3_8_27B_BASE_AS_FIRST_ACQUISITION_SUBJECT_BECAUSE_ITS_REPORTED_AUTOMATIONBENCH_37_3_DOES_NOT_CLEAR_40",
+    "DO_NOT_SPEND_A_SEPARATE_ACQUISITION_ON_AUTOMATIONBENCH_UNTIL_SMAUG_MINI_REQUALIFICATION_FAILS_OR_SCOPE_MISMATCH_IS_PROVED",
+    "KEEP_LIVEBENCH_SCORE_ONLY_CHECKER_CONSTRUCTORS_QUARANTINED_FROM_SEMANTIC_CAPABILITY_CREDIT",
+    "KEEP_ALL_CURRENT_ACCEPTANCE_AND_OWNERSHIP_COUNTS_UNCHANGED_UNTIL_GATES_PASS"
+  ],
+  "hard_nonclaims": [
+    "PUBLIC_VENDOR_SCORES_DO_NOT_PROVE_BRAIN_OWNERSHIP",
+    "PUBLIC_VENDOR_SCORES_DO_NOT_PROVE_EXACT_BRAIN_RUNTIME_EQUIVALENCE",
+    "AUTOMATIONBENCH_41_8_HAS_NOT_YET_BEEN_INDEPENDENTLY_RECOMPUTED_INSIDE_BRAIN",
+    "NO_CLAIM_55_6_GB_BF16_FITS_CURRENT_ZERO_COST_STORAGE_OR_COMPUTE",
+    "NO_CLAIM_ANY_QUANTIZED_SUBJECT_PRESERVES_EITHER_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_TERMINAL_CASE_EXPOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
