@@ -256,7 +256,7 @@ def _build_core_skeleton(
         splitter = str(ss["section_spliter"])
         n = int(ss["num_sections"])
         for i in range(1, n + 1):
-            components.append(f"{splitter} {i}\n{safe}s{i}")
+            components.append(f"{splitter}{i}\n{safe}s{i}")
 
     if bullets:
         n = int(_slots(bullets)["num_bullets"])
