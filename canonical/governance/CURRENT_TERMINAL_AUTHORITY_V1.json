@@ -888,8 +888,8 @@
     },
     "root2_root3_minimum_execution_frontier_v1": {
       "path": "canonical/governance/ROOT2_ROOT3_MINIMUM_EXECUTION_FRONTIER_V1.json",
-      "git_blob_sha": "4adb0e9642e26566e4e413e8a1951603b9013168",
-      "status": "ACTIVE__ROOT2_LIVE_ZERO_REALITY_FRONTIER_COMPRESSED__ROOT3_ZERO_RUNNABLE_EVENTS__ZERO_CREDIT"
+      "git_blob_sha": "e437bf5991f8e41369f016b1da959a013ea46ebb",
+      "status": "16_ROOT2_ONLY__3_MIXED__SYNTHESIS_PERFORMANCE_ONLY__ZERO_CREDIT"
     },
     "current_witness_target_totalization_v2_candidate": {
       "path": "canonical/governance/CURRENT_WITNESS_TARGET_TOTALIZATION_V2_CANDIDATE.json",
@@ -898,13 +898,13 @@
     },
     "root2_fixed_bar_route_inventory_v1": {
       "path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
-      "git_blob_sha": "b273b4313d329e962ac749151d086e2b1e93c5ca",
-      "status": "ACTIVE__15_ROOT2_PREDICATES__14_UNIQUE_SURFACES__SEARCH_COMPRESSED__HLE_ADAPTER_DISCHARGED__ZERO_CREDIT"
+      "git_blob_sha": "71495ebcf456119f4df694203631aeeb3048c81a",
+      "status": "15_FIXED_BAR_PREDICATES__14_SURFACES__OSWORLD_GITLAB_REVISION_DELETED__ZERO_CREDIT"
     },
     "root3_residual_compression_v1": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
-      "git_blob_sha": "471cb9f352bf64cc56a262dfe4df829555fc3679",
-      "status": "ACTIVE_FAIL_CLOSED__CURRENT_ROOT3_RESIDUALS_COMPRESSED__ZERO_CREDIT"
+      "git_blob_sha": "22ee9392b19b63b50f8d94cba4d28147b9b15f2f",
+      "status": "SYNTHESIS_SCOPE_RECLASSIFIED_TO_ROOT2_ONLY__ZERO_CREDIT"
     },
     "current_zero_reality_minimum_cut_v7": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V7.json",
@@ -918,8 +918,8 @@
     },
     "current_zero_reality_minimum_cut_v8": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
-      "git_blob_sha": "8aba43f58cbf9b14aacc1aa259b2a63c32044fbb",
-      "status": "ACTIVE_CANDIDATE__ROOT2_ROUTE_SEARCH_COMPRESSED__HLE_ADAPTER_DISCHARGED__NO_FRESH_REALITY__ZERO_CREDIT"
+      "git_blob_sha": "62197933c4ee97f23a51662a5176f9a4c78e8803",
+      "status": "CURRENT_ROOT2_CLASSIFICATION_AND_ROUTES_RECONCILED__NO_FRESH_REALITY"
     },
     "current_v8_post_compression_verification_binding": {
       "path": "canonical/governance/CURRENT_V8_POST_COMPRESSION_VERIFICATION_BINDING_V1.json",
@@ -1010,6 +1010,32 @@
       "verification_path": "canonical/verification/HLE_OPUS55_TOOL_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "942cd3032f8e1c53555f2df0810f82c86273f9ae",
       "status": "ACTIVE__INDEPENDENTLY_VERIFIED__ZERO_CREDIT"
+    },
+    "terminal_root_cause_state_v1": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "32bbdc6f1fb489f23669b42a3f1db93a1db7836e",
+      "status": "16_ROOT2_ONLY__7_ROOT3_ONLY__3_MIXED__26_UNRESOLVED__ZERO_CREDIT"
+    },
+    "synthesis_scope_reclassification": {
+      "activation_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "60d845cf2370854bfd171154cf94946436be2c16",
+      "certificate_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "certificate_git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+      "verification_path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "1528485a15c98e89c9fb4dc50d691b6682e08542",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT2_AND_ROOT3_TO_ROOT2_ONLY__ZERO_CREDIT"
+    },
+    "osworld_gitlab_protocol": {
+      "reconciliation_path": "canonical/governance/OSWORLD_V21_GITLAB_PROTOCOL_RECONCILIATION_V1.json",
+      "reconciliation_git_blob_sha": "a6142a898df97c8d9691b6a810850fa8c962b035",
+      "verification_path": "canonical/verification/OSWORLD_V21_GITLAB_PROTOCOL_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "workflow_run_id": 37163196069,
+      "workflow_job_id": 111320730605,
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FUNCTIONAL_GITLAB_CONTRACT__ZERO_CREDIT"
+    },
+    "root2_hypergraph_rebind_v3_candidate": {
+      "path": "canonical/governance/ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V3.json",
+      "status": "PENDING_INDEPENDENT_VERIFICATION__NO_SCHEDULING_AUTHORITY_YET"
     }
   },
   "residual": [
@@ -1649,7 +1675,7 @@
     "execution_authority": false,
     "promotion_authority": false
   },
-  "next_terminal_action": "ROOT2_ONLY_LIVE_ZERO_REALITY_FRONTIER__NO_ROOT1_WORK__ROOT3_ZERO_CURRENT_RUNNABLE_EVENTS__HLE_FULL_2500_ACCOUNT_ACCESS_OPUS4_6_GRADER__CHARTOGRAPHY_PROJECT_CAPACITY_FOR_1000_CALLS__OSWORLD_HF_ACCOUNT_GITLAB_SELF_HOST_PROTOCOL__GDPVAL_FINANCE_AND_MATERIAL_STRONGER_PROOFS__NO_AUTOMATIONBENCH_PUBLIC600_REPEAT__NO_HLE_ADAPTER_REPEAT__NO_TERMINAL_CASE_EXECUTION_BEFORE_FIXED_POINT",
+  "next_terminal_action": "ROOT2_ONLY_EXECUTION_FRONTIER__19_PREDICATES_TOUCH_ROOT2__16_ROOT2_ONLY_PLUS_3_MIXED__SYNTHESIS_SCOPE_CLOSED_PERFORMANCE_ONLY__FIXED_BAR_HYPERGRAPH_CURRENT_REBIND_PENDING_VERIFICATION__NO_ROOT1_WORK__NO_FRESH_REALITY_OR_TERMINAL_CASES_BEFORE_FIXED_POINT",
   "ownership_state": {
     "verified_owned_families": 5,
     "total_families": 19,
