@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_TRANSITIVE_RUNTIME_CLOSURE_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_TRANSITIVE_RUNTIME_HELPERS__SYNTHETIC_ZERO_CASE_FULL_ADAPTER_PATH__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1720,
+    "head_sha": "b8c1df516f3177076409e011416d5da5c742099d",
+    "merge_ref_observed_in_run": "1b81e231e569d22253bdb0e53d74c821a7da77f1",
+    "workflow_run_id": 37186147469,
+    "workflow_job_id": 111388351054,
+    "conclusion": "success",
+    "verifier_git_blob_sha": "04728a7476213bca29b9ca6407af052ab4d5e638",
+    "workflow_git_blob_sha": "f0bd8d670507e030289f73f6120aed853bae6df5"
+  },
+  "exact_runtime_closure": {
+    "goal_compiler": {
+      "path": "canonical/runtime/goal_compiler.py",
+      "git_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e"
+    },
+    "capability_planner": {
+      "path": "canonical/runtime/capability_planner.py",
+      "git_blob_sha": "64ff65cb184f50d3336326f33cccfcc0a53301a8"
+    },
+    "capability_proposal_generators": {
+      "path": "canonical/runtime/capability_proposal_generators.py",
+      "git_blob_sha": "71f2bbfda66a65d8d75e035b9ae073671ebd56e2"
+    }
+  },
+  "bound_subjects": {
+    "astra_runtime": {
+      "git_blob_sha": "7f5d16b1db69cb620954bc778e0ba6e15e687b75"
+    },
+    "adapter": {
+      "git_blob_sha": "7e3885fa7a6e56df656c066e0a8f17cfa21424e7"
+    },
+    "entrypoint": {
+      "git_blob_sha": "603beefe0db24102b86b7c965e5433bd880392af"
+    },
+    "adapter_registry": {
+      "git_blob_sha": "afa021a25d2de53e293d10ab6759e55eaabaea21"
+    },
+    "bound_registry": {
+      "git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+    }
+  },
+  "observed": {
+    "status": "PASS__EXACT_BLOBS_SYNTHETIC_FULL_ADAPTER_PATH__PUBLIC_GITHUB_RUNNER",
+    "inference_ready": true,
+    "result_status": "PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE",
+    "cognition_dependency_class": "MODEL_INDEPENDENT",
+    "model_dependency_count": 0,
+    "trace_types": [
+      "read_file",
+      "read_file",
+      "finish"
+    ],
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "fresh_reality_consumed": false,
+    "paid_external_model_or_api_used": false,
+    "incremental_spend_usd": 0,
+    "carrier": {
+      "cpu_count": 4,
+      "memory_mb": 15989,
+      "free_disk_mb": 88063,
+      "runner_os": "Linux",
+      "repository_private": false
+    }
+  },
+  "effect": "DELETE_LIVEBENCH_EXACT_TRANSITIVE_FROZEN_RUNTIME_DEPENDENCY_CLOSURE_AS_OPEN_ZERO_REALITY_RESIDUAL",
+  "remaining": [
+    "WRITE_ONLY_OR_CRYPTOGRAPHIC_ESCROW_IMPLEMENTATION_AND_PRODUCTION_RECIPIENT",
+    "SEPARATE_EXPLICIT_SCOPED_SHADOW_COLLECTION_ACTIVATION",
+    "REAL_POINT_OF_USE_PREFLIGHT_AND_PRODUCTION_ONE_USE_CLAIM",
+    "LIVEBENCH_SCORE_GE_65_7"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_TERMINAL_CASE_EXPOSURE",
+    "NO_LIVEBENCH_SCORE",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_SHADOW_COLLECTION_AUTHORITY_FROM_THIS_RECEIPT",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
