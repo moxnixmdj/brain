@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_IMMUTABLE_EVENT_SHA_FRONTIER_20261005_V1",
   "date": "2026-10-05",
-  "status": "ACTIVE_TRUTH__PRODUCTION_TOCTOU_DEFECT_REPAIRED_IN_ISOLATED_PR__INDEPENDENT_VERIFICATION_QUEUED__ZERO_PRODUCTION_CREDIT",
+  "status": "ACTIVE_TRUTH__ALL_OBSERVED_PREIMMUTABLE_LAUNCH_KEYS_TOMBSTONED__CLEAN_CURRENT_MAIN_EVENT_SHA_REPAIR_PR_INDEPENDENT_VERIFICATION_QUEUED__ZERO_PRODUCTION_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
   "breakthrough": {
@@ -15,21 +15,29 @@
     "tombstone_brain_commit": "1e265238375b590c54b3e21559e135d2c84999ee",
     "verifier_quarantine_commit": "ef5aa2d630dad4d5739a26a954ce0b515017be6c",
     "production_cases_consumed": 0,
-    "must_not_execute": true
+    "must_not_execute": true,
+    "all_observed_preimmutable_launch_keys": [
+      "76e8040db826990a90f5ab36b833c40af1ade15c89c579eeef2ca44bf1d0c7e9",
+      "9dd08aab9d79e6bbf2552d15c405b8de526478c3a505e2397455150d372164cb",
+      "5c62d42a792a72330535b07cd5f0722ad6e33417bd0179b7d9a01594da8c543d"
+    ],
+    "all_observed_preimmutable_claim_keys_present": true
   },
   "isolated_repair": {
     "repository": "moxnixmdj/verification-capsule-runner",
-    "pull_request": 2068,
-    "head_sha": "857c31cd4e554c8bf8a7b840a76ef1429d3b2c83",
+    "supersedes_closed_pull_request": 2068,
+    "pull_request": 2075,
+    "head_sha": "3fed8711a507aef740e92b51415f817a3cb26d69",
     "production_workflow_git_blob_sha": "990b4fe712ca509f3e01c8e632c75416a3cd0b98",
-    "repaired_lease_git_blob_sha": "0f6d045633b3cf4e178cb6359cd084ee0581294a",
-    "execution_lease_verification_run_id": 37241154459,
-    "production_launcher_verification_run_id": 37241154537,
+    "repaired_lease_git_blob_sha": "8ecdd481f3c87729618ea9d17cfae33e8328ed94",
+    "execution_lease_verification_run_id": 37241345179,
+    "production_launcher_verification_run_id": 37241345163,
     "state_at_record": "QUEUED",
-    "production_cases_generated": 0
+    "production_cases_generated": 0,
+    "preserved_prior_independent_execution_surface_pass": true
   },
   "next_action": {
-    "if_both_exact_checks_pass": "MERGE_PR_2068_ONLY_AFTER_RECONCILING_WITH_ANY_NEWER_LOAD_BEARING_UNKNOWN_DOMAIN_HARDENING; THEN_FREEZE_THE_MERGED_LEASE_BYTES_AND_VERIFY_EXTERNALLY_WITHOUT_SELF_MUTATION_BEFORE_CREATING_ANY_NEW_LAUNCH_REF",
+    "if_both_exact_checks_pass": "MERGE_PR_2075_ONLY_IF_CURRENT_MAIN_RECONCILIATION_PRESERVES_THE_SAME_THREE_FILE_DELTA; THEN_FREEZE_AND_EXTERNALLY_VERIFY_THE_EXACT_MERGED_LEASE_WITHOUT_SELF_MUTATION; ONLY_AFTER_THAT_FREEZE_A_NEW_OUTCOME_BLIND_REDUCTION_AND_CREATE_ONE_NEW_LAUNCH_REF",
     "if_any_check_fails": "REPAIR_ONLY_THE_FAILED_LOAD_BEARING_DEFECT_AND_REVERIFY; DO_NOT_LAUNCH_PRODUCTION",
     "forbidden": [
       "DO_NOT_COUNT_QUEUED_CHECKS_AS_PASS",
