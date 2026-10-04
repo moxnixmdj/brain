@@ -19,7 +19,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from canonical.runtime import livebench_legacy15_exact_contract_checker_v1 as exact_checker
+from canonical.runtime import livebench_legacy15_exact_postvalidator_v1 as exact_checker
 from canonical.runtime import livebench_legacy15_pointwise_search_v1 as pointwise
 from canonical.runtime import livebench_legacy_visible_constraint_compiler_v4 as compiler
 from canonical.runtime.livebench_frozen_active_legacy15_v1 import ACTIVE_IDS
@@ -85,7 +85,7 @@ def solve_prompt(
             max_total=max_total,
         )
     except (
-        exact_checker.ExactContractCheckerError,
+        exact_checker.ExactPostvalidationError,
         pointwise.PointwiseSearchError,
         KeyError,
         TypeError,
