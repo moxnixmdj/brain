@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_QWEN38_27B_CURRENT_Q2_EXACT_EXECUTION_SUBJECT_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_SOURCE_PINNED__CURRENT_9_83_GB_Q2_EXECUTION_SUBJECT_CONTENT_ADDRESSED__CAPABILITY_REQUALIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_73775_EXACT_EQUAL_TASK_MEAN",
+  "subject": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "repository_revision_observed": "4ca720788d1e01f1bff70c033e0d0028fd02e502",
+    "file": "Qwen3.8-27B-UD-Q2_K_XL.gguf",
+    "file_history_commit_observed": "313447f",
+    "displayed_size_gb_decimal": 9.83,
+    "sha256": "fd4730dd8aad070517978752b63d530aeb1740d2283cab9fa24f1e404032ddb0",
+    "xet_hash": "66781ed72764a0566e1fc2b63fe914bb40289727f3747e5c231e9d2bee782c0d",
+    "base_model": "Qwen/Qwen3.8-27B",
+    "architecture": "qwen3_5",
+    "license": "apache-2.0",
+    "context_length_tokens": 262144,
+    "runtime_route": "llama.cpp",
+    "public_runtime_examples": [
+      "llama serve -hf unsloth/Qwen3.8-27B-GGUF:UD-Q2_K_XL",
+      "llama cli -hf unsloth/Qwen3.8-27B-GGUF:UD-Q2_K_XL"
+    ]
+  },
+  "matched_full_precision_anchor": {
+    "exact_livebench_release": "2026-06-25",
+    "tasks": [
+      "paraphrase",
+      "simplify",
+      "story_generation",
+      "summarize"
+    ],
+    "qwen38_27b_bf16_scores_percent": [
+      74.9,
+      66.7,
+      73.1,
+      75.933
+    ],
+    "qwen38_27b_bf16_equal_task_mean_percent": 72.65825,
+    "opus55_max_effort_equal_task_mean_percent": 65.73775,
+    "full_precision_margin_pp": 6.9205
+  },
+  "external_quantization_evidence": {
+    "source": "Engineered.at Qwen3.8 27B quantization study observed 2026-10-04",
+    "reported_ud_q2_k_xl_ifbench_result": "UNCHANGED_VERSUS_BF16_IN_THAT_STUDY",
+    "reported_q2_size_gb_in_study": 10.7,
+    "reproducibility_firewall": "THE_STUDY_TESTED_AN_EARLIER_UNSLOTH_V2_FILE_SET_THAT_WAS_LATER_REPLACED__THE_CURRENT_SHA256_PINNED_FILE_INHERITS_ZERO_SCORE_OR_CAPABILITY_CREDIT"
+  },
+  "breakthrough": [
+    "THE_MINIMUM_EXECUTION_FRONTIER_NOW_HAS_A_CONCRETE_CURRENT_DOWNLOADABLE_CONTENT_ADDRESSED_Q2_SUBJECT_INSTEAD_OF_AN_APPROXIMATE_BIT_CLASS",
+    "THE_CURRENT_FILE_IS_9_83_GB_DISPLAYED__SUBSTANTIALLY_SMALLER_THAN_55_6_GB_BF16_AND_21_9_GB_NVIDIA_NVFP4_CANDIDATES",
+    "THE_NEXT_UNCERTAINTY_IS_NO_LONGER_ARTIFACT_IDENTITY__IT_IS_EXACT_CAPABILITY_RETENTION_AND_ZERO_SPEND_EXECUTION_FIT"
+  ],
+  "critical_path": [
+    "DO_NOT_DOWNLOAD_OR_INTERNALIZE_BF16_OR_NVFP4_FIRST",
+    "PROVE_AVAILABLE_ZERO_SPEND_EXECUTION_FIT_FOR_THIS_EXACT_9_83_GB_SUBJECT_WITHOUT_COMMITTING_TO_A_LARGE_DOWNLOAD",
+    "IF_FIT__ACQUIRE_AND_HASH_VERIFY_EXACT_SHA256",
+    "RUN_PUBLIC_NONTERMINAL_FOUR_TASK_QUALIFICATION_OR_AN_ADMISSIBLE_STRONGER_TEST_ON_THIS_EXACT_SUBJECT",
+    "PROMOTE_ONLY_IF_EQUAL_TASK_MEAN_GTE_65_73775_AND_SEMANTIC_VALIDITY_PASSES",
+    "ESCALATE_TO_Q3_OR_Q4_ONLY_ON_PROVED_Q2_FAILURE"
+  ],
+  "stop_rule": "Q2_IS_DISQUALIFIED_ONLY_BY_EXACT_SUBJECT_EXECUTION_FIT_FAILURE_OR_ADMISSIBLE_CAPABILITY_RESULT_BELOW_65_73775__NOT_BY_GENERIC_LOW_BIT_PREJUDICE",
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_Q2_SUBJECT_PRESERVES_THE_BF16_LIVEBENCH_SCORE",
+    "NO_CLAIM_IFBENCH_EQUALS_THE_EXACT_LIVEBENCH_FOUR_TASK_GEOMETRY",
+    "NO_CLAIM_THE_Q2_BYTES_ARE_ALREADY_INTERNALIZED",
+    "NO_CLAIM_CURRENT_BRAIN_COMPUTE_CAN_EXECUTE_THE_SUBJECT",
+    "NO_TERMINAL_CASE_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
