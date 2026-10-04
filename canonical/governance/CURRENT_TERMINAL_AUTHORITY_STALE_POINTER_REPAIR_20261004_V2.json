@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_STALE_POINTER_REPAIR_20261004_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_DERIVED_POINTER_TRUTH_REPAIR__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Make every execution-facing pointer in CURRENT_TERMINAL_AUTHORITY_V1 agree with the already-active post-revocation Root2-19 scheduler without overwriting newer scheduler work.",
+  "preserved_current_authorities": {
+    "current_root_seal": "canonical/governance/POST_LIVEBENCH_ROOT1_REVOCATION_CURRENT_ROOT_SEAL_V1.json",
+    "root2_19_activation": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json",
+    "root2_19_transport_verification": "canonical/verification/ROOT2_19_POST_REVOCATION_DAG_CONNECTOR_VERIFICATION_20261004_V1.json",
+    "effective_root2_touching_predicates": 19,
+    "livebench_class": "ROOT2_ONLY",
+    "livebench_target_percent": 65.73775
+  },
+  "repaired_stale_fields": [
+    "next",
+    "sources.post_livebench_current_root_seal.status",
+    "sources.livebench_local_root1_reclassification.status",
+    "sources.root2_post_livebench_18_predicate_rebind.status",
+    "sources.root2_post_livebench_18_predicate_rebind.effective_scheduling_authority",
+    "rule_tail"
+  ],
+  "invariant": {
+    "truth.opus55_acceptance": "5/19_PASS__14/19_OPEN",
+    "truth.opus55_verified_owned": "5/19_VERIFIED_OWNED_EQUAL_OR_BETTER__14/19_ACCEPTANCE_OPEN",
+    "truth.achieved": false,
+    "fresh_terminal_reality": false,
+    "acceptance_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_executed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_NEW_ROOT2_PROOF_CREDIT",
+    "NO_LIVEBENCH_PASS_OR_FAIL_VERDICT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_GOAL_COMPLETION_CLAIM"
+  ]
+}
