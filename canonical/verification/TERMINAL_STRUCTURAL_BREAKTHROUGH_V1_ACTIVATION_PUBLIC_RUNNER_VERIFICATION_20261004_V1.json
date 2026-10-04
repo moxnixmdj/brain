@@ -1,0 +1,11 @@
+{
+  "schema":"PROJECT_BRAIN_STRUCTURAL_BREAKTHROUGH_ACTIVATION_VERIFICATION",
+  "date":"2026-10-04",
+  "status":"INDEPENDENT_PUBLIC_PASS__ZERO_CREDIT",
+  "activation_blob":"575b5541b07e5c4856da5f718a3f5b0c43303d08",
+  "reconciliation_blob":"afa5770e40c031dadf82b25ce25e2ebe3e3fcead",
+  "verifier":{"pr":1681,"merge_commit":"606a1f750c7aeb8fdab01096c19e64d35c509083","run_id":37177551547,"job_id":111363238806,"conclusion":"success"},
+  "authority":{"scheduling":true,"candidate_generation":true,"execution":false,"promotion":false,"fresh_reality":false},
+  "preserved":"ROOT2_V11__ROOT3_V2__RETRIEVAL_V19__5_OF_19__12_OF_38__26_UNRESOLVED",
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0}
+}
