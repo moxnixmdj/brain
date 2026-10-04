@@ -30,7 +30,9 @@ NTH = "length_constraints:nth_paragraph_first_word"
 FORBIDDEN = "keywords:forbidden_words"
 EXISTENCE = "keywords:existence"
 END = "startend:end_checker"
-SENTENCE = "length_constraints:number_sentences"\n# Backward-compatible alias used by existing proof receipts/tests.\nSENTENCES = SENTENCE
+SENTENCE = "length_constraints:number_sentences"
+# Backward-compatible alias used by existing proof receipts/tests.
+SENTENCES = SENTENCE
 WORDS = "length_constraints:number_words"
 POSTSCRIPT = "detectable_content:postscript"
 BULLETS = "detectable_format:number_bullet_lists"
