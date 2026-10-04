@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V7_ENVIRONMENT_EQUIVALENT_SANITIZED_DIAGNOSTIC_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V6_PRECASE_ENVIRONMENT_RECREATED__SANITIZED_REPLAY72_DIAGNOSTIC__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1807,
+    "head_sha": "cfebe2452080aa785cc43012f9e4c1d15973210d",
+    "merged_commit": "87331f882aff42c1979806b4b1510d65113ca0da",
+    "workflow_run_id": 37192715453,
+    "workflow_job_id": 111408110863,
+    "conclusion": "success"
+  },
+  "exact_subjects": {
+    "diagnostic": {
+      "path": "diagnose_livebench_replay72_v7_sanitized.py",
+      "git_blob_sha": "55d4b961f58dc45c1513f9c9282a63773444773d"
+    },
+    "classifier": {
+      "path": "livebench_v7_sanitized_classifier.py",
+      "git_blob_sha": "44df7313c83914204299953dda81900fae85ab68"
+    },
+    "verifier": {
+      "path": "verify_livebench_v7_sanitized_diagnostic.py",
+      "git_blob_sha": "0c63704ba4e462c957516bc0f1ee0bdbdea8465c"
+    },
+    "base_executor": {
+      "path": "execute_livebench_if_replay72_v4_candidate.py",
+      "git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e"
+    }
+  },
+  "verified": {
+    "replay_prefix_limit": 72,
+    "v6_install_scorer_deps_before_dataset_read": true,
+    "v6_prepare_nltk_before_dataset_read": true,
+    "exact_base_executor_blob_bound": true,
+    "aggregate_classification_only": true,
+    "case_ids_emitted": false,
+    "prompt_text_emitted": false,
+    "response_text_emitted": false,
+    "raw_exception_text_emitted": false,
+    "synthetic_zero_case_classifier_pass": true,
+    "terminal_cases_consumed": 0
+  },
+  "semantic_effect": [
+    "DISCHARGE_V7_DIAGNOSTIC_V6_PRECASE_ENVIRONMENT_EQUIVALENCE_DELTA",
+    "PRESERVE_GLOBAL_ATOMIC_ONE_USE_CLAIM_AS_SEPARATE_POINT_OF_USE_GATE",
+    "PRESERVE_CASE_73_PLUS_AS_FORBIDDEN",
+    "PRESERVE_ZERO_ACCEPTANCE_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_V7_REPLAY_EXECUTED",
+    "NO_NEW_CASE_EXPOSURE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_ROOT1_REOPEN"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
