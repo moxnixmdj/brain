@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_CHECKER_COVERAGE_FRONTIER_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_POPULATION_GREEDY_SCORE_MASS_FRONTIER__SCHEDULING_HEURISTIC_ONLY__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Rank public IFBench checker families by exact public score-mass gain under an idealized family-perfect solver abstraction, so implementation work targets the smallest high-yield set first.",
+  "public_population": {
+    "repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "data/IFBench_test.jsonl",
+    "git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "rows": 300,
+    "instruction_count_distribution": {"1": 256, "2": 44}
+  },
+  "score_rule": {
+    "source": "canonical/governance/LIVEBENCH_IF_SCORE_MASS_MINIMUM_CUT_V1.json",
+    "formula": "score=(I[all]+true_fraction)/2"
+  },
+  "abstraction": "A_SELECTED_CHECKER_FAMILY_IS_ASSUMED_PERFECTLY_SATISFIED_ON_EVERY_PUBLIC_ROW_CONTAINING_IT__UNSELECTED_FAMILIES_ARE_FALSE__THIS_IS_NOT_A_RUNTIME_OR_TERMINAL_SCORE_CLAIM",
+  "greedy_frontier_to_first_public_threshold_crossing": [
+    {"rank":1,"checker":"count:unique_word_count","public_score_percent":2.75},
+    {"rank":2,"checker":"format:sub-bullets","public_score_percent":5.5},
+    {"rank":3,"checker":"ratio:stop_words","public_score_percent":9.083333333333334},
+    {"rank":4,"checker":"words:consonants","public_score_percent":11.833333333333334},
+    {"rank":5,"checker":"ratio:overlap","public_score_percent":14.583333333333334},
+    {"rank":6,"checker":"sentence:keyword","public_score_percent":17.75},
+    {"rank":7,"checker":"count:word_count_range","public_score_percent":20.583333333333332},
+    {"rank":8,"checker":"words:odd_even_syllables","public_score_percent":23.25},
+    {"rank":9,"checker":"format:emoji","public_score_percent":25.833333333333332},
+    {"rank":10,"checker":"format:quotes","public_score_percent":28.416666666666668},
+    {"rank":11,"checker":"words:vowel","public_score_percent":31.0},
+    {"rank":12,"checker":"format:line_indent","public_score_percent":33.5},
+    {"rank":13,"checker":"count:pronouns","public_score_percent":35.916666666666664},
+    {"rank":14,"checker":"format:parentheses","public_score_percent":38.333333333333336},
+    {"rank":15,"checker":"words:palindrome","public_score_percent":40.666666666666664},
+    {"rank":16,"checker":"format:list","public_score_percent":42.833333333333336},
+    {"rank":17,"checker":"words:no_consecutive","public_score_percent":45.25},
+    {"rank":18,"checker":"ratio:sentence_words","public_score_percent":47.416666666666664},
+    {"rank":19,"checker":"format:thesis","public_score_percent":49.583333333333336},
+    {"rank":20,"checker":"sentence:increment","public_score_percent":52.0},
+    {"rank":21,"checker":"ratio:sentence_balance","public_score_percent":54.166666666666664},
+    {"rank":22,"checker":"count:numbers","public_score_percent":56.25},
+    {"rank":23,"checker":"count:conjunctions","public_score_percent":58.416666666666664},
+    {"rank":24,"checker":"count:punctuation","public_score_percent":60.416666666666664},
+    {"rank":25,"checker":"ratio:sentence_type","public_score_percent":62.416666666666664},
+    {"rank":26,"checker":"words:paragraph_last_first","public_score_percent":64.41666666666667},
+    {"rank":27,"checker":"words:alphabet","public_score_percent":66.33333333333333}
+  ],
+  "scheduler_conclusion": "DO_NOT_IMPLEMENT_ALL_83_CHECKERS_BY_DEFAULT__IMPLEMENT_AND_VERIFY_HIGH_YIELD_FAMILIES_UNTIL_THE_EXACT_TERMINAL_SCORE_MASS_CERTIFICATE_CLOSES__PUBLIC_FRONTIER_ONLY_PRIORITIZES_WHICH_FAMILIES_TO_ATTACK_FIRST",
+  "hard_nonclaims": [
+    "NO_TERMINAL_DISTRIBUTION_EQUIVALENCE",
+    "NO_TERMINAL_SCORE_ESTIMATE",
+    "NO_CLAIM_SELECTED_FAMILIES_ARE_ALREADY_SOLVED",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0
+  }
+}

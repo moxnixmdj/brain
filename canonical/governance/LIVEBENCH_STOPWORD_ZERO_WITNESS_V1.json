@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_STOPWORD_ZERO_WITNESS_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PARAMETER_FREE_ZERO_STOPWORD_WITNESS__EXACT_SCORER_ENVIRONMENT_VERIFICATION_REQUIRED__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_checker": "ratio:stop_words",
+  "objective": "Eliminate the hidden percentage parameter as an implementation difficulty by constructing a response with exactly zero English stopword tokens, which satisfies every legal no-more-than percentage ceiling.",
+  "pinned_public_source": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_path": "livebench/if_runner/ifbench/instructions.py",
+    "instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "instructions_util_path": "livebench/if_runner/ifbench/instructions_util.py",
+    "instructions_util_git_blob_sha": "21b13c7fcfc2c2de01e80c9e7dd222b9bca81342",
+    "checker_semantics": "count_words and count_stopwords both tokenize with RegexpTokenizer(r'\\w+'); StopWordPercentageChecker accepts iff 100*num_stopwords/num_words <= percentage."
+  },
+  "construction": {
+    "runtime_path": "canonical/runtime/livebench_stopword_zero_witness_v1.py",
+    "test_path": "canonical/tests/test_livebench_stopword_zero_witness_v1.py",
+    "witness_family": "qzxv0 qzxv1 ...",
+    "expected_word_count_positive": true,
+    "expected_stopword_count": 0,
+    "expected_stopword_percent": 0,
+    "parameter_independence": "IF_EXACT_PINNED_ENGLISH_STOPWORD_CORPUS_CONTAINS_NONE_OF_THE_SYNTHETIC_TOKENS__THE_SAME_WITNESS_PASSES_EVERY_PERCENTAGE_FROM_0_TO_100"
+  },
+  "public_population_scheduling_evidence": {
+    "repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "data/IFBench_test.jsonl",
+    "git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "row_count": 300,
+    "ratio_stop_words_occurrences": 12,
+    "singleton_occurrences": 7,
+    "paired_with_format_sub_bullets": 5,
+    "use": "SCHEDULING_HEURISTIC_ONLY__NO_TERMINAL_DISTRIBUTION_INFERENCE"
+  },
+  "independent_verification_required": [
+    "LOAD_THE_EXACT_PINNED_NLTK_ENGLISH_STOPWORD_CORPUS_IN_A_REPRODUCIBLE_RUNNER",
+    "PROVE_EVERY_SYNTHETIC_WITNESS_TOKEN_IS_ABSENT_FROM_THAT_CORPUS",
+    "RUN_THE_EXACT_PINNED_StopWordPercentageChecker_FOR_BOUNDARY_PERCENTAGES_INCLUDING_0_AND_100",
+    "VERIFY_NO_POST_PROMPT_NETWORK_OR_PACKAGE_ACQUISITION_IS_REQUIRED_BY_THE_DEPLOYED_SUCCESSOR"
+  ],
+  "scheduler_effect_if_verified": [
+    "MARK_ratio_stop_words_AS_PARAMETER_FREE_DETERMINISTIC_CHECKER_FAMILY_FOR_SCORE_MASS_PLANNING",
+    "COMPOSE_WITH_OTHER_CHECKER_WITNESSES_ONLY_AFTER_EXACT_MULTI_CONSTRAINT_POSTVALIDATION",
+    "RECOMPUTE_MINIMUM_SCORE_MASS_CUT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TERMINAL_200_QUESTION_DISTRIBUTION_MATCHES_PUBLIC_IFBENCH_TEST",
+    "NO_CURRENT_LIVEBENCH_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_FRESH_TERMINAL_CASE_EXPOSURE",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
