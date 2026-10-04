@@ -28,17 +28,32 @@ jobs:
           git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git "$RUNNER_TEMP/LiveBench"
           git -C "$RUNNER_TEMP/LiveBench" checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
           test "$(git -C "$RUNNER_TEMP/LiveBench" rev-parse HEAD)" = "8f8e5c381a16e3f24257776edd53471fe86f8091"
-      - name: Run Brain unit tests
-        run: |
-          python -m pytest -q canonical/tests/test_livebench_legacy25_witness_compiler_v1.py canonical/tests/test_root2_livebench_if_astra_inference_adapter_v5.py
-      - name: Run exact pinned public checker verification
+      - name: Run exact pinned public checker verification with diagnostic capture
+        id: exact
+        continue-on-error: true
         env:
           PYTHONPATH: ${{ github.workspace }}:${{ runner.temp }}/LiveBench/livebench/if_runner
         run: |
-          python canonical/verification_tools/livebench_legacy25_exact_public_checker_verify_v1.py --output "$RUNNER_TEMP/legacy25_exact_result.json"
+          set +e
+          python canonical/verification_tools/livebench_legacy25_exact_public_checker_verify_v1.py --output "$RUNNER_TEMP/legacy25_exact_result.json" >"$RUNNER_TEMP/legacy25_stdout.txt" 2>"$RUNNER_TEMP/legacy25_stderr.txt"
+          code=$?
+          echo "$code" >"$RUNNER_TEMP/legacy25_exit_code.txt"
+          cat "$RUNNER_TEMP/legacy25_stdout.txt"
+          cat "$RUNNER_TEMP/legacy25_stderr.txt" >&2
+          exit "$code"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: legacy25-exact-public-checker-result
-          path: ${{ runner.temp }}/legacy25_exact_result.json
-          if-no-files-found: warn
+          name: legacy25-exact-public-checker-diagnostics
+          path: |
+            ${{ runner.temp }}/legacy25_exact_result.json
+            ${{ runner.temp }}/legacy25_stdout.txt
+            ${{ runner.temp }}/legacy25_stderr.txt
+            ${{ runner.temp }}/legacy25_exit_code.txt
+          if-no-files-found: error
+      - name: Enforce exact checker success
+        if: steps.exact.outcome != 'success'
+        run: exit 1
+      - name: Run Brain unit tests
+        run: |
+          python -m pytest -q canonical/tests/test_livebench_legacy25_witness_compiler_v1.py canonical/tests/test_root2_livebench_if_astra_inference_adapter_v5.py
