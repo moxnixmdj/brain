@@ -92,3 +92,20 @@ def test_quote_bullets_keeps_bullet_lines_visible():
     assert out["status"] == "CANDIDATE_WITNESS"
     assert out["response"][0] == '"' and out["response"][-1] == '"'
     assert len(re.findall(r"^\s*\*[^\*].*$", out["response"], flags=re.MULTILINE)) == 3
+
+
+def test_postscript_scaffold_is_sentence_neutral_by_construction():
+    ps = c.compose_contracts([
+        C(c.SENTENCES, num_sentences=2, relation="less than"),
+        C(c.POSTSCRIPT, postscript_marker="P.S."),
+    ])
+    assert ps["status"] == "CANDIDATE_WITNESS"
+    assert "\nP.S.+" in ps["response"]
+    assert "P.S. 9000001" not in ps["response"]
+
+    pps = c.compose_contracts([
+        C(c.SENTENCES, num_sentences=2, relation="less than"),
+        C(c.POSTSCRIPT, postscript_marker="P.P.S"),
+    ])
+    assert pps["status"] == "CANDIDATE_WITNESS"
+    assert pps["response"].endswith("P.P.S")
