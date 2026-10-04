@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DOMAIN_TERM_SOURCE_FUSION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_BLOB_BOUND__ZERO_LEARNED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "REPAIR_THE_OBSERVED_OEWN_MISSING_DOMAIN_TERM_RESIDUAL_WITH_PROVENANCE_BOUND_MULTI_SOURCE_RAW_KNOWLEDGE_AND_FAIL_CLOSED_CONFLICT_HANDLING_BEFORE_ANY_LEARNED_BYTE_ESCALATION",
+  "parent_frontier": "canonical/governance/H100_RESEARCH_FRONTIER_STATE_V1.json",
+  "exact_bound_components": {
+    "canonical/governance/H100_DOMAIN_TERM_SOURCE_FALLBACK_KNOWLEDGE_V1.json": "09b166a1f0f0a00cb75f2b43f8c769cf3f7603b4",
+    "canonical/governance/H100_DOMAIN_TERM_SOURCE_FALLBACK_PREEXPOSURE_V1.json": "83316304baf753cc3541e68d65774f1d3f8a4d85",
+    "canonical/runtime/h100_domain_term_source_fusion_v1.py": "d9f83e67962007dd7c40b9310c91b8c37de62d38",
+    "canonical/tests/test_h100_domain_term_source_fusion_v1.py": "528c7dfe98cb35e2fcab7d1169ee3955b8d7257f"
+  },
+  "observed_residual": {
+    "source": "canonical/verification/H100_OEWN_REAL_LEXICAL_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "missing_terms": [
+      "covariate",
+      "regressor"
+    ],
+    "query_failures": 0,
+    "classification": "RAW_SOURCE_COVERAGE_GAP_NOT_LEARNED_REPRESENTATION_GAP"
+  },
+  "design": {
+    "primary_source": "OEWN_2025",
+    "fallback_trigger": "ONLY_ABSTAIN_LEXICAL_QUERY_NOT_PINNED",
+    "minimum_distinct_sources": 2,
+    "unanimity_required": true,
+    "conflict_behavior": "ABSTAIN_SOURCE_CONFLICT",
+    "insufficient_behavior": "ABSTAIN_SOURCE_SUPPORT_INSUFFICIENT",
+    "missing_behavior": "ABSTAIN_SOURCE_TERM_UNPINNED",
+    "may_override_oewn_ambiguity": false
+  },
+  "source_basis": [
+    {
+      "id": "MGH_FREESURFER_GLM",
+      "role": "DIRECT_REGRESSOR_COVARIATE_EQUIVALENCE"
+    },
+    {
+      "id": "UCD_BIVARIATE_REGRESSION",
+      "role": "DIRECT_X_EXPLANATORY_REGRESSOR_COVARIATE_EQUIVALENCE"
+    },
+    {
+      "id": "WISC_REGRESSION_TERMINOLOGY",
+      "role": "REGRESSOR_AND_PREDICTOR_X_SIDE_EQUIVALENCE"
+    },
+    {
+      "id": "NIST_NLS_GLOSSARY",
+      "role": "PREDICTOR_X_RESPONSE_Y_ANCHOR"
+    }
+  ],
+  "preexposed_tasks": {
+    "total": 3,
+    "direct_missing_term_repairs": 2,
+    "mandatory_unpinned_abstention": 1
+  },
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_LEXICAL_COMPLETENESS",
+    "NO_GENERAL_SEMANTIC_UNDERSTANDING_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_LEARNED_KERNEL_JUSTIFICATION"
+  ],
+  "independent_verification_required": true
+}
