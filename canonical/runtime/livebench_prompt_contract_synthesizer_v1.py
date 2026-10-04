@@ -13,6 +13,8 @@ import re
 import string
 from typing import Any
 
+from canonical.runtime import livebench_ratio_reference_free_constructor_v1 as ratio_constructor
+
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_PROMPT_CONTRACT_SYNTHESIZER_V1"
 
 _NAMES = (
@@ -99,7 +101,22 @@ def _modern(text: str) -> dict[str, Any] | None:
         return _pass(" ".join(_NAMES[:p[0]]), "MODERN_PERSON_NAMES", {"N":p[0]})
 
     if re.search(r"Maintain a trigram overlap of\s+\d+%\s*\(±2%\)", text, re.I):
-        return _blocked("MODERN_NGRAM_REFERENCE_NOT_SAFELY_DERIVABLE_FROM_VISIBLE_GRAMMAR")
+        try:
+            ratio = ratio_constructor.construct_ratio_overlap_candidate(text)
+        except Exception as exc:
+            return _blocked("MODERN_NGRAM_REFERENCE_FREE_CONSTRUCTION_FAILED:" + type(exc).__name__)
+        if ratio.get("status") != "CANDIDATE_CONSTRUCTION_FOUND":
+            return _blocked("MODERN_NGRAM_REFERENCE_FREE_CONSTRUCTION_NOT_FOUND")
+        return _pass(
+            str(ratio["candidate"]),
+            "MODERN_NGRAM_REFERENCE_FREE_PUBLIC_GRAMMAR",
+            {
+                "target_percent": ratio.get("target_percent"),
+                "predicted_overlap_percent": ratio.get("predicted_overlap_percent"),
+                "required_reference_relation": ratio.get("required_reference_relation"),
+                "uses_hidden_reference_text": False,
+            },
+        )
 
     p = _ints(r"Include exactly\s+(\d+)\s+numbers in the response", text)
     if p:
