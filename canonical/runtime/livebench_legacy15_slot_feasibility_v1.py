@@ -26,6 +26,7 @@ HISTORICAL_GENERATOR_BLOB = "6ff390d6885cf90f88d9d36959735cb327613edc"
 NTH = "length_constraints:nth_paragraph_first_word"
 EXISTENCE = "keywords:existence"
 FORBIDDEN = "keywords:forbidden_words"
+SECTIONS = "detectable_format:multiple_sections"
 END = "startend:end_checker"
 
 
@@ -65,17 +66,23 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
     forbidden = by_id.get(FORBIDDEN, {}).get("forbidden_words", ())
     forbidden_words = [str(x) for x in forbidden]
 
-    if EXISTENCE in by_id and FORBIDDEN in by_id:
-        required = [str(x) for x in by_id[EXISTENCE].get("keywords", ())]
-        forbidden_by_fold = {word.casefold(): word for word in forbidden_words}
-        for keyword in required:
-            if keyword.casefold() in forbidden_by_fold:
-                reasons.append("REQUIRED_KEYWORD_IS_FORBIDDEN_WORD:" + keyword.casefold())
+    # Do NOT certify required-keyword/forbidden-word overlap as UNSAT.
+    # KeywordChecker uses unbounded substring search, while ForbiddenWords uses
+    # whole-word boundaries.  For a generated alphabetic keyword such as
+    # "harbor", the carrier "harborx" satisfies existence without matching
+    # forbidden \\bharbor\\b.  Treating overlap as contradiction would be a
+    # false certificate.
 
     if NTH in by_id and FORBIDDEN in by_id:
         first_word = str(by_id[NTH].get("first_word", ""))
         if first_word and any(first_word.casefold() == w.casefold() for w in forbidden_words):
             reasons.append("NTH_FIRST_WORD_IS_FORBIDDEN_WORD")
+
+    if SECTIONS in by_id and FORBIDDEN in by_id:
+        splitter = str(by_id[SECTIONS].get("section_spliter", ""))
+        hit = _literal_forbidden_hit(splitter, forbidden_words)
+        if hit is not None:
+            reasons.append("MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:" + hit.casefold())
 
     if END in by_id and FORBIDDEN in by_id:
         end_phrase = str(by_id[END].get("end_phrase", ""))
