@@ -16,7 +16,7 @@ def _write_ppm(path: pathlib.Path) -> None:
     for y in range(247, 252):
         for x in range(50, 360):
             setpx(x, y, (0, 0, 0))
-    for y in range(150, 247):
+    for y in range(150, 221):
         for x in range(120, 171):
             setpx(x, y, (255, 0, 0))
     for x in range(70, 330):
