@@ -5,6 +5,7 @@ import inspect
 import itertools
 import threading
 from pathlib import Path
+from urllib.parse import urlsplit
 from typing import Any, Callable, Mapping
 
 from canonical.runtime import zero_spend_provider_guard_v1 as zero_guard
@@ -61,10 +62,13 @@ def _status_from_exception(exc: BaseException) -> int | None:
     return None
 
 def _provider_for_url(url: Any) -> str | None:
-    value = str(url)
-    if "api.sec-api.io/" in value:
+    try:
+        host = (urlsplit(str(url)).hostname or "").lower()
+    except Exception:
+        return None
+    if host == "api.sec-api.io":
         return "sec_api"
-    if "api.tiingo.com/" in value:
+    if host == "api.tiingo.com":
         return "tiingo"
     return None
 
