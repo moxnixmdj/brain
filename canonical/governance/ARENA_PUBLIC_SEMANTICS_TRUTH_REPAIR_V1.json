@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_ARENA_PUBLIC_SEMANTICS_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAIL_CLOSED__CORRECTS_UNAUTHENTICATED_PUBLIC_REPRODUCIBILITY_CLAIM__ZERO_CREDIT",
+  "objective": "CORRECT_THE_EVIDENCE_CLASSIFICATION_FOR_ARENA_API_SEMANTICS_WITHOUT_REOPENING_ALREADY_VERIFIED_PORTAL_EXISTENCE_OR_INVENTING_ACCOUNT_FACTS",
+  "observed_now": {
+    "api_reference_url": "https://portal.api.preview.arena.ai/docs/api-reference",
+    "routing_url": "https://portal.api.preview.arena.ai/docs/routing",
+    "unauthenticated_fetch_result": "REDIRECTS_TO_AUTHENTICATED_LOGIN",
+    "authenticated_api_portal_existence_publicly_reproducible": true,
+    "endpoint_and_routing_semantics_unauthenticated_publicly_reproducible": false
+  },
+  "supersedes_in_effect": [
+    "canonical/governance/ARENA_COMPARATOR_PUBLIC_SEMANTICS_RECONCILIATION_V1.json#public_semantics.model_enumeration_endpoint_documented",
+    "canonical/governance/ARENA_COMPARATOR_PUBLIC_SEMANTICS_RECONCILIATION_V1.json#public_semantics.direct_model_parameter_routing_documented",
+    "canonical/governance/ARENA_COMPARATOR_PUBLIC_SEMANTICS_RECONCILIATION_V1.json#public_semantics.fallback_control_documented",
+    "canonical/governance/ARENA_COMPARATOR_PUBLIC_SEMANTICS_RECONCILIATION_V1.json#public_semantics.resolved_model_header_documented",
+    "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_PLAN_V1.json#arena_public_semantics_reconciliation.publicly_verifiable_now"
+  ],
+  "corrected_classification": {
+    "publicly_reproducible_without_login": [
+      "AUTHENTICATED_API_PORTAL_EXISTS",
+      "PORTAL_REDIRECTS_TO_LOGIN_WHEN_UNAUTHENTICATED",
+      "HUMAN_DIRECT_MODE_SUPPORTS_SPECIFIC_MODEL_SELECTION_ON_CURRENT_HELP_SURFACE"
+    ],
+    "login_gated_or_account_specific": [
+      "GET_V1_MODELS_ENDPOINT_SEMANTICS",
+      "DIRECT_MODEL_PARAMETER_ROUTING_SEMANTICS",
+      "FALLBACK_CONTROL_SEMANTICS",
+      "RESOLVED_MODEL_RESPONSE_HEADER_SEMANTICS",
+      "ACCOUNT_MODEL_LIST_INCLUDES_EXACT_REQUIRED_OPUS55_VARIANT",
+      "ZERO_INCREMENTAL_SPEND_ENTITLEMENT_OR_PREEXISTING_CREDIT",
+      "FROZEN_HARNESS_AND_EFFORT_COMPARABILITY"
+    ]
+  },
+  "scheduler_effect_if_independently_verified": {
+    "restore_as_unbound_until_authenticated_receipt": [
+      "ARENA_MODEL_ENUMERATION_ENDPOINT_SEMANTICS",
+      "ARENA_DIRECT_MODEL_ROUTING_SEMANTICS",
+      "ARENA_FALLBACK_CONTROL_SEMANTICS",
+      "ARENA_ACTUAL_SERVED_MODEL_OBSERVABILITY_SEMANTICS"
+    ],
+    "preserve": [
+      "ARENA_API_PORTAL_EXISTENCE",
+      "ARENA_ACCOUNT_EXACT_MODEL_AVAILABILITY",
+      "ARENA_ZERO_INCREMENTAL_SPEND_ENTITLEMENT",
+      "ARENA_HARNESS_AND_EFFORT_COMPARABILITY"
+    ],
+    "rule": "ACCOUNT_AUTHENTICATED_RECEIPT_OR_SEPARATELY_REPRODUCIBLE_PRIMARY_SOURCE_REQUIRED_BEFORE_SEMANTICS_CAN_DELETE_THESE_BLOCKERS"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_LOGIN_GATED_SEMANTICS_ARE_FALSE",
+    "NO_CLAIM_EXACT_OPUS55_IS_UNAVAILABLE",
+    "NO_CLAIM_ARENA_API_IS_PAID_OR_FREE_FOR_THE_REQUIRED_VOLUME",
+    "NO_COMPARATOR_EXECUTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
