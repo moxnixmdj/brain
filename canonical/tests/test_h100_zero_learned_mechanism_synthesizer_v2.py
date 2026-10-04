@@ -59,7 +59,11 @@ class ZeroLearnedExpressionTreeV2Tests(unittest.TestCase):
             rows,target="out",
             bounds={"x1":[0.1,10000.0],"x2":[0.001,0.5]},
         )
-        self.assertLess(d["candidates"][0]["nrmse"],0.03)
+        best=d["candidates"][0]
+        self.assertLess(best["nrmse"],0.03)
+        if best.get("search_origin") == "V1_BASELINE":
+            self.assertIn("**",best["expression"])
+            self.assertNotIn("^",best["expression"])
 
     def test_exact_synthetic_nested_correction_generalizes(self):
         def law(x,z):
@@ -71,11 +75,13 @@ class ZeroLearnedExpressionTreeV2Tests(unittest.TestCase):
                 * z**(1.0/3.0)
                 / (1+(0.4/z)**(2.0/3.0))**0.25
             )
+        # Two passive observations plus exactly five active points.  The active
+        # design contains a repeated-coordinate slice, making the nested factors
+        # structurally identifiable inside the public 2d+1 budget.
         points=[
             (7.0,0.7),(120.0,3.0),
-            (1.0,0.2),(1000.0,0.2),(1.0,10.0),(1000.0,10.0),
-            (math.sqrt(1000.0),math.sqrt(2.0)),
-            (15.0,0.35),(350.0,7.0),
+            (1000.0,10.0),(1000.0,0.2),(1.0,10.0),(1.0,0.2),
+            (1.0,math.sqrt(2.0)),
         ]
         rows=[{"u":x,"v":z,"out":law(x,z)} for x,z in points]
         d=s.discover(
