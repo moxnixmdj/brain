@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "mission": "PERMANENTLY_OWN_ALL_19_USEFUL_OPUS_5_5_CAPABILITY_FAMILIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "change": "RECONCILE_CURRENT_TERMINAL_AUTHORITY_WITH_CURRENT_ROOT_STATE_AND_DELETE_STALE_ROOT1_ROOT2_18_SCHEDULING_AUTHORITY",
+  "basis": {
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_git_blob_sha": "3fd35b7865f7827a5a7b4202bc625fe0f980dcda",
+    "current_partition": {
+      "root1_positive_gap_count": 0,
+      "root1_only": 0,
+      "root2_only": 16,
+      "root3_only": 7,
+      "root2_and_root3": 3,
+      "root2_touching": 19,
+      "unresolved_total": 26,
+      "livebench_class": "ROOT2_ONLY"
+    }
+  },
+  "leverage": "ONE_CANONICAL_TRUTH_REPAIR_PREVENTS_MULTIPLE_FRONTIER_LANES_FROM_BEING_JUDGED_AGAINST_REVOKED_ROOT1_AND_ROOT2_18_SCHEDULER_TEXT",
+  "invariants": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_REALITY",
+    "NO_TERMINAL_CASE_EXECUTION_OR_EXPOSURE",
+    "NO_THRESHOLD_CHANGE",
+    "FAIL_CLOSED_IF_CURRENT_ROOT_PARTITION_CHANGES",
+    "CURRENT_AUTHORITY_ROOT_POINTER_MUST_CONTENT_ADDRESS_EXACT_ROOT_BYTES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
