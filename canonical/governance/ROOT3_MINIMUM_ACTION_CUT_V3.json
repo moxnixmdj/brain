@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_MINIMUM_ACTION_CUT_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__POST_UNKNOWN_DOMAIN_V6_PROMOTION__9_ROOT3_PREDICATES__2_DIRECT_FINANCE_LEAVES__3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
+  "objective": "Recompute the minimum nonduplicative Root3 frontier after UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT was independently proved by V6, deleting its two former direct-oracle leaves while preserving only information-positive resume events.",
+  "supersedes": {
+    "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+    "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d"
+  },
+  "new_verified_delta": {
+    "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "state": "PROVED",
+    "acceptance_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "acceptance_reduction_git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
+    "independent_verification_path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "independent_verification_git_blob_sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d",
+    "effect": "DELETE_TWO_UNKNOWN_DOMAIN_DIRECT_ORACLE_LEAVES_FROM_ROOT3_FRONTIER__NO_FAMILY_CREDIT__MYSTERYMECHANISM_REMAINS_OPEN"
+  },
+  "derivation": {
+    "live_root3_predicates": 9,
+    "formal_matched_scope_targets": 7,
+    "formal_population_identities": 4,
+    "synthesis_scope_residual": 0,
+    "composition_dependency": "8_OPEN_INTERFACES__EVENT_DRIVEN_ONLY__UNKNOWN_DOMAIN_FAMILY_NOT_ACCEPTED_BECAUSE_MYSTERYMECHANISM_REMAINS_OPEN",
+    "direct_oracle_residual": "2_FROZEN_FINANCE_LEAVES_ACROSS_1_PREDICATE",
+    "matched_scope_execution": "7_TARGETS__ONE_SHARED_FUTURE_SUPERPORTFOLIO_WAVE",
+    "generic_zero_reality_search": "SATURATED_UNDER_CURRENT_EVIDENCE_AFTER_UNKNOWN_DOMAIN_V6_PROMOTION"
+  },
+  "remaining_root3_only_predicates": [
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "VISION_DENSE_NONCHART_SCOPE",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+  ],
+  "mixed_root2_root3_predicates": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+  ],
+  "minimum_event_classes": [
+    {
+      "id": "NEW_SCOPE_CERTIFICATE_EVENT",
+      "effect": "Run existing universal scope closure compiler against an exact new independently verified lossless/exhaustive/universal certificate; may delete formal targets or remaining direct leaves without fresh reality."
+    },
+    {
+      "id": "UPSTREAM_SCOPE_RECEIPT_EVENT",
+      "effect": "Recompute the 8 open composition component interfaces from newly accepted scope-complete family receipts; no direct composition reality."
+    },
+    {
+      "id": "ROOT3_FRESH_REALITY_EVENT",
+      "effect": "Only after zero-reality fixed point and explicit authority, execute one shared matched superportfolio wave plus the exact two surviving finance direct-oracle leaves in parallel."
+    }
+  ],
+  "current_consequence": "NO_NONDOMINATED_ROOT3_EXECUTION_CURRENTLY_AUTHORIZED__UNKNOWN_DOMAIN_V6_EVENT_ALREADY_REDUCED_FIXED_POINT__ONLY_RESUME_ON_NEW_EVENT",
+  "hard_rules": [
+    "NO_REPEAT_GENERIC_ROOT3_SEARCH_WITH_UNCHANGED_INPUTS",
+    "NO_DIRECT_COMPOSITION_REALITY",
+    "NO_SYNTHESIS_SCOPE_WORK__SCOPE_ALREADY_CLOSED",
+    "NO_UNKNOWN_DOMAIN_DIRECT_ORACLE_EXECUTION__PREDICATE_ALREADY_PROVED",
+    "NO_FINANCE_SOURCE_REINTERNALIZATION__ONLY_TWO_FROZEN_DIRECT_ORACLE_LEAVES_REMAIN",
+    "NO_MATCHED_CASE_GENERATION_BEFORE_EXACT_COMPARATOR_ADMISSIBILITY_AND_ZERO_REALITY_FIXED_POINT",
+    "NO_DIRECT_ORACLE_EXECUTION_BEFORE_EXPLICIT_FRESH_REALITY_AUTHORIZATION",
+    "ZERO_CREDIT_FROM_SCHEDULING_OR_COMPRESSION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
