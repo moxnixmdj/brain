@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_OVERLAP_VISIBLE_WITNESS_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "PASS__INDEPENDENT_PUBLIC_RECOMPUTATION__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1851,
+    "merged_commit": "601ae303814648d369ad7b49352b1b9925a6b874",
+    "workflow_run_id": 37198823299,
+    "workflow_job_id": 111426114852,
+    "head_sha": "eeceea3c3ec358ab0ae6ddacf9696da133573b87",
+    "artifact_id": 11301793049,
+    "artifact_name": "livebench-ratio-overlap-visible-witness-receipt",
+    "artifact_digest_sha256": "2fac0361b9f2b397a218823ab5deb3a52b61e4e90164a36406d5f2e5528f22b5",
+    "job_conclusion": "success"
+  },
+  "pinned_sources": {
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_ifbench_instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "verified_counts": {
+    "pinned_public_ratio_overlap_rows": 12,
+    "exact_frozen_checker_passes": 12,
+    "witnesses_generated_without_hidden_reference": 12,
+    "raw_reference_literal_visible_rows": 5,
+    "raw_reference_literal_not_visible_rows": 7
+  },
+  "conclusion": "The exact hidden reference string is not required for constructive satisfaction of the frozen character-trigram overlap checker on the pinned public ratio:overlap family; visible-only witnesses pass all 12 public rows.",
+  "remaining_boundary": [
+    "MULTI_CONSTRAINT_COMPOSITION_SOUNDNESS_NOT_CLOSED_BY_THIS_RECEIPT",
+    "FROZEN_TERMINAL_POPULATION_BINDING_NOT_CLOSED_BY_THIS_RECEIPT",
+    "LIVEBENCH_ACCEPTANCE_NOT_GRANTED",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
