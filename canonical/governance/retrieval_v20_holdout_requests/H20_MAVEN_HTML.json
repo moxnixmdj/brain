@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_HOLDOUT_REQUEST_V1",
+  "episode_id": "H20_MAVEN_HTML",
+  "difficulty": "NEW_ECOSYSTEM",
+  "query_action": {
+    "action_id": "H20Q09",
+    "source_id": "MAVEN_CENTRAL_SEARCH",
+    "query_family": "FRESH_HOLDOUT_BEHAVIOR_V20",
+    "query": "Java HTML parser DOM CSS selector clean markup"
+  },
+  "source": {
+    "source_id": "MAVEN_CENTRAL_SEARCH",
+    "provider": "maven",
+    "upstream_group": "MAVEN_CENTRAL_API",
+    "ecosystem": "maven",
+    "registry": "maven"
+  },
+  "target_identity_present": false
+}
