@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_STRICT_EVALUATOR_AUTHORITY_REPAIR_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__SURVIVING_EXACT_AUTHORITY_FIXED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "defect": {
+    "runtime": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+    "fact": "POINTWISE_SOLVER_USES_THIS_POSTVALIDATOR",
+    "prior_bug": "RAW_CHECKER_RESULT_WAS_CREDITED_WITHOUT_FROZEN_RESPONSE_STRIP_NONEMPTY_GATE",
+    "consequence": "BLANK_RESPONSES_COULD_RECEIVE_CHECKER_TRUE_FLAGS_IMPOSSIBLE_UNDER_FROZEN_EVALUATION_MAIN"
+  },
+  "authority": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "evaluation_main_blob": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+    "evaluation_gate": "if response.strip() and instruction.check_following(response):",
+    "nltk_version": "3.10.3",
+    "nltk_punkt_blob": "48496d2448c009221d2452c8e928699027b20ebe"
+  },
+  "repair": {
+    "postvalidator": {
+      "path": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+      "blob": "a5ea6f67d85dc02f2114548c8d9729efd05acea4"
+    },
+    "postvalidator_tests": {
+      "path": "canonical/tests/test_livebench_legacy15_exact_postvalidator_v1.py",
+      "blob": "7fb2e5d525f72e5d84684a64e3d518a02c2ae089"
+    },
+    "feasibility": {
+      "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+      "blob": "b3ed5d7cfd3a8c9ecb5acfba79b3a8975dca7f8b"
+    },
+    "feasibility_tests": {
+      "path": "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py",
+      "blob": "c2b1b0ac3917404788dabb2b0002185854140912"
+    }
+  },
+  "theorem": {
+    "claim": "LENGTH_CONSTRAINTS_NUMBER_SENTENCES_WITH_RELATION_LESS_THAN_AND_THRESHOLD_ONE_IS_UNSAT_AS_A_SINGLETON_UNDER_THE_FROZEN_STRICT_SCORER",
+    "proof": [
+      "BLANK_OR_WHITESPACE_RESPONSE_CANNOT_RECEIVE_TRUE_FOR_ANY_INSTRUCTION_DUE_TO_EVALUATION_MAIN_GATE",
+      "NLTK_3_10_3_PUNKT_FINAL_SLICE_SEMANTICS_YIELD_AT_LEAST_ONE_SENTENCE_FOR_EVERY_NONBLANK_RESPONSE",
+      "THEREFORE_NO_RESPONSE_CAN_RECEIVE_TRUE_FOR_SENTENCE_COUNT_LESS_THAN_ONE"
+    ],
+    "pointwise_consequence": "EVERY_REQUIRED_NEXT_CARDINALITY_SUBSET_CONTAINING_THIS_CONTRACT_IS_SEMANTICALLY_UNSAT"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/livebench-zero-sentence-unsat-20261005-sol",
+    "prior_run": 37241824365,
+    "current_version": "NLTK_3_10_3",
+    "status": "QUEUED_OR_PENDING_REFRESH",
+    "credit_before_success": false
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROWS_READ",
+    "NO_TERMINAL_FREQUENCIES_USED",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_CLAIM_WHOLE_LIVEBENCH_PREDICATE_IS_CLOSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
