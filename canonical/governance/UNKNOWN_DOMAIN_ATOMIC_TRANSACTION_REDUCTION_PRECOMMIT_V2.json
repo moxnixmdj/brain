@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_ATOMIC_TRANSACTION_REDUCTION_PRECOMMIT_V2",
+  "date": "2026-10-05",
+  "status": "FROZEN_BEFORE_PRODUCTION_OUTCOME__STRENGTHENED_CONTROL_PLANE__EXACT_VERIFICATION_RUNNING__ZERO_CREDIT",
+  "supersedes": "canonical/governance/UNKNOWN_DOMAIN_ATOMIC_TRANSACTION_REDUCTION_PRECOMMIT_V1.json",
+  "supersession_reason": "V1_BOUND_PRE_HARDENING_LAUNCHER_AND_LEASE_BLOBS__SEMANTIC_EXECUTION_IDENTITY_UNCHANGED__CONTROL_PLANE_STRENGTHENED_BEFORE_ANY_PRODUCTION_OUTCOME",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "preexposure_observation": {
+    "exact_candidate_commit": "33c660f4a801b69f2a46d3bbc5dbfb74618e066a",
+    "exact_push_verification_run_id": 37242061269,
+    "verification_state_at_freeze": "QUEUED",
+    "production_launch_ref_created": false,
+    "semantic_claim_ref_created": false,
+    "production_outcome_observed_before_freeze": false,
+    "production_result_observed_before_freeze": false,
+    "production_cases_consumed_for_semantic_identity": 0
+  },
+  "frozen_subject": {
+    "execution_identity_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_EXECUTION_IDENTITY_V2",
+    "execution_identity_sha256": "5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e",
+    "execution_lease_git_blob_sha": "6120316cdb35b9acd02556578d59c0e22dea4938",
+    "launcher_git_blob_sha": "4a7c8b1b19e05bd0eb8b902455aa5c67c988854e",
+    "production_workflow_git_blob_sha": "f05f16251a1567a85ebfd2ca8a1a4ccf75a5d38e",
+    "launcher_tests_git_blob_sha": "7186f6c7fdf92bf61f679646c77e48062411269c",
+    "exact_verifier_git_blob_sha": "67d2bba97cdae986f721c0770f7b824e7fa9eacb",
+    "required_launch_ref": "refs/heads/unknown-domain-direct-launch/5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e",
+    "required_claim_ref": "refs/heads/unknown-domain-direct-claims/5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e",
+    "expected_result_path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_PRODUCTION_RESULT_5DC0103691B2B3AFA8BB8F95482389DCD796FB87346804066907FF146ECDBB1E_V1.json",
+    "exact_component_count": 14
+  },
+  "strengthened_invariants": [
+    "ATOMIC_CLAIM_RESPONSE_OBJECT_SHA_MUST_EQUAL_IMMUTABLE_LAUNCH_SHA",
+    "RECOVERY_BYTES_EMITTED_BEFORE_FALLIBLE_LOCAL_OR_REMOTE_PERSISTENCE",
+    "EXCEPTION_MESSAGE_NOT_PERSISTED",
+    "LOCAL_RESULT_FILE_WRITE_IS_BEST_EFFORT_AFTER_RECOVERY_ENVELOPE",
+    "SEMANTIC_CLAIM_IDENTITY_UNCHANGED_BY_CONTROL_PLANE_METADATA"
+  ],
+  "acceptance_reduction": {
+    "required_result_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_PRODUCTION_RESULT_V1",
+    "required_result_status": "PRODUCTION_PASS",
+    "required_target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "required_authority_claim_id": "refs/heads/unknown-domain-direct-claims/5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e",
+    "required_claim_create_http_status": 201,
+    "required_claim_uniqueness_source": "ATOMIC_CREATE_RESPONSE",
+    "required_claim_response_object_sha_equals_launch_sha": true,
+    "required_execution_identity_sha256": "5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e",
+    "required_execution_lease_git_blob_sha": "6120316cdb35b9acd02556578d59c0e22dea4938",
+    "required_launcher_git_blob_sha": "4a7c8b1b19e05bd0eb8b902455aa5c67c988854e",
+    "required_production_workflow_git_blob_sha": "f05f16251a1567a85ebfd2ca8a1a4ccf75a5d38e",
+    "required_production_cases_generated": 27,
+    "required_case_result_count": 27,
+    "required_unique_case_ids": 27,
+    "required_leaf_counts": {
+      "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE": 12,
+      "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS": 15
+    },
+    "required_abstention_class_balance": {
+      "IDENTIFIABLE": 5,
+      "NONIDENTIFIABLE": 5,
+      "UNDERSPECIFIED": 5
+    },
+    "required_transfer_leaf_pass": true,
+    "required_abstention_leaf_pass": true,
+    "required_all_27_cases_pass": true,
+    "required_every_case_scorer_pass": true,
+    "max_probe_count_per_case": 2,
+    "required_persistent_learned_bytes": 0,
+    "required_external_frontier_model_calls": 0,
+    "required_external_learned_capability_calls": 0,
+    "required_incremental_spend_usd": 0,
+    "required_raw_hidden_records_persisted": false,
+    "required_raw_evaluator_secret_persisted": false,
+    "required_raw_beacon_persisted": false,
+    "required_replay_allowed": false,
+    "required_replacement_allowed": false,
+    "required_result_promotion_authority": false,
+    "required_separate_independent_reduction": true
+  },
+  "decision_rule": {
+    "if_every_required_condition_is_true": "PREDICATE_LOCAL_PROOF_CANDIDATE_ONLY__REQUIRES_SEPARATE_INDEPENDENT_REDUCTION_RECEIPT",
+    "if_any_required_condition_is_false_or_missing": "FAIL_CLOSED__PREDICATE_REMAINS_OPEN",
+    "post_result_threshold_change_allowed": false,
+    "post_result_case_replacement_allowed": false,
+    "post_result_tuning_allowed": false
+  },
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "ownership_credit": false,
+    "promotion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
