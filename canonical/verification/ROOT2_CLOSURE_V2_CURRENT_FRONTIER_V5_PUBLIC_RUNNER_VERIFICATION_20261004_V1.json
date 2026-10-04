@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_CURRENT_MAIN_V4_TO_V5_PROJECTION__CIRCLECI_ROUTE_DELETED__VALS_FINANCE_RUNNER_BOUND__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subject": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5.json",
+    "git_blob_sha": "e948022f0a4e8d91b949a5155d850d56aa137c87",
+    "parent_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V4.json",
+    "parent_frontier_git_blob_sha": "8c90a1dc4903f9b895788ff2864822d6ebc26ac9",
+    "canonical_parent_commit": "6405c322026a21896c3fcbc2cb88e0244773145c"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1568,
+    "verifier_head_sha": "8739de3a14d8c353b3e5fbcdc2fd63bdb886fbcc",
+    "verifier_merge_commit": "2f24249e3e28aadcf275732f660f1620fb32f9ca",
+    "workflow_run_id": 37168462917,
+    "workflow_job_id": 111336298139,
+    "conclusion": "success",
+    "successful_workflow": "Verify Root2 frontier V5 projection"
+  },
+  "verified": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_touching_predicates": 19,
+    "circleci_free_xlarge_deleted": true,
+    "buildkite_preserved_as_only_current_documented_zero_spend_tb4_candidate": true,
+    "finance_agent_v2_public_custom_harness_bound": true,
+    "finance_agent_v2_gated_suite_and_zero_cost_tool_residuals_preserved": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0
+  },
+  "consequence": "V5_FRONTIER_IS_ADMISSIBLE_TO_MERGE_AS_TRUTH_REPAIR__SCHEDULING_POINTER_ACTIVATION_REMAINS_A_SEPARATE_EXACTLY_VERIFIED_TRANSACTION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
