@@ -22,6 +22,7 @@ jobs:
       - name: Diagnose theorem and regression
         shell: bash
         run: |
+          set +e
           python - <<'PY' > v3-result.txt 2>&1
           import hashlib, json, traceback
           result={"proof":None,"regression":None,"errors":[]}
