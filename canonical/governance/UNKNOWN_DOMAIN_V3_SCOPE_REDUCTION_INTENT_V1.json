@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V3_SCOPE_REDUCTION_INTENT_V1",
   "date": "2026-10-05",
-  "status": "FROZEN_BEFORE_INDEPENDENT_VERIFIER_OUTCOME__ZERO_REALITY__ZERO_CREDIT",
+  "status": "FALSIFIED_BY_IDENTIFIER_TOTALITY_HOLE__DO_NOT_ACTIVATE__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
   "target_scope_id": "scope://opus55/UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT/exact-frozen-v2-generator-domain",
@@ -35,11 +35,9 @@
     "resume_event": "NEW_SCOPE_CERTIFICATE_EVENT"
   },
   "positive_consequence_if_and_only_if_exact_verifier_receipt_passes": {
-    "scope_certificate_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
-    "scope_relation": "EXACT",
-    "root3_new_scope_certificate_event_eligible": true,
-    "delete_27_case_production_as_required_information_acquisition_for_exact_frozen_scope": true,
-    "production_information_gain_for_exact_frozen_scope": 0,
+    "scope_certificate_basis": "NONE__THIS_INTENT_IS_FALSIFIED",
+    "root3_new_scope_certificate_event_eligible": false,
+    "delete_27_case_production_as_required_information_acquisition_for_exact_frozen_scope": false,
     "acceptance_credit_delta": 0,
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
@@ -73,5 +71,12 @@
   },
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "falsification": {
+    "discovered_after_freeze": true,
+    "class": "TRUNCATED_HMAC_IDENTIFIER_TOTALITY_NOT_STRUCTURALLY_PROVED",
+    "consequence": "RUNNER_PR_2084_CAN_VERIFY_FLOAT_REPAIRED_EMITTED_POPULATIONS_BUT_CANNOT_BY_ITSELF_DISCHARGE_THE_CANONICAL_UNIVERSAL_SCOPE_OBLIGATION",
+    "required_successor": "CONTENT_BOUND_SUCCESSOR_WITH_STRUCTURALLY_INJECTIVE_OPAQUE_IDENTIFIER_CONSTRUCTION_PLUS_EXACT_ADD2_IEEE754_ORIENTATION",
+    "canonical_revocation_commit": "085e262b6c47b8f82dd4b3259fea25d6b2104b30"
+  }
 }
