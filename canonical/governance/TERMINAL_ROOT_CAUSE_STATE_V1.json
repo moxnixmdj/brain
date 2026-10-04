@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROOT_CAUSE_STATE_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__LIVEBENCH_FORCED_FAIL_REVOKED__ROOT1_ZERO__LIVEBENCH_REOPENED_ROOT2",
+  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__UNKNOWN_DOMAIN_FALSE_UNIVERSAL_PROMOTION_REVOKED__TOOL_DISCOVERY_PROMOTED__LIVEBENCH_FORCED_FAIL_REVOKED__ROOT1_ZERO",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_acceptance": {
     "accepted_families": 5,
@@ -523,11 +523,13 @@
     },
     "evidence": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5",
+      "git_blob_sha": "651df834c302b551d6dc14e83683c1dde1311706",
       "pointer_reconciliation": {
-        "status": "RECONCILED_TO_CURRENT_12_PROVED_26_UNRESOLVED_LEDGER",
-        "previous_stale_git_blob_sha": "f99b00e6dca735ffa7a790a414155b4f69856cf0",
-        "acceptance_credit_delta": 0
+        "status": "RECONCILED_TO_CURRENT_12_PROVED_26_UNRESOLVED_LEDGER_AFTER_UNKNOWN_DOMAIN_V2_UNIVERSAL_COUNTEREXAMPLE",
+        "previous_stale_git_blob_sha": "eca644e96e10bc8f0948de2e724337eeaa3c842d",
+        "truth_repair_path": "canonical/governance/UNKNOWN_DOMAIN_V2_UNIVERSAL_PROOF_TRUTH_REPAIR_20261005_V1.json",
+        "truth_repair_git_blob_sha": "696d1dc31fba58152d6a99b85437e58ad8e97009",
+        "acceptance_credit_delta": -1
       }
     },
     "unresolved_total": 26,
