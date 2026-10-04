@@ -37,9 +37,9 @@
     ],
     [
       "ARENA_API",
-      "Arena now publishes an OpenAI-compatible and Anthropic-compatible machine API gateway with explicit model selection, fallback disable, and X-Arena-Resolved-Model provenance",
-      "Old audit assumption that Arena has no machine channel is obsolete; account/key, exact Opus 5.5 availability, zero-cost entitlement, and harness equivalence remain unbound",
-      "MACHINE_CHANNEL_DISCOVERED__WAKE_ON_ACCOUNT_KEY_MODEL_LIST_AND_ZERO_COST_ALLOWANCE"
+      "Authenticated Arena API portal is current first-party surface; detailed API docs now require sign-in",
+      "Machine API route is a candidate account-gated path; exact endpoint semantics, account key, model list, fallback/provenance controls, zero-cost entitlement, and harness equivalence are not independently reproduced",
+      "CANDIDATE_MACHINE_CHANNEL__NOT_ADMITTED_UNTIL_AUTHENTICATED_ACCOUNT_AND_EXACT_ROUTE_RECEIPTS"
     ]
   ],
   "implications": {
@@ -48,7 +48,7 @@
     "auto_model_selection_admissible": false,
     "proxy_substitution_admissible": false,
     "generic_free_opus_search": "SATURATED_UNDER_CURRENT_PUBLIC_AND_CONNECTED_ACCOUNT_EVIDENCE",
-    "arena_machine_channel_exists": true,
+    "arena_machine_channel_exists": false,
     "arena_machine_route_currently_admissible": false,
     "arena_api_public_search_saturated": true,
     "arena_api_remaining_account_facts": [
@@ -58,7 +58,9 @@
       "HARNESS_AND_EFFORT_RELATION_TO_FROZEN_COMPARATOR"
     ],
     "arena_machine_channel_publicly_verified": false,
-    "arena_machine_endpoint_existence_independently_verifiable": true
+    "arena_machine_endpoint_existence_independently_verifiable": false,
+    "arena_machine_channel_candidate_detected": true,
+    "arena_authenticated_api_portal_independently_verifiable": true
   },
   "next": [
     "OBSERVE_ARENA_API_ACCOUNT_KEY_MODEL_LIST_CREDIT_STATE_AND_HARNESS_RELATION__NO_MORE_GENERIC_PRICING_SEARCH",
