@@ -158,6 +158,50 @@ def test_sentence_less_than_one_with_public_end_phrase_is_certified():
     assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in out["hard_unsat_reasons"]
 
 
+def test_sentence_less_than_one_rejects_every_active_nonempty_requirement():
+    cases = [
+        [{"instruction_id": f.EXISTENCE, "slots": {"keywords": ["rock"]}}],
+        [{"instruction_id": f.NTH, "slots": {"num_paragraphs": 2, "nth_paragraph": 1, "first_word": "rock"}}],
+        [{"instruction_id": f.POSTSCRIPT, "slots": {"postscript_marker": "P.S."}}],
+        [{"instruction_id": f.BULLETS, "slots": {"num_bullets": 1}}],
+        [{"instruction_id": f.TITLE, "slots": {}}],
+        [{"instruction_id": f.SECTIONS, "slots": {"section_spliter": "Section", "num_sections": 1}}],
+        [{"instruction_id": f.END, "slots": {"end_phrase": "Any other questions?"}}],
+        [{"instruction_id": f.QUOTATION, "slots": {}}],
+        [{"instruction_id": f.WORDS, "slots": {"num_words": 100, "relation": "at least"}}],
+    ]
+    sentence = {
+        "instruction_id": f.SENTENCE,
+        "slots": {"num_sentences": 1, "relation": "less than"},
+    }
+    for extra in cases:
+        out = f.classify_visible_contracts([sentence, *extra])
+        assert out["status"] == "PROVED_UNSAT"
+        assert any(
+            x.startswith("SENTENCE_LT_ONE_REQUIRES_EMPTY_BUT_CHECKER_REQUIRES_OUTPUT:")
+            for x in out["hard_unsat_reasons"]
+        )
+
+
+def test_sentence_less_than_one_allows_empty_compatible_contracts():
+    out = f.classify_visible_contracts([
+        {
+            "instruction_id": f.SENTENCE,
+            "slots": {"num_sentences": 1, "relation": "less than"},
+        },
+        {
+            "instruction_id": f.FORBIDDEN,
+            "slots": {"forbidden_words": ["rock"]},
+        },
+        {
+            "instruction_id": f.WORDS,
+            "slots": {"num_words": 100, "relation": "less than"},
+        },
+    ])
+    assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
+    assert out["hard_unsat_reasons"] == []
+
+
 def test_sentence_less_than_one_does_not_overcertify_nonpublic_end_phrase():
     contracts = [
         {
