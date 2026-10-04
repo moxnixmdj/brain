@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_SLOT_FEASIBILITY_TRUTH_REPAIR_V1",
   "date": "2026-10-05",
-  "status": "TRUTH_REPAIR__STRUCTURAL_REDUCTION_PRESERVED__THREE_SOUND_HARD_UNSAT_CLASSES_BOUND__FALSE_SECTION_UNSAT_FULLY_RETRACTED__ZERO_ACCEPTANCE_CREDIT",
+  "status": "TRUTH_REPAIR__STRUCTURAL_REDUCTION_PRESERVED__SLOT_FEASIBILITY_LAYER_REQUIRED__THREE_SOUND_HARD_UNSAT_CLASSES_BOUND__PUBLIC_WORD_DOMAIN_BOUND__ZERO_ACCEPTANCE_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "problem": "The existing 928 conflict-compatible active15 ID sets and seven archetypes compress the public conflict graph, but ID-level compatibility is not logically equivalent to satisfiability of the concrete visible checker slots.",
@@ -155,5 +155,14 @@
     "promotion": false,
     "fresh_reality": false,
     "acceptance_credit": false
+  },
+  "truth_repair_reconciliation": {
+    "exact_runtime_git_blob_sha": "abcd0aac17dc7f0be70c6ac37855d5ef6a87ca1f",
+    "exact_slot_tests_git_blob_sha": "1020e6b3b0a43a1d78c46851d2fce08fcf93ac94",
+    "pointwise_bridge_tests_current_git_blob_sha": "22e37b72287d9ec05562968ee3dd5a1aea98e2c6",
+    "section_forbidden_unsat_class_retracted": true,
+    "certified_hard_unsat_class_count": 3,
+    "empty_reason_set_means": "UNKNOWN_NOT_SAT",
+    "acceptance_credit_delta": 0
   }
 }
