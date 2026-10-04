@@ -99,13 +99,14 @@ def _apply_end_material(
     body: str,
     postscript: dict[str, Any] | None,
     end_checker: dict[str, Any] | None,
+    forbidden: list[str],
 ) -> str:
     end_phrase = str(_slots(end_checker).get("end_phrase") or "") if end_checker else ""
     marker = str(_slots(postscript).get("postscript_marker") or "") if postscript else ""
     tail_parts = []
     if marker:
         tail_parts.append(marker)
-        tail_parts.append("note")
+        tail_parts.append(_safe_token(forbidden, "post"))
     if end_phrase:
         tail_parts.append(end_phrase)
     tail = " ".join(tail_parts).strip()
@@ -114,8 +115,13 @@ def _apply_end_material(
     return body.replace("__PB_END_SLOT__", tail, 1).rstrip()
 
 
-def _apply_quote(text: str, quotation: bool) -> str:
-    return f'"{text}"' if quotation else text
+def _apply_quote(text: str, quotation: bool, bullet_aware: bool = False) -> str:
+    if not quotation:
+        return text
+    # The frozen bullet checker anchors '*' at the start of a line.  Putting the
+    # opening quote on its own line preserves whole-response quotation while
+    # keeping the first bullet visible to ^\\s*\\* under MULTILINE.
+    return '"\\n' + text + '"' if bullet_aware else f'"{text}"'
 
 
 def _required_fragments(required: list[str], forbidden: list[str]) -> list[str]:
@@ -265,8 +271,10 @@ def _finalize_core_candidate(
     postscript = _one(constraints, "detectable_content:postscript")
     end_checker = _one(constraints, "startend:end_checker")
     quotation = _one(constraints, "startend:quotation") is not None
-    text = _apply_end_material(text, postscript, end_checker)
-    return _apply_quote(text, quotation)
+    forbidden = _forbidden(constraints)
+    text = _apply_end_material(text, postscript, end_checker, forbidden)
+    bullets = _one(constraints, "detectable_format:number_bullet_lists") is not None
+    return _apply_quote(text, quotation, bullet_aware=bullets)
 
 
 def _word_constraint_ok(
