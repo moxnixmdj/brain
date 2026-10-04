@@ -75,6 +75,12 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
         if first_word and any(first_word.casefold() == w.casefold() for w in forbidden_words):
             reasons.append("NTH_FIRST_WORD_IS_FORBIDDEN_WORD")
 
+    if SECTIONS in by_id and FORBIDDEN in by_id:
+        splitter = str(by_id[SECTIONS].get("section_spliter", ""))
+        hit = _literal_forbidden_hit(splitter, forbidden_words)
+        if hit is not None:
+            reasons.append("MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:" + hit.casefold())
+
     if END in by_id and FORBIDDEN in by_id:
         end_phrase = str(by_id[END].get("end_phrase", ""))
         hit = _literal_forbidden_hit(end_phrase, forbidden_words)
