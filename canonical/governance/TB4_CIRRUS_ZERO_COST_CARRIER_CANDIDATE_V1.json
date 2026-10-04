@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CIRRUS_ZERO_COST_CARRIER_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_CARRIER_ROUTE_BOUND__EXTERNAL_CIRRUS_INTEGRATION_OR_RECEIPT_MISSING__ZERO_CASES__ZERO_CREDIT",
+  "objective": "Raise the machine-verified Terminal-Bench 4.0 attainability upper bound from 180 to at least 220 without exposing any acceptance case by binding the minimum eight-task resource recovery envelope to a zero-incremental-spend remote carrier.",
+  "authority": {
+    "minimum_recovery_cut": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+    "attainability_manifest": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
+    "attainability_verdict": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json"
+  },
+  "exact_score_effect": {
+    "current_creditable_tasks": 36,
+    "trials_per_task": 5,
+    "current_upper_bound_successes": 180,
+    "additional_clean_tasks_required": 8,
+    "projected_creditable_tasks_if_carrier_bound": 44,
+    "projected_upper_bound_successes_if_carrier_bound": 220,
+    "required_successes": 220
+  },
+  "carrier_candidate": {
+    "provider": "Cirrus CI managed Compute Engine VM for open-source projects",
+    "requested_platform": "linux/amd64",
+    "requested_cpu": 8,
+    "requested_memory_gb": 24,
+    "requested_disk_gb": 100,
+    "requested_image": "cirrus-images/family/docker-builder",
+    "docker_required": true,
+    "docker_compose_required": true,
+    "public_documentation": [
+      "https://github.com/cirruslabs/cirrus-ci-docs/blob/master/docs/features.md",
+      "https://github.com/cirruslabs/cirrus-ci-docs/blob/master/docs/guide/custom-vms.md",
+      "https://github.com/cirruslabs/vm-images"
+    ],
+    "billing_claim_under_test": "Cirrus CI documentation states managed Linux/compute_engine_instance execution is free for open-source projects up to the documented monthly compute-credit cap. This is not yet a session-specific entitlement receipt.",
+    "verification_repo": "moxnixmdj/verification-capsule-runner",
+    "verification_pr": 1133,
+    "verification_commit": "acf48bd97f9729b340a275a77cf1844e687bdb27",
+    "probe_scope": [
+      "CPU_COUNT_GE_8",
+      "MEM_AVAILABLE_MB_GE_16384",
+      "ROOT_FREE_MB_GE_51200",
+      "DOCKER_AVAILABLE",
+      "DOCKER_COMPOSE_AVAILABLE"
+    ]
+  },
+  "observation_at_binding": {
+    "cirrus_check_attached": false,
+    "github_combined_status_count": 0,
+    "github_actions_runs_for_same_commit": "PRESENT_BUT_UNRELATED_TO_CIRRUS",
+    "carrier_resource_receipt_observed": false
+  },
+  "hard_rules": [
+    "NO_TERMINAL_BENCH_TASK_INSTRUCTION_OR_SOLUTION_CONTENT_FROM_THIS ROUTE",
+    "NO_ACCEPTANCE_CASE_EXECUTION_UNTIL_CANONICAL_ATTAINABILITY_IS_RECOMPILED_OPEN",
+    "NO_CARRIER_CREDIT_FROM_DOCUMENTATION_ALONE",
+    "NO_ZERO_COST_CLAIM_FROM A GENERIC OSS PLAN WITHOUT A SESSION_OR_ACCOUNT_EXECUTION_RECEIPT",
+    "PROTOCOL_EQUIVALENCE_MUST_BE_EXPLICITLY_BOUND_BEFORE HETEROGENEOUS CARRIER SCORE CREDIT",
+    "IF_RESOURCE_PROBE_FAILS_OR_CIRRUS_INTEGRATION_IS_UNAVAILABLE_KEEP UPPER BOUND AT 180"
+  ],
+  "next_if_probe_passes": [
+    "BIND_CONTENT_ADDRESSED_RESOURCE_RECEIPT",
+    "BIND_ZERO_INCREMENTAL_SPEND_RECEIPT",
+    "PROVE_PROTOCOL_EQUIVALENCE_FOR_THE_EIGHT_RECOVERY_TASKS_WITHOUT_CASE_EXPOSURE",
+    "RECOMPILE_TB4_ATTAINABILITY_CUT",
+    "ONLY_IF_RECOMPILED_STATE_IS_OPEN_MAY_A_SEPARATE_EXECUTION_LEASE_BE_CONSIDERED"
+  ],
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
