@@ -327,13 +327,15 @@
           "repo": "caiplayer/financial-research-agent",
           "license": "MIT",
           "role": "deterministic point-in-time SEC evidence retrieval, provenance-preserving event extraction, evidence review, and offline regression-test shell",
-          "discovery_status": "REUSABLE_CANDIDATE__OFFLINE_CORE__ZERO_CREDIT"
+          "discovery_status": "REUSABLE_CANDIDATE__OFFLINE_CORE__ZERO_CREDIT",
+          "pinned_commit": "c4bccbd639e534715b509fa9c124953de31482d7"
         },
         {
           "repo": "baimmm6767/sec-data",
           "license": "Apache-2.0",
           "role": "local SEC/XBRL financial-statement extraction and modelling-ready structured data pipeline with filing-aware mapping and accounting repairs",
-          "discovery_status": "REUSABLE_CANDIDATE__LOCAL_PROCESSING__ZERO_CREDIT"
+          "discovery_status": "REUSABLE_CANDIDATE__LOCAL_PROCESSING__ZERO_CREDIT",
+          "pinned_commit": "fa1a92816e1e0cea7ca8b2eb963dd048a8f8d987"
         }
       ],
       "campaign_next_action": "Compose only the deterministic SEC provenance/event-review and local XBRL/accounting extraction primitives first; independently verify exact numeric/provenance behavior and isolate any remaining learned financial-judgment residual before acquisition or credit."
@@ -531,7 +533,8 @@
           "repo": "tradertanmay/research-agent",
           "license": "MIT",
           "role": "local-first multi-source evidence discovery, document cross-referencing, citation-grounded synthesis, and report generation with a fully local Ollama path",
-          "discovery_status": "REUSABLE_CANDIDATE__ZERO_COST_LOCAL_PATH__ZERO_CREDIT"
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_COST_LOCAL_PATH__ZERO_CREDIT",
+          "pinned_commit": "3d0ee79fbe7e701c8b5fb93c5ed7fc6a59c9c749"
         }
       ],
       "campaign_next_action": "Factor model-substrate-independent evidence collection, citation grounding, synthesis, and report-assembly primitives from the MIT local-first candidate; verify donor-independent behavior before any route-coverage or ownership credit."
