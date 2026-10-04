@@ -45,6 +45,10 @@ def visible_base_from_prompt(prompt: str) -> str:
     text = KEYWORD_RE.sub("", text)
     text = text.replace(CONSONANT_DESCRIPTION, "")
     text = text.replace("\u200b", "")
+    # LiveBench's modern carrier may wrap verifier clauses in an explicit XML
+    # envelope while the scorer reference remains the semantic base request.
+    # Remove only the known carrier tags after clause erasure.
+    text = re.sub(r"</?instructions\s*>", "", text, flags=re.IGNORECASE)
     return _norm_ws(text)
 
 
