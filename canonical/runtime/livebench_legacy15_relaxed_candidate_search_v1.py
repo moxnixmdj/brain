@@ -21,6 +21,7 @@ from itertools import combinations
 from typing import Any, Iterable
 
 from canonical.runtime import livebench_legacy15_joint_candidate_generator_v1 as base
+from canonical.runtime import livebench_legacy15_contract_composer_v2 as composer_v2
 from canonical.runtime import livebench_legacy15_composition_partition_v1 as partition
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_RELAXED_CANDIDATE_SEARCH_V1"
@@ -67,6 +68,7 @@ def generate_relaxed(
     seen: dict[str, dict[str, Any]] = {}
     subset_attempts = 0
     subset_generator_passes = 0
+    subset_proved_unsat = 0
 
     def add(response: str, provenance: dict[str, Any]) -> None:
         if response in seen:
@@ -90,20 +92,45 @@ def generate_relaxed(
         for subset in combinations(range(k), size):
             subset_attempts += 1
             subrows = [rows[i] for i in subset]
-            out = base.generate(subrows, max_candidates=max_per_subset)
-            if out.get("status") != "PASS_CANDIDATES":
+            subset_ids = [str(rows[i]["instruction_id"]) for i in subset]
+
+            # Prefer the newer public-domain composer. It contains stronger
+            # lexical shielding and structural constructions than the older
+            # bounded generator while remaining visible-contract only.
+            v2 = composer_v2.compose_contracts(subrows)
+            if v2.get("status") == "PROVED_UNSAT":
+                subset_proved_unsat += 1
                 continue
-            subset_generator_passes += 1
-            provenance = {
-                "kind": "RELAXED_SUBSET",
-                "subset_indices": list(subset),
-                "instruction_ids": [str(rows[i]["instruction_id"]) for i in subset],
-                "mode": out.get("mode"),
-            }
-            for response in out.get("candidates") or []:
-                add(str(response), provenance)
-                if len(seen) >= max_total:
-                    break
+
+            any_generated = False
+            if v2.get("status") == "CANDIDATE_WITNESS" and isinstance(v2.get("response"), str):
+                add(
+                    str(v2["response"]),
+                    {
+                        "kind": "RELAXED_SUBSET_COMPOSER_V2",
+                        "subset_indices": list(subset),
+                        "instruction_ids": subset_ids,
+                        "mode": v2.get("route"),
+                    },
+                )
+                any_generated = True
+
+            out = base.generate(subrows, max_candidates=max_per_subset)
+            if out.get("status") == "PASS_CANDIDATES":
+                provenance = {
+                    "kind": "RELAXED_SUBSET_GENERATOR_V1",
+                    "subset_indices": list(subset),
+                    "instruction_ids": subset_ids,
+                    "mode": out.get("mode"),
+                }
+                for response in out.get("candidates") or []:
+                    add(str(response), provenance)
+                    any_generated = True
+                    if len(seen) >= max_total:
+                        break
+
+            if any_generated:
+                subset_generator_passes += 1
             if len(seen) >= max_total:
                 break
         if len(seen) >= max_total:
@@ -117,6 +144,7 @@ def generate_relaxed(
         "theoretical_nonempty_relaxation_count": (1 << k) - 1,
         "subset_attempt_count": subset_attempts,
         "subset_generator_pass_count": subset_generator_passes,
+        "subset_proved_unsat_count": subset_proved_unsat,
         "candidate_count": len(candidates),
         "candidates": candidates,
         "requires_exact_full_case_checker_postvalidation": True,
