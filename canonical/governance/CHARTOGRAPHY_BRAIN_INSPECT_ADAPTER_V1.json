@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_BRAIN_INSPECT_ADAPTER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAIL_CLOSED_INSPECT_MODELAPI_ADAPTER__BACKEND_BINDING_STILL_OPEN__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "purpose": "Remove evaluation-plumbing ambiguity without claiming or externalizing the missing multimodal capability.",
+  "inspect_contract": {
+    "package": "inspect-ai",
+    "verified_target_version": "0.3.276",
+    "chartography_minimum_declared_version": ">=0.3.244",
+    "provider_name": "brain-chartography",
+    "required_generate_signature": "generate(input:list[ChatMessage], tools:list[ToolInfo], tool_choice:ToolChoice, config:GenerateConfig)->ModelOutput"
+  },
+  "runtime": {
+    "path": "canonical/runtime/eval_adapters/chartography_brain_model_api_v1.py",
+    "registration": "@modelapi(name='brain-chartography')",
+    "model_usage": "--model brain-chartography/brain"
+  },
+  "fail_closed_properties": [
+    "REQUIRES_SEPARATELY_VERIFIED_BACKEND_BINDING",
+    "REQUIRES_INTERNALIZED_CONFIGURED_CAPABILITY",
+    "REQUIRES_BRAIN_CONTROLLED_BACKEND",
+    "REQUIRES_ZERO_EXTERNAL_MODEL_DEPENDENCIES",
+    "REQUIRES_NETWORK_REQUIRED_FALSE",
+    "REQUIRES_INCREMENTAL_SPEND_ZERO",
+    "FORBIDS_FALLBACK",
+    "FORBIDS_EXTERNAL_BASE_URL",
+    "FORBIDS_EXTERNAL_API_KEY",
+    "REQUIRES_EXACT_SINGLE_USER_MESSAGE",
+    "REQUIRES_EXACT_TEXT_THEN_IMAGE_CONTENT",
+    "PRESERVES_QUESTION_BY_SHA256",
+    "PRESERVES_IMAGE_BYTES_BY_SHA256",
+    "REJECTS_REMOTE_IMAGE_FETCH",
+    "REJECTS_TOOLS",
+    "FAILS_ON_BACKEND_PROGRAM_HASH_DRIFT"
+  ],
+  "backend_binding_contract": {
+    "schema": "PROJECT_BRAIN_CHARTOGRAPHY_MULTIMODAL_BACKEND_BINDING_V1",
+    "status_required": "VERIFIED_BOUND_MULTIMODAL_BACKEND",
+    "exact_missing_backend_capability": "QUESTION_PLUS_IMAGE_BYTES_TO_ANSWER_TEXT",
+    "current_state": "OPEN"
+  },
+  "classification": {
+    "root1": "UNCHANGED_INACTIVE__ADAPTER_DOES_NOT_ASSERT_SEMANTIC_CAPABILITY",
+    "root2": "ADAPTER_IMPLEMENTATION_CANDIDATE__BACKEND_BINDING_AND_SCORE_REMAIN",
+    "root3": "UNCHANGED"
+  },
+  "hard_nonclaims": [
+    "TEST_FIXTURE_BACKEND_IS_NOT_A_PRODUCTION_CAPABILITY",
+    "NO_CLAIM_BRAIN_CAN_YET_ANSWER_CHARTOGRAPHY_IMAGES",
+    "NO_CHARTOGRAPHY_TERMINAL_CASES_EXECUTED",
+    "NO_SCORE_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_ADAPTER_AGAINST_INSPECT_AI_0_3_276__THEN_BIND_ONLY_A_SEPARATELY_VERIFIED_INTERNAL_MULTIMODAL_BACKEND__THEN ZERO_CASE END_TO_END PREFLIGHT__THEN SCORE",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
