@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V10_REPLAY72_STRUCTURAL_DIAGNOSTIC_RECEIPT_V1",
+  "date": "2026-10-04",
+  "status": "VERIFIED_EXECUTION_LOG_OBSERVED__72_ALREADY_EXPOSED_CASES_REPLAYED__ZERO_NEW_CASE_EXPOSURE__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37195688717,
+    "workflow_job_id": 111416950471,
+    "head_sha": "d784c3bff5f83672a6a1923fce00e395f3c5d413",
+    "activation_blob_sha": "7a2c2fdc3cc08862850a13667ee2cd2b2e2aae91",
+    "epoch_digest_sha256": "a71f24f79df6b6be6e910efb1299776ac9fede9e78539577695d6e386fc2eb52",
+    "claim_ref": "refs/heads/livebench-v10-claims/a71f24f79df6b6be6e910efb1299776ac9fede9e78539577695d6e386fc2eb52"
+  },
+  "execution": {
+    "atomic_claim_create_http_status": 201,
+    "terminal_dataset_read_before_claim": false,
+    "execution_started_before_claim": false,
+    "replay_prefix_limit": 72,
+    "replayed_already_exposed_cases": 72,
+    "new_case_exposure": false,
+    "case_73_or_later": false,
+    "case_ids_emitted": false,
+    "prompt_text_emitted": false,
+    "response_text_emitted": false,
+    "raw_exception_text_emitted": false,
+    "raw_composition_detail_emitted": false,
+    "unclassified_runtime_count": 0
+  },
+  "structural_histogram": {
+    "ARCHITECTURAL_GAP:CONTROL_OR_FANOUT": 2,
+    "COMPOSITION_PRODUCER:UNRESOLVED_GROUNDED_CLAUSES": 27,
+    "POLICY_BLOCK:POST_PROMPT_CAPABILITY_ACQUISITION_FORBIDDEN": 43
+  },
+  "interpretation": [
+    "ALL_72_ALREADY_EXPOSED_CASES_CLASSIFIED_BY_CURRENT_FORMAL_ROUTING",
+    "NO_CASE_CONTENT_OR_RESPONSE_TEXT_IS_BOUND_HERE",
+    "THIS_IS_DIAGNOSTIC_LOCALIZATION_NOT_A_LIVEBENCH_SCORE",
+    "THE_43_POLICY_BLOCK_CASES_AND_27_COMPOSITION_PRODUCER_CASES_DOMINATE_THE_OBSERVED_PREFIX_RESIDUAL"
+  ],
+  "authority": {
+    "acceptance_credit": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "new_case_exposure": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
