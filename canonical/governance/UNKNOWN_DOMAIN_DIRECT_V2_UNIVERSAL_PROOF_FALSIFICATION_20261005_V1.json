@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "VERIFIED_CONSTRUCTIVE_COUNTEREXAMPLE__UNIVERSAL_THEOREM_FALSE__ZERO_PRODUCTION_CASES",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "falsified_claim": "FOR_EVERY_POPULATION_THE_EXACT_FROZEN_V2_GENERATOR_CAN_EMIT__THE_EXACT_FROZEN_V2_CANDIDATE_PASSES_ALL_27_CASES",
+  "root_cause": "ADD2_IS_COMMUTATIVE_OVER_REAL_ARITHMETIC_BUT_NOT_BITWISE_ROLE_ORDER_INVARIANT_UNDER_LEFT_ASSOCIATIVE_IEEE754_FLOAT_ADDITION__CANDIDATE_COLLAPSES_ROLE_SWAP_AT_1E_12_ROUNDING_WHILE_SCORER_REQUIRES_EXACT_FLOAT_EQUALITY",
+  "exact_counterexample": {
+    "derivation_only": true,
+    "production_generator_called": false,
+    "production_case_generated": false,
+    "beacon": "CEFULL-00000006-20261005-LONG",
+    "evaluator_secret_derivation": "sha256('secret-full-6')",
+    "evaluator_secret_sha256_hex": "8cc1b69c472bb86d980e9f31f22f389a85b403694968bfda59bfea9a183c115e",
+    "transfer_index": 4,
+    "primitive_family": "COMPOSITIONAL_REWRITE",
+    "op": "ADD2",
+    "bias": 1.478631303275289,
+    "role_rows": [
+      [
+        -0.8233171660268983,
+        1.2067705734163052
+      ],
+      [
+        0.6867101173666388,
+        -2.7622017644558445
+      ],
+      [
+        -2.1617668799093805,
+        0.41241816831820666
+      ],
+      [
+        2.521455815427132,
+        0.35108555436504324
+      ],
+      [
+        -1.7762554211206583,
+        -2.005368923218164
+      ],
+      [
+        1.9488958442573054,
+        1.1652541962456116
+      ]
+    ],
+    "domain_b_r0_feature_id": "udir_b_fe49e5a743809c",
+    "domain_b_r1_feature_id": "udir_b_b1a15bbfc0bcc9",
+    "rows_0_through_4_true_vs_swapped_exact_equal": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "query_true_left_associative": 4.592781343778206,
+    "query_swapped_left_associative": 4.5927813437782055,
+    "query_exact_equal": false,
+    "query_difference": -8.881784197001252e-16,
+    "query_round_12_true": 4.592781343778,
+    "query_round_12_swapped": 4.592781343778,
+    "candidate_support_set_same": true,
+    "candidate_consequence_bucket_same": true,
+    "candidate_lexicographic_mapping_selection": "SWAPPED__r1_feature_id_is_lexicographically_smaller",
+    "scorer_behavior": "FAIL__DOMAIN_B_TERMINAL_CONSEQUENCE_WRONG"
+  },
+  "code_path": {
+    "candidate_mapping_filter": "canonical/runtime/unknown_domain_direct_candidate_v1.py::_candidate_mappings uses _close tolerance",
+    "candidate_v2_resolution": "canonical/runtime/unknown_domain_direct_candidate_v2.py::_transfer concludes when support-set count and round(12) consequence count are each one",
+    "candidate_mapping_choice": "sorted(mappings,key=lambda m:tuple(sorted(m.items())))[0]",
+    "scorer_exactness": "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py::score_transfer compares terminal_consequence with gold_terminal_consequence using exact !=",
+    "generator_arithmetic": "ADD2 evaluates bias + r0 + r1 using ordinary Python float left association"
+  },
+  "consequence": [
+    "PR1858_UNIVERSAL_PASS_CLAIM_MUST_NOT_BE_PROMOTED",
+    "RUNNER_PR2040_EXPECTED_SYNTHETIC_FALSIFICATION_MUST_BE_TREATED_AS_A_COUNTEREXAMPLE_NOT_AS_QUEUE_NOISE",
+    "DO_NOT_DELETE_FRESH_REALITY_REQUIREMENT_ON_THE_BASIS_OF_THE_FALSE_V2_THEOREM",
+    "NEXT_ZERO_REALITY_REPAIR_MUST_REMOVE_THE_FLOAT_ROLE_ORDER_ARTIFACT_WITHOUT_WEAKENING_THE_SEMANTIC_BEHAVIORAL_CONTRACT"
+  ],
+  "repair_frontier": {
+    "preferred_direction": "VERSIONED_EVALUATOR_OR_RUNTIME_NUMERIC_SEMANTICS_REPAIR_THAT_MAKES_SEMANTICALLY_COMMUTATIVE_ADD2_ORDER_INVARIANT__THEN_REFREEZE_AND_REPROVE_BEFORE_ANY_PRODUCTION",
+    "forbidden_shortcut": "DO_NOT_SIMPLY_RELAX_ACCEPTANCE_TO_HIDE_REAL_SEMANTIC_ERRORS__THE_REPAIR_MUST_BE_NARROWLY_BOUND_TO_NUMERIC_REPRESENTATION_EQUIVALENCE_AND_INDEPENDENTLY_VERIFIED",
+    "production_fallback": "CURRENTLY_NO_EXECUTION_AUTHORITY__OLD_LEASE_RETIRED__REPAIRED_SUCCESSOR_PR2053_AND_NEW_REDUCTION_REQUIRED"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
