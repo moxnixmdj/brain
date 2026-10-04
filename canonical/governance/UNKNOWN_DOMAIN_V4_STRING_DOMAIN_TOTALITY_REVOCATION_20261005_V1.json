@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V4_STRING_DOMAIN_TOTALITY_REVOCATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__V4_TOP_LEVEL_UNIVERSAL_TOTALITY_NOT_PROVED__REACHABLE_ACCEPTED_BEACON_ENCODING_COUNTEREXAMPLE__PREDICATE_REMAINS_EXTERNAL_BLOCKED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "canonical_acceptance_before_record": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "git_blob_sha": "25bc947e9f4b71b46dff13405cf231602cdeff1f",
+    "predicate_state": "EXTERNAL_BLOCKED",
+    "proved_predicate_count": 12,
+    "unresolved_predicate_count": 26,
+    "credit_delta": 0
+  },
+  "falsified_top_level_claim": {
+    "proof_path": "canonical/runtime/unknown_domain_direct_v4_universal_proof_v1.py",
+    "proof_git_blob_sha": "72bbed393ac1bcaccb4cf33cd37835662c421f6c",
+    "claimed_beacon_scope": "ALL_VALID_STRINGS_LENGTH_GE_16",
+    "exact_counterexample_description": "A_PYTHON_STR_OF_SIXTEEN_ASCII_A_CHARACTERS_FOLLOWED_BY_ONE_UNPAIRED_HIGH_SURROGATE_U_D800_PASSES_LEN_STRIP_GE_16_BUT_STRICT_UTF8_ENCODING_RAISES_UNICODEENCODEERROR",
+    "logic": "A_UNIVERSAL_EMISSION_AND_PASS_THEOREM_IS_FALSE_IF_ONE_INPUT_ADMITTED_BY_ITS_OWN_GATE_FAILS_TO_EMIT"
+  },
+  "affected_generators": [
+    {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py",
+      "historical_bound_blob": "8b855851b8a0fec3a0811c5033cc4ea6d2436954",
+      "mechanism": "V3_DRAW_AND_DELEGATED_V2_RANDOMNESS_USE_STRICT_UTF8_ENCODING_AFTER_A_LENGTH_ONLY_BEACON_GATE"
+    },
+    {
+      "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v4.py",
+      "current_blob_at_detection": "e52858b9fef2d795f72b45cd3ae82ad04344aa91",
+      "mechanism": "V4_STRUCTURALLY_TOTALIZES_IDENTIFIERS_BUT_STILL_CALLS_V1_TOKEN_AND_V2_RANDOMNESS_WITH_THE_RAW_ACCEPTED_BEACON__STRICT_UTF8_REMAINS_PARTIAL"
+    }
+  ],
+  "regression": {
+    "path": "canonical/tests/test_unknown_domain_v4_string_domain_totality_revocation_v1.py",
+    "commit": "6d67939e69770c3141307a0c19f91646d2624c95",
+    "expected_v3": "UNICODEENCODEERROR_REPRODUCED",
+    "expected_v4": "UNICODEENCODEERROR_REPRODUCED"
+  },
+  "surviving_valid_work": [
+    "CANDIDATE_V3_EXACT_ADD2_ROLE_ORIENTATION_REPAIR_IS_NOT_INVALIDATED_BY_THIS_COUNTEREXAMPLE",
+    "STRUCTURAL_IDENTIFIER_BIJECTION_ARGUMENTS_ARE_NOT_INVALIDATED_FOR_INPUTS_THAT_REACH_IDENTIFIER_CONSTRUCTION",
+    "V2_ADD2_ONE_ULP_FALSIFIER_REMAINS_VALID",
+    "FINITE_NONPRODUCTION_FALSIFICATION_PASSES_REMAIN_REGRESSION_EVIDENCE_BUT_NOT_UNIVERSAL_TOTALITY"
+  ],
+  "invalidated_or_blocked": [
+    "DO_NOT_PROMOTE_V4_TOP_LEVEL_FOR_EVERY_VALID_SECRET_AND_BEACON_THEOREM",
+    "DO_NOT_USE_ANY_V4_RECEIPT_THAT_FAILS_TO_ATTACK_THE_FULL_ACCEPTED_STRING_INTERFACE",
+    "DO_NOT_ADVANCE_UNKNOWN_DOMAIN_ACCEPTANCE_FROM_12_TO_13_ON_THE_CURRENT_V4_PACKAGE",
+    "DO_NOT_LAUNCH_THE_FALSIFIED_V2_5DC_SEMANTIC_PRODUCTION_IDENTITY"
+  ],
+  "required_successor": {
+    "preservation_rule": "PRESERVE_THE_ORIGINAL_ACCEPTED_STRING_QUANTIFIER__DO_NOT_WEAKEN_SCOPE_MERELY_TO_ESCAPE_THE_COUNTEREXAMPLE",
+    "minimal_repair": "CANONICALIZE_EVERY_ACCEPTED_PYTHON_STR_BEACON_AND_STRING_SECRET_THROUGH_A_TOTAL_INJECTIVE_ENCODING_BEFORE_ANY_LEGACY_STRICT_UTF8_HMAC_PATH__OR_REIMPLEMENT_ALL_RANDOMNESS_ON_A_TOTAL_BYTE_ENCODING",
+    "required_proof_obligations": [
+      "TOTAL_EMISSION_FOR_EVERY_BEACON_ADMITTED_BY_THE_LENGTH_GATE_INCLUDING_ALL_SURROGATE_CODE_UNITS",
+      "TOTAL_SECRET_CANONICALIZATION_FOR_THE_DECLARED_SECRET_INTERFACE",
+      "STRUCTURAL_IDENTIFIER_INJECTIVITY",
+      "EXACT_ADD2_IEEE754_GOLD_EQUALITY",
+      "ALL_SIX_TRANSFER_FAMILIES",
+      "ALL_THREE_ABSTENTION_CLASSES",
+      "INDEPENDENT_CONTENT_BOUND_VERIFICATION",
+      "SEPARATE_FAIL_CLOSED_ROOT3_AND_ACCEPTANCE_REDUCTION"
+    ]
+  },
+  "experimental_successor_nonauthority": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "research/unknown-domain-v5-total-python-string-domain-20261005",
+    "generator_v4_blob": "6685a1b173acacc69cffc99efeafd48fee793d69",
+    "universal_proof_v5_blob": "ab6ea01260b13133d208a7eea08317cfaa1e9ab0",
+    "independent_verifier_blob": "3ee4827ccd829d66c5ded22214d8ecb036fa1b1d",
+    "status": "RESEARCH_CANDIDATE_ONLY__NO_ACCEPTANCE_OR_EXECUTION_AUTHORITY"
+  },
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "ownership_credit": false,
+    "promotion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
