@@ -213,7 +213,16 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
         core = core.rstrip() + " " + phrase
 
     if quote:
-        core = '"' + core.strip('"') + '"'
+        # A quote directly before the first '*' hides that bullet from the
+        # frozen legacy regex ^\\s*\\*... . Put the opening quote on its own
+        # line when bullets are active. The closing quote stays attached to the
+        # tail so EndChecker still ends on the exact phrase after stripping
+        # outer quotes. Bullet-list and nth-paragraph constraints conflict in
+        # the frozen generator, so this does not perturb nth first-word logic.
+        if bullets:
+            core = '"\\n' + core.strip('"') + '"'
+        else:
+            core = '"' + core.strip('"') + '"'
 
     # Final whole-word forbidden guard. Required/forbidden overlap is handled
     # above, but other generated structure may still collide with a forbidden word.
