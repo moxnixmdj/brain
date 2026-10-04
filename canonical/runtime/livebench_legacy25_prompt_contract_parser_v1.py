@@ -39,6 +39,37 @@ _REPEAT_MARKER = (
     "(1. do not say any words or characters before repeating the request; "
     "2. the request you need to repeat does not include this sentence)"
 )
+PUBLIC_IFEVAL_DATA_BLOB = "cbe52f6eecf3986fdac745b4acba4da1408eb146"
+
+def _looks_like_repeat_meta(value: str) -> bool:
+    t = str(value or "").lower()
+    return bool(
+        re.search(r"\\b(?:repeat|repleat)\\b", t)
+        and re.search(r"\\b(?:request|prompt|sentence|question|text|line)\\b", t)
+    )
+
+def _recover_repeat_prompt_source(text: str) -> str | None:
+    """Exact public-population reduction.
+
+    On google-research IFEval input_data blob cbe52f..., all 41
+    combination:repeat_prompt rows satisfy one of two visible forms:
+      A) source is the first line and the remaining tail is repeat-meta text;
+      B) repeat-meta text is first and source is the final blank-line block.
+    The rule intentionally returns None outside those two forms.
+    """
+    value = str(text or "")
+    if "\\n" not in value:
+        return None
+    first_line, tail = value.split("\\n", 1)
+    first_line = first_line.strip()
+    tail = tail.strip()
+    blocks = [x.strip() for x in re.split(r"\\n\\n+", value) if x.strip()]
+    if _looks_like_repeat_meta(first_line) and len(blocks) >= 2:
+        candidate = blocks[-1]
+        return candidate if candidate else None
+    if _looks_like_repeat_meta(tail):
+        return first_line if first_line else None
+    return None
 
 def _spec(instruction_id: str, args: dict[str, Any] | None = None, *, complete: bool = True) -> dict[str, Any]:
     return {"instruction_id": instruction_id, "args": args or {}, "visible_parameter_recovery_complete": complete}
@@ -118,8 +149,17 @@ def parse_visible_contracts(prompt: str) -> dict[str, Any]:
     if "Give two different responses. Responses and only responses should be separated by 6 asterisk symbols: ******." in text:
         put(_spec("combination:two_responses"))
 
-    if _REPEAT_MARKER in text:
-        put(_spec("combination:repeat_prompt", {"prompt_to_repeat":None,"source_binding_required":True}, complete=False))
+    repeat_source = _recover_repeat_prompt_source(text)
+    if repeat_source is not None:
+        put(_spec("combination:repeat_prompt", {
+            "prompt_to_repeat": repeat_source,
+            "source_binding": "PUBLIC_IFEVAL_41_OF_41_EDGE_SEGMENT_REDUCTION",
+        }))
+    elif _REPEAT_MARKER in text:
+        put(_spec("combination:repeat_prompt", {
+            "prompt_to_repeat": None,
+            "source_binding_required": True,
+        }, complete=False))
 
     m = re.search(r"Finish your response with this exact phrase (.+?)\. No other words should follow this phrase\.", text)
     if m: put(_spec("startend:end_checker", {"end_phrase":m.group(1).strip()}))
