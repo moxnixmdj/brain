@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_MINIMUM_CAUSAL_DEPTH_V2_CANDIDATE",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_SUBJECT_BLOBS_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT__NO_AUTHORITY",
+  "objective": "MAKE_AUTHENTICATED_ONE_BIT_THRESHOLD_RECEIPTS_AN_EXPLICIT_MINIMUM_INFORMATION_ROOT2_LANE_WITHOUT_MUTATING_VERIFIED_V1_OR_EXPANDING_EXECUTION_OR_FRESH_REALITY_AUTHORITY",
+  "source_main": "f5341a3e4e7dfa947df8b7975516552cff9fc131",
+  "immutable_predecessor": {
+    "activation_path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "c184c1aed33c06f6b4307ace79a959c21de96958",
+    "predecessor_plan_path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_PLAN_V1.json",
+    "predecessor_plan_git_blob_sha": "3c203a1c2060b333a2e13417ab3a3a2880c94f2c",
+    "mutation_allowed": false
+  },
+  "subjects": {
+    "plan": {
+      "path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_PLAN_V2.json",
+      "git_blob_sha": "457e77191bd6566774fff85ef79d3977d1e7ab61"
+    },
+    "guard": {
+      "path": "canonical/runtime/terminal_minimum_causal_depth_guard_v2.py",
+      "git_blob_sha": "affb71e9ddb83cdc81ee178697d0f3b9c800758e"
+    },
+    "tests": {
+      "path": "canonical/tests/test_terminal_minimum_causal_depth_guard_v2.py",
+      "git_blob_sha": "e734ee48527096ef381db61ed97bd33dd4d140b0"
+    },
+    "workflow": {
+      "path": ".github/workflows/verify-terminal-minimum-causal-depth-v2.yml",
+      "git_blob_sha": "6e688b2bb877dcda8c3349030b67470bafa8dfd0"
+    }
+  },
+  "dependencies": {
+    "blind_threshold_activation": {
+      "path": "canonical/governance/ROOT2_BLIND_THRESHOLD_RECEIPT_ACTIVATION_V1.json",
+      "git_blob_sha": "324a7a762a3a2e7116372414afa6b52343673a3d"
+    },
+    "arena_reconciliation": {
+      "path": "canonical/governance/ARENA_COMPARATOR_PUBLIC_SEMANTICS_RECONCILIATION_V1.json",
+      "git_blob_sha": "d9bbedb43e8b5da66331d9cdd7254718a7ab23db"
+    }
+  },
+  "intended_scheduler_delta": [
+    "ADD_AUTHENTICATED_ONE_BIT_THRESHOLD_RECEIPT_RACE_TO_EVIDENCE_COLLAPSE",
+    "PREFER_AUTHENTICATED_PASS_FAIL_AT_EXACT_FROZEN_THRESHOLD_WHEN_EXACT_SCORE_AND_PRIVATE_DATASET_ARE_NOT_TERMINALLY_REQUIRED",
+    "PRESERVE_OFFICIAL_RELATIVE_RATING_THRESHOLD_SEMANTICS_FOR_GDPVAL_AND_AA_BRIEFCASE",
+    "PRESERVE_MATCHED_NONINFERIORITY_AS_NOT_COLLAPSIBLE_TO_ONE_FIXED_BAR_BIT"
+  ],
+  "preserved_truth": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gaps": 0,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_delta": 0
+  },
+  "verification_required": [
+    "RUN_V2_GUARD_AND_TEST",
+    "CONFIRM_V1_EXACT_BLOBS_UNCHANGED",
+    "CONFIRM_BLIND_THRESHOLD_ELIGIBLE_SET_EXACT",
+    "CONFIRM_RELATIVE_RATING_NONTRANSPORT",
+    "CONFIRM_NO_MATCHED_NONINFERIORITY_COLLAPSE",
+    "CONFIRM_ZERO_ACCEPTANCE_CAPABILITY_OWNERSHIP_CREDIT"
+  ],
+  "hard_rules": [
+    "NO_MUTATION_OF_VERIFIED_V1_SUBJECTS",
+    "NO_SELF_ASSERTED_THRESHOLD_RECEIPT",
+    "SOURCE_AUTHENTICITY_REQUIRES_SEPARATE_CONTENT_ADDRESSED_VERIFICATION",
+    "NO_EXACT_SCORE_OR_PRIVATE_DATASET_REQUIREMENT_WHEN_AUTHENTICATED_THRESHOLD_BIT_IS_TERMINALLY_SUFFICIENT",
+    "NO_FRESH_REALITY_EXECUTION_PROMOTION_OR_ACCEPTANCE_AUTHORITY_FROM_THIS_CANDIDATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
