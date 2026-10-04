@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_ZERO_COST_TOOL_BOUNDARY_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FREE_TIERS_EXIST__EXACT_HELDOUT_QUOTA_SUFFICIENCY_OPEN__ZERO_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "first_party_runner": {
+    "repo": "vals-ai/finance-agent-v2",
+    "public_question_file": {
+      "path": "data/public.txt",
+      "git_blob_sha": "789e46e5941eb973f2796df7189ff76d08d3eba8",
+      "public_question_count": 27
+    },
+    "agent_runtime": {
+      "path": "finance_agent/get_agent.py",
+      "git_blob_sha": "22c012241a430975266fb7f8d2fe7af8e9f1b8d4",
+      "max_time_seconds": 7200,
+      "default_max_turns": null
+    }
+  },
+  "required_external_tools": [
+    {
+      "tool": "Tavily web_search",
+      "current_free_boundary": "1000_API_CREDITS_PER_MONTH__NO_CREDIT_CARD__REQUESTS_STOP_WHEN_EXHAUSTED",
+      "source": "https://www.tavily.com/pricing"
+    },
+    {
+      "tool": "sec-api.io EDGAR search",
+      "current_free_boundary": "FIRST_100_API_CALLS_FREE",
+      "source": "https://sec-api.io/pricing"
+    },
+    {
+      "tool": "Tiingo price_history",
+      "current_free_boundary": "STARTER_0_USD__50_REQUESTS_PER_HOUR__1000_PER_DAY__1GB_PER_MONTH",
+      "source": "https://www.tiingo.com/pricing"
+    }
+  ],
+  "deductions": [
+    "TOOL_STACK_IS_NOT_INHERENTLY_PAID",
+    "PUBLIC_27_QUESTION_SET_DOES_NOT_ESTABLISH_OFFICIAL_HELDOUT_SUITE_SIZE",
+    "RUNNER_DEFAULT_HAS_NO_MAX_TURN_CAP",
+    "RUNNER_TIME_CAP_ALONE_DOES_NOT_UPPER_BOUND_PROVIDER_CALLS_TIGHTLY_ENOUGH_TO_PROVE_FREE_QUOTA_SUFFICIENCY",
+    "THEREFORE_ZERO_COST_TOOL_DEPENDENCY_BLOCKER_NARROWS_TO_EXACT_HELDOUT_SUITE_SIZE_PLUS_WORST_CASE_PROVIDER_CALL_BOUNDS_OR_ACCOUNT_OBSERVATION"
+  ],
+  "delete_as_blockers": [
+    "UNKNOWN_WHETHER_TAVILY_HAS_ANY_ZERO_COST_API_ROUTE",
+    "UNKNOWN_WHETHER_SEC_API_HAS_ANY_ZERO_COST_API_ROUTE",
+    "UNKNOWN_WHETHER_TIINGO_HAS_ANY_ZERO_COST_API_ROUTE"
+  ],
+  "preserve": [
+    "VALS_PLATFORM_APPROVAL",
+    "EXACT_OFFICIAL_TEST_SUITE_ID",
+    "OFFICIAL_HELDOUT_SUITE_SIZE_OR_EQUIVALENT_EXECUTION_BOUND",
+    "WORST_CASE_TAVILY_CALL_BOUND_WITHIN_FREE_CREDITS",
+    "WORST_CASE_SEC_API_CALL_BOUND_WITHIN_100_FREE_CALLS",
+    "WORST_CASE_TIINGO_CALL_BOUND_WITHIN_STARTER_LIMITS",
+    "BRAIN_CUSTOM_HARNESS_BINDING",
+    "BRAIN_SCORE_GE_58_59"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_27_EQUALS_OFFICIAL_HELDOUT",
+    "NO_CLAIM_FREE_QUOTAS_ARE_SUFFICIENT_FOR_OFFICIAL_RUN",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
