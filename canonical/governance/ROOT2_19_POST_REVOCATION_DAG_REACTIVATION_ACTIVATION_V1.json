@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__SEPARATE_TOOL_RECOMPUTATION_PASS__REUSE_PRIOR_INDEPENDENTLY_VERIFIED_19_PREDICATE_DAG__SCHEDULING_ONLY__ZERO_CREDIT",
+  "objective": "Reactivate the existing independently verified output-only threshold DAG as the current Root2 scheduling compiler after proving exact identity between its 19-predicate domain and the repaired current 19-predicate Root2-touching set.",
+  "current_root_binding": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "e8371418ed39b83b14df874c8eb5e0bdb6a2e603",
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 16,
+    "root2_and_root3_count": 3,
+    "root2_touching_count": 19
+  },
+  "candidate": {
+    "path": "canonical/governance/ROOT2_19_PREDICATE_POST_LIVEBENCH_REVOCATION_REACTIVATION_V1.json",
+    "git_blob_sha": "2290a4e553cc0d685fc2a0ecaefe8621fea1c206"
+  },
+  "transport_verification": {
+    "path": "canonical/verification/ROOT2_19_POST_REVOCATION_DAG_CONNECTOR_VERIFICATION_20261004_V1.json",
+    "status": "SEPARATE_TOOL_RECOMPUTATION_PASS__EXACT_CURRENT_19_PREDICATE_DOMAIN_EQUALS_INDEPENDENTLY_VERIFIED_DAG_DOMAIN__SCHEDULING_ONLY__ZERO_CREDIT"
+  },
+  "reused_verified_compiler": {
+    "manifest_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1.json",
+    "manifest_git_blob_sha": "1fba51d15bcfdf6accd90948155517f7c9b98bbb",
+    "runtime_path": "canonical/runtime/threshold_proof_dag_v1.py",
+    "runtime_git_blob_sha": "7a0c715d931dbba05bc9e5ae344e1ead787ea5b8",
+    "subject_verification_path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "subject_verification_git_blob_sha": "553602570334f39003708e52d781b8c59f27eb7c",
+    "activation_verification_path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "activation_verification_git_blob_sha": "eef494009e47b758a99ab48649e050c332e4988a"
+  },
+  "scheduling_effect": [
+    "OUTPUT_ONLY_THRESHOLD_DAG_IS_CURRENT_FOR_THE_EXACT_19_ROOT2_TOUCHING_PREDICATES",
+    "STOP_EACH_PREDICATE_AT_THE_FIRST_SOUND_PASS_OR_FAIL_CERTIFICATE",
+    "RECOMPUTE_MINIMUM_DEPENDENCY_AWARE_CERTIFICATE_CUT_AFTER_EVERY_VERIFIED_DELTA",
+    "LIVEBENCH_ROUTE_IS_LEGACY_IFEVAL_ONLY_WITHOUT_THE_REVOKED_64_PERCENT_BOUND",
+    "ROOT3_DEPENDENCY_GATES_REMAIN_LOAD_BEARING_FOR_THREE_MIXED_PREDICATES",
+    "FRESH_REALITY_REMAINS_BLOCKED"
+  ],
+  "supersedes_for_current_scheduling": [
+    "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
+    "FULL_19_PREDICATE_ROUTE_RECOMPUTATION_AFTER_LIVEBENCH_ROOT1_REVOCATION"
+  ],
+  "next_minimum_action": "COMPILE_CURRENT_EVIDENCE_DELTAS_INTO_THE_REACTIVATED_DAG__SOLVE_THE_MINIMUM_ZERO_REALITY_PASS_OR_FAIL_CERTIFICATE_CUT__EXECUTE_ONLY_THAT_CUT",
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
