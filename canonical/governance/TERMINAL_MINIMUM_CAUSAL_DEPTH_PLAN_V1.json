@@ -1,0 +1,151 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_MINIMUM_CAUSAL_DEPTH_PLAN_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAIL_CLOSED__ZERO_CREDIT__NO_FRESH_REALITY_AUTHORITY",
+  "source_main": "78e66a428468c1425b361845a6410757a4053032",
+  "objective": "MINIMIZE_TERMINAL_MAKESPAN_BY_COLLAPSING_CAUSAL_DEPTH__NOT_RAW_ACTION_COUNT",
+  "terminal_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false,
+    "root1_positive_gaps": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3
+  },
+  "optimization": {
+    "batch_bellman": "V(S)=min_B[max_a_in_B(t(a))+sum_o P(o|B,S)*V(T(S,B,o))]",
+    "priority": "J(a)=p_lower(a)*(predicate_weight(a)+lambda*downstream_action_deletion(a)+mu*information_gain(a))/(critical_path_seconds(a)*(1+correlation_penalty(a)))",
+    "probability_rules": [
+      "DETERMINISTIC_ENTAILMENT_MAY_USE_P_LOWER_1",
+      "FALSIFIED_OR_OWNER_CLOSED_ROUTE_USES_P_LOWER_0_UNTIL_REOPEN",
+      "UNCALIBRATED_OPEN_WORLD_OR_OWNER_EVENT_REMAINS_UNKNOWN",
+      "JEFFREYS_BETA_ONLY_FOR_ACTUAL_REPEATED_BERNOULLI_ROUTE_HISTORY"
+    ]
+  },
+  "macro_actions": [
+    {
+      "id": "EVIDENCE_COLLAPSE",
+      "parallel_lanes": [
+        "TYPED_MINIMUM_CERTIFICATE_BASIS",
+        "GLOBAL_FEDERATED_EVIDENCE_RETRIEVAL",
+        "CONSOLIDATED_AUTHENTICATED_FACT_SWEEP",
+        "OWNER_RESULT_RACES_ZERO_SCHEDULER_ATTENTION"
+      ],
+      "typed_certificate_rule": "A_CERTIFICATE_MAY_COVER_A_PREDICATE_ONLY_IF_METRIC_SEMANTICS_AND_SCOPE_IMPLICATION_ARE_EXPLICITLY_PROVED",
+      "relative_elo_special_case": {
+        "predicates": [
+          "PROWORK_GDPVAL_GE_1846",
+          "PROWORK_AA_BRIEFCASE_GE_1822",
+          "ARTIFACT_AA_BRIEFCASE_GE_1822"
+        ],
+        "inadmissible_as_sufficient_without_bridge": [
+          "PURE_ABSOLUTE_BEHAVIORAL_DOMINANCE",
+          "OBJECTIVE_CEILING_OR_FLOOR_ON_NONRELATIVE_METRICS",
+          "EXHAUSTIVE_TASK_UNIVERSE_PROOF_WITHOUT_RELATIVE_SCORE_BRIDGE",
+          "SCOPE_SAFE_BEHAVIORAL_DOMINANCE_WITHOUT_RELATIVE_SCORE_BRIDGE"
+        ],
+        "surviving_route_classes": [
+          "VERIFIED_RELATIVE_SCORE_BRIDGE",
+          "EXISTING_CONTENT_ADDRESSED_RELATIVE_COMPARATOR_EVIDENCE",
+          "OWNER_RESULT",
+          "MATCHED_EMPIRICAL_COMPARISON"
+        ]
+      },
+      "retrieval_rule": "BOUNDED_PRIMARY_ENUMERATION_THEN_PRIMARY_OWNER_AND_REPOSITORY_THEN_VERSION_HISTORY_THEN_GENERAL_INDEXES_THEN_SOCIAL_OR_COMMUNITY_CANDIDATE_DISCOVERY",
+      "open_world_miss": "UNKNOWN_NOT_NONEXISTENT"
+    },
+    {
+      "id": "ISOLATION_COLLAPSE",
+      "goal": "FACTOR_FRESH_REALITY_INDEPENDENCE_INTO_ONE_GENERIC_PRECOMMIT_THEOREM_PLUS_THIN_BENCHMARK_INTERFACES",
+      "generic_antecedents": [
+        "CANDIDATE_HARNESS_SCORER_ENVIRONMENT_POLICY_COMMITTED_BEFORE_CASE_EXPOSURE",
+        "EXECUTED_CANDIDATE_HASH_EQUALS_COMMITTED_CANDIDATE_HASH",
+        "INDEPENDENT_EXECUTOR_CONTROLS_CASE_REVEAL",
+        "NO_EVALUATION_OUTPUT_TO_CANDIDATE_STATE_CHANNEL",
+        "ALL_RESULTS_BOUND_TO_COMMITMENT"
+      ],
+      "benchmark_interface": [
+        "POPULATION_IDENTITY",
+        "SCORER_IDENTITY",
+        "EFFORT_SEMANTICS",
+        "TOOL_BOUNDARY",
+        "ENVIRONMENT_IDENTITY",
+        "COMPARATOR_IDENTITY"
+      ],
+      "hard_gate": "NO_FRESH_REALITY_AUTHORITY_UNTIL_GENERIC_THEOREM_AND_BENCHMARK_SPECIFIC_INTERFACE_ARE_INDEPENDENTLY_VERIFIED"
+    },
+    {
+      "id": "EXACT_FIXED_POINT",
+      "rule": "AFTER_EVERY_VERIFIED_DELTA_RECOMPUTE_FULL_PREDICATE_FAMILY_SCOPE_COMPOSITION_AND_ROUTE_CLOSURE_AND_DELETE_PROVED_ZERO_PROBABILITY_OR_STRICTLY_DOMINATED_ACTIONS"
+    },
+    {
+      "id": "ONE_MINIMUM_TERMINAL_WAVE",
+      "rule": "EXECUTE_ONLY_THE_MINIMUM_IRREDUCIBLE_REALITY_CUT_AFTER_FIXED_POINT__PARALLELIZE_INDEPENDENT_RESIDUALS__ESCROW_RESULTS_UNTIL_FULL_WAVE_COMPLETES__THEN_ATOMIC_REDUCTION_AND_PROMOTION",
+      "fresh_reality_authority": false
+    }
+  ],
+  "arena_public_semantics_reconciliation": {
+    "publicly_verifiable_now": [
+      "AUTHENTICATED_API_PORTAL_EXISTS",
+      "MODEL_ENUMERATION_ENDPOINT_DOCUMENTED",
+      "DIRECT_MODEL_PARAMETER_ROUTING_DOCUMENTED",
+      "FALLBACK_CONTROL_DOCUMENTED",
+      "RESOLVED_MODEL_RESPONSE_HEADER_DOCUMENTED"
+    ],
+    "still_account_or_protocol_specific": [
+      "ACCOUNT_MODEL_LIST_INCLUDES_EXACT_REQUIRED_OPUS55_VARIANT",
+      "ZERO_INCREMENTAL_SPEND_ENTITLEMENT_OR_PREEXISTING_CREDIT",
+      "FROZEN_HARNESS_AND_EFFORT_COMPARABILITY"
+    ],
+    "acceptance_credit_delta": 0
+  },
+  "synthesis_latest_delta": {
+    "candidate_contract": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json",
+    "effect_if_independently_activated": [
+      "DELETE_FIVE_CASE_SPECIFIC_QUALITY_DIMENSION_SCORER_BINDINGS_UNSPECIFIED",
+      "DELETE_PORTFOLIO_LEVEL_CONSERVATIVE_MATCHED_NONINFERIORITY_REDUCER_UNSPECIFIED"
+    ],
+    "remaining": [
+      "EXACT_OPUS_5_5_COMPARATOR_ADMISSIBILITY_OR_SEPARATELY_VERIFIED_STRONGER_PROOF",
+      "FROZEN_MATCHED_CASE_POPULATION_AND_EXPLICIT_FRESH_REALITY_AUTHORITY",
+      "BRAIN_AND_OPUS_IDENTICAL_CASE_EXECUTION",
+      "MATCHED_QUALITY_RESULT"
+    ],
+    "acceptance_credit_delta": 0
+  },
+  "off_critical_path_unless_terminal_implication": [
+    "H100_ZERO_LEARNED_MECHANISM_RESEARCH",
+    "GENERIC_NEW_ARCHITECTURE",
+    "MORE_WORKERS_WITHOUT_CAUSAL_FANOUT",
+    "REPEATED_SATURATED_SEARCHES"
+  ],
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_GOAL_SUBSTITUTION",
+    "NO_INVENTED_POINT_PROBABILITIES",
+    "NO_PUBLIC_PRIVATE_BENCHMARK_SUBSTITUTION_WITHOUT_EXACT_OR_SUPERSET_PROOF",
+    "NO_PUBLIC_ARENA_SEMANTICS_TO_ACCOUNT_ENTITLEMENT_INFERENCE",
+    "NO_RELATIVE_ELO_FROM_ABSOLUTE_BEHAVIOR_WITHOUT_RELATIVE_SCORE_BRIDGE",
+    "NO_FRESH_REALITY_AUTHORITY_FROM_THIS_PLAN",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_PLAN",
+    "RECOMPUTE_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
