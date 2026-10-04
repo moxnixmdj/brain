@@ -23,9 +23,13 @@
   },
   "duplicate_guard": {
     "checked_open_pull_requests": true,
-    "closest_open_pr": 1857,
-    "closest_pr_scope": "content-pointer and witness normalization reconciliation",
-    "nonduplicate_delta": "This intent repairs the still-stale top-level root/scheduler projection and adds a coherence regression; PR 1857 does not repair that contradiction."
+    "prior_same_blocker_pr": 1805,
+    "prior_pr_title": "Truth-repair stale Root1 / Root2-18 pointers in current authority",
+    "prior_pr_head": "4be703e50ccf0a326acd2eb41750ed7d29f9fbf5",
+    "prior_pr_base": "94d6c7ffd8a5f78ebe523e65aec93e44b6c86701",
+    "prior_pr_verification_state": "OPEN__ALL_OBSERVED_ATTACHED_WORKFLOWS_FAILED__STALE_BASE",
+    "disposition": "SUPERSEDE_WITH_CURRENT_BASE_REPAIR__DO_NOT_RUN_PARALLEL_DUPLICATE_IMPLEMENTATIONS",
+    "current_repair_delta": "Reapply the same truth repair against the still-unchanged authority blob on current main, preserve newer root overlays, and bind regression directly to current TERMINAL_ROOT_CAUSE_STATE_V1."
   },
   "mutation_scope": [
     "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
