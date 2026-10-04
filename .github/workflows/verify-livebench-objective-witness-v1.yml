@@ -22,8 +22,11 @@ jobs:
         with:
           python-version: '3.12'
       - name: Verify exact frozen upstream scorer semantics
+        id: scorer
+        continue-on-error: true
         run: |
-          python - <<'PY'
+          set +e
+          python - <<'PY' > scorer-theorem.log 2>&1
           import hashlib
           import json
           import pathlib
@@ -82,6 +85,20 @@ jobs:
           assert theorem["accounting"]["new_terminal_cases_consumed"] == 0
           print("PINNED_SCORER_THEOREM_PASS")
           PY
+          rc=$?
+          echo "$rc" > scorer-theorem.rc
+          cat scorer-theorem.log
+          exit 0
+      - name: Upload scorer diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scorer-theorem-diagnostic
+          path: |
+            scorer-theorem.log
+            scorer-theorem.rc
+      - name: Enforce scorer theorem result
+        run: test "$(cat scorer-theorem.rc)" = "0"
 
   adapter-tests:
     runs-on: ubuntu-latest
@@ -92,9 +109,26 @@ jobs:
         with:
           python-version: '3.12'
       - name: Verify objective-witness adapter
+        id: adapter
+        continue-on-error: true
         env:
           PYTHONPATH: .
         run: |
+          set +e
           python -m unittest \
             canonical.tests.test_root2_livebench_if_objective_witness_adapter_v3 \
-            -v
+            -v > adapter-tests.log 2>&1
+          rc=$?
+          echo "$rc" > adapter-tests.rc
+          cat adapter-tests.log
+          exit 0
+      - name: Upload adapter diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adapter-tests-diagnostic
+          path: |
+            adapter-tests.log
+            adapter-tests.rc
+      - name: Enforce adapter result
+        run: test "$(cat adapter-tests.rc)" = "0"
