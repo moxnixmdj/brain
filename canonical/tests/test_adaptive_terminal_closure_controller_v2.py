@@ -89,5 +89,22 @@ class AdaptiveTerminalClosureControllerV2Tests(unittest.TestCase):
         )
 
 
+    def test_livebench_public_prompt_ratio_overlap_successor_is_executable(self):
+        from canonical.runtime.livebench_ratio_overlap_public_prompt_solver_v1 import (
+            construct_public_ratio_overlap_response,
+        )
+
+        prompt = (
+            "Maintain a trigram overlap of 100% (±2%) with the provided reference text. "
+            "abcdefghijklmno"
+        )
+        out = construct_public_ratio_overlap_response(prompt)
+        self.assertEqual(out["status"], "PASS", out)
+        self.assertLessEqual(out["absolute_target_error_percent"], 2.0)
+        self.assertTrue(out["candidate_whitespace_free"])
+        self.assertFalse(out["hidden_metadata_required"])
+        self.assertFalse(out["raw_reference_required"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
