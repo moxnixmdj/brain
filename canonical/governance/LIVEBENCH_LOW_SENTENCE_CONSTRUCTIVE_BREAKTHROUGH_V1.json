@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LOW_SENTENCE_CONSTRUCTIVE_BREAKTHROUGH_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__LOCAL_STRUCTURAL_PASS__INDEPENDENT_PUBLIC_RUNNER_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem_deleted_if_verified": [
+    "NTH_PLUS_SENTENCE_LESS_THAN_UNVERIFIED_FOR_THRESHOLDS_GE_2",
+    "LESS_THAN_TWO_SENTENCE_POSTSCRIPT_END_UNVERIFIED"
+  ],
+  "construction": {
+    "postscript_boundary_strategy": "STITCH_REQUIRED_MARKER_TO_ALPHABETIC_CONTINUATION",
+    "p_s_example": "P.S.zxqv",
+    "p_p_s_example": "P.P.Szxqv",
+    "effect": "REQUIRED_LITERAL_MARKER_REMAINS_PRESENT_WHILE_ITS_PERIODS_ARE_NOT_TOKEN_FINAL_SENTENCE_BOUNDARIES",
+    "end_phrase_effect": "AT_MOST_ONE_EXPLICIT_FINAL_SENTENCE_BOUNDARY",
+    "paragraph_effect": "NTH_PARAGRAPH_DOUBLE_NEWLINE_STRUCTURE_ADDS_NO_SENTENCE_END_PUNCTUATION",
+    "learned_punkt_data_required": false
+  },
+  "local_structural_audit": {
+    "environment_nltk_version": "3.9.2",
+    "punkt_parameters": "EMPTY",
+    "nth_matrix_rows": 3240,
+    "plain_matrix_rows": 216,
+    "total_rows": 3456,
+    "max_sentence_count": 1,
+    "counterexamples": 0,
+    "interpretation": "EVERY_TESTED_NONEMPTY_SOURCE_VISIBLE_CONSTRUCTION_SATISFIES_LESS_THAN_N_SENTENCES_FOR_EVERY_N_GE_2"
+  },
+  "hard_boundary": {
+    "nth_less_than_1": "UNSAT_FOR_THIS_NONEMPTY_CONSTRUCTION_CLASS__REMAINS_FAIL_CLOSED",
+    "acceptance_credit": false,
+    "fresh_reality_authority": false,
+    "promotion_authority": false
+  },
+  "source_bindings": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "brain_candidate_runtime_path": "canonical/runtime/livebench_legacy15_general_composer_v1.py",
+    "brain_candidate_runtime_blob": "3612d9aa4adba1c1b51eb1b2908acfd6730d39cc"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2066,
+    "workflow": "Verify LiveBench sentence geometry V1",
+    "current_head_sha": "0d3333cccdeba80136e8873c5254be7c137a744f",
+    "workflow_run_id": 37241446918,
+    "state": "QUEUED"
+  },
+  "accounting": {
+    "terminal_cases_read": 0,
+    "terminal_cases_generated": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
