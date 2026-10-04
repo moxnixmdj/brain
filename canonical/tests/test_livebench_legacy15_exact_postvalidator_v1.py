@@ -55,6 +55,17 @@ def test_registry_adapter_preserves_contract_order_and_boolean_vector():
     assert out["acceptance_credit"] is False
 
 
+def test_registry_adapter_matches_strict_nonempty_evaluator_gate():
+    registry = {"keywords:forbidden_words": ForbidInstruction}
+    row = contract("keywords:forbidden_words", forbidden_words=["omega"])
+
+    # The raw ForbiddenWords checker would accept empty text, but the frozen
+    # LiveBench strict evaluator rejects empty/whitespace before checker call.
+    assert p.evaluate_with_registry("", [row], registry)["checker_results"] == [False]
+    assert p.evaluate_with_registry("   \n\t", [row], registry)["checker_results"] == [False]
+    assert p.evaluate_with_registry("alpha", [row], registry)["checker_results"] == [True]
+
+
 def test_parameter_incomplete_fails_closed():
     row = {
         "instruction_id": "keywords:existence",
