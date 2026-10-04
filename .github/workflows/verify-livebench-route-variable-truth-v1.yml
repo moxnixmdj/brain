@@ -1,0 +1,26 @@
+name: Verify LiveBench route variable truth v1
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/governance/LIVEBENCH_2026_06_25_IFBENCH58_SCORER_ROUTE_RECONCILIATION_20261005_V1.json'
+      - 'canonical/verification/LIVEBENCH_IFBENCH58_ROUTE_VARIABLE_SUBSTITUTION_REVOCATION_20261005_V1.json'
+      - 'canonical/verification/LIVEBENCH_FROZEN_POPULATION_DISPATCH_METADATA_VERIFICATION_20261004_V1.json'
+      - 'canonical/verification/LIVEBENCH_FROZEN_SCORER_SCOPE_COLLAPSE_INDEPENDENT_VERIFICATION_20261004_V1.json'
+      - 'canonical/tests/test_livebench_route_variable_truth_v1.py'
+      - '.github/workflows/verify-livebench-route-variable-truth-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12.10'
+      - run: python -m pytest -q canonical/tests/test_livebench_route_variable_truth_v1.py
