@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SCOPE_UNION_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "BREAKTHROUGH__PUBLIC_SCOPE_LATTICE_15_LT_24_LT_25__AMBIGUITY_REMOVED_BY_SUPERSET_PROOF_TARGET__ZERO_ACCEPTANCE_CREDIT_UNTIL_UNION25_POINTWISE_CLOSURE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem_eliminated": "THE_CURRENT LIVEBENCH ROUTE WAS ABOUT TO MAKE EXACT ACTIVE15 SCOPE IDENTITY LOAD-BEARING EVEN THOUGH THREE PUBLIC SURFACES DISAGREE ON 15 VS 16 VS 24 FAMILIES",
+  "independent_public_evidence": {
+    "paper_primary_source": {
+      "url": "https://livebench.ai/livebench.pdf",
+      "table": "Table 4",
+      "printed_page": 31,
+      "paper_prose_subset_count": 16,
+      "visible_row_level_livebench_checkmark_count": 15,
+      "full_table_family_count": 25,
+      "exact_active15_row_identity_matches_current_runtime": true,
+      "source_inconsistency": "PROSE_SAYS_16_WHILE_VISIBLE_TABLE_ROWS_MARK_15"
+    },
+    "historical_generator_primary_source": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+      "path": "livebench/if_runner/live_data.py",
+      "git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+      "sampled_family_count": 24,
+      "sampling": "UNIFORM_INSTRUCTION_COUNT_2_TO_5_THEN_RANDOM_CHOICE_WITHOUT_REPLACEMENT_THEN_CONFLICT_REMOVAL",
+      "only_table4_family_not_in_generator24": "language:response_language"
+    }
+  },
+  "current_verified_envelope": {
+    "receipt": "canonical/verification/LIVEBENCH_POINTWISE_ENVELOPE_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "verified_cases": 12489,
+    "pointwise_exact_optimum_match": 12489,
+    "active_family_count": 15,
+    "terminal_rows_read": 0,
+    "acceptance_credit": 0,
+    "remaining_scope_nonclaim": "NOT_YET_A_FORMAL_PROOF_OF_THE_FULL_PUBLIC_GENERATOR_SLOT_CARTESIAN_PRODUCT"
+  },
+  "scope_lattice": {
+    "active15_count": 15,
+    "historical_generator_count": 24,
+    "public_table_union_count": 25,
+    "active15_strict_subset_of_generator24": true,
+    "generator24_strict_subset_of_union25": true,
+    "generator24_minus_active15": [
+      "change_case:capital_word_frequency",
+      "change_case:english_capital",
+      "change_case:english_lowercase",
+      "detectable_content:number_placeholders",
+      "detectable_format:constrained_response",
+      "detectable_format:number_highlighted_sections",
+      "keywords:frequency",
+      "keywords:letter_frequency",
+      "punctuation:no_comma"
+    ],
+    "union25_minus_generator24": [
+      "language:response_language"
+    ]
+  },
+  "breakthrough_theorem": {
+    "statement": "POINTWISE_OPTIMALITY_OVER_ALL PUBLIC_TABLE4_UNION_25 GENERATOR-ADMISSIBLE VISIBLE CONTRACTS STRICTLY SUBSUMES THE CURRENT ACTIVE15 TARGET, EVERY POSSIBLE 15- OR 16-FAMILY SUBSET OF THE PUBLIC TABLE, AND EVERY OUTPUT FAMILY CHOICE OF THE PINNED 24-FAMILY HISTORICAL GENERATOR.",
+    "consequence": "THE 15_VS_16_VS_24 DOCUMENTATION DISAGREEMENT NO LONGER NEEDS TO BE RESOLVED BEFORE LIVEBENCH CAPABILITY CLOSURE; PROVING THE 25-FAMILY PUBLIC UNION MAKES THE DISAGREEMENT NON-LOAD-BEARING.",
+    "proof": [
+      "ACTIVE15_IS_A_STRICT_SUBSET_OF_GENERATOR24",
+      "GENERATOR24_IS_A_STRICT_SUBSET_OF_PUBLIC_TABLE4_UNION25",
+      "EVERY TABLE4_SUBSET_IS_A_SUBSET_OF_PUBLIC_TABLE4_UNION25",
+      "POINTWISE_SCORE_DOMINANCE_RESTRICTS_MONOTONICALLY_TO_ANY_SUBSET_OF_THE_PROVED_DOMAIN"
+    ]
+  },
+  "critical_path_change": {
+    "stop": "DO_NOT_SPEND_LOAD_BEARING_EFFORT TRYING TO GUESS WHETHER 15 OR 16 IS THE TRUE RELEASE SCOPE",
+    "start": "EXTEND THE EXISTING POINTWISE COMPOSER_POSTVALIDATOR_CERTIFICATE PIPELINE FROM ACTIVE15 TO PUBLIC_TABLE4_UNION25",
+    "why": "ONE STRONGER PROOF REMOVES THREE COMPETING SCOPE ASSUMPTIONS AT ONCE AND PRESERVES ZERO_TERMINAL CONTAMINATION BOUNDARY"
+  },
+  "new_proof_carrier": {
+    "runtime": "canonical/runtime/livebench_public_scope_union_v1.py",
+    "tests": "canonical/tests/test_livebench_public_scope_union_v1.py",
+    "workflow": ".github/workflows/verify-livebench-public-scope-union-v1.yml",
+    "runtime_claim": "EXACT_PINNED_HISTORICAL_SOURCE_PARSING_PROVES_15_LT_24_LT_25_AND_EMITS_THE_AMBIGUITY_FREE_UNION25_TARGET"
+  },
+  "hard_nonclaims": [
+    "UNION25_POINTWISE_OPTIMALITY_IS_NOT_YET_PROVED",
+    "THE_TERMINAL_GOAL_IS_NOT_YET_PROVED",
+    "LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_AND_OWNERSHIP_CREDIT_REMAIN_ZERO",
+    "NO_TERMINAL_ROW_CONTENT_INSTRUCTION_ID_LIST HIDDEN_KWARGS FREQUENCIES RESPONSES OR TARGET_SCORES WERE_USED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
