@@ -12,7 +12,7 @@ def transfer_hidden():
 def transfer_trace():
     return {
       "decision":"CONCLUDE","terminal_consequence":"GO",
-      "domain_a_source_receipt_ids":["R1"],"domain_b_discovery_probe_count":1,
+      "domain_a_source_receipt_ids":["R1"],"transferred_primitive_fingerprint":"prim:abc","domain_b_discovery_probe_count":1,
       "support_feature_ids":["F1","F2"],"negative_transfer_rejected_feature_ids":["D1","D2"],
       "mapping_basis":"CAUSAL_ISOMORPHISM",
       "evidence_provenance":[
@@ -53,3 +53,11 @@ def test_underspecified_accepts_exact_discriminator_or_witnessed_abstention():
     assert score_case(abst_hidden("UNDERSPECIFIED"),{"decision":"REQUEST_DISCRIMINATOR","discriminator":"P2"})["pass"] is True
     assert score_case(abst_hidden("UNDERSPECIFIED"),{"decision":"ABSTAIN","nonidentifiability_witness":"missing P2"})["pass"] is True
     assert score_case(abst_hidden("UNDERSPECIFIED"),{"decision":"REQUEST_DISCRIMINATOR","discriminator":"P9"})["pass"] is False
+
+def test_transfer_wrong_primitive_fingerprint_fails():
+    t=transfer_trace();t["transferred_primitive_fingerprint"]="prim:wrong"
+    assert score_case(transfer_hidden(),t)["pass"] is False
+
+def test_transfer_unbound_receipt_fails():
+    h=transfer_hidden();h["domain_a_receipt_primitive_bindings"]={"R1":"prim:other"}
+    assert score_case(h,transfer_trace())["pass"] is False
