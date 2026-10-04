@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_WHITESPACE_INVARIANT_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PINNED_IFBENCH_AND_LIVEBENCH_RECOMPUTATION__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/LIVEBENCH_NGRAM_WHITESPACE_INVARIANT_REDUCTION_V1.json",
+    "runtime_path": "canonical/runtime/livebench_ngram_whitespace_invariant_compiler_v1.py"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_commit": "7b850c899f8de8fc5a99019ce65904bc25bf1633",
+    "verifier_path": "subject/livebench_ratio_overlap_score_equivalence_20261004/verify.py",
+    "workflow_path": ".github/workflows/verify-livebench-ratio-overlap-score-equivalence.yml",
+    "workflow_run_id": 37198594991,
+    "workflow_job_id": 111425441861,
+    "conclusion": "success"
+  },
+  "pinned_sources": {
+    "ifbench_repository": "allenai/IFBench",
+    "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "livebench_instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "verified_facts": {
+    "public_ifbench_rows": 300,
+    "ratio_overlap_rows": 12,
+    "normalized_reference_visible_rows": 12,
+    "non_whitespace_trigram_equivalence_rows": 12,
+    "constructive_passing_witness_rows": 12,
+    "theorem": "For whitespace-free candidate V, every trigram of V is non-whitespace. Whitespace normalization changes only whitespace-bearing reference trigrams, so intersection(T3(V),T3(raw_reference)) equals intersection(T3(V),T3(normalized_reference)) exactly."
+  },
+  "consequence": "BYTE_EXACT_REFERENCE_WHITESPACE_RECOVERY_IS_DELETED_AS_A_PUBLIC_FAMILY_REQUIREMENT_FOR_THE_VERIFIED_WHITESPACE_FREE_ROUTE__NORMALIZED_REFERENCE_SEGMENTATION_REMAINS_REQUIRED",
+  "hard_nonclaims": [
+    "NO_FROZEN_TERMINAL_LIVEBENCH_DATASET_EQUIVALENCE",
+    "NO_FULL_SUCCESSOR_COMPOSITION_PROOF",
+    "NO_LIVEBENCH_ACCEPTANCE",
+    "NO_EXECUTION_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
