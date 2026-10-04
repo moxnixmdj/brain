@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_WHITESPACE_INVARIANT_OVERLAP_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_PARAMETER_NONDERIVABILITY_COLLAPSE_FOR_RATIO_OVERLAP__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem": {
+    "prior_truth_repair": "canonical/governance/LIVEBENCH_PUBLIC_PROMPT_PARAMETER_TRUTH_REPAIR_V1.json",
+    "prior_open_residual": "EXACT_REFERENCE_TEXT_NOT_LITERALLY_VISIBLE_IN_7_OF_12_PINNED_PUBLIC_RATIO_OVERLAP_ROWS__WHITESPACE_NORMALIZATION_NOT_ASSUMED_SCORE_PRESERVING"
+  },
+  "breakthrough": {
+    "theorem": "A_RESPONSE_CAN_BE_CONSTRUCTED_WHOSE_UNIQUE_CHARACTER_TRIGRAMS_PARTITION_INTO_WHITESPACE_INVARIANT_COMMON_TRIGRAMS_AND_FRESH_SENTINEL_NONCOMMON_TRIGRAMS__THEREFORE_THE_EXACT_NGRAM_OVERLAP_SCORE_IS_INVARIANT_TO_UNKNOWN_REFERENCE_WHITESPACE",
+    "runtime": "canonical/runtime/livebench_overlap_whitespace_invariant_v1.py",
+    "tests": "canonical/tests/test_livebench_overlap_whitespace_invariant_v1.py",
+    "public_prompt_only": true,
+    "hidden_kwargs_required": false,
+    "terminal_case_metadata_required": false,
+    "unseen_terminal_case_content_required": false
+  },
+  "public_slice_preverification": {
+    "pinned_ifbench_repo": "allenai/IFBench",
+    "pinned_ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "pinned_ifbench_test_blob": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "pinned_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "pinned_checker_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "ratio_overlap_rows": 12,
+    "constructive_certificates_within_plus_minus_2": 12,
+    "max_certificate_error_percent": 2,
+    "note": "PREVERIFICATION_COMPUTATION_ONLY__MUST_NOT_BE_USED_FOR_ACCEPTANCE_OR_EXECUTION_AUTHORITY_BEFORE_INDEPENDENT_RECOMPUTATION"
+  },
+  "causal_effect": [
+    "REMOVES_THE_NEED_TO_RECONSTRUCT_RAW_REFERENCE_WHITESPACE_FOR_THE_PINNED_PUBLIC_RATIO_OVERLAP_SLICE",
+    "REPLACES_UNSOUND_NORMALIZATION_EQUIVALENCE_WITH_A_SCORE_INVARIANCE_CERTIFICATE",
+    "PROVIDES_A_DETERMINISTIC_MODEL_INDEPENDENT_CONSTRUCTIVE_COMPONENT_FOR_SUCCESSOR_LIVEBENCH_ROUTING",
+    "DOES_NOT_BY_ITSELF_SOLVE_COMPANION_CONSTRAINT_COMPOSITION_OR_PROVE_FROZEN_TERMINAL_POPULATION_EQUIVALENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_TERMINAL_SCORE",
+    "NO_CASE_73_PLUS",
+    "NO_CLAIM_ALL_83_PUBLIC_INSTRUCTION_TYPES_SOLVED",
+    "NO_CLAIM_PUBLIC_IFBENCH_300_EQUALS_THE_FROZEN_TERMINAL_LIVEBENCH_200",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_AUTHORITY_BEFORE_INDEPENDENT_VERIFICATION_AND_SUCCESSOR_PRECOMMIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
