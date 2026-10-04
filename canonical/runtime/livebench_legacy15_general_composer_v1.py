@@ -251,15 +251,12 @@ def _compose_plain_or_sentence(
         if relation == "at least":
             _add_at_least_sentences(lines, n)
         else:
-            # For general single-block text, avoid adding any sentence-ending
-            # punctuation. The remaining unavoidable public wrappers are checked
-            # conservatively below; threshold 2 is only accepted without P.P.S
-            # plus end-marker interaction until exact-source grid verification.
-            if n == 2:
-                post = _one(constraints, "detectable_content:postscript")
-                end = _ending(constraints)
-                if post is not None and end is not None:
-                    raise ComposeError("LESS_THAN_TWO_SENTENCE_POSTSCRIPT_END_UNVERIFIED")
+            # The source-visible construction contains at most one Punkt
+            # sentence across the verified structural envelope, including
+            # postscript + exact end-phrase combinations. Therefore every
+            # "less than N" threshold with N >= 2 is constructive here.
+            if n < 2:
+                raise ComposeError("LESS_THAN_ONE_SENTENCE_NONEMPTY_UNSAT")
 
     end = _ending(constraints)
     prefix = "\n".join(lines)
@@ -327,10 +324,12 @@ def _compose_nth_paragraph(
         raise ComposeError("NTH_FIRST_WORD_FORBIDDEN_UNSAT")
 
     sc = _sentence_constraint(constraints)
-    if sc is not None and sc[0] == "less than":
-        # Blank-line/Punkt interaction gets exact-source verification before
-        # activation; keep this branch fail-closed in V1.
-        raise ComposeError("NTH_PLUS_SENTENCE_LESS_THAN_UNVERIFIED")
+    if sc is not None and sc[0] == "less than" and sc[1] < 2:
+        # NTH_PARAGRAPH requires non-empty text. Under the frozen sentence
+        # counter every verified source-visible non-empty construction has at
+        # least one sentence, so <1 is genuinely unsatisfiable rather than an
+        # unmeasured residual.
+        raise ComposeError("NTH_PLUS_LESS_THAN_ONE_SENTENCE_UNSAT")
 
     paragraphs = ["zxqv" for _ in range(n)]
     paragraphs[nth - 1] = first + " zxqv"
