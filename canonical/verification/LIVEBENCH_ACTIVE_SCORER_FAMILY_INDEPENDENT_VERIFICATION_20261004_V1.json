@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ACTIVE_SCORER_FAMILY_INDEPENDENT_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "PASS__INDEPENDENT_METADATA_ONLY_RECOMPUTATION__LEGACY_IFEVAL_ONLY__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "brain_candidate_pull_request": 1732,
+    "candidate_git_blob_sha": "416a15134aa3b8b6a8d7b78aa312e57f6526dcb0"
+  },
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1861,
+    "merged_commit": "8590f5ddfa0182f5870ec00a093dc0d54223f5df",
+    "head_sha": "349c0027fdbe8a40c3bcbf1c358e438857a21fe7",
+    "workflow_run_id": 37199024172,
+    "workflow_job_id": 111426694339,
+    "job_conclusion": "success",
+    "artifact_id": 11302223209,
+    "artifact_name": "livebench-active-scorer-family-v1",
+    "artifact_digest_sha256": "354c50a3d135b693ad7bdccd19aa3e001acb116935d9db1fd1abe6872b1ed458"
+  },
+  "pinned_inputs": {
+    "frozen_dataset_repository": "livebench/instruction_following",
+    "frozen_dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "frozen_parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "frozen_parquet_bytes": 537024,
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "dispatch_git_blob_sha": "b36561da5b54380c724c507462d0ee65feefeac8",
+    "dispatch_boundary": "2025-11-25"
+  },
+  "verified_result": {
+    "dataset_rows": 400,
+    "active_population_count": 200,
+    "active_task_counts": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    },
+    "active_release_date_histogram": {
+      "2024-11-25": 200
+    },
+    "legacy_ifeval_active_rows": 200,
+    "modern_ifbench_active_rows": 0,
+    "active_scorer_family": "LEGACY_IFEVAL_ONLY",
+    "metadata_columns_read": [
+      "question_id",
+      "task",
+      "livebench_release_date",
+      "livebench_removal_date"
+    ],
+    "prompt_or_turn_text_read": false,
+    "terminal_responses_generated": 0
+  },
+  "consequence": [
+    "THE_EXACT_FROZEN_200_ROW_LIVEBENCH_IF_PREDICATE_IS_LOAD_BEARING_ONLY_ON_THE_PINNED_LEGACY_IFEVAL_SCORER_FAMILY",
+    "THE_58_MODERN_IFBENCH_CHECKERS_ARE_REMOVED_FROM_THE_CURRENT_TERMINAL_CRITICAL_PATH",
+    "MODERN_IFBENCH_WORK_REMAINS_REUSABLE_NONTERMINAL_CAPABILITY_WORK_BUT_CANNOT_BE_COUNTED_AS_DIRECT_PROGRESS_ON_THIS_FROZEN_PREDICATE"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_PROMPT_CONTENT_READ",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CLAIM_THE_25_LEGACY_CHECKERS_ARE_YET COMPOSITIONALLY_SOLVED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
