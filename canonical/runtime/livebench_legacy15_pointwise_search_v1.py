@@ -22,6 +22,7 @@ from canonical.runtime import livebench_pointwise_optimality_certificate_v1 as s
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_POINTWISE_SEARCH_V1"
 MAX_CHECKERS = structural.MAX_FROZEN_LEGACY_CHECKERS_PER_CASE
+PINNED_STRICT_EVALUATOR_BLOB = "4a341984936c4d609644a3b77f8c030ac5aa7269"
 
 
 class PointwiseSearchError(ValueError):
@@ -233,16 +234,33 @@ def solve_with_pinned_livebench(
             "source": row.get("provenance"),
         })
 
+    evaluation_blob = (
+        binding.get("evaluation_main_blob")
+        or binding.get("evaluation_main_git_blob_sha")
+    )
+    strict_gate_bound = (
+        binding.get("strict_nonempty_gate_bound") is True
+        or bool(binding.get("strict_nonempty_guard"))
+    )
+    postvalidator_authoritative = (
+        evaluation_blob == PINNED_STRICT_EVALUATOR_BLOB
+        and strict_gate_bound
+    )
     result = _select_best_postvalidated(
         contracts,
         evaluated,
-        checker_vector_authoritative=True,
-        checker_vector_authority="EXACT_PINNED_LIVEBENCH_POSTVALIDATOR",
+        checker_vector_authoritative=postvalidator_authoritative,
+        checker_vector_authority=(
+            "EXACT_PINNED_LIVEBENCH_STRICT_POSTVALIDATOR"
+            if postvalidator_authoritative
+            else "PINNED_CHECKERS_WITHOUT_BOUND_STRICT_WRAPPER"
+        ),
     )
     result["candidate_pool_count"] = pool["candidate_count"]
     result["subset_attempt_count"] = pool["subset_attempt_count"]
     result["exact_checker_callback_required"] = False
     result["exact_checker_binding"] = binding
+    result["strict_evaluator_binding_required"] = PINNED_STRICT_EVALUATOR_BLOB
     return result
 
 def run(args: dict[str, Any] | None = None, root=None) -> dict[str, Any]:
