@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_19_POST_REVOCATION_DAG_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "SEPARATE_TOOL_RECOMPUTATION_PASS__EXACT_CURRENT_19_PREDICATE_DOMAIN_EQUALS_INDEPENDENTLY_VERIFIED_DAG_DOMAIN__SCHEDULING_ONLY__ZERO_CREDIT",
+  "objective": "Independently recompute the current post-LiveBench-revocation Root2-touching predicate set from the canonical root state and prove exact identity with the already independently verified 19-predicate output-only threshold DAG.",
+  "subject": {
+    "current_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "e8371418ed39b83b14df874c8eb5e0bdb6a2e603"
+    },
+    "current_root_seal": {
+      "path": "canonical/governance/POST_LIVEBENCH_ROOT1_REVOCATION_CURRENT_ROOT_SEAL_V1.json",
+      "git_blob_sha": "8429fdbf97f0b045a6ea54e3cae3e2413b9acdae"
+    },
+    "reactivation_candidate": {
+      "path": "canonical/governance/ROOT2_19_PREDICATE_POST_LIVEBENCH_REVOCATION_REACTIVATION_V1.json",
+      "git_blob_sha": "2290a4e553cc0d685fc2a0ecaefe8621fea1c206"
+    },
+    "dag_manifest": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1.json",
+      "git_blob_sha": "1fba51d15bcfdf6accd90948155517f7c9b98bbb"
+    },
+    "dag_runtime_activation": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_ACTIVATION_V1.json",
+      "git_blob_sha": "7ea4dd4edb59c8526bd3993e02f4a8fb53c65085"
+    },
+    "dag_public_verification": {
+      "path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "553602570334f39003708e52d781b8c59f27eb7c"
+    },
+    "dag_activation_public_verification": {
+      "path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "eef494009e47b758a99ab48649e050c332e4988a"
+    },
+    "livebench_revocation": {
+      "path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
+      "git_blob_sha": "bbbe29ec26b1f96ba5538ca159f899e316b167e7"
+    },
+    "livebench_scorer_scope": {
+      "path": "canonical/governance/LIVEBENCH_TERMINAL_SCORER_SCOPE_ACTIVATION_V1.json",
+      "git_blob_sha": "f64fe4a10c3b7f8a8a95819fb79c898d17a2bae4"
+    }
+  },
+  "recomputation": {
+    "current_unresolved_atomic": 26,
+    "current_root1_positive_gap_count": 0,
+    "current_root2_only_count": 16,
+    "current_root2_and_root3_count": 3,
+    "current_root2_touching_count": 19,
+    "current_root2_unique_count": 19,
+    "verified_dag_predicate_count": 19,
+    "verified_dag_unique_count": 19,
+    "current_minus_verified_dag": [],
+    "verified_dag_minus_current": [],
+    "exact_sorted_set_equality": true,
+    "candidate_current_list_exactly_matches_recomputed_current": true,
+    "candidate_dag_list_exactly_matches_verified_manifest": true,
+    "prior_dag_public_verification_status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_THRESHOLD_DAG_SUBJECT_BLOBS__11_OF_11_TESTS__THREE_ADVERSARIAL_CHECKS__ZERO_CREDIT",
+    "prior_dag_public_verification_run_id": 37187218426,
+    "root1_inactive": true,
+    "livebench_current_class": "ROOT2_ONLY__MEASUREMENT_OR_COMPARATOR_UNCERTAINTY"
+  },
+  "consequence": [
+    "DELETE_FULL_19_PREDICATE_ROUTE_REDESIGN_FROM_CURRENT_CRITICAL_PATH",
+    "REACTIVATE_THE_ALREADY_INDEPENDENTLY_VERIFIED_OUTPUT_ONLY_THRESHOLD_DAG_FOR_EXACTLY_THE_CURRENT_19_ROOT2_TOUCHING_PREDICATES",
+    "COMPILE_ONLY_CURRENT_EVIDENCE_DELTAS_AND_MINIMUM_PASS_OR_FAIL_CERTIFICATE_CUTS",
+    "PRESERVE_ROOT3_GATES_FOR_THE_THREE_MIXED_PREDICATES",
+    "PRESERVE_FRESH_REALITY_BLOCK"
+  ],
+  "hard_nonclaims": [
+    "NO_ROOT2_ACCEPTANCE_PREDICATE_IS_CLOSED_BY_DOMAIN_IDENTITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_REUSE_OF_THE_REVOKED_LIVEBENCH_64_PERCENT_FORCED_FAIL_BOUND",
+    "THIS_CONNECTOR_RECOMPUTATION_IS_NOT_A_NEW_PUBLIC_RUNNER_EXECUTION_OF_PRIVATE_CURRENT_ROOT_STATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
