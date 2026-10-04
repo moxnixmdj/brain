@@ -337,6 +337,26 @@
       "promotion_authority": false,
       "fresh_reality_authority": false,
       "acceptance_credit_delta": 0
+    },
+    "livebench_shadow_v2_root_projection": {
+      "activation_path": "canonical/governance/LIVEBENCH_SHADOW_V2_ROOT_PROJECTION_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "191dc7a7f33243b45268e4a38a139ffa4e5e0c85",
+      "verification_path": "canonical/verification/LIVEBENCH_SHADOW_V2_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "64c3000f77470f4114a4139ff1fd5f1f63f3d130",
+      "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_THREE_STEP_PRE_REVEAL_CUT__ZERO_CREDIT",
+      "target_predicate": "LIVEBENCH_IF_GE_65_7",
+      "exact_next_zero_reality_action": "ACTUAL_LIVEBENCH_ZERO_CASE_POINT_OF_USE_RESOURCE_AND_DEPENDENCY_PREFLIGHT_RECEIPT",
+      "exact_remaining_before_case_reveal": [
+        "ACTUAL_LIVEBENCH_ZERO_CASE_POINT_OF_USE_RESOURCE_AND_DEPENDENCY_PREFLIGHT_RECEIPT",
+        "SEPARATE_V2_SHADOW_COLLECTION_ACTIVATION_BOUND_TO_VERIFIED_CONTROL_PLANE_AND_ACTUAL_PREFLIGHT",
+        "ATOMIC_PRODUCTION_ONE_USE_CLAIM_AFTER_PREFLIGHT_AND_BEFORE_CASE_REVEAL"
+      ],
+      "shadow_collection_authority": false,
+      "case_reveal_authority": false,
+      "global_fresh_reality_authority": false,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "acceptance_credit_delta": 0
     }
   },
   "accounting": {
