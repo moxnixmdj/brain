@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V9_FORMAL_ROUTING_WRAPPER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V9_REPLAY72_WRAPPER__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "candidate": "canonical/governance/LIVEBENCH_V9_FORMAL_ROUTING_REPLAY72_CANDIDATE_V1.json",
+  "subject": {
+    "wrapper_path": "diagnose_livebench_replay72_v9_formal_routing.py",
+    "wrapper_git_blob_sha": "895b0c949284a9024661feace72efc9939929309",
+    "adapter_v2_git_blob_sha": "dbc895a0e458e411aafd3c96e0ddc2c01e657375",
+    "compiler_git_blob_sha": "1d83dffb7024666cc2202f88a0dca6819165f35a",
+    "v8_diagnostic_git_blob_sha": "bc5bfd7d791b1343cbcf4d09d8f41c6f73ed9f68",
+    "v8_classifier_git_blob_sha": "0c48d463989f8351e3b0a502a174b59ff391ffe8",
+    "base_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/livebench-formal-routing-v2-20261004",
+    "trigger_commit": "20128f21aaa21b31c2fec28b36a4719583158249",
+    "workflow_run_id": 37195123816,
+    "workflow_job_id": 111415283340,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_subject_blobs": true,
+    "v2_import_substitution": true,
+    "epoch_digest_bound": "5bc110694f940f04014542c9660b98983fc178ae8489fee6db4e1e3b822c9c05",
+    "direct_dataset_access_added_by_wrapper": false,
+    "replay_scope_expansion": false,
+    "terminal_cases_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_REPLAY_EXECUTION",
+    "NO_CASE_73_PLUS",
+    "NO_SCORE",
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT"
+  ],
+  "authority": {
+    "execution": false,
+    "replay72": false,
+    "new_case_exposure": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
