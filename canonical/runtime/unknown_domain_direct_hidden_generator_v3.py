@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+import math
 from typing import Any, Mapping
 
 from canonical.runtime import unknown_domain_direct_hidden_generator_v1 as v1
@@ -27,14 +28,23 @@ ABSTAIN = v1.ABSTAIN
 
 
 def _rank(secret: bytes, beacon: str, tag: str, index: int, count: int) -> int:
+    """Secret-keyed bijection on range(count), independent of digest uniqueness."""
+    if count <= 0:
+        raise v1.UnknownDomainGeneratorError("RANK_COUNT_INVALID")
     if not 0 <= index < count:
         raise v1.UnknownDomainGeneratorError("RANK_INDEX_OUT_OF_RANGE")
-    keyed = []
-    for i in range(count):
-        msg = f"{beacon}|V3-RANK|{tag}|{i}".encode()
-        keyed.append((hmac.new(secret, msg, hashlib.sha256).digest(), i))
-    ordered = [i for _, i in sorted(keyed)]
-    return ordered.index(index)
+    msg = f"{beacon}|V3-PERM|{tag}".encode()
+    seed = int.from_bytes(hmac.new(secret, msg, hashlib.sha256).digest(), "big")
+    offset = seed % count
+
+    # Any multiplier coprime to count induces a permutation modulo count.
+    multiplier = 1 + ((seed // count) % count)
+    while math.gcd(multiplier, count) != 1:
+        multiplier += 1
+        if multiplier > count:
+            multiplier = 1
+
+    return (multiplier * index + offset) % count
 
 
 def _opaque_suffix(secret: bytes, beacon: str, *parts: Any) -> str:
@@ -50,15 +60,13 @@ def _surface_ids_total(
     roles: list[str],
 ) -> tuple[dict[str, str], list[str]]:
     logical = [("ROLE", role) for role in roles] + [("DIST", str(i)) for i in range(2)]
-    keyed = []
-    for kind, label in logical:
-        msg = f"{beacon}|V3-SURFACE-RANK|{case_index}|{domain}|{kind}|{label}".encode()
-        keyed.append((hmac.new(secret, msg, hashlib.sha256).digest(), kind, label))
-    ordered = [(kind, label) for _, kind, label in sorted(keyed)]
     alias = {}
-    for rank, (kind, label) in enumerate(ordered):
-        # rank makes equality impossible inside the domain even if every HMAC
-        # suffix collides.  The rank-to-role assignment is secret-permuted.
+    tag = f"SURFACE:{case_index}:{domain}"
+    for logical_index, (kind, label) in enumerate(logical):
+        # _rank is an algebraic bijection, so the explicit rank prefix is
+        # collision-free for every secret/beacon.  The HMAC suffix is decorative
+        # opacity only and is not load-bearing for identity totality.
+        rank = _rank(secret, beacon, tag, logical_index, len(logical))
         alias[(kind, label)] = (
             f"{domain.lower()}_f{rank}_"
             + _opaque_suffix(secret, beacon, case_index, domain, kind, label)
