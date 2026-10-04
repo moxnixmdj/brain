@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_BRAIN_ADAPTER_INTERFACE_BOUNDARY_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_MULTIMODAL_INTERFACE_BINDING_GAP__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "target_surface": "Chartography with tools",
+  "upstream_contract": {
+    "repository": "surge-ai/chartography",
+    "commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+    "task_path": "src/chartography/task.py",
+    "task_git_blob_sha": "163d910274f06720b601006ef1b6266e7cfd30b6",
+    "scorer_path": "src/chartography/scorer.py",
+    "scorer_git_blob_sha": "11cffaa92dff3bed126247990d41f1509574040e",
+    "required_model_input": [
+      "TEXT_QUESTION",
+      "IMAGE"
+    ],
+    "solver": "inspect_ai.solver.generate",
+    "output_role": "MODEL_ANSWER_TO_BE_JUDGED",
+    "judge_separate_from_brain_adapter": true
+  },
+  "current_brain_interface": {
+    "registry_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "registry_git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782",
+    "verified_bound_capability_count": 42,
+    "exact_declared_multimodal_question_image_answer_bindings": [],
+    "exact_binding_present": false,
+    "relevant_existing_narrow_tools": [
+      "web.browser.rendered.capture.chromedriver",
+      "pdf.extract.ocr.tesseract",
+      "image.code.decode.zbarimg"
+    ],
+    "text_planner_path": "canonical/runtime/astra_runtime.py",
+    "text_planner_limitation": "CURRENT_VERIFIED_PLANNER_BRIDGE_ACCEPTS_TEXT_PROMPT_AND_RETURNS_TEXT_JSON_PROPOSAL__NOT_BOUND_AS_CHARTOGRAPHY_IMAGE_PLUS_QUESTION_MODEL_PROVIDER"
+  },
+  "exact_missing_binding": {
+    "interface_id": "chartography.model.multimodal_answer.v1",
+    "input_contract": [
+      "question:string",
+      "image:bytes_or_equivalent_exact_chart_image"
+    ],
+    "output_contract": "answer:string",
+    "required_semantics": "ANSWER_THE_QUESTION_FROM_THE_IMAGE_WITHOUT_CHANGING_CHARTOGRAPHY_TASK_OR_SCORER_SEMANTICS",
+    "required_properties": [
+      "CONTENT_ADDRESSED_PROVIDER_IDENTITY",
+      "ZERO_INCREMENTAL_SPEND",
+      "EXACT_IMAGE_AND_QUESTION_PRESERVATION",
+      "NO_TEST_CASE_SPECIFIC_TUNING",
+      "INSPECT_GENERATE_COMPATIBILITY_OR_PROVED_EQUIVALENT",
+      "INDEPENDENT_ZERO_CASE_INTERFACE_VERIFICATION"
+    ]
+  },
+  "classification": {
+    "root1": "NOT_REOPENED__ABSENCE_OF_AN_EXACT_BOUND_INTERFACE_IS_NOT_POSITIVE_PROOF_OF_AN_UNLEARNABLE_CAPABILITY_GAP",
+    "root2": "OPEN__BRAIN_EVALUATION_ADAPTER_BINDING_MISSING",
+    "root3": "UNCHANGED",
+    "consequence": "DO_NOT_EXECUTE_CHARTOGRAPHY_CASES_UNTIL_AN_EXACT_MULTIMODAL_BRAIN_PROVIDER_OR_PROVED_EQUIVALENT_IS_BOUND_AND_ZERO_CASE_VERIFIED"
+  },
+  "hard_nonclaims": [
+    "DOES_NOT_CLAIM_BRAIN_CANNOT_REASON_OVER_IMAGES",
+    "DOES_NOT_CLAIM_NO_COMPOSITION_OR_ACQUISITION_ROUTE_CAN_CREATE_THE_INTERFACE",
+    "DOES_NOT_PROMOTE_OCR_OR_SCREENSHOT_CAPTURE_TO_GENERAL_CHART_REASONING",
+    "DOES_NOT_USE_OR_EXPOSE_CHARTOGRAPHY_TERMINAL_CASE_CONTENT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": "ROUTE_THIS_EXACT_INTERFACE_ID_THROUGH_EXISTING_ACQUISITION_DISCOVERY_CONTROL__BIND_A_ZERO_COST_PROVIDER_OR_PROVED_EQUIVALENT__ZERO_CASE_VERIFY_INTERFACE__THEN REMOVE BRAIN_ADAPTER_BLOCKER",
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
