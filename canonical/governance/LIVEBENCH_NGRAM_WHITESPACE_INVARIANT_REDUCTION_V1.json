@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_WHITESPACE_INVARIANT_REDUCTION_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__CONSTRUCTIVE_PUBLIC_12_OF_12_PASS__EXACT_RAW_REFERENCE_REQUIREMENT_REDUCED_TO_NORMALIZED_REFERENCE_SEGMENTATION__ZERO_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "status": "ACTIVE_CANDIDATE__INDEPENDENT_PUBLIC_RUNNER_PASS__CONSTRUCTIVE_PUBLIC_12_OF_12_PASS__EXACT_RAW_REFERENCE_REQUIREMENT_REDUCED_TO_NORMALIZED_REFERENCE_SEGMENTATION__ZERO_TERMINAL_CASES__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "target_instruction": "ratio:overlap",
   "objective": "Delete the exact-raw-reference-text requirement for NGramOverlapChecker by constructing responses whose trigrams contain no whitespace, making their overlap score invariant to hidden whitespace layout.",
@@ -62,7 +62,7 @@
     "NO_CASE_SPECIFIC_TERMINAL_RULES",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_REDUCTION",
     "FAIL_CLOSED_IF_NORMALIZED_REFERENCE_CANNOT_BE PROVED RECOVERED",
-    "INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_LOAD_BEARING_PROMOTION"
+    "INDEPENDENT_PUBLIC_FAMILY_VERIFICATION_DOES_NOT_PROVE_FROZEN_TERMINAL_DATASET_EQUIVALENCE_OR_ACCEPTANCE"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -77,5 +77,18 @@
     "promotion": false,
     "fresh_reality": false,
     "acceptance_credit": false
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_commit": "7b850c899f8de8fc5a99019ce65904bc25bf1633",
+    "verifier_path": "subject/livebench_ratio_overlap_score_equivalence_20261004/verify.py",
+    "workflow_path": ".github/workflows/verify-livebench-ratio-overlap-score-equivalence.yml",
+    "workflow_run_id": 37198594991,
+    "workflow_job_id": 111425441861,
+    "conclusion": "success",
+    "verified_public_rows": 300,
+    "verified_ratio_overlap_rows": 12,
+    "verified_constructive_passing_witness_rows": 12,
+    "verified_non_whitespace_trigram_equivalence_rows": 12
   }
 }
