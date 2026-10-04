@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROOT_CAUSE_STATE_V1",
-  "date": "2026-10-04",
+  "date": "2026-10-05",
   "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__TOOL_DISCOVERY_PROMOTED__LIVEBENCH_FORCED_FAIL_REVOKED__ROOT1_ZERO__LIVEBENCH_REOPENED_ROOT2",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_acceptance": {
     "accepted_families": 5,
     "open_families": 14,
-    "proved_atomic": 12,
-    "unresolved_atomic": 26,
+    "proved_atomic": 13,
+    "unresolved_atomic": 25,
     "total_families": 19,
     "total_atomic": 38,
     "terminal": false
@@ -63,8 +63,8 @@
       "current_blocker_classification_seal": {
         "path": "canonical/governance/ROOT1_CURRENT_BLOCKER_CLASSIFICATION_SEAL_V1.json",
         "git_blob_sha": "d8346fec4326ee3fed32f08dcd29782bbc3647d2",
-        "status": "CURRENT_AGAIN_FOR_ROOT1_ZERO_ONLY__LIVEBENCH_POSITIVE_GAP_REVOKED__ROOT2_PARTITION_REQUIRES_RECOMPUTE",
-        "theorem": "CURRENT_UNRESOLVED_26_EQUALS_16_ROOT2_ONLY_PLUS_7_ROOT3_ONLY_PLUS_3_MIXED__DISJOINT__ROOT1_RESIDUAL_ZERO",
+        "status": "CURRENT_FOR_ROOT1_ZERO_AND_POST_UNKNOWN_DOMAIN_V6_25_PREDICATE_PARTITION__ZERO_CREDIT",
+        "theorem": "CURRENT_UNRESOLVED_25_EQUALS_16_ROOT2_ONLY_PLUS_6_ROOT3_ONLY_PLUS_3_MIXED__DISJOINT__ROOT1_RESIDUAL_ZERO",
         "independent_verifier": {
           "repository": "moxnixmdj/verification-capsule-runner",
           "pull_request": 1540,
@@ -75,10 +75,10 @@
         "current_main_live_recomputation": {
           "target_families": 19,
           "atomic_predicates": 38,
-          "proved_predicates": 12,
-          "unresolved_predicates": 26,
+          "proved_predicates": 13,
+          "unresolved_predicates": 25,
           "root2_only": 16,
-          "root3_only": 7,
+          "root3_only": 6,
           "root2_and_root3": 3,
           "root1_positive_gaps": 0,
           "root1_current_residual": 0
@@ -523,17 +523,17 @@
     },
     "evidence": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5",
+      "git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
       "pointer_reconciliation": {
-        "status": "RECONCILED_TO_CURRENT_12_PROVED_26_UNRESOLVED_LEDGER",
+        "status": "RECONCILED_TO_CURRENT_13_PROVED_25_UNRESOLVED_LEDGER__UNKNOWN_DOMAIN_V6_PROMOTED",
         "previous_stale_git_blob_sha": "f99b00e6dca735ffa7a790a414155b4f69856cf0",
         "acceptance_credit_delta": 0
       }
     },
-    "unresolved_total": 26,
+    "unresolved_total": 25,
     "root1_positive_gap_count": 0,
     "root2_only_count": 16,
-    "root3_only_count": 7,
+    "root3_only_count": 6,
     "root2_and_root3_count": 3,
     "root2_only": [
       "ARTIFACT_AA_BRIEFCASE_GE_1822",
@@ -558,7 +558,6 @@
       "VISION_DENSE_NONCHART_SCOPE",
       "FINANCE_UNCOVERED_SCOPE_AUDIT",
       "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
-      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
       "COMPOSITION_COMPONENT_SCOPED_PROOFS",
       "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
     ],
@@ -587,20 +586,31 @@
       "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
       "reason": "UNSOUND_64_PERCENT_UPPER_BOUND_REVOKED",
       "acceptance_credit_delta": 0
+    },
+    "unknown_domain_v6_promotion": {
+      "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "state": "PROVED",
+      "acceptance_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "acceptance_reduction_git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
+      "independent_verification_path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "independent_verification_git_blob_sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d",
+      "family_status": "OPEN__MYSTERYMECHANISM_GE_49_55_REMAINS"
     }
   },
   "root3_current_execution_state": {
-    "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
-    "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
-    "verification_path": "canonical/verification/ROOT3_POST_SYNTHESIS_PUBLIC_RUNNER_VERIFICATION_20261004_V2.json",
-    "verification_git_blob_sha": "7a5e32351cd20c6ef15d50283e2753186e04e77d",
-    "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__10_LIVE_ROOT3_PREDICATES__7_MATCHED_SCOPE_TARGETS__3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
-    "live_root3_predicates": 10,
+    "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V3.json",
+    "git_blob_sha": "929c5b90a86c1ec227146f3fbec065844df95a8b",
+    "supersedes_verified_v2_path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+    "status": "POST_UNKNOWN_DOMAIN_V6_RECOMPUTE_CANDIDATE__9_LIVE_ROOT3_PREDICATES__7_MATCHED_SCOPE_TARGETS__2_FINANCE_DIRECT_LEAVES__ZERO_CURRENT_RUNNABLE_ACTIONS__PENDING_INDEPENDENT_VERIFICATION__ZERO_CREDIT",
+    "live_root3_predicates": 9,
     "matched_scope_targets": 7,
     "event_class_count": 3,
     "currently_runnable_event_count": 0,
     "fresh_reality_authority": false,
-    "synthesis_scope_closed": true
+    "synthesis_scope_closed": true,
+    "unknown_domain_direct_leaves_deleted": 2,
+    "remaining_direct_oracle_leaves": 2,
+    "fail_closed_rule": "DO_NOT_SCHEDULE_NEW_ROOT3_EXECUTION_UNTIL_V3_INDEPENDENT_VERIFICATION_OR_A_NEW_STRONGER_CURRENT_RECEIPT"
   },
   "root3_scope_certificate_admissibility_refinement": {
     "path": "canonical/governance/ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V2.json",
@@ -641,7 +651,7 @@
     "workflow_run_id": 37168503920
   },
   "root_partition_transport": {
-    "status": "ACTIVE_POST_REVOCATION_19_ROOT2_DAG_REBIND__EXACT_DOMAIN_IDENTITY_PASS__ZERO_ACCEPTANCE_CREDIT",
+    "status": "ACTIVE_POST_REVOCATION_19_ROOT2_DAG_REBIND__POST_UNKNOWN_DOMAIN_V6_ROOT3_COUNT_RECONCILED__ZERO_ACCEPTANCE_CREDIT",
     "source_root_git_blob_sha": "c3d1e25e2268cce90df545a93f107aa24fed8f8b",
     "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
     "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
@@ -650,10 +660,10 @@
     "effective_partition": {
       "root1_positive_gap_count": 0,
       "root2_only_count": 16,
-      "root3_only_count": 7,
+      "root3_only_count": 6,
       "root2_and_root3_count": 3,
       "root2_touching_count": 19,
-      "unresolved_total": 26
+      "unresolved_total": 25
     },
     "scheduling_authority": true,
     "next_required": "COMPILE_CURRENT_EVIDENCE_DELTAS_INTO_REACTIVATED_OUTPUT_ONLY_DAG_AND_SOLVE_MINIMUM_ZERO_REALITY_PASS_OR_FAIL_CERTIFICATE_CUT",
