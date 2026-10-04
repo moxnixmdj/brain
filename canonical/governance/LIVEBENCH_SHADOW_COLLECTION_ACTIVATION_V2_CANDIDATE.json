@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_REALITY_COLLECTION_ACTIVATION_V2_CANDIDATE",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__LIVEBENCH_SUCCESSOR_PREREQUISITES_BOUND__ZERO_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "intended_final_schema": "PROJECT_BRAIN_SHADOW_REALITY_COLLECTION_ACTIVATION_V2",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "prerequisites": {
+    "shadow_lease_v2": {
+      "path": "canonical/runtime/shadow_reality_lease_v2.py",
+      "git_blob_sha": "8a13e29ddc160ea4af62aed434fb8a1a65afb998"
+    },
+    "shadow_lease_v2_verification": {
+      "path": "canonical/verification/SHADOW_REALITY_LEASE_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "c3eaa9aef1b9cc1a6e5d39d478f5490c1660e4fb"
+    },
+    "control_plane_verification": {
+      "path": "canonical/verification/LIVEBENCH_SHADOW_CONTROL_PLANE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "af01458bfb36ede0f494214fd2f240e5aa36b3c5"
+    },
+    "successor_precommit_verification": {
+      "path": "canonical/verification/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "f123064a5ebed27c8636a2ebc031fb9a31067a13"
+    },
+    "successor_preexposure_plan": {
+      "path": "canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json",
+      "git_blob_sha": "081732ce3ea9cb914d6e373e94d2b1671ee69206",
+      "plan_sha256": "7d7d8c088dcc17081490724e2548467604f0304291751d38a2a8662d32cdf46a"
+    },
+    "point_of_use_preflight_v2": {
+      "path": "canonical/runtime/livebench_shadow_point_of_use_preflight_v2.py",
+      "git_blob_sha": "c9127a9ca7b50a04b0935d15d0a816777678182d"
+    },
+    "claim_backend": {
+      "path": "canonical/governance/SHADOW_GIT_REF_ONE_USE_CLAIM_BACKEND_V1.json",
+      "git_blob_sha": "b660e2ee70f42c7872a9b65c78198c5bdbf03609"
+    },
+    "escrow_contract": {
+      "path": "canonical/governance/SHADOW_WRITE_ONLY_ESCROW_CONTRACT_V1.json",
+      "git_blob_sha": "3fde5a915dec9cadf138650536820c972a9b8fb1"
+    }
+  },
+  "intended_final_fields": {
+    "active": true,
+    "shadow_collection_authority": true,
+    "independent_verification_pass": true,
+    "zero_incremental_spend_only": true,
+    "write_only_escrow_only": true,
+    "two_phase_isolation_protocol_required": true,
+    "durable_one_use_claim_backend_verified": true,
+    "point_of_use_preflight_required": true,
+    "post_execution_isolation_receipt_required": true,
+    "global_fresh_reality_authority": false,
+    "acceptance_credit_authority": false,
+    "promotion_authority": false
+  },
+  "scope": "LIVEBENCH_IF_SHADOW_COLLECTION_ONLY__NO_RESULT_RELEASE",
+  "hard_rules": [
+    "FINAL_ACTIVATION_MUST_REFERENCE_AN_INDEPENDENT_CONTENT_ADDRESSED_VERIFICATION_RECEIPT",
+    "FINAL_ACTIVATION_MUST_REFERENCE_THE_INDEPENDENTLY_VERIFIED_CREATE_ONCE_CLAIM_BACKEND_RECEIPT",
+    "FINAL_ACTIVATION_DOES_NOT_AUTHORIZE_CASE_REVEAL_WITHOUT_POINT_OF_USE_PREFLIGHT_AND_ONE_USE_CLAIM",
+    "NO_RESULT_RELEASE_BEFORE_ZERO_REALITY_FIXED_POINT",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "shadow_collection_authority": false,
+  "fresh_reality_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false
+}
