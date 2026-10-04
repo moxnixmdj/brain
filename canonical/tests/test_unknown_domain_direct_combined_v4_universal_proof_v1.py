@@ -32,6 +32,7 @@ def test_v3_qualification_population_passes_unchanged_frozen_scorer():
 
 def test_identifier_totality_proof_covers_real_case_tag_sizes():
     ident=proof.prove()["identifier_totality_proof"]
+    assert 3 in ident["covered_permutation_sizes"]
     assert 12 in ident["covered_permutation_sizes"]
     assert 15 in ident["covered_permutation_sizes"]
     assert ident["hmac_collision_resistance_required_for_identifier_uniqueness"] is False
