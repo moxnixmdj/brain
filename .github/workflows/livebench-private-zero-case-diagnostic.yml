@@ -119,8 +119,12 @@ jobs:
           cp "$RECEIPT" /tmp/livebench-private-zero-case-receipt.json
           git config user.name "Project Brain LiveBench Diagnostic"
           git config user.email "project-brain-livebench-diagnostic@users.noreply.github.com"
-          git fetch origin livebench-diagnostic-receipts
-          git switch -C livebench-diagnostic-receipts origin/livebench-diagnostic-receipts
+          if git ls-remote --exit-code --heads origin livebench-diagnostic-receipts >/dev/null 2>&1; then
+            git fetch origin livebench-diagnostic-receipts
+            git switch -C livebench-diagnostic-receipts origin/livebench-diagnostic-receipts
+          else
+            git switch -c livebench-diagnostic-receipts
+          fi
           mkdir -p "$(dirname "$RECEIPT")"
           cp /tmp/livebench-private-zero-case-receipt.json "$RECEIPT"
           git add "$RECEIPT"
