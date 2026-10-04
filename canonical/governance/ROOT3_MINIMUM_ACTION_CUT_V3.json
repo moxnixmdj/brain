@@ -1,90 +1,37 @@
 {
   "schema": "PROJECT_BRAIN_ROOT3_MINIMUM_ACTION_CUT_V3",
   "date": "2026-10-05",
-  "status": "CANDIDATE__POST_UNKNOWN_DOMAIN_V6_RECOMPUTE__9_ROOT3_PREDICATES__7_SHARED_MATCHED_SCOPE_TARGETS__1_FINANCE_DIRECT_ORACLE_PREDICATE__COMPOSITION_EVENT_DRIVEN__ZERO_CREDIT",
-  "objective": "Recompute the minimum nonduplicative Root3 frontier after UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT promotion, deleting stale work while preserving exact unresolved scope obligations.",
-  "authority": {
-    "root_state": {
-      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "919da676976043e5b501f207d3cf420dc4fb50b1"
+  "status": "REVOKED__STALE_INPUT_AFTER_UNKNOWN_DOMAIN_V6_PROMOTION_FALSIFICATION__ZERO_CREDIT__DO_NOT_SCHEDULE",
+  "objective": "Historical candidate only. It was derived from a transient 13/38 state that was independently falsified before this candidate could acquire authority.",
+  "revocation": {
+    "reason": "UNKNOWN_DOMAIN_V6_ATOMIC_PROMOTION_REVOKED_BY_SUBCLASS_FALSIFIER",
+    "current_root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "current_root_state_git_blob_sha": "916f0b1dd4196473bbfe3246ab861f85c6d89d6e",
+    "restored_truth": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 12,
+      "unresolved_atomic": 26,
+      "root1_positive_gap_count": 0,
+      "root2_only_count": 16,
+      "root3_only_count": 7,
+      "root2_and_root3_count": 3,
+      "root3_touching_count": 10
     },
-    "acceptance_evidence": {
-      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8"
-    },
-    "post_unknown_domain_reconciliation": {
-      "path": "canonical/governance/POST_UNKNOWN_DOMAIN_V6_ROOT_AUTHORITY_RECONCILIATION_20261005_V1.json",
-      "git_blob_sha": "7503081e44eb9a37ac870b6f713fe77f1ca220aa"
-    },
-    "matched_superportfolio_v2": {
-      "path": "canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V2.json",
-      "git_blob_sha": "e886f262aa4b4946b290d636d336bf857afa946c"
-    }
-  },
-  "exact_partition": {
-    "unresolved_total": 25,
-    "root1_positive_gap_count": 0,
-    "root2_only_count": 16,
-    "root3_only_count": 6,
-    "root2_and_root3_count": 3,
-    "root3_touching_count": 9
-  },
-  "live_root3_predicates": [
-    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
-    "VISION_DENSE_NONCHART_SCOPE",
-    "FINANCE_UNCOVERED_SCOPE_AUDIT",
-    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
-    "COMPOSITION_COMPONENT_SCOPED_PROOFS",
-    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
-    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
-    "IF_SCOPE_BOUNDARY_NONINFERIOR",
-    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
-  ],
-  "shared_matched_scope_targets": [
-    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
-    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
-    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
-    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
-    "IF_SCOPE_BOUNDARY_NONINFERIOR",
-    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
-    "VISION_DENSE_NONCHART_SCOPE"
-  ],
-  "derivation": {
-    "live_root3_predicates": 9,
-    "shared_matched_scope_target_count": 7,
-    "direct_oracle_predicates": [
-      "FINANCE_UNCOVERED_SCOPE_AUDIT"
+    "invalidated_assumption": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_PROVED",
+    "invalidated_fields": [
+      "unresolved_total_25",
+      "root3_only_count_6",
+      "root3_touching_count_9",
+      "finance_as_only_direct_oracle_predicate"
     ],
-    "direct_oracle_residual": "TWO_FROZEN_FINANCE_DIRECT_ORACLE_LEAVES__UNKNOWN_DOMAIN_DIRECT_ORACLE_RESIDUAL_DELETED_BY_VERIFIED_V6_ATOMIC_PROMOTION",
-    "composition_dependency": "COMPOSITION_COMPONENT_SCOPED_PROOFS__4_OF_12_SCOPED_PROVED__8_OPEN__EVENT_DRIVEN_FROM_UPSTREAM_SCOPE_COMPLETE_RECEIPTS",
-    "arithmetic_identity": "9 = 7_SHARED_MATCHED_SCOPE_TARGETS + 1_FINANCE_DIRECT_ORACLE_PREDICATE + 1_COMPOSITION_COMPONENT_DEPENDENCY",
-    "stale_count_truth_repair": "POST_UNKNOWN_DOMAIN_V6_RECONCILIATION_DELTA_FIELD_MATCHED_SCOPE_TARGETS_7_TO_6_IS_NOT_USED_AS_AUTHORITY_BECAUSE THE CURRENT_UNRESOLVED_SET_AND_FROZEN_SUPERPORTFOLIO_ENUMERATE_SEVEN LIVE MATCHED_SCOPE TARGETS"
+    "consequence": "USE_CURRENT_REVOCATION_AWARE_ROOT_AUTHORITY_AND_RECOMPUTE_ROOT3_ONLY_FROM_CURRENT_EVIDENCE; THIS FILE HAS NO SCHEDULING AUTHORITY"
   },
-  "minimum_event_classes": [
-    {
-      "id": "NEW_SCOPE_CERTIFICATE_EVENT",
-      "effect": "Apply only an independently verified lossless/exhaustive/universal certificate to the exact affected predicate(s), then recompute this cut."
-    },
-    {
-      "id": "UPSTREAM_SCOPE_RECEIPT_EVENT",
-      "effect": "Recompute the eight open composition component interfaces from newly accepted scope-complete upstream receipts; no direct composition reality."
-    },
-    {
-      "id": "ROOT3_FRESH_REALITY_EVENT",
-      "effect": "Only with separate explicit authority, execute one shared seven-target matched superportfolio wave and the two frozen finance direct-oracle leaves in parallel."
-    }
-  ],
-  "current_consequence": "NO_NONDOMINATED_ROOT3_FRESH_REALITY_EXECUTION_AUTHORIZED__ZERO_REALITY_WORK_ONLY_ON_NEW_LOAD_BEARING_SCOPE_CERTIFICATES_OR_UPSTREAM_RECEIPTS__UNKNOWN_DOMAIN_SCOPE WORK DELETED",
   "hard_rules": [
-    "NO_RESCHEDULING_UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
-    "NO_REPEAT_GENERIC_ROOT3_SEARCH_WITH_UNCHANGED_INPUTS",
-    "NO_DIRECT_COMPOSITION_REALITY",
-    "NO_SYNTHESIS_SCOPE_WORK__SCOPE_ALREADY_CLOSED",
-    "NO_FINANCE_SOURCE_REINTERNALIZATION__OPERATIVE_SOURCE_ALREADY_ADMITTED",
-    "NO_MATCHED_CASE_GENERATION_BEFORE_EXACT_COMPARATOR_ADMISSIBILITY_AND APPLICABLE ZERO_REALITY FIXED POINT",
-    "NO_DIRECT_ORACLE_EXECUTION_BEFORE EXPLICIT FRESH REALITY AUTHORIZATION",
-    "SEVEN_SHARED_MATCHED_SCOPE_TARGETS_MUST_NOT_BE_COMPRESSED_TO_SIX_WITHOUT_NAMED_PREDICATE_PROMOTION_OR_VERIFIED_SCOPE_COLLAPSE",
-    "ZERO_CREDIT_FROM_SCHEDULING_OR_COMPRESSION"
+    "DO_NOT_SCHEDULE_FROM_THIS_FILE",
+    "DO_NOT_TREAT_TRANSIENT_13_OF_38_STATE_AS_CURRENT",
+    "DO_NOT_DELETE_UNKNOWN_DOMAIN_ROOT3_RESIDUAL",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -98,6 +45,5 @@
   "scheduling_authority": false,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "fresh_reality_authority": false
 }
