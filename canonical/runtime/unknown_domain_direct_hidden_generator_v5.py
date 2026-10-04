@@ -21,14 +21,24 @@ IDENTIFIER_TOTALITY="INHERITS_V4_STRUCTURAL_SLOT_ORDINAL_UNIQUENESS"
 
 
 def _beacon_gate(beacon: Any)->str:
-    if not isinstance(beacon,str) or len(beacon.strip())<16:
+    if not isinstance(beacon,str):
+        raise v1.UnknownDomainGeneratorError("POST_FREEZE_BEACON_INVALID")
+    # Call the exact built-in implementation instead of virtual dispatch on
+    # the accepted str instance. A hostile str subclass may override strip(),
+    # encode(), __str__, or other methods; the declared isinstance-accepted
+    # domain must remain total for those values too.
+    stripped=str.strip(beacon)
+    if len(stripped)<16:
         raise v1.UnknownDomainGeneratorError("POST_FREEZE_BEACON_INVALID")
     return beacon
 
 
 def _canonical_beacon(beacon: Any)->str:
     text=_beacon_gate(beacon)
-    raw=text.encode("utf-8","surrogatepass")
+    # Explicit base-method dispatch bypasses a str subclass's overridden
+    # encode(). The return is exact built-in bytes, after which hex() yields an
+    # exact built-in ASCII str for every downstream legacy helper.
+    raw=str.encode(text,"utf-8","surrogatepass")
     # surrogatepass is total over Python str code-point sequences; hex is a
     # byte-injective ASCII representation, so no legacy strict-UTF8 helper can
     # reject or collapse an accepted beacon after this point.
@@ -37,9 +47,12 @@ def _canonical_beacon(beacon: Any)->str:
 
 def _secret_bytes_total(secret: Any)->bytes:
     if isinstance(secret,bytes):
-        out=secret
+        # Materialize through the immutable buffer interface rather than
+        # virtual bytes-subclass methods such as __bytes__ or __len__.
+        out=memoryview(secret).tobytes()
     elif isinstance(secret,str):
-        out=secret.encode("utf-8","surrogatepass")
+        # Same non-virtual rule as the beacon path.
+        out=str.encode(secret,"utf-8","surrogatepass")
     else:
         raise v1.UnknownDomainGeneratorError("EVALUATOR_SECRET_INVALID")
     if len(out)<32:
