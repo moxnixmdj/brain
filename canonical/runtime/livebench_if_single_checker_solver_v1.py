@@ -35,7 +35,7 @@ ANCHORS: dict[str, str] = {
     "count:keywords_multiple": "five times in your response and keyword",
     "count:numbers": "numbers in the response",
     "count:person_names": "from this list of person names",
-    "count:pronouns": "personal pronouns",
+    "count:pronouns": "pronouns",
     "count:punctuation": "use every standard punctuation mark at least once",
     "count:unique_word_count": "unique words in the response",
     "count:word_count_range": "the response must contain between",
@@ -287,7 +287,7 @@ def _build_dynamic(iid: str, prompt: str) -> str | None:
         return _sentences(n, n, word)
 
     if iid == "count:pronouns":
-        n = _int(r"at least\s+(\d+)\s+personal pronouns", prompt)
+        n = _int(r"at least\s+(\d+)\s+(?:personal\s+)?pronouns", prompt)
         return " ".join(["I"] * n) if n is not None else None
 
     if iid == "sentence:increment":
