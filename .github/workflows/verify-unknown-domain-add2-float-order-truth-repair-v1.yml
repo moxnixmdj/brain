@@ -1,0 +1,44 @@
+name: Verify Unknown-Domain ADD2 float-order truth repair V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/unknown_domain_direct_candidate_v1.py"
+      - "canonical/runtime/unknown_domain_direct_candidate_v2.py"
+      - "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py"
+      - "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py"
+      - "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py"
+      - "canonical/runtime/unknown_domain_direct_hidden_scorer_v2.py"
+      - "canonical/runtime/unknown_domain_direct_execution_harness_v1.py"
+      - "canonical/runtime/unknown_domain_direct_execution_harness_v2.py"
+      - "canonical/runtime/unknown_domain_direct_v2_universal_proof_v2.py"
+      - "canonical/tests/test_unknown_domain_add2_float_order_truth_repair_v1.py"
+      - "canonical/tests/test_unknown_domain_direct_v2_universal_proof_v2.py"
+      - "canonical/governance/UNKNOWN_DOMAIN_V1_UNIVERSAL_PROOF_FLOAT_ORDER_REVOCATION_20261005_V1.json"
+      - "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json"
+      - "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V2.json"
+      - ".github/workflows/verify-unknown-domain-add2-float-order-truth-repair-v1.yml"
+permissions:
+  contents: read
+jobs:
+  falsification-and-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pytest -q canonical/tests/test_unknown_domain_add2_float_order_truth_repair_v1.py
+  universal-proof-v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pytest -q canonical/tests/test_unknown_domain_direct_v2_universal_proof_v2.py
+      - run: python3 -m canonical.runtime.unknown_domain_direct_v2_universal_proof_v2 > /tmp/proof-v2.json
+      - run: |
+          python3 - <<'PY'
+          import json
+          d=json.load(open("/tmp/proof-v2.json",encoding="utf-8"))
+          assert d["status"]=="PASS__UNIVERSAL_OVER_EXACT_FROZEN_V2_GENERATOR_DOMAIN_WITH_TRUTH_REPAIRED_NUMERIC_SCORER"
+          assert d["scope"]["terminal_or_production_cases_generated"]==0
+          assert d["production_execution_information_gain"]==0
+          assert d["accounting"]["acceptance_credit_delta"]==0
+          print("TRUTH_REPAIRED_UNIVERSAL_PROOF_V2_PASS")
+          PY
