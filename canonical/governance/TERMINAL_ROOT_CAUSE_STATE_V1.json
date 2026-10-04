@@ -246,6 +246,27 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
+    },
+    "synthesis_dimension_scorers_and_strict_reducer": {
+      "activation_path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "300fb663e6b598b389961ddf663d88abcd206545",
+      "verification_path": "canonical/verification/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "e13360b7aba2756f0eb97cac977515c07f3bcbdc",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__PREEXPOSURE_SCORERS_AND_REDUCER_FROZEN__ZERO_CREDIT",
+      "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "deleted_residuals": [
+        "FIVE_CASE_SPECIFIC_QUALITY_DIMENSION_SCORER_BINDINGS_UNSPECIFIED",
+        "PORTFOLIO_LEVEL_CONSERVATIVE_MATCHED_NONINFERIORITY_REDUCER_UNSPECIFIED"
+      ],
+      "remaining": [
+        "EXACT_OPUS_5_5_COMPARATOR_ADMISSIBILITY_OR_SEPARATELY_VERIFIED_STRONGER_PROOF",
+        "FROZEN_MATCHED_CASE_POPULATION_AND_EXPLICIT_FRESH_REALITY_AUTHORITY",
+        "BRAIN_AND_OPUS_IDENTICAL_CASE_EXECUTION",
+        "MATCHED_QUALITY_RESULT"
+      ],
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false
     }
   },
   "accounting": {
