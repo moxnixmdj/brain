@@ -27,6 +27,7 @@ NTH = "length_constraints:nth_paragraph_first_word"
 EXISTENCE = "keywords:existence"
 FORBIDDEN = "keywords:forbidden_words"
 END = "startend:end_checker"
+SECTION = "detectable_format:multiple_sections"
 
 
 def _slots_by_id(contracts: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -82,6 +83,16 @@ def hard_unsat_reasons(contracts: Sequence[Mapping[str, Any]]) -> tuple[str, ...
         hit = _literal_forbidden_hit(end_phrase, forbidden_words)
         if hit is not None:
             reasons.append("MANDATORY_END_PHRASE_CONTAINS_FORBIDDEN_WORD:" + hit.casefold())
+
+    if SECTION in by_id and FORBIDDEN in by_id:
+        splitter = str(by_id[SECTION].get("section_spliter", ""))
+        hit = _literal_forbidden_hit(splitter, forbidden_words)
+        if hit is not None:
+            # SectionChecker counts occurrences of the literal splitter followed
+            # by a digit. Therefore every satisfying response must contain the
+            # splitter as a standalone word. If that word is forbidden, the
+            # concrete visible contract is unsatisfiable.
+            reasons.append("MANDATORY_SECTION_SPLITTER_CONTAINS_FORBIDDEN_WORD:" + hit.casefold())
 
     return tuple(reasons)
 
