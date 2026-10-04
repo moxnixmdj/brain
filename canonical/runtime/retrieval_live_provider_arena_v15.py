@@ -7,7 +7,7 @@ strategy reduces conjunction pressure and expands the bounded repository window
 before manifest extraction. No package identity is used for discovery.
 """
 from __future__ import annotations
-import hashlib, json, time
+import hashlib, json, time, urllib.parse
 from typing import Any, Mapping
 from canonical.runtime import retrieval_live_provider_arena_v11 as v11
 from canonical.runtime import retrieval_live_provider_arena_v13 as v13
@@ -72,6 +72,47 @@ def repo_union(queries:list[str],*,limit_per_query:int=30,timeout:float=20.0):
         })
     return union,traces
 
+
+def maven_artifact_lineage(coordinates:list[str],*,timeout:float=20.0,max_queries:int=24,limit:int=60):
+    """Expand discovered current Maven coordinates by artifactId lineage.
+
+    ArtifactIds come only from discovered manifests. Group identities returned
+    by Maven Central are candidate aliases across historical/current publishing
+    lineages; no answer-key group is injected.
+    """
+    aliases=[];seen_alias=set();seen_artifacts=set();traces=[]
+    for coord in coordinates:
+        if len(traces)>=max_queries:
+            break
+        if ":" not in coord:
+            continue
+        artifact=coord.split(":",1)[1].strip()
+        if len(artifact)<3 or artifact.casefold() in seen_artifacts:
+            continue
+        seen_artifacts.add(artifact.casefold())
+        q=f'a:"{artifact}"'
+        url="https://search.maven.org/solrsearch/select?"+urllib.parse.urlencode({
+            "q":q,"rows":limit,"wt":"json",
+        })
+        start=time.perf_counter()
+        try:
+            obj=v13.base._url_json(url,timeout=timeout)
+            docs=((obj.get("response") or {}).get("docs") or []) if isinstance(obj,dict) else []
+            ids=[str(x.get("id") or "") for x in docs if str(x.get("id") or "").strip()]
+            status="SUCCESS";err=None
+        except Exception as exc:
+            ids=[];status="FAILED_RETRYABLE";err=f"{type(exc).__name__}:{str(exc)[:300]}"
+        for mid in ids:
+            key=mid.casefold()
+            if key not in seen_alias:
+                seen_alias.add(key);aliases.append(mid)
+        traces.append({
+            "artifact_id":artifact,"query":q,"status":status,
+            "candidate_count":len(ids),"error":err,
+            "latency_seconds":max(0.0,time.perf_counter()-start),
+        })
+    return aliases,traces
+
 def bridge(query:str,*,timeout:float=20.0,max_repos:int=40,max_poms:int=24):
     qs=atomic_behavior_queries(query)
     repos,search_traces=repo_union(qs,limit_per_query=30,timeout=timeout)
@@ -88,12 +129,22 @@ def bridge(query:str,*,timeout:float=20.0,max_repos:int=40,max_poms:int=24):
             key=coord.casefold()
             if key not in seen:
                 seen.add(key);coords.append(coord)
+    lineage_aliases,lineage_traces=maven_artifact_lineage(
+        coords,timeout=timeout,max_queries=24,limit=60
+    )
+    merged=list(coords);merged_seen={x.casefold() for x in merged}
+    for alias in lineage_aliases:
+        if alias.casefold() not in merged_seen:
+            merged_seen.add(alias.casefold());merged.append(alias)
     return {
         "queries":qs,
         "repository_candidates":repos,
-        "coordinates":coords,
+        "coordinates":merged,
+        "direct_manifest_coordinates":coords,
+        "maven_lineage_aliases":lineage_aliases,
         "search_traces":search_traces,
         "repository_manifest_traces":repo_traces,
+        "maven_lineage_traces":lineage_traces,
     }
 
 def rows()->tuple[Mapping[str,Any],...]:
@@ -121,7 +172,9 @@ def run(*,timeout:float=20.0):
             b={
                 "queries":atomic_behavior_queries(str(row["query"])),
                 "repository_candidates":[],"coordinates":[],
+                "direct_manifest_coordinates":[],"maven_lineage_aliases":[],
                 "search_traces":[],"repository_manifest_traces":[],
+                "maven_lineage_traces":[],
                 "error":f"{type(exc).__name__}:{str(exc)[:500]}",
             }
             status="FAILED_RETRYABLE"
@@ -180,6 +233,7 @@ def run(*,timeout:float=20.0):
             "ATOMIC_BEHAVIOR_EXPANSION_IS_TARGET_IDENTITY_FREE",
             "CANDIDATE_UNION_IS_MONOTONIC",
             "PACKAGE_CREDIT_REQUIRES_POM_GROUP_ARTIFACT_EXTRACTION",
+            "HISTORICAL_GROUP_ALIAS_RECOVERY_MUST_BE_DERIVED_FROM_DISCOVERED_ARTIFACT_ID_ONLY",
             "DEEPER_REPOSITORY_WINDOW_IS_BOUNDED_AND_EMPIRICALLY_TESTED",
             "FINITE_30_CASE_RECALL_IS_NOT_OPEN_WORLD_COMPLETENESS",
         ],
