@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_WRITE_ONLY_RESULT_ESCROW_IMPLEMENTATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CRYPTOGRAPHIC_RESULT_NONVISIBILITY_IMPLEMENTED__ZERO_CASES__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Replace the write-only escrow contract-only state with a concrete fixed-size cryptographic result sink that has encryption capability but no decryption/reveal capability in the execution context.",
+  "construction": {
+    "payload_encryption": "AES_256_GCM",
+    "key_encapsulation": "RSA_2048_OAEP_SHA256",
+    "python_dependency": [
+      "cryptography",
+      "50.0.2"
+    ],
+    "fixed_plaintext_bytes": 262144,
+    "fixed_envelope_bytes": 262444,
+    "output_path_source": "LEASE_DIGEST_ONLY",
+    "create_semantics": "O_WRONLY|O_CREAT|O_EXCL",
+    "production_private_key_present": false,
+    "production_decrypt_function_present": false,
+    "post_fixed_point_private_key_required_for_release": true
+  },
+  "pre_fixed_point_visible_surface": {
+    "result_body": false,
+    "score": false,
+    "summary": false,
+    "plaintext_result_length": false,
+    "plaintext_result_hash": false,
+    "artifact_size_result_dependent": false,
+    "artifact_filename_result_dependent": false,
+    "candidate_mutation_authorized": false,
+    "policy_mutation_authorized": false
+  },
+  "overflow_behavior": "OVERFLOW_LENGTH_AND_DIGEST_ARE_STORED_ONLY_INSIDE_ENCRYPTED_FIXED_SIZE_PAYLOAD__VISIBLE_SURFACE_REMAINS_CONSTANT",
+  "independent_verification_required": [
+    "EXACT_RUNTIME_BLOB",
+    "ROUNDTRIP_DECRYPTION_ONLY_IN_SEPARATE_TEST_AUTHORITY",
+    "DIFFERENT_RESULTS_PRODUCE_EQUAL_SIZE_ENVELOPES",
+    "RECEIPT_CONTAINS_NO_PLAINTEXT_RESULT_FIELDS",
+    "OPAQUE_COMPLETION_SURFACE_CONSTANT",
+    "PRODUCTION_MODULE_HAS_NO_DECRYPT_OR_PRIVATE_KEY_LOADER_CALL",
+    "DUPLICATE_CREATE_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_PRODUCTION_RELEASE_PRIVATE_KEY_BOUND",
+    "NO_RESULT_RELEASE_AUTHORITY",
+    "NO_TERMINAL_CASE_REVEAL",
+    "NO_LIVEBENCH_SCORE",
+    "NO_SHADOW_COLLECTION_AUTHORITY_FROM_THIS_CANDIDATE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
