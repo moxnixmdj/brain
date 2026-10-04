@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_DECISION_ONLY_EVALUATION_FINAL_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__SCHEDULING_ONLY__ZERO_CREDIT",
+  "verified_activation_subject": {
+    "path": "canonical/governance/ROOT2_DECISION_ONLY_EVALUATION_ACTIVATION_V1.json",
+    "git_blob_sha": "4086abe4559e30ade7bb7fa5be5571eaf40e94ee"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_DECISION_ONLY_EVALUATION_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1789,
+    "merge_commit": "e693ea26ddef55cc84cd2056c0f0c29d827bc3ea",
+    "workflow_run_id": 37191060375,
+    "conclusion": "success"
+  },
+  "semantic_delta_from_verified_subject": "NONE__FINAL_POINTER_ONLY",
+  "effective_authority": {
+    "scheduling": true,
+    "decision_certificate_compilation": true,
+    "benchmark_execution": false,
+    "fresh_reality": false,
+    "acceptance_reduction": false,
+    "promotion": false
+  },
+  "preserved_truth": {
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_touching_predicates": 19,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
