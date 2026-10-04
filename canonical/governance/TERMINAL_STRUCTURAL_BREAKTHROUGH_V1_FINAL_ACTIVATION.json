@@ -1,0 +1,26 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_STRUCTURAL_BREAKTHROUGH_V1_FINAL_ACTIVATION",
+  "date":"2026-10-04",
+  "status":"ACTIVE__INDEPENDENT_PUBLIC_PASS__SCHEDULING_ONLY__ZERO_CREDIT",
+  "activation":{"path":"canonical/governance/TERMINAL_STRUCTURAL_BREAKTHROUGH_V1_ACTIVATION.json","git_blob_sha":"575b5541b07e5c4856da5f718a3f5b0c43303d08"},
+  "mechanical_verification":{"path":"canonical/verification/TERMINAL_STRUCTURAL_BREAKTHROUGH_V1_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json","git_blob_sha":"709e9d3a425ffe003f2137a851df8adf92774578"},
+  "activation_verification":{"path":"canonical/verification/TERMINAL_STRUCTURAL_BREAKTHROUGH_V1_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json","git_blob_sha":"714335f80b537b976131941ee73411113f40bd37"},
+  "reconciled_main":"e6d0b29bd27d3a2fa4839ccdb838e21037dd66cf",
+  "effects":[
+    "STRONGER_PROOF_REPLACEMENT_CANDIDATE_GENERATION_ACTIVE",
+    "CONSOLIDATED_AUTHENTICATED_ACCOUNT_SWEEP_ROUTING_ACTIVE",
+    "OWNER_RESULT_RACES_REMAIN_PARALLEL_ZERO_ATTENTION",
+    "FIXED_POINT_RECOMPUTE_AND_DOMINATED_ACTION_DELETION_ACTIVE"
+  ],
+  "non_effects":[
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "PRECOMMIT_ISOLATION_THEOREM_REMAINS_UNPROVED_FOR_EACH_BENCHMARK"
+  ],
+  "precedence":"AFTER_ROOT2_V11_AND_ROOT3_V2_DOMAIN_GATES__BEFORE_ADAPTIVE_V3_AND_RETRIEVAL_V19_CANDIDATE_SEARCH",
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0},
+  "authority":{"scheduling":true,"candidate_generation":true,"execution":false,"promotion":false,"fresh_reality":false}
+}
