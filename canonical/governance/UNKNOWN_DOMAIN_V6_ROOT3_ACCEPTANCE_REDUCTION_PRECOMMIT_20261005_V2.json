@@ -70,7 +70,7 @@
           ]
         },
         {
-          "protocol_clause": "NEGATIVE_TRANSFER_DISTRACTORS_DO_NOT_RECEIVE_CREDIT",
+          "protocol_clause": "NEGATIVE_TRANSFER_DISTRACTORS_DO_NOT_RECEIVE CREDIT",
           "evaluator_witnesses": [
             "HIDDEN_DISTRACTOR_FEATURES_DO_NOT_APPEAR_AS_POSITIVE_SUPPORT",
             "NEGATIVE_TRANSFER_CHECKS_EXPLICITLY_REJECT_ALL_HIDDEN_DISTRACTORS"
