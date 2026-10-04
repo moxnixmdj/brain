@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_POST_REVOCATION_19_PREDICATE_REBIND_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_19_PREDICATE_POST_REVOCATION_REBIND__INDEPENDENT_VERIFICATION_REQUIRED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Restore a current fail-closed Root2 scheduling frontier after the unsound LiveBench forced-fail Root1 classification was revoked, without granting execution, fresh-reality, promotion, acceptance, family, capability, or ownership credit.",
+  "source_bindings": {
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "e8371418ed39b83b14df874c8eb5e0bdb6a2e603"
+    },
+    "livebench_forced_fail_revocation": {
+      "path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
+      "git_blob_sha": "bbbe29ec26b1f96ba5538ca159f899e316b167e7"
+    },
+    "frontier_v18": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V18.json",
+      "git_blob_sha": "57d5ee650d4ee250db455d5818899f32aa304918"
+    },
+    "frontier_v18_independent_verification": {
+      "path": "canonical/verification/ROOT2_FRONTIER_V18_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "411089263339c4506b641cf08ba9ac13a50ee4c9"
+    }
+  },
+  "bound_partition": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "root2_touching_predicates": 19
+  },
+  "proof_obligations": [
+    "CURRENT_TERMINAL_ROOT_STATE_MUST_BIND_ROOT1_POSITIVE_GAP_COUNT_0__ROOT2_ONLY_16__ROOT3_ONLY_7__ROOT2_AND_ROOT3_3__UNRESOLVED_26",
+    "ROOT2_FRONTIER_V18_EXACT_STATE_MUST_MATCH_THE_SAME_19_TOUCHING_PARTITION",
+    "ROOT2_FRONTIER_V18_MUST_HAVE_AN_INDEPENDENT_PUBLIC_RUNNER_PASS_BOUND_TO_ITS_EXACT_GIT_BLOB",
+    "LIVEBENCH_IF_GE_65_7_MUST_BE_PRESENT_IN_CURRENT_ROOT2_ONLY_AND_MUST_NOT_BE_PRESENT_IN_CURRENT_ROOT1_ONLY",
+    "NO_EXECUTION_FRESH_REALITY_PROMOTION_OR_ACCEPTANCE_AUTHORITY_MAY_BE_INTRODUCED"
+  ],
+  "consequence_if_independently_verified": {
+    "current_root2_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V18.json",
+    "root2_touching_predicates": 19,
+    "scheduler_authority": "RESTORE_FOR_SCHEDULING_ONLY",
+    "livebench_state": "ROOT2_ONLY__MEASUREMENT_OR_COMPARATOR_UNCERTAINTY",
+    "root1_positive_gap_count": 0,
+    "next_minimum_action": "FOLLOW_V18_ZERO_REALITY_CAUSAL_ORDER_AND_RECOMPUTE_AFTER_EACH_VERIFIED_DELTA"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_GOAL_COMPLETION_CLAIM",
+    "NO_NEW_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE",
+    "NO_CLAIM_ROOT2_FRONTIER_V18_CLOSES_ANY_PREDICATE_BY_ITSELF"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "independent_verification_required": true
+}
