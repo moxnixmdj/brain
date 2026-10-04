@@ -59,6 +59,31 @@
           "path": "canonical/governance/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2_ACTIVATION_V1.json",
           "status": "HISTORICAL_SUPERSEDED_BY_V3__VERIFIED_FALLBACK_RETAINED"
         }
+      },
+      "current_blocker_classification_seal": {
+        "path": "canonical/governance/ROOT1_CURRENT_BLOCKER_CLASSIFICATION_SEAL_V1.json",
+        "git_blob_sha": "d8346fec4326ee3fed32f08dcd29782bbc3647d2",
+        "status": "MERGED_CURRENT_MAIN__LIVE_RECOMPUTATION_PASS__ZERO_ROOT1_RESIDUAL__ZERO_CREDIT",
+        "theorem": "CURRENT_UNRESOLVED_26_EQUALS_16_ROOT2_ONLY_PLUS_7_ROOT3_ONLY_PLUS_3_MIXED__DISJOINT__ROOT1_RESIDUAL_ZERO",
+        "independent_verifier": {
+          "repository": "moxnixmdj/verification-capsule-runner",
+          "pull_request": 1540,
+          "head_sha": "a8789e318ddd4549438d1022b8215b9623bdeaf0",
+          "workflow_run_id": 37166028401,
+          "conclusion": "success"
+        },
+        "current_main_live_recomputation": {
+          "target_families": 19,
+          "atomic_predicates": 38,
+          "proved_predicates": 12,
+          "unresolved_predicates": 26,
+          "root2_only": 16,
+          "root3_only": 7,
+          "root2_and_root3": 3,
+          "root1_positive_gaps": 0,
+          "root1_current_residual": 0
+        },
+        "hard_nonclaim": "DOES_NOT_SEAL_FUTURE_ROOT1_IMPOSSIBILITY_OR_14_FAMILY_ROUTE_COVERAGE"
       }
     },
     "root_2_measurement_or_comparator": {
