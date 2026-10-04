@@ -205,15 +205,17 @@ def compile_visible_constraints(prompt: str) -> dict[str, Any]:
                 errors.append({"instruction_id": instruction_id, "error": type(exc).__name__})
     matches.sort(key=lambda x: (x.start, x.end, x.instruction_id))
 
-    # Duplicate instances of the same public instruction family are forbidden by
-    # the pinned conflict registry. If the visible text appears to contain one,
-    # fail closed instead of arbitrarily choosing an instance.
+    # Preserve multiplicity. Classic IFEval legitimately repeats the same
+    # instruction family to encode intervals (for example >=600 and <701 words)
+    # or multiple independently-scored keyword-frequency constraints. Family
+    # identity is therefore not a unique key. Ambiguity/unsatisfiability is a
+    # later composition concern; the parser must not discard valid instances.
     ids = [m.instruction_id for m in matches]
-    duplicates = sorted({x for x in ids if ids.count(x) > 1})
+    repeated_ids = sorted({x for x in ids if ids.count(x) > 1})
 
     return {
         "schema": SCHEMA,
-        "status": "PASS" if not errors and not duplicates else "FAIL_CLOSED",
+        "status": "PASS" if not errors else "FAIL_CLOSED",
         "constraints": [m.to_dict() for m in matches],
         "recognized_type_count": len(set(ids)),
         "parameter_complete_count": sum(1 for m in matches if m.parameter_complete),
@@ -221,7 +223,8 @@ def compile_visible_constraints(prompt: str) -> dict[str, Any]:
             {"instruction_id": m.instruction_id, "unresolved_parameters": list(m.unresolved_parameters)}
             for m in matches if not m.parameter_complete
         ],
-        "duplicate_instruction_ids": duplicates,
+        "repeated_instruction_ids": repeated_ids,
+        "constraint_instance_count": len(matches),
         "parse_errors": errors,
         "registered_legacy_type_count": LEGACY_REGISTERED_TYPE_COUNT,
         "model_dependency_count": 0,
