@@ -12,7 +12,62 @@ on:
 permissions:
   contents: read
 jobs:
-  verify:
+  theorem:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m canonical.runtime.unknown_domain_direct_combined_v4_universal_proof_v1
+
+  fixture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate nonproduction V3 fixture
+        run: |
+          python - <<'PY'
+          from canonical.runtime import unknown_domain_direct_hidden_generator_v3 as g
+          p=g.generate_qualification_fixture_population(beacon="COMBINED-V4-QUALIFICATION-BEACON-0001")
+          assert p["production"] is False
+          assert p["case_count"]==27
+          assert len(p["visible_cases"])==27
+          assert len(p["hidden_records"])==27
+          print("fixture PASS")
+          PY
+
+  scored-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute one nonproduction population through unchanged harness/scorer
+        run: |
+          python - <<'PY'
+          from canonical.runtime import unknown_domain_direct_candidate_v3 as c
+          from canonical.runtime import unknown_domain_direct_hidden_generator_v3 as g
+          from canonical.runtime import unknown_domain_direct_hidden_scorer_v1 as s
+          from canonical.runtime import unknown_domain_direct_execution_harness_v1 as h
+          p=g.generate_qualification_fixture_population(beacon="COMBINED-V4-QUALIFICATION-BEACON-0001")
+          rows=[]
+          for v,r in zip(p["visible_cases"],p["hidden_records"]):
+              out=h.execute_case(candidate_step=c.step,case_visible=v,hidden_record=r)
+              assert out["scorer_result"]["pass"] is True,(v["case_id"],out)
+              rows.append(out["scorer_result"])
+          assert s.aggregate(rows)["all_27_cases_pass"] is True
+          print("27/27 nonproduction regression PASS")
+          PY
+
+  suite:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -21,4 +76,3 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pytest -q canonical/tests/test_unknown_domain_direct_combined_v4_universal_proof_v1.py
-      - run: python -m canonical.runtime.unknown_domain_direct_combined_v4_universal_proof_v1
