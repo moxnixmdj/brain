@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_WHITESPACE_INVARIANT_REDUCTION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONSTRUCTIVE_PUBLIC_12_OF_12_PASS__EXACT_RAW_REFERENCE_REQUIREMENT_REDUCED_TO_NORMALIZED_REFERENCE_SEGMENTATION__ZERO_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_instruction": "ratio:overlap",
+  "objective": "Delete the exact-raw-reference-text requirement for NGramOverlapChecker by constructing responses whose trigrams contain no whitespace, making their overlap score invariant to hidden whitespace layout.",
+  "public_source_bindings": {
+    "ifbench_repository": "allenai/IFBench",
+    "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "ifbench_test_path": "data/IFBench_test.jsonl",
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "livebench_checker_path": "livebench/if_runner/ifbench/instructions.py",
+    "livebench_checker_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "prior_truth_receipt": "canonical/verification/LIVEBENCH_PUBLIC_PARAMETER_TRUTH_INDEPENDENT_VERIFICATION_20261004_V1.json",
+    "prior_truth_receipt_git_blob_sha": "ee5346e1468e9b0dd5bd7f41ddaf0c2d423cfa0a"
+  },
+  "theorem": {
+    "premises": [
+      "NGramOverlapChecker forms sets of character trigrams from response and exact reference_text.",
+      "normalize_ws changes only whitespace runs and trims boundary whitespace.",
+      "The constructed response contains no whitespace characters."
+    ],
+    "claim": "For every response trigram t, membership of t in the exact raw reference trigram set equals membership of t in the normalize_ws(reference) trigram set. Therefore the checker overlap percentage is exactly identical under the raw and normalized reference.",
+    "consequence": "Exact raw reference whitespace is not a score-relevant hidden parameter for whitespace-free constructed responses."
+  },
+  "constructive_public_recomputation": {
+    "public_ratio_overlap_rows": 12,
+    "normalized_reference_available_in_prior_public_receipt": "12_OF_12_VISIBLE_AFTER_WHITESPACE_NORMALIZATION",
+    "constructor_input": [
+      "NORMALIZED_REFERENCE_TEXT",
+      "VISIBLE_PERCENTAGE"
+    ],
+    "constructor_search": "ENUMERATE_WHITESPACE_FREE_REFERENCE_TOKEN_SUBSTRINGS_AND_APPEND_UNIQUE_PRIVATE_USE_FILLER_CHARACTERS_ABSENT_FROM_NORMALIZED_REFERENCE_UNTIL_SCORE_ENTERS_PLUS_MINUS_2_PERCENT_BAND",
+    "witnesses_found": 12,
+    "witnesses_with_official_raw_exact_score_inside_tolerance": 12,
+    "raw_exact_score_equal_to_normalized_reference_score": 12,
+    "failures": 0,
+    "terminal_cases_consumed": 0
+  },
+  "runtime": {
+    "path": "canonical/runtime/livebench_ngram_whitespace_invariant_compiler_v1.py",
+    "test_path": "canonical/tests/test_livebench_ngram_whitespace_invariant_compiler_v1.py",
+    "behavior": "FAIL_CLOSED_IF_NO_DETERMINISTIC_WITNESS_IS_FOUND"
+  },
+  "residual_reduction": {
+    "before": "RATIO_OVERLAP_EXACT_REFERENCE_TEXT_ACQUISITION_OR_SCORE_EQUIVALENT_CANONICALIZATION",
+    "after": "NORMALIZED_REFERENCE_SEGMENTATION_FROM_VISIBLE_PROMPT_OR_OTHER_ADMISSIBLE_PUBLIC_GENERATION_CONTRACT",
+    "deleted_requirement": "BYTE_EXACT_RAW_REFERENCE_WHITESPACE_RECOVERY",
+    "remaining_not_proved": [
+      "FROZEN_TERMINAL_LIVEBENCH_DATASET_EQUIVALENCE",
+      "CONTAMINATION_SAFE_NORMALIZED_REFERENCE_SEGMENTATION_FOR_EVERY_TERMINAL_RATIO_OVERLAP_ROW",
+      "FULL_LIVEBENCH_SUCCESSOR_PASS",
+      "LIVEBENCH_ACCEPTANCE"
+    ]
+  },
+  "next_minimum_action": "PROVE_A_GENERAL_PROMPT_ONLY_SEGMENTER_THAT_RECOVERS_NORMALIZED_REFERENCE_TEXT_FROM_THE_PUBLIC_CONSTRAINT_GRAMMAR_WITHOUT_TERMINAL_CASE_CONTENT; THEN COMPOSE IT_WITH_THIS CONSTRUCTOR BEFORE ANY NEW CASE EXPOSURE.",
+  "hard_rules": [
+    "NO_UNEXPOSED_TERMINAL_CASE_CONTENT",
+    "NO_CASE_SPECIFIC_TERMINAL_RULES",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_REDUCTION",
+    "FAIL_CLOSED_IF_NORMALIZED_REFERENCE_CANNOT_BE PROVED RECOVERED",
+    "INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_LOAD_BEARING_PROMOTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
