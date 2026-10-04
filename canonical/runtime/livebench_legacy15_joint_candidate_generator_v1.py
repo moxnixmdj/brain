@@ -151,6 +151,55 @@ def _keyword_payload(required: list[str], forbidden: list[str] | None = None) ->
     return " ".join(_required_fragments(required, list(forbidden or [])))
 
 
+def prove_visible_unsat(constraints: Iterable[dict[str, Any]]) -> dict[str, Any]:
+    """Prove narrow visible contradictions from frozen checker semantics.
+
+    This is deliberately conservative. It returns proved=True only when the
+    exact required end phrase necessarily contains a whole-word expression
+    forbidden by the same visible constraint set. EndChecker requires that
+    literal phrase at the response tail (after outer-quote stripping), while
+    ForbiddenWords rejects the same whole-word regex anywhere in the original
+    response, so no response can satisfy both.
+    """
+    rows = list(constraints)
+    forbidden = _forbidden(rows)
+    end_checker = _one(rows, "startend:end_checker")
+    if not forbidden or not end_checker:
+        return {"proved": False}
+
+    end_phrase = str(_slots(end_checker).get("end_phrase") or "").strip()
+    if not end_phrase:
+        return {"proved": False}
+
+    collisions: list[str] = []
+    for word in forbidden:
+        try:
+            if re.search(r"\b" + word + r"\b", end_phrase, flags=re.IGNORECASE):
+                collisions.append(word)
+        except re.error:
+            # The exact frozen checker would also receive this expression.
+            # Do not claim a proof from malformed regex syntax here.
+            return {"proved": False}
+
+    if not collisions:
+        return {"proved": False}
+    return {
+        "proved": True,
+        "reason": "EXACT_END_PHRASE_FORBIDDEN_WHOLE_WORD_COLLISION",
+        "end_phrase": end_phrase,
+        "colliding_forbidden_words": sorted(collisions),
+        "proof_basis": (
+            "EndChecker requires response.strip().strip(\"\\\"\").lower() "
+            "to end with end_phrase; ForbiddenWords rejects the same whole-word "
+            "regex anywhere in the unstripped response."
+        ),
+        "hidden_instruction_ids_used": False,
+        "hidden_kwargs_used": False,
+        "terminal_case_metadata_used": False,
+        "terminal_data_used": False,
+    }
+
+
 def _special_json(constraints: list[dict[str, Any]]) -> list[str]:
     required = _required_keywords(constraints)
     forbidden = _forbidden(constraints)
@@ -318,6 +367,23 @@ def generate(constraints: Iterable[dict[str, Any]], max_candidates: int = 96) ->
             "error": "ACTIVE15_CONFLICT_GRAPH_REJECTED",
             "candidates": [],
             "terminal_data_used": False,
+        }
+
+    unsat = prove_visible_unsat(rows)
+    if unsat.get("proved"):
+        return {
+            "schema": SCHEMA,
+            "status": "PROVED_UNSAT_VISIBLE_CONSTRAINTS",
+            "candidates": [],
+            "unsat_proof": unsat,
+            "requires_exact_pinned_checker_postvalidation": False,
+            "hidden_instruction_ids_used": False,
+            "hidden_kwargs_used": False,
+            "terminal_case_metadata_used": False,
+            "terminal_data_used": False,
+            "model_dependency_count": 0,
+            "acceptance_credit": False,
+            "semantic_capability_credit": False,
         }
 
     try:
