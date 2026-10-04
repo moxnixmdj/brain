@@ -1,0 +1,24 @@
+{
+  "schema":"PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCER_CANDIDATE_V1",
+  "date":"2026-10-05",
+  "status":"FROZEN_BEFORE_PRODUCTION_OUTCOME__REDUCER_CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate":"UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "precommit":{"path":"canonical/governance/UNKNOWN_DOMAIN_DIRECT_PRODUCTION_REDUCTION_PRECOMMIT_V1.json","git_blob_sha":"7a43b9023e19e1d43629b88b5a68f8ac26b1e9c7"},
+  "objective":"COMPILE_THE_ALREADY_FROZEN_PRODUCTION_REDUCTION_INTO_FAIL_CLOSED_CODE_BEFORE_THE_ONE_USE_OUTCOME_IS_OBSERVED",
+  "rules":[
+    "NO_THRESHOLD_CHANGE_AFTER_RESULT",
+    "NO_CASE_REPLACEMENT",
+    "NO_POST_RESULT_TUNING",
+    "EVERY_CASE_MUST_HAVE_FROZEN_SCORER_PASS",
+    "EXACT_12_TRANSFER_AND_15_ABSTENTION_CASES",
+    "EXACT_5_5_5_ABSTENTION_CLASS_BALANCE",
+    "MAX_TWO_PROBES_PER_CASE",
+    "ZERO_LEARNED_BYTES_AND_ZERO_EXTERNAL_LEARNED_CALLS",
+    "PASS_CREATES_ONLY_PREDICATE_LOCAL_PROOF_CANDIDATE",
+    "SEPARATE_INDEPENDENT_REDUCTION_AND_ACCEPTANCE_PROMOTION_REQUIRED"
+  ],
+  "runtime":"canonical/runtime/unknown_domain_direct_production_reducer_v1.py",
+  "tests":"canonical/tests/test_unknown_domain_direct_production_reducer_v1.py",
+  "authority":{"execution":false,"fresh_reality":false,"acceptance_credit":false,"promotion":false},
+  "accounting":{"incremental_spend_usd":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0}
+}
