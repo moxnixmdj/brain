@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CAUSAL_DEPTH_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V2",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__DYNAMIC_ROOT2_V12_ROOT_PROJECTION__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "5e03218edf72b031e6bbafd6a2ee010cc2c0acd9"
+    },
+    "activation": {
+      "path": "canonical/governance/TERMINAL_CAUSAL_DEPTH_COLLAPSE_ACTIVATION_V1.json",
+      "git_blob_sha": "1c4400af63533e236847189b17b11e8dd7f80107"
+    },
+    "policy_verification": {
+      "path": "canonical/verification/TERMINAL_CAUSAL_DEPTH_COLLAPSE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "bf6e682b8c55eab3bfafe424c830657c6ffdbcd9"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1699,
+    "verifier_head_sha": "2998d34957ea0c73cb712125eecf58b3303f483d",
+    "verifier_merge_commit": "452c5540da2cd0296113d8b397042f292c65bb2b",
+    "workflow_run_id": 37180094010,
+    "workflow_job_id": 111370736484,
+    "conclusion": "success"
+  },
+  "verified": {
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 16,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "root2_effective_frontier": "ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12",
+    "root2_effective_scheduling_authority": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "consequence": "THE_PREDECLARED_TERMINAL_CAUSAL_DEPTH_COLLAPSE_ROOT_POINTER_CONDITION_IS_SATISFIED_FOR_EXACT_ROOT_BLOB_5E03218__SCHEDULING_ONLY__NO_TERMINAL_CREDIT",
+  "hard_nonclaims": [
+    "NO_TERMINAL_GOAL_ACHIEVEMENT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
