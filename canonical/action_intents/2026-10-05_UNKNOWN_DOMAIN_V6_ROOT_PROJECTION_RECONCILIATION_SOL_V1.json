@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "mission": "PERMANENTLY_OWN_ALL_19_USEFUL_OPUS_5_5_CAPABILITY_FAMILIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "change": "RECONCILE_UNKNOWN_DOMAIN_V6_ATOMIC_PROMOTION_INTO_CURRENT_ROOT_PARTITION_AND_TERMINAL_AUTHORITY",
+  "basis": {
+    "acceptance_binding_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "acceptance_binding_git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
+    "promotion_path": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "promotion_git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
+    "independent_verification_path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "independent_verification_git_blob_sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d",
+    "workflow_run_id": 37243390754,
+    "resulting_root_state_git_blob_sha": "841eb353e0434a64cd379ba691848c43c3b93912",
+    "resulting_terminal_authority_git_blob_sha": "8fa74253e1aa2a312132a43b451468a63c140574"
+  },
+  "exact_delta": {
+    "proved_atomic": "12->13",
+    "unresolved_atomic": "26->25",
+    "root3_only": "7->6",
+    "root2_only": "16->16",
+    "root2_and_root3": "3->3",
+    "root2_touching": "19->19",
+    "accepted_families": "5->5",
+    "terminal": "false->false"
+  },
+  "invariants": [
+    "NO_DOUBLE_COUNT_OF_PARALLEL_UNKNOWN_DOMAIN_V6_RECEIPTS",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_ATOMIC_SCOPE_PROMOTION",
+    "NO_NEW_REALITY",
+    "NO_TERMINAL_OR_PRODUCTION_CASE_CONSUMPTION",
+    "ROOT2_19_DOMAIN_SET_UNCHANGED",
+    "STALE_ROOT3_10_PREDICATE_CUT_HAS_NO_EXECUTION_AUTHORITY",
+    "TERMINAL_REMAINS_FALSE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_predicate_credit_delta": 1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
