@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_FRESH_HOLDOUT_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIRST_FRESH_HOLDOUT_MEASURED_8_OF_12__FOUR_MISSES_PRESERVED__ZERO_CREDIT",
+  "frozen_inputs": {
+    "executor": {
+      "path": "canonical/runtime/retrieval_verified_route_executor_v1.py",
+      "git_blob_sha": "dd1b4dfb8f2412867650c8a546285e38f3b1b9ee"
+    },
+    "executor_verification": {
+      "path": "canonical/verification/RETRIEVAL_V20_FROZEN_EXECUTOR_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "01b7dca21385fa1055cb16e37401baf9977d9378"
+    },
+    "manifest": {
+      "path": "canonical/governance/RETRIEVAL_V20_FRESH_HOLDOUT_MANIFEST_V1.json",
+      "git_blob_sha": "b9f1798b7c5d745b0f71aa5a09f8404545129004"
+    },
+    "answer_key": {
+      "path": "canonical/governance/RETRIEVAL_V20_FRESH_HOLDOUT_ANSWER_KEY_V1.json",
+      "git_blob_sha": "4a3d7406a23149f8aef66aa0ad04ce3b0b56a61c"
+    },
+    "arena": {
+      "path": "canonical/runtime/retrieval_fresh_holdout_arena_v20.py",
+      "git_blob_sha": "03e9e6f2dd0f87f0c86ee18474d6620b7a1b7e4d"
+    },
+    "freshness_audit": {
+      "path": "canonical/verification/RETRIEVAL_V20_HOLDOUT_FRESHNESS_AUDIT_V1.json",
+      "git_blob_sha": "e8fa8cc00167e5c75ffa4d20805b91c2c2fd1d9f"
+    },
+    "entrypoint_v4_git_blob_sha": "2ad2fb952b3c361e74cb083b335d39b04a7c130b",
+    "route_portfolio_git_blob_sha": "855a6cba59fff8c079f61212acadc254c4e9e736",
+    "controller_v3_git_blob_sha": "44cb29b284f7ff069a68bf21e221f15d17ee94fa"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1674,
+    "merge_commit": "b1ff74f87de7819eaef362aa3840959d185d6f85",
+    "workflow_run_id": 37174682556,
+    "workflow_job_id": 111354740827,
+    "conclusion": "success"
+  },
+  "measured_live_truth": {
+    "case_count": 12,
+    "usable_case_count": 12,
+    "failed_retryable_case_count": 0,
+    "hit_count": 8,
+    "miss_count": 4,
+    "portfolio_union_recall_on_usable_cases": 0.6666666666666666,
+    "mean_first_hit_action_index": 1.625,
+    "mean_first_hit_measured_route_latency_seconds": 9.449521724,
+    "miss_episode_ids": [
+      "H20_GITHUB_RUST_SEARCH",
+      "H20_GITHUB_AR_NLP",
+      "H20_MAVEN_LANG_UTIL",
+      "H20_RUBY_JOBS"
+    ],
+    "provider_recall": {
+      "github": {
+        "hits": 1,
+        "cases": 3,
+        "recall": 0.3333333333333333
+      },
+      "npm": {
+        "hits": 1,
+        "cases": 1,
+        "recall": 1
+      },
+      "crates": {
+        "hits": 1,
+        "cases": 1,
+        "recall": 1
+      },
+      "huggingface_pipeline": {
+        "hits": 2,
+        "cases": 2,
+        "recall": 1
+      },
+      "maven": {
+        "hits": 1,
+        "cases": 2,
+        "recall": 0.5
+      },
+      "nuget": {
+        "hits": 1,
+        "cases": 1,
+        "recall": 1
+      },
+      "rubygems": {
+        "hits": 0,
+        "cases": 1,
+        "recall": 0
+      },
+      "packagist": {
+        "hits": 1,
+        "cases": 1,
+        "recall": 1
+      }
+    },
+    "difficulty_recall": {
+      "BEHAVIOR_ONLY": 0,
+      "MULTILINGUAL": 0.5,
+      "REGISTRY_BEHAVIOR": 1,
+      "PROVIDER_NATIVE_ENUM": 1,
+      "NEW_ECOSYSTEM": 0.6
+    }
+  },
+  "crucial_observations": [
+    "THE_PRIOR_FINITE_30_OF_30_TUNED_UNION_DID_NOT_GENERALIZE_TO_100_PERCENT_ON_THE_FRESH_HOLDOUT",
+    "FRESH_HOLDOUT_RECALL_IS_0_6666666666666666",
+    "ALL_12_TRANSPORTS_WERE_USABLE_SO_THE_FOUR_MISSES_ARE_RETRIEVAL_MISSES_NOT_TRANSPORT_FAILURES",
+    "THE_MAVEN_HTML_CASE_WAS_RECOVERED_BY_REPOSITORY_MANIFEST_BRIDGE_AT_ACTION_INDEX_3",
+    "THE_NPM_NUGET_AND_PACKAGIST_CASES_NEEDED_MULTI_QUERY_DECOMPOSITION_IN_THE_FRESH_SET",
+    "GITHUB_BEHAVIOR_AND_MULTILINGUAL_GENERALIZATION_REMAIN_WEAK",
+    "RUBYGEMS_BEHAVIOR_GENERALIZATION_REMAINS_WEAK",
+    "MAVEN_BEHAVIOR_TO_PACKAGE_IDENTITY_GENERALIZATION_IS_INCOMPLETE"
+  ],
+  "hard_rules": [
+    "THIS_8_OF_12_RESULT_IS_IMMUTABLE_FIRST_HOLDOUT_EVIDENCE",
+    "NO_POST_HOC_ROUTE_CHANGE_MAY_RECLASSIFY_THIS_ORIGINAL_RESULT",
+    "THE_FOUR_MISSES_MUST_BE_COMPILED_INTO_PERMANENT_REGRESSION_CASES",
+    "FUTURE_IMPROVEMENTS_MUST_BE_MEASURED_ON_A_NEW_HOLDOUT_NOT_THIS_ONE",
+    "FINITE_HOLDOUT_RECALL_IS_NOT_OPEN_WORLD_COMPLETENESS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_12_CASES_REPRESENT_ALL_DOMAINS_LANGUAGES_OR_PROVIDERS",
+    "NO_OPEN_WORLD_COMPLETENESS_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
