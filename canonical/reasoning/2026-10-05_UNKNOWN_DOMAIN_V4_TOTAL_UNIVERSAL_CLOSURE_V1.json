@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "receipt_id": "UNKNOWN-DOMAIN-V4-TOTAL-EXACT-UNIVERSAL-CLOSURE-20261005-V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "real_objective": "Eliminate the Unknown-Domain fresh-reality dependency only if the original universal scope is actually proved.",
+  "governing_invariants": [
+    "CORRECTNESS_FIRST",
+    "NO_SCOPE_WEAKENING",
+    "NO_DUPLICATE_EXECUTION",
+    "ZERO_INCREMENTAL_SPEND",
+    "FAIL_CLOSED_PROMOTION"
+  ],
+  "material_premises": [
+    "V2 universal proof is false due to an exact IEEE-754 ADD2 role-order counterexample.",
+    "Candidate V3 repairs that exact semantic bug using visible role-sign orientation.",
+    "V1/V2 truncated opaque identifiers do not support a universal injectivity claim over every secret.",
+    "Structural-permutation Generator V3 removes identifier collision assumptions for every accepted input.",
+    "PR1901 avoids collisions by rejecting bad namespaces, which weakens the original total-input quantifier.",
+    "No open carrier found before this action composed both exact-float Candidate V3 and structural-permutation Generator V3."
+  ],
+  "evidence_refs": [
+    "Brain #1858",
+    "#1889",
+    "#1894",
+    "#1901",
+    "#1909",
+    "candidate_v3@8df7f13455b710623806a8219174b397a2c3c442",
+    "generator_v3@8b855851b8a0fec3a0811c5033cc4ea6d2436954"
+  ],
+  "conclusion": "The minimum sufficient zero-reality route is the conjunction of the two complementary repairs, not either repair alone and not a quantifier-weakened fail-closed wrapper.",
+  "selected_route": "CANDIDATE_V3_EXACT_FLOAT_PLUS_STRUCTURAL_PERMUTATION_GENERATOR_V3",
+  "rejected_material_alternatives": [
+    {
+      "route": "PR1901",
+      "reason": "Scope weakens to successfully emitted populations."
+    },
+    {
+      "route": "PR1894",
+      "reason": "Uses Candidate V2 and reopens the one-ulp ADD2 failure."
+    },
+    {
+      "route": "PR1909",
+      "reason": "Uses V2 identifier construction and leaves universal collision totality unproved."
+    }
+  ],
+  "uncertainties": [
+    "Independent verification has not yet passed.",
+    "Separate Root3/acceptance reduction remains required after theorem verification."
+  ],
+  "assumptions": [
+    "Exact content-bound Python 3.12 semantics are the evaluator semantics."
+  ],
+  "non_goals": [
+    "No open-world generalization.",
+    "No acceptance/capability/ownership credit in this PR.",
+    "No production execution."
+  ],
+  "next_action": "Open one independent verifier for this exact conjunction; on PASS run the separate scope/acceptance reducer, otherwise preserve the counterexample and fail closed.",
+  "supersession_conditions": [
+    "Any bound subject blob changes.",
+    "Independent verifier finds a counterexample.",
+    "A stronger verified route subsumes this exact scope."
+  ],
+  "supersedes": null,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
