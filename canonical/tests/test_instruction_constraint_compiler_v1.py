@@ -28,6 +28,16 @@ class InstructionConstraintCompilerTests(unittest.TestCase):
         ok, _ = validate_response(out["response"], compile_constraints("Use at least 5 unique words in the response."))
         self.assertTrue(ok)
 
+    def test_forbidden_literal_not_misparsed_as_required(self):
+        c = compile_constraints('Do not include the word "omega".')
+        self.assertEqual(c.required_literals, ())
+        self.assertEqual(c.forbidden_literals, ("omega",))
+
+    def test_exact_numbers_inside_word_budget(self):
+        out = synthesize_formal_only("Use exactly 5 words and include exactly 2 numbers.")
+        self.assertEqual(out["status"], "FORMAL_CONSTRAINTS_SATISFIED_SEMANTIC_SEED_STILL_REQUIRED")
+        self.assertEqual(len(out["response"].split()), 5)
+
     def test_no_constraint_route_blocks(self):
         out = synthesize_formal_only("Explain photosynthesis.")
         self.assertEqual(out["status"], "BLOCKED")
