@@ -1,0 +1,51 @@
+name: H100 zero-learned primitive repair V1
+
+on:
+  push:
+    branches:
+      - research/h100-proposal-measurement-current-v1
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_parametric_unary_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_parametric_unary_v1.py'
+      - 'canonical/runtime/h100_zero_learned_primitive_repair_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_primitive_repair_v1.py'
+      - '.github/workflows/h100-zero-learned-primitive-repair-v1.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_parametric_unary_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_parametric_unary_v1.py'
+      - 'canonical/runtime/h100_zero_learned_primitive_repair_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_primitive_repair_v1.py'
+      - '.github/workflows/h100-zero-learned-primitive-repair-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: h100-zero-learned-primitive-repair-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-and-replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run fresh-parameter and contract tests
+        run: |
+          python -m unittest canonical.tests.test_h100_zero_learned_parametric_unary_v1 -v
+          python -m unittest canonical.tests.test_h100_zero_learned_primitive_repair_v1 -v
+      - name: Replay PERIODIC_SINE
+        run: python canonical/runtime/h100_zero_learned_primitive_repair_v1.py --task PERIODIC_SINE --require-useful
+      - name: Replay EXPONENTIAL
+        run: python canonical/runtime/h100_zero_learned_primitive_repair_v1.py --task EXPONENTIAL --require-useful
+      - name: Replay SIGN_STEP
+        run: python canonical/runtime/h100_zero_learned_primitive_repair_v1.py --task SIGN_STEP --require-useful

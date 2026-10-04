@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_H100_PROPOSAL_MEASUREMENT_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_FIXED_AND_ANYTIME_PROPOSAL_MEASUREMENT_BYTES__ZERO_CREDIT",
+  "subject": {
+    "fixed_runtime": {
+      "path": "canonical/runtime/h100_proposal_probability_estimator_v1.py",
+      "git_blob_sha": "ca0d56ac568639009a7b2c2c90ae1d17840d3676"
+    },
+    "fixed_tests": {
+      "path": "canonical/tests/test_h100_proposal_probability_estimator_v1.py",
+      "git_blob_sha": "2e48403e2ad949f4f89399fc57b993f78b908da3"
+    },
+    "fixed_governance": {
+      "path": "canonical/governance/H100_PROPOSAL_PROBABILITY_ESTIMATOR_CANDIDATE_V1.json",
+      "git_blob_sha": "00e6f226f8c46ed423db1edc63106322b8fd833f"
+    },
+    "anytime_runtime": {
+      "path": "canonical/runtime/h100_anytime_proposal_confidence_v1.py",
+      "git_blob_sha": "f8e4bf51f758c7c4c89c5e5d899d8f7e756c767f"
+    },
+    "anytime_tests": {
+      "path": "canonical/tests/test_h100_anytime_proposal_confidence_v1.py",
+      "git_blob_sha": "03384f1c71d5211d06ae3194b820884d3ae04d82"
+    },
+    "anytime_governance": {
+      "path": "canonical/governance/H100_ANYTIME_PROPOSAL_CONFIDENCE_CANDIDATE_V1.json",
+      "git_blob_sha": "845c03bb4e903943de6a725255ccaf7d23b10b81"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1734,
+    "verifier_head_sha": "d889dc8dfee58d9c313be4cc4290435410206e92",
+    "merge_commit": "4e52fa80ddf5c1b5b46b77566d35bb2864c40960",
+    "workflow_run_id": 37185239599,
+    "workflow_job_id": 111385684018,
+    "conclusion": "success",
+    "verifier_path": "verify_h100_proposal_probability_v1.py",
+    "verifier_git_blob_sha": "4a7ca0f6d644c09fe1a3a2d0d531eb4527d1fac9",
+    "workflow_path": ".github/workflows/verify-h100-proposal-probability-v1.yml",
+    "workflow_git_blob_sha": "9545248c2881be92aace118c8c84bbfe1bf13028"
+  },
+  "verified": {
+    "exact_subject_blobs": true,
+    "copied_subject_tests_pass": true,
+    "fixed_sample_exact_clopper_pearson": true,
+    "anytime_alpha_spending_identity": true,
+    "anytime_exact_clopper_pearson_each_time": true,
+    "first_crossing_immutability": true,
+    "optional_stopping_bias_control": "PASS_WITH_SUMMABLE_TWO_SIDED_ALPHA_SPENDING",
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_PROPOSAL_PROBABILITY_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

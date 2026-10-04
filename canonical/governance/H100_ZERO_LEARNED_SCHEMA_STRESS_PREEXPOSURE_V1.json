@@ -1,0 +1,167 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_SCHEMA_STRESS_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_COMPILER_OUTCOMES__PUBLIC_SYNTHETIC_NONTERMINAL__ZERO_CREDIT",
+  "objective": "TEST_WHETHER_RAW_TEXT_AND_TOOL_TRACE_OBSERVATIONS_CAN_BE_COMPILED_INTO_TYPED_NUMERIC_ROWS_WITH_ZERO_PERSISTENT_LEARNED_BYTES",
+  "task_count": 8,
+  "outcome_definition": {
+    "useful_candidate": "COMPILER_RETURNS_EXACT_EXPECTED_INPUT_FIELD_ORDER_TARGET_FIELD_AND_ALL_EXPECTED_NUMERIC_ROWS_WITHOUT_DROPPING_OR_INVENTING_VALUES",
+    "all_tasks_conjunctive": true,
+    "partial_credit": false
+  },
+  "tasks": [
+    {
+      "task_id": "KV_SENTENCES",
+      "format": "FREE_TEXT_KEY_VALUE",
+      "expected_inputs": [
+        "x",
+        "z"
+      ],
+      "target": "y",
+      "payload": [
+        "Observation 1: x=1.0, z=-2.0, y=3.5",
+        "Observation 2: x=2.5, z=0.0, y=4.0",
+        "Observation 3: x=-1.0, z=3.25, y=-0.5"
+      ]
+    },
+    {
+      "task_id": "WHEN_OBSERVED_SENTENCES",
+      "format": "FREE_TEXT_RELATIONAL",
+      "expected_inputs": [
+        "x"
+      ],
+      "target": "y",
+      "payload": [
+        "When x is -2.0, observed y is 4.0.",
+        "When x is 0.5, observed y is 0.25.",
+        "When x is 3.0, observed y is 9.0."
+      ]
+    },
+    {
+      "task_id": "CSV_TEXT",
+      "format": "CSV",
+      "expected_inputs": [
+        "x",
+        "z"
+      ],
+      "target": "y",
+      "payload": "x,z,y\n1.0,2.0,3.0\n-2.5,4.0,1.5\n0.0,-1.0,-1.0\n"
+    },
+    {
+      "task_id": "MARKDOWN_TABLE",
+      "format": "MARKDOWN_TABLE",
+      "expected_inputs": [
+        "x",
+        "z"
+      ],
+      "target": "y",
+      "payload": "| x | z | y |\n|---:|---:|---:|\n|1.0|2.0|3.0|\n|-1.0|4.0|3.0|\n|0.5|-0.5|0.0|"
+    },
+    {
+      "task_id": "JSON_ROWS",
+      "format": "JSON_ROWS",
+      "expected_inputs": [
+        "x",
+        "z"
+      ],
+      "target": "y",
+      "payload": [
+        {
+          "x": 1,
+          "z": 2,
+          "y": 3
+        },
+        {
+          "x": -1.5,
+          "z": 0.5,
+          "y": -1
+        },
+        {
+          "x": 4,
+          "z": -2,
+          "y": 2
+        }
+      ]
+    },
+    {
+      "task_id": "TOOL_TRACE_ARGUMENTS_RESULT",
+      "format": "TOOL_TRACE",
+      "expected_inputs": [
+        "x",
+        "z"
+      ],
+      "target": "y",
+      "payload": [
+        {
+          "tool": "measure",
+          "arguments": {
+            "x": 1,
+            "z": 2
+          },
+          "result": {
+            "y": 3
+          }
+        },
+        {
+          "tool": "measure",
+          "arguments": {
+            "x": -2,
+            "z": 0.5
+          },
+          "result": {
+            "y": -1.5
+          }
+        },
+        {
+          "tool": "measure",
+          "arguments": {
+            "x": 0.25,
+            "z": 0.75
+          },
+          "result": {
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "task_id": "JSONL_TOOL_TRACE",
+      "format": "JSONL_TOOL_TRACE",
+      "expected_inputs": [
+        "x"
+      ],
+      "target": "y",
+      "payload": "{\"tool\":\"probe\",\"arguments\":{\"x\":-2.0},\"result\":{\"y\":4.0}}\n{\"tool\":\"probe\",\"arguments\":{\"x\":0.5},\"result\":{\"y\":0.25}}\n{\"tool\":\"probe\",\"arguments\":{\"x\":3.0},\"result\":{\"y\":9.0}}\n"
+    },
+    {
+      "task_id": "MIXED_WHITESPACE_SIGN_SCI",
+      "format": "FREE_TEXT_KEY_VALUE",
+      "expected_inputs": [
+        "x",
+        "z"
+      ],
+      "target": "y",
+      "payload": [
+        "x = +1e-3 ; z = -2.5E+1 ; y = -2.4999e1",
+        "x=-4.2e+0; z=3e-1; y=-3.9",
+        "x = 0 ; z = +7.5 ; y = 7.5"
+      ]
+    }
+  ],
+  "hard_rules": [
+    "NO_LANGUAGE_MODEL_OR_EXTERNAL_LEARNED_PARSER",
+    "NO_RANDOM_SEARCH",
+    "NO_DYNAMIC_CODE_EXECUTION",
+    "NO_POST_HOC_TASK_CHANGE",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_OPEN_WORLD_NATURAL_LANGUAGE_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

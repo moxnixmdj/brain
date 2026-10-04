@@ -1,0 +1,73 @@
+name: H100 zero-learned novelty stress V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_NOVELTY_STRESS_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_NOVELTY_STRESS_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_novelty_stress_v1.py'
+      - 'canonical/runtime/h100_zero_learned_novelty_cell_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_novelty_stress_v1.py'
+      - 'canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py'
+      - 'canonical/runtime/h100_expression_tree_symbolic_regression_v1.py'
+      - '.github/workflows/h100-zero-learned-novelty-stress-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: h100-zero-learned-novelty-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest canonical.tests.test_h100_zero_learned_novelty_stress_v1 -v
+
+  task:
+    name: task-${{ matrix.task }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        task:
+          - AFFINE_2D
+          - POWER_RATIO
+          - RECIPROCAL_AFFINE
+          - NESTED_SATURATION
+          - LINEAR_PLUS_SATURATION
+          - CROSS_STABLE_RATIO
+          - DOUBLE_CROSS_STABLE_RATIO
+          - LOG1P_ABS
+          - RATIONAL_QUADRATIC
+          - PERIODIC_SINE
+          - EXPONENTIAL
+          - SIGN_STEP
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Try all three frozen zero-learned routes
+        shell: bash
+        run: |
+          set +e
+          python canonical/runtime/h100_zero_learned_novelty_cell_v1.py --task "${{ matrix.task }}" --route ZERO_LEARNED_MONOMIAL_V1 --require-useful
+          A=$?
+          python canonical/runtime/h100_zero_learned_novelty_cell_v1.py --task "${{ matrix.task }}" --route EXPRESSION_TREE_D2_W16 --require-useful
+          B=$?
+          python canonical/runtime/h100_zero_learned_novelty_cell_v1.py --task "${{ matrix.task }}" --route EXPRESSION_TREE_D4_W32 --require-useful
+          C=$?
+          set -e
+          if [ "$A" = "0" ] || [ "$B" = "0" ] || [ "$C" = "0" ]; then
+            exit 0
+          fi
+          exit 3

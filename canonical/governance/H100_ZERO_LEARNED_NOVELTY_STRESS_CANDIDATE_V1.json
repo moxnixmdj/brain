@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_NOVELTY_STRESS_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_PREEXPOSURE_RUNTIME_TEST_BYTES_BOUND__OUTCOMES_NOT_YET_OBSERVED__ZERO_CREDIT",
+  "objective": "RUN_THE_FIRST_CONTENT_ADDRESSED_ZERO_LEARNED_H100_NOVELTY_CENSUS_AFTER_FREEZING_ALL_TASKS_ROUTES_HOLDOUTS_AND_SUCCESS_THRESHOLDS",
+  "exact_bound_components": {
+    "canonical/governance/H100_ZERO_LEARNED_NOVELTY_STRESS_PREEXPOSURE_V1.json": "d5fe85f82a40b3eef2231167c6fbe8bed248bb1d",
+    "canonical/runtime/h100_zero_learned_novelty_stress_v1.py": "21f54300b9c2cffe95dd3ff8e845e87b0ce19831",
+    "canonical/tests/test_h100_zero_learned_novelty_stress_v1.py": "c07529006ad6c67678c201ccc8ef4fac1a63516b"
+  },
+  "chronology": {
+    "preexposure_commit": "1dc8ab672f4950339b41b11d3fb48d48755683b0",
+    "runtime_created_after_preexposure": true,
+    "tests_created_after_preexposure": true,
+    "outcomes_observed_before_candidate": false
+  },
+  "experiment": {
+    "tasks": 12,
+    "routes": 3,
+    "route_task_pairs": 36,
+    "persistent_learned_bytes": 0,
+    "external_learned_capability_calls_allowed": 0,
+    "hidden_terminal_cases": 0,
+    "holdout_nrmse_threshold": 1e-7,
+    "result_artifact": "h100-zero-learned-novelty-stress-v1"
+  },
+  "decision_rule": {
+    "first_priority": "IF_ANY_WITHIN_CURRENT_OPERATOR_CLOSURE_TASK_FAILS_ALL_ROUTES__FIX_SEARCH_OR_COMPOSITION_BEFORE_GRAMMAR_EXPANSION",
+    "second_priority": "OTHERWISE_EXPAND_THE_SMALLEST_OPERATOR_PRIMITIVE_SET_THAT_COVERS_FAILED_OUTSIDE_OPERATOR_TASKS",
+    "learned_state_escalation": "FORBIDDEN_FROM_THIS_EXPERIMENT_ALONE__ONLY_AFTER_NONLEARNED_REPAIRS_ARE_EXHAUSTED_AND_REMEASURED"
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_GENERALIZATION_CLAIM",
+    "NO_MYSTERYMECHANISM_SCORE_CLAIM",
+    "NO_TERMINAL_ACCEPTANCE_CREDIT",
+    "NO_LEARNED_CORE_NECESSITY_CLAIM_FROM_ONE_STRESS_POPULATION"
+  ],
+  "authority": {
+    "public_synthetic_research_execution": true,
+    "terminal_execution": false,
+    "promotion": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}

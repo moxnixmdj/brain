@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_PARAMETRIC_PRIMITIVE_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_IF_MERGED__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_LEARNED_GATE1_PRIMITIVE_EXPANSION__ZERO_CREDIT",
+  "objective": "ACTIVATE_THE_INDEPENDENTLY_VERIFIED_ZERO_LEARNED_PARAMETRIC_UNARY_LAYER_AS_AN_H100_GATE1_CANDIDATE_GENERATION_MECHANISM_AFTER_IT_REMOVED_ALL_THREE_PREEXPOSED_PHASE1_OPERATOR_RESIDUALS",
+  "runtime": {
+    "path": "canonical/runtime/h100_zero_learned_parametric_unary_v1.py",
+    "git_blob_sha": "6a77f80e2cf01b079fcf7b688689d08a11b47c32",
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0
+  },
+  "verification": {
+    "path": "canonical/verification/H100_ZERO_LEARNED_PRIMITIVE_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1745,
+    "workflow_run_id": 37186784210,
+    "conclusion": "success"
+  },
+  "operative_scope": [
+    "LINEAR_TREND_PLUS_PARAMETERIZED_SINUSOID",
+    "ABS_INPUT_EXPONENTIAL_WITH_FITTED_RATE",
+    "AFFINE_THRESHOLD_STEP_WITH_FITTED_BOUNDARY"
+  ],
+  "cumulative_preexposed_stress": "12_OF_12_SOLVED_WITH_ZERO_PERSISTENT_LEARNED_BYTES_ACROSS_EXISTING_AND_NEW_ZERO_LEARNED_ROUTES",
+  "next_structural_residuals": [
+    "RAW_NATURAL_LANGUAGE_OR_ARBITRARY_TOOL_TRACE_TO_TYPED_NUMERIC_SCHEMA_COMPILATION",
+    "OPEN_WORLD_PROPOSAL_PROBABILITY_MEASUREMENT_ON_PREEXPOSED_NOVEL_TASKS",
+    "GENERAL_OPERATOR_CLASSES_BEYOND_THE_FINITE_PREEXPOSED_STRESS_POPULATION"
+  ],
+  "authority": {
+    "candidate_generation": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "hard_rules": [
+    "FINITE_STRESS_CLOSURE_IS_NOT_OPEN_WORLD_COMPLETENESS",
+    "ZERO_LEARNED_STRESS_SUCCESS_CREATES_NO_TERMINAL_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "DO_NOT_ADD_LEARNED_STATE_WHILE_CURRENT_OBSERVED_RESIDUAL_HAS_AN_UNFALSIFIED_ZERO_LEARNED_ROUTE",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
