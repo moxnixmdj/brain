@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LANGUAGE_EXCEPTION_CARRIER_V2_PRECOMMIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__V2_EXACT_DETECTOR_BUCKET_REPAIR__ZERO_CREDIT__INDEPENDENT_RUNTIME_VERIFICATION_PENDING",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "purpose": "Freeze the corrected V2 private-use language-exception carrier before any independent runtime outcome so a pass can delete the 30-language template axis without post-outcome rule changes.",
+  "supersedes_for_v2_subject": {
+    "path": "canonical/governance/LIVEBENCH_LANGUAGE_EXCEPTION_CARRIER_PRECOMMIT_20261005_V1.json",
+    "reason": "V1 gate binds the falsified ASCII-letter counter; V2 uses the exact pinned detector A..z bucket and requires a new frozen subject."
+  },
+  "frozen_subjects": {
+    "carrier_path": "canonical/runtime/livebench_union25_language_exception_carrier_v2.py",
+    "carrier_git_blob_sha": "6d708be971ea8ea5e3aa5ada6dfd65abfd83bc64",
+    "carrier_test_path": "canonical/tests/test_livebench_union25_language_exception_carrier_v2.py",
+    "carrier_test_git_blob_sha": "b4742cb30ba0c27b8a1c61dc662582f1ee708ee3"
+  },
+  "pinned_runtime": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_path": "livebench/if_runner/instruction_following_eval/instructions.py",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "langdetect_repository": "Mimino666/langdetect",
+    "langdetect_commit": "5071871742170034557c0e6ec8d6e410f3d9652f",
+    "detector_blob": "cc831a0e7530d49fa9b544c9b779ba075ffdbe5c",
+    "detector_factory_blob": "aa5a7b24b46b460d6faece5e4afcd23f7178a578",
+    "ngram_blob": "ee82e38f73aadbf118ec03a6342c328d808539d2",
+    "package_version": "1.0.9"
+  },
+  "exact_success_gate": [
+    "ALL_FROZEN_SUBJECT_AND_PUBLIC_RUNTIME_BLOBS_MATCH",
+    "V2_STATIC_VERIFY_PASSES",
+    "PINNED_DETECTOR_CLEANING_REMOVES_EVERY_A_TO_z_CHARACTER_AFTER_V2_DOMINANCE",
+    "U_E000_UNIGRAM_BIGRAM_AND_TRIGRAM_HAVE_ZERO_PROFILE_FEATURE_MATCHES",
+    "DETECT_RAISES_LANGDETECTEXCEPTION_BEFORE_RANDOM_TRIALS_FOR_ALL_ADVERSARIAL_PAYLOADS",
+    "PINNED_RESPONSE_LANGUAGE_CHECKER_EXCEPTION_BRANCH_RETURNS_TRUE",
+    "PINNED_ENGLISH_UPPER_AND_LOWER_CHECKER_EXCEPTION_BRANCH_RETURNS_TRUE",
+    "NEAR_WINDOW_VALID_CASE_STAYS_BELOW_10000_AND_RAISES_EXCEPTION",
+    "OVER_WINDOW_CONSTRUCTION_FAILS_CLOSED",
+    "ZERO_TERMINAL_ROWS_HIDDEN_KWARGS_TARGET_RESPONSES_OR_TARGET_SCORES"
+  ],
+  "adversarial_payload_classes": [
+    "EMPTY",
+    "ASCII_LOWER",
+    "ASCII_UPPER",
+    "A_TO_z_GAP_CHARACTERS",
+    "DIGITS_AND_PUNCTUATION",
+    "LIVEBENCH_STRUCTURAL_SCAFFOLD",
+    "KEYWORD_AND_LETTER_FREQUENCY_STYLE",
+    "NEAR_DETECTOR_WINDOW"
+  ],
+  "promotion_rule": "ONLY_AN_INDEPENDENT_POST_FREEZE_CONTENT_BOUND_RUNTIME_PASS_MAY_PROMOTE_V2_AS_A_COMPOSITION_PRIMITIVE__LIVEBENCH_ACCEPTANCE_REMAINS_SEPARATE",
+  "failure_rule": "ANY_SURVIVING_PROFILE_FEATURE_DETECTION_CHECKER_FALSE_TRUNCATION_OR_BLOB_MISMATCH_FAILS_CLOSED",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_POINTWISE_OPTIMALITY_CLAIM",
+    "NO_TERMINAL_COMPLETION_CLAIM"
+  ]
+}
