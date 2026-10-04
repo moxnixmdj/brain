@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_UNION25_SEMANTIC_MINIMUM_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__UNION25_DELTA_REDUCED_TO_SMALL_SEMANTIC_CORE__INDEPENDENT_PUBLIC_RUNNER_PENDING__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "pinned_public_source": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2"
+  },
+  "canonical_bindings": {
+    "union25_archetypes": {
+      "path": "canonical/runtime/livebench_union25_archetypes_v1.py",
+      "git_blob_sha": "8c68e63bbc1e1b843f076dbcd8c4bfae11d4cc2a"
+    },
+    "mandatory_loss_lower_bound": {
+      "path": "canonical/runtime/livebench_union25_mandatory_loss_v1.py",
+      "git_blob_sha": "0f7f22e3ac694d1181e7956ed6552cee376c9d21"
+    },
+    "mandatory_loss_tests": {
+      "path": "canonical/tests/test_livebench_union25_mandatory_loss_v1.py",
+      "git_blob_sha": "45587eae3a2cd57ae11535053f1bbddbb9344910"
+    },
+    "verified_legacy25_compiler": {
+      "path": "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py",
+      "git_blob_sha": "20421dfa016584b202b194afd3f82c9bd46a1f23"
+    },
+    "verified_legacy25_single_checker_witnesses": {
+      "path": "canonical/runtime/livebench_legacy25_single_contract_witness_v1.py",
+      "git_blob_sha": "e927c05071bb4342b41fb9d5be07cc32ea82e820"
+    }
+  },
+  "exact_reduction": {
+    "full_registry_compatible_sets_1_to_5": 14559,
+    "already_closed_active15_sets": 928,
+    "union25_delta_structures": 13631,
+    "delta10_internal_extension_kernels": 156,
+    "extra_bearing_routes": {
+      "GENERAL": 13614,
+      "TWO_RESPONSES": 12,
+      "REPEAT_PROMPT": 4,
+      "CONSTRAINED_SINGLETON": 1
+    },
+    "exact_single_family_support": "25_OF_25_VISIBLE_COMPILATION_AND_SINGLE_CHECKER_CONSTRUCTION_ALREADY_INDEPENDENTLY_VERIFIED",
+    "load_bearing_semantic_family_core": {
+      "families": [
+        "keywords:frequency",
+        "keywords:letter_frequency",
+        "language:response_language",
+        "change_case:capital_word_frequency",
+        "change_case:english_capital",
+        "change_case:english_lowercase"
+      ],
+      "conflict_compatible_nonempty_core_signatures": 19,
+      "size_histogram": {
+        "1": 6,
+        "2": 9,
+        "3": 4
+      }
+    },
+    "zero_lexical_footprint_decorators": {
+      "detectable_content:number_placeholders": {
+        "max_public_parameter": 4,
+        "witness_atom": "[]",
+        "reason": "PINNED_PLACEHOLDER_REGEX_COUNTS_EMPTY_BRACKETS; ATOM_HAS_ZERO_WORD_AND_LETTER_FOOTPRINT"
+      },
+      "detectable_format:number_highlighted_sections": {
+        "max_public_parameter": 4,
+        "witness_atom": "*#*",
+        "reason": "PINNED_HIGHLIGHT_REGEX_ACCEPTS_NONEMPTY_PUNCTUATION_BODY; ATOM_HAS_ZERO_WORD_AND_LETTER_FOOTPRINT"
+      }
+    },
+    "conditionally_factored_global_filter": {
+      "family": "punctuation:no_comma",
+      "general_rule": "COMMA_FREE_CONSTRUCTION_ALPHABET",
+      "exact_exception": "combination:repeat_prompt",
+      "exception_condition": "PROMPT_TO_REPEAT_CONTAINS_COMMA",
+      "consequence": "REPEAT_AND_NO_COMMA_CANNOT_BOTH_PASS_WHEN_THE_REQUIRED_COPIED_PREFIX_CONTAINS_A_COMMA"
+    }
+  },
+  "newly_frozen_sound_mandatory_loss_rules": [
+    "REPEAT_PREFIX_COMMA_VS_NO_COMMA",
+    "LOWERCASE_ENGLISH_VS_SECTION_HEADING_CASE",
+    "UPPERCASE_ENGLISH_VS_MIXED_CASE_SECTION_HEADING",
+    "CAPITAL_WORD_UPPER_BOUND_VS_UPPERCASE_SECTION_FLOOR"
+  ],
+  "key_breakthrough": "THE_UNION25_DELTA_IS_NOT_A_13631_CASE_SEMANTIC_SEARCH. AFTER STRUCTURAL_FACTORIZATION_AND_ZERO_FOOTPRINT_DECORATION_REMOVAL, THE_LOAD_BEARING_EXTRA_FAMILY INTERACTION CORE HAS_ONLY_19_COMPATIBLE_SIGNATURES, PLUS_EXPLICIT_SMALL_SPECIAL_ROUTE_OBLIGATIONS.",
+  "public_independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2170,
+    "branch": "verify/livebench-union25-delta10-factorization-20261005-v1",
+    "verifier_head_sha": "f0cfcce630fdd5064c8c2b1f1e3be7172975ece0",
+    "state": "PENDING",
+    "claims_to_verify": [
+      "14559_928_13631_156_EXACT_FACTORIZATION",
+      "19_HARD_CORE_STRUCTURAL_PROJECTION",
+      "ZERO_LEXICAL_FOOTPRINT_PLACEHOLDER_AND_HIGHLIGHT_ATOMS",
+      "FOUR_SOUND_NEW_MANDATORY_LOSS_RULES"
+    ]
+  },
+  "next_minimum_action": [
+    "WAIT_FOR_NO_CREDIT_INDEPENDENT_RUNNER_VERDICT_ON_PR2170_WHILE_CONTINUING_LOCALLY",
+    "EXTEND_EXISTING_ACTIVE15_LEXICAL_QUOTIENT_TO_A_THREE_COUNT_MANDATORY_FOOTPRINT_VECTOR__KEYWORD_REGEX_OCCURRENCES__TARGET_LETTER_OCCURRENCES__UPPERCASE_WORD_COUNT",
+    "CLOSE_LANGUAGE_AND_GLOBAL_CASE_MODES_OVER_THE_19_HARD_CORE_SIGNATURES",
+    "THEN_RUN_EXACT_PINNED_POSTVALIDATION_AND_PROMOTE_LIVEBENCH_ONLY_IF_POINTWISE_OPTIMALITY_COVERS_PUBLIC_UNION25"
+  ],
+  "hard_nonclaims": [
+    "THE_19_CORE_SIGNATURES_ARE_NOT_YET_A_COMPLETE_POINTWISE_OPTIMALITY_PROOF",
+    "ZERO_LEXICAL_FOOTPRINT_DOES_NOT_BY_ITSELF_PROVE_SAFE_PLACEMENT_IN_EVERY_STRUCTURAL_WRAPPER",
+    "THE_FOUR_MANDATORY_LOSS_RULES_ARE_SOUND_BUT_NOT_CLAIMED_COMPLETE",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_GOAL_COMPLETION_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_read": 0,
+    "hidden_terminal_kwargs_read": 0,
+    "target_scores_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
