@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_MINIMUM_DELTA_ACQUISITION_V3_CANDIDATE",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ROOT1_MINIMUM_DELTA_COMPILER__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "scope": "ROOT1_CAPABILITY_MISSING_ONLY",
+  "objective": "Collapse Root1 work to the minimum missing capability delta; search only uncovered primitives; select exact minimum admissible zero-cost route cover; seal the frozen envelope only with complete lossless independently verified primitive coverage.",
+  "authority": {
+    "predecessor": "canonical/governance/ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2_ACTIVATION_V1.json",
+    "current_root1_truth": "ZERO_POSITIVELY_ESTABLISHED_CAPABILITY_GAPS__ROOT1_INACTIVE"
+  },
+  "implementation": {
+    "runtime_path": "canonical/runtime/root1_minimum_delta_acquisition_v3.py",
+    "tests_path": "canonical/tests/test_root1_minimum_delta_acquisition_v3.py"
+  },
+  "mathematical_objective": {
+    "posterior_close_probability": "Beta(successes+1/2, failures+1/2) posterior mean",
+    "discovery_value": "(P_CLOSE*EXPECTED_CLOSURE_MASS + INFORMATION_GAIN + TRANSFER_GAIN + PROOF_GAIN)/(TIME + RISK + CORRELATION_PENALTY)",
+    "acquisition_problem": "EXACT_MINIMUM_WEIGHT_ADMISSIBLE_SET_COVER_ON_RESIDUAL_PRIMITIVES",
+    "residual": "REQUIRED - (VERIFIED_OWNED UNION VERIFIED_TRANSFERABLE UNION VERIFIED_COMPOSABLE UNION VERIFIED_INTERNALIZABLE_ZERO_COST_ROUTES)"
+  },
+  "required_source_classes": [
+    "CANONICAL_BRAIN_AND_PRIOR_RECEIPTS",
+    "SOURCE_CODE_AND_PACKAGE_REGISTRIES",
+    "OFFICIAL_DOCUMENTATION_AND_SPECIFICATIONS",
+    "PAPERS_AND_CITATION_GRAPHS",
+    "ISSUES_PULL_REQUESTS_AND_TECHNICAL_DISCUSSIONS",
+    "COMMUNITY_AND_SOCIAL_DISCOVERY_LEADS"
+  ],
+  "seal_gate": [
+    "FROZEN_PRIMITIVE_DECOMPOSITION_COMPLETE",
+    "FROZEN_PRIMITIVE_DECOMPOSITION_LOSSLESS",
+    "INDEPENDENT_VERIFICATION_PASS",
+    "EVERY_PRIMITIVE_HAS_VERIFIED_OWNED_OR_VERIFIED_SAFE_DURABLE_INTERNALIZABLE_OWNERSHIP_COMPATIBLE_ZERO_COST_ROUTE"
+  ],
+  "hard_rules": [
+    "ROOT1_INACTIVE_MEANS_ZERO_ACQUISITION_ACTIONS",
+    "UNKNOWN_OR_UNPROVED_IS_NOT_MISSING",
+    "ONLY_RESIDUAL_PRIMITIVES_ENTER_DISCOVERY",
+    "PAID_OR_UNSAFE_OR_NONINTERNALIZABLE_ROUTES_CANNOT_CLOSE_ROOT1",
+    "CORRELATED_SEARCHES_ARE_PENALIZED",
+    "SEARCH_STOP_REQUIRES_VALID_ROUTE_OR_REQUIRED_ORTHOGONAL_SOURCE_EXHAUSTION_ACTION_INVARIANCE",
+    "NO_CAPABILITY_ACCEPTANCE_FAMILY_OR_OWNERSHIP_CREDIT_FROM_THIS_CANDIDATE"
+  ],
+  "current_effect": {
+    "root1_positive_gap_count_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "fresh_reality_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false
+  }
+}\n
