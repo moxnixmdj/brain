@@ -1271,8 +1271,8 @@
     "total": 38,
     "authorized_acceptance_case_actions": [],
     "source": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-    "source_git_blob_sha": "4000854d577f7ab5f0146d21d16e91d017458431",
-    "state": "AUTHORITY_RECONCILED_AFTER_TOOL_DISCOVERY_PROMOTION__UNIVERSAL_SCOPE_COMPILED_INTO_CURRENT_EVIDENCE_ABI"
+    "source_git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8",
+    "state": "AUTHORITY_RECONCILED_POST_UNKNOWN_DOMAIN_V6__13_PROVED__25_UNRESOLVED__EXACT_ACCEPTANCE_LEDGER_BLOB_BOUND"
   },
   "tb4_threshold_execution": {
     "full_population_trial_slots": 330,
