@@ -22,7 +22,7 @@ from typing import Any
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_HERMETIC_NLTK_BINDING_V1"
 
-PINNED_PYTHON = (3, 12)
+PINNED_PYTHON = (3, 12, 10)
 PINNED_NLTK_VERSION = "3.10.3"
 PINNED_NLTK_WHEEL_SHA256 = "ff9598a8e20518ee0d557745890cc4435b9578489e2dcbc69c4f81fa060caf7c"
 PINNED_NLTK_DATA_COMMIT = "550b6625bcef1f2abff2ff770a5a0d272c9c6b2a"
@@ -124,10 +124,10 @@ def verify_and_bind(
     nltk_wheel_path: str | Path,
     nltk_data_root: str | Path,
 ) -> dict[str, Any]:
-    if tuple(sys.version_info[:2]) != PINNED_PYTHON:
+    if tuple(sys.version_info[:3]) != PINNED_PYTHON:
         raise HermeticNLTKError(
             "PYTHON_VERSION_DRIFT:"
-            + ".".join(map(str, sys.version_info[:2]))
+            + ".".join(map(str, sys.version_info[:3]))
         )
 
     observed_version = importlib.metadata.version("nltk")
@@ -170,7 +170,7 @@ def verify_and_bind(
     return {
         "schema": SCHEMA,
         "status": "PASS__HERMETIC_NLTK_PACKAGE_AND_PUNKT_BYTES_BOUND",
-        "python_major_minor": list(PINNED_PYTHON),
+        "python_version": list(PINNED_PYTHON),
         "nltk_version": observed_version,
         "nltk_wheel_sha256": wheel_sha,
         "nltk_data_commit": PINNED_NLTK_DATA_COMMIT,
