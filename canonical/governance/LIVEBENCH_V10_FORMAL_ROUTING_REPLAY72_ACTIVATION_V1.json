@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_V10_FORMAL_ROUTING_REPLAY72_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE__ONE_USE_REPLAY72_ONLY__CURRENT_VERIFIED_COMPILER__ZERO_CREDIT",
+  "status": "REVOKED_FAIL_CLOSED__ACTIVATION_BINDING_INCOMPLETE__ZERO_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "candidate": "canonical/governance/LIVEBENCH_V10_FORMAL_ROUTING_REPLAY72_CANDIDATE_V1.json",
   "verification": {
@@ -32,8 +32,8 @@
     "aggregate_structural_histogram_only": true
   },
   "authority": {
-    "execution": true,
-    "replay_existing_prefix": true,
+    "execution": false,
+    "replay_existing_prefix": false,
     "new_case_exposure": false,
     "fresh_reality": false,
     "promotion": false,
@@ -44,11 +44,26 @@
     "DUPLICATE_OR_NON201_ABORT_BEFORE_DATASET_READ",
     "NO_CASE_73_OR_LATER",
     "NO_POLICY_WEAKENING",
-    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT"
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT",
+    "REVOKED_ACTIVATION_MUST_NOT_BE_USED_FOR_EXECUTION"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
     "new_terminal_cases_authorized": 0,
     "acceptance_credit_delta": 0
+  },
+  "revocation": {
+    "date": "2026-10-04",
+    "reason": "VERIFIED_LAUNCHER_ACCEPTED_ARBITRARY_40_HEX_ACTIVATION_BLOB_WITHOUT_AUTHENTICATING_EXACT_ACTIVATION_ARTIFACT",
+    "affected_launcher_git_blob_sha": "d7cd5b5c90f19ef02c1f27afa1629ed6af5500d9",
+    "one_use_claim_observed_before_revocation": false,
+    "replay_observed_before_revocation": false,
+    "repaired_launcher_candidate_git_blob_sha": "2d3b9ad4e3f4f02af56f402733a8d8bb04ab79c0",
+    "reactivation_requirements": [
+      "INDEPENDENT_VERIFY_REPAIRED_LAUNCHER_EXACT_BLOB",
+      "INDEPENDENT_VERIFY_EXACT_ACTIVATION_ARTIFACT_BINDING",
+      "RECONFIRM_ONE_USE_CLAIM_ABSENT",
+      "CREATE_NEW_CONTENT_ADDRESSED_ACTIVATION"
+    ]
   }
 }
