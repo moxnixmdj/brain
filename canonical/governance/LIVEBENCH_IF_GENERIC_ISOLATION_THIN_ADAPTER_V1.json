@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_GENERIC_ISOLATION_THIN_ADAPTER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__7_OF_8_THIN_ADAPTER_FIELDS_PROVED__ZERO_SPEND_CARRIER_RECEIPT_OPEN__FAIL_CLOSED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "objective": "Instantiate the independently verified generic precommit-isolation thin-adapter semantics for the exact frozen LiveBench IF fixed-bar route, while leaving zero-incremental-spend carrier evidence explicitly unresolved.",
+  "generic_theorem": {
+    "activation_path": "canonical/governance/GENERIC_PRECOMMIT_ISOLATION_THEOREM_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "89b3d8cbbc3b9e0822870ee803fb99c37a82d209",
+    "runtime_git_blob_sha": "58f2ae9c3f0ef0ac55da2e58d0ed81ae88560296"
+  },
+  "evidence": {
+    "comparator_route": {
+      "path": "canonical/governance/LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2.json",
+      "git_blob_sha": "7067a849585d9020f3d78aa374c0eeecb5078c8b"
+    },
+    "population_binding": {
+      "path": "canonical/governance/LIVEBENCH_IF_2026_06_25_RELEASE_POPULATION_RECONCILIATION_V2.json",
+      "git_blob_sha": "fa9acadf92826cff424d97f25b4094f60fed3571"
+    },
+    "hermetic_input_binding": {
+      "path": "canonical/governance/LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json",
+      "git_blob_sha": "5d0b876e07901b61f92c89b2257bd07790f53e60"
+    },
+    "brain_inference_adapter_public_verification": {
+      "path": "canonical/verification/ROOT2_LIVEBENCH_IF_ASTRA_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "7343b20409c5df874bd35c45db46045477d29e08"
+    }
+  },
+  "fixed_bar_semantics": {
+    "release": "2026-06-25",
+    "population_count": 200,
+    "threshold_percent": 65.7,
+    "comparator_model_key": "claude-opus-5-5-max-effort",
+    "rule": "This predicate is a public fixed numeric bar on the frozen population and deterministic IF scorer. The comparator effort label identifies the provenance of the frozen 65.7 bar; no new Opus execution is required for this predicate. Brain still must execute the exact frozen population/scorer/tool boundary with its precommitted candidate."
+  },
+  "thin_adapter_fields": {
+    "population_identity_verified": true,
+    "scorer_or_grader_equivalence_verified": true,
+    "effort_and_context_semantics_verified": true,
+    "tool_and_environment_boundary_verified": true,
+    "exact_comparator_identity_verified": true,
+    "no_proxy_substitution_verified": true,
+    "zero_incremental_spend_or_entitlement_verified": false,
+    "acceptance_rule_bound": true
+  },
+  "proved_field_count": 7,
+  "required_field_count": 8,
+  "exact_remaining_adapter_residual": [
+    "ZERO_INCREMENTAL_SPEND_OR_ALREADY_ENTITLED_CARRIER_RECEIPT_FOR_THE_EXACT_PRECOMMITTED_BRAIN_EXECUTION"
+  ],
+  "consequence_if_independently_verified": [
+    "DELETE_REPROOF_OF_POPULATION_SCORER_FIXED_BAR_EFFORT_PROVENANCE_TOOL_BOUNDARY_COMPARATOR_IDENTITY_NO_PROXY_AND_ACCEPTANCE_RULE_FOR_LIVEBENCH_IF_ISOLATION_ADAPTER",
+    "PRESERVE_ZERO_SPEND_CARRIER_RECEIPT_AS_THE_ONLY_THIN_ADAPTER_FIELD_RESIDUAL",
+    "PRESERVE_FULL_GENERIC_ISOLATION_INSTANTIATION_RECEIPT_FOR_EXACT_COMMITTED_BYTES_AND_CAUSAL_EDGES",
+    "PRESERVE_EXPLICIT_FRESH_REALITY_AUTHORITY_AS_SEPARATE_GATE",
+    "PRESERVE_BRAIN_SCORE_GE_65_7_AS_UNEXECUTED_RESULT"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE",
+    "NO_BENCHMARK_CASE_EXPOSURE",
+    "NO_ZERO_SPEND_CARRIER_CLAIM",
+    "NO_FULL_THIN_ADAPTER_PASS",
+    "NO_GENERIC_ISOLATION_INSTANTIATION_RECEIPT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
