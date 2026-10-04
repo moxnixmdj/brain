@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_PROMPT_INVERTER_PUBLIC_COVERAGE_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_TRUTH_REPAIR__PUBLIC_CLASSIC_IFEVAL_COVERAGE_FALSIFIES_UNIVERSAL_EXACT_DESCRIPTION_INVERSION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Fail-close the newly added prompt-only legacy IFEval inverter against a pinned public classic IFEval population without reading any frozen LiveBench terminal prompts, kwargs, responses, or scores.",
+  "subjects": {
+    "brain_inverter": {
+      "path": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py",
+      "git_blob_sha": "74904d2a00ed3f0bb2e8ab7787c59c0a8f828f7a",
+      "commit": "90345af832df8df8c89c2f7fefcdd70c29565bbd"
+    },
+    "public_classic_ifeval": {
+      "repository": "google-research/google-research",
+      "commit": "e49bbfe381c9c0e564b937f1c4e163a2273c65cc",
+      "path": "instruction_following_eval/data/input_data.jsonl",
+      "git_blob_sha": "cbe52f6eecf3986fdac745b4acba4da1408eb146",
+      "rows": 541
+    },
+    "pinned_livebench_legacy_scorer_source": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+      "registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+    }
+  },
+  "audit_method": {
+    "type": "SOURCE_EQUIVALENT_REGEX_RECOGNITION_AUDIT",
+    "description": "Reproduced the inverter's 25 public regex recognizers against each public classic IFEval prompt and compared recognized instruction families with the row's public instruction_id_list.",
+    "terminal_livebench_prompt_read": false,
+    "terminal_kwargs_read": false,
+    "terminal_response_read": false,
+    "terminal_score_read": false,
+    "public_classic_instruction_ids_used": true
+  },
+  "results": {
+    "public_rows": 541,
+    "public_instruction_instances": 834,
+    "recognized_instruction_instances": 42,
+    "instruction_instance_coverage_fraction": 0.050359712230215826,
+    "instruction_instance_coverage_percent": 5.0359712230215825,
+    "rows_with_all_public_instruction_ids_recognized": 10,
+    "row_full_coverage_fraction": 0.018484288354898338,
+    "row_full_coverage_percent": 1.8484288354898337
+  },
+  "representative_public_counterexamples": [
+    {
+      "instruction_id": "punctuation:no_comma",
+      "public_wording": "You are not allowed to use any commas in your response.",
+      "current_inverter_expected_shape": "In your entire response, refrain from the use of any commas.",
+      "consequence": "SAME_CHECKER_SEMANTICS__DIFFERENT_VISIBLE_GRAMMAR__CURRENT_REGEX_DOES_NOT_RECOGNIZE"
+    },
+    {
+      "instruction_id": "length_constraints:number_sentences",
+      "public_wording": "Use less than 5 sentences.",
+      "current_inverter_expected_shape": "Your response should contain less than 5 sentences.",
+      "consequence": "PARAMETER_IS_VISIBLE_BUT_CURRENT_FIXED_DESCRIPTION_REGEX_IS_NOT_PARAPHRASE_COMPLETE"
+    },
+    {
+      "instruction_id": "keywords:existence",
+      "public_wording": "The email must include the keywords \"correlated\" and \"experiencing\".",
+      "current_inverter_expected_shape": "Include keywords ['correlated', 'experiencing'] in the response.",
+      "consequence": "KEYWORDS_ARE_VISIBLE__SURFACE_FORM_DIFFERS"
+    },
+    {
+      "instruction_id": "detectable_format:json_format",
+      "public_wording": "I want the entire output in JSON format.",
+      "current_inverter_expected_shape": "Entire output should be wrapped in JSON format. You can use markdown ticks such as ```.",
+      "consequence": "STATIC_CHECKER_INTENT_VISIBLE__CURRENT_ANCHOR_TOO_NARROW"
+    }
+  ],
+  "truth_repair": {
+    "falsified": [
+      "CURRENT_SOURCE_DESCRIPTION_STRINGS_ARE_A_UNIVERSAL_VISIBLE_GRAMMAR_FOR_CLASSIC_IFEVAL_PROMPTS",
+      "LIVEBENCH_LEGACY_IFEVAL_PROMPT_INVERTER_V1_CAN_CURRENTLY_BE_TREATED_AS_25_OF_25_PROMPT_COVERAGE",
+      "PARAMETER_DERIVABILITY_FROM_BUILD_DESCRIPTION_IMPLIES_PARAMETER_DERIVABILITY_FROM_ARBITRARILY_PARAPHRASED_VISIBLE_PROMPTS"
+    ],
+    "preserved": [
+      "THE_LEGACY_REGISTRY_HAS_25_ACTIVE_CHECKER_TYPES",
+      "24_OF_25_CHECKER_TYPES_HAVE_SCORE_RELEVANT_PARAMETERS_RENDERABLE_OR_STATIC_AT_THE_CHECKER_SPECIFICATION_LEVEL",
+      "combination:repeat_prompt_HAS_A_SEPARATE_PUBLIC_PROMPT_ONLY_RECOVERY_ROUTE",
+      "THE_MISSING_PROBLEM_IS_VISIBLE_LANGUAGE_INVERSION_COVERAGE_NOT_HIDDEN_SCORER_SEMANTICS"
+    ]
+  },
+  "scheduling_effect": [
+    "DO_NOT_PROMOTE_OR_EXECUTE_THE_CURRENT_EXACT_DESCRIPTION_INVERTER_AS_A_UNIVERSAL_LEGACY_SUCCESSOR",
+    "BUILD_A_PARAPHRASE_TOLERANT_LEGACY_CONSTRAINT_PARSER_FROM_PUBLIC_CLASSIC_IFEVAL_VARIANTS_PLUS_PINNED_CHECKER_SEMANTICS",
+    "PROVE_PUBLIC_541_ROW_INSTRUCTION_ID_RECALL_AND_PARAMETER_RECOVERY_BEFORE_ANY_TERMINAL_USE",
+    "FAIL_CLOSED_ON_AMBIGUOUS_OR_CONFLICTING_PARSES",
+    "KEEP_FROZEN_LIVEBENCH_TERMINAL_PROMPTS_UNREAD_UNTIL_SEPARATE_AUTHORITY"
+  ],
+  "next_minimum_proof_target": {
+    "name": "PUBLIC_CLASSIC_IFEVAL_PARAPHRASE_COMPLETE_INVERTER",
+    "success_criterion": "541_OF_541_PUBLIC_ROWS_HAVE_ALL_PUBLIC_INSTRUCTION_IDS_RECOGNIZED_AND_ALL_SCORE_RELEVANT_ARGUMENTS_EXACTLY_RECONSTRUCTED_OR_PROVED_UNNECESSARY",
+    "reason": "This is the strongest zero-reality route to convert the 25-checker legacy scorer into a deterministic visible-prompt constraint compiler without assuming exact source-generated wording."
+  },
+  "hard_nonclaims": [
+    "PUBLIC_CLASSIC_5_04_PERCENT_INSTANCE_COVERAGE_DOES_NOT_ESTIMATE_FROZEN_LIVEBENCH_TERMINAL_COVERAGE",
+    "DOES_NOT_PROVE_THE_FROZEN_LIVEBENCH_PROMPTS_USE_THE_CLASSIC_PUBLIC_PARAPHRASES",
+    "DOES_NOT_PROVE_LEGACY_DISPATCH_COLLAPSE_UNTIL_ITS_SEPARATE_INDEPENDENT_VERIFIER_PASSES",
+    "DOES_NOT_CLAIM_NO_STRONGER_PARSER_ALREADY_EXISTS_ELSEWHERE",
+    "NO_LIVEBENCH_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
