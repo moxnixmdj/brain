@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_PRE_EXPOSURE_ISOLATION_PLAN_V1",
+  "candidate_sha256": "8f99aa371061160822670fc6f5da2ce3a01cc260063330ed6e5954a2cac68c9a",
+  "harness_sha256": "dcb03697e0f38d50933ca38650809fc80343737e4be3105966f2851e510c4b9e",
+  "scorer_sha256": "d500c0b8ad7bcf545800a3f815123bfcc955845fba4587d783d93a4f8750cfd1",
+  "environment_sha256": "4acea3a01cf7b6ac89c5134c269d7c20241cdce46f38487e6da9a3640ab49f6a",
+  "policy_sha256": "3e77340568dce7d6ff8f77f94de7e1fe38b85c705d88ba1067447f716a456e90",
+  "pre_reveal_observed_candidate_sha256": "8f99aa371061160822670fc6f5da2ce3a01cc260063330ed6e5954a2cac68c9a",
+  "pre_reveal_observed_harness_sha256": "dcb03697e0f38d50933ca38650809fc80343737e4be3105966f2851e510c4b9e",
+  "pre_reveal_observed_scorer_sha256": "d500c0b8ad7bcf545800a3f815123bfcc955845fba4587d783d93a4f8750cfd1",
+  "pre_reveal_observed_environment_sha256": "4acea3a01cf7b6ac89c5134c269d7c20241cdce46f38487e6da9a3640ab49f6a",
+  "pre_reveal_observed_policy_sha256": "3e77340568dce7d6ff8f77f94de7e1fe38b85c705d88ba1067447f716a456e90",
+  "commit_event_sequence": 10,
+  "pre_reveal_verification_event_sequence": 20,
+  "case_reveal_has_occurred": false,
+  "execution_has_started": false,
+  "evaluation_output_exists": false,
+  "independent_executor_bound": true,
+  "committed_components_immutable": true,
+  "candidate_mutation_blocked": true,
+  "unrelated_work_mutation_blocked": true,
+  "terminal_case_source_inaccessible_before_claim": true,
+  "reveal_step_requires_verified_activation": true,
+  "reveal_step_requires_verified_one_use_claim": true,
+  "reveal_step_requires_point_of_use_preflight_pass": true,
+  "outputs_bound_to_commitment_and_lease": true,
+  "write_only_escrow_sink_bound": true,
+  "result_read_blocked_until_zero_reality_fixed_point": true,
+  "post_execution_isolation_receipt_mandatory": true,
+  "fail_closed_on_any_component_drift": true,
+  "workflow_control_receipt": {
+    "path": "canonical/governance/SHADOW_WORKFLOW_CONTROL_CONTRACT_V1.json",
+    "git_blob_sha": "d2722e7759b8045178458e1e7a8ed7904954a36d"
+  },
+  "escrow_contract_receipt": {
+    "path": "canonical/governance/SHADOW_WRITE_ONLY_ESCROW_CONTRACT_V1.json",
+    "git_blob_sha": "3fde5a915dec9cadf138650536820c972a9b8fb1"
+  },
+  "commitment_sha256": "58ee189b9c035e3e7e96897193c2b6b9fa5b612a0394ca70d55bd0c562be5bca",
+  "plan_sha256": "9608157e7ef52fab08bc387bb19ccfb10001cbb5367849a9806d6b0e7df34b31"
+}
