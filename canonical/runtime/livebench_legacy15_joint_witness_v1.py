@@ -15,6 +15,7 @@ import re
 from typing import Any
 
 from canonical.runtime import livebench_legacy_visible_constraint_compiler_v4 as compiler
+from canonical.runtime import livebench_legacy15_slot_feasibility_v1 as feasibility
 from canonical.runtime.livebench_frozen_active_legacy15_v1 import ACTIVE_IDS
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_JOINT_WITNESS_V1"
@@ -279,6 +280,32 @@ def solve(prompt: str) -> dict[str, Any]:
     outside = sorted(set(ids) - set(ACTIVE_IDS))
     if outside:
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "error": "OUTSIDE_FROZEN_ACTIVE15:" + ",".join(outside), "response": None}
+
+    slot_state = feasibility.classify_visible_contracts(constraints)
+    if slot_state.get("status") == "PROVED_UNSAT":
+        return {
+            "schema": SCHEMA,
+            "status": "PROVED_UNSAT_VISIBLE_CONTRACTS",
+            "response": None,
+            "instruction_ids": ids,
+            "hard_unsat_reasons": list(slot_state.get("hard_unsat_reasons") or []),
+            "hidden_instruction_ids_used": False,
+            "hidden_kwargs_used": False,
+            "terminal_case_metadata_used": False,
+            "terminal_case_content_used": False,
+            "network_used": False,
+            "model_dependency_count": 0,
+            "acceptance_credit": False,
+            "semantic_capability_credit": False,
+        }
+    if str(slot_state.get("status", "")).startswith("FAIL_CLOSED"):
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "error": "SLOT_FEASIBILITY_" + str(slot_state.get("status")),
+            "response": None,
+            "instruction_ids": ids,
+        }
 
     try:
         json_c = _get_one(constraints, "detectable_format:json_format")
