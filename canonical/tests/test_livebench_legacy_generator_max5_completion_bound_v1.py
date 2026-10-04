@@ -25,7 +25,7 @@ def test_active15_composition_upper_bound_shrinks_to_size_at_most_five():
 def test_exact_opus_mass_and_full_case_sufficiency():
     out = b.prove()["derived"]
     assert out["target_percent"] == "65.73775"
-    assert out["target_score_mass"] == "5259/40"
+    assert out["target_score_mass"] == "262951/2000"
     assert out["fully_completed_rows_sufficient"] == 132
 
 
