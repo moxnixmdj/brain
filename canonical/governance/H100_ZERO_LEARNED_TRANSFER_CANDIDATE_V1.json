@@ -6,7 +6,8 @@
   "exact_bound_components": {
     "canonical/governance/H100_ZERO_LEARNED_TRANSFER_PREEXPOSURE_V1.json": "0aedbdff8520e5f1d274b490b274c756532ace4e",
     "canonical/runtime/h100_zero_learned_transfer_v1.py": "1bf0ebd74e9d413a9301031d33e619b397484e3c",
-    "canonical/tests/test_h100_zero_learned_transfer_v1.py": "6213195d5c3487a9bde844a78291a76e25b0a29b"
+    "canonical/tests/test_h100_zero_learned_transfer_v1.py": "6213195d5c3487a9bde844a78291a76e25b0a29b",
+    ".github/workflows/h100-zero-learned-transfer-v1.yml": "7324cf931bd436e06cfb281cabcdfb62203634a3"
   },
   "measurement": {
     "p": "EXACT_SUCCESS_MASS_UNDER_UNIFORM_WITH_REPLACEMENT_SAMPLING_FROM_A_FROZEN_FINITE_PROPOSAL_CATALOG",
