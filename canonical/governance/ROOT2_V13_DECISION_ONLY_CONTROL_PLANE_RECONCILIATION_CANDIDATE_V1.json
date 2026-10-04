@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V13_DECISION_ONLY_CONTROL_PLANE_RECONCILIATION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_SUBJECT_BLOBS_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT__NO_EXECUTION_AUTHORITY",
+  "objective": "RECONCILE_CANONICAL_ROOT_AND_CURRENT_TERMINAL_AUTHORITY_TO_HIGHEST_WHOLE_FRONTIER_VERIFIED_AND_STAGED_ROOT2_V13_PLUS_ACTIVE_DECISION_ONLY_SETTLEMENT__DELETE_STALE_V10_INSTRUCTION__PRESERVE_ARENA_TRUTH_REPAIR",
+  "source_main": "eb662bc78f851249aacbee1bd6b209cc5a171042",
+  "subjects": {
+    "root": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "aff9dd642ce05f174374b2c9e2c7d0b282f257a2"
+    },
+    "current_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "2ac73aee0efd81fca9a66413ecf1097b7b049d97"
+    },
+    "guard": {
+      "path": "canonical/runtime/root2_v13_decision_only_control_plane_guard_v1.py",
+      "git_blob_sha": "12abb038ed3352f891521919dbc28742b4b2461a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_root2_v13_decision_only_control_plane_guard_v1.py",
+      "git_blob_sha": "f05b1089f0266aa25aac76d829e8af7ef2a88539"
+    }
+  },
+  "dependencies": {
+    "v13_frontier": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V13.json",
+      "git_blob_sha": "bb631b80eea5a183728fb27e2aff99bbe63f1757"
+    },
+    "v13_verification": {
+      "path": "canonical/verification/ROOT2_FRONTIER_V13_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "dd810106cf30f101453da07e2ef37cb81d7faddd"
+    },
+    "v13_staged_activation": {
+      "path": "canonical/governance/ROOT2_FRONTIER_V13_FINAL_ACTIVATION_V1.json",
+      "git_blob_sha": "08c84d8f0a46ff0f13943388306195fea79ca6d7"
+    },
+    "decision_only_final_activation": {
+      "path": "canonical/governance/ROOT2_DECISION_ONLY_EVALUATION_FINAL_ACTIVATION_V1.json",
+      "git_blob_sha": "2f8690507a16840f085bcf34da90df1593dd0226"
+    },
+    "prior_decision_only_root_projection": {
+      "path": "canonical/verification/ROOT2_DECISION_ONLY_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "432d15b62b70dd6f7e030aafd7239bd1a381b5ee"
+    },
+    "arena_truth_repair": {
+      "path": "canonical/governance/ARENA_PUBLIC_SEMANTICS_TRUTH_REPAIR_V1.json",
+      "git_blob_sha": "a76391c98767a0fa688adc32f5ac23f9caaea624"
+    }
+  },
+  "new_projection_receipt_path": "canonical/verification/ROOT2_V13_DECISION_ONLY_CONTROL_PLANE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+  "exact_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false
+  },
+  "semantic_delta": [
+    "ROOT2_CURRENT_FRONTIER_V12_TO_V13_SCHEDULING_ONLY",
+    "MIRROR_ACTIVE_DECISION_ONLY_SETTLEMENT_IN_CURRENT_TERMINAL_AUTHORITY",
+    "DELETE_STALE_V10_NEXT_TERMINAL_ACTION",
+    "PRESERVE_V14_THROUGH_V18_AS_NONACTIVE_UNTIL_SEPARATE_WHOLE_FRONTIER_VERIFICATION_AND_ACTIVATION",
+    "PRESERVE_ARENA_PUBLIC_SEMANTICS_TRUTH_REPAIR",
+    "PRESERVE_ZERO_EXECUTION_PROMOTION_FRESH_REALITY_AND_ACCEPTANCE_CREDIT"
+  ],
+  "verification_required": [
+    "RECOMPUTE_EXACT_GIT_BLOB_IDENTITIES_FROM_BYTES",
+    "RUN_FAIL_CLOSED_GUARD_AND_TEST",
+    "CONFIRM_V13_FRONTIER_AND_STAGED_ACTIVATION_BINDINGS",
+    "CONFIRM_DECISION_ONLY_ROUTE_PRECEDENCE_AND_CURRENT_MIRROR",
+    "CONFIRM_STALE_V10_DELETED",
+    "CONFIRM_V14_THROUGH_V18_NOT_PROMOTED",
+    "CONFIRM_ARENA_TRUTH_REPAIR_PRESERVED",
+    "CONFIRM_COUNTS_5_12_26_AND_TERMINAL_FALSE",
+    "CONFIRM_ZERO_EXECUTION_PROMOTION_FRESH_REALITY_AND_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
