@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_ACTIVATION_V2_RECEIPT",
+  "date": "2026-10-04",
+  "status": "ACTIVE_CONDITIONAL__ONE_EPOCH_REPLAY_ALREADY_EXPOSED_72_ONLY__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "root": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "3f678ff5f419abaaa00cca84d392b685d8332bfd",
+    "required_status": "CONDITIONAL_RELEASE__ATOMIC_FIRST_CREATE_REQUIRED"
+  },
+  "activation_candidate": {
+    "path": "canonical/governance/LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_ACTIVATION_V2.json",
+    "git_blob_sha": "00cac718909d9d311189efb7cadcbc75dfad84dc"
+  },
+  "environment_equivalence_verification": {
+    "path": "canonical/verification/LIVEBENCH_V7_ENVIRONMENT_EQUIVALENT_SANITIZED_DIAGNOSTIC_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "8ee86249a581e4e19e53b63a8a3cd990074ce842",
+    "run_id": 37192715453,
+    "job_id": 111408110863,
+    "conclusion": "success"
+  },
+  "atomic_claim_verification": {
+    "path": "canonical/verification/GENERIC_ATOMIC_EXECUTION_CLAIM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "d5b94c39ac9e8224abef162de314bd047bc249d0",
+    "run_id": 37193275645,
+    "job_id": 111409763028,
+    "conclusion": "success"
+  },
+  "exact_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "execute/livebench-v7-sanitized-classification-20261004",
+    "launcher_path": "launch_livebench_v7_sanitized_atomic.py",
+    "launcher_git_blob_sha": "d977690efd97e093b28474d23b37ee6e4520ed0f",
+    "diagnostic_git_blob_sha": "55d4b961f58dc45c1513f9c9282a63773444773d",
+    "classifier_git_blob_sha": "44df7313c83914204299953dda81900fae85ab68",
+    "verifier_git_blob_sha": "0c63704ba4e462c957516bc0f1ee0bdbdea8465c",
+    "base_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "epoch_digest_sha256": "5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
+    "claim_ref": "refs/heads/livebench-v7-claims/5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d"
+  },
+  "release_condition": "POINT_OF_USE_EXACT_BLOB_CHECKS_PASS_AND_ZERO_CASE_VERIFIER_EXITS_0_AND_FIRST_ATOMIC_CREATE_RETURNS_HTTP_201",
+  "scope": {
+    "maximum_successful_claims": 1,
+    "maximum_successful_replays": 1,
+    "already_exposed_prefix_limit": 72,
+    "case_73_or_later": false,
+    "new_case_exposure": false,
+    "acceptance_credit": false,
+    "promotion": false,
+    "global_fresh_reality": false,
+    "root1_reopen": false
+  },
+  "fail_closed": [
+    "ANY_BLOB_OR_ROOT_DRIFT",
+    "VERIFIER_NONZERO",
+    "CLAIM_HTTP_422",
+    "ANY_CLAIM_NON_201",
+    "CLAIM_RESPONSE_MISMATCH"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_authorized": 0,
+    "acceptance_credit_delta": 0
+  }
+}
