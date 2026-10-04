@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SUCCESSOR_V3_PREEXPOSURE_PLAN__FIVE_COMPONENT_EXACT__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "path": "canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json",
+    "git_blob_sha": "2663f794033cf779fdecb8806a95e932f6084004",
+    "plan_sha256": "9608157e7ef52fab08bc387bb19ccfb10001cbb5367849a9806d6b0e7df34b31",
+    "commitment_sha256": "58ee189b9c035e3e7e96897193c2b6b9fa5b612a0394ca70d55bd0c562be5bca"
+  },
+  "source_successor_precommit": {
+    "path": "canonical/governance/LIVEBENCH_IF_EXECUTION_PRECOMMIT_V2.json",
+    "git_blob_sha": "66554061f204d8a86b37a30c84d0cf07a525a786"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1733,
+    "verifier_head_sha": "7cf7ca94a61d4d217dd6ea6ee301d85607f21bfb",
+    "verifier_merge_commit": "bec95842b286b4853e5452e50539b466bc6f54b9",
+    "workflow_run_id": 37185143435,
+    "workflow_job_id": 111385405507,
+    "conclusion": "success"
+  },
+  "verified": {
+    "pre_exposure_plan_pass": true,
+    "component_count": 5,
+    "all_component_hashes_equal_verified_successor_precommit": true,
+    "pre_reveal_observed_hashes_equal_committed_hashes": true,
+    "commitment_digest_exact": true,
+    "plan_digest_exact": true,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "case_reveal_authority": false,
+    "execution_authority": false,
+    "shadow_collection_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_authorized": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "shadow_collection_authority": false
+}
