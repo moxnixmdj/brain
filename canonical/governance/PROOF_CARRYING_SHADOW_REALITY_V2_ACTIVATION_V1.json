@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_CARRYING_SHADOW_REALITY_V2_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_MAIN_BOUND__INDEPENDENT_EXACT_ROOT_PROJECTION_REQUIRED__ZERO_CREDIT",
+  "objective": "ACTIVATE_ONLY_PER_ROUTE_ZERO_CREDIT_ESCROWED_SHADOW_COLLECTION_WHEN_THE_INDEPENDENTLY_VERIFIED_V2_LEASE_GATE_PASSES__WITHOUT_RESULT_RELEASE_ACCEPTANCE_PROMOTION_OR_GLOBAL_FRESH_REALITY_AUTHORITY",
+  "bound_main_commit": "50697f29b56afbf72654ccc9aef548bcb5368ffa",
+  "terminal_state_preserved": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "terminal": false,
+    "root1_positive_gap_count": 0
+  },
+  "implementation": {
+    "runtime_path": "canonical/runtime/terminal_state_compression_scheduler_v1.py",
+    "runtime_git_blob_sha": "fd5639e9d503f59913bfbd08e47799ef5132b1e7",
+    "policy_path": "canonical/governance/PROOF_CARRYING_SHADOW_REALITY_POLICY_V2.json",
+    "policy_git_blob_sha": "756a608f0a3acaa72e56abbaa078f1cf0f3df938",
+    "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "independent_verifier_commit": "96e72332a433d576f40bddb0a620cf45e0c49441",
+    "independent_verifier_workflow_run_id": 37189267485,
+    "independent_verifier_conclusion": "success"
+  },
+  "authority_semantics": {
+    "scheduling_authority": true,
+    "per_route_shadow_collection_authority": true,
+    "result_release_authority": false,
+    "terminal_execution_authority": false,
+    "acceptance_credit_authority": false,
+    "promotion_authority": false,
+    "global_fresh_reality_promotion_authority": false
+  },
+  "per_route_activation_gate": [
+    "EXACT_CURRENT_V2_RUNTIME_AND_POLICY_BYTES",
+    "VERIFY_SHADOW_REALITY_LEASE_RETURNS_SHADOW_COLLECTION_READY_TRUE",
+    "UNDERLYING_GENERIC_ISOLATION_RECEIPT_REVERIFIED",
+    "UNDERLYING_BENCHMARK_THIN_ADAPTER_REVERIFIED",
+    "EXPLICIT_CONTENT_ADDRESSED_SHADOW_AUTHORITY_RECEIPT_BOUND",
+    "ONE_USE_LEASE_AND_NONCE_UNCONSUMED",
+    "ZERO_INCREMENTAL_SPEND_GUARD_TRUE",
+    "RESULT_ESCROWED_AND_HIDDEN_FROM_CANDIDATE_OPTIMIZER_AND_MUTATORS",
+    "RELEASE_REQUIRES_ZERO_REALITY_FIXED_POINT",
+    "RELEASE_REQUIRES_INDEPENDENT_VERIFICATION"
+  ],
+  "hard_rules": [
+    "THIS_ACTIVATION_AUTHORIZES_COLLECTION_ONLY__NEVER_SCORE_RELEASE",
+    "NO_RESULT_MAY_AFFECT_CANDIDATE_SELECTION_MUTATION_SCHEDULING_OR_ACCEPTANCE_BEFORE_RELEASE",
+    "NO_ACCEPTANCE_OR_FAMILY_CAPABILITY_OWNERSHIP_CREDIT_FROM_SHADOW_COLLECTION",
+    "NO_ROUTE_WITH_FAILED_OR_MISSING_THIN_ADAPTER",
+    "NO_ROUTE_WITH_FAILED_OR_MISSING_ISOLATION_RECEIPT",
+    "NO_REPLAY_OR_SECOND_EXECUTION_UNDER_ONE_USE_LEASE",
+    "NO_NONZERO_INCREMENTAL_SPEND",
+    "ANY_ROOT_PROJECTION_MISMATCH_REVOKES_THIS_ACTIVATION",
+    "GLOBAL_FRESH_REALITY_PROMOTION_AUTHORITY_REMAINS_FALSE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "activation_effect_if_independently_verified": "PER_ROUTE_SHADOW_COLLECTION_MAY_OVERLAP_UNRELATED_ZERO_REALITY_WORK__RESULTS_REMAIN_SEALED_UNTIL_FIXED_POINT_RELEASE_GATE",
+  "active": false
+}
