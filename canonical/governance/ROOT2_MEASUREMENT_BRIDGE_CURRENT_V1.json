@@ -58,6 +58,6 @@
     "frontier_verification_git_blob_sha": "226832c5e9d5f4121f26d93bd645ed51dce474fe",
     "effective_scheduling_authority": true,
     "frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V10_ACTIVATION_V1.json",
-    "frontier_activation_git_blob_sha": "dc2605176a10982d4d700faea951f8e11d043a1f"
+    "frontier_activation_git_blob_sha": "00e6990cbae1399b7dc5e1e3455382aa10ee1cad"
   }
 }
