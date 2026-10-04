@@ -533,21 +533,21 @@
     ],
     "authority": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "atomic_predicates": {
-      "proved": 13,
-      "unresolved": 25,
+      "proved": 12,
+      "unresolved": 26,
       "total": 38
     },
     "ownership_promotion_authority": false,
     "rule": "ACCEPTANCE_PASS_REQUIRES_CURRENT_SCOPE_COMPLETE_PROTOCOL_EVIDENCE__TOOL_DISCOVERY_PROMOTED_FROM_INDEPENDENT_ABSOLUTE_CEILING_PLUS_UNIVERSAL_SCOPE_PROOF__RAW_BEHAVIORAL_EXECUTION_DOES_NOT_SUBSTITUTE",
     "livebench_fixed_bar_delta": {
       "predicate_id": "LIVEBENCH_IF_GE_65_7",
-      "state": "PROVED",
+      "state": "QUARANTINED_DIRTY_EVIDENCE__NOT_PROVED",
       "evidence_path": "canonical/verification/LIVEBENCH_EXACT200_DETERMINISTIC_PUBLIC_QUALIFICATION_20261004_V1.json",
-      "evidence_git_blob_sha": "22ac08ad456b440ddfb9b40dd38781aa70ea2579",
+      "truth_repair_path": "canonical/governance/LIVEBENCH_EXACT200_CONTAMINATION_CREDIT_REVOCATION_20261004_V1.json",
       "exact_score_percent": 84.40416666666667,
       "comparator_floor_percent": 65.73775,
-      "family_acceptance_delta": 0,
-      "reason": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT_HAS_TWO_OTHER_OPEN_PREDICATES"
+      "acceptance_credit_delta": 0,
+      "reason": "ACTIVE_CONTAMINATION_LEDGER_AND_PREQUALIFICATION_PARTITION_RULE_NOT_DISCHARGED"
     }
   },
   "behavioral_quarantined_family_count": 0,
