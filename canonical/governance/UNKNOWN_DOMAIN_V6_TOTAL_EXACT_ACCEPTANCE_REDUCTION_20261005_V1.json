@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_SCOPE_PROOF_PASS__ATOMIC_PREDICATE_PROMOTED__ZERO_FAMILY_CAPABILITY_OWNERSHIP_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "frozen_precommit": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V6_ROOT3_ACCEPTANCE_REDUCTION_PRECOMMIT_20261005_V1.json",
+    "commit": "95eeeeb12a206d5cd635ee70a2e8961e5b2c231d",
+    "outcome_blind": true
+  },
+  "independent_verification": {
+    "path": "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "d75374b2c9053b550c7f680aaebb2b8abaafe06d",
+    "workflow_run_id": 37243390754,
+    "workflow_job_id": 111556412538,
+    "artifact_id": 11318231607,
+    "artifact_zip_sha256": "50ff23a2fad53dd1076d66cabdb90453a241718d484b66e155ae42a05e2af8a1",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__TOTAL_STRING_STRUCTURAL_ID_EXACT_ADD2_AND_BOUND_UNIVERSAL_SCOPE__ZERO_FAMILY_CAPABILITY_OWNERSHIP_CREDIT"
+  },
+  "condition_evaluation": {
+    "workflow_success": true,
+    "exact_subject_blobs_match": true,
+    "v4_string_counterexample_reproduced": true,
+    "v5_surrogate_domain_exhausted_2048": true,
+    "structural_identifier_totality_survives_forced_total_token_collision": true,
+    "exact_add2_float_order_repaired": true,
+    "all_six_transfer_families_universal": true,
+    "all_three_abstention_classes_universal": true,
+    "nonproduction_432_cases_all_pass": true,
+    "production_or_terminal_cases_consumed": 0,
+    "all_frozen_precommit_conditions_true": true
+  },
+  "deduction": {
+    "prior_state": "EXTERNAL_BLOCKED",
+    "discharge_condition_satisfied": true,
+    "new_state": "PROVED",
+    "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "independent_or_objective": true,
+    "scope_complete": true,
+    "atomic_predicate_proved_delta": 1,
+    "unresolved_predicate_delta": -1,
+    "bound_blocker_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "reason_family_remains_open": "MYSTERYMECHANISM_GE_49_55_IS_SEPARATE_AND_UNCHANGED"
+  },
+  "supersedes_for_this_predicate": [
+    "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_REVOCATION_20261005_V1.json",
+    "canonical/governance/UNKNOWN_DOMAIN_V4_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_BEYOND_THE_BOUND_EVALUATOR_CONTRACT",
+    "NO_MYSTERYMECHANISM_THRESHOLD_CREDIT",
+    "NO_UNKNOWN_DOMAIN_FAMILY_ACCEPTANCE_CREDIT_FROM_THIS_ATOMIC_PREDICATE_ALONE",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOMIC_PREDICATE_ALONE",
+    "NO_PRODUCTION_OR_TERMINAL_CASE_CONSUMPTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_family_credit_delta": 0,
+    "atomic_predicate_proved_delta": 1,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
