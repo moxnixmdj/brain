@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_EXACT_LITERAL_ROUTING_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__GENERAL_FAIL_CLOSED_EXACT_LITERAL_ROUTING__ZERO_REALITY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/goal_compiler.py",
+    "git_blob_sha": "43abde3a26acbbab7d50804f431ea448a170d722"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1808,
+    "head_sha": "bf61f22093115133c7ea1b9aaf9b4d81a8fc4966",
+    "workflow_run_id": 37193177444,
+    "workflow_job_id": 111409470994,
+    "conclusion": "success",
+    "verifier_path": "verify_general_exact_literal_routing_20261004.py",
+    "verifier_git_blob_sha": "c7b9937fe9d6944c84b8c97dc1d0760468f7d7c0",
+    "entrypoint_path": "verification/run.sh",
+    "entrypoint_git_blob_sha": "44a6b453d83bae577d0fde6925867580338fe1eb"
+  },
+  "verified": {
+    "exact_subject_blob": true,
+    "positive_generalization_cases": 5,
+    "negative_rejection_cases": 5,
+    "benchmark_specific_token_present_in_runtime": false,
+    "capability_acquisition_required": false,
+    "deterministic_finish_action_only": true,
+    "multiline_rejected": true,
+    "ambiguous_unquoted_phrase_rejected": true,
+    "explanatory_goal_rejected": true,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "semantic_effect": [
+    "PROVES_A_GENERAL_DOMAIN_FREE_EXACT_LITERAL_RESPONSE_CLASS_CAN_ROUTE_DIRECTLY_TO_EXISTING_MODEL_INDEPENDENT_FINISH",
+    "PROVES_THIS_CLASS_NEEDS_NO_PACKAGE_CAPABILITY_ACQUISITION",
+    "DOES_NOT_PROVE_GENERAL_INSTRUCTION_FOLLOWING_OUTSIDE_THE_NARROW_LITERAL_GRAMMAR"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_TERMINAL_SCORE",
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_ROOT1_REOPEN",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CASE_REPLAY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
