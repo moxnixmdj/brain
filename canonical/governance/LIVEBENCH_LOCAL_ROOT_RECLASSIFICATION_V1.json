@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__LIVEBENCH_ROOT2_RESOLVED_NEGATIVELY__LOCAL_ROOT1_POSITIVE_GAP__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "frozen_candidate": {
+    "commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f"
+  },
+  "evidence": {
+    "forced_fail_binding_path": "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_BINDING_V1.json",
+    "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "independent_verifier_commit": "f3c439f329c7b481a8448a0619e7696111e05ecc",
+    "verified_observed_zero_score_cases": 72,
+    "population_count": 200,
+    "maximum_remaining_score_mass": 128,
+    "full_population_upper_percent": 64,
+    "threshold_percent": 65.7,
+    "additional_case_exposure_needed": false
+  },
+  "deduction": [
+    "THE_FROZEN_CANDIDATE_PREDICATE_VALUE_IS_FORCED_FALSE_BECAUSE_128_DIV_200_TIMES_100_EQUALS_64_0_LT_65_7",
+    "THEREFORE_LIVEBENCH_MEASUREMENT_OR_COMPARATOR_UNCERTAINTY_FOR_THIS_FROZEN_CANDIDATE_IS_RESOLVED_NEGATIVELY",
+    "LIVEBENCH_IF_GE_65_7_WAS_CLASSIFIED_ROOT2_ONLY_NOT_ROOT3_UNDER_THE_ACTIVE_THREE_ROOT_MODEL",
+    "A_KNOWN_FALSE_ACCEPTANCE_PREDICATE_CANNOT_REMAIN_CLASSIFIED_AS_MERE_MEASUREMENT_UNCERTAINTY",
+    "UNDER_THE_EXHAUSTIVE_ACTIVE_THREE_ROOT_MODEL_THE_CURRENT_FROZEN_SYSTEM_THEREFORE_HAS_A_POSITIVE_OPERATIVE_ROOT1_GAP_FOR_THIS_PREDICATE"
+  ],
+  "root_transition": {
+    "prior_local_class": "ROOT2_ONLY__MEASUREMENT_UNKNOWN",
+    "new_local_class": "ROOT1_POSITIVE_OPERATIVE_GAP__MEASUREMENT_RESOLVED_NEGATIVELY",
+    "root2_local_residual": false,
+    "root3_local_residual": false,
+    "root1_positive_gap": true,
+    "global_root1_status_if_verified": "ACTIVE__AT_LEAST_ONE_POSITIVE_OPERATIVE_GAP",
+    "exact_gap_statement": "THE_EXACT_FROZEN_BRAIN_SYSTEM_CANNOT_REACH_THE_LIVEBENCH_IF_65_7_ACCEPTANCE_BAR_UNDER_ITS_FROZEN_EXECUTION_CONTRACT"
+  },
+  "causal_boundary": {
+    "proved": "OPERATIVE_SYSTEM_LEVEL_ACCEPTANCE_CAPABILITY_GAP_FOR_THE_EXACT_FROZEN_CANDIDATE",
+    "not_proved": [
+      "UNIVERSAL_SEMANTIC_REASONING_CAPABILITY_MISSING",
+      "ALL_FUTURE_BRAIN_REVISIONS_FAIL",
+      "ANY_SINGLE_CAUSAL_SUBSYSTEM_ALONE_EXPLAINS_ALL_72_ZERO_SCORE_CASES",
+      "THE_V10_DIAGNOSTIC_HISTOGRAM_IS_ACCEPTANCE_EVIDENCE"
+    ],
+    "observed_candidate_causal_classes_non_load_bearing_localization": [
+      "POLICY_BLOCK_POST_PROMPT_CAPABILITY_ACQUISITION",
+      "COMPOSITION_PRODUCER_UNRESOLVED_GROUNDED_CLAUSES",
+      "CONTROL_OR_FANOUT_ARCHITECTURAL_GAP"
+    ]
+  },
+  "scheduler_effect_if_verified": [
+    "DELETE_ALL_FURTHER_LIVEBENCH_CASE_EXPOSURE_FOR_EXACT_FROZEN_CANDIDATE",
+    "DELETE_LIVEBENCH_FROM_ROOT2_UNKNOWN_MEASUREMENT_QUEUE_FOR_EXACT_FROZEN_CANDIDATE",
+    "ADD_LIVEBENCH_TO_ROOT1_REPAIR_QUEUE_WITH_EXACT_SYSTEM_LEVEL_GAP_STATEMENT",
+    "REQUIRE_SUCCESSOR_PRECOMMIT_OR_SCOPE_COMPLETE_STRONGER_PROOF_BEFORE_ANY_NEW_ACCEPTANCE_ATTEMPT",
+    "DO_NOT_TUNE_SUCCESSOR_ON_UNEXPOSED_CASES"
+  ],
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_A_PROVED_FAIL",
+    "NO_CASE_73_OR_LATER_FOR_THE_FAILED_FROZEN_CANDIDATE",
+    "NO_RAW_TERMINAL_PROMPT_CONTENT_USED_TO_DESIGN_SUCCESSOR",
+    "NO_RETROACTIVE_USE_OF_V10_QUARANTINED_DIAGNOSTIC_AS_LOAD_BEARING_ACCEPTANCE_EVIDENCE",
+    "ROOT1_REOPEN_IS_LOCAL_TO_THE_PROVED_OPERATIVE_GAP_UNLESS_SEPARATE_EVIDENCE_EXPANDS_SCOPE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
