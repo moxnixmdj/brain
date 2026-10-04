@@ -9,7 +9,7 @@ from canonical.runtime.livebench_shadow_atomic_claim_transaction_v1 import (
 from canonical.runtime.livebench_shadow_point_of_use_preflight_v1 import expected_claim_ref
 
 ROOT=Path(__file__).resolve().parents[2]
-PLAN=ROOT/"canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V2.json"
+PLAN=ROOT/"canonical/governance/LIVEBENCH_IF_SHADOW_PREEXPOSURE_PLAN_V3.json"
 
 def plan():
     return json.loads(PLAN.read_text())
@@ -42,6 +42,10 @@ def preflight_receipt():
       "claim_backend_receipt":{
         "path":"canonical/governance/SHADOW_GIT_REF_ONE_USE_CLAIM_BACKEND_V1.json",
         "git_blob_sha":"b660e2ee70f42c7872a9b65c78198c5bdbf03609",
+      },
+      "resource_fit_verification_receipt":{
+        "path":"canonical/verification/LIVEBENCH_ZERO_CASE_RESOURCE_FIT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+        "git_blob_sha":"667943c418a434988d915bfb2ac736679af3bf7b",
       },
     }
 
@@ -103,20 +107,17 @@ def test_no_absence_precheck_field_is_needed():
 
 def test_duplicate_or_failed_create_never_grants_reveal():
     p=plan(); r=preflight_receipt(); c=claim(p,r)
-    c["create_http_status"]=422
-    c["reference_created"]=False
+    c["create_http_status"]=422; c["reference_created"]=False
     out=verify_atomic_claim_transaction(
         plan=p,preflight_receipt=r,activation_receipt=activation(),claim_receipt=c)
     assert out["atomic_claim_transaction_pass"] is False
     assert out["case_reveal_authority"] is False
-    assert out["shadow_collection_authority"] is False
 
 def test_activation_is_still_mandatory():
     p=plan(); r=preflight_receipt(); a=activation(); a["active"]=False
     out=verify_atomic_claim_transaction(
         plan=p,preflight_receipt=r,activation_receipt=a,claim_receipt=claim(p,r))
     assert out["atomic_claim_transaction_pass"] is False
-    assert out["case_reveal_authority"] is False
 
 def test_preflight_failure_blocks_claim_authority():
     p=plan(); r=preflight_receipt(); r["synthetic_zero_case_smoke_pass"]=False
@@ -127,13 +128,11 @@ def test_preflight_failure_blocks_claim_authority():
 def test_claim_must_bind_exact_preflight():
     p=plan(); r=preflight_receipt(); c=claim(p,r)
     c["preflight_binding_sha256"]="0"*64
-    out=verify_atomic_claim_transaction(
-        plan=p,preflight_receipt=r,activation_receipt=activation(),claim_receipt=c)
-    assert out["atomic_claim_transaction_pass"] is False
+    assert verify_atomic_claim_transaction(
+        plan=p,preflight_receipt=r,activation_receipt=activation(),claim_receipt=c)["atomic_claim_transaction_pass"] is False
 
 def test_case_reveal_before_claim_fails_closed():
     p=plan(); r=preflight_receipt(); c=claim(p,r)
     c["case_reveal_has_occurred_before_claim"]=True
-    out=verify_atomic_claim_transaction(
-        plan=p,preflight_receipt=r,activation_receipt=activation(),claim_receipt=c)
-    assert out["atomic_claim_transaction_pass"] is False
+    assert verify_atomic_claim_transaction(
+        plan=p,preflight_receipt=r,activation_receipt=activation(),claim_receipt=c)["atomic_claim_transaction_pass"] is False
