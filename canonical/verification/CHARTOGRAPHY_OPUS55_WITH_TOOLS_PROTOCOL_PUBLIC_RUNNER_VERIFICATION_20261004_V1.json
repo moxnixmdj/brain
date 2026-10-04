@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_OPUS55_WITH_TOOLS_PROTOCOL_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIRST_PARTY_89_WITH_TOOLS__CONTAINER_IMAGE_STANDARD_LIBRARIES_CROP_TOOL__PUBLIC_NATIVE_NO_TOOLS_NON_SUBSTITUTABLE__ZERO_CASES__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "candidate": {
+    "path": "canonical/governance/CHARTOGRAPHY_OPUS55_WITH_TOOLS_PROTOCOL_RECONCILIATION_V1.json",
+    "git_blob_sha": "7d61b7d53c5e902dcaf6c7a6bfde1f5cf4ea8d51"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "verification_commit": "63fce84281dea616eee1bade8f51813bdacaf879",
+    "workflow_run_id": 37170012551,
+    "workflow_job_id": 111340858602,
+    "conclusion": "success"
+  },
+  "verified": {
+    "frozen_target_percent": 89,
+    "condition": "WITH_TOOLS",
+    "environment": [
+      "CONTAINER",
+      "IMAGE_FILE_PRESENT_IN_CONTAINER",
+      "STANDARD_LIBRARIES_INSTALLED",
+      "IMAGE_CROPPING_TOOL"
+    ],
+    "grader": "Gemini 3.5 Flash",
+    "public_native_no_tools_non_substitutable": true,
+    "existing_no_tools_brain_adapter_role": "SUBCOMPONENT_ONLY"
+  },
+  "root_effect": {
+    "root1": "UNCHANGED_INACTIVE",
+    "root2": "OPEN__WITH_TOOLS_HARNESS_BINDING_AND_COMPARABILITY_LOAD_BEARING",
+    "root3": "UNCHANGED"
+  },
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
