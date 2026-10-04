@@ -1,10 +1,10 @@
 """Unknown-Domain hidden generator V5: structural IDs plus total string interface.
 
 V4 makes evaluator-visible identifiers structurally distinct even under forced
-_token collisions, but it still accepts arbitrary Python beacon strings before
-passing them to legacy strict-UTF8 HMAC helpers. V5 preserves V4's evaluator
-semantics and identifier construction while canonicalizing every accepted
-Python string beacon and string evaluator secret before any legacy path.
+_token collisions. V5 preserves V4 evaluator semantics while canonicalizing the
+exact built-in str/bytes domain emitted by the frozen production launcher before
+any legacy strict-UTF8 HMAC path. The gate intentionally rejects Python objects
+that merely spoof isinstance membership through __class__.
 """
 from __future__ import annotations
 
@@ -16,15 +16,14 @@ from canonical.runtime import unknown_domain_direct_hidden_generator_v4 as v4
 SCHEMA="PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_HIDDEN_GENERATOR_V5"
 BEACON_CANONICALIZATION="UTF8_SURROGATEPASS_BYTES_TO_LOWER_HEX_WITH_V5_PREFIX"
 SECRET_CANONICALIZATION="UTF8_SURROGATEPASS_FOR_STR__BYTES_IDENTITY"
-STRING_DOMAIN_TOTALITY="TOTAL_FOR_EVERY_FINITE_PYTHON_STR_ACCEPTED_BY_DECLARED_GATES"
+STRING_DOMAIN_TOTALITY="TOTAL_FOR_FROZEN_PRODUCTION_LAUNCHER_EXACT_BUILTIN_STR_BYTES_DOMAIN"
 IDENTIFIER_TOTALITY="INHERITS_V4_STRUCTURAL_SLOT_ORDINAL_UNIQUENESS"
 
 
 def _beacon_gate(beacon: Any)->str:
-    # Preserve the existing isinstance-accepted domain, including str subclasses,
-    # but bypass overridable subclass methods so accepted values cannot make the
-    # supposedly total interface partial.
-    if not isinstance(beacon,str) or len(str.strip(beacon))<16:
+    # The frozen production launcher constructs the beacon as an exact built-in
+    # str. Do not widen that reachable domain with spoofable isinstance semantics.
+    if type(beacon) is not str or len(str.strip(beacon))<16:
         raise v1.UnknownDomainGeneratorError("POST_FREEZE_BEACON_INVALID")
     return beacon
 
@@ -39,13 +38,14 @@ def _canonical_beacon(beacon: Any)->str:
 
 
 def _secret_bytes_total(secret: Any)->bytes:
-    if isinstance(secret,bytes):
-        # bytes subclasses may override __bytes__, __buffer__, and __getitem__.
-        # Invoke the base bytes descriptor directly on a full slice: this reads
-        # the inherited immutable bytes payload, bypasses subclass Python hooks,
-        # and materializes an exact plain bytes value.
-        out=bytes.__getitem__(secret,slice(None))
-    elif isinstance(secret,str):
+    # The frozen production launcher constructs the evaluator secret with
+    # secrets.token_bytes(32), which is exact built-in bytes. Exact built-in str
+    # remains accepted for deterministic nonproduction qualification fixtures.
+    # Reject proxy/subclass widening instead of pretending isinstance defines the
+    # production domain.
+    if type(secret) is bytes:
+        out=secret
+    elif type(secret) is str:
         out=str.encode(secret,"utf-8","surrogatepass")
     else:
         raise v1.UnknownDomainGeneratorError("EVALUATOR_SECRET_INVALID")
