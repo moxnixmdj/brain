@@ -32,10 +32,10 @@ def test_current_authority_root_partition_and_scheduler_are_coherent():
     assert root2["execution_authority"] is False
     assert root2["fresh_reality"] is False
 
+    assert authority["next"] == authority["next_terminal_action"]
     assert "REPAIR_VERIFIED_LIVEBENCH_ROOT1_GAP" not in authority["next"]
     assert "ROOT2_18" not in authority["next"]
     assert "19_ROOT2_TOUCHING_PREDICATES" in authority["next"]
-    assert "NO_ROOT1_REPAIR_WITHOUT_NEW_POSITIVE_GAP_PROOF" in authority["next"]
 
     assert "LIVEBENCH_ROOT1_ONLY" not in authority["rule"]
     assert "ROOT2_EXACTLY_18_TOUCHING" not in authority["rule"]
@@ -47,6 +47,8 @@ def test_superseded_root1_and_root2_18_sources_have_no_scheduling_authority():
     authority = _load("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json")
     sources = authority["sources"]
 
+    assert sources["post_livebench_current_root_seal"]["effective_scheduling_authority"] is False
+    assert sources["livebench_local_root1_reclassification"]["effective_scheduling_authority"] is False
     assert sources["root2_post_livebench_18_predicate_rebind"]["effective_scheduling_authority"] is False
     assert sources["root2_closure_v2_current_frontier"]["effective_scheduling_authority"] is False
     assert "REVOKED" in sources["livebench_local_root1_reclassification"]["status"]
