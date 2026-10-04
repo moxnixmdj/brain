@@ -1,8 +1,12 @@
 from canonical.runtime.livebench_legacy_joint_witness_v1 import solve
 
 
-def assert_pass(prompt):
-    out = solve(prompt)
+def envelope(suffix: str) -> str:
+    return "Public synthetic source text\n-------\n" + suffix
+
+
+def assert_pass(envelope(prompt)):
+    out = solve(envelope(prompt))
     assert out["status"] == "PASS_CANDIDATE_EXACT_POSTVALIDATION_REQUIRED", out
     assert out["response"]
     return out["response"]
@@ -15,7 +19,7 @@ def test_general_joint_keyword_word_no_comma_quote():
         "In your entire response, refrain from the use of any commas. "
         "Wrap your entire response with double quotation marks."
     )
-    response = assert_pass(prompt)
+    response = assert_pass(envelope(prompt))
     assert response.startswith('"') and response.endswith('"')
     assert "," not in response
     assert "alpha" in response.lower() and "beta" in response.lower()
@@ -27,7 +31,7 @@ def test_two_response_route_with_title_and_no_comma():
         "Your answer must contain a title, wrapped in double angular brackets, such as <<poem of joy>>. "
         "In your entire response, refrain from the use of any commas."
     )
-    response = assert_pass(prompt)
+    response = assert_pass(envelope(prompt))
     assert response.count("******") == 1
     assert "<<verified result>>" in response
     assert "," not in response
@@ -42,8 +46,10 @@ def test_repeat_prompt_recovers_visible_prefix():
         " does not include this sentence)"
     )
     prompt = prefix + " " + marker + " Include keywords ['alpha'] in the response."
-    response = assert_pass(prompt)
-    assert response.lower().startswith(prefix.lower())
+    wrapped = envelope(prompt)
+    response = assert_pass(wrapped)
+    expected_prefix = wrapped.split(marker, 1)[0].strip()
+    assert response.lower().startswith(expected_prefix.lower())
     assert "alpha" in response.lower()
 
 
@@ -54,7 +60,7 @@ def test_markdown_paragraph_and_bullets_compose():
         "* This is point 1. \n* This is point 2 "
         "The response must contain at least 2 placeholders represented by square brackets, such as [address]."
     )
-    response = assert_pass(prompt)
+    response = assert_pass(envelope(prompt))
     assert response.count("***") == 2
     assert "[slot1]" in response and "[slot2]" in response
 
@@ -65,7 +71,7 @@ def test_nth_paragraph_first_word_compose():
         "new lines as if it was '\\n\\n' in python. Paragraph 2 must start with word river. "
         "Answer with at least 20 words."
     )
-    response = assert_pass(prompt)
+    response = assert_pass(envelope(prompt))
     paragraphs = response.split("\n\n")
     assert len(paragraphs) == 3
     assert paragraphs[1].lower().startswith("river")
@@ -76,13 +82,13 @@ def test_visible_less_than_contradiction_fails_closed():
         "Include keywords ['alpha'] in the response. "
         "In your response, the letter a should appear less than 1 times."
     )
-    out = solve(prompt)
+    out = solve(envelope(prompt))
     assert out["status"] == "FAIL_CLOSED"
     assert "LETTER" in out["error"]
 
 
 def test_language_family_is_outside_recovered_generator_surface():
     prompt = "Your ENTIRE response should be in English language, no other language is allowed."
-    out = solve(prompt)
+    out = solve(envelope(prompt))
     assert out["status"] == "FAIL_CLOSED"
     assert out["error"] == "OUTSIDE_RECOVERED_HISTORICAL_GENERATOR_SURFACE"
