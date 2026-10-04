@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_CLEAN_EQUIVALENT_DEVELOPMENT_PRECOMMIT_V1",
   "date": "2026-10-04",
-  "status": "PRECOMMITTED__DEVELOPMENT_ONLY__CLEAN_CANDIDATE_REBOUND_BEFORE_CASE_GENERATION__NO_ACCEPTANCE_CREDIT",
+  "status": "PRECOMMITTED__DEVELOPMENT_ONLY__RUNTIME_DEPENDENCY_REPAIRED_BEFORE_ANY_CASE_GENERATION__NO_ACCEPTANCE_CREDIT",
   "objective": "Measure the source-derived 25-type successor on a clean independently generated population before freezing any acceptance qualification successor.",
   "candidate": {
     "path": "canonical/runtime/livebench_legacy25_clean_witness_v1.py",
@@ -68,6 +68,7 @@
     "langdetect": "1.0.9",
     "nltk_data_commit": "550b6625bcef1f2abff2ff770a5a0d272c9c6b2",
     "allowed_network_role": "FETCH_PINNED_PUBLIC_SOURCE_AND_NLTK_ASSETS_BEFORE_CASE_GENERATION_ONLY",
-    "python_hash_seed": "0"
+    "python_hash_seed": "0",
+    "immutabledict": "4.3.1"
   }
 }
