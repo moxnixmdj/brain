@@ -1,0 +1,59 @@
+name: Audit LiveBench legacy15 joint witness V2 on clean predecessor
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_legacy15_joint_witness_v2.py"
+      - "canonical/runtime/livebench_legacy15_joint_witness_v2_predecessor_audit.py"
+      - "canonical/tests/test_livebench_legacy15_joint_witness_v2.py"
+      - ".github/workflows/audit-livebench-legacy15-joint-witness-v2.yml"
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install exact audit dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "nltk==3.8.1" "langdetect==1.0.9" pyarrow huggingface_hub pytest
+          python - <<'PY'
+          import nltk
+          nltk.download("punkt", quiet=True)
+          PY
+      - name: Run local regressions
+        run: pytest -q canonical/tests/test_livebench_legacy15_joint_witness_v2.py
+      - name: Fetch pinned LiveBench scorer source
+        run: |
+          git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/livebench
+          git -C /tmp/livebench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
+          test "$(git -C /tmp/livebench rev-parse HEAD)" = "8f8e5c381a16e3f24257776edd53471fe86f8091"
+      - name: Fetch exact removed predecessor population
+        run: |
+          python - <<'PY'
+          from huggingface_hub import hf_hub_download
+          print(hf_hub_download(
+              repo_id="livebench/instruction_following",
+              repo_type="dataset",
+              revision="4f7ab12f0d47848da31de92bd7cc3d7d4acfe695",
+              filename="data/test-00000-of-00001.parquet",
+              local_dir="/tmp/livebench-predecessor",
+          ))
+          PY
+      - name: Audit visible-only joint constructor with exact pinned scorer
+        env:
+          LIVEBENCH_ROOT: /tmp/livebench
+        run: |
+          mkdir -p /tmp/receipt
+          python canonical/runtime/livebench_legacy15_joint_witness_v2_predecessor_audit.py \
+            --parquet /tmp/livebench-predecessor/data/test-00000-of-00001.parquet \
+            --output /tmp/receipt/livebench-legacy15-joint-witness-v2-predecessor-audit.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: livebench-legacy15-joint-witness-v2-predecessor-audit
+          path: /tmp/receipt/livebench-legacy15-joint-witness-v2-predecessor-audit.json
