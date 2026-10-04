@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_MEANING_SENSITIVE_OWNERSHIP_GATE_V1",
+  "date": "2026-10-04",
+  "status": "PRECOMMITTED__PUBLIC_NONTERMINAL_PROVIDER_BOUNDARY_GATE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "base_commit_sha": "f0ba8deb73f2a905adaec606cc3b9783e0474fe3",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "purpose": "DISTINGUISH_A_GENERAL_SEMANTIC_SUBSTRATE_FROM_A_HIDDEN_EXTERNAL_TARGET_CAPABILITY_PROVIDER_BY_REQUIRING_A_CAUSAL_BRAIN_CONFIGURATION_RESCUE_ON_MEANING_PRESERVING_PUBLIC_NONTERMINAL_CASES",
+  "frozen_semantic_suite": {
+    "path": "canonical/governance/LIVEBENCH_ROOT1_QWEN38_4B_SEMANTIC_SEED_PRECOMMIT_V1.json",
+    "git_blob_sha": "49dad45f14b4afa81799cc0e3dcb18293ab2fca9",
+    "case_count": 8,
+    "effects": [
+      "text.paraphrase.semantic_preserving",
+      "text.simplify.semantic_preserving",
+      "text.summarize.faithful",
+      "text.story.generate_instruction_grounded"
+    ]
+  },
+  "brain_owned_composer": {
+    "path": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py",
+    "git_blob_sha": "b766cefd5e7f23d2533ff49d1c259eb83a0a53f0",
+    "contract": "ANY_PASS_RESPONSE_CONTAINS_THE_ORIGINAL_SEMANTIC_SEED_VERBATIM_AS_ONE_CONTIGUOUS_SUBSTRING"
+  },
+  "paired_execution_protocol": {
+    "seed_route": "RUN_THE_EXACT_CANDIDATE_SUBSTRATE_ON_THE_FROZEN_SEMANTIC_REQUEST_ONLY",
+    "direct_route": "RUN_THE_SAME_EXACT_CANDIDATE_SUBSTRATE_ON_THE_SAME_SEMANTIC_REQUEST_PLUS_THE_CASE_OVERLAY_IN_ONE_PROMPT",
+    "brain_route": "RUN_THE_BRAIN_OWNED_COMPOSER_ON_THE_SEED_ROUTE_OUTPUT_PLUS_THE_CASE_OVERLAY_WITH_NO_MODEL_CALL",
+    "same_subject_required": true,
+    "one_attempt_per_case_per_route": true,
+    "adaptive_retry": false,
+    "case_specific_tuning": false
+  },
+  "formal_overlays": {
+    "PARA_1": "Response must start with \"<<<\".",
+    "PARA_2": "Response must end with \">>>\".",
+    "SIMPLE_1": "Response must start with \"[[[\".",
+    "SIMPLE_2": "Response must end with \"]]]\".",
+    "SUM_1": "Response must start with \"{{{\". Response must end with \"}}}\".",
+    "SUM_2": "Response must start with \"(((\".",
+    "STORY_1": "Response must end with \")))\".",
+    "STORY_2": "Response must start with \"###\". Response must end with \"%%%\"."
+  },
+  "pass_rule": {
+    "seed_semantic_suite": "8_OF_8_PASS_THE_FROZEN_SEMANTIC_AND_BASE_FORMAT_CONTRACT",
+    "brain_composed_suite": "8_OF_8_PASS_THE_SAME_SEMANTIC_CONTRACT_PLUS_THE_FROZEN_FORMAL_OVERLAY",
+    "provider_negative_control": "DIRECT_ROUTE_MUST_FAIL_AT_LEAST_2_OF_8_FULL_CASES",
+    "materiality": "AT_LEAST_2_CASES_RESCUED_AND_RESCUES_SPAN_AT_LEAST_2_OF_THE_4_SEMANTIC_EFFECT_CLASSES",
+    "provider_already_capable_verdict": "IF_DIRECT_ROUTE_PASSES_7_OR_8_CASES_OR_FAILS_TO_SHOW_THE_PRECOMMITTED_MATERIAL_RESCUE__DO_NOT_USE_THIS_EXPERIMENT_TO_CLAIM_BRAIN_OWNERSHIP",
+    "gate_pass_meaning": "BOUNDED_PROVIDER_BOUNDARY_SIGNAL_ONLY__THE_SUBSTRATE_SUPPLIES_SEMANTIC_SEEDS_WHILE_THE_BRAIN_LAYER_IS_CAUSALLY_NECESSARY_FOR_THE_PRECOMMITTED_COMPOSED_CONTRACT"
+  },
+  "why_this_is_load_bearing": [
+    "A_BENCHMARK_WINNING_DONOR_OR_BASE_CAN_BE_A_HIDDEN_CAPABILITY_PROVIDER_EVEN_WHEN_OPEN_WEIGHT",
+    "THE_RAW_DIRECT_ROUTE_AND_BRAIN_COMPOSED_ROUTE_USE_THE_SAME_EXACT_SUBSTRATE_SO_MODEL_IDENTITY_IS_CONTROLLED",
+    "THE_COMPOSER_PRESERVES_THE_SEMANTIC_SEED_VERBATIM_SO_FORMAL_RESCUE_CANNOT_BE_BOUGHT_BY_DELETING_OR_REWRITING_THE_SEMANTIC_NUCLEUS",
+    "THE_GATE_REJECTS_A_SUBSTRATE_THAT_CANNOT_FIRST_PASS_THE_MEANING_SENSITIVE_SEMANTIC_SEED_CONTRACT",
+    "THE_GATE_ALSO_REJECTS_OWNERSHIP_ATTRIBUTION_WHEN_THE_SUBSTRATE_ALREADY_SUPPLIES_THE_BOUNDED_COMPOSED_TARGET_DIRECTLY"
+  ],
+  "hard_nonclaims": [
+    "THIS_8_CASE_PUBLIC_SYNTHETIC_GATE_IS_NOT_OPEN_WORLD_SEMANTIC_UNDERSTANDING",
+    "THIS_GATE_DOES_NOT_INHERIT_OR_PROVE_LIVEBENCH_IF_GE_65_7",
+    "THIS_GATE_DOES_NOT_PROVE_ALL_25_LEGACY_IFEVAL_CHECKER_TYPES",
+    "A_PASS_DOES_NOT_GRANT_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "A_PASS_ONLY_IDENTIFIES_A_CAUSAL_PROVIDER_BOUNDARY_SIGNAL_FOR_SUBSTRATE_SELECTION",
+    "NO_TERMINAL_CASE_CONTENT_OR_METADATA_IS_USED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "independent_verification_required": true
+}
