@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
 """Seed-preserving structural instruction postprocessor v2.
 
-This successor extends v1 with transformations derived only from the public
-IFBench checker contract. It does not inspect or encode unexposed LiveBench
-terminal cases. The added operations preserve the semantic seed modulo
-formatting/punctuation scaffolds and fail closed if the final response does not
-satisfy every recognized constraint.
+This successor extends the repaired v1 contract with transformations derived
+only from the pinned public IFBench checker surface. It does not inspect or
+encode unexposed LiveBench terminal cases.
+
+Mechanical preservation invariant:
+  remove_whitespace(seed) occurs verbatim and contiguously inside
+  remove_whitespace(response).
+
+Therefore PASS may add explicitly required outer scaffolds and may reflow
+whitespace, but it may not delete, reorder, substitute, or case-fold any
+non-whitespace character from the semantic seed. This is a byte-level
+structural invariant, not a claim of general semantic equivalence.
 
 Public source binding:
   allenai/IFBench@ifbench/instructions.py
@@ -21,6 +28,10 @@ from canonical.runtime import instruction_constraint_compiler_v1 as compiler
 
 SCHEMA = "PROJECT_BRAIN_SEED_PRESERVING_INSTRUCTION_POSTPROCESSOR_V2"
 PUBLIC_IFBENCH_INSTRUCTIONS_BLOB = "7f167018e0c5472b04e13cbf847e5988c04ecb11"
+PRESERVATION_CONTRACT = (
+    "REMOVE_WHITESPACE_SEED_OCCURS_VERBATIM_AND_CONTIGUOUSLY_INSIDE_"
+    "REMOVE_WHITESPACE_RESPONSE"
+)
 
 _NESTED_PARENS_TEXT = "nest parentheses (and [brackets {and braces}]) at least 5 levels deep"
 _NESTED_QUOTES_TEXT = (
@@ -33,17 +44,19 @@ _PUNCTUATION_TEXT = (
 )
 _NEWLINE_WORDS_TEXT = "write each word on a new line"
 
-# Five correctly nested levels, no lexical content invented.
 _NESTED_PARENS_MARKER = "([{(())}])"
-# Open double, single, double; then close double, single, double.
 _NESTED_QUOTES_MARKER = '"' + "'" + '""' + "'" + '"'
-# The checker removes one interrobang occurrence, so retain all six ASCII marks.
 _PUNCTUATION_MARKER = "?!.,!?;:"
-
 
 def _norm_instruction(text: str) -> str:
     return " ".join(str(text or "").strip().lower().split())
 
+def _without_whitespace(text: str) -> str:
+    return "".join(ch for ch in str(text) if not ch.isspace())
+
+def _seed_preserved(seed: str, candidate: str) -> bool:
+    core = _without_whitespace(seed)
+    return bool(core) and core in _without_whitespace(candidate)
 
 def _public_flags(instruction: str) -> dict[str, bool]:
     t = _norm_instruction(instruction)
@@ -53,7 +66,6 @@ def _public_flags(instruction: str) -> dict[str, bool]:
         "punctuation_cover": _PUNCTUATION_TEXT in t,
         "newline_words": _NEWLINE_WORDS_TEXT in t,
     }
-
 
 def _check_nested_parentheses(value: str) -> bool:
     levels: list[str] = []
@@ -78,7 +90,6 @@ def _check_nested_parentheses(value: str) -> bool:
                 max_depth = 0
     return False
 
-
 def _check_nested_quotes(value: str) -> bool:
     levels: list[str] = []
     min_levels = 3
@@ -96,7 +107,6 @@ def _check_nested_quotes(value: str) -> bool:
             reached_depth = max(reached_depth, current_depth)
     return False
 
-
 def _check_punctuation_cover(value: str) -> bool:
     punctuation = {".", ",", "!", "?", ";", ":"}
     if not ("!?" in value or "?!" in value or "‽" in value):
@@ -108,25 +118,23 @@ def _check_punctuation_cover(value: str) -> bool:
         punctuation.discard(char)
     return not punctuation
 
-
 def _check_newline_words(value: str) -> bool:
     stripped = value.translate(str.maketrans("", "", string.punctuation))
     lines = [line for line in stripped.strip().split("\n") if line != ""]
     return len(lines) == len(stripped.strip().split())
-
 
 def _result(status: str, **extra: Any) -> dict[str, Any]:
     return {
         "schema": SCHEMA,
         "status": status,
         "public_ifbench_instructions_blob": PUBLIC_IFBENCH_INSTRUCTIONS_BLOB,
+        "seed_preservation_contract": PRESERVATION_CONTRACT,
         "model_dependency_count": 0,
         "network_used": False,
         "incremental_spend_usd": 0,
         "terminal_authority": False,
         **extra,
     }
-
 
 def transform(seed: str, instruction: str) -> dict[str, Any]:
     seed = str(seed or "")
@@ -135,29 +143,24 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
         return _result("FAIL_CLOSED", error="SEMANTIC_SEED_REQUIRED")
     if not instruction:
         return _result("FAIL_CLOSED", error="INSTRUCTION_REQUIRED")
-
     try:
         constraints = compiler.compile_constraints(instruction)
     except Exception as exc:
+        return _result("FAIL_CLOSED", error="CONSTRAINT_COMPILE_FAILED:" + type(exc).__name__)
+
+    if constraints.exact_response is not None and constraints.exact_response != seed:
         return _result(
             "FAIL_CLOSED",
-            error="CONSTRAINT_COMPILE_FAILED:" + type(exc).__name__,
+            error="EXACT_RESPONSE_CONFLICTS_WITH_SEED_PRESERVATION",
+            constraints=asdict(constraints),
+            response=None,
+            seed_nonwhitespace_content_preserved=False,
         )
 
     flags = _public_flags(instruction)
     candidate = seed
     applied: list[str] = []
 
-    # Existing v1-safe transformations.
-    if constraints.exact_response is not None:
-        candidate = constraints.exact_response
-        applied.append("EXACT_RESPONSE")
-    if constraints.lowercase_only:
-        candidate = candidate.lower()
-        applied.append("LOWERCASE")
-    if constraints.uppercase_only:
-        candidate = candidate.upper()
-        applied.append("UPPERCASE")
     if constraints.prefix is not None and not candidate.startswith(constraints.prefix):
         candidate = constraints.prefix + candidate
         applied.append("PREFIX")
@@ -165,8 +168,6 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
         candidate = candidate + constraints.suffix
         applied.append("SUFFIX")
 
-    # Public IFBench structural transforms. Punctuation-only scaffolds introduce
-    # no lexical claims and are placed as separate tokens from the semantic seed.
     if flags["nested_parentheses"] and not _check_nested_parentheses(candidate):
         candidate = _NESTED_PARENS_MARKER + " " + candidate
         applied.append("IFBENCH_NESTED_PARENTHESES_5")
@@ -176,11 +177,20 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
     if flags["punctuation_cover"] and not _check_punctuation_cover(candidate):
         candidate = candidate.rstrip() + " " + _PUNCTUATION_MARKER
         applied.append("IFBENCH_PUNCTUATION_COVER")
-
-    # Whitespace-only reformatting: lexical token order is unchanged.
     if flags["newline_words"] and not _check_newline_words(candidate):
         candidate = "\n".join(candidate.split())
         applied.append("IFBENCH_WORD_PER_LINE")
+
+    if not _seed_preserved(seed, candidate):
+        return _result(
+            "FAIL_CLOSED",
+            error="SEED_PRESERVATION_INVARIANT_BROKEN",
+            applied_transforms=applied,
+            public_flags=flags,
+            constraints=asdict(constraints),
+            response=None,
+            seed_nonwhitespace_content_preserved=False,
+        )
 
     ok, old_errors = compiler.validate_response(candidate, constraints)
     errors = list(old_errors)
@@ -192,7 +202,6 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
         errors.append("IFBENCH_PUNCTUATION_COVER")
     if flags["newline_words"] and not _check_newline_words(candidate):
         errors.append("IFBENCH_NEWLINE_WORDS")
-
     if not ok or errors:
         return _result(
             "FAIL_CLOSED",
@@ -202,6 +211,7 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
             public_flags=flags,
             constraints=asdict(constraints),
             response=None,
+            seed_nonwhitespace_content_preserved=True,
         )
 
     return _result(
@@ -211,15 +221,14 @@ def transform(seed: str, instruction: str) -> dict[str, Any]:
         public_flags=flags,
         constraints=asdict(constraints),
         exact_postvalidation=True,
-        seed_lexical_content_deleted=False,
+        seed_nonwhitespace_content_preserved=True,
         terminal_cases_used=0,
         hard_nonclaim=(
-            "PASS_PROVES_ONLY_RECOGNIZED_FORMAL_CONSTRAINTS; "
-            "IT_DOES_NOT_PROVE_GENERAL_SEMANTIC_INSTRUCTION_FOLLOWING "
-            "OR LIVEBENCH_IF_GE_65_7"
+            "PASS_PROVES_ONLY_RECOGNIZED_FORMAL_CONSTRAINTS_AND_THE_EXPLICIT_"
+            "NONWHITESPACE_SEED_PRESERVATION_INVARIANT; IT_DOES_NOT_PROVE_"
+            "GENERAL_SEMANTIC_INSTRUCTION_FOLLOWING_OR LIVEBENCH_IF_GE_65_7"
         ),
     )
-
 
 def run(args: dict[str, Any], root=None) -> dict[str, Any]:
     args = args or {}
