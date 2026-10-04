@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_CHARACTER_TRIGRAM_SUCCESSOR_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_CANDIDATE__PUBLIC_FAMILY_DIRECT_RECOMPUTATION_12_OF_12__INDEPENDENT_VERIFICATION_PENDING__ZERO_CREDIT__NO_TERMINAL_AUTHORITY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "root_class": "ROOT1_POSITIVE_OPERATIVE_GAP",
+  "frozen_gap": {
+    "failed_candidate_upper_percent": 64.0,
+    "required_percent": 65.7,
+    "minimum_delta_percentage_points": 1.7
+  },
+  "candidate_runtime": {
+    "controller_path": "canonical/runtime/livebench_character_trigram_constraint_controller_v1.py",
+    "adapter_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v3_candidate.py",
+    "fallback": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v2.py",
+    "policy": "USE_CHARACTER_TRIGRAM_CONTROLLER_ONLY_WHEN_VISIBLE_RATIO_GRAMMAR_IS_RECOGNIZED__OTHERWISE_FALL_BACK_UNCHANGED"
+  },
+  "exact_frozen_scorer": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "path": "livebench/if_runner/ifbench/instructions.py",
+    "git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "ratio_semantics": "SET_OF_CHARACTER_TRIGRAMS__INTERSECTION_OVER_RESPONSE_TRIGRAM_SET_SIZE__PLUS_MINUS_2_PERCENT"
+  },
+  "pinned_public_family": {
+    "repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "data/IFBench_test.jsonl",
+    "git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "rows": 300,
+    "ratio_overlap_rows": 12,
+    "ratio_overlap_mass": 0.04,
+    "max_instruction_depth": 2,
+    "ratio_observed_compositions": [
+      ["ratio:overlap"],
+      ["ratio:overlap", "sentence:keyword"],
+      ["words:consonants", "ratio:overlap"]
+    ]
+  },
+  "direct_recomputation": {
+    "normalized_visible_base_request_extraction": "12_OF_12",
+    "exact_ratio_constraint_pass_against_public_hidden_REFERENCE_TEXT": "12_OF_12",
+    "full_observed_compound_constraint_pass": "12_OF_12",
+    "terminal_cases_used": 0,
+    "case_specific_rules": 0,
+    "hidden_kwargs_used_by_runtime_candidate": false,
+    "hidden_public_kwargs_used_only_by_verifier_for_GROUND_TRUTH_CHECK": true
+  },
+  "conditional_leverage_bound": {
+    "public_ratio_family_mass_percentage_points": 4.0,
+    "frozen_gap_percentage_points": 1.7,
+    "mass_to_gap_ratio": 2.3529411765,
+    "interpretation": "IF_THE_FROZEN_TERMINAL_POPULATION_HAS_COMPARABLE_RATIO_FAMILY_MASS_AND_THE_CURRENT_CANDIDATE_FAILS_ENOUGH_OF_THAT_MASS_THEN_THIS_SINGLE_GENERIC_REPAIR_COULD_BE_SUFFICIENT_TO_CROSS_65_7; NEITHER CONDITION_IS_YET_PROVED"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1863,
+    "branch": "verify/livebench-character-trigram-constructor-20261004-sol",
+    "state": "PENDING__WORKFLOW_NOT_YET_COMPLETED",
+    "workflow_name": "Verify LiveBench Character Trigram Constructor"
+  },
+  "next_minimum_actions": [
+    "OBTAIN_INDEPENDENT_PUBLIC_VERIFIER_PASS_FOR_EXACT_PINNED_BYTES_AND_12_OF_12_OBSERVED_COMPOSITION",
+    "VERIFY_CONTROLLER_AND_ADAPTER_EXACT_BLOBS_WITH_SYNTHETIC_TESTS",
+    "PROVE_OR_BIND_EXACT_FROZEN_LIVEBENCH_VISIBLE_PROMPT_CONSTRUCTION_SCOPE_WITHOUT_READING_UNEXPOSED_TERMINAL_CASES",
+    "FREEZE_SUCCESSOR_COMMIT_BEFORE_ANY_NEW_COMPARATOR_RESULT",
+    "REPLAY_ONLY_ALREADY_EXPOSED_CASES_1_TO_72_UNDER_EXISTING_ONE_USE_AUTHORITY_TO_MEASURE_CAUSAL_DELTA",
+    "IF_DELTA_CAN_FORCE_65_7_CLOSE_ROOT1; OTHERWISE_RECOMPUTE_CAUSAL_HISTOGRAM_AND_WORK_ONLY_NEXT_DOMINANT_GENERIC CLASS"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_DATASET_EQUIVALENCE",
+    "NO_SEMANTIC_BASE_TASK_QUALITY_PROOF",
+    "NO_CLAIM_CURRENT_FROZEN_CANDIDATE_FAILS_ALL_RATIO_ROWS",
+    "NO_CLAIM_PUBLIC_4_PERCENT_EQUALS_TERMINAL_4_PERCENT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
