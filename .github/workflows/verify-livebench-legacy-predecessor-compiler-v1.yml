@@ -1,0 +1,60 @@
+name: Verify LiveBench legacy predecessor compiler V1
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py"
+      - "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py"
+      - "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py"
+      - ".github/workflows/verify-livebench-legacy-predecessor-compiler-v1.yml"
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py"
+      - "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py"
+      - "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py"
+      - ".github/workflows/verify-livebench-legacy-predecessor-compiler-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install public replay dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pyarrow huggingface_hub
+
+      - name: Fetch exact removed predecessor parquet
+        run: |
+          python - <<'PY'
+          from huggingface_hub import hf_hub_download
+          p = hf_hub_download(
+              repo_id="livebench/instruction_following",
+              repo_type="dataset",
+              revision="4f7ab12f0d47848da31de92bd7cc3d7d4acfe695",
+              filename="data/test-00000-of-00001.parquet",
+              local_dir="/tmp/livebench-predecessor",
+          )
+          print(p)
+          PY
+
+      - name: Replay visible compiler without active terminal rows
+        run: |
+          mkdir -p /tmp/receipt
+          python canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py \
+            --parquet /tmp/livebench-predecessor/data/test-00000-of-00001.parquet \
+            --output /tmp/receipt/livebench-legacy-predecessor-compiler-v1.json
+
+      - name: Upload replay receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: livebench-legacy-predecessor-compiler-v1
+          path: /tmp/receipt/livebench-legacy-predecessor-compiler-v1.json
