@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RUNTIME_CLASSIFICATION_REPLAY72_V7_CANDIDATE",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SANITIZED_REPLAY72_CAUSAL_CLASSIFICATION_ONLY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Classify the 29 causally-unclassified runtime exits from the already-exposed 72-case LiveBench prefix without using or exporting prompt content, response content, raw stdout, raw stderr, raw exception messages, or source-code lines.",
+  "current_root": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "822d7a0e64b2e919a873526d111e7202c40e1f5b"
+  },
+  "prior_truth": {
+    "path": "canonical/verification/LIVEBENCH_V6_REPLAY72_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "2714cee0a278c5bd426437bbd99fe3267cd85e6f",
+    "terminal_cases_consumed": 72,
+    "policy_blocked_count": 43,
+    "runtime_exit_count": 29,
+    "valid_candidate_response_count": 0,
+    "predicate_failure_admissible": false,
+    "root1_reopen_authorized": false
+  },
+  "frozen_subject": {
+    "candidate_git_blob_sha": "07e857f0a7095838cecbc6a79961fe9580673ee4",
+    "prior_executor_repository": "moxnixmdj/verification-capsule-runner",
+    "prior_executor_path": "execute_livebench_if_replay72_v4_candidate.py",
+    "prior_executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e",
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "case_order": "QUESTION_ID_ASCENDING_FIXED_PREEXECUTION",
+    "replay_prefix_limit": 72
+  },
+  "diagnostic_output_allowlist": [
+    "NORMALIZED_EXCEPTION_CLASS",
+    "NORMALIZED_TRACEBACK_FRAME_MODULE_OR_CANONICAL_RELATIVE_PATH",
+    "NORMALIZED_TRACEBACK_FUNCTION_NAME",
+    "SAFE_PREDEFINED_POLICY_CATEGORY",
+    "SANITIZED_STRUCTURE_SHA256",
+    "AGGREGATE_COUNT"
+  ],
+  "forbidden_output": [
+    "PROMPT_CONTENT",
+    "PROMPT_HASH_DERIVED_FROM_NEW_TRANSFORMATION",
+    "RESPONSE_CONTENT",
+    "RAW_STDOUT",
+    "RAW_STDERR",
+    "RAW_EXCEPTION_MESSAGE",
+    "TRACEBACK_SOURCE_CODE_LINE",
+    "CASE_73_OR_LATER",
+    "NEW_CASE_SELECTION",
+    "SCORE_OR_PASS_FAIL_DERIVED_FROM_DIAGNOSTIC"
+  ],
+  "replay_scope": {
+    "already_exposed_prefix_only": true,
+    "terminal_case_limit": 72,
+    "case_73_or_later_authorized": false,
+    "new_case_exposure_authorized": false,
+    "scoring_required": false,
+    "repair_design_from_prompt_or_response_forbidden": true
+  },
+  "activation_requirements": [
+    "INDEPENDENTLY_VERIFY_EXACT_CANDIDATE_BYTES",
+    "INDEPENDENTLY_VERIFY_DIAGNOSTIC_EXECUTOR_EMITS_ONLY_ALLOWLISTED_STRUCTURAL_FIELDS",
+    "INDEPENDENTLY_VERIFY_RAW_STDOUT_STDERR_EXCEPTION_MESSAGES_AND_SOURCE_LINES_NEVER_ESCAPE",
+    "INDEPENDENTLY_VERIFY_REPLAY_LIMIT_72_AND_NO_CASE_73_PLUS",
+    "INDEPENDENTLY_VERIFY_CURRENT_ROOT_COMPATIBILITY_AT_POINT_OF_USE",
+    "BIND_EXACT_DIAGNOSTIC_EXECUTOR_BLOB_AND_ONE_EPOCH_LAUNCHER",
+    "CREATE_SEPARATE_ONE_EPOCH_V7_ACTIVATION"
+  ],
+  "authority": {
+    "execution": false,
+    "replay_existing_prefix": false,
+    "new_case_exposure": false,
+    "predicate_local_fresh_reality": false,
+    "global_fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false,
+    "root1_reopen": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
