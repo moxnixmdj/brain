@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_FRESH_HOLDOUT_ANSWER_KEY_V1",
+  "date": "2026-10-04",
+  "created_after_frozen_executor_and_request_manifest": true,
+  "targets": {
+    "H20_GITHUB_JA_MORPH": "polm/fugashi",
+    "H20_GITHUB_RUST_SEARCH": "BurntSushi/ripgrep",
+    "H20_GITHUB_AR_NLP": "CAMeL-Lab/camel_tools",
+    "H20_NPM_CONCURRENT_MAP": "p-map",
+    "H20_CRATE_JSON": "serde_json",
+    "H20_HF_SENTENCE_SIM": "sentence-transformers/all-MiniLM-L6-v2",
+    "H20_HF_TEXT_CLASS": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+    "H20_MAVEN_LANG_UTIL": "org.apache.commons:commons-lang3",
+    "H20_MAVEN_HTML": "org.jsoup:jsoup",
+    "H20_NUGET_MICRO_ORM": "Dapper",
+    "H20_RUBY_JOBS": "sidekiq",
+    "H20_PHP_HTTP": "symfony/http-client"
+  },
+  "hard_rules": [
+    "ANSWER_KEY_IS_SCORING_ONLY",
+    "ANSWER_KEY_MUST_BE_LOADED_ONLY_AFTER_ALL_HOLDOUT_RETRIEVAL_EXECUTIONS_COMPLETE",
+    "TARGET_IDENTITIES_MUST_NOT_APPEAR_IN_REQUEST_QUERIES_OR_ROUTE_GENERATION",
+    "ORIGINAL_HOLDOUT_RESULT_IS_IMMUTABLE_AFTER_FIRST_EXECUTION"
+  ]
+}
