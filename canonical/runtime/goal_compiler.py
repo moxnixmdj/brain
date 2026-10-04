@@ -519,6 +519,11 @@ def _compile_exact_literal_response_goal(goal):
         if not unquoted:
             return None
         literal=unquoted.group(1).strip()
+        # A quote-like opener belongs to the quoted grammar. If that grammar
+        # failed (empty target, mismatched delimiter, trailing junk), fail
+        # closed instead of laundering it through the unquoted route.
+        if literal.startswith(('"',"“","”")):
+            return None
 
     if not literal or "\\n" in literal or "\\r" in literal:
         return None
