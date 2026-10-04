@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_GIT_REF_ONE_USE_CLAIM_BACKEND_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__OBSERVED_CREATE_ONCE_GIT_REF_SEMANTICS__ZERO_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Use a GitHub Git ref keyed by the lease digest as the durable atomic one-use claim primitive for shadow benchmark collection.",
+  "backend": {
+    "repository": "moxnixmdj/brain",
+    "namespace": "refs/heads/shadow-claims/",
+    "claim_key_rule": "shadow-claims/<lease_digest_sha256>",
+    "operation": "GITHUB_CREATE_REFERENCE",
+    "success_condition": "FIRST_CREATE_SUCCEEDS",
+    "replay_condition": "SECOND_CREATE_OF_IDENTICAL_REF_MUST_FAIL_REFERENCE_ALREADY_EXISTS"
+  },
+  "observed_probe": {
+    "probe_ref": "refs/heads/shadow-claim-probe/20261004-0646-v1",
+    "base_commit": "13c8668c8f3d0f1a5a84e2215b670ddc7d2e9eeb",
+    "first_create": "SUCCEEDED",
+    "second_identical_create": "REJECTED",
+    "second_status": 422,
+    "second_error": "Reference already exists"
+  },
+  "claim_receipt_requirements": [
+    "LEASE_DIGEST_SHA256_BOUND",
+    "CLAIM_REF_EXACTLY_DERIVED_FROM_LEASE_DIGEST",
+    "POINT_OF_USE_PREFLIGHT_PASS_BOUND",
+    "FIRST_CREATE_SUCCESS_RECEIPT_BOUND",
+    "SECOND_CREATE_NOT_REQUIRED_FOR_PRODUCTION_CLAIM",
+    "CASE_REVEAL_HAS_NOT_OCCURRED_AT_CLAIM_TIME",
+    "EXECUTION_HAS_NOT_STARTED_AT_CLAIM_TIME"
+  ],
+  "hard_rules": [
+    "PROBE_OBSERVATION_IS_NOT_INDEPENDENT_VERIFICATION",
+    "NO_TERMINAL_CASE_CONTENT_READ",
+    "NO_CASE_REVEAL_AUTHORITY_FROM_THIS_FILE",
+    "NO_SHADOW_COLLECTION_ACTIVATION_FROM_THIS_FILE",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "FAIL_CLOSED_IF_CLAIM_REF_ALREADY_EXISTS",
+    "FAIL_CLOSED_IF_REF_NAME_DOES_NOT_MATCH_LEASE_DIGEST",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "claim_backend_verified": false,
+  "shadow_collection_authority": false,
+  "fresh_reality_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
