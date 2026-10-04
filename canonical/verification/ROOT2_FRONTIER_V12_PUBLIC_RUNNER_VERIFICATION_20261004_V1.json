@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V12_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PURE_ZERO_REALITY_SCHEDULING_REDUCTION__COUNTS_STABLE__ZERO_CREDIT__NO_FRESH_REALITY",
+  "subject_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
+  "subject_git_blob_sha": "75ca9127a73ca2dd52a49f2f09e2e0ccc384129a",
+  "parent_v11_git_blob_sha": "6857750dea3a0af48a5acc545b6f66b619d4335b",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1693,
+    "head_sha": "bd4a98a07cc6adadb8281c678dd16ff055c7adb1",
+    "merge_commit": "592b944ea8f53650b3f72dbe0706897f2461336b",
+    "workflow_run_id": 37179392646,
+    "workflow_job_id": 111368684287,
+    "conclusion": "success"
+  },
+  "verified": {
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root2_touching": 19,
+    "relative_elo_pure_absolute_nonrelative_routes_pruned_for_three_predicates": true,
+    "synthesis_five_dimension_scorer_binding_underspecification_deleted": true,
+    "synthesis_conservative_reducer_underspecification_deleted": true,
+    "external_fact_set_unchanged": true,
+    "fresh_reality_block_unchanged": true,
+    "unrelated_routes_unchanged": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
