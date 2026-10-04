@@ -13,7 +13,7 @@
     "new_reality_units_consumed": 0,
     "rule": "UNKNOWN_DOMAIN_V6_PROMOTION_REVOKED_BY_REACHABLE_ISINSTANCE_ACCEPTED_STR_SUBCLASS_OVERRIDE_COUNTEREXAMPLE__REPAIRED_SUBCLASS_SAFE_BLOBS_REQUIRE_INDEPENDENT_CONTENT_BOUND_VERIFICATION_AND_SEPARATE_REDUCTION__LIVEBENCH_EXACT200_REMAINS_DIRTY_AND_FAIL_CLOSED_NOT_PROVEN",
     "latest_delta_receipt": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
-    "latest_delta_receipt_sha": "a47accdf0c3a65f0da0e4171b1466cac575bbaa2"
+    "latest_delta_receipt_sha": "a30a19aa0ab9ac18eaf0d005cf1f71b636660fb4"
   },
   "claims": [
     {
@@ -200,12 +200,12 @@
       "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
       "state": "EXTERNAL_BLOCKED",
       "source_path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
-      "source_sha": "a47accdf0c3a65f0da0e4171b1466cac575bbaa2",
+      "source_sha": "a30a19aa0ab9ac18eaf0d005cf1f71b636660fb4",
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
       "supporting_sources": [
         {
           "path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
-          "sha": "a47accdf0c3a65f0da0e4171b1466cac575bbaa2"
+          "sha": "a30a19aa0ab9ac18eaf0d005cf1f71b636660fb4"
         },
         {
           "path": "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py",
