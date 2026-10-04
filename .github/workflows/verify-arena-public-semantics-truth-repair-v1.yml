@@ -1,0 +1,23 @@
+name: verify-arena-public-semantics-truth-repair-v1
+on:
+  pull_request:
+    paths:
+      - 'canonical/governance/ARENA_PUBLIC_SEMANTICS_TRUTH_REPAIR_V1.json'
+      - 'canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json'
+      - 'canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json'
+      - 'canonical/runtime/arena_public_semantics_truth_repair_guard_v1.py'
+      - 'canonical/tests/test_arena_public_semantics_truth_repair_guard_v1.py'
+      - '.github/workflows/verify-arena-public-semantics-truth-repair-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python canonical/runtime/arena_public_semantics_truth_repair_guard_v1.py
+      - run: python -c "from canonical.tests.test_arena_public_semantics_truth_repair_guard_v1 import test_arena_truth_repair; test_arena_truth_repair()"

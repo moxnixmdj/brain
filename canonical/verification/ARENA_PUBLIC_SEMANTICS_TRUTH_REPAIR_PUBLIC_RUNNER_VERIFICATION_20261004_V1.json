@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ARENA_PUBLIC_SEMANTICS_TRUTH_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BYTE_TRUTH_REPAIR_CANDIDATE__ZERO_CREDIT",
+  "subjects": {
+    "canonical/governance/ARENA_PUBLIC_SEMANTICS_TRUTH_REPAIR_V1.json": "d7a7165630bd2963c78d5e7f4fbd2f286e57334a",
+    "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "3fafe7ec793ed1b2419b268d6559be3f01fbfacf",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "ce7dd92470b8767e7ef0390457ddab77df928a58"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1785,
+    "merged_commit": "75fc0cb31f613c3d5b8a242d763135966e6a5a53",
+    "workflow_run_id": 37190832565,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_GIT_BLOB_IDENTITIES_RECOMPUTED_FROM_BYTES",
+    "ARENA_API_PORTAL_EXISTENCE_PUBLICLY_REPRODUCIBLE",
+    "ENDPOINT_AND_ROUTING_SEMANTICS_NOT_UNAUTHENTICATED_PUBLICLY_REPRODUCIBLE",
+    "ACCOUNT_MODEL_AVAILABILITY_ZERO_SPEND_AND_HARNESS_COMPARABILITY_REMAIN_UNBOUND",
+    "TERMINAL_COUNTS_PRESERVED_5_ACCEPTED_12_PROVED_26_UNRESOLVED",
+    "TERMINAL_REMAINS_FALSE",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "ZERO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
