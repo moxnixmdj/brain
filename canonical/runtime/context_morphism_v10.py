@@ -114,6 +114,11 @@ def verify(*,raw:Mapping[str,Any],expected_source_context_sha256:str,
         and r.get("no_new_strategy_invalidators") is True
         and r.get("conservative_performance_transport_valid") is True
         and r.get("source_episodes_executed_bound_strategy") is True
+        and r.get("canonical_strategy_semantics_complete_for_transport") is True
+        and r.get("source_policy_evidence_complete_for_bound_strategy") is True
+        and r.get("source_episodes_distinct_evidence_instances") is True
+        and r.get("source_context_strategy_relevant_scope_complete") is True
+        and r.get("target_context_strategy_relevant_scope_complete") is True
     )
     if not required:
         raise ContextMorphismError("MORPHISM_SEMANTIC_PROOF_INCOMPLETE")
