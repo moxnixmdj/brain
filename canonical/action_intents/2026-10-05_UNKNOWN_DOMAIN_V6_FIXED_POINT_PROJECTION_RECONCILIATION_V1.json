@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "mission": "PERMANENTLY_OWN_ALL_19_USEFUL_OPUS_5_5_CAPABILITY_FAMILIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "action": "DERIVED_FIXED_POINT_RECONCILIATION_AFTER_UNKNOWN_DOMAIN_V6_ATOMIC_PROMOTION",
+  "canonical_base_commit": "938060f5e420541db850ebbc4896a965f745c606",
+  "inputs": {
+    "ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "dd85ca4bb01193220a24afbb189365937024b2a8"
+    },
+    "closure": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "4d8867a35b05db4073fd49d508ef36da090b01fa"
+    },
+    "root": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "919da676976043e5b501f207d3cf420dc4fb50b1"
+    },
+    "matrix_prior_sha": "11498bd194c8018617767918edec020268239bc1"
+  },
+  "derived_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 13,
+    "unresolved_atomic": 25,
+    "root1_positive_gap_count": 0,
+    "root2_touching": 19,
+    "root3_touching": 9,
+    "unknown_domain_family_state": "OPEN__MYSTERYMECHANISM_GE_49_55_REMAINS",
+    "terminal": false
+  },
+  "invariants": [
+    "NO_NEW_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_REALITY_OR_TERMINAL_CASES",
+    "NO_THRESHOLD_CHANGE",
+    "ALL_PUBLIC_FRONTIER_MIRRORS_DERIVED_FROM_CURRENT_TERMINAL_AUTHORITY",
+    "AUTHORITY_POINTERS_CONTENT_ADDRESS_EXACT_CURRENT_INPUTS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "atomic_predicate_delta": 0
+  }
+}

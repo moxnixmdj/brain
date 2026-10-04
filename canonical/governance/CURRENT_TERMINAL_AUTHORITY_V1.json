@@ -16,12 +16,12 @@
   "sources": {
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-      "git_blob_sha": "fae1bc5338993911f1078680996aa48e677d7a15",
+      "git_blob_sha": "4d8867a35b05db4073fd49d508ef36da090b01fa",
       "status": "CURRENT_SCOPE_RECONCILED__5_OF_19_ACCEPTANCE_PASS__5_OF_19_VERIFIED_OWNED__14_OPEN__TERMINAL_FALSE"
     },
     "ownership_matrix": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "git_blob_sha": "11498bd194c8018617767918edec020268239bc1",
+      "git_blob_sha": "fa06cacfeeb801a4ebf8311a0d4b17ccc17b3dcf",
       "status": "CURRENT_RECONCILED__5_OF_19_ACCEPTANCE__5_VERIFIED_OWNED__14_ACCEPTANCE_OPEN"
     },
     "acceptance_calibration": {
