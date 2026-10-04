@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Public predecessor replay for legacy LiveBench visible compiler V2.
+"""Public predecessor replay for legacy LiveBench visible compiler V4.
 
 This audit intentionally uses ONLY the removed 200-row predecessor dataset at
 livebench/instruction_following@4f7ab12... . Hidden instruction ids/kwargs are
@@ -18,7 +18,7 @@ from typing import Any
 
 import pyarrow.parquet as pq
 
-from canonical.runtime import livebench_legacy_visible_constraint_compiler_v2 as compiler
+from canonical.runtime import livebench_legacy_visible_constraint_compiler_v4 as compiler
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY_PREDECESSOR_COMPILER_AUDIT_V1"
 PREDECESSOR_REVISION = "4f7ab12f0d47848da31de92bd7cc3d7d4acfe695"
@@ -136,7 +136,7 @@ def audit(parquet_path: Path) -> dict[str, Any]:
         if params_ok:
             kwargs_exact_rows += 1
 
-        complete = bool(out.get("all_recognized_parameters_complete"))
+        complete = (\n            not list(out.get("parameter_incomplete") or [])\n            and all(bool(x.get("parameter_complete")) for x in constraints)\n        )
         if complete:
             complete_rows += 1
 
