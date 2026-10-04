@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_V3_SUCCESSOR_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CLOSES_TWO_KNOWN_V2_UNIVERSAL_HOLES_IF_INDEPENDENTLY_VERIFIED__ZERO_CREDIT__NO_PRODUCTION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "supersedes_false_candidate": "UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION",
+  "source_revocation": {
+    "path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_REVOCATION_20261005_V1.json",
+    "required_holes": [
+      "STRUCTURAL_IDENTIFIER_TOTALITY_FOR_EVERY_VALID_EMITTED_POPULATION",
+      "EXACT_ADD2_ROLE_ORIENTATION_OR_OTHER_PROOF_OF_EXACT_IEEE754_GOLD_EQUALITY"
+    ]
+  },
+  "exact_blobs": {
+    "canonical/runtime/unknown_domain_direct_candidate_v3.py": "afafbf729940d6b77b65a76f78e5b241d30a9ed9",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v3.py": "7e2b4627812e1b1d2c3923ad6c1138a5d90ef923",
+    "canonical/tests/test_unknown_domain_direct_v3_successor.py": "3226e7bb9978a0d57140d6795c9b62e82acf00ce"
+  },
+  "repairs": {
+    "identifier_totality": {
+      "mechanism": "V3_WRAPS_V2_AND_FAILS_CLOSED_BEFORE_RETURNING_ANY_POPULATION_IF_LOAD_BEARING_SOURCE_OR_TARGET_OPAQUE_IDENTIFIERS_ARE_NONUNIQUE_OR_CROSS_DOMAIN_COLLIDE",
+      "theorem_scope": "EVERY_POPULATION_SUCCESSFULLY_RETURNED_BY_V3_SATISFIES_THE_EXPLICIT_IDENTIFIER_TOTALITY_POSTCONDITION",
+      "no_hash_collision_assumption": true
+    },
+    "add2_exact_role_orientation": {
+      "mechanism": "MATCH_VISIBLE_DOMAIN_B_FEATURE_SIGN_SIGNATURES_TO_DOMAIN_A_ROLE_SIGN_SIGNATURES_FROM_THE_INDEPENDENTLY_EARNED_SOURCE_RECEIPT_AFTER_AT_LEAST_ONE_ALLOWED_PROBE_BREAKS_DISTRACTOR_MIMICRY",
+      "inputs_used": [
+        "VISIBLE_DOMAIN_A_TASK_INPUTS",
+        "VISIBLE_SOURCE_ROLE_BINDING_IN_EARNED_RECEIPT",
+        "VISIBLE_DOMAIN_B_PUBLIC_TASK_INPUTS",
+        "VISIBLE_ALLOWED_PROBE_TRANSCRIPT"
+      ],
+      "forbidden_inputs": [
+        "HIDDEN_DOMAIN_MAPPING",
+        "HIDDEN_GOLD_TERMINAL_CONSEQUENCE",
+        "EVALUATOR_SECRET",
+        "POST_FREEZE_BEACON",
+        "PRODUCTION_SCORE_OR_FAILURE_FEEDBACK"
+      ],
+      "exact_float_rule": "SELECT_EXACT_ROLE_ORIENTATION_BEFORE_CALLING_THE_UNCHANGED_UDIR_V1_ADD2_EVALUATOR__DO_NOT_USE_ROUNDED_QUERY_CONSEQUENCE_TO_BREAK_THE_ROLE_TIE"
+    }
+  },
+  "preproduction_falsification": {
+    "tests_path": "canonical/tests/test_unknown_domain_direct_v3_successor.py",
+    "cases": [
+      "EXACT_SECRET0_INDEX4_COUNTEREXAMPLE_THAT_REVOKED_V2_MUST_PASS",
+      "32_QUALIFICATION_BEACONS_X_27_CASES_MUST_ALL_PASS_EXACT_SCORER_WITHIN_PROBE_BUDGET",
+      "TARGET_IDENTIFIER_COLLISION_MUST_FAIL_CLOSED",
+      "SOURCE_ROLE_IDENTIFIER_COLLISION_MUST_FAIL_CLOSED",
+      "CROSS_DOMAIN_IDENTIFIER_COLLISION_MUST_FAIL_CLOSED"
+    ]
+  },
+  "required_independent_verification": [
+    "EXACT_BLOB_IDENTITY",
+    "RUN_STDLIB_UNIT_SUITE",
+    "REPRODUCE_REVOKED_V2_COUNTEREXAMPLE_AND_SHOW_V3_EXACT_PASS",
+    "VERIFY_CANDIDATE_HAS_NO_HIDDEN_RECORD_ARGUMENT_OR_IMPORT",
+    "VERIFY_V3_GENERATOR_RETURNS_NO_POPULATION_BEFORE_IDENTIFIER_TOTALITY_CHECK",
+    "NO_PRODUCTION_CASE_GENERATION"
+  ],
+  "promotion_gate": [
+    "INDEPENDENT_VERIFICATION_PASS",
+    "SEPARATE_FAIL_CLOSED_ROOT3_SCOPE_REDUCTION",
+    "SEPARATE_ACCEPTANCE_REDUCTION",
+    "NO_PRODUCTION_CREDIT_FROM_QUALIFICATION_FIXTURES"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_PRODUCTION_EXECUTION_AUTHORITY",
+    "NO_CLAIM_V3_IS_CORRECT_UNTIL_INDEPENDENT_VERIFICATION_PASSES",
+    "NO_ROOT1_REOPEN_OR_CLOSE_FROM_THIS_CANDIDATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "production_cases_generated": 0,
+    "production_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
