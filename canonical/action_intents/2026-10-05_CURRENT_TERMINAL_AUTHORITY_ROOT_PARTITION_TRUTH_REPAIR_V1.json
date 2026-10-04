@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_PREMUTATION_INTENT__TRUTH_REPAIR_ONLY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "base_commit": "f98c7bc53eb5ea5cab7679fa4cb367b4f2a22b79",
+  "problem": "CURRENT_TERMINAL_AUTHORITY_V1 contains stale top-level scheduling text and historical source-status labels that still assert the revoked LiveBench Root1-only / Root2-18 partition, while the same current authority and TERMINAL_ROOT_CAUSE_STATE_V1 contain the active corrected partition Root1=0, Root2-touching=19, LiveBench=Root2-only.",
+  "controlling_truth": {
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_blob_sha": "3fd35b7865f7827a5a7b4202bc625fe0f980dcda",
+    "livebench_revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
+    "livebench_revocation_blob_sha": "bbbe29ec26b1f96ba5538ca159f899e316b167e7",
+    "root2_19_activation_path": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json",
+    "root2_19_activation_blob_sha": "3acbf619667fb8db5884069b4721b460f2da322c",
+    "current_partition": {
+      "root1_positive_gap_count": 0,
+      "root2_only": 16,
+      "root3_only": 7,
+      "root2_and_root3": 3,
+      "root2_touching": 19,
+      "livebench_class": "ROOT2_ONLY"
+    }
+  },
+  "duplicate_guard": {
+    "checked_open_pull_requests": true,
+    "prior_same_blocker_pr": 1805,
+    "prior_pr_title": "Truth-repair stale Root1 / Root2-18 pointers in current authority",
+    "prior_pr_head": "4be703e50ccf0a326acd2eb41750ed7d29f9fbf5",
+    "prior_pr_base": "94d6c7ffd8a5f78ebe523e65aec93e44b6c86701",
+    "prior_pr_verification_state": "OPEN__ALL_OBSERVED_ATTACHED_WORKFLOWS_FAILED__STALE_BASE",
+    "disposition": "SUPERSEDE_WITH_CURRENT_BASE_REPAIR__DO_NOT_RUN_PARALLEL_DUPLICATE_IMPLEMENTATIONS",
+    "current_repair_delta": "Reapply the same truth repair against the still-unchanged authority blob on current main, preserve newer root overlays, and bind regression directly to current TERMINAL_ROOT_CAUSE_STATE_V1."
+  },
+  "mutation_scope": [
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "canonical/tests/test_current_terminal_authority_root_partition_coherence_v1.py"
+  ],
+  "invariants": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY",
+    "NO_TERMINAL_CASE_EXECUTION_OR_EXPOSURE",
+    "NO_THRESHOLD_CHANGE",
+    "NO_ROOT1_REPAIR_SCHEDULED_WITHOUT_A_NEW_POSITIVE_OPERATIVE_GAP_PROOF",
+    "ROOT2_SCHEDULER_DOMAIN_EQUALS_CURRENT_19_TOUCHING_PREDICATES"
+  ],
+  "acceptance_test": "Current authority top-level scheduling text, current-root overlays, source labels, and TERMINAL_ROOT_CAUSE_STATE_V1 must agree that Root1 is inactive, LiveBench is Root2-only, and the active Root2 scheduler domain has 19 touching predicates.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
