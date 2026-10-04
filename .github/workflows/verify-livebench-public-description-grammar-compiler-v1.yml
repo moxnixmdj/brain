@@ -1,0 +1,82 @@
+name: Verify LiveBench public description grammar compiler v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/ifbench_public_description_grammar_compiler_v1.py"
+      - "canonical/tests/test_ifbench_public_description_grammar_compiler_v1.py"
+      - "canonical/governance/LIVEBENCH_PUBLIC_DESCRIPTION_GRAMMAR_COMPILER_CANDIDATE_V1.json"
+      - ".github/workflows/verify-livebench-public-description-grammar-compiler-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Unit tests
+        run: python -m unittest canonical.tests.test_ifbench_public_description_grammar_compiler_v1
+
+      - name: Fetch exact pinned public upstream source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/livebench-public-grammar
+          base="https://raw.githubusercontent.com/LiveBench/LiveBench/8f8e5c381a16e3f24257776edd53471fe86f8091"
+          curl -fsSL "$base/livebench/if_runner/ifbench/instructions.py" -o /tmp/livebench-public-grammar/modern_instructions.py
+          curl -fsSL "$base/livebench/if_runner/ifbench/instructions_registry.py" -o /tmp/livebench-public-grammar/modern_registry.py
+          curl -fsSL "$base/livebench/if_runner/instruction_following_eval/instructions.py" -o /tmp/livebench-public-grammar/legacy_instructions.py
+          curl -fsSL "$base/livebench/if_runner/instruction_following_eval/instructions_registry.py" -o /tmp/livebench-public-grammar/legacy_registry.py
+
+          test "$(git hash-object /tmp/livebench-public-grammar/modern_instructions.py)" = "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+          test "$(git hash-object /tmp/livebench-public-grammar/modern_registry.py)" = "adfed4832877566e62970257b50c6fa32c302fb2"
+          test "$(git hash-object /tmp/livebench-public-grammar/legacy_instructions.py)" = "4997bab885a676d92545fd91a9a20b48d234a2b2"
+          test "$(git hash-object /tmp/livebench-public-grammar/legacy_registry.py)" = "903ed738398648c7cfac61d5ffa478c22f1f0891"
+
+      - name: Exact 83 to 80 plus 3 source-only proof
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from canonical.runtime.ifbench_public_description_grammar_compiler_v1 import compile_grammar, combine_grammars
+
+          root = Path("/tmp/livebench-public-grammar")
+          modern = compile_grammar(
+              (root / "modern_instructions.py").read_text(encoding="utf-8"),
+              (root / "modern_registry.py").read_text(encoding="utf-8"),
+          )
+          legacy = compile_grammar(
+              (root / "legacy_instructions.py").read_text(encoding="utf-8"),
+              (root / "legacy_registry.py").read_text(encoding="utf-8"),
+          )
+          combined = combine_grammars(modern, legacy)
+
+          assert modern["active_checker_count"] == 58, modern["active_checker_count"]
+          assert legacy["active_checker_count"] == 25, legacy["active_checker_count"]
+          assert combined["active_checker_count"] == 83, combined["active_checker_count"]
+          assert combined["visible_complete_count"] == 80, combined["visible_complete_count"]
+          assert combined["hidden_parameter_checker_count"] == 3, combined["hidden_parameter_checker_count"]
+
+          residual = {
+              (x["instruction_id"], tuple(x["hidden_parameter_keys"]))
+              for x in combined["checkers"]
+              if not x["visible_complete"]
+          }
+          expected = {
+              ("ratio:overlap", ("reference_text",)),
+              ("repeat:repeat_span", ("prompt_to_repeat",)),
+              ("combination:repeat_prompt", ("prompt_to_repeat",)),
+          }
+          assert residual == expected, (residual, expected)
+          print({
+              "modern": modern["active_checker_count"],
+              "legacy": legacy["active_checker_count"],
+              "total": combined["active_checker_count"],
+              "visible_complete": combined["visible_complete_count"],
+              "hidden_semantic_residuals": sorted(residual),
+          })
+          PY
