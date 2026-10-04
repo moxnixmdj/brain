@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SUCCESSOR_ZERO_CASE_LITERAL_ROUTING_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FROZEN_LIVEBENCH_RUNTIME_SUCCESSOR_ZERO_CASE__MODEL_INDEPENDENT__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "successor_goal_compiler_path": "canonical/runtime/goal_compiler.py",
+    "successor_goal_compiler_git_blob_sha": "43abde3a26acbbab7d50804f431ea448a170d722",
+    "frozen_runtime_package_basis": "canonical/governance/LIVEBENCH_FROZEN_RUNTIME_PACKAGE_CLOSURE_RECONCILIATION_V1.json"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1811,
+    "head_sha": "6699cd538f3a13a508e79aae53a4ea59410ca61b",
+    "workflow_run_id": 37193132574,
+    "workflow_job_id": 111409344940,
+    "conclusion": "success",
+    "diagnostic_path": "diagnose_livebench_public_inference_capsule_20261004.py",
+    "diagnostic_git_blob_sha": "4fca448c0d3b2f6c5c8d7d87613a4f74d0092b9e",
+    "workflow_path": ".github/workflows/diagnose-livebench-public-inference-capsule-20261004.yml",
+    "workflow_git_blob_sha": "6a8d47d71122d4a33b6e54009fdbff290ee3a7ba"
+  },
+  "verified": {
+    "request_class": "SYNTHETIC_ZERO_CASE_INFERENCE",
+    "preexposed_instruction": "Reply with exactly SYNTHETIC_OK.",
+    "adapter_status": "PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE",
+    "exact_answer": "SYNTHETIC_OK",
+    "cognition_dependency_class": "MODEL_INDEPENDENT",
+    "model_dependency_count": 0,
+    "paid_external_model_or_api_used": false,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "blocker_delta": {
+    "before": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH__CAPABILITY_ACQUISITION_REQUIRED",
+    "after": "DETERMINISTIC_EXACT_LITERAL_RESPONSE__MODEL_INDEPENDENT_FINISH_PASS",
+    "deleted": [
+      "LIVEBENCH_SYNTHETIC_ZERO_CASE_GENERAL_INSTRUCTION_ROUTING_BLOCKER_FOR_THIS_EXACT_LITERAL_CLASS",
+      "IRRELEVANT_POST_PROMPT_PACKAGE_ACQUISITION_FOR_THIS_EXACT_LITERAL_CLASS"
+    ],
+    "preserved": [
+      "29_V6_RUNTIME_EXIT_CAUSAL_CLASSES_REMAIN_SEPARATE_UNLESS_V7_OR_OTHER_SANITIZED_DIAGNOSTIC_PROVES_THEM",
+      "LIVEBENCH_IF_GE_65_7_REMAINS_UNRESOLVED",
+      "NO_CASE_73_OR_LATER_AUTHORITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_PROMPT_OR_RESPONSE_USED_TO_DESIGN_REPAIR",
+    "NO_TERMINAL_CASE_REPLAY",
+    "NO_LIVEBENCH_SCORE",
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_ROOT1_REOPEN",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_AUTHORITY_FOR_V7_OR_ANY_OTHER_REPLAY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
