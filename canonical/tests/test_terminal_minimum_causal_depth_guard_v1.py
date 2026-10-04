@@ -7,4 +7,5 @@ def test_guard_passes():
     assert out["relative_elo_transport_fail_closed"] is True
     assert out["arena_account_inference_fail_closed"] is True
     assert out["isolation_authority_fail_closed"] is True
+    assert out["blind_threshold_minimum_information_bound"] is True
     assert out["acceptance_credit_delta"] == 0
