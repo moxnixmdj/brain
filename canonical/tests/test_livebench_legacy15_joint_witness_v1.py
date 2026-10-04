@@ -108,3 +108,16 @@ def test_quotation_bullets_and_end_all_compose():
     response = out["response"]
     assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")
+
+
+def test_postscript_ps_compacts_under_less_than_two_sentences():
+    prompt = (
+        "Your response should contain less than 2 sentences. "
+        "At the end of your response, please explicitly add a postscript starting with P.S."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert "P.S." in out["response"]
+    # No whitespace may follow the scorer-visible P.S. marker here: frozen
+    # Punkt otherwise counts that period as an additional sentence boundary.
+    assert "P.S. " not in out["response"]
