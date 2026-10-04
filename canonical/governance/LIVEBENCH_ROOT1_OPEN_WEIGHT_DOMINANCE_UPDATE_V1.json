@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_OPEN_WEIGHT_DOMINANCE_UPDATE_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_SOURCE_BOUND__SMALLER_SEARCH_FRONTIER__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "prior_candidate": {
+    "model": "Qwen/Qwen3.8-27B",
+    "artifact_commit": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "license": "apache-2.0",
+    "published_repository_size_gb": 55.6,
+    "livebench_2026_06_25_if_task_scores_percent": {
+      "paraphrase": 74.9,
+      "simplify": 66.7,
+      "story_generation": 73.1,
+      "summarize": 75.933
+    },
+    "exact_if_mean_percent": 72.65825
+  },
+  "dominating_candidate": {
+    "model": "abacusai/Smaug-Mini",
+    "artifact_commit": "2750fd9f1e67e004111a53a6d9a39c15fbbd33ef",
+    "base_model": "Qwen/Qwen3.8-27B",
+    "architecture": "Qwen3_5ForConditionalGeneration",
+    "parameter_count_billion": 27,
+    "precision": "bfloat16",
+    "license": "apache-2.0",
+    "published_repository_size_gb": 55.6,
+    "livebench_2026_06_25_if_task_scores_percent": {
+      "paraphrase": 76.183,
+      "simplify": 65.383,
+      "story_generation": 78.0,
+      "summarize": 76.1
+    },
+    "exact_if_mean_percent": 73.9165,
+    "margin_over_opus55_exact_mean_pp": 8.17875,
+    "margin_over_prior_qwen_candidate_pp": 1.25825
+  },
+  "comparator": {
+    "model": "claude-opus-5-5-max-effort",
+    "livebench_2026_06_25_if_task_scores_percent": {
+      "paraphrase": 64.267,
+      "simplify": 58.667,
+      "story_generation": 70.917,
+      "summarize": 69.1
+    },
+    "exact_if_mean_percent": 65.73775,
+    "display_percent": 65.7
+  },
+  "public_source_bindings": {
+    "livebench_repository": "LiveBench/new-livebench",
+    "livebench_table_path": "public/table_2026_06_25.csv",
+    "livebench_table_git_blob_sha": "73ab7d8d9752b4d7cc1bc8c574ab0eb80c36c84b",
+    "smaug_repository": "https://huggingface.co/abacusai/Smaug-Mini",
+    "smaug_artifact_commit": "2750fd9f1e67e004111a53a6d9a39c15fbbd33ef",
+    "qwen_repository": "https://huggingface.co/Qwen/Qwen3.8-27B",
+    "qwen_artifact_commit": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
+  },
+  "dominance_claim": {
+    "scope": "ROOT1_OPEN_WEIGHT_FULL_PRECISION_ACQUISITION_FRONTIER_ONLY",
+    "claim": "SMAUG_MINI_STRICTLY_IMPROVES_MATCHED_LIVEBENCH_IF_MARGIN_OVER_QWEN3_8_27B_WITHOUT_INCREASING_PUBLISHED_FULL_PRECISION_REPOSITORY_SIZE_OR_PARAMETER_COUNT",
+    "consequence": "USE_SMAUG_MINI_AS_THE_FIRST_FULL_PRECISION_ACQUISITION_SUBJECT_FOR_ROOT1_FIT_AND_INTERNALIZATION_TESTS__DO_NOT_SPEND_WORK_ON_QWEN3_8_27B_FIRST_UNLESS_SMAUG_SPECIFIC_VALIDATION_FAILS"
+  },
+  "quantized_route_quarantine": {
+    "community_candidate": "prithivMLmods/Smaug-Mini-GGUF",
+    "q4_k_m_reported_size_gb": 16.5,
+    "q5_k_m_reported_size_gb": 19.2,
+    "rule": "QUANTIZATION_CREATES_A_DISTINCT_EXECUTION_SUBJECT_AND_INHERITS_ZERO_LIVEBENCH_OR_SEMANTIC_CAPABILITY_CREDIT_UNTIL_INDEPENDENTLY_VERIFIED",
+    "potential_if_verified": "Q4_K_M_WOULD_REDUCE_WEIGHT_STORAGE_BY_ABOUT_70_PERCENT_RELATIVE_TO_55_6_GB_BF16",
+    "current_credit": 0
+  },
+  "new_critical_path": [
+    "CONTENT_ADDRESS_AND_DURABLY_INTERNALIZE_EXACT_SMAUG_MINI_CAPABILITY_BYTES_OR_AN_INDEPENDENTLY_VERIFIED_EQUIVALENT_EXECUTION_SUBJECT",
+    "PROVE_ZERO_INCREMENTAL_SPEND_STORAGE_AND_EXECUTION_FIT",
+    "REPRODUCE_OR_STRONGLY_DOMINATE_ROOT1_SEMANTIC_INSTRUCTION_FOLLOWING_ON_ADMISSIBLE_NONTERMINAL_EVIDENCE",
+    "ONLY_THEN_FREEZE_A_SUCCESSOR_BEFORE_ANY_NEW_TERMINAL_CASE"
+  ],
+  "deleted_work": [
+    "INVENT_A_GENERAL_SEMANTIC_TEXT_PRODUCER_FROM_SCRATCH_BEFORE_TESTING_EXISTING_OPEN_WEIGHT_ACQUISITION",
+    "USE_QWEN3_8_27B_AS_FIRST_FULL_PRECISION_ROOT1_ACQUISITION_CANDIDATE",
+    "TREAT_SCORE_ONLY_RATIO_OVERLAP_WITNESSES_AS_SEMANTIC_CAPABILITY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_SMAUG_MINI_BYTES_ARE_ALREADY_INTERNALIZED_OR_OWNED_BY_BRAIN",
+    "NO_CLAIM_55_6_GB_BF16_EXECUTION_FITS_CURRENT_ZERO_COST_COMPUTE",
+    "NO_CLAIM_COMMUNITY_Q4_OR_Q5_QUANTIZATION_PRESERVES_73_9165",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_FRESH_TERMINAL_CASE_EXPOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
