@@ -1,0 +1,152 @@
+name: LiveBench Private Zero-Case Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/livebench-private-zero-case-diagnostic.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: livebench-private-zero-case-diagnostic
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run exact frozen zero-case inference and persist receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, pathlib, subprocess, traceback
+
+          receipt_path=pathlib.Path(
+              "canonical/astra_runtime/evidence/"
+              "LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json"
+          )
+          receipt={
+              "schema":"PROJECT_BRAIN_LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_V1",
+              "terminal_case_content_read":False,
+              "terminal_cases_consumed":0,
+              "paid_external_model_or_api_used":False,
+              "runner":"ubuntu-24.04",
+              "python_version":"3.12",
+          }
+          expected={
+              "canonical/runtime/astra_runtime.py":"7f5d16b1db69cb620954bc778e0ba6e15e687b75",
+              "canonical/runtime/root2_livebench_if_astra_inference_adapter_v1.py":"7e3885fa7a6e56df656c066e0a8f17cfa21424e7",
+              "canonical/runtime/goal_compiler.py":"4b61fe911471854ec15c7900816f61e9e55f602e",
+          }
+          observed={}
+          try:
+              for path,want in expected.items():
+                  got=subprocess.check_output(
+                      ["git","rev-parse","HEAD:"+path],text=True
+                  ).strip()
+                  observed[path]=got
+                  if got!=want:
+                      raise RuntimeError(
+                          "FROZEN_BLOB_MISMATCH:"+path+":"+want+":"+got
+                      )
+              receipt["observed_git_blobs"]=observed
+
+              from canonical.runtime import root2_livebench_if_astra_inference_adapter_v1 as a
+              req={
+                  "benchmark_id":"LIVEBENCH_IF_2026_06_25",
+                  "task_id":"SYNTHETIC_ZERO_CASE_INFERENCE",
+                  "allowed_tools":[],
+                  "task_payload":{"instruction":"Reply with exactly SYNTHETIC_OK."},
+              }
+              out=a.infer(req)
+              if out.get("status")!="PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE":
+                  raise RuntimeError("ADAPTER_STATUS:"+str(out.get("status")))
+              if out.get("cognition_dependency_class")!="MODEL_INDEPENDENT":
+                  raise RuntimeError(
+                      "COGNITION_DEPENDENCY_CLASS:"
+                      +str(out.get("cognition_dependency_class"))
+                  )
+              if out.get("model_dependency_count")!=0:
+                  raise RuntimeError(
+                      "MODEL_DEPENDENCY_COUNT:"
+                      +str(out.get("model_dependency_count"))
+                  )
+              if not str(out.get("answer") or "").strip():
+                  raise RuntimeError("EMPTY_ANSWER")
+
+              receipt.update(
+                  status="PASS",
+                  adapter_status=out.get("status"),
+                  cognition_dependency_class=out.get("cognition_dependency_class"),
+                  model_dependency_count=out.get("model_dependency_count"),
+                  answer_nonempty=True,
+              )
+          except BaseException as exc:
+              receipt.update(
+                  status="FAIL",
+                  blocker_type=type(exc).__name__,
+                  blocker_message=str(exc),
+                  traceback=traceback.format_exc()[-12000:],
+                  observed_git_blobs=observed,
+              )
+
+          receipt_path.parent.mkdir(parents=True,exist_ok=True)
+          receipt_path.write_text(
+              json.dumps(receipt,indent=2,sort_keys=True)+"\n",
+              encoding="utf-8",
+          )
+          print("LIVEBENCH_PRIVATE_DIAGNOSTIC_STATUS="+receipt["status"])
+          print("LIVEBENCH_PRIVATE_DIAGNOSTIC_BLOCKER="+str(receipt.get("blocker_message") or "NONE"))
+          PY
+
+      - name: Persist diagnostic receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Project Brain LiveBench Diagnostic"
+          git config user.email "project-brain-livebench-diagnostic@users.noreply.github.com"
+          git add canonical/astra_runtime/evidence/LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Persist LiveBench private transitive runtime diagnostic V3"
+            PUSHED=0
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                PUSHED=1
+                break
+              fi
+              sleep $((attempt * 2))
+            done
+            if [ "$PUSHED" -ne 1 ]; then
+              echo "Failed to persist diagnostic receipt after 5 attempts" >&2
+              exit 52
+            fi
+          fi
+
+      - name: Enforce diagnostic result
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          p="canonical/astra_runtime/evidence/LIVEBENCH_PRIVATE_TRANSITIVE_RUNTIME_DIAGNOSTIC_20261004_V3.json"
+          x=json.load(open(p,encoding="utf-8"))
+          print("status="+str(x.get("status")))
+          if x.get("status")!="PASS":
+              raise SystemExit(
+                  "LiveBench private zero-case diagnostic failed: "
+                  +str(x.get("blocker_message") or x.get("blocker_type"))
+              )
+          PY
