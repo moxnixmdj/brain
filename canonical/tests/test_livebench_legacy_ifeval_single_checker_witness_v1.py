@@ -24,7 +24,7 @@ class LegacySingleCheckerWitnessTests(unittest.TestCase):
         self.assertEqual(out["response"].split("\n\n")[1].split()[0], "cedar")
 
     def test_json(self):
-        out = solver.solve("Entire output should be wrapped in JSON format. You can use markdown ticks such as three backticks.")
+        out = solver.solve("Entire output should be wrapped in JSON format. You can use markdown ticks such as ```.")
         self.assertEqual(out["response"], '{"answer":"safe"}')
 
     def test_two_constraints_fail_closed(self):
