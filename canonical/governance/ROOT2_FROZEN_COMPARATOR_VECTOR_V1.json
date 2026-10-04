@@ -6,7 +6,16 @@
   "authority": {
     "route_inventory_path": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
     "route_inventory_git_blob_sha": "9f93503d6ee0ac95c63fc7a4dafc1f75f2e48294",
-    "rebind_reason": "TARGETS_UNCHANGED__ROUTE_STATE_ONLY__CHARTOGRAPHY_HARD_ZERO_SPEND_GUARD_DISCHARGED__PROJECT_CAPACITY_REMAINS"
+    "rebind_reason": "TARGETS_UNCHANGED__ROUTE_STATE_ONLY__CHARTOGRAPHY_HARD_ZERO_SPEND_GUARD_DISCHARGED__PROJECT_CAPACITY_REMAINS",
+    "gdpval_opus55_fixed_bar_provenance": {
+      "activation_path": "canonical/governance/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "1c2ead2e8c5cd14e109ab9361bc4962bcc1e0c8e",
+      "candidate_path": "canonical/governance/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_RECONCILIATION_20261004_V1.json",
+      "candidate_git_blob_sha": "fd854342e2d1a75596d261dfacc2990faf24eee0",
+      "verification_path": "canonical/verification/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "cc3492fc112155ad78c49d3c4b40c8b63467b906",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__FROZEN_1846_PRESERVED__LIVE_1867_DIAGNOSTIC__ZERO_CREDIT"
+    }
   },
   "surfaces": [
     {
@@ -39,7 +48,13 @@
         "PROWORK_GDPVAL_GE_1846"
       ],
       "target": ">=1846 Elo",
-      "route_class": "OWNER_GRADING_LAYER_OR_STRONGER_PROOF"
+      "route_class": "OWNER_GRADING_LAYER_OR_STRONGER_PROOF__FROZEN_1846_PROVENANCE_VERIFIED__LIVE_1867_DIAGNOSTIC",
+      "comparator_provenance": {
+        "frozen_release_bar_elo": 1846,
+        "live_observed_elo": 1867,
+        "live_observed_role": "DIAGNOSTIC_ONLY",
+        "explicit_rebase_required": true
+      }
     },
     {
       "surface": "AA-Briefcase v1.1",
@@ -128,7 +143,8 @@
     "NO_SCORE_INHERITANCE_ACROSS_SURFACES",
     "SHARED_AA_BRIEFCASE_EXECUTION_MAY_SERVE_TWO_PREDICATES_ONLY_IF_BOTH_SCOPE_CONTRACTS_PASS",
     "NO_TARGET_REBASE_FROM_LIVE_LEADERBOARD_DRIFT_WITHOUT_EXPLICIT_TERMINAL_REBASE",
-    "ZERO_INCREMENTAL_SPEND"
+    "ZERO_INCREMENTAL_SPEND",
+    "GDPVAL_LIVE_1867_MUST_NOT_REBASE_FROZEN_1846_WITHOUT_EXPLICIT_VERIFIED_TERMINAL_REBASE"
   ],
   "incremental_spend_usd": 0,
   "acceptance_credit_delta": 0,
