@@ -178,7 +178,11 @@ def evaluate_with_registry(
         slots = dict(row["slots"])
         try:
             instruction.build_description(**slots)
-            flags.append(bool(instruction.check_following(str(response))))
+            text = str(response)
+            # Frozen LiveBench evaluator() runs strict only. Strict evaluation
+            # gates every instruction with response.strip() before invoking the
+            # checker, so empty/whitespace-only outputs must score False here.
+            flags.append(bool(text.strip()) and bool(instruction.check_following(text)))
         except Exception as exc:
             raise ExactPostvalidationError(
                 "CHECKER_EXECUTION_FAILED:" + iid + ":" + type(exc).__name__ + ":" + str(exc)
