@@ -1,0 +1,85 @@
+name: verify-livebench-objective-witness-v1
+
+on:
+  push:
+    branches:
+      - breakthrough/livebench-objective-witness-v1-20261004
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify exact frozen upstream scorer semantics
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import pathlib
+          import urllib.request
+
+          COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
+          FILES = {
+              "legacy": (
+                  "livebench/if_runner/instruction_following_eval/evaluation_main.py",
+                  "4a341984936c4d609644a3b77f8c030ac5aa7269",
+              ),
+              "modern": (
+                  "livebench/if_runner/ifbench/evaluation_lib.py",
+                  "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+              ),
+              "reducer": (
+                  "livebench/process_results/instruction_following/utils.py",
+                  "8ce01747887ec0792c8f024e1972e34ece781676",
+              ),
+          }
+
+          def blob_sha(raw: bytes) -> str:
+              return hashlib.sha1(
+                  b"blob " + str(len(raw)).encode() + b"\0" + raw
+              ).hexdigest()
+
+          texts = {}
+          for key, (path, expected) in FILES.items():
+              url = f"https://raw.githubusercontent.com/LiveBench/LiveBench/{COMMIT}/{path}"
+              with urllib.request.urlopen(url, timeout=30) as resp:
+                  raw = resp.read()
+              observed = blob_sha(raw)
+              assert observed == expected, (key, observed, expected)
+              texts[key] = raw.decode("utf-8")
+
+          for key in ("legacy", "modern"):
+              text = texts[key]
+              assert "def test_instruction_following_strict" in text
+              assert "instruction.check_following(response)" in text
+              assert "follow_all_instructions=all(is_following_list)" in text
+
+          reducer = texts["reducer"]
+          assert "def score_results(" in reducer
+          assert "score_1 = 1 if follow_all_instructions else 0" in reducer
+          assert "score_2 = [1 if follow else 0 for follow in follow_instruction_list]" in reducer
+          assert "avg_score = (score_1 + score_2) / 2" in reducer
+          assert "evaluation_lib.test_instruction_following_strict(inp, response)" in reducer
+
+          theorem = json.loads(pathlib.Path(
+              "canonical/governance/LIVEBENCH_OBJECTIVE_SCORER_SEMANTIC_INDEPENDENCE_THEOREM_V1.json"
+          ).read_text())
+          assert theorem["frozen_upstream"]["commit"] == COMMIT
+          assert theorem["theorem"]["separate_semantic_task_quality_evaluator_in_score_chain"] is False
+          assert theorem["authority"]["acceptance_credit"] is False
+          assert theorem["accounting"]["new_terminal_cases_consumed"] == 0
+          print("PINNED_SCORER_THEOREM_PASS")
+          PY
+      - name: Verify objective-witness adapter
+        env:
+          PYTHONPATH: .
+        run: |
+          python -m unittest             canonical.tests.test_root2_livebench_if_objective_witness_adapter_v3             -v
