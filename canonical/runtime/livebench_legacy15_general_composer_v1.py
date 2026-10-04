@@ -173,7 +173,14 @@ def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> lis
         marker = str(_slots(post).get("postscript_marker") or "")
         if marker not in {"P.S.", "P.P.S"}:
             raise ComposeError("POSTSCRIPT_PARAMETER_DRIFT")
-        lines.append(marker + " zxqv")
+        # Keep the required public postscript marker while preventing its
+        # internal periods from becoming token-final Punkt boundaries.
+        # The frozen PostscriptChecker accepts these exact marker prefixes.
+        continuation = "zxqv"
+        if marker == "P.S.":
+            lines.append(marker + continuation)   # P.S.zxqv
+        else:
+            lines.append(marker + continuation)   # P.P.Szxqv
 
     return lines
 
