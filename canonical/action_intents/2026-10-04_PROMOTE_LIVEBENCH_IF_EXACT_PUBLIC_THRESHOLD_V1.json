@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PROMOTE-LIVEBENCH-IF-EXACT-PUBLIC-THRESHOLD-20261004-V1",
+  "status": "CANDIDATE_ACCEPTANCE_REDUCTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_NEW_HIDDEN_REALITY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "LIVEBENCH_IF_GE_65_7_REMAINS_ROOT2_ONLY_DESPITE_EXACT_PUBLIC_POPULATION_THRESHOLD_PASS",
+  "action_kind": "ACCEPTANCE_REDUCTION",
+  "expected_parent_frontier_change": {
+    "atomic_predicates": "12_OF_38_TO_13_OF_38",
+    "unresolved_predicates": "26_TO_25",
+    "accepted_families": "5_OF_19_UNCHANGED",
+    "newly_proved_predicates": [
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "root2_only": "16_TO_15",
+    "root2_touching": "19_TO_18",
+    "family_status": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT_REMAINS_OPEN"
+  },
+  "registry_binding": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "predicate_id": "LIVEBENCH_IF_GE_65_7",
+    "acceptance": "LiveBench Instruction Following >= 65.7%"
+  },
+  "independent_input": {
+    "path": "canonical/verification/LIVEBENCH_IF_EXACT_PUBLIC_THRESHOLD_RECEIPT_20261004_V1.json",
+    "git_blob_sha": "165192ffa20e052f094371c04d15da6c9147a146",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37238525973,
+    "workflow_job_id": 111542366567,
+    "conclusion": "success"
+  },
+  "proof": {
+    "exact_four_task_mean_percent": 84.40416666666667,
+    "conservative_comparator_floor_percent": 65.73775,
+    "literal_registry_floor_percent": 65.7,
+    "margin_over_registry_percentage_points": 18.704166666666666,
+    "population_count": 200,
+    "selected_release": "2026-06-25",
+    "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "scorer_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "hidden_ids_or_kwargs_used_by_candidate": false,
+    "model_dependency_count": 0,
+    "network_dependency_at_runtime": false,
+    "incremental_spend_usd": 0
+  },
+  "hard_rules": [
+    "PROMOTE_EXACTLY_LIVEBENCH_IF_GE_65_7_OR_FAIL_CLOSED",
+    "DO_NOT_PROMOTE_INSTRUCTION_FOLLOWING_FAMILY",
+    "NO_OTHER_ACCEPTANCE_STATE_MUTATION",
+    "NO_HIDDEN_OR_FRESH_TERMINAL_CASES",
+    "NO_PROMOTION_BEFORE_SEPARATE_INDEPENDENT_EXACT_BYTE_VERIFICATION"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
