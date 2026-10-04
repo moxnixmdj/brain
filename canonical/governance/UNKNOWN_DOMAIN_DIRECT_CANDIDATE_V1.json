@@ -20,15 +20,15 @@
     "independent_public_runner_pass": true
   },
   "new_exact_bound_components": {
-    "canonical/runtime/structural_mapping_prover_v1.py": "ce8956b43471f0d53b3ce897c1a07e3ce5877133",
+    "canonical/runtime/structural_mapping_prover_v1.py": "3c5c002e9f8b7bff9170c0e8fab2588132a6b6ca",
     "canonical/runtime/unknown_domain_direct_adapter_v1.py": "7935053825f19daa620f343f2faafbb3a39ae6d8",
-    "canonical/tests/test_unknown_domain_direct_adapter_v1.py": "daf092fcfece0eb9c1fc8b52188f9ce4f1e4b387",
+    "canonical/tests/test_unknown_domain_direct_adapter_v1.py": "55b1d5409ed8757fd3c85bbadca05bc7d5b5b465",
     ".github/workflows/verify-unknown-domain-direct-candidate-v1.yml": "e65037115d310af4c2369abd2f872f9bf1f3cc27"
   },
   "route": {
     "cross_domain_transfer": [
-      "PROPOSE_MAPPING_FROM_TYPED_DIRECTED_STRUCTURE_ONLY",
-      "IGNORE_SURFACE_LABELS_AND_ARBITRARY_METADATA",
+      "PROPOSE_MAPPING_FROM_DIRECTED_TOPOLOGY_ONLY",
+      "IGNORE_SURFACE_LABELS_NODE_KIND_NAMES_EDGE_TYPE_NAMES_AND_ARBITRARY_METADATA",
       "REJECT_ZERO_MAPPING_CASE",
       "ABSTAIN_ON_MULTIPLE_MAPPING_CASE",
       "REQUIRE_HIDDEN_EVALUATOR_RECEIPT_BOUND_TO_EXACT_MAPPING_DIGEST",
