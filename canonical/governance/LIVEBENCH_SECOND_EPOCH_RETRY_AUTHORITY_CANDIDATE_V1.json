@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SECOND_EPOCH_RETRY_AUTHORITY_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__POST_EXPOSURE_PRE_INFERENCE_SCORER_FAILURE_RECOVERY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT__NO_AUTHORITY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Authorize at most one new exact execution epoch only if independent evidence proves the prior run stopped before any Brain candidate inference and the repair is scorer-only, public-upstream-derived, independently verified, and leaves candidate/population/order/threshold unchanged.",
+  "prior_attempt": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1761,
+    "head_sha": "d8e6edd61fb1fbeedd856aa31cc202348e52529c",
+    "driver_git_blob_sha": "05d71d3d06ebac9b5d74eb31b137141e6b8797c2",
+    "workflow_run_id": 37188253705,
+    "workflow_job_id": 111394777574,
+    "required_failure_code": "FAIL_CLOSED:UNKNOWN_INSTRUCTION_IDS",
+    "required_inference_state": "ZERO_CANDIDATE_INFERENCES_BEFORE_FAILURE"
+  },
+  "verified_repair": {
+    "scorer_supplement_git_blob_sha": "13105f751550ea89646bb82bd4c1d8325afe2840",
+    "independent_workflow_run_id": 37188804615,
+    "independently_verified_without_terminal_cases": true,
+    "repair_scope": "SCORER_DISPATCH_AND_SCORER_RUNTIME_DEPENDENCIES_ONLY",
+    "derivation_source": "PUBLIC_UPSTREAM_LIVEBENCH_CONTROL_FLOW_AND_REQUIREMENTS_ONLY"
+  },
+  "retry_binding": {
+    "corrected_driver_git_blob_sha": "e9db4e7553397035aed67186f0065e4a79fa7732",
+    "candidate_commit": "d5de4f5808dced840da34d051e3f9a5ff06e2e54",
+    "candidate_tree": "fd39e966d4686c7317b9a1558b360eb0c58ad76f",
+    "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+    "population_count": 200,
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "dataset_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "threshold_percent": 65.7,
+    "case_order": "QUESTION_ID_ASCENDING_FIXED_PREEXECUTION",
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "candidate_mutation": false,
+    "post_result_tuning": false,
+    "incremental_spend_usd": 0
+  },
+  "conditional_effect_if_independently_verified": {
+    "one_new_execution_epoch_eligible": true,
+    "authorized_predicates": [
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "global_fresh_reality_authority": false,
+    "promotion_authority": false,
+    "acceptance_credit_delta": 0,
+    "all_other_predicates_unauthorized": true
+  },
+  "hard_rules": [
+    "PRIOR_POPULATION_EXPOSURE_IS_NOT_RECLASSIFIED_AS_UNREAD",
+    "RETRY_IS_ALLOWED_ONLY_BECAUSE_PRIOR_FAILURE_PRECEDED_ALL_CANDIDATE_INFERENCE_AND_RESPONSE_GENERATION",
+    "REPAIR_MUST_BE INDEPENDENT_OF_TERMINAL_PROMPT_CONTENT_CANDIDATE_RESPONSES_AND_SCORE",
+    "EXACT_FROZEN_CANDIDATE_POPULATION_THRESHOLD_AND_FIXED_ORDER_MUST_NOT_CHANGE",
+    "ONE_NEW_EXECUTION_EPOCH_MAXIMUM",
+    "NO_RETRY_AFTER_ANY_CANDIDATE_RESPONSE_FROM_THE_NEW_EPOCH_WITHOUT_NEW_SEPARATE_AUTHORITY",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_PROMOTION_OR_ACCEPTANCE_CREDIT_FROM_THIS_CANDIDATE"
+  ],
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false
+}
