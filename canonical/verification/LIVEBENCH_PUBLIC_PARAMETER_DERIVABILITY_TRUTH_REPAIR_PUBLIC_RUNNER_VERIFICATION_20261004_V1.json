@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_PARAMETER_DERIVABILITY_TRUTH_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PINNED_UPSTREAM_RECOMPUTATION__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/LIVEBENCH_PUBLIC_PROMPT_PARAMETER_DERIVABILITY_TRUTH_REPAIR_V1.json"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1834,
+    "head_sha": "92656f8d9fdc2211271f9053bb17c9ff9c9726f9",
+    "merge_commit": "781e36c91c457b170c95211b36eed3b58a68192a",
+    "workflow_run_id": 37197721146,
+    "workflow_job_id": 111422929019,
+    "conclusion": "success",
+    "artifact_id": 11300854043,
+    "artifact_name": "livebench-public-parameter-truth-receipt",
+    "artifact_digest": "sha256:33b19dbd9efb6e5aa8c6124de2337cbe8703c4fd2c2bdabf49fc4f18150fbd72"
+  },
+  "verified_sources": {
+    "allenai_ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_ifbench_instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "verified_counts": {
+    "public_ifbench_rows": 300,
+    "ratio_overlap_rows": 12,
+    "ratio_overlap_raw_reference_visible": 5,
+    "ratio_overlap_normalized_reference_visible": 12,
+    "repeat_span_rows": 4,
+    "repeat_span_raw_prompt_visible": 3,
+    "repeat_span_score_relevant_slice_equal": 4,
+    "legacy_repeat_prompt_rows_in_public_ifbench_ood": 0
+  },
+  "verified_semantics": [
+    "NGRAMOVERLAPCHECKER_APPLIES_CHARACTER_NGRAMS_TO_RESPONSE_STRING_AND_EXACT_STORED_REFERENCE_TEXT",
+    "EXACT_RAW_REFERENCE_TEXT_LITERAL_VISIBILITY_FAILS_ON_7_OF_12_PINNED_PUBLIC_RATIO_OVERLAP_ROWS",
+    "WHITESPACE_NORMALIZED_VISIBILITY_IS_NOT_AN_EXACT_SCORER_IDENTITY_PROOF",
+    "REPEATSPAN_SCORE_RELEVANT_WORD_SLICE_RECOVERY_PASSES_4_OF_4_PINNED_PUBLIC_ROWS"
+  ],
+  "hard_nonclaims": [
+    "NO_FROZEN_TERMINAL_LIVEBENCH_DATASET_EQUIVALENCE",
+    "NO_CLAIM_THAT_NO_OTHER_ADMISSIBLE_NGRAM_REFERENCE_RECOVERY_ROUTE_EXISTS",
+    "NO_ACCEPTANCE_EXECUTION_PROMOTION_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
