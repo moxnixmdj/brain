@@ -234,6 +234,18 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
+    },
+    "structural_breakthrough_overlay": {
+      "final_activation_path": "canonical/governance/TERMINAL_STRUCTURAL_BREAKTHROUGH_V1_FINAL_ACTIVATION.json",
+      "race_manifest_path": "canonical/governance/TERMINAL_STRONGER_PROOF_RACE_MANIFEST_V1.json",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_PASS__SCHEDULING_AND_CANDIDATE_GENERATION_ONLY__ZERO_CREDIT",
+      "stronger_proof_candidate_generation": true,
+      "consolidated_authenticated_account_sweep": true,
+      "owner_result_races_parallel_zero_attention": true,
+      "precommit_isolation_theorem_status": "UNPROVED_BENCHMARK_SPECIFIC__NO_FRESH_REALITY_EFFECT",
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false
     }
   },
   "accounting": {
