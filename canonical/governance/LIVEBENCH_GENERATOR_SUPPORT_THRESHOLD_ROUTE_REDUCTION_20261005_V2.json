@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_GENERATOR_SUPPORT_THRESHOLD_ROUTE_REDUCTION_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__GENERATOR_REACHABLE_UNSAT_COUNTEREXAMPLE_BINDS_SCORE_CEILING__UNIVERSAL_SUPPORT_THRESHOLD_ROUTE_FALSIFIED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": {
+    "prior_state": "THE_928_CONFLICT_COMPATIBLE_ID_SETS_AND_SEVEN_ARCHETYPES_WERE_BEING_TREATED_AS_THE_MAIN_PATH_TOWARD_A_UNIVERSAL_GENERATOR_DOMAIN_CONSTRUCTION_PROOF",
+    "new_fact": "THE_PUBLIC_HISTORICAL_GENERATOR_SUPPORT_CONTAINS_A_REACHABLE_CONCRETE_TWO_CHECKER_SLOT_TUPLE_THAT_IS_JOINTLY_UNSATISFIABLE",
+    "score_consequence": "ANY_RESPONSE_ON_THAT_TWO_CHECKER_TUPLE_CAN_HAVE_AT_MOST_ONE_TRUE_CHECKER_SO_THE_FROZEN_STRICT_CASE_SCORE_IS_AT_MOST_1_OVER_4",
+    "threshold_consequence": "1_OVER_4_IS_STRICTLY_BELOW_65_7_PERCENT__THEREFORE_NO_UNIVERSAL_PER_ROW_LOWER_BOUND_OVER_ALL_GENERATOR_SUPPORTED_SLOT_TUPLES_CAN_PROVE_LIVEBENCH_IF_GE_65_7",
+    "scope_consequence": "THE_928_TO_7_REDUCTION_REMAINS_VALUABLE_FOR_SOLVER_HARDENING_AND_FALSIFICATION_BUT_IS_NOT_A_FIXED_POPULATION_ACCEPTANCE_PROOF"
+  },
+  "truth_repair": {
+    "prior_illustrative_counterexample_word": "alpha",
+    "pinned_word_list_contains_alpha": false,
+    "generator_reachable_counterexample_word": "rock",
+    "pinned_word_list_contains_rock": true,
+    "why_reachable": [
+      "PARAGRAPH_FIRST_WORD_CHECK_DRAWS_FIRST_WORD_THROUGH_generate_keywords",
+      "FORBIDDEN_WORDS_DRAWS_FORBIDDEN_WORDS_THROUGH_generate_keywords",
+      "generate_keywords_USES_random_sample_ON_THE_PINNED_WORD_LIST",
+      "ROCK_IS_IN_THE_PINNED_WORD_LIST",
+      "THE_TWO_INSTRUCTION_IDS_ARE_CONFLICT_COMPATIBLE_IN_THE_PINNED_REGISTRY",
+      "THEREFORE_A_CONCRETE_SLOT_TUPLE_WITH_first_word_ROCK_AND_forbidden_words_CONTAINING_ROCK_HAS_POSITIVE_PUBLIC_GENERATOR_SUPPORT"
+    ],
+    "logical_unsat": [
+      "PARAGRAPH_FIRST_WORD_CHECK_REQUIRES_THE_SELECTED_PARAGRAPH_FIRST_WORD_TO_EQUAL_ROCK",
+      "THAT_FORCES_ROCK_AS_A_STANDALONE_WORD",
+      "FORBIDDEN_WORDS_REJECTS_ANY_RESPONSE_CONTAINING_STANDALONE_ROCK",
+      "NO_RESPONSE_CAN_PASS_BOTH_CHECKERS"
+    ]
+  },
+  "source_bindings": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_util_git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "historical_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "score_process_git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676"
+  },
+  "candidate_subjects": {
+    "falsifier_runtime": {
+      "path": "canonical/runtime/livebench_generator_support_threshold_route_falsifier_v2.py",
+      "git_blob_sha": "33be56766f6d81bc17441c0d6bdfc4af6af6358e"
+    },
+    "tests": {
+      "path": "canonical/tests/test_livebench_generator_support_threshold_route_falsifier_v2.py",
+      "git_blob_sha": "69ee7350e55b361fe75082c5a0c3fd70db972506"
+    },
+    "slot_feasibility_runtime": {
+      "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+      "git_blob_sha": "9502f2237af47b422376f2babcd3b7ca3e47eda1"
+    },
+    "score_bound_runtime": {
+      "path": "canonical/runtime/livebench_if_score_bound_v1.py",
+      "git_blob_sha": "f8e4f2bb0d537bfd4646c4037cf74238f7b0d4df"
+    }
+  },
+  "score_proof": {
+    "checker_count": 2,
+    "joint_all_true_possible": false,
+    "maximum_true_checker_count": 1,
+    "frozen_score_rule": "0.5_TIMES_ALL_TRUE_BINARY_PLUS_0.5_TIMES_TRUE_CHECKER_FRACTION",
+    "maximum_case_score": "1/4",
+    "target_floor": "657/1000",
+    "maximum_case_score_is_below_target_floor": true
+  },
+  "scheduler_reduction": {
+    "demote_as_acceptance_path": "UNIVERSAL_GENERATOR_SUPPORT_SATISFIABILITY_OR_PER_ROW_THRESHOLD_FLOOR",
+    "retain_as_candidate_hardening": [
+      "928_TO_7_STRUCTURAL_ARCHETYPE_REDUCTION",
+      "EXACT_PUBLIC_SYNTHETIC_CHECKER_AUDITS",
+      "SLOT_LEVEL_WITNESS_OR_UNSAT_CLASSIFICATION"
+    ],
+    "corrected_minimum_cut": [
+      "USE_SYNTHETIC_EXACT_AUDITS_ONLY_UNTIL_THE_VISIBLE_PROMPT_SOLVER_IS_STABLE_AND_FAIL_CLOSED",
+      "FREEZE_AND_CONTENT_ADDRESS_THE_FINAL_CANDIDATE_SCORER_AND_NONLEAKING_EXECUTION_PROTOCOL_BEFORE_FIXED_POPULATION_EXPOSURE",
+      "RUN_ONE_CLEAN_FIXED_POPULATION_EXECUTION_WITH_ONLY_THE_PRECOMMITTED_AGGREGATE_RECEIPT_EXPOSED",
+      "OR_REPLACE_THAT_EXECUTION_WITH_A_CONTENT_INDEPENDENT_FIXED_POPULATION_SCORE_MASS_PROOF_IF_AN_ADMISSIBLE_SCOPE_BRIDGE_IS_PROVED",
+      "NEVER_REQUIRE_ALL_GENERATOR_SUPPORTED_SLOT_TUPLES_TO_HAVE_A_PER_ROW_SCORE_FLOOR_AT_OR_ABOVE_65_7"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_ACTUAL_FROZEN_ROW_CONTENT_READ",
+    "NO_ACTUAL_FROZEN_ROW_METADATA_READ",
+    "NO_ACTUAL_FROZEN_SLOT_FREQUENCY_INFERRED",
+    "NO_CLAIM_THE_REACHABLE_COUNTEREXAMPLE_OCCURS_IN_THE_FIXED_200_ROW_POPULATION",
+    "NO_CURRENT_LIVEBENCH_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
