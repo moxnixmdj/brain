@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_GENERATOR_SUPPORT_UNIVERSAL_ROUTE_FALSIFICATION_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_STRONGER_FORMAL_FALSIFICATION__PURE_STRING_CONTRADICTION__INDEPENDENT_EXACT_SOURCE_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": "SEPARATE_CONSTRUCTOR_TOTALITY_FROM_THRESHOLD_PROOF__THE_FULL_GENERATOR_SUPPORT_CONTAINS_REACHABLE_CONFLICT_COMPATIBLE_PARAMETERIZATIONS_WITH_CASE_SCORE_CEILING_0_25__THEREFORE_A_UNIFORM_SUPPORT_WIDE_GE_65_73775_PERCENT_FLOOR_IS IMPOSSIBLE",
+  "source_bindings": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "frozen_checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "frozen_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "frozen_instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "frozen_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "frozen_score_process_blob": "8ce01747887ec0792c8f024e1972e34ece781676",
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "historical_generator_blob": "6ff390d6885cf90f88d9d36959735cb327613edc"
+  },
+  "counterexample": {
+    "instruction_ids": [
+      "keywords:forbidden_words",
+      "startend:end_checker"
+    ],
+    "conflict_compatible": true,
+    "reachable_parameters": {
+      "keywords:forbidden_words": {
+        "forbidden_words_includes": "other",
+        "reachability": "FROZEN_WORD_LIST_CONTAINS_other__ForbiddenWords_DEFAULT_SAMPLES_FROM_WORD_LIST"
+      },
+      "startend:end_checker": {
+        "end_phrase": "Any other questions?",
+        "reachability": "FROZEN_ENDING_OPTIONS_CONTAINS_EXACT_PHRASE__EndChecker_DEFAULT_RANDOM_CHOICE"
+      }
+    },
+    "historical_generator_reachability": "THE_FROZEN_HISTORICAL_GENERATOR_SAMPLES_2_TO_5_DISTINCT_IDS_WITH_REPLACE_FALSE__DECONFLICTS_ONLY_REGISTRY_CONFLICTS__THEN_CALLS_EACH_SELECTED_build_description_WITH_NO_KWARGS",
+    "mutual_exclusion_proof": [
+      "EndChecker_TRUE_IMPLIES_NORMALIZED_RESPONSE_ENDS_WITH_EXACT_Any_other_questions_QUESTION_MARK",
+      "THAT_REQUIRED_SUFFIX_CONTAINS_other_AS_A_WHOLE_WORD",
+      "ForbiddenWords_WITH_other_REJECTS_ANY_RESPONSE_CONTAINING_WHOLE_WORD_other_CASE_INSENSITIVE",
+      "THEREFORE_EndChecker_AND_ForbiddenWords_CANNOT_BOTH_BE_TRUE_FOR_ANY_RESPONSE"
+    ]
+  },
+  "score_consequence": {
+    "frozen_rule": "(ALL_TRUE_BINARY + TRUE_FRACTION) / 2",
+    "instruction_count": 2,
+    "maximum_simultaneously_true": 1,
+    "all_true_binary": 0,
+    "maximum_true_fraction": 0.5,
+    "maximum_case_score": 0.25,
+    "opus55_comparator_floor": 0.6573775,
+    "counterexample_below_comparator": true
+  },
+  "scheduler_truth_repair": {
+    "remove_as_acceptance_proof_route": "UNIFORM_PER_CASE_THRESHOLD_FLOOR_OVER_THE_ENTIRE_928_GENERATOR_SUPPORT",
+    "retain_as_constructor_falsification_surface": "928_SET_SEVEN_ARCHETYPE_EXACT_CHECKER_SWEEP",
+    "reason": "CONSTRUCTOR_TOTALITY_IS_USEFUL_ENGINEERING_EVIDENCE_BUT_CANNOT_ALONE_ESTABLISH_THE_POPULATION_MEAN_THRESHOLD",
+    "threshold_proof_must_be_population_specific": true,
+    "allowed_successor_classes": [
+      "CASE_INDEPENDENT_FORMAL_LOWER_BOUND_SPECIFIC_TO_THE_FIXED_FROZEN_POPULATION_USING_NONCONTAMINATED_AGGREGATE_OR_COMMITMENT_FACTS",
+      "PRECOMMITTED_CLEAN_UNEXPOSED_EQUIVALENT_EVALUATION_WITH_VERIFIED_SCOPE_TRANSFER",
+      "OTHER_INDEPENDENT_STRONGER_POPULATION_SPECIFIC_PROOF_THAT_DOES_NOT_READ_OR_TUNE_TO_QUARANTINED_TERMINAL_ROWS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_THE_FROZEN_200_ROW_POPULATION_CONTAINS_THIS_COUNTEREXAMPLE",
+    "NO_CLAIM_THAT_THE_FROZEN_POPULATION_SCORE_IS_BELOW_THRESHOLD",
+    "NO_CLAIM_THAT_CONSTRUCTOR_TOTALITY_IS_UNNECESSARY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "implementation": {
+    "runtime": "canonical/runtime/livebench_generator_support_universal_route_falsifier_v2.py",
+    "tests": "canonical/tests/test_livebench_generator_support_universal_route_falsifier_v2.py",
+    "workflow": ".github/workflows/verify-livebench-generator-support-universal-route-falsification-v2.yml"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
