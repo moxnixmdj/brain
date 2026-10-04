@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_QWEN35_4B_SEMANTIC_SEED_EXECUTION_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_ZERO_COST_SMALL_CORE_QUALIFICATION_LANE__BRANCH_PUSH_TRIGGER_COMMITTED__RESULT_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "rationale": {
+    "source_ladder": "canonical/governance/LIVEBENCH_ROOT1_REUSED_SEMANTIC_CORE_LADDER_V1.json",
+    "source_observability_repair": "canonical/governance/LIVEBENCH_IF_OBSERVABILITY_FACTOR_BREAKTHROUGH_20261004_V1.json",
+    "decision": "QUALIFY_ALREADY_EXECUTED_3_013_GB_QWEN3_5_4B_Q4_CARRIER_ON_A_MEANING_SENSITIVE_GATE_BEFORE_LARGER_21_9_GB_OR_55_6_GB_ACQUISITION",
+    "reason": "OLD_4B_FAILURE_LOCALIZED_OPEN_ENDED_TERMINATION_NOT_NARROW_SEMANTIC_SEED_GENERATION"
+  },
+  "exact_subject": {
+    "model": "Qwen/Qwen3.5-4B",
+    "gguf_repo": "bartowski/Qwen_Qwen3.5-4B-GGUF",
+    "gguf_revision": "ba06320255db2dbec194dad738d066be90dabf29",
+    "gguf_file": "Qwen_Qwen3.5-4B-Q4_K_M.gguf",
+    "bytes": 3013027808,
+    "sha256": "13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983",
+    "runtime": "llama.cpp",
+    "runtime_commit": "7fe450e19305b828c199d602c23a8337aaa1f03b",
+    "prior_zero_cost_execution_evidence": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1.json"
+  },
+  "verifier_lane": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/root1-qwen35-4b-semantic-seed-20261004-v1",
+    "verifier_path": "verify_root1_qwen35_4b_semantic_seed_v1.py",
+    "workflow_path": ".github/workflows/verify-root1-qwen35-4b-semantic-seed-v1.yml",
+    "verifier_commit": "05b8aa89c0d5fe23dfa90f438b21007ac53fcfbf",
+    "workflow_creation_commit": "5276139943bd669346205d5bbee5d060676dc348",
+    "isolated_trigger_commit": "deacc074e5a1a3467300cc3b9d11d828401f657b",
+    "superseded_pull_request": 1961,
+    "superseded_pr_reason": "PR_TRIGGER_WOKE_MANY_UNRELATED_REPOSITORY_CHECKS__SWITCHED_TO_BRANCH_SCOPED_PUSH_TO_REDUCE_QUEUE_CONTENTION",
+    "exact_push_run_id": "NOT_OBSERVABLE_WITH_CURRENT_GITHUB_CONNECTOR__DO_NOT_INVENT",
+    "incremental_spend_usd": 0
+  },
+  "frozen_semantic_gate": {
+    "task_count": 8,
+    "families": {
+      "paraphrase": 2,
+      "simplify": 2,
+      "summarize": 2,
+      "story": 2
+    },
+    "admission_rule": [
+      "EXACT_GGUF_BYTES_AND_SHA256_MATCH",
+      "AT_LEAST_7_OF_8_TASKS_PASS",
+      "AT_LEAST_1_OF_2_TASKS_PASS_IN_EVERY_REQUIRED_SEMANTIC_FAMILY"
+    ],
+    "semantics": [
+      "FACT_ANCHOR_PRESERVATION",
+      "CAUSAL_OR_TEMPORAL_RELATION_PRESERVATION_WHERE_REQUIRED",
+      "PARAPHRASE_NONCOPY_CONSTRAINT",
+      "SIMPLIFICATION_LENGTH_BOUND",
+      "SUMMARY_IRRELEVANT_DETAIL_EXCLUSION",
+      "STORY_EVENT_ORDER_AND_EXACT_SENTENCE_COUNT"
+    ],
+    "terminal_cases_consumed": 0
+  },
+  "next_if_pass": "BIND_THE_EXACT_4B_SUBJECT_AS_A_NARROW_SEMANTIC_SEED_CANDIDATE__THEN_TEST_COMPOSITION_WITH_THE_FORMAL_CONSTRAINT_STACK_ON_STRONGER_PUBLIC_NONTERMINAL_GENERALIZATION",
+  "next_if_fail": "ESCALATE_TO_THE_ALREADY_EXECUTED_5_060_GB_QWEN3_5_9B_Q4_CARRIER__DO_NOT_REPLAY_THE_4B_GATE_WITH_RELAXED_CRITERIA",
+  "hard_nonclaims": [
+    "RESULT_NOT_YET_OBSERVED",
+    "NO_TERMINAL_ACCEPTANCE",
+    "NO_GENERAL_OPEN_WORLD_SEMANTIC_CAPABILITY_CREDIT",
+    "NO_OPUS55_PARITY_CLAIM",
+    "NO_OLD_AGENTIC_FAILURE_REVERSAL",
+    "NO_FRESH_TERMINAL_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "research_execution": true,
+    "fresh_terminal_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
