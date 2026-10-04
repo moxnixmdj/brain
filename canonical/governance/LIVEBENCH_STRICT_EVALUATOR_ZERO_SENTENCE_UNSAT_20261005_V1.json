@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_STRICT_EVALUATOR_ZERO_SENTENCE_UNSAT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__STRICT_EVALUATOR_SINGLE_CONTRACT_UNSAT_CERTIFICATE__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "claim": "A visible length_constraints:number_sentences contract with relation=less than and num_sentences=1 is unsatisfiable under the frozen strict evaluation path, even when it is the only instruction.",
+  "proof": [
+    "FROZEN_LIVEBENCH_STRICT_EVALUATOR_APPENDS_TRUE_ONLY_IF_RESPONSE_STRIP_IS_NONEMPTY_AND_THE_CHECKER_RETURNS_TRUE",
+    "BLANK_OR_WHITESPACE_ONLY_RESPONSES_THEREFORE_CANNOT_PASS_ANY_STRICT_INSTRUCTION",
+    "NLTK_PUNKT_3_9_2__SLICES_FROM_TEXT_UNCONDITIONALLY_YIELDS_A_FINAL_SLICE_ENDING_AT_LEN_TEXT_RSTRIP",
+    "NLTK_PUNKT_3_9_2__REALIGN_BOUNDARIES_EMITS_THAT_FINAL_SLICE_WHEN_ITS_TEXT_IS_NONEMPTY",
+    "THEREFORE_EVERY_RESPONSE_ADMITTED_BY_THE_STRICT_NONEMPTY_GATE_HAS_AT_LEAST_ONE_PUNKT_SENTENCE",
+    "NUMBER_OF_SENTENCES_LESS_THAN_ONE_REQUIRES_ZERO_SENTENCES",
+    "NO_RESPONSE_CAN_MAKE_THIS_STRICT_CHECKER_RESULT_TRUE"
+  ],
+  "source_bindings": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "evaluation_main_git_blob_sha": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+    "instructions_util_git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "nltk_version": "3.9.2",
+    "nltk_punkt_git_blob_sha": "877b79dd29103464d13c967cc74e030a92c7cfbc",
+    "historical_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc"
+  },
+  "implementation": {
+    "runtime_path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+    "runtime_git_blob_sha": "4573bd181598a96957d639b8c144950b72085a6e",
+    "tests_path": "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py",
+    "tests_git_blob_sha": "8ec60b252cc2b129805d18d33aeca02c82adeba8",
+    "runtime_commit": "9ac77accb220e914bcdd3a0bbf321b7790d75be3",
+    "tests_commit": "207c9b1a10bf1584863aed66c08fadccb2393b30"
+  },
+  "pointwise_optimality_consequence": {
+    "kernel_path": "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py",
+    "kernel_git_blob_sha": "f0e1faae5b5d1a90a1184fe6cca409591acbbb27",
+    "singleton_case_checker_count": 1,
+    "maximum_true_checker_count": 0,
+    "exact_optimal_case_score": "0",
+    "certificate_requirement": "THE_SINGLETON_SUBSET_ITSELF_IS_SEMANTICALLY_UNSAT__THEREFORE_G_EQUALS_ZERO_IS_POINTWISE_OPTIMAL",
+    "value": "REMOVES_A_FALSE_WITNESS_SEARCH_BRANCH_AND_GIVES_THE_POINTWISE_SOLVER_AN_EXACT_ZERO_SCORE_TERMINAL_CLASS"
+  },
+  "relation_to_prior_sentence_end_certificate": {
+    "prior_class": "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE",
+    "strict_improvement": "THE_MANDATORY_END_PHRASE_IS_NOT_NEEDED__STRICT_EVALUATOR_NONEMPTY_GATING_PLUS_PUNKT_SEMANTICS_ALREADY_MAKE_SENTENCE_LT_ONE IMPOSSIBLE"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROW_CONTENT_READ",
+    "NO_TERMINAL_CASE_FREQUENCY_INFERRED",
+    "NO_CLAIM_ABOUT_WHETHER_THE_FROZEN_200_CASE_POPULATION_CONTAINS_THIS_SLOT",
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_CREDIT",
+    "NO_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
