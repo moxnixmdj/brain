@@ -23,7 +23,7 @@ HISTORICAL_GENERATOR_COMMIT = "686be1e78a0ba8036d7e355bc406e1a265da5292"
 HISTORICAL_GENERATOR_MAX_DRAW = 5
 HISTORICAL_GENERATOR_MIN_DRAW = 2
 TARGET_POPULATION = 200
-TARGET_PERCENT = Fraction(263, 4) + Fraction(151, 4000)  # 65.73775 exactly
+TARGET_PERCENT = Fraction(262951, 4000)  # 65.73775 exactly
 
 
 def case_score(instruction_count: int, guaranteed_following: int) -> Fraction:
@@ -121,7 +121,7 @@ def prove() -> dict:
     assert result["derived"]["valid_active15_identity_subsets_size_1_to_5_upper_bound"] == 928
     assert min_nonfinal == Fraction(1, 10)
     assert min_completion == Fraction(3, 5)
-    assert target_mass == Fraction(5259, 40)  # 131.475
+    assert target_mass == Fraction(262951, 2000)  # 131.4755
     assert fully_completed_rows_sufficient == 132
     return result
 
