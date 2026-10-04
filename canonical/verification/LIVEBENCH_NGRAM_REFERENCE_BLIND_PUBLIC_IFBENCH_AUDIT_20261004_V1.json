@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_REFERENCE_BLIND_PUBLIC_IFBENCH_AUDIT_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_DATA_CONSTRUCTIVE_AUDIT__12_OF_12_PASS__ZERO_TERMINAL_DATA__ZERO_CREDIT",
+  "source": {
+    "repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "data/IFBench_test.jsonl",
+    "git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3"
+  },
+  "method": "For each public ratio:overlap row, select a visible contiguous run known by public reference verification to occur exactly in reference_text, let m be its unique trigram count, append k distinct private-use sentinels absent from public prompt/reference, and evaluate the official checker formula. Selection is verifier-side only; frozen production requires an upstream preserved-run certificate.",
+  "rows": [
+    {
+      "key": "144",
+      "target": 72,
+      "run": "claims.",
+      "m": 5,
+      "k": 2,
+      "actual_percent": 71.42857142857143,
+      "pass": true
+    },
+    {
+      "key": "145",
+      "target": 93,
+      "run": "Transformational",
+      "m": 14,
+      "k": 1,
+      "actual_percent": 93.33333333333333,
+      "pass": true
+    },
+    {
+      "key": "146",
+      "target": 74,
+      "run": "∂(yu)/∂x",
+      "m": 6,
+      "k": 2,
+      "actual_percent": 75,
+      "pass": true
+    },
+    {
+      "key": "147",
+      "target": 59,
+      "run": "descriptive,",
+      "m": 10,
+      "k": 7,
+      "actual_percent": 58.8235294117647,
+      "pass": true
+    },
+    {
+      "key": "148",
+      "target": 6,
+      "run": "Glenn-Copeland",
+      "m": 12,
+      "k": 188,
+      "actual_percent": 6,
+      "pass": true
+    },
+    {
+      "key": "149",
+      "target": 13,
+      "run": "urbanize",
+      "m": 6,
+      "k": 40,
+      "actual_percent": 13.043478260869565,
+      "pass": true
+    },
+    {
+      "key": "150",
+      "target": 24,
+      "run": "obliged.",
+      "m": 6,
+      "k": 19,
+      "actual_percent": 24,
+      "pass": true
+    },
+    {
+      "key": "151",
+      "target": 23,
+      "run": "personality",
+      "m": 9,
+      "k": 30,
+      "actual_percent": 23.076923076923077,
+      "pass": true
+    },
+    {
+      "key": "152",
+      "target": 11,
+      "run": "nuclearly",
+      "m": 7,
+      "k": 57,
+      "actual_percent": 10.9375,
+      "pass": true
+    },
+    {
+      "key": "212",
+      "target": 54,
+      "run": "animation",
+      "m": 7,
+      "k": 6,
+      "actual_percent": 53.84615384615385,
+      "pass": true
+    },
+    {
+      "key": "213",
+      "target": 50,
+      "run": "heart.\\\"",
+      "m": 5,
+      "k": 5,
+      "actual_percent": 50,
+      "pass": true
+    },
+    {
+      "key": "214",
+      "target": 11,
+      "run": "defining",
+      "m": 6,
+      "k": 49,
+      "actual_percent": 10.909090909090908,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "rows": 12,
+    "pass": 12,
+    "fail": 0,
+    "max_absolute_target_error_percent": 1
+  },
+  "next": "PROVE_PRESERVED_RUN_AND_SENTINEL_ABSENCE_FROM_FROZEN_LIVEBENCH_FAMILY_WITHOUT_TERMINAL_CONTENT__THEN_COMPOSE_WITH_EXISTING_REVERSE_GRAMMAR_AND_COMPANION_CONSTRAINT_SOLVER",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
