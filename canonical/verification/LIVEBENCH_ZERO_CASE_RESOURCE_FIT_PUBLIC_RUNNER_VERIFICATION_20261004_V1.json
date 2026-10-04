@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ZERO_CASE_RESOURCE_FIT_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CORRECTED_PINNED_SCORER_ENVIRONMENT__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "benchmark_id": "LIVEBENCH_IF_2026_06_25",
+  "finding": {
+    "original_frozen_environment_complete": false,
+    "missing_runtime_dependencies": [
+      ["spacy", "3.8.16"],
+      ["en-core-web-sm", "3.8.0"]
+    ],
+    "corrected_environment_resource_fit_pass": true,
+    "public_standard_runner": "ubuntu-24.04",
+    "python_version": "3.12"
+  },
+  "verifier_subjects": {
+    "verifier_script": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "path": "verify_livebench_zero_case_resource_fit_20261004.py",
+      "git_blob_sha": "bf2893b2a07ce43e7846d0d72b9b6997d61bf057"
+    },
+    "workflow": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "path": ".github/workflows/verify-livebench-zero-case-resource-fit-20261004.yml",
+      "git_blob_sha": "2ce68bd6dcadcbd6a569c18a93a1015225dd6c59"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1729,
+    "head_sha": "63942c2095c958b9ad2569b263f681e623e56027",
+    "merge_commit": "b1b3acd6455895cf4e1d4507f025341a7f818e2e",
+    "workflow_run_id": 37184530130,
+    "workflow_job_id": 111383591914,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_frozen_brain_and_scorer_blob_count": 7,
+    "astra_model_independent_smoke": true,
+    "response_adapter_smoke": true,
+    "scorer_import_pass": true,
+    "spacy_version": "3.8.16",
+    "en_core_web_sm_version": "3.8.0",
+    "paid_external_model_or_api_used": false,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_TERMINAL_CASE_REVEAL",
+    "NO_LIVEBENCH_SCORE",
+    "NO_SHADOW_COLLECTION_AUTHORITY",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
