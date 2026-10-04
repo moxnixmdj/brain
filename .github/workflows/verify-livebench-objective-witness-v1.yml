@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  scorer-theorem:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -56,6 +56,7 @@ jobs:
               with urllib.request.urlopen(url, timeout=30) as resp:
                   raw = resp.read()
               observed = blob_sha(raw)
+              print(key, observed)
               assert observed == expected, (key, observed, expected)
               texts[key] = raw.decode("utf-8")
 
@@ -81,6 +82,15 @@ jobs:
           assert theorem["accounting"]["new_terminal_cases_consumed"] == 0
           print("PINNED_SCORER_THEOREM_PASS")
           PY
+
+  adapter-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Verify objective-witness adapter
         env:
           PYTHONPATH: .
