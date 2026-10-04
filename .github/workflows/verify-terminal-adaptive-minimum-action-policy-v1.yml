@@ -1,0 +1,25 @@
+name: Verify terminal adaptive minimum-action policy
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V1.json'
+      - 'canonical/runtime/terminal_adaptive_minimum_action_policy_v1.py'
+      - 'canonical/tests/test_terminal_adaptive_minimum_action_policy_v1.py'
+      - '.github/workflows/verify-terminal-adaptive-minimum-action-policy-v1.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate governance JSON
+        run: python -m json.tool canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V1.json >/dev/null
+      - name: Run focused tests
+        run: python -m pytest -q canonical/tests/test_terminal_adaptive_minimum_action_policy_v1.py
