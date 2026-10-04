@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_PY312_PLATFORM_INVARIANCE_PRECOMMIT_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_BEFORE_PRODUCTION_OUTCOME__TRANSPORT_ONLY__ZERO_CREDIT",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "execution_lease_sha256": "9dd08aab9d79e6bbf2552d15c405b8de526478c3a505e2397455150d372164cb",
+  "invariant_subject": {
+    "exact_runtime_blobs": {
+      "candidate_v1": "a2a77269a8175ce315b466035049da0f761b8734",
+      "candidate_v2": "4470716f95a559a700e461262df909ae19a41651",
+      "generator_v1": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+      "generator_v2": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+      "scorer": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+      "harness": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+      "preflight": "e1365ccdba308c529f182797cf68075b2f1dc07c",
+      "launcher": "4218195d0cf49252ac6733c0bd80b673826ef95a"
+    },
+    "python_version": "3.12",
+    "platform_sensitive_modules_observed": [],
+    "native_extension_dependencies_observed": [],
+    "locale_time_subprocess_platform_api_dependencies_observed": [],
+    "math_operations_observed": [
+      "math.isfinite",
+      "math.inf",
+      "math.isclose(rel_tol=0.0,abs_tol=1e-12)"
+    ],
+    "interpretation": "RUNNER_OS_IS_TRANSPORT_ONLY_FOR_THE_FROZEN_PURE_PYTHON_SEMANTICS; THE EXECUTION_LEASE_CLAIM_AND_EXACT_COMPONENT_BYTES_DO_NOT_CHANGE"
+  },
+  "allowed_parallel_transport_lanes": [
+    "ubuntu-24.04",
+    "macos-15"
+  ],
+  "linearization_rule": "ALL_LANES_USE_THE_SAME_ATOMIC_CLAIM_REF; EXACTLY_ONE HTTP_201 MAY CROSS INTO BEACON_AND_CASE_GENERATION; ALL OTHERS MUST ABORT_PRE_BEACON",
+  "authority": {
+    "changes_execution_lease": false,
+    "changes_candidate": false,
+    "changes_evaluator": false,
+    "acceptance_credit": false,
+    "promotion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "production_cases_generated_at_freeze": 0,
+    "acceptance_credit_delta": 0
+  }
+}
