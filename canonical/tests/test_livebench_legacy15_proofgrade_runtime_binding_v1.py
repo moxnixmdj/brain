@@ -102,3 +102,9 @@ def test_data_archive_binding_detects_extracted_drift(tmp_path):
             "punkt.zip",
             expected,
         )
+
+
+def test_python_patch_version_drift_fails_before_artifact_access(monkeypatch):
+    monkeypatch.setattr(hermetic.sys, "version_info", (3, 12, 9))
+    with pytest.raises(hermetic.HermeticNLTKError, match="PYTHON_VERSION_DRIFT:3.12.9"):
+        hermetic.verify_and_bind("/does/not/matter.whl", "/does/not/matter")
