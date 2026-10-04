@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIRED_UNIVERSAL_ZERO_REALITY_PROOF__INDEPENDENT_CONTENT_BOUND_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "supersedes_falsified_candidate": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json",
+  "falsification_receipt": "canonical/governance/UNKNOWN_DOMAIN_V1_UNIVERSAL_PROOF_FLOAT_ORDER_REVOCATION_20261005_V1.json",
+  "exact_subject_blobs": {
+    "candidate_v1": "a2a77269a8175ce315b466035049da0f761b8734",
+    "candidate_v2": "4470716f95a559a700e461262df909ae19a41651",
+    "generator_v1": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "generator_v2": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "hidden_scorer_v2": "668f41a8b619e4a8ac52388be35d834c8afd67e3",
+    "execution_harness_v2": "6cdb1f39d6646025f7a5a8fccb2091b164471e5e"
+  },
+  "proof": {
+    "runtime": "canonical/runtime/unknown_domain_direct_v2_universal_proof_v2.py",
+    "tests": "canonical/tests/test_unknown_domain_direct_v2_universal_proof_v2.py",
+    "executable_float_regression": "canonical/tests/test_unknown_domain_add2_float_order_truth_repair_v1.py",
+    "theorem": "FOR_EVERY_VALID_V2_GENERATOR_POPULATION__CANDIDATE_V2_THROUGH_TRUTH_REPAIRED_HARNESS_V2_AND_SCORER_V2_PASSES_ALL_27_CASES",
+    "zero_reality": true
+  },
+  "numeric_semantics": {
+    "transfer_terminal_abs_tol": 1e-12,
+    "transfer_terminal_rel_tol": 1e-12,
+    "minimum_structural_wrong_support_gap": 0.027479338842975206,
+    "maximum_add2_two_order_binary64_divergence_bound": "2*gamma_2*9_LT_4.0E-15",
+    "safety_relation": "NUMERIC_TOLERANCE_IS_MORE_THAN_TEN_ORDERS_OF_MAGNITUDE_BELOW_THE_SMALLEST_PROVED_WRONG_SUPPORT_GAP",
+    "changed_surface": "TRANSFER_TERMINAL_NUMERIC_COMPARISON_ONLY"
+  },
+  "independent_verification_required": [
+    "RUN_FLOAT_ORDER_REGRESSION_ON_EXACT_BOUND_BYTES",
+    "RUN_UNIVERSAL_PROOF_V2_ON_EXACT_BOUND_BYTES",
+    "VERIFY_V1_COUNTEREXAMPLE_FAILS_OLD_SCORER_AND_PASSES_V2_SCORER",
+    "VERIFY_ALL_27_QUALIFICATION_FIXTURE_CASES_PASS_V2_HARNESS",
+    "VERIFY_ZERO_PRODUCTION_OR_TERMINAL_CASE_GENERATION"
+  ],
+  "promotion_rule": "NO_ACCEPTANCE_OR_EXECUTION_CREDIT_UNTIL_SEPARATE_INDEPENDENT_PUBLIC_RUNNER_PASS_AND_CANONICAL_ACCEPTANCE_REDUCTION",
+  "production_rule": "DO_NOT_EXECUTE_PRODUCTION_UNDER_FALSIFIED_SCORER_V1__REQUALIFY_ANY_FUTURE_PRODUCTION_LEASE_AGAINST_SCORER_V2_AND_HARNESS_V2_ONLY_AFTER_INDEPENDENT_PASS",
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_PRODUCTION_CASES_GENERATED_OR_CONSUMED",
+    "NO_REUSE_OF_FALSIFIED_V1_UNIVERSAL_THEOREM"
+  ],
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "production_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
