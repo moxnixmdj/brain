@@ -9,6 +9,8 @@ on:
       - "canonical/tests/test_livebench_historical24_composition_space_v1.py"
       - "canonical/runtime/livebench_historical24_exact_postvalidator_v1.py"
       - "canonical/tests/test_livebench_historical24_exact_postvalidator_v1.py"
+      - "canonical/runtime/livebench_historical24_special_pointwise_v1.py"
+      - "canonical/tests/test_livebench_historical24_special_pointwise_v1.py"
       - ".github/workflows/verify-livebench-historical24-scope-v1.yml"
   workflow_dispatch:
 
@@ -44,7 +46,8 @@ jobs:
           python -m pytest -q \
             canonical/tests/test_livebench_historical24_scope_superset_v1.py \
             canonical/tests/test_livebench_historical24_composition_space_v1.py \
-            canonical/tests/test_livebench_historical24_exact_postvalidator_v1.py
+            canonical/tests/test_livebench_historical24_exact_postvalidator_v1.py \
+            canonical/tests/test_livebench_historical24_special_pointwise_v1.py
 
       - name: Verify exact 13,750-set historical24 structural reduction
         run: |
@@ -57,6 +60,58 @@ jobs:
           assert x["sets_containing_at_least_one_extra9_family"] == 12822, x
           assert x["counts_by_route"]["GENERAL"] == 13721, x
           print(json.dumps(x, sort_keys=True))
+          PY
+
+      - name: Exact-postvalidate all 29 special structures
+        run: |
+          python - <<'PY'
+          import sys
+          sys.path.insert(0, "/tmp/livebench-pinned/livebench/if_runner")
+          from instruction_following_eval import instructions_registry
+          from canonical.runtime import livebench_historical24_composition_space_v1 as space
+          from canonical.runtime import livebench_historical24_exact_postvalidator_v1 as exact
+          from canonical.runtime import livebench_historical24_special_pointwise_v1 as special
+
+          def c(iid, **slots):
+              return {"instruction_id": iid, "slots": slots, "parameter_complete": True}
+
+          def build(ids, comma_repeat=False):
+              out=[]
+              for iid in ids:
+                  if iid=="keywords:existence":
+                      out.append(c(iid, keywords=["alpha","beta"]))
+                  elif iid=="keywords:forbidden_words":
+                      out.append(c(iid, forbidden_words=["gamma","delta"]))
+                  elif iid=="combination:repeat_prompt":
+                      out.append(c(iid, prompt_to_repeat=("Write a compact note, please." if comma_repeat else "Write a compact note.")))
+                  else:
+                      out.append(c(iid))
+              return out
+
+          special_sets=[x for x in space.enumerate_compatible_sets() if space.route(x)!="GENERAL"]
+          assert len(special_sets)==29
+          full=0
+          collision=0
+          for ids in special_sets:
+              rows=build(ids, False)
+              plan=special.solve_special(rows)
+              assert plan["status"]=="CANDIDATE_POINTWISE_OPTIMAL_SPECIAL_ROUTE", (ids,plan)
+              flags=exact.evaluate_with_registry(plan["response"], rows, instructions_registry.INSTRUCTION_DICT)["checker_results"]
+              assert sum(flags)==len(ids), (ids,plan,flags)
+              full+=1
+
+              if space.route(ids)=="REPEAT_PROMPT" and "punctuation:no_comma" in ids:
+                  rows=build(ids, True)
+                  plan=special.solve_special(rows)
+                  flags=exact.evaluate_with_registry(plan["response"], rows, instructions_registry.INSTRUCTION_DICT)["checker_results"]
+                  assert sum(flags)==len(ids)-1, (ids,plan,flags)
+                  assert flags[[r["instruction_id"] for r in rows].index("combination:repeat_prompt")] is False
+                  assert flags[[r["instruction_id"] for r in rows].index("punctuation:no_comma")] is True
+                  collision+=1
+
+          assert full==29
+          assert collision==4
+          print({"special_structures_exact_full":full,"repeat_comma_collision_structures_exact_one_loss":collision})
           PY
 
       - name: Prove exact source-bound historical24 scope superset
