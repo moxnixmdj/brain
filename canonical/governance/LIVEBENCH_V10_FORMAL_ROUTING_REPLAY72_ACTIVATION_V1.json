@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V10_FORMAL_ROUTING_REPLAY72_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__ONE_USE_REPLAY72_ONLY__CURRENT_VERIFIED_COMPILER__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "candidate": "canonical/governance/LIVEBENCH_V10_FORMAL_ROUTING_REPLAY72_CANDIDATE_V1.json",
+  "verification": {
+    "path": "canonical/verification/LIVEBENCH_V10_FORMAL_ROUTING_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "b36a87e8ab9416735d2e40f399bfc3aed6260f11",
+    "workflow_run_id": 37195421272,
+    "workflow_job_id": 111416161049,
+    "conclusion": "success"
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/livebench-formal-routing-v2-20261004",
+    "wrapper_path": "diagnose_livebench_replay72_v10_formal_routing.py",
+    "wrapper_git_blob_sha": "56ea114d59f0309bc14ef0504a44bec1f808e876",
+    "launcher_path": "launch_livebench_v10_formal_routing_atomic.py",
+    "launcher_git_blob_sha": "d7cd5b5c90f19ef02c1f27afa1629ed6af5500d9"
+  },
+  "one_use_epoch": {
+    "epoch_digest_sha256": "a71f24f79df6b6be6e910efb1299776ac9fede9e78539577695d6e386fc2eb52",
+    "claim_ref": "refs/heads/livebench-v10-claims/a71f24f79df6b6be6e910efb1299776ac9fede9e78539577695d6e386fc2eb52",
+    "maximum_successful_claims": 1
+  },
+  "scope": {
+    "replay_prefix_limit": 72,
+    "already_exposed_prefix_only": true,
+    "new_case_exposure": false,
+    "case_73_or_later": false,
+    "aggregate_structural_histogram_only": true
+  },
+  "authority": {
+    "execution": true,
+    "replay_existing_prefix": true,
+    "new_case_exposure": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "hard_rules": [
+    "ATOMIC_CLAIM_201_BEFORE_DATASET_READ",
+    "DUPLICATE_OR_NON201_ABORT_BEFORE_DATASET_READ",
+    "NO_CASE_73_OR_LATER",
+    "NO_POLICY_WEAKENING",
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_authorized": 0,
+    "acceptance_credit_delta": 0
+  }
+}
