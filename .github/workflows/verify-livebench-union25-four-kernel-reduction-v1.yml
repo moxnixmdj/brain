@@ -1,0 +1,27 @@
+name: Verify LiveBench union25 four-kernel reduction
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/livebench_union25_four_maximal_kernel_reduction_v1.py"
+      - "canonical/tests/test_livebench_union25_four_maximal_kernel_reduction_v1.py"
+      - "canonical/governance/LIVEBENCH_UNION25_FOUR_MAXIMAL_KERNEL_BREAKTHROUGH_20261005_V1.json"
+      - ".github/workflows/verify-livebench-union25-four-kernel-reduction-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test runner
+        run: python -m pip install --disable-pip-version-check --quiet pytest==8.4.2
+      - name: Verify exact four-kernel reduction
+        run: |
+          python -m pytest -q canonical/tests/test_livebench_union25_four_maximal_kernel_reduction_v1.py
+          python canonical/runtime/livebench_union25_four_maximal_kernel_reduction_v1.py
