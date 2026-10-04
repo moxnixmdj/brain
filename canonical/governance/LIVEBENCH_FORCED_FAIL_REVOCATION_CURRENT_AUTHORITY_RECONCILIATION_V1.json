@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FORCED_FAIL_REVOCATION_CURRENT_AUTHORITY_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONNECTOR_RECOMPUTED_TRUTH_TRANSPORT__FAIL_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_truth_repair": {
+    "path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
+    "commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
+    "conclusion": "PRIOR_64_PERCENT_FORCED_FAIL_WAS_UNSOUND_BECAUSE_SCORE_LOWER_BOUND_ZERO_WAS_USED_AS_SCORE_UPPER_BOUND_ZERO"
+  },
+  "corrected_root_state": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "branch_commit": "7dfda372ac96edaf5d855298f6912330fb561c88",
+    "git_blob_sha": "d0bf55615dbe0302786ea65ab455decbb7d04fff",
+    "exact_partition": {
+      "root1_only": 0,
+      "root2_only": 16,
+      "root3_only": 7,
+      "root2_and_root3": 3,
+      "root2_touching": 19,
+      "unresolved_total": 26
+    }
+  },
+  "livebench": {
+    "predicate_id": "LIVEBENCH_IF_GE_65_7",
+    "current_class": "ROOT2_ONLY__MEASUREMENT_OR_COMPARATOR_UNCERTAINTY",
+    "active_scorer_scope": "LEGACY_IFEVAL_ONLY",
+    "active_population": 200,
+    "exact_opus_four_task_mean_percent": 65.73775,
+    "next_zero_reality_obligation": "PROVE_PASSING_SCORE_LOWER_BOUND_GE_65_73775_OR_VALID_FAILING_SCORE_UPPER_BOUND",
+    "scorer_scope_activation": "canonical/governance/LIVEBENCH_TERMINAL_SCORER_SCOPE_ACTIVATION_V1.json"
+  },
+  "scheduling": {
+    "root1": "INACTIVE_UNLESS_NEW_POSITIVE_OPERATIVE_GAP_EVIDENCE_APPEARS",
+    "root2": "RESTORE_19_TOUCHING_PREDICATE_UNIVERSE__PRESERVE_ZERO_REALITY_PRECEDENCE__INCLUDE_LIVEBENCH_LEGACY_IFEVAL_LOWER_BOUND_LANE",
+    "root3": "UNCHANGED_EVENT_DRIVEN_OR_SCOPE_PROOF_ROUTES",
+    "root2_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
+    "root2_activation": "canonical/governance/ROOT2_FRONTIER_V12_FINAL_ACTIVATION_V1.json",
+    "revoked": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json"
+  },
+  "hard_rules": [
+    "DO_NOT_TREAT_LIVEBENCH_AS_ROOT1_FROM_THE_REVOKED_64_PERCENT_BOUND",
+    "DO_NOT_EXECUTE_THE_18_PREDICATE_REBIND_AS_CURRENT",
+    "DO_NOT_READ_NEW_TERMINAL_PROMPT_OR_RESPONSE_CONTENT",
+    "DO_NOT_GRANT_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT_FROM_THIS_RECONCILIATION",
+    "RECOMPUTE_IF_REVOCATION_ROOT_STATE_OR_SCORER_SCOPE_BINDINGS_DRIFT"
+  ],
+  "authority": {
+    "scheduling_transport": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_executed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
