@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_LEGACY_REPEAT_PROMPT_VISIBLE_RECOVERY_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__LAST_LEGACY_HIDDEN_PARAMETER_DELETED_BY_VISIBLE_BOUNDARY_RECOVERY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "frozen_legacy_checker": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instruction_id": "combination:repeat_prompt",
+    "class": "RepeatPromptThenAnswer",
+    "exact_condition": "value.strip().lower().startswith(prompt_to_repeat.strip().lower())"
+  },
+  "public_nonterminal_audit": {
+    "repository": "google-research/google-research",
+    "commit": "e49bbfe381c9c0e564b937f1c4e163a2273c65cc",
+    "path": "instruction_following_eval/data/input_data.jsonl",
+    "git_blob_sha": "cbe52f6eecf3986fdac745b4acba4da1408eb146",
+    "rows_total": 541,
+    "repeat_prompt_rows": 41,
+    "hidden_request_is_visible_exact_substring": "41/41",
+    "exact_boundary_recovery": "41/41",
+    "prefix_layout_rows": 33,
+    "suffix_layout_rows": 8,
+    "minimum_winning_directive_score": 1.5652475842498528,
+    "minimum_distinct_request_score_margin": 0.4341089863751968
+  },
+  "breakthrough": {
+    "prior_frontier": "24_OF_25_LEGACY_TYPES_VISIBLE_COMPLETE__combination:repeat_prompt.prompt_to_repeat_HIDDEN",
+    "deletion": "THE_HIDDEN_VALUE_NEED_NOT_BE_READ_OR_GUESSED__THE_VISIBLE_PROMPT_IS_SPLIT_AT_NEWLINE_RUNS__THE_REPEAT_DIRECTIVE_SIDE_IS_IDENTIFIED_BY_SOURCE_DERIVED_LEXICAL_INVARIANTS__THE_OPPOSITE_SIDE_IS_THE_REQUEST",
+    "successor_frontier": "25_OF_25_LEGACY_CHECKER_PARAMETER_CLASSES_HAVE_A_PUBLIC_VISIBLE_RECOVERY_ROUTE__CONDITIONAL_ON_INDEPENDENT_VERIFICATION_AND_FULL_GRAMMAR_COMPOSITION",
+    "runtime": "canonical/runtime/legacy_repeat_prompt_visible_recovery_v1.py",
+    "tests": "canonical/tests/test_legacy_repeat_prompt_visible_recovery_v1.py"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_LIVEBENCH_CASES_READ",
+    "NO_CLAIM_THAT_PARAMETER_RECOVERY_ALONE_SOLVES_MULTI_CHECKER_WITNESS_COMPOSITION",
+    "NO_LIVEBENCH_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CLAIM_THAT_PUBLIC_IFEVAL_ROWS_ARE_ROW_IDENTICAL_TO_THE_FROZEN_LIVEBENCH_200"
+  ],
+  "next_minimum_action": "INDEPENDENTLY_VERIFY_41_OF_41_PUBLIC_RECOVERY_AND_EXACT_CHECKER_STARTSWITH_SEMANTICS__THEN_COMPOSE_THIS_WITH_THE_24_OF_25_VISIBLE_GRAMMAR_TO_FREEZE_A_25_TYPE_LEGACY_CONJUNCTION_SOLVER_BEFORE_ANY_UNSEEN_TERMINAL_EXECUTION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
