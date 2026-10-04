@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_USE_BENCHMARK_REPLAY_ATOMIC_CLAIM_POLICY_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__GENERIC_ONE_USE_EXECUTION_LINEARIZATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Make every future one-use benchmark replay or scoped reality epoch globally linearizable before any case read or execution, using atomic first Git-ref creation as the sole uniqueness event.",
+  "cause_binding": {
+    "path": "canonical/governance/LIVEBENCH_V6_DUPLICATE_REPLAY_CONCURRENCY_RECONCILIATION_V1.json",
+    "failure_class": "CONTROL_PLANE_LINEARIZATION_FAILURE"
+  },
+  "runtime": {
+    "path": "canonical/runtime/atomic_one_use_execution_claim_v1.py"
+  },
+  "tests": {
+    "path": "canonical/tests/test_atomic_one_use_execution_claim_v1.py"
+  },
+  "existing_proof_reuse": {
+    "specific_prior_runtime": "canonical/runtime/livebench_shadow_atomic_claim_transaction_v1.py",
+    "specific_prior_runtime_git_blob_sha": "f4a5b0ac63214277befdca79f6cb32e2acedc0c6",
+    "specific_prior_verification": "canonical/verification/LIVEBENCH_SHADOW_ATOMIC_CLAIM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "specific_prior_verification_git_blob_sha": "e436fa6bcd0c37e1e16c3524e05a876843945904",
+    "reused_theorem": "ATOMIC_FIRST_CREATE_HTTP_201_IS_THE_LINEARIZATION_POINT__DUPLICATE_OR_ANY_NON_201_FAILS_CLOSED"
+  },
+  "claim_protocol": {
+    "claim_namespace": "refs/heads/claims/one-use/<sha256(EXACT_ACTIVATION_CANDIDATE_SCOPE_BINDING)>",
+    "absence_precheck": "FORBIDDEN",
+    "success": "ONLY_ATOMIC_CREATE_HTTP_201_WITH_EXACT_RESPONSE_REF_AND_TARGET_SHA",
+    "duplicate": "HTTP_422_OR_ANY_NON_201__FAIL_BEFORE_CASE_READ_OR_EXECUTION",
+    "binding_fields": [
+      "EXACT_ACTIVATION_CONTENT_ADDRESS",
+      "EXACT_CANDIDATE_CONTENT_ADDRESS",
+      "BENCHMARK_ID",
+      "TARGET_PREDICATE",
+      "EXECUTION_KIND",
+      "SCOPE_ID",
+      "MAX_CASE_COUNT",
+      "NEW_CASE_EXPOSURE_FLAG"
+    ]
+  },
+  "mandatory_for": [
+    "ANY_FUTURE_ONE_EPOCH_BENCHMARK_REPLAY",
+    "ANY_SCOPED_REALITY_LEASE_DECLARED_ONE_USE",
+    "ANY_EXECUTION_AUTHORITY_WITH_NONREPEATABLE_CASE_EXPOSURE_OR_REPLAY_BUDGET"
+  ],
+  "activation_effect_if_verified": [
+    "V6_REPLAY_EPOCH_IS_SPENT__NO_ADDITIONAL_V6_REPLAY_AUTHORITY",
+    "FUTURE_ONE_USE_REPLAY_LAUNCHERS_MUST_PRESENT_VERIFIED_ATOMIC_CLAIM_RECEIPT_BEFORE_CASE_READ",
+    "CHECK_THEN_ACT_ABSENCE_PROBES_ARE_FORBIDDEN",
+    "CLAIM_FAILURE_CANNOT_BE_OVERRIDDEN_BY_SCHEDULER_OR_LAUNCHER_RETRY"
+  ],
+  "hard_rules": [
+    "NO_CASE_READ_BEFORE_ATOMIC_CLAIM",
+    "NO_EXECUTION_START_BEFORE_ATOMIC_CLAIM",
+    "NO_EVALUATION_OUTPUT_BEFORE_ATOMIC_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT_FROM_CLAIM",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "CLAIM_AUTHORITY_IS_THIS_EXACT_LEASE_ONLY",
+    "FAIL_CLOSED_ON_ACTIVATION_CANDIDATE_OR_SCOPE_DRIFT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
