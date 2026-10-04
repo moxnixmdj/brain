@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_OVERLAP_PROMPT_COMPOSITION_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_12_OF_12_CONSTRUCTIVE_COMPOSITION__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source_authority": {
+    "ifbench_repository": "allenai/IFBench",
+    "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "ifbench_data_path": "data/IFBench_test.jsonl",
+    "frozen_checker_repository": "LiveBench/LiveBench",
+    "frozen_checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "frozen_checker_path": "livebench/if_runner/ifbench/instructions.py"
+  },
+  "breakthrough": {
+    "statement": "THE_PUBLIC_RATIO_OVERLAP_FAMILY_CAN_BE_COMPOSED_PROMPT_ONLY_WITH_ITS_OBSERVED_CO_CONSTRAINTS_WITHOUT_RECONSTRUCTING_EXACT_RAW_REFERENCE_WHITESPACE",
+    "mechanism": [
+      "RECOVER_REFERENCE_UP_TO_WHITESPACE_WITH_THE_PROMPT_SEGMENTER",
+      "SELECT_A_VISIBLE_WHITESPACE_FREE_TOKEN_TO_CREATE_KNOWN_REFERENCE_TRIGRAMS",
+      "SELECT_PRIVATE_USE_FILLER_CHARACTERS_ABSENT_FROM_THE_RECOVERED_REFERENCE_SO_EVERY_FILLER_BEARING_TRIGRAM_IS_PROVABLY_NONMATCHING_UNDER_THE_SEGMENTER_CONTRACT",
+      "FOR_SENTENCE_KEYWORD_REPEAT_ONE_PRIVATE_USE_SCAFFOLD_CHARACTER_PLUS_PERIOD_SO_ARBITRARILY_LARGE_SENTENCE_ORDINALS COST_ONLY_O_1_DISTINCT_SCAFFOLD_TRIGRAMS",
+      "ISOLATE_THE_REQUIRED_KEYWORD_BETWEEN_PRIVATE_USE_CHARACTERS_SO_ONLY_ITS_INTERNAL_TRIGRAMS_HAVE_REFERENCE MEMBERSHIP TO ACCOUNT",
+      "FOR_WORDS_CONSONANTS_USE_ONE CHECKER_VISIBLE WORD WHOSE VISIBLE REFERENCE TOKEN ALREADY CONTAINS AN ASCII CONSONANT CLUSTER",
+      "SOLVE_THE_REQUIRED DISTINCT-TRIGRAM DENOMINATOR DIRECTLY AND ADD UNIQUE PRIVATE_USE FILLER TO HIT THE PLUS_MINUS_2_PERCENT BAND"
+    ],
+    "new_runtime": "canonical/runtime/livebench_ratio_overlap_prompt_composer_v1.py",
+    "new_tests": "canonical/tests/test_livebench_ratio_overlap_prompt_composer_v1.py"
+  },
+  "public_family_self_check": {
+    "ratio_overlap_rows": 12,
+    "row_keys": ["144", "145", "146", "147", "148", "149", "150", "151", "152", "212", "213", "214"],
+    "composition_distribution": {
+      "ratio_only": 5,
+      "ratio_plus_sentence_keyword": 4,
+      "ratio_plus_words_consonants": 3
+    },
+    "constructive_pass_rows": 12,
+    "predicted_overlap_equal_to_exact_checker_overlap_rows": 12,
+    "result": "12_OF_12",
+    "terminal_rows_used": 0,
+    "independent_verification": false
+  },
+  "representative_constructive_scores_percent": {
+    "144": 72.727273,
+    "145": 93.333333,
+    "146": 75.0,
+    "147": 58.823529,
+    "148": 6.0,
+    "149": 13.043478,
+    "150": 24.0,
+    "151": 23.076923,
+    "152": 10.958904,
+    "212": 53.846154,
+    "213": 50.0,
+    "214": 10.909091
+  },
+  "residual_reduction": {
+    "retired_under_prompt_segmenter_contract": [
+      "EXACT_RAW_REFERENCE_WHITESPACE_ACQUISITION_FOR_RATIO_OVERLAP",
+      "PRIVATE_USE_SUFFIX_DISJOINTNESS_AS_EXTERNAL_ASSUMPTION",
+      "PUBLIC_RATIO_PLUS_SENTENCE_KEYWORD_COMPOSITION",
+      "PUBLIC_RATIO_PLUS_WORDS_CONSONANTS_COMPOSITION"
+    ],
+    "remaining": [
+      "INDEPENDENTLY_VERIFY_THE_NEW_RUNTIME_AND_TEST_BLOBS",
+      "INDEPENDENTLY_VERIFY_PROMPT_SEGMENTER_EQUIVALENCE_ON_THE_PINNED_PUBLIC_RATIO FAMILY",
+      "BIND_THIS_CONSTRUCTOR_TO_THE_ACTIVE_ACCEPTANCE_ROUTE WITHOUT_SCORE_ONLY_CREDIT",
+      "SEMANTIC_ANSWER_QUALITY_REMAINS_A_SEPARATE ROOT1 REQUIREMENT",
+      "NO_GENERALIZATION_CLAIM_TO_UNSEEN_CHECKER_COMBINATIONS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT_YET",
+    "NO_OPUS55_CAPABILITY_CREDIT",
+    "NO_TERMINAL_GOAL_COMPLETION CLAIM",
+    "NO_GENERAL_SEMANTIC_ANSWER_QUALITY PROOF",
+    "NO_TERMINAL_CASE CONTENT USED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
