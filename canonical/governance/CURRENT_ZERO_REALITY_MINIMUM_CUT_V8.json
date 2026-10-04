@@ -48,8 +48,8 @@
     },
     "root3_compression": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
-      "git_blob_sha": "22ee9392b19b63b50f8d94cba4d28147b9b15f2f",
-      "status": "ACTIVE_FAIL_CLOSED__SYNTHESIS_SCOPE_RECLASSIFIED_TO_ROOT2_ONLY__ZERO_CREDIT"
+      "git_blob_sha": "3358c94f8dcd5edda7aea1d2bb0d61207d1b1867",
+      "status": "ACTIVE_FAIL_CLOSED__UNKNOWN_DOMAIN_OPERATIVE_LEARNING_OVERLAY_V7__TWO_FROZEN_LEAVES_PRESERVED__POINTER_VERIFICATION_PENDING__ZERO_CREDIT"
     },
     "matched_totalization": {
       "path": "canonical/verification/CURRENT_WITNESS_TARGET_TOTALIZATION_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
