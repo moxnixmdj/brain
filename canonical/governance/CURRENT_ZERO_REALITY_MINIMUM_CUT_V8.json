@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V8",
-  "date": "2026-10-03",
-  "status": "ACTIVE_CANDIDATE__ROOT2_ROUTE_SEARCH_COMPRESSED__HLE_ADAPTER_DISCHARGED__NO_FRESH_REALITY__ZERO_CREDIT",
+  "date": "2026-10-04",
+  "status": "ACTIVE_CANDIDATE__SYNTHESIS_ROOT3_SCOPE_CLOSED__ROOT2_ROUTE_SEARCH_COMPRESSED__HLE_ADAPTER_DISCHARGED__NO_FRESH_REALITY__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_state": {
     "accepted_families": 5,
@@ -269,5 +269,12 @@
       "scope_relation": "CLOSED_BY_INDEPENDENT_SCOPE_CERTIFICATE",
       "fresh_reality_authority": false
     }
-  ]
+  ],
+  "synthesis_scope_reclassification": {
+    "certificate": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+    "certificate_git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+    "verification": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "1528485a15c98e89c9fb4dc50d691b6682e08542",
+    "consequence": "ROOT3_INVOLVED_11_TO_10__ROOT2_INVOLVED_REMAINS_19__UNRESOLVED_REMAINS_26__ZERO_ACCEPTANCE_CREDIT"
+  }
 }
