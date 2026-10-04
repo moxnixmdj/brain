@@ -340,7 +340,11 @@
         }
       ],
       "scope_limit": "ROOT2_ONLY_OPEN_UNTIL_CLEAN_CASE_INDEPENDENT_STRONGER_PROOF_OR_PRECOMMITTED_CLEAN_EQUIVALENT_EVALUATION",
-      "credit_revoked_by": "canonical/governance/LIVEBENCH_EXACT200_CONTAMINATION_CREDIT_REVOCATION_20261004_V1.json"
+      "credit_revoked_by": "canonical/governance/LIVEBENCH_EXACT200_CONTAMINATION_CREDIT_REVOCATION_20261004_V1.json",
+      "promotion_verification_path": "canonical/verification/LIVEBENCH_IF_EXACT_PUBLIC_THRESHOLD_PROMOTION_EXACT_BYTE_VERIFICATION_20261004_V1.json",
+      "promotion_verification_sha": "8b2071fb31f359b2f990d8c7da1fe6feeabfcb31",
+      "promotion_verification_run_id": 37239021521,
+      "promotion_verification_job_id": 111543787531
     }
   ],
   "rules": [
