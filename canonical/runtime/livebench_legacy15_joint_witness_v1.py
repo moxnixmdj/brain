@@ -254,7 +254,15 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
 def solve(prompt: str) -> dict[str, Any]:
     compiled = compiler.compile_visible_constraints(str(prompt or ""))
     constraints = list(compiled.get("constraints") or [])
-    if compiled.get("status") != "PASS" or not compiled.get("all_recognized_parameters_complete"):
+    # Compiler V4 proves completeness by making status PASS iff there are no
+    # parse errors, duplicate instruction ids, or parameter-incomplete rows.
+    # V4 intentionally does not emit the older
+    # all_recognized_parameters_complete convenience field.
+    if (
+        compiled.get("status") != "PASS"
+        or bool(compiled.get("parameter_incomplete"))
+        or int(compiled.get("parameter_complete_count", -1)) != len(constraints)
+    ):
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "error": "VISIBLE_COMPILER_NOT_COMPLETE", "response": None}
     if not constraints:
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "error": "NO_ACTIVE_CONSTRAINTS", "response": None}
