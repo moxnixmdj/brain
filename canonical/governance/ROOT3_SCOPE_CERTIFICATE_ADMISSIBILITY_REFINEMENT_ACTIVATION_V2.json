@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V2",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__POST_SYNTHESIS_RECONCILIATION__ADMISSIBILITY_RULE_PRESERVED__ZERO_CREDIT",
+  "base_minimum_cut": {
+    "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+    "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+    "verification_path": "canonical/verification/ROOT3_POST_SYNTHESIS_PUBLIC_RUNNER_VERIFICATION_20261004_V2.json",
+    "verification_git_blob_sha": "7a5e32351cd20c6ef15d50283e2753186e04e77d"
+  },
+  "refinement": {
+    "path": "canonical/governance/ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_V1.json",
+    "git_blob_sha": "25a39569f141e6699320b5fb70e6cc434eef07fa",
+    "operative_rule": "ACCOUNTING_LABEL_CARDINALITY_OR_SINGLETON_FAMILY_TO_CONTRACT_MAPPING_IS_NEVER_SCOPE_COMPLETENESS_EVIDENCE_WITHOUT_AN_EXPLICIT_INDEPENDENT_LOSSLESS_OR_EXHAUSTIVE_DECOMPOSITION_CERTIFICATE"
+  },
+  "synthesis_scope_closure": {
+    "activation_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "60d845cf2370854bfd171154cf94946436be2c16",
+    "certificate_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+    "certificate_git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+    "verification_path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verification_git_blob_sha": "1528485a15c98e89c9fb4dc50d691b6682e08542",
+    "conclusion": "COMPLIANT_SCOPE_CERTIFICATE_CLOSED_SYNTHESIS_SCOPE_RELATION__PREDICATE_RECLASSIFIED_ROOT2_ONLY"
+  },
+  "current_effect": {
+    "root3_predicates": 10,
+    "matched_scope_targets": 7,
+    "minimum_event_classes": 3,
+    "currently_runnable_event_count": 0,
+    "invalid_scope_shortcut_deleted": true,
+    "synthesis_scope_relation_closed": true,
+    "synthesis_root3": false
+  },
+  "scheduling_effect": "NO_NEW_RUNNABLE_ROOT3_ACTION__NEW_SCOPE_CERTIFICATE_EVENTS_STILL_REQUIRE_EXPLICIT_INDEPENDENT_LOSSLESS_EXHAUSTIVE_OR_UNIVERSAL_COMPLETENESS",
+  "hard_nonclaims": [
+    "NO_ADDITIONAL_ROOT3_PREDICATE_CLOSED_BY_THIS_RECONCILIATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification": {
+    "path": "canonical/verification/ROOT3_SCOPE_ADMISSIBILITY_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "46f51ec2a2ce1dfb859adfa420f6b8c362ef0ad1",
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1530,
+    "workflow_run_id": 37165294031,
+    "workflow_job_id": 111326841730,
+    "conclusion": "success"
+  }
+}
