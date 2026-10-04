@@ -73,7 +73,7 @@ def _special_json(constraints: list[dict[str, Any]]) -> str:
     required = _required_fragments(_required(constraints), forbidden)
     filler = _safe_token(forbidden)
     payload = " ".join([filler, *required]).strip()
-    response = json.dumps({"response": payload}, ensure_ascii=False)
+    # Avoid injecting an uncontrolled lexical key. "response" is itself a\n    # legal historical WORD_LIST value and may be forbidden. A top-level JSON\n    # string is accepted by the pinned JsonFormat checker.\n    response = json.dumps(payload, ensure_ascii=False)
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
             raise JointWitnessError("JSON_FORBIDDEN_COLLISION")
@@ -139,7 +139,9 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
         n = int(s["num_sections"])
         splitter = str(s["section_spliter"])
         for i in range(1, n + 1):
-            body_parts.append(f"{splitter} {i}\n{filler}{i}")
+            # Zero whitespace before the numeric index passes SectionChecker
+            # while removing the whole-word boundary after the splitter.
+            body_parts.append(f"{splitter}{i}\\n{filler}{i}")
 
     if bullets:
         n = int(_slots(bullets)["num_bullets"])
