@@ -1,12 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_ROOT3_MINIMUM_ACTION_CUT_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT3_11_PREDICATES_TO_3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
+  "status": "ACTIVE__SYNTHESIS_SCOPE_EVENT_CONSUMED__10_ROOT3_PREDICATES_TO_3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
   "objective": "Freeze the minimum nonduplicative Root3 action frontier after universal-scope compilation, population coalescence, matched-superportfolio binding, and current zero-reality saturation.",
   "derivation": {
-    "live_root3_predicates": 11,
+    "live_root3_predicates": 10,
     "formal_targets_coalesced_to_population_identities": 4,
-    "synthesis_root3_residual": "ONE_SCOPE_RELATION",
+    "synthesis_root3_residual": "CLOSED_BY_INDEPENDENT_LOSSLESS_SCOPE_CERTIFICATE__ROOT2_PERFORMANCE_RESIDUAL_ONLY",
     "composition_dependency": "8_OPEN_INTERFACES__EVENT_DRIVEN_ONLY",
     "matched_scope_execution": "8_TARGETS__ONE_SHARED_FUTURE_SUPERPORTFOLIO_WAVE",
     "direct_oracle_residual": "4_FROZEN_LEAVES",
@@ -17,7 +17,7 @@
     "UPSTREAM_SCOPE_RECEIPT_EVENT",
     "ROOT3_FRESH_REALITY_EVENT"
   ],
-  "current_consequence": "NO_NONDOMINATED_ROOT3_EXECUTION_IS_CURRENTLY_AUTHORIZED_OR_INFORMATION_POSITIVE_UNDER_BOUND_EVIDENCE__WAIT_FOR_A_RESUME_EVENT",
+  "current_consequence": "ONE_NEW_SCOPE_CERTIFICATE_EVENT_CONSUMED__SYNTHESIS_RECLASSIFIED_ROOT2_ONLY__NO_OTHER_NONDOMINATED_ROOT3_EXECUTION_CURRENTLY_AUTHORIZED",
   "hard_rules": [
     "NO_REPEAT_GENERIC_ROOT3_SEARCH_WHILE_SATURATION_INPUTS_UNCHANGED",
     "NO_DIRECT_COMPOSITION_REALITY",
@@ -50,5 +50,10 @@
     "conclusion": "success",
     "artifact_id": 11288095099,
     "artifact_digest": "sha256:94e36171be705f92f64131cdbb923cfbbcf6c1d8adde44edd664b2c46e19847b"
+  },
+  "synthesis_scope_event": {
+    "certificate": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+    "verification": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "effect": "ROOT3_INVOLVED_11_TO_10__ROOT2_INVOLVED_REMAINS_19__UNRESOLVED_REMAINS_26"
   }
 }
