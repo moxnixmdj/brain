@@ -48,7 +48,7 @@
     },
     "root3_compression": {
       "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
-      "git_blob_sha": "97716f740418523aa16cff38c9a485c95675506a",
+      "git_blob_sha": "66babe959f0a159c450dc49cba520189288515ff",
       "status": "ACTIVE_FAIL_CLOSED__UNKNOWN_DOMAIN_OPERATIVE_LEARNING_OVERLAY_V7__TWO_FROZEN_LEAVES_PRESERVED__POINTER_VERIFICATION_PENDING__ZERO_CREDIT"
     },
     "matched_totalization": {
