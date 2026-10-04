@@ -157,7 +157,10 @@ def evaluate_with_registry(
         checker = cls(iid)
         # Exact visible slots suppress every random/default generation branch.
         checker.build_description(**slots)
-        results.append(bool(checker.check_following(str(response))))
+        text = str(response)
+        # Match frozen LiveBench test_instruction_following_strict exactly:
+        # empty/whitespace-only responses fail before checker execution.
+        results.append(bool(text.strip()) and bool(checker.check_following(text)))
     return tuple(results)
 
 
