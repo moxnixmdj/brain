@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_SUB100MB_H100_EXPERIMENT_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_RESEARCH_CONSTRAINT__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CAPABILITY_CREDIT",
+  "objective": "MAKE_THE_VERIFIED_H100_RESOURCE_AND_PROVIDER_BOUNDARY_THE_OPERATIVE_CONSTRAINT_FOR_SUB100MB_KERNEL_RESEARCH_WITHOUT_CHANGING_TERMINAL_CAPABILITY_ACCEPTANCE",
+  "contract": {
+    "path": "canonical/governance/SUB100MB_LEARNED_CORE_EXPERIMENT_CONTRACT_V1.json",
+    "git_blob_sha": "94b74f1e2f4b5663d0ff490cd4d2b23363299a5e"
+  },
+  "guard": {
+    "path": "canonical/runtime/sub100mb_learned_state_guard_v1.py",
+    "git_blob_sha": "7663016998fbfd4cd6b848fd18fd515308fa5baa"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/SUB100MB_H100_GUARD_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "393a13cd0be44aa2d4c3fbe9cca10bdb9a7ebac2",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1682,
+    "verifier_merge_commit": "caeae57f26e5169753081cf7c9830e36b8d8ddea",
+    "workflow_run_id": 37177811255,
+    "workflow_job_id": 111364015165,
+    "conclusion": "success"
+  },
+  "operative_rules": [
+    "SUB100MB_RESEARCH_CANDIDATES_MUST_USE_THE_VERIFIED_GUARD_BEFORE_ANY_H100_SUCCESS_CLAIM",
+    "ALL_PERSISTENT_CAPABILITY_BEARING_LEARNED_STATE_COUNTS_REGARDLESS_OF_LOCATION",
+    "LEARNED_ARTIFACT_BYTE_COUNTS_REQUIRE_INDEPENDENT_CONTENT_ADDRESSED_RECEIPTS",
+    "EXTERNAL_LEARNED_OR_FRONTIER_CAPABILITY_PROVIDERS_ARE_FORBIDDEN_DURING_SCORED_H100_EXECUTION",
+    "RAW_JIT_KNOWLEDGE_MAY_NOT_SUBSTITUTE_TASK_SPECIFIC_REASONING_OR_CAPABILITY",
+    "19_FAMILY_AND_38_ATOM_DENOMINATORS_MAY_NOT_BE_SHRUNK",
+    "BUDGET_COMPLIANCE_CREATES_ZERO_CAPABILITY_CREDIT",
+    "FIRST_FALSIFICATION_GATE_IS_UNKNOWN_DOMAIN_ADAPTATION"
+  ],
+  "current_state": {
+    "accepted_families": 5,
+    "verified_owned_families": 5,
+    "total_families": 19,
+    "proved_atomic": 12,
+    "total_atomic": 38,
+    "h100_terminal": false,
+    "kernel_candidate_bound": false
+  },
+  "authority": {
+    "research_constraint": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
