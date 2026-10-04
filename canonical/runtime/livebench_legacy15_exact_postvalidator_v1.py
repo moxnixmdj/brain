@@ -21,6 +21,7 @@ PINNED_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
 PINNED_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 PINNED_UTIL_BLOB = "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
 PINNED_EVALUATION_MAIN_BLOB = "4a341984936c4d609644a3b77f8c030ac5aa7269"
+PINNED_NLTK_VERSION = "3.10.3"
 
 SLOT_KEYS: dict[str, tuple[str, ...]] = {
     "keywords:existence": ("keywords",),
@@ -145,6 +146,14 @@ def load_pinned_registry(livebench_root: str | Path):
         "instruction_following_eval.instructions_registry"
     )
     util_module = importlib.import_module("instruction_following_eval.instructions_util")
+    observed_nltk_version = str(getattr(util_module.nltk, "__version__", ""))
+    if observed_nltk_version != PINNED_NLTK_VERSION:
+        raise ExactPostvalidationError(
+            "NLTK_VERSION_MISMATCH:"
+            + observed_nltk_version
+            + ":expected="
+            + PINNED_NLTK_VERSION
+        )
 
     if Path(registry_module.__file__).resolve() != registry_path:
         raise ExactPostvalidationError("REGISTRY_IMPORT_ORIGIN_MISMATCH")
@@ -165,6 +174,7 @@ def load_pinned_registry(livebench_root: str | Path):
         "instructions_util_blob": PINNED_UTIL_BLOB,
         "evaluation_main_blob": PINNED_EVALUATION_MAIN_BLOB,
         "strict_nonempty_response_gate_bound": True,
+        "nltk_version": observed_nltk_version,
     }
 
 
