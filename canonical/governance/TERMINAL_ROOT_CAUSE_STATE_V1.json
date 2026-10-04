@@ -180,7 +180,19 @@
     "low_value_free_tier_trial_quota_support_outreach_forbidden": true,
     "self_service_facts_are_owner_waits": false,
     "root2_primary_source_search_deletions": "canonical/governance/ROOT2_EXTERNAL_PRIMARY_SOURCE_REFRESH_ACTIVATION_V1.json",
-    "repeat_search_for_deleted_primary_source_classes_forbidden": true
+    "repeat_search_for_deleted_primary_source_classes_forbidden": true,
+    "adaptive_meta_scheduler": {
+      "activation_path": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V2_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "0a70eb7ff3cfbe07e4765f2e490351fbaa505030",
+      "policy_path": "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V2.json",
+      "policy_git_blob_sha": "c5b9a287b51c0594f7925770f0f22fbbbb2738dc",
+      "runtime_path": "canonical/runtime/terminal_adaptive_minimum_action_policy_v1.py",
+      "runtime_git_blob_sha": "bfffe6dff32f5445a0c52657f7d9ec8d544b1f79",
+      "status": "CANDIDATE__ACTIVATION_VERIFICATION_REQUIRED__SCHEDULING_ONLY__ZERO_CREDIT",
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false
+    }
   },
   "accounting": {
     "acceptance_credit_delta": 0,
