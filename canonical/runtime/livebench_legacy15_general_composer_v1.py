@@ -104,6 +104,38 @@ def _append_word_padding(text: str, constraint: dict[str, Any] | None) -> str:
     raise ComposeError("UNKNOWN_WORD_RELATION")
 
 
+
+def _apply_word_constraint(
+    prefix: str,
+    suffix: str | None,
+    constraint: dict[str, Any] | None,
+) -> str:
+    """Apply the word predicate while preserving an exact terminal suffix."""
+    def join(p: str, s: str | None) -> str:
+        if s:
+            return (p + "\n" + s).strip() if p else s
+        return p
+
+    final = join(prefix, suffix)
+    if constraint is None:
+        return final
+    slots = _slots(constraint)
+    relation = str(slots.get("relation") or "")
+    target = int(slots.get("num_words"))
+    current = _count_words(final)
+    if relation == "less than":
+        if current >= target:
+            raise ComposeError(f"WORD_LESS_THAN_UNSAT:{current}>={target}")
+        return final
+    if relation == "at least":
+        need = max(0, target - current)
+        if need:
+            pad = " ".join(["zxqv"] * need)
+            prefix = (prefix + "\n" + pad).strip() if prefix else pad
+        return join(prefix, suffix)
+    raise ComposeError("UNKNOWN_WORD_RELATION")
+
+
 def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> list[str]:
     lines: list[str] = []
     if _one(constraints, "detectable_format:title") is not None:
@@ -226,15 +258,17 @@ def _compose_plain_or_sentence(
                     raise ComposeError("LESS_THAN_TWO_SENTENCE_POSTSCRIPT_END_UNVERIFIED")
 
     end = _ending(constraints)
-    if end is not None:
-        lines.append(end)
-
-    text = "\n".join(lines)
-    bad = _forbidden_collision(text, forbidden)
+    prefix = "\n".join(lines)
+    mandatory = (prefix + ("\n" + end if end else "")).strip()
+    bad = _forbidden_collision(mandatory, forbidden)
     if bad:
         raise ComposeError("MANDATORY_FORBIDDEN_COLLISION:" + bad)
 
-    text = _append_word_padding(text, _one(constraints, "length_constraints:number_words"))
+    text = _apply_word_constraint(
+        prefix,
+        end,
+        _one(constraints, "length_constraints:number_words"),
+    )
     return _wrap_quote(text, constraints)
 
 
@@ -255,15 +289,18 @@ def _compose_star_paragraph(
     if common:
         paragraphs[0] += "\n" + "\n".join(common)
     end = _ending(constraints)
-    if end is not None:
-        paragraphs[-1] += "\n" + end
 
-    text = "\n***\n".join(paragraphs)
-    bad = _forbidden_collision(text, forbidden)
+    prefix = "\n***\n".join(paragraphs)
+    mandatory = (prefix + ("\n" + end if end else "")).strip()
+    bad = _forbidden_collision(mandatory, forbidden)
     if bad:
         raise ComposeError("MANDATORY_FORBIDDEN_COLLISION:" + bad)
 
-    text = _append_word_padding(text, _one(constraints, "length_constraints:number_words"))
+    text = _apply_word_constraint(
+        prefix,
+        end,
+        _one(constraints, "length_constraints:number_words"),
+    )
     return _wrap_quote(text, constraints)
 
 
@@ -302,15 +339,18 @@ def _compose_nth_paragraph(
         paragraphs[0] += " " + " ".join(["Zxqv."] * sc[1])
 
     end = _ending(constraints)
-    if end is not None:
-        paragraphs[-1] += "\n" + end
 
-    text = "\n\n".join(paragraphs)
-    bad = _forbidden_collision(text, forbidden)
+    prefix = "\n\n".join(paragraphs)
+    mandatory = (prefix + ("\n" + end if end else "")).strip()
+    bad = _forbidden_collision(mandatory, forbidden)
     if bad:
         raise ComposeError("MANDATORY_FORBIDDEN_COLLISION:" + bad)
 
-    text = _append_word_padding(text, _one(constraints, "length_constraints:number_words"))
+    text = _apply_word_constraint(
+        prefix,
+        end,
+        _one(constraints, "length_constraints:number_words"),
+    )
     return _wrap_quote(text, constraints)
 
 
