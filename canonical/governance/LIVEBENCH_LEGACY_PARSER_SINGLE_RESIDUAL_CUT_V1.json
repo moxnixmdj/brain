@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_PARSER_SINGLE_RESIDUAL_CUT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONDITIONAL_COMPOSITION_CUT__24_OF_25_LEGACY_PARAMETER_SURFACES_VISIBLE__ONE_HIDDEN_PARAMETER_RESIDUAL__ZERO_CREDIT__UPSTREAM_INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Compose the frozen-population scorer-family reduction with the source-derived public description grammar reduction so the Root1 parser/parameter-binding frontier is no larger than the score-relevant legacy surface.",
+  "inputs": {
+    "active_scorer_family_binding_candidate": {
+      "path": "canonical/governance/LIVEBENCH_ACTIVE_SCORER_FAMILY_BINDING_V1.json",
+      "git_blob_sha": "416a15134aa3b8b6a8d7b78aa312e57f6526dcb0",
+      "brain_pull_request": 1732,
+      "brain_head_sha": "2d5aec68aa51f95aeb887c3032eca91464acf865",
+      "required_verified_fact": "ALL_200_ACTIVE_FROZEN_ROWS_DISPATCH_TO_LEGACY_IFEVAL__MODERN_IFBENCH_ACTIVE_ROW_COUNT_ZERO"
+    },
+    "public_description_grammar_compiler_candidate": {
+      "path": "canonical/governance/LIVEBENCH_PUBLIC_DESCRIPTION_GRAMMAR_COMPILER_CANDIDATE_V1.json",
+      "git_blob_sha": "fd4438a969ae3a546b0e7519119b36f916239999",
+      "brain_pull_request": 1734,
+      "brain_head_sha": "d5d0c2289981d2b3e1945ad85fcbc364370cc3b2",
+      "required_verified_facts": [
+        "LEGACY_ACTIVE_CHECKER_COUNT_EQUALS_25",
+        "COMBINED_ACTIVE_CHECKER_COUNT_EQUALS_83",
+        "COMBINED_VISIBLE_COMPLETE_COUNT_EQUALS_80",
+        "COMBINED_HIDDEN_PARAMETER_CHECKER_COUNT_EQUALS_3",
+        "THE_ONLY_LEGACY_HIDDEN_PARAMETER_CHECKER_IS_combination:repeat_prompt_WITH_prompt_to_repeat"
+      ]
+    }
+  },
+  "deduction": {
+    "premises": [
+      "THE_EXACT_FROZEN_ACTIVE_POPULATION_USES_ONLY_THE_25_LEGACY_IFEVAL_CHECKER_TYPES",
+      "THE_SOURCE_ONLY_GRAMMAR_AUDIT_CLASSIFIES_24_OF_THOSE_25_LEGACY_TYPES_AS_VISIBLE_COMPLETE",
+      "THE_REMAINING_LEGACY_TYPE_IS_combination:repeat_prompt_AND_ITS_ONLY_HIDDEN_EFFECTIVE_PARAMETER_IS_prompt_to_repeat"
+    ],
+    "result": {
+      "active_checker_type_upper_bound": 25,
+      "prompt_visible_complete_parameter_types": 24,
+      "hidden_parameter_checker_types": 1,
+      "hidden_parameter_residuals": [
+        {
+          "instruction_id": "combination:repeat_prompt",
+          "parameter": "prompt_to_repeat"
+        }
+      ],
+      "modern_ifbench_checker_types_on_exact_frozen_parser_critical_path": 0
+    },
+    "critical_path_effect_after_both_upstreams_are_independently_verified": [
+      "DELETE_MODERN_58_TYPE_PARAMETER_BINDING_WORK_FROM_THIS_EXACT_FROZEN_PREDICATE",
+      "DELETE_24_LEGACY_VISIBLE_PARAMETER_BINDING_TYPES_FROM_THE_UNKNOWN_PARAMETER_FRONTIER",
+      "FOCUS_PARAMETER_RECOVERY_WORK_ON_combination:repeat_prompt.prompt_to_repeat_ONLY",
+      "KEEP_WITNESS_CONSTRUCTION_CHECKER_COMPOSITION_AND_SCORE_MASS_AS_SEPARATE_PROOF_OBLIGATIONS",
+      "DO_NOT_CONFUSE_PARAMETER_VISIBILITY_WITH_CHECKER_SATISFIABILITY_OR_BENCHMARK_SCORE"
+    ]
+  },
+  "why_this_is_stronger_than_either_input_alone": [
+    "SCORER_FAMILY_BINDING_ALONE_ONLY_REDUCES_83_TYPES_TO_AN_UPPER_BOUND_OF_25_LEGACY_TYPES",
+    "GRAMMAR_COMPILATION_ALONE_LEAVES_3_HIDDEN_PARAMETER_RESIDUALS_ACROSS_83_TYPES",
+    "THE_COMPOSITION_INTERSECTS_THE_TWO_SURFACES_AND_REDUCES_THE_ACTIVE_HIDDEN_PARAMETER_FRONTIER_TO_ONE"
+  ],
+  "activation_condition": {
+    "all_required": [
+      "PR_1732_EXACT_SUBJECT_OR_IDENTICAL_BLOB_INDEPENDENT_VERIFICATION_PASS",
+      "PR_1734_EXACT_SUBJECT_OR_IDENTICAL_BLOB_PINNED_SOURCE_VERIFICATION_PASS",
+      "NO_DRIFT_IN_FROZEN_DATASET_IDENTITY_DISPATCH_BOUNDARY_LEGACY_REGISTRY_OR_GRAMMAR_AUDIT_RESULT"
+    ],
+    "before_activation": "SCHEDULING_HINT_ONLY__NO_LOAD_BEARING_DELETION",
+    "after_activation": "MAY_DELETE_NONACTIVE_PARAMETER_BINDING_WORK_ONLY__NO_ACCEPTANCE_OR_EXECUTION_CREDIT"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_PR_1732_OR_PR_1734_IS_ALREADY_INDEPENDENTLY_VERIFIED",
+    "NO_CLAIM_24_VISIBLE_COMPLETE_TYPES_HAVE_VALID_WITNESS_CONSTRUCTORS",
+    "NO_CLAIM_THE_SINGLE_HIDDEN_PARAMETER_RESIDUAL_IS_THE_ONLY_REMAINING_ROOT1_PROBLEM",
+    "NO_CLAIM_OF_MULTI_CHECKER_COMPOSITION_CLOSURE",
+    "NO_LIVEBENCH_SCORE_CLAIM",
+    "NO_TERMINAL_CASE_OR_PROMPT_CONTENT_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_prompt_content_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "next": "INDEPENDENTLY_VERIFY_BOTH_BOUND_UPSTREAM_SUBJECTS__THEN_ACTIVATE_THIS_INTERSECTION_CUT_AND_WORK_THE_SINGLE_HIDDEN_PARAMETER_BINDING_RESIDUAL_IN_PARALLEL_WITH_WITNESS_CONSTRUCTION_COMPOSITION_AND_SCORE_MASS"
+}
