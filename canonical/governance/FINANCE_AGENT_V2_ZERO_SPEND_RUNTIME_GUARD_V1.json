@@ -18,11 +18,11 @@
   },
   "runtime": {
     "path": "canonical/runtime/zero_spend_provider_guard_v1.py",
-    "git_blob_sha": "PENDING_CREATE"
+    "git_blob_sha": "356af559fc74ac3eab5532b2d8fee9ddfb98f962"
   },
   "tests": {
     "path": "canonical/tests/test_zero_spend_provider_guard_v1.py",
-    "git_blob_sha": "PENDING_CREATE"
+    "git_blob_sha": "a789dd4245f46f32bd0f90bdaed9f778491b4df9"
   },
   "theorem": [
     "IF_EACH_PROVIDER_ACCOUNT_STATE_IS_INDEPENDENTLY_VERIFIED_FREE_ONLY_WITH_PAID_FALLBACK_OVERAGE_AND_BILLING_CHARGE_PATHS_DISABLED",
