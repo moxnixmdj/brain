@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_OVERLAP_PROMPT_SEGMENTATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PROMPT_ONLY_NORMALIZED_REFERENCE_RECOVERY_12_OF_12_PUBLIC_ROWS__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_instruction": "ratio:overlap",
+  "objective": "Remove hidden exact-reference acquisition from the successor path by recovering a score-sufficient normalized reference and target percentage from visible prompt text only.",
+  "runtime": {
+    "path": "canonical/runtime/livebench_ratio_overlap_prompt_segmenter_v1.py",
+    "git_blob_sha": "b0a745ce730c7f92f8ca3a804baa2519255845a6",
+    "test_path": "canonical/tests/test_livebench_ratio_overlap_prompt_segmenter_v1.py"
+  },
+  "public_sources": {
+    "ifbench_repository": "allenai/IFBench",
+    "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "ifbench_test_blob": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "livebench_checker_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "constructive_result": {
+    "public_ifbench_rows": 300,
+    "public_ratio_overlap_rows": 12,
+    "prompt_only_normalized_reference_recovered": 12,
+    "visible_percentage_recovered": 12,
+    "raw_vs_normalized_nonwhitespace_trigram_equivalence": 12,
+    "whitespace_free_passing_witnesses": 12,
+    "failures": 0,
+    "special_cases_closed": [
+      "ORDINAL_VARIANTS_ST_ND_RD_TH",
+      "ZERO_WIDTH_U200B_OUTER_GENERATED_CONSTRAINT_DELIMITER",
+      "RATIO_CONSTRAINT_PREFIX_SUFFIX_OR_MIDDLE",
+      "PUBLIC_SENTENCE_KEYWORD_CO_CONSTRAINT",
+      "PUBLIC_CONSONANT_CLUSTER_CO_CONSTRAINT"
+    ]
+  },
+  "proof_composition": [
+    "PROMPT_SEGMENTER_RECOVERS_NORMALIZED_REFERENCE_AND_PERCENTAGE_FROM_VISIBLE_PROMPT_ON_12_OF_12_PINNED_PUBLIC_RATIO_OVERLAP_ROWS",
+    "WHITESPACE_INVARIANT_COMPILER_CONSTRUCTS_WHITESPACE_FREE_RESPONSES",
+    "FOR_WHITESPACE_FREE_RESPONSE_THE_RAW_REFERENCE_AND_NORMALIZED_REFERENCE_CHECKER_INTERSECTION_ARE_EXACTLY_EQUAL",
+    "THEREFORE_BYTE_EXACT_RAW_REFERENCE_WHITESPACE_IS_NOT_REQUIRED_FOR_THIS PUBLIC FAMILY ROUTE"
+  ],
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1852,
+    "head_sha": "084cddcadb34d91e6938ef38fc854bae795fe64d",
+    "workflow_run_id": 37198842641,
+    "status": "QUEUED"
+  },
+  "residual_after_this_candidate": [
+    "INDEPENDENT_PUBLIC_RUNNER_PASS_AND_RECEIPT_BINDING",
+    "PROVE_FROZEN_TERMINAL_LIVEBENCH_RATIO_OVERLAP_ROWS_ARE_WITHIN_THIS_PUBLIC_CONSTRUCTION_ENVELOPE_WITHOUT_READING_UNEXPOSED_TERMINAL_CASE_CONTENT",
+    "PROVE_OR_FAIL_CLOSED_FOR_ANY_TERMINAL_CO_CONSTRAINT_FORM_OUTSIDE_THE_PUBLIC_V1_SEGMENTER_GRAMMAR",
+    "FULL_SUCCESSOR_ACCEPTANCE_REMAINS_SEPARATE"
+  ],
+  "hard_nonclaims": [
+    "NO_FROZEN_TERMINAL_DATASET_EQUIVALENCE",
+    "NO_UNEXPOSED_TERMINAL_CASE_CONTENT_USED",
+    "NO_ARBITRARY_FUTURE_INSTRUCTION_COMBINATION_COVERAGE",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
