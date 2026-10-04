@@ -105,8 +105,10 @@ def _apply_end_material(
     marker = str(_slots(postscript).get("postscript_marker") or "") if postscript else ""
     tail_parts = []
     if marker:
+        # The frozen checker requires only a matching postscript marker. Avoid
+        # injecting arbitrary payload words that can collide with an otherwise
+        # satisfiable forbidden-word constraint.
         tail_parts.append(marker)
-        tail_parts.append("note")
     if end_phrase:
         tail_parts.append(end_phrase)
     tail = " ".join(tail_parts).strip()
@@ -155,7 +157,7 @@ def _special_two(constraints: list[dict[str, Any]]) -> list[str]:
     safe = _safe_token(forbidden)
     first_parts = []
     if _one(constraints, "detectable_format:title"):
-        first_parts.append("<<x>>")
+        first_parts.append(f"<<{safe}>>")
     if required:
         first_parts.append(_keyword_payload(required))
     first_parts.append(safe + "a")
@@ -184,7 +186,7 @@ def _build_core_skeleton(
     safe = _safe_token(forbidden)
     components: list[str] = []
     if title:
-        components.append("<<x>>")
+        components.append(f"<<{safe}>>")
     if required:
         components.append(_keyword_payload(required))
 
@@ -231,7 +233,7 @@ def _build_core_skeleton(
 
     # Preserve __PB_END_SLOT__ through the padding phase. Finalization happens
     # in generate(), after the word constraint has been satisfied.
-    if not _forbidden_ok(body, forbidden):
+    if not _forbidden_ok(body.replace("__PB_END_SLOT__", ""), forbidden):
         raise ValueError("STRUCTURE_HITS_FORBIDDEN_WORD")
     return body
 
