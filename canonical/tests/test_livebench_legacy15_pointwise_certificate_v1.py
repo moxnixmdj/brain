@@ -86,3 +86,20 @@ def test_sentence_end_unsat_makes_one_of_two_pointwise_optimal():
     assert result["pointwise_optimal"] is True
     assert result["required_next_cardinality_subset_count"] == 1
     assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in result["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
+
+
+def test_sentence_lt_one_nonempty_pair_makes_one_of_two_pointwise_optimal():
+    contracts = [
+        {
+            "instruction_id": "length_constraints:number_sentences",
+            "slots": {"num_sentences": 1, "relation": "less than"},
+        },
+        {
+            "instruction_id": "detectable_format:title",
+            "slots": {},
+        },
+    ]
+    result = certify(contracts, [True, False])
+    assert result["status"].startswith("PASS__POINTWISE_SCORE_OPTIMAL")
+    assert result["pointwise_optimal"] is True
+    assert result["required_next_cardinality_subset_count"] == 1
