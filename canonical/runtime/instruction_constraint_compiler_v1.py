@@ -208,15 +208,28 @@ def synthesize_formal_only(instruction: str) -> dict:
         words.extend(_word_tokens(c.prefix))
     for lit in c.required_literals:
         words.extend(_word_tokens(lit))
+
+    required_number_slots = c.exact_numbers or 0
+    if c.max_words is not None and required_number_slots > c.max_words:
+        return {
+            "schema": SCHEMA,
+            "status": "BLOCKED",
+            "response": None,
+            "constraints": asdict(c),
+            "validation_errors": ["EXACT_NUMBERS_EXCEED_MAX_WORDS"],
+            "semantic_seed_required": True,
+            "model_dependency_count": 0,
+        }
+
     i = 0
+    while len(words) < max(target_words - required_number_slots, 0):
+        words.append(_FILLER[i % len(_FILLER)])
+        i += 1
+    for n in range(required_number_slots):
+        words.append(str(n + 1))
     while len(words) < target_words:
         words.append(_FILLER[i % len(_FILLER)])
         i += 1
-    if c.exact_numbers:
-        for n in range(c.exact_numbers):
-            if len(words) >= target_words and c.max_words is not None:
-                break
-            words.append(str(n + 1))
     candidate = " ".join(words)
     if c.prefix and not candidate.startswith(c.prefix):
         candidate = c.prefix + (" " if candidate else "") + candidate
