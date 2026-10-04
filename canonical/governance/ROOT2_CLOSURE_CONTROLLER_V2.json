@@ -1,12 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_CLOSURE_CONTROLLER_V2",
   "date": "2026-10-04",
-  "status": "CANDIDATE__SESSION_TESTED__INDEPENDENT_PUBLIC_RUNNER_PENDING__ZERO_CREDIT",
+  "status": "CANDIDATE__SESSION_TESTED__RECONCILED_TO_SYNTHESIS_SCOPE_RECLASSIFICATION__INDEPENDENT_REVERIFY_PENDING__ZERO_CREDIT",
   "base_terminal_authority_head": "deb61749c171ee04e7f97bb4cbcb0b7d583599da",
   "objective": "MINIMIZE_ROOT2_WORST_CASE_WALL_CLOCK_ACTION_COUNT_AND_IRREVERSIBLE_EVALUATIONS_WITHOUT_FALSE_COMPARATOR_EQUIVALENCE",
   "exact_state": {
-    "root2_only": 15,
-    "root2_and_root3": 4,
+    "root2_only": 16,
+    "root2_and_root3": 3,
     "root2_touching": 19,
     "unique_fixed_bar_surfaces": 14,
     "accepted_families": 5,
@@ -64,11 +64,21 @@
       "predicates": [
         "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
         "IF_SCOPE_BOUNDARY_NONINFERIOR",
-        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
         "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
       ],
       "first_route": "SEARCH_FOR_SCOPE_COMPLETE_OBJECTIVE_CEILING_OR_DOMINANCE_PROOF_BEFORE_CASE_LEVEL_OPUS55_COMPARATOR",
       "fallback": "ONE_SHARED_MATCHED_SUPERPORTFOLIO_WAVE_ONLY_AFTER_EXACT_COMPARATOR_ADMISSIBILITY_AND_ZERO_REALITY_FIXED_POINT"
+    },
+    "synthesis": {
+      "predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "current_class": "ROOT2_ONLY",
+      "scope_side": "CLOSED_BY_VERIFIED_SCOPE_CERTIFICATE",
+      "root2_residuals": [
+        "metric:matched_quality",
+        "matched_quality_noninferiority",
+        "required_claim_coverage_noninferiority"
+      ],
+      "rule": "DO_NOT_REOPEN_SCOPE_SIDE__WORK_ONLY_ROOT2_METRIC_AND_NUMERIC_NONINFERIORITY_RESIDUALS"
     }
   },
   "dead_or_sleeping_branches": [
@@ -125,5 +135,12 @@
   },
   "runtime": "canonical/runtime/root2_closure_controller_v2.py",
   "tests": "canonical/tests/test_root2_closure_controller_v2.py",
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "reconciliation": {
+    "source": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "terminal_root_state_blob_sha": "8b8721e0f9b65ab86f193fcf7d19b8a8d286b0a4",
+    "change": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_RECLASSIFIED_ROOT2_AND_ROOT3_TO_ROOT2_ONLY_AFTER_VERIFIED_SCOPE_CERTIFICATE",
+    "counts": "16_ROOT2_ONLY__7_ROOT3_ONLY__3_ROOT2_AND_ROOT3__26_UNRESOLVED",
+    "acceptance_delta": 0
+  }
 }
