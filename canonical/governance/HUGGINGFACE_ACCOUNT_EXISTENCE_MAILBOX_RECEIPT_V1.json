@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_HUGGINGFACE_ACCOUNT_EXISTENCE_MAILBOX_RECEIPT_V1",
+  "date": "2026-10-05",
+  "status": "AUTHENTICATED_MAILBOX_FACT__ACCOUNT_EXISTENCE_ONLY__GATED_ACCESS_STILL_UNKNOWN__SCHEDULING_ONLY__ZERO_CREDIT",
+  "source": {
+    "provider": "Gmail",
+    "message_id": "1a06ce0cf3b919c5",
+    "subject": "[Hugging Face] Click this link to confirm your email address",
+    "email_ts": "2026-09-04T14:44:27+00:00",
+    "fact": "A_HUGGING_FACE_ACCOUNT_REGISTRATION_EXISTED_FOR_THE_BOUND_USER_EMAIL"
+  },
+  "effects": [
+    "DELETE_NO_HUGGINGFACE_ACCOUNT_OR_REGISTRATION_AS_A_BLOCKER",
+    "PRESERVE_HLE_GATED_DATASET_ACCESS_OR_ACCEPTANCE_AS_UNKNOWN",
+    "PRESERVE_OSWORLD_GATED_ASSET_ACCESS_OR_ACCEPTANCE_AS_UNKNOWN",
+    "PREFER_SELF_SERVICE_GATE_ACCEPTANCE_OR_DIRECT_ACCOUNT_OBSERVATION_OVER_NEW_ACCOUNT_CREATION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_EMAIL_CONFIRMATION_LINK_IS_STILL_VALID",
+    "NO_CLAIM_CURRENT_HUGGING_FACE_LOGIN_SESSION_EXISTS",
+    "NO_CLAIM_HLE_GATE_IS_ACCEPTED",
+    "NO_CLAIM_OSWORLD_GATE_IS_ACCEPTED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
