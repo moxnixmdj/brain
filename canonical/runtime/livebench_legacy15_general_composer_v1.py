@@ -196,11 +196,11 @@ def _sentence_constraint(constraints: list[dict[str, Any]]) -> tuple[str, int] |
 
 
 def _add_at_least_sentences(lines: list[str], n: int) -> None:
-    # Each token is deliberately a plain non-abbreviation sentence. Other
-    # structural text can only increase the frozen Punkt count, so this is a
-    # monotone lower-bound construction.
+    # '!' is an unconditional Punkt sentence break in the tokenizer's first
+    # pass, unlike a period-final token whose classification may consult the
+    # trained abbreviation model. This makes the lower bound model-independent.
     for _ in range(n):
-        lines.insert(0, "Zxqv.")
+        lines.insert(0, "Zxqv!")
 
 
 def _ending(constraints: list[dict[str, Any]]) -> str | None:
@@ -337,7 +337,7 @@ def _compose_nth_paragraph(
         paragraphs[-1] += "\n" + "\n".join(common)
 
     if sc is not None and sc[0] == "at least":
-        paragraphs[0] += " " + " ".join(["Zxqv."] * sc[1])
+        paragraphs[0] += " " + " ".join(["Zxqv!"] * sc[1])
 
     end = _ending(constraints)
 
