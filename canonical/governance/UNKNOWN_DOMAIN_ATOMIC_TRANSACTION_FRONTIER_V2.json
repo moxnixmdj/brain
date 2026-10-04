@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_ATOMIC_TRANSACTION_FRONTIER_V2",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__EXACT_STRENGTHENED_CANDIDATE_UNDER_INDEPENDENT_PUSH_VERIFICATION__ZERO_CREDIT",
+  "exact_candidate_commit": "33c660f4a801b69f2a46d3bbc5dbfb74618e066a",
+  "execution_identity_sha256": "5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e",
+  "production_blobs": {
+    "execution_lease": "6120316cdb35b9acd02556578d59c0e22dea4938",
+    "launcher": "4a7c8b1b19e05bd0eb8b902455aa5c67c988854e",
+    "workflow": "f05f16251a1567a85ebfd2ca8a1a4ccf75a5d38e"
+  },
+  "independent_verification": {
+    "method": "ONE_SHOT_PUSH_WORKFLOW_CHECKING_OUT_EXACT_CANDIDATE_COMMIT",
+    "trigger_commit": "9a62ceca9d33d0a683cdb7f45c0a904ee9cf3d24",
+    "run_id": 37242061269,
+    "state": "QUEUED",
+    "exact_candidate_checkout": "33c660f4a801b69f2a46d3bbc5dbfb74618e066a"
+  },
+  "stale_route_truth": {
+    "raw_9dd_claim_branch_exists": true,
+    "raw_9dd_production_result_exists": false,
+    "interpretation": "TOMBSTONED_OR_NONPRODUCTION_CLAIM__NO_PRODUCTION_RESULT_EVIDENCE__NO_CREDIT",
+    "semantic_5dc_claim_branch_exists": false,
+    "semantic_5dc_launch_branch_exists": false
+  },
+  "next_gate": [
+    "INDEPENDENT_PUSH_VERIFIER_MUST_PASS_EXACT_33C660F",
+    "MERGE_OR_RECONSTRUCT_ONLY_IF_MERGED_PRODUCTION_BLOBS_EQUAL_VERIFIED_BLOBS",
+    "V2_OUTCOME_BLIND_REDUCTION_MUST_REMAIN_FROZEN",
+    "CREATE_EXACTLY_ONE_SEMANTIC_5DC_LAUNCH_REF_ONLY_AFTER_VERIFIED_MERGED_BYTES",
+    "ONLY_ATOMIC_CLAIM_HTTP_201_WITH_OBJECT_SHA_EQUAL_TO_IMMUTABLE_LAUNCH_SHA_MAY_EXECUTE"
+  ],
+  "authority": {
+    "execution": false,
+    "acceptance_credit": false,
+    "promotion": false
+  }
+}
