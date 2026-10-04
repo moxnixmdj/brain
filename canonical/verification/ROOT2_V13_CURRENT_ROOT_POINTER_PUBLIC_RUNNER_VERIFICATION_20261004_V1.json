@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_V13_CURRENT_ROOT_POINTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_CURRENT_ROOT_BLOB_BINDS_ROOT2_V13__COUNTS_STABLE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "e1410880f63d92de1b4787fd6ce2c0535b6cdd19"
+  },
+  "frontier": {
+    "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V13.json",
+    "git_blob_sha": "bb631b80eea5a183728fb27e2aff99bbe63f1757"
+  },
+  "frontier_activation": {
+    "path": "canonical/governance/ROOT2_FRONTIER_V13_FINAL_ACTIVATION_V1.json",
+    "git_blob_sha": "08c84d8f0a46ff0f13943388306195fea79ca6d7"
+  },
+  "frontier_verification": {
+    "path": "canonical/verification/ROOT2_FRONTIER_V13_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "dd810106cf30f101453da07e2ef37cb81d7faddd"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1714,
+    "verifier_head_sha": "07ad85ece102b315fb1031375a4d406aa3311531",
+    "verifier_merge_commit": "6d7d903072bdd244a82596a551b0e9f20ce9fc27",
+    "workflow_run_id": 37182653589,
+    "workflow_job_id": 111378158712,
+    "workflow_name": "Verify Root2 V13 current root pointer",
+    "conclusion": "success"
+  },
+  "verified": {
+    "root2_frontier": "V13",
+    "accepted_families": 5,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root3_unchanged": true,
+    "livebench_thin_adapter_8_of_8_complete": true,
+    "root2_effective_scheduling_authority": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "acceptance_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
