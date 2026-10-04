@@ -70,3 +70,15 @@ def test_score_formula_matches_livebench_shape():
     assert o.strict_score_from_pass_count(5, 5) == 1.0
     assert o.strict_score_from_pass_count(5, 4) == 0.4
     assert o.strict_score_from_pass_count(2, 1) == 0.25
+
+
+def test_sentence_zero_multi_constraint_reason_family_is_recognized():
+    out = o.solve_contracts([
+        C(c.SENTENCES, num_sentences=1, relation="less than"),
+        C(c.EXIST, keywords=["brain", "proof", "signal", "world", "analysis"]),
+        C(c.TITLE),
+    ])
+    assert out["status"] == "CANDIDATE_POINTWISE_OPTIMAL"
+    assert out["sacrificed_instruction_ids"] == [c.SENTENCES]
+    assert out["theoretical_max_pass_count"] == 2
+    assert math.isclose(out["theoretical_pointwise_optimum_strict_score"], 1.0 / 3.0)
