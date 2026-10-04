@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_V1",
-  "date": "2026-10-03",
-  "status": "ACTIVE_FAIL_CLOSED__TERMINAL_GOAL_NOT_ACHIEVED",
+  "date": "2026-10-05",
+  "status": "ACTIVE_FAIL_CLOSED__TERMINAL_GOAL_NOT_ACHIEVED__LIVE_CONTENT_POINTERS_RECONCILED",
   "truth": {
     "terminal_execution": "3352/3352_RAW_EXECUTIONS_PASS__IMMUTABLE",
     "contracts": "12/12_WHOLE_SCOPE_PASS__P1_SCOPE_RESTORED_BY_INDEPENDENT_ZERO_REALITY_UNIVERSAL_PROOF",
@@ -15,7 +15,7 @@
   "sources": {
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-      "git_blob_sha": "fae1bc5338993911f1078680996aa48e677d7a15",
+      "git_blob_sha": "db596861ab2ed25e4772d175cf6e264508c83564",
       "status": "CURRENT_SCOPE_RECONCILED__5_OF_19_ACCEPTANCE_PASS__5_OF_19_VERIFIED_OWNED__14_OPEN__TERMINAL_FALSE"
     },
     "ownership_matrix": {
@@ -298,7 +298,7 @@
     },
     "acceptance_predicate_evidence_bindings_reconciled": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5",
+      "git_blob_sha": "c16ba4071525afb12e3d025d056c8bb2bd182019",
       "status": "CURRENT_12_PROVED__26_UNRESOLVED__ROOT1_SOURCE_BLOCKERS_RECLASSIFIED_TO_ROOT3__COMPOSITION_V6_4_OF_12_BOUND__COUNTS_UNCHANGED"
     },
     "protocol_implication_batch_scope_v2": {
