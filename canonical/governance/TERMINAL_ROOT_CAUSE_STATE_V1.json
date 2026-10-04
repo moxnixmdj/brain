@@ -206,7 +206,8 @@
           "reason": "LIVEBENCH_IF_GE_65_7_REMOVED_FROM_ROOT2_AFTER_VERIFIED_FORCED_FAIL_AND_RECLASSIFIED_ROOT1",
           "projection_path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json",
           "projection_git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99"
-        }
+        },
+        "current_effective_state": "SUPERSEDED_FOR_CURRENTNESS_BY_POST_LIVEBENCH_18_PREDICATE_REBIND"
       },
       "livebench_negative_resolution": {
         "predicate_id": "LIVEBENCH_IF_GE_65_7",
@@ -415,7 +416,8 @@
       "fresh_reality_authority": false,
       "acceptance_credit_delta": 0,
       "scheduling_authority": false,
-      "currentness_invalidation": "LIVEBENCH_IF_GE_65_7_RESOLVED_NEGATIVELY_AND_RECLASSIFIED_ROOT1"
+      "currentness_invalidation": "LIVEBENCH_IF_GE_65_7_RESOLVED_NEGATIVELY_AND_RECLASSIFIED_ROOT1",
+      "current_effective_state": "SUPERSEDED_FOR_CURRENTNESS_BY_POST_LIVEBENCH_18_PREDICATE_REBIND"
     },
     "terminal_minimum_causal_depth": {
       "activation_path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1.json",
@@ -514,7 +516,9 @@
       "verification_path": "canonical/verification/POST_LIVEBENCH_ROOT2_REBIND_CONNECTOR_VERIFICATION_20261004_V1.json",
       "verification_git_blob_sha": "569fad34651f724d0746a09a3413a8ca7258d928",
       "status": "CURRENT_18_PREDICATE_SCHEDULING_REBIND"
-    }
+    },
+    "root2_effective_scheduling_authority_source": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
+    "root2_effective_scheduling_scope": "EXACT_CURRENT_18_ROOT2_TOUCHING_PREDICATES_ONLY"
   },
   "accounting": {
     "acceptance_credit_delta": 0,
