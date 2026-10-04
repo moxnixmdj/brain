@@ -8,7 +8,8 @@
   },
   "verification": {
     "path": "canonical/verification/POST_LIVEBENCH_ROOT2_REBIND_CONNECTOR_VERIFICATION_20261004_V1.json",
-    "git_blob_sha": null
+    "git_blob_sha": "569fad34651f724d0746a09a3413a8ca7258d928",
+    "mode": "SEPARATE_TOOL_RECOMPUTATION_PASS_WITH_PUBLIC_INDEPENDENT_LOAD_BEARING_CLASSIFICATION_AND_PROJECTION"
   },
   "public_load_bearing_inputs": [
     {
@@ -53,5 +54,6 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
-  }
+  },
+  "private_runner_infrastructure_note": "TWO_PRIVATE_GITHUB_HOSTED_RUNNER_ATTEMPTS_FAILED_BEFORE_ANY_STEP_WITH_RUNNER_ID_0__NOT_INTERPRETED_AS_VERIFICATION_FAILURE"
 }
