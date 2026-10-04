@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ARENA_COMPARATOR_PUBLIC_EVIDENCE_CORRECTION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_FAIL_CLOSED_PUBLIC_EVIDENCE_CORRECTION__ZERO_CREDIT",
+  "objective": "PREVENT_PUBLIC_SEARCH_FROM_OVERCLAIMING_LOGIN_GATED_ARENA_API_SEMANTICS",
+  "observed_publicly": {
+    "authenticated_api_portal_exists": true,
+    "api_reference_url": "https://portal.api.preview.arena.ai/docs/api-reference",
+    "routing_url": "https://portal.api.preview.arena.ai/docs/routing",
+    "portal_behavior": "UNAUTHENTICATED_ACCESS_REDIRECTS_TO_WORKOS_AUTHENTICATION",
+    "direct_human_specific_model_selection_supported": true,
+    "daily_usage_credit_system_publicly_documented": true
+  },
+  "not_publicly_verified_in_this_refresh": [
+    "GET_V1_MODELS_SEMANTICS",
+    "DIRECT_API_MODEL_PARAMETER_ROUTING_SEMANTICS",
+    "FALLBACK_DISABLE_OR_CONTROL_SEMANTICS",
+    "X_ARENA_RESOLVED_MODEL_HEADER_SEMANTICS",
+    "EXACT_OPUS55_AVAILABILITY_IN_THIS_ACCOUNT",
+    "ZERO_INCREMENTAL_SPEND_API_ENTITLEMENT",
+    "EFFORT_AND_HARNESS_EQUIVALENCE"
+  ],
+  "effect": "PRESERVE_ACCOUNT_AUTHENTICATED_ARENA_SWEEP_AS_LOAD_BEARING__DO_NOT_PROMOTE_SEARCH_SNIPPETS_OR_PRIOR_UNAUTHENTICATED_MEMORY_AS_API_SEMANTIC_RECEIPTS",
+  "public_sources": [
+    "https://portal.api.preview.arena.ai/docs/api-reference",
+    "https://portal.api.preview.arena.ai/docs/routing",
+    "https://help.arena.ai/articles/1858200927-lmarena-experiments-new-model-selector",
+    "https://help.arena.ai/articles/3295820808-arena-troubleshooting-daily-usage-limits"
+  ],
+  "hard_rules": [
+    "LOGIN_GATED_DOC_CONTENT_IS_NOT_PUBLICLY_VERIFIED_CONTENT",
+    "SEARCH_RESULT_SUMMARIES_ARE_DISCOVERY_ONLY",
+    "ACCOUNT_MODEL_LIST_CREDIT_STATE_AND_PROTOCOL_RECEIPTS_REMAIN_REQUIRED",
+    "NO_COMPARATOR_EXECUTION",
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
