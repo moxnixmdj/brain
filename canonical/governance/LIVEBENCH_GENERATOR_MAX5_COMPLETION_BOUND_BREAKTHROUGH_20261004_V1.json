@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_GENERATOR_MAX5_COMPLETION_BOUND_BREAKTHROUGH_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_CONDITIONAL_BREAKTHROUGH__SOURCE_LINEAGE_BINDING_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_EXACT_OPUS_RAW_MEAN_65_73775",
+  "objective": "Exploit a stronger structural consequence of the recovered historical LiveBench legacy generator before spending work on arbitrary nine-family compositions.",
+  "public_source_basis": {
+    "repository": "LiveBench/LiveBench",
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "path": "livebench/if_runner/live_data.py",
+    "facts": [
+      "samples_to_draw=np.random.randint(2,max_instructions+1,...) with max_instructions default 5",
+      "np.random.choice(all_constraints,draw,replace=False)",
+      "check_for_conflitcs only removes elements from the sampled list",
+      "no instruction ids are added after conflict repair"
+    ]
+  },
+  "conditional_theorem": {
+    "maximum_instruction_instances_per_generated_case": 5,
+    "duplicate_instruction_ids_per_generated_case": false,
+    "active15_conflict_valid_identity_subsets_of_size_1_to_5_upper_bound": 928,
+    "minimum_nonfinal_instruction_score_marginal": "1/10",
+    "minimum_final_instruction_completion_score_marginal": "3/5",
+    "completion_marginal_formula": "1/2 + 1/(2n)",
+    "exact_target_percent": "65.73775",
+    "exact_target_score_mass_for_200": "5259/40",
+    "fully_completed_rows_sufficient": 132
+  },
+  "scheduler_delta_if_lineage_is_admissibly_bound": [
+    "FORBID_CONSTRUCTIVE_SEARCH_OR_PROOF_OBLIGATIONS_REQUIRING_MORE_THAN_FIVE_INSTRUCTION_INSTANCES_PER_CASE",
+    "PRIORITIZE_NEAR_COMPLETE_CASES_BECAUSE_EVERY_FINAL_INSTRUCTION_IS_WORTH_AT_LEAST_3/5_CASE_SCORE_MASS",
+    "USE_928_AS_A_SAFE_IDENTITY_COMPOSITION_UPPER_BOUND_BEFORE_PARAMETER_DOMAINS_AND_CASE_FREQUENCIES_ARE_KNOWN",
+    "STOP_ON_EXACT_SCORE_MASS_5259/40_OR_HIGHER"
+  ],
+  "runtime": "canonical/runtime/livebench_legacy_generator_max5_completion_bound_v1.py",
+  "tests": "canonical/tests/test_livebench_legacy_generator_max5_completion_bound_v1.py",
+  "hard_nonclaims": [
+    "HISTORICAL_GENERATOR_LINEAGE_TO_THE_ACTIVE_2024_11_25_ROWS_IS_NOT_PROVED_BY_THIS_ARTIFACT",
+    "NO_ACTIVE_TERMINAL_ROW_CONTENT_METADATA_KWARGS_RESPONSE_OR_SCORE_IS_READ",
+    "NO_CASE_FREQUENCY_OR_CASE_LEVEL_COMBINATION_IS_INFERRED",
+    "NO_LIVEBENCH_PASS_OR_FAIL_VERDICT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_executed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
