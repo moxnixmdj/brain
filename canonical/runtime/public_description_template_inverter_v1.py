@@ -226,6 +226,131 @@ def match_prompt(prompt: str, specs: Iterable[TemplateSpec]) -> list[dict[str, A
     return matches
 
 
+
+def _module_string_constants(tree: ast.Module) -> dict[str, str]:
+    env: dict[str, str] = {}
+    changed = True
+    while changed:
+        changed = False
+        for node in tree.body:
+            if not isinstance(node, (ast.Assign, ast.AnnAssign)):
+                continue
+            value = node.value
+            if value is None:
+                continue
+            targets = node.targets if isinstance(node, ast.Assign) else (node.target,)
+            if len(targets) != 1 or not isinstance(targets[0], ast.Name):
+                continue
+            name = targets[0].id
+            resolved = _static_eval_string(value, env)
+            if resolved is not None and env.get(name) != resolved:
+                env[name] = resolved
+                changed = True
+    return env
+
+
+def _static_eval_string(node: ast.AST, env: dict[str, str]) -> str | None:
+    literal = _static_string(node)
+    if literal is not None:
+        return literal
+    if isinstance(node, ast.Name):
+        return env.get(node.id)
+    if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Add):
+        left = _static_eval_string(node.left, env)
+        right = _static_eval_string(node.right, env)
+        if left is not None and right is not None:
+            return left + right
+    return None
+
+
+def extract_registry_bindings(registry_source: str) -> dict[str, tuple[str, ...]]:
+    """Return Instruction subclass -> active public instruction IDs.
+
+    Handles literal keys and module-level string-prefix concatenation used by
+    the frozen legacy IFEval registry. Commented-out entries are absent from the
+    AST and therefore cannot silently become active.
+    """
+    try:
+        tree = ast.parse(str(registry_source))
+    except SyntaxError as exc:
+        raise DescriptionGrammarError("REGISTRY_SOURCE_SYNTAX_ERROR") from exc
+    env = _module_string_constants(tree)
+    pairs: list[tuple[str, str]] = []
+    found = False
+    for node in tree.body:
+        if not isinstance(node, (ast.Assign, ast.AnnAssign)):
+            continue
+        targets = node.targets if isinstance(node, ast.Assign) else (node.target,)
+        if not any(isinstance(t, ast.Name) and t.id == "INSTRUCTION_DICT" for t in targets):
+            continue
+        found = True
+        if not isinstance(node.value, ast.Dict):
+            raise DescriptionGrammarError("INSTRUCTION_DICT_NOT_LITERAL_DICT")
+        for key_node, value_node in zip(node.value.keys, node.value.values):
+            if key_node is None:
+                raise DescriptionGrammarError("REGISTRY_DICT_UNPACK_UNSUPPORTED")
+            instruction_id = _static_eval_string(key_node, env)
+            if instruction_id is None:
+                raise DescriptionGrammarError("REGISTRY_ID_NOT_STATIC")
+            if not (
+                isinstance(value_node, ast.Attribute)
+                and isinstance(value_node.value, ast.Name)
+                and value_node.value.id == "instructions"
+            ):
+                raise DescriptionGrammarError("REGISTRY_VALUE_NOT_INSTRUCTION_CLASS")
+            pairs.append((value_node.attr, instruction_id))
+    if not found:
+        raise DescriptionGrammarError("INSTRUCTION_DICT_NOT_FOUND")
+    by_class: dict[str, list[str]] = {}
+    for class_name, instruction_id in pairs:
+        if instruction_id not in by_class.setdefault(class_name, []):
+            by_class[class_name].append(instruction_id)
+    return {name: tuple(ids) for name, ids in sorted(by_class.items())}
+
+
+def recognize(
+    prompt: str,
+    instruction_source: str,
+    registry_source: str,
+) -> list[dict[str, Any]]:
+    """Recognize public instruction IDs and visible rendered parameters.
+
+    This composes the source-derived description grammar with the active public
+    registry. Runtime input is still only visible prompt text plus precommitted
+    public source bytes. No benchmark kwargs or case IDs are required.
+    """
+    bindings = extract_registry_bindings(registry_source)
+    matches = match_prompt(str(prompt or ""), extract_templates(instruction_source))
+    out: list[dict[str, Any]] = []
+    for match in matches:
+        class_name = match["class_name"]
+        ids = bindings.get(class_name, ())
+        for instruction_id in ids:
+            out.append({
+                **match,
+                "instruction_id": instruction_id,
+                "registry_binding_proved": True,
+            })
+    out.sort(key=lambda x: (x["span"][0], x["span"][1], x["instruction_id"]))
+    return out
+
+
+def audit_registered_coverage(
+    instruction_source: str,
+    registry_source: str,
+) -> dict[str, Any]:
+    bindings = extract_registry_bindings(registry_source)
+    report = audit(instruction_source, expected_classes=bindings.keys())
+    return {
+        "schema": SCHEMA + "_REGISTERED_COVERAGE_AUDIT",
+        "active_instruction_id_count": sum(len(ids) for ids in bindings.values()),
+        "active_instruction_class_count": len(bindings),
+        "all_active_classes_have_description_templates": report["all_expected_classes_covered"],
+        "missing_active_classes": report["missing_expected_classes"],
+        "bindings": {k: list(v) for k, v in bindings.items()},
+        "source_execution": False,
+    }
+
 def manifest(source: str) -> dict[str, Any]:
     specs = extract_templates(source)
     return {
@@ -241,6 +366,15 @@ def run(args: dict[str, Any], root=None) -> dict[str, Any]:
     source = str(args.get("source") or "")
     if not source:
         raise DescriptionGrammarError("SOURCE_REQUIRED")
+    registry_source = str(args.get("registry_source") or "")
+    if "prompt" in args and registry_source:
+        return {
+            "schema": SCHEMA + "_RECOGNITION",
+            "matches": recognize(str(args.get("prompt") or ""), source, registry_source),
+            "source_execution": False,
+        }
+    if registry_source:
+        return audit_registered_coverage(source, registry_source)
     if "prompt" in args:
         return {
             "schema": SCHEMA + "_MATCH",
