@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_CLEAN_SOURCE_GENERATOR_GEOMETRY_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CLEAN_SOURCE_ONLY_GENERATOR_GEOMETRY__ZERO_TARGET_ROWS__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Replace contaminated target-row combination learning with an exact source-derived conservative superset of every historical LiveBench legacy generator family combination.",
+  "source_authority": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "generator_parent_commit": "262cfc141e65fa9cf80015b9630b54bed2346f43",
+    "generator_path": "livebench/if_runner/live_data.py",
+    "generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "generator_delete_commit": "c01596b42858840c1cd82e44eddb1df531c375f",
+    "pinned_evaluator_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "conflict_registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+  },
+  "proved_from_source": [
+    "RAW_INSTRUCTION_DRAW_IS_WITHOUT_REPLACEMENT",
+    "RAW_DRAW_CARDINALITY_IS_2_THROUGH_5",
+    "GENERATOR_FAMILY_UNIVERSE_HAS_24_FAMILIES",
+    "LANGUAGE_RESPONSE_LANGUAGE_IS_NOT_IN_GENERATOR_UNIVERSE",
+    "PUBLIC_INSTRUCTION_CONFLICTS_ARE_APPLIED_BEFORE_KWARGS_AND_DESCRIPTIONS",
+    "POST_DECONFLICTION_OUTPUT_IS_A_CONFLICT_FREE_SUBSET_OF_THE_RAW_DRAW",
+    "THEREFORE_EVERY_NONEMPTY_GENERATOR_OUTPUT_IS_CONTAINED_IN_ALL_CONFLICT_FREE_SOURCE_FAMILY_SUBSETS_OF_SIZE_1_THROUGH_5"
+  ],
+  "conservative_geometry": {
+    "family_count": 24,
+    "max_cardinality": 5,
+    "conflict_free_superset_count": 13750,
+    "counts_by_cardinality": {
+      "1": 24,
+      "2": 189,
+      "3": 980,
+      "4": 3514,
+      "5": 9043
+    },
+    "relation_to_actual_generator": "SUPERSET__DOES_NOT_ASSUME_RANDOM_CONFLICT_PAIR_ORDER_OR_TARGET_ROW_REALIZATION"
+  },
+  "clean_reuse": {
+    "pre_exposure_prompt_inverter": {
+      "path": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py",
+      "first_commit": "d985738fcda3e8d4057ae59d7aa5fc800a721f91",
+      "committed_utc": "2026-10-04T11:42:05Z"
+    },
+    "pre_exposure_visible_compiler": {
+      "path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py",
+      "first_commit": "28b30965234e46daa2e3e3b79c95087528cae075",
+      "committed_utc": "2026-10-04T11:44:19Z"
+    },
+    "first_recorded_public_target_search_exposure": {
+      "path": "canonical/governance/LIVEBENCH_UNPLANNED_PUBLIC_SEARCH_EXPOSURE_RECONCILIATION_V1.json",
+      "commit": "bf6d5265e8026ebab03159c7f68155d1a24d51a1",
+      "committed_utc": "2026-10-04T11:51:12Z"
+    },
+    "rule": "PRE_EXPOSURE_SOURCE_DERIVED_PARSERS_MAY_BE_REUSED__TARGET_DERIVED_ACTIVE15_COMPOSER_MUST_NOT_BE_LOAD_BEARING"
+  },
+  "next": [
+    "INDEPENDENTLY_VERIFY_THIS_13750_SET_GEOMETRY_FROM_EXACT_PUBLIC_SOURCE",
+    "BUILD_NEW_SOURCE_ONLY_RESPONSE_SYNTHESIS_OVER_THE_13750_SET_SUPERSET_WITHOUT_TARGET_ROW_INPUTS",
+    "SEPARATELY_DISCHARGE_PARAMETER_DOMAINS_FROM_PINNED_CHECKER_GENERATORS",
+    "IF_UNIVERSAL_CONSTRUCTION_IS_FALSE__USE_PRECOMMITTED_CLEAN_GENERATOR_EQUIVALENT_EVALUATION_WITH_VERIFIED_SCOPE_BRIDGE"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_PROVE_ANY_RESPONSE_CONSTRUCTOR_PASSES",
+    "DOES_NOT_CLOSE_LIVEBENCH_IF_GE_65_7",
+    "DOES_NOT_USE_THE_CONTAMINATED_200_ROW_REALIZATION",
+    "DOES_NOT_GRANT_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
