@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_EXACT200_ACCEPTANCE_REDUCTION_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_BRAIN_BYTES_PUBLIC_FIXED_BAR_PASS__INDEPENDENT_PROMOTION_VERIFICATION_REQUIRED__ZERO_FAMILY_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "source_bindings": {
+    "brain_main_commit": "29feb90f96b32f8cae4e81708e2b366813686e23",
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "pre_evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5"
+    },
+    "pre_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "3fd35b7865f7827a5a7b4202bc625fe0f980dcda"
+    },
+    "exact_brain_runtime_blobs": {
+      "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py": "e986035ff68b53c0dc7a7eb478f6e3d8882214aa",
+      "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py": "721207ba39d502e3f610289578e9d5bab78b1fcc",
+      "canonical/runtime/livebench_frozen_active_legacy15_v1.py": "34440ee69322e9d519cbe656cb03c55683a8b9c6",
+      "canonical/runtime/livebench_legacy15_joint_witness_v1.py": "029d6018fd705fa5d1a53c88c4c3dd60764d8489"
+    }
+  },
+  "independent_exact_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-livebench-exact-brain-bytes-20261004-sol",
+    "workflow_run_id": 37238837049,
+    "workflow_job_id": 111543251329,
+    "head_sha": "6d8769b4edd4f3e1644a332f659b9f6f5e2bca01",
+    "conclusion": "success",
+    "exact_brain_git_blob_gate": true,
+    "scorer_install_pass": true,
+    "exact_scorer_checkout_pass": true,
+    "exact_public_population_download_pass": true,
+    "exact_brain_bytes_execution_pass": true,
+    "receipt_persist_pass": true,
+    "receipt_path": "receipts/livebench_exact_brain_bytes_v1.json",
+    "receipt_git_blob_sha": "165192ffa20e052f094371c04d15da6c9147a146",
+    "artifact_id": 11316533369,
+    "artifact_digest": "sha256:23b2614490fec1c4aecedf899fcf0276a692edea2b327edc7ac641a9ea57e770"
+  },
+  "exact_surface": {
+    "dataset_repository": "livebench/instruction_following",
+    "dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "population_count": 200,
+    "task_counts": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    },
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "scorer_family": "LEGACY_IFEVAL_STRICT",
+    "score_rule": "(ALL_TRUE_BINARY + TRUE_FRACTION)/2",
+    "hidden_or_fresh_terminal_cases_used": 0
+  },
+  "exact_result": {
+    "brain_percent": 84.40416666666667,
+    "frozen_registry_threshold_percent": 65.7,
+    "stricter_public_opus_equal_task_mean_floor_percent": 65.73775,
+    "margin_over_stricter_floor_percentage_points": 18.666416666666663,
+    "predicate_forced": "PASS"
+  },
+  "theorem": [
+    "84.40416666666667 >= 65.73775",
+    "65.73775 >= 65.7",
+    "THEREFORE_LIVEBENCH_IF_GE_65_7_IS_TRUE_ON_THE_EXACT_FROZEN_PUBLIC_FIXED_BAR_SURFACE"
+  ],
+  "intended_atomic_reduction": {
+    "before": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 12,
+      "unresolved_atomic": 26,
+      "root2_only": 16,
+      "root3_only": 7,
+      "root2_and_root3": 3,
+      "root2_touching": 19
+    },
+    "after": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 13,
+      "unresolved_atomic": 25,
+      "root2_only": 15,
+      "root3_only": 7,
+      "root2_and_root3": 3,
+      "root2_touching": 18
+    },
+    "family_credit_delta": 0,
+    "acceptance_family_delta": 0
+  },
+  "family_guard": {
+    "family_remains_open": true,
+    "remaining_family_predicates": [
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+    ],
+    "no_universal_instruction_following_claim": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_hidden_terminal_cases_consumed": 0,
+    "predicate_credit_delta": 1,
+    "family_credit_delta": 0,
+    "terminal_goal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "DOES_NOT_PROVE_IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "DOES_NOT_PROVE_IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "DOES_NOT_ACCEPT_THE_INSTRUCTION_FOLLOWING_FAMILY",
+    "DOES_NOT_CLOSE_ROOT2_GLOBALLY",
+    "DOES_NOT_CLOSE_THE_TERMINAL_OBJECTIVE"
+  ],
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
