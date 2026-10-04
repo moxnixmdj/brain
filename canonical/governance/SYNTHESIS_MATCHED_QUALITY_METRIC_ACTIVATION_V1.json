@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_MATCHED_QUALITY_METRIC_ACTIVATION_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__PREEXPOSURE_MATCHED_QUALITY_AGGREGATOR_FROZEN__SCHEDULING_ONLY__ZERO_CREDIT",
+  "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+    "git_blob_sha": "0886f7592875a5b750cdd401aa783351ab2f0854"
+  },
+  "scorer": {
+    "path": "canonical/runtime/synthesis_matched_quality_metric_v1.py",
+    "git_blob_sha": "116b7394f4b0a6845056c798e966f4cc26f294bf"
+  },
+  "verification": {
+    "path": "canonical/verification/SYNTHESIS_MATCHED_QUALITY_METRIC_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1678,
+    "verifier_merge_commit": "cfe8e9102d5615e6d7aa5b69b2ae435d3f640a38",
+    "workflow_run_id": 37176553743,
+    "workflow_job_id": 111360244300,
+    "conclusion": "success",
+    "git_blob_sha": "8a5be1224383dccfbd917729df285eeb96004825"
+  },
+  "effects": {
+    "delete": [
+      "SYNTHESIS_MATCHED_QUALITY_CASE_LEVEL_AGGREGATION_UNDERSPECIFIED"
+    ],
+    "preserve": [
+      "FIVE_CASE_SPECIFIC_QUALITY_DIMENSION_SCORER_BINDINGS",
+      "PORTFOLIO_LEVEL_CONSERVATIVE_MATCHED_NONINFERIORITY_REDUCER",
+      "EXACT_OPUS_5_5_COMPARATOR_ADMISSIBILITY_OR_STRONGER_PROOF",
+      "MATCHED_CASE_GENERATION_ONLY_AFTER_ALL_PREEXPOSURE_BINDINGS_AND_EXPLICIT_AUTHORITY",
+      "BRAIN_AND_OPUS_MATCHED_QUALITY_RESULT"
+    ]
+  },
+  "metric": {
+    "aggregation": "MIN_NONCOMPENSATORY",
+    "component_count": 5,
+    "required_claim_coverage_separate": true,
+    "unsupported_material_claims_hard_zero": true
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "hard_rules": [
+    "NO_MATCHED_CASE_GENERATION_FROM_THIS_ACTIVATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXISTING_BRAIN_RESULT_MAY_BE_REINTERPRETED_AS_MATCHED_QUALITY",
+    "DIMENSION_SCORERS_MUST_BE_FROZEN_AND_INDEPENDENTLY_VERIFIED_BEFORE_MATCHED_EXECUTION",
+    "PORTFOLIO_NONINFERIORITY_REDUCER_MUST_BE_FROZEN_AND_INDEPENDENTLY_VERIFIED_BEFORE_MATCHED_EXECUTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_projection_verification_required": true
+}

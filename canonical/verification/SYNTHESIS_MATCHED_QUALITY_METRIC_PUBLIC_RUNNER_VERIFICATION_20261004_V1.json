@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_MATCHED_QUALITY_METRIC_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_PREEXPOSURE_MATCHED_QUALITY_METRIC_CONTRACT__ZERO_CREDIT",
+  "subject": {
+    "contract_path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+    "contract_git_blob_sha": "0886f7592875a5b750cdd401aa783351ab2f0854",
+    "scorer_path": "canonical/runtime/synthesis_matched_quality_metric_v1.py",
+    "scorer_git_blob_sha": "116b7394f4b0a6845056c798e966f4cc26f294bf",
+    "tests_path": "canonical/tests/test_synthesis_matched_quality_metric_v1.py",
+    "tests_git_blob_sha": "f3424fdd694a809092cdd3c1caad89daa1f4d41b"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1678,
+    "head_sha": "9d04f33dc458e329bde8f88cf2a1fe1e06c34712",
+    "merge_commit": "cfe8e9102d5615e6d7aa5b69b2ae435d3f640a38",
+    "workflow_name": "Verify synthesis matched-quality metric V1",
+    "workflow_run_id": 37176553743,
+    "workflow_job_id": 111360244300,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_SCORER_CONTRACT_AND_FIVE_AUTHORITY_BLOBS_MATCHED",
+    "FROZEN_PROTOCOL_NAMES_INDEPENDENT_QUALITY_SCORE_AND_REQUIRED_CLAIM_COVERAGE",
+    "TARGET_NORMALIZATION_REQUIRES_MATCHED_QUALITY_AND_REQUIRED_CLAIM_COVERAGE_SEPARATELY",
+    "SCOPE_RELATION_IS_ALREADY_INDEPENDENTLY_PROVEN_STRONGER",
+    "REQUIRED_CLAIM_COVERAGE_PROOF_EXPLICITLY_DOES_NOT_INFER_MATCHED_QUALITY",
+    "MATCHED_QUALITY_AGGREGATION_IS_MINIMUM_OF_FIVE_NON_COVERAGE_QUALITY_DIMENSIONS",
+    "AGGREGATION_IS_NONCOMPENSATORY_AND_MONOTONE",
+    "ANY_UNSUPPORTED_MATERIAL_CLAIM_HARD_ZEROS_QUALITY",
+    "REQUIRED_CLAIM_COVERAGE_CANNOT_BE_INJECTED_INTO_QUALITY",
+    "MISSING_EXTRA_NONFINITE_BOOLEAN_OR_OUT_OF_RANGE_INPUTS_FAIL_CLOSED",
+    "NO_BRAIN_OR_OPUS_RESULT",
+    "ZERO_SPEND_ZERO_TERMINAL_CASES_ZERO_ACCEPTANCE_CREDIT_NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

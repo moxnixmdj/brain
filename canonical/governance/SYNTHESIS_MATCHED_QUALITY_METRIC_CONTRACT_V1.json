@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PREEXPOSURE_DETERMINISTIC_NONCOMPENSATORY_QUALITY_AGGREGATOR__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "FREEZE_THE_PREVIOUSLY_UNDERSPECIFIED_CASE_LEVEL_MATCHED_QUALITY_AGGREGATION_FOR_SYNTHESIS_BEFORE_ANY_MATCHED_CASE_GENERATION_OR_RESULT_EXPOSURE",
+  "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "frozen_authority": {
+    "terminal_protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "proof_mode": "MATCHED_GROUNDED_SYNTHESIS_NONINFERIORITY",
+      "primary_metrics": [
+        "unsupported_material_claim_rate",
+        "required_claim_coverage",
+        "constraint_pass_rate",
+        "decision_relevant_omission_rate",
+        "independent_quality_score"
+      ]
+    },
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json",
+      "git_blob_sha": "515f24f3000218d324be4a7c774b42f790a6ebaa",
+      "target_atom": "metric:matched_quality"
+    },
+    "scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+      "scope_relation": "PROVEN_STRONGER"
+    },
+    "required_claim_coverage_ceiling": {
+      "path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
+      "git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
+      "role": "COVERAGE_REMAINS_A_SEPARATE_METRIC_AND_MUST_NOT_BE_HIDDEN_INSIDE_MATCHED_QUALITY"
+    },
+    "prewave_protocol": {
+      "path": "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
+      "git_blob_sha": "46cce2be4e277485b7c83233630d0e2fe57d06d1",
+      "binding_requirement": "SCORER_OR_ORACLE_VERSION_OR_HASH_AND_METRIC_AND_THRESHOLD_MUST_BE_FROZEN_BEFORE_CASE_EXPOSURE"
+    }
+  },
+  "metric_contract": {
+    "scorer_path": "canonical/runtime/synthesis_matched_quality_metric_v1.py",
+    "scorer_semantics": "CASE_LEVEL_AGGREGATOR_ONLY__RAW_DIMENSION_SCORERS_REMAIN_SEPARATE_BINDINGS",
+    "quality_components": [
+      "claim_to_source_fidelity",
+      "uncertainty_and_disagreement_preservation",
+      "audience_adaptation",
+      "format_and_style_constraints",
+      "compression_without_decision_relevant_loss"
+    ],
+    "excluded_separate_metric": "required_claim_coverage",
+    "unsupported_material_claim_rule": "ANY_UNSUPPORTED_MATERIAL_CLAIM_HARD_ZEROS_MATCHED_QUALITY",
+    "component_domain": "EACH_COMPONENT_MUST_BE_SEPARATELY_SCORED_AND_NORMALIZED_TO_CLOSED_INTERVAL_0_1",
+    "aggregation": "MATCHED_QUALITY_EQUALS_MINIMUM_OF_THE_FIVE_QUALITY_COMPONENT_SCORES",
+    "rationale": [
+      "NONCOMPENSATORY__A_HIGH_SCORE_ON_ONE_DIMENSION_CANNOT_HIDE_FAILURE_ON_ANOTHER_FROZEN_REQUIRED_DIMENSION",
+      "MONOTONE_IN_EVERY_COMPONENT",
+      "GLOBAL_RANGE_0_TO_1",
+      "CEILING_1_ONLY_WHEN_ALL_FIVE_COMPONENTS_EQUAL_1_AND_NO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "COVERAGE_IS_NOT_DOUBLE_COUNTED_BECAUSE_REQUIRED_CLAIM_COVERAGE_REMAINS_ITS_OWN_ACCEPTANCE_METRIC"
+    ]
+  },
+  "statistical_noninferiority": {
+    "state": "OPEN",
+    "rule": "THIS_CONTRACT_FREEZES_ONLY_CASE_LEVEL_QUALITY_AGGREGATION__THE_PORTFOLIO_LEVEL_CONSERVATIVE_BRAIN_VS_OPUS_BOUND_REDUCER_MUST_BE_FROZEN_AND_INDEPENDENTLY_VERIFIED_SEPARATELY_BEFORE_MATCHED_EXECUTION",
+    "no_inference_from_existing_brain_results": true
+  },
+  "remaining_after_activation_if_verified": [
+    "FREEZE_CASE_SPECIFIC_DETERMINISTIC_OR_INDEPENDENT_DIMENSION_SCORERS_FOR_ALL_FIVE_COMPONENTS",
+    "FREEZE_PORTFOLIO_LEVEL_CONSERVATIVE_MATCHED_NONINFERIORITY_REDUCER",
+    "PROVE_EXACT_OPUS_5_5_COMPARATOR_ADMISSIBILITY_OR_STRONGER_PROOF",
+    "ONLY_THEN_GENERATE_FUTURE_BEACON_MATCHED_CASES",
+    "RUN_BRAIN_AND_OPUS_ON_IDENTICAL_FROZEN_CASES",
+    "BIND_MATCHED_QUALITY_NONINFERIORITY_RESULT"
+  ],
+  "hard_nonclaims": [
+    "NO_MATCHED_QUALITY_RESULT",
+    "NO_BRAIN_SCORE",
+    "NO_OPUS_SCORE",
+    "NO_MATCHED_NONINFERIORITY_RESULT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_POST_HOC_METRIC_SELECTION_FROM_TERMINAL_RESULTS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
