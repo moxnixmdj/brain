@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LANGUAGE_DECORATOR_NEUTRALITY_PRECOMMIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__ZERO_CREDIT__INDEPENDENT_VERIFICATION_PENDING",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "purpose": "Discharge the only runtime-sensitive caveat preventing exact union25 semantic-kernel reduction from 64 to 41 kernels.",
+  "frozen_subjects": {
+    "semantic_kernel_reduction_path": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
+    "semantic_kernel_reduction_blob": "PLACEHOLDER_BIND_AT_VERIFY_TIME",
+    "legacy25_single_witness_path": "canonical/runtime/livebench_legacy25_single_contract_witness_v1.py",
+    "legacy25_single_witness_blob": "e927c05071bb4342b41fb9d5be07cc32ea82e820",
+    "legacy25_compiler_blob": "20421dfa016584b202b194afd3f82c9bd46a1f23"
+  },
+  "pinned_runtime": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "langdetect_version": "1.0.9"
+  },
+  "exact_test_domain": {
+    "language_codes": 30,
+    "base_carriers": "THE_EXACT_30_LANGUAGE_SAMPLES_IN_LEGACY25_SINGLE_CONTRACT_WITNESS_V1",
+    "decorators": [
+      "[]",
+      "*-*"
+    ],
+    "placements": [
+      "PREFIX",
+      "INFIX",
+      "SUFFIX",
+      "BOTH_DECORATORS_PREFIX",
+      "BOTH_DECORATORS_INFIX",
+      "BOTH_DECORATORS_SUFFIX"
+    ],
+    "repetitions": [
+      1,
+      4
+    ],
+    "required_invariant": "langdetect.detect(decorated_text) == language_code for every case"
+  },
+  "success_gate": [
+    "ALL_FROZEN_BLOBS_AND_PINNED_VERSIONS_MATCH",
+    "EXACTLY_30_LANGUAGE_CODES_ARE_PRESENT",
+    "EVERY_UNDECORATED_BASE_CARRIER_PASSES_THE_PINNED_RESPONSE_LANGUAGE_CHECKER",
+    "EVERY_DECLARED_DECORATOR_PLACEMENT_AND_REPETITION_PRESERVES_THE_SAME_PINNED_LANGDETECT_CODE",
+    "PLACEHOLDER_AND_HIGHLIGHT_CARRIERS_STILL_HAVE_ZERO_WORD_ZERO_ASCII_LETTER_ZERO_COMMA_ZERO_SENTENCE_TERMINATOR_ZERO_CASED_CHARACTER_DELTAS",
+    "ZERO_TERMINAL_ROWS_ZERO_HIDDEN_KWARGS_ZERO_TARGET_RESPONSES_ZERO_TARGET_SCORES_ARE_READ"
+  ],
+  "promotion_rule": "ONLY_ON_INDEPENDENT_PASS__THE_SEMANTIC_KERNEL_REDUCTION_MAY_SET assume_language_decorator_neutrality=true AND CLAIM 41 SEMANTIC KERNELS / 39 HARD KERNELS",
+  "failure_rule": "ANY_LANGUAGE_OR_PLACEMENT_COUNTEREXAMPLE_FAILS_CLOSED__KEEP_64_KERNEL_CONSERVATIVE_REDUCTION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_GOAL_COMPLETION_CLAIM"
+  ]
+}
