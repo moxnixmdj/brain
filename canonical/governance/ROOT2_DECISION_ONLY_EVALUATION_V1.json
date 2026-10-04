@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_DECISION_ONLY_EVALUATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__DECISION_ONLY_ROOT2_COMPOSITION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Settle each frozen Root2 acceptance predicate with the cheapest admissible decision certificate, preferring an authenticated one-bit owner/platform threshold verdict or an exact lower/upper-bound threshold certificate over exact-score disclosure, dataset disclosure, or full benchmark completion.",
+  "composition": {
+    "runtime": "canonical/runtime/root2_decision_only_evaluation_v1.py",
+    "tests": "canonical/tests/test_root2_decision_only_evaluation_v1.py",
+    "threshold_dag": {
+      "runtime": "canonical/runtime/threshold_proof_dag_v1.py",
+      "governance": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1.json",
+      "independent_verification": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+    },
+    "blind_threshold": {
+      "runtime": "canonical/runtime/blind_threshold_receipt_v1.py",
+      "activation": "canonical/governance/ROOT2_BLIND_THRESHOLD_RECEIPT_ACTIVATION_V1.json",
+      "independent_verification": "canonical/verification/ROOT2_BLIND_THRESHOLD_RECEIPT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+    }
+  },
+  "terminal_information_contract": {
+    "required_output": "ONLY_WHETHER_THE_EXACT_FROZEN_ACCEPTANCE_PREDICATE_IS_FORCED_PASS_OR_FORCED_FAIL",
+    "exact_score_required": false,
+    "benchmark_dataset_required": false,
+    "full_benchmark_completion_required": false,
+    "full_benchmark_rule": "LAST_RESORT_ONLY_WHEN_NO_SMALLER_ADMISSIBLE_CERTIFICATE_CAN_SETTLE_THE_PREDICATE"
+  },
+  "route_precedence": [
+    "EXISTING_CONTENT_ADDRESSED_ACCEPTANCE_RECEIPT_OR_FORMAL_IMPLICATION",
+    "AUTHENTICATED_OWNER_OR_PLATFORM_ONE_BIT_THRESHOLD_RECEIPT",
+    "EXISTING_DETERMINISTIC_SCORER_OR_VERIFIER_CERTIFIED_LOWER_OR_UPPER_BOUND",
+    "DEPENDENCY_AWARE_MINIMUM_ZERO_REALITY_PROOF_CUT",
+    "MINIMUM_AUTHORIZED_EMPIRICAL_RESIDUAL",
+    "FULL_BENCHMARK_ONLY_IF_IRREDUCIBLE"
+  ],
+  "root2_metric_classes": {
+    "ADDITIVE_THRESHOLD": {
+      "count": 11,
+      "decision_rule": "PASS_WHEN_VERIFIED_LOWER_BOUND_GE_THRESHOLD__FAIL_WHEN_VERIFIED_UPPER_BOUND_LT_THRESHOLD__UNRUN_MASS_MAY_BE_COUNTED_AS_ZERO_FOR_PASS_LOWER_BOUND"
+    },
+    "GATED_WEIGHTED_THRESHOLD": {
+      "count": 1,
+      "decision_rule": "RESOLVE_DEALBREAKERS_FIRST__THEN_STOP_WHEN_VERIFIED_WEIGHTED_LOWER_OR_UPPER_BOUND_FORCES_VERDICT"
+    },
+    "RELATIVE_RATING_THRESHOLD": {
+      "count": 3,
+      "decision_rule": "ONLY_OFFICIAL_RELATIVE_RATING_THRESHOLD_RECEIPT_OR_VERIFIED_RELATIVE_SCORE_BRIDGE_CAN_SETTLE_FIXED_ELO__PURE_ABSOLUTE_BEHAVIOR_NONTRANSPORTABLE"
+    },
+    "MATCHED_NONINFERIORITY": {
+      "count": 4,
+      "decision_rule": "PASS_WHEN_BRAIN_CONSERVATIVE_LOWER_BOUND_GE_COMPARATOR_UPPER_BOUND__ONE_FIXED_BAR_BIT_IS_NOT_SUFFICIENT"
+    }
+  },
+  "cross_predicate_reuse": [
+    {
+      "surface": "AA-Briefcase v1.1",
+      "predicates": [
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "rule": "ONE_EXACT_AUTHENTICATED_RELATIVE_THRESHOLD_RECEIPT_MAY_FEED_BOTH_ONLY_AFTER_EACH_SCOPE_BINDING_INDEPENDENTLY_PASSES"
+    }
+  ],
+  "scheduling_effect_if_verified": [
+    "DO_NOT_REQUIRE_EXACT_SCORE_WHEN_AUTHENTICATED_THRESHOLD_BIT_SETTLES_THE_FROZEN_PREDICATE",
+    "DO_NOT_REQUIRE_DATASET_DISCLOSURE_FOR_PRIVATE_BENCHMARKS_WHEN_OWNER_PLATFORM_CAN_RETURN_AUTHENTICATED_THRESHOLD_VERDICT",
+    "DO_NOT_FINISH_ADDITIVE_OR_WEIGHTED_BENCHMARK_AFTER_VERIFIED_BOUND_FORCES_PASS_OR_FAIL",
+    "COUNT_UNRUN_CASES_AS_ZERO_WHEN_BUILDING_A_CONSERVATIVE_PASS_LOWER_BOUND",
+    "PREFER_ACTION_SET_WITH_MINIMUM_DEPENDENCY_AWARE_CRITICAL_PATH_SECONDS__THEN_ACTION_COUNT__THEN_TOTAL_ACTION_SECONDS",
+    "RECOMPUTE_MINIMUM_CERTIFICATE_CUT_AFTER_EVERY_VERIFIED_DELTA",
+    "BLOCK_FRESH_REALITY_ACTIONS_UNLESS_SEPARATELY_AUTHORIZED"
+  ],
+  "hard_rules": [
+    "NO_ACCEPTANCE_CREDIT_FROM_SCHEDULING_OR_COMPOSITION_ALONE",
+    "NO_SELF_ASSERTED_OWNER_THRESHOLD_RECEIPT",
+    "NO_SCORE_OR_HARNESS_DRIFT",
+    "NO_PUBLIC_PRIVATE_SUBSTITUTION_WITHOUT_EXACT_OR_SCOPE_SAFE_STRONGER_IMPLICATION",
+    "NO_RELATIVE_ELO_INFERENCE_FROM_PURE_ABSOLUTE_BEHAVIOR",
+    "NO_MATCHED_NONINFERIORITY_COLLAPSE_TO_ONE_FIXED_BAR_BIT",
+    "NO_DOUBLE_COUNTING_OVERLAPPING_SCORE_MASS",
+    "NO_FRESH_REALITY_WITHOUT_SEPARATE_EXPLICIT_AUTHORITY",
+    "NO_PROMOTION_WITHOUT_SEPARATE_ACCEPTANCE_REDUCTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
