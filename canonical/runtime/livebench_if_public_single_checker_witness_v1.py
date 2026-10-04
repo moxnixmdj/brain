@@ -52,6 +52,11 @@ def _constant(needle: str, checker_id: str, response: str):
     return rule
 
 
+def _guard(needle: str, checker_id: str):
+    """Recognize a public checker grammar without constructing a response."""
+    return _constant(needle, "guard:" + checker_id, "")
+
+
 def _word_range(prompt: str):
     m = _match(r"\bresponse must contain between\s+(\d+)\s+and\s+(\d+)\s+words?\b", prompt)
     if not m:
@@ -228,6 +233,24 @@ def _rules() -> list[Callable[[str], tuple[str, str] | None]]:
                   "format:output_template", "My Answer: x\nMy Conclusion: y\nFuture Outlook: z"),
         _constant("The output should not contain any whitespace.",
                   "format:no_whitespace", "abc"),
+
+        # Guard-only recognition for the remaining 14 pinned public checker IDs.
+        # These rules prevent a supported checker from stealing a conjunction
+        # merely because the other public checker lacks a constructor here.
+        _guard("Maintain a trigram overlap of", "ratio:overlap"),
+        _guard("Answer with one of the following options:", "format:options"),
+        _guard("Include keyword", "count:keywords_multiple"),
+        _guard("as the", "words:keywords_specific_position"),
+        _guard("The second word in your response and the second to last word", "words:words_position"),
+        _guard("Copy the span of words that lies between", "repeat:repeat_span"),
+        _guard("reverse alphabetical order, each on a new line", "custom:reverse_newline"),
+        _guard("reverse order of what it should be, per word", "custom:word_reverse"),
+        _guard("reverse order of what it should be, per letter", "custom:character_reverse"),
+        _guard("capital cities of european countries whose latitude is higher than than 45 degrees", "custom:european_capitals_sort"),
+        _guard('column names are ["ID", "Country", "City", "Year", "Count"]', "custom:csv_city"),
+        _guard('column names are ["ProductID", "Category", "Brand", "Price", "Stock"]', "custom:csv_special_character"),
+        _guard('column names are ["StudentID", "Subject", "Grade", "Semester", "Score"]', "custom:csv_quotes"),
+        _guard("List the start dates of all the battles Napoleon fought separated by commas", "custom:date_format_list"),
     ]
 
 
@@ -250,6 +273,14 @@ def construct_single_checker_witness(prompt: str) -> dict:
         }
 
     iid = unique_ids[0]
+    if iid.startswith("guard:"):
+        return {
+            "schema": SCHEMA,
+            "status": "BLOCKED",
+            "reason": "PUBLIC_CHECKER_RECOGNIZED_BUT_CONSTRUCTOR_UNSUPPORTED",
+            "matched_checker_ids": unique_ids,
+        }
+
     responses = [response for rid, response in matches if rid == iid]
     if not responses or any(response != responses[0] for response in responses):
         return {
