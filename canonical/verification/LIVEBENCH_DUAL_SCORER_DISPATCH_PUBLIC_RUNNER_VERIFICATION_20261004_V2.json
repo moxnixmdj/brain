@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_DUAL_SCORER_DISPATCH_PUBLIC_RUNNER_VERIFICATION_V2",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_LEGACY_IFEVAL_CURRENT_IFBENCH_DISPATCH_AND_RESPONSE_PREPROCESSING__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "release_cutoff": "2025-11-25",
+    "old_path": "LEGACY_IFEVAL",
+    "new_path": "IFBENCH"
+  },
+  "implementation": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "path": "livebench_dual_scorer_dispatch_v2.py",
+    "git_blob_sha": "34cec73dfe08d654735b9a7bf57d002da5f958cc"
+  },
+  "independent_verification": {
+    "pull_request": 1774,
+    "head_sha": "b1a691d18054c8d824b00498f95c4d898033e0a3",
+    "merge_commit": "58f1163f512a6ae651d54a7175ff611f70cc3594",
+    "workflow_run_id": 37189465346,
+    "workflow_job_id": 111398443079,
+    "conclusion": "success",
+    "verifier_git_blob_sha": "e2d8caa37c45953a4ad764b53efbbe8e3ecc307e",
+    "workflow_git_blob_sha": "af4fd938a0ec6edc3b1183b92d811ef615f09e7c"
+  },
+  "verified": {
+    "dispatch_before_cutoff": "LEGACY_IFEVAL",
+    "dispatch_at_or_after_cutoff": "IFBENCH",
+    "global_think_tag_preprocessing": true,
+    "ifbench_solution_tag_preprocessing": true,
+    "legacy_synthetic_strict_score_pass": true,
+    "ifbench_synthetic_strict_score_pass": true,
+    "terminal_dataset_downloaded": false,
+    "terminal_case_content_read": false,
+    "terminal_cases_consumed": 0,
+    "candidate_inferences": 0,
+    "incremental_spend_usd": 0
+  },
+  "semantic_effect": "BINDS_THE_CORRECTED_SCORER_DISPATCH_IMPLEMENTATION_FOR_A_FUTURE_V3_AUTHORIZED_EXECUTION__DOES_NOT_AUTHORIZE_EXECUTION_OR_ACCEPTANCE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
