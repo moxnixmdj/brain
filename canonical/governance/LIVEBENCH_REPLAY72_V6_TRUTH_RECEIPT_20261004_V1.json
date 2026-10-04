@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_REPLAY72_V6_TRUTH_RECEIPT_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__AUTHORIZED_REPLAY72_COMPLETE__ZERO_VALID_RESPONSES__MIXED_POLICY_BLOCK_AND_UNLOCALIZED_EXIT__RAW_THRESHOLD_FAIL_NOT_YET_CAPABILITY_ADMISSIBLE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "execute/livebench-replay72-v6-20261004-0918",
+    "trigger_commit": "556c4deeeb3f659f8ad48a214da6c207de72a134",
+    "workflow_run_id": 37191977679,
+    "workflow_job_id": 111405917591,
+    "conclusion": "success",
+    "runner": "ubuntu-24.04",
+    "launcher_activation_blob_sha": "c449329ad9e6e9ac001c5a1cdb2f3fa187fa49b3",
+    "executor_git_blob_sha": "2a57ce896ddbd6819246aab8b44d17a00f36b61e"
+  },
+  "point_of_use_prelaunch": {
+    "status": "PASS__V6_POINT_OF_USE_PRELAUNCH",
+    "base_root_git_blob_sha": "54021118b1b1f299cf0191d1e413a3009d95d76c",
+    "point_of_use_root_git_blob_sha": "822d7a0e64b2e919a873526d111e7202c40e1f5b",
+    "added_scheduler_overlays": [
+      "root2_decision_only_evaluation"
+    ],
+    "compatible": true,
+    "new_case_exposure_authorized": false,
+    "terminal_cases_consumed": 0
+  },
+  "observed_replay": {
+    "replay_prefix_limit": 72,
+    "terminal_cases_consumed": 72,
+    "new_cases_exposed": 0,
+    "valid_candidate_responses": 0,
+    "empty_response_count": 72,
+    "empty_response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "policy_blocked_post_prompt_capability_acquisition": 43,
+    "inference_exit_1_count": 29,
+    "unique_inference_exit_1_stderr_hash_count": 29,
+    "other_inference_error_count": 0,
+    "observed_score_mass": 0,
+    "observed_mean_percent": 0,
+    "conservative_full_population_upper_percent_from_recorded_zero_scores": 64,
+    "raw_executor_predicate_fail_forced": true,
+    "receipts_sha256": "3e1ba75095ebcd84847c663b87866e4535ba9efe9f9d9974ca65a75b7c8a8366"
+  },
+  "causal_interpretation": {
+    "frozen_runtime_package_closure_already_independently_verified": true,
+    "scorer_dispatch_already_independently_verified": true,
+    "policy_block_semantics": "THE_FROZEN_CANDIDATE_REACHED_A_POST_PROMPT_CAPABILITY_ACQUISITION_BOUNDARY_FOR_43_OF_72_REPLAYED_CASES_WHILE_POST_PROMPT_ACQUISITION_WAS_EXPLICITLY_FORBIDDEN_BY_THE_FROZEN_EVALUATION_POLICY",
+    "policy_block_evidence_class": "CONSTRUCTIVE_PREBOUND_CAPABILITY_ROUTE_GAP_SIGNAL_FOR_THE_FROZEN_CANDIDATE__NOT_YET_A_TERMINAL_ROOT1_PROMOTION",
+    "exit_semantics": "29_CASES_EXITED_NONZERO_BEFORE_A_VALID_RESPONSE_AND_HAVE_DISTINCT_SANITIZED_STDERR_HASHES__THEIR_CAUSES_ARE_NOT_LOCALIZED_BY_THIS RECEIPT",
+    "raw_fail_admissibility": false,
+    "reason_raw_fail_not_admissible": "THE_RAW_THRESHOLD_UPPER_BOUND_TREATS_ALL_72_EMPTY_OUTPUTS_AS_BEHAVIORAL_FAILURES__43_ARE_EXPLICIT_POLICY_BOUNDARY_EVENTS_AND_29_REMAIN_UNLOCALIZED_EXECUTION_EXITS__CAUSAL_CLASSIFICATION_MUST_PRECEDE_CAPABILITY_OR_ACCEPTANCE_CREDIT",
+    "root1_reopen_authorized_by_this_receipt": false,
+    "root2_predicate_closed_by_this_receipt": false
+  },
+  "next_required_actions": [
+    "INDEPENDENTLY_VERIFY_EXACT_RUN_JOB_PRELAUNCH_TERMINAL_SUMMARY_AND_43_29_ZERO_VALID_RESPONSE_COUNTS",
+    "LOCALIZE_THE_29_DISTINCT_INFERENCE_EXIT_1_CAUSES_WITH_ZERO_TERMINAL_CASES_OR_ALREADY_EXPOSED_PREFIX_ONLY__NO_CASE_73_PLUS",
+    "PROVE_WHETHER_THE_43_POST_PROMPT_ACQUISITION_BOUNDARY_EVENTS_IMPLY_AN_OPERATIVE_PREBOUND_CAPABILITY_GAP_AFTER_ALL_PREEXPOSURE_ACQUISITION_ROUTES_ARE_ACCOUNTED_FOR",
+    "RECOMPUTE_ROOT1_ROOT2_CLASSIFICATION_FROM_CAUSAL_EVIDENCE__DO_NOT_FORCE_ROOT1_OR_ROOT2 CREDIT BY LABEL",
+    "DO_NOT_EXPOSE_NEW_LIVEBENCH_CASES_UNTIL_A_SEPARATE_EXPLICIT_AUTHORITY_EXISTS"
+  ],
+  "hard_nonclaims": [
+    "NO_ADMISSIBLE_LIVEBENCH_CAPABILITY_FAIL_FROM_RAW_ZERO_SCORES_YET",
+    "NO_LIVEBENCH_PASS",
+    "NO_ACCEPTANCE_OR_PROMOTION_CREDIT",
+    "NO_ROOT1_REOPEN_YET",
+    "NO_CASE_73_OR_LATER_EXPOSURE",
+    "NO_CANDIDATE_MUTATION",
+    "NO_PROMPT_OR_RESPONSE_CONTENT_USED_TO_DESIGN_REPAIR"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "newly_exposed_terminal_cases": 0,
+    "replayed_already_exposed_terminal_cases": 72,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
