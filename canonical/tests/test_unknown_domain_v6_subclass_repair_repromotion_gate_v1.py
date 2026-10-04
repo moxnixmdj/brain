@@ -17,6 +17,9 @@ def test_repromotion_gate_is_outcome_blind_and_fail_closed():
     assert "STR_SUBCLASS_OVERRIDE_STRIP_IS_EXPLICITLY_ATTACKED" in required
     assert "STR_SUBCLASS_OVERRIDE_ENCODE_IS_EXPLICITLY_ATTACKED" in required
     assert "BYTES_SUBCLASS_OVERRIDE_BYTES_IS_EXPLICITLY_ATTACKED" in required
+    assert "BYTES_SUBCLASS_OVERRIDE_BUFFER_IS_EXPLICITLY_ATTACKED" in required
+    assert "BYTES_SUBCLASS_OVERRIDE_LEN_GETITEM_AND_ITER_ARE_EXPLICITLY_ATTACKED_OR_A_STRONGER_BASE_DESCRIPTOR_BYPASS_TEST_IS_EXECUTED" in required
+    assert "BYTES_PAYLOAD_MATERIALIZATION_BYPASSES_PYTHON_BUFFER_DISPATCH" in required
     assert "ADVERSARIAL_SUBCLASS_BEACON_AND_SECRET_PATHS_EXECUTE_ALL_27_CASES_THROUGH_EXACT_CANDIDATE_HARNESS_AND_SCORER" in required
 
     pred = gate["promotion_predicate"]
@@ -30,9 +33,9 @@ def test_repromotion_gate_is_outcome_blind_and_fail_closed():
 def test_gate_binds_exact_repaired_subject_and_frozen_semantics():
     gate = json.loads(GATE.read_text(encoding="utf-8"))
     blobs = gate["repaired_candidate"]["required_blobs"]
-    assert blobs["canonical/runtime/unknown_domain_direct_hidden_generator_v5.py"] == "d087601a62a0b8ec9ab264487fb0b27a6246b977"
-    assert blobs["canonical/tests/test_unknown_domain_direct_v5.py"] == "c98733407d594c3fa5713de5742022325463f390"
-    assert blobs["canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py"] == "4a3e72b365ffa7e163abc63d197fcd386bdd104d"
+    assert blobs["canonical/runtime/unknown_domain_direct_hidden_generator_v5.py"] == "60373126f3ee27368ae06e6d7d559f1b826d90d4"
+    assert blobs["canonical/tests/test_unknown_domain_direct_v5.py"] == "5bc00ff6f7671ad43acb04a6fe4c3b6d1893c380"
+    assert blobs["canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py"] == "58d3a61f5e2cb24b4387ddd817b64f897f62fe06"
 
     bridge = gate["frozen_semantic_bridge"]
     assert bridge["protocol_git_blob_sha"] == "fd586455d582c38c7062ffe735f86cb9f2e803ab"
