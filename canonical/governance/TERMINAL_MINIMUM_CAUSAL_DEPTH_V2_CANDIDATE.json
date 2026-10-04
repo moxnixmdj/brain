@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_MINIMUM_CAUSAL_DEPTH_V2_CANDIDATE",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CURRENT_CANONICAL_TRUTH_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT__NO_AUTHORITY",
+  "objective": "MAKE_AUTHENTICATED_ONE_BIT_THRESHOLD_RECEIPTS_THE_MINIMUM_INFORMATION_ROUTE_WHEN_SUFFICIENT_WHILE_PRESERVING_RELATIVE_RATING_SEMANTICS_ARENA_TRUTH_REPAIR_AND_VERIFIED_V1_IMMUTABILITY",
+  "source_main": "5a184fb53c5915c8a322fdf8857631162e4b36c1",
+  "subjects": {
+    "plan": {
+      "path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_PLAN_V2.json",
+      "git_blob_sha": "64680bdf05914abeb9aba02190fd285dbd911122"
+    },
+    "guard": {
+      "path": "canonical/runtime/terminal_minimum_causal_depth_guard_v2.py",
+      "git_blob_sha": "808e7bcb6e2a5652ebb0f3f27b644b4a280cf7b3"
+    },
+    "tests": {
+      "path": "canonical/tests/test_terminal_minimum_causal_depth_guard_v2.py",
+      "git_blob_sha": "d910eb11f3ea2ff99d8b456e57ffabed278c71ca"
+    }
+  },
+  "immutable_predecessor": {
+    "plan_path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_PLAN_V1.json",
+    "plan_git_blob_sha": "3c203a1c2060b333a2e13417ab3a3a2880c94f2c",
+    "activation_path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "c184c1aed33c06f6b4307ace79a959c21de96958",
+    "mutation_allowed": false
+  },
+  "active_dependencies": {
+    "blind_threshold_activation": {
+      "path": "canonical/governance/ROOT2_BLIND_THRESHOLD_RECEIPT_ACTIVATION_V1.json",
+      "git_blob_sha": "324a7a762a3a2e7116372414afa6b52343673a3d"
+    },
+    "arena_truth_repair": {
+      "path": "canonical/governance/ARENA_PUBLIC_SEMANTICS_TRUTH_REPAIR_V1.json",
+      "git_blob_sha": "a76391c98767a0fa688adc32f5ac23f9caaea624"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "54021118b1b1f299cf0191d1e413a3009d95d76c"
+    },
+    "current_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "09c8686990eceb6dee49229390f30e3b3b2e83de"
+    }
+  },
+  "exact_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "root1_positive_gaps": 0,
+    "root2_only": 16,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "terminal": false
+  },
+  "intended_delta": [
+    "ADD_AUTHENTICATED_ONE_BIT_THRESHOLD_RECEIPT_RACE_TO_EVIDENCE_COLLAPSE",
+    "PREFER_PASS_FAIL_AT_EXACT_FROZEN_THRESHOLD_OVER_EXACT_SCORE_OR_PRIVATE_DATASET_WHEN_TERMINALLY_SUFFICIENT",
+    "PRESERVE_OFFICIAL_RELATIVE_RATING_THRESHOLD_SEMANTICS",
+    "PRESERVE_MATCHED_NONINFERIORITY_AS_NOT_COLLAPSIBLE_TO_FIXED_BAR_BIT",
+    "PRESERVE_ARENA_LOGIN_GATED_ENDPOINT_AND_ROUTING_SEMANTICS_AS_UNBOUND",
+    "DO_NOT_TREAT_HUMAN_READABLE_NEXT_ACTION_TEXT_AS_AUTHORITY_WHEN_CONTENT_ADDRESSED_AUTHORITY_OBJECTS_EXIST"
+  ],
+  "verification_required": [
+    "RECOMPUTE_ALL_SUBJECT_AND_DEPENDENCY_GIT_BLOB_IDENTITIES",
+    "RUN_V2_GUARD_AND_TESTS",
+    "CONFIRM_V1_VERIFIED_SUBJECTS_UNCHANGED",
+    "CONFIRM_BLIND_THRESHOLD_ELIGIBLE_SET_EXACT",
+    "CONFIRM_RELATIVE_RATING_NONTRANSPORT",
+    "CONFIRM_ARENA_TRUTH_REPAIR_PRESERVED",
+    "CONFIRM_TERMINAL_COUNTS_AND_ROOT_PARTITION_PRESERVED",
+    "CONFIRM_ZERO_ACCEPTANCE_EXECUTION_PROMOTION_FRESH_REALITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
