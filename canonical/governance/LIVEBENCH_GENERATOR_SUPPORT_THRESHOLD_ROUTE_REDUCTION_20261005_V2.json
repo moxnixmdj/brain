@@ -1,11 +1,11 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_GENERATOR_SUPPORT_THRESHOLD_ROUTE_REDUCTION_20261005_V2",
   "date": "2026-10-05",
-  "status": "CANDIDATE_TRUTH_REPAIR__GENERATOR_REACHABLE_UNSAT_COUNTEREXAMPLE_BINDS_SCORE_CEILING__UNIVERSAL_SUPPORT_THRESHOLD_ROUTE_FALSIFIED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE_TRUTH_REPAIR__FULLY_GENERATOR_ADMITTED_UNSAT_COUNTEREXAMPLE_BINDS_SCORE_CEILING__UNIVERSAL_SUPPORT_THRESHOLD_ROUTE_FALSIFIED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "breakthrough": {
-    "prior_state": "THE_928_CONFLICT_COMPATIBLE_ID_SETS_AND_SEVEN_ARCHETYPES_WERE_BEING_TREATED_AS_THE_MAIN_PATH_TOWARD_A_UNIVERSAL_GENERATOR_DOMAIN_CONSTRUCTION_PROOF",
+    "prior_state": "THE_928_CONFLICT_COMPATIBLE_ID_SETS_AND_SEVEN_ARCHETYPES_WERE_BEING_TREATED_AS_THE_MAIN PATH_TOWARD_A_UNIVERSAL_GENERATOR_DOMAIN_CONSTRUCTION_PROOF",
     "new_fact": "THE_PUBLIC_HISTORICAL_GENERATOR_SUPPORT_CONTAINS_A_REACHABLE_CONCRETE_TWO_CHECKER_SLOT_TUPLE_THAT_IS_JOINTLY_UNSATISFIABLE",
     "score_consequence": "ANY_RESPONSE_ON_THAT_TWO_CHECKER_TUPLE_CAN_HAVE_AT_MOST_ONE_TRUE_CHECKER_SO_THE_FROZEN_STRICT_CASE_SCORE_IS_AT_MOST_1_OVER_4",
     "threshold_consequence": "1_OVER_4_IS_STRICTLY_BELOW_65_7_PERCENT__THEREFORE_NO_UNIVERSAL_PER_ROW_LOWER_BOUND_OVER_ALL_GENERATOR_SUPPORTED_SLOT_TUPLES_CAN_PROVE_LIVEBENCH_IF_GE_65_7",
@@ -14,15 +14,25 @@
   "truth_repair": {
     "prior_illustrative_counterexample_word": "alpha",
     "pinned_word_list_contains_alpha": false,
+    "intermediate_one_word_forbidden_example_generator_cardinality_complete": false,
     "generator_reachable_counterexample_word": "rock",
-    "pinned_word_list_contains_rock": true,
+    "generator_reachable_forbidden_words": [
+      "rock",
+      "western",
+      "sentence",
+      "signal",
+      "dump"
+    ],
+    "forbidden_sample_cardinality": 5,
+    "all_five_forbidden_words_are_distinct": true,
+    "all_five_forbidden_words_are_in_pinned_word_list": true,
     "why_reachable": [
-      "PARAGRAPH_FIRST_WORD_CHECK_DRAWS_FIRST_WORD_THROUGH_generate_keywords",
-      "FORBIDDEN_WORDS_DRAWS_FORBIDDEN_WORDS_THROUGH_generate_keywords",
+      "PARAGRAPH_FIRST_WORD_CHECK_DRAWS_EXACTLY_ONE_FIRST_WORD_THROUGH_generate_keywords_1",
+      "FORBIDDEN_WORDS_DRAWS_EXACTLY_FIVE_DISTINCT_WORDS_THROUGH_generate_keywords_5",
       "generate_keywords_USES_random_sample_ON_THE_PINNED_WORD_LIST",
-      "ROCK_IS_IN_THE_PINNED_WORD_LIST",
+      "ROCK_AND_THE_FOUR_COMPANION_WORDS_ARE_IN_THE_PINNED_WORD_LIST",
       "THE_TWO_INSTRUCTION_IDS_ARE_CONFLICT_COMPATIBLE_IN_THE_PINNED_REGISTRY",
-      "THEREFORE_A_CONCRETE_SLOT_TUPLE_WITH_first_word_ROCK_AND_forbidden_words_CONTAINING_ROCK_HAS_POSITIVE_PUBLIC_GENERATOR_SUPPORT"
+      "THEREFORE_A_CONCRETE_SLOT_TUPLE_WITH_first_word_ROCK_AND_A_FIVE_WORD_FORBIDDEN_SAMPLE_CONTAINING_ROCK_HAS_POSITIVE_PUBLIC_GENERATOR_SUPPORT"
     ],
     "logical_unsat": [
       "PARAGRAPH_FIRST_WORD_CHECK_REQUIRES_THE_SELECTED_PARAGRAPH_FIRST_WORD_TO_EQUAL_ROCK",
@@ -43,11 +53,11 @@
   "candidate_subjects": {
     "falsifier_runtime": {
       "path": "canonical/runtime/livebench_generator_support_threshold_route_falsifier_v2.py",
-      "git_blob_sha": "33be56766f6d81bc17441c0d6bdfc4af6af6358e"
+      "git_blob_sha": "3a10b70f8cf010a03afac3b34271c67b8825f3c1"
     },
     "tests": {
       "path": "canonical/tests/test_livebench_generator_support_threshold_route_falsifier_v2.py",
-      "git_blob_sha": "69ee7350e55b361fe75082c5a0c3fd70db972506"
+      "git_blob_sha": "d75a3dd53a641606e2700199a9315cec53ddfea7"
     },
     "slot_feasibility_runtime": {
       "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
@@ -72,7 +82,8 @@
     "retain_as_candidate_hardening": [
       "928_TO_7_STRUCTURAL_ARCHETYPE_REDUCTION",
       "EXACT_PUBLIC_SYNTHETIC_CHECKER_AUDITS",
-      "SLOT_LEVEL_WITNESS_OR_UNSAT_CLASSIFICATION"
+      "SLOT_LEVEL_WITNESS_OR_UNSAT_CLASSIFICATION",
+      "POINTWISE_OPTIMALITY_CERTIFICATION"
     ],
     "corrected_minimum_cut": [
       "USE_SYNTHETIC_EXACT_AUDITS_ONLY_UNTIL_THE_VISIBLE_PROMPT_SOLVER_IS_STABLE_AND_FAIL_CLOSED",
