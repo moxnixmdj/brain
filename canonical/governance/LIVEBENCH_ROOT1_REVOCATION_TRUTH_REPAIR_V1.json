@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_REVOCATION_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ROOT1_PREMISE_INVALIDATED_BY_ACTIVE_PARTIAL_CREDIT_TRUTH_REPAIR__RETURN_LIVEBENCH_TO_ROOT2_ONLY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Remove the unsupported LiveBench Root1 positive-gap classification after the sole forced-fail proof was invalidated by the active lower-bound-versus-upper-bound truth repair.",
+  "current_authority_bindings": {
+    "terminal_root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "c3d1e25e2268cce90df545a93f107aa24fed8f8b"
+    },
+    "old_reclassification": {
+      "path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+      "git_blob_sha": "eef18a73b23db53082b934976bcbd05cab9c5684"
+    },
+    "old_projection": {
+      "path": "canonical/governance/LIVEBENCH_ROOT_PARTITION_PROJECTION_V1.json",
+      "git_blob_sha": "21dc5e07e18ba3e99a97ffef20a098833c684e99"
+    },
+    "active_truth_repair": {
+      "path": "canonical/governance/LIVEBENCH_PARTIAL_CREDIT_UPPER_BOUND_TRUTH_REPAIR_20261004_V1.json",
+      "git_blob_sha": "359f740191e528f16b30ed6b893dad5caee5698d"
+    },
+    "repaired_mass_runtime": {
+      "path": "canonical/runtime/livebench_partial_credit_mass_v1.py",
+      "git_blob_sha": "0e3c0d89736d809f5378a3c81734eb4295b48ce2"
+    }
+  },
+  "invalidated_premise": {
+    "old_claim": "72 observed zero-score cases imply maximum remaining score mass 128 and full-population upper bound 64.0 percent.",
+    "old_use": "This was the load-bearing deduction that moved LIVEBENCH_IF_GE_65_7 from ROOT2_ONLY to ROOT1_POSITIVE_OPERATIVE_GAP.",
+    "active_repair": "The 72 records established lower-bound information, not separate exact-score or score-upper-bound evidence. A lower bound of zero does not constrain a case's score upper bound below 1.",
+    "repaired_conservative_upper_mass": 200,
+    "repaired_forced_fail": false
+  },
+  "classification_rule_application": {
+    "root_state_rule": "UNKNOWN_OR_UNPROVED_CAPABILITY_MUST_NOT_BE_CLASSIFIED_AS_MISSING__ROOT1_REQUIRES_POSITIVE_EVIDENCE_OF_AN_OPERATIVE_CAPABILITY_GAP_AFTER_AVAILABLE_ACQUISITION_ROUTES_ARE_ACCOUNTED_FOR",
+    "partition_rule": "UNKNOWN_OR_UNMEASURED_FIXED_BAR=>ROOT2__PROVED_FALSE_FIXED_BAR_WITH_CONSTRUCTIVE_OPERATIVE_SYSTEM_FAILURE=>ROOT1",
+    "current_supported_state": "THE_FIXED_BAR_IS_NOT_PROVED_FALSE_BY_THE_REVOKED_64_PERCENT_UPPER_BOUND_ARGUMENT",
+    "consequence": "LIVEBENCH_IF_GE_65_7_MUST_NOT_REMAIN_ROOT1_ON_THAT_ARGUMENT; FAIL_CLOSED_CLASSIFICATION_RETURNS_TO_ROOT2_ONLY_UNTIL A SOUND FIXED-BAR VALUE OR OTHER POSITIVE OPERATIVE-GAP PROOF EXISTS."
+  },
+  "exact_partition_repair": {
+    "before": {
+      "unresolved_total": 26,
+      "root1_only_count": 1,
+      "root2_only_count": 15,
+      "root3_only_count": 7,
+      "root2_and_root3_count": 3,
+      "root2_touching_count": 18,
+      "root1_only": [
+        "LIVEBENCH_IF_GE_65_7"
+      ]
+    },
+    "after": {
+      "unresolved_total": 26,
+      "root1_only_count": 0,
+      "root2_only_count": 16,
+      "root3_only_count": 7,
+      "root2_and_root3_count": 3,
+      "root2_touching_count": 19,
+      "livebench_membership": "ROOT2_ONLY"
+    },
+    "invariant": "0 + 16 + 7 + 3 = 26",
+    "acceptance_counts_changed": false
+  },
+  "scheduler_effect_if_verified": [
+    "SUPERSEDE_LIVEBENCH_ROOT1_ONLY_CLASSIFICATION_AND_THE_POST_LIVEBENCH_18_ROOT2_TOUCHING_CURRENTNESS_SEAL",
+    "RESTORE_LIVEBENCH_IF_GE_65_7_TO_ROOT2_FIXED_BAR_UNRESOLVED",
+    "RECOMPUTE_ROOT2_TOUCHING_FRONTIER_AS_19_PREDICATES",
+    "PRESERVE_CONSTRUCTIVE_LIVEBENCH_SUCCESSOR_WORK_AS_OPTIONAL_ZERO_REALITY_EVIDENCE_GENERATION__NOT_AS_PROOF_THAT_ROOT1_IS_ACTIVE",
+    "DO_NOT_GRANT ACCEPTANCE OR CAPABILITY CREDIT"
+  ],
+  "separation_of_claims": {
+    "open_weight_semantic_core_candidates": "MAY_BE_HIGH_LEVERAGE_ACQUISITION_ROUTES_FOR_TERMINAL_CAPABILITY_OWNERSHIP_BUT_DO_NOT BY THEMSELVES PROVE THE CURRENT BRAIN LIVEBENCH PREDICATE IS FALSE",
+    "score_only_solvers": "MAY_CONSTRUCT FUTURE SUCCESSOR EVIDENCE BUT DO NOT RETROACTIVELY RESTORE THE INVALIDATED FORCED-FAIL CERTIFICATE",
+    "terminal_goal": "REMAINS_FALSE; THIS IS A ROOT-CAUSE TRUTH REPAIR, NOT CLOSURE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_LIVEBENCH_IF_GE_65_7_IS_TRUE",
+    "NO_CLAIM_THE_FROZEN_CANDIDATE_PASSES",
+    "NO_CLAIM_NO_OTHER POSITIVE ROOT1 EVIDENCE COULD EVER BE PRODUCED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_TERMINAL_CASE_CONTENT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "next_minimum_action": "INDEPENDENTLY_VERIFY THE REVOCATION AGAINST THE EXACT CURRENT ROOT ARTIFACTS AND REPAIRED MASS RUNTIME; ONLY THEN TRANSPORT THE 0/16/7/3 PARTITION AND REBIND ROOT2 TO 19.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
