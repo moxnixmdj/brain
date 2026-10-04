@@ -1,0 +1,35 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_STRUCTURAL_BREAKTHROUGH_V1_CURRENT_MAIN_RECONCILIATION",
+  "date":"2026-10-04",
+  "status":"CANDIDATE_COMPATIBILITY_RECONCILIATION__ZERO_CREDIT",
+  "candidate_base":"e6b44874f73bf84a65615935e0ba4346f8b3f202",
+  "reconciled_main":"e6d0b29bd27d3a2fa4839ccdb838e21037dd66cf",
+  "main_delta":{
+    "commit_count":10,
+    "scope":"SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_AND_ROOT_PROJECTION_ONLY",
+    "root_blob":"60b70daf25f47d12d7a9522990769c0200acbfa9",
+    "acceptance":"5_OF_19",
+    "proved_atomic":12,
+    "unresolved_atomic":26,
+    "root1_positive_gaps":0,
+    "root2_only":16,
+    "root3_only":7,
+    "root2_and_root3":3,
+    "fresh_reality_authority":false
+  },
+  "compatibility":{
+    "stronger_proof_compiler_semantics_unchanged":true,
+    "precommit_guard_semantics_unchanged":true,
+    "root2_v11_preserved":true,
+    "root3_v2_preserved":true,
+    "retrieval_v19_preserved":true,
+    "synthesis_new_metric_contract_is_orthogonal_and_reduces_only_metric_underspecification":true,
+    "synthesis_exact_comparator_or_stronger_proof_requirement_preserved":true
+  },
+  "hard_rule":"DO_NOT_TREAT_THIS_RECONCILIATION_AS_ACCEPTANCE_OR_FRESH_REALITY_AUTHORITY",
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0},
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false,
+  "independent_verification_required":true
+}
