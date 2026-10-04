@@ -10,8 +10,8 @@
   "gmail_observation": {
     "provider": "GitHub",
     "subject": "[GitHub] You have used 90% of the Actions storage included for the moxnixmdj account",
-    "observed_fact": "EMAIL_STATES_PLAN_INCLUDES_0_5_GB_ACTIONS_STORAGE_PER_MONTH_AT_NO_EXTRA_COST",
-    "interpretation_against_current_github_docs": "MATCHES_GITHUB_FREE_PERSONAL_PLAN__NOT_GITHUB_PRO",
+    "observed_fact": "EMAIL_STATES_PLAN_INCLUDES_0_5_GB_GITHUB_ACTIONS_ARTIFACT_STORAGE_PER_MONTH_AT_NO_EXTRA_COST",
+    "interpretation_against_current_github_docs": "CONNECTED_ACCOUNT_IS_PERSONAL__CURRENT_GITHUB_DOCS_MAP_500_MB_ACTIONS_ARTIFACT_STORAGE_TO_GITHUB_FREE_PERSONAL__PRO_IS_1_GB",
     "exact_message_id": "1a1041c00a9bdba1"
   },
   "current_public_plan_mapping": {
@@ -20,7 +20,7 @@
     "github_free_codespaces_core_hours_per_month": 120,
     "github_pro_codespaces_core_hours_per_month": 180
   },
-  "deduction": "CONNECTED_ACCOUNT_IS_PERSONAL_AND_CURRENT_PLAN_CLASS_IS_GITHUB_FREE__THEREFORE_INCLUDED_CODESPACES_COMPUTE_ALLOWANCE_CLASS_IS_120_CORE_HOURS_PER_MONTH",
+  "deduction": "CONNECTED_ACCOUNT_IS_PERSONAL_AND_ACCOUNT_EMAIL_MATCHES_GITHUB_FREE_ACTIONS_ARTIFACT_STORAGE_QUOTA__THEREFORE_PLAN_CLASS_IS_GITHUB_FREE_PERSONAL__INCLUDED_CODESPACES_CLASS_IS_120_CORE_HOURS_PER_MONTH",
   "hard_nonclaims": [
     "NO_CLAIM_REMAINING_CODESPACES_CORE_HOURS",
     "NO_CLAIM_CODESPACES_8_CORE_MACHINE_IS_AVAILABLE_FOR_MOXNIXMDJ_BRAIN",
@@ -28,7 +28,9 @@
     "NO_CLAIM_BUDGET_STOP_IS_CONFIGURED",
     "NO_CLAIM_CODESPACE_CAN_BE_CREATED_NOW",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
-    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY",
+    "ACTIONS_BUDGET_STATE_DOES_NOT_PROVE_CODESPACES_BUDGET_OR_PAYMENT_METHOD_STATE",
+    "EMAIL_DOES_NOT_PROVE_REMAINING_CODESPACES_USAGE"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -40,5 +42,23 @@
   },
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "public_source_binding": {
+    "github_docs_commit": "2bd66de8cea336061c9ea060c9b37385136e6ab3",
+    "actions_included_quotas": {
+      "path": "data/reusables/billing/actions-included-quotas.md",
+      "git_blob_sha": "6ec1fdcfe16e856b856738d4208a026b4cd93a56",
+      "verified_mapping": "FREE_PERSONAL_500_MB_ACTIONS_ARTIFACT_STORAGE__PRO_1_GB"
+    },
+    "github_plans": {
+      "path": "content/get-started/learning-about-github/githubs-plans.md",
+      "git_blob_sha": "40d7b89bad9f35b323cb5bfcad5f7a603ff4b4bd",
+      "verified_mapping": "FREE_PERSONAL_120_CODESPACES_CORE_HOURS_PER_MONTH__PRO_180"
+    },
+    "codespaces_billing": {
+      "path": "content/billing/concepts/product-billing/github-codespaces.md",
+      "git_blob_sha": "a2fb8a5f741767c2a7a4aa8b6b3da38a113126d9",
+      "verified_mapping": "FREE_PERSONAL_120_HOURS__IF_NO_VALID_PAYMENT_METHOD_USAGE_BLOCKS_AFTER_QUOTA"
+    }
+  }
 }
