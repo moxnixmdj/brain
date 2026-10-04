@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_SUB100MB_SEMANTIC_CORE_PREFLIGHT_V1",
+  "date": "2026-10-04",
+  "status": "ACTIVE_FALSIFICATION__PUBLIC_RUNNER_QUEUED__ZERO_TERMINAL__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "root_gap": {
+    "required_effects": [
+      "text.paraphrase.semantic_preserving",
+      "text.simplify.semantic_preserving",
+      "text.summarize.faithful",
+      "text.story.generate_instruction_grounded"
+    ],
+    "current_verified_bound_semantic_generation_effect_count": 0,
+    "source_frontier": "canonical/governance/LIVEBENCH_ROOT1_SEMANTIC_SEED_REPAIR_FRONTIER_V1.json"
+  },
+  "relation_to_open_weight_27b_breakthrough": {
+    "source": "canonical/governance/LIVEBENCH_ROOT1_OPEN_WEIGHT_SEMANTIC_CORE_BREAKTHROUGH_V1.json",
+    "preserved_fact": "PUBLIC_OPEN_WEIGHT_27B_CORE_PROVES_GENERAL_SEMANTIC_CAPABILITY_EXISTENCE",
+    "unresolved_under_h100": "THE_ACTIVE_SUB100MB_EXPERIMENT_REQUIRES_TOTAL_PERSISTENT_LEARNED_STATE_LE_100000000_BYTES__THE_27B_EXISTENCE_PROOF_DOES_NOT_ESTABLISH_A_COMPLIANT_LOCAL_FORM",
+    "consequence": "TEST_A_SINGLE_SELF_CONTAINED_SUB100MB_GENERAL_TEXT_CORE_BEFORE_ANY_NEW_TRAINING_OR_LARGE_MODEL_INTERNALIZATION"
+  },
+  "candidate": {
+    "upstream_model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "upstream_license": "Apache-2.0",
+    "upstream_public_claims": [
+      "ON_DEVICE_COMPACT_TEXT_GENERATION",
+      "INSTRUCTION_FOLLOWING",
+      "TEXT_REWRITING_AND_SUMMARIZATION_SUPPORTED_BY_INSTRUCT_TUNING"
+    ],
+    "local_form": {
+      "repository": "bartowski/SmolLM2-135M-Instruct-GGUF",
+      "revision": "a8a1f0e5962e87caf134245b7796b15cd4563d6f",
+      "artifact": "SmolLM2-135M-Instruct-IQ4_XS.gguf",
+      "sha256": "d766661c2e39c3da78d8eddf15287af263dce1eedc1c9c8093ed8e54eb067dbc",
+      "published_display_size_mb": 90.9,
+      "exact_byte_count": "PENDING_INDEPENDENT_RUNNER_MEASUREMENT",
+      "quantization": "IQ4_XS",
+      "conservative_accounting_rule": "COUNT_THE_ENTIRE_GGUF_FILE_AS_PERSISTENT_LEARNED_STATE__DO_NOT_EXCLUDE_METADATA_OR_TOKENIZER_BYTES_FOR_THIS_PREFLIGHT"
+    },
+    "deterministic_runtime": {
+      "project": "ggml-org/llama.cpp",
+      "pinned_commit": "0504396140d1c882f5f6ee34466a42db7ae90114",
+      "external_learned_provider_calls_during_scored_preflight": 0,
+      "post_prompt_network_calls": 0
+    }
+  },
+  "frozen_preexposure_gate": {
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1896,
+    "verifier_head_sha": "0c6a1cdbd19b0e0f6433e4131b477e52fba19efd",
+    "workflow_run_id": 37199567536,
+    "verifier_script": "verify_livebench_root1_smollm2_semantic_core_v1.py",
+    "workflow": ".github/workflows/verify-livebench-root1-smollm2-semantic-core-v1.yml",
+    "public_synthetic_tasks": 8,
+    "task_families": {
+      "paraphrase": 2,
+      "simplify": 2,
+      "summarize": 2,
+      "story": 2
+    },
+    "admission_rule": [
+      "EXACT_GGUF_SHA256_MATCH",
+      "EXACT_MEASURED_GGUF_BYTES_LE_100000000",
+      "AT_LEAST_7_OF_8_TASKS_PASS",
+      "AT_LEAST_1_OF_2_TASKS_PASS_IN_EVERY_REQUIRED_EFFECT_FAMILY"
+    ],
+    "semantic_checks": [
+      "FACT_ANCHOR_PRESERVATION",
+      "CAUSAL_OR_TEMPORAL_RELATION_PRESERVATION_WHERE_REQUIRED",
+      "PARAPHRASE_NONCOPY_CONSTRAINT",
+      "SIMPLIFICATION_LENGTH_BOUND",
+      "SUMMARY_IRRELEVANT_DETAIL_EXCLUSION",
+      "STORY_EVENT_ORDER_AND_EXACT_SENTENCE_COUNT"
+    ],
+    "terminal_cases_consumed": 0
+  },
+  "decision_rule": {
+    "if_gate_fails": "KILL_THIS_EXACT_SUB100MB_CANDIDATE_LANE__DO_NOT_RELAX_THE_FROZEN_GATE_POST_HOC",
+    "if_gate_passes": "ADMIT_ONLY_TO_STRONGER_PUBLIC_NONTERMINAL_GENERALIZATION_VERIFICATION_AND_EXACT_ASSET_INTERNALIZATION__NO_TERMINAL_OR_CAPABILITY_CREDIT_YET",
+    "no_model_card_substitution": true,
+    "no_benchmark_score_only_substitution": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "research_falsification": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SMOLLM2_135M_ALREADY_MEETS_THE_OPUS55_CAPABILITY_ENVELOPE",
+    "NO_CLAIM_PUBLIC_SYNTHETIC_PASS_WOULD_PROVE_OPEN_WORLD_SEMANTICS",
+    "NO_CLAIM_90_9_MB_DISPLAY_SIZE_IS_THE_LOAD_BEARING_EXACT_BYTE_COUNT",
+    "NO_TERMINAL_LIVEBENCH_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ]
+}
