@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_HARD_UNSAT_SCORE_CEILING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_FORMAL_BOUND__PUBLIC_CHECKER_SEMANTICS_ONLY__INDEPENDENT_VERIFICATION_PENDING__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "premises": {
+    "hard_unsat_class": "LESS_THAN_ONE_SENTENCE_WITH_MANDATORY_PUBLIC_END_PHRASE",
+    "hard_unsat_runtime": "canonical/runtime/livebench_legacy15_slot_feasibility_v2.py",
+    "historical_generator_max_instructions_before_deconfliction": 5,
+    "frozen_score_rule": "score=(all_instructions_followed_indicator + fraction_of_individual_instructions_followed)/2",
+    "score_utils_git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676"
+  },
+  "proof": {
+    "exact_two_instruction_case": [
+      "THE_TWO CHECKERS CANNOT BOTH BE TRUE",
+      "THEREFORE all_instructions_followed_indicator=0",
+      "AT MOST ONE_OF_TWO_INDIVIDUAL_CHECKS_CAN_BE_TRUE",
+      "fraction_followed<=1/2",
+      "score<=(0+1/2)/2=1/4"
+    ],
+    "any_case_containing_the_unsat_pair_with_k_total_instructions": [
+      "THE_HARD_UNSAT_PAIR_FORCES all_instructions_followed_indicator=0",
+      "AT_MOST_k-1_OF_k_INDIVIDUAL_CHECKS_CAN_BE_TRUE",
+      "score<=(k-1)/(2k)",
+      "FOR_GENERATOR_ADMITTED_k_IN_[2,5], THE_MAXIMUM_OF_THIS_CEILING_IS_0.4"
+    ],
+    "exact_pair_score_ceiling": 0.25,
+    "superset_case_score_ceiling_for_k_le_5": 0.4
+  },
+  "breakthrough_consequence": [
+    "A UNIVERSAL_PROOF_THAT_EVERY_GENERATOR_ADMITTED_VISIBLE_CONTRACT_TUPLE_CAN_SCORE_1_IS FALSE",
+    "HARD_UNSAT_TUPLES_MUST_BE EXPLICITLY CERTIFIED_AND_ACCOUNTED_FOR",
+    "LIVEBENCH_IF_GE_65_7_CANNOT_BE_CLOSED_BY_RAW_UNIVERSAL_JOINT_SATISFIABILITY",
+    "THE_REMAINING_ACCEPTANCE_PROOF_MUST_USE_A_SOUND_POPULATION_BOUND_OR_AN_ADMISSIBLE_PRECOMMITTED_CLEAN_EVALUATION_AFTER_FREEZING_A_CONTAMINATION_SAFE_CANDIDATE"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROW_CONTENT_READ",
+    "NO_TERMINAL_UNSAT_FREQUENCY_INFERRED",
+    "NO_LOWER_BOUND_ON_FINAL_POPULATION_SCORE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
