@@ -420,14 +420,22 @@
         "verification_run_id": 37185639140,
         "verification_job_id": 111386844731,
         "bridge_path": "canonical/governance/LIVEBENCH_V7_GENERIC_ATOMIC_ONE_USE_EXECUTION_CLAIM_BRIDGE_V1.json",
-        "bridge_git_blob_sha": "ab563b537e1b743a98dd460994b9e0952d699220",
-        "launcher_git_blob_sha": "d977690efd97e093b28474d23b37ee6e4520ed0f",
+        "bridge_git_blob_sha": "ecafd9d73e4e736420ce0c46c037b1e4a80ee417",
+        "launcher_git_blob_sha": "5470223c39f78af008eb90bafd5d780a35230895",
         "epoch_digest_sha256": "5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
-        "claim_ref": "refs/heads/livebench-v7-claims/5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d"
+        "claim_ref": "refs/heads/livebench-v7-claims/5ea710ae6d8b64c9ae990da5bd3ae747806e12843b8c2566bbb1be83d09ab53d",
+        "launcher_verification": {
+          "path": "canonical/verification/LIVEBENCH_V7_ATOMIC_LAUNCHER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+          "git_blob_sha": "0b6f32c6ef239877725869194052c00ff549d28d",
+          "workflow_run_id": 37193437313,
+          "workflow_job_id": 111410251686,
+          "conclusion": "success"
+        }
       },
       "conditions": [
         "PATCHED_DIAGNOSTIC_BLOBS_MATCH",
         "POINT_OF_USE_ZERO_CASE_VERIFIER_PASS",
+        "VERIFIED_CURRENT_ATOMIC_LAUNCHER_BLOB_MATCH",
         "EXACT_ATOMIC_CLAIM_CREATE_RETURNS_201"
       ],
       "on_duplicate_or_non201": "ABORT_BEFORE_DATASET_READ",
