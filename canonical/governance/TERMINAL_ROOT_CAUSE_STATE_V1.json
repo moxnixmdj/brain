@@ -242,7 +242,7 @@
       "stronger_proof_candidate_generation": true,
       "consolidated_authenticated_account_sweep": true,
       "owner_result_races_parallel_zero_attention": true,
-      "precommit_isolation_theorem_status": "UNPROVED_BENCHMARK_SPECIFIC__NO_FRESH_REALITY_EFFECT",
+      "precommit_isolation_theorem_status": "GENERIC_CONDITIONAL_THEOREM_INDEPENDENTLY_PROVED__ZERO_CURRENT_BENCHMARK_INSTANTIATIONS__THIN_ADAPTERS_AND_EXPLICIT_FRESH_REALITY_AUTHORITY_STILL_REQUIRED",
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
@@ -307,6 +307,36 @@
       "family_credit_delta": 0,
       "capability_credit_delta": 0,
       "ownership_credit_delta": 0
+    },
+    "typed_minimum_certificate_basis": {
+      "runtime_path": "canonical/runtime/terminal_typed_minimum_certificate_basis_v1.py",
+      "runtime_git_blob_sha": "b42c81e04109e1ff081517672b397390bb3749e0",
+      "verification_path": "canonical/verification/TYPED_MINIMUM_CERTIFICATE_BASIS_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "069ac4d25f82b62e0ae03e7eb9ae30a3c1a96628",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__26_PREDICATES_TO_29_TYPED_OBLIGATIONS__SCHEDULING_PREPROOF_ONLY__ZERO_CREDIT",
+      "typed_obligations": 29,
+      "comparator_strength_obligations": 19,
+      "scope_completeness_obligations": 10,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false,
+      "acceptance_credit_delta": 0
+    },
+    "generic_precommit_isolation": {
+      "activation_path": "canonical/governance/GENERIC_PRECOMMIT_ISOLATION_THEOREM_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "89b3d8cbbc3b9e0822870ee803fb99c37a82d209",
+      "verification_path": "canonical/verification/GENERIC_PRECOMMIT_ISOLATION_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "e9e07a85e7a932ba7ce024c77897ab9016c72ce4",
+      "projection_verification_path": "canonical/verification/TERMINAL_STRUCTURAL_PARALLELIZATION_ROOT_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "status": "ACTIVE_IFF_EXACT_ROOT_PROJECTION_RECEIPT_EXISTS_AND_PASSES__GENERIC_CONDITIONAL_THEOREM_ONLY__ZERO_CREDIT",
+      "generic_conditional_adaptation_independence_proved": true,
+      "current_benchmark_instantiation_receipts_proved": 0,
+      "benchmark_thin_adapter_still_required": true,
+      "explicit_fresh_reality_authority_still_required": true,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false,
+      "acceptance_credit_delta": 0
     }
   },
   "accounting": {
