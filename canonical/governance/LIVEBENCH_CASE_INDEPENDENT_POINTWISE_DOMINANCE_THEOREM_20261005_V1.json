@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_CASE_INDEPENDENT_POINTWISE_DOMINANCE_THEOREM_20261005_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__CASE_INDEPENDENT_UNIVERSAL_DOMINANCE_PROOF_CHAIN_COMPLETE__INDEPENDENT_COMPOSITION_VERIFICATION_REQUIRED",
+  "status": "CANDIDATE__ACTIVE15_POINTWISE_DOMINANCE_CHAIN_CLOSED__PREDICATE_PROMOTION_BLOCKED_BY_INDEPENDENT_UNION25_SCOPE_PROOF",
   "predicate_id": "LIVEBENCH_IF_GE_65_7",
   "objective": "Prove the fixed 65.7 LiveBench IF predicate without reading or replaying any target row by showing the deterministic Brain construction is pointwise maximal on every generator-admitted checker contract.",
   "frozen_dependencies": {
@@ -95,13 +95,14 @@
   },
   "candidate_consequence": {
     "predicate": "LIVEBENCH_IF_GE_65_7",
-    "forced_true_if_independent_composition_verification_passes": true,
-    "acceptance_credit_delta_if_verified": 1,
+    "forced_true_if_independent_composition_verification_passes": false,
+    "acceptance_credit_delta_if_verified": 0,
     "family_credit_delta": 0,
     "family_stays_open_on": [
       "IF_SCOPE_BOUNDARY_NONINFERIOR",
       "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
-    ]
+    ],
+    "blocked_on": "UNION25_SCOPE_CLOSURE_OR_EXACT_RELEASE_SCOPE_BRIDGE"
   },
   "authority": {
     "scheduling": true,
@@ -110,10 +111,12 @@
     "acceptance_credit": false
   },
   "hard_nonclaims": [
+    "ACTIVE15_CLOSURE_MUST_NOT_BE_PROMOTED_AS_FULL_LIVEBENCH_PREDICATE_AFTER_THE_INDEPENDENT_15_LT_24_LT_25_SCOPE_LATTICE_PROOF",
     "NO_ACCEPTANCE_CREDIT_BEFORE_INDEPENDENT_COMPOSITION_VERIFICATION",
     "NO_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE",
     "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOMIC_PREDICATE",
-    "NO_TERMINAL_GOAL_COMPLETION_CLAIM"
+    "NO_TERMINAL_GOAL_COMPLETION_CLAIM",
+    "UNION25_POINTWISE_OPTIMALITY_IS_NOT_YET_PROVED"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -122,5 +125,16 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "scope_correction": {
+    "authority": "canonical/governance/LIVEBENCH_SCOPE_UNION_BREAKTHROUGH_20261005_V1.json",
+    "authority_git_blob_sha": "db40a9252f65af4782bec23710f3ec5acbff617f",
+    "independent_verification": "canonical/verification/LIVEBENCH_PUBLIC_SCOPE_UNION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+    "active15_count": 15,
+    "historical_generator_count": 24,
+    "full_pinned_registry_count": 25,
+    "full_registry_compatible_identity_sets_1_to_5": 14559,
+    "consequence": "ACTIVE15_POINTWISE_DOMINANCE_IS_A_STRICT_SUBSCOPE_RESULT_AND_CANNOT_BY_ITSELF_FORCE_LIVEBENCH_IF_GE_65_7_WITHOUT_EITHER_AN_INDEPENDENT_EXACT_RELEASE_SCOPE_BRIDGE_TO_ACTIVE15_OR_POINTWISE_CLOSURE_OVER_PUBLIC_UNION25",
+    "required_next": "EXTEND_POINTWISE_CONSTRUCTION_AND_POSTVALIDATION_FROM_ACTIVE15_TO_PUBLIC_UNION25_OR_PROVE_AN_INDEPENDENT_NONCONTAMINATING_RELEASE_SCOPE_BRIDGE"
   }
 }
