@@ -15,10 +15,8 @@ SCHEMA = "PROJECT_BRAIN_LIVEBENCH_IF_PUBLIC_SINGLE_CHECKER_WITNESS_V1"
 PERSON_NAMES = [
     "Emma","Liam","Sophia","Jackson","Olivia","Noah","Ava","Lucas","Isabella","Mason",
     "Mia","Ethan","Charlotte","Alexander","Amelia","Benjamin","Harper","Leo","Zoe","Daniel",
-    "Chloe","Samuel","Lily","Matthew","Grace","Owen","Abigail","Gabriel","Ella","Jacob",
-    "Scarlett","Nathan","Victoria","Elijah","Layla","Nicholas","Audrey","David","Hannah",
-    "Christopher","Penelope","Thomas","Nora","Andrew","Aria","Joseph","Claire","Ryan","Stella",
-    "Jonathan",
+    "Layla","Nicholas","Audrey","David","Hannah","Christopher","Penelope","Thomas","Nora",
+    "Andrew","Aria","Joseph","Claire","Ryan","Stella","Jonathan",
 ]
 CONJUNCTIONS = ["and","but","for","nor","or","so","yet"]
 
