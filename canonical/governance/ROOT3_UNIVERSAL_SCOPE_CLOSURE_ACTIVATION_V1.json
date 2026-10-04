@@ -1,19 +1,25 @@
 {
   "schema": "PROJECT_BRAIN_ROOT3_UNIVERSAL_SCOPE_CLOSURE_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_11_ROOT3_TARGETS_TO_4_WORK_CLASSES__ZERO_CREDIT",
+  "status": "ACTIVE__SYNTHESIS_SCOPE_RELATION_CLOSED__10_ROOT3_TARGETS__3_LIVE_WORK_CLASSES__ZERO_CREDIT",
   "objective": "Minimize canonical Root3 scope-completeness work without weakening proof standards or spending fresh reality before the zero-reality fixed point.",
   "current_truth": {
     "root3_only_predicates": 7,
     "root2_and_root3_predicates": 4,
-    "live_root3_predicates": 11,
+    "live_root3_predicates": 10,
     "current_normalized_witness_pairs_checked": 96,
     "current_direct_reuse_closures": 0,
     "finance_direct_oracle_leaves": 2,
     "unknown_domain_direct_oracle_leaves": 2,
     "composition_components_proved": 4,
     "composition_components_open": 8,
-    "synthesis_operational_atoms_current": 7
+    "synthesis_operational_atoms_current": 7,
+    "synthesis_scope_relation_closed": true,
+    "synthesis_root2_residuals_preserved": [
+      "metric:matched_quality",
+      "matched_quality_noninferiority",
+      "required_claim_coverage_noninferiority"
+    ]
   },
   "exact_work_classes": [
     {
@@ -28,13 +34,6 @@
         "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
       ],
       "policy": "ONE_SHARED_FORMAL_SCOPE_PROOF_PIPELINE__TARGET_SPECIFIC_CERTIFICATES_ONLY__STOP_GENERIC_SEARCH_WHILE_CURRENT_SATURATION_HOLDS"
-    },
-    {
-      "id": "ROOT3_SYNTHESIS_SCOPE_RELATION_V1",
-      "targets": [
-        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
-      ],
-      "policy": "PROVE_ONLY_THE_MISSING_SCOPE_RELATION_FOR_ROOT3__PRESERVE_MATCHED_QUALITY_AND_NUMERIC_BOUNDS_AS_ROOT2_RESIDUALS__DO_NOT_REPROVE_SEVEN_OPERATIONAL_ATOMS"
     },
     {
       "id": "ROOT3_COMPOSITION_DEPENDENCY_RECOMPUTE_V1",
@@ -70,7 +69,8 @@
     "NO_SOURCE_REINTERNALIZATION_FOR_FINANCE_OR_UNKNOWN_DOMAIN",
     "NO_REPROVING_SEVEN_CURRENT_SYNTHESIS_OPERATIONAL_ATOMS",
     "NO_FRESH_REALITY_BEFORE_ZERO_REALITY_FIXED_POINT",
-    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_COMPILER"
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_COMPILER",
+    "SYNTHESIS_ROOT3_SCOPE_RELATION_IS_CLOSED__DO_NOT_REOPEN_WITHOUT_SCOPE_CERTIFICATE_INVALIDATION"
   ],
   "runtime": "canonical/runtime/root3_universal_scope_closure_compiler_v1.py",
   "tests": "canonical/tests/test_root3_universal_scope_closure_compiler_v1.py",
@@ -96,5 +96,16 @@
     "generic_certificate_preprocessor": "canonical/runtime/universal_scope_closure_compiler_v1.py",
     "frontier_compiler": "canonical/runtime/root3_universal_scope_closure_compiler_v1.py",
     "rule": "GENERIC_COMPILER_VALIDATES_CERTIFICATE_SEMANTICS__ROOT3_FRONTIER_COMPILER_MINIMIZES_AND_SCHEDULES_CURRENT_SCOPE_OBLIGATIONS"
-  }
+  },
+  "closed_work_classes": [
+    {
+      "id": "ROOT3_SYNTHESIS_SCOPE_RELATION_V1",
+      "targets": [
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ],
+      "policy": "PROVE_ONLY_THE_MISSING_SCOPE_RELATION_FOR_ROOT3__PRESERVE_MATCHED_QUALITY_AND_NUMERIC_BOUNDS_AS_ROOT2_RESIDUALS__DO_NOT_REPROVE_SEVEN_OPERATIONAL_ATOMS",
+      "status": "CLOSED__INDEPENDENT_LOSSLESS_SCOPE_CERTIFICATE",
+      "certificate": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json"
+    }
+  ]
 }
