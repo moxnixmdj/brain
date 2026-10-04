@@ -72,3 +72,76 @@ def test_v5_large_nonproduction_sweep():
         secret=hashlib.sha256(f"v5-secret-{k}".encode()).digest()
         beacon="V5-VERIFY-"+hashlib.sha256(f"beacon-{k}".encode()).hexdigest()[:24]
         _run(g5._generate(beacon=beacon,evaluator_secret=secret,namespace=f"V5T{k}"))
+
+
+class _AdversarialStr(str):
+    def strip(self,*args,**kwargs):
+        raise RuntimeError("OVERRIDDEN_STRIP_MUST_NOT_RUN")
+
+    def encode(self,*args,**kwargs):
+        raise RuntimeError("OVERRIDDEN_ENCODE_MUST_NOT_RUN")
+
+
+class _AdversarialBytes(bytes):
+    def __bytes__(self):
+        raise RuntimeError("OVERRIDDEN_BYTES_MUST_NOT_RUN")
+
+    def __buffer__(self,*args,**kwargs):
+        raise RuntimeError("OVERRIDDEN_BUFFER_MUST_NOT_RUN")
+
+    def __len__(self):
+        raise RuntimeError("OVERRIDDEN_LEN_MUST_NOT_RUN")
+
+    def __getitem__(self,*args,**kwargs):
+        raise RuntimeError("OVERRIDDEN_GETITEM_MUST_NOT_RUN")
+
+    def __iter__(self):
+        raise RuntimeError("OVERRIDDEN_ITER_MUST_NOT_RUN")
+
+
+def test_v5_totality_includes_isinstance_accepted_str_and_bytes_subclasses():
+    beacon=_AdversarialStr("A"*16+"\ud800")
+    secret_text=_AdversarialStr("S"*31+"\udfff")
+    packet=g5._generate(
+        beacon=beacon,
+        evaluator_secret=secret_text,
+        namespace="V5SUBCLASS",
+    )
+    assert packet["case_count"]==27
+    _run(packet)
+
+    secret_bytes=_AdversarialBytes(b"B"*32)
+    assert g5._secret_bytes_total(secret_bytes)==b"B"*32
+
+
+class _FakeStrProxy:
+    @property
+    def __class__(self):
+        return str
+
+
+class _FakeBytesProxy:
+    @property
+    def __class__(self):
+        return bytes
+
+
+def test_v7_genuine_runtime_type_gate_rejects_class_spoof_proxies():
+    fake_str=_FakeStrProxy()
+    fake_bytes=_FakeBytesProxy()
+    assert isinstance(fake_str,str) is True
+    assert isinstance(fake_bytes,bytes) is True
+    assert issubclass(type(fake_str),str) is False
+    assert issubclass(type(fake_bytes),bytes) is False
+
+    for fn,arg in (
+        (g5._beacon_gate,fake_str),
+        (g5._secret_bytes_total,fake_str),
+        (g5._secret_bytes_total,fake_bytes),
+    ):
+        try:
+            fn(arg)
+        except g1.UnknownDomainGeneratorError:
+            pass
+        else:
+            raise AssertionError("CLASS_SPOOF_PROXY_MUST_BE_REJECTED")
