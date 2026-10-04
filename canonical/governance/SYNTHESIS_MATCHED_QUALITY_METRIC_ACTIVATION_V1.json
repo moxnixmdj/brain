@@ -18,7 +18,8 @@
     "verifier_merge_commit": "cfe8e9102d5615e6d7aa5b69b2ae435d3f640a38",
     "workflow_run_id": 37176553743,
     "workflow_job_id": 111360244300,
-    "conclusion": "success"
+    "conclusion": "success",
+    "git_blob_sha": "8a5be1224383dccfbd917729df285eeb96004825"
   },
   "effects": {
     "delete": [
