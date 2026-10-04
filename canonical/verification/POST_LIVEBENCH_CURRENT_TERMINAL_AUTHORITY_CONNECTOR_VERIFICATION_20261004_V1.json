@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_POST_LIVEBENCH_CURRENT_TERMINAL_AUTHORITY_CONNECTOR_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__CURRENTNESS_AND_SCHEDULER_TRUTH_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/POST_LIVEBENCH_CURRENT_TERMINAL_AUTHORITY_RECONCILIATION_V1.json",
+    "git_blob_sha": "e5905e932601b993399a60dfa98e5d3cd6c4d4ff"
+  },
+  "source_head_observed": "878f5d45bf99809c9117b40f849a10a060c280f3",
+  "exact_blob_checks": [
+    {
+      "name": "root_state",
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "expected": "c3d1e25e2268cce90df545a93f107aa24fed8f8b",
+      "observed": "c3d1e25e2268cce90df545a93f107aa24fed8f8b",
+      "pass": true
+    },
+    {
+      "name": "post_livebench_root_seal",
+      "path": "canonical/governance/POST_LIVEBENCH_CURRENT_ROOT_SEAL_V1.json",
+      "expected": "6dbd4d19bbc432e3927968113658637057a3ee94",
+      "observed": "6dbd4d19bbc432e3927968113658637057a3ee94",
+      "pass": true
+    },
+    {
+      "name": "root2_18_activation",
+      "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_ACTIVATION_V1.json",
+      "expected": "f778e8eeb1295a03465a4cc6d49c3efab2ff80bb",
+      "observed": "f778e8eeb1295a03465a4cc6d49c3efab2ff80bb",
+      "pass": true
+    },
+    {
+      "name": "livebench_root1_reclassification",
+      "path": "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+      "expected": "eef18a73b23db53082b934976bcbd05cab9c5684",
+      "observed": "eef18a73b23db53082b934976bcbd05cab9c5684",
+      "pass": true
+    },
+    {
+      "name": "livebench_forced_fail",
+      "path": "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_BINDING_V1.json",
+      "expected": "98659983c43ac37508177b4003a08cfd5d1e9447",
+      "observed": "98659983c43ac37508177b4003a08cfd5d1e9447",
+      "pass": true
+    }
+  ],
+  "structural_checks": {
+    "partition_1_plus_15_plus_7_plus_3_equals_26": true,
+    "root2_15_plus_3_equals_18": true,
+    "livebench_root1_positive_gap_bound": true,
+    "accepted_families_unchanged": true,
+    "proved_atomic_unchanged": true,
+    "terminal_false": true
+  },
+  "verdict": "PASS",
+  "nonclaims": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_REPAIR_PROVED",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
