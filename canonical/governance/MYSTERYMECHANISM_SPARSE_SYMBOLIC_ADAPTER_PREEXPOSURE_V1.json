@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_SPARSE_SYMBOLIC_ADAPTER_PREEXPOSURE_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_PUBLIC_CONTRACT_ADAPTER_DESIGN__NO_HIDDEN_CASES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "target_predicate": "MYSTERYMECHANISM_GE_49_55",
+  "public_contract": {
+    "source": "https://www.vals.ai/benchmarks/mysterymechanism",
+    "source_updated": "2026-10-01",
+    "mechanism_count": 222,
+    "passive_observations_per_task": 2,
+    "active_experiment_budget_rule": "2*d+1",
+    "anonymous_variables": true,
+    "physical_bounds": true,
+    "final_submission": "ONE_EXECUTABLE_MATHEMATICAL_LAW",
+    "scoring": "PRIVATE_CONTINUOUS_STRUCTURAL_PROBES__BINARY_FUNCTIONAL_RECOVERY_UNDER_NOISE_AWARE_NORMALIZED_ERROR_THRESHOLD",
+    "opus55_reference_percent": 49.55
+  },
+  "discovered_current_brain_gap": {
+    "expression_tree_runtime": "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+    "expression_tree_blob": "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490",
+    "minimum_rows": 8,
+    "two_dimensional_contract_total_rows": 7,
+    "defect": "CURRENT_EXPRESSION_TREE_ROUTE_CANNOT_RUN_ON_THE_PUBLIC_2D_TASK_SHAPE"
+  },
+  "candidate_design": {
+    "runtime": "canonical/runtime/mysterymechanism_sparse_symbolic_adapter_v1.py",
+    "tests": "canonical/tests/test_mysterymechanism_sparse_symbolic_adapter_v1.py",
+    "principles": [
+      "USE_EXISTING_ZERO_LEARNED_CONTINUOUS_POWER_LINEAR_AND_MONOMIAL_SYNTHESIZER_FIRST",
+      "ADD_SPARSE_LEAVE_ONE_OUT_EXPRESSION_TREE_ROUTE_FOR_5_TO_7_OBSERVATION_REGIMES",
+      "RESERVE_FINAL_ACTIVE_EXPERIMENT_FOR_BOUND_CONSTRAINED_MODEL_DISAGREEMENT_WHEN_USEFUL",
+      "USE_FULL_2D_PLUS_1_BUDGET_BUT_NEVER_EXCEED_IT",
+      "SERIALIZE_ONLY_SAFE_EXPLICIT_ARITHMETIC_EXPRESSIONS",
+      "FAIL_CLOSED_IF_NO_LOW_ERROR_STRUCTURAL_CLASS_SURVIVES",
+      "ZERO_PERSISTENT_LEARNED_BYTES",
+      "ZERO_EXTERNAL_LEARNED_CAPABILITY_PROVIDER"
+    ],
+    "sparse_grammar": [
+      "VARIABLE",
+      "CONSTANT_ONE",
+      "NEG",
+      "ABS",
+      "SQUARE",
+      "SQRT_ABS",
+      "CBRT_SIGNED",
+      "POW_ABS_2_3",
+      "POW_ABS_1_4",
+      "POW_ABS_5_8",
+      "POW_ABS_4_5",
+      "LOG1P_ABS",
+      "SAT",
+      "ADD",
+      "SUB",
+      "MUL",
+      "SAFE_DIV",
+      "STABLE_DIV"
+    ],
+    "fit_rule": "LEAVE_ONE_OUT_NORMALIZED_RMSE_PLUS_COMPLEXITY__THEN_REFIT_SELECTED_STRUCTURE_ON_ALL_ROWS",
+    "final_probe_rule": "MAXIMIZE_NORMALIZED_PREDICTION_DISAGREEMENT_ON_DETERMINISTIC_IN_BOUNDS_GRID__ELSE_USE_RESERVED_CENTER"
+  },
+  "verification_plan": {
+    "no_private_or_terminal_cases": true,
+    "public_examples_allowed_for_compatibility_only": true,
+    "synthetic_hidden_from_candidate_motifs": [
+      "POWER_LAW",
+      "AFFINE",
+      "NESTED_SATURATION",
+      "RATIO_CORRECTION"
+    ],
+    "required": [
+      "2D_PLAN_USES_EXACTLY_5_ACTIVE_EXPERIMENTS_WITH_LAST_RESERVED",
+      "EVERY_PROBE_WITHIN_DECLARED_BOUNDS",
+      "PUBLIC_STREAM_POWER_SHAPE_RECOVERS_CONTINUOUS_POWER_EXPONENTS",
+      "SPARSE_7_ROW_ROUTE_EXECUTES_WITHOUT_8_ROW_FAILURE",
+      "OUT_OF_GRAMMAR_CASE_FAILS_CLOSED",
+      "NO_DYNAMIC_EVAL_OR_EXTERNAL_MODEL_CALLS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_MYSTERYMECHANISM_PRIVATE_222_CASE_SCORE_CLAIM",
+    "NO_MYSTERYMECHANISM_GE_49_55_ACCEPTANCE_CREDIT",
+    "NO_UNKNOWN_DOMAIN_FAMILY_PROMOTION",
+    "NO_TERMINAL_TRUE_CLAIM",
+    "PUBLIC_EXAMPLE_SUCCESS_IS_NOT_HELDOUT_GENERALIZATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
