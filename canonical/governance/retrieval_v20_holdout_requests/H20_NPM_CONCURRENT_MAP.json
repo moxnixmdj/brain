@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_HOLDOUT_REQUEST_V1",
+  "episode_id": "H20_NPM_CONCURRENT_MAP",
+  "difficulty": "REGISTRY_BEHAVIOR",
+  "query_action": {
+    "action_id": "H20Q04",
+    "source_id": "NPM_REGISTRY_SEARCH",
+    "query_family": "FRESH_HOLDOUT_BEHAVIOR_V20",
+    "query": "map asynchronous functions concurrently with concurrency limit promise JavaScript"
+  },
+  "source": {
+    "source_id": "NPM_REGISTRY_SEARCH",
+    "provider": "npm",
+    "upstream_group": "NPM_PUBLIC_REGISTRY",
+    "ecosystem": "npm"
+  },
+  "target_identity_present": false
+}
