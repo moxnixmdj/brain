@@ -1,0 +1,29 @@
+name: LiveBench zero-learned extractive summary V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/LIVEBENCH_ZERO_LEARNED_EXTRACTIVE_SUMMARY_PREEXPOSURE_V1.json'
+      - 'canonical/governance/LIVEBENCH_ZERO_LEARNED_EXTRACTIVE_SUMMARY_CANDIDATE_V1.json'
+      - 'canonical/runtime/zero_learned_extractive_summary_v1.py'
+      - 'canonical/tests/test_zero_learned_extractive_summary_v1.py'
+      - '.github/workflows/livebench-zero-learned-extractive-summary-v1.yml'
+  push:
+    branches:
+      - research/livebench-zero-learned-extractive-summary-v1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify extractive summarizer
+        run: python -m unittest canonical.tests.test_zero_learned_extractive_summary_v1 -v
