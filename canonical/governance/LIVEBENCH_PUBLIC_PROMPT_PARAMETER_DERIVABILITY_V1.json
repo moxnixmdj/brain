@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_PROMPT_PARAMETER_DERIVABILITY_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_BENCHMARK_FAMILY_DERIVABILITY_REDUCES_HIDDEN_METADATA_RESIDUAL__EXACT_FROZEN_DATASET_EQUIVALENCE_STILL_REQUIRED__ZERO_CREDIT",
+  "target": "LIVEBENCH_PUBLIC_SCORER_GRAMMAR_SUCCESSOR_REPAIR",
+  "frozen_livebench_source": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "ifbench_readme_blob": "de771a18e7c7625270768fc284e8931cf40f3009",
+    "fact": "IFBench 58 OOD constraint templates are combined with held-out base prompts; verification functions are public."
+  },
+  "reverse_parameter_audit": {
+    "active_instruction_types": 83,
+    "normal_rendered_or_static_parameter_types": 80,
+    "nonrendered_parameter_cases": [
+      {
+        "checker": "NGramOverlapChecker",
+        "parameter": "reference_text",
+        "public_family_derivation": "BASE_REQUEST_TEXT_TO_WHICH_THE_PUBLIC_CONSTRAINT_TEMPLATE_IS_APPENDED",
+        "confidence": "PUBLIC_IFBENCH_DATA_EXAMPLES_SUPPORT__EXACT_FROZEN_LIVEBENCH_DATA_BINDING_PENDING"
+      },
+      {
+        "checker": "RepeatSpanChecker",
+        "parameter": "prompt_to_repeat",
+        "public_family_derivation": "BASE_REQUEST_TEXT_PRECEDING_THE_PUBLIC_COPY_SPAN_CONSTRAINT",
+        "confidence": "PUBLIC_IFBENCH_DATA_EXAMPLES_SUPPORT__EXACT_FROZEN_LIVEBENCH_DATA_BINDING_PENDING"
+      },
+      {
+        "checker": "RepeatPromptThenAnswer",
+        "parameter": "prompt_to_repeat",
+        "public_family_derivation": "VISIBLE_BASE_REQUEST_SEGMENT_PRECEDING_OR_WRAPPED_BY_THE_REPEAT_INSTRUCTION",
+        "confidence": "PUBLIC_IFEVAL_DATA_EXAMPLES_SUPPORT__EXACT_FROZEN_LIVEBENCH_DATA_BINDING_PENDING"
+      }
+    ]
+  },
+  "consequence_if_exact_dataset_binding_verified": [
+    "NO_HIDDEN_INSTRUCTION_ID_LIST_REQUIRED_BY_SUCCESSOR",
+    "NO_HIDDEN_KWARGS_REQUIRED_BY_SUCCESSOR",
+    "ALL_CHECKER_PARAMETERS_ARE_EITHER_EXPLICITLY_RENDERED_STATIC_OR_DERIVABLE_FROM_CANDIDATE_VISIBLE_PROMPT",
+    "UNIVERSAL_REVERSE_GRAMMAR_COMPILER_REMAINS_POSSIBLE"
+  ],
+  "next_exact_proof_obligations": [
+    "BIND_FROZEN_LIVEBENCH_LEGACY_ROWS_TO_IFEVAL_PROMPT_CONSTRUCTION_SEMANTICS_WITHOUT_READING_UNEXPOSED_TERMINAL_CONTENT",
+    "BIND_FROZEN_LIVEBENCH_MODERN_ROWS_TO_IFBENCH_BASE_PROMPT_PLUS_CONSTRAINT_CONSTRUCTION_SEMANTICS_WITHOUT_READING_UNEXPOSED_TERMINAL_CONTENT",
+    "VERIFY_PROMPT_SEGMENTATION_ALGORITHM_RECOVERS_BASE_REQUEST_AND_APPENDED_CONSTRAINT_FROM_SYNTHETIC_PUBLIC_GENERATOR_CASES",
+    "VERIFY_NO_OTHER_HIDDEN_METADATA_ENTERS_ANY_CHECK_FOLLOWING_PREDICATE"
+  ],
+  "contamination_firewall": [
+    "NO_UNEXPOSED_LIVEBENCH_TERMINAL_CASE_CONTENT",
+    "NO_CASE_SPECIFIC_PROMPT_RULES",
+    "PUBLIC_UPSTREAM_SOURCE_AND_PUBLIC_BENCHMARK_FAMILY_DATA_ONLY",
+    "EXACT_FROZEN_DATASET_BINDING_REQUIRED_BEFORE_PROMOTION_TO_PROOF"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_YET_PROVE_EXACT_FROZEN_DATASET_EQUIVALENCE",
+    "DOES_NOT_CLOSE_LIVEBENCH",
+    "DOES_NOT_GRANT_ACCEPTANCE_OR_NEW_CASE_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
