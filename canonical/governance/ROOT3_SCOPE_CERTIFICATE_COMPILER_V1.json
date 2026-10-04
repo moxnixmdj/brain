@@ -1,0 +1,129 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_SCOPE_CERTIFICATE_COMPILER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FOUR_ADMISSIBLE_SCOPE_CERTIFICATE_CLASSES__ZERO_CREDIT",
+  "scope": "ROOT3_ONLY",
+  "current_root3": {
+    "affected_predicate_count": 10,
+    "root3_only_count": 7,
+    "root2_and_root3_count": 3,
+    "synthesis_scope_closed": true
+  },
+  "admissible_certificate_classes": {
+    "EXACT_ENUMERATION": {
+      "closes_when": [
+        "TARGET_SCOPE_IS_CONTENT_ADDRESSED_FINITE_UNIVERSE",
+        "EVERY_MEMBER_IS_EXHAUSTIVELY_ENUMERATED",
+        "PROPERTY_VERIFIED_FOR_EVERY_MEMBER",
+        "NO_UNCOVERED_MEMBER"
+      ]
+    },
+    "INDUCTIVE_INVARIANT": {
+      "closes_when": [
+        "INITIAL_STATE_IMPLIES_INVARIANT",
+        "INVARIANT_AND_ALLOWED_TRANSITION_IMPLY_NEXT_INVARIANT",
+        "INVARIANT_IMPLIES_TARGET_PROPERTY",
+        "TRANSITION_AND_DOMAIN_SCOPE_EXACT_OR_SUPERSET"
+      ]
+    },
+    "ASSUME_GUARANTEE_COMPOSITION": {
+      "closes_when": [
+        "EVERY_USED_COMPONENT_HAS_SCOPED_PROOF",
+        "ASSUMPTION_GUARANTEE_INTERFACES_ARE_COMPATIBLE",
+        "COMPOSITION_THEOREM_IMPLIES_GLOBAL_TARGET_PROPERTY"
+      ]
+    },
+    "EXACT_RESIDUAL_OBSERVATION": {
+      "closes_when": [
+        "RESIDUAL_SET_IS_CONTENT_ADDRESSED_AND_EXHAUSTIVE",
+        "ZERO_REALITY_FIXED_POINT_REACHED",
+        "FRESH_REALITY_EXPLICITLY_AUTHORIZED",
+        "EVERY_RESIDUAL_LEAF_OBSERVED_AND_INDEPENDENTLY_VERIFIED"
+      ]
+    }
+  },
+  "forbidden_shortcuts": [
+    "REPRESENTATIVE_EXAMPLES_DO_NOT_PROVE_UNIVERSAL_SCOPE",
+    "SEARCH_MISS_DOES_NOT_PROVE_NONEXISTENCE",
+    "PROBABILITY_OR_CONSENSUS_DOES_NOT_REPLACE_SCOPE_PROOF",
+    "SHARED_POPULATION_IDENTITY_DOES_NOT_SHARE_TARGET_SPECIFIC_SEMANTICS",
+    "NO_CROSS_FAMILY_PASS_INHERITANCE"
+  ],
+  "current_campaigns": [
+    {
+      "id": "AGENCY_SCOPE_CERT",
+      "targets": [
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+      ],
+      "preferred": "INDUCTIVE_INVARIANT",
+      "fallback": "ROOT3_MATCHED_SUPERPORTFOLIO_WAVE"
+    },
+    {
+      "id": "IF_SCOPE_CERT",
+      "targets": [
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR"
+      ],
+      "preferred": "INDUCTIVE_INVARIANT",
+      "fallback": "ROOT3_MATCHED_SUPERPORTFOLIO_WAVE"
+    },
+    {
+      "id": "COMPOSITION_SCOPE_CERT",
+      "targets": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "preferred": "ASSUME_GUARANTEE_COMPOSITION",
+      "fallback": "ROOT3_MATCHED_SUPERPORTFOLIO_WAVE"
+    },
+    {
+      "id": "VISION_SCOPE_CERT",
+      "targets": [
+        "VISION_DENSE_NONCHART_SCOPE"
+      ],
+      "preferred": "EXACT_ENUMERATION_OR_INDUCTIVE_INVARIANT",
+      "fallback": "ROOT3_MATCHED_SUPERPORTFOLIO_WAVE"
+    },
+    {
+      "id": "FINANCE_DIRECT_RESIDUAL",
+      "targets": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
+      ],
+      "preferred": "PROVE_EXISTING_INVARIANT_IMPLIES_RESIDUAL",
+      "fallback": "EXACT_RESIDUAL_OBSERVATION",
+      "frozen_leaf_count": 2
+    },
+    {
+      "id": "UNKNOWN_DIRECT_RESIDUAL",
+      "targets": [
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "preferred": "PROVE_V6_OR_EXISTING_INVARIANT_IMPLIES_RESIDUAL",
+      "fallback": "EXACT_RESIDUAL_OBSERVATION",
+      "frozen_leaf_count": 2
+    }
+  ],
+  "optimization": {
+    "lexicographic_objective": [
+      "MIN_CRITICAL_PATH_DEPTH",
+      "MIN_FRESH_REALITY_UNITS",
+      "MIN_ACTION_COUNT",
+      "MIN_FALSE_PROOF_RISK"
+    ],
+    "shared_empirical_fallback": "ONE_MATCHED_SUPERPORTFOLIO_WAVE_PLUS_ONE_FOUR_LEAF_DIRECT_ORACLE_BATCH",
+    "composition_receipt_rule": "EVENT_DRIVEN_FROM_UPSTREAM_SCOPE_COMPLETE_RECEIPTS__NO_SEPARATE_REALITY"
+  },
+  "next": "COMPILE_CURRENT_CERTIFICATE_CANDIDATES__TRY_FORMAL_CLOSURE_FOR_FOUR_SCOPE_POPULATIONS_AND_FOUR_DIRECT_LEAVES__THEN_RECOMPUTE_ROOT3_FIXED_POINT",
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
