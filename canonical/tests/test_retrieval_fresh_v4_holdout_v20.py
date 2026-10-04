@@ -16,9 +16,8 @@ def test_v4_plan_is_answer_key_blind():
             query_actions=[v20.query_action(row)],
             sources=[v20.source_row(row)],
         )
-        s=__import__("json").dumps(plan,ensure_ascii=False).casefold()
         t=v20.v11._norm(row["target"])
-        assert t not in s
+        assert not v20.identity_leaked(plan,t)
 
 if __name__=="__main__":
     test_validate();test_targets_are_new_vs_v11();test_v4_plan_is_answer_key_blind()
