@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_RETRIEVAL_V20_HOLDOUT_REQUEST_V1",
+  "episode_id": "H20_GITHUB_AR_NLP",
+  "difficulty": "MULTILINGUAL",
+  "query_action": {
+    "action_id": "H20Q03",
+    "source_id": "GITHUB_REPOSITORY_SEARCH",
+    "query_family": "FRESH_HOLDOUT_BEHAVIOR_V20",
+    "query": "Arabic natural language processing morphology dialect toolkit Python",
+    "script": "ARABIC",
+    "language_variants": [
+      {
+        "language": "ar",
+        "text": "أدوات معالجة اللغة العربية صرف لهجات Python"
+      }
+    ]
+  },
+  "source": {
+    "source_id": "GITHUB_REPOSITORY_SEARCH",
+    "provider": "github",
+    "upstream_group": "GITHUB_PUBLIC_API",
+    "source_class": "repository",
+    "script": "ARABIC"
+  },
+  "target_identity_present": false
+}
