@@ -154,3 +154,23 @@ def test_end_forbidden_noncollision_is_not_false_positive():
         c("keywords:forbidden_words", forbidden_words=["agency", "can"]),
     ])
     assert proof == {"proved": False}
+
+
+def test_section_forbidden_is_routed_through_canonical_unsat_kernel():
+    out = g.generate([
+        c("detectable_format:multiple_sections", section_spliter="Section", num_sections=3),
+        c("keywords:forbidden_words", forbidden_words=["section"]),
+    ])
+    assert out["status"] == "PROVED_UNSAT_VISIBLE_CONSTRAINTS"
+    assert out["candidates"] == []
+    assert "MANDATORY_SECTION_SPLITTER_IS_FORBIDDEN_WORD:section" in out["unsat_proof"]["hard_unsat_reasons"]
+
+
+def test_sentence_lt_one_plus_public_end_is_routed_through_canonical_unsat_kernel():
+    out = g.generate([
+        c("length_constraints:number_sentences", num_sentences=1, relation="less than"),
+        c("startend:end_checker", end_phrase="Any other questions?"),
+    ])
+    assert out["status"] == "PROVED_UNSAT_VISIBLE_CONSTRAINTS"
+    assert out["candidates"] == []
+    assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in out["unsat_proof"]["hard_unsat_reasons"]
