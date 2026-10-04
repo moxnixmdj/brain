@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_WORKFLOW_CONTROL_CONTRACT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__POINT_OF_USE_FAIL_CLOSED_CONTROL_CONTRACT__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Require all pre-exposure gates immediately before any terminal case reveal and make durable one-use claim success the final precondition for reveal.",
+  "ordered_protocol": [
+    "VERIFY_EXACT_PREEXPOSURE_PLAN_HASH_AND_COMPONENT_HASHES",
+    "VERIFY_BENCHMARK_THIN_ADAPTER_AND_ZERO_SPEND_BOUNDARIES",
+    "RUN_ZERO_CASE_RESOURCE_AND_DEPENDENCY_PREFLIGHT",
+    "VERIFY_CASE_REVEAL_EXECUTION_AND_OUTPUT_HAVE_NOT_OCCURRED",
+    "VERIFY_WRITE_ONLY_ESCROW_CONTRACT_AND_OUTPUT_BINDING",
+    "VERIFY_SEPARATE_SHADOW_COLLECTION_ACTIVATION_RECEIPT",
+    "CREATE_DURABLE_ONE_USE_CLAIM_REF_KEYED_BY_LEASE_DIGEST",
+    "REQUIRE_FIRST_CREATE_SUCCESS",
+    "ONLY_THEN_ALLOW_CASE_REVEAL",
+    "WRITE_RESULT_ONLY_TO_BOUND_ESCROW",
+    "EMIT_POST_EXECUTION_GENERIC_ISOLATION_RECEIPT"
+  ],
+  "fail_closed_conditions": [
+    "ANY_COMPONENT_HASH_DRIFT",
+    "ANY_PREEXPOSURE_PLAN_DIGEST_DRIFT",
+    "ANY_THIN_ADAPTER_GATE_FALSE",
+    "ZERO_SPEND_OR_RESOURCE_PREFLIGHT_FAIL",
+    "CASE_REVEAL_ALREADY_OCCURRED",
+    "EXECUTION_ALREADY_STARTED",
+    "RESULT_ALREADY_EXISTS",
+    "SHADOW_ACTIVATION_MISSING_OR_INVALID",
+    "CLAIM_REF_ALREADY_EXISTS",
+    "CLAIM_REF_CREATE_FAILURE",
+    "ESCROW_NONVISIBILITY_NOT_PROVED"
+  ],
+  "hard_rules": [
+    "NO_TERMINAL_CASE_CONTENT_MAY_BE_READ_BEFORE_SUCCESSFUL_ONE_USE_CLAIM",
+    "NO_PRECLAIM_READINESS_MAY_GRANT_CASE_REVEAL",
+    "NO_GLOBAL_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  },
+  "shadow_collection_authority": false,
+  "fresh_reality_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
