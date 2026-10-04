@@ -254,5 +254,13 @@
       "frontier_verification": "canonical/verification/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "acceptance_credit_delta": 0
     }
+  },
+  "root3_pointer_reconciliation_verification": {
+    "path": "canonical/verification/ROOT3_ROOT_CAUSE_POINTER_PUBLIC_RUNNER_VERIFICATION_20261004_V2.json",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT_CAUSE_AND_TERMINAL_AUTHORITY_ALIGNED_ON_ROOT3_V2__ZERO_CREDIT",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_pull_request": 1571,
+    "verifier_merge_commit": "73d087aa201ed40f8b879bf98c5050b8e7dd4d29",
+    "workflow_run_id": 37168503920
   }
 }
