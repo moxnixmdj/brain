@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_MINIMUM_CAUSAL_DEPTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT",
+  "subjects": {
+    "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_PLAN_V1.json": "3c203a1c2060b333a2e13417ab3a3a2880c94f2c",
+    "canonical/governance/ARENA_COMPARATOR_PUBLIC_SEMANTICS_RECONCILIATION_V1.json": "d9bbedb43e8b5da66331d9cdd7254718a7ab23db",
+    "canonical/runtime/terminal_minimum_causal_depth_guard_v1.py": "8033a0e8d30b7f2e3b759518a0bfc964a57bfa3b",
+    "canonical/tests/test_terminal_minimum_causal_depth_guard_v1.py": "2e28278ddee11d66cf54b1e08e1b2e706e55af58"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1777,
+    "merged_commit": "cc900e76e7a2b6971d2c38ed899ac087d0b9edd6",
+    "workflow_run_id": 37190119446,
+    "conclusion": "success"
+  },
+  "verified": [
+    "TERMINAL_COUNTS_PRESERVED_5_ACCEPTED_12_PROVED_26_UNRESOLVED",
+    "RELATIVE_ELO_ABSOLUTE_TRANSPORT_REMAINS_FAIL_CLOSED",
+    "ARENA_PUBLIC_SEMANTICS_DO_NOT_IMPLY_ACCOUNT_MODEL_ENTITLEMENT",
+    "ARENA_PUBLIC_SEMANTICS_DO_NOT_IMPLY_ZERO_INCREMENTAL_SPEND",
+    "GENERIC_ISOLATION_STRUCTURE_DOES_NOT_GRANT_FRESH_REALITY_AUTHORITY",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
