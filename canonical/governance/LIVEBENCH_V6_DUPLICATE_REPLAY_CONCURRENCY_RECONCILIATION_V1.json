@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V6_DUPLICATE_REPLAY_CONCURRENCY_RECONCILIATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__DUPLICATE_ONE_EPOCH_EXECUTION_DETECTED__SECOND_REPLAY_NONAUTHORITATIVE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "activation": {
+    "path": "canonical/governance/LIVEBENCH_RETRY_EXECUTION_EPOCH_V6_ACTIVATION_V1.json",
+    "git_blob_sha": "c449329ad9e6e9ac001c5a1cdb2f3fa187fa49b3",
+    "declared_rule": "ONE_REPLAY_EPOCH_ONLY"
+  },
+  "authoritative_first_epoch": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37191763314,
+    "workflow_job_id": 111405270609,
+    "evidence_branch": "execute/livebench-replay72-v6-20261004",
+    "evidence_commit": "59c9a029027b7c3eed4bb80f22933e7ddb2ddfb1",
+    "prelaunch_timestamp_utc": "2026-10-04T09:19:19.1687446Z",
+    "terminal_result_timestamp_utc": "2026-10-04T09:20:06.6668582Z",
+    "canonical_truth_receipt": {
+      "path": "canonical/verification/LIVEBENCH_V6_REPLAY72_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+    },
+    "result": {
+      "terminal_cases_consumed": 72,
+      "valid_candidate_responses": 0,
+      "policy_blocked_count": 43,
+      "runtime_exit_count": 29,
+      "recorded_score_mass": 0,
+      "arithmetic_fail_forced": true,
+      "predicate_failure_admissible": false
+    },
+    "authority": "FIRST_AND_ONLY_ADMISSIBLE_V6_REPLAY_EPOCH"
+  },
+  "non_authoritative_duplicate_epoch": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37191913947,
+    "workflow_job_id": 111405727774,
+    "head_sha": "c3c14e3143aa6f0b87cd57cbd398c49059f64b0a",
+    "run_index_path": "LIVEBENCH_V6_REPLAY72_RUN_INDEX.json",
+    "run_index_git_blob_sha": "c2f7fd3a2188da92f23a8c30304756c2aff70816",
+    "prelaunch_timestamp_utc": "2026-10-04T09:22:04.0477645Z",
+    "terminal_result_timestamp_utc": "2026-10-04T09:22:57.2493102Z",
+    "result": {
+      "terminal_cases_replayed": 72,
+      "new_case_exposure_count": 0,
+      "valid_candidate_responses": 0,
+      "policy_blocked_count": 43,
+      "runtime_exit_count": 29,
+      "recorded_score_mass": 0,
+      "conservative_full_population_upper_percent": 64.0,
+      "arithmetic_fail_forced": true
+    },
+    "disposition": "NONAUTHORITATIVE_DUPLICATE_EXECUTION__MUST_NOT_ADD_ACCEPTANCE_CAPABILITY_OR_REALITY_CREDIT"
+  },
+  "ordering_proof": {
+    "first_terminal_result_precedes_second_prelaunch": true,
+    "first_terminal_result_timestamp_utc": "2026-10-04T09:20:06.6668582Z",
+    "second_prelaunch_timestamp_utc": "2026-10-04T09:22:04.0477645Z",
+    "interpretation": "THE_SECOND_EXECUTION_BEGAN_AFTER_THE_AUTHORIZED_ONE_EPOCH_LEASE_HAD_ALREADY_BEEN_CONSUMED"
+  },
+  "root_cause": {
+    "class": "CONTROL_PLANE_LINEARIZATION_FAILURE",
+    "cause": "V6_LAUNCHER_VERIFIED_POINT_OF_USE_ROOT_COMPATIBILITY_BUT_DID_NOT_ATOMICALLY_CLAIM_A_GLOBALLY_UNIQUE_ONE_USE_EXECUTION_REF_BEFORE_EXECUTION",
+    "existing_reusable_primitive": {
+      "runtime": "canonical/runtime/livebench_shadow_atomic_claim_transaction_v1.py",
+      "git_blob_sha": "f4a5b0ac63214277befdca79f6cb32e2acedc0c6",
+      "verification": "canonical/verification/LIVEBENCH_SHADOW_ATOMIC_CLAIM_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "verification_git_blob_sha": "e436fa6bcd0c37e1e16c3524e05a876843945904",
+      "proved_semantics": "ATOMIC_FIRST_GIT_REF_CREATE_201_IS_ONE_USE_LINEARIZATION_POINT__DUPLICATE_422_FAILS_CLOSED"
+    }
+  },
+  "required_repair": [
+    "MARK_V6_REPLAY_EPOCH_SPENT_AND_FORBID_ANY_ADDITIONAL_V6_REPLAY",
+    "REQUIRE_ATOMIC_FIRST_CREATE_ONE_USE_CLAIM_BEFORE_ANY_FUTURE_ONE_EPOCH_BENCHMARK_REPLAY",
+    "NO_PRIOR_ABSENCE_CHECK__ATOMIC_CREATE_RESPONSE_IS_THE_LINEARIZATION_POINT",
+    "DUPLICATE_OR_NON_201_CREATE_MUST_FAIL_BEFORE_CASE_READ_OR_EXECUTION",
+    "BIND_CLAIM_TO_EXACT_ACTIVATION_CANDIDATE_AND_EXECUTION_SCOPE"
+  ],
+  "hard_nonclaims": [
+    "NO_NEW_CASE_73_OR_LATER_EXPOSED_BY_DUPLICATE",
+    "NO_LIVEBENCH_CAPABILITY_FAILURE_PROVED",
+    "NO_ROOT1_REOPEN",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_SECOND_REPLAY_RESULT_AS_INDEPENDENT_ACCEPTANCE_EVIDENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_case_exposure_count_from_duplicate": 0,
+    "duplicate_replayed_existing_case_count": 72,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "additional_v6_replay_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
