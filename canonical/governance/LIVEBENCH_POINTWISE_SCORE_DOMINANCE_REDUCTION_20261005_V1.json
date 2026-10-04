@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_POINTWISE_SCORE_DOMINANCE_REDUCTION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__DISTRIBUTION_FREE_POINTWISE_DOMINANCE_REDUCTION__EXECUTABLE_CERTIFICATE_KERNEL_BOUND__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "problem_deleted_if_proved": [
+    "UNKNOWN_TERMINAL_CASE_FREQUENCIES",
+    "UNKNOWN_TERMINAL_ID_COMBINATION_FREQUENCIES",
+    "NEED_TO_IDENTIFY_132_SPECIFIC_FULL_SCORE_CASES_BEFORE_PROVING_NONINFERIORITY",
+    "NEED_TO_FORCE_FULL_SCORE_ON_LOGICALLY_UNSATISFIABLE_CONTRACT_TUPLES"
+  ],
+  "frozen_public_scorer": {
+    "score_formula": "S_q(r) = (I[g_q(r)=k_q] + g_q(r)/k_q)/2",
+    "population_count": 200,
+    "exact_opus_comparator_mean_percent": 65.73775,
+    "score_bound_runtime": "canonical/runtime/livebench_if_score_bound_v1.py",
+    "score_bound_runtime_git_blob_sha": "f8e4f2bb0d537bfd4646c4037cf74238f7b0d4df"
+  },
+  "theorem": {
+    "definitions": [
+      "FOR_EACH_FROZEN_CASE_q__LET_M_q_BE_THE_MAXIMUM_EXACT_PUBLIC_CHECKER_SCORE_OVER_ALL_POSSIBLE_RESPONSES",
+      "THE_OPUS_RESPONSE_FOR_q_IS_ONE_MEMBER_OF_THAT_RESPONSE_SPACE__THEREFORE_S_q(OPUS_q)_LE_M_q",
+      "IF_A_PRECOMMITTED_BRAIN_SOLVER_RETURNS_A_RESPONSE_WITH_SCORE_M_q_FOR_EVERY_q__THEN_MEAN_q_S_q(BRAIN_q)_GE_MEAN_q_S_q(OPUS_q)"
+    ],
+    "conclusion": "POINTWISE_EXACT_SCORE_OPTIMALITY_IMPLIES_DISTRIBUTION_FREE_NONINFERIORITY_TO_OPUS_ON_THE_IDENTICAL_FROZEN_POPULATION",
+    "threshold_consequence": "BECAUSE_THE_ACCEPTANCE_BAR_IS_THE_EXACT_OPUS_MEAN_65_73775_PERCENT__A_POINTWISE_OPTIMAL_SOLVER_MEETS_OR_EXCEEDS_THE_BAR_WITHOUT_READING_OR_INFERING_TERMINAL_CASE_FREQUENCIES",
+    "requires_terminal_frequency_knowledge": false,
+    "requires_terminal_combination_frequency_knowledge": false,
+    "requires_every_case_to_be_jointLY_satisfiable": false
+  },
+  "bounded_case_certificate": {
+    "historical_generator_max_checkers_per_case": 5,
+    "candidate_response_true_checker_count": "g",
+    "optimality_rule": "IF_THE_CANDIDATE_SATISFIES_g_CHECKERS_AND_EVERY_SUBSET_OF_EXACTLY_g_PLUS_1_CHECKERS_IS_INDEPENDENTLY_PROVED_JOINTLY_UNSAT__THEN_NO_RESPONSE_CAN_SATISFY_MORE_THAN_g_CHECKERS",
+    "proof": [
+      "ANY_RESPONSE_SATISFYING_MORE_THAN_g_CHECKERS_NECESSARILY_SATISFIES_AT_LEAST_ONE_SUBSET_OF_EXACTLY_g_PLUS_1_CHECKERS",
+      "IF_ALL_SUCH_g_PLUS_1_SUBSETS_ARE_UNSAT__NO_SUCH_RESPONSE_EXISTS",
+      "THE_FROZEN_SCORE_IS_STRICTLY_MONOTONE_IN_TRUE_CHECKER_COUNT_FOR_g_LESS_THAN_k_AND_FULL_SCORE_IS_MAXIMAL_AT_g_EQUALS_k",
+      "THEREFORE_THE_CANDIDATE_SCORE_IS_POINTWISE_MAXIMAL"
+    ],
+    "maximum_required_unsat_subset_certificates_per_case": 10,
+    "worst_case": "k=5__g=2__C(5,3)=10",
+    "full_score_case_unsat_certificates_required": 0
+  },
+  "executable_kernel": {
+    "runtime": "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py",
+    "runtime_git_blob_sha": "f0e1faae5b5d1a90a1184fe6cca409591acbbb27",
+    "tests": "canonical/tests/test_livebench_pointwise_optimality_certificate_v1.py",
+    "tests_git_blob_sha": "af762ebcdf9ed5a85db090f10de8216f23465410",
+    "runtime_commit": "a1152bdab21ae50de42f67aac3a515bd43d347c7",
+    "tests_commit": "7a8849f7af0403c3d32adc4f2ae6d70f5c1b005",
+    "kernel_scope": "STRUCTURAL_CERTIFICATE_COMPLETENESS_ONLY__SEMANTIC_UNSAT_PROOFS_MUST_BE_INDEPENDENTLY_VERIFIED_INPUTS"
+  },
+  "scheduler_rewrite": {
+    "delete_as_unnecessarily_distribution_dependent": [
+      "SEARCH_FOR_TERMINAL_CASE_FREQUENCIES_TO_LOCATE_132_FULL_SCORE_ROWS",
+      "REQUIRE_UNIVERSAL_FULL_SCORE_ON_GENERATOR_ADMITTED_UNSAT_TUPLES"
+    ],
+    "replace_with": [
+      "PRECOMMIT_A_PROMPT_ONLY_ACTIVE15_CASE_SOLVER",
+      "FOR_EACH_VISIBLE_CONTRACT_TUPLE_GENERATE_THE_BEST_AVAILABLE_CANDIDATE_RESPONSE",
+      "EXACTLY_POSTVALIDATE_CANDIDATE_CHECKER_BOOLEANS_WITH_PINNED_PUBLIC_CHECKER_BYTES",
+      "WHEN_NOT_FULL_SCORE__PROVE_EVERY_NEXT_CARDINALITY_CHECKER_SUBSET_UNSAT_USING_CHECKER_SEMANTICS",
+      "EMIT_A_MACHINE_CHECKABLE_POINTWISE_OPTIMALITY_CERTIFICATE",
+      "FAIL_CLOSED_ON_ANY_CASE_WITHOUT_A_COMPLETE_OPTIMALITY_CERTIFICATE",
+      "INDEPENDENTLY_VERIFY_THE_GENERIC SOLVER_AND_UNSAT_KERNEL_BEFORE_ANY_FRESH_TERMINAL_EXECUTION"
+    ],
+    "critical_next_proof": "BUILD_A_SOUND_SEMANTIC_UNSAT_KERNEL_FOR_THE_ACTIVE15_VISIBLE_SLOT_CONTRACTS_AND_COUPLE_IT_TO_CANDIDATE_POSTVALIDATION__ONLY_CASE_LOCAL_g_PLUS_1_SUBSETS_NEED_CERTIFICATION",
+    "why_higher_leverage": "THE_PROOF_OBLIGATION IS_BOUNDED_BY_AT_MOST_10_NEXT_CARDINALITY_UNSAT_CERTIFICATES_PER_CASE_AND_DOES_NOT_REQUIRE_TERMINAL_DISTRIBUTION_DISCOVERY"
+  },
+  "relation_to_slot_feasibility_truth_repair": {
+    "prior_path": "canonical/governance/LIVEBENCH_SLOT_FEASIBILITY_TRUTH_REPAIR_20261005_V1.json",
+    "preserved": [
+      "ID_COMPATIBILITY_DOES_NOT_IMPLY_SLOT_SATISFIABILITY",
+      "UNSAT_CERTIFICATES_MUST_FOLLOW_EXACT_PINNED_CHECKER_SEMANTICS",
+      "NO_TERMINAL_ROW_CONTENT_OR_FREQUENCY_INFERENCE"
+    ],
+    "strict_improvement": "UNSAT_TUPLES_NO_LONGER_REQUIRE_A_SPECIAL_GLOBAL_EXCEPTION_OR_FULL_SATISFACTION__THEY_ARE_HANDLED_BY_POINTWISE_MAX_SCORE_CERTIFICATES"
+  },
+  "hard_nonclaims": [
+    "THE_CURRENT_JOINT_WITNESS_IS_NOT_YET_PROVED_POINTWISE_OPTIMAL",
+    "THE_CURRENT_TWO_HARD_UNSAT_CLASSES_ARE_NOT_CLAIMED_COMPLETE",
+    "THE_STRUCTURAL_CERTIFICATE_KERNEL_DOES_NOT_BY_ITSELF_PROVE_SEMANTIC_UNSAT",
+    "NO_TERMINAL_ROW_CONTENT_WAS_READ_FOR_THIS_REDUCTION",
+    "NO_TERMINAL_CASE_FREQUENCY_IS_INFERRED",
+    "NO_FRESH_TERMINAL_EXECUTION_IS_AUTHORIZED",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_IS_GRANTED"
+  ],
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
