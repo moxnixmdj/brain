@@ -42,14 +42,13 @@ def policy_digest(policy:Mapping[str,Any])->str:
     return "sha256:"+hashlib.sha256(body).hexdigest()
 
 
-def compile_verified_policy(
+def build_policy_candidate(
     *,
     episodes:Sequence[Mapping[str,Any]],
     incumbent_strategy:str,
     candidate_strategy:str,
     environment_class:str,
     comparison_verification_receipt:Mapping[str,Any],
-    policy_artifact_receipt:Mapping[str,Any],
 )->dict[str,Any]:
     comp=meta.compare(
         episodes=episodes,
@@ -63,29 +62,13 @@ def compile_verified_policy(
         verification_receipt=comparison_verification_receipt,
     )
     digest=policy_digest(base)
-    r=policy_artifact_receipt
-    if (
-        r.get("independent_verified") is not True
-        or r.get("exact_byte_bound") is not True
-        or r.get("conclusion")!="success"
-    ):
-        raise LearningStrategyOptimizerError("POLICY_ARTIFACT_RECEIPT_INVALID")
-    if _s(r.get("environment_class"))!=_s(environment_class):
-        raise LearningStrategyOptimizerError("POLICY_ARTIFACT_ENVIRONMENT_MISMATCH")
-    if _s(r.get("strategy_id"))!=_s(candidate_strategy):
-        raise LearningStrategyOptimizerError("POLICY_ARTIFACT_STRATEGY_MISMATCH")
-    if r.get("policy_sha256")!=digest:
-        raise LearningStrategyOptimizerError("POLICY_ARTIFACT_DIGEST_MISMATCH")
-    rid=_s(r.get("receipt_id"))
-    if not rid:
-        raise LearningStrategyOptimizerError("POLICY_ARTIFACT_RECEIPT_ID_REQUIRED")
     return {
         "schema":SCHEMA,
         **base,
         "policy_sha256":digest,
-        "policy_verification_receipt":dict(r),
-        "verified_policy":True,
-        "selection_authority":"MATCHED_VERIFIED_ENVIRONMENT_CLASS_ONLY",
+        "verified_policy":False,
+        "candidate_only":True,
+        "selection_authority":"NONE_UNTIL_INDEPENDENT_POLICY_ARTIFACT_VERIFICATION",
         "execution_authority":False,
         "promotion_authority":False,
         "fresh_reality_authority":False,
@@ -93,6 +76,55 @@ def compile_verified_policy(
         "ownership_credit_delta":0,
     }
 
+
+def verify_policy_candidate(*,candidate:Mapping[str,Any],policy_artifact_receipt:Mapping[str,Any])->dict[str,Any]:
+    expected=policy_digest(candidate)
+    if candidate.get("policy_sha256")!=expected:
+        raise LearningStrategyOptimizerError("POLICY_CANDIDATE_DIGEST_INVALID")
+    r=policy_artifact_receipt
+    if (
+        r.get("independent_verified") is not True
+        or r.get("exact_byte_bound") is not True
+        or r.get("conclusion")!="success"
+    ):
+        raise LearningStrategyOptimizerError("POLICY_ARTIFACT_RECEIPT_INVALID")
+    env=_s(candidate.get("environment_class"))
+    strategy=_s(candidate.get("preferred_learning_strategy"))
+    if _s(r.get("environment_class"))!=env:
+        raise LearningStrategyOptimizerError("POLICY_ARTIFACT_ENVIRONMENT_MISMATCH")
+    if _s(r.get("strategy_id"))!=strategy:
+        raise LearningStrategyOptimizerError("POLICY_ARTIFACT_STRATEGY_MISMATCH")
+    if r.get("policy_sha256")!=expected:
+        raise LearningStrategyOptimizerError("POLICY_ARTIFACT_DIGEST_MISMATCH")
+    rid=_s(r.get("receipt_id"))
+    if not rid:
+        raise LearningStrategyOptimizerError("POLICY_ARTIFACT_RECEIPT_ID_REQUIRED")
+    return {
+        **dict(candidate),
+        "verified_policy":True,
+        "candidate_only":False,
+        "selection_authority":"MATCHED_VERIFIED_ENVIRONMENT_CLASS_ONLY",
+        "policy_verification_receipt":dict(r),
+    }
+
+
+def compile_verified_policy(
+    *,
+    episodes:Sequence[Mapping[str,Any]],
+    incumbent_strategy:str,
+    candidate_strategy:str,
+    environment_class:str,
+    comparison_verification_receipt:Mapping[str,Any],
+    policy_artifact_receipt:Mapping[str,Any],
+)->dict[str,Any]:
+    candidate=build_policy_candidate(
+        episodes=episodes,
+        incumbent_strategy=incumbent_strategy,
+        candidate_strategy=candidate_strategy,
+        environment_class=environment_class,
+        comparison_verification_receipt=comparison_verification_receipt,
+    )
+    return verify_policy_candidate(candidate=candidate,policy_artifact_receipt=policy_artifact_receipt)
 
 def _verified_policy(raw:Mapping[str,Any])->dict[str,Any]:
     if raw.get("verified_policy") is not True:
