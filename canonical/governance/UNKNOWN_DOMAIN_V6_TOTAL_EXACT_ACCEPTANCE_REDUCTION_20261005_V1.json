@@ -72,7 +72,7 @@
   "current_authority": false,
   "revoked_by": {
     "path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
-    "git_blob_sha": "a47accdf0c3a65f0da0e4171b1466cac575bbaa2",
+    "git_blob_sha": "a30a19aa0ab9ac18eaf0d005cf1f71b636660fb4",
     "reason": "PRE_REPAIR_V5_ACCEPTED_STR_SUBCLASSES_VIA_ISINSTANCE_BUT_USED_OVERRIDABLE_INSTANCE_STRIP_AND_ENCODE__DECLARED_TOTAL_STRING_INTERFACE_FALSE"
   }
 }
