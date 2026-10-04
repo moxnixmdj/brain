@@ -86,3 +86,30 @@ def test_integer_ratio_target_still_parses_as_float(monkeypatch):
 
     assert out["status"] == "PASS_CANDIDATE_SINGLE_CHECKER_WITNESS"
     assert seen["pct"] == 65.0
+
+
+
+def test_public_decimal_serialized_conjunction_count_is_solved():
+    # Exact released IFBench population wording (public row 8 class).
+    prompt = (
+        "Use at least 4.0 different coordinating conjunctions in the response. "
+        "Explain arterial injury."
+    )
+    out = solve(prompt)
+    assert out["status"] == "PASS_CANDIDATE_SINGLE_CHECKER_WITNESS"
+    assert out["checker_id"] == "count:conjunctions"
+    words = set(out["response"].lower().split())
+    assert len(words & {"and", "but", "for", "nor", "or", "so", "yet"}) >= 4
+
+
+def test_public_punctuation_list_marker_is_preserved_exactly():
+    # Released IFBench contains the !?!? list marker. The old generic parser
+    # truncated punctuation markers at the first period boundary.
+    prompt = (
+        "Answer with a list of items, instead of bullet points use !?!?. "
+        "Define preludes, caprichos, romances and ballads."
+    )
+    out = solve(prompt)
+    assert out["status"] == "PASS_CANDIDATE_SINGLE_CHECKER_WITNESS"
+    assert out["checker_id"] == "format:list"
+    assert out["response"] == "!?!? one\n!?!? two"
