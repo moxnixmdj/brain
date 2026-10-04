@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_IFEVAL_CONSTRAINT_SYNTHESIS_REDUCTION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__TERMINAL_RELEVANT_SCORER_REDUCTION__SINGLE_CHECKER_PRIMITIVES_COMPILED__ZERO_CREDIT_PENDING_EXACT_REPLAY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "mission_lock": "EXACT_FROZEN_200_ROW_LIVEBENCH_IF_POPULATION",
+  "precondition": {
+    "verified_active_scorer_family": "LEGACY_IFEVAL_ONLY",
+    "legacy_rows": 200,
+    "modern_ifbench_rows": 0,
+    "brain_binding_commit": "839795a3f0fe0f5cd930e0cc2ef97e92c5a40644"
+  },
+  "pinned_public_authority": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instruction_registry_path": "livebench/if_runner/instruction_following_eval/instructions_registry.py",
+    "instruction_registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_path": "livebench/if_runner/instruction_following_eval/instructions.py",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "evaluation_path": "livebench/if_runner/instruction_following_eval/evaluation_main.py",
+    "evaluation_git_blob_sha": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+    "score_wrapper_path": "livebench/process_results/instruction_following/utils.py",
+    "score_wrapper_git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676"
+  },
+  "verified_from_public_code_by_direct_inspection": {
+    "registered_legacy_checker_count": 25,
+    "strict_evaluator_calls_only_registered_instruction_check_following_predicates": true,
+    "semantic_ground_truth_comparison_in_legacy_ifeval_path": false,
+    "strict_row_score_formula": "(all_constraints_pass + fraction_constraints_pass) / 2",
+    "loose_evaluator_active": false,
+    "response_must_be_nonempty": true,
+    "model_judge_dependency": false
+  },
+  "breakthrough": {
+    "statement": "FOR_THE_EXACT_FROZEN_LEGACY_IFEVAL_SCORER, OPEN_ENDED_TASK_SEMANTICS ARE_NOT_DIRECTLY_SCORED; THE LOAD_BEARING COMPUTATION IS FINITE RESPONSE_CONSTRAINT SATISFACTION",
+    "consequence": [
+      "DO_NOT_SOLVE_LIVEBENCH_IF_AS_200_OPEN_ENDED_LANGUAGE_TASKS",
+      "COMPILE_THE_25_PUBLIC_CHECKER PREDICATES INTO DETERMINISTIC WITNESS CONSTRUCTORS",
+      "COMPOSE ONLY NONCONFLICTING CHECKERS AND REPLAY THE EXACT PINNED PREDICATES LOCALLY",
+      "TARGET THE MINIMUM PROVED ROW_SCORE MASS NEEDED TO FORCE 65.7"
+    ],
+    "important_boundary": "Some constraints can depend on row kwargs or exact prompt repetition. This reduction removes semantic-answer correctness as a scored requirement; it does not claim row metadata or prompt text is never needed by a constraint."
+  },
+  "compiled_primitive": {
+    "runtime": "canonical/runtime/livebench_legacy_ifeval_single_checker_synthesizer_v1.py",
+    "tests": "canonical/tests/test_livebench_legacy_ifeval_single_checker_synthesizer_v1.py",
+    "instruction_ids_covered": 25,
+    "semantic_task_content_required_by_constructor": false,
+    "model_dependency_count": 0,
+    "network_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "fail_closed_boundaries": [
+      "UNKNOWN_INSTRUCTION_ID",
+      "MISSING_REQUIRED_KWARGS",
+      "INVALID_RELATION_OR_PARAMETER_DOMAIN",
+      "UNPROVED_OR_IMPOSSIBLE_NONEMPTY_RELATIONAL_BOUNDARY"
+    ]
+  },
+  "next_load_bearing_obligation": [
+    "EXACT_PUBLIC_REPLAY_OF_ALL_25_SINGLE_CHECKER CONSTRUCTORS OVER_GENERATOR_DOMAIN",
+    "COMPILE_INSTRUCTION_CONFLICT_MATRIX",
+    "BUILD_COMPATIBLE_MULTI_CHECKER COMPOSITION SOLVER",
+    "PROVE_MINIMUM SCORE MASS >= 0.657 WITHOUT READING TERMINAL TURN CONTENT",
+    "ONLY_THEN_EXECUTE_OR_CLAIM ACCEPTANCE UNDER THE PRECOMMITTED TERMINAL ROUTE"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_ALL_MULTI_CHECKER COMBINATIONS ARE_CLOSED",
+    "NO_TERMINAL_CASE CONTENT READ",
+    "NO_TERMINAL_RESPONSE GENERATED",
+    "NO_OPUS55 CAPABILITY CREDIT",
+    "NO_CLAIM TERMINAL GOAL COMPLETE"
+  ],
+  "accounting": {
+    "terminal_case_content_read": 0,
+    "terminal_cases_executed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
