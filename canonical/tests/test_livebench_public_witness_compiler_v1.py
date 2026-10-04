@@ -2,6 +2,7 @@
 import pytest
 
 from canonical.runtime.livebench_public_witness_compiler_v1 import compile_witness
+from canonical.runtime.livebench_public_description_detector_v1 import verify_registry_self_coverage
 
 
 @pytest.mark.parametrize(
@@ -93,3 +94,27 @@ def test_multi_checker_fails_closed():
     assert out["status"] == "BLOCKED"
     assert out["reason"] == "MULTI_CHECKER_COMBINATION_NOT_PROVED"
     assert len(out["matched_checkers"]) == 2
+
+
+def test_total_public_description_detector_self_coverage():
+    out = verify_registry_self_coverage()
+    assert out["status"] == "PASS", out
+    assert out["checker_count"] == 83
+    assert out["pattern_count"] == 86
+    assert out["failures"] == []
+
+
+def test_unsupported_public_checker_fails_closed_before_witness():
+    out = compile_witness("Task. Use at least 7 unique words in the response.")
+    assert out["status"] == "BLOCKED", out
+    assert out["reason"] == "UNSUPPORTED_PUBLIC_CHECKER_DETECTED"
+    assert "UniqueWordCountChecker" in out["detected_unsupported_checkers"]
+
+
+def test_supported_plus_unsupported_public_checker_fails_closed():
+    out = compile_witness(
+        "Task. Answer with at least 5 words. "
+        "Use at least 7 unique words in the response."
+    )
+    assert out["status"] == "BLOCKED", out
+    assert out["reason"] == "UNSUPPORTED_PUBLIC_CHECKER_DETECTED"
