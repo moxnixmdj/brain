@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ACTIVE_SCORER_FAMILY_BINDING_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__METADATA_ONLY_POPULATION_TO_SCORER_FAMILY_BINDING__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Bind every active row in the exact frozen 200-question LiveBench IF population to the scorer family selected by the independently verified public dispatch rule, without reading prompt or turn content.",
+  "frozen_population": {
+    "repository": "livebench/instruction_following",
+    "revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "parquet_bytes": 537024,
+    "population_verification_path": "canonical/verification/LIVEBENCH_IF_2026_06_25_RELEASE_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "population_verification_git_blob_sha": "307dc7c24bf0d608e204ec43a9b9002d72a0b49a",
+    "active_release": "2026-06-25",
+    "active_population_count": 200,
+    "active_task_counts": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    }
+  },
+  "scorer_dispatch": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "dispatch_path": "livebench/gen_ground_truth_judgment.py",
+    "dispatch_git_blob_sha": "b36561da5b54380c724c507462d0ee65feefeac8",
+    "verified_supplement_path": "canonical/verification/LIVEBENCH_LEGACY_SCORER_SUPPLEMENT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verified_supplement_commit": "403fbac2a9fb59d966f8f323db2349c327c06896",
+    "boundary": "2025-11-25",
+    "rule": "instruction_following rows with livebench_release_date < 2025-11-25 use legacy instruction_following_eval; rows at or after 2025-11-25 use IFBench"
+  },
+  "verification_contract": {
+    "allowed_parquet_columns": [
+      "question_id",
+      "task",
+      "livebench_release_date",
+      "livebench_removal_date"
+    ],
+    "prompt_or_turn_columns_forbidden": true,
+    "assert_exact_parquet_identity": true,
+    "assert_active_population_200": true,
+    "assert_active_task_counts_50_each": true,
+    "assert_all_active_release_dates_strictly_before_2025_11_25": true,
+    "assert_modern_ifbench_active_row_count_zero": true,
+    "assert_legacy_ifeval_active_row_count_200": true,
+    "assert_exact_public_dispatch_blob": true
+  },
+  "consequence_if_verified": {
+    "active_scorer_family": "LEGACY_IFEVAL_ONLY",
+    "legacy_active_rows": 200,
+    "modern_ifbench_active_rows": 0,
+    "scheduler_delete": [
+      "DO_NOT_TREAT_MODERN_IFBENCH_83_CHECKER_COVERAGE_AS_LOAD_BEARING_FOR_THIS_EXACT_FROZEN_PREDICATE",
+      "DO_NOT_TREAT_PUBLIC_IFBENCH_TEST_KWARGS_RECOVERY_AS_DIRECT_PROGRESS_ON_THIS_EXACT_FROZEN_PREDICATE",
+      "DO_NOT_SPEND_ROOT1_CRITICAL_PATH_EFFORT_ON_MODERN_IFBENCH_ONLY_CHECKERS_UNLESS_THE_FROZEN_DATASET_OR_COMPARATOR_IDENTITY_IS_FORMALLY_CHANGED"
+    ],
+    "scheduler_promote": [
+      "REPAIR_AND_COMPILE_THE_PINNED_LEGACY_IFEVAL_CHECKER_SURFACE_FOR_THE_200_ACTIVE_ROWS",
+      "MAXIMIZE_PROVED_SCORE_MASS_UNDER_THE_EXACT_LEGACY_SCORER",
+      "PRESERVE_MODERN_IFBENCH_WORK_AS_NONTERMINAL_REUSABLE_CAPABILITY_ONLY"
+    ],
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "THIS CANDIDATE DOES_NOT_ITSELF_PROVE_THE_RELEASE_DATE_HISTOGRAM",
+    "NO_PROMPT_TEXT_OR_TURN_TEXT_READ",
+    "NO_TERMINAL_RESPONSE_GENERATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY",
+    "DOES_NOT_INVALIDATE_MODERN_IFBENCH_WORK_AS_GENERAL_CAPABILITY; ONLY ITS LOAD_BEARING_ROLE_FOR_THIS EXACT FROZEN PREDICATE IS AT ISSUE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_case_content_read": 0,
+    "terminal_cases_executed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
