@@ -58,6 +58,23 @@ class LiveBenchPublicSingleCheckerWitnessV1Tests(unittest.TestCase):
         self.assertEqual(out["status"],"BLOCKED")
         self.assertEqual(set(out["matched_checker_ids"]),{"count:numbers","count:conjunctions"})
 
+    def test_unsupported_public_checker_is_recognized_and_blocked(self):
+        out=build("Maintain a trigram overlap of 23% (±2%) with the provided reference text. Base request.")
+        self.assertEqual(out["status"],"BLOCKED")
+        self.assertEqual(out["reason"],"PUBLIC_CHECKER_RECOGNIZED_BUT_CONSTRUCTOR_UNSUPPORTED")
+        self.assertEqual(out["matched_checker_ids"],["guard:ratio:overlap"])
+
+    def test_supported_plus_unsupported_conjunction_fails_closed(self):
+        out=build(
+            "Maintain a trigram overlap of 23% (±2%) with the provided reference text. "
+            "The response must include keyword giraffe in the 7-th sentence."
+        )
+        self.assertEqual(out["status"],"BLOCKED")
+        self.assertEqual(
+            set(out["matched_checker_ids"]),
+            {"guard:ratio:overlap","sentence:keyword"},
+        )
+
     def test_unknown_semantic_prompt_fails_closed(self):
         out=build("Explain photosynthesis clearly.")
         self.assertEqual(out["status"],"BLOCKED")
