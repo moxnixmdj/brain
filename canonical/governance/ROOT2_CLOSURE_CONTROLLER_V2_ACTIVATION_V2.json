@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_CLOSURE_CONTROLLER_V2_ACTIVATION_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PHASE1_CONTROLLER_BYTES_INDEPENDENT_PASS__FINAL_STABLE_MIRROR_REVERIFY_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "governance_path": "canonical/governance/ROOT2_CLOSURE_CONTROLLER_V2.json",
+    "governance_git_blob_sha": "328d58eddbaf0198128973e06af7ca68c3527e27",
+    "runtime_path": "canonical/runtime/root2_closure_controller_v2.py",
+    "runtime_git_blob_sha": "0150744f8e2024421c94c1ec4944368cf72a59b9",
+    "tests_path": "canonical/tests/test_root2_closure_controller_v2.py",
+    "tests_git_blob_sha": "c9b581e265835a5d1840701b39f87bed3dd30ad8"
+  },
+  "phase1_verification": {
+    "path": "canonical/verification/ROOT2_SYNTHESIS_COVERAGE_V2_PHASE1_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "verifier_pull_request": 1546,
+    "verifier_merge_commit": "b7c190c6951fec505ec88467abc3e3c6a3be2c37",
+    "workflow_run_id": 37166366078,
+    "workflow_job_id": 111329972862,
+    "conclusion": "success"
+  },
+  "semantic_delta": {
+    "synthesis_required_claim_coverage_noninferiority": "PROVED",
+    "remaining_synthesis_root2_residuals": [
+      "metric:matched_quality",
+      "matched_quality_noninferiority"
+    ],
+    "acceptance_count_change": 0,
+    "atomic_predicate_count_change": 0
+  },
+  "authority": {
+    "scheduling_authority": true,
+    "effective_scheduling_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "activation_condition": "FINAL_STABLE_MIRROR_SET_INDEPENDENT_PUBLIC_RUNNER_PASS_AND_CURRENT_TERMINAL_AUTHORITY_EXPLICIT_BINDING",
+  "hard_rules": [
+    "PHASE1_VERIFICATION_DOES_NOT_VERIFY_REBASED_STABLE_FRONTIER_BYTES",
+    "NO_FRESH_REALITY",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
