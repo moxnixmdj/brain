@@ -84,6 +84,8 @@ def parse_supported_prompt(prompt: str) -> ParsedPrompt:
 def _novel_chars(prompt: str, count: int, *, start: int = 0) -> str:
     if count < 0:
         raise PromptOnlyOverlapError("NEGATIVE_FILLER_COUNT")
+    if count == 0:
+        return ""
     out: list[str] = []
     seen = 0
     for cp in range(0xE000, 0xF8FF + 1):
