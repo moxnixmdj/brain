@@ -1,10 +1,12 @@
-name: Verify LiveBench legacy15 joint witness V1
+name: Verify LiveBench legacy15 exhaustive exact composition V2
 
 on:
   pull_request:
     paths:
       - "canonical/runtime/livebench_legacy15_joint_witness_v1.py"
-      - "canonical/runtime/livebench_legacy15_joint_witness_exact_synthetic_audit_v1.py"
+      - "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py"
+      - "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py"
+      - "canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py"
       - "canonical/tests/test_livebench_legacy15_joint_witness_v1.py"
       - ".github/workflows/verify-livebench-legacy-joint-witness-v1.yml"
   workflow_dispatch:
@@ -42,12 +44,12 @@ jobs:
       - name: Run exhaustive public synthetic composition audit
         run: |
           mkdir -p /tmp/receipt
-          python canonical/runtime/livebench_legacy15_joint_witness_exact_synthetic_audit_v1.py \
+          python canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py \
             --livebench-root /tmp/livebench \
-            --output /tmp/receipt/livebench-legacy15-joint-witness-v1.json
+            --output /tmp/receipt/livebench-legacy15-end2end-exact-synthetic-audit-v2.json
 
       - name: Upload exact audit receipt
         uses: actions/upload-artifact@v4
         with:
-          name: livebench-legacy15-joint-witness-v1
-          path: /tmp/receipt/livebench-legacy15-joint-witness-v1.json
+          name: livebench-legacy15-end2end-exact-synthetic-audit-v2
+          path: /tmp/receipt/livebench-legacy15-end2end-exact-synthetic-audit-v2.json
