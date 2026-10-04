@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_COMPOSITIONAL_LANGUAGE_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PREEXPOSED_12_TASK_COMPOSITIONAL_GRAMMAR__EXACT_BLOB_BOUND__ZERO_LEARNED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "TEST_WHETHER_THE_CURRENT_H100_COMPOSITIONAL_LANGUAGE_RESIDUAL_CAN_BE_DISCHARGED_BY_A_ZERO_LEARNED_PROPOSITION_COMPILER_OVER_MULTIPLE_CLAUSES_NEGATION_AND_BOUNDED_REFERENCES_WITH_FAIL_CLOSED_CONTRADICTION_HANDLING",
+  "parent_frontier": "canonical/governance/H100_RESEARCH_FRONTIER_STATE_V1.json",
+  "preexposure": {
+    "path": "canonical/governance/H100_ZERO_LEARNED_COMPOSITIONAL_LANGUAGE_PREEXPOSURE_V1.json",
+    "git_blob_sha": "2d2af5020bc30bc322d4285b54c0d979a5c0b882",
+    "task_count": 12
+  },
+  "exact_bound_components": {
+    "canonical/runtime/h100_zero_learned_compositional_language_v1.py": "fd5f16e4ac4187a98f7824b68879871a82eece6a",
+    "canonical/tests/test_h100_zero_learned_compositional_language_v1.py": "1c5095eca2ecd43eca0940662b69f5de8fb3cc19"
+  },
+  "proposition_ir": {
+    "primitives": [
+      "SIGNED_ROLE_ASSERTION",
+      "DIRECTIONAL_EDGE",
+      "METADATA_EXCLUSION",
+      "MENTION_GROUP",
+      "BOUNDED_REFERENCE_BINDING"
+    ],
+    "supported_references": [
+      "it",
+      "they",
+      "the former",
+      "the latter",
+      "which"
+    ],
+    "fail_closed": [
+      "POSITIVE_NEGATIVE_ROLE_CONTRADICTION",
+      "MULTIPLE_POSITIVE_TARGETS",
+      "UNRESOLVED_OR_NONUNIQUE_REFERENCE",
+      "INSUFFICIENT_DIRECTIONAL_EVIDENCE"
+    ]
+  },
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "random_search": false,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "success_effect_if_independently_verified": {
+    "structural_progress": "DISCHARGE_BOUNDED_MULTI_CLAUSE_NEGATION_AND_REFERENCE_COMPOSITIONAL_LANGUAGE_GATE",
+    "next_residual": "OPEN_WORLD_TOOL_TRACE_SEMANTICS_OUTSIDE_KNOWN_STRUCTURES",
+    "learned_byte_rung_change": 0
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_LANGUAGE_UNDERSTANDING_CLAIM",
+    "NO_GENERAL_PRONOUN_RESOLUTION_CLAIM",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_LEARNED_KERNEL_JUSTIFICATION"
+  ],
+  "independent_verification_required": true
+}
