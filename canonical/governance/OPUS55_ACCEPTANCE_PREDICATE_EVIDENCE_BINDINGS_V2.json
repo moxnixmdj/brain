@@ -1,19 +1,19 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2",
   "date": "2026-10-02",
-  "status": "AUTHORITY_RECONCILED__13_PROVED__25_UNRESOLVED__LIVEBENCH_DIRTY_TARGET_REPLAY_QUARANTINED__ROOT1_INACTIVE",
+  "status": "AUTHORITY_RECONCILED__12_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_V2_FALSE_UNIVERSAL_PROOF_REVOKED__LIVEBENCH_DIRTY_TARGET_REPLAY_QUARANTINED__ROOT1_INACTIVE",
   "objective": "Bind only content-addressed atomic acceptance evidence. Until saturation is complete, benchmark and matched-case execution remains forbidden.",
   "saturation": {
-    "status": "CURRENT_ZERO_REALITY_RECEIPT_RECONCILIATION__13_PROVED__25_UNRESOLVED__UNKNOWN_DOMAIN_DIRECT_AUDIT_UNIVERSALLY_PROVED__LIVEBENCH_EXACT200_CREDIT_REVOKED",
+    "status": "CURRENT_ZERO_REALITY_RECEIPT_RECONCILIATION__12_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_V2_UNIVERSAL_PROMOTION_REVOKED__LIVEBENCH_EXACT200_CREDIT_REVOKED",
     "source_snapshot_sha": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "receipt": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "proved_predicate_count": 13,
+    "proved_predicate_count": 12,
     "bound_blocker_count": 3,
-    "unresolved_predicate_count": 25,
+    "unresolved_predicate_count": 26,
     "new_reality_units_consumed": 0,
-    "rule": "UNKNOWN_DOMAIN_DIRECT_TWO_LEAF_SCOPE_CLOSED_BY_OBJECTIVE_CONTENT_BOUND_UNIVERSAL_FORMAL_PROOF__ONE_USE_27_CASE_PRODUCTION_RUN_DELETED_AS_ZERO_INFORMATION_GAIN__LIVEBENCH_EXACT200_REMAINS_DIRTY_AND_FAIL_CLOSED_NOT_PROVEN",
-    "latest_delta_receipt": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_20261005_V1.json",
-    "latest_delta_receipt_sha": "941e62de59e4c528e8afbb95482f6707bc62104e"
+    "rule": "UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_PROMOTION_REVOKED_BY_EXACT_BINARY64_ADD2_ROLE_ORDER_COUNTEREXAMPLE__PREDICATE_FAIL_CLOSED_OPEN__V3_REPAIR_ZERO_CREDIT_PENDING_INDEPENDENT_CONTENT_BOUND_VERIFICATION__LIVEBENCH_EXACT200_REMAINS_DIRTY_AND_FAIL_CLOSED_NOT_PROVEN",
+    "latest_delta_receipt": "canonical/governance/UNKNOWN_DOMAIN_V2_UNIVERSAL_PROOF_TRUTH_REPAIR_20261005_V1.json",
+    "latest_delta_receipt_sha": "696d1dc31fba58152d6a99b85437e58ad8e97009"
   },
   "claims": [
     {
@@ -198,43 +198,35 @@
     },
     {
       "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
-      "state": "PROVED",
-      "proof_kind": "OBJECTIVE_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
-      "source_path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_20261005_V1.json",
-      "source_sha": "941e62de59e4c528e8afbb95482f6707bc62104e",
-      "independent_or_objective": true,
-      "scope_complete": true,
-      "basis": "UNIVERSAL_THEOREM_OVER_EVERY_POPULATION_THE_EXACT_FROZEN_V2_GENERATOR_CAN_EMIT__ALL_12_TRANSFER_AND_15_ABSTENTION_CASES_PASS_EXACT_FROZEN_SCORER__MAX_2_PROBES_LT_FULL_REDISCOVERY_FLOOR_3__81_FRESH_HIDDEN_CASES_AND_EXACT_TWO_LEAF_ACTIVATION_ALREADY_INDEPENDENTLY_VERIFIED",
+      "state": "EXTERNAL_BLOCKED",
+      "source_path": "canonical/governance/UNKNOWN_DOMAIN_V2_UNIVERSAL_PROOF_TRUTH_REPAIR_20261005_V1.json",
+      "source_sha": "696d1dc31fba58152d6a99b85437e58ad8e97009",
+      "independent_or_objective": false,
+      "scope_complete": false,
+      "basis": "V2_FOR_ALL_CLAIM_IS_FALSE__EXACT_SYNTHETIC_FROZEN_GENERATOR_WITNESS_CAUSES_LEXICOGRAPHIC_r0_r1_SWAP__CANDIDATE_FLOAT_7_335613344468422_DIFFERS_FROM_FROZEN_GOLD_7_335613344468421__SCORER_EXACT_EQUALITY_FAILS__V3_VISIBLE_SIGN_SIGNATURE_REPAIR_REMAINS_ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
       "supporting_sources": [
         {
-          "path": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_CANDIDATE_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-          "sha": "36452412fb60ce38405f139111eba98b5cebc040"
+          "path": "canonical/runtime/unknown_domain_direct_v2_add2_float_counterexample_v1.py",
+          "sha": "b8c5e3a613d42fdc2313da4bdbf77d00d3795e97"
         },
         {
-          "path": "canonical/verification/UNKNOWN_DOMAIN_V2_ACTIVATION_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-          "sha": "32d6dc95d81211be13fd96aa91165ebf321197a0"
+          "path": "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+          "sha": "522f551eb73035bf18379131c83202f6673e04d1"
         },
         {
-          "path": "canonical/verification/UNKNOWN_DOMAIN_V2_FINAL_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-          "sha": "93353244a5a0a6a7ef2e1e0a3a1bbedb63cef3ec"
+          "path": "canonical/runtime/unknown_domain_direct_v3_universal_proof_v1.py",
+          "sha": "7ec58848f264c75ba8ae9552349d43f836f00d6c"
         },
         {
-          "path": "canonical/governance/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_PROOF_CANDIDATE_20261005_V1.json",
-          "sha": "97084bbfb2d9228b9555c3fb71d29f4d0e8796fa"
-        },
-        {
-          "path": "canonical/runtime/unknown_domain_direct_v2_universal_proof_v1.py",
-          "sha": "2400dba7f763fc16dc65c31512ccd9eee8be82fb"
+          "path": "canonical/tests/test_unknown_domain_direct_v3_float_order_repair_v1.py",
+          "sha": "42047d2a23007a4b5da04d31ede41cd455c66d84"
         }
       ],
       "root_class": "ROOT3",
-      "superseded_blocker": {
-        "state": "EXTERNAL_BLOCKED",
-        "blocker": "VERIFIED_UNKNOWN_DOMAIN_OPERATIVE_SOURCE_ADMITTED__TWO_FROZEN_INFORMATION_SAFE_DIRECT_ORACLE_LEAVES_REMAIN_UNEXECUTED",
-        "discharge_condition": "RUN_AND_INDEPENDENTLY_VERIFY_ONLY_THE_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_ORACLE_LEAVES__NO_SOURCE_ADMISSION_WORK_REMAINS",
-        "superseded_by": "STRICTLY_STRONGER_UNIVERSAL_FORMAL_SCOPE_PROOF_WITH_ZERO_PRODUCTION_INFORMATION_GAIN"
-      }
+      "blocker": "V2_UNIVERSAL_FORMAL_PROOF_FALSIFIED_BY_EXACT_ADD2_BINARY64_ROLE_ORDER_COUNTEREXAMPLE__V3_REPAIR_CANDIDATE_EXISTS_BUT_IS_NOT_INDEPENDENTLY_VERIFIED",
+      "blocker_class": "ROOT3_DIRECT_SCOPE_EVIDENCE_RESIDUAL",
+      "discharge_condition": "INDEPENDENTLY_VERIFY_EXACT_V3_ROLE_ORDER_REPAIR_AND_CONTENT_BOUND_UNIVERSAL_PROOF__THEN_REDUCE_AND_PROMOTE_ONLY_IF_THE_VERIFIED_EXACT_SUBJECT_PASSES"
     },
     {
       "predicate_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
