@@ -116,3 +116,6 @@ def test_smaller_semantic_unsat_cores_compress_five_required_subsets_to_two():
     assert result["required_next_cardinality_subset_count"] == 5
     assert result["minimum_unsat_core_cover_count"] == 2
     assert len(result["minimum_unsat_core_cover"]) == 2
+    assert result["inherited_unsat_subset_skips"] > 0
+    cores = [set(row["core_indices"]) for row in result["semantic_unsat_evidence"]]
+    assert all(not (a < b) for a in cores for b in cores)
