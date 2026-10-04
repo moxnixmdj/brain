@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_PUBLIC_CONTRACT_STRUCTURE_BREAKTHROUGH_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SOURCE_AND_PUBLIC_CORPUS_DERIVED_STRUCTURAL_BREAKTHROUGH__ZERO_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "verified_upstream_scope": {
+    "active_scorer_family": "LEGACY_IFEVAL_ONLY",
+    "active_terminal_rows": 200,
+    "legacy_registry_types": 25,
+    "modern_ifbench_terminal_rows": 0,
+    "receipt": "canonical/verification/LIVEBENCH_ACTIVE_SCORER_FAMILY_INDEPENDENT_VERIFICATION_20261004_V1.json"
+  },
+  "public_evidence": {
+    "repository": "google-research/google-research",
+    "commit": "e49bbfe381c9c0e564b937f1c4e163a2273c65cc",
+    "path": "instruction_following_eval/data/input_data.jsonl",
+    "git_blob_sha": "cbe52f6eecf3986fdac745b4acba4da1408eb146",
+    "rows": 541,
+    "instruction_instances": 834,
+    "same_family_duplicate_rows": 17,
+    "exact_same_id_and_kwargs_duplicate_rows": 1,
+    "exact_duplicate_extra_instances": 1,
+    "exact_duplicate_example_public_key": 30,
+    "repeat_prompt_rows": 41,
+    "repeat_target_exact_contiguous_substring_rows": 41,
+    "repeat_target_prefix_rows": 33,
+    "repeat_target_suffix_rows": 8
+  },
+  "breakthroughs": [
+    {
+      "name": "MULTI_INSTANCE_FAMILY_REPRESENTATION",
+      "result": "SAME_FAMILY_DOES_NOT_IMPLY_DUPLICATE_ERROR",
+      "reason": "PUBLIC_LEGACY_ROWS_USE_TWO_DISTINCT_SAME_FAMILY_PREDICATES_FOR_RANGES_AND_BOUNDS"
+    },
+    {
+      "name": "EXACT_PREDICATE_QUOTIENT_FOR_FULL_SCORE",
+      "result": "EXACT_IDENTICAL_CHECKER_MULTIPLICITY_IS_NOT_REQUIRED_FOR_FULL_SCORE_WITNESS_CONSTRUCTION",
+      "proof": "IF_EVERY_UNIQUE_SEMANTIC_PREDICATE_IS_TRUE_THEN_EVERY_EXPANDED_DUPLICATE_INSTANCE_IS_TRUE__ALL_TRUE_EQUALS_1__TRUE_FRACTION_EQUALS_1__SCORE_EQUALS_0_5_PLUS_0_5_EQUALS_1",
+      "scope": "FULL_SCORE_SUFFICIENCY_ONLY__NOT_ARBITRARY_PARTIAL_SCORE_EQUIVALENCE"
+    },
+    {
+      "name": "REPEAT_PROMPT_VISIBLE_ARGUMENT_RECOVERY",
+      "result": "PUBLIC_41_OF_41_PROMPT_TO_REPEAT_VALUES_ARE_EXACT_VISIBLE_EDGE_SUBSTRINGS",
+      "effect": "THE_ONLY_PREVIOUSLY_MARKED_PARAMETER_INCOMPLETE_LEGACY_FAMILY_HAS_A_MODEL_FREE_VISIBLE_RECOVERY_ROUTE_ON_THE_PINNED_PUBLIC_CLASSIC_POPULATION"
+    }
+  ],
+  "scheduler_delta": [
+    "DELETE_DUPLICATE_FAMILY_ID_AS_AN_AUTOMATIC_PARSE_FAILURE",
+    "PRESERVE_DISTINCT_SAME_FAMILY_PREDICATES_WHEN_KWARGS_DIFFER",
+    "QUOTIENT_ONLY_EXACT_SEMANTIC_DUPLICATES_WHEN_PROVING_FULL_SCORE_WITNESS_SUFFICIENCY",
+    "PROMOTE_VISIBLE_REPEAT_TARGET_EDGE_RECOVERY_AS_THE_ZERO_LEARNED_ROUTE_FOR_combination_repeat_prompt",
+    "DO_NOT_REQUIRE_RECONSTRUCTION_OF_INVISIBLE_EXACT_DUPLICATE_MULTIPLICITY_TO_PROVE_A_FULL_SCORE_CASE",
+    "CONTINUE_TOWARD_SEMANTIC_PREDICATE_COVERAGE_AND_COMPATIBLE_WITNESS_SYNTHESIS__NOT_HIDDEN_BENCHMARK_BOOKKEEPING_RECONSTRUCTION"
+  ],
+  "implementation": {
+    "runtime": "canonical/runtime/livebench_legacy_visible_contract_core_v2.py",
+    "tests": "canonical/tests/test_livebench_legacy_visible_contract_core_v2.py"
+  },
+  "hard_nonclaims": [
+    "PUBLIC_CLASSIC_IFEVAL_IS_NOT_ASSUMED_TO_EQUAL_THE_FROZEN_TERMINAL_PROMPT_DISTRIBUTION",
+    "NO_FROZEN_TERMINAL_PROMPT_CONTENT_WAS_READ",
+    "NO_TERMINAL_RESPONSE_WAS_GENERATED",
+    "NO_LIVEBENCH_ACCEPTANCE_SCORE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "REPEAT_PROMPT_41_OF_41_IS_PUBLIC_POPULATION_EVIDENCE_NOT_A_TERMINAL_COVERAGE_CLAIM",
+    "EXACT_DUPLICATE_QUOTIENT_DOES_NOT_PRESERVE_PARTIAL_SCORE_IN_GENERAL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
