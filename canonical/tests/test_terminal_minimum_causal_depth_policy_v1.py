@@ -5,23 +5,60 @@ import pytest
 
 STATE={
 "accepted_families":5,"open_families":14,"proved_atomic":12,"unresolved_atomic":26,
-"total_families":19,"total_atomic":38,"root1_positive_gaps":0,"root2_only":16,
+"total_families":19,"total_atomic":38,"root1_positive_gaps":1,"root2_only":15,
 "root3_only":7,"root2_and_root3":3,"terminal":False,
 }
 
-def test_live_state_exact():
+
+def test_live_state_accepts_current_authoritative_partition():
     validate_live_state(STATE)
+
+
+def test_live_state_accepts_future_consistent_verified_delta():
+    future=dict(STATE)
+    future.update({
+        "accepted_families":6,
+        "open_families":13,
+        "proved_atomic":13,
+        "unresolved_atomic":25,
+        "root1_positive_gaps":0,
+    })
+    validate_live_state(future)
+
+
+def test_live_state_rejects_inconsistent_atomic_partition():
     bad=dict(STATE); bad["proved_atomic"]=13
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="INCONSISTENT_ATOMIC_PARTITION"):
         validate_live_state(bad)
+
+
+def test_live_state_rejects_inconsistent_root_partition():
+    bad=dict(STATE); bad["root2_only"]=16
+    with pytest.raises(ValueError, match="INCONSISTENT_ROOT_PARTITION"):
+        validate_live_state(bad)
+
+
+def test_terminal_flag_is_derived_fail_closed():
+    closed={
+        "accepted_families":19,"open_families":0,"proved_atomic":38,"unresolved_atomic":0,
+        "total_families":19,"total_atomic":38,"root1_positive_gaps":0,"root2_only":0,
+        "root3_only":0,"root2_and_root3":0,"terminal":True,
+    }
+    validate_live_state(closed)
+    closed["terminal"]=False
+    with pytest.raises(ValueError, match="INCONSISTENT_TERMINAL_FLAG"):
+        validate_live_state(closed)
+
 
 def test_relative_elo_rejects_pure_absolute_without_bridge():
     assert route_admissible("PROWORK_GDPVAL_GE_1846","FORMAL_ENTAILMENT") is False
     assert route_admissible("PROWORK_GDPVAL_GE_1846","FORMAL_ENTAILMENT",explicit_relative_bridge=True) is True
     assert route_admissible("PROWORK_GDPVAL_GE_1846","OWNER_RESULT") is True
 
+
 def test_non_elo_absolute_route_remains_possible():
     assert route_admissible("LIVEBENCH_IF_GE_65_7","FORMAL_ENTAILMENT") is True
+
 
 def test_fresh_reality_is_blocked_without_both_gates():
     routes=[
@@ -33,10 +70,12 @@ def test_fresh_reality_is_blocked_without_both_gates():
     assert len(out["wave2"]["blocked_actions"]) == 1
     assert len(out["wave0"]["typed_evidence_collapse"]) == 1
 
+
 def test_fresh_reality_requires_isolation_too():
     routes=[{"predicate_id":"LIVEBENCH_IF_GE_65_7","route_kind":"FIXED_BAR_SCORE"}]
     out=compile_waves(STATE,routes,generic_isolation_proved=False,fresh_reality_authorized=True)
     assert out["wave2"]["fresh_reality_authorized"] is False
+
 
 def test_relative_invalid_route_is_pruned_not_promoted():
     routes=[
@@ -45,6 +84,7 @@ def test_relative_invalid_route_is_pruned_not_promoted():
     ]
     out=filter_routes(routes)
     assert [x["route_kind"] for x in out] == ["RELATIVE_SCORE_BRIDGE"]
+
 
 def test_dominance_prunes_only_known_mechanical_case():
     actions=[
