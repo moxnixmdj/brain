@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_DECISION_ONLY_EVALUATION_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_ACTIVATION_BLOB__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_DECISION_ONLY_EVALUATION_ACTIVATION_V1.json",
+    "git_blob_sha": "4086abe4559e30ade7bb7fa5be5571eaf40e94ee"
+  },
+  "bound_subject_verification": {
+    "path": "canonical/verification/ROOT2_DECISION_ONLY_EVALUATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "345ad6ce5d5ba5105c82e5663fa9a97e99ccec05"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1789,
+    "verified_head_sha": "556be49165e9641886b7a8896ff73157e6c52ddd",
+    "merge_commit": "e693ea26ddef55cc84cd2056c0f0c29d827bc3ea",
+    "workflow_run_id": 37191060375,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_ACTIVATION_AND_RECEIPT_BLOBS",
+    "EXACT_RUNTIME_TEST_GOVERNANCE_BINDINGS",
+    "SCHEDULING_AND_DECISION_CERTIFICATE_COMPILATION_TRUE",
+    "EXECUTION_FRESH_REALITY_PROMOTION_ACCEPTANCE_REDUCTION_FALSE",
+    "COUNTS_PRESERVED_5_ACCEPTED_12_PROVED_26_UNRESOLVED_19_ROOT2_TOUCHING",
+    "ZERO_INCREMENTAL_SPEND_ZERO_NEW_REALITY_ZERO_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
