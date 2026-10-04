@@ -51,6 +51,32 @@ class H100ExpressionTreeTests(unittest.TestCase):
         self.assertEqual(out["status"], "EXACT_CANDIDATE_FOUND", out)
         self.assertLessEqual(out["best_candidate"]["nrmse"], 1e-8)
 
+    def test_cross_variable_correction_exact_recovery(self):
+        rows = []
+        pairs = [
+            (-3, -2), (-2, 1), (-1, 3), (0, -1), (1, 0), (2, 2),
+            (3, -3), (4, 1), (5, -2), (6, 3), (7, -1), (8, 2),
+        ]
+        for x, z in pairs:
+            y = 0.75 + 1.2 * x + 2.5 * (z / (1 + abs(x)))
+            rows.append({"a": x, "b": z, "y": y})
+        out = discover(rows, target="y")
+        self.assertEqual(out["status"], "EXACT_CANDIDATE_FOUND", out)
+        self.assertLessEqual(out["best_candidate"]["nrmse"], 1e-8)
+
+    def test_two_cross_variable_corrections_exact_recovery(self):
+        rows = []
+        pairs = [
+            (-3, -2), (-2, 1), (-1, 3), (0, -1), (1, 0), (2, 2),
+            (3, -3), (4, 1), (5, -2), (6, 3), (7, -1), (8, 2),
+        ]
+        for x, z in pairs:
+            y = 2.0 * (x / (1 + abs(z))) + 3.0 * (z / (1 + abs(x)))
+            rows.append({"a": x, "b": z, "y": y})
+        out = discover(rows, target="y")
+        self.assertEqual(out["status"], "EXACT_CANDIDATE_FOUND", out)
+        self.assertLessEqual(out["best_candidate"]["nrmse"], 1e-8)
+
     def test_surface_renaming_preserves_exact_behavior(self):
         sat = lambda z: z / (1 + abs(z))
         rows_a = self.rows(lambda x: 1 + 4 * sat(x))
