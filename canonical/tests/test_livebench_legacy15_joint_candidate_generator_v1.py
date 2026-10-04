@@ -145,6 +145,22 @@ def test_postscript_payload_avoids_visible_forbidden_word():
         assert x.rstrip().endswith("Any other questions?")
 
 
+def test_postscript_can_share_single_sentence_with_exact_end_phrase():
+    out = g.generate([
+        c("detectable_content:postscript", postscript_marker="P.S."),
+        c("startend:end_checker", end_phrase="Any other questions?"),
+        c("length_constraints:number_sentences", num_sentences=2, relation="less than"),
+        c("length_constraints:number_words", num_words=6, relation="less than"),
+    ])
+    assert out["status"] == "PASS_CANDIDATES"
+    assert any(
+        x.rstrip().endswith("Any other questions?")
+        and "P.S.+" in x
+        and len(re.findall(r"\\w+", x)) < 6
+        for x in out["candidates"]
+    )
+
+
 def test_exact_end_forbidden_whole_word_collision_is_proved_unsat():
     out = g.generate([
         c("startend:end_checker", end_phrase="Is there anything else I can help with?"),
