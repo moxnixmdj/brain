@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V6_REPLAY72_EXECUTION_TRUTH_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__LIVEBENCH_V6_REPLAY72_DIAGNOSTIC_TRUTH__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/LIVEBENCH_V6_REPLAY72_EXECUTION_TRUTH_RECEIPT_20261004_V1.json",
+    "git_blob_sha": "fee64ba81fbee1117db48eb406a2ea11cc7ff9fb"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/livebench-v6-replay72-truth-20261004-0925",
+    "head_sha": "d3ed97a8f90a8d8aa67fda5b13c3254caa9e2ee9",
+    "workflow_run_id": 37192308164,
+    "workflow_job_id": 111406899706,
+    "conclusion": "success",
+    "verifier_path": "verify_livebench_v6_replay72_truth_20261004.py",
+    "verifier_git_blob_sha": "daaf82e16808aa72baa5c6c73ec98cc1f4ef7291",
+    "workflow_path": ".github/workflows/verify-livebench-v6-replay72-truth-20261004.yml",
+    "workflow_git_blob_sha": "6b7cf9b765e6f05d10d9084d16668c1c15d0e867"
+  },
+  "independently_recomputed": {
+    "source_execution_workflow_run_id": 37191933717,
+    "source_execution_workflow_job_id": 111405786415,
+    "terminal_cases_replayed": 72,
+    "new_terminal_cases_consumed": 0,
+    "valid_candidate_responses": 0,
+    "policy_blocked_post_prompt_capability_acquisition": 43,
+    "inference_exit_nonzero": 29,
+    "observed_score_mass": 0,
+    "conservative_full_population_upper_percent": 64,
+    "threshold_percent": 65.7,
+    "route_fail_forced": true,
+    "capability_failure_proved": false,
+    "root1_reopen_authorized": false,
+    "incremental_spend_usd": 0
+  },
+  "verified_nonclaims": [
+    "NO_UNDERLYING_CAPABILITY_FAILURE_PROVED",
+    "NO_ROOT1_REOPEN_AUTHORIZED",
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_AUTHORITY_FOR_ANOTHER_REPLAY_OR_CASE_73_PLUS"
+  ],
+  "semantic_effect": [
+    "V6_REPLAY72_EPOCH_IS_SPENT_AND_MUST_NOT_BE_REPEATED_WITHOUT_NEW_AUTHORITY",
+    "FROZEN_EXECUTION_ROUTE_IS_NUMERICALLY_FAIL_FORCED_UNDER_OBSERVED_ZERO_RESPONSE_FAILURE_MODE",
+    "CAPABILITY_QUALITY_REMAINS_UNADJUDICATED_BECAUSE_VALID_CANDIDATE_RESPONSE_COUNT_IS_ZERO",
+    "NEXT_WORK_MUST_TARGET_GENERAL_PREEXPOSED_NONTERMINAL_ROUTING_OR_RUNTIME_FAILURE_LOCALIZATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false
+}
