@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_GLOBAL_INFORMATION_CUT_AND_INSTRUCTION_COMPILER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "triggering_evidence": {
+    "livebench_v7_receipt": "canonical/verification/LIVEBENCH_V7_SANITIZED_CLASSIFICATION_EXECUTION_RECEIPT_20261004_V1.json",
+    "observed_prefix_cases": 72,
+    "valid_response_count": 0,
+    "classification_histogram": {
+      "POLICY_BLOCK:POST_PROMPT_ACQUISITION_OR_NETWORK_FORBIDDEN": 43,
+      "STATIC_BLOCKER:BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_BLOCKED": 27,
+      "STATIC_BLOCKER:GOAL_ARCHITECTURAL_GAP": 2
+    },
+    "new_case_exposure": 0
+  },
+  "changes": [
+    {
+      "path": "canonical/runtime/root2_global_information_cut_v1.py",
+      "purpose": "jointly optimize Root2 evidence actions across all predicates with shared-evidence reuse and dependency closure"
+    },
+    {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "purpose": "generic local structural instruction compiler; exact-formal responses may close without semantic generator; non-exact semantic requests fail closed and explicitly require a semantic seed"
+    }
+  ],
+  "truth_rules": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT_FROM_THIS_CANDIDATE",
+    "NO_USE_OF_TERMINAL_PROMPT_TEXT_CASE_IDS_RESPONSES_OR_RAW_EXCEPTIONS",
+    "NO_CLAIM_THAT_STRUCTURAL_CONSTRAINT_SATISFACTION_EQUALS_SEMANTIC_TASK_SUCCESS",
+    "NO_MUTATION_OF_HISTORICAL_FROZEN_LIVEBENCH_CANDIDATE",
+    "NO_CASE_73_PLUS_EXPOSURE",
+    "NO_ROOT1_REOPEN_FROM_AGGREGATE_CLASSIFICATION_ALONE"
+  ],
+  "next_verification": [
+    "INDEPENDENT_PUBLIC_RUNNER_UNIT_TESTS",
+    "INDEPENDENT_SYNTHETIC_ONLY_INSTRUCTION_CONSTRAINT_STRESS",
+    "GLOBAL_CUT_SOLVER_CROSS_CHECK_AGAINST_BRUTE_FORCE_SMALL_INSTANCES",
+    "ONLY_AFTER_VERIFICATION_CONSIDER_BINDING_AS_A_VERIFIED_BOUND_CAPABILITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
