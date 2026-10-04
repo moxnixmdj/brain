@@ -1,19 +1,109 @@
 """Unknown-Domain hidden generator V3 with structurally total opaque IDs.
 
-V2 truncated HMAC labels could collide for some valid secret/beacon values. V3
-keeps every semantic task distribution unchanged but assigns each semantic
-feature to a secret-randomized *slot*. The slot ordinal is unique by
-construction and its semantic assignment is hidden by an HMAC ranking. Opaque
-suffixes remain for unlinkability; uniqueness no longer depends on them.
+V2 used truncated-HMAC strings directly as identifiers. That cannot establish a
+universal no-collision theorem over every accepted secret/beacon. V3 instead
+uses HMAC only to secret-randomize a finite semantic ordering, then encodes the
+unique ordinal slot into every harness/scorer-critical identifier.
+
+Therefore uniqueness is structural even if every HMAC-derived rank and opaque
+suffix collides. Numeric/task semantics remain V2. Production generation still
+requires the exact V1 predicate-local one-use authority gate.
 """
 from __future__ import annotations
 
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 from canonical.runtime import unknown_domain_direct_hidden_generator_v1 as v1
 from canonical.runtime import unknown_domain_direct_hidden_generator_v2 as v2
 
 SCHEMA = "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_HIDDEN_GENERATOR_V3"
+
+
+def _total_ids(
+    secret: bytes,
+    beacon: str,
+    *,
+    scope: str,
+    labels: Sequence[str],
+    prefix: str,
+) -> dict[str, str]:
+    """Secret-randomized finite bijection from semantic labels to opaque slots.
+
+    HMAC output is ordering material only. The unique integer slot, plus a
+    deterministic semantic-label tie-break for equal ranks, makes injectivity
+    independent of any cryptographic collision assumption.
+    """
+    rows = [str(x) for x in labels]
+    if not rows or len(rows) != len(set(rows)):
+        raise v1.UnknownDomainGeneratorError("V3_TOTAL_ID_LABEL_SET_INVALID")
+
+    ranked = []
+    for label in rows:
+        rank = v1._token(
+            secret, beacon, "v3-total-id-rank", scope, label, width=64
+        )
+        ranked.append((rank, label))
+    ranked.sort()
+
+    width = max(2, len(str(len(ranked) - 1)))
+    out: dict[str, str] = {}
+    for slot, (_, label) in enumerate(ranked):
+        opaque = v1._token(
+            secret, beacon, "v3-total-id-opaque", scope, slot, width=14
+        )
+        out[label] = f"{prefix}{slot:0{width}d}_{opaque}"
+
+    if len(out) != len(rows) or len(set(out.values())) != len(rows):
+        raise AssertionError("V3_TOTAL_ID_BIJECTION_BROKEN")
+    return out
+
+
+def _case_ids_total(
+    secret: bytes,
+    beacon: str,
+    namespace: str,
+) -> dict[tuple[str, int], str]:
+    labels = [
+        *(
+            f"T:{i}"
+            for i in range(v1.PRODUCTION_CASE_COUNTS[v1.TRANSFER])
+        ),
+        *(
+            f"A:{i}"
+            for i in range(v1.PRODUCTION_CASE_COUNTS[v1.ABSTAIN])
+        ),
+    ]
+    mapped = _total_ids(
+        secret,
+        beacon,
+        scope=f"{namespace}|CASES",
+        labels=labels,
+        prefix=f"{namespace}-C",
+    )
+    return {
+        (
+            v1.TRANSFER if label.startswith("T:") else v1.ABSTAIN,
+            int(label.split(":", 1)[1]),
+        ): case_id
+        for label, case_id in mapped.items()
+    }
+
+
+def _local_ids_total(
+    secret: bytes,
+    beacon: str,
+    *,
+    case_id: str,
+    kind: str,
+    labels: Sequence[str],
+) -> dict[str, str]:
+    return _total_ids(
+        secret,
+        beacon,
+        scope=f"{case_id}|{kind}",
+        labels=labels,
+        prefix=f"{kind}-{case_id}-",
+    )
 
 
 def _surface_ids_total(
@@ -23,27 +113,20 @@ def _surface_ids_total(
     domain: str,
     roles: list[str],
 ) -> tuple[dict[str, str], list[str]]:
-    semantic = [("role", role) for role in roles] + [("distractor", str(i)) for i in range(2)]
-
-    ranked = []
-    for kind, key in semantic:
-        rank = v1._token(
-            secret, beacon, "opaque-slot-rank", case_index, domain, kind, key, width=64
-        )
-        ranked.append((rank, kind, key))
-    # The semantic key is a deterministic tie-breaker. Even a full-HMAC tie
-    # therefore cannot collapse identifiers; it only selects a stable slot order.
-    ranked.sort()
-
-    label_by_semantic = {}
-    for slot, (_, kind, key) in enumerate(ranked):
-        opaque = v1._token(
-            secret, beacon, "opaque-label", case_index, domain, slot, width=14
-        )
-        label_by_semantic[(kind, key)] = f"{domain.lower()}_f{slot}_{opaque}"
-
-    mapping = {role: label_by_semantic[("role", role)] for role in roles}
-    distractors = [label_by_semantic[("distractor", str(i))] for i in range(2)]
+    semantic = [
+        *(f"ROLE:{role}" for role in roles),
+        "DISTRACTOR:0",
+        "DISTRACTOR:1",
+    ]
+    mapped = _total_ids(
+        secret,
+        beacon,
+        scope=f"{domain}|CASE:{case_index}|FEATURES",
+        labels=semantic,
+        prefix=f"{domain.lower()}_c{case_index}_f",
+    )
+    mapping = {role: mapped[f"ROLE:{role}"] for role in roles}
+    distractors = [mapped[f"DISTRACTOR:{i}"] for i in range(2)]
 
     all_ids = list(mapping.values()) + distractors
     if len(all_ids) != len(set(all_ids)):
@@ -51,7 +134,17 @@ def _surface_ids_total(
     return mapping, distractors
 
 
-def _transfer_case(secret: bytes, beacon: str, index: int, *, namespace: str):
+def _transfer_case(
+    secret: bytes,
+    beacon: str,
+    index: int,
+    *,
+    namespace: str,
+    case_id: str | None = None,
+):
+    if case_id is None:
+        case_id = _case_ids_total(secret, beacon, namespace)[(v1.TRANSFER, index)]
+
     family, program, roles = v2._program_for(secret, beacon, index)
     fingerprint = v1._sha256(program)
     source_rows = v2._role_rows(secret, beacon, index, program, domain="A")
@@ -86,7 +179,8 @@ def _transfer_case(secret: bytes, beacon: str, index: int, *, namespace: str):
             "terminal_consequence": v1._eval(program, row),
         })
 
-    receipt_id = f"R-{v1._token(secret, beacon, 'receipt', index, namespace)}"
+    # One receipt per case, structurally namespaced by the already-total case id.
+    receipt_id = f"R-{case_id}"
     receipt = {
         "receipt_id": receipt_id,
         "normalized_primitive_program": program,
@@ -98,13 +192,23 @@ def _transfer_case(secret: bytes, beacon: str, index: int, *, namespace: str):
         "conclusion": "success",
     }
 
+    probe_ids = _local_ids_total(
+        secret,
+        beacon,
+        case_id=case_id,
+        kind="P",
+        labels=("0", "1"),
+    )
     probes = []
     probe_hidden = {}
     for j, row in enumerate(target_rows[3:5]):
-        pid = f"P-{v1._token(secret, beacon, 'probe', index, j, namespace)}"
+        pid = probe_ids[str(j)]
         probes.append({
             "probe_id": pid,
-            "argument_schema": {"type": "OBSERVE_PRECOMMITTED_ROW", "row_slot": j},
+            "argument_schema": {
+                "type": "OBSERVE_PRECOMMITTED_ROW",
+                "row_slot": j,
+            },
             "cost": j + 1,
         })
         probe_hidden[pid] = {
@@ -118,14 +222,13 @@ def _transfer_case(secret: bytes, beacon: str, index: int, *, namespace: str):
     query_inputs = v1._surface_row(
         query_roles, b_map, b_distractors, mimic_visible=False, probe_variant=9
     )
-    case_id = (
-        f"{namespace}-T-"
-        f"{v1._token(secret, beacon, 'case', v1.TRANSFER, index, namespace, width=20)}"
-    )
     visible = {
         "case_id": case_id,
         "leaf_id": v1.TRANSFER,
-        "domain_a": {"tasks": source_observations, "earned_receipts": [receipt]},
+        "domain_a": {
+            "tasks": source_observations,
+            "earned_receipts": [receipt],
+        },
         "domain_b": {
             "tasks": target_observations,
             "query_inputs": query_inputs,
@@ -135,7 +238,9 @@ def _transfer_case(secret: bytes, beacon: str, index: int, *, namespace: str):
                 "output_shape": "SCALAR_TERMINAL_CONSEQUENCE",
             },
         },
-        "decision_requirement": "PREDICT_TERMINAL_CONSEQUENCE_AND_PROVIDE_TRANSFER_PROOF_TRACE",
+        "decision_requirement": (
+            "PREDICT_TERMINAL_CONSEQUENCE_AND_PROVIDE_TRANSFER_PROOF_TRACE"
+        ),
     }
     relevant = [b_map[r] for r in roles]
     hidden = {
@@ -154,29 +259,215 @@ def _transfer_case(secret: bytes, beacon: str, index: int, *, namespace: str):
         "surface_label_permutation_verified": True,
         "domain_vocabularies_disjoint": True,
         "allowed_probe_outcome_table": probe_hidden,
-        "opaque_identifier_scheme": "SECRET_RANDOMIZED_STRUCTURALLY_UNIQUE_SLOT_V3",
+        "opaque_identifier_scheme": (
+            "SECRET_RANDOMIZED_STRUCTURALLY_UNIQUE_SLOT_V3"
+        ),
     }
     return visible, hidden
+
+
+def _abstention_case_total(
+    secret: bytes,
+    beacon: str,
+    index: int,
+    *,
+    namespace: str,
+    case_id: str,
+):
+    cls = v1.ABSTAIN_CLASSES[index // 5]
+
+    hypothesis_ids = _local_ids_total(
+        secret,
+        beacon,
+        case_id=case_id,
+        kind="H",
+        labels=("0", "1"),
+    )
+    h1, h2 = hypothesis_ids["0"], hypothesis_ids["1"]
+
+    action_ids = _local_ids_total(
+        secret,
+        beacon,
+        case_id=case_id,
+        kind="A",
+        labels=("0", "1"),
+    )
+    a = action_ids["0"]
+    b = a if cls == "IDENTIFIABLE" else action_ids["1"]
+
+    hypotheses = [
+        {
+            "hypothesis_id": h1,
+            "plausible": True,
+            "terminal_consequence": a,
+            "evidence": ["OBS-0"],
+        },
+        {
+            "hypothesis_id": h2,
+            "plausible": True,
+            "terminal_consequence": b,
+            "evidence": ["OBS-0"],
+        },
+    ]
+
+    probes = []
+    table = {}
+    minimum = None
+    probe_ids = _local_ids_total(
+        secret,
+        beacon,
+        case_id=case_id,
+        kind="D",
+        labels=("0", "1"),
+    )
+    if cls == "UNDERSPECIFIED":
+        p0, p1 = probe_ids["0"], probe_ids["1"]
+        probes = [
+            {
+                "probe_id": p0,
+                "argument_schema": {"type": "SAFE_BINARY_DISCRIMINATOR"},
+                "cost": 1,
+            },
+            {
+                "probe_id": p1,
+                "argument_schema": {"type": "SAFE_BINARY_DISCRIMINATOR"},
+                "cost": 2,
+            },
+        ]
+        table = {
+            p0: {h1: "LEFT", h2: "RIGHT"},
+            p1: {h1: "LEFT", h2: "RIGHT"},
+        }
+        minimum = p0
+    elif cls == "NONIDENTIFIABLE":
+        p0 = probe_ids["0"]
+        probes = [
+            {
+                "probe_id": p0,
+                "argument_schema": {"type": "SAFE_OBSERVATION"},
+                "cost": 1,
+            }
+        ]
+        table = {p0: {h1: "SAME", h2: "SAME"}}
+
+    visible = {
+        "case_id": case_id,
+        "leaf_id": v1.ABSTAIN,
+        "hypotheses": hypotheses,
+        "public_observations": {"OBS-0": "VISIBLE"},
+        "allowed_probes": probes,
+        "decision_requirement": (
+            "CONCLUDE_OR_ABSTAIN_OR_REQUEST_DISCRIMINATOR"
+        ),
+    }
+    hidden = {
+        "case_id": case_id,
+        "leaf_id": v1.ABSTAIN,
+        "identifiability_status": cls,
+        "equivalence_classes": [[h1, h2]] if a == b else [[h1], [h2]],
+        "gold_terminal_consequence": a if cls == "IDENTIFIABLE" else None,
+        "minimum_discriminator_id": minimum,
+        "allowed_probe_outcome_table": table,
+    }
+    return visible, hidden
+
+
+def _validate_total_identifier_scopes(
+    visible: Sequence[Mapping[str, Any]],
+    hidden: Sequence[Mapping[str, Any]],
+) -> None:
+    case_ids = [str(row.get("case_id") or "") for row in visible]
+    if len(case_ids) != 27 or len(case_ids) != len(set(case_ids)):
+        raise AssertionError("V3_CASE_ID_TOTALITY_BROKEN")
+    if [str(row.get("case_id") or "") for row in hidden] != case_ids:
+        raise AssertionError("V3_VISIBLE_HIDDEN_CASE_ALIGNMENT_BROKEN")
+
+    receipt_ids = []
+    for v, h in zip(visible, hidden, strict=True):
+        if v["leaf_id"] == v1.TRANSFER:
+            receipts = v["domain_a"]["earned_receipts"]
+            if len(receipts) != 1:
+                raise AssertionError("V3_TRANSFER_RECEIPT_CARDINALITY_BROKEN")
+            receipt_ids.append(str(receipts[0]["receipt_id"]))
+
+            pids = [str(x["probe_id"]) for x in v["domain_b"]["allowed_probes"]]
+            if len(pids) != 2 or len(pids) != len(set(pids)):
+                raise AssertionError("V3_TRANSFER_PROBE_ID_TOTALITY_BROKEN")
+            if set(pids) != set(h["allowed_probe_outcome_table"]):
+                raise AssertionError("V3_TRANSFER_PROBE_TABLE_ALIGNMENT_BROKEN")
+
+            relevant = list(h["transfer_relevant_feature_ids"])
+            distractors = list(h["distractor_feature_ids"])
+            roles = list(h["latent_primitive_program"]["roles"])
+            if len(relevant) != len(roles) or len(relevant) != len(set(relevant)):
+                raise AssertionError("V3_RELEVANT_FEATURE_ID_TOTALITY_BROKEN")
+            if len(distractors) != 2 or len(distractors) != len(set(distractors)):
+                raise AssertionError("V3_DISTRACTOR_ID_TOTALITY_BROKEN")
+            if set(relevant) & set(distractors):
+                raise AssertionError(
+                    "V3_RELEVANT_DISTRACTOR_DISJOINTNESS_BROKEN"
+                )
+        else:
+            hids = [str(x["hypothesis_id"]) for x in v["hypotheses"]]
+            if len(hids) != 2 or len(hids) != len(set(hids)):
+                raise AssertionError("V3_HYPOTHESIS_ID_TOTALITY_BROKEN")
+
+            status = str(h["identifiability_status"])
+            consequences = [
+                str(x["terminal_consequence"]) for x in v["hypotheses"]
+            ]
+            if status == "IDENTIFIABLE":
+                if len(set(consequences)) != 1:
+                    raise AssertionError(
+                        "V3_IDENTIFIABLE_ACTION_EQUIVALENCE_BROKEN"
+                    )
+            elif len(set(consequences)) != 2:
+                raise AssertionError("V3_DISTINCT_ACTION_TOTALITY_BROKEN")
+
+            pids = [str(x["probe_id"]) for x in v["allowed_probes"]]
+            if len(pids) != len(set(pids)):
+                raise AssertionError(
+                    "V3_ABSTENTION_PROBE_ID_TOTALITY_BROKEN"
+                )
+            if set(pids) != set(h["allowed_probe_outcome_table"]):
+                raise AssertionError(
+                    "V3_ABSTENTION_PROBE_TABLE_ALIGNMENT_BROKEN"
+                )
+
+    if len(receipt_ids) != len(set(receipt_ids)):
+        raise AssertionError("V3_RECEIPT_ID_TOTALITY_BROKEN")
 
 
 def _generate(*, beacon: str, evaluator_secret: Any, namespace: str):
     if not isinstance(beacon, str) or len(beacon.strip()) < 16:
         raise v1.UnknownDomainGeneratorError("POST_FREEZE_BEACON_INVALID")
     secret = v1._secret_bytes(evaluator_secret)
+    case_ids = _case_ids_total(secret, beacon, namespace)
+
     visible = []
     hidden = []
     for i in range(v1.PRODUCTION_CASE_COUNTS[v1.TRANSFER]):
-        a, b = _transfer_case(secret, beacon, i, namespace=namespace)
+        a, b = _transfer_case(
+            secret,
+            beacon,
+            i,
+            namespace=namespace,
+            case_id=case_ids[(v1.TRANSFER, i)],
+        )
         visible.append(a)
         hidden.append(b)
     for i in range(v1.PRODUCTION_CASE_COUNTS[v1.ABSTAIN]):
-        a, b = v1._abstention_case(secret, beacon, i, namespace=namespace)
+        a, b = _abstention_case_total(
+            secret,
+            beacon,
+            i,
+            namespace=namespace,
+            case_id=case_ids[(v1.ABSTAIN, i)],
+        )
         visible.append(a)
         hidden.append(b)
 
-    ids = [x["case_id"] for x in visible]
-    if len(ids) != 27 or len(ids) != len(set(ids)):
-        raise v1.UnknownDomainGeneratorError("CASE_ID_SET_INVALID")
+    _validate_total_identifier_scopes(visible, hidden)
     return {
         "schema": SCHEMA,
         "case_count": 27,
@@ -184,6 +475,9 @@ def _generate(*, beacon: str, evaluator_secret: Any, namespace: str):
         "hidden_records": hidden,
         "visible_packet_digest": v1._sha256(visible),
         "hidden_packet_digest": v1._sha256(hidden),
+        "identifier_totality": (
+            "ALL_HARNESS_AND_SCORER_CRITICAL_FINITE_ID_SCOPES_STRUCTURAL"
+        ),
     }
 
 
@@ -191,7 +485,11 @@ def generate_production_population(
     *, beacon: str, evaluator_secret: Any, authority: Mapping[str, Any]
 ):
     v1._production_authorized(authority)
-    out = _generate(beacon=beacon, evaluator_secret=evaluator_secret, namespace="UDIR3")
+    out = _generate(
+        beacon=beacon,
+        evaluator_secret=evaluator_secret,
+        namespace="UDIR3",
+    )
     out["authority_claim_id"] = str(authority["one_use_claim_id"])
     out["production"] = True
     return out
@@ -206,5 +504,7 @@ def generate_qualification_fixture_population(*, beacon: str):
         namespace="QUALONLY3",
     )
     out["production"] = False
-    out["hard_nonclaim"] = "QUALIFICATION_FIXTURES_ARE_NOT_PRODUCTION_OR_TERMINAL_CASES"
+    out["hard_nonclaim"] = (
+        "QUALIFICATION_FIXTURES_ARE_NOT_PRODUCTION_OR_TERMINAL_CASES"
+    )
     return out
