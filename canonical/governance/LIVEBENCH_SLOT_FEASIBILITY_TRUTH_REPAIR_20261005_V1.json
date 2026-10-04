@@ -42,12 +42,13 @@
   },
   "new_runtime": {
     "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
-    "git_blob_sha": "bd5964838930cd3c88783490bf4e424958e2edde",
+    "git_blob_sha": "56c39dafa24be235982557bbdf5678bef2ae8fae",
     "tests_path": "canonical/tests/test_livebench_legacy15_slot_feasibility_v1.py",
-    "tests_git_blob_sha": "b249137b2fd888a7ab4165b1e040022379b024d3",
+    "tests_git_blob_sha": "b2eef299fa9d422b32870bee9cb217a6b7136908",
     "certified_hard_unsat_classes": [
       "NTH_PARAGRAPH_FIRST_WORD_EQUALS_A_FORBIDDEN_WORD",
-      "MANDATORY_END_PHRASE_CONTAINS_A_GENERATED_LITERAL_FORBIDDEN_WORD"
+      "MANDATORY_END_PHRASE_CONTAINS_A_GENERATED_LITERAL_FORBIDDEN_WORD",
+      "MANDATORY_SECTION_SPLITTER_EQUALS_A_GENERATED_LITERAL_FORBIDDEN_WORD"
     ],
     "important_semantics": "NO_REPORTED_CONTRADICTION_MEANS_UNKNOWN_NOT_SAT; THE_LAYER_FAILS_CLOSED"
   },
