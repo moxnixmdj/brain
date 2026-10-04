@@ -172,9 +172,9 @@ def _source_structure_theorem() -> dict[str, Any]:
     assert "v1._production_authorized(authority)" in g2
 
     assert "itertools.permutations(sorted(keys),len(roles))" in c1
-    assert "if len(supports)==1 and len(consequences)==1:" in c2.replace(" ", "")
-    assert "if len(transcript)<2:" in c2.replace(" ", "")
-    assert "return v1._abstention_step(case_visible)" in c2
+    assert "iflen(supports)==1andlen(consequences)==1:" in c2.replace(" ", "")
+    assert "iflen(transcript)<2:" in c2.replace(" ", "")
+    assert "returnv1._abstention_step(case_visible)" in c2.replace(" ", "")
     assert "MAX_TRANSFER_PROBES=2" in harness.replace(" ", "")
     assert 'if probe_count>=floor' in scorer.replace(" ", "")
     assert '"TRANSFER_SUPPORT_DOES_NOT_MATCH_HIDDEN_RELEVANT_SET"' in scorer
