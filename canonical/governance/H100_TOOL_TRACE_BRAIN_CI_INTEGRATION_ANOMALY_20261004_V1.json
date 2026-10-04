@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TOOL_TRACE_BRAIN_CI_INTEGRATION_ANOMALY_20261004_V1",
+  "date": "2026-10-04",
+  "status": "RECORDED__BRAIN_LOCAL_WORKFLOW_FAILURE_WITH_ZERO_RECORDED_STEPS__INDEPENDENT_EXACT_SUBJECT_PASS_LOAD_BEARING__ZERO_CREDIT",
+  "brain_pull_request": 1688,
+  "brain_subject_head_sha": "d51cbbc81afc2ceb5606f655c50127266201ae58",
+  "brain_local_workflow": {
+    "name": "H100 zero-learned tool-trace normalizer V1",
+    "run_id": 37193385918,
+    "job_id": 111410099427,
+    "conclusion": "failure",
+    "recorded_steps": 0,
+    "semantic_failure_identified": false
+  },
+  "exact_subject_blobs": {
+    "preexposure": "b280663c459d72e3e6081130a3cdb8680a668b64",
+    "candidate": "6f9b10c905ba3b33e5c687a1253655ead997747a",
+    "runtime": "c5b8018c9a62fcec85de46b0ace1be0bd0ddbd06",
+    "tests": "d8e61fbd11e377c77df0ee49e593fdad8f7bf53a"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1816,
+    "merge_commit": "b16e4080067c75c269e492c125a47a67cbb76b6b",
+    "workflow_run_id": 37193482392,
+    "workflow_job_id": 111410387302,
+    "conclusion": "success",
+    "exact_subject_blobs": true,
+    "frozen_replay": "10_OF_10_EXACT",
+    "fresh_challenges": "5_OF_5_PASS"
+  },
+  "rule": "DO_NOT_RECLASSIFY_ZERO_STEP_BRAIN_RUNNER_FAILURE_AS_TOOL_TRACE_CAPABILITY_FAILURE_WHEN_EXACT_SUBJECT_BYTES_HAVE_AN_INDEPENDENT_CONTENT_ADDRESSED_PASS",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
