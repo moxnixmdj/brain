@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V3_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_ON_CANONICAL_POINTER_BINDING__CORE_INDEPENDENT_PUBLIC_RUNNER_PASS__ROOT1_INACTIVE__ZERO_CREDIT",
+  "status": "ACTIVE_MAIN_CANDIDATE__CORE_INDEPENDENT_PUBLIC_RUNNER_PASS__ACTIVATION_PROJECTION_VERIFICATION_PENDING__ROOT1_INACTIVE__ZERO_CREDIT",
   "scope": "ROOT1_CAPABILITY_MISSING_ONLY",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "operative_control": {
@@ -14,7 +14,12 @@
     "core_verifier_pull_request": 1524,
     "core_verifier_merge_commit": "3456f143c8ca3e6b6b2b49e5e87438ae597926f0",
     "core_workflow_run_id": 37164893100,
-    "core_workflow_job_id": 111325696191
+    "core_workflow_job_id": 111325696191,
+    "governance_git_blob_sha": "e74c994a01e7b8cf93eb4f463beb6e33cda56e94",
+    "runtime_git_blob_sha": "7c9ba29c6ba32df782d5d0322dc06b53ea447391",
+    "tests_git_blob_sha": "0b0f2bb84563eecf3eabc52109a6e068dc9550e3",
+    "envelope_audit_git_blob_sha": "1318af58b44ea733421aded33b56144875e0a3e3",
+    "core_verification_git_blob_sha": "060788a84f33ff3474c62151f415688f1297ea4f"
   },
   "current_root1_truth": {
     "root1_positive_gap_count": 0,
