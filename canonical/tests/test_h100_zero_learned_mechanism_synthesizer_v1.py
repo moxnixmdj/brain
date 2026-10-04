@@ -48,6 +48,33 @@ class ZeroLearnedMechanismSynthesizerTests(unittest.TestCase):
         self.assertEqual(best["feature_expression"],"x^0.5")
         self.assertLess(best["nrmse"],1e-10)
 
+    def test_continuous_power_fit_on_public_stream_power_shape(self):
+        rows=[
+            {"x1":25.5646,"x2":0.1859,"out":0.0012396},
+            {"x1":0.1108,"x2":0.0187,"out":-0.0000064},
+            {"x1":100,"x2":0.05,"out":0.0008841},
+            {"x1":10000,"x2":0.05,"out":0.0082336},
+            {"x1":100,"x2":0.5,"out":0.0049850},
+            {"x1":10000,"x2":0.5,"out":0.0454408},
+            {"x1":1000,"x2":0.2,"out":0.0078693},
+        ]
+        d=s.discover(rows,target="out")
+        best=d["candidates"][0]
+        self.assertEqual(best["family"],"log_power")
+        self.assertAlmostEqual(best["exponents"][0],0.4822,delta=0.01)
+        self.assertAlmostEqual(best["exponents"][1],0.7478,delta=0.01)
+        self.assertLess(best["nrmse"],0.03)
+
+    def test_2d_probe_design_uses_full_2d_plus_1_budget(self):
+        p=s.design_initial_probes({"x1":[0.1,10000],"x2":[0.001,0.5]})
+        self.assertEqual(p["budget"],5)
+        self.assertEqual(len(p["points"]),5)
+        self.assertEqual(p["points"][0],{"x1":0.1,"x2":0.001})
+        self.assertEqual(p["points"][3],{"x1":10000.0,"x2":0.5})
+        self.assertAlmostEqual(p["points"][4]["x1"],math.sqrt(1000),places=8)
+        self.assertAlmostEqual(p["points"][4]["x2"],math.sqrt(0.0005),places=8)
+        self.assertEqual(p["learned_parameter_bytes"],0)
+
     def test_surface_renaming_preserves_structural_signature(self):
         a=[
             {"foo":x,"bar":z,"out":5*x*x/z+1}
