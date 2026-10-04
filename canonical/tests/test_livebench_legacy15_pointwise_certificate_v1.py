@@ -88,21 +88,34 @@ def test_sentence_end_unsat_makes_one_of_two_pointwise_optimal():
     assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in result["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
 
 
-def test_generalized_zero_sentence_unsat_makes_partial_candidate_optimal():
+def test_smaller_semantic_unsat_cores_compress_five_required_subsets_to_two():
     contracts = [
         {
-            "instruction_id": "length_constraints:number_sentences",
-            "slots": {"num_sentences": 1, "relation": "less than"},
+            "instruction_id": "length_constraints:nth_paragraph_first_word",
+            "slots": {"num_paragraphs": 2, "nth_paragraph": 1, "first_word": "alpha"},
+        },
+        {
+            "instruction_id": "startend:end_checker",
+            "slots": {"end_phrase": "Any other questions?"},
         },
         {
             "instruction_id": "detectable_format:title",
             "slots": {},
         },
+        {
+            "instruction_id": "keywords:forbidden_words",
+            "slots": {"forbidden_words": ["alpha"]},
+        },
+        {
+            "instruction_id": "length_constraints:number_sentences",
+            "slots": {"num_sentences": 1, "relation": "less than"},
+        },
     ]
-    result = certify(contracts, [True, False])
+    result = certify(contracts, [True, True, True, False, False])
     assert result["pointwise_optimal"] is True
-    assert result["required_next_cardinality_subset_count"] == 1
-    assert any(
-        x.startswith("SENTENCE_LT_ONE_REQUIRES_EMPTY_BUT_CHECKER_REQUIRES_OUTPUT:")
-        for x in result["semantic_unsat_evidence"][0]["hard_unsat_reasons"]
-    )
+    assert result["required_next_cardinality_subset_count"] == 5
+    assert result["minimum_unsat_core_cover_count"] == 2
+    assert len(result["minimum_unsat_core_cover"]) == 2
+    assert result["inherited_unsat_subset_skips"] > 0
+    cores = [set(row["core_indices"]) for row in result["semantic_unsat_evidence"]]
+    assert all(not (a < b) for a in cores for b in cores)
