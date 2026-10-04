@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_WORD_TOKEN_EQUIVALENCE_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_TRUTH_REPAIR__PUBLIC_SOURCE_DIRECTLY_INSPECTED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Correct the current overbroad ratio-overlap residual by replacing raw-reference-byte recovery with the exact score-sufficient equivalence relation induced by the public IFBench NGramOverlapChecker.",
+  "supersedes_premise": {
+    "path": "canonical/verification/LIVEBENCH_PUBLIC_PARAMETER_TRUTH_INDEPENDENT_VERIFICATION_20261004_V1.json",
+    "premise": "WHITESPACE_NORMALIZATION_CANNOT_BE_ASSUMED_SCORE_PRESERVING_BECAUSE_NGRAMOVERLAPCHECKER_USES_CHARACTER_TRIGRAMS_OF_EXACT_REFERENCE_TEXT",
+    "state": "FALSE_AS_WRITTEN__PUBLIC_CHECKER_USES_WORD_TOKENIZATION_THEN_WORD_TRIGRAMS"
+  },
+  "public_source_binding": {
+    "repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "ifbench/instructions.py",
+    "git_blob_sha": "7f167018e0c5472b04e13cbf847e5988c04ecb11",
+    "class": "NGramOverlapChecker",
+    "observed_semantics": [
+      "ngrams = set(nltk.ngrams(nltk.word_tokenize(value), 3))",
+      "ref_ngrams = set(nltk.ngrams(nltk.word_tokenize(reference_text), 3))",
+      "overlap = len(ngrams.intersection(ref_ngrams)) / len(ngrams)"
+    ]
+  },
+  "exact_theorem": {
+    "definitions": {
+      "T(x)": "nltk.word_tokenize(x)",
+      "G(x)": "set(nltk.ngrams(T(x), 3))",
+      "S(y,r)": "|G(y) INTERSECT G(r)| / |G(y)| for nonempty G(y)"
+    },
+    "necessary_for_score_identity": "NOT_RAW_STRING_IDENTITY",
+    "sufficient_conditions": [
+      "G(candidate_reference) == G(true_reference)",
+      "STRONGER_SUFFICIENT_CONDITION: T(candidate_reference) == T(true_reference)"
+    ],
+    "conclusion": "IF_G(candidate_reference)_EQUALS_G(true_reference)_THEN_FOR_EVERY_RESPONSE_Y_THE_NGRAM_OVERLAP_SCORE_AND_PASS_FAIL_RESULT_ARE_IDENTICAL",
+    "proof": "The checker reads the reference only through G(reference). Substituting any reference with the same G set leaves the numerator, denominator, percentage and threshold comparison unchanged for every candidate response."
+  },
+  "public_family_evidence_already_bound": {
+    "verification_path": "canonical/verification/LIVEBENCH_PUBLIC_PARAMETER_TRUTH_INDEPENDENT_VERIFICATION_20261004_V1.json",
+    "public_ratio_overlap_rows": 12,
+    "raw_reference_visible": 5,
+    "normalized_reference_visible": 12,
+    "corrected_interpretation": "THE_7_NORMALIZED_ONLY_ROWS_REQUIRE_TOKEN_OR_TRIGRAM_SET_EQUIVALENCE_PROOF__NOT_RAW_BYTE_RECOVERY"
+  },
+  "residual_reduction": {
+    "deleted_obligation": "RECOVER_EXACT_REFERENCE_TEXT_BYTES_FOR_ALL_RATIO_OVERLAP_CASES",
+    "replacement_obligation": "PROVE_PROMPT_DERIVED_REFERENCE_HAS_IDENTICAL_NLTK_WORD_TOKEN_TRIGRAM_SET_TO_SCORER_REFERENCE",
+    "next_minimum_public_test": "RECOMPUTE_T_AND_G_FOR_THE_7_NORMALIZED_ONLY_PUBLIC_IFBENCH_ROWS_AND_CHECK_EXACT_EQUALITY",
+    "if_public_7_of_7_pass": "PROMOTE_PUBLIC_FAMILY_RATIO_OVERLAP_PARAMETER_DERIVABILITY_FROM_OPEN_RAW_REFERENCE_ACQUISITION_TO_TOKEN_EQUIVALENT_DERIVABILITY__EXACT_FROZEN_LIVEBENCH_CONSTRUCTION_BINDING_STILL_REQUIRED",
+    "if_any_fail": "LOCALIZE_ONLY_THE_FAILING_TOKENIZATION_DIFFERENCES__DO_NOT_REOPEN_RAW_BYTE_RECOVERY_GLOBALLY"
+  },
+  "integration_relevance": {
+    "seed_postprocessor": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+    "instruction_compiler": "canonical/runtime/instruction_constraint_compiler_v1.py",
+    "effect": "A_SCORE_EQUIVALENT_REFERENCE_DERIVATION_CAN_BE_COMPOSED_WITH_GENERIC_SEMANTIC_SEEDS_AND_EXACT_POSTVALIDATION_WITHOUT_TERMINAL_CASE_SPECIALIZATION"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_ALL_7_NORMALIZED_ONLY_PUBLIC_ROWS_ALREADY_PASS_TOKEN_EQUIVALENCE",
+    "NO_CLAIM_OF_EXACT_FROZEN_LIVEBENCH_DATASET_EQUIVALENCE",
+    "NO_LIVEBENCH_ACCEPTANCE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
