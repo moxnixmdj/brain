@@ -1,0 +1,90 @@
+name: Verify terminal-relevant change
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/**"
+      - "canonical/tests/**"
+      - "canonical/governance/**"
+      - ".github/workflows/verify-terminal-relevant-change.yml"
+  push:
+    paths:
+      - "canonical/runtime/**"
+      - "canonical/tests/**"
+      - "canonical/governance/**"
+      - ".github/workflows/verify-terminal-relevant-change.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  changed-surface:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile changed Python and run changed/paired unit tests
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.before }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          python - <<'PY'
+          import os, pathlib, py_compile, subprocess, sys
+
+          root = pathlib.Path(".")
+          event = os.environ.get("EVENT_NAME", "")
+          base = os.environ.get("PR_BASE_SHA") if event == "pull_request" else os.environ.get("BASE_SHA")
+          if not base or set(base) == {"0"}:
+              base = subprocess.check_output(["git", "rev-parse", "HEAD^"], text=True).strip()
+
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", f"{base}...HEAD"], text=True
+          ).splitlines()
+          relevant = [
+              p for p in changed
+              if p.startswith(("canonical/runtime/", "canonical/tests/", "canonical/governance/"))
+          ]
+          print("changed relevant files:")
+          for p in relevant:
+              print(" -", p)
+
+          py_files = [p for p in relevant if p.endswith(".py") and (root / p).is_file()]
+          for p in py_files:
+              py_compile.compile(p, doraise=True)
+
+          tests = {
+              p for p in py_files
+              if p.startswith("canonical/tests/test_") and p.endswith(".py")
+          }
+          runtime_files = [
+              p for p in py_files
+              if p.startswith("canonical/runtime/") and pathlib.Path(p).name != "__init__.py"
+          ]
+          for p in runtime_files:
+              stem = pathlib.Path(p).stem
+              candidate = f"canonical/tests/test_{stem}.py"
+              if (root / candidate).is_file():
+                  tests.add(candidate)
+
+          if runtime_files and not tests:
+              raise SystemExit(
+                  "FAIL_CLOSED: runtime changed but no changed or conventionally paired unit test exists"
+              )
+
+          for p in sorted(tests):
+              module = p[:-3].replace("/", ".")
+              print(f"running {module}")
+              subprocess.run([sys.executable, "-m", "unittest", module, "-v"], check=True)
+
+          print(
+              f"PASS: compiled={len(py_files)} runtime={len(runtime_files)} tests={len(tests)}"
+          )
+          PY
