@@ -560,6 +560,17 @@
       "capability_credit_delta": 0,
       "ownership_credit_delta": 0,
       "remaining_family_gate": "MYSTERYMECHANISM_GE_49_55"
+    },
+    "mysterymechanism_reality_gate": {
+      "predicate_id": "MYSTERYMECHANISM_GE_49_55",
+      "state": "EXTERNAL_REQUIRED__NOT_PROVED",
+      "reason": "FROZEN_EMPIRICAL_PRIVATE_222_MECHANISM_SCORE_CANNOT_BE_DERIVED_FROM_PUBLIC_EXAMPLES_OR_FINITE_TRANSCRIPTS_WITHOUT_PRIVATE_OUTCOME_RECEIPT_OR_PROVEN_SCOPE_SUPERSET",
+      "gate_path": "canonical/governance/MYSTERYMECHANISM_IRREDUCIBLE_PRIVATE_SCORE_GATE_20261005_V1.json",
+      "nonidentifiability_theorem": "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py",
+      "active_candidate": "canonical/runtime/mysterymechanism_sparse_symbolic_adapter_v1.py",
+      "verifier_pr": 2166,
+      "acceptance_credit_delta": 0,
+      "family_credit_delta": 0
     }
   },
   "behavioral_quarantined_family_count": 0,
