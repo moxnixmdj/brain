@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_FRONTIER_V10_ACTIVATION_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__V10_COMPOSITION_INDEPENDENT_PASS__POINTER_PROJECTION_REVERIFY_REQUIRED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "status": "ACTIVE__V10_COMPOSITION_AND_POINTER_PROJECTION_INDEPENDENT_PASS__EFFECTIVE_SCHEDULING__ZERO_CREDIT",
   "frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V10.json",
   "frontier_git_blob_sha": "2012926814d0d06405da56da64e589b06fef1756",
   "verification_path": "canonical/verification/ROOT2_V10_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
@@ -16,7 +16,7 @@
   ],
   "authority": {
     "scheduling": true,
-    "effective_scheduling": false,
+    "effective_scheduling": true,
     "execution": false,
     "promotion": false,
     "fresh_reality": false
@@ -30,5 +30,19 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "pointer_projection_verification": {
+    "path": "canonical/verification/ROOT2_V10_POINTER_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "73fce958517f0467666bc9e70f8411fa618b5210",
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37173464316,
+    "workflow_job_id": 111351076362,
+    "conclusion": "success"
+  },
+  "preserved_controls": {
+    "external_fact_acquisition_overlay_activation_path": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_ACTIVATION_V1.json",
+    "external_fact_acquisition_overlay_activation_git_blob_sha": "4e6a60814a097ef6905f487cadfe5e8264f2494a",
+    "primary_source_search_deletions_pointer_verification_path": "canonical/verification/ROOT2_PRIMARY_SOURCE_SEARCH_DELETIONS_POINTER_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "primary_source_search_deletions_pointer_verification_git_blob_sha": "80c9767429671e72c58d000c8c2b3c5650d9b3ce"
   }
 }
