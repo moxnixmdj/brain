@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_ROOT2_WAKE_AWARE_AUTHORITY_RECONCILIATION_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__LIVE_ROOT2_POINTER_REPAIR_ONLY__ZERO_CREDIT",
+  "subject": {
+    "root_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_git_blob_sha": "4672a96608357daa47ffab066e45d7594d8bf4c9",
+    "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "authority_git_blob_sha": "558b176862a4089101878e0d460780909fcc304c"
+  },
+  "bound_scheduler": {
+    "compilation_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "compilation_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
+    "activation_path": "canonical/governance/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "d739ade25b0c00cee069add72dab9677fa31e027",
+    "activation_verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "activation_verification_git_blob_sha": "d197df20e5192f6613169d4620d7649fdf0e4884",
+    "wake_aware_cut_path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+    "wake_aware_cut_git_blob_sha": "d09abed23287560508353ce0e0476b98a9749cef"
+  },
+  "recomputed_truth": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "terminal": false,
+    "root1_positive_gap_count": 0,
+    "root2_touching_count": 18,
+    "root3_touching_count": 9,
+    "active_information_positive_root2_groups": 6,
+    "sleep_until_wake_root2_branches": 3,
+    "fresh_reality_authority": false
+  },
+  "checks": {
+    "acceptance_counts_preserved": true,
+    "root_partition_preserved": true,
+    "exact18_v4_bound": true,
+    "wake_aware_v3_bound": true,
+    "cursor_dormancy_preserved": true,
+    "execution_authority_remains_false": true,
+    "promotion_authority_remains_false": true,
+    "fresh_reality_authority_remains_false": true
+  },
+  "consequence": "REMOVE_STALE_V12_PENDING_REBIND_CONTROL_PLANE_TEXT_AND_DISPATCH_ONLY_INFORMATION_POSITIVE_ROOT2_ZERO_REALITY_GROUPS",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
