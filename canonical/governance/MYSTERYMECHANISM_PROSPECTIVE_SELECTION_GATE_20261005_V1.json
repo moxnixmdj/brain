@@ -26,8 +26,9 @@
     ],
     "screening": {
       "all_transform_pairs_fit_only": true,
-      "inner_loo_candidate_cap": 512,
-      "candidate_cap_selection_source": "FIT_ONLY",
+      "selection_search": "EXACT_BRANCH_AND_BOUND_OVER_FIT_ONLY_INNER_LOO",
+      "lower_bound": "FIT_NRMSE_PLUS_COMPLEXITY_PENALTY",
+      "stopping_rule": "STOP_ONLY_WHEN_NEXT_FIT_ONLY_LOWER_BOUND_EXCEEDS_INCUMBENT_FINAL_SELECTION_SCORE",
       "prospective_validation_influences_candidate_set": false,
       "prospective_validation_influences_structure_selection": false
     },
@@ -41,7 +42,7 @@
   },
   "breakthrough": {
     "deleted_false_shortcut": "TREATING_POST_SELECTION_HELD_ROW_SCORING_AS_PROSPECTIVE_VALIDATION",
-    "new_capability": "TRUE_PRESELECTION_HOLDOUT_FALSIFICATION_FOR_SPARSE_SYMBOLIC_STRUCTURE_SEARCH",
+    "new_capability": "TRUE_PRESELECTION_HOLDOUT_FALSIFICATION_WITH_EXACT_FIT_ONLY_BRANCH_AND_BOUND_STRUCTURE_SEARCH",
     "terminal_leverage": "MYSTERYMECHANISM_IS_A_LIVE_ROOT2_PREDICATE_AND_ALSO_REMAINS_THE_SEPARATE_OPEN_PREDICATE_IN_UNKNOWN_DOMAIN_ADAPTATION_AFTER_UNKNOWN_DOMAIN_TRANSFER_AUDIT",
     "acceptance_credit_delta": 0,
     "family_credit_delta": 0,
