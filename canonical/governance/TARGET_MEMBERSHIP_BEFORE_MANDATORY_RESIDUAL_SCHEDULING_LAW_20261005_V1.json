@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_MEMBERSHIP_BEFORE_MANDATORY_RESIDUAL_SCHEDULING_LAW_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__GENERAL_FAIL_CLOSED_SCHEDULER_PRECEDENCE_LAW__SCIENTIFIC_HYPOTHESIS_CONTRADICTION_REPAIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Prevent any Brain-registry noncoverage or residual decomposition result from becoming mandatory terminal work before the target-membership premise for that behavior has itself been proved.",
+  "bound_authorities": {
+    "scientific_target_scope_quarantine": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_TARGET_SCOPE_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "de091bdc3c1e3bb4ec793afa44cf2b2caf51bae7"
+    },
+    "scientific_edge_falsification": {
+      "path": "canonical/verification/TERMINAL_ACCEPTANCE_V3_SCIENTIFIC_HYPOTHESIS_EDGE_FALSIFICATION_20261005_V1.json",
+      "git_blob_sha": "830dcd19615923f55ded7159da608e7ad85b110e"
+    },
+    "deterministic_subtraction_activation": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_ACTIVATION_V1.json",
+      "git_blob_sha": "d33464eee4d69f000a4715c256f447869d540522"
+    },
+    "deterministic_subtraction_subject": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_20261005_V1.json",
+      "git_blob_sha": "da24aa0173be9dc5d43bdb427cdc790bf7481c14"
+    },
+    "deterministic_subtraction_verification": {
+      "path": "canonical/verification/SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "c539adc4e4a81013fb09d325274f2136b7fc7583"
+    }
+  },
+  "theorem": {
+    "name": "TARGET_MEMBERSHIP_PRECEDES_MANDATORY_RESIDUAL_SCHEDULING",
+    "variables": {
+      "P_b": "TARGET_MEMBERSHIP_FOR_BEHAVIOR_b_IS_PROVED",
+      "M_b": "BEHAVIOR_b_IS_SCHEDULED_AS_MANDATORY_TERMINAL_WORK",
+      "S_i": "AN_INDEPENDENTLY_VERIFIED_SUBTRACTION_OR_REUSE_FACT_FOR_b"
+    },
+    "scheduler_invariant": "FOR_ALL_b__M_b_IMPLIES_P_b",
+    "fail_closed_consequence": "FOR_ALL_b__NOT_P_b_IMPLIES_NOT_M_b",
+    "orthogonality": "TRUTH_OF_INDEPENDENTLY_VERIFIED_S_i_IS_NOT_REVOKED_BY_NOT_P_b__THE_S_i_REMAIN_REUSABLE_IF_P_b_IS_LATER_PROVED",
+    "noncoverage_rule": "BRAIN_REGISTRY_NONCOVERAGE_ESTABLISHES_AT_MOST_A_CONDITIONAL_RESIDUAL_UNTIL_P_b_IS_TRUE",
+    "proof_sketch": [
+      "Mandatory scheduling is justified only for target behavior obligations.",
+      "Therefore mandatory scheduling implies proved target membership.",
+      "If proved target membership is absent, the conjunction M_b AND NOT_P_b violates the scheduler invariant.",
+      "Independent deterministic subtraction receipts concern how to solve a behavior if it is required; they do not themselves prove that the target requires the behavior.",
+      "Therefore subtraction/reuse evidence is preserved while the remaining residual is demoted from mandatory work to a conditional candidate."
+    ]
+  },
+  "application": {
+    "behavior": "SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001",
+    "target_membership_proved": false,
+    "brain_registry_noncoverage_or_residual_exists": true,
+    "three_verified_subtransforms_preserved": true,
+    "mandatory_terminal_work": false,
+    "current_classification": "CONDITIONAL_TARGET_SCOPE_CANDIDATE__DO_NOT_EXECUTE_MATCHED_COMPARISON_UNLESS_TARGET_MEMBERSHIP_IS_PROVED",
+    "if_target_membership_later_proved": [
+      "REUSE_ALL_THREE_VERIFIED_DETERMINISTIC_SUBTRACTIONS",
+      "SEARCH_SCOPE_COMPLETE_STRONGER_EXISTING_RECEIPTS",
+      "ONLY_IF_IRREDUCIBLE__USE_EXISTING_T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO"
+    ]
+  },
+  "scheduler_delta": {
+    "delete": [
+      "SCHEDULE_ONLY_SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001_AS_THE_NEW_HYPOTHESIS_FORMATION_RESIDUAL"
+    ],
+    "replace_with": [
+      "CLASSIFY_SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001_AS_CONDITIONAL_TARGET_SCOPE_CANDIDATE",
+      "RESOLVE_TARGET_MEMBERSHIP_BEFORE_ANY_MATCHED_COMPARATOR_OR_T3_EXECUTION",
+      "IF_TARGET_MEMBERSHIP_IS_PROVED__PRESERVE_THE_EXISTING_THREE_SUBTRACTIONS_AND_CONTINUE_FROM_ONLY_THE_IRREDUCIBLE_RESIDUAL"
+    ],
+    "preserve": [
+      "DO_NOT_SCHEDULE_NEW_OPUS_COMPARISON_FOR_EXPLICIT_TYPED_HYPOTHESIS_ENUMERATION_WHEN_VERIFIED_COMPILER_PRECONDITIONS_HOLD",
+      "DO_NOT_SCHEDULE_NEW_OPUS_COMPARISON_FOR_EXACT_BAYES_INFORMATION_GAIN_EXPECTED_UTILITY_OR_HARD_FILTERING_WHEN_VERIFIED_PRIMITIVE_PRECONDITIONS_HOLD",
+      "DO_NOT_SCHEDULE_NEW_OPUS_COMPARISON_FOR_DECLARED_MODEL_CONDITIONAL_DISCRIMINATION_WHEN_VERIFIED_V3_PRECONDITIONS_HOLD",
+      "SEARCH_SCOPE_COMPLETE_STRONGER_RECEIPTS_BEFORE_ANY_MATCHED_COMPARATOR_EXECUTION",
+      "REUSE_EXISTING_T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO_IF_MATCHED_COMPARISON_REMAINS_IRREDUCIBLE_AFTER_TARGET_MEMBERSHIP_IS_PROVED"
+    ]
+  },
+  "critical_path_effect": "REMOVES_ONE_UNJUSTIFIED_MANDATORY_RESIDUAL_LANE_NOW_AND_INSTALLS_A_REUSABLE_PRECEDENCE_RULE_THAT_PREVENTS_EQUIVALENT_FALSE_BLOCKERS_FROM_REGISTRY_NONCOVERAGE_ALONE.",
+  "hard_nonclaims": [
+    "NO_CLAIM_OPUS_5_5_LACKS_SCIENTIFIC_HYPOTHESIS_FORMATION",
+    "NO_CLAIM_OPUS_5_5_HAS_THE_EXACT_SEMANTIC_INVENTION_TRANSFORM_AS_A_LOAD_BEARING_TARGET_BEHAVIOR",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY_CLAIM",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
