@@ -4145,13 +4145,37 @@ def _controller_plan_sha256(actions):
     return hashlib.sha256(raw).hexdigest()
 
 
-def _controller_checkpoint_record_valid(record):
+def _controller_checkpoint_record_valid(record,prior_trace=None):
     if not isinstance(record,dict):
         return False
     action=record.get("plan")
     result=record.get("result")
     if not isinstance(action,dict) or not isinstance(result,dict):
         return False
+
+    # V2 checkpoint records preserve both the declarative source plan and the
+    # resolved action/result bytes.  Re-resolving against the already validated
+    # prefix makes cross-action state lineage load-bearing rather than merely
+    # historical metadata.  Legacy V1 records remain resumable but are not
+    # eligible for the stronger provenance/state-preservation proof.
+    record_version=int(record.get("record_version",1) or 1)
+    if record_version>=2:
+        source_plan=record.get("source_plan")
+        if not isinstance(source_plan,dict):
+            return False
+        if record.get("source_plan_sha256")!=_json_value_sha256(source_plan):
+            return False
+        if record.get("action_sha256")!=_json_value_sha256(action):
+            return False
+        if record.get("result_sha256")!=_json_value_sha256(result):
+            return False
+        try:
+            resolved=_resolve_result_refs(dict(source_plan),list(prior_trace or []))
+        except Exception:
+            return False
+        if resolved!=action:
+            return False
+
     typ=str(action.get("type") or "")
     if typ=="finish":
         return True
@@ -4196,7 +4220,7 @@ def _controller_checkpoint_record_valid(record):
 
 def _validated_checkpoint_prefix(completed):
     for index,record in enumerate(completed):
-        if not _controller_checkpoint_record_valid(record):
+        if not _controller_checkpoint_record_valid(record,completed[:index]):
             return completed[:index],index
     return completed,None
 
@@ -4286,7 +4310,17 @@ def _run_model_independent_goal(step, mission, goal):
         if isinstance(result,dict) and result.get("error"):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         _verify_action_expectation(action,result)
-        trace.append({"cycle":cycle,"plan":action,"result":result})
+        source_plan=json.loads(json.dumps(raw_action,ensure_ascii=False))
+        trace.append({
+          "record_version":2,
+          "cycle":cycle,
+          "source_plan":source_plan,
+          "source_plan_sha256":_json_value_sha256(source_plan),
+          "plan":action,
+          "action_sha256":_json_value_sha256(action),
+          "result":result,
+          "result_sha256":_json_value_sha256(result),
+        })
         checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
         interrupt_after=step.get("interrupt_after_controller_actions_once")
         if interrupt_after is not None:
