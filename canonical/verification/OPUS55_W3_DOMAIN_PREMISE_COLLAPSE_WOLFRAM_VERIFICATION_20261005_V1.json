@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_W3_DOMAIN_PREMISE_COLLAPSE_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_SYMBOLIC_KERNEL_PASS__W3_WITHOUT_COMPLETE_DOMAIN_PREMISE_DOES_NOT_ENTAIL_LITERAL_TARGET_COMPLETENESS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_W3_DOMAIN_PREMISE_COLLAPSE_THEOREM_20261005_V1.json",
+    "commit_sha": "3e08d4d538721f0d397594f915ab29d67ea43199"
+  },
+  "verifier": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "class": "STATELESS_SYMBOLIC_RECOMPUTATION",
+    "test_domain_size": 3,
+    "encoding": {
+      "Ui": "BOOLEAN_MEMBERSHIP_IN_ACTUAL_TARGET_SET_U",
+      "Di": "BOOLEAN_MEMBERSHIP_IN_W3_QUANTIFIED_DOMAIN_D",
+      "Pi": "BOOLEAN_BRAIN_DOMINATES_BEHAVIOR_i"
+    }
+  },
+  "checks": {
+    "explicit_countermodel": {
+      "D": [
+        true,
+        false
+      ],
+      "U": [
+        true,
+        true
+      ],
+      "P": [
+        true,
+        false
+      ],
+      "W3_over_D": true,
+      "literal_over_U": false,
+      "U_subset_D": false,
+      "pass": true
+    },
+    "with_subset_premise": {
+      "formula": "FOR_ALL_BOOLEAN_MEMBERSHIP_AND_PERFORMANCE_ASSIGNMENTS__[(FOR_ALL_i D_i=>P_i) AND (FOR_ALL_i U_i=>D_i)] => (FOR_ALL_i U_i=>P_i)",
+      "wolfram_result": true,
+      "pass": true
+    },
+    "without_subset_premise": {
+      "formula": "FOR_ALL_BOOLEAN_MEMBERSHIP_AND_PERFORMANCE_ASSIGNMENTS__[(FOR_ALL_i D_i=>P_i)] => (FOR_ALL_i U_i=>P_i)",
+      "wolfram_result": false,
+      "pass": true
+    }
+  },
+  "deduction": [
+    "UNIVERSAL_DOMINANCE_OVER_D_PLUS_U_SUBSET_D_ENTAILS_LITERAL_DOMINANCE_OVER_U.",
+    "UNIVERSAL_DOMINANCE_OVER_D_ALONE_DOES_NOT_ENTAIL_LITERAL_DOMINANCE_OVER_U.",
+    "THEREFORE_A_COMPLETE_TARGET_DOMAIN_PREMISE_IS_LOAD_BEARING_FOR_W3.",
+    "W3_CANNOT_BE_COUNTED_AS_AN_INDEPENDENT_SOURCE_OF_TARGET_DISCOVERY_COMPLETENESS_UNLESS_ITS_PROOF_ITSELF_ESTABLISHES_THE_COMPLETE_TARGET_DOMAIN_RELATION."
+  ],
+  "scheduler_consequence": [
+    "DELETE_W3_DOMINANCE_CONSTRUCTION_BEFORE_COMPLETE_TARGET_DOMAIN_PREMISE",
+    "FOCUS_LITERAL_FINALITY_INFORMATION_WORK_ON_COMPLETE_TARGET_DOMAIN_WITNESS_OR_CHARACTERIZATION",
+    "WHEN_SUCH_A_PREMISE_EXISTS__RECOMPUTE_CHEAPEST_DOMINANCE_OR_COMPONENT_PROOF"
+  ],
+  "current_public_owner_evidence": {
+    "result": "NO_EXPLICIT_EXHAUSTIVENESS_ATTESTATION_FOUND_IN_CURRENT_BOUND_FIRST_PARTY_SURFACES",
+    "supporting_semantics": [
+      "BENCHMARKED_CAPABILITIES",
+      "COMPLETE_PUBLICLY_REPORTED_EVALUATION_RESULTS",
+      "KEY_USE_CASES_INCLUDE",
+      "SELECTED_IMPROVEMENTS_AND_EXAMPLES"
+    ],
+    "nonclaim": "THIS_DOES_NOT_PROVE_GLOBAL_ABSENCE_OF_A_PRIVATE_OR_UNINDEXED_COMPLETE_TARGET_SPEC"
+  },
+  "hard_nonclaims": [
+    "NO_LITERAL_TERMINAL_COMPLETION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
