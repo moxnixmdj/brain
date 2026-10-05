@@ -1,0 +1,264 @@
+{
+  "candidate_precommit": {
+    "candidate_file": "chartqa_mse_structural.h100uc",
+    "complete_bundle_bytes": 99999997,
+    "packed_sha256": "17fc7d37f6c6e8457d53dd93efff365b17850acf5810ba3067bb06c7c226cb14"
+  },
+  "cases": [
+    {
+      "annotation_index": 747,
+      "id": "FCH_747",
+      "image_bytes": 44674,
+      "image_sha256": "279fc0aa83c7278710d62a2b2e9590344a2c0cc8d2098ef5de3c772030c257b2",
+      "imgname": "multi_col_1150.png",
+      "label": "72.8",
+      "query": "what is the sum of the high school  that have been bullied in lifetime Both male and female",
+      "selection_hash": "0047cb4cac55b4a023288cb61b22e4d321e56ad61ff163e1f91049ffa51af066",
+      "split": "human"
+    },
+    {
+      "annotation_index": 657,
+      "id": "FCH_657",
+      "image_bytes": 44258,
+      "image_sha256": "85bfaef8834b8bd7de6c44643cc2d960ceaeeb3b44a63c8739aab32ca912a3c1",
+      "imgname": "two_col_40183.png",
+      "label": "306",
+      "query": "What is the sum of Lago di Bolsena and Lago di Bracciano ?",
+      "selection_hash": "00668dd81758f9a27738d318764a7e9876cce4c01b23427d9a7fb1cbdab9a17e",
+      "split": "human"
+    },
+    {
+      "annotation_index": 146,
+      "id": "FCH_146",
+      "image_bytes": 42964,
+      "image_sha256": "ca771ed14e6c3b763342d863343291ef80b9bb8816a1a07eff1f7e58a187d580",
+      "imgname": "67626600001661.png",
+      "label": "270827",
+      "query": "What's the value of largest bar?",
+      "selection_hash": "0086870393fd503d72c465e0867bde760fb63d375608611bc60648e73fcda07d",
+      "split": "human"
+    },
+    {
+      "annotation_index": 197,
+      "id": "FCH_197",
+      "image_bytes": 33311,
+      "image_sha256": "a83a8ad310538f39d7b26acdb92b7b793aac30d4f5b6efa5f66c3e851780061c",
+      "imgname": "24779936003610.png",
+      "label": "3",
+      "query": "In how many years has the mortality rate is greater than 10% in the Caribbean?",
+      "selection_hash": "008f37456baafb5d8f8f0751ea080dd1178941bf7982454021418a6609ea8ad3",
+      "split": "human"
+    },
+    {
+      "annotation_index": 442,
+      "id": "FCH_442",
+      "image_bytes": 53378,
+      "image_sha256": "7f0bd7ef58ab88e6ae2ce082d0ba769448b0e2e81004a3ae1451061a217ccb0a",
+      "imgname": "OECD_LABOUR_PRODUCTIVITY_FORECAST_AUT_JPN_NOR_NZL_SVN_000076.png",
+      "label": "Yes",
+      "query": "Is Austria represented by purple dotted line?",
+      "selection_hash": "00a0efbc7f418e8860b1b7a4031d21648057353bdfd44193caa0e8a8cc9bf106",
+      "split": "human"
+    },
+    {
+      "annotation_index": 804,
+      "id": "FCH_804",
+      "image_bytes": 38206,
+      "image_sha256": "69c39582328a8480af17296c357e474c0400ca5c68380d39a5faee142d6656f0",
+      "imgname": "multi_col_20517.png",
+      "label": "47",
+      "query": "what is the highest value in blue bar ?",
+      "selection_hash": "00ccb22fa82fc41aba43ba9369dfa54003c5b3de804eb33baec542b696db8792",
+      "split": "human"
+    },
+    {
+      "annotation_index": 526,
+      "id": "FCH_526",
+      "image_bytes": 35287,
+      "image_sha256": "3b4203d219f4997630c7168c51c13fffc21903412c3276767562651cc8817057",
+      "imgname": "two_col_100534.png",
+      "label": "Nothing at all",
+      "query": "Which opinion has the highest share?",
+      "selection_hash": "0194eb777d262b04f02e6c253dfb4290b346cddb6b5c556021899c5f0ee69fdf",
+      "split": "human"
+    },
+    {
+      "annotation_index": 821,
+      "id": "FCH_821",
+      "image_bytes": 35761,
+      "image_sha256": "c63313fe35ab110a1adbbc773ea20a58471daeeb29bb312d63e5e77efb09f271",
+      "imgname": "multi_col_20895.png",
+      "label": "1.6",
+      "query": "What is the total value of 13-17 years old who using Facebook ?",
+      "selection_hash": "01dc9dd8e62e9b06557aefa19d7d8063659d96b8ef6b97763e25340f506a7244",
+      "split": "human"
+    },
+    {
+      "annotation_index": 178,
+      "id": "FCH_178",
+      "image_bytes": 38009,
+      "image_sha256": "7c1d1f4f1e13bfc9fb5a320f820381226c112df06d257fdb386cb0575671bbb8",
+      "imgname": "11832048004610.png",
+      "label": "2009",
+      "query": "In which year the commercial bank branches are maximum in Senegal?",
+      "selection_hash": "01ebe4fd610d1e901c488f886b6430e030cf847334efe4f93f29e8e3d6ea7ea2",
+      "split": "human"
+    },
+    {
+      "annotation_index": 382,
+      "id": "FCH_382",
+      "image_bytes": 12396,
+      "image_sha256": "a0e5f77e0bcbb9b6c147afc8bfbfe424d7d95bc4bbfa47a8aa6a054ce778850a",
+      "imgname": "OECD_LONG-TERM_INTEREST_RATES_AUS_AUT_LTU_NOR_USA_000021.png",
+      "label": "purple",
+      "query": "What color represent Norway?",
+      "selection_hash": "021274140e93effa6ec4fd2cb440038e98da6473aa57aeddd58e23849f5851ca",
+      "split": "human"
+    },
+    {
+      "annotation_index": 432,
+      "id": "FCA_432",
+      "image_bytes": 44179,
+      "image_sha256": "7bc25e6327bc1405ad23fa01028fea63ec28d76471ab4099c1ec092a2e82d4b6",
+      "imgname": "two_col_5582.png",
+      "label": "Germany",
+      "query": "Which European country took the highest place in the ranking?",
+      "selection_hash": "00b7bc51cc86c2f49a809c6742663fb36450a01efd1e93098f30070b2998c497",
+      "split": "augmented"
+    },
+    {
+      "annotation_index": 840,
+      "id": "FCA_840",
+      "image_bytes": 35972,
+      "image_sha256": "15ee498b0b1be91e57a3defee1ed1a305a80632bf4512dc8704824e434259500",
+      "imgname": "two_col_101515.png",
+      "label": "443.81",
+      "query": "What was the total value of private equity investments in 2007?",
+      "selection_hash": "00cc5fecb4860381807a226d7461ac49d69c5f4ce44888f7dfd1ac30f38a3be9",
+      "split": "augmented"
+    },
+    {
+      "annotation_index": 339,
+      "id": "FCA_339",
+      "image_bytes": 32989,
+      "image_sha256": "9ecf4846089844ded237036ef7fb345102968ca2f10e3af378530ad086c22b0b",
+      "imgname": "two_col_5690.png",
+      "label": "279",
+      "query": "How much of Canada Goose's revenue was generated in the United States?",
+      "selection_hash": "00cdd210107ffb26d13afe5b963d25d53238879cf30c40d431a581ed99b8792c",
+      "split": "augmented"
+    },
+    {
+      "annotation_index": 483,
+      "id": "FCA_483",
+      "image_bytes": 40983,
+      "image_sha256": "84b716f30b5539d85763c683bbd2ac96f84ec24e1dd67ae5d58743ca9c4107c0",
+      "imgname": "two_col_43387.png",
+      "label": "3.45",
+      "query": "What was the total attendance during the 2019/2020 season?",
+      "selection_hash": "0186b45ab441b9891d73efece3d4eb1c3cf365e14733099324d0bc0d81288e21",
+      "split": "augmented"
+    },
+    {
+      "annotation_index": 257,
+      "id": "FCA_257",
+      "image_bytes": 34342,
+      "image_sha256": "5fab467b7f73dc6498442c600c24b29b410826a566bfc64a85f7750c835bfe25",
+      "imgname": "two_col_102382.png",
+      "label": "21.9",
+      "query": "What percentage of people in the UK planned to spend 5-10 pounds on a Halloween costume?",
+      "selection_hash": "01a99eafc44a9989ae5d03d6448de0d09a9c657cacb34a86a670749141cd7136",
+      "split": "augmented"
+    },
+    {
+      "annotation_index": 601,
+      "id": "FCA_601",
+      "image_bytes": 34963,
+      "image_sha256": "582c7c64d3bdc15ce410774058b210a227ba800a563bcf9b65b0127a447f3dbc",
+      "imgname": "two_col_80702.png",
+      "label": "2019",
+      "query": "How many marriages took place in Luxembourg in 2019?",
+      "selection_hash": "026736553be41e683f55efa88a61e616a7a460b57348f5cec4ee73b18708516e",
+      "split": "augmented"
+    },
+    {
+      "annotation_index": 168,
+      "id": "FCA_168",
+      "image_bytes": 31556,
+      "image_sha256": "a3b1a140c4d0b26f9663cba7bc75103c5d151395154bc98913a5c5457ac887cd",
+      "imgname": "two_col_43968.png",
+      "label": "2.7",
+      "query": "What is the estimated urea production capacity addition in the United States in 2017?",
+      "selection_hash": "028b5b31371ac2046b204cbacd1f4a604ccf2eaac29aa744c00478ca903ce4dd",
+      "split": "augmented"
+    },
+    {
+      "annotation_index": 715,
+      "id": "FCA_715",
+      "image_bytes": 80063,
+      "image_sha256": "5b446571eb605ec32aaec9437aa7f4679045408c4c142e8279d30b65fbc9e879",
+      "imgname": "two_col_102449.png",
+      "label": "90.7",
+      "query": "What percentage of Antigua and Barbuda's total employment did tourism contribute to in 2019?",
+      "selection_hash": "02ce175e5fdc48bb18f69262b1e6a4e4f4bdbf1cd46df957aafb9588fb8d0b48",
+      "split": "augmented"
+    },
+    {
+      "annotation_index": 480,
+      "id": "FCA_480",
+      "image_bytes": 30287,
+      "image_sha256": "e0801ee6a5b03e0225d8fbb3d39f23d7ea816ec649ab3fd69466781228d03559",
+      "imgname": "two_col_63265.png",
+      "label": "2010",
+      "query": "When did the plant load factor of nuclear stations in the UK begin to fluctuate?",
+      "selection_hash": "0373a53fd76d80ef683b7079ed0933a0401a773b8665f156cbb0c7eae7e9a7aa",
+      "split": "augmented"
+    },
+    {
+      "annotation_index": 291,
+      "id": "FCA_291",
+      "image_bytes": 82145,
+      "image_sha256": "a78f44f06342fe38e3b8525c93cbe503c78e16a6abcddb1f5521aa3e07324b90",
+      "imgname": "multi_col_1149.png",
+      "label": "2127.25",
+      "query": "What was the value of U.S. international exports in dollars in 2020?",
+      "selection_hash": "039429402161106d21c601712acefbec963ec834d5536a7c4a7bfd754dfffd6b",
+      "split": "augmented"
+    }
+  ],
+  "chartqa_commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "date": "2026-10-05",
+  "h100_credit_delta": 0,
+  "hard_nonclaims": [
+    "PUBLIC_CHARTQA_HOLDOUT_ONLY",
+    "NO_CHARTOGRAPHY_THRESHOLD_CREDIT",
+    "NO_FULL_H100_TERMINAL_CREDIT"
+  ],
+  "objective": "Measure relaxed-accuracy capability preservation of a frozen sub-100MB UniChart candidate without exact-answer-agreement as a gate.",
+  "pass_gate": {
+    "byte_condition": "COMPLETE_BUNDLE_BYTES <= 100000000",
+    "conjunctive": true,
+    "minimum_fp32_relaxed_accuracy": 0.5,
+    "packed_condition": "PACKED_ACCURACY >= FP32_ACCURACY - 0.05",
+    "packed_noninferiority_margin_absolute": 0.05
+  },
+  "schema": "PROJECT_BRAIN_H100_UNICHART_FRESH_CAPABILITY_HOLDOUT_V1",
+  "scorer": {
+    "name": "CHARTQA_RELAXED_ACCURACY",
+    "numeric_rule": "ABS(PRED-GOLD)/ABS(GOLD)<=0.05__ZERO_GOLD_REQUIRES_EXACT_ZERO",
+    "text_rule": "CASE_INSENSITIVE_STRIPPED_EXACT_MATCH"
+  },
+  "selection": {
+    "annotation_git_blobs": {
+      "augmented": "131068b504407d9cdd8413fe5c574772bb241613",
+      "human": "983dacfcb6aabc8598031c07eeba7747f9884c4a"
+    },
+    "excluded_image_count": 87,
+    "rule": "LOWEST_SHA256_OF_SEED_SPLIT_INDEX_IMAGE_AMONG_IMAGES_NOT_USED_BY_ANY_PRIOR_A_EXPERIMENT",
+    "seed": "H100_UNICHART_FRESH_CAPABILITY_HOLDOUT_V1__2026-10-05",
+    "target_per_split": 10,
+    "total_cases": 20,
+    "unique_images": 20
+  },
+  "status": "FROZEN_BEFORE_FP32_OR_PACKED_OUTPUTS__UNTOUCHED_PUBLIC_HOLDOUT__ZERO_CREDIT"
+}
