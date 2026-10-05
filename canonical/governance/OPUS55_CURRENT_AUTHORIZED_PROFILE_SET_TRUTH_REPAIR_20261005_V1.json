@@ -1,0 +1,130 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_CURRENT_AUTHORIZED_PROFILE_SET_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_PROFILE_MEMBERSHIP_TRUTH_REPAIR__CYBER_VERIFIED_OPUS55_EXCLUDED_UNTIL_AVAILABLE__LIFE_SCIENCES_VERIFIED_PRESERVED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Truth-repair the candidate Opus 5.5 profile-union boundary by distinguishing profiles currently available in the frozen target epoch from announced future profiles. Prevent future Cyber Verification access from silently expanding today's current target set before Anthropic actually makes Opus 5.5 available through that program.",
+  "supersedes_for_current_profile_membership_only": {
+    "path": "canonical/governance/OPUS55_TARGET_PROFILE_UNION_BOUNDARY_20261005_V1.json",
+    "git_blob_sha": "b8cfc03751ef1df11df5f94516e8fe6a1fc5a4c8",
+    "preserved": "PROFILE_UNION_EXACT_GOAL_PRESERVATION_THEOREM",
+    "repaired": "MEMBERSHIP_OF_P_AT_2026_10_05"
+  },
+  "first_party_current_evidence": [
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "published": "2026-09-22",
+      "observations": [
+        "VETTED_ORGANIZATIONS_CAN_APPLY_TODAY_TO_LIFE_SCIENCES_VERIFICATION_TO_USE_OPUS55_FOR_BIOLOGY_RESEARCH",
+        "CYBER_VERIFICATION_EXPANSION_TO_OPUS55_WAS_ANNOUNCED_AS_FUTURE__IN_THE_COMING_WEEKS",
+        "DEFAULT_CYBER_SAFEGUARDS_REROUTE_MOST_CYBERSECURITY_TASKS_TO_OPUS_4_8",
+        "PRESERVED_THINKING_APPLIES_TO_OPUS55_API_ACCOUNTS_CREATED_ON_OR_AFTER_2026_08_31"
+      ]
+    },
+    {
+      "url": "https://support.claude.com/en/articles/16049681-why-claude-switched-models-in-your-conversation-with-opus-5-or-opus-5-5",
+      "observed_date": "2026-10-05",
+      "observations": [
+        "CURRENT_HELP_CENTER_EXPLICITLY_STATES_OPUS55_IS_NOT_CURRENTLY_AVAILABLE_IN_CYBER_VERIFICATION_PROGRAM",
+        "LIFE_SCIENCES_VERIFICATION_IS_THE_CURRENT_ROUTE_FOR_LEGITIMATE_LIFE_SCIENCES_WORK_AFFECTED_BY_SAFEGUARDS"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5",
+      "observed_date": "2026-10-05",
+      "observations": [
+        "OPUS55_CURRENTLY_RUNS_BIOLOGY_CYBERSECURITY_AND_REASONING_EXTRACTION_SAFETY_CLASSIFIERS",
+        "LIFE_SCIENCES_VERIFICATION_APPLICATION_IS_CURRENTLY_REFERENCED_FOR_ORGANIZATIONS_WHOSE_WORK_IS_IMPEDED_BY_BIOLOGY_CLASSIFIER"
+      ]
+    }
+  ],
+  "current_profile_membership": {
+    "include": [
+      {
+        "profile_id": "OPUS55_GENERAL_PRODUCTION_SAFEGUARDED",
+        "membership": "CURRENT",
+        "role": "DEFAULT_PUBLIC_OPUS55_BEHAVIOR_WITH_CURRENT_SAFEGUARDS_AND_ANY_DOCUMENTED_FALLBACK_POLICY",
+        "caveat": "FALLBACK_SUCCESS_IS_DEPLOYED_SYSTEM_BEHAVIOR_AND_IS_NOT_RAW_OPUS55_BACKEND_EVIDENCE"
+      },
+      {
+        "profile_id": "OPUS55_LIFE_SCIENCES_VERIFIED",
+        "membership": "CURRENT_AUTHORIZED_APPLICATION_ROUTE_CONFIRMED",
+        "role": "BROADER_LEGITIMATE_BIOLOGY_RESEARCH_AND_DEVELOPMENT_ACCESS_WHERE_DEFAULT_BIOLOGY_SAFEGUARDS_IMPEDE_WORK",
+        "caveat": "EXACT_ALLOWED_TASK_SET_AND_RESIDUAL_SAFEGUARDS_NOT_YET_PROVED_EXHAUSTIVE"
+      }
+    ],
+    "configuration_axes_not_yet_promoted_to_distinct_capability_profiles": [
+      {
+        "axis": "API_ACCOUNT_CREATION_COHORT",
+        "observed_difference": "PRESERVED_THINKING_FOR_ACCOUNTS_CREATED_ON_OR_AFTER_2026_08_31",
+        "rule": "KEEP_AS_INTERFACE_CONFIGURATION_METADATA_UNLESS_A_USEFUL_CAPABILITY_DELTA_IS_PROVED"
+      },
+      {
+        "axis": "PLATFORM_OR_HARNESS",
+        "observed_difference": "CLAUDE_AI_CLAUDE_CODE_API_AND_CLOUD_ACCESS_SURFACES_EXIST",
+        "rule": "DO_NOT_CREATE_DISTINCT_TARGET_CAPABILITY_PROFILE_WITHOUT_OBSERVABLE_CAPABILITY_DELTA"
+      }
+    ],
+    "exclude_until_activation_event": [
+      {
+        "profile_id": "OPUS55_CYBER_VERIFIED",
+        "current_membership": "FALSE_AS_OF_2026_10_05_FIRST_PARTY_HELP_CENTER",
+        "future_event": "ANTHROPIC_MAKES_OPUS55_CURRENTLY_AVAILABLE_IN_CYBER_VERIFICATION_PROGRAM",
+        "wake_rule": "ADD_TO_P_CURRENT_ONLY_AFTER_A_CURRENT_FIRST_PARTY_SOURCE_CONFIRMS_AVAILABILITY_AND_BIND_EXACT_TIER_OR_PERMISSION_SCOPE",
+        "consequence": "NO_CURRENT_TERMINAL_WORK_MAY_BE_SCHEDULED_SOLELY_TO_MATCH_A_FUTURE_CYBER_VERIFICATION_PROFILE"
+      }
+    ]
+  },
+  "set_theoretic_repair": {
+    "P_current": "CURRENTLY_AVAILABLE_AUTHORIZED_FIRST_PARTY_OPUS55_PROFILES_AT_FROZEN_EPOCH",
+    "P_announced_future": "ANNOUNCED_BUT_NOT_YET_AVAILABLE_OPUS55_PROFILES",
+    "rule": "P_CURRENT_INTERSECT_P_ANNOUNCED_FUTURE_IS_EMPTY_BY_MEMBERSHIP_STATE_FOR_ANY_PROFILE_NOT_YET_AVAILABLE",
+    "target_now": "UNION_OVER_p_IN_P_CURRENT_OF_USEFUL_OBSERVABLE_OPUS55_BEHAVIORS",
+    "future_update": "WHEN_AN_ANNOUNCED_PROFILE_BECOMES_CURRENTLY_AVAILABLE__REOPEN_TARGET_DISCOVERY_AND_UNION_ITS_VERIFIED_USEFUL_BEHAVIOR_DELTA",
+    "no_goal_weakening": "The terminal goal concerns useful Opus 5.5 capabilities that actually exist in authorized first-party profiles in the frozen/current target epoch. Future unavailable access states are not current capabilities; they wake when they become real."
+  },
+  "minimum_current_profile_delta_cut": [
+    "LIFE_SCIENCES_VERIFIED_VS_GENERAL_PROFILE_USEFUL_BEHAVIOR_DELTA",
+    "PROFILE_BOUND_SECURITY_RELIABILITY_ACCEPTANCE_FOR_CURRENT_PROFILES",
+    "VERIFY_NO_OTHER_CURRENT_FIRST_PARTY_OPUS55_PROFILE_HAS_A_MATERIAL_USEFUL_BEHAVIOR_DELTA",
+    "PRESERVE_CYBER_VERIFIED_OPUS55_AS_EVENT_DRIVEN_FUTURE_CANDIDATE_ONLY"
+  ],
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "CURRENT_MANDATORY_OPUS55_CYBER_VERIFICATION_PROFILE_PARITY_PROGRAM",
+      "TREAT_ANNOUNCED_FUTURE_PROFILE_AS_MEMBER_OF_CURRENT_TARGET_SET"
+    ],
+    "activate": [
+      "LIFE_SCIENCES_VERIFIED_PROFILE_DELTA_RECONCILIATION",
+      "CURRENT_PROFILE_SECURITY_RELIABILITY_ACCEPTANCE",
+      "CURRENT_FIRST_PARTY_PROFILE_COMPLETENESS_SEARCH",
+      "CYBER_VERIFIED_OPUS55_AVAILABILITY_WAKE_CONDITION"
+    ]
+  },
+  "falsifiers": [
+    "A_CURRENT_FIRST_PARTY_SOURCE_SHOWS_OPUS55_IS_ALREADY_AVAILABLE_IN_CYBER_VERIFICATION_PROGRAM_ON_2026_10_05",
+    "LIFE_SCIENCES_VERIFICATION_IS_NOT_CURRENTLY_AVAILABLE_FOR_OPUS55",
+    "ANOTHER_CURRENT_AUTHORIZED_FIRST_PARTY_OPUS55_PROFILE_WITH_MATERIAL_USEFUL_BEHAVIOR_DELTA_IS_FOUND"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_PROFILE_SET_IS_EXHAUSTIVE",
+    "NO_CLAIM_LIFE_SCIENCES_VERIFICATION_REMOVES_ALL_BIOLOGY_SAFEGUARDS",
+    "NO_CLAIM_FUTURE_CYBER_VERIFICATION_CAPABILITY_DELTA_IS_ZERO",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_LITERAL_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 3,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": true,
+  "independent_verification_required": true
+}
