@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_SECURITY_RELIABILITY_CROSS_CUTTING_ACCEPTANCE_DIMENSION_20261005_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__FIRST_PARTY_TARGET_OBLIGATION_FOUND__CROSS_CUTTING_ACCEPTANCE_GAP__ZERO_CREDIT",
+  "status": "SUPERSEDED_IN_PART__EXTERNAL_SECURE_AGENT_STACK_MECHANICS_SEPARATED_FROM_INTRINSIC_OPUS55_SECURITY_BEHAVIOR__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective": "Prevent false terminal closure caused by treating security and adversarial reliability as prose conditions rather than load-bearing measurable behavior where Anthropic publicly claims Opus 5.5 strength.",
   "first_party_evidence": {
@@ -74,5 +74,7 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": true,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "superseded_by": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_VS_DEPLOYMENT_PROFILE_BOUNDARY_20261005_V2.json",
+  "correction": "MODEL_INTRINSIC_PROMPT_INJECTION_RESISTANCE_SCOPE_JUDGMENT_AND_CONTAINMENT_BEHAVIOR_REMAIN_TARGET_RELEVANT__EXTERNAL_ACTION_CLASSIFIER_SANDBOX_OR_OTHER_WRAPPER_MECHANICS_ARE_NOT_AUTOMATICALLY_OPUS55_INTRINSIC_CAPABILITIES."
 }
