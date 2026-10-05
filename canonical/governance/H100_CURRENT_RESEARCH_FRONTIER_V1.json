@@ -417,6 +417,30 @@
       "unverified_quartic_fail_closed": true,
       "persistent_learned_bytes": 0,
       "deduction": "THE_MINIMAL_PATCH_SEARCH_TO_DISTINCT_TRANSFER_TO_COMPILE_RATCHET_LOOP_IS NOW PUBLIC_RUNNER_VERIFIED FOR THE CUBIC FAMILY__THE PREVIOUSLY_MISSED_TRANSFER_TASK NOW RESOLVES AS A LIBRARY HIT WITH ZERO RAW SEARCH WHILE UNVERIFIED QUARTIC REMAINS FAIL_CLOSED"
+    },
+    "generic_patch_search_transfer": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__FOUR_OF_FOUR_STRUCTURALLY_DISTINCT_FAMILIES__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_GENERIC_PATCH_SEARCH_TRANSFER_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_GENERIC_PATCH_SEARCH_TRANSFER_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "runtime": "canonical/runtime/h100_generic_patch_search_transfer_v1.py",
+      "families": [
+        "POWER5",
+        "HINGE",
+        "GAUSSIAN",
+        "TANH"
+      ],
+      "tasks_passed": "4_OF_4",
+      "all_seed_registry_v2_misses": true,
+      "all_transfer_registry_v2_misses": true,
+      "patch_search_median_seconds": 0.006139396999969904,
+      "persistent_learned_bytes": 0,
+      "compile_candidates": [
+        "CAP_AFFINE_POWER5_V1",
+        "CAP_AFFINE_HINGE_V1",
+        "CAP_AFFINE_GAUSSIAN_V1",
+        "CAP_AFFINE_TANH_V1"
+      ],
+      "deduction": "ONE_PREDECLARED_PATCH_GRAMMAR_TRANSFERRED_FOUR_DISTINCT_FAMILIES_AFTER_VERIFIED_REGISTRY_V2_MISSES__INCLUDING_DIFFERENT_RUNTIME_SHAPE_PARAMETERS_FOR_HINGE_GAUSSIAN_AND_TANH__THIS EXTENDS_THE_RATCHET_BEYOND_CUBIC_WITHIN_BOUNDED_SYNTHETIC_SCOPE"
     }
   },
   "next_structural_residuals_ranked": [
@@ -427,8 +451,8 @@
     },
     {
       "rank": 2,
-      "residual": "GENERALIZE_PATCH_SEARCH_BEYOND_SINGLE_CUBIC_FAMILY",
-      "reason": "REGISTRY_V2_CUBIC_RATCHET_IS NOW PUBLIC_RUNNER_VERIFIED__THE INTERNAL PATCH LOOP SEARCHED_THREE STRUCTURES SELECTED CUBIC TRANSFERRED IT TO A DISTINCT FROZEN TASK COMPILED IT INTO THE REGISTRY AND REUSED IT WITH ZERO RAW SEARCH__THE NEXT INTERNAL QUESTION IS WHETHER THE SAME PATCH SEARCH AND COMPILE LOOP GENERALIZES BEYOND THIS ONE CUBIC FAMILY WITHOUT HAND_DESIGNING THE GRAMMAR AROUND EACH OBSERVED MISS"
+      "residual": "COMPILE_AND_PUBLICLY_VERIFY_MULTI_FAMILY_REGISTRY_V3",
+      "reason": "GENERIC_PATCH_SEARCH NOW SECOND_CARRIER_PASSES FOUR_OF_FOUR DISTINCT SEED_TO_TRANSFER FAMILIES AFTER REGISTRY_V2_MISSES__THE NEXT INTERNAL A MOVE IS TO COMPILE ONLY THE FOUR VERIFIED STRUCTURES INTO REGISTRY_V3 AND PROVE THEY BECOME ZERO_RAW_SEARCH_HITS WHILE UNVERIFIED STRUCTURES STILL_FAIL_CLOSED"
     },
     {
       "rank": 3,
@@ -537,7 +561,9 @@
     "jit_lexical_orchestrator_second_carrier_verified": true,
     "manual_lexical_route_selection_required": false,
     "registry_v2_cubic_public_runner_verified": true,
-    "minimal_patch_compile_reuse_loop_closed_for_cubic_family": true
+    "minimal_patch_compile_reuse_loop_closed_for_cubic_family": true,
+    "generic_patch_search_multi_family_second_carrier_verified": true,
+    "generic_patch_search_scope": "FOUR_SYNTHETIC_SEED_TRANSFER_FAMILIES__POWER5_HINGE_GAUSSIAN_TANH__PREDECLARED_GRAMMAR_NOT_UNIVERSAL"
   },
   "accounting": {
     "incremental_spend_usd": 0,
