@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_C1_EPHEMERAL_TWO_CHANNEL_BOUNDARY_LOCAL_REPLAY_20261005_V1",
+  "date": "2026-10-05",
+  "status": "LOCAL_REPLAY_PASS__PYTHON_COMPILE_PASS__13_OF_13_ADVERSARIAL_TESTS_PASS__NOT_INDEPENDENT__ZERO_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/composition_closed_world_boundary_v1.py",
+    "runtime_commit": "cebafbe482e09fa0681d062e9633148aad13952e",
+    "tests_path": "canonical/tests/test_composition_closed_world_boundary_v1.py",
+    "tests_commit": "fd217f1c5efa560419d511a9d5f6cd02375661f9",
+    "governance_path": "canonical/governance/COMPOSITION_C1_EPHEMERAL_TWO_CHANNEL_BOUNDARY_BREAKTHROUGH_20261005_V1.json",
+    "governance_commit": "cdd4d08b7eb2fed3177ed3ddd7feaf1408b4cc73"
+  },
+  "execution": {
+    "python_compile": "PASS",
+    "unittest": "PASS",
+    "tests_run": 13,
+    "tests_passed": 13,
+    "tests_failed": 0,
+    "tested_properties": [
+      "COMPLETE_TWO_CHANNEL_CERTIFICATE_ACCEPTED",
+      "RAW_PRIOR_RESULT_BYPASS_REJECTED",
+      "PERSISTENT_WORKSPACE_ESCAPE_REJECTED",
+      "PERSISTENT_PROCESS_ESCAPE_REJECTED",
+      "PERSISTENT_BROWSER_PROFILE_ESCAPE_REJECTED",
+      "UNBROKERED_EXTERNAL_MUTATION_REJECTED",
+      "PRECOMMIT_WITHOUT_CARRIER_ENFORCEMENT_REJECTED",
+      "UNVERIFIED_BROKER_RECEIPT_BYTES_REJECTED",
+      "ROLLBACK_WITHOUT_CHILD_DISCARD_REJECTED",
+      "FROZEN_SCOPE_INCOMPLETENESS_REJECTED",
+      "THIRD_CROSS_MACROSTEP_CHANNEL_REJECTED",
+      "FORBIDDEN_CHANNEL_CLASS_DRIFT_REJECTED",
+      "UNBOUND_RECEIPT_FIELDS_REJECTED"
+    ]
+  },
+  "truth_boundary": {
+    "independent_verification": false,
+    "system_carrier_execution_verified": false,
+    "C1_closed_world_capsule_mediation_totality_proved": false,
+    "C2_critical_invariant_universe_totality_proved": false,
+    "composition_zero_critical_invariant_failures_closed": false,
+    "role": "DIAGNOSTIC_REPLAY_ONLY__PROVES_THE_NEW_CERTIFICATE_LOGIC_EXECUTES_AND_FAILS_CLOSED_ON_TESTED_COUNTERMODELS"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
