@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_SEMANTIC_RESIDUAL_DONOR_TRIAGE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__MOOSE_STAR_IS_STRONG_INTERNALIZABLE_DONOR_FOR_INSPIRATION_RETRIEVAL_AND_HYPOTHESIS_COMPOSITION_SUBREGION__QUESTION_FORMATION_AND_FULL_TEST_MODEL_SEMANTICS_REMAIN_OPEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_parent_residual": "SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001",
+  "source_activation": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_ACTIVATION_V1.json",
+  "objective": "Search for reusable permissively licensed learned mechanisms that attack only the still-open semantic scientific-hypothesis residual after deterministic exact subtransforms were removed.",
+  "candidate": {
+    "id": "MOOSE_STAR_R1D_7B",
+    "upstream_repo": "https://github.com/ZonglinY/MOOSE-Star",
+    "upstream_model": "https://huggingface.co/ZonglinY/MOOSE-Star-R1D-7B",
+    "upstream_quant_candidate": "https://huggingface.co/mradermacher/MOOSE-Star-R1D-7B-GGUF",
+    "repo_license": "Apache-2.0",
+    "model_card_license": "Apache-2.0",
+    "architecture": "DeepSeek-R1-Distill-Qwen-7B fine-tune",
+    "released_learned_subtasks": [
+      "INSPIRATION_RETRIEVAL_FROM_CANDIDATE_SCIENTIFIC_PAPERS",
+      "HYPOTHESIS_COMPOSITION_FROM_RESEARCH_QUESTION_BACKGROUND_SURVEY_PREVIOUS_HYPOTHESIS_AND_INSPIRATION"
+    ],
+    "published_results": {
+      "inspiration_retrieval_accuracy_percent": 54.34,
+      "base_inspiration_retrieval_accuracy_percent": 28.42,
+      "hypothesis_composition_total": 5.02,
+      "base_hypothesis_composition_total": 4.05,
+      "bounded_hard_total": 2.78,
+      "base_bounded_hard_total": 2.00,
+      "judge_for_hypothesis_composition": "GPT-4o"
+    },
+    "local_quantization_observed": {
+      "Q4_K_S_GB": 4.6,
+      "Q4_K_M_GB": 4.8,
+      "Q6_K_GB": 6.4,
+      "Q8_0_GB": 8.2,
+      "source_role": "THIRD_PARTY_STATIC_GGUF_QUANTIZATION_OF_UPSTREAM_MODEL__MUST_VERIFY_HASH_LICENSE_AND_QUALITY_BEFORE_OWNERSHIP_USE"
+    }
+  },
+  "semantic_factorization": {
+    "parent_open_residual": "SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001",
+    "subregions": [
+      {
+        "id": "SCIENTIFIC_RESEARCH_QUESTION_OR_PROBLEM_FORMATION",
+        "status_after_candidate": "OPEN",
+        "reason": "MOOSE_STAR_HYPOTHESIS_COMPOSITION_PROMPT_ASSUMES_A_RESEARCH_QUESTION_IS_ALREADY_SUPPLIED"
+      },
+      {
+        "id": "SCIENTIFIC_INSPIRATION_RETRIEVAL_AND_SELECTION",
+        "status_after_candidate": "INTERNALIZABLE_LEARNED_DONOR_FOUND__UNVERIFIED_FOR_BRAIN_TARGET_SCOPE",
+        "candidate_route": "MOOSE_STAR_IR_OR_MULTITASK_MODEL"
+      },
+      {
+        "id": "SCIENTIFIC_HYPOTHESIS_SEMANTIC_COMPOSITION",
+        "status_after_candidate": "INTERNALIZABLE_LEARNED_DONOR_FOUND__UNVERIFIED_FOR_BRAIN_TARGET_SCOPE",
+        "candidate_route": "MOOSE_STAR_HC_OR_MULTITASK_MODEL",
+        "boundary": "REQUIRES_RESEARCH_QUESTION_BACKGROUND_AND_INSPIRATION_INPUTS"
+      },
+      {
+        "id": "SCIENTIFIC_TEST_MODEL_AND_FEASIBILITY_SEMANTICS_WHEN_NOT_EXPLICIT",
+        "status_after_candidate": "PARTIALLY_TOUCHED_BUT_NOT_SCOPE_CLOSED",
+        "reason": "MOOSE_STAR_OUTPUT_INCLUDES_MOTIVATION_MECHANISM_METHODOLOGY_BUT_NO PROOF THAT IT COVERS GENERAL FEASIBILITY_OBSERVATION_MODEL_OR_DISCRIMINATING_TEST_SEMANTICS"
+      }
+    ]
+  },
+  "why_high_leverage": [
+    "THE_DONOR_WEIGHTS_ARE_RELEASED_NOT_MERELY_A_PROMPT_OR_CLOUD_SERVICE",
+    "LICENSE_IS_PERMISSIVE_APACHE_2_0",
+    "THE_TRAINING_OBJECTIVE_DIRECTLY_TARGETS_SCIENTIFIC_HYPOTHESIS_COMPOSITION_RATHER_THAN_GENERIC_CHAT",
+    "THE_IR_PLUS_HC_DECOMPOSITION_MATCHES_TWO_LOAD_BEARING_SEMANTIC_SUBREGIONS",
+    "QUANTIZED_LOCAL_ARTIFACTS_EXIST_AT_SINGLE_DIGIT_GB_SCALE",
+    "NO_NEW_OUTER_PORTFOLIO_IS_REQUIRED; T3_CAN HOST_PREQUALIFICATION_AND_MATCHED_OR_STRONGER_PROOF"
+  ],
+  "important_limits": [
+    "NO_DIRECT_OPUS_5_5_MATCHED_COMPARISON_FOUND",
+    "PUBLISHED_HC_JUDGING_USES_GPT_4O_AND_IS_NOT_TERMINAL_BRAIN_EVIDENCE",
+    "BIOMEDICAL_TOMATO_STAR_TRAINING_SCOPE_DOES_NOT_BY_ITSELF_PROVE_GENERAL_SCIENTIFIC_SCOPE",
+    "RESEARCH_QUESTION_FORMATION_REMAINS_OPEN",
+    "GENERAL_TEST_FEASIBILITY_AND_OBSERVATION_MODEL_FORMATION_REMAINS_OPEN",
+    "THIRD_PARTY_GGUF_QUANTS_REQUIRE_INDEPENDENT_IDENTITY_AND_QUALITY_VERIFICATION",
+    "NO_CLAIM_MODEL_FITS_AVAILABLE_CURRENT_RUNTIME_UNTIL_RESOURCE_PREFLIGHT"
+  ],
+  "next_minimum_actions": [
+    "CONTENT_ADDRESS_AND_LICENSE_VERIFY_UPSTREAM_MODEL_CODE_CONFIG_AND_SELECTED_WEIGHT_OR_QUANT_ARTIFACT",
+    "FREEZE_A_ZERO_TERMINAL_CASE_PREQUALIFICATION_PROTOCOL_FOR_ONLY_INSPIRATION_RETRIEVAL_AND_HYPOTHESIS_COMPOSITION",
+    "TEST_DONOR_INDEPENDENTLY_ON_PUBLIC_NONTERMINAL_OR_SYNTHETIC_CASES_FOR_PROMPT_FORMAT_PARSEABILITY_AND_BASIC_SEMANTIC_OUTPUT",
+    "IF_PREQUALIFICATION_PASSES_BIND_MOOSE_STAR_AS_CANDIDATE_INTERNALIZED_ROUTE_FOR_THE_TWO_SUBREGIONS",
+    "SEARCH_SEPARATELY_FOR_RESEARCH_QUESTION_FORMATION_AND_GENERAL_TEST_MODEL_SEMANTICS; DO_NOT PRETEND_MOOSE_STAR_COVERS THEM",
+    "ONLY_AFTER_ROUTE_AND_SCOPE_PREQUALIFICATION_DECIDE WHETHER_ANY_MATCHED_OPUS_T3_CASES_REMAIN_NECESSARY"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_MOOSE_STAR_EQUALS_OR_BEATS_OPUS_5_5",
+    "NO_CLAIM_WHOLE_SCIENTIFIC_HYPOTHESIS_RESIDUAL_IS_SOLVED",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_INCREMENTAL_SPEND_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
