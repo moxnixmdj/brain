@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PROFILE_UNION_SECURITY_INDEPENDENT_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_LOGIC_PASS__GITHUB_ROUNDTRIP_PASS__FIRST_PARTY_SOURCE_BINDINGS_RECORDED__ZERO_ACCEPTANCE_CREDIT",
+  "subjects": [
+    {
+      "path": "canonical/governance/OPUS55_TARGET_PROFILE_UNION_BOUNDARY_20261005_V1.json",
+      "commit_sha": "6eab7caeec6ed7a9efdafadabf04f9fa6cc0e855",
+      "git_blob_sha": "b8cfc03751ef1df11df5f94516e8fe6a1fc5a4c8"
+    },
+    {
+      "path": "canonical/governance/OPUS55_SECURITY_RELIABILITY_CROSS_CUTTING_ACCEPTANCE_DIMENSION_20261005_V1.json",
+      "commit_sha": "94c4a7a82cbeee6037ea91c4a914a16669521a7b",
+      "git_blob_sha": "6b3a71f506d7656e152c87f3cbbdc61f1991102b"
+    }
+  ],
+  "independent_symbolic_verification": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "formulas": [
+      "AND@@FLATTEN@BOOLEANTABLE[IMPLIES[(IMPLIES[a,b]&&IMPLIES[b,d]),IMPLIES[a,d]],{a,b,d}]",
+      "AND@@FLATTEN@BOOLEANTABLE[IMPLIES[a,OR[a,b]],{a,b}]"
+    ],
+    "result": [
+      true,
+      true
+    ],
+    "interpretation": [
+      "SUBSET_MEMBERSHIP_PLUS_PROPERTY_ON_SUPERSET_IMPLIES_PROPERTY_ON_SUBSET",
+      "MEMBERSHIP_IN_ANY_COMPONENT_SET_IMPLIES_MEMBERSHIP_IN_A_UNION_CONTAINING_THAT_COMPONENT"
+    ],
+    "scope_warning": "THIS_VERIFIES_ONLY_THE_SET_THEORETIC_PROFILE_UNION IMPLICATION__NOT_THE_REAL_WORLD_COMPLETENESS_OF_THE_PROFILE_REGISTRY_OR_ANY PERFORMANCE CLAIM"
+  },
+  "first_party_source_verification": [
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "verified_observations": [
+        "CYBERSECURITY_SAFEGUARDS_ROUTE_MOST_CYBER_TASKS_TO_OPUS_4_8",
+        "CYBER_VERIFICATION_PROGRAM_HAS_MULTIPLE_TRUSTED_ACCESS_TIERS",
+        "LIFE_SCIENCES_VERIFICATION_PROGRAM_EXPOSES_BROADER_RESEARCH_ACCESS",
+        "PRESERVED_THINKING_APPLIES_TO_OPUS55_API_ACCOUNTS_CREATED_ON_OR_AFTER_2026_08_31",
+        "PROMPT_INJECTION_DEFENSE_IS_REPORTED_ACROSS_CODING_TOOL_USE_COMPUTER_USE_AND_WEB_BROWSING",
+        "ACTION_SCREENING_SANDBOX_AND_SECURITY_CODE_REVIEW_ARE_PART_OF_THE_SECURE_CODING_AGENT_STACK"
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "verified_observations": [
+        "OPUS55_SUPPORTS_TEXT_INCLUDING_VOICE_DICTATION_AND_IMAGE_INPUTS",
+        "OPUS55_OUTPUTS_TEXT_TEXT_BASED_ARTIFACTS_AND_DIAGRAMS",
+        "OPUS55_DEPLOYMENT_HAS_CAPABILITY_SPECIFIC_PROTECTIONS"
+      ]
+    }
+  ],
+  "github_roundtrip": {
+    "profile_file_fetch_pass": true,
+    "security_file_fetch_pass": true,
+    "profile_commit_fetch_pass": true,
+    "security_commit_fetch_pass": true
+  },
+  "verdict": {
+    "profile_union_logical_repair": "VERIFIED_AS_GOAL_PRESERVING_RELATIVE_TO_THE_ENUMERATED_PROFILE_SET_P",
+    "real_world_profile_completeness": "OPEN",
+    "security_acceptance_gap": "SUPPORTED_BY_FIRST_PARTY_TARGET_EVIDENCE",
+    "current_terminal_completion": false,
+    "acceptance_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CURRENT_PROFILE_REGISTRY_IS_EXHAUSTIVE",
+    "NO_CLAIM_BRAIN_MATCHES_OPUS55_SECURITY_RELIABILITY",
+    "NO_CLAIM_OF_FAMILY_CAPABILITY_OR_OWNERSHIP_PROMOTION",
+    "NO_LITERAL_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": true
+}
