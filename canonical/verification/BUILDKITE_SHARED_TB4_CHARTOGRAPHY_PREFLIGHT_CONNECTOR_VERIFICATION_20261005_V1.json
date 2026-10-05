@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_BUILDKITE_SHARED_TB4_CHARTOGRAPHY_PREFLIGHT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__SHARED_ZERO_CASE_PREFLIGHT_SHAPE_AND_TRIAL_FACTS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/BUILDKITE_SHARED_TB4_CHARTOGRAPHY_ZERO_CASE_PREFLIGHT_20261005_V1.json",
+    "git_blob_sha": "cfeacc31c68fda03bf3ca8dc3d380e124039db52"
+  },
+  "recomputed_public_provider_facts": {
+    "linux_large": {
+      "shape": "LINUX_AMD64_8X32",
+      "vcpu": 8,
+      "memory_gb": 32,
+      "disk_gb": 158,
+      "docker_preinstalled": true,
+      "docker_compose_preinstalled": true,
+      "source": "https://buildkite.com/docs/agent/buildkite-hosted/linux"
+    },
+    "all_access_trial": {
+      "linux_vcpu_concurrency": 24,
+      "linux_vcpu_minutes_included": 4000,
+      "no_credit_card_required": true,
+      "trial_duration_days": 30,
+      "source_limits": "https://buildkite.com/docs/platform/limits",
+      "source_pricing": "https://www.buildkite.com/pricing/"
+    }
+  },
+  "logical_checks": {
+    "single_large_job_within_trial_concurrency": true,
+    "tb4_minimum_cpu_ge_8": true,
+    "tb4_minimum_memory_ge_16gb_documentary": true,
+    "tb4_minimum_disk_ge_50gb_documentary": true,
+    "docker_and_compose_documentary": true,
+    "qwen_weight_bytes_lt_32gb_ram": true,
+    "qwen_weight_bytes_lt_158gb_disk": true,
+    "runtime_peak_fit_not_inferred": true,
+    "one_account_can_host_both_zero_case_preflights": true,
+    "no_terminal_case_required": true
+  },
+  "connector_limit": "THIS_RECOMPUTATION_VERIFIES_PUBLIC_PROVIDER_FACTS_AND_STATIC COALESCENCE LOGIC ONLY__ACCOUNT_SPECIFIC_SHAPE_ACCESS_RUNTIME_RAM_DOCKER_EXECUTION_AND_BILLING_HARD_STOP_STILL_REQUIRE_AUTHENTICATED_ZERO_CASE_OBSERVATION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
