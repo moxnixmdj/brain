@@ -32,6 +32,7 @@ _ALLOWED_CONSTRAINT_KEYS = {
 }
 _SAFE_SOURCE = re.compile(r"^[A-Za-z0-9._:/-]+$")
 _SAFE_LOCATOR = re.compile(r"^[^\[\]\n\r;@]{1,160}$")
+_RESERVED_CITATION_MARKER = re.compile(r"\[src:", re.IGNORECASE)
 
 
 def _fail(reason: str, *, details: Any = None) -> dict[str, Any]:
@@ -106,12 +107,14 @@ def _normalize_item(row: Any) -> dict[str, Any]:
     if kind not in _KINDS:
         raise ValueError("KIND_UNSUPPORTED")
     text = _clean_text(row.get("text"), "TEXT")
+    if _RESERVED_CITATION_MARKER.search(text):
+        raise ValueError("TEXT_RESERVED_CITATION_MARKER")
     provenance = _normalize_provenance(row.get("provenance"))
     section_raw = row.get("section")
     section = None
     if section_raw is not None:
         section = _clean_text(section_raw, "SECTION")
-        if "#" in section:
+        if "#" in section or _RESERVED_CITATION_MARKER.search(section):
             raise ValueError("SECTION_UNSAFE")
     return {
         "id": item_id,
@@ -157,33 +160,42 @@ def _normalize_constraints(value: Any) -> dict[str, Any]:
             raise ValueError("ALLOWED_SECTIONS_INVALID")
         allowed_sections = [_clean_text(x, "ALLOWED_SECTION") for x in allowed_sections]
 
-    try:
-        max_items = int(value.get("max_items"))
-    except Exception as exc:
-        raise ValueError("MAX_ITEMS_REQUIRED") from exc
+    if "max_items" not in value:
+        raise ValueError("MAX_ITEMS_REQUIRED")
+    max_items_raw = value.get("max_items")
+    if isinstance(max_items_raw, bool) or not isinstance(max_items_raw, int):
+        raise ValueError("MAX_ITEMS_INVALID")
+    max_items = max_items_raw
     if max_items < 0:
         raise ValueError("MAX_ITEMS_INVALID")
 
     max_chars_raw = value.get("max_chars")
     max_chars = None
     if max_chars_raw is not None:
-        try:
-            max_chars = int(max_chars_raw)
-        except Exception as exc:
-            raise ValueError("MAX_CHARS_INVALID") from exc
+        if isinstance(max_chars_raw, bool) or not isinstance(max_chars_raw, int):
+            raise ValueError("MAX_CHARS_INVALID")
+        max_chars = max_chars_raw
         if max_chars <= 0:
             raise ValueError("MAX_CHARS_INVALID")
 
-    try:
-        heading_level = int(value.get("heading_level", 2))
-    except Exception as exc:
-        raise ValueError("HEADING_LEVEL_INVALID") from exc
+    heading_level_raw = value.get("heading_level", 2)
+    if isinstance(heading_level_raw, bool) or not isinstance(heading_level_raw, int):
+        raise ValueError("HEADING_LEVEL_INVALID")
+    heading_level = heading_level_raw
     if not 1 <= heading_level <= 6:
         raise ValueError("HEADING_LEVEL_INVALID")
 
     require_title = value.get("require_title", False)
-    if require_title not in (True, False):
+    if not isinstance(require_title, bool):
         raise ValueError("REQUIRE_TITLE_INVALID")
+
+    section_controls_active = (
+        bool(required_sections)
+        or allowed_sections is not None
+        or "heading_level" in value
+    )
+    if output_format != "SECTIONED_MARKDOWN" and section_controls_active:
+        raise ValueError("SECTION_CONSTRAINTS_REQUIRE_SECTIONED_MARKDOWN")
 
     return {
         "output_format": output_format,
@@ -244,6 +256,8 @@ def solve(public: Mapping[str, Any]) -> dict[str, Any]:
         title = task.get("title")
         if title is not None:
             title = _clean_text(title, "TITLE")
+            if _RESERVED_CITATION_MARKER.search(title):
+                return _fail("TITLE_RESERVED_CITATION_MARKER")
         if constraints["require_title"] and title is None:
             return _fail("TITLE_REQUIRED")
 
