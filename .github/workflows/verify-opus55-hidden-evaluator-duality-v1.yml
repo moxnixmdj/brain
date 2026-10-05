@@ -1,0 +1,27 @@
+name: Verify Opus55 hidden evaluator duality V1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/OPUS55_UNIVERSAL_OBSERVABLE_TASK_SUPERDOMAIN_HIDDEN_EVALUATOR_DUALITY_20261005_V1.json"
+      - "canonical/runtime/opus55_hidden_evaluator_duality_v1.py"
+      - "canonical/tests/test_opus55_hidden_evaluator_duality_v1.py"
+      - ".github/workflows/verify-opus55-hidden-evaluator-duality-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Parse governance JSON
+        run: python -m json.tool canonical/governance/OPUS55_UNIVERSAL_OBSERVABLE_TASK_SUPERDOMAIN_HIDDEN_EVALUATOR_DUALITY_20261005_V1.json > /dev/null
+      - name: Verify hidden evaluator duality
+        run: python -m unittest canonical.tests.test_opus55_hidden_evaluator_duality_v1 -v
