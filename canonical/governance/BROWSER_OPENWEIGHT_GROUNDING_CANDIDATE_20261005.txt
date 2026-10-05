@@ -1,0 +1,5 @@
+CANDIDATE ZERO CREDIT
+Target: BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001
+Open-weight candidate: ServiceNow GroundNext-7B-V0 revision 87fa3b667023fa7c4aa8120be722304f051631ab
+Use only for screenshot-to-coordinate grounding. Preserve Brain-owned action validation and stale-state recovery.
+No parity, scope-closure, OSWorld, family, or acceptance credit before independent qualification.
