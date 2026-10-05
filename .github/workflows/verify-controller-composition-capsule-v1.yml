@@ -1,0 +1,45 @@
+name: Verify controller composition capsule V1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/astra_runtime.py"
+      - "canonical/runtime/composition_state_capsule_v2.py"
+      - "canonical/runtime/controller_composition_capsule_adapter_v1.py"
+      - "canonical/tests/test_controller_composition_capsule_adapter_v1.py"
+      - ".github/workflows/verify-controller-composition-capsule-v1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/astra_runtime.py"
+      - "canonical/runtime/composition_state_capsule_v2.py"
+      - "canonical/runtime/controller_composition_capsule_adapter_v1.py"
+      - "canonical/tests/test_controller_composition_capsule_adapter_v1.py"
+      - ".github/workflows/verify-controller-composition-capsule-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Compile integration surfaces
+        run: |
+          python -m py_compile \
+            canonical/runtime/astra_runtime.py \
+            canonical/runtime/composition_state_capsule_v2.py \
+            canonical/runtime/controller_composition_capsule_adapter_v1.py \
+            canonical/tests/test_controller_composition_capsule_adapter_v1.py
+      - name: Run capsule v2 kernel adversarial tests
+        run: python -m unittest -v canonical.tests.test_composition_state_capsule_v2
+      - name: Run controller capsule integration adversarial tests
+        run: python -m unittest -v canonical.tests.test_controller_composition_capsule_adapter_v1
+      - name: Run existing model-independent controller regressions
+        run: python -m unittest -v canonical.tests.test_astra_runtime_model_independence
