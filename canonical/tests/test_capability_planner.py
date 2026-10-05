@@ -117,6 +117,32 @@ class CapabilityPlannerTests(unittest.TestCase):
             out["actions"][1]["args"]["value"],
             {"$result": {"cycle": 0, "field": "value"}},
         )
+        self.assertEqual(
+            out["composition_contract"],
+            [
+                {
+                    "cycle": 0,
+                    "capability_id": "learn-value",
+                    "requires": [],
+                    "provides": ["knowledge.value.available"],
+                    "result_fields": ["value"],
+                    "provider_bindings": {},
+                },
+                {
+                    "cycle": 1,
+                    "capability_id": "write-value",
+                    "requires": ["knowledge.value.available"],
+                    "provides": ["record.written"],
+                    "result_fields": [],
+                    "provider_bindings": {
+                        "knowledge.value.available": {
+                            "cycle": 0,
+                            "capability_id": "learn-value",
+                        }
+                    },
+                },
+            ],
+        )
 
     def test_effect_result_binding_rejects_undeclared_provider_field(self):
         problem = {
