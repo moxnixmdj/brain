@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_DOMAIN_BEHAVIOR_UNIVERSE_ANCHOR_SUPPLEMENT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PRIMARY_SOURCE_SURFACE_PRESENCE_TRUTH_REPAIR__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Correct stale zero-observed-surface fields for two active V21 J-domain obligations using the first-party Opus 5.5 system card, without claiming exhaustiveness, parity, or ownership.",
+  "base": {
+    "path": "canonical/governance/OPUS55_DOMAIN_BEHAVIOR_UNIVERSE_ANCHOR_20261005_V1.json",
+    "git_blob_sha": "b6c09cd59491903c9c1aa358035e861b2c08bb0f"
+  },
+  "primary_source": {
+    "index_url": "https://www.anthropic.com/system-cards",
+    "document_url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "publication_date": "2026-09-22",
+    "authority": "PRIMARY_PROVIDER"
+  },
+  "repairs": [
+    {
+      "domain_id": "HEALTHCARE",
+      "first_party_section": "8.15 Healthcare",
+      "corrected_surface_presence": true,
+      "actor_attribution_boundary": "THE_SECTION_USES_A_DEPLOYMENT_CONFIGURATION_WITH_SAFETY_ROUTING__SURFACE_PRESENCE_DOES_NOT_BY_ITSELF_PROVE_A_CLEAN_INTRINSIC_OPUS55_PERFORMANCE_BAR.",
+      "exhaustive_behavior_universe": false,
+      "lossless_transform_mapping": false,
+      "revised_state": "PRIMARY_SOURCE_SURFACE_OBSERVED__DECOMPOSITION_AND_ACTOR_ATTRIBUTION_REQUIRED"
+    },
+    {
+      "domain_id": "MATHEMATICAL_REASONING_ARXIVMATH",
+      "first_party_section": "8.9 ArXivMath",
+      "corrected_surface_presence": true,
+      "protocol_identity": "AUGUST_2026__57_PROBLEMS__MAX_EFFORT__FOUR_ATTEMPTS_PER_PROBLEM__NO_TOOLS_AND_CODE_SANDBOX_WITHOUT_INTERNET_TOOL_VARIANTS__SYSTEM_CARD_SETTING_DISTINCT_FROM_MATHARENA_VENDOR_HARNESS",
+      "published_surface_results": {
+        "NO_TOOLS_PERCENT": 91.2,
+        "WITH_TOOLS_PERCENT": 96.9
+      },
+      "exhaustive_behavior_universe": false,
+      "lossless_transform_mapping": false,
+      "revised_state": "PRIMARY_SOURCE_SURFACE_OBSERVED__DECOMPOSITION_AND_PROTOCOL_BINDING_REQUIRED"
+    }
+  ],
+  "deduction": {
+    "proved": [
+      "ZERO_OBSERVED_FIRST_PARTY_SURFACE_IS_FALSE_FOR_BOTH_LISTED_DOMAIN_OBLIGATIONS.",
+      "SOURCE_EXISTENCE_SEARCH_FOR_THESE_TWO OBLIGATIONS CAN_STOP."
+    ],
+    "not_proved": [
+      "DOMAIN_EXHAUSTIVENESS",
+      "LOSSLESS_TRANSFORM_COVERAGE",
+      "BRAIN_NONINFERIORITY",
+      "ANY_META_OR_ATOMIC_CLOSURE",
+      "TERMINAL_GOAL"
+    ]
+  },
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "SEARCH_FOR_FIRST_PARTY_SURFACE_EXISTENCE_FOR_THE_TWO_LISTED_DOMAINS"
+    ],
+    "preserve": [
+      "J_DOMAIN_BEHAVIOR_DECOMPOSITION_OR_COUNTEREXAMPLE",
+      "PER_DOMAIN_EXHAUSTIVENESS",
+      "LOSSLESS_MAPPING_OR_CONSTRUCTIVE_COUNTEREXAMPLE",
+      "ACTOR_ATTRIBUTION_AND_PROTOCOL_IDENTITY"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
