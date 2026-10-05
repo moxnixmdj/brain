@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__CONNECTOR_RECOMPUTATION_PASS__CURSORBENCH_DORMANT_ROUTE_REPAIR__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json",
+    "git_blob_sha": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
+  },
+  "verification": {
+    "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "c72193a6d03ac1f27db2f68d1f6e7b8c962fe395"
+  },
+  "supersedes": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V13_ACTIVATION_V1.json",
+    "git_blob_sha": "2a4b1caf89f66c74f2c1e79e2666e76f8e2952c0"
+  },
+  "effects": [
+    "ACTIVATE_V14_ZERO_REALITY_SCHEDULING_FOR_CURRENT_14_24_EPOCH",
+    "REMOVE_CURSORBENCH_FROM_ACTIVE_OWNER_OR_PLATFORM_RESULT_BATCH",
+    "PRESERVE_CURSORBENCH_STRICT_ACCEPTANCE_OPEN",
+    "REOPEN_CURSORBENCH_ONLY_ON_MATERIAL_CURSOR_POLICY_OR_INTERFACE_CHANGE_OR_SEPARATELY_ADMISSIBLE_STRONGER_SCOPE_COMPLETE_PROOF",
+    "PRESERVE_ALL_OTHER_V13_ZERO_REALITY_ACTION_GROUPS_AND_HARD_RULES"
+  ],
+  "current_action_groups": [
+    "A_SHARED_BUILDKITE_TB4_CHARTOGRAPHY_PREFLIGHT",
+    "B_SELF_SERVICE_AND_ACCOUNT_FACT_SWEEP",
+    "C_HLE_GRADER_RELATION",
+    "D_VALS_FINANCE_AGENT_PREFLIGHT",
+    "E_OWNER_OR_PLATFORM_RESULT_BATCH",
+    "F_FINANCE_AND_SYNTHESIS_CERTIFICATE_COMPILATION",
+    "G_ROOT3_SCOPE_CERTIFICATE_RACE",
+    "H_COMPOSITION_UPSTREAM_RECEIPT_RECOMPUTE",
+    "I_FINANCE_DIRECT_ORACLE_HOLD"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "next": "EXECUTE_ONLY_CURRENT_INFORMATION_POSITIVE_ZERO_REALITY_GROUPS__CURSORBENCH_DORMANT_UNTIL_REOPEN_EVENT"
+}
