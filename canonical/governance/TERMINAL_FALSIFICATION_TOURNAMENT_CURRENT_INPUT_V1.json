@@ -173,7 +173,11 @@
           "kind": "NECESSITY_COUNTERMODEL",
           "cost_units": 1,
           "decisive": true,
-          "status": "PENDING"
+          "status": "PASS_NO_COUNTEREXAMPLE",
+          "receipt": {
+            "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_TERMINAL_NECESSITY_SEARCH_20261005_V1.json",
+            "git_blob_sha": "4fde6530b69670f211fa35a9eb36e70ead342ed1"
+          }
         },
         {
           "id": "F_TERMINAL_SUFFICIENCY_COUNTERMODEL",
