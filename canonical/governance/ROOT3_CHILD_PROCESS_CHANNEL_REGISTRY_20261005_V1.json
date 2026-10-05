@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_CHILD_PROCESS_CHANNEL_REGISTRY_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__CURRENT_ASTRA_CHILD_PROCESS_UNIVERSE_FINITE_AT_8_EXACT_CALL_SITES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Replace the open-ended CHILD_PROCESS_INTERNAL_EFFECTS Root3 C1 residual with an exact content-addressed call-site universe for the current ASTRA runtime, without claiming that the child implementations are already mediated.",
+  "subject": {
+    "astra_runtime_path": "canonical/runtime/astra_runtime.py",
+    "astra_runtime_git_blob_sha": "0912dfa4119950f6d235d501dfa784e65e9f71c9",
+    "compiler_path": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+    "tests_path": "canonical/tests/test_root3_child_process_channel_registry_v1.py"
+  },
+  "exact_current_universe": {
+    "total_subprocess_run_sites": 8,
+    "function_counts": {
+      "run_shell": 1,
+      "_ensure_pypi_dependency": 2,
+      "_ensure_apt_dependencies": 3,
+      "_goal_action": 1,
+      "_verify_and_promote_acquisition": 1
+    },
+    "classes": [
+      "ARBITRARY_SHELL_STEP",
+      "PYPI_INSTALL_CHILD",
+      "APT_METADATA_QUERY_CHILD",
+      "APT_INSTALL_CHILD",
+      "DPKG_STATE_QUERY_CHILD",
+      "PYTHON_TEST_EXECUTION_CHILD",
+      "RECURSIVE_ASTRA_VERIFICATION_CHILD"
+    ]
+  },
+  "minimum_resolution_cut": [
+    "ROUTE_ARBITRARY_SHELL_THROUGH_FINAL_EFFECT_AUTHORIZER_OR_FORBID_FROM_CREDITED_RUNTIME",
+    "ROUTE_PIP_AND_APT_INSTALLS_THROUGH_PACKAGE_ENV_MUTATION_AUTHORIZATION_WITH_EXACT_ARTIFACT_BINDING",
+    "SANDBOX_OR_SCOPE_COMPLETELY_BIND_PYTHON_TEST_EXECUTION",
+    "BIND_RECURSIVE_ASTRA_CHILD_TO_THE_SAME_STRICT_EFFECT_BOUNDARY_AND_EXACT_RUNTIME_BYTES",
+    "BIND_OR_SANDBOX_APT_CACHE_AND_DPKG_QUERY_EXTERNAL_BINARIES"
+  ],
+  "root3_effect": {
+    "prior_residual": "CHILD_PROCESS_INTERNAL_EFFECTS__OPEN_WORLD",
+    "new_residual": "FINITE_8_SITE_CHILD_PROCESS_UNIVERSE__EFFECT_MEDIATION_PER_SITE_STILL_OPEN",
+    "c1_scope_complete": false,
+    "acceptance_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CHILD_PROCESS_EFFECT_TOTALITY_IS_PROVED",
+    "NO_CLAIM_EXTERNAL_BINARIES_OR_EXECUTED_TEST_PROGRAMS_ARE EFFECT_FREE",
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
