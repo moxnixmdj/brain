@@ -1,0 +1,157 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_V5_GAP_TO_T0_T3_MULTIPLEX_OVERLAY_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ALL_CURRENT_V5_PROOF_BASIS_GAPS_EMBED_IN_EXISTING_T0_T3_OUTER_WAVE__ZERO_ADDITIONAL_PORTFOLIOS_IF_REFROZEN_BEFORE_TERMINAL_RESULTS__ZERO_CREDIT",
+  "objective": "Preserve the exact four-portfolio outer minimum reality cut while repairing the newly discovered public-bar scope-completeness, creative/diagram, multilingual, and long-context proof-basis gaps without inventing a fifth terminal portfolio.",
+  "authorities": {
+    "outer_portfolios": {
+      "path": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
+      "git_blob_sha": "7c49e3a44dc9a827e84a12b572ea6b8e9b2fa1f5"
+    },
+    "five_family_partition": {
+      "path": "canonical/governance/FIVE_PUBLIC_BAR_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "8f74ca3d9609737913714844a793b8566028a0aa"
+    },
+    "multilingual_long_context": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+    },
+    "creative_diagram_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    },
+    "active_terminal_basis": {
+      "path": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+      "git_blob_sha": "9c60356ab509a16df5104777f360b9fb18255842"
+    },
+    "legacy_predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    }
+  },
+  "exact_reduction": {
+    "surviving_public_bar_scope_leaf_count": 7,
+    "surviving_public_bar_scope_leaves": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
+    ],
+    "additional_observed_surface_classes": [
+      "CREATIVE_TEXT_GENERATION_QUALITY",
+      "DIAGRAM_OUTPUT_CORRECTNESS_STRUCTURE_PRESENTATION",
+      "MULTILINGUAL_PERFORMANCE_CONDITION",
+      "LONG_CONTEXT_CONDITION"
+    ],
+    "prior_outer_portfolio_count": 4,
+    "required_new_portfolio_count": 0,
+    "preserved_outer_portfolio_count": 4,
+    "added_reality_unit_cost_if_preconditions_hold": 0,
+    "reason": "Every surviving behavioral leaf is already assigned to at least one of T0,T1,T2,T3. Creative/diagram are synthesis-artifact output slices inside T1. Multilingual and long-context are cross-cutting condition tags/slices over existing family portfolios, not independent primitive capability families."
+  },
+  "overlay": [
+    {
+      "portfolio": "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO",
+      "add_or_bind": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_SCOPE_COMPLETENESS",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001_SCOPE_COMPLETENESS",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001_SCOPE_COMPLETENESS",
+        "MULTILINGUAL_ADVANCED_AGENTIC_CODING_CONDITION",
+        "LONG_CONTEXT_ADVANCED_AGENTIC_CODING_CONDITION"
+      ],
+      "candidate_first_party_anchors": [
+        "SWE_BENCH_MULTILINGUAL_OPUS55_93_9",
+        "PROGRAMBENCH_HIDDEN_TEST_PASS_RATE_OPUS55_91_2"
+      ]
+    },
+    {
+      "portfolio": "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO",
+      "add_or_bind": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_SCOPE_COMPLETENESS",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_SCOPE_COMPLETENESS",
+        "CREATIVE_TEXT_GENERATION_QUALITY",
+        "DIAGRAM_OUTPUT_CORRECTNESS_STRUCTURE_PRESENTATION",
+        "MULTILINGUAL_PROFESSIONAL_COMMUNICATION_CONDITION",
+        "LONG_CONTEXT_PROFESSIONAL_SYNTHESIS_CONDITION"
+      ],
+      "candidate_first_party_anchors": [
+        "GMMLU_42_LANGUAGE_AVG_OPUS55_94_3",
+        "MILU_11_LANGUAGE_AVG_OPUS55_93_1"
+      ]
+    },
+    {
+      "portfolio": "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO",
+      "add_or_bind": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001_SCOPE_COMPLETENESS",
+        "MULTILINGUAL_INSTRUCTION_FOLLOWING_CONDITION_IF_MATERIAL_TO_TARGET_SCOPE",
+        "LONG_CONTEXT_INSTRUCTION_AND_AGENT_SEQUENCE_CONDITION"
+      ]
+    },
+    {
+      "portfolio": "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO",
+      "add_or_bind": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001_SCOPE_COMPLETENESS",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_SHARED_SCOPE_BINDING",
+        "MULTILINGUAL_MULTIDISCIPLINARY_REASONING_CONDITION",
+        "LONG_CONTEXT_RESEARCH_EVIDENCE_CONDITION_IF_MATERIAL_TO_TARGET_SCOPE"
+      ]
+    }
+  ],
+  "preservation_theorem": {
+    "statement": "A newly discovered acceptance obligation does not require a new reality portfolio when it can be measured losslessly as a predeclared scorer/condition slice over an already-required portfolio population and route, provided the overlay is frozen before terminal outcomes are observed and any newly added cases are cleanly refrozen.",
+    "required_conditions": [
+      "NO_TERMINAL_OUTCOME_FOR_THE_AFFECTED_PORTFOLIO_HAS_BEEN_OBSERVED",
+      "OVERLAY_TASK_TAGS_METRICS_SCORERS_STOP_RULES_AND_SCOPE_BINDINGS_ARE_FROZEN_BEFORE_TERMINAL_EXECUTION",
+      "ANY_ADDED_HELDOUT_CASES_ARE_CLEAN_AND_REFROZEN_WITH_CONTAMINATION_ACCOUNTING",
+      "PUBLIC_BAR_SCOPE_CREDITS_ONLY_THE_BEHAVIOR_IT_ACTUALLY_EXERCISES",
+      "CROSS_CUTTING_CONDITION_CREDIT_DOES_NOT_TRANSFER_TO_A_FAMILY_EDGE_UNLESS_THE_TAGGED_SLICE_EXERCISES_THAT_EDGE_OR_A_VERIFIED_STRONGER_SCOPE_COMPLETE_RELATION EXISTS",
+      "CREATIVE_OR_DIAGRAM_OUTPUT_RECEIVES_NO CREDIT FROM GENERIC ARTIFACT_OR_SYNTHESIS SCORES WITHOUT EXPLICIT OUTPUT_QUALITY_SCORING"
+    ],
+    "failure_rule": "If any required obligation cannot be measured losslessly inside T0-T3 under the frozen route, only that obligation may open a new portfolio. Do not reopen the whole outer cut."
+  },
+  "scheduler_effect": {
+    "delete": [
+      "OPEN_A_FIFTH_PORTFOLIO_MERELY_BECAUSE_THE_PROOF_BASIS_GREW",
+      "DUPLICATE_THE_SEVEN_SHARED_SCOPE_LEAVES_PER_FAMILY",
+      "RUN_SEPARATE_MULTILINGUAL_OR_LONG_CONTEXT_CAMPAIGNS_BEFORE_TESTING_T0_T3_EMBEDDABILITY"
+    ],
+    "activate": [
+      "REFREEZE_T0_T3_WITH_EXPLICIT_GAP_OVERLAY_BEFORE_ANY_TERMINAL_OUTPUT",
+      "BIND_EACH_NEW_SCOPE_LEAF_TO_ITS_EXISTING_PORTFOLIO_SCORER_OR_ADD_A_PREDECLARED_SCORER",
+      "ADD_CREATIVE_TEXT_AND_DIAGRAM_OUTPUT_QUALITY_SLICES_TO_T1",
+      "ADD_MULTILINGUAL_AND_LONG_CONTEXT_TAGGED_SLICES_TO_THE_MATERIAL_EXISTING_PORTFOLIOS",
+      "RUN_THE_SAME_FOUR_OUTER_PORTFOLIOS_IN_PARALLEL_ONLY_AFTER_EXISTING_PREQUALIFICATION_AND_OVERLAY_REFREEZE_PASS"
+    ],
+    "preserve": [
+      "EXACT_FOUR_PORTFOLIO_OUTER_WAVE",
+      "ZERO_INCREMENTAL_SPEND",
+      "ROOT1_POSITIVE_GAP_ZERO",
+      "FAIL_CLOSED_ACCEPTANCE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_NEW_ACCEPTANCE_PREDICATE_IS_PROVED_BY_THIS_OVERLAY",
+    "NO_PUBLIC_BAR_RESULT_IS CLAIMED",
+    "NO_MULTILINGUAL_LONG_CONTEXT_CREATIVE_OR_DIAGRAM_PARITY_IS CLAIMED",
+    "NO_CLAIM_CURRENT_FROZEN_T0_T3_CASES_ALREADY_EXERCISE_EVERY_NEW_SLICE",
+    "NO_EXECUTION_AUTHORITY_UNTIL_OVERLAY_REFREEZE_AND_EXISTING_PREQUALIFICATION_PASS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
