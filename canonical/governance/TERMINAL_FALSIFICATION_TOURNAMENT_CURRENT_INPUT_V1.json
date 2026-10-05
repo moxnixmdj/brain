@@ -60,7 +60,11 @@
           "kind": "DECOMPOSITION_ENTAILMENT",
           "cost_units": 3,
           "decisive": true,
-          "status": "PENDING"
+          "status": "PASS_NO_COUNTEREXAMPLE",
+          "receipt": {
+            "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_DECOMPOSITION_ENTAILMENT_SEARCH_20261005_V1.json",
+            "git_blob_sha": "de5f83cbff67caa597d85708085b60390fda86eb"
+          }
         }
       ],
       "action_cost_units": 12,
