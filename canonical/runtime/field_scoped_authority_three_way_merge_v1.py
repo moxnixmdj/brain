@@ -461,18 +461,19 @@ def _load(path: str) -> Any:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    if argv is None:
+        argv = sys.argv[1:]
+    if list(argv) == ["--self-test"]:
+        _self_test()
+        return 0
+
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("base")
     p.add_argument("candidate")
     p.add_argument("live")
     p.add_argument("--read", action="append", default=[])
     p.add_argument("--write", action="append", required=True)
-    p.add_argument("--self-test", action="store_true")
     args = p.parse_args(argv)
-
-    if args.self_test:
-        _self_test()
-        return 0
 
     result = merge_authority(
         _load(args.base),
