@@ -7,9 +7,9 @@ import canonical.runtime.root3_subprocess_effect_class_registry_v1 as registry
 
 
 class Root3SubprocessEffectClassRegistryTests(unittest.TestCase):
-    def test_exact_current_29_site_partition(self):
+    def test_exact_current_22_site_partition(self):
         out = registry.compile_effect_classes()
-        self.assertEqual(out["site_count"], 29)
+        self.assertEqual(out["site_count"], 22)
         self.assertEqual(out["class_count"], 7)
         self.assertEqual(
             out["class_counts"],
@@ -19,11 +19,11 @@ class Root3SubprocessEffectClassRegistryTests(unittest.TestCase):
                 "DECLARED_ARTIFACT_PRODUCTION": 1,
                 "LOCAL_LOOPBACK_SERVICE": 1,
                 "PACKAGE_ENV_MUTATION": 3,
-                "READ_ONLY_DECLARED_QUERY": 15,
+                "READ_ONLY_DECLARED_QUERY": 8,
                 "TEMPORARY_FILESYSTEM_TRANSFORM": 2,
             },
         )
-        self.assertEqual(out["duplicate_policy_obligations_deleted"], 22)
+        self.assertEqual(out["duplicate_policy_obligations_deleted"], 15)
         self.assertEqual(
             len({(x["module_path"], x["lineno"], x["process_api"]) for x in out["classified_sites"]}),
             29,
