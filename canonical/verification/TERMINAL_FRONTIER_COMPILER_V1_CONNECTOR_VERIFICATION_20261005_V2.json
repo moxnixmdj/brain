@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FRONTIER_COMPILER_V1_CONNECTOR_VERIFICATION_20261005_V2",
+  "date": "2026-10-05",
+  "status": "SEPARATE_IMPLEMENTATION_CONNECTOR_RECOMPUTATION_PASS__LATEST_MAIN_REPLAY__EXACT_38_IDENTITY__14_PROVED__24_UNRESOLVED__ROOT2_18__ROOT3_9__META_8_OPEN__ZERO_CREDIT",
+  "observed_rebase_head": "de0d18b4a9d74f41434ae622daec1b7ed888c77b",
+  "rebase_base": "321389cdbe6dc8ec963fd9328d68d0062168a5e3",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V1.json",
+      "git_blob_sha": "2746ce4c38052dcc2dbb7de24c25728bf06ac31c"
+    },
+    "runtime": {
+      "path": "canonical/runtime/terminal_frontier_compiler_v1.py",
+      "git_blob_sha": "e916144f67d64d76b2d348d761125ee74905807b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_terminal_frontier_compiler_v1.py",
+      "git_blob_sha": "c2a80cb309f9b7571ee87f43e2195bdfae4c73fd"
+    }
+  },
+  "exact_recomputation": {
+    "registry_total_atomic": 38,
+    "proved_predicate_count": 14,
+    "unresolved_predicate_count": 24,
+    "exact_unresolved_identity_equals_root_partition": true,
+    "root1_positive_gap_count": 0,
+    "root2_touching_count": 18,
+    "root3_touching_count": 9,
+    "meta_envelope_open_count": 8,
+    "terminal": false
+  },
+  "authority_bindings": {
+    "root1_meta": {
+      "activation": {
+        "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5_ACTIVATION_V1.json",
+        "git_blob_sha": "72281405d99d0004cf2fa1ed9080d7cdafc2f70c"
+      },
+      "subject": {
+        "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+        "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+      },
+      "verification": {
+        "path": "canonical/verification/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5_CONNECTOR_VERIFICATION_20261005_V1.json",
+        "git_blob_sha": "e59f2b1c7f2db5fd5b3f0d0da8f33b8dd35b3d8d"
+      },
+      "verification_pass": true
+    },
+    "zero_reality": {
+      "activation": {
+        "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_ACTIVATION_V1.json",
+        "git_blob_sha": "343be0d774f96ed851d668ad29045a12195f12ce"
+      },
+      "subject": {
+        "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json",
+        "git_blob_sha": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
+      },
+      "verification": {
+        "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_CONNECTOR_VERIFICATION_20261005_V1.json",
+        "git_blob_sha": "c72193a6d03ac1f27db2f68d1f6e7b8c962fe395"
+      },
+      "verification_pass": true
+    }
+  },
+  "canonical_inputs": {
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860"
+    },
+    "acceptance_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    }
+  },
+  "falsification_checks": {
+    "count_equal_wrong_predicate_identity_rejected": true,
+    "highest_authority_nonactive_rejected": true,
+    "historical_lower_superseded_authority_does_not_poison_higher_active": true,
+    "subject_blob_drift_rejected": true,
+    "verification_blob_drift_rejected": true,
+    "nonpassing_verification_rejected": true,
+    "verification_subject_mismatch_rejected": true,
+    "false_38_of_38_without_meta_closure_rejected": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_PYTHON_CI_HAS_COMPLETED",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_GOAL_CLAIM"
+  ]
+}
