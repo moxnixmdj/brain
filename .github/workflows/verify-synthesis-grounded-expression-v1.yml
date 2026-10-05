@@ -1,0 +1,42 @@
+name: Verify synthesis grounded expression V1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/synthesis_grounded_expression_ir_v1.py"
+      - "canonical/tests/test_synthesis_grounded_expression_ir_v1.py"
+      - "canonical/governance/SYNTHESIS_C2_GROUNDED_EXPRESSION_BOUNDED_ROUTE_20261005_V1.json"
+      - ".github/workflows/verify-synthesis-grounded-expression-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify exact frozen blobs
+        shell: python
+        run: |
+          import hashlib
+          from pathlib import Path
+          expected = {
+              "canonical/runtime/synthesis_grounded_expression_ir_v1.py": "6388c425ecac5fc5f85e02bf55bdc4b1d0f99caa",
+              "canonical/tests/test_synthesis_grounded_expression_ir_v1.py": "6f83d7bc61161e4cf5423e7ca3fb4c4b47e88a37",
+              "canonical/governance/SYNTHESIS_C2_GROUNDED_EXPRESSION_BOUNDED_ROUTE_20261005_V1.json": "beb7663361a61bb424b0e629947f4040eeec5aba",
+          }
+          for p, want in expected.items():
+              data = Path(p).read_bytes()
+              got = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+              if got != want:
+                  raise SystemExit(f"BLOB_DRIFT {p} {got} != {want}")
+          print("EXACT_BLOBS_PASS")
+      - name: Run grounded expression tests
+        run: python -m unittest -v canonical.tests.test_synthesis_grounded_expression_ir_v1
