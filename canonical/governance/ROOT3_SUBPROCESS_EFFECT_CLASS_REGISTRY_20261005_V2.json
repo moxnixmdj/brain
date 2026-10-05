@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_SUBPROCESS_EFFECT_CLASS_REGISTRY_CANDIDATE_V2",
+  "date": "2026-10-05",
+  "status": "CURRENT__29_EXACT_PROCESS_SITES_PARTITIONED_INTO_7_CLASSES__ASTRA_DRIFT_REPAIRED__CONNECTOR_RECOMPUTED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Preserve the 29-to-7 effect-class compression on the actual current runtime after ASTRA line drift, with exact path+line+API keys and zero semantic widening.",
+  "authorities": {
+    "child_process_registry": {
+      "path": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+      "git_blob_sha": "9274fe69eb54f78eb22a8ee4b895d71215fab33a"
+    },
+    "c1_repo_local_verification": {
+      "path": "canonical/verification/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CONNECTOR_VERIFICATION_20261005_V2.json",
+      "git_blob_sha": "b8e56a9b807cd4b77de6cc5656a780b12ddc2949"
+    },
+    "drift_repair_verification": {
+      "path": "canonical/verification/ROOT3_ASTRA_CALLSITE_DRIFT_REPAIR_CONNECTOR_VERIFICATION_20261005_V1.json"
+    }
+  },
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/root3_subprocess_effect_class_registry_v1.py",
+      "git_blob_sha": "771ea8c30eb25b23e22eaba3474ea65f879f912f"
+    }
+  },
+  "partition": {
+    "site_count": 29,
+    "class_count": 7,
+    "class_counts": {
+      "READ_ONLY_DECLARED_QUERY": 15,
+      "TEMPORARY_FILESYSTEM_TRANSFORM": 2,
+      "PACKAGE_ENV_MUTATION": 3,
+      "LOCAL_LOOPBACK_SERVICE": 1,
+      "DECLARED_ARTIFACT_PRODUCTION": 1,
+      "BOUND_CHILD_CODE_EXECUTION": 5,
+      "ARBITRARY_COMMAND_EXECUTION": 2
+    },
+    "duplicate_policy_obligations_deleted": 22
+  },
+  "repaired_astra_lines": [
+    325,
+    595,
+    673,
+    918,
+    933,
+    940,
+    1209,
+    5771
+  ],
+  "hard_nonclaims": [
+    "NO_CLASS_LABEL_IMPLIES_CHILD_INTERNAL_EFFECT_SAFETY",
+    "NO_SEMANTIC_AUTHORIZATION_CREDIT",
+    "NO_ROOT3_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
