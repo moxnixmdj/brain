@@ -1,0 +1,257 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CONDITION_RESTRICTION_TRANSFER_MATRIX_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SHARED_DOMAIN_LANGUAGE_CONTEXT_CONDITION_MATRIX__POINTWISE_RESTRICTION_SAFE__AGGREGATE_TRANSFER_FORBIDDEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Replace duplicated per-family domain/language/context proof scheduling with one fail-closed condition matrix. Reuse a parent proof on a condition only when the proof semantics logically survive restriction to that condition; never infer subgroup parity from aggregate parity alone.",
+  "exact_authorities": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee",
+      "state": "14_OF_38_PROVED__24_OPEN__5_OF_19_ACCEPTANCE_PASS"
+    },
+    "root1_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "first_party_surface_mapping_v2": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+    },
+    "multilingual_long_context_boundary_v2": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+    },
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "theorem": {
+    "id": "CONDITION_RESTRICTION_TRANSFER",
+    "statement": "For a frozen target domain U and condition C with C subseteq U: if the load-bearing proof establishes Brain(x) >= Target(x) pointwise for every x in U, or establishes an objective ceiling/correctness property pointwise for every x in U, then the same proposition holds for every x in C by restriction. If the load-bearing proof establishes only an aggregate statistic over U, aggregate noninferiority on U does not imply aggregate noninferiority on C without an additional condition-preserving theorem or condition-specific bound.",
+    "machine_check": {
+      "engine": "WOLFRAM_LANGUAGE_KERNEL",
+      "pointwise_restriction_result": true,
+      "aggregate_counterexample": {
+        "brain": [
+          1,
+          0
+        ],
+        "target": [
+          0,
+          1
+        ],
+        "whole_domain_mean_noninferior": true,
+        "subset_indices": [
+          2
+        ],
+        "subset_mean_noninferior": false
+      },
+      "result": "PASS__POINTWISE_RESTRICTION_TAUTOLOGY_AND_AGGREGATE_TRANSFER_COUNTEREXAMPLE"
+    }
+  },
+  "admissible_transfer_classes": [
+    "INDEPENDENT_UNIVERSAL_FORMAL_SCOPE_PROOF_WITH_POINTWISE_OR_OBJECTIVE_CEILING_SEMANTICS",
+    "EXHAUSTIVE_FINITE_SCOPE_PROOF_WITH_PER_CASE_POINTWISE_SEMANTICS",
+    "OBJECTIVE_THEORETICAL_CEILING_PROOF_WHOSE_FROZEN_SCOPE_CONTAINS_THE_CONDITION"
+  ],
+  "forbidden_transfer_classes": [
+    "WHOLE_DOMAIN_MEAN_OR_ELO_NONINFERIORITY_WITHOUT_CONDITION_BOUND",
+    "FINITE_SAMPLE_SUCCESS_USED_AS_PROTOCOL_WIDE_DOMINANCE",
+    "SEMANTIC_FAMILY_MAPPING_WITHOUT_OUTCOME_PARITY",
+    "MECHANISM_IDENTITY_OR_REGISTRY_INCIDENCE_USED_AS_TARGET_CONDITION_PARITY"
+  ],
+  "shared_condition_matrix": [
+    {
+      "condition": "CYBERSECURITY",
+      "mapped_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "COMPUTER_AND_BROWSER_USE",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+      ],
+      "mapping_state": "SEMANTICALLY_MAPPED__OUTCOME_PARITY_OPEN",
+      "transfer_rule": "CLOSE_ONLY_COMPONENT_CELLS_WHOSE_EXISTING_SCOPE_COMPLETE_PROOF_EXPLICITLY_CONTAINS_THE_CYBER_CONDITION; DO_NOT_INHERIT_WHOLE_UNION_PARITY_FROM_UNCONDITIONED_AGGREGATES"
+    },
+    {
+      "condition": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "mapped_family_union": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "mapping_state": "SEMANTICALLY_MAPPED__OUTCOME_PARITY_OPEN",
+      "transfer_rule": "SAME_FAIL_CLOSED_RESTRICTION_RULE"
+    },
+    {
+      "condition": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "mapped_family_union": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+      ],
+      "mapping_state": "SEMANTICALLY_MAPPED__OUTCOME_PARITY_OPEN",
+      "transfer_rule": "SAME_FAIL_CLOSED_RESTRICTION_RULE"
+    },
+    {
+      "condition": "HEALTHCARE",
+      "mapped_family_union": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "mapping_state": "SEMANTICALLY_MAPPED__OUTCOME_PARITY_OPEN",
+      "transfer_rule": "SAME_FAIL_CLOSED_RESTRICTION_RULE"
+    },
+    {
+      "condition": "MATHEMATICAL_REASONING_ARXIVMATH",
+      "mapped_family_union": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "EXACT_SYMBOLIC_COMPUTATION",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+      ],
+      "mapping_state": "SEMANTICALLY_MAPPED__NON_SYMBOLIC_MATH_PARITY_OPEN",
+      "transfer_rule": "EXACT_SYMBOLIC_COMPUTATION_MAY_TRANSFER_ONLY_INSIDE_ITS_FROZEN_BOUNDED_OPERATION_CLASSES; IT_CANNOT_DISCHARGE_GENERAL_ARXIVMATH"
+    },
+    {
+      "condition": "MULTILINGUAL_PERFORMANCE",
+      "mapped_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ],
+      "mapping_state": "CROSS_CUTTING_CONDITION__PARITY_OPEN",
+      "target_observation_examples": [
+        "SWE_BENCH_MULTILINGUAL_OPUS55_93_9",
+        "GMMLU_42_LANGUAGE_AVG_OPUS55_94_3",
+        "MILU_11_LANGUAGE_AVG_OPUS55_93_1"
+      ],
+      "transfer_rule": "NO_ENGLISH_ONLY_OR_UNCONDITIONED_AGGREGATE_INHERITANCE"
+    },
+    {
+      "condition": "LONG_CONTEXT",
+      "mapped_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      ],
+      "mapping_state": "CROSS_CUTTING_CONDITION__PARITY_OPEN",
+      "target_observation_examples": [
+        "PROGRAMBENCH_UP_TO_1M_CONTEXT_OPUS55_91_2"
+      ],
+      "transfer_rule": "LONG_HORIZON_MEMORY_OWNERSHIP_DOES_NOT_AUTOMATICALLY_IMPLY_1M_INPUT_CONTEXT_PARITY; REQUIRE_SCOPE_CONTAINMENT_OR_CONDITION_SPECIFIC_PROOF"
+    }
+  ],
+  "public_target_observations": {
+    "role": "NON_LOAD_BEARING_TARGET_CONDITION_HINTS_UNTIL_CONTENT_ADDRESSED_PRIMARY_EXTRACTION_AND_PROTOCOL_BINDING",
+    "observed_2026_10_05": [
+      {
+        "surface": "MULTILINGUAL",
+        "benchmark": "GMMLU",
+        "opus55": 94.3,
+        "unit": "percent",
+        "languages": 42
+      },
+      {
+        "surface": "MULTILINGUAL",
+        "benchmark": "MILU",
+        "opus55": 93.1,
+        "unit": "percent",
+        "languages": 11
+      },
+      {
+        "surface": "LONG_CONTEXT",
+        "benchmark": "ProgramBench",
+        "opus55": 91.2,
+        "unit": "percent",
+        "context": "UP_TO_1M_TOKENS"
+      },
+      {
+        "surface": "MATHEMATICAL_REASONING_ARXIVMATH",
+        "benchmark": "ArXivMath",
+        "opus55_with_tools": 96.9,
+        "opus55_no_tools": 91.2,
+        "unit": "percent"
+      },
+      {
+        "surface": "HEALTHCARE",
+        "benchmark": "HealthBench Professional",
+        "opus55_length_adjusted": 65.6,
+        "unit": "percent"
+      }
+    ],
+    "primary_index": "https://www.anthropic.com/system-cards",
+    "product_benchmark_context": "https://www.anthropic.com/claude/opus",
+    "note": "These observations define possible condition-specific target witnesses only. They do not prove exhaustiveness and do not grant Brain credit."
+  },
+  "scheduler_compression": {
+    "prior_root1_condition_lanes": [
+      "FIVE_EXACT_FAMILY_MAPPING_OR_COUNTEREXAMPLE_CHECKS",
+      "MULTILINGUAL_CONDITION_COVERAGE_PROOF",
+      "LONG_CONTEXT_CONDITION_COVERAGE_PROOF"
+    ],
+    "replace_with": [
+      "ONE_SHARED_TERMINAL_CONDITION_MATRIX",
+      "AUTO_DISCHARGE_ONLY_SOUND_RESTRICTION_TRANSFER_CELLS_FROM_EXISTING_CONTENT_ADDRESSED_PROOFS",
+      "SCHEDULE_ONLY_REMAINING_CONDITION_SPECIFIC_RESIDUAL_CELLS",
+      "PRESERVE_CREATIVE_DIAGRAM_BASIS_REPAIR_AS_SEPARATE_OUTPUT_SURFACE_WORK"
+    ],
+    "dedupe_rule": "A CONDITION X FAMILY CELL MAY BE PROVED ONCE AND REUSED EVERYWHERE ITS EXACT PROPOSITION APPEARS; DO_NOT RE-RUN A WHOLE FAMILY FOR EACH CONDITION.",
+    "expected_effect": "REMOVE_DUPLICATE_PROOF_CONSTRUCTION_AND_PREVENT_UNSOUND_AGGREGATE_TO_SUBGROUP_PROMOTION__NO_ACCEPTANCE_COUNTS_CHANGE_YET"
+  },
+  "interaction_with_literal_target_completeness": {
+    "complete_target_domain_witness_still_required": true,
+    "rule": "THIS_MATRIX_COMPRESSES_PROOF_OF_CURRENTLY_OBSERVED_DOMAIN_AND_CROSS_CUTTING_CONDITIONS. IT DOES_NOT TURN_A_FINITE_OBSERVED_SURFACE_SET_INTO_AN_EXHAUSTIVE_ALL_USEFUL_TARGET_SPECIFICATION.",
+    "w1_w2_w3_boundary_preserved": true
+  },
+  "next_machine_action": "BUILD_A_CONTENT_ADDRESSED_CELL_COMPILER_THAT_JOINS_EACH_CONDITION_WITH_CURRENT_ACCEPTANCE_PROOFS_AND_EMITS CLOSED_ONLY_WHEN_PROOF_CLASS_AND_SCOPE_CONTAINMENT_PASS__THEN_RECOMPUTE_ROOT1_CONDITION_RESIDUALS",
+  "hard_nonclaims": [
+    "NO_DOMAIN_CONDITION_PARITY_CREDIT",
+    "NO_MULTILINGUAL_PARITY_CREDIT",
+    "NO_LONG_CONTEXT_PARITY_CREDIT",
+    "NO_NEW_ATOMIC_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_PROMOTION",
+    "NO_TARGET_WEAKENING",
+    "NO_CLAIM_CURRENT_PUBLIC_TARGET_EVIDENCE_IS_EXHAUSTIVE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
