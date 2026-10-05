@@ -1,0 +1,158 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_FORMATION_COMPOSITION_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__MONOLITHIC_HYPOTHESIS_FORMATION_GAP_REDUCED_TO_EXISTING_OWNED_COMPOSITION_PLUS_THREE_LATENT_RESIDUAL_CLASSES__ZERO_CREDIT",
+  "canonical_base_commit": "91847c12727501f4cae78b2da1b24d038667817d",
+  "objective": "Minimize the newly exposed AGENTIC_SCIENTIFIC_RESEARCH hypothesis/question-formation proof obligation by exact behavioral decomposition and reuse of already verified Brain-owned primitives before any new mechanism or standalone evaluation program is created.",
+  "source_bindings": {
+    "gap": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "f0c6e15e6af698a80895eedf2c39bb874b4697b8"
+    },
+    "shared": {
+      "path": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
+      "git_blob_sha": "ca28ce910e0d946bc7f78d556d47d0ac109a36f2"
+    },
+    "typed": {
+      "path": "canonical/capabilities/opus55/TYPED_HYPOTHESIS_COMPILER_001.json",
+      "git_blob_sha": "07f16c9e0a61904bf2aff306e4cba4a68e05d65c"
+    },
+    "templ": {
+      "path": "canonical/capabilities/opus55/G0_BOUNDED_TYPED_TEMPLATE_SYNTHESIS_001.json",
+      "git_blob_sha": "edbc0ff4ca333381dd2c38fec5979ebb73285d07"
+    },
+    "ident": {
+      "path": "canonical/capabilities/opus55/FINITE_IDENTIFIABILITY_KERNEL_001.json",
+      "git_blob_sha": "1d3a556f15380dfe3aef1e6120c94563df2ef126"
+    },
+    "decisions": {
+      "path": "canonical/capabilities/opus55/SHARED_BOUNDED_DECISION_PRIMITIVES_001.json",
+      "git_blob_sha": "dac3d653df1ed65a3a5249950b8568abce7be62e"
+    },
+    "registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "key_falsification": {
+    "exact_reuse_of_typed_hypothesis_compiler_alone": false,
+    "reason": "TYPED_HYPOTHESIS_COMPILER_001 requires an explicit typed fact/template universe and explicitly excludes raw-language semantic inference, open-ended template invention, candidate ranking, and truth selection."
+  },
+  "constructive_decomposition": [
+    {
+      "stage": "A_EVIDENCE_TO_TYPED_FACTS_RELATIONS_AND_AVAILABLE_HYPOTHESIS_SCHEMA",
+      "existing_basis": "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL",
+      "owned_subregion": "Structured facts, source-grounded bounded coreference/merge, bounded grammars, JIT-retrievable schemas/templates, and verified S0 prefixes.",
+      "residual": "S0_IMPLICIT_LONG_RANGE_SOURCE_TRACEABLE_RELATION_FORMATION or other raw semantic binding outside verified prefixes.",
+      "new_mechanism_required_now": false
+    },
+    {
+      "stage": "B_TYPED_PRIMITIVE_VOCABULARY_TO_WELL_TYPED_HYPOTHESIS_TEMPLATES",
+      "existing_basis": "G0_BOUNDED_TYPED_TEMPLATE_SYNTHESIS_001",
+      "owned_subregion": "Finite explicit typed primitive vocabulary to exhaustive well-typed linear composition templates within declared bounds.",
+      "residual": "G0_NOVEL_PRIMITIVE_TYPE_CONDITIONAL_OR_SEMANTIC_STRUCTURE_INVENTION only when the needed structure is neither JIT-retrievable knowledge nor expressible in the explicit vocabulary/bounds.",
+      "new_mechanism_required_now": false
+    },
+    {
+      "stage": "C_TYPED_FACTS_AND_TEMPLATES_TO_EXHAUSTIVE_SUPPORTED_HYPOTHESIS_CANDIDATES",
+      "existing_basis": "TYPED_HYPOTHESIS_COMPILER_001",
+      "owned_subregion": "Exhaustive supported candidate enumeration relative to a declared finite typed fact/template universe, with provenance and ambiguity preserved.",
+      "residual": "NONE_WITHIN_DECLARED_FINITE_TYPED_UNIVERSE",
+      "new_mechanism_required_now": false
+    },
+    {
+      "stage": "D_CANDIDATE_HYPOTHESES_PLUS_PREDECLARED_OUTCOME_MODELS_TO_DISCRIMINATING_TEST",
+      "existing_basis": "FINITE_IDENTIFIABILITY_KERNEL_001",
+      "owned_subregion": "Exact filtering of finite hypothesis spaces and minimum-worst-case discriminator selection with expected-remaining and cost tie-breaks.",
+      "residual": "Outcome/effect-model acquisition when models are not explicit or derivable from verified structured transitions.",
+      "new_mechanism_required_now": false
+    },
+    {
+      "stage": "E_EXPLICIT_BELIEF_OBSERVATION_AND_UTILITY_MODELS_TO_RANKING",
+      "existing_basis": "EXACT_INFORMATION_GAIN_WHEN_BELIEF_AND_OBSERVATION_MODEL_EXPLICIT + EXACT_EXPECTED_UTILITY_WHEN_PROBABILITIES_AND_UTILITIES_EXPLICIT",
+      "owned_subregion": "Exact information gain and expected-utility ranking once probabilities, observation models, utilities and costs are explicit.",
+      "residual": "S1_IMPLICIT_SEMANTIC_ADJUDICATION_AND_ABSTENTION where scientific merit, feasibility or model probabilities remain materially implicit.",
+      "new_mechanism_required_now": false
+    },
+    {
+      "stage": "F_EXPLICIT_RESEARCH_REQUIREMENTS_TO_NEXT_ACTION_OR_STOP",
+      "existing_basis": "SHARED_BOUNDED_DECISION_PRIMITIVES_001",
+      "owned_subregion": "Explicit material requirement coverage to verified research action or exact stop.",
+      "residual": "Open-domain query/source relevance or sufficiency judgment only where prerequisites remain semantically implicit.",
+      "new_mechanism_required_now": false
+    }
+  ],
+  "theorem": {
+    "name": "SCIENTIFIC_HYPOTHESIS_FORMATION_IS_COMPOSITION_NOT_A_NEW_PRIMITIVE_BY_DEFAULT",
+    "premises": [
+      "The candidate scientific behavior requires hypothesis/question proposal, feasibility/information ranking, and a discriminating test.",
+      "Verified Brain-owned components already cover bounded typed template synthesis, exhaustive typed candidate instantiation, finite discriminator selection, exact information-gain/expected-utility arithmetic for explicit models, and explicit research action/stop selection.",
+      "The shared semantic basis already classifies unresolved S0/G0/S1 behavior as latent diagnostic/proof-only classes rather than authorized new implementation lanes.",
+      "Knowledge and retrievable domain schemas remain JIT by terminal mission law, so a retrievable scientific schema is not a new capability primitive."
+    ],
+    "conclusion": "Do not create a standalone scientific-hypothesis-generation mechanism lane or an independent whole-leaf comparator program by default. Represent the behavior as a composition acceptance obligation in the existing T3 research portfolio, reusing owned bounded components and measuring only the exact surviving S0/G0/S1 residue if the composed route fails.",
+    "scope_limit": "This is a scheduling/proof-basis reduction, not proof that Brain matches Opus 5.5 on open-ended scientific hypothesis formation."
+  },
+  "residual_partition": [
+    {
+      "id": "R1_IMPLICIT_SCIENTIFIC_SEMANTIC_BINDING",
+      "parent": "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL",
+      "reopen_only_if": "T3 produces repeatable solvable failure attributable to missing source-traceable scientific relation/schema formation outside verified prefixes."
+    },
+    {
+      "id": "R2_GENUINELY_NOVEL_HYPOTHESIS_STRUCTURE",
+      "parent": "G0_NOVEL_TYPED_TEMPLATE_AND_EFFECT_MODEL_SYNTHESIS",
+      "reopen_only_if": "A required hypothesis cannot be represented from JIT-retrievable or finite explicit typed primitives within declared bounds and the missing structure is causally load-bearing."
+    },
+    {
+      "id": "R3_IMPLICIT_HYPOTHESIS_MERIT_OR_FEASIBILITY_RANKING",
+      "parent": "S1_IMPLICIT_SEMANTIC_ADJUDICATION_AND_ABSTENTION",
+      "reopen_only_if": "Explicit feasibility, outcome, probability, utility and cost models cannot be formed and implicit ranking is causally required for terminal success."
+    }
+  ],
+  "scheduling_reduction": {
+    "delete": [
+      "DEFAULT_STANDALONE_SCIENTIFIC_HYPOTHESIS_FORMATION_MECHANISM_PROGRAM",
+      "DEFAULT_SEPARATE_WHOLE_LEAF_MATCHED_COMPARATOR_BEFORE_T3_COMPOSITION_TEST"
+    ],
+    "reuse": [
+      "G0_BOUNDED_TYPED_TEMPLATE_SYNTHESIS_001",
+      "TYPED_HYPOTHESIS_COMPILER_001",
+      "FINITE_IDENTIFIABILITY_KERNEL_001",
+      "EXACT_INFORMATION_GAIN_WHEN_BELIEF_AND_OBSERVATION_MODEL_EXPLICIT",
+      "EXACT_EXPECTED_UTILITY_WHEN_PROBABILITIES_AND_UTILITIES_EXPLICIT",
+      "SHARED_BOUNDED_DECISION_PRIMITIVES_001"
+    ],
+    "preserve": [
+      "T3_RESEARCH_PORTFOLIO_AS_COMPOSITION_ACCEPTANCE_SURFACE",
+      "THREE_LATENT_RESIDUAL_CLASSES_FAIL_CLOSED",
+      "ROOT1_POSITIVE_GAP_ZERO",
+      "CURRENT_14_OF_38_ACCEPTANCE_COUNT"
+    ],
+    "fresh_terminal_cases_added": 0
+  },
+  "critical_path_next": "VERIFY_THIS_REDUCTION_AGAINST_EXACT_BOUND_SOURCE_BLOBS__IF_PASS_BIND_SCIENTIFIC_HYPOTHESIS_FORMATION_AS_COMPOSITE_T3_OBLIGATION_AND_FORBID_STANDALONE_PROGRAM_UNLESS_T3_CAUSALLY_REOPENS_R1_R2_OR_R3",
+  "hard_nonclaims": [
+    "NO_CLAIM_OPEN_ENDED_SCIENTIFIC_HYPOTHESIS_PARITY_IS_PROVED",
+    "NO_NEW_FAMILY",
+    "NO_NEW_MECHANISM_OWNERSHIP_CREDIT",
+    "NO_ACCEPTANCE_OR_ATOMIC_PREDICATE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CLAIM_ALL_SCIENTIFIC_SEMANTICS_ARE_FINITE_OR_EXPLICIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
