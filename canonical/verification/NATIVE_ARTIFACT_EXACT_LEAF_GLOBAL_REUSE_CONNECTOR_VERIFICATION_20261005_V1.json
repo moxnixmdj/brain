@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_NATIVE_ARTIFACT_EXACT_LEAF_GLOBAL_REUSE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__PROVED_OBJECTIVE_CEILING_NATIVE_ARTIFACT_LEAF_REUSED_IN_TWO_TARGET_FAMILIES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/NATIVE_ARTIFACT_EXACT_LEAF_GLOBAL_REUSE_CANDIDATE_20261005_V1.json",
+    "git_blob_sha": "1e0adb8bfaf24adde27455e13e55fe102088bbf5"
+  },
+  "inputs": {
+    "registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    }
+  },
+  "recomputed": {
+    "exact_occurrences": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "ARTIFACT_CREATION"
+    ],
+    "source_predicate": "ARTIFACT_MECHANICAL_GATES_CEILING",
+    "source_state": "PROVED",
+    "scope_complete": true,
+    "independent_or_objective": true,
+    "objective_ceiling": true,
+    "brain_value": 1,
+    "theoretical_ceiling_value": 1,
+    "partition_maps_exact_leaf_to_predicate_as_already_proved": true,
+    "target_duplicate_proof_incidences_removed_from_future_work": 2
+  },
+  "hard_nonclaims": [
+    "NO_NEW_ATOMIC_CREDIT",
+    "NO_WHOLE_FAMILY_ACCEPTANCE",
+    "NO_PROFESSIONAL_QUALITY_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
