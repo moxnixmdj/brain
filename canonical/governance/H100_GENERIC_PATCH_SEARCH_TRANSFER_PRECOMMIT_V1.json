@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_H100_GENERIC_PATCH_SEARCH_TRANSFER_PRECOMMIT_V1",
   "date": "2026-10-05",
-  "status": "FROZEN_BEFORE_GENERIC_PATCH_SEARCH_OUTCOMES__FOUR_SEED_TRANSFER_FAMILIES__ZERO_CREDIT",
+  "status": "FROZEN_BEFORE_GENERIC_PATCH_SEARCH_OUTCOMES__PREEXECUTION_GRID_ALIGNMENT_CORRECTED__FOUR_SEED_TRANSFER_FAMILIES__ZERO_CREDIT",
   "objective": "Test whether one predeclared zero-learned patch grammar can repair multiple verified-library misses, transfer each discovered structural family to a distinct frozen task, and thereby justify multiple compile candidates rather than one cubic special case.",
   "baseline_registry": "canonical/runtime/h100_verified_capability_registry_v2.py",
   "x_population": {
@@ -128,8 +128,8 @@
     },
     {
       "id": "HINGE",
-      "seed_truth": "-0.4+0.2*x+1.1*max(0,x-0.7)",
-      "transfer_truth": "0.8-0.1*x-0.6*max(0,x+0.9)",
+      "seed_truth": "-0.4+0.2*x+1.1*max(0,x-0.6)",
+      "transfer_truth": "0.8-0.1*x-0.6*max(0,x+0.8)",
       "expected_family_for_audit_only": "HINGE"
     },
     {
@@ -164,5 +164,13 @@
     "terminal_cases_consumed": 0,
     "h100_terminal_credit_delta": 0
   },
-  "promotion_authority": false
+  "promotion_authority": false,
+  "preexecution_correction": {
+    "reason": "HINGE_THRESHOLDS_MUST_LIE_ON_THE_PREDECLARED_TRAINING_X_OR_ADJACENT_MIDPOINT_GRID_FOR_EXACT_RECOVERY",
+    "old_seed_threshold": 0.7,
+    "new_seed_threshold": 0.6,
+    "old_transfer_threshold": -0.9,
+    "new_transfer_threshold": -0.8,
+    "outcomes_observed_before_correction": false
+  }
 }
