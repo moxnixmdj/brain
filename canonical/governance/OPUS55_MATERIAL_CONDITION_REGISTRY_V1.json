@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_MATERIAL_CONDITION_REGISTRY_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__DYNAMIC_CROSS_CUTTING_TERMINAL_CONDITION_UNIVERSE__SOURCE_UNIVERSE_UNSEALED__ZERO_CREDIT",
+  "objective": "Represent material Opus 5.5 capability conditions separately from family names and the legacy atomic acceptance registry, so terminal finality cannot be inferred from a fixed predicate denominator while known cross-cutting or domain conditions remain open.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authorities": {
+    "family_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "surface_mapping": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+    "multilingual_long_context_boundary": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+    "abstract_generalization_boundary": "canonical/governance/OPUS55_ABSTRACT_GENERALIZATION_ARC_AGI_BOUNDARY_V1.json",
+    "image_input_mapping": "canonical/governance/OPUS55_IMAGE_INPUT_EXISTING_FAMILY_MAPPING_20261005_V1.json",
+    "voice_dictation_boundary": "canonical/governance/OPUS55_VOICE_DICTATION_MODEL_BOUNDARY_RECONCILIATION_20261005_V1.json"
+  },
+  "rules": [
+    "CONDITIONS_ARE_ORTHOGONAL_TO_ACCOUNTING_FAMILIES__A_CONDITION_MAY_SPAN_MULTIPLE_FAMILIES",
+    "A_FAMILY_ACCEPTANCE_PASS_DOES_NOT_TRANSFER_TO_AN_UNPROVED_MATERIAL_CONDITION",
+    "A_PUBLIC_BENCHMARK_PROVES_ONLY_ITS_EXERCISED_CONDITION_AND_SCOPE",
+    "CONDITION_EVIDENCE_COUNTS_ONLY_WHEN_PROVED_AND_SCOPE_COMPLETE",
+    "DISCOVERED_CONDITIONS_MAY_GROW_THE_REGISTRY_WITHOUT_CODE_OR_DENOMINATOR_CHANGES",
+    "TERMINAL_FINALITY_REQUIRES_ALL_REGISTERED_MATERIAL_CONDITIONS_CLOSED_AND_SOURCE_UNIVERSE_SEALED",
+    "SOURCE_UNIVERSE_SEAL_IS_A_SEPARATE_PROOF_OBLIGATION__KNOWN_CONDITION_CLOSURE_ALONE_CANNOT_SEAL_IT",
+    "NO_CONDITION_REGISTRY_ENTRY_CREATES_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "source_universe": {
+    "sealed": false,
+    "reason": "CURRENT_CANONICAL_AUDITS_EXPLICITLY_KEEP_THE_GLOBAL_SOURCE_UNIVERSE_UNSEALED_AND_NEW_MATERIAL_DIMENSIONS_HAVE_CONTINUED_TO_APPEAR_AFTER_V5",
+    "seal_requires": [
+      "CONTENT_ADDRESSED_SOURCE_SNAPSHOT_OR_EQUIVALENT_EXPLICIT_SOURCE_BOUNDARY",
+      "FIXED_POINT_ENUMERATION_SHOWING_NO_UNMAPPED_MATERIAL_USEFUL_BEHAVIOR_OR_CONDITION_IN_THE_BOUND_SOURCE_UNIVERSE",
+      "INDEPENDENT_VERIFICATION_OF_THE_ENUMERATION_AND_MAPPING",
+      "REOPEN_ON_ANY_NEWER_LOAD_BEARING_SOURCE_DELTA"
+    ]
+  },
+  "conditions": [
+    {
+      "id": "CYBERSECURITY_DOMAIN_CONDITION",
+      "kind": "DOMAIN_CONDITION",
+      "families": ["ADVANCED_AGENTIC_CODING","COMPLEX_MULTI_TOOL_AGENCY","COMPUTER_AND_BROWSER_USE","TOOL_DISCOVERY_SELECTION_AND_LEARNING","UNKNOWN_DOMAIN_ADAPTATION","MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"],
+      "source": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "acceptance": "Equal-or-better useful behavior on the material authorized cybersecurity scope or a scope-safe stronger certificate."
+    },
+    {
+      "id": "BIOLOGY_RESEARCH_AND_DEVELOPMENT_DOMAIN_CONDITION",
+      "kind": "DOMAIN_CONDITION",
+      "families": ["AGENTIC_SCIENTIFIC_RESEARCH","MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING","UNKNOWN_DOMAIN_ADAPTATION","TOOL_DISCOVERY_SELECTION_AND_LEARNING","VISION_AND_DENSE_DOCUMENT_UNDERSTANDING","COMMUNICATION_AND_SYNTHESIS"],
+      "source": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "acceptance": "Equal-or-better useful behavior on material safe biology research-and-development scope or a scope-safe stronger certificate."
+    },
+    {
+      "id": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT_DOMAIN_CONDITION",
+      "kind": "DOMAIN_CONDITION",
+      "families": ["AGENTIC_SCIENTIFIC_RESEARCH","ADVANCED_AGENTIC_CODING","COMPLEX_MULTI_TOOL_AGENCY","TOOL_DISCOVERY_SELECTION_AND_LEARNING","MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING","SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"],
+      "source": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "acceptance": "Equal-or-better automated AI research-and-development outcomes on material target scope or a scope-safe stronger certificate."
+    },
+    {
+      "id": "HEALTHCARE_DOMAIN_CONDITION",
+      "kind": "DOMAIN_CONDITION",
+      "families": ["PROFESSIONAL_KNOWLEDGE_WORK","MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING","COMMUNICATION_AND_SYNTHESIS","VISION_AND_DENSE_DOCUMENT_UNDERSTANDING","INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT","AGENTIC_SCIENTIFIC_RESEARCH"],
+      "source": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "acceptance": "Equal-or-better outcomes on the material healthcare scope represented by the target evidence or a scope-safe stronger certificate."
+    },
+    {
+      "id": "NON_SYMBOLIC_MATHEMATICAL_REASONING_CONDITION",
+      "kind": "CROSS_CUTTING_REASONING_CONDITION",
+      "families": ["MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING","EXACT_SYMBOLIC_COMPUTATION","SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"],
+      "source": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "acceptance": "Equal-or-better non-symbolic mathematical reasoning on material target scope; bounded exact symbolic proof alone is insufficient."
+    },
+    {
+      "id": "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_CONDITION",
+      "kind": "CROSS_CUTTING_CREATIVE_OUTPUT_CONDITION",
+      "families": ["COMMUNICATION_AND_SYNTHESIS","ARTIFACT_CREATION"],
+      "source": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "acceptance": "Equal-or-better creative-content and semantic-diagram behavior on material target scope, including quality leaves outside mechanical artifact gates."
+    },
+    {
+      "id": "MULTILINGUAL_PERFORMANCE_CONDITION",
+      "kind": "CROSS_CUTTING_LANGUAGE_CONDITION",
+      "families": ["ADVANCED_AGENTIC_CODING","COMMUNICATION_AND_SYNTHESIS","INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT","MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING","PROFESSIONAL_KNOWLEDGE_WORK"],
+      "source": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "acceptance": "Equal-or-better outcomes on material multilingual conditions or a scope-safe stronger certificate."
+    },
+    {
+      "id": "LONG_CONTEXT_CONDITION",
+      "kind": "CROSS_CUTTING_CONTEXT_HORIZON_CONDITION",
+      "families": ["ADVANCED_AGENTIC_CODING","COMMUNICATION_AND_SYNTHESIS","PROFESSIONAL_KNOWLEDGE_WORK","INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT","LONG_HORIZON_MEMORY_AND_CONTINUITY"],
+      "source": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "acceptance": "Equal-or-better outcomes on material long-context conditions or a scope-safe stronger certificate."
+    },
+    {
+      "id": "ABSTRACT_GENERALIZATION_ARC_AGI_CONDITION",
+      "kind": "CROSS_CUTTING_NOVEL_TASK_GENERALIZATION_CONDITION",
+      "families": ["UNKNOWN_DOMAIN_ADAPTATION","MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING","VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"],
+      "source": "canonical/governance/OPUS55_ABSTRACT_GENERALIZATION_ARC_AGI_BOUNDARY_V1.json",
+      "acceptance": "Equal-or-better abstract/few-shot visual generalization on material ARC-AGI-like scope or a scope-safe stronger certificate."
+    }
+  ],
+  "explicit_nonconditions": [
+    {
+      "surface": "VOICE_DICTATION_INPUT",
+      "reason": "CURRENT_VERIFIED_BOUNDARY_CLASSIFIES_DICTATION_AS_UPSTREAM_SPEECH_TO_TEXT_WITH_TEXT_AS_THE_LOAD_BEARING_MODEL_INPUT",
+      "reopen_if": "NEW_LOAD_BEARING_NATIVE_AUDIO_EVIDENCE_APPEARS"
+    },
+    {
+      "surface": "IMAGE_INPUT",
+      "reason": "CURRENT_MAPPING_BINDS_IMAGE_INPUT_TO_EXISTING_VISION_AND_COMPUTER_BROWSER_FAMILY_SCOPE; ITS ACCEPTANCE_REMAINS_IN_THOSE_SCOPE_OBLIGATIONS_RATHER_THAN A SEPARATE CROSS_CUTTING_CONDITION"
+    }
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
