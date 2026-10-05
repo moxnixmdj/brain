@@ -1,0 +1,147 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V6",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__POST_V5_MAPPING_COLLAPSE__ROOT1_PRIMITIVE_FAMILY_FRONTIER_CLOSED__THREE_ENVELOPE_PROOF_BASIS_GROUPS_REMAIN__FIVE_PUBLIC_BAR_SCOPE_GUARDS_PRESERVED_SEPARATELY__ZERO_CREDIT",
+  "objective": "Recompute the current Root1 envelope frontier after the V5-scheduled family-mapping checks were resolved into existing family unions, without deleting distinct terminal acceptance scope obligations.",
+  "predecessor": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+    "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+  },
+  "source_bindings": {
+    "surface_to_family_union_mapping_v2": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+    },
+    "public_bar_scope_quarantine": {
+      "path": "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "fa4cddb4af4fb29c7e19e004774b11d6b874359a"
+    },
+    "public_bar_scope_quarantine_verification": {
+      "path": "canonical/verification/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "94f91683b110827074162708557e621557ef5c1e"
+    },
+    "multilingual_long_context_boundary_v2": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+    },
+    "creative_diagram_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    },
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    }
+  },
+  "recomputation": {
+    "v5_family_mapping_frontier_count": 5,
+    "v5_family_mapping_frontier": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "HEALTHCARE",
+      "MATHEMATICAL_REASONING_ARXIVMATH"
+    ],
+    "all_five_now_semantically_mapped_to_existing_family_unions": true,
+    "new_primitive_family_required_from_current_observed_surfaces": false,
+    "root1_positive_gap_count": 0,
+    "root1_positive_gap_active": false,
+    "current_observed_surface_mapping_frontier_remaining": []
+  },
+  "remaining_root1_envelope_proof_basis_groups": [
+    {
+      "id": "MULTILINGUAL_PERFORMANCE",
+      "kind": "CROSS_CUTTING_LANGUAGE_CONDITION",
+      "state": "PARITY_OPEN",
+      "rule": "NO_INHERITANCE_FROM_ENGLISH_ONLY_OR_UNSCOPED_EVIDENCE"
+    },
+    {
+      "id": "LONG_CONTEXT",
+      "kind": "CROSS_CUTTING_CONTEXT_HORIZON_CONDITION",
+      "state": "PARITY_OPEN",
+      "rule": "NO_INHERITANCE_FROM_SHORT_CONTEXT_OR_UNSCOPED_EVIDENCE"
+    },
+    {
+      "id": "CREATIVE_TEXT_AND_DIAGRAM_OUTPUT",
+      "kind": "EXISTING_FAMILY_UNION_ACCEPTANCE_BASIS_REPAIR",
+      "state": "CREATIVE_AND_DIAGRAM_OBLIGATIONS_NOT_YET_LOSSLESSLY_COVERED",
+      "families": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION"
+      ]
+    }
+  ],
+  "remaining_root1_envelope_proof_basis_group_count": 3,
+  "separate_terminal_acceptance_scope_guards": {
+    "count": 5,
+    "families": [
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "PROFESSIONAL_KNOWLEDGE_WORK"
+    ],
+    "state": "PRESERVED__NOT_ROOT1_PRIMITIVE_FAMILY_DISCOVERY_WORK__STILL_LOAD_BEARING_FOR_LITERAL_TERMINAL_FINALITY",
+    "rule": "PUBLIC_FIXED_BARS_REMAIN_NECESSARY_BUT_CANNOT_PROMOTE_WHOLE_FAMILY_SCOPE_WITHOUT_LOSSLESS_SCOPE_EQUIVALENCE_OR_EXPLICIT_UNCOVERED_SCOPE_CLOSURE"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "REPEAT_CYBERSECURITY_NEW_FAMILY_MAPPING_CHECK",
+      "REPEAT_BIOLOGY_RESEARCH_AND_DEVELOPMENT_NEW_FAMILY_MAPPING_CHECK",
+      "REPEAT_AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT_NEW_FAMILY_MAPPING_CHECK",
+      "REPEAT_HEALTHCARE_NEW_FAMILY_MAPPING_CHECK",
+      "REPEAT_MATHEMATICAL_REASONING_ARXIVMATH_NEW_FAMILY_MAPPING_CHECK"
+    ],
+    "activate": [
+      "MULTILINGUAL_CONDITION_SCOPE_AND_PARITY_CLOSURE",
+      "LONG_CONTEXT_CONDITION_SCOPE_AND_PARITY_CLOSURE",
+      "MINIMUM_CREATIVE_TEXT_AND_DIAGRAM_ACCEPTANCE_BASIS_REPAIR"
+    ],
+    "preserve": [
+      "FIVE_PUBLIC_BAR_ONLY_WHOLE_FAMILY_SCOPE_GUARDS",
+      "CURRENT_14_OF_38_ATOMIC_REGISTRY_STATE_AS_DECLARED_ACCOUNTING",
+      "CURRENT_ROOT1_POSITIVE_GAP_ZERO",
+      "NO_FRESH_REALITY_WITHOUT_SEPARATE_AUTHORITY",
+      "NO_TERMINAL_FINALITY_FROM_38_OF_38_ALONE_WHILE_PROOF_BASIS_GAPS_REMAIN"
+    ]
+  },
+  "terminal_consequence": {
+    "root1_primitive_family_discovery_for_current_observed_surfaces": "CLOSED_CANDIDATE",
+    "literal_terminal_finality": false,
+    "reason": "THREE_ENVELOPE_PROOF_BASIS_GROUPS_AND_FIVE_SEPARATE_ACCEPTANCE_SCOPE_GUARDS_REMAIN_OPEN_IN_ADDITION_TO_THE_CURRENT_ATOMIC_ACCEPTANCE_FRONTIER"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_TERMINAL_SEAL",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_THE_FIVE_PUBLIC_BAR_SCOPE_GUARDS_ARE_SOLVED",
+    "NO_CLAIM_MULTILINGUAL_LONG_CONTEXT_CREATIVE_OR_DIAGRAM_PARITY",
+    "NO_CLAIM_FUTURE_NEW_FIRST_PARTY_SURFACES_CANNOT_REOPEN_ROOT1",
+    "NO_INDEPENDENT_VERIFICATION_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "verification_requirements": [
+    "RECOMPUTE_EXACT_V5_FIVE_SURFACE_SET_AGAINST_MAPPING_V2",
+    "CONFIRM_NO_CURRENT_OBSERVED_SURFACE_REQUIRES_A_NEW_PRIMITIVE_FAMILY",
+    "CONFIRM_MULTILINGUAL_AND_LONG_CONTEXT_REMAIN_CONDITION_GAPS_UNDER_BOUNDARY_V2",
+    "CONFIRM_CREATIVE_AND_DIAGRAM_ACCEPTANCE_BASIS_GAP_REMAINS_OPEN",
+    "CONFIRM_EXACT_FIVE_PUBLIC_BAR_SCOPE_GUARDS_REMAIN_SEPARATE_AND_LOAD_BEARING",
+    "CONFIRM_ZERO_CREDIT_AND_ZERO_FRESH_REALITY"
+  ]
+}
