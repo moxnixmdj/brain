@@ -55,3 +55,11 @@ def test_read_only_get_still_requires_continuous_obs_authority():
     finally:
         rt._ACTIVE_CONTINUOUS_OBS_CONTEXT = old_context
         rt._ACTIVE_CONTINUOUS_OBS_MODULE = old_module
+
+
+def test_unregistered_external_tool_kind_fails_closed_before_obs_or_transport():
+    with pytest.raises(rt.Blocker, match="EXTERNAL_TOOL_KIND_UNREGISTERED:arbitrary_tool"):
+        rt._authorize_external_information(
+            "arbitrary_tool",
+            {"resource": "anything"},
+        )
