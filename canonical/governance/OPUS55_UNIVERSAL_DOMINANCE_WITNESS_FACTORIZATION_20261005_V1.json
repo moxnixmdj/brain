@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_UNIVERSAL_DOMINANCE_WITNESS_FACTORIZATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__W3_FACTORIZED_INTO_DOMAIN_COVERAGE_AND_UNIVERSAL_DOMINANCE__CIRCULAR_DOMAIN_PREMISES_FAIL_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Remove the hidden completeness premise from W3_UNIVERSAL_BEHAVIORAL_DOMINANCE_THEOREM and reduce it to the exact two propositions that must both be proved before W3 can discharge literal target completeness.",
+  "authorities": {
+    "open_world_boundary": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+    "minimum_information_cut": "canonical/governance/OPUS55_TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT_20261005_V1.json",
+    "global_terminal_universe": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+      "git_blob_sha": "ff97ffee7c9b25a491ff5ee231919ea4964f09e3",
+      "scope_note": "BRAIN_OBLIGATION_AND_PROOF_UNIVERSE__NOT_A_PROOF_THAT_THE_TARGET_CAPABILITY_UNIVERSE_IS_EXHAUSTIVELY_ENUMERATED"
+    }
+  },
+  "definitions": {
+    "U": "THE_ACTUAL_SET_OF_ALL_USEFUL_OBSERVABLE_OPUS_5_5_CAPABILITY_BEHAVIORS",
+    "D": "THE_DOMAIN_OVER_WHICH_A_CANDIDATE_UNIVERSAL_DOMINANCE_THEOREM QUANTIFIES",
+    "DOMINATES": "FOR_THE_FROZEN_ACCEPTANCE_SEMANTICS_APPLICABLE_TO_EACH_BEHAVIOR__BRAIN_IS_EQUAL_OR_BETTER_THAN_OPUS_5_5"
+  },
+  "theorem": {
+    "name": "W3_DOMAIN_COVERAGE_AND_DOMINANCE_FACTORIZATION",
+    "necessary_and_sufficient_form": [
+      "COVERAGE: U_SUBSET_OR_EQUAL_D",
+      "DOMINANCE: FOR_ALL_X_IN_D__BRAIN_DOMINATES_OPUS55_ON_X"
+    ],
+    "implication": "(U_SUBSET_OR_EQUAL_D) AND (FOR_ALL_X_IN_D BRAIN>=OPUS55) IMPLIES FOR_ALL_U_IN_U BRAIN>=OPUS55",
+    "nonimplications": [
+      "UNIVERSAL_DOMINANCE_OVER_D_WITHOUT_U_SUBSET_OR_EQUAL_D_DOES_NOT_CLOSE_LITERAL_ALL",
+      "U_SUBSET_OR_EQUAL_D_WITHOUT_UNIVERSAL_DOMINANCE_DOES_NOT_CLOSE_LITERAL_ALL",
+      "DEFINING_D_FROM_THE_CURRENT_FINITE_OBSERVED_SURFACE_SET_DOES_NOT_PROVE_U_SUBSET_OR_EQUAL_D"
+    ]
+  },
+  "coverage_witness_classes": [
+    {
+      "id": "TARGET_RELATIVE_COMPLETE_DOMAIN",
+      "routes": [
+        "W1_TARGET_OWNER_EXHAUSTIVE_BEHAVIOR_SPECIFICATION",
+        "W2_IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION",
+        "AN_EQUIVALENT_INDEPENDENT_COMPLETE_ENUMERATION_ORACLE"
+      ],
+      "effect": "SUPPLIES_OR_DERIVES_U_SUBSET_OR_EQUAL_D"
+    },
+    {
+      "id": "TARGET_INDEPENDENT_SUPERDOMAIN",
+      "requirement": "D_IS_DEFINED_INDEPENDENTLY_OF_CURRENT_OPUS_CAPABILITY_ENUMERATION_AND_IS_PROVED_BY_INTERFACE_OR_SEMANTIC_TYPE_TO_CONTAIN_EVERY_POSSIBLE_OBSERVABLE_OPUS55_INTERACTION_BEHAVIOR",
+      "effect": "CAN_SUPPLY_U_SUBSET_OR_EQUAL_D_WITHOUT_W1_OR_W2",
+      "cost": "THE_DOMINANCE_THEOREM_MUST_THEN_HOLD_OVER_THE_ENTIRE_SUPERDOMAIN__NOT_ONLY_KNOWN_USEFUL_SUBSETS"
+    }
+  ],
+  "critical_path_reduction": {
+    "generic_w3_is_not_one_action": true,
+    "minimum_w3_subproblems": [
+      "BIND_A_NONCIRCULAR_DOMAIN_COVERAGE_WITNESS",
+      "PROVE_UNIVERSAL_EQUAL_OR_BETTER_DOMINANCE_OVER_THAT_BOUND_DOMAIN"
+    ],
+    "current_bound_target_complete_domain_witness": false,
+    "current_bound_target_independent_superdomain_dominance_theorem": false,
+    "current_global_terminal_universe_is_sufficient_as_target_domain_coverage_witness": false
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TREAT_BUILD_W3_AS_A_SINGLE_UNSPECIFIED_MAGIC_THEOREM_TASK",
+      "USE_CURRENT_FINITE_38_OR_19_FAMILY_REGISTRY_AS_D_WITHOUT_SEPARATE_U_SUBSET_OR_EQUAL_D_PROOF",
+      "USE_GLOBAL_TERMINAL_UNIVERSE_V1_AS_TARGET_DISCOVERY_COMPLETENESS_BY_NAME_ALONE"
+    ],
+    "activate": [
+      "FIRST_SEARCH_FOR_A_TARGET_INDEPENDENT_OBSERVABLE_INTERACTION_SUPERDOMAIN_DEFINITION_FROM_BOUND_INTERFACE_SEMANTICS",
+      "IF_BOUND__REQUIRE_A_SEPARATE_UNIVERSAL_DOMINANCE_PROOF_OVER_THE_FULL_SUPERDOMAIN",
+      "IF_NOT_BOUND__W3_DOMAIN_COVERAGE_DEPENDS_ON_W1_W2_OR_EQUIVALENT_COMPLETE_ORACLE"
+    ]
+  },
+  "breakthrough": {
+    "description": "W3_NO_LONGER_HIDES_TARGET_COMPLETENESS_INSIDE_THE_WORD_UNIVERSAL",
+    "information_gain": "ANY_W3_PROPOSAL_CAN_NOW_BE_FAIL_CLOSED_BY_TESTING_COVERAGE_AND_DOMINANCE_SEPARATELY",
+    "expected_duplicate_work_deleted": "UNBOUNDED_UNIVERSAL_THEOREM_SEARCH_WITHOUT_A_BOUND_DOMAIN"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_W3_IS_IMPOSSIBLE_IN_PRINCIPLE",
+    "NO_CLAIM_A_TARGET_INDEPENDENT_SUPERDOMAIN_CANNOT_BE_DEFINED",
+    "NO_CLAIM_CURRENT_BRAIN_DOMINATES_OPUS55_OVER_SUCH_A_SUPERDOMAIN",
+    "NO_LITERAL_TERMINAL_FINALITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
