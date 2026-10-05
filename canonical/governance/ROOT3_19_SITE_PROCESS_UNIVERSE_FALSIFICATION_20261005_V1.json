@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_19_SITE_PROCESS_UNIVERSE_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "DEDUCTIVE_SCOPE_FALSIFICATION__19_SITE_UNIVERSE_NOT_WHOLE_CREDITED_RUNTIME_PROCESS_UNIVERSE__29_SITE_BOUND_RUNTIME_SCAN_WINS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT3_PROCESS_UNIVERSE_19_ACTIVATION_20261005_V1.json",
+    "claim": "REPLACE_22_SITE_PROCESS_UNIVERSE_WITH_19_SITE_EXACT_UNIVERSE"
+  },
+  "stronger_counterevidence": {
+    "registry": {
+      "path": "canonical/governance/ROOT3_CHILD_PROCESS_CHANNEL_REGISTRY_20261005_V1.json",
+      "claim": "WHOLE_CURRENT_BOUND_RUNTIME_HAS_29_PROCESS_CREATION_SITES_ACROSS_13_FILES"
+    },
+    "verification": {
+      "path": "canonical/verification/ROOT3_CHILD_PROCESS_CHANNEL_REGISTRY_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "result": "CONNECTOR_RECOMPUTATION_PASS",
+      "files_scanned": 48,
+      "repo_local_modules_scanned": 47,
+      "total_process_creation_sites": 29,
+      "subprocess_run_sites": 27,
+      "subprocess_popen_sites": 2,
+      "files_with_process_creation": 13
+    }
+  },
+  "reconciliation": {
+    "19_site_claim_may_still_be_valid_for": "THE_NARROW_EFFECT_CLASSIFIER_OR_SPECIFIC_PROCESS_SITE_SUBUNIVERSE_BOUND_BY_ITS_EXACT_AUTHORITY",
+    "19_site_claim_may_not_be_used_for": "WHOLE_CREDITED_RUNTIME_PROCESS_EFFECT_TOTALITY_OR_GLOBAL_ROOT3_NO_BYPASS",
+    "whole_runtime_process_universe_for_current_bound_48_file_scan": 29,
+    "remaining_unproved_fact": "ALL_29_SITES_ARE_MEDIATED_FORBIDDEN_OR_EFFECT_FREE_UNDER_THE_REQUIRED_EFFECT_CLASS_AND_CHILD_PROGRAM_SEMANTICS"
+  },
+  "falsifier": {
+    "id": "TEN_ADDITIONAL_PROCESS_CREATION_SITES_OUTSIDE_19_SITE_UNIVERSE",
+    "witness_count": 10,
+    "reason": "A GLOBAL PROCESS-UNIVERSE OR NO-BYPASS THEOREM OVER 19 SITES CANNOT ENTAIL WHOLE-RUNTIME PROCESS TOTALITY WHEN A VERIFIED CONTENT-ADDRESSED SCAN OF THE BOUND RUNTIME IDENTIFIES 29 PROCESS-CREATION SITES."
+  },
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "USE_19_SITE_PROCESS_UNIVERSE_AS_WHOLE_RUNTIME_C1_TOTALITY_PREMISE",
+      "CLAIM_GLOBAL_ROOT3_CHANNEL_TOTALITY_FROM_19_SITE_MEDIATION_ALONE"
+    ],
+    "preserve": [
+      "READ_ONLY_5_OF_5_CLASS_CLOSURE_WITHIN_ITS_EXACT_CLASS_SCOPE",
+      "19_SITE_CLASSIFIER_RESULTS_WITHIN_THEIR_NARROW_BOUND_SCOPE",
+      "SHARED_DOMINATOR_KERNEL_AS_A_GRAPH_THEOREM"
+    ],
+    "activate": [
+      "CLASSIFY_AND_MEDIATE_OR_FORBID_ALL_29_CURRENT_PROCESS_CREATION_SITES",
+      "BIND_CHILD_PROGRAM_INTERNAL_EFFECTS_OR_FAIL_CLOSED",
+      "RERUN_SHARED_DOMINATOR_ON_THE_SCOPE_COMPLETE_CURRENT_RUNTIME_CHANNEL_GRAPH"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_ROOT3_SCOPE_IS_UNBOUNDED",
+    "NO_CLAIM_THE_19_SITE_CLASSIFIER_IS_INCORRECT_WITHIN_ITS_DECLARED_SUBSCOPE",
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
