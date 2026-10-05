@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_TOP_SUPPORT_RESATURATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__OCT03_SATURATION_STALE_FOR_NEW_TOP_SUPPORT_PROOF_FORM__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Reopen only the Root3 zero-violation proof routes enabled by the 2026-10-05 target-free top-support theorem, which postdates the 2026-10-03 stronger-proof saturation.",
+  "authorities": {
+    "old_saturation": ["canonical/governance/CURRENT_ROOT3_ZERO_REALITY_STRONGER_PROOF_SATURATION_V1.json", "bdc78fdc147a014e5d77d5daafb5434b1a4e878f"],
+    "current_root3": ["canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V6.json", "1f0a57cee47a7c58aae2732802cdde1571977f52"],
+    "top_support_theorem": ["canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json", "69e3ac04f0158bd2309c926d606d798449633f25"],
+    "top_support_kernel": ["canonical/runtime/hidden_evaluator_top_support_dominance_v1.py", "e1eeaf7dd77d60656587b668d3e7419f82341c38"],
+    "top_support_tests": ["canonical/tests/test_hidden_evaluator_top_support_dominance_v1.py", "14ada70e1190bae1533661ab77e5e60315c3ce6e"],
+    "frozen_protocols": ["canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json", "62394e5b7d221ec9f69c3458f669e40e253a9d09"],
+    "composition_manifest": ["canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json", "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"]
+  },
+  "truth_repair": {
+    "old_saturation_scope": "VALID_ONLY_RELATIVE_TO_ITS_2026_10_03_BOUND_PROOF_BASIS",
+    "new_proof_form": "SCOPE_COMPLETE_BRAIN_TOP_SUPPORT_CAN_PROVE_ZERO_VIOLATION_NONINFERIORITY_WITHOUT_TARGET_DISTRIBUTION_OR_CASE_OUTPUTS",
+    "reopened_predicates": [
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+    ]
+  },
+  "minimum_zero_reality_actions": [
+    "SEARCH_OR_CONSTRUCT_A_SCOPE_COMPLETE_INDEPENDENT_TOP_SUPPORT_RECEIPT_FOR_IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "SEARCH_OR_CONSTRUCT_A_SCOPE_COMPLETE_INDEPENDENT_TOP_SUPPORT_RECEIPT_FOR_COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+    "RUN_THE_FAIL_CLOSED_TOP_SUPPORT_KERNEL_ON_EACH_CANDIDATE",
+    "RECOMPUTE_ATOMIC_ACCEPTANCE_AND_ROOT_PARTITION_AFTER_EACH_INDEPENDENT_PASS"
+  ],
+  "exact_effect_if_proved": {
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS": "DELETE_ONLY_ITS_OPUS_CASE_LEVEL_COMPARATOR_DEPENDENCY__PRESERVE_IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES": "DELETE_ONLY_ITS_OPUS_CASE_LEVEL_COMPARATOR_DEPENDENCY__PRESERVE_COMPONENT_SCOPED_PROOFS_AND_COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+  },
+  "composition_falsification": {
+    "current_isolated_component_proofs": "4_OF_12",
+    "even_12_of_12_is_not_sufficient_for_zero_invariant_claim": true,
+    "reason": "CROSS_CAPABILITY_STATE_HANDOFF_AND_ROLLBACK_IS_A_SEPARATE_COMPOSITION_ONLY_DIMENSION"
+  },
+  "nonclaims": [
+    "NO_PREDICATE_CLOSED",
+    "NO_RECEIPT_CLAIMED_TO_EXIST",
+    "NO_SUCCESS_COMPARATOR_DELETED",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
