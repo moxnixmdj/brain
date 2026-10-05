@@ -43,7 +43,7 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
     def test_zero_reality_pointer_tracks_highest_active_cut(self):
         docs,shas=self.live()
         gov=ROOT/"canonical/governance"
-        rx=re.compile(r"^CURRENT_ZERO_REALITY_MINIMUM_CUT_V(\\d+)_ACTIVATION_V1\\.json$")
+        rx=re.compile(r"^CURRENT_ZERO_REALITY_MINIMUM_CUT_V(\d+)_ACTIVATION_V1\.json$")
         active=[]
         for path in gov.glob("CURRENT_ZERO_REALITY_MINIMUM_CUT_V*_ACTIVATION_V1.json"):
             m=rx.match(path.name)
