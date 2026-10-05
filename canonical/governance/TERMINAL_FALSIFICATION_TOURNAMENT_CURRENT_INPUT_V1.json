@@ -87,7 +87,11 @@
           "kind": "BYPASS_SEARCH",
           "cost_units": 1,
           "decisive": true,
-          "status": "PENDING"
+          "status": "COUNTEREXAMPLE_FOUND",
+          "receipt": {
+            "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_BYPASS_SEARCH_20261005_V1.json",
+            "git_blob_sha": "8007c90fba7197de6dd9886eeecf592a55cd336e"
+          }
         },
         {
           "id": "F_ROOT3_SCOPE_COUNTERMODEL",
