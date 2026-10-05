@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__EXACT_18_SET_PRESERVED__ONLY_CURSOR_OWNER_ROUTE_DELETED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f"
+  },
+  "route_correction": {
+    "path": "canonical/governance/CURSORBENCH_CURRENT_ROOT2_ROUTE_CORRECTION_20261005_V1.json",
+    "git_blob_sha": "4fe28c8db6693ae167184a8aa3ce1b571e18fc83"
+  },
+  "prior_subject": {
+    "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V3.json",
+    "git_blob_sha": "82612b803c1d47eeb8888cf99a00c14a1bea54e1"
+  },
+  "checks": {
+    "current_14_24_counts_preserved": true,
+    "exact_root2_touching_count_18": true,
+    "exact_predicate_set_preserved": true,
+    "livebench_absent": true,
+    "route_mutation_count": 1,
+    "only_mutated_predicate": "CODING_CURSORBENCH_GE_57_8",
+    "cursor_owner_run_wait_deleted": true,
+    "cursor_public_submission_wait_deleted": true,
+    "stronger_proof_route_preserved": true,
+    "future_material_policy_change_reopen_preserved": true,
+    "no_acceptance_credit": true,
+    "no_execution_or_fresh_reality_authority": true
+  },
+  "connector_evidence": {
+    "channel": "GMAIL_AUTHENTICATED_THREAD_RECHECK",
+    "thread_id": "1a103dde59e2a653",
+    "owner_reply_domain": "cursor.com",
+    "owner_reply_reconfirms_no_external_owner_run": true,
+    "owner_reply_reconfirms_no_public_submission_interface": true
+  },
+  "hard_nonclaims": [
+    "NO_CURSORBENCH_SCORE",
+    "NO_PREDICATE_CLOSURE",
+    "NO_CLAIM_STRONGER_SCOPE_COMPLETE_PROOF_IMPOSSIBLE",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
