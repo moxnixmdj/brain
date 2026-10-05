@@ -24,6 +24,13 @@ SCHEMA = "PROJECT_BRAIN_ROOT3_READ_ONLY_ATTEMPT_AUTHORIZATION_V1"
 AUTHORITY_ID = "ROOT3_READ_ONLY_DECLARED_QUERY_V1"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 EFFECT_CLASS = "READ_ONLY_DECLARED_QUERY"
+EXPECTED_FUNCTION = {
+    ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 32, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/jq_query.py", 41, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py", 44, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/sqlite_verify_cli.py", 66, "subprocess.run"): "_run_json",
+    ("canonical/runtime/bound_capabilities/yq_yaml_json.py", 21, "subprocess.run"): "run",
+}
 
 
 def _canon(value: Any) -> bytes:
@@ -80,6 +87,12 @@ def authorize(request: Mapping[str, Any]) -> dict[str, Any]:
             return _deny("CALLSITE_NOT_VERIFIED_READ_ONLY")
         if callsite.get("effect_class") != EFFECT_CLASS:
             return _deny("EFFECT_CLASS_MISMATCH")
+        if callsite.get("function") != EXPECTED_FUNCTION.get(key):
+            return _deny("CALLSITE_FUNCTION_MISMATCH")
+        if callsite.get("registry_site_count") != 18:
+            return _deny("REGISTRY_SITE_COUNT_MISMATCH")
+        if callsite.get("runtime_join") != "EXACT_PATH_LINE_API":
+            return _deny("RUNTIME_JOIN_MISMATCH")
         if request.get("api") != "subprocess.run":
             return _deny("PROCESS_API_MISMATCH")
 
