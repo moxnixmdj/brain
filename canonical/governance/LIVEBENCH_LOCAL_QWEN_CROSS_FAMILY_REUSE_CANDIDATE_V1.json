@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LOCAL_QWEN_CROSS_FAMILY_REUSE_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CROSS_FAMILY_REUSE_BEFORE_NEW_LEARNED_STATE__INDEPENDENT_SEMANTIC_VERIFICATION_RUNNING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": {
+    "prior_frontier": "PREFERRED_27B_OPEN_WEIGHT_SEMANTIC_CORE_EXISTS_BUT_EXACT_LOCAL_FORM_AND_INTERNALIZATION_REMAIN_OPEN",
+    "new_fact": "BRAIN_ALREADY_HAS_A_CONTENT_ADDRESSED_5GB_LOCAL_QWEN_EXECUTION_SUBJECT_INDEPENDENTLY_RUN_AT_ZERO_INCREMENTAL_SPEND_FOR_OTHER_TERMINAL_FAMILIES",
+    "scheduler_consequence": "FALSIFY_THE_ALREADY_PINNED_9B_SUBSTRATE_AS_A_GENERAL_SEMANTIC_TEXT_SEED_BEFORE_ACQUIRING_OR_INTERNALIZING_A_NEW_20_TO_56GB_27B_EXECUTION_SUBJECT"
+  },
+  "exact_existing_subject": {
+    "model_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+    "model_bytes": 5060174144,
+    "model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "local_alias": "brain-qwen3.5-9b",
+    "endpoint_contract": "LOCAL_LLAMA_CPP_OPENAI_CHAT_COMPLETIONS",
+    "prior_independent_evidence": [
+      {
+        "path": "canonical/verification/TOOLATHLON_LOCAL_QWEN_TOOLCALL_PREFLIGHT_20261003_V1.json",
+        "runner_pr": 1201,
+        "proved": "EXACT_PINNED_LOCAL_ENDPOINT_AND_STRUCTURED_TOOL_CALL_COMPATIBILITY"
+      },
+      {
+        "path": "canonical/verification/TB_SCIENCE_LOCAL_QWEN_PLANNER_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "runner_pr": 1230,
+        "proved": "EXACT_PINNED_LOCAL_MODEL_GENERATED_6_OF_6_STRUCTURED_NONTERMINAL_SCIENCE_PROPOSALS"
+      }
+    ]
+  },
+  "new_independent_falsification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1888,
+    "branch": "verify/livebench-local-qwen-semantic-reuse-20261004-sol",
+    "head_sha": "efbd172428b1e8a3691dc1d4dceba3fd59fc5429",
+    "workflow_run_id": 37199459309,
+    "status": "QUEUED_AT_FREE_PUBLIC_RUNNER",
+    "scope": [
+      "PARAPHRASE_SEMANTIC_FACT_PRESERVATION_PLUS_SURFACE_CHANGE",
+      "SIMPLIFY_FACT_PRESERVATION_PLUS_COMPRESSION",
+      "SUMMARIZE_KEY_FACT_PRESERVATION_PLUS_COMPRESSION",
+      "GROUNDED_STORY_EVENT_ORDER_AND_NONTRIVIAL_GENERATION"
+    ],
+    "cases": 8,
+    "terminal_case_exposure": 0,
+    "generic_model_judge_used": false,
+    "deterministic_checks_only": true
+  },
+  "decision_rule": {
+    "if_pass": [
+      "PROMOTE_9B_AS_THE_FIRST_SEMANTIC_SEED_REUSE_CANDIDATE_FOR_ROOT1_INTEGRATION_TESTS",
+      "BUILD_FAIL_CLOSED_GENERAL_TEXT_ADAPTER_ON_THE_ALREADY_PINNED_LOCAL_ENDPOINT",
+      "COMPOSE_WITH_LEGACY_IFEVAL_CONSTRAINT_SURFACE_AND_SEED_PRESERVING_POSTPROCESSOR",
+      "REQUIRE_SEPARATE_MATCHED_THRESHOLD_AND_OWNERSHIP_PROOF_BEFORE_CAPABILITY_OR_ACCEPTANCE_CREDIT"
+    ],
+    "if_fail": [
+      "DO_NOT_TUNE_ON_TERMINAL_CASES",
+      "RETAIN_FAILURE_AS_FALSIFICATION_EVIDENCE",
+      "ADVANCE_TO_THE_STRONGER_PUBLIC_27B_OPEN_WEIGHT_CORE_OR_ANOTHER_SEPARATELY_QUALIFIED_LOCAL_FORM"
+    ]
+  },
+  "dominance": {
+    "avoids_new_model_acquisition_if_pass": true,
+    "existing_subject_bytes": 5060174144,
+    "preferred_27b_base_bf16_bytes": 55563006776,
+    "byte_ratio_existing_vs_base": 0.091073,
+    "caveat": "BYTE_SIZE_DOMINANCE_IS_OPERATIONAL_ONLY; IT DOES_NOT_IMPLY_CAPABILITY_NONINFERIORITY"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_9B_MODEL_MEETS_THE_65_7_LIVEBENCH_IF_BAR",
+    "NO_CLAIM_THE_9B_MODEL_MATCHES_OPUS_5_5_SEMANTIC_QUALITY",
+    "NO_CAPABILITY_FAMILY_OWNERSHIP_OR_ACCEPTANCE_CREDIT",
+    "NO_UNEXPOSED_TERMINAL_CASE_READ_OR_EXECUTION",
+    "NO_CLAIM_EXTERNAL_DOWNLOAD_BY_HASH_ALONE_SATISFIES_FINAL_DURABLE_INTERNALIZATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
