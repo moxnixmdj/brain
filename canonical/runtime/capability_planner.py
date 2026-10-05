@@ -172,7 +172,7 @@ def _resolve_effect_bindings(value, consumer, providers):
                     "BINDING_RESULT_FIELD_UNDECLARED",
                     f"{producer.capability_id}:{field}",
                 )
-            return {"$result": {"cycle": cycle, "field": field}}
+            return {"$result": {"cycle": cycle, "field": field, "effect": effect}}
         return {
             key: _resolve_effect_bindings(item, consumer, providers)
             for key, item in value.items()
