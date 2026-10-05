@@ -1,0 +1,7 @@
+{
+  "fp32_accuracy": 0.35,
+  "fp32_correct": 7,
+  "h100_credit_delta": 0,
+  "schema": "PROJECT_BRAIN_H100_UNICHART_STRUCTURAL_HOLDOUT_RESULT_V1",
+  "status": "INVALID_DONOR_BASELINE_BELOW_50_PERCENT"
+}
