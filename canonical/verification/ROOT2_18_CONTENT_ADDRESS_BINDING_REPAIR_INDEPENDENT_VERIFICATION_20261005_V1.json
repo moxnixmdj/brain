@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_CONTENT_ADDRESS_REPAIR_INDEPENDENT_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_SUBJECT_AND_VERIFICATION_CONTENT_ADDRESSES_BOUND__NO_PLACEHOLDER__ZERO_CREDIT",
+  "verified_activation": {
+    "path": "canonical/governance/ROOT2_18_CURRENT_14_24_SCHEDULING_ACTIVATION_V1.json",
+    "git_blob_sha": "44265094d5827769560cdddef77f500a9b404d0a",
+    "canonical_main_commit": "1598049000116545858976d1a576ae9ccb55eab3"
+  },
+  "bound_subject": {
+    "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V3.json",
+    "git_blob_sha": "82612b803c1d47eeb8888cf99a00c14a1bea54e1"
+  },
+  "bound_verification": {
+    "path": "canonical/verification/ROOT2_18_CURRENT_14_24_RECOMPUTATION_V1.json",
+    "git_blob_sha": "e26b2ec473f457660fad73721052720a39c0090f",
+    "status": "PASS__EXACT_18_SET_AND_ROUTE_REUSE_RECOMPUTED__ZERO_CREDIT"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2240,
+    "head_sha": "dfdc96f61d176c70892b4961bebb86a856a2368c",
+    "workflow_run_id": 37252915935,
+    "workflow_job_id": 111584047795,
+    "conclusion": "success",
+    "python": "3.12.10",
+    "artifact_id": 11321701969,
+    "artifact_name": "root2-18-content-address-repair-v1",
+    "artifact_digest_sha256": "4ddb5900c5acaf20c22ed6fe89ff151a104eadee1c1b5775ce034a899545e2a5"
+  },
+  "verified": {
+    "activation_subject_link_exact": true,
+    "activation_verification_link_exact": true,
+    "placeholder_absent": true,
+    "verification_receipt_pass": true,
+    "exact_root2_touching": 18,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "route_drift": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
