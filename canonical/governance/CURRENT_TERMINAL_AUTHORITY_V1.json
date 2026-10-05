@@ -112,15 +112,15 @@
     "terminal_projection_consistency": {
       "governance_path": "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V3.json",
       "runtime_path": "canonical/runtime/terminal_projection_consistency_v1.py",
-      "runtime_git_blob_sha": "b4eef6beae804fefb3b6b374940912c48f4aee83",
+      "runtime_git_blob_sha": "aab1b6973fd38fe5273f84a5eaa87e9a4162a738",
       "tests_path": "canonical/tests/test_terminal_projection_consistency_v1.py",
       "tests_git_blob_sha": "0f94788b4bb68317ba0605bb42c1fa22d84cd93c",
       "workflow_path": ".github/workflows/verify-terminal-projection-consistency.yml",
       "workflow_git_blob_sha": "a70fc8af46828827fd403652b01a29a01b4edc85",
       "verification_path": "canonical/verification/COUNT_GENERIC_TERMINAL_PROJECTION_V2_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "verification_git_blob_sha": "e74dd56ae251381324336773241d6a2896aea8b1",
-      "status": "CANDIDATE_CONDITION_AWARE_OPEN_WORLD_FINALITY_GUARD__PR_2088_VERIFICATION_PENDING__ZERO_CREDIT",
-      "governance_git_blob_sha": "ba6d0ce8a78dd53aef45026a7df7cb8c392e7a8b",
+      "status": "CANDIDATE_CONDITION_AWARE_OPEN_WORLD_FINALITY_GUARD__CONTENT_ADDRESSED_SEAL_RECEIPT_REQUIRED__PR_2088_VERIFICATION_PENDING__ZERO_CREDIT",
+      "governance_git_blob_sha": "41397da07498953a933d8b1c433df25ee4f79053",
       "pr": 2088
     },
     "acceptance_residual_verdict_v10": {
