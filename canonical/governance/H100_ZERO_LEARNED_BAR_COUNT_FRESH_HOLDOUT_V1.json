@@ -1,0 +1,53 @@
+{
+  "case_count": 3,
+  "cases": [
+    {
+      "annotation_index": 52,
+      "imgname": "04301786022389.png",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "0d8f4235c0ff7541dd152cc24c24deff0cdfc677e7713f884c36ce6997d5b3ed",
+      "split": "human"
+    },
+    {
+      "annotation_index": 42,
+      "imgname": "00108924006058.png",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "17f78e5aff3f0ac314e053c88bf008179967d922b7fe708a1d044b2c547e2c9d",
+      "split": "human"
+    },
+    {
+      "annotation_index": 934,
+      "imgname": "multi_col_100304.png",
+      "query": "How many bars ( combined) in the chart ?",
+      "selection_hash": "822d3c2c675cd8a0e8dd03d2e4a72f988aac0f711f14271665e1938ebdab7ce6",
+      "split": "human"
+    }
+  ],
+  "date": "2026-10-06",
+  "hard_nonclaims": [
+    "THREE_CASE_HOLDOUT_IS_SMALL",
+    "BAR_COUNT_ONLY_NOT_GENERAL_CHART_QA"
+  ],
+  "images_opened": false,
+  "labels_exposed": false,
+  "runtime_frozen_before_selection": true,
+  "runtime_path": "canonical/runtime/h100_zero_learned_bar_count_v1.py",
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_BAR_COUNT_FRESH_HOLDOUT_V1",
+  "selection_rule": "UNSEEN_VAL_CASES__QUERY_ASKS_TOTAL_VISIBLE_BAR_COUNT_ONLY__EXCLUDES_VALUE_THRESHOLD_EQUALITY_OR_COMPARISON_CONDITIONS__EXCLUDES_PRIOR_V1_V2__SORTED_BY_PREDECLARED_SHA256_SALT",
+  "selection_salt": "H100_ZERO_LEARNED_BAR_COUNT_HOLDOUT_V1",
+  "source_annotation_sha256": {
+    "augmented": "cafc675781fba27282b78cab40eb49b77a5bf890ef1e89294bb67c994bdfde47",
+    "human": "e297ce5b38b4ab79bd0e22a93eb19a65cb89f9bd07ce886cb78f2e333fb0ba14"
+  },
+  "source_revision": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "status": "FROZEN_IDENTITIES_ONLY__LABELS_AND_IMAGES_UNOPENED_AT_SELECTION",
+  "pass_gate": {
+    "required_exact_count_correct": 3,
+    "total_cases": 3,
+    "abstention_counts_as_incorrect": true,
+    "runtime_must_match_frozen_v1": true,
+    "persistent_learned_bytes_must_equal": 0,
+    "pretrained_vision_models_must_equal": 0,
+    "ocr_models_must_equal": 0
+  }
+}
