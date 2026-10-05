@@ -330,3 +330,104 @@ def discover(
 
 def predict(candidate: Mapping[str, Any], point: Mapping[str, Any]) -> float:
     return v1.predict(candidate, point)
+
+
+def solve(
+    rows: Sequence[Mapping[str, Any]],
+    *,
+    bounds: Mapping[str, Sequence[Any]],
+    target: str = "out",
+    validation_index: int = -1,
+    fit_threshold: float = 0.05,
+) -> dict[str, Any]:
+    """Return an executable candidate only through the prospective-safe route."""
+    threshold = sparse._finite(fit_threshold, "fit_threshold")
+    if threshold <= 0:
+        raise ProspectiveSelectionError("FIT_THRESHOLD_INVALID")
+    discovery = discover(
+        rows,
+        bounds=bounds,
+        target=target,
+        validation_index=validation_index,
+    )
+    candidate = discovery.get("candidate")
+    if candidate is None:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED__NO_PROSPECTIVELY_VALIDATED_SEPARABLE_CANDIDATE",
+            "candidate": None,
+            "expression": None,
+            "fit_threshold": threshold,
+            "discovery_status": discovery["status"],
+            "selected_prevalidation": discovery.get("selected_prevalidation"),
+            "prospective_validation_nrmse": discovery.get("prospective_validation_nrmse"),
+            "persistent_learned_bytes": 0,
+            "external_learned_capability_calls": 0,
+            "acceptance_credit_delta": 0,
+            "family_credit_delta": 0,
+            "capability_credit_delta": 0,
+            "ownership_credit_delta": 0,
+        }
+    conservative = max(
+        float(candidate["fit_nrmse"]),
+        float(candidate["inner_loo_nrmse"]),
+        float(candidate["prospective_validation_nrmse"]),
+    )
+    if not math.isfinite(conservative) or conservative > threshold:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED__PROSPECTIVE_ERROR_ABOVE_SOLVER_THRESHOLD",
+            "candidate": None,
+            "expression": None,
+            "fit_threshold": threshold,
+            "conservative_nrmse": conservative,
+            "selected_prevalidation": discovery["selected_prevalidation"],
+            "prospective_validation_nrmse": discovery["prospective_validation_nrmse"],
+            "persistent_learned_bytes": 0,
+            "external_learned_capability_calls": 0,
+            "acceptance_credit_delta": 0,
+            "family_credit_delta": 0,
+            "capability_credit_delta": 0,
+            "ownership_credit_delta": 0,
+        }
+    return {
+        "schema": SCHEMA,
+        "status": "CANDIDATE_READY__PROSPECTIVE_SELECTION_SAFE__UNVERIFIED_PRIVATE_SCORE",
+        "route": "SEPARABLE_BILINEAR_PROSPECTIVE_HOLDOUT",
+        "candidate": candidate,
+        "expression": discovery["expression"],
+        "conservative_nrmse": conservative,
+        "fit_threshold": threshold,
+        "validation_index": discovery["validation_index"],
+        "validation_observation_used_for_selection": False,
+        "persistent_learned_bytes": 0,
+        "external_learned_capability_calls": 0,
+        "dynamic_code_execution": False,
+        "random_search": False,
+        "private_score_claimed": False,
+        "acceptance_credit_delta": 0,
+        "family_credit_delta": 0,
+        "capability_credit_delta": 0,
+        "ownership_credit_delta": 0,
+    }
+
+
+def choose_final_experiment(
+    rows: Sequence[Mapping[str, Any]],
+    *,
+    bounds: Mapping[str, Sequence[Any]],
+    target: str = "out",
+    grid_levels: int = 5,
+) -> dict[str, Any]:
+    """Choose the final probe before the row that V2 will reserve as holdout."""
+    out = sparse.choose_final_experiment(
+        rows,
+        bounds=bounds,
+        target=target,
+        grid_levels=grid_levels,
+    )
+    return {
+        **out,
+        "prospective_contract": "APPEND_THIS_OBSERVATION_LAST__DO_NOT_USE_ITS_RESULT_BEFORE_V2_STRUCTURE_SELECTION",
+        "acceptance_credit_delta": 0,
+    }
