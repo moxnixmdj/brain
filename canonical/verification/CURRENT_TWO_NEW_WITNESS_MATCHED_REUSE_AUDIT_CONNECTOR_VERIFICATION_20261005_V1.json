@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TWO_NEW_WITNESS_MATCHED_REUSE_AUDIT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__2X8_16_PAIRS__ZERO_DIRECT_FULL_TARGET_REUSE__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TWO_NEW_WITNESS_MATCHED_REUSE_AUDIT_20261005_V1.json",
+    "git_blob_sha": "64115750a661ae2e1b8eb7e6c8728b0d2cd1813c"
+  },
+  "source_bindings": {
+    "livebench": {
+      "path": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "57e27e3c56372b57a1d4e0255f49340d4a4c8588"
+    },
+    "unknown_domain": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "ebe8edcda3e0aa7dcffab6032834532a6f06c5f7"
+    },
+    "targets": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+      "git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    }
+  },
+  "checks": {
+    "exact_pair_count_16": true,
+    "exact_witness_count_2": true,
+    "exact_target_count_8": true,
+    "all_current_scope_relations_unproved": true,
+    "all_current_full_target_semantic_implications_unproved": true,
+    "all_direct_closures_false": true,
+    "livebench_explicitly_proves_only_livebench_fixed_bar": true,
+    "livebench_explicitly_disclaims_whole_instruction_following_family_closure": true,
+    "unknown_domain_explicitly_limits_scope_to_frozen_evaluator_and_reachable_launcher_domain": true,
+    "normalized_target_provenance_explicitly_grants_no_semantic_or_scope_equivalence": true
+  },
+  "consequence": "DELETE_GENERIC_DIRECT_REUSE_SEARCH_FOR_THE_TWO_NEW_WITNESSES__RESUME_ONLY_ON_NEW_CONTENT_ADDRESSED_SEMANTIC_IMPLICATION_OR_EXACT_SUPERSET_SCOPE_BRIDGE",
+  "hard_nonclaims": [
+    "NO_CLAIM_NEW_BRIDGE_THEOREM_IMPOSSIBLE",
+    "NO_PARTIAL_ATOM_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
