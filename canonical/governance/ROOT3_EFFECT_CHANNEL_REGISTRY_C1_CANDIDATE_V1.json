@@ -1,0 +1,139 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__REPO_DYNAMIC_MODULE_UNIVERSE_FINITE__C1_PARTIAL__NONREPO_NATIVE_CHILD_EFFECT_TOTALITY_OPEN__ZERO_CREDIT",
+  "objective": "Compile and content-address the finite repo-local dynamic module universe used by the current credited ASTRA runtime, while failing closed on nonliteral helper loading and preserving external/native/child-process effect totality as explicit open C1 residuals.",
+  "parent_mincut": {
+    "path": "canonical/governance/ROOT3_SHARED_NO_BYPASS_CHANNEL_MINCUT_20261005_V1.json",
+    "build_cut": "C1_CHANNEL_REGISTRY"
+  },
+  "subject": {
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "9231c9c328d449d33ec26b0c6083a654a5986ca2"
+    },
+    "bound_capability_registry": {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+    }
+  },
+  "observed_current_census": {
+    "spec_from_file_location_call_count": 13,
+    "literal_runtime_helper_calls": [
+      "npm_package_utils",
+      "auto_python_source_codec_acquisition",
+      "capability_proposal_generators",
+      "continuous_obs_runtime"
+    ],
+    "nonliteral_runtime_helper_calls": 0,
+    "bound_capability_count": 42,
+    "bound_adapter_module_count": 35,
+    "bound_adapter_entrypoints": "ALL_RUN",
+    "bound_source_types": [
+      "apt",
+      "npm",
+      "pypi",
+      "python_stdlib",
+      "runtime_native",
+      "system_tool"
+    ]
+  },
+  "expected_repo_dynamic_universe": {
+    "spec_from_file_location_call_count": 13,
+    "literal_runtime_helpers": [
+      "auto_python_source_codec_acquisition",
+      "capability_proposal_generators",
+      "continuous_obs_runtime",
+      "npm_package_utils"
+    ],
+    "bound_adapter_modules": [
+      "archive_tarfile",
+      "archive_verify_gnu_tar",
+      "browser_chromedriver",
+      "cli_command",
+      "docx_report_from_json",
+      "docx_verify_ooxml",
+      "docx_verify_ooxml_intent",
+      "evidence_decision_synthesis",
+      "evidence_decision_verify",
+      "generic_evidence_claim_relation",
+      "http_json_fetch",
+      "jq_query",
+      "node_library_codec",
+      "numeric_expression_sympy",
+      "objective_claim_operand_binding",
+      "objective_evidence_unit_extract",
+      "objective_relevance_bm25",
+      "pandoc_weasyprint",
+      "pdf_ocr_tesseract",
+      "pdf_pypdf",
+      "plain_goal_bound_grounding",
+      "plain_goal_bound_grounding_verify",
+      "pypi_provenance_audit",
+      "python_document_builder",
+      "python_library_codec",
+      "python_source_audit",
+      "python_test_audit",
+      "runtime_native_action",
+      "source_authority_binding_ror",
+      "sqlite_table_stdlib",
+      "sqlite_verify_cli",
+      "web_release_verify",
+      "xlsx_table_xlsxwriter",
+      "xlsx_verify_openpyxl",
+      "yq_yaml_json"
+    ],
+    "fixed_repo_loader_paths": [
+      "canonical/runtime/semantic_authorities.py",
+      "canonical/runtime/capability_proposal_generators.py",
+      "canonical/runtime/capability_planner.py",
+      "canonical/runtime/composition_state_capsule_guard_v2.py",
+      "canonical/runtime/capability_discovery.py",
+      "canonical/runtime/goal_compiler.py",
+      "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+      "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+      "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+      "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
+      "canonical/runtime/auto_capability_acquisition.py"
+    ]
+  },
+  "theorem_boundary": {
+    "proves": [
+      "CURRENT_ASTRA_EXPLICIT_SPEC_LOADER_COUNT_IS_FROZEN",
+      "ALL_ACTUAL_RUNTIME_HELPER_CALLS_HAVE_LITERAL_MODULE_NAMES",
+      "BOUND_CAPABILITY_ADAPTER_MODULE_SELECTION_IS_FINITE_AND_REGISTRY_BOUND",
+      "ALL_REGISTERED_REPO_LOCAL_DYNAMIC_MODULE_FILES_MUST_EXIST_AND_ARE_CONTENT_ADDRESSED_IN_COMPILER_OUTPUT"
+    ],
+    "does_not_prove": [
+      "THIRD_PARTY_DEPENDENCY_EFFECT_TOTALITY",
+      "NATIVE_EXTENSION_INTERNAL_EFFECT_MEDIATION",
+      "CHILD_PROCESS_INTERNAL_EFFECT_MEDIATION",
+      "EXTERNAL_TOOL_BRIDGE_OTHER_PROCESS_EFFECT_MEDIATION",
+      "FULL_C1_SCOPE_COMPLETENESS",
+      "C2_MEDIATOR_BINDINGS",
+      "C3_GRAPH_DOMINANCE"
+    ]
+  },
+  "expected_next_residuals": [
+    "CLASSIFY_NONREPO_DEPENDENCY_SOURCE_TYPES_BY_EFFECT_CARRIER",
+    "BOUND_OR_FORBID_NATIVE_EXTENSION_INTERNAL_MATERIAL_EFFECTS",
+    "BOUND_OR_SANDBOX_CHILD_PROCESS_INTERNAL_MATERIAL_EFFECTS",
+    "BOUND_EXTERNAL_TOOL_BRIDGE_EFFECT_CARRIER",
+    "ONLY_THEN_PROMOTE_C1_SCOPE_COMPLETE_AND_RUN_C2_C3"
+  ],
+  "runtime": "canonical/runtime/root3_effect_channel_registry_v1.py",
+  "tests": "canonical/tests/test_root3_effect_channel_registry_v1.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
