@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_FULL2500_SELF_SERVICE_GATE_RECONCILIATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PRIMARY_SOURCE_SELF_SERVICE_GATE_RECLASSIFICATION__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "objective": "Delete any residual owner-approval-wait interpretation for full HLE-2500 access while preserving authenticated terms acceptance, contamination safeguards, grader comparability, and Brain threshold evidence.",
+  "primary_sources": [
+    {
+      "source": "Center for AI Safety HLE GitHub README",
+      "url": "https://github.com/centerforaisafety/hle",
+      "verified_fact": "HLE consists of 2500 questions and official loading path is load_dataset('cais/hle', split='test')."
+    },
+    {
+      "source": "Hugging Face cais/hle dataset card",
+      "url": "https://huggingface.co/datasets/cais/hle",
+      "verified_fact": "Repository is publicly visible but file/content access requires a logged-in user to agree to share contact information and accept the dataset conditions."
+    }
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "HLE_HUMAN_OWNER_APPROVAL_WAIT_AS_A_DISTINCT_DEPENDENCY",
+      "HLE_DATASET_LOCATION_DISCOVERY",
+      "HLE_QUESTION_COUNT_DISCOVERY"
+    ],
+    "preserve": [
+      "AUTHENTICATED_HUGGING_FACE_ACCOUNT",
+      "DATASET_TERMS_ACCEPTANCE_AND_CONTACT_SHARING",
+      "MATERIAL_ACCESS_TO_EXACT_FULL_2500_WITHOUT_REUPLOADING_OR_PUBLICLY_REDISTRIBUTING",
+      "CONTAMINATION_SAFE_EVALUATION_CONTROL",
+      "ZERO_COST_CLAUDE_OPUS_4_6_COMPARABLE_GRADER_OR_SEPARATELY_PROVED_CONSERVATIVE_SCORER_RELATION",
+      "BRAIN_SCORE_CERTIFICATE_GE_67_7"
+    ],
+    "current_access_action": "LOG_IN_TO_HUGGING_FACE_AND_ACCEPT_THE_OFFICIAL_CAIS_HLE_CONDITIONS__NO OWNER SUPPORT OUTREACH REQUIRED FOR DATASET ACCESS"
+  },
+  "hard_nonclaims": [
+    "PUBLIC_DATASET_CARD_VISIBILITY_DOES_NOT MEAN THE PARQUET FILE IS ACCESSIBLE WITHOUT AUTHENTICATION",
+    "TERMS ACCEPTANCE DOES NOT PROVE ANTHROPIC GRADER EQUIVALENCE",
+    "DATASET ACCESS DOES NOT AUTHORIZE CASE EXPOSURE BEFORE THE APPLICABLE ZERO_REALITY FIXED POINT",
+    "NO HLE SCORE OR ACCEPTANCE CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
