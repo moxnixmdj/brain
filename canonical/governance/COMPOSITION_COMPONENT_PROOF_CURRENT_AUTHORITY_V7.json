@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V7",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__5_OF_12_SCOPED_PROVED__7_OPEN__SYNTHESIS_SCOPE_BRIDGE_PENDING_INDEPENDENT_VERIFICATION__ZERO_PARENT_CREDIT",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "supersedes": [
+    {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
+      "disposition": "HISTORICAL_4_OF_12_MEMORY_RECOVERY_DELEGATION_TOOL_DISCOVERY"
+    }
+  ],
+  "truth": {
+    "frozen_interface_count": 12,
+    "candidate_admissible_scoped_proved": 5,
+    "candidate_open": 7,
+    "candidate_scoped_proved_components": [
+      "memory",
+      "recovery",
+      "delegation",
+      "tool discovery",
+      "evidence synthesis"
+    ],
+    "parent_composition_predicate_closed": false,
+    "strict_opus55_acceptance_delta": 0
+  },
+  "candidate_slice": {
+    "input_path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V7.json",
+    "bridge_path": "canonical/governance/COMPOSITION_SYNTHESIS_SCOPE_COMPLETE_BRIDGE_V1.json",
+    "independent_verification_required": true
+  },
+  "current_open_after_candidate": [
+    "research",
+    "tool use",
+    "artifact creation",
+    "browser/computer action",
+    "coding",
+    "debugging",
+    "artifact production"
+  ],
+  "hard_rules": [
+    "V7_IS_NOT_ACTIVE_UNTIL_INDEPENDENT_VERIFICATION_PASSES",
+    "SYNTHESIS_SCOPE_BRIDGE_GRANTS_ONLY_EVIDENCE_SYNTHESIS_SCOPED_ACCEPTANCE_PROOF",
+    "NO_SYNTHESIS_PERFORMANCE_CREDIT",
+    "NO_ARTIFACT_PRODUCTION_CREDIT_BY_SHARED_INTERFACE",
+    "NO_PARENT_COMPOSITION_ACCEPTANCE_UNTIL_ALL_12_COMPONENT_INTERFACES_AND_PARENT_MATCHED_AND_INVARIANT_PREDICATES_CLOSE",
+    "NO_FRESH_REALITY",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_results_replayed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
