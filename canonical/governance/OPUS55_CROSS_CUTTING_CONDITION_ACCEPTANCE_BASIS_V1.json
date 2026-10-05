@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_CROSS_CUTTING_CONDITION_ACCEPTANCE_BASIS_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TWO_CROSS_CUTTING_TERMINAL_OBLIGATIONS__NO_NEW_FAMILY__NO_38_PREDICATE_MUTATION__ZERO_CREDIT",
+  "objective": "Turn verified multilingual and long-context condition mappings into explicit terminal acceptance obligations without creating new capability families or granting parity by inheritance.",
+  "authority": {
+    "boundary_path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+    "boundary_git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+  },
+  "obligations": [
+    {
+      "id": "MULTILINGUAL_CONDITION_PARITY_V1",
+      "kind": "CROSS_CUTTING_LANGUAGE_CONDITION",
+      "families": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ],
+      "candidate_public_bars": [
+        "SWE_BENCH_MULTILINGUAL_GE_93_9",
+        "GMMLU_42_LANGUAGE_AVG_GE_94_3",
+        "MILU_11_LANGUAGE_AVG_GE_93_1"
+      ],
+      "acceptance_rule": "PASS_IF_BRAIN_MEETS_OR_EXCEEDS_THE_RELEVANT_FROZEN_OPUS55_PUBLIC_BAR_ON_EACH_MATERIAL_EXERCISED_LANGUAGE_CONDITION_OR_IF_A_SCOPE_SAFE_STRONGER_CERTIFICATE_PROVES_NONINFERIORITY",
+      "no_inheritance": "ENGLISH_ONLY_OR_SINGLE_LANGUAGE_ACCEPTANCE_DOES_NOT_IMPLY_MULTILINGUAL_PARITY",
+      "result_status": "OPEN"
+    },
+    {
+      "id": "LONG_CONTEXT_CONDITION_PARITY_V1",
+      "kind": "CROSS_CUTTING_CONTEXT_HORIZON_CONDITION",
+      "families": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      ],
+      "candidate_public_bar": "PROGRAMBENCH_HIDDEN_TEST_PASS_RATE_GE_91_2_ON_OPUS55_SYSTEM_CARD_SETUP",
+      "acceptance_rule": "PASS_IF_BRAIN_MEETS_OR_EXCEEDS_THE_FROZEN_OPUS55_LONG_CONTEXT_BAR_ON_THE_EXACT_MATCHED_HARNESS_OR_IF_A_SCOPE_SAFE_STRONGER_CERTIFICATE_PROVES_EQUAL_OR_BETTER_TERMINAL_OUTCOMES",
+      "no_inheritance": "SHORT_CONTEXT_ACCEPTANCE_OR_LARGE_EXTERNAL_CONTEXT_WINDOW_DOES_NOT_IMPLY_LONG_CONTEXT_PARITY",
+      "result_status": "OPEN"
+    }
+  ],
+  "registry_relationship": {
+    "existing_family_count": 19,
+    "existing_atomic_predicate_count": 38,
+    "new_family_required": false,
+    "mutate_atomic_registry_now": false,
+    "role": "META_TERMINAL_CONDITION_BASIS_REQUIRED_FOR_LITERAL_ALL_USEFUL_OPUS55_FINALITY"
+  },
+  "terminal_effect": {
+    "closes_condition_classification_question_if_verified": true,
+    "closes_condition_performance_results": false,
+    "literal_terminal_finality_still_open": true
+  },
+  "hard_nonclaims": [
+    "NO_MULTILINGUAL_PARITY_CLAIM",
+    "NO_LONG_CONTEXT_PARITY_CLAIM",
+    "NO_NEW_FAMILY_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
