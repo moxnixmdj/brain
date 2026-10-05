@@ -1,0 +1,40 @@
+name: Verify composition capsule runtime integration V1
+
+on:
+  push:
+    branches:
+      - breakthrough/composition-capsule-runtime-integration-20261005-sol
+  pull_request:
+    paths:
+      - "canonical/runtime/capability_planner.py"
+      - "canonical/runtime/astra_runtime.py"
+      - "canonical/runtime/composition_state_capsule_v1.py"
+      - "canonical/tests/test_capability_planner.py"
+      - "canonical/tests/test_composition_state_capsule_v1.py"
+      - "canonical/tests/test_composition_state_capsule_runtime_integration_v1.py"
+      - ".github/workflows/verify-composition-capsule-runtime-integration-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Compile modified runtime
+        run: |
+          python -m py_compile canonical/runtime/capability_planner.py
+          python -m py_compile canonical/runtime/composition_state_capsule_v1.py
+          python -m py_compile canonical/runtime/astra_runtime.py
+      - name: Run capsule and planner integration tests
+        run: |
+          python -m unittest -v \
+            canonical.tests.test_composition_state_capsule_v1 \
+            canonical.tests.test_capability_planner \
+            canonical.tests.test_composition_state_capsule_runtime_integration_v1 \
+            canonical.tests.test_grounded_composition_runtime_scope

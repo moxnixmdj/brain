@@ -172,7 +172,7 @@ def _resolve_effect_bindings(value, consumer, providers):
                     "BINDING_RESULT_FIELD_UNDECLARED",
                     f"{producer.capability_id}:{field}",
                 )
-            return {"$result": {"cycle": cycle, "field": field}}
+            return {"$result": {"cycle": cycle, "field": field, "effect": effect}}
         return {
             key: _resolve_effect_bindings(item, consumer, providers)
             for key, item in value.items()
@@ -194,6 +194,15 @@ def plan_actions(problem):
         action = _resolve_effect_bindings(cap.action, cap, providers)
         action.setdefault("args", {})
         action["capability_id"] = cid
+        # Runtime-load-bearing contract. This preserves the planner's declared
+        # state boundary after $effect_result is compiled to an executable
+        # result reference, so the executor can enforce cross-role state via
+        # the content-addressed composition capsule instead of raw trace access.
+        action["_capability_contract"] = {
+            "requires": sorted(cap.requires),
+            "provides": sorted(cap.provides),
+            "result_fields": sorted(cap.result_fields),
+        }
         cycle = len(actions)
         provider_bindings = {}
         for effect in sorted(cap.requires):
