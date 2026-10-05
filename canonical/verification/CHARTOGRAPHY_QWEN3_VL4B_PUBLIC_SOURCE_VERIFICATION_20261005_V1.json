@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3_VL4B_PUBLIC_SOURCE_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PUBLIC_PRIMARY_SOURCE_RECOMPUTATION_PASS__ROUTE_EXISTENCE_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ROUTE_V1.json",
+    "git_blob_sha": "2c682676f05ef6b7568a9bc79530be4d1b352aff"
+  },
+  "verified_public_facts": {
+    "model": "Qwen/Qwen3-VL-4B-Instruct",
+    "revision": "ebb281ec70b05090aa6165b016eac8ec08e71b17",
+    "private": false,
+    "gated": false,
+    "license": "apache-2.0",
+    "pipeline_tag": "image-text-to-text",
+    "library": "transformers",
+    "model_type": "qwen3_vl",
+    "parameter_count": 4437815808,
+    "bf16_stored_bytes": 8875719344,
+    "auto_model": "AutoModelForMultimodalLM",
+    "processor": "AutoProcessor",
+    "native_image_input": true
+  },
+  "source_urls": [
+    "https://huggingface.co/api/models/Qwen/Qwen3-VL-4B-Instruct",
+    "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct/tree/main"
+  ],
+  "scheduler_effect": [
+    "PUBLIC_ZERO_LICENSE_COST_GENERIC_IMAGE_TEXT_ACQUISITION_ROUTE_EXISTS",
+    "CURRENT_CHARTOGRAPHY_VISION_PREREQUISITE_IS_NO_LONGER_AN_INVENTION_ONLY_BRANCH",
+    "PRESERVE_EXACT_EXECUTION_FIT_QUALIFICATION_THRESHOLD_AND_OWNERSHIP_GATES"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_BF16_FULL_GPU_FIT_ON_8GB_VRAM",
+    "NO_CLAIM_ANY_QUANTIZED_VARIANT_PRESERVES_CAPABILITY",
+    "NO_CLAIM_CHARTOGRAPHY_GE_89",
+    "NO_CLAIM_VISION_DENSE_NONCHART_SCOPE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
