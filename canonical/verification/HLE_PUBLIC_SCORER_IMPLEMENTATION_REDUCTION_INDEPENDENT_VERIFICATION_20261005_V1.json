@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_PUBLIC_SCORER_IMPLEMENTATION_REDUCTION_INDEPENDENT_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PINNED_CAIS_PUBLIC_SCORER_FACTS_VERIFIED__CORROBORATIVE_ONLY_UNDER_STRONGER_HLE_PROTOCOL_PRECEDENCE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/HLE_PUBLIC_SCORER_IMPLEMENTATION_REDUCTION_20261005_V1.json",
+    "git_blob_sha": "ae770390fc51089b9fd7179d97a008db9e213441",
+    "source_commit": "e3e395980b3e56f733cb75a3451f07dec84a6e1c"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "isolated_branch": "verify/hle-public-scorer-20261005-macos",
+    "verified_head_sha": "a5ad00509cf6b35a05ae7191d989c20989ad01d6",
+    "verifier_git_blob_sha": "3043ed41d757b4a0d5e728ff777c37e014950708",
+    "workflow_git_blob_sha": "8deec4a40021604d9595e013c92c56da1003e8ea",
+    "workflow_run_id": 37249056838,
+    "workflow_job_id": 111572735218,
+    "conclusion": "success",
+    "artifact_id": 11320611008,
+    "artifact_digest": "sha256:54db75c6c753b1ac800b46a463f4dc92f978fba1e262ce86e0ddae50486b2c13"
+  },
+  "verified": {
+    "cais_repository": "centerforaisafety/hle",
+    "cais_commit": "22ed3074b1e7b134bcbc09028d0ba320839b0655",
+    "judge_git_blob_sha": "4caca7c5e6eaa9c64ec33e5f1bcc93312e6c5b31",
+    "readme_git_blob_sha": "a948c9512541fff702aaf5e0c8bc371fded3689c",
+    "official_judge_prompt_public": true,
+    "official_current_default_judge": "o3-mini-2025-01-31",
+    "accuracy_reducer_public": true,
+    "anthropic_protocol_equivalence_claimed": false,
+    "terminal_cases_consumed": 0
+  },
+  "precedence": {
+    "stronger_current_hle_authority": "canonical/governance/HLE_OPUS55_PUBLIC_PROTOCOL_REGRESSION_RECONCILIATION_ACTIVATION_V1.json",
+    "stronger_verified_protocol_receipt": "canonical/verification/HLE_OPUS55_ROUTE_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "effect": "THIS_RECEIPT_CORROBORATES_THAT_PUBLIC_CAIS_SCORER_IMPLEMENTATION_IS_KNOWN__IT_DOES_NOT_REOPEN_OR_REPLACE_THE_ALREADY_VERIFIED_ANTHROPIC_OPUS55_PROTOCOL"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "ANY_REMAINING_CLAIM_THAT_CAIS_BASE_HLE_JUDGE_PROMPT_OR_ACCURACY_REDUCER_IS_PRIVATE_OR_UNDISCOVERED"
+    ],
+    "preserve": [
+      "MATERIAL_CAIS_HLE_FULL_2500_AUTO_GATE_ACCOUNT_ACCESS_WITHOUT_CONTAMINATION",
+      "ZERO_COST_CLAUDE_OPUS_4_6_COMPARABLE_GRADER_OR_SEPARATELY_PROVED_CONSERVATIVE_SCORER_RELATION",
+      "BRAIN_SCORE_CERTIFICATE_GE_67_7"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CAIS_O3_MINI_JUDGE_EQUALS_ANTHROPIC_OPUS46_GRADER",
+    "NO_HLE_SCORE",
+    "NO_DATASET_CASES_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
