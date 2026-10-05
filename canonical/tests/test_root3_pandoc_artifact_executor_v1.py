@@ -26,7 +26,7 @@ class PandocArtifactExecutorTests(unittest.TestCase):
     def test_prepare_exact_current_surface(self):
         with tempfile.TemporaryDirectory() as td:
             root=pathlib.Path(td); c=ctx(root)
-            with patch.object(ex.shutil,"which",side_effect=self.tools), patch.object(ex.confinement,"_inside_mounts",return_value=[]):
+            with patch.object(ex,"_resolve_tool",side_effect=lambda n:"/usr/bin/"+n), patch.object(ex.confinement,"_inside_mounts",return_value=[]):
                 p=ex._prepare(c)
             self.assertEqual(p["destination"],(root/"out.pdf").resolve())
             self.assertEqual(p["expected_pre_sha256"],"ABSENT")
@@ -58,7 +58,7 @@ class PandocArtifactExecutorTests(unittest.TestCase):
             def fake(prepared,popen_impl):
                 pathlib.Path(prepared["output_dir"],"artifact.pdf").write_bytes(payload)
                 return {"timed_out":False,"returncode":0,"stdout_b64":base64.b64encode(b"ok").decode(),"stderr_b64":""}
-            with patch.object(ex.shutil,"which",side_effect=self.tools), patch.object(ex.confinement,"_inside_mounts",return_value=[]), patch.object(ex.confinement,"_run_confined",side_effect=fake):
+            with patch.object(ex,"_resolve_tool",side_effect=lambda n:"/usr/bin/"+n), patch.object(ex.confinement,"_inside_mounts",return_value=[]), patch.object(ex.confinement,"_run_confined",side_effect=fake):
                 cp=ex.make_executor(popen_impl=lambda *a,**kw:None)(c)
             self.assertEqual(cp.returncode,0)
             self.assertEqual((root/"out.pdf").read_bytes(),payload)
@@ -68,7 +68,7 @@ class PandocArtifactExecutorTests(unittest.TestCase):
             root=pathlib.Path(td); c=ctx(root); dst=root/"out.pdf"; dst.write_bytes(ex.PDF_MAGIC+b"old")
             def fake(prepared,popen_impl):
                 return {"timed_out":False,"returncode":7,"stdout_b64":"","stderr_b64":base64.b64encode(b"bad").decode()}
-            with patch.object(ex.shutil,"which",side_effect=self.tools), patch.object(ex.confinement,"_inside_mounts",return_value=[]), patch.object(ex.confinement,"_run_confined",side_effect=fake):
+            with patch.object(ex,"_resolve_tool",side_effect=lambda n:"/usr/bin/"+n), patch.object(ex.confinement,"_inside_mounts",return_value=[]), patch.object(ex.confinement,"_run_confined",side_effect=fake):
                 cp=ex.make_executor(popen_impl=lambda *a,**kw:None)(c)
             self.assertEqual(cp.returncode,7)
             self.assertEqual(dst.read_bytes(),ex.PDF_MAGIC+b"old")
