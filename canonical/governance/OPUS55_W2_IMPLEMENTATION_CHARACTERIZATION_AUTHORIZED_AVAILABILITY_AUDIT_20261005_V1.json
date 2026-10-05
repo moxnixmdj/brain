@@ -8,7 +8,7 @@
   "authorities": {
     "minimum_information_cut": "canonical/governance/OPUS55_TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT_20261005_V1.json",
     "route_collapse": "canonical/governance/UNIVERSAL_DOMINANCE_ROUTE_COLLAPSE_THEOREM_20261005_V1.json",
-    "finite_black_box_lower_bound": "canonical/governance/FINITE_BLACK_BOX_TARGET_UNIVERSAL_CERTIFICATION_LOWER_BOUND_V2.json"
+    "finite_black_box_lower_bound": "canonical/governance/FINITE_BLACK_BOX_TARGET_UNIVERSAL_CERTIFICATION_LOWER_BOUND_20261005_V2.json"
   },
   "first_party_observations": [
     {
@@ -79,7 +79,7 @@
   ],
   "accounting": {
     "incremental_spend_usd": 0,
-    "new_reality_units_consumed": 0,
+    "new_reality_units_consumED": 0,
     "terminal_cases_consumed": 0,
     "acceptance_credit_delta": 0,
     "family_credit_delta": 0,
