@@ -14,6 +14,7 @@ of external evidence channels.
 from __future__ import annotations
 
 import copy
+import hashlib
 import importlib.util
 import json
 import pathlib
@@ -48,6 +49,22 @@ def _canon(value: Any) -> str:
         )
     except (TypeError, ValueError) as exc:
         raise CompositionGuardError("NON_CANONICALIZABLE_VALUE") from exc
+
+
+def _validate_channel_receipt(value: Mapping[str, Any]) -> dict[str, Any]:
+    if not isinstance(value, Mapping):
+        raise CompositionGuardError("CHANNEL_RECEIPT_INVALID")
+    receipt = copy.deepcopy(dict(value))
+    if receipt.get("schema") != "PROJECT_BRAIN_COMPOSITION_RUNTIME_CHANNEL_GUARD_V1":
+        raise CompositionGuardError("CHANNEL_RECEIPT_SCHEMA_INVALID")
+    supplied = receipt.pop("channel_manifest_sha256", None)
+    if not isinstance(supplied, str) or len(supplied) != 64:
+        raise CompositionGuardError("CHANNEL_RECEIPT_HASH_INVALID")
+    computed = hashlib.sha256(_canon(receipt).encode("utf-8")).hexdigest()
+    if supplied != computed:
+        raise CompositionGuardError("CHANNEL_RECEIPT_HASH_MISMATCH")
+    receipt["channel_manifest_sha256"] = supplied
+    return receipt
 
 
 def _strings(value: Any, label: str) -> list[str]:
@@ -360,13 +377,7 @@ def append_action_result(
         + ["evidence:" + evidence_id, "action:" + action_ref, "producer:" + producer_ref]
     )
     if channel_receipt is not None:
-        if not isinstance(channel_receipt, Mapping):
-            raise CompositionGuardError("CHANNEL_RECEIPT_INVALID")
-        if channel_receipt.get("schema") != "PROJECT_BRAIN_COMPOSITION_RUNTIME_CHANNEL_GUARD_V1":
-            raise CompositionGuardError("CHANNEL_RECEIPT_SCHEMA_INVALID")
-        manifest_hash = channel_receipt.get("channel_manifest_sha256")
-        if not isinstance(manifest_hash, str) or len(manifest_hash) != 64:
-            raise CompositionGuardError("CHANNEL_RECEIPT_HASH_INVALID")
+        channel_receipt = _validate_channel_receipt(channel_receipt)
     values = {
         effect: {
             "effect": effect,
