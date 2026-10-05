@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V3_CANDIDATE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__V2_38_EXACTLY_PRESERVED_PLUS_TWO_VERIFIED_MISSING_SURFACE_OBLIGATIONS__40_TOTAL__ZERO_CREDIT__ACTIVATION_SEPARATE",
+  "subject": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V3_CANDIDATE.json",
+    "git_blob_sha": "e5481d678d11295a1670c57403e58186336bb2f6"
+  },
+  "predecessor": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "predicate_count": 38
+  },
+  "proof_basis_gap": {
+    "path": "canonical/verification/CREATIVE_DIAGRAM_PROOF_BASIS_GAP_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "0c52d00a458efa72da541ac221c09fd5a249479e",
+    "classification": "TERMINAL_PROOF_BASIS_GAP__NOT_POSITIVE_CAPABILITY_GAP"
+  },
+  "current_live_ledger": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+    "meaning": "UNCHANGED__CURRENT_LIVE_ACCEPTANCE_ACCOUNTING_REMAINS_ON_ACTIVATED_V2_BASIS_UNTIL_SEPARATE_MIGRATION"
+  },
+  "checks": {
+    "candidate_predicate_count_40": true,
+    "candidate_unique_id_count_40": true,
+    "first_38_predicate_objects_semantically_identical_to_v2": true,
+    "residual_family_definition_semantically_identical_to_v2": true,
+    "added_predicate_count_exactly_2": true,
+    "added_creative_predicate_family_communication_and_synthesis": true,
+    "added_diagram_predicate_family_artifact_creation": true,
+    "no_new_accounting_family": true,
+    "no_live_ledger_mutation": true,
+    "no_acceptance_credit": true
+  },
+  "added_predicates": [
+    "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+    "DIAGRAM_OUTPUT_SCOPE_QUALITY_NONINFERIOR"
+  ],
+  "migration_rule": "DO_NOT_REWRITE_CURRENT_COUNTS_OR_TERMINAL_AUTHORITY_UNTIL_INDEPENDENT_VERIFICATION_AND_A_SEPARATE_CONTENT_ADDRESSED_REGISTRY_LEDGER_ROOT_AND_TERMINAL_PROJECTION_MIGRATION_PASS",
+  "hard_nonclaims": [
+    "NO_CLAIM_14_OF_40_IS_CURRENT_AUTHORITY",
+    "NO_CREATIVE_OR_DIAGRAM_PREDICATE_PROVED",
+    "NO_FAMILY_ACCEPTANCE_DELTA",
+    "NO_TERMINAL_FINALITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_public_runner_verification_required": true
+}
