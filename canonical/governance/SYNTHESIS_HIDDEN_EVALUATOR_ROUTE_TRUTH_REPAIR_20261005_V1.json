@@ -1,0 +1,80 @@
+{
+  "schema":"PROJECT_BRAIN_SYNTHESIS_HIDDEN_EVALUATOR_ROUTE_TRUTH_REPAIR_20261005_V1",
+  "date":"2026-10-05",
+  "status":"CANDIDATE_TRUTH_REPAIR__SYNTHESIS_CASE_LEVEL_EVALUATOR_IS_ALREADY_EXPLICIT_AND_FROZEN__UNKNOWN_WEIGHT_DISCOVERY_DELETED__ZERO_CREDIT",
+  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective":"Correct the live hidden-evaluator routing reduction for SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR. The active synthesis contract already fixes the exact case-level quality function and deterministic dimension scorers, so unknown evaluator weights are not a current information bottleneck. Preserve the coupling theorem for genuinely hidden monotone evaluators, but remove it as the primary synthesis route unless the frozen metric contract changes.",
+  "authorities":{
+    "routing_subject":{
+      "path":"canonical/governance/MATCHED_NONINFERIORITY_MONOTONE_ROUTE_CLASSIFICATION_20261005_V1.json",
+      "git_blob_sha":"36072fd038bd52b62d7e355a055753bbf1e9c61b"
+    },
+    "matched_quality_activation":{
+      "path":"canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_ACTIVATION_V1.json",
+      "git_blob_sha":"1ca2de029b02ca8518e59e0d66a973e3e26e251b",
+      "active_metric":"MATCHED_QUALITY = MINIMUM_OF_FIVE_EXPLICIT_NORMALIZED_COMPONENT_SCORES__UNSUPPORTED_MATERIAL_CLAIM_HARD_ZERO"
+    },
+    "dimension_scorer_activation":{
+      "path":"canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1.json",
+      "git_blob_sha":"300fb663e6b598b389961ddf663d88abcd206545",
+      "effect":"FIVE_DIMENSION_SCORERS_AND_STRICT_PAIRED_POINTWISE_DOMINANCE_REDUCER_ALREADY_FROZEN_AND_INDEPENDENTLY_VERIFIED"
+    },
+    "stronger_proof_falsification":"canonical/governance/SYNTHESIS_MATCHED_QUALITY_STRONGER_PROOF_FALSIFICATION_20261005_V1.json"
+  },
+  "recomputed_facts":{
+    "case_level_quality_aggregator_hidden":false,
+    "quality_dimension_scorers_unspecified":false,
+    "portfolio_strict_sufficient_reducer_unspecified":false,
+    "exact_opus55_matched_outcome_or_score_bound_available":false,
+    "universal_brain_ceiling_on_all_admissible_synthesis_inputs_proved":false
+  },
+  "logical_repair":{
+    "invalid_live_reason":"UNKNOWN_MONOTONE_WEIGHTS_ARE_A_REAL_INFORMATION_COST_THE_COUPLING_ROUTE_CAN_REMOVE",
+    "why_invalid":"THE ACTIVE FROZEN ACCEPTANCE SEMANTICS CONTAIN NO UNKNOWN CASE_LEVEL QUALITY WEIGHT VECTOR. THE QUALITY FUNCTION IS EXACTLY MIN OF FIVE EXPLICIT COMPONENT SCORES WITH A HARD ZERO RULE, AND THE PORTFOLIO HAS AN ACTIVE STRICT PAIRED SUFFICIENT REDUCER.",
+    "wolfram_check":{
+      "statement":"FOR_ALL_COMPONENT_VECTORS_b,t_IN_[0,1]^5__b_i>=t_i_FOR_ALL_i_IMPLIES_MIN(b)>=MIN(t)",
+      "result":true,
+      "counterexample":"NONE"
+    },
+    "correct_remaining_information":"TARGET PERFORMANCE INFORMATION OR A STRONGER UNIVERSAL BRAIN PERFORMANCE PROOF__NOT EVALUATOR WEIGHT IDENTIFICATION",
+    "coupling_theorem_role":"REMAINS_SOUND_FOR OTHER GENUINELY_HIDDEN_MONOTONE_EVALUATORS; FOR CURRENT SYNTHESIS IT DOES_NOT_CREATE_NEW_INFORMATION WITHOUT TARGET OUTCOME MASS OR BOUNDS"
+  },
+  "scheduler_effect_if_verified":{
+    "delete":[
+      "SYNTHESIS_AS_PRIMARY_HIDDEN_WEIGHT_DISCOVERY_TARGET",
+      "PROVE_UNKNOWN_SYNTHESIS_AGGREGATOR_MONOTONICITY_AS_A_NEW_OBLIGATION",
+      "RECONSTRUCT_OR_QUERY_SYNTHESIS_AGGREGATOR_WEIGHTS"
+    ],
+    "preserve":[
+      "F_SYNTHESIS_COMPARATOR_CAPACITY_OR_STRONGER_PROOF",
+      "ACTIVE_EXACT_FIVE_DIMENSION_SCORERS",
+      "ACTIVE_MIN_NONCOMPENSATORY_CASE_LEVEL_AGGREGATOR",
+      "ACTIVE_STRICT_PAIRED_POINTWISE_DOMINANCE_SUFFICIENT_REDUCER",
+      "SEARCH_FOR_FORMAL_OR_EXHAUSTIVE_GENERAL_SEMANTIC_CEILING_PROOF",
+      "EXACT_OPUS55_COMPARATOR_CAPACITY_SNAPSHOT_ONLY_IF_STRONGER_PROOF_REMAINS_UNAVAILABLE"
+    ],
+    "new_primary_synthesis_question":"CAN_BRAIN_MATCHED_QUALITY_BE_PROVED_AT_GLOBAL_CEILING_1_FOR_ALL_ADMISSIBLE_FROZEN_SYNTHESIS_INPUTS_OR OTHERWISE LOWER_BOUNDED_ABOVE_ANY_POSSIBLE_OPUS_SCORE_WITHOUT TARGET CALLS",
+    "fallback_if_no":"TARGET_OUTCOME_OR_SCORE_BOUND_IS_INFORMATION_THEORETICALLY_REQUIRED_UNDER_THE_CURRENT_FROZEN_ACCEPTANCE CONTRACT"
+  },
+  "hard_nonclaims":[
+    "NO_SYNTHESIS_ACCEPTANCE_CLOSURE",
+    "NO_CLAIM_TARGET_COMPARATOR_IS_ALWAYS_REQUIRED",
+    "NO_CLAIM_UNIVERSAL_BRAIN_CEILING_IS_IMPOSSIBLE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting":{
+    "incremental_spend_usd":0,
+    "new_reality_units_consumed":0,
+    "terminal_cases_consumed":0,
+    "acceptance_credit_delta":0,
+    "family_credit_delta":0,
+    "capability_credit_delta":0,
+    "ownership_credit_delta":0
+  },
+  "scheduling_authority":false,
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false,
+  "independent_verification_required":true
+}
