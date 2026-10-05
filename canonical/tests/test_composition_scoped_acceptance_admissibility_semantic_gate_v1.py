@@ -57,3 +57,15 @@ def test_global_semantic_gate_fails_closed_on_scope_only_receipts():
     assert proj["artifact_plus_synthesis_6_of_12_authorized"] is False
     assert gate["acceptance_credit_delta"] == 0
     assert gate["fresh_reality_authority"] is False
+
+
+def test_scope_completeness_does_not_imply_acceptance_under_current_authority():
+    gate = json.loads(GATE.read_text(encoding="utf-8"))
+    ff = gate["formal_falsification"]
+    assert ff["result"] == "FALSE"
+    assert ff["canonical_counterexample"]["scope_complete"] is True
+    assert ff["canonical_counterexample"]["acceptance_closed"] is False
+    assert ff["canonical_counterexample"]["implication_evaluation"] is False
+    assert ff["independent_logic_check"]["tautology_q_scope_implies_acceptance"] is False
+    assert ff["independent_logic_check"]["countermodel_exists_for_scope_true_acceptance_false"] is True
+    assert gate["semantic_gate"]["current_answer"].startswith("PROVED_FAIL_CLOSED")
