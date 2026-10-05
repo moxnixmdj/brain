@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_CHILD_PROCESS_CENSUS_C1_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__REGISTERED_PROCESS_SPAWN_UNIVERSE_COMPILER__ZERO_CREDIT",
+  "objective": "Compile every current process-spawn primitive reachable through the exact registered C1 repository execution universe into a content-addressed finite census before attempting mediation or sandboxing.",
+  "parent": {
+    "path": "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json",
+    "git_blob_sha": "7e2a232d8c7c66d711e858cc75c647c5690a43eb"
+  },
+  "process_apis": [
+    "subprocess.run",
+    "subprocess.Popen",
+    "subprocess.call",
+    "subprocess.check_call",
+    "subprocess.check_output",
+    "os.system",
+    "os.popen",
+    "os.spawnl",
+    "os.spawnle",
+    "os.spawnlp",
+    "os.spawnlpe",
+    "os.spawnv",
+    "os.spawnve",
+    "os.spawnvp",
+    "os.spawnvpe",
+    "multiprocessing.Process",
+    "asyncio.create_subprocess_exec",
+    "asyncio.create_subprocess_shell"
+  ],
+  "theorem_boundary": {
+    "proves": [
+      "ALL_CURRENT_REGISTERED_REPOSITORY_EXECUTION_MODULES_ARE_PARSED",
+      "ALL_MATCHING_PROCESS_SPAWN_CALLS_ARE_CONTENT_ADDRESSED_AND_ENUMERATED",
+      "ALIASED_IMPORTS_OF_SUPPORTED_PROCESS_PRIMITIVES_ARE_NORMALIZED"
+    ],
+    "does_not_prove": [
+      "CHILD_PROCESS_INTERNAL_EFFECT_MEDIATION",
+      "PROCESS_ARGUMENT_SAFETY",
+      "FULL_C1_SCOPE_COMPLETENESS",
+      "C2_MEDIATOR_BINDINGS",
+      "C3_GRAPH_DOMINANCE"
+    ]
+  },
+  "runtime": "canonical/runtime/root3_child_process_census_v1.py",
+  "tests": "canonical/tests/test_root3_child_process_census_v1.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
