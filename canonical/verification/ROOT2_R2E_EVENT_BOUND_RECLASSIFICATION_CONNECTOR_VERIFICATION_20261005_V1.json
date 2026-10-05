@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__R2E_EVENT_BOUND__ACTIVE_ATOMS_14_TO_10__ACTIVE_GROUPS_6_TO_5__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_20261005_V1.json",
+    "git_blob_sha": "4bcd638848a5d7d87eec77cb98364b3650ff9a49"
+  },
+  "parent": {
+    "path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V4.json",
+    "git_blob_sha": "ddebb1ff75f65ee67d444d6f524f3342eecbb519"
+  },
+  "verified_sources": [
+    [
+      "FRONTIERCODE_CURSORBENCH_OWNER_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "26c1f813503c156e818499b2e6fe4fdb00d40c05"
+    ],
+    [
+      "GDPVAL_AA_V21_PUBLIC_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "e3d890b0fdfe2c5173cf18efddbc1483b7db6701"
+    ],
+    [
+      "GDPVAL_OPUS55_TARGET_FRESHNESS_ACTIVATION_20261005_V1.json",
+      "d59ec93a0566ccc1982827cbc4b9f92a2c87b248"
+    ],
+    [
+      "AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json",
+      "3f09067d0fa174c343f2f157495d3654a15b3965"
+    ],
+    [
+      "MYSTERYMECHANISM_IRREDUCIBLE_PRIVATE_SCORE_GATE_20261005_V1.json",
+      "44a2f94be04d51773d994741eb3aa6795da92949"
+    ],
+    [
+      "MYSTERYMECHANISM_PUBLIC_SCOPE_SUPERSET_SEARCH_SATURATION_20261005_V1.json",
+      "a8b142d5a38683018f0f86d748338b51c9054d02"
+    ]
+  ],
+  "reclassified_predicates": [
+    "CODING_FRONTIERCODE_GE_54_4",
+    "PROWORK_GDPVAL_GE_1846",
+    "AUTOMATIONBENCH_GE_40",
+    "MYSTERYMECHANISM_GE_49_55"
+  ],
+  "recomputation": {
+    "parent_information_positive_atoms": 14,
+    "reclassified_atoms": 4,
+    "current_information_positive_atoms": 10,
+    "parent_active_groups": 6,
+    "current_active_groups": 5,
+    "removed_active_group": "R2E_NON_OWNER_CERTIFICATE_AND_BRIDGE_LANE",
+    "root2_partition_check": "10_ACTIVE + 2_AA_EVENT + 1_FINANCE_FIXED_POINT + 1_TB_SCIENCE_FRESH + 4_R2E_EVENT = 18"
+  },
+  "verdict": {
+    "scheduling_reduction_sound": true,
+    "predicates_deleted": 0,
+    "predicates_proved": 0,
+    "acceptance_changed": false,
+    "fresh_reality_consumed": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
