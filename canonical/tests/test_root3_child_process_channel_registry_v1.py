@@ -11,12 +11,12 @@ from canonical.runtime.root3_child_process_channel_registry_v1 import (
 )
 
 
-def test_current_whole_runtime_child_process_universe_is_exactly_19():
+def test_current_whole_runtime_child_process_universe_is_exactly_18():
     out = compile_registry()
     whole = out["whole_runtime"]
     assert whole["scanned_python_file_count"] == 49
-    assert whole["child_process_call_site_count"] == 19
-    assert whole["subprocess_run_count"] == 18
+    assert whole["child_process_call_site_count"] == 18
+    assert whole["subprocess_run_count"] == 17
     assert whole["subprocess_popen_count"] == 1
     assert whole["os_system_or_unregistered_subprocess_api_count"] == 0
     assert whole["modules_with_child_processes_count"] == 12
