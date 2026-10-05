@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__CURRENT_14_24_ZERO_REALITY_V12__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json",
+    "git_blob_sha": "2628f99626ca64f4d57920f732b19021f8cc34c2"
+  },
+  "recomputed_inputs": {
+    "term": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "ce04ca62612681d3d3493bf8a664f066e0b61b98"
+    },
+    "root": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860"
+    },
+    "r2": {
+      "path": "canonical/governance/ROOT2_18_CURRENT_14_24_SCHEDULING_ACTIVATION_V1.json",
+      "git_blob_sha": "7d0dd1a755d5e278897791e11884d4a4287ef58d"
+    },
+    "r3": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V5.json",
+      "git_blob_sha": "8397c1341b48947727c070f37a184580ca32c844"
+    },
+    "bk": {
+      "path": "canonical/governance/BUILDKITE_TRIAL_OWNER_CONFIRMATION_20261005_V1.json",
+      "git_blob_sha": "931806f3051f4476babf7e6af97dd04d1d400242"
+    }
+  },
+  "checks": {
+    "current_14_24": true,
+    "current_partition_15_6_3_and_root2_18": true,
+    "root2_scheduler_active_scheduling_only": true,
+    "root3_exact_9_with_7_shared": true,
+    "v12_exact_counts": true,
+    "nine_zero_reality_action_groups": true,
+    "closed_livebench_unknown_domain_not_rescheduled": true,
+    "buildkite_binding_exact": true,
+    "no_execution_promotion_or_fresh_reality_authority": true,
+    "zero_credit_zero_spend": true
+  },
+  "errors": [],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "CONNECTOR_RECOMPUTATION_IS_NOT_AN_INDEPENDENT_PUBLIC_RUNNER_RECEIPT"
+  ]
+}
