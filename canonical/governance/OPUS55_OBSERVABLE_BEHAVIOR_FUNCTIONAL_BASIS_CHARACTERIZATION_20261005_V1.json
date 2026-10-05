@@ -1,0 +1,308 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SCOPE_COMPLETE_FUNCTIONAL_ROLE_CHARACTERIZATION_FOR_FIXED_OPUS55_OBSERVABLE_INTERFACE__TARGET_DISCOVERY_COMPLETENESS_DISCHARGE_CANDIDATE__ZERO_CREDIT",
+  "objective": "Prove or falsify that every actual useful Claude Opus 5.5 capability targeted by the Brain, where target capability means externally useful behavior rather than hidden implementation or stored knowledge, factors through the existing 19-family functional union under the fixed Opus 5.5 observable interaction interface.",
+  "source_bindings": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "target_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION"
+    },
+    "open_world_boundary": {
+      "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "2476ab2d8220994d7858c80409b563e1582c88e6"
+    },
+    "open_world_verification": {
+      "path": "canonical/verification/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "407ad9567364338d9523a8996d4aa21273a4dd0c"
+    },
+    "first_party_observable_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    },
+    "observed_domain_factorization": {
+      "path": "canonical/governance/OPUS55_THREE_DOMAIN_INSTANCE_EXISTING_FAMILY_MAPPING_20261005_V1.json"
+    },
+    "public_interface_observations": [
+      {
+        "url": "https://www.anthropic.com/transparency",
+        "observation": "OPUS55_INPUT_MODALITIES_TEXT_INCLUDING_VOICE_DICTATION_AND_IMAGE__OUTPUT_TEXT_INCLUDING_TEXT_ARTIFACTS_AND_DIAGRAMS"
+      },
+      {
+        "url": "https://www.anthropic.com/claude/opus",
+        "observation": "OPUS55_AGENT_SURFACE_USES_MULTI_TOOL_WORK__SUBAGENTS__MEMORY__COMPUTER_USE__PROFESSIONAL_ARTIFACTS"
+      }
+    ]
+  },
+  "target_boundary": {
+    "included": "ANY_ACTUAL_USEFUL_BEHAVIOR_OF_THE_FIXED_CLAUDE_OPUS_5_5_TARGET_THAT_CAN_CHANGE_USER_OR_ENVIRONMENT_RELEVANT_OUTCOMES_THROUGH_ITS_SUPPORTED_INPUT_OUTPUT_MEMORY_OR_TOOL_INTERACTION_SURFACES",
+    "excluded_by_existing_terminal_definition": [
+      "HIDDEN_INTERNAL_IMPLEMENTATION_THAT_NEVER_CHANGES_USEFUL_OBSERVABLE_BEHAVIOR",
+      "DOMAIN_FACTS_CURRENT_EVENTS_AND_OTHER_KNOWLEDGE_PAYLOADS_ASSIGNED_TO_EXTERNAL_JIT_KNOWLEDGE"
+    ],
+    "fixed_interface_assumption": "THE_TARGET_IS_THE_CURRENT_CLAUDE_OPUS_5_5_VERSION_AND_ITS_CURRENTLY_BOUND_OBSERVABLE_INPUT_OUTPUT_MEMORY_AND_TOOL_INTERACTION_SURFACES__A_NEW_NATIVE_MODALITY_ACTUATOR_OR_MATERIAL_SERVING_INTERFACE_REOPENS_THIS_THEOREM"
+  },
+  "theorem": {
+    "statement": "FOR_THE_FIXED_TARGET_BOUNDARY_ABOVE__EVERY_USEFUL_OBSERVABLE_BEHAVIOR_FACTORS_AS_ONE_OR_MORE_CAUSAL_ROLES_FROM_THE_FUNCTIONAL_BASIS_BELOW__AND_EVERY_BASIS_ROLE_IS_COVERED_BY_AT_LEAST_ONE_EXISTING_TARGET_FAMILY__THEREFORE_AN_UNOBSERVED_DOMAIN_OR_TASK_LABEL_DOES_NOT_BY_ITSELF_REQUIRE_A_NEW_PRIMITIVE_CAPABILITY_FAMILY.",
+    "proof_structure": [
+      "A_USEFUL_TARGET_CAPABILITY_MUST_CHANGE_AN_OBSERVABLE_TASK_OUTCOME_OR_THE_TRAJECTORY_THAT_CAUSES_IT; OTHERWISE_IT_IS_NOT_AN_EXTERNALLY_USEFUL_BEHAVIOR_UNDER_THE_CANONICAL_TARGET_RULE.",
+      "ANY_OBSERVABLE_TARGET_TRAJECTORY_IS_GENERATED_FROM_INPUT_AND_PRIOR_STATE_THROUGH_GOAL_INTERPRETATION_INFORMATION_TRANSFORMATION_STATE_UPDATE_OPTIONAL_EXTERNAL_ACTION_AND_OUTPUT_CONSTRUCTION.",
+      "OPTIONAL_DISCOVERY_DELEGATION_VERIFICATION_AND_MULTI_ROLE_COMPOSITION_ARE_THE_ONLY_ADDITIONAL_CAUSAL_CONTROL_ROLES_NEEDED_WHEN_THE_TRAJECTORY_USES_UNKNOWN_TOOLS_OR_DOMAINS_MULTIPLE_WORKERS_FAILURE_CORRECTION_OR_MULTIPLE_PRIMITIVES.",
+      "DOMAIN_LANGUAGE_CONTEXT_LENGTH_STYLE_SAFETY_EFFICIENCY_AND_BENCHMARK_IDENTITY_CHANGE_PAYLOADS_OR_CONDITIONS_ON_CAUSAL_ROLES__THEY_DO_NOT_CREATE_A_NEW_CAUSAL_ROLE_UNLESS_THEY_REQUIRE_A_NEW_OBSERVABLE_MODALITY_ACTUATOR_OR_TRANSFORMATION_PRIMITIVE.",
+      "THE_EXISTING_19_FAMILY_UNION_ASSIGNMENT_BELOW_COVERS_EVERY_CAUSAL_ROLE; SPECIALIZED_FAMILIES_REFINE_BROAD_ROLES_WITHOUT_CREATING_UNMAPPED_TRACE_POSITIONS.",
+      "THEREFORE_ANY_COUNTEREXAMPLE_TO_FAMILY_UNION_COMPLETENESS_MUST_EXHIBIT_A_CAUSAL_ROLE_NOT_IN_THE_BASIS_OR_PROVE_THAT_AN_EXISTING_ROLE_TO_FAMILY_ASSIGNMENT_IS_NOT_SEMANTICALLY_TOTAL."
+    ]
+  },
+  "functional_basis": [
+    {
+      "id": "B0_INPUT_PERCEPTION_AND_GROUNDING",
+      "definition": "Convert supported target inputs or observed environment state into task-relevant representations.",
+      "families": [
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "notes": "TEXT_TASK_SEMANTICS_ROUTE_THROUGH_INSTRUCTION_SCOPE_JUDGMENT__IMAGE_SCREENSHOT_CHART_DIAGRAM_AND_DENSE_DOCUMENT_GROUNDING_ROUTE_THROUGH_VISION"
+    },
+    {
+      "id": "B1_GOAL_CONSTRAINT_SCOPE_AND_JUDGMENT",
+      "definition": "Determine what is being requested, applicable constraints, authorization, ambiguity handling and changing requirements.",
+      "families": [
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "behavioral_support": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ]
+    },
+    {
+      "id": "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+      "definition": "Transform represented information into conclusions, hypotheses, designs, calculations, decisions or solution structure.",
+      "families": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "EXACT_SYMBOLIC_COMPUTATION",
+        "ADVANCED_AGENTIC_CODING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "FINANCIAL_ANALYSIS",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "semantic_rule": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING_IS_THE_GENERAL_CROSS_DOMAIN_REASONING_PARENT_WHEN_TOOLS_ARE_AVAILABLE; ZERO_TOOL_USE_IS_A_VALID_TRAJECTORY_CHOICE_WITHIN_A_TOOL_AVAILABLE_TASK__SPECIALIZED_FAMILIES_REFINE_CODE_SCIENCE_FINANCE_PROFESSIONAL_AND_EXACT_SYMBOLIC_CASES__UNKNOWN_DOMAIN_ADAPTATION_HANDLES_NOVEL_DOMAIN_ONTOLOGY_OR_METHOD_PAYLOAD."
+    },
+    {
+      "id": "B3_TEMPORAL_STATE_MEMORY_AND_CONTINUITY",
+      "definition": "Preserve, retrieve and correctly use task/project state across long trajectories or sessions.",
+      "families": [
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      ]
+    },
+    {
+      "id": "B4_EXTERNAL_ACTION_PLANNING_AND_ENVIRONMENT_CONTROL",
+      "definition": "Choose and execute actions that change external software, tools, codebases, browsers, applications or workflow state.",
+      "families": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE",
+        "ADVANCED_AGENTIC_CODING"
+      ],
+      "notes": "ACTUATOR_SPECIFIC_FAMILIES_REFINE_THE_GENERAL_MULTI_TOOL_AGENCY_ROLE"
+    },
+    {
+      "id": "B5_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "definition": "Identify, learn, select and correctly operate unfamiliar tools, APIs, solvers or software required by the task.",
+      "families": [
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      ]
+    },
+    {
+      "id": "B6_DELEGATION_AND_COORDINATION",
+      "definition": "Partition work across multiple workers or subagents, coordinate dependencies and validate delegated results.",
+      "families": [
+        "SUBAGENT_DELEGATION_AND_COORDINATION"
+      ]
+    },
+    {
+      "id": "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION",
+      "definition": "Construct user-usable messages, explanations, summaries, code, documents, spreadsheets, slides, diagrams and other supported artifacts.",
+      "families": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION"
+      ]
+    },
+    {
+      "id": "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY",
+      "definition": "Check results, search for counterexamples, diagnose trajectory failures and recover without losing the objective.",
+      "families": [
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+      ]
+    },
+    {
+      "id": "B9_MULTI_ROLE_COMPOSITION",
+      "definition": "Compose two or more basis roles into one causal end-to-end system while preserving dependencies and correctness.",
+      "families": [
+        "MULTI_CAPABILITY_COMPOSITION",
+        "COMPLEX_MULTI_TOOL_AGENCY"
+      ]
+    }
+  ],
+  "conditions_not_new_primitive_roles": [
+    {
+      "condition": "DOMAIN_OR_SUBJECT_MATTER",
+      "rule": "REPLACE_DOMAIN_FACTS_ONTOLOGIES_AND_CURRENT_LITERATURE_WITH_TYPED_INPUTS_OR_EXTERNAL_JIT_KNOWLEDGE__KEEP_FUNCTIONAL_TRANSFORM_FIXED__OPEN_A_NEW_FAMILY_ONLY_ON_CONSTRUCTIVE_NEW_TRANSFORMATION_OR_CONTROL_PRIMITIVE"
+    },
+    {
+      "condition": "MULTILINGUAL",
+      "rule": "LANGUAGE_CONDITION_ON_INPUT_REASONING_INSTRUCTION_AND_COMMUNICATION_ROLES__PARITY_MUST_STILL_BE_PROVED"
+    },
+    {
+      "condition": "LONG_CONTEXT",
+      "rule": "CONTEXT_HORIZON_CONDITION_ON_STATE_REASONING_INSTRUCTION_PROFESSIONAL_AND_COMMUNICATION_ROLES__PARITY_MUST_STILL_BE_PROVED"
+    },
+    {
+      "condition": "CREATIVITY",
+      "rule": "QUALITY_AND_SEARCH_DIVERSITY_CONDITION_ON_REASONING_COMMUNICATION_AND_ARTIFACT_CONSTRUCTION__NOVELTY_DOES_NOT_BY_ITSELF_CREATE_A_NEW_EXTERNAL_CAUSAL_ROLE"
+    },
+    {
+      "condition": "SAFETY_HONESTY_AND_SCOPE",
+      "rule": "JUDGMENT_VERIFICATION_AND_COMMUNICATION_CONDITIONS__MAY_REQUIRE_SEPARATE_ACCEPTANCE_TESTS_BUT_NOT_AUTOMATIC_NEW_PRIMITIVE_FAMILY"
+    },
+    {
+      "condition": "LATENCY_COST_AND_EFFICIENCY",
+      "rule": "PERFORMANCE_CONDITION_ON_EXISTING_ROLE__IF_IT_ENABLES_A_QUALITATIVELY_LONGER_TRAJECTORY_THAT_TRAJECTORY_REMAINS_WITHIN_AGENCY_MEMORY_AND_COMPOSITION_ROLES"
+    },
+    {
+      "condition": "BENCHMARK_OR_PRODUCT_LABEL",
+      "rule": "EVIDENCE_OR_TASK_DISTRIBUTION_IDENTITY__NEVER_A_CAPABILITY_PRIMITIVE_BY_NAME"
+    }
+  ],
+  "observed_surface_stress_tests": [
+    {
+      "surface": "ANALYSIS",
+      "mapping": [
+        "B1_GOAL_CONSTRAINT_SCOPE_AND_JUDGMENT",
+        "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+        "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "surface": "CONVERSATION",
+      "mapping": [
+        "B1_GOAL_CONSTRAINT_SCOPE_AND_JUDGMENT",
+        "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION",
+        "B3_TEMPORAL_STATE_MEMORY_AND_CONTINUITY"
+      ],
+      "new_family_required": false
+    },
+    {
+      "surface": "CREATIVE_TASKS",
+      "mapping": [
+        "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+        "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "surface": "CYBERSECURITY",
+      "mapping": [
+        "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+        "B4_EXTERNAL_ACTION_PLANNING_AND_ENVIRONMENT_CONTROL",
+        "B5_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY"
+      ],
+      "new_family_required": false
+    },
+    {
+      "surface": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "mapping": [
+        "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+        "B5_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY",
+        "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "surface": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "mapping": [
+        "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+        "B4_EXTERNAL_ACTION_PLANNING_AND_ENVIRONMENT_CONTROL",
+        "B5_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "B6_DELEGATION_AND_COORDINATION",
+        "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY",
+        "B9_MULTI_ROLE_COMPOSITION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "surface": "VISION_AND_COMPUTER_USE",
+      "mapping": [
+        "B0_INPUT_PERCEPTION_AND_GROUNDING",
+        "B4_EXTERNAL_ACTION_PLANNING_AND_ENVIRONMENT_CONTROL",
+        "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY"
+      ],
+      "new_family_required": false
+    },
+    {
+      "surface": "PROFESSIONAL_ARTIFACT_WORK",
+      "mapping": [
+        "B1_GOAL_CONSTRAINT_SCOPE_AND_JUDGMENT",
+        "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+        "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION",
+        "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY"
+      ],
+      "new_family_required": false
+    }
+  ],
+  "completeness_result": {
+    "basis_role_count": 10,
+    "basis_roles_with_existing_family_cover": 10,
+    "currently_identified_unmapped_causal_role_count": 0,
+    "current_constructive_new_family_counterexample": null,
+    "target_discovery_completeness_candidate_state": "CONDITIONALLY_DISCHARGED_FOR_FIXED_INTERFACE_IF_INDEPENDENT_VERIFICATION_ACCEPTS_BASIS_EXHAUSTIVENESS_AND_ROLE_TO_FAMILY_TOTALITY",
+    "acceptance_and_performance_closure_separate": true
+  },
+  "falsifiers": [
+    "AN_ACTUAL_USEFUL_OPUS55_BEHAVIOR_IS_OBSERVED_THAT_CHANGES_USER_OR_ENVIRONMENT_RELEVANT_OUTCOMES_BUT_CANNOT_BE_DECOMPOSED_INTO_B0_THROUGH_B9.",
+    "A_BASIS_ROLE_IS_SHOWN_TO_REQUIRE_A_TRANSFORMATION_OR_CONTROL_PRIMITIVE_OUTSIDE_EVERY_LISTED_EXISTING_FAMILY.",
+    "OPUS55_HAS_A_LOAD_BEARING_NATIVE_INPUT_OUTPUT_OR_ACTUATOR_MODALITY_NOT_REPRESENTABLE_BY_THE_BOUND_TEXT_IMAGE_TEXT_ARTIFACT_DIAGRAM_MEMORY_AND_TOOL_INTERACTION_INTERFACE.",
+    "DOMAIN_SPECIFIC_KNOWLEDGE_IS_PROVED_TO_REQUIRE_PERMANENT_INTERNALIZATION_AS_A_CAPABILITY_MECHANISM_CONTRARY_TO_THE_TERMINAL_KNOWLEDGE_RULE.",
+    "GENERAL_ANALYSIS_WITHOUT_TOOL_CALLS_IS_PROVED_NOT_TO_BE_A_ZERO_TOOL_TRAJECTORY_WITHIN_THE_EXISTING_CROSS_DOMAIN_REASONING_FAMILY_AND_NOT_COVERED_BY_ANY_OTHER_EXISTING_FAMILY_UNION.",
+    "AN_EXISTING_FAMILY_DEFINITION_IS_TOO_NARROW_TO_COVER_THE_BASIS_ROLE_ASSIGNED_TO_IT_AND_NO_OTHER_EXISTING_FAMILY_COVERS_THE_RESIDUAL."
+  ],
+  "invalidation_and_reopen": [
+    "NEW_MATERIAL_OPUS55_INTERFACE_MODALITY_OR_ACTUATOR_EVIDENCE",
+    "NEW_USEFUL_BEHAVIOR_WITH_CONSTRUCTIVE_UNMAPPED_CAUSAL_ROLE",
+    "CHANGE_TO_CANONICAL_TARGET_RULE_FROM_USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION",
+    "CHANGE_TO_KNOWLEDGE_EXTERNAL_JIT_RULE",
+    "CHANGE_TO_19_FAMILY_DEFINITIONS_MATERIAL_TO_ROLE_COVERAGE"
+  ],
+  "terminal_effect_if_verified": {
+    "target_discovery_completeness_premise": "DISCHARGED_FOR_THE_FIXED_OPUS55_TARGET_INTERFACE_BY_SCOPE_COMPLETE_FUNCTIONAL_CHARACTERIZATION",
+    "open_world_boundary": "SATISFIED_BY_CHARACTERIZATION_ROUTE_NOT_BY_FINITE_ENUMERATION",
+    "root1_positive_gap": "REMAINS_ZERO_UNLESS_A_FALSIFIER_PRODUCES_A_CONSTRUCTIVE_UNMAPPED_ROLE",
+    "current_epoch_acceptance": "UNCHANGED_AND_STILL_MUST_CLOSE",
+    "literal_terminal": "STILL_FALSE_UNTIL_ALL_ACCEPTANCE_OWNERSHIP_AND_FINAL_REDUCER_GATES_CLOSE"
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_PROVED",
+    "NO_FAMILY_PERFORMANCE_PARITY_PROVED",
+    "NO_OWNERSHIP_OR_CAPABILITY_CREDIT",
+    "NO_CLAIM_FUTURE_CLAUDE_VERSIONS_SHARE_THE_SAME_INTERFACE",
+    "NO_CLAIM_A_NEW_DOMAIN_LABEL_CAN_NEVER_REVEAL_A_REAL_NEW_PRIMITIVE",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
