@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_MEMBERSHIP_BEFORE_MANDATORY_RESIDUAL_SCHEDULING_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__INDEPENDENT_SYMBOLIC_KERNEL_CONFIRMS_FAIL_CLOSED_PRECEDENCE_AND_SUBTRACTION_PRESERVATION__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TARGET_MEMBERSHIP_BEFORE_MANDATORY_RESIDUAL_SCHEDULING_LAW_20261005_V1.json"
+  },
+  "independent_kernel": "WOLFRAM_LANGUAGE",
+  "formalization": {
+    "P": "TARGET_MEMBERSHIP_PROVED",
+    "M": "MANDATORY_TERMINAL_SCHEDULING",
+    "S1_S2_S3": "THREE_INDEPENDENTLY_VERIFIED_DETERMINISTIC_SUBTRACTIONS",
+    "invariant": "Implies[M,P]",
+    "known_case": "Not[P]",
+    "required_consequence": "Not[M]"
+  },
+  "kernel_checks": [
+    {
+      "expression": "TautologyQ[Implies[And[Implies[M,P],Not[P]],Not[M]],{M,P}]",
+      "result": true
+    },
+    {
+      "expression": "SatisfiabilityCount[And[Implies[M,P],Not[P],M],{M,P}]",
+      "result": 0,
+      "meaning": "NO_MODEL_EXISTS_WHERE_MANDATORY_SCHEDULING_COEXISTS_WITH_UNPROVED_TARGET_MEMBERSHIP_UNDER_THE_INVARIANT"
+    },
+    {
+      "expression": "TautologyQ[Implies[And[S1,S2,S3,Implies[M,P],Not[P]],And[S1,S2,S3,Not[M]]],{S1,S2,S3,M,P}]",
+      "result": true,
+      "meaning": "THE_THREE_VERIFIED_SUBTRACTIONS_ARE_PRESERVED_WHILE_MANDATORY_RESIDUAL_SCHEDULING_IS_REMOVED"
+    }
+  ],
+  "connector_observation": {
+    "raw_kernel_result": "{True,{False,False},0,True}",
+    "note": "The second tuple element is the kernel's BooleanMinimize representation for the invariant plus Not[P]; the load-bearing checks are the first, third and fourth outputs."
+  },
+  "verification_result": {
+    "precedence_law_valid": true,
+    "contradictory_mandatory_state_unsatisfiable": true,
+    "verified_subtractions_preserved": true,
+    "scientific_semantic_residual_must_be_conditional_until_target_membership_is_proved": true
+  },
+  "hard_nonclaims": [
+    "NO_TARGET_MEMBERSHIP_PROOF_CREATED",
+    "NO_CAPABILITY_PARITY_PROOF_CREATED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
