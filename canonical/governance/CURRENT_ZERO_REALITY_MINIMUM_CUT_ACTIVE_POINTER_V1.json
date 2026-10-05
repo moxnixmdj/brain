@@ -256,11 +256,11 @@
     "direct_main_prewrite_enforced": false
   },
   "benchmark_witness_elimination": {
-    "status": "ACTIVE_SCHEDULING_EXTENSION__V2_PROOF_CARRYING_EVALUATOR_RELATION__ZERO_CREDIT",
+    "status": "ACTIVE_SCHEDULING_EXTENSION__V3_PROOF_CARRYING_ALL_PREMISES__ZERO_CREDIT",
     "synthesis": "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_SYNTHESIS_20261006_V1.json",
     "tournament_activation": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_BENCHMARK_WITNESS_ELIMINATION_ACTIVATION_20261006_V1.json",
-    "runtime": "canonical/runtime/benchmark_witness_elimination_compiler_v2.py",
-    "tests": "canonical/tests/test_benchmark_witness_elimination_compiler_v2.py",
+    "runtime": "canonical/runtime/benchmark_witness_elimination_compiler_v3.py",
+    "tests": "canonical/tests/test_benchmark_witness_elimination_compiler_v3.py",
     "target_external_score_atoms": 11,
     "proof_order": [
       "THRESHOLD_LOWER_BOUND",
@@ -269,18 +269,23 @@
       "EXACT_EXTERNAL_RESULT"
     ],
     "external_wait_role": "NONBLOCKING_WAKE_SOURCE",
-    "rule": "SYNTHESIZE_AND_FALSIFY_CHEAPEST_SOUND_THRESHOLD_CERTIFICATE_BEFORE_EXTERNAL_EVALUATION__ALL_CERTIFICATES_REQUIRE_V2_PROOF_CARRYING_FROZEN_TARGET_EVALUATOR_RELATION__GENERIC_PROTOCOL_PUBLIC_CALIBRATION_RESOURCE_COMPATIBILITY_OR_BARE_BOOLEAN_NEVER_SUBSTITUTE",
+    "rule": "SYNTHESIZE_AND_FALSIFY_CHEAPEST_SOUND_CERTIFICATE_BEFORE_EXTERNAL_EVALUATION__EVERY_LOAD_BEARING_PREMISE_MUST_BE_A_TARGET_SCOPED_CONTENT_ADDRESSED_PROOF_OBJECT__ASSERTION_ONLY_BOOLEANS_NEVER_SUBSTITUTE",
     "accounting": {
       "acceptance_credit_delta": 0,
       "capability_credit_delta": 0,
       "ownership_credit_delta": 0
     },
     "prior_runtime": "canonical/runtime/benchmark_witness_elimination_compiler_v1.py",
-    "runtime_git_blob_sha": "94488630eb1174ee75d98fc7bc74c44b0c9bfcd2",
-    "tests_git_blob_sha": "7123d4979578ff9d1d7fb9ec4c378dc91b7b6cd5",
+    "runtime_git_blob_sha": "ace06caa1a8680a0a52d5341345dd5413b0620aa",
+    "tests_git_blob_sha": "88019e79e0cb5d76cec49abb492bb017498355d0",
     "evaluator_relation_v2_activation": "canonical/governance/BENCHMARK_WITNESS_EVALUATOR_RELATION_V2_ACTIVATION_20261006_V1.json",
     "evaluator_relation_v2_activation_git_blob_sha": "bdf989ef3d2bc3a77606ab5d680bbacd1fa04fe1",
     "evaluator_relation_v2_verification": "canonical/verification/BENCHMARK_WITNESS_EVALUATOR_RELATION_V2_SPRITE_VERIFICATION_20261006_V1.json",
-    "evaluator_relation_v2_verification_git_blob_sha": "a1435b76832c59913de5f5a183ece4b8ee4b51cb"
+    "evaluator_relation_v2_verification_git_blob_sha": "a1435b76832c59913de5f5a183ece4b8ee4b51cb",
+    "prior_runtime_v2": "canonical/runtime/benchmark_witness_elimination_compiler_v2.py",
+    "all_premises_v3_activation": "canonical/governance/BENCHMARK_WITNESS_ALL_PREMISES_V3_ACTIVATION_20261006_V1.json",
+    "all_premises_v3_activation_git_blob_sha": "b1877fb4e78e701b43be6c35abe7ee51a46b3ad8",
+    "all_premises_v3_verification": "canonical/verification/BENCHMARK_WITNESS_ALL_PREMISES_V3_SPRITE_VERIFICATION_20261006_V1.json",
+    "all_premises_v3_verification_git_blob_sha": "6640c0aaea69132694aecd270abed8a0dc50bd48"
   }
 }
