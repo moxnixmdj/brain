@@ -53,6 +53,8 @@ def _calls(tree:ast.Module):
     for node in ast.walk(tree):
         if isinstance(node,ast.Call):
             q=_qname(node.func)
+            if q is None and isinstance(node.func,ast.Attribute):
+                q="*."+str(node.func.attr)
             if q: out.append((q,node))
     return out
 
