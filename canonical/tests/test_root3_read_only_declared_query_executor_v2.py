@@ -1,7 +1,5 @@
 from __future__ import annotations
 import pathlib, subprocess, tempfile, unittest
-ROOT=pathlib.Path("/home/sprite/root3-package-v1")
-sys.path.insert(0,str(ROOT))
 from canonical.runtime import root3_read_only_declared_query_executor_v2 as d
 from canonical.runtime import root3_read_only_local_file_query_executor_v1 as local
 from canonical.runtime import root3_read_only_package_metadata_executor_v1 as pkg
