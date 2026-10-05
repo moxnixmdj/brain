@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_STATIC_SVG_DIAGRAM_MECHANICS_KERNEL_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__BOUNDED_TYPED_DIAGRAM_IR_TO_RENDERABLE_SVG_MECHANICAL_CEILING__LOCAL_FALSIFICATION_PASS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Convert a bounded load-bearing part of Opus 5.5 text-based diagram output from learned uncertainty into deterministic owned mechanics, without claiming diagram content/layout/quality parity.",
+  "parent_repair": {
+    "path": "canonical/governance/CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V2_20261005.json",
+    "git_blob_sha": "02ee9918fc38f3bdee96f847d04e7fd1337b9e46",
+    "exact_residual": "HTML_SVG_RENDER_STRUCTURE_MECHANICS_CEILING"
+  },
+  "behavior_contract_candidate": {
+    "behavior_id": "TYPED_DIAGRAM_IR_TO_RENDERABLE_STATIC_SVG_001",
+    "inputs": "Validated typed diagram IR containing canvas, rect/ellipse nodes, labels, and directed labeled edges.",
+    "allowed_information": "Only the explicit IR; no target output, hidden evaluator, or task-specific solution.",
+    "required_output_or_action": "Emit a safe SVG whose canvas, node identities, labels, edge identities, source/target relations, and fragment references exactly encode the IR and which an independent real SVG renderer can rasterize.",
+    "success_condition": "Exact structural round-trip passes AND an installed real SVG rendering engine emits a valid PNG at or above the declared canvas dimensions.",
+    "failure_condition": "Schema/geometry invalid; identity/reference drift; unsafe script/event/external reference appears; renderer missing; render fails; or output dimensions regress.",
+    "dependency_boundary": "Content selection, semantic diagram decomposition, layout judgment, readability and presentation quality remain outside this mechanical contract.",
+    "bounded_scope": {
+      "schema": "BRAIN_STATIC_SVG_DIAGRAM_SPEC_V1",
+      "max_canvas_px": 4096,
+      "max_nodes": 128,
+      "max_edges": 256,
+      "node_shapes": [
+        "rect",
+        "ellipse"
+      ],
+      "edge_semantics": "DIRECTED_SOURCE_TARGET_WITH_OPTIONAL_LABEL",
+      "output": "STATIC_SVG"
+    }
+  },
+  "implementation": {
+    "compiler": {
+      "path": "canonical/runtime/html_svg_diagram_mechanics_v1.py",
+      "git_blob_sha": "9476c34e34f64f0e5babd00fa2e5967f41b4f5bb"
+    },
+    "compiler_tests": {
+      "path": "canonical/tests/test_html_svg_diagram_mechanics_v1.py",
+      "git_blob_sha": "30fd4a3a1d9d57b97168d68c6100558b6c6cd84c"
+    },
+    "real_renderer_oracle": {
+      "path": "canonical/runtime/svg_diagram_render_oracle_v1.py",
+      "git_blob_sha": "9a66f7d915fa6d510c9cda50b569f6e4ddd8eb25",
+      "admissible_engines": [
+        "rsvg-convert",
+        "inkscape"
+      ],
+      "rule": "NO_STATIC_PARSER_ONLY_RENDER_CREDIT__MISSING_REAL_RENDER_ENGINE_FAILS_CLOSED"
+    },
+    "renderer_tests": {
+      "path": "canonical/tests/test_svg_diagram_render_oracle_v1.py",
+      "git_blob_sha": "9c5385c81ef6f78dd5b53feb4aafc98e42caf2ad"
+    }
+  },
+  "local_nonindependent_preflight": {
+    "environment": "CURRENT_WORKER_CONTAINER__NOT_CANONICAL_INDEPENDENT_RUNNER",
+    "compiler_falsification_tests": "9_OF_9_PASS_BEFORE_CANONICAL_COMMIT",
+    "renderer_oracle_tests": "4_OF_4_PASS",
+    "real_renderer_observation": {
+      "engine": "inkscape",
+      "result": "PASS",
+      "test_canvas": [
+        640,
+        360
+      ]
+    },
+    "authority": "DEBUGGING_AND_CANDIDATE_EVIDENCE_ONLY__NO_TERMINAL_OR_ACCEPTANCE_CREDIT"
+  },
+  "breakthrough": {
+    "prior_shape": "DIAGRAM_OUTPUT_TREATED_AS_POTENTIALLY_ONE_NEW_BROAD_LEARNED_REALIZATION_CAPABILITY",
+    "new_shape": "FOR_THE_BOUND_TYPED_NODE_EDGE_DIAGRAM_CLASS__REALIZATION_SYNTAX_IDENTITY_REFERENCES_AND_RENDERABILITY_ARE_DETERMINISTIC_OWNED_MECHANICS;LEARNED_RESIDUAL_STARTS_AT_SEMANTIC_DECOMPOSITION_LAYOUT_AND_QUALITY",
+    "leverage": "REMOVES_MECHANICAL_FAILURE_MODES_FROM_ANY_LATER_MATCHED_DIAGRAM_QUALITY_COMPARISON_AND_PREVENTS_SCORING_LEARNED_JUDGMENT_FOR_XML_SERIALIZATION_OR_RENDERER_AVAILABILITY"
+  },
+  "scheduler_effect_if_independently_verified": {
+    "delete": [
+      "SEARCH_FOR_A_LEARNED_MODEL_TO_SERIALIZE_THIS_BOUNDED_DIAGRAM_CLASS",
+      "STATIC_XML_PARSE_AS_SUFFICIENT_RENDERABILITY_PROOF",
+      "ATTRIBUTE_RENDER_ENGINE_FAILURE_TO_DIAGRAM_JUDGMENT"
+    ],
+    "preserve": [
+      "PROVE_EXISTING_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_CONTRACT_UNDER_DIAGRAM_CONDITION",
+      "PROVE_EVIDENCE_TO_AUDIENCE_SYNTHESIS_VISUAL_ENCODING_CONDITION_WHERE_APPLICABLE",
+      "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+      "EXPAND_MECHANICAL_SCOPE_ONLY_WHEN_A_TARGET_ENTAILING_DIAGRAM_BEHAVIOR_IS_OUTSIDE_THIS_BOUND_CLASS"
+    ],
+    "next": "RUN_CONTENT_BOUND_INDEPENDENT_VERIFICATION_OF_THE_COMPILER_AND_REAL_RENDERER_ORACLE;THEN_USE_IT_AS_A_MECHANICAL_GATE_INSIDE_THE_DIAGRAM_CONDITION_ACCEPTANCE_ROUTE"
+  },
+  "falsifiers": [
+    "AN IR-VALID INPUT IN THE DECLARED BOUNDED SCOPE COMPILES TO STRUCTURALLY NONISOMORPHIC SVG.",
+    "A COMPILED SVG PASSES STRUCTURAL VALIDATION BUT FAILS THE FROZEN REAL SVG RENDERER FOR A MECHANICAL REASON.",
+    "A TARGET-ENTAILING DIAGRAM BEHAVIOR REQUIRES A MECHANICAL PRIMITIVE OUTSIDE THE DECLARED BOUNDED SCOPE; THAT BEHAVIOR REMAINS OPEN RATHER THAN BEING SILENTLY CREDITED.",
+    "INDEPENDENT TESTING FINDS SCRIPT EVENT EXTERNAL REFERENCE OR IDENTITY INJECTION THROUGH VALID IR."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_DIAGRAM_OUTPUT_PARITY",
+    "NO_CLAIM_CREATIVE_TEXT_PARITY",
+    "NO_CLAIM_EXISTING_ARTIFACT_JUDGMENT_IS_DIAGRAM_CONDITION_COMPLETE",
+    "NO_CLAIM_THIS_BOUNDED_KERNEL_COVERS_ALL_HTML_SVG_CUSTOM_VISUALS",
+    "NO_CLAIM_LOCAL_TESTS_ARE_INDEPENDENT_VERIFICATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

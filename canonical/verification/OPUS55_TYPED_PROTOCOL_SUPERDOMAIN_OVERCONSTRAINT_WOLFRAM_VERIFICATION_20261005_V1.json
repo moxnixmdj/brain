@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TYPED_PROTOCOL_SUPERDOMAIN_OVERCONSTRAINT_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_SYMBOLIC_COUNTEREXAMPLE_PASS__UNIVERSAL_PROTOCOL_POLICY_DOMINANCE_IS_STRICTLY_STRONGER_THAN_TARGET_PARITY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_INTRINSIC_TYPED_PROTOCOL_SUPERDOMAIN_20261005_V1.json",
+    "commit_sha": "e522124589e33da966a077eba35caeff47cbb6c9"
+  },
+  "engine": {
+    "name": "Wolfram Language",
+    "method": "Resolve over Reals",
+    "formulas": [
+      "Exists[{b,t,s}, 0<=t<=1 && 0<=b<=1 && 0<=s<=1 && b>=t && s>b]",
+      "ForAll[{b,t,s}, Implies[0<=t<=1 && 0<=b<=1 && 0<=s<=1 && b>=t && s>t, b>=s]]",
+      "4/5 >= 4/5",
+      "4/5 >= 1"
+    ],
+    "exact_output": [
+      true,
+      false,
+      true,
+      false
+    ]
+  },
+  "interpretation": {
+    "existential_counterexample_exists": true,
+    "universal_implication_valid": false,
+    "concrete_witness": {
+      "opus_target_score": "4/5",
+      "brain_score": "4/5",
+      "arbitrary_protocol_conformant_policy_score": "1"
+    },
+    "terminal_parity_holds": true,
+    "universal_superdomain_policy_dominance_holds": false,
+    "conclusion": "BRAIN_NONINFERIOR_TO_ACTUAL_OPUS55_DOES_NOT_ENTAIL_BRAIN_DOMINATES_EVERY_ARBITRARY_PROTOCOL_CONFORMANT_POLICY. USING THE UNIVERSAL STOCHASTIC POLICY SUPERDOMAIN AS THE PERFORMANCE DOMINANCE TARGET IS NOT GOAL-EQUIVALENT."
+  },
+  "scope": {
+    "proves": "THE LOGICAL OVERCONSTRAINT COUNTEREXAMPLE AND NONIMPLICATION",
+    "does_not_prove": [
+      "THE COMPLETE SEMANTIC TARGET ENVELOPE",
+      "CURRENT OPUS55 PERFORMANCE",
+      "BRAIN TERMINAL PARITY",
+      "TARGET DISCOVERY COMPLETENESS"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

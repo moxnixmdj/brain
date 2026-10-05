@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_EXPLICIT_EVALUATOR_ROUTE_TRUTH_REPAIR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_SYMBOLIC_AND_CANONICAL_AUTHORITY_RECOMPUTATION_PASS__SYNTHESIS_EXPLICIT_EVALUATOR_ROUTE_CONFIRMED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_EXPLICIT_EVALUATOR_ROUTE_TRUTH_REPAIR_20261005_V1.json",
+    "git_blob_sha": "069871b739017f418fd30176de5bfbc86d817094"
+  },
+  "checks": [
+    {
+      "id": "EXPLICIT_AGGREGATOR_IDENTITY",
+      "result": "PASS",
+      "authority_path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+      "authority_git_blob_sha": "0886f7592875a5b750cdd401aa783351ab2f0854",
+      "recomputed": "MATCHED_QUALITY_EQUALS_MINIMUM_OF_THE_FIVE_QUALITY_COMPONENT_SCORES; ANY_UNSUPPORTED_MATERIAL_CLAIM_HARD_ZEROS_MATCHED_QUALITY; EACH_COMPONENT_IN_[0,1]"
+    },
+    {
+      "id": "ACTIVE_METRIC_BINDING",
+      "result": "PASS",
+      "authority_path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_ACTIVATION_V1.json",
+      "authority_git_blob_sha": "1ca2de029b02ca8518e59e0d66a973e3e26e251b",
+      "recomputed": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS; FIVE_COMPONENT_AGGREGATOR_FROZEN; NO_EXISTING_BRAIN_RESULT_MAY_BE_REINTERPRETED_AS_MATCHED_QUALITY"
+    },
+    {
+      "id": "COVERAGE_METRIC_ALREADY_REDUCED",
+      "result": "PASS",
+      "authority_path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
+      "authority_git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
+      "recomputed": "BRAIN_REQUIRED_CLAIM_COVERAGE_LOWER_BOUND=1; ADMISSIBLE_METRIC_UPPER_BOUND=1; BRAIN_MINUS_COMPARATOR_LOWER_BOUND=0; ONLY_MATCHED_QUALITY_REMAINS_UNPROVED"
+    },
+    {
+      "id": "UNSUPPORTED_MATERIAL_CLAIMS_ALREADY_PROVED",
+      "result": "PASS",
+      "authority_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "authority_git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+      "recomputed": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_STATE_IS_PROVED"
+    },
+    {
+      "id": "SCOPE_COMPLETE_FOR_SYNTHESIS_DIMENSIONS",
+      "result": "PASS",
+      "authority_path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "authority_git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+      "recomputed": "SCOPE_RELATION_PROVEN_STRONGER; COVERAGE_COMPLETE_TRUE; EXACT_UNION; CHILDREN_INCLUDE_THE_FIVE_MATCHED_QUALITY_DIMENSIONS_PLUS_REQUIRED_EVIDENCE_COVERAGE"
+    },
+    {
+      "id": "WOLFRAM_MIN_CEILING_THEOREM",
+      "result": "PASS",
+      "engine": "WOLFRAM_LANGUAGE_KERNEL",
+      "input": "ASSUME 0<=c1..c5,tq<=1 AND c1=...=c5=1; CHECK Min[c1..c5]=1 AND Min[c1..c5]>=tq",
+      "raw_result": "True",
+      "coverage_check": "ASSUME 0<=target_coverage<=1; CHECK 1>=target_coverage",
+      "coverage_raw_result": "True"
+    },
+    {
+      "id": "HIDDEN_WEIGHT_ROUTE_NOT_LOAD_BEARING",
+      "result": "PASS",
+      "reason": "THE HIDDEN-EVALUATOR COUPLING THEOREM IS SOUND GENERICALLY, BUT ITS WEIGHT-UNCERTAINTY ADVANTAGE CANNOT REDUCE A PREDICATE WHOSE CANONICAL CASE-LEVEL EVALUATOR FUNCTION IS ALREADY EXPLICITLY FIXED AS MIN."
+    }
+  ],
+  "verdict": {
+    "synthesis_hidden_weight_search_required": false,
+    "explicit_evaluator_route_required": true,
+    "absolute_ceiling_route_sound_if_all_five_components_proved_at_one": true,
+    "matched_quality_predicate_currently_closed": false,
+    "acceptance_credit_delta": 0
+  },
+  "errors": [],
+  "hard_nonclaims": [
+    "NO_CLAIM_FIVE_COMPONENT_SCORERS_ARE_ALREADY_BOUND",
+    "NO_CLAIM_FIVE_COMPONENTS_ALREADY_HAVE_SCOPE_COMPLETE_CEILING_RESULTS",
+    "NO_MATCHED_QUALITY_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_AUTHENTICATED_ACCOUNT_ACCESS_FACT_SWEEP_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_OBSERVED_AUTHENTICATED_PROVIDER_MAIL_FACTS__SCHEDULING_ONLY__PARTIAL_GATE_REDUCTION__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_class": "CONNECTED_GMAIL_PROVIDER_ORIGIN_MESSAGES",
+  "facts": [
+    {
+      "provider": "BUILDKITE",
+      "source_date": "2026-10-05T00:02:29Z",
+      "source_subject": "Re: All Access Trial: confirm 8-vCPU Linux hosted agent + Docker for benchmark preflight",
+      "authenticated_sender_domain": "buildkite.com",
+      "observed_fact": "A Buildkite Staff Support Engineer replied that the All Access Trial would support the outlined use case.",
+      "outlined_use_case_components": [
+        "LINUX_LARGE_AMD64_8X32_OR_EQUIVALENT_8_VCPU_32_GB_SHAPE",
+        "ORDINARY_DOCKER_RUN_AND_DOCKER_COMPOSE_ON_HOSTED_LINUX_AGENT",
+        "ZERO_COST_TRIAL_USE_WITH_NO_PAID_PROVISIONING_ACCEPTABLE"
+      ],
+      "exact_interpretation": "PROVIDER_SUPPORTS_COMBINED_OUTLINED_USE_CASE",
+      "nonclaims": [
+        "NO_ACTIVE_TRIAL_ORG_PROVED",
+        "NO_CURRENT_AUTHENTICATED_BUILDKITE_SESSION_PROVED",
+        "NO_INDIVIDUALLY_ENUMERATED_YES_NO_RECEIPT_FOR_EACH_SUBCOMPONENT",
+        "NO_JOB_EXECUTION_OR_HARDWARE_RECEIPT",
+        "NO_TERMINAL_CASE_EXECUTION"
+      ],
+      "scheduler_effect": "REMOVE_CARRIER_CAPABILITY_UNCERTAINTY_FROM_A_SHARED_BUILDKITE_TB4_CHARTOGRAPHY_PREFLIGHT__KEEP_ACTIVE_TRIAL_ORG_AND_ZERO_COST_RUNTIME_RECEIPT_GATES"
+    },
+    {
+      "provider": "OPENROUTER",
+      "source_date": "2026-04-04T00:56:42Z",
+      "source_subject": "Welcome to OpenRouter",
+      "authenticated_sender_domain": "openrouter.ai",
+      "observed_facts": [
+        "Provider welcome message explicitly states that the user has an OpenRouter account.",
+        "Provider message states free models work without credits."
+      ],
+      "exact_interpretation": "ACCOUNT_EXISTENCE_PROVED__GENERIC_FREE_MODEL_ACCESS_CLAIMED_BY_PROVIDER",
+      "nonclaims": [
+        "NO_CURRENT_ACCOUNT_BALANCE_SNAPSHOT",
+        "NO_TOPUP_OR_CREDIT_RECEIPT",
+        "NO_CLAUDE_OPUS_5_5_ZERO_INCREMENTAL_CAPACITY_PROVED",
+        "NO_API_KEY_EXISTENCE_PROVED",
+        "NO_COMPARATOR_CALL_AUTHORITY"
+      ],
+      "scheduler_effect": "REMOVE_OPENROUTER_ACCOUNT_EXISTENCE_UNCERTAINTY_FROM_F_SYNTHESIS_COMPARATOR_CAPACITY_OR_STRONGER_PROOF__KEEP_CURRENT_BALANCE_OR_OPUS55_ZERO_INCREMENTAL_CAPACITY_GATE"
+    },
+    {
+      "provider": "HUGGING_FACE",
+      "source_date": "2026-09-04T14:44:27Z",
+      "source_subject": "[Hugging Face] Click this link to confirm your email address",
+      "authenticated_sender_domain": "huggingface.co",
+      "observed_fact": "Provider sent an account email-confirmation message after account creation.",
+      "exact_interpretation": "ACCOUNT_CREATION_EVENT_EVIDENCED",
+      "nonclaims": [
+        "NO_CURRENT_EMAIL_CONFIRMATION_STATE_PROVED",
+        "NO_CURRENT_LOGIN_PROVED",
+        "NO_CURRENT_TERMS_ACCEPTANCE_PROVED",
+        "NO_GATED_HLE_OR_OSWORLD_ASSET_ACCESS_PROVED"
+      ],
+      "scheduler_effect": "ACCOUNT_EXISTENCE_ALREADY_BOUND_ELSEWHERE__DO_NOT_TREAT_AS_HLE_OR_OSWORLD_ACCESS"
+    },
+    {
+      "provider": "GOOGLE_GEMINI",
+      "source_date": "2026-09-15T21:55:15Z",
+      "source_subject": "Welcome to Gemini",
+      "authenticated_sender_domain": "google.com",
+      "observed_fact": "Google sent a Gemini Apps welcome message to the connected account.",
+      "exact_interpretation": "GEMINI_APP_ACCOUNT_LEVEL_ACCESS_EVIDENCED",
+      "nonclaims": [
+        "NO_GOOGLE_AI_STUDIO_PROJECT_PROVED",
+        "NO_GEMINI_API_KEY_PROVED",
+        "NO_GEMINI_3_5_FLASH_FREE_CAPACITY_RECEIPT",
+        "NO_GOOGLE_CLOUD_PROJECT_BILLING_OR_QUOTA_SNAPSHOT"
+      ],
+      "scheduler_effect": "DO_NOT_USE_GEMINI_APP_WELCOME_AS_CHARTOGRAPHY_API_CAPACITY_PROOF"
+    }
+  ],
+  "negative_search_results": {
+    "buildkite_trial_activation_receipt_found": false,
+    "openrouter_balance_or_topup_receipt_found": false,
+    "huggingface_gated_benchmark_access_receipt_found": false,
+    "google_ai_studio_or_project_free_capacity_receipt_found": false,
+    "vals_provider_account_receipt_found": false,
+    "interpretation": "MAILBOX_SEARCH_ABSENCE_IS_NOT_PROVIDER_ACCOUNT_STATE_PROOF__IT_ONLY_PREVENTS_FALSE_POSITIVE_PROMOTION_FROM_MAIL"
+  },
+  "minimum_cut_effects": {
+    "A_SHARED_BUILDKITE_TB4_CHARTOGRAPHY_PREFLIGHT": {
+      "carrier_capability_uncertainty": "REDUCED",
+      "remaining_gate": [
+        "ACTIVE_OR_SELF_SERVICE_ALL_ACCESS_TRIAL_ORG",
+        "AUTHENTICATED_ZERO_CASE_RUNTIME_HARDWARE_DOCKER_COMPOSE_RECEIPT",
+        "HARD_ZERO_INCREMENTAL_SPEND_STOP"
+      ],
+      "gate_satisfied": false
+    },
+    "B_SELF_SERVICE_AND_ACCOUNT_FACT_SWEEP": {
+      "huggingface_account_existence": "ALREADY_EVIDENCED",
+      "remaining_gate": [
+        "CURRENT_HF_LOGIN_AND_TERMS_STATE",
+        "PINNED_HLE_OR_OSWORLD_ASSET_ACCESS",
+        "GEMINI_API_PROJECT_FREE_CAPACITY_RECEIPT"
+      ],
+      "gate_satisfied": false
+    },
+    "F_SYNTHESIS_COMPARATOR_CAPACITY_OR_STRONGER_PROOF": {
+      "openrouter_account_existence": "PROVED",
+      "remaining_gate": [
+        "AUTHENTICATED_CURRENT_ZERO_INCREMENTAL_OPUS55_CAPACITY_SNAPSHOT_OR_POSITIVE_EXISTING_BALANCE",
+        "OR_NEW_FORMAL_OR_EXHAUSTIVE_GENERAL_SEMANTIC_CEILING_PROOF"
+      ],
+      "gate_satisfied": false
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_public_verification_possible": false,
+  "connector_recheck_required_on_wake": true,
+  "next": "RECOMPUTE_ZERO_REALITY_MINIMUM_CUT_WITH_ACCOUNT_EXISTENCE_AND_BUILDKITE_CARRIER_COMPATIBILITY_REMOVED_AS_UNKNOWNS__DO_NOT_WAKE_F_WITHOUT_CURRENT_OPUS55_CAPACITY"
+}

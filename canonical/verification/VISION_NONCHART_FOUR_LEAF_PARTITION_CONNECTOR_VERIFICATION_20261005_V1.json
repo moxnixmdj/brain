@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_VISION_NONCHART_FOUR_LEAF_PARTITION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_EXACT_LITERAL_RECOMPUTATION_PASS__FOUR_NONCHART_LEAVES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/VISION_NONCHART_FOUR_LEAF_PARTITION_20261005_V1.json",
+    "git_blob_sha": "a95f412b365c8927547477232e8516c81e16abaf"
+  },
+  "inputs": [
+    {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    }
+  ],
+  "recomputation": {
+    "declared_content_classes": [
+      "dense documents",
+      "charts",
+      "screenshots",
+      "diagrams",
+      "complex real-world imagery"
+    ],
+    "chart_class": [
+      "charts"
+    ],
+    "exact_nonchart_remainder": [
+      "dense documents",
+      "screenshots",
+      "diagrams",
+      "complex real-world imagery"
+    ],
+    "nonchart_count": 4,
+    "partition_is_within_declared_family_literal": true,
+    "performance_credit_from_partition": false,
+    "errors": []
+  },
+  "consequence": "REPLACE_UNSTRUCTURED_NONCHART_REMAINDER_SEARCH_WITH_FOUR_LEAF_OR_ONE_VERIFIED_SUPERSET_PROOF_FRONTIER",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

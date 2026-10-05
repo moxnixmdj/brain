@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_HIDDEN_EVALUATOR_ROUTE_TRUTH_REPAIR_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__SYNTHESIS_EVALUATOR_EXPLICIT__HIDDEN_WEIGHT_ROUTE_DELETED__TARGET_PERFORMANCE_REMAINS_OPEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_HIDDEN_EVALUATOR_ROUTE_TRUTH_REPAIR_20261005_V1.json",
+    "git_blob_sha": "07921dd7a03c768933540b397656d8122ce6360f"
+  },
+  "sources": {
+    "matched_quality_activation": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_ACTIVATION_V1.json",
+      "git_blob_sha": "1ca2de029b02ca8518e59e0d66a973e3e26e251b"
+    },
+    "dimension_scorers_reducer_activation": {
+      "path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1.json",
+      "git_blob_sha": "300fb663e6b598b389961ddf663d88abcd206545"
+    },
+    "stronger_proof_falsification": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_STRONGER_PROOF_FALSIFICATION_20261005_V1.json",
+      "git_blob_sha": "5ed80b01e5d4b6ad768931e72d5a8edf22a86c63"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    }
+  },
+  "checks": {
+    "predicate_in_registry": true,
+    "predicate_not_proved_in_evidence_ledger": true,
+    "metric_activation_active": true,
+    "metric_component_count_is_5": true,
+    "metric_is_min_noncompensatory": true,
+    "unsupported_material_claims_hard_zero": true,
+    "dimension_scorers_and_reducer_active": true,
+    "strict_paired_pointwise_reducer_frozen": true,
+    "old_ceiling_shortcut_falsified": true,
+    "universal_ceiling_premise_not_proved": true
+  },
+  "deduction": [
+    "CURRENT_SYNTHESIS_CASE_LEVEL_MATCHED_QUALITY_HAS_NO_UNKNOWN_WEIGHT_VECTOR",
+    "FIVE_COMPONENT_SCORERS_AND_STRICT_PAIRED_SUFFICIENT_REDUCER_ARE_ALREADY_FROZEN_AND_ACTIVE",
+    "THEREFORE_HIDDEN_WEIGHT_IDENTIFICATION_IS_NOT_A_CURRENT_SYNTHESIS_INFORMATION_DEPENDENCY",
+    "THE_ATOMIC_PREDICATE_REMAINS_OPEN_BECAUSE_TARGET_PERFORMANCE_OR_A_SEPARATELY_VALID_STRONGER_UNIVERSAL_BRAIN_PROOF_IS_STILL_MISSING"
+  ],
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_ACCEPTANCE_CLOSURE",
+    "NO_TARGET_SCORE_OR_OUTCOME_BOUND",
+    "NO_UNIVERSAL_BRAIN_CEILING_PROOF",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

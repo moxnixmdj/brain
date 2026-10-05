@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_EXPLICIT_EVALUATOR_ROUTE_CORRECTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__SYNTHESIS_IS_EXPLICIT_EVALUATOR_UNKNOWN_TARGET_PERFORMANCE_NOT_HIDDEN_WEIGHT_PROBLEM__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "objective": "Prevent the new hidden-evaluator monotone-coupling route from being mis-scheduled as a way to remove unknown synthesis scorer weights. The synthesis evaluator is already fully frozen and independently verified; the remaining uncertainty is target outcome/performance or a universal Brain ceiling proof.",
+  "authorities": {
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+      "acceptance": "Brain conservative matched quality/coverage bound >= Opus matched bound on frozen synthesis portfolio."
+    },
+    "matched_quality_runtime": {
+      "path": "canonical/runtime/synthesis_matched_quality_metric_v1.py",
+      "git_blob_sha": "116b7394f4b0a6845056c798e966f4cc26f294bf"
+    },
+    "matched_quality_activation": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_ACTIVATION_V1.json",
+      "git_blob_sha": "1ca2de029b02ca8518e59e0d66a973e3e26e251b",
+      "status": "ACTIVE__INDEPENDENT_PUBLIC_RUNNER_PASS__PREEXPOSURE_MATCHED_QUALITY_AGGREGATOR_FROZEN__SCHEDULING_ONLY__ZERO_CREDIT"
+    },
+    "dimension_scorer_activation": {
+      "path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1.json",
+      "git_blob_sha": "300fb663e6b598b389961ddf663d88abcd206545",
+      "result": "FIVE_DETERMINISTIC_DIMENSION_SCORERS_AND_STRICT_PAIRED_REDUCER_FROZEN"
+    },
+    "prior_monotone_routing_candidate": {
+      "commit_sha": "8afa7e33cab66cb9f50bb4fce96bfd614362f4f5",
+      "claim_to_repair": "UNKNOWN_MONOTONE_WEIGHTS_ARE_A_REAL_INFORMATION_COST_THE_COUPLING_ROUTE_CAN_REMOVE"
+    },
+    "prior_stronger_proof_falsification": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_STRONGER_PROOF_FALSIFICATION_20261005_V1.json",
+      "git_blob_sha": "5ed80b01e5d4b6ad768931e72d5a8edf22a86c63"
+    }
+  },
+  "exact_evaluator": {
+    "quality_components": [
+      "claim_to_source_fidelity",
+      "uncertainty_and_disagreement_preservation",
+      "audience_adaptation",
+      "format_and_style_constraints",
+      "compression_without_decision_relevant_loss"
+    ],
+    "component_range": "[0,1]",
+    "unsupported_material_claim_rule": "IF_UNSUPPORTED_MATERIAL_CLAIMS_GT_0__MATCHED_QUALITY_EQUALS_0",
+    "otherwise": "MATCHED_QUALITY_EQUALS_MINIMUM_OF_THE_FIVE_COMPONENTS",
+    "required_claim_coverage": "SEPARATE_METRIC_ALREADY_DISCHARGED_BY_100_PERCENT_CEILING_ROUTE__MATCHED_QUALITY_REMAINS_OPEN",
+    "hidden_aggregation_weights_exist_in_current_contract": false
+  },
+  "theorem": {
+    "id": "EXPLICIT_SYNTHESIS_EVALUATOR_CLASSIFICATION",
+    "statement": "Under the active frozen synthesis contract, scorer-weight discovery is not a load-bearing premise because the case evaluator is exactly known. Any target-free discharge must instead prove a Brain universal ceiling/top-support condition over the full claimed scope; otherwise some target outcome/performance information remains necessary.",
+    "proof": [
+      "THE_ACTIVE_RUNTIME DEFINES_MATCHED_QUALITY EXACTLY AS ZERO_ON_ANY_UNSUPPORTED_MATERIAL_CLAIM ELSE MINIMUM_OF_FIVE_FROZEN_COMPONENTS.",
+      "THE_COMPONENT_SCORERS AND PORTFOLIO REDUCER ARE ALSO FROZEN AND INDEPENDENTLY VERIFIED.",
+      "THEREFORE THERE IS NO UNKNOWN SYNTHESIS_AGGREGATOR_WEIGHT VECTOR TO IDENTIFY OR ELIMINATE.",
+      "COORDINATEWISE_COMPONENT_DOMINANCE DOES IMPLY MIN_SCORE_DOMINANCE__BUT TO MAKE THIS TARGET_FREE BRAIN MUST BE PROVED IN A UNIVERSAL TOP SUPPORT CLASS OR AT THE GLOBAL SCORE CEILING.",
+      "THE_GLOBAL_SCORE_CEILING_IS_1 AND IS ACHIEVED ONLY WHEN EVERY_LOAD_BEARING_COMPONENT_IS_1_WITH_NO_UNSUPPORTED_MATERIAL_CLAIM.",
+      "THE_EXISTING_STRONGER_PROOF_FALSIFICATION STATES THAT THE REQUIRED_GENERAL_SEMANTIC_PREMISE_FOR_SUCH_A_UNIVERSAL_CEILING_IS_NOT_CURRENTLY_PROVED.",
+      "THEREFORE_MONOTONE_COUPLING_IS_NOT_A_CURRENT_INFORMATION_SOURCE_FOR_THIS_PREDICATE; IT_CAN_ONLY_REDUCE_FUTURE_TARGET_OUTCOME_EVIDENCE_IF_SOUND_MASS_OR_SUPPORT_BOUNDS_ARRIVE."
+    ]
+  },
+  "symbolic_recomputation": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "results": {
+      "coordinatewise_dominance_implies_min_aggregate_dominance": true,
+      "global_min_aggregate_ceiling_on_unit_hypercube": 1,
+      "ceiling_witness": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "scheduler_repair": {
+    "delete_now": [
+      "SEARCH_FOR_UNKNOWN_SYNTHESIS_AGGREGATOR_WEIGHTS",
+      "REQUEST_EXACT_SYNTHESIS_AGGREGATOR_WEIGHTS",
+      "TREAT_MONOTONE_COUPLING_AS_IF_IT_REMOVED_CURRENT_OPUS_PERFORMANCE_UNCERTAINTY_WITHOUT_TARGET_MASS_OR_SUPPORT_EVIDENCE"
+    ],
+    "classify_predicate_as": "EXPLICIT_EVALUATOR__UNKNOWN_TARGET_OUTCOME_PERFORMANCE__TARGET_FREE_ONLY_VIA_UNIVERSAL_BRAIN_TOP_SUPPORT_OR_OTHER_STRONGER_PROOF",
+    "current_routes_in_priority_order": [
+      "UNIVERSAL_MATCHED_QUALITY_CEILING_PROOF_IF_AND_ONLY_IF_GENERAL_SEMANTIC_PREMISES_CAN_BE_PROVED_SCOPE_COMPLETE",
+      "ZERO_INCREMENTAL_EXACT_OPUS55_MATCHED_COMPARATOR_CAPACITY_PLUS_FROZEN_IDENTICAL_CASE_EXECUTION_AFTER_AUTHORITY",
+      "NEW_SOUND_TARGET_OUTCOME_SUPPORT_OR_MASS_BOUNDS_THAT_ENABLE_MONOTONE_DOMINANCE_WITHOUT_EXACT_DISTRIBUTION"
+    ],
+    "wake_monotone_route_on": [
+      "NEW_SCOPE_COMPLETE_BRAIN_OUTCOME_SUPPORT_CERTIFICATE_STRONGER_THAN_CURRENT_FALSIFIED_CEILING_PREMISE",
+      "NEW_TARGET_OUTCOME_SUPPORT_OR_CONSERVATIVE_MASS_BOUNDS",
+      "MATERIAL_CHANGE_TO_FROZEN_SYNTHESIS_EVALUATOR"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_MONOTONE_COUPLING_THEOREM_IS_FALSE",
+    "NO_CLAIM_SYNTHESIS_MATCHED_QUALITY_IS_CLOSED",
+    "NO_CLAIM_BRAIN_HAS_UNIVERSAL_SCORE_1",
+    "NO_OPUS_RESULT_INFERRED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

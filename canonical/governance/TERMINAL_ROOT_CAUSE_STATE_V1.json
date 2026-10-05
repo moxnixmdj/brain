@@ -204,6 +204,20 @@
           "execution_authority": false,
           "promotion_authority": false,
           "fresh_reality_authority": false
+        },
+        "membership_authority": {
+          "activation_path": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V1_ACTIVATION_V1.json",
+          "activation_git_blob_sha": "c7974959ee4ae21f398d3b1a431ba86d5b504e18",
+          "runtime_path": "canonical/runtime/terminal_frontier_compiler_v1.py",
+          "runtime_git_blob_sha": "e916144f67d64d76b2d348d761125ee74905807b",
+          "verification_path": "canonical/verification/TERMINAL_FRONTIER_COMPILER_V1_CONNECTOR_VERIFICATION_20261005_V2.json",
+          "verification_git_blob_sha": "2124baae7333f2d3d6f9c869a51f33713f59abbe",
+          "status": "ACTIVE__DERIVE_EXACT_ROOT2_ROOT3_MEMBERSHIP_FROM_CURRENT_REGISTRY_EVIDENCE_ROOT_IDENTITY__STATIC_COUNT_REBIND_NOT_REQUIRED",
+          "scheduling_authority": true,
+          "execution_authority": false,
+          "promotion_authority": false,
+          "fresh_reality_authority": false,
+          "rule": "DYNAMIC_COMPILER_DEFINES_LIVE_MEMBERSHIP__CURRENT_V4_AND_WAKE_AWARE_V3_ARE_ROUTE_CACHE_FOR_THE_BOUND_14_24_EPOCH__RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA"
         }
       },
       "livebench_negative_resolution": {
@@ -546,6 +560,21 @@
       "execution_authority": false,
       "promotion_authority": false,
       "fresh_reality_authority": false
+    },
+    "live_terminal_frontier_compiler": {
+      "activation_path": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V1_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "c7974959ee4ae21f398d3b1a431ba86d5b504e18",
+      "runtime_path": "canonical/runtime/terminal_frontier_compiler_v1.py",
+      "runtime_git_blob_sha": "e916144f67d64d76b2d348d761125ee74905807b",
+      "verification_path": "canonical/verification/TERMINAL_FRONTIER_COMPILER_V1_CONNECTOR_VERIFICATION_20261005_V2.json",
+      "verification_git_blob_sha": "2124baae7333f2d3d6f9c869a51f33713f59abbe",
+      "status": "ACTIVE__DERIVE_EXACT_ROOT2_ROOT3_MEMBERSHIP_FROM_CURRENT_REGISTRY_EVIDENCE_ROOT_IDENTITY__STATIC_COUNT_REBIND_NOT_REQUIRED",
+      "scheduling_authority": true,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false,
+      "rule": "DYNAMIC_COMPILER_DEFINES_LIVE_MEMBERSHIP__CURRENT_V4_AND_WAKE_AWARE_V3_ARE_ROUTE_CACHE_FOR_THE_BOUND_14_24_EPOCH__RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+      "terminal_finality_authority": false
     }
   },
   "accounting": {
@@ -724,7 +753,7 @@
   },
   "root2_authority_reconciliation": {
     "date": "2026-10-05",
-    "status": "CANDIDATE_BRANCH_RECONCILIATION__LIVE_ROOT2_POINTERS_MATCH_ALREADY_ACTIVE_V4_AND_WAKE_AWARE_V3__ZERO_CREDIT",
+    "status": "REBASED_ON_CURRENT_MAIN__EXACT18_V4_WAKE_AWARE_V3_PLUS_LIVE_IDENTITY_COMPILER__ZERO_CREDIT",
     "reason": "CURRENT_ROOT_STATE_IS_14_24_AND_EXACT_18_BUT_TOP_LEVEL_ROOT2_POINTERS_STILL_REFERRED_TO_STALE_V12_PENDING_REBIND_TEXT_AFTER_V4_AND_WAKE_AWARE_V3_BECAME_ACTIVE",
     "compilation_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
     "compilation_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
@@ -745,6 +774,11 @@
     },
     "execution_authority": false,
     "promotion_authority": false,
-    "fresh_reality_authority": false
+    "fresh_reality_authority": false,
+    "base_main_commit": "b5f05bed03048017575dcc65096b97227c57bc89",
+    "supersedes_stale_control_plane": [
+      "ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12_AS_CURRENT_MEMBERSHIP_AUTHORITY",
+      "PENDING_EXACT_CURRENT_18_PREDICATE_REBIND_AFTER_CLEAN_LIVEBENCH_PROMOTION"
+    ]
   }
 }

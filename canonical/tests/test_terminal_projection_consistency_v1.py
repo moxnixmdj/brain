@@ -14,13 +14,28 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
     def test_live_projection_is_count_generic_and_consistent(self):
         docs,shas=self.live(); out=self.evaluate(docs,shas)
         self.assertTrue(out["pass"],out)
-        self.assertEqual(out["acceptance_closed_families"],4)
-        self.assertEqual(out["acceptance_open_families"],15)
-        self.assertEqual(out["atomic_predicates_proved"],11)
-        self.assertEqual(out["atomic_predicates_unresolved"],27)
+        root=docs["authority"]["current_root_partition_override"]
+        self.assertEqual(out["acceptance_closed_families"],root["accepted_families"])
+        self.assertEqual(out["acceptance_open_families"],root["open_families"])
+        self.assertEqual(out["atomic_predicates_proved"],root["proved_atomic"])
+        self.assertEqual(out["atomic_predicates_unresolved"],root["unresolved_atomic"])
         self.assertEqual(set(out["baseline_families"]),{"EXACT_SYMBOLIC_COMPUTATION","LONG_HORIZON_MEMORY_AND_CONTINUITY"})
         self.assertIn("SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",out["accepted_families"])
         self.assertIn("SUBAGENT_DELEGATION_AND_COORDINATION",out["accepted_families"])
+
+    def test_canonical_pointer_tracks_current_terminal_authority(self):
+        docs,shas=self.live()
+        pointer=_load("canonical/CANONICAL_POINTER.json")
+        root=docs["authority"]["current_root_partition_override"]
+        expected_blocker=(
+            f"TERMINAL_FALSE__{root['open_families']}_OF_19_FAMILIES_OPEN__"
+            f"{root['unresolved_atomic']}_OF_38_ATOMIC_PREDICATES_UNRESOLVED__"
+            "SEE_CURRENT_TERMINAL_AUTHORITY_NEXT_FOR_EXACT_ACTIVE_ROUTE"
+        )
+        current=pointer["current_frontier"]
+        self.assertEqual(current["critical_blocker"],expected_blocker)
+        self.assertEqual(current["highest_leverage_capability_gap"],expected_blocker)
+        self.assertEqual(current["next_step"],docs["authority"]["next_terminal_action"])
 
     def test_next_residual_family_closure_is_derived_without_code_change(self):
         docs,shas=self.live(); docs=copy.deepcopy(docs)

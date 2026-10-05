@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_ZERO_CRITICAL_INVARIANT_MINIMUM_PREMISE_CUT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_EXACT_BLOB_RECOMPUTATION_PASS__THREE_SEMANTIC_PREMISES_LOCALIZED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/COMPOSITION_ZERO_CRITICAL_INVARIANT_MINIMUM_PREMISE_CUT_20261005_V1.json",
+    "git_blob_sha": "cad34e4a8912b2ffa07d73d94c9651f2852d7247"
+  },
+  "exact_inputs": [
+    {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+      "git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    },
+    {
+      "path": "canonical/governance/OPUS55_COMPOSITIONAL_TRACE_REFINEMENT_TERMINAL_REDUCER_20261005_V1.json",
+      "git_blob_sha": "741c354c705a77972ba051dcc62917bfc53fa941"
+    },
+    {
+      "path": "canonical/verification/OPUS55_COMPOSITIONAL_TRACE_REFINEMENT_WOLFRAM_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "69baf09701eaeb59e105d0f95310d97023a25ef1"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+      "git_blob_sha": "8328e12804f64cab1c0d9509966cb1d2d8fb1f82"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
+      "git_blob_sha": "ab9f6fc19937d23edb24dc26a2affed96cea0a9a"
+    }
+  ],
+  "recomputation": {
+    "normalized_target_atoms_exact": true,
+    "normalized_zero_failure_metric_exact": true,
+    "forward_simulation_requires_scope_authority_and_no_hidden_composition_debt": true,
+    "grounded_composition_verifier_checks_structural_wiring_and_binding": true,
+    "grounded_composition_verifier_does_not_establish_universal_runtime_state_preservation": true,
+    "grounded_composition_verifier_does_not_establish_universal_runtime_evidence_provenance_completeness": true,
+    "direct_structural_reuse_closes_target": false,
+    "residual_premise_count": 3,
+    "errors": []
+  },
+  "consequence": [
+    "DELETE_STRUCTURAL_COMPOSITION_VERIFIER_AS_DIRECT_INVARIANT_CLOSURE_ROUTE",
+    "FOCUS_ZERO_REALITY_SEARCH_ON_P1_STATE_PRESERVATION_AND_P2_PROVENANCE_COMPLETENESS",
+    "RECOMPUTE_P3_ZERO_FAILURE_AGGREGATION_ONLY_AFTER_P1_AND_P2"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
