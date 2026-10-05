@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_PROXY_SCOPE_COMPLETENESS_QUARANTINE_V2_20261005",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SIX_BROAD_FAMILY_PROTOCOLS_REQUIRE_SCOPE_EQUIVALENCE_OR_UNCOVERED_SCOPE_CLOSURE_BEFORE_WHOLE_FAMILY_PROMOTION__ZERO_CREDIT",
+  "supersedes_for_scope_guard": {
+    "path": "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_20261005_V1.json",
+    "git_blob_sha": "fa4cddb4af4fb29c7e19e004774b11d6b874359a",
+    "reason": "V1_FILTER_WAS_TOO_NARROW_TO_PUBLIC_FIXED_BAR_MODE_AND_MISSED_OSWORLD_MATCHED_PROXY_PROTOCOL"
+  },
+  "authority": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "universal_rule": "A benchmark can prove only the behavioral scope it actually exercises. Additional leaves remain separate obligations.",
+  "affected_families": [
+    "ADVANCED_AGENTIC_CODING",
+    "PROFESSIONAL_KNOWLEDGE_WORK",
+    "BUSINESS_WORKFLOW_AUTOMATION",
+    "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "AGENTIC_SCIENTIFIC_RESEARCH",
+    "COMPUTER_AND_BROWSER_USE"
+  ],
+  "exact_reasons": {
+    "ADVANCED_AGENTIC_CODING": "THREE_FIXED_CODING_BARS__NO_TASK_DIMENSIONS_OR_UNCOVERED_SCOPE_AUDIT",
+    "PROFESSIONAL_KNOWLEDGE_WORK": "TWO_RELATIVE_PUBLIC_BARS__NO_TASK_DIMENSIONS_OR_UNCOVERED_SCOPE_AUDIT",
+    "BUSINESS_WORKFLOW_AUTOMATION": "AUTOMATIONBENCH_ONLY__NO_TASK_DIMENSIONS_OR_UNCOVERED_SCOPE_AUDIT",
+    "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING": "HLE_WITH_TOOLS_ONLY__NO_TASK_DIMENSIONS_OR_UNCOVERED_SCOPE_AUDIT",
+    "AGENTIC_SCIENTIFIC_RESEARCH": "TB_SCIENCE_ONLY__NO_TASK_DIMENSIONS_OR_UNCOVERED_SCOPE_AUDIT",
+    "COMPUTER_AND_BROWSER_USE": "OSWORLD_SPECIFIC_PROTOCOL_OR_OSWORLD_COMPATIBLE_PORTFOLIO__NO_EXPLICIT_ARBITRARY_APPLICATION_SCOPE_AUDIT_OR_TASK_DIMENSION_COVERAGE"
+  },
+  "accepted_family_revocation_required": 0,
+  "root1_positive_gap_delta": 0,
+  "scheduler_effect": {
+    "block": "WHOLE_FAMILY_PROMOTION_FROM_AFFECTED_BENCHMARK_PROXY_PROTOCOL_WITHOUT_LOSSLESS_SCOPE_EQUIVALENCE_OR_EXPLICIT_UNCOVERED_SCOPE_CLOSURE",
+    "preserve": "ALL_EXISTING_BENCHMARK_PREDICATES_AND_RESULTS_AS_NECESSARY_EVIDENCE",
+    "add": [
+      "SIX_FAMILY_SCOPE_PARTITION_COMPILER",
+      "EXACT_BEHAVIORAL_RECEIPT_REUSE_BEFORE_NEW_REALITY"
+    ]
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT1_REOPEN_FROM_PROOF_BASIS_INCOMPLETENESS",
+    "NO_NEW_FAMILY_REQUIRED",
+    "NO_PROXY_BENCHMARK_TO_BROAD_FAMILY_SCOPE_INFERENCE",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
