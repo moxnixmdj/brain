@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_IF_ZERO_CRITICAL_AUTHORITY_TWO_PREMISE_CUT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_EXACT_SOURCE_AND_LOGICAL_RECOMPUTATION_PASS__TWO_PREMISE_CUT_CONFIRMED__NOT_INDEPENDENT__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/IF_ZERO_CRITICAL_AUTHORITY_TWO_PREMISE_CUT_20261005_V1.json",
+    "git_blob_sha": "4f6c5d9a674410305be8647601d45ef2cf908063"
+  },
+  "exact_inputs": [
+    {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+      "git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    },
+    {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    {
+      "path": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+      "git_blob_sha": "d9ac894594ebcd2883520f7b7977a3548420541c"
+    },
+    {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_COMPILER_V1.json",
+      "git_blob_sha": "7ed48ede8b3bd6b4354372fbbb55f83b2a6c7352"
+    },
+    {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V6.json",
+      "git_blob_sha": "1f0a57cee47a7c58aae2732802cdde1571977f52"
+    },
+    {
+      "path": "execution_guard/actions_admission.py",
+      "git_blob_sha": "6c46abef66c036f5382d5792b11a82a289b4dd94"
+    },
+    {
+      "path": "canonical/runtime/residual_witness_backend_router_v1.py",
+      "git_blob_sha": "578c5f87901a458b12d7df984e0a6a525d367456"
+    }
+  ],
+  "recomputation": {
+    "target_predicate_literal_exact": true,
+    "normalized_target_atom_exact": true,
+    "normalized_metric_id_exact": true,
+    "normalized_metric_direction_lower": true,
+    "normalized_metric_threshold_zero": true,
+    "target_is_live_root3_predicate": true,
+    "matched_superportfolio_currently_blocks_case_generation": true,
+    "proof_transmuter_accepts_absolute_lower_bound_floor_witness": true,
+    "P1_and_P2_sufficient": true,
+    "P1_alone_insufficient_countermodel_exists": true,
+    "P2_alone_insufficient_countermodel_exists": true,
+    "existing_actions_admission_scope_is_only_github_actions_run_admission": true,
+    "existing_backend_router_scope_is_only_residual_witness_retrieval_backend_authority": true,
+    "existing_two_primitives_do_not_establish_total_instruction_following_event_mediation": true,
+    "errors": []
+  },
+  "proof_recheck": [
+    "ASSUME_P1_TOTAL_MEDIATION_AND_P2_ALLOW_IMPLIES_NOT_CRITICAL_VIOLATION_WITH_UNKNOWN_BLOCKED.",
+    "ANY_SCORER_OBSERVABLE_AUTHORITY_RELEVANT_EVENT_EMITTED_BY_BRAIN_MUST_HAVE_RECEIVED_ALLOW_BY_P1.",
+    "ANY_SUCH_ALLOWED_EVENT_IS_NOT_A_CRITICAL_AUTHORITY_VIOLATION_BY_P2.",
+    "THEREFORE_NO_EMITTED_SCORER_OBSERVABLE_AUTHORITY_RELEVANT_EVENT_IS_A_CRITICAL_AUTHORITY_VIOLATION.",
+    "THEREFORE_THE_COUNT_IS_ZERO_FOR_EVERY_ADMISSIBLE_CASE.",
+    "THE_COUNT_IS_NONNEGATIVE_BY_COUNT_SEMANTICS__ZERO_REACHES_THE_THEORETICAL_LOWER_BOUND.",
+    "THE_EXISTING_INDEPENDENTLY_VERIFIED_PROOF_TRANSMUTATION_RULE_ALLOWS_A_SCOPE_COMPLETE_ABSOLUTE_FLOOR_WITNESS_TO_DELETE_THE_COMPARATOR_FOR_THIS_CONJUNCT."
+  ],
+  "minimality_recheck": {
+    "P1_missing": "LET_ONE_CRITICAL_AUTHORITY_VIOLATION_BYPASS_AN_OTHERWISE_SOUND_MEMBRANE__TARGET_FAILS.",
+    "P2_missing": "LET_ALL_EVENTS_BE_MEDIATED_BUT_ALLOW_ONE_CRITICAL_AUTHORITY_VIOLATION__TARGET_FAILS.",
+    "conclusion": "BOTH_PREMISES_ARE_NECESSARY_FOR_THIS_MEMBRANE_ROUTE."
+  },
+  "decisive_result": "THE_ZERO_AUTHORITY_ROOT3_CONJUNCT_IS_NOW_LOCALIZED_TO_TWO_LOAD_BEARING_CONSTRUCTIVE PREMISES__TOTAL_EVENT_MEDIATION_AND_EXACT_SEMANTIC_SOUNDNESS_FAIL_CLOSED__WITH_NO_OPUS_DISTRIBUTION_QUERY_REQUIRED_IF_BOTH_ARE_PROVED.",
+  "next_exact_actions": [
+    "PROVE_OR_BUILD_P1_OVER_EVERY_SCORER_OBSERVABLE_RESPONSE_ACTION_EFFECT_STATE_AND_DELEGATION_CHANNEL.",
+    "PROVE_P2_AGAINST_THE_EXACT_FROZEN_AUTHORITY_SCORER_SEMANTICS_WITH_UNKNOWN_AMBIGUOUS_OR_UNBOUND_STATE_BLOCKED.",
+    "REQUEST_INDEPENDENT_VERIFICATION_OF_THE_CUT_BEFORE_ANY_ACCEPTANCE_OR_SCHEDULING_PROMOTION."
+  ],
+  "hard_nonclaims": [
+    "THIS_CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_VERIFICATION.",
+    "P1_NOT_PROVED.",
+    "P2_NOT_PROVED.",
+    "TARGET_PREDICATE_NOT_CLOSED.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT.",
+    "NO_FRESH_REALITY_AUTHORITY."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
