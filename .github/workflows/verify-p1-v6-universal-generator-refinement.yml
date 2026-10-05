@@ -1,0 +1,21 @@
+name: Verify P1 V6 universal terminal generator refinement
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/p1_v6_universal_terminal_generator_refinement_v1.py"
+      - "canonical/tests/test_p1_v6_universal_terminal_generator_refinement_v1.py"
+      - "canonical/governance/P1_V6_UNIVERSAL_TERMINAL_GENERATOR_REFINEMENT_ACTIVATION_V1.json"
+      - ".github/workflows/verify-p1-v6-universal-generator-refinement.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run universal old-generator to V6 refinement proof
+        run: python -m unittest canonical.tests.test_p1_v6_universal_terminal_generator_refinement_v1 -v
