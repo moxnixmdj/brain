@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import importlib.util
+import json
 import pathlib
 import sys
 import unittest
@@ -41,6 +43,24 @@ def fixture():
             },
         ],
     }
+
+def channel_receipt():
+    body = {
+        "schema": "PROJECT_BRAIN_COMPOSITION_RUNTIME_CHANNEL_GUARD_V1",
+        "status": "PASS",
+        "closed_world_observed_subset": True,
+        "file_reads": [],
+        "directory_reads": [],
+        "mutations": [],
+        "forbidden_events": [],
+        "acceptance_credit_delta": 0,
+    }
+    raw = json.dumps(
+        body, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+    body["channel_manifest_sha256"] = hashlib.sha256(raw).hexdigest()
+    return body
+
 
 class Tests(unittest.TestCase):
     def _first_step(self):
@@ -94,6 +114,41 @@ class Tests(unittest.TestCase):
         bad_actions[1]["args"]["path"]["$result"]["field"] = "undeclared"
         with self.assertRaisesRegex(guard.CompositionGuardError, "RESULT_REFERENCE_FIELD_UNDECLARED"):
             guard.validate_plan(bad_actions, p["composition_contract"], p["planning"]["initial_facts"])
+
+    def test_channel_receipt_is_content_bound_and_self_hash_verified(self):
+        p = planner.plan_actions(fixture())
+        cap = guard.seed_capsule(p["planning"]["initial_facts"])
+        row = p["composition_contract"][0]
+        action = guard.resolve_action_from_capsule(cap, row, p["actions"][0])
+        result = {"path": "canonical/runtime/EXECUTOR_POLICY_V1.json"}
+        receipt = channel_receipt()
+        cap = guard.append_action_result(cap, row, action, result, receipt)
+        self.assertEqual(guard.verify_capsule(cap)["status"], "PASS")
+        trace = [{
+            "cycle": 0,
+            "plan": action,
+            "result": result,
+            "composition_channel_receipt": receipt,
+            "composition_capsule_head_hash": cap["head_hash"],
+        }]
+        rebuilt = guard.rebuild_valid_prefix(
+            p["actions"],
+            p["composition_contract"],
+            p["planning"]["initial_facts"],
+            trace,
+        )
+        self.assertEqual(rebuilt["valid_count"], 1, rebuilt)
+
+        bad = copy.deepcopy(trace)
+        bad[0]["composition_channel_receipt"]["status"] = "FAIL_CLOSED"
+        rebuilt = guard.rebuild_valid_prefix(
+            p["actions"],
+            p["composition_contract"],
+            p["planning"]["initial_facts"],
+            bad,
+        )
+        self.assertEqual(rebuilt["valid_count"], 0, rebuilt)
+        self.assertIn("CHANNEL_RECEIPT_HASH_MISMATCH", rebuilt["reason"])
 
     def test_capsule_v2_binds_action_producer_and_evidence(self):
         _, cap, _, _ = self._first_step()
