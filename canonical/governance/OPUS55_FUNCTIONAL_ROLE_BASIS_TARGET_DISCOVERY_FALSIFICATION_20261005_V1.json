@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FUNCTIONAL_ROLE_BASIS_TARGET_DISCOVERY_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FAIL__FUNCTIONAL_ROLE_BASIS_DOES_NOT_ENTAIL_TARGET_BEHAVIOR_COMPLETENESS__ONTOLOGY_USE_RETAINED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "path": "canonical/governance/OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V1.json",
+    "git_blob_sha": "62c0e207ce935a02611700a69e0917f938792b11"
+  },
+  "objective": "Independently test whether coverage of every causal role B0-B9 by existing families is sufficient to discharge literal target-discovery completeness for all useful Opus 5.5 behaviors.",
+  "distinction": {
+    "role_ontology_completeness": "EVERY_OBSERVABLE_TRAJECTORY_CAN_BE_DESCRIBED_USING_THE_LISTED_CAUSAL_ROLE_TYPES",
+    "behavioral_semantic_completeness": "EVERY_TARGET_INPUT_CONDITIONED_TRANSFORMATION_POLICY_OR_USEFUL_BEHAVIOR_WITHIN_THOSE_ROLE_TYPES_IS_IDENTIFIED_OR_DOMINATED",
+    "key_result": "THE_FIRST_DOES_NOT_IMPLY_THE_SECOND"
+  },
+  "constructive_countermodel": {
+    "input_domain": ["0", "1"],
+    "target_behavior": "f(x)=x",
+    "brain_behavior": "g(x)=0",
+    "shared_causal_role_trace": [
+      "B0_INPUT_PERCEPTION_AND_GROUNDING",
+      "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+      "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION"
+    ],
+    "role_coverage_equal": true,
+    "behavioral_equivalence": false,
+    "distinguishing_input": 1,
+    "target_output_at_distinguishing_input": 1,
+    "brain_output_at_distinguishing_input": 0,
+    "conclusion": "IDENTICAL_ROLE_SUPPORT_AND_COMPLETE_ROLE_TAXONOMY_ARE_COMPATIBLE_WITH_A_MISSING_TARGET_BEHAVIOR_INSIDE_AN_ALREADY_COVERED_ROLE"
+  },
+  "formal_result": {
+    "proposition": "SAME_CAUSAL_ROLE_SET_IMPLIES_BEHAVIORAL_EQUIVALENCE",
+    "tautology": false,
+    "witness": "sameRoles=true__equivalentBehavior=false",
+    "finite_behavior_counterexample_exists": true
+  },
+  "logical_effect": {
+    "preserved": [
+      "THE_B0_THROUGH_B9_BASIS_MAY_REMAIN_A_USEFUL_CAUSAL_ROLE_ONTOLOGY",
+      "AN_UNOBSERVED_DOMAIN_LABEL_DOES_NOT_BY_ITSELF_PROVE_A_NEW_PRIMITIVE_CAUSAL_ROLE",
+      "THE_19_FAMILY_UNION_MAY_STILL_BE_A_CANDIDATE_PRIMITIVE_ROLE_COVER"
+    ],
+    "falsified": [
+      "TARGET_DISCOVERY_COMPLETENESS_IS_DISCHARGED_MERELY_BECAUSE_ALL_CAUSAL_ROLES_HAVE_EXISTING_FAMILY_COVER",
+      "OPEN_WORLD_BEHAVIORAL_COMPLETENESS_FOLLOWS_FROM_ROLE_TO_FAMILY_TOTALITY",
+      "ABSENCE_OF_AN_UNMAPPED_ROLE_PROVES_ABSENCE_OF_AN_UNOBSERVED_USEFUL_TARGET_BEHAVIOR"
+    ]
+  },
+  "repair": {
+    "allowed_terminal_use_of_functional_basis": "ROOT1_PRIMITIVE_ROLE_ONTOLOGY_OR_SCOPE_ORGANIZATION_ONLY",
+    "forbidden_terminal_use": "W1_W2_OR_W3_TARGET_DISCOVERY_COMPLETENESS_CERTIFICATE_WITHOUT_AN_ADDITIONAL_COMPLETE_BEHAVIOR_DOMAIN_OR_DOMINANCE_PREMISE",
+    "minimum_missing_premise": "A_PROOF_THAT_EVERY_SEMANTIC_BEHAVIOR_WITHIN_EACH_ROLE_IS_EITHER_EXHAUSTIVELY_CHARACTERIZED_OR_UNIVERSALLY_DOMINATED_UNDER_THE_FULL_ADMISSIBLE_TARGET_DOMAIN"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "PROMOTE_OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V1_TO_TARGET_DISCOVERY_COMPLETENESS_CERTIFICATE_FROM_ROLE_COVERAGE_ALONE"
+    ],
+    "preserve": [
+      "USE_FUNCTIONAL_BASIS_TO_AVOID_OPENING_NEW_FAMILIES_FROM_DOMAIN_LABELS_ALONE",
+      "KEEP_TARGET_DISCOVERY_FINALITY_GUARD_ACTIVE",
+      "CONTINUE_SEARCH_FOR_W1_W2_OR_A_REAL_W3_COMPLETE_DOMAIN_WITNESS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_B0_B9_ROLE_TAXONOMY_IS_FALSE",
+    "NO_CLAIM_A_NEW_PRIMITIVE_FAMILY_IS_REQUIRED",
+    "NO_CLAIM_LITERAL_TARGET_COMPLETENESS_IS_IMPOSSIBLE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

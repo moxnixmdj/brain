@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FUNCTIONAL_ROLE_BASIS_TARGET_DISCOVERY_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__COUNTERMODEL_AND_NONIMPLICATION_CONFIRMED_BY_INDEPENDENT_SYMBOLIC_KERNEL__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_FUNCTIONAL_ROLE_BASIS_TARGET_DISCOVERY_FALSIFICATION_20261005_V1.json"
+  },
+  "independent_kernel": "WOLFRAM_LANGUAGE",
+  "checks": [
+    {
+      "expression": "FindInstance[(x==0||x==1)&&x!=0,x,Integers]",
+      "result": "{{x->1}}",
+      "meaning": "FOR_f(x)=x_AND_g(x)=0__x=1_IS_A_DISTINGUISHING_INPUT_ON_THE_FINITE_DOMAIN"
+    },
+    {
+      "expression": "Resolve[ForAll[x,Implies[x==0||x==1,x==0]],Integers]",
+      "result": false,
+      "meaning": "g(x)=0_DOES_NOT_EQUAL_f(x)=x_ON_ALL_INPUTS"
+    },
+    {
+      "expression": "TautologyQ[Implies[sameRoles,equivalentBehavior],{sameRoles,equivalentBehavior}]",
+      "result": false,
+      "meaning": "SHARED_ROLE_COVERAGE_DOES_NOT_LOGICALLY_ENTAIL_BEHAVIORAL_EQUIVALENCE"
+    }
+  ],
+  "verification_result": {
+    "constructive_counterexample_valid": true,
+    "role_coverage_to_behavioral_completeness_implication_invalid": true,
+    "functional_basis_target_discovery_discharge_falsified": true,
+    "functional_basis_ontology_use_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT",
+    "NO_NEW_TARGET_BEHAVIOR_ASSERTED_FOR_OPUS55",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

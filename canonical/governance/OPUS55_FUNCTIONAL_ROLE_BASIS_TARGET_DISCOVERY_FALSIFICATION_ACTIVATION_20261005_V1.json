@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FUNCTIONAL_ROLE_BASIS_TARGET_DISCOVERY_FALSIFICATION_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__FUNCTIONAL_ROLE_BASIS_RESTRICTED_TO_ONTOLOGY_USE__TARGET_DISCOVERY_DISCHARGE_FORBIDDEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_FUNCTIONAL_ROLE_BASIS_TARGET_DISCOVERY_FALSIFICATION_20261005_V1.json"
+  },
+  "verification": {
+    "path": "canonical/verification/OPUS55_FUNCTIONAL_ROLE_BASIS_TARGET_DISCOVERY_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "result": "INDEPENDENT_SYMBOLIC_KERNEL_PASS"
+  },
+  "active_truth": {
+    "functional_role_basis_may_organize_primitive_roles": true,
+    "functional_role_basis_alone_proves_target_discovery_complete": false,
+    "eligible_as_W1": false,
+    "eligible_as_W2": false,
+    "eligible_as_W3_without_complete_behavior_domain_and_dominance_premises": false,
+    "literal_target_discovery_complete": false
+  },
+  "scheduler_delta": {
+    "delete": [
+      "VERIFY_OR_ACTIVATE_TARGET_DISCOVERY_COMPLETENESS_FROM_B0_B9_ROLE_EXHAUSTIVENESS_ALONE"
+    ],
+    "preserve": [
+      "FUNCTIONAL_BASIS_FOR_ROOT1_ONTOLOGY_COMPRESSION",
+      "TERMINAL_FRONTIER_COMPILER_V2_TARGET_DISCOVERY_GUARD",
+      "SEARCH_FOR_AUTHORITATIVE_EXHAUSTIVE_TARGET_SPECIFICATION",
+      "SEARCH_FOR_COMPLETE_IMPLEMENTATION_CHARACTERIZATION",
+      "BUILD_REAL_W3_ONLY_WITH_COMPLETE_DOMAIN_PREMISE_AND_UNIVERSAL_DOMINANCE"
+    ]
+  },
+  "critical_path_effect": "REMOVES_A_FALSE_SHORTCUT_TO_LITERAL_FINALITY_AND_PREVENTS_ROLE_TAXONOMY_FROM_BEING_MISPROMOTED_AS_BEHAVIORAL_COMPLETENESS.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "terminal": false
+}
