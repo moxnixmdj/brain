@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_UNIVERSAL_CEILING_THEOREM_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "DEDUCTIVE_FALSIFICATION__CURRENT_V3_COMPILER_DOES_NOT_PROVE_UNIVERSAL_CONTRACT_SUCCESS__TWO_LOAD_BEARING_GAPS_EXPOSED__ZERO_CREDIT",
+  "subject": {
+    "candidate_path": "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_PERFORMANCE_CEILING_CANDIDATE_V1.json",
+    "candidate_blob": "160ab6fbd05d1f29ffa5ea6bd9054fdde4b780e0",
+    "compiler_path": "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
+    "compiler_blob": "79d3896818b03223348f05adf4fdcd574f6f355e",
+    "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+  },
+  "load_bearing_contract": {
+    "registry_path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "registry_blob": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "success_requirements": [
+      "COVERAGE_IS_COMPLETE",
+      "DIMENSIONS_TYPES_INVARIANTS_ARE_CONSISTENT",
+      "INDEPENDENTLY_GENERATED_ACCEPTANCE_CHECKS_COVER_EACH_MATERIAL_GRAPH_EDGE"
+    ],
+    "verification_route": [
+      "FREEZE_GRAPH_BEFORE_FINAL_BUILDER_VALIDATION",
+      "CHECK_LINEAGE_COVERAGE",
+      "CHECK_INTERMEDIATE_INVARIANTS",
+      "CHECK_STRUCTURALLY_INDEPENDENT_CONSEQUENCES"
+    ]
+  },
+  "falsification": {
+    "gap_1": {
+      "id": "INVARIANT_TRUTH_NOT_VERIFIED",
+      "exact_behavior": "For every invariant row, v3 only validates that `kind` and `statement` are nonempty strings, then copies them into graph output.",
+      "missing_operation": "No executable invariant predicate, proof certificate, semantic consequence, or verifier is evaluated against the materialized graph.",
+      "counterexample_schema": "An admissible normalized rule may contain a syntactically nonempty but false invariant statement. v3 can return COMPILED because invariant truth is never checked.",
+      "consequence": "The theorem sentence claiming declared invariants are preserved is not entailed by the bound compiler."
+    },
+    "gap_2": {
+      "id": "INDEPENDENT_EDGE_ACCEPTANCE_NOT_GENERATED_OR_EXECUTED",
+      "exact_behavior": "v3 appends fixed string labels such as `ALL_INPUT_EDGES_PRESENT` and `EDGE_DELETION_OR_REWIRE_MUST_BE_DETECTABLE` to `acceptance_checks`.",
+      "missing_operation": "No independently derived consequence, edge-ablation oracle, alternate computation, proof certificate, or executable acceptance predicate is generated and run.",
+      "counterexample_schema": "A graph may contain an incorrect-but-schema-valid semantic dependency while the returned acceptance list still contains all generic labels.",
+      "consequence": "The contract requirement for independently generated acceptance checks over every material edge is not universally discharged."
+    }
+  },
+  "preserved_valid_parts": [
+    "FINITE_PENDING_RULE_RANKING_ESTABLISHES_TERMINATION_OR_FAIL_CLOSED_ON_UNRESOLVED_DEPENDENCY_OR_CYCLE",
+    "DECLARED_NODE_AND_RULE_TYPE_DIMENSION_METADATA_ARE_CHECKED_FOR_EXACT_MATCH",
+    "APPLICABLE_REQUIREMENTS_REQUIRE_AT_LEAST_ONE_DECLARED_CONSUMER",
+    "REQUIRED_OUTPUT_IDS_MUST_BE_TRACEABLE_TO_MATERIALIZED_NODES",
+    "EXCLUDED_REQUIREMENTS_REQUIRE_NONEMPTY_JUSTIFICATION",
+    "OPERATOR_IDENTITY_REMAINS_OPAQUE_AND_IS_NOT_SEMANTICALLY_INVENTED"
+  ],
+  "theorem_verdict": {
+    "universal_success_lower_bound_1_proved": false,
+    "theoretical_ceiling_1_integrable": false,
+    "standalone_performance_obligation_closed": false,
+    "coding_reuse_authorized": false,
+    "financial_reuse_authorized": false,
+    "reason": "AT_LEAST_TWO_SUCCESS_CONDITION_CONJUNCTS_ARE_NOT_PROVED_BY_THE_CURRENT_BOUND_COMPILER"
+  },
+  "minimum_repair_frontier": [
+    {
+      "id": "R1_PROOF_CARRYING_OR_EXECUTABLE_INVARIANTS",
+      "requirement": "Each load-bearing invariant must have machine-checkable semantics under the frozen input protocol, either as an executable total predicate over bound graph state or a proof certificate checked by a Brain-owned verifier.",
+      "nonshortcut": "A nonempty prose statement or copied metadata is not evidence that the invariant holds."
+    },
+    {
+      "id": "R2_STRUCTURALLY_INDEPENDENT_EDGE_CONSEQUENCE_VERIFIER",
+      "requirement": "For every material edge, generate and execute at least one acceptance consequence whose derivation is structurally independent of blindly replaying the builder graph, with edge deletion/rewire producing a detectable failed obligation.",
+      "nonshortcut": "A fixed list of intended check names is not an independent check."
+    }
+  ],
+  "repair_strategy": {
+    "preferred": "PROOF_CARRYING_NORMALIZED_RULE_BOUNDARY",
+    "reason": "It preserves the existing deterministic post-normalization compiler boundary while making invariant truth and independent edge consequences explicit machine-checkable inputs rather than pretending arbitrary semantic operators can be universally inferred.",
+    "candidate_v4_input_additions": [
+      "INVARIANT_CERTIFICATE_OR_TOTAL_PREDICATE_PER_LOAD_BEARING_INVARIANT",
+      "INDEPENDENT_CONSEQUENCE_CERTIFICATE_OR_VERIFIER_SPEC_PER_MATERIAL_EDGE",
+      "EXACT_VERIFIER_IDENTITY_AND_CONTENT_HASH",
+      "FAIL_CLOSED_ON_ANY_UNCHECKED_INVARIANT_OR_MATERIAL_EDGE"
+    ]
+  },
+  "scheduler_effect": {
+    "delete": [
+      "INTEGRATE_STRUCTURED_METHOD_1_OF_1_CEILING_FROM_V3",
+      "CLOSE_STRUCTURED_METHOD_STANDALONE_PERFORMANCE_OBLIGATION_FROM_CURRENT_CANDIDATE",
+      "REUSE_CURRENT_CANDIDATE_AS_CODING_OR_FINANCIAL_ABSOLUTE_CEILING"
+    ],
+    "activate": [
+      "BUILD_MINIMAL_PROOF_CARRYING_V4_CONTRACT_FOR_R1_AND_R2",
+      "INDEPENDENTLY_VERIFY_THE_REPAIRED_COMPILER_ON_EXACT_BOUND_BLOBS",
+      "ONLY_THEN_REATTEMPT_UNIVERSAL_CEILING"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CURRENT_COMPILER_IS_USELESS",
+    "NO_CLAIM_MATCHED_STATISTICAL_ROUTE_IS_INVALID",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
