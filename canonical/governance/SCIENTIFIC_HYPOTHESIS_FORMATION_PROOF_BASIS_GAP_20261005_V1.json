@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__DISTINCT_SCIENTIFIC_RESEARCH_BEHAVIORAL_LEAF_NOT_COVERED_BY_CURRENT_RESEARCH_CONTROL_CONTRACT__NO_NEW_FAMILY__ZERO_CREDIT",
+  "objective": "Bind the newly exposed scientific hypothesis/question formation behavior as a distinct acceptance-basis obligation inside AGENTIC_SCIENTIFIC_RESEARCH only if existing behavioral contracts do not already contain that transformation.",
+  "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "candidate_behavior": {
+    "behavior_id": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "inputs": "Observed phenomenon, existing evidence/provenance, domain constraints, unresolved anomalies, available tools and research budget",
+    "environment_state": "Scientific inquiry state before or between execution workflows where the next useful research question or falsifiable hypothesis is not already supplied",
+    "allowed_information": "JIT literature/data/tools plus current evidence graph; no hidden target answer",
+    "required_output_or_action": "Formulate one or more decision-relevant, falsifiable research questions or hypotheses; rank them by expected information gain and feasibility; specify a discriminating test or observation plan",
+    "success_condition": "Questions/hypotheses are scientifically coherent, falsifiable, nontrivial relative to evidence, and induce feasible tests whose outcomes materially discriminate live explanations",
+    "failure_condition": "Tautological or unfalsifiable hypothesis, restatement of supplied facts, no discriminating test, ignored decisive evidence, or dominated research choice",
+    "scope": "Scientific research-question and hypothesis formation from evidence state"
+  },
+  "noncoverage_recomputation": [
+    {
+      "existing_behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "verdict": "DOES_NOT_SUBSUME",
+      "reason": "Its inputs already contain a research question or task objective and an unresolved requirement graph; its transformation selects next query/source/tool/stop action to close evidence requirements. It does not generate or rank the research question/hypothesis itself."
+    },
+    {
+      "existing_behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "verdict": "DOES_NOT_SUBSUME",
+      "reason": "Its transformation derives acceptance consequences and counterexamples from an already supplied task specification/candidate. It does not choose a scientific hypothesis or experimental question from an inquiry state."
+    },
+    {
+      "existing_behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "verdict": "DOES_NOT_SUBSUME",
+      "reason": "It localizes an already observed execution failure and nominates a repair target; this is diagnosis, not forward scientific hypothesis formation."
+    },
+    {
+      "existing_behavior_id": "EXACT_INFORMATION_GAIN_WHEN_BELIEF_AND_OBSERVATION_MODEL_EXPLICIT",
+      "verdict": "COMPONENT_ONLY_NOT_SUBSUMING",
+      "reason": "Exact information-gain arithmetic can rank explicitly specified candidates but does not generate scientifically meaningful candidate hypotheses/tests or establish their feasibility and discriminating semantics."
+    }
+  ],
+  "first_party_relation": {
+    "source": "https://www.anthropic.com/claude-opus-5-5-system-card",
+    "section": "8.17 Life sciences capabilities and broader scientific capability surface",
+    "role": "Supports materiality of scientific inquiry/research capability; does not itself prove this exact leaf or its Brain parity."
+  },
+  "proof_basis_effect": {
+    "root1_positive_gap_delta": 0,
+    "new_family_required": false,
+    "behavioral_contract_registry_extension_candidate": true,
+    "current_38_registry_changed": false,
+    "current_14_of_38_changed": false,
+    "literal_terminal_finality_blocked_until_bound_or_stronger_implication_proved": true
+  },
+  "preferred_proof_order": [
+    "SEARCH_EXISTING_CONTENT_ADDRESSED_BRAIN_RECEIPTS_FOR_EXACT_HYPOTHESIS_OR_QUESTION_FORMATION_BEHAVIOR",
+    "TRY_FORMAL_OR_OBJECTIVE_DISCRIMINATION_CEILING_FOR_BOUNDED_SUBREGIONS",
+    "EMBED_SCOPE_COMPLETE_LEAF_SCORING_IN_EXISTING_T3_RESEARCH_PORTFOLIO_BEFORE_CREATING_ANY_NEW_PORTFOLIO",
+    "USE_MATCHED_DIRECT_NONINFERIORITY_ONLY_FOR_IRREDUCIBLE_OPEN_ENDED_RESIDUAL"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_BRAIN_LACKS_THE_BEHAVIOR",
+    "NO_NEW_ACCOUNTING_FAMILY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CLAIM_THIS_CANDIDATE_ITSELF_EXTENDS_THE_ACTIVE_BEHAVIORAL_REGISTRY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
