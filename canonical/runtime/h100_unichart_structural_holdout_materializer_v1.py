@@ -10,7 +10,7 @@ FILES=[
  ('augmented','ChartQA Dataset/val/val_augmented.json','131068b504407d9cdd8413fe5c574772bb241613'),
 ]
 def git_blob_sha(blob:bytes)->str:
-    return hashlib.sha1(b'blob '+str(len(blob)).encode()+b'\\0'+blob).hexdigest()
+    return hashlib.sha1(b'blob '+str(len(blob)).encode()+bytes([0])+blob).hexdigest()
 out=[]
 imgdir=ROOT/'chartqa_holdout_images'; imgdir.mkdir(exist_ok=True)
 for kind,path,expected_blob_sha in FILES:
