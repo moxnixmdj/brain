@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_LITERAL_TERMINAL_NOW_ATTAINABILITY_CUT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__CURRENT_LITERAL_FINALITY_HAS_NO_INFORMATION_POSITIVE_INTERNAL_CLOSURE_ROUTE_WITHOUT_EXTERNAL_COMPLETE_DOMAIN_WAKE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/LITERAL_TERMINAL_NOW_ATTAINABILITY_CUT_20261005_V1.json",
+    "git_blob_sha": "2d80cbb05ca95bc03d57523a8bfbf181c9441afb"
+  },
+  "bound_inputs": {
+    "w1_audit": {
+      "path": "canonical/governance/OPUS55_AUTHORITATIVE_COMPLETENESS_SOURCE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "3ceb15e65f8fcb261ef176a1be974c3265651658",
+      "result": "NO_EXHAUSTIVE_USEFUL_CAPABILITY_ATTESTATION_FOUND_IN_BOUND_CURRENT_FIRST_PARTY_SET"
+    },
+    "w2_audit": {
+      "path": "canonical/governance/OPUS55_W2_IMPLEMENTATION_CHARACTERIZATION_AUTHORIZED_AVAILABILITY_AUDIT_20261005_V1.json",
+      "git_blob_sha": "6fe363e4ae632c7c0f049ec9b8f5f808a2c7ae82",
+      "result": "NO_BRAIN_ACCESSIBLE_COMPLETE_IMPLEMENTATION_CHARACTERIZATION_IN_CURRENT_AUTHORIZED_EVIDENCE"
+    },
+    "w3_collapse": {
+      "path": "canonical/governance/OPUS55_W3_DOMAIN_PREMISE_COLLAPSE_THEOREM_20261005_V1.json",
+      "git_blob_sha": "2ce89c5ad58fee1837c4e43f409af084c12af57e",
+      "result": "W3_REQUIRES_COMPLETE_TARGET_DOMAIN_PREMISE"
+    },
+    "finite_black_box_lower_bound": {
+      "path": "canonical/governance/FINITE_BLACK_BOX_TARGET_UNIVERSAL_CERTIFICATION_LOWER_BOUND_20261005_V2.json",
+      "git_blob_sha": "1361bc41d48d3ba843a9ae3e3c91f09ee41e512d",
+      "result": "FINITE_EXACT_TARGET_QUERIES_CANNOT_CERTIFY_LITERAL_ALL"
+    }
+  },
+  "live_first_party_recomputation": [
+    {
+      "source": "https://www.anthropic.com/claude/opus",
+      "observed": "Uses nonexhaustive 'Key use cases include' language and offers Opus 5.5 via hosted Claude/API/cloud routes.",
+      "supports": ["W1_UNDISCHARGED", "HOSTED_ACCESS_NOT_W2"]
+    },
+    {
+      "source": "https://www.anthropic.com/transparency",
+      "observed": "Calls the system card source complete for publicly reported evaluation results, not complete for all useful behaviors; model/training description remains high level and proprietary.",
+      "supports": ["W1_UNDISCHARGED", "W2_UNDISCHARGED"]
+    },
+    {
+      "source": "https://www.anthropic.com/responsible-scaling-policy",
+      "observed": "Requires multi-party authorization, temporary least-privilege access and anti-exfiltration controls for model weights.",
+      "supports": ["W2_NOT_PUBLICLY_AVAILABLE_AS_COMPLETE_IMPLEMENTATION_CHARACTERIZATION"]
+    },
+    {
+      "source": "https://www.anthropic.com/research/deprecation-commitments",
+      "observed": "Anthropic preserves model weights internally and describes possible future public availability of select past models.",
+      "supports": ["WEIGHT_EXISTENCE_DOES_NOT_EQUAL_CURRENT_BRAIN_ACCESS", "W2_FUTURE_WAKE_REMAINS_POSSIBLE"]
+    }
+  ],
+  "recomputed_logic": {
+    "complete_target_domain_information_required": true,
+    "w1_currently_discharged": false,
+    "w2_currently_discharged": false,
+    "w3_without_complete_domain_can_close_literal_finality": false,
+    "finite_black_box_expansion_can_close_literal_finality": false,
+    "current_internal_information_positive_literal_finality_action_count": 0,
+    "literal_terminal_soundly_certifiable_now": false,
+    "goal_redefined": false,
+    "observed_epoch_work_remains_information_positive": true
+  },
+  "scheduler_verdict": {
+    "literal_finality_lane": "SLEEP_UNTIL_EXTERNAL_COMPLETE_DOMAIN_WAKE",
+    "observed_epoch_lane": "CONTINUE",
+    "wake_classes": [
+      "TARGET_OWNER_EXHAUSTIVE_BEHAVIOR_SPEC_OR_ATTESTATION",
+      "AUTHORIZED_COMPLETE_IMPLEMENTATION_CHARACTERIZATION",
+      "OTHER_SOUND_COMPLETE_TARGET_DOMAIN_WITNESS"
+    ]
+  },
+  "verification_class": "CONNECTED_CANONICAL_PLUS_LIVE_FIRST_PARTY_RECOMPUTATION__NOT_INDEPENDENT_PUBLIC_RUNNER",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TERMINAL_GOAL_IS_IMPOSSIBLE_IN_PRINCIPLE",
+    "NO_CLAIM_W1_OR_W2_WILL_NEVER_EXIST",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
