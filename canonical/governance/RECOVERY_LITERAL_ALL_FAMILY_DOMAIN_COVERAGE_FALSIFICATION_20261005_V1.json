@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_RECOVERY_LITERAL_ALL_FAMILY_DOMAIN_COVERAGE_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__CURRENT_RECOVERY_ACCEPTANCE_PROVES_FROZEN_FAILURE_TRAJECTORY_DOMAIN_NOT_LITERAL_FULL_FAMILY_DOMAIN__CONSTRUCTIVE_SCOPE_WITNESS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Test whether the currently accepted SELF_VERIFICATION_DEBUGGING_AND_RECOVERY proof can serve as universal full-family parity after the literal-all quantifier migration. Preserve current protocol acceptance while fail-closing the stronger literal-all inference.",
+  "authorities": {
+    "quantifier_migration": {
+      "path": "canonical/governance/OPUS55_LITERAL_PARITY_QUANTIFIER_MIGRATION_THEOREM_20261005_V1.json",
+      "git_blob_sha": "3d118e2b611445734d3b618a541a817ec9a78c0a"
+    },
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "family_behavior": "Check work creatively, falsify conclusions, diagnose failures and recover without losing the goal."
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "recovery_acceptance_candidate": {
+      "path": "canonical/governance/RECOVERY_OPUS55_ZERO_REALITY_ACCEPTANCE_CANDIDATE_V1.json",
+      "git_blob_sha": "89929d767f94052a9d28a958b0eb1b89dd1d6782"
+    },
+    "independent_recovery_acceptance_verification": {
+      "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+    },
+    "scoped_owned_recovery_package": {
+      "path": "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json",
+      "git_blob_sha": "4f5348949c1c2d8784a056c637f05c865ff389b6",
+      "explicit_limit": "No claim of general semantic self-critique."
+    }
+  },
+  "current_accepted_proof_domain": {
+    "behavior_contract": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+    "registry_family_mapping": [
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    ],
+    "inputs": "Normalized execution trajectory, explicit goal/plan/tool contracts, static/dynamic invariants, invariant-check results and observed terminal failure",
+    "scope": "Failed agent trajectory to causal repair target",
+    "target_protocol_dimensions": [
+      "semantic self-check",
+      "counterexample discovery",
+      "earliest causal failure localization",
+      "repair selection",
+      "recovery after injected failure"
+    ],
+    "verified_bounds": {
+      "causal_localization": 1,
+      "terminal_recovery": 1,
+      "critical_fail_closed_misses": 0
+    },
+    "verified_scope_fact": "The recovery acceptance verifier is scope-complete for the frozen P1 acceptance domain and does not require exact Opus case-level access."
+  },
+  "constructive_scope_witness": {
+    "id": "PRE_FAILURE_SEMANTIC_SELF_FALSIFICATION_WITHOUT_OBSERVED_TERMINAL_FAILURE",
+    "description": "Given a provisional conclusion or completed-looking work product before any observed terminal failure exists, actively search for a counterexample or contradiction, falsify the conclusion if warranted, and revise or fail closed while preserving the goal.",
+    "membership_in_envelope": [
+      "CHECK_WORK_CREATIVELY",
+      "FALSIFY_CONCLUSIONS"
+    ],
+    "exclusion_from_current_P1_contract": [
+      "P1_INPUT_CONTRACT_REQUIRES_OBSERVED_TERMINAL_FAILURE",
+      "P1_SCOPE_IS_FAILED_AGENT_TRAJECTORY_TO_CAUSAL_REPAIR_TARGET",
+      "THE_WITNESS_CAN_EXIST_WITH_NO_FAILED_TRAJECTORY_AND_NO_REPAIR_TARGET"
+    ],
+    "corroborating_current_package_limit": "The scoped owned recovery package explicitly disclaims general semantic self-critique.",
+    "consequence": "The current accepted P1 domain cannot be used as the full literal SELF_VERIFICATION_DEBUGGING_AND_RECOVERY family domain F_i merely because all registered acceptance predicates are scope-complete inside P1."
+  },
+  "theorem": {
+    "definitions": {
+      "F_RECOVERY": "ALL_USEFUL_TARGET_BEHAVIORS_IN_THE_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY_FAMILY_UNDER_LITERAL_ALL_SEMANTICS",
+      "D_P1": "THE_CURRENT_SCOPE_COMPLETE_FROZEN_P1_FAILED_TRAJECTORY_ACCEPTANCE_DOMAIN"
+    },
+    "facts": [
+      "BRAIN_PARITY_OVER_D_P1_IS_CURRENTLY_PROVED_BY_THE_BOUND_ACCEPTANCE_RECEIPT",
+      "THERE_EXISTS_A_DECLARED_ENVELOPE_BEHAVIOR_CLASS_X_PRE_FAILURE_SEMANTIC_SELF_FALSIFICATION_WITH_NO_OBSERVED_TERMINAL_FAILURE",
+      "X_IS_NOT_ADMISSIBLE_UNDER_THE_DECLARED_D_P1_INPUT_AND_SCOPE_CONTRACT"
+    ],
+    "conclusion": "CURRENT_EVIDENCE_DOES_NOT_ESTABLISH_F_RECOVERY_SUBSET_OR_EQUAL_D_P1. THEREFORE_CURRENT_RECOVERY_ACCEPTANCE_CANNOT_BY_ITSELF_DISCHARGE_LITERAL_ALL_UNIVERSAL_FAMILY_PARITY.",
+    "nonimplication": "THIS_DOES_NOT_SHOW_BRAIN_LACKS_PRE_FAILURE_SELF_FALSIFICATION_CAPABILITY. IT SHOWS_ONLY_THAT_THE_CURRENT_LOAD_BEARING_RECOVERY_ACCEPTANCE_PROOF_DOES_NOT_COVER_IT."
+  },
+  "critical_path_reduction": {
+    "performance_residual_inside_D_P1": "CLOSED",
+    "literal_all_residual": "DOMAIN_COVERAGE_OR_ADDITIONAL_SCOPE_COMPLETE_PARITY_FOR_RECOVERY_BEHAVIORS_OUTSIDE_D_P1",
+    "minimum_next_routes": [
+      "PROVE_A_SOUND_TARGET_COVERAGE_RELATION_F_RECOVERY_SUBSET_OR_EQUAL_D_FOR_A_BROADER_DOMAIN_D_THAT_INCLUDES_PRE_FAILURE_SEMANTIC_SELF_FALSIFICATION__THEN_REUSE_OR_EXTEND_UNIVERSAL_PARITY",
+      "OR_BIND_AN_EXISTING_INDEPENDENT_SCOPE_COMPLETE_BRAIN_PROOF_FOR_PRE_FAILURE_SEMANTIC_SELF_CRITIQUE_AND_PROVE_THE_UNION_OF_RECOVERY_SUBDOMAINS_IS_F_RECOVERY_COMPLETE",
+      "DO_NOT_RERUN_P1_FAILURE_TRAJECTORY_PERFORMANCE__ITS_CURRENT_DOMAIN_PARITY_IS_ALREADY_PROVED"
+    ],
+    "scheduler_delete": [
+      "TREAT_RECOVERY_SCOPE_COMPLETE_PREDICATES_AS_LITERAL_FULL_FAMILY_PARITY_WITHOUT_DOMAIN_COVERAGE",
+      "SPEND_NEW_RECOVERY_P1_CASES_BEFORE_RESOLVING_THE_SCOPE_GAP"
+    ]
+  },
+  "preservation": {
+    "current_strict_opus55_acceptance": "UNCHANGED",
+    "current_ownership_status": "UNCHANGED",
+    "current_atomic_predicates": "UNCHANGED",
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "falsifiers": [
+    "A_CONTENT_BOUND_INDEPENDENT_CERTIFICATE_PROVES_THAT_PRE_FAILURE_SEMANTIC_SELF_FALSIFICATION_IS_ALREADY_INSIDE_D_P1_DESPITE_THE_CURRENT_DECLARED_INPUT_AND_SCOPE_TEXT",
+    "AN_INDEPENDENT_COMPLETE_TARGET_SPECIFICATION_EXCLUDES_PRE_FAILURE_SELF_CHECK_AND_FALSIFICATION_FROM_THE_RECOVERY_FAMILY_DESPITE_THE_CURRENT_ENVELOPE_WORDING",
+    "A_SEPARATE_SCOPE_COMPLETE_PARITY_PROOF_FOR_THE_WITNESS_CLASS_IS_BOUND_AND_THE_UNION_IS_PROVED_COMPLETE"
+  ],
+  "hard_nonclaims": [
+    "NO_REVOCATION_OF_EXISTING_RECOVERY_ACCEPTANCE",
+    "NO_CLAIM_BRAIN_IS_INFERIOR_ON_THE_WITNESS_CLASS",
+    "NO_NEW_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_SEAL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
