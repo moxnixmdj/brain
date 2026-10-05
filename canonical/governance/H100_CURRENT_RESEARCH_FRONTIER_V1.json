@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_H100_RESEARCH_FRONTIER_STATE_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_RESEARCH_FRONTIER__DIRECT_UNKNOWN_DOMAIN_TRANSFER_ATOM_INDEPENDENTLY_PROVED_V6__MYSTERYMECHANISM_SPARSE_DISCOVERY_AND_PRIVATE_SCORE_EVIDENCE_NOW_CRITICAL__ZERO_H100_TERMINAL_CREDIT",
+  "status": "ACTIVE_RESEARCH_FRONTIER__UNKNOWN_DOMAIN_TRANSFER_ATOM_CLOSED_BY_INDEPENDENT_V7_V8_SUCCESSOR__MYSTERYMECHANISM_PRIVATE_SCORE_EVIDENCE_REMAINS_CRITICAL__ZERO_H100_TERMINAL_CREDIT",
   "hypothesis": "FULL_FROZEN_BRAIN_CAPABILITY_ENVELOPE_WITH_LE_100000000_PERSISTENT_LEARNED_BYTES_AND_ZERO_EXTERNAL_LEARNED_CAPABILITY_PROVIDER_DURING_SCORED_EXECUTION",
   "current_evidence": {
     "measurement_layer": {
@@ -240,15 +240,18 @@
     "ownership_credit_delta": 0
   },
   "post_v6_reconciliation": {
-    "date": "2026-10-05",
-    "unknown_domain_transfer_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
-    "state": "PROVED",
-    "source": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
-    "source_git_blob_sha": "bfbed0be7da9a3bfe1d007ca0576480c48103596",
-    "mysterymechanism_candidate": "canonical/runtime/mysterymechanism_sparse_symbolic_adapter_v1.py",
-    "mysterymechanism_preexposure": "canonical/governance/MYSTERYMECHANISM_SPARSE_SYMBOLIC_ADAPTER_PREEXPOSURE_V1.json",
-    "private_score_gate": "canonical/governance/MYSTERYMECHANISM_IRREDUCIBLE_PRIVATE_SCORE_GATE_20261005_V1.json",
-    "verifier_pr": 2166,
-    "rule": "DIRECT_TRANSFER_IS_NO_LONGER_THE_NEXT_RESIDUAL__DO_NOT_DOUBLE_COUNT_V6__PRIVATE_MYSTERY_SCORE_REMAINS_UNPROVED"
-  }
+    "status": "HISTORICAL_V6_ROUTE_REVOKED__SUPERSEDED_BY_V7_V8_SCOPE_COMPLETE_SUCCESSOR",
+    "historical_source": "canonical/governance/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "current_verification": "canonical/verification/UNKNOWN_DOMAIN_V7_WINDOWS_V8_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "current_acceptance_reduction": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "current_ledger_git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+    "predicate_state": "PROVED",
+    "family_state": "OPEN_ON_MYSTERYMECHANISM_GE_49_55"
+  },
+  "current_terminal_counts": {
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "terminal": false
+  },
+  "next": "DO_NOT_REOPEN_UNKNOWN_DOMAIN_TRANSFER_AUDIT__WORK_ONLY_MYSTERYMECHANISM_GE_49_55_VIA_OWNER_SCORE_RECEIPT_OR_TRUE_SCOPE_COMPLETE_STRONGER_PROOF__NO_FINITE_PUBLIC_PROBE_SUBSTITUTION"
 }
