@@ -19,7 +19,7 @@
     },
     "six_family_scope_partition_verification": {
       "path": "canonical/verification/SIX_BENCHMARK_PROXY_SCOPE_PARTITION_CONNECTOR_VERIFICATION_20261005_V1.json",
-      "git_blob_sha": "5a9dca45230e4dd108e131165347bb1c9ad54b7d"
+      "git_blob_sha": "3854e8db30023d29ae6b2157b1b359a6be13b347"
     },
     "older_shared_residual_cut": {
       "path": "canonical/governance/FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_20261005_V1.json",
