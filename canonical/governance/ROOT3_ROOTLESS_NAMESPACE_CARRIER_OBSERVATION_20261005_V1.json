@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_ROOTLESS_NAMESPACE_CARRIER_OBSERVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ZERO_CREDIT_CARRIER_OBSERVATION__INDEPENDENT_IMPLEMENTATION_REQUIRED",
+  "objective": "Record a zero-cost isolated-carrier observation relevant to Root3 confinement without granting execution or acceptance authority.",
+  "environment": {
+    "carrier": "brain-heldout003-one-shot",
+    "python": "3.13.7"
+  },
+  "observed": [
+    "UNPRIVILEGED_USER_NAMESPACE_AVAILABLE",
+    "SEPARATE_NETWORK_MOUNT_PID_IPC_NAMESPACES_AVAILABLE",
+    "ISOLATED_CHILD_REPORTED_PID_1",
+    "HOST_PATH_WAS_NOT_VISIBLE_FROM_ISOLATED_ROOT",
+    "READ_ONLY_ROOT_WRITE_WAS_BLOCKED",
+    "PRIVATE_TEMPORARY_WRITE_SUCCEEDED_WITHOUT_PERSISTING_TO_HOST",
+    "EXTERNAL_NETWORK_CONNECTION_DID_NOT_SUCCEED"
+  ],
+  "important_limits": [
+    "FRESH_PROC_MOUNT_WAS_NOT_PERMITTED_ON_THIS_CARRIER",
+    "LOCAL_LOOPBACK_SERVICE_MODE_NOT_VERIFIED",
+    "GENERAL_CHILD_PROGRAM_COMPATIBILITY_NOT_VERIFIED",
+    "NO_ROOT3_C1_C2_C3_CLOSURE",
+    "NO_KERNEL_OR_PLATFORM_WIDE_SECURITY_CLAIM"
+  ],
+  "deduction": "DOCKER_AVAILABILITY_IS_NOT_LOGICALLY_NECESSARY_FOR_A_ZERO_COST_ISOLATED_CHILD_CARRIER; A ROOTLESS_NAMESPACE_ROUTE_EXISTS ON_THE_OBSERVED_CARRIER_FOR_THE_TESTED_NO_NETWORK_READ_ONLY_ROOT_CASE.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
