@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__V5_META_ENVELOPE_SCHEDULING_ONLY__ROOT1_POSITIVE_ZERO__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+    "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "e59f2b1c7f2db5fd5b3f0d0da8f33b8dd35b3d8d"
+  },
+  "effects": [
+    "SUPERSEDE_V4_AS_CURRENT_META_ENVELOPE_SCHEDULING_FRONTIER",
+    "SCHEDULE_FIVE_FAMILY_MAPPING_CHECKS",
+    "SCHEDULE_MULTILINGUAL_AND_LONG_CONTEXT_CROSS_CUTTING_COVERAGE_CHECKS",
+    "SCHEDULE_MINIMUM_CREATIVE_DIAGRAM_PROOF_BASIS_REPAIR",
+    "PRESERVE_ROOT1_POSITIVE_GAP_ZERO",
+    "BLOCK_LITERAL_ALL_USEFUL_FINALITY_FROM_CURRENT_38_ATOMS_ALONE"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
