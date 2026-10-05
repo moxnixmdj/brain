@@ -34,7 +34,7 @@ for k,v in (spec.get("env_add") or {}).items():
 try:
     p=subprocess.run(
         spec["argv"],
-        stdin=subprocess.DEVNULL,
+        stdin=None,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         timeout=spec["timeout"],
