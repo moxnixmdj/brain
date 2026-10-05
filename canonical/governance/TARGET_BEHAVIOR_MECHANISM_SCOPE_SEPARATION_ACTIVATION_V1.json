@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__SCHEDULING_GUARD__TARGET_BEHAVIOR_BEFORE_MECHANISM_PROOF_DEBT__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_20261005_V1.json",
+    "git_blob_sha": "251cac9c9f7892e26ca90f2f5118f31e1df02099"
+  },
+  "verification": {
+    "path": "canonical/verification/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "0faf22ddde8c652bb7418ab7779df8f1ee55b35f"
+  },
+  "gate": {
+    "path": "canonical/runtime/target_behavior_mechanism_entailment_gate_v1.py",
+    "git_blob_sha": "771fc5271f5cf1f9fe5a3152fd311d3e668d1014"
+  },
+  "scheduler_effect": {
+    "supersedes_only": [
+      "REGISTRY_INCIDENCE_IMPLIES_MANDATORY_FAMILY_ACCEPTANCE_OBLIGATION",
+      "MECHANISM_PROOF_SPEND_BEFORE_TARGET_ENTAILMENT_PROOF"
+    ],
+    "preserves": [
+      "SIX_BENCHMARK_PROXY_FAMILY_SCOPE_GAPS_AS_OPEN",
+      "ALL_EXISTING_PUBLIC_BENCHMARK_THRESHOLDS",
+      "ALL_EXISTING_MECHANISM_ROUTES_AND_RECEIPTS_AS_OPTIONAL_SUFFICIENT_EVIDENCE",
+      "ALL_CURRENT_ACCEPTANCE_COUNTS",
+      "ROOT1_POSITIVE_GAP_ZERO",
+      "FAIL_CLOSED_TERMINAL_FINALITY"
+    ],
+    "next_order": [
+      "RECOMPUTE_PUBLIC_BENCHMARK_TASK_UNION_AGAINST_OBSERVABLE_FAMILY_BEHAVIOR_BASES",
+      "REUSE_STRONGER_EXISTING_RECEIPTS_FOR_UNCOVERED_OBSERVABLE_TARGET_DIMENSIONS",
+      "REQUIRE_TARGET_ENTAILMENT_RECEIPT_BEFORE_SCHEDULING_ANY_SPECIFIC_IMPLEMENTATION_MECHANISM_AS_MANDATORY",
+      "ONLY_THEN_BIND_MINIMUM_IRREDUCIBLE_PERFORMANCE_OR_FRESH_REALITY_OBLIGATION"
+    ]
+  },
+  "current_guard_result": {
+    "registry_derived_surviving_edges": 12,
+    "direct_explicit_target_entailment_edges": 1,
+    "edges_quarantined_from_automatic_mandatory_status": 11,
+    "target_behavior_obligations_deleted": 0,
+    "benchmark_thresholds_deleted": 0
+  },
+  "hard_rules": [
+    "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION",
+    "NO_TARGET_WEAKENING",
+    "NO_REGISTRY_INCIDENCE_TO_MANDATORY_ACCEPTANCE_WITHOUT_ENTAILMENT",
+    "NO_NEW_REALITY_FOR_A_MECHANISM_BEFORE_THE_TARGET_REQUIRES_IT",
+    "UNKNOWN_ENTAILMENT_IS_NOT_NONEXISTENCE_OF_CAPABILITY",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
