@@ -57,6 +57,33 @@ class ReadOnlyAttemptAuthorizerTests(unittest.TestCase):
         self.assertFalse(out["allowed"])
         self.assertEqual(out["reason"], "EFFECT_CLASS_MISMATCH")
 
+    def test_forged_function_denies(self):
+        req = make_request()
+        req["callsite"]["function"] = "forged"
+        core = dict(req); core.pop("request_sha256")
+        req["request_sha256"] = mediator._sha(core)
+        out = auth.authorize(req)
+        self.assertFalse(out["allowed"])
+        self.assertEqual(out["reason"], "CALLSITE_FUNCTION_MISMATCH")
+
+    def test_registry_count_drift_denies(self):
+        req = make_request()
+        req["callsite"]["registry_site_count"] = 19
+        core = dict(req); core.pop("request_sha256")
+        req["request_sha256"] = mediator._sha(core)
+        out = auth.authorize(req)
+        self.assertFalse(out["allowed"])
+        self.assertEqual(out["reason"], "REGISTRY_SITE_COUNT_MISMATCH")
+
+    def test_runtime_join_drift_denies(self):
+        req = make_request()
+        req["callsite"]["runtime_join"] = "OTHER"
+        core = dict(req); core.pop("request_sha256")
+        req["request_sha256"] = mediator._sha(core)
+        out = auth.authorize(req)
+        self.assertFalse(out["allowed"])
+        self.assertEqual(out["reason"], "RUNTIME_JOIN_MISMATCH")
+
     def test_custom_env_denies(self):
         req = make_request()
         req["env"] = {"key_count": 1, "binding_sha256": "a" * 64}
