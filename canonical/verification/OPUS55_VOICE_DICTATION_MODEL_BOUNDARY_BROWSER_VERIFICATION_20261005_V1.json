@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_VOICE_DICTATION_MODEL_BOUNDARY_BROWSER_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PRIMARY_SOURCE_BROWSER_RECOMPUTATION_PASS__DICTATION_IS_SPEECH_TO_TEXT_BEFORE_CLAUDE_TEXT_RESPONSE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_VOICE_DICTATION_MODEL_BOUNDARY_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "b8367a8a5094a70d09db1105bdf37907b49eacd2"
+  },
+  "current_primary_sources": [
+    {
+      "url": "https://support.claude.com/en/articles/10065434-use-dictation-on-claude-mobile",
+      "observed": [
+        "DICTATION_TURNS_SPEECH_INTO_TEXT",
+        "CLAUDE_RECEIVES_A_WRITTEN_PROMPT",
+        "CLAUDE_REPLIES_IN_TEXT",
+        "DICTATION_IS_EXPLICITLY_DISTINCT_FROM_VOICE_MODE"
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "observed": [
+        "OPUS55_TEXT_MODALITY_IS_DESCRIBED_AS_TEXT_INCLUDING_VOICE_DICTATION",
+        "IMAGE_INPUT_IS_LISTED_SEPARATELY"
+      ]
+    }
+  ],
+  "checks": {
+    "dictation_audio_to_text_upstream": true,
+    "native_opus55_raw_audio_required_for_dictation": false,
+    "written_text_prompt_is_model_load_bearing_input": true,
+    "voice_mode_not_classified_by_this_receipt": true
+  },
+  "consequence": "DELETE_ONLY_THE_DICTATION_NATIVE_AUDIO_MODEL_CAPABILITY_OBLIGATION__PRESERVE_ANY_SEPARATE_VOICE_MODE_ANALYSIS_IF_IT_BECOMES_TERMINAL_LOAD_BEARING",
+  "hard_nonclaims": [
+    "NOT_AN_INDEPENDENT_PUBLIC_RUNNER_RECEIPT",
+    "NO_GLOBAL_ENVELOPE_SEAL",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
