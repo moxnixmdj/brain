@@ -171,6 +171,22 @@ def _execute(
         _IN_EXECUTOR.reset(token)
 
 
+
+def run_namespace_carrier(policy: Mapping[str, Any]) -> dict[str, Any]:
+    """Launch one canonical namespace policy through the frozen original Popen.
+
+    This escape from the global subprocess monkeypatch exists only for the
+    trusted class-executor path. It never accepts a raw command: the namespace
+    launcher still canonicalizes the policy and constructs the unshare/chroot
+    carrier command itself.
+    """
+    if not _INSTALLED:
+        raise ProcessEffectDenied("NAMESPACE_CARRIER_REQUIRES_INSTALLED_MEDIATOR")
+    if not _IN_EXECUTOR.get():
+        raise ProcessEffectDenied("NAMESPACE_CARRIER_OUTSIDE_CLASS_EXECUTOR_FORBIDDEN")
+    from canonical.runtime.zero_ambient_namespace_launcher_v1 import run_confined
+    return run_confined(policy, popen_impl=_ORIGINAL_POPEN)
+
 def _guarded_run(*args: Any, **kwargs: Any):
     return _execute("subprocess.run", args, kwargs)
 
