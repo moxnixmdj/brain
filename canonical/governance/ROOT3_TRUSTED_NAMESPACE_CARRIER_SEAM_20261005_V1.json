@@ -1,0 +1,41 @@
+{
+  "schema":"PROJECT_BRAIN_ROOT3_TRUSTED_NAMESPACE_CARRIER_SEAM_20261005_V1",
+  "date":"2026-10-05",
+  "status":"CANDIDATE__EXECUTOR_ONLY_ORIGINAL_POPEN_NAMESPACE_CARRIER_SEAM__ISOLATED_REPLAY_PASS__ZERO_CREDIT",
+  "objective":"Allow class executors to enter the already-verified namespace membrane without recursing through the global subprocess mediator, while never exposing raw original Popen outside active executor context.",
+  "subjects":{
+    "launcher":{"path":"canonical/runtime/zero_ambient_namespace_launcher_v1.py","git_blob_sha":"da07fb2f1a14b57eeebac2707e9ac757ae69e7b7"},
+    "mediator":{"path":"canonical/runtime/root3_subprocess_mediator_v2.py","git_blob_sha":"d1c71d7e14d30884ab2e66d19d947a562b2dec97"},
+    "tests":{"path":"canonical/tests/test_root3_trusted_namespace_carrier_v1.py","git_blob_sha":"80ef8bcaca566295c92ab2431040e1106210f625"}
+  },
+  "proved":[
+    "NAMESPACE_LAUNCHER_CAN_USE_A_CALLER_SUPPLIED_SPAWN_PRIMITIVE_WHILE_STILL_CANONICALIZING_AND_CONSTRUCTING_THE_CONFINED_COMMAND_ITSELF",
+    "MEDIATOR_EXPOSES_THE_FROZEN_ORIGINAL_POPEN_ONLY_INDIRECTLY_THROUGH_RUN_NAMESPACE_CARRIER",
+    "RUN_NAMESPACE_CARRIER_DENIES_WHEN_MEDIATOR_IS_NOT_INSTALLED",
+    "RUN_NAMESPACE_CARRIER_DENIES_OUTSIDE_ACTIVE_CLASS_EXECUTOR_CONTEXT",
+    "ACTIVE_CLASS_EXECUTOR_CAN_ENTER_REAL_NAMESPACE_MEMBRANE_WITHOUT_REENTRANT_MEDIATOR_DENIAL",
+    "EXISTING_NAMESPACE_AND_MEDIATOR_REGRESSIONS_REMAIN_PASSING"
+  ],
+  "isolated_replay":{
+    "carrier":"brain-heldout003-one-shot",
+    "unit_tests":{"ran":16,"failures":0,"errors":0},
+    "real_seam_probe":"PASS__CHILD_EXITED__BROKER_PAYLOAD_SEAM_OK__7_BYTES"
+  },
+  "critical_path_effect":[
+    "DELETE_REENTRANT_MEDIATOR_AS_A_BLOCKER_FOR_NAMESPACE_CLASS_EXECUTORS",
+    "ENABLE_CLASS_EXECUTORS_TO_SHARE_ONE_MEMBRANE_WITHOUT_RECEIVING_RAW_PROCESS_AUTHORITY"
+  ],
+  "remaining":[
+    "BIND_EFFECT_CLASS_EXECUTORS_TO_THE_SEAM",
+    "PRESERVE_CALLSITE_SPECIFIC_SUBPROCESS_SEMANTICS",
+    "COMPLETE_STREAMING_POPEN_AND_OTHER_NON_RUN_LIFECYCLE_SEMANTICS",
+    "COMPLETE_C1_C2_C3_NO_BYPASS_AND_NON_ARTIFACT_SEMANTIC_POSTCONDITIONS"
+  ],
+  "hard_nonclaims":[
+    "NO_CLAIM_ALL_29_SITES_ARE_BOUND_TO_THE_NAMESPACE_SUBSTRATE",
+    "NO_CLAIM_ANY_EFFECT_CLASS_IS_FULLY_IMPLEMENTED_BY_THIS_SEAM",
+    "NO_C1_C2_C3_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0},
+  "execution_authority":false,"promotion_authority":false,"fresh_reality_authority":false
+}
