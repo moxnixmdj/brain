@@ -161,20 +161,41 @@
       "deduction": "FINITE_PREEXPOSED_PAIRED_TRANSFER_SHOWS_COMPILED_ZERO_LEARNED_REUSE_CAN_CREATE_NONZERO_PROPOSAL_MASS_ON_DISTINCT_SAME_FAMILY_TASKS__OPEN_WORLD_TRANSFER_REMAINS_UNCLAIMED"
     },
     "chartography_unichart_sub100mb_storage_candidate": {
-      "status": "CANONICAL_ZERO_CREDIT_CONDITIONAL_STORAGE_FEASIBILITY_PASS__CAPABILITY_PRESERVATION_UNPROVED",
+      "status": "INDEPENDENT_SECOND_CARRIER_PUBLIC_CHARTQA_NONINFERIORITY_PASS__BOUNDED_CAPABILITY_PRESERVATION_PROVED__ZERO_H100_TERMINAL_CREDIT",
       "candidate_path": "canonical/governance/H100_UNICHART_STORAGE_FEASIBILITY_CANDIDATE_V1.json",
-      "candidate_git_blob_sha": "f2f1b4bf2c4ed71edff61a5c45752042daffefe5",
-      "connector_verification_path": "canonical/verification/H100_UNICHART_STORAGE_FEASIBILITY_CONNECTOR_VERIFICATION_20261005_V1.json",
-      "connector_verification_git_blob_sha": "e100e4a0ab3c1b93c07862b74d40f01f4179576e",
-      "donor": "ahmed-masry/unichart-base-960",
-      "conditional_all_w3_total_bytes": 84341436,
+      "bounded_capability_precommit_v1": "canonical/governance/H100_UNICHART_FRESH_CAPABILITY_HOLDOUT_V1.json",
+      "bounded_capability_precommit_v2": "canonical/governance/H100_UNICHART_FRESH_CAPABILITY_HOLDOUT_V2.json",
+      "independent_verification": "canonical/verification/H100_UNICHART_FRESH_CAPABILITY_V2_INDEPENDENT_CARRIER_VERIFICATION_20261005_V1.json",
+      "donor": "ahmed-masry/unichart-chartqa-960",
+      "donor_checkpoint_sha256": "4407db60801a20bcf254946acfee6727491ef1739ad7b4d3abbf87b7c75e7229",
+      "packed_subject_sha256": "17fc7d37f6c6e8457d53dd93efff365b17850acf5810ba3067bb06c7c226cb14",
+      "packed_subject_bytes": 94686795,
+      "ancillary_bytes": 5313202,
+      "complete_bundle_bytes": 99999997,
       "h100_budget_bytes": 100000000,
-      "conditional_margin_bytes": 15658564,
-      "exact_state_dict_enumeration": "OPEN",
-      "real_packed_checkpoint": "OPEN",
-      "nonterminal_chart_reasoning_preservation": "OPEN",
-      "persistent_learned_byte_rung_effect": "NONE__CURRENT_RUNG_REMAINS_ZERO",
-      "deduction": "CHARTOGRAPHY_VISION_DOES_NOT_CURRENTLY_FORCE_H100_ABOVE_100MB_ON_STORAGE_GROUNDS__A_CHART_SPECIALIZED_DONOR_HAS_A_CONDITIONAL_SUB100MB_PACKING_ROUTE__NO_CAPABILITY_OR_H100_CREDIT_UNTIL_REAL_TRANSFORM_AND_NONTERMINAL_QUALIFICATION"
+      "margin_bytes": 3,
+      "fresh_holdout_v1": {
+        "cases": 20,
+        "fp32_correct": 11,
+        "packed_correct": 11,
+        "fp32_accuracy": 0.55,
+        "packed_accuracy": 0.55,
+        "same_carrier_pass": true
+      },
+      "fresh_holdout_v2": {
+        "cases": 100,
+        "fp32_correct": 66,
+        "packed_correct": 63,
+        "fp32_accuracy": 0.66,
+        "packed_accuracy": 0.63,
+        "packed_minus_fp32_accuracy": -0.03,
+        "frozen_noninferiority_margin_absolute": 0.05,
+        "second_isolated_carrier_pass": true,
+        "same_provider": true,
+        "independent_provider_verified": false
+      },
+      "persistent_learned_byte_rung_effect": "NONE__CURRENT_RUNG_REMAINS_ZERO__THIS_IS_A_CONTINGENCY_PROOF_NOT_A_RUNG_ADVANCE",
+      "deduction": "A_REAL_COMPLETE_99_999_997_BYTE_UNICHART_SUBJECT_PRESERVED_BOUNDED_PUBLIC_CHARTQA_CAPABILITY_WITHIN_THE_FROZEN_5_POINT_NONINFERIORITY_MARGIN_ON_A_FRESH_100_CASE_HOLDOUT_AND_WAS_REGENERATED_ON_A_DISTINCT_ISOLATED_CARRIER__THIS_PROVES_BOUNDED_SUB100MB_CHART_QA_CAPABILITY_PRESERVATION_BUT_NOT_CHARTOGRAPHY_GE_89_OPEN_WORLD_VISION_OR_FULL_H100"
     }
   },
   "next_structural_residuals_ranked": [
@@ -248,7 +269,10 @@
     "bounded_paired_transfer_post_compile_p": 0.25,
     "bounded_paired_transfer_n95": 11,
     "chartography_sub100mb_storage_candidate_conditional": true,
-    "chartography_sub100mb_capability_preservation_proved": false
+    "chartography_sub100mb_capability_preservation_proved": true,
+    "chartography_sub100mb_capability_scope": "BOUNDED_PUBLIC_CHARTQA_ONLY__100_CASE_FRESH_HOLDOUT__NOT_CHARTOGRAPHY_GE_89__NOT_OPEN_WORLD_VISION",
+    "chartography_sub100mb_independent_second_carrier_verified": true,
+    "chartography_sub100mb_independent_provider_verified": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
