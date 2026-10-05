@@ -4194,10 +4194,61 @@ def _controller_checkpoint_record_valid(record):
     return True
 
 
-def _validated_checkpoint_prefix(completed):
+_CONTROLLER_TRACE_GENESIS_SHA256 = "0" * 64
+
+def _controller_trace_value_sha256(value):
+    raw=json.dumps(
+        value,sort_keys=True,separators=(",",":"),ensure_ascii=False,default=str
+    ).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+def _controller_trace_record(cycle,action,result,previous_sha256):
+    previous=str(previous_sha256 or _CONTROLLER_TRACE_GENESIS_SHA256)
+    base={
+      "cycle":int(cycle),
+      "plan":action,
+      "plan_sha256":_controller_trace_value_sha256(action),
+      "result":result,
+      "result_sha256":_controller_trace_value_sha256(result),
+      "previous_trace_sha256":previous,
+    }
+    out=dict(base)
+    out["record_sha256"]=_controller_trace_value_sha256(base)
+    return out
+
+def _controller_trace_record_chain_valid(record,previous_sha256):
+    if not isinstance(record,dict):
+        return False
+    previous=str(previous_sha256 or _CONTROLLER_TRACE_GENESIS_SHA256)
+    if record.get("previous_trace_sha256")!=previous:
+        return False
+    plan=record.get("plan")
+    result=record.get("result")
+    if not isinstance(plan,dict) or not isinstance(result,dict):
+        return False
+    if record.get("plan_sha256")!=_controller_trace_value_sha256(plan):
+        return False
+    if record.get("result_sha256")!=_controller_trace_value_sha256(result):
+        return False
+    base={
+      "cycle":record.get("cycle"),
+      "plan":plan,
+      "plan_sha256":record.get("plan_sha256"),
+      "result":result,
+      "result_sha256":record.get("result_sha256"),
+      "previous_trace_sha256":record.get("previous_trace_sha256"),
+    }
+    return record.get("record_sha256")==_controller_trace_value_sha256(base)
+
+def _validated_checkpoint_prefix(completed,require_content_bound_trace=False):
+    previous=_CONTROLLER_TRACE_GENESIS_SHA256
     for index,record in enumerate(completed):
         if not _controller_checkpoint_record_valid(record):
             return completed[:index],index
+        if require_content_bound_trace:
+            if not _controller_trace_record_chain_valid(record,previous):
+                return completed[:index],index
+            previous=record.get("record_sha256")
     return completed,None
 
 
@@ -4233,12 +4284,27 @@ def _load_controller_checkpoint(step,mission,actions):
     observed=[x.get("cycle") for x in completed if isinstance(x,dict)]
     if observed!=expected:
         raise Blocker("CONTROLLER_CHECKPOINT_SEQUENCE_INVALID")
-    valid_prefix,rewound_from=_validated_checkpoint_prefix(completed)
+    require_content_bound_trace=bool(step.get("require_content_bound_trace",False))
+    valid_prefix,rewound_from=_validated_checkpoint_prefix(
+        completed,require_content_bound_trace=require_content_bound_trace
+    )
+    if require_content_bound_trace and rewound_from is None:
+        expected_head=(
+            valid_prefix[-1].get("record_sha256")
+            if valid_prefix else _CONTROLLER_TRACE_GENESIS_SHA256
+        )
+        if data.get("trace_chain_head_sha256")!=expected_head:
+            valid_prefix=[]
+            rewound_from=0
     if rewound_from is not None:
         data["completed_actions"]=valid_prefix
         data["rewind_count"]=int(data.get("rewind_count") or 0)+1
         data["last_rewound_from_action_index"]=rewound_from
-        data["last_rewind_reason"]="DURABLE_EFFECT_INVALID_OR_MISSING"
+        data["last_rewind_reason"]=(
+            "CONTENT_BOUND_TRACE_INVALID"
+            if require_content_bound_trace
+            else "DURABLE_EFFECT_INVALID_OR_MISSING"
+        )
     data["resume_count"]=int(data.get("resume_count") or 0)+1
     data["next_action_index"]=len(data.get("completed_actions") or [])
     data["updated_at_utc"]=utc()
@@ -4251,6 +4317,10 @@ def _write_controller_checkpoint(path,data,trace,status="IN_PROGRESS"):
     data["completed_actions"]=trace
     data["next_action_index"]=len(trace)
     data["status"]=status
+    if trace and isinstance(trace[-1],dict) and trace[-1].get("record_sha256"):
+        data["trace_chain_head_sha256"]=trace[-1]["record_sha256"]
+    elif data.get("trace_chain_head_sha256") is not None:
+        data["trace_chain_head_sha256"]=_CONTROLLER_TRACE_GENESIS_SHA256
     data["updated_at_utc"]=utc()
     writej(path,data)
     return data
@@ -4286,7 +4356,15 @@ def _run_model_independent_goal(step, mission, goal):
         if isinstance(result,dict) and result.get("error"):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         _verify_action_expectation(action,result)
-        trace.append({"cycle":cycle,"plan":action,"result":result})
+        if step.get("require_content_bound_trace",False):
+            previous=(
+                trace[-1].get("record_sha256")
+                if trace and isinstance(trace[-1],dict) and trace[-1].get("record_sha256")
+                else _CONTROLLER_TRACE_GENESIS_SHA256
+            )
+            trace.append(_controller_trace_record(cycle,action,result,previous))
+        else:
+            trace.append({"cycle":cycle,"plan":action,"result":result})
         checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
         interrupt_after=step.get("interrupt_after_controller_actions_once")
         if interrupt_after is not None:
@@ -5304,6 +5382,9 @@ def _run_capability_planned_goal(step, mission, goal):
     derived.pop("capability_problem",None)
     derived.pop("capability_problem_ref",None)
     derived["controller_actions"]=planned["actions"]
+    derived["require_content_bound_trace"]=bool(
+        problem.get("require_content_bound_trace",False)
+    )
     derived["max_controller_actions"]=max(
         int(step.get("max_controller_actions",16)),
         len(planned["actions"])
