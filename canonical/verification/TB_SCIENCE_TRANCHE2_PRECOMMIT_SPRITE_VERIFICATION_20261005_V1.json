@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANCHE2_PRECOMMIT_SPRITE_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ISOLATED_REMOTE_REPLAY_PASS__NEXT_THREE_UNTOUCHED_SLOTS_EXACT__EXECUTION_FALSE__ZERO_CREDIT",
+  "subjects": {
+    "precommit": {
+      "path": "canonical/governance/TB_SCIENCE_TRANCHE2_PRECOMMIT_20261005_V1.json",
+      "git_blob_sha": "d1a78f3091e22657bad06d1a68fac40da29dc6fe"
+    },
+    "manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    },
+    "tranche1_result": {
+      "path": "canonical/verification/TB_SCIENCE_TRANCHE1_RESULT_20261003_V1.json",
+      "git_blob_sha": "283cc7049949238047f545c4faa6beac62086e3f"
+    },
+    "current_route": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_ROUTE_REBIND_20261005_V1.json",
+      "git_blob_sha": "dae0296799b44d8d97a4bea402754ebfbf43cdc8"
+    }
+  },
+  "environment": {
+    "carrier": "EXISTING_ISOLATED_SPRITE",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/tmp/tb-science-tranche2-precommit-verify-20261005",
+    "incremental_spend_usd": 0
+  },
+  "verified": {
+    "prior_spent_slots_are_exactly_schedule_ranks_1_to_3": true,
+    "next_candidate_slots_are_exactly_schedule_ranks_4_to_6": true,
+    "next_candidate_slots_disjoint_from_spent_slots": true,
+    "retries_per_slot_zero": true,
+    "slot_replacement_false": true,
+    "fixed_denominator_210": true,
+    "execution_authority_false": true,
+    "fresh_reality_authority_false": true,
+    "next_slots": [
+      "terminal-bench-science/baseline-free-localization::trial-0",
+      "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "terminal-bench-science/koopman-mfg-id::trial-0"
+    ]
+  },
+  "remaining": [
+    "CURRENT_ROUTE_EXECUTION_CAPSULE_OR_WORKFLOW_BOUND_TO_EXACT_CURRENT_BYTES_AND_PRECOMMIT",
+    "INDEPENDENT_VERIFICATION_OF_CURRENT_EXECUTION_CAPSULE",
+    "EXPLICIT_TRANCHE2_FRESH_REALITY_EXECUTION_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_CASE_EXECUTED",
+    "NO_FRESH_REALITY_AUTHORITY_GRANTED",
+    "NO_TB_SCIENCE_SCORE_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
