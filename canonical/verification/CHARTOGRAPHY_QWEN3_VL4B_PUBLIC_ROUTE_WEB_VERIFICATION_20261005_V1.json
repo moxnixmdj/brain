@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3_VL4B_PUBLIC_ROUTE_WEB_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__PUBLIC_ZERO_LICENSE_COST_NATIVE_IMAGE_TEXT_ROUTE_EXISTS__LOCAL_FIT_AND_CHARTOGRAPHY_PERFORMANCE_UNPROVED__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "subject": {
+    "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ROUTE_V1.json",
+    "discovery_commit": "9e8c59e27df6c234fa25a9d9b2600786af29265c"
+  },
+  "primary_public_sources": [
+    {
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct/tree/main",
+      "observed": [
+        "MODEL_QWEN_QWEN3_VL_4B_INSTRUCT_EXISTS_PUBLICLY",
+        "PIPELINE_IMAGE_TEXT_TO_TEXT",
+        "LICENSE_APACHE_2_0",
+        "REPOSITORY_TOTAL_SIZE_APPROX_8_89_GB",
+        "TRANSFORMERS_IMAGE_INPUT_EXAMPLE_PRESENT",
+        "VLLM_LOCAL_SERVING_EXAMPLE_PRESENT",
+        "DOCKER_MODEL_RUNNER_EXAMPLE_PRESENT",
+        "DISPLAYED_VERIFIED_HISTORY_PREFIX_EBB281E"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct/blob/main/README.md",
+      "observed": [
+        "AUTO_PROCESSOR_AND_AUTO_MODEL_FOR_MULTIMODAL_LM_LOCAL_LOAD_EXAMPLE_PRESENT",
+        "MESSAGE_CONTENT_ACCEPTS_IMAGE_PLUS_TEXT"
+      ]
+    }
+  ],
+  "deduction": [
+    "A_PUBLIC_APACHE_2_0_NATIVE_IMAGE_TEXT_OPEN_WEIGHT_ACQUISITION_ROUTE_EXISTS",
+    "THEREFORE_NO_PUBLIC_ZERO_LICENSE_COST_GENERIC_IMAGE_TEXT_ROUTE_EXISTS_IS_FALSE_AND_MUST_NOT_REMAIN_A_BLOCKER",
+    "THE_ROUTE_DOES_NOT_BY_ITSELF_PROVE_CURRENT_DEVICE_FIT_BRAIN_INTERNALIZATION_SCOPE_RELEVANT_CHART_REASONING_OR_CHARTOGRAPHY_GE_89"
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "NO_PUBLIC_ZERO_LICENSE_COST_GENERIC_IMAGE_TEXT_MODEL_ROUTE_EXISTS"
+    ],
+    "preserve": [
+      "AUTHORIZED_ZERO_COST_CARRIER_OR_DEVICE_FIT",
+      "EXACT_EXECUTION_SUBJECT_BINDING",
+      "NONTERMINAL_SCOPE_RELEVANT_CHART_REASONING_QUALIFICATION",
+      "PROJECT_SPECIFIC_GEMINI_3_5_FLASH_JUDGE_CAPACITY",
+      "CHARTOGRAPHY_THRESHOLD_CERTIFICATE_GE_89"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FULL_BF16_MODEL_FITS_USERS_DEVICE",
+    "NO_CLAIM_QUANTIZED_VARIANT_PRESERVES_PERFORMANCE",
+    "NO_CLAIM_CHARTOGRAPHY_GE_89",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
