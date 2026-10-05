@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_V4_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EIGHT_GROUPS_FOUR_OUTER_PORTFOLIOS_AND_16_SECTION_SOURCE_MATRIX_STRUCTURALLY_CONSISTENT__ZERO_CREDIT",
+  "subjects": {
+    "terminal_cut": {
+      "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V4.json",
+      "git_blob_sha": "bb8e994b631034f85ca8edc39a9993b4cc5d75f8"
+    },
+    "source_matrix": {
+      "path": "canonical/governance/OPUS55_SYSTEM_CARD_CAPABILITY_CHAPTER_COVERAGE_MATRIX_20261005_V1.json",
+      "git_blob_sha": "f4fda4e06a20e70e37610f664f9287fb49866c37"
+    },
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "recomputation": {
+    "action_group_count": 8,
+    "unique_action_group_count": 8,
+    "declared_action_group_count": 8,
+    "action_group_count_consistent": true,
+    "cross_cutting_conditions": [
+      "MULTILINGUAL_PERFORMANCE",
+      "LONG_CONTEXT",
+      "ABSTRACT_GENERALIZATION_ARC_AGI"
+    ],
+    "abstract_generalization_present": true,
+    "abstract_generalization_family_binding": [
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    ],
+    "every_abstract_generalization_family_exists_in_19_family_envelope": true,
+    "required_new_outer_portfolio_count": 0,
+    "preserved_outer_portfolio_count": 4,
+    "target_discovery_completeness_state": "UNPROVED",
+    "system_card_section_rows": 16,
+    "unique_system_card_section_rows": 16,
+    "exact_section_sequence": [
+      "8.2",
+      "8.3",
+      "8.4",
+      "8.5",
+      "8.6",
+      "8.7",
+      "8.8",
+      "8.9",
+      "8.10",
+      "8.11",
+      "8.12",
+      "8.13",
+      "8.14",
+      "8.15",
+      "8.16",
+      "8.17"
+    ],
+    "source_matrix_declared_unmapped_section_count": 0,
+    "source_matrix_declared_new_family_count": 0
+  },
+  "verified_consequence": [
+    "ABSTRACT_GENERALIZATION_DOES_NOT_REQUIRE_A_NINTH_ACTION_GROUP_ON_CURRENT_ACCOUNTING",
+    "ABSTRACT_GENERALIZATION_DOES_NOT_REQUIRE_A_TWENTIETH_FAMILY_ON_CURRENT_CLASSIFICATION",
+    "ABSTRACT_GENERALIZATION_CAN_BE_SCHEDULED_INSIDE_EXISTING_GROUP_G_AND_EXISTING_OUTER_PORTFOLIOS_SUBJECT_TO_SCOPE_CORRECT_REFREEZE",
+    "CURRENT_FROZEN_SYSTEM_CARD_SECTION8_CHAPTER_HAS_A_COMPLETE_16_ROW_ACCOUNTING_MATRIX",
+    "TARGET_DISCOVERY_COMPLETENESS_REMAINS_A_SEPARATE_OPEN_TERMINAL_PREMISE",
+    "NO_ACCEPTANCE_PARITY_OR_OWNERSHIP_CREDIT_FOLLOWS_FROM_THIS_STRUCTURAL_RECOMPUTATION"
+  ],
+  "source_verification_boundary": {
+    "connector_recomputed_repository_structure": true,
+    "independent_public_runner_receipt": false,
+    "external_source_text_exhaustiveness_proved": false,
+    "literal_all_useful_target_discovery_proved": false,
+    "reason": "THIS_VERIFICATION_CHECKS_THE_MERGED_REPOSITORY_GRAPH_AND_DECLARED_FROZEN_SECTION_MATRIX. IT_DOES_NOT_PROVE_THAT_FINITE_PUBLIC_SOURCES_EXHAUST_ALL_ACTUAL_USEFUL_OPUS55_BEHAVIOR."
+  },
+  "hard_nonclaims": [
+    "NO_ARC_AGI_PARITY_CLAIM",
+    "NO_SYSTEM_CARD_SCORE_PARITY_CLAIM",
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_NEW_FAMILY_ACCEPTANCE",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_LITERAL_TERMINAL_FINALITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
