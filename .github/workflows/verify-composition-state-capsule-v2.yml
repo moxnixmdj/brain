@@ -1,0 +1,41 @@
+name: Verify composition state capsule V2
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/COMPOSITION_STATE_CAPSULE_CONTENT_BOUND_HARDENING_20261005_V1.json"
+      - "canonical/runtime/composition_state_capsule_v2.py"
+      - "canonical/tests/test_composition_state_capsule_v2.py"
+      - ".github/workflows/verify-composition-state-capsule-v2.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify exact candidate blobs
+        shell: python
+        run: |
+          import hashlib
+          from pathlib import Path
+          expected = {
+              "canonical/governance/COMPOSITION_STATE_CAPSULE_CONTENT_BOUND_HARDENING_20261005_V1.json": "686fd1f3958758beb5427dfd13fcf57c7581f269",
+              "canonical/runtime/composition_state_capsule_v2.py": "cd45d76c831b34cc688a232bb34ce50a22337954",
+              "canonical/tests/test_composition_state_capsule_v2.py": "40904bc887feea4c56dce385d7b9f913b3a357d2",
+          }
+          for path, want in expected.items():
+              data = Path(path).read_bytes()
+              got = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+              if got != want:
+                  raise SystemExit(f"BLOB_DRIFT {path} {got} != {want}")
+          print("EXACT_BLOBS_PASS")
+      - name: Run V2 adversarial tests
+        run: python -m unittest -v canonical.tests.test_composition_state_capsule_v2
