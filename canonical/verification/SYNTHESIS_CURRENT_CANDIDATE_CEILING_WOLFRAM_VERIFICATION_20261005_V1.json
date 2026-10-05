@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_CURRENT_CANDIDATE_CEILING_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_COMPUTATIONAL_RECHECK_PASS__LOGIC_ARITHMETIC_WITNESS_ONLY__ZERO_CREDIT",
+  "subject": {
+    "brain_pr": 2207,
+    "candidate_certificate_path": "canonical/governance/SYNTHESIS_CURRENT_CANDIDATE_CEILING_COUNTEREXAMPLE_20261005_V1.json",
+    "candidate_certificate_git_blob_sha": "6a28da70caba24cef70e19b39a1fb15fc940e88e",
+    "candidate_runtime_path": "canonical/runtime/p3_information_safe_candidate_v3.py",
+    "candidate_runtime_git_blob_sha": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a",
+    "matched_quality_runtime_path": "canonical/runtime/synthesis_matched_quality_metric_v1.py",
+    "matched_quality_runtime_git_blob_sha": "116b7394f4b0a6845056c798e966f4cc26f294bf"
+  },
+  "independent_engine": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "recomputed_logic": "TWO_THRESHOLD_VOTES__CURRENT_TIE_SUPPORT_RULE__AUTHORITY_FILTERED_SINGLE_SOURCE_TRUTH__UNSUPPORTED_MATERIAL_CLAIM_HARD_ZERO",
+    "result": {
+      "votes": [true, false],
+      "trueVotes": 1,
+      "falseVotes": 1,
+      "candidateSupported": true,
+      "candidateSelectsClaim": true,
+      "authorityWorldSupportsClaim": false,
+      "unsupportedMaterialClaims": 1,
+      "matchedQuality": 0.0,
+      "counterexampleHolds": true
+    }
+  },
+  "verification_scope": {
+    "verified": [
+      "THE_CONSTRUCTIVE_60_40_THRESHOLD_WITNESS_IS_ARITHMETICALLY_VALID",
+      "THE_CURRENT_TIE_RULE_ACCEPTS_ONE_TRUE_ONE_FALSE",
+      "THE_SRC_B_ONLY_AUTHORITY_WORLD_MAKES_M_GE_50_FALSE",
+      "ONE_UNSUPPORTED_MATERIAL_CLAIM_HARD_ZEROS_THE_FROZEN_MATCHED_QUALITY_AGGREGATE"
+    ],
+    "not_verified_by_this_receipt": [
+      "GIT_BLOB_FETCH_INDEPENDENCE",
+      "WHOLE_REPOSITORY_INTEGRATION",
+      "TERMINAL_BENCHMARK_BEHAVIOR",
+      "ANY_OPUS55_TARGET_SCORE"
+    ]
+  },
+  "conclusion": "CONSTRUCTIVE_COUNTEREXAMPLE_LOGIC_RECHECKED_PASS__CURRENT_P3_V3_UNIVERSAL_MATCHED_QUALITY_1_ROUTE_REMAINS_FALSIFIED_IF_THE_PINNED_SOURCE_BYTES_ARE_AS_DECLARED",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
