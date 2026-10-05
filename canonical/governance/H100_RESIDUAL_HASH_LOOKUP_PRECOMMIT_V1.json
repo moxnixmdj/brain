@@ -1,0 +1,165 @@
+{
+  "schema": "PROJECT_BRAIN_H100_RESIDUAL_HASH_LOOKUP_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_HASH_LOOKUP_TASK_OUTCOMES__RESEARCH_BRANCH_ONLY",
+  "objective": "Replace target-by-target scanning of the transient sign-quotient basis with an exact residual-direction hash lookup for affine-plus-one-feature tasks.",
+  "theorem": {
+    "model": "y=a+b*x+c*f(x)",
+    "projection": "R=I-P_span(1,x)",
+    "identity": "R(y)=c*R(f)",
+    "consequence": "AFTER_SIGN_AND_SCALE_NORMALIZATION__THE_TARGET_RESIDUAL_DIRECTION_EQUALS_THE_TERMINAL_FEATURE_RESIDUAL_DIRECTION_WHEN_c_NONZERO",
+    "safety": "HASH_LOOKUP_IS_ONLY_A_PROPOSAL_MECHANISM__ACTUAL_TRAIN_AND_HOLDOUT_NRMSE_VERIFICATION_REMAINS_MANDATORY"
+  },
+  "basis_source": "TARGET_INDEPENDENT_SIGN_QUOTIENT_BASIS_FROM_H100_SIGN_QUOTIENT_DEPTH8_V1",
+  "max_depth": 8,
+  "terminal_index": {
+    "construction_inputs": [
+      "FROZEN_TRAIN_X",
+      "TRANSIENT_FEATURE_VALUES_ONLY"
+    ],
+    "no_target_y": true,
+    "residual_key": "FIT_FEATURE_AGAINST_INTERCEPT_PLUS_X__TAKE_RESIDUAL__NORMALIZE_BY_MAX_ABS__CANONICALIZE_SIGN__ROUND_10_DECIMALS",
+    "bucket_policy": "KEEP_ALL_REPRESENTATIVES_SHARING_A_KEY__SORT_BY_MINIMUM_DEPTH_THEN_SIGNATURE"
+  },
+  "fresh_tasks": [
+    {
+      "id": "HASH8_F",
+      "sequence": [
+        "log1p_abs",
+        "sat",
+        "sqrt_abs",
+        "log1p_abs",
+        "square",
+        "sat",
+        "sqrt_abs",
+        "sat"
+      ],
+      "seed": [
+        0.24,
+        -0.12,
+        0.89
+      ],
+      "transfer": [
+        -0.41,
+        0.22,
+        -1.04
+      ]
+    },
+    {
+      "id": "HASH8_G",
+      "sequence": [
+        "square",
+        "log1p_abs",
+        "sat",
+        "sqrt_abs",
+        "log1p_abs",
+        "square",
+        "sat",
+        "log1p_abs"
+      ],
+      "seed": [
+        -0.27,
+        0.17,
+        1.09
+      ],
+      "transfer": [
+        0.55,
+        -0.25,
+        0.79
+      ]
+    },
+    {
+      "id": "HASH8_H",
+      "sequence": [
+        "sat",
+        "log1p_abs",
+        "sqrt_abs",
+        "sat",
+        "log1p_abs",
+        "square",
+        "sqrt_abs",
+        "sat"
+      ],
+      "seed": [
+        0.14,
+        0.29,
+        -0.82
+      ],
+      "transfer": [
+        -0.46,
+        -0.15,
+        1.19
+      ]
+    },
+    {
+      "id": "HASH8_I",
+      "sequence": [
+        "sqrt_abs",
+        "log1p_abs",
+        "square",
+        "sat",
+        "log1p_abs",
+        "sqrt_abs",
+        "sat",
+        "square"
+      ],
+      "seed": [
+        0.39,
+        -0.07,
+        0.74
+      ],
+      "transfer": [
+        -0.18,
+        0.21,
+        -1.24
+      ]
+    },
+    {
+      "id": "HASH8_J",
+      "sequence": [
+        "log1p_abs",
+        "sqrt_abs",
+        "sat",
+        "square",
+        "log1p_abs",
+        "sat",
+        "sqrt_abs",
+        "log1p_abs"
+      ],
+      "seed": [
+        -0.15,
+        0.25,
+        0.98
+      ],
+      "transfer": [
+        0.32,
+        -0.18,
+        -0.67
+      ]
+    }
+  ],
+  "pass_gate": [
+    "INDEX_CONSTRUCTION_USES_ZERO_TARGET_VALUES",
+    "ALL_FIVE_TARGETS_PRODUCE_A_NONEMPTY_HASH_BUCKET",
+    "ALL_FIVE_VERIFY_WITH_HOLDOUT_NRMSE_LE_1E-8",
+    "ALL_FIVE_TRANSFER_WITH_HOLDOUT_NRMSE_LE_1E-8",
+    "MEDIAN_TARGET_LOOKUP_PLUS_VERIFICATION_SECONDS_LT_0_05",
+    "PERSISTENT_M_fit_BYTES_ZERO",
+    "NO_INDEX_OR_SELECTED_STRUCTURE_IS_PERSISTED"
+  ],
+  "measurements": [
+    "TRANSIENT_INDEX_KEY_COUNT",
+    "HASH_COLLISION_BUCKET_SIZE_PER_TASK",
+    "LOOKUP_SECONDS",
+    "LOOKUP_PLUS_VERIFICATION_SECONDS",
+    "BASIS_GENERATION_SECONDS",
+    "INDEX_BUILD_SECONDS",
+    "TOTAL_AMORTIZED_SECONDS_PER_TASK_FOR_FIVE_TASK_BATCH"
+  ],
+  "hard_nonclaims": [
+    "EXACT_HASH_LOOKUP_DOES_NOT_SOLVE_NOISY_OR_APPROXIMATE_TARGETS",
+    "FINITE_UNARY_DEPTH8_BASIS_IS_NOT_GENERAL_PROGRAM_SEARCH",
+    "TRANSIENT_BASIS_GENERATION_COST_REMAINS_REAL",
+    "M_cap_AND_M_dev_ARE_SEPARATE_FROM_M_fit"
+  ]
+}
