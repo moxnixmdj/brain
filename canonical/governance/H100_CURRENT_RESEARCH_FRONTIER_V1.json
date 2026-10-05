@@ -264,20 +264,30 @@
       "deduction": "LIBRARY_FIRST_ROUTING_IS_NOW_BOTH_FORMALLY_AND_EMPIRICALLY_SUPPORTED_ON_THE_MEASURED_REUSABLE_CAPABILITY_COHORT__THE_NEXT_ARCHITECTURAL_MOVE_IS_TO_MAKE_VERIFIED_CAPABILITY_REGISTRY_LOOKUP_THE_DEFAULT_PRE_SYNTHESIS_STAGE"
     },
     "verified_capability_registry": {
-      "status": "SECOND_ISOLATED_CARRIER_PASS__EXECUTABLE_LIBRARY_FIRST_REGISTRY__ZERO_CREDIT",
+      "status": "SECOND_ISOLATED_CARRIER_PASS__EXECUTABLE_MULTI_DOMAIN_REGISTRY__SEVEN_PRIOR_VERIFIED_ENTRIES__ZERO_CREDIT",
       "governance": "canonical/governance/H100_VERIFIED_CAPABILITY_REGISTRY_V1.json",
-      "verification": "canonical/verification/H100_VERIFIED_CAPABILITY_REGISTRY_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
-      "entry_count": 3,
+      "verification": "canonical/verification/H100_VERIFIED_CAPABILITY_REGISTRY_MULTIDOMAIN_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "entry_count": 7,
+      "selector_capacity_slots": 32,
+      "selector_bits": 5,
       "entries": [
         "CAP_LINEAR_TREND_SINUSOID_V1",
         "CAP_EXP_ABS_V1",
-        "CAP_THRESHOLD_STEP_V1"
+        "CAP_THRESHOLD_STEP_V1",
+        "CAP_OEWN_REAL_LEXICAL_V1",
+        "CAP_LEXICAL_SOURCE_FALLBACK_V1",
+        "CAP_COMPOSITIONAL_LANGUAGE_V1",
+        "CAP_TOOL_TRACE_NORMALIZER_V1"
       ],
+      "parametric_entries": 3,
+      "direct_non_synthetic_entries": 4,
       "frozen_transfer_hits": "3_OF_3",
-      "raw_synthesis_attempts_before_hit": 0,
+      "non_synthetic_direct_invocations": "4_OF_4",
+      "raw_synthesis_attempts_before_verified_hit": 0,
+      "unknown_direct_id_fail_closed": true,
       "out_of_family_fail_closed": true,
       "persistent_learned_bytes": 0,
-      "deduction": "THE_VERIFIED_LIBRARY_FIRST_ROUTER_IS NOW EXECUTABLE__KNOWN_VERIFIED FAMILIES RESOLVE BEFORE RAW SYNTHESIS AND UNKNOWN INPUTS FAIL CLOSED TO THE RAW SEARCH STAGE"
+      "deduction": "THE_VERIFIED_LIBRARY_FIRST_ROUTER_NOW_SPANS_SEVEN_PRIOR_VERIFIED_CAPABILITY_CLASSES_ACROSS_PARAMETRIC_REASONING_REAL_LEXICAL_LANGUAGE_AND_TOOL_TRACE_DOMAINS__KNOWN_CAPABILITIES_RESOLVE_WITH_ZERO_RAW_ATTEMPTS_AND_UNKNOWN_CASES_FAIL_CLOSED"
     },
     "non_synthetic_verifier_cost": {
       "status": "SECOND_ISOLATED_CARRIER_PASS__FOUR_CAPABILITY_CLASSES__ZERO_CREDIT",
@@ -306,8 +316,8 @@
     },
     {
       "rank": 2,
-      "residual": "NON_SYNTHETIC_INCREMENTAL_DESCRIPTION_LENGTH_AND_MULTI_DOMAIN_REGISTRY_ROUTING",
-      "reason": "FOUR_NON_SYNTHETIC_CAPABILITY_CLASSES_NOW_HAVE_CHEAP_SECOND_CARRIER_VERIFIER_COST_MEASUREMENTS__DESCRIPTION_LENGTH_AND_EXECUTABLE_MULTI_DOMAIN_REGISTRY_ROUTING_REMAIN_TO_BE_BOUND"
+      "residual": "NON_SYNTHETIC_INCREMENTAL_DESCRIPTION_LENGTH_UNDER_FROZEN_CANONICAL_PROGRAM_CODE",
+      "reason": "MULTI_DOMAIN_VERIFIED_REGISTRY_ROUTING_IS_NOW_EXECUTABLE_AND_SECOND_CARRIER_VERIFIED_ACROSS_SEVEN_ENTRIES__NON_SYNTHETIC_VERIFIER_COST_IS_MEASURED__THE_REMAINING_INTERNAL_SEARCH_COMPLEXITY_UNKNOWN_IS_A_NON_ARBITRARY_CANONICAL RAW PROGRAM DESCRIPTION_LENGTH FOR THE FOUR NON_SYNTHETIC CAPABILITY CLASSES"
     },
     {
       "rank": 3,
@@ -393,10 +403,12 @@
     "library_first_measured_wall_clock_speedup_verified": true,
     "library_first_measured_speedup_scope": "THREE_ALREADY_VERIFIED_SYNTHETIC_TRANSFER_TASKS__MEDIAN_9_2745X_ON_SECOND_SPRITE",
     "default_verified_capability_registry_first_router_implemented": true,
-    "verified_capability_registry_seed_entries": 3,
+    "verified_capability_registry_seed_entries": 7,
     "verified_capability_registry_out_of_family_fail_closed": true,
     "non_synthetic_real_world_capability_verifier_cost_distribution_measured": true,
-    "non_synthetic_real_world_capability_verifier_cost_scope": "FOUR_PRIOR_INDEPENDENTLY_VERIFIED_CLASSES__TEST_SUITE_PROXY__MEDIANS_APPROX_0_078_TO_0_084_SECONDS"
+    "non_synthetic_real_world_capability_verifier_cost_scope": "FOUR_PRIOR_INDEPENDENTLY_VERIFIED_CLASSES__TEST_SUITE_PROXY__MEDIANS_APPROX_0_078_TO_0_084_SECONDS",
+    "verified_capability_registry_multidomain_second_carrier_verified": true,
+    "non_synthetic_registry_routing_verified": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
