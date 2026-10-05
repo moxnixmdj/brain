@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_FUNCTIONAL_BASIS_TARGET_COMPLETENESS_QUANTIFIER_GAP_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_DEDUCTIVE_FALSIFICATION__FUNCTIONAL_ROLE_TAXONOMY_COVERAGE_DOES_NOT_BY_ITSELF_PROVE_TARGET_BEHAVIOR_SUPERSET_COVERAGE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Prevent the functional-role characterization from being promoted into literal target-discovery completeness unless it separately proves extensional totality inside every broad role. Preserve the useful B0-B9 taxonomy as a decomposition/scheduling basis.",
+  "authorities": {
+    "functional_basis_candidate": {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V1.json",
+      "git_blob_sha": "62c0e207ce935a02611700a69e0917f938792b11"
+    },
+    "superset_normal_form": {
+      "path": "canonical/governance/TARGET_SUPERSET_COVERAGE_DOMINANCE_NORMAL_FORM_20261005_V1.json",
+      "git_blob_sha": "55a027d50e6f9d1c4d70a75b39d6a536e26a4277"
+    },
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "target_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION"
+    }
+  },
+  "distinction": {
+    "intensional_role_cover": "Every useful behavior can be described as occupying one or more generic causal roles B0-B9.",
+    "extensional_target_cover": "Every actual useful Opus 5.5 behavior cell u is inside a certification domain D on which Brain-vs-Opus dominance is proved.",
+    "theorem": "INTENSIONAL_ROLE_COVER_DOES_NOT_ENTAIL_EXTENSIONAL_BEHAVIORAL_SUPERSET_COVER."
+  },
+  "countermodel": {
+    "construction": [
+      "ASSUME_B0_THROUGH_B9_ARE_EXHAUSTIVE_CAUSAL_ROLE_LABELS.",
+      "LET_B2_BE_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING_AS_DECLARED.",
+      "LET_THE_CURRENT_PROVED_OR_ENUMERATED_B2_SUBDOMAIN_D_B2_CONTAIN_ALL_BEHAVIORS_CURRENTLY_BOUND_TO_THE_19_FAMILY_ACCEPTANCE_PROGRAM.",
+      "ADD_A_USEFUL_TARGET_BEHAVIOR_u_STAR_THAT_IS_AN_INFORMATION_TRANSFORMATION_AND_THUS_MAPS_CLEANLY_TO_B2_BUT_USES_A_PREVIOUSLY_UNCHARACTERIZED_TRANSFORMATION_OR_DECISION_FUNCTION_NOT_PROVED_INSIDE_D_B2.",
+      "ALL_ROLE_TAXONOMY_PREMISES_REMAIN_TRUE__u_STAR_HAS_ROLE_B2_AND_REQUIRES_NO_NEW_TOP_LEVEL_CAUSAL_ROLE.",
+      "YET_u_STAR_IS_OUTSIDE_THE_PROVED_CERTIFICATION_SUBDOMAIN_D_B2__SO_U_SUBSET_OR_EQUAL_D_IS_FALSE_OR_AT_LEAST_NOT_PROVED.",
+      "THEREFORE_B0_B9_ROLE_EXHAUSTIVENESS_PLUS_ROLE_TO_FAMILY_NAME_MAPPING_DOES_NOT_PROVE_LITERAL_TARGET_COVERAGE."
+    ],
+    "concrete_analogy": "Classifying arithmetic, theorem proving, program synthesis and an unknown future reasoning transform all as B2 does not prove that a proof of some B2 members covers every possible B2 transform.",
+    "consistent_with_candidate_falsifiers": true
+  },
+  "quantifier_failure": {
+    "invalid_form": "FOR_ALL_u_IN_U_EXISTS_role_IN_BASIS(role(u)) AND EXISTS_family_COVERING_ROLE => FOR_ALL_u_IN_U Brain_dominates(u)",
+    "missing_premise": "FOR_EACH_ROLE_r__THE_ASSIGNED_FAMILY_CERTIFICATION_DOMAIN_D_r_IS_EXTENSIONALLY_TOTAL_FOR_EVERY_USEFUL_TARGET_BEHAVIOR_INSTANCE_u_WITH_ROLE_r__OR_A_STRONGER_PROVED_SUPERSET_COVERAGE_RELATION",
+    "valid_form": "IF_U_SUBSET_OR_EQUAL_D_IS_SEPARATELY_PROVED_AND_BRAIN_DOMINATES_TARGET_ON_ALL_LOAD_BEARING_CELLS_OF_D__THEN_LITERAL_ALL_FOLLOWS."
+  },
+  "effect_on_functional_basis_candidate": {
+    "preserve": [
+      "B0_B9_AS_A_HIGH_VALUE_CAUSAL_DECOMPOSITION_AND_COUNTEREXAMPLE_LOCALIZATION_TAXONOMY",
+      "ZERO_IDENTIFIED_TOP_LEVEL_UNMAPPED_ROLE_ON_CURRENT_OBSERVED_SURFACES",
+      "NO_NEW_20TH_FAMILY_FROM_DOMAIN_LABEL_ALONE",
+      "FALSIFIER_SEARCH_FOR_NEW_MODALITY_ACTUATOR_OR_CAUSAL_ROLE"
+    ],
+    "revoke_if_not_separately_proved": [
+      "TARGET_DISCOVERY_COMPLETENESS_DISCHARGE_FROM_ROLE_TAXONOMY_ALONE",
+      "U_SUBSET_OR_EQUAL_EXISTING_19_FAMILY_CERTIFICATION_DOMAIN_FROM_ROLE_NAME_COVERAGE_ALONE",
+      "LITERAL_ALL_FINALITY_FROM_BASIS_ROLE_COUNT_10"
+    ]
+  },
+  "minimum_repair": [
+    "FOR_EACH_B0_B9_ROLE_DEFINE_A_CONTENT_ADDRESSED_EXTENSIONAL_CERTIFICATION_DOMAIN_D_r__NOT_JUST_A_NATURAL_LANGUAGE_ROLE_LABEL.",
+    "PROVE_EVERY_ACTUAL_USEFUL_OPUS55_BEHAVIOR_WITH_ROLE_r_IS_IN_D_r_OR_PROVE_A_STRONGER_TARGET_UPPER_ENVELOPE_THEOREM.",
+    "THEN_PROVE_BRAIN_NONINFERIORITY_OVER_EVERY_LOAD_BEARING_CELL_OF_UNION_r_D_r.",
+    "IF_THE_ROLE_DOMAINS_ARE_DEFINED_AS_ALL_POSSIBLE_TRANSFORMS_ALLOWED_BY_THE_INTERFACE__ACKNOWLEDGE_THAT_COVERAGE_BECOMES_TRIVIAL_BUT_DOMINANCE_BECOMES_A_MUCH_STRONGER_UNIVERSAL_CLAIM_AND_MUST_STILL_BE_PROVED."
+  ],
+  "scheduler_effect": {
+    "delete": [
+      "PROMOTE_FUNCTIONAL_ROLE_TAXONOMY_AS_LITERAL_TARGET_COMPLETENESS_WITHOUT_EXTENSIONAL_ROLE_TOTALITY",
+      "TREAT_NO_NEW_TOP_LEVEL_ROLE_COUNTEREXAMPLE_AS_PROOF_NO_UNCOVERED_WITHIN_ROLE_BEHAVIOR_EXISTS"
+    ],
+    "preserve": [
+      "TARGET_SUPERSET_COVERAGE_PLUS_DOMINANCE_NORMAL_FORM",
+      "W1_OWNER_ATTESTATION_EVENT_ROUTE",
+      "SEARCH_FOR_SOUND_TARGET_UPPER_ENVELOPE",
+      "FUNCTIONAL_BASIS_AS_A_COMPRESSION_AND_FALSIFICATION_TOOL",
+      "CURRENT_EPOCH_ACCEPTANCE_CLOSURE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FUNCTIONAL_BASIS_IS_FALSE_AS_A_ROLE_TAXONOMY",
+    "NO_CLAIM_AN_UNOBSERVED_OPUS55_CAPABILITY_ACTUALLY_EXISTS",
+    "NO_CLAIM_LITERAL_TERMINAL_IS_IMPOSSIBLE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
