@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_SHARED_SYNTHESIS_ROOT2_ROUTING_REDUCTION_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__THREE_PUBLIC_BAR_FAMILY_SYNTHESIS_OCCURRENCES_COLLAPSED_TO_ONE_EXISTING_ROOT2_OBLIGATION__HISTORICAL_P3_POSTHOC_RESCORING_REJECTED__ZERO_CREDIT",
-  "objective": "Minimize terminal wall-clock by routing every surviving EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 occurrence in the five-public-bar scope partition to the single already-frozen communication-and-synthesis acceptance obligation, while preserving fail-closed proof semantics and forbidding post-hoc reinterpretation of the historical P3 terminal wave under the later matched-quality metric.",
+  "status": "TRUTH_REPAIRED__THREE_FAMILY_SYNTHESIS_FANOUT_DEDUPLICATED_TO_TWO_ORTHOGONAL_SHARED_ROOTS__HISTORICAL_P3_POSTHOC_RESCORING_REJECTED__ZERO_CREDIT",
+  "objective": "Minimize terminal wall-clock by deduplicating the three EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 family occurrences into exactly two orthogonal shared obligations: the existing Root2 matched-quality performance target and the active Root3 typed-input-domain scope-completeness root. Preserve fail-closed proof semantics and forbid post-hoc reinterpretation of the historical P3 terminal wave under the later matched-quality metric.",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authorities": {
     "five_family_partition": {
@@ -16,8 +16,8 @@
     "synthesis_scope_certificate": {
       "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
       "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
-      "scope_relation": "PROVEN_STRONGER",
-      "coverage_complete": true
+      "predicate_scope_coverage_complete": true,
+      "whole_behavior_input_domain_coverage_complete": false
     },
     "synthesis_matched_quality_metric": {
       "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
@@ -42,6 +42,27 @@
     "historical_terminal_candidate": {
       "path": "canonical/runtime/contract_native_brain_candidate.py",
       "git_blob_sha": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85"
+    },
+    "synthesis_scope_overextension_quarantine": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "c1b2d488dfd38c27b533f98424036be874d5e829"
+    },
+    "synthesis_scope_overextension_activation": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "30d509bb0edc7a3bd7cf74feddd7bafbcce73d19",
+      "scheduling_authority": true
+    },
+    "synthesis_scope_concurrency_reconciliation": {
+      "path": "canonical/governance/SYNTHESIS_LEAF_SCOPE_CONCURRENCY_CONFLICT_RECONCILIATION_20261005_V1.json",
+      "git_blob_sha": "4b1b9c7149eb040447b8dd1665366eccfbca60f4"
+    },
+    "synthesis_scope_concurrency_verification": {
+      "path": "canonical/verification/SYNTHESIS_LEAF_SCOPE_CONCURRENCY_CONFLICT_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "10d11ba3945808be928891e17d5d1b63548fce99"
+    },
+    "p3_contract_semantic_reduction": {
+      "path": "canonical/governance/SYNTHESIS_P3_CONTRACT_SEMANTIC_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "f6b83872bf1288693e4e5250a561599f1cc6fa75"
     }
   },
   "deduplicated_leaf": {
@@ -53,7 +74,7 @@
     ],
     "fanout_count": 3,
     "canonical_existing_acceptance_target": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
-    "rule": "DO_NOT_CREATE_THREE_FAMILY_SPECIFIC_SYNTHESIS_COMPARATOR_OBLIGATIONS__CLOSE_THE_SHARED_SYNTHESIS_ACCEPTANCE_TARGET_ONCE_AND_REUSE_ONLY_BY_EXACT_BEHAVIORAL_IDENTITY"
+    "rule": "DO_NOT_CREATE_PER_FAMILY_SYNTHESIS_PROOF PROGRAMS__CLOSE_THE_TWO_SHARED_ORTHOGONAL_ROOTS_ONCE_EACH_AND_REUSE_ONLY_BY_EXACT_BEHAVIORAL_IDENTITY"
   },
   "historical_p3_truth_audit": {
     "terminal_wave_receipts": {
@@ -92,24 +113,9 @@
     ],
     "conclusion": "HISTORICAL_P3_IS_VALID_EVIDENCE_FOR_THE_EXACT_FROZEN_CHECKS_IT_ACTUALLY_EXERCISED__IT_IS_NOT_A_POSTHOC_MATCHED_QUALITY_RESULT"
   },
-  "root2_reduction": {
-    "preserve": [
-      "CURRENT_SYNTHESIS_SCOPE_CERTIFICATE",
-      "CURRENT_MATCHED_QUALITY_METRIC_AND_FIVE_DIMENSION_SCORERS",
-      "CURRENT_REQUIRED_CLAIM_COVERAGE_CEILING_WHERE_ALREADY_ACTIVE",
-      "PUBLIC_BAR_SCOPE_EQUIVALENCE_AS_AN_OPTION_ONLY_IF_A_FUTURE_LOSSLESS_PROOF_IS_ACTUALLY_ESTABLISHED"
-    ],
-    "delete_from_future_work": [
-      "THREE_SEPARATE_NEW_SYNTHESIS_MATCHED_COMPARATOR_DESIGNS_FOR_THE_THREE_FANOUT_FAMILIES",
-      "THREE_SEPARATE_NEW_SYNTHESIS_SCOPE_CLOSURE_OBLIGATIONS_WITH_IDENTICAL_BEHAVIORAL_ID",
-      "POSTHOC_RESCORING_OF_TERMINAL_V3_P3_RECEIPTS_UNDER_SYNTHESIS_MATCHED_QUALITY_METRIC_V1"
-    ],
-    "single_load_bearing_target": "PROVE_SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_ONCE_WITH_AN_ADMISSIBLE_PREDECLARED_ROUTE_OR_A_SEPARATELY_VERIFIED_STRONGER_PROOF",
-    "promotion_effect_if_future_target_is_validly_proved": "REUSE_THE_SCOPE_COMPLETE_SYNTHESIS_RECEIPT_FOR_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_IN_ALL_THREE_FANOUT_FAMILIES__SUBJECT_TO_EACH_FAMILY_REMAINING_LEAVES",
-    "fresh_reality_required_by_this_reduction": false
-  },
   "hard_nonclaims": [
     "NO_SYNTHESIS_MATCHED_QUALITY_PASS",
+    "NO_WHOLE_BEHAVIOR_INPUT_DOMAIN_SCOPE_COMPLETENESS_PASS",
     "NO_PUBLIC_BAR_SCOPE_EQUIVALENCE_PASS",
     "NO_NEW_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
     "NO_REINTERPRETATION_OF_HISTORICAL_TERMINAL_RESULTS",
@@ -124,13 +130,46 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
-    "duplicate_future_synthesis_obligations_deleted": 2,
-    "surviving_shared_synthesis_obligation_count": 1
+    "surviving_shared_synthesis_obligation_count": 2,
+    "family_local_duplicate_programs_avoided_candidate": 4
   },
   "scheduling_authority": false,
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
   "independent_verification_required": true,
-  "next": "INDEPENDENTLY_VERIFY_THIS_ROUTING_REDUCTION__THEN_BIND_IT_INTO_THE_CURRENT_SCOPE_REPAIR_SCHEDULER__WORK_THE_SINGLE_SHARED_SYNTHESIS_ROOT2_TARGET"
+  "next": "WORK_THE_ACTIVE_SHARED_ROOT3_SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS__THEN_RETURN_TO_THE_SEPARATE_SHARED_ROOT2_MATCHED_QUALITY_TARGET",
+  "shared_roots": {
+    "root2_performance": {
+      "id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "state": "OPEN",
+      "statement": "Prove matched synthesis quality/coverage noninferiority by an admissible predeclared comparator route or a separately verified stronger proof.",
+      "already_closed_narrower_component": "REQUIRED_CLAIM_COVERAGE_HAS_A_SEPARATE_ABSOLUTE_CEILING_ROUTE__DO_NOT_INFER_MATCHED_QUALITY",
+      "historical_p3_terminal_pass_is_sufficient": false
+    },
+    "root3_scope": {
+      "id": "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS",
+      "state": "ACTIVE_OPEN",
+      "statement": "Prove totality and scope completeness of the frozen synthesis route over every admissible normalized evidence/audience/constraint input in EVIDENCE_TO_AUDIENCE_SYNTHESIS_001, or losslessly partition and close the uncovered residual input classes.",
+      "activation": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_ACTIVATION_20261005_V1.json",
+      "fanout_count": 3
+    },
+    "common_deduplication_rule": "ONE_ROOT2_PERFORMANCE_PROGRAM_PLUS_ONE_ROOT3_TYPED_DOMAIN_PROGRAM__NO_THREE_FAMILY_LOCAL_COPIES_OF_EITHER"
+  },
+  "root_reduction": {
+    "preserve": [
+      "PREDICATE_LEVEL_SYNTHESIS_SCOPE_CERTIFICATE",
+      "CURRENT_MATCHED_QUALITY_METRIC_AND_FIVE_DIMENSION_SCORERS",
+      "CURRENT_REQUIRED_CLAIM_COVERAGE_CEILING_WHERE_VALID",
+      "ACTIVE_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS_ROOT",
+      "ALL_VALID_HISTORICAL_P3_TERMINAL_RECEIPTS_WITHOUT_POSTHOC_METRIC_RELABELLING"
+    ],
+    "delete_from_future_work": [
+      "THREE_SEPARATE_FAMILY_LOCAL_SYNTHESIS_MATCHED_COMPARATOR_PROGRAMS",
+      "THREE_SEPARATE_FAMILY_LOCAL_SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_PROGRAMS",
+      "POSTHOC_RESCORING_OF_TERMINAL_V3_P3_RECEIPTS_UNDER_SYNTHESIS_MATCHED_QUALITY_METRIC_V1"
+    ],
+    "surviving_shared_root_count": 2,
+    "next_priority": "ATTACK_SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS_FIRST_BECAUSE_IT_IS_A_ZERO_REALITY_DEDUCTIVE_SCOPE_PROBLEM_WITH_FANOUT_THREE__PRESERVE_ROOT2_MATCHED_QUALITY_AS_SEPARATE"
+  }
 }
