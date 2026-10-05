@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_NATIVE_ARTIFACT_EXACT_LEAF_GLOBAL_REUSE_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__PROVED_NATIVE_ARTIFACT_COMPONENT_REUSE__TWO_DUPLICATE_TARGET_PROOF_INCIDENCES_REMOVED_FROM_FUTURE_WORK__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/NATIVE_ARTIFACT_EXACT_LEAF_GLOBAL_REUSE_CANDIDATE_20261005_V1.json",
+    "git_blob_sha": "1e0adb8bfaf24adde27455e13e55fe102088bbf5"
+  },
+  "verification": {
+    "path": "canonical/verification/NATIVE_ARTIFACT_EXACT_LEAF_GLOBAL_REUSE_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "61e8b61e9b48d869c1623251b4ce1a780f6c737b"
+  },
+  "effects": [
+    "REUSE_PROVED_NATIVE_ARTIFACT_LEAF_IN_PROFESSIONAL_KNOWLEDGE_WORK",
+    "REUSE_PROVED_NATIVE_ARTIFACT_LEAF_IN_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+    "RECOMPUTE_BOTH_TARGET_FAMILIES_AGAINST_ONLY_OTHER_RESIDUALS_AND_PUBLIC_BARS",
+    "INVALIDATE_IF_BOUND_REGISTRY_OR_COMPONENT_PROOF_CHANGES"
+  ],
+  "exact_behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+  "target_family_count": 2,
+  "duplicate_target_incidences_removed_from_future_work": 2,
+  "hard_rules": [
+    "EXACT_BEHAVIOR_ID_ONLY",
+    "NO_WHOLE_FAMILY_OR_NEW_ATOMIC_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
