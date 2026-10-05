@@ -4,7 +4,7 @@
   "status": "CONNECTOR_AND_FIRST_PARTY_RECOMPUTATION_PASS__V1_OMISSION_CONFIRMED__V2_SET_REDUCER_STRUCTURALLY_VALID__SEMANTIC_INTERFACE_TOTALITY_STILL_OPEN__ZERO_CREDIT",
   "subject": {
     "path": "canonical/governance/OPUS55_PROFILE_AWARE_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_20261005_V2.json",
-    "git_blob_sha": "fd136189b99cbaf333c317bc275337c0d081d88d"
+    "git_blob_sha": "ece4a5052f319b1e7f2cb25f66a4e72f12318fae"
   },
   "recomputed_first_party_facts": [
     {
@@ -31,6 +31,14 @@
         "adaptive_thinking_always_on": true,
         "thinking_blocks_tied_to_model_and_conversation": true
       }
+    },
+    {
+      "source": "https://platform.claude.com/docs/en/api/messages/create",
+      "checks": {
+        "stop_reason_is_success_response_control_state": true,
+        "refusal_has_structured_stop_details": true,
+        "pause_turn_is_continuation_relevant": true
+      }
     }
   ],
   "v1_recomputation": {
@@ -56,7 +64,9 @@
     "signed_thinking_state_return_path_present": true,
     "profile_key_present": true,
     "performance_credit_claimed": false,
-    "new_family_claimed": false
+    "new_family_claimed": false,
+    "response_control_state_present": true,
+    "refusal_and_pause_resume_channels_present": true
   },
   "wolfram_structural_check": {
     "engine": "WOLFRAM_LANGUAGE",
@@ -71,7 +81,8 @@
     "v2_coverage_theorem_shape_logically_valid": true,
     "v2_semantic_interface_totality_proved": false,
     "v2_role_basis_extensional_totality_proved": false,
-    "literal_terminal_finality": false
+    "literal_terminal_finality": false,
+    "v2_repair_removes_identified_response_control_counterexample": true
   },
   "next_minimum_falsification_cut": [
     "ENUMERATE_ONLY_FIRST_PARTY_MODEL_SIDE_CONTENT_BLOCK_AND_CONTROL_CHANNEL_TYPES_FOR_EACH_AUTHORIZED_PROFILE",
