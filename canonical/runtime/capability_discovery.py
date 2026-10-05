@@ -417,39 +417,19 @@ def _parse_deb822_records(text):
 
 
 def _apt_index_target_files(identifier=None, language=None):
-    if shutil.which("apt-get") is None:
-        return []
-    argv=["apt-get","indextargets","--format","$(FILENAME)"]
-    if identifier:
-        argv.append("Identifier: "+str(identifier))
-    if language:
-        argv.append("Language: "+str(language))
     try:
-        p=subprocess.run(argv,text=True,capture_output=True,timeout=20)
+        from canonical.runtime.apt_metadata_snapshot_v1 import apt_index_target_files
+        return apt_index_target_files(identifier=identifier,language=language)
     except Exception:
         return []
-    if p.returncode!=0:
-        return []
-    out=[]
-    for line in p.stdout.splitlines():
-        path=line.strip()
-        if path and path not in out:
-            out.append(path)
-    return out
 
 
 def _read_apt_index(path,timeout_s=30):
-    helper="/usr/lib/apt/apt-helper"
-    if not pathlib.Path(helper).exists():
-        return ""
     try:
-        p=subprocess.run(
-            [helper,"cat-file",str(path)],
-            text=True,capture_output=True,timeout=timeout_s
-        )
+        from canonical.runtime.apt_metadata_snapshot_v1 import read_apt_index
+        return read_apt_index(path).decode("utf-8","replace")
     except Exception:
         return ""
-    return p.stdout if p.returncode==0 else ""
 
 
 def _apt_full_metadata_records():
@@ -461,22 +441,12 @@ def _apt_full_metadata_records():
     global _APT_FULL_METADATA_CACHE
     if _APT_FULL_METADATA_CACHE is not None:
         return _APT_FULL_METADATA_CACHE
-    if shutil.which("apt-cache") is None:
-        _APT_FULL_METADATA_CACHE=[]
-        return _APT_FULL_METADATA_CACHE
     try:
-        p=subprocess.run(
-            ["apt-cache","dumpavail"],
-            text=True,capture_output=True,timeout=35
-        )
+        from canonical.runtime.apt_metadata_snapshot_v1 import package_records
+        packages=package_records()
     except Exception:
         _APT_FULL_METADATA_CACHE=[]
         return _APT_FULL_METADATA_CACHE
-    if p.returncode!=0:
-        _APT_FULL_METADATA_CACHE=[]
-        return _APT_FULL_METADATA_CACHE
-
-    packages=_parse_deb822_records(p.stdout)
     translation_by_md5={}
     for path in _apt_index_target_files(identifier="Translations",language="en"):
         text=_read_apt_index(path,timeout_s=30)
@@ -566,82 +536,17 @@ def _apt_xapian_index():
 
 
 def _apt_contents_executable_owners():
-    """Map packages to /usr/bin executables with one pass per APT Contents file."""
+    """Map packages to /usr/bin executables from the content-bound APT snapshot."""
     global _APT_EXECUTABLE_OWNERS_CACHE
     if _APT_EXECUTABLE_OWNERS_CACHE is not None:
         return _APT_EXECUTABLE_OWNERS_CACHE
-
-    helper="/usr/lib/apt/apt-helper"
-    owners={}
-    if not pathlib.Path(helper).exists() or shutil.which("apt-get") is None:
-        _APT_EXECUTABLE_OWNERS_CACHE=owners
-        return owners
-
     try:
-        p=subprocess.run(
-            ["apt-get","indextargets","--format","$(IDENTIFIER)\t$(FILENAME)"],
-            text=True,capture_output=True,timeout=20
-        )
+        from canonical.runtime.apt_metadata_snapshot_v1 import executable_owners
+        owners=executable_owners()
     except Exception:
-        _APT_EXECUTABLE_OWNERS_CACHE=owners
-        return owners
-    if p.returncode!=0:
-        _APT_EXECUTABLE_OWNERS_CACHE=owners
-        return owners
-
-    files=[]
-    for line in p.stdout.splitlines():
-        if "\t" not in line:
-            continue
-        identifier,path=line.split("\t",1)
-        if not identifier.startswith("Contents"):
-            continue
-        path=path.strip()
-        if path and path not in files:
-            files.append(path)
-
-    for path in files:
-        try:
-            proc=subprocess.Popen(
-                [helper,"cat-file",path],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.DEVNULL,
-                text=True,
-                errors="replace",
-            )
-        except Exception:
-            continue
-        try:
-            for line in proc.stdout or []:
-                line=line.rstrip("\n")
-                if not line:
-                    continue
-                try:
-                    filename,raw_owners=line.rsplit(None,1)
-                except ValueError:
-                    continue
-                normalized=filename.lstrip("/")
-                if not normalized.startswith("usr/bin/"):
-                    continue
-                executable="/"+normalized
-                for raw_owner in raw_owners.split(","):
-                    owner=raw_owner.strip().rsplit("/",1)[-1]
-                    owner=owner.split(":",1)[0]
-                    if not owner:
-                        continue
-                    bucket=owners.setdefault(owner,[])
-                    if executable not in bucket:
-                        bucket.append(executable)
-        finally:
-            if proc.stdout:
-                proc.stdout.close()
-            try:
-                proc.wait(timeout=10)
-            except Exception:
-                proc.kill()
+        owners={}
     _APT_EXECUTABLE_OWNERS_CACHE=owners
     return owners
-
 
 def _search_apt_packages_full_metadata(effect,limit=12):
     state=_apt_xapian_index()
