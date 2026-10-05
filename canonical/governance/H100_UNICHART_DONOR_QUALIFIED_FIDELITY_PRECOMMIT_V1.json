@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_DONOR_QUALIFIED_FIDELITY_PRECOMMIT_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_BEFORE_DONOR_QUALIFICATION_SCAN__PACKED_SUBJECT_UNEXPOSED_TO_CANDIDATE_POOL__ZERO_CREDIT",
+  "objective": "Measure whether the frozen sub-100MB structural candidate preserves answers on fresh public ChartQA cases that the FP32 donor can actually solve.",
+  "source": {
+    "repository": "vis-nlp/ChartQA",
+    "commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+    "human_blob_sha": "983dacfcb6aabc8598031c07eeba7747f9884c4a",
+    "augmented_blob_sha": "131068b504407d9cdd8413fe5c574772bb241613"
+  },
+  "selection": {
+    "start_annotation_index": 20,
+    "per_split_target": 10,
+    "split_order": [
+      "human",
+      "augmented"
+    ],
+    "scan_order": "ASCENDING_ANNOTATION_INDEX",
+    "donor_qualification": "FP32_RELAXED_CORRECT_TRUE",
+    "stop_rule": "FIRST_10_DONOR_CORRECT_CASES_PER_SPLIT",
+    "exclude_images_seen_by_packed_subject": [
+      "3887.png",
+      "4576.png",
+      "5734.png",
+      "11756.png",
+      "13153.png",
+      "multi_col_20933.png",
+      "multi_col_972.png",
+      "multi_col_60377.png",
+      "multi_col_60563.png",
+      "multi_col_101153.png",
+      "multi_col_80582.png"
+    ],
+    "packed_model_must_not_run_during_qualification": true
+  },
+  "gate": {
+    "selected_case_count": 20,
+    "fp32_selected_accuracy": 1,
+    "packed_relaxed_accuracy_minimum": 0.95,
+    "packed_exact_answer_agreement_minimum": 0.85,
+    "complete_bundle_bytes_lte": 100000000,
+    "conjunctive": true
+  },
+  "rationale": "This is a donor-capability fidelity test, not an estimate of random-slice ChartQA accuracy. Case inclusion depends only on FP32 donor correctness under a rule frozen before the qualification scan; packed outputs cannot influence selection.",
+  "hard_nonclaims": [
+    "DONOR_QUALIFIED_SELECTION_IS_NOT_AN_UNBIASED_ESTIMATE_OF_FULL_CHARTQA_ACCURACY",
+    "PASS_DOES_NOT_PROVE_CHARTOGRAPHY_GE_89",
+    "PASS_DOES_NOT_PROVE_FULL_H100_TERMINAL_CAPABILITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_credit_delta": 0
+  }
+}
