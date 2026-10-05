@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_SPRITE_ZERO_SPEND_TRUTH_REPAIR_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__ACCOUNT_MAILBOX_PLUS_GITHUB_RUN_PLUS_LIVE_SPRITE_METADATA_RECOMPUTATION__ZERO_CREDIT",
+  "subject": {
+    "truth_repair_path": "canonical/governance/SPRITE_ZERO_SPEND_TRUTH_REPAIR_20261005_V1.json"
+  },
+  "observed": {
+    "fly_trial_start_email_date": "2026-09-04",
+    "fly_trial_end_email_date": "2026-09-11",
+    "zero_spend_gate_run_id": 37255057104,
+    "zero_spend_gate_jobs_zero_steps": true,
+    "sprite_name": "brain-heldout003-one-shot",
+    "sprite_id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+    "current_sprite_status": "cold",
+    "current_sprite_metadata_exposes_remaining_credit": false
+  },
+  "conclusion": "CURRENT_EVIDENCE_DOES_NOT_PROVE_ANY_NONBILLABLE_OR_CREDIT_COVERED_SPRITE_WAKE__THEREFORE_HARD_ZERO_POLICY_REQUIRES_NO_WAKE_AND_REVOKES_ONLY_THE_COST_CARRIER_INTERPRETATION_OF_THE_PRIOR_REPLAY",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
