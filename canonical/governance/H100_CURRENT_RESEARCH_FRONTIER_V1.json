@@ -262,6 +262,22 @@
       },
       "persistent_learned_bytes": 0,
       "deduction": "LIBRARY_FIRST_ROUTING_IS_NOW_BOTH_FORMALLY_AND_EMPIRICALLY_SUPPORTED_ON_THE_MEASURED_REUSABLE_CAPABILITY_COHORT__THE_NEXT_ARCHITECTURAL_MOVE_IS_TO_MAKE_VERIFIED_CAPABILITY_REGISTRY_LOOKUP_THE_DEFAULT_PRE_SYNTHESIS_STAGE"
+    },
+    "verified_capability_registry": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__EXECUTABLE_LIBRARY_FIRST_REGISTRY__ZERO_CREDIT",
+      "governance": "canonical/governance/H100_VERIFIED_CAPABILITY_REGISTRY_V1.json",
+      "verification": "canonical/verification/H100_VERIFIED_CAPABILITY_REGISTRY_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "entry_count": 3,
+      "entries": [
+        "CAP_LINEAR_TREND_SINUSOID_V1",
+        "CAP_EXP_ABS_V1",
+        "CAP_THRESHOLD_STEP_V1"
+      ],
+      "frozen_transfer_hits": "3_OF_3",
+      "raw_synthesis_attempts_before_hit": 0,
+      "out_of_family_fail_closed": true,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE_VERIFIED_LIBRARY_FIRST_ROUTER_IS NOW EXECUTABLE__KNOWN_VERIFIED FAMILIES RESOLVE BEFORE RAW SYNTHESIS AND UNKNOWN INPUTS FAIL CLOSED TO THE RAW SEARCH STAGE"
     }
   },
   "next_structural_residuals_ranked": [
@@ -294,7 +310,8 @@
     "SEARCH_EXISTING_VERIFIED_CAPABILITY_REFERENCES_AND_MINIMAL_PATCHES_BEFORE RAW_PROGRAM SYNTHESIS__EVERY_SAVED_DESCRIPTION_BIT HALVES THE GENERIC DOVETAIL BOUND",
     "MEASURE_INCREMENTAL_DESCRIPTION_LENGTH RELATIVE_TO_THE_CURRENT_VERIFIED_LIBRARY__DO_NOT_USE_RAW_SOURCE_FILE_SIZE_AS A SUBSTITUTE FOR A FROZEN CANONICAL PROGRAM CODE",
     "USE_THE_FROZEN_CAPABILITY_REGISTRY_AND_CANONICAL_DESCRIPTOR_CODE_TO_MEASURE_NON_SYNTHETIC_CAPABILITIES__DO_NOT_GENERALIZE_THE_THREE_FAMILY_L_AND_T_DISTRIBUTION",
-    "DEFAULT_H100_ROUTING_ORDER_IS_VERIFIED_CAPABILITY_LIBRARY_THEN_PARAMETER_FIT_THEN_COMPOSITION_OR_PATCH_THEN_RAW_SYNTHESIS__RAW_FIRST_REQUIRES_EVIDENCE_THAT_NO_LIBRARY_MATCH_EXISTS"
+    "DEFAULT_H100_ROUTING_ORDER_IS_VERIFIED_CAPABILITY_LIBRARY_THEN_PARAMETER_FIT_THEN_COMPOSITION_OR_PATCH_THEN_RAW_SYNTHESIS__RAW_FIRST_REQUIRES_EVIDENCE_THAT_NO_LIBRARY_MATCH_EXISTS",
+    "NEW_VERIFIED_CAPABILITY_FAMILIES_MUST_ENTER_THE_CONTENT_ADDRESSED_REGISTRY_AFTER_INDEPENDENT_VERIFICATION__REGISTRY_ENTRIES_MAY_NOT_BE_ADDED_FROM_SELF_CERTIFICATION"
   ],
   "learned_byte_ladder": {
     "current_rung_bytes": 0,
@@ -357,7 +374,9 @@
     "non_synthetic_real_world_capability_description_length_distribution_measured": false,
     "library_first_measured_wall_clock_speedup_verified": true,
     "library_first_measured_speedup_scope": "THREE_ALREADY_VERIFIED_SYNTHETIC_TRANSFER_TASKS__MEDIAN_9_2745X_ON_SECOND_SPRITE",
-    "default_verified_capability_registry_first_router_implemented": false
+    "default_verified_capability_registry_first_router_implemented": true,
+    "verified_capability_registry_seed_entries": 3,
+    "verified_capability_registry_out_of_family_fail_closed": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
