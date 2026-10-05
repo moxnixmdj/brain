@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FRONTIER_V2_LITERAL_FINALITY_GUARD_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__ADDITIVE_LITERAL_FINALITY_FAIL_CLOSED_GUARD__V1_FRONTIER_COUNTS_PRESERVED__ZERO_CREDIT",
+  "objective": "Activate only the V2 terminal-truth guard, without replacing the currently verified V1 frontier-count compiler until V2 receives runtime/CI verification.",
+  "subject": {
+    "path": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V2.json",
+    "git_blob_sha": "cfdebaf429e66f118b5e9bccc147feb1f054ed01"
+  },
+  "implementation_candidate": {
+    "path": "canonical/runtime/terminal_frontier_compiler_v2.py",
+    "git_blob_sha": "5dcae9ffb9c31ee3a5bf280b416fcbf7cd593d33",
+    "runtime_execution_verified": false
+  },
+  "tests_candidate": {
+    "path": "canonical/tests/test_terminal_frontier_compiler_v2.py",
+    "git_blob_sha": "b387f609675ffd6f0f32e4b57f88f29a64b5a194",
+    "runtime_execution_verified": false
+  },
+  "independent_logic_verification": {
+    "path": "canonical/verification/W4_COVERAGE_ONLY_LITERAL_FINALITY_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "d1b463c148a9074f84e0c5de204588011e289117",
+    "result": "INDEPENDENT_SYMBOLIC_KERNEL_PASS"
+  },
+  "w4_reconciliation_activation": {
+    "path": "canonical/governance/W4_COVERAGE_ONLY_LITERAL_FINALITY_FALSIFICATION_ACTIVATION_20261005_V1.json",
+    "git_blob_sha": "93be1124e8e808ce3cad3a32a3cb19e6f13d46d3"
+  },
+  "active_guard": {
+    "rule": "LITERAL_TERMINAL_TRUE_REQUIRES_CURRENT_ACCEPTANCE_AND_META_CLOSURE_PLUS_A_POSITIVE_COMPLETE_TARGET_DOMAIN_AND_PERFORMANCE_WITNESS__W4_TOP_LEVEL_FAMILY_OR_INTERFACE_COVERAGE_ALONE_IS_NOT_SUFFICIENT.",
+    "current_effect": "FORCE_LITERAL_TERMINAL_FALSE_IN_CURRENT_STATE.",
+    "preserves": "TERMINAL_FRONTIER_COMPILER_V1_AS_CURRENT_COUNT_AND_ROOT_IDENTITY_SCHEDULING_AUTHORITY",
+    "does_not_activate": "TERMINAL_FRONTIER_COMPILER_V2_RUNTIME_AS_COUNT_SCHEDULING_AUTHORITY"
+  },
+  "rationale": [
+    "V1 lacks the separate target-discovery finality conjunct.",
+    "The active W4 certificate explicitly limits itself to top-level causal-role/19-family discovery and states no literal terminal finality from that receipt alone.",
+    "Independent symbolic verification proves coverage does not imply dominance.",
+    "Therefore the conservative conjunction can be activated as a terminal-truth guard without granting acceptance or relying on unexecuted V2 Python."
+  ],
+  "scheduling_authority": true,
+  "terminal_finality_guard_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_V2_PYTHON_TESTS_HAVE_RUN",
+    "NO_REPLACEMENT_OF_V1_FRONTIER_COUNT_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_LITERAL_TERMINAL_COMPLETION"
+  ]
+}
