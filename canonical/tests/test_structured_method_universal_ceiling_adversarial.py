@@ -1,16 +1,18 @@
 """Independent adversarial verification for the structured-method universal ceiling candidate.
 
-This test uses the exact bound compiler contract and demonstrates two facts:
-1. mutually inconsistent declared invariants are preserved as text but are not checked,
-   yet the compiler returns COMPILED;
-2. the emitted acceptance plan is a fixed checklist, not an independently generated
-   discriminating consequence of the rule/operator.
+This test uses the exact bound compiler and its independent structural oracle.
+It demonstrates that the current proof route accepts a witness whose declared
+invariants are mutually inconsistent, because both programs preserve invariant
+text but neither checks semantic consistency. It also shows that the emitted
+acceptance plan is invariant across different operator identities rather than an
+operator-specific independently generated consequence.
 
-Therefore the current compiler cannot by itself establish the behavioral-contract
-success condition requiring invariant consistency and independently generated
-acceptance checks for each material graph edge.
+The frozen behavioral contract requires invariant consistency and independently
+generated acceptance checks for each material graph edge. Therefore the current
+compiler+oracle route does not establish that success condition universally.
 """
 from canonical.runtime.structured_method_normalized_rule_graph_v3 import compile_graph
+from canonical.runtime.structured_method_normalized_rule_oracle_v3 import score
 
 
 def _task(operator: str):
@@ -52,10 +54,12 @@ def _task(operator: str):
     }
 
 
-def test_inconsistent_invariants_do_not_fail_closed():
-    result = compile_graph(_task("IDENTITY"))
-    assert result["status"] == "COMPILED"
-    invariants = result["rules"][0]["invariants"]
+def test_compiler_and_oracle_accept_semantically_inconsistent_invariants():
+    public = _task("IDENTITY")
+    candidate = compile_graph(public)
+    assert candidate["status"] == "COMPILED"
+    assert score(public, candidate) == {"pass": True, "reason": "PASS"}
+    invariants = candidate["rules"][0]["invariants"]
     assert [x["statement"] for x in invariants] == [
         "OUTPUT y MUST BE STRICTLY POSITIVE",
         "OUTPUT y MUST BE NONPOSITIVE",
