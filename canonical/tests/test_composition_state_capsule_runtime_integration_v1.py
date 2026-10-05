@@ -66,9 +66,19 @@ class Tests(unittest.TestCase):
             self.assertTrue(bound["content_bound_action_result_provenance"])
             self.assertTrue(bound["runtime_channel_receipts_complete"])
             self.assertTrue(bound["observed_file_ambient_channel_subset_closed"])
-            self.assertTrue(bound["semantic_declaration_completeness"])
-            self.assertTrue(bound["external_evidence_channel_completeness"])
-            self.assertTrue(bound["broader_runtime_channel_totality"])
+            self.assertEqual(
+                bound["semantic_declaration_completeness"],
+                "UNVERIFIED__RUNTIME_OBSERVATION_IS_NOT_A_SEMANTIC_SCOPE_PROOF",
+            )
+            self.assertEqual(
+                bound["external_evidence_channel_completeness"],
+                "UNVERIFIED__EXTERNAL_RUNTIME_CHANNELS_FORBIDDEN_BUT_REPO_EVIDENCE_PROVENANCE_NOT_SCOPE_COMPLETE",
+            )
+            self.assertEqual(
+                bound["broader_runtime_channel_totality"],
+                "CANDIDATE__STRICT_AUDITED_ACTION_SUBSET_ONLY",
+            )
+            self.assertTrue(bound["strict_runtime_channel_candidate_pass"])
             self.assertTrue(bound["rollback_scope_complete"])
             self.assertEqual(
                 bound["rollback_policy"],
