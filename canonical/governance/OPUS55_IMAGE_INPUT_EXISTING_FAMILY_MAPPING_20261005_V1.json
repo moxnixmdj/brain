@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_IMAGE_INPUT_EXISTING_FAMILY_MAPPING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__LOSSLESS_EXISTING_FAMILY_UNION_MAPPING_FOR_IMAGE_INPUT_SURFACE__NO_NEW_FAMILY__ZERO_CREDIT",
+  "objective": "Resolve whether first-party Opus 5.5 image-input capability requires a new terminal family or is already contained in the declared Vision and Computer/Browser family semantics.",
+  "source_bindings": {
+    "envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    }
+  },
+  "first_party_surface": "IMAGE_INPUT",
+  "formal_decomposition": {
+    "useful_behavior_partition": [
+      {
+        "class": "UNDERSTAND_OR_REASON_ABOUT_IMAGE_CONTENT",
+        "mapped_family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "literal_family_scope": "READ_AND_REASON_OVER_DENSE_DOCUMENTS_CHARTS_SCREENSHOTS_DIAGRAMS_AND_COMPLEX_REAL_WORLD_IMAGERY"
+      },
+      {
+        "class": "USE_VISUAL_INPUT_TO_GROUND_ACTION_IN_BROWSER_OR_APPLICATION",
+        "mapped_family": "COMPUTER_AND_BROWSER_USE",
+        "literal_family_scope": "MULTI_STEP_WORKFLOWS_ACROSS_BROWSERS_AND_ARBITRARY_APPLICATIONS_WITH_PLANNING_VISUAL_GROUNDING_AND_JUDGMENT"
+      }
+    ],
+    "union_rule": "EVERY LOAD_BEARING IMAGE_INPUT USEFUL BEHAVIOR IDENTIFIED BY THE DECLARED OPUS SURFACE IS EITHER PERCEPTUAL_OR_REASONING_INTERPRETATION OR VISUAL_GROUNDING_FOR_ACTION; BOTH CLASSES ARE LITERAL SUBSETS OF EXISTING FAMILY DEFINITIONS.",
+    "new_family_required": false
+  },
+  "acceptance_consequence": {
+    "envelope_mapping_obligation_closed": true,
+    "acceptance_not_closed": true,
+    "load_bearing_existing_predicates": [
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "VISION_DENSE_NONCHART_SCOPE",
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "rule": "THIS MAPPING ONLY PROVES FAMILY-ENVELOPE COVERAGE. CURRENT VISION/COMPUTER ACCEPTANCE PREDICATES MUST STILL PROVE EQUAL_OR_BETTER PERFORMANCE OVER THEIR COMPLETE CLAIMED SCOPE."
+  },
+  "root1_effect": {
+    "positive_new_gap_count_delta": 0,
+    "global_envelope_sealed": false,
+    "remaining_meta_surface_groups": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_VISION_FAMILY_ACCEPTANCE_IS CLOSED",
+    "NO_CLAIM_OSWORLD_ALONE_COVERS_GENERAL_IMAGE_UNDERSTANDING",
+    "NO_NEW_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
