@@ -101,6 +101,11 @@ class ScientificHypothesisBoundedTests(unittest.TestCase):
         )
         self.assertEqual(out["selected_test"]["test_id"],"perfect-cheap")
 
+    def test_boolean_direction_is_rejected(self):
+        bad=[{"id":"x","target":"growth","predicted_direction":True,"hypothesis":"x"}]
+        with self.assertRaisesRegex(HypothesisKernelError,"MECHANISM_DIRECTION_INVALID"):
+            generate_hypotheses(observations=OBS,mechanisms=bad)
+
     def test_invalid_likelihood_normalization_fails_closed(self):
         with self.assertRaisesRegex(HypothesisKernelError,"TEST_PROB_NOT_NORMALIZED"):
             formulate_and_rank(
