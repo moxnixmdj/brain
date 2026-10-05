@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_ARBITRARY_COMMAND_EFFECT_CLASS_FIREWALL_LOCAL_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "LOCAL_ISOLATED_BEHAVIOR_PASS__NONINDEPENDENT__ZERO_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/root3_subprocess_effect_class_firewall_v1.py",
+    "runtime_git_blob_sha": "73d3e4fd98ecfa6e7c1ae356cfc85850894c18fb",
+    "tests_path": "canonical/tests/test_root3_subprocess_effect_class_firewall_v1.py",
+    "tests_git_blob_sha": "681d2f0ba0220a5c98f1ee9c783513be7c0b7df8",
+    "governance_path": "canonical/governance/ROOT3_ARBITRARY_COMMAND_EFFECT_CLASS_FIREWALL_20261005_V1.json"
+  },
+  "environment": {
+    "carrier": "CURRENT_CHAT_LOCAL_PYTHON_RUNTIME",
+    "incremental_spend_usd": 0,
+    "independent": false
+  },
+  "results": {
+    "pure_logic": "PASS",
+    "live_stack_exact_line_resolution": "PASS",
+    "arbitrary_site_denied_before_downstream": true,
+    "nonarbitrary_site_delegated_once": true,
+    "unknown_site_fail_closed": true,
+    "unsupported_api_fail_closed": true,
+    "ambiguous_site_fail_closed": true,
+    "outside_repo_path_fail_closed": true
+  },
+  "truth_boundary": {
+    "proved": "THE_CANDIDATE_ALGORITHM_RESOLVES_FROZEN_CALLSITE_IDENTITY_FROM_A_LIVE_STACK_AND_DENIES_THE_ARBITRARY_CLASS_BEFORE_DOWNSTREAM_AUTHORIZATION_IN_LOCAL_ISOLATED_TESTS",
+    "not_proved": [
+      "EXACT_BRANCH_BLOBS_HAVE_BEEN_INDEPENDENTLY_EXECUTED",
+      "FIREWALL_IS_INSTALLED_IN_PRODUCTION_CREDITED_RUNTIME",
+      "OTHER_SIX_EFFECT_CLASSES_ARE_SAFE",
+      "ROOT3_C1_C2_C3_ARE_COMPLETE"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
