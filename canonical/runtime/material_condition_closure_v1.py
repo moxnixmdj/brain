@@ -46,6 +46,8 @@ def compile_material_condition_closure(
     registry: Mapping[str, Any],
     evidence: Mapping[str, Any],
     envelope: Mapping[str, Any],
+,
+    verified_source_universe_receipt_sha: str | None = None,
 ) -> dict[str, Any]:
     errors: list[str] = []
 
@@ -108,8 +110,24 @@ def compile_material_condition_closure(
         source_sealed = source_universe.get("sealed") is True
         if source_sealed:
             receipt = source_universe.get("independent_seal_receipt")
-            if not isinstance(receipt, str) or not receipt:
-                errors.append("SOURCE_UNIVERSE_SEALED_WITHOUT_INDEPENDENT_RECEIPT")
+            if not isinstance(receipt, Mapping):
+                errors.append("SOURCE_UNIVERSE_SEALED_WITHOUT_STRUCTURED_INDEPENDENT_RECEIPT")
+            else:
+                path = receipt.get("path")
+                declared_sha = receipt.get("git_blob_sha")
+                state = receipt.get("state")
+                if not isinstance(path, str) or not path:
+                    errors.append("SOURCE_UNIVERSE_SEAL_RECEIPT_PATH_INVALID")
+                if (
+                    not isinstance(declared_sha, str)
+                    or len(declared_sha) != 40
+                    or any(ch not in "0123456789abcdef" for ch in declared_sha.lower())
+                ):
+                    errors.append("SOURCE_UNIVERSE_SEAL_RECEIPT_SHA_INVALID")
+                if state != "INDEPENDENT_PASS":
+                    errors.append("SOURCE_UNIVERSE_SEAL_RECEIPT_NOT_INDEPENDENT_PASS")
+                if verified_source_universe_receipt_sha != declared_sha:
+                    errors.append("SOURCE_UNIVERSE_SEAL_RECEIPT_BLOB_NOT_VERIFIED")
 
     if errors:
         return _fail(*errors)
