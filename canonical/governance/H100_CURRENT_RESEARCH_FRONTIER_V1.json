@@ -387,6 +387,16 @@
       "prior_verification": "canonical/verification/H100_MINIMAL_PATCH_SEARCH_SEPARATE_RUNTIME_VERIFICATION_20261005_V1.json",
       "persistent_learned_bytes": 0,
       "hard_nonclaim": "DO_NOT_TREAT_REGISTRY_V2_AS_INDEPENDENTLY_VERIFIED_UNTIL_END_TO_END_TESTS_EXECUTE_ON_AN_EXTERNAL_OR_DISTINCT_ISOLATED_CARRIER"
+    },
+    "lexical_coverage_bound": {
+      "status": "SEPARATE_RUNTIME_FORMAL_PASS__FINITE_PERSISTENT_LEXICON_OPEN_WORLD_COMPLETENESS_IMPOSSIBLE__JIT_SOURCE_CONDITIONAL_ROUTE",
+      "governance": "canonical/governance/H100_OPEN_WORLD_LEXICAL_COVERAGE_BOUND_V1.json",
+      "verification": "canonical/verification/H100_LEXICAL_COVERAGE_BOUND_SEPARATE_RUNTIME_VERIFICATION_20261005_V1.json",
+      "runtime": "canonical/runtime/h100_lexical_coverage_bound_v1.py",
+      "theorem": "ANY_FINITE_LEXICON_HAS_A_CONSTRUCTIVE_UNCOVERED_STRING_LONGER_THAN_ITS_LONGEST_MEMBER",
+      "valid_route": "EVENT_DRIVEN_JIT_SOURCE_ACQUISITION_PLUS_PROVENANCE_PLUS_QUERY_COMPLETENESS_PLUS_CONFLICT_ABSTENTION",
+      "persistent_learned_bytes": 0,
+      "deduction": "OPEN_WORLD_LEXICAL_COMPLETENESS_CANNOT_BE_SUPPLIED_BY_FIXED_FINITE_PERSISTENT_STATE__THE_REMAINING_REAL_RESIDUAL_IS_SOURCE_AVAILABILITY_COMPLETENESS_TRUST_CONFLICT_AND_ROLE_BRIDGE_COVERAGE"
     }
   },
   "next_structural_residuals_ranked": [
@@ -402,8 +412,8 @@
     },
     {
       "rank": 3,
-      "residual": "OPEN_WORLD_LEXICAL_COVERAGE_COMPLETENESS",
-      "reason": "OBSERVED_LEXICAL_MISSES_HAVE_EVENT_DRIVEN_ZERO_LEARNED_FALLBACKS__FUTURE_SOURCE_GAPS_REMAIN_FAIL_CLOSED_AND_EVENT_DRIVEN"
+      "residual": "RUNTIME_LEXICAL_SOURCE_AVAILABILITY_COMPLETENESS_TRUST_AND_ROLE_BRIDGE_COVERAGE",
+      "reason": "FORMAL_SEPARATE_RUNTIME_PROOF_DELETES_FIXED_FINITE_OPEN_WORLD_LEXICAL_COMPLETENESS_AS_AN_IMPOSSIBLE_TARGET__OBSERVED_MISSES_ALREADY_HAVE_EVENT_DRIVEN_ZERO_LEARNED_FALLBACKS__THE_REMAINING_REAL_UNKNOWN_IS_WHETHER_A_GIVEN_TERM_HAS_COMPLETE_TRUSTWORTHY_NONCONFLICTING_SOURCE_RELATIONS_MAPPABLE_BY_THE_VERIFIED_ROLE_BRIDGE"
     }
   ],
   "decision_policy": [
@@ -499,7 +509,11 @@
     "minimal_patch_search_distinct_transfer_passed": true,
     "minimal_patch_search_scope": "THREE_FROZEN_POLYNOMIAL_PATCHES__ONE_DISTINCT_CUBIC_TRANSFER_TASK",
     "registry_v2_cubic_candidate_committed": true,
-    "registry_v2_cubic_independently_verified": false
+    "registry_v2_cubic_independently_verified": false,
+    "fixed_finite_lexicon_open_world_completeness_possible": false,
+    "fixed_finite_lexicon_open_world_completeness_impossibility_proved": true,
+    "jit_lexical_source_conditional_contract_proved": true,
+    "arbitrary_term_source_availability_not_claimed": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
