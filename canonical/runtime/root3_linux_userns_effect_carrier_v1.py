@@ -54,7 +54,10 @@ def _repo_prefix(repo: Path, raw: str) -> tuple[str,Path]:
     rel=Path(raw)
     if any(part in {"",".."} for part in rel.parts):
         raise CarrierError("WRITABLE_PREFIX_INVALID")
+    lexical=Path(os.path.abspath(repo/rel))
     resolved=(repo/rel).resolve()
+    if resolved!=lexical:
+        raise CarrierError("WRITABLE_PREFIX_SYMLINK_COMPONENT_FORBIDDEN:"+raw)
     if resolved==repo:
         raise CarrierError("WRITABLE_PREFIX_REPO_ROOT_FORBIDDEN")
     if repo not in resolved.parents:
