@@ -58,7 +58,7 @@
     "realized_synthesis_text_emitted": false,
     "claim_to_provenance_mapping_emitted": false,
     "unsupported_required_claim_behavior": "IF_NO_VOTES_CONTINUE__CLAIM_OMITTED_WITHOUT_EXPLICIT_UNRESOLVED_OR_INSUFFICIENT_EVIDENCE_STATE",
-    "preflight_oracle_mirrors_no_vote_omission": true
+    "preflight_zero_evidence_required_claim_coverage": "NOT_EXERCISED__GENERATOR_CREATES_TWO_OR_THREE_EVIDENCE_UNITS_FOR_EVERY_CLAIM"
   },
   "current_implementation_envelope": {
     "name": "P3_V3_NUMERIC_THRESHOLD_SELECTION_SUBDOMAIN",
@@ -106,7 +106,7 @@
     {
       "id": "SYNTHESIS_SCOPE_R5_INSUFFICIENT_EVIDENCE_FOR_REQUIRED_CLAIM",
       "witness": "A required claim with zero matching evidence units or evidence that cannot support it.",
-      "source_reason": "When votes is empty the candidate continues and silently omits the required claim; it emits no unresolved/insufficient-evidence state. The bounded suite oracle follows the same omission rule, so that preflight cannot falsify this contract miss.",
+      "source_reason": "When votes is empty the candidate continues and silently omits the required claim; it emits no unresolved/insufficient-evidence state. The bounded preflight generator always creates 2 or 3 evidence units for every generated claim, so that population cannot exercise this zero-evidence required-claim class.",
       "contract_clause": "required coverage is complete; no unsupported material claims"
     },
     {
