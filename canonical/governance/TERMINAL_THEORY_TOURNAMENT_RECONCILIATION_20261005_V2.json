@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_THEORY_TOURNAMENT_RECONCILIATION_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_TARGET_RECONCILIATION__ZERO_CREDIT",
+  "base_main_commit": "38845ca1d0c9ba6a7fb7540a52f0d9ee0c299fcb",
+  "supersedes_branch_candidate": "canonical/governance/TERMINAL_THEORY_TOURNAMENT_RECONCILIATION_20261005_V1.json",
+  "reason_for_supersession": "The V1 branch candidate treated the activated W4 target-discovery certificate as current. A later target-boundary artifact was then identified that supersedes W4's bound profile-union authority for intrinsic Opus 5.5 capability attribution.",
+  "chronology": [
+    {
+      "event": "W4_ACTIVATION",
+      "time": "2026-10-05T02:13:17Z",
+      "path": "canonical/governance/OPUS55_TARGET_DISCOVERY_COMPLETENESS_CERTIFICATE_V1_ACTIVATION_V1.json",
+      "git_blob_sha": "8382da2ed68c531e596f0cbe424f7028d30eae50"
+    },
+    {
+      "event": "INTRINSIC_TARGET_BOUNDARY_V2",
+      "time": "2026-10-05T02:13:50Z",
+      "path": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_VS_DEPLOYMENT_PROFILE_BOUNDARY_20261005_V2.json",
+      "git_blob_sha": "9bac958e4db829f94d756cd94709d0c885d43e25"
+    },
+    {
+      "event": "INTRINSIC_TARGET_BOUNDARY_V2_AUTHORITY_REPAIR",
+      "time": "2026-10-05T02:15:03Z"
+    }
+  ],
+  "current_reconciliation": {
+    "W4_FIXED_INTERFACE_ROLE_DECOMPOSITION": "PRESERVE_AS_A_STRONG_CANDIDATE_LEMMA",
+    "W4_TARGET_DISCOVERY_COMPLETE_FLAG": "NOT_CURRENTLY_LOAD_BEARING_UNTIL_REBOUND_TO_INTRINSIC_C55_AND_REVERIFIED",
+    "reason": "W4 depends on OPUS55_TARGET_PROFILE_UNION_BOUNDARY_V1. The later intrinsic-vs-deployment V2 explicitly supersedes that boundary, excludes fallback/external-executor/wrapper behavior from intrinsic credit, and leaves semantic target-superset coverage for C55 open.",
+    "old_literal_finality_information_cut": "NOT_DISCHARGED_FOR_CURRENT_INTRINSIC_C55_TARGET_BY_W4_V1_ALONE",
+    "terminal": false
+  },
+  "current_target_discovery_obligation": {
+    "target": "C55__USEFUL_BEHAVIORAL_CAPABILITIES_CAUSALLY_ATTRIBUTABLE_TO_THE_OPUS55_MODEL_POLICY",
+    "required": "PROVE_A_SOUND_INTRINSIC_C55_TARGET_SUPERSET_COVERAGE_WITNESS_OR_OTHER_COMPLETE_TARGET_DOMAIN_WITNESS",
+    "preferred_route": "REBASE_THE_FIXED_INTERFACE_FUNCTIONAL_ROLE_DECOMPOSITION_ON_ACTOR_ATTRIBUTED_INTRINSIC_C55__THEN_REVERIFY_SCOPE_COMPLETENESS",
+    "reopen_or_reject_on": [
+      "INTRINSIC_USEFUL_BEHAVIOR_NOT_DECOMPOSABLE_INTO_THE_BOUND_FUNCTIONAL_ROLE_BASIS",
+      "ROLE_TO_EXISTING_FAMILY_MAPPING_NOT_TOTAL_FOR_INTRINSIC_C55",
+      "LOAD_BEARING_MODEL_SIDE_INTERFACE_CHANNEL_NOT_COVERED_BY_THE_REBASED_DOMAIN",
+      "TARGET_EVIDENCE_WITH_LOAD_BEARING_ACTOR_ATTRIBUTION_AMBIGUITY"
+    ]
+  },
+  "other_theory_results_preserved": {
+    "STRUCTURED_METHOD_UNIVERSAL_CEILING_V3": "UNAVAILABLE_AFTER_EXISTING_DEDUCTIVE_FALSIFICATION_UNTIL_REPAIRED_AND_REVERIFIED",
+    "BEHAVIOR_CONTRACT_COMPLETENESS_20261002": "STRUCTURAL_FIELD_COMPLETENESS_ONLY__NOT_CURRENT_SEMANTIC_ACCEPTANCE_COMPLETENESS",
+    "TERMINAL_COUNTEREXAMPLE_AND_ENVELOPE_COMPILER_V1": "RETAIN_AS_CORE_RESIDUAL_BASIS_COMPONENT"
+  },
+  "remaining_terminal_conjuncts": [
+    "INTRINSIC_C55_TARGET_COMPLETENESS",
+    "CURRENT_ACCEPTANCE_BASIS_COMPLETENESS",
+    "ATOMIC_PERFORMANCE_AND_ACCEPTANCE_PARITY",
+    "META_CONDITION_PARITY",
+    "UNIVERSAL_SCOPE_AND_COMPOSITION_SOUNDNESS",
+    "BRAIN_OWNERSHIP_AND_DONOR_INDEPENDENCE",
+    "FINAL_CONTENT_ADDRESSED_CLEANROOM_REPLAY_AND_FINALITY_REDUCER"
+  ],
+  "next": [
+    "REBASE_AND_ADVERSARIALLY_TEST_W4_ROLE_COVERAGE_ON_INTRINSIC_C55",
+    "ADVERSARIALLY_TEST_TERMINAL_ACCEPTANCE_BASIS_V5_AND_REQUIRE_INDEPENDENT_VERIFICATION",
+    "ADVERSARIALLY_TEST_ROOT3_CURRENT_RUNTIME_CHANNEL_TOTALITY_AND_MEDIATOR_SEMANTIC_SOUNDNESS",
+    "RECOMPUTE_THE_MINIMUM_SURVIVING_TERMINAL_PREMISE_SET_AFTER_EVERY_VERIFIED_CHANGE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_INTRINSIC_C55_TARGET_DISCOVERY_IS_COMPLETE",
+    "NO_CLAIM_TERMINAL_TRUE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
