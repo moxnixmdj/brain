@@ -40,7 +40,8 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
     def test_next_residual_family_closure_is_derived_without_code_change(self):
         docs,shas=self.live(); docs=copy.deepcopy(docs)
         reg=docs["predicate_registry"]; atom=docs["atomic_bindings"]
-        target="TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+        live_before=self.evaluate(docs,shas)
+        target=next(f for f in reg["residual_families"] if f not in set(live_before["accepted_families"]))
         ids=[p["id"] for p in reg["predicates"] if p["family"]==target]
         cmap={x["predicate_id"]:x for x in atom["claims"]}
         for pid in ids:
@@ -82,10 +83,12 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
 
     def test_ownership_cannot_precede_acceptance(self):
         docs,shas=self.live(); docs=copy.deepcopy(docs)
-        row=next(x for x in docs["matrix"]["rows"] if x["family"]=="TOOL_DISCOVERY_SELECTION_AND_LEARNING")
+        live_before=self.evaluate(docs,shas)
+        target=next(f for f in docs["predicate_registry"]["residual_families"] if f not in set(live_before["accepted_families"]))
+        row=next(x for x in docs["matrix"]["rows"] if x["family"]==target)
         row["postwave_ownership_credit"]="VERIFIED_OWNED_EQUAL_OR_BETTER"
         out=self.evaluate(docs,shas); self.assertFalse(out["pass"])
-        self.assertIn("MATRIX_OWNERSHIP_WITHOUT_ACCEPTANCE:TOOL_DISCOVERY_SELECTION_AND_LEARNING",out["errors"])
+        self.assertIn("MATRIX_OWNERSHIP_WITHOUT_ACCEPTANCE:"+target,out["errors"])
 
     def test_stale_blob_pointer_fails_closed(self):
         docs,shas=self.live(); docs=copy.deepcopy(docs)

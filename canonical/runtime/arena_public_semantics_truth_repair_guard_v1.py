@@ -28,10 +28,17 @@ def verify()->dict:
         assert ptr["scheduling_authority"] is True
         assert ptr["execution_authority"] is False
         assert ptr["fresh_reality_authority"] is False
-    assert root["current_acceptance"]["accepted_families"]==5
-    assert root["current_acceptance"]["proved_atomic"]==12
-    assert root["current_acceptance"]["unresolved_atomic"]==26
-    assert root["current_acceptance"]["terminal"] is False
+    a=root["current_acceptance"]
+    c=cur["current_root_partition_override"]
+    atomic=cur["atomic_acceptance_frontier"]
+    assert a["accepted_families"]==c["accepted_families"]
+    assert a["open_families"]==c["open_families"]
+    assert a["proved_atomic"]==c["proved_atomic"]==atomic["proved"]
+    assert a["unresolved_atomic"]==c["unresolved_atomic"]==atomic["unresolved"]
+    assert a["total_atomic"]==atomic["total"]
+    assert a["proved_atomic"]+a["unresolved_atomic"]==a["total_atomic"]
+    assert a["accepted_families"]+a["open_families"]==a["total_families"]
+    assert a["terminal"] is False and c["terminal"] is False
     return {
       "schema":"PROJECT_BRAIN_ARENA_PUBLIC_SEMANTICS_TRUTH_REPAIR_GUARD_V1",
       "status":"PASS",

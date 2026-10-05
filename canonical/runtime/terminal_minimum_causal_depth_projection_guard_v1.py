@@ -26,10 +26,17 @@ def verify() -> dict:
     current=load(CURRENT)
     check_ptr(root["scheduler_policy"]["terminal_minimum_causal_depth"])
     check_ptr(current["terminal_minimum_causal_depth_authority"])
-    assert root["current_acceptance"]["accepted_families"]==5
-    assert root["current_acceptance"]["proved_atomic"]==12
-    assert root["current_acceptance"]["unresolved_atomic"]==26
-    assert root["current_acceptance"]["terminal"] is False
+    a=root["current_acceptance"]
+    c=current["current_root_partition_override"]
+    atomic=current["atomic_acceptance_frontier"]
+    assert a["accepted_families"]==c["accepted_families"]
+    assert a["open_families"]==c["open_families"]
+    assert a["proved_atomic"]==c["proved_atomic"]==atomic["proved"]
+    assert a["unresolved_atomic"]==c["unresolved_atomic"]==atomic["unresolved"]
+    assert a["total_atomic"]==atomic["total"]
+    assert a["proved_atomic"]+a["unresolved_atomic"]==a["total_atomic"]
+    assert a["accepted_families"]+a["open_families"]==a["total_families"]
+    assert a["terminal"] is False and c["terminal"] is False
     return {
       "schema":"PROJECT_BRAIN_TERMINAL_MINIMUM_CAUSAL_DEPTH_PROJECTION_GUARD_V1",
       "status":"PASS",

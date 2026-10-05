@@ -45,7 +45,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: Preserve trusted validator
-        run: cp canonical/runtime/enforce_goal_hierarchy.py /tmp/trusted_drift_guard.py
+        run: |
+          cp canonical/runtime/enforce_goal_hierarchy.py /tmp/trusted_drift_guard.py
+          cp execution_guard/v22_prewrite_admission.py /tmp/trusted_v22_prewrite_admission.py
       - name: Resolve comparison
         id: refs
         shell: bash
@@ -68,4 +70,4 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           CURRENT_PR_NUMBER: ${{ github.event.pull_request.number || 0 }}
         run: |
-          python /tmp/trusted_drift_guard.py --base "${{ steps.refs.outputs.base }}" --head "${{ steps.refs.outputs.head }}"
+          PYTHONPATH=/tmp python /tmp/trusted_drift_guard.py --base "${{ steps.refs.outputs.base }}" --head "${{ steps.refs.outputs.head }}"

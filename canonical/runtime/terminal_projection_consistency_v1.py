@@ -11,7 +11,7 @@ and scope_complete in the current ledger. Historical family-specific receipts ma
 as provenance, but they do not drive live counters.
 """
 from __future__ import annotations
-import hashlib, json
+import hashlib, json, subprocess
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Mapping
@@ -32,6 +32,23 @@ def _load(rel:str)->dict[str,Any]:
     return value
 
 def _git_blob_sha(rel:str)->str:
+    # Git blob identity must be checkout-platform independent. If the tracked
+    # worktree file is clean, use the repository object directly; this avoids
+    # CRLF/LF transformations changing a content-addressed authority check.
+    try:
+        dirty=subprocess.run(
+            ["git","diff","--quiet","--",rel],
+            cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,
+        )
+        if dirty.returncode==0:
+            sha=subprocess.check_output(
+                ["git","rev-parse",f"HEAD:{rel}"],
+                cwd=ROOT,text=True,stderr=subprocess.DEVNULL,
+            ).strip()
+            if len(sha)==40 and all(c in "0123456789abcdef" for c in sha):
+                return sha
+    except (OSError,subprocess.SubprocessError):
+        pass
     data=(ROOT/rel).read_bytes()
     h=hashlib.sha1(); h.update(f"blob {len(data)}\0".encode()); h.update(data)
     return h.hexdigest()
