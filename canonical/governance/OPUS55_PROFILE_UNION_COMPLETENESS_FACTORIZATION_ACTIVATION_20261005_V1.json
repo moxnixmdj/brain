@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PROFILE_UNION_COMPLETENESS_FACTORIZATION_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__PROFILE_UNION_COMPLETENESS_REMAINS_OPEN__PROFILE_AND_BEHAVIOR_FACTORS_EXPLICIT__SECURITY_ROWS_MEMBERSHIP_GATED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_PROFILE_UNION_COMPLETENESS_AND_TARGET_MEMBERSHIP_FACTORIZATION_20261005_V1.json",
+    "git_blob_sha": "ee2ce2a52c95f2334fd44c74df7334188707310b"
+  },
+  "verification": {
+    "path": "canonical/verification/OPUS55_PROFILE_UNION_COMPLETENESS_FACTORIZATION_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "result": "PASS__INDEPENDENT_SYMBOLIC_KERNEL",
+    "raw_kernel_result": "{True,1,True}"
+  },
+  "effects": [
+    "DO_NOT_PROMOTE_OPUS55_TARGET_PROFILE_UNION_BOUNDARY_AS_TARGET_DISCOVERY_COMPLETENESS",
+    "WHEN_USING_PROFILE_DECOMPOSITION_REQUIRE_PROFILE_SET_COMPLETENESS_AND_PER_PROFILE_BEHAVIOR_COVERAGE",
+    "ALLOW_PROFILE_ENUMERATION_BYPASS_ONLY_WITH_A_NONCIRCULAR_TARGET_INDEPENDENT_SUPERDOMAIN_PROOF_AND_FULL_UNIVERSAL_DOMINANCE_OVER_THAT_DOMAIN",
+    "KEEP_ALL_FOUR_NEW_SECURITY_RELIABILITY_DIMENSIONS_NONMANDATORY_UNTIL_EACH_DIMENSION_HAS_PROVED_TARGET_MEMBERSHIP_FOR_ITS_BOUND_PROFILE_SCOPE",
+    "DO_NOT_INFER_RAW_OPUS55_BACKEND_CAPABILITY_FROM_EXTERNAL_SCREENING_SANDBOX_OR_DEPLOYED_STACK_MECHANISM_DESCRIPTIONS_ALONE",
+    "PRESERVE_DIRECT_FIRST_PARTY_SECURITY_BEHAVIOR_CLAIMS_AS_TARGET_MEMBERSHIP_CANDIDATES"
+  ],
+  "literal_completeness_lane": {
+    "profile_route": "PROVE_P0_EQUALS_P_AND_FOR_EACH_PROFILE_PROVE_COMPLETE_U_p_COVERAGE",
+    "superdomain_route": "PROVE_ALL_PROFILE_BEHAVIORS_SUBSET_D_WITHOUT_ENUMERATION_AND_PROVE_UNIVERSAL_BRAIN_NONINFERIORITY_OVER_D",
+    "finite_blackbox_accumulation_alone": "DOMINATED_FOR_LITERAL_FINALITY",
+    "current_literal_terminal": false
+  },
+  "security_scheduler_state": {
+    "candidate_dimension_count": 4,
+    "mandatory_dimension_count_from_candidate": 0,
+    "target_membership_first": true
+  },
+  "hard_rules": [
+    "NO_GOAL_WEAKENING",
+    "NO_PROFILE_FREE_ACCEPTANCE_CLAIMS",
+    "NO_MANDATORY_NEW_SECURITY_DEBT_FROM_MECHANISM_ASSOCIATION",
+    "NO_LITERAL_TERMINAL_FINALITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ACTIVATION",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
