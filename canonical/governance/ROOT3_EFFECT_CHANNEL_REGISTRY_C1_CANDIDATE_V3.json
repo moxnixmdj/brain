@@ -5,7 +5,7 @@
   "objective": "Classify every currently registered repo-local capability module by material-effect carrier and fail closed on new unclassified network, child-process, in-process third-party, or dynamic-import edges.",
   "parent": {
     "path": "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json",
-    "git_blob_sha": "e3e303ab8b70a1c56c080446c3dc896185c12c1a"
+    "git_blob_sha": "7e2a232d8c7c66d711e858cc75c647c5690a43eb"
   },
   "bound_registry": {
     "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
