@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TWO_NEW_WITNESS_MATCHED_REUSE_AUDIT_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__2X8_DIRECT_REUSE_DELTA_SATURATED__NEW_BRIDGE_THEOREMS_STILL_ALLOWED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TWO_NEW_WITNESS_MATCHED_REUSE_AUDIT_20261005_V1.json",
+    "git_blob_sha": "64115750a661ae2e1b8eb7e6c8728b0d2cd1813c"
+  },
+  "verification": {
+    "path": "canonical/verification/CURRENT_TWO_NEW_WITNESS_MATCHED_REUSE_AUDIT_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "15f9b3137cc31b7fde9d6f41a9d883f8f50d6465"
+  },
+  "effects": [
+    "DELETE_REPEAT_DIRECT_REUSE_SEARCH_FOR_LIVEBENCH_IF_GE_65_7_AGAINST_THE_EIGHT_CURRENT_MATCHED_TARGETS",
+    "DELETE_REPEAT_DIRECT_REUSE_SEARCH_FOR_UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_AGAINST_THE_EIGHT_CURRENT_MATCHED_TARGETS",
+    "PRESERVE_SEARCH_FOR_A_NEW_CONTENT_ADDRESSED_SEMANTIC_IMPLICATION_THEOREM",
+    "PRESERVE_SEARCH_FOR_A_NEW_EXACT_OR_SUPERSET_SCOPE_BRIDGE",
+    "PRESERVE_CURRENT_MATCHED_TARGETS_AND_ACCEPTANCE_COUNTS"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
