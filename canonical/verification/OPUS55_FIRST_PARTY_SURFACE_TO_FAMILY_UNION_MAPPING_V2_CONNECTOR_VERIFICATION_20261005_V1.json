@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__V5_FIVE_FAMILY_MAPPING_FRONTIER_FULLY_REPRESENTED__CONDITION_ROWS_QUARANTINED_TO_V2__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+    "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+  },
+  "inputs": {
+    "root1_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "root1_v5_activation": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5_ACTIVATION_V1.json",
+      "git_blob_sha": "72281405d99d0004cf2fa1ed9080d7cdafc2f70c"
+    },
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "behavioral_decomposition": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1.json",
+      "git_blob_sha": "c0069cbcbc26aaf663f48c0068f64969564afe10"
+    },
+    "behavioral_decomposition_verification": {
+      "path": "canonical/verification/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "4c762beb158a2e1deecd24f8461828063172606e"
+    },
+    "multilingual_long_context_v2": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+    },
+    "semantic_law": {
+      "path": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+      "git_blob_sha": "5b70ed776f13194ea02d7df1d878a88386a48b61"
+    }
+  },
+  "recomputation": {
+    "exact_v5_family_mapping_frontier": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "HEALTHCARE",
+      "MATHEMATICAL_REASONING_ARXIVMATH"
+    ],
+    "exact_subject_rows_for_v5_frontier": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "HEALTHCARE",
+      "MATHEMATICAL_REASONING_ARXIVMATH"
+    ],
+    "v5_frontier_minus_subject_rows": [],
+    "subject_rows_minus_v5_frontier_ignored_for_this_reduction": [
+      "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT",
+      "MULTILINGUAL_PERFORMANCE",
+      "LONG_CONTEXT"
+    ],
+    "all_referenced_family_ids_exist_in_frozen_19_family_envelope": true,
+    "all_five_mapping_rows_have_nonempty_existing_family_unions": true,
+    "no_new_accounting_family_required_by_the_five_currently_enumerated_mapping_labels": true,
+    "primitive_family_gap_from_five_v5_mapping_labels": false
+  },
+  "truth_repairs": [
+    {
+      "issue": "SUBJECT_MULTILINGUAL_AND_LONG_CONTEXT_ROWS_PRECEDE_V2_TRUTH_REPAIR",
+      "disposition": "DO_NOT_USE_SUBJECT_CONDITION_ROWS_AS_CURRENT_AUTHORITY",
+      "current_authority": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "reason": "V2 adds ADVANCED_AGENTIC_CODING to both observed cross-cutting condition unions and remains parity-open."
+    },
+    {
+      "issue": "EXACT_SYMBOLIC_COMPUTATION_HAS_EXPLICIT_NARROW_SCOPE_WARNING",
+      "disposition": "DO_NOT_TREAT_EXACT_SYMBOLIC_COMPUTATION_AS_GENERAL_MATHEMATICAL_REASONING_PROOF",
+      "reason": "The MATHEMATICAL_REASONING_ARXIVMATH mapping is a union-level accounting mapping only; general/non-symbolic parity remains open under multidisciplinary reasoning and verification behavior."
+    },
+    {
+      "issue": "CREATIVE_DIAGRAM_MAPPING_IS_NOT_ACCEPTANCE_BASIS_CLOSURE",
+      "disposition": "PRESERVE_MINIMUM_CREATIVE_DIAGRAM_PROOF_BASIS_REPAIR",
+      "authority": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json"
+    }
+  ],
+  "consequence": [
+    "DELETE_ONLY_THE_FIVE_V5_FAMILY_MAPPING_OR_COUNTEREXAMPLE_SCHEDULER_ACTIONS_AS_DOMINATED_BY_CURRENT_SEMANTIC_MAPPING",
+    "SET_CURRENTLY_ENUMERATED_V5_FAMILY_MAPPING_FRONTIER_TO_ZERO_FOR_SCHEDULING",
+    "PRESERVE_MULTILINGUAL_AND_LONG_CONTEXT_AS_CROSS_CUTTING_PARITY_OPEN_UNDER_V2",
+    "PRESERVE_CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR",
+    "PRESERVE_CURRENT_14_OF_38_PROVED__24_UNRESOLVED_ATOMIC_ACCEPTANCE_FRONTIER",
+    "PRESERVE_ROOT1_POSITIVE_GAP_ZERO",
+    "PRESERVE_LITERAL_TERMINAL_FALSE"
+  ],
+  "reopen_conditions": [
+    "NEW_FIRST_PARTY_USEFUL_BEHAVIOR_SURFACE_NOT_SEMANTICALLY_MAPPED_TO_THE_FROZEN_FAMILY_BASIS",
+    "CONSTRUCTIVE_COUNTEREXAMPLE_SHOWING_ONE_OF_THE_FIVE_MAPPING_UNIONS_LOSSES_A_REQUIRED_OBSERVABLE_BEHAVIOR",
+    "FROZEN_19_FAMILY_ENVELOPE_OR_BOUND_BEHAVIORAL_DECOMPOSITION_DRIFTS"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_PUBLIC_RUNNER_ACCEPTANCE",
+    "NO_DOMAIN_OR_MATH_PARITY_CLAIM",
+    "NO_CROSS_CUTTING_CONDITION_PARITY_CLAIM",
+    "NO_CREATIVE_DIAGRAM_ACCEPTANCE_CLAIM",
+    "NO_ATOMIC_ACCEPTANCE_DELTA",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_GLOBAL_TERMINAL_SEAL",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
