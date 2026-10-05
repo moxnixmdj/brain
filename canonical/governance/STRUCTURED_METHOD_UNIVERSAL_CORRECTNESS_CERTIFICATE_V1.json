@@ -7,7 +7,7 @@
   "basis_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
   "exact_candidate_blobs": {
     "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_RELATION_V1.json": "4e7c2c43cae956ce8eadf29ae04165ed2c9e77a7",
-    "canonical/runtime/structured_method_universal_correctness_certificate_v1.py": "7639dbca4ba1112197ef2bc9c601c673c3f2eb87",
+    "canonical/runtime/structured_method_universal_correctness_certificate_v1.py": "68b74726f8b95877b786309c1b51d665929478da",
     "canonical/tests/test_structured_method_universal_correctness_certificate_v1.py": "47e65b23bbd55e2130c3f486d192f39495428cb2",
     "canonical/runtime/structured_method_normalized_rule_graph_v3.py": "79d3896818b03223348f05adf4fdcd574f6f355e",
     "canonical/runtime/structured_method_normalized_rule_oracle_v3.py": "5d92b1360fbb1bb27baacc8a04adb3744abf690c",
