@@ -1,0 +1,203 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIRST_PARTY_SURFACES_DECOMPOSED_TO_MINIMUM_OBSERVABLE_BEHAVIORAL_LEAVES__GLOBAL_ENVELOPE_UNSEALED__ZERO_CREDIT",
+  "objective": "Reduce first-party Opus 5.5 observable surface labels into explicit behavior-level obligations under the Behavioral Contract and Semantic Purge Law, without inferring capability absence from uncontracted or unproved mappings.",
+  "authorities": {
+    "semantic_law": {
+      "path": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+      "git_blob_sha": "5b70ed776f13194ea02d7df1d878a88386a48b61"
+    },
+    "contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    },
+    "envelope_v2": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V2.json",
+      "git_blob_sha": "53abbfc02b100b5bcb9aaffe5f7b85802f267852"
+    }
+  },
+  "public_source_facts": [
+    "Anthropic classifies Opus 5.5 input modalities as text including voice dictation plus image input.",
+    "Anthropic states Opus 5.5 engages in conversation analysis coding and creative tasks and outputs text text-based artifacts and diagrams.",
+    "Anthropic reports useful cybersecurity biology research and automated AI research-and-development capability surfaces."
+  ],
+  "exact_deletions": [
+    {
+      "surface": "VOICE_DICTATION_INPUT",
+      "result": "NO_SEPARATE_NATIVE_AUDIO_BEHAVIOR_LEAF_JUSTIFIED_BY_CURRENT_FIRST_PARTY_TAXONOMY",
+      "reason": "FIRST_PARTY_MODALITY_DESCRIPTION_CLASSIFIES_VOICE_DICTATION_INSIDE_TEXT_INPUT__NATIVE_AUDIO_PROCESSING_IS_NOT_CLAIMED",
+      "preserved": "IF_FUTURE_FIRST_PARTY_EVIDENCE_ESTABLISHES_NATIVE_AUDIO_PROCESSING_REOPEN"
+    }
+  ],
+  "candidate_behavioral_leaves": [
+    {
+      "id": "VISUAL_INPUT_TO_TASK_RELEVANT_SEMANTIC_MODEL_001",
+      "covers": [
+        "IMAGE_INPUT_AND_VISUAL_REASONING"
+      ],
+      "inputs": "Static image or rendered visual plus task objective and allowed contextual metadata",
+      "environment_state": "Noninteractive or snapshot visual evidence that may contain objects text spatial relations plots diagrams screenshots or real-world imagery",
+      "allowed_information": "Visible pixels plus task-visible metadata and JIT general knowledge; no hidden task solution",
+      "required_output_or_action": "Produce task-relevant grounded visual facts relationships and uncertainty sufficient for downstream reasoning or action",
+      "success_condition": "Independent visual-grounding checks confirm required objects relations values or scene facts without material hallucination and downstream task evidence can cite the grounded visual observations",
+      "failure_condition": "Material object relation value or spatial claim is unsupported or required visual evidence is omitted",
+      "terminal_consequence": "Required for first-party image-input capability and for Chartography dense-document and visual-computer surfaces",
+      "verification_route": "Frozen nonterminal visual qualification plus scope-specific terminal protocols; compare against OCR-only and text-only baselines",
+      "dependency_boundary": "Image decoding/OCR/rendering may be deterministic; visual semantic grounding and relation inference are separate residuals",
+      "scope": "Task-relevant semantic understanding of static visual inputs",
+      "existing_exact_contract_equivalent": false,
+      "root1_gap_proved": false
+    },
+    {
+      "id": "CREATIVE_CONSTRAINT_TO_NOVEL_CONTENT_001",
+      "covers": [
+        "CREATIVE_TASKS",
+        "CREATIVE_TEXT_ARTIFACT_OUTPUT"
+      ],
+      "inputs": "User creative objective genre/style/audience constraints optional source material and prohibited-content constraints",
+      "environment_state": "Open-ended generation task with many acceptable outputs and no single deterministic target",
+      "allowed_information": "User-provided material JIT knowledge and owned tools/configuration",
+      "required_output_or_action": "Generate original task-responsive content satisfying explicit constraints while preserving coherence usefulness and requested style",
+      "success_condition": "Independent rubric confirms instruction satisfaction coherence style/audience fit and nontrivial novelty without unsupported required factual claims",
+      "failure_condition": "Constraint violation incoherence generic/template output plagiarism-like copying or failure to produce the requested creative content",
+      "terminal_consequence": "Required because first-party Opus 5.5 explicitly exposes creative-task behavior not proved by grounded synthesis alone",
+      "verification_route": "Contamination-safe creative portfolio with predeclared multi-dimensional rubric and matched/stronger comparison route",
+      "dependency_boundary": "Formatting and file mechanics are separate; this leaf is open-ended creative content generation/judgment",
+      "scope": "Creative text and artifact content generation under explicit constraints",
+      "existing_exact_contract_equivalent": false,
+      "root1_gap_proved": false
+    },
+    {
+      "id": "SEMANTIC_RELATION_GRAPH_TO_DIAGRAM_ARTIFACT_001",
+      "covers": [
+        "DIAGRAM_OUTPUT"
+      ],
+      "inputs": "Concepts entities relationships hierarchy/flow constraints target audience and output-format constraints",
+      "environment_state": "Diagram creation or revision task",
+      "allowed_information": "Task-visible semantic content JIT knowledge and owned artifact/rendering tools",
+      "required_output_or_action": "Construct a diagram structure whose nodes edges grouping labels and layout encode the required semantics and render to a usable artifact",
+      "success_condition": "Independent semantic graph comparison and render checks show all required relations represented no contradictory relation invented and visual structure is legible",
+      "failure_condition": "Missing/wrong relation mislabeled node structurally misleading layout or unusable render",
+      "terminal_consequence": "Required because first-party Opus 5.5 explicitly advertises diagram output and current artifact mechanical proof does not claim arbitrary diagram semantics",
+      "verification_route": "Generated hidden semantic graphs plus independent graph/render oracle; matched quality only for irreducible aesthetic residual",
+      "dependency_boundary": "Rendering/layout mechanics may be deterministic/open; semantic graph construction and aesthetic judgment are separable",
+      "scope": "Semantic diagram generation from explicit or inferable task relations",
+      "existing_exact_contract_equivalent": false,
+      "root1_gap_proved": false
+    },
+    {
+      "id": "AUTHORIZED_SECURITY_STATE_TO_VERIFIED_FINDING_AND_REMEDIATION_001",
+      "covers": [
+        "CYBERSECURITY"
+      ],
+      "inputs": "Authorized software/system evidence security objective scope boundary and available analysis/testing tools",
+      "environment_state": "Defensive or explicitly authorized security assessment environment",
+      "allowed_information": "Task-authorized code/configuration/runtime observations and JIT security knowledge within declared scope",
+      "required_output_or_action": "Identify a material security weakness or confirm its absence within tested scope and produce a verifiable remediation or defensive validation action",
+      "success_condition": "Independent authorized validation confirms the finding/remediation and scope/authority invariants are preserved",
+      "failure_condition": "False security claim missed material in-scope weakness invalid remediation or action outside authorization",
+      "terminal_consequence": "Captures useful first-party cybersecurity capability without treating the domain name as a mechanism",
+      "verification_route": "Safe authorized benchmark or synthetic defensive corpus with independent validators; no uncontrolled real-world targeting",
+      "dependency_boundary": "Coding computer use tool discovery and general reasoning may be reused; security-specific applicability judgment remains explicit until reduced",
+      "scope": "Authorized defensive security analysis and remediation",
+      "existing_exact_contract_equivalent": false,
+      "root1_gap_proved": false
+    },
+    {
+      "id": "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001",
+      "covers": [
+        "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+        "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT"
+      ],
+      "inputs": "Research objective current evidence candidate hypotheses/interventions measurable outcomes and tool/experiment constraints",
+      "environment_state": "Iterative research or engineering environment where actions produce new observations",
+      "allowed_information": "JIT literature/data/task-visible state safe/authorized tools and existing owned analysis mechanisms",
+      "required_output_or_action": "Choose a falsifiable next hypothesis/intervention or engineering experiment execute or specify the admissible action and update belief/priority from the resulting evidence",
+      "success_condition": "Independent evaluation shows the selected intervention is relevant and discriminating the evidence update is directionally correct and repeated iterations improve objective progress versus retrieval-only baseline",
+      "failure_condition": "Non-falsifiable or irrelevant experiment evidence-insensitive update repeated low-information intervention or unsupported conclusion",
+      "terminal_consequence": "Separates active research/engineering experimentation from the existing retrieval-oriented ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001 contract",
+      "verification_route": "Safe cross-domain research/engineering simulation or public benchmark with intervention-value and evidence-update scoring",
+      "dependency_boundary": "JIT domain knowledge retrieval is external; experiment selection and evidence-conditioned update are capability behavior",
+      "scope": "Safe iterative hypothesis/experiment selection and evidence update across scientific and AI-engineering domains",
+      "existing_exact_contract_equivalent": false,
+      "root1_gap_proved": false
+    }
+  ],
+  "exact_existing_contract_reuse": [
+    {
+      "surfaces": [
+        "CLEAR_NATURAL_COMMUNICATION",
+        "LONG_SESSION_COLLABORATION"
+      ],
+      "contracts": [
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "LONG_HORIZON_STATE_CONTINUITY_MECHANICS"
+      ],
+      "note": "Reuse is limited to the contracted grounded communication and continuity behavior; creative generation remains separate."
+    },
+    {
+      "surfaces": [
+        "CYBERSECURITY",
+        "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+        "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT"
+      ],
+      "contracts": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TASK_TO_DELEGATION_GRAPH_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ],
+      "note": "These are reusable supporting behaviors only and do not by themselves discharge the new domain-surface leaves."
+    }
+  ],
+  "minimality_claim": "FIVE_NEW_BEHAVIORAL_LEAF_CANDIDATES_PLUS_ONE_VOICE_DICTATION_DELETION__NO_NEW_ACCOUNTING_FAMILY_REQUIRED_AT_THIS_STAGE",
+  "root1_effect": {
+    "positive_gap_delta": 0,
+    "reason": "UNCONTRACTED_OR_UNPROVED_BEHAVIOR_IS_UNKNOWN_NOT_MISSING__ROOT1_REQUIRES_POSITIVE OPERATIVE GAP EVIDENCE AFTER ROUTE ACCOUNTING"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "DOMAIN_LABEL_TO_NEW_FAMILY_INVENTION",
+      "VOICE_DICTATION_NATIVE_AUDIO_ACQUISITION_WITHOUT_NEW_FIRST_PARTY_EVIDENCE"
+    ],
+    "activate": [
+      "CONTRACT_AND_ROUTE_SEARCH_FOR_FIVE_EXPLICIT_BEHAVIORAL_LEAVES",
+      "DEDUCTIVE_OR_EXISTING_CONTRACT_REDUCTION_BEFORE_NEW_ACQUISITION"
+    ],
+    "preserve": [
+      "CURRENT_24_ATOMIC_ACCEPTANCE_FRONTIER",
+      "GLOBAL_ENVELOPE_UNSEALED",
+      "ZERO_FRESH_REALITY"
+    ]
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT1_REOPEN_FROM_UNCONTRACTED_STATUS",
+    "NO_UNSAFE_OR_UNAUTHORIZED_SECURITY_OR_BIOLOGICAL_EXECUTION",
+    "NO_DOMAIN_NAME_TO_MECHANISM_INFERENCE",
+    "SEARCH_DELETE_DETERMINISTIC_RETRIEVE_REUSE_COMPOSE_BEFORE_WHITE_BOX_OR_TRAINING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
