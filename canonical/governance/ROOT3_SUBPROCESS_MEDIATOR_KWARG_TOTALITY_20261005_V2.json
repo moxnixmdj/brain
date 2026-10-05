@@ -12,7 +12,9 @@
     "runtime_path": "canonical/runtime/root3_subprocess_mediator_v1.py",
     "runtime_git_blob_sha": "8443b61b15cb2bc597c4fa292650f2a0aae899b5",
     "tests_path": "canonical/tests/test_root3_subprocess_mediator_v1.py",
-    "tests_git_blob_sha": "ca368f53686f4577b5e5c38681fb008b0b328a4b"
+    "tests_git_blob_sha": "ca368f53686f4577b5e5c38681fb008b0b328a4b",
+    "stdlib_verification_path": "canonical/tests/test_root3_subprocess_kwarg_totality_v2.py",
+    "stdlib_verification_git_blob_sha": "66ea797084b420d74cc764738a7f8da0a4f7b88b"
   },
   "repair": {
     "prior_gap": "THE_V1_MEDIATOR_REJECTED_A_FIXED_LIST_OF_UNMEDIATED_KWARGS_BUT_DID_NOT_FAIL_CLOSED_ON_ALL_OTHER_UNCLASSIFIED_PROCESS_CREATION_KWARGS",
@@ -38,5 +40,11 @@
     "ownership_credit_delta": 0
   },
   "independent_verification_required": true,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "verification_plan": {
+    "independent_carrier": "EXISTING_COLD_SPRITE_NO_NEW_INSTALLS",
+    "command": "python canonical/tests/test_root3_subprocess_kwarg_totality_v2.py",
+    "required_cases": 4,
+    "public_runner_note": "GITHUB_ACTIONS_ATTEMPT_FAILED_BEFORE_ANY_STEP_EXECUTED__CLASSIFY_AS_CARRIER_FAILURE_NOT_TEST_FAILURE"
+  }
 }
