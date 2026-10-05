@@ -712,6 +712,27 @@
       "all_three_distinct_transfer_pass": true,
       "persistent_learned_bytes": 0,
       "deduction": "VERIFIED_CAPABILITY_MACROS_COLLAPSED_THREE_FRESH_SYNTACTIC_DEPTH8_SEARCHES_FROM_A_2015538_CHAIN_PRIMITIVE_COMPLETE_SPACE_TO_12_MACRO_CANDIDATES__SHOWING_EXECUTED_COMPOUNDING_OF_THE_CAPABILITY_RATCHET_WITH_ZERO_LEARNED_STATE"
+    },
+    "zero_learned_event_memory": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__10000_EVENT_THREE_RESTART_CONTINUITY__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_ZERO_LEARNED_EVENT_MEMORY_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_ZERO_LEARNED_EVENT_MEMORY_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "runtime": "canonical/runtime/h100_zero_learned_event_memory_v1.py",
+      "event_count": 10000,
+      "restart_boundaries": [
+        2500,
+        5000,
+        7500
+      ],
+      "full_replay_wall_clock_seconds": 0.1296718739977223,
+      "snapshot_tail_replay_wall_clock_seconds": 0.024750579999818,
+      "event_log_canonical_bytes": 2128356,
+      "snapshot_canonical_bytes": 4317,
+      "all_equivalences_pass": true,
+      "all_integrity_controls_reject": true,
+      "persisted_state_class": "NONLEARNED_TASK_STATE_OR_KNOWLEDGE",
+      "persistent_learned_bytes": 0,
+      "deduction": "BOUNDED_LONG_HORIZON_TASK_STATE_CONTINUITY_RESTART_RECOVERY_SNAPSHOT_COMPACTION_AND_FAIL_CLOSED_INTEGRITY_ARE_DEMONSTRATED_WITH_ZERO_PERSISTENT_LEARNED_STATE"
     }
   },
   "next_structural_residuals_ranked": [
@@ -752,7 +773,8 @@
     "DO_NOT_TREAT_ABSENT_DISTINGUISHING_LEXICAL_INFORMATION_AS_A_MODEL_CAPABILITY_DEFECT__FAIL_CLOSED_ABSTENTION_IS_THE_SOUND_GENERAL_ACTION",
     "WHEN_SCORE_PRUNED_SEARCH_FAILS_DESPITE_TARGET_STRUCTURE_BEING_IN_THE_OPERATOR_CLOSURE__TEST_STRUCTURAL_REACHABILITY BEFORE ATTRIBUTING_FAILURE_TO_MODEL_CAPABILITY",
     "USE_COMPLETE_BOUNDED_ENUMERATION_WHEN_THE_STRUCTURAL_SLICE_IS_SMALL_ENOUGH__THEN_COMPILE_VERIFIED_STRUCTURES_BACK_INTO_THE_LIBRARY",
-    "AFTER_COMPILING_VERIFIED_STRUCTURES__SEARCH_COMPOSITIONS_IN_MACRO_CAPABILITY_SPACE_BEFORE_REEXPANDING_TO_PRIMITIVE_PROGRAM_SPACE"
+    "AFTER_COMPILING_VERIFIED_STRUCTURES__SEARCH_COMPOSITIONS_IN_MACRO_CAPABILITY_SPACE_BEFORE_REEXPANDING_TO_PRIMITIVE_PROGRAM_SPACE",
+    "TREAT_DURABLE_TASK_STATE_AND_EVENT_LOGS_AS_NONLEARNED_KNOWLEDGE_STATE__DO_NOT_FORCE_CONTINUITY_INTO_MODEL_WEIGHTS"
   ],
   "learned_byte_ladder": {
     "current_rung_bytes": 0,
@@ -887,7 +909,11 @@
     "compiled_macro_depth8_search_three_fresh_families_verified": true,
     "compiled_macro_search_space_cardinality_reduction": 167961.5,
     "compiled_macro_search_measured_wall_clock_seconds_max": 0.0020486229987000115,
-    "learned_byte_rung_still_zero_after_macro_depth8_search": true
+    "learned_byte_rung_still_zero_after_macro_depth8_search": true,
+    "bounded_long_horizon_event_memory_zero_learned_verified": true,
+    "bounded_long_horizon_event_memory_scope": "10000_EVENTS__THREE_RESTARTS__257_KEYS__HASH_CHAINED_LOG__SNAPSHOT_TAIL_RECOVERY",
+    "long_horizon_task_state_bytes_are_nonlearned_knowledge": true,
+    "open_world_semantic_memory_not_claimed": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
