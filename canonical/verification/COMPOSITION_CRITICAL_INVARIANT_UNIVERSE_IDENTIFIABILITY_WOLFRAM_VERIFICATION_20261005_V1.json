@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_CRITICAL_INVARIANT_UNIVERSE_IDENTIFIABILITY_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "OBJECTIVE_PROPOSITIONAL_COUNTERMODEL_PASS__NONENTAILMENT_CORROBORATED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/COMPOSITION_CRITICAL_INVARIANT_UNIVERSE_IDENTIFIABILITY_20261005_V1.json",
+    "branch": "breakthrough/composition-critical-universe-identifiability-20261005-sol",
+    "commit": "17958a7d20257aabcb4a92f2b55f7de015303620"
+  },
+  "proposition": "A_REGISTRY_R_CAN_BE_A_SUBSET_OF_AUTHORITATIVE_CRITICAL_UNIVERSE_U_AND_EVERY_REGISTRY_MEMBER_CAN_PASS_WHILE_AN_OMITTED_CRITICAL_MEMBER_FAILS__THEREFORE_REGISTRY_PASS_ALONE_DOES_NOT_ENTAIL_NO_CRITICAL_INVARIANT_FAILURE",
+  "wolfram_query": "FindInstance[rInU && jInU && rInR && !jInR && Implies[rInR,rPass] && Implies[jInR,jPass] && !(Implies[rInU,rPass] && Implies[jInU,jPass]), {rInU,jInU,rInR,jInR,rPass,jPass}, Booleans]",
+  "raw_result": "{{rInU -> True, jInU -> True, rInR -> True, jInR -> False, rPass -> True, jPass -> False}}",
+  "interpretation": {
+    "r": "REGISTERED_CRITICAL_INVARIANT__PASSES",
+    "j": "OMITTED_CRITICAL_INVARIANT__FAILS",
+    "registry_subset_universe": true,
+    "every_registered_member_passes": true,
+    "frozen_all_critical_pass_condition": false,
+    "countermodel_exists": true
+  },
+  "scope": "PROPOSITIONAL_SET_MEMBERSHIP_NONENTAILMENT_ONLY__DOES_NOT_ASSERT_THAT_AN_OMITTED_REAL_CRITICAL_INVARIANT_J_EXISTS",
+  "consequence": "ANY_SOUND_C2_CLOSURE_STILL_REQUIRES_AUTHORITATIVE_UNIVERSE_EQUALITY_OR_STRONGER_SCOPE_COMPLETE_SUPERCLASS_ENTAILMENT",
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_TERMINAL_VERIFICATION",
+    "NO_CLAIM_REAL_COMPOSITION_ACCEPTANCE_HAS_AN_ACTUAL_OMITTED_INVARIANT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_terminal_verification": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
