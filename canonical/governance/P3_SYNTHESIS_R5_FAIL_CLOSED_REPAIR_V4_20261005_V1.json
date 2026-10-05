@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SYNTHESIS_R5_FAIL_CLOSED_REPAIR_V4_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__R5_SILENT_REQUIRED_CLAIM_DROP_REPAIRED__R6_MECHANICAL_PROVENANCE_UNIT_ERASURE_REDUCED__V3_COMPATIBILITY_PRESERVED_ON_256_CONSTRUCTED_CASES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Execute the highest-priority deterministic synthesis typed-domain repair: required claims with missing, contradictory, unit-incompatible, or output-budget-excluded support must become explicit unresolved states instead of silently disappearing.",
+  "authority": {
+    "countermodel_partition": {
+      "path": "canonical/governance/SYNTHESIS_P3_TYPED_INPUT_DOMAIN_COUNTERMODEL_PARTITION_20261005_V1.json",
+      "current_priority": "R5_INSUFFICIENT_REQUIRED_SUPPORT_BECAUSE_CURRENT_PREFLIGHT_ORACLE_SHARES_THE_SAME_BLIND_SPOT"
+    },
+    "frozen_v3_candidate": {
+      "path": "canonical/runtime/p3_information_safe_candidate_v3.py",
+      "git_blob_sha": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a"
+    },
+    "frozen_v3_suite": {
+      "path": "canonical/runtime/p3_information_safe_proof_suite_v3.py",
+      "git_blob_sha": "7b4fef2a2ba2c84b3499ded1ed4bbaac6714fa42"
+    }
+  },
+  "new_candidate": {
+    "path": "canonical/runtime/p3_information_safe_candidate_v4.py",
+    "changes": [
+      "EXPLICIT_NO_MATCHING_EVIDENCE_STATE_FOR_REQUIRED_CLAIMS",
+      "EXPLICIT_INSUFFICIENT_SUPPORT_STATE_FOR_REQUIRED_CLAIMS",
+      "FAIL_CLOSED_ON_MIXED_OR_EXPLICITLY_MISMATCHED_UNITS",
+      "EXPLICIT_OUTPUT_BUDGET_EXCLUDES_REQUIRED_CLAIM_STATE",
+      "PRESERVE_EVIDENCE_ID_PROVENANCE_UNIT_AND_VALUE_FOR_SELECTED_CLAIMS"
+    ],
+    "hidden_evaluator_information_added": false,
+    "terminal_authority": false
+  },
+  "construction_verification": {
+    "kind": "LOCAL_DETERMINISTIC_CONSTRUCTION_CHECK__NOT_INDEPENDENT_PROMOTION_EVIDENCE",
+    "v3_compatibility_cases": 256,
+    "v3_compatibility_result": "PASS",
+    "targeted_checks": [
+      "NO_MATCHING_REQUIRED_EVIDENCE_FAILS_CLOSED",
+      "UNANIMOUSLY_CONTRADICTED_REQUIRED_CLAIM_FAILS_CLOSED",
+      "MIXED_UNITS_FAIL_CLOSED",
+      "SELECTED_CLAIM_EVIDENCE_RECEIPT_PRESERVES_PROVENANCE_ID_AND_UNIT",
+      "OUTPUT_BUDGET_CANNOT_SILENTLY_DROP_REQUIRED_CLAIM"
+    ],
+    "targeted_result": "PASS"
+  },
+  "scope_effect_if_independently_verified": {
+    "r5_insufficient_evidence_for_required_claim": "CLOSED_FOR_THE_V4_NUMERIC_THRESHOLD_SELECTION_ENVELOPE",
+    "r6_provenance_and_unit_sensitive_support": "MECHANICAL_INFORMATION_ERASURE_PARTIALLY_CLOSED__SEMANTIC_SOURCE_AUTHORITY_AND_GENERAL_SUPPORT_SEMANTICS_REMAIN_OPEN",
+    "whole_synthesis_typed_domain_scope": "OPEN",
+    "new_terminal_cases_required": 0,
+    "fresh_reality_required": false
+  },
+  "scheduler_effect_if_activated": {
+    "delete": [
+      "REPAIR_R5_SILENT_REQUIRED_CLAIM_OMISSION_IN_V4",
+      "TREAT_MIXED_UNITS_AS_INTERCHANGEABLE_SCALAR_VOTES_IN_V4",
+      "REPROVE_V3_SYNTHETIC_SELECTION_BEHAVIOR_FOR_V4_BEFORE_SOURCE_BOUND_COMPATIBILITY_CHECK"
+    ],
+    "next": [
+      "INDEPENDENTLY_VERIFY_V4_SOURCE_AND_TESTS",
+      "RECOMPUTE_R1_R7_RESIDUAL_PARTITION_AGAINST_V4",
+      "ATTACK_REMAINING_R6_SEMANTIC_SOURCE_AUTHORITY_SLICE_OR_NEXT_HIGHEST_ROOT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_WHOLE_SYNTHESIS_SCOPE_COMPLETENESS",
+    "NO_GENERAL_NONNUMERIC_EVIDENCE_SUPPORT",
+    "NO_GENERAL_CLAIM_SEMANTICS",
+    "NO_GENERAL_AUDIENCE_OR_FORMAT_REALIZATION",
+    "NO_MATCHED_QUALITY_PASS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_SEAL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
