@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3_VL4B_GGUF_PUBLIC_RUNNER_PREFLIGHT_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_PREEXECUTION__PUBLIC_STANDARD_RUNNER__SYNTHETIC_MULTIMODAL_ZERO_TERMINAL_CASE__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "objective": "Test exact pinned compact Qwen3-VL-4B GGUF materialization, CPU runtime fit, and image-text execution on a free standard public GitHub-hosted runner without consuming any Chartography terminal case or judge call.",
+  "subject_binding": {
+    "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_GGUF_Q4_EXECUTION_SUBJECT_V1.json",
+    "git_blob_sha": "92e9d895f4d7b1bbf70132ae27eae89fc601dd75"
+  },
+  "execution_subject": {
+    "model_repository": "Qwen/Qwen3-VL-4B-Instruct-GGUF",
+    "model_revision": "594171a9fa4ab2a90f017aa69a323b270cd8d24f",
+    "model_file": "Qwen3VL-4B-Instruct-Q4_K_M.gguf",
+    "model_bytes": 2497281696,
+    "model_sha256": "ce6a2eac86eeb49ffacb19d580ddd26c0d42cd0a0386b311158a5bf4a6996ffe",
+    "projector_file": "mmproj-Qwen3VL-4B-Instruct-Q8_0.gguf",
+    "projector_sha256": "30ba2c7dd3127a4561b6cba9d13d0f711c91bdb38742e2f56d73c8cb596bd06d",
+    "llama_cpp_repository": "ggml-org/llama.cpp",
+    "llama_cpp_commit": "a7fb71fab83b474a0892b9a05aaa3a8ddca2729b",
+    "runtime_binary": "llama-mtmd-cli",
+    "backend": "CPU"
+  },
+  "carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "visibility": "public",
+    "runner_label": "ubuntu-24.04",
+    "documented_vcpu": 4,
+    "documented_memory_gb": 16,
+    "documented_ssd_gb": 14,
+    "billing_class": "STANDARD_PUBLIC_REPOSITORY_RUNNER__FREE",
+    "sources": [
+      "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+      "https://docs.github.com/en/billing/concepts/product-billing/github-actions"
+    ]
+  },
+  "synthetic_input": {
+    "construction": "GENERATE_LOCAL_64X64_UNCOMPRESSED_24BIT_BMP_WITH_RED_BACKGROUND_AND_BLUE_CENTER_SQUARE",
+    "prompt": "Describe the image briefly. Mention the two visible colors.",
+    "terminal_or_benchmark_case": false,
+    "external_dataset": false
+  },
+  "pass_gates": [
+    "RUNNER_REPORTS_AT_LEAST_4_LOGICAL_CPUS_AND_AT_LEAST_14_GIB_USABLE_RAM_CLASS",
+    "PINNED_MODEL_AND_PROJECTOR_DOWNLOAD_AND_SHA256_MATCH",
+    "LLAMA_CPP_EXACT_COMMIT_CHECKOUT_AND_LLAMA_MTMD_CLI_BUILD_PASS",
+    "MODEL_AND_PROJECTOR_LOAD_WITHOUT_OOM",
+    "SYNTHETIC_IMAGE_TEXT_INFERENCE_EXITS_ZERO",
+    "OUTPUT_IS_NONEMPTY",
+    "PEAK_RSS_AND_FREE_DISK_ARE_CAPTURED"
+  ],
+  "logical_effect_if_pass": [
+    "CHARTOGRAPHY_COMPACT_GGUF_EXECUTION_SUBJECT_RUNTIME_FIT_CLOSED_ON_FREE_PUBLIC_STANDARD_RUNNER",
+    "CHARTOGRAPHY_SYNTHETIC_MULTIMODAL_SMOKE_CLOSED",
+    "DELETE_BUILDKITE_ACCOUNT_DEPENDENCY_FOR_CHARTOGRAPHY_FIRST_FIT_AND_SYNTHETIC_SMOKE",
+    "PRESERVE_NONTERMINAL_SCOPE_RELEVANT_CHART_REASONING_QUALIFICATION",
+    "PRESERVE_PROJECT_SPECIFIC_JUDGE_CAPACITY_RECEIPT",
+    "PRESERVE_CHARTOGRAPHY_THRESHOLD_CERTIFICATE_GE_89"
+  ],
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_TERMINAL_CASE_READ",
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_PERFORMANCE_INHERITANCE_FROM_MODEL_CARD_OR_BASE_MODEL",
+    "SYNTHETIC_SMOKE_DOES_NOT_PROVE_CHARTOGRAPHY_GE_89",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": "SYNTHETIC_ZERO_TERMINAL_PREFLIGHT_ONLY",
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
