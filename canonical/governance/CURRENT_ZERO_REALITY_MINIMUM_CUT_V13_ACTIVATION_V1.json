@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V13_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CONNECTOR_RECOMPUTATION_PASS__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V13.json",
+    "git_blob_sha": "13f22a51407199628aab2138e1e3ed0f32a99b41"
+  },
+  "verification": {
+    "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V13_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "7aa30ee654780cec7c62d16fba39e5e28031c436"
+  },
+  "effects": [
+    "ACTIVATE_EXACT_NINE_V13_ZERO_REALITY_ACTION_GROUPS",
+    "COALESCE_TB4_AND_CHARTOGRAPHY_BUILDKITE_ZERO_CASE_PREFLIGHT",
+    "RECLASSIFY_HLE_FULL2500_ACCESS_AS_SELF_SERVICE_AUTHENTICATED_GATE",
+    "DELETE_HLE_OWNER_APPROVAL_WAIT_AND_GENERIC_PUBLIC_SCORER_DISCOVERY",
+    "PRESERVE_HLE_GRADER_RELATION_AS_SEPARATE_OPEN_ZERO_REALITY_RESIDUAL",
+    "RECOMPUTE_AND_DELETE_DOMINATED_WORK_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_TERMINAL_CASE_EXPOSURE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING",
+    "FAIL_CLOSED_ON_SUBJECT_OR_VERIFICATION_BLOB_DRIFT"
+  ],
+  "next": "RUN_ONLY_V13_INFORMATION_POSITIVE_ZERO_REALITY_ACTIONS_WITH_AVAILABLE_ACCESS__OWNER_WAITS_PARALLEL__RECOMPUTE_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA"
+}
