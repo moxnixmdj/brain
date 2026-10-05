@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_MINIMUM_ACTION_CUT_V5_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__EXACT_9_ROOT3_TOUCHING__7_SHARED_MATCHED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V5.json",
+    "git_blob_sha": "8397c1341b48947727c070f37a184580ca32c844"
+  },
+  "recomputed_inputs": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "ce04ca62612681d3d3493bf8a664f066e0b61b98"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860"
+    },
+    "acceptance_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "matched_superportfolio_v2": {
+      "path": "canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V2.json",
+      "git_blob_sha": "e886f262aa4b4946b290d636d336bf857afa946c"
+    }
+  },
+  "verified": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 15,
+    "root3_only_count": 6,
+    "root2_and_root3_count": 3,
+    "root2_touching_count": 18,
+    "root3_touching_count": 9,
+    "exact_root3_touching": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "VISION_DENSE_NONCHART_SCOPE"
+    ],
+    "shared_matched_scope_targets": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "VISION_DENSE_NONCHART_SCOPE"
+    ],
+    "finance_direct_oracle_predicate": "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "finance_direct_oracle_leaf_count": 2,
+    "composition_scope_dependency_predicate": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+    "composition_scoped_components_proved": 4,
+    "composition_scoped_components_open": 8,
+    "unknown_domain_transfer_rescheduled": false,
+    "current_root3_fresh_reality_authority": false,
+    "current_nondominated_direct_root3_execution": false
+  },
+  "arithmetic": [
+    "9=6+3",
+    "9=7+1+1",
+    "4+8=12"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_DIRECT_COMPOSITION_REALITY_AUTHORIZED",
+    "NO_FINANCE_DIRECT_ORACLE_EXECUTION_AUTHORIZED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
