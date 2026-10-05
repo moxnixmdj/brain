@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_READ_ONLY_EXECUTOR_MEDIATOR_INTEGRATION_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__CURRENT_MEDIATOR_AND_READ_ONLY_EXECUTOR_INTEROPERATE__ZERO_CREDIT",
+  "exact_blobs": {
+    "mediator": "9ca4dfee3d986327850bd3de9ff6f10101769ac7",
+    "adapter": "5f9f040687736b356000b1645edf097888f88857",
+    "read_only_executor": "a86f78c0732b50c1a93f9364a937fefe6f776b26",
+    "apt_executor": "d87957495a93ebadd9042e3b1aacc4e17c697a5b"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "bound_class": "READ_ONLY_DECLARED_QUERY",
+    "routed_requests": 5,
+    "real_jq_route_pass": true,
+    "real_apt_discovery_route_pass": true,
+    "child_launch_used_captured_original_primitive": true
+  },
+  "scope": "INTEGRATION_SHAPE_AND_RUNTIME_DISPATCH_ONLY",
+  "production_authority_proved": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
