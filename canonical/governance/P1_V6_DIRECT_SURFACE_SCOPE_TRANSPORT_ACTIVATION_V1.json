@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V6_DIRECT_SURFACE_SCOPE_TRANSPORT_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__EXACT_VERIFIED_V6_SCOPE_TRANSPORT_TO_THREE_FROZEN_P1_ROLES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prove, without terminal replay, that exact independently verified V6 is an exact-or-stronger carrier for the frozen P1 causal-localization role delegated by FrontierCode v1.1, CursorBench 4.0, and Recovery Scope Composition.",
+  "runtime": "canonical/runtime/p1_v6_direct_surface_scope_transport_v1.py",
+  "tests": "canonical/tests/test_p1_v6_direct_surface_scope_transport_v1.py",
+  "source_v6": "canonical/governance/P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V6.json",
+  "v6_independent_verification": "canonical/verification/P1_TYPED_CAUSAL_INTERVENTION_V6_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "v5_falsification": "canonical/verification/P1_V5_PSEUDO_RESCUE_FALSIFICATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "declared_direct_surfaces": [
+    "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+  ],
+  "proof_boundary": "CANONICAL_NORMALIZED_TRAJECTORY_IR_AND_FROZEN_P1_ROLE_ONLY",
+  "anti_overclaim": [
+    "NO_WHOLE_BENCHMARK_SUPERSET_CLAIM",
+    "NO_PRIVATE_SCORE_REPRODUCTION_CLAIM",
+    "NO_ADJACENT_CONTRACT_INHERITANCE",
+    "NO_TERMINAL_ACCEPTANCE_FROM_SCOPE_TRANSPORT_ALONE",
+    "NO_V5_RESCUE_EVIDENCE",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT_FROM_THIS_GATE"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_SCOPE_TRANSPORT_BYTES__THEN_RECOMPUTE_P1_COMPOSITE_RESTORATION_OR_THE_MINIMUM_IRREDUCIBLE_TERMINAL_CUT",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
