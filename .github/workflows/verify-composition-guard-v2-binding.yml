@@ -1,0 +1,55 @@
+name: Verify composition guard V2 binding
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/composition_state_capsule_guard_v1.py"
+      - "canonical/runtime/composition_state_capsule_v2.py"
+      - "canonical/runtime/astra_runtime.py"
+      - "canonical/tests/test_composition_state_capsule_guard_v1.py"
+      - ".github/workflows/verify-composition-guard-v2-binding.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify exact subject blobs
+        shell: python
+        run: |
+          import hashlib
+          from pathlib import Path
+          expected = {
+              "canonical/runtime/composition_state_capsule_guard_v1.py": "9b31d67ee0686a02d7f11917e8713f91e4ce63c8",
+              "canonical/runtime/astra_runtime.py": "176c5f53e5b04e37ca6a3b7e9b21882c7f0c9c7c",
+              "canonical/tests/test_composition_state_capsule_guard_v1.py": "3846d43ffdb40d82397dfa4689ce629f37e18367",
+              "canonical/runtime/composition_state_capsule_v2.py": "cf72b9211872dfe1994248cc2395e031554507b4",
+          }
+          for path, want in expected.items():
+              data = Path(path).read_bytes()
+              got = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+              assert got == want, (path, got, want)
+          print("EXACT_BLOBS_PASS")
+      - name: Compile modified runtime
+        run: |
+          python -m py_compile canonical/runtime/composition_state_capsule_guard_v1.py canonical/runtime/astra_runtime.py
+      - name: Run composition guard tests
+        run: python -m unittest -v canonical.tests.test_composition_state_capsule_guard_v1
+      - name: Assert strict V2 seam in runtime source
+        shell: python
+        run: |
+          from pathlib import Path
+          guard = Path("canonical/runtime/composition_state_capsule_guard_v1.py").read_text()
+          runtime = Path("canonical/runtime/astra_runtime.py").read_text()
+          assert 'with_name("composition_state_capsule_v2.py")' in guard
+          assert "composition_capsule,composition_row,action,result" in runtime
+          assert "ACTION_DESCRIPTOR_REQUIRED" in guard
+          print("STRICT_V2_EXECUTION_SEAM_PASS")
