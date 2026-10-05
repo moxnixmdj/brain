@@ -9,6 +9,11 @@ on:
       - ".github/workflows/verify-current-26-zero-reality-frontier-v3.yml"
   pull_request:
     branches: [main]
+    paths:
+      - "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V3.json"
+      - "canonical/runtime/current_26_zero_reality_frontier_v3.py"
+      - "canonical/tests/test_current_26_zero_reality_frontier_v3.py"
+      - ".github/workflows/verify-current-26-zero-reality-frontier-v3.yml"
 permissions:
   contents: read
 jobs:
