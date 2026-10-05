@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_FIELD_SCOPED_AUTHORITY_CONCURRENCY_REFINEMENT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CONCURRENCY_REFINEMENT__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Replace false whole-control-plane-blob serialization for zero-credit proposal rebases with exact declared field dependency conflicts, without weakening the existing authority epoch guard for execution, evidence consumption, promotion, or fresh reality.",
+  "observed_problem": {
+    "live_observation": "PR_2127_HEAD_9955ea880f8987d63de573ef8f45240185297155_BECAME_101_COMMITS_BEHIND_MAIN_0ce81b1dd6395621e50ca5299870cfe43e46a9f2_WHILE_TOUCHING_ONLY_TWO_NEW_RUNTIME_FILES",
+    "interpretation": "BRANCH_DISTANCE_IS_NOT_A_SOUND_PROXY_FOR_LOAD_BEARING_STALENESS_UNDER_CURRENT_CONCURRENCY",
+    "terminal_credit_delta": 0
+  },
+  "predecessor_outer_guard": {
+    "governance_path": "canonical/governance/AUTHORITY_EPOCH_PREEMPTION_V3.json",
+    "governance_git_blob_sha": "89a4d783e27e43283c2480bac2f10b915fbbfedd",
+    "runtime_path": "canonical/runtime/authority_epoch_guard_v1.py",
+    "runtime_git_blob_sha": "9f7f06db978a9670e01b080de37b50dc04873361",
+    "preserved_semantics": [
+      "FREEZE_EPOCH_BEFORE_EXPENSIVE_OR_IRREVERSIBLE_WORK",
+      "RECHECK_EPOCH_BEFORE_EXECUTION_EVIDENCE_CONSUMPTION_OR_MERGE",
+      "FAIL_CLOSED_ON_LOAD_BEARING_CONTROL_PLANE_CHANGE",
+      "NO_FRESH_REALITY_OR_PROMOTION_FROM_A_STALE_EPOCH"
+    ],
+    "limitation_refined_here": "THE_OUTER_GUARD_CONTENT_ADDRESSES_WHOLE_CONTROL_PLANE_BLOBS_AND_DECLARED_NO_AUTOMATIC_REBASE_OF_STALE_WORK"
+  },
+  "candidate_components": {
+    "projection_gate": {
+      "path": "canonical/runtime/field_scoped_authority_projection_gate_v1.py",
+      "git_blob_sha": "770174d3f70e18d35dfe18449c613df0259c6dd2",
+      "role": "SEAL_EXACT_RFC6901_READ_DEPENDENCIES_AND_MAKE_UNDECLARED_AUTHORITY_INPUTS_UNAVAILABLE_TO_THE_VERIFIER"
+    },
+    "three_way_merge": {
+      "path": "canonical/runtime/field_scoped_authority_three_way_merge_v1.py",
+      "git_blob_sha": "ca034e44dd0c2922e9515b79df5d5749649953c9",
+      "role": "TRANSPLANT_ONLY_DECLARED_WRITES_ONTO_LIVE_STATE_IF_DECLARED_READ_PREMISES_AND_WRITE_SCOPES_HAVE_NO_DIVERGENT_CONFLICT"
+    }
+  },
+  "two_tier_law": {
+    "outer_epoch_guard_required_for": [
+      "FRESH_REALITY_EXECUTION",
+      "TERMINAL_CASE_OR_PRIVATE_EVIDENCE_CONSUMPTION",
+      "ACCEPTANCE_OR_FAMILY_PROMOTION",
+      "OWNERSHIP_PROMOTION",
+      "IRREVERSIBLE_EXTERNAL_ACTION",
+      "FINAL_DOMAIN_VERIFIER_COMMIT"
+    ],
+    "field_scoped_rebase_may_only_prepare": [
+      "ZERO_CREDIT_RESEARCH_CANDIDATE",
+      "ZERO_CREDIT_CONTROL_PLANE_TRUTH_REPAIR",
+      "ZERO_CREDIT_SCHEDULING_OR_VERIFIER_CANDIDATE"
+    ],
+    "promotion_rule": "FIELD_SCOPED_MERGE_OUTPUT_HAS_ZERO_AUTHORITY_UNTIL_DOMAIN_SPECIFIC_VERIFICATION_PASSES_ON_THE_MERGED_OUTPUT_AND_THE_OUTER_EPOCH_GUARD_IS_RECHECKED_AT_THE_REQUIRED_AUTHORITY_BOUNDARY"
+  },
+  "safe_merge_theorem": {
+    "premises": [
+      "CANDIDATE_CHANGED_NO_PATH_OUTSIDE_DECLARED_WRITE_POINTERS",
+      "EVERY_DECLARED_READ_POINTER_HAS_THE_SAME_EXACT_VALUE_IN_BASE_AND_LIVE",
+      "EVERY_DECLARED_WRITE_POINTER_IS_EITHER_UNCHANGED_FROM_BASE_IN_LIVE_OR_ALREADY_EQUALS_THE_CANDIDATE_VALUE",
+      "MERGE_APPLIES_ONLY_DECLARED_CANDIDATE_WRITES_TO_A_COPY_OF_LIVE",
+      "DOMAIN_SPECIFIC_VERIFIER_RECHECKS_THE_MERGED_OUTPUT"
+    ],
+    "consequence": "UNRELATED_LIVE_CHANGES_ARE_PRESERVED_AND_CANNOT_CHANGE_ANY_DECLARED_CANDIDATE_PREMISE_OR_BE_OVERWRITTEN_BY_THE_CANDIDATE",
+    "non_consequence": "THIS_DOES_NOT_PROVE_SEMANTIC_COMPLETENESS_OF_THE_DECLARED_READ_SET; SEALED_PROJECTION_OR_INDEPENDENT_REVIEW_MUST_ENFORCE_THAT THE_VERIFIER_CANNOT_DEPEND_ON_UNDECLARED_FIELDS"
+  },
+  "fail_closed_conditions": [
+    "MALFORMED_OR_OVERLAPPING_POINTERS",
+    "UNDECLARED_CANDIDATE_MUTATION",
+    "DECLARED_READ_DEPENDENCY_CHANGED_OR_DISAPPEARED",
+    "DIVERGENT_WRITE_WRITE_CONFLICT",
+    "MANIFEST_OR_RECEIPT_TAMPERING",
+    "UNSUPPORTED_INEXACT_FLOAT_AUTHORITY_VALUE",
+    "DOMAIN_VERIFIER_FAILURE",
+    "OUTER_EPOCH_GUARD_FAILURE_AT_AN_AUTHORITY_BOUNDARY"
+  ],
+  "expected_leverage": {
+    "old_invalidating_granularity": "WHOLE_CONTROL_PLANE_BLOB_OR_BRANCH_EPOCH",
+    "candidate_invalidating_granularity": "EXACT_DECLARED_READ_WRITE_DEPENDENCY_CONE",
+    "asymptotic_effect": "UNRELATED_CONCURRENT_CONTROL_PLANE_EDITS_NO_LONGER_FORCE_RECOMPUTATION_OF_A_ZERO_CREDIT_CANDIDATE",
+    "claim_boundary": "NO_NUMERIC_SPEEDUP_FACTOR_IS_CLAIMED_WITHOUT_MEASUREMENT"
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY",
+    "NO_AUTOMATIC_PROMOTION",
+    "NO_CLAIM_THE_CURRENT_PR_HAS_INDEPENDENT_VERIFICATION",
+    "NO_CLAIM_BRANCH_BEHIND_COUNT_ALONE_PROVES_SEMANTIC_SAFETY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
