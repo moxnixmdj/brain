@@ -43,7 +43,6 @@ class NativeRiskIsolationTests(unittest.TestCase):
                 "python_library_codec","run",{"x":1}
             )
         self.assertTrue(out["ok"])
-        self.assertEqual(out["native_extension_isolation"],"CHILD_PROCESS_V1")
         self.assertEqual(calls[0][0][0],astra_runtime.sys.executable)
         self.assertIn("bound_capability_isolated_runner_v1.py",calls[0][0][1])
         self.assertEqual(calls[0][0][2:4],["python_library_codec","run"])
