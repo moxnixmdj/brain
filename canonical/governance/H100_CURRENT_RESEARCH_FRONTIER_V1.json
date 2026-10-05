@@ -459,6 +459,19 @@
       "unverified_rational_fail_closed": true,
       "persistent_learned_bytes": 0,
       "deduction": "THE_PATCH_SEARCH_TO_DISTINCT_TRANSFER_TO_COMPILE_TO_REUSE LOOP IS NOW PUBLIC RUNNER VERIFIED ACROSS FIVE PATCH FAMILIES TOTAL__CUBIC_PLUS_POWER5_HINGE_GAUSSIAN_TANH__WITH UNKNOWN_RATIONAL STILL FAIL_CLOSED"
+    },
+    "verified_capability_registry_v4": {
+      "status": "PUBLIC_GITHUB_HOSTED_RUNNER_PASS__THIRTEEN_VERIFIED_ENTRIES__EXPRESSION_ESCAPE_RATCHET_CLOSED__ZERO_CREDIT",
+      "runtime": "canonical/runtime/h100_verified_capability_registry_v4.py",
+      "second_carrier_verification": "canonical/verification/H100_REGISTRY_V4_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "public_verification": "canonical/verification/H100_REGISTRY_V4_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "entry_count": 13,
+      "added_capability": "CAP_AFFINE_RATIONAL_SAT_SQUARE_V1",
+      "rational_raw_synthesis_attempts_before_hit": 0,
+      "legacy_power5_still_hits": true,
+      "unverified_log1p_abs_fail_closed": true,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE_FULL_REGISTRY_MISS_TO_BROADER_EXPRESSION_SEARCH_TO_STRUCTURE_TRANSFER_TO_COMPILE_TO_ZERO_RAW_SEARCH_REUSE_LOOP_IS PUBLIC_RUNNER_VERIFIED_FOR_THE_RATIONAL_STRUCTURE"
     }
   },
   "next_structural_residuals_ranked": [
@@ -469,8 +482,8 @@
     },
     {
       "rank": 2,
-      "residual": "OPEN_WORLD_PATCH_DISCOVERY_BEYOND_PREDECLARED_FINITE_GRAMMAR",
-      "reason": "REGISTRY_V3 PUBLIC_RUNNER VERIFIES THE FULL PATCH RATCHET ACROSS FOUR ADDITIONAL DISTINCT TRANSFER FAMILIES__THE NEXT INTERNAL A LIMIT IS NO LONGER COMPILE REUSE BUT WHETHER USEFUL STRUCTURES OUTSIDE A PREDECLARED FINITE GRAMMAR CAN BE DISCOVERED WITH PRACTICAL COMPLEXITY_CONDITIONED SEARCH"
+      "residual": "PRACTICAL_OPEN_WORLD_SEARCH_BEYOND_FROZEN_DEPTH_AND_OPERATOR_SET",
+      "reason": "REGISTRY_V4 PUBLIC RUNNER VERIFIES ESCAPE FROM THE FINITE PATCH GRAMMAR INTO A BROADER EXPRESSION_TREE SEARCH AND SUCCESSFUL COMPILE_REUSE__THE REMAINING INTERNAL A LIMIT IS PRACTICAL SEARCH WHEN THE NEEDED STRUCTURE LIES OUTSIDE THE CURRENT FROZEN DEPTH_OPERATOR_SET OR HAS LARGE_DESCRIPTION_LENGTH"
     },
     {
       "rank": 3,
@@ -557,7 +570,7 @@
     "library_first_measured_wall_clock_speedup_verified": true,
     "library_first_measured_speedup_scope": "THREE_ALREADY_VERIFIED_SYNTHETIC_TRANSFER_TASKS__MEDIAN_9_2745X_ON_SECOND_SPRITE",
     "default_verified_capability_registry_first_router_implemented": true,
-    "verified_capability_registry_seed_entries": 12,
+    "verified_capability_registry_seed_entries": 13,
     "verified_capability_registry_out_of_family_fail_closed": true,
     "non_synthetic_real_world_capability_verifier_cost_distribution_measured": true,
     "non_synthetic_real_world_capability_verifier_cost_scope": "FOUR_PRIOR_INDEPENDENTLY_VERIFIED_CLASSES__TEST_SUITE_PROXY__MEDIANS_APPROX_0_078_TO_0_084_SECONDS",
@@ -584,7 +597,11 @@
     "generic_patch_search_scope": "FOUR_SYNTHETIC_SEED_TRANSFER_FAMILIES__POWER5_HINGE_GAUSSIAN_TANH__PREDECLARED_GRAMMAR_NOT_UNIVERSAL",
     "registry_v3_multi_family_public_runner_verified": true,
     "patch_compile_reuse_loop_verified_family_count": 5,
-    "learned_byte_rung_still_zero_after_registry_v3": true
+    "learned_byte_rung_still_zero_after_registry_v3": true,
+    "registry_v4_expression_escape_public_runner_verified": true,
+    "finite_patch_grammar_escape_to_expression_search_verified": true,
+    "broader_search_compile_reuse_loop_verified": true,
+    "learned_byte_rung_still_zero_after_registry_v4": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
