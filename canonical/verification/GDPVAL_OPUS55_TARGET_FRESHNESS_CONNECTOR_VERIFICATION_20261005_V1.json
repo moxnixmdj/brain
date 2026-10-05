@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_OPUS55_TARGET_FRESHNESS_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_PRIMARY_SOURCE_RECOMPUTATION_PASS__CURRENT_OWNER_OPUS55_MAX_1867__FROZEN_1846_NOT_UNCONDITIONAL__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/GDPVAL_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1.json"
+  },
+  "authority": {
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "capability_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "active_predicate": "PROWORK_GDPVAL_GE_1846"
+  },
+  "primary_source_observation": {
+    "source": "Artificial Analysis GDPval-AA v2.1 owner leaderboard",
+    "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "observed_date": "2026-10-05",
+    "model": "Claude Opus 5.5 (Max, Default Fallback)",
+    "elo": 1867,
+    "confidence_interval": "-26/+26",
+    "methodology_summary": "Blind pairwise same-task comparisons aggregated to Elo; current page states DeepSeek V4.1 Flash (max) anchor at 1600."
+  },
+  "checks": {
+    "frozen_brain_scalar_1846": true,
+    "current_owner_scalar_1867": true,
+    "exact_scalar_equality": false,
+    "elo_is_population_aggregation_dependent": true,
+    "cross_epoch_unconditional_1846_can_change_terminal_truth": true,
+    "current_owner_route_requires_current_epoch_reference": true
+  },
+  "verified_rule": {
+    "current_owner_epoch": "IF_BRAIN_SCORE_USES_CURRENT_GDPVAL_AA_V2_1_OWNER_DATASET_HARNESS_SCORER_RATING_EPOCH_AND_MATCHED_CONFIGURATION__REQUIRE_BRAIN_ELO_GE_1867",
+    "historical_epoch": "ALLOW_1846_ONLY_IF_EXACT_HISTORICAL_DATASET_HARNESS_SCORER_RATING_EPOCH_AND_OPUS55_CONFIGURATION_THAT_PRODUCED_1846_ARE_BOUND",
+    "otherwise": "FAIL_CLOSED__MATCHED_SAME_EPOCH_OPUS55_REFERENCE_OR_SCOPE_SAFE_STRONGER_PROOF"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_1867_APPLIES_TO_NONIDENTICAL_HISTORICAL_SETUP",
+    "NO_CLAIM_1846_WAS_FALSE_IN_ITS_SOURCE_EPOCH",
+    "NO_BRAIN_SCORE",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_TERMINAL_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
