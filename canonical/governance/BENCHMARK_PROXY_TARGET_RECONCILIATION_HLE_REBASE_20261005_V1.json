@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_PROXY_TARGET_RECONCILIATION_HLE_REBASE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__HLE_REBASE__ZERO_CREDIT",
+  "subject": "canonical/governance/BENCHMARK_PROXY_MECHANISM_TO_OBSERVABLE_TARGET_RECONCILIATION_20261005_V1.json",
+  "subject_verification": "canonical/verification/BENCHMARK_PROXY_MECHANISM_TO_OBSERVABLE_TARGET_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+  "newer_authority": "canonical/governance/MULTIDISCIPLINARY_REASONING_HLE_TARGET_SCOPE_COLLAPSE_ACTIVATION_20261005_V1.json",
+  "corrected_result": {
+    "prior_v4_registry_mechanism_roots": 5,
+    "exact_target_entailed_mechanism_edges": 1,
+    "exact_target_entailed_edge": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001::COMPUTER_AND_BROWSER_USE",
+    "multidisciplinary_additional_scope_residuals": 0,
+    "five_public_bar_new_mandatory_behavioral_residuals_under_current_target_evidence": 0,
+    "hle_multimodal_configuration_identity_still_open": false
+  },
+  "remaining_scope_classes": [
+    "OBSERVABLE_DEPENDENCY_SCOPE_STRENGTH_FOR_OTHER_FAMILIES_WHERE_LOAD_BEARING",
+    "COMPUTER_AND_BROWSER_USE_ARBITRARY_APPLICATION_SCOPE",
+    "GLOBAL_TARGET_DISCOVERY_COMPLETENESS_PREMISE"
+  ],
+  "nonclaims": [
+    "NO_WHOLE_FAMILY_SCOPE_CLOSURE",
+    "NO_SCORE_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
