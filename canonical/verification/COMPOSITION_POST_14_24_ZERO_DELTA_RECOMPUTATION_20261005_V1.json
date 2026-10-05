@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_POST_14_24_ZERO_DELTA_RECOMPUTATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__NO_NEW_COMPONENT_INTERFACE_CREDIT_FROM_LIVEBENCH_OR_UNKNOWN_DOMAIN_ATOMIC_CLOSURES__4_OF_12_REMAINS__ZERO_CREDIT",
+  "current_component_authority": {
+    "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
+    "git_blob_sha": "5bb089582a5bc2ee4a44143c8d3a11e919fecdff",
+    "proved": 4,
+    "open": 8
+  },
+  "current_atomic_ledger": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+    "proved": 14,
+    "unresolved": 24
+  },
+  "checked_new_atoms": [
+    "LIVEBENCH_IF_GE_65_7",
+    "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+  ],
+  "open_components": [
+    "research",
+    "tool use",
+    "artifact creation",
+    "browser/computer action",
+    "coding",
+    "debugging",
+    "evidence synthesis",
+    "artifact production"
+  ],
+  "result": {
+    "livebench_component_binding": null,
+    "unknown_domain_component_binding": null,
+    "new_component_receipts": 0,
+    "current_scoped_proved": 4,
+    "current_open": 8
+  },
+  "explicit_noninheritance": {
+    "recovery_bridge": "canonical/verification/COMPOSITION_RECOVERY_SCOPE_COMPLETE_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "recovery_bridge_git_blob_sha": "2c18b5029b1a953488b2aefacb00f67b88d27659",
+    "debugging_credit_forbidden_by_existing_receipt": true
+  },
+  "next": "WORK_ONLY_THE_8_OPEN_FROZEN_COMPONENT_INTERFACES_FROM_NEW_INDEPENDENT_ACCEPTANCE_SCOPED_RECEIPTS__NO_NAME_ANALOGY",
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0
+}
