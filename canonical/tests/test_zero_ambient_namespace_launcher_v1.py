@@ -112,11 +112,19 @@ class NamespaceLauncherTests(unittest.TestCase):
             self.assertEqual(r['status'],'BROKER_OUTPUT_LIMIT_EXCEEDED')
         finally: td.cleanup()
 
-    def test_root_parent_requires_nonroot_identity(self):
+    def test_parent_identity_policy_is_carrier_correct(self):
         td,root=write_input({'c.py':'pass\n'})
         try:
-            with self.assertRaisesRegex(m.NamespaceConfinementError,'ROOT_PARENT_REQUIRES'):
-                m.canonical_policy({'argv':['/usr/bin/python3','/input/c.py'],'input_dir':str(root)})
+            bare={'argv':['/usr/bin/python3','/input/c.py'],'input_dir':str(root)}
+            if os.geteuid()==0:
+                with self.assertRaisesRegex(m.NamespaceConfinementError,'ROOT_PARENT_REQUIRES'):
+                    m.canonical_policy(bare)
+            else:
+                p=m.canonical_policy(bare)
+                self.assertEqual(p['host_uid'],os.geteuid())
+                self.assertEqual(p['host_gid'],os.getegid())
+                with self.assertRaisesRegex(m.NamespaceConfinementError,'HOST_UID_MUST_EQUAL_CURRENT_NONROOT_UID'):
+                    m.canonical_policy({**bare,'host_uid':os.geteuid()+1})
         finally: td.cleanup()
 
 if __name__=='__main__': unittest.main(verbosity=2)
