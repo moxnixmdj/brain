@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_ARBITRARY_COMMAND_EFFECT_CLASS_FIREWALL_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__DELETE_ARBITRARY_COMMAND_CLASS_FROM_CREDITED_RUNTIME__ZERO_CREDIT__LOCAL_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Reduce the seven Root3 subprocess semantic proof classes to six live proof classes by fail-closed exclusion of the two generic arbitrary-command escape hatches before canonical grant lookup.",
+  "authority_inputs": {
+    "effect_class_registry": {
+      "path": "canonical/runtime/root3_subprocess_effect_class_registry_v1.py",
+      "git_blob_sha": "c70a4caa96885832bb6b2f3adde1d2654c14de16"
+    },
+    "subprocess_mediator": {
+      "path": "canonical/runtime/root3_subprocess_mediator_v1.py",
+      "git_blob_sha": "8443b61b15cb2bc597c4fa292650f2a0aae899b5"
+    },
+    "final_authorizer_adapter": {
+      "path": "canonical/runtime/root3_subprocess_final_authorizer_adapter_v1.py",
+      "git_blob_sha": "0ef0ead29b329721c15e71f2736bc1ef17c150c3"
+    }
+  },
+  "exact_deleted_class": {
+    "effect_class": "ARBITRARY_COMMAND_EXECUTION",
+    "site_count": 2,
+    "sites": [
+      {
+        "module_path": "canonical/runtime/astra_runtime.py",
+        "lineno": 263,
+        "process_api": "subprocess.run",
+        "semantic_role": "GENERIC_BASH_LC_SHELL"
+      },
+      {
+        "module_path": "canonical/runtime/bound_capabilities/cli_command.py",
+        "lineno": 27,
+        "process_api": "subprocess.run",
+        "semantic_role": "GENERIC_ARGV_CLI_ADAPTER"
+      }
+    ],
+    "policy": "DENY_BEFORE_DOWNSTREAM_CANONICAL_GRANT_LOOKUP"
+  },
+  "mechanism": {
+    "live_identity": "WALK_STILL_LIVE_PYTHON_CALL_STACK_DURING_MEDIATOR_AUTHORIZATION",
+    "lookup": "EXACT_MODULE_PATH_LINE_NUMBER_PROCESS_API_MATCH_AGAINST_FROZEN_29_SITE_REGISTRY",
+    "unknown_site": "DENY",
+    "ambiguous_site": "DENY",
+    "unsupported_api": "DENY",
+    "arbitrary_class": "DENY",
+    "remaining_known_classes": "DELEGATE_TO_EXISTING_CANONICAL_FINAL_AUTHORIZER_PATH",
+    "grants_created_by_firewall": 0
+  },
+  "expected_proof_surface_after_activation": {
+    "prior_classes": 7,
+    "forbidden_classes": 1,
+    "remaining_semantic_classes_to_prove": 6,
+    "arbitrary_command_sites_proved_safe": false,
+    "arbitrary_command_sites_credited": false,
+    "interpretation": "DELETE_BY_EXCLUSION_NOT_PROVE_BY_LABEL"
+  },
+  "activation_boundary": [
+    "THIS_CANDIDATE_MUST_WRAP_THE_DOWNSTREAM_FINAL_AUTHORIZER_BEFORE_INSTALLING_THE_GLOBAL_SUBPROCESS_MEDIATOR",
+    "NO_ARBITRARY_COMMAND_EXECUTION_SITE_MAY_RECEIVE_CREDITED_RUNTIME_AUTHORITY",
+    "ANY_PROCESS_SITE_SET_OR_LINE_DRIFT_REQUIRES_REGISTRY_REFRESH_BEFORE_ACTIVATION",
+    "NONARBITRARY_CLASS_LABELS_REMAIN_ZERO_CREDIT_AND_REQUIRE_THEIR_OWN_SEMANTIC_PROOFS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERIC_SHELL_OR_GENERIC_CLI_IS_SAFE",
+    "NO_CLAIM_THE_OTHER_SIX_EFFECT_CLASSES_ARE_SAFE",
+    "NO_CLAIM_CHILD_INTERNAL_NATIVE_OR_EXTERNAL_EFFECT_TOTALITY",
+    "NO_C1_C2_C3_CLOSURE",
+    "NO_ROOT3_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}\n
