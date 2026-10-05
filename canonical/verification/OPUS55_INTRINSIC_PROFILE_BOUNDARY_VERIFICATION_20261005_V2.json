@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_INTRINSIC_PROFILE_BOUNDARY_VERIFICATION_20261005_V2",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_DEPENDENCY_AND_SOURCE_RECOMPUTATION_PASS_WITH_OPEN_COMPLETENESS_BOUNDARY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_VS_DEPLOYMENT_PROFILE_BOUNDARY_20261005_V2.json",
+    "git_blob_sha": "ed9f3a2c73566a018e0530d76eeda3a17e139ee1",
+    "commit_sha": "113b8add30bbc43f84d27cd65b18710f55c12baf"
+  },
+  "verified_dependencies": [
+    {
+      "path": "canonical/governance/OPUS55_INTERFACE_POLICY_NORMAL_FORM_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "699ffbab1116de83c2d67f224efd35def381b645",
+      "verified_semantic": "EXTERNAL_TOOL_BACKEND_SEMANTICS_ARE_NOT_INTRINSIC_MODEL_CAPABILITY_WITHOUT_CAUSAL_ENTAILMENT"
+    }
+  ],
+  "first_party_recomputation": [
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "pass": [
+        "CYBER_TASKS_CAN_REROUTE_TO_OPUS_4_8",
+        "VERIFIED_ACCESS_PROGRAMS_CHANGE_EXPOSED_BEHAVIOR",
+        "MODEL_ITSELF_IS_SEPARATELY_DESCRIBED_AS_HAVING_STRONGER_PROMPT_INJECTION_DEFENSES",
+        "SECURE_CODING_AGENT_STACK_NAMES_CLASSIFIER_SANDBOX_AND_CODE_REVIEW_AS DISTINCT SYSTEM COMPONENTS"
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "pass": [
+        "DIRECT_MODEL_MODALITY_SUMMARY_IS_TEXT_AND_IMAGE_INPUTS_WITH_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUTS",
+        "DEPLOYMENT_PROTECTIONS_ARE_REPORTED_SEPARATELY_FROM_CAPABILITY_SUMMARY"
+      ]
+    }
+  ],
+  "recomputed_deductions": [
+    "A_FALLBACK_COMPLETION_CANNOT_BE_USED_AS_DIRECT EVIDENCE THAT_OPUS55 ITSELF PRODUCED THE LOAD_BEARING BEHAVIOR",
+    "AN_EXTERNAL_EXECUTOR_OR WRAPPER MECHANISM CANNOT BE PROMOTED TO INTRINSIC OPUS55 CAPABILITY BY PRODUCT ASSOCIATION ALONE",
+    "PROFILE_VARIATION_IS_USEFUL FOR DISCOVERY BECAUSE IT CAN REVEAL BEHAVIOR HIDDEN OR REROUTED UNDER DEFAULT SAFEGUARDS",
+    "ACTOR_ATTRIBUTION_IS_REQUIRED TO PROJECT DEPLOYED TRAJECTORIES ONTO THE INTRINSIC OPUS55 CAPABILITY TARGET"
+  ],
+  "verdict": {
+    "causal_target_repair": "PASS",
+    "profile_sweep_as_discovery_strategy": "PASS",
+    "profile_union_as_unfiltered_intrinsic_target": "REJECTED",
+    "target_superset_coverage_for_intrinsic_C55": "OPEN",
+    "brain_dominance_over_C55": "OPEN",
+    "literal_terminal_finality": false
+  },
+  "hard_nonclaims": [
+    "NO_COMPLETE_PROFILE_REGISTRY CLAIM",
+    "NO_COMPLETE_INTRINSIC_CAPABILITY ENUMERATION CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": true
+}
