@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_STRUCTURAL_SAFEGUARD_EXECUTION_RECEIPT_V1",
+  "date": "2026-10-05",
+  "status": "REAL_PACKED_ARTIFACT_CREATED_AND_INDEPENDENTLY_REHASHED__HOLDOUT_UNTESTED__ZERO_CREDIT",
+  "source_checkpoint_sha256": "4407db60801a20bcf254946acfee6727491ef1739ad7b4d3abbf87b7c75e7229",
+  "packer_git_blob_sha": "0fe8d7364638d8ec80ed570402d81125b7766947",
+  "precommit_git_blob_sha": "a1937c3a60d6dd26aedb6af93d9181bf50c4736a",
+  "holdout_runner_git_blob_sha": "1a35e9a76161a19ac80bf1cfedf12fcbfe81e0b8",
+  "artifact": {
+    "output_bytes": 94686795,
+    "output_sha256": "89d0dfe759920047c8668d398b0811efad962f0194f36f3858bedf290af3d429",
+    "ancillary_bytes": 5313202,
+    "complete_bundle_bytes": 99999997,
+    "h100_budget_bytes": 100000000,
+    "margin_bytes": 3,
+    "independent_rehash_match": true
+  },
+  "allocation": {
+    "fp16_numel": 219264,
+    "forced_w4_numel": 60599288,
+    "candidate_numel": 141039616,
+    "i64_numel": 200000,
+    "candidate_groups_total": 550936,
+    "selected_candidate_w4_groups": 189006,
+    "manifest_bytes": 259911
+  },
+  "lineage": {
+    "prior_20_case_set_role": "DEVELOPMENT_ONLY_AFTER_OBSERVED_FAILURES",
+    "new_holdout_status": "NOT_MATERIALIZED_AT_ARTIFACT_FREEZE_TIME",
+    "holdout_selection": "FIRST_10_POST_INDEX9_NONDEV_IMAGES_PER_SPLIT"
+  },
+  "hard_nonclaims": [
+    "BYTE_PASS_DOES_NOT_PROVE_CAPABILITY_PRESERVATION",
+    "NO_NEW_HOLDOUT_OUTPUT_OBSERVED_BEFORE_THIS_RECEIPT",
+    "NO_CHARTOGRAPHY_THRESHOLD_CREDIT",
+    "NO_FULL_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
