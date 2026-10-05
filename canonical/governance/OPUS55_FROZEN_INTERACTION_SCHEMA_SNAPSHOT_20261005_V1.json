@@ -118,7 +118,28 @@
       "metadata",
       "user_profile_id",
       "workspace_id"
-    ]
+    ],
+    "all_request_control_fields": [
+      "max_tokens",
+      "messages",
+      "model",
+      "cache_control",
+      "container",
+      "diagnostics",
+      "inference_geo",
+      "metadata",
+      "output_config",
+      "service_tier",
+      "stop_sequences",
+      "system",
+      "thinking",
+      "tool_choice",
+      "tools",
+      "user_profile_id",
+      "workspace_id",
+      "stream"
+    ],
+    "all_request_control_field_count": 18
   },
   "beta_schema": {
     "response_content_union": [
@@ -220,7 +241,35 @@
       "mcp_servers",
       "speed",
       "betas"
-    ]
+    ],
+    "all_request_control_fields": [
+      "max_tokens",
+      "messages",
+      "model",
+      "cache_control",
+      "compaction",
+      "container",
+      "context_management",
+      "diagnostics",
+      "fallback_credit_token",
+      "fallbacks",
+      "inference_geo",
+      "mcp_servers",
+      "metadata",
+      "output_config",
+      "service_tier",
+      "speed",
+      "stop_sequences",
+      "system",
+      "thinking",
+      "tool_choice",
+      "tools",
+      "betas",
+      "user_profile_id",
+      "workspace_id",
+      "stream"
+    ],
+    "all_request_control_field_count": 25
   },
   "closure_rule": {
     "schema_boundary": "THE_UNION_OF_STABLE_AND_BETA_FIRST_PARTY_GENERATED_MESSAGE_CREATE_REQUEST_RESPONSE_TOOL_AND_STOP_CONTROL_TYPES_AT_THE_PINNED_SDK_COMMIT",
