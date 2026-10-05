@@ -87,15 +87,17 @@ mount --bind "$INPUT" "$ROOT/input"
 mount -o remount,bind,ro,nosuid,nodev "$ROOT/input"
 mount -t tmpfs -o size="${SCRATCH_MB}m",nosuid,nodev,noexec tmpfs "$ROOT/tmp"
 mount -t tmpfs -o size="${SCRATCH_MB}m",nosuid,nodev tmpfs "$ROOT/work"
-/usr/sbin/ip link set lo up
+IP_BIN="$(command -v ip)"; CHROOT_BIN="$(command -v chroot)"
+"$IP_BIN" link set lo up
 ulimit -t "$CPU_S"; ulimit -v "$MEM_KB"; ulimit -f "$FILE_KB"; ulimit -n "$NOFILE"; ulimit -u "$PIDS"
-exec /usr/sbin/chroot "$ROOT" /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp PROJECT_BRAIN_BROKER_FD="$BROKER" "$@"
+exec "$CHROOT_BIN" "$ROOT" /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp PROJECT_BRAIN_BROKER_FD="$BROKER" "$@"
 '''
 
 def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     p=canonical_policy(policy); lim=p['limits']
-    required=['/usr/bin/unshare','/usr/bin/mount','/usr/sbin/chroot','/usr/bin/setpriv','/usr/sbin/ip','/usr/bin/bash']
-    missing=[x for x in required if not pathlib.Path(x).exists()]
+    required_names=['unshare','mount','chroot','setpriv','ip','bash','env']
+    resolved={name:shutil.which(name) for name in required_names}
+    missing=[name for name,path in resolved.items() if not path]
     if missing: raise NamespaceConfinementError('HOST_PRIMITIVE_MISSING:'+','.join(missing))
     root=tempfile.mkdtemp(prefix='brain-ns-membrane-'); os.chown(root,p['host_uid'],p['host_gid'])
     parent,child=socket.socketpair(); broker=[]; overflow=[False]
@@ -116,7 +118,7 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     th=threading.Thread(target=reader,daemon=True); th.start()
     env={'BROKER_FD':str(child.fileno()),'PYTHONDONTWRITEBYTECODE':'1'}
     for k,v in p['env'].items(): env[k]=v
-    cmd=['/usr/bin/unshare','--user','--map-root-user','--mount','--net','--pid','--fork','--ipc','--uts','/usr/bin/bash','-c',_SETUP,'_',root,p['input_dir'],str(child.fileno()),str(lim['memory_mb']*1024),str(lim['cpu_seconds']),str(math.ceil(lim['max_file_mb']*1024)),str(lim['nofile']),str(lim['pids']),str(lim['scratch_mb']),'/usr/bin/setpriv','--no-new-privs','--bounding-set=-all','--inh-caps=-all','--ambient-caps=-all','/usr/bin/env','-i','PATH=/usr/bin:/bin','HOME=/tmp','PYTHONDONTWRITEBYTECODE=1','PROJECT_BRAIN_BROKER_FD='+str(child.fileno())]
+    cmd=[resolved['unshare'],'--user','--map-root-user','--mount','--net','--pid','--fork','--ipc','--uts',resolved['bash'],'-c',_SETUP,'_',root,p['input_dir'],str(child.fileno()),str(lim['memory_mb']*1024),str(lim['cpu_seconds']),str(math.ceil(lim['max_file_mb']*1024)),str(lim['nofile']),str(lim['pids']),str(lim['scratch_mb']),resolved['setpriv'],'--no-new-privs','--bounding-set=-all','--inh-caps=-all','--ambient-caps=-all',resolved['env'],'-i','PATH=/usr/bin:/bin','HOME=/tmp','PYTHONDONTWRITEBYTECODE=1','PROJECT_BRAIN_BROKER_FD='+str(child.fileno())]
     for k,v in p['env'].items(): cmd.append(k+'='+v)
     cmd += p['argv']
     popen_kw={'stdin':subprocess.DEVNULL,'stdout':subprocess.DEVNULL,'stderr':subprocess.DEVNULL,'pass_fds':(child.fileno(),),'env':env,'start_new_session':True}
