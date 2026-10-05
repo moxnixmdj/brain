@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_TARGET_SCOPE_PRECEDENCE_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__SCIENTIFIC_SEMANTIC_RESIDUAL_DEMOTED_TO_CONDITIONAL_TARGET_SCOPE_CANDIDATE__THREE_VERIFIED_SUBTRACTIONS_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TARGET_MEMBERSHIP_BEFORE_MANDATORY_RESIDUAL_SCHEDULING_LAW_20261005_V1.json"
+  },
+  "verification": {
+    "path": "canonical/verification/TARGET_MEMBERSHIP_BEFORE_MANDATORY_RESIDUAL_SCHEDULING_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "result": "INDEPENDENT_SYMBOLIC_KERNEL_PASS"
+  },
+  "supersedes_only": {
+    "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_ACTIVATION_V1.json",
+    "git_blob_sha": "d33464eee4d69f000a4715c256f447869d540522",
+    "superseded_scheduling_statement": "SCHEDULE_ONLY_SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001_AS_THE_NEW_HYPOTHESIS_FORMATION_RESIDUAL"
+  },
+  "active_truth": {
+    "target_membership_for_exact_semantic_residual": "UNPROVED",
+    "mandatory_terminal_work_now": false,
+    "classification_now": "CONDITIONAL_TARGET_SCOPE_CANDIDATE",
+    "verified_deterministic_subtractions_preserved": 3,
+    "next_load_bearing_action": "RESOLVE_EXACT_TARGET_MEMBERSHIP_FROM_FIRST_PARTY_OR_SCOPE_SAFE_STRONGER_EVIDENCE",
+    "matched_comparator_or_T3_execution_before_membership_proof": "FORBIDDEN_BY_FAIL_CLOSED_PRECEDENCE"
+  },
+  "scheduler_delta": {
+    "delete": [
+      "MANDATORY_EXECUTION_OF_SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001"
+    ],
+    "preserve": [
+      "THREE_VERIFIED_DETERMINISTIC_SUBTRACTIONS",
+      "SEARCH_STRONGER_EXISTING_RECEIPTS_AFTER_TARGET_MEMBERSHIP_IS_PROVED",
+      "REUSE_T3_ONLY_IF_TARGET_MEMBERSHIP_IS_PROVED_AND_COMPARISON_REMAINS_IRREDUCIBLE"
+    ]
+  },
+  "critical_path_effect": "ONE_FALSE_MANDATORY_LANE_REMOVED_WITHOUT_WEAKENING_THE_TERMINAL_OBJECTIVE_OR_SPENDING_FRESH_REALITY.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "terminal": false
+}
