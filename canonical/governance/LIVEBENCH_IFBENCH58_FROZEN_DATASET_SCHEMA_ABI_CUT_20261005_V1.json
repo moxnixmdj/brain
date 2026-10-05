@@ -1,0 +1,168 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IFBENCH58_FROZEN_DATASET_SCHEMA_ABI_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_FROZEN_SCHEMA_INVALIDATES_TWO_HIDDEN_FIXED_STATE_ASSUMPTIONS__ROUTE_RECONCILIATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Reconcile the exact content-addressed LiveBench 2026-06-25 instruction-following dataset ABI with the pinned post-2025 IFBench58 scorer before spending work on hidden-state reconstruction.",
+  "bound_authorities": {
+    "frozen_population": {
+      "brain_verification": "canonical/verification/LIVEBENCH_IF_2026_06_25_RELEASE_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "hf_repository": "livebench/instruction_following",
+      "hf_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+      "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+      "parquet_bytes": 537024,
+      "active_population_size": 200
+    },
+    "pinned_runtime": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "common_blob": "95373cc6a82bc935013e2c23d2a183022f802f5c",
+      "if_process_utils_blob": "8ce01747887ec0792c8f024e1972e34ece781676",
+      "ifbench_evaluation_blob": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+      "ifbench_instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+    },
+    "superseded_or_challenged_candidate": {
+      "pull_request": 2022,
+      "head_sha": "af69ba35b52ba96a9777fb8e664c0e8aa1ebdb2a",
+      "claim_under_test": "56_OF_58_VISIBLE_STATE_CLOSED_WITH_ONLY_ratio_overlap.reference_text_AND_repeat_span.prompt_to_repeat_AS_HIDDEN_FIXED_STATE_RESIDUALS"
+    }
+  },
+  "exact_frozen_kwargs_schema": {
+    "source": "HF_DATASET_CARD_AT_EXACT_BOUND_REVISION_0868379",
+    "kwargs_struct_fields": [
+      "num_bullets",
+      "num_paragraphs",
+      "num_words",
+      "relation",
+      "forbidden_words",
+      "section_spliter",
+      "num_sections",
+      "keywords",
+      "end_phrase",
+      "postscript_marker",
+      "num_sentences",
+      "nth_paragraph",
+      "first_word",
+      "prompt_to_repeat"
+    ],
+    "not_representable_as_named_kwargs_members": [
+      "reference_text",
+      "percentage",
+      "n_start",
+      "n_end"
+    ],
+    "row_content_read": false,
+    "instruction_id_list_read": false,
+    "prompt_or_turn_text_read": false
+  },
+  "runtime_facts": {
+    "question_to_scorer_adapter": [
+      "ifbench_process_results constructs InputExample from question.instruction_id_list, question.turns[0], and question.kwargs",
+      "test_instruction_following_strict filters null kwargs and invokes instruction.build_description(**kwargs_for_that_instruction)",
+      "ifbench_process_results catches scorer exceptions and returns score 0"
+    ],
+    "ratio_overlap": {
+      "checker": "NGramOverlapChecker",
+      "required_or_score_relevant_state": [
+        "reference_text",
+        "percentage"
+      ],
+      "schema_result": "NEITHER_FIELD_IS_REPRESENTABLE_IN_THE_EXACT_BOUND_KWARGS_STRUCT",
+      "pinned_default_behavior": [
+        "missing percentage selects random integer 1..100",
+        "missing reference_text leaves _reference_text as None",
+        "check_following applies nltk.ngrams to _reference_text"
+      ],
+      "deduction": "ON_ANY_EXACT_BOUND_ROW_DISPATCHED_TO_ratio:overlap_WITH_NO_OUT_OF_BAND_TRANSFORM__THE_SCORER_CANNOT_RECEIVE_A_FIXED_REFERENCE_TEXT_FROM_THE_FROZEN_PARQUET. THE_CURRENT_HIDDEN_REFERENCE_TEXT_PROVENANCE_OBLIGATION_IS_THEREFORE_MISCLASSIFIED. THE_ROW_IS_EITHER_ABSENT_FROM_THE_ACTIVE_POPULATION_OR_THE_PINNED_ROUTE_DEGENERATES_TO_EXCEPTION_TO_ZERO; IT_IS_NOT_A_FIXED_HIDDEN_REFERENCE_TEXT_CASE.",
+      "consequence": "DEMOTE_ratio_overlap_REFERENCE_RECOVERY_UNTIL_ABI_RECONCILIATION"
+    },
+    "repeat_span": {
+      "checker": "RepeatSpanChecker",
+      "required_or_score_relevant_state": [
+        "prompt_to_repeat",
+        "n_start",
+        "n_end"
+      ],
+      "schema_result": "prompt_to_repeat_IS_REPRESENTABLE_BUT_n_start_AND_n_end_ARE_NOT",
+      "pinned_default_behavior": [
+        "missing or false prompt_to_repeat raises ValueError",
+        "missing or false n_start samples a random start index",
+        "missing or false n_end samples a random end index after the selected start",
+        "check_following compares the response to the selected whitespace-word slice"
+      ],
+      "deduction": "ON_ANY_EXACT_BOUND_ROW_DISPATCHED_TO_repeat:repeat_span_WITH_NONEMPTY_prompt_to_repeat_AND_NO_OUT_OF_BAND_TRANSFORM__THE_SCORE_RELEVANT_SPAN_INDICES_ARE_RUNTIME_RANDOM_STATE_RATHER_THAN_FIXED_TERMINAL_KWARGS. IF_prompt_to_repeat_IS_EMPTY_THE_ROUTE_DEGENERATES_TO_EXCEPTION_TO_ZERO.",
+      "consequence": "REPLACE_prompt_to_repeat_ONLY_HIDDEN_STATE_THEOREM_WITH_A_SCORER_DETERMINISM_AND_ACTIVE_FAMILY_PRESENCE_GATE"
+    }
+  },
+  "breakthrough": {
+    "before": "LIVEBENCH_ZERO_REALITY_ROUTE_TREATED_TWO_FIELDS_AS_THE_ONLY_FIXED_HIDDEN_TERMINAL_STATE_SHAPES_REQUIRING_PROVENANCE_RECOVERY",
+    "after": [
+      "ratio:overlap.reference_text_IS_NOT_STORABLE_IN_THE_EXACT_CONTENT_ADDRESSED_DATASET_ABI_AND_CANNOT_BE_TREATED_AS_FIXED_HIDDEN_TERMINAL_STATE",
+      "repeat:repeat_span.n_start_AND_n_end_ARE_NOT_STORABLE_IN_THE_EXACT_CONTENT_ADDRESSED_DATASET_ABI_AND_THEREFORE_BECOME_RUNTIME_RANDOMNESS_IF_THE_FAMILY_IS_PRESENT",
+      "THE_LOAD_BEARING_NEXT_GATE_IS_SCORER_DATA_ABI_RECONCILIATION__NOT_REFERENCE_TEXT_OR_prompt_to_repeat_RECONSTRUCTION"
+    ],
+    "work_eliminated": [
+      "DO_NOT_PROVE_REFERENCE_TEXT_VISIBLE_PROMPT_RECOVERY_FOR_THE_BOUND_0868379_DATASET_UNTIL_AN_ABI_ROUTE_EXISTS_THAT_CAN_ACTUALLY_SUPPLY_reference_text",
+      "DO_NOT_PROVE_REPEAT_SPAN_VISIBLE_PROMPT_RECOVERY_WHILE_n_start_AND_n_end_ARE_RUNTIME_RANDOM_UNDER_THE_BOUND_SCHEMA"
+    ]
+  },
+  "minimum_next_gates": [
+    {
+      "rank": 1,
+      "gate": "INDEPENDENT_SCHEMA_RECOMPUTATION",
+      "pass": "EXACT_0868379_PARQUET_OR_EXACT_REVISION_METADATA_RECOMPUTES_THE_SAME_KWARGS_STRUCT_AND_HASH_BINDING_WITH_ZERO_ROW_TEXT_READ"
+    },
+    {
+      "rank": 2,
+      "gate": "OUT_OF_BAND_TRANSFORM_SEARCH",
+      "pass": "PROVE_OR_REFUTE_ANY_PINNED_FIRST_PARTY_TRANSFORM_BETWEEN_HF_ROW_LOAD_AND_ifbench_process_results_THAT_INJECTS_reference_text_percentage_n_start_OR_n_end"
+    },
+    {
+      "rank": 3,
+      "gate": "ACTIVE_FAMILY_PRESENCE_WITHOUT_CONTENT_LEAK",
+      "pass": "DETERMINE_WHETHER_ratio:overlap_OR_repeat:repeat_span_CAN_APPEAR_IN_THE_ACTIVE_200_POPULATION_USING_ONLY_ADMISSIBLE_METADATA_OR_A_SCOPE_THEOREM; OTHERWISE_FAIL_CLOSED"
+    },
+    {
+      "rank": 4,
+      "gate": "SCORER_DETERMINISM",
+      "pass": "IF_repeat:repeat_span_IS_POSSIBLE__BIND_THE_RNG_STATE_OR_PROVE_A_RESPONSE_STRATEGY_AND_SCORE_BOUND_VALID_FOR_ALL_RUNTIME_RANDOM_SLICES"
+    },
+    {
+      "rank": 5,
+      "gate": "RECOMPILE_POINTWISE_DOMINANCE_ROUTE",
+      "pass": "ONLY_AFTER_ABI_AND_DETERMINISM_GATES__RESTATE_THE_EXACT_CONTRACT_INVERTER_AND_POINTWISE_MAXIMALITY_OBLIGATIONS"
+    }
+  ],
+  "falsifiers": [
+    "THE_EXACT_BOUND_0868379_PARQUET_SCHEMA_IN_FACT_CONTAINS_reference_text_percentage_n_start_OR_n_end_AS_KWARGS_STRUCT_MEMBERS",
+    "THE_PINNED_LIVEBENCH_RUNTIME_HAS_A_CONTENT_ADDRESSED_TRANSFORM_THAT_INJECTS_THOSE_FIELDS_BEFORE_ifbench_process_results",
+    "THE_ACTIVE_200_POPULATION_IS_NOT_THE_EXACT_0868379_BYTES_ALREADY_BOUND_BY_CANONICAL_VERIFICATION",
+    "THE_PINNED_CHECKER_OR_EVALUATOR_BLOBS_DIFFER_FROM_THE_BOUND_SHAS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ratio:overlap_OR_repeat:repeat_span_OCCURS_IN_ANY_TERMINAL_ROW",
+    "NO_TERMINAL_INSTRUCTION_ID_LIST_READ",
+    "NO_TERMINAL_KWARGS_VALUES_READ",
+    "NO_PROMPT_OR_TURN_TEXT_READ",
+    "NO_BRAIN_LIVEBENCH_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_read": 0,
+    "terminal_instruction_lists_read": 0,
+    "terminal_kwargs_values_read": 0,
+    "prompt_or_turn_text_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
