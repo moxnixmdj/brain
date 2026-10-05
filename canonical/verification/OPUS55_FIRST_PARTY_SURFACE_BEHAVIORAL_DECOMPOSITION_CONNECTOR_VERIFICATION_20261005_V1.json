@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__FIVE_NEW_BEHAVIORAL_LEAF_CANDIDATES_PLUS_ONE_VOICE_TEXT_MODALITY_DELETION__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1.json",
+    "git_blob_sha": "c0069cbcbc26aaf663f48c0068f64969564afe10"
+  },
+  "recomputed_inputs": {
+    "contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    },
+    "semantic_law": {
+      "path": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+      "git_blob_sha": "5b70ed776f13194ea02d7df1d878a88386a48b61"
+    }
+  },
+  "checks": {
+    "candidate_leaf_count": 5,
+    "exact_voice_deletion_count": 1,
+    "all_expected_surface_atoms_accounted": true,
+    "candidate_leaf_ids_not_already_present_in_active_contract_registry": true,
+    "all_candidate_leaves_explicitly_non_root1": true,
+    "semantic_law_requires_behavioral_contract_before_mechanism_search": true,
+    "zero_acceptance_capability_family_ownership_credit": true
+  },
+  "verified_surface_accounting": [
+    "CYBERSECURITY",
+    "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+    "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+    "IMAGE_INPUT_AND_VISUAL_REASONING",
+    "CREATIVE_TASKS",
+    "CREATIVE_TEXT_ARTIFACT_OUTPUT",
+    "DIAGRAM_OUTPUT",
+    "VOICE_DICTATION_INPUT"
+  ],
+  "consequence": [
+    "SCHEDULER_MAY_REPLACE_SIX_BROAD_META_SURFACE_LABELS_WITH_FIVE_EXPLICIT_BEHAVIORAL_LEAF_CANDIDATES_PLUS_ONE_DELETION",
+    "ROOT1_POSITIVE_GAP_COUNT_REMAINS_ZERO",
+    "GLOBAL_ENVELOPE_REMAINS_UNSEALED",
+    "NO_NEW_ACCOUNTING_FAMILY_IS_JUSTIFIED_AT_THIS_STAGE"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_PUBLIC_RUNNER_ACCEPTANCE",
+    "NO_CLAIM_ANY_NEW_BEHAVIORAL_LEAF_IS_MISSING_FROM_THE_OPERATIVE_SYSTEM",
+    "NO_CLAIM_ANY_NEW_BEHAVIORAL_LEAF_HAS_AN_OWNED_MECHANISM",
+    "NO_TERMINAL_ENVELOPE_SEAL",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
