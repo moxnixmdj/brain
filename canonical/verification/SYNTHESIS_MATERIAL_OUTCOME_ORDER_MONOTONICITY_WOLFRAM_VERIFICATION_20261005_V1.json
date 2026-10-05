@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_MATERIAL_OUTCOME_ORDER_MONOTONICITY_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_SYMBOLIC_KERNEL_PASS__SOURCE_BINDINGS_OPERATOR_AUDITED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_MATERIAL_OUTCOME_ORDER_MONOTONICITY_CERTIFICATE_20261005_V1.json",
+    "git_blob_sha": "60087399b58885bb314cfa13378cb9dc9c0d9ff1"
+  },
+  "exact_source_bindings": {
+    "canonical/governance/MATCHED_NONINFERIORITY_MONOTONE_ROUTE_CLASSIFICATION_20261005_V1.json": "36072fd038bd52b62d7e355a055753bbf1e9c61b",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+    "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json": "0886f7592875a5b750cdd401aa783351ab2f0854",
+    "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json": "8206cb013b5cd0d653ffa70d1e867f8c4d4630b8",
+    "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1.json": "300fb663e6b598b389961ddf663d88abcd206545",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+  },
+  "independent_kernel": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "positive_check": {
+      "code": "FullSimplify[{Min[fB,uB,aB,sB,cB] >= Min[fT,uT,aT,sT,cT], rB >= rT}, Assumptions -> 0 <= fT <= fB <= 1 && 0 <= uT <= uB <= 1 && 0 <= aT <= aB <= 1 && 0 <= sT <= sB <= 1 && 0 <= cT <= cB <= 1 && 0 <= rT <= rB <= 1]",
+      "exact_output": "{True, True}",
+      "result": "PASS"
+    },
+    "negative_canary": {
+      "target_vector": [
+        "3/5",
+        "3/5"
+      ],
+      "brain_vector": [
+        "3/10",
+        "9/10"
+      ],
+      "target_mean": "3/5",
+      "brain_mean": "3/5",
+      "target_min": "3/5",
+      "brain_min": "3/10",
+      "same_mean": true,
+      "brain_min_worse": true,
+      "result": "PASS__MEAN_OR_WEIGHTED_SUM_TIE_DOES_NOT_IMPLY_NONCOMPENSATORY_MIN_DOMINANCE"
+    }
+  },
+  "source_semantic_audit": {
+    "protocol_six_dimensions": [
+      "claim-to-source fidelity",
+      "required evidence coverage",
+      "uncertainty/disagreement preservation",
+      "audience adaptation",
+      "format/style constraints",
+      "compression without decision-relevant loss"
+    ],
+    "scope_certificate_child_count": 6,
+    "scope_certificate_coverage_relation": "EXACT_UNION",
+    "matched_quality_component_count": 5,
+    "coverage_separate": true,
+    "unsupported_material_claims_separate_atomic_gate": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+    "verdict": "PASS_RELATIVE_TO_EXACT_BOUND_SOURCE_BLOBS"
+  },
+  "verified_consequence": [
+    "COORDINATEWISE_DOMINANCE_ON_THE_COMPLETE_SIX_VECTOR_IMPLIES_NONINFERIOR_FROZEN_MATCHED_QUALITY_AND_REQUIRED_CLAIM_COVERAGE",
+    "EXACT_HIDDEN_AGGREGATOR_WEIGHT_DISCOVERY_IS_NOT_REQUIRED_BY_THE_CURRENT_FROZEN_SYNTHESIS_PROTOCOL",
+    "THE_REMAINING_INFORMATIONAL_BLOCKER_IS_OUTCOME_MASS_OR_CONSERVATIVE_BOUND_COMPILATION_AND_A_FULL_MASS_COUPLING_OR_OTHER_STRONGER_PROOF"
+  ],
+  "hard_nonclaims": [
+    "NO_TARGET_OUTCOME_MASS_VERIFIED",
+    "NO_BRAIN_OUTCOME_MASS_VERIFIED",
+    "NO_COUPLING_EXECUTED",
+    "NO_SYNTHESIS_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
