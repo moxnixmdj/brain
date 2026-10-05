@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_CEILING_TARGET_PRECEDENCE_RECONCILIATION_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__SCHEDULING_PRECEDENCE__STRUCTURED_METHOD_CEILING_REMOVED_FROM_MANDATORY_TERMINAL_CRITICAL_PATH__OPTIONAL_ROUTE_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/STRUCTURED_METHOD_CEILING_TARGET_PRECEDENCE_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "d46427c929d035fb236340c47a45b4df17c231b8"
+  },
+  "verification": {
+    "path": "canonical/verification/STRUCTURED_METHOD_CEILING_TARGET_PRECEDENCE_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "d9355d08f47690a27709e9bdf418e56f646cb18e"
+  },
+  "supersedes_for_mandatory_priority_only": {
+    "path": "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CEILING_ROUTE_ACTIVATION_V1.json",
+    "activation_commit": "9a43903f4dd8556d0577971fa526ee639935f06b"
+  },
+  "effects": [
+    "REMOVE_INDEPENDENT_FORMAL_VERIFICATION_OF_STRUCTURED_METHOD_FINITE_DAG_CEILING_THEOREM_FROM_MANDATORY_TERMINAL_PRIORITY",
+    "PRESERVE_STRUCTURED_METHOD_CEILING_ARTIFACTS_AS_OPTIONAL_SUFFICIENT_EVIDENCE",
+    "PRESERVE_ALL_TARGET_BEHAVIORS_THRESHOLDS_AND_ACCEPTANCE_LINES",
+    "WAKE_ONLY_ON_NEW_TARGET_ENTAILMENT_OR_STRICTLY_CHEAPER_DIRECT_CLOSURE_OF_AN_ALREADY_MANDATORY_OBSERVABLE_TARGET"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
