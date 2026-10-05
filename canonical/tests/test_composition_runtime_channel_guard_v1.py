@@ -64,6 +64,29 @@ class Tests(unittest.TestCase):
                         check=False,
                     )
 
+    def test_strict_action_branches_exclude_known_ambient_escape_calls(self):
+        runtime_path = pathlib.Path(__file__).resolve().parents[1] / "runtime" / "astra_runtime.py"
+        source = runtime_path.read_text(encoding="utf-8")
+        forbidden = (
+            "subprocess", "urllib", "socket.", "requests", "time.",
+            "datetime", "random", "secrets", "importlib", "_load_",
+            "_invoke", "os.environ", "os.getenv", "ctypes", "eval(",
+            "exec(", "compile(", "__import__(",
+        )
+        from canonical.runtime.composition_runtime_channel_guard_v1 import (
+            STRICT_C1_ACTION_TYPES,
+        )
+        for action_type in sorted(STRICT_C1_ACTION_TYPES):
+            token = f'    if typ=="{action_type}":'
+            start = source.find(token)
+            self.assertGreaterEqual(start, 0, action_type)
+            end = source.find("\n    if typ==", start + len(token))
+            if end < 0:
+                end = len(source)
+            body = source[start:end]
+            hits = [needle for needle in forbidden if needle in body]
+            self.assertEqual(hits, [], (action_type, hits))
+
     def test_unaudited_action_type_fails_closed_in_strict_mode(self):
         with tempfile.TemporaryDirectory() as td:
             with self.assertRaisesRegex(
