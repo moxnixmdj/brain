@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_VOICE_DICTATION_MODEL_BOUNDARY_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIRST_PARTY_DICTATION_IS_UPSTREAM_SPEECH_TO_TEXT__NO_NATIVE_OPUS55_AUDIO_CAPABILITY_REQUIRED_FOR_DICTATION_SURFACE__ZERO_CREDIT",
+  "objective": "Classify the first-party 'voice dictation input' surface so the global Opus 5.5 capability envelope does not invent a model-native speech-recognition obligation when the product documents dictation as upstream speech-to-text.",
+  "source_bindings": {
+    "root1_envelope_v2": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V2.json",
+      "git_blob_sha": "53abbfc02b100b5bcb9aaffe5f7b85802f267852"
+    },
+    "first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    }
+  },
+  "public_primary_sources": [
+    {
+      "url": "https://support.claude.com/en/articles/10065434-use-dictation-on-claude-mobile",
+      "observed": "DICTATION_TURNS_SPEECH_INTO_TEXT__USER_SENDS_WRITTEN_PROMPT__CLAUDE_REPLIES_IN_TEXT"
+    },
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "observed": "OPUS55_MODALITIES_DESCRIBED_AS_TEXT_INCLUDING_VOICE_DICTATION_AND_IMAGE_INPUTS"
+    }
+  ],
+  "classification": {
+    "surface": "VOICE_DICTATION_INPUT",
+    "native_opus55_raw_audio_input_required": false,
+    "client_or_product_speech_to_text_upstream": true,
+    "model_load_bearing_input_after_dictation": "TEXT_PROMPT",
+    "model_capability_mapping": [
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "COMMUNICATION_AND_SYNTHESIS"
+    ],
+    "new_family_required": false,
+    "reasoning": "THE PRODUCT-SPECIFIC SPEECH RECOGNITION STEP OCCURS BEFORE THE TEXT PROMPT IS SENT TO CLAUDE; THE OPUS55 LOAD-BEARING BEHAVIOR IS THEREFORE TEXT UNDERSTANDING_AND_RESPONSE, ALREADY INSIDE DECLARED TEXT CAPABILITY FAMILIES."
+  },
+  "scheduler_delta": {
+    "delete": [
+      "VOICE_DICTATION_NATIVE_AUDIO_MODEL_CAPABILITY_OBLIGATION",
+      "OPEN_NEW_AUDIO_OR_SPEECH_RECOGNITION_FAMILY_FROM_DICTATION_SURFACE"
+    ],
+    "preserve": [
+      "TEXT_PROMPT_INSTRUCTION_FOLLOWING_AND_COMMUNICATION_ACCEPTANCE",
+      "VOICE_MODE_AS_SEPARATE_PRODUCT_SURFACE_IF_LATER_SHOWN_TO_BE_LOAD_BEARING_FOR_OPUS55__NOT_DECIDED_HERE"
+    ]
+  },
+  "root1_effect": {
+    "positive_new_gap_count_delta": 0,
+    "voice_dictation_mapping_obligation_closed": true,
+    "global_envelope_sealed": false,
+    "remaining_meta_surface_groups": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "IMAGE_INPUT_AND_VISUAL_REASONING",
+      "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_VOICE_MODE_OR_AUDIO_PRODUCT_BEHAVIOR_IS_NON_MODEL",
+    "NO_CLAIM_GLOBAL_19_FAMILY_ENVELOPE_IS SEALED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
