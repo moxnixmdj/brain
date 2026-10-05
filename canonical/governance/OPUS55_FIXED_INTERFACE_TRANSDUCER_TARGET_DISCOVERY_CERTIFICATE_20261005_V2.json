@@ -1,0 +1,163 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIXED_INTERFACE_TRANSDUCER_TARGET_DISCOVERY_CERTIFICATE_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__W4_TARGET_DISCOVERY_COVERAGE_BY_TARGET_INDEPENDENT_INTERACTIVE_TRANSDUCER_SUPERDOMAIN__NO_ROLE_TAXONOMY_OR_PROFILE_ENUMERATION_PREMISE__ZERO_CREDIT",
+  "objective": "Repair the prior W4 target-discovery certificate by proving only the coverage half U⊆D from the frozen Opus 5.5 external interaction boundary. Remove the falsified B0-B9 role-to-family totality premise and remove profile-enumeration completeness as a coverage prerequisite.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "witness_class": "W4_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE",
+  "target_discovery_complete": true,
+  "supersedes_for_target_discovery_coverage": {
+    "path": "canonical/governance/OPUS55_TARGET_DISCOVERY_COMPLETENESS_CERTIFICATE_V1.json",
+    "commit_sha": "1b799349c77098446573e2c67b0306bdebea9ca3",
+    "reason": "PRIOR_CERTIFICATE_DEPENDED_ON_B0_B9_ROLE_TOTALITY_AND_PROFILE_UNION;ROLE_TO_BEHAVIORAL_COMPLETENESS_WAS_INDEPENDENTLY_FALSIFIED_AND_PROFILE_ENUMERATION_REMAINS_OPEN"
+  },
+  "exact_authorities": {
+    "target_rule": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "target_rule": "capability includes outcomes internal mechanisms and transfer, with behavioral family labels bound elsewhere; canonical terminal objective concerns useful capability, not copying hidden implementation"
+    },
+    "target_independent_superdomain": {
+      "path": "canonical/governance/OPUS55_FIXED_INTERFACE_INTERACTIVE_TRANSDUCER_SUPERDOMAIN_20261005_V1.json",
+      "git_blob_sha": "251fb6277aae86efefc0f06d9cd27afee73e0e"
+    },
+    "live_w4_frontier_runtime": {
+      "path": "canonical/runtime/terminal_frontier_compiler_v2.py",
+      "git_blob_sha": "5dcae9ffb9c31ee3a5bf280b416fcbf7cd593d33",
+      "w4_allowed_by_commit": "1b951ac950ac033c6baa93806aa796dbd4ce934f"
+    },
+    "role_basis_falsification": {
+      "commit_sha": "9b79f7ef15ab710dba0ccfc55e10e8b85217d2bb",
+      "consequence": "B0_B9_ROLE_TAXONOMY_NOT_USED_AS_BEHAVIORAL_COMPLETENESS_PREMISE"
+    },
+    "profile_union_gate": {
+      "activation_commit_sha": "0a8210a24c04b6d64a78b4233c199b646713b072",
+      "allowed_bypass": "NONCIRCULAR_TARGET_INDEPENDENT_SUPERDOMAIN_PLUS_FULL_UNIVERSAL_DOMINANCE"
+    }
+  },
+  "first_party_interface_evidence": [
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "observed_2026_10_05": [
+        "CLAUDE_OPUS_5_5_INPUT_MODALITIES_TEXT_INCLUDING_VOICE_DICTATION_AND_IMAGES",
+        "CLAUDE_OPUS_5_5_OUTPUTS_TEXT_INCLUDING_TEXT_BASED_ARTIFACTS_AND_DIAGRAMS"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed_2026_10_05": [
+        "MODEL_CLAUDE_OPUS_5_5_ACTIVE",
+        "INPUT_TO_OUTPUT_TEXT_AND_IMAGES_TO_TEXT",
+        "ADAPTIVE_THINKING_INTERNAL_MODE_DOES_NOT_CREATE_A_NEW_EXTERNAL_ACTUATOR_CHANNEL"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works",
+      "observed_2026_10_05": [
+        "MODEL_EMITS_STRUCTURED_TOOL_REQUEST",
+        "CLIENT_OR_SERVER_EXECUTES_TOOL",
+        "RESULT_RETURNS_TO_MODEL_CONVERSATION",
+        "USER_DEFINED_AND_SERVER_TOOL_BUCKETS_SHARE_THE_MODEL_SIDE_TOOL_INTERACTION_PATTERN"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool",
+      "observed_2026_10_05": [
+        "BROWSER_ACTIONS_ARE_MODEL_TOOL_CALLS_EXECUTED_EXTERNALLY_AND_RETURNED_AS_RESULTS"
+      ]
+    }
+  ],
+  "coverage_domain": {
+    "D": "ALL_CAUSAL_STATEFUL_STOCHASTIC_INTERACTIVE_TRANSDUCERS_OVER_THE_FROZEN_OPUS55_EXTERNAL_MODALITY_AND_STRUCTURED_TOOL_INTERACTION_BOUNDARY",
+    "internal_state": "ARBITRARY__MAY_ENCODE_RAW_MODEL_LATENT_STATE_SYSTEM_PROMPTS_MEMORY_SAFEGUARD_STATE_PROFILE_STATE_FALLBACK_ROUTING_OR_OTHER_HIDDEN_DEPLOYMENT_STATE_WITHOUT CLAIMING TO KNOW OR OWN THOSE TARGET INTERNALS",
+    "target_object_robustness": [
+      "RAW_OPUS55_MODEL_BEHAVIOR_IS_CONTAINED",
+      "OPUS55_PLUS_SYSTEM_PROMPT_OR_SAFEGUARD_BEHAVIOR_IS_CONTAINED",
+      "AUTHORIZED_DEPLOYED_PROFILE_BEHAVIOR_USING_THE_SAME_EXTERNAL_BOUNDARY_IS_CONTAINED",
+      "FALLBACK_OR_SCREENING_STACK_OUTPUT_BEHAVIOR_IS_CONTAINED_AS A COVERAGE SUPERSET EVEN IF IT IS LATER EXCLUDED FROM THE EXACT TERMINAL TARGET"
+    ],
+    "profile_enumeration_required_for_coverage": false,
+    "role_taxonomy_required_for_coverage": false
+  },
+  "theorem": {
+    "definitions": {
+      "U": "WHATEVER_EXACT_SUBSET_OF_USEFUL_OBSERVABLE_BEHAVIORS THE_LITERAL FROZEN OPUS55 TARGET SEMANTICS ULTIMATELY SELECTS",
+      "A": "BEHAVIORS REALIZED THROUGH THE FROZEN DOCUMENTED EXTERNAL MODEL INTERACTION BOUNDARY",
+      "D": "THE TARGET INDEPENDENT INTERACTIVE TRANSDUCER SUPERDOMAIN ABOVE"
+    },
+    "empirical_interface_premise": "EVERY BEHAVIOR ELIGIBLE FOR THE FROZEN OPUS55 USEFUL-CAPABILITY TARGET IS REALIZED THROUGH THE BOUND TEXT_IMAGE_TEXT_OR_STRUCTURED_TOOL INTERACTION SURFACES; PRODUCT OR PROFILE STATE MAY CHANGE THE TRANSDUCER BUT NOT REQUIRE A NEW EXTERNAL CHANNEL.",
+    "formal_premises": [
+      "U_SUBSET_OR_EQUAL_A",
+      "A_SUBSET_OR_EQUAL_D"
+    ],
+    "formal_conclusion": "U_SUBSET_OR_EQUAL_D",
+    "proof": [
+      "TAKE_ANY u∈U.",
+      "BY THE FROZEN TARGET AND FIRST_PARTY MODALITY/TOOL BOUNDARY u IS REALIZED THROUGH THE BOUND EXTERNAL INTERACTION CHANNELS, SO u∈A.",
+      "ANY SUCH BEHAVIOR IS INDUCED BY SOME CAUSAL STATEFUL STOCHASTIC MAPPING FROM INTERACTION HISTORY PLUS ARBITRARY INTERNAL STATE TO AN ADMISSIBLE MODEL EMISSION AND NEXT STATE.",
+      "D CONTAINS ALL SUCH MAPPINGS BY DEFINITION, SO u∈D.",
+      "THEREFORE U⊆D."
+    ],
+    "symbolic_check": {
+      "kernel": "WOLFRAM_LANGUAGE",
+      "tautology": "Implies[(U→A)∧(A→D), U→D] == True",
+      "independent_result": true,
+      "countermodel_without_interface_premise": "U=True,A=False,D=True demonstrates that A⊆D alone is insufficient"
+    }
+  },
+  "dominance_separation": {
+    "target_discovery_coverage_proved_if_verified": true,
+    "performance_or_dominance_proved": false,
+    "why": "D is intentionally an enormous superset, so coverage is easy but universal Brain noninferiority over D is strictly harder than noninferiority over the unknown exact U.",
+    "active_dominance_routes": [
+      "E_EXACT_GLOBAL_OPTIMUM_CERTIFICATES_WHERE_EVALUATOR_IS_ADMISSIBLY_AVAILABLE_AND EXACTLY OPTIMIZABLE",
+      "HIDDEN_EVALUATOR_MONOTONE_COUPLING_WHERE A MATERIAL ORDER IS INDEPENDENTLY CERTIFIED",
+      "EXACT_OR_STRONGER_POLICY_EQUIVALENCE_ONLY_FOR_THE_IRREDUCIBLE_HIDDEN_EVALUATOR_REMAINDER",
+      "SCOPED_OBSERVED_EPOCH ACCEPTANCE FOR CURRENT 19 FAMILY/38 ATOMIC PROOF SYSTEM"
+    ]
+  },
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "WAIT_FOR_W1_OWNER_EXHAUSTIVENESS_ATTESTATION_AS_A_LOGICAL_PREREQUISITE_TO_TARGET_COVERAGE",
+      "WAIT_FOR_COMPLETE_PROFILE_ENUMERATION_AS_A_LOGICAL_PREREQUISITE_TO_TARGET_COVERAGE",
+      "USE_B0_B9_ROLE_TO_FAMILY_TOTALITY_AS_TARGET_DISCOVERY_PROOF",
+      "ACCUMULATE_MORE_FINITE_BENCHMARKS_FOR_TARGET_DISCOVERY_COMPLETENESS"
+    ],
+    "preserve": [
+      "W1_OWNER_REPLY_AS_OPTIONAL_DOMAIN_SHRINKING_INFORMATION",
+      "TARGET_OBJECT_RAW_MODEL_VS_DEPLOYED_PROFILE SEMANTICS FOR DECIDING WHICH SUBSET OF D ACTUALLY MATTERS",
+      "ALL_OBSERVED_EPOCH ACCEPTANCE AND DOMINANCE OBLIGATIONS",
+      "FAIL_CLOSED_REOPEN_IF_A NEW LOAD_BEARING EXTERNAL MODEL CHANNEL APPEARS"
+    ],
+    "new_global_bottleneck": "UNIVERSAL_OR SUFFICIENTLY PARTITIONED BRAIN DOMINANCE OVER THE SOUND COVERING DOMAIN__NOT TARGET DISCOVERY ENUMERATION"
+  },
+  "falsifiers": [
+    "OFFICIAL EVIDENCE OF A LOAD_BEARING OPUS55 EXTERNAL MODEL INPUT CHANNEL NOT REPRESENTABLE BY THE BOUND INPUT CLASS",
+    "OFFICIAL EVIDENCE OF A LOAD_BEARING OPUS55 EXTERNAL OUTPUT OR ACTUATOR CHANNEL NOT REPRESENTABLE BY TEXT OR STRUCTURED TOOL INTERACTION",
+    "THE TERMINAL OBJECTIVE REQUIRES A PURELY INTERNAL TARGET PROPERTY WITH NO USEFUL OBSERVABLE BEHAVIORAL CONSEQUENCE",
+    "A TARGET PROFILE USES A MATERIAL MODEL_SIDE INTERACTION CHANNEL OUTSIDE THE BOUND CLASS"
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM D IS MINIMAL",
+    "NO CLAIM THE EXACT TARGET SUBSET U HAS BEEN ENUMERATED",
+    "NO CLAIM BRAIN DOMINATES D",
+    "NO CLAIM PROFILE FALLBACK OUTPUTS BELONG TO THE FINAL TARGET OBJECT",
+    "NO LITERAL TERMINAL FINALITY",
+    "NO ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT",
+    "NO FRESH REALITY AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
