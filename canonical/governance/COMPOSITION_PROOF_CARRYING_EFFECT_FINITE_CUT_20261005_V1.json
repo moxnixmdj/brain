@@ -1,0 +1,166 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_PROOF_CARRYING_EFFECT_FINITE_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__CURRENT_EXECUTABLE_COMPOSITION_DOMAIN_REDUCED_TO_FINITE_EFFECT_WITNESS_TABLE_PLUS_ONE_TRACE_CONTENT_BINDING_INVARIANT__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+  "objective": "Replace the open-ended P1 cross-role state-preservation and P2 load-bearing provenance-completeness residuals with the smallest current finite proof obligations induced by the exact executable bound-capability universe and controller semantics.",
+  "authorities": {
+    "minimum_premise_cut": {
+      "path": "canonical/governance/COMPOSITION_ZERO_CRITICAL_INVARIANT_MINIMUM_PREMISE_CUT_20261005_V1.json",
+      "git_blob_sha": "cad34e4a8912b2ffa07d73d94c9651f2852d7247"
+    },
+    "grounded_composer": {
+      "path": "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+      "git_blob_sha": "8328e12804f64cab1c0d9509966cb1d2d8fb1f82"
+    },
+    "grounded_composition_verifier": {
+      "path": "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
+      "git_blob_sha": "ab9f6fc19937d23edb24dc26a2affed96cea0a9a"
+    },
+    "capability_planner": {
+      "path": "canonical/runtime/capability_planner.py",
+      "git_blob_sha": "64ff65cb184f50d3336326f33cccfcc0a53301a8"
+    },
+    "executor": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "7f5d16b1db69cb620954bc778e0ba6e15e687b75"
+    },
+    "bound_capability_registry": {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+    }
+  },
+  "exact_current_domain": {
+    "verified_bound_capability_entries": 42,
+    "entries_with_executable_action_template": 41,
+    "executable_entries_with_runtime_expectation": 41,
+    "executable_entries_with_nonempty_verification_metadata": 41,
+    "nonexecutable_entries": [
+      "docx.document.verify.ooxml"
+    ],
+    "nonexecutable_exclusion_rule": "grounded_executable_composition.compose rejects a candidate lacking action_template with CANDIDATE_ACTION_TEMPLATE_MISSING, so the sole nonexecutable registry entry cannot enter this composition route.",
+    "scope": "CURRENT_CONTENT_ADDRESSED_BOUND_CAPABILITY_REGISTRY_AND_GROUNDED_EXECUTABLE_COMPOSITION_ROUTE_ONLY"
+  },
+  "already_enforced_runtime_structure": {
+    "planner_dependency_order": "plan_capabilities admits a capability only when its requires set is a subset of the current fact state; plan_actions emits selected capability actions in that dependency order.",
+    "concrete_valueflow": "effect-result dependencies are lowered to an exact prior action cycle plus declared result field; _resolve_result_refs fails closed on invalid cycle or missing field.",
+    "postcondition_gate": "_run_model_independent_goal executes _verify_action_expectation(action,result) before appending that action/result record to the trace and therefore before any later action can consume it.",
+    "sequential_trace": "each successful controller action is appended as an ordered record containing cycle, resolved plan, and concrete result.",
+    "checkpoint_identity": "controller checkpoints are bound to the controller action plan hash; named missions alone may resume.",
+    "durable_resume_validation": "_validated_checkpoint_prefix validates durable path/hash evidence where available and rewinds from the first invalid or missing durable effect before continuation.",
+    "unknown_or_failed_result_behavior": "action errors, expectation failures, invalid result references, invalid checkpoint state, and missing required provider result fields fail closed."
+  },
+  "critical_semantic_gap": {
+    "statement": "A passed runtime expectation is not yet, by syntax alone, a proof that every semantic effect label in that capability's provides set is true. The registry verification metadata establishes capability-specific evidence, but the current composition theorem lacks one explicit effect-to-witness binding for every executable provides edge.",
+    "why_it_is_now_finite": "The current executable composition universe contains exactly 41 actionable verified registry entries, each already carrying a deterministic expectation and verification metadata.",
+    "not_allowed": [
+      "DO_NOT_TREAT_PROVIDES_LABELS_AS_TRUE_MERELY_BECAUSE_THE_ACTION_RETURNED_WITHOUT_ERROR",
+      "DO_NOT_TREAT_EXPECTATION_PASS_AS_SEMANTIC_EFFECT_PROOF_UNLESS_THE_EFFECT_TO_EXPECTATION_BINDING_IS_EXPLICIT",
+      "DO_NOT_INFER_CRYPTOGRAPHIC_OR_CONTENT_BOUND_PROVENANCE_FROM_ORDERED_TRACE_STORAGE_ALONE"
+    ]
+  },
+  "finite_minimum_cut": [
+    {
+      "id": "E1_EFFECT_WITNESS_SEMANTIC_BINDING_TABLE",
+      "cardinality": 41,
+      "statement": "For every executable VERIFIED_BOUND_CAPABILITY entry c and every declared effect e in c.provides, bind a deterministic runtime witness predicate W(c,e,result,state) such that the existing action expectation or an equally fail-closed postcondition check implies W, and W is sufficient for the semantic truth of e within the exact declared effect contract.",
+      "required_fields_per_entry": [
+        "capability_id",
+        "registry_blob",
+        "provided_effect",
+        "runtime_witness_predicate",
+        "witness_source_field_or_artifact",
+        "semantic_effect_contract",
+        "verification_receipt_or_independent_oracle",
+        "fail_closed_condition"
+      ],
+      "compression_rule": "A single capability row may cover multiple provided effects only when the same witnessed postcondition semantically entails each effect and that entailment is explicit."
+    },
+    {
+      "id": "E2_APPEND_ONLY_CONTENT_BOUND_TRACE_PROVENANCE",
+      "cardinality": 1,
+      "statement": "Bind every successful load-bearing controller transition to one append-only content-addressed provenance chain over at least plan identity, action cycle, resolved action, result digest or durable artifact digest, prior-chain digest, and checkpoint identity; a consumer or resumed mission may rely on a prior transition only when the bound chain prefix verifies.",
+      "reason_not_deleted": "The current controller trace is ordered and checkpointed, and durable artifact hashes are verified where available, but not every load-bearing result record is universally content-bound into one cryptographic chain. P2 explicitly requires content-bound complete lineage.",
+      "minimum_runtime_delta": [
+        "TRACE_RECORD_DIGEST",
+        "PREVIOUS_TRACE_DIGEST",
+        "CHECKPOINT_CHAIN_HEAD",
+        "FAIL_CLOSED_RECOMPUTATION_ON_RESUME",
+        "EFFECT_WITNESS_REFERENCE_TO_THE_EXACT_PROVIDER_TRACE_RECORD"
+      ]
+    }
+  ],
+  "lifting_theorem": {
+    "id": "PROOF_CARRYING_EFFECTS_PLUS_CONTENT_BOUND_TRACE_IMPLIES_CURRENT_DOMAIN_P1_P2",
+    "premises": [
+      "THE_CURRENT_GROUNDED_EXECUTABLE_COMPOSITION_DOMAIN_IS_RESTRICTED_TO_THE_CONTENT_ADDRESSED_41_EXECUTABLE_REGISTRY_ENTRIES.",
+      "E1 HOLDS FOR EVERY EXECUTABLE REGISTRY ENTRY AND EVERY DECLARED PROVIDED EFFECT.",
+      "THE_EXISTING PLANNER EXECUTES A CONSUMER ONLY AFTER ITS REQUIRED PROVIDER ACTION APPEARS EARLIER IN THE SELECTED PLAN.",
+      "THE_EXISTING EXECUTOR FAILS CLOSED UNLESS EACH PROVIDER ACTION SATISFIES ITS DETERMINISTIC POSTCONDITION BEFORE TRACE APPEND.",
+      "ALL_CROSS_ACTION_RUNTIME_VALUEFLOW_USES_EXACT_PRIOR_CYCLE_AND_DECLARED_RESULT_FIELD_REFERENCES_OR_FAILS_CLOSED.",
+      "E2 BINDS EVERY LOAD_BEARING SUCCESSFUL TRANSITION AND ITS EFFECT WITNESSES INTO A VERIFIED CONTENT ADDRESSED TRACE PREFIX.",
+      "ON_RESUME_INVALID_DURABLE_EFFECTS_OR_INVALID_TRACE_PREFIXES_REWIND_BEFORE_ANY_LATER_CONSUMER_EXECUTES."
+    ],
+    "proof_sketch": [
+      "TAKE_ANY_EXECUTED CONSUMER ACTION IN A PLANNER-GENERATED CURRENT-DOMAIN COMPOSITION.",
+      "EVERY REQUIRED INTERNAL EFFECT HAS A SELECTED PROVIDER EARLIER IN THE PLAN, OR THE PLAN CANNOT REACH THAT FACT STATE.",
+      "BY EXECUTOR ORDERING, THE PROVIDER'S POSTCONDITION CHECK PASSES BEFORE THE PROVIDER ENTERS THE SUCCESS TRACE.",
+      "BY E1, THAT PASSED WITNESS ESTABLISHES THE SEMANTIC PROVIDED EFFECT RATHER THAN MERELY ITS LABEL.",
+      "ANY CONCRETE CROSS-ROLE VALUE IS RESOLVED FROM THE EXACT EARLIER PROVIDER CYCLE AND DECLARED FIELD; MISSING OR AMBIGUOUS VALUEFLOW FAILS CLOSED.",
+      "BY E2, THE PROVIDER ACTION, RESULT OR ARTIFACT DIGEST, EFFECT WITNESS, AND CONSUMER DEPENDENCY ARE CONTENT BOUND IN ONE VERIFIED PREFIX.",
+      "A RESUMED EXECUTION CAN CONTINUE ONLY FROM A VALIDATED PREFIX; OTHERWISE IT REWINDS BEFORE THE INVALID EFFECT.",
+      "THEREFORE NO LATER CURRENT-DOMAIN ROLE MAY LEGITIMATELY CONSUME AN UNWITNESSED OR UNPROVENANCED INTERNAL EFFECT. CROSS-ROLE STATE REQUIRED BY THE PLAN IS PRESERVED AS A VERIFIED RESULT/ARTIFACT REFERENCE OR EXECUTION FAILS CLOSED, AND LOAD-BEARING LINEAGE IS COMPLETE AND CONTENT BOUND."
+    ],
+    "conditional_conclusion": [
+      "P1_CROSS_ROLE_STATE_PRESERVATION",
+      "P2_LOAD_BEARING_PROVENANCE_COMPLETENESS"
+    ],
+    "then": "WITH THE OTHER FROZEN CRITICAL COMPOSITION INVARIANTS, RECOMPUTE P3_CRITICAL_FAILURE_AGGREGATION. ONLY AN INDEPENDENTLY VERIFIED P3 MAY ESTABLISH critical_composition_invariant_failures = 0."
+  },
+  "leverage": {
+    "old_residual_shape": "TWO_BROAD_UNIVERSAL_RUNTIME_SEMANTIC_THEOREMS_PLUS_ZERO_FAILURE_AGGREGATION",
+    "new_residual_shape": "41_FINITE_EFFECT_WITNESS_BINDINGS_PLUS_ONE_GENERIC_TRACE_CHAIN_INVARIANT_PLUS_MECHANICAL_P3_RECOMPUTATION",
+    "new_build_required": "ONE_GENERIC_TRACE_CONTENT_BINDING_MECHANISM; NO_NEW_COMPOSITION_ENGINE_REQUIRED",
+    "comparison_with_confinement_broker_route": "THE CONFINED_EFFECT_BROKER IS A STRONGER SHARED LONG_TERM NO_BYPASS SUBSTRATE FOR DYNAMIC EFFECTS, BUT IT REQUIRES NEW SANDBOX_AND_BROKER K1-K6 BUILD PREMISES. THIS FINITE CUT REUSES CURRENT EXECUTION MECHANICS AND IS THE SMALLER IMMEDIATE CUT FOR THE EXISTING 41_ENTRY COMPOSITION DOMAIN.",
+    "future_registry_growth_rule": "A newly executable capability MUST NOT ENTER THE PROVED COMPOSITION DOMAIN UNTIL ITS E1 EFFECT_WITNESS BINDINGS ARE ADDED AND INDEPENDENTLY VERIFIED."
+  },
+  "scheduler_delta": {
+    "delete": [
+      "SEARCH_FOR_A_SINGLE_OPEN_WORLD_P1_STATE_PRESERVATION_THEOREM_OVER_ARBITRARY_DYNAMIC_CAPABILITIES_AS_THE_ONLY_COMPOSITION_ROUTE",
+      "SEARCH_FOR_A_SINGLE_OPEN_WORLD_P2_PROVENANCE_COMPLETENESS_THEOREM_OVER_ARBITRARY_DYNAMIC_CAPABILITIES_AS_THE_ONLY_COMPOSITION_ROUTE",
+      "ENUMERATE_PAIRWISE_OR_HIGHER_ORDER_CAPABILITY_COMBINATIONS_TO_PROVE_STATE_PRESERVATION",
+      "REPROVE_PLANNER_ORDERING_RESULT_REFERENCE_AND_EXPECTATION_GATING_PER_CAPABILITY"
+    ],
+    "activate": [
+      "COMPILE_41_ENTRY_EFFECT_WITNESS_SEMANTIC_BINDING_TABLE",
+      "BUILD_ONE_APPEND_ONLY_CONTENT_BOUND_TRACE_PROVENANCE_CHAIN",
+      "INDEPENDENTLY_FALSIFY_EFFECT_WITNESS_ROWS_WITH_RESULT_AND_ARTIFACT_MUTATIONS",
+      "INDEPENDENTLY_FALSIFY_TRACE_CHAIN_WITH_REORDER_DELETE_RESULT_MUTATE_ARTIFACT_AND_CHECKPOINT_REPLAY_MUTATIONS",
+      "AFTER_E1_E2_PASS_RECOMPUTE_P3_AND_PARENT_COMPOSITION_FORWARD_SIMULATION"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_41_EFFECT_WITNESS_SEMANTIC_BINDINGS_ARE_ALREADY PROVED",
+    "NO_CLAIM_THE_CURRENT_CONTROLLER_TRACE_IS_ALREADY UNIVERSALLY CONTENT BOUND",
+    "NO_CLAIM_P1_OR_P2_IS CLOSED BEFORE E1_AND_E2_INDEPENDENT_VERIFICATION",
+    "NO_CLAIM_COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES_IS PROVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_LITERAL_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
