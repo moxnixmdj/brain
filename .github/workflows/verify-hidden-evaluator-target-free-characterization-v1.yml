@@ -1,0 +1,38 @@
+name: verify hidden evaluator target-free characterization v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_MONOTONE_DOMINANCE_CHARACTERIZATION_V1.json"
+      - "canonical/runtime/hidden_evaluator_target_free_characterization_v1.py"
+      - "canonical/tests/test_hidden_evaluator_target_free_characterization_v1.py"
+      - "canonical/verification/HIDDEN_EVALUATOR_TARGET_FREE_MONOTONE_DOMINANCE_WOLFRAM_VERIFICATION_20261005_V1.json"
+      - ".github/workflows/verify-hidden-evaluator-target-free-characterization-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run characterization tests
+        run: python -m unittest canonical.tests.test_hidden_evaluator_target_free_characterization_v1 -v
+      - name: Parse governance and verification JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths = [
+              Path("canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_MONOTONE_DOMINANCE_CHARACTERIZATION_V1.json"),
+              Path("canonical/verification/HIDDEN_EVALUATOR_TARGET_FREE_MONOTONE_DOMINANCE_WOLFRAM_VERIFICATION_20261005_V1.json"),
+          ]
+          for path in paths:
+              json.loads(path.read_text(encoding="utf-8"))
+              print("JSON_PASS", path)
+          PY
