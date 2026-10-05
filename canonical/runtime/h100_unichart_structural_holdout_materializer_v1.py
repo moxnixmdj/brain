@@ -2,7 +2,8 @@ from __future__ import annotations
 # PREPARED ONLY. Do not execute until structural candidate hash/size receipt exists.
 import hashlib, json, pathlib, urllib.parse, urllib.request
 ROOT=pathlib.Path('/tmp/h100pack')
-BASE='https://raw.githubusercontent.com/vis-nlp/ChartQA/main/'
+CHARTQA_COMMIT='044eabfc306abfe9340c5741f0093aefc5973d06'
+BASE=f'https://raw.githubusercontent.com/vis-nlp/ChartQA/{CHARTQA_COMMIT}/'
 DEV_IMAGES={'3887.png','4576.png','5734.png','11756.png','13153.png','multi_col_20933.png','multi_col_972.png','multi_col_60377.png','multi_col_60563.png','multi_col_101153.png','multi_col_80582.png'}
 FILES=[
  ('human','ChartQA Dataset/val/val_human.json','983dacfcb6aabc8598031c07eeba7747f9884c4a'),
@@ -40,6 +41,7 @@ for kind,path,expected_blob_sha in FILES:
         case['image_bytes']=len(blob)
         out.append(case)
 receipt={'schema':'PROJECT_BRAIN_H100_UNICHART_STRUCTURAL_HOLDOUT_MATERIALIZATION_V1',
+         'chartqa_commit':CHARTQA_COMMIT,
          'selection':'FIRST_10_POST_INDEX9_NONDEV_IMAGES_PER_SPLIT','case_count':20,
          'annotation_blob_sha_verified':True,'cases':out}
 (ROOT/'chartqa_structural_holdout.json').write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
