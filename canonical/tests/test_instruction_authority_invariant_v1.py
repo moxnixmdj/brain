@@ -1,6 +1,12 @@
 from itertools import chain, combinations
+import copy
+import threading
+
+import pytest
 
 from canonical.runtime.instruction_authority_invariant_v1 import (
+    AuthorityCommitError,
+    InstructionAuthorityCommitGate,
     evaluate_instruction_action,
     next_requirement_epoch,
 )
@@ -54,7 +60,9 @@ def base_proposal():
 def test_valid_normalized_action_passes():
     out = evaluate_instruction_action([req("R1"), req("R2")], base_state(), base_proposal())
     assert out["pass"] is True
-    assert out["execution_authority"] is True
+    assert out["execution_authority"] is False
+    assert out["point_in_time_authority"] is True
+    assert out["commit_gate_required"] is True
     assert out["semantic_extraction_proved"] is False
     assert out["bypass_coverage_proved"] is False
 
@@ -157,9 +165,170 @@ def test_exhaustive_two_scope_normalized_soundness():
                             "required_scopes": list(required),
                         }
                         out = evaluate_instruction_action(requirements, state, proposal)
-                        if out["execution_authority"]:
+                        if out["point_in_time_authority"]:
                             assert proposal_epoch == state["current_epoch"]
                             assert not unresolved
                             assert set(required) <= set(authorized)
                             assert not (set(required) & set(forbidden))
                             assert not (set(authorized) & set(forbidden))
+
+
+
+def _gate():
+    return InstructionAuthorityCommitGate(
+        [req("R1"), req("R2")],
+        base_state(),
+    )
+
+
+def test_point_in_time_decision_cannot_be_used_as_durable_execution_authority():
+    out = evaluate_instruction_action(
+        [req("R1"), req("R2")],
+        base_state(),
+        base_proposal(),
+    )
+    assert out["pass"] is True
+    assert out["point_in_time_authority"] is True
+    assert out["execution_authority"] is False
+    assert out["commit_gate_required"] is True
+
+
+def test_one_use_commit_executes_effect_exactly_once():
+    gate = _gate()
+    issued = gate.issue_grant(base_proposal(), grant_id="grant-once")
+    assert issued["pass"] is True
+    assert issued["execution_authority"] is False
+
+    calls = []
+    committed = gate.commit(
+        issued["grant"],
+        base_proposal(),
+        lambda: calls.append("effect") or {"ok": True},
+    )
+    assert committed["pass"] is True
+    assert committed["execution_authority"] is True
+    assert committed["effect_committed"] is True
+    assert calls == ["effect"]
+
+    with pytest.raises(AuthorityCommitError, match="GRANT_REPLAY_FORBIDDEN"):
+        gate.commit(
+            issued["grant"],
+            base_proposal(),
+            lambda: calls.append("replay"),
+        )
+    assert calls == ["effect"]
+
+
+def test_requirement_change_between_issue_and_commit_invalidates_grant():
+    gate = _gate()
+    issued = gate.issue_grant(base_proposal(), grant_id="grant-stale")
+    gate.advance_requirements(
+        [req("R2"), req("R3")],
+        active_requirement_ids=["R2", "R3"],
+        authorized_scopes=["read"],
+        forbidden_scopes=["write", "delete"],
+    )
+
+    with pytest.raises(
+        AuthorityCommitError,
+        match="CURRENT_AUTHORITY_REVALIDATION_FAILED|GRANT_EPOCH_MISMATCH",
+    ):
+        gate.commit(
+            issued["grant"],
+            base_proposal(),
+            lambda: "must-not-run",
+        )
+
+
+def test_action_digest_mismatch_fails_closed():
+    gate = _gate()
+    issued = gate.issue_grant(base_proposal(), grant_id="grant-action")
+    changed = base_proposal()
+    changed["action_id"] = "A2"
+
+    with pytest.raises(
+        AuthorityCommitError,
+        match="GRANT_ACTION_DIGEST_MISMATCH",
+    ):
+        gate.commit(issued["grant"], changed, lambda: "must-not-run")
+
+
+def test_state_digest_mismatch_fails_closed():
+    gate = _gate()
+    issued = gate.issue_grant(base_proposal(), grant_id="grant-state")
+    forged = copy.deepcopy(issued["grant"])
+    forged["normalized_authority_state_digest"] = "0" * 64
+
+    with pytest.raises(
+        AuthorityCommitError,
+        match="GRANT_STATE_DIGEST_MISMATCH",
+    ):
+        gate.commit(forged, base_proposal(), lambda: "must-not-run")
+
+
+def test_effect_failure_consumes_grant_and_prevents_replay():
+    gate = _gate()
+    issued = gate.issue_grant(base_proposal(), grant_id="grant-fail")
+
+    def fail_effect():
+        raise RuntimeError("partial-effect-failure")
+
+    with pytest.raises(RuntimeError, match="partial-effect-failure"):
+        gate.commit(issued["grant"], base_proposal(), fail_effect)
+
+    with pytest.raises(AuthorityCommitError, match="GRANT_REPLAY_FORBIDDEN"):
+        gate.commit(issued["grant"], base_proposal(), lambda: "retry")
+
+
+def test_requirement_epoch_change_cannot_interleave_with_effect_commit():
+    gate = _gate()
+    issued = gate.issue_grant(base_proposal(), grant_id="grant-linear")
+    effect_entered = threading.Event()
+    allow_effect_exit = threading.Event()
+    update_started = threading.Event()
+    update_finished = threading.Event()
+    errors = []
+
+    def effect():
+        effect_entered.set()
+        if not allow_effect_exit.wait(2):
+            raise RuntimeError("effect-release-timeout")
+        return "committed"
+
+    def do_commit():
+        try:
+            gate.commit(issued["grant"], base_proposal(), effect)
+        except Exception as exc:  # pragma: no cover - diagnostic path
+            errors.append(exc)
+
+    def do_update():
+        update_started.set()
+        try:
+            gate.advance_requirements(
+                [req("R2"), req("R3")],
+                active_requirement_ids=["R2", "R3"],
+                authorized_scopes=["read"],
+                forbidden_scopes=["write", "delete"],
+            )
+            update_finished.set()
+        except Exception as exc:  # pragma: no cover - diagnostic path
+            errors.append(exc)
+
+    commit_thread = threading.Thread(target=do_commit)
+    update_thread = threading.Thread(target=do_update)
+    commit_thread.start()
+    assert effect_entered.wait(2)
+
+    update_thread.start()
+    assert update_started.wait(2)
+    assert not update_finished.wait(0.05)
+
+    allow_effect_exit.set()
+    commit_thread.join(2)
+    update_thread.join(2)
+
+    assert not commit_thread.is_alive()
+    assert not update_thread.is_alive()
+    assert update_finished.is_set()
+    assert errors == []
+    assert gate.snapshot()["current_epoch"] == 4

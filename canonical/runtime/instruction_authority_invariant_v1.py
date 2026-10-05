@@ -4,25 +4,55 @@ This kernel deliberately starts *after* semantic extraction.  It accepts a
 normalized requirement graph, a normalized authority state, and a proposed
 action.  It proves the deterministic enforcement slice only.
 
-The exact causal decomposition is:
+The repaired causal decomposition is:
 
     critical authority violation
         => semantic extraction error
-        OR deterministic enforcement error
-        OR enforcement bypass
+        OR point-in-time deterministic enforcement error
+        OR temporal authorization handoff / linearization error
+        OR true execution-route bypass
 
-This module is intended to make the middle term mechanically zero for every
-action that is actually routed through it.  It makes no claim that arbitrary
-natural-language requirements were normalized correctly and no claim that all
-execution surfaces are already routed through the kernel.
+The pure evaluator below proves only point-in-time normalized eligibility.  It
+never returns reusable execution authority.  Consequential effects must pass
+through InstructionAuthorityCommitGate, which revalidates the current state at
+the commit linearization point, consumes a one-use grant, and executes the
+effect while authority-state changes are serialized against that effect.
+
+This module makes no claim that arbitrary natural-language requirements were
+normalized correctly and no claim that all execution surfaces are already
+routed through the commit gate.
 """
 from __future__ import annotations
 
-from typing import Any, Mapping
+import copy
+import hashlib
+import json
+import threading
+import uuid
+from typing import Any, Callable, Mapping
 
 from canonical.runtime.requirement_graph_kernel import compile_requirement_contract
 
 SCHEMA = "PROJECT_BRAIN_INSTRUCTION_AUTHORITY_INVARIANT_V1"
+GRANT_SCHEMA = "PROJECT_BRAIN_INSTRUCTION_AUTHORITY_GRANT_V1"
+COMMIT_SCHEMA = "PROJECT_BRAIN_INSTRUCTION_AUTHORITY_COMMIT_V1"
+
+
+class AuthorityCommitError(RuntimeError):
+    pass
+
+
+def _digest(value: Any) -> str:
+    try:
+        raw = json.dumps(
+            value,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=False,
+        ).encode("utf-8")
+    except Exception as exc:
+        raise AuthorityCommitError("AUTHORITY_BINDING_NOT_CANONICAL_JSON") from exc
+    return hashlib.sha256(raw).hexdigest()
 
 
 def _strset(value: Any, field: str, errors: list[str]) -> set[str]:
@@ -47,6 +77,8 @@ def _fail(errors: list[str], *, graph: Mapping[str, Any] | None = None) -> dict[
         "status": "ABSTAIN__FAIL_CLOSED",
         "pass": False,
         "execution_authority": False,
+        "point_in_time_authority": False,
+        "commit_gate_required": True,
         "errors": sorted(set(errors)),
         "requirement_graph": dict(graph or {}),
         "deterministic_enforcement_error_possible_for_allowed_action": False,
@@ -64,7 +96,11 @@ def evaluate_instruction_action(
     state: Mapping[str, Any],
     proposal: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Return execution authority only when all normalized authority invariants hold.
+    """Return point-in-time eligibility when normalized authority invariants hold.
+
+    This function intentionally never returns durable execution authority.
+    Callers must issue and consume a one-use grant through
+    InstructionAuthorityCommitGate for consequential effects.
 
     Required normalized state:
       current_epoch: non-negative int
@@ -173,7 +209,9 @@ def evaluate_instruction_action(
         "schema": SCHEMA,
         "status": "PASS__NORMALIZED_AUTHORITY_INVARIANTS_HOLD",
         "pass": True,
-        "execution_authority": True,
+        "execution_authority": False,
+        "point_in_time_authority": True,
+        "commit_gate_required": True,
         "action_id": action_id.strip(),
         "epoch": epoch,
         "active_requirement_ids": sorted(active),
@@ -199,6 +237,236 @@ def evaluate_instruction_action(
         "capability_credit_delta": 0,
         "ownership_credit_delta": 0,
     }
+
+
+class InstructionAuthorityCommitGate:
+    """Linearizable one-use commit gate for normalized instruction authority.
+
+    Soundness boundary:
+      * all authority-state changes for the claimed surface use advance_requirements;
+      * all consequential effects for the claimed surface use commit;
+      * semantic normalization remains an upstream obligation.
+
+    The effect callback runs while the gate lock is held.  This is deliberate:
+    no requirement/authority epoch transition can interleave between the final
+    current-state validation and the consequential effect.
+    """
+
+    def __init__(
+        self,
+        requirements: list[dict[str, Any]],
+        state: Mapping[str, Any],
+    ) -> None:
+        if not isinstance(requirements, list):
+            raise AuthorityCommitError("REQUIREMENTS_NOT_LIST")
+        if not isinstance(state, Mapping):
+            raise AuthorityCommitError("STATE_NOT_OBJECT")
+        self._lock = threading.RLock()
+        self._requirements = copy.deepcopy(requirements)
+        self._state = copy.deepcopy(dict(state))
+        self._issued: set[str] = set()
+        self._consumed: set[str] = set()
+        self._in_commit = False
+
+        initial = evaluate_instruction_action(
+            self._requirements,
+            self._state,
+            {
+                "action_id": "__gate_initialization_probe__",
+                "epoch": self._state.get("current_epoch"),
+                "requirement_ids": list(self._state.get("active_requirement_ids") or []),
+                "required_scopes": [],
+            },
+        )
+        if initial.get("pass") is not True:
+            raise AuthorityCommitError(
+                "INITIAL_AUTHORITY_STATE_INVALID:" + ",".join(initial.get("errors") or [])
+            )
+
+    def snapshot(self) -> dict[str, Any]:
+        with self._lock:
+            return copy.deepcopy(self._state)
+
+    def issue_grant(
+        self,
+        proposal: Mapping[str, Any],
+        *,
+        grant_id: str | None = None,
+    ) -> dict[str, Any]:
+        with self._lock:
+            if self._in_commit:
+                raise AuthorityCommitError("GRANT_ISSUE_DURING_COMMIT_FORBIDDEN")
+            decision = evaluate_instruction_action(
+                self._requirements,
+                self._state,
+                proposal,
+            )
+            if decision.get("pass") is not True:
+                return {
+                    "schema": GRANT_SCHEMA,
+                    "status": "ABSTAIN__FAIL_CLOSED",
+                    "pass": False,
+                    "execution_authority": False,
+                    "commit_gate_required": True,
+                    "errors": list(decision.get("errors") or []),
+                    "grant": None,
+                }
+
+            gid = str(grant_id or uuid.uuid4().hex).strip()
+            if not gid:
+                raise AuthorityCommitError("GRANT_ID_INVALID")
+            if gid in self._issued or gid in self._consumed:
+                raise AuthorityCommitError("GRANT_ID_REUSE_FORBIDDEN")
+
+            required_scopes = sorted(
+                str(x).strip()
+                for x in (proposal.get("required_scopes") or [])
+                if isinstance(x, str) and x.strip()
+            )
+            grant = {
+                "schema": GRANT_SCHEMA,
+                "unique_grant_id": gid,
+                "action_digest": _digest(dict(proposal)),
+                "requirement_epoch": self._state.get("current_epoch"),
+                "normalized_authority_state_digest": _digest(self._state),
+                "requirement_contract_digest": _digest(self._requirements),
+                "required_scope_set": required_scopes,
+            }
+            self._issued.add(gid)
+            return {
+                "schema": GRANT_SCHEMA,
+                "status": "PASS__ONE_USE_GRANT_ISSUED",
+                "pass": True,
+                "execution_authority": False,
+                "point_in_time_authority": True,
+                "commit_gate_required": True,
+                "errors": [],
+                "grant": grant,
+            }
+
+    def advance_requirements(
+        self,
+        requirements: list[dict[str, Any]],
+        *,
+        active_requirement_ids: list[str],
+        authorized_scopes: list[str],
+        forbidden_scopes: list[str] | None = None,
+        unresolved_authority_questions: list[str] | None = None,
+    ) -> dict[str, Any]:
+        with self._lock:
+            if self._in_commit:
+                raise AuthorityCommitError(
+                    "AUTHORITY_STATE_CHANGE_DURING_COMMIT_FORBIDDEN"
+                )
+            if not isinstance(requirements, list):
+                raise AuthorityCommitError("REQUIREMENTS_NOT_LIST")
+
+            candidate = next_requirement_epoch(
+                self._state,
+                active_requirement_ids=active_requirement_ids,
+                authorized_scopes=authorized_scopes,
+                forbidden_scopes=forbidden_scopes,
+                unresolved_authority_questions=unresolved_authority_questions,
+            )
+            graph = compile_requirement_contract(
+                requirements,
+                expected_required_ids=sorted(
+                    str(x).strip()
+                    for x in candidate.get("active_requirement_ids") or []
+                    if isinstance(x, str) and x.strip()
+                ),
+            )
+            if graph.get("pass") is not True:
+                raise AuthorityCommitError("REQUIREMENT_GRAPH_FAIL_CLOSED")
+
+            self._requirements = copy.deepcopy(requirements)
+            self._state = copy.deepcopy(candidate)
+            return copy.deepcopy(candidate)
+
+    def commit(
+        self,
+        grant: Mapping[str, Any],
+        proposal: Mapping[str, Any],
+        effect: Callable[[], Any],
+    ) -> dict[str, Any]:
+        if not callable(effect):
+            raise AuthorityCommitError("EFFECT_NOT_CALLABLE")
+
+        with self._lock:
+            if self._in_commit:
+                raise AuthorityCommitError("NESTED_COMMIT_FORBIDDEN")
+            if not isinstance(grant, Mapping) or grant.get("schema") != GRANT_SCHEMA:
+                raise AuthorityCommitError("GRANT_SCHEMA_INVALID")
+
+            gid = str(grant.get("unique_grant_id") or "").strip()
+            if not gid or gid not in self._issued:
+                raise AuthorityCommitError("GRANT_NOT_ISSUED_BY_GATE")
+            if gid in self._consumed:
+                raise AuthorityCommitError("GRANT_REPLAY_FORBIDDEN")
+
+            decision = evaluate_instruction_action(
+                self._requirements,
+                self._state,
+                proposal,
+            )
+            if decision.get("pass") is not True:
+                raise AuthorityCommitError(
+                    "CURRENT_AUTHORITY_REVALIDATION_FAILED:"
+                    + ",".join(decision.get("errors") or [])
+                )
+
+            if grant.get("action_digest") != _digest(dict(proposal)):
+                raise AuthorityCommitError("GRANT_ACTION_DIGEST_MISMATCH")
+            if grant.get("requirement_epoch") != self._state.get("current_epoch"):
+                raise AuthorityCommitError("GRANT_EPOCH_MISMATCH")
+            if (
+                grant.get("normalized_authority_state_digest")
+                != _digest(self._state)
+            ):
+                raise AuthorityCommitError("GRANT_STATE_DIGEST_MISMATCH")
+            if (
+                grant.get("requirement_contract_digest")
+                != _digest(self._requirements)
+            ):
+                raise AuthorityCommitError("GRANT_REQUIREMENT_DIGEST_MISMATCH")
+
+            required_scopes = sorted(
+                str(x).strip()
+                for x in (proposal.get("required_scopes") or [])
+                if isinstance(x, str) and x.strip()
+            )
+            if list(grant.get("required_scope_set") or []) != required_scopes:
+                raise AuthorityCommitError("GRANT_SCOPE_SET_MISMATCH")
+
+            # Consume before invoking the effect.  A callback failure cannot be
+            # retried under the same grant, which removes replay-after-partial-
+            # effect ambiguity.
+            self._consumed.add(gid)
+            self._in_commit = True
+            try:
+                effect_result = effect()
+            finally:
+                self._in_commit = False
+
+            return {
+                "schema": COMMIT_SCHEMA,
+                "status": "PASS__EFFECT_COMMITTED_UNDER_CURRENT_ONE_USE_AUTHORITY",
+                "pass": True,
+                "execution_authority": True,
+                "effect_committed": True,
+                "unique_grant_id": gid,
+                "requirement_epoch": self._state.get("current_epoch"),
+                "normalized_authority_state_digest": _digest(self._state),
+                "action_digest": _digest(dict(proposal)),
+                "effect_result": effect_result,
+                "errors": [],
+                "semantic_extraction_proved": False,
+                "route_coverage_proved": False,
+                "acceptance_credit_delta": 0,
+                "family_credit_delta": 0,
+                "capability_credit_delta": 0,
+                "ownership_credit_delta": 0,
+            }
 
 
 def next_requirement_epoch(
