@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FINITE_EFFECT_CARRIER_CLASSIFICATION__C1_SCOPE_COMPLETENESS_NOT_YET_CLAIMED__ZERO_CREDIT",
+  "objective": "Classify every currently registered repo-local capability module by material-effect carrier and fail closed on new unclassified network, child-process, in-process third-party, or dynamic-import edges.",
+  "parent": {
+    "path": "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json",
+    "git_blob_sha": "e3e303ab8b70a1c56c080446c3dc896185c12c1a"
+  },
+  "bound_registry": {
+    "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+  },
+  "network_modules": {
+    "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "canonical/runtime/npm_package_utils.py": "05fd0591083034df48c3ee426d6b3e11e0183555",
+    "canonical/runtime/bound_capabilities/browser_chromedriver.py": "6edaad1d9d23700a55d988c891d4ef41b8191c4b",
+    "canonical/runtime/bound_capabilities/http_json_fetch.py": "269e7b0f1aee8cac785f7f0e60338a1562a45201",
+    "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py": "227877b9f7c80c8e810a1042a0bad5c0ed94577d",
+    "canonical/runtime/bound_capabilities/pypi_provenance_audit.py": "fd8af415d7846be0f2ff23aa1674df77af504d03",
+    "canonical/runtime/bound_capabilities/source_authority_binding_ror.py": "9396ff7169b274af9bbfbe736e004587631e3b05",
+    "canonical/runtime/bound_capabilities/web_release_verify.py": "126b46cd2cd11dd12bfa16aa0e337349fe0d70bf"
+  },
+  "child_process_modules": {
+    "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "canonical/runtime/auto_python_source_codec_acquisition.py": "65453b2eed5e678def3f0ab1c4d44182fb0b9a78",
+    "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py": "18c484e973e0becf6abf883463a7dc174d0bcd22",
+    "canonical/runtime/bound_capabilities/browser_chromedriver.py": "6edaad1d9d23700a55d988c891d4ef41b8191c4b",
+    "canonical/runtime/bound_capabilities/cli_command.py": "6782773801cd8f2258e4368a4debbe6e66c4a393",
+    "canonical/runtime/bound_capabilities/jq_query.py": "f0b644274c1ffbff7ea5adb81e07e00435d2ac4c",
+    "canonical/runtime/bound_capabilities/node_library_codec.py": "0babcf3adf7762b5e24d9c8be4f8ecb3a7b2e805",
+    "canonical/runtime/bound_capabilities/pandoc_weasyprint.py": "1d7e867bb4837b7589d8346c85fe97db4c1166be",
+    "canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py": "4fb3853a28974b30e8c5c36f85815cdb71fc243c",
+    "canonical/runtime/bound_capabilities/python_test_audit.py": "b6fe40131583587e21f9c1e369679de140349e81",
+    "canonical/runtime/bound_capabilities/sqlite_verify_cli.py": "339c6e5cd3e1804a43dd3632deb713b61f6344a4",
+    "canonical/runtime/bound_capabilities/yq_yaml_json.py": "8dce9a679d51153e0e779e4fcc5380a1ce106637"
+  },
+  "inprocess_third_party_imports": {
+    "canonical/runtime/capability_discovery.py": ["xapian"],
+    "canonical/runtime/bound_capabilities/numeric_expression_sympy.py": ["sympy"],
+    "canonical/runtime/bound_capabilities/pdf_pypdf.py": ["pypdf"],
+    "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py": ["xlsxwriter"],
+    "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py": ["openpyxl"]
+  },
+  "registry_constrained_dynamic_imports": {
+    "canonical/runtime/bound_capabilities/python_document_builder.py": [
+      {
+        "adapter_module": "python_document_builder",
+        "module": "docx",
+        "factory": "Document",
+        "source_type": "apt",
+        "package": "python3-docx"
+      }
+    ]
+  },
+  "carrier_classes": [
+    "REPO_LOCAL_OR_STDLIB_ONLY",
+    "NETWORK_DIRECT",
+    "CHILD_PROCESS_DIRECT",
+    "INPROCESS_THIRD_PARTY",
+    "REGISTRY_CONSTRAINED_DYNAMIC_IMPORT"
+  ],
+  "hard_rules": [
+    "ANY_NEW_UNCLASSIFIED_NETWORK_CALL_FAILS_CLOSED",
+    "ANY_NEW_UNCLASSIFIED_SUBPROCESS_CALL_FAILS_CLOSED",
+    "ANY_NEW_NONSTDLIB_IMPORT_OUTSIDE_THE_DECLARED_SET_FAILS_CLOSED",
+    "ANY_DYNAMIC_IMPORT_NOT_PROVED_LITERAL_BY_THE_BOUND_CAPABILITY_REGISTRY_FAILS_CLOSED",
+    "CLASSIFICATION_IS_NOT_MEDIATION",
+    "NO_C1_SCOPE_COMPLETE_CLAIM_UNTIL_C2_MEDIATOR_BINDINGS_AND_NONREPO_INTERNAL_EFFECT_BOUNDARIES_ARE_DISCHARGED"
+  ],
+  "next": [
+    "RUN_C1_V3_AUDITOR_ON_CURRENT_MAIN",
+    "BUILD_C2_MEDIATOR_BINDING_AUDIT_FOR_EVERY_NETWORK_CHILD_AND_MATERIAL_WRITE_EDGE",
+    "FAIL_CLOSED_ON_ANY_DIRECT_EDGE_NOT_ROUTED_THROUGH_THE_REQUIRED_MEDIATOR",
+    "ONLY_THEN_ATTEMPT_C3_GRAPH_DOMINANCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
