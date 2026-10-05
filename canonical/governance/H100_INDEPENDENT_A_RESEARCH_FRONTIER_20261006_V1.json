@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_H100_INDEPENDENT_A_RESEARCH_FRONTIER_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_FRONTIER__INFORMATION_NECESSITY_NOW_SEPARATED_FROM_SEARCH_AND_MODEL_SIZE",
+  "objective": "Determine the minimum genuinely learned persistent state required for frontier-level capability, with zero learned bytes as the preferred hypothesis and <=100MB as the fallback ceiling.",
+  "established": [
+    {
+      "claim": "MISSING_INFORMATION_CANNOT_BE_CREATED_BY_SEARCH_OR_COMPUTE",
+      "evidence": "canonical/verification/H100_INFORMATION_STATE_LOWER_BOUND_SECOND_CARRIER_VERIFICATION_20261006_V1.json"
+    },
+    {
+      "claim": "WITH_RUNTIME_EVIDENCE_CLASSES_C_j_AND_B_WORLD_DEPENDENT_BITS__UNIFORM_EXACT_SUCCESS_IS_AT_MOST_SUM_MIN_ABS_C_j_2^B_DIV_N",
+      "evidence": "canonical/verification/H100_CONDITIONAL_INFORMATION_STATE_BOUND_SECOND_CARRIER_VERIFICATION_20261006_V1.json"
+    },
+    {
+      "claim": "JIT_EVIDENCE_CAN_REPLACE_PERSISTENT_WORLD_DEPENDENT_BITS_BY_SPLITTING_RESIDUAL_EQUIVALENCE_CLASSES",
+      "evidence": "canonical/verification/H100_JIT_EVIDENCE_AMBIGUITY_COLLAPSE_SECOND_CARRIER_VERIFICATION_20261006_V1.json"
+    }
+  ],
+  "strongest_current_design_law": "BEFORE_ALLOCATING_ANY_LEARNED_BYTES__MAXIMIZE_RUNTIME_DISTINGUISHING_INFORMATION_FROM_CONTEXT_RETRIEVAL_TOOLS_VERIFICATION_AND_EXTERNAL_KNOWLEDGE__THEN MEASURE THE LARGEST RESIDUAL EVIDENCE_EQUIVALENCE_CLASS__ONLY THAT RESIDUAL AMBIGUITY CAN JUSTIFY PERSISTENT WORLD_DEPENDENT STATE",
+  "next_experiments_ranked": [
+    {
+      "rank": 1,
+      "experiment": "REAL_TASK_RESIDUAL_AMBIGUITY_CENSUS",
+      "goal": "For multiple already-verified capability classes, define hidden-world alternatives and measure how runtime context/tools/JIT knowledge split them; report largest residual equivalence class and resulting learned-bit lower bound."
+    },
+    {
+      "rank": 2,
+      "experiment": "VISION_INFORMATION_VS_LEARNED_STATE_DECOMPOSITION",
+      "goal": "Determine which information carried by the sub-100MB UniChart learned subject can instead be supplied as runtime visual structure extraction or deterministic symbolic features, without claiming success until fresh holdouts are frozen."
+    },
+    {
+      "rank": 3,
+      "experiment": "ADVERSARIAL_NONEXTERNALIZABLE_INFORMATION_SEARCH",
+      "goal": "Actively search for realistic frontier tasks whose correct output depends on latent information unavailable from all allowed runtime channels, because such a task would be genuine evidence for positive learned-state necessity."
+    }
+  ],
+  "learned_byte_policy": {
+    "current_research_hypothesis_bytes": 0,
+    "fallback_ceiling_bytes": 100000000,
+    "escalation_rule": "ESCALATE_ONLY_AFTER_A_FROZEN_REALISTIC_COUNTEREXAMPLE_LEAVES_RESIDUAL_AMBIGUITY_THAT_CANNOT_BE_REMOVED_BY_ALLOWED_RUNTIME_INFORMATION_CHANNELS_AND_CANNOT_BE_SOLVED_BY_WORLD_INDEPENDENT_COMPUTATION"
+  },
+  "hard_nonclaims": [
+    "NO_UNIVERSAL_ZERO_LEARNED_SUFFICIENCY_CLAIM",
+    "NO_OPUS55_EQUIVALENCE_CLAIM",
+    "NO_TERMINAL_OR_ACCEPTANCE_CREDIT"
+  ]
+}
