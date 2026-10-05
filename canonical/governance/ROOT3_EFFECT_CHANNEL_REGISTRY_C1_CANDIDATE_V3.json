@@ -21,7 +21,8 @@
     "canonical/runtime/bound_capabilities/source_authority_binding_ror.py": "9396ff7169b274af9bbfbe736e004587631e3b05",
     "canonical/runtime/bound_capabilities/web_release_verify.py": "126b46cd2cd11dd12bfa16aa0e337349fe0d70bf",
     "canonical/runtime/auto_npm_library_acquisition.py": "b74cdf34a96fc2d591b902e1d582e0381a8a8d08",
-    "canonical/runtime/auto_pypi_library_acquisition.py": "6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f"
+    "canonical/runtime/auto_pypi_library_acquisition.py": "6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f",
+    "canonical/runtime/astra_runtime.py": "0912dfa4119950f6d235d501dfa784e65e9f71c9"
   },
   "child_process_modules": {
     "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
@@ -38,7 +39,8 @@
     "canonical/runtime/bound_capabilities/yq_yaml_json.py": "8dce9a679d51153e0e779e4fcc5380a1ce106637",
     "canonical/runtime/auto_npm_library_acquisition.py": "b74cdf34a96fc2d591b902e1d582e0381a8a8d08",
     "canonical/runtime/auto_pypi_library_acquisition.py": "6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f",
-    "canonical/runtime/apt_cli_probe.py": "3f3a8f6a0154e1ed3f87fc97b99840598297b119"
+    "canonical/runtime/apt_cli_probe.py": "3f3a8f6a0154e1ed3f87fc97b99840598297b119",
+    "canonical/runtime/astra_runtime.py": "0912dfa4119950f6d235d501dfa784e65e9f71c9"
   },
   "inprocess_third_party_imports": {
     "canonical/runtime/capability_discovery.py": [
@@ -142,7 +144,8 @@
     "canonical/runtime/bound_capabilities/source_authority_binding_ror.py": "9396ff7169b274af9bbfbe736e004587631e3b05",
     "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py": "d729d19ba5c0808273268426e7450f1db74a5c07",
     "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py": "b8a6d0f0553ffec468676b24f87d56aeb01cea17",
-    "canonical/runtime/bound_capabilities/yq_yaml_json.py": "8dce9a679d51153e0e779e4fcc5380a1ce106637"
+    "canonical/runtime/bound_capabilities/yq_yaml_json.py": "8dce9a679d51153e0e779e4fcc5380a1ce106637",
+    "canonical/runtime/astra_runtime.py": "0912dfa4119950f6d235d501dfa784e65e9f71c9"
   },
   "third_party_module_blobs": {
     "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
@@ -150,5 +153,8 @@
     "canonical/runtime/bound_capabilities/pdf_pypdf.py": "b63f658d269078f37f8a67be31ce4993b6cf3fcc",
     "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py": "b8a6d0f0553ffec468676b24f87d56aeb01cea17",
     "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py": "93c84e524dd01eace5b059f00d7c0c020f36c57c"
-  }
+  },
+  "truth_repairs": [
+    "ASTRA_RUNTIME_ITSELF_IS_A_DIRECT_NETWORK_CHILD_PROCESS_AND_LOCAL_FILESYSTEM_EFFECT_CARRIER__TOP_LEVEL_SHELL_HTTP_AND_DEPENDENCY_ACQUISITION_CHANNELS_MUST_BE_IN_C1"
+  ]
 }
