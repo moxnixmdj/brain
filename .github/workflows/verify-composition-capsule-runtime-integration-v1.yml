@@ -1,0 +1,35 @@
+name: Verify composition capsule runtime integration V1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/capability_planner.py"
+      - "canonical/runtime/astra_runtime.py"
+      - "canonical/runtime/composition_state_capsule_v1.py"
+      - "canonical/runtime/composition_state_capsule_adapter_v1.py"
+      - "canonical/tests/test_capability_planner.py"
+      - "canonical/tests/test_composition_state_capsule_v1.py"
+      - "canonical/tests/test_composition_state_capsule_adapter_v1.py"
+      - "canonical/tests/test_astra_runtime_composition_capsule_integration_v1.py"
+      - "canonical/tests/test_astra_runtime_model_independence.py"
+      - ".github/workflows/verify-composition-capsule-runtime-integration-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Compile modified runtime
+        run: |
+          python -m py_compile             canonical/runtime/capability_planner.py             canonical/runtime/composition_state_capsule_v1.py             canonical/runtime/composition_state_capsule_adapter_v1.py             canonical/runtime/astra_runtime.py
+      - name: Run composition state and planner tests
+        run: |
+          python -m unittest -v             canonical.tests.test_composition_state_capsule_v1             canonical.tests.test_composition_state_capsule_adapter_v1             canonical.tests.test_capability_planner             canonical.tests.test_astra_runtime_composition_capsule_integration_v1             canonical.tests.test_astra_runtime_model_independence
