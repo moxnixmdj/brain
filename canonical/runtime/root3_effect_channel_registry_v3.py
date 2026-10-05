@@ -74,17 +74,32 @@ def _calls(tree: ast.Module) -> list[tuple[str, ast.Call]]:
     return out
 
 
+def _literal_mode(node: ast.Call) -> str | None:
+    if len(node.args) >= 2 and isinstance(node.args[1], ast.Constant) and isinstance(node.args[1].value, str):
+        return node.args[1].value
+    for kw in node.keywords:
+        if kw.arg == "mode" and isinstance(kw.value, ast.Constant) and isinstance(kw.value.value, str):
+            return kw.value.value
+    return None
+
+
 def _write_effect(q: str, node: ast.Call) -> bool:
-    if q.endswith((".write_text", ".write_bytes", ".mkdir", ".unlink", ".rename", ".touch", ".save")):
+    if q.endswith((
+        ".write_text", ".write_bytes", ".mkdir", ".unlink", ".rename",
+        ".replace", ".touch", ".save", ".rmdir",
+    )):
         return True
-    if q in {"sqlite3.connect", "xlsxwriter.Workbook"}:
+    if q in {
+        "sqlite3.connect", "xlsxwriter.Workbook",
+        "shutil.copy", "shutil.copy2", "shutil.copyfile", "shutil.copytree",
+        "shutil.move", "shutil.rmtree",
+        "os.remove", "os.unlink", "os.rename", "os.replace", "os.mkdir",
+        "os.makedirs", "os.rmdir", "os.removedirs",
+    }:
         return True
-    if q == "open":
-        if len(node.args) >= 2 and isinstance(node.args[1], ast.Constant) and isinstance(node.args[1].value, str):
-            return any(ch in node.args[1].value for ch in "wax+")
-        for kw in node.keywords:
-            if kw.arg == "mode" and isinstance(kw.value, ast.Constant) and isinstance(kw.value.value, str):
-                return any(ch in kw.value.value for ch in "wax+")
+    if q == "open" or q.endswith(".open") or q in {"tarfile.open", "gzip.open", "bz2.open", "lzma.open", "zipfile.ZipFile"}:
+        mode = _literal_mode(node)
+        return mode is not None and any(ch in mode for ch in "wax+")
     return False
 
 
@@ -198,18 +213,25 @@ def audit(repo_root: str | Path, manifest_rel: str) -> dict[str, Any]:
             third_observed[rel] = external
 
         for q, node in _calls(tree):
-            if q in {
-                "urllib.request.urlopen",
-                "socket.socket",
-                "requests.get", "requests.post", "requests.request",
-                "httpx.get", "httpx.post", "httpx.request",
-            }:
+            if (
+                q in {
+                    "urllib.request.urlopen",
+                    "socket.socket", "socket.create_connection", "socket.getaddrinfo",
+                    "requests.get", "requests.post", "requests.request",
+                    "httpx.get", "httpx.post", "httpx.request",
+                }
+                or q.startswith("urllib3.")
+            ):
                 network_observed.add(rel)
-            if q in {
-                "subprocess.run", "subprocess.Popen",
-                "subprocess.check_call", "subprocess.check_output",
-                "os.system", "os.popen",
-            }:
+            if (
+                q in {
+                    "subprocess.run", "subprocess.Popen", "subprocess.call",
+                    "subprocess.check_call", "subprocess.check_output",
+                    "os.system", "os.popen",
+                }
+                or q.startswith("os.exec")
+                or q.startswith("os.spawn")
+            ):
                 child_observed.add(rel)
             if _write_effect(q, node):
                 write_observed.add(rel)
@@ -233,7 +255,9 @@ def audit(repo_root: str | Path, manifest_rel: str) -> dict[str, Any]:
                 "THIRD_PARTY_IMPORT_SET_MISMATCH:" + rel + ":OBS=" + ",".join(sorted(obs)) + ":DECL=" + ",".join(sorted(dec))
             )
 
-    allowed_dynamic = set(manifest.get("registry_constrained_dynamic_imports", {}))
+    registry_dynamic = set(manifest.get("registry_constrained_dynamic_imports", {}))
+    untrusted_dynamic = set(manifest.get("untrusted_dynamic_import_modules", {}))
+    allowed_dynamic = registry_dynamic | untrusted_dynamic
     if dynamic_import_modules - allowed_dynamic:
         errors.append("UNCLASSIFIED_DYNAMIC_IMPORT:" + ",".join(sorted(dynamic_import_modules - allowed_dynamic)))
 
@@ -266,6 +290,7 @@ def audit(repo_root: str | Path, manifest_rel: str) -> dict[str, Any]:
         "local_filesystem_write_modules_observed": sorted(write_observed),
         "inprocess_third_party_imports_observed": {k: sorted(v) for k, v in sorted(third_observed.items())},
         "dynamic_import_modules_observed": sorted(dynamic_import_modules),
+        "untrusted_dynamic_import_modules_observed": sorted(dynamic_import_modules & untrusted_dynamic),
         "errors": errors,
         "c1_scope_complete": False,
         "remaining": [
