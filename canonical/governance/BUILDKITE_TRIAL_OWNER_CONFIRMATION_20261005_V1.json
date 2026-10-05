@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_BUILDKITE_TRIAL_OWNER_CONFIRMATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "OWNER_PROVIDER_CONFIRMATION__DOCUMENTARY_ROUTE_NARROWED__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "source": {
+    "provider": "Buildkite",
+    "sender_role": "Staff Support Engineer",
+    "sender_domain": "buildkite.com",
+    "received_at": "2026-10-05T00:02:29+00:00",
+    "subject": "Re: All Access Trial: confirm 8-vCPU Linux hosted agent + Docker for benchmark preflight"
+  },
+  "request_scope": {
+    "requested_shape": "LINUX_AMD64_8X32__8_VCPU__32_GB_RAM__APPROX_158_GB_DISK",
+    "required_runtime": [
+      "DOCKER_RUN",
+      "DOCKER_COMPOSE"
+    ],
+    "required_hard_zero_spend": [
+      "NO_CREDIT_CARD",
+      "NO_AUTOMATIC_PAID_OVERAGE_AFTER_INCLUDED_OR_TRIAL_ALLOWANCE"
+    ],
+    "minimum_workload_requirements": [
+      "8_VCPU",
+      "16_GB_USABLE_RAM",
+      "50_GB_FREE_DISK",
+      "DOCKER",
+      "DOCKER_COMPOSE"
+    ]
+  },
+  "provider_reply_summary": "Provider explicitly stated that the All Access Trial supports the use case outlined in the request.",
+  "inference_boundary": {
+    "proved": [
+      "PROVIDER_CONFIRMS_OUTLINED_ZERO_COST_PREFLIGHT_USE_CASE_IS_SUPPORTED_BY_ALL_ACCESS_TRIAL"
+    ],
+    "not_yet_proved": [
+      "USER_ACCOUNT_OR_TRIAL_ORGANIZATION_EXISTS",
+      "EXACT_LARGE_SHAPE_IS_ACTUALLY_SELECTABLE_IN_THIS_ACCOUNT",
+      "OBSERVED_NPROC_RAM_DISK_VALUES",
+      "OBSERVED_DOCKER_AND_COMPOSE_RUNTIME_SUCCESS",
+      "OBSERVED_HARD_STOP_WITHOUT_PAID_OVERAGE"
+    ]
+  },
+  "remaining_minimum_action": [
+    "CREATE_OR_ACCESS_TRIAL_ORGANIZATION",
+    "RUN_ONE_ZERO_CASE_RUNTIME_PREFLIGHT_ON_LARGE_LINUX_AGENT",
+    "BIND_OBSERVED_CPU_RAM_DISK_DOCKER_COMPOSE_AND_BILLING_HARD_STOP_RECEIPT"
+  ],
+  "hard_rules": [
+    "NO_SUPPORT_WAIT_REMAINS_LOAD_BEARING",
+    "NO_TB4_TERMINAL_CASES_BEFORE_ZERO_REALITY_FIXED_POINT",
+    "NO_PAID_PROVISIONING",
+    "NO_ACCEPTANCE_CREDIT_FROM_PROVIDER_CONFIRMATION_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
