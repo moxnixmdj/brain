@@ -96,7 +96,8 @@ def evaluate_documents(authority:Mapping[str,Any], closure:Mapping[str,Any], mat
                        atomic:Mapping[str,Any], registry:Mapping[str,Any], envelope:Mapping[str,Any],
                        actual_blob_shas:Mapping[str,str]|None=None,
                        material_registry:Mapping[str,Any]|None=None,
-                       material_evidence:Mapping[str,Any]|None=None)->dict[str,Any]:
+                       material_evidence:Mapping[str,Any]|None=None,
+                       material_source_receipt_blob_sha:str|None=None)->dict[str,Any]:
     d=_derive(registry,atomic,envelope)
     errors=list(d["errors"])
     accepted=d["accepted_families"]; opened=d["open_families"]
@@ -104,7 +105,10 @@ def evaluate_documents(authority:Mapping[str,Any], closure:Mapping[str,Any], mat
     total_families=len(d["target_families"]); total_predicates=len(d["predicate_ids"])
 
     if material_registry is not None and material_evidence is not None:
-        material=compile_material_condition_closure(material_registry,material_evidence,envelope)
+        material=compile_material_condition_closure(
+            material_registry,material_evidence,envelope,
+            verified_source_universe_receipt_sha=material_source_receipt_blob_sha,
+        )
         if not material.get("pass"):
             errors.extend("MATERIAL_CONDITION_GATE:"+str(e) for e in material.get("errors",[]))
     else:
@@ -226,9 +230,19 @@ def evaluate_documents(authority:Mapping[str,Any], closure:Mapping[str,Any], mat
 def evaluate_live()->dict[str,Any]:
     docs={k:_load(v) for k,v in PATHS.items()}
     shas={v:_git_blob_sha(v) for v in PATHS.values()}
+    receipt_sha=None
+    source_universe=docs["material_condition_registry"].get("source_universe")
+    if isinstance(source_universe,Mapping) and source_universe.get("sealed") is True:
+        receipt=source_universe.get("independent_seal_receipt")
+        if isinstance(receipt,Mapping) and isinstance(receipt.get("path"),str):
+            try:
+                receipt_sha=_git_blob_sha(receipt["path"])
+            except (FileNotFoundError, OSError):
+                receipt_sha=None
     return evaluate_documents(docs["authority"],docs["closure"],docs["matrix"],docs["atomic_bindings"],
                               docs["predicate_registry"],docs["target_envelope"],shas,
-                              docs["material_condition_registry"],docs["material_condition_evidence"])
+                              docs["material_condition_registry"],docs["material_condition_evidence"],
+                              receipt_sha)
 
 def main()->int:
     out=evaluate_live(); print(json.dumps(out,indent=2,sort_keys=True))
