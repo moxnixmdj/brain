@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_OBJECTIVE_SCORER_SEMANTIC_INDEPENDENCE_THEOREM_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_PINNED_SCORER_THEOREM__ZERO_TERMINAL_CASE_CONTENT__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "frozen_upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_evaluator": {
+      "path": "livebench/if_runner/instruction_following_eval/evaluation_main.py",
+      "git_blob_sha": "4a341984936c4d609644a3b77f8c030ac5aa7269"
+    },
+    "current_ifbench_evaluator": {
+      "path": "livebench/if_runner/ifbench/evaluation_lib.py",
+      "git_blob_sha": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b"
+    },
+    "score_adapter": {
+      "path": "livebench/process_results/instruction_following/utils.py",
+      "git_blob_sha": "8ce01747887ec0792c8f024e1972e34ece781676"
+    }
+  },
+  "theorem": {
+    "legacy_strict_score_dependency": "REGISTERED_INSTRUCTION_CHECK_FOLLOWING_RESPONSE_BOOLEANS_ONLY",
+    "current_ifbench_strict_score_dependency": "REGISTERED_INSTRUCTION_CHECK_FOLLOWING_RESPONSE_BOOLEANS_ONLY",
+    "livebench_score_reducer": "AVERAGE_OF_ALL_INSTRUCTIONS_BOOLEAN_AND_MEAN_INSTRUCTION_BOOLEAN",
+    "separate_semantic_task_quality_evaluator_in_score_chain": false,
+    "consequence": "FOR_THIS_FROZEN_SCORE_PREDICATE_ONLY__A_CONSTRUCTIVELY_GENERATED_RESPONSE_WITNESS_NEED_NOT_SEPARATELY_PROVE_PARAPHRASE_SUMMARY_SIMPLIFICATION_OR_STORY_QUALITY_IF_THE_FROZEN_REGISTERED_CHECKERS_ACCEPT_IT",
+    "compiler_implication": "SEMANTIC_SEED_REQUIRED_IS_A_GENERAL_TASK QUALITY GUARD__NOT_A_TERM_IN_THE_FROZEN_LIVEBENCH_IF_SCORE_FUNCTION"
+  },
+  "candidate_route": {
+    "path": "canonical/runtime/root2_livebench_if_objective_witness_adapter_v3.py",
+    "policy": [
+      "USE_ONLY_RESPONSES_CONSTRUCTIVELY_SYNTHESIZED_BY_THE_EXISTING_FORMAL_CONSTRAINT_COMPILER",
+      "REVALIDATE_THE_RESPONSE_AGAINST_THE_COMPILER_CONSTRAINT_SET_BEFORE_RETURN",
+      "FALL_THROUGH_UNCHANGED_WHEN_NO_FORMAL_WITNESS_EXISTS",
+      "NO_EXTERNAL_TOOLS",
+      "NO_POST_PROMPT_CAPABILITY_ACQUISITION_ON_THE_WITNESS_FAST_PATH",
+      "MARK_SCORE_CONTRACT_ONLY_TRUE",
+      "MARK_SEMANTIC_CAPABILITY_CLAIM_FALSE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_SEMANTIC_INSTRUCTION_FOLLOWING_SOLVED",
+    "NO_CLAIM_PARAPHRASE_SUMMARY_SIMPLIFICATION_OR_STORY_GENERATION_CAPABILITY_FROM_THIS_THEOREM",
+    "NO_LIVEBENCH_SCORE_YET",
+    "NO_CASE_73_PLUS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "next_gate": "PRIVATE_BRANCH_CI_THEN_REPLAY_ONLY_THE_ALREADY_EXPOSED_72_CASE_PREFIX_WITH_ZERO_NEW_CASE_EXPOSURE_AND_MEASURE_SCORE_OR_STRUCTURAL_DELTA_BEFORE_ANY_CASE_73_PLUS",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "routing": false,
+    "replay72": false,
+    "new_case_exposure": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
