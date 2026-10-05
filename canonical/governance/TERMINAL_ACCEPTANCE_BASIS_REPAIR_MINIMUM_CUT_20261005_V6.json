@@ -1,0 +1,196 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V6",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_KNOWN_AUTHORITY_REBASE__SEVEN_ACTION_GROUPS__INTRINSIC_SECURITY_EXPLICIT__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Repair V5 against current intrinsic C55 target semantics without expanding the action-group count unnecessarily. Preserve all V5 acceptance work, explicitly represent the five current domain-mapping surfaces, multilingual and long-context conditions, creative/diagram composite basis, abstract-generalization condition, and four model-intrinsic security/reliability dimensions. This is a current-known-authority acceptance basis candidate only; it is not literal target-domain completeness.",
+  "base": {
+    "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V5.json",
+    "git_blob_sha": "3dc1515da5c965919f16c781e56bbce140be3773"
+  },
+  "v5_falsification": {
+    "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_V5_FALSIFICATION_20261005_V1.json",
+    "git_blob_sha": "725579fb3d3089478745bb041f7b7201776d4aee",
+    "effect": "V5 compression preserved; V5 completeness claim unavailable until current intrinsic target/security semantics are rebound and totality is independently verified."
+  },
+  "current_authorities": {
+    "intrinsic_target_boundary_v2": {
+      "path": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_VS_DEPLOYMENT_PROFILE_BOUNDARY_20261005_V2.json",
+      "git_blob_sha": "9bac958e4db829f94d756cd94709d0c885d43e25"
+    },
+    "security_acceptance_dimension": {
+      "path": "canonical/governance/OPUS55_SECURITY_RELIABILITY_CROSS_CUTTING_ACCEPTANCE_DIMENSION_20261005_V1.json",
+      "git_blob_sha": "36008627b79824d22a66d9594077ba6e011d123e",
+      "interpretation": "USE_ONLY_MODEL_INTRINSIC_DIMENSIONS_PRESERVED_BY_INTRINSIC_TARGET_BOUNDARY_V2; EXTERNAL_CLASSIFIER_SANDBOX_WRAPPER_AND_FALLBACK_MECHANICS_ARE_NOT_INTRINSIC_CREDIT."
+    },
+    "multilingual_long_context_v2": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+    },
+    "domain_behavior_mapping_v1": {
+      "path": "canonical/governance/OPUS55_DOMAIN_BEHAVIORAL_QUOTIENT_MAPPING_V1.json",
+      "git_blob_sha": "101f6766913ae31168c9d11be0f10e5b2a0b3bec"
+    },
+    "creative_diagram_basis_activation": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_ACCEPTANCE_BASIS_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "7a88a686bde231d2570dafc5bdb07a034a0a149c"
+    },
+    "root1_meta_inventory_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "system_card_section8_matrix": {
+      "path": "canonical/governance/OPUS55_SYSTEM_CARD_CAPABILITY_CHAPTER_COVERAGE_MATRIX_20261005_V1.json",
+      "git_blob_sha": "f4fda4e06a20e70e37610f664f9287fb49866c37"
+    }
+  },
+  "scope": {
+    "proved_if_independently_verified": "CURRENT_CONTENT_ADDRESSED_KNOWN_ACCEPTANCE_AUTHORITY_ACCOUNTING_TOTALITY_ONLY",
+    "not_proved": [
+      "LITERAL_ALL_USEFUL_OPUS55_TARGET_DOMAIN_COMPLETENESS",
+      "PERFORMANCE_PARITY",
+      "DOMAIN_SEMANTIC_LOSSLESSNESS",
+      "MULTILINGUAL_PARITY",
+      "LONG_CONTEXT_PARITY",
+      "CREATIVE_OR_DIAGRAM_PARITY",
+      "ROOT3_SCOPE_OR_COMPOSITION",
+      "OWNERSHIP",
+      "FINALITY"
+    ]
+  },
+  "effective_action_groups": [
+    "A_CODING_UNCOVERED_SCOPE_PARTITION",
+    "B_PROFESSIONAL_WORK_UNCOVERED_SCOPE_PARTITION",
+    "C_BUSINESS_AUTOMATION_UNCOVERED_SCOPE_PARTITION",
+    "E_SCIENTIFIC_RESEARCH_UNCOVERED_SCOPE_PARTITION",
+    "F_CREATIVE_AND_DIAGRAM_ACCEPTANCE_BASIS",
+    "G_SHARED_TERMINAL_CONDITION_MATRIX",
+    "H_COMPUTER_BROWSER_UNCOVERED_SCOPE_PARTITION"
+  ],
+  "action_group_count": 7,
+  "group_F": {
+    "composite_obligation_id": "CREATIVE_DIAGRAM_SURFACE_NONINFERIOR__META",
+    "strata": [
+      "CREATIVE_TEXT",
+      "DIAGRAM_OUTPUT"
+    ],
+    "rule": "BOTH_STRATA_MUST_PASS_INDEPENDENTLY__NO_AVERAGING_A_FAILURE_IN_ONE_STRATUM_AWAY_WITH_THE_OTHER",
+    "performance_open": true
+  },
+  "group_G_current_dimensions": {
+    "cross_cutting_conditions": [
+      "MULTILINGUAL_PERFORMANCE",
+      "LONG_CONTEXT",
+      "ABSTRACT_GENERALIZATION_ARC_AGI"
+    ],
+    "domain_condition_surfaces": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "HEALTHCARE",
+      "MATHEMATICAL_REASONING_ARXIVMATH"
+    ],
+    "model_intrinsic_security_dimensions": [
+      "PROMPT_INJECTION_RESISTANCE_WHERE_THE_MODEL_ITSELF_IS_THE_ACTOR",
+      "SCOPE_AUTHORIZATION_AND_UNTRUSTED_CONTENT_JUDGMENT",
+      "SELF_VERIFICATION_FOR_SECURITY_RELEVANT_CODE_OR_SYSTEM_CHANGES",
+      "CONTAINMENT_DISCIPLINE_WHERE_MODEL_POLICY_IS_THE_LOAD_BEARING_ACTOR"
+    ]
+  },
+  "domain_aliases_and_rebindings": {
+    "LIFE_SCIENCES_CAPABILITIES": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+    "reason": "System Card surface label and Root1 domain-frontier label refer to the same current biology/life-sciences acceptance lane for scheduling; parity still requires a scope-complete exact bridge and no score inheritance is granted by aliasing."
+  },
+  "domain_mapping_result": {
+    "surface_count": 5,
+    "mapped_to_existing_family_union_count": 5,
+    "constructive_unmapped_transform_count": 0,
+    "new_family_required_now": false,
+    "semantic_losslessness_proved": false,
+    "domain_parity_proved": false
+  },
+  "multilingual_long_context_result": {
+    "multilingual_condition_explicit": true,
+    "long_context_condition_explicit": true,
+    "multilingual_parity_proved": false,
+    "long_context_parity_proved": false,
+    "automatic_transfer_from_english_or_short_context_forbidden": true
+  },
+  "intrinsic_security_result": {
+    "external_pre_action_classifier_intrinsic_credit": false,
+    "sandbox_isolation_intrinsic_credit": false,
+    "wrapper_level_code_review_intrinsic_credit": false,
+    "fallback_model_security_behavior_intrinsic_credit": false,
+    "four_model_intrinsic_security_dimensions_explicit": true,
+    "security_parity_proved": false
+  },
+  "system_card_accounting": {
+    "section8_subsections_expected": 16,
+    "section8_subsections_accounted": 16,
+    "unmapped_section8_subsections": 0,
+    "source_accounting_only": true,
+    "literal_target_discovery_complete": false
+  },
+  "root1_meta_accounting": {
+    "family_mapping_frontier_count": 5,
+    "cross_cutting_condition_frontier_count": 2,
+    "creative_diagram_basis_repair_present": true,
+    "root1_positive_gap_count_delta": 0,
+    "rule": "UNKNOWN_MAPPING_OR_UNPROVED_CONDITION_IS_NOT_POSITIVE_CAPABILITY_ABSENCE"
+  },
+  "closure_rule": {
+    "current_known_acceptance_basis_accounting_may_be_called_complete_only_if": [
+      "EVERY_V5_LOAD_BEARING_ACCEPTANCE_CONDITION_IS_PRESERVED_OR_REBOUND_TO_AN_EQUAL_OR_STRONGER_CURRENT_DIMENSION",
+      "ALL_FIVE_ROOT1_DOMAIN_MAPPING_SURFACES_ARE_EXPLICITLY_REPRESENTED",
+      "MULTILINGUAL_AND_LONG_CONTEXT_ARE_EXPLICITLY_REPRESENTED",
+      "THE_CREATIVE_DIAGRAM_COMPOSITE_BASIS_IS_EXPLICITLY_REPRESENTED",
+      "ALL_FOUR_INTRINSIC_SECURITY_DIMENSIONS_FROM_INTRINSIC_TARGET_BOUNDARY_V2_ARE_EXPLICITLY_REPRESENTED",
+      "ALL_16_FROZEN_SYSTEM_CARD_SECTION8_SUBSECTIONS_RETAIN_AN_ACCOUNTING_DESTINATION",
+      "NEGATIVE_CANARIES_PROVE_REMOVING_ANY_REQUIRED_DIMENSION_FAILS_CLOSED",
+      "INDEPENDENT_VERIFICATION_BINDS_THE_EXACT_SOURCE_BLOBS"
+    ],
+    "literal_terminal_acceptance_basis_completeness_requires_additionally": "A_SEPARATE_SOUND_TARGET_DOMAIN_COMPLETENESS_OR_SUPERSET_COVERAGE_THEOREM__CURRENT_KNOWN_SOURCE_ACCOUNTING_IS_NOT_ENOUGH"
+  },
+  "scheduler_delta_if_verified": {
+    "delete": [
+      "USE_V5_AS_CURRENT_COMPLETE_ACCEPTANCE_BASIS",
+      "TREAT_CYBERSECURITY_DOMAIN_LABEL_AS_A_SUBSTITUTE_FOR_INTRINSIC_PROMPT_INJECTION_SCOPE_AUTHORIZATION_SELF_VERIFICATION_OR_CONTAINMENT_DIMENSIONS",
+      "COUNT_EXTERNAL_SECURITY_WRAPPERS_AS_INTRINSIC_OPUS55_CAPABILITY",
+      "DUPLICATE_SEPARATE_DOMAIN_MODULE_SEARCH_WHERE_THE_SHARED_BEHAVIORAL_MAPPING_APPLIES"
+    ],
+    "activate": [
+      "ONE_SHARED_GROUP_G_CONDITION_COMPILER_OVER_CURRENT_DOMAIN_CROSS_CUTTING_AND_INTRINSIC_SECURITY_DIMENSIONS",
+      "PER_DOMAIN_SEMANTIC_LOSSLESSNESS_OR_COUNTEREXAMPLE_CHECKS",
+      "MULTILINGUAL_SEMANTIC_PRESERVATION_CERTIFICATE",
+      "LONG_CONTEXT_DECISION_SUFFICIENCY_CERTIFICATE",
+      "MODEL_INTRINSIC_SECURITY_ACCEPTANCE_CERTIFICATES"
+    ],
+    "preserve": [
+      "ALL_V5_A_B_C_E_F_H_WORK",
+      "ALL_38_CURRENT_ATOMIC_PREDICATES",
+      "CURRENT_32_OPEN_TRUTH_OBLIGATION_COUNT_UNTIL_AN_AUTHORITATIVE_RECOMPUTATION_CHANGES_IT",
+      "FAIL_CLOSED_LITERAL_TARGET_COMPLETENESS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_V6_IS_LITERAL_ALL_TARGET_COMPLETE",
+    "NO_CLAIM_ANY_DOMAIN_LANGUAGE_CONTEXT_SECURITY_CREATIVE_OR_DIAGRAM_PARITY",
+    "NO_NEW_FAMILY_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
