@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_BUILDKITE_PROTOCOL_EQUIVALENCE_FALSIFICATION_REMOTE_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "AUTHORIZED_REMOTE_WINDOWS_CARRIER_PASS__CURRENT_BUILDKITE_RESOURCE_RECEIPT_FAILS_CLOSED__EXACT_EIGHT_PUBLIC_METADATA_REPLAY_PASS__ZERO_CREDIT",
+  "subjects": {
+    "falsification_spec": {
+      "path": "canonical/governance/TB4_BUILDKITE_PROTOCOL_EQUIVALENCE_FALSIFICATION_20261006_V1.json",
+      "git_blob_sha": "3f20a5a80dee6d55202373b3e8ab0a39acb341fe"
+    },
+    "compiler": {
+      "path": "canonical/runtime/tb4_buildkite_protocol_equivalence_v1.py",
+      "git_blob_sha": "1bb0b7f76917d18f5ba2614aa9bd74ae70fea7df"
+    },
+    "tests": {
+      "path": "canonical/tests/test_tb4_buildkite_protocol_equivalence_v1.py",
+      "git_blob_sha": "327af3e6524a134f1ff6f01cd9321131ad127bb6"
+    },
+    "current_buildkite_receipt": {
+      "path": "canonical/verification/BUILDKITE_ZERO_CASE_RUNTIME_RECEIPT_20261006_V1.json",
+      "git_blob_sha": "5a10884bc32d3c003a26306ec67bbc902b7338bb"
+    },
+    "exact_eight_identity_manifest": {
+      "path": "canonical/governance/TB4_RECOVERY_TASK_IDENTITY_MANIFEST_20261006_V1.json",
+      "git_blob_sha": "2398e449340708a683ae66ce8ff4ac6482fd8fb3"
+    }
+  },
+  "environment": {
+    "carrier": "AUTHORIZED_REMOTE_WINDOWS_MACHINE",
+    "python_version": "3.14.7",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "compiler_replay": {
+    "tests_run": 5,
+    "failures": 0,
+    "errors": 0,
+    "current_resource_receipt_pass": false,
+    "current_resource_receipt_missing_protocol_obligations": 7,
+    "synthetic_complete_zero_case_receipt_pass": true,
+    "synthetic_pass_scope": "PUBLIC_HARBOR_CARRIER_PROTOCOL_EQUIVALENCE_ONLY__NO_ANTHROPIC_TARGET_HARNESS_RELATION"
+  },
+  "exact_public_metadata_replay": {
+    "source_repository": "harbor-framework/terminal-bench",
+    "frozen_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "fetch_method": "EXACT_RAW_TASK_TOML_ONLY__LOCAL_GIT_BLOB_SHA_RECOMPUTATION",
+    "task_toml_files_read": 8,
+    "instruction_files_read": 0,
+    "solution_files_read": 0,
+    "test_payload_files_read": 0,
+    "terminal_cases_executed": 0,
+    "all_eight_blob_sha_matches": true,
+    "observed": {
+      "separate_verifier_task_count": 8,
+      "artifact_declared_task_count": 8,
+      "verifier_no_network_task_count": 1,
+      "mcp_sidecar_task_count": 1,
+      "service_scoped_artifact_task_count": 1,
+      "verifier_collect_hook_task_count": 1,
+      "maximum_agent_timeout_sec": 28800,
+      "maximum_verifier_timeout_sec": 5400,
+      "maximum_environment_build_timeout_sec": 1800,
+      "observed_schema_versions": [
+        "1.0",
+        "1.1",
+        "2.0",
+        "UNDECLARED"
+      ]
+    }
+  },
+  "deduction": "THE_CURRENT_BUILDKITE_RESOURCE_PREFLIGHT_IS_NOT_ADMISSIBLE_PROTOCOL_EQUIVALENCE_EVIDENCE_FOR_THE_EXACT_EIGHT_TB4_RECOVERY_TASKS__SEVEN_ZERO_CASE_PROTOCOL_OBLIGATIONS_REMAIN",
+  "next": "DO_NOT_RUN_TB4_TERMINAL_CASES__DO_NOT_REPEAT_RESOURCE_PREFLIGHT__RUN_OR_BIND_ONLY_THE_SEVEN_ZERO_CASE_PROTOCOL_PROBES_AFTER_ACCOUNT_SPECIFIC_ZERO_SPEND_ALLOWANCE_OR_HARD_STOP_IS_CONTENT_ADDRESSED__OTHERWISE_CONTINUE_OTHER_V22_INFORMATION_POSITIVE_ROUTES",
+  "hard_nonclaims": [
+    "NO_CLAIM_BUILDKITE_CANNOT_SATISFY_THE_SEVEN_PROTOCOL_OBLIGATIONS",
+    "NO_ANTHROPIC_RELEASE_TARGET_HARNESS_EQUIVALENCE",
+    "NO_TB4_SCORE_PROVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
