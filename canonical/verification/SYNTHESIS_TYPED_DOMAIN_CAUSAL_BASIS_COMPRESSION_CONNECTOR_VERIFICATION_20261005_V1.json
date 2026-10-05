@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_TYPED_DOMAIN_CAUSAL_BASIS_COMPRESSION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__SEVEN_SOURCE_BOUND_SYNTHESIS_RESIDUAL_CLASSES_EXACTLY_PARTITIONED_INTO_THREE_CAUSAL_INTERFACES__TWO_EXISTING_SHARED_SEMANTIC_CLASSES_PLUS_ONE_SYNTHESIS_SPECIFIC_CANDIDATE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_TYPED_DOMAIN_CAUSAL_BASIS_COMPRESSION_20261005_V1.json",
+    "git_blob_sha": "2e6432cc122ce5b8a575fff11813a7be3734833c"
+  },
+  "recomputed_sources": {
+    "countermodel": {
+      "path": "canonical/governance/SYNTHESIS_P3_TYPED_INPUT_DOMAIN_COUNTERMODEL_PARTITION_20261005_V1.json",
+      "git_blob_sha": "4150a16f4c20bf0bfcaa23d31b0b03af69417b2b"
+    },
+    "shared_semantic_basis": {
+      "path": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
+      "git_blob_sha": "ca28ce910e0d946bc7f78d556d47d0ac109a36f2"
+    }
+  },
+  "checks": {
+    "source_constructive_residual_class_count": 7,
+    "mapped_source_residual_class_count": 7,
+    "unmapped_source_residual_class_count": 0,
+    "duplicate_mapped_source_residual_class_count": 0,
+    "extraneous_mapped_residual_class_count": 0,
+    "causal_interface_count": 3,
+    "existing_shared_class_reuse_count": 2,
+    "new_synthesis_specific_candidate_class_count": 1,
+    "s0_exact_id_present_in_shared_basis": true,
+    "s1_exact_id_present_in_shared_basis": true,
+    "zero_acceptance_credit": true,
+    "zero_family_credit": true,
+    "zero_capability_credit": true,
+    "zero_ownership_credit": true,
+    "no_scheduling_execution_promotion_or_fresh_reality_authority": true
+  },
+  "exact_partition": {
+    "SYNTHESIS_C0_SOURCE_TRACEABLE_SEMANTIC_GROUNDING": [
+      "SYNTHESIS_SCOPE_R2_NONNUMERIC_OR_STRUCTURED_EVIDENCE",
+      "SYNTHESIS_SCOPE_R3_GENERAL_CLAIM_SEMANTICS",
+      "SYNTHESIS_SCOPE_R6_PROVENANCE_AND_UNIT_SENSITIVE_SUPPORT"
+    ],
+    "SYNTHESIS_C1_OBJECTIVE_CONDITIONED_SALIENCE_AND_ABSTENTION": [
+      "SYNTHESIS_SCOPE_R1_OPEN_AUDIENCE_ADAPTATION",
+      "SYNTHESIS_SCOPE_R5_INSUFFICIENT_EVIDENCE_FOR_REQUIRED_CLAIM"
+    ],
+    "SYNTHESIS_C2_GROUNDED_EXPRESSION_AND_CONSTRAINT_REALIZATION": [
+      "SYNTHESIS_SCOPE_R4_GENERAL_OUTPUT_CONSTRAINTS",
+      "SYNTHESIS_SCOPE_R7_REALIZED_SYNTHESIS_EXPRESSION"
+    ]
+  },
+  "verified_consequence": [
+    "DO_NOT_RUN_SEVEN_INDEPENDENT_SYNTHESIS_MECHANISM_ACQUISITION_LANES",
+    "REUSE_EXISTING_SHARED_S0_AND_S1_RESIDUAL_PROGRAMS_FOR_THEIR_EXACT_SYNTHESIS_SUBPROBLEMS",
+    "SEARCH_REUSE_FIRST_FOR_ONE_SYNTHESIS_SPECIFIC_C2_GROUNDED_EXPRESSION_AND_CONSTRAINT_REALIZATION_INTERFACE",
+    "PRESERVE_ALL_SEVEN_COUNTEREXAMPLES_AS_REGRESSION_REQUIREMENTS",
+    "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS_REMAINS_OPEN"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_PUBLIC_RUNNER_PROMOTION",
+    "NO_CLAIM_S0_OR_S1_IS_ALREADY_OWNED_OR_SCOPE_COMPLETE",
+    "NO_CLAIM_C2_IS_ALREADY_IMPLEMENTED",
+    "NO_CLAIM_THREE_INTERFACES_EXHAUST_ALL_OPEN_ENDED_SYNTHESIS_SEMANTICS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
