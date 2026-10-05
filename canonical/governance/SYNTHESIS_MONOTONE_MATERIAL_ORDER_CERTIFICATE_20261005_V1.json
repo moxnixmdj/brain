@@ -1,0 +1,182 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_MONOTONE_MATERIAL_ORDER_CERTIFICATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SYNTHESIS_MATCHED_QUALITY_REDUCED_TO_FIVE_DIMENSION_MONOTONE_COUPLING__COVERAGE_AND_UNSUPPORTED_CLAIM_CONJUNCTS_SEPARATE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Close the material-order/monotonicity premises for the live Synthesis matched-quality residual so exact hidden composite weights are not treated as a prerequisite. Preserve the need for admissible target/Brain outcome-mass evidence and a passing dominance-preserving coupling.",
+  "source_bindings": {
+    "current_root2": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+      "git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f"
+    },
+    "terminal_protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json",
+      "git_blob_sha": "515f24f3000218d324be4a7c774b42f790a6ebaa"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "matched_quality_contract": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+      "git_blob_sha": "0886f7592875a5b750cdd401aa783351ab2f0854"
+    },
+    "matched_quality_runtime": {
+      "path": "canonical/runtime/synthesis_matched_quality_metric_v1.py",
+      "git_blob_sha": "116b7394f4b0a6845056c798e966f4cc26f294bf"
+    },
+    "matched_quality_independent_verification": {
+      "path": "canonical/verification/SYNTHESIS_MATCHED_QUALITY_METRIC_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "8a5be1224383dccfbd917729df285eeb96004825"
+    },
+    "required_claim_coverage_ceiling": {
+      "path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
+      "git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f"
+    },
+    "coupling_theorem": {
+      "path": "canonical/governance/HIDDEN_EVALUATOR_MONOTONE_COUPLING_DOMINANCE_V1.json",
+      "git_blob_sha": "678f728089a8df815153af6dd58a88894dd0671f"
+    },
+    "coupling_theorem_verification": {
+      "path": "canonical/verification/HIDDEN_EVALUATOR_MONOTONE_COUPLING_WOLFRAM_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "28466698cf3799dc58935200e40b52ef07573846"
+    },
+    "frontier_route": {
+      "path": "canonical/governance/MATCHED_NONINFERIORITY_MONOTONE_ROUTE_CLASSIFICATION_20261005_V1.json",
+      "git_blob_sha": "36072fd038bd52b62d7e355a055753bbf1e9c61b"
+    }
+  },
+  "exact_live_residual": {
+    "predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "root2_route": "BRAIN_CONSERVATIVE_LOWER_BOUND_GE_OPUS_UPPER_BOUND__SYNTHESIS_SCOPE_SIDE_ALREADY_CLOSED",
+    "target_required_atoms": [
+      "dimension:claim_to_source_fidelity",
+      "dimension:required_evidence_coverage",
+      "dimension:uncertainty_and_disagreement_preservation",
+      "dimension:audience_adaptation",
+      "dimension:format_and_style_constraints",
+      "dimension:compression_without_decision_relevant_loss",
+      "metric:matched_quality",
+      "metric:required_claim_coverage"
+    ],
+    "separate_conjuncts": {
+      "unsupported_material_claims": "SEPARATE_ATOMIC_INVARIANT__SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS__ALREADY_PROVED_IN_CURRENT_ACCEPTANCE_BINDINGS",
+      "required_claim_coverage": "SEPARATE_METRIC__ABSOLUTE_CEILING_ROUTE_EXISTS__DO_NOT_HIDE_INSIDE_MATCHED_QUALITY",
+      "scope": "CLOSED_BY_INDEPENDENT_LOSSLESS_EXACT_UNION_SCOPE_CERTIFICATE"
+    },
+    "live_focus": "MATCHED_QUALITY_NONINFERIORITY"
+  },
+  "material_outcome_order": {
+    "domain": "FROZEN_SYNTHESIS_TARGET_SCOPE_AFTER_SCOPE_CERTIFICATE",
+    "coordinates": [
+      {
+        "id": "claim_to_source_fidelity",
+        "direction": "higher",
+        "range": "[0,1]"
+      },
+      {
+        "id": "uncertainty_and_disagreement_preservation",
+        "direction": "higher",
+        "range": "[0,1]"
+      },
+      {
+        "id": "audience_adaptation",
+        "direction": "higher",
+        "range": "[0,1]"
+      },
+      {
+        "id": "format_and_style_constraints",
+        "direction": "higher",
+        "range": "[0,1]"
+      },
+      {
+        "id": "compression_without_decision_relevant_loss",
+        "direction": "higher",
+        "range": "[0,1]"
+      }
+    ],
+    "dominance_relation": "b_GE_MATERIAL_t_IFF_FOR_ALL_FIVE_COORDINATES__b_i_GE_t_i",
+    "completeness_basis": [
+      "THE_FROZEN_TERMINAL_PROTOCOL_DECLARES_EXACTLY_SIX_SYNTHESIS_TASK_DIMENSIONS.",
+      "THE_INDEPENDENT_SCOPE_CERTIFICATE_IS_COVERAGE_COMPLETE_EXACT_UNION_AND_HAS_ONE_CHILD_FOR_EACH_OF_THOSE_SIX_DIMENSIONS.",
+      "REQUIRED_EVIDENCE_COVERAGE_IS_SEPARATE_AND_HAS_ITS_OWN_NONINFERIORITY_METRIC.",
+      "THE_OTHER_FIVE_DIMENSIONS_ARE_EXACTLY_THE_FIVE_FROZEN_MATCHED_QUALITY_COMPONENTS.",
+      "NO_ADDITIONAL_MATCHED_QUALITY_DIMENSION_IS_DECLARED_BY_THE_BOUND_PROTOCOL_OR_TARGET_NORMALIZATION."
+    ],
+    "fail_closed_boundary": "ANY_NEW_LOAD_BEARING_SYNTHESIS_QUALITY_DIMENSION_OR_TARGET_NORMALIZATION_CHANGE_INVALIDATES_THIS_CERTIFICATE"
+  },
+  "monotonicity_proof": {
+    "frozen_aggregator": "matched_quality = 0 if unsupported_material_claims>0 else min(q1,q2,q3,q4,q5)",
+    "clean_case_restriction": "THE_SEPARATE_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_ATOMIC_INVARIANT_MUST_REMAIN_PROVED; THIS_CERTIFICATE_DOES_NOT_REPROVE_IT.",
+    "theorem": "FOR_CLEAN_CASES_IF_b_i_GE_t_i_FOR_ALL_FIVE_QUALITY_COORDINATES_THEN_min_i(b_i)_GE_min_i(t_i).",
+    "proof": [
+      "LET_mT = MIN_i(t_i).",
+      "FOR_EVERY_i__b_i_GE_t_i_GE_mT.",
+      "THEREFORE_MIN_i(b_i)_GE_mT=MIN_i(t_i)."
+    ],
+    "independent_existing_check": "SYNTHESIS_MATCHED_QUALITY_METRIC_PUBLIC_RUNNER_VERIFICATION_ALREADY_VERIFIES_THE_AGGREGATION_IS_NONCOMPENSATORY_AND_MONOTONE"
+  },
+  "coupling_reduction": {
+    "sufficient_condition": "FOR_EACH_FROZEN_TASK_CELL_OR_SCOPE_COMPLETE_PORTFOLIO_ABSTRACTION__A_COUPLING_OF_OPUS_AND_BRAIN_OUTCOME_MASS_EXISTS_WITH_SUPPORT_ONLY_ON_FIVE_DIMENSION_MATERIAL_DOMINANCE_EDGES.",
+    "consequence": "THE_VERIFIED_MONOTONE_COUPLING_THEOREM_IMPLIES_EXPECTED_MATCHED_QUALITY_NONINFERIORITY_WITHOUT_DISCOVERING_ANY_ADDITIONAL_HIDDEN_COMPOSITE_WEIGHT_VECTOR.",
+    "exact_weight_discovery_required": false,
+    "exact_target_observational_equivalence_required": false,
+    "target_outcome_mass_or_conservative_mass_bounds_still_required": true,
+    "brain_outcome_mass_or_conservative_mass_bounds_still_required": true,
+    "statistical_conservative_bound_layer_still_required": true
+  },
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "SEARCH_FOR_UNDECLARED_SYNTHESIS_COMPOSITE_QUALITY_WEIGHTS_AS_A_PREREQUISITE",
+      "TREAT_THE_FIVE_FROZEN_QUALITY_DIMENSIONS_AS_IF_THEIR_MATERIAL_ORDER_WERE_STILL_UNDEFINED",
+      "COLLAPSE_REQUIRED_CLAIM_COVERAGE_BACK_INTO_MATCHED_QUALITY"
+    ],
+    "preserve": [
+      "FIVE_DIMENSION_SCORER_BINDINGS",
+      "SEPARATE_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY",
+      "ZERO_UNSUPPORTED_MATERIAL_CLAIMS_INVARIANT",
+      "ADMISSIBLE_OPUS_AND_BRAIN_OUTCOME_MASS_EVIDENCE",
+      "CONSERVATIVE_PORTFOLIO_STATISTICS",
+      "EXACT_DOMINANCE_PRESERVING_COUPLING_OR_AN_EVEN_STRONGER_PROOF"
+    ],
+    "next": [
+      "COMPILE_ANY_CURRENT_CLEAN_BRAIN_AND_TARGET_SYNTHESIS_EVIDENCE_INTO_THE_FIVE_DIMENSION_FINITE_OUTCOME_CLASSES_OR_SOUND_MASS_BOUNDS.",
+      "RUN_THE_EXACT_COUPLING_KERNEL_WHERE_MARGINALS_ARE_EXACT; OTHERWISE_BUILD_A_FAIL_CLOSED_ROBUST_BOUND_LAYER_BEFORE_CLAIMING_COUPLING.",
+      "ONLY_IF_DOMINANCE_TRANSPORT_FAILS_RETURN_TO_NEW_TARGET_QUERY_OR_STRONGER_PERFORMANCE_PROOF."
+    ]
+  },
+  "falsifiers": [
+    "THE_SYNTHESIS_PROTOCOL_OR_TARGET_NORMALIZATION_ADDS_A_NEW_LOAD_BEARING_MATCHED_QUALITY_DIMENSION.",
+    "THE_SCOPE_CERTIFICATE_IS_REVOKED_OR_NO_LONGER_COVERS_THE_FROZEN_TARGET_SCOPE.",
+    "THE_MATCHED_QUALITY_AGGREGATOR_CHANGES_FROM_THE_BOUND_MIN_NONCOMPENSATORY_RULE.",
+    "UNSUPPORTED_MATERIAL_CLAIMS_INVARIANT_IS_REOPENED.",
+    "THE_ACCEPTANCE_FUNCTION_IS_SHOWN_NONMONOTONE_IN_ANY_CERTIFIED_MATERIAL_COORDINATE."
+  ],
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_ACCEPTANCE_PREDICATE_CLOSED_BY_THIS_CERTIFICATE",
+    "NO_BRAIN_OR_OPUS_MATCHED_RESULT",
+    "NO_COUPLING_PASS_CLAIM",
+    "NO_STATISTICAL_CONFIDENCE_BOUND_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_OR_EXECUTION_AUTHORITY",
+    "NO_LITERAL_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
