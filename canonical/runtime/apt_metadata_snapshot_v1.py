@@ -102,10 +102,16 @@ def _decode_block(block:bytes, dictionary:bytes=b"")->bytes:
         mlen,i=_read_len(block,i,token&0x0F)
         mlen+=4
         src=len(out)-offset
-        for _ in range(mlen):
-            if src<0 or src>=len(out):
+        if src<0:
+            raise AptSnapshotError("LZ4_MATCH_SOURCE_INVALID")
+        if mlen<=offset:
+            out.extend(out[src:src+mlen])
+        else:
+            pattern=bytes(out[src:src+offset])
+            if len(pattern)!=offset:
                 raise AptSnapshotError("LZ4_MATCH_SOURCE_INVALID")
-            out.append(out[src]); src+=1
+            repeats=(mlen+offset-1)//offset
+            out.extend((pattern*repeats)[:mlen])
     return bytes(out[base:])
 
 
