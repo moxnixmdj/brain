@@ -62,7 +62,7 @@ mount -t tmpfs -o size=32m,nosuid,nodev tmpfs "$ROOT/work"
 IP_BIN="$(command -v ip)"; CHROOT_BIN="$(command -v chroot)"
 "$IP_BIN" link set lo up
 ulimit -t 120; ulimit -v 2097152; ulimit -f 1048576; ulimit -n 64; ulimit -u 32
-exec "$CHROOT_BIN" "$ROOT" /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp LANG=C LC_ALL=C "$@"
+exec "$CHROOT_BIN" "$ROOT" /usr/bin/setpriv --no-new-privs --bounding-set=-all --inh-caps=-all --ambient-caps=-all /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp LANG=C LC_ALL=C "$@"
 """
 
 class PackageMetadataDenied(PermissionError):
