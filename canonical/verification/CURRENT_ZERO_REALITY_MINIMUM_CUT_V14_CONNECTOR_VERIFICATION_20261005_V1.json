@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__CURSORBENCH_DORMANT_ROUTE_TRUTH_REPAIR__CURRENT_14_24__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json",
+    "git_blob_sha": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
+  },
+  "observed_head": "c6f568a857ee3332113131714edcfe97c11daa2e",
+  "checks": {
+    "current_14_24": true,
+    "cursor_removed_from_active_owner_batch": true,
+    "cursor_bound_to_waiting_reopen_events": true,
+    "cursor_owner_boundary_exact": true,
+    "zero_execution_promotion_fresh_reality": true
+  },
+  "errors": [],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
