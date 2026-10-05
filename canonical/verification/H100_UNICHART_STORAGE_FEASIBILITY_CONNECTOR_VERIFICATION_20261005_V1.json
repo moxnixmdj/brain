@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_STORAGE_FEASIBILITY_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__CONDITIONAL_STORAGE_FEASIBILITY_ONLY__ZERO_CREDIT",
+  "subject": {
+    "candidate_path": "canonical/governance/H100_UNICHART_STORAGE_FEASIBILITY_CANDIDATE_V1.json",
+    "candidate_git_blob_sha": "f2f1b4bf2c4ed71edff61a5c45752042daffefe5",
+    "runtime_path": "canonical/runtime/h100_unichart_storage_feasibility_v1.py",
+    "runtime_git_blob_sha": "6b21d057c203d64e3559d1c9416b481d30032e7e",
+    "tests_path": "canonical/tests/test_h100_unichart_storage_feasibility_v1.py",
+    "tests_git_blob_sha": "9af1c81c71ce49fd7859281ba6bfe14c5bd0d3a2"
+  },
+  "recomputation": {
+    "checkpoint_bytes": 809199995,
+    "max_fp32_values_floor_file_bytes_div_4": 202299998,
+    "target_bits_per_weight": 3,
+    "packed_weight_bytes": 75862500,
+    "group_size": 256,
+    "group_count": 790235,
+    "metadata_bytes_per_group": 4,
+    "quant_metadata_bytes": 3160940,
+    "ancillary_bundle_bytes": 5317996,
+    "total_candidate_bytes": 84341436,
+    "h100_budget_bytes": 100000000,
+    "margin_bytes": 15658564
+  },
+  "checks": {
+    "arithmetic_consistent": true,
+    "total_below_budget": true,
+    "margin_positive": true,
+    "exact_state_dict_count_not_claimed": true,
+    "capability_preservation_not_claimed": true,
+    "h100_credit_zero": true,
+    "terminal_cases_consumed_zero": true
+  },
+  "theorem_boundary": "PASS_ONLY_IF_THE_RELEASED_CHECKPOINTS_PERSISTENT_LEARNED_TENSORS_ARE_FP32_AS_DECLARED_AND_THE_TRANSFORM_APPLIES_TO_ALL_LEARNED_CHECKPOINT_STATE__EXACT_STATE_DICT_ENUMERATION_REMAINS_MANDATORY",
+  "next_required_evidence": [
+    "EXACT_STATE_DICT_TENSOR_AND_DTYPE_ENUMERATION",
+    "REAL_PACKED_CHECKPOINT_BYTE_COUNT",
+    "NONTERMINAL_CHART_REASONING_CAPABILITY_PRESERVATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  }
+}
