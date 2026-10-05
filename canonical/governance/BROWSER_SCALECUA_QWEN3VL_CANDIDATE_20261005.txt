@@ -1,0 +1,7 @@
+CANDIDATE ZERO CREDIT
+Target: BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001 for COMPUTER_AND_BROWSER_USE only.
+Primary route: THUDM SCALE-CUA Qwen3-VL-8B OSWorld checkpoint, publicly downloadable, approximately 17.5 GB, reported 67.7% OSWorld.
+Actual evaluation surface: screenshot observations with PyAutoGUI actions. Qwen3-VL computer-use action interface supports keyboard, typing, mouse movement/click variants, drag, scroll, wait, termination and answer actions.
+GroundNext-7B-V0 is retained only as an optional click-only grounding specialist, not a whole-contract route.
+Before any credit: bind exact checkpoint revision/license/files, verify full action parser used by SCALE-CUA, run zero-terminal synthetic action/grounding/stale-state tests, prove scope partition, and verify no external target-capability provider at runtime.
+No Opus parity, OSWorld acceptance, whole-scope, family, capability, ownership, or terminal credit from this marker.
