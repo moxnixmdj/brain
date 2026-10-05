@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_UNIVERSAL_CEILING_INVARIANT_COUNTEREXAMPLE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_DEDUCTIVE_FALSIFICATION__CURRENT_UNIVERSAL_1_OF_1_CEILING_DOES_NOT_FOLLOW_FROM_EXACT_BOUND_COMPILER__INVARIANT_SEMANTIC_CONSISTENCY_GAP__ZERO_CREDIT",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "target_candidate": {
+    "path": "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_PERFORMANCE_CEILING_CANDIDATE_V1.json",
+    "git_blob_sha": "160ab6fbd05d1f29ffa5ea6bd9054fdde4b780e0"
+  },
+  "exact_authorities": {
+    "compiler": {
+      "path": "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
+      "git_blob_sha": "79d3896818b03223348f05adf4fdcd574f6f355e"
+    },
+    "oracle": {
+      "path": "canonical/runtime/structured_method_normalized_rule_oracle_v3.py",
+      "git_blob_sha": "5d92b1360fbb1bb27baacc8a04adb3744abf690c"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "scope_gate_input": {
+      "path": "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+      "git_blob_sha": "fc2e739789825bba5f30da56c6896de11678b6e8"
+    },
+    "public_verification": {
+      "path": "canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "1d6159334bf8e7067f5cb8d31ae0f25b7bb473c3"
+    }
+  },
+  "contract_fact": {
+    "success_condition": "coverage is complete, dimensions/types/invariants are consistent, and independently generated acceptance checks cover each material graph edge",
+    "load_bearing_dimension": "INVARIANT_SEMANTIC_CONSISTENCY"
+  },
+  "implementation_fact": {
+    "compiler_invariant_handling": "FOR_EACH_DECLARED_INVARIANT_THE_COMPILER_CHECKS_ONLY_THAT_IT_IS_A_MAPPING_WITH_NONEMPTY_kind_AND_statement_STRINGS__THEN_COPIES_THE_STRINGS_INTO_THE_GRAPH.",
+    "oracle_invariant_handling": "THE_ORACLE_REPEATS_THE_SAME_SHAPE_AND_NONEMPTY_STRING_CHECK_AND_RECONSTRUCTS_THE_DECLARATION__IT_DOES_NOT_DECIDE_THE_TRUTH_OR_MUTUAL_CONSISTENCY_OF_INVARIANT_SEMANTICS.",
+    "scope_gate_interaction": "DECLARED_INVARIANT_PRESERVATION",
+    "mismatch": "DECLARATION_PRESERVATION_IS_STRICTLY_WEAKER_THAN_SEMANTIC_INVARIANT_CONSISTENCY_REQUIRED_BY_THE_FROZEN_BEHAVIORAL_CONTRACT."
+  },
+  "counterexample": {
+    "admissible_shape": {
+      "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "task": {
+        "inputs": [{"id":"a","type":"number","dimension":"dimensionless"}],
+        "requirements": [{"id":"R","source_kind":"constraint","status":"applicable"}],
+        "normalized_rules": [{
+          "id":"RULE_X",
+          "operator":"opaque_normalized_operator",
+          "inputs":["a"],
+          "input_contracts":[{"type":"number","dimension":"dimensionless"}],
+          "output":"x",
+          "type":"number",
+          "dimension":"dimensionless",
+          "consumes_requirements":["R"],
+          "invariants":[
+            {"kind":"equality","statement":"x == 0"},
+            {"kind":"equality","statement":"x == 1"}
+          ]
+        }],
+        "required_outputs":["x"]
+      }
+    },
+    "compiler_behavior_from_source": "RETURNS_COMPILED_BECAUSE_BOTH_INVARIANTS_HAVE_NONEMPTY_KIND_AND_STATEMENT_AND_ALL_STRUCTURAL_GRAPH_CHECKS_PASS.",
+    "behavioral_contract_result": "FAILS_SUCCESS_CONDITION_BECAUSE_x_EQUALS_0_AND_x_EQUALS_1_ARE_MUTUALLY_INCONSISTENT_OVER_ORDINARY_NUMBER_SEMANTICS.",
+    "deduction": "THERE_EXISTS_AN_INPUT_ADMITTED_BY_THE_CURRENT_COMPILER_ORACLE_STRUCTURAL_SCHEMA_FOR_WHICH_COMPILED_DOES_NOT_IMPLY_THE_FROZEN_SUCCESS_CONDITION__THEREFORE_BRAIN_LOWER_BOUND_EQUALS_1_OVER_EVERY_FINITE_ADMISSIBLE_INSTANCE_IS_NOT_ESTABLISHED_BY_THE_CURRENT_COMPILER_PLUS_ORACLE."
+  },
+  "relation_to_prior_public_verification": {
+    "preserved": [
+      "ARBITRARY_NORMALIZED_OPERATOR_IDENTITY_IS_NOT_A_COMPILER_SCOPE_LIMIT",
+      "REQUIREMENT_LINEAGE_AND_JUSTIFIED_EXCLUSION_CHECKS",
+      "TYPE_AND_DIMENSION_CONTRACT_MUTATION_REJECTION",
+      "EDGE_DELETE_OR_REWIRE_REJECTION",
+      "DECLARED_INVARIANT_MUTATION_REJECTION",
+      "REQUIRED_OUTPUT_TRACEABILITY",
+      "CYCLE_OR_UNRESOLVED_DEPENDENCY_FAIL_CLOSED"
+    ],
+    "not_proved_by_prior_receipt": [
+      "SEMANTIC_TRUTH_OR_MUTUAL_CONSISTENCY_OF_DECLARED_INVARIANTS"
+    ],
+    "reason": "THE_PUBLIC_RECEIPT_EXPLICITLY_VERIFIED_INVARIANT_DECLARATION_MUTATION_REJECTION__NOT_SEMANTIC_INVARIANT_EVALUATION."
+  },
+  "minimum_repair_options": [
+    {
+      "id": "REPAIR_A_UPSTREAM_VERIFIED_INVARIANT_SEMANTICS",
+      "requirement": "MAKE_SEMANTICALLY_VERIFIED_AND_MUTUALLY_CONSISTENT_INVARIANTS_AN_EXPLICIT_FROZEN_INPUT_PRECONDITION_WITH_AN_INDEPENDENT_RECEIPT__THEN_REPROVE_SCOPE_EQUIVALENCE_WITHOUT_WEAKENING_THE_BEHAVIOR."
+    },
+    {
+      "id": "REPAIR_B_DECIDABLE_INVARIANT_LANGUAGE",
+      "requirement": "REPLACE_OPAQUE_INVARIANT_STATEMENTS_WITH_A_TYPED_DECIDABLE_INVARIANT_IR_AND_HAVE_AN_INDEPENDENT_ENGINE_CHECK_CONSISTENCY_OR_FAIL_CLOSED_BEFORE_COMPILED."
+    }
+  ],
+  "scheduler_effect_if_independently_verified": {
+    "delete": [
+      "PROMOTE_STRUCTURED_METHOD_UNIVERSAL_PERFORMANCE_CEILING_CANDIDATE_V1_AS_CURRENTLY_WRITTEN",
+      "INFER_1_OF_1_SUCCESS_FROM_DECLARED_INVARIANT_PRESERVATION_ALONE"
+    ],
+    "activate": [
+      "CHOOSE_MINIMUM_REPAIR_A_OR_B",
+      "REVERIFY_THE_EXACT_SCOPE_RELATION_AND_UNIVERSAL_CEILING_AFTER_REPAIR"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_STRUCTURED_METHOD_BEHAVIOR_CANNOT_BE_CLOSED_BY_FORMAL_PROOF",
+    "NO_CLAIM_EXISTING_STRUCTURAL_GRAPH_MECHANICS_ARE_INVALID",
+    "NO_CLAIM_OPERATOR_SEMANTICS_MUST_BE_INTERNALIZED_BY_THIS_COMPILER",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
