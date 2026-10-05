@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__SHARED_RESIDUAL_SCOPE_CLOSURE_SCHEDULING_FRONTIER__16_LOCAL_SLOTS_FACTORED_TO_10_UNIQUE_CONTRACTS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_20261005_V1.json",
+    "git_blob_sha": "61a8764d8e48b2b8abefcacb0d474226f69ea8c9"
+  },
+  "verification": {
+    "path": "canonical/verification/FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "452f5ffa38e33957fc73cf8eb10794a46ce02133"
+  },
+  "supersedes_for_scheduling": [
+    "FIVE_INDEPENDENT_FAMILY_LOCAL_UNCOVERED_SCOPE_AUDIT_DESIGNS"
+  ],
+  "preserves": [
+    "PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE",
+    "ALL_EXISTING_FIXED_PUBLIC_BARS_AS_NECESSARY_WHERE_LOAD_BEARING",
+    "ROOT1_POSITIVE_GAP_ZERO",
+    "CURRENT_ACCEPTANCE_AND_OWNERSHIP_COUNTS",
+    "FAIL_CLOSED_TERMINAL_FINALITY"
+  ],
+  "active_order": [
+    {
+      "rank": 1,
+      "action": "EXACT_BINDING_REUSE_CHECK",
+      "target": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "leverage_if_pass": "DISCHARGES_ONE_SHARED_RESIDUAL_FOR_ADVANCED_AGENTIC_CODING__AGENTIC_SCIENTIFIC_RESEARCH__BUSINESS_WORKFLOW_AUTOMATION",
+      "fresh_reality_required": false
+    },
+    {
+      "rank": 2,
+      "action": "EXACT_BINDING_REUSE_CHECK",
+      "target": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "leverage_if_pass": "DISCHARGES_ONE_SHARED_RESIDUAL_FOR_BUSINESS_WORKFLOW_AUTOMATION",
+      "fresh_reality_required": false
+    },
+    {
+      "rank": 3,
+      "action": "CONTRACT_LEVEL_ACCEPTANCE_CLOSURE",
+      "target": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "leverage_if_pass": "DISCHARGES_SHARED_RESIDUAL_FOR_THREE_AFFECTED_FAMILIES",
+      "fresh_reality_required": "ONLY_IF_EXISTING_ADMISSIBLE_EVIDENCE_CANNOT_CLOSE"
+    },
+    {
+      "rank": 4,
+      "action": "CONTRACT_LEVEL_ACCEPTANCE_CLOSURE",
+      "target": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "leverage_if_pass": "DISCHARGES_SHARED_RESIDUAL_FOR_TWO_AFFECTED_FAMILIES",
+      "fresh_reality_required": "ONLY_IF_EXISTING_ADMISSIBLE_EVIDENCE_CANNOT_CLOSE"
+    },
+    {
+      "rank": 5,
+      "action": "CONTRACT_LEVEL_ACCEPTANCE_CLOSURE",
+      "target": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "leverage_if_pass": "DISCHARGES_SHARED_RESIDUAL_FOR_TWO_AFFECTED_FAMILIES",
+      "fresh_reality_required": "ONLY_IF_EXISTING_ADMISSIBLE_EVIDENCE_CANNOT_CLOSE"
+    },
+    {
+      "rank": 6,
+      "action": "SINGLETON_RESIDUAL_CLOSURE_ONLY_IF_STILL_LOAD_BEARING",
+      "targets": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+      ]
+    },
+    {
+      "rank": 7,
+      "action": "RECOMPUTE",
+      "target": "FIVE_FAMILY_SCOPE_CLOSURE__38_ATOMIC_ACCEPTANCE_PREDICATES__19_FAMILY_TERMINAL_FINALITY"
+    }
+  ],
+  "hard_rules": [
+    "DO_NOT_RUN_FIVE_DUPLICATE_FAMILY_LOCAL_SCOPE_PROGRAMS_WHEN_ONE_EXACT_CONTRACT_PROOF_CAN_BE_REUSED",
+    "DO_NOT_REUSE_ANY_PROOF_WITHOUT_EXACT_CONTRACT_SCOPE_AND_ROUTE_BINDING",
+    "DO_NOT_CREATE_ACCEPTANCE_OR_OWNERSHIP_CREDIT_FROM_FACTORING_OR_CONNECTOR_VERIFICATION",
+    "DO_NOT_SPEND_FRESH_REALITY_BEFORE_ZERO_REALITY_REUSE_CHECKS_FAIL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
