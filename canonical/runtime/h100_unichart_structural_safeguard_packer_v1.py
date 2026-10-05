@@ -28,24 +28,44 @@ def mode_for(storage):
 
 def group_payload(n,bits): return 4+math.ceil(n*bits/8)
 
-def score_candidates(source,parsed):
+def score_candidates(source,parsed,*,chunk_groups:int=4096):
     ranked=[]; gid=0
     with zipfile.ZipFile(source,'r') as z:
         for s in parsed['storages']:
             mode=mode_for(s)
-            if s['dtype']!='F32': continue
+            if s['dtype']!='F32':
+                continue
             remaining=int(s['numel']); local=0
             with z.open(s['entry'],'r') as src:
                 while remaining:
-                    n=min(GROUP_SIZE,remaining)
-                    raw=src.read(n*4)
-                    if len(raw)!=n*4: raise PackerError('SOURCE_TRUNCATED')
-                    vals=np.frombuffer(raw,dtype='<f4').reshape(1,n)
-                    if mode=='CANDIDATE':
-                        s3=float(_sse_rows(vals,3)[0]); s4=float(_sse_rows(vals,4)[0])
-                        ranked.append((s3-s4,s['aliases'][0],local,gid))
-                        gid+=1
-                    local+=1; remaining-=n
+                    groups=min(chunk_groups,math.ceil(remaining/GROUP_SIZE))
+                    want=min(remaining,groups*GROUP_SIZE)
+                    raw=src.read(want*4)
+                    if len(raw)!=want*4:
+                        raise PackerError('SOURCE_TRUNCATED')
+                    vals=np.frombuffer(raw,dtype='<f4')
+                    full,rem=divmod(want,GROUP_SIZE)
+                    pos=0
+                    if full:
+                        mat=vals[:full*GROUP_SIZE].reshape(full,GROUP_SIZE)
+                        if mode=='CANDIDATE':
+                            s3=_sse_rows(mat,3); s4=_sse_rows(mat,4)
+                            for j in range(full):
+                                ranked.append((float(s3[j]-s4[j]),s['aliases'][0],local,gid))
+                                local+=1; gid+=1
+                        else:
+                            local+=full
+                        pos=full*GROUP_SIZE
+                    if rem:
+                        if mode=='CANDIDATE':
+                            mat=vals[pos:].reshape(1,rem)
+                            s3=_sse_rows(mat,3); s4=_sse_rows(mat,4)
+                            ranked.append((float(s3[0]-s4[0]),s['aliases'][0],local,gid))
+                            gid+=1
+                        local+=1
+                    remaining-=want
+                if src.read(1):
+                    raise PackerError('SOURCE_TRAILING_BYTES')
     ranked.sort(key=lambda r:(-r[0],r[1],r[2]))
     return ranked
 
