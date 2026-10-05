@@ -18,6 +18,7 @@ FILES = [
     "canonical/governance/STATIC_SVG_DIAGRAM_MECHANICS_KERNEL_20261005_V1.json",
     "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json",
+    "canonical/verification/CREATIVE_TEXT_METRIC_INDEPENDENCE_WOLFRAM_VERIFICATION_20261005_V1.json",
     "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
     "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
     "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
@@ -45,6 +46,7 @@ class CreativeDiagramAcceptanceBasisRepairV3Tests(unittest.TestCase):
         self.assertEqual(out["new_diagram_acceptance_atoms"], 0)
         self.assertEqual(out["new_creative_text_acceptance_atoms"], 1)
         self.assertEqual(out["creative_atom"], "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR")
+        self.assertEqual(out["creative_metric_independence"], "INDEPENDENT_WOLFRAM_CONSTRUCTIVE_COUNTERMODEL_PASS")
         self.assertEqual(
             out["projected_if_creative_atom_integrated_unproved"],
             "19_FAMILIES__39_ATOMS__14_PROVED__25_UNRESOLVED",
