@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_BOUNDED_SUBREGION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ZERO_LEARNED_BOUNDED_SUBREGION__OPEN_ENDED_SEMANTIC_HYPOTHESIS_PROPOSAL_REMAINS_OPEN__ZERO_CREDIT",
+  "target_behavior": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+  "objective": "Prove the maximum deterministic subregion before considering any learned scientific-hypothesis generator.",
+  "implementation": {
+    "path": "canonical/runtime/scientific_hypothesis_bounded_v1.py",
+    "tests": "canonical/tests/test_scientific_hypothesis_bounded_v1.py"
+  },
+  "proved_candidate_subregion": [
+    "NORMALIZED_OBSERVED_ANOMALY_PLUS_EXPLICIT_FINITE_MECHANISM_GRAMMAR_TO_FALSIFIABLE_MATCHING_HYPOTHESIS_SET",
+    "EXPLICIT_PRIORS_AND_EXPLICIT_P_OUTCOME_GIVEN_HYPOTHESIS_TO_EXACT_SHANNON_EXPECTED_INFORMATION_GAIN",
+    "FEASIBLE_TEST_SELECTION_BY_MAX_INFORMATION_GAIN_PER_COST_WITH_DETERMINISTIC_TIE_BREAKS",
+    "FAIL_CLOSED_WHEN_NO_EXPLICIT_MECHANISM_MATCH_OR_NO_DISCRIMINATING_FEASIBLE_TEST"
+  ],
+  "irreducible_residual_after_candidate_if_verified": [
+    "OPEN_ENDED_SCIENTIFICALLY_MEANINGFUL_MECHANISM_OR_HYPOTHESIS_PROPOSAL_WHEN_THE_RELEVANT_MECHANISM_IS_NOT_ALREADY_PRESENT_IN_THE_EXPLICIT_GRAMMAR",
+    "SEMANTIC_JUDGMENT_THAT_A_PROPOSED_MECHANISM_IS_SCIENTIFICALLY_COHERENT_AND_NONTRIVIAL_BEYOND_STRUCTURAL_VALIDITY",
+    "CONSTRUCTING_A_TRUSTWORTHY_OBSERVATION_MODEL_OR_PRIOR_WHEN_NOT_GIVEN_OR_DERIVABLE_FROM_VERIFIED_EVIDENCE",
+    "INVENTING_A_FEASIBLE_DISCRIMINATING_TEST_WHEN_NO_EXPLICIT_TEST_MODEL_IS_AVAILABLE"
+  ],
+  "h100_effect": {
+    "learned_rung_bytes": 0,
+    "learned_rung_advance": false,
+    "conclusion": "DO_NOT_ADD_LEARNED_STATE_FOR_HYPOTHESIS_RANKING_OR_EXPERIMENT_SELECTION_WHEN_THE_MECHANISM_GRAMMAR_AND_OBSERVATION_MODEL_ARE_EXPLICIT"
+  },
+  "hard_nonclaims": [
+    "NO_WHOLE_SCIENTIFIC_HYPOTHESIS_FORMATION_OWNERSHIP",
+    "NO_CLAIM_OPEN_ENDED_NOVEL_HYPOTHESIS_GENERATION_IS_DETERMINISTIC",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}\n
