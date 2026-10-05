@@ -11,9 +11,9 @@ from canonical.runtime.root3_subprocess_effect_class_registry_v1 import EXPECTED
 
 
 class RuntimeCallsiteClassifierTests(unittest.TestCase):
-    def test_registry_is_exact_current_19_site_universe(self):
-        self.assertEqual(len(EXPECTED), 19)
-        self.assertEqual(sum(1 for k in EXPECTED if k[2].endswith("run")), 18)
+    def test_registry_is_exact_current_18_site_universe(self):
+        self.assertEqual(len(EXPECTED), 18)
+        self.assertEqual(sum(1 for k in EXPECTED if k[2].endswith("run")), 17)
         self.assertEqual(sum(1 for k in EXPECTED if k[2].endswith("Popen")), 1)
 
     def test_direct_unregistered_test_call_fails_closed(self):
