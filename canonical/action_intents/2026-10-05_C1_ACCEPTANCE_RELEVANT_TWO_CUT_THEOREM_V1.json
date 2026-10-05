@@ -1,0 +1,204 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V11",
+  "date": "2026-10-05",
+  "action_id": "C1_ACCEPTANCE_RELEVANT_TWO_CUT_THEOREM_20261005_V1",
+  "status": "PROPOSED_PREEXECUTION__LEASE_CLAIM__ZERO_REALITY__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "ef3e99ca90e9e30eee186a506e94f31c4a7f0da9",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "ZERO_REALITY_UNIVERSAL_CERTIFICATE__COMPOSITION_C1",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::C1_CLOSED_WORLD_CAPSULE_MEDIATION_TOTALITY",
+  "expected_parent_frontier_change": "COMPRESS_C1_FROM_OPEN_ENDED_ENUMERATION_OF_FILESYSTEM_PROCESS_BROWSER_AND_OTHER_SIDE_CHANNEL_TYPES_TO_A_FINITE_TWO_CUT_INFORMATION_FLOW_CERTIFICATE__INGRESS_DOMINANCE_PLUS_MATERIAL_EFFECT_EGRESS_DOMINANCE_WITH_EXACT_ROLLBACK_RESET__NO_CREDIT_UNTIL_IMPLEMENTATION_PREMISES_ARE_INDEPENDENTLY_BOUND",
+  "theory_invariants": {
+    "terminal_target": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL",
+    "knowledge_policy": "EXTERNAL_JIT_ONLY",
+    "underlying_capability_invention": "FORBIDDEN",
+    "selected_work_class": "PROOF_COMPRESSION_AND_INTEGRATION_OF_EXISTING_BRAIN_MECHANISMS",
+    "incremental_spend_usd": 0,
+    "fresh_reality_authorized": false
+  },
+  "ownership_tests": {
+    "applies": false,
+    "reason": "PREPROOF_ONLY__NO_CAPABILITY_OR_OWNERSHIP_PROMOTION"
+  },
+  "reasoning_durability": {
+    "real_objective": "DISCHARGE_OR_MINIMIZE_THE_ACTIVE_ROOT3_C1_COMPOSITION_NO_BYPASS_OBLIGATION_WITH_ZERO_FRESH_REALITY",
+    "governing_invariants": [
+      "V18_GROUP_G_ALLOWS_ONLY_NEW_LOAD_BEARING_LOSSLESS_EXHAUSTIVE_OR_UNIVERSAL_CERTIFICATES",
+      "NO_TERMINAL_CASE_GENERATION",
+      "NO_SELF_CERTIFIED_ACCEPTANCE_CREDIT",
+      "NO_DUPLICATE_C1_EXECUTION_LEASE"
+    ],
+    "material_premises": [
+      "CAPSULE_V2_GUARD_V2_PROVES_DECLARED_CROSS_CAPABILITY_STATE_CONTINUITY_BUT_NOT_SEMANTIC_DECLARATION_COMPLETENESS",
+      "LEGACY_ASTRA_PRIOR_RESULT_SHELL_CHANNEL_IS_A_KNOWN_C1_BYPASS_COUNTEREXAMPLE",
+      "ROOT3_MONOTONE_DENY_THEOREM_REDUCES_AUXILIARY_EFFECT_CHANNELS_TO_VETO_ONLY_IF_PARENT_IMPLEMENTATION_ENFORCES_THE_NORMAL_FORM",
+      "FROZEN_MULTI_CAPABILITY_COMPOSITION_ACCEPTANCE_HAS_FINITE_DECLARED_TASK_DIMENSIONS_AND_LOAD_BEARING_STATE_HANDOFF_ROLLBACK_PROVENANCE_METRICS",
+      "C1_CONCERNS_ACCEPTANCE_RELEVANT_CAUSAL_INFLUENCE_NOT_PHYSICAL_NONEXISTENCE_OF_EVERY_POSSIBLE_SIDE_CHANNEL"
+    ],
+    "evidence_refs": [
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V18.json",
+      "canonical/governance/COMPOSITION_ACCEPTANCE_QUOTIENT_CAPSULE_MINIMUM_CUT_ACTIVATION_20261005_V1.json",
+      "canonical/governance/COMPOSITION_STATE_CAPSULE_NO_BYPASS_TRUTH_REPAIR_20261005_V1.json",
+      "canonical/runtime/composition_state_capsule_guard_v2.py",
+      "canonical/governance/ROOT3_MONOTONE_DENY_OBSERVATION_CHANNEL_IMMUNITY_BREAKTHROUGH_20261005_V1.json",
+      "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
+    ],
+    "conclusion": "C1_CAN_BE_PROVED_WITHOUT_ENUMERATING_SIDE_CHANNEL_TYPES_IF_TWO_DOMINATING_CUTS_AND_ROLLBACK_RESET_ARE_PROVED: EVERY_ACCEPTANCE_RELEVANT_POSITIVE_INFORMATION_FLOW_TO_A_LATER_MACROSTEP_INTERSECTS_A_FAIL_CLOSED_CONTENT_BOUND_INGRESS_MEDIATOR; EVERY_MATERIAL_EFFECT_INTERSECTS_THE_EXISTING_FAIL_CLOSED_ROOT3_BROKER; ALL_OTHER_OBSERVATIONS_ARE_VETO_ONLY; ROLLBACK_REINITIALIZES_EPHEMERAL_EXECUTION_FROM_THE_SAME_BOUND_CUTPOINT",
+    "selected_route": "FORMALIZE_AND_INDEPENDENTLY_CHECK_THE_TWO_CUT_THEOREM__THEN_LEAVE_ONLY_EXACT_IMPLEMENTATION_DOMINANCE_PREMISES_FOR_A_LATER_BINDING_RECEIPT",
+    "rejected_material_alternatives": [
+      "ENUMERATE_EVERY_SIDE_CHANNEL_CLASS__UNBOUNDED_AND_UNNECESSARY_IF_CONSUMER_CUT_DOMINATES",
+      "PATCH_ALL_LEGACY_ASTRA_CHANNELS__BROADER_THAN_FROZEN_ACCEPTANCE_SCOPE",
+      "REPEAT_CAPSULE_UNIT_TESTS__DOES_NOT_PROVE_SCOPE_COMPLETENESS",
+      "GENERATE_TERMINAL_CASES__FORBIDDEN_BY_CURRENT_V18",
+      "CLAIM_C1_FROM_ROOT3_BROKER_ALONE__INPUT_SIDE_CAUSAL_INFLUENCE_REMAINS"
+    ],
+    "uncertainties": [
+      "CURRENT_RUNTIME_BYTES_MAY_NOT_YET_HAVE_A_SINGLE_DOMINATING_ACCEPTANCE_INGRESS_CONSTRUCTOR",
+      "ROLLBACK_MAY_NOT_YET_RESET_ALL_EPHEMERAL_LOCAL_EXECUTION_STATE"
+    ],
+    "assumptions": [
+      "THE_CURRENT_C1_TARGET_AND_V18_GROUP_G_REMAIN_ACTIVE_AT_THIS_BASE",
+      "EXISTING_CAPSULE_V2_AND_ROOT3_EFFECT_BROKER_ARTIFACTS_REMAIN_VALID PREMISES"
+    ],
+    "non_goals": [
+      "NO_C1_CLOSURE_FROM_THEOREM_ALONE",
+      "NO_C2_CLOSURE",
+      "NO_COMPOSITION_TERMINAL_SUCCESS_NONINFERIORITY",
+      "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+      "NO_TERMINAL_COMPLETION_CLAIM"
+    ],
+    "next_action": "OPEN_GUARDED_PR__FORMALIZE_TWO_CUT_CERTIFICATE__INDEPENDENTLY_VERIFY_BOOLEAN_AND_GRAPH_CORE__BIND_ONLY_ZERO_CREDIT_CANDIDATE_ARTIFACTS",
+    "supersession_conditions": [
+      "C1_IS_ALREADY_CLOSED_BY_A_SCOPE_COMPLETE_RECEIPT",
+      "CURRENT_ACTIVE_ZERO_REALITY_CUT_SUPERSEDES_GROUP_G",
+      "A_LOWER_NUMBER_OPEN_PR_CLAIMS_THE_SAME_BLOCKER_LEASE",
+      "A_STRONGER_EXISTING_CERTIFICATE_DELETES_THE_TWO_CUT_ROUTE"
+    ],
+    "supersedes": "CLOSED_STALE_PR_2262_ONLY__NO_CREDIT"
+  },
+  "recursive_obs": {
+    "goal": "PERMANENT_OPUS55_USEFUL_CAPABILITY_OWNERSHIP",
+    "capability": "MULTI_CAPABILITY_COMPOSITION__ZERO_CRITICAL_INVARIANT_FAILURES",
+    "blocker": "C1_CLOSED_WORLD_CAPSULE_MEDIATION_TOTALITY",
+    "deletion_first_order": [
+      "DELETE_OPEN_ENDED_CHANNEL_TYPE_ENUMERATION",
+      "BYPASS_WHOLE_LEGACY_ASTRA_SCOPE_IN_FAVOR_OF_FROZEN_ACCEPTANCE_CAUSAL_SCOPE",
+      "REUSE_CAPSULE_V2_GUARD_V2_ROOT3_BROKER_MONOTONE_DENY",
+      "COMPOSE_INPUT_CUT_AND_EFFECT_CUT",
+      "CONFIGURE_ONLY_IF_IMPLEMENTATION_BINDING_REQUIRES_IT",
+      "INTEGRATE_ONLY_MINIMAL_BOUNDARY_GLUE"
+    ],
+    "route_frontier": {
+      "discovery_required": true,
+      "observed_current_base": "ef3e99ca90e9e30eee186a506e94f31c4a7f0da9",
+      "challengers": [
+        "OPEN_ENDED_CHANNEL_CLASS_ENUMERATION",
+        "WHOLE_ASTRA_PATCH",
+        "ACCEPTANCE_RELEVANT_TWO_CUT_CAUSAL_DOMINANCE"
+      ],
+      "selected": "ACCEPTANCE_RELEVANT_TWO_CUT_CAUSAL_DOMINANCE",
+      "selection_reason": "UNIVERSAL_OVER_CHANNEL_TYPE_AND_DIRECTLY_MATCHES_C1_CAUSAL_LOAD_BEARING_SCOPE_WITH_ZERO_FRESH_REALITY",
+      "unresolved_plausible_dominator": false
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "C1_ACCEPTANCE_RELEVANT_TWO_CUT_001",
+    "inputs": "Directed causal influence graph for frozen composition execution; provenance-classified ingress values; capsule cutpoint; trusted immutable config; declared current external observations; auxiliary observations; material effect requests",
+    "environment_state": "V18 zero-reality epoch",
+    "allowed_information": "Existing canonical evidence and synthetic/formal countermodels only",
+    "required_output_or_action": "A theorem/certificate whose premises are sufficient for C1 and whose failure yields a concrete bypass class",
+    "success_condition": "If all acceptance-relevant positive information paths hit the fail-closed ingress cut, all material effect paths hit the Root3 broker cut, non-cut auxiliary influence is veto-only, and rollback recreates the same cutpoint state, then no untracked channel can positively create/alter acceptance-relevant state or committed effects",
+    "failure_condition": "Any path from unbound ambient state to later acceptance-relevant decision state bypasses ingress; any auxiliary channel can parameterize/authorize a committed effect; or rollback preserves unbound mutable state",
+    "terminal_consequence": "Reduces C1 to finite implementation dominance premises; only a separately independently verified implementation receipt may close C1",
+    "verification_route": "Formal graph-cut argument plus independent symbolic Boolean check and explicit countermodels for missing ingress cut, missing effect cut, or non-reset rollback",
+    "dependency_boundary": "Frozen MULTI_CAPABILITY_COMPOSITION acceptance scope",
+    "scope": "C1 only"
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "NO_UNTOUCHED_TASK_OR_PROMOTION"
+  },
+  "qualification_stage": "ZERO_REALITY_PREPROOF",
+  "terminal_proof_control": {
+    "proof_obligation": "C1_CLOSED_WORLD_CAPSULE_MEDIATION_TOTALITY",
+    "hole_type": "UNBOUNDED_CAUSAL_CHANNEL_ENUMERATION",
+    "expected_certificate_or_receipt": "C1_ACCEPTANCE_RELEVANT_TWO_CUT_THEOREM_PLUS_INDEPENDENT_SYMBOLIC_VERIFICATION",
+    "validator": "GRAPH_CUT_DOMINANCE_AND_BOOLEAN_NONINTERFERENCE_CHECK",
+    "maximum_cheap_test_cost": 0,
+    "prerequisites": [
+      "CAPSULE_V2_GUARD_V2",
+      "ROOT3_MONOTONE_DENY_EFFECT_MEDIATION",
+      "KNOWN_LEGACY_ASTRA_BYPASS_COUNTEREXAMPLE"
+    ],
+    "contamination_risk": "NONE",
+    "reversibility": "FULL",
+    "falsification_condition": "ONE_BYPASS_PATH_OR_ONE_AUXILIARY_POSITIVE_AUTHORITY_COUNTERMODEL",
+    "critical_path_relation": "DIRECT_ACTIVE_ROOT3_C1"
+  },
+  "continuous_obs": {
+    "schema": "PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V18.json",
+      "canonical/governance/COMPOSITION_ACCEPTANCE_QUOTIENT_CAPSULE_MINIMUM_CUT_ACTIVATION_20261005_V1.json",
+      "canonical/governance/COMPOSITION_STATE_CAPSULE_NO_BYPASS_TRUTH_REPAIR_20261005_V1.json",
+      "canonical/runtime/composition_state_capsule_guard_v2.py",
+      "canonical/governance/ROOT3_MONOTONE_DENY_OBSERVATION_CHANNEL_IMMUNITY_BREAKTHROUGH_20261005_V1.json"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "obs_layers_current": true,
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": true,
+    "information_boundary_complete": true,
+    "information_policy": "NO_NEW_REALITY",
+    "dependencies": []
+  },
+  "reality_query_admission": {
+    "proof_obligation": "C1_CLOSED_WORLD_CAPSULE_MEDIATION_TOTALITY",
+    "existing_evidence_search": "CURRENT_C1_ARTIFACTS_AND_COUNTEREXAMPLE_ALREADY_BOUND",
+    "evidence_scope_equivalence": "ZERO_REALITY_DEDUCTIVE",
+    "deductive_closure": "THEOREM_ATTEMPT_ONLY",
+    "counterfactual_terminal_distinctions": "THEOREM_VALID_REDUCES_C1_IMPLEMENTATION_CUT__INVALID_LEAVES_CURRENT_C1_UNCHANGED",
+    "dominated_observations_deleted": [
+      "FRESH_TERMINAL_CASES",
+      "REPEAT_LOCAL_CAPSULE_TESTS"
+    ],
+    "candidate_observations": [],
+    "minimum_reality_cut": [],
+    "terminal_decision_value": "NO_REALITY_QUERY_REQUIRED",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "global_cut_snapshot": "V18_GROUP_G",
+    "global_cut_membership": true
+  },
+  "global_terminal_proof_cut": {
+    "graph_snapshot": "14_OF_38_PROVED__24_OPEN",
+    "existing_evidence_saturation": "C1_CURRENT_REPO_EVIDENCE",
+    "deductive_closure": "ACTIVE_C1_C2_COMPOSITION_MINIMUM_CUT",
+    "shared_residual_compression": "C1_CAUSAL_SCOPE_COMPRESSION",
+    "candidate_observations": [],
+    "dominance_deletions": [
+      "OPEN_ENDED_SIDE_CHANNEL_ENUMERATION"
+    ],
+    "exact_global_minimum_reality_cut": "V18_ZERO_REALITY_GROUP_G",
+    "proposed_action_membership": true,
+    "terminal_decision_value": "DIRECT_C1_CERTIFICATE_COMPRESSION"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_C1_CLOSURE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_COMPLETION"
+  ]
+}
