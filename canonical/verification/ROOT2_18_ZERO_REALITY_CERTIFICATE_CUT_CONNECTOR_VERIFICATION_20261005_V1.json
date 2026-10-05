@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_ZERO_REALITY_CERTIFICATE_CUT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_ROOT2_18_COVERAGE__SEVEN_GROUPS_PLUS_ONE_DEFERRED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_18_ZERO_REALITY_CERTIFICATE_CUT_V1.json",
+    "git_blob_sha": "6ec6de4472342297fca54771499cce385cffeb9f"
+  },
+  "authority": {
+    "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f"
+  },
+  "checks": {
+    "root2_exact_count_18": true,
+    "zero_reality_work_group_count_7": true,
+    "unique_zero_reality_addressed_root2_17": true,
+    "deferred_exactly_tb_science": true,
+    "addressed_union_plus_deferred_equals_exact_active_root2_set": true,
+    "cursor_absent_from_owner_or_platform_result_batch": true,
+    "cursor_present_in_stronger_scope_complete_proof_group": true,
+    "zero_root3_only_predicates_in_current_root2_work_groups": true,
+    "all_work_groups_zero_reality": true,
+    "zero_credit": true,
+    "no_execution_promotion_or_fresh_reality_authority": true
+  },
+  "deductions": [
+    "CURRENT_V13_GLOBAL_CUT_CONTAINS_STALE_CURSORBENCH_OWNER_RESULT_WORK_AFTER_ACTIVE_ROOT2_V4_DELETED_THAT_ROUTE",
+    "CURRENT_V13_GLOBAL_CUT_MIXES_ROOT3_ONLY_WORK_INTO_A_PHASE_WHOSE_ACTIVE_TERMINAL_NEXT_ACTION_IS_ROOT2_18_FIRST",
+    "ROOT2_FIRST_ZERO_REALITY_WORK_CAN_BE_REPRESENTED_BY_SEVEN_CURRENT_GROUPS_ADDRESSING_17_OF_18_ROOT2_PREDICATES",
+    "TB_SCIENCE_GE_58_7_IS_THE_SINGLE_ROOT2_PREDICATE_INTENTIONALLY_DEFERRED_BEYOND_THE_ZERO_REALITY_FIXED_POINT",
+    "CURSORBENCH_REUSES_THE_EXISTING_STRONGER_PROOF_RACE_WITHOUT_A_NEW_GROUP_AND_WITHOUT_REOPENING_OWNER_OR_PUBLIC_SUBMISSION_WAIT"
+  ],
+  "exact_sets": {
+    "zero_reality_addressed": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "MYSTERYMECHANISM_GE_49_55",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "PROWORK_GDPVAL_GE_1846",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+    ],
+    "deferred": [
+      "TB_SCIENCE_GE_58_7"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
