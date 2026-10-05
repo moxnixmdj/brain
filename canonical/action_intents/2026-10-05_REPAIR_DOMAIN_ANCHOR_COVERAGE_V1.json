@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-DOMAIN-ANCHOR-COVERAGE-20261005-V1",
+  "status": "CANDIDATE__EXACT_BASE_BOUND__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "4dc2758dcf69c1dab25aed6d173f81449529ba23",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "V21_J_DOMAIN_ANCHOR_MARKS_TWO_FIRST_PARTY_CAPABILITY_SURFACES_AS_UNOBSERVED_DESPITE_EXPLICIT_OPUS55_SYSTEM_CARD_SECTIONS",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::V21_J_DOMAIN_ANCHOR_TWO_FIRST_PARTY_SURFACES_STALE",
+  "expected_parent_frontier_change": "Replace source-incomplete status for the two affected J-domain anchors with primary-source-observed protocol-bound surfaces while preserving exhaustive_behavior_universe=false, lossless_transform_mapping=false, all eight meta obligations open, terminal=false, and zero credit.",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "CAPABILITY_EVIDENCE_PRESENT__CURRENT_DOMAIN_ANCHOR_PROJECTION_STALE",
+  "prior_work_checked": [
+    "CURRENT_ZERO_REALITY_MINIMUM_CUT_V21 active J_DOMAIN_BEHAVIOR_DECOMPOSITION_OR_COUNTEREXAMPLE",
+    "OPUS55_DOMAIN_BEHAVIOR_UNIVERSE_ANCHOR_20261005_V1 currently records empty observed_surfaces for HEALTHCARE and MATHEMATICAL_REASONING_ARXIVMATH",
+    "Claude Opus 5.5 System Card Section 8.15 explicitly evaluates healthcare behavior",
+    "Claude Opus 5.5 System Card Section 8.9 explicitly evaluates ArXivMath research-level mathematics",
+    "No current open PR was found owning this exact anchor-staleness blocker"
+  ],
+  "stop_condition": "Stop after primary-source model-specific surfaces and protocol facts are content-addressed as a zero-credit supplement, with no exhaustiveness, parity, family, capability, ownership, execution, promotion, or fresh-reality claim.",
+  "recursive_obs": {
+    "real_outcome": "J domain scheduling no longer treats two explicitly documented Opus 5.5 capability surfaces as absent.",
+    "required_capability": "FAIL_CLOSED_PRIMARY_SOURCE_DOMAIN_ANCHOR_RECONCILIATION",
+    "selected_surviving_route": "ADD_ZERO_CREDIT_PRIMARY_SOURCE_SUPPLEMENT__DO_NOT_EDIT_ACCEPTANCE_COUNTS",
+    "why_selected_route_is_fastest_sufficient": "The missing information is already public in the first-party system card; no benchmark execution or model query is required.",
+    "deleted_or_bypassed_paths": [
+      "FRESH_HEALTHCARE_EVALUATION",
+      "FRESH_ARXIVMATH_EVALUATION",
+      "INFER_EXHAUSTIVENESS_FROM_ONE_BENCHMARK",
+      "INFER_INTRINSIC_OPUS55_HEALTHCARE_SCORE_FROM_FALLBACK_CONTAMINATED_DEPLOYED_RESULT"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
