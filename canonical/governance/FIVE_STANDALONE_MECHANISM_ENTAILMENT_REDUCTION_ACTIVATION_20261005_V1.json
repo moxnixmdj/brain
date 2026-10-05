@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__SCHEDULING_PRECEDENCE__FIVE_PRIOR_STANDALONE_MECHANISM_PROGRAMS_REDUCED_TO_ONE_CURRENTLY_MANDATORY_SPECIFIC_MECHANISM_PROGRAM__FOUR_OPTIONAL_EVIDENCE_ROUTES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_20261005_V1.json",
+    "git_blob_sha": "5f56aff3073ac7e5113805915fa0d37fbb273282"
+  },
+  "verification": {
+    "path": "canonical/verification/FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "0ea321f408d0b2ee12d24654ed0eafde0db56c15"
+  },
+  "precedence": {
+    "over": "canonical/governance/SEVEN_LEAF_PERFORMANCE_OBLIGATION_COMPRESSION_V1.json",
+    "scope": "MANDATORY_SPECIFIC_MECHANISM_PROGRAM_SCHEDULING_ONLY",
+    "reason": "The later active target-behavior mechanism-entailment guard forbids mechanism proof spend before target entailment."
+  },
+  "effects": {
+    "preserve_mandatory_specific_mechanism_program": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+    ],
+    "quarantine_from_mandatory_specific_mechanism_program_status": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+    ],
+    "preserve_quarantined_as_optional_sufficient_evidence_routes": true,
+    "prior_specific_mechanism_program_count": 5,
+    "current_specific_mechanism_program_count": 1,
+    "specific_mechanism_program_reduction_fraction": 0.8,
+    "observable_target_obligations_deleted": 0,
+    "benchmark_thresholds_deleted": 0
+  },
+  "next": [
+    "RECOMPUTE_AFFECTED_BROAD_FAMILY_GAPS_ONLY_ON_OBSERVABLE_TARGET DIMENSIONS",
+    "REUSE_EXISTING STRONGER RECEIPTS AND PUBLIC BENCHMARK PREDICATES BEFORE INVENTING ANY NEW MECHANISM-SPECIFIC PROGRAM",
+    "PRESERVE BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001 AS DIRECTLY TARGET-ENTAILED FOR COMPUTER_AND_BROWSER_USE",
+    "WAKE ANY OF THE FOUR QUARANTINED MECHANISMS ONLY ON A NEW VERIFIED TARGET-ENTAILMENT RECEIPT"
+  ],
+  "hard_rules": [
+    "NO_TARGET_WEAKENING",
+    "NO_DELETION_OF_BROAD_FAMILY_SCOPE",
+    "NO_ACCEPTANCE_CREDIT_FROM_SCHEDULING_COMPRESSION",
+    "NO_FRESH_REALITY_FOR_QUARANTINED_MECHANISMS",
+    "FAIL_CLOSED_ON_NEW_CONTRADICTORY_ENTAILMENT_EVIDENCE"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
