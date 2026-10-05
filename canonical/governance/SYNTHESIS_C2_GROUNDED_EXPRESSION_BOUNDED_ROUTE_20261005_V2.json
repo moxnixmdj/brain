@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_C2_GROUNDED_EXPRESSION_BOUNDED_ROUTE_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PREVERIFICATION_ADVERSARIAL_REPAIR__AMBIGUOUS_CITATION_ENCODING_FAIL_CLOSED__SECTIONED_EXACT_ORDER_PRESERVED__INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes_candidate": {
+    "path": "canonical/governance/SYNTHESIS_C2_GROUNDED_EXPRESSION_BOUNDED_ROUTE_20261005_V1.json",
+    "reason": "V1 exact runtime/test bytes were falsified before independent verification by two admissible-boundary adversarial cases; preserve V1 only as historical candidate state."
+  },
+  "causal_interface": "SYNTHESIS_C2_GROUNDED_EXPRESSION_AND_CONSTRAINT_REALIZATION",
+  "authorities": {
+    "causal_basis": {
+      "path": "canonical/governance/SYNTHESIS_TYPED_DOMAIN_CAUSAL_BASIS_COMPRESSION_20261005_V1.json",
+      "git_blob_sha": "2e6432cc122ce5b8a575fff11813a7be3734833c"
+    },
+    "runtime": {
+      "path": "canonical/runtime/synthesis_grounded_expression_ir_v1.py",
+      "git_blob_sha": "0709b7d43a069eaa9eb3240df28789a9107a36db",
+      "repair_commit": "48de624a2e7ea6e542e8f7e849bccdef2269baf6"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_grounded_expression_ir_v1.py",
+      "git_blob_sha": "f28e5648e7327fdd6cba54c602016485e0eb66c5",
+      "regression_commit": "e78874c47254d73e8f2de11c594eae7a65b8e6fe"
+    }
+  },
+  "falsified_v1_cases": [
+    {
+      "id": "C2_V1_PROVENANCE_CITATION_DELIMITER_COLLISION",
+      "witness": "A single provenance locator such as p4;FAKE@p9 serialized as [src:LEDGER@p4;FAKE@p9], which is textually indistinguishable from multiple source/locator components under the route's own delimiter syntax.",
+      "violated_property": "PROVENANCE_BINDINGS_SURVIVE_TO_REALIZED_MATERIAL_CLAIMS_WHERE_REQUIRED",
+      "repair": "Fail closed on citation-delimiter characters ';' and '@' inside locator values so the bounded inline citation encoding remains unambiguous."
+    },
+    {
+      "id": "C2_V1_SECTION_GROUPING_REORDERS_INTERLEAVED_ITEMS",
+      "witness": "SECTIONED_MARKDOWN with selected item order Findings(A), Risks(B), Findings(C) grouped by section into A,C,B and then tripped INTERNAL_ITEM_PRESERVATION_FAILURE.",
+      "violated_property": "EXACT_ITEM_ORDER_OR_INPUT_ORDER under an otherwise supported SECTIONED_MARKDOWN request.",
+      "repair": "Render section headings as ordered stream boundaries; repeat a heading when a section recurs instead of regrouping selected items."
+    }
+  ],
+  "admitted_domain": {
+    "upstream_preconditions": [
+      "CONTENT_ITEMS_ARE_ALREADY_SELECTED_BY_UPSTREAM_SALIENCE_ADJUDICATION",
+      "EVERY_ITEM_IS_ALREADY_SOURCE_GROUNDED_BY_UPSTREAM_SEMANTIC_GROUNDING",
+      "ITEM_KIND_IS_CLAIM_UNCERTAINTY_OR_CONFLICT",
+      "EVERY_ITEM_HAS_NONEMPTY_SOURCE_PROVENANCE",
+      "MATERIAL_ITEM_TEXT_IS_ALREADY_SEMANTICALLY_FINAL_FOR_VERBATIM_REALIZATION"
+    ],
+    "supported_output_formats": [
+      "BULLETS",
+      "PARAGRAPHS",
+      "SECTIONED_MARKDOWN"
+    ],
+    "supported_constraint_language": [
+      "EXACT_ITEM_ORDER_OR_INPUT_ORDER",
+      "REQUIRED_AND_ALLOWED_SECTIONS",
+      "MAX_ITEM_COUNT_AS_FEASIBILITY_GATE",
+      "MAX_CHARACTER_COUNT_AS_FEASIBILITY_GATE",
+      "HEADING_LEVEL",
+      "TITLE_REQUIREMENT",
+      "INLINE_SOURCE_ID_CITATIONS_WITH_UNAMBIGUOUS_SOURCE_AND_LOCATOR_TOKENS",
+      "VERBATIM_GROUNDED_STYLE"
+    ]
+  },
+  "repaired_guarantees": [
+    "EVERY_PASSING_INPUT_ITEM_IS_RENDERED_EXACTLY_ONCE_IN_THE_ALREADY_SELECTED_ORDER",
+    "SECTIONED_MARKDOWN_NEVER_REGROUPS_SELECTED_ITEMS",
+    "INLINE_PROVENANCE_SERIALIZATION_IS_UNAMBIGUOUS_OVER_THE_ADMITTED_SOURCE_ID_AND_LOCATOR_ALPHABET",
+    "NO_CONTENT_ITEM_IS_DROPPED_TO_SATISFY_A_BUDGET",
+    "NO_MATERIAL_CLAIM_IS_SEMANTICALLY_REWRITTEN",
+    "NO_NEW_MATERIAL_CLAIM_IS_INTRODUCED",
+    "UNCERTAINTY_AND_CONFLICT_STATE_IS_EXPLICIT_IN_RENDERED_OUTPUT",
+    "UNKNOWN_WRITING_CONSTRAINTS_FAIL_CLOSED",
+    "INFEASIBLE_LENGTH_OR_ITEM_BUDGET_FAILS_CLOSED"
+  ],
+  "explicit_residuals": {
+    "still_open": [
+      "ARBITRARY_NATURAL_LANGUAGE_STYLE_OR_TONE_TRANSFORMATION",
+      "SEMANTIC_PARAPHRASING_WHILE_PRESERVING_SUPPORT",
+      "FREE_FORM_CONNECTIVE_PROSE_GENERATION",
+      "ARBITRARY_DOCUMENT_SPREADSHEET_SLIDE_LAYOUT_REALIZATION",
+      "UPSTREAM_SOURCE_GROUNDING_C0",
+      "UPSTREAM_SALIENCE_AND_ABSTENTION_C1",
+      "GENERAL_COMMUNICATION_AND_SYNTHESIS_OPUS55_PARITY"
+    ]
+  },
+  "proof_obligations": [
+    "EXACT_RUNTIME_AND_TEST_BLOBS_MATCH_V2_FROZEN_HASHES",
+    "ALL_COMMITTED_UNIT_TESTS_PASS",
+    "CITATION_DELIMITER_COLLISION_FAILS_CLOSED",
+    "INTERLEAVED_SECTIONED_ITEM_ORDER_IS_PRESERVED",
+    "UNKNOWN_CONSTRAINT_FAILS_CLOSED",
+    "MISSING_PROVENANCE_FAILS_CLOSED",
+    "INFEASIBLE_BUDGET_FAILS_CLOSED_WITHOUT_DROP_OR_TRUNCATION",
+    "ZERO_TERMINAL_PROMOTION_FAMILY_OR_CAPABILITY_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_WRITING_OR_SYNTHESIS_PARITY",
+    "NO_C0_OR_C1_CLOSURE",
+    "NO_SYNTHESIS_TYPED_DOMAIN_SCOPE_COMPLETENESS",
+    "NO_SYNTHESIS_MATCHED_QUALITY_NONINFERIORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "REBIND_PUBLIC_RUNNER_CAPSULE_TO_V2_EXACT_BLOBS__RUN_INDEPENDENT_TESTS__ONLY_THEN_RECOMPUTE_C2_RESIDUAL"
+}
