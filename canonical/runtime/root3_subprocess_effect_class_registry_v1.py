@@ -107,9 +107,7 @@ class EffectClassRegistryError(RuntimeError):
     pass
 
 
-def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
-    child = compile_child_registry(root)
-    rows = child["whole_runtime"]["call_sites"]
+def classify_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
     observed: dict[tuple[str, int, str], dict[str, Any]] = {}
     for row in rows:
         key = (
@@ -197,6 +195,12 @@ def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
         "promotion_authority": False,
         "fresh_reality_authority": False,
     }
+
+
+def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
+    child = compile_child_registry(root)
+    rows = child["whole_runtime"]["call_sites"]
+    return classify_rows(rows)
 
 
 if __name__ == "__main__":
