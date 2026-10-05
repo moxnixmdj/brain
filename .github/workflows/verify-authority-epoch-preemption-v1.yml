@@ -26,5 +26,5 @@ jobs:
         run: |
           set -euo pipefail
           git fetch origin main
-          expected=$(python -c "import json; print(json.load(open('canonical/governance/AUTHORITY_EPOCH_PREEMPTION_V2.json', encoding='utf-8'))['start_authority_epoch_sha256'])")
+          expected=$(python -c "import json; print(json.load(open('canonical/governance/AUTHORITY_EPOCH_PREEMPTION_V3.json', encoding='utf-8'))['start_authority_epoch_sha256'])")
           python canonical/runtime/authority_epoch_guard_v1.py --ref origin/main --expected "$expected"
