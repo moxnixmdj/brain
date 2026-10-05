@@ -1,0 +1,25 @@
+name: Verify Opus 5.5 GA+beta SDK typed schema snapshot V2
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/OPUS55_FIRST_PARTY_SDK_TYPED_SCHEMA_SNAPSHOT_20261005_V1.json
+      - canonical/runtime/verify_opus55_first_party_sdk_typed_schema_snapshot_v2.py
+      - .github/workflows/verify-opus55-sdk-schema-snapshot-v2.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Reconstruct frozen Anthropic GA+beta schema snapshot
+        run: python canonical/runtime/verify_opus55_first_party_sdk_typed_schema_snapshot_v2.py
