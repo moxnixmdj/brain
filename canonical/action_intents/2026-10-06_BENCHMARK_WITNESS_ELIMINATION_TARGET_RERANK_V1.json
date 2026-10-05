@@ -3,7 +3,7 @@
   "action_id": "BENCHMARK-WITNESS-ELIMINATION-TARGET-RERANK-20261006-SOL",
   "status": "CANDIDATE__CURRENT_BASE_BOUND__ZERO_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "73705cc03e70e89aa901f561d4bda3e7ed719881",
+  "canonical_base_commit": "0598f4738f7cd71a6a22323788ea7e48d021b427",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
@@ -17,7 +17,7 @@
   "weakens_existing_guard": false,
   "v22_prewrite_admission": {
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "active_pointer_git_blob_sha": "0f2afe854b2126360f4b4b68227d89baf940c699",
+    "active_pointer_git_blob_sha": "4b53c382945552583a6279550594a1f0f890c11f",
     "mode": "ACTIVE_INTERFACE",
     "interface": "EXTERNAL_RESULT_OR_ACCESS",
     "target_truth_obligations": [
@@ -25,7 +25,7 @@
       "FINANCE_AGENT_V2_GE_58_59",
       "MYSTERYMECHANISM_GE_49_55"
     ],
-    "proof_state_reachability": "Deletes one falsified universal-certificate route and concentrates certificate synthesis on two still-information-positive scope-superset candidates without benchmark execution.",
+    "proof_state_reachability": "Deletes one information-theoretically falsified universal route and ranks two surviving scope-superset certificate classes under the active V3 rule that every load-bearing premise must be target-scoped and content-addressed.",
     "fresh_reality_authority": false,
     "terminal_credit_delta": 0,
     "currentness": {
@@ -53,7 +53,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "73705cc03e70e89aa901f561d4bda3e7ed719881",
+    "canonical_base_commit": "0598f4738f7cd71a6a22323788ea7e48d021b427",
     "real_outcome": "Spend no wall-clock time waiting on providers when certificate synthesis remains possible; spend no synthesis effort on routes already disproved by information theory.",
     "required_capability": "IDENTIFIABILITY_AWARE_BENCHMARK_WITNESS_ELIMINATION",
     "obs_goal": {
