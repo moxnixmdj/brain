@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FALSIFICATION_CONTROL_LOOP_LOCAL_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "LOCAL_DETERMINISTIC_REPLAY_PASS__10_OF_10__CURRENT_GRAPH_COMPILES__NOT_INDEPENDENT__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {"path":"canonical/runtime/terminal_falsification_control_loop_v1.py","git_blob_sha":"32645e84a2ff9261883fce8a33f221898242d0c4"},
+    "tests": {"path":"canonical/tests/test_terminal_falsification_control_loop_v1.py","git_blob_sha":"c88c6af47798de823c1ff0a8351afa026d1ccd2d"},
+    "governance": {"path":"canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V1.json","git_blob_sha":"89babb15eee427ed96a885ab96fd7bab5e8de362"}
+  },
+  "result": {
+    "tests_run": 10,
+    "failures": 0,
+    "errors": 0,
+    "falsified_route_death_enforced": true,
+    "live_successor_repair_enforced": true,
+    "unrepaired_falsified_necessity_blocks_terminal": true,
+    "nonexhaustive_survival_zero_proof_credit": true,
+    "proved_label_requires_content_addressed_receipts": true,
+    "universe_authority_strict_precedence": true,
+    "nonuniverse_reachability_per_cost_ordering": true,
+    "missing_or_falsified_dependency_fail_closed": true,
+    "current_graph_terminal_ready": false,
+    "current_graph_universe_complete": false,
+    "current_graph_proof_credit_delta": 0,
+    "current_graph_unrepaired_dead_claims": [],
+    "current_graph_blocked_claims": [],
+    "current_graph_schedule": [
+      "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
+      "C_BENCHMARK_WITNESS_ELIMINATION_V2",
+      "C_EFFECT_BOUNDARY_CLOSURE_V2",
+      "C_CONDITION_RESTRICTION_AND_INTERACTION_CLOSURE_V2",
+      "C_CAPABILITY_OWNERSHIP_DONOR_INDEPENDENCE_V1"
+    ],
+    "dead_repaired_routes": [
+      "C_TERMINAL_BASIS_CURRENT32",
+      "C_ROOT3_SHARED_UNIVERSAL",
+      "C_META_BEHAVIORAL_QUOTIENT"
+    ]
+  },
+  "independence": {
+    "independent_remote_replay_completed": false,
+    "attempted_carrier": "brain-h100-independent-replay-v1",
+    "carrier_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "attempt_result": "EXECUTION_BLOCKED_BY_TOOL_SAFETY_BOUNDARY",
+    "claim": "NO_INDEPENDENT_REPLAY_CREDIT"
+  },
+  "hard_nonclaims": [
+    "NO_TARGET_UNIVERSE_COMPLETENESS_PROVED",
+    "NO_CURRENT_TRUTH_OBLIGATION_CLOSED",
+    "NO_TERMINAL_FINALITY_PROVED",
+    "NO_INDEPENDENT_VERIFICATION_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
