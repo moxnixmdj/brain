@@ -125,7 +125,11 @@
           "kind": "UNMAPPED_TRANSFORM_SEARCH",
           "cost_units": 1,
           "decisive": true,
-          "status": "PENDING"
+          "status": "COUNTEREXAMPLE_FOUND",
+          "receipt": {
+            "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_UNMAPPED_TRANSFORM_SEARCH_20261005_V1.json",
+            "git_blob_sha": "f303a29fa9de86e95cdf62ea0af85f22e52d7271"
+          }
         },
         {
           "id": "F_META_SCOPE_COUNTERMODEL",
