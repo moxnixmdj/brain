@@ -11,9 +11,21 @@ _ACTIVE_CONTINUOUS_OBS_MODULE=None
 _ACTIVE_CONTINUOUS_OBS_MISSION_ID=None
 
 def _authorize_external_information(kind,payload):
+    raw_kind=str(kind)
+    # Information-authority routes must be observational only.  In particular,
+    # urllib.Request can silently turn a data-bearing request into POST, while
+    # the old bridge classified every "urlopen" as EXACT_FETCH.  Reject any
+    # mutating/ambiguous method or request body before either the external
+    # bridge or the direct urllib fallback can perform a network effect.
+    if raw_kind=="urlopen":
+        request_payload=payload if isinstance(payload,dict) else {}
+        method=str(request_payload.get("method") or "GET").upper()
+        if method not in {"GET","HEAD"}:
+            raise Blocker("EXTERNAL_INFORMATION_HTTP_METHOD_FORBIDDEN:"+method)
+        if request_payload.get("data_b64") is not None:
+            raise Blocker("EXTERNAL_INFORMATION_HTTP_BODY_FORBIDDEN")
     if _ACTIVE_CONTINUOUS_OBS_CONTEXT is None or _ACTIVE_CONTINUOUS_OBS_MODULE is None:
         raise Blocker("CONTINUOUS_OBS_INFORMATION_CONTEXT_NOT_BOUND")
-    raw_kind=str(kind)
     if raw_kind in {"http_get","urlopen"}:
         action_kind="EXACT_FETCH"
         source=str((payload or {}).get("url") or "")
