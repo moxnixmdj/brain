@@ -3,7 +3,7 @@
   "action_id": "BENCHMARK-WITNESS-ELIMINATION-TARGET-RERANK-20261006-SOL",
   "status": "CANDIDATE__CURRENT_BASE_BOUND__ZERO_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "0598f4738f7cd71a6a22323788ea7e48d021b427",
+  "canonical_base_commit": "40cc13174ac15131d59134a5bb869af602b40358",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
@@ -46,14 +46,20 @@
       "decisive_question": "Which current private-score targets still admit a sound public-contract scope-superset theorem, and which are already blocked by nonidentifiability or explicit public/private mismatch?",
       "known_counterexamples_checked": true,
       "counterexample_receipts": [
-        "canonical/governance/MYSTERYMECHANISM_IRREDUCIBLE_PRIVATE_SCORE_GATE_20261005_V1.json",
-        "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json"
+        {
+          "path": "canonical/governance/MYSTERYMECHANISM_IRREDUCIBLE_PRIVATE_SCORE_GATE_20261005_V1.json",
+          "git_blob_sha": "44a2f94be04d51773d994741eb3aa6795da92949"
+        },
+        {
+          "path": "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json",
+          "git_blob_sha": "3f09067d0fa174c343f2f157495d3654a15b3965"
+        }
       ]
     }
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "0598f4738f7cd71a6a22323788ea7e48d021b427",
+    "canonical_base_commit": "40cc13174ac15131d59134a5bb869af602b40358",
     "real_outcome": "Spend no wall-clock time waiting on providers when certificate synthesis remains possible; spend no synthesis effort on routes already disproved by information theory.",
     "required_capability": "IDENTIFIABILITY_AWARE_BENCHMARK_WITNESS_ELIMINATION",
     "obs_goal": {
@@ -103,8 +109,8 @@
         "INTEGRATE"
       ],
       "routes_ranked": [
-        "AUTOMATIONBENCH_FINITE_STATE_TRANSITION_GRAMMAR_SUPERSET",
-        "FINANCE_AGENT_PUBLISHED_CONTRACT_SUPERSET",
+        "AUTOMATIONBENCH_FINITE_STATE_TRANSITION_GRAMMAR_SUPERSET_FALSIFICATION_UNDER_V3",
+        "FINANCE_AGENT_PUBLISHED_CONTRACT_SUPERSET_FALSIFICATION_UNDER_V3",
         "MYSTERYMECHANISM_ONLY_IF_RESTRICTED_MECHANISM_CLASS_APPEARS",
         "EXACT_EXTERNAL_RESULT_LAST"
       ],
@@ -122,7 +128,7 @@
         "UNRESTRICTED_MYSTERYMECHANISM_UNIVERSALITY_SEARCH"
       ],
       "adjacent_capabilities_absorbed": [
-        "benchmark witness elimination compiler",
+        "benchmark witness elimination compiler V3 proof-carrying admission",
         "falsification tournament",
         "finite-probe nonidentifiability theorem"
       ],
@@ -133,7 +139,10 @@
         "reused current V22 pointer",
         "reused existing witness-elimination synthesis",
         "reused MysteryMechanism nonidentifiability gate",
-        "reused AutomationBench public/private scope cut"
+        "reused AutomationBench public/private scope cut",
+        "revalidated Finance Agent v2 methodology distinction between unambiguous question design and LLM-jury evaluation",
+        "rebound tournament counterexamples to exact Git blob identities",
+        "reused V3 all-premise proof-carrying witness admission"
       ],
       "search_stop_decision": "Stop MysteryMechanism universal synthesis until a load-bearing mechanism-class restriction appears; continue AutomationBench grammar-superset falsification first.",
       "affected_layers_only_on_revalidation": true
