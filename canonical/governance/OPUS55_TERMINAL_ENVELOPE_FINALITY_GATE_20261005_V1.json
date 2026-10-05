@@ -1,0 +1,184 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TERMINAL_ENVELOPE_FINALITY_GATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FAIL_CLOSED_TWO_LAYER_FINALITY_GATE__PUBLIC_SOURCE_FIXED_POINT_FINITE__BEHAVIORAL_UNIVERSALITY_REMAINS_EXPLICIT__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Make terminal-envelope finality decidable without weakening the literal terminal objective by separating finite first-party public-source exhaustiveness from the strictly stronger claim that every useful Opus 5.5 behavior is covered.",
+  "authorities": {
+    "behavioral_contract_schema": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_SCHEMA_V1.json",
+      "git_blob_sha": "b173d8fc6e29df3cec3579954bb17c594308b151"
+    },
+    "behavioral_contract_law": {
+      "path": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+      "git_blob_sha": "5b70ed776f13194ea02d7df1d878a88386a48b61"
+    },
+    "first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    },
+    "surface_mapping": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+    },
+    "root1_v3_exhaustiveness_truth_repair": {
+      "path": "canonical/governance/ROOT1_ENVELOPE_V3_EXHAUSTIVENESS_QUARANTINE_20261005_V1.json",
+      "commit": "43a1e5c241aef4084cd675f782a24109eb62c1cf"
+    },
+    "root1_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "acceptance_basis_repair_v2": {
+      "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V2.json",
+      "git_blob_sha": "d2867bdcb4e2a721c2dbcde59100627508a7866a"
+    }
+  },
+  "problem": {
+    "observed_failure_mode": "A finite family/predicate frontier was previously at risk of being treated as globally exhaustive while first-party Opus 5.5 capability surfaces were still being discovered and mapped.",
+    "logical_error": "NO_POSITIVE_MISSING_FAMILY_GAP is not equivalent to ALL_USEFUL_CAPABILITIES_EXHAUSTIVELY_COVERED.",
+    "consequence": "Literal terminal finality cannot be authorized by closing the current predicate ledger alone."
+  },
+  "theorem": {
+    "name": "TWO_LAYER_TERMINAL_ENVELOPE_FINALITY",
+    "statement": "For the frozen Claude Opus 5.5 target, terminal envelope finality requires BOTH (A) a finite content-addressed fixed point over the authoritative public first-party capability source graph with lossless mapping of every capability-bearing semantic unit, AND (B) a behavioral-universality certificate showing that the resulting contracted behavior basis covers every useful target behavior admitted by the literal terminal objective. Layer A is decidable by finite graph closure. Layer B must not be inferred from Layer A, family count, benchmark count, absence of a known counterexample, or product-page enumeration.",
+    "terminal_gate": "PUBLIC_FIRST_PARTY_SOURCE_CLOSURE AND LOSSLESS_SURFACE_MAPPING AND BEHAVIORAL_UNIVERSALITY AND ACCEPTANCE_BASIS_COMPLETE AND ALL_REQUIRED_ACCEPTANCE_PROVED AND OWNERSHIP_COMPLETE"
+  },
+  "layer_a_public_first_party_source_closure": {
+    "target": "Claude Opus 5.5 released 2026-09-22",
+    "canonical_root_classes": [
+      "MODEL_SPECIFIC_RELEASE_PAGE",
+      "MODEL_SPECIFIC_SYSTEM_CARD",
+      "MODEL_SYSTEM_CARDS_INDEX",
+      "TRANSPARENCY_MODEL_REPORT",
+      "OPUS_PRODUCT_PAGE"
+    ],
+    "current_observed_roots": [
+      "https://www.anthropic.com/claude-opus-5-5",
+      "https://www.anthropic.com/system-cards",
+      "https://www.anthropic.com/transparency",
+      "https://www.anthropic.com/claude/opus"
+    ],
+    "graph_rule": "Starting from the canonical roots, follow only first-party links that materially assert or document Opus 5.5 model behavior, modality, capability evaluation, benchmark performance, tool/computer behavior, professional use, scientific/research behavior, or model-specific capability boundary. Normalize redirects and query variants before identity comparison.",
+    "content_addressing": [
+      "STORE_FETCH_TIMESTAMP",
+      "STORE_CANONICAL_NORMALIZED_URL",
+      "STORE_RESPONSE_OR_EXTRACTED_CONTENT_DIGEST",
+      "STORE_SOURCE_SECTION_OR_ANCHOR_FOR_EACH_SEMANTIC_UNIT",
+      "STORE_PARENT_LINK_EDGE_FOR_EACH_DISCOVERED_SOURCE"
+    ],
+    "semantic_extraction": {
+      "required_unit_classes": [
+        "MODEL_BEHAVIOR_CLAIM",
+        "MODALITY_CLAIM",
+        "BENCHMARK_OR_EVALUATION_DIMENSION",
+        "USEFUL_TASK_OR_WORKFLOW_CLAIM",
+        "CAPABILITY_BOUNDARY_OR_LIMITATION",
+        "MODEL_SPECIFIC_TOOL_OR_COMPUTER_USE_CLAIM"
+      ],
+      "extraction_rule": "Every capability-bearing heading, prose claim, table row, benchmark/evaluation row, figure caption with model-specific capability meaning, and explicit limitation must receive a stable semantic-unit id.",
+      "noncapability_quarantine": "Deployment policy, price, availability, generic safety policy, and organization-level statements may be excluded only with an explicit reason code showing they contain no target behavioral claim."
+    },
+    "mapping_partition": {
+      "required_states": [
+        "LOSSLESSLY_MAPPED_TO_EXISTING_BEHAVIOR_CONTRACT_OR_EXACT_FAMILY_UNION",
+        "OPEN_EXPLICIT_BEHAVIORAL_LEAF_OR_FAMILY_OBLIGATION",
+        "QUARANTINED_NONCAPABILITY_WITH_REASON"
+      ],
+      "invariant": "EVERY_EXTRACTED_SEMANTIC_UNIT_HAS_EXACTLY_ONE_TERMINAL_DISPOSITION",
+      "seal_requires_open_count": 0
+    },
+    "fixed_point_conditions": [
+      "ALL_CANONICAL_ROOTS_CONTENT_ADDRESSED",
+      "NO_NEW_CAPABILITY_BEARING_FIRST_PARTY_URL_REACHABLE_FROM_THE_CURRENT_GRAPH",
+      "ALL_DISCOVERED_CAPABILITY_SOURCES_CONTENT_ADDRESSED",
+      "ALL_CAPABILITY_BEARING_SEMANTIC_UNITS_EXTRACTED",
+      "EXTRACTED_UNIT_SET_EQUALS_MAPPED_PLUS_EXPLICITLY_QUARANTINED_NONCAPABILITY_SET",
+      "ZERO_UNRESOLVED_MAPPING_UNITS",
+      "INDEPENDENT_OMISSION_CHECK_PASSES"
+    ],
+    "independent_omission_check": "A verifier independent of the mapping author must re-enumerate headings/tables/figures/benchmark sections and fail if it finds any capability-bearing source edge or semantic unit absent from the frozen graph and mapping ledger.",
+    "result_name": "PUBLIC_FIRST_PARTY_SOURCE_CLOSURE"
+  },
+  "layer_b_behavioral_universality": {
+    "status": "OPEN__REQUIRED_FOR_LITERAL_TERMINAL_FINALITY",
+    "definition": "Every useful behavior the frozen Opus 5.5 target can materially perform under the terminal target rule is either exactly represented by the Brain's contracted behavioral basis or is losslessly implied by a proved composition of that basis.",
+    "why_layer_a_is_insufficient": [
+      "PUBLIC_DOCUMENTATION_CAN_BE_SELECTIVE",
+      "A_MODEL_CAN_HAVE_USEFUL_ELICITABLE_BEHAVIOR_NOT_NAMED_ON_PRODUCT_OR_SYSTEM_CARD_PAGES",
+      "BENCHMARK_AND_DOMAIN_LABELS_SAMPLE_BEHAVIOR_AND_DO_NOT_FORM_A UNIVERSAL BEHAVIOR GRAMMAR",
+      "ABSENCE_OF_A_CURRENT_CONSTRUCTIVE_COUNTEREXAMPLE_IS_NOT_A UNIVERSAL_PROOF"
+    ],
+    "admissible_closure_routes": [
+      {
+        "id": "UNIVERSAL_BEHAVIORAL_GRAMMAR_PROOF",
+        "rule": "Prove that every admissible useful target transformation can be normalized into the canonical behavioral-contract schema and losslessly decomposed into the frozen Brain-owned leaf/composition basis."
+      },
+      {
+        "id": "TARGET_SEMANTIC_EQUIVALENCE_PROOF",
+        "rule": "Prove an independently verifiable behavioral equivalence relation between the target's full useful-behavior domain and the Brain basis without requiring access to hidden model internals."
+      }
+    ],
+    "inadmissible_shortcuts": [
+      "NO_KNOWN_COUNTEREXAMPLE",
+      "CURRENT_19_FAMILIES_LOOK_COMPLETE",
+      "ALL_PUBLIC_BENCHMARKS_PASS",
+      "ALL_CURRENT_ACCEPTANCE_PREDICATES_PASS",
+      "ALL_FIRST_PARTY_PAGES_ENUMERATED",
+      "FAMILY_LABEL_SIMILARITY",
+      "BENCHMARK_LABEL_SIMILARITY"
+    ],
+    "constructive_reopen_rule": "Any newly demonstrated useful Opus 5.5 behavior not already losslessly covered by the frozen behavioral basis immediately reopens Layer B and the terminal envelope, even after Layer A is sealed.",
+    "result_name": "BEHAVIORAL_UNIVERSALITY"
+  },
+  "leverage": {
+    "deletes": [
+      "TREATING_CONTINUED_WEB_ENUMERATION_AS_AN_UNBOUNDED_TERMINAL_PROOF_PROGRAM",
+      "TREATING_ZERO_CURRENT_ROOT1_POSITIVE_GAPS_AS_GLOBAL_EXHAUSTIVENESS",
+      "REPEATEDLY_REOPENING_THE_PUBLIC_SOURCE_SET_WITHOUT_A_FIXED_POINT_DEFINITION",
+      "DECLARING_TERMINAL_FROM_CURRENT_PREDICATE_SATURATION_ALONE"
+    ],
+    "creates": [
+      "ONE_FINITE_PUBLIC_SOURCE_GRAPH_FIXED_POINT",
+      "ONE_EXPLICIT_BEHAVIORAL_UNIVERSALITY_OBLIGATION",
+      "ONE_FAIL_CLOSED_TERMINAL_ENVELOPE_GATE"
+    ],
+    "critical_path_effect": "Layer A can be closed deterministically with zero terminal case exposure. Layer B is isolated as the only remaining envelope-universality claim instead of being hidden inside repeated surface audits."
+  },
+  "immediate_zero_reality_actions": [
+    "MATERIALIZE_AND_CONTENT_ADDRESS_THE_CURRENT_FIRST_PARTY_ROOT_GRAPH",
+    "COMPILE_STABLE_SEMANTIC_UNIT_IDS_FOR_EVERY_CAPABILITY_BEARING_SECTION_TABLE_ROW_FIGURE_AND_LIMITATION",
+    "RECONCILE_CURRENT_HEALTHCARE_MULTILINGUAL_LONG_CONTEXT_MATHEMATICAL_REASONING_ARC_AGI_CREATIVE_DIAGRAM_IMAGE_VOICE_AND_SCIENTIFIC_HYPOTHESIS_DISCOVERIES_INTO_THE_MAPPING_LEDGER",
+    "RUN_AN_INDEPENDENT_OMISSION_CHECK_AND_ITERATE_TO_SOURCE_GRAPH_FIXED_POINT",
+    "IN_PARALLEL_FORMALIZE_BEHAVIORAL_UNIVERSALITY_AS_A UNIVERSAL_CONTRACT_DECOMPOSITION_PROOF_OBLIGATION_USING_BEHAVIORAL_CONTRACT_SCHEMA_V1"
+  ],
+  "terminal_claim_policy": {
+    "public_source_seal_only": "NECESSARY_NOT_SUFFICIENT",
+    "root1_positive_gap_zero_only": "NECESSARY_NOT_SUFFICIENT",
+    "current_acceptance_basis_saturation_only": "NECESSARY_NOT_SUFFICIENT",
+    "literal_terminal_authority": "FORBIDDEN_UNTIL_ALL_CONJUNCTS_IN_THE_TERMINAL_GATE_ARE_PROVED_AND_INDEPENDENTLY_VERIFIED"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_PUBLIC_SOURCE_GRAPH_IS_ALREADY_AT_FIXED_POINT",
+    "NO_CLAIM_PUBLIC_FIRST_PARTY_SOURCES_ENUMERATE_ALL_LATENT_USEFUL_MODEL_BEHAVIOR",
+    "NO_CLAIM_BEHAVIORAL_UNIVERSALITY_IS_CURRENTLY_PROVED",
+    "NO_NEW_FAMILY_OR_ATOMIC_ACCEPTANCE_PREDICATE_FROM_THIS_PROTOCOL",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
