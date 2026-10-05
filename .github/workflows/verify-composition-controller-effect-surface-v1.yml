@@ -1,0 +1,40 @@
+name: Verify composition controller effect surface v1
+
+on:
+  push:
+    branches:
+      - "chatgpt/composition-state-provenance-v1-20261005"
+    paths:
+      - "canonical/runtime/composition_controller_effect_surface_v1.py"
+      - "canonical/tests/test_composition_controller_effect_surface_v1.py"
+      - "canonical/governance/COMPOSITION_CONTROLLER_EFFECT_SURFACE_CLOSED_WORLD_REDUCTION_20261005_V1.json"
+      - "canonical/runtime/astra_runtime.py"
+      - ".github/workflows/verify-composition-controller-effect-surface-v1.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/composition_controller_effect_surface_v1.py"
+      - "canonical/tests/test_composition_controller_effect_surface_v1.py"
+      - "canonical/governance/COMPOSITION_CONTROLLER_EFFECT_SURFACE_CLOSED_WORLD_REDUCTION_20261005_V1.json"
+      - "canonical/runtime/astra_runtime.py"
+      - ".github/workflows/verify-composition-controller-effect-surface-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile verifier
+        run: python -m py_compile canonical/runtime/composition_controller_effect_surface_v1.py canonical/tests/test_composition_controller_effect_surface_v1.py
+      - name: Run finite effect-surface audit tests
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_composition_controller_effect_surface_v1
+      - name: Emit audit receipt
+        run: PYTHONPATH=. python canonical/runtime/composition_controller_effect_surface_v1.py
