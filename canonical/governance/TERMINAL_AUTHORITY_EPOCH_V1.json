@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_AUTHORITY_EPOCH_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FAIL_CLOSED_STALE_WORK_PREEMPTION__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Prevent workers, branches, benchmark runs, and verification jobs from continuing load-bearing work after the terminal authority or critical-path evidence has changed.",
+  "epoch_algorithm": {
+    "canonical_payload": "JSON_SORT_KEYS_COMPACT_OF_VERSION_AND_ORDERED_SOURCE_BINDINGS",
+    "version": 1,
+    "sha256": "faf16856ce0275c1295d8c035121dd90dbf18b336889ddbdd47f69702de79995"
+  },
+  "source_bindings": [
+    {"path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json","git_blob_sha":"46eb11c6d77642bd69cfccd1b97b2cb81796b9f6"},
+    {"path":"canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json","git_blob_sha":"916f0b1dd4196473bbfe3246ab861f85c6d89d6e"},
+    {"path":"canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json","git_blob_sha":"0d4d78928ffd9b1979e5d38c074c6d5c86cfdeab"},
+    {"path":"canonical/governance/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_PRECOMMIT_20261005_V1.json","git_blob_sha":"e0c84402955425aca64b20562f3400287e8792fc"},
+    {"path":"canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_ISOLATED_ROOT3_REPROMOTION_GATE_20261005_V6.json","git_blob_sha":"55e20c4d247d3fac5a58651fdc4303e8c09fb54c"},
+    {"path":"canonical/governance/TB4_BUILDKITE_ALL_ACCESS_TRIAL_CARRIER_CANDIDATE_20261004_V1.json","git_blob_sha":"de604e9f696e5366f5f825857190d4940ced89a0"}
+  ],
+  "worker_contract": {
+    "required_field": "authority_epoch_id",
+    "required_value": "faf16856ce0275c1295d8c035121dd90dbf18b336889ddbdd47f69702de79995",
+    "on_mismatch": "ABORT_BEFORE_COMPUTE_CASE_EXPOSURE_OR_LOAD_BEARING_COMMIT__RELOAD_CURRENT_AUTHORITY__RECOMPUTE_PRIORITY",
+    "on_source_blob_change": "CURRENT_EPOCH_INVALID__NEW_EPOCH_REQUIRED",
+    "historical_receipts": "PRESERVED_AS_EVIDENCE_BUT_MAY_NOT_SCHEDULE_NEW_WORK_WITHOUT_CURRENT_EPOCH"
+  },
+  "observed_motivation": [
+    "LIVEBENCH_UNION25_WORK_CONTINUED_AFTER_VERIFIED_ACTIVE15_SCOPE_DELETED_TEN_IDS_FROM_THE_EXACT_FROZEN_PREDICATE_CRITICAL_PATH",
+    "UNKNOWN_DOMAIN_REPROMOTION_GATES_CHANGED_REPEATEDLY_AFTER_TRANSPORT_AND_DOMAIN_FALSIFIERS",
+    "DERIVED_FRONTIERS_HAVE_LAGGED_CANONICAL_ACCEPTANCE_AND_ROOT_AUTHORITY"
+  ],
+  "hard_rules": [
+    "EPOCH_GUARD_IS_SCHEDULING_AND_PREEMPTION_ONLY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_STALE_WORK_MAY_BE_PROMOTED_MERELY_BECAUSE_IT_FINISHED_AFTER_EPOCH_CHANGE",
+    "A_RESULT_FROM_AN_OLDER_EPOCH_MAY_BE_REUSED_ONLY_AFTER_EXPLICIT_CONTENT_ADDRESSED_REBINDING_TO_CURRENT_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
