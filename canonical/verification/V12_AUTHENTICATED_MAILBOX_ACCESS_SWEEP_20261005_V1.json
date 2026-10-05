@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_V12_AUTHENTICATED_MAILBOX_ACCESS_SWEEP_20261005_V1",
+  "date": "2026-10-05",
+  "status": "POINT_IN_TIME_ACCOUNT_AND_OWNER_CHANNEL_SWEEP__PARTIAL_FACTS_BOUND__ZERO_CREDIT",
+  "scope": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_GROUPS_A_B_C_D",
+  "observations": [
+    {
+      "surface": "BUILDKITE",
+      "state": "OWNER_PROVIDER_CONFIRMATION_ALREADY_BOUND__ACCOUNT_RUNTIME_PREFLIGHT_UNOBSERVED",
+      "evidence": "canonical/governance/BUILDKITE_TRIAL_OWNER_CONFIRMATION_20261005_V1.json",
+      "consequence": "DELETE_SUPPORT_WAIT__PRESERVE_TRIAL_ORG_AND_ZERO_CASE_RUNTIME_PREFLIGHT"
+    },
+    {
+      "surface": "HUGGING_FACE_OSWORLD",
+      "state": "ACCOUNT_EXISTENCE_EVIDENCE_PRESENT__OSWORLD_GATED_TERMS_ACCEPTANCE_NOT_OBSERVED_IN_PROVIDER_MAIL",
+      "mailbox_evidence": "2026-09-04 Hugging Face email-confirmation message was previously observed",
+      "consequence": "PRESERVE_AUTHENTICATED_TERMS_ACCEPTANCE_AND_ASSET_ACCESS_FACT"
+    },
+    {
+      "surface": "GOOGLE_AI_STUDIO_CHARTOGRAPHY",
+      "state": "GENERAL_GEMINI_ACCOUNT_MAIL_PRESENT__NO_AI_STUDIO_PROJECT_OR_QUOTA_RECEIPT_OBSERVED",
+      "observed_mail": [
+        "Welcome to Gemini",
+        "You now have exclusive access to AI features"
+      ],
+      "consequence": "DO_NOT_INFER_AI_STUDIO_PROJECT_OR_FREE_QUOTA"
+    },
+    {
+      "surface": "VALS_FINANCE_AGENT_AND_MYSTERYMECHANISM",
+      "state": "NO_PROVIDER_ORIGINATED_VALS_REPLY_OBSERVED_IN_120_DAY_MAILBOX_SWEEP",
+      "consequence": "APPROVAL_EXACT_SUITE_ID_AND_OWNER_RESULT_REMAIN_UNKNOWN"
+    },
+    {
+      "surface": "ARTIFICIAL_ANALYSIS",
+      "state": "NO_PROVIDER_ORIGINATED_REPLY_OBSERVED_IN_120_DAY_MAILBOX_SWEEP",
+      "consequence": "RELATIVE_SCORE_AND_FINANCE_INDEX_OWNER_FACTS_REMAIN_UNKNOWN"
+    },
+    {
+      "surface": "COGNITION_FRONTIERCODE",
+      "state": "NO_PROVIDER_ORIGINATED_REPLY_OBSERVED_IN_120_DAY_MAILBOX_SWEEP",
+      "consequence": "OWNER_SCORE_RECEIPT_REMAINS_UNKNOWN"
+    },
+    {
+      "surface": "CURSORBENCH",
+      "state": "OWNER_REPLY_OBSERVED__EXTERNAL_SYSTEM_OWNER_RUN_NOT_OFFERED",
+      "gmail_message_id": "1a103e0ae4bd73ad",
+      "ticket": "T-G59465",
+      "consequence": "OWNER_RUN_CURSORBENCH_ROUTE_P_EQUALS_0_UNTIL_POLICY_CHANGE__STRONGER_PROOF_ONLY"
+    },
+    {
+      "surface": "ZAPIER_AUTOMATIONBENCH",
+      "state": "NO_PROVIDER_ORIGINATED_REPLY_OBSERVED_IN_120_DAY_MAILBOX_SWEEP",
+      "consequence": "OFFICIAL_PRIVATE_RESULT_ACCESS_REMAINS_UNKNOWN"
+    },
+    {
+      "surface": "SURGE_CHARTOGRAPHY",
+      "state": "NO_PROVIDER_ORIGINATED_REPLY_OBSERVED_IN_120_DAY_MAILBOX_SWEEP",
+      "consequence": "OWNER_JUDGE_OR_RESULT_RECEIPT_REMAINS_UNKNOWN"
+    }
+  ],
+  "epistemic_rules": [
+    "NO_MAILBOX_REPLY_IS_NOT_PROOF_OF_NONEXISTENCE_OR_DENIAL",
+    "GENERAL_ACCOUNT_EMAIL_IS_NOT_ACCOUNT_SPECIFIC_BENCHMARK_ACCESS",
+    "CURSOR_OWNER_REPLY_IS_DIRECT_NEGATIVE_EVIDENCE_FOR_EXTERNAL_OWNER_RUN_CURSORBENCH",
+    "ZERO_TERMINAL_CASES_READ_OR_EXECUTED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
