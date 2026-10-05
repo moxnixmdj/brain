@@ -104,9 +104,11 @@ def derive_source_facts(
                 == "ADMISSIBLE_SUBSTITUTION"
         ),
         "SCOPE_GATE_ADMISSIBLE": (
-            scope_gate.get("status", "").startswith("INDEPENDENT_PASS__")
+            scope_gate.get("status", "").startswith("INDEPENDENT_PASS__ADMISSIBLE_SUBSTITUTION__ZERO_UNRESOLVED_DIMENSIONS")
+            and (scope_gate.get("verdict") or {}).get("status") == "ADMISSIBLE_SUBSTITUTION"
             and (scope_gate.get("verdict") or {}).get("admissible") is True
-            and (scope_gate.get("verdict") or {}).get("unresolved_required_dimensions") == []
+            and (scope_gate.get("verdict") or {}).get("errors") == []
+            and (scope_gate.get("verdict") or {}).get("leaked_inference_ids") == []
         ),
         "INDEPENDENT_ORACLE_VERIFIED": (
             oracle_verification.get("status", "").startswith("INDEPENDENT_PASS__")
