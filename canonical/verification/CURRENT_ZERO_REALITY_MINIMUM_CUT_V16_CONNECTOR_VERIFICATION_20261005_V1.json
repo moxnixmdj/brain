@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V16_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__SIX_INFORMATION_POSITIVE_GROUPS__HLE_EVENT_BOUND_SLEEP__SYNTHESIS_VISION_REFINED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V16.json",
+    "git_blob_sha": "8e4b396f75ace1c546b79700db9715c0d0e814e8"
+  },
+  "sources": {
+    "v15": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15.json",
+      "git_blob_sha": "37c58301f1e002a200dc93a2e7d771cd1ffc5dcb"
+    },
+    "hle": {
+      "path": "canonical/verification/HLE_OPUS46_GPT54_CROSS_JUDGE_EMPIRICAL_BRIDGE_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "80ad9a0e3e2c2b16def38e13b8580d69692d1623"
+    },
+    "syn": {
+      "path": "canonical/governance/SYNTHESIS_HIDDEN_EVALUATOR_ROUTE_TRUTH_REPAIR_ACTIVATION_V1.json",
+      "git_blob_sha": "ac12d96b7d060ba996f1f2672d66f05da628dd93"
+    },
+    "visp": {
+      "path": "canonical/verification/VISION_NONCHART_FOUR_LEAF_PARTITION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "231cad168cdbeb292949cc62440b46ccb192ec9f"
+    },
+    "visa": {
+      "path": "canonical/governance/VISION_NONCHART_EXISTING_RECEIPT_REUSE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "a73b9d503cf53a7582ff0648c7e1e00b2e75e5e1"
+    },
+    "root": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860"
+    }
+  },
+  "checks": {
+    "current_14_24": true,
+    "exactly_six_live_groups": true,
+    "hle_removed_from_live": true,
+    "hle_event_bound_sleep": true,
+    "hle_threshold_transfer_still_open": true,
+    "synthesis_exact_question_refined": true,
+    "vision_exact_four_leaf_frontier": true,
+    "vision_existing_receipt_fixed_point_exact": true,
+    "zero_credit_no_execution_or_fresh_reality": true
+  },
+  "errors": [],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
