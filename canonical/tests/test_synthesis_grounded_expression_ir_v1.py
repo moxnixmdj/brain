@@ -98,6 +98,23 @@ class GroundedExpressionIRTests(unittest.TestCase):
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertEqual(out["reason"], "PROVENANCE_REQUIRED")
 
+    def test_ambiguous_provenance_locator_delimiters_fail_closed(self):
+        task = base_task()
+        task["task"]["items"][0]["provenance"][0]["locator"] = "p4;FAKE@p9"
+        out = solve(task)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertEqual(out["reason"], "LOCATOR_UNSAFE")
+
+    def test_sectioned_markdown_preserves_interleaved_exact_item_order(self):
+        task = base_task(output_format="SECTIONED_MARKDOWN")
+        task["task"]["items"][2]["section"] = "Findings"
+        out = solve(task)
+        self.assertEqual(out["status"], "PASS", out)
+        self.assertEqual([x["item_id"] for x in out["trace"]], ["C1", "U1", "X1"])
+        self.assertEqual(out["rendered_text"].count("## Findings"), 2)
+        self.assertLess(out["rendered_text"].index("Revenue increased"), out["rendered_text"].index("The forecast range"))
+        self.assertLess(out["rendered_text"].index("The forecast range"), out["rendered_text"].index("Two sources disagree"))
+
     def test_unknown_writing_constraint_is_not_silently_ignored(self):
         task = base_task()
         task["task"]["constraints"]["tone"] = "persuasive"
