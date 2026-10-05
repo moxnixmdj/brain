@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_INVARIANT_COUNTEREXAMPLE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__FROZEN_CONTRACT_REQUIRES_INVARIANT_SEMANTIC_CONSISTENCY__CURRENT_COMPILER_AND_ORACLE_CHECK_DECLARATION_IDENTITY_ONLY__STRENGTHENED_BISIMULATION_CEILING_BLOCKED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CEILING_INVARIANT_COUNTEREXAMPLE_20261005_V1.json",
+    "git_blob_sha": "0686c564bcee50d69bc7d5b392d78f8b71d03283"
+  },
+  "exact_inputs": {
+    "compiler": [
+      "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
+      "79d3896818b03223348f05adf4fdcd574f6f355e"
+    ],
+    "oracle": [
+      "canonical/runtime/structured_method_normalized_rule_oracle_v3.py",
+      "5d92b1360fbb1bb27baacc8a04adb3744abf690c"
+    ],
+    "registry": [
+      "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    ],
+    "scope_gate_input": [
+      "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+      "fc2e739789825bba5f30da56c6896de11678b6e8"
+    ],
+    "strengthened_relation": [
+      "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_RELATION_V1.json",
+      "4e7c2c43cae956ce8eadf29ae04165ed2c9e77a7"
+    ],
+    "strengthened_certificate": [
+      "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_CERTIFICATE_V1.json",
+      "fc4bcf84aff19ed4b96c93166a1e7044d6b689d0"
+    ],
+    "strengthened_preflight": [
+      "canonical/verification/STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_CONNECTOR_PREFLIGHT_20261005_V1.json",
+      "1154f8b41613908c1a10d4d63161a3b15effb33f"
+    ]
+  },
+  "recomputed": {
+    "check_count": 9,
+    "check_pass_count": 9,
+    "contract_requires_invariant_semantic_consistency": true,
+    "contract_requires_independently_generated_edge_checks": true,
+    "compiler_only_validates_nonempty_invariant_declarations": true,
+    "oracle_only_reconstructs_nonempty_invariant_declarations": true,
+    "oracle_score_compares_reconstructed_source_fields": true,
+    "current_scope_gate_tracks_declared_invariant_preservation_not_semantic_truth": true,
+    "strengthened_relation_claims_one_of_one_ceiling": true,
+    "strengthened_certificate_claims_one_of_one_ceiling": true,
+    "strengthened_preflight_has_no_independent_credit": true
+  },
+  "decisive_logic": [
+    "COMPILER_ORACLE_BISIMULATION_PROVES_AGREEMENT_ON_THEIR_SHARED_STRUCTURAL_RELATION",
+    "THE_FROZEN_BEHAVIORAL_SUCCESS_RELATION_IS_STRICTLY_STRONGER_BECAUSE_IT_REQUIRES_INVARIANTS_TO_BE_SEMANTICALLY_CONSISTENT_AND_INDEPENDENT_EDGE_CONSEQUENCES",
+    "TWO_IMPLEMENTATIONS_THAT_BOTH_COPY_CONTRADICTORY_INVARIANT_STRINGS_CAN_AGREE_PERFECTLY_WHILE_THE_FROZEN_BEHAVIOR_FAILS",
+    "THEREFORE_A_PUBLIC_RUNNER_PASS_OF_THE_STRENGTHENED_BISIMULATION_THEOREM_CANNOT_BY_ITSELF_DISCHARGE_THE_STRUCTURED_METHOD_LEAF"
+  ],
+  "required_before_positive_credit": [
+    "CLOSE_INVARIANT_SEMANTIC_CONSISTENCY_BY_EXACT_SCOPE_COMPLETE_PROOF",
+    "CLOSE_INDEPENDENT_EDGE_CONSEQUENCE_REQUIREMENT_BY_EXACT_SCOPE_COMPLETE_PROOF",
+    "REFREEZE_AND_INDEPENDENTLY_VERIFY_A_REPAIRED_WHOLE_LEAF_THEOREM"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_STRUCTURAL_BISIMULATION_IS_FALSE",
+    "NO_CLAIM_PUBLIC_RUNNER_WILL_FAIL",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
