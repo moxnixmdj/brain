@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__REVOCATION_AWARE_CURRENT_STATE_REBOUND__OUTPUT_ONLY_THRESHOLD_PROOF_DAG__19_ROOT2_TOUCHING_PREDICATES__12_PROVED_26_UNRESOLVED__ZERO_CREDIT__INDEPENDENT_REVERIFICATION_REQUIRED",
+  "status": "CANDIDATE__OUTPUT_ONLY_THRESHOLD_PROOF_DAG__19_ROOT2_TOUCHING_PREDICATES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
   "objective": "Replace benchmark-first scheduling with the minimum admissible certificate that settles each frozen Root2 acceptance predicate while preserving exact target semantics and fail-closed evidence rules.",
   "source_bindings": {
     "predicate_registry": {
@@ -10,19 +10,19 @@
     },
     "evidence_ledger": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "0d4d78928ffd9b1979e5d38c074c6d5c86cfdeab"
+      "git_blob_sha": "bc420c6d1a6caaab7a6d5c257640d3f5797170f5"
     },
     "root_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "916f0b1dd4196473bbfe3246ab861f85c6d89d6e"
+      "git_blob_sha": "e353d54f4608d25b7f0ea06fba5d8fbf2ddfbb59"
+    },
+    "root2_frontier_v17": {
+      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V17.json",
+      "git_blob_sha": "8c1325dd652b65a7d5c24e041ac06556a84f569c"
     },
     "replacement_planner": {
       "path": "canonical/governance/ACCEPTANCE_PROOF_REPLACEMENT_PLANNER_CANDIDATE_V1.json",
       "git_blob_sha": "a653a4ccce58f3fbe85b414dc57f60ca3ae00923"
-    },
-    "root2_frontier_v18": {
-      "path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V18.json",
-      "git_blob_sha": "57d5ee650d4ee250db455d5818899f32aa304918"
     }
   },
   "runtime": {
@@ -200,6 +200,6 @@
     "tests_passed": 11,
     "tests_total": 11,
     "result": "PASS",
-    "note": "Prior runtime validation preserved; revocation-aware manifest state rebinding requires independent repository reverification before reactivation."
+    "note": "Local execution only; independent repository verification remains required before activation."
   }
 }
