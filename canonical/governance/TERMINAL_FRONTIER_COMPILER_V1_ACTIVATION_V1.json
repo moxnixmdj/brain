@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FRONTIER_COMPILER_V1_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__SEPARATE_CONNECTOR_RECOMPUTATION_PASS__EXACT_IDENTITY_FRONTIER_SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V1.json",
+    "git_blob_sha": "2746ce4c38052dcc2dbb7de24c25728bf06ac31c"
+  },
+  "runtime": {
+    "path": "canonical/runtime/terminal_frontier_compiler_v1.py",
+    "git_blob_sha": "e916144f67d64d76b2d348d761125ee74905807b"
+  },
+  "verification": {
+    "path": "canonical/verification/TERMINAL_FRONTIER_COMPILER_V1_CONNECTOR_VERIFICATION_20261005_V2.json",
+    "git_blob_sha": "2124baae7333f2d3d6f9c869a51f33713f59abbe"
+  },
+  "effects": [
+    "ACTIVATE_EXACT_REGISTRY_MINUS_PROVED_IDENTITY_DERIVATION_AS_TERMINAL_FRONTIER_SCHEDULING_PROJECTION",
+    "DELETE_STATIC_ROOT2_AND_ROOT3_COUNT_REBIND_AS_A_REQUIRED_CONTROL_PLANE_STEP_WHEN_BOUND_COMPILER_EPOCH_IS_VALID",
+    "REQUIRE_CURRENT_META_ENVELOPE_CLOSURE_AS_A_TERMINAL_FINALITY_CONJUNCT",
+    "FAIL_CLOSED_ON_ROOT_PARTITION_IDENTITY_DRIFT_OR_SUBJECT_BLOB_DRIFT_OR_VERIFICATION_BLOB_DRIFT_OR_NONPASSING_AUTHORITY_VERIFICATION",
+    "PRESERVE_CURRENT_ROOT1_META_AND_ZERO_REALITY_AUTHORITIES_AS_COMPILER_INPUT_AUTHORITIES"
+  ],
+  "current_verified_state": {
+    "total_atomic": 38,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "root1_positive_gap_count": 0,
+    "root2_touching_count": 18,
+    "root3_touching_count": 9,
+    "meta_envelope_open_count": 8,
+    "terminal": false
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "terminal_finality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_GOAL_CLAIM"
+  ],
+  "next": "SCHEDULE_ONLY_FROM_THE_EXACT_LIVE_FRONTIER__RECOMPUTE_AFTER_EVERY_VERIFIED_CANONICAL_DELTA"
+}
