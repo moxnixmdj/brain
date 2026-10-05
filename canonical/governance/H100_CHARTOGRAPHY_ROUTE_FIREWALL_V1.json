@@ -14,7 +14,7 @@
     "information_capacity_bits_at_budget": 800000000,
     "idealized_weight_bytes": {
       "one_bit": 554726976,
-      "one_point_five_eight_bit": 876468023,
+      "one_point_five_eight_bit": 876468622,
       "four_bit": 2218907904,
       "eight_bit": 4437815808,
       "sixteen_bit": 8875631616
