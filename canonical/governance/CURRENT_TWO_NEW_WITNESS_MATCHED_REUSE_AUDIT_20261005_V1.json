@@ -1,0 +1,204 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TWO_NEW_WITNESS_MATCHED_REUSE_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_2X8_DELTA_AUDIT__16_PAIRS__ZERO_FULL_TARGET_CLOSURES__ZERO_CREDIT",
+  "objective": "Audit only the two witness identities added after the independently verified 12-witness totalization against the eight normalized matched/scope targets, requiring both semantic implication and exact-or-superset target-domain coverage before any reuse credit.",
+  "authority": {
+    "livebench_witness": {
+      "path": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "57e27e3c56372b57a1d4e0255f49340d4a4c8588"
+    },
+    "unknown_domain_witness": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "ebe8edcda3e0aa7dcffab6032834532a6f06c5f7"
+    },
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+      "git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    },
+    "current_8x14_connector_recomputation": {
+      "path": "canonical/verification/CURRENT_WITNESS_TARGET_TOTALIZATION_V3_CONNECTOR_VERIFICATION_20261005_V1.json"
+    }
+  },
+  "admissibility_rule": "DIRECT_REUSE_REQUIRES_CONTENT_ADDRESSED_SOURCE_THEOREM_SEMANTICALLY_IMPLIES_THE_FULL_TARGET_CLAIM_AND_SOURCE_PROOF_DOMAIN_IS_EXACTLY_THE_TARGET_DOMAIN_OR_A_VERIFIED_SUPERSET__PARTIAL_ANALOGY_OR_SHARED_WORDS_GRANT_ZERO_CREDIT",
+  "witness_count": 2,
+  "target_count": 8,
+  "pair_count": 16,
+  "pairs": [
+    {
+      "witness_predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "target_predicate_id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "witness_scope": "EXACT_FROZEN_200_CASE_ACTIVE15_LIVEBENCH_IF_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_BINDS_ONLY_LIVEBENCH_FIXED_BAR_AND_EXPLICITLY_DISCLAIMS_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "target_predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "witness_scope": "EXACT_FROZEN_200_CASE_ACTIVE15_LIVEBENCH_IF_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_BINDS_ONLY_LIVEBENCH_FIXED_BAR_AND_EXPLICITLY_DISCLAIMS_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "target_predicate_id": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "witness_scope": "EXACT_FROZEN_200_CASE_ACTIVE15_LIVEBENCH_IF_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_BINDS_ONLY_LIVEBENCH_FIXED_BAR_AND_EXPLICITLY_DISCLAIMS_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "target_predicate_id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "witness_scope": "EXACT_FROZEN_200_CASE_ACTIVE15_LIVEBENCH_IF_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_BINDS_ONLY_LIVEBENCH_FIXED_BAR_AND_EXPLICITLY_DISCLAIMS_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "target_predicate_id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "witness_scope": "EXACT_FROZEN_200_CASE_ACTIVE15_LIVEBENCH_IF_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_BINDS_ONLY_LIVEBENCH_FIXED_BAR_AND_EXPLICITLY_DISCLAIMS_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "target_predicate_id": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "witness_scope": "EXACT_FROZEN_200_CASE_ACTIVE15_LIVEBENCH_IF_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_BINDS_ONLY_LIVEBENCH_FIXED_BAR_AND_EXPLICITLY_DISCLAIMS_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "witness_scope": "EXACT_FROZEN_200_CASE_ACTIVE15_LIVEBENCH_IF_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_BINDS_ONLY_LIVEBENCH_FIXED_BAR_AND_EXPLICITLY_DISCLAIMS_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "target_predicate_id": "VISION_DENSE_NONCHART_SCOPE",
+      "witness_scope": "EXACT_FROZEN_200_CASE_ACTIVE15_LIVEBENCH_IF_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_BINDS_ONLY_LIVEBENCH_FIXED_BAR_AND_EXPLICITLY_DISCLAIMS_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "target_predicate_id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "witness_scope": "EXACT_FROZEN_UNKNOWN_DOMAIN_REACHABLE_LAUNCHER_AND_EVALUATOR_TYPE_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_EXPLICITLY_DISCLAIMS_OPEN_WORLD_GENERALIZATION_BEYOND_FROZEN_EVALUATOR_AND_REACHABLE_LAUNCHER_DOMAIN__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "target_predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "witness_scope": "EXACT_FROZEN_UNKNOWN_DOMAIN_REACHABLE_LAUNCHER_AND_EVALUATOR_TYPE_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_EXPLICITLY_DISCLAIMS_OPEN_WORLD_GENERALIZATION_BEYOND_FROZEN_EVALUATOR_AND_REACHABLE_LAUNCHER_DOMAIN__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "target_predicate_id": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "witness_scope": "EXACT_FROZEN_UNKNOWN_DOMAIN_REACHABLE_LAUNCHER_AND_EVALUATOR_TYPE_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_EXPLICITLY_DISCLAIMS_OPEN_WORLD_GENERALIZATION_BEYOND_FROZEN_EVALUATOR_AND_REACHABLE_LAUNCHER_DOMAIN__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "target_predicate_id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "witness_scope": "EXACT_FROZEN_UNKNOWN_DOMAIN_REACHABLE_LAUNCHER_AND_EVALUATOR_TYPE_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_EXPLICITLY_DISCLAIMS_OPEN_WORLD_GENERALIZATION_BEYOND_FROZEN_EVALUATOR_AND_REACHABLE_LAUNCHER_DOMAIN__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "target_predicate_id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "witness_scope": "EXACT_FROZEN_UNKNOWN_DOMAIN_REACHABLE_LAUNCHER_AND_EVALUATOR_TYPE_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_EXPLICITLY_DISCLAIMS_OPEN_WORLD_GENERALIZATION_BEYOND_FROZEN_EVALUATOR_AND_REACHABLE_LAUNCHER_DOMAIN__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "target_predicate_id": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "witness_scope": "EXACT_FROZEN_UNKNOWN_DOMAIN_REACHABLE_LAUNCHER_AND_EVALUATOR_TYPE_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_EXPLICITLY_DISCLAIMS_OPEN_WORLD_GENERALIZATION_BEYOND_FROZEN_EVALUATOR_AND_REACHABLE_LAUNCHER_DOMAIN__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "witness_scope": "EXACT_FROZEN_UNKNOWN_DOMAIN_REACHABLE_LAUNCHER_AND_EVALUATOR_TYPE_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_EXPLICITLY_DISCLAIMS_OPEN_WORLD_GENERALIZATION_BEYOND_FROZEN_EVALUATOR_AND_REACHABLE_LAUNCHER_DOMAIN__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    },
+    {
+      "witness_predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "target_predicate_id": "VISION_DENSE_NONCHART_SCOPE",
+      "witness_scope": "EXACT_FROZEN_UNKNOWN_DOMAIN_REACHABLE_LAUNCHER_AND_EVALUATOR_TYPE_DOMAIN",
+      "exact_or_superset_scope_relation_proved": false,
+      "full_target_semantic_implication_proved": false,
+      "direct_target_closure": false,
+      "reason": "SOURCE_PROOF_EXPLICITLY_DISCLAIMS_OPEN_WORLD_GENERALIZATION_BEYOND_FROZEN_EVALUATOR_AND_REACHABLE_LAUNCHER_DOMAIN__NO_EXACT_OR_SUPERSET_BINDING_TO_ANY_MATCHED_PORTFOLIO"
+    }
+  ],
+  "result": {
+    "exact_or_superset_scope_relations_proved": 0,
+    "full_target_semantic_implications_proved": 0,
+    "direct_target_closures": 0,
+    "consequence": "THE_TWO_NEWLY_ADDED_PROVED_WITNESSES_DO_NOT_BY_THEMSELVES CLOSE_ANY_OF_THE_EIGHT_MATCHED_TARGETS_UNDER_CURRENT_CONTENT_ADDRESSED_SCOPE EVIDENCE",
+    "nonconsequence": "THIS_DOES_NOT_PROVE_NO_NEW_BRIDGE_THEOREM_CAN_BE_INVENTED__IT_ONLY DELETES_DIRECT_REUSE_WITHOUT_A_NEW_SCOPE_BRIDGE"
+  },
+  "targeted_notes": {
+    "livebench_to_instruction_following": "LIVEBENCH_PROVES_POINTWISE_OPTIMALITY_ON_ITS_EXACT_ACTIVE15 CHECKER POPULATION__THE MATCHED IF TARGET ALSO REQUIRES AUTHORIZATION_SCOPE AMBIGUITY REQUIREMENT_CHANGE ABSTENTION_FAIL_CLOSED AND A DISTINCT FROZEN PORTFOLIO BINDING__NO CURRENT SCOPE BRIDGE",
+    "unknown_domain_to_fail_closed": "UNKNOWN_DOMAIN_V8 PROVES TOTALITY_AND TYPE_BOUNDARY SAFETY FOR ONE FROZEN LAUNCHER_EVALUATOR DOMAIN__THE MATCHED IF AND AGENCY SAFETY TARGETS ARE DIFFERENT PORTFOLIOS WITH NO CURRENT EXACT_OR_SUPERSET DOMAIN BINDING"
+  },
+  "hard_nonclaims": [
+    "NO_PARTIAL_ATOM_CREDIT",
+    "NO_CLAIM_A_NEW_SCOPE_BRIDGE_THEOREM_IS_IMPOSSIBLE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": "DELETE_GENERIC_DIRECT_REUSE_SEARCH_FOR_THE_TWO_NEW_WITNESSES__ONLY_RESUME_ON_A_NEW_CONTENT_ADDRESSED_SCOPE_BRIDGE_OR_SEMANTIC IMPLICATION THEOREM",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
