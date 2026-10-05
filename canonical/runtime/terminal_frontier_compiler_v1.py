@@ -66,16 +66,17 @@ def _discover_highest_active(
         doc = _load(rel, root)
         if doc.get("scheduling_authority") is not True:
             continue
-        status = str(doc.get("status") or "").upper()
-        if not status.startswith("ACTIVE"):
-            raise FrontierCompileError(
-                f"SCHEDULING_AUTHORITY_WITH_NONACTIVE_STATUS:{rel}:{status}"
-            )
         rows.append((int(m.group(1)), rel, doc))
     if not rows:
         raise FrontierCompileError(f"NO_ACTIVE_ACTIVATION:{pattern.pattern}")
     rows.sort(key=lambda x: (x[0], x[1]))
-    return rows[-1]
+    selected = rows[-1]
+    status = str(selected[2].get("status") or "").upper()
+    if not status.startswith("ACTIVE"):
+        raise FrontierCompileError(
+            f"HIGHEST_SCHEDULING_AUTHORITY_NONACTIVE:{selected[1]}:{status}"
+        )
+    return selected
 
 
 def _verification_passes(
