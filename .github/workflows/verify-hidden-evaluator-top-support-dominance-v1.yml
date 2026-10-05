@@ -1,0 +1,42 @@
+name: Verify target-free top-support dominance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json"
+      - "canonical/runtime/hidden_evaluator_top_support_dominance_v1.py"
+      - "canonical/tests/test_hidden_evaluator_top_support_dominance_v1.py"
+      - ".github/workflows/verify-hidden-evaluator-top-support-dominance-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify exact frozen subject blobs
+        shell: python
+        run: |
+          import hashlib
+          from pathlib import Path
+          expected = {
+              "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json": "69e3ac04f0158bd2309c926d606d798449633f25",
+              "canonical/runtime/hidden_evaluator_top_support_dominance_v1.py": "e1eeaf7dd77d60656587b668d3e7419f82341c38",
+              "canonical/tests/test_hidden_evaluator_top_support_dominance_v1.py": "14ada70e1190bae1533661ab77e5e60315c3ce6e",
+          }
+          for path, want in expected.items():
+              data = Path(path).read_bytes()
+              got = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+              if got != want:
+                  raise SystemExit(f"BLOB_DRIFT {path} {got} != {want}")
+          print("EXACT_BLOBS_PASS")
+      - name: Run fail-closed theorem-kernel tests
+        run: python -m unittest -v canonical.tests.test_hidden_evaluator_top_support_dominance_v1
