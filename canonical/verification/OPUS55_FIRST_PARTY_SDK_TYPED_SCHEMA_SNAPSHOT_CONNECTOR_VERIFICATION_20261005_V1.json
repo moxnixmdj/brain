@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIRST_PARTY_SDK_TYPED_SCHEMA_SNAPSHOT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__20_OF_20_BLOBS__7_OF_7_TYPED_UNIONS__5_OF_5_CONTROL_PARTITIONS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_FIRST_PARTY_SDK_TYPED_SCHEMA_SNAPSHOT_20261005_V1.json",
+    "git_blob_sha": "69338dca814bdb5c30564e2112ef5716a6443211"
+  },
+  "action_intent": {
+    "path": "canonical/action_intents/2026-10-05_VERIFY_OPUS55_FIRST_PARTY_SDK_TYPED_SCHEMA_SNAPSHOT_SOL_V2.json",
+    "git_blob_sha": "dd91235a3f7d58cd190d8d8c85bc763b15576adf"
+  },
+  "machine_verifier": {
+    "path": "canonical/runtime/verify_opus55_first_party_sdk_typed_schema_snapshot_v2.py",
+    "git_blob_sha": "bf5d19e7adb979ae2f791eb8af3a02318e834cf9"
+  },
+  "source": {
+    "repository": "anthropics/anthropic-sdk-python",
+    "ref": "v1.11.0",
+    "refetch_method": "GITHUB_CONNECTOR_FETCH_FILE_AT_EXACT_TAG",
+    "bound_blob_count": 20,
+    "matched_blob_count": 20,
+    "all_bound_blob_shas_match": true
+  },
+  "blob_results": {
+    "src/anthropic/types/message_param.py": "c3a2046f2ad752cd87722fac4bae8545e317d474",
+    "src/anthropic/types/content_block.py": "a0baaeb69bab7c74ae6e6aa9613f3381ad416811",
+    "src/anthropic/types/stop_reason.py": "d28f681b8464057da3ddac61a83548e266880e10",
+    "src/anthropic/types/tool_union_param.py": "53ddbcb4490ac96b2797c2d952109e40b3d9ae56",
+    "src/anthropic/types/message.py": "34dc178ccec1f6b49bfacd0743dcd18689bc3c0d",
+    "src/anthropic/types/message_create_params.py": "585e92451d6399aba980aff392fbc0ba942e85d4",
+    "src/anthropic/types/beta/beta_message_param.py": "aad1d9c11bffa5975a3203e5633490d0de96968d",
+    "src/anthropic/types/beta/beta_content_block.py": "8034b978b7fdb990faf0e3c9fdb0e1a338817f2d",
+    "src/anthropic/types/beta/beta_content_block_param.py": "84f0e1466477a278371f88b507ae86ab308ba8d1",
+    "src/anthropic/types/beta/beta_stop_reason.py": "f3d0d3070d0eac3065917a5d11cbbc935faebeb8",
+    "src/anthropic/types/beta/beta_tool_union_param.py": "8a82fb5a4048935e4c0fef28351500e99687bd18",
+    "src/anthropic/types/beta/message_create_params.py": "7f688b24dfc9744f5e0df2678c5fe0bba1b50f44",
+    "src/anthropic/types/beta/beta_message.py": "afaff2d6ba64aa16943c8788d9b913c8dab56d87",
+    "src/anthropic/types/beta/beta_input_transformation.py": "73356bf2564bbe5ef6464aef372fb0b6387a142a",
+    "src/anthropic/types/beta/beta_refusal_stop_details.py": "965d3593e983514e77c920176f80355516579037",
+    "src/anthropic/types/anthropic_beta_param.py": "735b323c6676c66246935c95e9ecced63911060c",
+    "src/anthropic/types/beta/beta_compaction_block.py": "3c03b7174987ecec94821a49c0e3b9a95fbb7976",
+    "src/anthropic/types/beta/beta_fallback_block.py": "19bb60cf508178c89fabf67907540d9a08a3ff00",
+    "src/anthropic/types/beta/beta_mcp_tool_listing_block.py": "1878fb7864742ea691e5da30644b18ce32012fb7",
+    "src/anthropic/types/beta/beta_context_management_response.py": "f86831222e6b078b0afcd0b112a362e7fc91867e"
+  },
+  "typed_union_recomputation": {
+    "check_count": 7,
+    "passed_count": 7,
+    "checks": {
+      "ga_request_message_content": true,
+      "ga_response_content": true,
+      "ga_stop_reasons": true,
+      "beta_request_message_content": true,
+      "beta_response_content": true,
+      "beta_stop_reasons": true,
+      "beta_input_transformations": true
+    }
+  },
+  "control_state_recomputation": {
+    "check_count": 5,
+    "passed_count": 5,
+    "checks": {
+      "ga_request": true,
+      "ga_response": true,
+      "beta_request_additions_or_variants": true,
+      "beta_message_level_additions": true,
+      "beta_response_additions_or_variants": true
+    },
+    "note": "INITIAL_QUICK_REGEX_CROSSCHECK_FALSELY_CAPTURED_DOCSTRING_EXAMPLE_IDENTIFIERS__PARSER_WAS_REPAIRED_BY_REMOVING_TRIPLE_QUOTED_DOCSTRINGS__RECOMPUTATION_THEN_PASSED_ALL_FIVE__CANONICAL_PYTHON_VERIFIER_USES_AST_AND_IS_NOT_AFFECTED"
+  },
+  "conclusion": [
+    "THE_CONTENT_ADDRESSED_GA_PLUS_BETA_SNAPSHOT_IS_REPRODUCIBLE_AT_THE_DECLARED_V1_11_0_SOURCE_PIN",
+    "ALL_DECLARED_EXTRACTED_TYPED_UNIONS_MATCH_THE_BOUND_FIRST_PARTY_SOURCE",
+    "ALL_DECLARED_TOP_LEVEL_CONTROL_AND_STATE_PARTITIONS_MATCH_THE_BOUND_FIRST_PARTY_SOURCE"
+  ],
+  "scheduler_effect": [
+    "DELETE_REPEAT_MANUAL_REENUMERATION_OF_THE_VERIFIED_GA_AND_BETA_SCHEMA_MEMBERS_WHILE_THE_SOURCE_REF_AND_BOUND_BLOB_VECTOR_ARE_UNCHANGED",
+    "ADVANCE_ROOT3_SCHEMA_CLOSED_ROUTE_TO_PROFILE_ADMISSIBILITY_BINDING_AND_TOTAL_BRAIN_IR_ENCODER_PREMISES",
+    "DO_NOT_TREAT_SCHEMA_REPRODUCIBILITY_AS_PROFILE_COMPLETENESS_OR_BEHAVIORAL_DOMINANCE"
+  ],
+  "public_runner": {
+    "workflow": "Verify Opus 5.5 GA+beta SDK typed schema snapshot V2",
+    "initial_run_id": 37255884036,
+    "initial_observation": "QUEUED_AT_TIME_OF_CONNECTOR_RECOMPUTATION",
+    "role": "REDUNDANT_REPRODUCTION__NOT_CREDITED_UNTIL_PASS"
+  },
+  "hard_nonclaims": [
+    "NO_PROOF_THE_GA_PLUS_BETA_SDK_SURFACE_COVERS_EVERY_OPUS55_FIRST_PARTY_PROFILE",
+    "NO_PROOF_ALL_BETA_FEATURES_ARE_ADMISSIBLE_FOR_OPUS55",
+    "NO_TOTAL_BRAIN_IR_ENCODER_PROOF",
+    "NO_PRIMITIVE_LOCAL_REFINEMENT_OR_COMPOSITIONAL_PERFORMANCE_DOMINANCE",
+    "NO_TARGET_DISCOVERY_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
