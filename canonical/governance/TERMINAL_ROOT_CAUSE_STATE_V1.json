@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROOT_CAUSE_STATE_V1",
   "date": "2026-10-04",
-  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__LIVEBENCH_CLEAN_FIXED_BAR_CLOSED__13_PROVED__25_UNRESOLVED",
+  "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__14_PROVED__24_UNRESOLVED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_acceptance": {
     "accepted_families": 5,
     "open_families": 14,
-    "proved_atomic": 13,
-    "unresolved_atomic": 25,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
     "total_families": 19,
     "total_atomic": 38,
     "terminal": false
@@ -530,17 +530,16 @@
     },
     "evidence": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "25d3408c7ee746f0f853d718ffa1af1ecff14596",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
       "pointer_reconciliation": {
-        "status": "RECONCILED_TO_CURRENT_13_PROVED_25_UNRESOLVED_LEDGER",
-        "previous_stale_git_blob_sha": "0d4d78928ffd9b1979e5d38c074c6d5c86cfdeab",
+        "status": "RECONCILED_TO_CURRENT_14_PROVED_24_UNRESOLVED_LEDGER",
         "acceptance_credit_delta": 0
       }
     },
-    "unresolved_total": 25,
+    "unresolved_total": 24,
     "root1_positive_gap_count": 0,
     "root2_only_count": 15,
-    "root3_only_count": 7,
+    "root3_only_count": 6,
     "root2_and_root3_count": 3,
     "root2_only": [
       "ARTIFACT_AA_BRIEFCASE_GE_1822",
@@ -564,7 +563,6 @@
       "VISION_DENSE_NONCHART_SCOPE",
       "FINANCE_UNCOVERED_SCOPE_AUDIT",
       "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
-      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
       "COMPOSITION_COMPONENT_SCOPED_PROOFS",
       "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
     ],
@@ -594,6 +592,12 @@
       "acceptance_commit": "26b0437c4ebe66a229d1ad72a927f2c6b4670c40",
       "reason": "EXACT_ACTIVE15_POINTWISE_MAXIMUM_DOMINANCE_FORCES_BRAIN_MEAN_GE_65_73775_GE_65_7",
       "acceptance_credit_delta": 1
+    },
+    "unknown_domain_root_transition": {
+      "state": "CLOSED__PROVED",
+      "verification": "canonical/verification/UNKNOWN_DOMAIN_V7_WINDOWS_V8_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "acceptance_reduction": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "ledger_commit": "9b88babb07a85f3ae3940780ab0b343a5d65b0ee"
     }
   },
   "root3_current_execution_state": {
