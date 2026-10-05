@@ -1,8 +1,8 @@
-"""Fail-closed typed compiler for coverage-dominance sandwich certificates.
+"""Fail-closed compiler for a typed task-acceptance coverage/dominance sandwich.
 
-This module does not prove semantic coverage or dominance. It composes
-already-admissible certificates only when they bind to one exact semantic
-region universe whose atom meanings are individually content-addressed.
+The runtime composes already-admissible certificates only over one exact
+content-addressed *partition* of task/acceptance semantics. It does not prove
+the semantic premises itself.
 """
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 class BridgeError(ValueError):
     pass
 
-def _require_bool(obj: Mapping[str, Any], key: str) -> None:
+def _require_true(obj: Mapping[str, Any], key: str) -> None:
     if obj.get(key) is not True:
         raise BridgeError(f"{key}_REQUIRED_TRUE")
 
@@ -37,8 +37,7 @@ def _universe(value: Any) -> tuple[set[str], str]:
             raise BridgeError("UNIVERSE_ATOM_ID_INVALID")
         normalized[atom]=_sha(semantic_sha,f"UNIVERSE_ATOM_{atom}_SEMANTIC_SHA")
     canonical=json.dumps(normalized,sort_keys=True,separators=(",",":"),ensure_ascii=True).encode()
-    digest=hashlib.sha256(canonical).hexdigest()
-    return set(normalized),digest
+    return set(normalized),hashlib.sha256(canonical).hexdigest()
 
 def _ids(value: Any, label: str) -> set[str]:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes, bytearray)):
@@ -66,6 +65,14 @@ def compile_typed_sandwich(manifest: Mapping[str, Any]) -> dict[str, Any]:
         if declared_digest != derived_digest:
             raise BridgeError("UNIVERSE_SHA256_CONTENT_MISMATCH")
 
+        partition=manifest.get("partition_certificate")
+        if not isinstance(partition,Mapping):
+            raise BridgeError("PARTITION_CERTIFICATE_MISSING")
+        _sha(partition.get("source_sha"),"PARTITION_SOURCE_SHA")
+        _require_true(partition,"independent_or_objective")
+        _require_true(partition,"pairwise_disjoint_proved")
+        _require_true(partition,"atoms_define_declared_omega_proved")
+
         coverage=manifest.get("coverage_certificates")
         dominance=manifest.get("dominance_certificates")
         if not isinstance(coverage,Sequence) or isinstance(coverage,(str,bytes,bytearray)) or not coverage:
@@ -83,8 +90,9 @@ def compile_typed_sandwich(manifest: Mapping[str, Any]) -> dict[str, Any]:
             if cert.get("universe_sha256") != declared_digest:
                 raise BridgeError(f"COVERAGE_{i}_UNIVERSE_SHA256_MISMATCH")
             _sha(cert.get("source_sha"),f"COVERAGE_{i}_SOURCE_SHA")
-            _require_bool(cert,"independent_or_objective")
-            _require_bool(cert,"u_subset_domain_proved")
+            _require_true(cert,"independent_or_objective")
+            _require_true(cert,"exact_atom_union_embedding_proved")
+            _require_true(cert,"u_subset_domain_proved")
             cells=_ids(cert.get("cells"),f"COVERAGE_{i}_CELLS")
             if not cells <= universe:
                 raise BridgeError(f"COVERAGE_{i}_UNKNOWN_REGION")
@@ -101,9 +109,10 @@ def compile_typed_sandwich(manifest: Mapping[str, Any]) -> dict[str, Any]:
             if cert.get("universe_sha256") != declared_digest:
                 raise BridgeError(f"DOMINANCE_{i}_UNIVERSE_SHA256_MISMATCH")
             _sha(cert.get("source_sha"),f"DOMINANCE_{i}_SOURCE_SHA")
-            _require_bool(cert,"independent_or_objective")
-            _require_bool(cert,"scope_complete")
-            _require_bool(cert,"b_subset_q_proved")
+            _require_true(cert,"independent_or_objective")
+            _require_true(cert,"exact_atom_union_embedding_proved")
+            _require_true(cert,"scope_complete")
+            _require_true(cert,"b_subset_q_proved")
             cells=_ids(cert.get("cells"),f"DOMINANCE_{i}_CELLS")
             if not cells <= universe:
                 raise BridgeError(f"DOMINANCE_{i}_UNKNOWN_REGION")
