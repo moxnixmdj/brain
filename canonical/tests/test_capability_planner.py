@@ -144,6 +144,48 @@ class CapabilityPlannerTests(unittest.TestCase):
             ],
         )
 
+    def test_composition_contract_binds_every_requirement_source(self):
+        problem = {
+            "initial_facts": ["repo.available"],
+            "target_effects": ["record.written"],
+            "capabilities": [
+                {
+                    "id": "locate-record",
+                    "requires": ["repo.available"],
+                    "provides": ["record.located"],
+                    "cost": 1,
+                    "action": {"type": "search_text", "args": {"query": "record"}},
+                },
+                {
+                    "id": "write-record",
+                    "requires": ["record.located"],
+                    "provides": ["record.written"],
+                    "cost": 1,
+                    "action": {"type": "write_json_records", "args": {}},
+                },
+            ],
+        }
+        out = planner.plan_actions(problem)
+        contract = out["composition_contract"]
+        self.assertEqual(
+            contract[0]["requirement_bindings"],
+            {"repo.available": {"source": "initial_fact"}},
+        )
+        self.assertEqual(
+            contract[1]["requirement_bindings"],
+            {
+                "record.located": {
+                    "source": "capability",
+                    "cycle": 0,
+                    "capability_id": "locate-record",
+                }
+            },
+        )
+        self.assertEqual(
+            contract[1]["provider_bindings"],
+            {"record.located": {"cycle": 0, "capability_id": "locate-record"}},
+        )
+
     def test_effect_result_binding_rejects_undeclared_provider_field(self):
         problem = {
             "initial_facts": [],
