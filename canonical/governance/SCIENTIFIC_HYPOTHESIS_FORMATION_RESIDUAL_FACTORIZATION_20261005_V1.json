@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_FORMATION_RESIDUAL_FACTORIZATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__BROAD_SCIENTIFIC_HYPOTHESIS_LEAF_FACTORED_INTO_ALREADY_OWNED_EXACT_SELECTION_COMPONENT_PLUS_NARROW_SEMANTIC_GENERATION_RESIDUAL__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Shrink SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001 before any matched-comparator construction by removing the exact information-gain selection subproblem already declared Brain-owned, while preserving every open semantic obligation.",
+  "authorities": {
+    "scientific_hypothesis_gap": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "f0c6e15e6af698a80895eedf2c39bb874b4697b8"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "relevant_known_owned_leaf": "EXACT_INFORMATION_GAIN_WHEN_BELIEF_AND_OBSERVATION_MODEL_EXPLICIT"
+    }
+  },
+  "factorization": {
+    "original_transform": [
+      "GENERATE_DECISION_RELEVANT_FALSIFIABLE_RESEARCH_QUESTIONS_OR_HYPOTHESES",
+      "SPECIFY_DISCRIMINATING_TEST_OR_OBSERVATION_PLAN",
+      "RANK_CANDIDATES_BY_EXPECTED_INFORMATION_GAIN_AND_FEASIBILITY"
+    ],
+    "already_owned_exact_component": {
+      "behavior": "EXACT_INFORMATION_GAIN_WHEN_BELIEF_AND_OBSERVATION_MODEL_EXPLICIT",
+      "applicability_preconditions": [
+        "FINITE_OR_EXPLICITLY_REPRESENTED_CANDIDATE_HYPOTHESIS_OR_QUESTION_SET",
+        "EXPLICIT_BELIEF_OR_PRIOR_STATE",
+        "EXPLICIT_OBSERVATION_MODEL_OR_OUTCOME_LIKELIHOODS",
+        "DECLARED_INFORMATION_GAIN_OBJECTIVE"
+      ],
+      "effect": "WHEN_THE_PRECONDITIONS_HOLD__EXPECTED_INFORMATION_GAIN_COMPUTATION_AND_ORDERING_MUST_BE_ROUTED_TO_THE_OWNED_EXACT_COMPONENT__NOT_REPROVED_BY_AN_OPUS55_MATCHED_COMPARATOR"
+    },
+    "irreducible_open_semantic_residual": {
+      "candidate_behavior_id": "EVIDENCE_STATE_TO_NOVEL_FALSIFIABLE_HYPOTHESIS_AND_TEST_SET_001",
+      "inputs": "Observed phenomenon; evidence/provenance graph; domain constraints; unresolved anomalies; available tools and research budget; optionally an explicit belief state.",
+      "environment_state": "Scientific inquiry state in which the useful live hypotheses/questions and/or discriminating observation models are not already fully enumerated.",
+      "allowed_information": "JIT literature/data/tools plus current evidence graph; no hidden target answer or evaluator leakage.",
+      "required_output_or_action": "Generate a finite set of scientifically coherent, nontrivial, falsifiable hypotheses or research questions together with feasible discriminating tests/observation plans and enough explicit outcome semantics to permit objective downstream ranking where possible.",
+      "success_conditions": [
+        "AT_LEAST_ONE_LIVE_CANDIDATE_IS_NOT_A_TAUTOLOGY_OR_RESTATEMENT_OF_SUPPLIED_EVIDENCE",
+        "EACH_PROMOTED_HYPOTHESIS_OR_QUESTION_HAS_AN_OBSERVATION_OR_TEST_THAT_COULD_FALSIFY_OR_MATERIALLY_DISCRIMINATE_IT",
+        "PROPOSED_TESTS_RESPECT_DECLARED_DOMAIN_AND_RESOURCE_CONSTRAINTS",
+        "KNOWN_DECISIVE_EVIDENCE_IS_NOT_IGNORED",
+        "WHEN_MULTIPLE_LIVE_CANDIDATES_SURVIVE__OUTPUT_EXPOSES_SUFFICIENT_BELIEF_AND_OBSERVATION_MODEL_STRUCTURE_FOR_THE_OWNED_INFORMATION_GAIN_COMPONENT_OR_EXPLICITLY_MARKS_WHAT_REMAINS_SEMANTICALLY_UNSPECIFIED"
+      ],
+      "failure_conditions": [
+        "UNFALSIFIABLE_OR_TAUTOLOGICAL_OUTPUT",
+        "MERE_RESTATEMENT_OF_GIVEN_FACTS",
+        "NO_DISCRIMINATING_TEST_OR_OBSERVATION_PLAN",
+        "TEST_CANNOT_CHANGE_RELATIVE_SUPPORT_AMONG_LIVE_EXPLANATIONS",
+        "HIDDEN_RELIANCE_ON_EXACT_INFORMATION_GAIN_JUDGMENT_WHEN_THE_REQUIRED_PROBABILITY_MODEL_IS_NOT_EXPLICIT"
+      ],
+      "scope": "Open-ended semantic generation of scientific hypotheses/questions and discriminating test models from an evidence state."
+    }
+  },
+  "proof_boundary": {
+    "exact_component_does_not_cover": [
+      "HYPOTHESIS_GENERATION",
+      "QUESTION_GENERATION",
+      "SEMANTIC_COHERENCE",
+      "SCIENTIFIC_NONTRIVIALITY",
+      "FALSIFIABILITY_SEMANTICS",
+      "TEST_FEASIBILITY_WHEN_NOT_EXPLICITLY_ENCODED",
+      "INFERENCE_OF_PRIORS_OR_OBSERVATION_LIKELIHOODS_FROM_OPEN_ENDED_EVIDENCE"
+    ],
+    "semantic_component_does_not_need_to_reprove": [
+      "EXACT_EXPECTED_INFORMATION_GAIN_ARITHMETIC_WHEN_MODEL_PRECONDITIONS_HOLD",
+      "ORDERING_BY_THAT_EXACT_INFORMATION_GAIN_VALUE_WHEN_FEASIBILITY_CONSTRAINTS_ARE_EXPLICIT"
+    ]
+  },
+  "scheduler_delta_if_independently_verified": {
+    "delete": [
+      "MATCHED_OPUS55_SCORING_OF_EXACT_INFORMATION_GAIN_ARITHMETIC_INSIDE_SCIENTIFIC_HYPOTHESIS_FORMATION",
+      "DUPLICATE_MODEL_BASED_INFORMATION_GAIN_RANKING_IMPLEMENTATION_FOR_THIS_NEW_LEAF"
+    ],
+    "preserve": [
+      "SEARCH_FOR_EXISTING_CONTENT_ADDRESSED_HYPOTHESIS_GENERATION_RECEIPTS",
+      "FORMAL_OR_OBJECTIVE_CEILINGS_FOR_BOUNDED_HYPOTHESIS_GENERATION_SUBREGIONS",
+      "MATCHED_DIRECT_NONINFERIORITY_ONLY_FOR_THE_IRREDUCIBLE_OPEN_ENDED_SEMANTIC_RESIDUAL",
+      "ALL_TB_SCIENCE_PUBLIC_BAR_AND_SCOPE_SAFE_ACCEPTANCE_REQUIREMENTS"
+    ],
+    "preferred_execution_order": [
+      "BIND_THE_EXACT_INFORMATION_GAIN_IMPLEMENTATION_AND_INDEPENDENT_RECEIPT_BEHIND_THE_REGISTRY_KNOWN_OWNED_ASSERTION",
+      "SEARCH_CURRENT_T3_RESEARCH_ROUTE_FOR_ALREADY_OBSERVED_HYPOTHESIS_AND_TEST_GENERATION_BEHAVIOR",
+      "IF_FOUND__TRY_SCOPE_COMPLETE_REUSE_OR_STRONGER_PROOF",
+      "ONLY_IF_STILL_OPEN__DESIGN_A_MINIMUM_MATCHED_PORTFOLIO_FOR_EVIDENCE_STATE_TO_NOVEL_FALSIFIABLE_HYPOTHESIS_AND_TEST_SET_001"
+    ]
+  },
+  "basis_effect": {
+    "new_accounting_family_required": false,
+    "current_atomic_registry_count_changed": false,
+    "current_proved_atomic_count_changed": false,
+    "root1_positive_gap_delta": 0,
+    "claim": "THIS_FACTORIZATION_NARROWS_A_CANDIDATE_PROOF_BASIS_OBLIGATION__IT_DOES_NOT_PROMOTE_OR_DELETE_THE_OBLIGATION_UNTIL_THE_OWNED_COMPONENT_BINDING_AND_FACTORIZATION_ARE_INDEPENDENTLY_VERIFIED"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_REGISTRY_KNOWN_OWNED_ASSERTION_ALONE_IS_A_TERMINAL_ACCEPTANCE_RECEIPT",
+    "NO_CLAIM_OPEN_ENDED_HYPOTHESIS_GENERATION_IS_ALREADY_OWNED",
+    "NO_CLAIM_AGENTIC_SCIENTIFIC_RESEARCH_IS_ACCEPTED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_NEW_TERMINAL_CASES_AUTHORIZED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "INDEPENDENTLY_BIND_THE_EXACT_INFORMATION_GAIN_OWNERSHIP_RECEIPT__THEN_RECOMPUTE_THE_MINIMUM_SEMANTIC_HYPOTHESIS_GENERATION_RESIDUAL_BEFORE_ANY_COMPARATOR_OR_NEW_PORTFOLIO"
+}
