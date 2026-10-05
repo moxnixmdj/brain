@@ -1,0 +1,323 @@
+{
+  "class_counts": {
+    "ARBITRARY_COMMAND_EXECUTION": 2,
+    "BOUND_CHILD_CODE_EXECUTION": 5,
+    "DECLARED_ARTIFACT_PRODUCTION": 1,
+    "LOCAL_LOOPBACK_SERVICE": 1,
+    "PACKAGE_ENV_MUTATION": 3,
+    "READ_ONLY_DECLARED_QUERY": 15,
+    "TEMPORARY_FILESYSTEM_TRANSFORM": 2
+  },
+  "corroborating_context_fields": [
+    "function_ast_sha256"
+  ],
+  "current_astra_blob": "85977747574cf7f393ca22a2c65268ed283ab3fe",
+  "diagnostic_only_fields": [
+    "diagnostic_lineno"
+  ],
+  "identity_fields": [
+    "module_path",
+    "function",
+    "process_api",
+    "call_ast_sha256"
+  ],
+  "identity_rationale": "CALL_AST_IS_THE_SMALLEST_CURRENT_ZERO_COLLISION_LOCATION_FREE_IDENTITY_OVER_ALL_29_SITES__FUNCTION_AST_IS_CORROBORATING_CONTEXT_NOT_AUTHORITY__CLASS_EXECUTOR_MUST_STILL_VALIDATE_RUNTIME_COMMAND_SEMANTICS",
+  "popen_count": 2,
+  "prior_astra_blob": "0912dfa4119950f6d235d501dfa784e65e9f71c9",
+  "records": [
+    {
+      "call_ast_sha256": "2e2f9112f33b7ff2076a8e802096db2785042375ebfdb0fb7bd1b93b46a430d1",
+      "diagnostic_lineno": 325,
+      "effect_class": "ARBITRARY_COMMAND_EXECUTION",
+      "function": "run_shell",
+      "function_ast_sha256": "2a71c0ea9727889bd86b6a4138a868a13fc500c4c1b7004890833360d76d125c",
+      "module_path": "canonical/runtime/astra_runtime.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "CALL_AND_ENCLOSING_FUNCTION_AST_IDENTICAL_TO_PRIOR_CLASSIFIED_ASTRA_SOURCE"
+    },
+    {
+      "call_ast_sha256": "6216067a55c6aacca124e1b28f6d1856b021f4d108d7e00d86868b090d240a0f",
+      "diagnostic_lineno": 595,
+      "effect_class": "PACKAGE_ENV_MUTATION",
+      "function": "_ensure_pypi_dependency",
+      "function_ast_sha256": "94aec9effcc5e9484958a380d58d963f83ad83e0aacff453c6bb1664716c1775",
+      "module_path": "canonical/runtime/astra_runtime.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "CALL_AND_ENCLOSING_FUNCTION_AST_IDENTICAL_TO_PRIOR_CLASSIFIED_ASTRA_SOURCE"
+    },
+    {
+      "call_ast_sha256": "893f291f765dfbc4ce2e58afc2e4ca660b390bd87aa4bcd18da03dd3524cbd44",
+      "diagnostic_lineno": 673,
+      "effect_class": "PACKAGE_ENV_MUTATION",
+      "function": "_ensure_pypi_dependency",
+      "function_ast_sha256": "94aec9effcc5e9484958a380d58d963f83ad83e0aacff453c6bb1664716c1775",
+      "module_path": "canonical/runtime/astra_runtime.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "CALL_AND_ENCLOSING_FUNCTION_AST_IDENTICAL_TO_PRIOR_CLASSIFIED_ASTRA_SOURCE"
+    },
+    {
+      "call_ast_sha256": "1e02e1fd87737804c8caead5e98d82e7155f51c968d4475b065f4115c1f57b0e",
+      "diagnostic_lineno": 918,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_ensure_apt_dependencies",
+      "function_ast_sha256": "a8ce80f576b4fc318ed9965b671cc08769e741f9164d7cf4672bc43e91f2a657",
+      "module_path": "canonical/runtime/astra_runtime.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "CALL_AND_ENCLOSING_FUNCTION_AST_IDENTICAL_TO_PRIOR_CLASSIFIED_ASTRA_SOURCE"
+    },
+    {
+      "call_ast_sha256": "1d6a6cfd5bc6bd5fc258e57846c81f12b25af170959348d3110ea32836ce53f7",
+      "diagnostic_lineno": 933,
+      "effect_class": "PACKAGE_ENV_MUTATION",
+      "function": "_ensure_apt_dependencies",
+      "function_ast_sha256": "a8ce80f576b4fc318ed9965b671cc08769e741f9164d7cf4672bc43e91f2a657",
+      "module_path": "canonical/runtime/astra_runtime.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "CALL_AND_ENCLOSING_FUNCTION_AST_IDENTICAL_TO_PRIOR_CLASSIFIED_ASTRA_SOURCE"
+    },
+    {
+      "call_ast_sha256": "59dd3431c7f5d5782b6cdd89b8331174e2630cbbc99d6c61739290d28cfe1911",
+      "diagnostic_lineno": 940,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_ensure_apt_dependencies",
+      "function_ast_sha256": "a8ce80f576b4fc318ed9965b671cc08769e741f9164d7cf4672bc43e91f2a657",
+      "module_path": "canonical/runtime/astra_runtime.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "CALL_AND_ENCLOSING_FUNCTION_AST_IDENTICAL_TO_PRIOR_CLASSIFIED_ASTRA_SOURCE"
+    },
+    {
+      "call_ast_sha256": "a3d32723bf2ec390fbef7cfd14fd83b263ab6357cca8945d9d7d8d4b19b1eaf5",
+      "diagnostic_lineno": 1209,
+      "effect_class": "BOUND_CHILD_CODE_EXECUTION",
+      "function": "_goal_action",
+      "function_ast_sha256": "99f545a0088e4e984a95951533825b38e369f5aff0af3e78136433a0776907f4",
+      "module_path": "canonical/runtime/astra_runtime.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "CALL_AST_IDENTICAL__ENCLOSING_FUNCTION_DIFF_INDEPENDENTLY_REVIEWED_AS_REPO_MUTATION_PATH_HARDENING_ONLY"
+    },
+    {
+      "call_ast_sha256": "8a17b8f80414334e7364ade34ac6fc7731582da5faeea3b80be3972f412f09ed",
+      "diagnostic_lineno": 5771,
+      "effect_class": "BOUND_CHILD_CODE_EXECUTION",
+      "function": "_verify_and_promote_acquisition",
+      "function_ast_sha256": "4c2f9fec503304bfea608fd01b71822dba0a04d2adabdf851a3164b5304a46f5",
+      "module_path": "canonical/runtime/astra_runtime.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "CALL_AND_ENCLOSING_FUNCTION_AST_IDENTICAL_TO_PRIOR_CLASSIFIED_ASTRA_SOURCE"
+    },
+    {
+      "call_ast_sha256": "7150b54345979d5a8d78b10111dfa9d94196c4a0212fd05d56f07a4091eb3d8e",
+      "diagnostic_lineno": 217,
+      "effect_class": "BOUND_CHILD_CODE_EXECUTION",
+      "function": "dispatch",
+      "function_ast_sha256": "f08e3619b7d343e4e728ad7eeae81cf923b847a47ecb8c69ea3823fe813e8954",
+      "module_path": "canonical/runtime/auto_python_source_codec_acquisition.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "3ae9ba5effd9ecfc5cfcbc54846a6d3b253fcdef21261768ad296c524b0563be",
+      "diagnostic_lineno": 32,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "run",
+      "function_ast_sha256": "e08a1e4d53efde1b3321e4cd7bb7fa5cc2679d438486b448a5d1ed214e002562",
+      "module_path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "622882f3545f27d02924c6b5ed8badd0d57d5dbd6058b56ea0663ddea1061614",
+      "diagnostic_lineno": 40,
+      "effect_class": "TEMPORARY_FILESYSTEM_TRANSFORM",
+      "function": "run",
+      "function_ast_sha256": "e08a1e4d53efde1b3321e4cd7bb7fa5cc2679d438486b448a5d1ed214e002562",
+      "module_path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "3617e122e2cc27089676813fac930171ddd57e9a4d37cf5d9bec91d2a00350b2",
+      "diagnostic_lineno": 50,
+      "effect_class": "LOCAL_LOOPBACK_SERVICE",
+      "function": "run",
+      "function_ast_sha256": "59095c3a5a3f870aa19ff39b946a46bcd695c2c29344373d9044981e2ec85342",
+      "module_path": "canonical/runtime/bound_capabilities/browser_chromedriver.py",
+      "process_api": "subprocess.Popen",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "7a4054b9185e245c52e4d3df9813982dcbd900a0c8528071cecea4887041d776",
+      "diagnostic_lineno": 27,
+      "effect_class": "ARBITRARY_COMMAND_EXECUTION",
+      "function": "run",
+      "function_ast_sha256": "5357e6476d856760e105e8b65db26d948e8977691bc5d0df4e73138fdd2f90cc",
+      "module_path": "canonical/runtime/bound_capabilities/cli_command.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "00197ea8ae9eac5253b403882ae504ced95a8133c4dacb47b0806351e803cbf3",
+      "diagnostic_lineno": 41,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "run",
+      "function_ast_sha256": "212653d150821435be3c7ec5be7ec9155d4eddeb25032bc1ea6ccc71f6ce0dcc",
+      "module_path": "canonical/runtime/bound_capabilities/jq_query.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "fa8f0ac2885581848dbf5cf040274f74ac914ace2954205cf712b4f43e03d49a",
+      "diagnostic_lineno": 16,
+      "effect_class": "BOUND_CHILD_CODE_EXECUTION",
+      "function": "_run_node",
+      "function_ast_sha256": "368e892dfda0ab42553fef0697f6cdc4ed2ae25d6650fa86b894b27290dfaade",
+      "module_path": "canonical/runtime/bound_capabilities/node_library_codec.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "9ff8e71e605038c3162155dd709411f598d8e8f66b75bc2bc55338556ae48a7e",
+      "diagnostic_lineno": 24,
+      "effect_class": "DECLARED_ARTIFACT_PRODUCTION",
+      "function": "run",
+      "function_ast_sha256": "777e9ea8e67b0fe2d80f3cdcee38c07f96f9c214ae1266a379ce7141d0bf57e8",
+      "module_path": "canonical/runtime/bound_capabilities/pandoc_weasyprint.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "749d278c576299df9bdad1d16c352f4dd41b25ce40509fc04c084bd8196d83ac",
+      "diagnostic_lineno": 29,
+      "effect_class": "TEMPORARY_FILESYSTEM_TRANSFORM",
+      "function": "run",
+      "function_ast_sha256": "ce857e130a18ad0e3e1fd87fc5c31152b34617bd1b641b7b031e9495a10db15e",
+      "module_path": "canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "6c1e815b533b2afb4091ff0103d22c10a4325c7b381cf5fa92c04659d9a1304a",
+      "diagnostic_lineno": 44,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "run",
+      "function_ast_sha256": "ce857e130a18ad0e3e1fd87fc5c31152b34617bd1b641b7b031e9495a10db15e",
+      "module_path": "canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "5a18e8f928c46375b580ddb23584b018a348b52d45da4508a1840a3e96e3a905",
+      "diagnostic_lineno": 50,
+      "effect_class": "BOUND_CHILD_CODE_EXECUTION",
+      "function": "run",
+      "function_ast_sha256": "8a64c8ea5fcc90b06485f127bbe0aac3a5a5cfd966c5ddf27b5d9f82ba7a9f13",
+      "module_path": "canonical/runtime/bound_capabilities/python_test_audit.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "f0aae8417c0ebddd836662439478ab1fb079d659a115478f9ab5e9ccd246f0cb",
+      "diagnostic_lineno": 66,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_run_json",
+      "function_ast_sha256": "b08460bdebb572dd24f23d9610420d6dbdc7238051a447c7e2e976e05f69d5b5",
+      "module_path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "77a6a26b87966d853420c19f2c2c07c73f0b17d34c2b99722ab6ba567e6afa61",
+      "diagnostic_lineno": 21,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "run",
+      "function_ast_sha256": "e21221954ff42553dd2a387606a4d5c582147cfc278c864448e6cf9e9d039131",
+      "module_path": "canonical/runtime/bound_capabilities/yq_yaml_json.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "fdd4b8ec594ca8cf67ed30a6b719a68f46e5b8264c4eca773b76db2e6af8d3fa",
+      "diagnostic_lineno": 267,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_legacy_search_apt_packages",
+      "function_ast_sha256": "fa5476423e2fee7c8a63e90f757a6fb62e9572b0effe583d40f6ba89fc9a7479",
+      "module_path": "canonical/runtime/capability_discovery.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "60f5ee41d0e2c819820cc2be45c565fb9c7e139cf9c544450c3830defb42588a",
+      "diagnostic_lineno": 359,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_legacy_search_apt_packages",
+      "function_ast_sha256": "fa5476423e2fee7c8a63e90f757a6fb62e9572b0effe583d40f6ba89fc9a7479",
+      "module_path": "canonical/runtime/capability_discovery.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "8483147a5dba0da39fa31aa22472fdb8b071601c81d620fe4d520fd81eaecfe8",
+      "diagnostic_lineno": 368,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_legacy_search_apt_packages",
+      "function_ast_sha256": "fa5476423e2fee7c8a63e90f757a6fb62e9572b0effe583d40f6ba89fc9a7479",
+      "module_path": "canonical/runtime/capability_discovery.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "1e15722f186c2575bb0cff73e2c0a0bee9897b95dd2d8f276bbb44c9723e94d3",
+      "diagnostic_lineno": 428,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_apt_index_target_files",
+      "function_ast_sha256": "f53692ed4996fd65d928978d81eda9f31f18244e6a2fcbe78cfecf37f267a943",
+      "module_path": "canonical/runtime/capability_discovery.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "96a07b7c723660d9a860b323f41dc1cbf794a7456e0af0dfc290efb574eab5a3",
+      "diagnostic_lineno": 446,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_read_apt_index",
+      "function_ast_sha256": "b2ff439b3ebd58151c4b2d95b04620357bf5e0bffd5427bb07e02b7f41eee9b2",
+      "module_path": "canonical/runtime/capability_discovery.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "993272ec836c4f1c0fdfb51e48ebda4acd8cabaa600b69c6f9748afe207cdcd5",
+      "diagnostic_lineno": 468,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_apt_full_metadata_records",
+      "function_ast_sha256": "78dab76d88f3b82f9fd0e48729853ca8ba15bb56a630da86ee2a2a12a6b4303e",
+      "module_path": "canonical/runtime/capability_discovery.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "2ae0b27c6a6010e5f0d1d5df5d8556b02a243595c821b2c7b40cc0abdc90355d",
+      "diagnostic_lineno": 581,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_apt_contents_executable_owners",
+      "function_ast_sha256": "8dfe030ebb5b83d42ab7a6a446b3a9fe7047c73618636d2b1a18d42d6a7ed5a0",
+      "module_path": "canonical/runtime/capability_discovery.py",
+      "process_api": "subprocess.run",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    },
+    {
+      "call_ast_sha256": "a9a20abd5bd191a534c63cba538caefa0f47a3355064dc3dfbe5e8ccdc3a167b",
+      "diagnostic_lineno": 605,
+      "effect_class": "READ_ONLY_DECLARED_QUERY",
+      "function": "_apt_contents_executable_owners",
+      "function_ast_sha256": "8dfe030ebb5b83d42ab7a6a446b3a9fe7047c73618636d2b1a18d42d6a7ed5a0",
+      "module_path": "canonical/runtime/capability_discovery.py",
+      "process_api": "subprocess.Popen",
+      "transfer_basis": "EXACT_NON_ASTRA_MODULE_BLOB_UNCHANGED_FROM_PRIOR_CONTENT_ADDRESSED_UNIVERSE"
+    }
+  ],
+  "run_count": 27,
+  "schema": "PROJECT_BRAIN_ROOT3_SUBPROCESS_EFFECT_CLASS_FINGERPRINT_MAP_V2",
+  "site_count": 29,
+  "status": "PASS__CURRENT_29_SITE_EFFECT_CLASSES_BOUND_BY_LOCATION_FREE_AST_FINGERPRINTS"
+}
