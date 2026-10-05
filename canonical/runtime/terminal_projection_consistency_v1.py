@@ -16,7 +16,10 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime.material_condition_closure_v1 import compile_material_condition_closure
+try:
+    from canonical.runtime.material_condition_closure_v1 import compile_material_condition_closure
+except ModuleNotFoundError:  # direct execution: python canonical/runtime/terminal_projection_consistency_v1.py
+    from material_condition_closure_v1 import compile_material_condition_closure
 
 ROOT=Path(__file__).resolve().parents[2]
 PATHS={
