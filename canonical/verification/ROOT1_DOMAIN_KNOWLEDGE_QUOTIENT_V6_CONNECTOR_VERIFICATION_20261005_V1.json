@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_DOMAIN_KNOWLEDGE_QUOTIENT_V6_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__FIVE_DOMAIN_TAXONOMY_BRANCHES_COLLAPSE_TO_CONDITION_OVERLAYS_WITHOUT_PARITY_TRANSFER__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V6.json",
+    "git_blob_sha": "4f7a142a11bfe694c2018348c99aa994c3a21488"
+  },
+  "inputs": {
+    "v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "quotient": {
+      "path": "canonical/governance/ROOT1_DOMAIN_KNOWLEDGE_CAPABILITY_QUOTIENT_V1.json",
+      "git_blob_sha": "1b34dc4f094ac9444751766cf4222f2ff055533e"
+    },
+    "envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "multilingual_long_context": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+    },
+    "creative_diagram": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    },
+    "public_bar_scope_quarantine": {
+      "path": "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "fa4cddb4af4fb29c7e19e004774b11d6b874359a"
+    }
+  },
+  "recomputed": {
+    "terminal_knowledge_rule_external_jit": true,
+    "v5_domain_mapping_group_count": 5,
+    "quotient_domain_reduction_count": 5,
+    "all_quotient_family_references_exist_in_19_family_envelope": true,
+    "v6_primitive_family_mapping_frontier_count": 0,
+    "v6_domain_condition_overlay_count": 5,
+    "v6_cross_cutting_condition_count": 2,
+    "v6_total_condition_overlay_count": 7,
+    "creative_text_basis_gap_preserved_open": true,
+    "diagram_output_basis_gap_preserved_open": true,
+    "five_public_bar_only_scope_bridges_preserved_open": true,
+    "root1_positive_gap_count": 0,
+    "domain_parity_credit_transferred": false,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
+  },
+  "logic_check": {
+    "taxonomy_implication": "DOMAIN_LABEL_PLUS_EXTERNAL_JIT_KNOWLEDGE_IS_NOT_SUFFICIENT_TO_WITNESS_A_NEW_PRIMITIVE_CAPABILITY_FAMILY",
+    "new_family_reopen_condition": "CONCRETE_REUSABLE_OPERATOR_SURVIVES_KNOWLEDGE_REMOVAL_AND_IS_NOT_REPRESENTABLE_BY_ANY_EXISTING_FAMILY_UNION",
+    "parity_separation": "TAXONOMY_COLLAPSE_DOES_NOT_PROVE_EQUAL_OR_BETTER_DOMAIN_OUTCOMES",
+    "result": "PASS"
+  },
+  "errors": [],
+  "consequence": [
+    "DELETE_FIVE_DOMAIN_LABEL_TO_NEW_FAMILY_MAPPING_BRANCHES_FROM_ROOT1_TAXONOMY_SEARCH",
+    "KEEP_FIVE_DOMAIN_EQUAL_OR_BETTER_CONDITION_OVERLAYS_OPEN",
+    "KEEP_MULTILINGUAL_AND_LONG_CONTEXT_OPEN",
+    "KEEP_CREATIVE_DIAGRAM_BASIS_REPAIR_OPEN",
+    "KEEP_FIVE_PUBLIC_BAR_ONLY_SCOPE_BRIDGES_OPEN",
+    "PRESERVE_ROOT1_POSITIVE_ZERO",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
+    "NO_DOMAIN_PARITY_CLAIM",
+    "NO_LITERAL_TERMINAL_FINALITY",
+    "NO_38_OF_38_SUFFICIENCY_CLAIM",
+    "NO_NEW_FAMILY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
