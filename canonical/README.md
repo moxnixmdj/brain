@@ -9,7 +9,18 @@ This directory is the provider-independent canonical control plane for Project B
 - **SQLite:** active working authority/cache. It must be reconstructable from canonical evidence and must never be the only durable source.
 - **Execution providers:** replaceable and non-canonical. CI, browser providers, agent platforms, model surfaces, and other providers may execute work but cannot define canonical truth by themselves.
 
-## Current verified state
+## Boot rule
+
+This README is orientation, not live scheduling authority.
+
+Before consequential work, read:
+- `canonical/CANONICAL_POINTER.json`
+- `canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json`
+- every mandatory law and gate named by the live pointer
+
+If this README conflicts with those current content-addressed authorities, the current authorities win and work fails closed until the contradiction is reconciled.
+
+## Current verified substrate
 
 - Real integrated same-identity Superworker population: **P_real = 1**.
 - Active qualified identity: `SUPERWORKER-UNIFIED-1`.
@@ -21,83 +32,110 @@ This directory is the provider-independent canonical control plane for Project B
 - Cross-supplier independent verification: **VERIFIED on the proof mission**.
 - Hard incremental spend: **$0**.
 
+These substrate facts do not imply completion of the terminal capability objective. Current acceptance, ownership, blockers, and scheduling state must be read from the live terminal authority.
+
 ## Core theory
 
-Project Brain uses this operational decomposition:
+Project Brain uses the current operational decomposition:
 
-`FRONTIER INTELLIGENCE = KNOWLEDGE + CAPABILITIES`
+`EFFECTIVE FRONTIER INTELLIGENCE = BRAIN-OWNED CAPABILITY MECHANISMS + EXTERNAL JIT KNOWLEDGE + GENERAL COMPUTATION SUBSTRATE`
 
 ### Knowledge
 
-The knowledge-side architecture is treated as solved for the current program unless falsified:
+Knowledge remains external/JIT:
 
-`need knowledge -> acquire the strongest relevant external/JIT knowledge -> verify -> preserve`
+`need knowledge -> acquire strongest relevant current knowledge -> verify -> use -> preserve only compact state/evidence needed for reproducibility`
 
-The project does not try to reproduce a frontier model's giant permanent knowledge warehouse inside another parameter store.
+Project Brain does not treat permanent accumulation of a frontier model's knowledge warehouse as capability ownership.
 
 ### Capabilities
 
-Capabilities are now the active research frontier.
+Capabilities are the active ownership frontier.
 
-For each useful frontier capability:
+For each useful target capability:
 
-`frontier capability -> define real useful effect -> establish frontier bar -> search/race all legitimate routes -> verify equal or better capability -> inherit winning route -> frontier implementation becomes unnecessary`
+`define useful effect -> establish Opus 5.5 acceptance bar -> delete unnecessary demand -> search existing realizations -> reuse/substitute/harvest/configure -> verify exact Brain-owned route >= bar -> save permanently -> regression-protect`
 
-The objective is **not** to copy or accumulate the frontier capability inventory.
+External models/services may be capability specimens. White-box systems may be donors. Neither counts as Brain ownership while the external provider remains the operative target-capability implementation.
 
-The objective is to obtain the **maximum useful capability, at least equal to the frontier bar, through the fastest and cheapest verified realizable route**.
+Underlying useful capability invention is forbidden by the current mission lock. Allowed creation is integration, extraction/minimization tooling, configuration, packaging, routing, persistence, verification, recovery, and adapters that encode already-existing capability mechanisms.
 
 ## Active terminal objective
 
-Systematically obsolete the useful capabilities of frontier models by finding verified equal-or-better capability routes with minimum wall-clock time and incremental cost.
+Terminal target:
 
-Frontier models and agents are:
-- sources of capability bars;
-- challenge generators;
-- optional capability suppliers.
+`OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1`
 
-They are not implementation blueprints or terminal architectures.
+Brain must permanently internalize, configure, verify, and own all useful Claude Opus 5.5 capabilities at equal-or-better useful performance, while keeping knowledge external/JIT.
 
-Authoritative goal:
-- `canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OBSOLESCENCE_MISSION_LOCK_V4.md`
+Authoritative mission lock:
+- `canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md`
 
-Active execution strategy:
-- `canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2.md`
+Active capability strategy:
+- `canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md`
 
 Canonical capability queue:
 - `canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json`
 
-## Active loop
+Current terminal truth and next scheduling action:
+- `canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json`
 
-1. recover and normalize the frontier capability surface;
-2. choose the highest-leverage capability;
-3. define its real useful behavior;
-4. establish the strongest defensible frontier bar;
-5. search the hidden warehouse;
-6. race reuse, composition, JIT acquisition, deterministic/specialized systems, model suppliers, adaptation, and only then invention;
-7. run consequential real work;
-8. independently verify equal-or-better capability;
-9. mark the frontier implementation obsolete or preserve the exact residual gap;
-10. inherit the winner and repeat.
+Mandatory fail-closed action gates:
+- `canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json`
+- `canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V9.json`
+
+## Active acquisition order
+
+Apply the deletion-first order encoded by the current gates and strategy:
+
+1. delete unnecessary capability demand;
+2. bypass it when the same terminal effect can be obtained without it;
+3. reuse already-owned Brain capability;
+4. substitute deterministic/software/open existing mechanisms;
+5. white-box harvest only a residual already-existing learned mechanism when needed;
+6. compose existing mechanisms;
+7. configure and integrate the surviving route;
+8. verify the exact Brain-owned route at or above the Opus 5.5 bar;
+9. save the winning capability package and regression evidence permanently.
+
+Opaque external models/services can establish the bar or act as specimens, but cannot receive ownership credit.
 
 ## Progress metric
 
 Primary:
 
-`verified useful capability strength / wall-clock time / incremental cost`
+`verified Brain-owned useful capability strength / wall-clock time / incremental cost`
 
-with correctness first and a hard $0 incremental-spend constraint unless the user changes it.
+subject to:
+1. correctness;
+2. capability >= Opus 5.5;
+3. permanent Brain ownership;
+4. donor independence when harvesting is used;
+5. minimum wall-clock;
+6. hard $0 incremental spend;
+7. minimum compute and complexity.
 
-Capability count, parameter count, benchmark count, worker count, and infrastructure count are not progress by themselves.
+Capability count, parameter count, benchmark count, worker count, infrastructure count, and scheduling activity are not progress by themselves.
+
+## Current-work discipline
+
+- Refresh live canonical state before consequential reasoning.
+- Do not schedule from stale summaries.
+- Use current content-addressed evidence before acquiring new reality.
+- Do not consume fresh terminal evidence without explicit authority.
+- Recompute the minimum causal/proof cut after every verified delta.
+- Preserve contamination boundaries and untouched qualification populations.
+- Fail closed on unresolved contradictions.
+- Do not duplicate an already-open blocker lease or equivalent work intent.
 
 ## Relationship to Superworkers
 
-The verified Superworker is the execution substrate for capability obsolescence, not the final product.
+The verified Superworker is execution substrate, not the terminal product.
 
-Clean-room reproduction, persistence, recovery, provenance, and verification remain mandatory architectural properties, but they are subordinate to the terminal capability-obsolescence mission.
+Persistence, clean-room reproduction, recovery, provenance, independent verification, and provider replaceability remain mandatory, but they serve the terminal capability-ownership mission.
 
 ## Non-negotiable law
 
 Provider loss, suspension, deletion, outage, or account failure must not destroy canonical truth or prevent reconstruction.
 
-No provider is canonical. Provider-specific execution is replaceable substrate only.
+No execution provider is canonical. Provider-specific execution is replaceable substrate only.
