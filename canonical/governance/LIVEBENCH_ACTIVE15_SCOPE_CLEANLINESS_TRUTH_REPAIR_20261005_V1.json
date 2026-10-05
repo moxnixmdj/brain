@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ACTIVE15_SCOPE_CLEANLINESS_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_FAIL_CLOSED_TRUTH_REPAIR__ACTIVE15_SCOPE_OPENING_IS_TARGET_POPULATION_DEPENDENT__NO_CLEAN_ACCEPTANCE_CREDIT_FROM_ACTIVE15_COMPOSITION_ALONE",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "defect": "THE_CLEAN_ACTIVE15_PROMOTION_CHAIN_TREATS_A_SCOPE OPENING DERIVED FROM A HASH COMPUTED AFTER LOADING THE TERMINAL 200 ROW POPULATION AS IF IT WERE A CASE INDEPENDENT SOURCE ONLY PREMISE. THE HASH PRECEDES ITS LATER PREIMAGE OPENING BUT IT DOES NOT PRECEDE OR REMOVE THE TARGET POPULATION DEPENDENCE THAT CREATED IT.",
+  "exact_evidence": {
+    "terminal_commitment_receipt": {
+      "path": "canonical/verification/LIVEBENCH_FIRST_DIRECT_ATTEMPT_TRUTH_RECEIPT_20261004_V1.json",
+      "git_blob_sha": "0ddffd52cd05b880964cf034527aabddb255baef",
+      "facts": {
+        "terminal_dataset_downloaded": true,
+        "terminal_population_loaded": true,
+        "frozen_population_expected": 200,
+        "candidate_inference_count": 0,
+        "unmatched_instruction_id_set_sha256": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d"
+      }
+    },
+    "active15_scope_opening": {
+      "path": "canonical/verification/LIVEBENCH_FROZEN_ACTIVE_LEGACY15_HASH_OPENING_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "c926e145466b812a9d6d00aca63f589f59ca2249",
+      "fact": "THE_15_ID_OPENING IS VERIFIED AGAINST THE PREEXISTING TARGET DERIVED HASH"
+    },
+    "active15_composition_verification": {
+      "path": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "57e27e3c56372b57a1d4e0255f49340d4a4c8588",
+      "fact": "THE COMPOSITION VERIFIER PASSES ON ITS SUPPLIED PREMISES BUT ONE LOAD BEARING PREMISE IS THE TARGET DERIVED ACTIVE15 SCOPE OPENING"
+    },
+    "contamination_authority": {
+      "path": "canonical/governance/LIVEBENCH_EXACT200_CONTAMINATION_CREDIT_REVOCATION_20261004_V1.json",
+      "git_blob_sha": "5b0b73d52b49f036f1e45884110f2a05a9b25364",
+      "admissible_rescue_used_by_active15_chain": "CASE_INDEPENDENT_FORMAL_OR_UNIVERSAL_PROOF_FROM_FROZEN_CHECKER_SEMANTICS_WITHOUT_TARGET_ROW_DEPENDENCE"
+    },
+    "terminal_protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+      "contamination_rule": "Development evidence, protocol-design evidence, qualification evidence and final confirmation evidence must be partitioned before qualification.",
+      "dirty_evidence_rule": "dirty evidence or unknown dependency is FAIL_CLOSED_NOT_PROVEN"
+    },
+    "exposure_firewall": {
+      "v1_path": "canonical/governance/LIVEBENCH_UNPLANNED_PUBLIC_SEARCH_EXPOSURE_RECONCILIATION_V1.json",
+      "v1_git_blob_sha": "450a6a0d6aa96dd25e2f48d6e9643196b71de79b",
+      "v2_path": "canonical/governance/LIVEBENCH_UNPLANNED_PUBLIC_SEARCH_EXPOSURE_RECONCILIATION_V2.json",
+      "v2_git_blob_sha": "bcb79e06964dc2e0dd7b153e4f44b936db336e84",
+      "relevant_rules": [
+        "DO_NOT_USE_CASE_SPECIFIC_INSTRUCTION_COMBINATIONS_AS_COVERAGE_TARGETS",
+        "FUTURE_SUCCESSOR_MUST_BE_DERIVED_FROM_CHECKER_SOURCE_PUBLIC_NONTERMINAL_GRAMMAR_AND_CASE_INDEPENDENT_ALGORITHMS",
+        "CONTAMINATED_CASES_MAY_NOT_SUPPLY_CLEAN_GENERALIZATION_CREDIT"
+      ]
+    },
+    "public_generator": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+      "path": "livebench/if_runner/live_data.py",
+      "git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc",
+      "source_fact": "add_instructions_to_registry samples from the full 25 family legacy constraint union; source semantics do not independently restrict generation to Active15"
+    }
+  },
+  "logical_falsification": [
+    "THE HASH OPENING IS CRYPTOGRAPHICALLY VALID BUT CRYPTOGRAPHIC VALIDITY ONLY PROVES WHICH PREIMAGE MATCHES THE TARGET DERIVED COMMITMENT",
+    "COMMITMENT PRECEDES OPENING DOES NOT IMPLY COMMITMENT PRECEDES TARGET OBSERVATION; THE RECEIPT STATES THE TERMINAL POPULATION WAS LOADED BEFORE THE HASH WAS EMITTED",
+    "THE ACTIVE15 COMPOSITION PROOF DELETES TEN CHECKER FAMILIES ONLY AFTER USING THAT TARGET DERIVED SCOPE PREMISE",
+    "THEREFORE THE ACTIVE15 PROMOTION CHAIN IS NOT A PROOF WITHOUT TARGET POPULATION DEPENDENCE UNDER THE CITED ADMISSIBLE RESCUE",
+    "THE PUBLIC HISTORICAL GENERATOR CANNOT REPAIR THIS BY ITSELF BECAUSE ITS all_constraints POOL CONTAINS ALL 25 LEGACY FAMILIES"
+  ],
+  "scheduler_consequence": {
+    "active15_solver_and_proofs_reusable": true,
+    "active15_scope_hash_truth_preserved": true,
+    "active15_scope_hash_allowed_as_noncredit_crosscheck": true,
+    "active15_scope_hash_sufficient_for_clean_acceptance_promotion": false,
+    "clean_active15_composition_verifier_success_sufficient_for_promotion": false,
+    "next_load_bearing_route": "REMOVE_TARGET_SCOPE_DEPENDENCE BY EITHER A SOURCE ONLY SCOPE THEOREM OR A UNIVERSAL POINTWISE DOMINANCE PROOF OVER THE FULL PUBLIC LEGACY25 GENERATOR ENVELOPE",
+    "preferred_route_now": "UNION25_UNIVERSAL_POINTWISE_DOMINANCE__REUSE_ACTIVE15_CLOSURE__CLOSE_ONLY_THE_REDUCED_HARD_EXTRA_SIGNATURES"
+  },
+  "promotion_guard": {
+    "predicate_must_remain": "NOT_PROVED_BY_CLEAN_ACTIVE15_SCOPE_CHAIN",
+    "acceptance_credit_delta_from_repair": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "fail_closed_until": [
+      "TARGET_INDEPENDENT_SOURCE_ONLY_SCOPE PROOF BINDING THE EXACT ACCEPTANCE POPULATION",
+      "OR UNION25 PUBLIC GENERATOR UNIVERSAL POINTWISE DOMINANCE WITH INDEPENDENT EXACT CHECKER VERIFICATION"
+    ]
+  },
+  "hard_nonclaims": [
+    "THIS DOES NOT FALSIFY THE FACT THAT THE FROZEN TARGET OBSERVED ACTIVE UNION HASH OPENS TO THE 15 LISTED IDS",
+    "THIS DOES NOT FALSIFY THE ACTIVE15 POINTWISE OPTIMALITY PROOFS ON THEIR CLAIMED DOMAIN",
+    "THIS DOES NOT CLAIM THE TEN EXTRA FAMILIES OCCUR IN THE FROZEN 200 TARGET",
+    "THIS DOES NOT USE OR REVEAL ANY TERMINAL PROMPT RESPONSE HIDDEN KWARG OR CASE LEVEL COMBINATION",
+    "NO TERMINAL GOAL COMPLETION CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_rows_read": 0,
+    "new_terminal_prompts_read": 0,
+    "new_terminal_kwargs_read": 0,
+    "target_scores_read": 0,
+    "acceptance_credit_delta": -1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
