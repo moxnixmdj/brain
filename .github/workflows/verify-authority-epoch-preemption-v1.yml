@@ -1,0 +1,30 @@
+name: Verify authority epoch preemption V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/authority_epoch_guard_v1.py
+      - canonical/tests/test_authority_epoch_guard_v1.py
+      - canonical/governance/AUTHORITY_EPOCH_PREEMPTION_V2.json
+      - .github/workflows/verify-authority-epoch-preemption-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v6
+        with: {python-version: "3.12.10"}
+      - name: Run epoch unit tests
+        run: python -m unittest -v canonical.tests.test_authority_epoch_guard_v1
+      - name: Check frozen start epoch against current main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          expected=$(python -c "import json; print(json.load(open('canonical/governance/AUTHORITY_EPOCH_PREEMPTION_V2.json', encoding='utf-8'))['start_authority_epoch_sha256'])")
+          python canonical/runtime/authority_epoch_guard_v1.py --ref origin/main --expected "$expected"
