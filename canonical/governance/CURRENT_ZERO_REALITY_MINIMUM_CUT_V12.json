@@ -54,6 +54,10 @@
     "predecessor": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V11.json",
       "git_blob_sha": "452c6f2231fbe93fd54e3299eb54d7103567a08a"
+    },
+    "buildkite_trial_owner_confirmation": {
+      "path": "canonical/governance/BUILDKITE_TRIAL_OWNER_CONFIRMATION_20261005_V1.json",
+      "git_blob_sha": "4bbaac76d887593a80b7a26b2e9f681256d857a1"
     }
   },
   "deletions_since_v11": [
@@ -86,6 +90,19 @@
         "SELF_HOST_PROTOCOL_EQUIVALENCE",
         "BRAIN_THRESHOLD_CERTIFICATE"
       ]
+    },
+    {
+      "predicate": "CODING_TB4_GE_66_4",
+      "reason": "BUILDKITE_STAFF_SUPPORT_ENGINEER_CONFIRMED_ALL_ACCESS TRIAL SUPPORTS THE REQUESTED 8VCPU_32GB_DOCKER_ZERO_COST PREFLIGHT USE CASE",
+      "delete": [
+        "BUILDKITE_SUPPORT_CONFIRMATION_WAIT"
+      ],
+      "preserve": [
+        "TRIAL_ORG_ACCESS",
+        "OBSERVED_RUNTIME_RESOURCE_RECEIPT",
+        "OBSERVED_DOCKER_COMPOSE_PASS",
+        "OBSERVED_HARD_ZERO_SPEND_STOP"
+      ]
     }
   ],
   "minimum_zero_reality_action_groups": [
@@ -94,12 +111,13 @@
       "predicates": [
         "CODING_TB4_GE_66_4"
       ],
-      "action": "PARALLEL_ACCOUNT_RUNTIME_PREFLIGHT_ON_ONLY_CURRENT_ADMISSIBLE_ZERO_SPEND_CARRIER_CANDIDATES__STOP_ON_FIRST_FULLY_ADMISSIBLE_ROUTE",
+      "action": "BUILDKITE_PROVIDER_SUPPORT_WAIT_DELETED__CREATE_OR_ACCESS_TRIAL_ORGANIZATION__RUN_ONE_ZERO_CASE_PREFLIGHT_ON_LINUX_AMD64_8X32_OR_STRONGER__BIND_OBSERVED_CPU_RAM_DISK_DOCKER_COMPOSE_AND_HARD_ZERO_SPEND_RECEIPT__OMC_REMAINS_PARALLEL_FALLBACK_IF ACCOUNT ACCESS ALREADY AVAILABLE",
       "current_candidates": [
-        "BUILDKITE",
-        "OMC_CLOUD"
+        "BUILDKITE_OWNER_CONFIRMED_TRIAL_PREFLIGHT_ROUTE",
+        "OMC_CLOUD_DOCUMENTARY_FALLBACK"
       ],
-      "fresh_reality": false
+      "fresh_reality": false,
+      "new_deletion": "NO_SUPPORT_WAIT_REMAINS_LOAD_BEARING"
     },
     {
       "id": "B_AUTHENTICATED_SELF_SERVICE_ACCESS_SWEEP",
