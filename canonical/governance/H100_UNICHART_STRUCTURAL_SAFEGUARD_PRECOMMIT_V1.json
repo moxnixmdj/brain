@@ -27,13 +27,27 @@
     "split": "validation",
     "human_annotation_file": "ChartQA Dataset/val/val_human.json",
     "human_git_blob_sha": "983dacfcb6aabc8598031c07eeba7747f9884c4a",
-    "human_selection": "ANNOTATION_INDICES_10_THROUGH_19_IN_FROZEN_FILE_ORDER",
+    "human_selection": "SCAN_FROM_INDEX_10__SELECT_FIRST_10_RECORDS_WHOSE_IMGNAME_NOT_IN_DEVELOPMENT_IMAGE_SET",
     "augmented_annotation_file": "ChartQA Dataset/val/val_augmented.json",
     "augmented_git_blob_sha": "131068b504407d9cdd8413fe5c574772bb241613",
-    "augmented_selection": "ANNOTATION_INDICES_10_THROUGH_19_IN_FROZEN_FILE_ORDER",
+    "augmented_selection": "SCAN_FROM_INDEX_10__SELECT_FIRST_10_RECORDS_WHOSE_IMGNAME_NOT_IN_DEVELOPMENT_IMAGE_SET",
     "total_cases": 20,
     "labels_and_images_not_used_to_choose_precision_policy": true,
-    "no_case_deletion_after_outcomes": true
+    "no_case_deletion_after_outcomes": true,
+    "development_image_names_excluded": [
+      "3887.png",
+      "4576.png",
+      "5734.png",
+      "11756.png",
+      "13153.png",
+      "multi_col_20933.png",
+      "multi_col_972.png",
+      "multi_col_60377.png",
+      "multi_col_60563.png",
+      "multi_col_101153.png",
+      "multi_col_80582.png"
+    ],
+    "image_overlap_with_prior_development_set_allowed": false
   },
   "pass_gate": {
     "minimum_fp32_relaxed_accuracy": 0.5,
