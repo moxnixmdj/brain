@@ -143,5 +143,12 @@
     "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py": "d729d19ba5c0808273268426e7450f1db74a5c07",
     "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py": "b8a6d0f0553ffec468676b24f87d56aeb01cea17",
     "canonical/runtime/bound_capabilities/yq_yaml_json.py": "8dce9a679d51153e0e779e4fcc5380a1ce106637"
+  },
+  "third_party_module_blobs": {
+    "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "canonical/runtime/bound_capabilities/numeric_expression_sympy.py": "443e3386f11156e55635556b6e8f8ad7d7733592",
+    "canonical/runtime/bound_capabilities/pdf_pypdf.py": "b63f658d269078f37f8a67be31ce4993b6cf3fcc",
+    "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py": "b8a6d0f0553ffec468676b24f87d56aeb01cea17",
+    "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py": "93c84e524dd01eace5b059f00d7c020f36c57c"
   }
 }
