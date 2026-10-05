@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ACTIVE15_PLUS_ONE_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__RELEASE_SCOPE_REDUCED_TO_FOUR_ACTIVE15_PLUS_ONE_SUPERSETS__GENERIC_MINIMUM_SACRIFICE_CONSTRUCTOR_INSTALLED__INDEPENDENT_POSTVALIDATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "base_commit": "64291e1e0b206e94efc94d505497ab271ca0a50e",
+  "scope_reduction": {
+    "path": "canonical/runtime/livebench_release_schema_scope_bridge_v1.py",
+    "git_blob_sha": "fa90615507b048894b5dc118e0c6c39cb2146fcf",
+    "schema_excluded_argument_bearing_extras": 6,
+    "residual_noarg_extras": [
+      "detectable_format:constrained_response",
+      "change_case:english_capital",
+      "change_case:english_lowercase",
+      "punctuation:no_comma"
+    ],
+    "sufficient_scope_shape": "ACTIVE15_OR_ACTIVE15_PLUS_EXACTLY_ONE_OF_FOUR_NOARG_EXTRAS",
+    "assumption_boundary": "AT_LEAST_ONE_OF_THE_FIRST_PARTY_TABLE15_OR_PROSE16_SCOPE_REPRESENTATIONS_IS_FAITHFUL"
+  },
+  "construction": {
+    "runtime": "canonical/runtime/livebench_active15_plus_one_pointwise_v1.py",
+    "tests": "canonical/tests/test_livebench_active15_plus_one_pointwise_v1.py",
+    "active15_composer_v3_blob": "ec6cee3e9cb36773527294c8677fe2d62453f712",
+    "active15_feasibility_blob": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+    "union25_mandatory_loss_blob": "0f7f22e3ac694d1181e7956ed6552cee376c9d21",
+    "language_exception_carrier_v2_blob": "2f33f00d2dfdba82597f7d273898c3da4f920b3a"
+  },
+  "mathematical_reduction": {
+    "public_max_contracts_per_row": 5,
+    "maximum_sacrifice_subsets_examined_per_row": 32,
+    "method": "EXACT_MINIMUM_HITTING_SET_OVER_SOUND_MANDATORY_LOSS_HYPEREDGES",
+    "lower_bound": "EVERY_MANDATORY_LOSS_EDGE_REQUIRES_AT_LEAST_ONE_FAILED_CHECKER",
+    "upper_bound": "CONSTRUCT_A_WITNESS_FOR_THE_RETAINED_EDGE_FREE_SUBSET",
+    "consequence_if_exact_postvalidation_passes": "LOWER_BOUND_EQUALS_CONSTRUCTIVE_UPPER_BOUND_POINTWISE_FOR_EVERY_ADMITTED_ACTIVE15_PLUS_ONE_CONTRACT"
+  },
+  "extension_laws": {
+    "constrained_response": "REGISTRY_SINGLETON__FIXED_ALLOWED_RESPONSE",
+    "no_comma": "TRANSPARENT_EXCEPT_REPEAT_PREFIX_COMMA__THEN_EXACT_ONE_CHECKER_MINIMUM_LOSS",
+    "english_capital": "GLOBAL_UPPERCASE_TRANSFORM_PLUS_UNCASED_LANGUAGE_EXCEPTION_CARRIER__MIXED_CASE_SECTION_CONFLICT_IS_EXPLICIT_LOSS_EDGE",
+    "english_lowercase": "GLOBAL_LOWERCASE_TRANSFORM_PLUS_UNCASED_LANGUAGE_EXCEPTION_CARRIER__ANY_FROZEN_SECTION_SPLITTER_CONFLICT_IS_EXPLICIT_LOSS_EDGE"
+  },
+  "required_next_gates": [
+    "INDEPENDENT_EXACT_RUNTIME_PASS_FOR_LANGUAGE_EXCEPTION_CARRIER_V2",
+    "INDEPENDENT_EXACT_CHECKER_POSTVALIDATION_OF_ACTIVE15_PLUS_ONE_CONSTRUCTOR_OVER_THE_PUBLIC_PARAMETER_QUOTIENT",
+    "INDEPENDENT_BINDING_OF_FROZEN_PARQUET_SCHEMA_FIELDS_AND_FIRST_PARTY_15_VS_16_SCOPE_ENVELOPE",
+    "ONLY_THEN_RECOMPUTE_LIVEBENCH_POINTWISE_DOMINANCE_AND_PREDICATE_ACCEPTANCE"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_ROWS_PROMPTS_HIDDEN_KWARGS_RESPONSES_FREQUENCIES_OR_TARGET_SCORES_READ",
+    "LANGUAGE_EXCEPTION_CARRIER_V2_IS_STILL_CONDITIONAL_ON_ITS_FROZEN_INDEPENDENT_RUNTIME_GATE",
+    "SCOPE_ENVELOPE_REMAINS_CONDITIONAL_ON_FIRST_PARTY_PAPER_SCOPE_FAITHFULNESS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
