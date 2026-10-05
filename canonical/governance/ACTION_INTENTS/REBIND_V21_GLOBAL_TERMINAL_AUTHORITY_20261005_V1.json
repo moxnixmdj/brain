@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REBIND-V21-GLOBAL-TERMINAL-AUTHORITY-20261005-SOL",
+  "status": "CURRENT_BASE_TRUTH_RECONCILIATION__ZERO_CREDIT",
+  "date": "2026-10-05",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "f8b44ca7ef7408de0159df1e4c380e90201d2310",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "ACTIVE_ZERO_REALITY_POINTER_AND_TERMINAL_GLOBAL_TRUTH_STALE_RELATIVE_TO_INDEPENDENTLY_VERIFIED_V21_ACTIVATION",
+  "action_kind": "CONTROL_PLANE_TRUTH_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::ACTIVE_ZERO_REALITY_POINTER_AND_TERMINAL_GLOBAL_TRUTH_STALE_RELATIVE_TO_INDEPENDENTLY_VERIFIED_V21_ACTIVATION",
+  "selected_route": "REUSE_EXISTING_INDEPENDENTLY_VERIFIED_V21_CUT_AND_ACTIVATION__REBIND_ACTIVE_POINTER__EXPOSE_GLOBAL_24_ATOMIC_PLUS_8_META_TRUTH_WITHOUT_CHANGING_ACCEPTANCE",
+  "expected_parent_frontier_change": "ZERO_ACCEPTANCE_DELTA__DELETE_STALE_V18_SCHEDULING_ENTRYPOINT__MAKE_GLOBAL_32_OPEN_TRUTH_OBLIGATIONS_EXPLICIT__PRESERVE_TERMINAL_FALSE",
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT__CONTROL_PLANE_PROJECTION_STALE",
+  "prior_work_checked": [
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V21.json",
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V21_ACTIVATION_V1.json",
+    "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V21_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "PR_2113_STALE_V14_CONTROL_PLANE_REPAIR__MERGEABLE_FALSE__NO_ACTION_INTENT_IN_DIFF",
+    "PR_2165_STALE_V14_POINTER_REPAIR"
+  ],
+  "theory_invariants": {
+    "exact_terminal_goal_unchanged": true,
+    "knowledge_external_jit": true,
+    "permanent_brain_owned_capability_required": true,
+    "threshold_weakening_forbidden": true,
+    "missing_proof_not_missing_capability": true,
+    "underlying_capability_invention_forbidden": true
+  },
+  "ownership_tests": {
+    "required": false,
+    "reason": "CONTROL_PLANE_PROJECTION_REPAIR_ONLY__NO_CAPABILITY_PROMOTION"
+  },
+  "reasoning_durability": {
+    "real_objective": "MINIMIZE_WALL_CLOCK_TO_TRUTHFUL_TERMINAL_OWNERSHIP_BY_REMOVING_STALE_SCHEDULER_STATE",
+    "material_premises": [
+      "V21 activation status is ACTIVE and scheduling_authority=true",
+      "V21 connector verification is already bound by activation",
+      "active pointer still names V18",
+      "V21 exact state preserves 14/38 proved and 24/38 unresolved while adding 8 meta-envelope obligations",
+      "CURRENT_TERMINAL_AUTHORITY remains terminal=false"
+    ],
+    "conclusion": "REBINDING_PROJECTIONS_IS_REQUIRED_BEFORE_FURTHER_FRONTIER_EXECUTION",
+    "rejected_material_alternatives": [
+      "CREATE_NEW_ZERO_REALITY_CUT__DUPLICATES_VERIFIED_V21",
+      "RUN_FRESH_TERMINAL_CASES__NOT_AUTHORIZED",
+      "USE_STALE_V18_POINTER__CONTRADICTS_ACTIVE_V21_SCHEDULING_AUTHORITY"
+    ],
+    "uncertainties": [
+      "CURRENT_MAIN_MAY_ADVANCE_BEFORE_PATCH_COMMIT__MUST_REVALIDATE_EXACT_BASE",
+      "GLOBAL_META_ENVELOPE_FIELDS_MUST_NOT_BE_MISTAKEN_FOR_NEW_ACCEPTANCE_PREDICATES"
+    ],
+    "next_action": "OPEN_GUARDED_PR_WITH_INTENT_ONLY__THEN_REVALIDATE_AND_PATCH_POINTER_PROJECTIONS",
+    "supersession_conditions": [
+      "MAIN_LANDS_A_NEWER_ACTIVE_CUT_THAN_V21",
+      "ANOTHER_VALID_LOWER_PR_LEASE_OWNS_THE_EXACT_CURRENT_BLOCKER",
+      "V21_ACTIVATION_OR_VERIFICATION_IS_REVOKED"
+    ]
+  },
+  "recursive_obs": {
+    "current_base": "f8b44ca7ef7408de0159df1e4c380e90201d2310",
+    "current_atomic_truth": "14_OF_38_PROVED__24_OPEN",
+    "current_family_truth": "5_OF_19_VERIFIED_OWNED__14_OPEN",
+    "current_global_truth": "24_ATOMIC_OPEN_PLUS_8_META_ENVELOPE_OPEN__32_TOTAL_OPEN_TRUTH_OBLIGATIONS",
+    "root1_positive_gap_count": 0,
+    "active_verified_cut": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V21",
+    "stale_projection": "CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1_NAMES_V18",
+    "highest_leverage_route": "DELETE_STALE_CONTROL_PLANE_STATE_BY_REUSE__NO_NEW_REALITY"
+  },
+  "behavioral_contract": {
+    "behavior_id": "CONTROL_PLANE_CURRENT_FRONTIER_PROJECTION",
+    "inputs": "EXACT_CONTENT_ADDRESSED_ACTIVE_CUT_ACTIVATION_VERIFICATION_AND_CURRENT_TERMINAL_AUTHORITY",
+    "required_output_or_action": "ALL_CURRENT_FRONTIER_ENTRYPOINTS_IDENTIFY_HIGHEST_ACTIVE_VERIFIED_CUT_AND_DISTINGUISH_ATOMIC_ACCEPTANCE_FROM_META_ENVELOPE_TRUTH",
+    "success_condition": "NO_READER_CAN_SELECT_V18_WHEN_V21_IS_HIGHEST_ACTIVE_SCHEDULING_AUTHORITY__TERMINAL_REMAINS_FALSE__NO_CREDIT_INFLATION",
+    "failure_condition": "STALE_CUT_SELECTED_OR_META_OBLIGATIONS_HIDDEN_OR_ACCEPTANCE_COUNTS_CHANGED_WITHOUT_EVIDENCE",
+    "scope": "CONTROL_PLANE_PROJECTION_ONLY"
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "NO_UNTOUCHED_TASK_OR_TERMINAL_CASE_EXPOSURE"
+  },
+  "qualification_stage": "NOT_APPLICABLE__ZERO_REALITY_TRUTH_REPAIR",
+  "terminal_proof_control": {
+    "proof_obligation": "CURRENT_ENTRYPOINT_EQUALS_HIGHEST_ACTIVE_VERIFIED_ZERO_REALITY_CUT_AND_GLOBAL_OPEN_TRUTH_IS_NOT_UNDERCOUNTED",
+    "hole_type": "STALE_POINTER_AND_SCOPE_PROJECTION",
+    "expected_certificate_or_receipt": "DETERMINISTIC_POINTER_COHERENCE_PLUS_EXISTING_V21_CONNECTOR_VERIFICATION",
+    "maximum_cheap_test_cost": "ZERO_INCREMENTAL_SPEND",
+    "contamination_risk": "NONE",
+    "reversibility": "FULL",
+    "falsification_condition": "NEWER_ACTIVE_CUT_OR_V21_REVOCATION_OR_POINTER_HASH_MISMATCH",
+    "critical_path_relation": "DIRECT_SCHEDULER_TRUTH"
+  },
+  "continuous_obs": {
+    "required": true,
+    "revalidate_before_each_write": true,
+    "abort_on_newer_cut": true,
+    "abort_on_main_change_if_load_bearing_projection_changes": true
+  },
+  "reality_query_admission": {
+    "verdict": "NO_REALITY_QUERY_REQUIRED",
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0
+  },
+  "global_terminal_proof_cut": {
+    "proposed_action_membership": "TRUTH_PRESERVING_CONTROL_PLANE_RECONCILIATION_ONLY",
+    "terminal_decision_value": "PREVENT_STALE_WORK_AND_EXPOSE_COMPLETE_CURRENT_OPEN_TRUTH_SET"
+  },
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "supersedes_stale_open_pr_intents": [
+    2113,
+    2165
+  ]
+}
