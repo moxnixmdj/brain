@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_PUBLIC_FAMILY_CONSTRUCTIVE_CLOSURE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_IFBENCH_RATIO_FAMILY_12_OF_12_PROMPT_LEVEL_PASS__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "sources": {
+    "ifbench": ["allenai/IFBench", "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d", "a8e343ed928d8b4e649b9dba651fed7757ccacc3"],
+    "checker": ["LiveBench/LiveBench", "8f8e5c381a16e3f24257776edd53471fe86f8091", "02b2dfeb50f036b89bec3df34522c73f756d8f44"],
+    "checker_util_blob": "21b13c7fcfc2c2de01e80c9e7dd222b9bca81342"
+  },
+  "result": {
+    "ratio_rows": 12,
+    "ratio_only": 5,
+    "ratio_plus_sentence_keyword": 4,
+    "ratio_plus_consonant_cluster": 3,
+    "normalized_reference_recovered": 12,
+    "exact_raw_reference_overlap_pass": 12,
+    "prompt_level_pass": 12,
+    "constructor_input": "VISIBLE_PROMPT_ONLY",
+    "terminal_rows_read": 0
+  },
+  "theorem": [
+    "WHITESPACE_FREE_RESPONSE_TRIGRAM_MEMBERSHIP_IS_REFERENCE_WHITESPACE_INVARIANT",
+    "FRESH_PRIVATE_USE_SENTINELS_CREATE_ONLY_NONMATCHING_REFERENCE_TRIGRAMS",
+    "PINNED_PUBLIC_RATIO_FAMILY_IS_CONSTRUCTIVELY_SOLVABLE_FROM_VISIBLE_PROMPTS"
+  ],
+  "runtime": "canonical/runtime/livebench_ngram_public_family_compiler_v2.py",
+  "next": [
+    "INDEPENDENT_PUBLIC_RECOMPUTATION",
+    "FROZEN_LIVEBENCH_GRAMMAR_ENVELOPE_BINDING_WITHOUT_TERMINAL_CASE_READ",
+    "NEW_SUCCESSOR_INTEGRATION_AND_PRECOMMIT"
+  ],
+  "nonclaims": [
+    "NO_FROZEN_TERMINAL_DATASET_EQUIVALENCE",
+    "NO_65_7_SCORE_CLAIM",
+    "NO_ROOT1_CLOSURE",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
