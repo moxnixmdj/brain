@@ -205,17 +205,21 @@
   },
   "external_result_reuse": {
     "aa_briefcase_v1_1": {
-      "status": "ACTIVE__ONE_VERIFIED_COMPARABLE_RESULT_MAY_DISCHARGE_TWO_ATOMS__ZERO_CREDIT_UNTIL_RESULT_EXISTS",
+      "status": "ACTIVE__FROZEN_RATING_EPOCH_FIREWALL__ONE_VERIFIED_COMPARABLE_RESULT_MAY_DISCHARGE_TWO_ATOMS__ZERO_CREDIT_UNTIL_RESULT_EXISTS",
       "predicates": [
         "PROWORK_AA_BRIEFCASE_GE_1822",
         "ARTIFACT_AA_BRIEFCASE_GE_1822"
       ],
       "runtime": "canonical/runtime/aa_briefcase_dual_predicate_result_bridge_v1.py",
-      "runtime_git_blob_sha": "56f7098191d527fe711d9f7febb97d91eb97640a",
+      "runtime_git_blob_sha": "8566c1038ccf041641452a9ce910532224950677",
       "tests": "canonical/tests/test_aa_briefcase_dual_predicate_result_bridge_v1.py",
-      "tests_git_blob_sha": "caaafb23f99b502c93b129c5b2b5eecd0fb9234d",
-      "verification": "canonical/verification/AA_BRIEFCASE_DUAL_PREDICATE_RESULT_BRIDGE_LOCAL_VERIFICATION_20261005_V1.json",
-      "rule": "REQUEST_OR_RUN_AA_BRIEFCASE_V1_1_ONCE_FOR_THE_EXACT_FROZEN_BRAIN_SUBJECT__DO_NOT_DUPLICATE_PROWORK_AND_ARTIFACT_EVALUATIONS"
+      "tests_git_blob_sha": "e484469626838f2356f93e09d91d65ebcda5ed82",
+      "verification": "canonical/verification/AA_BRIEFCASE_DUAL_PREDICATE_RESULT_BRIDGE_EPOCH_FIREWALL_VERIFICATION_20261005_V1.json",
+      "verification_git_blob_sha": "e974baf2fb0a729b604672fb4cd68c8e2521002f",
+      "frozen_rating_epoch": "ANTHROPIC_RELEASE_2026_09_22__AA_BRIEFCASE_V1_1__OPUS55_MAX_DEFAULT_FALLBACK",
+      "frozen_opus55_reference_elo": 1822,
+      "current_owner_observation_elo": 1808,
+      "rule": "DO_NOT_COMPARE_CURRENT_OR_OTHER_EPOCH_ELO_TO_FROZEN_1822__ONE_RESULT_MAY_SERVE_BOTH_ATOMS_ONLY_WHEN_OWNER_OR_INDEPENDENT_EVIDENCE_BINDS_IT_TO_THE_EXACT_FROZEN_RATING_EPOCH"
     }
   }
 }
