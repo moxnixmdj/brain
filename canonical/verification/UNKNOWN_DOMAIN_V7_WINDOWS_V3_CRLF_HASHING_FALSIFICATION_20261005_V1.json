@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_WINDOWS_V3_CRLF_HASHING_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FALSIFIED__V3_CHANNEL_RETAINS_WINDOWS_WORKING_TREE_BYTE_HASH_BUG__ZERO_CREDIT",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "falsified_gate": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_ISOLATED_ROOT3_REPROMOTION_GATE_20261005_V3.json",
+    "git_blob_sha": "885f9e446e8861f2c73ebb3114a65d9842805852"
+  },
+  "decisive_evidence": {
+    "prior_failed_head": "6fea34cdb9c5ec52bfe9deae6cab9708a80d48aa",
+    "git_object_subject_blobs_at_prior_failed_head": {
+      "generator_v5": "0faa62fce4bc2f2a99c173b0a10a32d5e1c6a244",
+      "tests": "1961cff0013ff9f17feca981409d89d01ecf6769",
+      "universal_proof": "2da564d27a318a99713165208126aaaf36ebc924"
+    },
+    "prior_windows_run_id": 37246058457,
+    "prior_working_tree_hashes_observed_in_log": {
+      "generator_v5": "f5120e7b780733f89915a1824b03033103a39414",
+      "tests": "d88ca616d5046894857e6bf1319141f12a3c16b5",
+      "universal_proof": "9b229924361ddae093529615454b057da548206a"
+    },
+    "conclusion": "THE_PRIOR_BRANCH_DID_NOT_CONTAIN_NONMATCHING_GIT_SUBJECT_BLOBS__THE_VERIFIER_HASHED_WINDOWS_MATERIALIZED_CHECKOUT_BYTES_AND_CONFUSED_CRLF_TRANSFORMATION_WITH_REPOSITORY_BLOB_IDENTITY"
+  },
+  "v3_channel": {
+    "staging_head": "9b78c530f6d3c3f2d0f8ecc681970fdc10dec3c2",
+    "verifier_blob": "ac23654421582be75d7ae934f83a8d4e77725413",
+    "verifier_behavior": "READ_BYTES_AND_RECOMPUTE_GIT_BLOB_SHA_FROM_WINDOWS_WORKING_TREE",
+    "workflow_blob": "fbe14b7068a0adcd6e5b9b0063bc4c0728907086",
+    "observed_execution_run_id": 37246337821,
+    "observed_execution_conclusion": "failure",
+    "reason": "PYTEST_BOOTSTRAP_WAS_FIXED_BUT_THE_LOAD_BEARING_CRLF_HASHING_BUG_REMAINED"
+  },
+  "required_successor": [
+    "BIND_REPOSITORY_IDENTITIES_WITH_GIT_REV_PARSE_HEAD_PATH_OR_EQUIVALENT_GIT_OBJECT_LOOKUP",
+    "KEEP_EXACT_V7_SUBJECT_LAUNCHER_PROTOCOL_EVALUATOR_AND_THRESHOLDS_UNCHANGED",
+    "KEEP_PINNED_PYTEST_BOOTSTRAP",
+    "EXECUTE_BOTH_PYTHON_3_12_10_AND_3_13_EVEN_IF_ONE_FAILS",
+    "FREEZE_SUCCESSOR_HEAD_VERIFIER_WORKFLOW_AND_TRIGGER_RULE_BEFORE_DEDICATED_EXECUTION"
+  ],
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_cases_consumed": 0
+  }
+}
