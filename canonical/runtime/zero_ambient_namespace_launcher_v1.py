@@ -93,7 +93,8 @@ ulimit -t "$CPU_S"; ulimit -v "$MEM_KB"; ulimit -f "$FILE_KB"; ulimit -n "$NOFIL
 exec "$CHROOT_BIN" "$ROOT" /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp PROJECT_BRAIN_BROKER_FD="$BROKER" "$@"
 '''
 
-def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
+def _run_confined(policy:Mapping[str,Any], *, popen_impl)->dict[str,Any]:
+    if not callable(popen_impl): raise NamespaceConfinementError('POPEN_IMPL_NOT_CALLABLE')
     p=canonical_policy(policy); lim=p['limits']
     required_names=['unshare','mount','chroot','setpriv','ip','bash','env']
     resolved={name:shutil.which(name) for name in required_names}
@@ -125,7 +126,7 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     if os.geteuid()==0: popen_kw.update(user=p['host_uid'],group=p['host_gid'],extra_groups=[])
     started=time.monotonic(); timed_out=False
     try:
-        proc=subprocess.Popen(cmd,**popen_kw); child.close()
+        proc=popen_impl(cmd,**popen_kw); child.close()
         try: rc=proc.wait(timeout=lim['wallclock_s'])
         except subprocess.TimeoutExpired:
             timed_out=True
@@ -143,3 +144,7 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     if timed_out: status='WALLCLOCK_LIMIT_EXCEEDED'
     elif overflow[0]: status='BROKER_OUTPUT_LIMIT_EXCEEDED'
     return {'schema':SCHEMA,'status':status,'policy_sha256':policy_sha256(p),'returncode':rc,'wallclock_ms':round((time.monotonic()-started)*1000,3),'broker_bytes':len(raw),'broker_sha256':hashlib.sha256(raw).hexdigest(),'broker_payload':raw,'material_effects_committed':0,'execution_authority':False,'promotion_authority':False,'fresh_reality_authority':False}
+
+
+def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
+    return _run_confined(policy,popen_impl=subprocess.Popen)
