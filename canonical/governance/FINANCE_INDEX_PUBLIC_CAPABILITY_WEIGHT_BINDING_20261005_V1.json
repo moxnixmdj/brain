@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_PUBLIC_CAPABILITY_WEIGHT_BINDING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PUBLIC_PRIMARY_SOURCE_CAPABILITY_WEIGHT_BINDING__ZERO_CREDIT",
+  "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+  "objective": "Bind the current public Artificial Analysis Finance & Accounting Index top-level capability weights and evaluation membership so later threshold compilation does not guess the weighting structure.",
+  "public_target": {
+    "model": "Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)",
+    "score": 61,
+    "source": "https://artificialanalysis.ai/models/capabilities/finance-and-accounting"
+  },
+  "methodology_sources": [
+    "https://artificialanalysis.ai/methodology/capability-indices",
+    "https://artificialanalysis.ai/models/capabilities/finance-and-accounting",
+    "https://artificialanalysis.ai/articles/artificial-analysis-capability-indices-v1-1"
+  ],
+  "capability_weights": [
+    {
+      "capability": "Business Knowledge",
+      "weight": 0.3,
+      "evaluations": [
+        "AA-Omniscience Business Accuracy"
+      ]
+    },
+    {
+      "capability": "Agentic Knowledge Work",
+      "weight": 0.3,
+      "evaluations": [
+        "GDPval-AA v2.1",
+        "AA-Briefcase v1.1"
+      ]
+    },
+    {
+      "capability": "Reasoning",
+      "weight": 0.2,
+      "evaluations": [
+        "Humanity's Last Exam"
+      ]
+    },
+    {
+      "capability": "Agentic Tool Use",
+      "weight": 0.1,
+      "evaluations": [
+        "AutomationBench-AA Finance"
+      ]
+    },
+    {
+      "capability": "Long-Context",
+      "weight": 0.05,
+      "evaluations": [
+        "LCR",
+        "GDP.pdf"
+      ]
+    },
+    {
+      "capability": "Non-Hallucination",
+      "weight": 0.05,
+      "evaluations": [
+        "AA-Omniscience Business Non-Hallucination"
+      ]
+    }
+  ],
+  "arithmetic": {
+    "weight_sum": 1,
+    "terminal_condition": "SUM_OVER_CAPABILITIES(weight_i * verified_comparable_brain_capability_subscore_lower_bound_i) >= 61",
+    "warning": "PUBLIC_METHODOLOGY_BINDS_TOP_LEVEL_CAPABILITY_WEIGHTS_BUT_DOES_NOT_BY_ITSELF_SPECIFY_A_SAFE_RAW_EVALUATION_LEVEL_AGGREGATION_RULE_INSIDE_MULTI_EVALUATION_CAPABILITIES"
+  },
+  "scheduler_delta": {
+    "delete": [
+      "FINANCE_INDEX_TOP_LEVEL_CAPABILITY_WEIGHTS_UNKNOWN",
+      "FINANCE_INDEX_PUBLIC_EVALUATION_MEMBERSHIP_UNKNOWN",
+      "GENERIC_SEARCH_FOR_FINANCE_INDEX_TOP_LEVEL_WEIGHT_STRUCTURE"
+    ],
+    "preserve": [
+      "BIND_COMPARABLE_BRAIN_CAPABILITY_SUBSCORE_LOWER_BOUNDS",
+      "BIND_OR_PROVE_SAFE_WITHIN_CAPABILITY_AGGREGATION_FOR_AGENTIC_KNOWLEDGE_WORK_AND_LONG_CONTEXT",
+      "NO_RAW_EVALUATION_WEIGHT_GUESSING",
+      "NO_SEPARATE_FULL_INDEX_RUN_IF_SOUND_WEIGHTED_LOWER_BOUND_GE_61"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GDPVAL_AND_AA_BRIEFCASE_HAVE_EQUAL_INTERNAL_WEIGHT_WITHIN_AGENTIC_KNOWLEDGE_WORK",
+    "NO_CLAIM_LCR_AND_GDP_PDF_HAVE_EQUAL_INTERNAL_WEIGHT_WITHIN_LONG_CONTEXT",
+    "NO_BRAIN_FINANCE_INDEX_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
