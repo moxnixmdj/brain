@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_TARGET_PROFILE_UNION_BOUNDARY_20261005_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__EXACT_GOAL_PRESERVING_TARGET_IDENTITY_REPAIR__PROFILE_UNION_SUPERSET__ZERO_CREDIT",
+  "status": "SUPERSEDED__PROFILE_UNION_WAS_TOO_BROAD_AS_INTRINSIC_CAPABILITY_TARGET__PRESERVED_AS_DEPLOYMENT_EVIDENCE_PARTITION_ONLY__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective": "Make the target set U well-defined without weakening the terminal objective by replacing an underspecified single-profile reading of Claude Opus 5.5 with the union of useful observable behaviors exposed across all officially supported authorized first-party Opus 5.5 access/deployment profiles in the frozen target epoch.",
   "problem": {
@@ -103,5 +103,7 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": true,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "superseded_by": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_VS_DEPLOYMENT_PROFILE_BOUNDARY_20261005_V2.json",
+  "correction": "AUTHORIZED_PROFILE_UNION_IS_USEFUL_FOR_DISCOVERY_AND_EVIDENCE_PARTITIONING_BUT_MUST_EXCLUDE_BEHAVIOR_CAUSED_BY_FALLBACK_MODELS_EXTERNAL_TOOL_EXECUTORS_OR_NON_MODEL_WRAPPERS_FROM_INTRINSIC_OPUS55_CAPABILITY_CREDIT."
 }
