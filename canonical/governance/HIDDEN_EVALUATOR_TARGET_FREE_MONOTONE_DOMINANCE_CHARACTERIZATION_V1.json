@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_HIDDEN_EVALUATOR_TARGET_FREE_MONOTONE_DOMINANCE_CHARACTERIZATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__TARGET_FREE_MONOTONE_DOMINANCE_IFF_CHARACTERIZATION__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Upgrade the one-way target-free top-support corollary into an exact finite-poset characterization. This decides when all target-distribution and case-level comparator information can be deleted for a hidden utility known only to be monotone in a scope-complete material partial order, and proves when such deletion is impossible without extra target or evaluator information.",
+  "authority_bindings": {
+    "top_support_sufficiency": {
+      "path": "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json",
+      "git_blob_sha": "69e3ac04f0158bd2309c926d606d798449633f25"
+    },
+    "monotone_coupling": {
+      "path": "canonical/governance/HIDDEN_EVALUATOR_MONOTONE_COUPLING_DOMINANCE_V1.json",
+      "git_blob_sha": "678f728089a8df815153af6dd58a88894dd0671f"
+    },
+    "root3_snapshot": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V6.json",
+      "git_blob_sha": "1f0a57cee47a7c58aae2732802cdde1571977f52",
+      "use": "SNAPSHOT_ONLY__NO_CURRENTNESS_OR_SCHEDULING_AUTHORITY_CLAIM"
+    }
+  },
+  "theorem": {
+    "id": "TARGET_FREE_UNIVERSAL_MONOTONE_DOMINANCE_IFF_UNIQUE_GREATEST_SUPPORT",
+    "definitions": {
+      "Y": "FINITE_SCOPE_COMPLETE_MATERIAL_OUTCOME_CLASSES_FOR_ONE_FROZEN_PREDICATE_OR_TASK_CELL",
+      "GE": "SOUND_PARTIAL_ORDER_ON_Y__x_GE_y_MEANS_x_IS_NO_WORSE_THAN_y_ON_EVERY_LOAD_BEARING_MATERIAL_DIMENSION",
+      "Q": "BRAIN_OUTCOME_DISTRIBUTION_ON_Y",
+      "P": "ARBITRARY_TARGET_DISTRIBUTION_ON_Y",
+      "U_MONO": "ALL_BOUNDED_REAL_VALUED_UTILITIES_MONOTONE_WITH_RESPECT_TO_GE",
+      "GREATEST": "g_IN_Y_SUCH_THAT_FOR_EVERY_y_IN_Y__g_GE_y"
+    },
+    "equivalence": [
+      "A__FOR_EVERY_TARGET_DISTRIBUTION_P_ON_Y_AND_EVERY_u_IN_U_MONO__E_Q[u]>=E_P[u]",
+      "B__Y_HAS_A_GREATEST_ELEMENT_g_AND_Q_ASSIGNS_PROBABILITY_1_TO_g",
+      "C__SUPPORT_Q_IS_CONFINED_TO_OUTCOMES_THAT_DOMINATE_EVERY_y_IN_Y"
+    ],
+    "uniqueness": "BECAUSE_GE_IS_ANTISYMMETRIC__THE_SET_IN_C_HAS_CARDINALITY_AT_MOST_1__SO_B_AND_C_ARE_EQUIVALENT",
+    "sufficiency_proof": [
+      "IF_Q_IS_POINT_MASS_AT_g_AND_g_GE_y_FOR_EVERY_y__MONOTONICITY_GIVES_u(g)>=u(y)_FOR_EVERY_y_AND_EVERY_u_IN_U_MONO",
+      "AVERAGING_OVER_ANY_P_GIVES_E_Q[u]=u(g)>=E_P[u]"
+    ],
+    "necessity_proof": [
+      "ASSUME_A",
+      "FIX_ANY_y_IN_Y_AND_CHOOSE_TARGET_P=DELTA_y",
+      "LET_UP_y={z_IN_Y:z_GE_y}; ITS_INDICATOR_1_UP_y_IS_BOUNDED_AND_MONOTONE",
+      "A_IMPLIES_E_Q[1_UP_y]>=E_DELTA_y[1_UP_y]=1__HENCE_Q(UP_y)=1",
+      "THIS_HOLDS_FOR_EVERY_y__SO_Q_IS_SUPPORTED_ON_INTERSECTION_y_UP_y__THE_SET_OF_GREATEST_ELEMENTS",
+      "A_PARTIAL_ORDER_HAS_AT_MOST_ONE_GREATEST_ELEMENT__THEREFORE_A_REQUIRES_A_UNIQUE_g_AND_Q(g)=1"
+    ],
+    "explicit_falsifier": "IF_Q_HAS_POSITIVE_MASS_ON_ANY_b_THAT_FAILS_TO_DOMINATE_SOME_y__CHOOSE_P=DELTA_y_AND_u=INDICATOR_OF_UP_y__THEN_E_Q[u]<1=E_P[u]"
+  },
+  "breakthrough": {
+    "new_information": "THE_EXISTING_TOP_SUPPORT_RULE_IS_NOT_MERELY_A_STRONG_SUFFICIENT_SPECIAL_CASE__UNDER_THE_SAME_FINITE_SCOPE_COMPLETE_PARTIAL_ORDER_AND_ARBITRARY_MONOTONE_HIDDEN_UTILITY ASSUMPTIONS IT_IS_THE_EXACT_TARGET_FREE_BOUNDARY",
+    "search_pruning_rule": "DO_NOT_SEARCH_FOR_A_WEAKER_TARGET_DISTRIBUTION_FREE UNIVERSAL_MONOTONE_DOMINANCE CERTIFICATE INSIDE_THIS_MODEL_CLASS. FIRST PROVE_A_GREATEST_MATERIAL_OUTCOME_EXISTS_AND_BRAIN_UNIVERSALLY_ATTAINS_IT; OTHERWISE SOME_TARGET_DISTRIBUTION_EVALUATOR_OR_ADDITIONAL_UTILITY_STRUCTURE_IS_INFORMATION_THEORETICALLY_REQUIRED.",
+    "critical_path_gain": "CONVERTS_OPEN_ENDED_COMPARATOR_ELIMINATION_SEARCH_INTO_A_BINARY_STRUCTURAL_TEST_BEFORE_ANY_FRESH_REALITY_OR_TARGET_CASE_COLLECTION"
+  },
+  "root3_v6_snapshot_projection": [
+    {
+      "predicate_id": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "target_free_route": "SURVIVES_ONLY_IF_ZERO_CRITICAL_VIOLATIONS_IS_THE_GREATEST_CLASS_FOR_THE_COMPLETE_LOAD_BEARING_ORDER_AND_BRAIN_IS_UNIVERSALLY_CONFINED_TO_IT"
+    },
+    {
+      "predicate_id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "target_free_route": "SURVIVES_ONLY_IF_ZERO_CRITICAL_FAILURES_IS_THE_GREATEST_CLASS_FOR_THE_COMPLETE_LOAD_BEARING_ORDER_AND_BRAIN_IS_UNIVERSALLY_CONFINED_TO_IT"
+    },
+    {
+      "predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "target_free_route": "RELATIVE_NONREGRESSION_ALONE_IS_INSUFFICIENT__A_GREATEST_SAFETY_OUTCOME_AND_UNIVERSAL_BRAIN_ATTAINMENT_ARE_REQUIRED"
+    },
+    {
+      "predicate_id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "target_free_route": "REQUIRES_FULL_SCOPE_UNIVERSAL_SUCCESS_CEILING"
+    },
+    {
+      "predicate_id": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "target_free_route": "REQUIRES_FULL_SCOPE_UNIVERSAL_TERMINAL_SUCCESS_CEILING"
+    },
+    {
+      "predicate_id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "target_free_route": "FIRST_DEFINE_A_SCOPE_COMPLETE_ORDER_WITH_A_GREATEST_BOUNDARY_OUTCOME_AND_PROVE_UNIVERSAL_BRAIN_ATTAINMENT__OTHERWISE_RETAIN_TARGET_INFORMATION"
+    },
+    {
+      "predicate_id": "VISION_DENSE_NONCHART_SCOPE",
+      "target_free_route": "NO_DELETION_JUSTIFIED_BY_THIS_THEOREM_WITHOUT_A_SCOPE_COMPLETE_ORDER_AND_ATTAINABLE_GREATEST_OUTCOME"
+    }
+  ],
+  "mechanical_verification": {
+    "runtime": "canonical/runtime/hidden_evaluator_target_free_characterization_v1.py",
+    "tests": "canonical/tests/test_hidden_evaluator_target_free_characterization_v1.py",
+    "wolfram_receipt": "canonical/verification/HIDDEN_EVALUATOR_TARGET_FREE_MONOTONE_DOMINANCE_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "wolfram_exhaustive_corroboration": "ALL_LABELED_PARTIAL_ORDERS_ON_N_1_TO_4_AND_ALL_NONEMPTY_SUPPORTS__3428_SUPPORT_TESTS_TOTAL__ZERO_MISMATCHES"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_ROOT3_PREDICATE_IS_CLOSED_NOW",
+    "NO_CLAIM_ANY_LIVE_BRAIN_RUNTIME_IS_SCOPE_COMPLETE_AT_A_GREATEST_OUTCOME",
+    "NO_CLAIM_REAL_HIDDEN_OPUS55_UTILITY_IS_MONOTONE_IN_AN_UNVERIFIED_OR_INCOMPLETE_ORDER",
+    "NO_CLAIM_FINITE_OUTCOME_ABSTRACTION_IS_SCOPE_COMPLETE_UNLESS_SEPARATELY_PROVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
