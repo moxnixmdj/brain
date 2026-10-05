@@ -431,7 +431,7 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_OPUS55_ACCEPTANCE_PASS__14_OPEN__12_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_V6_REVOKED_PENDING_V2_INDEPENDENT_REPROMOTION_GATE__OWNERSHIP_PROMOTION_SEPARATE",
+    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_OPUS55_ACCEPTANCE_PASS__14_OPEN__12_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_V1_V2_V3_REPROMOTION_ROUTES_INVALID__V7_GENUINE_TYPE_GATE_PENDING_DUAL_VERSION_IMMUTABLE_MAIN_VERIFICATION__OWNERSHIP_PROMOTION_SEPARATE",
     "override_allowed": false
   },
   "specification_closure": {
@@ -551,13 +551,25 @@
     },
     "unknown_domain_v6_delta": {
       "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
-      "state": "EXTERNAL_BLOCKED__REVOKED_PENDING_BUFFER_SAFE_INDEPENDENT_REPROMOTION",
+      "state": "EXTERNAL_BLOCKED__V1_V2_V3_REPROMOTION_ROUTES_INVALID__V7_GENUINE_TYPE_GATE_PENDING",
       "revocation_path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
       "revocation_git_blob_sha": "a30a19aa0ab9ac18eaf0d005cf1f71b636660fb4",
-      "repromotion_gate_path": "canonical/governance/UNKNOWN_DOMAIN_V6_SUBCLASS_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V2.json",
-      "repromotion_gate_git_blob_sha": "0f831e1a56b85d48740ccb8639015ddde4d31b07",
+      "class_spoof_falsifier_path": "canonical/verification/UNKNOWN_DOMAIN_V6_REPAIRED_CLASS_SPOOF_FALSIFIER_20261005_V1.json",
+      "class_spoof_falsifier_git_blob_sha": "1552eb871a57de855be8abd09774ee077a7425df",
+      "v3_self_falsifier_path": "canonical/verification/UNKNOWN_DOMAIN_V6_RUNTIME_TYPE_GATE_V3_SELF_FALSIFICATION_20261005_V1.json",
+      "v3_self_falsifier_git_blob_sha": "0b64f207db2ad07a8b69a53d514f0c717a1d0afc",
+      "invalidated_repromotion_gates": [
+        "canonical/governance/UNKNOWN_DOMAIN_V6_SUBCLASS_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V2.json",
+        "canonical/governance/UNKNOWN_DOMAIN_V6_RUNTIME_TYPE_REPAIR_ROOT3_REPROMOTION_GATE_20261005_V3.json"
+      ],
+      "repromotion_gate_path": "canonical/governance/UNKNOWN_DOMAIN_V7_GENUINE_TYPE_ROOT3_REPROMOTION_GATE_20261005_V2.json",
+      "repromotion_gate_git_blob_sha": "673cb3beae6b74cfcbb10beaec3fb65a58ecab0a",
+      "successor_branch": "breakthrough/unknown-domain-v7-clean-genuine-type-20261005-sol",
+      "successor_frozen_branch_head": "da7b73c7d007127565b9fe2125c5dca9e4e544f6",
+      "independent_verifier_pr": 2217,
+      "required_python_versions": ["3.12.10", "3.13"],
+      "immutable_main_verifier_execution_required": true,
       "previous_acceptance_reduction_state": "REVOKED",
-      "previous_independent_verification_state": "REVOKED_FOR_DECLARED_SUBCLASS_TOTALITY",
       "family_acceptance_delta": 0,
       "capability_credit_delta": 0,
       "ownership_credit_delta": 0,
