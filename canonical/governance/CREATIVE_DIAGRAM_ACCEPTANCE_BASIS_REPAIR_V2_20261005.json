@@ -1,0 +1,186 @@
+{
+  "schema": "PROJECT_BRAIN_CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V2_20261005",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__DIAGRAM_TARGET_COMPRESSED_TO_EXISTING_ARTIFACT_JUDGMENT_PLUS_DETERMINISTIC_HTML_SVG_MECHANICS__CREATIVE_TEXT_RETAINS_ONE_QUALITY_OBLIGATION__ZERO_CREDIT",
+  "objective": "Repair action-group F with the smallest lossless basis after checking current first-party Claude output semantics and current public creative/SVG evaluation surfaces.",
+  "canonical_bindings": {
+    "creative_diagram_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    },
+    "minimum_cut": {
+      "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V1.json"
+    },
+    "artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "external_source_observations": [
+    {
+      "id": "ANTHROPIC_OPUS55_MODALITY_SURFACE",
+      "url": "https://www.anthropic.com/transparency",
+      "observed": "Claude Opus 5.5 output includes text, text-based artifacts, and diagrams.",
+      "role": "FIRST_PARTY_TARGET_SURFACE"
+    },
+    {
+      "id": "ANTHROPIC_CUSTOM_VISUAL_IMPLEMENTATION_SURFACE",
+      "url": "https://support.claude.com/en/articles/9002504-can-claude-produce-images",
+      "observed": "Claude does not generate photos or illustrations like image-generation tools; diagrams, charts and interactive visuals are generated using HTML and SVG.",
+      "role": "FIRST_PARTY_SCOPE_NARROWING"
+    },
+    {
+      "id": "ANTHROPIC_CUSTOM_VISUAL_EXAMPLES",
+      "url": "https://support.claude.com/en/articles/13979539-custom-visuals-in-chat-and-cowork",
+      "observed": "Custom visuals include flowcharts and other diagrams/charts/interactive visuals built from the user question.",
+      "role": "FIRST_PARTY_SCOPE_CHARACTERIZATION"
+    },
+    {
+      "id": "ARENA_CREATIVE_WRITING_OPUS55",
+      "url": "https://arena.ai/leaderboard/text/creative-writing",
+      "observed": "2026-10-02 leaderboard: claude-opus-5.5-high score 1516 +/- 20 with 1058 votes.",
+      "role": "PUBLIC_HUMAN_PREFERENCE_CREATIVE_REFERENCE_ONLY"
+    },
+    {
+      "id": "EQBENCH_CREATIVE_WRITING_V3",
+      "url": "https://github.com/EQ-bench/creative-writing-bench",
+      "observed": "Open benchmark uses 32 prompts x 3 iterations, rubric plus pairwise Glicko/Elo; leaderboard-parity evaluation recommends Claude Sonnet 4.6 judge and is not zero-incremental-cost by default.",
+      "role": "OPEN_REPRODUCIBLE_CREATIVE_PROTOCOL_WITH_COST_CAVEAT"
+    },
+    {
+      "id": "POKEMON_SVG_OPUS55",
+      "url": "https://svg-bench.fenx.work/",
+      "observed": "Opus 5.5 high scores 40.51 on a 15-case SVG illustration benchmark; scoring uses vision-model evaluation plus human calibration.",
+      "role": "NARROW_SVG_REFERENCE_ONLY__NOT_GENERAL_DIAGRAM_PROOF"
+    },
+    {
+      "id": "AA_BRIEFCASE_PUBLIC_DIAGRAM_EXAMPLE",
+      "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
+      "observed": "The public AA-Briefcase example includes a single-page LaTeX/TikZ market-structure diagram, showing diagram-like professional artifact work is within representative artifact task structure; the public example itself does not contribute to official Elo.",
+      "role": "REPRESENTATIVE_SCOPE_EVIDENCE_ONLY__NO_SCORE_INHERITANCE"
+    }
+  ],
+  "scope_repair": {
+    "old_diagram_child": "DIAGRAM_OUTPUT_SEMANTIC_CORRECTNESS_STRUCTURE_PRESENTATION_NONINFERIOR",
+    "first_party_scope_correction": {
+      "exclude": [
+        "ARBITRARY_PHOTOREALISTIC_IMAGE_GENERATION",
+        "ARBITRARY_RASTER_ILLUSTRATION_GENERATION"
+      ],
+      "retain": [
+        "HTML_SVG_DIAGRAMS",
+        "FLOWCHARTS",
+        "CHARTS",
+        "INTERACTIVE_VISUALS",
+        "PROFESSIONAL_ARTIFACT_VISUALS_WHERE_MATERIALLY_USEFUL"
+      ],
+      "reason": "FIRST_PARTY_CLAUDE_HELP_EXPLICITLY_DISTINGUISHES_CUSTOM_HTML_SVG_VISUALS_FROM_PHOTO_OR_ILLUSTRATION_GENERATION"
+    },
+    "lossless_decomposition_candidate": [
+      {
+        "leaf": "DIAGRAM_CONTENT_LAYOUT_AND_REVISION_JUDGMENT",
+        "reuse_existing_behavior": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "required_condition_extension": "HTML_SVG_DIAGRAM_FLOWCHART_CHART_CONDITION",
+        "new_learned_primitive_required": false,
+        "proof_requirement": "PROVE_EXISTING_BEHAVIORAL_CONTRACT_AND_ITS_TERMINAL_ACCEPTANCE_REMAIN_NONINFERIOR_UNDER_THE_DIAGRAM_CONDITION; DO_NOT_INHERIT UNTIL SHOWN"
+      },
+      {
+        "leaf": "DIAGRAM_GROUNDED_CONTENT_SELECTION",
+        "reuse_existing_behavior": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "required_condition_extension": "VISUAL_ENCODING_OF_REQUIRED_EVIDENCE_WHERE_SOURCE_GROUNDED",
+        "new_learned_primitive_required": false,
+        "proof_requirement": "ONLY_APPLIES_WHEN_DIAGRAM_IS_EVIDENCE_GROUNDED; CREATIVE_OR_SYNTHETIC_VISUALS_DO_NOT_INHERIT THIS LEAF"
+      },
+      {
+        "leaf": "HTML_SVG_RENDER_STRUCTURE_MECHANICS",
+        "reuse_existing_behavior": null,
+        "classification": "DETERMINISTIC_MECHANICAL_CAPABILITY_CANDIDATE",
+        "required_checks": [
+          "WELL_FORMED_OUTPUT",
+          "RENDERABLE_WITH_FROZEN_RENDERER",
+          "NO_BROKEN_REFERENCES_OR_INVALID_STRUCTURE",
+          "REQUIRED_ELEMENTS_AND_RELATIONSHIPS_PRESENT_IN_MACHINE_READABLE_INTERMEDIATE",
+          "ROUND_TRIP_OR_EXPORT_VALIDITY_WHERE_APPLICABLE"
+        ],
+        "new_learned_primitive_required": false,
+        "current_status": "NO_EXISTING_CANONICAL_HTML_SVG_MECHANICAL_RECEIPT_FOUND_IN_REPOSITORY_SEARCH__OPEN"
+      }
+    ],
+    "diagram_breakthrough": "DO_NOT_OPEN_A_NEW_BROAD_LEARNED_DIAGRAM_CAPABILITY_CONTRACT_FROM_THE_FIRST_PARTY_SURFACE. FIRST CONDITION_EXISTING_ARTIFACT_JUDGMENT_AND_SYNTHESIS_CONTRACTS_ON_HTML_SVG_DIAGRAM_TASKS, AND ADD_ONLY_THE_MISSING_DETERMINISTIC_RENDER_STRUCTURE_GATE."
+  },
+  "creative_text_repair": {
+    "child": "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+    "candidate_public_reference": {
+      "benchmark": "Arena Text Creative Writing",
+      "opus55_configuration": "claude-opus-5.5-high",
+      "score": 1516,
+      "uncertainty": 20,
+      "votes": 1058,
+      "as_of": "2026-10-02",
+      "strength": "LARGE_PUBLIC_HUMAN_PREFERENCE_SURFACE",
+      "limitation": "BRAIN_DOES_NOT_YET_HAVE_A_ZERO_COST_OFFLINE_ROUTE_TO_OBTAIN_A_COMPARABLE_ARENA_RATING"
+    },
+    "open_protocol_candidate": {
+      "benchmark": "EQ-Bench Creative Writing v3",
+      "public_prompts_and_code": true,
+      "prompt_count": 32,
+      "iterations": 3,
+      "leaderboard_parity_judge": "Claude Sonnet 4.6",
+      "hard_zero_cost_issue": "RECOMMENDED_COMPARABLE_JUDGE_ROUTE_IS_PAID_BY_DEFAULT",
+      "use": "PROTOCOL_SOURCE_AND_SCOPE_DEFINITION_UNTIL_A_ZERO_INCREMENTAL_COST_COMPARABLE_JUDGE_OR_STRONGER_OBJECTIVE_PROOF_EXISTS"
+    },
+    "minimum_surviving_learned_obligation_count": 1,
+    "minimum_surviving_learned_obligation": "OPEN_ENDED_CREATIVE_TEXT_QUALITY"
+  },
+  "action_group_f_reduction": {
+    "prior_children": [
+      "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+      "DIAGRAM_OUTPUT_SEMANTIC_CORRECTNESS_STRUCTURE_PRESENTATION_NONINFERIOR"
+    ],
+    "candidate_replacement_basis": [
+      "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001__DIAGRAM_CONDITION",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001__VISUAL_ENCODING_CONDITION_WHERE_APPLICABLE",
+      "HTML_SVG_RENDER_STRUCTURE_MECHANICS_CEILING"
+    ],
+    "new_broad_learned_primitive_count": 1,
+    "new_broad_learned_primitive": "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+    "diagram_new_broad_learned_primitive_count": 0,
+    "reason": "FIRST_PARTY_DIAGRAM_OUTPUT_IS_A_STRUCTURED_HTML_SVG_ARTIFACT_SURFACE; CURRENT_BRAIN_ALREADY_HAS_LOAD_BEARING_ARTIFACT_QUALITY_JUDGMENT_AND_EVIDENCE_SYNTHESIS_BEHAVIORS. ONLY_CONDITION_COVERAGE_AND_DETERMINISTIC_RENDER_MECHANICS_REMAIN_UNPROVED."
+  },
+  "priority": [
+    "INDEPENDENTLY_VERIFY_FIRST_PARTY_SCOPE_CORRECTION_AND_THIS_DECOMPOSITION",
+    "SEARCH_OR_ACQUIRE_MINIMAL_OPEN_HTML_SVG_RENDER_VALIDATION_MECHANISM_BEFORE_WRITING_NEW_MECHANICS",
+    "PROVE_EXISTING_ARTIFACT_JUDGMENT_CONTRACT_UNDER_DIAGRAM_CONDITION_OR_FIND_COUNTEREXAMPLE",
+    "SEPARATELY_SOLVE_ZERO_COST_COMPARABLE_CREATIVE_TEXT_SCORING_ROUTE",
+    "DO_NOT_SPEND_FRESH_TERMINAL_CASES_OR_OPUS_CALLS_FOR_THIS_REPAIR_UNTIL_ZERO_REALITY_SATURATION"
+  ],
+  "hard_nonclaims": [
+    "NO_DIAGRAM_ACCEPTANCE_CREDIT",
+    "NO_CREATIVE_TEXT_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_AA_BRIEFCASE_OFFICIAL_ELO_PROVES_DIAGRAM_OUTPUT",
+    "NO_CLAIM_POKEMON_SVG_PROVES_GENERAL_DIAGRAM_QUALITY",
+    "NO_CLAIM_ARENA_SCORE_IS_CURRENTLY_EXECUTABLE_FOR_BRAIN_AT_ZERO_COST",
+    "NO_CLAIM_EXISTING_ARTIFACT_JUDGMENT_CONTRACT_ALREADY_HAS_DIAGRAM_CONDITION_COVERAGE",
+    "NO_NEW_FAMILY",
+    "NO_ROOT1_POSITIVE_CAPABILITY_GAP"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
