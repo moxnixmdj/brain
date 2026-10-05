@@ -159,6 +159,8 @@ def _prepare(context: Mapping[str, Any]) -> dict[str, Any]:
         raise PandocArtifactDenied("PANDOC_OPTIONS_INVALID")
 
     kwargs = dict(context.get("kwargs") or {})
+    if set(kwargs) != {"cwd", "text", "capture_output", "timeout"}:
+        raise PandocArtifactDenied("PROCESS_KWARGS_NOT_EXACT_FROZEN_SURFACE")
     if kwargs.get("shell", False):
         raise PandocArtifactDenied("SHELL_FORBIDDEN")
     if kwargs.get("env") is not None:
@@ -179,6 +181,8 @@ def _prepare(context: Mapping[str, Any]) -> dict[str, Any]:
     repo_root = pathlib.Path(os.fspath(cwd_raw)).resolve(strict=True)
     if not repo_root.is_dir():
         raise PandocArtifactDenied("REPOSITORY_ROOT_CWD_INVALID")
+    if confinement._inside_mounts(repo_root):
+        raise PandocArtifactDenied("REPOSITORY_INPUT_HAS_NESTED_MOUNTS")
 
     src = _inside(repo_root, argv[1], "INPUT")
     dst = _inside(repo_root, argv[3], "OUTPUT")
@@ -190,14 +194,14 @@ def _prepare(context: Mapping[str, Any]) -> dict[str, Any]:
     pre_sha, _ = _prestate(dst)
 
     pandoc = _resolve_tool("pandoc")
-    _resolve_tool("weasyprint")
+    weasyprint = _resolve_tool("weasyprint")
     src_rel = src.relative_to(repo_root).as_posix()
     inner = [
         pandoc,
         "/input/" + src_rel,
         "-o",
         "/output/artifact.pdf",
-        "--pdf-engine=weasyprint",
+        "--pdf-engine=" + weasyprint,
     ]
     spec = {"argv": inner, "timeout": timeout}
     encoded = base64.urlsafe_b64encode(
@@ -263,6 +267,8 @@ def make_executor(*, popen_impl: Callable[..., Any]) -> Callable[[Mapping[str, A
     def execute(context: Mapping[str, Any]) -> subprocess.CompletedProcess:
         prepared = _prepare(context)
         stage = pathlib.Path(tempfile.mkdtemp(prefix="project-brain-pandoc-artifact-"))
+        if os.geteuid() == 0:
+            os.chown(stage, 65534, 65534)
         try:
             confined = {
                 **prepared,
