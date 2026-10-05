@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXISTING_INDEPENDENT_SYNTHESIS_SCOPE_CERTIFICATE_BINDS_IDENTICAL_BEHAVIORAL_LEAF_SCOPE__SCOPE_ONLY__ZERO_PERFORMANCE_CREDIT",
+  "objective": "Bind the independently verified synthesis lossless scope certificate to the identical frozen EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 behavioral leaf, discharging only scope completeness while preserving matched performance as open.",
+  "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+  "authorities": {
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "independent_scope_verification": {
+      "path": "canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "1852516f725f5b72badfc2f65be22e542ed83623"
+    },
+    "receipt_saturation_activation": {
+      "path": "canonical/governance/SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_ACTIVATION_20261005_V1.json"
+    }
+  },
+  "exact_scope_binding": {
+    "registry_inputs": "Verified evidence units with provenance, user objective/audience, output constraints and required claims",
+    "registry_required_behavior": "Select, organize and express the necessary evidence so required claims are supported, material uncertainty/disagreement is preserved and irrelevant detail is omitted",
+    "registry_scope": "Grounded evidence synthesis under audience and format constraints",
+    "certificate_witness_scope": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+    "certificate_scope_relation": "PROVEN_STRONGER",
+    "certificate_coverage_relation": "EXACT_UNION",
+    "certificate_coverage_complete": true,
+    "dimensions": [
+      "CLAIM_TO_SOURCE_FIDELITY",
+      "REQUIRED_EVIDENCE_COVERAGE",
+      "UNCERTAINTY_DISAGREEMENT_PRESERVATION",
+      "AUDIENCE_ADAPTATION",
+      "FORMAT_STYLE_CONSTRAINTS",
+      "COMPRESSION_WITHOUT_DECISION_RELEVANT_LOSS"
+    ],
+    "every_dimension_universal_formal_scope_proof": true,
+    "every_dimension_all_admissible_target_inputs_proved": true
+  },
+  "consequence": {
+    "leaf_scope_completeness": "PROVED_IF_THIS_BRIDGE_IS_INDEPENDENTLY_RECOMPUTED",
+    "leaf_performance": "OPEN",
+    "existing_performance_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "fanout_if_activated": [
+      "COMMUNICATION_AND_SYNTHESIS",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "FINANCIAL_ANALYSIS"
+    ],
+    "scope_repair_fanout_in_six_family_partition": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ]
+  },
+  "scheduler_delta_if_verified": [
+    "DELETE_NEW_SCOPE_COMPLETENESS_PROGRAM_FOR_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "PRESERVE_ONLY_EXISTING_SYNTHESIS_MATCHED_PERFORMANCE_RESIDUAL_FOR_THE_LEAF",
+    "REUSE_SCOPE_RECEIPT_BY_EXACT_BEHAVIOR_IDENTITY_ACROSS_ALL_CONSUMERS",
+    "DO_NOT_CREATE_FAMILY_LOCAL_SYNTHESIS_SCOPE_PROOFS"
+  ],
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_MATCHED_QUALITY_NONINFERIORITY_CREDIT",
+    "NO_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY_CREDIT",
+    "NO_WHOLE_FAMILY_ACCEPTANCE_FROM_SCOPE_ONLY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
