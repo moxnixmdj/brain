@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_POST_READ_ONLY_MINIMUM_CLASS_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__POST_READ_ONLY_CLASS_FRONTIER__3_ACTIVE_CLASS_SPECIFIC_SEMANTIC_LANES_PLUS_SHARED_TOTALITY__ZERO_CREDIT",
+  "base_main_commit": "5c0bb6c3d75c87bd63ff8623a92a7287d2a5ae4e",
+  "objective": "Minimize Root3 wall-clock by deleting effect-class work already closed, semantically routed, or intentionally default-denied, while preserving every unresolved cross-cutting totality and no-bypass obligation.",
+  "sources": {
+    "effect_class_registry": {
+      "path": "canonical/runtime/root3_subprocess_effect_class_registry_v1.py",
+      "git_blob_sha": "1756bcdfe121cf2c79904600647488b7149b33fd"
+    },
+    "read_only_closure": {
+      "path": "canonical/governance/ROOT3_READ_ONLY_DECLARED_QUERY_CLASS_CLOSURE_ACTIVATION_20261005_V2.json",
+      "git_blob_sha": "6e0e879456653a701654a20af9c8f9990e90b0b0"
+    },
+    "one_substrate_activation": {
+      "path": "canonical/governance/ROOT3_SEVEN_CLASS_ONE_SUBSTRATE_ACTIVATION_20261005_V2.json",
+      "git_blob_sha": "b8a36ddee30cc66b8eae3d9992e1592889e3b010"
+    },
+    "one_substrate_policy": {
+      "path": "canonical/governance/ROOT3_SEVEN_CLASS_ONE_SUBSTRATE_POLICY_20261005_V2.json",
+      "git_blob_sha": "83b8cf2d84d8bfa49dbe5bd2159e5c9296eb4b4e"
+    }
+  },
+  "exact_effect_class_partition": {
+    "total_process_sites": 22,
+    "total_effect_classes": 7,
+    "class_site_counts": {
+      "READ_ONLY_DECLARED_QUERY": 8,
+      "TEMPORARY_FILESYSTEM_TRANSFORM": 2,
+      "PACKAGE_ENV_MUTATION": 3,
+      "LOCAL_LOOPBACK_SERVICE": 1,
+      "DECLARED_ARTIFACT_PRODUCTION": 1,
+      "BOUND_CHILD_CODE_EXECUTION": 5,
+      "ARBITRARY_COMMAND_EXECUTION": 2
+    }
+  },
+  "frontier_reduction": {
+    "removed_from_active_class_specific_work": {
+      "READ_ONLY_DECLARED_QUERY": "CURRENT_8_OF_8_EXECUTOR_COMPLETE",
+      "DECLARED_ARTIFACT_PRODUCTION": "TYPED_PARENT_FINALIZER_AND_SCHEMA_SPECIFIC_SEMANTIC_ROUTE_INDEPENDENTLY_REPLAYED",
+      "PACKAGE_ENV_MUTATION": "DEFAULT_DENY__NO_CURRENT_GENERIC_MUTATION_AUTHORITY",
+      "ARBITRARY_COMMAND_EXECUTION": "DEFAULT_DENY__NO_CURRENT_GENERIC_COMMAND_AUTHORITY"
+    },
+    "active_class_specific_semantic_lanes": [
+      "TEMPORARY_FILESYSTEM_TRANSFORM",
+      "LOCAL_LOOPBACK_SERVICE",
+      "BOUND_CHILD_CODE_EXECUTION"
+    ],
+    "active_class_specific_lane_count": 3,
+    "shared_substrate": "canonical/runtime/zero_ambient_namespace_launcher_v1.py"
+  },
+  "cross_cutting_residuals_preserved": [
+    "BIND_ALL_AUTHORIZED_CHILD_PROCESS_CREATION_TO_THE_NAMESPACE_SUBSTRATE",
+    "PROVE_DESCENDANT_NATIVE_EFFECT_TOTALITY",
+    "PROVE_NONREPO_DEPENDENCY_EFFECT_TOTALITY",
+    "PROVE_EXTERNAL_TOOL_BRIDGE_EFFECT_TOTALITY",
+    "PROVE_EFFECT_BROKER_SEMANTIC_SOUNDNESS_FOR_NON_ARTIFACT_EFFECT_CLASSES",
+    "PROVE_CLASS_SPECIFIC_POSTCONDITIONS_FOR_NON_ARTIFACT_EFFECT_CLASSES",
+    "COMPLETE_C1_C2_C3_SHARED_NO_BYPASS_DOMINANCE",
+    "PRESERVE_KERNEL_NAMESPACE_SECURITY_AS_EXPLICIT_CARRIER_ASSUMPTION_AND_FALSIFICATION_BOUNDARY"
+  ],
+  "minimum_execution_order": [
+    "1_PROVE_ONE_SHARED_CHILD_BINDING_AND_NO_BYPASS_INVARIANT_OVER_THE_NAMESPACE_SUBSTRATE",
+    "2_DISCHARGE_BOUND_CHILD_CODE_EXECUTION_BY_INHERITING_THE_SHARED_BOUNDARY_OR_EMIT_EXACT_ESCAPE_COUNTEREXAMPLE",
+    "3_DISCHARGE_TEMPORARY_FILESYSTEM_TRANSFORM_WITH_EPHEMERAL_WORKSPACE_POSTCONDITION_OR_EMIT_EXACT_ESCAPE_COUNTEREXAMPLE",
+    "4_DISCHARGE_LOCAL_LOOPBACK_SERVICE_WITH_LOOPBACK_LIFECYCLE_POSTCONDITION_OR_EMIT_EXACT_ESCAPE_COUNTEREXAMPLE",
+    "5_RECOMPUTE_ROOT3_C1_C2_C3_AND_DELETE_DOMINATED_CLASS_SPECIFIC_WORK"
+  ],
+  "selection_rule": "AT_EACH_STEP_CHOOSE_THE_ACTION_MAXIMIZING_VERIFIED_DOWNSTREAM_OBLIGATION_REACH_PER_WALL_CLOCK_SECOND__VERIFIED_IMPLICATION_P1__FALSIFIED_ROUTE_P0__OTHERWISE_UNKNOWN_NO_INVENTED_POINT_PROBABILITY",
+  "hard_nonclaims": [
+    "NO_ROOT3_C1_C2_C3_COMPLETENESS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "DEFAULT_DENY_DOES_NOT_PROVE_A_REQUIRED_USEFUL_BEHAVIOR_EXISTS_OR_IS_SATISFIED",
+    "ARTIFACT_SEMANTIC_ROUTE_DOES_NOT_BY_ITSELF_PROVE_ARTIFACT_CONTENT_QUALITY",
+    "READ_ONLY_EXECUTOR_COMPLETENESS_DOES_NOT_PROVE_GLOBAL_NO_BYPASS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
