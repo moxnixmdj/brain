@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_SPRITE_ZERO_SPEND_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_FAIL_CLOSED__SPRITE_ZERO_SPEND_CLAIM_UNPROVED__TECHNICAL_REPLAY_DIAGNOSTIC_ONLY__ZERO_CREDIT",
+  "objective": "Prevent a same-day Root3 Sprite replay from being treated as admissible hard-$0 independent verification when account-specific zero-cost capacity was never proved.",
+  "affected_receipt": {
+    "path": "canonical/verification/ROOT3_SUBPROCESS_EFFECT_CLASS_REGISTRY_SPRITE_REPLAY_20261005_V1.json",
+    "git_blob_sha": "3c8f7e6e02f6c96c5821e91c98de4fa69911a275",
+    "unsupported_field": "environment.incremental_spend_usd = 0"
+  },
+  "account_evidence": {
+    "fly_trial_started": {
+      "observed_email_date": "2026-09-04",
+      "provider_statement": "Free trial good for 7 days or 2 total hours of machine runtime."
+    },
+    "fly_trial_ended": {
+      "observed_email_date": "2026-09-11",
+      "provider_statement": "Trial ended; continuing service requires adding payment details / Pay-as-You-Go."
+    },
+    "current_sprite_metadata": {
+      "sprite_name": "brain-heldout003-one-shot",
+      "sprite_id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+      "status": "cold",
+      "billing_or_credit_fields_observed": false
+    }
+  },
+  "failed_zero_spend_gate": {
+    "branch": "sprites-zero-spend-carrier-gate-20261005-sol",
+    "commit_prefix": "9c852ee",
+    "github_run_id": 37255057104,
+    "jobs": [
+      {
+        "name": "guard",
+        "job_id": 111590238172,
+        "conclusion": "failure",
+        "steps": null
+      },
+      {
+        "name": "continuous-obs-runtime",
+        "job_id": 111590238289,
+        "conclusion": "failure",
+        "steps": null
+      }
+    ],
+    "interpretation": "PRE_ASSIGNMENT_OR_ZERO_STEP_FAILURE__NO_ZERO_SPEND_PROPOSITION_EXECUTED__NO_COST_ELIGIBILITY_PROOF_CREATED"
+  },
+  "public_pricing_boundary": {
+    "current_rule": "Sprites CPU and memory are metered while running; warm/cold are not compute-billed. Trial credit may exist only when account-specific credit remains.",
+    "account_specific_remaining_credit_proved": false
+  },
+  "deductions": [
+    "THE_ROOT3_29_TO_7_CLASSIFICATION_RESULT_MAY_BE_PRESERVED_AS_DIAGNOSTIC_TECHNICAL_EVIDENCE",
+    "THE_SPRITE_REPLAY_MUST_NOT_BE_USED_AS_PROOF_OF_A_HARD_ZERO_COST_INDEPENDENT_CARRIER",
+    "THE_FIELD_environment.incremental_spend_usd_0_IS_NOT_ADMISSIBLY_ESTABLISHED_BY_CURRENT_EVIDENCE",
+    "NO_FUTURE_SPRITE_WAKE_IS_ADMISSIBLE_UNDER_HARD_ZERO_SPEND_WITHOUT_A_CURRENT_ACCOUNT_SPECIFIC_CREDIT_OR_NONBILLABLE_CAPACITY_RECEIPT"
+  ],
+  "scheduler_effect": {
+    "delete": [
+      "WAKE_EXISTING_SPRITE_BASED_ONLY_ON_OLD_TRIAL_OR_PRIOR_ZERO_SPEND_LABEL",
+      "TREAT_ROOT3_SPRITE_REPLAY_AS_HARD_ZERO_INDEPENDENT_VERIFICATION"
+    ],
+    "preserve": [
+      "ROOT3_EFFECT_CLASS_SOURCE_CLASSIFICATION_AS_ZERO_CREDIT_SEMANTIC_WORK",
+      "LOCAL_OR_CONNECTOR_RECOMPUTATION_OF_CLASSIFIER_BYTES",
+      "FUTURE_SPRITE_USE_IF_AND_ONLY_IF_ACCOUNT_SPECIFIC_ZERO_COST_CAPACITY_IS_PROVED_FIRST"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_PRIOR_SPRITE_REPLAY_DEFINITELY_INCURRED_A_CHARGE",
+    "NO_CLAIM_THE_PRIOR_TECHNICAL_TEST_RESULT_WAS_FALSE",
+    "NO_ROOT3_ACCEPTANCE_OR_CAPABILITY_CREDIT_CHANGE",
+    "NO_NEW_SPRITE_EXECUTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
