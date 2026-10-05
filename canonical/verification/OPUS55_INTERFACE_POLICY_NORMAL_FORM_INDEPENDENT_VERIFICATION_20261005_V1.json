@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_INTERFACE_POLICY_NORMAL_FORM_INDEPENDENT_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_FIRST_PARTY_DOCUMENTATION_PASS__BOUNDED_TOOL_INTERFACE_SCOPE__EXECUTOR_SUBSTITUTION_INVARIANCE_DERIVED__ZERO_CAPABILITY_CREDIT",
+  "subject": {
+    "path": "canonical/reasoning/2026-10-05_OPUS55_INTERFACE_POLICY_NORMAL_FORM_V1.json",
+    "blob_sha": "506b9deb251160f1d47d2d23fb897f852f17c541"
+  },
+  "base_commit": "27508bd12d5229ab3f5ad90e5195cf5e9cb8637f",
+  "objective": "Independently verify whether documented Opus 5.5 tool-mediated behavior factors into a model policy over structured interaction traces plus external execution transitions, and derive the strongest safe target-ontology consequence.",
+  "first_party_evidence": [
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works",
+      "observed": [
+        "User-defined tools are client-executed: Claude emits tool_use; the application executes the operation and returns tool_result.",
+        "Anthropic-schema memory/bash/text_editor/computer/browser tools are also client-executed.",
+        "Server tools including web_search, web_fetch, code_execution and tool_search are executed by Anthropic infrastructure rather than by the model itself.",
+        "The documentation explicitly describes tool use as a contract in which the model emits a structured request and code or Anthropic servers run the operation."
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools",
+      "observed": [
+        "Server tool calls are represented as server_tool_use blocks and tool results are injected back into the model interaction.",
+        "The API/server-side loop executes server tools; the model receives the resulting interaction state."
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool",
+      "observed": [
+        "Browser use is a client toolset; the caller application executes every member call.",
+        "Claude receives tool results and continues the loop."
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
+      "observed": [
+        "Computer use is a client toolset; the caller application runs screenshot/mouse/keyboard member calls."
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/api/messages/create",
+      "observed": [
+        "The Messages API exposes structured tool_use, tool_result, server_tool_use, thinking, text, image/document/search-result content blocks."
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed": [
+        "Opus 5.5 direct documented model I/O is text-and-image input to text output with adaptive thinking; tool-mediated work is exposed through the tool-use interfaces above."
+      ]
+    }
+  ],
+  "verified_claims": [
+    "USER_DEFINED_CLIENT_TOOL_INTERNAL_COMPUTATION_IS_NOT_EXECUTED_BY_THE_OPUS_MODEL_POLICY.",
+    "ANTHROPIC_SCHEMA_CLIENT_TOOL_INTERNAL_COMPUTATION_IS_NOT_EXECUTED_BY_THE_OPUS_MODEL_POLICY.",
+    "DOCUMENTED_SERVER_TOOL_COMPUTATION_IS_EXECUTED_BY_SERVER_INFRASTRUCTURE_AND_EXPOSED_TO_THE_MODEL_THROUGH_STRUCTURED_TOOL_INTERACTION.",
+    "THEREFORE_TOOL_MEDIATED_TRAJECTORIES_ON_THE_CHECKED_DOCUMENTED_SURFACES_FACTOR_INTO_MODEL_POLICY_DECISIONS_AND_EXTERNAL_EXECUTION_TRANSITIONS.",
+    "ARBITRARY_EXTERNAL_EXECUTOR_IMPLEMENTATION_SEMANTICS_MUST_NOT_BE_ENUMERATED_AS_DISTINCT_INTRINSIC_OPUS_CAPABILITIES_SOLELY_BECAUSE_OPUS_CAN_USE_THOSE_EXECUTORS."
+  ],
+  "derived_breakthrough": {
+    "name": "EXECUTOR_SUBSTITUTION_INVARIANCE_QUOTIENT",
+    "statement": "For intrinsic Opus tool-capability attribution, quotient tool-mediated behavior by trace-equivalent executor substitutions. If two executors expose equivalent admissible interfaces and generate the same observable result trace for the model's selected actions, any model behavior invariant under that substitution belongs to the policy side; executor-internal algorithms that are absent from the model observation trace do not become intrinsic model capabilities.",
+    "causal_basis": [
+      "The model selects actions from conversation/interface state.",
+      "Executor internals are not observed by the model except through declared schemas and returned results.",
+      "Trace-equivalent executor substitutions leave the model's observable history unchanged.",
+      "A policy cannot causally depend on hidden executor internals that never enter its observation history.",
+      "Therefore target ontology should identify executor-internal implementation variants that are observationally equivalent from the model-policy boundary."
+    ],
+    "acceptance_consequence": "TOOL_CAPABILITY_TESTS_SHOULD_MEASURE_SCHEMA_INTERPRETATION__ACTION_SELECTION__ARGUMENT_CONSTRUCTION__SEQUENCING__RESULT_INTEGRATION__RECOVERY__AND_LONG_HORIZON_CONTROL_UNDER_EXECUTOR_SUBSTITUTION__NOT_REIMPLEMENTATION_OF_TOOL_INTERNAL_ALGORITHMS.",
+    "search_space_consequence": "DELETE_TOOL_NAME_OR_TOOL_IMPLEMENTATION_COUNTING_AS_AN_AUTOMATIC_SOURCE_OF_NEW_INTRINSIC_OPUS_CAPABILITY_FAMILIES.",
+    "falsifier": "A_CURRENT_OPUS55_SURFACE_WHERE_A_USEFUL_MODEL_BEHAVIOR_CAUSALLY_DEPENDS_ON_AN_INTRINSIC_ACTION_OR_COMPUTATION_CHANNEL_NOT_REPRESENTABLE_AS_MODEL_POLICY_OVER_DOCUMENTED_OR_EQUIVALENT_OBSERVATION_ACTION_STATE."
+  },
+  "counterexample_search": {
+    "checked_classes": [
+      "USER_DEFINED_CLIENT_TOOLS",
+      "ANTHROPIC_SCHEMA_CLIENT_TOOLS",
+      "SERVER_TOOLS",
+      "BROWSER_USE",
+      "COMPUTER_USE",
+      "MESSAGES_API_CONTENT_AND_TOOL_BLOCKS"
+    ],
+    "concrete_breaking_counterexample_found": false,
+    "unresolved_scope": [
+      "PRIVATE_OR_UNDOCUMENTED_PRODUCT_SURFACES",
+      "ANY_FUTURE_SURFACE_WITH_MODEL_INTRINSIC_EXTERNAL_ACTION_EXECUTION_NOT_FACTORED_THROUGH_AN_EQUIVALENT_INTERFACE",
+      "LITERAL_COMPLETENESS_OF_ALL_USEFUL_OPUS55_BEHAVIORS"
+    ]
+  },
+  "verdict": {
+    "interface_policy_normal_form_on_checked_documented_tool_surfaces": "PASS",
+    "executor_substitution_invariance": "PASS_AS_CAUSAL_ATTRIBUTION_RULE",
+    "current_19_family_envelope_exhaustive": "NOT_PROVED",
+    "opus55_terminal_goal_achieved": false,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "permitted_scheduler_effect": "DELETE_FALSE_EXTERNAL_EXECUTOR_IMPLEMENTATION_ENUMERATION_ONLY_AFTER_CANONICAL_RECONCILIATION__PRESERVE_ALL_MODEL_POLICY_DIRECT_MODALITY_AND_PUBLIC_PERFORMANCE_OBLIGATIONS"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_PRIVATE_CLAUDE_PRODUCT_SURFACES_ARE_COVERED.",
+    "NO_CLAIM_MODEL_POLICY_ITSELF_IS_OWNED_OR_DOMINATED_BY_BRAIN.",
+    "NO_CLAIM_THE_19_CURRENT_FAMILIES_ARE_EXHAUSTIVE.",
+    "NO_LITERAL_TERMINAL_COMPLETION.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
