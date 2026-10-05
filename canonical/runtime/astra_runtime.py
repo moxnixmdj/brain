@@ -4498,7 +4498,9 @@ def _run_model_independent_goal(step, mission, goal):
         if composition_guard is not None and composition_row is not None:
             try:
                 with composition_channel_guard.capture_runtime_channels(
-                    ROOT,strict=composition_c1_strict
+                    ROOT,
+                    strict=composition_c1_strict,
+                    action_type=typ,
                 ) as channel_capture:
                     result=_goal_action(action)
                 composition_channel_receipt=channel_capture.finish()
