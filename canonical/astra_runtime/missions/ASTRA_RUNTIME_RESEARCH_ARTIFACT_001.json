@@ -14,7 +14,8 @@
         "type": "http_status",
         "value": 200
       },
-      "replay_on_resume": true
+      "replay_on_resume": true,
+      "cross_step_inputs": []
     },
     {
       "id": "consume-research-and-create-artifact",
@@ -23,7 +24,15 @@
       "verify": {
         "type": "file_exists",
         "path": "canonical/astra_runtime/evidence/research_artifact_001.html"
-      }
+      },
+      "cross_step_inputs": [
+        {
+          "step_index": 0,
+          "channels": [
+            "BODY"
+          ]
+        }
+      ]
     }
   ],
   "replay_after_root_cause_change": {
@@ -42,5 +51,12 @@
     "prior_failure": "LATEST_VERSION_NOT_EXTRACTED_FROM_TRUNCATED_HTML",
     "repair": "Use official machine-readable Python releases RSS feed",
     "replay_authorized": true
+  },
+  "cross_step_context_mode": "DECLARED_CONTENT_BOUND_V1",
+  "cross_step_boundary_repair": {
+    "mode": "DECLARED_CONTENT_BOUND_V1",
+    "invariant": "Later shell steps receive only explicitly declared prior-step channels. Each admitted prior result is SHA-256 content-bound before environment projection.",
+    "known_counterexample_closed": "ASTRA_STEP_0_BODY remains available only because step 1 explicitly declares step 0 BODY as an input.",
+    "hard_nonclaim": "This repairs the known mission-runner raw-result bypass but does not by itself prove whole-runtime P1/P2 channel completeness."
   }
 }
