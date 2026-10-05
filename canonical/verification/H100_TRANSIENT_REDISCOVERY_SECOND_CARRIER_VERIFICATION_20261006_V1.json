@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TRANSIENT_REDISCOVERY_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__FIVE_OF_FIVE_FRESH_DEPTH4_STRUCTURES__ZERO_PERSISTENT_M_fit",
+  "branch": "research/h100-representation-invariant-accounting-v1",
+  "precommit": {
+    "path": "canonical/governance/H100_TRANSIENT_REDISCOVERY_PRECOMMIT_V1.json",
+    "git_blob_sha": "a95d59253a3e5d13f85a1a954d6786302d9eb2d2"
+  },
+  "runtime": {
+    "path": "canonical/runtime/h100_transient_rediscovery_v1.py",
+    "git_blob_sha": "b252863ed5dbd72545ed058385b4380c43d39332"
+  },
+  "tests": {
+    "path": "canonical/tests/test_h100_transient_rediscovery_v1.py",
+    "git_blob_sha": "163676753e2db321672ce5a55fc7bd6bcc1cf01e"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "observed": {
+    "tests_passed": 5,
+    "tests_total": 5,
+    "task_count": 5,
+    "enumeration_count_per_task": 1554,
+    "all_first_exact_depth": 4,
+    "all_exact_count_at_depth4": 1,
+    "all_transfer_pass": true,
+    "search_wall_clock_seconds": [
+      0.19542874100443441,
+      0.19909533799364,
+      0.1893482329978724,
+      0.1918137190004927,
+      0.21690105999732623
+    ],
+    "search_wall_clock_seconds_max": 0.21690105999732623,
+    "persistent_m_fit_bytes": 0,
+    "persistent_search_selected_structures": 0,
+    "persistent_fitted_coefficients": 0,
+    "writes_discovered_structure_to_registry": false,
+    "external_learned_capability_calls": 0
+  },
+  "deduction": "FOR_THIS_FROZEN_FINITE_DEPTH4_UNARY_SLICE__PERSISTING_SEARCH_SELECTED_CAPABILITY_OPCODES_IS_UNNECESSARY__THE_STRUCTURE_CAN_BE_REDISCOVERED_TRANSIENTLY_FROM_TASK_EXAMPLES_IN_ABOUT_TWO_TENTHS_OF_A_SECOND_AND_DISCARDED__RESTORING_ZERO_PERSISTENT_M_fit_FOR_THE_TESTED_CAPABILITY_CLASS",
+  "hard_nonclaims": [
+    "M_cap_IS_NONZERO_BECAUSE_GENERIC_SEARCH_CODE_EXISTS",
+    "M_dev_MAY_BE_NONZERO_FOR_EVIDENCE_RESPONSIVE_ENGINEERING",
+    "FINITE_DEPTH4_UNARY_SEARCH_DOES_NOT_PROVE_GENERAL_PROGRAM_SEARCH",
+    "THIS_DOES_NOT_RETROACTIVELY_REPAIR_THE_PERSISTED_CURRENT_REGISTRY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
