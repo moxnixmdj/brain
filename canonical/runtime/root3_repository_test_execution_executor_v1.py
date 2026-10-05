@@ -69,18 +69,23 @@ def _prepare(context,repo_root=None):
     return {"profile":PROFILE,"callsite_key":key,"original_argv":[os.fspath(x) for x in cmd],"kwargs":kwargs,"policy":policy,"timeout":timeout,"test_sha256":test_sha,"encoded_spec":encoded,"target_path":str(target)}
 
 def _completed(prepared,result):
-    if result.get("test_sha256") is not None and result.get("test_sha256")!=prepared["test_sha256"]:\n        raise RepositoryTestExecutionDenied("BROKER_TEST_HASH_MISMATCH")\n    if hashlib.sha256(pathlib.Path(prepared["target_path"]).read_bytes()).hexdigest()!=prepared["test_sha256"]:
+    if result.get("test_sha256") is not None and result.get("test_sha256")!=prepared["test_sha256"]:
+        raise RepositoryTestExecutionDenied("BROKER_TEST_HASH_MISMATCH")
+    if hashlib.sha256(pathlib.Path(prepared["target_path"]).read_bytes()).hexdigest()!=prepared["test_sha256"]:
         raise RepositoryTestExecutionDenied("TEST_BYTES_DRIFT_AFTER_EXECUTION")
     try:
         stdout_b=base64.b64decode(result.get("stdout_b64") or "",validate=True)
         stderr_b=base64.b64decode(result.get("stderr_b64") or "",validate=True)
-    except Exception as exc: raise RepositoryTestExecutionDenied("BROKER_STDIO_ENCODING_INVALID") from exc
+    except Exception as exc:
+        raise RepositoryTestExecutionDenied("BROKER_STDIO_ENCODING_INVALID") from exc
     enc=locale.getpreferredencoding(False) or "utf-8"
-    stdout=stdout_b.decode(enc,errors="replace"); stderr=stderr_b.decode(enc,errors="replace")
+    stdout=stdout_b.decode(enc,errors="replace")
+    stderr=stderr_b.decode(enc,errors="replace")
     if result.get("timed_out") is True:
         raise subprocess.TimeoutExpired(prepared["original_argv"],prepared["timeout"],output=stdout,stderr=stderr)
     rc=result.get("returncode")
-    if isinstance(rc,bool) or not isinstance(rc,int): raise RepositoryTestExecutionDenied("BROKER_RETURNCODE_INVALID")
+    if isinstance(rc,bool) or not isinstance(rc,int):
+        raise RepositoryTestExecutionDenied("BROKER_RETURNCODE_INVALID")
     return subprocess.CompletedProcess(args=prepared["original_argv"],returncode=rc,stdout=stdout,stderr=stderr)
 
 def make_executor(*,popen_impl:Callable[...,Any],repo_root):
