@@ -252,6 +252,14 @@ def _atomic_replace(target: pathlib.Path, payload: bytes) -> None:
             os.fsync(fh.fileno())
         os.replace(temp_name, target)
         temp_name = None
+        try:
+            fd = os.open(target.parent, os.O_RDONLY)
+            try:
+                os.fsync(fd)
+            finally:
+                os.close(fd)
+        except OSError:
+            pass
     finally:
         if temp_name is not None:
             try:
