@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import hashlib
+
 from canonical.runtime.terminal_frontier_compiler_v1 import (
     compile_frontier,
     frontier_epoch,
+    git_blob_sha,
     root_partition,
     terminal_finality,
 )
@@ -17,6 +20,8 @@ def test_current_frontier_compiles_without_static_scheduler_counts():
     assert out["root1_positive_gap_count"] == 0
     assert out["meta_envelope"]["active_version"] >= 5
     assert out["meta_envelope"]["open_count"] >= 1
+    assert out["zero_reality_cut"]["active_version"] >= 12
+    assert "CURRENT_ZERO_REALITY_MINIMUM_CUT_V12" in out["zero_reality_cut"]["subject_path"]
     assert out["terminal"] is False
 
 
@@ -63,3 +68,10 @@ def test_frontier_epoch_changes_on_any_bound_component():
     b = dict(a)
     b["y"] = "3" * 40
     assert frontier_epoch(a) != frontier_epoch(b)
+
+
+def test_git_blob_sha_uses_real_nul_separator(tmp_path):
+    payload = b"abc"
+    (tmp_path / "x").write_bytes(payload)
+    expected = hashlib.sha1(b"blob 3\0abc").hexdigest()
+    assert git_blob_sha("x", tmp_path) == expected
