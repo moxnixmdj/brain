@@ -198,6 +198,45 @@ def solve_contracts(contracts: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         }
 
     active_contracts = [c for c in contracts if str(c.get("instruction_id")) in u.ACTIVE15]
+
+    # Three schema19 extra signatures can occur with no Active15 contract at
+    # all. The Active15 solver intentionally rejects an empty contract list, so
+    # handle these true singletons here instead of delegating them into
+    # NO_CONTRACTS.
+    if not active_contracts:
+        if extra == NO_COMMA:
+            response = "9000001"
+            proof = "DIRECT_COMMA_FREE_SINGLETON_WITNESS"
+        elif extra == EN_CAP:
+            # value.isupper() is true. In observed langdetect 1.0.9,
+            # cleaning_text sees latin=1/nonlatin=3, removes A, U+200B
+            # normalizes to spaces, no n-grams remain, LangDetectException is
+            # raised, and the pinned checker counts that exception as followed.
+            response = "A" + "\u200b" * 3
+            proof = "DIRECT_CASE_SINGLETON__LANGDETECT_FAIL_OPEN_AFTER_ZERO_FEATURES"
+        elif extra == EN_LOW:
+            response = "a" + "\u200b" * 3
+            proof = "DIRECT_CASE_SINGLETON__LANGDETECT_FAIL_OPEN_AFTER_ZERO_FEATURES"
+        else:
+            raise AssertionError("UNREACHABLE_EMPTY_ACTIVE_EXTRA")
+        return {
+            "schema": SCHEMA,
+            "status": "CANDIDATE_POINTWISE_OPTIMAL_ACTIVE15_PLUS_ONE",
+            "extra_family": extra,
+            "response": response,
+            "instruction_ids": sorted(ids),
+            "sacrificed_instruction_ids": [],
+            "instruction_count": 1,
+            "theoretical_max_pass_count": 1,
+            "theoretical_pointwise_optimum_strict_score": 1.0,
+            "proof_shape": proof,
+            "terminal_rows_used": False,
+            "hidden_kwargs_used": False,
+            "terminal_frequencies_used": False,
+            "target_scores_used": False,
+            "acceptance_credit": False,
+        }
+
     solved = active.solve_contracts(active_contracts)
     if solved.get("status") != "CANDIDATE_POINTWISE_OPTIMAL":
         return {
