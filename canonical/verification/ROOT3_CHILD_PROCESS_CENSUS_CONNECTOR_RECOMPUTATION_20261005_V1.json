@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_CHILD_PROCESS_CENSUS_CONNECTOR_RECOMPUTATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_SOURCE_RECOMPUTATION__29_EXPLICIT_SPAWN_SITES__ALIAS_SENSITIVE_COMPILER_STILL_REQUIRED__ZERO_CREDIT",
+  "subject": {
+    "parent_c1_path": "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json",
+    "parent_c1_git_blob_sha": "7e2a232d8c7c66d711e858cc75c647c5690a43eb",
+    "candidate_path": "canonical/governance/ROOT3_CHILD_PROCESS_CENSUS_C1_CANDIDATE_V1.json"
+  },
+  "direct_source_census": {
+    "explicit_spawn_site_count": 29,
+    "modules_with_spawn_sites": 13,
+    "modules": [
+      {
+        "path": "canonical/runtime/astra_runtime.py",
+        "git_blob_sha": "0912dfa4119950f6d235d501dfa784e65e9f71c9",
+        "site_count": 8
+      },
+      {
+        "path": "canonical/runtime/capability_discovery.py",
+        "git_blob_sha": "b9e7423ab24bf2da98869b02d782e791a779892a",
+        "site_count": 8
+      },
+      {
+        "path": "canonical/runtime/auto_python_source_codec_acquisition.py",
+        "git_blob_sha": "65453b2eed5e678def3f0ab1c4d44182fb0b9a78",
+        "site_count": 1
+      },
+      {
+        "path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
+        "git_blob_sha": "18c484e973e0becf6abf883463a7dc174d0bcd22",
+        "site_count": 2
+      },
+      {
+        "path": "canonical/runtime/bound_capabilities/browser_chromedriver.py",
+        "git_blob_sha": "6edaad1d9d23700a55d988c891d4ef41b8191c4b",
+        "site_count": 1
+      },
+      {
+        "path": "canonical/runtime/bound_capabilities/cli_command.py",
+        "git_blob_sha": "6782773801cd8f2258e4368a4debbe6e66c4a393",
+        "site_count": 1
+      },
+      {
+        "path": "canonical/runtime/bound_capabilities/jq_query.py",
+        "git_blob_sha": "f0b644274c1ffbff7ea5adb81e07e00435d2ac4c",
+        "site_count": 1
+      },
+      {
+        "path": "canonical/runtime/bound_capabilities/node_library_codec.py",
+        "git_blob_sha": "0babcf3adf7762b5e24d9c8be4f8ecb3a7b2e805",
+        "site_count": 1
+      },
+      {
+        "path": "canonical/runtime/bound_capabilities/pandoc_weasyprint.py",
+        "git_blob_sha": "1d7e867bb4837b7589d8346c85fe97db4c1166be",
+        "site_count": 1
+      },
+      {
+        "path": "canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py",
+        "git_blob_sha": "4fb3853a28974b30e8c5c36f85815cdb71fc243c",
+        "site_count": 2
+      },
+      {
+        "path": "canonical/runtime/bound_capabilities/python_test_audit.py",
+        "git_blob_sha": "b6fe40131583587e21f9c1e369679de140349e81",
+        "site_count": 1
+      },
+      {
+        "path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
+        "git_blob_sha": "339c6e5cd3e1804a43dd3632deb713b61f6344a4",
+        "site_count": 1
+      },
+      {
+        "path": "canonical/runtime/bound_capabilities/yq_yaml_json.py",
+        "git_blob_sha": "8dce9a679d51153e0e779e4fcc5380a1ce106637",
+        "site_count": 1
+      }
+    ]
+  },
+  "key_findings": [
+    "GENERIC_ASTRA_RUN_SHELL_IS_A_DYNAMIC_BASH_LC_PROCESS_CARRIER",
+    "CAPABILITY_DISCOVERY_CONTAINS_EIGHT_PROCESS_SPAWN_SITES",
+    "BOUND_ADAPTER_PROCESS_SURFACE_IS_FINITE_IN_CURRENT_DIRECT_SOURCE_CENSUS",
+    "NEXT_STEP_IS_MEDIATION_OR_SANDBOX_CLASSIFICATION_PER_CONTENT_ADDRESSED_SITE_NOT_MORE_GENERIC_SEARCH"
+  ],
+  "theorem_boundary": {
+    "proves": [
+      "29_DIRECTLY_EXPRESSED_PROCESS_SPAWN_SITES_WERE_FOUND_IN_THE_CURRENT_REGISTERED_EXECUTION_UNIVERSE",
+      "THE_13_MODULES_CONTAINING_THOSE_DIRECT_SITES_ARE_CONTENT_ADDRESSED"
+    ],
+    "does_not_prove": [
+      "NO_ALIASED_PROCESS_PRIMITIVE_EXISTS_OUTSIDE_DIRECT_TEXTUAL_CENSUS",
+      "CHILD_PROCESS_INTERNAL_EFFECT_MEDIATION",
+      "PROCESS_ARGUMENT_SAFETY",
+      "FULL_C1_SCOPE_COMPLETENESS"
+    ]
+  },
+  "next_required_evidence": [
+    "RUN_ALIAS_SENSITIVE_AST_CENSUS_COMPILER",
+    "CLASSIFY_29_SITES_BY_FIXED_COMMAND_DYNAMIC_COMMAND_INSTALLER_TEST_RUNNER_BROWSER_OR_CODEC",
+    "ROUTE_OR_SANDBOX_EFFECTFUL_CLASSES_THROUGH_TRUTH_PRESERVING_EFFECT_CARRIER"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
