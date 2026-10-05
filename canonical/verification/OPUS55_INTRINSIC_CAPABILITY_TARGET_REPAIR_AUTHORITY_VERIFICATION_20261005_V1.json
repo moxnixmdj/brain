@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_INTRINSIC_CAPABILITY_TARGET_REPAIR_AUTHORITY_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_EXACT_BLOB_RECOMPUTATION_PASS__ZERO_REALITY_ZERO_AUTHORITY__CAUSAL_TARGET_SEMANTICS_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_VS_DEPLOYMENT_PROFILE_BOUNDARY_20261005_V2.json",
+    "git_blob_sha": "9bac958e4db829f94d756cd94709d0c885d43e25"
+  },
+  "checks": {
+    "fallback_model_outputs_excluded_from_intrinsic_credit": true,
+    "external_tool_backend_computation_excluded_without_causal_evidence": true,
+    "wrapper_security_mechanics_excluded_without_causal_evidence": true,
+    "intrinsic_model_security_behaviors_preserved": true,
+    "fresh_reality_authority_false": true,
+    "execution_authority_false": true,
+    "promotion_authority_false": true,
+    "new_reality_units_consumed_zero": true,
+    "acceptance_credit_delta_zero": true
+  },
+  "consequence": "USE_THIS_REPAIRED_FILE_AS_ZERO_REALITY_TARGET_SEMANTICS_INPUT_ONLY__NO_EXECUTION_OR_TERMINAL_CREDIT",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
