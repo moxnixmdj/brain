@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ACCEPTANCE_QUOTIENT_SINGLE_POLICY_BINDING_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__STRUCTURAL_QUANTIFIER_REPAIR__ZERO_CREDIT",
+  "problem": {
+    "legacy_subject": "canonical/runtime/acceptance_quotient_simulation_v3.py",
+    "finding": "V3 requires a global single-owned-policy receipt and per-edge induced-by-bound-policy receipts but does not structurally bind those receipts to one exact policy identity, policy implementation blob, policy epoch, claimed acceptance domain, or exact macroedge bytes.",
+    "consequence": "A split-policy certificate can satisfy every V3 Boolean obligation while edge witnesses are supplied by different policies, recreating the forbidden forall-edge-exists-policy quantifier order."
+  },
+  "independent_logic_check": {
+    "engine": "Wolfram Language",
+    "formula": "((b11 OR b12) AND (b21 OR b22)) AND NOT((b11 AND b21) OR (b12 AND b22))",
+    "satisfiable": true,
+    "witness": {
+      "b11": false,
+      "b12": true,
+      "b21": true,
+      "b22": false
+    },
+    "interpretation": "Each of two edges has a policy witness, but no single one of the two policies witnesses both edges."
+  },
+  "repair": {
+    "runtime": "canonical/runtime/acceptance_quotient_simulation_v4.py",
+    "selftest": "canonical/verification/acceptance_quotient_simulation_v4_selftest.py",
+    "new_invariants": [
+      "GLOBAL_AND_PER_EDGE_RECEIPTS_BIND_THE_SAME_POLICY_ID",
+      "GLOBAL_AND_PER_EDGE_RECEIPTS_BIND_THE_SAME_POLICY_GIT_BLOB_SHA",
+      "GLOBAL_AND_PER_EDGE_RECEIPTS_BIND_THE_SAME_POLICY_EPOCH",
+      "GLOBAL_AND_PER_EDGE_RECEIPTS_BIND_THE_COMPUTED_ACCEPTANCE_DOMAIN_SHA256",
+      "EACH_PER_EDGE_RECEIPT_BINDS_THE_EXACT_MACROEDGE_SHA256",
+      "RECEIPT_AND_POLICY_GIT_BLOB_IDENTIFIERS_ARE_STRICT_40_HEX"
+    ],
+    "effect": "The legacy split-policy witness is structurally rejected before V3 graph and semantic checks run."
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY",
+    "NO_CLAIM_RECEIPT_CONTENT_IS_TRUE_FROM STRUCTURE_ALONE",
+    "INDEPENDENT_BYTE_LEVEL_VERIFICATION_OF_RECEIPTS_AND_POLICY_IMPLEMENTATION_REMAINS_REQUIRED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
