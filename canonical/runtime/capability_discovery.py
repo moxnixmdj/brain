@@ -8,6 +8,7 @@ install third-party code. Binding is a separate verified step.
 from __future__ import annotations
 
 import json
+import os
 import pathlib
 import re
 import shutil
