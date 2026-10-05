@@ -1,27 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_H100_UNICHART_COARSE_SPECIAL_TOKEN_MISMATCH_CERTIFIER_V1",
   "date": "2026-10-05",
-  "status": "FROZEN_AFTER_H00_SMOKE_BEFORE_H01_PLUS_PACKED_OUTPUTS__LOGICAL_SHORT_CIRCUIT_ONLY__ZERO_CREDIT",
-  "objective": "Prove exact-answer mismatches faster without changing the frozen 20-case agreement gate.",
-  "theorem": [
-    "THE_FROZEN_POSTPROCESS_REMOVES_ONLY_EOS_AND_PAD_BEFORE_TAKING_THE_SUFFIX_AFTER_<s_answer>",
-    "A_GENERATED_NONREMOVABLE_SPECIAL_TOKEN_ABSENT_FROM_THE_FP32_TARGET_CANNOT_BE_ERASED_BY_FUTURE_TOKENS",
-    "IF_EVERY_LIVE_BEAM_HAS_SUCH_A_TOKEN_THEN_NO_DESCENDANT_BEAM_CAN_DECODE_TO_THE_FP32_TARGET",
-    "FOUR_PROVED_MISMATCHES_IMPLY_AT_MOST_16_OF_20_AGREEMENTS_WHICH_IS_BELOW_THE_FROZEN_0_85_THRESHOLD"
-  ],
-  "frozen_case_order": "FIRST_CASES_IN_ALREADY_FROZEN_20_CASE_ORDER__NO_REORDERING",
-  "runtime": "canonical/runtime/h100_unichart_coarse_mismatch_certifier_v1.py",
-  "hard_rules": [
-    "H00_PRIOR_SMOKE_IS_DISCLOSED",
-    "NO_H01_PLUS_PACKED_OUTPUT_WAS_OBSERVED_BEFORE_THIS_CERTIFIER_WAS_FROZEN",
-    "NO_PROMPT_IMAGE_MODEL_PACK_SCORER_OR_THRESHOLD_CHANGE",
-    "CERTIFIER_MAY_ONLY_STOP_WHEN_EXACT_AGREEMENT_IS_ALREADY_IMPOSSIBLE"
-  ],
+  "status": "REVOKED__UNSOUND_THEOREM__DO_NOT_EXECUTE__ZERO_CREDIT",
+  "revocation_reason": "A future generated <s_answer> token changes the frozen postprocess suffix boundary, so a previously emitted non-removable special token can be discarded from the final compared answer. Therefore early presence of <summarize_chart> does not prove exact-answer mismatch before generation terminates.",
+  "falsified_claim": "FUTURE_TOKENS_CANNOT_ERASE_THE_OBSERVED_BAD_SPECIAL_TOKEN_FROM_THE_POSTPROCESSED_ANSWER",
+  "surviving_fact": "FOUR_FINAL_EXACT_ANSWER_MISMATCHES_STILL_SUFFICE_TO_MAKE_THE_FROZEN_0_85_AGREEMENT_GATE_IMPOSSIBLE",
+  "runtime_deleted": true,
+  "execution_authority": false,
+  "promotion_authority": false,
   "accounting": {
-    "incremental_spend_usd": 0,
-    "terminal_cases_consumed": 0,
     "acceptance_credit_delta": 0,
     "capability_credit_delta": 0,
     "h100_credit_delta": 0
   }
-}\n
+}
