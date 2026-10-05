@@ -1,0 +1,197 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_DOMAIN_KNOWLEDGE_CAPABILITY_QUOTIENT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_DOMAIN_LABELS_REDUCED_FROM_NEW_FAMILY_BRANCHES_TO_EXISTING_FAMILY_UNION_CONDITION_OVERLAYS__ZERO_CREDIT",
+  "objective": "Exploit the terminal knowledge rule to distinguish reusable capability operators from domain knowledge, so domain labels do not create spurious primitive capability families while equal-or-better domain performance remains an explicit acceptance obligation.",
+  "terminal_rule": {
+    "capability_target": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL",
+    "knowledge_rule": "KNOWLEDGE_REMAINS_EXTERNAL_JIT_AND_IS_NOT_A_PERMANENT_CAPABILITY_PACKAGE",
+    "authority": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "predecessor": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+    "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+  },
+  "public_source_freeze": [
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "role": "FIRST_PARTY_MODALITY_AND_USEFUL_SURFACE_DECLARATIONS"
+    },
+    {
+      "url": "https://www.anthropic.com/claude/opus",
+      "role": "FIRST_PARTY_OPUS55_PRODUCT_AND_BENCHMARK_SURFACE"
+    },
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5-system-card",
+      "role": "FIRST_PARTY_CAPABILITY_EVALUATION_SURFACE"
+    }
+  ],
+  "quotient_rule": {
+    "definition": "For terminal family taxonomy, quotient observable task behavior by domain-specific knowledge/data/tool instances. A domain-labeled surface requires a new primitive capability family only if a capability-relevant operator remains after removing external-JIT knowledge and that operator is not representable by composition of existing family behaviors.",
+    "new_family_gate": [
+      "IDENTIFY_A_CAPABILITY_RELEVANT_OPERATOR_REQUIRED_BY_THE_DOMAIN_SURFACE",
+      "PROVE_THE_OPERATOR_IS_NOT_DOMAIN_KNOWLEDGE_DATA_OR_TOOL_INSTANCE_ALLOWED_BY_EXTERNAL_JIT",
+      "PROVE_NO_EXISTING_FAMILY_OR_EXPLICIT_COMPOSITION_OF_EXISTING_FAMILIES_REPRESENTS_THE_OPERATOR",
+      "ONLY_THEN_OPEN_A_NEW_PRIMITIVE_FAMILY"
+    ],
+    "parity_rule": "TAXONOMY_REDUCTION_NEVER_TRANSFERS_ACCEPTANCE. EVERY DOMAIN_SURFACE_REMAINS AN EQUAL_OR_BETTER CONDITION OVERLAY UNTIL DIRECT OR SCOPE_COMPLETE EVIDENCE CLOSES IT.",
+    "why_lossless_for_taxonomy": "The terminal target explicitly separates internalized reusable capability from external/JIT knowledge. Domain identity alone therefore cannot be a primitive-capability witness; only a residual reusable operator can."
+  },
+  "five_domain_reductions": [
+    {
+      "surface": "CYBERSECURITY",
+      "existing_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "COMPUTER_AND_BROWSER_USE",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "operator_witness": [
+        "CODE_AND_BINARY_OR_SOURCE_TRANSFORMATION",
+        "MULTI_STEP_TOOL_DRIVEN_ACTION",
+        "ENVIRONMENT_INTERACTION",
+        "UNKNOWN_TOOL_AND_SCHEMA_DISCOVERY",
+        "NOVEL_DOMAIN_ONTOLOGY_ACQUISITION",
+        "FAILURE_LOCALIZATION_AND_RECOVERY",
+        "CROSS_COMPONENT_COMPOSITION"
+      ],
+      "taxonomy_state": "NO_NEW_PRIMITIVE_FAMILY_REQUIRED_UNLESS_COUNTEREXAMPLE_EXHIBITS_A_RESIDUAL_OPERATOR_OUTSIDE_THIS_UNION",
+      "condition_overlay": "CYBERSECURITY_EQUAL_OR_BETTER_OUTCOME_COVERAGE",
+      "condition_state": "OPEN"
+    },
+    {
+      "surface": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "existing_family_union": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "operator_witness": [
+        "SCIENTIFIC_HYPOTHESIS_AND_ITERATIVE_ANALYSIS",
+        "EXPERT_TOOL_AUGMENTED_REASONING",
+        "SCIENTIFIC_IMAGE_AND_DENSE_DATA_INTERPRETATION",
+        "SPECIALIZED_TOOL_DISCOVERY",
+        "UNFAMILIAR_ONTOLOGY_ACQUISITION",
+        "EVIDENCE_SYNTHESIS",
+        "CROSS_COMPONENT_COMPOSITION"
+      ],
+      "taxonomy_state": "NO_NEW_PRIMITIVE_FAMILY_REQUIRED_UNLESS_COUNTEREXAMPLE_EXHIBITS_A_RESIDUAL_OPERATOR_OUTSIDE_THIS_UNION",
+      "condition_overlay": "BIOLOGY_R_AND_D_EQUAL_OR_BETTER_OUTCOME_COVERAGE",
+      "condition_state": "OPEN"
+    },
+    {
+      "surface": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "existing_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "operator_witness": [
+        "SOFTWARE_IMPLEMENTATION_AND_DEBUGGING",
+        "EXPERIMENT_DESIGN_AND_ANALYSIS",
+        "LONG_HORIZON_MULTI_TOOL_EXECUTION",
+        "TOOL_AND_API_LEARNING",
+        "PROJECT_STATE_CONTINUITY",
+        "FALSIFICATION_AND_RECOVERY",
+        "RESEARCH_CODE_TOOL_COMPOSITION"
+      ],
+      "taxonomy_state": "NO_NEW_PRIMITIVE_FAMILY_REQUIRED_UNLESS_COUNTEREXAMPLE_EXHIBITS_A_RESIDUAL_OPERATOR_OUTSIDE_THIS_UNION",
+      "condition_overlay": "AUTOMATED_AI_R_AND_D_EQUAL_OR_BETTER_OUTCOME_COVERAGE",
+      "condition_state": "OPEN"
+    },
+    {
+      "surface": "HEALTHCARE",
+      "existing_family_union": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "operator_witness": [
+        "PROFESSIONAL_MULTI_STAGE_WORK_PRODUCT",
+        "EXPERT_REASONING_WITH_TOOLS",
+        "RECORD_IMAGE_AND_DOCUMENT_INTERPRETATION",
+        "EVIDENCE_SYNTHESIS",
+        "SCOPE_AND_JUDGMENT",
+        "DOMAIN_ONTOLOGY_ADAPTATION"
+      ],
+      "taxonomy_state": "NO_NEW_PRIMITIVE_FAMILY_REQUIRED_UNLESS_COUNTEREXAMPLE_EXHIBITS_A_RESIDUAL_OPERATOR_OUTSIDE_THIS_UNION",
+      "condition_overlay": "HEALTHCARE_EQUAL_OR_BETTER_OUTCOME_COVERAGE",
+      "condition_state": "OPEN"
+    },
+    {
+      "surface": "MATHEMATICAL_REASONING_ARXIVMATH",
+      "existing_family_union": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "EXACT_SYMBOLIC_COMPUTATION",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+      ],
+      "operator_witness": [
+        "EXPERT_LEVEL_REASONING",
+        "EXACT_BOUNDED_SYMBOLIC_SUBROUTINES",
+        "SOLVER_OR_PROOF_TOOL_DISCOVERY",
+        "PROOF_OR_DERIVATION_SELF_CHECK"
+      ],
+      "taxonomy_state": "NO_NEW_PRIMITIVE_FAMILY_REQUIRED_UNLESS_COUNTEREXAMPLE_EXHIBITS_A_RESIDUAL_OPERATOR_OUTSIDE_THIS_UNION",
+      "condition_overlay": "RESEARCH_MATHEMATICS_EQUAL_OR_BETTER_OUTCOME_COVERAGE",
+      "condition_state": "OPEN"
+    }
+  ],
+  "reduction": {
+    "v5_family_mapping_branch_count": 5,
+    "new_primitive_family_branches_after_quotient": 0,
+    "domain_condition_overlays_preserved": 5,
+    "root1_positive_gap_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "falsification": {
+    "reopen_taxonomy_if": "A concrete Opus55 useful behavior in any reduced domain requires a reusable capability operator that survives external-JIT knowledge removal and cannot be represented by any listed existing family union.",
+    "do_not_reopen_for": [
+      "DOMAIN_NAME_ALONE",
+      "DOMAIN_SPECIFIC_FACTS_OR_LITERATURE",
+      "DOMAIN_SPECIFIC_DATASET",
+      "DOMAIN_SPECIFIC_TOOL_INSTANCE_WHEN_TOOL_DISCOVERY_AND_USE_OPERATOR_IS_ALREADY_REPRESENTED",
+      "HIGHER_OPUS55_SCORE_WITHOUT_A_NEW_OPERATOR_WITNESS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_DOMAIN_PARITY_CLAIM",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_CURRENT_38_PREDICATES_ARE_TERMINALLY_COMPLETE",
+    "NO_CLAIM_MULTILINGUAL_LONG_CONTEXT_CREATIVE_OR_DIAGRAM_CONDITIONS_ARE_CLOSED",
+    "NO_CLAIM_THE_PUBLIC_SOURCE_SET_REVEALS_PRIVATE_OR_UNDISCLOSED_BEHAVIORS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
