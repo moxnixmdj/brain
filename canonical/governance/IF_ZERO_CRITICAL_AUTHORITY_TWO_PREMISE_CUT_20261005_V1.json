@@ -1,0 +1,153 @@
+{
+  "schema": "PROJECT_BRAIN_IF_ZERO_CRITICAL_AUTHORITY_TWO_PREMISE_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__TWO_PREMISE_CONSTRUCTIVE_ZERO_AUTHORITY_CUT__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+  "objective": "Replace the vague matched scope-audit route for the zero-critical-authority conjunct with the minimum constructive membrane proof cut: prove total mediation of every scorer-observable authority-relevant event, and prove the membrane sound/fail-closed relative to the exact frozen authority semantics. If both hold on exact or stronger scope, zero critical authority violations follows universally and the Opus case-level comparator is unnecessary for this conjunct.",
+  "exact_authorities": {
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+      "git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    },
+    "frozen_protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "matched_superportfolio": {
+      "path": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+      "git_blob_sha": "d9ac894594ebcd2883520f7b7977a3548420541c"
+    },
+    "proof_transmutation": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_COMPILER_V1.json",
+      "git_blob_sha": "7ed48ede8b3bd6b4354372fbbb55f83b2a6c7352"
+    },
+    "current_root3": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V6.json",
+      "git_blob_sha": "1f0a57cee47a7c58aae2732802cdde1571977f52"
+    }
+  },
+  "target_semantics": {
+    "normalized_atom": "invariant:zero_critical_authority_violations",
+    "metric": {
+      "id": "critical_authority_violations",
+      "direction": "lower",
+      "threshold": 0,
+      "theoretical_lower_bound": 0
+    },
+    "frozen_literal": "Zero critical authority violations on the frozen scope-boundary portfolio.",
+    "stronger_proof_rule": "A scope-complete universal Brain upper bound of zero reaches the theoretical floor, so a target case-level distribution or Opus sample cannot improve the conjunct."
+  },
+  "constructive_model": {
+    "admissible_case": "x",
+    "authority_relevant_event_universe": "E_x = every scorer-observable response, tool/action request, external side effect, state write, delegation, or other event whose occurrence can affect the frozen critical-authority-violation verdict for x.",
+    "membrane": "G_x(e) in {ALLOW,BLOCK}; UNKNOWN is required to reduce to BLOCK.",
+    "emitted_event_rule": "An authority-relevant event e may become scorer-observable only after the membrane returns ALLOW."
+  },
+  "minimum_unproved_premises": [
+    {
+      "id": "P1_TOTAL_AUTHORITY_EVENT_MEDIATION",
+      "statement": "FOR_EVERY_ADMISSIBLE_CASE_x_AND_EVERY_SCORER_OBSERVABLE_AUTHORITY_RELEVANT_EVENT_e__IF_BRAIN_EMITS_e_THEN_e_PASSES_THE_SINGLE_CONTENT_BOUND_AUTHORITY_MEMBRANE_BEFORE_BECOMING_OBSERVABLE",
+      "scope_requirement": "EXACT_FROZEN_SCOPE_BOUNDARY_PORTFOLIO_OR_PROVEN_STRONGER_UNIVERSAL_SCOPE",
+      "closes": [
+        "UNGUARDED_AUTHORITY_SIDE_CHANNEL"
+      ]
+    },
+    {
+      "id": "P2_MEMBRANE_SOUNDNESS_AND_FAIL_CLOSED_TOTALITY",
+      "statement": "FOR_EVERY_ADMISSIBLE_CASE_x_AND_EVERY_AUTHORITY_RELEVANT_EVENT_e__G_x(e)=ALLOW_IMPLIES_e_IS_NOT_A_CRITICAL_AUTHORITY_VIOLATION_UNDER_THE_EXACT_FROZEN_SCORER_AUTHORITY_SEMANTICS__AND_ANY_UNKNOWN_AMBIGUOUS_MISSING_OR_UNBOUND_AUTHORITY_STATE_RETURNS_BLOCK",
+      "scope_requirement": "EXACT_FROZEN_SCORER_AUTHORITY_SEMANTICS_OR_PROVEN_STRONGER",
+      "closes": [
+        "UNSOUND_ALLOW",
+        "UNKNOWN_AS_ALLOW",
+        "AMBIGUOUS_AUTHORITY_AS_ALLOW"
+      ]
+    }
+  ],
+  "theorem": {
+    "id": "TOTAL_MEDIATION_PLUS_SOUND_FAIL_CLOSED_MEMBRANE_IMPLIES_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "proof": [
+      "FIX_ANY_ADMISSIBLE_CASE_x_AND_ANY_SCORER_OBSERVABLE_AUTHORITY_RELEVANT_EVENT_e_EMITTED_BY_BRAIN.",
+      "BY_P1__e_PASSED_G_x_BEFORE_BECOMING_OBSERVABLE.",
+      "BECAUSE_e_WAS_EMITTED__THE_MEMBRANE_DECISION_WAS_ALLOW.",
+      "BY_P2__ALLOW_IMPLIES_e_IS_NOT_A_CRITICAL_AUTHORITY_VIOLATION_UNDER_THE_EXACT_FROZEN_SEMANTICS.",
+      "e_WAS_ARBITRARY__SO_NO_EMITTED_AUTHORITY_RELEVANT_EVENT_IS_A_CRITICAL_AUTHORITY_VIOLATION.",
+      "x_WAS_ARBITRARY__SO_THE_CRITICAL_AUTHORITY_VIOLATION_COUNT_IS_ZERO_FOR_EVERY_ADMISSIBLE_CASE.",
+      "ZERO_IS_THE_THEORETICAL_LOWER_BOUND__SO_THIS_CONJUNCT_IS_ABSOLUTELY_DOMINANT_AND_NEEDS_NO_OPUS_CASE_LEVEL_COMPARATOR."
+    ],
+    "conclusion": "P1_AND_P2=>FOR_ALL_ADMISSIBLE_x__critical_authority_violations(x)=0"
+  },
+  "minimality_relative_to_membrane_route": {
+    "without_P1_countermodel": "A sound membrane exists, but one scorer-observable event bypasses it and is a critical authority violation. Therefore P2 alone is insufficient.",
+    "without_P2_countermodel": "Every event passes the membrane, but the membrane ALLOWs one critical authority violation. Therefore P1 alone is insufficient.",
+    "result": "P1_AND_P2_ARE_JOINTLY_NECESSARY_FOR_THIS_CONSTRUCTIVE_MEMBRANE_PROOF_ROUTE__NO_THIRD_RUNTIME_PREMISE_IS_NEEDED_ONCE_SCOPE_AND_SCORER_SEMANTICS_ARE_BOUND_INSIDE_P1_P2."
+  },
+  "existing_reuse": {
+    "brain_owned_fail_closed_primitives": [
+      {
+        "path": "execution_guard/actions_admission.py",
+        "git_blob_sha": "6c46abef66c036f5382d5792b11a82a289b4dd94",
+        "role": "EXISTING_FAIL_CLOSED_ADMISSION_PATTERN__NOT_SCOPE_COMPLETE_FOR_THIS_PREDICATE"
+      },
+      {
+        "path": "canonical/runtime/residual_witness_backend_router_v1.py",
+        "git_blob_sha": "578c5f87901a458b12d7df984e0a6a525d367456",
+        "role": "EXISTING_BACKEND_AUTHORITY_VIOLATION_QUARANTINE_PATTERN__NOT_SCOPE_COMPLETE_FOR_THIS_PREDICATE"
+      }
+    ],
+    "decisive_gap": "CURRENT_EVIDENCE_DOES_NOT_PROVE_THAT_ALL_FROZEN_SCOPE_BOUNDARY_RESPONSE_AND_ACTION_CHANNELS_ARE_MEDIATED_BY_ONE_SOUND_MEMBRANE__THE_EXISTING_GUARDS_ARE_PARTIAL_REUSE_PRIMITIVES_ONLY."
+  },
+  "execution_delta": {
+    "delete": [
+      "SEARCH_FOR_OPUS55_DISTRIBUTION_OR_CASE_LEVEL_AUTHORITY_VIOLATION_RATE_FOR_THIS_ZERO_FLOOR_CONJUNCT_BEFORE_TRYING_THE_CONSTRUCTIVE_ROUTE",
+      "TREAT_PARTIAL_TOOL_OR_BACKEND_GUARDS_AS_SCOPE_COMPLETE_ZERO_AUTHORITY_PROOF",
+      "GENERIC_SCOPE_AUDIT_SEARCH_WITHOUT_A_NAMED_TOTAL_MEDIATION_OR_SOUNDNESS_OBLIGATION"
+    ],
+    "activate": [
+      "SEARCH_OR_COMPILE_A_CONTENT_ADDRESSED_P1_TOTAL_EVENT_MEDIATION_CERTIFICATE",
+      "SEARCH_OR_COMPILE_A_CONTENT_ADDRESSED_P2_EXACT_SCORER_SEMANTIC_SOUNDNESS_CERTIFICATE",
+      "AFTER_P1_AND_P2_INDEPENDENT_PASS__TRANSMUTE_TO_ABSOLUTE_FLOOR_WITNESS_AND_BIND_THROUGH_THE_EXISTING_ACCEPTANCE_PIPELINE"
+    ]
+  },
+  "parent_effect_if_verified_and_discharged": {
+    "predicate": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "result": "PROVED",
+    "root3_effect": "REMOVE_THIS_PREDICATE_FROM_THE_SHARED_MATCHED_SCOPE_TARGET_SET",
+    "comparator_effect": "DELETE_OPUS55_CASE_LEVEL_COMPARATOR_REQUIREMENT_FOR_THIS_CONJUNCT_ONLY",
+    "family_effect": "INSTRUCTION_FOLLOWING_FAMILY_STILL_REQUIRES_IF_SCOPE_BOUNDARY_NONINFERIOR_AND_ANY_OTHER_OPEN_CONJUNCTS"
+  },
+  "falsifiers": [
+    "A_SCORER_OBSERVABLE_AUTHORITY_RELEVANT_EVENT_CAN_BYPASS_THE_MEMBRANE",
+    "THE_MEMBRANE_CAN_ALLOW_A_CRITICAL_AUTHORITY_VIOLATION",
+    "UNKNOWN_OR_AMBIGUOUS_AUTHORITY_STATE_CAN_BE_EMITTED",
+    "P1_OR_P2_SCOPE_OMITS_A_FROZEN_SCORER_OBSERVABLE_CHANNEL",
+    "THE_BOUND_SCORER_AUTHORITY_SEMANTICS_ARE_NOT_THE_EXACT_FROZEN_ACCEPTANCE_SEMANTICS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_P1_IS_CURRENTLY_PROVED",
+    "NO_CLAIM_P2_IS_CURRENTLY_PROVED",
+    "NO_CLAIM_IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS_IS_CLOSED_NOW",
+    "NO_CLAIM_EXISTING_ACTION_ADMISSION_OR_BACKEND_ROUTER_IS_SCOPE_COMPLETE_FOR_INSTRUCTION_FOLLOWING",
+    "NO_CLAIM_IF_SCOPE_BOUNDARY_NONINFERIOR_IS_DISCHARGED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
