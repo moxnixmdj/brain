@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_FIVE_PUBLIC_BAR_SYNTHESIS_SCOPE_REUSE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__SYNTHESIS_SCOPE_REUSED_ACROSS_THREE_FAMILIES__SIX_UNIQUE_SCOPE_LEAVES_REMAIN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/FIVE_PUBLIC_BAR_SYNTHESIS_SCOPE_REUSE_REDUCTION_V1.json",
+    "git_blob_sha": "e4fd262760902b2667c2ce3832fd08f777c7ff3b"
+  },
+  "checks": {
+    "exact_certificate_blob": true,
+    "certificate_scope_complete": true,
+    "certificate_root3_closed": true,
+    "exact_three_occurrences": true,
+    "no_synthesis_survivors": true,
+    "surviving_occurrence_count": true,
+    "unique_leaf_count": true,
+    "count_conservation": true,
+    "performance_open": true,
+    "zero_credit": true,
+    "no_authority": true
+  },
+  "recomputed": {
+    "surviving_leaf_occurrences": 8,
+    "unique_surviving_behavioral_leaves": 6,
+    "surviving_unique_leaves": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+    ]
+  },
+  "hard_boundary": "SCOPE_ONLY__MATCHED_QUALITY_AND_OPUS_COMPARATOR_REMAIN_ROOT2_OPEN",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
