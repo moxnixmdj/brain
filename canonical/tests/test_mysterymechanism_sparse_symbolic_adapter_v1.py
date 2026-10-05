@@ -91,8 +91,9 @@ class MysteryMechanismSparseSymbolicAdapterTests(unittest.TestCase):
             "CANDIDATE_READY__UNVERIFIED_ON_PRIVATE_STRUCTURAL_PROBES",
             out,
         )
-        self.assertEqual(out["route"], "SEPARABLE_BILINEAR_TRANSFORM", out)
+        self.assertEqual(out["route"], "SEPARABLE_BILINEAR_TRANSFORM_V2", out)
         self.assertLess(out["conservative_nrmse"], 1e-5, out)
+        self.assertLess(out["candidate"]["delete_two_nrmse"], 1e-5, out)
         self.assertFalse(out["private_score_claimed"])
         self.assertEqual(out["acceptance_credit_delta"], 0)
         self.assertEqual(out["family_credit_delta"], 0)
