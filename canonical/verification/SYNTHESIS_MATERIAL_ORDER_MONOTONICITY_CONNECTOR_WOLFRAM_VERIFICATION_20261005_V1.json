@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_MATERIAL_ORDER_MONOTONICITY_CONNECTOR_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__EXACT_SOURCE_BINDINGS__FROZEN_MATERIAL_VECTOR_COMPLETE_RELATIVE_TO_PREDICATE__WOLFRAM_MONOTONICITY_TRUE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_MATERIAL_ORDER_MONOTONICITY_CERTIFICATE_V1.json",
+    "git_blob_sha": "649b2e282a92049451f5e0d7015d0f1b0889b569"
+  },
+  "source_blob_checks": {
+    "acceptance_registry": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "matched_quality_activation": "1ca2de029b02ca8518e59e0d66a973e3e26e251b",
+    "matched_quality_runtime": "116b7394f4b0a6845056c798e966f4cc26f294bf",
+    "dimension_scorer_contract": "8206cb013b5cd0d653ffa70d1e867f8c4d4630b8",
+    "dimension_scorer_runtime": "3e2c155e76a2a2965bd340f1fb93b7c4abc0c721",
+    "hidden_evaluator_coupling": "678f728089a8df815153af6dd58a88894dd0671f"
+  },
+  "semantic_recomputation": {
+    "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "registry_acceptance_text_exact": "Brain conservative matched quality/coverage bound >= Opus matched bound on frozen synthesis portfolio.",
+    "frozen_quality_component_count": 5,
+    "frozen_quality_aggregation": "MIN_NONCOMPENSATORY",
+    "unsupported_material_claim_rule": "HARD_ZERO_IF_COUNT_GT_0",
+    "required_claim_coverage_in_quality_aggregate": false,
+    "required_claim_coverage_is_separate_metric": true,
+    "material_vector_coordinate_count": 7,
+    "vector_sufficiency_for_declared_case_observables": true,
+    "reason": "ZERO_UNSUPPORTED_BINARY_PLUS_FIVE_QUALITY_COMPONENTS_DETERMINE_MATCHED_QUALITY_EXACTLY; REQUIRED_CLAIM_COVERAGE_IS_THE_SEPARATE_DECLARED_COVERAGE_OBSERVABLE."
+  },
+  "independent_symbolic_kernel": {
+    "kernel": "WOLFRAM_LANGUAGE",
+    "proof_goal": "COORDINATEWISE_DOMINANCE_ON_ZERO_UNSUPPORTED_BINARY_FIVE_QUALITY_COMPONENTS_AND_COVERAGE_IMPLIES_FROZEN_QUALITY_AND_COVERAGE_DOMINANCE",
+    "decomposition": [
+      "zB=0,zO=0",
+      "zB=1,zO=0",
+      "zB=1,zO=1",
+      "coverage_cB>=cO"
+    ],
+    "wolfram_code": "{FullSimplify[0*Min[b1,b2,b3,b4,b5] >= 0*Min[o1,o2,o3,o4,o5]], FullSimplify[1*Min[b1,b2,b3,b4,b5] >= 0*Min[o1,o2,o3,o4,o5], Assumptions -> (0<=b1<=1 && 0<=b2<=1 && 0<=b3<=1 && 0<=b4<=1 && 0<=b5<=1)], FullSimplify[1*Min[b1,b2,b3,b4,b5] >= 1*Min[o1,o2,o3,o4,o5], Assumptions -> (0<=o1<=b1<=1 && 0<=o2<=b2<=1 && 0<=o3<=b3<=1 && 0<=o4<=b4<=1 && 0<=o5<=b5<=1)], FullSimplify[cB>=cO, Assumptions -> 0<=cO<=cB<=1]}",
+    "raw_result": "{True, True, True, True}",
+    "all_cases_true": true
+  },
+  "verified_consequence": [
+    "FROZEN_SYNTHESIS_MATERIAL_ORDER_IS_SOUND_FOR_THE_DECLARED_MATCHED_QUALITY_AND_COVERAGE_OBSERVABLES",
+    "FROZEN_SYNTHESIS_QUALITY_AND_COVERAGE_OBSERVABLES_ARE_COORDINATEWISE_MONOTONE_IN_THE_BOUND_VECTOR",
+    "HIDDEN_EVALUATOR_COUPLING_ROUTE_NO_LONGER_NEEDS_EXACT_SYNTHESIS_AGGREGATOR_WEIGHT_DISCOVERY_FOR_THESE_DECLARED_OBSERVABLES",
+    "OUTCOME_MASS_AND_FULL_MASS_COUPLING_REMAIN_OPEN"
+  ],
+  "limitations": [
+    "NO_BRAIN_OR_OPUS_OUTCOME_DISTRIBUTION_BOUND",
+    "NO_DOMINANCE_PRESERVING_COUPLING_PROVED",
+    "NO_SYNTHESIS_PREDICATE_CLOSED",
+    "NO_MATCHED_CASES_GENERATED_OR_EXECUTED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
