@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
+  "date": "2026-10-05",
+  "action_id": "2026-10-05_SCIENCE_TARGET_GATE_REPAIR_V1",
+  "status": "LEASED__ZERO_REALITY",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "4e9d397ddd8932e071bd22af48cc3264e0706dd3",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "SCHEDULER_TRUTH_REPAIR",
+  "blocker_lease_key": "SCIENCE_TARGET_GATE_SKIPPED_BY_LATER_SCHEDULING_ACTIVATION",
+  "causal_blocker": "Later scientific-hypothesis subtraction scheduling is unconditional although exact target membership remains unproved.",
+  "expected_parent_frontier_change": "Condition residual scheduling on target-scope proof while preserving valid deterministic subtractions.",
+  "reasoning_durability": {
+    "evidence_refs": [
+      "canonical/governance/SCIENTIFIC_HYPOTHESIS_TARGET_SCOPE_QUARANTINE_20261005_V1.json",
+      "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_ACTIVATION_V1.json"
+    ],
+    "selected_route": "TARGET_SCOPE_GATE_FIRST",
+    "non_goals": [
+      "No acceptance credit",
+      "No fresh cases"
+    ],
+    "next_action": "Write reconciliation."
+  },
+  "recursive_obs": {
+    "selected": "REUSE_AND_CONDITION"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
