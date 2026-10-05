@@ -34,7 +34,7 @@ def test_global_semantic_gate_fails_closed_on_scope_only_receipts():
     ledger = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json")
     synth = load("canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json")
 
-    assert "acceptance-scoped receipts" in manifest["next"].lower().replace("_", " ")
+    assert "acceptance scoped receipts" in manifest["next"].lower().replace("_", " ")
     assert "ACCEPTANCE_SCOPED" in authority["hard_rules"][0]
     assert authority["truth"]["current_admissible_scoped_proved"] == 4
     assert authority["truth"]["current_open"] == 8
