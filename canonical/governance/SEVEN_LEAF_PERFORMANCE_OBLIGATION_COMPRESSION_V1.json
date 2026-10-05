@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_SEVEN_LEAF_PERFORMANCE_OBLIGATION_COMPRESSION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SEVEN_SURVIVING_LEAVES_COMPRESSED_TO_TWO_EXISTING_ACCEPTANCE_BINDINGS_PLUS_FIVE_STANDALONE_PERFORMANCE_OBLIGATIONS__ZERO_CREDIT",
+  "objective": "Delete duplicate residual performance programs after composing the current seven-leaf saturation frontier with independently/scope-verified synthesis reuse and verified AA-Briefcase multiplexing. Preserve every strict Opus-5.5 acceptance obligation.",
+  "source_bindings": {
+    "seven_leaf_saturation": {
+      "path": "canonical/governance/SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_20261005_V1.json",
+      "git_blob_sha": "2ad6f6e4d367b0b73e019f677e3c7a0bb1ed815a"
+    },
+    "six_family_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    },
+    "synthesis_cross_family_reuse": {
+      "path": "canonical/governance/SYNTHESIS_LEAF_CROSS_FAMILY_REUSE_BINDING_V1.json",
+      "git_blob_sha": "9fea1b94709027c3152aaf2b3e3076d90a0a0875"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "aa_briefcase_multiplex": {
+      "path": "canonical/governance/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_BINDING_V1.json",
+      "git_blob_sha": "65512b512ebe44eea63fb849293e07be87e0b7fa"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    }
+  },
+  "derivation": {
+    "input_unique_surviving_leaves": 7,
+    "reused_existing_acceptance_bindings": [
+      {
+        "leaf": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "existing_acceptance_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "scope_status": "INDEPENDENTLY_VERIFIED_PROVEN_STRONGER__EXACT_UNION__COVERAGE_COMPLETE",
+        "family_fanout": [
+          "PROFESSIONAL_KNOWLEDGE_WORK",
+          "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "AGENTIC_SCIENTIFIC_RESEARCH"
+        ],
+        "consequence": "NO_SEPARATE_LEAF_PERFORMANCE_PROGRAM__KEEP_EXISTING_SYNTHESIS_ROOT2_PREDICATE_ONLY",
+        "current_performance_state": "OPEN"
+      },
+      {
+        "leaf": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "existing_acceptance_predicates": [
+          "PROWORK_AA_BRIEFCASE_GE_1822",
+          "ARTIFACT_AA_BRIEFCASE_GE_1822"
+        ],
+        "shared_receipt": "ONE_FUTURE_COMPARABLE_AA_BRIEFCASE_V1_1_GE_1822_RECEIPT",
+        "consequence": "NO_SEPARATE_PROFESSIONAL_QUALITY_LEAF_PERFORMANCE_PROGRAM__ONE_SHARED_RECEIPT_REFERENCED_BY_TWO_ATOMIC_PREDICATES_AND_THIS_LEAF",
+        "current_performance_state": "OPEN__SCORE_ROUTE_NOT_READY"
+      }
+    ],
+    "standalone_residual_performance_obligations": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+    ],
+    "arithmetic": {
+      "unique_surviving_leaves": 7,
+      "leaves_delegated_to_existing_acceptance_bindings": 2,
+      "standalone_residual_performance_obligations": 5,
+      "identity": "7 - 2 = 5"
+    }
+  },
+  "scheduling_delta": {
+    "delete": [
+      "STANDALONE_SYNTHESIS_LEAF_PERFORMANCE_PROGRAM_OUTSIDE_SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "STANDALONE_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_PERFORMANCE_PROGRAM_OUTSIDE_THE_SHARED_AA_BRIEFCASE_RECEIPT",
+      "FAMILY_BY_FAMILY_DUPLICATION_OF_SYNTHESIS_PERFORMANCE_FOR_THREE_FANOUT_FAMILIES"
+    ],
+    "preserve": [
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_CURRENT_ROOT2_WORK",
+      "ONE_COMPARABLE_AA_BRIEFCASE_V1_1_GE_1822_RECEIPT_ROUTE",
+      "THE_FIVE_STANDALONE_RESIDUAL_LEAF_PERFORMANCE_OBLIGATIONS",
+      "ALL_CURRENT_ATOMIC_THRESHOLDS_AND_SCOPE_BOUNDARIES"
+    ],
+    "independent_leaf_performance_result_program_count": 5,
+    "note": "This is proof-program compression, not acceptance closure. The two reused leaves remain open until their bound existing acceptance predicates actually pass."
+  },
+  "hard_nonclaims": [
+    "NO_OPUS55_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_FAMILY_PROMOTION",
+    "NO_REINTERPRETATION_OF_PRE_METRIC_SYNTHESIS_RESULTS_AS_MATCHED_QUALITY",
+    "NO_AA_BRIEFCASE_SCORE_CREDIT_BEFORE_A_COMPARABLE_GE_1822_RECEIPT",
+    "NO_TRANSFER_OF_A_RECEIPT_OUTSIDE_ITS_INDEPENDENTLY_BOUND_SCOPE",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
