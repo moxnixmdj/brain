@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_ROOTLESS_NAMESPACE_CARRIER_SPRITE_OBSERVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ISOLATED_REMOTE_OBSERVATION_PASS_FOR_TESTED_BOUNDARY__ZERO_CREDIT",
+  "subject": {
+    "bootstrap_sha256": "1b6dd0ad9e714d5284bb837aef808a5179fbeef8c9822a85c2b3163f1b7b8374",
+    "probe_sha256": "c282934a98ac56dfc65fe099d98960ebec3924f379ffe98f83ccaeffa9f91f72",
+    "governance_path": "canonical/governance/ROOT3_ROOTLESS_NAMESPACE_CARRIER_OBSERVATION_20261005_V1.json"
+  },
+  "environment": {
+    "carrier": "brain-heldout003-one-shot",
+    "sprite_id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+    "python": "3.13.7",
+    "kernel": "6.12.105-fly",
+    "unshare": "util-linux 2.41.3",
+    "mount": "util-linux 2.41.3",
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "pid_in_isolated_child": 1,
+    "host_path_visible": false,
+    "read_only_root_write_succeeded": false,
+    "private_temporary_write_succeeded": true,
+    "private_temporary_write_persisted_to_host_after_exit": false,
+    "external_network_connection_succeeded": false
+  },
+  "falsified_assumption": {
+    "assumption": "FRESH_PROC_MOUNT_AVAILABLE_IN_THIS_ROOTLESS_CARRIER_CONFIGURATION",
+    "result": false,
+    "effect": "PROC_MOUNT_MUST_NOT_BE_A_REQUIRED_PREMISE_FOR_THIS_ROUTE"
+  },
+  "deduction": "THE_OBSERVED_ZERO_COST_CARRIER_SUPPORTS_A_TESTED_ROOTLESS_NO_EXTERNAL_NETWORK_READ_ONLY_ROOT_ISOLATION_PATH_WITH_PID_SEPARATION_AND_NONPERSISTENT_PRIVATE_SCRATCH; THIS IS A CARRIER_LEAD, NOT A ROOT3 CLOSURE.",
+  "hard_nonclaims": [
+    "NO_GENERAL_KERNEL_SECURITY_PROOF",
+    "NO_COMPLETE_FILE_DESCRIPTOR_OR_DESCENDANT_AUTHORITY_PROOF",
+    "NO_LOCAL_LOOPBACK_SERVICE_PROOF",
+    "NO_CLASS_SPECIFIC_SEMANTIC_GUARD_PROOF",
+    "NO_ROOT3_C1_C2_C3_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
