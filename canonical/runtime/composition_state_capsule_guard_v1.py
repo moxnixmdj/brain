@@ -1,4 +1,4 @@
-"""No-bypass guard binding capability-graph execution to the composition state capsule.
+"""No-bypass guard binding capability-graph execution to content-bound composition capsule V2.
 
 Scope: deterministic capability plans emitted by capability_planner.plan_actions.
 This module proves/mechanically enforces declared cross-capability state continuity.
@@ -21,7 +21,7 @@ class CompositionGuardError(ValueError):
 
 
 def _load_capsule():
-    path = pathlib.Path(__file__).resolve().with_name("composition_state_capsule_v1.py")
+    path = pathlib.Path(__file__).resolve().with_name("composition_state_capsule_v2.py")
     spec = importlib.util.spec_from_file_location(
         "project_brain_composition_state_capsule_guard_dependency", path
     )
@@ -166,19 +166,31 @@ def seed_capsule(initial_facts: Sequence[str]):
     cap = capsule_mod.empty_capsule()
     if not initial:
         return cap
+    producer_ref = "capability_planner"
     action_ref = "verified_initial_facts"
     cap = capsule_mod.append_macrostep(
         cap,
-        producer="capability_planner",
+        producer_ref=producer_ref,
+        producer_descriptor={
+            "component": "capability_planner",
+            "role": "verified_initial_fact_seed",
+        },
         action_ref=action_ref,
+        action_descriptor={
+            "operation": "seed_verified_initial_facts",
+            "initial_facts": list(initial),
+        },
         requires=[],
         provides=initial,
         values={
             fact: {"effect": fact, "source": "verified_initial_fact"}
             for fact in initial
         },
-        evidence_refs=[],
-        lineage={fact: ["action:" + action_ref] for fact in initial},
+        evidence_values={},
+        lineage={
+            fact: ["action:" + action_ref, "producer:" + producer_ref]
+            for fact in initial
+        },
     )
     return cap
 
@@ -199,6 +211,7 @@ def assert_action_ready(capsule: Mapping[str, Any], row: Mapping[str, Any]) -> d
 def append_action_result(
     capsule: Mapping[str, Any],
     row: Mapping[str, Any],
+    action: Mapping[str, Any],
     result: Any,
 ):
     capsule_mod = _load_capsule()
@@ -208,8 +221,16 @@ def append_action_result(
     provides = _strings(row.get("provides"), "ROW_PROVIDES")
     if not isinstance(cycle, int) or cycle < 0 or not cid:
         raise CompositionGuardError("ROW_IDENTITY_INVALID")
+    if not isinstance(action, Mapping):
+        raise CompositionGuardError("ACTION_DESCRIPTOR_REQUIRED")
+    if action.get("capability_id") != cid:
+        raise CompositionGuardError("ACTION_CAPABILITY_ID_MISMATCH")
+    producer_ref = cid
     action_ref = f"capability:{cid}:cycle:{cycle}"
-    lineage_refs = ["state:" + effect for effect in requires] + ["action:" + action_ref]
+    lineage_refs = (
+        ["state:" + effect for effect in requires]
+        + ["action:" + action_ref, "producer:" + producer_ref]
+    )
     values = {
         effect: {
             "effect": effect,
@@ -221,12 +242,18 @@ def append_action_result(
     }
     return capsule_mod.append_macrostep(
         capsule,
-        producer=cid,
+        producer_ref=producer_ref,
+        producer_descriptor={
+            "kind": "capability_executor",
+            "capability_id": cid,
+            "cycle": cycle,
+        },
         action_ref=action_ref,
+        action_descriptor=dict(action),
         requires=requires,
         provides=provides,
         values=values,
-        evidence_refs=[],
+        evidence_values={},
         lineage={effect: list(lineage_refs) for effect in provides},
     )
 
@@ -246,7 +273,10 @@ def rebuild_from_trace(
             raise CompositionGuardError(f"TRACE_{cycle}_INVALID")
         row = validated["contract"][cycle]
         assert_action_ready(cap, row)
-        cap = append_action_result(cap, row, record.get("result"))
+        action = record.get("plan")
+        if not isinstance(action, Mapping):
+            raise CompositionGuardError(f"TRACE_{cycle}_ACTION_DESCRIPTOR_MISSING")
+        cap = append_action_result(cap, row, action, record.get("result"))
     capsule_mod = _load_capsule()
     verdict = capsule_mod.verify_capsule(cap)
     if verdict.get("status") != "PASS":
