@@ -249,142 +249,197 @@ def _apt_query_variants(queries):
 
 
 def _legacy_search_apt_packages(effect, limit=12):
-    """Search the local Ubuntu/Debian package catalog without installing anything."""
-    if not sys.platform.startswith("linux") or shutil.which("apt-cache") is None:
+    """Snapshot-only APT fallback that emits candidate evidence, never binding proof.
+
+    The old fallback spawned apt-cache search/policy/show.  That process surface
+    is unnecessary: the same package metadata is already present in the
+    content-addressable APT list snapshot.  This route intentionally does not
+    claim to reproduce APT's policy resolver.  It emits exact Package/Version/
+    SHA256 tuples as candidate evidence; auto_apt_cli_acquisition subsequently
+    probes each tuple before any capability can be promoted.
+    """
+    if not sys.platform.startswith("linux"):
         return {
             "schema":"PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
             "effect":effect,"source":"APT_CATALOG","source_url":None,
             "queries":effect_queries(effect),"candidate_count":0,"candidates":[],
-            "errors":[{"error":"APT_CACHE_UNAVAILABLE"}],"binding_performed":False,
+            "errors":[{"error":"APT_PLATFORM_UNSUPPORTED"}],"binding_performed":False,
         }
+    try:
+        from canonical.runtime.apt_metadata_snapshot_v1 import (
+            package_records,
+            translation_records,
+        )
+        packages=package_records()
+        translations=translation_records(language="en")
+    except Exception as exc:
+        return {
+            "schema":"PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+            "effect":effect,"source":"APT_CATALOG","source_url":None,
+            "queries":effect_queries(effect),"candidate_count":0,"candidates":[],
+            "errors":[{"error":"APT_SNAPSHOT_UNAVAILABLE:"+type(exc).__name__+":"+str(exc)}],
+            "binding_performed":False,
+        }
+
+    translation_by_md5={}
+    for rec in translations:
+        key=str(rec.get("Description-md5") or "").strip().lower()
+        desc=str(rec.get("Description-en") or rec.get("Description") or "").strip()
+        if key and desc and key not in translation_by_md5:
+            translation_by_md5[key]=desc
+
     queries=effect_queries(effect)
     apt_queries=_apt_query_variants(queries)
-    seen={}
-    errors=[]
     effect_tokens=set(queries)
-    for query in apt_queries:
-        try:
-            p=subprocess.run(
-                ["apt-cache","search",query],
-                text=True,capture_output=True,timeout=20
-            )
-        except Exception as exc:
-            errors.append({"query":query,"error":type(exc).__name__+":"+str(exc)})
+    by_name={}
+    errors=[]
+
+    machine=(getattr(os.uname(),"machine","") or "").lower()
+    host_arch={
+        "x86_64":"amd64","amd64":"amd64",
+        "aarch64":"arm64","arm64":"arm64",
+        "i386":"i386","i686":"i386",
+        "ppc64le":"ppc64el","s390x":"s390x",
+    }.get(machine)
+
+    for rec in packages:
+        name=str(rec.get("Package") or "").strip()
+        version=str(rec.get("Version") or "").strip()
+        sha=str(rec.get("SHA256") or "").strip().lower()
+        arch=str(rec.get("Architecture") or "").strip().lower()
+        if (
+            not name or not version
+            or re.fullmatch(r"[0-9a-f]{64}",sha) is None
+            or (host_arch and arch and arch not in {"all",host_arch})
+        ):
             continue
-        if p.returncode!=0:
-            errors.append({"query":query,"error":"APT_SEARCH_FAILED:"+p.stderr[-500:]})
+        md5=str(rec.get("Description-md5") or "").strip().lower()
+        description=translation_by_md5.get(
+            md5,
+            str(rec.get("Description") or "").strip(),
+        )
+        blob=(name+" "+description).lower()
+        if not any(re.search(q,blob,flags=re.IGNORECASE) for q in apt_queries):
             continue
-        for line in p.stdout.splitlines():
-            if " - " not in line:
-                continue
-            name,description=line.split(" - ",1)
-            name=name.strip(); description=description.strip()
-            blob=(name+" "+description).lower()
-            ordered_blob_tokens=re.findall(r"[a-z0-9]+",blob)
-            blob_tokens=set(ordered_blob_tokens)
-            # Treat common lexical compounds equivalently across package
-            # metadata styles: "bar code" -> "barcode", "qr code" ->
-            # "qrcode", etc. This stays domain-independent and prevents a
-            # spacing convention from hiding the best supplier/verifier.
-            compound_tokens={
-                ordered_blob_tokens[i]+ordered_blob_tokens[i+1]
-                for i in range(len(ordered_blob_tokens)-1)
-                if len(ordered_blob_tokens[i])>=2 and len(ordered_blob_tokens[i+1])>=2
-            }
-            lexical_tokens=blob_tokens | compound_tokens
-            matched={
-                t for t in effect_tokens
-                if any(v in lexical_tokens for v in _lexical_variants(t))
-            }
-            if not matched:
-                continue
-            score=0
-            ordered_name_tokens=re.findall(r"[a-z0-9]+",name.lower())
-            name_tokens=set(ordered_name_tokens) | {
-                ordered_name_tokens[i]+ordered_name_tokens[i+1]
-                for i in range(len(ordered_name_tokens)-1)
-            }
-            for t in matched:
-                distinctive=t not in GENERIC_DISCOVERY_TOKENS
-                if t in name_tokens:
-                    score += 24 if distinctive else 6
-                else:
-                    score += 10 if distinctive else 2
-            # Integration friction matters more than word count. Standalone
-            # executables are usually cheaper to bind than language libraries.
-            lname=name.lower()
-            integration_friction=0
-            if lname.startswith(("python3-","ruby-","golang-","php-","php")):
-                integration_friction=2
-                score-=10
-            if lname.startswith(("lib","librust-","libghc-")):
-                integration_friction=3
-                score-=12
-            if name.endswith(("-dev","-doc","-dbg","-prof")):
-                integration_friction=max(integration_friction,4)
-                score-=8
-            if integration_friction==0:
-                score+=8
-            # Reward candidates that jointly cover multiple distinct pieces
-            # of the requested effect. A package matching both "decode" and
-            # "barcode" is more useful than one that merely mentions barcode.
-            if len(matched)>1:
-                score += 20*(len(matched)-1)
-            if lname in effect.lower():
-                score+=8
-            prior=seen.get(name)
-            cand={
-                "discovery_source":"APT_CATALOG",
-                "name":name,
-                "description":description,
-                "query":query,
-                "matched_terms":sorted(matched),
-                "score":score,
-                "integration_friction":integration_friction,
-                "required_secret_count":0,
-                "required_environment_count":0,
-                "zero_cost_eligible":True,
-                "eligibility_status":"LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-                "binding_kind":"apt",
-                "packages":[],
-                "remotes":[],
-            }
-            if prior is None or cand["score"]>prior["score"]:
-                seen[name]=cand
-    ranked=sorted(seen.values(),key=lambda x:(-x["score"],x["name"]))[:max(1,min(int(limit),50))]
-    enriched=[]
-    for cand in ranked:
-        name=cand["name"]
-        try:
-            policy=subprocess.run(["apt-cache","policy",name],text=True,capture_output=True,timeout=10)
-            version=None
-            for line in policy.stdout.splitlines():
-                s=line.strip()
-                if s.startswith("Candidate:"):
-                    version=s.split(":",1)[1].strip()
+
+        ordered_blob_tokens=re.findall(r"[a-z0-9]+",blob)
+        blob_tokens=set(ordered_blob_tokens)
+        compound_tokens={
+            ordered_blob_tokens[i]+ordered_blob_tokens[i+1]
+            for i in range(len(ordered_blob_tokens)-1)
+            if len(ordered_blob_tokens[i])>=2
+            and len(ordered_blob_tokens[i+1])>=2
+        }
+        lexical_tokens=blob_tokens | compound_tokens
+        matched={
+            t for t in effect_tokens
+            if any(v in lexical_tokens for v in _lexical_variants(t))
+        }
+        if not matched:
+            continue
+
+        score=0
+        ordered_name_tokens=re.findall(r"[a-z0-9]+",name.lower())
+        name_tokens=set(ordered_name_tokens) | {
+            ordered_name_tokens[i]+ordered_name_tokens[i+1]
+            for i in range(len(ordered_name_tokens)-1)
+        }
+        for token in matched:
+            distinctive=token not in GENERIC_DISCOVERY_TOKENS
+            if token in name_tokens:
+                score += 24 if distinctive else 6
+            else:
+                score += 10 if distinctive else 2
+
+        lname=name.lower()
+        integration_friction=0
+        if lname.startswith(("python3-","ruby-","golang-","php-","php")):
+            integration_friction=2
+            score-=10
+        if lname.startswith(("lib","librust-","libghc-")):
+            integration_friction=3
+            score-=12
+        if name.endswith(("-dev","-doc","-dbg","-prof")):
+            integration_friction=max(integration_friction,4)
+            score-=8
+        if integration_friction==0:
+            score+=8
+        if len(matched)>1:
+            score += 20*(len(matched)-1)
+        if lname in str(effect).lower():
+            score+=8
+
+        cand={
+            "discovery_source":"APT_CATALOG",
+            "name":name,
+            "description":description,
+            "query":"APT_SNAPSHOT_LEXICAL_FALLBACK",
+            "matched_terms":sorted(matched),
+            "score":score,
+            "integration_friction":integration_friction,
+            "required_secret_count":0,
+            "required_environment_count":0,
+            "zero_cost_eligible":True,
+            "eligibility_status":"LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "binding_kind":"apt",
+            "packages":[],
+            "remotes":[],
+            "version":version,
+            "archive_sha256":sha,
+            "architecture":arch or None,
+            "candidate_authority":"SNAPSHOT_METADATA_ONLY__DOWNSTREAM_PROBE_REQUIRED",
+        }
+        bucket=by_name.setdefault(name,{})
+        key=(version,sha,arch)
+        prior=bucket.get(key)
+        if prior is None or cand["score"]>prior["score"]:
+            bucket[key]=cand
+
+    # Preserve supplier diversity.  First emit one exact tuple per ranked
+    # package name; only then emit alternate versions.  This prevents several
+    # historical versions of one package from crowding the downstream probe
+    # frontier while still avoiding any false claim about APT policy priority.
+    ranked_names=[]
+    for name,tuples in by_name.items():
+        vals=sorted(
+            tuples.values(),
+            key=lambda x:(-float(x["score"]),str(x["version"]),str(x["archive_sha256"])),
+        )
+        if vals:
+            ranked_names.append((name,vals))
+    ranked_names.sort(key=lambda nv:(-float(nv[1][0]["score"]),nv[0]))
+
+    cap=max(1,min(int(limit),50))
+    selected=[]
+    depth=0
+    while len(selected)<cap:
+        added=False
+        for _name,vals in ranked_names:
+            if depth<len(vals):
+                selected.append(vals[depth])
+                added=True
+                if len(selected)>=cap:
                     break
-            sha=None
-            if version and version!="(none)":
-                show=subprocess.run(["apt-cache","show",f"{name}={version}"],text=True,capture_output=True,timeout=15)
-                for line in show.stdout.splitlines():
-                    if line.startswith("SHA256:"):
-                        sha=line.split(":",1)[1].strip().lower()
-                        break
-            cand["version"]=version
-            cand["archive_sha256"]=sha
-        except Exception as exc:
-            cand["metadata_error"]=type(exc).__name__+":"+str(exc)
-        enriched.append(cand)
+        if not added:
+            break
+        depth+=1
+
     return {
         "schema":"PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "effect":effect,
         "source":"APT_CATALOG",
         "source_url":None,
         "queries":queries,
-        "candidate_count":len(enriched),
-        "candidates":enriched,
+        "candidate_count":len(selected),
+        "candidates":selected,
         "errors":errors,
         "binding_performed":False,
+        "metadata_route":{
+            "snapshot_only":True,
+            "apt_policy_equivalence_claimed":False,
+            "downstream_probe_required":True,
+            "subprocess_count":0,
+        },
     }
 
 
