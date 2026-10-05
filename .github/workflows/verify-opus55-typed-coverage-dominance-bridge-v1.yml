@@ -1,0 +1,27 @@
+name: Verify typed coverage-dominance bridge
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/OPUS55_TYPED_COVERAGE_DOMINANCE_BRIDGE_20261005_V1.json"
+      - "canonical/runtime/opus55_typed_coverage_dominance_bridge_v1.py"
+      - "canonical/tests/test_opus55_typed_coverage_dominance_bridge_v1.py"
+      - ".github/workflows/verify-opus55-typed-coverage-dominance-bridge-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Parse governance JSON
+        run: python -m json.tool canonical/governance/OPUS55_TYPED_COVERAGE_DOMINANCE_BRIDGE_20261005_V1.json > /dev/null
+      - name: Run typed bridge regressions
+        run: python -m unittest canonical.tests.test_opus55_typed_coverage_dominance_bridge_v1 -v
