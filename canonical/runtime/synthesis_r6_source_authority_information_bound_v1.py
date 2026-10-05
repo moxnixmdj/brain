@@ -1,10 +1,10 @@
 """Fail-closed source-authority gate for synthesis R6.
 
-This module does not infer trust from source names.  It requires an explicit,
+This module does not infer trust from source names. It requires an explicit,
 evidence-specific authority fact whose provenance binding exactly matches the
-evidence unit.  Missing, contradictory, or misbound facts remain unresolved.
+evidence unit. Missing, contradictory, or misbound facts remain unresolved.
 
-Zero acceptance credit.  This is a deterministic pre-support gate.
+Zero acceptance credit. This is a deterministic pre-support gate.
 """
 from __future__ import annotations
 
@@ -17,20 +17,14 @@ ALLOWED_STATES = {"ADMISSIBLE", "INADMISSIBLE"}
 def _provenance(value: Any) -> tuple[str, ...]:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
         return ()
-    out = tuple(str(x) for x in value if str(x))
-    return out
+    return tuple(str(x) for x in value if str(x))
 
 
 def gate_evidence(
     evidence: Sequence[Mapping[str, Any]],
     authority_facts: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Classify evidence without guessing source authority.
-
-    Authority facts are intentionally evidence-specific.  Each fact must bind:
-    evidence_id, exact provenance sequence, ADMISSIBLE/INADMISSIBLE state, and
-    a non-empty basis string identifying why the fact is verified.
-    """
+    """Classify evidence without guessing source authority."""
     facts_by_id: dict[str, list[Mapping[str, Any]]] = {}
     for fact in authority_facts:
         if not isinstance(fact, Mapping):
@@ -114,27 +108,17 @@ def threshold_polarity(
     claim: Mapping[str, Any],
     gated: Mapping[str, Any],
 ) -> str:
-    """Demonstrate the post-gate polarity for the bounded threshold subdomain.
+    """Demonstrate post-gate polarity on the bounded numeric-threshold subdomain.
 
-    Any unresolved evidence sharing the claim metric keeps the result unresolved.
-    General claim semantics remain outside this module.
+    This helper is deliberately conservative: any unresolved authority fact blocks
+    a polarity commitment. General claim semantics remain outside this module.
     """
+    if gated.get("unresolved"):
+        return "UNRESOLVED_SOURCE_AUTHORITY"
+
     metric = str(claim.get("metric") or "")
     relation = str(claim.get("relation") or "")
     threshold = float(claim["threshold"])
-
-    evidence_ids_for_metric: set[str] = set()
-    for bucket in ("admissible", "inadmissible"):
-        for receipt in gated.get(bucket, []):
-            row = receipt.get("evidence", {})
-            if str(row.get("metric") or "") == metric:
-                evidence_ids_for_metric.add(str(row.get("evidence_id") or ""))
-
-    unresolved_ids = {
-        str(x.get("evidence_id") or "") for x in gated.get("unresolved", [])
-    }
-    if unresolved_ids & evidence_ids_for_metric:
-        return "UNRESOLVED_SOURCE_AUTHORITY"
 
     vals: list[float] = []
     for receipt in gated.get("admissible", []):
