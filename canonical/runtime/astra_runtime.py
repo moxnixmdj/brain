@@ -6339,7 +6339,16 @@ def run_goal(step, mission):
 
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
+    mission=mission or {}
+    mode=mission.get("cross_step_context_mode")
+    if mode not in (None,DECLARED_CROSS_STEP_CONTEXT_MODE):
+        raise Blocker("CROSS_STEP_CONTEXT_MODE_UNKNOWN:"+str(mode))
     if adapter=="shell":
+        if mode==DECLARED_CROSS_STEP_CONTEXT_MODE and (
+            not isinstance(prior_results,dict)
+            or prior_results.get("mode")!=DECLARED_CROSS_STEP_CONTEXT_MODE
+        ):
+            raise Blocker("DECLARED_CROSS_STEP_CONTEXT_REQUIRED")
         return run_shell(step, prior_results)
     if adapter=="http":
         return run_http(step)
