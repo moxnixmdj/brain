@@ -8,6 +8,7 @@ import unittest
 
 from canonical.runtime import root3_read_only_local_file_query_executor_v1 as ro
 from canonical.runtime import root3_subprocess_mediator_v2 as mediator
+from canonical.runtime.root3_subprocess_effect_class_registry_v1 import EXPECTED
 from canonical.runtime.bound_capabilities import jq_query, sqlite_verify_cli
 
 
@@ -25,6 +26,36 @@ class ReadOnlyLocalFileExecutorTests(unittest.TestCase):
 
     def allow(self, request):
         return {"allowed": True, "authorization_sha256": "a" * 64}
+
+    def test_supported_subset_is_exactly_five_of_current_fifteen(self):
+        current={k for k,v in EXPECTED.items() if v=="READ_ONLY_DECLARED_QUERY"}
+        self.assertEqual(len(current),15)
+        self.assertEqual(len(ro.SUPPORTED),5)
+        self.assertTrue(set(ro.SUPPORTED).issubset(current))
+        self.assertEqual(len(current-set(ro.SUPPORTED)),10)
+
+    def test_target_is_nested_inside_namespace_wrapper_not_raw_spawn(self):
+        import base64
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            src=root/"in.json"; src.write_text('{"x":1}\n',encoding="utf-8")
+            ctx={
+              "effect_class":"READ_ONLY_DECLARED_QUERY",
+              "callsite":{
+                "module_path":"canonical/runtime/bound_capabilities/jq_query.py",
+                "lineno":41,"process_api":"subprocess.run",
+              },
+              "args":(["jq","-r",".x",str(src)],),
+              "kwargs":{"cwd":root,"text":True,"capture_output":True,"timeout":60},
+            }
+            prepared=ro._prepare(ctx)
+            policy=prepared["policy"]
+            self.assertEqual(policy["argv"][0],"/usr/bin/python3")
+            self.assertEqual(policy["argv"][1:3],["-I","-c"])
+            spec=json.loads(base64.urlsafe_b64decode(policy["argv"][4]).decode("utf-8"))
+            self.assertEqual(pathlib.Path(spec["argv"][0]).name,"jq")
+            self.assertEqual(spec["argv"][-1],"/input/in.json")
+            self.assertEqual(spec["cwd"],"/input")
 
     def test_unsupported_apt_metadata_site_denies_before_spawn(self):
         calls=[]
