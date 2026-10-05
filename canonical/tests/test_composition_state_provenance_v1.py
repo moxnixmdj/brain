@@ -18,6 +18,7 @@ def v2_record(cycle, source_plan, plan, result):
         "action_sha256": astra._json_value_sha256(plan),
         "result": copy.deepcopy(result),
         "result_sha256": astra._json_value_sha256(result),
+        "durable_effects": [],
     }
 
 
@@ -124,6 +125,7 @@ class CompositionStateProvenanceTests(unittest.TestCase):
         self.assertEqual(rec["source_plan_sha256"], astra._json_value_sha256(rec["source_plan"]))
         self.assertEqual(rec["action_sha256"], astra._json_value_sha256(rec["plan"]))
         self.assertEqual(rec["result_sha256"], astra._json_value_sha256(rec["result"]))
+        self.assertEqual(rec["durable_effects"], [])
         self.assertTrue(astra._controller_checkpoint_record_valid(rec, []))
 
     def test_legacy_record_remains_resumable_but_has_no_v2_proof_status(self):
