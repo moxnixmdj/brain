@@ -1,28 +1,26 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1",
   "date": "2026-10-05",
-  "status": "ACTIVE__V15_CONNECTOR_RECOMPUTATION_PASS__SEVEN_INFORMATION_POSITIVE_GROUPS__SCHEDULING_ONLY__ZERO_CREDIT",
+  "status": "ACTIVE__V14_CONNECTOR_RECOMPUTATION_PASS__CURRENT_14_24__SCHEDULING_ONLY__ZERO_CREDIT",
   "active_cut": {
-    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15.json",
-    "git_blob_sha": "37c58301f1e002a200dc93a2e7d771cd1ffc5dcb"
-  },
-  "activation": {
-    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15_ACTIVATION_V1.json",
-    "git_blob_sha": "e4667972a22e8e1c60aaa4542950abc68e89067c"
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json",
+    "git_blob_sha": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
   },
   "verification": {
-    "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15_CONNECTOR_VERIFICATION_20261005_V1.json",
-    "git_blob_sha": "d9374d3e33e3703effdb3b87a088f16bc798a953",
-    "conclusion": "connector_recomputation_pass",
+    "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "c72193a6d03ac1f27db2f68d1f6e7b8c962fe395",
+    "conclusion": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS",
     "independent_public_runner": false
   },
+  "activation": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_ACTIVATION_V1.json",
+    "git_blob_sha": "343be0d774f96ed851d668ad29045a12195f12ce",
+    "scheduling_authority": true
+  },
   "supersedes": {
-    "active_pointer_state": "V11_INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "pointer_state": "V11__12_PROVED__26_UNRESOLVED",
     "cut": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V11.json",
-    "cut_git_blob_sha": "452c6f2231fbe93fd54e3299eb54d7103567a08a",
-    "verification": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V11_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "verification_git_blob_sha": "171bd694a56277ae466801d2d260268d43176e91",
-    "reason": "V15_ACTIVATION_IS_NEWER_AND_EXPLICITLY_ACTIVE_FOR_CURRENT_14_24_EPOCH;_POINTER_WAS_STALE_AND_COULD_MISROUTE_WORKERS_TO_12_26_STATE"
+    "reason": "CURRENT_TERMINAL_AUTHORITY_AND_ACTIVE_V14_SCHEDULER_ARE_14_PROVED__24_UNRESOLVED"
   },
   "exact_state": {
     "accepted_families": 5,
@@ -36,29 +34,8 @@
     "root3_touching_count": 9,
     "terminal": false
   },
-  "current_information_positive_action_groups": [
-    "A_SHARED_BUILDKITE_TB4_CHARTOGRAPHY_PREFLIGHT",
-    "B_SELF_SERVICE_AND_ACCOUNT_FACT_SWEEP",
-    "C_HLE_GRADER_RELATION",
-    "D_VALS_FINANCE_AGENT_PREFLIGHT",
-    "E_OWNER_OR_PLATFORM_RESULT_BATCH",
-    "F_SYNTHESIS_COMPARATOR_CAPACITY_OR_STRONGER_PROOF",
-    "G_ROOT3_SCOPE_CERTIFICATE_RACE"
-  ],
-  "dormant_wake_only": [
-    "FINANCE_ACCOUNTING_INDEX_DETERMINISTIC_COMPILER",
-    "COMPOSITION_UPSTREAM_RECEIPT_RECOMPUTE",
-    "FINANCE_DIRECT_ORACLE_HOLD"
-  ],
-  "hard_rules": [
-    "ZERO_INCREMENTAL_SPEND",
-    "NO_TERMINAL_CASE_EXPOSURE",
-    "NO_FRESH_REALITY_AUTHORITY",
-    "NO_DORMANT_NODE_AS_CURRENT_ACTION",
-    "NO_COMPARATOR_CALL_BEFORE_AUTHENTICATED_ZERO_INCREMENTAL_CAPACITY",
-    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING"
-  ],
-  "next": "EXECUTE_ONLY_V15_INFORMATION_POSITIVE_ZERO_REALITY_ACTIONS__RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA_OR_WAKE_EVENT",
+  "current_delta": "V14_CURRENT_14_24__LIVEBENCH_AND_UNKNOWN_DOMAIN_PROMOTED__CURSORBENCH_DORMANT_ROUTE_TRUTH_REPAIR",
+  "next": "EXECUTE_ONLY_CURRENT_INFORMATION_POSITIVE_ZERO_REALITY_GROUPS_A_THROUGH_I__CURSORBENCH_DORMANT_UNTIL_REOPEN_EVENT__NO_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
   "incremental_spend_usd": 0,
@@ -69,5 +46,6 @@
   "scheduling_authority": true,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "hard_nonclaim": "POINTER_REBIND_CHANGES_NO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_TRUTH;IT_ONLY_REMOVES_STALE_V11_CONTROL_PLANE_STATE"
 }
