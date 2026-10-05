@@ -16,6 +16,7 @@ import platform
 import re
 import shlex
 import shutil
+import stat
 import subprocess
 import tempfile
 from dataclasses import dataclass
@@ -54,11 +55,56 @@ def _repo_prefix(repo: Path, raw: str) -> tuple[str,Path]:
     if any(part in {"",".."} for part in rel.parts):
         raise CarrierError("WRITABLE_PREFIX_INVALID")
     resolved=(repo/rel).resolve()
-    if repo!=resolved and repo not in resolved.parents:
+    if resolved==repo:
+        raise CarrierError("WRITABLE_PREFIX_REPO_ROOT_FORBIDDEN")
+    if repo not in resolved.parents:
         raise CarrierError("WRITABLE_PREFIX_ESCAPE")
     if not resolved.is_dir():
         raise CarrierError("WRITABLE_PREFIX_NOT_DIRECTORY:"+raw)
     return rel.as_posix(),resolved
+
+
+def _inside(path: Path, prefix: Path) -> bool:
+    return path==prefix or prefix in path.parents
+
+
+def _preflight_repo_tree(repo: Path, writable_paths: Sequence[Path]) -> None:
+    """Reject host-tree aliases that could defeat mount-path confinement."""
+    for root,dirs,files in os.walk(repo,topdown=True,followlinks=False):
+        base=Path(root)
+
+        if base!=repo and base.is_mount():
+            raise CarrierError(
+                "NESTED_MOUNTPOINT_FORBIDDEN:"
+                +base.relative_to(repo).as_posix()
+            )
+
+        # os.walk lists symlinked directories in dirs but does not traverse them
+        # when followlinks=False. Validate their lstat type explicitly.
+        for name in list(dirs)+list(files):
+            path=base/name
+            st=path.lstat()
+            mode=st.st_mode
+
+            if stat.S_ISDIR(mode) or stat.S_ISLNK(mode):
+                continue
+
+            if not stat.S_ISREG(mode):
+                raise CarrierError(
+                    "SPECIAL_FILE_FORBIDDEN:"
+                    +path.relative_to(repo).as_posix()
+                )
+
+            if any(_inside(path,prefix) for prefix in writable_paths):
+                # A pre-existing hard link in an authorized rw bind can alias
+                # an inode outside the prefix and make the outer ro mount
+                # irrelevant. Reject conservatively even if all aliases happen
+                # to be inside the same authorized prefix.
+                if int(st.st_nlink)!=1:
+                    raise CarrierError(
+                        "WRITABLE_PREFIX_HARDLINK_FORBIDDEN:"
+                        +path.relative_to(repo).as_posix()
+                    )
 
 
 def probe() -> dict:
@@ -107,8 +153,15 @@ def build_unshare_command(
         rel,p=_repo_prefix(repo,raw)
         if rel in seen:
             raise CarrierError("WRITABLE_PREFIX_DUPLICATE:"+rel)
+        for existing_rel,existing_path in prefixes:
+            if _inside(p,existing_path) or _inside(existing_path,p):
+                raise CarrierError(
+                    "WRITABLE_PREFIX_OVERLAP:"+existing_rel+":"+rel
+                )
         seen.add(rel)
         prefixes.append((rel,p))
+
+    _preflight_repo_tree(repo,[p for _,p in prefixes])
 
     env={
         "PATH":"/usr/bin:/bin",
