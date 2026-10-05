@@ -5,9 +5,10 @@ claim that an external invariant receipt is semantically sound; instead it makes
 that receipt, the exact authority grant, and the exact policy bytes load-bearing
 inputs to a deterministic precommit token.
 
-The intended use is behind a zero-ambient-authority launcher: arbitrary child
-code can compute, but no material effect commits unless this verifier returns a
-content-bound permit.
+The wire adapter is intentionally aligned with zero_ambient_authority_launcher_v1:
+the child emits PROJECT_BRAIN_EFFECT_REQUEST_V1:<json>, the launcher parses the
+JSON object, and this verifier is the next parent-side gate. Ordinary stdout has
+no effect authority and an unknown request type fails closed.
 """
 from __future__ import annotations
 
@@ -21,18 +22,16 @@ SCHEMA = "PROJECT_BRAIN_ROOT3_PROOF_CARRYING_EFFECT_V1"
 REQUEST_SCHEMA = "PROJECT_BRAIN_ROOT3_EFFECT_REQUEST_V1"
 POLICY_SCHEMA = "PROJECT_BRAIN_ROOT3_EFFECT_POLICY_V1"
 
-EFFECT_CLASSES = frozenset(
-    {
-        "durable_write",
-        "network_request",
-        "process_exec",
-        "external_tool_call",
-        "state_append",
-        "evidence_append",
-        "final_output",
-    }
-)
-
+WIRE_TYPE_TO_CLASS = {
+    "artifact_commit": "durable_write",
+    "network_request": "network_request",
+    "process_exec": "process_exec",
+    "external_tool_call": "external_tool_call",
+    "state_append": "state_append",
+    "evidence_append": "evidence_append",
+    "final_output": "final_output",
+}
+EFFECT_CLASSES = frozenset(WIRE_TYPE_TO_CLASS.values())
 _COMPOSITION_CLASSES = frozenset({"state_append", "evidence_append", "final_output"})
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
@@ -126,15 +125,25 @@ def _normalize_policy(policy: Mapping[str, Any]) -> dict[str, Any]:
 def _normalize_request(request: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(request, Mapping):
         raise EffectContractError("REQUEST_NOT_OBJECT")
-    if request.get("schema") != REQUEST_SCHEMA:
-        raise EffectContractError("REQUEST_SCHEMA_MISMATCH")
 
-    effect_class = _token(request.get("effect_class"), "REQUEST_EFFECT_CLASS")
-    if effect_class not in EFFECT_CLASSES:
-        raise EffectContractError("REQUEST_UNKNOWN_EFFECT_CLASS")
+    # Launcher-wire objects use type/request_id and do not need to repeat schema.
+    if "type" in request:
+        wire_type = _token(request.get("type"), "REQUEST_TYPE")
+        request_id = _token(request.get("request_id"), "REQUEST_ID")
+        effect_class = WIRE_TYPE_TO_CLASS.get(wire_type)
+        if effect_class is None:
+            raise EffectContractError("REQUEST_UNKNOWN_WIRE_TYPE")
+    else:
+        if request.get("schema") != REQUEST_SCHEMA:
+            raise EffectContractError("REQUEST_SCHEMA_MISMATCH")
+        request_id = _token(request.get("request_id"), "REQUEST_ID")
+        effect_class = _token(request.get("effect_class"), "REQUEST_EFFECT_CLASS")
+        if effect_class not in EFFECT_CLASSES:
+            raise EffectContractError("REQUEST_UNKNOWN_EFFECT_CLASS")
 
     normalized: dict[str, Any] = {
         "schema": REQUEST_SCHEMA,
+        "request_id": request_id,
         "subject": _token(request.get("subject"), "REQUEST_SUBJECT"),
         "authority_epoch": _token(request.get("authority_epoch"), "REQUEST_AUTHORITY_EPOCH"),
         "effect_class": effect_class,
@@ -199,8 +208,8 @@ def verify_effect_request(
     """Return a content-bound precommit permit or fail closed.
 
     Exact tuple matching is intentional. No prefix, wildcard, ambient fallback,
-    implicit inheritance, or "closest rule" behavior exists in this reference
-    contract.
+    implicit inheritance, diagnostic-output interpretation, or closest-rule
+    behavior exists in this reference contract.
     """
 
     try:
@@ -236,6 +245,7 @@ def verify_effect_request(
             "schema": SCHEMA,
             "policy_sha256": policy_digest,
             "request_sha256": request_digest,
+            "request_id": normalized_request["request_id"],
             "authority_epoch": normalized_policy["authority_epoch"],
             "exact_grant_match": True,
             "composition_receipt_required": normalized_request["effect_class"]
@@ -246,12 +256,14 @@ def verify_effect_request(
         return {
             "schema": SCHEMA,
             "status": "PASS_STRUCTURAL_PRECOMMIT",
+            "request_id": normalized_request["request_id"],
             "effect_class": normalized_request["effect_class"],
             "policy_sha256": policy_digest,
             "request_sha256": request_digest,
             "permit_sha256": permit_sha256,
             "exact_grant_match": True,
             "no_wildcard_or_ambient_fallback": True,
+            "auxiliary_output_has_zero_positive_authority": True,
             "composition_receipt_bound": normalized_request["effect_class"]
             in _COMPOSITION_CLASSES,
             "semantic_receipt_byte_verification_still_required": normalized_request[
