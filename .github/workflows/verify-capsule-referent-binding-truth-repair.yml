@@ -7,6 +7,8 @@ on:
     paths:
       - "canonical/runtime/composition_state_capsule_v1.py"
       - "canonical/tests/test_composition_state_capsule_referent_binding_counterexample_v1.py"
+      - "canonical/runtime/composition_state_capsule_referent_binding_v1.py"
+      - "canonical/tests/test_composition_state_capsule_referent_binding_v1.py"
       - "canonical/governance/COMPOSITION_STATE_CAPSULE_REFERENT_BINDING_TRUTH_REPAIR_20261005_V1.json"
       - ".github/workflows/verify-capsule-referent-binding-truth-repair.yml"
   pull_request:
@@ -14,6 +16,8 @@ on:
     paths:
       - "canonical/runtime/composition_state_capsule_v1.py"
       - "canonical/tests/test_composition_state_capsule_referent_binding_counterexample_v1.py"
+      - "canonical/runtime/composition_state_capsule_referent_binding_v1.py"
+      - "canonical/tests/test_composition_state_capsule_referent_binding_v1.py"
       - "canonical/governance/COMPOSITION_STATE_CAPSULE_REFERENT_BINDING_TRUTH_REPAIR_20261005_V1.json"
       - ".github/workflows/verify-capsule-referent-binding-truth-repair.yml"
   workflow_dispatch:
@@ -34,3 +38,5 @@ jobs:
         run: PYTHONPATH=. python -m unittest -v canonical.tests.test_composition_state_capsule_v1
       - name: Reproduce referent-alias counterexamples
         run: PYTHONPATH=. python -m unittest -v canonical.tests.test_composition_state_capsule_referent_binding_counterexample_v1
+      - name: Verify constructive content-bound referent adapter
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_composition_state_capsule_referent_binding_v1
