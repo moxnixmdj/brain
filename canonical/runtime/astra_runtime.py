@@ -4293,9 +4293,23 @@ def _run_model_independent_goal(step, mission, goal):
 
     if composition_guard is not None:
         try:
-            composition_capsule=composition_guard.rebuild_from_trace(
+            rebuilt=composition_guard.rebuild_valid_prefix(
                 actions,composition_contract,composition_initial_facts,trace
             )
+            composition_capsule=rebuilt["capsule"]
+            valid_count=int(rebuilt.get("valid_count") or 0)
+            if valid_count < min(len(trace),len(composition_contract)):
+                rewound_from=len(trace)
+                trace=trace[:valid_count]
+                start_cycle=len(trace)
+                checkpoint["rewind_count"]=int(checkpoint.get("rewind_count") or 0)+1
+                checkpoint["last_rewound_from_action_index"]=rewound_from
+                checkpoint["composition_rewind_reason"]=str(
+                    rebuilt.get("reason") or "COMPOSITION_PREFIX_INVALID"
+                )
+                checkpoint=_write_controller_checkpoint(
+                    checkpoint_path,checkpoint,trace
+                )
         except Exception as exc:
             raise Blocker(
                 "COMPOSITION_STATE_REBUILD_FAILED:"
@@ -4323,7 +4337,18 @@ def _run_model_independent_goal(step, mission, goal):
             elif cycle!=len(composition_contract) or raw_action.get("type")!="finish":
                 raise Blocker("COMPOSITION_STATE_UNDECLARED_ACTION_BYPASS:"+str(cycle))
 
-        action=_resolve_result_refs(dict(raw_action),trace)
+        if composition_guard is not None and composition_row is not None:
+            try:
+                action=composition_guard.resolve_action_from_capsule(
+                    composition_capsule,composition_row,dict(raw_action)
+                )
+            except Exception as exc:
+                raise Blocker(
+                    "COMPOSITION_STATE_READ_FAILED:"
+                    +type(exc).__name__+":"+str(exc)
+                ) from exc
+        else:
+            action=_resolve_result_refs(dict(raw_action),trace)
         typ=action.get("type")
         if typ not in allowed_types:
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:"+str(typ))
@@ -4339,7 +4364,7 @@ def _run_model_independent_goal(step, mission, goal):
         if composition_guard is not None and composition_row is not None:
             try:
                 composition_capsule=composition_guard.append_action_result(
-                    composition_capsule,composition_row,result
+                    composition_capsule,composition_row,action,result
                 )
                 composition_verdict=composition_guard.verify_capsule(
                     composition_capsule
@@ -4391,10 +4416,13 @@ def _run_model_independent_goal(step, mission, goal):
                 )
                 writej(capsule_path,composition_capsule)
                 composition_summary={
-                  "schema":"PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_RUNTIME_BINDING_V1",
+                  "schema":"PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_RUNTIME_BINDING_V2",
                   "status":"PASS",
                   "scope":"DETERMINISTIC_CAPABILITY_GRAPH_DECLARED_CROSS_CAPABILITY_STATE",
                   "declared_cross_capability_state_no_bypass":True,
+                  "state_reads_are_capsule_sourced":True,
+                  "producer_action_and_execution_evidence_are_content_bound":True,
+                  "resume_prefix_is_capsule_head_checked":True,
                   "semantic_declaration_completeness":"UNVERIFIED",
                   "external_evidence_channel_completeness":"UNVERIFIED",
                   "head_hash":composition_capsule.get("head_hash"),
@@ -4957,9 +4985,9 @@ def _load_capability_planner():
     return module
 
 def _load_composition_state_capsule_guard():
-    path=pathlib.Path(__file__).resolve().with_name("composition_state_capsule_guard_v1.py")
+    path=pathlib.Path(__file__).resolve().with_name("composition_state_capsule_guard_v2.py")
     spec=importlib.util.spec_from_file_location(
-        "project_brain_composition_state_capsule_guard",path
+        "project_brain_composition_state_capsule_guard_v2",path
     )
     if spec is None or spec.loader is None:
         raise Blocker("COMPOSITION_STATE_CAPSULE_GUARD_LOAD_FAILED")
