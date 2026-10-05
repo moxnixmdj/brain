@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_MATERIAL_ORDER_MONOTONICITY_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__SCHEDULING_PREMISE_REDUCTION__MATERIAL_ORDER_AND_MONOTONICITY_PROVED__OUTCOME_MASS_AND_COUPLING_OPEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_MATERIAL_ORDER_MONOTONICITY_CERTIFICATE_V1.json",
+    "git_blob_sha": "649b2e282a92049451f5e0d7015d0f1b0889b569"
+  },
+  "verification": {
+    "path": "canonical/verification/SYNTHESIS_MATERIAL_ORDER_MONOTONICITY_CONNECTOR_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "ee61b4936d09b06ac86113dadb0e1263ad4dc8ce"
+  },
+  "effects": [
+    "DELETE_EXACT_SYNTHESIS_AGGREGATOR_WEIGHT_DISCOVERY_AS_A_PREREQUISITE_FOR_THE_FROZEN_DECLARED_QUALITY_COVERAGE_OBSERVABLES",
+    "MARK_SOUND_MATERIAL_OUTCOME_ORDER_PREMISE_PROVED_FOR_THE_FROZEN_SYNTHESIS_PREDICATE",
+    "MARK_COORDINATEWISE_MONOTONICITY_PREMISE_PROVED_FOR_THE_FROZEN_SYNTHESIS_QUALITY_COVERAGE_OBSERVABLES",
+    "PRESERVE_OUTCOME_MASS_ABSTRACTION_AS_OPEN",
+    "PRESERVE_FULL_MASS_DOMINANCE_PRESERVING_COUPLING_OR_EXACT_COMPARATOR_AS_OPEN",
+    "NO_MATCHED_CASE_EXECUTION"
+  ],
+  "current_minimum_next_actions": [
+    "SEARCH_EXISTING_RECEIPTS_FOR_SCOPE_COMPLETE_BRAIN_AND_OPUS_OUTCOME_MASS_BOUNDS_ON_THE_SEVEN_COORDINATE_VECTOR",
+    "IF_SUCH_MASS_BOUNDS_EXIST_RUN_THE_EXACT_RATIONAL_COUPLING_KERNEL",
+    "IF_NO_OUTCOME_MASS_EVIDENCE_EXISTS_REMAIN_EVENT_OR_COMPARATOR_CAPACITY_BOUND"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
