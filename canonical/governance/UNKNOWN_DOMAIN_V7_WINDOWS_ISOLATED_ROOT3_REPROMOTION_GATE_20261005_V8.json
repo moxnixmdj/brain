@@ -1,0 +1,166 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_WINDOWS_ISOLATED_ROOT3_REPROMOTION_GATE_20261005_V8",
+  "date": "2026-10-05",
+  "status": "FROZEN_PREOUTCOME__PYTHON_GIT_OBJECT_REMATERIALIZATION__DUAL_RUNTIME_FAIL_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "supersedes_external_channel_only": {
+    "paths": [
+      "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_ISOLATED_ROOT3_REPROMOTION_GATE_20261005_V5.json",
+      "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_ISOLATED_ROOT3_REPROMOTION_GATE_20261005_V6.json",
+      "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_ISOLATED_ROOT3_REPROMOTION_GATE_20261005_V7.json"
+    ],
+    "falsifier_path": "canonical/verification/UNKNOWN_DOMAIN_V7_WINDOWS_V7_POWERSHELL_PARSER_FALSIFICATION_20261005_V1.json",
+    "falsifier_git_blob_sha": "04fe1cc81176b84617bafd40e8a792eb189c305c",
+    "reason": "V5_ABORTED_ON_POWERSHELL_PARSE_BEFORE_NORMALIZATION__V7_RETAINED_THE_SAME_COLON_AFTER_VARIABLE_PARSE_BUG_IN_ITS_NORMALIZATION_BLOCK__V8_MOVES_ALL_LOAD_BEARING_GIT_OBJECT_REMATERIALIZATION_AND_RAW_BLOB_HASHING_INTO_PYTHON_WITHOUT_POWERSHELL_VARIABLE_INTERPOLATION"
+  },
+  "current_authority": {
+    "predicate_state": "EXTERNAL_BLOCKED",
+    "proved_atomic": 12,
+    "unresolved_atomic": 26,
+    "family_state": "OPEN"
+  },
+  "freeze_timing": {
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "staging_branch": "stage/unknown-domain-v7-reachable-windows-v7-20261005-sol",
+    "pretrigger_head_sha": "9bc1a9f29c7a17c1665b260f7505ffd916351131",
+    "execution_branch": "verify/unknown-domain-v7-reachable-windows-v7-20261005-sol",
+    "execution_branch_created_before_freeze": false,
+    "trigger_created_before_freeze": false,
+    "execution_outcome_observed": false,
+    "rule": "NO_SUBJECT_THRESHOLD_RECEIPT_SCHEMA_REQUIRED_ATTACK_OR_PROMOTION_CONDITION_MAY_CHANGE_AFTER_EXECUTION_BRANCH_CREATION_OR_TRIGGER"
+  },
+  "candidate_authority": {
+    "generator_v5_blob": "0faa62fce4bc2f2a99c173b0a10a32d5e1c6a244",
+    "tests_blob": "1961cff0013ff9f17feca981409d89d01ecf6769",
+    "universal_proof_blob": "2da564d27a318a99713165208126aaaf36ebc924",
+    "candidate_v1_blob": "a2a77269a8175ce315b466035049da0f761b8734",
+    "candidate_v2_blob": "4470716f95a559a700e461262df909ae19a41651",
+    "candidate_v3_blob": "8df7f13455b710623806a8219174b397a2c3c442",
+    "generator_v1_blob": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "generator_v2_blob": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "generator_v4_blob": "e52858b9fef2d795f72b45cd3ae82ad04344aa91",
+    "scorer_blob": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "harness_blob": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "proof_status_required": "PASS__UNIVERSAL_TOTAL_STRING_STRUCTURAL_ID_AND_EXACT_FLOAT_BOUND_EVALUATOR",
+    "proof_domain": "EXACT_REACHABLE_FROZEN_PRODUCTION_LAUNCHER_BUILTIN_STR_X_BUILTIN_BYTES"
+  },
+  "reachable_domain_binding": {
+    "launcher_blob": "7f05674904a4b3223cb26993a1e2e4b0bac8a0e7",
+    "launcher_workflow_blob": "990b4fe712ca509f3e01c8e632c75416a3cd0b98",
+    "exact_reachable_types": {
+      "beacon": "EXACT_BUILTIN_STR",
+      "evaluator_secret": "EXACT_BUILTIN_BYTES_LENGTH_32"
+    },
+    "hard_nonclaim": "HISTORICAL_LAUNCHER_IS_TYPE_DOMAIN_EVIDENCE_ONLY__NOT_REPAIRED_V7_RUNTIME_ACTIVATION_EVIDENCE"
+  },
+  "independent_windows_contract": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "staging_head_sha": "9bc1a9f29c7a17c1665b260f7505ffd916351131",
+    "execution_branch": "verify/unknown-domain-v7-reachable-windows-v7-20261005-sol",
+    "workflow_path": ".github/workflows/verify-unknown-domain-v7-reachable-windows-v7.yml",
+    "workflow_blob": "92f15f8962a74f53e00dfed29768612359d09227",
+    "verifier_path": "verification/unknown_domain_v7_reachable_domain_independent_v3.py",
+    "verifier_blob": "d25d0c4f468bf058675d43b2e1a2e68960e32f5f",
+    "trigger_path": "TRIGGER_UNKNOWN_DOMAIN_V7_WINDOWS_V7",
+    "trigger_content": "trigger exact V7 Windows V8 exact-object verification after canonical gate freeze\n",
+    "trigger_git_blob_sha": "d6afdad275c6a22dbff608d83bbcd5674f7c0590",
+    "trigger_rule": "EXECUTION_HEAD_MUST_BE_A_DIRECT_CHILD_OF_FROZEN_STAGING_HEAD_AND_THE_ONLY_TREE_CHANGE_MUST_BE_THE_TRIGGER_MARKER_BLOB",
+    "event_required": "push",
+    "runner_required": "windows-latest",
+    "required_python_versions_in_same_job": [
+      "3.12.10",
+      "3.13"
+    ],
+    "pytest_version_required": "8.4.2",
+    "exact_object_materialization": {
+      "mechanism": "PYTHON_SUBPROCESS_GIT_CAT_FILE_BLOB_HEAD_PATH_THEN_PATH_WRITE_BYTES",
+      "identities_proven_twice": [
+        "HASH_GIT_CAT_FILE_BYTES_AS_GIT_BLOB",
+        "HASH_REMATERIALIZED_PATH_READ_BYTES_AS_GIT_BLOB"
+      ],
+      "expected_exact_files": 14,
+      "shell_variable_interpolation_load_bearing": false
+    },
+    "per_runtime_fail_closed_requirements": [
+      "DELETE_BASE_RECEIPT_TARGET_RECEIPT_AND_PASS_MARKER_BEFORE_RUNTIME",
+      "CHECK_NATIVE_EXIT_IMMEDIATELY_AFTER_VERSION_PYTEST_INSTALL_VERIFIER_REGRESSION_AND_RECEIPT_VALIDATION",
+      "REQUIRE_FRESH_BASE_RECEIPT_AFTER_VERIFIER",
+      "REQUIRE_EXACT_SCHEMA_STATUS_54_CASES_ZERO_REALITY_AND_ZERO_CREDIT",
+      "CREATE_RUNTIME_PASS_MARKER_ONLY_AFTER_ALL_CHECKS"
+    ],
+    "expected_receipt_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_REACHABLE_DOMAIN_INDEPENDENT_VERIFICATION_V1",
+    "expected_receipt_status": "PASS__CONTENT_BOUND_FROZEN_LAUNCHER_REACHABLE_TYPE_DOMAIN__CLASS_SPOOF_REJECTED__54_NONPRODUCTION_CASES__ZERO_TERMINAL_REALITY",
+    "required_artifacts": [
+      "unknown_domain_v7_reachable_domain_receipt_py312.json",
+      "unknown_domain_v7_reachable_domain_receipt_py313.json"
+    ],
+    "required_properties": [
+      "EXECUTION_HEAD_IS_EXACT_SINGLE_MARKER_CHILD_OF_FROZEN_STAGING_HEAD",
+      "SINGLE_WINDOWS_JOB_SUCCEEDS",
+      "ALL_14_BOUND_EXECUTABLE_AND_EVIDENCE_FILES_ARE_REMATERIALIZED_FROM_EXACT_GIT_OBJECT_BYTES",
+      "PYTHON_3_12_10_AND_3_13_BOTH_EXECUTE_WITH_FRESH_ISOLATED_RECEIPTS",
+      "PYTEST_8_4_2_AND_EXACT_V5_REGRESSION_SUITE_PASS_ON_BOTH_RUNTIMES",
+      "BOUND_UNIVERSAL_PROOF_EXECUTES_UNCHANGED_AND_RETURNS_REQUIRED_STATUS_ON_BOTH_RUNTIMES",
+      "CAPTURED_FROZEN_LAUNCHER_BOUNDARY_IS_EXACT_STR_X_BYTES32",
+      "FAKE_CLASS_PROXIES_AND_REAL_SUBCLASS_WIDENING_ARE_REJECTED",
+      "ALL_2048_SURROGATES_AND_FORCED_TOKEN_COLLISION_ARE_RECHECKED",
+      "54_NONPRODUCTION_EXACT_SCORER_CASES_PASS_ON_EACH_RUNTIME",
+      "BOTH_RECEIPTS_MATCH_SCHEMA_STATUS_54_CASES_ZERO_REALITY_AND_ZERO_CREDIT"
+    ]
+  },
+  "frozen_semantics": {
+    "protocol_blob": "fd586455d582c38c7062ffe735f86cb9f2e803ab",
+    "evaluator_blob": "52090daf78d12020af48c1b6ffaea056d9029e1b",
+    "semantic_bridge_audit_blob": "d2149624692c95c0b0a7d1e00902ab4ec4281f65",
+    "all_eight_protocol_clauses_required": true,
+    "rule": "VERIFICATION_TRANSPORT_ONLY_MAY_CHANGE__SUBJECT_EVALUATOR_PROTOCOL_AND_ACCEPTANCE_THRESHOLDS_ARE_FROZEN"
+  },
+  "promotion_predicate": {
+    "all_required": [
+      "ALL_V8_EXECUTION_BINDINGS_AND_EXACT_OBJECT_MATERIALIZATION_CHECKS_MATCH",
+      "WINDOWS_JOB_SUCCEEDS_WITH_BOTH_REQUIRED_PYTHON_RUNTIMES",
+      "BOTH_FRESH_RECEIPTS_AND_ALL_REQUIRED_ATTACKS_PASS",
+      "UNIVERSAL_PROOF_STATUS_MATCHES_ON_BOTH_RUNTIMES",
+      "FROZEN_PROTOCOL_EVALUATOR_AND_SEMANTIC_BRIDGE_MATCH",
+      "ZERO_PRODUCTION_OR_TERMINAL_CASES_CONSUMED"
+    ],
+    "on_all_true": {
+      "predicate_state": "PROVED",
+      "proved_predicate_count_transition": "12_TO_13",
+      "unresolved_predicate_count_transition": "26_TO_25",
+      "root3_only_predicate_removed": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0,
+      "family_remains_open_on": "MYSTERYMECHANISM_GE_49_55"
+    },
+    "on_any_false_missing_hash_mismatch_or_new_counterexample": {
+      "predicate_state": "EXTERNAL_BLOCKED",
+      "proved_predicate_count_delta": 0,
+      "unresolved_predicate_count_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
+    }
+  },
+  "hard_rules": [
+    "V5_V6_V7_CHANNELS_CANNOT_AUTHORIZE_PROMOTION",
+    "NO_POST_OUTCOME_RELAXATION",
+    "NO_SELF_PROMOTION_FROM_BRANCH_TESTS",
+    "ANY_NEW_COUNTEREXAMPLE_FAILS_CLOSED",
+    "NO_MYSTERYMECHANISM_OR_FAMILY_CAPABILITY_OWNERSHIP_CREDIT",
+    "NO_RUNTIME_ACTIVATION_CLAIM_FROM_TYPE_DOMAIN_EVIDENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
