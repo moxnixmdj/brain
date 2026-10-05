@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_ASSERTION_REGISTRY_BRIDGE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_EXACT_SOURCE_RECOMPUTATION_PASS__PRIVATE_REGISTRY_SUBSET_NOT_PROVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/AUTOMATIONBENCH_PRIVATE_ASSERTION_REGISTRY_BRIDGE_V1.json"
+  },
+  "upstream": {
+    "repository": "zapier/AutomationBench",
+    "commit": "4a8e1061254004d9dac807054eed33fad7d1ff14",
+    "files": {
+      "README.md": "680d7006e1a05e94c6ce208e91b13dd821d1554f",
+      "automationbench/rubric/__init__.py": "70d3287403a620063d9a8d01c3aeb6ae954ae0ba",
+      "automationbench/rubric/registry.py": "e9e8550ada14d26e861ec3f083ec417ad4b1e7ab"
+    }
+  },
+  "recomputation": {
+    "private_set_separate_held_out": true,
+    "private_set_purposely_harder": true,
+    "owner_wording_assertion_relation": "SIMILAR_ASSERTION_FRAMEWORK",
+    "owner_claim_exact_registry_identity": false,
+    "owner_claim_private_registry_subset_public": false,
+    "local_scores_may_not_match_official_one_to_one": true,
+    "public_evaluation_is_assertion_based_final_state": true,
+    "public_binary_pass_requires_partial_credit_exactly_one": true,
+    "public_unknown_assertion_type_raises": true,
+    "consequence": "PUBLIC_ASSERTION_REGISTRY_UNIVERSALITY_ALONE_DOES_NOT_LOGICALLY_IMPLY_PRIVATE_AUTOMATIONBENCH_GE_40_WITHOUT_AN_EXACT_OR_SUPERSET_ASSERTION_SEMANTICS_BRIDGE"
+  },
+  "minimum_missing_premises": [
+    "PRIVATE_ASSERTION_TYPE_SET_SUBSET_OF_OR_EQUIVALENT_TO_FROZEN_PUBLIC_REGISTRY",
+    "PRIVATE_PARAMETER_AND_SCORING_SEMANTICS_MATCH_OR_ARE_CONSERVATIVELY_COVERED",
+    "BRAIN_POLICY_OR_STATE_CONSTRUCTOR_UNIVERSALLY_SATISFIES_ALL_PRIVATE_ASSERTION_COMPOSITIONS_UNDER_EXACT_PRIVATE_TOOL_ENVIRONMENT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PRIVATE_REGISTRY_IS_DIFFERENT",
+    "NO_CLAIM_PRIVATE_REGISTRY_IS_NOT_A_SUBSET",
+    "NO_AUTOMATIONBENCH_THRESHOLD_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
