@@ -48,10 +48,39 @@ class Tests(unittest.TestCase):
         v = guard.validate_plan(p["actions"], p["composition_contract"], p["planning"]["initial_facts"])
         self.assertEqual(v["status"], "PASS")
         cap = guard.seed_capsule(p["planning"]["initial_facts"])
-        cap = guard.append_action_result(cap, p["composition_contract"][0], {"path": "canonical/runtime/EXECUTOR_POLICY_V1.json"})
+        cap = guard.append_action_result(
+            cap,
+            p["composition_contract"][0],
+            p["actions"][0],
+            {"path": "canonical/runtime/EXECUTOR_POLICY_V1.json"},
+        )
         guard.assert_action_ready(cap, p["composition_contract"][1])
-        cap = guard.append_action_result(cap, p["composition_contract"][1], {"verified": True})
-        self.assertEqual(guard.verify_capsule(cap)["status"], "PASS")
+        cap = guard.append_action_result(
+            cap,
+            p["composition_contract"][1],
+            p["actions"][1],
+            {"verified": True},
+        )
+        verdict = guard.verify_capsule(cap)
+        self.assertEqual(verdict["status"], "PASS")
+        self.assertTrue(verdict["action_is_content_bound"])
+        self.assertTrue(verdict["producer_is_content_bound"])
+        self.assertTrue(verdict["output_lineage_binds_action_and_producer"])
+
+    def test_executed_action_descriptor_is_load_bearing(self):
+        p = planner.plan_actions(fixture())
+        cap = guard.seed_capsule(p["planning"]["initial_facts"])
+        bad_action = copy.deepcopy(p["actions"][0])
+        bad_action["capability_id"] = "different"
+        with self.assertRaisesRegex(
+            guard.CompositionGuardError, "ACTION_CAPABILITY_ID_MISMATCH"
+        ):
+            guard.append_action_result(
+                cap,
+                p["composition_contract"][0],
+                bad_action,
+                {"path": "canonical/runtime/EXECUTOR_POLICY_V1.json"},
+            )
 
     def test_provider_binding_drift_fails_closed(self):
         p = planner.plan_actions(fixture())
