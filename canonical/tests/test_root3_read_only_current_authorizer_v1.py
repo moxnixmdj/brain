@@ -22,7 +22,7 @@ READ_ONLY_CALLSITE = {
 
 DENIED_CALLSITE = {
     "module_path": "canonical/runtime/astra_runtime.py",
-    "lineno": 262,
+    "lineno": 325,
     "process_api": "subprocess.run",
     "function": "run_shell",
     "effect_class": "ARBITRARY_COMMAND_EXECUTION",
