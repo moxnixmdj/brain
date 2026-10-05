@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3_VL4B_GGUF_Q4_SOURCE_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PUBLIC_SOURCE_METADATA_PASS__ARTIFACT_IDENTITY_ONLY__ZERO_CREDIT",
+  "subject_path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_GGUF_Q4_EXECUTION_SUBJECT_V1.json",
+  "verified": {
+    "repository": "Qwen/Qwen3-VL-4B-Instruct-GGUF",
+    "revision": "594171a9fa4ab2a90f017aa69a323b270cd8d24f",
+    "model_name": "Qwen3VL-4B-Instruct-Q4_K_M.gguf",
+    "model_bytes": 2497281696,
+    "model_sha256": "ce6a2eac86eeb49ffacb19d580ddd26c0d42cd0a0386b311158a5bf4a6996ffe",
+    "projector_name": "mmproj-Qwen3VL-4B-Instruct-Q8_0.gguf",
+    "projector_sha256": "30ba2c7dd3127a4561b6cba9d13d0f711c91bdb38742e2f56d73c8cb596bd06d",
+    "official_qwen_repository": true,
+    "multimodal_subject": true
+  },
+  "effect": [
+    "SELF_QUANTIZATION_NOT_REQUIRED_FOR_FIRST_FIT_PREFLIGHT",
+    "COMPACT_UPSTREAM_SUBJECT_AVAILABLE_FOR_SYNTHETIC_MULTIMODAL_SMOKE"
+  ],
+  "nonclaims": [
+    "NO_RUNTIME_FIT",
+    "NO_PERFORMANCE_EQUIVALENCE",
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}
