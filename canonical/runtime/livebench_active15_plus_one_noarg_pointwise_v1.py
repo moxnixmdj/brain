@@ -198,6 +198,45 @@ def solve_contracts(contracts: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         }
 
     active_contracts = [c for c in contracts if str(c.get("instruction_id")) in u.ACTIVE15]
+
+    # Active15+1 includes the valid degenerate case where the Active15 subset is
+    # empty. The Active15 solver correctly rejects an empty contract list, so
+    # handle these three singleton no-arg extras directly instead of delegating
+    # an impossible empty subproblem.
+    if not active_contracts:
+        if extra == NO_COMMA:
+            response = "alpha"
+            proof = "SINGLETON_NO_COMMA__COMMA_FREE_WITNESS"
+        elif extra in {EN_CAP, EN_LOW}:
+            carrier = choose_forbidden_safe_carrier(())
+            response = carrier.upper() if extra == EN_CAP else carrier.lower()
+            proof = (
+                "SINGLETON_ENGLISH_CASE__PINNED_ENGLISH_CARRIER_WITH_GLOBAL_"
+                "CASE_NORMALIZATION__NO_ACTIVE15_SUBPROBLEM_REQUIRED"
+            )
+        else:
+            raise AssertionError("UNREACHABLE_SINGLETON_EXTRA")
+        return {
+            "schema": SCHEMA,
+            "status": "CANDIDATE_POINTWISE_OPTIMAL_ACTIVE15_PLUS_ONE",
+            "extra_family": extra,
+            "response": response,
+            "instruction_ids": sorted(ids),
+            "sacrificed_instruction_ids": [],
+            "instruction_count": 1,
+            "theoretical_max_pass_count": 1,
+            "theoretical_pointwise_optimum_strict_score": 1.0,
+            "proof_shape": proof,
+            "carrier_word_count_if_case_route": (
+                CASE_CARRIER_WORD_COUNT if extra in {EN_CAP, EN_LOW} else 0
+            ),
+            "terminal_rows_used": False,
+            "hidden_kwargs_used": False,
+            "terminal_frequencies_used": False,
+            "target_scores_used": False,
+            "acceptance_credit": False,
+        }
+
     solved = active.solve_contracts(active_contracts)
     if solved.get("status") != "CANDIDATE_POINTWISE_OPTIMAL":
         return {
