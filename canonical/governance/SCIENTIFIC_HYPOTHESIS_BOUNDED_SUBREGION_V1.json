@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_BOUNDED_SUBREGION_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__ZERO_LEARNED_BOUNDED_SUBREGION__OPEN_ENDED_SEMANTIC_HYPOTHESIS_PROPOSAL_REMAINS_OPEN__ZERO_CREDIT",
+  "status": "CANDIDATE__EXACT_RUNTIME_TEST_BLOB_BOUND__ZERO_LEARNED_BOUNDED_SUBREGION__OPEN_ENDED_SEMANTIC_HYPOTHESIS_PROPOSAL_REMAINS_OPEN__ZERO_CREDIT",
   "target_behavior": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
   "objective": "Prove the maximum deterministic subregion before considering any learned scientific-hypothesis generator.",
   "implementation": {
@@ -44,5 +44,9 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
-}\n
+  "independent_verification_required": true,
+  "exact_bound_components": {
+    "canonical/runtime/scientific_hypothesis_bounded_v1.py": "5f7fd250bfd6da0b17ae3ca063b9def63b6b1a0e",
+    "canonical/tests/test_scientific_hypothesis_bounded_v1.py": "36011ddc87f9cfa6341ae5930fdf193e14f98d18"
+  }
+}
