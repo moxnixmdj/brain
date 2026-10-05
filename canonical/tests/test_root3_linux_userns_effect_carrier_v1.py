@@ -38,6 +38,20 @@ def test_repo_root_cannot_be_writable_prefix(tmp_path):
         )
 
 
+def test_symlinked_writable_prefix_is_rejected(tmp_path):
+    repo=tmp_path/"repo"; repo.mkdir()
+    (repo/"realout").mkdir()
+    (repo/"outlink").symlink_to("realout",target_is_directory=True)
+    root=tmp_path/"root"; root.mkdir()
+    with pytest.raises(CarrierError,match="WRITABLE_PREFIX_SYMLINK_COMPONENT_FORBIDDEN"):
+        build_unshare_command(
+            repo_root=repo,
+            sandbox_root=root,
+            writable_repo_prefixes=["outlink"],
+            argv=["/usr/bin/true"],
+        )
+
+
 def test_overlapping_writable_prefixes_fail_closed(tmp_path):
     repo=tmp_path/"repo"; repo.mkdir()
     (repo/"out").mkdir(); (repo/"out"/"nested").mkdir()
