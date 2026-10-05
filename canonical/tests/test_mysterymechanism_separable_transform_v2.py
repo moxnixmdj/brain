@@ -117,3 +117,30 @@ def test_nonfinite_input_still_fails_closed():
             bounds={"x": [1.0, 2.0], "z": [1.0, 2.0]},
             target="out",
         )
+
+
+def test_fail_closed_solver_exposes_only_prospectively_validated_route():
+    fit_rows = _six_fit_rows()
+    point = {"x": 1.4, "z": 1.4}
+    good_rows = fit_rows + [{**point, "out": _law(**point)}]
+    bad_rows = fit_rows + [{**point, "out": _law(**point) + 1000.0}]
+
+    good = sep.solve(
+        good_rows,
+        bounds={"x": [1.0, 2.0], "z": [1.0, 2.0]},
+        target="out",
+    )
+    bad = sep.solve(
+        bad_rows,
+        bounds={"x": [1.0, 2.0], "z": [1.0, 2.0]},
+        target="out",
+    )
+
+    assert good["status"] == "CANDIDATE_READY__PROSPECTIVE_SELECTION_SAFE__UNVERIFIED_PRIVATE_SCORE"
+    assert good["route"] == "SEPARABLE_BILINEAR_PROSPECTIVE_HOLDOUT"
+    assert good["candidate"] is not None
+    assert good["expression"]
+
+    assert bad["status"].startswith("FAIL_CLOSED__")
+    assert bad["candidate"] is None
+    assert bad["expression"] is None
