@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TARGET_DISCOVERY_COMPLETENESS_CERTIFICATE_V1_VERIFICATION",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_CROSS_SOURCE_AND_SYMBOLIC_RECOMPUTATION_PASS__W4_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_VERIFIED__ZERO_ACCEPTANCE_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_TARGET_DISCOVERY_COMPLETENESS_CERTIFICATE_V1.json",
+    "git_blob_sha": "7e9c93c13836a3735bdbdad61c1038252d555ae2"
+  },
+  "verification_modes": [
+    "FRESH_FIRST_PARTY_PUBLIC_SOURCE_CROSS_CHECK",
+    "CANONICAL_BLOB_RECOMPUTATION",
+    "WOLFRAM_LANGUAGE_SET_UNION_RECOMPUTATION",
+    "WOLFRAM_SAT_COUNTEREXAMPLE_SEARCH"
+  ],
+  "semantic_checks": {
+    "official_modality_boundary": {
+      "result": "PASS",
+      "source": "https://www.anthropic.com/transparency",
+      "observed": "Claude Opus 5.5 understands text including voice dictation and image inputs and outputs text including text-based artifacts and diagrams.",
+      "consequence": "NO_SEPARATE_AUDIO_INPUT_CAUSAL_CHANNEL_IS_REQUIRED_FOR_VOICE_DICTATION; IT_IS_REPORTED_AS_TEXT_INPUT. NO_NATIVE_AUDIO_OR_VIDEO_OUTPUT_MODALITY_IS_REPORTED_FOR_OPUS55_IN_THE_BOUND_MODEL_REPORT."
+    },
+    "platform_model_io_boundary": {
+      "result": "PASS",
+      "source": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed": "Input to output is text and images to text; Opus 5.5 is the active latest model.",
+      "consequence": "INDEPENDENT_FIRST_PARTY_DEVELOPER_DOCUMENTATION_MATCHES_THE_TRANSPARENCY_HUB_MODEL_SIDE_MODALITY_BOUNDARY."
+    },
+    "tool_interaction_boundary": {
+      "result": "PASS",
+      "source": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works",
+      "observed": "Claude emits structured tool-use requests; client or server executes the operation and returns results; user-defined, Anthropic-schema and server tools share the same model-side interaction pattern.",
+      "consequence": "ARBITRARY_TOOL_SEMANTICS_DO_NOT_ADD_A_NEW_MODEL_SIDE_ACTUATOR_CLASS; THEY_REFINE_THE_EXTERNAL_ACTION_ROLE_THROUGH_A_TYPED_REQUEST_RESULT_INTERFACE."
+    },
+    "message_block_boundary": {
+      "result": "PASS",
+      "source": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls",
+      "observed": "Conversation content uses text, image, tool_use and tool_result blocks and client tool calls carry structured name, id and input.",
+      "consequence": "THE_DOCUMENTED_MODEL_SIDE_TRACE_ALPHABET_IS_COMPATIBLE_WITH_THE_BOUND_FIXED_INTERFACE_NORMAL_FORM."
+    },
+    "computer_and_browser_are_tool_refinements": {
+      "result": "PASS",
+      "sources": [
+        "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
+        "https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool"
+      ],
+      "observed": "Desktop screenshot, mouse and keyboard control and live browser reading/action are exposed through tool-use toolsets.",
+      "consequence": "COMPUTER_AND_BROWSER_USE_DO_NOT_REQUIRE_A_NEW_MODEL_SIDE_OUTPUT_CHANNEL_OUTSIDE_STRUCTURED_TOOL_ACTION."
+    },
+    "authorized_profile_union_preserves_interface_family_count": {
+      "result": "PASS",
+      "canonical_path": "canonical/governance/OPUS55_TARGET_PROFILE_UNION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "b8cfc03751ef1df11df5f94516e8fe6a1fc5a4c8",
+      "recomputed": "PROFILE_SPECIFIC_DIFFERENCES_AFFECT_ACCESS_SAFEGUARDS_ROUTING_THINKING_OR_HARNESS_BINDING; THE_BOUNDARY_EXPLICITLY_STATES_THE_EXISTING_19_FAMILY_COUNT_IS_NOT_CHANGED."
+    },
+    "security_dimension_is_cross_cutting_not_new_primitive": {
+      "result": "PASS",
+      "canonical_path": "canonical/governance/OPUS55_SECURITY_RELIABILITY_CROSS_CUTTING_ACCEPTANCE_DIMENSION_20261005_V1.json",
+      "git_blob_sha": "6b3a71f506d7656e152c87f3cbbdc61f1991102b",
+      "recomputed": "SECURITY_RELIABILITY_MAPS_TO_EXISTING_SCOPE_JUDGMENT_EXTERNAL_ACTION_SELF_VERIFICATION_AND_COMPOSITION_ROLES; NEW_PRIMITIVE_FAMILY_REQUIRED_IS_FALSE."
+    }
+  },
+  "structural_checks": {
+    "functional_role_family_cover": {
+      "result": "PASS",
+      "source_path": "canonical/governance/OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V1.json",
+      "source_git_blob_sha": "62c0e207ce935a02611700a69e0917f938792b11",
+      "wolfram_recomputed": {
+        "role_count": 10,
+        "primitive_role_count": 9,
+        "all_roles_have_nonempty_family_cover": true,
+        "all_primitive_roles_have_nonempty_family_cover": true,
+        "distinct_family_union_count": 19
+      }
+    },
+    "target_superset_logic": {
+      "result": "PASS",
+      "wolfram_sat_universe_size": 12,
+      "counterexample_exists": false,
+      "checked_relation": "U_SUBSET_D_AND_DOMINANCE_ON_D_IMPLIES_NO_U_CELL_WITHOUT_DOMINANCE"
+    },
+    "composition_induction_skeleton": {
+      "result": "PASS",
+      "wolfram_sat_trace_length": 16,
+      "counterexample_exists": false,
+      "checked_relation": "GOOD_0_AND_EACH_GOOD_i_IMPLIES_GOOD_i_PLUS_1_ENTAILS_GOOD_16"
+    },
+    "live_compiler_supports_w4": {
+      "result": "PASS",
+      "compiler_path": "canonical/runtime/terminal_frontier_compiler_v2.py",
+      "compiler_git_blob_sha": "2df4877fe83b5e2420cb60c7aa2ab43864011823",
+      "test_path": "canonical/tests/test_terminal_frontier_compiler_v2.py",
+      "test_git_blob_sha": "f17b3918f587d0641d4655b400fbdb7f7dfad113",
+      "recomputed": "W4_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_IS_IN_THE_ACCEPTED_WITNESS_CLASS_SET_AND_HAS_AN_EXPLICIT_POSITIVE_REGRESSION_ASSERTION."
+    }
+  },
+  "adversarial_falsification": {
+    "searched_counterexample_classes": [
+      "A_NATIVE_OPUS55_MODEL_SIDE_MODALITY_OUTSIDE_TEXT_IMAGE_INPUT_OR_TEXT_OUTPUT",
+      "AN_EXTERNAL_ACTION_CHANNEL_NOT_MEDIATED_BY_STRUCTURED_TOOL_USE_OR_APPLICATION_EXECUTION",
+      "A_SECURITY_RELIABILITY_BEHAVIOR_REQUIRING_A_NEW_PRIMITIVE_CAUSAL_ROLE",
+      "AN_AUTHORIZED_PROFILE_THAT_CHANGES_THE_TOP_LEVEL_CAUSAL_ROLE_UNIVERSE",
+      "A_B0_THROUGH_B9_ROLE_WITH_NO_EXISTING_FAMILY_COVER"
+    ],
+    "constructive_counterexample_found": false,
+    "reopen_rule": "ANY_FUTURE_CONSTRUCTIVE_COUNTEREXAMPLE_OR_OFFICIAL_INTERFACE_CHANGE_INVALIDATES_THIS_VERIFICATION_AND_REOPENS_TARGET_DISCOVERY."
+  },
+  "verdict": {
+    "target_discovery_complete_for_frozen_authorized_profile_union": true,
+    "witness_class": "W4_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE",
+    "performance_acceptance_complete": false,
+    "family_acceptance_complete": false,
+    "ownership_complete": false,
+    "terminal_finality_from_this_receipt_alone": false
+  },
+  "errors": [],
+  "hard_nonclaims": [
+    "NO_TARGET_OWNER_EXHAUSTIVE_USE_CASE_ATTESTATION_CLAIM",
+    "NO_CLAIM_PRIVATE_UNPUBLISHED_NONOFFICIAL_ACCESS_PROFILES_ARE_IN_SCOPE",
+    "NO_CLAIM_INTERFACE_COVERAGE_PROVES_PERFORMANCE",
+    "NO_CLAIM_EXISTING_19_FAMILY_ACCEPTANCE_CONTRACTS_ARE_COMPLETE_OR_PASSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
