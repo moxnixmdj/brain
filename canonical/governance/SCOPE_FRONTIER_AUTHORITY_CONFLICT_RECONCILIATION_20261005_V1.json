@@ -1,0 +1,141 @@
+{
+  "schema": "PROJECT_BRAIN_SCOPE_FRONTIER_AUTHORITY_CONFLICT_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH_REPAIR__FIVE_SCOPE_OPEN__TWO_SCOPE_CLOSED_PERFORMANCE_OPEN__FINITE_RECEIPTS_NOT_UNIVERSAL_SCOPE__ZERO_CREDIT",
+  "objective": "Resolve the concurrent five-leaf and seven-leaf scope scheduling activations without weakening any acceptance obligation. Preserve finite Terminal V3 receipts as valid behavior evidence, but do not let finite receipts overwrite independently verified scope-completeness authorities or imply universal scope where none is proved.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authorities": {
+    "five_leaf_truth_repair_activation": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2_ACTIVATION_V1.json",
+      "git_blob_sha": "f348efc0129e0d464c6fd47d66e316e0a90287b3",
+      "role": "MORE_SPECIFIC_CURRENT_CLASSIFICATION_WITH_INDEPENDENT_SCOPE_AUTHORITIES"
+    },
+    "five_leaf_truth_repair_subject": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2.json",
+      "git_blob_sha": "629fb370b6da7296685e9e79c2e2a76c25fd9106"
+    },
+    "seven_leaf_receipt_saturation_activation": {
+      "path": "canonical/governance/SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "c035b6e5c0e88513e49bfbffb9f1fcb5ac686aac",
+      "role": "VALID_RECEIPT_SATURATION_AUTHORITY__OVERBROAD_ONLY_WHERE_IT_LABELS_ALREADY_CERTIFIED_SCOPE_AS_OPEN"
+    },
+    "seven_leaf_receipt_saturation_verification": {
+      "path": "canonical/verification/SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "643c7ed80ca9fba9ed989a60d769e91d16730a49"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+      "facts": [
+        "verified=true",
+        "independent=true",
+        "coverage_complete=true",
+        "coverage_relation=EXACT_UNION",
+        "scope_relation=PROVEN_STRONGER"
+      ]
+    },
+    "structured_method_scope_audit": {
+      "path": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
+      "git_blob_sha": "1db04e3c2c523dfe5f2ebe719b7c63dc9ccd808e",
+      "facts": [
+        "status=SCOPE_CLOSED",
+        "unresolved_scope_dimensions=[]",
+        "scope_gate.verdict=ADMISSIBLE_SUBSTITUTION"
+      ]
+    },
+    "terminal_v3_zero_new_leaf_candidate": {
+      "path": "canonical/governance/FIVE_PUBLIC_BAR_TERMINAL_V3_SCOPE_REUSE_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "f1add5ff2f4b4c461ba0224e684e5eed025d7a38",
+      "role": "CANDIDATE_ONLY__FINITE_RECEIPT_REUSE_VALID__UNIVERSAL_SCOPE_CLOSURE_INFERENCE_NOT_AUTHORIZED"
+    },
+    "terminal_v3_zero_new_leaf_connector": {
+      "path": "canonical/verification/FIVE_PUBLIC_BAR_TERMINAL_V3_SCOPE_REUSE_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "5a84a5374e0363af3d6850e1dcf0b5f6638920d2",
+      "role": "CONNECTED_RECOMPUTATION_NOT_INDEPENDENT_PUBLIC_RUNNER__NO_PROMOTION_AUTHORITY"
+    },
+    "open_world_boundary": {
+      "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "2476ab2d8220994d7858c80409b563e1582c88e6",
+      "theorem": "NO_FINITE_NONEXHAUSTIVE_OBSERVATION_SET_CAN_CERTIFY_A_UNIVERSAL_CLAIM_WITHOUT_AN_ADDITIONAL_COMPLETENESS_PREMISE"
+    },
+    "p3_scope_falsification": {
+      "path": "canonical/governance/SYNTHESIS_P3_TYPED_SCOPE_COUNTEREXAMPLE_PARTITION_20261005_V1.json",
+      "git_blob_sha": "83dc5abb482d2380f5b8431284105ed30ed76d77",
+      "role": "REFUTES_UNIVERSAL_SCOPE_PROOF_FROM_BOUNDED_P3_V3_IMPLEMENTATION_ONLY__DOES_NOT_REVOKE_SEPARATE_SYNTHESIS_SCOPE_CERTIFICATE"
+    }
+  },
+  "reconciliation_theorem": {
+    "premises": [
+      "The seven-leaf receipt-saturation authority establishes that all seven labels have behavior-bound finite Terminal V3 pass evidence and explicitly states finite/portfolio pass does not prove whole-contract scope completeness.",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 has a separate independently verified scope certificate with exact-union coverage and PROVEN_STRONGER relation.",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001 has a separate scope audit with SCOPE_CLOSED, zero unresolved scope dimensions, and ADMISSIBLE_SUBSTITUTION.",
+      "The five-leaf truth repair removes exactly those two independently scope-closed leaves from scope-repair scheduling while preserving their performance obligations.",
+      "The zero-new-leaf Terminal V3 reuse candidate derives its zero-uncovered conclusion from finite passed contract receipts; its connector verification is not an independent public-runner promotion and itself grants zero credit.",
+      "The open-world boundary forbids finite nonexhaustive observations from proving universal completeness absent a separate completeness premise."
+    ],
+    "conclusion": [
+      "For scope-repair scheduling, the sound active registry frontier is exactly five leaves, not seven and not zero.",
+      "The seven-leaf receipt-saturation result remains valid as a receipt inventory, but its blanket statement that all seven are scope-open is superseded for exactly the two leaves with stronger independent scope-completeness authorities.",
+      "The Terminal V3 zero-new-leaf candidate may be reused as finite direct-behavior evidence but may not discharge universal scope completeness for the remaining five leaves.",
+      "P3 v3 falsification does not reopen synthesis scope because the synthesis scope certificate is a separate formal lossless-decomposition authority; it only kills P3-v3-as-universal-implementation-proof."
+    ]
+  },
+  "active_scope_repair_frontier": [
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+  ],
+  "scope_closed_performance_open": [
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+  ],
+  "terminal_v3_receipt_status": {
+    "all_seven_have_finite_behavior_bound_pass_receipts": true,
+    "implication_for_new_mechanism_acquisition": "DO_NOT_ACQUIRE_NEW_MECHANISM_FROM_LABEL_ALONE__FIRST_EXHIBIT_CONSTRUCTIVE_UNCOVERED_SCOPE_CELL",
+    "implication_for_scope_completeness": "NONE_WITHOUT_SEPARATE_SCOPE_COMPLETE_PROOF_OR_EXPLICIT_RESIDUAL_PARTITION"
+  },
+  "precedence": {
+    "scope_repair_scheduling": "THIS_RECONCILIATION_THEN_SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2_ACTIVATION_V1",
+    "receipt_inventory": "SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_ACTIVATION_20261005_V1_REMAINS_VALID",
+    "zero_new_leaf_candidate": "QUARANTINED_FOR_UNIVERSAL_SCOPE_PROMOTION__FINITE_RECEIPTS_REMAIN_ADMISSIBLE_AS_FINITE_EVIDENCE",
+    "performance_acceptance": "UNCHANGED__CURRENT_OPUS55_TERMINAL_PROOF_PROTOCOLS_AND_ROOT2_AUTHORITIES_CONTROL"
+  },
+  "scheduling_delta": {
+    "delete": [
+      "SCOPE_COMPLETENESS_WORK_FOR_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "SCOPE_COMPLETENESS_WORK_FOR_STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "CLAIM_ALL_SEVEN_RECEIPT_SATURATED_LEAVES_ARE_SCOPE_OPEN",
+      "CLAIM_TERMINAL_V3_FINITE_PASS_ALONE_CLOSES_SCOPE_FOR_THE_REMAINING_FIVE",
+      "ATTEMPT_UNIVERSAL_SCOPE_PROOF_FROM_P3_V3"
+    ],
+    "activate": [
+      "WORK_ONLY_THE_FIVE_EXACT_SCOPE_OPEN_LEAVES_FOR_SCOPE_COMPLETENESS_OR_CONSTRUCTIVE_RESIDUAL_PARTITION",
+      "PRESERVE_SYNTHESIS_AND_STRUCTURED_METHOD_PERFORMANCE_ONLY_WORK",
+      "REUSE_TERMINAL_V3_RECEIPTS_TO_AVOID_DUPLICATE_FRESH_RUNS_UNLESS_A_NEW_UNCOVERED_SCOPE_CELL_IS_CONTENT_ADDRESSED",
+      "RECOMPUTE_SCOPE_FRONTIER_AFTER_EACH_INDEPENDENT_SCOPE_DELTA"
+    ]
+  },
+  "hard_rules": [
+    "FINITE_PASS_IS_NOT_UNIVERSAL_SCOPE_COMPLETENESS",
+    "INDEPENDENT_SCOPE_COMPLETE_AUTHORITY_DOMINATES_GENERIC_SCOPE_OPEN_DEFAULT_FOR_THE_SAME_EXACT_BEHAVIOR_ID",
+    "SCOPE_CLOSURE_DOES_NOT_GRANT_PERFORMANCE_ACCEPTANCE",
+    "NO_REINTERPRETATION_OF_HISTORICAL_TERMINAL_RESULTS_AS_NEW_MATCHED_PERFORMANCE_METRICS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
