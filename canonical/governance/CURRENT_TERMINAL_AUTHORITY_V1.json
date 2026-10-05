@@ -2002,7 +2002,18 @@
     "scheduling_authority": true,
     "acceptance_credit_delta": 0,
     "activation_path": "canonical/governance/ROOT2_18_CURRENT_14_24_SCHEDULING_ACTIVATION_V1.json",
-    "verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_RECOMPUTATION_V1.json"
+    "verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_RECOMPUTATION_V1.json",
+    "tb_science_target_freshness_overlay": {
+      "status": "ACTIVE__HARNESS_CONDITIONAL_TARGET_FRESHNESS_RESOLVED__ACCEPTANCE_OPEN",
+      "activation_path": "canonical/governance/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_ACTIVATION_20261005_V1.json",
+      "activation_commit": "ed2ead30b5d8e7a3b475b8b7c9ce62a37ab8ca75",
+      "verification_path": "canonical/verification/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "public_current_route_target_percent": 63.3,
+      "anthropic_release_route_target_percent": 58.7,
+      "rule": "FREEZE_HARNESS_IDENTITY_BEFORE_BRAIN_RESULT__PUBLIC_CURRENT_ROUTE_USES_63_3__58_7_ONLY_FOR_PROVED_IDENTICAL_ANTHROPIC_RELEASE_SETUP__ELSE_MATCHED_SAME_HARNESS_OR_FAIL_CLOSED",
+      "predicate_proved": false,
+      "acceptance_credit_delta": 0
+    }
   },
   "promotion_accounting_invariant": {
     "status": "ACTIVE_FAIL_CLOSED",
