@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHARTREADER_DETECTOR_DECOMPOSITION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__PUBLIC_CODE_SEMANTICS_AND_STATIC_BYTE_BUDGET__ZERO_H100_CREDIT__INDEPENDENT_EXECUTION_STILL_REQUIRED",
+  "subject": {
+    "path": "canonical/governance/H100_CHARTREADER_DETECTOR_DECOMPOSITION_V1.json",
+    "git_blob_sha": "6df7a2003064be3e567bd258b73a1aedcca2e194"
+  },
+  "budget_compiler": {
+    "path": "canonical/runtime/h100_chartreader_detector_budget_v1.py",
+    "git_blob_sha": "0a2753ed0bcd36a4c2fd84efd57175ac602d15fb"
+  },
+  "public_source_blobs": {
+    "zhiqic/ChartReader::README.md": "df3a400e42f2a5ec51b0ad2c6ca2c13b1fa33c3f",
+    "zhiqic/ChartReader::models/KPDetection.py": "34592b62bc2b93ff8b7272d639fa0da00c5a8845",
+    "zhiqic/ChartReader::models/KPGrouping.py": "d5f5716600035404695c19795fe8c513a19f3b19",
+    "zhiqic/ChartReader::models/model_utils.py": "ac77186af5726330310f45e2c1fab9bd8012f297",
+    "zhiqic/ChartReader::models/py_utils/kp.py": "9448735e64d751981c055f1a6badce70e11bd8fc",
+    "zhiqic/ChartReader::models/py_utils/utils.py": "f3277eba04e3ce8886bed287caf8e1ac5bf030e1"
+  },
+  "source_semantic_checks": {
+    "kp_detection_n5": true,
+    "kp_detection_two_stacks": true,
+    "dims_256_256_384_384_384_512": true,
+    "modules_2_2_2_2_2_4": true,
+    "detector_out_dim3": true,
+    "grouping_transformer_layers6": true,
+    "grouping_d_model260": true,
+    "grouping_ff1024": true,
+    "per_stack_detector_outputs_present": true,
+    "detection_loss_consumes_all_stack_heatmaps": true,
+    "detection_loss_consumes_all_stack_regressions": true,
+    "loss_averages_across_stack_heads": true,
+    "t5_base_is_separate_comprehension_stage": true
+  },
+  "independent_static_recomputation": {
+    "first_stack_detector": {
+      "matrix_weight_elements": 97145728,
+      "vector_elements": 60682,
+      "batchnorm_buffer_bytes": 239248,
+      "quantization_channels": 30858,
+      "conv2d_modules": 90,
+      "total_learned_parameter_elements": 97206410
+    },
+    "full_two_stack_detector": {
+      "matrix_weight_elements": 194665856,
+      "vector_elements": 121620,
+      "batchnorm_buffer_bytes": 479520,
+      "quantization_channels": 61844,
+      "conv2d_modules": 180,
+      "total_learned_parameter_elements": 194787476
+    },
+    "full_grouping_model": {
+      "matrix_weight_elements": 199499904,
+      "vector_elements": 141870,
+      "batchnorm_buffer_bytes": 479520,
+      "quantization_channels": 75854,
+      "total_learned_parameter_elements": 199641774
+    },
+    "storage_bytes": {
+      "first_stack_q4": 49301704,
+      "first_stack_int8": 97874568,
+      "full_two_stack_q4": 98793680,
+      "full_grouping_q4": 101403784
+    },
+    "h100_headroom_bytes": {
+      "first_stack_q4": 50698296,
+      "first_stack_int8": 2125432,
+      "full_two_stack_q4": 1206320,
+      "full_grouping_q4": -1403784
+    }
+  },
+  "deductions": [
+    "FIRST_STACK_DETECTOR_IS_DIRECTLY_SUPERVISED_BUT_PERFORMANCE_AFTER_TRUNCATION_IS_UNPROVED",
+    "FIRST_STACK_Q4_FULL_STATIC_PERSISTENT_LAYOUT_HAS_50_698_296_BYTES_GLOBAL_HEADROOM",
+    "FULL_TWO_STACK_DETECTOR_Q4_STATIC_LAYOUT_FITS_BUT_CONSUMES_NEARLY_ALL_GLOBAL_BUDGET",
+    "FULL_GROUPING_MODEL_Q4_EXCEEDS_100000000_BYTES_UNDER_THE_CONSERVATIVE_LAYOUT",
+    "SEPARATING_LEARNED_DERENDERING_FROM_DETERMINISTIC_GROUPING_OCR_CALIBRATION_AND_REASONING_IS_A_VALID_H100_ARCHITECTURE_CANDIDATE_NOT_A_CAPABILITY_PROOF"
+  ],
+  "hard_nonclaims": [
+    "NO_PRETRAINED_CHECKPOINT_PINNED",
+    "NO_QUANTIZED_EXECUTION_SUBJECT",
+    "NO_NONTERMINAL_PERFORMANCE_VERIFICATION",
+    "NO_WHOLE_CHARTOGRAPHY_SCOPE_PROOF",
+    "NO_LEARNED_BYTE_RUNG_ADVANCE",
+    "NO_H100_TERMINAL_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "h100_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_public_runner_required_before_any_promotion": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
