@@ -1,0 +1,167 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PROFILE_CONDITIONED_OFFICIAL_SDK_SCHEMA_CLOSURE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__PROFILE_CONDITIONED_STABLE_PLUS_AUTHORIZED_BETA_SCHEMA_PRODUCT__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": "A single flat interaction-schema snapshot is not a sound terminal target boundary when the first-party surface contains stable and beta-only load-bearing channels. Stable-only under-approximates the target whenever an authorized Opus 5.5 profile exposes beta behavior; stable-union-all-beta over-approximates the target whenever a beta is unavailable or unauthorized for that profile.",
+  "breakthrough": "Replace flat S_EPOCH with a profile-conditioned schema product extracted mechanically from Anthropic's content-addressed generated SDK type graph. For each frozen target profile p, construct S_p from the stable graph plus exactly the beta subgraph authorized for p. Target coverage is then proved over the union of valid trajectories of the S_p, not by hand-enumerating channels and not by assuming every beta belongs to every profile.",
+  "upstream_official_schema_source": {
+    "repository": "anthropics/anthropic-sdk-python",
+    "commit": "18f25547f20cf5f01da69ac611e700e3bc9ebf21",
+    "release_commit_message": "Merge pull request #1966 from anthropics/release-please--branches--main--changes--next / release: 1.11.0",
+    "role": "Anthropic-generated Python SDK schema witness; files are mechanically parsed and Git-blob-addressed rather than trusted by prose inspection."
+  },
+  "pinned_schema_roots": {
+    "stable": [
+      {
+        "path": "src/anthropic/types/content_block.py",
+        "git_blob_sha": "a0baaeb69bab7c74ae6e6aa9613f3381ad416811",
+        "root": "ContentBlock",
+        "direct_union_member_count": 12
+      },
+      {
+        "path": "src/anthropic/types/content_block_param.py",
+        "git_blob_sha": "b6a481a0ab64424475760b6e63316ed9177dc532",
+        "root": "ContentBlockParam",
+        "direct_union_member_count": 16
+      },
+      {
+        "path": "src/anthropic/types/stop_reason.py",
+        "git_blob_sha": "d28f681b8464057da3ddac61a83548e266880e10",
+        "root": "StopReason",
+        "literal_count": 7
+      },
+      {
+        "path": "src/anthropic/types/message_create_params.py",
+        "git_blob_sha": "585e92451d6399aba980aff392fbc0ba942e85d4",
+        "root": "MessageCreateParamsBase"
+      }
+    ],
+    "beta": [
+      {
+        "path": "src/anthropic/types/beta/beta_content_block.py",
+        "git_blob_sha": "8034b978b7fdb990faf0e3c9fdb0e1a338817f2d",
+        "root": "BetaContentBlock",
+        "direct_union_member_count": 18
+      },
+      {
+        "path": "src/anthropic/types/beta/beta_content_block_param.py",
+        "git_blob_sha": "84f0e1466477a278371f88b507ae86ab308ba8d1",
+        "root": "BetaContentBlockParam",
+        "direct_union_member_count": 25
+      },
+      {
+        "path": "src/anthropic/types/beta/beta_stop_reason.py",
+        "git_blob_sha": "f3d0d3070d0eac3065917a5d11cbbc935faebeb8",
+        "root": "BetaStopReason",
+        "literal_count": 8
+      },
+      {
+        "path": "src/anthropic/types/beta/message_create_params.py",
+        "git_blob_sha": "7f688b24dfc9744f5e0df2678c5fe0bba1b50f44",
+        "root": "MessageCreateParamsBase"
+      }
+    ]
+  },
+  "mechanical_counterexample_to_flat_stable_schema": {
+    "stable_stop_reasons": [
+      "end_turn",
+      "max_tokens",
+      "stop_sequence",
+      "tool_use",
+      "pause_turn",
+      "refusal",
+      "model_context_window_exceeded"
+    ],
+    "beta_stop_reasons_add": [
+      "compaction"
+    ],
+    "beta_output_classes_not_represented_by_a_simple_stable_name_prefix_mapping_include": [
+      "BetaCompactionBlock",
+      "BetaFallbackBlock",
+      "BetaMCPToolUseBlock",
+      "BetaMCPToolResultBlock",
+      "BetaMCPToolListingBlock",
+      "BetaAdvisorToolResultBlock"
+    ],
+    "beta_input_classes_with_new_protocol_roles_include": [
+      "BetaCompactionBlockParam",
+      "BetaRequestToolAdditionBlockParam",
+      "BetaRequestToolRemovalBlockParam",
+      "BetaRequestMCPToolResultBlockParam",
+      "BetaMCPToolListingBlockParam",
+      "BetaFallbackBlockParam"
+    ],
+    "beta_only_top_level_request_fields_that_are_load_bearing_for_trajectory_semantics": [
+      "compaction",
+      "context_management",
+      "fallback_credit_token",
+      "fallbacks",
+      "mcp_servers",
+      "speed",
+      "betas"
+    ],
+    "conclusion": "STABLE_ONLY_S_EPOCH_IS_NOT_A_COMPLETE_GENERIC_FIRST_PARTY_INTERACTION_SCHEMA__AND_ALL_BETA_CANNOT_BE_GRANTED_TO_ALL_PROFILES_WITHOUT_AUTHORIZATION_EVIDENCE"
+  },
+  "formalization": {
+    "P": "THE_FROZEN_SET_OF_AUTHORIZED_FIRST_PARTY_OPUS55_TARGET_PROFILES",
+    "S_STABLE": "THE_CONTENT_ADDRESSED_CLOSURE_OF_THE_PINNED_STABLE_REQUEST_RESPONSE_CONTROL_AND_STATE_SCHEMA",
+    "A_p": "THE_EXACT_CONTENT_ADDRESSED_SET_OF_BETA_FEATURES_HEADERS_AND_PROFILE_ENTITLEMENTS AUTHORIZED_FOR_PROFILE_p",
+    "S_p": "CLOSURE(S_STABLE UNION BETA_SUBGRAPH(A_p))",
+    "Q_p": "THE_LOAD_BEARING_ACCEPTANCE_CONDITIONS_FOR_PROFILE_p",
+    "D_p": "ALL_FINITE_VALID_TRAJECTORIES_GENERABLE_BY_S_p_WITH_PROFILE_STATE_AND_Q_p_PRESERVED",
+    "U_p": "ALL_USEFUL_OBSERVABLE_TARGET_BEHAVIORS_OF_PROFILE_p",
+    "U_STAR": "UNION_OVER_p_IN_P(U_p)",
+    "D_STAR": "UNION_OVER_p_IN_P(D_p)"
+  },
+  "coverage_theorem_candidate": {
+    "premise_1": "THE_OFFICIAL_SDK_SCHEMA_GRAPH_ROOTS_AND_TRANSITIVE_REFERENCES ARE FROZEN_AND_INDEPENDENTLY_PROVED_COMPLETE_FOR_THE_APPLICABLE_STABLE_AND_BETA API SURFACES AT THE TARGET EPOCH",
+    "premise_2": "THE PROFILE_TO_BETA_AUTHORIZATION_REGISTRY A_p IS COMPLETE_AND FAILS_CLOSED_ON UNKNOWN OR ANNOUNCED_NOT_ACTIVE FEATURES",
+    "premise_3": "EVERY_USEFUL_BEHAVIOR_IN_EACH_U_p_IS_REALIZED_BY_A_FINITE_VALID_TRAJECTORY_THROUGH_S_p_WITH_LOAD_BEARING_PROFILE_AND_ACCEPTANCE_STATE PRESERVED",
+    "conclusion": "U_STAR_SUBSET_OR_EQUAL_D_STAR",
+    "proof_shape": "FINITE_TYPE_GRAPH_CLOSURE_PLUS_PROFILE_AUTHORIZATION_PRODUCT_PLUS_BEHAVIOR_REALIZABILITY",
+    "fresh_terminal_reality_required_for_schema_extraction": false
+  },
+  "leverage": {
+    "manual_channel_enumeration_deleted_if_verified": true,
+    "new_schema_member_becomes_mechanical_wake_event": true,
+    "stable_beta_semantic_drift_becomes_mechanical_wake_event": true,
+    "unauthorized_beta_overcredit_fails_closed": true,
+    "beta_only_channel_omission_fails_closed": true,
+    "remaining_information_positive_premise_after_sdk_extraction": "COMPLETE_PROFILE_TO_BETA_AUTHORIZATION_REGISTRY_AND_TRANSITIVE_SCHEMA_CLOSURE",
+    "terminal_case_consumption": 0,
+    "incremental_spend_usd": 0
+  },
+  "verifier": {
+    "path": "canonical/verification/verify_opus55_official_sdk_schema_closure_v1.py",
+    "function": "PIN_EXACT_UPSTREAM_COMMIT_AND_GIT_BLOBS__AST_EXTRACT_STABLE_AND_BETA_UNIONS_STOP_REASONS_AND_REQUEST_FIELDS__FAIL_CLOSED_ON_ANY_DRIFT"
+  },
+  "relationship_to_existing_candidate": {
+    "path": "canonical/governance/OPUS55_SCHEMA_CLOSED_TRACE_SUPERSET_CANDIDATE_20261005_V2.json",
+    "effect": "TRUTH_REPAIR_AND_STRENGTHENING__REPLACE_ONE_FLAT_S_EPOCH_WITH_PROFILE_CONDITIONED_S_p_PRODUCT__PRESERVE_ZERO_CREDIT_AND_EXISTING_TARGET",
+    "does_not_weaken_target": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_BETA_FEATURES_ARE_AVAILABLE_TO_OPUS55",
+    "NO_CLAIM_THE_PINNED_SDK_GRAPH_ALONE_PROVES_PROFILE_AUTHORIZATION",
+    "NO_CLAIM_THE_PINNED_SDK_GRAPH_ALONE_PROVES_USEFUL_BEHAVIOR_COMPLETENESS",
+    "NO_CLAIM_OPAQUE_EXTERNAL_MODEL_CAPABILITY_IS_INTERNALIZED_BY_SCHEMA_ENUMERATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
