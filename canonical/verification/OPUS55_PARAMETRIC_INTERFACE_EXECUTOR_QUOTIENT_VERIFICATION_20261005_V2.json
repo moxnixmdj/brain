@@ -1,0 +1,151 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PARAMETRIC_INTERFACE_EXECUTOR_QUOTIENT_VERIFICATION_20261005_V2",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_FIRST_PARTY_PLUS_WOLFRAM_FINITE_FALSIFICATION_PASS__PARAMETRIC_IN_TRUE_MODEL_VISIBLE_STATE__ZERO_CREDIT",
+  "base_commit": "60af21915796e665ebe16f4d6f298beb66e49562",
+  "supersedes_branch_only_subject": "canonical/verification/OPUS55_INTERFACE_POLICY_NORMAL_FORM_INDEPENDENT_VERIFICATION_20261005_V1.json",
+  "reconciles": [
+    {
+      "path": "canonical/reasoning/2026-10-05_OPUS55_INTERFACE_POLICY_NORMAL_FORM_V1.json",
+      "effect": "PRESERVE_POLICY_PLUS_EXECUTOR_FACTORIZATION__REMOVE_ANY_IMPLICIT_FIXED_INTERFACE_COMPLETENESS_DEPENDENCE"
+    },
+    {
+      "path": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_PROFILE_PROJECTION_20261005_V1.json",
+      "blob_sha": "c1aa58b8864a6fbe46d3c68bc42ca25b33e6f063",
+      "effect": "INDEPENDENTLY_SUPPORT_TOOL_BACKEND_PROJECTION_AND_STRENGTHEN_WITH_EXECUTOR_EQUIVALENCE_CLASS"
+    },
+    {
+      "path": "canonical/governance/OPUS55_FIXED_INTERFACE_THINKING_CHANNEL_COUNTEREXAMPLE_20261005_V1.json",
+      "effect": "ACCEPT_COUNTEREXAMPLE__THINKING_SIGNATURE_STATE_IS_LOAD_BEARING__THE_QUOTIENT_THEOREM_NOW_QUANTIFIES_OVER_TRUE_I_STAR_INSTEAD_OF_A_FROZEN_INCOMPLETE_ALPHABET"
+    }
+  ],
+  "theorem": {
+    "id": "PARAMETRIC_EXECUTOR_SUBSTITUTION_INVARIANCE_QUOTIENT",
+    "definitions": {
+      "I_STAR": "THE_TRUE_COMPLETE_MODEL_VISIBLE_AND_CARRIED_FORWARD_STATE_REQUIRED_FOR_OPUS55_BEHAVIOR__NOT_ASSUMED_CURRENTLY_ENUMERATED",
+      "M": "OPUS55_MODEL_POLICY_MAPPING_I_STAR_TO_MODEL_GENERATED_ACTIONS_OR_OUTPUTS",
+      "E": "EXTERNAL_EXECUTION_TRANSITION_FOR_A_TOOL_OR_DEPLOYMENT_OPERATION",
+      "TRACE_EQUIVALENT_E1_E2": "FOR_THE_REACHABLE_MODEL_SELECTED_ACTIONS_AND_STATES_UNDER_COMPARISON__E1_AND_E2_RETURN_THE_SAME_MODEL_VISIBLE_RESULTS_AND_STATE_TRANSITIONS"
+    },
+    "statement": "For intrinsic Opus 5.5 capability attribution, external executors that are trace-equivalent relative to the true model-visible state I_STAR belong to the same executor equivalence class. Replacing E1 by E2 cannot create a new intrinsic model capability when the model-visible interaction trace is unchanged.",
+    "proof_sketch": [
+      "AT_T0_THE_MODEL_RECEIVES_THE_SAME_I_STAR_STATE_IN_BOTH_SYSTEMS.",
+      "THE_SAME_POLICY_M_THEREFORE_SELECTS_THE_SAME_ACTION_OR_OUTPUT.",
+      "TRACE_EQUIVALENCE_GIVES_THE_SAME_MODEL_VISIBLE_EXECUTOR_RESULT_AND_NEXT_STATE.",
+      "BY_INDUCTION_THE_MODEL_VISIBLE_TRACE_AND_ALL_FUTURE_MODEL_ACTIONS_REMAIN_IDENTICAL.",
+      "EXECUTOR_INTERNAL_IMPLEMENTATION_DETAILS_ABSENT_FROM_I_STAR_CANNOT_BE_CAUSAL_INPUTS_TO_M.",
+      "THEREFORE_EXTERNAL_IMPLEMENTATION_VARIANTS_ALONE_DO_NOT DEFINE_NEW_INTRINSIC_OPUS_CAPABILITIES."
+    ],
+    "key_repair": "THE_THEOREM_DOES_NOT_REQUIRE_US_TO_KNOW_I_STAR_COMPLETELY_TODAY. ANY_NEWLY_DISCOVERED_LOAD_BEARING_CHANNEL_SUCH_AS_SIGNED_THINKING_STATE_IS_ADDED_TO_I_STAR; EXECUTOR_EQUIVALENCE_IS THEN_JUDGED_RELATIVE_TO_THE_REPAIRED_STATE."
+  },
+  "first_party_evidence": [
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works",
+      "observed": [
+        "TOOL_USE_IS_A_CONTRACT_BETWEEN_APPLICATION_AND_MODEL.",
+        "THE_MODEL_EMITS_STRUCTURED_REQUESTS;CLIENT_CODE_OR_ANTHROPIC_SERVERS_EXECUTE_OPERATIONS.",
+        "FOR_USER_DEFINED_CLIENT_TOOLS_CLAUDE_NEVER_SEES_IMPLEMENTATION;IT_SEES_SCHEMA_AND_RETURNED_RESULT."
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference",
+      "observed": [
+        "ANTHROPIC_DISTINGUISHES_SERVER_TOOLS_FROM_CLIENT_TOOLS_BY_EXECUTION_LOCATION."
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools",
+      "observed": [
+        "SERVER_TOOLS_EXECUTE_IN_THE_API_SERVER_SIDE_LOOP_AND_RESULTS_ARE_RETURNED_IN_STRUCTURED_BLOCKS."
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed": [
+        "OPUS55_ADAPTIVE_THINKING_IS_ALWAYS_ON.",
+        "THINKING_BLOCKS_ARE_TIED_TO_MODEL_AND_CONVERSATION.",
+        "TEXT_BETWEEN_TOOL_CALLS_CAN_RETURN_IN_THINKING_BLOCKS."
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/migration-guide",
+      "observed": [
+        "THINKING_BLOCKS_MUST_BE_RETURNED_COMPLETE_AND_UNMODIFIED_IN_TOOL_USE_LOOPS.",
+        "THINKING_BLOCKS_CAN_CARRY_SIGNATURE_STATE_EVEN_WHEN_VISIBLE_THINKING_TEXT_IS_OMITTED."
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback",
+      "observed": [
+        "FALLBACKS_CAN_MOVE_A_REQUEST_TO_A_DIFFERENT_MODEL_AFTER_A_CLASSIFIER_REFUSAL.",
+        "THE_RESPONSE_IDENTIFIES_WHICH_MODEL_SERVED_IT.",
+        "SEPARATE_ROUTING_OR_FALLBACK_BEHAVIOR_MUST_NOT_BE_CREDITED_TO_OPUS55_WITHOUT_CAUSAL_ATTRIBUTION."
+      ]
+    }
+  ],
+  "independent_falsification": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "model": "BINARY_FINITE_DETERMINISTIC_POLICY_AND_EXECUTOR_SYSTEM",
+    "horizon": 5,
+    "total_cases": 128,
+    "cases_satisfying_reachable_trace_equivalence_premise": 56,
+    "all_premise_cases_produced_identical_model_state_trace": true,
+    "counterexample_count": 0,
+    "exact_kernel_output": "<|\"total_cases\" -> 128, \"premise_cases\" -> 56, \"all_premise_implies_identical_trace\" -> True, \"counterexamples\" -> {}|>",
+    "scope_note": "FINITE_FALSIFICATION_SUPPORTS_BUT_DOES_NOT_REPLACE_THE_GENERAL_INDUCTIVE_CAUSAL_ARGUMENT"
+  },
+  "scheduler_effect_if_reconciled": {
+    "delete": [
+      "OPEN_NEW_INTRINSIC_CAPABILITY_FAMILY_ONLY_BECAUSE_A_NEW_EXTERNAL_TOOL_NAME_OR_BACKEND_IMPLEMENTATION_EXISTS",
+      "INTERNALIZE_EXECUTOR_PRIVATE_ALGORITHMS_WHEN_ONLY_MODEL_POLICY_OVER_THEIR_SCHEMA_AND_RESULTS_IS_LOAD_BEARING",
+      "REQUIRE_A_FROZEN_COMPLETE_INTERFACE_ALPHABET_BEFORE_APPLYING_EXECUTOR_CAUSAL_QUOTIENTING"
+    ],
+    "preserve": [
+      "SCHEMA_AND_CONTRACT_INTERPRETATION",
+      "TOOL_SELECTION_AND_PARAMETERIZATION",
+      "SEQUENCING_AND_MULTI_TOOL_COORDINATION",
+      "RESULT_INTERPRETATION_AND_STATE_UPDATE",
+      "RECOVERY_AND_SCOPE_JUDGMENT",
+      "LONG_HORIZON_CONTINUITY",
+      "ALL_DIRECT_MODEL_MODALITY_AND_LOAD_BEARING_STATE_CHANNELS_INCLUDING_THINKING_STATE",
+      "PROFILE_SPECIFIC_OPUS55_SERVED_BEHAVIORS"
+    ]
+  },
+  "verdict": {
+    "executor_substitution_invariance": "PASS_ON_DOCUMENTED_CAUSAL_BOUNDARY_PLUS_FINITE_FALSIFICATION",
+    "fixed_interface_completeness_required": false,
+    "thinking_channel_counterexample_survives": true,
+    "current_19_family_envelope_exhaustive": "NOT_PROVED",
+    "literal_target_completeness": "NOT_PROVED",
+    "terminal_goal_achieved": false,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "falsifiers": [
+    "A_MODEL_BEHAVIOR_IS_SHOWN_TO_CAUSALLY_DEPEND_ON_EXECUTOR_INTERNAL_STATE_THAT_NEVER_ENTERS_OR_ALTERS_ANY_MODEL_VISIBLE_OR_CARRIED_FORWARD_STATE.",
+    "THE_TERMINAL_OBJECTIVE_IS_REDEFINED_TO_CLONE_COMPLETE_EXTERNAL_DEPLOYMENT_INFRASTRUCTURE_RATHER_THAN_OPUS55_CAPABILITY.",
+    "AN_EXECUTOR_SUBSTITUTION_CLASSIFIED_TRACE_EQUIVALENT_IS_SHOWN_TO_CHANGE_A_MODEL_VISIBLE_TRACE_OR_MODEL_ACTION."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_I_STAR_IS_CURRENTLY_COMPLETELY_ENUMERATED.",
+    "NO_CLAIM_CURRENT_19_FAMILIES_ARE_EXHAUSTIVE.",
+    "NO_CLAIM_BRAIN_OWNS_OR_DOMINATES_OPUS55_POLICY.",
+    "NO_LITERAL_TERMINAL_COMPLETION.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
