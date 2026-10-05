@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TASK_LABEL_INFORMATION_BOUND_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__9_OF_9__TASK_RELEVANT_INFORMATION_BOUND__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_TASK_LABEL_INFORMATION_BOUND_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_task_label_information_bound_v1.py",
+    "tests": "canonical/tests/test_h100_task_label_information_bound_v1.py"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "verified": {
+    "tests_passed": 9,
+    "tests_total": 9,
+    "binary_opposite_label_zero_bit_bound": 0.5,
+    "same_output_worlds_need_zero_bits": true,
+    "majority_label_zero_bit_bound": true,
+    "multiple_evidence_classes": true,
+    "perfect_bits_depend_on_max_distinct_required_labels_not_world_count": true,
+    "unique_label_case_recovers_identity_bound": true
+  },
+  "deduction": "INFORMATION_STATE_LOWER_BOUNDS_FOR_CAPABILITY_TASKS_MUST_COUNT_DISTINCT_REQUIRED_OUTPUTS_WITHIN_RUNTIME_EVIDENCE_CLASSES__NOT IRRELEVANT LATENT WORLD IDENTITY",
+  "hard_nonclaims": [
+    "NO_COMPUTE_TIME_LOWER_BOUND",
+    "NO_UNIVERSAL_ZERO_LEARNED_SUFFICIENCY_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
