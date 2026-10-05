@@ -1,0 +1,269 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_LEGACY_TARGET_TUPLE_REBIND_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TEN_LEGACY_PREDICATES_BOUND_TO_NINE_FROZEN_TARGET_TUPLES__TARGET_IDENTITY_ONLY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predecessor": {
+    "v22_target_truth": {
+      "path": "canonical/governance/OPUS55_TARGET_TRUTH_NORMALIZATION_20261005_V1.json",
+      "git_blob_sha": "2cc96ba7862686358ef9bc18da6f03b40a729eab"
+    },
+    "frozen_target_lock": {
+      "path": "canonical/governance/OPUS55_TARGET_IDENTITY_TRUTH_LOCK_20261005_V1.json",
+      "git_blob_sha": "9261f4b4fe117292438ed9a049fdcc5eda085392"
+    }
+  },
+  "rule": "BIND_FROZEN_ACCEPTANCE_LABELS_TO_THEIR_ORIGINAL_PRIMARY_PUBLICATION_OR_ALREADY_PRELOCKED_CURRENT_ROUTE__DO_NOT_REBASE_TO_DIFFERENT_EVALUATOR_HARNESS_FALLBACK_OR_RELATIVE_RATING_SNAPSHOT",
+  "bindings": [
+    {
+      "predicate_id": "CODING_TB4_GE_66_4",
+      "predicate_label_target_value": 66.4,
+      "effective_target_value": 66.4,
+      "target_tuple_id": "ANTHROPIC_2026_09_22__TB4_4_0__OPUS55_XHIGH__66_4",
+      "target_tuple": {
+        "benchmark": "Terminal-Bench",
+        "benchmark_version": "4.0",
+        "model": "Claude Opus 5.5",
+        "effort": "xhigh",
+        "evaluator": "Anthropic release evaluation",
+        "harness": "ANTHROPIC_2026_09_22_TERMINAL_BENCH_4_0_SETUP",
+        "fallback_policy": "PRODUCTION_SAFEGUARDS_AND_FALLBACKS_AS_PUBLISHED",
+        "unit": "percent"
+      },
+      "target_source_role": "PRIMARY_PROVIDER_FROZEN_PUBLICATION",
+      "source_url": "https://www.anthropic.com/claude-opus-5-5",
+      "source_snapshot": "2026-09-22",
+      "source_fact": "provider table row 66.4; footnote identifies Opus 5.5 xhigh",
+      "reproducibility_state": "OPAQUE_PROVIDER_SETUP__SAME_SETUP_OR_STRONGER_PROOF_REQUIRED",
+      "score_execution_authority": false
+    },
+    {
+      "predicate_id": "CODING_FRONTIERCODE_GE_54_4",
+      "predicate_label_target_value": 54.4,
+      "effective_target_value": 54.4,
+      "target_tuple_id": "ANTHROPIC_2026_09_22__FRONTIERCODE_1_1_MAIN__OPUS55_MAX__54_4",
+      "target_tuple": {
+        "benchmark": "FrontierCode",
+        "benchmark_version": "v1.1 Main",
+        "model": "Claude Opus 5.5",
+        "effort": "max",
+        "evaluator": "Anthropic release evaluation",
+        "harness": "ANTHROPIC_2026_09_22_FRONTIERCODE_V1_1_MAIN_SETUP",
+        "fallback_policy": "PRODUCTION_SAFEGUARDS_AND_FALLBACKS_AS_PUBLISHED",
+        "unit": "percent"
+      },
+      "target_source_role": "PRIMARY_PROVIDER_FROZEN_PUBLICATION",
+      "source_url": "https://www.anthropic.com/claude-opus-5-5",
+      "source_snapshot": "2026-09-22",
+      "source_fact": "provider table row 54.4; table-wide rule max unless otherwise noted",
+      "reproducibility_state": "OPAQUE_PROVIDER_SETUP__SAME_SETUP_OR_STRONGER_PROOF_REQUIRED",
+      "score_execution_authority": false
+    },
+    {
+      "predicate_id": "PROWORK_GDPVAL_GE_1846",
+      "predicate_label_target_value": 1846,
+      "effective_target_value": 1846,
+      "target_tuple_id": "ANTHROPIC_2026_09_22__GDPVAL_AA_2_1__OPUS55_MAX__1846",
+      "target_tuple": {
+        "benchmark": "GDPval-AA",
+        "benchmark_version": "v2.1",
+        "model": "Claude Opus 5.5",
+        "effort": "max",
+        "evaluator": "Frozen publication relative-rating observation",
+        "harness": "FROZEN_2026_09_22_GDPVAL_AA_V2_1_RATING_SNAPSHOT",
+        "fallback_policy": "DEFAULT_FALLBACK_AS_PUBLISHED",
+        "unit": "Elo"
+      },
+      "rating_pool_snapshot": "FROZEN_PUBLICATION_SNAPSHOT_2026_09_22",
+      "target_source_role": "PRIMARY_PROVIDER_FROZEN_RELATIVE_SNAPSHOT",
+      "source_url": "https://www.anthropic.com/claude-opus-5-5",
+      "source_snapshot": "2026-09-22",
+      "source_fact": "provider table row 1846",
+      "reproducibility_state": "RELATIVE_SCORE_REQUIRES_SAME_POOL_OR_VERIFIED_BRIDGE",
+      "score_execution_authority": false
+    },
+    {
+      "predicate_id": "PROWORK_AA_BRIEFCASE_GE_1822",
+      "predicate_label_target_value": 1822,
+      "effective_target_value": 1822,
+      "target_tuple_id": "ANTHROPIC_2026_09_22__AA_BRIEFCASE_1_1__OPUS55_MAX__1822",
+      "target_tuple": {
+        "benchmark": "AA-Briefcase",
+        "benchmark_version": "v1.1",
+        "model": "Claude Opus 5.5",
+        "effort": "max",
+        "evaluator": "Frozen publication relative-rating observation",
+        "harness": "FROZEN_2026_09_22_AA_BRIEFCASE_V1_1_RATING_SNAPSHOT",
+        "fallback_policy": "DEFAULT_FALLBACK_AS_PUBLISHED",
+        "unit": "Elo"
+      },
+      "rating_pool_snapshot": "FROZEN_PUBLICATION_SNAPSHOT_2026_09_22",
+      "target_source_role": "PRIMARY_PROVIDER_FROZEN_RELATIVE_SNAPSHOT",
+      "source_url": "https://www.anthropic.com/claude-sonnet-5-5",
+      "source_snapshot": "2026-09-28_PRIMARY_PROVIDER_REPUBLICATION_OF_OPUS55_ROW",
+      "source_fact": "Anthropic table explicitly reports Opus 5.5 AA-Briefcase v1.1 = 1822",
+      "reproducibility_state": "RELATIVE_SCORE_REQUIRES_SAME_POOL_OR_VERIFIED_BRIDGE",
+      "score_execution_authority": false
+    },
+    {
+      "predicate_id": "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "predicate_label_target_value": 1822,
+      "effective_target_value": 1822,
+      "target_tuple_id": "ANTHROPIC_2026_09_22__AA_BRIEFCASE_1_1__OPUS55_MAX__1822",
+      "target_tuple": {
+        "benchmark": "AA-Briefcase",
+        "benchmark_version": "v1.1",
+        "model": "Claude Opus 5.5",
+        "effort": "max",
+        "evaluator": "Frozen publication relative-rating observation",
+        "harness": "FROZEN_2026_09_22_AA_BRIEFCASE_V1_1_RATING_SNAPSHOT",
+        "fallback_policy": "DEFAULT_FALLBACK_AS_PUBLISHED",
+        "unit": "Elo"
+      },
+      "rating_pool_snapshot": "FROZEN_PUBLICATION_SNAPSHOT_2026_09_22",
+      "target_source_role": "PRIMARY_PROVIDER_FROZEN_RELATIVE_SNAPSHOT",
+      "source_url": "https://www.anthropic.com/claude-sonnet-5-5",
+      "source_snapshot": "2026-09-28_PRIMARY_PROVIDER_REPUBLICATION_OF_OPUS55_ROW",
+      "source_fact": "same frozen Opus 5.5 AA-Briefcase v1.1 1822 tuple; separate artifact scope binding still required",
+      "reproducibility_state": "RELATIVE_SCORE_REQUIRES_SAME_POOL_OR_VERIFIED_BRIDGE",
+      "score_execution_authority": false
+    },
+    {
+      "predicate_id": "AUTOMATIONBENCH_GE_40",
+      "predicate_label_target_value": 40,
+      "effective_target_value": 40,
+      "target_tuple_id": "ZAPIER_EARLY_ACCESS__AUTOMATIONBENCH__OPUS55_MAX__40_0",
+      "target_tuple": {
+        "benchmark": "AutomationBench",
+        "benchmark_version": "Zapier early-access release evaluation 2026-09-22",
+        "model": "Claude Opus 5.5",
+        "effort": "max",
+        "evaluator": "Zapier",
+        "harness": "ZAPIER_AUTOMATIONBENCH_EARLY_ACCESS_SETUP",
+        "fallback_policy": "NO_FALLBACK__SAFEGUARD_INTERVENTION_COUNTS_FAILURE",
+        "unit": "percent"
+      },
+      "target_source_role": "PRIMARY_PROVIDER_BINDING_TO_EXTERNAL_EVALUATOR_RESULT",
+      "source_url": "https://www.anthropic.com/claude-opus-5-5",
+      "source_snapshot": "2026-09-22",
+      "source_fact": "Anthropic footnote: run and reported by Zapier; no fallback; Opus 5.5 early-access result 40.0",
+      "reproducibility_state": "EXTERNAL_EVALUATOR_SETUP__EXACT_PRIVATE_PUBLIC_EQUIVALENCE_OR_STRONGER_PROOF_REQUIRED",
+      "score_execution_authority": false
+    },
+    {
+      "predicate_id": "HLE_TOOLS_GE_67_7",
+      "predicate_label_target_value": 67.7,
+      "effective_target_value": 67.7,
+      "target_tuple_id": "ANTHROPIC_2026_09_22__HLE_WITH_TOOLS__OPUS55_MAX__67_7",
+      "target_tuple": {
+        "benchmark": "Humanity's Last Exam",
+        "benchmark_version": "Anthropic release evaluation 2026-09-22",
+        "model": "Claude Opus 5.5",
+        "effort": "max",
+        "evaluator": "Anthropic release evaluation",
+        "harness": "ANTHROPIC_HLE_WITH_TOOLS_RELEASE_SETUP",
+        "fallback_policy": "PRODUCTION_SAFEGUARDS_AND_FALLBACKS_AS_PUBLISHED",
+        "unit": "percent"
+      },
+      "target_source_role": "PRIMARY_PROVIDER_FROZEN_PUBLICATION",
+      "source_url": "https://www.anthropic.com/claude-opus-5-5",
+      "source_snapshot": "2026-09-22",
+      "source_fact": "provider table row 67.7 with tools",
+      "reproducibility_state": "MATCHED_GRADER_AND_TOOL_PROTOCOL_OR_STRONGER_PROOF_REQUIRED",
+      "score_execution_authority": false
+    },
+    {
+      "predicate_id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "predicate_label_target_value": 89,
+      "effective_target_value": 89,
+      "target_tuple_id": "ANTHROPIC_2026_09_22__CHARTOGRAPHY_WITH_TOOLS__OPUS55_MAX__89_0",
+      "target_tuple": {
+        "benchmark": "Chartography",
+        "benchmark_version": "Anthropic release evaluation 2026-09-22",
+        "model": "Claude Opus 5.5",
+        "effort": "max",
+        "evaluator": "Anthropic release published result",
+        "harness": "ANTHROPIC_CHARTOGRAPHY_WITH_TOOLS_RELEASE_SETUP",
+        "fallback_policy": "PRODUCTION_SAFEGUARDS_AND_FALLBACKS_AS_PUBLISHED",
+        "unit": "percent"
+      },
+      "target_source_role": "PRIMARY_PROVIDER_FROZEN_PUBLICATION",
+      "source_url": "https://www.anthropic.com/claude-opus-5-5",
+      "source_snapshot": "2026-09-22",
+      "source_fact": "provider table row 89.0 with tools",
+      "reproducibility_state": "OPAQUE_PROVIDER_SETUP__MATCHED_JUDGE_OR_STRONGER_PROOF_REQUIRED",
+      "score_execution_authority": false
+    },
+    {
+      "predicate_id": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "predicate_label_target_value": 81.8,
+      "effective_target_value": 81.8,
+      "target_tuple_id": "ANTHROPIC_2026_09_22__OSWORLD_2_1_PARTIAL__OPUS55_MAX__81_8",
+      "target_tuple": {
+        "benchmark": "OSWorld",
+        "benchmark_version": "2.1 partial",
+        "model": "Claude Opus 5.5",
+        "effort": "max",
+        "evaluator": "Anthropic release published result",
+        "harness": "ANTHROPIC_OSWORLD_2_1_PARTIAL_RELEASE_SETUP",
+        "fallback_policy": "PRODUCTION_SAFEGUARDS_AND_FALLBACKS_AS_PUBLISHED",
+        "unit": "percent"
+      },
+      "target_source_role": "PRIMARY_PROVIDER_FROZEN_PUBLICATION",
+      "source_url": "https://www.anthropic.com/claude-opus-5-5",
+      "source_snapshot": "2026-09-22",
+      "source_fact": "provider table row 81.8 partial",
+      "reproducibility_state": "EXACT_PARTIAL_TASK_SCOPE_AND_HARNESS_OR_STRONGER_PROOF_REQUIRED",
+      "score_execution_authority": false
+    },
+    {
+      "predicate_id": "TB_SCIENCE_GE_58_7",
+      "predicate_label_target_value": 58.7,
+      "effective_target_value": 63.33333333333333,
+      "target_tuple_id": "PUBLIC_CURRENT__TB_SCIENCE_0_1__OPUS55_MAX_CLAUDE_CODE__63_333333",
+      "route_id": "PUBLIC_CURRENT_HARNESS",
+      "consumed_brain_slots": 3,
+      "target_tuple": {
+        "benchmark": "Terminal-Bench-Science",
+        "benchmark_version": "0.1 / frozen manifest terminal-bench-science@0.1.0",
+        "model": "Claude Opus 5.5",
+        "effort": "max",
+        "evaluator": "Terminal-Bench-Science public leaderboard",
+        "harness": "Claude Code",
+        "fallback_policy": "LEADERBOARD_AS_PUBLISHED",
+        "unit": "percent"
+      },
+      "target_source_role": "CANONICAL_PRELOCKED_PUBLIC_CURRENT_ROUTE",
+      "source_url": "https://www.terminal-bench-science.ai/",
+      "source_snapshot": "CURRENT_ROUTE_FROZEN_BEFORE_CONSUMED_BRAIN_SLOTS",
+      "source_fact": "canonical freshness activation and current-target execution overlay bind comparator to 63.333333%; three Brain slots already consumed",
+      "canonical_authorities": [
+        "canonical/governance/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_ACTIVATION_20261005_V1.json",
+        "canonical/governance/TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V1.json",
+        "canonical/verification/TB_SCIENCE_OPUS55_SNAPSHOT_IDENTITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      ],
+      "reproducibility_state": "FROZEN_210_SLOT_MANIFEST__NO_ROUTE_SWITCH_AFTER_CONSUMED_RESULTS",
+      "score_execution_authority": false
+    }
+  ],
+  "deductions": [
+    "V22_LIVE_CURRENT_OBSERVATIONS_DO_NOT_REPLACE_FROZEN_ACCEPTANCE_TARGETS_WHEN_CONFIGURATION_DIFFERS",
+    "THE_TEN_V22_LEGACY_UNBOUND_PREDICATES_HAVE_EXPLICIT_SOURCE_ROW_IDENTITIES_AFTER_THIS_REBIND",
+    "TEN_PREDICATES_REDUCE_TO_NINE_DISTINCT_TARGET_TUPLES_BECAUSE_PROWORK_AND_ARTIFACT_SHARE_ONE_AA_BRIEFCASE_SCORE_TUPLE",
+    "TB_SCIENCE_REMAINS_ON_THE_PRELOCKED_PUBLIC_CURRENT_63_333333_PERCENT_ROUTE_BECAUSE_BRAIN_RESULTS_HAVE_ALREADY_BEEN_CONSUMED",
+    "TARGET_IDENTITY_BINDING_DOES_NOT_PROVE_BRAIN_MEETS_ANY_TARGET"
+  ],
+  "next_required": "RECOMPUTE_V22_32_OPEN_TRUTH_OBLIGATIONS__DELETE_TARGET_IDENTITY_SEARCH__KEEP_ONLY_SCORE_ACCESS_SCOPE_COMPOSITION_AND_BEHAVIORAL_TRANSFER_WORK",
+  "score_execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
