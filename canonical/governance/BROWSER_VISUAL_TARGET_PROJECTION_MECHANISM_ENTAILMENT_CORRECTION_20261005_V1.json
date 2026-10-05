@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_BROWSER_VISUAL_TARGET_PROJECTION_MECHANISM_ENTAILMENT_CORRECTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__COMPUTER_BROWSER_VISUAL_GROUNDING_TARGET_PRESERVED__WHOLE_BROWSER_RESIDUAL_NOT_EXACTLY_TARGET_ENTAILED_AS_ONE_MANDATORY_MECHANISM__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Apply the active target-behavior-before-mechanism rule one level more precisely to the sole surviving exact mechanism edge. Preserve visual grounding, planning, judgment, arbitrary-application workflow completion, OSWorld performance, and ownership postconditions while preventing the stronger composite residual from being treated as target-identical merely because one of its dimensions is explicitly named.",
+  "authorities": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "computer_browser_useful_behavior": "Complete multi-step workflows across browsers and arbitrary applications with planning, visual grounding and judgment."
+    },
+    "target_mechanism_guard": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json",
+      "git_blob_sha": "f9fff2497d9a27da64ecffcd12f4cca78dc2e4ea",
+      "hard_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION"
+    },
+    "prior_reconciliation": {
+      "path": "canonical/governance/BENCHMARK_PROXY_MECHANISM_TO_OBSERVABLE_TARGET_RECONCILIATION_20261005_V1.json",
+      "git_blob_sha": "4622ba6529c25b4d070ed334c80b2288783a7423"
+    },
+    "browser_contract": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+    },
+    "browser_scope_route": "canonical/governance/BROWSER_LEAF_SCOPE_REUSE_BINDING_V1.json",
+    "browser_terminal_route": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+    "osworld_methodology": "canonical/governance/OSWORLD_OPUS55_EXACT_METHODOLOGY_RECONCILIATION_20261004_V1.json"
+  },
+  "logical_issue": {
+    "form": "TARGET_ENTAILMENT_OF_A_PROJECTION_DOES_NOT_ENTAIL_THE_WHOLE_COMPOSITE_RESIDUAL",
+    "target_observable_conjuncts": [
+      "MULTI_STEP_BROWSER_AND_ARBITRARY_APPLICATION_WORKFLOW_COMPLETION",
+      "PLANNING",
+      "VISUAL_GROUNDING",
+      "JUDGMENT"
+    ],
+    "browser_residual_conjuncts": [
+      "SELECT_AND_EXECUTE_NEXT_GROUNDED_ACTION_AGAINST_INTENDED_UI_OR_TOOL_TARGET",
+      "BIND_RESULTING_OBSERVATION_TO_UPDATED_STATE",
+      "VALID_TARGET_AND_ARGUMENTS",
+      "STATE_ADVANCES_TOWARD_DECLARED_GOAL",
+      "RECOVERY_AFTER_OBSERVABLE_STATE_MISMATCH",
+      "REJECT_ACTIONS_BASED_ON_STALE_STATE",
+      "REJECT_UNOBSERVED_SIDE_EFFECTS",
+      "SUPPRESS_REPEATED_NO_PROGRESS_LOOPS",
+      "NO_OPAQUE_TARGET_CAPABILITY_PROVIDER_REMAINS_OPERATIVE"
+    ],
+    "countermodel": "An admissible internally owned controller can satisfy arbitrary-application workflow completion with planning, visual grounding and judgment using a different state representation, planner, recovery strategy, side-effect monitor, or loop-control architecture. Therefore the target does not logically require this exact composite residual identity even though several of its observable projections are useful sufficient evidence for the target.",
+    "ownership_note": "NO_OPAQUE_EXTERNAL_MODEL_PROVIDER is independently required by the terminal internalization objective, but that global ownership postcondition does not turn the exact browser residual implementation/decomposition into the unique target behavior."
+  },
+  "correct_target_projection": {
+    "id": "COMPUTER_BROWSER_VISUALLY_GROUNDED_WORKFLOW_OUTCOME",
+    "required_observable_behavior": [
+      "COMPLETE_MULTI_STEP_WORKFLOWS_ACROSS_BROWSERS_AND_ARBITRARY_APPLICATIONS",
+      "USE_CURRENT_RENDERED_VISUAL_STATE_SUFFICIENTLY_TO_GROUND_ACTIONS",
+      "PLAN_AND_EXERCISE_JUDGMENT_ACROSS_STEPS",
+      "ACHIEVE_CORRECT_TASK_OUTCOMES_WITHOUT_OPERATIVE_EXTERNAL_TARGET_CAPABILITY_PROVIDER"
+    ],
+    "admissible_realizations": [
+      "SCREENSHOT_FIRST_VISUAL_GROUNDING",
+      "SCREENSHOT_PLUS_OCR",
+      "SCREENSHOT_PLUS_ACCESSIBILITY_OR_DOM",
+      "APPLICATION_ACCESSIBILITY_OR_STRUCTURED_UI_STATE_WHERE_AVAILABLE",
+      "OTHER_INTERNALIZED_REALIZATION_THAT_PROVES_THE_SAME_OBSERVABLE_OUTCOME_AND_SCOPE"
+    ],
+    "not_mandated": "THE_EXACT_INTERNAL_DECOMPOSITION_OR_ALL_EXTRA_CONJUNCTS_OF_BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+  },
+  "proof_surface": {
+    "primary_public_behavioral_bar": "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "target_methodology_preserves": [
+      "1080P_RENDERED_SCREEN_CONTEXT",
+      "ALL_SCREENSHOTS",
+      "UP_TO_500_ACTION_STEPS",
+      "108_OSWORLD_TASKS_UNDER_THE_FROZEN_PARTIAL_METHOD"
+    ],
+    "rule": "USE_OSWORLD_OR_A_SCOPE_SAFE_STRONGER_DIRECT_OBJECTIVE_ROUTE_TO_PROVE_THE_VISUALLY_GROUNDED_ARBITRARY_APPLICATION_OUTCOME. DO_NOT REQUIRE PARITY_FOR_ONE PARTICULAR_INTERNAL_RESIDUAL_DECOMPOSITION IN_ADDITION_TO_THE_OUTCOME_BAR_UNLESS_A_SEPARATE_TARGET_SOURCE_ENTAILS_IT.",
+    "existing_browser_residual_evidence_role": "OPTIONAL_SUFFICIENT_STRENGTHENER_AND_DIAGNOSTIC_ROUTE__NOT_TARGET_IDENTITY"
+  },
+  "scheduler_delta_if_verified": {
+    "prior_exact_target_entailed_mechanism_edge_count": 1,
+    "repaired_exact_mandatory_mechanism_edge_count": 0,
+    "delete_from_mandatory_mechanism_identity": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001::COMPUTER_AND_BROWSER_USE"
+    ],
+    "preserve_as_mandatory_observable_target": [
+      "COMPUTER_BROWSER_VISUALLY_GROUNDED_WORKFLOW_OUTCOME",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "ARBITRARY_APPLICATION_SCOPE",
+      "PLANNING",
+      "VISUAL_GROUNDING",
+      "JUDGMENT",
+      "GLOBAL_INTERNALIZED_OWNERSHIP_POSTCONDITIONS"
+    ],
+    "preserve_optional_evidence": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1",
+      "EXACT_DOM_AND_CONSENSUS_DOM_GROUNDING_COMPONENTS",
+      "BROWSER_GOAL_GROUNDING_RECOVERY_COMPONENTS"
+    ],
+    "consequence": "THE_LAST_REGISTRY_DERIVED_EXACT_MECHANISM_SCOPE_ROOT_DISAPPEARS; COMPUTER_BROWSER_REMAINS_OPEN_ONLY_ON_OBSERVABLE_SCOPE_PERFORMANCE_TARGET_IDENTITY_AND_GLOBAL_OWNERSHIP_POSTCONDITIONS."
+  },
+  "falsifiers": [
+    "A_PRIMARY_OR_FROZEN_TARGET_SOURCE_EXPLICITLY_REQUIRES_THE_FULL_BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001_CONTRACT_NOT_MERELY_VISUAL_GROUNDING_OR_WORKFLOW_OUTCOME.",
+    "THE_OSWORLD_TARGET_ROUTE_IS_PROVED_INCAPABLE_OF_OBSERVING_VISUAL_GROUNDING_ARBITRARY_APPLICATION_WORKFLOW_OUTCOME_EVEN_WHEN_EXACT_HARNESS_SEMANTICS_ARE_MATCHED.",
+    "AN_EXISTING_TERMINAL_PROMOTION_LAW_EXPLICITLY_REQUIRES_THIS_EXACT_RESIDUAL_IDENTITY_INDEPENDENTLY_OF_OBSERVABLE_OUTCOME."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_VISUAL_GROUNDING_IS_OPTIONAL",
+    "NO_CLAIM_ARBITRARY_APPLICATION_SCOPE_IS_CLOSED",
+    "NO_OSWORLD_SCORE_CREDIT",
+    "NO_FAMILY_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_DELETION_OF_GLOBAL_INTERNALIZATION_REQUIREMENTS",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
