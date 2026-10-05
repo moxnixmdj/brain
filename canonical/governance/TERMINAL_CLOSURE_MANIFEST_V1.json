@@ -431,7 +431,7 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_OPUS55_ACCEPTANCE_PASS__14_OPEN__12_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__26_UNRESOLVED__UNKNOWN_DOMAIN_V1_V2_V3_REPROMOTION_ROUTES_INVALID__V7_GENUINE_TYPE_GATE_PENDING_DUAL_VERSION_IMMUTABLE_MAIN_VERIFICATION__OWNERSHIP_PROMOTION_SEPARATE",
+    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_OPUS55_ACCEPTANCE_PASS__14_OPEN__14_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__24_UNRESOLVED__LIVEBENCH_IF_AND_UNKNOWN_DOMAIN_TRANSFER_AUDIT_CLEANLY_PROVED__OWNERSHIP_PROMOTION_SEPARATE",
     "override_allowed": false
   },
   "specification_closure": {
@@ -533,8 +533,8 @@
     ],
     "authority": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "atomic_predicates": {
-      "proved": 12,
-      "unresolved": 26,
+      "proved": 14,
+      "unresolved": 24,
       "total": 38
     },
     "ownership_promotion_authority": false,
@@ -551,7 +551,7 @@
     },
     "unknown_domain_v6_delta": {
       "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
-      "state": "EXTERNAL_BLOCKED__V1_V2_V3_REPROMOTION_ROUTES_INVALID__V7_GENUINE_TYPE_GATE_PENDING",
+      "state": "HISTORICAL_REVOCATION_SUPERSEDED_BY_V7_V8_SCOPE_COMPLETE_SUCCESSOR_PROOF",
       "revocation_path": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
       "revocation_git_blob_sha": "a30a19aa0ab9ac18eaf0d005cf1f71b636660fb4",
       "class_spoof_falsifier_path": "canonical/verification/UNKNOWN_DOMAIN_V6_REPAIRED_CLASS_SPOOF_FALSIFIER_20261005_V1.json",
@@ -567,13 +567,18 @@
       "successor_branch": "breakthrough/unknown-domain-v7-clean-genuine-type-20261005-sol",
       "successor_frozen_branch_head": "da7b73c7d007127565b9fe2125c5dca9e4e544f6",
       "independent_verifier_pr": 2217,
-      "required_python_versions": ["3.12.10", "3.13"],
+      "required_python_versions": [
+        "3.12.10",
+        "3.13"
+      ],
       "immutable_main_verifier_execution_required": true,
       "previous_acceptance_reduction_state": "REVOKED",
       "family_acceptance_delta": 0,
       "capability_credit_delta": 0,
       "ownership_credit_delta": 0,
-      "remaining_family_gate_after_repromotion": "MYSTERYMECHANISM_GE_49_55"
+      "remaining_family_gate_after_repromotion": "MYSTERYMECHANISM_GE_49_55",
+      "successor_verification": "canonical/verification/UNKNOWN_DOMAIN_V7_WINDOWS_V8_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "successor_reduction": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json"
     },
     "mysterymechanism_reality_gate": {
       "predicate_id": "MYSTERYMECHANISM_GE_49_55",
@@ -585,6 +590,13 @@
       "verifier_pr": 2166,
       "acceptance_credit_delta": 0,
       "family_credit_delta": 0
+    },
+    "latest_atomic_reconciliation": {
+      "ledger_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "ledger_git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+      "livebench_verification": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "unknown_domain_verification": "canonical/verification/UNKNOWN_DOMAIN_V7_WINDOWS_V8_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "status": "CURRENT__14_PROVED__24_UNRESOLVED__TERMINAL_FALSE"
     }
   },
   "behavioral_quarantined_family_count": 0,
