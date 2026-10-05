@@ -17,7 +17,7 @@
   "subject": {
     "runtime": {
       "path": "canonical/runtime/root3_subprocess_effect_class_registry_v1.py",
-      "git_blob_sha": "1513b673b7e517677381294a7e91440f441a138d"
+      "git_blob_sha": "c70a4caa96885832bb6b2f3adde1d2654c14de16"
     },
     "tests": {
       "path": "canonical/tests/test_root3_subprocess_effect_class_registry_v1.py",
