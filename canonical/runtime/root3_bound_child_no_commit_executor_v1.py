@@ -138,10 +138,13 @@ def _system_python(raw: str) -> str:
     got = pathlib.Path(os.path.realpath(raw))
     if got != expected:
         raise BoundChildDenied("PYTHON_EXECUTABLE_NOT_CURRENT_INTERPRETER")
-    token = str(expected)
-    if not (token.startswith("/usr/") or token.startswith("/bin/")):
-        raise BoundChildDenied("PYTHON_EXECUTABLE_NOT_SYSTEM_PATH")
-    return token
+    # The parent may itself run from a venv or carrier-specific Python path that
+    # is intentionally not mounted into the zero-ambient child. Authenticate
+    # the caller against sys.executable, then use the verified namespace Python.
+    inner = pathlib.Path("/usr/bin/python3")
+    if not inner.is_file():
+        raise BoundChildDenied("NAMESPACE_PYTHON_UNAVAILABLE")
+    return str(inner)
 
 
 def _strict_copy_tree(src: pathlib.Path, dst: pathlib.Path) -> tuple[int, int]:
