@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_SCOPE_BASIS_REPAIR_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_FIVE_SCOPE_GAPS_COMPILED_TO_EXISTING_PREDICATES_AND_EXISTING_BEHAVIORAL_CONTRACTS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PUBLIC_BAR_SCOPE_BASIS_REPAIR_20261005_V1.json",
+    "git_blob_sha": "d2ec01b880bc93c0364ec95274caca17edf7402f"
+  },
+  "recomputed": {
+    "affected_family_count": 5,
+    "exact_affected_family_set": [
+      "ADVANCED_AGENTIC_CODING",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ],
+    "every_family_is_in_active_public_bar_scope_quarantine": true,
+    "every_referenced_public_predicate_exists_in_frozen_predicate_registry": true,
+    "every_referenced_residual_contract_exists_in_behavioral_contract_registry": true,
+    "every_residual_set_exactly_matches_existing_family_to_residual_contracts_mapping": true,
+    "new_behavioral_contract_ids": 0,
+    "new_family_ids": 0,
+    "new_reality_units": 0,
+    "proof_basis_shape": "FINITE_CONJUNCTION__PUBLIC_MEASURED_SCOPE_PLUS_EXACT_EXISTING_UNCOVERED_RESIDUAL_CONTRACTS"
+  },
+  "consequence": [
+    "DELETE_VAGUE_SEARCH_FOR_UNSPECIFIED_SCOPE_EQUIVALENCE_CERTIFICATES_FOR_THE_FIVE_AFFECTED_FAMILIES",
+    "SCHEDULE_ONLY_EXISTING_PUBLIC_PREDICATE_CLOSURE_AND_EXISTING_RESIDUAL_CONTRACT_CLOSURE",
+    "ALLOW_ONE_RESIDUAL_RECEIPT_TO_DISCHARGE_MULTIPLE_FAMILY_SCOPE_OBLIGATIONS_ONLY_WHEN_THE_EXACT_BEHAVIOR_ID_AND_EVIDENCE_SCOPE_MATCH",
+    "KEEP_WHOLE_FAMILY_PROMOTION_FAIL_CLOSED_UNTIL_ALL_REQUIRED_CONJUNCTS_PASS"
+  ],
+  "threshold_guard": {
+    "predicate": "TB_SCIENCE_GE_58_7",
+    "status": "EXTERNAL_CURRENT_LEADERBOARD_DISAGREEMENT_REQUIRES_PROTOCOL_RECONCILIATION_BEFORE_TERMINAL_CREDIT",
+    "observed_current_public_value": "Opus 5.5(max) 63.3% +/- 3.3%, release date 2026-09-22",
+    "sources": [
+      "https://www.terminal-bench-science.ai/",
+      "https://www.terminal-bench-science.ai/announcement"
+    ],
+    "claim_limit": "Observation only; no threshold rewrite until version/harness/agent/configuration comparability is proven."
+  },
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
+    "NO_BAR_RESULT_PROVED",
+    "NO_RESIDUAL_CONTRACT_RESULT_PROVED",
+    "NO_FAMILY_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT1_POSITIVE_GAP_CREATED",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
