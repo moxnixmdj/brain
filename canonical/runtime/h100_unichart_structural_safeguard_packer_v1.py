@@ -72,7 +72,7 @@ def score_candidates(source,parsed,*,chunk_groups:int=4096):
 def layout(parsed,selected,source_sha):
     cursor=len(MAGIC)+8; cand_gid=0; stor=[]
     for s in parsed['storages']:
-        start=cursor; mode=mode_for(s); groups=0
+        start=cursor; mode=mode_for(s); groups=0; cand_start=cand_gid
         if mode=='I64':
             cursor += int(s['bytes'])
         elif mode=='FP16':
@@ -87,11 +87,20 @@ def layout(parsed,selected,source_sha):
                     cand_gid+=1
                 cursor+=group_payload(n,bits); groups+=1; rem-=n
         stor.append({'key':s['key'],'dtype':s['dtype'],'numel':s['numel'],'aliases':s['aliases'],
-                     'mode':mode,'groups':groups,'candidate_group_start':None,
+                     'mode':mode,'groups':groups,
+                     'candidate_group_start':cand_start if mode=='CANDIDATE' else None,
                      'data_start':start,'data_end':cursor})
+    precision=bytearray((cand_gid+7)//8)
+    for idx in selected:
+        if idx<0 or idx>=cand_gid:
+            raise PackerError('CANDIDATE_BITMAP_INDEX_OUT_OF_RANGE')
+        precision[idx//8] |= 1 << (idx%8)
+    precision_bytes=bytes(precision)
     manifest={'schema':PACKED_SCHEMA,'source_sha256':source_sha,'group_size':GROUP_SIZE,
               'policy':'FP16_NORM_BIAS__W4_TOKEN_POSITION_RELPOS__SOURCE_SSE_KNAPSACK_REMAINDER',
               'selected_candidate_w4_groups':len(selected),'candidate_group_count':cand_gid,
+              'candidate_precision_bitmap_b64':base64.b64encode(precision_bytes).decode('ascii'),
+              'candidate_precision_bitmap_sha256':hashlib.sha256(precision_bytes).hexdigest(),
               'storages':stor,
               'tensor_count':parsed['tensor_count'],'storage_count':parsed['storage_count'],
               'tensor_aliases':[{'name':r['name'],'storage_key':r['storage_key'],'shape':r['shape'],
