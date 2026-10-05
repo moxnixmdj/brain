@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ENVELOPE_BREAKTHROUGHS_CONNECTOR_RECOMPUTATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__GOVERNANCE_AND_SCHEDULER_FACTS_ONLY__NO_ACCEPTANCE_CREDIT",
+  "subjects": [
+    {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_MINIMAL_ACCEPTANCE_BASIS_REPAIR_20261005_V1.json",
+      "git_blob_sha": "c7220a9f861c4a36f36119da6f396610f7cc09a9"
+    },
+    {
+      "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "2476ab2d8220994d7858c80409b563e1582c88e6"
+    },
+    {
+      "path": "canonical/governance/OPUS55_THREE_DOMAIN_INSTANCE_EXISTING_FAMILY_MAPPING_20261005_V1.json",
+      "git_blob_sha": "9f7fb3b5157be5c5cc77ffb3e595247171cacba0"
+    },
+    {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_DOMAIN_OPERATION_FACTS_20261005_V1.json",
+      "git_blob_sha": "c50e3a3f3c67b098148fcf4ca3128cc72122b31b"
+    }
+  ],
+  "method": [
+    "RE_FETCH_EXACT_GIT_BLOBS_FROM_CANONICAL_MAIN",
+    "RECOMPUTE_LOGICAL_IMPLICATIONS_AGAINST_BOUND_BEHAVIORAL_REGISTRY_AND_FIRST_PARTY_SURFACE_AUDIT",
+    "FALSIFY_ANY_CLAIM_THAT_REDUCES_INDEPENDENTLY_FALSIFIABLE_ACCEPTANCE_OBLIGATIONS_BY_RENAMING_A_CONJUNCTION",
+    "DISTINGUISH_GRANULAR_DOMAIN_EXAMPLES_FROM_BROAD_FIRST_PARTY_DOMAIN_UMBRELLAS",
+    "DISTINGUISH_ALREADY_ASSERTED_BUT_UNDECOMPOSED_UMBRELLAS_FROM_COMPLETELY_UNOBSERVED_TARGET_BEHAVIORS"
+  ],
+  "recomputed_results": {
+    "creative_diagram": {
+      "shared_behavioral_leaf_supported": true,
+      "new_family_required_by_current_evidence": false,
+      "independently_falsifiable_acceptance_strata": 2,
+      "fake_38_to_39_atomic_compression_rejected": true,
+      "candidate_basis_if_separately_frozen": 40,
+      "acceptance_proved": false
+    },
+    "open_world_target_boundary": {
+      "current_first_party_surface_audit_explicitly_nonexhaustive": true,
+      "literal_all_useful_target_is_universal": true,
+      "finite_nonexhaustive_observation_set_sufficient_for_literal_universal_terminal": false,
+      "additional_target_discovery_completeness_premise_required": true,
+      "goal_substitution_detected": false
+    },
+    "three_domain_mapping": {
+      "granular_examples_factor_through_existing_functional_families": true,
+      "constructive_new_family_counterexample_found": false,
+      "broad_domain_umbrellas_exhaustively_decomposed": false,
+      "three_domain_meta_groups_terminally_closed": false,
+      "valid_scheduler_compression": "THREE_SEPARATE_GENERIC_MAPPING_SEARCHES_TO_ONE_SHARED_THREE_STRATUM_DECOMPOSITION_COMPLETENESS_GATE"
+    }
+  },
+  "frontier_after_recomputation": {
+    "root1_positive_capability_gap_added": 0,
+    "new_family_added": 0,
+    "creative_diagram_mechanism_lanes_needed": 1,
+    "creative_diagram_acceptance_strata_needed": 2,
+    "domain_mapping_shared_decomposition_gates_needed": 1,
+    "target_discovery_completeness_gates_needed": 1,
+    "existing_atomic_acceptance_state_changed": false,
+    "terminal_state_changed": false
+  },
+  "scheduler_deletions_justified": [
+    "GENERIC_SEARCH_FOR_A_20TH_CREATIVE_OR_DIAGRAM_FAMILY",
+    "DUPLICATE_CREATIVE_TEXT_VS_TEXT_DIAGRAM_MECHANISM_RESEARCH_WHERE_SHARED_TRANSFORM_IS_LOAD_BEARING",
+    "FAKE_ATOMIC_PREDICATE_COMPRESSION_BY_CONJUNCTION_RENAMING",
+    "THREE_INDEPENDENT_GENERIC_NEW_FAMILY_SEARCHES_TRIGGERED_ONLY_BY_CYBER_BIOLOGY_OR_AI_R_AND_D_DOMAIN_NAMES",
+    "LITERAL_TERMINAL_FINALITY_FROM_FINITE_NONEXHAUSTIVE_ACCEPTANCE_BASIS_ALONE"
+  ],
+  "remaining_exact_gates": [
+    "CURRENT_24_UNRESOLVED_ATOMIC_ACCEPTANCE_PREDICATES_FROM_THE_EXISTING_38_PREDICATE_REGISTRY",
+    "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR_IF_FROZEN",
+    "TEXT_BASED_DIAGRAM_REALIZATION_NONINFERIOR_IF_FROZEN",
+    "THREE_DOMAIN_UMBRELLA_TO_FUNCTIONAL_LEAF_DECOMPOSITION_COMPLETE",
+    "TARGET_DISCOVERY_COMPLETENESS_PREMISE",
+    "EXISTING_TERMINAL_OWNERSHIP_AND_CLEANROOM_GATES"
+  ],
+  "verification_independence": {
+    "independent_public_runner": false,
+    "connector_recomputation": true,
+    "promotion_authority": false,
+    "note": "THIS_RECEIPT_IS_SUFFICIENT_TO_PRESERVE_AND_DEDUPLICATE_GOVERNANCE_REASONING_BUT_NOT_TO_PROMOTE_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
