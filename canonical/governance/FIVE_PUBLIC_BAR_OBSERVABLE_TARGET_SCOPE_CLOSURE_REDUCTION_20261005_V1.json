@@ -1,0 +1,289 @@
+{
+  "schema": "PROJECT_BRAIN_FIVE_PUBLIC_BAR_OBSERVABLE_TARGET_SCOPE_CLOSURE_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_PUBLIC_BAR_FAMILY_STRUCTURAL_SCOPE_REDUCED_TO_PUBLIC_PERFORMANCE_AND_TARGET_IDENTITY_ONLY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Recompute the five public-bar-only family scope gaps after the active target-behavior/mechanism separation. Preserve every frozen observable family behavior and every public performance predicate, but remove mechanism-shaped dependencies that are neither explicit target behavior nor needed to cover an observable family dimension.",
+  "authorities": {
+    "capability_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "task_union_audit": {
+      "path": "canonical/governance/PUBLIC_BAR_TASK_UNION_SCOPE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2295a03fe9090e6842c6bd850b7bca67d1f71131"
+    },
+    "target_mechanism_guard": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json",
+      "git_blob_sha": "f9fff2497d9a27da64ecffcd12f4cca78dc2e4ea"
+    },
+    "target_conditioned_residual_reconciliation": {
+      "path": "canonical/governance/PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_20261005_V1.json",
+      "git_blob_sha": "d2a204be38378841c353decad6368af66aa48724"
+    },
+    "target_conditioned_connector_verification": {
+      "path": "canonical/verification/PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "a037a51b9860b4a8404c7dc5bed3a93b290070a8"
+    },
+    "atomic_evidence_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "tb_science_current_target_overlay": {
+      "path": "canonical/governance/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "acdc32cb73e08208ce8d99fab1b2e0031d5f9fd3"
+    }
+  },
+  "rule": "For a public-bar family F, structural scope is sufficient when every observable clause in the frozen useful_behavior sentence is either directly represented in the benchmark task union used by F or covered by an already scope-complete stronger observable receipt. A particular internal mechanism is not an additional mandatory conjunct unless target entailment is independently proved. Performance bars, target-epoch identity and same-harness comparability remain separate load-bearing obligations.",
+  "families": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "frozen_useful_behavior": "Long-running work in unfamiliar/large codebases: feature implementation, debugging, refactoring, review, terminal operation, ambiguous multi-file changes, root-cause analysis and self-checking.",
+      "direct_public_union_cover": [
+        "UNFAMILIAR_REPOSITORY_INTENT_AND_CODEBASE_UNDERSTANDING",
+        "FEATURE_IMPLEMENTATION_AND_MULTI_FILE_EDIT",
+        "BUG_FINDING_DEBUGGING_AND_INVESTIGATION",
+        "REFACTORING_WITH_BEHAVIOR_PRESERVATION",
+        "PLANNING_REVIEW_AND_DESIGN_ADHERENCE",
+        "TERMINAL_BUILD_TEST_JOB_AND_OPERATION_EXECUTION",
+        "LONG_HORIZON_AMBIGUITY_AND_STATE_RETENTION_AT_THE_CLAIMED_TASK_HORIZON"
+      ],
+      "stronger_observable_receipts": [
+        {
+          "predicate": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+          "state": "PROVED",
+          "covers": "ROOT_CAUSE_ANALYSIS"
+        },
+        {
+          "predicate": "RECOVERY_TERMINAL_NONINFERIOR",
+          "state": "PROVED",
+          "covers": "SELF_CHECK_AND_RECOVERY_OUTCOME"
+        },
+        {
+          "predicate": "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+          "state": "PROVED",
+          "covers": "FAIL_CLOSED_SELF_CHECKING"
+        }
+      ],
+      "nonmandatory_mechanisms": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ],
+      "structural_scope_residuals": [],
+      "remaining_load_bearing": [
+        "CODING_TB4_GE_66_4",
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8",
+        "EXACT_BENCHMARK_AND_AGENT_CONFIGURATION_IDENTITY_FOR_EACH_BAR"
+      ],
+      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_OPEN"
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "frozen_useful_behavior": "Produce high-quality professional work products and complete multi-hour/multi-stage office tasks.",
+      "direct_public_union_cover": [
+        "HIGH_QUALITY_PROFESSIONAL_WORK_PRODUCT__GDPVAL_AA_PAIRWISE_ELO_AND_AA_BRIEFCASE_RUBRIC_ANALYTICAL_PRESENTATION_QUALITY",
+        "MULTI_HOUR_MULTI_STAGE_OFFICE_TASK_COMPLETION__AA_BRIEFCASE_MULTI_WEEK_LINKED_PROJECTS",
+        "DOCUMENT_SPREADSHEET_SLIDE_DIAGRAM_DELIVERABLE_PRODUCTION",
+        "REALISTIC_CROSS_OCCUPATION_PROFESSIONAL_TASKS"
+      ],
+      "stronger_observable_receipts": [
+        {
+          "predicate": "ARTIFACT_MECHANICAL_GATES_CEILING",
+          "state": "PROVED",
+          "covers": "NATIVE_DELIVERABLE_MECHANICAL_PRESERVATION_WITHIN_CLAIMED_FORMAT_SCOPE"
+        },
+        {
+          "predicate": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+          "state": "PROVED",
+          "covers": "SOURCE_FIDELITY_INVARIANT"
+        },
+        {
+          "predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+          "state": "PROVED",
+          "covers": "TRANSFER_BEYOND_ENUMERATED_DOMAIN_INSTANCES_WITHIN_ITS_FROZEN_SCOPE"
+        },
+        {
+          "predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+          "state": "PROVED",
+          "covers": "TOOL_ROUTE_SUCCESS_WITHIN_ITS_FROZEN_SCOPE"
+        }
+      ],
+      "nonmandatory_mechanisms": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
+      ],
+      "structural_scope_residuals": [],
+      "remaining_load_bearing": [
+        "PROWORK_GDPVAL_GE_1846_OR_CURRENT_SAME_EPOCH_EQUIVALENT_TARGET_RULE",
+        "PROWORK_AA_BRIEFCASE_GE_1822_OR_CURRENT_SAME_EPOCH_EQUIVALENT_TARGET_RULE",
+        "GDPVAL_AA_TARGET_EPOCH_IDENTITY",
+        "AA_BRIEFCASE_TARGET_EPOCH_IDENTITY"
+      ],
+      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_AND_TARGET_EPOCH_OPEN"
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "frozen_useful_behavior": "Execute real multi-application business workflows accurately end-to-end.",
+      "direct_public_union_cover": [
+        "CROSS_APPLICATION_ORCHESTRATION",
+        "API_OR_TOOL_DISCOVERY",
+        "BUSINESS_POLICY_AND_GUARDRAIL_COMPLIANCE",
+        "IRRELEVANT_OR_MISLEADING_RECORD_FILTERING",
+        "CORRECT_END_STATE_WRITES",
+        "MULTI_DOMAIN_BUSINESS_WORKFLOW_EXECUTION"
+      ],
+      "target_scope_exclusions": [
+        "VISUAL_BROWSER_GROUNDING_IS_NOT_EXPLICITLY_REQUIRED_BY_THIS_FAMILY_SENTENCE; API_OR_TOOL_MEDIATED_REALIZATIONS_REMAIN_ADMISSIBLE",
+        "A_SPECIFIC_RECOVERY_CONTROLLER_IS_NOT_AN_OBSERVABLE_TARGET_REQUIREMENT"
+      ],
+      "nonmandatory_mechanisms": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "structural_scope_residuals": [],
+      "remaining_load_bearing": [
+        "AUTOMATIONBENCH_GE_40",
+        "AUTOMATIONBENCH_PUBLIC_PASS_RATE_VS_AUTOMATIONBENCH_AA_METRIC_IDENTITY_SPLIT",
+        "EXACT_TARGET_CONFIGURATION_IDENTITY"
+      ],
+      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_AND_METRIC_IDENTITY_OPEN"
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "frozen_useful_behavior": "Solve difficult expert-level questions across domains with search/code/tools.",
+      "direct_public_union_cover": [
+        "DIFFICULT_EXPERT_LEVEL_CLOSED_ENDED_REASONING",
+        "MULTIDOMAIN_TRANSFER_ACROSS_MORE_THAN_100_SUBJECTS",
+        "SEARCH_AUGMENTED_EVIDENCE_GATHERING",
+        "CODE_OR_COMPUTATION_TOOL_USE"
+      ],
+      "configuration_reclassification": {
+        "prior_open_item": "MULTIMODAL_OR_NON_TEXT_INPUT_WHERE_PRESENT__HLE_WITH_TOOLS_CONDITION_IDENTITY",
+        "new_classification": "TARGET_OBSERVATION_AND_HARNESS_IDENTITY__NOT_A_NEW_BEHAVIORAL_SCOPE_RESIDUAL",
+        "rationale": "HLE itself is multimodal, while the frozen family target is expert-level questions across domains with search/code/tools. Any image-bearing questions in the exact vendor-scored population must be preserved by the exact HLE target setup, but this does not create a separate all-multimodal capability claim for this family.",
+        "public_sources": [
+          "https://www.anthropic.com/claude-opus-5-5",
+          "https://www.lastexam.ai/"
+        ]
+      },
+      "target_scope_exclusions": [
+        "OPEN_ENDED_AUDIENCE_SYNTHESIS_IS_NOT_IN_THE_FROZEN_FAMILY_SENTENCE",
+        "A_SPECIFIC_ITERATIVE_RESEARCH_CONTROLLER_IS_NOT_IN_THE_FROZEN_FAMILY_SENTENCE",
+        "GENERAL_CALIBRATED_ABSTENTION_IS_NOT_A_SEPARATE_CLAUSE_OF_THIS_FAMILY_SENTENCE"
+      ],
+      "structural_scope_residuals": [],
+      "remaining_load_bearing": [
+        "HLE_TOOLS_GE_67_7",
+        "EXACT_ANTHROPIC_WITH_TOOLS_POPULATION_TOOLING_JUDGE_AND_REASONING_EFFORT_IDENTITY",
+        "GATED_POPULATION_ACCESS_OR_SCOPE_SAFE_EQUIVALENT",
+        "BRAIN_TOOL_ADAPTER_AND_SCORE"
+      ],
+      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__HLE_PERFORMANCE_AND_TARGET_SETUP_IDENTITY_OPEN"
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "frozen_useful_behavior": "Use scientific software, tools, analysis and iterative reasoning to solve long-horizon research/technical tasks.",
+      "direct_public_union_cover": [
+        "SCIENTIFIC_DATA_ANALYSIS_AND_STATISTICAL_INFERENCE",
+        "SIMULATION_OPTIMIZATION_AND_MODEL_FITTING",
+        "THEOREM_PROVING_AND_MATHEMATICAL_WORKFLOW",
+        "SIGNAL_IMAGE_INVERSE_AND_SENSOR_WORKFLOWS",
+        "SCIENTIFIC_CODE_SOFTWARE_AND_ARTIFACT_EXECUTION",
+        "ITERATIVE_LONG_HORIZON_RESEARCH_WORKFLOW_EXECUTION"
+      ],
+      "conditional_non_target_items": [
+        "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+        "RESULT_INTERPRETATION_VALIDATION_AND_SCIENTIFIC_COMMUNICATION_BEYOND_THE_FROZEN_EXECUTION_WORKFLOW_SENTENCE"
+      ],
+      "target_scope_basis": "The frozen useful_behavior sentence requires execution of long-horizon scientific research/technical workflows; it does not separately require generating the research question/hypothesis or audience-facing communication. The current target-scope quarantine independently fail-closes those additions unless later first-party target evidence proves them load-bearing.",
+      "nonmandatory_mechanisms": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "structural_scope_residuals": [],
+      "remaining_load_bearing": [
+        "TB_SCIENCE_GE_58_7_PREDICATE_UNDER_HARNESS_CONDITIONAL_TARGET_RULE",
+        "CURRENT_PUBLIC_ROUTE_OPUS55_FLOOR_63_3_PERCENT",
+        "EXACT_TB_SCIENCE_VERSION_HARNESS_AGENT_AND_TARGET_CONFIGURATION_IDENTITY",
+        "BRAIN_VERIFIER_SUCCESS_MASS_AND_SCORE"
+      ],
+      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_AND_TARGET_FRESHNESS_OPEN"
+    }
+  ],
+  "aggregate": {
+    "family_count": 5,
+    "prior_new_candidate_behavioral_residual_count": 1,
+    "mandatory_new_behavioral_residual_count_after_target_conditioning": 0,
+    "prior_configuration_identity_scope_item_count": 1,
+    "behavioral_configuration_residual_count_after_reclassification": 0,
+    "target_observation_or_harness_identity_items_preserved": true,
+    "standalone_mechanism_parity_programs_required_by_these_five_families": 0,
+    "public_performance_predicates_deleted": 0,
+    "target_epoch_or_harness_guards_deleted": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "GENERIC_SCOPE_EQUIVALENCE_SEARCH_FOR_THE_FIVE_PUBLIC_BAR_FAMILIES",
+      "MANDATORY_PARITY_PROGRAMS_FOR_MECHANISMS_NOT_TARGET_ENTAILED",
+      "HLE_MULTIMODAL_CONFIGURATION_AS_A_SEPARATE_BEHAVIORAL_SCOPE_RESIDUAL",
+      "UNCONDITIONAL_SCIENTIFIC_HYPOTHESIS_FORMATION_PARITY_PROGRAM"
+    ],
+    "activate": [
+      "EXECUTE_OR_FORMALLY_DISCHARGE_ONLY_THE_FROZEN_PUBLIC_PERFORMANCE_PREDICATES",
+      "FREEZE_EXACT_TARGET_OBSERVATION_TUPLES_BEFORE_SCORE_CREDIT",
+      "PRESERVE_CURRENT_TB_SCIENCE_63_3_PUBLIC_ROUTE_OVERLAY",
+      "PRESERVE_GDPVAL_AA_AND_AA_BRIEFCASE_EPOCH_RECONCILIATION",
+      "PRESERVE_AUTOMATIONBENCH_METRIC_IDENTITY_SPLIT",
+      "WAKE_CONDITIONAL_TARGET_BEHAVIORS_ONLY_ON_NEW_VERIFIED_TARGET_SCOPE_EVIDENCE"
+    ]
+  },
+  "public_scope_sources": [
+    "https://cursor.com/evals",
+    "https://cognition.com/blog/frontier-code-1-1",
+    "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "https://artificialanalysis.ai/evaluations/aa-briefcase",
+    "https://arxiv.org/abs/2604.18934",
+    "https://github.com/zapier/AutomationBench",
+    "https://www.lastexam.ai/",
+    "https://www.terminal-bench-science.ai/announcement",
+    "https://www.terminal-bench-science.ai/",
+    "https://www.anthropic.com/claude-opus-5-5"
+  ],
+  "falsifiers": [
+    "A_FROZEN_USEFUL_BEHAVIOR_CLAUSE_IN_ANY_OF_THE_FIVE_FAMILIES_IS_NOT_DIRECTLY_COVERED_BY_THE_BOUND_PUBLIC_TASK_UNION_OR_AN_EXPLICITLY_LISTED_SCOPE_COMPLETE_STRONGER_OBSERVABLE_RECEIPT.",
+    "A_QUARANTINED_MECHANISM_IS_INDEPENDENTLY_PROVED_NECESSARY_FOR_EVERY_ADMISSIBLE_REALIZATION_OF_A_FROZEN_OBSERVABLE_TARGET_CLAUSE.",
+    "THE_HLE_67_7_WITH_TOOLS_TARGET_IS_PROVED_TO_ASSERT_A_SEPARATE_GENERAL_MULTIMODAL_CAPABILITY_BEYOND_THE_EXACT_BENCHMARK_POPULATION.",
+    "FIRST_PARTY_OPUS55_EVIDENCE_PROVES_SCIENTIFIC_HYPOTHESIS_FORMATION_OR_SCIENTIFIC_COMMUNICATION_IS_A_LOAD_BEARING_TARGET_CLAUSE_NOT_ALREADY_REPRESENTED_ELSEWHERE."
+  ],
+  "hard_nonclaims": [
+    "NO_PUBLIC_BAR_PERFORMANCE_RESULT_PROVED",
+    "NO_FAMILY_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_ALL_POSSIBLE_PROFESSIONAL_BUSINESS_SCIENTIFIC_OR_CODING_TASKS_ARE_ENUMERATED_BY_PUBLIC_BENCHMARKS",
+    "NO_CLAIM_HLE_HARNESS_IDENTITY_IS_ALREADY_RESOLVED",
+    "NO_CLAIM_SCIENTIFIC_HYPOTHESIS_FORMATION_IS_ABSENT_FROM_OPUS55",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_FINALITY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
