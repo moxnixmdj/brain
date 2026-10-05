@@ -181,6 +181,69 @@ class ModelIndependenceTests(unittest.TestCase):
                 runtime._inherit_verified_capabilities(problem)
 
 
+    def test_controller_result_lineage_rejects_tampered_prior_state(self):
+        first=runtime._controller_trace_record(
+            0,
+            {"type":"synthetic","args":{}},
+            {"value":"alpha"},
+            None,
+        )
+        second=runtime._controller_trace_record(
+            1,
+            {"type":"synthetic","args":{}},
+            {"value":"beta"},
+            first["chain_sha256"],
+        )
+        valid,rewound=runtime._validated_checkpoint_prefix([first,second])
+        self.assertEqual(valid,[first,second])
+        self.assertIsNone(rewound)
+        self.assertEqual(
+            runtime._resolve_result_refs(
+                {"$result":{"cycle":0,"field":"value"}},
+                [first,second],
+            ),
+            "alpha",
+        )
+
+        tampered=json.loads(json.dumps([first,second]))
+        tampered[0]["result"]["value"]="forged"
+        valid,rewound=runtime._validated_checkpoint_prefix(tampered)
+        self.assertEqual(valid,[])
+        self.assertEqual(rewound,0)
+        with self.assertRaisesRegex(
+            runtime.Blocker,
+            "RESULT_REFERENCE_LINEAGE_INVALID:0",
+        ):
+            runtime._resolve_result_refs(
+                {"$result":{"cycle":0,"field":"value"}},
+                tampered,
+            )
+
+    def test_controller_lineage_content_binds_durable_effect_without_adapter_hash(self):
+        path=CANONICAL_ROOT/"astra_runtime"/"tmp"/"TEST_CONTROLLER_LINEAGE_BINDING.txt"
+        path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_text("alpha",encoding="utf-8")
+        self.addCleanup(lambda: path.unlink(missing_ok=True))
+        rel="canonical/astra_runtime/tmp/TEST_CONTROLLER_LINEAGE_BINDING.txt"
+        record=runtime._controller_trace_record(
+            0,
+            {"type":"synthetic","args":{}},
+            {"result_path":rel},
+            None,
+        )
+        valid,rewound=runtime._validated_checkpoint_prefix([record])
+        self.assertEqual(valid,[record])
+        self.assertIsNone(rewound)
+        self.assertEqual(
+            record["durable_effect_sha256"][rel],
+            runtime.sha_file(path),
+        )
+
+        path.write_text("mutated",encoding="utf-8")
+        valid,rewound=runtime._validated_checkpoint_prefix([record])
+        self.assertEqual(valid,[])
+        self.assertEqual(rewound,0)
+
     def test_anonymous_controller_checkpoints_are_isolated_by_plan_hash(self):
         first=[
             {"type":"read_file","args":{"path":"canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"}},
