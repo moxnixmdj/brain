@@ -1,0 +1,244 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PROFILE_AWARE_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_REPAIR__V1_INTERFACE_ALPHABET_FALSIFIED__INTRINSIC_OPUS55_POLICY_INTERFACE_RESTORED_WITH_ACTOR_ATTRIBUTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Repair the fixed-interface target-coverage route without weakening or broadening the terminal goal: represent the complete documented interaction/state surface needed to characterize the intrinsic Opus 5.5 model policy, while treating fallback models, server/client executors, refusal classifiers, and wrapper mechanics as environment actors rather than Opus capability.",
+  "supersedes_as_coverage_candidate_only": {
+    "path": "canonical/governance/OPUS55_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_CERTIFICATE_20261005_V1.json",
+    "git_blob_sha": "146b237515ba8867acd6778b291e340e5e9138fc",
+    "reason": "V1 omits load-bearing thinking and redacted-thinking response/state blocks from its model-emission alphabet."
+  },
+  "authorities": {
+    "interface_policy_normal_form": {
+      "path": "canonical/reasoning/2026-10-05_OPUS55_INTERFACE_POLICY_NORMAL_FORM_V1.json",
+      "git_blob_sha": "506b9deb251160f1d47d2d23fb897f852f17c541"
+    },
+    "interface_policy_first_party_verification": {
+      "path": "canonical/verification/OPUS55_INTERFACE_POLICY_NORMAL_FORM_FIRST_PARTY_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "9bd6b2196cb3b6e66357df61d31d1293a2e18f14"
+    },
+    "target_profile_union": {
+      "path": "canonical/governance/OPUS55_TARGET_PROFILE_UNION_BOUNDARY_20261005_V1.json",
+      "status": "SUPERSEDED_AS_INTRINSIC_TARGET__DISCOVERY_PARTITION_ONLY"
+    },
+    "target_superset_normal_form": {
+      "path": "canonical/governance/TARGET_SUPERSET_COVERAGE_DOMINANCE_NORMAL_FORM_20261005_V1.json",
+      "git_blob_sha": "55a027d50e6f9d1c4d70a75b39d6a536e26a4277"
+    },
+    "intrinsic_capability_boundary": {
+      "path": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_VS_DEPLOYMENT_PROFILE_BOUNDARY_20261005_V2.json",
+      "git_blob_sha": "9bac958e4db829f94d756cd94709d0c885d43e25"
+    }
+  },
+  "fresh_first_party_evidence": [
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/migration-guide",
+      "observed_2026_10_05": [
+        "THINKING_RUNS_ON_EVERY_CLAUDE_OPUS_5_5_REQUEST",
+        "RESPONSES_CAN_BEGIN_WITH_ONE_OR_MORE_THINKING_BLOCKS_BEFORE_TEXT",
+        "TOOL_USE_LOOPS_MUST_RETURN_THINKING_BLOCKS_COMPLETE_AND_UNMODIFIED",
+        "TEXT_BETWEEN_TOOL_CALLS_CAN_ARRIVE_IN_THINKING_BLOCKS"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/api/messages/create",
+      "observed_2026_10_05": [
+        "THINKING_BLOCK_PARAM_HAS_TYPE_THINKING_SIGNATURE_AND_THINKING",
+        "REDACTED_THINKING_BLOCK_PARAM_HAS_TYPE_REDACTED_THINKING_AND_OPAQUE_DATA",
+        "THINKING_BLOCKS_MUST_BE_PASSED_BACK_UNMODIFIED_AND_IN_ORIGINAL_ORDER",
+        "REDACTED_THINKING_BLOCKS_MUST_BE_PASSED_BACK_UNCHANGED"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed_2026_10_05": [
+        "ADAPTIVE_THINKING_IS_ALWAYS_ON",
+        "THINKING_BLOCKS_ARE_TIED_TO_MODEL_AND_CONVERSATION",
+        "TEXT_BETWEEN_TOOL_CALLS_IS_RETURNED_IN_THINKING_BLOCKS_AT_THIS_MODEL_GENERATION"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/api/messages/create",
+      "observed_2026_10_05": [
+        "EVERY_SUCCESSFUL_RESPONSE_HAS_STOP_REASON_STATE",
+        "STOP_REASON_CAN_BE_END_TURN_MAX_TOKENS_STOP_SEQUENCE_TOOL_USE_PAUSE_TURN_REFUSAL_OR_MODEL_CONTEXT_WINDOW_EXCEEDED",
+        "REFUSAL_CAN_CARRY_STRUCTURED_STOP_DETAILS_CATEGORY_AND_EXPLANATION",
+        "PAUSE_TURN_REQUIRES_RETURNING_THE_ASSISTANT_CONTENT_TO_CONTINUE"
+      ]
+    }
+  ],
+  "v1_constructive_falsifier": {
+    "v1_model_emissions": [
+      "TEXT",
+      "STRUCTURED_TOOL_USE_OR_SERVER_TOOL_USE_REQUEST"
+    ],
+    "valid_opus55_trace_prefix": [
+      "USER_TEXT_OR_IMAGE_INPUT",
+      "MODEL_THINKING_BLOCK_WITH_SIGNATURE",
+      "MODEL_TOOL_USE_REQUEST",
+      "TOOL_RESULT",
+      "PRIOR_MODEL_THINKING_BLOCK_RETURNED_UNMODIFIED",
+      "MODEL_NEXT_THINKING_OR_TEXT_BLOCK"
+    ],
+    "counterexample": "A valid Opus 5.5 tool-use response containing a thinking block is not representable by the V1 model-emission alphabet because THINKING is neither TEXT nor TOOL_USE. The block is also load-bearing conversation state because the API requires it to be returned unmodified in the continuing tool-use conversation.",
+    "consequence": [
+      "THE_V1_INTERFACE_COMPLETENESS_PREMISE_IS_FALSE_AS_WRITTEN_FOR_THE_DOCUMENTED_OPUS55_API",
+      "U_STAR_SUBSET_OR_EQUAL_A_V1_IS_NOT_ESTABLISHED",
+      "THE_V1_FIXED_INTERFACE_CERTIFICATE_CANNOT_DISCHARGE_LITERAL_TARGET_DISCOVERY_COMPLETENESS"
+    ],
+    "additional_counterexample": "V1 also omits response-level continuation/control state. Such state must be represented in the deployed interaction trace, but it MUST NOT automatically receive intrinsic Opus55 capability credit: refusal classifiers, fallback routing, parser stop reasons, and server execution can be separate actors."
+  },
+  "repaired_profile_aware_interface": {
+    "profile_key": [
+      "TARGET_MODEL_VERSION",
+      "FROZEN_TARGET_EPOCH",
+      "PLATFORM_OR_HARNESS",
+      "ACCESS_OR_VERIFICATION_PROFILE",
+      "SAFEGUARD_AND_FALLBACK_STATE",
+      "EFFORT_OR_THINKING_SETTING_WHEN_LOAD_BEARING",
+      "TOOL_OR_COMPUTER_USE_HARNESS_WHEN_LOAD_BEARING"
+    ],
+    "conversation_inputs_and_state": [
+      "SYSTEM_INSTRUCTIONS_AND_REQUEST_CONFIGURATION",
+      "TEXT",
+      "IMAGE_OR_SCREENSHOT",
+      "DOCUMENT_OR_SEARCH_RESULT_CONTENT_BLOCK",
+      "TOOL_RESULT_OR_SERVER_TOOL_RESULT",
+      "TOOL_SCHEMA_AND_TOOL_AVAILABILITY_STATE",
+      "SIGNED_THINKING_BLOCK_STATE_RETURNED_UNMODIFIED_WHEN_REQUIRED",
+      "REDACTED_THINKING_BLOCK_STATE_RETURNED_UNMODIFIED_WHEN_REQUIRED",
+      "PRIOR_CONVERSATION_AND_COMPACTION_STATE_ALLOWED_BY_THE_PROFILE"
+    ],
+    "model_emissions": [
+      "TEXT",
+      "THINKING_BLOCK",
+      "REDACTED_THINKING_BLOCK",
+      "STRUCTURED_TOOL_USE_OR_SERVER_TOOL_USE_REQUEST"
+    ],
+    "trajectory_operations": [
+      "SEQUENCE",
+      "BRANCH",
+      "LOOP",
+      "PARALLEL_TOOL_CALL_GROUP",
+      "PAUSE_AND_CONTINUE",
+      "STATE_CARRY_FORWARD"
+    ],
+    "external_effect_rule": "Effects outside model-generated content occur through external execution transitions. Thinking and redacted-thinking are model-generated/state-carry blocks, not external executor computations.",
+    "response_control_and_metadata": [
+      "STOP_REASON_AND_STOP_DETAILS_AS_PLATFORM_OR_MODEL_CONTROL_STATE_WITH_ACTOR_ATTRIBUTION",
+      "STOP_SEQUENCE_WHEN_PRESENT",
+      "CITATION_OR_CONTENT_BLOCK_METADATA_WHEN_LOAD_BEARING",
+      "CONTAINER_OR_SERVER_TOOL_EXECUTION_STATE_WHEN_LOAD_BEARING"
+    ],
+    "actor_classes": [
+      "OPUS55_MODEL_POLICY",
+      "PROFILE_ROUTER_OR_SAFEGUARD",
+      "FALLBACK_MODEL",
+      "CLIENT_EXECUTOR",
+      "ANTHROPIC_SERVER_EXECUTOR_OR_PARSER",
+      "USER_OR_EXTERNAL_ENVIRONMENT"
+    ],
+    "actor_attribution_rule": "Every load-bearing trace event used for intrinsic capability credit MUST be projected onto OPUS55_MODEL_POLICY. Non-Opus actors remain in the interaction trace only as conditions, observations, or external transitions."
+  },
+  "role_factorization": {
+    "new_primitive_family_required": false,
+    "thinking_generation_and_use": [
+      "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING"
+    ],
+    "signed_thinking_continuity": [
+      "B3_TEMPORAL_STATE_MEMORY_AND_CONTINUITY"
+    ],
+    "thinking_interleaved_with_tools": [
+      "B4_EXTERNAL_ACTION_PLANNING_AND_ENVIRONMENT_CONTROL",
+      "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY",
+      "B9_MULTI_ROLE_COMPOSITION"
+    ],
+    "reason": "The discovered blocks add a missing documented channel/state type to the trace alphabet but do not by themselves exhibit a new causal role outside the existing B0-B9 basis.",
+    "response_termination_and_refusal_state": [
+      "ENVIRONMENT_OR_PROFILE_CONDITION__NO_INTRINSIC_CREDIT_WITHOUT_A55_ACTOR_ATTRIBUTION",
+      "B1_GOAL_CONSTRAINT_SCOPE_AND_JUDGMENT_ONLY_WHERE_OPUS55_POLICY_IS_LOAD_BEARING_ACTOR",
+      "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY_ONLY_WHERE_OPUS55_POLICY_IS_LOAD_BEARING_ACTOR"
+    ],
+    "pause_turn_and_resume_state": [
+      "B3_TEMPORAL_STATE_MEMORY_AND_CONTINUITY",
+      "B9_MULTI_ROLE_COMPOSITION"
+    ]
+  },
+  "repaired_coverage_theorem": {
+    "definitions": {
+      "P": "AUTHORIZED_FIRST_PARTY_OPUS55_DEPLOYMENT_OR_ACCESS_PROFILES_USED_AS_DISCOVERY_AND_EVIDENCE_PARTITIONS",
+      "H_p": "DOCUMENTED_INTERACTION_HISTORIES_AVAILABLE_UNDER_PROFILE_p",
+      "A55": "ACTOR_ATTRIBUTION_PREDICATE THAT A LOAD_BEARING DECISION_TRANSFORMATION_OR_CONTROL EVENT WAS PRODUCED_BY_OPUS55_POLICY",
+      "C55": "ALL_USEFUL_INTRINSIC_BEHAVIORAL_CAPABILITIES_CAUSALLY_ATTRIBUTABLE_TO_OPUS55_MODEL_POLICY",
+      "A_p": "ALL_FINITE_DOCUMENTED_INTERACTION_TRACES_EXPRESSIBLE_UNDER_THE_REPAIRED_INTERFACE_FOR_PROFILE_p",
+      "A_STAR": "UNION_OVER_p_IN_P_OF_A_p",
+      "PI55_A_STAR": "PROJECTION_OF_A_STAR_ONTO_LOAD_BEARING_EVENTS_WITH_A55_TRUE",
+      "D": "COMPOSITION_CLOSURE_OF_THE_EXISTING_B0_THROUGH_B9_BEHAVIORAL_ROLE_DOMAIN"
+    },
+    "sufficient_premises": [
+      "PROFILE_SWEEP_IS_USED_FOR_DISCOVERY_NOT_AS_THE_INTRINSIC_TARGET_SET",
+      "FOR_EVERY_AUTHORIZED_PROFILE_p_THE_BOUND_INTERFACE_DESCRIPTION_IS_COMPLETE_FOR_CHANNELS_AND_STATE_NEEDED_TO_CONDITION_OR_OBSERVE_OPUS55_POLICY",
+      "EVERY_INTRINSIC_c_IN_C55_HAS_AT_LEAST_ONE_DOCUMENTED_TRACE_WITNESS_IN_A_STAR_WITH_THE_LOAD_BEARING_OPUS55_EVENTS_IDENTIFIED_BY_A55",
+      "EVERY_LOAD_BEARING_OPUS55_POLICY_EVENT_OR_STATE_DEPENDENCY_IN_PI55_A_STAR_FACTORS_THROUGH_B0_THROUGH_B9",
+      "THE_CERTIFICATION_DOMAIN_D_EXTENSIONALLY_COVERS_THE_REQUIRED_ROLE_CONTRACTS_NOT_MERELY_THE_ROLE_NAMES"
+    ],
+    "conclusion_if_independently_verified": "C55_SUBSET_OR_EQUAL_PI55_A_STAR_SUBSET_OR_EQUAL_D",
+    "critical_boundary": "THIS IS INTRINSIC TARGET COVERAGE ONLY. FALLBACK MODEL OUTPUTS EXTERNAL TOOL COMPUTATION SAFEGUARD WRAPPERS AND PLATFORM PARSER METADATA RECEIVE NO OPUS55 CAPABILITY CREDIT WITHOUT ACTOR EVIDENCE. PERFORMANCE DOMINANCE OVER_D REMAINS SEPARATE."
+  },
+  "breakthrough": {
+    "description": "THE OPEN_WORLD COMPLETENESS PROBLEM CAN BE COMPRESSED TO A FINITE ACTOR_ATTRIBUTED INTERFACE PROOF: sweep profiles to discover behavior, represent all causal state channels including thinking, then project the trace onto intrinsic Opus55 policy events before capability credit.",
+    "leverage": [
+      "DO_NOT_REOPEN_20TH_FAMILY_SEARCH_FOR_THINKING_BLOCKS",
+      "DO_NOT_COUNT_FALLBACK_MODELS_SERVER_TOOLS_REFUSAL_CLASSIFIERS_OR_WRAPPERS_AS_OPUS55_CAPABILITY",
+      "DO_NOT_ENUMERATE_DOMAIN_LABELS_TO_REPAIR_INTERFACE_COVERAGE",
+      "REUSE_THE_EXISTING_POLICY_NORMAL_FORM_AND_B0_B9_ROLE_BASIS",
+      "REVERIFY_ONLY_INTERFACE_TOTALITY_ACTOR_ATTRIBUTION_AND_EXTENSIONAL_ROLE_COVERAGE_BEFORE_RETURNING_TO_DOMAIN_DOMINANCE"
+    ]
+  },
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "USE_V1_FIXED_INTERFACE_CERTIFICATE_AS_TARGET_COMPLETENESS_WITNESS",
+      "TREAT_TEXT_AND_TOOL_USE_AS_THE_COMPLETE_OPUS55_MODEL_EMISSION_ALPHABET",
+      "PROFILE_FREE_INTERFACE_COMPLETENESS_CLAIMS",
+      "USE_DEPLOYMENT_PROFILE_UNION_AS_INTRINSIC_OPUS55_TARGET_WITHOUT_ACTOR_PROJECTION",
+      "COUNT_REFUSAL_FALLBACK_SERVER_TOOL_OR_WRAPPER_OUTPUT_AS_INTRINSIC_OPUS55_CAPABILITY_BY_ASSOCIATION"
+    ],
+    "activate": [
+      "INDEPENDENT_FIRST_PARTY_FALSIFICATION_OF_THE_REPAIRED_INTERACTION_ALPHABET",
+      "ACTOR_PROVENANCE_ON_EACH_LOAD_BEARING_TARGET_EVENT",
+      "PROFILE_SWEEP_AS_DISCOVERY_EVIDENCE_PARTITION",
+      "PROVE_C55_SUBSET_OR_EQUAL_PI55_A_STAR",
+      "COMPILE_EXISTING_RECEIPTS_INTO_STATE_CONDITIONED_LOCAL_REFINEMENT_ONLY_AFTER_INTRINSIC_TARGET_COVERAGE_SURVIVES"
+    ],
+    "preserve": [
+      "ALL_EXISTING_PERFORMANCE_THRESHOLDS",
+      "FAIL_CLOSED_LITERAL_ALL_FINALITY",
+      "ZERO_INCREMENTAL_SPEND",
+      "NO_NEW_FAMILY_WITHOUT_CONSTRUCTIVE_NEW_CAUSAL_ROLE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_REPAIRED_INTERACTION_ALPHABET_IS_ALREADY_PROVED COMPLETE",
+    "NO_CLAIM_ALL_PRIVATE_OR_UNPUBLISHED_OPUS55_PROFILES_ARE_KNOWN",
+    "NO_CLAIM_THINKING_TEXT_OR_SIGNATURE_BYTES_MUST_BE_REPRODUCED_BY_BRAIN",
+    "NO_CLAIM_EXTERNAL_REFUSAL_CLASSIFIER_OR_FALLBACK_BEHAVIOR_IS_INTRINSIC_OPUS55_CAPABILITY",
+    "NO_CLAIM_INTERFACE_EXPRESSIVITY_IMPLIES_PERFORMANCE_DOMINANCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_LITERAL_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 4,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": true,
+  "independent_verification_required": true
+}
