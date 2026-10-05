@@ -3,7 +3,7 @@
   "action_id": "BIND-TB4-BUILDKITE-ZERO-SPEND-HARD-STOP-20261006-SOL",
   "status": "CANDIDATE__CURRENT_BASE_BOUND__ZERO_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "c5173abe2ab456d9c3291996d29f3cdda619f270",
+  "canonical_base_commit": "0598f4738f7cd71a6a22323788ea7e48d021b427",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
@@ -17,7 +17,7 @@
   "weakens_existing_guard": false,
   "v22_prewrite_admission": {
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "active_pointer_git_blob_sha": "997775514396c2ce1befe7d28874913e6ae35665",
+    "active_pointer_git_blob_sha": "4b53c382945552583a6279550594a1f0f890c11f",
     "mode": "ACTIVE_INTERFACE",
     "interface": "EXTERNAL_RESULT_OR_ACCESS",
     "target_truth_obligations": [
@@ -59,7 +59,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "c5173abe2ab456d9c3291996d29f3cdda619f270",
+    "canonical_base_commit": "0598f4738f7cd71a6a22323788ea7e48d021b427",
     "real_outcome": "Convert already-observed current-account and provider-policy evidence into the narrow TB4 Buildkite zero-spend hard-stop prerequisite closure.",
     "required_capability": "TRUTH_PRESERVING_ACCOUNT_SPECIFIC_ZERO_SPEND_ADJUDICATION",
     "obs_goal": {
@@ -132,7 +132,8 @@
       ],
       "adjacent_capabilities_absorbed": [
         "verified Buildkite large-host runtime",
-        "verified Buildkite Harbor protocol equivalence"
+        "verified generic Harbor carrier comparability",
+        "V3 proof-carrying benchmark witness admission"
       ],
       "fresh_reuse_plan": "Reuse the zero-spend hard-stop only until trial expiry, allowance exhaustion, provider policy change, or account plan-state change."
     },
@@ -142,7 +143,8 @@
         "reused public trial-policy reduction",
         "reused runtime receipt",
         "reused protocol-equivalence binding",
-        "content-addressed authenticated account snapshot"
+        "content-addressed authenticated account snapshot",
+        "revalidated provider pricing/trial policy on 2026-10-06"
       ],
       "search_stop_decision": "Stop billing-route discovery because the current-account deduction is complete under provider policy and explicit falsification triggers are defined.",
       "affected_layers_only_on_revalidation": true
