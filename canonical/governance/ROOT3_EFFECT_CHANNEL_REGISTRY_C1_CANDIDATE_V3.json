@@ -149,6 +149,6 @@
     "canonical/runtime/bound_capabilities/numeric_expression_sympy.py": "443e3386f11156e55635556b6e8f8ad7d7733592",
     "canonical/runtime/bound_capabilities/pdf_pypdf.py": "b63f658d269078f37f8a67be31ce4993b6cf3fcc",
     "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py": "b8a6d0f0553ffec468676b24f87d56aeb01cea17",
-    "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py": "93c84e524dd01eace5b059f00d7c020f36c57c"
+    "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py": "93c84e524dd01eace5b059f00d7c0c020f36c57c"
   }
 }
