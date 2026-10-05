@@ -188,12 +188,31 @@ def plan_actions(problem):
     cap_by_id = {c.capability_id: c for c in caps}
     actions = []
     providers = {}
+    composition_contract = []
     for cid in result["plan"]:
         cap = cap_by_id[cid]
         action = _resolve_effect_bindings(cap.action, cap, providers)
         action.setdefault("args", {})
         action["capability_id"] = cid
         cycle = len(actions)
+        provider_bindings = {}
+        for effect in sorted(cap.requires):
+            provider = providers.get(effect)
+            if provider is None:
+                continue
+            provider_cycle, producer = provider
+            provider_bindings[effect] = {
+                "cycle": provider_cycle,
+                "capability_id": producer.capability_id,
+            }
+        composition_contract.append({
+            "cycle": cycle,
+            "capability_id": cid,
+            "requires": sorted(cap.requires),
+            "provides": sorted(cap.provides),
+            "result_fields": sorted(cap.result_fields),
+            "provider_bindings": provider_bindings,
+        })
         actions.append(action)
         for effect in cap.provides:
             providers[effect] = (cycle, cap)
@@ -205,4 +224,8 @@ def plan_actions(problem):
         "args": {"summary": finish_summary},
         "why": "All target effects have an executable minimum-cost capability plan."
     })
-    return {"planning": result, "actions": actions}
+    return {
+        "planning": result,
+        "actions": actions,
+        "composition_contract": composition_contract,
+    }
