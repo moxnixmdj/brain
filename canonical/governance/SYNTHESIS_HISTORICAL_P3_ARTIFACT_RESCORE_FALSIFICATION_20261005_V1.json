@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_HISTORICAL_P3_ARTIFACT_RESCORE_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__IMMUTABLE_TERMINAL_ARTIFACT_AUDITED__POSTHOC_MATCHED_QUALITY_RESCORING_NOT_POSSIBLE_FROM_RETAINED_EVIDENCE__ZERO_CREDIT",
+  "objective": "Close the dead zero-reality branch that proposes rescoring the 2026-10-02 P3 terminal wave under the later synthesis matched-quality metric. Audit the original retained workflow artifact itself, not only the canonical summary.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "artifact_authority": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36977803089,
+    "workflow_job_id": 110745333159,
+    "artifact_id": 11214610934,
+    "artifact_name": "terminal-v3-wave-receipts",
+    "artifact_size_bytes": 54755,
+    "artifact_zip_sha256": "e77e935b4612ecbe094e806f1f4da3dff0289552844b29e5a7a7bd99020503f2",
+    "expired": false,
+    "retained_files": [
+      "full_result.json",
+      "summary.json"
+    ],
+    "full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+    "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+    "post_freeze_beacon": "36977020853"
+  },
+  "artifact_audit": {
+    "p3_behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "retained_p3_rows": [
+      {
+        "portfolio": "T1",
+        "case_id": "T1::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+        "direct_instrumentation_pass": true,
+        "parent_terminal_acceptance_pass": true
+      },
+      {
+        "portfolio": "T3",
+        "case_id": "T3::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+        "direct_instrumentation_pass": true,
+        "parent_terminal_acceptance_pass": true
+      }
+    ],
+    "per_case_p3_evaluator_facts_retained": false,
+    "per_case_p3_candidate_outputs_retained": false,
+    "per_case_p3_hidden_oracle_rows_retained": false,
+    "per_case_provenance_scoring_facts_retained": false,
+    "per_case_audience_requirement_counts_retained": false,
+    "per_case_format_style_constraint_counts_retained": false,
+    "per_case_decision_relevant_retention_counts_retained": false,
+    "reason": "THE_FULL_RESULT_CONTAINS_ONLY_AGGREGATE_PARENT_RECEIPTS_FOR_P3. WORKFLOW_LOGS CONFIRM ONLY full_result.json AND summary.json WERE UPLOADED."
+  },
+  "execution_snapshot_truth": {
+    "parent_runner": {
+      "path": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
+      "git_blob_sha_at_execution": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
+      "p3_route": "contract_native_proof_suites.score_case"
+    },
+    "p3_scorer": {
+      "path": "canonical/runtime/contract_native_proof_suites.py",
+      "git_blob_sha_at_execution": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+      "checked": [
+        "required claim IDs present",
+        "unsupported or unknown claim IDs absent",
+        "uncertainty flags present for selected conflicted claims",
+        "max_claims format bound",
+        "required claims ordered before optional claims"
+      ],
+      "not_scored_as_retained_per_case_facts": [
+        "provenance correctness output",
+        "general audience-requirement satisfaction counts",
+        "general format/style-constraint satisfaction counts",
+        "decision-relevant-unit retention counts used by the later metric"
+      ]
+    }
+  },
+  "later_metric_authority": {
+    "metric_contract_path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+    "dimension_scorer_path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json",
+    "quality_dimensions": [
+      "claim_to_source_fidelity",
+      "uncertainty_and_disagreement_preservation",
+      "audience_adaptation",
+      "format_and_style_constraints",
+      "compression_without_decision_relevant_loss"
+    ]
+  },
+  "falsification": {
+    "candidate_route": "RECONSTRUCT_MATCHED_QUALITY_FROM_THE_IMMUTABLE_2026_10_02_P3_TERMINAL_ARTIFACT_WITHOUT_NEW_REALITY",
+    "result": "FAIL_CLOSED",
+    "why": [
+      "THE_LATER_METRIC_REQUIRES DIMENSION FACTS NOT RETAINED IN THE ARTIFACT",
+      "THE_HISTORICAL_SCORER DID_NOT MEASURE ALL LATER DIMENSIONS",
+      "AGGREGATE direct_instrumentation_pass=true CANNOT BE RETROACTIVELY RELABELLED AS matched_quality=1"
+    ]
+  },
+  "scheduler_effect": {
+    "delete": [
+      "SEARCH_THE_TERMINAL_V3_ARTIFACT_AGAIN_FOR_NONEXISTENT_P3_PER_CASE_MATCHED_QUALITY_FACTS",
+      "INFER_PROVENANCE_AUDIENCE_FORMAT_OR_COMPRESSION_CEILING_FROM_THE_AGGREGATE_P3_PASS_BOOLEAN",
+      "POSTHOC_RESCORING_OF_TERMINAL_V3_P3_AS_SYNTHESIS_MATCHED_QUALITY_V1"
+    ],
+    "preserve": [
+      "HISTORICAL_P3_PASS_FOR_THE_EXACT_FROZEN_CHECKS_IT_ACTUALLY_EXECUTED",
+      "SYNTHESIS_ROOT3_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS",
+      "SYNTHESIS_ROOT2_MATCHED_QUALITY_PERFORMANCE_OBLIGATION",
+      "REQUIRED_CLAIM_COVERAGE_CEILING_PROOF_WHERE_ALREADY_VALID"
+    ],
+    "minimum_remaining_root2_options": [
+      "AN_EXISTING_PREDECLARED_MATCHED_QUALITY_RESULT_NOT_YET BOUND",
+      "A_SEPARATELY_VERIFIED_STRONGER_PROOF_FROM_AN_INDEPENDENTLY_BOUND CURRENT MECHANISM",
+      "IF_NEITHER_EXISTS__FRESH_MATCHED_PERFORMANCE_EVIDENCE_UNDER_THE_ALREADY_FROZEN_METRIC"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SYNTHESIS_MATCHED_QUALITY_IS_INFERIOR",
+    "NO_CLAIM_FRESH_REALITY_IS_YET_AUTHORIZED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_INVALIDATION_OF_THE_HISTORICAL_P3_TERMINAL_PASS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
