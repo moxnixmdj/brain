@@ -11,6 +11,7 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class ScopedProofEvidence:
+    subject_contract_bound: bool
     subject_entails_component_obligation: bool
     scope_covers_interface: bool
     independent_or_objective: bool
@@ -24,6 +25,7 @@ def admissible_component_scoped_proof(evidence: ScopedProofEvidence) -> bool:
     """Return True iff every load-bearing semantic/admissibility premise is proved."""
     return all(
         (
+            evidence.subject_contract_bound,
             evidence.subject_entails_component_obligation,
             evidence.scope_covers_interface,
             evidence.independent_or_objective,
