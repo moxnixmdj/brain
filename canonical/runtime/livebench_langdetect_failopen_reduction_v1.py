@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+    raise AssertionError(FALSIFICATION_REASON)\nFALSIFICATION_REASON = "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR_BECAUSE_LOGGING_IS_UNBOUND"\n#!/usr/bin/env python3
 """Source-bound fail-open reduction for LiveBench legacy language kernels.
 
 Pinned scorer:
