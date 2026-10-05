@@ -75,6 +75,12 @@ class Tests(unittest.TestCase):
             "NOT_EQUIVALENT",
         )
 
+    def test_missing_actor_fails_closed(self):
+        bad = [{"type": "TEXT", "payload": "semantic"}]
+        verdict = verify_observational_equivalence(bad, bad)
+        self.assertEqual(verdict["status"], "FAIL_CLOSED")
+        self.assertIn("ACTOR_INVALID", verdict["reason"])
+
     def test_unknown_event_type_fails_closed(self):
         bad = [{"type": "MAGIC", "actor": "OPUS55_MODEL_POLICY", "payload": 1}]
         verdict = verify_observational_equivalence(bad, bad)
