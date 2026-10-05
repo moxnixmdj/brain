@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ARXIVMATH_EXISTING_FAMILY_MAPPING_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__LOSSLESS_EXISTING_FAMILY_MAPPING__NO_NEW_FAMILY__PARITY_STILL_OPEN__ZERO_CREDIT",
+  "objective": "Close the MATHEMATICAL_REASONING_ARXIVMATH meta-envelope mapping question without inventing a new capability family from a benchmark/domain label.",
+  "authorities": {
+    "root1_envelope_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "capability_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "benchmark_owner_facts": {
+    "source": "https://matharena.ai/arxivmath/",
+    "competition_source": "https://matharena.ai/competitions",
+    "task_kind": "FINAL_ANSWER_RESEARCH_LEVEL_MATHEMATICS",
+    "problem_origin": "RECENT_ARXIV_MATHEMATICS_PAPERS",
+    "grading": "FINAL_ANSWER_CORRECTNESS",
+    "benchmark_properties": [
+      "OPEN",
+      "DYNAMIC",
+      "CONTAMINATION_MINIMIZING"
+    ],
+    "tool_variants": "SAME_MATHEMATICAL_TASK_KIND_WITH_OPTIONAL_CODE_EXECUTION_SANDBOX_IN_TOOL_ENABLED_VARIANTS"
+  },
+  "decomposition": {
+    "primitive_behavior": "DERIVE_A_CORRECT_FINAL_ANSWER_FROM_A_SELF_CONTAINED_ADVANCED_MATHEMATICAL_PROBLEM_USING_REASONING_AND_OPTIONAL_ALLOWED_COMPUTATION",
+    "novelty_condition": "PROBLEMS_ARE_DRAWN_FROM_RECENT_RESEARCH_MATHEMATICS_AND_MAY_REQUIRE_UNFAMILIAR_THEORETICAL_STRUCTURE",
+    "tool_condition": "OPTIONAL_CODE_EXECUTION_CHANGES_AVAILABLE_MECHANICS_NOT_THE_PRIMITIVE_TASK_KIND",
+    "not_required": [
+      "OPEN_WORLD_SCIENTIFIC_EXPERIMENT_SELECTION",
+      "ACTIVE_LITERATURE_RETRIEVAL",
+      "LAB_OR_REAL_WORLD_INTERVENTION",
+      "NEW_FAMILY_FROM_RESEARCH_DOMAIN_LABEL"
+    ]
+  },
+  "family_mapping": {
+    "primary_family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "supporting_owned_leaves": [
+      "EXACT_SYMBOLIC_COMPUTATION"
+    ],
+    "supporting_open_contracts": [
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+    ],
+    "new_family_required": false,
+    "reason": "The observable success criterion is mathematical reasoning to a parser-checkable final answer, optionally aided by code. Research provenance raises difficulty and freshness but does not change the task into a distinct primitive capability family."
+  },
+  "acceptance_boundary": {
+    "mapping_closed_if_verified": true,
+    "capability_parity_proved": false,
+    "no_tools_parity_proved": false,
+    "tools_parity_proved": false,
+    "remaining": "PROVE_EQUAL_OR_BETTER_OUTCOME_ON_THE_MATERIAL_ARXIVMATH_CONDITION_OR_A_SCOPE_SAFE_STRONGER_CERTIFICATE_UNDER_EXISTING_REASONING_FAMILY_ACCOUNTING"
+  },
+  "root1_effect": {
+    "positive_gap_delta": 0,
+    "root1_reopened": false,
+    "meta_mapping_group_closed_if_verified": "MATHEMATICAL_REASONING_ARXIVMATH"
+  },
+  "scheduler_delta": {
+    "delete": [
+      "OPEN_NEW_ARXIVMATH_FAMILY_FROM_BENCHMARK_NAME",
+      "GENERIC_SEARCH_FOR_A_DISTINCT_ARXIVMATH_MECHANISM_CLASS"
+    ],
+    "preserve": [
+      "ARXIVMATH_CONDITION_PARITY_OR_STRONGER_PROOF",
+      "EXACT_VERSION_AND_HARNESS_BINDING_FOR_ANY_ACCEPTANCE_RESULT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_MATCHES_OPUS55_ON_ARXIVMATH",
+    "NO_CLAIM_RESEARCH_LEVEL_MATHEMATICS_IS_EASY_OR_SATURATED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
