@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_ARTIFACT_DIAGRAM_SCOPE_REOPEN_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_ARTIFACT_UNCOVERED_FORMAT_SCOPE_PROOF_IS_NOT_SCOPE_COMPLETE_FOR_NEWLY_BOUND_DIAGRAM_SURFACE__REOPEN_REQUIRED_IF_INDEPENDENTLY_VERIFIED__ZERO_CREDIT",
+  "objective": "Fail closed the existing ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT proof if its load-bearing scope no longer covers the current Opus 5.5 target envelope after diagram output became an explicit first-party useful surface.",
+  "source_bindings": {
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+      "predicate_id": "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT",
+      "acceptance": "Format-specific visual/layout/quality leaves outside AA-Briefcase are independently proven."
+    },
+    "current_evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+      "current_state": "PROVED",
+      "current_scope_complete": true
+    },
+    "prior_scope_partition_proof": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d",
+      "status": "PASS__FROZEN_CONTRACTED_ARTIFACT_SCOPE_PARTITIONS_COMPLETELY_INTO_NATIVE_MECHANICS_PLUS_AA_BRIEFCASE_PROFESSIONAL_QUALITY__NO_EXTRA_DIRECT_QUALITY_LEAF"
+    },
+    "prior_scope_map": {
+      "path": "canonical/governance/AA_BRIEFCASE_ARTIFACT_SCOPE_COVERAGE_MAP_V1.json",
+      "git_blob_sha": "87c362eee0b012baa3f89890b4f7d78a6f23684a"
+    },
+    "new_first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    },
+    "new_creative_diagram_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    }
+  },
+  "recomputation": {
+    "prior_predicate_is_generic_uncovered_format_scope_audit": true,
+    "prior_proof_scope_is_explicitly_frozen_to_then_contracted_artifact_scope": true,
+    "prior_proof_excludes_arbitrary_uncontracted_native_features": true,
+    "prior_scope_map_refuses_automatic_credit_for_specific_visual_layout_or_format_features_not_shown_exercised": true,
+    "current_first_party_target_now_contains_diagram_output": true,
+    "current_creative_diagram_gap_says_existing_artifact_scope_proof_does_not_automatically_cover_diagram_output": true,
+    "current_evidence_binding_can_remain_scope_complete_without_new_diagram_coverage_proof": false
+  },
+  "logic": [
+    "A_CURRENT_PROVED_ATOMIC_SCOPE_AUDIT_MUST_REMAIN_SCOPE_COMPLETE_FOR_THE_CURRENT_TARGET_ENVELOPE",
+    "THE_LOAD_BEARING_2026_10_02_ARTIFACT_SCOPE_PARTITION_PROOF_IS_EXPLICITLY_LIMITED_TO_THE_FROZEN_CONTRACTED_SCOPE_AND_EXCLUDES_ARBITRARY_UNCONTRACTED_FEATURES",
+    "THE_2026_10_05_FIRST_PARTY_SURFACE_AUDIT_ADDS_DIAGRAM_OUTPUT_AS_A_USEFUL_OPUS55_SURFACE",
+    "THE_2026_10_05_CREATIVE_DIAGRAM_GAP_EXPLICITLY_DENIES_AUTOMATIC_DIAGRAM_CREDIT_FROM_THE_PRIOR_ARTIFACT_SCOPE_PROOF",
+    "THEREFORE_SCOPE_COMPLETE_TRUE_FOR_ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT_IS_NO_LONGER_ESTABLISHED_UNLESS_A_NEW_SCOPE_SAFE_DIAGRAM_COVERAGE_CERTIFICATE_IS BOUND"
+  ],
+  "required_current_state_if_activated": {
+    "predicate_id": "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT",
+    "state": "REOPENED_SCOPE_INCOMPLETE",
+    "root_class": "TERMINAL_PROOF_BASIS_SCOPE_COMPLETENESS_GAP",
+    "discharge_condition": "PROVE_DIAGRAM_OUTPUT_IS_LOSSLESSLY_COVERED_BY_AA_BRIEFCASE_EXERCISED_SCOPE_OR_BIND_A_SCOPE_COMPLETE_SEPARATE_DIAGRAM_VISUAL_LAYOUT_QUALITY_PROOF_THAT_SATISFIES_THE_EXISTING_GENERIC_SCOPE_AUDIT",
+    "historical_proof_preservation": "KEEP_2026_10_02_SCOPE_PARTITION_AS_VALID_FOR_ITS_FROZEN_PRE_DIAGRAM_SCOPE_ONLY"
+  },
+  "candidate_accounting_if_activated": {
+    "proved_atomic_predicates": 13,
+    "unresolved_atomic_predicates": 25,
+    "total_atomic_predicates": 38,
+    "accepted_families": 5,
+    "open_families": 14,
+    "root1_positive_gap_count": 0,
+    "terminal": false
+  },
+  "minimum_repair": {
+    "preferred": "REUSE_THE_EXISTING_ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT_ID__DO_NOT_ADD_A_REDUNDANT_NEW_TOP_LEVEL_DIAGRAM_ATOM_IF_THE_GENERIC_SCOPE_AUDIT_CAN_BE_EXTENDED_SOUNDLY",
+    "diagram_scope_reduction": "TREAT_DIAGRAM_OUTPUT_AS_EXISTING_ARTIFACT_CREATION_PLUS_COMMUNICATION_SYNTHESIS_SCOPE_UNLESS_POSITIVE_EVIDENCE_REQUIRES_A_NEW_FAMILY",
+    "performance_rule": "NO_DIAGRAM_PARITY_CREDIT_FROM_RENDER_VALIDITY_ALONE__SEMANTIC_CORRECTNESS_STRUCTURE_AND_PRESENTATION_REMAIN_LOAD_BEARING"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_LACKS_DIAGRAM_CAPABILITY",
+    "NO_NEW_FAMILY_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CANONICAL_ACCOUNTING_CHANGE_UNTIL_INDEPENDENT_VERIFICATION_AND_ACTIVATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
