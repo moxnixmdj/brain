@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PROFILE_UNION_COMPLETENESS_AND_TARGET_MEMBERSHIP_FACTORIZATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PROFILE_UNION_DOES_NOT_DISCHARGE_OPEN_WORLD_COMPLETENESS__TWO_FACTOR_PROFILE_ROUTE__SECURITY_ROWS_MEMBERSHIP_GATED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Preserve the exact-goal authorized-profile-union repair while preventing it from being misread as target-discovery completeness, and apply the active target-membership-before-mandatory-scheduling law to the newly proposed security/reliability acceptance rows.",
+  "authorities": {
+    "profile_union_boundary": {
+      "path": "canonical/governance/OPUS55_TARGET_PROFILE_UNION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "b8cfc03751ef1df11df5f94516e8fe6a1fc5a4c8"
+    },
+    "open_world_boundary": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+    "minimum_information_cut": "canonical/governance/OPUS55_TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT_20261005_V1.json",
+    "w3_factorization": {
+      "path": "canonical/governance/OPUS55_UNIVERSAL_DOMINANCE_WITNESS_FACTORIZATION_20261005_V1.json",
+      "git_blob_sha": "5635f999109ae48176276e01c65facda54d2e31b"
+    },
+    "finite_blackbox_nonidentifiability": {
+      "path": "canonical/governance/OPUS55_FINITE_BLACKBOX_LITERAL_COMPLETENESS_NONIDENTIFIABILITY_20261005_V1.json",
+      "git_blob_sha": "3b8c53f1848b0365f8e68c4150b987aed700ccc5"
+    },
+    "target_membership_law": {
+      "path": "canonical/governance/TARGET_MEMBERSHIP_BEFORE_MANDATORY_RESIDUAL_SCHEDULING_LAW_20261005_V1.json",
+      "git_blob_sha": "beeafda581c52054e644b0e82a402743c10794d5"
+    },
+    "security_reliability_candidate": {
+      "path": "canonical/governance/OPUS55_SECURITY_RELIABILITY_CROSS_CUTTING_ACCEPTANCE_DIMENSION_20261005_V1.json",
+      "git_blob_sha": "6b3a71f506d7656e152c87f3cbbdc61f1991102b"
+    }
+  },
+  "definitions": {
+    "P": "THE_ACTUAL_SET_OF_OFFICIALLY_SUPPORTED_AUTHORIZED_FIRST_PARTY_OPUS55_ACCESS_OR_DEPLOYMENT_PROFILES_IN_THE_FROZEN_TARGET_EPOCH",
+    "P0": "A_CONTENT_ADDRESSED_PROFILE_SET_CURRENTLY_ENUMERATED_BY_BRAIN",
+    "U_p": "THE_ACTUAL_USEFUL_OBSERVABLE_OPUS55_BEHAVIOR_SET_AVAILABLE_UNDER_PROFILE_p",
+    "U_star": "UNION_OVER_p_IN_P_OF_U_p",
+    "D": "A_CANDIDATE_DOMAIN_CLAIMED_TO_COVER_THE_LITERAL_TARGET"
+  },
+  "theorem": {
+    "id": "PROFILE_UNION_COMPLETENESS_FACTORIZATION",
+    "profile_decomposition_route": {
+      "sufficient_conditions_for_Ustar_subset_D": [
+        "PROFILE_SET_COMPLETENESS: P0_EQUALS_P",
+        "PER_PROFILE_BEHAVIOR_COVERAGE: FOR_ALL_p_IN_P0__U_p_SUBSET_OR_EQUAL_D"
+      ],
+      "proof": [
+        "IF_P0_EQUALS_P_THEN_U_star_EQUALS_UNION_OVER_p_IN_P0_OF_U_p",
+        "IF_EVERY_U_p_IS_A_SUBSET_OF_D_THEN_THEIR_UNION_IS_A_SUBSET_OF_D",
+        "THEREFORE_BOTH_CONDITIONS_TOGETHER_IMPLY_U_star_SUBSET_OR_EQUAL_D"
+      ],
+      "fail_closed_nonimplications": [
+        "ENUMERATING_PROFILES_WITHOUT_COMPLETE_U_p_CHARACTERIZATION_DOES_NOT_PROVE_U_star_COVERAGE",
+        "CHARACTERIZING_ONLY_ENUMERATED_PROFILES_WITHOUT_P0_EQUALS_P_DOES_NOT_PROVE_U_star_COVERAGE",
+        "DEFINING_U_star_BY_SET_UNION_DOES_NOT_ITSELF_ENUMERATE_OR_CHARACTERIZE_ITS_MEMBERS"
+      ]
+    },
+    "target_independent_superdomain_route": {
+      "statement": "PROFILE_ENUMERATION_CAN_BE_BYPASSED_ONLY_IF_D_IS_INDEPENDENTLY_PROVED_TO_CONTAIN_EVERY_POSSIBLE_U_p_FOR_EVERY_p_IN_P",
+      "cost": "BRAIN_MUST_THEN_PROVE_EQUAL_OR_BETTER_DOMINANCE_OVER_THE_FULL_BOUND_D__FINITE_BLACKBOX_OBSERVATIONS_ALONE_CANNOT_SUPPLY_THIS_UNIVERSAL_CLAIM_WITHOUT_ADDITIONAL_STRUCTURE",
+      "relation_to_W3": "THIS_IS_THE_TARGET_INDEPENDENT_SUPERDOMAIN_BRANCH_OF_W3__NOT_A_FREE_COMPLETENESS_WITNESS"
+    }
+  },
+  "current_truth": {
+    "profile_union_is_goal_preserving_boundary_repair": true,
+    "profile_union_is_target_discovery_completeness_proof": false,
+    "profile_set_completeness_P0_equals_P_proved": false,
+    "all_per_profile_behavior_sets_U_p_complete_or_covered": false,
+    "target_independent_superdomain_with_universal_dominance_proved": false,
+    "literal_target_completeness": false
+  },
+  "security_reliability_membership_gate": {
+    "candidate_dimensions": [
+      "UNTRUSTED_CONTENT_INSTRUCTION_SEPARATION",
+      "PRE_ACTION_AUTHORIZATION_AND_SCOPE_CHECK",
+      "CONTAINMENT_BOUNDARY_DISCIPLINE",
+      "SECURITY_REVIEW_AND_RECOVERY"
+    ],
+    "rule": "EACH_DIMENSION_MAY_BECOME_MANDATORY_TERMINAL_WORK_ONLY_AFTER_ITS_USEFUL_OBSERVABLE_TARGET_MEMBERSHIP_IS_PROVED_FOR_THE_BOUND_OPUS55_PROFILE_SCOPE",
+    "current_mandatory_delta_from_security_candidate": 0,
+    "mechanism_warning": "FIRST_PARTY_EVIDENCE_ABOUT_EXTERNAL_ACTION_SCREENING_CLASSIFIERS_SANDBOXES_OR_OTHER_DEPLOYED_STACK_MECHANISMS_DOES_NOT_BY_ITSELF_PROVE_THE_CORRESPONDING_BEHAVIOR_IS_A_RAW_OPUS55_BACKEND_CAPABILITY; OBSERVABLE_TARGET_MEMBERSHIP_MUST_BE_BOUND_SEPARATELY",
+    "profile_system_warning": "IF_THE_TERMINAL_TARGET_INTENTIONALLY_INCLUDES_DEPLOYED_PROFILE_SYSTEM_BEHAVIOR_RATHER_THAN_RAW_BACKEND_BEHAVIOR_THAT_SCOPE_MUST_BE_EXPLICITLY_BOUND_BEFORE_CREDIT_OR_MANDATORY_SCHEDULING",
+    "preserve": "DIRECT_FIRST_PARTY_BEHAVIORAL_SECURITY_CLAIMS_REMAIN_VALID_TARGET_MEMBERSHIP_CANDIDATES_AND_MUST_NOT_BE_DISCARDED"
+  },
+  "critical_path_delta": {
+    "delete": [
+      "TREAT_PROFILE_UNION_DEFINITION_AS_LITERAL_COMPLETENESS",
+      "SCHEDULE_SECURITY_RELIABILITY_ROWS_AS_MANDATORY_FROM_DEPLOYED_STACK_MECHANISM_DESCRIPTIONS_ALONE",
+      "USE_FINITE_PER_PROFILE_BENCHMARK_ACCUMULATION_AS_A_SUBSTITUTE_FOR_PER_PROFILE_BEHAVIOR_COMPLETENESS"
+    ],
+    "activate": [
+      "PROFILE_SET_COMPLETENESS_PROOF_OR_TARGET_INDEPENDENT_PROFILE_SUPERDOMAIN_PROOF",
+      "PER_PROFILE_BEHAVIOR_COMPLETENESS_ONLY_WHEN_USING_PROFILE_DECOMPOSITION_ROUTE",
+      "TARGET_MEMBERSHIP_PROOF_BEFORE_EACH_NEW_SECURITY_RELIABILITY_MANDATORY_ROW",
+      "UNIVERSAL_DOMINANCE_ONLY_AFTER_DOMAIN_COVERAGE_IS_NONCIRCULARLY_BOUND"
+    ]
+  },
+  "breakthrough": {
+    "description": "THE_NEW_PROFILE_UNION_TARGET_IS_NOW_A_TWO_FACTOR_INFORMATION_PROBLEM_INSTEAD_OF_AN_AMBIGUOUS_SINGLE_TARGET_LABEL__AND_NEW_CROSS_CUTTING_SECURITY_DEBT_CANNOT_ENTER_THE_CRITICAL_PATH_BY_MECHANISM_ASSOCIATION_ALONE",
+    "literal_completeness_information_floor": "EITHER_COMPLETE_PROFILE_PLUS_PER_PROFILE_BEHAVIOR_INFORMATION_OR_A_TARGET_INDEPENDENT_SUPERDOMAIN_PLUS_TRUE_UNIVERSAL_DOMINANCE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CURRENT_ENUMERATED_PROFILE_SET_IS_INCOMPLETE",
+    "NO_CLAIM_ANTHROPIC_HAS_UNPUBLISHED_AUTHORIZED_PROFILES",
+    "NO_CLAIM_SECURITY_RELIABILITY_IS_OUT_OF_SCOPE",
+    "NO_CLAIM_EXTERNAL_SECURITY_STACK_BEHAVIOR_IS_NEVER_RELEVANT_TO_THE_USER_DEFINED_TARGET",
+    "NO_LITERAL_TERMINAL_FINALITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
