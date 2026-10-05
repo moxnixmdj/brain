@@ -1,0 +1,171 @@
+{
+  "schema": "PROJECT_BRAIN_CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V3_20261005",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__V2_UPGRADED_BY_OWNED_SVG_MECHANICS__DIAGRAM_ZERO_NEW_BROAD_LEARNED_PRIMITIVES__ONE_CREATIVE_TEXT_ACCEPTANCE_ATOM__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Update the existing creative/diagram acceptance-basis repair after the HTML/SVG mechanics residual acquired a concrete Brain-owned deterministic kernel, preserving the smallest sound residual basis: conditioned reuse for diagram judgment plus exactly one creative-text quality acceptance atom.",
+  "bound_base_commit": "5161a1f177e3ca491f719ad24d80193242c327b9",
+  "authorities": {
+    "predecessor_repair": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V2_20261005.json",
+      "git_blob_sha": "02ee9918fc38f3bdee96f847d04e7fd1337b9e46"
+    },
+    "svg_mechanics_kernel": {
+      "path": "canonical/governance/STATIC_SVG_DIAGRAM_MECHANICS_KERNEL_20261005_V1.json",
+      "git_blob_sha": "5680d37569e95923c62b9292af96abad7ca39e98"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "synthesis_scorer_contract": {
+      "path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json",
+      "git_blob_sha": "8206cb013b5cd0d653ffa70d1e867f8c4d4630b8"
+    },
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "creative_diagram_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860"
+    },
+    "svg_compiler": {
+      "path": "canonical/runtime/html_svg_diagram_mechanics_v1.py",
+      "git_blob_sha": "9476c34e34f64f0e5babd00fa2e5967f41b4f5bb"
+    },
+    "svg_real_render_oracle": {
+      "path": "canonical/runtime/svg_diagram_render_oracle_v1.py",
+      "git_blob_sha": "9a66f7d915fa6d510c9cda50b569f6e4ddd8eb25"
+    }
+  },
+  "state_change_since_v2": {
+    "v2_open_leaf": "HTML_SVG_RENDER_STRUCTURE_MECHANICS",
+    "v2_reason_open": "NO_EXISTING_CANONICAL_HTML_SVG_MECHANICAL_RECEIPT_FOUND_IN_REPOSITORY_SEARCH__OPEN",
+    "new_mechanism": "STATIC_SVG_DIAGRAM_MECHANICS_KERNEL_20261005_V1",
+    "new_mechanism_scope": "BOUNDED_TYPED_DIAGRAM_IR_TO_RENDERABLE_STATIC_SVG",
+    "local_preflight_only": {
+      "compiler_falsification_tests": "9_OF_9_PASS",
+      "renderer_oracle_tests": "4_OF_4_PASS",
+      "real_renderer_observation": "INKSCAPE_PASS"
+    },
+    "independent_terminal_credit": false,
+    "effect": "THE_MECHANICAL_LEAF_NOW_HAS_A_CONCRETE_OWNED_CANDIDATE_ROUTE; IT REMAINS UNPROMOTED UNTIL CONTENT_BOUND_INDEPENDENT_VERIFICATION PASSES."
+  },
+  "diagram_reduction": {
+    "new_broad_learned_primitive_count": 0,
+    "new_acceptance_atom_count": 0,
+    "basis": [
+      {
+        "leaf": "DIAGRAM_CONTENT_LAYOUT_AND_REVISION_JUDGMENT",
+        "reuse_behavior": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "condition_extension": "HTML_SVG_DIAGRAM_FLOWCHART_CHART_CONDITION",
+        "proof_required": "PROVE_THE_EXISTING_BEHAVIORAL_CONTRACT_AND_TERMINAL_ACCEPTANCE_REMAIN_NONINFERIOR_UNDER_THE_DIAGRAM_CONDITION__NO_INHERITANCE_BY_LABEL."
+      },
+      {
+        "leaf": "DIAGRAM_GROUNDED_CONTENT_SELECTION",
+        "reuse_behavior": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "condition_extension": "VISUAL_ENCODING_OF_REQUIRED_EVIDENCE_WHERE_SOURCE_GROUNDED",
+        "proof_required": "PROVE_THE_EXISTING_SYNTHESIS_CONTRACT_REMAINS_NONINFERIOR_UNDER_VISUAL_ENCODING__ONLY_WHERE_THE_DIAGRAM_IS_EVIDENCE_GROUNDED."
+      },
+      {
+        "leaf": "HTML_SVG_RENDER_STRUCTURE_MECHANICS",
+        "reuse_behavior": "STATIC_SVG_DIAGRAM_MECHANICS_KERNEL_20261005_V1",
+        "condition_extension": "BOUND_TYPED_NODE_EDGE_STATIC_SVG_SCOPE",
+        "proof_required": "RUN_CONTENT_BOUND_INDEPENDENT_VERIFICATION_OF_THE_COMPILER_AND_REAL_RENDER_ORACLE__EXPAND_SCOPE_ONLY_ON_A_CONSTRUCTIVE_TARGET_BEHAVIOR_OUTSIDE_THE_BOUND_CLASS."
+      }
+    ],
+    "hard_boundary": "THE_DETERMINISTIC_KERNEL_DOES_NOT_CLAIM_CONTENT_SELECTION_SEMANTIC_DECOMPOSITION_LAYOUT_JUDGMENT_READABILITY_OR_PRESENTATION_QUALITY.",
+    "conclusion": "DO_NOT_ADD_A_NEW_BROAD_DIAGRAM_QUALITY_ATOM_OR_LEARNED_DIAGRAM_CAPABILITY_UNLESS_CONSTRUCTIVE FALSIFICATION SHOWS THE CONDITIONED EXISTING CONTRACTS PLUS VERIFIED MECHANICS ARE INSUFFICIENT."
+  },
+  "creative_text_reduction": {
+    "minimum_surviving_learned_obligation_count": 1,
+    "new_acceptance_atom": {
+      "id": "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "kind": "QUALITY_NONINFERIORITY__STRONGER_FORMAL_OR_EXHAUSTIVE_PROOF_ALLOWED",
+      "acceptance": "Brain-owned configured route must equal or exceed Opus 5.5 on open-ended creative-text generation quality over a predeclared contamination-safe portfolio and frozen quality protocol, or satisfy a sound stronger scope-complete proof.",
+      "required_quality_scope": [
+        "ORIGINALITY_OR_NOVELTY_WHERE_TASK_REQUIRES_IT",
+        "COHERENCE_AND_INTERNAL_CONSISTENCY",
+        "CONSTRAINT_AND_STYLE_ADHERENCE",
+        "TASK_RELEVANCE",
+        "OVERALL_CREATIVE_EFFECTIVENESS"
+      ],
+      "no_comparator_authority_from_this_candidate": true,
+      "fresh_reality_authority": false
+    },
+    "why_existing_synthesis_metric_is_not_sufficient": {
+      "current_frozen_dimensions": [
+        "claim_to_source_fidelity",
+        "uncertainty_and_disagreement_preservation",
+        "audience_adaptation",
+        "format_and_style_constraints",
+        "compression_without_decision_relevant_loss"
+      ],
+      "creative_quality_dimension_present": false,
+      "reason": "OPEN_ENDED_CREATIVE_QUALITY_CAN_DIVERGE_WHILE_ALL_FIVE_CURRENT_SYNTHESIS_DIMENSIONS_PASS; SILENTLY CALLING_THE_EXISTING_SYNTHESIS_PREDICATE_SUFFICIENT_WOULD_LEAVE_THE_CREATIVE_QUALITY_TARGET_UNMEASURED.",
+      "rule": "DO_NOT_RETROACTIVELY_REINTERPRET_THE_EXISTING_FROZEN_SYNTHESIS_SCORER_AS_CREATIVE_QUALITY."
+    }
+  },
+  "minimality": {
+    "family_count_before": 19,
+    "family_count_after": 19,
+    "family_mutations": 0,
+    "atomic_count_before": 38,
+    "atomic_count_after_if_integrated": 39,
+    "proved_atomic_before": 14,
+    "proved_atomic_after_if_integrated": 14,
+    "unresolved_atomic_before": 24,
+    "unresolved_atomic_after_if_integrated": 25,
+    "new_broad_diagram_learned_primitives": 0,
+    "new_diagram_acceptance_atoms": 0,
+    "new_creative_text_acceptance_atoms": 1,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0
+  },
+  "critical_path": [
+    "INDEPENDENTLY_VERIFY_STATIC_SVG_DIAGRAM_MECHANICS_KERNEL_V1_AND_REAL_RENDER_ORACLE.",
+    "PROVE_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_NONINFERIORITY_UNDER_THE_HTML_SVG_DIAGRAM_FLOWCHART_CHART_CONDITION.",
+    "PROVE_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_NONINFERIORITY_UNDER_VISUAL_ENCODING_WHERE_EVIDENCE_GROUNDED.",
+    "ADD_CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR_TO_A_VERSIONED_ACCEPTANCE_REGISTRY_SUCCESSOR_ONLY_AFTER_DUPLICATE_SEARCH_AND_INDEPENDENT_REVIEW.",
+    "USE_THE_STRONGEST_ZERO_REALITY_OR_SCOPE_COMPLETE_PROOF_AVAILABLE_BEFORE_ANY_TARGET_COMPARATOR_OR_FRESH_TERMINAL_CASE.",
+    "RECOMPUTE_ROOT_AND_META_STATE_FROM_AUTHORITATIVE_REGISTRY_AND_EVIDENCE__NEVER_HAND_EDIT_COUNTS."
+  ],
+  "separate_open_lanes": {
+    "general_non_specialized_analysis_B2": "NOT_CLOSED_BY_THIS_REPAIR__NO_SEMANTIC_TOTALITY_CLAIM.",
+    "target_discovery_or_interface_completeness": "NOT_CLOSED_BY_THIS_REPAIR__SEPARATE_LANE.",
+    "literal_terminal_finality": "FALSE_UNTIL_ALL_ACCEPTANCE_META_OWNERSHIP_AND_TARGET_COMPLETENESS_REQUIREMENTS_CLOSE."
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_GOAL_CLAIM.",
+    "NO_DIAGRAM_ACCEPTANCE_CREDIT.",
+    "NO_CREATIVE_TEXT_ACCEPTANCE_CREDIT.",
+    "NO_CLAIM_THE_LOCAL_SVG_KERNEL_PREFLIGHT_IS_INDEPENDENT_VERIFICATION.",
+    "NO_CLAIM_EXISTING_ARTIFACT_OR_SYNTHESIS_CONTRACTS_ALREADY_HAVE_DIAGRAM_CONDITION_PARITY.",
+    "NO_CLAIM_GENERAL_NON_SPECIALIZED_ANALYSIS_IS_CLOSED.",
+    "NO_TARGET_DISCOVERY_COMPLETENESS_CLAIM.",
+    "NO_NEW_FAMILY.",
+    "NO_ROOT1_POSITIVE_CAPABILITY_GAP.",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY.",
+    "NO_RETROACTIVE_REINTERPRETATION_OF_EXISTING_PROVED_RESULTS."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
