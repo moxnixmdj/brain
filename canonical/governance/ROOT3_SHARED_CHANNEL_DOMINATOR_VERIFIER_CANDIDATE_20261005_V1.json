@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_SHARED_CHANNEL_DOMINATOR_VERIFIER_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_IMPLEMENTATION__C3_DOMINATOR_VERIFIER_BUILT__C1_C2_C4_C5_REMAIN_SCOPE_BINDING_OBLIGATIONS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Implement the finite fail-closed graph-dominance kernel required by the shared Root3 no-bypass minimum cut, so IF authority and Composition can reuse one mechanically checkable no-bypass proof once a scope-complete current runtime channel manifest is bound.",
+  "authorities": {
+    "shared_channel_mincut": {
+      "path": "canonical/governance/ROOT3_SHARED_NO_BYPASS_CHANNEL_MINCUT_20261005_V1.json"
+    },
+    "complete_mediation_breakthrough": {
+      "path": "canonical/governance/ROOT3_ZERO_VIOLATION_COMPLETE_MEDIATION_BREAKTHROUGH_20261005_V1.json",
+      "git_blob_sha": "f1b84e39bb7e4caff9e1b25e02bdfd3beaf31a03"
+    }
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/root3_channel_dominator_verifier_v1.py",
+    "tests": "canonical/tests/test_root3_channel_dominator_verifier_v1.py",
+    "algorithm": "FOR_EACH_DECLARED_LOAD_BEARING_SINK__REMOVE_ITS_REQUIRED_MEDIATOR_AND_RUN_MULTI_SOURCE_REACHABILITY_FROM_ALL_RUNTIME_ENTRYPOINTS__ANY_REACHABLE_SINK_IS_AN_EXPLICIT_BYPASS_WITNESS",
+    "complexity": "O(K*(V+E))__K_LOAD_BEARING_SINKS__FINITE_AND_DETERMINISTIC",
+    "content_binding": "GRAPH_DIGEST_COVERS_SOURCE_BLOB_IDENTITIES_ENTRYPOINTS_NODES_EDGES_MEDIATOR_BINDINGS_DYNAMIC_REGISTRY_STATE_AND_UNCLASSIFIED_CHANNEL_STATE",
+    "fail_closed_conditions": [
+      "MALFORMED_OR_DUPLICATE_NODE_EDGE_OR_BINDING",
+      "UNKNOWN_ENTRYPOINT_OR_DANGLING_EDGE",
+      "UNKNOWN_DYNAMIC_EDGE",
+      "DYNAMIC_EDGE_REGISTRY_NOT_DECLARED_COMPLETE",
+      "UNCLASSIFIED_LOAD_BEARING_CHANNEL",
+      "LOAD_BEARING_SINK_WITHOUT_MEDIATOR_BINDING",
+      "DECLARED_LOAD_BEARING_SINK_UNREACHABLE",
+      "ANY_MEDIATOR_BYPASS_PATH",
+      "SOURCE_BLOB_IDENTITY_MALFORMED",
+      "OPTIONAL_DECLARED_GRAPH_DIGEST_MISMATCH"
+    ]
+  },
+  "theorem_boundary": {
+    "proves_if_manifest_scope_complete": "EVERY_DECLARED_REACHABLE_LOAD_BEARING_SINK_IS_DOMINATED_BY_ITS_BOUND_MEDIATOR",
+    "does_not_prove": [
+      "CHANNEL_DISCOVERY_COMPLETENESS",
+      "DYNAMIC_DISPATCH_EXTERNAL_BRIDGE_OR_PLUGIN_TOTALITY",
+      "CURRENT_SOURCE_BLOB_BYTES_MATCH_THE_DECLARED_GIT_BLOB_SHAS",
+      "PREDICATE_SPECIFIC_GUARD_SEMANTIC_SOUNDNESS",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+    ]
+  },
+  "minimum_remaining_cut": [
+    {
+      "id": "C1_C2_CURRENT_CHANNEL_MANIFEST",
+      "action": "COMPILE_AND_CONTENT_ADDRESS_THE_EXACT_CURRENT_LOAD_BEARING_RUNTIME_CHANNEL_GRAPH_AND_MEDIATOR_BINDINGS__INCLUDING_ALL_DYNAMIC_DISPATCH_EXTERNAL_BRIDGE_AND_PLUGIN_EDGES",
+      "fail_closed_on": "ANY_UNCLASSIFIED_OR_UNREGISTERED_LOAD_BEARING_CHANNEL"
+    },
+    {
+      "id": "C4_CURRENT_BLOB_RECOMPUTATION",
+      "action": "INDEPENDENTLY_RECOMPUTE_EVERY_DECLARED_SOURCE_BLOB_SHA_AND_GRAPH_DIGEST_FROM_THE_EXACT_CREDITED_REVISION",
+      "fail_closed_on": "ANY_DRIFT"
+    },
+    {
+      "id": "C5_INDEPENDENT_RUNNER",
+      "action": "RUN_THIS_VERIFIER_ON_THE_BOUND_CURRENT_MANIFEST_IN_AN_INDEPENDENT_RUNNER_AND_BIND_THE_RECEIPT_TO_THE_EXACT_RUNTIME_REVISION",
+      "fail_closed_on": "NO_INDEPENDENT_SCOPE_COMPLETE_RECEIPT"
+    },
+    {
+      "id": "IF_GUARD_SOUNDNESS",
+      "action": "SEPARATELY_PROVE_THE_IF_AUTHORITY_GUARD_ALLOW_CONDITION_IMPLIES_ZERO_CRITICAL_AUTHORITY_VIOLATIONS_UNDER_THE_EXACT_FROZEN_SCOPE_BOUNDARY_SEMANTICS",
+      "fail_closed_on": "SEMANTIC_BINDING_OR_ALLOW_SOUNDNESS_OPEN"
+    }
+  ],
+  "leverage": {
+    "shared_predicates": [
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+    ],
+    "result": "C3_IS_NOW_A_REUSABLE_KERNEL_INSTEAD_OF_A_REPEATED_PREDICATE_LOCAL_ARGUMENT__THE_REMAINING_HARD_WORK_IS_SCOPE_COMPLETE_CURRENT_GRAPH_CONSTRUCTION_PLUS_PREDICATE_SPECIFIC_GUARD_SOUNDNESS",
+    "acceptance_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_RUNTIME_CHANNEL_TOTALITY",
+    "NO_CLAIM_ANY_ROOT3_PREDICATE_CLOSED",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
