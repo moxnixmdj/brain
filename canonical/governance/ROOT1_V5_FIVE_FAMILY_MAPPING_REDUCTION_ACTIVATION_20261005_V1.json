@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_V5_FIVE_FAMILY_MAPPING_REDUCTION_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_CANDIDATE__SCHEDULING_ONLY__FIVE_FAMILY_MAPPING_ACTIONS_DELETED__ROOT1_POSITIVE_ZERO__ZERO_CREDIT",
+  "predecessor_activation": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5_ACTIVATION_V1.json",
+    "git_blob_sha": "72281405d99d0004cf2fa1ed9080d7cdafc2f70c"
+  },
+  "mapping_subject": {
+    "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+    "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+  },
+  "verification": {
+    "path": "canonical/verification/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "39cc17305ba4a116d2acf8a4991e209630b97645"
+  },
+  "truth_repair_authority": {
+    "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+    "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+  },
+  "superseded_scheduler_actions": [
+    "FIVE_EXACT_FAMILY_MAPPING_OR_COUNTEREXAMPLE_CHECKS",
+    "SCHEDULE_FIVE_FAMILY_MAPPING_CHECKS"
+  ],
+  "deleted_exact_mapping_frontier": [
+    "CYBERSECURITY",
+    "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+    "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+    "HEALTHCARE",
+    "MATHEMATICAL_REASONING_ARXIVMATH"
+  ],
+  "current_meta_envelope_frontier_after_reduction": {
+    "primitive_family_mapping_checks_remaining_for_currently_enumerated_v5_surfaces": 0,
+    "cross_cutting_condition_checks_remaining": [
+      "MULTILINGUAL_PERFORMANCE_PARITY_OR_STRONGER_SCOPE_SAFE_CERTIFICATE",
+      "LONG_CONTEXT_PARITY_OR_STRONGER_SCOPE_SAFE_CERTIFICATE"
+    ],
+    "terminal_proof_basis_repairs_remaining": [
+      "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT_ACCEPTANCE_BASIS_REPAIR"
+    ],
+    "current_atomic_acceptance_frontier": {
+      "proved": 14,
+      "unresolved": 24,
+      "total": 38
+    },
+    "accepted_families": 5,
+    "open_families": 14,
+    "root1_positive_gap_count": 0,
+    "literal_terminal_finality": false
+  },
+  "effects": [
+    "DELETE_DUPLICATE_NEW_FAMILY_DISCOVERY_WORK_FOR_THE_FIVE_CURRENT_V5_MAPPING_LABELS",
+    "ROUTE_DOMAIN_AND_MATH_PARITY_WORK_INTO_EXISTING_FAMILY_SCOPE_AND_ACCEPTANCE_PROOFS",
+    "USE_MULTILINGUAL_LONG_CONTEXT_V2_AS_CURRENT_CONDITION_AUTHORITY_NOT_THE_STALE_MAPPING_V2_CONDITION_ROWS",
+    "PRESERVE_MINIMUM_CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR",
+    "PRESERVE_ZERO_REALITY_AND_ZERO_INCREMENTAL_SPEND",
+    "REOPEN_ONLY_ON_NEW_UNMAPPED_FIRST_PARTY_SURFACE_OR_CONSTRUCTIVE_MAPPING_COUNTEREXAMPLE"
+  ],
+  "leverage": {
+    "eliminated_scheduler_action_groups": 5,
+    "fresh_reality_units_required_for_reduction": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "interpretation": "CONTROL_PLANE_COMPRESSION_ONLY__REMOVES_DOMINATED_SEARCH_WITHOUT_PRETENDING_CAPABILITY_PARITY"
+  },
+  "hard_rules": [
+    "MAPPING_CLOSURE_IS_NOT_PARITY",
+    "MAPPING_CLOSURE_IS_NOT_BEHAVIORAL_ACCEPTANCE",
+    "MAPPING_CLOSURE_IS_NOT_OWNERSHIP",
+    "NO_GENERAL_MATH_CREDIT_FROM_NARROW_EXACT_SYMBOLIC_SCOPE",
+    "NO_DOMAIN_CONDITION_TRANSFER_WITHOUT_SCOPE_PROOF",
+    "NO_TERMINAL_FINALITY_FROM_38_OF_38_ALONE",
+    "FAIL_CLOSED_ON_ANY_BOUND_BLOB_DRIFT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
