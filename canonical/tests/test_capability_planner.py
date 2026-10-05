@@ -75,6 +75,10 @@ class CapabilityPlannerTests(unittest.TestCase):
         }
         out = planner.plan_actions(problem)
         self.assertEqual(out["actions"][0]["capability_id"], "list-canonical")
+        self.assertEqual(
+            out["actions"][0]["_capability_contract"],
+            {"requires": [], "provides": ["tree.listed"], "result_fields": []},
+        )
         self.assertEqual(out["actions"][-1]["type"], "finish")
         self.assertEqual(out["actions"][-1]["args"]["summary"], "CAPABILITY_GRAPH_GOAL_COMPLETE")
 
@@ -115,7 +119,7 @@ class CapabilityPlannerTests(unittest.TestCase):
         self.assertEqual(out["planning"]["plan"], ["learn-value", "write-value"])
         self.assertEqual(
             out["actions"][1]["args"]["value"],
-            {"$result": {"cycle": 0, "field": "value"}},
+            {"$result": {"cycle": 0, "field": "value", "effect": "knowledge.value.available"}},
         )
 
     def test_effect_result_binding_rejects_undeclared_provider_field(self):
@@ -201,8 +205,8 @@ class CapabilityPlannerTests(unittest.TestCase):
         self.assertEqual(
             out["actions"][2]["args"]["evidence_paths"],
             [
-                {"$result": {"cycle": 0, "field": "output_path"}},
-                {"$result": {"cycle": 1, "field": "output_path"}}
+                {"$result": {"cycle": 0, "field": "output_path", "effect": "observation.a"}},
+                {"$result": {"cycle": 1, "field": "output_path", "effect": "observation.b"}}
             ],
         )
 
