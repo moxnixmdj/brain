@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_CONTENT_BINDING_TRUTH_REPAIR_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__V1_EXTERNAL_EVIDENCE_AND_ACTION_REFERENCES_NOT_CONTENT_BOUND__V2_BINDS_EXACT_CAPSULE_VISIBLE_INPUTS__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION_AND_INTEGRATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Repair the constructive composition P1/P2 capsule before it is used as a provenance-completeness premise. V1 content-addresses state values and record structure but accepts external evidence_refs and action_ref as bare caller-controlled identifiers. V2 binds the exact capsule-visible normalized evidence units and action specification by SHA-256 inside every record hash.",
+  "authorities": {
+    "v1_route": {
+      "path": "canonical/governance/COMPOSITION_STATE_CAPSULE_P1_P2_CONSTRUCTIVE_ROUTE_20261005_V1.json",
+      "git_blob_sha": "0b960324379acc9dd33669e2b780d3192dda09fd"
+    },
+    "v1_runtime": {
+      "path": "canonical/runtime/composition_state_capsule_v1.py",
+      "git_blob_sha": "6337298b4804307315308689fbeb65692c67980d"
+    },
+    "minimum_premise_cut": {
+      "path": "canonical/governance/COMPOSITION_ZERO_CRITICAL_INVARIANT_MINIMUM_PREMISE_CUT_20261005_V1.json",
+      "predicate": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+    },
+    "v2_runtime": {
+      "path": "canonical/runtime/composition_state_capsule_v2.py",
+      "git_blob_sha": "93470a2e079e875cbf8e13c80dd934ecacd32469"
+    },
+    "v2_tests": {
+      "path": "canonical/tests/test_composition_state_capsule_v2.py",
+      "git_blob_sha": "948eda7b6120a19128bbf429569d1735a1155f98",
+      "local_result": "12_OF_12_PASS__NOT_INDEPENDENT"
+    }
+  },
+  "v1_falsification": {
+    "claim_under_attack": "EVERY_LOAD_BEARING_COMPOSITION_OUTPUT_HAS_CONTENT_BOUND_EVIDENCE_AND_ACTION_LINEAGE",
+    "counterexample": "A V1 record may declare evidence_refs=[source-a] and lineage=[evidence:source-a] without storing or hashing any exact evidence unit for source-a. The same is true of action_ref: it is a bare identifier rather than a hash-bound action specification. Therefore the record can verify while the identifier is rebound outside the capsule to different evidence or action content.",
+    "code_facts": [
+      "V1_RECORD_HASH_INCLUDES_EVIDENCE_REFS_ONLY_AS_STRINGS",
+      "V1_DOES_NOT_STORE_OR_HASH_THE_EXACT_EXTERNAL_EVIDENCE_UNIT",
+      "V1_ACTION_REF_IS_A_BARE_STRING_WITH_NO_ACTION_SPEC_HASH",
+      "V1_STATE_VALUE_HASHES_AND_PARENT_BINDINGS_REMAIN_VALID"
+    ],
+    "consequence": "V1_IS_STILL_USEFUL_FOR_APPEND_ONLY_STATE_PRESERVATION_BUT_IS_NOT_BY_ITSELF_A_SOUND_CONTENT_BOUND_P2_PROVENANCE_COMPLETENESS_WITNESS."
+  },
+  "v2_repair": {
+    "action_binding": "EVERY_MACROSTEP_STORES_THE_EXACT_CAPSULE_VISIBLE_ACTION_SPEC_AND_BINDS_SHA256(CANONICAL_JSON(ACTION_SPEC))_IN_THE_RECORD_HASH.",
+    "evidence_binding": "EVERY_DECLARED_EVIDENCE_ID_MAPS_TO_AN_EXACT_CAPSULE_VISIBLE_NORMALIZED_EVIDENCE_UNIT; SHA256(CANONICAL_JSON(UNIT)) IS_BOUND_IN_THE_RECORD_HASH.",
+    "state_binding": "PRESERVES_V1_PARENT_HASH_VALUE_HASH_INPUT_BINDING_APPEND_ONLY_VERSION_AND_EXACT_PREFIX_ROLLBACK_INVARIANTS.",
+    "canonicalization": "JSON_CANONICALIZATION_IS_SORTED_KEY_COMPACT_UTF8_WITH_NAN_AND_NON_JSON_VALUES_REJECTED_FAIL_CLOSED.",
+    "lineage": [
+      "STATE_LINEAGE_MUST_POINT_TO_A_DECLARED_REQUIRED_STATE_KEY",
+      "EVIDENCE_LINEAGE_MUST_POINT_TO_A_DECLARED_CONTENT_BOUND_EVIDENCE_UNIT",
+      "ACTION_LINEAGE_MUST_MATCH_THE_CONTENT_BOUND_ACTION_SPEC_REFERENCE"
+    ],
+    "tamper_detection": [
+      "EVIDENCE_UNIT_MUTATION",
+      "ACTION_SPEC_MUTATION",
+      "STATE_VALUE_MUTATION",
+      "PARENT_HASH_MUTATION",
+      "INPUT_BINDING_DRIFT"
+    ]
+  },
+  "proof_boundary": {
+    "proved_if_v2_exact_bytes_are_independently_verified": [
+      "CAPSULE_VISIBLE_ACTION_SPEC_CONTENT_BINDING",
+      "CAPSULE_VISIBLE_NORMALIZED_EVIDENCE_UNIT_CONTENT_BINDING",
+      "APPEND_ONLY_STATE_VERSION_PRESERVATION",
+      "EXACT_PREFIX_ROLLBACK",
+      "FAIL_CLOSED_DECLARED_LINEAGE_BINDING"
+    ],
+    "still_open": [
+      "NO_BYPASS__EVERY_CREDITED_COMPOSITION_MACROSTEP_AND_LOAD_BEARING_OUTPUT_ACTUALLY_USES_V2",
+      "SOURCE_ADMISSION__THE_NORMALIZED_EVIDENCE_UNIT_FAITHFULLY_BINDS_ITS_EXTERNAL_SOURCE_BYTES_OR_OBJECT",
+      "EVIDENCE_CHANNEL_TOTALITY__NO_ACCEPTANCE_RELEVANT_EXTERNAL_INPUT_REACHES_A_MACROSTEP_OUTSIDE_DECLARED_EVIDENCE_INPUTS",
+      "P3_CRITICAL_FAILURE_AGGREGATION",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES_ACCEPTANCE"
+    ],
+    "key_rule": "HASHING_A_NORMALIZED_EVIDENCE_UNIT_PROVES_IMMUTABLE_LINEAGE_TO_THAT_UNIT__IT_DOES_NOT_PROVE_THE_UNIT_IS_TRUE_OR_THAT_ITS_EXTERNAL_SOURCE_IS_AUTHENTIC."
+  },
+  "adversarial_tests": [
+    "EVIDENCE_CONTENT_TAMPER_FAILS",
+    "ACTION_SPEC_TAMPER_FAILS",
+    "BARE_EVIDENCE_IDENTIFIER_HAS_NO_V2_ROUTE",
+    "UNBOUND_EVIDENCE_LINEAGE_FAILS",
+    "NONCANONICAL_NAN_EVIDENCE_FAILS",
+    "STATE_VALUE_TAMPER_FAILS",
+    "PARENT_HASH_TAMPER_FAILS",
+    "INPUT_BINDING_DRIFT_FAILS",
+    "VERSIONED_OVERWRITE_PRESERVES_EXACT_ROLLBACK",
+    "GENESIS_ROLLBACK_EXACT",
+    "UNKNOWN_ROLLBACK_TARGET_FAILS",
+    "VALID_APPEND_ONLY_HANDOFF_AND_PROJECTION_PASSES"
+  ],
+  "scheduler_effect_if_independently_verified": {
+    "supersede_for_p2_mechanical_route": "COMPOSITION_STATE_CAPSULE_V1_BARE_EVIDENCE_REF_BINDING",
+    "preserve": "V1_APPEND_ONLY_STATE_PRESERVATION_INSIGHT",
+    "next": [
+      "INTEGRATE_V2_AT_THE_SHARED_COMPOSITION_CROSS_ROLE_STATE_AND_EVIDENCE_BOUNDARY",
+      "PROVE_NO_BYPASS_AND_EVIDENCE_CHANNEL_TOTALITY_ON_THE_EXACT_CREDITED_RUNTIME",
+      "BIND_UPSTREAM_SOURCE_ADMISSION_RECEIPTS_TO_V2_NORMALIZED_EVIDENCE_UNITS",
+      "THEN_RECOMPUTE_P1_P2_AND_P3_ZERO_CRITICAL_COMPOSITION_FAILURE_AGGREGATION",
+      "ONLY_AFTER_SCOPE_COMPLETE_ZERO_SUPPORT_RUN_TARGET_FREE_TOP_SUPPORT_DOMINANCE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_P1_OR_P2_TERMINAL_CREDIT",
+    "NO_P3_CLOSURE",
+    "NO_COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES_CLOSURE",
+    "NO_CLAIM_EXTERNAL_SOURCE_TRUTH_FROM_HASHING_ALONE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
