@@ -2090,7 +2090,7 @@
     "reason": "PREVENT_CONCURRENT_OR_STALE_GATES_FROM_REGRESSING_ACCEPTANCE_COUNTS_AFTER_INDEPENDENT_DELTAS"
   },
   "global_truth_envelope": {
-    "status": "ACTIVE__V21_GLOBAL_FRONTIER__TERMINAL_FALSE",
+    "status": "ACTIVE__V22_GLOBAL_FRONTIER__TERMINAL_FALSE",
     "atomic_acceptance": {
       "proved": 14,
       "open": 24,
@@ -2106,16 +2106,16 @@
     "root2_touching_count": 18,
     "root3_touching_count": 9,
     "active_cut": {
-      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V21.json",
-      "git_blob_sha": "8a67a98901d29a9d6ab9e50717e84a61e9df4110"
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V22.json",
+      "git_blob_sha": "8359e6171cfab301ad9909364558a313fa7c4cae"
     },
     "activation": {
-      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V21_ACTIVATION_V1.json",
-      "git_blob_sha": "a03cefd14a59313f4a956780c5d2c67d230192c4"
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V22_ACTIVATION_V1.json",
+      "git_blob_sha": "7061fea8b3aec4d31c88849c5d56a18fe7cdb616"
     },
     "verification": {
-      "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V21_CONNECTOR_VERIFICATION_20261005_V1.json",
-      "git_blob_sha": "0e182c72d3b59079ca198db27091f1972cb318ae"
+      "path": "canonical/verification/V22_TARGET_TRUTH_FACTORIZATION_SPRITE_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "69bb826fd51523d984ffa626d51c7a647466f36e"
     },
     "pointer_repair_verification": {
       "path": "canonical/verification/CURRENT_ZERO_REALITY_ACTIVE_POINTER_V21_REPAIR_CONNECTOR_VERIFICATION_20261005_V1.json",
@@ -2135,12 +2135,21 @@
     "meta_dormant": [
       "CREATIVE_DIAGRAM_SURFACE_NONINFERIOR"
     ],
-    "rule": "META_ENVELOPE_OBLIGATIONS_ARE_NOT_ATOMIC_ACCEPTANCE_PREDICATES__NO_ACCEPTANCE_CREDIT_FROM_META_SCHEDULING",
+    "rule": "META_ENVELOPE_OBLIGATIONS_ARE_NOT_ATOMIC_ACCEPTANCE_PREDICATES__V22_SCHEDULING_FACTORIZATION_PRESERVES_ALL_OPEN_TRUTH_OBLIGATIONS__NO_ACCEPTANCE_CREDIT_FROM_SCHEDULING",
     "terminal": false,
     "scheduling_authority": true,
     "execution_authority": false,
     "promotion_authority": false,
-    "fresh_reality_authority": false
+    "fresh_reality_authority": false,
+    "active_pointer": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+      "git_blob_sha": "997775514396c2ce1befe7d28874913e6ae35665"
+    },
+    "active_shared_causal_interfaces": [
+      "EXTERNAL_RESULT_OR_ACCESS",
+      "UNIVERSAL_SCOPE_AND_COMPOSITION",
+      "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
+    ]
   },
   "v22_scheduler_projection": {
     "status": "ACTIVE__TERMINAL_TRUTH_FROM_THIS_AUTHORITY__SCHEDULING_ROUTE_FROM_V22_ACTIVE_POINTER__ZERO_CREDIT",
