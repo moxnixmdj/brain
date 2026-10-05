@@ -4,9 +4,9 @@ import ast, hashlib
 from pathlib import Path
 from typing import Any
 
-SCHEMA="PROJECT_BRAIN_ROOT3_EFFECT_SURFACE_AUDIT_V1"
+SCHEMA="PROJECT_BRAIN_ROOT3_EFFECT_SURFACE_AUDIT_V1"\n# Sound use: a detected site is constructive evidence of an effect surface.\n# Absence is not yet a whole-program completeness proof; dynamic Python and\n# receiver typing require a stronger closed-world registry/confinement proof.
 _SUBPROCESS={"run","Popen","call","check_call","check_output"}
-_FS={"write_text","write_bytes","mkdir","unlink","replace","rename","rmdir","touch"}
+_FS={"write_text","write_bytes","mkdir","unlink","rename","rmdir","touch"}
 _SHUTIL={"copy","copy2","copyfile","copytree","move","rmtree"}
 _DYNAMIC={"exec_module"}
 
