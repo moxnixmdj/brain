@@ -1,0 +1,139 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHARTREADER_KPGROUPING_CHECKPOINT_PROVENANCE_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__STRONG_ARCHITECTURE_COMPATIBILITY_AND_PROVIDER_FILE_IDENTITY__TENSOR_CONTENT_UNREAD_DUE_TRANSPORT_LIMIT__ZERO_CREDIT",
+  "objective": "Bind the strongest currently available provenance for a real pretrained ChartReader-compatible KPGrouping checkpoint so a future zero-cost carrier can content-address, slice, and quantize it without repeating discovery.",
+  "target_hypothesis": "FULL_FROZEN_BRAIN_CAPABILITY_ENVELOPE_WITH_LE_100000000_PERSISTENT_LEARNED_BYTES_AND_ZERO_EXTERNAL_LEARNED_CAPABILITY_PROVIDER_DURING_SCORED_EXECUTION",
+  "artifact": {
+    "provider": "GOOGLE_DRIVE",
+    "file_id": "11Z6cNl-5dcpbuDq9N_ZrB7rPUoJvAH_u",
+    "file_name": "KPGrouping_best.pkl",
+    "mime_type": "application/x-zip",
+    "size_bytes": 799462918,
+    "created_time": "2024-06-03T05:03:25.687Z",
+    "modified_time": "2024-06-03T05:05:05.497Z",
+    "provider_url": "https://drive.google.com/file/d/11Z6cNl-5dcpbuDq9N_ZrB7rPUoJvAH_u/view?usp=drivesdk",
+    "tensor_hash": null,
+    "tensor_content_inspected": false,
+    "content_addressed": false,
+    "current_transport_boundary": "GOOGLE_DRIVE_CONNECTOR_RAW_DOWNLOAD_REJECTS_FILES_OVER_268435456_BYTES__CHECKPOINT_IS_799462918_BYTES__LOCAL_RANGE_NETWORK_UNAVAILABLE"
+  },
+  "provenance": {
+    "upstream_chartreader": {
+      "repository": "zhiqic/ChartReader",
+      "commit": "215128f69b87f97dddfdc1991ae7fe785f2ec22c"
+    },
+    "downstream_execution_repo": {
+      "repository": "printjin-gmailcom/SW_Academy-Viztector",
+      "commit": "2980233aa5d85ca044c3c842fccd47070bc4653b"
+    },
+    "downstream_readme": {
+      "git_blob_sha": "d6178a8055aefcf6395eae3505a2de0e76adb207",
+      "binds_file_id": "11Z6cNl-5dcpbuDq9N_ZrB7rPUoJvAH_u",
+      "binds_filename": "KPGrouping_best.pkl"
+    },
+    "downstream_notebook": {
+      "git_blob_sha": "3ec30f8b11a250a66c37cdbba0d3f2b2490db570",
+      "recorded_total_parameters": 199641774,
+      "recorded_checkpoint_path": "./cache/nnet\\KPGrouping\\KPGrouping_best.pkl",
+      "recorded_inference_completion": true
+    },
+    "downstream_state_dict_loader": {
+      "path": "model_factory.py",
+      "git_blob_sha": "b73f517760e209bbce5f71b60463f48f1a4aea6b",
+      "load_contract": "self.model.load_state_dict(torch.load(cache_file))",
+      "save_contract": "torch.save(self.model.state_dict(), cache_file)"
+    }
+  },
+  "exact_architecture_compatibility": {
+    "byte_identical_upstream_and_downstream_files": [
+      {
+        "path": "models/KPGrouping.py",
+        "git_blob_sha": "d5f5716600035404695c19795fe8c513a19f3b19"
+      },
+      {
+        "path": "models/KPDetection.py",
+        "git_blob_sha": "34592b62bc2b93ff8b7272d639fa0da00c5a8845"
+      },
+      {
+        "path": "models/model_utils.py",
+        "git_blob_sha": "ac77186af5726330310f45e2c1fab9bd8012f297"
+      },
+      {
+        "path": "models/py_utils/utils.py",
+        "git_blob_sha": "f3277eba04e3ce8886bed287caf8e1ac5bf030e1"
+      }
+    ],
+    "kp_core": {
+      "upstream_git_blob_sha": "9448735e64d751981c055f1a6badce70e11bd8fc",
+      "downstream_git_blob_sha": "01babdb1b74d8ad6f57a5b2b980299a25685ae06",
+      "executable_noncomment_diff_count": 5,
+      "executable_diffs": [
+        {
+          "line_index": 366,
+          "upstream": "key_len = (key_scores[b_ind] > 0.4).sum()",
+          "fork": "key_len = (key_scores[b_ind] > 0.395).sum()"
+        },
+        {
+          "line_index": 367,
+          "upstream": "cen_len = (center_scores[b_ind] > 0.4).sum()",
+          "fork": "cen_len = (center_scores[b_ind] > 0.28).sum()"
+        },
+        {
+          "line_index": 372,
+          "upstream": "cen_type = torch.ones((cen_pos.size(0),1)).float().cuda()",
+          "fork": "cen_type = torch.ones((cen_pos.size(0),1)).float()"
+        },
+        {
+          "line_index": 374,
+          "upstream": "cen_type2 = torch.eye(cen_emb.size(0)).unsqueeze(-1).cuda()",
+          "fork": "cen_type2 = torch.eye(cen_emb.size(0)).unsqueeze(-1)"
+        },
+        {
+          "line_index": 380,
+          "upstream": "key_type = torch.zeros((key_pos.size(0),2)).float().cuda()",
+          "fork": "key_type = torch.zeros((key_pos.size(0),2)).float()"
+        }
+      ],
+      "classification": "ONLY_INFERENCE_SCORE_THRESHOLDS_AND_DEVICE_PLACEMENT_DIFFER__NO_MODULE_CONSTRUCTION_OR_PARAMETER_SHAPE_DIFF_OBSERVED"
+    },
+    "observed_parameter_count_matches_static_compiler": true,
+    "observed_parameter_count": 199641774
+  },
+  "size_consistency": {
+    "float32_parameter_bytes": 798567096,
+    "persistent_bn_buffer_bytes": 479520,
+    "expected_raw_state_dict_tensor_bytes": 799046616,
+    "provider_file_bytes": 799462918,
+    "serialization_overhead_bytes": 416302,
+    "overhead_fraction": 0.0005207270914346524,
+    "interpretation": "FILE_SIZE_IS_TIGHTLY_CONSISTENT_WITH_A_FULL_FP32_STATE_DICT_FOR_THE_EXACT_199641774_PARAMETER_GROUPING_ARCHITECTURE_PLUS_PERSISTENT_BN_BUFFERS_AND_ZIP_PICKLE_METADATA"
+  },
+  "consequence": [
+    "UPGRADE_CHARTREADER_ROUTE_FROM_ARCHITECTURE_ONLY_TO_EXACT_PROVIDER_FILE_ID_PLUS_STRONG_SHAPE_COMPATIBILITY_CHECKPOINT_CANDIDATE",
+    "PRESERVE_REQUIREMENT_TO_OBTAIN_FILE_BYTES_AND_COMPUTE_CRYPTOGRAPHIC_HASH_BEFORE_ANY_TRANSFORMATION_OR OWNERSHIP CLAIM",
+    "IF_MATERIALIZED_LOAD_FAIL_CLOSED_IN_THE_PINNED_FORK_ARCHITECTURE_AND_ENUMERATE_STATE_DICT_KEYS_SHAPES_DTYPES",
+    "ONLY_AFTER_EXACT_LOAD_CREATE_FIRST_STACK_Q4_AND_OTHER_H100_TRANSFORMED_SUBJECTS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FILE_TENSORS_HAVE_BEEN_INSPECTED",
+    "NO_CLAIM_THE_FILE_IS_BYTE_IDENTICAL_TO_ANY_ORIGINAL_AUTHORS_CHECKPOINT",
+    "NO_CLAIM_THE_FILE_LICENSE_STATUS_EXTENDS_BEYOND_THE_DOWNSTREAM_REPOSITORY_DISCLOSURE_AND_UPSTREAM_CODE_LICENSE",
+    "NO_CLAIM_FIRST_STACK_OR_QUANTIZED_PERFORMANCE",
+    "NO_LEARNED_BYTE_RUNG_ADVANCE",
+    "NO_H100_CHARTOGRAPHY_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "h100_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
