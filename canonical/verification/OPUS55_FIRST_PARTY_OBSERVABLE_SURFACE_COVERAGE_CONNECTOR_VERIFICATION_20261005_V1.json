@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_AND_CURRENT_FIRST_PARTY_SOURCE_RECOMPUTATION_PASS__MAPPING_CANDIDATES_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+    "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+  },
+  "source_recomputation": {
+    "sources": [
+      "https://www.anthropic.com/transparency",
+      "https://www.anthropic.com/claude/opus",
+      "https://www.anthropic.com/claude-opus-5-5",
+      "https://www.anthropic.com/system-cards"
+    ],
+    "observed_source_facts": [
+      "OPUS55_TEXT_INCLUDING_VOICE_DICTATION_AND_IMAGE_INPUTS",
+      "OPUS55_CONVERSATION_ANALYSIS_CODING_CREATIVE_TASKS",
+      "OPUS55_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT",
+      "OPUS55_ADVANCED_CODING_AGENTS_KNOWLEDGE_WORK_VISION_COMPUTER_USE",
+      "OPUS55_CYBERSECURITY_AND_BIOLOGY_CAPABILITIES",
+      "OPUS55_AUTOMATED_AI_R_AND_D_EVALUATION_CATEGORY",
+      "OPUS55_SYSTEM_CARD_IS_CURRENT_FIRST_PARTY_CAPABILITY_AUTHORITY"
+    ],
+    "checks": {
+      "all_observed_surface_labels_have_first_party_support": true,
+      "candidate_family_mappings_are_explicitly_nonterminal": true,
+      "domain_names_do_not_auto_create_new_families": true,
+      "voice_dictation_native_model_processing_not_inferred": true,
+      "positive_root1_gap_not_claimed": true,
+      "envelope_exhaustiveness_not_claimed": true
+    },
+    "errors": []
+  },
+  "consequence": [
+    "PRESERVE_CURRENT_19_FAMILY_ENVELOPE_AS_DECLARED_CANDIDATE_NOT_EXHAUSTIVE_SEAL",
+    "ADD_EXPLICIT_LOSSLESS_MAPPING_OBLIGATIONS_FOR_CYBER_BIOLOGY_AI_R_AND_D_CREATIVE_DIAGRAM_IMAGE_AND_VOICE_DICTATION_SURFACES",
+    "OPEN_NEW_FAMILY_ONLY_AFTER_EXACT_SCOPE_ANALYSIS_PROVES_EXISTING_FAMILY_UNION_INSUFFICIENT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
