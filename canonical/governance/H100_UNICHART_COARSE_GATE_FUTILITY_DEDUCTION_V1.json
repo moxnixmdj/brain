@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_COARSE_GATE_FUTILITY_DEDUCTION_V1",
+  "date": "2026-10-05",
+  "status": "LOGICAL_CONSEQUENCE_OF_ALREADY_FROZEN_20_CASE_GATE__ZERO_CREDIT",
+  "authority_input": "canonical/governance/H100_UNICHART_CHARTQA_PRESERVATION_PREEXPOSURE_V1.json",
+  "frozen_population_size": 20,
+  "frozen_exact_answer_agreement_minimum": 0.85,
+  "minimum_required_agreements": 17,
+  "maximum_allowed_mismatches": 3,
+  "sufficient_failure_certificate": "OBSERVE_AT_LEAST_4_EXACT_ANSWER_MISMATCHES_ON_DISTINCT_CASES_FROM_THE_ALREADY_FROZEN_20_CASE_POPULATION_USING_IDENTICAL_FP32_AND_PACKED_INFERENCE_CONTRACT",
+  "proof": "20_TOTAL_MINUS_4_MISMATCHES_EQUALS_AT_MOST_16_AGREEMENTS__16_DIV_20_EQUALS_0_8_LT_0_85",
+  "execution_policy": [
+    "MAY_EVALUATE_A_PREFIX_OF_THE_ALREADY_FROZEN_CASE_ORDER",
+    "STOP_ONCE_4_DISTINCT_EXACT_ANSWER_MISMATCHES_ARE_OBSERVED",
+    "DO_NOT_REORDER_SELECT_DELETE_OR_REPLACE_CASES",
+    "DO_NOT_CHANGE_PROMPTS_IMAGES_DECODING_SCORER_OR_THRESHOLDS",
+    "IF_FEWER_THAN_4_MISMATCHES_ARE_OBSERVED_CONTINUE_WITH_THE_NEXT_FROZEN_CASES"
+  ],
+  "observed_before_this_deduction": {
+    "case": "H00",
+    "exact_answer_mismatch": true,
+    "note": "THIS_PRIOR_OBSERVATION_DOES_NOT_CHANGE_THE_ARITHMETIC_THRESHOLD_DERIVED_FROM_THE_FROZEN_GATE"
+  },
+  "hard_nonclaims": [
+    "ONE_H00_MISMATCH_ALONE_DOES_NOT_PROVE_GATE_FAILURE",
+    "THIS_DEDUCTION_DOES_NOT CHANGE_THE_FROZEN_GATE",
+    "NO_CHARTOGRAPHY_THRESHOLD_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "h100_credit_delta": 0
+  }
+}
