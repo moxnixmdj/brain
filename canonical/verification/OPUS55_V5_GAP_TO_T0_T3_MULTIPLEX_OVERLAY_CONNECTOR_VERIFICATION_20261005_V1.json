@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_V5_GAP_TO_T0_T3_MULTIPLEX_OVERLAY_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__SEVEN_SCOPE_LEAVES_AND_CURRENT_CREATIVE_MULTILINGUAL_LONG_CONTEXT_GAPS_REQUIRE_ZERO_NEW_OUTER_PORTFOLIOS__REFREEZE_REQUIRED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_V5_GAP_TO_T0_T3_MULTIPLEX_OVERLAY_V1.json",
+    "git_blob_sha": "1fc6f13d644ed88f37940487f1d3cfc41c7aca0a"
+  },
+  "inputs": {
+    "active_terminal_basis": {
+      "path": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+      "git_blob_sha": "9c60356ab509a16df5104777f360b9fb18255842"
+    },
+    "outer_portfolios": {
+      "path": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
+      "git_blob_sha": "7c49e3a44dc9a827e84a12b572ea6b8e9b2fa1f5"
+    },
+    "five_family_partition": {
+      "path": "canonical/governance/FIVE_PUBLIC_BAR_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "8f74ca3d9609737913714844a793b8566028a0aa"
+    },
+    "multilingual_long_context": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+    },
+    "creative_diagram_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    }
+  },
+  "recomputed": {
+    "exact_unique_surviving_scope_leaf_count": 7,
+    "seven_scope_leaves_all_found_in_active_terminal_basis": true,
+    "seven_scope_leaf_portfolio_assignments": [
+      {
+        "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "portfolio": "T2",
+        "terminal_results_observed": 0
+      },
+      {
+        "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+        "portfolio": "T0",
+        "terminal_results_observed": 0
+      },
+      {
+        "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "portfolio": "T1_T3",
+        "terminal_results_observed": 0
+      },
+      {
+        "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "portfolio": "T3",
+        "terminal_results_observed": 0
+      },
+      {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "portfolio": "T1",
+        "terminal_results_observed": 0
+      },
+      {
+        "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "portfolio": "T0_T1_T2_T3",
+        "terminal_results_observed": 0
+      },
+      {
+        "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "portfolio": "T0_T1",
+        "terminal_results_observed": 0
+      }
+    ],
+    "all_seven_assign_only_to_T0_T1_T2_T3": true,
+    "all_seven_have_zero_terminal_results_observed": true,
+    "creative_and_diagram_candidate_families_are_T1_covered": true,
+    "multilingual_required_open_families_all_have_existing_outer_portfolio": true,
+    "long_context_required_open_families_all_have_existing_outer_portfolio": true,
+    "long_context_closed_memory_family_has_explicit_T2_overlay_slice": true,
+    "no_unjustified_long_context_research_edge": true,
+    "prior_outer_portfolio_count": 4,
+    "required_new_outer_portfolio_count": 0,
+    "preserved_outer_portfolio_count": 4
+  },
+  "consequence": [
+    "DO_NOT_OPEN_A_FIFTH_OUTER_PORTFOLIO_FOR_CURRENT_V5_PROOF_BASIS_GAPS",
+    "REFREEZE_ADDED_SLICES_SCORERS_AND_ANY_NEW_CLEAN_CASES_BEFORE_TERMINAL_EXECUTION",
+    "PRESERVE_T0_T1_T2_T3_AS_THE_ONLY_CURRENT_OUTER_REALITY_WAVE",
+    "FAIL_CLOSED_IF_ANY_GAP_CANNOT_BE_MEASURED_LOSSLESSLY_INSIDE_THE_ASSIGNED_PORTFOLIO"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
+    "NO_NEW_ACCEPTANCE_PREDICATE_PROVED",
+    "NO_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
