@@ -1,0 +1,126 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_PROOF_CARRYING_EFFECT_FINITE_CUT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_EXACT_BLOB_RECOMPUTATION_PASS__FINITE_41_ENTRY_DOMAIN_CONFIRMED__RUNTIME_LIFTING_STRUCTURE_CONFIRMED__CONTENT_BINDING_AND_EFFECT_SEMANTICS_REMAIN_OPEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/COMPOSITION_PROOF_CARRYING_EFFECT_FINITE_CUT_20261005_V1.json",
+    "git_blob_sha": "2adf6ce0c4afac99f074b38542d59e04ad5cecc7"
+  },
+  "exact_inputs": [
+    {
+      "path": "canonical/governance/COMPOSITION_ZERO_CRITICAL_INVARIANT_MINIMUM_PREMISE_CUT_20261005_V1.json",
+      "git_blob_sha": "cad34e4a8912b2ffa07d73d94c9651f2852d7247"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+      "git_blob_sha": "8328e12804f64cab1c0d9509966cb1d2d8fb1f82"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
+      "git_blob_sha": "ab9f6fc19937d23edb24dc26a2affed96cea0a9a"
+    },
+    {
+      "path": "canonical/runtime/capability_planner.py",
+      "git_blob_sha": "64ff65cb184f50d3336326f33cccfcc0a53301a8"
+    },
+    {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "7f5d16b1db69cb620954bc778e0ba6e15e687b75"
+    },
+    {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+    }
+  ],
+  "registry_recomputation": {
+    "verified_bound_capability_entries": 42,
+    "entries_with_action_template": 41,
+    "actionable_entries_with_expectation": 41,
+    "actionable_entries_with_verification_metadata": 41,
+    "actionable_entries_missing_expectation": [],
+    "actionable_entries_missing_verification_metadata": [],
+    "nonactionable_entries": [
+      {
+        "capability_id": "docx.document.verify.ooxml",
+        "provides": [
+          "docx.document.verify"
+        ]
+      }
+    ],
+    "grounded_composer_rejects_missing_action_template": true,
+    "errors": []
+  },
+  "runtime_recomputation": {
+    "planner_requires_subset_of_current_fact_state_before_transition": true,
+    "planner_records_provides_into_successor_fact_state": true,
+    "plan_actions_orders_selected_capabilities_by_planner_path": true,
+    "effect_result_lowering_targets_exact_prior_cycle_and_declared_result_field": true,
+    "executor_result_reference_invalid_cycle_fails_closed": true,
+    "executor_result_reference_missing_field_fails_closed": true,
+    "executor_runs_expectation_check_before_success_trace_append": true,
+    "later_consumer_cannot_execute_before_earlier_provider_record_is_appended": true,
+    "checkpoint_is_bound_to_controller_plan_hash": true,
+    "anonymous_invocations_do_not_resume_stale_checkpoint_state": true,
+    "resume_validates_durable_output_paths_and_hashes_where_available": true,
+    "resume_rewinds_from_first_invalid_durable_effect": true,
+    "complete_result_trace_universally_cryptographically_chained": false,
+    "semantic_provides_implied_by_expectation_for_all_41_entries": false,
+    "errors": []
+  },
+  "conditional_lifting_check": {
+    "if_effect_witness_semantics_complete": true,
+    "if_trace_content_binding_complete": true,
+    "then_planner_order_and_executor_gate_are_sufficient_to_prevent_legitimate_consumption_of_an_unwitnessed_internal_effect_in_the_current_domain": true,
+    "then_exact_cross_action_result_valueflow_is_provider_identified": true,
+    "then_resume_state_is_preserved_or_rewound_before_consumer_continuation": true,
+    "scope": "CURRENT_41_ENTRY_EXECUTABLE_BOUND_CAPABILITY_DOMAIN_ONLY"
+  },
+  "verified_reduction": {
+    "prior_p1_p2_residual_form": [
+      "UNIVERSAL_CROSS_ROLE_STATE_PRESERVATION_OR_VERIFIED_ROLLBACK",
+      "UNIVERSAL_LOAD_BEARING_RUNTIME_PROVENANCE_COMPLETENESS"
+    ],
+    "new_minimum_cut": [
+      {
+        "id": "E1_EFFECT_WITNESS_SEMANTIC_BINDING_TABLE",
+        "finite_entry_count": 41
+      },
+      {
+        "id": "E2_APPEND_ONLY_CONTENT_BOUND_TRACE_PROVENANCE",
+        "generic_mechanism_count": 1
+      }
+    ],
+    "p3_recomputed_now": false,
+    "reason": "E1_AND_E2_ARE_NOT_YET_INDEPENDENTLY_PROVED"
+  },
+  "adversarial_boundaries": [
+    "MUTATING_A_PROVIDES_LABEL_WITHOUT_UPDATING_ITS_EFFECT_WITNESS_MUST_INVALIDATE_E1.",
+    "MUTATING_A_RUNTIME_EXPECTATION_WITHOUT_REPROVING_EFFECT_SEMANTICS_MUST_INVALIDATE_E1.",
+    "REORDERING_OR_DELETING_A_LOAD_BEARING_TRACE_RECORD_MUST INVALIDATE_E2.",
+    "MUTATING_A_REFERENCED_RESULT_OR_DURABLE_ARTIFACT_AFTER_CHECKPOINT_MUST_INVALIDATE_THE_CHAIN_OR_FORCE_REWIND.",
+    "ADDING_A_NEW_EXECUTABLE_REGISTRY_CAPABILITY_WITHOUT_EFFECT_WITNESS_BINDINGS_MUST_EXCLUDE_IT_FROM_THE_PROVED_COMPOSITION_DOMAIN."
+  ],
+  "verdict": {
+    "finite_current_domain_claim": "PASS",
+    "existing_runtime_structural_lifting_claim": "PASS",
+    "effect_semantic_totality": "OPEN",
+    "universal_content_bound_provenance": "OPEN",
+    "p1_closed": false,
+    "p2_closed": false,
+    "p3_zero_failures_closed": false,
+    "target_predicate_closed": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
