@@ -1,0 +1,218 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V11",
+  "date": "2026-10-05",
+  "action_id": "C1_FROZEN_COMPOSITION_CLOSED_WORLD_MEDIATION_20261005_V1",
+  "status": "PROPOSED_PREEXECUTION__LEASE_CLAIM__ZERO_REALITY__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "b06e9fca5f59e3b3923045a473fc2a7a4ad5d876",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "ZERO_REALITY_PROOF_INTEGRATION__FROZEN_COMPOSITION_C1",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::C1_CLOSED_WORLD_CAPSULE_MEDIATION_TOTALITY",
+  "expected_parent_frontier_change": "TURN_C1_FROM_OPEN_PROSE_OBLIGATION_INTO_A_FINITE_MACHINE_CHECKABLE_CLOSED_WORLD_COMPOSITION_EXECUTION_BOUNDARY_CANDIDATE__NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT_UNTIL_INDEPENDENT_SCOPE_COMPLETE_VERIFICATION",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_policy": "DURABLE_BRAIN_OWNED_AND_VERIFIED_GE_OPUS55",
+    "external_winner_role": "SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_invention": false,
+    "integration_glue_only": true,
+    "incremental_spend_usd": 0,
+    "fresh_terminal_reality_authorized": false
+  },
+  "ownership_tests": {
+    "applies": false,
+    "reason": "THIS_ACTION_BUILDS_AND_FALSIFIES_A_ZERO_REALITY_PREPROOF_BOUNDARY_ONLY__NO_CAPABILITY_OR_OWNERSHIP_PROMOTION"
+  },
+  "reasoning_durability": {
+    "real_objective": "REDUCE_TERMINAL_TIME_BY_CLOSING_OR_SHARPLY_FALSIFYING_THE_ACTIVE_ROOT3_COMPOSITION_C1_NO_BYPASS_OBLIGATION_WITHOUT_FRESH_CASES",
+    "governing_invariants": [
+      "TERMINAL_GOAL_IS_OPUS55_USEFUL_CAPABILITY_OWNERSHIP",
+      "NO_FRESH_REALITY_FROM_ACTIVE_V18_CUT",
+      "NO_ACCEPTANCE_CREDIT_FROM_LOCAL_OR_SELF_CERTIFIED_TESTS",
+      "UNDERLYING_CAPABILITY_INVENTION_FORBIDDEN",
+      "REUSE_EXISTING_CAPSULE_V2_GUARD_AND_ROOT3_EFFECT_MEDIATION_BEFORE_NEW_MECHANISMS"
+    ],
+    "material_premises": [
+      "CURRENT_TERMINAL_AUTHORITY_IS_14_OF_38_PROVED__24_OPEN__5_OF_19_ACCEPTED",
+      "V18_ACTIVE_GROUP_G_EXPLICITLY_AUTHORIZES_NEW_LOAD_BEARING_LOSSLESS_EXHAUSTIVE_OR_UNIVERSAL_ROOT3_CERTIFICATES_WITH_ZERO_FRESH_REALITY",
+      "COMPOSITION_C1_REMAINS_OPEN_BECAUSE_LEGACY_ASTRA_HAS_AN_UNDECLARED_PRIOR_STEP_RESULT_CHANNEL",
+      "COMPOSITION_STATE_CAPSULE_GUARD_V2_ALREADY_CONTENT_BINDS_DECLARED_CROSS_CAPABILITY_STATE_BUT_EXPLICITLY_DOES_NOT_PROVE_DECLARATION_COMPLETENESS",
+      "FROZEN_COMPOSITION_PROTOCOL_HAS_FIVE_EXPLICIT_TASK_DIMENSIONS_AND_ACCEPTANCE_RELEVANT_STATE_HANDOFF_ROLLBACK_PROVENANCE_METRICS"
+    ],
+    "evidence_refs": [
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V18.json",
+      "canonical/governance/COMPOSITION_ACCEPTANCE_QUOTIENT_CAPSULE_MINIMUM_CUT_ACTIVATION_20261005_V1.json",
+      "canonical/governance/COMPOSITION_STATE_CAPSULE_NO_BYPASS_TRUTH_REPAIR_20261005_V1.json",
+      "canonical/runtime/composition_state_capsule_guard_v2.py",
+      "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
+    ],
+    "conclusion": "THE_SHORTEST_CURRENT_REPO_ONLY_ROUTE_IS_TO_DEFINE_A_FINITE_ACCEPTANCE_RELEVANT_CROSS_MACROSTEP_CHANNEL_REGISTRY_FOR_THE_FROZEN_COMPOSITION_PROFILE__FORCE_EVERY_DECLARED_POSITIVE_STATE_FLOW_THROUGH_CAPSULE_V2__AND_FAIL_CLOSED_ON_ANY_UNREGISTERED_OR_AMBIENT_POSITIVE_AUTHORITY_CHANNEL",
+    "selected_route": "REUSE_CAPSULE_V2_AND_EXISTING_ROOT3_ZERO_AMBIENT_EFFECT_MEDIATION__ADD_ONLY_A_FINITE_SCOPE_REGISTRY_AND_DETERMINISTIC_CLOSED_WORLD_VERIFIER__THEN_FALSIFY_AGAINST_THE_KNOWN_LEGACY_ASTRA_BYPASS",
+    "rejected_material_alternatives": [
+      "DECLARE_C1_CLOSED_FROM_CAPSULE_UNIT_TESTS__SELF_CERTIFICATION_AND_ALREADY_FALSIFIED",
+      "PATCH_ALL_OF_LEGACY_ASTRA__BROADER_THAN_FROZEN_ACCEPTANCE_SCOPE",
+      "GENERATE_NEW_TERMINAL_CASES__V18_FORBIDS_FRESH_REALITY",
+      "REPROVE_P1_P2_P3_SEPARATELY__SUPERSEDED_BY_ACTIVE_TWO_OBLIGATION_CUT",
+      "BUILD_NEW_CAPABILITY_SUBSTRATE__UNNECESSARY_AND_FORBIDDEN"
+    ],
+    "uncertainties": [
+      "THE_FROZEN_PORTFOLIO_MAY_REQUIRE_ACCEPTANCE_RELEVANT_MUTABLE_CHANNEL_CLASSES_NOT_YET_EXPLICITLY_ENUMERATED",
+      "A_CONCURRENT_WORKER_MAY_ADVANCE_OR_SUPERSEDE_C1_BEFORE_THIS_BRANCH_MERGES"
+    ],
+    "assumptions": [
+      "THE_FIVE_FROZEN_COMPOSITION_TASK_DIMENSIONS_REMAIN_THE_ACTIVE_ACCEPTANCE_SCOPE",
+      "CAPSULE_V2_AND_ROOT3_EFFECT_MEDIATION_BYTES_REMAIN_UNSUPERSEDED_DURING_THIS ACTION"
+    ],
+    "non_goals": [
+      "NO_CLAIM_COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "NO_CLAIM_C2_REGISTRY_TOTALITY",
+      "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_PROMOTION",
+      "NO_TERMINAL_COMPLETION_CLAIM"
+    ],
+    "next_action": "OPEN_GUARDED_PR__REVALIDATE_BASE_AND_LEASE__THEN_ADD_THE_SMALLEST_MACHINE_CHECKABLE_SCOPE_REGISTRY_AND_C1_VERIFIER_IF_AUTHORITY_SURVIVES",
+    "supersession_conditions": [
+      "CURRENT_TERMINAL_AUTHORITY_CHANGES_RELEVANT_COMPOSITION_STATE",
+      "V18_OR_GROUP_G_IS_SUPERSEDED",
+      "ANOTHER_VALID_OPEN_PR_OWNS_THE_SAME_BLOCKER_LEASE",
+      "C1_IS_CLOSED_OR_REPLACED_BY_A_SMALLER_VERIFIED_OBLIGATION"
+    ],
+    "supersedes": null
+  },
+  "recursive_obs": {
+    "goal": "PERMANENT_OPUS55_USEFUL_CAPABILITY_OWNERSHIP",
+    "capability": "MULTI_CAPABILITY_COMPOSITION__ZERO_CRITICAL_INVARIANT_FAILURES",
+    "blocker": "C1_CLOSED_WORLD_CAPSULE_MEDIATION_TOTALITY",
+    "deletion_first_scan": {
+      "DELETE": "SEPARATE_P1_P2_P3_SEARCH_ALREADY_DELETED_BY_ACTIVE_TWO_OBLIGATION_CUT",
+      "BYPASS": "NARROW_TO_FROZEN_ACCEPTANCE_SCOPE_INSTEAD_OF_WHOLE_ASTRA_RUNTIME",
+      "REUSE": "COMPOSITION_STATE_CAPSULE_V2__GUARD_V2__ROOT3_ZERO_AMBIENT_EFFECT_MEDIATION",
+      "SUBSTITUTE": "NO_STRONGER_EXISTING_SCOPE_COMPLETE_RECEIPT_FOUND",
+      "WHITE_BOX_HARVEST": "NOT_APPLICABLE_TO_THIS_CONTROL_BOUNDARY",
+      "COMPOSE": "SELECTED__COMPOSE_EXISTING_VERIFIED_MECHANISMS",
+      "CONFIGURE": "ONLY_IF_REQUIRED_BY_FINITE_SCOPE_REGISTRY",
+      "INTEGRATE": "ONLY_MINIMAL_GLUE_AFTER_REGISTRY_SPECIFICATION"
+    },
+    "solution": "FINITE_ACCEPTANCE_RELEVANT_CHANNEL_REGISTRY_PLUS_DENY_BY_DEFAULT_CLOSED_WORLD_VERIFIER_OVER_THE_BOUND_FROZEN_COMPOSITION_EXECUTION_PROFILE",
+    "verification": "KNOWN_LEGACY_ASTRA_BYPASS_MUST_FAIL__DECLARED_CAPSULE_PATH_MUST_PASS__UNREGISTERED_POSITIVE_CHANNEL_MUTANTS_MUST_FAIL__ANY_UNKNOWN_ACCEPTANCE_RELEVANT_CHANNEL_MUST_FAIL_CLOSED",
+    "inherited_system": "CAPSULE_V2_GUARD_V2_ROOT3_EFFECT_BROKER_ACCEPTANCE_QUOTIENT",
+    "obs": "CURRENT_ACTIVE_ROUTE_SURVIVES_DELETION_FIRST_SCAN_AS_MINIMAL_ZERO_REALITY_PROOF_PRODUCING_ACTION",
+    "exact_base_binding": "b06e9fca5f59e3b3923045a473fc2a7a4ad5d876",
+    "route_frontier": {
+      "discovery_required": true,
+      "freshness": "CURRENT_CANONICAL_REPO_STATE_OBSERVED_2026-10-05",
+      "incumbent": "LEGACY_ASTRA_WHOLE_RUNTIME_PATCH",
+      "challengers": [
+        "FROZEN_SCOPE_CAPSULE_V2_CLOSED_WORLD_PROFILE",
+        "ROOT3_ZERO_AMBIENT_EFFECT_MEDIATION_COMPOSED_WITH_CAPSULE_V2",
+        "WHOLE_RUNTIME_CHANNEL_ELIMINATION"
+      ],
+      "selected": "FROZEN_SCOPE_CAPSULE_V2_CLOSED_WORLD_PROFILE",
+      "selection_reason": "SMALLEST_ROUTE_THAT_DIRECTLY_TARGETS_ACTIVE_C1_AND_CAN_BE_FALSIFIED_WITH_EXISTING_EVIDENCE_WITHOUT_FRESH_TERMINAL_CASES",
+      "unresolved_plausible_dominator": false
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "FROZEN_COMPOSITION_CLOSED_WORLD_MEDIATION_C1_001",
+    "inputs": "Frozen composition protocol scope, declared capability dependency contract, verified initial facts, capsule V2 state, cross-macrostep action/result/evidence/rollback descriptors",
+    "environment_state": "V18 zero-reality epoch with legacy Astra bypass known and no fresh terminal evidence authority",
+    "allowed_information": "Existing canonical repository artifacts and synthetic structural mutants only; no untouched terminal cases and no new target comparator calls",
+    "required_output_or_action": "Either a finite machine-checkable registry proving all acceptance-relevant positive cross-macrostep channels are capsule-mediated or an explicit counterexample that leaves C1 open",
+    "success_condition": "Every acceptance-relevant positive cross-macrostep channel in the frozen profile is enumerated; registered positive channels are content-bound capsule/effect-broker mediated; unknown or ambient positive channels fail closed; known legacy Astra bypass is rejected",
+    "failure_condition": "Any acceptance-relevant positive channel can affect later acceptance without registry membership and content-bound mediation, or the verifier silently accepts unknown channel classes",
+    "terminal_consequence": "A verified pass would discharge C1 and remove one of two active composition zero-critical premises; a counterexample localizes the exact remaining channel instead of generating fresh cases",
+    "verification_route": "Deterministic unit and mutation tests plus independent verifier receipt before any predicate credit",
+    "dependency_boundary": "Frozen MULTI_CAPABILITY_COMPOSITION acceptance profile only, not arbitrary legacy Astra runtime behavior",
+    "scope": "Five frozen task dimensions and acceptance-relevant cross-capability handoff/rollback/provenance channels"
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "NO_UNTOUCHED_QUALIFICATION_EVIDENCE_EXPOSURE__NO_PROMOTION"
+  },
+  "qualification_stage": "NOT_APPLICABLE__ZERO_REALITY_PREPROOF",
+  "terminal_proof_control": {
+    "proof_obligation": "C1_CLOSED_WORLD_CAPSULE_MEDIATION_TOTALITY",
+    "hole_type": "SCOPE_COMPLETENESS_AND_NO_BYPASS",
+    "expected_certificate_or_receipt": "CONTENT_ADDRESSED_FINITE_CHANNEL_REGISTRY_PLUS_DETERMINISTIC_CLOSED_WORLD_VERIFIER_AND_INDEPENDENT_PASS",
+    "validator": "FAIL_CLOSED_ENUMERATION_AND_MUTATION_VERIFIER",
+    "maximum_cheap_test_cost": 0,
+    "prerequisites": [
+      "ACTIVE_V18_GROUP_G",
+      "CAPSULE_V2_GUARD_V2",
+      "KNOWN_LEGACY_ASTRA_BYPASS_COUNTEREXAMPLE"
+    ],
+    "contamination_risk": "NONE__NO_TERMINAL_CASES",
+    "reversibility": "FULLY_REVERSIBLE_BRANCH",
+    "falsification_condition": "ANY_UNREGISTERED_ACCEPTANCE_RELEVANT_POSITIVE_CHANNEL_OR_ANY_KNOWN_BYPASS_ACCEPTED",
+    "critical_path_relation": "DIRECT_ACTIVE_ROOT3_C1_PREMISE"
+  },
+  "continuous_obs": {
+    "schema": "PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      "canonical/CANONICAL_POINTER.json",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V18.json",
+      "canonical/governance/COMPOSITION_ACCEPTANCE_QUOTIENT_CAPSULE_MINIMUM_CUT_ACTIVATION_20261005_V1.json",
+      "canonical/governance/COMPOSITION_STATE_CAPSULE_NO_BYPASS_TRUTH_REPAIR_20261005_V1.json",
+      "canonical/runtime/composition_state_capsule_guard_v2.py",
+      "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "obs_layers_current": true,
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": true,
+    "information_boundary_complete": true,
+    "information_policy": "NO_NEW_REALITY",
+    "dependencies": []
+  },
+  "reality_query_admission": {
+    "proof_obligation": "C1_CLOSED_WORLD_CAPSULE_MEDIATION_TOTALITY",
+    "existing_evidence_search": "SATURATED_TO_CURRENT_CANONICAL_C1_ARTIFACTS_AND_KNOWN_COUNTEREXAMPLE",
+    "evidence_scope_equivalence": "STRUCTURAL_ZERO_REALITY_ONLY",
+    "deductive_closure": "NOT_YET_CLOSED__THIS_ACTION_ATTEMPTS_CONSTRUCTIVE_FINITE_SCOPE_CLOSURE",
+    "counterfactual_terminal_distinctions": "PASS_DISCHARGES_C1__FAIL_LOCALIZES_EXACT_REMAINING_CHANNEL",
+    "dominated_observations_deleted": [
+      "NEW_TERMINAL_CASES",
+      "REPEAT_CAPSULE_LOCAL_TESTS_AS_SCOPE_PROOF"
+    ],
+    "candidate_observations": [],
+    "minimum_reality_cut": [],
+    "terminal_decision_value": "NO_REALITY_QUERY_REQUIRED",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "global_cut_snapshot": "V18_GROUP_G_ZERO_REALITY_CERTIFICATE_RACE",
+    "global_cut_membership": true
+  },
+  "global_terminal_proof_cut": {
+    "graph_snapshot": "CURRENT_TERMINAL_AUTHORITY_14_OF_38_PROVED_24_OPEN",
+    "existing_evidence_saturation": "C1_EXISTING_EVIDENCE_AND_COUNTEREXAMPLE_BOUND",
+    "deductive_closure": "ACTIVE_TWO_OBLIGATION_COMPOSITION_CUT",
+    "shared_residual_compression": "C1_PLUS_C2_ONLY_FOR_ZERO_CRITICAL_COMPOSITION_CONJUNCT",
+    "candidate_observations": [],
+    "dominance_deletions": [
+      "WHOLE_ASTRA_PATCH",
+      "FRESH_TERMINAL_CASE_GENERATION"
+    ],
+    "exact_global_minimum_reality_cut": "V18_ZERO_REALITY_GROUP_G",
+    "proposed_action_membership": true,
+    "terminal_decision_value": "DIRECT_C1_ROOT3_CERTIFICATE_PROGRESS_WITH_ZERO_FRESH_REALITY"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_C1_CLOSURE_CLAIM_BEFORE_INDEPENDENT_VERIFICATION",
+    "NO_COMPOSITION_TERMINAL_SUCCESS_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_GOAL_ACHIEVED_CLAIM"
+  ]
+}
