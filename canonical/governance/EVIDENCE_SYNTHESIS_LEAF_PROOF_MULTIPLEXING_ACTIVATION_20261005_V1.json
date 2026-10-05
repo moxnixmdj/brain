@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_SYNTHESIS_LEAF_PROOF_MULTIPLEXING_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__ONE_SYNTHESIS_LEAF_CERTIFICATE_ROUTE__FIVE_CONSUMER_REUSE__CURRENT_V13_GROUP_F__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/EVIDENCE_SYNTHESIS_LEAF_PROOF_MULTIPLEXING_20261005_V1.json",
+    "git_blob_sha": "dba44ea8aa649dfe1b826ac1c75144a5042c1463"
+  },
+  "verification": {
+    "path": "canonical/verification/EVIDENCE_SYNTHESIS_LEAF_PROOF_MULTIPLEXING_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "e1925a83a474b100cbc33de70599dc631aa0c3be"
+  },
+  "current_authority": {
+    "scope_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "fdc70d49bfe3f4691fab728f2016242632018ce4"
+    },
+    "zero_reality_cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V13.json",
+      "git_blob_sha": "13f22a51407199628aab2138e1e3ed0f32a99b41",
+      "action_group": "F_FINANCE_AND_SYNTHESIS_CERTIFICATE_COMPILATION"
+    }
+  },
+  "effects": [
+    "SCHEDULE_EXACTLY_ONE_SCOPE_COMPLETE_CERTIFICATE_FOR_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "DELETE_THREE_SEPARATE_FAMILY_LOCAL_SYNTHESIS_SCOPE_PROOF_BRANCHES_FOR_PROFESSIONAL_KNOWLEDGE_WORK_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING_AND_AGENTIC_SCIENTIFIC_RESEARCH",
+    "ON_VERIFIED_SCOPE_COMPLETE_CLOSURE_REUSE_THE_EXACT_LEAF_RECEIPT_FOR_COMMUNICATION_AND_SYNTHESIS_PROFESSIONAL_KNOWLEDGE_WORK_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING_AGENTIC_SCIENTIFIC_RESEARCH_AND_FINANCIAL_ANALYSIS",
+    "NO_TRANSFER_BEYOND_EXACT_BEHAVIORAL_IDENTITY",
+    "RECOMPUTE_CURRENT_SIX_FAMILY_SCOPE_PARTITION_AND_COMPOSITION_UPSTREAM_RECEIPTS_AFTER_CLOSURE"
+  ],
+  "potential_delta_after_certificate_closure": {
+    "current_scope_partition_surviving_occurrences": 12,
+    "current_scope_partition_unique_surviving_leaves": 7,
+    "synthesis_occurrences_removed": 3,
+    "post_closure_surviving_occurrences": 9,
+    "post_closure_unique_surviving_leaves": 6,
+    "additional_registry_consumers_receiving_same_exact_leaf_receipt": 2
+  },
+  "current_truth": {
+    "synthesis_leaf_certificate_closed": false,
+    "family_acceptance_delta": 0,
+    "atomic_acceptance_delta": 0,
+    "terminal": false
+  },
+  "hard_rules": [
+    "NO_CERTIFICATE_CREDIT_UNTIL_SCOPE_COMPLETE_INDEPENDENT_VERIFICATION",
+    "NO_WHOLE_FAMILY_PROMOTION_FROM_ONE_LEAF",
+    "NO_PUBLIC_BAR_AGGREGATE_TO_LEAF_INFERENCE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
