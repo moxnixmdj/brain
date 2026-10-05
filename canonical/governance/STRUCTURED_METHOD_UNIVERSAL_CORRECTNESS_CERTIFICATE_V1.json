@@ -8,7 +8,7 @@
   "exact_candidate_blobs": {
     "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_RELATION_V1.json": "4e7c2c43cae956ce8eadf29ae04165ed2c9e77a7",
     "canonical/runtime/structured_method_universal_correctness_certificate_v1.py": "7639dbca4ba1112197ef2bc9c601c673c3f2eb87",
-    "canonical/tests/test_structured_method_universal_correctness_certificate_v1.py": "c7939dffd1e3098db044b3d4a98cdebbac66492b",
+    "canonical/tests/test_structured_method_universal_correctness_certificate_v1.py": "47e65b23bbd55e2130c3f486d192f39495428cb2",
     "canonical/runtime/structured_method_normalized_rule_graph_v3.py": "79d3896818b03223348f05adf4fdcd574f6f355e",
     "canonical/runtime/structured_method_normalized_rule_oracle_v3.py": "5d92b1360fbb1bb27baacc8a04adb3744abf690c",
     "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json": "1db04e3c2c523dfe5f2ebe719b7c63dc9ccd808e",
@@ -44,7 +44,7 @@
     "matched_opus_case_level_comparator_required": false
   },
   "hard_nonclaims": [
-    "NO_ACCEPTANCE_LEDGER_MUTATION_FROM_THIS CANDIDATE",
+    "NO_ACCEPTANCE_LEDGER_MUTATION_FROM_THIS_CANDIDATE",
     "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_BEFORE_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_AND_SEPARATE_REDUCTION",
     "NO_CLAIM_ABOUT_NATURAL_LANGUAGE_RULE_EXTRACTION",
     "NO_CLAIM_ABOUT_EXECUTING_OR_NUMERICALLY_VALIDATING_OPAQUE_OPERATOR_SEMANTICS",
