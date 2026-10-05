@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_TWO_CUT_CRITICAL_PATH_RECONCILIATION_20261005_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__LITERAL_FINALITY_SPLIT_INTO_EPOCH_ACCEPTANCE_AND_TARGET_DISCOVERY_COMPLETENESS__COMPLETENESS_LANE_EVENT_DRIVEN__ZERO_CREDIT",
+  "status": "CANDIDATE_TRUTH_REPAIRED__TERMINAL_FINALITY_SPLIT_INTO_EPOCH_ACCEPTANCE_AND_TARGET_DOMAIN_COVERAGE_DOMINANCE__CONFIGURABLE_ROUTE_C_ACTIVE__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective": "Reconcile the live 14/38 observable-epoch acceptance program with the separately necessary literal target-discovery completeness premise, delete mathematically non-identifying work, and route zero-spend compute only to information-positive acceptance closure while the completeness lane sleeps until a load-bearing witness event occurs.",
   "source_main_commit": "f9c935b2ab6dd193b6fac067f7e1e45b2a10f3e3",
@@ -37,6 +37,22 @@
     "root3_minimum_action_cut": {
       "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V5.json",
       "git_blob_sha": "8397c1341b48947727c070f37a184580ca32c844"
+    },
+    "finite_query_configurable_truth_repair": {
+      "path": "canonical/governance/FINITE_BLACK_BOX_TARGET_UNIVERSAL_CERTIFICATION_LOWER_BOUND_20261005_V3.json",
+      "git_blob_sha": "f2bc02581d722a24b6376a8510682dae8c63d131"
+    },
+    "configurable_quantifier_correction": {
+      "path": "canonical/governance/OPUS55_CONFIGURABLE_CAPABILITY_QUANTIFIER_CORRECTION_20261005_V1.json",
+      "git_blob_sha": "f019b28366b985dec2d6e3dec527e54482d9af3b"
+    },
+    "target_superset_normal_form": {
+      "path": "canonical/governance/TARGET_SUPERSET_COVERAGE_DOMINANCE_NORMAL_FORM_20261005_V1.json",
+      "git_blob_sha": "55a027d50e6f9d1c4d70a75b39d6a536e26a4277"
+    },
+    "root2_r2e_event_bound_reclassification": {
+      "path": "canonical/governance/ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_20261005_V1.json",
+      "git_blob_sha": "4bcd638848a5d7d87eec77cb98364b3650ff9a49"
     }
   },
   "exact_current_state": {
@@ -50,7 +66,7 @@
     "terminal_goal_achieved": false
   },
   "two_cut_normal_form": {
-    "formula": "TERMINAL_LITERAL_FINALITY = CURRENT_OBSERVABLE_EPOCH_ACCEPTANCE_AND_OWNERSHIP_CLOSURE AND SOUND_COMPLETE_TARGET_DOMAIN_WITNESS",
+    "formula": "TERMINAL_LITERAL_FINALITY = CURRENT_OBSERVABLE_EPOCH_ACCEPTANCE_AND_OWNERSHIP_CLOSURE AND SOUND_TARGET_SUPERDOMAIN_COVERAGE_AND_DOMINANCE",
     "cut_A": {
       "id": "CURRENT_OBSERVABLE_EPOCH_ACCEPTANCE_AND_OWNERSHIP_CLOSURE",
       "state": "OPEN",
@@ -58,46 +74,53 @@
       "compute_policy": "ACTIVE__RUN_ONLY_INFORMATION_POSITIVE_ZERO_REALITY_BRANCHES__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA"
     },
     "cut_B": {
-      "id": "SOUND_COMPLETE_TARGET_DOMAIN_WITNESS",
+      "id": "SOUND_TARGET_SUPERDOMAIN_COVERAGE_AND_DOMINANCE",
       "state": "OPEN",
-      "current_evidence": "NO_EXHAUSTIVE_OWNER_ATTESTATION_OR_EQUIVALENT_SCOPE_COMPLETE_CHARACTERIZATION_BOUND_IN_CURRENT_AUTHORITIES",
-      "compute_policy": "EVENT_DRIVEN_SLEEP__NO_FINITE_BLACKBOX_ACCUMULATION_AS_LITERAL_COMPLETENESS_PROOF"
+      "current_evidence": "FINITE_TARGET_QUERIES_DO_NOT_ESTABLISH_LITERAL_ALL__EXACT_TARGET_ENUMERATION_NOT_REQUIRED__CONFIGURABLE_TASK_CONDITIONED_DOMINANCE_ROUTE_C_IS_LOGICALLY_SOUND_BUT_NOT_YET_GLOBALLY_CLOSED",
+      "compute_policy": "HYBRID__R1_OWNER_EXHAUSTIVENESS_EVENT_ROUTE__R2_EXACT_INTERNAL_CHARACTERIZATION_SEARCH_WHEN_INFORMATION_POSITIVE__R3_CONFIGURABLE_TASK_CONDITIONED_DOMINANCE_ACTIVE"
     }
   },
   "theorem": {
-    "premise_1": "The active W3 result is downstream of a complete target-domain premise; W3 is a dominance technique, not independent target-discovery information.",
-    "premise_2": "For an unrestricted black-box target class, any finite observation set is compatible with at least two target functions that agree on all observed inputs and differ on an unobserved input; therefore finite benchmark accumulation alone cannot certify universal literal completeness.",
-    "premise_3": "The current owner-exhaustiveness public search is saturated without an exhaustive attestation, and the current outreach snapshot contains no owner reply that supplies one.",
-    "conclusion": "Under the currently admitted evidence/action set, extra internal cycles devoted solely to finite black-box target discovery have zero sound path to discharge Cut B. They are dominated by Cut A work until a completeness wake event changes the premise set."
+    "premise_1": "Finite exact target-query accumulation does not soundly prove literal target completeness when an admissible useful target behavior cell remains logically unfixed.",
+    "premise_2": "Exact target enumeration or exact target simulation is sufficient but not necessary for literal finality.",
+    "premise_3": "For a configurable system the terminal quantifier is task-conditioned: FOR_ALL_TASKS EXISTS_OWNED_CONFIGURATION_B_TAU, not one fixed B for all tasks.",
+    "premise_4": "If a proved superdomain D covers every actual useful target task and the Brain can admissibly choose and prove a globally noninferior owned configuration for every task in D, then target-independent configurable dominance establishes literal finality over U without exact Opus simulation.",
+    "conclusion": "Delete finite-query accumulation as a literal-completeness proof, but keep Route C active. The irreducible load-bearing problem is now superdomain coverage plus per-task admissible dominance, not waiting for owner attestation."
   },
   "scheduling_delta": {
     "delete_now": [
-      "BUILD_W3_BEFORE_COMPLETE_TARGET_DOMAIN_PREMISE",
-      "ADD_FINITE_BENCHMARKS_SOLELY_TO_PROVE_ABSENCE_OF_UNOBSERVED_USEFUL_TARGET_BEHAVIOR",
+      "BUILD_W3_BEFORE_COMPLETE_TARGET_DOMAIN_OR_SUPERDOMAIN_PREMISE",
+      "ADD_FINITE_OPUS_QUERIES_SOLELY_TO_PROVE_ABSENCE_OF_UNOBSERVED_USEFUL_TARGET_BEHAVIOR",
+      "TREAT_EXACT_OPUS_SIMULATION_AS_NECESSARY_FOR_EVERY_CONFIGURABLE_DOMINANCE_PROOF",
       "PERIODIC_OWNER_MAILBOX_POLLING_WITHOUT_MATERIAL_WAKE_EVENT",
       "REPEAT_PUBLIC_EXHAUSTIVENESS_SEARCH_WITHOUT_NEW_SOURCE_CLASS_OR_MATERIAL_SOURCE_DELTA",
-      "TREAT_MORE_OBSERVED_EPOCH_ACCEPTANCE_CASES_AS_LITERAL_TARGET_DISCOVERY_COMPLETENESS"
+      "REPEAT_ROOT2_R2E_GENERIC_SEARCHES_ALREADY_SATURATED_OR_SCOPE_MISMATCHED"
     ],
     "active_now": [
-      "ROOT2_14_INFORMATION_POSITIVE_ATOMS_FROM_WAKE_AWARE_V4",
+      "ROOT2_10_INFORMATION_POSITIVE_ATOMS_AFTER_R2E_FOUR_PREDICATE_EVENT_BOUND_RECLASSIFICATION",
+      "ROOT2_R2E_FOUR_PREDICATES_SLEEP_UNTIL_OWNER_SCOPE_BRIDGE_OR_STRONGER_PROOF_WAKE_EVENT",
       "ROOT2_SHARED_AA_RECEIPT_ONLY_ON_MATERIAL_EVENT",
       "ROOT2_FINANCE_ACCOUNTING_FIXED_POINT_ONLY_ON_NEW_BOUND_OR_TRANSFORM_EVENT",
       "ROOT2_TB_SCIENCE_REMAINS_FRESH_REALITY_DEFERRED",
       "ROOT3_NEW_LOAD_BEARING_SCOPE_CERTIFICATE_EVENTS",
       "ROOT3_UPSTREAM_SCOPE_RECEIPT_EVENTS",
+      "ROUTE_C_RECLASSIFY_TASKS_BY_EVALUATOR_AVAILABILITY_AND_EXACT_OPTIMIZABILITY",
+      "ROUTE_C_PROVE_GLOBAL_OPTIMUM_CERTIFICATES_ON_EXPLICIT_EVALUATOR_STRATA",
+      "ROUTE_C_ATTACK_SUPERDOMAIN_COVERAGE_AND_HIDDEN_EVALUATOR_COMPLEMENT_SEPARATELY",
       "RECOMPUTE_CURRENT_CONTENT_ADDRESSED_ACCEPTANCE_LEDGER_AFTER_EVERY_VERIFIED_DELTA"
     ],
     "cut_B_wake_events": [
-      "TARGET_OWNER_EXHAUSTIVENESS_ATTESTATION",
-      "NEW_FIRST_PARTY_SOURCE_EXPLICITLY_CLAIMING_COMPLETE_USEFUL_BEHAVIORAL_CHARACTERIZATION",
-      "SCOPE_COMPLETE_TARGET_INDEPENDENT_SUPERDOMAIN_COVERAGE_THEOREM_WITH_VERIFIED_DOMINANCE",
-      "OTHER_STRUCTURAL_PROOF_SOUNDLY_EXCLUDING_USEFUL_UNOBSERVED_TARGET_BEHAVIOR",
-      "MATERIAL_NEW_TARGET_EVIDENCE__REOPEN_AND_MAP_DELTA_BEFORE_ANY_LITERAL_FINALITY"
+      "R1_TARGET_OWNER_EXHAUSTIVENESS_ATTESTATION",
+      "R1_NEW_FIRST_PARTY_COMPLETE_BEHAVIORAL_CHARACTERIZATION",
+      "R2_NEW_LEGITIMATE_EXACT_INTERNAL_TARGET_CHARACTERIZATION_ROUTE",
+      "R3_NEW_SUPERDOMAIN_COVERAGE_CERTIFICATE",
+      "R3_NEW_EXACT_EVALUATOR_OR_GLOBAL_OPTIMUM_CERTIFICATE",
+      "MATERIAL_NEW_TARGET_EVIDENCE__REOPEN_AND_MAP_DELTA_BEFORE_LITERAL_FINALITY"
     ]
   },
   "leverage_result": {
-    "conceptual_parallel_lanes_before": "ACCEPTANCE_CLOSURE_PLUS_FALSELY_PARALLEL_W3_OR_FINITE_DISCOVERY_WORK",
-    "conceptual_parallel_lanes_after": "ACCEPTANCE_CLOSURE_ACTIVE__COMPLETENESS_EVENT_DRIVEN",
+    "conceptual_parallel_lanes_before": "ACCEPTANCE_CLOSURE_PLUS_UNDISCIPLINED_FINITE_TARGET_QUERY_ACCUMULATION_PLUS_UNSCOPED_COMPLETENESS_SEARCH",
+    "conceptual_parallel_lanes_after": "ACCEPTANCE_CLOSURE_ACTIVE__R1_EVENT_BOUND__R2_INFORMATION_POSITIVE_ONLY__R3_CONFIGURABLE_DOMINANCE_ACTIVE",
     "fresh_reality_units_consumed": 0,
     "terminal_cases_consumed": 0,
     "incremental_spend_usd": 0,
@@ -105,7 +128,7 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
-    "expected_effect": "REMOVE_NONIDENTIFYING_COMPLETENESS_COMPUTE_FROM_CRITICAL_PATH_AND_CONCENTRATE_AVAILABLE_ZERO_SPEND_WORK_ON_PREDICATES_THAT_CAN_CHANGE_CURRENT_ACCEPTANCE_STATE"
+    "expected_effect": "REMOVE_NONIDENTIFYING_TARGET_QUERY_WORK_AND FOUR_SATURATED_ROOT2_R2E SEARCH LANES WHILE PRESERVING THE TARGET_INDEPENDENT_CONFIGURABLE_DOMINANCE ROUTE THAT CAN ADVANCE LITERAL FINALITY WITHOUT OWNER_WAIT"
   },
   "promotion_gate": [
     "INDEPENDENTLY_VERIFY_ALL_BOUND_BLOB_SHAS_AND_LOGICAL_IMPLICATIONS",
@@ -114,14 +137,16 @@
     "DO_NOT_PROMOTE_IF_THIS_ARTIFACT_IS_INTERPRETED_AS TARGET_WEAKENING OR COMPLETENESS_CREDIT"
   ],
   "hard_nonclaims": [
-    "NO_CLAIM_TARGET_DISCOVERY_COMPLETENESS_IS_PROVED",
+    "NO_CLAIM_TARGET_DISCOVERY_OR_SUPERDOMAIN_COMPLETENESS_IS_PROVED",
+    "NO_CLAIM_ROUTE_C_CURRENTLY_CLOSES_LITERAL_ALL",
+    "NO_CLAIM_ALL_USEFUL_TARGET_TASKS_HAVE_EXPLICIT_EVALUATORS_OR_EXACTLY_OPTIMIZABLE_SPACES",
     "NO_CLAIM_TERMINAL_GOAL_IS_ACHIEVED",
     "NO_WEAKENING_OF_ALL_USEFUL_OPUS_5_5_CAPABILITIES",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
     "NO_FRESH_REALITY_AUTHORITY",
     "NO_EXECUTION_AUTHORITY",
     "NO_PROMOTION_AUTHORITY",
-    "NO_CLAIM_FINITE_BENCHMARKS_ARE_USELESS_FOR_CURRENT_EPOCH_ACCEPTANCE"
+    "NO_CLAIM_FINITE_BENCHMARKS_ARE_USELESS_FOR_SCOPED_CURRENT_EPOCH_ACCEPTANCE"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -136,5 +161,32 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "observed_main_through_commit": "b66d34216fc1024d312a6bdd603ef40f0b9ee1c9",
+  "literal_finality_routes": {
+    "R1": {
+      "id": "AUTHORITATIVE_EXHAUSTIVE_TARGET_SEMANTICS",
+      "state": "EVENT_BOUND",
+      "next": "WAKE_ON_OWNER_EXHAUSTIVENESS_ATTESTATION_OR_EQUIVALENT_COMPLETE_FIRST_PARTY_SEMANTICS"
+    },
+    "R2": {
+      "id": "BRAIN_OWNED_EXACT_INTERNAL_TARGET_CHARACTERIZATION",
+      "state": "OPEN_SEARCH_ONLY_WHEN_NEW_INFORMATION_POSITIVE_ROUTE_EXISTS",
+      "next": "DO_NOT_INFER_FROM_FINITE_TRANSCRIPTS"
+    },
+    "R3": {
+      "id": "CONFIGURABLE_TASK_CONDITIONED_DOMINANCE",
+      "state": "ACTIVE_ZERO_REALITY_STRUCTURAL_ROUTE",
+      "sufficient_form": [
+        "PROVE_A_TASK_SUPERDOMAIN_D_WITH_U_SUBSET_OR_EQUAL_D_FOR_ALL_ACTUAL_USEFUL_OPUS55_TASKS_U",
+        "FOR_EACH_TASK_TAU_IN_D_SELECT_A_DURABLY_BRAIN_OWNED_CONFIGURATION_B_TAU_USING_ONLY_ADMISSIBLE_TASK_INFORMATION",
+        "PROVE_B_TAU_EQUAL_OR_BETTER_THAN_ANY_ADMISSIBLE_OPUS55_POLICY_UNDER_FULL_ACCEPTANCE_AND_RESOURCE_SEMANTICS"
+      ],
+      "next": [
+        "RECLASSIFY_TASKS_BY_EVALUATOR_AVAILABILITY_AND_EXACT_OPTIMIZABILITY",
+        "PROVE_GLOBAL_OPTIMUM_CERTIFICATES_ON_EXPLICIT_EVALUATOR_STRATA_BEFORE_OPUS_COMPARATOR_SPEND",
+        "ATTACK_TASK_SUPERDOMAIN_COVERAGE_AND_HIDDEN_OR_IMPLICIT_EVALUATOR_COMPLEMENT_SEPARATELY"
+      ]
+    }
+  }
 }
