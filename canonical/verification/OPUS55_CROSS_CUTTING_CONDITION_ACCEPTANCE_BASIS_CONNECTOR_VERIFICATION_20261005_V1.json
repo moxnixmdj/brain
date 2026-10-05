@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_CROSS_CUTTING_CONDITION_ACCEPTANCE_BASIS_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__TWO_CROSS_CUTTING_TERMINAL_OBLIGATIONS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_CROSS_CUTTING_CONDITION_ACCEPTANCE_BASIS_V1.json",
+    "git_blob_sha": "6a895e7abbfc83b884ddc6e157fe6dabb8bd2cf8"
+  },
+  "checks": {
+    "two_obligations": true,
+    "multilingual": true,
+    "long_context": true,
+    "no_new_family": true,
+    "no_atomic_mutation": true,
+    "results_open": true,
+    "zero_credit": true,
+    "no_authority": true
+  },
+  "deduction": [
+    "MULTILINGUAL_AND_LONG_CONTEXT_ARE_CROSS_CUTTING_ACCEPTANCE_CONDITIONS_ON_EXISTING_FAMILIES_NOT_NEW_PRIMITIVE_FAMILIES",
+    "EXISTING_ENGLISH_OR_SHORT_CONTEXT_RESULTS_CANNOT_BE_INHERITED_AS_PARITY",
+    "LITERAL_TERMINAL_FINALITY_REQUIRES_THESE_CONDITION_RESULTS_OR_SCOPE_SAFE_STRONGER_PROOFS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
