@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_INDEPENDENT_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_VERIFICATION_FAIL__BASIS_ROLE_COMPLETENESS_DOES_NOT_PROVE_FAMILY_SEMANTIC_TOTALITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "path": "canonical/governance/OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V1.json",
+    "git_blob_sha": "62c0e207ce935a02611700a69e0917f938792b11"
+  },
+  "bound_target_envelope": {
+    "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+  },
+  "verdict": "FAIL_AS_TARGET_DISCOVERY_COMPLETENESS_DISCHARGE__PASS_ONLY_AS_CAUSAL_ROLE_TAXONOMY_CANDIDATE",
+  "independent_checks": [
+    {
+      "id": "SOURCE_SURFACE",
+      "result": "PASS",
+      "finding": "Anthropic first-party current Opus 5.5 model reporting explicitly includes conversation, analysis, coding and creative tasks under the model's useful observable surface.",
+      "source": "https://www.anthropic.com/transparency",
+      "observed_on": "2026-10-05"
+    },
+    {
+      "id": "ROLE_DECOMPOSITION",
+      "result": "PASS",
+      "finding": "The subject consistently decomposes CREATIVE_TASKS into B2 information transformation/reasoning plus B7 output construction; ANALYSIS likewise consumes B2."
+    },
+    {
+      "id": "ROLE_TO_FAMILY_SEMANTIC_TOTALITY",
+      "result": "FAIL",
+      "finding": "The frozen 19-family envelope does not contain a family whose useful_behavior is proved to be a semantic superset of the general non-specialized B2 region needed by creative tasks and ordinary analysis. MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING is frozen as difficult expert-level questions across domains with search/code/tools. The other B2 assignees are specialized to exact symbolic, coding, scientific, finance, professional work, or unknown-domain adaptation. COMMUNICATION_AND_SYNTHESIS covers B7 output/synthesis but is not assigned by the subject as B2 reasoning coverage and its frozen prose does not establish general creative problem-solving totality."
+    }
+  ],
+  "constructive_counterexample_class": {
+    "id": "B2_GENERAL_ANALYSIS_CREATIVE_NON_SPECIALIZED_REGION",
+    "target_surface": "A text-input task asking for original creative generation or ordinary analysis under user constraints, with no necessary coding, science, finance, professional-work, exact-symbolic, or unknown-domain specialization.",
+    "subject_mapping": [
+      "B1_GOAL_CONSTRAINT_SCOPE_AND_JUDGMENT",
+      "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+      "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION"
+    ],
+    "uncovered_requirement": "B2 transformation quality for the non-specialized creative/general-analysis region.",
+    "why_current_family_union_is_not_proved_total": [
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING is textually narrower: difficult expert-level questions across domains with search/code/tools.",
+      "Specialized B2 families do not cover the residual by definition unless the task is forced into an unrelated specialization.",
+      "B7 output construction can render the result but cannot substitute for the missing B2 transformation-quality claim.",
+      "A broad role label such as INFORMATION_TRANSFORMATION cannot itself establish that one of the frozen acceptance families semantically contains every transformation inhabiting that role."
+    ]
+  },
+  "subject_falsifier_triggered": "AN_EXISTING_FAMILY_DEFINITION_IS_TOO_NARROW_TO_COVER_THE_BASIS_ROLE_ASSIGNED_TO_IT_AND_NO_OTHER_EXISTING_FAMILY_COVERS_THE_RESIDUAL.",
+  "theorem_repair": {
+    "new_distinction": [
+      "CAUSAL_ROLE_BASIS_COMPLETENESS: every useful observable trajectory position factors through B0-B9.",
+      "TARGET_FAMILY_SEMANTIC_TOTALITY: every useful target behavior region is contained in at least one frozen family useful_behavior contract.",
+      "ACCEPTANCE_CLOSURE: Brain proves equal-or-better behavior on every region of every target family."
+    ],
+    "rule": "CAUSAL_ROLE_BASIS_COMPLETENESS_IS_NECESSARY_BUT_NOT_SUFFICIENT_FOR_TARGET_FAMILY_SEMANTIC_TOTALITY. A role-to-family edge is load-bearing only with an explicit semantic-superset proof over the relevant target behavior region.",
+    "minimum_open_residual": "B2_GENERAL_ANALYSIS_CREATIVE_NON_SPECIALIZED_REGION",
+    "minimum_repair_options": [
+      "Prove that an existing frozen family useful_behavior already semantically contains the residual without weakening or reinterpreting its words, and bind acceptance evidence for that region.",
+      "Otherwise expand or add exactly one family contract covering general analysis/creative problem-solving and create a non-proxy acceptance obligation for the added region."
+    ]
+  },
+  "scheduler_effect": {
+    "preserve": [
+      "B0_THROUGH_B9_CAUSAL_ROLE_TAXONOMY_AS_USEFUL_RESEARCH_CANDIDATE",
+      "ROOT1_CONSTRUCTIVE_SEARCH_FOR_NEW_INTERFACE_ROLES",
+      "ALL_CURRENT_ACCEPTANCE_PERFORMANCE_AND_OWNERSHIP_GATES"
+    ],
+    "block": [
+      "TARGET_DISCOVERY_COMPLETENESS_PREMISE_DISCHARGE_FROM_THE_SUBJECT_AS_WRITTEN",
+      "ROOT1_POSITIVE_GAP_ZERO_INFERENCE_FROM_BASIS_ROLE_COUNT_ALONE"
+    ],
+    "activate": [
+      "SEMANTIC_SUPERSET_PROOF_OR_SINGLE_RESIDUAL_FAMILY_REPAIR_FOR_B2_GENERAL_ANALYSIS_CREATIVE_NON_SPECIALIZED_REGION"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_A_NEW_20TH_FAMILY_IS DEFINITELY_REQUIRED",
+    "NO_CLAIM_THE_B0_B9_ROLE_BASIS_IS_FALSE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TARGET_WEAKENING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification": true,
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
