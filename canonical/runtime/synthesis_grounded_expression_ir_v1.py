@@ -31,7 +31,7 @@ _ALLOWED_CONSTRAINT_KEYS = {
     "style",
 }
 _SAFE_SOURCE = re.compile(r"^[A-Za-z0-9._:/-]+$")
-_SAFE_LOCATOR = re.compile(r"^[^\[\]\n\r]{1,160}$")
+_SAFE_LOCATOR = re.compile(r"^[^\[\]\n\r;@]{1,160}$")
 
 
 def _fail(reason: str, *, details: Any = None) -> dict[str, Any]:
@@ -295,30 +295,28 @@ def solve(public: Mapping[str, Any]) -> dict[str, Any]:
                     "provenance": item["provenance"],
                 })
         else:
-            section_order: list[str] = []
-            grouped: dict[str, list[dict[str, Any]]] = {}
+            # Preserve the already-selected exact item order.  If a section
+            # recurs non-contiguously, repeat its heading rather than silently
+            # regrouping items and changing salience/order semantics.
+            active_section = None
             for item in items:
                 section = item["section"]
-                if section not in grouped:
-                    grouped[section] = []
-                    section_order.append(section)
-                grouped[section].append(item)
-            for si, section in enumerate(section_order):
-                if lines and lines[-1] != "":
+                if section != active_section:
+                    if lines and lines[-1] != "":
+                        lines.append("")
+                    lines.append("#" * constraints["heading_level"] + " " + section)
                     lines.append("")
-                lines.append("#" * constraints["heading_level"] + " " + section)
-                lines.append("")
-                for item in grouped[section]:
-                    rendered, body = _render_item(item, True)
-                    lines.append(rendered)
-                    trace.append({
-                        "item_id": item["id"],
-                        "kind": item["kind"],
-                        "source_text": item["text"],
-                        "rendered_body": body,
-                        "provenance": item["provenance"],
-                        "section": section,
-                    })
+                    active_section = section
+                rendered, body = _render_item(item, True)
+                lines.append(rendered)
+                trace.append({
+                    "item_id": item["id"],
+                    "kind": item["kind"],
+                    "source_text": item["text"],
+                    "rendered_body": body,
+                    "provenance": item["provenance"],
+                    "section": section,
+                })
 
         rendered_text = "\n".join(lines).rstrip()
         max_chars = constraints["max_chars"]
