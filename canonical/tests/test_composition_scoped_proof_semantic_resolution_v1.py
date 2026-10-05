@@ -43,6 +43,7 @@ def test_scope_only_is_not_a_component_proof():
     ) == "SCOPE_ONLY__NO_COMPONENT_CREDIT"
 
     scope_only = ScopedProofEvidence(
+        subject_contract_bound=True,
         subject_entails_component_obligation=False,
         scope_covers_interface=True,
         independent_or_objective=True,
@@ -56,6 +57,7 @@ def test_scope_only_is_not_a_component_proof():
 
 def test_direct_component_proof_can_be_semantically_admissible_without_family_acceptance():
     direct = ScopedProofEvidence(
+        subject_contract_bound=True,
         subject_entails_component_obligation=True,
         scope_covers_interface=True,
         independent_or_objective=True,
@@ -102,3 +104,33 @@ def test_current_scope_only_counterexamples_remain_zero_credit():
     assert current["automatic_new_component_credit"] == 0
     assert resolution["accounting"]["acceptance_credit_delta"] == 0
     assert resolution["fresh_reality_authority"] is False
+
+
+def test_untyped_subject_fails_closed_even_if_some_receipt_claims_entailment():
+    untyped = ScopedProofEvidence(
+        subject_contract_bound=False,
+        subject_entails_component_obligation=True,
+        scope_covers_interface=True,
+        independent_or_objective=True,
+        current=True,
+        contamination_clean=True,
+        content_bound=True,
+        preconditions_compatible=True,
+    )
+    assert admissible_component_scoped_proof(untyped) is False
+
+
+def test_current_open_eight_are_literal_interfaces_without_subject_contracts():
+    manifest = load("canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json")
+    authority = load("canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json")
+    gap = load("canonical/governance/COMPOSITION_COMPONENT_PROOF_SUBJECT_TYPING_GAP_20261005_V1.json")
+
+    assert manifest["family_bindings_complete"] is False
+    assert manifest["receipt_bindings_complete"] is False
+    assert all(x["required_properties"] == ["SCOPED_ACCEPTANCE_PROOF"] for x in manifest["interfaces"])
+    assert all("proof_subject_id" not in x for x in manifest["interfaces"])
+
+    assert authority["truth"]["current_admissible_scoped_proved"] == 4
+    assert authority["truth"]["current_open"] == 8
+    assert set(authority["open_components"]) == set(gap["observed_fact"]["current_open_components"])
+    assert gap["observed_fact"]["manifest_has_explicit_component_proof_subject_contract"] is False
