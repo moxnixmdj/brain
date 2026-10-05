@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_TASK_ACCEPTANCE_QUOTIENT_INVENTORY_SPRITE_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ISOLATED_REMOTE_REPLAY_PASS__EXACT_CURRENT_BLOBS__24_OPEN__17_OTHER__5_H_SEPARATING__2_M_RESTRICTED__ZERO_CREDIT",
+  "base_commit": "8d75f8069723b7cabd243f9b2520f9ca4f9f83b8",
+  "subjects": {
+    "runtime": {
+      "path": "canonical/runtime/task_acceptance_quotient_inventory_v1.py",
+      "git_blob_sha": "195ca8114f4018627bd4730e35d7d3911a2c4f83"
+    },
+    "tests": {
+      "path": "canonical/tests/test_task_acceptance_quotient_inventory_v1.py",
+      "git_blob_sha": "499ec4efab907fd18a7aac5a410375fd025d2e98"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    }
+  },
+  "environment": {
+    "carrier": "EXISTING_ISOLATED_SPRITE",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/tmp/brain-task-acceptance-quotient-v1-replay-20261005",
+    "python": "3.13.7",
+    "incremental_spend_usd": 0
+  },
+  "execution": {
+    "note": "Carrier lacks pytest; load-bearing compile_inventory result replayed directly with stdlib against exact copied registry and evidence bytes.",
+    "result": {
+      "status": "PASS",
+      "quotient_class_counts": {
+        "H_SEPARATING": 5,
+        "M_RESTRICTED": 2,
+        "OTHER": 17
+      },
+      "open_predicate_count": 24,
+      "opus_case_level_result_not_required_count": 19,
+      "opus_case_level_result_required_count": 5,
+      "opus_case_level_result_required": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ]
+    }
+  },
+  "proved": [
+    "CURRENT_24_OPEN_ATOMS_PARTITION_EXACTLY_INTO_17_OTHER_5_H_SEPARATING_2_M_RESTRICTED",
+    "ONLY_THE_EXACT_FIVE_LISTED_ATOMS_REQUIRE_MATCHED_OPUS_CASE_LEVEL_INFORMATION_BY_DEFAULT_CLASSIFICATION",
+    "THE_OTHER_19_ATOMS_HAVE_SOUND_NON_CASE_LEVEL_ROUTES_BEFORE_ANY_OPUS_CASE_ACQUISITION"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_ATOM_CLOSED",
+    "NO_PUBLIC_FIXED_BAR_BRAIN_RESULT_PROVED",
+    "NO_STRONGER_CEILING_RECEIPT_PROVED_FOR_ANY_H_SEPARATING_ATOM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
