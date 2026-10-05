@@ -184,7 +184,11 @@
           "kind": "SUFFICIENCY_COUNTERMODEL",
           "cost_units": 1,
           "decisive": true,
-          "status": "PENDING"
+          "status": "COUNTEREXAMPLE_FOUND",
+          "receipt": {
+            "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_TERMINAL_SUFFICIENCY_COUNTERMODEL_20261005_V1.json",
+            "git_blob_sha": "77e5a893b65d3509b563f024a427d492d45e1489"
+          }
         },
         {
           "id": "F_TERMINAL_SCOPE_COUNTERMODEL",
