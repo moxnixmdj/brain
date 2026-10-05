@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TRUTH_REPAIR__ADVANCED_AGENTIC_CODING_ADDED_TO_BOTH_CROSS_CUTTING_CONDITIONS__PARITY_OPEN__ZERO_CREDIT",
+  "predecessor": {
+    "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V1.json",
+    "git_blob_sha": "31a148ac13966ff6199b63c63ecd0a42fa506da9"
+  },
+  "source_bindings": {
+    "root1_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "current_first_party_observations": [
+    "SYSTEM_CARD_SECTION_8_2_REPORTS_SWE_BENCH_MULTILINGUAL_93_9_FOR_OPUS55",
+    "SYSTEM_CARD_SECTION_8_10_PROGRAMBENCH_IS_LONG_CONTEXT_AGENTIC_CODING_AND_OPUS55_SCORES_91_2",
+    "PROGRAMBENCH_EPISODES_SPAN_UP_TO_THE_FULL_1M_TOKEN_WINDOW",
+    "SYSTEM_CARD_SECTION_8_16_REPORTS_GMMLU_94_3_ACROSS_42_LANGUAGES_AND_MILU_93_1_ACROSS_11_LANGUAGES"
+  ],
+  "classifications": [
+    {
+      "surface": "MULTILINGUAL_PERFORMANCE",
+      "kind": "CROSS_CUTTING_LANGUAGE_CONDITION",
+      "minimum_observed_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ],
+      "new_family_required": false,
+      "remaining": "PROVE_EQUAL_OR_BETTER_OUTCOMES_ON_MATERIAL_MULTILINGUAL_CONDITIONS_OR_SCOPE_SAFE_STRONGER_CERTIFICATE",
+      "candidate_public_bars": [
+        "SWE_BENCH_MULTILINGUAL_GE_93_9",
+        "GMMLU_42_LANGUAGE_AVG_GE_94_3",
+        "MILU_11_LANGUAGE_AVG_GE_93_1"
+      ]
+    },
+    {
+      "surface": "LONG_CONTEXT",
+      "kind": "CROSS_CUTTING_CONTEXT_HORIZON_CONDITION",
+      "minimum_observed_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      ],
+      "new_family_required": false,
+      "remaining": "PROVE_EQUAL_OR_BETTER_OUTCOMES_ON_MATERIAL_LONG_CONTEXT_CONDITIONS_OR_SCOPE_SAFE_STRONGER_CERTIFICATE",
+      "candidate_public_bar": "PROGRAMBENCH_HIDDEN_TEST_PASS_RATE_GE_91_2_ON_OPUS55_SYSTEM_CARD_SETUP"
+    }
+  ],
+  "terminal_basis_effect": {
+    "current_38_predicate_registry_already_contains_explicit_multilingual_condition_predicate": false,
+    "current_38_predicate_registry_already_contains_explicit_long_context_condition_predicate": false,
+    "classification": "CROSS_CUTTING_ACCEPTANCE_BASIS_GAPS_UNLESS_EXISTING_SCOPE_COMPLETE_PROOF_IS_SHOWN_TO_IMPLY_THESE_CONDITIONS"
+  },
+  "hard_nonclaims": [
+    "NO_MULTILINGUAL_PARITY_CLAIM",
+    "NO_LONG_CONTEXT_PARITY_CLAIM",
+    "NO_AUTOMATIC_TRANSFER_FROM_ENGLISH_OR_SHORT_CONTEXT_EVIDENCE",
+    "NO_NEW_FAMILY_CLAIM",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
