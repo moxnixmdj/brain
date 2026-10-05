@@ -1,0 +1,218 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_HISTORICAL_TERMINAL_EXECUTOR_SCOPE_REALIZATION_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__HISTORICAL_P3_EXECUTOR_IDENTITY_RECONCILED__DECLARED_CHECK_SET_STRICTLY_STRONGER_THAN_REALIZED_TERMINAL_SCORER__OLD_PASS_NARROWED_NOT_REVOKED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Bind the exact implementation that produced the 2026-10-02 P3 terminal receipts, distinguish it from the preflight-only P3 v3 adapter, and determine which frozen P3 binding checks were actually realized by the historical terminal scorer. Preserve the historical pass only for conditions it really measured.",
+  "authorities": {
+    "p3_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+    },
+    "terminal_artifact_audit": {
+      "path": "canonical/governance/SYNTHESIS_HISTORICAL_P3_ARTIFACT_RESCORE_FALSIFICATION_20261005_V1.json",
+      "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+      "historical_parent_runner_git_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449"
+    },
+    "historical_terminal_candidate": {
+      "path": "canonical/runtime/contract_native_brain_candidate.py",
+      "ref": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+      "git_blob_sha": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85"
+    },
+    "historical_terminal_suite": {
+      "path": "canonical/runtime/contract_native_proof_suites.py",
+      "ref": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+      "git_blob_sha": "0210790c7dd705ef328e1b55d529a30c5c6c3337"
+    },
+    "preflight_only_candidate": {
+      "path": "canonical/runtime/p3_information_safe_candidate_v3.py",
+      "git_blob_sha": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a"
+    },
+    "preflight_only_suite": {
+      "path": "canonical/runtime/p3_information_safe_proof_suite_v3.py",
+      "git_blob_sha": "7b4fef2a2ba2c84b3499ded1ed4bbaac6714fa42"
+    },
+    "preflight_residual_partition": {
+      "path": "canonical/governance/SYNTHESIS_P3_TYPED_INPUT_DOMAIN_COUNTERMODEL_PARTITION_20261005_V1.json"
+    }
+  },
+  "route_identity": {
+    "declared_bounded_p3_v3_role": "INFORMATION_BOUNDARY_AND_MUTATION_PREFLIGHT_ONLY__NOT_WHOLE_DOMAIN_TERMINAL_SCORE",
+    "historical_terminal_execution_route": "terminal_parent_portfolio_runner_v1._run_contract_native -> contract_native_brain_candidate.solve -> contract_native_proof_suites.score_case",
+    "theorem": "P3_INFORMATION_SAFE_V3_LIMITATIONS_ARE_VALID_COUNTERMODELS_FOR_THAT_PREFLIGHT_ADAPTER_BUT_CANNOT_BY_THEMSELVES_CHARACTERIZE_THE_IMPLEMENTATION_THAT_PRODUCED_THE_HISTORICAL_TERMINAL_RECEIPTS",
+    "consequence": "ROOT3_REPAIR_MUST_BIND_BOTH_THE_PREDECLARED_INFORMATION_BOUNDARY_AND_THE_ACTUAL_TERMINAL_EXECUTOR_REALIZATION"
+  },
+  "historical_terminal_input_population": {
+    "generated_fields": [
+      "task.audience",
+      "task.evidence[].claim_id",
+      "task.evidence[].role",
+      "task.evidence[].support",
+      "task.evidence[].provenance",
+      "task.evidence[].audience",
+      "task.format_constraints.max_claims",
+      "task.format_constraints.ordered_required_first"
+    ],
+    "absent_declared_visible_classes": [
+      "USER_OBJECTIVE",
+      "ALLOWED_JIT_KNOWLEDGE_AND_TOOL_RECEIPTS",
+      "SEPARATE_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_OBJECT_BEYOND_EVIDENCE_ROLE_TAGS",
+      "GENERAL_FORMAT_AND_STYLE_CONSTRAINT_LANGUAGE_BEYOND_MAX_CLAIMS_AND_REQUIRED_FIRST_ORDER"
+    ],
+    "population_specific_facts": [
+      "GENERATOR_FORCES_AT_LEAST_ONE_REQUIRED_ROLE",
+      "FORBIDDEN_ROLE_IS_ALWAYS_UNSUPPORTED",
+      "MAX_CLAIMS_EQUALS_REQUIRED_PLUS_OPTIONAL_COUNT_SO_GENERATED_OUTPUT_BUDGET_DOES_NOT_FORCE_COMPRESSION_OF_SUPPORTED_CLAIMS",
+      "AUDIENCE_IS_GENERATED_BUT_THE_TERMINAL_CANDIDATE_DOES_NOT_CONDITION_SELECTION_ON_IT",
+      "PROVENANCE_IS_GENERATED_BUT_NEITHER_TERMINAL_CANDIDATE_OUTPUT_NOR_TERMINAL_SCORER_VERIFIES_CLAIM_TO_PROVENANCE_PRESERVATION"
+    ]
+  },
+  "historical_terminal_candidate_realization": {
+    "consumed_for_synthesis_decision": [
+      "evidence.claim_id",
+      "evidence.role",
+      "evidence.support",
+      "format_constraints.max_claims"
+    ],
+    "conflict_representation": "support == conflicted -> uncertainty claim id",
+    "output_fields": [
+      "selected_claims",
+      "uncertainty_claims"
+    ],
+    "not_consumed_or_not_emitted": [
+      "task.audience",
+      "evidence.provenance",
+      "evidence.audience",
+      "USER_OBJECTIVE",
+      "ALLOWED_JIT_KNOWLEDGE_AND_TOOL_RECEIPTS",
+      "GENERAL_FORMAT_STYLE_CONSTRAINTS_OTHER_THAN_MAX_CLAIMS",
+      "REALIZED_SYNTHESIS_TEXT_OR_ARTIFACT_CONTENT",
+      "CLAIM_TO_PROVENANCE_BINDINGS"
+    ]
+  },
+  "declared_check_realization": [
+    {
+      "declared_check": "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "historical_realization": "PARTIAL_WITHIN_GENERATED_ROLE_SUPPORT_MODEL",
+      "evidence": "Candidate excludes support=unsupported; scorer rejects forbidden/unknown selected IDs. Generated forbidden rows are the unsupported class.",
+      "universal_claim": false
+    },
+    {
+      "declared_check": "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED",
+      "historical_realization": "REALIZED_FOR_GENERATED_REQUIRED_ROLE_IDS",
+      "evidence": "Scorer rejects missing generated required role IDs.",
+      "universal_claim": false
+    },
+    {
+      "declared_check": "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS",
+      "historical_realization": "NOT_REALIZED",
+      "evidence": "Candidate emits no claim-to-provenance mapping and scorer does not read provenance.",
+      "universal_claim": false
+    },
+    {
+      "declared_check": "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED",
+      "historical_realization": "PARTIAL_AS_CONFLICTED_CLAIM_ID_FLAG",
+      "evidence": "Scorer requires uncertainty IDs for selected rows whose generated support label is conflicted; it does not preserve source-level disagreement content.",
+      "universal_claim": false
+    },
+    {
+      "declared_check": "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION",
+      "historical_realization": "NOT_REALIZED_AS_DECLARED",
+      "evidence": "Suite has no hidden decision-relevance labels in this scorer, and generated max_claims equals required+optional supported capacity, so the normal generated population does not exercise a binding supported-claim compression tradeoff.",
+      "universal_claim": false
+    },
+    {
+      "declared_check": "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
+      "historical_realization": "PARTIAL_FORMAT_ONLY",
+      "evidence": "Scorer enforces max_claims and required-before-optional ordering. Candidate does not consume task.audience and scorer has no audience-conditioned oracle.",
+      "universal_claim": false
+    },
+    {
+      "declared_check": "IRRELEVANT_EVIDENCE_EXCLUDED_WITHOUT_DELETING_REQUIRED_SUPPORT",
+      "historical_realization": "PARTIAL_UNSUPPORTED_FORBIDDEN_EXCLUSION_ONLY",
+      "evidence": "Forbidden unsupported claim IDs are excluded, but no independent relevance label distinguishes irrelevant supported optional evidence and the candidate otherwise includes optional supported IDs up to budget.",
+      "universal_claim": false
+    }
+  ],
+  "constructive_actual_terminal_residual_classes": [
+    {
+      "id": "SYNTHESIS_TERMINAL_R1_PROVENANCE_PRESERVATION",
+      "witness": "Two otherwise similar material claims require different source provenance bindings.",
+      "reason": "Historical terminal output cannot express claim-to-provenance bindings."
+    },
+    {
+      "id": "SYNTHESIS_TERMINAL_R2_OBJECTIVE_AND_AUDIENCE_CONDITIONING",
+      "witness": "Two admissible tasks share evidence/roles but require different optional selection or organization because objective/audience differs.",
+      "reason": "Historical terminal candidate does not consume task.audience and the generated public task contains no user objective."
+    },
+    {
+      "id": "SYNTHESIS_TERMINAL_R3_GENERAL_FORMAT_STYLE_AND_BUDGET",
+      "witness": "An admissible output constraint requires structure/style/citation form or a genuinely binding compression budget beyond max_claims with all supported optional claims fitting.",
+      "reason": "Historical candidate interprets only max_claims; generated max_claims equals required+optional count."
+    },
+    {
+      "id": "SYNTHESIS_TERMINAL_R4_DECISION_RELEVANCE_AND_IRRELEVANCE",
+      "witness": "Supported optional evidence contains both decision-relevant and irrelevant units under a tight output budget.",
+      "reason": "Historical scorer has no decision-relevance oracle for this route and no supported-irrelevant class."
+    },
+    {
+      "id": "SYNTHESIS_TERMINAL_R5_GENERAL_REQUIRED_CLAIM_OR_DECISION_SEMANTICS",
+      "witness": "A decision requirement is not already compiled into evidence.role required/optional/forbidden tags.",
+      "reason": "Historical candidate consumes role tags, not a separate required-claims or decision-requirements object."
+    },
+    {
+      "id": "SYNTHESIS_TERMINAL_R6_REALIZED_SYNTHESIS_EXPRESSION",
+      "witness": "The required output is audience-constrained prose or artifact content rather than a list of claim IDs.",
+      "reason": "Historical candidate emits selected_claims and uncertainty_claims only."
+    },
+    {
+      "id": "SYNTHESIS_TERMINAL_R7_ALLOWED_JIT_TOOL_RECEIPT_INTEGRATION",
+      "witness": "An admissible synthesis decision depends on an allowed JIT knowledge/tool receipt explicitly present at the P3 boundary.",
+      "reason": "Historical terminal public task and candidate expose no such field."
+    }
+  ],
+  "falsified_inferences": [
+    "AGGREGATE_DIRECT_INSTRUMENTATION_PASS_IMPLIES_ALL_SEVEN_DECLARED_P3_REQUIRED_CHECKS_WERE_MEASURED",
+    "P3_INFORMATION_SAFE_V3_WAS_THE_IMPLEMENTATION_THAT_PRODUCED_THE_TERMINAL_P3_RECEIPTS",
+    "THE_HISTORICAL_TERMINAL_PASS_BY_ITSELF_ESTABLISHES_WHOLE_EVIDENCE_TO_AUDIENCE_SYNTHESIS_CONTRACT_SUCCESS"
+  ],
+  "preserved_truth": [
+    "THE_2026_10_02_P3_TERMINAL_PASS_REMAINS_VALID_FOR_THE_EXACT_CONTRACT_NATIVE_SCORER_CONDITIONS_IT_EXECUTED",
+    "THE_P3_V3_PREFLIGHT_COUNTERMODEL_REMAINS_VALID_FOR_ITS_CONTENT_ADDRESSED_ADAPTER",
+    "THE_PREDICATE_LEVEL_SYNTHESIS_SCOPE_CERTIFICATE_REMAINS_SEPARATE",
+    "SYNTHESIS_MATCHED_QUALITY_ROOT2_REMAINS_OPEN",
+    "SYNTHESIS_TYPED_INPUT_DOMAIN_ROOT3_REMAINS_OPEN"
+  ],
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "USE_P3_V3_PRECHECK_IMPLEMENTATION_AS_IF_IT_WERE_THE_HISTORICAL_TERMINAL_EXECUTOR",
+      "USE_HISTORICAL_P3_AGGREGATE_PASS_AS_EVIDENCE_THAT_PROVENANCE_AUDIENCE_COMPRESSION_AND_GENERAL_FORMAT_CHECKS_ALL_RAN",
+      "TRY_TO_PROVE_WHOLE_DOMAIN_TOTALITY_FOR_EITHER_NARROW_IMPLEMENTATION"
+    ],
+    "activate": [
+      "SYNTHESIS_TYPED_IR_GENERALIZATION_AND_TOTALITY_BOUND_TO_ACTUAL_TERMINAL_AND_PREFLIGHT_ROUTE_IDENTITIES"
+    ],
+    "priority": "DEFINE_ONE_TYPED_IR_WITH_EXPLICIT_PROVENANCE_OBJECTIVE_AUDIENCE_REQUIRED_SEMANTICS_GENERAL_CONSTRAINTS_DECISION_RELEVANCE_AND_EXPRESSION_OUTPUT__THEN_PROVE_TOTALITY_OR_FAIL_CLOSED_RESIDUAL_PARTITION"
+  },
+  "hard_nonclaims": [
+    "NO_REVOCATION_OF_THE_HISTORICAL_P3_PASS_FOR_ITS_ACTUAL_SCORER",
+    "NO_CLAIM_SYNTHESIS_MATCHED_QUALITY_IS_INFERIOR",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "SEVEN_ACTUAL_TERMINAL_RESIDUAL_CLASSES_ARE_CONSTRUCTIVE_MINIMUM_COUNTEREXAMPLES_NOT_CLAIMED_EXHAUSTIVE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
