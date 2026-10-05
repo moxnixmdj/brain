@@ -27,8 +27,8 @@ def verify() -> dict:
     check_ptr(root["scheduler_policy"]["terminal_minimum_causal_depth"])
     check_ptr(current["terminal_minimum_causal_depth_authority"])
     a=root["current_acceptance"]
-    c=current["current_root_partition_override"] if "current" in locals() else cur["current_root_partition_override"]
-    atomic=(current if "current" in locals() else cur)["atomic_acceptance_frontier"]
+    c=current["current_root_partition_override"]
+    atomic=current["atomic_acceptance_frontier"]
     assert a["accepted_families"]==c["accepted_families"]
     assert a["open_families"]==c["open_families"]
     assert a["proved_atomic"]==c["proved_atomic"]==atomic["proved"]
