@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_PROTOCOL_EQUIVALENCE_FACTORIZATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "TRUTH_REPAIR__MONOLITHIC_PROTOCOL_EQUIVALENCE_SPLIT_INTO_TWO_INDEPENDENT_PREMISES__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "frozen_target": {
+    "benchmark": "Terminal-Bench",
+    "benchmark_version": "4.0",
+    "score": 66.4,
+    "unit": "percent",
+    "effort": "xhigh",
+    "evaluator": "Anthropic release evaluation",
+    "harness": "Anthropic Terminal-Bench 4.0 setup; public Claude Code leaderboard used only as calibration",
+    "fallback_policy": "PRODUCTION_SAFEGUARDS_ENABLED_WITH_PUBLISHED_FALLBACK_BEHAVIOR",
+    "binding_path": "canonical/governance/OPUS55_SCORE_TARGET_TUPLE_BINDINGS_20261005_V1.json",
+    "binding_git_blob_sha": "9bbd45f066ab94fa3f5110b9cc5efcd4118d1367"
+  },
+  "current_carrier_evidence": {
+    "path": "canonical/verification/BUILDKITE_ZERO_CASE_RUNTIME_RECEIPT_20261006_V1.json",
+    "git_blob_sha": "5a10884bc32d3c003a26306ec67bbc902b7338bb",
+    "proves": [
+      "CPU_MEMORY_DISK_ENVELOPE",
+      "DOCKER_RUNTIME",
+      "DOCKER_COMPOSE",
+      "ORDINARY_CONTAINER_RUN",
+      "EIGHT_CPU_LIMIT_ACCEPTANCE"
+    ],
+    "does_not_prove": [
+      "SAME_DATASET_DIGEST",
+      "SAME_TASK_AND_VERIFIER_IMAGE_DIGESTS",
+      "SAME_HARBOR_EXECUTION_SEMANTICS",
+      "SAME_NETWORK_AND_CREDENTIAL_SEMANTICS",
+      "SAME_RETRY_TIMEOUT_TRIAL_SEMANTICS",
+      "EXACT_ANTHROPIC_AGENT_RUNTIME_VERSION",
+      "EXACT_ANTHROPIC_FALLBACK_ROUTING"
+    ]
+  },
+  "public_methodology_observations": {
+    "anthropic_release": {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "observed": "Terminal-Bench 4.0 target is 66.4 at xhigh; production safeguards were enabled; interventions could route cybersecurity to Opus 4.8 and biology/frontier-LLM-development to Opus 5; the public 5-trials-per-task Claude Code leaderboard is described as calibration, and Anthropic reports its own setup reproduces Opus 5 within noise.",
+      "implication": "PUBLIC_LEADERBOARD_CALIBRATION_IS_NOT_EXACT_FROZEN_TARGET_HARNESS_IDENTITY"
+    },
+    "harbor_public_protocol": {
+      "url": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4",
+      "observed": "Terminal-Bench 4 is publicly runnable through Harbor; public jobs expose five attempts per task and explicit environment, agent, retry, timeout and resource configuration.",
+      "implication": "CARRIER_INVARIANCE_CAN_BE_FACTORIZED_AS_EXACT_EXECUTION_SEMANTICS_BUT_REQUIRES_BINDINGS_BEYOND_RESOURCE_CAPACITY"
+    }
+  },
+  "carrier_invariance": {
+    "status": "OPEN",
+    "same_dataset_digest": false,
+    "same_task_and_verifier_images": false,
+    "same_harbor_execution_semantics": false,
+    "same_resource_limits": false,
+    "same_network_semantics": false,
+    "same_retry_timeout_trial_semantics": false,
+    "receipts": [],
+    "required_next": "PROVE_OR_FALSIFY_A_CONTENT_ADDRESSED_HARBOR_CARRIER_INVARIANCE_CONTRACT_WITH_ZERO_TERMINAL_CASES"
+  },
+  "target_harness_identity": {
+    "status": "OPEN",
+    "evidence_class": "PUBLIC_LEADERBOARD_CALIBRATION",
+    "same_agent_runtime_and_version": false,
+    "same_model_effort": true,
+    "same_fallback_policy": false,
+    "same_evaluator": false,
+    "same_trial_count": true,
+    "fallback_policy_relation": "UNKNOWN",
+    "receipts": [],
+    "required_next": "COMPILE_THE_MAXIMUM_PUBLICLY_OBSERVABLE_FROZEN_ANTHROPIC_HARNESS_VECTOR__FAIL_CLOSED_ON_EVERY_UNOBSERVED_DIMENSION"
+  },
+  "theorem": "FULL_TB4_PROTOCOL_EQUIVALENCE_REQUIRES_CARRIER_RUNTIME_SUBPREMISES_AND_EXACT_CARRIER_INVARIANCE_AND_EXACT_FROZEN_TARGET_HARNESS_IDENTITY__NONE_MAY_SUBSTITUTE_FOR_ANOTHER",
+  "current_verdict": "NOT_PROVED",
+  "falsified_shortcuts": [
+    "RESOURCE_ENVELOPE_PASS_IMPLIES_PROTOCOL_EQUIVALENCE",
+    "PUBLIC_LEADERBOARD_CALIBRATION_IMPLIES_EXACT_ANTHROPIC_RELEASE_HARNESS_IDENTITY",
+    "WITHIN_NOISE_REPRODUCTION_IMPLIES_PROTOCOL_IDENTITY"
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "REPEAT_BUILDKITE_RESOURCE_PREFLIGHT",
+      "TREAT_PROTOCOL_EQUIVALENCE_AS_ONE_UNTYPED_BOOLEAN"
+    ],
+    "active_zero_case_attacks": [
+      "CARRIER_INVARIANCE_CONTRACT",
+      "FROZEN_TARGET_HARNESS_OBSERVABLE_VECTOR"
+    ],
+    "terminal_case_execution_authorized": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
