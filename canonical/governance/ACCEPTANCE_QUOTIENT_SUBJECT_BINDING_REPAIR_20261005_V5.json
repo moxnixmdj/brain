@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_ACCEPTANCE_QUOTIENT_SUBJECT_BINDING_REPAIR_20261005_V5",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_SOUNDNESS_REPAIR__V4_ACCEPTANCE_CLASS_AND_CAUSAL_SEMANTICS_PRESERVED__EXACT_CERTIFICATE_SUBJECT_BINDING_ADDED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Close cross-certificate receipt replay while preserving the live V4 stochastic/distribution acceptance-class gate and the V3 single-causal-policy gate.",
+  "falsification": {
+    "live_predecessor": "canonical/runtime/acceptance_quotient_simulation_v4.py",
+    "defect": "V4_REQUIRES_STRONGER_SEMANTIC_RECEIPTS_BUT_RECEIPT_PATH_SHA_AND_BOOLEAN_FIELDS_DO_NOT_BIND_THE_EXACT_RELATION_TERMINAL_EDGE_SET_OR_ACCEPTANCE_SEMANTICS_CLASS",
+    "constructive_counterexample": "A_V4_PASSING_CERTIFICATE_CAN_RENAME_A_TARGET_TERMINAL_AND_THE_CORRESPONDING_RELATION_AND_EDGE_WHILE_REUSING_ALL_OLD_RECEIPTS__V4_STILL_PASSES__SO_RECEIPT_EXISTENCE_ALONE_DOES_NOT_PROVE_THE_NEW_CERTIFICATE",
+    "classification": "SUBJECT_MISBINDING_REPLAY_CHANNEL"
+  },
+  "repair": {
+    "runtime": "canonical/runtime/acceptance_quotient_simulation_v5.py",
+    "tests": "canonical/tests/test_acceptance_quotient_simulation_v5.py",
+    "global_subject_includes": [
+      "ACCEPTANCE_SEMANTICS_CLASS",
+      "TARGET_AND_BRAIN_STATE_SETS",
+      "INITIAL_AND_TERMINAL_STATE_SETS",
+      "RELATION",
+      "TARGET_CUT_EDGES",
+      "BRAIN_MACRO_EDGE_FROM_TO_AND_TARGET_EDGE_COVERAGE"
+    ],
+    "global_receipts_bound": [
+      "ABSTRACTION",
+      "RELATION_SOUNDNESS",
+      "TERMINAL_ACCEPTANCE",
+      "CAUSAL_STRATEGY",
+      "POLICY_DISTRIBUTION_BRIDGE_OR_DISTRIBUTION_FREE_DOMINANCE"
+    ],
+    "edge_receipts_bound": [
+      "SCOPE_AUTHORITY",
+      "REALIZABILITY",
+      "CAUSAL_POLICY_BINDING"
+    ],
+    "preserved_reduction": "ONLY_AFTER_V5_AND_EXTERNAL_RECEIPT_BYTE_VERIFICATION_PASS__ACCEPTANCE_IRRELEVANT_INTERMEDIATE_TRANSITIONS_MAY_BE_CONTRACTED"
+  },
+  "required_independent_verification": [
+    "RUN_EXACT_V5_BYTES_AND_TESTS.",
+    "CONFIRM_THE_RELATION_AND_EDGE_REPLAY_COUNTEREXAMPLES_PASS_V4_BUT_FAIL_V5.",
+    "CONFIRM_ACCEPTANCE_SEMANTICS_CLASS_CHANGE_INVALIDATES_PRIOR_BINDINGS.",
+    "CONFIRM_V4_STOCHASTIC_AND_DISTRIBUTION_FREE_GATES_REMAIN_LOAD_BEARING.",
+    "CONFIRM_ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_AND_FRESH_REALITY_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CURRENT_ACCEPTANCE_PREDICATE_CLOSED.",
+    "NO_CLAIM_ANY_REQUIRED_V5_REAL_RECEIPT_ALREADY_EXISTS.",
+    "NO_CLAIM_SUBJECT_HASHING_PROVES_RECEIPT_CONTENT.",
+    "NO_FRESH_REALITY_AUTHORITY.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
