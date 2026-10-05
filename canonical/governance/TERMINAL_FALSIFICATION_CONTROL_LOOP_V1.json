@@ -19,12 +19,14 @@
     {"path":"canonical/governance/BENCHMARK_WITNESS_EVALUATOR_RELATION_V2_ACTIVATION_20261006_V1.json","git_blob_sha":"bdf989ef3d2bc3a77606ab5d680bbacd1fa04fe1"}
   ],
   "controller": {
-    "runtime": {"path":"canonical/runtime/terminal_falsification_control_loop_v1.py","git_blob_sha":"f4a2f33b14e85c6926748876b9f1b3a5d7be103b"},
-    "tests": {"path":"canonical/tests/test_terminal_falsification_control_loop_v1.py","git_blob_sha":"ed00290d9f97acfb23916c988380e3b2e3734a37"}
+    "runtime": {"path":"canonical/runtime/terminal_falsification_control_loop_v1.py","git_blob_sha":"32645e84a2ff9261883fce8a33f221898242d0c4"},
+    "tests": {"path":"canonical/tests/test_terminal_falsification_control_loop_v1.py","git_blob_sha":"c88c6af47798de823c1ff0a8351afa026d1ccd2d"}
   },
   "control_invariants": [
     "FALSIFIED_ROUTE_HAS_ZERO_SCHEDULING_VALUE_UNTIL_A_REPAIRED_SUCCESSOR_EXISTS",
+    "UNREPAIRED_FALSIFIED_NECESSITY_REMAINS_A_TERMINAL_BLOCKER",
     "FALSIFIER_SURVIVAL_HAS_ZERO_PROOF_CREDIT_UNTIL_SEPARATE_CONTENT_ADDRESSED_PROOF_PROMOTION",
+    "PROVED_LABEL_WITHOUT_VALID_PATH_PLUS_GIT_BLOB_SHA_RECEIPTS_HAS_ZERO_PROOF_CREDIT",
     "TERMINAL_FINALITY_REMAINS_FALSE_UNTIL_TARGET_UNIVERSE_COMPLETENESS_OR_A_STRONGER_SCOPE_SUPERSET_THEOREM_IS_PROVED",
     "DEPENDENCIES_ON_FALSIFIED_OR_MISSING_CLAIMS_FAIL_CLOSED",
     "UNIVERSE_AUTHORITY_PRECEDES_NONUNIVERSE_LEVERAGE_SCORING",
@@ -39,6 +41,7 @@
       "status":"FALSIFIED",
       "cost_units":1,
       "target_truth_obligations":["TERMINAL_FINALITY_BASIS__32_OPEN_TRUTH_OBLIGATIONS"],
+      "target_truth_obligation_count":1,
       "falsification_receipt":{"path":"canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_TERMINAL_SUFFICIENCY_COUNTERMODEL_20261005_V1.json","git_blob_sha":"77e5a893b65d3509b563f024a427d492d45e1489"}
     },
     {
@@ -48,6 +51,7 @@
       "successor_of":"C_TERMINAL_BASIS_CURRENT32",
       "cost_units":1,
       "target_truth_obligations":["LITERAL_ALL_USEFUL_OPUS55_FINALITY"],
+      "target_truth_obligation_count":1,
       "falsifiers":["UNREPRESENTED_USEFUL_BEHAVIOR","SOURCE_SURFACE_ESCAPE","COMPOSITION_ESCAPE","TWO_WORLDS_TERMINAL_COUNTERMODEL"]
     },
     {
@@ -56,6 +60,7 @@
       "status":"FALSIFIED",
       "cost_units":1,
       "target_truth_obligations":["ROOT3_SHARED_SCOPE_COMPOSITION"],
+      "target_truth_obligation_count":7,
       "falsification_receipt":{"path":"canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_BYPASS_SEARCH_20261005_V1.json","git_blob_sha":"8007c90fba7197de6dd9886eeecf592a55cd336e"}
     },
     {
@@ -65,6 +70,7 @@
       "successor_of":"C_ROOT3_SHARED_UNIVERSAL",
       "cost_units":2,
       "target_truth_obligations":["ROOT3_SHARED_SCOPE_COMPOSITION"],
+      "target_truth_obligation_count":7,
       "falsifiers":["UNMEDIATED_EFFECT_ESCAPE","BOOTSTRAP_ORDER_COUNTERMODEL","CLASS_EXECUTOR_SOUNDNESS_COUNTERMODEL"]
     },
     {
@@ -73,6 +79,7 @@
       "status":"FALSIFIED",
       "cost_units":1,
       "target_truth_obligations":["META_BEHAVIORAL_TRANSFER"],
+      "target_truth_obligation_count":7,
       "falsification_receipt":{"path":"canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_UNMAPPED_TRANSFORM_SEARCH_20261005_V1.json","git_blob_sha":"f303a29fa9de86e95cdf62ea0af85f22e52d7271"}
     },
     {
@@ -82,6 +89,7 @@
       "successor_of":"C_META_BEHAVIORAL_QUOTIENT",
       "cost_units":2,
       "target_truth_obligations":["META_BEHAVIORAL_TRANSFER"],
+      "target_truth_obligation_count":7,
       "falsifiers":["UNMAPPED_TRANSFORM","NONSEPARABLE_INTERACTION","OUTCOME_TRANSFER_COUNTERMODEL"]
     },
     {
@@ -90,6 +98,7 @@
       "status":"ACTIVE",
       "cost_units":3,
       "target_truth_obligations":["EXTERNAL_SCORE_ATOMS_ACTIVE11"],
+      "target_truth_obligation_count":11,
       "depends_on":["C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2"],
       "falsifiers":["TARGET_IDENTITY_MISMATCH","EVALUATOR_RELATION_UNSOUNDNESS","SCOPE_COUNTERMODEL"]
     },
@@ -99,11 +108,19 @@
       "status":"ACTIVE",
       "cost_units":2,
       "target_truth_obligations":["TERMINAL_OWNERSHIP_DONOR_INDEPENDENCE"],
+      "target_truth_obligation_count":1,
       "depends_on":["C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2"],
       "falsifiers":["DONOR_INDEPENDENCE_COUNTERMODEL","CLEAN_ROOM_RECONSTRUCTION_FAILURE","HIDDEN_EXTERNAL_DEPENDENCY"]
     }
   ],
-  "scheduler_rule": "RUN_UNIVERSE_AUTHORITY_BY_LOGICAL_PRECEDENCE; RUN_OTHER_LANES_ONLY_WHEN_OUTPUT_REMAINS_VALID_UNDER_POSSIBLE_UNIVERSE_EXPANSION; RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA.",
+  "expected_current_schedule": [
+    "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
+    "C_BENCHMARK_WITNESS_ELIMINATION_V2",
+    "C_EFFECT_BOUNDARY_CLOSURE_V2",
+    "C_CONDITION_RESTRICTION_AND_INTERACTION_CLOSURE_V2",
+    "C_CAPABILITY_OWNERSHIP_DONOR_INDEPENDENCE_V1"
+  ],
+  "scheduler_rule": "RUN_UNIVERSE_AUTHORITY_BY_LOGICAL_PRECEDENCE; THEN_RANK_OTHER_LANES_BY_TARGET_TRUTH_REACHABILITY_PER_COST_WITH_LANE_ORDER_ONLY_AS_TIE_BREAKER; RUN_ONLY_WORK_WHOSE_OUTPUT_REMAINS_VALID_UNDER_POSSIBLE_UNIVERSE_EXPANSION; RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA.",
   "provider_control_plane": {
     "direct_main_prewrite_enforced": false,
     "terminal_critical_path": false,
