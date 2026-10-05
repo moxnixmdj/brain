@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_FIVE_PUBLIC_BAR_TERMINAL_V3_SCOPE_REUSE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__7_OF_7_SURVIVING_LEAVES_HAVE_EXACT_TERMINAL_V3_PASS__11_OF_11_OCCURRENCES_REUSED__ZERO_NEW_SCOPE_LEAVES__PUBLIC_BARS_UNCHANGED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/FIVE_PUBLIC_BAR_TERMINAL_V3_SCOPE_REUSE_REDUCTION_20261005_V1.json",
+    "git_blob_sha": "f1add5ff2f4b4c461ba0224e684e5eed025d7a38"
+  },
+  "checks": {
+    "partition_sha_exact": true,
+    "current_registry_sha_exact": true,
+    "terminal_v3_postwave_sha_exact": true,
+    "current_protocol_sha_exact": true,
+    "postwave_semantic_registry_equals_current_registry": true,
+    "terminal_v3_all_12_contracts_pass": true,
+    "exact_surviving_leaf_count": 7,
+    "exact_surviving_leaves_all_passed": true,
+    "reused_surviving_occurrences": 11,
+    "remaining_uncovered_occurrences": 0,
+    "remaining_unique_uncovered_leaves": 0,
+    "new_scope_predicates_required": 0,
+    "current_no_proxy_rule_preserved": true,
+    "public_bar_requirements_preserved": true,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "errors": []
+  },
+  "verified_consequence": [
+    "DELETE_CREATION_OF_NEW_UNCOVERED_BEHAVIORAL_SCOPE_PREDICATES_FOR_THE_SEVEN_SURVIVING_LEAVES_AS_CURRENT_DEFAULT",
+    "REUSE_IMMUTABLE_TERMINAL_V3_PASSES_BY_EXACT_BEHAVIORAL_IDENTITY_FOR_THE_FIVE_FAMILY_SCOPE_REPAIR",
+    "KEEP_ALL_CURRENT_PUBLIC_OPUS_FIXED_BARS_AND_MATCHED_PERFORMANCE_OBLIGATIONS_OPEN_UNTIL_SEPARATELY_PROVED",
+    "NO_TERMINAL_V3_REPLAY"
+  ],
+  "verification_class": "CONNECTED_CANONICAL_RECOMPUTATION__NOT_INDEPENDENT_PUBLIC_RUNNER",
+  "independent_public_runner_required_for_promotion": true,
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_PROMOTION",
+    "NO_FAMILY_ACCEPTANCE_CLOSURE",
+    "NO_PUBLIC_BAR_SCORE_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
