@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import pytest
 
+import ast
+
 from canonical.runtime.root3_child_process_channel_registry_v1 import (
     ChildProcessRegistryError,
+    _Visitor,
     compile_registry,
 )
 
@@ -45,8 +48,15 @@ def test_arbitrary_shell_call_site_is_present_and_explicit():
     assert matches[0]["process_api"] == "subprocess.run"
 
 
-def test_new_unregistered_process_api_would_be_a_fail_closed_class():
-    # The compiler accepts only subprocess.run and subprocess.Popen. Any other
-    # subprocess.* call or os.system is accumulated in the forbidden set and
-    # causes ChildProcessRegistryError. Keep the exception type load-bearing.
+def test_new_unregistered_process_api_is_detected_for_fail_closed_rejection():
+    tree = ast.parse("import subprocess\ndef f():\n    subprocess.call(['x'])\n")
+    v = _Visitor("synthetic.py")
+    v.visit(tree)
+    assert v.rows == []
+    assert v.forbidden == [{
+        "module_path": "synthetic.py",
+        "function": "f",
+        "lineno": 3,
+        "process_api": "subprocess.call",
+    }]
     assert issubclass(ChildProcessRegistryError, RuntimeError)
