@@ -48,9 +48,15 @@ def classify_scope_only(
     return "SUBJECT_AND_SCOPE_SEMANTICALLY_ELIGIBLE__CHECK_ADMISSIBILITY_PRECONDITIONS"
 
 
-def whole_family_acceptance_required(
+def whole_family_acceptance_is_logically_required(
     *,
     direct_component_proof_admissible: bool,
 ) -> bool:
-    """Whole-family acceptance is not logically required when a direct proof closes the exact obligation."""
-    return not direct_component_proof_admissible
+    """A direct proof is a counterexample to whole-family acceptance being logically necessary.
+
+    When no direct proof is presently admissible, this returns False as well: absence
+    of one current route does not prove that whole-family acceptance is logically
+    necessary. It may still be the cheapest available sufficient receipt.
+    """
+    _ = direct_component_proof_admissible
+    return False
