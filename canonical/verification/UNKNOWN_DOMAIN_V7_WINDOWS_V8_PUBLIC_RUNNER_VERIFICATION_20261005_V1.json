@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_WINDOWS_V8_PUBLIC_RUNNER_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_OBJECT_REACHABLE_DOMAIN_TOTALITY__CLASS_SPOOF_AND_SUBCLASS_WIDENING_REJECTED__DUAL_RUNTIME__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "target_family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "frozen_gate": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_ISOLATED_ROOT3_REPROMOTION_GATE_20261005_V8.json",
+    "git_blob_sha": "be54bb9db64dbaacf7fd5d6424e84c1cc58e1692",
+    "status": "FROZEN_PREOUTCOME__PYTHON_GIT_OBJECT_REMATERIALIZATION__DUAL_RUNTIME_FAIL_CLOSED__ZERO_CREDIT"
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/unknown-domain-v7-reachable-windows-v7-20261005-sol",
+    "frozen_staging_head_sha": "9bc1a9f29c7a17c1665b260f7505ffd916351131",
+    "execution_head_sha": "ab165b1d761c13229e181890ffd1c3a4b97e3f78",
+    "execution_parent_sha": "9bc1a9f29c7a17c1665b260f7505ffd916351131",
+    "only_execution_delta": "TRIGGER_UNKNOWN_DOMAIN_V7_WINDOWS_V7",
+    "trigger_git_blob_sha": "d6afdad275c6a22dbff608d83bbcd5674f7c0590",
+    "event": "push",
+    "workflow_path": ".github/workflows/verify-unknown-domain-v7-reachable-windows-v7.yml",
+    "workflow_git_blob_sha": "92f15f8962a74f53e00dfed29768612359d09227",
+    "verifier_path": "verification/unknown_domain_v7_reachable_domain_independent_v3.py",
+    "verifier_git_blob_sha": "d25d0c4f468bf058675d43b2e1a2e68960e32f5f",
+    "workflow_run_id": 37247084485,
+    "workflow_job_id": 111566974537,
+    "workflow_conclusion": "success",
+    "runner": "windows-latest"
+  },
+  "artifact": {
+    "artifact_id": 11319387720,
+    "name": "unknown-domain-v7-reachable-windows-v7-both-pythons",
+    "size_bytes": 2360,
+    "digest_sha256": "229127f4f27c0e01f486ddbd6adea828351921653c7105c4e155b6957918893f",
+    "contains": [
+      "unknown_domain_v7_reachable_domain_receipt_py312.json",
+      "unknown_domain_v7_reachable_domain_receipt_py313.json"
+    ]
+  },
+  "exact_object_materialization": {
+    "expected_bound_files": 14,
+    "observed_log_marker": "EXACT_GIT_OBJECT_BYTES_REMATERIALIZED 14",
+    "passed": true,
+    "mechanism": "git cat-file blob HEAD:path -> exact bytes -> Path.write_bytes -> recompute Git blob SHA",
+    "subject_semantics_changed": false
+  },
+  "exact_subject": {
+    "generator_v5_blob": "0faa62fce4bc2f2a99c173b0a10a32d5e1c6a244",
+    "tests_blob": "1961cff0013ff9f17feca981409d89d01ecf6769",
+    "universal_proof_blob": "2da564d27a318a99713165208126aaaf36ebc924",
+    "candidate_v1_blob": "a2a77269a8175ce315b466035049da0f761b8734",
+    "candidate_v2_blob": "4470716f95a559a700e461262df909ae19a41651",
+    "candidate_v3_blob": "8df7f13455b710623806a8219174b397a2c3c442",
+    "generator_v1_blob": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "generator_v2_blob": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "generator_v4_blob": "e52858b9fef2d795f72b45cd3ae82ad04344aa91",
+    "scorer_blob": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "harness_blob": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "launcher_blob": "7f05674904a4b3223cb26993a1e2e4b0bac8a0e7",
+    "launcher_workflow_blob": "990b4fe712ca509f3e01c8e632c75416a3cd0b98"
+  },
+  "runtime_results": {
+    "python_3_12_10": {
+      "version_observed": "3.12.10",
+      "independent_receipt_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_REACHABLE_DOMAIN_INDEPENDENT_VERIFICATION_V1",
+      "independent_receipt_status": "PASS__CONTENT_BOUND_FROZEN_LAUNCHER_REACHABLE_TYPE_DOMAIN__CLASS_SPOOF_REJECTED__54_NONPRODUCTION_CASES__ZERO_TERMINAL_REALITY",
+      "regression_suite": "7_PASSED",
+      "nonproduction_exact_scorer_cases": 54,
+      "surrogate_codepoints_exhausted": 2048,
+      "pass": true
+    },
+    "python_3_13": {
+      "version_observed": "3.13.15",
+      "independent_receipt_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_REACHABLE_DOMAIN_INDEPENDENT_VERIFICATION_V1",
+      "independent_receipt_status": "PASS__CONTENT_BOUND_FROZEN_LAUNCHER_REACHABLE_TYPE_DOMAIN__CLASS_SPOOF_REJECTED__54_NONPRODUCTION_CASES__ZERO_TERMINAL_REALITY",
+      "regression_suite": "7_PASSED",
+      "nonproduction_exact_scorer_cases": 54,
+      "surrogate_codepoints_exhausted": 2048,
+      "pass": true
+    }
+  },
+  "attacks": {
+    "fake___class___str_proxy_rejected": true,
+    "fake___class___bytes_proxy_rejected": true,
+    "real_str_subclass_widening_rejected": true,
+    "real_bytes_subclass_widening_rejected": true,
+    "forced_total_token_collision_retested": true,
+    "all_2048_surrogate_codepoints_retested": true
+  },
+  "launcher_boundary": {
+    "beacon_exact_type": "str",
+    "beacon_prefix": "UDIR-PROD-",
+    "evaluator_secret_exact_type": "bytes",
+    "evaluator_secret_length": 32,
+    "production_or_terminal_cases_actually_generated": 0
+  },
+  "gate_evaluation": {
+    "execution_binding_matches_frozen_gate": true,
+    "exact_object_materialization_matches_frozen_gate": true,
+    "both_required_python_runtimes_pass": true,
+    "both_fresh_receipts_match_required_schema_status": true,
+    "exact_v5_regression_suite_passes_both_runtimes": true,
+    "all_required_attacks_pass": true,
+    "zero_production_or_terminal_cases_consumed": true,
+    "all_v8_verification_conditions_satisfied": true
+  },
+  "hard_nonclaims": [
+    "THIS_INDEPENDENT_RECEIPT_DOES_NOT_SELF_PROMOTE_THE_PREDICATE",
+    "SEPARATE_FAIL_CLOSED_ROOT3_ACCEPTANCE_REDUCTION_REQUIRED",
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION_BEYOND_THE_FROZEN_EVALUATOR_AND_REACHABLE_LAUNCHER_DOMAIN",
+    "NO_UNKNOWN_DOMAIN_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "production_cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
