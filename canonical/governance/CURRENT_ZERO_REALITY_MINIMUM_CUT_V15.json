@@ -1,0 +1,195 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V15",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_14_24_EPOCH__SEVEN_INFORMATION_POSITIVE_GROUPS__THREE_DORMANT_SUBLANES_EXCISED__NO_FRESH_REALITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Repair V14 so the current minimum cut contains only actions whose execution can change the present proof state. Move Finance deterministic recompilation, composition upstream recomputation, and Finance direct-oracle work to exact wake conditions.",
+  "exact_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false,
+    "root1_positive_gap_count": 0,
+    "root2_touching_count": 18,
+    "root3_touching_count": 9
+  },
+  "authorities": {
+    "predecessor": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json",
+      "git_blob_sha": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
+    },
+    "finance_fixed_point": {
+      "path": "canonical/governance/FINANCE_INDEX_DETERMINISTIC_ZERO_REALITY_FIXED_POINT_20261005_V1.json",
+      "git_blob_sha": "18c3a5343079ea3efbd692bb4e72c53e0ae4838d"
+    },
+    "comparator_access": {
+      "path": "canonical/governance/OPUS55_ZERO_INCREMENTAL_EXACT_COMPARATOR_ACCESS_RECONCILIATION_20261005_V1.json",
+      "git_blob_sha": "3b0b1e6d0034b8e5fdc19ce1fc758f8610803d03"
+    },
+    "synthesis_stronger_proof_falsification": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_STRONGER_PROOF_FALSIFICATION_20261005_V1.json",
+      "git_blob_sha": "5ed80b01e5d4b6ad768931e72d5a8edf22a86c63"
+    }
+  },
+  "current_information_positive_action_groups": [
+    {
+      "id": "A_SHARED_BUILDKITE_TB4_CHARTOGRAPHY_PREFLIGHT",
+      "predicates": [
+        "CODING_TB4_GE_66_4",
+        "CHARTOGRAPHY_TOOLS_GE_89"
+      ],
+      "action": "ONE_AUTHENTICATED_BUILDKITE_ALL_ACCESS_TRIAL_ORG__ONE_LINUX_AMD64_8X32_ZERO_CASE_JOB__CAPTURE_CPU_RAM_DISK_DOCKER_COMPOSE_AND_HARD_ZERO_SPEND_FACTS__THEN_PINNED_QWEN3_VL4B_SYNTHETIC_LOAD_SMOKE__NO_TERMINAL_CASES",
+      "gate": "ACCOUNT_ACCESS_OR_SELF_SERVICE_TRIAL_ORG",
+      "fresh_reality": false
+    },
+    {
+      "id": "B_SELF_SERVICE_AND_ACCOUNT_FACT_SWEEP",
+      "predicates": [
+        "HLE_TOOLS_GE_67_7",
+        "CHARTOGRAPHY_TOOLS_GE_89",
+        "OSWORLD_2_1_PARTIAL_GE_81_8"
+      ],
+      "action": "HLE_HF_LOGIN_AND_TERMS__OSWORLD_HF_LOGIN_AND_PINNED_V21_ASSET_ACCESS__CHARTOGRAPHY_GEMINI_3_5_FLASH_PROJECT_FREE_CAPACITY_RECEIPT__NO_SCORE_CASES",
+      "gate": "AUTHENTICATED_SELF_SERVICE_ACCESS",
+      "fresh_reality": false
+    },
+    {
+      "id": "C_HLE_GRADER_RELATION",
+      "predicates": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "action": "PASSIVE_ANTHROPIC_REPLY_ROUTE_IN_PARALLEL_WITH_PRIMARY_PUBLIC_REPRODUCIBLE_CLAUDE_OPUS_4_6_GRADER_OR_FORMALLY_PROVED_CONSERVATIVE_SCORER_RELATION__NO_TOOL_PROTOCOL_RESEARCH",
+      "gate": "NEW_REPLY_OR_NEW_PRIMARY_REPRODUCIBLE_GRADER_RELATION_EVIDENCE",
+      "fresh_reality": false
+    },
+    {
+      "id": "D_VALS_FINANCE_AGENT_PREFLIGHT",
+      "predicates": [
+        "FINANCE_AGENT_V2_GE_58_59"
+      ],
+      "action": "BIND_VALS_APPROVAL_EXACT_SUITE_ID_FREE_ONLY_PROVIDER_ACCOUNT_SNAPSHOTS_AND_ZERO_COST_OUTCOME_TELEMETRY__NO_1350_SCORE_EXECUTIONS",
+      "gate": "AUTHENTICATED_VALS_OR_PROVIDER_ACCOUNT_FACTS",
+      "fresh_reality": false
+    },
+    {
+      "id": "E_OWNER_OR_PLATFORM_RESULT_BATCH",
+      "predicates": [
+        "CODING_FRONTIERCODE_GE_54_4",
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822",
+        "AUTOMATIONBENCH_GE_40",
+        "MYSTERYMECHANISM_GE_49_55"
+      ],
+      "action": "ACQUIRE_ONLY_RESULT_BEARING_AUTHENTICATED_THRESHOLD_OR_RELATIVE_SCORE_RECEIPTS_OR_EXACT_OWNER_EVALUATION_ACCESS__NO_GENERIC_SUPPORT_OR_FREE_TRIAL_QUERIES",
+      "gate": "OWNER_OR_PLATFORM_RESULT_BEARING_ACCESS",
+      "fresh_reality": false
+    },
+    {
+      "id": "F_SYNTHESIS_COMPARATOR_CAPACITY_OR_STRONGER_PROOF",
+      "predicates": [
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ],
+      "action": "FIRST_BIND_ONE_AUTHENTICATED_ZERO_INCREMENTAL_OPUS55_ACCOUNT_CAPACITY_SNAPSHOT_OPENROUTER_EXISTING_BALANCE_OR_ANTHROPIC_FREE_CREDIT_ELIGIBILITY__ONLY_AFTER_POSITIVE_SNAPSHOT_COMPILE_SMALLEST_PREDECLARED_COMPARATOR_CERTIFICATE__IN_PARALLEL_ALLOW_ONLY_A_NEW_FORMAL_OR_EXHAUSTIVE_GENERAL_SEMANTIC_CEILING_PROOF__NO_MATCHED_CASE_EXECUTION_YET",
+      "gate": "ACCOUNT_CAPACITY_SNAPSHOT_OR_NEW_STRONGER_PROOF_PREMISE",
+      "evidence_from_this_session": "GMAIL_SEARCH_FOUND_NO_OPENROUTER_TOPUP_BALANCE_RECEIPT_AND_NO_ANTHROPIC_API_CREDIT_BILLING_RECEIPT__THIS_DOES_NOT_EQUAL_AN_AUTHENTICATED_ACCOUNT_BALANCE_SNAPSHOT",
+      "fresh_reality": false
+    },
+    {
+      "id": "G_ROOT3_SCOPE_CERTIFICATE_RACE",
+      "predicates": [
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "VISION_DENSE_NONCHART_SCOPE",
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "action": "ONLY_NEW_LOAD_BEARING_LOSSLESS_EXHAUSTIVE_OR_UNIVERSAL_CERTIFICATES__NO_REPEAT_GENERIC_ROOT3_SEARCH__NO_CASE_GENERATION",
+      "gate": "CONSTRUCTIVE_NEW_CERTIFICATE_PREMISE",
+      "fresh_reality": false
+    }
+  ],
+  "dormant_wake_only": [
+    {
+      "id": "FINANCE_ACCOUNTING_INDEX_DETERMINISTIC_COMPILER",
+      "predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "state": "SLEEP_INFORMATION_FIXED_POINT",
+      "reason": "NO_RECEIPTED_NORMALIZED_BRAIN_COMPONENT_LOWER_BOUND__NO_VERIFIED_SUBSCORE_FLOOR_OR_INNER_TRANSFORM__NO_OWNER_INDEX_RECEIPT",
+      "wake_on": [
+        "NEW_INDEPENDENT_NORMALIZED_BRAIN_COMPONENT_LOWER_BOUND_RECEIPT",
+        "NEW_VERIFIED_COMPONENT_SUBSCORE_FLOOR_OR_INNER_TRANSFORM",
+        "ARTIFICIAL_ANALYSIS_RESULT_BEARING_FINANCE_INDEX_OR_COMPONENT_RECEIPT",
+        "MATERIAL_OWNER_METHODOLOGY_OR_API_SCHEMA_CHANGE",
+        "SCOPE_SAFE_STRONGER_PROOF"
+      ]
+    },
+    {
+      "id": "COMPOSITION_UPSTREAM_RECEIPT_RECOMPUTE",
+      "predicate": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "state": "SLEEP_EVENT_BOUND",
+      "reason": "V14_ITSELF_AUTHORIZES_RECOMPUTE_ONLY_WHEN_NEW_SCOPE_COMPLETE_UPSTREAM_RECEIPTS_ARRIVE",
+      "wake_on": [
+        "NEW_SCOPE_COMPLETE_UPSTREAM_COMPONENT_RECEIPT"
+      ]
+    },
+    {
+      "id": "FINANCE_DIRECT_ORACLE_HOLD",
+      "predicate": "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "state": "HOLD_FRESH_REALITY_BLOCKED",
+      "reason": "V14_ITSELF_FORBIDS_EXECUTION_BEFORE_EXPLICIT_FRESH_REALITY_AUTHORITY",
+      "wake_on": [
+        "EXPLICIT_FRESH_REALITY_AUTHORITY",
+        "STRONGER_ZERO_REALITY_SCOPE_COMPLETE_PROOF"
+      ]
+    }
+  ],
+  "compression": {
+    "v14_listed_group_count": 9,
+    "v15_information_positive_group_count": 7,
+    "removed_as_current_actions": [
+      "H_COMPOSITION_UPSTREAM_RECEIPT_RECOMPUTE",
+      "I_FINANCE_DIRECT_ORACLE_HOLD"
+    ],
+    "finance_half_of_v14_F_moved_to_wake_only": true,
+    "synthesis_half_of_v14_F_preserved_as_rewritten_F": true,
+    "acceptance_state_changed": false,
+    "capability_state_changed": false,
+    "ownership_state_changed": false
+  },
+  "scheduling_policy": {
+    "objective": "MINIMIZE_EXPECTED_TERMINAL_CRITICAL_PATH_SECONDS",
+    "admissibility": "EXECUTE_ONLY_ACTIONS_WITH_NONZERO_CURRENT_PROOF_STATE_REACHABILITY_OR_MINIMAL_PREREQUISITES_OF_SUCH_ACTIONS",
+    "recompute": "AFTER_EVERY_VERIFIED_DELTA_OR_WAKE_EVENT",
+    "probability_rule": "NO_UNCALIBRATED_POINT_PROBABILITIES__VERIFIED_LOGICAL_IMPLICATION_P1__FALSIFIED_ROUTE_P0_UNTIL_REOPEN__OTHERWISE_UNKNOWN_OR_INTERVAL"
+  },
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_TERMINAL_CASE_EXPOSURE",
+    "NO_FRESH_REALITY_FROM_THIS_CUT",
+    "NO_DORMANT_NODE_COUNTED_AS_CURRENT_EXECUTABLE_ACTION",
+    "NO_REPEATED_FINANCE_COMPILATION_WITH_UNCHANGED_PREMISES",
+    "NO_COMPOSITION_RECOMPUTE_WITHOUT_NEW_UPSTREAM_RECEIPT",
+    "NO_FINANCE_DIRECT_ORACLE_WITHOUT_FRESH_REALITY_AUTHORITY",
+    "NO_OPUS55_COMPARATOR_CALL_BEFORE_AUTHENTICATED_ZERO_INCREMENTAL_CAPACITY_AND_HARD_COST_CAP",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
