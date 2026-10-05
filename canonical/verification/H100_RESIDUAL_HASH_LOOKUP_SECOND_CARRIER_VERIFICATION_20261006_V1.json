@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_H100_RESIDUAL_HASH_LOOKUP_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__FIVE_OF_FIVE_FRESH_DEPTH8_HASH_LOOKUPS__ZERO_PERSISTENT_M_fit",
+  "branch": "research/h100-representation-invariant-accounting-v1",
+  "precommit": {
+    "path": "canonical/governance/H100_RESIDUAL_HASH_LOOKUP_PRECOMMIT_V1.json",
+    "git_blob_sha": "dbeb713fda24979045e204a4a78513073e2d7f9a"
+  },
+  "runtime": {
+    "path": "canonical/runtime/h100_residual_hash_lookup_v1.py",
+    "git_blob_sha": "b8472989aae98378c5c80a52abc0d49342533454"
+  },
+  "tests": {
+    "path": "canonical/tests/test_h100_residual_hash_lookup_v1.py",
+    "git_blob_sha": "a1ff88db26c211afcb0ef10849cb3ec98133798b"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "observed": {
+    "tests_passed": 5,
+    "tests_total": 5,
+    "transient_unary_class_count": 54525,
+    "terminal_residual_key_count": 39815,
+    "basis_generation_seconds": 4.870663722002064,
+    "index_build_seconds": 2.7611694730003364,
+    "median_lookup_plus_verification_seconds": 0.00014814700261922553,
+    "amortized_seconds_per_task_for_five_task_batch": 1.526580784401449,
+    "all_five_hash_bucket_nonempty": true,
+    "all_five_seed_verify": true,
+    "all_five_transfer": true,
+    "persistent_m_fit_bytes": 0,
+    "persistent_hash_index": 0,
+    "persistent_selected_structures": 0
+  },
+  "deduction": "FOR_EXACT_AFFINE_PLUS_ONE_FEATURE_TASKS__TARGET_INDEPENDENT_TRANSIENT_BASIS_GENERATION_CAN_BE_SEPARATED_FROM_TARGET_SOLVING__RESIDUAL_DIRECTION_HASHING_REDUCES_MEDIAN_TARGET_LOOKUP_PLUS_VERIFICATION_TO_ABOUT_0_15_MILLISECONDS_WITH_ZERO_PERSISTENT_M_fit",
+  "hard_nonclaims": [
+    "EXACT_HASH_LOOKUP_DOES_NOT_SOLVE_NOISY_APPROXIMATE_TARGETS",
+    "BASIS_AND_INDEX_BUILD_COST_REMAINS_ABOUT_7_6_SECONDS_ON_THIS_CARRIER",
+    "FINITE_UNARY_DEPTH8_SEARCH_IS_NOT_GENERAL_PROGRAM_SEARCH",
+    "M_cap_AND_M_dev_ARE_SEPARATE_FROM_M_fit"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
