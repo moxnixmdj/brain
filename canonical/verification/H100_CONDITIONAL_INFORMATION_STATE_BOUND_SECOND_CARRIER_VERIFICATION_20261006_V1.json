@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CONDITIONAL_INFORMATION_STATE_BOUND_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__8_OF_8_TESTS__INDEPENDENT_A_RESEARCH__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_CONDITIONAL_INFORMATION_STATE_BOUND_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_conditional_information_state_bound_v1.py",
+    "tests": "canonical/tests/test_h100_conditional_information_state_bound_v1.py"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "independence_scope": "DISTINCT_ISOLATED_CARRIER_FROM_PRIMARY_RESEARCH_WORKER__SAME_PROVIDER"
+  },
+  "verified": {
+    "tests_passed": 8,
+    "tests_total": 8,
+    "no_evidence_reduces_to_unconditional_bound": true,
+    "singleton_jit_evidence_classes_need_zero_bits": true,
+    "partial_partition_interpolation": true,
+    "zero_bit_bound": "NUMBER_OF_EVIDENCE_CLASSES_DIV_WORLD_COUNT",
+    "perfect_identification_bits": "CEIL_LOG2_LARGEST_EQUIVALENCE_CLASS"
+  },
+  "deduction": "PERSISTENT_WORLD_DEPENDENT_STATE_IS_ONLY_INFORMATION_THEORETICALLY_REQUIRED_TO_RESOLVE_AMBIGUITY_REMAINING_INSIDE_RUNTIME_EVIDENCE_EQUIVALENCE_CLASSES__JIT_EVIDENCE_CAN_SUBSTITUTE_FOR_PERSISTENT_BITS_BY_SPLITTING_THOSE_CLASSES",
+  "hard_nonclaims": [
+    "DOES_NOT_PROVE_REAL_TASKS_HAVE_SMALL_EQUIVALENCE_CLASSES",
+    "DOES_NOT_PROVE_JIT_EVIDENCE_IS_ALWAYS_AVAILABLE",
+    "DOES_NOT_PROVE_ZERO_LEARNED_STATE_IS UNIVERSALLY SUFFICIENT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
