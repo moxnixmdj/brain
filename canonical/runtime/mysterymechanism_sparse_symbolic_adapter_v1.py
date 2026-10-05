@@ -534,17 +534,22 @@ def solve(rows: Sequence[Mapping[str, Any]], *, bounds: Mapping[str, Sequence[An
     except SparseSymbolicError:
         pass
 
-    # Frozen generic 2-D extension. Import locally to avoid a module cycle:
-    # the separable learner deliberately reuses this module's numeric helpers.
+    # V2 generic 2-D extension. The V1 LOO selector is retained as a
+    # reproducible falsified design; V2 removes affine-equivalent duplicate
+    # hypotheses and selects with exact delete-two risk before LOO.
     if len(b) == 2 and len(rows) >= 7:
         try:
-            from canonical.runtime import mysterymechanism_separable_transform_v1 as separable
+            from canonical.runtime import mysterymechanism_separable_transform_v2 as separable
             dd = separable.discover(rows, bounds=b, target=target)
             dc = dd.get("candidate")
             if dc is not None:
-                err = max(float(dc["loo_nrmse"]), float(dc["all_row_nrmse"]))
+                err = max(
+                    float(dc["delete_two_nrmse"]),
+                    float(dc["loo_nrmse"]),
+                    float(dc["all_row_nrmse"]),
+                )
                 options.append((
-                    "SEPARABLE_BILINEAR_TRANSFORM",
+                    "SEPARABLE_BILINEAR_TRANSFORM_V2",
                     err,
                     int(dc["complexity"]),
                     dc,
