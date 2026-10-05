@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_AUTHORITY_V4",
+  "date": "2026-10-03",
+  "status": "DORMANT_PREACTIVATION_AUTHORITY_CANDIDATE__CANONICAL_DBA3_CANDIDATE__EXACTLY_ONE_SLOT__INDEPENDENT_AUTHORITY_BYTE_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "candidate_basis": {
+    "candidate_path": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_CANDIDATE_V4.json",
+    "candidate_git_blob_sha": "dba3ff2c53765f8423d4161e079b663c76959fc1",
+    "candidate_verification_path": "canonical/verification/TB_SCIENCE_V4_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+    "candidate_verification_git_blob_sha": "a4b2ccc6ac1fb24ff9d01f04abe77ae58d66f267",
+    "cpu_verification_path": "canonical/verification/TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "cpu_verification_git_blob_sha": "7497bc7249431a832a0e938fcf6d575bfbfaf5f3"
+  },
+  "current_parity": {
+    "comparator_model": "Opus 5.5",
+    "comparator_percent": 63.33333333333333,
+    "fixed_denominator": 210,
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "finalized_failures_before_slot": 5,
+    "remaining_failures_before_fail_lock": 73
+  },
+  "exact_route": {
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "manifest_path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "harbor_version": "0.23.0",
+    "controller_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_blob": "fe7c0ce885197217774638df382aeb6f68ff38dd",
+    "source_gate_path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "command_policy_path": "canonical/runtime/harbor_command_policy.py",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "environment_transport_path": "canonical/runtime/harbor_environment_transport.py",
+    "environment_transport_blob": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "qwen_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "rebuild_llama_cpp_on_current_runner": true,
+    "compiled_llama_cpp_cache_forbidden": true
+  },
+  "authorized_slot": {
+    "slot_id": "terminal-bench-science/koopman-mfg-id::trial-0",
+    "schedule_order": 5,
+    "attempt_index": 0,
+    "task_rank": 5,
+    "task_name": "terminal-bench-science/koopman-mfg-id",
+    "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f"
+  },
+  "permanently_consumed_slots": [
+    "terminal-bench-science/genomic-model-ranking::trial-0",
+    "terminal-bench-science/mri-harmonization::trial-0",
+    "terminal-bench-science/navigation-sensor-calibration::trial-0",
+    "terminal-bench-science/baseline-free-localization::trial-0",
+    "terminal-bench-science/virtual-baseline-localization::trial-0"
+  ],
+  "execution_semantics": {
+    "slots_authorized": 1,
+    "retries_per_slot": 0,
+    "slot_replacement": false,
+    "denominator_shrink": false,
+    "duplicate_slot_credit": false,
+    "exact_success_rule": "reward >= 1.0",
+    "stop_after_slot": true,
+    "auto_revoke_after_slot_finalization": true,
+    "infrastructure_invalid_or_missing_verifier_result_finalizes_zero": true
+  },
+  "activation_conditions": [
+    "THIS_EXACT_AUTHORITY_BLOB_HAS_A_SEPARATE_INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "CURRENT_TERMINAL_AUTHORITY_EXPLICITLY_POINTS_TO_THIS_EXACT_AUTHORITY_BLOB_AS_ACTIVE",
+    "CURRENT_LIVE_30_INFORMATION_DOMINANCE_SCHEDULER_NO_LONGER_FORBIDS_FRESH_REALITY",
+    "ALL_BOUND_ROUTE_AND_COMPARATOR_BLOBS_REMAIN_EXACT",
+    "THE_AUTHORIZED_SLOT_IS_STILL_UNTOUCHED_AT_ACTIVATION"
+  ],
+  "current_scheduler_gate": {
+    "path": "canonical/governance/CURRENT_30_INFORMATION_DOMINANCE_ACTIVATION_V1.json",
+    "git_blob_sha": "685546c11301bd113efac0f2c1f0baa4c179e70f",
+    "fresh_reality_authority": false,
+    "consequence": "DORMANT__MUST_NOT_EXECUTE_UNDER_CURRENT_SCHEDULER"
+  },
+  "hard_rules": [
+    "FILE_EXISTENCE_IS_NOT_ACTIVATION",
+    "NO_EXECUTION_UNLESS_CURRENT_TERMINAL_AUTHORITY_POINTS_TO_THIS_EXACT_VERIFIED_BLOB",
+    "NO_EXECUTION_WHILE_CURRENT_SCHEDULER_FRESH_REALITY_AUTHORITY_IS_FALSE",
+    "NO_CONSUMED_SLOT_REPLAY",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "CLEAN_CURRENT_RUNNER_LLAMA_CPP_BUILD_REQUIRED",
+    "EXECUTE_EXACTLY_ONE_SLOT_THEN_AUTO_REVOKE"
+  ],
+  "execution_authority": true,
+  "effective_execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
