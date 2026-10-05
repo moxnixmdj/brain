@@ -18,10 +18,10 @@ ROOT_STATE_PATH = "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json"
 EVIDENCE_PATH = "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
 
 ROOT1_ACTIVATION_RE = re.compile(
-    r"^ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V(\\d+)_ACTIVATION_V1\\.json$"
+    r"^ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V(\d+)_ACTIVATION_V1\.json$"
 )
 ZERO_REALITY_ACTIVATION_RE = re.compile(
-    r"^CURRENT_ZERO_REALITY_MINIMUM_CUT_V(\\d+)_ACTIVATION_V1\\.json$"
+    r"^CURRENT_ZERO_REALITY_MINIMUM_CUT_V(\d+)_ACTIVATION_V1\.json$"
 )
 
 
@@ -48,7 +48,7 @@ def _load(path: str, root: Path = ROOT) -> dict[str, Any]:
 
 def git_blob_sha(path: str, root: Path = ROOT) -> str:
     raw = _read_bytes(path, root)
-    return hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\\0" + raw).hexdigest()
+    return hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
 
 
 def _discover_highest_active(
@@ -163,7 +163,7 @@ def frontier_epoch(component_blobs: Mapping[str, str]) -> str:
     for path, sha in sorted(component_blobs.items()):
         if not re.fullmatch(r"[0-9a-f]{40}", str(sha)):
             raise FrontierCompileError(f"INVALID_COMPONENT_SHA:{path}:{sha}")
-        lines.append(f"{path}={sha}\\n")
+        lines.append(f"{path}={sha}\n")
     return hashlib.sha256("".join(lines).encode()).hexdigest()
 
 
