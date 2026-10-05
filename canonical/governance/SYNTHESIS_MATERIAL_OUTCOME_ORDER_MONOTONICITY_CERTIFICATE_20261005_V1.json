@@ -1,0 +1,160 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_MATERIAL_OUTCOME_ORDER_MONOTONICITY_CERTIFICATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_FROZEN_SYNTHESIS_MATERIAL_VECTOR_COMPLETE_AND_AGGREGATION_MONOTONE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "objective": "Discharge the first two proof obligations of the current matched-noninferiority monotone route using only frozen current artifacts: bind a complete material outcome vector for the open synthesis matched predicate and prove the frozen quality/coverage projection is coordinatewise monotone.",
+  "authority": {
+    "route_classification": {
+      "path": "canonical/governance/MATCHED_NONINFERIORITY_MONOTONE_ROUTE_CLASSIFICATION_20261005_V1.json",
+      "git_blob_sha": "36072fd038bd52b62d7e355a055753bbf1e9c61b"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "matched_quality_metric": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+      "git_blob_sha": "0886f7592875a5b750cdd401aa783351ab2f0854"
+    },
+    "dimension_scorers": {
+      "path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json",
+      "git_blob_sha": "8206cb013b5cd0d653ffa70d1e867f8c4d4630b8"
+    },
+    "dimension_scorer_activation": {
+      "path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1.json",
+      "git_blob_sha": "300fb663e6b598b389961ddf663d88abcd206545"
+    },
+    "evidence_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    }
+  },
+  "frozen_material_outcome_vector": {
+    "coordinates": [
+      {
+        "id": "claim_to_source_fidelity",
+        "direction": "HIGHER_IS_BETTER",
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "required_claim_coverage",
+        "direction": "HIGHER_IS_BETTER",
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "uncertainty_and_disagreement_preservation",
+        "direction": "HIGHER_IS_BETTER",
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "audience_adaptation",
+        "direction": "HIGHER_IS_BETTER",
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "format_and_style_constraints",
+        "direction": "HIGHER_IS_BETTER",
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "compression_without_decision_relevant_loss",
+        "direction": "HIGHER_IS_BETTER",
+        "range": [
+          0,
+          1
+        ]
+      }
+    ],
+    "material_order": "BRAIN_GE_TARGET_IFF_EACH_OF_THE_SIX_COORDINATES_IS_GE_ITS_TARGET_COORDINATE",
+    "completeness_basis": [
+      "THE_FROZEN_COMMUNICATION_AND_SYNTHESIS_PROTOCOL_DECLARES_EXACTLY_THESE_SIX_TASK_DIMENSIONS",
+      "SYNTHESIS_SCOPE_CERTIFICATE_V1_PROVES_EXACT_UNION_COVERAGE_OF_THE_SAME_SIX_DIMENSIONS",
+      "SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1_USES_EXACTLY_THE_FIVE_NON_COVERAGE_DIMENSIONS_AS_QUALITY_COMPONENTS",
+      "REQUIRED_CLAIM_COVERAGE_REMAINS_AN_EXPLICIT_SEPARATE_METRIC_AND_IS_NOT_DOUBLE_COUNTED",
+      "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_IS_A_SEPARATE_ATOMIC_ACCEPTANCE_GATE_ALREADY_PROVED_IN_THE_CURRENT_EVIDENCE_LEDGER__IT_IS_NOT_AN_UNDECLARED_HIDDEN_WEIGHTING_DIMENSION_OF_THIS_OPEN_PREDICATE",
+      "NO_SEVENTH_MATERIAL_DIMENSION_MAY_BE_ADDED_WITHOUT_A_FROZEN_PROTOCOL_CHANGE"
+    ],
+    "exact_union_claim": "FOR_THE_CURRENT_OPEN_MATCHED_SYNTHESIS_PREDICATE__THE_SIX_VECTOR_IS_A_COMPLETE_MATERIAL_OUTCOME BASIS RELATIVE_TO_THE_FROZEN_PROTOCOL_AND_SCOPE_CERTIFICATE",
+    "target_rebase": false
+  },
+  "frozen_aggregation": {
+    "matched_quality": "Q = MIN(F,U,A,S,C)",
+    "coverage": "R = REQUIRED_CLAIM_COVERAGE",
+    "unsupported_material_claim_rule": "SEPARATE_HARD_GATE__ANY_UNSUPPORTED_MATERIAL_CLAIM_HARD_ZEROS_Q__CURRENT_ZERO_UNSUPPORTED_ATOMIC_GATE_IS_SEPARATELY_PROVED",
+    "theorem": "IF_BRAIN_DOMINATES_TARGET_COORDINATEWISE_ON_(F,R,U,A,S,C)__THEN_Q_BRAIN_GE_Q_TARGET_AND_R_BRAIN_GE_R_TARGET",
+    "monotonicity": "Q_IS_COORDINATEWISE_NONDECREASING_IN_F_U_A_S_C_AND_R_IS_IDENTITY_NONDECREASING_IN_R"
+  },
+  "consequence": {
+    "discharged_current_route_obligations": [
+      "BIND_THE_FROZEN_SYNTHESIS_QUALITY_AND_COVERAGE_DIMENSIONS_AS_A_COMPLETE_MATERIAL_OUTCOME_VECTOR_FOR_THE_CURRENT_CONTRACT",
+      "PROVE_OR_FAIL_CLOSE_THAT_THE_ADMISSIBLE_MATCHED_QUALITY_AGGREGATOR_CLASS_IS_COORDINATEWISE_MONOTONE_ON_THAT_VECTOR"
+    ],
+    "delete": [
+      "EXACT_SYNTHESIS_AGGREGATOR_WEIGHT_DISCOVERY",
+      "HIDDEN_WEIGHT_RECONSTRUCTION_AS_A_PRECONDITION_FOR_TESTING_VECTOR_DOMINANCE_OR_COUPLING"
+    ],
+    "preserve": [
+      "COMPILE_CURRENT_BRAIN_AND_TARGET_EVIDENCE_INTO_FINITE_OUTCOME_CLASSES_OR_CONSERVATIVE_MASS_BOUNDS",
+      "RUN_EXACT_DOMINANCE_PRESERVING_COUPLING_KERNEL",
+      "OBTAIN_TARGET_OUTCOME_INFORMATION_IF_CURRENT_EVIDENCE_CANNOT_BOUND_TARGET_MASS",
+      "MATCHED_QUALITY_RESULT_OR_A_SEPARATELY_VERIFIED_STRONGER_PROOF",
+      "NO_ACCEPTANCE_CREDIT_UNTIL_THE_PREDICATE_ITSELF_IS_DISCHARGED"
+    ],
+    "critical_path_after_certificate": "OUTCOME_MASS_OR_CONSERVATIVE_BOUND_COMPILATION__THEN_FULL_MASS_COUPLING__NOT_AGGREGATOR_WEIGHT_DISCOVERY"
+  },
+  "falsifiers": [
+    "FROZEN_PROTOCOL_HAS_A_MATERIAL_SYNTHESIS_DIMENSION_OUTSIDE_THE_SIX_VECTOR",
+    "SCOPE_CERTIFICATE_EXACT_UNION_IS_REVOKED_OR_NOT_APPLICABLE_TO_THE_CURRENT_TARGET",
+    "MATCHED_QUALITY_IS_NOT_MIN_OF_THE_FIVE_DECLARED_NON_COVERAGE_DIMENSIONS",
+    "REQUIRED_CLAIM_COVERAGE_IS_NOT_A_SEPARATE_EXPLICIT_METRIC",
+    "CURRENT_ACCEPTANCE_ADDS_A_HIDDEN_NONMONOTONE_MATERIAL_TERM"
+  ],
+  "independent_symbolic_verification": {
+    "path": "canonical/verification/SYNTHESIS_MATERIAL_OUTCOME_ORDER_MONOTONICITY_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "state": "TO_BE_BOUND_AFTER_FILE_CREATION"
+  },
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_PREDICATE_CLOSURE",
+    "NO_BRAIN_OUTCOME_DISTRIBUTION_CLAIM",
+    "NO_OPUS_OUTCOME_DISTRIBUTION_CLAIM",
+    "NO_FULL_MASS_COUPLING_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_LITERAL_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
