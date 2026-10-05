@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_SCOPED_ACCEPTANCE_SEMANTIC_RESOLUTION_V1",
+  "date": "2026-10-05",
+  "status": "FORMAL_COUNTERMODEL_RESOLVES_GATE_NO__SCOPE_COMPLETENESS_ALONE_CANNOT_ESTABLISH_SCOPED_ACCEPTANCE__ZERO_CREDIT",
+  "objective": "Resolve the global Composition semantic gate by proving that a scope-complete certificate with explicitly open performance/acceptance cannot, by itself, satisfy SCOPED_ACCEPTANCE_PROOF.",
+  "authority": {
+    "frozen_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "current_composition_authority": {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
+      "git_blob_sha": "5bb089582a5bc2ee4a44143c8d3a11e919fecdff"
+    },
+    "synthesis_scope_verification": {
+      "path": "canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "1852516f725f5b72badfc2f65be22e542ed83623"
+    },
+    "artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    }
+  },
+  "definitions": {
+    "SCOPE_COMPLETE": "The certificate covers the entire frozen component domain.",
+    "SCOPED_ACCEPTANCE": "The certificate establishes the required accepted behavior/performance over that frozen component domain.",
+    "claim_under_test": "SCOPE_COMPLETE implies SCOPED_ACCEPTANCE"
+  },
+  "countermodel": {
+    "frozen_domain": ["x"],
+    "covered_domain": ["x"],
+    "scope_complete": true,
+    "brain_terminal_success_on_x": 0,
+    "required_terminal_success_on_x": 1,
+    "scoped_acceptance": false,
+    "witness": "The entire domain is covered, yet the Brain fails the required behavior on the only point in the domain.",
+    "implication_holds": false
+  },
+  "theorem": {
+    "statement": "Scope completeness alone is insufficient for SCOPED_ACCEPTANCE_PROOF.",
+    "proof": [
+      "A universal implication SCOPE_COMPLETE -> SCOPED_ACCEPTANCE is false if one model satisfies SCOPE_COMPLETE and violates SCOPED_ACCEPTANCE.",
+      "The explicit one-point countermodel satisfies exact scope completeness.",
+      "The same countermodel fails the required accepted behavior.",
+      "Therefore scope completeness alone cannot entail scoped acceptance."
+    ],
+    "result": "PROVED_NONIMPLICATION"
+  },
+  "canonical_consistency": {
+    "manifest_requires": "SCOPED_ACCEPTANCE_PROOF",
+    "current_authority_rule": "ONLY_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_CURRENT_SOURCE_RECEIPTS_GRANT_COMPONENT_CREDIT",
+    "synthesis_source_acceptance_closed": false,
+    "artifact_scope_proof_performance_credit": "ZERO__AA_BRIEFCASE_GE_1822_REMAINS_REQUIRED",
+    "conclusion": "The current scope-only synthesis and artifact candidates remain inadmissible for Composition component credit until acceptance-grade upstream evidence closes."
+  },
+  "scheduler_effect": {
+    "resolved_global_gate": "NO",
+    "delete_route": "SEARCH_FOR_A_THEOREM_THAT_SCOPE_COMPLETENESS_ALONE_SUFFICES",
+    "composition_recompute_policy": "EVENT_DRIVEN_ONLY_ON_NEW_ACCEPTANCE_GRADE_UPSTREAM_RECEIPT_OR_DIRECT_CURRENT_OWNED_FAMILY_WITNESS",
+    "safe_scoped_proved_count": 4,
+    "safe_open_count": 8
+  },
+  "hard_rules": [
+    "NO_COMPONENT_CREDIT_FROM_SCOPE_COMPLETENESS_ALONE",
+    "NO_SELF_ASSERTED_ACCEPTANCE_SCOPED_LABEL_AS_PROOF",
+    "NO_PARENT_COMPOSITION_ACCEPTANCE_FROM_THIS_RESOLUTION",
+    "NO_STRICT_OPUS55_ACCEPTANCE_DELTA",
+    "NO_FRESH_REALITY",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
