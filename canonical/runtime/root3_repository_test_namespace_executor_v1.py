@@ -22,20 +22,19 @@ SUPPORTED = {
 }
 
 _RUNNER = r"""
-import pathlib,sys
+import pathlib,sys,types
 snapshot=pathlib.Path(sys.argv[1])
 logical=sys.argv[2]
 raw=snapshot.read_bytes()
 sys.argv=[logical]
 script_dir=str(pathlib.PurePosixPath(logical).parent)
 sys.path=[script_dir,"/input"]+[p for p in sys.path if p not in (script_dir,"/input","")]
-g={
-    "__name__":"__main__",
-    "__file__":logical,
-    "__package__":None,
-    "__cached__":None,
-}
-exec(compile(raw,logical,"exec"),g,g)
+module=types.ModuleType("__main__")
+module.__file__=logical
+module.__package__=None
+module.__cached__=None
+sys.modules["__main__"]=module
+exec(compile(raw,logical,"exec"),module.__dict__,module.__dict__)
 """
 
 _WRAPPER = r"""
