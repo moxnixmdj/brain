@@ -1,0 +1,210 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_14_24_EPOCH__18_ROOT2_TOUCHING_PREDICATES__ZERO_ROUTE_DRIFT__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Bind the unchanged exact 18-predicate Root2 threshold-DAG routes to the current 14-proved/24-unresolved authority after Unknown-Domain V8 removed one Root3-only atom.",
+  "source_bindings": {
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860"
+    },
+    "clean_livebench_reduction": {
+      "path": "canonical/governance/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "5e9d6d560f7ff6a3a8a6e8cff7d52e31cd71d957"
+    },
+    "clean_livebench_verification": {
+      "path": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "57e27e3c56372b57a1d4e0255f49340d4a4c8588"
+    },
+    "prior_verified_19_subject": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1.json",
+      "git_blob_sha": "1fba51d15bcfdf6accd90948155517f7c9b98bbb"
+    },
+    "prior_verified_19_activation": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_ACTIVATION_V1.json",
+      "git_blob_sha": "7ea4dd4edb59c8526bd3993e02f4a8fb53c65085"
+    },
+    "prior_verified_19_public_verification": {
+      "path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "553602570334f39003708e52d781b8c59f27eb7c"
+    },
+    "unknown_domain_v8_reduction": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "ebe8edcda3e0aa7dcffab6032834532a6f06c5f7"
+    },
+    "prior_13_25_rebind": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V2.json",
+      "git_blob_sha": "85541957119129483a2af9a3bebb5d4fe99f7a60"
+    }
+  },
+  "runtime": {
+    "path": "canonical/runtime/threshold_proof_dag_v1.py",
+    "git_blob_sha": "7a0c715d931dbba05bc9e5ae344e1ead787ea5b8"
+  },
+  "exact_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "root1_only": 0,
+    "root2_only": 15,
+    "root3_only": 6,
+    "root2_and_root3": 3,
+    "root2_touching": 18
+  },
+  "derivation": {
+    "removed_predicate": "LIVEBENCH_IF_GE_65_7",
+    "prior_root2_touching": 19,
+    "current_root2_touching": 18,
+    "set_rule": "CURRENT_18_EQUALS_PRIOR_VERIFIED_19_MINUS_EXACTLY_LIVEBENCH_IF_GE_65_7",
+    "route_mutations_for_remaining_predicates": 0,
+    "post_unknown_domain_rule": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_WAS_ROOT3_ONLY__ITS_CLOSURE_CHANGES_GLOBAL_COUNTS_AND_ROOT3_COUNT_BUT_NOT_THE_EXACT_18_ROOT2_TOUCHING_SET__ROUTE_MUTATIONS_ZERO",
+    "global_delta_since_v2": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_MOVED_ROOT3_ONLY_TO_PROVED",
+    "root2_membership_changed_since_v2": false,
+    "route_mutations_since_v2": 0
+  },
+  "predicates": [
+    {
+      "id": "CODING_TB4_GE_66_4",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "VERIFIED_SUCCESS_MASS_LOWER_BOUND_OR_STRONGER_PROOF__FULL_TB4_ONLY_IF_RESIDUAL_IRREDUCIBLE"
+    },
+    {
+      "id": "CODING_FRONTIERCODE_GE_54_4",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "OWNER_SCORE_RECEIPT_OR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF__NO_GENERIC_PUBLIC_DATASET_HUNT"
+    },
+    {
+      "id": "CODING_CURSORBENCH_GE_57_8",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "OWNER_SCORE_RECEIPT_OR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF__NO_GENERIC_PUBLIC_DATASET_HUNT"
+    },
+    {
+      "id": "PROWORK_GDPVAL_GE_1846",
+      "class": "RELATIVE_RATING_THRESHOLD",
+      "route": "EXACT_COMPARABLE_BRAIN_RELATIVE_SCORE_RECEIPT_OR_VERIFIED_RELATIVE_SCORE_BRIDGE__ABSOLUTE_PROOF_ALONE_FORBIDDEN"
+    },
+    {
+      "id": "PROWORK_AA_BRIEFCASE_GE_1822",
+      "class": "RELATIVE_RATING_THRESHOLD",
+      "route": "ONE_EXACT_AA_BRIEFCASE_RELATIVE_SCORE_RECEIPT_MAY_BE_REUSED_FOR_ARTIFACT_AA_ONLY_IF_BOTH_SCOPE_BINDINGS_PASS"
+    },
+    {
+      "id": "AUTOMATIONBENCH_GE_40",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "DETERMINISTIC_FINAL_STATE_ASSERTION_PROOF_MASS_PLUS_MINIMUM_PRIVATE_RESIDUAL__NO_PUBLIC600_PRIVATE_SUBSTITUTION_WITHOUT_EQUIVALENCE"
+    },
+    {
+      "id": "HLE_TOOLS_GE_67_7",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "DETERMINISTIC_GRADER_CERTIFIED_MASS_PLUS_MINIMUM_JUDGED_RESIDUAL__FULL_2500_ONLY_IF_REQUIRED"
+    },
+    {
+      "id": "TB_SCIENCE_GE_58_7",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "VERIFIER_SUCCESS_MASS_WITH_EARLY_STOP_CERTIFICATE__TARGET_FRESHNESS_MUST_BE_RESOLVED_BEFORE_ACCEPTANCE"
+    },
+    {
+      "id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "DETERMINISTIC_REFERENCE_OR_JUDGE_SAFE_LOWER_BOUND_PLUS_MINIMUM_EXTERNAL_JUDGE_RESIDUAL"
+    },
+    {
+      "id": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "EXACT_PARTIAL_TASK_SUCCESS_LOWER_BOUND__UNRUN_TASKS_COUNT_ZERO_FOR_PASS_CERTIFICATE"
+    },
+    {
+      "id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "VERIFIED_WEIGHTED_COMPONENT_LOWER_BOUND_GE_61__DO_NOT_REQUIRE_COMPONENTWISE_OPUS_NONINFERIORITY"
+    },
+    {
+      "id": "FINANCE_AGENT_V2_GE_58_59",
+      "class": "GATED_WEIGHTED_THRESHOLD",
+      "route": "DEALBREAKER_FIRST_WEIGHTED_LOWER_BOUND_COMPILATION_OVER_FROZEN_450_X3_EXECUTIONS__STOP_WHEN_THRESHOLD_FORCED"
+    },
+    {
+      "id": "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "class": "RELATIVE_RATING_THRESHOLD",
+      "route": "REUSE_EXACT_AA_BRIEFCASE_RELATIVE_SCORE_RECEIPT_FROM_PROWORK_ONLY_IF_ARTIFACT_SCOPE_BINDING_IS_INDEPENDENTLY_VERIFIED"
+    },
+    {
+      "id": "MYSTERYMECHANISM_GE_49_55",
+      "class": "ADDITIVE_THRESHOLD",
+      "route": "OWNER_VALS_SCORE_RECEIPT_OR_SCOPE_COMPLETE_STRONGER_PROOF__H100_STRUCTURAL_PROGRESS_ALONE_ZERO_CREDIT"
+    },
+    {
+      "id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "class": "MATCHED_NONINFERIORITY",
+      "route": "BRAIN_CONSERVATIVE_LOWER_BOUND_GE_OPUS_UPPER_BOUND__SYNTHESIS_SCOPE_SIDE_ALREADY_CLOSED"
+    },
+    {
+      "id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "class": "MATCHED_NONINFERIORITY",
+      "route": "MATCHED_MARGIN_CERTIFICATE_AFTER_ROOT3_SCOPE_SIDE_CLOSES_OR_SCOPE_COMPLETE_STRONGER_PROOF"
+    },
+    {
+      "id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "class": "MATCHED_NONINFERIORITY",
+      "route": "MATCHED_MARGIN_CERTIFICATE_AFTER_ROOT3_SCOPE_SIDE_CLOSES_OR_SCOPE_COMPLETE_STRONGER_PROOF"
+    },
+    {
+      "id": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "class": "MATCHED_NONINFERIORITY",
+      "route": "MATCHED_MARGIN_CERTIFICATE_AFTER_COMPONENT_SCOPE_PROOFS_AND_ROOT3_SCOPE_SIDE_CLOSE"
+    }
+  ],
+  "cross_predicate_reuse": [
+    {
+      "shared_surface": "AA-Briefcase v1.1",
+      "predicates": [
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "rule": "ONE_SCORE_RECEIPT_CAN_SATISFY_BOTH_ONLY_IF_EXACT_HARNESS_SCORE_IDENTITY_AND_EACH_PREDICATE_SCOPE_BINDING_ARE_SEPARATELY_VERIFIED"
+    }
+  ],
+  "proof_precedence": [
+    "FORMAL_IMPLICATION_OR_OBJECTIVE_CEILING",
+    "EXISTING_CONTENT_ADDRESSED_RECEIPT",
+    "DETERMINISTIC_SCORER_OR_INVARIANT_CERTIFIED_MASS",
+    "OWNER_SIDE_BLIND_SCORE_RECEIPT",
+    "MINIMUM_EMPIRICAL_RESIDUAL",
+    "FULL_BENCHMARK"
+  ],
+  "hard_rules": [
+    "NO_BENCHMARK_COMPLETION_REQUIREMENT_WHEN_A_SOUND_THRESHOLD_CERTIFICATE_ALREADY_SETTLES_THE_FROZEN_PREDICATE",
+    "NO_RELATIVE_ELO_OR_RATING_INFERENCE_FROM_ABSOLUTE_BEHAVIOR_WITHOUT_VERIFIED_RELATIVE_SCORE_BRIDGE",
+    "NO_PUBLIC_PRIVATE_SUBSTITUTION_WITHOUT_EXACT_OR_SCOPE_SAFE_STRONGER_IMPLICATION",
+    "NO_DOUBLE_COUNTING_OVERLAPPING_TASK_CASE_OR_COMPONENT_COVERAGE",
+    "NO_FRESH_REALITY_BEFORE_SEPARATE_EXPLICIT_AUTHORITY",
+    "NO_TARGET_OR_SCORER_REBASE_AFTER_BRAIN_RESULTS",
+    "RECOMPUTE_MINIMUM_CUT_AFTER_EVERY_VERIFIED_DELTA",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT_FROM_THIS_COMPILER_OR_MANIFEST",
+    "NO_LIVEBENCH_IF_GE_65_7_ROOT2_WORK_AFTER_CLEAN_ATOMIC_PROMOTION",
+    "FAIL_CLOSED_IF_CURRENT_ROOT_PARTITION_DIFFERS_FROM_0_ROOT1_15_ROOT2_ONLY_6_ROOT3_ONLY_3_MIXED_OR_IF_CURRENT_ROOT2_TOUCHING_SET_DIFFERS_FROM_THE_BOUND_18"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "scheduling_authority": false,
+  "independent_verification_required": true
+}
