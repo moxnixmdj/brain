@@ -663,6 +663,39 @@
       "sound_no_evidence_action": "ABSTAIN",
       "persistent_learned_bytes_required_by_theorem": 0,
       "deduction": "ARBITRARY_NOVEL_TERM_CORRECTNESS_REQUIRES_DISTINGUISHING_INFORMATION__WITHOUT IT THE RESIDUAL IS INFORMATION_AVAILABILITY NOT MODEL_SIZE_OR_INTERNAL_REASONING"
+    },
+    "complete_unary_chain_search": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__THREE_OF_THREE_FRESH_DEPTH4_STRUCTURES__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_COMPLETE_UNARY_CHAIN_SEARCH_PRECOMMIT_V1.json",
+      "prior_failure": "canonical/verification/H100_ITERATIVE_DEPTH_ESCAPE_SECOND_CARRIER_FAILURE_20261005_V1.json",
+      "verification": "canonical/verification/H100_COMPLETE_UNARY_CHAIN_SEARCH_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "runtime": "canonical/runtime/h100_complete_unary_chain_search_v1.py",
+      "task_count": 3,
+      "enumeration_count_per_task": 1554,
+      "total_chains_evaluated": 4662,
+      "all_first_exact_depth": 4,
+      "search_wall_clock_seconds_range": [
+        0.17544760700548068,
+        0.18400662299973192
+      ],
+      "persistent_learned_bytes": 0,
+      "deduction": "TARGET_INDEPENDENT_COMPLETE_UNARY_CHAIN_ENUMERATION_REMOVED_THE_OBSERVED_BEAM_PREFIX_PRUNING_FAILURE_FOR_THREE_FRESH_DEPTH4_FAMILIES_WITH_SMALL_MEASURED_WALL_CLOCK_AND_ZERO_LEARNED_STATE"
+    },
+    "verified_capability_registry_v8": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__TWENTY_ONE_ENTRIES__DEPTH4_CHAIN_RATCHET_CLOSED__ZERO_CREDIT",
+      "runtime": "canonical/runtime/h100_verified_capability_registry_v8.py",
+      "verification": "canonical/verification/H100_REGISTRY_V8_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "entry_count": 21,
+      "added_capabilities": [
+        "CAP_AFFINE_CHAIN_SQUARE_LOG_SQRT_SAT_V1",
+        "CAP_AFFINE_CHAIN_SAT_SQUARE_LOG_SQRT_V1",
+        "CAP_AFFINE_CHAIN_LOG_SAT_SQRT_LOG_V1"
+      ],
+      "all_three_transfer_library_hits": true,
+      "raw_synthesis_attempts_before_hit": 0,
+      "unverified_depth4_chain_fail_closed": true,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE_DEPTH4_SEARCH_REPAIR_TO_TRANSFER_TO_COMPILE_TO_ZERO_RAW_SEARCH_REUSE_LOOP_IS_CLOSED_FOR_THREE_FRESH_STRUCTURES"
     }
   },
   "next_structural_residuals_ranked": [
@@ -700,7 +733,9 @@
     "TREAT_ALREADY_VERIFIED_NON_SYNTHETIC_CAPABILITIES_AS_LIBRARY_REFERENCES_DURING_SEARCH__DO_NOT_REDISCOVER_THEIR_FULL_IMPLEMENTATIONS_UNLESS_THE_CONTENT_ADDRESSED_REGISTRY_ENTRY_IS_INVALIDATED",
     "DO_NOT_CLAIM_UNBYPASSABLE_EXTERNAL_EFFECT_MEDIATION_FROM_REPO_LEVEL_BROKER_CODE_ALONE__HOST_OR_PROVIDER_MUST_PHYSICALLY_ENFORCE_THE_GATE",
     "FOR_AUTHENTICATED_MUTATIONS_REQUIRE_CONTENT_ADDRESSED_PREWRITE_AUTHORITY EXACT_SCOPE IDEMPOTENCY AUDIT AND FAIL_CLOSED_REPLAY__SEPARATELY_REPORT_PROVIDER_CREDENTIAL_BREADTH",
-    "DO_NOT_TREAT_ABSENT_DISTINGUISHING_LEXICAL_INFORMATION_AS_A_MODEL_CAPABILITY_DEFECT__FAIL_CLOSED_ABSTENTION_IS_THE_SOUND_GENERAL_ACTION"
+    "DO_NOT_TREAT_ABSENT_DISTINGUISHING_LEXICAL_INFORMATION_AS_A_MODEL_CAPABILITY_DEFECT__FAIL_CLOSED_ABSTENTION_IS_THE_SOUND_GENERAL_ACTION",
+    "WHEN_SCORE_PRUNED_SEARCH_FAILS_DESPITE_TARGET_STRUCTURE_BEING_IN_THE_OPERATOR_CLOSURE__TEST_STRUCTURAL_REACHABILITY BEFORE ATTRIBUTING_FAILURE_TO_MODEL_CAPABILITY",
+    "USE_COMPLETE_BOUNDED_ENUMERATION_WHEN_THE_STRUCTURAL_SLICE_IS_SMALL_ENOUGH__THEN_COMPILE_VERIFIED_STRUCTURES_BACK_INTO_THE_LIBRARY"
   ],
   "learned_byte_ladder": {
     "current_rung_bytes": 0,
@@ -826,7 +861,12 @@
     "lexical_no_evidence_information_bound_proved": true,
     "lexical_no_evidence_randomized_minimax_worst_case_accuracy": 0.5,
     "arbitrary_novel_term_correctness_without_distinguishing_information_possible": false,
-    "lexical_remaining_boundary_is_external_or_contextual_information": true
+    "lexical_remaining_boundary_is_external_or_contextual_information": true,
+    "beam_pruning_depth4_failure_constructively_observed": true,
+    "complete_depth4_unary_chain_search_three_fresh_families_verified": true,
+    "registry_v8_depth4_chain_ratchet_verified": true,
+    "registry_v8_entry_count": 21,
+    "learned_byte_rung_still_zero_after_registry_v8": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
