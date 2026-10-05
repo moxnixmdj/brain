@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_UNIVERSAL_CEILING_COUNTEREXAMPLE_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FAIL_CLOSED__CURRENT_UNIVERSAL_CEILING_CANDIDATE_NOT_PROVED__STATIC_COUNTEREXAMPLE_TO_INVARIANT_AND_INDEPENDENT_ACCEPTANCE_PREMISES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "audited_candidate": {
+    "path": "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_PERFORMANCE_CEILING_CANDIDATE_V1.json",
+    "git_blob_sha": "160ab6fbd05d1f29ffa5ea6bd9054fdde4b780e0"
+  },
+  "audited_runtime": {
+    "path": "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
+    "git_blob_sha": "79d3896818b03223348f05adf4fdcd574f6f355e"
+  },
+  "behavior_contract": {
+    "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "load_bearing_success_condition": "coverage is complete, dimensions/types/invariants are consistent, and independently generated acceptance checks cover each material graph edge",
+    "load_bearing_verification_route": "freeze graph before final builder validation; check lineage coverage, intermediate invariants and structurally independent consequences"
+  },
+  "independent_static_findings": [
+    {
+      "id": "F1_INVARIANTS_ARE_TRANSPORTED_NOT_VERIFIED",
+      "severity": "THEOREM_BREAKING",
+      "runtime_fact": "For every declared invariant the compiler validates only that the row is a mapping and that kind and statement are nonempty strings, then copies those strings into graph_rows. No invariant predicate is evaluated against inputs, operator semantics, outputs, or any independent oracle.",
+      "candidate_conflict": "The ceiling theorem states that declared invariants are preserved and concludes universal success on the frozen behavior relation.",
+      "contract_conflict": "The behavior success condition requires invariants to be consistent and the verification route requires checking intermediate invariants.",
+      "deduction": "A compiler that merely records an invariant statement cannot universally certify that the invariant holds. Therefore the claimed universal soundness/ceiling conclusion does not follow from the exact runtime."
+    },
+    {
+      "id": "F2_ACCEPTANCE_CHECKS_ARE_STATIC_LABELS_NOT_INDEPENDENT_CONSEQUENCES",
+      "severity": "THEOREM_BREAKING",
+      "runtime_fact": "For each rule the compiler emits the same six literal acceptance-check labels. It does not synthesize, execute, or bind an independently generated consequence for any material edge.",
+      "candidate_conflict": "The candidate treats graph materialization plus these structural checks as universal success.",
+      "contract_conflict": "The behavior contract requires independently generated acceptance checks for each material edge and explicitly rejects builder-derived checks that merely recompute the same graph.",
+      "deduction": "Static check names emitted by the builder are not evidence of structural independence. The exact runtime therefore does not implement the full behavior relation it is claimed to universally ceiling."
+    },
+    {
+      "id": "F3_OPERATOR_SEMANTIC_SIGNATURE_NOT_MACHINE_BOUND",
+      "severity": "SCOPE_BREAKING",
+      "runtime_fact": "The runtime validates operator only as a nonempty string token. It has no operator semantic-signature object and performs no semantic relation check connecting operator, input contracts, output contract, or invariants.",
+      "source_conflict": "The runtime module docstring says unknown operator identity is acceptable because its semantic signature is part of the normalized rule input, while the executable compile_graph contract contains no such signature field.",
+      "deduction": "The proof may treat semantic normalization as upstream, but the claimed machine-checked frozen boundary does not bind the purported semantic signature. A malformed or semantically incompatible operator token can therefore pass the graph compiler whenever metadata shape checks pass."
+    }
+  ],
+  "constructive_witness": {
+    "purpose": "Exhibit an input shape accepted by the exact runtime's structural guards while the load-bearing invariant and independent-acceptance obligations remain unproved.",
+    "input": {
+      "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "task": {
+        "inputs": [
+          {"id": "x", "type": "NUMBER", "dimension": "LENGTH"}
+        ],
+        "requirements": [
+          {"id": "REQ_POSITIVE_OUTPUT", "source_kind": "constraint", "status": "applicable"}
+        ],
+        "normalized_rules": [
+          {
+            "id": "R1",
+            "inputs": ["x"],
+            "output": "y",
+            "operator": "SEMANTICALLY_UNBOUND_OPERATOR",
+            "input_contracts": [
+              {"type": "NUMBER", "dimension": "LENGTH"}
+            ],
+            "type": "NUMBER",
+            "dimension": "LENGTH",
+            "consumes_requirements": ["REQ_POSITIVE_OUTPUT"],
+            "invariants": [
+              {"kind": "VALUE_CONSTRAINT", "statement": "y MUST BE STRICTLY POSITIVE"}
+            ]
+          }
+        ],
+        "required_outputs": ["y"]
+      }
+    },
+    "static_path_proof": [
+      "x is admitted as a unique typed input.",
+      "REQ_POSITIVE_OUTPUT is admitted as an applicable supported-source requirement.",
+      "R1 becomes ready because x exists.",
+      "operator passes because it is only required to be a nonempty token.",
+      "input type/dimension contract matches x.",
+      "output metadata is accepted as nonempty type/dimension.",
+      "REQ_POSITIVE_OUTPUT is marked consumed by R1.",
+      "the invariant row passes because kind and statement are nonempty strings; its truth is never evaluated.",
+      "y is inserted as a derived node, so required_outputs traceability passes.",
+      "the compiler therefore has no remaining structural reason to reject this instance even though it has proved neither the declared positivity invariant nor an independent consequence of R1."
+    ],
+    "falsified_claim": "THE_EXACT_RUNTIME_DOES_NOT_ESTABLISH_FOR_EVERY_ADMISSIBLE_INSTANCE_THAT_DECLARED_INVARIANTS_HOLD_AND_INDEPENDENT_EDGE_ACCEPTANCE_CONSEQUENCES_EXIST."
+  },
+  "effect_on_current_frontier": {
+    "candidate_result_brain_lower_bound_1": "NOT_AUTHORIZED",
+    "theoretical_upper_bound_1": "TRIVIAL_METRIC_BOUND_ONLY__DOES_NOT_CREATE_EQUALITY",
+    "standalone_performance_obligation": "REMAINS_OPEN",
+    "legacy_atomic_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_effect": "NONE_EXCEPT_PREVENT_FALSE_PROMOTION"
+  },
+  "minimum_repair_cut": [
+    "Freeze an executable invariant semantics contract or explicitly narrow the behavior contract so invariant truth is not part of the claimed relation.",
+    "Bind operator semantic signatures in machine-readable normalized-rule inputs and validate the signature relation needed by the theorem, or explicitly remove semantic-signature claims from the proof boundary.",
+    "Generate and verify edge consequences through an independence mechanism that is not merely a literal checklist emitted by the same builder.",
+    "Only then restate and independently verify the universal theorem over the exact repaired runtime and exact behavior relation."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_NORMALIZED_RULE_GRAPH_COMPILER_IS_USELESS",
+    "NO_CLAIM_TYPE_DIMENSION_LINEAGE_OR_CYCLE_CHECKS_ARE_INVALID",
+    "NO_CLAIM_SEMANTIC_RULE_EXTRACTION_MUST_MOVE_INSIDE_THIS_RUNTIME",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
