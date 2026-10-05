@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHARTREADER_KPGROUPING_CHECKPOINT_PROVENANCE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__DRIVE_FILE_IDENTITY_PLUS_EXACT_ARCHITECTURE_COMPATIBILITY__TENSOR_HASH_STILL_UNAVAILABLE__ZERO_CREDIT",
+  "provider_observation": {
+    "file_id": "11Z6cNl-5dcpbuDq9N_ZrB7rPUoJvAH_u",
+    "file_name": "KPGrouping_best.pkl",
+    "mime_type": "application/x-zip",
+    "size_bytes": 799462918,
+    "created_time": "2024-06-03T05:03:25.687Z",
+    "modified_time": "2024-06-03T05:05:05.497Z"
+  },
+  "checks": {
+    "downstream_readme_binds_exact_drive_id_and_filename": true,
+    "kpgrouping_byte_identical_to_upstream": true,
+    "kpdetection_byte_identical_to_upstream": true,
+    "model_utils_byte_identical_to_upstream": true,
+    "utils_byte_identical_to_upstream": true,
+    "kp_core_only_five_executable_diffs": true,
+    "kp_core_diffs_are_threshold_or_device_only": true,
+    "notebook_records_exact_199641774_parameter_network": true,
+    "notebook_records_loading_exact_kpgrouping_best_path": true,
+    "notebook_records_completed_one_image_inference": true,
+    "loader_is_plain_pytorch_state_dict": true,
+    "file_size_consistent_with_full_fp32_state_dict": true,
+    "tensor_payload_content_addressed": false
+  },
+  "exact_blobs": {
+    "downstream_readme": "d6178a8055aefcf6395eae3505a2de0e76adb207",
+    "downstream_notebook": "3ec30f8b11a250a66c37cdbba0d3f2b2490db570",
+    "downstream_model_factory": "b73f517760e209bbce5f71b60463f48f1a4aea6b",
+    "upstream_kp": "9448735e64d751981c055f1a6badce70e11bd8fc",
+    "downstream_kp": "01babdb1b74d8ad6f57a5b2b980299a25685ae06",
+    "exact_shared_model_files": {
+      "models/KPGrouping.py": "d5f5716600035404695c19795fe8c513a19f3b19",
+      "models/KPDetection.py": "34592b62bc2b93ff8b7272d639fa0da00c5a8845",
+      "models/model_utils.py": "ac77186af5726330310f45e2c1fab9bd8012f297",
+      "models/py_utils/utils.py": "f3277eba04e3ce8886bed287caf8e1ac5bf030e1"
+    }
+  },
+  "recomputed_size": {
+    "param_count": 199641774,
+    "float32_param_bytes": 798567096,
+    "bn_buffer_bytes": 479520,
+    "raw_tensor_bytes": 799046616,
+    "file_bytes": 799462918,
+    "serialization_overhead_bytes": 416302
+  },
+  "transport_boundary": {
+    "raw_connector_limit_bytes": 268435456,
+    "file_bytes": 799462918,
+    "materialization_succeeded": false,
+    "range_read_available": false
+  },
+  "conclusion": "STRONG_CHECKPOINT_COMPATIBILITY_CANDIDATE_EXISTS_AND_IS_PROVIDER_IDENTIFIED__NEXT_IRREDUCIBLE_STEP_IS_BYTE_MATERIALIZATION_HASH_AND_STATE_DICT_INSPECTION_ON_A_ZERO_COST_CARRIER",
+  "hard_nonclaims": [
+    "NO_TENSOR_HASH",
+    "NO_TENSOR_INSPECTION",
+    "NO_PERFORMANCE_CREDIT",
+    "NO_H100_RUNG_ADVANCE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "h100_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
