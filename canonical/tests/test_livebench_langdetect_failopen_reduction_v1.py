@@ -40,13 +40,10 @@ def test_unsafe_nonascii_is_rejected():
         raise AssertionError("unsafe non-ASCII input was accepted")
 
 
-def test_exact_kernel_collapse():
-    out = r.verify()
-    red = out["kernel_reduction"]
-    assert red["prior_conservative_total"] == 64
-    assert red["prior_language_sensitive"] == 31
-    assert red["language_residual_hard_kernel_count"] == 8
-    assert red["candidate_total_after_failopen"] == 33
-    assert red["candidate_reduction_vs_prior"] == 31
-    assert out["acceptance_credit"] is False
-    assert out["independent_verification_required"] is True
+def test_failopen_theorem_is_revoked_by_unbound_logging_handler():
+    try:
+        r.verify()
+    except AssertionError as exc:
+        assert "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR" in str(exc)
+    else:
+        raise AssertionError("revoked fail-open theorem unexpectedly promoted")
