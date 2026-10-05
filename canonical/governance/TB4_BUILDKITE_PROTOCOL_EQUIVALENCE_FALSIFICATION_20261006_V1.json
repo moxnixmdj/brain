@@ -31,7 +31,8 @@
     "observed_schema_versions": [
       "1.0",
       "1.1",
-      "2.0"
+      "2.0",
+      "UNDECLARED"
     ],
     "task_blob_bindings": [
       {
@@ -65,7 +66,8 @@
         "protocol": [
           "SEPARATE_VERIFIER",
           "SERVICE_SCOPED_ARTIFACT",
-          "MCP_SSE_SIDECAR"
+          "MCP_SSE_SIDECAR",
+          "SCHEMA_VERSION_UNDECLARED_DEFAULT"
         ]
       },
       {
@@ -101,7 +103,8 @@
           "ARTIFACT_HANDOFF"
         ]
       }
-    ]
+    ],
+    "schema_version_note": "medical-claims-processing omits schema_version in its frozen task.toml; exact Harbor runtime/default semantics are therefore load-bearing and must be content-addressed rather than inferred."
   },
   "public_semantics_sources": [
     {
