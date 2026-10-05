@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "receipt_id": "PARAMETRIC-INTERFACE-EXECUTOR-QUOTIENT-DECISION-20261005-V2",
+  "date": "2026-10-05",
+  "status": "DURABLE_INDEPENDENT_REASONING__ZERO_CREDIT__CURRENT_BASE_BOUND",
+  "canonical_base_commit": "60af21915796e665ebe16f4d6f298beb66e49562",
+  "real_objective": "Reduce the literal Opus 5.5 capability target to causally intrinsic model behavior without losing any real behavior and without requiring premature completeness of the model interface alphabet.",
+  "governing_invariants": [
+    "ALL_USEFUL_OPUS55_TARGET_UNCHANGED.",
+    "BRAIN_MUST_OWN_CAPABILITY_MECHANISMS_GE_OPUS55.",
+    "EXTERNAL_EXECUTOR_COMPUTATION_IS_NOT_MODEL_CAPABILITY_WITHOUT_CAUSAL_MODEL_ATTRIBUTION.",
+    "NEW_LOAD_BEARING_MODEL_STATE_CHANNELS_MUST_BE_ADDED_TO_THE_TARGET_STATE_DOMAIN.",
+    "ZERO_CAPABILITY_CREDIT_FOR_ONTOLOGY_OR_PROOF_COMPRESSION_ALONE."
+  ],
+  "material_premises": [
+    "Current first-party tool documentation says the model emits requests while client code or Anthropic servers execute tool operations.",
+    "For user-defined client tools the model sees schema and returned result, not implementation code.",
+    "Current Opus 5.5 documentation exposes thinking blocks/signatures as load-bearing carried-forward state in tool-use loops.",
+    "Current canonical intrinsic-profile projection already separates Opus55-served behavior from fallback/classifier/tool-backend behavior.",
+    "A causal quotient over executor variants can be stated relative to the true model-visible state I_STAR, so it remains sound when I_STAR gains newly discovered channels."
+  ],
+  "evidence_refs": [
+    "canonical/reasoning/2026-10-05_OPUS55_INTERFACE_POLICY_NORMAL_FORM_V1.json",
+    "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_PROFILE_PROJECTION_20261005_V1.json",
+    "canonical/governance/OPUS55_FIXED_INTERFACE_THINKING_CHANNEL_COUNTEREXAMPLE_20261005_V1.json",
+    "canonical/verification/OPUS55_PARAMETRIC_INTERFACE_EXECUTOR_QUOTIENT_VERIFICATION_20261005_V2.json",
+    "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works",
+    "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference",
+    "https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools",
+    "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+    "https://platform.claude.com/docs/en/models/opus-5-5/migration-guide",
+    "https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback"
+  ],
+  "conclusion": {
+    "theorem": "PARAMETRIC_EXECUTOR_SUBSTITUTION_INVARIANCE_QUOTIENT",
+    "core": "Intrinsic Opus tool capability is invariant under substitutions of external executors that preserve the model-visible trace relative to the true load-bearing model state I_STAR.",
+    "repair_over_v1": "Do not freeze I_STAR to text plus tool blocks. Thinking/signature and any later verified load-bearing channel join I_STAR without changing the quotient argument.",
+    "deletion": "External backend implementation variants do not generate distinct intrinsic Opus capability obligations merely because Opus can control them.",
+    "preserve": "All model-side orchestration, semantic judgment, state handling, direct modalities, and profile-specific Opus55-served behaviors remain target obligations.",
+    "terminal_truth": "This is target-space compression, not terminal completion; literal target completeness and current acceptance residuals remain open."
+  },
+  "selected_route": "REUSE_EXISTING_CAUSAL_PROJECTIONS__PARAMETERIZE_OVER_TRUE_INTERFACE_STATE__INDEPENDENTLY_FALSIFY__PRESERVE_ZERO_CREDIT",
+  "rejected_material_alternatives": [
+    {
+      "route": "FIXED_INTERFACE_QUOTIENT",
+      "reason": "Falsified as a completeness assumption by the signed thinking-state channel counterexample."
+    },
+    {
+      "route": "COUNT_EVERY_TOOL_BACKEND_AS_INTRINSIC_CAPABILITY",
+      "reason": "Causal misattribution and artificial open-ended target growth."
+    },
+    {
+      "route": "PROJECT_ALL_DEPLOYMENT_BEHAVIOR_OUT",
+      "reason": "Unsound; Opus55-generated refusals, scope judgment, profile-specific served behavior, and other intrinsic behavior must remain."
+    },
+    {
+      "route": "DECLARE_19_FAMILY_ENVELOPE_COMPLETE",
+      "reason": "No complete target-domain witness follows from this theorem."
+    }
+  ],
+  "uncertainties": [
+    "I_STAR is not yet proven completely enumerated.",
+    "Private or undocumented first-party surfaces may reveal additional load-bearing channels.",
+    "Lossless mapping from the intrinsic behavior universe to current family/evaluation structure remains separate.",
+    "Literal finality still requires a sound complete target-domain premise."
+  ],
+  "assumptions": [
+    "First-party documentation correctly describes the checked public execution boundaries.",
+    "Capability attribution is causal with respect to model-visible and carried-forward state.",
+    "Trace equivalence is evaluated over all load-bearing model-visible state, not merely displayed text."
+  ],
+  "non_goals": [
+    "No raw chain-of-thought reproduction requirement.",
+    "No claim thinking signature bytes themselves are a capability to clone.",
+    "No held-out task execution.",
+    "No acceptance, family, capability, or ownership promotion."
+  ],
+  "next_action": "RECONCILE_THE_PARAMETRIC_QUOTIENT_INTO_TARGET_ONTOLOGY_AND_USE_IT_AS_A_DELETION_GATE_WHEN_NEW_TOOL_OR_DEPLOYMENT_SURFACES_ARE_DISCOVERED__THEN_KEEP_CURRENT_24_OPEN_ACCEPTANCE_FRONTIER_SEPARATE.",
+  "supersession_conditions": [
+    "A verified Opus55 behavior causally depends on executor internals without any model-visible or carried-forward trace difference.",
+    "The terminal target is explicitly changed from Opus55 capability to complete deployed-system cloning.",
+    "A stronger verified causal target theorem subsumes this quotient."
+  ],
+  "supersedes": [
+    "BRANCH_ONLY canonical/reasoning/2026-10-05_INTERFACE_POLICY_NORMAL_FORM_INDEPENDENT_VERIFICATION_DECISION_V1.json"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false
+}
