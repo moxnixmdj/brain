@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
   "action_id": "UNKNOWN-DOMAIN-V6-SUBCLASS-REVOCATION-REPAIR-20261005-V1",
-  "status": "CRITICAL_PATH__ZERO_REALITY__FALSE_CREDIT_REVOCATION_AND_REPAIR__INDEPENDENT_VERIFICATION_PENDING",
+  "status": "CRITICAL_PATH__ZERO_REALITY__FALSE_CREDIT_REVOKED__REPAIR_SCOPE_QUANTIFIER_BLOCKED__INDEPENDENT_VERIFICATION_PENDING",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "a3417a4e88dba3b830dc729584fd6f831baab3a9",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
@@ -28,7 +28,7 @@
       ]
     },
     "obs_blocker": {
-      "surviving_causal_blocker": "ISINSTANCE_ACCEPTED_STR_SUBCLASS_CAN_OVERRIDE_INSTANCE_STRIP_OR_ENCODE"
+      "surviving_causal_blocker": "GENUINE_SUBCLASS_OVERRIDE_PARTIALITY_REPAIRED__BUT_ACTUAL_TYPE_GATE_NARROWS_THE_LITERAL_PRE_REPAIR_ISINSTANCE_ADMITTED_DOMAIN"
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -38,10 +38,10 @@
         "CONFIGURE_BUILTIN_DESCRIPTOR_CALLS"
       ],
       "selected_surviving_route": "BUILTIN_STR_DESCRIPTOR_PLUS_BUFFER_PROTOCOL_REPAIR_WITH_ADVERSARIAL_REGRESSION",
-      "fastest_sufficient": true
+      "fastest_sufficient": false
     },
     "obs_verification": {
-      "falsification_condition": "ANY_ADMITTED_SUBCLASS_REMAINS_PARTIAL__ANY_BOUND_REGRESSION_FAILS__ANY_INDEPENDENT_CONTENT_BOUND_CHECK_FAILS"
+      "falsification_condition": "ANY_ADMITTED_SUBCLASS_REMAINS_PARTIAL__ANY_PRE_REPAIR_ADMITTED_VALUE_IS_SILENTLY_DROPPED_WITHOUT_CONTRACT_AUTHORITY__ANY_BOUND_REGRESSION_FAILS__ANY_INDEPENDENT_CONTENT_BOUND_CHECK_FAILS"
     },
     "obs_inherited_system": {
       "unchanged_components_reused": true
@@ -52,11 +52,11 @@
   },
   "behavioral_contract": {
     "behavior_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT__TOTAL_EXACT_EVALUATOR__SUBCLASS_SAFE",
-    "inputs": "All values admitted by the existing isinstance-based beacon/secret gates, including str and bytes subclasses.",
+    "inputs": "The exact authoritative Unknown-Domain input quantifier must be frozen first. Current candidate covers genuine runtime str/bytes hierarchy values, but does not preserve every value that can satisfy the pre-repair isinstance-based path via __class__ spoofing.",
     "environment_state": "Repaired Generator V5 + Generator V4 + Candidate V3 + exact harness/scorer.",
     "allowed_information": "Existing zero-reality proof inputs only; no terminal/production cases.",
     "required_output_or_action": "Canonicalization/emission must be total over admitted values and all bound evaluator semantics must remain exact.",
-    "success_condition": "Adversarial subclasses cannot trigger override partiality; exact V6 proof bindings pass; independent verification passes.",
+    "success_condition": "No genuine subclass override can trigger partiality; no accepted-input scope is silently narrowed; exact V6 proof bindings pass; independent verification passes.",
     "failure_condition": "Any admitted value raises due to overridable subclass hooks or any existing exact evaluator property regresses.",
     "terminal_consequence": "One atomic predicate may become eligible for re-promotion only after separate independent reduction.",
     "verification_route": "Adversarial subclass regression + exact V6 proof + independent PR verifier.",
@@ -64,7 +64,7 @@
     "scope": "EXACT_BOUND_EVALUATOR_ONLY"
   },
   "terminal_proof_control": {
-    "proof_obligation": "Totality over the literal admitted isinstance domain.",
+    "proof_obligation": "First resolve the exact accepted-input quantifier; then prove totality over that frozen domain without silent narrowing.",
     "hole_type": "UNIVERSAL_INPUT_DOMAIN_PARTIALITY",
     "expected_certificate_or_receipt": "Independent content-bound pass on repaired blobs with explicit subclass counterexample coverage.",
     "validator": "Independent CI/runner plus separate acceptance reduction.",
