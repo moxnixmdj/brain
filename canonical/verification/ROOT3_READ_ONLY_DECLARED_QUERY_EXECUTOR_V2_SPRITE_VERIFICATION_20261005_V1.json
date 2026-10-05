@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_READ_ONLY_DECLARED_QUERY_EXECUTOR_V2_SPRITE_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__CURRENT_8_OF_8_READ_ONLY_DECLARED_QUERY_EXECUTOR_COVERAGE__3_LEGACY_APT_EXACT_SEMANTICS__ZERO_CREDIT",
+  "base_main_commit": "2de11cb236a4ea294d8df73da9c70aafd8a5bc81",
+  "subject": {
+    "apt_legacy_executor": {
+      "path": "canonical/runtime/root3_read_only_apt_legacy_executor_v1.py",
+      "git_blob_sha": "d87957495a93ebadd9042e3b1aacc4e17c697a5b"
+    },
+    "composite_executor": {
+      "path": "canonical/runtime/root3_read_only_declared_query_executor_v2.py",
+      "git_blob_sha": "a86f78c0732b50c1a93f9364a937fefe6f776b26"
+    },
+    "static_tests": {
+      "path": "canonical/tests/test_root3_read_only_declared_query_executor_v2.py",
+      "git_blob_sha": "91567b1da6d6b315ef633fb7ee5259c37981c598"
+    }
+  },
+  "bound_current_dependencies": {
+    "process_universe_activation": {
+      "path": "canonical/governance/ROOT3_PROCESS_UNIVERSE_22_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "dad1155679fd9a374037f65175a6ca3eb1fe0397"
+    },
+    "effect_registry": {
+      "path": "canonical/runtime/root3_subprocess_effect_class_registry_v1.py",
+      "git_blob_sha": "1756bcdfe121cf2c79904600647488b7149b33fd"
+    },
+    "child_registry": {
+      "path": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+      "git_blob_sha": "d12adff13a91e9f3ae3b3d7bcb1f7922dcd40552"
+    },
+    "prior_local_executor": {
+      "path": "canonical/runtime/root3_read_only_local_file_query_executor_v1.py",
+      "git_blob_sha": "74166a80c47ed8ddce7bae7b61a3a3610ac2ef8a"
+    },
+    "prior_local_verification": {
+      "path": "canonical/verification/ROOT3_READ_ONLY_LOCAL_FILE_QUERY_EXECUTOR_SPRITE_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "7ed8652cca4bdb5b1a1c54c8312f64f84a77e6f2"
+    },
+    "apt_snapshot": {
+      "path": "canonical/runtime/apt_metadata_snapshot_v1.py",
+      "git_blob_sha": "426189ed3a8c37d3ecb515cc8f89ab31e927fd24"
+    },
+    "namespace_launcher": {
+      "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+      "git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+    }
+  },
+  "isolated_sprite": {
+    "sprite_id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+    "exact_branch_runtime_blob_check": true,
+    "static_test_result": "5_OF_5_PASS",
+    "semantic_replay_result": "PASS",
+    "current_read_only_sites": 8,
+    "bound_read_only_sites": 8,
+    "local_file_sites": 5,
+    "legacy_apt_sites": 3,
+    "metadata_snapshot_unchanged": true,
+    "real_local_file_route_pass": true,
+    "profile_swap_denied_before_spawn": true,
+    "unknown_site_denied_before_spawn": true,
+    "private_network_namespace_required": true,
+    "fixed_apt_dpkg_metadata_mounts_read_only": true
+  },
+  "apt_exact_semantics": [
+    {
+      "profile": "APT_SEARCH",
+      "stdout_bytes": 13386,
+      "stdout_sha256": "71e62d9367455e94625464b1f7de79f68be857d2139667e6185611208606dc16"
+    },
+    {
+      "profile": "APT_POLICY",
+      "stdout_bytes": 398,
+      "stdout_sha256": "88e0a2ec4c13a4a39228e20a7a653fc773b74544c9c9f48ce7487caf9dbd9364"
+    },
+    {
+      "profile": "APT_SHOW",
+      "stdout_bytes": 1963,
+      "stdout_sha256": "bc5b064d7b1de70f9424468018bcf21d954282383ad4bb62bb48a7aeb71933ca"
+    }
+  ],
+  "truth_boundary": {
+    "proves_current_read_only_executor_coverage_complete": true,
+    "proves_three_residual_apt_outputs_equal_host_for_verified_cases": true,
+    "proves_metadata_snapshot_unchanged_for_verified_replay": true,
+    "proves_global_mediator_binding_active": false,
+    "proves_root3_c1_complete": false,
+    "proves_root3_c2_complete": false,
+    "proves_root3_c3_complete": false,
+    "proves_terminal_predicate": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
