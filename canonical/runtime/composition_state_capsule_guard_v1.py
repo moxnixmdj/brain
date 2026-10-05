@@ -7,6 +7,7 @@ completeness; those remain separate premises.
 """
 from __future__ import annotations
 
+import copy
 import importlib.util
 import pathlib
 import sys
@@ -55,11 +56,20 @@ def _result_refs(value: Any) -> list[dict[str, Any]]:
                 raise CompositionGuardError("RESULT_REFERENCE_INVALID")
             cycle = spec.get("cycle")
             field = spec.get("field")
+            effect = spec.get("effect")
             if not isinstance(cycle, int) or isinstance(cycle, bool) or cycle < 0:
                 raise CompositionGuardError("RESULT_REFERENCE_CYCLE_INVALID")
             if not isinstance(field, str) or not field.strip():
                 raise CompositionGuardError("RESULT_REFERENCE_FIELD_REQUIRED")
-            out.append({"cycle": cycle, "field": field.strip()})
+            if effect is not None and (
+                not isinstance(effect, str) or not effect.strip()
+            ):
+                raise CompositionGuardError("RESULT_REFERENCE_EFFECT_INVALID")
+            out.append({
+                "cycle": cycle,
+                "field": field.strip(),
+                "effect": effect.strip() if isinstance(effect, str) else None,
+            })
             return out
         for item in value.values():
             out.extend(_result_refs(item))
@@ -119,15 +129,26 @@ def validate_plan(
         if not isinstance(got_bindings, Mapping) or dict(got_bindings) != expected_bindings:
             raise CompositionGuardError(f"CONTRACT_{index}_PROVIDER_BINDING_MISMATCH")
 
-        allowed_provider_cycles = {
-            value["cycle"]: value["capability_id"] for value in expected_bindings.values()
-        }
         for ref in _result_refs(action):
             provider_cycle = ref["cycle"]
-            if provider_cycle not in allowed_provider_cycles:
+            effect = ref.get("effect")
+            if not effect:
                 raise CompositionGuardError(
-                    f"CONTRACT_{index}_RESULT_REFERENCE_BYPASSES_REQUIRED_EFFECT:"
-                    + str(provider_cycle)
+                    f"CONTRACT_{index}_RESULT_REFERENCE_EFFECT_REQUIRED"
+                )
+            if effect not in requires:
+                raise CompositionGuardError(
+                    f"CONTRACT_{index}_RESULT_REFERENCE_EFFECT_NOT_REQUIRED:" + effect
+                )
+            binding = expected_bindings.get(effect)
+            if binding is None:
+                raise CompositionGuardError(
+                    f"CONTRACT_{index}_RESULT_REFERENCE_EFFECT_HAS_NO_PROVIDER:" + effect
+                )
+            if binding["cycle"] != provider_cycle:
+                raise CompositionGuardError(
+                    f"CONTRACT_{index}_RESULT_REFERENCE_PROVIDER_MISMATCH:"
+                    + effect + ":" + str(provider_cycle)
                 )
             producer = normalized[provider_cycle]
             if ref["field"] not in producer["result_fields"]:
@@ -194,6 +215,88 @@ def assert_action_ready(capsule: Mapping[str, Any], row: Mapping[str, Any]) -> d
         "required_effects": requires,
         "capsule_head_hash": context["capsule_head_hash"],
     }
+
+
+def resolve_action_from_capsule(
+    capsule: Mapping[str, Any],
+    row: Mapping[str, Any],
+    action: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Resolve capability inputs only through verified capsule state."""
+    if not isinstance(action, Mapping):
+        raise CompositionGuardError("ACTION_INVALID")
+    requires = _strings(row.get("requires"), "ROW_REQUIRES")
+    provider_bindings = row.get("provider_bindings")
+    if not isinstance(provider_bindings, Mapping):
+        raise CompositionGuardError("ROW_PROVIDER_BINDINGS_INVALID")
+    capsule_mod = _load_capsule()
+    context = capsule_mod.project_context(capsule, requires)
+
+    def resolve(value: Any):
+        if isinstance(value, Mapping):
+            if set(value) == {"$result"}:
+                spec = value["$result"]
+                if not isinstance(spec, Mapping):
+                    raise CompositionGuardError("RESULT_REFERENCE_INVALID")
+                cycle = spec.get("cycle")
+                field = spec.get("field")
+                effect = spec.get("effect")
+                if not isinstance(cycle, int) or isinstance(cycle, bool) or cycle < 0:
+                    raise CompositionGuardError("RESULT_REFERENCE_CYCLE_INVALID")
+                if not isinstance(field, str) or not field.strip():
+                    raise CompositionGuardError("RESULT_REFERENCE_FIELD_REQUIRED")
+                if not isinstance(effect, str) or not effect.strip():
+                    raise CompositionGuardError("RESULT_REFERENCE_EFFECT_REQUIRED")
+                effect = effect.strip()
+                field = field.strip()
+                if effect not in requires:
+                    raise CompositionGuardError(
+                        "RESULT_REFERENCE_EFFECT_NOT_REQUIRED:" + effect
+                    )
+                binding = provider_bindings.get(effect)
+                if not isinstance(binding, Mapping):
+                    raise CompositionGuardError(
+                        "RESULT_REFERENCE_EFFECT_HAS_NO_PROVIDER:" + effect
+                    )
+                if binding.get("cycle") != cycle:
+                    raise CompositionGuardError(
+                        "RESULT_REFERENCE_PROVIDER_MISMATCH:"
+                        + effect + ":" + str(cycle)
+                    )
+                payload = context["values"].get(effect)
+                if not isinstance(payload, Mapping):
+                    raise CompositionGuardError(
+                        "CAPSULE_EFFECT_VALUE_INVALID:" + effect
+                    )
+                if payload.get("effect") != effect:
+                    raise CompositionGuardError(
+                        "CAPSULE_EFFECT_IDENTITY_MISMATCH:" + effect
+                    )
+                if payload.get("producer_cycle") != cycle:
+                    raise CompositionGuardError(
+                        "CAPSULE_EFFECT_PROVIDER_CYCLE_MISMATCH:" + effect
+                    )
+                if payload.get("capability_id") != binding.get("capability_id"):
+                    raise CompositionGuardError(
+                        "CAPSULE_EFFECT_PROVIDER_IDENTITY_MISMATCH:" + effect
+                    )
+                current = payload.get("result")
+                for part in field.split("."):
+                    if not isinstance(current, Mapping) or part not in current:
+                        raise CompositionGuardError(
+                            "CAPSULE_RESULT_REFERENCE_FIELD_MISSING:" + field
+                        )
+                    current = current[part]
+                return copy.deepcopy(current)
+            return {key: resolve(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [resolve(item) for item in value]
+        return copy.deepcopy(value)
+
+    resolved = resolve(action)
+    if not isinstance(resolved, dict):
+        raise CompositionGuardError("RESOLVED_ACTION_INVALID")
+    return resolved
 
 
 def append_action_result(
