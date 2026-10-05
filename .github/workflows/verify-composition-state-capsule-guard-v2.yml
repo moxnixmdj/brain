@@ -1,0 +1,30 @@
+name: Verify composition state capsule guard V2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/composition_state_capsule_v2.py"
+      - "canonical/runtime/composition_state_capsule_guard_v2.py"
+      - "canonical/runtime/capability_planner.py"
+      - "canonical/runtime/astra_runtime.py"
+      - "canonical/tests/test_composition_state_capsule_guard_v2.py"
+      - ".github/workflows/verify-composition-state-capsule-guard-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Run V2 capsule and bridge tests
+        run: |
+          python -m unittest -v canonical.tests.test_composition_state_capsule_v2
+          python -m unittest -v canonical.tests.test_composition_state_capsule_guard_v2
