@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_V22_H100_TERMINAL_RELEVANCE_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SCHEDULING_REDUCTION__H100_RESEARCH_PRESERVED_BUT_WAKE_ONLY__ZERO_CREDIT",
+  "exact_main_commit": "d8d70cf2a99cf0e3284ef5ab98a522b9dd7f7fc9",
+  "facts": {
+    "root1_positive_gap_count": 0,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "total_open_truth_obligations": 32,
+    "recent_h100_commits_zero_credit": [
+      "34eeec2f666c453a5b190de7baeaeb481398457f",
+      "e2888ce30032c895902889ea8bbfcac7c3e32378",
+      "d8d70cf2a99cf0e3284ef5ab98a522b9dd7f7fc9"
+    ]
+  },
+  "rule": "IF_ROOT1_HAS_NO_POSITIVE_GAP_AND_H100_WORK_DOES_NOT_DIRECTLY_DISCHARGE_A_CURRENT_OPEN_TRUTH_OBLIGATION__H100_IS_NOT_CURRENT_TERMINAL_CRITICAL_PATH",
+  "demote_to_wake_only": [
+    "NEW_H100_REGISTRY_RATCHETS",
+    "NEW_H100_OPERATOR_ACQUISITION_VARIANTS",
+    "NEW_H100_UNICHART_COMPRESSION_VARIANTS",
+    "NEW_H100_TOOL_ACQUISITION_RESEARCH_WITHOUT_DIRECT_CURRENT_PREDICATE_BINDING"
+  ],
+  "wake_conditions": [
+    "VALID_CURRENT_ROOT1_POSITIVE_GAP",
+    "DIRECT_ADMISSIBLE_CURRENT_PREDICATE_BINDING_FOR_FROZEN_H100_SUBJECT",
+    "META_OBLIGATION_PROVED_TO_REQUIRE_H100_PRIMITIVE",
+    "V22_RECOMPUTATION_GIVES_H100_NONZERO_CURRENT_PROOF_REACHABILITY"
+  ],
+  "preserve_existing_h100_artifacts": true,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
