@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Markdown-to-PDF conversion with typed parent-only durable finalization."""
+"""Markdown-to-PDF conversion with typed parent-only durable finalization.
+
+Pandoc requires a .pdf output filename to select PDF production. The adapter
+therefore creates an ephemeral .pdf symlink to /proc/self/fd/1, causing Pandoc's
+PDF bytes to flow through captured stdout. Only the parent finalizer receives
+durable repository-write authority.
+"""
 from __future__ import annotations
 
 import hashlib
@@ -7,10 +13,12 @@ import json
 import os
 import pathlib
 import subprocess
+import tempfile
 
 from canonical.runtime import root3_typed_artifact_finalizer_v1 as finalizer
 
 CAPABILITY_ID = "document.convert.markdown_pdf.pandoc_weasyprint"
+STDOUT_PROXY_TARGET = "/proc/self/fd/1"
 
 
 def _safe_input_path(root, raw):
@@ -78,9 +86,10 @@ def _toolchain_binding(root):
             "pandoc",
             "<MARKDOWN_PATH>",
             "-o",
-            "-",
+            "<EPHEMERAL_PDF_STDOUT_PROXY>",
             "--pdf-engine=weasyprint",
         ],
+        "stdout_proxy_target": STDOUT_PROXY_TARGET,
     }
     encoded = json.dumps(
         contract, sort_keys=True, separators=(",", ":"), ensure_ascii=False
@@ -99,20 +108,34 @@ def run(args, root):
     toolchain_binding_sha256 = _toolchain_binding(root)
     expected_pre_sha256 = finalizer.observe_prestate(root, output_path)
 
-    argv = ["pandoc", str(source), "-o", "-", "--pdf-engine=weasyprint"]
-    proc = subprocess.run(
-        argv,
-        cwd=root,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=False,
-        timeout=max(1, min(int(args.get("timeout_s", 120)), 300)),
-    )
-    stderr = bytes(proc.stderr or b"").decode("utf-8", "replace")
-    if proc.returncode != 0:
-        raise RuntimeError("PANDOC_PDF_FAILED:" + stderr[-2000:])
+    with tempfile.TemporaryDirectory(prefix="project-brain-pandoc-stdout-") as td:
+        proxy = pathlib.Path(td) / "output.pdf"
+        proxy.symlink_to(STDOUT_PROXY_TARGET)
+        if not proxy.is_symlink() or os.readlink(proxy) != STDOUT_PROXY_TARGET:
+            raise RuntimeError("PDF_STDOUT_PROXY_INVALID")
 
-    payload = bytes(proc.stdout or b"")
+        argv = [
+            "pandoc",
+            str(source),
+            "-o",
+            str(proxy),
+            "--pdf-engine=weasyprint",
+        ]
+        proc = subprocess.run(
+            argv,
+            cwd=root,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=False,
+            timeout=max(1, min(int(args.get("timeout_s", 120)), 300)),
+        )
+        if not proxy.is_symlink() or os.readlink(proxy) != STDOUT_PROXY_TARGET:
+            raise RuntimeError("PDF_STDOUT_PROXY_MUTATED")
+        stderr = bytes(proc.stderr or b"").decode("utf-8", "replace")
+        if proc.returncode != 0:
+            raise RuntimeError("PANDOC_PDF_FAILED:" + stderr[-2000:])
+        payload = bytes(proc.stdout or b"")
+
     plan = finalizer.build_plan(
         output_path=output_path,
         payload=payload,
@@ -129,7 +152,13 @@ def run(args, root):
 
     return {
         "adapter": "pandoc_weasyprint",
-        "argv": argv,
+        "argv_contract": [
+            "pandoc",
+            str(source.relative_to(root)),
+            "-o",
+            "<EPHEMERAL_PDF_STDOUT_PROXY>",
+            "--pdf-engine=weasyprint",
+        ],
         "returncode": 0,
         "input_path": str(source.relative_to(root)),
         "input_sha256": input_sha256,
@@ -137,6 +166,7 @@ def run(args, root):
         "output_bytes": len(payload),
         "output_sha256": receipt["post_sha256"],
         "output_verified": True,
+        "pdf_transport": "EPHEMERAL_PDF_SUFFIX_SYMLINK_TO_CHILD_STDOUT_FD1",
         "child_durable_output_path_authority": False,
         "typed_parent_finalization": True,
         "artifact_finalizer_plan_sha256": receipt["plan_sha256"],
