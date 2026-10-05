@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_NGRAM_WHITESPACE_INVARIANCE_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CONSTRUCTIVE_PUBLIC_12_OF_12__INDEPENDENT_VERIFICATION_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "target_residual": "NGramOverlapChecker.reference_text exact whitespace layout",
+  "theorem": {
+    "statement": "Let R be an exact reference, V its whitespace-normalized visible form, and Y any output containing no whitespace. Every trigram of Y is non-whitespace. Whitespace normalization preserves membership of every non-whitespace trigram, so G3(Y)∩G3(R)=G3(Y)∩G3(V). Therefore the frozen character-trigram overlap score of Y against R equals the score against V exactly.",
+    "consequence": "Exact reference whitespace layout is information-theoretically unnecessary for this checker when the successor deliberately emits a whitespace-free candidate.",
+    "scope": "Frozen LiveBench NGramOverlapChecker at commit 8f8e5c381a16e3f24257776edd53471fe86f8091 only."
+  },
+  "pinned_public_sources": {
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_ifbench_instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "livebench_ifbench_instructions_util_git_blob_sha": "21b13c7fcfc2c2de01e80c9e7dd222b9bca81342"
+  },
+  "runtime": {
+    "path": "canonical/runtime/livebench_ngram_whitespace_invariant_solver_v1.py",
+    "input_contract": "VISIBLE_WHITESPACE_NORMALIZED_REFERENCE_PLUS_PUBLIC_TARGET_AND_PUBLIC_COMPANION_PARAMETERS_ONLY",
+    "exact_reference_input_forbidden": true,
+    "output_contract": "WHITESPACE_FREE_DETERMINISTIC_CANDIDATE_WITH_COMPUTABLE_FROZEN_OVERLAP_SCORE"
+  },
+  "local_constructive_validation": {
+    "public_ratio_overlap_rows": 12,
+    "passed": 12,
+    "exact_score_equality_count": 12,
+    "target_band_pass_count": 12,
+    "companion_constraint_pass_count": 12,
+    "companion_classes": [
+      "sentence:keyword",
+      "words:consonants"
+    ],
+    "exact_reference_use": "POST_CONSTRUCTION_PUBLIC_ORACLE_CHECK_ONLY",
+    "terminal_livebench_cases_consumed": 0
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1867,
+    "branch": "verify/livebench-ngram-whitespace-invariant-20261004-v1",
+    "workflow_name": "Verify LiveBench NGram Whitespace Invariance",
+    "workflow_run_id": 37199110427,
+    "state": "QUEUED_AT_BIND_TIME"
+  },
+  "impact_if_independently_verified": [
+    "DELETE_EXACT_REFERENCE_WHITESPACE_RECOVERY_FROM_THE_LIVEBENCH_SUCCESSOR_REQUIREMENTS",
+    "REPLACE_THE_NGRAM_REFERENCE_FORMATTING_RESIDUAL_WITH_A_DETERMINISTIC_VISIBLE_REFERENCE_CONSTRUCTOR",
+    "KEEP_THE_UNIVERSAL_REVERSE_GRAMMAR_SUCCESSOR_ROUTE_ALIVE_WITHOUT_UNEXPOSED_TERMINAL_CONTENT",
+    "RECOMPUTE_THE_LIVEBENCH_ROOT1_SUCCESSOR_PRECOMMIT_AFTER_BINDING_THE_VERIFIED_SOLVER"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_THAT_LIVEBENCH_IF_GE_65_7_IS CLOSED",
+    "NO_UNEXPOSED_TERMINAL_CASE_CONTENT_USED",
+    "NO_PROMOTION_AUTHORITY_UNTIL_SEPARATE_INDEPENDENT_VERIFICATION_AND_SUCCESSOR_PRECOMMIT"
+  ],
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
