@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__PUBLIC_BAR_SCOPE_SCHEDULING__ZERO_CURRENTLY_MANDATORY_NEW_BEHAVIORAL_RESIDUALS__ONE_CONFIGURATION_IDENTITY_CHECK__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "d2a204be38378841c353decad6368af66aa48724"
+  },
+  "verification": {
+    "path": "canonical/verification/PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "a037a51b9860b4a8404c7dc5bed3a93b290070a8"
+  },
+  "effects": {
+    "mandatory_new_behavioral_residuals": [],
+    "conditional_candidate_only": [
+      "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001"
+    ],
+    "open_configuration_identity_checks": [
+      "HLE_WITH_TOOLS_MULTIMODAL_OR_NON_TEXT_SCOPE_IDENTITY"
+    ],
+    "existing_dependency_graph_preserved": true,
+    "public_thresholds_preserved": true,
+    "broad_family_targets_preserved": true
+  },
+  "scheduler_effect": [
+    "DO_NOT_SCHEDULE_NEW_SCIENTIFIC_HYPOTHESIS_PARITY_WORK_UNLESS_TARGET_SCOPE_RECEIPT_WAKES_IT",
+    "VERIFY_EXISTING_DEPENDENCY_SCOPE_STRENGTHS",
+    "RESOLVE_HLE_WITH_TOOLS_MULTIMODAL_CONFIGURATION_IDENTITY",
+    "THEN_RECOMPUTE_FIVE_PUBLIC_BAR_FAMILY_SCOPE_COMPLETENESS"
+  ],
+  "hard_rules": [
+    "CANDIDATE_RESIDUAL_IS_NOT_MANDATORY_WITHOUT_TARGET_MEMBERSHIP",
+    "NO_TARGET_WEAKENING",
+    "NO_ACCEPTANCE_CREDIT_FROM_SCOPE_SCHEDULING",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
