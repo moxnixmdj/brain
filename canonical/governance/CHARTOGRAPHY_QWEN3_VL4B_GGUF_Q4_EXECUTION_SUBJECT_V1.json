@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3_VL4B_GGUF_Q4_EXECUTION_SUBJECT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__OFFICIAL_QWEN_QUANTIZED_MULTIMODAL_ARTIFACT_PINNED__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "upstream": {
+    "repository": "Qwen/Qwen3-VL-4B-Instruct-GGUF",
+    "revision": "594171a9fa4ab2a90f017aa69a323b270cd8d24f",
+    "license": "apache-2.0",
+    "modality": "image-text-to-text",
+    "model_file": {
+      "name": "Qwen3VL-4B-Instruct-Q4_K_M.gguf",
+      "bytes": 2497281696,
+      "sha256": "ce6a2eac86eeb49ffacb19d580ddd26c0d42cd0a0386b311158a5bf4a6996ffe"
+    },
+    "projector_file": {
+      "name": "mmproj-Qwen3VL-4B-Instruct-Q8_0.gguf",
+      "approximate_bytes": 454000000,
+      "sha256": "30ba2c7dd3127a4561b6cba9d13d0f711c91bdb38742e2f56d73c8cb596bd06d"
+    }
+  },
+  "scheduler_delta": {
+    "delete": [
+      "SELF_QUANTIZATION_BEFORE_FIRST_FIT_TEST",
+      "BF16_ONLY_FIRST_PREFLIGHT_ASSUMPTION"
+    ],
+    "preserve": [
+      "OBSERVED_RUNTIME_FIT",
+      "SYNTHETIC_MULTIMODAL_SMOKE",
+      "NONTERMINAL_CHART_REASONING_QUALIFICATION",
+      "CHARTOGRAPHY_THRESHOLD_CERTIFICATE_GE_89"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_PERFORMANCE_INHERITANCE_FROM_BASE_MODEL",
+    "NO_RUNTIME_FIT_CLAIM",
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
