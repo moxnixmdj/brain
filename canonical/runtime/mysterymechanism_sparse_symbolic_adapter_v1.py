@@ -421,6 +421,7 @@ def sparse_discover(
         "input_variables": list(names),
         "candidate_count": len(candidates),
         "best_candidate": candidates[0] if candidates else None,
+        "candidate_frontier": candidates[:8],
         "persistent_learned_bytes": 0,
         "external_learned_capability_calls": 0,
         "dynamic_code_execution": False,
@@ -571,20 +572,47 @@ def choose_final_experiment(
     *,
     bounds: Mapping[str, Sequence[Any]],
     target: str = "out",
-    grid_levels: int = 5,
+    grid_levels: int = 7,
 ) -> dict[str, Any]:
-    """Choose the reserved last experiment by model disagreement, always in bounds."""
+    """Choose the reserved experiment by route-balanced disagreement without repeats.
+
+    The benchmark budget makes the final intervention uniquely scarce.  A probe
+    already present in the observations has zero information value, so observed
+    points are excluded before scoring.  When multiple plausible mechanisms are
+    available, the selector maximizes normalized predictive disagreement with
+    route-balanced weights.  If disagreement is unavailable, it uses a
+    deterministic maximin exploration point rather than blindly reusing center.
+    """
     b = _normalize_bounds(bounds)
-    default = {name: _center(lo, hi) for name, (lo, hi) in b.items()}
-    if len(rows) < 5:
-        return {"status": "RESERVED_CENTER", "point": default, "reason": "INSUFFICIENT_ROWS_FOR_DISAGREEMENT"}
-    try:
-        discovery = base.discover(rows, target=target, inputs=list(b), top_k=8)
-        candidates = discovery.get("candidates") or []
-    except (base.MechanismSynthesisError, ValueError, OverflowError):
-        candidates = []
-    if len(candidates) < 2:
-        return {"status": "RESERVED_CENTER", "point": default, "reason": "FEWER_THAN_TWO_BASE_CANDIDATES"}
+    if not isinstance(grid_levels, int) or not 3 <= grid_levels <= 9:
+        raise SparseSymbolicError("GRID_LEVELS_INVALID")
+    names = list(b)
+
+    def unit_coordinate(name: str, value: float) -> float:
+        lo, hi = b[name]
+        if lo > 0 and hi > 0:
+            return math.log(value / lo) / math.log(hi / lo)
+        return (value - lo) / (hi - lo)
+
+    observed = []
+    for raw in rows:
+        if not isinstance(raw, Mapping) or any(name not in raw for name in names):
+            continue
+        try:
+            point = {name: _finite(raw[name], name) for name in names}
+        except SparseSymbolicError:
+            continue
+        if all(b[name][0] <= point[name] <= b[name][1] for name in names):
+            observed.append(tuple(unit_coordinate(name, point[name]) for name in names))
+
+    def novelty(point: Mapping[str, float]) -> float:
+        if not observed:
+            return 1.0
+        u = tuple(unit_coordinate(name, float(point[name])) for name in names)
+        return min(
+            math.sqrt(sum((a - z) ** 2 for a, z in zip(u, prior)) / len(names))
+            for prior in observed
+        )
 
     axes = []
     for name, (lo, hi) in b.items():
@@ -594,29 +622,158 @@ def choose_final_experiment(
         else:
             vals = [lo + (hi - lo) * i / (grid_levels - 1) for i in range(grid_levels)]
         axes.append(vals)
-    best = None
+
+    novel_grid = []
     for values in itertools.product(*axes):
-        point = dict(zip(b, values))
-        preds = []
-        for cand in candidates:
-            try:
-                preds.append(base.predict(cand, point))
-            except base.MechanismSynthesisError:
-                pass
-        if len(preds) < 2:
-            continue
-        mean = sum(preds) / len(preds)
-        spread = math.sqrt(sum((x - mean) ** 2 for x in preds) / len(preds))
-        score = spread / max(1.0, abs(mean), max(abs(x) for x in preds))
-        key = (score, tuple(values))
-        if best is None or key > best[0]:
-            best = (key, point)
-    if best is None or best[0][0] <= 1e-12:
-        return {"status": "RESERVED_CENTER", "point": default, "reason": "NO_USEFUL_DISAGREEMENT"}
+        point = dict(zip(names, values))
+        n = novelty(point)
+        if n > 1e-10:
+            novel_grid.append((n, tuple(float(v) for v in values), point))
+
+    # The task contract provides only O(d) observations, while the grid has at
+    # least 3**d points, so exhaustion should be unreachable in normal use.
+    # Fail closed instead of returning a known duplicate if a caller violates
+    # that contract.
+    if not novel_grid:
+        return {
+            "status": "FAIL_CLOSED__NO_NOVEL_GRID_POINT",
+            "point": None,
+            "reason": "EVERY_CANDIDATE_GRID_POINT_ALREADY_OBSERVED",
+            "repeated_existing_point": False,
+            "candidate_count": 0,
+            "route_candidate_counts": {},
+            "private_score_claimed": False,
+            "acceptance_credit_delta": 0,
+            "family_credit_delta": 0,
+            "capability_credit_delta": 0,
+            "ownership_credit_delta": 0,
+        }
+
+    # Pool high-quality hypotheses from independent internal grammars.  The
+    # previous selector used only BASE_ZERO_LEARNED candidates, so disagreement
+    # created by the sparse symbolic route was invisible.
+    pool = []
+
+    try:
+        discovery = base.discover(rows, target=target, inputs=names, top_k=8)
+        for cand in (discovery.get("candidates") or [])[:8]:
+            risk = max(
+                float(cand.get("nrmse", math.inf)),
+                float(cand.get("validation_nrmse", cand.get("nrmse", math.inf))),
+            )
+            if math.isfinite(risk):
+                pool.append(("BASE_ZERO_LEARNED", cand, risk, base.predict))
+    except (base.MechanismSynthesisError, ValueError, OverflowError):
+        pass
+
+    try:
+        discovery = sparse_discover(rows, target=target, inputs=names)
+        frontier = discovery.get("candidate_frontier") or []
+        if not frontier and discovery.get("best_candidate") is not None:
+            frontier = [discovery["best_candidate"]]
+        for cand in frontier[:8]:
+            risk = max(float(cand["loo_nrmse"]), float(cand["all_nrmse"]))
+            if math.isfinite(risk):
+                pool.append(("SPARSE_LOO_EXPRESSION", cand, risk, _sparse_predict))
+    except (SparseSymbolicError, ValueError, OverflowError, ArithmeticError):
+        pass
+
+    # Once seven or more rows exist, include the stronger V2 separable route as
+    # well.  Before the reserved benchmark intervention this branch is usually
+    # unavailable by design, because V2's delete-two estimator requires >=7.
+    if len(names) == 2 and len(rows) >= 7:
+        try:
+            from canonical.runtime import mysterymechanism_separable_transform_v2 as separable
+            discovery = separable.discover(rows, bounds=b, target=target)
+            cand = discovery.get("candidate")
+            if cand is not None:
+                risk = max(
+                    float(cand["delete_two_nrmse"]),
+                    float(cand["loo_nrmse"]),
+                    float(cand["all_row_nrmse"]),
+                )
+                if math.isfinite(risk):
+                    pool.append(("SEPARABLE_BILINEAR_TRANSFORM_V2", cand, risk, separable.predict))
+        except (ValueError, OverflowError, ArithmeticError):
+            pass
+
+    route_counts = {}
+    for route, _, _, _ in pool:
+        route_counts[route] = route_counts.get(route, 0) + 1
+
+    # Remove obviously dominated tails without assuming risks from different
+    # grammars are calibrated as probabilities.  This prevents one bad
+    # high-amplitude formula from manufacturing artificial disagreement.
+    if pool:
+        best_risk = min(item[2] for item in pool)
+        risk_ceiling = max(best_risk + 0.05, best_risk * 3.0 + 1e-12)
+        pool = [item for item in pool if item[2] <= risk_ceiling]
+        route_counts = {}
+        for route, _, _, _ in pool:
+            route_counts[route] = route_counts.get(route, 0) + 1
+
+    best = None
+    if len(pool) >= 2:
+        route_mass = {route: 1.0 / count for route, count in route_counts.items()}
+        for n, values, point in novel_grid:
+            preds = []
+            weights = []
+            for route, cand, _, predictor in pool:
+                try:
+                    pred = float(predictor(cand, point))
+                except (ValueError, OverflowError, ArithmeticError, base.MechanismSynthesisError, SparseSymbolicError):
+                    continue
+                if not math.isfinite(pred):
+                    continue
+                preds.append(pred)
+                weights.append(route_mass[route])
+            if len(preds) < 2:
+                continue
+            total_w = sum(weights)
+            mean = sum(w * p for w, p in zip(weights, preds)) / total_w
+            variance = sum(w * (p - mean) ** 2 for w, p in zip(weights, preds)) / total_w
+            rms = math.sqrt(sum(w * p * p for w, p in zip(weights, preds)) / total_w)
+            disagreement = math.sqrt(max(0.0, variance)) / max(1.0, abs(mean), rms)
+            # Information first; novelty breaks ties and keeps equal-information
+            # probes away from already sampled neighborhoods.
+            key = (disagreement, n, values)
+            if best is None or key > best[0]:
+                best = (key, point)
+
+    if best is not None and best[0][0] > 1e-12:
+        return {
+            "status": "BOUND_CONSTRAINED_INFORMATION_DISCRIMINATOR_V2",
+            "point": best[1],
+            "normalized_disagreement": best[0][0],
+            "normalized_novelty": best[0][1],
+            "candidate_count": len(pool),
+            "route_candidate_counts": route_counts,
+            "repeated_existing_point": False,
+            "all_coordinates_within_declared_bounds": True,
+            "private_score_claimed": False,
+            "acceptance_credit_delta": 0,
+            "family_credit_delta": 0,
+            "capability_credit_delta": 0,
+            "ownership_credit_delta": 0,
+        }
+
+    # No meaningful model disagreement exists yet.  Spend the reserved
+    # experiment on the point farthest from all observations rather than on an
+    # already-measured center.  This is deterministic, bounded, and strictly
+    # information-safe with respect to exact duplicate probes.
+    n, _, point = max(novel_grid, key=lambda item: (item[0], item[1]))
     return {
-        "status": "BOUND_CONSTRAINED_DISCRIMINATOR",
-        "point": best[1],
-        "normalized_disagreement": best[0][0],
-        "candidate_count": len(candidates),
+        "status": "MAXIMIN_NOVEL_EXPLORATION_V2",
+        "point": point,
+        "normalized_novelty": n,
+        "reason": "FEWER_THAN_TWO_PLAUSIBLE_CANDIDATES_OR_NO_USEFUL_DISAGREEMENT",
+        "candidate_count": len(pool),
+        "route_candidate_counts": route_counts,
+        "repeated_existing_point": False,
         "all_coordinates_within_declared_bounds": True,
+        "private_score_claimed": False,
+        "acceptance_credit_delta": 0,
+        "family_credit_delta": 0,
+        "capability_credit_delta": 0,
+        "ownership_credit_delta": 0,
     }
