@@ -241,6 +241,27 @@
       "verification_median_seconds_across_families": 0.00001766400009728386,
       "persistent_learned_bytes": 0,
       "deduction": "THE_FIRST_MEASURED_REUSABLE_CAPABILITY_COHORT_HAS_SHORT_COMPILED_DESCRIPTORS_AND_CHEAP_VERIFICATION_UNDER_THE_FROZEN_CANONICAL_DSL__THIS_SUPPORTS_LIBRARY_FIRST_SEARCH_BUT_DOES_NOT_ESTABLISH_A_GENERAL_REAL_WORLD_DESCRIPTION_LENGTH_DISTRIBUTION"
+    },
+    "library_first_routing_wall_clock": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__THREE_OF_THREE_FASTER__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_LIBRARY_FIRST_ROUTING_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_LIBRARY_FIRST_ROUTING_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "tasks": [
+        "SIN_B",
+        "EXP_B",
+        "STEP_B"
+      ],
+      "measured_speedup_raw_over_library": {
+        "min": 9.16560849276364,
+        "median": 9.274499195198556,
+        "max": 9.362417194667831
+      },
+      "attempted_routes_median": {
+        "library_first": 1,
+        "raw_first": 4
+      },
+      "persistent_learned_bytes": 0,
+      "deduction": "LIBRARY_FIRST_ROUTING_IS_NOW_BOTH_FORMALLY_AND_EMPIRICALLY_SUPPORTED_ON_THE_MEASURED_REUSABLE_CAPABILITY_COHORT__THE_NEXT_ARCHITECTURAL_MOVE_IS_TO_MAKE_VERIFIED_CAPABILITY_REGISTRY_LOOKUP_THE_DEFAULT_PRE_SYNTHESIS_STAGE"
     }
   },
   "next_structural_residuals_ranked": [
@@ -272,7 +293,8 @@
     "FOR_OPEN_WORLD_SEARCH_REPORT_COMPLEXITY_CONDITIONED_BOUNDS_IN_TERMS_OF_PREFIX_DESCRIPTION_LENGTH_L_AND_VERIFIER_COST_T__DISTINGUISH_EXISTENCE_COMPLETENESS_FROM_PRACTICAL_WALL_CLOCK",
     "SEARCH_EXISTING_VERIFIED_CAPABILITY_REFERENCES_AND_MINIMAL_PATCHES_BEFORE RAW_PROGRAM SYNTHESIS__EVERY_SAVED_DESCRIPTION_BIT HALVES THE GENERIC DOVETAIL BOUND",
     "MEASURE_INCREMENTAL_DESCRIPTION_LENGTH RELATIVE_TO_THE_CURRENT_VERIFIED_LIBRARY__DO_NOT_USE_RAW_SOURCE_FILE_SIZE_AS A SUBSTITUTE FOR A FROZEN CANONICAL PROGRAM CODE",
-    "USE_THE_FROZEN_CAPABILITY_REGISTRY_AND_CANONICAL_DESCRIPTOR_CODE_TO_MEASURE_NON_SYNTHETIC_CAPABILITIES__DO_NOT_GENERALIZE_THE_THREE_FAMILY_L_AND_T_DISTRIBUTION"
+    "USE_THE_FROZEN_CAPABILITY_REGISTRY_AND_CANONICAL_DESCRIPTOR_CODE_TO_MEASURE_NON_SYNTHETIC_CAPABILITIES__DO_NOT_GENERALIZE_THE_THREE_FAMILY_L_AND_T_DISTRIBUTION",
+    "DEFAULT_H100_ROUTING_ORDER_IS_VERIFIED_CAPABILITY_LIBRARY_THEN_PARAMETER_FIT_THEN_COMPOSITION_OR_PATCH_THEN_RAW_SYNTHESIS__RAW_FIRST_REQUIRES_EVIDENCE_THAT_NO_LIBRARY_MATCH_EXISTS"
   ],
   "learned_byte_ladder": {
     "current_rung_bytes": 0,
@@ -332,7 +354,10 @@
     "real_reusable_capability_incremental_description_length_distribution_measured": true,
     "real_reusable_capability_verifier_cost_distribution_measured": true,
     "description_length_measurement_scope": "THREE_ALREADY_VERIFIED_SYNTHETIC_REUSABLE_STRUCTURAL_FAMILIES_ONLY",
-    "non_synthetic_real_world_capability_description_length_distribution_measured": false
+    "non_synthetic_real_world_capability_description_length_distribution_measured": false,
+    "library_first_measured_wall_clock_speedup_verified": true,
+    "library_first_measured_speedup_scope": "THREE_ALREADY_VERIFIED_SYNTHETIC_TRANSFER_TASKS__MEDIAN_9_2745X_ON_SECOND_SPRITE",
+    "default_verified_capability_registry_first_router_implemented": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
