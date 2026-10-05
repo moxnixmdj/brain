@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_CONTENT_BOUND_HARDENING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__V2_CLOSES_FREE_FORM_ACTION_AND_EVIDENCE_REFERENCE_HOLE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Strengthen the constructive composition P1/P2 state capsule so every load-bearing action and evidence lineage edge is content-bound rather than a free-form string reference.",
+  "predecessor": {
+    "route": "canonical/governance/COMPOSITION_STATE_CAPSULE_P1_P2_CONSTRUCTIVE_ROUTE_20261005_V1.json",
+    "route_git_blob_sha": "0b960324379acc9dd33669e2b780d3192dda09fd",
+    "runtime": "canonical/runtime/composition_state_capsule_v1.py",
+    "runtime_git_blob_sha": "6337298b4804307315308689fbeb65692c67980d",
+    "finding": "V1_CONTENT_ADDRESSES_RECORDS_AND_STATE_VALUES_BUT_ACTION_REF_AND_EVIDENCE_REFS_ARE_FREE_FORM_TOKENS. THIS IS SUFFICIENT_FOR_STRUCTURAL_LINEAGE_IDENTITY_BUT_NOT_BY_ITSELF_FOR_CONTENT_BOUND_ACTION_OR_EVIDENCE_PROVENANCE."
+  },
+  "v2": {
+    "runtime": {
+      "path": "canonical/runtime/composition_state_capsule_v2.py",
+      "git_blob_sha": "cd45d76c831b34cc688a232bb34ce50a22337954"
+    },
+    "tests": {
+      "path": "canonical/tests/test_composition_state_capsule_v2.py",
+      "git_blob_sha": "40904bc887feea4c56dce385d7b9f913b3a357d2"
+    },
+    "mechanical_invariants": [
+      "ACTION_REF_IS_ID_PLUS_EMBEDDED_CONTENT_PLUS_SHA256_RECOMPUTED_BEFORE_COMMIT",
+      "EVERY_EVIDENCE_REF_IS_ID_PLUS_EMBEDDED_CONTENT_PLUS_SHA256_RECOMPUTED_BEFORE_COMMIT",
+      "ANY_ACTION_OR_EVIDENCE_CONTENT_TAMPER_FAILS_CLOSED",
+      "EVERY_REQUIRED_STATE_INPUT_BINDS_EXACT_PRIOR_RECORD_HASH_AND_VALUE_HASH",
+      "EVERY_PROVIDED_VALUE_IS_CONTENT_HASHED_AND_RECORD_HASHED",
+      "STATE_LINEAGE_CAN_REFERENCE_ONLY_DECLARED_REQUIRED_KEYS",
+      "EVIDENCE_LINEAGE_CAN_REFERENCE_ONLY_DECLARED_CONTENT_VERIFIED_EVIDENCE_IDS",
+      "ACTION_LINEAGE_CAN_REFERENCE_ONLY_THE_CONTENT_VERIFIED_ACTION_ID",
+      "PROJECT_CONTEXT_EXPOSES_ONLY_DECLARED_REQUIRED_KEYS",
+      "ROLLBACK_IS_EXACT_RESTORATION_OF_A_VERIFIED_CONTENT_ADDRESSED_PREFIX"
+    ]
+  },
+  "proof_reduction": {
+    "P1_cross_role_state_preservation": {
+      "mechanically_satisfied_inside_capsule": [
+        "APPEND_ONLY_VERSION_HISTORY",
+        "EXACT_PRIOR_VERSION_INPUT_BINDING",
+        "REQUIRED_KEY_FAIL_CLOSEDNESS",
+        "EXACT_PREFIX_ROLLBACK"
+      ],
+      "remaining_premise": "COMPLETE_MEDIATION__NO_CREDITED_CROSS_ROLE_STATE_CHANNEL_MAY_BYPASS_V2"
+    },
+    "P2_load_bearing_provenance_completeness": {
+      "mechanically_satisfied_inside_capsule": [
+        "CONTENT_BOUND_PRODUCER_ACTION",
+        "CONTENT_BOUND_DECLARED_EVIDENCE",
+        "CONTENT_BOUND_PARENT_RECORD",
+        "CONTENT_BOUND_REQUIRED_STATE_INPUTS",
+        "DECLARED_LINEAGE_FOR_EVERY_PROVIDED_VALUE"
+      ],
+      "remaining_premise": "COMPLETE_MEDIATION_AND_EVIDENCE_TOTALITY__ALL_ACCEPTANCE_RELEVANT_RUNTIME_OUTPUTS_AND_EVIDENCE_INPUTS_MUST_PASS_THROUGH_V2"
+    },
+    "consequence": "AFTER_V2_IS_INTEGRATED_AT_THE_COMPLETE_CROSS_ROLE_BOUNDARY__P1_AND_P2_REDUCE_TO_ONE_SHARED_NO_BYPASS_AND_INPUT_TOTALITY_PROOF_INSTEAD_OF_PER_MACROSTEP_STATE_OR_PROVENANCE_REASONING."
+  },
+  "adversarial_tests": [
+    "ACTION_CONTENT_TAMPER",
+    "EVIDENCE_CONTENT_TAMPER",
+    "FAKE_ACTION_HASH",
+    "FAKE_EVIDENCE_HASH",
+    "STATE_INPUT_BINDING_DRIFT",
+    "UNDECLARED_STATE_LINEAGE",
+    "UNBOUND_EVIDENCE_LINEAGE",
+    "VALUE_TAMPER",
+    "PARENT_TAMPER",
+    "EXACT_PREFIX_ROLLBACK"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_COMPLETE_MEDIATION_IS_ALREADY_PROVED",
+    "NO_CLAIM_P1_OR_P2_IS_CLOSED_FOR_THE_LIVE_RUNTIME",
+    "NO_CLAIM_P3_CRITICAL_FAILURE_AGGREGATION_IS_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
