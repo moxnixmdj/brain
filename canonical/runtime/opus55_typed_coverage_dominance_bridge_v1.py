@@ -1,15 +1,17 @@
 """Fail-closed typed compiler for coverage-dominance sandwich certificates.
 
-This module does not prove semantic coverage or dominance. It only composes
-already-admissible certificates after verifying that they inhabit one frozen
-region universe with stable atom IDs.
+This module does not prove semantic coverage or dominance. It composes
+already-admissible certificates only when they bind to one exact content-addressed
+region universe.
 """
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+import re
 from typing import Any
 
 SCHEMA = "PROJECT_BRAIN_OPUS55_TYPED_COVERAGE_DOMINANCE_BRIDGE_RUNTIME_V1"
+_SHA_RE = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 
 class BridgeError(ValueError):
     pass
@@ -17,6 +19,11 @@ class BridgeError(ValueError):
 def _require_bool(obj: Mapping[str, Any], key: str) -> None:
     if obj.get(key) is not True:
         raise BridgeError(f"{key}_REQUIRED_TRUE")
+
+def _sha(value: Any, label: str) -> str:
+    if not isinstance(value, str) or not _SHA_RE.fullmatch(value):
+        raise BridgeError(f"{label}_INVALID_CONTENT_ADDRESS")
+    return value
 
 def _ids(value: Any, label: str) -> set[str]:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes, bytearray)):
@@ -37,6 +44,7 @@ def compile_typed_sandwich(manifest: Mapping[str, Any]) -> dict[str, Any]:
         universe_id=manifest.get("universe_id")
         if not isinstance(universe_id,str) or not universe_id:
             raise BridgeError("UNIVERSE_ID_INVALID")
+        universe_sha=_sha(manifest.get("universe_sha"),"UNIVERSE_SHA")
         universe=_ids(manifest.get("universe_atoms"),"UNIVERSE_ATOMS")
         if not universe:
             raise BridgeError("UNIVERSE_EMPTY")
@@ -54,8 +62,10 @@ def compile_typed_sandwich(manifest: Mapping[str, Any]) -> dict[str, Any]:
             if not isinstance(cert,Mapping):
                 raise BridgeError(f"COVERAGE_{i}_NOT_OBJECT")
             if cert.get("universe_id") != universe_id:
-                raise BridgeError(f"COVERAGE_{i}_UNIVERSE_MISMATCH")
-            _require_bool(cert,"content_addressed")
+                raise BridgeError(f"COVERAGE_{i}_UNIVERSE_ID_MISMATCH")
+            if cert.get("universe_sha") != universe_sha:
+                raise BridgeError(f"COVERAGE_{i}_UNIVERSE_SHA_MISMATCH")
+            _sha(cert.get("source_sha"),f"COVERAGE_{i}_SOURCE_SHA")
             _require_bool(cert,"independent_or_objective")
             _require_bool(cert,"u_subset_domain_proved")
             cells=_ids(cert.get("cells"),f"COVERAGE_{i}_CELLS")
@@ -70,8 +80,10 @@ def compile_typed_sandwich(manifest: Mapping[str, Any]) -> dict[str, Any]:
             if not isinstance(cert,Mapping):
                 raise BridgeError(f"DOMINANCE_{i}_NOT_OBJECT")
             if cert.get("universe_id") != universe_id:
-                raise BridgeError(f"DOMINANCE_{i}_UNIVERSE_MISMATCH")
-            _require_bool(cert,"content_addressed")
+                raise BridgeError(f"DOMINANCE_{i}_UNIVERSE_ID_MISMATCH")
+            if cert.get("universe_sha") != universe_sha:
+                raise BridgeError(f"DOMINANCE_{i}_UNIVERSE_SHA_MISMATCH")
+            _sha(cert.get("source_sha"),f"DOMINANCE_{i}_SOURCE_SHA")
             _require_bool(cert,"independent_or_objective")
             _require_bool(cert,"scope_complete")
             _require_bool(cert,"b_subset_q_proved")
@@ -86,6 +98,7 @@ def compile_typed_sandwich(manifest: Mapping[str, Any]) -> dict[str, Any]:
             "schema":SCHEMA,
             "status":"CLOSED" if not residual else "OPEN",
             "universe_id":universe_id,
+            "universe_sha":universe_sha,
             "coverage_certificate_ids":cov_ids,
             "dominance_certificate_ids":dom_ids,
             "c_star":sorted(c_star),
