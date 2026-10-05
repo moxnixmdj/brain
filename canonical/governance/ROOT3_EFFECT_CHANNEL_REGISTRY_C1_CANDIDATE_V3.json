@@ -40,7 +40,9 @@
     "canonical/runtime/auto_npm_library_acquisition.py": "b74cdf34a96fc2d591b902e1d582e0381a8a8d08",
     "canonical/runtime/auto_pypi_library_acquisition.py": "6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f",
     "canonical/runtime/apt_cli_probe.py": "3f3a8f6a0154e1ed3f87fc97b99840598297b119",
-    "canonical/runtime/astra_runtime.py": "0912dfa4119950f6d235d501dfa784e65e9f71c9"
+    "canonical/runtime/astra_runtime.py": "0912dfa4119950f6d235d501dfa784e65e9f71c9",
+    "canonical/runtime/independent_pypi_codec_verifier.py": "7c8f68ac1dd8d7760794198f9ac0d8fb542be7e9",
+    "canonical/runtime/independent_npm_codec_verifier.py": "06fe2fbd7d5169e2cf455868747ac7077466c221"
   },
   "inprocess_third_party_imports": {
     "canonical/runtime/capability_discovery.py": [
@@ -76,7 +78,8 @@
     "CHILD_PROCESS_DIRECT",
     "INPROCESS_THIRD_PARTY",
     "REGISTRY_CONSTRAINED_DYNAMIC_IMPORT",
-    "LOCAL_FILESYSTEM_WRITE"
+    "LOCAL_FILESYSTEM_WRITE",
+    "UNTRUSTED_INPROCESS_DYNAMIC_CODE_EXECUTION"
   ],
   "hard_rules": [
     "ANY_NEW_UNCLASSIFIED_NETWORK_CALL_FAILS_CLOSED",
@@ -85,7 +88,8 @@
     "ANY_DYNAMIC_IMPORT_NOT_PROVED_LITERAL_BY_THE_BOUND_CAPABILITY_REGISTRY_FAILS_CLOSED",
     "CLASSIFICATION_IS_NOT_MEDIATION",
     "NO_C1_SCOPE_COMPLETE_CLAIM_UNTIL_C2_MEDIATOR_BINDINGS_AND_NONREPO_INTERNAL_EFFECT_BOUNDARIES_ARE_DISCHARGED",
-    "ANY_NEW_UNCLASSIFIED_LOCAL_FILESYSTEM_MUTATION_FAILS_CLOSED"
+    "ANY_NEW_UNCLASSIFIED_LOCAL_FILESYSTEM_MUTATION_FAILS_CLOSED",
+    "UNTRUSTED_DYNAMIC_IMPORT_CLASSIFICATION_DOES_NOT_IMPLY_SAFETY__C2_MUST_SANDBOX_OR_MEDIATE_IT_BEFORE_SCOPE_COMPLETE_PROMOTION"
   ],
   "next": [
     "RUN_C1_V3_AUDITOR_ON_CURRENT_MAIN",
@@ -145,7 +149,9 @@
     "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py": "d729d19ba5c0808273268426e7450f1db74a5c07",
     "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py": "b8a6d0f0553ffec468676b24f87d56aeb01cea17",
     "canonical/runtime/bound_capabilities/yq_yaml_json.py": "8dce9a679d51153e0e779e4fcc5380a1ce106637",
-    "canonical/runtime/astra_runtime.py": "0912dfa4119950f6d235d501dfa784e65e9f71c9"
+    "canonical/runtime/astra_runtime.py": "0912dfa4119950f6d235d501dfa784e65e9f71c9",
+    "canonical/runtime/independent_pypi_codec_verifier.py": "7c8f68ac1dd8d7760794198f9ac0d8fb542be7e9",
+    "canonical/runtime/independent_npm_codec_verifier.py": "06fe2fbd7d5169e2cf455868747ac7077466c221"
   },
   "third_party_module_blobs": {
     "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
@@ -155,6 +161,17 @@
     "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py": "93c84e524dd01eace5b059f00d7c0c020f36c57c"
   },
   "truth_repairs": [
-    "ASTRA_RUNTIME_ITSELF_IS_A_DIRECT_NETWORK_CHILD_PROCESS_AND_LOCAL_FILESYSTEM_EFFECT_CARRIER__TOP_LEVEL_SHELL_HTTP_AND_DEPENDENCY_ACQUISITION_CHANNELS_MUST_BE_IN_C1"
-  ]
+    "ASTRA_RUNTIME_ITSELF_IS_A_DIRECT_NETWORK_CHILD_PROCESS_AND_LOCAL_FILESYSTEM_EFFECT_CARRIER__TOP_LEVEL_SHELL_HTTP_AND_DEPENDENCY_ACQUISITION_CHANNELS_MUST_BE_IN_C1",
+    "INDEPENDENT_PYPI_CODEC_VERIFIER_EXECUTES_DOWNLOADED_MODULE_IMPORT_CODE_IN_PROCESS__THIS_IS_A_DISTINCT_DYNAMIC_EFFECT_CARRIER_AND_NOT_REGISTRY_TRUST"
+  ],
+  "untrusted_dynamic_import_modules": {
+    "canonical/runtime/independent_pypi_codec_verifier.py": {
+      "git_blob_sha": "7c8f68ac1dd8d7760794198f9ac0d8fb542be7e9",
+      "call": "importlib.import_module(module_name)",
+      "module_name_source": "TOP_LEVEL_MODULE_CANDIDATES_EXTRACTED_FROM_CONTENT_ADDRESSED_DOWNLOADED_WHEEL",
+      "execution_boundary": "TEMP_TARGET_SITE_INSERTED_AT_SYS_PATH_ZERO__IMPORT_EXECUTES_IN_CURRENT_PROCESS",
+      "classification": "UNTRUSTED_INPROCESS_DYNAMIC_CODE_EXECUTION",
+      "c1_disposition": "CLASSIFIED_BUT_NOT_MEDIATED__REQUIRES_C2_SANDBOX_OR_MEDIATOR_BOUNDARY"
+    }
+  }
 }
