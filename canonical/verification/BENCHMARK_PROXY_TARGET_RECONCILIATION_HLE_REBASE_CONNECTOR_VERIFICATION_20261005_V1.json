@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_PROXY_TARGET_RECONCILIATION_HLE_REBASE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__ONE_EXPLICIT_TARGET_MECHANISM_EDGE__HLE_EXTRA_SCOPE_ZERO__FIVE_FAMILY_NEW_RESIDUALS_ZERO__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/BENCHMARK_PROXY_TARGET_RECONCILIATION_HLE_REBASE_20261005_V1.json",
+    "git_blob_sha": "37ade3161ac3df03497134d0a5875614b8bc58f9"
+  },
+  "inputs": {
+    "v1_verification": {
+      "path": "canonical/verification/BENCHMARK_PROXY_MECHANISM_TO_OBSERVABLE_TARGET_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "ac910aae21c7f3158f5ddea4703b12f53548921e"
+    },
+    "hle_activation": {
+      "path": "canonical/governance/MULTIDISCIPLINARY_REASONING_HLE_TARGET_SCOPE_COLLAPSE_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "8bcce14802a05c8c4279d1e9473740300fa3274d"
+    },
+    "hle_verification": {
+      "path": "canonical/verification/MULTIDISCIPLINARY_REASONING_HLE_TARGET_SCOPE_COLLAPSE_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "0b89427b8ca33d6daa14df8e7a84ab92f78bcf3a"
+    }
+  },
+  "recomputed": {
+    "exact_target_entailed_mechanism_edges": [
+      {
+        "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "family": "COMPUTER_AND_BROWSER_USE"
+      }
+    ],
+    "exact_target_entailed_mechanism_edge_count": 1,
+    "five_family_new_mandatory_behavioral_residual_count": 0,
+    "multidisciplinary_additional_scope_residual_count": 0,
+    "hle_multimodal_configuration_identity_still_open": false,
+    "errors": []
+  },
+  "consequence": [
+    "USE_ONE_EXPLICIT_TARGET_ENTAILED_EXACT_MECHANISM_EDGE_FOR_PROXY_SCOPE_SCHEDULING",
+    "DO_NOT_REOPEN_MULTIDISCIPLINARY_EXTRA_SCOPE_BEYOND_HLE_TOOLS_TARGET",
+    "CONTINUE_ONLY_OBSERVABLE_SCOPE_STRENGTH_COMPUTER_BROWSER_ARBITRARY_APP_SCOPE_AND_GLOBAL_TARGET_DISCOVERY_COMPLETENESS"
+  ],
+  "verification_class": "CONNECTED_CANONICAL_RECOMPUTATION__SCHEDULING_ONLY__NOT_PROMOTION",
+  "hard_nonclaims": [
+    "NO_WHOLE_FAMILY_SCOPE_CLOSURE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
