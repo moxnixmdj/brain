@@ -1,0 +1,380 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_BRAIN_WITNESS_NORMALIZATION_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_14_PROVED_WITNESSES_EXACTLY_NORMALIZED__COUNT_GENERIC__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_SEMANTIC_CREDIT",
+  "objective": "Normalize every currently PROVED atomic acceptance witness from the exact current 14/38 evidence ledger into a stable content-addressed witness catalog without inferring target atoms, metric bounds, semantic implications, scope relations, acceptance, family, capability, or ownership credit.",
+  "authority": {
+    "evidence_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "predecessor": {
+      "path": "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V2.json",
+      "git_blob_sha": "5526f2c23b6f1eba5362c028f1029a8f15f095e1"
+    }
+  },
+  "witness_count": 14,
+  "witnesses": [
+    {
+      "witness_id": "WITNESS::DELEGATION_ZERO_CRITICAL_COORDINATION_VIOLATIONS",
+      "source_predicate_id": "DELEGATION_ZERO_CRITICAL_COORDINATION_VIOLATIONS",
+      "proof_kind": "RECEIPT",
+      "source_path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "source_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "132_OF_132_FROZEN_DELEGATION_DIRECT_CASES_PASS__SCORERS_REJECT_DUPLICATE_WORK_DEPENDENCY_VIOLATION_RESOURCE_CONFLICT_INVALID_CAPABILITY_ASSIGNMENT_WORKER_DOUBLE_BOOKING_EVIDENCE_OWNERSHIP_MISMATCH_AND_FANIN_LOSS",
+      "supporting_sources": [
+        {
+          "path": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+          "sha": "928466401b36e4f3b09c517950cc050432a0616f"
+        },
+        {
+          "path": "canonical/runtime/delegation_structural_variety_proof_v3.py",
+          "sha": "f5e1f45519278ed2cafa27d23b8602b0a362a492"
+        }
+      ],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::DELEGATION_SPEEDUP_NO_CORRECTNESS_TRADE",
+      "source_predicate_id": "DELEGATION_SPEEDUP_NO_CORRECTNESS_TRADE",
+      "proof_kind": "RECEIPT",
+      "source_path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "source_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "132_OF_132_FROZEN_DELEGATION_DIRECT_CASES_PASS__V2_SCORER_REQUIRES_EXACT_VALID_PLAN_AND_STRICT_ADVANTAGE_OVER_SERIAL_WALL_CLOCK_OR_NAIVE_FANOUT_COST",
+      "supporting_sources": [
+        {
+          "path": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+          "sha": "928466401b36e4f3b09c517950cc050432a0616f"
+        },
+        {
+          "path": "canonical/runtime/delegation_structural_variety_proof_v3.py",
+          "sha": "f5e1f45519278ed2cafa27d23b8602b0a362a492"
+        }
+      ],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::TOOL_LEARNING_SECOND_TASK_TRANSFER",
+      "source_predicate_id": "TOOL_LEARNING_SECOND_TASK_TRANSFER",
+      "proof_kind": "RECEIPT",
+      "source_path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "source_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "180_OF_180_FROZEN_TOOL_DISCOVERY_DIRECT_CASES_PASS__SCORER_EXPLICITLY_REQUIRES_REUSE_OF_UNCHANGED_STAGE1_EVIDENCE_IN_STAGE2_AND_REJECTS_REDUNDANT_REPROBING_EXCEPT_AFTER_PUBLIC_VERSION_CHANGE",
+      "supporting_sources": [
+        {
+          "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+          "sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+        },
+        {
+          "path": "canonical/runtime/tool_discovery_information_safe_proof.py",
+          "sha": "2450a9644119c9fdf9c43307a1d115098d6ba592"
+        }
+      ],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "source_predicate_id": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "proof_kind": "RECEIPT",
+      "source_path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "source_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "T1_AND_T3_LOAD_BEARING_SYNTHESIS_RECEIPTS_PASS__FROZEN_P3_BINDING_REQUIRED_CHECK_INCLUDES_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_AND_ANY_LOAD_BEARING_P3_FAILURE_BLOCKS_BEHAVIOR_PROOF",
+      "supporting_sources": [
+        {
+          "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+          "sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+        }
+      ],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::ARTIFACT_MECHANICAL_GATES_CEILING",
+      "source_predicate_id": "ARTIFACT_MECHANICAL_GATES_CEILING",
+      "proof_kind": "ABSOLUTE_CEILING",
+      "source_path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "source_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": true,
+      "brain_value": 1,
+      "objective_ceiling_value": 1,
+      "basis": "FROZEN_T1_NATIVE_ARTIFACT_AGGREGATE_8_DIRECT_INSTRUMENTATION_PASS__EXPLICIT_CLAIMED_SCOPE_DOCX_XLSX_PPTX_PDF_LOW_LEVEL_EDITS__BINDING_REQUIRES_FORMAT_REOPEN_STRUCTURE_AND_RENDER_PRESERVATION__STRUCTURAL_ORACLE_VERIFIES_DECLARED_EDIT_AND_NO_UNRELATED_MUTATION",
+      "supporting_sources": [
+        {
+          "path": "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+          "sha": "977e18ce2c19f7bb8a429a8f1c99407ff3000e92"
+        },
+        {
+          "path": "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+          "sha": "904eb61171f5ee775ff7824c1be7778d7acc4a23"
+        },
+        {
+          "path": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+          "sha": "39374e775d54cdc58315d7a1f877d834282a64f7"
+        }
+      ],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION",
+      "source_predicate_id": "TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION",
+      "proof_kind": "RECEIPT",
+      "source_path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "source_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "180_OF_180_FROZEN_TOOL_DISCOVERY_DIRECT_CASES_PASS__FROZEN_OBJECTIVE_BINDING_REQUIRES_EVIDENCE_BACKED_CAPABILITY_UPDATE_AND_NO_SELECTION_WITHOUT_CURRENT_POSITIVE_EVIDENCE",
+      "supporting_sources": [
+        {
+          "path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+          "sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+        },
+        {
+          "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+          "sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+        },
+        {
+          "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+          "sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+        }
+      ],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT",
+      "source_predicate_id": "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT",
+      "proof_kind": "RECEIPT",
+      "source_path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "source_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "FROZEN_ARTIFACT_CONTRACT_SCOPE_PARTITIONS_INTO_NATIVE_MECHANICAL_PRESERVATION_ALREADY_PROVED_PLUS_PROFESSIONAL_DELIVERABLE_JUDGMENT_COVERED_BY_THE_SEPARATE_AA_BRIEFCASE_PUBLIC_BAR_SCOPE__NO_EXTRA_DIRECT_QUALITY_LEAF",
+      "supporting_sources": [],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "source_predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "source_path": "canonical/verification/UNKNOWN_DOMAIN_V7_WINDOWS_V8_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "source_sha": "d65875f9abba55d9a58a4f2566f3719bebfb0a04",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "FROZEN_PREOUTCOME_V8_GATE__EXACT_GIT_OBJECT_REMATERIALIZATION_OF_14_BOUND_FILES__PYTHON_3_12_10_AND_3_13_15_BOTH_PASS__7_OF_7_REGRESSION_EACH__54_NONPRODUCTION_EXACT_SCORER_CASES_EACH__2048_SURROGATES_RECHECKED__FORCED_COLLISION_RECHECKED__FAKE_CLASS_PROXIES_AND_REAL_STR_BYTES_SUBCLASS_WIDENING_REJECTED__EXACT_FROZEN_LAUNCHER_BOUNDARY_STR_X_BYTES32__ZERO_PRODUCTION_OR_TERMINAL_CASES_CONSUMED",
+      "supporting_sources": [
+        {
+          "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_ISOLATED_ROOT3_REPROMOTION_GATE_20261005_V8.json",
+          "sha": "be54bb9db64dbaacf7fd5d6424e84c1cc58e1692",
+          "status": "FROZEN_PREOUTCOME"
+        },
+        {
+          "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+          "commit": "4f8f8df1ef2ca463953148e361048edeeee3dc98",
+          "status": "CURRENT_AUTHORITY_PREDICATE_PROMOTION__CONCURRENT_LIVEBENCH_REBASED__14_PROVED__24_UNRESOLVED"
+        },
+        {
+          "repository": "moxnixmdj/verification-capsule-runner",
+          "execution_head_sha": "ab165b1d761c13229e181890ffd1c3a4b97e3f78",
+          "workflow_run_id": 37247084485,
+          "workflow_job_id": 111566974537,
+          "artifact_id": 11319387720,
+          "artifact_digest_sha256": "229127f4f27c0e01f486ddbd6adea828351921653c7105c4e155b6957918893f",
+          "conclusion": "success"
+        }
+      ],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "source_predicate_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+      "source_path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "source_sha": "913d171b3c855000d322e183b142b3200eeaf0a9",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": true,
+      "brain_value": 1,
+      "objective_ceiling_value": 1,
+      "basis": "INDEPENDENT_PUBLIC_RUNNER_VERIFIED_BRAIN_AT_OBJECTIVE_CEILING_1_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS__FINITE_180_OF_180_SAMPLE_PRESERVED_AS_NON_LOAD_BEARING_SAMPLE_EVIDENCE",
+      "supporting_sources": [],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "source_predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+      "source_path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "source_sha": "d04f2a8c5594d261158835db1cae3822411b6b23",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": true,
+      "brain_value": 1,
+      "objective_ceiling_value": 1,
+      "basis": "INDEPENDENT_PUBLIC_RUNNER_COMPILED_THE_EXISTING_THEORETICAL_CEILING_WITNESS_WITH_AN_INDEPENDENT_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS_CERTIFICATE__DELEGATION_ONLY_NEW_CLOSURE",
+      "supporting_sources": [],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "source_predicate_id": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "proof_kind": "SCOPE_COMPLETE_STRONGER_PROOF",
+      "source_path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "source_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "HARDENED_INDEPENDENT_ZERO_REALITY_RECOVERY_REDUCER_PROVES_EXACT_FROZEN_SCOPE_AT_OBJECTIVE_CEILING_OR_FLOOR_USING_UNIVERSAL_P1_THEOREM_AND_WHOLE_SCOPE_RESTORATION__HISTORICAL_RELATION_OBSERVED_BOUNDS_AND_QUARANTINED_TERMINAL_RUN_NON_LOAD_BEARING",
+      "supporting_sources": [],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::RECOVERY_TERMINAL_NONINFERIOR",
+      "source_predicate_id": "RECOVERY_TERMINAL_NONINFERIOR",
+      "proof_kind": "SCOPE_COMPLETE_STRONGER_PROOF",
+      "source_path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "source_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "HARDENED_INDEPENDENT_ZERO_REALITY_RECOVERY_REDUCER_PROVES_EXACT_FROZEN_SCOPE_AT_OBJECTIVE_CEILING_OR_FLOOR_USING_UNIVERSAL_P1_THEOREM_AND_WHOLE_SCOPE_RESTORATION__HISTORICAL_RELATION_OBSERVED_BOUNDS_AND_QUARANTINED_TERMINAL_RUN_NON_LOAD_BEARING",
+      "supporting_sources": [],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+      "source_predicate_id": "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+      "proof_kind": "SCOPE_COMPLETE_STRONGER_PROOF",
+      "source_path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "source_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "HARDENED_INDEPENDENT_ZERO_REALITY_RECOVERY_REDUCER_PROVES_EXACT_FROZEN_SCOPE_AT_OBJECTIVE_CEILING_OR_FLOOR_USING_UNIVERSAL_P1_THEOREM_AND_WHOLE_SCOPE_RESTORATION__HISTORICAL_RELATION_OBSERVED_BOUNDS_AND_QUARANTINED_TERMINAL_RUN_NON_LOAD_BEARING",
+      "supporting_sources": [],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    },
+    {
+      "witness_id": "WITNESS::LIVEBENCH_IF_GE_65_7",
+      "source_predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "proof_kind": "CLEAN_CASE_INDEPENDENT_FORMAL_POINTWISE_DOMINANCE",
+      "source_path": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "source_sha": "57e27e3c56372b57a1d4e0255f49340d4a4c8588",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": false,
+      "brain_value": null,
+      "objective_ceiling_value": null,
+      "basis": "PREEXISTING_FROZEN_200_ROW_SCOPE_INDEPENDENTLY_OPENS_TO_EXACT_ACTIVE15__MINIMUM_CUT_RECOMPUTES_356352_CLASSIFICATION_STATES_WITH_ONLY_TWO_MANDATORY_LOSS_COORDINATES__712704_OF_712704_EXACT_POINTWISE_MAX_MATCHES__PINNED_PUNKT_REMAINDER_EXHAUSTED__EVERY_ACTIVE15_CASE_ATTAINS_TRUE_POINTWISE_MAXIMUM__ANY_OPUS_RESPONSE_CANNOT_EXCEED_SAME_CASE_MAXIMUM__PUBLIC_OPUS_IF_MEAN_65_73775_GE_65_7__ZERO_TARGET_ROWS_RESPONSES_OR_SCORES_USED",
+      "supporting_sources": [
+        {
+          "repository": "moxnixmdj/verification-capsule-runner",
+          "verified_checkout_sha": "ab7825a72bade9c61fd3f1142b1caecb192bc645",
+          "verifier_git_blob_sha": "3280203b47d61434ca89d70f56d4935ef1b29060",
+          "workflow_run_id": 37246829228,
+          "workflow_job_id": 111566258419,
+          "artifact_id": 11319227929,
+          "artifact_digest_sha256": "49b5da7e401373d93cccfe6b33c6b03e6147b8b35a8bdf6cb7c48ba51d011df5",
+          "conclusion": "success"
+        }
+      ],
+      "normalized_target_atoms": [],
+      "normalized_metric_bounds": {},
+      "semantic_implications": []
+    }
+  ],
+  "delta_since_v2": {
+    "predecessor_witness_count": 12,
+    "current_witness_count": 14,
+    "added_witnesses": [
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "LIVEBENCH_IF_GE_65_7"
+    ],
+    "removed_witnesses": [],
+    "semantic_credit_delta": 0
+  },
+  "hard_rules": [
+    "WITNESS_SET_IS_EXACT_RECOMPUTATION_OF_ALL_AND_ONLY_CURRENT_PROVED_CLAIMS",
+    "EVERY_WITNESS_MUST_BE_INDEPENDENT_OR_OBJECTIVE_AND_SCOPE_COMPLETE",
+    "NORMALIZED_TARGET_ATOMS_MUST_REMAIN_EMPTY_AT_THIS_LAYER",
+    "NORMALIZED_METRIC_BOUNDS_MUST_REMAIN_EMPTY_AT_THIS_LAYER",
+    "SEMANTIC_IMPLICATIONS_MUST_REMAIN_EMPTY_AT_THIS_LAYER",
+    "NEW_PROVED_CLAIMS_REQUIRE_RECOMPUTATION_NOT_MANUAL_APPEND",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_14_WITNESS_RECOMPUTATION__THEN_TOTALIZE_THE_CURRENT_14_WITNESSES_AGAINST_THE_EXISTING_INDEPENDENTLY_VERIFIED_8_TARGET_NORMALIZATION_V3",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "semantic_implication_verified": false,
+  "scope_relation_verified": false
+}
