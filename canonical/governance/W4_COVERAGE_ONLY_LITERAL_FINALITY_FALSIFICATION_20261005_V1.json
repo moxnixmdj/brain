@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_W4_COVERAGE_ONLY_LITERAL_FINALITY_FALSIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "PASS__W4_COVERAGE_ONLY_IS_NOT_LITERAL_TARGET_COMPLETENESS__RECLASSIFY_AS_W3_DOMAIN_PREMISE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subjects": [
+    "canonical/governance/OPUS55_FIXED_INTERFACE_INTERACTIVE_TRANSDUCER_SUPERDOMAIN_20261005_V1.json",
+    "canonical/governance/OPUS55_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_CERTIFICATE_20261005_V1.json",
+    "canonical/runtime/terminal_frontier_compiler_v2.py"
+  ],
+  "distinction": {
+    "coverage": "U_SUBSET_D: every useful target behavior lies inside a fixed-interface superdomain D.",
+    "dominance": "Brain is equal-or-better than Opus for every target-relevant task/behavior needed to conclude the terminal objective.",
+    "result": "COVERAGE_DOES_NOT_LOGICALLY_IMPLY_DOMINANCE."
+  },
+  "constructive_countermodel": {
+    "U": [
+      "u1"
+    ],
+    "D": [
+      "u1",
+      "u2"
+    ],
+    "coverage_true": true,
+    "brain_noninferior_on_u1": true,
+    "brain_noninferior_on_u2": false,
+    "dominance_over_D": false,
+    "consequence": "U_SUBSET_D can hold while universal dominance over D fails. Therefore a coverage-only certificate cannot by itself authorize literal terminal finality."
+  },
+  "classification": {
+    "W4_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE": "VALID_CANDIDATE_DOMAIN_COVERAGE_PREMISE_IF_INTERFACE_COMPLETENESS_SURVIVES_VERIFICATION",
+    "standalone_literal_completeness_witness": false,
+    "correct_terminal_route": "COMPOSE_W4_COVERAGE_WITH_UNIVERSAL_DOMINANCE_OVER_THE_COVERED_SUPERDOMAIN_OR_AN_EQUIVALENT_SOUND_REDUCTION; THE_COMBINED RESULT IS W3_CLASS.",
+    "compiler_rule": "DO_NOT_INCLUDE_W4_COVERAGE_ONLY_IN_TARGET_DISCOVERY_WITNESS_CLASSES."
+  },
+  "independent_symbolic_check": "canonical/verification/W4_COVERAGE_ONLY_LITERAL_FINALITY_WOLFRAM_VERIFICATION_20261005_V1.json",
+  "hard_nonclaims": [
+    "NO_CLAIM_FIXED_INTERFACE_SUPERDOMAIN_COVERAGE_IS_USELESS",
+    "NO_CLAIM_THE_W4_INTERFACE_COVERAGE_PREMISE_IS_FALSE",
+    "NO_CLAIM_W3_CANNOT_BE_BUILT_USING_W4_AS_ITS_DOMAIN_PREMISE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
