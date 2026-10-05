@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__V4_EXHAUSTIVENESS_REPAIR__FIVE_MAPPING_GROUPS_PLUS_TWO_CROSS_CUTTING_CONDITIONS_PLUS_ONE_CREATIVE_DIAGRAM_BASIS_REPAIR__ROOT1_POSITIVE_ZERO__ZERO_CREDIT",
+  "scope": "PRIMITIVE_FAMILY_ENUMERATION_PLUS_CROSS_CUTTING_SCOPE_AND_TERMINAL_PROOF_BASIS",
+  "predecessors": {
+    "v4": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V4.json",
+      "git_blob_sha": "f004248ddf87f94fdc8e85e6fa95a7dda8af28b9"
+    },
+    "exhaustiveness_quarantine": {
+      "path": "canonical/governance/ROOT1_ENVELOPE_V3_EXHAUSTIVENESS_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "18b878c19af54b76df1805753d8e062a2730a2a8"
+    },
+    "condition_boundary": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V1.json",
+      "git_blob_sha": "31a148ac13966ff6199b63c63ecd0a42fa506da9"
+    }
+  },
+  "root1_classification": {
+    "positive_gap_count": 0,
+    "active": false,
+    "rule": "UNKNOWN_MAPPING_OR_UNPROVED_CONDITION_IS_NOT_POSITIVE_CAPABILITY_ABSENCE"
+  },
+  "family_mapping_frontier": [
+    "CYBERSECURITY",
+    "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+    "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+    "HEALTHCARE",
+    "MATHEMATICAL_REASONING_ARXIVMATH"
+  ],
+  "cross_cutting_condition_frontier": [
+    {
+      "condition": "MULTILINGUAL_PERFORMANCE",
+      "state": "CANDIDATE_CLASSIFIED_AS_LANGUAGE_CONDITION__PARITY_OPEN"
+    },
+    {
+      "condition": "LONG_CONTEXT",
+      "state": "CANDIDATE_CLASSIFIED_AS_CONTEXT_HORIZON_CONDITION__PARITY_OPEN"
+    }
+  ],
+  "proof_basis_repair": {
+    "surface": "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT",
+    "state": "VERIFIED_PROOF_BASIS_GAP",
+    "authority": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json"
+  },
+  "closed_meta_boundaries": [
+    "VOICE_DICTATION_INPUT",
+    "IMAGE_INPUT_AND_VISUAL_REASONING"
+  ],
+  "terminal_finality_rule": "LITERAL_ALL_USEFUL_OPUS55_FINALITY_REQUIRES_CURRENT_ACCEPTANCE_CLOSURE_PLUS_ALL_REMAINING_FAMILY_MAPPINGS_PLUS_CROSS_CUTTING_CONDITION_COVERAGE_PLUS_CREATIVE_DIAGRAM_BASIS_REPAIR",
+  "scheduler_effect": {
+    "delete": [
+      "TREAT_V4_THREE_MAPPING_PLUS_CREATIVE_REPAIR_AS_GLOBALLY_EXHAUSTIVE",
+      "OPEN_NEW_FAMILY_FROM_LANGUAGE_OR_CONTEXT_LABEL_ALONE"
+    ],
+    "activate": [
+      "FIVE_EXACT_FAMILY_MAPPING_OR_COUNTEREXAMPLE_CHECKS",
+      "MULTILINGUAL_CONDITION_COVERAGE_PROOF",
+      "LONG_CONTEXT_CONDITION_COVERAGE_PROOF",
+      "MINIMUM_CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR"
+    ],
+    "preserve": [
+      "CURRENT_24_ATOMIC_REGISTRY_FRONTIER_AS_DECLARED_REGISTRY_STATE",
+      "CURRENT_ROOT1_POSITIVE_GAP_ZERO"
+    ]
+  },
+  "hard_rules": [
+    "NO_TERMINAL_FINALITY_FROM_38_OF_38_ALONE",
+    "NO_DOMAIN_LABEL_TO_NEW_FAMILY_INFERENCE",
+    "NO_CROSS_CONDITION_ACCEPTANCE_INHERITANCE_WITHOUT_SCOPE_PROOF",
+    "NO_ROOT1_REOPEN_FROM_UNCERTAINTY",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
