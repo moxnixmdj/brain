@@ -4145,6 +4145,32 @@ def _controller_plan_sha256(actions):
     return hashlib.sha256(raw).hexdigest()
 
 
+def _controller_durable_paths(action,result):
+    paths=[]
+    for path_key in (
+        "output_path","screenshot_path","xlsx_path",
+        "result_path","manifest_path","decision_path",
+    ):
+        raw=result.get(path_key) if isinstance(result,dict) else None
+        if isinstance(raw,str) and raw:
+            paths.append(raw)
+    if isinstance(action,dict) and str(action.get("type") or "")=="assert_file_exists":
+        raw=(action.get("args") or {}).get("path")
+        if isinstance(raw,str) and raw:
+            paths.append(raw)
+    return list(dict.fromkeys(paths))
+
+
+def _controller_capture_durable_effects(action,result):
+    rows=[]
+    for raw in _controller_durable_paths(action,result):
+        p=_safe_repo_path(raw)
+        if not p.is_file():
+            raise Blocker("CONTROLLER_DURABLE_EFFECT_MISSING:"+raw)
+        rows.append({"path":raw,"sha256":sha_file(p)})
+    return rows
+
+
 def _controller_checkpoint_record_valid(record,prior_trace=None):
     if not isinstance(record,dict):
         return False
@@ -4169,11 +4195,17 @@ def _controller_checkpoint_record_valid(record,prior_trace=None):
             return False
         if record.get("result_sha256")!=_json_value_sha256(result):
             return False
+        durable_effects=record.get("durable_effects")
+        if not isinstance(durable_effects,list):
+            return False
         try:
             resolved=_resolve_result_refs(dict(source_plan),list(prior_trace or []))
+            current_durable=_controller_capture_durable_effects(action,result)
         except Exception:
             return False
         if resolved!=action:
+            return False
+        if durable_effects!=current_durable:
             return False
 
     typ=str(action.get("type") or "")
@@ -4311,6 +4343,7 @@ def _run_model_independent_goal(step, mission, goal):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         _verify_action_expectation(action,result)
         source_plan=json.loads(json.dumps(raw_action,ensure_ascii=False))
+        durable_effects=_controller_capture_durable_effects(action,result)
         trace.append({
           "record_version":2,
           "cycle":cycle,
@@ -4320,6 +4353,7 @@ def _run_model_independent_goal(step, mission, goal):
           "action_sha256":_json_value_sha256(action),
           "result":result,
           "result_sha256":_json_value_sha256(result),
+          "durable_effects":durable_effects,
         })
         checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
         interrupt_after=step.get("interrupt_after_controller_actions_once")
