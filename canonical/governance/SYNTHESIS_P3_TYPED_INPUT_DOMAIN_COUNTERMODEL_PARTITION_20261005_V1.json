@@ -1,0 +1,170 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_P3_TYPED_INPUT_DOMAIN_COUNTERMODEL_PARTITION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SOURCE_BOUND_COUNTERMODEL__CURRENT_P3_V3_UNIVERSAL_TYPED_INPUT_TOTALITY_FALSIFIED__CONSTRUCTIVE_RESIDUAL_CLASSES_LOCALIZED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Replace the impossible task of proving universal whole-contract totality for the current P3 v3 implementation with a content-addressed exact implementation envelope plus constructive uncovered input classes. Preserve all valid predicate-level synthesis evidence and avoid fresh terminal cases until the route is generalized or residual classes are explicitly handled.",
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    },
+    "p3_candidate": {
+      "path": "canonical/runtime/p3_information_safe_candidate_v3.py",
+      "git_blob_sha": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a"
+    },
+    "p3_suite": {
+      "path": "canonical/runtime/p3_information_safe_proof_suite_v3.py",
+      "git_blob_sha": "7b4fef2a2ba2c84b3499ded1ed4bbaac6714fa42"
+    },
+    "p3_preflight_verification": {
+      "path": "canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "c0812ad6e7ee1e1c93d7419ed72f4fc7c9980381"
+    },
+    "semantic_reduction": {
+      "path": "canonical/governance/SYNTHESIS_P3_CONTRACT_SEMANTIC_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "f6b83872bf1288693e4e5250a561599f1cc6fa75"
+    },
+    "overextension_quarantine": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_20261005_V1.json"
+    }
+  },
+  "source_bound_facts": {
+    "audience_priority_literals": [
+      "executive",
+      "engineer",
+      "auditor"
+    ],
+    "audience_fallback_for_unlisted_audience": "EMPTY_PRIORITY_SET",
+    "supported_claim_relations": [
+      "at_least",
+      "at_most"
+    ],
+    "other_claim_relation_behavior": "RAISE_VALUE_ERROR_RELATION",
+    "evidence_value_conversion": "float(e['value'])",
+    "threshold_conversion": "float(claim['threshold'])",
+    "evidence_grouping_key": "metric",
+    "provenance_consumed_by_candidate": false,
+    "evidence_unit_consumed_by_candidate": false,
+    "objective_consumed_for_decision": false,
+    "general_format_style_constraints_consumed": false,
+    "output_budget_field_consumed": "max_claims",
+    "candidate_output_fields": [
+      "selected_claims",
+      "uncertainty_claims",
+      "terminal_authority"
+    ],
+    "realized_synthesis_text_emitted": false,
+    "claim_to_provenance_mapping_emitted": false,
+    "unsupported_required_claim_behavior": "IF_NO_VOTES_CONTINUE__CLAIM_OMITTED_WITHOUT_EXPLICIT_UNRESOLVED_OR_INSUFFICIENT_EVIDENCE_STATE",
+    "preflight_zero_evidence_required_claim_coverage": "NOT_EXERCISED__GENERATOR_CREATES_TWO_OR_THREE_EVIDENCE_UNITS_FOR_EVERY_CLAIM"
+  },
+  "current_implementation_envelope": {
+    "name": "P3_V3_NUMERIC_THRESHOLD_SELECTION_SUBDOMAIN",
+    "guaranteed_syntactic_requirements": [
+      "TASK_IS_MAPPING",
+      "CLAIMS_ARE_MAPPINGS_WITH_NUMERIC_CONVERTIBLE_THRESHOLD",
+      "CLAIM_RELATION_IS_AT_LEAST_OR_AT_MOST",
+      "EVIDENCE_VALUES_ARE_NUMERIC_CONVERTIBLE",
+      "MAX_CLAIMS_IS_INTEGER_CONVERTIBLE"
+    ],
+    "semantically_modeled_dimensions": [
+      "REQUIRED_CLAIM_ID_PRIORITY",
+      "THREE_ENUMERATED_AUDIENCE_KIND_PRIORITIES",
+      "NUMERIC_THRESHOLD_SUPPORT_VOTING",
+      "BINARY_CONFLICT_DETECTION_OVER_THRESHOLD_VOTES",
+      "COUNT_BUDGETED_CLAIM_ID_SELECTION"
+    ],
+    "not_a_whole_contract_totality_claim": true
+  },
+  "constructive_uncovered_classes": [
+    {
+      "id": "SYNTHESIS_SCOPE_R1_OPEN_AUDIENCE_ADAPTATION",
+      "witness": "Any admissible audience outside executive/engineer/auditor requiring audience-specific optional evidence selection or organization.",
+      "source_reason": "AUDIENCE_PRIORITY.get(audience,()) returns an empty preference set for every unlisted audience.",
+      "contract_clause": "user objective/audience; audience/format constraints pass"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_R2_NONNUMERIC_OR_STRUCTURED_EVIDENCE",
+      "witness": "Verified textual, categorical, boolean, table-cell, document-fragment, image-derived proposition, or other non-float evidence unit.",
+      "source_reason": "Every evidence value is forced through float(e['value']).",
+      "contract_clause": "Verified evidence units with provenance"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_R3_GENERAL_CLAIM_SEMANTICS",
+      "witness": "A required claim whose support relation is equality, membership, categorical identity, causal/relational, temporal ordering, logical entailment, interval, or another admissible non-threshold proposition.",
+      "source_reason": "_satisfies implements only at_least and at_most; every other relation raises ValueError('RELATION').",
+      "contract_clause": "required claims are supported"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_R4_GENERAL_OUTPUT_CONSTRAINTS",
+      "witness": "A valid explicit format/style/structure constraint beyond integer max_claims, such as required sections, table schema, citation form, tone, ordering, or artifact structure.",
+      "source_reason": "The candidate reads max_claims but has no general format/style/structure constraint interpreter.",
+      "contract_clause": "output constraints; audience/format constraints pass"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_R5_INSUFFICIENT_EVIDENCE_FOR_REQUIRED_CLAIM",
+      "witness": "A required claim with zero matching evidence units or evidence that cannot support it.",
+      "source_reason": "When votes is empty the candidate continues and silently omits the required claim; it emits no unresolved/insufficient-evidence state. The bounded preflight generator always creates 2 or 3 evidence units for every generated claim, so that population cannot exercise this zero-evidence required-claim class.",
+      "contract_clause": "required coverage is complete; no unsupported material claims"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_R6_PROVENANCE_AND_UNIT_SENSITIVE_SUPPORT",
+      "witness": "Two verified evidence units share a metric label but differ in provenance, source authority, unit, or otherwise cannot be treated as interchangeable scalar votes.",
+      "source_reason": "Candidate groups solely by metric, consumes only float(value), and never reads provenance or unit.",
+      "contract_clause": "Verified evidence units with provenance; claim-to-source fidelity"
+    },
+    {
+      "id": "SYNTHESIS_SCOPE_R7_REALIZED_SYNTHESIS_EXPRESSION",
+      "witness": "Any admissible task requiring the selected evidence to be expressed as audience-constrained prose, structured artifact content, or provenance-bearing material claims rather than only claim IDs.",
+      "source_reason": "Candidate emits selected_claims and uncertainty_claims IDs only; it emits neither synthesized expression nor claim-to-provenance bindings.",
+      "contract_clause": "Select, organize and express the necessary evidence"
+    }
+  ],
+  "theorem": {
+    "statement": "Because at least one admissible contract input exists in each constructive class for which the current content-addressed P3 v3 implementation either raises, ignores a required constraint, silently omits a required claim, erases provenance/unit distinctions, or does not emit the required expression, universal totality of this implementation over EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 is false.",
+    "consequence": "DO_NOT_SPEND_EFFORT_PROVING_CURRENT_P3_V3_WHOLE_DOMAIN_TOTALITY__GENERALIZE_OR_EXPLICITLY_ROUTE_THE_CONSTRUCTIVE_RESIDUAL_CLASSES",
+    "does_not_require_new_terminal_cases": true
+  },
+  "next_minimum_closure_problem": {
+    "id": "SYNTHESIS_TYPED_IR_GENERALIZATION_AND_TOTALITY",
+    "objective": "Create one frozen synthesis typed IR and total route whose admitted domain either covers R1-R7 or explicitly fails closed before claiming those classes, then prove that the admitted-plus-residual partition is exhaustive relative to the behavioral contract.",
+    "priority_order": [
+      "R5_INSUFFICIENT_REQUIRED_SUPPORT_BECAUSE_CURRENT_PREFLIGHT_ORACLE_SHARES_THE_SAME_BLIND_SPOT",
+      "R6_PROVENANCE_AND_UNIT_SENSITIVE_SUPPORT",
+      "R4_GENERAL_OUTPUT_CONSTRAINTS",
+      "R1_OPEN_AUDIENCE_ADAPTATION",
+      "R3_GENERAL_CLAIM_SEMANTICS",
+      "R2_NONNUMERIC_OR_STRUCTURED_EVIDENCE",
+      "R7_REALIZED_SYNTHESIS_EXPRESSION"
+    ],
+    "fresh_reality_before_generalization": "NOT_JUSTIFIED"
+  },
+  "fanout": [
+    "PROFESSIONAL_KNOWLEDGE_WORK",
+    "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "AGENTIC_SCIENTIFIC_RESEARCH"
+  ],
+  "hard_nonclaims": [
+    "THIS_DOES_NOT_PROVE_THE_SEVEN_RESIDUAL_CLASSES_ARE_AN_EXHAUSTIVE_PARTITION_OF_ALL_POSSIBLE_OPEN_ENDED_SYNTHESIS_SEMANTICS",
+    "THIS_DOES_NOT_REVOKE_PREDICATE_LEVEL_SYNTHESIS_SCOPE_OR_TERMINAL_RECEIPTS",
+    "THIS_DOES_NOT_CLAIM_THE_SYNTHESIS_MECHANISM_HAS_ZERO_USEFUL_SCOPE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
