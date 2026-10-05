@@ -1,0 +1,151 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_HOST_CONTEXT_MULTIPLEX_SCOPE_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__REPLACE_UNDECLARED_UNIVERSAL_INPUT_TOTALITY_PROGRAM_WITH_CANONICAL_HOST_CONTEXT_STRATIFIED_MATCHED_SCOPE_BINDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Compress the reopened EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 scope root by using the canonical matched synthesis proof mode itself to cover the three host-family occurrences, instead of requiring a stronger universal every-input totality theorem that the declared terminal protocol does not require.",
+  "authorities": {
+    "active_scope_frontier": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3_ACTIVATION_V1.json",
+      "subject": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3.json",
+      "active_root": "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "proof_mode": "MATCHED_GROUNDED_SYNTHESIS_NONINFERIORITY"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "preserved_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "overextension_quarantine": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "c1b2d488dfd38c27b533f98424036be874d5e829"
+    }
+  },
+  "recomputed_facts": {
+    "communication_family_maps_to_exact_single_behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "shared_host_fanout": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ],
+    "canonical_synthesis_acceptance_requires_universal_success_over_every_admissible_semantic_input": false,
+    "canonical_synthesis_acceptance_requires_frozen_representative_portfolio_exercising_declared_dimensions": true,
+    "canonical_dimensions": [
+      "CLAIM_TO_SOURCE_FIDELITY",
+      "REQUIRED_EVIDENCE_COVERAGE",
+      "UNCERTAINTY_AND_DISAGREEMENT_PRESERVATION",
+      "AUDIENCE_ADAPTATION",
+      "FORMAT_AND_STYLE_CONSTRAINTS",
+      "COMPRESSION_WITHOUT_DECISION_RELEVANT_LOSS"
+    ],
+    "existing_predicate_scope_dimension_relation_closed": true,
+    "existing_predicate_performance_open": true,
+    "whole_semantic_input_universe_formally_enumerated_in_current_contract": false
+  },
+  "core_reduction": {
+    "invalid_shortcut_rejected": "DO_NOT_REUSE_THE_EXISTING_T1_T3_P3_SCOPE_CERTIFICATE_AS_IF_IT_PROVED_ALL_INPUTS",
+    "unnecessary_stronger_program_rejected": "DO_NOT_REQUIRE_A_UNIVERSAL_EVERY_SEMANTIC_INPUT_TOTALITY_THEOREM_WHEN_THE_FROZEN_TERMINAL_PROTOCOL_IS_MATCHED_STATISTICAL_NONINFERIORITY",
+    "replacement": "FREEZE_ONE_SYNTHESIS_MATCHED_PORTFOLIO_WITH_EXPLICIT_HOST_CONTEXT_STRATA_AND_REQUIRE_THE_DECLARED_SYNTHESIS_DIMENSIONS_IN_EACH_MATERIAL_HOST_CONTEXT",
+    "why_lossless_for_declared_protocol": "THE TERMINAL PROTOCOL DEFINES ACCEPTANCE THROUGH A FROZEN REPRESENTATIVE SYNTHESIS PORTFOLIO; HOST_CONTEXT_STRATIFICATION MAKES THE THREE REUSE OCCURRENCES LOAD_BEARING INSIDE THAT SAME PROOF INSTEAD_OF INHERITING FROM UNRELATED T1_T3 SURFACES."
+  },
+  "required_host_context_strata": [
+    {
+      "id": "PROFESSIONAL_KNOWLEDGE_WORK_SYNTHESIS",
+      "host_family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "must_exercise": [
+        "MULTI_SOURCE_EVIDENCE",
+        "AUDIENCE_AND_PROFESSIONAL_FORMAT_CONSTRAINTS",
+        "CONFLICT_OR_UNCERTAINTY_WHERE_MATERIAL",
+        "DECISION_RELEVANT_COMPRESSION"
+      ]
+    },
+    {
+      "id": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING_SYNTHESIS",
+      "host_family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "must_exercise": [
+        "CROSS_DOMAIN_EVIDENCE",
+        "TOOL_OR_SEARCH_RECEIPT_SYNTHESIS",
+        "REQUIRED_CLAIM_COVERAGE",
+        "CALIBRATED_UNCERTAINTY"
+      ]
+    },
+    {
+      "id": "AGENTIC_SCIENTIFIC_RESEARCH_SYNTHESIS",
+      "host_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "must_exercise": [
+        "SCIENTIFIC_EVIDENCE_AND_RESULT_SYNTHESIS",
+        "CONFLICTING_OR_PARTIAL_EVIDENCE",
+        "SOURCE_FIDELITY",
+        "SCIENTIFIC_COMMUNICATION_CONSTRAINTS"
+      ]
+    }
+  ],
+  "shared_cross_strata_requirements": [
+    "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+    "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED",
+    "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED",
+    "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
+    "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION"
+  ],
+  "acceptance_multiplex": {
+    "source_family": "COMMUNICATION_AND_SYNTHESIS",
+    "already_proved_atomic_predicate": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+    "remaining_source_atomic_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "candidate_rule": "ONE_PREDECLARED_MATCHED_SYNTHESIS_PROGRAM_MAY_CLOSE_THE_REMAINING_SOURCE_PREDICATE_AND_DISCHARGE_EXACT_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_HOST_OCCURRENCES_ONLY_FOR_HOST_STRATA_EXPLICITLY_INCLUDED_AND_SCOPE_VERIFIED",
+    "no_cross_stratum_compensation": true,
+    "no_unobserved_host_scope_inheritance": true
+  },
+  "scope_repair_consequence_if_independently_verified": {
+    "replace_active_root": "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS",
+    "with": "SYNTHESIS_HOST_CONTEXT_PORTFOLIO_SCOPE_BINDING",
+    "new_independent_synthesis_scope_program_count": 0,
+    "new_duplicate_per_family_synthesis_program_count": 0,
+    "remaining_load_bearing_work": [
+      "FREEZE_HOST_CONTEXT_STRATIFIED_PORTFOLIO_WITH_PREDECLARED_SAMPLING_AND_METRICS",
+      "PROVE_THE_PORTFOLIO_SCOPE_BINDING_COVERS_EVERY_DECLARED_SYNTHESIS_DIMENSION_AND_THE_THREE_HOST_OCCURRENCES_WITHOUT_UNSUPPORTED_TRANSFER",
+      "EXECUTE_OR_DISCHARGE_SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_UNDER_SEPARATE_VALID_AUTHORITY",
+      "RETAIN_ANY_HOST_INPUT_CLASS_NOT_REPRESENTED_BY_THE_FROZEN_PORTFOLIO_AS_AN_EXPLICIT_RESIDUAL"
+    ]
+  },
+  "falsifiers": [
+    "THE_TERMINAL_PROTOCOL_IS_AMENDED_TO_REQUIRE_UNIVERSAL_PER_INPUT_TOTALITY",
+    "A_HOST_FAMILY_OCCURRENCE_ADDS_STRONGER_SYNTHESIS_INPUT_ENVIRONMENT_AUTHORITY_OR_SUCCESS_SEMANTICS_NOT_REPRESENTABLE_AS_A_PORTFOLIO_STRATUM",
+    "THE_COMMUNICATION_FAMILY_NO_LONGER_MAPS_EXACTLY_TO_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "INDEPENDENT_VERIFICATION_SHOWS_THE_HOST_STRATA_DO_NOT LOSSLESSLY COVER_THE_REUSE_OCCURRENCES"
+  ],
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_SCOPE_CLOSURE_YET",
+    "NO_SYNTHESIS_MATCHED_PERFORMANCE_CREDIT",
+    "NO_HOST_FAMILY_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_T1_T3_P3_EVIDENCE_IS_UNIVERSAL",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_SEAL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
