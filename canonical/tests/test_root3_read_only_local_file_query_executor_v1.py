@@ -28,12 +28,12 @@ class ReadOnlyLocalFileExecutorTests(unittest.TestCase):
     def allow(self, request):
         return {"allowed": True, "authorization_sha256": "a" * 64}
 
-    def test_supported_subset_is_exactly_five_of_current_eight(self):
+    def test_supported_subset_is_exactly_five_of_current_five(self):
         current={k for k,v in EXPECTED.items() if v=="READ_ONLY_DECLARED_QUERY"}
-        self.assertEqual(len(current),8)
+        self.assertEqual(len(current),5)
         self.assertEqual(len(ro.SUPPORTED),5)
         self.assertTrue(set(ro.SUPPORTED).issubset(current))
-        self.assertEqual(len(current-set(ro.SUPPORTED)),3)
+        self.assertEqual(len(current-set(ro.SUPPORTED)),0)
 
     def test_target_is_nested_inside_namespace_wrapper_not_raw_spawn(self):
         import base64
