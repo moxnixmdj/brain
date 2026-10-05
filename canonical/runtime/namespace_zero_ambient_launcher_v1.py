@@ -154,7 +154,7 @@ exec chroot "$ROOT" /usr/bin/env -i "${ENV_ARGS[@]}"   /usr/bin/setpriv --no-new
     for key,value in policy.env:
         env["PB_"+key]=value
     cmd=[
-        "unshare","--user","--map-root-user","--mount","--net","--pid","--fork","--ipc","--uts",
+        "unshare","--user","--map-root-user","--mount","--net","--pid","--fork","--kill-child=SIGKILL","--ipc","--uts",
         "bash","-c",setup,"_",root,policy.input_dir,*policy.argv,
     ]
     try:
