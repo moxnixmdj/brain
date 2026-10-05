@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V3_PARTIAL_PARSE_FALSIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "DETERMINISTIC_PUBLIC_CHECKER_COUNTEREXAMPLE__V3_PARTIAL_PARSE_UNSAFE__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v3.py",
+    "git_blob_sha": "ff977b2e34d551e5a2751852bb77d23c7c503647",
+    "route": "LIVEBENCH_IF_SCORE_ONLY_STRUCTURAL_WITNESS_V3"
+  },
+  "frozen_public_source": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "path": "livebench/if_runner/ifbench/instructions.py",
+    "git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "checker": "PalindromeChecker",
+    "description": "Include at least 10 single-word palindromes, each at least 5 characters long."
+  },
+  "counterexample": {
+    "synthetic_prompt": "Use at least 5 unique words in the response. Include at least 10 single-word palindromes, each at least 5 characters long.",
+    "construction": "COMBINE_ONE_CONSTRAINT_RECOGNIZED_BY_INSTRUCTION_CONSTRAINT_COMPILER_V1_WITH_ONE_FROZEN_PUBLIC_REGISTERED_IFBENCH_CONSTRAINT_NOT_RECOGNIZED_BY_THAT_COMPILER",
+    "v3_behavior": "SYNTHESIZE_AND_VALIDATE_ONLY_THE_RECOGNIZED_UNIQUE_WORD_SUBSET_THEN_RETURN_PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE",
+    "frozen_public_checker_behavior": "THE_SAME_RESPONSE_FAILS_PALINDROMECHECKER_BECAUSE_IT_DOES_NOT_CONTAIN_10_SINGLE_WORD_PALINDROMES_OF_LENGTH_AT_LEAST_5",
+    "reproducer": "canonical/verification/livebench_v3_partial_parse_falsification_v1.py"
+  },
+  "falsified_claims": [
+    "UNRECOGNIZED_REGISTERED_CONSTRAINTS_IN_A_MIXED_PROMPT_AUTOMATICALLY_FALL_THROUGH_TO_V2",
+    "POSTVALIDATION_AGAINST_ONLY_COMPILE_CONSTRAINTS_RECOVERED_SUBSET_IS_SUFFICIENT_TO_AUTHORIZE_A_MODEL_INDEPENDENT_LIVEBENCH_IF_WITNESS",
+    "V3_IS_FAIL_CLOSED_WITH_RESPECT_TO_PARTIALLY_PARSED_REGISTERED_PUBLIC_IFBENCH_PROMPTS"
+  ],
+  "preserved_claims": [
+    "THE_FROZEN_MODERN_IFBENCH_SCORER_HAS_NO_SEPARATE_SEMANTIC_ANSWER_QUALITY_TERM",
+    "A_FULLY_PROVED_CONSTRAINT_WITNESS_CAN_IN_PRINCIPLE_SCORE_WITHOUT_A_SEMANTIC_SEED",
+    "V2_EXACT_FORMAL_ROUTES_ARE_NOT_FALSIFIED_BY_THIS_COUNTEREXAMPLE",
+    "PROMPT_ONLY_RATIO_OVERLAP_REDUCTIONS_ARE_NOT_FALSIFIED_BY_THIS_COUNTEREXAMPLE"
+  ],
+  "required_truth_repair": {
+    "minimum_condition_before_v3_style_promotion": "PROVE_CONSTRAINT_SURFACE_COMPLETENESS_FOR_THE_ENTIRE_INPUT_PROMPT_BEFORE_AUTHORIZING_THE_MODEL_INDEPENDENT_STRUCTURAL_WITNESS_ROUTE",
+    "safe_behavior_without_that_proof": "FALL_BACK_TO_THE_PREVIOUS_VERIFIED_ROUTE",
+    "stronger_successor": "PARSE_AGAINST_THE_COMPLETE_PINNED_PUBLIC_INSTRUCTION_GRAMMAR_AND_REQUIRE_EVERY_RECOGNIZED_INSTRUCTION_DESCRIPTION_TO_HAVE_A_VERIFIED_CHECKER_LEVEL_CONSTRUCTOR_OR_FAIL_CLOSED"
+  },
+  "scheduler_effect": [
+    "DO_NOT_PROMOTE_OR_ACTIVATE_ROOT2_LIVEBENCH_IF_ASTRA_INFERENCE_ADAPTER_V3_AS_A_GENERAL_STRUCTURAL_SUCCESSOR",
+    "DO_NOT_COUNT_V3_STRUCTURAL_WITNESS_OUTPUT_AS_PROOF_OF_ALL_REGISTERED_CONSTRAINTS_UNLESS_PROMPT_SURFACE_COMPLETENESS_IS_ESTABLISHED",
+    "PRESERVE_SCORE_MASS_MINIMUM_CUT_WORK_BUT_REQUIRE_SOUND_PER_CONSTRAINT_MASS_CERTIFICATES"
+  ],
+  "contamination_firewall": [
+    "ZERO_UNEXPOSED_TERMINAL_LIVEBENCH_CASE_CONTENT",
+    "ZERO_TERMINAL_CASE_IDS",
+    "ZERO_TERMINAL_KWARGS",
+    "PUBLIC_FROZEN_CHECKER_SEMANTICS_ONLY",
+    "SYNTHETIC_COUNTEREXAMPLE_ONLY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
