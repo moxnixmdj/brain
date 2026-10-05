@@ -1,8 +1,13 @@
-"""Deterministic counterexample audit for composition cross-step no-bypass.
+"""Deterministic audit of the known Astra mission-runner cross-step bypass.
 
-This audit proves only that the current Astra mission runtime exposes a prior
-step result to a later shell step outside composition_state_capsule_v1/v2.
-It does not claim that every composition route uses this channel.
+The original counterexample was a research -> artifact mission whose shell step
+received every prior result through ASTRA_STEP_* environment variables without
+an explicit dependency declaration. The repaired boundary is intentionally
+narrow: strict missions must declare source step indexes and admitted channels,
+and the runtime content-binds each selected result before projection.
+
+This audit closes only that concrete bypass class. Whole-runtime P1/P2 closure
+still requires exhaustive channel accounting and independent verification.
 """
 from __future__ import annotations
 
@@ -15,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[2]
 RUNTIME = ROOT / "canonical/runtime/astra_runtime.py"
 MISSION = ROOT / "canonical/astra_runtime/missions/ASTRA_RUNTIME_RESEARCH_ARTIFACT_001.json"
 SCHEMA = "PROJECT_BRAIN_COMPOSITION_CROSS_STEP_NO_BYPASS_AUDIT_V1"
+MODE = "DECLARED_CONTENT_BOUND_V1"
 
 
 def _git_blob_sha(path: Path) -> str:
@@ -26,34 +32,35 @@ def _git_blob_sha(path: Path) -> str:
 
 def evaluate() -> dict[str, Any]:
     errors: list[str] = []
-    if not RUNTIME.is_file():
+    source = RUNTIME.read_text(encoding="utf-8") if RUNTIME.is_file() else ""
+    if not source:
         errors.append("ASTRA_RUNTIME_MISSING")
-        source = ""
-    else:
-        source = RUNTIME.read_text(encoding="utf-8")
 
-    if not MISSION.is_file():
-        errors.append("RESEARCH_ARTIFACT_MISSION_MISSING")
-        mission: dict[str, Any] = {}
+    if MISSION.is_file():
+        raw = json.loads(MISSION.read_text(encoding="utf-8"))
+        mission = raw if isinstance(raw, dict) else {}
     else:
-        value = json.loads(MISSION.read_text(encoding="utf-8"))
-        mission = value if isinstance(value, dict) else {}
-        if not mission:
-            errors.append("RESEARCH_ARTIFACT_MISSION_INVALID")
+        mission = {}
+    if not mission:
+        errors.append("RESEARCH_ARTIFACT_MISSION_MISSING_OR_INVALID")
 
     required_runtime_fragments = {
-        "context_results_collects_history":
-            'for rec in state.get("history",[]):',
-        "mission_loop_passes_all_context":
-            "result=execute_step(step, context_results(state), mission)",
-        "shell_receives_prior_results":
-            "return run_shell(step, prior_results)",
-        "shell_exports_result_json":
-            'prefix+"RESULT_JSON"',
-        "shell_exports_body":
-            'prefix+"BODY"',
-        "shell_exports_stdout":
-            'prefix+"STDOUT"',
+        "strict_mode_constant":
+            'DECLARED_CROSS_STEP_CONTEXT_MODE="DECLARED_CONTENT_BOUND_V1"',
+        "strict_context_builder":
+            "def _declared_context_results(state,step,current_step_index):",
+        "source_must_be_prior":
+            'raise Blocker("CROSS_STEP_SOURCE_NOT_PRIOR:"+str(source))',
+        "source_result_content_hash":
+            '"result_sha256":hashlib.sha256(raw).hexdigest()',
+        "shell_declaration_match":
+            'raise Blocker("CROSS_STEP_BINDING_DECLARATION_MISMATCH")',
+        "shell_hash_recheck":
+            'raise Blocker("CROSS_STEP_RESULT_HASH_MISMATCH:"+str(source))',
+        "forward_loop_uses_boundary":
+            "result=execute_step(step, _step_context_results(state,mission,i), mission)",
+        "rehydration_uses_boundary":
+            "result=execute_step(prior, _step_context_results(state,mission,j), mission)",
     }
     runtime_checks = {
         name: fragment in source
@@ -63,62 +70,75 @@ def evaluate() -> dict[str, Any]:
         if not passed:
             errors.append("RUNTIME_FRAGMENT_MISSING:" + name)
 
+    forbidden_runtime_fragments = {
+        "forward_loop_raw_all_context":
+            "result=execute_step(step, context_results(state), mission)",
+        "rehydration_raw_all_context":
+            "result=execute_step(prior, context_results(state), mission)",
+    }
+    forbidden_runtime_checks = {
+        name: fragment not in source
+        for name, fragment in forbidden_runtime_fragments.items()
+    }
+    for name, passed in forbidden_runtime_checks.items():
+        if not passed:
+            errors.append("RAW_CONTEXT_BYPASS_STILL_PRESENT:" + name)
+
     steps = mission.get("steps")
+    second = (
+        steps[1]
+        if isinstance(steps, list) and len(steps) >= 2 and isinstance(steps[1], dict)
+        else {}
+    )
     mission_checks = {
-        "two_or_more_steps": isinstance(steps, list) and len(steps) >= 2,
-        "first_step_http": (
-            isinstance(steps, list)
-            and len(steps) >= 1
-            and isinstance(steps[0], dict)
-            and steps[0].get("adapter") == "http"
-        ),
-        "later_shell_consumes_step0_body": (
-            isinstance(steps, list)
-            and len(steps) >= 2
-            and isinstance(steps[1], dict)
-            and steps[1].get("adapter") == "shell"
-            and "ASTRA_STEP_0_BODY" in str(steps[1].get("command") or "")
-        ),
+        "strict_mode_enabled":
+            mission.get("cross_step_context_mode") == MODE,
+        "later_shell_still_consumes_step0_body":
+            second.get("adapter") == "shell"
+            and "ASTRA_STEP_0_BODY" in str(second.get("command") or ""),
+        "step0_body_dependency_declared_exactly":
+            second.get("cross_step_inputs")
+            == [{"step_index": 0, "channels": ["BODY"]}],
     }
     for name, passed in mission_checks.items():
         if not passed:
             errors.append("MISSION_CHECK_FAILED:" + name)
 
-    capsule_bound_at_shell_boundary = (
-        "composition_state_capsule_v1" in source
-        or "composition_state_capsule_v2" in source
-    )
-    if capsule_bound_at_shell_boundary:
-        errors.append("CAPSULE_REFERENCE_PRESENT_REQUIRES_MANUAL_REAUDIT")
-
-    counterexample_holds = not errors
+    repaired = not errors
     return {
         "schema": SCHEMA,
         "status": (
-            "PASS__CURRENT_ASTRA_CROSS_STEP_CHANNEL_FALSIFIES_NO_BYPASS_PREMISE"
-            if counterexample_holds
-            else "FAIL_CLOSED__SOURCE_OR_SCOPE_DRIFT_REQUIRES_REAUDIT"
+            "PASS__KNOWN_RAW_CROSS_STEP_BYPASS_CLOSED_BY_DECLARED_CONTENT_BOUND_PROJECTION"
+            if repaired
+            else "FAIL_CLOSED__KNOWN_BYPASS_REPAIR_NOT_ESTABLISHED"
         ),
-        "counterexample_holds": counterexample_holds,
+        "known_counterexample_closed": repaired,
         "errors": sorted(errors),
         "runtime_checks": runtime_checks,
+        "forbidden_runtime_checks": forbidden_runtime_checks,
         "mission_checks": mission_checks,
-        "capsule_bound_at_shell_boundary": capsule_bound_at_shell_boundary,
         "runtime_path": str(RUNTIME.relative_to(ROOT)),
         "runtime_git_blob_sha": _git_blob_sha(RUNTIME) if RUNTIME.is_file() else None,
         "mission_path": str(MISSION.relative_to(ROOT)),
         "mission_git_blob_sha": _git_blob_sha(MISSION) if MISSION.is_file() else None,
         "scope": (
-            "ASTRA_SHELL_CROSS_STEP_RESULT_HANDOFF_USED_BY_EXPLICIT_"
+            "KNOWN_ASTRA_SHELL_CROSS_STEP_RESULT_HANDOFF_USED_BY_EXPLICIT_"
             "RESEARCH_TO_ARTIFACT_PORTFOLIO_MISSION"
         ),
         "implication": (
-            "COMPOSITION_STATE_CAPSULE_P1_P2_NO_BYPASS_INTEGRATION_PREMISE_"
-            "IS_FALSE_FOR_THIS_RUNTIME_SCOPE_UNTIL_RESTRICTED_OR_INTEGRATED"
+            "THE_PREVIOUS_CONSTRUCTIVE_COUNTEREXAMPLE_NO_LONGER_FALSIFIES_"
+            "NO_BYPASS_FOR_THIS_EXACT_HANDOFF"
         ),
+        "remaining": [
+            "EXHAUSTIVE_ACCOUNTING_OF_OTHER_MUTABLE_CROSS_STEP_CHANNELS",
+            "SEMANTIC_COMPLETENESS_OF_DECLARED_STATE_AND_EVIDENCE_INPUTS",
+            "INDEPENDENT_REPOSITORY_NATIVE_VERIFICATION",
+            "P3_CRITICAL_INVARIANT_AGGREGATION_AFTER_P1_P2",
+        ],
         "hard_nonclaims": [
-            "NO_CLAIM_ALL_COMPOSITION_ROUTES_USE_THIS_CHANNEL",
-            "NO_CLAIM_WHOLE_COMPOSITION_FAMILY_FAILS",
+            "NO_CLAIM_WHOLE_RUNTIME_P1_IS_PROVED",
+            "NO_CLAIM_WHOLE_RUNTIME_P2_IS_PROVED",
+            "NO_CLAIM_COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES_IS_CLOSED",
             "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
         ],
         "new_reality_units_consumed": 0,

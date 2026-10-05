@@ -6,22 +6,30 @@ from canonical.runtime.composition_cross_step_no_bypass_audit_v1 import evaluate
 
 
 class Tests(unittest.TestCase):
-    def test_current_runtime_counterexample_is_mechanical(self):
+    def test_known_raw_cross_step_counterexample_is_closed(self):
         out = evaluate()
         self.assertEqual(
             out["status"],
-            "PASS__CURRENT_ASTRA_CROSS_STEP_CHANNEL_FALSIFIES_NO_BYPASS_PREMISE",
+            "PASS__KNOWN_RAW_CROSS_STEP_BYPASS_CLOSED_BY_DECLARED_CONTENT_BOUND_PROJECTION",
             out,
         )
-        self.assertTrue(out["counterexample_holds"], out)
-        self.assertFalse(out["capsule_bound_at_shell_boundary"], out)
+        self.assertTrue(out["known_counterexample_closed"], out)
+        self.assertEqual(out["errors"], [], out)
         self.assertTrue(
-            out["mission_checks"]["later_shell_consumes_step0_body"],
+            out["mission_checks"]["step0_body_dependency_declared_exactly"],
             out,
         )
         self.assertTrue(
-            out["runtime_checks"]["mission_loop_passes_all_context"],
+            out["runtime_checks"]["source_result_content_hash"],
             out,
+        )
+        self.assertTrue(
+            out["forbidden_runtime_checks"]["forward_loop_raw_all_context"],
+            out,
+        )
+        self.assertIn(
+            "EXHAUSTIVE_ACCOUNTING_OF_OTHER_MUTABLE_CROSS_STEP_CHANNELS",
+            out["remaining"],
         )
 
 

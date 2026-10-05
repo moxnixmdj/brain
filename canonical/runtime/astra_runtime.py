@@ -64,7 +64,9 @@ def writej(p,x):
     p.write_text(json.dumps(x,indent=2,sort_keys=True)+"\n",encoding="utf-8")
 def readj(p): return json.loads(pathlib.Path(p).read_text(encoding="utf-8"))
 
-def context_results(state):
+DECLARED_CROSS_STEP_CONTEXT_MODE="DECLARED_CONTENT_BOUND_V1"
+
+def _context_result_map(state):
     latest={}
     for rec in state.get("history",[]):
         if rec.get("ok"):
@@ -73,7 +75,76 @@ def context_results(state):
         for rec in batch.get("steps",[]):
             if rec.get("ok"):
                 latest[rec["step_index"]]=rec["result"]
+    return latest
+
+def context_results(state):
+    latest=_context_result_map(state)
     return [latest[i] for i in sorted(latest)]
+
+def _cross_step_declarations(step):
+    raw=step.get("cross_step_inputs",[])
+    if not isinstance(raw,list):
+        raise Blocker("CROSS_STEP_INPUTS_INVALID")
+    allowed={"RESULT_JSON","BODY","STDOUT"}
+    out=[]
+    seen=set()
+    for item in raw:
+        if not isinstance(item,dict) or set(item)!={"step_index","channels"}:
+            raise Blocker("CROSS_STEP_INPUT_DECLARATION_INVALID")
+        source=item.get("step_index")
+        channels=item.get("channels")
+        if not isinstance(source,int) or isinstance(source,bool) or source<0:
+            raise Blocker("CROSS_STEP_SOURCE_INDEX_INVALID")
+        if source in seen:
+            raise Blocker("CROSS_STEP_SOURCE_DUPLICATE:"+str(source))
+        if (
+            not isinstance(channels,list)
+            or not channels
+            or any(not isinstance(x,str) or x not in allowed for x in channels)
+            or len(channels)!=len(set(channels))
+        ):
+            raise Blocker("CROSS_STEP_CHANNELS_INVALID:"+str(source))
+        seen.add(source)
+        out.append({"step_index":source,"channels":list(channels)})
+    return out
+
+def _declared_context_results(state,step,current_step_index):
+    declarations=_cross_step_declarations(step)
+    latest=_context_result_map(state)
+    bindings=[]
+    for decl in declarations:
+        source=decl["step_index"]
+        if source>=current_step_index:
+            raise Blocker("CROSS_STEP_SOURCE_NOT_PRIOR:"+str(source))
+        if source not in latest:
+            raise Blocker("CROSS_STEP_SOURCE_RESULT_MISSING:"+str(source))
+        result=latest[source]
+        raw=json.dumps(
+            result,sort_keys=True,separators=(",",":"),ensure_ascii=False
+        ).encode("utf-8")
+        bindings.append({
+          "step_index":source,
+          "channels":list(decl["channels"]),
+          "result":result,
+          "result_sha256":hashlib.sha256(raw).hexdigest(),
+        })
+    return {
+      "mode":DECLARED_CROSS_STEP_CONTEXT_MODE,
+      "bindings":bindings,
+    }
+
+def _step_context_results(state,mission,current_step_index):
+    mode=mission.get("cross_step_context_mode")
+    if mode is None:
+        return context_results(state)
+    if mode!=DECLARED_CROSS_STEP_CONTEXT_MODE:
+        raise Blocker("CROSS_STEP_CONTEXT_MODE_UNKNOWN:"+str(mode))
+    steps=mission.get("steps")
+    if not isinstance(steps,list) or current_step_index<0 or current_step_index>=len(steps):
+        raise Blocker("CROSS_STEP_CURRENT_STEP_INVALID")
+    return _declared_context_results(
+        state,steps[current_step_index],current_step_index
+    )
 
 def sha_file(p):
     h=hashlib.sha256()
@@ -132,19 +203,75 @@ def _resolve_bash_executable():
 def run_shell(step, prior_results=None):
     cmd=step["command"]
     env=os.environ.copy()
-    for i, result in enumerate(prior_results or []):
-        prefix=f"ASTRA_STEP_{i}_"
-        env[prefix+"RESULT_JSON"]=json.dumps(result, sort_keys=True)
-        if "body_excerpt" in result:
-            env[prefix+"BODY"]=result["body_excerpt"]
-        if "stdout" in result:
-            env[prefix+"STDOUT"]=result["stdout"]
+    cross_step_bindings=[]
+    if isinstance(prior_results,dict) and prior_results.get("mode")==DECLARED_CROSS_STEP_CONTEXT_MODE:
+        declarations=_cross_step_declarations(step)
+        raw_bindings=prior_results.get("bindings")
+        if not isinstance(raw_bindings,list):
+            raise Blocker("CROSS_STEP_BINDINGS_INVALID")
+        expected=[
+          {"step_index":x["step_index"],"channels":list(x["channels"])}
+          for x in declarations
+        ]
+        got=[
+          {
+            "step_index":x.get("step_index"),
+            "channels":list(x.get("channels") or []),
+          }
+          for x in raw_bindings if isinstance(x,dict)
+        ]
+        if len(got)!=len(raw_bindings) or got!=expected:
+            raise Blocker("CROSS_STEP_BINDING_DECLARATION_MISMATCH")
+        for binding in raw_bindings:
+            source=binding["step_index"]
+            result=binding.get("result")
+            raw=json.dumps(
+                result,sort_keys=True,separators=(",",":"),ensure_ascii=False
+            ).encode("utf-8")
+            digest=hashlib.sha256(raw).hexdigest()
+            if binding.get("result_sha256")!=digest:
+                raise Blocker("CROSS_STEP_RESULT_HASH_MISMATCH:"+str(source))
+            prefix=f"ASTRA_STEP_{source}_"
+            for channel in binding["channels"]:
+                if channel=="RESULT_JSON":
+                    env[prefix+"RESULT_JSON"]=json.dumps(result,sort_keys=True)
+                elif channel=="BODY":
+                    if not isinstance(result,dict) or "body_excerpt" not in result:
+                        raise Blocker("CROSS_STEP_BODY_UNAVAILABLE:"+str(source))
+                    env[prefix+"BODY"]=str(result["body_excerpt"])
+                elif channel=="STDOUT":
+                    if not isinstance(result,dict) or "stdout" not in result:
+                        raise Blocker("CROSS_STEP_STDOUT_UNAVAILABLE:"+str(source))
+                    env[prefix+"STDOUT"]=str(result["stdout"])
+                else:
+                    raise Blocker("CROSS_STEP_CHANNEL_UNKNOWN:"+str(channel))
+            env[prefix+"RESULT_SHA256"]=digest
+            cross_step_bindings.append({
+              "step_index":source,
+              "channels":list(binding["channels"]),
+              "result_sha256":digest,
+            })
+    else:
+        for i, result in enumerate(prior_results or []):
+            prefix=f"ASTRA_STEP_{i}_"
+            env[prefix+"RESULT_JSON"]=json.dumps(result, sort_keys=True)
+            if "body_excerpt" in result:
+                env[prefix+"BODY"]=result["body_excerpt"]
+            if "stdout" in result:
+                env[prefix+"STDOUT"]=result["stdout"]
     t=time.monotonic()
     p=subprocess.run([_resolve_bash_executable(),"-lc",cmd],cwd=ROOT,text=True,capture_output=True,env=env)
     return {
       "adapter":"shell","command":cmd,"returncode":p.returncode,
       "stdout":p.stdout[-12000:],"stderr":p.stderr[-12000:],
-      "duration_s":round(time.monotonic()-t,3)
+      "duration_s":round(time.monotonic()-t,3),
+      "cross_step_context_mode":(
+          DECLARED_CROSS_STEP_CONTEXT_MODE
+          if isinstance(prior_results,dict)
+          and prior_results.get("mode")==DECLARED_CROSS_STEP_CONTEXT_MODE
+          else "LEGACY_ALL_PRIOR_RESULTS"
+      ),
+      "cross_step_bindings":cross_step_bindings,
     }
 
 def _external_tool_bridge(kind,payload):
@@ -6212,7 +6339,16 @@ def run_goal(step, mission):
 
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
+    mission=mission or {}
+    mode=mission.get("cross_step_context_mode")
+    if mode not in (None,DECLARED_CROSS_STEP_CONTEXT_MODE):
+        raise Blocker("CROSS_STEP_CONTEXT_MODE_UNKNOWN:"+str(mode))
     if adapter=="shell":
+        if mode==DECLARED_CROSS_STEP_CONTEXT_MODE and (
+            not isinstance(prior_results,dict)
+            or prior_results.get("mode")!=DECLARED_CROSS_STEP_CONTEXT_MODE
+        ):
+            raise Blocker("DECLARED_CROSS_STEP_CONTEXT_REQUIRED")
         return run_shell(step, prior_results)
     if adapter=="http":
         return run_http(step)
@@ -6331,7 +6467,7 @@ def main():
                 continue
             try:
                 _continuous_obs_revalidate(f"BEFORE_REHYDRATION_STEP:{j}")
-                result=execute_step(prior, context_results(state), mission)
+                result=execute_step(prior, _step_context_results(state,mission,j), mission)
                 ok=verify(prior,result)
                 _continuous_obs_revalidate(f"AFTER_REHYDRATION_STEP:{j}")
             except Exception as e:
@@ -6373,7 +6509,7 @@ def main():
         adapter=step["adapter"]
         try:
             _continuous_obs_revalidate(f"BEFORE_STEP:{i}")
-            result=execute_step(step, context_results(state), mission)
+            result=execute_step(step, _step_context_results(state,mission,i), mission)
             ok=verify(step,result)
             _continuous_obs_revalidate(f"AFTER_STEP_RECEIPT:{i}")
         except Exception as e:
