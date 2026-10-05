@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
+  "action_id": "OPUS55-PARAMETRIC-INTERFACE-EXECUTOR-QUOTIENT-VERIFY-20261005-V2",
+  "status": "EVIDENCE_ONLY__CURRENT_BASE_BOUND__NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+  "date": "2026-10-05",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "60af21915796e665ebe16f4d6f298beb66e49562",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "INDEPENDENT_VERIFICATION__TARGET_ONTOLOGY_SEARCH_SPACE_DELETION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::EXTERNAL_EXECUTOR_IMPLEMENTATION_VARIANTS_MISCOUNTED_AS_INTRINSIC_OPUS_CAPABILITIES",
+  "expected_parent_frontier_change": "DELETE_EXTERNAL_EXECUTOR_IMPLEMENTATION_VARIANTS_FROM_INTRINSIC_TARGET_ENUMERATION_WITHOUT_FREEZING_OR_ASSUMING_COMPLETE_MODEL_INTERFACE_ALPHABET",
+  "theory_invariants": {
+    "terminal_goal_unchanged": true,
+    "all_useful_not_redefined": true,
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_ownership_required": true,
+    "opus55_or_better_acceptance_required": true,
+    "no_capability_credit_from_ontology_cleanup": true,
+    "interface_completeness_not_assumed": true
+  },
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-05_PARAMETRIC_INTERFACE_EXECUTOR_QUOTIENT_DECISION_V2.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "obs1_goal": "PERMANENTLY_OWN_ALL_INTRINSIC_USEFUL_OPUS55_CAPABILITIES_GE_OPUS55",
+    "obs2_required_capability": "SOUND_CAUSAL_TARGET_FACTORIZATION_THAT_SURVIVES_INTERFACE_REFINEMENT",
+    "obs3_blocker": "COUNTING_EXECUTOR_INTERNAL_IMPLEMENTATIONS_AS_MODEL_CAPABILITIES_CREATES_FALSE_OPEN_ENDED_TARGET;FIXED_INTERFACE_ASSUMPTIONS_CAN_FAIL_ON_NEW_LOAD_BEARING_CHANNELS",
+    "obs4_solution": "PARAMETRIC_EXECUTOR_SUBSTITUTION_QUOTIENT_OVER_WHATEVER_COMPLETE_MODEL_VISIBLE_STATE_IS_EVENTUALLY_PROVED",
+    "obs5_verification": "CURRENT_FIRST_PARTY_TOOL_EXECUTION_BOUNDARIES_PLUS_THINKING_STATE_CHANNEL_CHECK_PLUS_INDEPENDENT_FINITE_CAUSAL_FALSIFICATION",
+    "obs6_inherited_system": "DELETE_ONLY_EXECUTOR_INTERNAL_VARIANTS;PRESERVE_MODEL_POLICY_BEHAVIORS_AND_ALL_DIRECT_MODALITY_STATE_CHANNELS",
+    "obs7_obs": "STOP_AFTER_THEOREM_IS_ORTHOGONALIZED_FROM_INTERFACE_COMPLETENESS_AND_NO_COUNTEREXAMPLE_FOUND_IN_BOUND_CURRENT_SURFACES",
+    "deletion_first_order_checked": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "WHITE_BOX_HARVEST",
+      "COMPOSE",
+      "CONFIGURE",
+      "INTEGRATE"
+    ],
+    "selected_route": "REUSE_EXISTING_INTERFACE_POLICY_CANDIDATE_AND_INTRINSIC_PROFILE_PROJECTION__REPAIR_WITH_PARAMETRIC_INTERFACE_QUOTIENT",
+    "discovery_required": false,
+    "discovery_exemption_reason": "GOVERNANCE_AND_EVIDENCE_RECONCILIATION_ONLY__NO_CAPABILITY_ACQUISITION_ROUTE_OR_FRESH_TERMINAL_TASK",
+    "exact_base_commit_binding": true,
+    "material_state_change_invalidates": true
+  },
+  "behavioral_contract": {
+    "behavior_id": "PARAMETRIC_EXECUTOR_SUBSTITUTION_CAUSAL_ATTRIBUTION_001",
+    "inputs": "ACTUAL_MODEL_VISIBLE_STATE_I_STAR__TOOL_SCHEMAS__MODEL_ACTIONS__EXECUTOR_RESULTS__PRIOR_LOAD_BEARING_MODEL_STATE_INCLUDING_THINKING_STATE_WHERE_APPLICABLE",
+    "environment_state": "CURRENT_DOCUMENTED_OPUS55_TOOL_MEDIATED_INTERACTION",
+    "allowed_information": "CURRENT_FIRST_PARTY_PUBLIC_DOCUMENTATION_AND_CANONICAL_ZERO_CREDIT_CANDIDATES",
+    "required_output_or_action": "IDENTIFY_TRACE_EQUIVALENT_EXECUTOR_VARIANTS_AS_THE_SAME_INTRINSIC_MODEL_CAPABILITY_CONDITION",
+    "success_condition": "EXECUTOR_INTERNAL_DIFFERENCES_WITH_NO_DIFFERENCE_IN_MODEL_VISIBLE_TRACE_DO_NOT CREATE_DISTINCT_INTRINSIC_OPUS_CAPABILITIES",
+    "failure_condition": "A_CONCRETE_OPUS55_BEHAVIOR_CAUSALLY_DEPENDS_ON_EXECUTOR_INTERNAL_STATE_NOT_PRESENT_IN_ANY_MODEL_VISIBLE_OR_CARRIED_FORWARD_INTERFACE_STATE",
+    "terminal_consequence": "REDUCE_FALSE_OPEN_ENDED_TARGET_ENUMERATION_WITHOUT CLAIMING_INTERFACE_COMPLETENESS_OR_TERMINAL_FINALITY",
+    "verification_route": "FIRST_PARTY_DOCUMENTATION_TRIANGULATION_PLUS_FINITE_CAUSAL_COUNTEREXAMPLE_SEARCH",
+    "dependency_boundary": "INTRINSIC_MODEL_POLICY_STATE_VS_EXTERNAL_EXECUTION_TRANSITION",
+    "scope": "DOCUMENTED_TOOL_MEDIATED_OPUS55_SURFACES;THEOREM_PARAMETRIC_IN_I_STAR"
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "NO_UNTOUCHED_QUALIFICATION_EVIDENCE_OR_PROMOTION"
+  },
+  "qualification_stage": "NOT_APPLICABLE__EVIDENCE_ONLY",
+  "terminal_proof_control": {
+    "proof_obligation": "SHOW_EXECUTOR_QUOTIENT_REMAINS_SOUND_WITHOUT_ASSUMING_A_FIXED_COMPLETE_INTERFACE_ALPHABET",
+    "hole_type": "TARGET_ONTOLOGY",
+    "expected_certificate_or_receipt": "INDEPENDENT_VERIFICATION_V2",
+    "validator": "FIRST_PARTY_CAUSAL_BOUNDARY_CHECK_PLUS_WOLFRAM_FINITE_FALSIFICATION",
+    "maximum_cheap_test_cost": "ZERO_INCREMENTAL_SPEND",
+    "prerequisites": [
+      "canonical/reasoning/2026-10-05_OPUS55_INTERFACE_POLICY_NORMAL_FORM_V1.json",
+      "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_PROFILE_PROJECTION_20261005_V1.json",
+      "canonical/governance/OPUS55_FIXED_INTERFACE_THINKING_CHANNEL_COUNTEREXAMPLE_20261005_V1.json"
+    ],
+    "contamination_risk": "NONE__NO_HELDOUT_TASK",
+    "reversibility": "FULLY_REVERSIBLE",
+    "falsification_condition": "MODEL_INTRINSIC_BEHAVIOR_DEPENDS_ON_HIDDEN_EXECUTOR_INTERNALS_WITHOUT_TRACE_MEDIATION",
+    "critical_path_relation": "PREVENTS_FALSE_INFINITE_TOOL_IMPLEMENTATION_TARGET_WHILE_TARGET_DISCOVERY_REMAINS_OPEN"
+  },
+  "continuous_obs": {
+    "required": true,
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_PROFILE_PROJECTION_20261005_V1.json",
+      "canonical/governance/OPUS55_FIXED_INTERFACE_THINKING_CHANNEL_COUNTEREXAMPLE_20261005_V1.json"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "obs_layers_current": true,
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": true,
+    "information_boundary_complete": true,
+    "information_policy": "NO_NEW_TERMINAL_REALITY"
+  },
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "reason": "PUBLIC_DOCUMENTATION_AND_SYMBOLIC_FALSIFICATION_ONLY"
+  },
+  "global_terminal_proof_cut": {
+    "applies": false,
+    "reason": "NO_UNTOUCHED_TASK_SELECTION_EXECUTION_OR_TERMINAL_PROMOTION"
+  }
+}
