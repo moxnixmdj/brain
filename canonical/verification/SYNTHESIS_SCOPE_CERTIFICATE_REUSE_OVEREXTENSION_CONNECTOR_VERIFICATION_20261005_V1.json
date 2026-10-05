@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__PREDICATE_SCOPE_PROOF_VALID__WHOLE_BEHAVIOR_INPUT_DOMAIN_COMPLETENESS_NOT_ENTAILED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_20261005_V1.json",
+    "git_blob_sha": "c1b2d488dfd38c27b533f98424036be874d5e829"
+  },
+  "authorities": {
+    "certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "decomposition": {
+      "path": "canonical/governance/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_V1.json",
+      "git_blob_sha": "72f31ed22331be258e8762bedf0f0df3596af8d7"
+    },
+    "overextended_bridge": {
+      "path": "canonical/governance/EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_20261005_V1.json",
+      "git_blob_sha": "5654d4a2350016624b11820013b1df330787aca1"
+    },
+    "overextended_activation": {
+      "path": "canonical/governance/EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "64b6beffd6e9a0884df75b7687d906a39c4d0860"
+    }
+  },
+  "checks": {
+    "certificate_target_is_acceptance_predicate_scope": true,
+    "certificate_witness_is_terminal_synthesis_surface": true,
+    "decomposition_explicitly_limits_claim_to_target_subset": true,
+    "decomposition_target_dimension_count": 6,
+    "whole_behavior_input_domain_quantifier_present": false,
+    "predicate_root3_scope_relation_remains_closed": true,
+    "predicate_performance_remains_open": true,
+    "whole_leaf_scope_completeness_entailment": false,
+    "formal_countermodel_valid": true,
+    "errors": []
+  },
+  "deduction": [
+    "TARGET_SCOPE_SUBSET_OF_A_WITNESS_SCOPE_DOES_NOT_ENTAIL_TOTALITY_OVER_EVERY_ADMISSIBLE_WITNESS_INPUT.",
+    "THE_EXISTING SIX_DIMENSION CERTIFICATE REMAINS VALID FOR SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR ROOT3 SCOPE RELATION.",
+    "THE WHOLE EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 INPUT_DOMAIN_SCOPE_COMPLETENESS CLAIM MUST BE REVOKED UNTIL TOTALITY IS PROVED OR RESIDUAL INPUT CLASSES ARE PARTITIONED."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
