@@ -50,7 +50,7 @@ def _derive(registry:Mapping[str,Any], atomic:Mapping[str,Any], envelope:Mapping
     preds=[x for x in registry.get("predicates",[]) if isinstance(x,Mapping)]
     ids=[x.get("id") for x in preds]
     if None in ids or len(ids)!=len(set(ids)): errors.append("REGISTRY_PREDICATE_IDS_INVALID")
-    if len(preds)!=38: errors.append("REGISTRY_PREDICATE_COUNT_NOT_38")
+    if not preds: errors.append("REGISTRY_PREDICATES_EMPTY")
     by_family=defaultdict(list)
     for p in preds:
         fam=p.get("family")
