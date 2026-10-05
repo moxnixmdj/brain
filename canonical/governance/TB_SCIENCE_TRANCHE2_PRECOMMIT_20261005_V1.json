@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANCHE2_PRECOMMIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_PRECOMMIT__NEXT_THREE_UNTOUCHED_SLOTS__CURRENT_ROUTE_BYTES_BOUND__EXECUTION_FALSE_PENDING_CURRENT_CAPSULE_VERIFICATION__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "route_authority": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_ROUTE_REBIND_20261005_V1.json",
+    "git_blob_sha": "dae0296799b44d8d97a4bea402754ebfbf43cdc8"
+  },
+  "manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+  },
+  "current_route": {
+    "planner": {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "fe7c0ce885197217774638df382aeb6f68ff38dd"
+    },
+    "controller": {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "git_blob_sha": "5557efd21f1a433ad16766def3775a79c459784b"
+    },
+    "command_policy": {
+      "path": "canonical/runtime/harbor_command_policy.py",
+      "git_blob_sha": "a525773417291c7a4841bf35e1baff5370350d0d"
+    },
+    "harbor_transport": {
+      "path": "canonical/runtime/harbor_environment_transport.py",
+      "git_blob_sha": "ec46f648214a37bb16025d5ef2593efdf59f0d79"
+    },
+    "source_gate": {
+      "path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+      "git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+    },
+    "reducer": {
+      "path": "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py",
+      "git_blob_sha": "3b48ea534d606cf47a8321b56427353066393577"
+    },
+    "integration_verification": {
+      "path": "canonical/verification/TB_SCIENCE_PATCHED_REAL_HARBOR_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "4512996a6698463be367052b13a891bd0f647f73"
+    },
+    "harbor_version": "0.23.0",
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "dataset_content_hash": "sha256:91531bf50016a7c64f6cc60794a17c64c6b2c14858a8ae0de39ca16f2abd611a"
+  },
+  "prior_spend": {
+    "tranche1_result": {
+      "path": "canonical/verification/TB_SCIENCE_TRANCHE1_RESULT_20261003_V1.json",
+      "git_blob_sha": "283cc7049949238047f545c4faa6beac62086e3f"
+    },
+    "finalized_slots": [
+      "terminal-bench-science/genomic-model-ranking::trial-0",
+      "terminal-bench-science/mri-harmonization::trial-0",
+      "terminal-bench-science/navigation-sensor-calibration::trial-0"
+    ],
+    "success_count": 0,
+    "final_zero_count": 3,
+    "old_authority_revoked": true,
+    "shared_failure_causally_repaired_by_current_route": true
+  },
+  "next_untouched_slots": [
+    {
+      "schedule_rank": 4,
+      "slot_id": "terminal-bench-science/baseline-free-localization::trial-0",
+      "task_digest": "sha256:f35349bcb083094b096a2400d9e98e55690b35f26e2b395796364ad109e91d57"
+    },
+    {
+      "schedule_rank": 5,
+      "slot_id": "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "task_digest": "sha256:18e64cb62b351e3861e1995bdc3ba08bba37f0ae3e645ee4b250714b6f0c00ee"
+    },
+    {
+      "schedule_rank": 6,
+      "slot_id": "terminal-bench-science/koopman-mfg-id::trial-0",
+      "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f"
+    }
+  ],
+  "immutable_execution_semantics": {
+    "retries_per_slot": 0,
+    "slot_replacement": false,
+    "duplicate_credit": false,
+    "denominator": 210,
+    "success": "EXACT_HARBOR_VERIFIER_REWARD_GE_1_0",
+    "every_other_final_state": "ZERO",
+    "stop_on_pass_lock": "successes>=124",
+    "stop_on_fail_lock": "finalized_failures>=87",
+    "incremental_spend_usd": 0
+  },
+  "missing_before_execution": [
+    "CURRENT_ROUTE_EXECUTION_CAPSULE_OR_WORKFLOW_BOUND_TO_THE_EXACT_CURRENT_PLANNER_CONTROLLER_AND_PRECOMMIT",
+    "INDEPENDENT_VERIFICATION_OF_THAT_EXECUTION_CAPSULE",
+    "EXPLICIT_TRANCHE2_FRESH_REALITY_EXECUTION_AUTHORITY_BOUND_TO_THIS_PRECOMMIT"
+  ],
+  "activation_rule": "NO_TERMINAL_CASE_MAY_RUN_FROM_THIS_FILE__THIS_FILE_ONLY_FREEZES_WHICH_ALREADY_UNTOUCHED_SLOTS_A_FUTURE_EXACT_CURRENT_AUTHORITY_MAY_ACTIVATE",
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
