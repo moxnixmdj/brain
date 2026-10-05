@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_CONTENT_ADDRESS_BINDING_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_CONTENT_ADDRESS_REPAIR__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Replace the placeholder verification digest in the active exact-18 Root2 scheduling authority with the actual Git blob SHA and permanently guard both authority links against placeholder or content drift.",
+  "target": {
+    "path": "canonical/governance/ROOT2_18_CURRENT_14_24_SCHEDULING_ACTIVATION_V1.json",
+    "pre_repair_git_blob_sha": "7d0dd1a755d5e278897791e11884d4a4287ef58d",
+    "post_repair_git_blob_sha": "44265094d5827769560cdddef77f500a9b404d0a"
+  },
+  "bindings": {
+    "subject": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V3.json",
+      "git_blob_sha": "82612b803c1d47eeb8888cf99a00c14a1bea54e1"
+    },
+    "verification": {
+      "path": "canonical/verification/ROOT2_18_CURRENT_14_24_RECOMPUTATION_V1.json",
+      "git_blob_sha": "e26b2ec473f457660fad73721052720a39c0090f",
+      "status": "PASS__EXACT_18_SET_AND_ROUTE_REUSE_RECOMPUTED__ZERO_CREDIT"
+    }
+  },
+  "defect": "ACTIVE_SCHEDULING_AUTHORITY_CONTAINED_LITERAL_PENDING_CONTENT_ADDRESS_PLACEHOLDER_FOR_ITS_VERIFICATION_RECEIPT",
+  "repair": [
+    "BIND_ACTUAL_VERIFICATION_GIT_BLOB_SHA",
+    "PRESERVE_EXACT_18_ROUTE_SET_AND_ALL_AUTHORITY_BOUNDS",
+    "ADD_REGRESSION_TEST_RECOMPUTING_GIT_BLOB_SHA_FOR_BOTH_SUBJECT_AND_VERIFICATION",
+    "FAIL_IF_PENDING_PLACEHOLDER_REAPPEARS"
+  ],
+  "terminal_effect": "INTEGRITY_HARDENING_ONLY__NO_PREDICATE_CLOSED__NO_ROUTE_ADDED_OR_REMOVED",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
