@@ -1,0 +1,24 @@
+name: Verify two-clock work-unit validity V1
+
+on:
+  pull_request:
+    paths:
+      - canonical/runtime/work_unit_validity_guard_v1.py
+      - canonical/tests/test_two_clock_work_unit_validity_guard_v1.py
+      - canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261005_V1.json
+      - .github/workflows/verify-two-clock-work-unit-validity-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run two-clock guard tests
+        run: python -m unittest canonical.tests.test_two_clock_work_unit_validity_guard_v1 -v
