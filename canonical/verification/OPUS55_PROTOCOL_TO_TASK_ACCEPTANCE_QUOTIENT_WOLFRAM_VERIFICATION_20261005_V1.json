@@ -4,7 +4,7 @@
   "status": "INDEPENDENT_WOLFRAM_KERNEL_PASS__CARRIER_NOT_DOMINANCE_COUNTERMODEL_AND_TASK_CONDITIONED_PARTITION_LOGIC_CONFIRMED__ZERO_CREDIT",
   "subject": {
     "path": "canonical/governance/OPUS55_PROTOCOL_TO_TASK_ACCEPTANCE_QUOTIENT_NORMAL_FORM_20261005_V1.json",
-    "git_blob_sha": "6a77270660e66958c01bfef010714357f88c8c65"
+    "git_blob_sha": "f99773af55e434f8f5b3753261b51d90d6c13213"
   },
   "independent_kernel": {
     "provider": "WOLFRAM_LANGUAGE_KERNEL",
@@ -74,5 +74,14 @@
   "scheduling_authority": false,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "provenance_rebind": {
+    "status": "GITHUB_CONNECTOR_EXACT_BLOB_REBIND_PASS",
+    "corrected_authority_path": "canonical/governance/HIDDEN_EVALUATOR_DOMINANCE_BOUNDARY_V1.json",
+    "corrected_authority_git_blob_sha": "094d50ef0c2a54e7bc1b9cfd7f96c1b970b8b0ca",
+    "prior_incorrect_sha": "678f728089a8df815153af6dd58a88894dd0671f",
+    "prior_incorrect_sha_actual_subject": "canonical/governance/HIDDEN_EVALUATOR_MONOTONE_COUPLING_DOMINANCE_V1.json",
+    "logical_kernel_result_changed": false,
+    "acceptance_credit_delta": 0
+  }
 }
