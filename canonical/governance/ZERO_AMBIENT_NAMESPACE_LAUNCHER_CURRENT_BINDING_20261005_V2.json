@@ -1,0 +1,38 @@
+{
+  "schema":"PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_CURRENT_BINDING_20261005_V2",
+  "date":"2026-10-05",
+  "status":"ACTIVE_CANDIDATE__CURRENT_EXACT_BLOBS_BOUND__ISOLATED_REPLAY_PASS__ZERO_CREDIT",
+  "objective":"Repair stale subject identity in the original namespace-launcher candidate by binding the exact current runtime and test blobs that were independently replayed.",
+  "supersedes_for_subject_identity":{
+    "path":"canonical/governance/ZERO_AMBIENT_NAMESPACE_LAUNCHER_CANDIDATE_20261005_V1.json",
+    "git_blob_sha":"85237bae49461f6b15f9adce2590c04afe039e7d",
+    "reason":"V1 governance points at pre-final runtime/test blob identities and therefore cannot be load-bearing for the current bytes."
+  },
+  "subject":{
+    "runtime":{"path":"canonical/runtime/zero_ambient_namespace_launcher_v1.py","git_blob_sha":"6e687527e9c4da82fb5d974a729aaa263ee73ea8"},
+    "tests":{"path":"canonical/tests/test_zero_ambient_namespace_launcher_v1.py","git_blob_sha":"a71e312f6df45cbdcb4746b6f2f4c399b6905252"}
+  },
+  "verified_properties":[
+    "PRIVATE_ROOT_AND_SYSTEM_READ_ONLY__PRIVATE_SCRATCH_WRITABLE__HOST_PATHS_HIDDEN__INNER_LOOPBACK_ONLY",
+    "POST_LAUNCH_MOUNT_DENIED__PROCESS_LIMIT_ENFORCED__MEMORY_LIMIT_ENFORCED",
+    "REAL_PARENT_UNDECLARED_FD_NOT_INHERITED__STDOUT_STDERR_NOT_RETURNED",
+    "BROKER_OUTPUT_LIMIT_FAILS_CLOSED",
+    "NONROOT_PARENT_IDENTITY_POLICY_IS_CARRIER_CORRECT"
+  ],
+  "truth_boundary":[
+    "EXACT_CURRENT_RUNTIME_AND_TEST_BYTES_HAVE_ISOLATED_RUNTIME_REPLAY",
+    "DOCKER_IS_NOT_REQUIRED_ON_THIS_VERIFIED_CARRIER",
+    "NO_CLAIM_ALL_LINUX_CARRIERS_SUPPORT_THE_REQUIRED_NAMESPACE_PRIMITIVES",
+    "NO_CLASS_EXECUTOR_IS_BOUND_BY_THIS_ARTIFACT",
+    "NO_ROOT3_C1_C2_C3_OR_TERMINAL_ACCEPTANCE_CREDIT"
+  ],
+  "next":[
+    "BIND_READ_ONLY_DECLARED_QUERY_CLASS_EXECUTOR_TO_THIS_EXACT_SUBSTRATE",
+    "BIND_BROKER_PROTOCOL_TO_CANONICAL_FINAL_AUTHORIZER_WHERE_MATERIAL_PARENT_EFFECTS_ARE_NEEDED",
+    "PROVE_CURRENT_RUNTIME_ENTRY_DOMINANCE_AND_NO_ALTERNATE_EFFECT_BYPASS"
+  ],
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0},
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false
+}
