@@ -1,0 +1,162 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_INTERFACE_TRACE_TARGET_COVERAGE_FACTORIZATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TARGET_COVERAGE_FACTORED_FROM_FAMILY_TAXONOMY__U_SUBSET_D_TRACE_CONDITIONAL_ON_EXTERNAL_OBSERVABILITY_ONLY__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Remove primitive-family semantic totality from the target-discovery proof. Establish a target coverage superdomain directly from externally observable digital interaction traces, leaving family decomposition and equal-or-better performance as separate downstream obligations.",
+  "supersedes_for_target_coverage_reasoning_only": {
+    "path": "canonical/governance/OPUS55_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_CERTIFICATE_20261005_V1.json",
+    "reason": "V1_CORRECTLY_MOVED_TOWARD_INTERFACE_LEVEL_COVERAGE_BUT_MADE_B0_B9_ROLE_CLASSIFICATION_AND_19_FAMILY_TOTALITY_LOAD_BEARING_FOR_U_SUBSET_D. THE_NEW_FACTORIZATION_PROVES_TARGET_TRACE_COVERAGE_BEFORE_AND_INDEPENDENTLY_OF_ANY_FAMILY_MAPPING."
+  },
+  "canonical_authorities": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "target_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION"
+    },
+    "target_normal_form": {
+      "path": "canonical/governance/TARGET_SUPERSET_COVERAGE_DOMINANCE_NORMAL_FORM_20261005_V1.json",
+      "git_blob_sha": "55a027d50e6f9d1c4d70a75b39d6a536e26a4277"
+    },
+    "functional_role_truth_repair": {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V2.json",
+      "git_blob_sha": "62c0e207ce935a02611700a69e0917f938792b11",
+      "note": "ROLE_BASIS_IS_NON_LOAD_BEARING_FOR_TARGET_COVERAGE_IN_THIS_CERTIFICATE"
+    },
+    "target_completeness_guard": {
+      "path": "canonical/verification/FUNCTIONAL_ROLE_BASIS_TARGET_COMPLETENESS_GUARD_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "note": "FAMILY_NAME_OR_ROLE_NAME_SIMILARITY_IS_NOT_USED_AS_A_COVERAGE_PREMISE"
+    }
+  },
+  "fresh_public_interface_evidence": [
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed_2026_10_05": [
+        "OPUS_5_5_ACTIVE_LATEST",
+        "DOCUMENTED_PRIMARY_INPUT_OUTPUT_IS_TEXT_AND_IMAGES_TO_TEXT"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works",
+      "observed_2026_10_05": [
+        "TOOL_USE_IS_A_TYPED_CONTRACT",
+        "MODEL_EMITS_STRUCTURED_REQUEST",
+        "EXTERNAL_EXECUTOR_RUNS_OPERATION",
+        "RESULT_RETURNS_TO_CONVERSATION"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool",
+      "observed_2026_10_05": [
+        "BROWSER_USE_READS_AND_ACTS_ON_LIVE_WEBPAGES_THROUGH_CLIENT_TOOL_CALLS",
+        "OPUS_5_5_IS_LISTED_AS_SUPPORTED"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls",
+      "observed_2026_10_05": [
+        "CLIENT_TOOL_CALLS_ARE_EXPOSED_AS_TOOL_USE_BLOCKS_WITH_NAME_ID_AND_INPUT",
+        "TOOL_RESULTS_ARE_RETURNED_AS_STRUCTURED_CONTENT"
+      ]
+    }
+  ],
+  "abstraction": {
+    "rule": "ABSTRACT_PAYLOAD_SEMANTICS_AWAY_FOR_TARGET_DISCOVERY_ONLY. DO_NOT ABSTRACT THEM AWAY FOR PERFORMANCE OR ACCEPTANCE.",
+    "event_alphabet": [
+      "MODEL_RECEIVE(payload,metadata)",
+      "MODEL_EMIT(payload,metadata)",
+      "ACTION_REQUEST(action_id,typed_payload)",
+      "ACTION_RESULT(action_id,result_payload)",
+      "CONTINUATION_OR_STATE_TRANSITION(state_reference)"
+    ],
+    "payload_domain": "ARBITRARY_FINITE_DIGITAL_PAYLOAD_ADMITTED_BY_A_TARGET_DEPLOYMENT_SURFACE",
+    "trace_domain_D": "ALL_FINITE_OR_RESUMABLE_CAUSALLY_WELL_FORMED_TRACES_OVER_THE_EVENT_ALPHABET",
+    "exclusions": [
+      "INTERNAL_IMPLEMENTATION_STATE_NOT_EXTERNALLY_OBSERVABLE",
+      "COVERT_OR_PHYSICAL_SIDE_CHANNELS_NOT_PART_OF_INTENDED_MODEL_BEHAVIOR",
+      "KNOWLEDGE_CONTENT_AS_A_PERMANENT_CAPABILITY_PACKAGE"
+    ]
+  },
+  "theorem": {
+    "id": "EXTERNAL_TRACE_TARGET_COVERAGE_FACTORIZATION",
+    "definitions": {
+      "U": "ALL_USEFUL_EXTERNALLY_OBSERVABLE_OPUS_5_5_BEHAVIORS_IN_THE_TERMINAL_TARGET",
+      "D_TRACE": "ALL_CAUSALLY_WELL_FORMED_EXTERNAL_DIGITAL_INTERACTION_TRACES_OVER_THE_ABSTRACT_EVENT_ALPHABET",
+      "F": "ANY_LATER_FAMILY_OR_FUNCTIONAL_DECOMPOSITION_USED_TO_PROVE_OR_IMPLEMENT_PERFORMANCE"
+    },
+    "premises": [
+      "TARGET_RULE_IS_USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION",
+      "EVERY_INTENDED_EXTERNALLY_OBSERVABLE_MODEL_BEHAVIOR_ON_A_SUPPORTED_DIGITAL_DEPLOYMENT_SURFACE_MANIFESTS_AS_INPUT_OUTPUT_ACTION_RESULT_OR_CONTINUATION_EVENTS",
+      "INTERFACE_SPECIFIC_MODALITIES_AND_TOOL_SCHEMAS_CAN_BE_CARRIED_AS_PAYLOADS_WITHOUT_CHANGING_EVENT_CLASSIFICATION"
+    ],
+    "proof": [
+      "TAKE_ANY_u_IN_U.",
+      "BECAUSE_u_IS_EXTERNALLY_OBSERVABLE_INTENDED_MODEL_BEHAVIOR_ON_A_DIGITAL_DEPLOYMENT_SURFACE, ITS OBSERVATIONS EMISSIONS ACTIONS RESULTS AND CONTINUATIONS FORM_A_CAUSALLY_ORDERED_DIGITAL_TRACE.",
+      "MAP_EACH_EXTERNAL_EVENT_TO_THE_CORRESPONDING_ABSTRACT_EVENT_CLASS_WHILE_PRESERVING_THE_ORIGINAL_PAYLOAD_AND_ORDER.",
+      "THE_RESULT_IS_BY_CONSTRUCTION_AN_ELEMENT_OF_D_TRACE.",
+      "THEREFORE_FOR_ALL_u_IN_U__u_HAS_A_TRACE_REPRESENTATION_IN_D_TRACE__SO_U_SUBSET_OR_EQUAL_D_TRACE."
+    ],
+    "independence": [
+      "NO_B0_B9_ROLE_TOTALITY_PREMISE",
+      "NO_19_FAMILY_SEMANTIC_TOTALITY_PREMISE",
+      "NO_BENCHMARK_COVERAGE_PREMISE",
+      "NO_OWNER_PUBLISHED_EXHAUSTIVE_USE_CASE_LIST_PREMISE"
+    ],
+    "conclusion": "TARGET_DISCOVERY_COVERAGE_CAN_BE_CERTIFIED_AT_THE_EXTERNAL_TRACE_LEVEL_INDEPENDENTLY_OF_FAMILY_TAXONOMY. THIS DOES_NOT_PROVE_EQUAL_OR_BETTER_PERFORMANCE_ON_ANY_SEMANTIC_BEHAVIOR_CELL."
+  },
+  "critical_path_effect_if_verified": {
+    "delete": [
+      "USE_19_FAMILY_NAME_COVERAGE_AS_A_PREMISE_FOR_U_SUBSET_D",
+      "REOPEN_TARGET_DISCOVERY_BECAUSE_A_NEW_DOMAIN_NOUN_OR_TASK_LABEL_DOES_NOT_FIT_ONE_EXISTING_FAMILY_CLEANLY",
+      "SEARCH_FOR_A_20TH_FAMILY_AS_A_PREREQUISITE_TO_PROVING_EXTERNAL_TARGET_COVERAGE"
+    ],
+    "preserve": [
+      "FAMILY_LEVEL_SEMANTIC_SCOPE_PROOF_FOR_ACCEPTANCE",
+      "LOAD_BEARING_CONDITION_COVERAGE",
+      "EQUAL_OR_BETTER_PERFORMANCE_OR_FORMAL_DOMINANCE",
+      "COMPOSITIONAL_SOUNDNESS",
+      "CURRENT_14_PROVED_24_UNRESOLVED_ACCEPTANCE_LEDGER"
+    ],
+    "wake_target_coverage_only_on": [
+      "A_USEFUL_INTENDED_OPUS55_BEHAVIOR_HAS_AN_EXTERNAL_EFFECT_NOT_REPRESENTABLE_AS_DIGITAL_INPUT_OUTPUT_ACTION_RESULT_OR_CONTINUATION",
+      "THE_TERMINAL_TARGET_IS_EXPANDED_TO_INCLUDE_INTERNAL_IMPLEMENTATION_PROPERTIES_OR_COVERT_SIDE_CHANNELS"
+    ],
+    "next_best_use": "USE_D_TRACE_ONLY_AS_THE_TARGET_DISCOVERY_SUPERDOMAIN; THEN_MINIMIZE_SEMANTIC_ACCEPTANCE_SUBDOMAINS_SEPARATELY_FOR_PERFORMANCE_PROOF."
+  },
+  "machine_check_contract": {
+    "target_coverage_theorem_must_not_depend_on_family_count": true,
+    "target_coverage_theorem_must_not_depend_on_family_names": true,
+    "target_coverage_theorem_must_not_depend_on_benchmark_exhaustiveness": true,
+    "payloads_preserved_not_erased": true,
+    "performance_credit_from_trace_coverage_forbidden": true,
+    "acceptance_counts_must_remain_14_24": true
+  },
+  "falsifiers": [
+    "AN_INTENDED_USEFUL_TARGET_BEHAVIOR_HAS_AN_EXTERNALLY_OBSERVABLE_EFFECT_OUTSIDE_ANY_DIGITAL_INPUT_OUTPUT_ACTION_RESULT_OR_CONTINUATION_EVENT.",
+    "THE_TARGET_RULE_IS_CHANGED_TO_REQUIRE_INTERNAL_IMPLEMENTATION_IDENTITY.",
+    "THE_ABSTRACT_MAPPING_DROPS_PAYLOAD_INFORMATION_OR_CAUSAL_ORDER_IN_A_WAY_THAT_MAKES_A_LATER_PERFORMANCE_CLAIM_APPEAR_PROVED."
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_PROVED",
+    "NO_FAMILY_SEMANTIC_TOTALITY_PROVED",
+    "NO_EQUAL_OR_BETTER_PERFORMANCE_PROVED",
+    "NO_ARBITRARY_COMPOSITION_NONINFERIORITY_PROVED",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_SEAL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
