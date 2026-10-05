@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PUBLIC_CAPABILITY_SOURCE_UNIVERSE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FINITE_PUBLIC_SYSTEM_CARD_CAPABILITY_TAXONOMY_ENUMERATED__PARITY_NOT_PROVED__ZERO_CREDIT",
+  "objective": "Freeze the currently public Opus 5.5 capability-source taxonomy so terminal envelope work audits a finite source universe instead of an open-ended marketing/search surface.",
+  "sources": {
+    "original_system_card": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "mechanical_markdown_mirror": "https://malob.github.io/ai-system-cards/anthropic/claude-opus-5-5/card.md",
+    "mirror_provenance": "Complete system card mechanically converted from archived PDF; exact revision transcribed; page markers preserved; transcription artifacts possible.",
+    "first_party_observable_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    },
+    "prior_v5_frontier": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    }
+  },
+  "section8_top_level": [
+    "8.2 SWE-bench Pro, Multilingual, and Multimodal",
+    "8.3 DeepSWE v1.1",
+    "8.4 FrontierCode",
+    "8.5 Terminal-Bench 4.0",
+    "8.6 Terminal-Bench-Science 0.1",
+    "8.7 FrontierSWE v2",
+    "8.8 CursorBench 4.0",
+    "8.9 ArXivMath",
+    "8.10 Long context",
+    "8.11 Agentic search",
+    "8.12 Multi-agent",
+    "8.13 Multimodal",
+    "8.14 Real-world professional tasks",
+    "8.15 Healthcare",
+    "8.16 Multilingual performance",
+    "8.17 Life sciences capabilities"
+  ],
+  "separate_capability_bearing_system_card_sections": [
+    "2.2 CB evaluations",
+    "2.3 AI R&D",
+    "3.3 Cyber capability evaluations"
+  ],
+  "first_party_product_surface_classes": [
+    "TEXT_INPUT",
+    "IMAGE_INPUT",
+    "CONVERSATION_ANALYSIS_CODING_CREATIVE",
+    "TEXT_AND_TEXT_ARTIFACT_OUTPUT",
+    "DIAGRAM_OUTPUT",
+    "LONG_SESSION_COMMUNICATION"
+  ],
+  "source_universe_rule": {
+    "currently_public_system_card_capability_taxonomy_enumerated": true,
+    "reopen_on": [
+      "NEW_OR_REVISED_OPUS55_SYSTEM_CARD_REVISION",
+      "NEW_FIRST_PARTY_OPUS55_CAPABILITY_REPORT_OR_PRODUCT_MODALITY",
+      "NEW_BENCHMARK_OWNER_RESULT_DEMONSTRATING_A_MATERIALLY_DISTINCT_BEHAVIOR_CLASS"
+    ],
+    "external_benchmark_dimensions_may_add_conditions_without_reopening_primitive_family_count_if_losslessly_mapped": false
+  },
+  "hard_nonclaims": [
+    "NO_PARITY_CLAIM_FROM_TAXONOMY_ENUMERATION",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_MECHANICAL_MARKDOWN_IS_PRIMARY_AUTHORITY_FOR_NUMERIC_RESULTS",
+    "NO_CLAIM_ALL_EXTERNAL_THIRD_PARTY_BENCHMARKS_ARE_ENUMERATED",
+    "NO_TERMINAL_ENVELOPE_SEAL_FROM_SOURCE_LIST_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
