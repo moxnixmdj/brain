@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__PROFESSIONAL_ARTIFACT_LEAF_HAS_NO_STANDALONE_SCOPE_OR_PERFORMANCE_PROGRAM__FOUR_STANDALONE_SCOPE_REPAIR_LEAVES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3.json",
+    "git_blob_sha": "1010631e27d6d269173bb9fcb44f8e02acd4ecec"
+  },
+  "inputs": {
+    "prior_active_frontier": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2_ACTIVATION_V1.json"
+    },
+    "aa_binding": {
+      "path": "canonical/governance/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_BINDING_V1.json",
+      "git_blob_sha": "65512b512ebe44eea63fb849293e07be87e0b7fa"
+    },
+    "aa_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "verification_commit": "aa34d4faec9df6bd9f6f094853d98881a812b2f0"
+    },
+    "artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    }
+  },
+  "checks": {
+    "prior_frontier_contains_professional_leaf_as_standalone_scope_repair": true,
+    "aa_binding_behavior_id_exact": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "aa_surface_exact": "AA-Briefcase v1.1",
+    "aa_threshold_exact": 1822,
+    "both_atomic_predicates_share_same_surface_and_threshold": true,
+    "independent_artifact_scope_partition_binds_exact_leaf_to_aa_briefcase_condition": true,
+    "separate_professional_leaf_performance_program_redundant": true,
+    "separate_second_aa_execution_redundant": true,
+    "current_score_route_ready": false,
+    "current_score_result_proved": false,
+    "acceptance_credit_delta": 0,
+    "errors": []
+  },
+  "recomputed": {
+    "standalone_scope_repair_unique_before": 5,
+    "standalone_scope_repair_occurrences_before": 8,
+    "removed_from_standalone_scope_repair": [
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+    ],
+    "standalone_scope_repair_unique_after": 4,
+    "standalone_scope_repair_occurrences_after": 7,
+    "remaining": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+    ]
+  },
+  "verified_consequence": [
+    "SCHEDULE_NO_STANDALONE_SCOPE_COMPLETENESS_WORK_FOR_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "SCHEDULE_NO_STANDALONE_MATCHED_PERFORMANCE_PROGRAM_FOR_THE_SAME_LEAF",
+    "SCHEDULE_ONE_AA_BRIEFCASE_V1_1_GE_1822_RECEIPT_FOR_BOTH_ATOMIC_PREDICATES_AND_THE_EXACT_LEAF",
+    "KEEP_SCORE_AND_ALL_FAMILY_ACCEPTANCE_OPEN_UNTIL_RECEIPT_PASSES"
+  ],
+  "verification_class": "DETERMINISTIC_CURRENT_MAIN_CONNECTOR_RECOMPUTATION__NOT_A_NEW_INDEPENDENT_PERFORMANCE_VERIFIER",
+  "hard_nonclaims": [
+    "NO_AA_BRIEFCASE_SCORE_PASS",
+    "NO_ATOMIC_PREDICATE_PROMOTION",
+    "NO_FAMILY_ACCEPTANCE",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
