@@ -21,7 +21,7 @@
     },
     "tests": {
       "path": "canonical/tests/test_root3_subprocess_final_authorizer_adapter_v1.py",
-      "git_blob_sha": "35e9ef56a16db2f04609267416b00041707fa932"
+      "git_blob_sha": "cfdb9430cb5e19a9b6f30d7f4293e25095156e19"
     }
   },
   "binding": {
