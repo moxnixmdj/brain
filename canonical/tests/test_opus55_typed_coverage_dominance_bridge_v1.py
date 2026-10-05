@@ -12,16 +12,25 @@ def base():
         "universe_id":"OMEGA-V1",
         "universe_sha256":U,
         "universe_atoms":dict(ATOM_SHAS),
+        "partition_certificate":{
+            "source_sha":"a"*40,
+            "independent_or_objective":True,
+            "pairwise_disjoint_proved":True,
+            "atoms_define_declared_omega_proved":True,
+        },
         "coverage_certificates":[{
             "id":"C1","universe_id":"OMEGA-V1","universe_sha256":U,
             "source_sha":"b"*40,"cells":["A","B","C"],
-            "independent_or_objective":True,"u_subset_domain_proved":True,
+            "independent_or_objective":True,
+            "exact_atom_union_embedding_proved":True,
+            "u_subset_domain_proved":True,
         }],
         "dominance_certificates":[{
             "id":"B1","universe_id":"OMEGA-V1","universe_sha256":U,
             "source_sha":"c"*40,"cells":["A","B"],
-            "independent_or_objective":True,"scope_complete":True,
-            "b_subset_q_proved":True,
+            "independent_or_objective":True,
+            "exact_atom_union_embedding_proved":True,
+            "scope_complete":True,"b_subset_q_proved":True,
         }],
     }
 
@@ -42,11 +51,37 @@ class Tests(unittest.TestCase):
         m["coverage_certificates"].append({
             "id":"C2","universe_id":"OMEGA-V1","universe_sha256":U,
             "source_sha":"d"*40,"cells":["B","C","D"],
-            "independent_or_objective":True,"u_subset_domain_proved":True,
+            "independent_or_objective":True,
+            "exact_atom_union_embedding_proved":True,
+            "u_subset_domain_proved":True,
         })
         v=compile_typed_sandwich(m)
         self.assertEqual(v["c_star"],["B","C"])
         self.assertEqual(v["residual"],["C"])
+
+    def test_missing_partition_fails_closed(self):
+        m=base(); del m["partition_certificate"]
+        v=compile_typed_sandwich(m)
+        self.assertEqual(v["status"],"FAIL_CLOSED")
+        self.assertIn("PARTITION_CERTIFICATE_MISSING",v["reason"])
+
+    def test_unproved_disjointness_fails_closed(self):
+        m=base(); m["partition_certificate"]["pairwise_disjoint_proved"]=False
+        v=compile_typed_sandwich(m)
+        self.assertEqual(v["status"],"FAIL_CLOSED")
+        self.assertIn("pairwise_disjoint_proved_REQUIRED_TRUE",v["reason"])
+
+    def test_unproved_exact_coverage_embedding_fails_closed(self):
+        m=base(); m["coverage_certificates"][0]["exact_atom_union_embedding_proved"]=False
+        v=compile_typed_sandwich(m)
+        self.assertEqual(v["status"],"FAIL_CLOSED")
+        self.assertIn("exact_atom_union_embedding_proved_REQUIRED_TRUE",v["reason"])
+
+    def test_unproved_exact_dominance_embedding_fails_closed(self):
+        m=base(); m["dominance_certificates"][0]["exact_atom_union_embedding_proved"]=False
+        v=compile_typed_sandwich(m)
+        self.assertEqual(v["status"],"FAIL_CLOSED")
+        self.assertIn("exact_atom_union_embedding_proved_REQUIRED_TRUE",v["reason"])
 
     def test_cross_universe_id_fails_closed(self):
         m=base(); m["dominance_certificates"][0]["universe_id"]="OTHER"
