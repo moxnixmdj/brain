@@ -1,0 +1,153 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_CONTENT_ADDRESSED_TYPED_PROTOCOL_MANIFEST_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__HASH_STABLE_FIRST_PARTY_SDK_TYPE_UNIVERSE_BOUND__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Make the typed-protocol coverage premise finite, content-addressed, mechanically diffable, and fail-closed on protocol drift.",
+  "strengthens": {
+    "path": "canonical/governance/OPUS55_INTRINSIC_TYPED_PROTOCOL_SUPERDOMAIN_V1.json",
+    "commit_sha": "e522124589e33da966a077eba35caeff47cbb6c9"
+  },
+  "source": {
+    "repository": "anthropics/anthropic-sdk-python",
+    "release_commit_sha": "18f25547f20cf5f01da69ac611e700e3bc9ebf21",
+    "release": "1.11.0",
+    "files": [
+      [
+        "src/anthropic/types/content_block.py",
+        "a0baaeb69bab7c74ae6e6aa9613f3381ad416811"
+      ],
+      [
+        "src/anthropic/types/content_block_param.py",
+        "b6a481a0ab64424475760b6e63316ed9177dc532"
+      ],
+      [
+        "src/anthropic/types/stop_reason.py",
+        "d28f681b8464057da3ddac61a83548e266880e10"
+      ],
+      [
+        "src/anthropic/types/message.py",
+        "34dc178ccec1f6b49bfacd0743dcd18689bc3c0d"
+      ],
+      [
+        "src/anthropic/types/message_param.py",
+        "c3a2046f2ad752cd87722fac4bae8545e317d474"
+      ]
+    ]
+  },
+  "exact_sets": {
+    "response_content_union": [
+      "TextBlock",
+      "ThinkingBlock",
+      "RedactedThinkingBlock",
+      "ToolUseBlock",
+      "ServerToolUseBlock",
+      "WebSearchToolResultBlock",
+      "WebFetchToolResultBlock",
+      "CodeExecutionToolResultBlock",
+      "BashCodeExecutionToolResultBlock",
+      "TextEditorCodeExecutionToolResultBlock",
+      "ToolSearchToolResultBlock",
+      "ContainerUploadBlock"
+    ],
+    "request_content_param_union": [
+      "TextBlockParam",
+      "ImageBlockParam",
+      "DocumentBlockParam",
+      "SearchResultBlockParam",
+      "ThinkingBlockParam",
+      "RedactedThinkingBlockParam",
+      "ToolUseBlockParam",
+      "ToolResultBlockParam",
+      "ServerToolUseBlockParam",
+      "WebSearchToolResultBlockParam",
+      "WebFetchToolResultBlockParam",
+      "CodeExecutionToolResultBlockParam",
+      "BashCodeExecutionToolResultBlockParam",
+      "TextEditorCodeExecutionToolResultBlockParam",
+      "ToolSearchToolResultBlockParam",
+      "ContainerUploadBlockParam"
+    ],
+    "stop_reason_union": [
+      "end_turn",
+      "max_tokens",
+      "stop_sequence",
+      "tool_use",
+      "pause_turn",
+      "refusal",
+      "model_context_window_exceeded"
+    ],
+    "message_fields_needing_load_bearing_classification": [
+      "container",
+      "diagnostics",
+      "model",
+      "role",
+      "stop_details",
+      "stop_reason",
+      "stop_sequence",
+      "usage"
+    ]
+  },
+  "verified_repairs_to_manual_enumeration": [
+    "REDACTED_THINKING_IS_AN_EXPLICIT_OPAQUE_STATE_CARRIER",
+    "SPECIALIZED_SERVER_TOOL_RESULT_VARIANTS_ARE_EXPLICIT_TYPED_PROTOCOL_EVENTS",
+    "CONTAINER_UPLOAD_IS_AN_EXPLICIT_CONTENT_BLOCK_TYPE",
+    "PAUSE_TURN_REFUSAL_AND_MODEL_CONTEXT_WINDOW_EXCEEDED_ARE_EXPLICIT_STOP_STATES",
+    "COVERAGE_MUST_BIND_LOAD_BEARING_MESSAGE_CONTROL_STATE_AS_WELL_AS_CONTENT_BLOCK_TYPES"
+  ],
+  "finite_normalization_obligation": {
+    "target_classes": [
+      "MODEL_TEXT_OR_ARTIFACT_EVENT",
+      "OPAQUE_OR_SIGNED_MODEL_STATE_EVENT",
+      "MODEL_TOOL_ACTION_REQUEST_EVENT",
+      "EXTERNAL_OR_SERVER_TOOL_RESULT_EVENT",
+      "USER_OR_ENVIRONMENT_PAYLOAD_EVENT",
+      "SESSION_ENVIRONMENT_STATE_EVENT",
+      "TURN_CONTROL_EVENT"
+    ],
+    "pass_condition": "EVERY_BOUND_VARIANT_AND_LOAD_BEARING_CONTROL_FIELD_MAPS_LOSSLESSLY_TO_AT_LEAST_ONE_CLASS_WITH_ORDER_DISCRIMINATOR_REFERENCES_AND_CONTINUATION_SEMANTICS_PRESERVED",
+    "external_executor_boundary": "PRESERVING_AN_EXTERNAL_TOOL_RESULT_AS_MODEL_INPUT_STATE_DOES_NOT_CREDIT_THE_EXTERNAL_BACKEND_COMPUTATION_AS_INTRINSIC_MODEL_CAPABILITY"
+  },
+  "source_disagreement_guard": {
+    "observation": "THE_PINNED_SDK_MessageParam_PERMITS_ROLE_SYSTEM_WHILE_CURRENT_STABLE_MESSAGES_DOCUMENTATION_DESCRIBES_SYSTEM_AS_A_TOP_LEVEL_PARAMETER",
+    "rule": "USE_THE_PINNED_SDK_AS_A_COVERAGE_SUPERSET_NOT_AS_EXACT_MODEL_SUPPORT_SEMANTICS_WHEN_FIRST_PARTY_SURFACES_DISAGREE",
+    "coverage_effect": "EXTRA_VARIANTS_ARE_SAFE_FOR_SET_COVERAGE",
+    "dominance_effect": "EXTRA_VARIANTS_MUST_BE_PRUNED_OR_PARTITIONED_BEFORE_PERFORMANCE_DOMINANCE_PROOF"
+  },
+  "delta_reverification": {
+    "unchanged_rule": "IF_RELEASE_COMMIT_AND_ALL_FIVE_BLOB_SHAS_ARE_UNCHANGED_THE_FINITE_SNAPSHOT_IS_UNCHANGED",
+    "wake_conditions": [
+      "TARGET_MODEL_EPOCH_CHANGES",
+      "ANY_BOUND_BLOB_CHANGES",
+      "FIRST_PARTY_DOCS_EXPOSE_A_LOAD_BEARING_CHANNEL_OR_CONTROL_STATE_OUTSIDE_THE_BOUND_SUPERSET"
+    ],
+    "scheduler_effect_if_verified": [
+      "DELETE_REPEATED_BROAD_MANUAL_INTERFACE_ENUMERATION",
+      "REVERIFY_BY_HASH_COMPARE_PLUS_SEMANTIC_DELTA_ONLY"
+    ]
+  },
+  "current_truth": {
+    "snapshot_bound": true,
+    "semantic_completeness_independently_verified": false,
+    "target_coverage_credit": 0,
+    "performance_credit": 0,
+    "terminal_goal_achieved": false
+  },
+  "next": [
+    "INDEPENDENTLY_REFETCH_AND_RECOMPUTE_THE_FIVE_PINNED_BLOBS",
+    "CROSS_CHECK_CURRENT_FIRST_PARTY_MESSAGES_API_REFERENCE",
+    "PROVE_TOTAL_LOSSLESS_NORMALIZATION",
+    "THEN_REBIND_DOMAIN_COVERAGE_WITH_ZERO_PERFORMANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
