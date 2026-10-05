@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_ROOT2_WAKE_AWARE_AUTHORITY_RECONCILIATION_VERIFICATION_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__CURRENT_MAIN_REBASE__EXACT18_ROUTE_AUTHORITY_PLUS_DYNAMIC_MEMBERSHIP__ZERO_CREDIT",
+  "base": {
+    "main_commit": "b5f05bed03048017575dcc65096b97227c57bc89",
+    "prior_root_git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860",
+    "prior_authority_git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee",
+    "superseded_pr_head": "57038937636dd1f4ee01b7f90edd91ae35fa8e62"
+  },
+  "subject": {
+    "root_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_git_blob_sha": "10f7292ee4d6f68af908c49593b67cea21663cd3",
+    "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "authority_git_blob_sha": "b5ad539e63931d540c00badede8bd53378bbe124"
+  },
+  "live_membership_compiler": {
+    "activation_path": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V1_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "c7974959ee4ae21f398d3b1a431ba86d5b504e18",
+    "runtime_git_blob_sha": "e916144f67d64d76b2d348d761125ee74905807b",
+    "verification_git_blob_sha": "2124baae7333f2d3d6f9c869a51f33713f59abbe",
+    "verified_state": {
+      "proved_atomic": 14,
+      "unresolved_atomic": 24,
+      "root2_touching_count": 18,
+      "root3_touching_count": 9,
+      "terminal": false
+    }
+  },
+  "bound_route_scheduler": {
+    "compilation_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "compilation_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
+    "activation_path": "canonical/governance/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "d739ade25b0c00cee069add72dab9677fa31e027",
+    "verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "verification_git_blob_sha": "d197df20e5192f6613169d4620d7649fdf0e4884",
+    "wake_aware_cut_path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+    "wake_aware_cut_git_blob_sha": "d09abed23287560508353ce0e0476b98a9749cef"
+  },
+  "recomputed_truth": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "terminal": false,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 15,
+    "root3_only_count": 6,
+    "root2_and_root3_count": 3,
+    "root2_touching_count": 18,
+    "root3_touching_count": 9,
+    "active_information_positive_root2_groups": 6,
+    "sleep_until_wake_root2_branches": 3,
+    "fresh_reality_authority": false
+  },
+  "checks": {
+    "current_main_root_bytes_used": true,
+    "current_main_authority_bytes_used": true,
+    "newer_authority_fields_preserved": true,
+    "exact18_v4_artifacts_exist_on_main_with_exact_hashes": true,
+    "wake_aware_v3_exists_on_main_with_exact_hash": true,
+    "dynamic_membership_compiler_is_already_active": true,
+    "stale_v12_pending_rebind_text_removed_from_effective_root2_dispatch": true,
+    "acceptance_counts_preserved": true,
+    "terminal_remains_false": true,
+    "execution_authority_remains_false": true,
+    "promotion_authority_remains_false": true,
+    "fresh_reality_authority_remains_false": true
+  },
+  "consequence": "COLLAPSE_ROOT2_CONTROL_PLANE_SPLIT_BRAIN__LIVE_PREDICATE_MEMBERSHIP_COMES_FROM_ACTIVE_DYNAMIC_COMPILER__CURRENT_ROUTE_CACHE_IS_EXACT18_V4_PLUS_WAKE_AWARE_V3__NO_STATIC_COUNT_REBIND_REQUIRED_AS_FUTURE_MEMBERSHIP_GATE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_DELTA",
+    "NO_TERMINAL_GOAL_CLAIM",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ]
+}

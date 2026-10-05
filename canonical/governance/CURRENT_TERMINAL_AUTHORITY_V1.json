@@ -1981,7 +1981,7 @@
   },
   "root2_current_scheduler_overlay": {
     "effective_touching_predicate_count": 18,
-    "scheduling_compiler_status": "ACTIVE__EXACT_18_CURRENT_14_24_ROUTE_RECOMPUTATION_PASS__ZERO_CREDIT",
+    "scheduling_compiler_status": "ACTIVE__EXACT_18_V4_PLUS_WAKE_AWARE_EXECUTABLE_V3__ZERO_CREDIT",
     "prior_19_activation_path": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json",
     "prior_19_activation_git_blob_sha": "3acbf619667fb8db5884069b4721b460f2da322c",
     "prior_18_identity_manifest_path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_V1.json",
@@ -2001,8 +2001,8 @@
     "promotion_authority": false,
     "scheduling_authority": true,
     "acceptance_credit_delta": 0,
-    "activation_path": "canonical/governance/ROOT2_18_CURRENT_14_24_SCHEDULING_ACTIVATION_V1.json",
-    "verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_RECOMPUTATION_V1.json",
+    "activation_path": "canonical/governance/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_ACTIVATION_V1.json",
+    "verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_CONNECTOR_VERIFICATION_20261005_V1.json",
     "tb_science_target_freshness_overlay": {
       "status": "ACTIVE__HARNESS_CONDITIONAL_TARGET_FRESHNESS_RESOLVED__ACCEPTANCE_OPEN",
       "activation_path": "canonical/governance/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_ACTIVATION_20261005_V1.json",
@@ -2046,6 +2046,29 @@
       "rule": "NEW_SCOPE_RESIDUAL_MUST_BE_INSIDE_FROZEN_TARGET_SET_BEFORE_BECOMING_MANDATORY",
       "acceptance_credit_delta": 0,
       "fresh_reality_authority": false
+    },
+    "activation_git_blob_sha": "d739ade25b0c00cee069add72dab9677fa31e027",
+    "verification_git_blob_sha": "d197df20e5192f6613169d4620d7649fdf0e4884",
+    "compilation_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "compilation_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
+    "wake_aware_executable_cut_path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+    "wake_aware_executable_cut_git_blob_sha": "d09abed23287560508353ce0e0476b98a9749cef",
+    "active_information_positive_group_count": 6,
+    "sleep_until_wake_branch_count": 3,
+    "deferred_fresh_reality_predicate": "TB_SCIENCE_GE_58_7",
+    "live_membership_compiler": {
+      "activation_path": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V1_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "c7974959ee4ae21f398d3b1a431ba86d5b504e18",
+      "runtime_path": "canonical/runtime/terminal_frontier_compiler_v1.py",
+      "runtime_git_blob_sha": "e916144f67d64d76b2d348d761125ee74905807b",
+      "verification_path": "canonical/verification/TERMINAL_FRONTIER_COMPILER_V1_CONNECTOR_VERIFICATION_20261005_V2.json",
+      "verification_git_blob_sha": "2124baae7333f2d3d6f9c869a51f33713f59abbe",
+      "scheduling_authority": true,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false,
+      "terminal_finality_authority": false,
+      "rule": "LIVE_MEMBERSHIP_DERIVED_EACH_RUN__STATIC_ROUTE_COMPILATIONS_MUST_NOT_OVERRIDE_LIVE_DERIVED_PREDICATE_IDENTITY"
     }
   },
   "promotion_accounting_invariant": {
@@ -2056,5 +2079,39 @@
     "current_proved_atomic": 14,
     "current_unresolved_atomic": 24,
     "reason": "PREVENT_CONCURRENT_OR_STALE_GATES_FROM_REGRESSING_ACCEPTANCE_COUNTS_AFTER_INDEPENDENT_DELTAS"
+  },
+  "current_scheduler_truth_reconciliation": {
+    "date": "2026-10-05",
+    "status": "REBASED_CURRENT_MAIN__EXACT18_V4_WAKE_AWARE_V3__LIVE_MEMBERSHIP_COMPILER_BOUND__ZERO_CREDIT",
+    "root_state_path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "root_state_git_blob_sha": "10f7292ee4d6f68af908c49593b67cea21663cd3",
+    "root2_compilation_v4_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "root2_compilation_v4_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
+    "root2_v4_activation_path": "canonical/governance/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_ACTIVATION_V1.json",
+    "root2_v4_activation_git_blob_sha": "d739ade25b0c00cee069add72dab9677fa31e027",
+    "root2_v4_verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "root2_v4_verification_git_blob_sha": "d197df20e5192f6613169d4620d7649fdf0e4884",
+    "root2_wake_aware_executable_v3_path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+    "root2_wake_aware_executable_v3_git_blob_sha": "d09abed23287560508353ce0e0476b98a9749cef",
+    "repaired": [
+      "TOP_LEVEL_ROOT2_POINTERS_NOW_BIND_ALREADY_ACTIVE_EXACT18_V4_COMPILER",
+      "CURRENT_DISPATCH_BINDS_WAKE_AWARE_V3_CUT",
+      "CURSORBENCH_DORMANT_ROUTE_REMAINS_ASLEEP_UNTIL_WAKE_EVENT",
+      "ROOT3_9_TOUCHING_RECOMPUTE_REMAINS_OPEN",
+      "LIVE_TERMINAL_FRONTIER_COMPILER_V1_IS_BOUND_AS_MEMBERSHIP_AUTHORITY_SO_STATIC_COUNT_REBIND_IS_NOT_A_FUTURE_CONTROL_PLANE_PREREQUISITE"
+    ],
+    "accounting": {
+      "incremental_spend_usd": 0,
+      "new_reality_units_consumed": 0,
+      "terminal_cases_consumed": 0,
+      "acceptance_credit_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
+    },
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "base_main_commit": "b5f05bed03048017575dcc65096b97227c57bc89"
   }
 }
