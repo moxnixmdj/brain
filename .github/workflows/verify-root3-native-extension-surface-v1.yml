@@ -1,12 +1,17 @@
-name: Verify Root3 native extension surface V1
+name: Verify Root3 native extension surface and isolation V1
 
 on:
   pull_request:
     branches: [main]
     paths:
+      - 'canonical/runtime/astra_runtime.py'
       - 'canonical/runtime/root3_native_extension_surface_v1.py'
+      - 'canonical/runtime/bound_capability_isolated_runner_v1.py'
       - 'canonical/tests/test_root3_native_extension_surface_v1.py'
+      - 'canonical/tests/test_bound_capability_native_isolation_v1.py'
+      - 'canonical/tests/test_bound_capabilities.py'
       - 'canonical/governance/ROOT3_NATIVE_EXTENSION_SURFACE_C1_CANDIDATE_V1.json'
+      - 'canonical/governance/ROOT3_NATIVE_EXTENSION_ISOLATION_C1_CANDIDATE_V1.json'
       - '.github/workflows/verify-root3-native-extension-surface-v1.yml'
 
 permissions:
@@ -20,5 +25,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pytest canonical/tests/test_root3_native_extension_surface_v1.py -q
-      - run: python canonical/runtime/root3_native_extension_surface_v1.py
+      - name: Verify finite native-risk classification
+        run: python -m pytest canonical/tests/test_root3_native_extension_surface_v1.py -q
+      - name: Verify child isolation mechanics
+        run: python -m unittest canonical.tests.test_bound_capability_native_isolation_v1 -v
+      - name: Preserve legacy bound capability regressions
+        run: python -m unittest canonical.tests.test_bound_capabilities -v
+      - name: Emit current native-risk classification
+        run: python canonical/runtime/root3_native_extension_surface_v1.py
