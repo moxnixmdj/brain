@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_LINUX_USERNS_EFFECT_CARRIER_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__LIVE_LOCAL_NAMESPACE_CONFINEMENT_PASS__INTEGRATION_AND_INDEPENDENT_CARRIER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Collapse child-process and native-extension downstream effect uncertainty behind one Linux user/mount/network/PID namespace carrier with a read-only repository, explicit writable repo-prefix overlays, ephemeral tmpfs scratch, scrubbed environment, and zero process capabilities before payload execution.",
+  "parent": {
+    "effect_membrane": "canonical/governance/ROOT3_ZERO_VIOLATION_EXECUTABLE_EFFECT_MEMBRANE_20261005_V1.json",
+    "channel_registry": "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json"
+  },
+  "mechanism": {
+    "namespaces": [
+      "USER",
+      "MOUNT",
+      "NETWORK",
+      "PID"
+    ],
+    "repository_mount": "READ_ONLY_BY_DEFAULT",
+    "persistent_write_rule": "ONLY_EXPLICIT_REPO_DIRECTORY_PREFIX_OVERLAYS_ARE_RW",
+    "scratch": "TMPFS_EPHEMERAL",
+    "network": "FRESH_NETWORK_NAMESPACE_WITH_NO_EXTERNAL_INTERFACE",
+    "system_surface": "READ_ONLY_USR_ONLY__NO_HOST_HOME_RUN_ETC_PROC_OR_DEV_MOUNTS_BY_DEFAULT",
+    "environment": "ENV_I_SCRUBBED_PLUS_EXPLICIT_VALUES_ONLY",
+    "payload_privileges": [
+      "NO_NEW_PRIVS",
+      "BOUNDING_SET_EMPTY",
+      "INHERITABLE_CAPS_EMPTY",
+      "AMBIENT_CAPS_EMPTY"
+    ],
+    "fd_rule": "SUBPROCESS_CLOSE_FDS_TRUE"
+  },
+  "local_probe_20261005": {
+    "environment": "CURRENT_CHATGPT_LINUX_CONTAINER__NOT_A_CANONICAL_BRAIN_EXECUTION_CARRIER",
+    "observed": [
+      "UNSHARE_USER_MAPROOT_MOUNT_NET_PID_FORK_SUCCEEDED",
+      "READ_ONLY_REPO_WRITE_FAILED",
+      "AUTHORIZED_RW_OVERLAY_PERSISTED_TO_HOST",
+      "TMPFS_SCRATCH_WRITE_SUCCEEDED",
+      "TCP_CONNECT_FAILED_NETWORK_UNREACHABLE",
+      "AFTER_SETPRIV_PAYLOAD_MOUNT_ATTEMPT_FAILED"
+    ],
+    "terminal_cases_consumed": 0,
+    "interpretation": "CONSTRUCTIVE_FEASIBILITY_ONLY__DOES_NOT_PROVE_BUILD_RUNNER_OR_PRODUCTION_CARRIER_AVAILABILITY"
+  },
+  "leverage_if_integrated": [
+    "BOUND_CAPABILITY_ADAPTER_AND_THIRD_PARTY_NATIVE_CODE_CAN_RUN_INSIDE_ONE_CONFINEMENT_BOUNDARY",
+    "AUTHORIZED_CHILD_PROCESS_DESCENDANTS_INHERIT_THE_NAMESPACE_AND_CAPABILITY_RESTRICTIONS",
+    "RAW_CHILD_NETWORK_EFFECTS_ARE_REMOVED_INSTEAD_OF_AUDITED_ONE_BY_ONE",
+    "RAW_CHILD_HOST_WRITES_OUTSIDE_EXACT_ALLOWED_PREFIXES_ARE_REMOVED_INSTEAD_OF_AUDITED_ONE_BY_ONE"
+  ],
+  "remaining_before_e2_e3_credit": [
+    "BIND_EXACT_EXECUTION_CARRIER_AND_PROVE_USER_NAMESPACE_FEATURES_AVAILABLE_THERE",
+    "INTEGRATE_REFERENCE_MONITOR_ALLOWED_PATH_PREFIXES_INTO_CARRIER_WRITABLE_PREFIXES",
+    "MOVE_UNTRUSTED_BOUND_ADAPTER_AND_NATIVE_EXTENSION_EXECUTION_THROUGH_THE_CARRIER",
+    "FAIL_CLOSED_ON_DEPENDENCY_INSTALLATION_DURING_CREDITED_EXECUTION_OR_MOVE_INSTALLATION_TO_PREEXECUTION_SEALING",
+    "CLASSIFY_NETWORK_REQUIRING_CAPABILITIES_TO_SEPARATE_MEDIATED_BROKER_PATHS",
+    "PROVE_EXTERNAL_TOOL_BRIDGE_IS_READ_ONLY_INFORMATION_PLANE_OR_MEDIATE_ITS_MATERIAL_EFFECTS",
+    "INDEPENDENTLY_FALSIFY_NAMESPACE_ESCAPE_AND_OUTPUT_PREFIX_ESCAPE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_C1_E2_OR_E3_IS_COMPLETE",
+    "NO_CLAIM_ALL_TERMINAL_CAPABILITIES_RUN_IN_THIS_CARRIER",
+    "NO_CLAIM_BUILD_OR_PRODUCTION_RUNNER_SUPPORTS_THE_REQUIRED_NAMESPACE_FEATURES",
+    "NO_CLAIM_NETWORK_REQUIRING_CHILD_TOOLS_ARE_SUPPORTED",
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "runtime": "canonical/runtime/root3_linux_userns_effect_carrier_v1.py",
+  "tests": "canonical/tests/test_root3_linux_userns_effect_carrier_v1.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
