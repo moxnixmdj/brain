@@ -31,6 +31,10 @@ _IN_AUTHORIZATION: contextvars.ContextVar[bool] = contextvars.ContextVar(
     "project_brain_subprocess_authorization_active",
     default=False,
 )
+_RUN_DELEGATING_TO_POPEN: contextvars.ContextVar[bool] = contextvars.ContextVar(
+    "project_brain_subprocess_run_delegating_to_popen",
+    default=False,
+)
 _AUTHORIZER: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None
 _AUTHORITY_ID: str | None = None
 _INSTALLED = False
@@ -257,10 +261,16 @@ def _authorize(api: str, args: tuple[Any, ...], kwargs: Mapping[str, Any]) -> di
 
 def _guarded_run(*args: Any, **kwargs: Any):
     _authorize("subprocess.run", args, kwargs)
-    return _ORIGINAL_RUN(*args, **kwargs)
+    token = _RUN_DELEGATING_TO_POPEN.set(True)
+    try:
+        return _ORIGINAL_RUN(*args, **kwargs)
+    finally:
+        _RUN_DELEGATING_TO_POPEN.reset(token)
 
 
 def _guarded_popen(*args: Any, **kwargs: Any):
+    if _RUN_DELEGATING_TO_POPEN.get():
+        return _ORIGINAL_POPEN(*args, **kwargs)
     _authorize("subprocess.Popen", args, kwargs)
     return _ORIGINAL_POPEN(*args, **kwargs)
 
