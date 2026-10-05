@@ -209,6 +209,38 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["status"], "FAIL_CLOSED", out)
         self.assertIn("UNBOUND_FIELDS", out["reason"])
 
+    def _materialize_receipts(self, cert, root):
+        root=pathlib.Path(root)
+        keys=("frozen_scope_receipt","ephemeral_confinement_receipt","capsule_mediation_receipt","effect_broker_carrier_receipt","rollback_receipt")
+        for key in keys:
+            rec=cert[key]
+            path=root/rec["path"]
+            path.parent.mkdir(parents=True,exist_ok=True)
+            raw=(key+"\n").encode("utf-8")
+            path.write_bytes(raw)
+            rec["git_blob_sha"]=hashlib.sha1(
+                b"blob "+str(len(raw)).encode("ascii")+b"\0"+raw
+            ).hexdigest()
+
+    def test_repository_bound_five_exact_receipts_pass(self):
+        cert=base()
+        with tempfile.TemporaryDirectory() as td:
+            self._materialize_receipts(cert,td)
+            out=verify_repository_bound_closed_world_boundary(cert,td)
+            self.assertEqual(out["status"],"PASS",out)
+            self.assertEqual(out["repository_bindings_status"],"PASS")
+            self.assertEqual(len(out["verified_receipt_bindings"]),5)
+
+    def test_repository_bound_receipt_drift_fails_closed(self):
+        cert=base()
+        with tempfile.TemporaryDirectory() as td:
+            self._materialize_receipts(cert,td)
+            path=pathlib.Path(td)/cert["rollback_receipt"]["path"]
+            path.write_text("drift\n",encoding="utf-8")
+            out=verify_repository_bound_closed_world_boundary(cert,td)
+            self.assertEqual(out["status"],"FAIL_CLOSED",out)
+            self.assertIn("RECEIPT_GIT_BLOB_MISMATCH",out["reason"])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
