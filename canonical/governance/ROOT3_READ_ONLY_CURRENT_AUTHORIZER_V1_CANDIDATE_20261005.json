@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_READ_ONLY_CURRENT_AUTHORIZER_V1_CANDIDATE",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_READ_ONLY_CLASS_AUTHORITY__ALL_OTHER_EFFECT_CLASSES_DENIED__ZERO_CREDIT",
+  "objective": "Provide the smallest semantic authority needed to install the strict current Root3 subprocess bootstrap without granting authority to any effect class other than the independently confined READ_ONLY_DECLARED_QUERY lane.",
+  "subjects": {
+    "runtime": {
+      "path": "canonical/runtime/root3_read_only_current_authorizer_v1.py",
+      "git_blob_sha": "888432f53f1ee198e86b728e607bcb4288921245"
+    },
+    "tests": {
+      "path": "canonical/tests/test_root3_read_only_current_authorizer_v1.py",
+      "git_blob_sha": "09ab30343e1e12d25b996cf81edf4aab55d53150"
+    }
+  },
+  "dependencies": [
+    "canonical/runtime/root3_subprocess_mediator_v2.py",
+    "canonical/runtime/root3_subprocess_final_authorizer_adapter_v2.py",
+    "canonical/runtime/root3_read_only_local_file_query_executor_v1.py",
+    "canonical/runtime/root3_strict_current_bootstrap_v1.py",
+    "canonical/runtime/root3_subprocess_effect_class_registry_v1.py"
+  ],
+  "allow_rule": [
+    "MEDIATOR_REQUEST_MUST_PASS_EXACT_SCHEMA_FIELD_HASH_API_CALLSITE_AND_18_SITE_REGISTRY_BINDING_VALIDATION",
+    "EFFECT_CLASS_MUST_EQUAL_READ_ONLY_DECLARED_QUERY",
+    "AUTHORIZATION_DIGEST_BINDS_EXACT_MEDIATOR_REQUEST_HASH_AND_CALLSITE_IDENTITY"
+  ],
+  "deny_rule": [
+    "ALL_OTHER_SIX_EFFECT_CLASSES",
+    "UNKNOWN_OR_DRIFTED_CALLSITES",
+    "MALFORMED_OR_TAMPERED_REQUESTS",
+    "REGISTRY_CARDINALITY_OR_BINDING_DRIFT"
+  ],
+  "security_basis": {
+    "class_executor": "canonical/runtime/root3_read_only_local_file_query_executor_v1.py",
+    "class_executor_properties": [
+      "FIVE_EXACT_SUPPORTED_CALLSITES",
+      "NO_SHELL",
+      "NO_CUSTOM_ENV",
+      "NO_STDIN_OR_ARBITRARY_INPUT",
+      "FIXED_READ_ONLY_COMMAND_SHAPES",
+      "READ_ONLY_SQL_ONLY",
+      "ZERO_AMBIENT_NAMESPACE_CONFINEMENT",
+      "NO_NETWORK_NAMESPACE",
+      "BOUNDED_RESOURCE_LIMITS"
+    ]
+  },
+  "intended_next_step_if_independently_verified": "INSTALL_ROOT3_STRICT_CURRENT_BOOTSTRAP_AT_CREDITED_RUNTIME_ENTRYPOINT_USING_THIS_AUTHORIZER__THEREBY_KEEP_READ_ONLY_CLASS_USABLE_WHILE_OTHER_SIX_CLASSES_REMAIN_FAIL_CLOSED",
+  "hard_nonclaims": [
+    "NO_ROOT3_C1_C2_C3_COMPLETENESS",
+    "NO_AUTHORITY_FOR_PACKAGE_ENV_MUTATION",
+    "NO_AUTHORITY_FOR_TEMPORARY_FILESYSTEM_TRANSFORM",
+    "NO_AUTHORITY_FOR_LOCAL_LOOPBACK_SERVICE",
+    "NO_AUTHORITY_FOR_DECLARED_ARTIFACT_PRODUCTION",
+    "NO_AUTHORITY_FOR_BOUND_CHILD_CODE_EXECUTION",
+    "NO_AUTHORITY_FOR_ARBITRARY_COMMAND_EXECUTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
