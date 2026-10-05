@@ -29,7 +29,6 @@ from canonical.runtime import mysterymechanism_sparse_symbolic_adapter_v1 as spa
 
 SCHEMA = "PROJECT_BRAIN_MYSTERYMECHANISM_PROSPECTIVE_SELECTION_V2"
 MAX_GENERALIZATION_NRMSE = 0.08
-INNER_CANDIDATE_CAP = 512
 _EPS = 1e-12
 
 
@@ -182,12 +181,19 @@ def discover(
                 )
             )
 
+    # Exact fit-only branch-and-bound.  The all-fit error plus complexity
+    # penalty is a lower bound on this candidate's final selection score because
+    # selection uses max(all-fit error, inner-LOO error).  Therefore once the
+    # next lower bound exceeds the incumbent score, no unseen pair can win.
     screened.sort(key=lambda row: row[0])
-    finalists = screened[:INNER_CANDIDATE_CAP]
     best: tuple[tuple[Any, ...], dict[str, Any]] | None = None
+    inner_evaluated = 0
 
-    for _, candidate, a, bb in finalists:
+    for lower_bound, candidate, a, bb in screened:
+        if best is not None and float(lower_bound[0]) > float(best[0][0]) + 1e-12:
+            break
         loo_pred = _inner_loo_predictions(a, bb, y_fit)
+        inner_evaluated += 1
         if loo_pred is None:
             continue
         loo_error = float(sparse._nrmse(y_fit, loo_pred))
@@ -218,7 +224,7 @@ def discover(
             "selected_prevalidation": None,
             "validation_observation_used_for_selection": False,
             "transform_pairs_considered": considered,
-            "inner_candidates_evaluated": len(finalists),
+            "inner_candidates_evaluated": inner_evaluated,
             "acceptance_credit_delta": 0,
             "family_credit_delta": 0,
             "capability_credit_delta": 0,
@@ -259,8 +265,8 @@ def discover(
         "left_library_size": len(l1),
         "right_library_size": len(l2),
         "transform_pairs_considered": considered,
-        "inner_candidate_cap": INNER_CANDIDATE_CAP,
-        "inner_candidates_evaluated": len(finalists),
+        "inner_candidates_evaluated": inner_evaluated,
+        "selection_exact_branch_and_bound": True,
         "selected_prevalidation": selected_summary,
         "prospective_validation_prediction": (
             None if validation_prediction is None else float(validation_prediction)
