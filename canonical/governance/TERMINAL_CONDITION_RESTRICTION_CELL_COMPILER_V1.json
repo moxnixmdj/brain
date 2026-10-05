@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CONDITION_RESTRICTION_CELL_COMPILER_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FAIL_CLOSED_CELL_REUSE_COMPILER__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Compile condition x family proof cells mechanically so scope-safe pointwise/objective/exhaustive proofs are reused once, while aggregate or scope-implicit evidence remains open.",
+  "subject": {
+    "matrix_path": "canonical/governance/TERMINAL_CONDITION_RESTRICTION_TRANSFER_MATRIX_20261005_V1.json",
+    "matrix_rule": "POINTWISE_RESTRICTION_SAFE__AGGREGATE_TRANSFER_FORBIDDEN",
+    "runtime_path": "canonical/runtime/terminal_condition_restriction_cell_compiler_v1.py",
+    "tests_path": "canonical/tests/test_terminal_condition_restriction_cell_compiler_v1.py"
+  },
+  "admissible_proof_classes": [
+    "POINTWISE_UNIVERSAL",
+    "OBJECTIVE_CEILING",
+    "EXHAUSTIVE_FINITE_PER_CASE"
+  ],
+  "required_receipt_fields": [
+    "family",
+    "proof_class",
+    "covered_conditions",
+    "independent_or_objective",
+    "scope_complete",
+    "source_path",
+    "source_sha"
+  ],
+  "fail_closed_rules": [
+    "FAMILY_MAPPING_IS_NOT_OUTCOME_PARITY",
+    "AGGREGATE_MEAN_OR_ELO_DOES_NOT_TRANSFER_TO_SUBGROUPS",
+    "MISSING_EXPLICIT_CONDITION_SCOPE_DOES_NOT_CLOSE",
+    "NON_CONTENT_ADDRESSED_EVIDENCE_DOES_NOT_CLOSE",
+    "NON_INDEPENDENT_AND_NON_OBJECTIVE_EVIDENCE_DOES_NOT_CLOSE"
+  ],
+  "current_ledger_observation": {
+    "acceptance_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "note": "CURRENT_ACCEPTANCE_ROWS_DO_NOT_CARRY_THE_EXPLICIT_FAMILY_PLUS_COVERED_CONDITIONS_FIELDS_REQUIRED_BY_THIS_COMPILER__THEREFORE_NO_CURRENT_CONDITION_CELL_IS_PROMOTED_FROM_LEGACY_ROWS_BY_INFERENCE"
+  },
+  "expected_current_matrix_cell_count": 37,
+  "critical_path_effect_if_verified": [
+    "ONE_PROOF_RECEIPT_CAN_CLOSE_MULTIPLE_EXACT_DUPLICATE_CONDITION_CELLS_WHEN_SCOPE_EXPLICITLY_CONTAINS_THE_CONDITION",
+    "PREVENT_REPEAT_WHOLE_FAMILY_RUNS_FOR_CYBER_BIOLOGY_AI_R_AND_D_HEALTHCARE_MATH_MULTILINGUAL_AND_LONG_CONTEXT",
+    "PREVENT_UNSOUND_WHOLE_DOMAIN_AGGREGATE_TO_SUBGROUP_PROMOTION",
+    "MAKE_MISSING_SCOPE_METADATA_A_MACHINE_VISIBLE_RESIDUAL"
+  ],
+  "hard_nonclaims": [
+    "NO_CURRENT_CONDITION_PARITY_CREDIT",
+    "NO_NEW_ATOMIC_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_PROMOTION",
+    "NO_TARGET_WEAKENING",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
