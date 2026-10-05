@@ -182,11 +182,15 @@ def _completed(prepared: Mapping[str, Any], result: Mapping[str, Any]) -> subpro
     kwargs = prepared["kwargs"]
     encoding = kwargs.get("encoding") or "utf-8"
     errors = kwargs.get("errors") or "strict"
+    stdout = stdout_b.decode(encoding, errors=errors)
+    stderr = stderr_b.decode(encoding, errors=errors)
+    if prepared.get("profile") == "APT_POLICY":
+        stdout = stdout.replace("/input/dpkg/status", "/var/lib/dpkg/status")
     return subprocess.CompletedProcess(
         args=prepared["original_argv"],
         returncode=int(result["returncode"]),
-        stdout=stdout_b.decode(encoding, errors=errors),
-        stderr=stderr_b.decode(encoding, errors=errors),
+        stdout=stdout,
+        stderr=stderr,
     )
 
 
