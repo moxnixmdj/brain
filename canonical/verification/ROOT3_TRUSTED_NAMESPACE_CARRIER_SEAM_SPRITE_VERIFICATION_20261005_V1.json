@@ -1,0 +1,18 @@
+{
+  "schema":"PROJECT_BRAIN_ROOT3_TRUSTED_NAMESPACE_CARRIER_SEAM_SPRITE_VERIFICATION_20261005_V1",
+  "date":"2026-10-05",
+  "status":"ISOLATED_SPRITE_PASS__16_OF_16_REGRESSION_AND_ADVERSARIAL_TESTS__REAL_NAMESPACE_SEAM_PASS__ZERO_CREDIT",
+  "exact_blobs":{
+    "launcher":"da07fb2f1a14b57eeebac2707e9ac757ae69e7b7",
+    "mediator":"d1c71d7e14d30884ab2e66d19d947a562b2dec97",
+    "tests":"80ef8bcaca566295c92ab2431040e1106210f625"
+  },
+  "carrier":{"name":"brain-heldout003-one-shot","id":"sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589"},
+  "tests":{"ran":16,"failures":0,"errors":0},
+  "real_probe":{"status":"PASS","child_status":"CHILD_EXITED","broker_payload":"SEAM_OK","broker_bytes":7},
+  "truth_boundary":{
+    "proved":["OUTSIDE_EXECUTOR_ACCESS_DENIES","EXECUTOR_USES_FROZEN_ORIGINAL_POPEN","REAL_NAMESPACE_MEMBRANE_LAUNCH_SUCCEEDS_THROUGH_SEAM","OLD_LAUNCHER_AND_MEDIATOR_TESTS_STILL_PASS"],
+    "not_proved":["ALL_CLASS_EXECUTORS_BOUND","ALL_29_SITES_CONFINED","C1_C2_C3_COMPLETE","ANY_ACCEPTANCE_PREDICATE"]
+  },
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0}
+}
