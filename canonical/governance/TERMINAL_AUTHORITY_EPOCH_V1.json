@@ -1,21 +1,21 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_AUTHORITY_EPOCH_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__CURRENT_14_24_FAIL_CLOSED_STALE_WORK_PREEMPTION__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "status": "ACTIVE__CURRENT_14_24_V16_FAIL_CLOSED_STALE_WORK_PREEMPTION__ZERO_CREDIT",
   "objective": "Prevent workers, branches, benchmark runs, and verification jobs from continuing load-bearing work after the terminal authority or critical-path evidence has changed.",
   "epoch_algorithm": {
     "canonical_payload": "JSON_SORT_KEYS_COMPACT_OF_VERSION_AND_ORDERED_SOURCE_BINDINGS",
     "version": 1,
-    "sha256": "ea4992d97b90a350ba2579285d3e766d2418cc4be5a1ca083174a4c96326dd45"
+    "sha256": "8f2236bb439b78fd3ac6fc154788720fa587bb31c358ccaef6827f40a9d8a837"
   },
   "source_bindings": [
     {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-      "git_blob_sha": "50b1ffb416450faf5473234571dabf2c242088a2"
+      "git_blob_sha": "407ef23d376dcce88e9173349c1e8d537331f0b7"
     },
     {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "daccbdcd0b5a0eac527ec8728cc50157edde4b92"
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860"
     },
     {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
@@ -36,11 +36,11 @@
   ],
   "worker_contract": {
     "required_field": "authority_epoch_id",
-    "required_value": "ea4992d97b90a350ba2579285d3e766d2418cc4be5a1ca083174a4c96326dd45",
+    "required_value": "8f2236bb439b78fd3ac6fc154788720fa587bb31c358ccaef6827f40a9d8a837",
     "on_mismatch": "ABORT_BEFORE_COMPUTE_CASE_EXPOSURE_OR_LOAD_BEARING_COMMIT__RELOAD_CURRENT_AUTHORITY__RECOMPUTE_PRIORITY",
     "on_source_blob_change": "CURRENT_EPOCH_INVALID__NEW_EPOCH_REQUIRED",
     "historical_receipts": "PRESERVED_AS_EVIDENCE_BUT_MAY_NOT_SCHEDULE_NEW_WORK_WITHOUT_CURRENT_EPOCH",
-    "current_acceptance": "14_PROVED__24_UNRESOLVED__5_OF_19_FAMILIES",
+    "current_acceptance": "14_PROVED__24_UNRESOLVED__5_OF_19_FAMILIES__V16_SCHEDULING_ACTIVE",
     "current_root_partition": "0_ROOT1__15_ROOT2_ONLY__6_ROOT3_ONLY__3_MIXED__18_ROOT2_TOUCHING__9_ROOT3_TOUCHING"
   },
   "observed_motivation": [
@@ -68,7 +68,7 @@
   "promotion_authority": false,
   "fresh_reality_authority": false,
   "supersedes_epoch": {
-    "sha256": "4c3bc1d6576158882820e7ee7e75fd285b6c66cdb52d67d9ffffced6d757ab46",
-    "reason": "LIVEBENCH_IF_GE_65_7_CLEANLY_PROMOTED__ATOMIC_LEDGER_13_25__ROOT_PARTITION_15_7_3__UNKNOWN_DOMAIN_WINDOWS_GATE_ADVANCED_TO_V8"
+    "sha256": "ea4992d97b90a350ba2579285d3e766d2418cc4be5a1ca083174a4c96326dd45",
+    "reason": "TERMINAL_AUTHORITY_ADVANCED_TO_ACTIVE_V16_SCHEDULER__ROOT_CAUSE_REBOUND_TO_CURRENT_14_24_BYTES"
   }
 }
