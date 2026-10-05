@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_CERTIFICATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__UNIVERSAL_FORMAL_CORRECTNESS_AND_POINTWISE_THEORETICAL_CEILING__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge the performance residual of STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001 without empirical extrapolation by proving universal correctness of the deterministic normalized-rule graph compiler over the already independently admitted contract boundary.",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "exact_inputs": {
+    "canonical/runtime/structured_method_normalized_rule_graph_v3.py": "79d3896818b03223348f05adf4fdcd574f6f355e",
+    "canonical/runtime/structured_method_normalized_rule_oracle_v3.py": "5d92b1360fbb1bb27baacc8a04adb3744abf690c",
+    "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json": "1db04e3c2c523dfe5f2ebe719b7c63dc9ccd808e",
+    "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json": "fc2e739789825bba5f30da56c6896de11678b6e8",
+    "canonical/verification/STRUCTURED_METHOD_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "5325382e88f003b5685d9da13df321c23829174f",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/runtime/structured_method_universal_correctness_certificate_v1.py": "4b7d3853bb89f61fb2263d11c071469c2c6e3a0f",
+    "canonical/tests/test_structured_method_universal_correctness_certificate_v1.py": "ea1e3b59eef104778ad1b7efd4c1451e6da0dabf"
+  },
+  "admitted_boundary": {
+    "scope_status": "SCOPE_CLOSED__OPERATOR_AGNOSTIC_NORMALIZED_RULE_GRAPH_ADMISSIBLE",
+    "unresolved_scope_dimensions": [],
+    "input_boundary": "STRUCTURED_METHOD_REQUIREMENTS_PLUS_NORMALIZED_APPLICABLE_RULES_PLUS_INPUT_SCHEMA_AND_DECLARED_SEMANTIC_SIGNATURES",
+    "excluded_upstream_behavior": "SEMANTIC_EXTRACTION_OR_NORMALIZATION_OF_UNSTATED_OR_IMPLICIT_RULES",
+    "target_weakened": false
+  },
+  "formal_lemmas": [
+    {
+      "id": "L1_FINITE_PENDING_CARRIER",
+      "statement": "Every admissible input contains a finite explicit normalized_rules list; pending is initialized with exactly one entry per unique declared rule."
+    },
+    {
+      "id": "L2_LOOP_INVARIANT",
+      "statement": "After each successful iteration, nodes contains exactly original inputs plus outputs of processed rules; pending contains exactly unprocessed rules; edges, requirement lineage, invariants and acceptance rows are the exact source-declared structural projection of processed rules."
+    },
+    {
+      "id": "L3_TOPOLOGICAL_PROGRESS",
+      "statement": "For any nonempty finite acyclic pending dependency graph whose external predecessors are declared inputs or already processed outputs, at least one pending rule has all predecessors materialized. The compiler therefore processes at least one rule."
+    },
+    {
+      "id": "L4_TERMINATION",
+      "statement": "Each progress step removes one pending rule and no processed rule is reinserted. By finiteness, every valid acyclic graph terminates after exactly the number of declared rules."
+    },
+    {
+      "id": "L5_LOCAL_EXACTNESS",
+      "statement": "For each processed rule the compiler checks declared input type/dimension contracts, preserves exact operator identity as inert data, records every input edge, output metadata, consumed requirement and invariant, and rejects duplicate outputs."
+    },
+    {
+      "id": "L6_GLOBAL_COMPLETENESS_GATES",
+      "statement": "After rule exhaustion the compiler rejects any applicable requirement without a consumer and any required output not materialized, while preserving justified exclusions."
+    },
+    {
+      "id": "L7_INDEPENDENT_ORACLE_PROJECTION",
+      "statement": "The independently implemented oracle reconstructs the same load-bearing canonical projection directly from the same public normalized input without importing the compiler and compares every projection field exactly."
+    },
+    {
+      "id": "L8_POINTWISE_CEILING",
+      "statement": "By L1-L7, for every admissible valid normalized-rule input, oracle score of compiler output is pass. Binary structural correctness has upper bound 1, so the Brain route attains the pointwise theoretical ceiling 1 on the entire admitted behavior scope."
+    }
+  ],
+  "invalid_input_rule": "MALFORMED_OR_CYCLIC_INPUTS_OUTSIDE_THE_ADMITTED_VALID_NORMALIZED_RULE_DOMAIN_FAIL_CLOSED__NO_SUCCESS_CREDIT_INFERRED",
+  "empirical_relation": {
+    "terminal_v3_prior_sample": "SUPPORTING_NON_LOAD_BEARING_CORROBORATION_ONLY",
+    "uses_empirical_generalization": false,
+    "terminal_replay_required": false,
+    "new_reality_required": false
+  },
+  "expected_independent_projection": {
+    "universal_correctness_proved": true,
+    "theoretical_ceiling_proved": true,
+    "basis_kind": "UNIVERSAL_FORMAL_CORRECTNESS_PROOF",
+    "uses_empirical_generalization": false,
+    "terminal_cases_replayed": 0,
+    "new_reality_units_consumed": 0
+  },
+  "promotion_consequence_if_independently_verified": [
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001_BECOMES_ELIGIBLE_FOR_SCOPE_COMPLETE_POINTWISE_CEILING_REUSE",
+    "REMOVE_THIS_LEAF_FROM_THE_SEVEN_SURVIVING_PERFORMANCE_FRONTIER_AFTER_SEPARATE_FAIL_CLOSED_REDUCTION",
+    "REUSE_IDENTICAL_LEAF_PROOF_WHEREVER_THE_SAME_BEHAVIOR_ID_APPEARS",
+    "NO_PUBLIC_BENCHMARK_EXECUTION_REQUIRED_FOR_THIS_LEAF_ITSELF"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT_FROM_THIS_CANDIDATE_ALONE",
+    "NO_ADVANCED_AGENTIC_CODING_FAMILY_PROMOTION_FROM_THIS_LEAF_ALONE",
+    "NO_CLAIM_ABOUT_UPSTREAM_SEMANTIC_RULE_EXTRACTION",
+    "NO_EMPIRICAL_EXTRAPOLATION_FROM_TERMINAL_V3_SAMPLES",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_PROMOTION_BEFORE_INDEPENDENT_CONTENT_ADDRESSED_VERIFICATION_AND_SEPARATE_REDUCTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
