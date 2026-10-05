@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_BENCHMARK_WITNESS_ELIMINATION_RUNTIME_OVERLAY_V1",
   "date": "2026-10-06",
-  "status": "ACTIVE_CANDIDATE__BUILDKITE_RUNTIME_PASS_BOUND__ZERO_CREDIT",
+  "status": "ACTIVE_CANDIDATE__BUILDKITE_RUNTIME_PASS_BOUND__V2_CERTIFICATE_ADMISSION_BOUND__ZERO_CREDIT",
   "receipt": {
     "path": "canonical/verification/BUILDKITE_ZERO_CASE_RUNTIME_RECEIPT_20261006_V1.json",
     "git_blob_sha": "5a10884bc32d3c003a26306ec67bbc902b7338bb"
@@ -10,12 +10,23 @@
     "path": "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_BUILDKITE_RESOURCE_DELTA_20261006_V1.json",
     "git_blob_sha": "1b2bd0bb8c0df7f481eea07d47409e296a027b02"
   },
-  "scheduler_rule": "DO_NOT_REPEAT_BUILDKITE_AUTH_OR_RUNTIME_PREFLIGHT__CONTINUE_WITNESS_CERTIFICATE_SYNTHESIS_AND_FALSIFICATION",
+  "scheduler_rule": "DO_NOT_REPEAT_BUILDKITE_AUTH_OR_RUNTIME_PREFLIGHT__CONTINUE_WITNESS_CERTIFICATE_SYNTHESIS_AND_FALSIFICATION__REQUIRE_V2_PROOF_CARRYING_FROZEN_TARGET_EVALUATOR_RELATION_BEFORE_CERTIFICATE_ADMISSION",
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_cases_consumed": 0,
     "acceptance_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "certificate_admission": {
+    "runtime": "canonical/runtime/benchmark_witness_elimination_compiler_v2.py",
+    "runtime_git_blob_sha": "94488630eb1174ee75d98fc7bc74c44b0c9bfcd2",
+    "tests": "canonical/tests/test_benchmark_witness_elimination_compiler_v2.py",
+    "tests_git_blob_sha": "7123d4979578ff9d1d7fb9ec4c378dc91b7b6cd5",
+    "activation": "canonical/governance/BENCHMARK_WITNESS_EVALUATOR_RELATION_V2_ACTIVATION_20261006_V1.json",
+    "activation_git_blob_sha": "bdf989ef3d2bc3a77606ab5d680bbacd1fa04fe1",
+    "verification": "canonical/verification/BENCHMARK_WITNESS_EVALUATOR_RELATION_V2_SPRITE_VERIFICATION_20261006_V1.json",
+    "verification_git_blob_sha": "a1435b76832c59913de5f5a183ece4b8ee4b51cb",
+    "rule": "BARE_EVALUATOR_BOOLEAN_GENERIC_PROTOCOL_PUBLIC_CALIBRATION_RESOURCE_COMPATIBILITY_AND_CARRIER_RUNTIME_ONLY_ARE_NOT_ADMISSIBLE_EVALUATOR_RELATION_PROOFS"
   }
 }
