@@ -1,20 +1,24 @@
 from __future__ import annotations
-import unittest
+import hashlib, json, unittest
 from canonical.runtime.opus55_typed_coverage_dominance_bridge_v1 import compile_typed_sandwich
 
-U="a"*40
+ATOM_SHAS={"A":"1"*40,"B":"2"*40,"C":"3"*40,"D":"4"*40}
+def digest(atoms):
+    return hashlib.sha256(json.dumps(atoms,sort_keys=True,separators=(",",":"),ensure_ascii=True).encode()).hexdigest()
+U=digest(ATOM_SHAS)
+
 def base():
     return {
         "universe_id":"OMEGA-V1",
-        "universe_sha":U,
-        "universe_atoms":["A","B","C","D"],
+        "universe_sha256":U,
+        "universe_atoms":dict(ATOM_SHAS),
         "coverage_certificates":[{
-            "id":"C1","universe_id":"OMEGA-V1","universe_sha":U,
+            "id":"C1","universe_id":"OMEGA-V1","universe_sha256":U,
             "source_sha":"b"*40,"cells":["A","B","C"],
             "independent_or_objective":True,"u_subset_domain_proved":True,
         }],
         "dominance_certificates":[{
-            "id":"B1","universe_id":"OMEGA-V1","universe_sha":U,
+            "id":"B1","universe_id":"OMEGA-V1","universe_sha256":U,
             "source_sha":"c"*40,"cells":["A","B"],
             "independent_or_objective":True,"scope_complete":True,
             "b_subset_q_proved":True,
@@ -36,7 +40,7 @@ class Tests(unittest.TestCase):
     def test_coverage_intersection_tightens(self):
         m=base()
         m["coverage_certificates"].append({
-            "id":"C2","universe_id":"OMEGA-V1","universe_sha":U,
+            "id":"C2","universe_id":"OMEGA-V1","universe_sha256":U,
             "source_sha":"d"*40,"cells":["B","C","D"],
             "independent_or_objective":True,"u_subset_domain_proved":True,
         })
@@ -50,11 +54,17 @@ class Tests(unittest.TestCase):
         self.assertEqual(v["status"],"FAIL_CLOSED")
         self.assertIn("UNIVERSE_ID_MISMATCH",v["reason"])
 
-    def test_same_id_different_universe_sha_fails_closed(self):
-        m=base(); m["dominance_certificates"][0]["universe_sha"]="e"*40
+    def test_same_id_different_universe_digest_fails_closed(self):
+        m=base(); m["dominance_certificates"][0]["universe_sha256"]="e"*64
         v=compile_typed_sandwich(m)
         self.assertEqual(v["status"],"FAIL_CLOSED")
-        self.assertIn("UNIVERSE_SHA_MISMATCH",v["reason"])
+        self.assertIn("UNIVERSE_SHA256_MISMATCH",v["reason"])
+
+    def test_atom_semantic_drift_fails_closed(self):
+        m=base(); m["universe_atoms"]["A"]="9"*40
+        v=compile_typed_sandwich(m)
+        self.assertEqual(v["status"],"FAIL_CLOSED")
+        self.assertIn("UNIVERSE_SHA256_CONTENT_MISMATCH",v["reason"])
 
     def test_missing_source_content_address_fails_closed(self):
         m=base(); m["coverage_certificates"][0]["source_sha"]="not-a-sha"
