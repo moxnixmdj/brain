@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
+  "action_id": "OPUS55-INTERFACE-POLICY-NORMAL-FORM-INDEPENDENT-VERIFY-20261005-V1",
+  "status": "EVIDENCE_ONLY__CURRENT_BASE_BOUND__NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+  "date": "2026-10-05",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "27508bd12d5229ab3f5ad90e5195cf5e9cb8637f",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "INDEPENDENT_VERIFICATION_AND_SEARCH_SPACE_DELETION_PROOF",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::OPEN_ENDED_EXTERNAL_TOOL_IMPLEMENTATION_SEMANTICS_MISATTRIBUTED_AS_INTRINSIC_OPUS_CAPABILITY",
+  "expected_parent_frontier_change": "IF_VERIFIED__DELETE_EXTERNAL_TOOL_IMPLEMENTATION_ENUMERATION_FROM_INTRINSIC_OPUS_TARGET_DISCOVERY__PRESERVE_TOOL_POLICY_BEHAVIOR_AND_DIRECT_MODALITY_REQUIREMENTS",
+  "theory_invariants": {
+    "terminal_goal_unchanged": true,
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_ownership_required": true,
+    "external_executor_is_not_automatically_model_capability": true,
+    "opus55_or_better_acceptance_required": true,
+    "no_capability_credit_from_this_action": true
+  },
+  "ownership_tests": {
+    "applies_to_promotion": false,
+    "provider_access_is_ownership": false,
+    "external_specimen_separation_preserved": true,
+    "brain_configured_verification_still_required": true
+  },
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-05_INTERFACE_POLICY_NORMAL_FORM_INDEPENDENT_VERIFICATION_DECISION_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "obs1_goal": "PRESERVE_LITERAL_ALL_USEFUL_OPUS55_OWNERSHIP_TARGET",
+    "obs2_required_capability": "CORRECT_CAUSAL_FACTORIZATION_OF_TOOL_MEDIATED_OPUS_BEHAVIOR",
+    "obs3_blocker": "TARGET_SEARCH_CAN_BECOME_ARTIFICIALLY_UNBOUNDED_IF_EXTERNAL_EXECUTOR_INTERNAL_SEMANTICS_ARE_COUNTED_AS_INTRINSIC_MODEL_CAPABILITIES",
+    "obs4_route": "INDEPENDENTLY_VERIFY_EXISTING_INTERFACE_POLICY_NORMAL_FORM_AGAINST_CURRENT_FIRST_PARTY_DOCUMENTATION",
+    "obs5_verification": "TRIANGULATE_TOOL_EXECUTION_BOUNDARIES_ACROSS_TOOL_USE_SERVER_TOOL_BROWSER_COMPUTER_AND_MESSAGES_API_DOCUMENTATION",
+    "obs6_after_win": "DELETE_ONLY_FALSE_EXTERNAL_IMPLEMENTATION_OBLIGATIONS__PRESERVE_MODEL_POLICY_AND_DIRECT_IO_REQUIREMENTS",
+    "obs7_obs_process": "STOP_AFTER_CURRENT_FIRST_PARTY_SOURCES_CONVERGE_AND_NO_CONCRETE_COUNTEREXAMPLE_SURFACE_IS_FOUND",
+    "deletion_first_order_checked": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "WHITE_BOX_HARVEST",
+      "COMPOSE",
+      "CONFIGURE",
+      "INTEGRATE"
+    ],
+    "selected_route": "REUSE_EXISTING_CANDIDATE_THEOREM_PLUS_FRESH_FIRST_PARTY_INDEPENDENT_VERIFICATION",
+    "discovery_required": false,
+    "discovery_exemption_reason": "GOVERNANCE_AND_EVIDENCE_RECONCILIATION_ONLY__NO_CAPABILITY_ACQUISITION_OR_EXECUTION_ROUTE_SELECTED",
+    "exact_base_commit_binding": true,
+    "material_state_change_invalidates": true
+  },
+  "behavioral_contract": {
+    "behavior_id": "TOOL_MEDIATED_OPUS_CAUSAL_CREDIT_SEPARATION",
+    "inputs": "DOCUMENTED_CONVERSATION_STATE__TOOL_SCHEMAS__MODEL_TOOL_ACTIONS__TOOL_RESULTS",
+    "environment_state": "DOCUMENTED_CLAUDE_API_TOOL_USE_CONTRACT",
+    "allowed_information": "CURRENT_FIRST_PARTY_PUBLIC_ANTHROPIC_DOCUMENTATION",
+    "required_output_or_action": "CLASSIFY_MODEL_POLICY_CONTRIBUTION_SEPARATELY_FROM_EXTERNAL_EXECUTOR_COMPUTATION",
+    "success_condition": "NO_EXTERNAL_TOOL_INTERNAL_COMPUTATION_IS_CREDITED_AS_INTRINSIC_OPUS_CAPABILITY_WITHOUT_DIRECT_CAUSAL_EVIDENCE",
+    "failure_condition": "FIRST_PARTY_EVIDENCE_SHOWS_OPUS_MODEL_ITSELF_EXECUTES_THE_EXTERNAL_OPERATION_OR_EXPOSES_A_DISTINCT_INTRINSIC_ACTION_CHANNEL_NOT_REPRESENTED_BY_THE_POLICY_INTERFACE",
+    "terminal_consequence": "REMOVE_FALSE_OPEN_ENDED_TOOL_IMPLEMENTATION_ENUMERATION__DO_NOT_CHANGE_TERMINAL_FINALITY_OR_ACCEPTANCE_CREDIT",
+    "verification_route": "FIRST_PARTY_DOCUMENTATION_TRIANGULATION_PLUS_LOGICAL_CAUSAL_FACTORIZATION",
+    "dependency_boundary": "MODEL_POLICY_VS_CLIENT_OR_SERVER_EXECUTOR",
+    "scope": "CURRENT_DOCUMENTED_OPUS55_TOOL_MEDIATED_INTERACTION_SURFACES"
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "NO_UNTOUCHED_QUALIFICATION_TASK_OR_PROMOTION_EVIDENCE_EXPOSED"
+  },
+  "qualification_stage": "NOT_APPLICABLE__EVIDENCE_ONLY",
+  "terminal_proof_control": {
+    "proof_obligation": "VERIFY_CAUSAL_ATTRIBUTION_BOUNDARY_WITHOUT_WEAKENING_ALL_USEFUL_TARGET",
+    "hole_type": "TARGET_ONTOLOGY_AND_SEARCH_SPACE",
+    "expected_certificate_or_receipt": "INDEPENDENT_VERIFICATION_JSON",
+    "validator": "FIRST_PARTY_DOC_CONSISTENCY_AND_COUNTEREXAMPLE_SEARCH",
+    "maximum_cheap_test_cost": "ZERO_INCREMENTAL_SPEND",
+    "prerequisites": [
+      "CURRENT_CANDIDATE_REASONING_RECEIPT",
+      "CURRENT_FIRST_PARTY_TOOL_USE_DOCS"
+    ],
+    "contamination_risk": "NONE_KNOWN__NO_HELDOUT_TASK",
+    "reversibility": "FULLY_REVERSIBLE_BY_SUPERSEDING_RECEIPT",
+    "falsification_condition": "CONCRETE_CURRENT_OPUS55_SURFACE_BREAKS_POLICY_PLUS_EXECUTOR_FACTORIZATION",
+    "critical_path_relation": "DELETES_FALSE_UNBOUNDED_TARGET_ENUMERATION"
+  },
+  "continuous_obs": {
+    "required": true,
+    "canonical_state_dependencies": [
+      "canonical/reasoning/2026-10-05_OPUS55_INTERFACE_POLICY_NORMAL_FORM_V1.json",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "obs_layers_current": true,
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": true,
+    "information_boundary_complete": true,
+    "information_policy": "FIRST_PARTY_CURRENT_DOCUMENTATION_ONLY_FOR_QUALIFICATION_CLAIMS"
+  },
+  "reality_query_admission": {
+    "required": false,
+    "reason": "NO_SCARCE_OR_UNTOUCHED_TERMINAL_REALITY_SPEND__PUBLIC_DOCUMENTATION_VERIFICATION_ONLY",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED"
+  },
+  "global_terminal_proof_cut": {
+    "required": false,
+    "reason": "NO_UNTOUCHED_TASK_SELECTION_EXECUTION_OR_TERMINAL_PROMOTION",
+    "proposed_action_membership": "EVIDENCE_RECONCILIATION_ONLY"
+  }
+}
