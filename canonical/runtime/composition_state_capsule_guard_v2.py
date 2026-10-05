@@ -14,6 +14,7 @@ of external evidence channels.
 from __future__ import annotations
 
 import copy
+import hashlib
 import importlib.util
 import json
 import pathlib
@@ -48,6 +49,22 @@ def _canon(value: Any) -> str:
         )
     except (TypeError, ValueError) as exc:
         raise CompositionGuardError("NON_CANONICALIZABLE_VALUE") from exc
+
+
+def _validate_channel_receipt(value: Mapping[str, Any]) -> dict[str, Any]:
+    if not isinstance(value, Mapping):
+        raise CompositionGuardError("CHANNEL_RECEIPT_INVALID")
+    receipt = copy.deepcopy(dict(value))
+    if receipt.get("schema") != "PROJECT_BRAIN_COMPOSITION_RUNTIME_CHANNEL_GUARD_V1":
+        raise CompositionGuardError("CHANNEL_RECEIPT_SCHEMA_INVALID")
+    supplied = receipt.pop("channel_manifest_sha256", None)
+    if not isinstance(supplied, str) or len(supplied) != 64:
+        raise CompositionGuardError("CHANNEL_RECEIPT_HASH_INVALID")
+    computed = hashlib.sha256(_canon(receipt).encode("utf-8")).hexdigest()
+    if supplied != computed:
+        raise CompositionGuardError("CHANNEL_RECEIPT_HASH_MISMATCH")
+    receipt["channel_manifest_sha256"] = supplied
+    return receipt
 
 
 def _strings(value: Any, label: str) -> list[str]:
@@ -331,6 +348,7 @@ def append_action_result(
     row: Mapping[str, Any],
     action: Mapping[str, Any],
     result: Any,
+    channel_receipt: Mapping[str, Any] | None = None,
 ):
     capsule_mod = _load_capsule()
     cycle = row.get("cycle")
@@ -358,15 +376,30 @@ def append_action_result(
         ["state:" + effect for effect in requires]
         + ["evidence:" + evidence_id, "action:" + action_ref, "producer:" + producer_ref]
     )
+    if channel_receipt is not None:
+        channel_receipt = _validate_channel_receipt(channel_receipt)
     values = {
         effect: {
             "effect": effect,
             "producer_cycle": cycle,
             "capability_id": cid,
             "result": copy.deepcopy(result),
+            "channel_manifest_sha256": (
+                channel_receipt.get("channel_manifest_sha256")
+                if channel_receipt is not None
+                else None
+            ),
         }
         for effect in provides
     }
+    execution_evidence = {
+        "kind": "executed_capability_result",
+        "cycle": cycle,
+        "capability_id": cid,
+        "result": copy.deepcopy(result),
+    }
+    if channel_receipt is not None:
+        execution_evidence["runtime_channel_receipt"] = copy.deepcopy(dict(channel_receipt))
     return capsule_mod.append_macrostep(
         capsule,
         producer_ref=producer_ref,
@@ -384,14 +417,7 @@ def append_action_result(
         requires=requires,
         provides=provides,
         values=values,
-        evidence_values={
-            evidence_id: {
-                "kind": "executed_capability_result",
-                "cycle": cycle,
-                "capability_id": cid,
-                "result": copy.deepcopy(result),
-            }
-        },
+        evidence_values={evidence_id: execution_evidence},
         lineage={effect: list(lineage_refs) for effect in provides},
     )
 
@@ -418,7 +444,13 @@ def rebuild_valid_prefix(
             expected_action = resolve_action_from_capsule(cap, row, actions[cycle])
             if _canon(record.get("plan")) != _canon(expected_action):
                 raise CompositionGuardError(f"TRACE_{cycle}_RESOLVED_ACTION_DRIFT")
-            cap = append_action_result(cap, row, expected_action, record.get("result"))
+            cap = append_action_result(
+                cap,
+                row,
+                expected_action,
+                record.get("result"),
+                record.get("composition_channel_receipt"),
+            )
             expected_head = cap.get("head_hash")
             if record.get("composition_capsule_head_hash") != expected_head:
                 raise CompositionGuardError(f"TRACE_{cycle}_CAPSULE_HEAD_MISMATCH")

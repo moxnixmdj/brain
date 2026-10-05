@@ -12,7 +12,7 @@
   "subject": {
     "astra_runtime": {
       "path": "canonical/runtime/astra_runtime.py",
-      "git_blob_sha": "0912dfa4119950f6d235d501dfa784e65e9f71c9"
+      "git_blob_sha": "c726dba9e3803cb1656606a6ded90252f2d7448c"
     },
     "bound_capability_registry": {
       "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
@@ -26,6 +26,7 @@
       "_load_capability_discovery",
       "_load_capability_planner",
       "_load_capability_proposal_generators",
+      "_load_composition_runtime_channel_guard",
       "_load_composition_state_capsule_guard",
       "_load_goal_compiler",
       "_load_grounded_executable_composition",
@@ -46,7 +47,8 @@
       "_load_open_research_source_frontend": "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
       "_load_grounded_executable_composition": "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
       "_load_grounded_executable_composition_verifier": "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
-      "_load_auto_capability_acquisition": "canonical/runtime/auto_capability_acquisition.py"
+      "_load_auto_capability_acquisition": "canonical/runtime/auto_capability_acquisition.py",
+      "_load_composition_runtime_channel_guard": "canonical/runtime/composition_runtime_channel_guard_v1.py"
     },
     "literal_runtime_helpers": [
       "auto_python_source_codec_acquisition",
@@ -118,8 +120,8 @@
     ]
   },
   "observed_current_census": {
-    "spec_loader_sites": 13,
-    "fixed_loader_sites": 11,
+    "spec_loader_sites": 14,
+    "fixed_loader_sites": 12,
     "literal_runtime_helpers": 4,
     "ordinary_adapter_modules": 34,
     "runtime_native_direct_actions": 4,
@@ -137,7 +139,7 @@
   },
   "theorem_boundary": {
     "proves": [
-      "ALL_13_CURRENT_SPEC_FROM_FILE_LOCATION_SITES_ARE_CLASSIFIED_ON_EXACT_ASTRA_BYTES",
+      "ALL_14_CURRENT_SPEC_FROM_FILE_LOCATION_SITES_ARE_CLASSIFIED_ON_EXACT_ASTRA_BYTES",
       "ALL_ACTUAL_RUNTIME_HELPER_CALLS_USE_LITERAL_MODULE_NAMES",
       "ALL_ORDINARY_REGISTRY_ADAPTER_SELECTION_IS_FINITE_AND_REGISTRY_BOUND",
       "ALL_4_RUNTIME_NATIVE_ENTRIES_BIND_EXACTLY_TO_IMPLEMENTED_AND_CONTROLLER_ALLOWED_DIRECT_GOAL_ACTIONS",
@@ -174,5 +176,28 @@
   "scheduling_authority": false,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "strict_composition_runtime_profile_candidate": {
+    "status": "CANDIDATE__ZERO_CREDIT__STRICT_AUDITED_IN_PROCESS_ACTION_SUBSET_ONLY",
+    "guard_path": "canonical/runtime/composition_runtime_channel_guard_v1.py",
+    "guard_git_blob_sha": "8e8dd6052206fb5a7d0ac4e64684faaa5d2b3cd9",
+    "capsule_guard_path": "canonical/runtime/composition_state_capsule_guard_v2.py",
+    "capsule_guard_git_blob_sha": "a72173110d331e68a60cd74ab8c96675c6730b7e",
+    "mechanism": [
+      "STRICT_ACTION_TYPE_ALLOWLIST",
+      "FULL_REPOSITORY_PRE_POST_CONTENT_DIGEST",
+      "FILE_READ_CONTENT_BINDING",
+      "DIRECTORY_ENUMERATION_MANIFEST_BINDING",
+      "ENVIRONMENT_AND_CWD_DIGEST_BINDING",
+      "NETWORK_PROCESS_NATIVE_ESCAPE_FAIL_CLOSED",
+      "INVALID_RESUME_PREFIX_FAIL_CLOSED_INSTEAD_OF_UNPROVED_ROLLBACK"
+    ],
+    "hard_nonclaims": [
+      "NO_CLAIM_SEMANTIC_DECLARATION_SCOPE_COMPLETE",
+      "NO_CLAIM_REPO_EVIDENCE_PROVENANCE_SCOPE_COMPLETE",
+      "NO_CLAIM_FULL_BOUND_CAPABILITY_UNIVERSE_MEDIATED",
+      "NO_CLAIM_FULL_C1_SCOPE_COMPLETE",
+      "NO_ROOT3_OR_ACCEPTANCE_CREDIT"
+    ]
+  }
 }
