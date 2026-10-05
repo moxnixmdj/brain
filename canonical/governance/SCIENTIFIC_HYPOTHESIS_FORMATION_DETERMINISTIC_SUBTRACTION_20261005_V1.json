@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__UNFACTORED_HYPOTHESIS_OBLIGATION_REDUCED_TO_THREE_VERIFIED_OWNED_SUBTRANSFORMS_PLUS_ONE_OPEN_SEMANTIC_RESIDUAL__ZERO_CREDIT",
+  "objective": "Shrink SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001 before registry freeze by subtracting already owned exact subtransforms.",
+  "authorities": {
+    "gap": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+    "typed_hypothesis_compiler": {
+      "path": "canonical/capabilities/opus55/TYPED_HYPOTHESIS_COMPILER_001.json",
+      "implementation_git_blob_sha": "c52407e8e399edbc7254dddf76f615a4e4136d79",
+      "independent_verification_run": 36950600157
+    },
+    "deterministic_decision_primitives": {
+      "path": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json",
+      "runner_verified_git_blob_sha": "7f880b31274cec24e0f241fcf03d3af41f4d6bf8",
+      "independent_verification_run": 36902437206
+    },
+    "decision_discriminator_v3": {
+      "path": "canonical/governance/UNIVERSAL_LEARNING_DECISION_ROUTER_V3.json",
+      "implementation_git_blob_sha": "3ec9e43a7bbe40a264fa3560a93039461941dbee",
+      "verification": "canonical/verification/UNIVERSAL_LEARNING_DECISION_ROUTER_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "independent_verification_run": 37157661615
+    }
+  },
+  "owned_subtractions": [
+    {
+      "subtransform": "EXPLICIT_TYPED_HYPOTHESIS_UNIVERSE_TO_EXHAUSTIVE_SUPPORTED_CANDIDATE_SET",
+      "owned": true,
+      "precondition": "ENTITY_FACT_TEMPLATE_UNIVERSE_AND_TYPES_EXPLICIT",
+      "boundary": "NO_OPEN_ENDED_TEMPLATE_INVENTION_OR_RAW_TEXT_SEMANTIC_INFERENCE"
+    },
+    {
+      "subtransform": "EXPLICIT_BELIEF_OBSERVATION_MODEL_TO_EXACT_BAYES_INFORMATION_GAIN_HARD_FILTER_AND_EXPECTED_UTILITY_ORDER",
+      "owned": true,
+      "precondition": "CANDIDATES_PRIORS_LIKELIHOODS_OR_OBSERVATION_MODEL_AND_REQUIRED_ACTION_MODELS_EXPLICIT",
+      "boundary": "NO_SEMANTIC_PLAUSIBILITY_OR_MODEL_ESTIMATION_WHEN_MODELS_ARE_MISSING"
+    },
+    {
+      "subtransform": "DECLARED_HYPOTHESES_ACTIONS_AND_PREDICTED_OUTCOMES_TO_EXACT_CONDITIONAL_DISCRIMINATION_ROUTE",
+      "owned": true,
+      "precondition": "HYPOTHESES_PROBABILITIES_TERMINAL_ACTIONS_AND_SAFE_PROBE_OUTCOME_MAPS_DECLARED",
+      "boundary": "NO_CLAIM_PREDICTED_OUTCOME_MODEL_IS_TRUE"
+    }
+  ],
+  "factorization_theorem": "WHEN_THE_ABOVE_PRECONDITIONS_HOLD, CANDIDATE_ENUMERATION, QUANTITATIVE_INFORMATION_GAIN_UTILITY_RANKING, AND CONDITIONAL_DISCRIMINATION_ARE_ALREADY_BRAIN_OWNED_AT_EXACTNESS; TERMINAL_PROOF_MUST_NOT_REPAY_MATCHED_OPUS_COST_FOR_THOSE SUBTRANSFORMS. ONLY SEMANTIC CONSTRUCTION OF MISSING HYPOTHESES_TEMPLATES_MODELS_OR_NONFORMAL_SCIENTIFIC_FEASIBILITY_DISCRIMINATION_REMAINS LOAD_BEARING.",
+  "minimum_open_residual": {
+    "candidate_behavior_id": "SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001",
+    "required_output": "FROM_AN_INCOMPLETE_SCIENTIFIC_INQUIRY_STATE_CONSTRUCT_MEANINGFUL_FALSIFIABLE_CANDIDATE_HYPOTHESES_AND_TEST_MODELS_SUFFICIENT_TO_INSTANTIATE_THE_OWNED_EXACT_PRIMITIVES",
+    "success_dimensions": [
+      "SCIENTIFIC_COHERENCE",
+      "FALSIFIABILITY",
+      "NONTRIVIALITY_RELATIVE_TO_EVIDENCE",
+      "NO_MATERIAL_LIVE_EXPLANATION_OMISSION_WITHIN_CLAIMED_SCOPE",
+      "SEMANTICALLY_DISCRIMINATING_TEST_MODEL",
+      "NONMATERIALLY_WRONG_FEASIBILITY_MODEL"
+    ],
+    "proof_order": [
+      "SEARCH_EXISTING_SCOPE_COMPLETE_STRONGER_RECEIPT",
+      "IF_NONE_EMBED_ONLY_THIS_OPEN_RESIDUAL_IN_T3_MATCHED_COMPARATOR"
+    ]
+  },
+  "portfolio_effect": {
+    "new_portfolio_required": false,
+    "existing_portfolio": "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO",
+    "rule": "CASES_SATISFYING_OWNED_PRECONDITIONS_REQUIRE_COMPONENT_BINDING_NOT_NEW_MATCHED_OPUS_COMPARISON_FOR_SUBTRACTED_TRANSFORMS"
+  },
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "FREEZE_SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_AS_UNFACTORED_MONOLITH",
+      "MATCHED_OPUS_EVALUATION_OF_EXPLICIT_TYPED_CANDIDATE_ENUMERATION",
+      "MATCHED_OPUS_EVALUATION_OF_EXACT_INFORMATION_GAIN_ON_EXPLICIT_MODELS",
+      "MATCHED_OPUS_EVALUATION_OF_EXACT_CONDITIONAL_DISCRIMINATION_ON_DECLARED_MODELS"
+    ],
+    "activate": [
+      "VERIFY_CURRENT_BLOB_AND_PRECONDITION_BINDINGS",
+      "SEARCH_ONLY_THE_OPEN_SEMANTIC_RESIDUAL_FOR_STRONGER_PROOF",
+      "MATCH_ONLY_THE_OPEN_SEMANTIC_RESIDUAL_IF_STRONGER_PROOF_FAILS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OPEN_ENDED_SCIENTIFIC_HYPOTHESIS_FORMATION_IS_SOLVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT1_POSITIVE_GAP",
+    "NO_NEW_FAMILY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
