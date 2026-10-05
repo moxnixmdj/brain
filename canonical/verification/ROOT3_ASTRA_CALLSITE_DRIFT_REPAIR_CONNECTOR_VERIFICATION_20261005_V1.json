@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_ASTRA_CALLSITE_DRIFT_REPAIR_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__47_OF_47_C1_MODULE_BLOBS_UNCHANGED__CURRENT_ASTRA_8_SITES_REBOUND__29_OF_29_EXACT_CURRENT_SITES_MATCH__ZERO_CREDIT",
+  "base_commit": "9bb2a7b76a42015ceec12cc91d0940fa070980c9",
+  "current_astra": {
+    "path": "canonical/runtime/astra_runtime.py",
+    "git_blob_sha": "85977747574cf7f393ca22a2c65268ed283ab3fe",
+    "process_site_count": 8,
+    "function_partition": {
+      "run_shell": 1,
+      "_ensure_pypi_dependency": 2,
+      "_ensure_apt_dependencies": 3,
+      "_goal_action": 1,
+      "_verify_and_promote_acquisition": 1
+    },
+    "exact_sites": [
+      [
+        325,
+        "subprocess.run",
+        "ARBITRARY_COMMAND_EXECUTION"
+      ],
+      [
+        595,
+        "subprocess.run",
+        "PACKAGE_ENV_MUTATION"
+      ],
+      [
+        673,
+        "subprocess.run",
+        "PACKAGE_ENV_MUTATION"
+      ],
+      [
+        918,
+        "subprocess.run",
+        "READ_ONLY_DECLARED_QUERY"
+      ],
+      [
+        933,
+        "subprocess.run",
+        "PACKAGE_ENV_MUTATION"
+      ],
+      [
+        940,
+        "subprocess.run",
+        "READ_ONLY_DECLARED_QUERY"
+      ],
+      [
+        1209,
+        "subprocess.run",
+        "BOUND_CHILD_CODE_EXECUTION"
+      ],
+      [
+        5771,
+        "subprocess.run",
+        "BOUND_CHILD_CODE_EXECUTION"
+      ]
+    ]
+  },
+  "unchanged_c1_reuse": {
+    "prior_verification_path": "canonical/verification/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CONNECTOR_VERIFICATION_20261005_V2.json",
+    "prior_verification_git_blob_sha": "b8e56a9b807cd4b77de6cc5656a780b12ddc2949",
+    "content_addressed_module_count": 47,
+    "exact_current_blob_matches": 47,
+    "drift_count": 0,
+    "implication": "PRIOR_NO_NEW_PROCESS_SITE_FACTS_FOR_THE_47_MODULE_SUBUNIVERSE_REMAIN_REUSABLE_BY_EXACT_BYTE_IDENTITY"
+  },
+  "repaired_subjects": {
+    "child_registry": {
+      "path": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+      "git_blob_sha": "9274fe69eb54f78eb22a8ee4b895d71215fab33a"
+    },
+    "effect_registry": {
+      "path": "canonical/runtime/root3_subprocess_effect_class_registry_v1.py",
+      "git_blob_sha": "771ea8c30eb25b23e22eaba3474ea65f879f912f"
+    }
+  },
+  "recomputation": {
+    "expected_site_count": 29,
+    "observed_site_count": 29,
+    "missing_site_count": 0,
+    "extra_site_count": 0,
+    "subprocess_run_count": 27,
+    "subprocess_popen_count": 2,
+    "class_count": 7,
+    "class_counts": {
+      "ARBITRARY_COMMAND_EXECUTION": 2,
+      "BOUND_CHILD_CODE_EXECUTION": 5,
+      "DECLARED_ARTIFACT_PRODUCTION": 1,
+      "LOCAL_LOOPBACK_SERVICE": 1,
+      "PACKAGE_ENV_MUTATION": 3,
+      "READ_ONLY_DECLARED_QUERY": 15,
+      "TEMPORARY_FILESYSTEM_TRANSFORM": 2
+    }
+  },
+  "proved": [
+    "THE_ONLY_DRIFT_FROM_THE_PRIOR_CHILD_PROCESS_UNIVERSE_IS_ASTRA_RUNTIME_BYTE_AND_LINE_IDENTITY",
+    "THE_47_CONTENT_ADDRESSED_C1_RUNTIME_MODULES_REMAIN_BYTE_IDENTICAL",
+    "CURRENT_ASTRA_STILL_HAS_EXACTLY_EIGHT_PROCESS_CREATION_SITES_WITH_THE_SAME_FUNCTION_PARTITION",
+    "REPAIRED_EFFECT_REGISTRY_MATCHES_ALL_29_CURRENT_DIRECT_PYTHON_PROCESS_SITES_WITH_ZERO_MISSING_OR_EXTRA_KEYS",
+    "CLASS_CARDINALITIES_AND_PROCESS_API_CARDINALITIES_ARE_UNCHANGED"
+  ],
+  "hard_nonclaims": [
+    "NO_CHILD_INTERNAL_EFFECT_SAFETY_CREDIT",
+    "NO_CLASS_EXECUTOR_CREDIT",
+    "NO_C1_C2_C3_OR_ROOT3_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
