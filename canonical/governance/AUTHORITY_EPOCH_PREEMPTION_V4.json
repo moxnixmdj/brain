@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_AUTHORITY_EPOCH_PREEMPTION_V4",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_V14_FAIL_CLOSED_STALE_WORK_PREEMPTION__REFRESHED_AUTHORITY_EPOCH__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Make stale scheduled work fail closed when live terminal authority, root partition, atomic acceptance evidence, or active zero-reality scheduling authority changes, while ignoring unrelated repository churn.",
+  "start_authority_epoch_sha256": "e390cb4bff7b323617b1e3c440ea44c42815b8cac64bf7f749228ccfc6347dc8",
+  "start_brain_head": "7a5573702e3331a28e55e99e2edb95f5e173faa2",
+  "epoch_components": {
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "9015b1fcacb40222f920c124986fcea63cc6e5ee",
+    "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_ACTIVATION_V1.json": "343be0d774f96ed851d668ad29045a12195f12ce",
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
+  },
+  "supersedes_candidate": {
+    "path": "canonical/governance/AUTHORITY_EPOCH_PREEMPTION_V3.json",
+    "git_blob_sha": "89a4d783e27e43283c2480bac2f10b915fbbfedd",
+    "reason": "CURRENT_TERMINAL_AUTHORITY_BLOB_CHANGED_AFTER_V3_FREEZE__V3_EPOCH_MUST_FAIL_CLOSED"
+  },
+  "semantics": [
+    "FREEZE_EPOCH_BEFORE_EXPENSIVE_OR_IRREVERSIBLE_WORK",
+    "RECHECK_EPOCH_BEFORE_EXECUTION_EVIDENCE_CONSUMPTION_OR_MERGE",
+    "ANY_CONTROL_PLANE_MISMATCH_FAILS_CLOSED_AND_REQUIRES_REPLAN",
+    "HIGHEST_VERSION_ACTIVE_ZERO_REALITY_ACTIVATION_DEFINES_SCHEDULING_COMPONENT",
+    "INACTIVE_FUTURE_CUT_CANDIDATES_DO_NOT_PREEMPT_CURRENT_WORK",
+    "NON_CONTROL_PLANE_REPOSITORY_CHURN_DOES_NOT_PREEMPT_WORK"
+  ],
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY",
+    "NO_AUTOMATIC_REBASE_OF_STALE_WORK",
+    "INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_ACTIVATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
