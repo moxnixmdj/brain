@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_ATTENTION_SAFEGUARD_V2_PRECOMMIT",
+  "date": "2026-10-05",
+  "status": "FROZEN_BEFORE_V2_PACKED_OUTPUTS__PRIOR_CASES_DEVELOPMENT_ONLY__ZERO_CREDIT",
+  "rationale": "V1 audit showed decoder cross-attention and self-attention received much less W4 precision than MLP/encoder blocks. V2 protects routing matrices before source-SSE allocation.",
+  "forced_precision": {
+    "fp16": [
+      "ALL_NORM_AND_BIAS_F32_STORAGES"
+    ],
+    "w4": [
+      "TIED_TOKEN_EMBEDDING_AND_LM_HEAD",
+      "POSITIONAL_EMBEDDING",
+      "RELATIVE_POSITION_BIAS_TABLES",
+      "ALL_DECODER_SELF_ATTENTION_WEIGHT_MATRICES",
+      "ALL_DECODER_CROSS_ATTENTION_WEIGHT_MATRICES",
+      "ENCODER_PATCH_PROJECTION_WEIGHT",
+      "ENCODER_DOWNSAMPLE_REDUCTION_WEIGHTS"
+    ],
+    "candidate": "ALL_REMAINING_F32_WEIGHT_MATRICES__W3_BASE_W4_BY_SOURCE_ONLY_SSE3_MINUS_SSE4",
+    "i64": "LOSSLESS"
+  },
+  "complete_bundle_budget_bytes": 100000000,
+  "development_set": "ALL_PREVIOUSLY_EXPOSED_CHARTQA_CASES_ONLY",
+  "fresh_holdout_rule": "MUST_USE_NEW_DONOR_QUALIFIED_CASES_STARTING_AFTER_HUMAN_INDEX_56_AND_AUGMENTED_INDEX_33_IF_V2_ADVANCES",
+  "hard_nonclaims": [
+    "V2_NOT_YET_PACKED",
+    "NO_FRESH_HOLDOUT_OUTPUT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_credit_delta": 0
+  }
+}
