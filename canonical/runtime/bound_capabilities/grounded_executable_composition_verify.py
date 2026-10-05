@@ -126,6 +126,8 @@ def verify(goal,composition,grounding,registry,verified_initial_facts=None):
         return False,"PROBLEM_INVALID"
     if problem.get("restrict_inherited_bound_capabilities") is not True:
         return False,"GROUNDING_SCOPE_NOT_RESTRICTED"
+    if problem.get("require_content_bound_trace") is not True:
+        return False,"CONTENT_BOUND_TRACE_NOT_REQUIRED"
 
     caps=problem.get("capabilities")
     if not isinstance(caps,list) or not caps:
