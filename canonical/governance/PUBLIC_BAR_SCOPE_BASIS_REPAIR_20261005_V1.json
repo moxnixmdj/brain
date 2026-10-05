@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_SCOPE_BASIS_REPAIR_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_PUBLIC_BAR_ONLY_FAMILIES_COMPILED_TO_FINITE_SCOPE_OBLIGATIONS__ZERO_CREDIT",
+  "objective": "Replace the five vague public-bar-only whole-family scope gaps with an explicit proof basis: public bars remain necessary for the behavior they measure, while uncovered declared behavior is bound to existing measurable Brain behavioral contracts. This repairs proof-basis shape only; it does not prove any bar or residual.",
+  "authorities": {
+    "quarantine": "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_20261005_V1.json",
+    "protocols": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "behavioral_contract_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "predicate_registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"
+  },
+  "theorem": "For each affected family F, whole-family terminal acceptance requires conjunction(public fixed-bar predicates already frozen for F, terminally admissible evidence for every listed uncovered residual contract). Shared residual evidence may be reused across families only for the exact same behavioral contract and evidence scope; benchmark scores may not proxy for residuals.",
+  "families": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "declared_scope": "Long-running work in unfamiliar/large codebases: feature implementation, debugging, refactoring, review, terminal operation, ambiguous multi-file changes, root-cause analysis and self-checking.",
+      "existing_public_predicates": [
+        "CODING_TB4_GE_66_4",
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8"
+      ],
+      "uncovered_residual_contracts": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ],
+      "closure_rule": "PUBLIC_BARS_AND_ALL_LISTED_RESIDUALS_REQUIRED__NO_BAR_TO_RESIDUAL_INHERITANCE"
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "declared_scope": "Produce high-quality professional work products and complete multi-hour/multi-stage office tasks.",
+      "existing_public_predicates": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822"
+      ],
+      "uncovered_residual_contracts": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "closure_rule": "PUBLIC_BARS_AND_ALL_LISTED_RESIDUALS_REQUIRED__NO_DELIVERABLE_SCORE_TO_UNMEASURED_FORMAT_OR_EVIDENCE_JUDGMENT_INHERITANCE"
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "declared_scope": "Execute real multi-application business workflows accurately end-to-end.",
+      "existing_public_predicates": [
+        "AUTOMATIONBENCH_GE_40"
+      ],
+      "uncovered_residual_contracts": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "closure_rule": "AUTOMATIONBENCH_AND_ALL_LISTED_RESIDUALS_REQUIRED__NO_SINGLE_BENCHMARK_TO_ALL_INTERFACE_ROUTE_RECOVERY_STATES_INHERITANCE"
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "declared_scope": "Solve difficult expert-level questions across domains with search/code/tools.",
+      "existing_public_predicates": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "uncovered_residual_contracts": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ],
+      "closure_rule": "HLE_TOOLS_AND_ALL_LISTED_RESIDUALS_REQUIRED__CLOSED_ENDED_EXPERT_QA_MUST_NOT_PROXY_FOR_OPEN_RESEARCH_CONTROL_OR_SYNTHESIS"
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "declared_scope": "Use scientific software, tools, analysis and iterative reasoning to solve long-horizon research/technical tasks.",
+      "existing_public_predicates": [
+        "TB_SCIENCE_GE_58_7"
+      ],
+      "uncovered_residual_contracts": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "closure_rule": "TB_SCIENCE_AND_ALL_LISTED_RESIDUALS_REQUIRED__WORKFLOW_RESOLUTION_MUST_NOT_PROXY_FOR_RESEARCH_CONTROL_RECOVERY_OR_SYNTHESIS_OUTSIDE_MEASURED_TASK_SCOPE"
+    }
+  ],
+  "compression_result": {
+    "previous_gap_shape": "FIVE_UNBOUNDED_SCOPE_EQUIVALENCE_OR_UNCOVERED_SCOPE_REPAIR_OBLIGATIONS",
+    "new_gap_shape": "FIVE_FINITE_CONJUNCTIONS_OVER_EXISTING_PUBLIC_PREDICATES_AND_EXISTING_BEHAVIORAL_CONTRACTS",
+    "new_behavioral_contract_ids": 0,
+    "new_family_ids": 0,
+    "new_terminal_cases": 0,
+    "root1_positive_gap_delta": 0
+  },
+  "threshold_authority_guard": {
+    "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+    "canonical_predicate": "TB_SCIENCE_GE_58_7",
+    "observation": "Current public Terminal-Bench-Science 0.1 leaderboard surfaced on 2026-10-05 reports Opus 5.5(max) at 63.3% +/- 3.3% with release date 2026-09-22.",
+    "public_sources": [
+      "https://www.terminal-bench-science.ai/",
+      "https://www.terminal-bench-science.ai/announcement"
+    ],
+    "consequence": "FAIL_CLOSED__DO_NOT_TREAT_58_7_AS_CURRENT_OPUS55_EQUAL_OR_BETTER_BAR_UNTIL_VERSION_HARNESS_AGENT_CONFIG_AND_SCORE_PROVENANCE_ARE_RECONCILED",
+    "score_credit_delta": 0
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_PUBLIC_BAR_PROXY_TO_UNCOVERED_RESIDUALS",
+    "NO_SHARED_RESIDUAL_REUSE_UNLESS_BEHAVIOR_ID_AND_EVIDENCE_SCOPE_MATCH_EXACTLY",
+    "NO_THRESHOLD_UPDATE_FROM_WEB_OBSERVATION_WITHOUT_PROTOCOL_COMPARABILITY_PROOF",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
