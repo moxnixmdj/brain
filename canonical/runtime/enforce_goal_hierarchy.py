@@ -4,6 +4,11 @@ from __future__ import annotations
 import argparse, base64, hashlib, json, os, pathlib, subprocess, sys, urllib.parse, urllib.request
 from datetime import datetime, timezone, timedelta
 
+try:
+    from trusted_v22_prewrite_admission import ACTIVE_POINTER_PATH as V22_ACTIVE_POINTER_PATH, admission_errors as v22_admission_errors
+except ImportError:
+    from execution_guard.v22_prewrite_admission import ACTIVE_POINTER_PATH as V22_ACTIVE_POINTER_PATH, admission_errors as v22_admission_errors
+
 ROOT=pathlib.Path(os.environ.get("GITHUB_WORKSPACE") or pathlib.Path.cwd()).resolve()
 
 SENSITIVE_PREFIXES=(
@@ -16,6 +21,7 @@ SENSITIVE_PREFIXES=(
     "canonical/laws/",
     "canonical/gates/",
     "canonical/governance/",
+    "execution_guard/",
     ".github/workflows/",
 )
 SENSITIVE_EXACT={"canonical/CANONICAL_POINTER.json"}
@@ -73,8 +79,11 @@ PROTECTED_GUARD_PATHS={
     "canonical/runtime/EXECUTOR_POLICY_V1.json",
     "canonical/runtime/astra_runtime.py",
     "canonical/runtime/same_identity_supervisor.py",
+    "execution_guard/v22_prewrite_admission.py",
+    "execution_guard/github_actions_guarded_run_live.py",
     ".github/workflows/superworker-signed-command-relay.yml",
     ".github/workflows/drift-immunity-guard.yml",
+    ".github/workflows/verify-v22-prewrite-admission.yml",
 }
 GOVERNANCE_ACTIONS={
     "GOVERNANCE_GUARD",
@@ -946,6 +955,46 @@ def active_target_mirror_errors(hierarchy,target):
         errors.append("FRONTIER_TARGET_NEXT_ACTION_MISMATCH")
     return errors
 
+
+def enforce_v22_prewrite_admission(intent,base):
+    try:
+        pointer=load_at_ref(base,V22_ACTIVE_POINTER_PATH)
+        pointer_blob=git("rev-parse",f"{base}:{V22_ACTIVE_POINTER_PATH}")
+    except Exception as exc:
+        fail("V22_ACTIVE_POINTER_BASE_READ_FAILED:"+type(exc).__name__)
+        return
+    admission=intent.get("v22_prewrite_admission")
+    receipt_blobs={}
+    paths=[]
+    if isinstance(admission,dict):
+        wake=admission.get("wake_receipt_path")
+        if isinstance(wake,str) and wake.strip():
+            paths.append(wake)
+        tournament=admission.get("tournament")
+        if isinstance(tournament,dict):
+            for row in tournament.get("counterexample_receipts") or []:
+                if isinstance(row,dict):
+                    path=row.get("path")
+                    if isinstance(path,str) and path.strip():
+                        paths.append(path)
+    for path in sorted(set(paths)):
+        pure=pathlib.PurePosixPath(path)
+        if path.startswith("/") or ".." in pure.parts:
+            continue
+        if not path_exists_at_ref(base,path):
+            continue
+        try:
+            receipt_blobs[path]=git("rev-parse",f"{base}:{path}")
+        except Exception:
+            continue
+    errors=v22_admission_errors(
+        admission,pointer,pointer_blob_sha=pointer_blob,
+        action_kind=str(intent.get("action_kind") or ""),
+        receipt_blobs=receipt_blobs,
+    )
+    for item in errors:
+        fail(item)
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--base",required=True)
@@ -1083,6 +1132,7 @@ def main():
     intent=load(intents[0]) if intents else {}
 
     if intent:
+        enforce_v22_prewrite_admission(intent,ns.base)
         enforce_blocker_lease(intent)
         enforce_recursive_obs(intent,files,ns.base)
         enforce_target_continuity(intent,ns.base,hierarchy)
