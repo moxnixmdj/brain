@@ -6,9 +6,9 @@
   "objective": "Eliminate one concrete Root3 semantic-widening path where urllib urlopen requests with arbitrary HTTP methods or bodies were classified as information-only EXACT_FETCH actions before the external bridge or direct urllib fallback executed them.",
   "subject": {
     "runtime_path": "canonical/runtime/astra_runtime.py",
-    "runtime_git_blob_sha": "55de331c9b524531e911afc4c067b31291088578",
+    "runtime_git_blob_sha": "2479705e6796b7a956504093b83887ac12bd5f3b",
     "tests_path": "canonical/tests/test_astra_external_information_http_boundary_v1.py",
-    "tests_git_blob_sha": "7d7b3600ba5b8cb14252d02770c2dd6d816c0fb9"
+    "tests_git_blob_sha": "972e82a93309731463d3b81719cea650884c47ed"
   },
   "counterexample": {
     "old_path": "urllib.request.Request(data=...) -> _bridge_aware_urlopen -> _external_tool_bridge('urlopen', method/body) -> _authorize_external_information classified every urlopen as EXACT_FETCH -> external bridge or raw urllib fallback could perform a mutating HTTP request",
@@ -21,16 +21,29 @@
     "fail_closed_errors": [
       "EXTERNAL_INFORMATION_HTTP_METHOD_FORBIDDEN:<METHOD>",
       "EXTERNAL_INFORMATION_HTTP_BODY_FORBIDDEN"
-    ]
+    ],
+    "external_tool_bridge_kind_registry": {
+      "status": "CLOSED_WORLD_LITERAL_KIND_SET_FOR_CURRENT_ASTRA_CALL_SITES",
+      "allowed_kinds": [
+        "urlopen",
+        "http_get",
+        "planner",
+        "package_name_search",
+        "python_source_tree",
+        "pypi_wheel_closure"
+      ],
+      "rule": "ANY_UNREGISTERED_EXTERNAL_TOOL_KIND_FAILS_CLOSED_BEFORE_OBS_OR_TRANSPORT"
+    }
   },
   "verification_cases": [
     "POST_WITH_BODY_REJECTED_AT_ACTUAL_BRIDGE_AWARE_URLOPEN_CHOKE_POINT",
     "DELETE_WITHOUT_BODY_REJECTED",
     "GET_WITH_BODY_REJECTED",
-    "READ_ONLY_GET_STILL_REQUIRES_CONTINUOUS_OBS_INFORMATION_AUTHORITY"
+    "READ_ONLY_GET_STILL_REQUIRES_CONTINUOUS_OBS_INFORMATION_AUTHORITY",
+    "UNREGISTERED_EXTERNAL_TOOL_KIND_REJECTED_BEFORE_OBS_OR_TRANSPORT"
   ],
   "root3_effect": {
-    "c1_external_tool_bridge_residual": "NARROWED__MUTATING_HTTP_VIA_INFORMATION_AUTHORITY_REMOVED",
+    "c1_external_tool_bridge_residual": "NARROWED__MUTATING_HTTP_VIA_INFORMATION_AUTHORITY_REMOVED__UNKNOWN_BRIDGE_KIND_DYNAMIC_DISPATCH_REMOVED",
     "c1_scope_complete": false,
     "remaining_external_bridge_questions": [
       "PROVE_ALL_EXTERNAL_BRIDGE_KINDS_ARE_EFFECT_CLASSIFIED_AND_READ_ONLY_OR_ROUTE_MATERIAL_EFFECTS_THROUGH_THE_FINAL_AUTHORIZER",
