@@ -9,7 +9,7 @@
   "authorities": {
     "outer_portfolios": {
       "path": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
-      "git_blob_sha": "7c49e3a44dc9a827e84a12f572ea6b8e9b2fa1f5"
+      "git_blob_sha": "7c49e3a44dc9a827e84a12b572ea6b8e9b2fa1f5"
     },
     "portfolio_bindings": {
       "path": "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
