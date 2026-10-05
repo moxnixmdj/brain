@@ -79,7 +79,7 @@
   ],
   "accounting": {
     "incremental_spend_usd": 0,
-    "new_reality_units_consumED": 0,
+    "new_reality_units_consumed": 0,
     "terminal_cases_consumed": 0,
     "acceptance_credit_delta": 0,
     "family_credit_delta": 0,
