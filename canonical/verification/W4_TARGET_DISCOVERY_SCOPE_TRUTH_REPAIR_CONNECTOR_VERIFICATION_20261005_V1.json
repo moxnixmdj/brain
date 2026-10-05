@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_W4_TARGET_DISCOVERY_SCOPE_TRUTH_REPAIR_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__CURRENT_TERMINAL_COMPILER_REJECTS_W4_COVERAGE_ONLY_WITNESS__TEST_ASSERTS_FALSE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/W4_TARGET_DISCOVERY_ACTIVATION_SCOPE_TRUTH_REPAIR_20261005_V1.json",
+    "commit": "2172bf93aee8389023a80a15ee8d54fe0d696ddf"
+  },
+  "recomputed_current_blobs": {
+    "terminal_frontier_compiler": {
+      "path": "canonical/runtime/terminal_frontier_compiler_v2.py",
+      "git_blob_sha": "5dcae9ffb9c31ee3a5bf280b416fcbf7cd593d33"
+    },
+    "terminal_frontier_tests": {
+      "path": "canonical/tests/test_terminal_frontier_compiler_v2.py",
+      "git_blob_sha": "b387f609675ffd6f0f32e4b57f88f29a64b5a194"
+    }
+  },
+  "checks": {
+    "accepted_witness_classes": [
+      "W1_TARGET_OWNER_EXHAUSTIVE_BEHAVIOR_SPECIFICATION",
+      "W2_IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION",
+      "W3_UNIVERSAL_BEHAVIORAL_DOMINANCE_THEOREM"
+    ],
+    "w4_present_in_current_compiler_positive_witness_set": false,
+    "w4_occurrence_count_current_compiler": 0,
+    "regression_test_w4_target_discovery_complete_true_expected": false,
+    "activation_2850d_text_consistent_with_current_compiler": false,
+    "truth_repair_required": true
+  },
+  "verdict": {
+    "w4_valid_for_top_level_primitive_family_search_compression": true,
+    "w4_valid_for_literal_target_behavior_discovery_completeness": false,
+    "literal_target_discovery_complete_from_w4": false,
+    "terminal_finality_delta": 0
+  },
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_AN_INDEPENDENT_PUBLIC_RUNNER_RECEIPT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_W1_W2_OR_W3_IS_CURRENTLY_PROVED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
