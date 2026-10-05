@@ -1,0 +1,9 @@
+{
+  "schema": "PROJECT_BRAIN_REPOSITORY_TEST_EXECUTION_COMPOSITION_RECEIPT_V1",
+  "policy_id": "ROOT3_REPOSITORY_TEST_EXECUTION_V1",
+  "descriptor_schema": "PROJECT_BRAIN_ROOT3_CONTENT_BOUND_PROCESS_DESCRIPTOR_V1",
+  "snapshot_mode": "GIT_COMMIT_ARCHIVE_TO_PRIVATE_NAMESPACE_TMPFS",
+  "state_and_provenance_invariants_hold": true,
+  "scope_complete": true,
+  "independent_or_objective": true
+}
