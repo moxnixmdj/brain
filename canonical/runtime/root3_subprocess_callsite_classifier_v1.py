@@ -1,6 +1,6 @@
 """Runtime join from intercepted subprocess calls to the exact Root3 effect-class registry.
 
-The current Root3 universe is already frozen as 29 exact Python process-creation
+The current Root3 universe is already frozen as 22 exact Python process-creation
 sites keyed by (repository-relative module path, source line, process API).
 This module turns that static proof artifact into a runtime guard without
 modifying the 29 callers: an interceptor walks the live Python frame chain and
@@ -46,7 +46,7 @@ def classify_frame_chain(
     api = str(api)
     if api not in SUPPORTED_APIS:
         raise RuntimeCallsiteClassificationError("PROCESS_API_UNSUPPORTED:" + api)
-    if len(EXPECTED) != 29 or set(EXPECTED.values()) - CLASSES:
+    if len(EXPECTED) != 22 or set(EXPECTED.values()) - CLASSES:
         raise RuntimeCallsiteClassificationError("EFFECT_CLASS_REGISTRY_INVARIANT_FAILED")
 
     matches: list[dict[str, Any]] = []
