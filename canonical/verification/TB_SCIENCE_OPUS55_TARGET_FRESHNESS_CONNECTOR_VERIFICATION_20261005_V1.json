@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_OPUS55_TARGET_FRESHNESS_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_PRIMARY_SOURCE_RECOMPUTATION_PASS__SAME_BENCHMARK_LABEL_DIFFERENT_REPORTED_SETUPS__NO_CREDIT",
+  "objective": "Independently verify the TB-Science Opus 5.5 target-freshness truth repair using current primary public sources without executing any benchmark case.",
+  "subject": {
+    "path": "canonical/governance/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1.json"
+  },
+  "root2_authority": {
+    "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V3.json",
+    "git_blob_sha": "82612b803c1d47eeb8888cf99a00c14a1bea54e1",
+    "predicate": "TB_SCIENCE_GE_58_7"
+  },
+  "independently_observed_primary_sources": [
+    {
+      "source": "Anthropic Claude Opus 5.5 launch page",
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "published": "2026-09-22",
+      "benchmark": "Terminal-Bench-Science 0.1",
+      "opus55_score_percent": 58.7,
+      "setup_facts": [
+        "Anthropic reports the result on its Opus 5.5 launch evaluation surface",
+        "Anthropic states Terminal-Bench-Science standard error is approximately +/-3.5 to 5 points per model",
+        "Anthropic separately references the public leaderboard and its Claude Code three-trial harness when discussing reproduction of Opus 5"
+      ]
+    },
+    {
+      "source": "Terminal-Bench-Science official leaderboard",
+      "url": "https://www.terminal-bench-science.ai/",
+      "observed_date": "2026-10-05",
+      "benchmark": "Terminal-Bench-Science 0.1",
+      "model": "Opus 5.5(max)",
+      "agent": "Claude Code",
+      "task_count": 70,
+      "opus55_score_percent": 63.3,
+      "uncertainty_percent": 3.3
+    }
+  ],
+  "checks": {
+    "anthropic_58_7_observed": true,
+    "official_current_leaderboard_63_3_observed": true,
+    "current_public_leaderboard_identifies_opus55_max_and_claude_code": true,
+    "same_benchmark_label_alone_proves_harness_identity": false,
+    "unconditional_58_7_target_is_unsound_for_current_public_63_3_route": true,
+    "freeze_harness_identity_before_brain_result_required": true
+  },
+  "verified_consequence": {
+    "classification": "HARNESS_CONDITIONAL_COMPARATOR_TARGET",
+    "public_current_route": "IF_BRAIN_USES_MATERIALLY_COMPARABLE_CURRENT_PUBLIC_TB_SCIENCE_0_1_HARNESS__OPUS55_FLOOR_IS_63_3_PERCENT",
+    "anthropic_release_route": "58_7_PERCENT_IS_ADMISSIBLE_ONLY_IF_EXACT_OR_MATERIALLY_EQUIVALENT_ANTHROPIC_RELEASE_SETUP_IDENTITY_IS_PROVED",
+    "otherwise": "MATCHED_SAME_HARNESS_OPUS55_COMPARATOR_OR_FAIL_CLOSED_NOT_PROVEN",
+    "delete": [
+      "UNCONDITIONAL_58_7_AS_UNIVERSAL_TB_SCIENCE_OPUS55_THRESHOLD",
+      "CROSS_HARNESS_SCORE_TRANSPLANT",
+      "POST_BRAIN_RESULT_TARGET_SELECTION"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_SCORE",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_HARNESS_EQUIVALENCE_PROOF",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_TERMINAL_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
