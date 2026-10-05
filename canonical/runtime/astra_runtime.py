@@ -4113,6 +4113,19 @@ def _planner_post(prompt, timeout_s=20):
             errors.append({"model":model,"error":type(e).__name__+":"+str(e),"duration_s":round(time.monotonic()-t,3)})
     raise Blocker("PLANNER_ALL_ROUTES_FAILED:"+json.dumps(errors,sort_keys=True)[:1800])
 
+def _load_controller_composition_capsule_adapter():
+    path=pathlib.Path(__file__).resolve().with_name("controller_composition_capsule_adapter_v1.py")
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_controller_composition_capsule_adapter_v1",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("CONTROLLER_COMPOSITION_CAPSULE_ADAPTER_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
 def _controller_actions(step, mission):
     actions=step.get("controller_actions")
     ref=step.get("controller_actions_ref")
@@ -4204,11 +4217,16 @@ def _validated_checkpoint_prefix(completed):
 def _load_controller_checkpoint(step,mission,actions):
     plan_sha=_controller_plan_sha256(actions)
     path=_controller_checkpoint_path(step,mission,plan_sha=plan_sha)
+    capsule_enforced=bool(step.get("_composition_capsule_v2_enforced"))
+    capsule_adapter=(
+        _load_controller_composition_capsule_adapter()
+        if capsule_enforced else None
+    )
     # Anonymous invocations have no durable continuation identity. Reusing
     # even an identical completed plan across later calls would let stale
     # execution state impersonate a new goal. Only named missions may resume.
     if not mission.get("mission_id") or not path.is_file():
-        return path,{
+        fresh={
           "schema":"PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
           "mission_id":mission.get("mission_id"),
           "step_id":step.get("id") or step.get("step_id") or "goal",
@@ -4220,7 +4238,11 @@ def _load_controller_checkpoint(step,mission,actions):
           "test_interrupt_injected":False,
           "created_at_utc":utc(),
           "updated_at_utc":utc(),
-        },False
+        }
+        if capsule_enforced:
+            fresh["composition_capsule_v2"]=capsule_adapter.empty_capsule(ROOT)
+            fresh["composition_capsule_scope"]="DETERMINISTIC_CAPABILITY_GRAPH"
+        return path,fresh,False
     data=readj(path)
     if data.get("schema")!="PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1":
         raise Blocker("CONTROLLER_CHECKPOINT_SCHEMA_INVALID")
@@ -4239,6 +4261,29 @@ def _load_controller_checkpoint(step,mission,actions):
         data["rewind_count"]=int(data.get("rewind_count") or 0)+1
         data["last_rewound_from_action_index"]=rewound_from
         data["last_rewind_reason"]="DURABLE_EFFECT_INVALID_OR_MISSING"
+
+    if capsule_enforced:
+        current_trace=list(data.get("completed_actions") or [])
+        capsule=data.get("composition_capsule_v2")
+        if not isinstance(capsule,dict):
+            data["completed_actions"]=[]
+            data["composition_capsule_v2"]=capsule_adapter.empty_capsule(ROOT)
+            data["composition_capsule_scope"]="DETERMINISTIC_CAPABILITY_GRAPH"
+            data["rewind_count"]=int(data.get("rewind_count") or 0)+1
+            data["last_rewound_from_action_index"]=0
+            data["last_rewind_reason"]="CAPSULE_V2_MISSING_LEGACY_CHECKPOINT"
+        else:
+            verdict=capsule_adapter.verify_controller_state(capsule,current_trace,ROOT)
+            if verdict.get("status")!="PASS":
+                data["completed_actions"]=[]
+                data["composition_capsule_v2"]=capsule_adapter.empty_capsule(ROOT)
+                data["composition_capsule_scope"]="DETERMINISTIC_CAPABILITY_GRAPH"
+                data["rewind_count"]=int(data.get("rewind_count") or 0)+1
+                data["last_rewound_from_action_index"]=0
+                data["last_rewind_reason"]="CAPSULE_V2_INVALID:"+str(verdict.get("reason"))
+            else:
+                data["composition_capsule_scope"]="DETERMINISTIC_CAPABILITY_GRAPH"
+
     data["resume_count"]=int(data.get("resume_count") or 0)+1
     data["next_action_index"]=len(data.get("completed_actions") or [])
     data["updated_at_utc"]=utc()
@@ -4268,14 +4313,34 @@ def _run_model_independent_goal(step, mission, goal):
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
       "finish"
     }
+    capsule_enforced=bool(step.get("_composition_capsule_v2_enforced"))
+    capsule_adapter=(
+        _load_controller_composition_capsule_adapter()
+        if capsule_enforced else None
+    )
     checkpoint_path,checkpoint,resumed=_load_controller_checkpoint(step,mission,actions)
     trace=list(checkpoint.get("completed_actions") or [])
+    capsule=checkpoint.get("composition_capsule_v2") if capsule_enforced else None
+    if capsule_enforced and not isinstance(capsule,dict):
+        raise Blocker("CONTROLLER_COMPOSITION_CAPSULE_MISSING")
     start_cycle=len(trace)
     for cycle in range(start_cycle,len(actions)):
         raw_action=actions[cycle]
         if not isinstance(raw_action,dict):
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_NOT_OBJECT")
-        action=_resolve_result_refs(dict(raw_action),trace)
+        if capsule_enforced:
+            try:
+                capsule_adapter.assert_no_prior_state_bypass(raw_action,capsule)
+                action=capsule_adapter.resolve_result_refs(
+                    dict(raw_action),capsule,ROOT
+                )
+            except Exception as exc:
+                raise Blocker(
+                    "CONTROLLER_COMPOSITION_CAPSULE_INPUT_BLOCKED:"
+                    +type(exc).__name__+":"+str(exc)
+                ) from exc
+        else:
+            action=_resolve_result_refs(dict(raw_action),trace)
         typ=action.get("type")
         if typ not in allowed_types:
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:"+str(typ))
@@ -4286,7 +4351,25 @@ def _run_model_independent_goal(step, mission, goal):
         if isinstance(result,dict) and result.get("error"):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         _verify_action_expectation(action,result)
+        if capsule_enforced:
+            try:
+                capsule=capsule_adapter.append_cycle(
+                    capsule,
+                    cycle=cycle,
+                    raw_action=raw_action,
+                    resolved_action=action,
+                    result=result,
+                    root=ROOT,
+                )
+            except Exception as exc:
+                raise Blocker(
+                    "CONTROLLER_COMPOSITION_CAPSULE_COMMIT_BLOCKED:"
+                    +type(exc).__name__+":"+str(exc)
+                ) from exc
         trace.append({"cycle":cycle,"plan":action,"result":result})
+        if capsule_enforced:
+            checkpoint["composition_capsule_v2"]=capsule
+            checkpoint["composition_capsule_scope"]="DETERMINISTIC_CAPABILITY_GRAPH"
         checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
         interrupt_after=step.get("interrupt_after_controller_actions_once")
         if interrupt_after is not None:
@@ -4319,6 +4402,16 @@ def _run_model_independent_goal(step, mission, goal):
                 "resumed_from_action_index":start_cycle,
                 "rewind_count":int(checkpoint.get("rewind_count") or 0),
                 "last_rewound_from_action_index":checkpoint.get("last_rewound_from_action_index"),
+                "composition_capsule_v2_enforced":bool(capsule_enforced),
+                "composition_capsule_v2_head_hash":(
+                    capsule.get("head_hash")
+                    if capsule_enforced and isinstance(capsule,dict)
+                    else None
+                ),
+                "composition_capsule_scope":(
+                    "DETERMINISTIC_CAPABILITY_GRAPH"
+                    if capsule_enforced else None
+                ),
               }
             }
     raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH")
@@ -5304,6 +5397,9 @@ def _run_capability_planned_goal(step, mission, goal):
     derived.pop("capability_problem",None)
     derived.pop("capability_problem_ref",None)
     derived["controller_actions"]=planned["actions"]
+    # Deterministic capability-graph composition has explicit cross-step
+    # effect/result semantics. Capsule v2 is mandatory at this boundary.
+    derived["_composition_capsule_v2_enforced"]=True
     derived["max_controller_actions"]=max(
         int(step.get("max_controller_actions",16)),
         len(planned["actions"])
