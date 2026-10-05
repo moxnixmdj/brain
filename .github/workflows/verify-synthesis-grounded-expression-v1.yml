@@ -1,4 +1,4 @@
-name: Verify synthesis grounded expression V1
+name: Verify synthesis grounded expression V2
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     paths:
       - "canonical/runtime/synthesis_grounded_expression_ir_v1.py"
       - "canonical/tests/test_synthesis_grounded_expression_ir_v1.py"
-      - "canonical/governance/SYNTHESIS_C2_GROUNDED_EXPRESSION_BOUNDED_ROUTE_20261005_V1.json"
+      - "canonical/governance/SYNTHESIS_C2_GROUNDED_EXPRESSION_BOUNDED_ROUTE_20261005_V2.json"
       - ".github/workflows/verify-synthesis-grounded-expression-v1.yml"
   workflow_dispatch:
 
@@ -28,9 +28,9 @@ jobs:
           import hashlib
           from pathlib import Path
           expected = {
-              "canonical/runtime/synthesis_grounded_expression_ir_v1.py": "6388c425ecac5fc5f85e02bf55bdc4b1d0f99caa",
-              "canonical/tests/test_synthesis_grounded_expression_ir_v1.py": "6f83d7bc61161e4cf5423e7ca3fb4c4b47e88a37",
-              "canonical/governance/SYNTHESIS_C2_GROUNDED_EXPRESSION_BOUNDED_ROUTE_20261005_V1.json": "beb7663361a61bb424b0e629947f4040eeec5aba",
+              "canonical/runtime/synthesis_grounded_expression_ir_v1.py": "0709b7d43a069eaa9eb3240df28789a9107a36db",
+              "canonical/tests/test_synthesis_grounded_expression_ir_v1.py": "f28e5648e7327fdd6cba54c602016485e0eb66c5",
+              "canonical/governance/SYNTHESIS_C2_GROUNDED_EXPRESSION_BOUNDED_ROUTE_20261005_V2.json": "a138e506a9488a6f268c65febed7eb9420404de5",
           }
           for p, want in expected.items():
               data = Path(p).read_bytes()
