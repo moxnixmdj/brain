@@ -38,7 +38,11 @@
           "kind": "STRONGER_PROOF_SUBSTITUTION",
           "cost_units": 1,
           "decisive": true,
-          "status": "PENDING"
+          "status": "PASS_NO_COUNTEREXAMPLE",
+          "receipt": {
+            "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_STRONGER_PROOF_SUBSTITUTION_SEARCH_20261005_V1.json",
+            "git_blob_sha": "9f8c2042ab682ca2cefe3be116c9c380d111f12f"
+          }
         },
         {
           "id": "F_PUBLIC_EQUIVALENCE",
