@@ -32,6 +32,14 @@
     "acceptance_basis_repair_v2": {
       "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V2.json",
       "git_blob_sha": "d2867bdcb4e2a721c2dbcde59100627508a7866a"
+    },
+    "target_behavior_mechanism_separation": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_20261005_V1.json",
+      "commit": "c190f76d74237a12009aa96ae40957090e45523c",
+      "verified_by": {
+        "path": "canonical/verification/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+        "commit": "f2d28f3e04cd0db2ac1c368630ce9e1f49077788"
+      }
     }
   },
   "problem": {
@@ -41,7 +49,7 @@
   },
   "theorem": {
     "name": "TWO_LAYER_TERMINAL_ENVELOPE_FINALITY",
-    "statement": "For the frozen Claude Opus 5.5 target, terminal envelope finality requires BOTH (A) a finite content-addressed fixed point over the authoritative public first-party capability source graph with lossless mapping of every capability-bearing semantic unit, AND (B) a behavioral-universality certificate showing that the resulting contracted behavior basis covers every useful target behavior admitted by the literal terminal objective. Layer A is decidable by finite graph closure. Layer B must not be inferred from Layer A, family count, benchmark count, absence of a known counterexample, or product-page enumeration.",
+    "statement": "For the frozen Claude Opus 5.5 target, terminal envelope finality requires BOTH (A) a finite content-addressed fixed point over the authoritative public first-party capability source graph with lossless mapping of every capability-bearing semantic unit to FROZEN OBSERVABLE TARGET BEHAVIOR, AND (B) a behavioral-universality certificate showing that the resulting observable target-behavior basis covers every useful target behavior admitted by the literal terminal objective. Layer A is decidable by finite graph closure. Layer B must not be inferred from Layer A, family count, benchmark count, absence of a known counterexample, product-page enumeration, or implementation-mechanism incidence.",
     "terminal_gate": "PUBLIC_FIRST_PARTY_SOURCE_CLOSURE AND LOSSLESS_SURFACE_MAPPING AND BEHAVIORAL_UNIVERSALITY AND ACCEPTANCE_BASIS_COMPLETE AND ALL_REQUIRED_ACCEPTANCE_PROVED AND OWNERSHIP_COMPLETE"
   },
   "layer_a_public_first_party_source_closure": {
@@ -81,11 +89,12 @@
     },
     "mapping_partition": {
       "required_states": [
-        "LOSSLESSLY_MAPPED_TO_EXISTING_BEHAVIOR_CONTRACT_OR_EXACT_FAMILY_UNION",
-        "OPEN_EXPLICIT_BEHAVIORAL_LEAF_OR_FAMILY_OBLIGATION",
+        "LOSSLESSLY_MAPPED_TO_FROZEN_OBSERVABLE_TARGET_BEHAVIOR_OR_EXACT_FAMILY_UNION",
+        "MAPPED_TO_BEHAVIORAL_CONTRACT_ONLY_WITH_INDEPENDENT_TARGET_ENTAILMENT",
+        "OPEN_EXPLICIT_OBSERVABLE_TARGET_BEHAVIOR_OR_FAMILY_OBLIGATION",
         "QUARANTINED_NONCAPABILITY_WITH_REASON"
       ],
-      "invariant": "EVERY_EXTRACTED_SEMANTIC_UNIT_HAS_EXACTLY_ONE_TERMINAL_DISPOSITION",
+      "invariant": "EVERY_EXTRACTED_SEMANTIC_UNIT_HAS_EXACTLY_ONE_TERMINAL_DISPOSITION__NO_IMPLEMENTATION_MECHANISM_MAY_EXPAND_THE_FROZEN_TARGET_WITHOUT_INDEPENDENT_TARGET_ENTAILMENT",
       "seal_requires_open_count": 0
     },
     "fixed_point_conditions": [
@@ -102,7 +111,7 @@
   },
   "layer_b_behavioral_universality": {
     "status": "OPEN__REQUIRED_FOR_LITERAL_TERMINAL_FINALITY",
-    "definition": "Every useful behavior the frozen Opus 5.5 target can materially perform under the terminal target rule is either exactly represented by the Brain's contracted behavioral basis or is losslessly implied by a proved composition of that basis.",
+    "definition": "Every useful OBSERVABLE behavior the frozen Opus 5.5 target can materially perform under the terminal target rule is either exactly represented by the Brain's frozen target-behavior basis or is losslessly implied by a proved composition of that basis. Internal implementation mechanisms are not target obligations unless independent entailment proves their observable consequence is necessary.",
     "why_layer_a_is_insufficient": [
       "PUBLIC_DOCUMENTATION_CAN_BE_SELECTIVE",
       "A_MODEL_CAN_HAVE_USEFUL_ELICITABLE_BEHAVIOR_NOT_NAMED_ON_PRODUCT_OR_SYSTEM_CARD_PAGES",
@@ -112,7 +121,7 @@
     "admissible_closure_routes": [
       {
         "id": "UNIVERSAL_BEHAVIORAL_GRAMMAR_PROOF",
-        "rule": "Prove that every admissible useful target transformation can be normalized into the canonical behavioral-contract schema and losslessly decomposed into the frozen Brain-owned leaf/composition basis."
+        "rule": "Prove that every admissible useful OBSERVABLE target transformation can be normalized into a complete behavioral contract and losslessly decomposed into the frozen TARGET-BEHAVIOR basis; a sufficient Brain mechanism does not become target semantics merely because it implements that behavior."
       },
       {
         "id": "TARGET_SEMANTIC_EQUIVALENCE_PROOF",
@@ -126,7 +135,8 @@
       "ALL_CURRENT_ACCEPTANCE_PREDICATES_PASS",
       "ALL_FIRST_PARTY_PAGES_ENUMERATED",
       "FAMILY_LABEL_SIMILARITY",
-      "BENCHMARK_LABEL_SIMILARITY"
+      "BENCHMARK_LABEL_SIMILARITY",
+      "IMPLEMENTATION_MECHANISM_OR_REGISTRY_INCIDENCE_WITHOUT_TARGET_ENTAILMENT"
     ],
     "constructive_reopen_rule": "Any newly demonstrated useful Opus 5.5 behavior not already losslessly covered by the frozen behavioral basis immediately reopens Layer B and the terminal envelope, even after Layer A is sealed.",
     "result_name": "BEHAVIORAL_UNIVERSALITY"
@@ -141,14 +151,15 @@
     "creates": [
       "ONE_FINITE_PUBLIC_SOURCE_GRAPH_FIXED_POINT",
       "ONE_EXPLICIT_BEHAVIORAL_UNIVERSALITY_OBLIGATION",
-      "ONE_FAIL_CLOSED_TERMINAL_ENVELOPE_GATE"
+      "ONE_FAIL_CLOSED_TERMINAL_ENVELOPE_GATE",
+      "ONE_TARGET_MECHANISM_SEPARATION_INVARIANT_INSIDE_ENVELOPE_FINALITY"
     ],
     "critical_path_effect": "Layer A can be closed deterministically with zero terminal case exposure. Layer B is isolated as the only remaining envelope-universality claim instead of being hidden inside repeated surface audits."
   },
   "immediate_zero_reality_actions": [
     "MATERIALIZE_AND_CONTENT_ADDRESS_THE_CURRENT_FIRST_PARTY_ROOT_GRAPH",
     "COMPILE_STABLE_SEMANTIC_UNIT_IDS_FOR_EVERY_CAPABILITY_BEARING_SECTION_TABLE_ROW_FIGURE_AND_LIMITATION",
-    "RECONCILE_CURRENT_HEALTHCARE_MULTILINGUAL_LONG_CONTEXT_MATHEMATICAL_REASONING_ARC_AGI_CREATIVE_DIAGRAM_IMAGE_VOICE_AND_SCIENTIFIC_HYPOTHESIS_DISCOVERIES_INTO_THE_MAPPING_LEDGER",
+    "RECONCILE_CURRENT_HEALTHCARE_MULTILINGUAL_LONG_CONTEXT_MATHEMATICAL_REASONING_ARC_AGI_CREATIVE_DIAGRAM_IMAGE_VOICE_AND_SCIENTIFIC_HYPOTHESIS_DISCOVERIES_AS_OBSERVABLE_TARGET_BEHAVIORS__DO_NOT_PROMOTE_IMPLEMENTATION_MECHANISMS_INTO_TARGET_SCOPE",
     "RUN_AN_INDEPENDENT_OMISSION_CHECK_AND_ITERATE_TO_SOURCE_GRAPH_FIXED_POINT",
     "IN_PARALLEL_FORMALIZE_BEHAVIORAL_UNIVERSALITY_AS_A UNIVERSAL_CONTRACT_DECOMPOSITION_PROOF_OBLIGATION_USING_BEHAVIORAL_CONTRACT_SCHEMA_V1"
   ],
@@ -165,7 +176,8 @@
     "NO_NEW_FAMILY_OR_ATOMIC_ACCEPTANCE_PREDICATE_FROM_THIS_PROTOCOL",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
     "NO_FRESH_REALITY_AUTHORITY",
-    "NO_TERMINAL_CLAIM"
+    "NO_TERMINAL_CLAIM",
+    "NO_IMPLEMENTATION_MECHANISM_IS_MADE_A_TARGET_REQUIREMENT_WITHOUT_INDEPENDENT_TARGET_ENTAILMENT"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
