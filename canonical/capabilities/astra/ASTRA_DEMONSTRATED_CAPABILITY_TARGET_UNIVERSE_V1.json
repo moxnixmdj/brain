@@ -1,0 +1,166 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_DEMONSTRATED_CAPABILITY_TARGET_UNIVERSE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FROZEN_PUBLIC_PRIMARY_SOURCE_EXTRACTION__TARGET_COMPARATOR_SEPARATED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_USEFUL_REAL_WORLD_CAPABILITIES_DEMONSTRATED_BY_GPT_6_ASTRA_AT_EQUAL_OR_BETTER_REAL_OUTCOME_STRENGTH__KNOWLEDGE_EXTERNAL_JIT_ONLY__DONOR_INDEPENDENT__HARD_ZERO_INCREMENTAL_SPEND",
+  "target_rule": "CAPABILITY_BEHAVIOR_IS_THE_TARGET__BENCHMARKS_PREDICATES_MODEL_NAMES_AND_SCORES_ARE_EVIDENCE_ONLY",
+  "corpus_rule": "TARGET_UNIVERSE_IS_CLOSED_RELATIVE_TO_THIS_FROZEN_AUTHORITATIVE_PUBLIC_CORPUS_AND_EXTRACTION_RULE__NEW_AUTHORITATIVE_ASTRA_DEMONSTRATIONS_REOPEN_THE_UNIVERSE",
+  "source_corpus": [
+    {
+      "id": "OPENAI_ASTRA_LAUNCH_2026_09",
+      "url": "https://openai.com/index/gpt-6-astra/",
+      "role": "PRIMARY_TARGET_DEMONSTRATION_SURFACE"
+    },
+    {
+      "id": "OPENAI_GPT6_MODEL_GUIDE",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6-astra",
+      "role": "PRIMARY_CAPABILITY_AND_TOOL_SURFACE"
+    },
+    {
+      "id": "OPENAI_ASTRA_MODEL_DOC",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "role": "PRIMARY_CAPABILITY_AND_INTERFACE_SURFACE"
+    },
+    {
+      "id": "OPENAI_WORK_CODEX_GUIDE",
+      "url": "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
+      "role": "PRIMARY_PRODUCT_EXECUTION_SURFACE"
+    }
+  ],
+  "extraction_rule": {
+    "include": [
+      "EXPLICIT_ASTRA_CAPABILITY_CLASS",
+      "EXPLICIT_ASTRA_REAL_WORLD_BEHAVIOR_EXAMPLE",
+      "EXPLICIT_ASTRA_MULTI_STEP_WORKFLOW_BEHAVIOR",
+      "EXPLICIT_ASTRA_JUDGMENT_OR_ADAPTATION_BEHAVIOR"
+    ],
+    "exclude": [
+      "BENCHMARK_NAME_WITHOUT_BEHAVIORAL_MEANING",
+      "PRICING_ACCESS_OR_PLAN_ENTITLEMENT",
+      "MODEL_INTERNAL_IMPLEMENTATION",
+      "SAFETY_POLICY_AS_A_CAPABILITY_TARGET_UNLESS_IT_DESCRIBES_GENERAL_SCOPE_JUDGMENT",
+      "UNPUBLISHED_OR_INFERRED_HIDDEN_CAPABILITY"
+    ]
+  },
+  "target_behaviors": [
+    {
+      "id": "SOFTWARE_ENGINEERING",
+      "behavior": "Understand, modify, test, debug, install and troubleshoot software and codebases through multi-step execution.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09",
+        "OPENAI_GPT6_MODEL_GUIDE",
+        "OPENAI_ASTRA_MODEL_DOC"
+      ]
+    },
+    {
+      "id": "COMPUTER_AND_BROWSER_USE",
+      "behavior": "Operate browser and desktop interfaces to complete multi-step workflows, including forms and arbitrary application tasks.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09",
+        "OPENAI_GPT6_MODEL_GUIDE"
+      ]
+    },
+    {
+      "id": "WEB_RESEARCH_AND_BROWSING",
+      "behavior": "Conduct online research, browse for relevant information, synthesize results, and place them into useful work products.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09",
+        "OPENAI_GPT6_MODEL_GUIDE"
+      ]
+    },
+    {
+      "id": "SCIENCE_AND_DATA_ANALYSIS",
+      "behavior": "Analyze scientific data, use technical software and tools, generate analyses and plots, and solve difficult scientific tasks.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09"
+      ]
+    },
+    {
+      "id": "ADVANCED_MATHEMATICAL_REASONING",
+      "behavior": "Solve very difficult mathematical problems at frontier-evaluation level.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09"
+      ]
+    },
+    {
+      "id": "PROFESSIONAL_MULTI_STEP_KNOWLEDGE_WORK",
+      "behavior": "Carry out complex professional workflows with strong accuracy, context selection, judgment, and immediately usable outputs.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09",
+        "OPENAI_WORK_CODEX_GUIDE"
+      ]
+    },
+    {
+      "id": "DOCUMENT_SPREADSHEET_PRESENTATION_CREATION",
+      "behavior": "Create and edit polished documents, spreadsheets, presentations and analyses that follow templates and user style.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09",
+        "OPENAI_ASTRA_MODEL_DOC"
+      ]
+    },
+    {
+      "id": "VISUAL_GROUNDING_AND_CREATIVE_BUILD",
+      "behavior": "Use visual judgment while building and checking websites, games, applications, renderings and other visual artifacts.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09"
+      ]
+    },
+    {
+      "id": "MULTI_TOOL_WORKFLOW_EXECUTION",
+      "behavior": "Carry out multi-step workflows across code, browsers and professional software, composing tools as needed.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09",
+        "OPENAI_GPT6_MODEL_GUIDE"
+      ]
+    },
+    {
+      "id": "INSTRUCTION_SCOPE_AND_AMBIGUITY_JUDGMENT",
+      "behavior": "Resolve routine ambiguity, respect intended scope, ask when consequential ambiguity remains, and proceed sensibly otherwise.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09"
+      ]
+    },
+    {
+      "id": "GOAL_CONTINUITY_UNDER_STEERING",
+      "behavior": "Stay oriented to the original task as requirements change, incorporating steering without losing prior constraints or the broader goal.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09"
+      ]
+    },
+    {
+      "id": "NOVEL_ENVIRONMENT_ADAPTATION",
+      "behavior": "Learn and act effectively in novel environments with strong action efficiency rather than relying only on memorized routines.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09"
+      ]
+    },
+    {
+      "id": "CYBERSECURITY_PROBLEM_SOLVING",
+      "behavior": "Analyze software-security problems and, under authorized conditions, reason about vulnerabilities and exploitation tasks at frontier level.",
+      "source_ids": [
+        "OPENAI_ASTRA_LAUNCH_2026_09"
+      ]
+    }
+  ],
+  "strength_semantics": {
+    "target_reference": "GPT_6_ASTRA_DEMONSTRATED_OUTCOME",
+    "auxiliary_comparators_allowed": [
+      "CLAUDE_OPUS_5_5",
+      "GPT_5_6_SOL",
+      "OTHER_AUTHORITATIVE_FRONTIER_REFERENCES"
+    ],
+    "rule": "AUXILIARY_COMPARATORS_MAY_CALIBRATE_STRENGTH_OR_FALSIFY_A_ROUTE__THEY_CANNOT_ADD_OR_REMOVE_TARGET_BEHAVIORS"
+  },
+  "ownership_rule": {
+    "opaque_astra_runtime_counts_as_owned": false,
+    "external_model_runtime_counts_as_owned": false,
+    "donor_independent_brain_route_required": true,
+    "knowledge_external_jit": true,
+    "incremental_spend_usd": 0
+  },
+  "legacy_19_family_crosswalk_status": "REQUIRED_BEFORE_ACTIVATION",
+  "terminal_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0
+}
