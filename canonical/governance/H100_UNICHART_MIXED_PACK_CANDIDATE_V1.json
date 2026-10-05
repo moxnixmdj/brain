@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_MIXED_PACK_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__REAL_CHECKPOINT_TRANSFORM__MIXED_W4_ENCODER_W3_DECODER__ZERO_CREDIT__PUBLIC_RUNNER_EXECUTION_REQUIRED",
+  "objective": "Produce a real content-addressed UniChart packed checkpoint below 100,000,000 bytes using the independently verified exact tensor census, without consuming Chartography terminal cases.",
+  "authorities": {
+    "exact_tensor_verification": "canonical/verification/H100_UNICHART_EXACT_TENSOR_ENUMERATION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+    "source_checkpoint_revision": "baa206a05372f8c49778313abb7091e1d0c8e474",
+    "source_safetensors_sha256": "2faf9ef1ac62a290ea58c80e9e2454db4e3613579e7cb6167cb934a03c09664e",
+    "source_safetensors_bytes": 809095376,
+    "tensor_manifest_sha256": "8b32480b8f7981f3c8413941e522034f3779bef1187374f2ca836bc29af314c5"
+  },
+  "transform": {
+    "encoder_f32": "W4_AFFINE_GROUP256",
+    "decoder_f32": "W3_AFFINE_GROUP256",
+    "group_metadata": "FP16_SCALE_PLUS_FP16_OFFSET",
+    "i64": "LOSSLESS_RAW",
+    "rounding": "IEEE_RINT_TIES_TO_EVEN",
+    "group_boundary": "RESET_PER_TENSOR",
+    "last_group": "METADATA_FROM_REAL_VALUES_THEN_ZERO_PAD_CODES",
+    "source_partition": {
+      "encoder_f32_elements": 74180728,
+      "decoder_f32_elements": 127677440,
+      "i64_elements": 200000
+    }
+  },
+  "run_strategy": {
+    "execution_carrier": "PUBLIC_VERIFICATION_CAPSULE_RUNNER",
+    "reason": "Avoid private CI/storage spend under the hard zero-incremental-spend rule.",
+    "retained_artifact": "SMALL_JSON_RECEIPT_ONLY",
+    "packed_checkpoint": "CREATED_AND_HASHED_DURING_RUN_BUT_NOT_RETAINED_AS_A_LARGE_HOSTED_ARTIFACT",
+    "source_download": "PUBLIC_HUGGINGFACE_EXACT_REVISION",
+    "numpy_version": "2.0.2",
+    "hard_timeout_minutes": 30
+  },
+  "success_conditions": [
+    "SOURCE_SHA256_AND_EXACT_TENSOR_MANIFEST_MATCH_FROZEN_AUTHORITIES",
+    "ALL_463_F32_TENSORS_CLASSIFY_EXACTLY_AS_ENCODER_OR_DECODER",
+    "ALL_20_I64_TENSORS_ARE_COPIED_LOSSLESSLY",
+    "REAL_PACKED_CHECKPOINT_IS_CREATED",
+    "PACKED_CHECKPOINT_BYTES_LE_100000000",
+    "PACKED_CHECKPOINT_SHA256_IS_RECORDED",
+    "QUANTIZATION_ERROR_STATISTICS_ARE_RECORDED",
+    "ZERO_TERMINAL_CHARTOGRAPHY_CASES_CONSUMED"
+  ],
+  "next_after_storage_pass": [
+    "RECONSTRUCT_OR_DEQUANTIZE_THE_EXACT_PACKED_SUBJECT_IN_MEMORY",
+    "RUN_PUBLIC_OR_NONTERMINAL_CHART_REASONING_CAPABILITY_PRESERVATION",
+    "IF_CAPABILITY_FAILS_USE_ERROR_ATTRIBUTION_TO_REALLOCATE_BITS_WITHIN_THE_SAME_100MB_BUDGET",
+    "NO_H100_CREDIT_UNTIL_BYTE_AND_CAPABILITY_CONDITIONS_BOTH_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_MIXED_W4_W3_PRESERVES_UNICHART_CAPABILITY",
+    "NO_CLAIM_CHARTOGRAPHY_GE_89",
+    "NO_CLAIM_H100_TERMINAL_SUCCESS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "runtime": "canonical/runtime/h100_unichart_mixed_packer_v1.py",
+  "tests": "canonical/tests/test_h100_unichart_mixed_packer_v1.py",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
