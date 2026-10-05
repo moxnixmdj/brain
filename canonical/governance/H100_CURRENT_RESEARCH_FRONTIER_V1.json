@@ -696,6 +696,22 @@
       "unverified_depth4_chain_fail_closed": true,
       "persistent_learned_bytes": 0,
       "deduction": "THE_DEPTH4_SEARCH_REPAIR_TO_TRANSFER_TO_COMPILE_TO_ZERO_RAW_SEARCH_REUSE_LOOP_IS_CLOSED_FOR_THREE_FRESH_STRUCTURES"
+    },
+    "compiled_macro_chain_search": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__THREE_OF_THREE_FRESH_SYNTACTIC_DEPTH8_COMPOSITIONS__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_COMPILED_MACRO_CHAIN_SEARCH_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_COMPILED_MACRO_CHAIN_SEARCH_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "runtime": "canonical/runtime/h100_compiled_macro_chain_search_v1.py",
+      "macro_candidate_count_per_task": 12,
+      "primitive_depth8_complete_chain_count": 2015538,
+      "search_space_cardinality_ratio_primitive_over_macro": 167961.5,
+      "search_wall_clock_seconds_range": [
+        0.0019046329980483279,
+        0.0020486229987000115
+      ],
+      "all_three_distinct_transfer_pass": true,
+      "persistent_learned_bytes": 0,
+      "deduction": "VERIFIED_CAPABILITY_MACROS_COLLAPSED_THREE_FRESH_SYNTACTIC_DEPTH8_SEARCHES_FROM_A_2015538_CHAIN_PRIMITIVE_COMPLETE_SPACE_TO_12_MACRO_CANDIDATES__SHOWING_EXECUTED_COMPOUNDING_OF_THE_CAPABILITY_RATCHET_WITH_ZERO_LEARNED_STATE"
     }
   },
   "next_structural_residuals_ranked": [
@@ -735,7 +751,8 @@
     "FOR_AUTHENTICATED_MUTATIONS_REQUIRE_CONTENT_ADDRESSED_PREWRITE_AUTHORITY EXACT_SCOPE IDEMPOTENCY AUDIT AND FAIL_CLOSED_REPLAY__SEPARATELY_REPORT_PROVIDER_CREDENTIAL_BREADTH",
     "DO_NOT_TREAT_ABSENT_DISTINGUISHING_LEXICAL_INFORMATION_AS_A_MODEL_CAPABILITY_DEFECT__FAIL_CLOSED_ABSTENTION_IS_THE_SOUND_GENERAL_ACTION",
     "WHEN_SCORE_PRUNED_SEARCH_FAILS_DESPITE_TARGET_STRUCTURE_BEING_IN_THE_OPERATOR_CLOSURE__TEST_STRUCTURAL_REACHABILITY BEFORE ATTRIBUTING_FAILURE_TO_MODEL_CAPABILITY",
-    "USE_COMPLETE_BOUNDED_ENUMERATION_WHEN_THE_STRUCTURAL_SLICE_IS_SMALL_ENOUGH__THEN_COMPILE_VERIFIED_STRUCTURES_BACK_INTO_THE_LIBRARY"
+    "USE_COMPLETE_BOUNDED_ENUMERATION_WHEN_THE_STRUCTURAL_SLICE_IS_SMALL_ENOUGH__THEN_COMPILE_VERIFIED_STRUCTURES_BACK_INTO_THE_LIBRARY",
+    "AFTER_COMPILING_VERIFIED_STRUCTURES__SEARCH_COMPOSITIONS_IN_MACRO_CAPABILITY_SPACE_BEFORE_REEXPANDING_TO_PRIMITIVE_PROGRAM_SPACE"
   ],
   "learned_byte_ladder": {
     "current_rung_bytes": 0,
@@ -866,7 +883,11 @@
     "complete_depth4_unary_chain_search_three_fresh_families_verified": true,
     "registry_v8_depth4_chain_ratchet_verified": true,
     "registry_v8_entry_count": 21,
-    "learned_byte_rung_still_zero_after_registry_v8": true
+    "learned_byte_rung_still_zero_after_registry_v8": true,
+    "compiled_macro_depth8_search_three_fresh_families_verified": true,
+    "compiled_macro_search_space_cardinality_reduction": 167961.5,
+    "compiled_macro_search_measured_wall_clock_seconds_max": 0.0020486229987000115,
+    "learned_byte_rung_still_zero_after_macro_depth8_search": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
