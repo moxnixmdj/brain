@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS46_GRADER_PUBLIC_SEARCH_SATURATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PUBLIC_ROUTE_SEARCH_SATURATED_UNDER_CURRENT_PRIMARY_AND_CODE_SEARCHES__WAKE_ON_NEW_SOURCE_OR_OWNER_REPLY__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "preserved_authority": {
+    "protocol_receipt": "canonical/verification/HLE_OPUS55_ROUTE_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "protocol_truth": "OPUS55_HLE_WITH_TOOLS_USES_CLAUDE_OPUS_4_6_GRADER__WEB_SEARCH_FETCH_PROGRAMMATIC_TOOLS_CODE_EXECUTION__1M_TOKEN_CAP__NO_CONTEXT_COMPACTION",
+    "cais_scorer_receipt": "canonical/verification/HLE_PUBLIC_SCORER_IMPLEMENTATION_REDUCTION_INDEPENDENT_VERIFICATION_20261005_V1.json"
+  },
+  "fresh_search_20261005": {
+    "primary_anthropic": [
+      "https://www.anthropic.com/news/claude-opus-4-6",
+      "https://www.anthropic.com/system-cards",
+      "Claude Opus 4.6 system-card HLE methodology references"
+    ],
+    "code_and_web_queries": [
+      "\"Claude Opus 4.6\" HLE grader github prompt",
+      "\"Humanity's Last Exam\" \"Claude Opus 4.6\" github grader",
+      "\"HLE\" \"Opus 4.6\" grader github",
+      "\"HLE\" \"grader prompt\" github anthropic"
+    ],
+    "owner_mail_query": "Anthropic HLE/grader reply in linked Gmail",
+    "observed_owner_reply_count": 0
+  },
+  "observed_public_facts": [
+    "ANTHROPIC_PUBLICLY_IDENTIFIES_CLAUDE_OPUS_4_6_AS_HLE_MODEL_GRADER",
+    "ANTHROPIC_PUBLICLY_DESCRIBES_HLE_TOOL_PROTOCOL_AND_CONTAMINATION_REVIEW",
+    "CURRENT_PRIMARY_PUBLIC_SOURCES_SEARCHED_DO_NOT_EXPOSE_A_REPRODUCIBLE_HLE_OPUS_4_6_GRADER_PROMPT",
+    "NO_CURRENT_PUBLIC_SOURCE_FOUND_PROVING_THE_PUBLIC_CAIS_SCORER_IS_CONSERVATIVE_OR_EQUIVALENT_TO_ANTHROPIC_OPUS_4_6_GRADING",
+    "NO_OWNER_REPLY_FOUND_IN_LINKED_MAILBOX"
+  ],
+  "scheduler_effect": {
+    "delete_until_wake": [
+      "REPEAT_GENERIC_WEB_SEARCH_FOR_HLE_OPUS46_GRADER_PROMPT_WITH_UNCHANGED_SOURCE_SET",
+      "REPEAT_GENERIC_GITHUB_SEARCH_FOR_SAME_GRADER_PROMPT_WITH_UNCHANGED_SOURCE_SET"
+    ],
+    "preserve": [
+      "PASSIVE_ANTHROPIC_REPLY_EVENT",
+      "NEW_PRIMARY_SOURCE_OR_CODE_RELEASE_WAKE",
+      "FORMAL_SCORER_RELATION_PROOF_IF_NEW_LOAD_BEARING_EVIDENCE_APPEARS",
+      "AUTHENTICATED_FULL2500_ACCESS",
+      "BRAIN_SCORE_CERTIFICATE_AFTER_PREREQUISITES"
+    ]
+  },
+  "hard_nonclaims": [
+    "SEARCH_FAILURE_IS_NOT_NONEXISTENCE_PROOF",
+    "NO_CLAIM_ANTHROPIC_CANNOT_RELEASE_THE_PROMPT_LATER",
+    "NO_CLAIM_PUBLIC_CAIS_SCORER_IS_NOT_EQUIVALENT",
+    "NO_ACCEPTANCE_OR_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
