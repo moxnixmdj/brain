@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_TB4_BUILDKITE_ALL_ACCESS_TRIAL_CARRIER_CANDIDATE_20261004_V1",
-  "date": "2026-10-04",
-  "status": "CANDIDATE__NEW_MATERIAL_ZERO_COST_CARRIER_WAKE__PRIMARY_SOURCE_ROUTE_FOUND__ACCOUNT_PREFLIGHT_REQUIRED__ZERO_CREDIT",
-  "objective": "Reopen only the Terminal-Bench 4 carrier edge with a newly discovered Buildkite all-access-trial route that nominally satisfies the frozen minimum resource envelope, without claiming carrier admissibility before account-level and zero-case verification.",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__BUILDKITE_SUPPORT_CONFIRMATION_RECEIVED__ACCOUNT_ZERO_CASE_PREFLIGHT_REQUIRED__ZERO_CREDIT",
+  "objective": "Reopen only the Terminal-Bench 4 carrier edge with the Buildkite All Access Trial route, now additionally backed by direct provider-support confirmation of the outlined 8-vCPU Linux plus Docker zero-cost trial use case, without claiming carrier admissibility before account-level and zero-case verification.",
   "target_predicate": "CODING_TB4_GE_66_4",
   "authority": {
     "prior_census": {
@@ -42,6 +42,14 @@
       "role": "ZERO_UPFRONT_SPEND_AND_HARD_STOP_CANDIDATE"
     }
   ],
+  "support_confirmation": {
+    "gmail_thread_id": "1a1046291c6a633f",
+    "reply_observed_date": "2026-10-05",
+    "sender_role": "BUILDKITE_STAFF_SUPPORT_ENGINEER",
+    "state": "REPLY_RECEIVED__PROVIDER_SUPPORT_CONFIRMS_THE_OUTLINED_ALL_ACCESS_TRIAL_USE_CASE",
+    "support_reply_summary": "Provider support answered that the All Access Trial supports the outlined use case. The outlined request explicitly asked about the Linux Large 8-vCPU/32-GB shape, ordinary Docker and Docker Compose execution, and a zero-cost/no-paid-overage trial path.",
+    "truth_boundary": "SUPPORT_CONFIRMATION_REDUCES_DOCUMENTARY_UNCERTAINTY_BUT_DOES_NOT_REPLACE_ACCOUNT_LEVEL_ZERO_CASE_MEASUREMENT_OF_ACTUAL_ENABLED_SHAPE_FREE_DISK_DOCKER_DAEMON_OR_BILLING_HARD_STOP"
+  },
   "narrow_conclusion": {
     "generic_carrier_search_reopened": false,
     "named_information_positive_route_exists": true,
@@ -50,6 +58,7 @@
     "nominal_total_disk_requirement_met": true,
     "docker_binaries_listed": true,
     "zero_cost_trial_claimed_by_provider": true,
+    "direct_provider_support_confirmation_received": true,
     "tb4_carrier_admissibility_proved": false
   },
   "required_preflight_before_any_terminal_case": [
@@ -59,25 +68,15 @@
     "VERIFY_DOCKER_DAEMON_CAN_RUN_ORDINARY_CONTAINERS",
     "VERIFY_DOCKER_COMPOSE_CAN_START_MULTI_CONTAINER_WORKLOAD",
     "VERIFY_8_CPU_DOCKER_LIMIT_IS_ACCEPTED",
-    "VERIFY_NO_CREDIT_CARD_AND_NO_AUTOMATIC_PAID_OVERAGE_PATH",
+    "VERIFY_ACCOUNT_HAS_NO_AUTOMATIC_PAID_OVERAGE_OR_OTHER_INCREMENTAL_SPEND_PATH",
     "VERIFY_TRIAL_ALLOWANCE_SUFFICIENT_FOR_AT_LEAST_THE_MINIMUM_RECOVERY_TRANSACTION",
     "RUN_ZERO_TERMINAL_CASE_HARBOR_RESOURCE_AND_CONTAINER_PREFLIGHT"
   ],
-  "support_confirmation": {
-    "gmail_thread_id": "1a1046291c6a633f",
-    "state": "REQUEST_SENT__AWAITING_OWNER_REPLY",
-    "questions": [
-      "LARGE_SHAPE_AVAILABLE_DURING_TRIAL",
-      "DOCKER_RUN_AND_DOCKER_COMPOSE_ALLOWED_LOCALLY",
-      "TRIAL_INCLUDED_MINUTES_HAVE_NO_AUTOMATIC_PAID_OVERAGE"
-    ]
-  },
-  "decision_rule": "IF_AND_ONLY_IF_ALL_ACCOUNT_AND_ZERO_CASE_PREFLIGHT_REQUIREMENTS_PASS__PROMOTE_AS_ADMISSIBLE_TB4_RECOVERY_CARRIER_CANDIDATE; OTHERWISE RECORD_EXACT_FAILED_PREMISE_AND_KILL_ONLY_THIS_ROUTE",
+  "decision_rule": "IF_AND_ONLY_IF_ALL_ACCOUNT_AND_ZERO_CASE_PREFLIGHT_REQUIREMENTS_PASS__PROMOTE_AS_ADMISSIBLE_TB4_RECOVERY_CARRIER_CANDIDATE; OTHERWISE_RECORD_EXACT_FAILED_PREMISE_AND_KILL_ONLY_THIS_ROUTE",
   "hard_nonclaims": [
     "NO_CLAIM_BUILDKITE_TRIAL_ACCOUNT_ACCESS_CURRENTLY_EXISTS",
     "NO_CLAIM_LARGE_SHAPE_IS_ENABLED_IN_THE_USERS_TRIAL_BEFORE_OBSERVATION",
-    "NO_CLAIM_PREINSTALLED_DOCKER_BINARIES_IMPLY_DOCKER_DAEMON_RUNTIME_SEMANTICS",
-    "NO_CLAIM_158_GB_NOMINAL_DISK_IMPLIES_51200_MB_FREE_AT_JOB_START",
+    "NO_CLAIM_PROVIDER_SUPPORT_REPLY_ALONE_PROVES_RUNTIME_DOCKER_DAEMON_OR_FREE_DISK_STATE",
     "NO_TB4_TERMINAL_CASE_EXECUTION",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
     "ZERO_INCREMENTAL_SPEND"
