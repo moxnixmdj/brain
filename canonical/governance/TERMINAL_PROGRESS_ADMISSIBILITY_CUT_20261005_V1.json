@@ -1,0 +1,153 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROGRESS_ADMISSIBILITY_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TERMINAL_PROGRESS_REDUCED_TO_COMPLETENESS_WITNESS_OR_LIVE_ACCEPTANCE_DELTA__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Prevent zero-value ontology/proxy churn by admitting only actions that can change the proof state of literal target completeness or a still-live target acceptance predicate.",
+  "authorities": {
+    "minimum_information_cut": "canonical/governance/OPUS55_TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT_20261005_V1.json",
+    "target_superset_normal_form": "canonical/governance/TARGET_SUPERSET_COVERAGE_DOMINANCE_NORMAL_FORM_20261005_V1.json",
+    "w3_domain_premise_verification": "canonical/verification/OPUS55_W3_DOMAIN_PREMISE_COLLAPSE_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "five_public_bar_scope_reduction": "canonical/governance/FIVE_PUBLIC_BAR_OBSERVABLE_TARGET_SCOPE_CLOSURE_REDUCTION_20261005_V1.json",
+    "atomic_acceptance_bindings": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
+  },
+  "fresh_public_evidence": {
+    "as_of_utc": "2026-10-05T02:00:00Z",
+    "claude_opus55_platform_docs": {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed": [
+        "CLAUDE_OPUS_5_5_IS_ACTIVE_LATEST",
+        "RELEASED_2026_09_22",
+        "1M_CONTEXT",
+        "128K_MAX_OUTPUT",
+        "TEXT_AND_IMAGES_TO_TEXT",
+        "ADAPTIVE_THINKING_ALWAYS_ON",
+        "DEFAULT_EFFORT_MEDIUM",
+        "SYSTEM_PROMPT_AND_SYSTEM_CARD_ARE_REFERENCED",
+        "MODELS_API_CAN_QUERY_LIMITS_AND_CAPABILITIES"
+      ],
+      "w1_effect": "NO_EXPLICIT_ATTESTATION_THAT_THE_DOCUMENTED_CAPABILITY_FIELDS_OR_REFERENCED_SYSTEM_CARD_ARE_EXHAUSTIVE_FOR_ALL_USEFUL_OBSERVABLE_BEHAVIORS"
+    },
+    "anthropic_transparency_hub": {
+      "url": "https://www.anthropic.com/transparency",
+      "page_date": "2026-10-02",
+      "observed": [
+        "OPUS55_SUMMARY_POINTS_TO_SECTION_8_FOR_BENCHMARKED_CAPABILITIES",
+        "TRANSPARENCY_TEXT_DISTINGUISHES_COMPLETE_PUBLICLY_REPORTED_EVALUATION_RESULTS_FROM_THE_UNIVERSE_OF_USEFUL_BEHAVIORS"
+      ],
+      "w1_effect": "DOES_NOT_CLOSE_TARGET_OWNER_EXHAUSTIVE_BEHAVIOR_SPECIFICATION"
+    }
+  },
+  "theorem": {
+    "name": "TERMINAL_PROGRESS_ADMISSIBILITY_CUT",
+    "definitions": {
+      "C": "LITERAL_TARGET_COMPLETENESS_PROOF",
+      "E": "CONJUNCTION_OF_ALL_STILL_LIVE_TARGET_ACCEPTANCE_PREDICATES",
+      "T": "C_AND_E",
+      "C_normal_form": "W1_OR_W2_OR_W3"
+    },
+    "statement": "For any proposed action A, if A cannot produce, falsify, independently verify, or promote a W1/W2/W3 completeness witness and cannot change the proof state of any still-live conjunct of E, then executing A cannot change the truth or proved status of T. Therefore A has zero logical terminal progress value and is scheduler-dominated by any admissible action with nonzero proof-state reachability.",
+    "proof": [
+      "T is a conjunction C AND E.",
+      "By the active minimum-information cut, C can be discharged only by W1, W2, or W3 unless that theorem is falsified.",
+      "If A cannot alter the proof state of W1, W2, W3, or their premises, A cannot alter the proof state of C.",
+      "If A cannot alter any still-live conjunct of E, A cannot alter the proof state of E.",
+      "Therefore A cannot alter the proof state of T.",
+      "Any compute, requests, context, or wall-clock spent on A is terminally dominated unless A is required instrumentation for an admissible descendant action."
+    ]
+  },
+  "instrumentation_exception": "An action with no direct terminal delta remains admissible only when it is a necessary, minimal, content-addressed prerequisite for a descendant action that satisfies the theorem. The dependency must be explicit; generic research, taxonomy growth, or mechanism invention does not qualify by assertion.",
+  "scheduler_cut": {
+    "freeze_by_default": [
+      "NEW_MECHANISM_PARITY_PROGRAMS_NOT_INDEPENDENTLY_ENTAILED_BY_TARGET_BEHAVIOR",
+      "MORE_FINITE_BENCHMARK_ACCUMULATION_FOR_THE_PURPOSE_OF_PROVING_LITERAL_TARGET_COMPLETENESS",
+      "REPEATED_FIRST_PARTY_PUBLIC_SCANS_WITHOUT_A_NEW_SOURCE_EPOCH_OR_NEW_SURFACE",
+      "NEW_CAPABILITY_TAXONOMY_NODES_WITHOUT_VERIFIED_TARGET_SCOPE_EVIDENCE",
+      "PROXY_SCOPE_EXPANSION_AFTER_STRUCTURAL_SCOPE_IS_ALREADY_CLOSED",
+      "SELF_CERTIFYING_VERIFICATION_ARTIFACTS_THAT_CANNOT_CHANGE_AN_ACCEPTANCE_BINDING"
+    ],
+    "keep_live": [
+      {
+        "lane": "C_W1",
+        "action_class": "TARGET_OWNER_EXHAUSTIVENESS_EVIDENCE",
+        "admission": "NEW_FIRST_PARTY_SOURCE_OR_DIRECT_TARGET_OWNER_ATTESTATION_ONLY"
+      },
+      {
+        "lane": "C_W2",
+        "action_class": "AUTHORIZED_IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION",
+        "admission": "ONLY_IF_LAWFULLY_AVAILABLE_AND_SEMANTICALLY_COMPLETE_ENOUGH_TO_DERIVE_TARGET_BEHAVIOR"
+      },
+      {
+        "lane": "C_W3",
+        "action_class": "UNIVERSAL_DOMINANCE_WITH_COMPLETE_TARGET_SUPERSET_PREMISE",
+        "admission": "ONLY_IF_THE_DOMAIN_COVERAGE_PREMISE_IS_INDEPENDENTLY_PROVED_AND_NOT_CIRCULAR"
+      },
+      {
+        "lane": "E",
+        "action_class": "LIVE_TARGET_ACCEPTANCE_DELTA",
+        "admission": "EXACT_TARGET_IDENTITY_PLUS_PERFORMANCE_OR_A_FORMAL_SCOPE_COMPLETE_DISCHARGE"
+      },
+      {
+        "lane": "VERIFY",
+        "action_class": "INDEPENDENT_VERIFICATION_AND_PROMOTION",
+        "admission": "MUST_BIND_AN_ADMISSIBLE_C_OR_E_DELTA"
+      }
+    ]
+  },
+  "five_public_bar_consequence": {
+    "basis": "The current five-public-bar candidate reports zero remaining structural behavioral residuals after target conditioning.",
+    "allowed_next_work": [
+      "FREEZE_EXACT_TARGET_OBSERVATION_TUPLES",
+      "PROVE_OR_RUN_THE_REMAINING_PUBLIC_PERFORMANCE_PREDICATES",
+      "RESOLVE_TARGET_EPOCH_HARNESS_METRIC_AND_CONFIGURATION_IDENTITY",
+      "INDEPENDENTLY_VERIFY_AND_PROMOTE_THE_SCOPE_REDUCTION"
+    ],
+    "disallowed_as_progress": [
+      "INVENT_ADDITIONAL_INTERNAL_MECHANISMS_WITHOUT_TARGET_ENTAILMENT",
+      "EXPAND_BEHAVIORAL_SCOPE_FROM_BENCHMARK_PROXY_MECHANISMS",
+      "COUNT_STRUCTURAL_SCOPE_CLOSURE_AS_PERFORMANCE_CREDIT"
+    ]
+  },
+  "breakthrough": {
+    "old_scheduler_shape": "MANY_PLAUSIBLY_RELEVANT_RESEARCH_AND_MECHANISM_ACTIONS_COMPETING_FOR_ATTENTION",
+    "new_scheduler_shape": "ONLY_W1_W2_W3_OR_LIVE_ACCEPTANCE_DELTA_CAN_ADVANCE_TERMINAL_PROOF",
+    "effect": "CONVERTS_MISSION_LOCK_FROM_HEURISTIC_PRIORITY_TO_A_PROOF_STATE_ADMISSIBILITY_FILTER",
+    "expected_wall_clock_effect": "ELIMINATES_WORK_CLASSES_WITH_PROVABLY_ZERO_DIRECT_TERMINAL_DELTA; NO NUMERIC SPEEDUP CLAIMED"
+  },
+  "falsifiers": [
+    "THE_MINIMUM_INFORMATION_CUT_IS FALSIFIED BY A FOURTH LOGICALLY SUFFICIENT LITERAL_COMPLETENESS WITNESS CLASS.",
+    "A_FROZEN_ACTION_CLASS_LISTED_AS ZERO_VALUE IS SHOWN TO BE A NECESSARY MINIMAL PREREQUISITE FOR AN ADMISSIBLE DESCENDANT ACTION.",
+    "THE_FIVE_PUBLIC_BAR_STRUCTURAL_SCOPE_REDUCTION_IS FALSIFIED BY AN UNCOVERED TARGET-ENTAILING BEHAVIORAL CLAUSE.",
+    "A_NEW_FIRST_PARTY OPUS55 SOURCE EXPLICITLY ATTESTS EXHAUSTIVENESS FOR ALL USEFUL OBSERVABLE BEHAVIORS AND IS NOT REPRESENTABLE AS W1."
+  ],
+  "immediate_execution_order": [
+    "INDEPENDENTLY_VERIFY_THIS_ADMISSIBILITY_CUT_AND_THE_FIVE_PUBLIC_BAR_SCOPE_REDUCTION",
+    "RECOMPUTE_THE_LIVE_SCHEDULER_USING_ONLY_ADMITTED_ACTIONS",
+    "KEEP_ONE_DEDUPED_W1_SOURCE_EPOCH_WATCH_LANE",
+    "ALLOCATE_REMAINING_INTERNAL_EXECUTION_TO_EXACT_LIVE_ACCEPTANCE_PREDICATES",
+    "RECOMPUTE_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_TERMINAL_GOAL_IS_ALREADY_ACHIEVED",
+    "NO_CLAIM_W1_W2_OR_W3_IS_CURRENTLY_SATISFIED",
+    "NO_CLAIM_ALL_LIVE_ACCEPTANCE_PREDICATES_ARE_CLOSED",
+    "NO_CAPABILITY_FAMILY_ACCEPTANCE_OR_OWNERSHIP_CREDIT_FROM_THIS_SCHEDULER_THEOREM",
+    "NO_NUMERIC_PROBABILITY_OR_SPEEDUP_INVENTED",
+    "NO_PAID_OR_UNAUTHORIZED_EXTRACTION_ROUTE",
+    "NO_WEAKENING_OF_ALL_USEFUL_OPUS55_TARGET"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
