@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__FOUR_R2E_PREDICATES_EVENT_OR_STRONGER_PROOF_BOUND__PRESERVE_OPEN_TRUTH__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_20261005_V1.json",
+    "git_blob_sha": "4bcd638848a5d7d87eec77cb98364b3650ff9a49"
+  },
+  "recomputed_authorities": {
+    "frontiercode_boundary": "26c1f813503c156e818499b2e6fe4fdb00d40c05",
+    "gdpval_public_route_boundary": "e3d890b0fdfe2c5173cf18efddbc1483b7db6701",
+    "gdpval_target_epoch_firewall": "d59ec93a0566ccc1982827cbc4b9f92a2c87b248",
+    "automationbench_public_private_cut": "3f09067d0fa174c343f2f157495d3654a15b3965",
+    "mysterymechanism_public_scope_saturation": "a8b142d5a38683018f0f86d748338b51c9054d02"
+  },
+  "checks": {
+    "frontiercode_exact_public_self_run_established": false,
+    "gdpval_pairwise_owner_rating_layer_publicly_closed": false,
+    "automationbench_public_600_equals_official_private_population": false,
+    "mysterymechanism_public_scope_relation_lower_bounds_private_score": false,
+    "candidate_preserves_all_four_predicates_open": true,
+    "candidate_deletes_acceptance_predicates": false,
+    "candidate_grants_acceptance_credit": false,
+    "candidate_reduces_active_zero_information_group_count_from_6_to_5": true,
+    "repeated_generic_search_has_positive_expected_information_under_unchanged_source_state": false
+  },
+  "consequence": [
+    "SLEEP_R2E_GENERIC_SEARCH_LANE_UNTIL_BOUND_WAKE_EVENT_OR_STRONGER_PROOF",
+    "KEEP_CODING_FRONTIERCODE_GE_54_4_OPEN",
+    "KEEP_PROWORK_GDPVAL_GE_1846_OPEN_WITH_TARGET_EPOCH_FIREWALL",
+    "KEEP_AUTOMATIONBENCH_GE_40_OPEN",
+    "KEEP_MYSTERYMECHANISM_GE_49_55_OPEN",
+    "CONTINUE_INFORMATION_POSITIVE_ROOT2_GROUPS_ONLY"
+  ],
+  "external_mailbox_observation": {
+    "date": "2026-10-05",
+    "result": "NO_RESULT_BEARING_OWNER_REPLY_FOUND_IN_RECENT_OWNER_OUTREACH_SCAN",
+    "epistemic_role": "CORROBORATIVE_ONLY__NOT_REQUIRED_FOR_PUBLIC_ROUTE_BOUNDARY_PROOF"
+  },
+  "verification_class": "CONNECTED_CURRENT_MAIN_RECOMPUTATION_PLUS_CORROBORATIVE_OWNER_MAILBOX_CHECK__SCHEDULING_ONLY",
+  "hard_nonclaims": [
+    "NO_PREDICATE_CLOSED",
+    "NO_CLAIM_WAKE_EVENTS_CANNOT_OCCUR",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
