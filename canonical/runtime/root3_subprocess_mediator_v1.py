@@ -135,29 +135,32 @@ def _environment(value: Any) -> dict[str, Any] | None:
     }
 
 
+_REQUEST_BOUND_KWARGS = {
+    "cwd", "env", "stdin", "stdout", "stderr", "input", "shell", "text",
+    "universal_newlines", "capture_output", "timeout", "encoding", "errors",
+    "close_fds",
+}
+_CALLER_ONLY_KWARGS = {"check", "bufsize"}
+_FORBIDDEN_PROCESS_KWARGS = {
+    "executable", "preexec_fn", "pass_fds", "restore_signals",
+    "start_new_session", "process_group", "user", "group", "extra_groups",
+    "umask", "creationflags", "startupinfo", "pipesize",
+}
+
+
 def _reject_unsupported_kwargs(kwargs: Mapping[str, Any]) -> None:
-    # Keep the first strict carrier deliberately smaller than Python's complete
-    # subprocess surface. Every omitted process-creation knob is denied rather
-    # than silently passed through before its effect semantics are classified.
-    unsupported_if_present = {
-        "preexec_fn",
-        "pass_fds",
-        "restore_signals",
-        "start_new_session",
-        "process_group",
-        "user",
-        "group",
-        "extra_groups",
-        "umask",
-        "creationflags",
-        "startupinfo",
-        "pipesize",
-    }
-    for key in unsupported_if_present:
-        if key in kwargs and kwargs.get(key) not in (None, False, 0, (), []):
-            raise ProcessEffectDenied(
-                "SUBPROCESS_KWARG_NOT_YET_MEDIATED:" + key
-            )
+    # Closed-universe rule: no subprocess launch knob may be silently omitted
+    # from the request digest. New knobs must be explicitly classified.
+    for key, value in kwargs.items():
+        if key in _REQUEST_BOUND_KWARGS or key in _CALLER_ONLY_KWARGS:
+            continue
+        if key in _FORBIDDEN_PROCESS_KWARGS:
+            if value not in (None, False, 0, (), []):
+                raise ProcessEffectDenied(
+                    "SUBPROCESS_KWARG_NOT_YET_MEDIATED:" + key
+                )
+            continue
+        raise ProcessEffectDenied("SUBPROCESS_KWARG_UNCLASSIFIED:" + key)
 
 
 def _request(api: str, args: tuple[Any, ...], kwargs: Mapping[str, Any]) -> dict[str, Any]:
