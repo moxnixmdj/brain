@@ -70,6 +70,7 @@ class Tests(unittest.TestCase):
     def test_carrier_kind_is_load_bearing(self):
         right = trace("x", "y")
         right[1]["carrier_kind"] = "OTHER_OPAQUE_STATE"
+        right[3]["carrier_kind"] = "OTHER_OPAQUE_STATE"
         self.assertEqual(
             verify_observational_equivalence(trace(), right)["status"],
             "NOT_EQUIVALENT",
