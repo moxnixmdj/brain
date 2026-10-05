@@ -4,14 +4,20 @@ import hashlib, json, pathlib, urllib.parse, urllib.request
 ROOT=pathlib.Path('/tmp/h100pack')
 BASE='https://raw.githubusercontent.com/vis-nlp/ChartQA/main/'
 FILES=[
- ('human','ChartQA Dataset/val/val_human.json',range(10,20)),
- ('augmented','ChartQA Dataset/val/val_augmented.json',range(10,20)),
+ ('human','ChartQA Dataset/val/val_human.json',range(10,20),'983dacfcb6aabc8598031c07eeba7747f9884c4a'),
+ ('augmented','ChartQA Dataset/val/val_augmented.json',range(10,20),'131068b504407d9cdd8413fe5c574772bb241613'),
 ]
+def git_blob_sha(blob:bytes)->str:
+    return hashlib.sha1(b'blob '+str(len(blob)).encode()+b'\\0'+blob).hexdigest()
 out=[]
 imgdir=ROOT/'chartqa_holdout_images'; imgdir.mkdir(exist_ok=True)
-for kind,path,indices in FILES:
+for kind,path,indices,expected_blob_sha in FILES:
     url=BASE+urllib.parse.quote(path,safe='/')
-    data=json.load(urllib.request.urlopen(url))
+    raw=urllib.request.urlopen(url).read()
+    observed_blob_sha=git_blob_sha(raw)
+    if observed_blob_sha!=expected_blob_sha:
+        raise RuntimeError(f'ANNOTATION_BLOB_SHA_MISMATCH:{kind}:{observed_blob_sha}!={expected_blob_sha}')
+    data=json.loads(raw.decode('utf-8'))
     for i in indices:
         row=data[i]
         img=row['imgname']
@@ -24,6 +30,7 @@ for kind,path,indices in FILES:
         case['image_bytes']=len(blob)
         out.append(case)
 receipt={'schema':'PROJECT_BRAIN_H100_UNICHART_STRUCTURAL_HOLDOUT_MATERIALIZATION_V1',
-         'selection':'HUMAN_10_19_PLUS_AUGMENTED_10_19','case_count':20,'cases':out}
+         'selection':'HUMAN_10_19_PLUS_AUGMENTED_10_19','case_count':20,
+         'annotation_blob_sha_verified':True,'cases':out}
 (ROOT/'chartqa_structural_holdout.json').write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
 print(json.dumps({'case_count':len(out),'receipt':str(ROOT/'chartqa_structural_holdout.json')},indent=2))
