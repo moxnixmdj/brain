@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_AA_RELATIVE_BAR_SOURCE_DRIFT_GUARD_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_MULTI_SURFACE_RECOMPUTATION_PASS__PRESERVE_FROZEN_BARS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/AA_RELATIVE_BAR_SOURCE_DRIFT_GUARD_20261005_V1.json",
+    "git_blob_sha": "f579e750ea2bc7719b3123f84a37b86d508eca01"
+  },
+  "source_recomputation": {
+    "comparison_surfaces": [
+      "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-sonnet-5-5",
+      "https://artificialanalysis.ai/models/comparisons/minimax-m3-vs-claude-opus-5-5"
+    ],
+    "live_evaluation_surfaces": [
+      "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "https://artificialanalysis.ai/evaluations/gdpval-aa"
+    ],
+    "checks": {
+      "comparison_surface_aa_briefcase_1822": true,
+      "comparison_surface_gdpval_1846": true,
+      "live_surface_aa_briefcase_1808": true,
+      "live_surface_gdpval_1837": true,
+      "official_surfaces_currently_disagree": true,
+      "no_automatic_postfreeze_target_rebase": true
+    },
+    "errors": []
+  },
+  "consequence": "PRESERVE_1822_AND_1846_FROZEN_TERMINAL_BARS__DELETE_SEARCH_FOR_POST_FREEZE_LOWER_BAR_AS_A_CLOSURE_ROUTE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
