@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_ERROR_FIRST_PRESERVATION_RUNNER_PRECOMMIT_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_BEFORE_ANY_ERROR_FIRST_CHARTQA_ANSWER__ZERO_CREDIT",
+  "objective": "Bind the error-first ChartQA comparison procedure before observing any answer produced by that subject.",
+  "frozen_inputs": [
+    "canonical/governance/H100_UNICHART_CHARTQA_PRESERVATION_PREEXPOSURE_V1.json",
+    "canonical/governance/H100_UNICHART_CHARTQA_IMAGE_PREEXPOSURE_V1.json",
+    "canonical/governance/H100_UNICHART_CHARTQA_RUNTIME_ASSETS_V1.json",
+    "canonical/governance/H100_UNICHART_ERROR_FIRST_PRECISION_KNAPSACK_PRECOMMIT_V1.json"
+  ],
+  "same_as_coarse_gate": [
+    "FP32_DONOR",
+    "TWENTY_CASES",
+    "IMAGES",
+    "PROMPTS",
+    "GENERATION_PARAMETERS",
+    "RELAXED_ACCURACY",
+    "PACKED_NONINFERIORITY_MARGIN_0_05",
+    "EXACT_ANSWER_AGREEMENT_MINIMUM_0_85",
+    "COMPLETE_BUNDLE_LIMIT_100000000_BYTES"
+  ],
+  "eligibility": "ERROR_FIRST_COMPARISON_REMAINS_INACTIVE_UNTIL_THE_COARSE_GATE_IS_FORMALLY_FAILED_OR_SEPARATE_CANONICAL_ZERO_CREDIT_AUTHORITY_IS_CREATED",
+  "runtime": "canonical/runtime/h100_unichart_error_first_knapsack_preservation_runner_v1.py",
+  "tests": "canonical/tests/test_h100_unichart_error_first_knapsack_preservation_runner_v1.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "promotion_authority": false
+}
