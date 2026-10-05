@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_EVIDENCE_SYNTHESIS_SCOPE_COMPLETE_BRIDGE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PREEXISTING_SEMANTIC_BINDING_PLUS_INDEPENDENT_EXACT_UNION_SYNTHESIS_SCOPE_CERTIFICATE__INDEPENDENT_BRIDGE_VERIFICATION_REQUIRED__ZERO_PARENT_OR_PERFORMANCE_CREDIT",
+  "objective": "Bind only the frozen MULTI_CAPABILITY_COMPOSITION `evidence synthesis` component to the independently verified scope-complete EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 contract, using the pre-existing COMMUNICATION_AND_SYNTHESIS family-to-residual mapping. Do not transport matched synthesis quality, artifact production, delegation, or parent composition credit.",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "component_binding": {
+    "component_id": "evidence synthesis",
+    "interface_id": "delegation+evidence synthesis+artifact production",
+    "proved_properties_after_independent_verification": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ]
+  },
+  "authority": {
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "composition_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "synthesis_scope_independent_verification": {
+      "path": "canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "1852516f725f5b72badfc2f65be22e542ed83623"
+    }
+  },
+  "derivation": {
+    "frozen_component_literal": "evidence synthesis",
+    "frozen_interface_literal": "delegation+evidence synthesis+artifact production",
+    "source_family_id": "COMMUNICATION_AND_SYNTHESIS",
+    "source_behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "preexisting_family_mapping_required": [
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ],
+    "source_scope_certificate_target": "scope://opus55/SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "source_scope_certificate_witness": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+    "source_scope_relation": "PROVEN_STRONGER",
+    "source_coverage_relation": "EXACT_UNION",
+    "source_coverage_complete": true,
+    "source_independent": true,
+    "source_verified": true,
+    "matched_performance_required_for_this_dependency_predicate": false,
+    "reason": "COMPOSITION_COMPONENT_SCOPED_PROOFS is a DEPENDENCY_PROOF whose acceptance is only that every isolated component used in the composition claim has its own scoped proof. Matched composition success and synthesis matched quality are separate predicates and remain open."
+  },
+  "exact_scope_guard": {
+    "included": [
+      "claim-to-source fidelity",
+      "required evidence coverage",
+      "uncertainty/disagreement preservation",
+      "audience adaptation",
+      "format/style constraints",
+      "compression without decision-relevant loss"
+    ],
+    "excluded": [
+      "DELEGATION_COMPONENT",
+      "ARTIFACT_PRODUCTION_COMPONENT",
+      "SYNTHESIS_MATCHED_QUALITY_OR_NONINFERIORITY",
+      "GENERAL_MULTI_CAPABILITY_COMPOSITION_INTERACTION_SUCCESS",
+      "CROSS_CAPABILITY_STATE_HANDOFF_AND_ROLLBACK"
+    ],
+    "rule": "ONLY_THE_LITERAL_EVIDENCE_SYNTHESIS_COMPONENT_RECEIVES_SCOPED_ACCEPTANCE_PROOF_FROM_THE_PREEXISTING_SYNTHESIS_CONTRACT_MAPPING_AND_INDEPENDENT_EXACT_UNION_SCOPE_CERTIFICATE"
+  },
+  "candidate_receipt": {
+    "receipt_id": "COMPOSITION_SCOPE_COMPLETE_BRIDGE::COMMUNICATION_AND_SYNTHESIS::evidence_synthesis::V1",
+    "component_id": "evidence synthesis",
+    "interface_id": "delegation+evidence synthesis+artifact production",
+    "proved_properties": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ],
+    "verified": false,
+    "independent": false,
+    "contamination_clean": true,
+    "acceptance_scoped": true,
+    "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+    "source_family": "COMMUNICATION_AND_SYNTHESIS",
+    "source_behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "source_scope_certificate": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+    "source_independent_verification": "canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json"
+  },
+  "expected_effect_after_independent_verification": {
+    "current_composition_scoped_proved_components_before": 4,
+    "newly_admissible_component": "evidence synthesis",
+    "projected_scoped_proved_components_after": 5,
+    "projected_open_components_after": 7,
+    "parent_component_dependency_predicate_closed": false,
+    "parent_composition_predicate_closed": false,
+    "strict_opus55_acceptance_delta": 0
+  },
+  "hard_rules": [
+    "PREEXISTING_REGISTRY_MAPPING_MUST_BIND_COMMUNICATION_AND_SYNTHESIS_EXACTLY_TO_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_FOR_THIS_TRANSPORT",
+    "SYNTHESIS_SCOPE_CERTIFICATE_MUST_REMAIN_VERIFIED_INDEPENDENT_COVERAGE_COMPLETE_EXACT_UNION_AND_PROVEN_STRONGER",
+    "INDEPENDENT_VERIFICATION_MUST_CONFIRM_THE_EXACT_SIX_SOURCE_SYNTHESIS_DIMENSIONS",
+    "FROZEN_MANIFEST_MUST_CONTAIN_EXACTLY_ONE_LITERAL_EVIDENCE_SYNTHESIS_COMPONENT",
+    "NO_SYNTHESIS_MATCHED_PERFORMANCE_CREDIT",
+    "NO_DELEGATION_OR_ARTIFACT_PRODUCTION_CREDIT_TRANSPORT",
+    "NO_PARENT_COMPOSITION_TERMINAL_SUCCESS_OR_INVARIANT_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_SOURCE_BYTES_AND_SEMANTIC_CHAIN__IF_PASS_ADMIT_ONLY_THIS_COMPONENT_RECEIPT__BUILD_COMPOSITION_SLICE_V7_WITH_FIVE_CURRENT_RECEIPTS__RERUN_EXACT_SLICER__EXPECT_5_OF_12_SCOPED_PROVED_7_OPEN",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
