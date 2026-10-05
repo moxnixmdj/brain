@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V6_SCOPE_QUANTIFIER_FALSIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "FAIL_CLOSED__CURRENT_REPAIR_NOT_PROMOTABLE__SCOPE_QUANTIFIER_MUTATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "exact_current_subject_blobs": {
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py": "e92dfde05672a249f2dcb71c7ce87fc783142816",
+    "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py": "70bbb5a09b1225b60915cc74bf81593516e26f16",
+    "canonical/tests/test_unknown_domain_direct_v5.py": "e2ade4b713bb8103ae577de35a35b1caa03bc5a9",
+    "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json": "751a77dd0754e640fe25a1f4ffc214ffcd00be68"
+  },
+  "falsification": {
+    "construction": "class FakeAcceptedStr: __class__ property returns str; strip() returns >=16-char str; encode(...) returns bytes.",
+    "observed_semantics": {
+      "isinstance(value,str)": true,
+      "pre_repair_isinstance_gate_accepts": true,
+      "pre_repair_instance_strip_succeeds": true,
+      "pre_repair_instance_encode_succeeds": true,
+      "repaired_issubclass(type(value),str)_accepts": false
+    },
+    "deduction": "The repaired actual-runtime-type gate is not extensionally equivalent to the pre-repair isinstance-based path. Therefore a claim of preserving the literal prior accepted-input quantifier is false unless authoritative contract scope excludes such spoof-admitted values."
+  },
+  "independent_mechanical_checks": {
+    "genuine_str_subclass_builtin_strip_bypasses_instance_override": true,
+    "genuine_str_subclass_builtin_encode_bypasses_instance_override": true,
+    "genuine_bytes_subclass_base_getitem_full_slice_materializes_plain_bytes": true,
+    "spoofed_class_property_can_make_isinstance_true": true
+  },
+  "required_before_repromotion": [
+    "AUTHORITATIVE_ACCEPTED_INPUT_QUANTIFIER_FROZEN",
+    "NO_SILENT_SCOPE_NARROWING",
+    "CURRENT_BLOBS_EXACTLY_BOUND",
+    "OUTCOME_BLIND_PRECOMMIT_FOR_CURRENT_BLOBS",
+    "INDEPENDENT_EXECUTION_COVERS_GENUINE_SUBCLASS_HOOKS_AND_SPOOFED_ISINSTANCE_CASE",
+    "SEPARATE_FAIL_CLOSED_ACCEPTANCE_REDUCTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
