@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_READ_ONLY_DECLARED_QUERY_EXECUTOR_V2_20261005",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_8_OF_8_READ_ONLY_DECLARED_QUERY_EXECUTOR_COVERAGE_COMPLETE__GLOBAL_BINDING_AND_SCOPE_RECOMPUTE_OPEN__ZERO_CREDIT",
+  "objective": "Complete the current READ_ONLY_DECLARED_QUERY class executor after the 29-to-22 process-universe reduction, preserving exact APT candidate-selection semantics for the three irreducible legacy calls and reusing the verified five-site local-file executor.",
+  "current_process_universe": {
+    "activation_path": "canonical/governance/ROOT3_PROCESS_UNIVERSE_22_ACTIVATION_20261005_V1.json",
+    "activation_git_blob_sha": "dad1155679fd9a374037f65175a6ca3eb1fe0397",
+    "total_process_sites": 22,
+    "read_only_declared_query_sites": 8
+  },
+  "subjects": {
+    "apt_legacy_executor": {
+      "path": "canonical/runtime/root3_read_only_apt_legacy_executor_v1.py",
+      "git_blob_sha": "d87957495a93ebadd9042e3b1aacc4e17c697a5b"
+    },
+    "composite_executor": {
+      "path": "canonical/runtime/root3_read_only_declared_query_executor_v2.py",
+      "git_blob_sha": "a86f78c0732b50c1a93f9364a937fefe6f776b26"
+    },
+    "static_tests": {
+      "path": "canonical/tests/test_root3_read_only_declared_query_executor_v2.py",
+      "git_blob_sha": "91567b1da6d6b315ef633fb7ee5259c37981c598"
+    },
+    "prior_local_executor": {
+      "path": "canonical/runtime/root3_read_only_local_file_query_executor_v1.py",
+      "git_blob_sha": "74166a80c47ed8ddce7bae7b61a3a3610ac2ef8a"
+    }
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT3_READ_ONLY_DECLARED_QUERY_EXECUTOR_V2_SPRITE_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "8f925fa38021b114552c07ecd615071a609e021c",
+    "conclusion": "PASS__CURRENT_8_OF_8_READ_ONLY_DECLARED_QUERY_EXECUTOR_COVERAGE__3_LEGACY_APT_EXACT_SEMANTICS__ZERO_CREDIT"
+  },
+  "decomposition": {
+    "local_file_sites": 5,
+    "legacy_apt_sites": 3,
+    "total_bound_sites": 8,
+    "overlap_sites": 0,
+    "missing_sites": 0,
+    "extra_sites": 0
+  },
+  "apt_residual_strategy": {
+    "decision": "PRESERVE_APT_POLICY_SEMANTICS_IN_CONFINED_EXECUTOR_INSTEAD_OF_REIMPLEMENTING_CANDIDATE_SELECTION",
+    "reason": "Seven metadata subprocesses were deleted by the content-bound APT snapshot. The remaining search/policy/show calls depend on APT candidate-selection semantics; exact confined execution is smaller and less error-prone than duplicating package-manager policy.",
+    "authority": {
+      "network": "PRIVATE_NETWORK_NAMESPACE",
+      "system_binaries": "READ_ONLY",
+      "apt_dpkg_metadata": "FIXED_READ_ONLY_MOUNTS",
+      "capabilities": "DROPPED",
+      "privilege_escalation": "NO_NEW_PRIVILEGES",
+      "stdin": "DENIED",
+      "shell": "DENIED",
+      "custom_env": "DENIED",
+      "custom_cwd": "DENIED"
+    }
+  },
+  "exact_callsite_provenance_note": {
+    "repository_bounded_adapters": [
+      "archive_verify_gnu_tar",
+      "jq_query",
+      "sqlite_verify_cli",
+      "yq_yaml_json"
+    ],
+    "ephemeral_generated_input_adapter": "pdf_ocr_tesseract",
+    "generic_launcher_v1_trusted_root_hardening": "DEFENSE_IN_DEPTH_RESIDUAL__DO_NOT_INFER_GENERIC_ARBITRARY_HOST_INPUT_SAFETY_FROM_THIS_CLASS_EXECUTOR"
+  },
+  "effects": [
+    "COMPLETE_CURRENT_READ_ONLY_DECLARED_QUERY_EXECUTOR_COVERAGE_8_OF_8",
+    "PRESERVE_EXISTING_FIVE_LOCAL_FILE_NAMESPACE_EXECUTORS",
+    "BIND_THREE_LEGACY_APT_SEARCH_POLICY_SHOW_SITES_TO_PRIVATE_NAMESPACE_WITH_READ_ONLY_METADATA",
+    "FAIL_CLOSED_ON_UNKNOWN_SITE_OR_PROFILE_SWAP_BEFORE_CHILD_SPAWN",
+    "PRESERVE_ZERO_TERMINAL_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "EXECUTOR_COVERAGE_IS_NOT_GLOBAL_MEDIATOR_INSTALLATION",
+    "THIS_DOES_NOT_PROVE_ALL_ROOT3_C1_C2_C3_OBLIGATIONS",
+    "THIS_DOES_NOT PROVE_GENERIC_ZERO_AMBIENT_LAUNCHER_V1_SAFE_FOR_ARBITRARY_PARENT_SELECTED_INPUT_ROOTS",
+    "THIS_DOES_NOT CLOSE_ANY_ACCEPTANCE_OR_OWNERSHIP_PREDICATE_BY_ITSELF"
+  ],
+  "next": [
+    "BIND_THIS_EXACT_READ_ONLY_EXECUTOR_TO_ROOT3_SUBPROCESS_MEDIATOR_V2_UNDER_FINAL_AUTHORIZER_CONTEXT",
+    "RECOMPUTE_ROOT3_C1_C2_C3_AND_DELETE_ANY_RESIDUALS_DISCHARGED_BY_COMPLETE_READ_ONLY_CLASS_COVERAGE",
+    "HARDEN_OR_PROVE_AWAY_GENERIC_TRUSTED_INPUT_ROOT_RESIDUAL",
+    "CONTINUE_LOCAL_LOOPBACK_SERVICE_AND_DECLARED_ARTIFACT_PRODUCTION_CLASS_EXECUTORS",
+    "KEEP_PACKAGE_ENV_MUTATION_AND_ARBITRARY_COMMAND_EXECUTION_UNBOUND_DEFAULT_DENY"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
