@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_PROTOCOL_EQUIVALENCE_FACTORIZATION_ACTIVATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "ACTIVE_IF_MERGED__TB4_PROTOCOL_EQUIVALENCE_FACTORED_AND_FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "subjects": {
+    "factorization": {
+      "path": "canonical/governance/TB4_PROTOCOL_EQUIVALENCE_FACTORIZATION_20261006_V1.json",
+      "git_blob_sha": "1b066d671db1c3e8f53d3641dd0d815717781bdd"
+    },
+    "runtime": {
+      "path": "canonical/runtime/tb4_protocol_equivalence_factorization_v1.py",
+      "git_blob_sha": "05294abae815be66e0a4b68fd19cecf449728447"
+    },
+    "tests": {
+      "path": "canonical/tests/test_tb4_protocol_equivalence_factorization_v1.py",
+      "git_blob_sha": "f8d70a4aa91629240c55d84faaaee142b8cf5669"
+    },
+    "verification": {
+      "path": "canonical/verification/TB4_PROTOCOL_EQUIVALENCE_FACTORIZATION_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "37f12dc24f5c118cd09244e2b488a13dd1548251"
+    }
+  },
+  "scheduler_rule": "DO_NOT_TREAT_RESOURCE_COMPATIBILITY_OR_PUBLIC_LEADERBOARD_CALIBRATION_AS_FULL_TB4_PROTOCOL_EQUIVALENCE__ATTACK_CARRIER_INVARIANCE_AND_EXACT_FROZEN_TARGET_HARNESS_IDENTITY_SEPARATELY_WITH_ZERO_TERMINAL_CASES",
+  "active_zero_case_attacks": [
+    "TB4_CARRIER_INVARIANCE_CONTRACT",
+    "TB4_FROZEN_TARGET_HARNESS_OBSERVABLE_VECTOR"
+  ],
+  "demoted_or_deleted": [
+    "REPEAT_BUILDKITE_RESOURCE_PREFLIGHT",
+    "MONOLITHIC_PROTOCOL_EQUIVALENCE_BOOLEAN",
+    "PUBLIC_LEADERBOARD_AS_EXACT_TARGET_SUBSTITUTE"
+  ],
+  "preserve_open": [
+    "ACCOUNT_SPECIFIC_ZERO_SPEND_BOUND",
+    "TB4_THRESHOLD_CERTIFICATE",
+    "EXACT_FROZEN_TARGET_HARNESS_IDENTITY",
+    "EXACT_CARRIER_INVARIANCE"
+  ],
+  "hard_nonclaims": [
+    "NO_TB4_PROTOCOL_EQUIVALENCE_PROVED",
+    "NO_TB4_SCORE_PROVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
