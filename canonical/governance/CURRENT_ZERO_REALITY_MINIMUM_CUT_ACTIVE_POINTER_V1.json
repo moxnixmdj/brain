@@ -184,5 +184,24 @@
     "current_recovery_verification_git_blob_sha": "00c59b07c0bf95fc1aba1fef80231534af657f57",
     "closed_cells": 5,
     "open_cells": 32
+  },
+  "root3_current_runtime_process_authority": {
+    "status": "ACTIVE__CURRENT_29_SITE_IDENTITY_RESTORED_AFTER_ASTRA_DRIFT__ZERO_CREDIT",
+    "activation": "canonical/governance/ROOT3_SEVEN_CLASS_ONE_SUBSTRATE_ACTIVATION_20261005_V3.json",
+    "activation_git_blob_sha": "6355b8d7dee75c11f47ceff922d9a4fc3152d7fd",
+    "child_process_registry": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+    "child_process_registry_git_blob_sha": "9274fe69eb54f78eb22a8ee4b895d71215fab33a",
+    "effect_class_registry": "canonical/runtime/root3_subprocess_effect_class_registry_v1.py",
+    "effect_class_registry_git_blob_sha": "771ea8c30eb25b23e22eaba3474ea65f879f912f",
+    "process_site_count": 29,
+    "subprocess_run_count": 27,
+    "subprocess_popen_count": 2,
+    "class_count": 7,
+    "current_astra_blob": "85977747574cf7f393ca22a2c65268ed283ab3fe",
+    "stale_astra_keys_retired": 8,
+    "missing_current_site_keys": 0,
+    "extra_current_site_keys": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
   }
 }
