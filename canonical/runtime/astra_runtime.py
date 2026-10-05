@@ -924,7 +924,6 @@ def _invoke_isolated_bound_adapter(module_name, entrypoint, call_args):
             raise Blocker("ISOLATED_BOUND_ADAPTER_RESULT_INVALID:"+type(exc).__name__) from exc
     if not isinstance(result,dict):
         raise Blocker("ISOLATED_BOUND_ADAPTER_RESULT_NOT_OBJECT")
-    result.setdefault("native_extension_isolation","CHILD_PROCESS_V1")
     return result
 
 
