@@ -132,3 +132,9 @@ def test_current_runtime_is_conservative_extension_on_historically_receipted_dom
     assert extension["current_blob"] == CURRENT_BLOB
     assert extension["historical_and_current_blobs_equal"] is False
     assert cert["hard_nonclaims"]
+
+
+if __name__ == "__main__":
+    test_recovery_gap_is_existing_contract_mapping_not_unnamed_behavior()
+    test_current_runtime_is_conservative_extension_on_historically_receipted_domain()
+    print("RECOVERY_EXISTING_CONTRACT_FACTORIZATION_PASS")
