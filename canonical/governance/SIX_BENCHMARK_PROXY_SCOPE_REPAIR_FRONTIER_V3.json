@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TRUTH_REPAIR__PROFESSIONAL_ARTIFACT_LEAF_MOVED_FROM_STANDALONE_SCOPE_REPAIR_TO_EXISTING_AA_BRIEFCASE_BOUND_PERFORMANCE_LANE__FOUR_STANDALONE_SCOPE_REPAIR_LEAVES__ZERO_CREDIT",
+  "objective": "Remove a redundant standalone scope/performance program for PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001 because the current independently checked scope partition binds that exact leaf to the same frozen AA-Briefcase v1.1 >=1822 Elo surface already required by two atomic predicates. Preserve the score as open and fail closed until an admissible score receipt exists.",
+  "authorities": {
+    "v2_active_frontier": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2_ACTIVATION_V1.json"
+    },
+    "aa_multiplex_binding": {
+      "path": "canonical/governance/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_BINDING_V1.json",
+      "git_blob_sha": "65512b512ebe44eea63fb849293e07be87e0b7fa"
+    },
+    "aa_multiplex_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "verification_commit": "aa34d4faec9df6bd9f6f094853d98881a812b2f0",
+      "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_SAME_SURFACE_SAME_THRESHOLD_AND_INDEPENDENT_SCOPE_PARTITION_BINDING__SCHEDULING_ONLY__ZERO_CREDIT"
+    },
+    "independent_artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    },
+    "six_family_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    }
+  },
+  "exact_identity": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "benchmark": "AA-Briefcase v1.1",
+    "threshold": 1822,
+    "unit": "Elo",
+    "shared_atomic_predicates": [
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822"
+    ],
+    "independent_scope_partition_disposition": "COVERED_BY_AA_BRIEFCASE_PUBLIC_BAR_SCOPE_IF_AND_ONLY_IF_BRAIN_MEETS_THE_FROZEN_1822_ELO_THRESHOLD",
+    "current_score_route_ready": false,
+    "current_score_result_proved": false
+  },
+  "classification": {
+    "scope_closed_performance_open": [
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+    ],
+    "public_bar_bound_no_standalone_scope_program": [
+      {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "route": "ONE_FUTURE_ADMISSIBLE_AA_BRIEFCASE_V1_1_GE_1822_ELO_RECEIPT",
+        "effect": "THE_SAME_RECEIPT_SATISFIES_BOTH_AA_ATOMIC_PREDICATES_AND_THE_EXACT_PROFESSIONAL_QUALITY_LEAF__NO_SEPARATE_SCOPE_OR_PERFORMANCE_PORTFOLIO"
+      }
+    ],
+    "standalone_scope_repair_open": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+    ],
+    "quarantined_candidate": [
+      "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001"
+    ]
+  },
+  "recomputed_frontier": {
+    "prior_standalone_scope_repair_unique": 5,
+    "prior_standalone_scope_repair_occurrences": 8,
+    "professional_artifact_occurrences_removed_from_standalone_scope_repair": 1,
+    "standalone_scope_repair_unique_after": 4,
+    "standalone_scope_repair_occurrences_after": 7,
+    "public_bar_bound_leaf_count": 1,
+    "terminal_acceptance_obligation_count_reduced": false
+  },
+  "scheduling_delta": {
+    "delete": [
+      "SEPARATE_SCOPE_COMPLETENESS_PROGRAM_FOR_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "SEPARATE_MATCHED_PERFORMANCE_PROGRAM_FOR_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "SECOND_AA_BRIEFCASE_EXECUTION_FOR_THE_SAME_FROZEN_SURFACE"
+    ],
+    "preserve": [
+      "ONE_AA_BRIEFCASE_V1_1_GE_1822_SCORE_RECEIPT",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "ALL_OTHER_FOUR_STANDALONE_SCOPE_REPAIR_LEAVES",
+      "ALL_ACCEPTANCE_AND_OWNERSHIP_GATES"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_AA_BRIEFCASE_SCORE_PASS",
+    "NO_PROFESSIONAL_KNOWLEDGE_WORK_ACCEPTANCE",
+    "NO_ARTIFACT_CREATION_ACCEPTANCE",
+    "NO_PROFESSIONAL_ARTIFACT_LEAF_PERFORMANCE_CREDIT",
+    "NO_ACCEPTANCE_PREDICATE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
