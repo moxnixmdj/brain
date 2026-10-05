@@ -162,7 +162,7 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
     state = root_state.get("current_acceptance") or {}
     _must(state.get("proved_atomic") == 14 and state.get("unresolved_atomic") == 24,
           "ROOT_STATE_NOT_14_24")
-    _must(root_state.get("terminal") is False, "ROOT_STATE_TERMINAL_UNEXPECTED")
+    _must(state.get("terminal") is False, "ROOT_STATE_TERMINAL_UNEXPECTED")
 
     _must("Content selection, layout quality, and presentation quality are explicitly outside scope." in compiler_source,
           "COMPILER_SCOPE_BOUNDARY_MISSING")
