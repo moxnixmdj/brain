@@ -1,8 +1,8 @@
-"""Compile the exact 29-site subprocess universe into seven semantic effect classes.
+"""Compile the exact 22-site subprocess universe into seven semantic effect classes.
 
 This is a classification/compression layer only. It does NOT infer that a child
 program is free of hidden effects from its declared class. The purpose is to
-replace 29 duplicated policy-verifier obligations with seven class-specific
+replace 22 remaining policy-verifier obligations with seven class-specific
 semantic proof obligations, while retaining exact per-call-site identity.
 
 Any call-site drift, new process API, missing mapping, duplicate mapping, or
@@ -31,26 +31,19 @@ CLASSES = {
     "ARBITRARY_COMMAND_EXECUTION",
 }
 
-# Exact mapping over the already content-addressed 29-site current universe.
+# Exact mapping over the already content-addressed 22-site current universe.
 # Keys are (module_path, lineno, process_api).
 EXPECTED: dict[tuple[str, int, str], str] = {
     ("canonical/runtime/astra_runtime.py", 325, "subprocess.run"): "ARBITRARY_COMMAND_EXECUTION",
     ("canonical/runtime/astra_runtime.py", 595, "subprocess.run"): "PACKAGE_ENV_MUTATION",
     ("canonical/runtime/astra_runtime.py", 673, "subprocess.run"): "PACKAGE_ENV_MUTATION",
-    ("canonical/runtime/astra_runtime.py", 918, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
-    ("canonical/runtime/astra_runtime.py", 933, "subprocess.run"): "PACKAGE_ENV_MUTATION",
-    ("canonical/runtime/astra_runtime.py", 940, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
-    ("canonical/runtime/astra_runtime.py", 1209, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
-    ("canonical/runtime/astra_runtime.py", 5771, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
+    ("canonical/runtime/astra_runtime.py", 939, "subprocess.run"): "PACKAGE_ENV_MUTATION",
+    ("canonical/runtime/astra_runtime.py", 1215, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
+    ("canonical/runtime/astra_runtime.py", 5777, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
 
     ("canonical/runtime/capability_discovery.py", 267, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
     ("canonical/runtime/capability_discovery.py", 359, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
     ("canonical/runtime/capability_discovery.py", 368, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
-    ("canonical/runtime/capability_discovery.py", 428, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
-    ("canonical/runtime/capability_discovery.py", 446, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
-    ("canonical/runtime/capability_discovery.py", 468, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
-    ("canonical/runtime/capability_discovery.py", 581, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
-    ("canonical/runtime/capability_discovery.py", 605, "subprocess.Popen"): "READ_ONLY_DECLARED_QUERY",
 
     ("canonical/runtime/auto_python_source_codec_acquisition.py", 217, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
     ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 32, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
@@ -152,22 +145,22 @@ def classify_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
             }
         )
 
-    if len(classified) != 29 or sum(counts.values()) != 29:
-        raise EffectClassRegistryError("CLASSIFICATION_COUNT_NOT_29")
+    if len(classified) != 22 or sum(counts.values()) != 22:
+        raise EffectClassRegistryError("CLASSIFICATION_COUNT_NOT_22")
     if any(v == 0 for v in counts.values()):
         raise EffectClassRegistryError("EMPTY_DECLARED_EFFECT_CLASS")
 
     return {
         "schema": SCHEMA,
-        "status": "PASS__EXACT_29_PROCESS_SITES_PARTITIONED_INTO_7_DECLARED_EFFECT_CLASSES",
-        "site_count": 29,
+        "status": "PASS__EXACT_22_PROCESS_SITES_PARTITIONED_INTO_7_DECLARED_EFFECT_CLASSES",
+        "site_count": 22,
         "class_count": len(CLASSES),
         "class_counts": counts,
         "classified_sites": classified,
-        "semantic_verifier_obligations_before": 29,
+        "semantic_verifier_obligations_before": 22,
         "semantic_verifier_classes_after": len(CLASSES),
-        "duplicate_policy_obligations_deleted": 29 - len(CLASSES),
-        "compression_percent": (29 - len(CLASSES)) / 29 * 100.0,
+        "duplicate_policy_obligations_deleted": 22 - len(CLASSES),
+        "compression_percent": (22 - len(CLASSES)) / 22 * 100.0,
         "class_proof_residuals": CLASS_PROOF_RESIDUALS,
         "truth_boundary": {
             "classification_is_scope_complete_for_current_direct_python_process_sites": True,

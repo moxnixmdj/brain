@@ -11,12 +11,12 @@ from canonical.runtime.root3_child_process_channel_registry_v1 import (
 )
 
 
-def test_current_whole_runtime_child_process_universe_is_exactly_29():
+def test_current_whole_runtime_child_process_universe_is_exactly_22():
     out = compile_registry()
     whole = out["whole_runtime"]
-    assert whole["scanned_python_file_count"] == 48
-    assert whole["child_process_call_site_count"] == 29
-    assert whole["subprocess_run_count"] == 27
+    assert whole["scanned_python_file_count"] == 49
+    assert whole["child_process_call_site_count"] == 12
+    assert whole["subprocess_run_count"] == 21
     assert whole["subprocess_popen_count"] == 2
     assert whole["os_system_or_unregistered_subprocess_api_count"] == 0
     assert whole["modules_with_child_processes_count"] == 13
@@ -24,13 +24,13 @@ def test_current_whole_runtime_child_process_universe_is_exactly_29():
     assert out["child_process_effect_totality_proved"] is False
 
 
-def test_astra_subset_remains_exactly_eight_with_known_partition():
+def test_astra_subset_remains_exactly_six_with_known_partition():
     out = compile_registry()
-    assert out["astra_subset"]["call_site_count"] == 8
+    assert out["astra_subset"]["call_site_count"] == 6
     assert out["astra_subset"]["function_counts"] == {
         "run_shell": 1,
         "_ensure_pypi_dependency": 2,
-        "_ensure_apt_dependencies": 3,
+        "_ensure_apt_dependencies": 1,
         "_goal_action": 1,
         "_verify_and_promote_acquisition": 1,
     }
