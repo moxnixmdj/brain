@@ -267,12 +267,10 @@ def _legacy_search_apt_packages(effect, limit=12):
             "errors":[{"error":"APT_PLATFORM_UNSUPPORTED"}],"binding_performed":False,
         }
     try:
-        from canonical.runtime.apt_metadata_snapshot_v1 import (
-            package_records,
-            translation_records,
-        )
-        packages=package_records()
-        translations=translation_records(language="en")
+        # This cache is itself populated exclusively from apt_metadata_snapshot_v1
+        # after the Root3 metadata-process deletion.  Reusing it avoids reparsing
+        # tens of thousands of Package/Translation records for every role query.
+        packages=_apt_full_metadata_records()
     except Exception as exc:
         return {
             "schema":"PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
@@ -281,13 +279,6 @@ def _legacy_search_apt_packages(effect, limit=12):
             "errors":[{"error":"APT_SNAPSHOT_UNAVAILABLE:"+type(exc).__name__+":"+str(exc)}],
             "binding_performed":False,
         }
-
-    translation_by_md5={}
-    for rec in translations:
-        key=str(rec.get("Description-md5") or "").strip().lower()
-        desc=str(rec.get("Description-en") or rec.get("Description") or "").strip()
-        if key and desc and key not in translation_by_md5:
-            translation_by_md5[key]=desc
 
     queries=effect_queries(effect)
     apt_queries=_apt_query_variants(queries)
@@ -314,11 +305,7 @@ def _legacy_search_apt_packages(effect, limit=12):
             or (host_arch and arch and arch not in {"all",host_arch})
         ):
             continue
-        md5=str(rec.get("Description-md5") or "").strip().lower()
-        description=translation_by_md5.get(
-            md5,
-            str(rec.get("Description") or "").strip(),
-        )
+        description=str(rec.get("description") or rec.get("Description") or "").strip()
         blob=(name+" "+description).lower()
         if not any(re.search(q,blob,flags=re.IGNORECASE) for q in apt_queries):
             continue
