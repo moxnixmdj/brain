@@ -140,9 +140,7 @@
         "A_SPECIFIC_RECOVERY_CONTROLLER_IS_NOT_AN_OBSERVABLE_TARGET_REQUIREMENT"
       ],
       "nonmandatory_mechanisms": [
-        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
-        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
-        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
       ],
       "structural_scope_residuals": [],
       "remaining_load_bearing": [
@@ -150,7 +148,23 @@
         "AUTOMATIONBENCH_PUBLIC_PASS_RATE_VS_AUTOMATIONBENCH_AA_METRIC_IDENTITY_SPLIT",
         "EXACT_TARGET_CONFIGURATION_IDENTITY"
       ],
-      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_AND_METRIC_IDENTITY_OPEN"
+      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_AND_METRIC_IDENTITY_OPEN",
+      "stronger_observable_receipts": [
+        {
+          "predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+          "state": "PROVED",
+          "covers": "TOOL_ROUTE_SUCCESS_WITHIN_FROZEN_SCOPE__REUSABLE_STRENGTHENER_NOT_NEW_BUSINESS_MECHANISM_DEBT"
+        },
+        {
+          "predicate": "RECOVERY_TERMINAL_NONINFERIOR",
+          "state": "PROVED",
+          "covers": "RECOVERY_OUTCOME_WITHIN_FROZEN_SCOPE__REUSABLE_STRENGTHENER_NOT_NEW_BUSINESS_MECHANISM_DEBT"
+        }
+      ],
+      "reusable_already_proved_strengtheners": [
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001_VIA_ACCEPTED_TOOL_DISCOVERY_FAMILY",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_VIA_ACCEPTED_RECOVERY_FAMILY"
+      ]
     },
     {
       "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
@@ -285,5 +299,6 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "revision_note": "V1 corrected in-place before verification: Business tool-route and trajectory-localization are already-proved reusable strengtheners, not target-entailment-quarantined mechanism debts. Only browser visual grounding is nonmandatory for BUSINESS_WORKFLOW_AUTOMATION under the active target-behavior guard."
 }
