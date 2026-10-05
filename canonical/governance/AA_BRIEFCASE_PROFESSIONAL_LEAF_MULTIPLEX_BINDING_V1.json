@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_BINDING_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ONE_FROZEN_AA_BRIEFCASE_SCORE_RECEIPT_MULTIPLEXES_TWO_ATOMIC_PREDICATES_AND_ONE_IDENTICAL_PROFESSIONAL_QUALITY_LEAF__ZERO_CREDIT",
+  "objective": "Delete duplicate AA-Briefcase execution and a separate PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001 residual-performance program. Reuse one future admissible comparable AA-Briefcase v1.1 >=1822 Elo Brain receipt only across propositions already bound to the exact same frozen benchmark surface and exact behavioral leaf.",
+  "authorities": {
+    "six_family_scope_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    },
+    "artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    },
+    "artifact_scope_map": {
+      "path": "canonical/governance/AA_BRIEFCASE_ARTIFACT_SCOPE_COVERAGE_MAP_V1.json",
+      "git_blob_sha": "87c362eee0b012baa3f89890b4f7d78a6f23684a"
+    },
+    "comparator_provenance": {
+      "path": "canonical/governance/AA_BRIEFCASE_OPUS55_COMPARATOR_PROVENANCE_RECONCILIATION_V1.json",
+      "git_blob_sha": "55974d8c5d8e32f276149543959ad88f2c5abb89"
+    },
+    "score_readiness": {
+      "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+      "git_blob_sha": "4e59e30461c9ff1bee1a9474627d5fb4074844b2"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "exact_identity": {
+    "benchmark": "AA-Briefcase v1.1",
+    "frozen_target_score": 1822,
+    "unit": "Elo",
+    "target_predicates": [
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822"
+    ],
+    "readiness_surface_families": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "ARTIFACT_CREATION"
+    ],
+    "behavioral_leaf": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "leaf_scope": "Professional deliverable planning and revision judgment",
+    "artifact_scope_partition_disposition": "COVERED_BY_AA_BRIEFCASE_PUBLIC_BAR_SCOPE_IF_AND_ONLY_IF_BRAIN_MEETS_THE_FROZEN_1822_ELO_THRESHOLD"
+  },
+  "theorem": {
+    "name": "SAME_SURFACE_SAME_RECEIPT_PLUS_IDENTICAL_LEAF_MULTIPLEXING",
+    "premises": [
+      "Both atomic predicates name the same benchmark version, same frozen threshold and same comparator provenance object.",
+      "The canonical score-readiness matrix has one AA-Briefcase row whose family set contains both PROFESSIONAL_KNOWLEDGE_WORK and ARTIFACT_CREATION.",
+      "Independent artifact scope partition proves PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001 is inside the AA-Briefcase exercised professional-quality scope conditional on meeting the frozen 1822 threshold.",
+      "The six-family scope partition uses that exact same behavior_id as the surviving Professional Knowledge Work quality leaf.",
+      "No proposition outside the exact benchmark exercised scope inherits this receipt."
+    ],
+    "conclusion": "One future content-addressed comparable Brain AA-Briefcase v1.1 receipt meeting frozen >=1822 Elo may be referenced by both atomic predicates and by the exact professional-quality behavioral leaf. A second AA-Briefcase execution or a separate matched comparator for that same leaf is logically redundant.",
+    "fail_closed_conditions": [
+      "RECEIPT_MUST_BE_ONE_COMPARABLE_FROZEN_AA_BRIEFCASE_V1_1_SCORE_ROUTE",
+      "RECEIPT_MUST_MEET_OR_EXCEED_1822_ELO_UNDER_THE_FROZEN_COMPARATOR_PROTOCOL",
+      "NO_MIXING_WITH_LIVE_1808_REFERENCE_AS_IF_SAME_RUN",
+      "NO_REUSE_TO_GDPVAL_OR_SYNTHESIS_OR_NATIVE_MECHANICAL_LEAVES",
+      "NO_REUSE_TO_FILE_FEATURES_OUTSIDE_ACTUALLY_EXERCISED_AA_BRIEFCASE_SCOPE",
+      "IF_HARNESS_OR_TASK_POPULATION_DIFFERS_MATERIALLY_REUSE_FAILS_CLOSED"
+    ]
+  },
+  "scheduling_reduction": {
+    "before": [
+      "AA_BRIEFCASE_SCORE_FOR_PROFESSIONAL_KNOWLEDGE_WORK",
+      "AA_BRIEFCASE_SCORE_FOR_ARTIFACT_CREATION",
+      "SEPARATE_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_PERFORMANCE_PROGRAM"
+    ],
+    "after": [
+      "ONE_AA_BRIEFCASE_V1_1_GE_1822_SCORE_RECEIPT_REFERENCED_THREE_WAYS"
+    ],
+    "duplicate_aa_briefcase_score_executions_deleted": 1,
+    "separate_leaf_performance_programs_deleted": 1,
+    "new_terminal_cases_added": 0,
+    "new_empirical_predicates_added": 0,
+    "six_family_scope_cut_unique_leaf_ids": 7,
+    "independent_nonpublic_leaf_evidence_programs_after_binding": 6,
+    "caveat": "The leaf ID remains an explicit accounting dependency until the shared AA-Briefcase score predicate is actually proved; this reduction deletes duplicate execution, not acceptance obligations."
+  },
+  "current_state": {
+    "score_route_ready": false,
+    "score_result_proved": false,
+    "leaf_performance_proved": false,
+    "scheduling_reuse_candidate": true
+  },
+  "hard_nonclaims": [
+    "NO_AA_BRIEFCASE_SCORE_CREDIT",
+    "NO_PROWORK_OR_ARTIFACT_FAMILY_ACCEPTANCE",
+    "NO_BEHAVIORAL_LEAF_PERFORMANCE_CREDIT_BEFORE_THE_SHARED_SCORE_RECEIPT_PASSES",
+    "NO_CLAIM_AA_BRIEFCASE_COVERS_SYNTHESIS_OR_LONG_HORIZON_CONTINUITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
