@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V4",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__META_MAPPING_FRONTIER_THREE_GROUPS_PLUS_ONE_VERIFIED_PROOF_BASIS_REPAIR__ROOT1_POSITIVE_ZERO__GLOBAL_ENVELOPE_UNSEALED__ZERO_CREDIT",
+  "scope": "ROOT1_CAPABILITY_MISSING_PLUS_TERMINAL_ENVELOPE_COMPLETENESS_AND_ACCEPTANCE_BASIS_FINALITY",
+  "predecessor": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V3.json",
+    "git_blob_sha": "a8c6a107f46081be2f124f404eba5e253d04e9a0",
+    "verification_path": "canonical/verification/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V3_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "verification_git_blob_sha": "9d550bd31f3b5a27a047e54945623d459c19de45"
+  },
+  "proof_basis_gap": {
+    "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+    "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354",
+    "verification_path": "canonical/verification/CREATIVE_DIAGRAM_PROOF_BASIS_GAP_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "verification_git_blob_sha": "0c52d00a458efa72da541ac221c09fd5a249479e",
+    "classification": "CREATIVE_TEXT_AND_DIAGRAM_OUTPUT_REQUIRE_ACCEPTANCE_BASIS_REPAIR__NOT_POSITIVE_BRAIN_CAPABILITY_GAP"
+  },
+  "root1_classification": {
+    "root1_positive_gap_count": 0,
+    "root1_currently_active": false,
+    "rule": "PROOF_BASIS_INCOMPLETENESS_OR_UNMAPPED_SURFACE_UNCERTAINTY_IS_NOT A POSITIVE BRAIN CAPABILITY FAILURE"
+  },
+  "meta_envelope_mapping_frontier": [
+    {
+      "surface_group": "CYBERSECURITY",
+      "closure": "LOSSLESS_EXISTING_FAMILY_UNION_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    },
+    {
+      "surface_group": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "closure": "LOSSLESS_EXISTING_FAMILY_UNION_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    },
+    {
+      "surface_group": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "closure": "LOSSLESS_EXISTING_FAMILY_UNION_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    }
+  ],
+  "classified_nonmapping_terminal_repairs": [
+    {
+      "surface_group": "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT",
+      "state": "PROOF_BASIS_GAP_VERIFIED_BY_CONNECTOR_RECOMPUTATION",
+      "repair": "EXTEND_EXISTING_FAMILY_ACCEPTANCE_BASIS_MINIMALLY_OR_OPEN_NEW FAMILY ONLY IF EXACT ANALYSIS PROVES EXISTING FAMILY UNION INSUFFICIENT"
+    }
+  ],
+  "previously_closed_meta_groups": [
+    "VOICE_DICTATION_INPUT",
+    "IMAGE_INPUT_AND_VISUAL_REASONING"
+  ],
+  "terminal_finality_rule": "LITERAL_ALL_USEFUL_OPUS55_TERMINAL_SUCCESS_REQUIRES BOTH: (A) THREE REMAINING META MAPPING GROUPS CLOSED AND (B) CREATIVE_DIAGRAM PROOF BASIS REPAIRED AND PROVED; 38_OF_38 CURRENT REGISTRY ALONE IS NOT SUFFICIENT.",
+  "scheduler_effect": {
+    "activate": [
+      "PARALLEL_EXACT_MAPPING_OR_COUNTEREXAMPLE_WORK_ON_CYBERSECURITY_BIOLOGY_AI_R_AND_D",
+      "MINIMUM_CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR"
+    ],
+    "delete": [
+      "CREATIVE_DIAGRAM_GENERIC_MAPPING_SEARCH",
+      "VOICE_DICTATION_META_MAPPING_WORK",
+      "IMAGE_INPUT_NEW_FAMILY_SEARCH"
+    ],
+    "preserve": [
+      "CURRENT_24_ATOMIC_FRONTIER_AS_DECLARED_REGISTRY_STATE__NOT_LITERAL_TERMINAL_FINALITY"
+    ]
+  },
+  "hard_rules": [
+    "NO_ROOT1 REOPEN FROM PROOF BASIS GAP ALONE",
+    "NO NEW FAMILY FROM DOMAIN LABEL ALONE",
+    "NO TERMINAL ENVELOPE SEAL UNTIL ALL META GROUPS AND BASIS REPAIR CLOSE",
+    "NO ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT FROM THIS AUDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
