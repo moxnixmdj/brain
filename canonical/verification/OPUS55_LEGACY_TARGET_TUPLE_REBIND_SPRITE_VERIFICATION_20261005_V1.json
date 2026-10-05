@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_LEGACY_TARGET_TUPLE_REBIND_SPRITE_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ISOLATED_REMOTE_EXACT_BYTE_REPLAY_PASS__5_OF_5__TEN_PREDICATES_TO_NINE_TARGET_TUPLES__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/opus55_legacy_target_tuple_rebinder_v1.py",
+      "git_blob_sha": "c2bc8042a68b5fb4ea975d11fae54774b2605178"
+    },
+    "governance": {
+      "path": "canonical/governance/OPUS55_LEGACY_TARGET_TUPLE_REBIND_20261005_V1.json",
+      "git_blob_sha": "7368d3a5c266b6077288915a35ac414ac8f0d02a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_opus55_legacy_target_tuple_rebinder_v1.py",
+      "git_blob_sha": "bb3ae6add39190ebabc7abdb5e588fd6e3a2aa6b"
+    }
+  },
+  "carrier": {
+    "sprite_name": "brain-heldout003-one-shot",
+    "sprite_id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+    "python": "3.13.7",
+    "incremental_spend_usd": 0
+  },
+  "execution": {
+    "tests_run": 5,
+    "failures": 0,
+    "errors": 0,
+    "duration_seconds": 0.007
+  },
+  "proved": [
+    "THE_EXACT_V22_TEN_LEGACY_UNBOUND_PREDICATES_NOW_HAVE_EXPLICIT_TARGET_TUPLES",
+    "THE_TEN_PREDICATES_MAP_TO_NINE_DISTINCT_TUPLES_BECAUSE_TWO_AA_BRIEFCASE_PREDICATES_SHARE_ONE_SCORE_TUPLE",
+    "FROZEN_TARGET_VALUES_ARE_PRESERVED_EXCEPT_TB_SCIENCE_WHICH_PRESERVES_ITS_ALREADY_PRELOCKED_63_333333_PUBLIC_CURRENT_ROUTE",
+    "NO_CURRENT_LIVE_BOARD_VALUE_REBASES_A_FROZEN_TARGET",
+    "TARGET_IDENTITY_BINDING_GRANTS_ZERO_SCORE_EXECUTION_OR_ACCEPTANCE_CREDIT"
+  ],
+  "not_proved": [
+    "BRAIN_MEETS_ANY_NEW_TARGET",
+    "SAME_HARNESS_ACCESS_EXISTS_FOR_OPAQUE_PROVIDER_ROWS",
+    "RELATIVE_RATING_POOL_REPRODUCTION_OR_BRIDGE",
+    "ANY_NEW_ATOMIC_ACCEPTANCE",
+    "TERMINAL_GOAL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
