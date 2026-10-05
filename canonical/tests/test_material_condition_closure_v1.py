@@ -65,13 +65,42 @@ class MaterialConditionClosureTests(unittest.TestCase):
         registry = copy.deepcopy(registry)
         evidence = copy.deepcopy(evidence)
         registry["source_universe"]["sealed"] = True
-        registry["source_universe"]["independent_seal_receipt"] = "test-independent-receipt"
+        registry["source_universe"]["independent_seal_receipt"] = {
+            "path": "canonical/verification/test-independent-receipt.json",
+            "git_blob_sha": "a" * 40,
+            "state": "INDEPENDENT_PASS",
+        }
         evidence["claims"] = [
             {"condition_id": row["id"], "state": "PROVED", "scope_complete": True}
             for row in registry["conditions"]
         ]
-        out = compile_material_condition_closure(registry, evidence, envelope)
+        out = compile_material_condition_closure(
+            registry, evidence, envelope,
+            verified_source_universe_receipt_sha="a" * 40,
+        )
         self.assertTrue(out["terminal_condition_gate_pass"], out)
+
+    def test_declared_seal_with_unverified_blob_fails_closed(self):
+        registry, evidence, envelope = self.docs()
+        registry = copy.deepcopy(registry)
+        evidence = copy.deepcopy(evidence)
+        registry["source_universe"]["sealed"] = True
+        registry["source_universe"]["independent_seal_receipt"] = {
+            "path": "canonical/verification/fake.json",
+            "git_blob_sha": "b" * 40,
+            "state": "INDEPENDENT_PASS",
+        }
+        evidence["claims"] = [
+            {"condition_id": row["id"], "state": "PROVED", "scope_complete": True}
+            for row in registry["conditions"]
+        ]
+        out = compile_material_condition_closure(
+            registry, evidence, envelope,
+            verified_source_universe_receipt_sha=None,
+        )
+        self.assertFalse(out["pass"])
+        self.assertIn("SOURCE_UNIVERSE_SEAL_RECEIPT_BLOB_NOT_VERIFIED", out["errors"])
+        self.assertFalse(out["terminal_condition_gate_pass"])
 
     def test_scope_incomplete_claim_does_not_close_condition(self):
         registry, evidence, envelope = self.docs()
