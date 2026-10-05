@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_STANDALONE_LEAF_PROGRAMS_REDUCED_TO_ONE_MANDATORY_MECHANISM_PROGRAM_PLUS_FOUR_OPTIONAL_EVIDENCE_ROUTES__ZERO_CREDIT",
+  "objective": "Reconcile the verified seven-to-five leaf performance compression with the later active target-behavior-before-mechanism scheduling guard, so internal mechanism incidence cannot remain mandatory after explicit target-entailment audit quarantines it.",
+  "authorities": {
+    "five_program_source": {
+      "path": "canonical/governance/SEVEN_LEAF_PERFORMANCE_OBLIGATION_COMPRESSION_V1.json",
+      "git_blob_sha": "fb8f0dfd2d500015e058523a9ef644e8efe2be11",
+      "verified_by": "canonical/verification/SEVEN_LEAF_PERFORMANCE_OBLIGATION_COMPRESSION_CONNECTOR_VERIFICATION_20261005_V1.json"
+    },
+    "target_behavior_guard": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json",
+      "activation_commit": "69f3c05e6be905c3d3a17f4a0d024f025e96547c",
+      "subject": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_20261005_V1.json",
+      "subject_git_blob_sha": "251cac9c9f7892e26ca90f2f5118f31e1df02099",
+      "rule": "REQUIRE_TARGET_ENTAILMENT_RECEIPT_BEFORE_SCHEDULING_ANY_SPECIFIC_IMPLEMENTATION_MECHANISM_AS_MANDATORY"
+    }
+  },
+  "exact_intersection": [
+    {
+      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "prior_program_state": "STANDALONE_PERFORMANCE_OBLIGATION",
+      "target_entailment_state": "NOT_PROVED__SUFFICIENT_MECHANISM_ONLY",
+      "new_mandatory_mechanism_state": "QUARANTINED",
+      "preserved_observable_target": "AMBIGUOUS_MULTI_FILE_CHANGE_CORRECTNESS_AND_SELF_CHECKING_OUTCOME",
+      "optional_evidence_route_preserved": true
+    },
+    {
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "prior_program_state": "STANDALONE_PERFORMANCE_OBLIGATION",
+      "target_entailment_state": "NOT_PROVED__SUFFICIENT_OR_PARTIALLY_ALIGNED_MECHANISM",
+      "new_mandatory_mechanism_state": "QUARANTINED",
+      "preserved_observable_target": "DIFFICULT_EXPERT_LEVEL_TOOL_AUGMENTED_REASONING_AND_LONG_HORIZON_SCIENTIFIC_TASK_SUCCESS",
+      "optional_evidence_route_preserved": true
+    },
+    {
+      "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "prior_program_state": "STANDALONE_PERFORMANCE_OBLIGATION",
+      "target_entailment_state": "ADJACENT_NOT_ENTAILED",
+      "new_mandatory_mechanism_state": "QUARANTINED",
+      "optional_evidence_route_preserved": true
+    },
+    {
+      "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "prior_program_state": "STANDALONE_PERFORMANCE_OBLIGATION",
+      "target_entailment_state": "OUT_OF_SCOPE_UNDER_CURRENT_FROZEN_FAMILY_WORDING",
+      "new_mandatory_mechanism_state": "QUARANTINED",
+      "optional_evidence_route_preserved": true
+    },
+    {
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "prior_program_state": "STANDALONE_PERFORMANCE_OBLIGATION",
+      "target_entailment_state": "EXPLICIT_TARGET_BEHAVIOR",
+      "target_family": "COMPUTER_AND_BROWSER_USE",
+      "new_mandatory_mechanism_state": "PRESERVE_AS_DIRECT_TARGET_ENTAILED",
+      "optional_evidence_route_preserved": true
+    }
+  ],
+  "proof": {
+    "prior_standalone_program_count": 5,
+    "directly_target_entailed_among_five": 1,
+    "quarantined_from_mandatory_mechanism_status": 4,
+    "mandatory_specific_mechanism_program_count_after_guard": 1,
+    "arithmetic": "5 = 1 + 4",
+    "important_scope_rule": "THIS_REDUCTION_REMOVES_ONLY MANDATORY SPECIFIC-MECHANISM PROOF PROGRAMS. IT DOES NOT CLOSE OR DELETE ANY BROAD FAMILY OBSERVABLE TARGET, PUBLIC BENCHMARK THRESHOLD, OR STRICT OPUS55 PERFORMANCE OBLIGATION."
+  },
+  "scheduler_delta": {
+    "delete_as_mandatory_specific_mechanism_programs": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+    ],
+    "preserve_as_mandatory_specific_mechanism_program": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+    ],
+    "preserve_all_four_quarantined_routes_as": "OPTIONAL_SUFFICIENT_EVIDENCE_IF_THEY_CLOSE_AN_OBSERVABLE_TARGET_DIMENSION_WITHOUT_TARGET_EXPANSION",
+    "next": [
+      "AUDIT_ONLY_OBSERVABLE_TARGET_DIMENSIONS_FOR_THE_AFFECTED_FAMILIES",
+      "REUSE_EXISTING_PUBLIC_BENCHMARK_AND_STRONGER_RECEIPTS_FIRST",
+      "DO_NOT_SPEND_FRESH_REALITY_ON_THE_FOUR_QUARANTINED_MECHANISMS_UNLESS_A_NEW_ENTAILMENT_RECEIPT_MAKES_ONE NECESSARY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_ATOMIC_PREDICATE_CLOSED",
+    "NO_BROAD_FAMILY_SCOPE_GAP_CLOSED",
+    "NO_BENCHMARK_THRESHOLD_DELETED_OR_WEAKENED",
+    "NO_CLAIM_THE_FOUR_QUARANTINED_MECHANISMS_ARE_USELESS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
