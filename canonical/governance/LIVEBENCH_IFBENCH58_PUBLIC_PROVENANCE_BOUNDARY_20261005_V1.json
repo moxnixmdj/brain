@@ -1,0 +1,126 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IFBENCH58_PUBLIC_PROVENANCE_BOUNDARY_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PUBLIC_SOURCE_PROVENANCE_BOUNDARY__ZERO_TERMINAL_CONTENT__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "parent_candidate": {
+    "pr": 2022,
+    "head_sha": "af69ba35b52ba96a9777fb8e664c0e8aa1ebdb2a",
+    "visible_state_cut": "canonical/governance/LIVEBENCH_IFBENCH58_VISIBLE_STATE_SUFFICIENCY_CUT_20261005_V1.json"
+  },
+  "pinned_runtime": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "common_path": "livebench/common.py",
+    "evaluator_path": "livebench/if_runner/ifbench/evaluation_lib.py",
+    "scorer_path": "livebench/process_results/instruction_following/utils.py",
+    "instructions_path": "livebench/if_runner/ifbench/instructions.py"
+  },
+  "new_findings": {
+    "runner_source_boundary": [
+      "PINNED_COMMON_PY_LOADS_CATEGORY_DATA_VIA_DATASETS.LOAD_DATASET_FROM_LIVEBENCH_SLASH_CATEGORY_WITHOUT_AN_IMMUTABLE_DATASET_REVISION",
+      "PINNED_IFBENCH_STRICT_EVALUATOR_CONSUMES_STORED_INSTRUCTION_ID_LIST_AND_STORED_KWARGS_AND_DOES_NOT_RECONSTRUCT_HIDDEN_REFERENCE_TEXT_OR_PROMPT_TO_REPEAT_FROM_VISIBLE_PROMPT",
+      "NOVEMBER_UPDATE_PR_309_MERGED_2025_11_26_AND_INTRODUCED_THE_IFBENCH_SCORER_AND_VENDORED_IFBENCH_RUNTIME_BUT_DID_NOT_ADD_THE_RELEASE_QUESTION_POPULATION_TO_THE_GIT_REPOSITORY"
+    ],
+    "public_dataset_boundary": [
+      "THE_PUBLIC_HUGGINGFACE_LIVEBENCH_SLASH_INSTRUCTION_FOLLOWING_MAIN_HISTORY_VISIBLE_ON_2026_10_05_HAS_ITS_LATEST_DATASET_UPLOAD_AT_COMMIT_0868379_ON_2025_04_07",
+      "THAT_PUBLIC_HEAD_REPORTS_400_ROWS_AND_RELEASE_DATES_ONLY_THROUGH_2024_11_25",
+      "THEREFORE_THE_MUTABLE_PUBLIC_HF_HEAD_IS_NOT_AN_IMMUTABLE_PROVENANCE_WITNESS_FOR_THE_POST_2025_11_25_IFBENCH58_POPULATION"
+    ],
+    "public_ifbench_diagnostic": [
+      "PUBLIC_IFBENCH_ROWS_SUPPORT_THE_HYPOTHESIS_THAT_RATIO_OVERLAP_REFERENCE_TEXT_EQUALS_THE_BASE_REQUEST_BEFORE_THE_RENDERED_CONSTRAINT",
+      "PUBLIC_IFBENCH_ROWS_SUPPORT_THE_HYPOTHESIS_THAT_REPEAT_SPAN_PROMPT_TO_REPEAT_EQUALS_THE_BASE_REQUEST_BEFORE_THE_RENDERED_CONSTRAINT",
+      "THESE_ROWS_ARE_DIAGNOSTIC_ONLY_AND_DO_NOT_ESTABLISH_IDENTITY_WITH_THE_LIVEBENCH_2026_06_25_TERMINAL_POPULATION"
+    ]
+  },
+  "impossibility_cut": {
+    "theorem": "NO_UNCONDITIONAL_HIDDEN_STATE_INDEPENDENT_POINTWISE_CLOSURE_FOR_THE_TWO_RESIDUAL_FAMILIES",
+    "repeat_repeat_span": {
+      "statement": "IF_TWO_ADMISSIBLE_HIDDEN_PROMPT_TO_REPEAT_VALUES_WITH_THE_SAME_VISIBLE_STATE_PRODUCE_DIFFERENT_REQUIRED_TOKEN_SLICES_FOR_THE_VISIBLE_N_START_N_END_THEN_NO_SINGLE_RESPONSE_CAN_PASS_REPEAT_SPAN_FOR_BOTH",
+      "proof": [
+        "THE_PINNED_CHECKER_ACCEPTS_IFF_RESPONSE_TOKENS_EQUAL_THE_HIDDEN_PROMPT_TOKEN_SLICE",
+        "A_SINGLE_RESPONSE_HAS_ONE_TOKEN_SEQUENCE",
+        "ONE_TOKEN_SEQUENCE_CANNOT_EQUAL_TWO_DISTINCT_REQUIRED_TOKEN_SEQUENCES"
+      ]
+    },
+    "ratio_overlap": {
+      "statement": "WITHOUT_A_RESTRICTION_LINKING_HIDDEN_REFERENCE_TEXT_TO_VISIBLE_STATE_THERE_IS_NO_GENERAL_FIXED_RESPONSE_GUARANTEE_FOR_ARBITRARY_VISIBLE_NONZERO_PERCENTAGE_TARGETS",
+      "proof": [
+        "THE_PINNED_CHECKER_SCORE_DEPENDS_ON_INTERSECTION_BETWEEN_RESPONSE_CHARACTER_TRIGRAM_SET_AND_HIDDEN_REFERENCE_CHARACTER_TRIGRAM_SET",
+        "FOR_A_FIXED_RESPONSE_WITH_A_NONEMPTY_TRIGRAM_SET_DIFFERENT_HIDDEN_REFERENCE_SETS_CAN_CHANGE_THE_INTERSECTION_CARDINALITY",
+        "THEREFORE_VISIBLE_PERCENTAGE_ALONE_DOES_NOT_DETERMINE_PASS_OR_FAIL"
+      ],
+      "scope_note": "THIS_IS_A_NONIDENTIFIABILITY_RESULT_OVER_UNRESTRICTED_HIDDEN_REFERENCES__NOT_A_CLAIM_ABOUT_THE_ACTUAL_RELEASE_GENERATOR"
+    }
+  },
+  "consequence": {
+    "prior_route_demoted": "SEARCH_FOR_A_SINGLE_RESPONSE_THAT_PASSES_BOTH_RESIDUAL_FAMILIES_FOR_ALL_POSSIBLE_HIDDEN_VALUES",
+    "reason": "PROVABLY_INSUFFICIENT_WITHOUT_A_HIDDEN_TO_VISIBLE_INVARIANT",
+    "exact_zero_terminal_closure_options": [
+      {
+        "rank": 1,
+        "route": "IMMUTABLE_GENERATOR_OR_BUILD_PROVENANCE",
+        "sufficient_evidence": "PIN_EXACT_SOURCE_OR_CONTENT_ADDRESSED_BUILD_ARTIFACT_PROVING_REFERENCE_TEXT_AND_PROMPT_TO_REPEAT_ARE_DETERMINISTIC_FUNCTIONS_OF_VISIBLE_PROMPT_CONTENT"
+      },
+      {
+        "rank": 2,
+        "route": "AUTHORIZED_BLIND_EVALUATOR",
+        "sufficient_evidence": "CONTENT_ADDRESSED_SCORER_ACCEPTS_VISIBLE_PROMPT_RESPONSE_PAIRS_AND_RETURNS_EXACT_SCORE_WITHOUT_DISCLOSING_TERMINAL_ROWS_OR_HIDDEN_KWARGS__THEN_USE_SEARCH_PLUS_CERTIFIED_POSTVALIDATION"
+      }
+    ],
+    "fail_closed_rule": "DO_NOT_PROMOTE_VISIBLE_STATE_SUFFICIENCY_FROM_56_OF_58_TO_58_OF_58_UNTIL_ONE_CLOSURE_ROUTE_IS_CONTENT_ADDRESSED_AND_INDEPENDENTLY_REPLAYED"
+  },
+  "source_refs": [
+    {
+      "kind": "git",
+      "url": "https://github.com/LiveBench/LiveBench/blob/8f8e5c381a16e3f24257776edd53471fe86f8091/livebench/common.py",
+      "fact": "UNREVISIONED_HUGGINGFACE_CATEGORY_LOAD"
+    },
+    {
+      "kind": "git",
+      "url": "https://github.com/LiveBench/LiveBench/blob/8f8e5c381a16e3f24257776edd53471fe86f8091/livebench/if_runner/ifbench/evaluation_lib.py",
+      "fact": "STRICT_EVALUATOR_CONSUMES_STORED_KWARGS"
+    },
+    {
+      "kind": "git",
+      "url": "https://github.com/LiveBench/LiveBench/blob/8f8e5c381a16e3f24257776edd53471fe86f8091/livebench/if_runner/ifbench/instructions.py",
+      "fact": "EXACT_HIDDEN_STATE_DEPENDENT_CHECKER_SEMANTICS"
+    },
+    {
+      "kind": "git_pr",
+      "url": "https://github.com/LiveBench/LiveBench/pull/309",
+      "merge_commit": "cf3240276fd8376488c38206d1b0d7c5fa88b5f0",
+      "fact": "POST_2025_11_25_IFBENCH_RUNTIME_MIGRATION"
+    },
+    {
+      "kind": "huggingface_history",
+      "url": "https://huggingface.co/datasets/livebench/instruction_following/commits/main",
+      "latest_public_dataset_commit_observed": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+      "latest_public_dataset_commit_date_observed": "2025-04-07",
+      "observation_date": "2026-10-05"
+    },
+    {
+      "kind": "public_diagnostic",
+      "url": "https://huggingface.co/datasets/allenai/IFBench_test",
+      "fact": "PUBLIC_ROWS_SUPPORT_BASE_REQUEST_TO_HIDDEN_FIELD_HYPOTHESIS_ONLY"
+    }
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_LIVEBENCH_2026_06_25_TERMINAL_POPULATION_EQUALS_PUBLIC_ALLENAI_IFBENCH_TEST",
+    "NO_CLAIM_THE_TWO_HIDDEN_STATE_RESIDUALS_ARE_CLOSED",
+    "NO_CLAIM_THE_PUBLIC_HF_HEAD_IS_THE_DATA_SOURCE_USED_FOR_THE_PUBLISHED_2026_LEADERBOARD",
+    "NO_TERMINAL_ROWS_READ",
+    "NO_TERMINAL_KWARGS_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_read": 0,
+    "terminal_kwargs_read": 0,
+    "terminal_instruction_lists_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
