@@ -1,0 +1,33 @@
+name: Verify hidden evaluator monotone coupling
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/hidden_evaluator_monotone_coupling_v1.py"
+      - "canonical/tests/test_hidden_evaluator_monotone_coupling_v1.py"
+      - "canonical/governance/HIDDEN_EVALUATOR_MONOTONE_COUPLING_DOMINANCE_V1.json"
+      - ".github/workflows/verify-hidden-evaluator-monotone-coupling.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/hidden_evaluator_monotone_coupling_v1.py"
+      - "canonical/tests/test_hidden_evaluator_monotone_coupling_v1.py"
+      - "canonical/governance/HIDDEN_EVALUATOR_MONOTONE_COUPLING_DOMINANCE_V1.json"
+      - ".github/workflows/verify-hidden-evaluator-monotone-coupling.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify monotone coupling theorem kernel
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_hidden_evaluator_monotone_coupling_v1
