@@ -8,6 +8,13 @@ on:
       - "canonical/tests/test_synthesis_grounded_expression_ir_v1.py"
       - "canonical/governance/SYNTHESIS_C2_GROUNDED_EXPRESSION_BOUNDED_ROUTE_20261005_V2.json"
       - ".github/workflows/verify-synthesis-grounded-expression-v1.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/synthesis_grounded_expression_ir_v1.py"
+      - "canonical/tests/test_synthesis_grounded_expression_ir_v1.py"
+      - "canonical/governance/SYNTHESIS_C2_GROUNDED_EXPRESSION_BOUNDED_ROUTE_20261005_V2.json"
+      - ".github/workflows/verify-synthesis-grounded-expression-v1.yml"
   workflow_dispatch:
 
 permissions:
