@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_INFORMATION_GAIN_KERNEL_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_RATIONAL_INFORMATION_GAIN_COMPARISON_KERNEL_INSTALLED__LOCAL_9_OF_9_TEST_PASS__INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_PENDING__ZERO_CREDIT",
+  "objective": "Turn the registry assertion EXACT_INFORMATION_GAIN_WHEN_BELIEF_AND_OBSERVATION_MODEL_EXPLICIT into a content-addressable deterministic implementation boundary usable by scientific-hypothesis residual factorization without numerical-log approximation.",
+  "implementation": {
+    "path": "canonical/runtime/exact_information_gain.py",
+    "git_blob_sha": "940c86d7368f1eae6bef2404c0e8cf532a668d85"
+  },
+  "tests": {
+    "path": "canonical/tests/test_exact_information_gain.py",
+    "git_blob_sha": "b754543acd18b25dac4002b47a31604f4fb50afd"
+  },
+  "theorem": {
+    "domain": "Finite explicit hypothesis set; exact rational prior; exact rational observation likelihoods for each candidate test.",
+    "mutual_information_form": "I(H;O)=sum_{h,o} p(h,o) ln(p(h,o)/(p(h)p(o)))",
+    "exact_comparison_reduction": [
+      "For candidate tests A and B, collect the rational coefficients of each ln(r) term in I_A-I_B.",
+      "Clear all coefficient denominators with positive integer D.",
+      "Then D*(I_A-I_B)=ln(R) where R is an exactly computable positive rational product of rational bases raised to integer exponents.",
+      "Because ln is strictly increasing, sign(I_A-I_B)=sign(R-1).",
+      "Therefore pairwise ordering requires no floating-point logarithm and admits a rational comparison certificate."
+    ],
+    "exact_value_claim": "NO_NUMERIC_EXACT_REAL_LOG_VALUE_IS_CLAIMED__THE_KERNEL_PROVES_EXACT_ORDERING_AND_EMITS_A_MACHINE_CHECKABLE_RATIONAL_SIGN_WITNESS."
+  },
+  "interfaces": [
+    "information_gain_log_terms",
+    "compare_information_gain",
+    "comparison_certificate",
+    "rank_tests_by_information_gain"
+  ],
+  "fail_closed_rules": [
+    "FLOAT_PROBABILITIES_REJECTED",
+    "PRIOR_MUST_SUM_EXACTLY_TO_ONE",
+    "EVERY_LIKELIHOOD_ROW_MUST_SUM_EXACTLY_TO_ONE",
+    "LIKELIHOOD_HYPOTHESIS_KEYS_MUST_EQUAL_PRIOR_KEYS",
+    "NEGATIVE_PROBABILITY_REJECTED"
+  ],
+  "local_verification": {
+    "environment": "ChatGPT isolated Python harness",
+    "pytest_result": "9 passed",
+    "elapsed_seconds": 0.03,
+    "role": "AUTHOR_SIDE_PRECOMMIT_CHECK_ONLY__NOT_INDEPENDENT_PUBLIC_RUNNER_RECEIPT"
+  },
+  "scientific_factorization_effect": {
+    "source": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_RESIDUAL_FACTORIZATION_20261005_V1.json",
+    "if_independently_verified": "DELETE_MATCHED_OPUS55_SCORING_FOR_INFORMATION_GAIN_ARITHMETIC_AND_ORDERING_WHEN_EXPLICIT_RATIONAL_MODEL_PRECONDITIONS_HOLD",
+    "residual_preserved": [
+      "HYPOTHESIS_GENERATION",
+      "QUESTION_GENERATION",
+      "SEMANTIC_COHERENCE",
+      "SCIENTIFIC_NONTRIVIALITY",
+      "FALSIFIABILITY_SEMANTICS",
+      "TEST_FEASIBILITY_WHEN_NOT_EXPLICITLY_ENCODED",
+      "INFERENCE_OF_PRIORS_OR_OBSERVATION_LIKELIHOODS_FROM_OPEN_ENDED_EVIDENCE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OPEN_ENDED_HYPOTHESIS_GENERATION_IS_SOLVED",
+    "NO_CLAIM_INFORMATION_GAIN_IS_EXACTLY_ORDERABLE_WHEN_PRIORS_OR_LIKELIHOODS_ARE_NOT_EXPLICIT_EXACT_RATIONALS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_UNTIL_INDEPENDENT_VERIFICATION_AND_CANONICAL_BINDING",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
