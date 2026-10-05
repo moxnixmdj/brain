@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_CEILING_TARGET_PRECEDENCE_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__REMOVE_STRUCTURED_METHOD_UNIVERSAL_CEILING_FROM_MANDATORY_TERMINAL_CRITICAL_PATH__PRESERVE_OPTIONAL_EVIDENCE_ROUTE__ZERO_CREDIT",
+  "objective": "Resolve scheduling conflict between the structured-method universal-ceiling priority activation and the newer target-conditioned proxy reconciliation.",
+  "authorities": {
+    "older_structured_method_priority": {
+      "path": "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CEILING_ROUTE_ACTIVATION_V1.json",
+      "activation_commit": "9a43903f4dd8556d0577971fa526ee639935f06b",
+      "effect": "PRIORITIZE_INDEPENDENT_FORMAL_VERIFICATION_OF_STRUCTURED_METHOD_FINITE_DAG_CEILING_THEOREM"
+    },
+    "newer_target_conditioned_proxy_authority": {
+      "path": "canonical/governance/BENCHMARK_PROXY_TARGET_RECONCILIATION_HLE_REBASE_ACTIVATION_V1.json",
+      "activation_commit": "05d0751713585902116eee7c2d37c62f11f0188f",
+      "effect": "ONE_EXPLICIT_TARGET_MECHANISM_EDGE_ONLY__BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001::COMPUTER_AND_BROWSER_USE"
+    },
+    "direct_target_entailment_guard": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json",
+      "activation_commit": "69f3c05e6be905c3d3a17f4a0d024f025e96547c",
+      "rule": "NO_NEW_REALITY_OR_MANDATORY_MECHANISM_PROOF_BEFORE_TARGET_ENTAILMENT"
+    },
+    "five_to_one_mechanism_reduction": {
+      "path": "canonical/governance/FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_ACTIVATION_20261005_V1.json",
+      "activation_commit": "a4cfdd0c1d75e3407f43e8f6f587ba4acb4c5395",
+      "structured_method_state": "QUARANTINED_FROM_MANDATORY_SPECIFIC_MECHANISM_STATUS"
+    }
+  },
+  "recomputation": {
+    "structured_method_behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "target_entailment_currently_proved": false,
+    "current_exact_target_entailed_mechanism_edges": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001::COMPUTER_AND_BROWSER_USE"
+    ],
+    "structured_method_is_in_current_exact_target_entailed_mechanism_set": false,
+    "formal_ceiling_theorem_may_be_useful_as_optional_sufficient_evidence": true,
+    "formal_ceiling_theorem_is_mandatory_for_terminal_acceptance": false
+  },
+  "scheduler_delta": {
+    "delete_from_mandatory_priority": [
+      "INDEPENDENT_FORMAL_VERIFICATION_OF_STRUCTURED_METHOD_FINITE_DAG_CEILING_THEOREM"
+    ],
+    "preserve_as_optional": [
+      "STRUCTURED_METHOD_UNIVERSAL_PERFORMANCE_CEILING_CANDIDATE_V1",
+      "STRUCTURED_METHOD_UNIVERSAL_CEILING_PREMISE_CONNECTOR_VERIFICATION_20261005_V1"
+    ],
+    "wake_condition": "ONLY_IF_A_NEW_VERIFIED_TARGET_ENTAILMENT_RECEIPT_MAKES_STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001_NECESSARY_OR_IF_THE_OPTIONAL_PROOF_DIRECTLY_CLOSES_AN_ALREADY_MANDATORY_OBSERVABLE_TARGET_WITH_LOWER_COST_THAN_ALL_OTHER_ROUTES",
+    "fresh_reality_delta": 0
+  },
+  "precedence_rule": "TARGET_MEMBERSHIP_AND_OBSERVABLE_ACCEPTANCE_REQUIREMENTS_PRECEDE_IMPLEMENTATION_OR_MECHANISM_PROOF_SCHEDULING",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_STRUCTURED_METHOD_THEOREM_IS_FALSE",
+    "NO_CLAIM_STRUCTURED_METHOD_CAPABILITY_IS_USELESS",
+    "NO_TARGET_OR_THRESHOLD_DELETION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
