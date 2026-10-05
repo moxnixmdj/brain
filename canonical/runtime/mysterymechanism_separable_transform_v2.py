@@ -338,6 +338,7 @@ def predict(candidate: Mapping[str, Any], point: Mapping[str, Any]) -> float:
     return v1.predict(candidate, point)
 
 
+
 def solve(
     rows: Sequence[Mapping[str, Any]],
     *,
@@ -346,27 +347,37 @@ def solve(
     validation_index: int = -1,
     fit_threshold: float = 0.05,
 ) -> dict[str, Any]:
-    """Return an executable candidate only through the prospective-safe route."""
+    """Prospectively audit first; refine with the final row only after it passes.
+
+    The reserved observation is never allowed to rescue a model that failed to
+    predict it prospectively.  Once the pre-final structure passes that audit,
+    the observation is no longer wasted: V1 may reuse it as an active
+    discriminator to refine the final structure.  This improves capability
+    without mislabeling post-observation refinement as independent validation.
+    """
     threshold = sparse._finite(fit_threshold, "fit_threshold")
     if threshold <= 0:
         raise ProspectiveSelectionError("FIT_THRESHOLD_INVALID")
-    discovery = discover(
+
+    audit = discover(
         rows,
         bounds=bounds,
         target=target,
         validation_index=validation_index,
     )
-    candidate = discovery.get("candidate")
-    if candidate is None:
+    audit_candidate = audit.get("candidate")
+    if audit_candidate is None:
         return {
             "schema": SCHEMA,
-            "status": "FAIL_CLOSED__NO_PROSPECTIVELY_VALIDATED_SEPARABLE_CANDIDATE",
+            "status": "FAIL_CLOSED__PROSPECTIVE_AUDIT_FAILED__NO_REFINEMENT",
+            "route": "PROSPECTIVE_AUDIT_THEN_ACTIVE_REFINEMENT",
             "candidate": None,
             "expression": None,
             "fit_threshold": threshold,
-            "discovery_status": discovery["status"],
-            "selected_prevalidation": discovery.get("selected_prevalidation"),
-            "prospective_validation_nrmse": discovery.get("prospective_validation_nrmse"),
+            "audit_status": audit["status"],
+            "selected_prevalidation": audit.get("selected_prevalidation"),
+            "prospective_validation_nrmse": audit.get("prospective_validation_nrmse"),
+            "final_row_reused_for_refinement": False,
             "persistent_learned_bytes": 0,
             "external_learned_capability_calls": 0,
             "acceptance_credit_delta": 0,
@@ -374,21 +385,24 @@ def solve(
             "capability_credit_delta": 0,
             "ownership_credit_delta": 0,
         }
-    conservative = max(
-        float(candidate["fit_nrmse"]),
-        float(candidate["inner_loo_nrmse"]),
-        float(candidate["prospective_validation_nrmse"]),
+
+    audit_conservative = max(
+        float(audit_candidate["fit_nrmse"]),
+        float(audit_candidate["inner_loo_nrmse"]),
+        float(audit_candidate["prospective_validation_nrmse"]),
     )
-    if not math.isfinite(conservative) or conservative > threshold:
+    if not math.isfinite(audit_conservative) or audit_conservative > threshold:
         return {
             "schema": SCHEMA,
-            "status": "FAIL_CLOSED__PROSPECTIVE_ERROR_ABOVE_SOLVER_THRESHOLD",
+            "status": "FAIL_CLOSED__PROSPECTIVE_AUDIT_ABOVE_SOLVER_THRESHOLD__NO_REFINEMENT",
+            "route": "PROSPECTIVE_AUDIT_THEN_ACTIVE_REFINEMENT",
             "candidate": None,
             "expression": None,
             "fit_threshold": threshold,
-            "conservative_nrmse": conservative,
-            "selected_prevalidation": discovery["selected_prevalidation"],
-            "prospective_validation_nrmse": discovery["prospective_validation_nrmse"],
+            "audit_conservative_nrmse": audit_conservative,
+            "selected_prevalidation": audit["selected_prevalidation"],
+            "prospective_validation_nrmse": audit["prospective_validation_nrmse"],
+            "final_row_reused_for_refinement": False,
             "persistent_learned_bytes": 0,
             "external_learned_capability_calls": 0,
             "acceptance_credit_delta": 0,
@@ -396,16 +410,58 @@ def solve(
             "capability_credit_delta": 0,
             "ownership_credit_delta": 0,
         }
+
+    # The information barrier has now done its job.  Reuse the observed final
+    # result for capability refinement, but never call the resulting metric an
+    # independent validation score.
+    refined = v1.discover(
+        rows,
+        bounds=bounds,
+        target=target,
+        validation_index=validation_index,
+    )
+    refined_candidate = refined.get("candidate")
+    if refined_candidate is None:
+        chosen_candidate = audit_candidate
+        chosen_expression = audit["expression"]
+        chosen_route = "PROSPECTIVE_AUDIT_CANDIDATE"
+        refined_visible_error = math.inf
+    else:
+        refined_visible_error = max(
+            float(refined_candidate.get("fit_nrmse", math.inf)),
+            float(refined_candidate.get("reserved_validation_nrmse", math.inf)),
+            float(refined_candidate.get("all_row_nrmse", math.inf)),
+        )
+        if (
+            math.isfinite(refined_visible_error)
+            and refined_visible_error <= threshold
+            and refined_visible_error <= audit_conservative
+        ):
+            chosen_candidate = refined_candidate
+            chosen_expression = refined["expression"]
+            chosen_route = "PROSPECTIVE_AUDIT_THEN_ACTIVE_REFINEMENT"
+        else:
+            chosen_candidate = audit_candidate
+            chosen_expression = audit["expression"]
+            chosen_route = "PROSPECTIVE_AUDIT_CANDIDATE"
+
     return {
         "schema": SCHEMA,
-        "status": "CANDIDATE_READY__PROSPECTIVE_SELECTION_SAFE__UNVERIFIED_PRIVATE_SCORE",
-        "route": "SEPARABLE_BILINEAR_PROSPECTIVE_HOLDOUT",
-        "candidate": candidate,
-        "expression": discovery["expression"],
-        "conservative_nrmse": conservative,
+        "status": "CANDIDATE_READY__PROSPECTIVE_AUDIT_PASSED__ZERO_PRIVATE_SCORE_CREDIT",
+        "route": chosen_route,
+        "candidate": chosen_candidate,
+        "expression": chosen_expression,
+        "audit_conservative_nrmse": audit_conservative,
+        "refined_visible_error_nonindependent": (
+            None if not math.isfinite(refined_visible_error)
+            else float(refined_visible_error)
+        ),
         "fit_threshold": threshold,
-        "validation_index": discovery["validation_index"],
-        "validation_observation_used_for_selection": False,
+        "validation_index": audit["validation_index"],
+        "audit_passed_before_refinement": True,
+        "validation_observation_used_for_audit_selection": False,
+        "final_row_reused_for_refinement": chosen_route == "PROSPECTIVE_AUDIT_THEN_ACTIVE_REFINEMENT",
+        "final_row_refinement_metric_is_independent_validation": False,
         "persistent_learned_bytes": 0,
         "external_learned_capability_calls": 0,
         "dynamic_code_execution": False,
@@ -416,7 +472,6 @@ def solve(
         "capability_credit_delta": 0,
         "ownership_credit_delta": 0,
     }
-
 
 def choose_final_experiment(
     rows: Sequence[Mapping[str, Any]],
