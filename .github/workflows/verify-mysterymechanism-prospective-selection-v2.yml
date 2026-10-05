@@ -20,15 +20,15 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.12.10'
+          python-version: '3.12'
       - name: Run targeted tests with durable diagnostic
         id: targeted
         shell: bash
         run: |
           set +e
-          python -m unittest -v canonical.tests.test_mysterymechanism_separable_transform_v2 > prospective-selection-v2-pytest.log 2>&1
+          python -m unittest canonical.tests.test_mysterymechanism_separable_transform_v2 -v > prospective-selection-v2-pytest.log 2>&1
           code=$?
           cat prospective-selection-v2-pytest.log
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
