@@ -751,9 +751,16 @@
     "reopened_scope_incomplete_families": [],
     "authority": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "atomic_acceptance": {
-      "proved": 12,
-      "unresolved": 26,
-      "total": 38
+      "proved": 14,
+      "unresolved": 24,
+      "total": 38,
+      "current_ledger": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "current_ledger_git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+      "latest_closed_atoms": [
+        "LIVEBENCH_IF_GE_65_7",
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "terminal": false
     },
     "promotion_authority": false,
     "rule": "CURRENT_ACCEPTANCE_REQUIRES_SCOPE_COMPLETE_PROTOCOL_EVIDENCE__TOOL_DISCOVERY_CLOSED_BY_INDEPENDENT_ABSOLUTE_CEILING_PLUS_UNIVERSAL_FORMAL_SCOPE_PROOF__OWNERSHIP_SEPARATE"
