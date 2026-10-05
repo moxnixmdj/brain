@@ -31,6 +31,32 @@ from typing import Any, Iterator
 
 SCHEMA = "PROJECT_BRAIN_COMPOSITION_RUNTIME_CHANNEL_GUARD_V1"
 
+# Strict mode is intentionally small.  These actions execute entirely in the
+# in-process deterministic dispatcher and their acceptance-relevant state is
+# file/directory/env state observable by this guard.  Any action that can
+# delegate to third-party code, a child process, network I/O, or native code is
+# excluded until its own channel boundary is independently closed.
+STRICT_C1_ACTION_TYPES = frozenset({
+    "read_file",
+    "list_tree",
+    "search_text",
+    "write_json_records",
+    "assert_file_exists",
+    "assert_json_fields_equal",
+    "assert_text_contains_json_keys",
+    "project_browser_result_json",
+    "join_runtime_json_arrays",
+    "assert_runtime_json_join",
+    "aggregate_runtime_json_arrays",
+    "assert_runtime_json_aggregate",
+    "derive_grouped_records",
+    "assert_grouped_derived_records",
+    "select_ranked_record",
+    "assert_ranked_record",
+    "assert_hex_prefix_bucket",
+    "assert_collection_length_bucket",
+})
+
 
 class CompositionChannelError(RuntimeError):
     pass
@@ -204,6 +230,7 @@ def _directory_state(path: Path | None, label: str) -> dict[str, Any]:
 class Capture:
     repo_root: Path
     strict: bool = True
+    action_type: str | None = None
     file_reads: dict[str, dict[str, Any]] = field(default_factory=dict)
     directory_reads: dict[str, dict[str, Any]] = field(default_factory=dict)
     mutation_pre: dict[str, dict[str, Any]] = field(default_factory=dict)
@@ -214,6 +241,10 @@ class Capture:
     _receipt: dict[str, Any] | None = None
 
     def begin(self) -> None:
+        if self.strict and self.action_type not in STRICT_C1_ACTION_TYPES:
+            raise CompositionChannelError(
+                "STRICT_C1_ACTION_TYPE_UNAUDITED:" + str(self.action_type)
+            )
         env = {str(k): str(v) for k, v in os.environ.items()}
         self.ambient_input = {
             "cwd": str(Path.cwd().resolve()),
@@ -329,6 +360,8 @@ class Capture:
         dirs = [self.directory_reads[k] for k in sorted(self.directory_reads)]
         body = {
             "schema": SCHEMA,
+            "action_type": self.action_type,
+            "strict_action_type_audited": self.action_type in STRICT_C1_ACTION_TYPES,
             "ambient_input": self.ambient_input,
             "file_reads": reads,
             "directory_reads": dirs,
@@ -347,7 +380,10 @@ class Capture:
         body["native_escape_excluded"] = not any(
             x.get("event") == "native.escape" for x in self.forbidden_events
         )
-        body["closed_world_observed_subset"] = not self.forbidden_events
+        body["closed_world_observed_subset"] = (
+            not self.forbidden_events
+            and body["strict_action_type_audited"]
+        )
         body["status"] = "PASS" if body["closed_world_observed_subset"] else "FAIL_CLOSED"
         body["acceptance_credit_delta"] = 0
         self._finished = True
@@ -374,10 +410,17 @@ def ensure_audit_hook() -> None:
 
 @contextlib.contextmanager
 def capture_runtime_channels(
-    repo_root: str | os.PathLike[str], *, strict: bool = True
+    repo_root: str | os.PathLike[str],
+    *,
+    strict: bool = True,
+    action_type: str | None = None,
 ) -> Iterator[Capture]:
     ensure_audit_hook()
-    cap = Capture(Path(repo_root).resolve(), strict=bool(strict))
+    cap = Capture(
+        Path(repo_root).resolve(),
+        strict=bool(strict),
+        action_type=str(action_type) if action_type is not None else None,
+    )
     cap.begin()
     token = _ACTIVE.set(cap)
     try:
