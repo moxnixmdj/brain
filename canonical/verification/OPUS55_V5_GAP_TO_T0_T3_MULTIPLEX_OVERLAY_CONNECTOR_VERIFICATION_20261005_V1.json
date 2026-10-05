@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_V5_GAP_TO_T0_T3_MULTIPLEX_OVERLAY_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__SEVEN_SURVIVING_SCOPE_LEAVES_PLUS_CREATIVE_DIAGRAM_MULTILINGUAL_LONG_CONTEXT_EMBED_IN_EXISTING_T0_T3__ZERO_NEW_PORTFOLIOS_IF_REFROZEN_PREOUTCOME__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_V5_GAP_TO_T0_T3_MULTIPLEX_OVERLAY_V1.json",
+    "git_blob_sha": "1fc6f13d644ed88f37940487f1d3cfc41c7aca0a"
+  },
+  "authorities": {
+    "outer_portfolios": {
+      "path": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
+      "git_blob_sha": "7c49e3a44dc9a827e84a12f572ea6b8e9b2fa1f5"
+    },
+    "portfolio_bindings": {
+      "path": "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
+      "git_blob_sha": "8b439403a05b4a912f06a8866db25f6e53b52473"
+    },
+    "contract_proof_modes": {
+      "path": "canonical/governance/ACTIVE_CONTRACT_PROOF_MODE_CLASSIFICATION_V1.json",
+      "git_blob_sha": "0b15f465117add397d709ef725eb37d363643196"
+    },
+    "six_family_scope_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "fdc70d49bfe3f4691fab728f2016242632018ce4"
+    },
+    "multilingual_long_context": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+    },
+    "creative_diagram_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    }
+  },
+  "recomputed": {
+    "surviving_scope_leaf_count": 7,
+    "all_seven_behavior_ids_exist_in_active_contract_proof_mode_classification": true,
+    "portfolio_embedding": {
+      "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ],
+      "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+      ],
+      "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ]
+    },
+    "every_surviving_leaf_has_at_least_one_existing_portfolio": true,
+    "creative_text_and_diagram_family_union_is_already_inside_T1": true,
+    "multilingual_material_family_edges_embed_across_T0_T1_T2_T3": true,
+    "long_context_material_family_edges_embed_across_T0_T1_T2_after_boundary_repair": true,
+    "long_context_research_edge_not_inferred": true,
+    "required_new_outer_portfolio_count": 0,
+    "terminal_outcomes_observed_by_overlay": 0
+  },
+  "verified_theorem": "NO_NEW_OUTER_REALITY_PORTFOLIO_IS_REQUIRED_FOR_THE_CURRENT_V5_PROOF_BASIS_GAPS_IF_ALL_ADDED_TAGS_CASES_SCORERS_SCOPE_BINDINGS_AND_STOP_RULES_ARE_REFROZEN_BEFORE_ANY_AFFECTED_TERMINAL_OUTCOME_AND_EXISTING_T0_T3_PREQUALIFICATION_REMAINS_FAIL_CLOSED.",
+  "scheduler_effect": {
+    "delete": [
+      "OPEN_FIFTH_TERMINAL_PORTFOLIO_FROM_CURRENT_V5_GAPS",
+      "RUN_SEPARATE_MULTILINGUAL_CAMPAIGN_BEFORE_T0_T3_TAGGED_SLICE_EMBEDDABILITY_FAILS",
+      "RUN_SEPARATE_LONG_CONTEXT_CAMPAIGN_BEFORE_T0_T2_TAGGED_SLICE_EMBEDDABILITY_FAILS",
+      "DUPLICATE_SEVEN_SCOPE_LEAVES_PER_FAMILY"
+    ],
+    "activate": [
+      "REFREEZE_EXISTING_T0_T3_WITH_CURRENT_V5_OVERLAY_BEFORE_TERMINAL_OUTPUT",
+      "ADD_ONLY_MISSING_PREDECLARED_SCORERS_OR_CLEAN_CASES_INSIDE_THEIR_EXISTING_PORTFOLIOS",
+      "RECOMPUTE_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_AFTER_REFREEZE",
+      "EXECUTE_NO_TERMINAL_CASES_UNTIL_PREQUALIFICATION_AND_FRESH_REALITY_AUTHORITY_ALLOW"
+    ]
+  },
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_PUBLIC_RUNNER_ACCEPTANCE",
+    "NO_ACCEPTANCE_PREDICATE_IS_PROVED",
+    "NO_CLAIM_EXISTING_FROZEN_CASES_ALREADY_EXERCISE_NEW_SLICES",
+    "NO_MULTILINGUAL_LONG_CONTEXT_CREATIVE_OR_DIAGRAM_PARITY_CREDIT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
