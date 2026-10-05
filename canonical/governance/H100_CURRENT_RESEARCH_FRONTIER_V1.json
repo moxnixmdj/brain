@@ -363,6 +363,30 @@
       "raw_synthesis_attempts_executed": 0,
       "persistent_learned_bytes": 0,
       "deduction": "A_DETERMINISTIC_TYPED_CONTRACT_PLANNER_CAN_SELECT_THE_SHORTEST_VERIFIED_CAPABILITY_CHAIN_WITHOUT_TASK_VALUES_OR_IDS__THE_CURRENT_RESIDUAL_MOVES_TO_MINIMAL_PATCH_SEARCH_AFTER_A_VERIFIED_REGISTRY_MISS"
+    },
+    "minimal_patch_search_and_transfer": {
+      "status": "SEPARATE_RUNTIME_REIMPLEMENTATION_PASS__CUBIC_STRUCTURE_ELIGIBLE_FOR_REGISTRY_COMPILATION__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_MINIMAL_PATCH_SEARCH_PRECOMMIT_V1.json",
+      "candidate_runtime": "canonical/runtime/h100_minimal_patch_search_v1.py",
+      "separate_runtime_verification": "canonical/verification/H100_MINIMAL_PATCH_SEARCH_SEPARATE_RUNTIME_VERIFICATION_20261005_V1.json",
+      "selected_patch_id": "AFFINE_PLUS_X3",
+      "seed_holdout_nrmse": 1.593749614832299e-16,
+      "transfer_holdout_nrmse": 5.428536695859682e-16,
+      "transfer_acceptance_threshold_nrmse": 1e-8,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE_MINIMAL_FROZEN_THREE_PATCH_SEARCH_SELECTS_CUBIC_ONLY_AND_THE_SAME_STRUCTURE_TRANSFERS_TO_A_DISTINCT_PRECOMMITTED_TASK__THIS_SUPPORTS_THE_COMPILE_RATCHET_BUT_DOES_NOT_PROVE_OPEN_WORLD_PATCH_SEARCH"
+    },
+    "verified_capability_registry_v2_candidate": {
+      "status": "CANDIDATE_COMMITTED__INDEPENDENT_END_TO_END_EXECUTION_PENDING_DUE_CONNECTOR_TRANSPORT_BLOCK__NO_PROMOTION",
+      "runtime": "canonical/runtime/h100_verified_capability_registry_v2.py",
+      "tests": "canonical/tests/test_h100_verified_capability_registry_v2.py",
+      "added_capability": "CAP_AFFINE_CUBIC_V1",
+      "base_registry_entries": 7,
+      "candidate_registry_entries": 8,
+      "routing_order": "V1_VERIFIED_LIBRARY_THEN_VERIFIED_CUBIC_THEN_RAW_SEARCH",
+      "prior_verification": "canonical/verification/H100_MINIMAL_PATCH_SEARCH_SEPARATE_RUNTIME_VERIFICATION_20261005_V1.json",
+      "persistent_learned_bytes": 0,
+      "hard_nonclaim": "DO_NOT_TREAT_REGISTRY_V2_AS_INDEPENDENTLY_VERIFIED_UNTIL_END_TO_END_TESTS_EXECUTE_ON_AN_EXTERNAL_OR_DISTINCT_ISOLATED_CARRIER"
     }
   },
   "next_structural_residuals_ranked": [
@@ -373,8 +397,8 @@
     },
     {
       "rank": 2,
-      "residual": "MINIMAL_PATCH_SEARCH_AFTER_VERIFIED_LIBRARY_MISS_AND_TRANSFER_COMPILE_RATCHET",
-      "reason": "AUTONOMOUS_TYPED_PLAN_SELECTION_IS_NOW_SECOND_CARRIER_VERIFIED__THE_OUT_OF_LIBRARY_CUBIC_CONTROL_CLEANLY_REACHES_THE_RAW_SEARCH_BOUNDARY__THE_NEXT_INTERNAL H100 MOVE_IS_TO_SEARCH_A_SMALL_PATCH_GRAMMAR_COMPILE_THE_MINIMAL_VERIFIED_REPAIR_INTO_THE_LIBRARY_AND_RETEST_A_DISTINCT_FROZEN_TASK"
+      "residual": "INDEPENDENT_END_TO_END_REGISTRY_V2_CUBIC_RATCHET_VERIFICATION",
+      "reason": "MINIMAL_CUBIC_PATCH_SEARCH_AND_DISTINCT_TRANSFER_HAVE_A_SEPARATE_RUNTIME_PASS__REGISTRY_V2_CANDIDATE_IS_COMMITTED__THE_REMAINING INTERNAL A GATE IS AN INDEPENDENT END_TO_END TEST THAT THE PREVIOUSLY_MISSED_CUBIC_TRANSFER BECOMES_A_ZERO_RAW_SEARCH_LIBRARY_HIT WHILE LEGACY_HITS_AND_UNVERIFIED_QUARTIC_MISS_REMAIN_CORRECT"
     },
     {
       "rank": 3,
@@ -471,7 +495,11 @@
     "predeclared_multi_capability_composition_verified": true,
     "predeclared_multi_capability_composition_scope": "THREE_POSITIVE_SYNTHETIC_TASKS_PLUS_ONE_FAIL_CLOSED_CONTROL",
     "autonomous_multi_capability_plan_selection_verified": true,
-    "autonomous_multi_capability_plan_scope": "MONOTONIC_TYPED_RESOURCE_GRAPH__NO_SIDE_EFFECTS__RETROSPECTIVE_FROZEN_COMPOSITION_TASKS"
+    "autonomous_multi_capability_plan_scope": "MONOTONIC_TYPED_RESOURCE_GRAPH__NO_SIDE_EFFECTS__RETROSPECTIVE_FROZEN_COMPOSITION_TASKS",
+    "minimal_patch_search_distinct_transfer_passed": true,
+    "minimal_patch_search_scope": "THREE_FROZEN_POLYNOMIAL_PATCHES__ONE_DISTINCT_CUBIC_TRANSFER_TASK",
+    "registry_v2_cubic_candidate_committed": true,
+    "registry_v2_cubic_independently_verified": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
