@@ -21,7 +21,7 @@ class Tests(unittest.TestCase):
             source.write_text("alpha", encoding="utf-8")
             out = root / "out.txt"
 
-            with capture_runtime_channels(root, strict=True) as cap:
+            with capture_runtime_channels(root, strict=True, action_type="write_json_records") as cap:
                 value = source.read_text(encoding="utf-8")
                 list(root.iterdir())
                 out.write_text(value + "-beta", encoding="utf-8")
@@ -45,7 +45,7 @@ class Tests(unittest.TestCase):
 
     def test_ambient_environment_is_content_bound_without_exposing_values(self):
         with tempfile.TemporaryDirectory() as td:
-            with capture_runtime_channels(td, strict=True) as cap:
+            with capture_runtime_channels(td, strict=True, action_type="read_file") as cap:
                 pass
             receipt = cap.finish()
             ambient = receipt["ambient_input"]
@@ -58,15 +58,26 @@ class Tests(unittest.TestCase):
                 CompositionChannelError,
                 "UNMEDIATED_RUNTIME_CHANNEL:process.spawn",
             ):
-                with capture_runtime_channels(td, strict=True):
+                with capture_runtime_channels(td, strict=True, action_type="read_file"):
                     subprocess.run(
                         ["definitely-not-executed-because-audit-hook-blocks"],
                         check=False,
                     )
 
+    def test_unaudited_action_type_fails_closed_in_strict_mode(self):
+        with tempfile.TemporaryDirectory() as td:
+            with self.assertRaisesRegex(
+                CompositionChannelError,
+                "STRICT_C1_ACTION_TYPE_UNAUDITED:invoke_capability",
+            ):
+                with capture_runtime_channels(
+                    td, strict=True, action_type="invoke_capability"
+                ):
+                    pass
+
     def test_non_strict_mode_reports_but_does_not_promote_forbidden_event(self):
         with tempfile.TemporaryDirectory() as td:
-            with capture_runtime_channels(td, strict=False) as cap:
+            with capture_runtime_channels(td, strict=False, action_type="invoke_capability") as cap:
                 cap.observe("socket.connect", (None, ("example.test", 443)))
             receipt = cap.finish()
             self.assertEqual(receipt["status"], "FAIL_CLOSED")
