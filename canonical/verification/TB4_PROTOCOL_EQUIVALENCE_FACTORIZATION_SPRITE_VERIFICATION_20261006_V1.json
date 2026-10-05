@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_PROTOCOL_EQUIVALENCE_FACTORIZATION_SPRITE_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_EXISTING_SPRITE_REPLAY_PASS__6_OF_6__RESOURCE_ONLY_AND_PUBLIC_CALIBRATION_SHORTCUTS_FAIL_CLOSED__ZERO_CREDIT",
+  "subjects": {
+    "factorization": {
+      "path": "canonical/governance/TB4_PROTOCOL_EQUIVALENCE_FACTORIZATION_20261006_V1.json",
+      "git_blob_sha": "1b066d671db1c3e8f53d3641dd0d815717781bdd"
+    },
+    "runtime": {
+      "path": "canonical/runtime/tb4_protocol_equivalence_factorization_v1.py",
+      "git_blob_sha": "05294abae815be66e0a4b68fd19cecf449728447"
+    },
+    "tests": {
+      "path": "canonical/tests/test_tb4_protocol_equivalence_factorization_v1.py",
+      "git_blob_sha": "f8d70a4aa91629240c55d84faaaee142b8cf5669"
+    },
+    "current_carrier_receipt": {
+      "path": "canonical/verification/BUILDKITE_ZERO_CASE_RUNTIME_RECEIPT_20261006_V1.json",
+      "git_blob_sha": "5a10884bc32d3c003a26306ec67bbc902b7338bb"
+    },
+    "frozen_target_binding": {
+      "path": "canonical/governance/OPUS55_SCORE_TARGET_TUPLE_BINDINGS_20261005_V1.json",
+      "git_blob_sha": "9bbd45f066ab94fa3f5110b9cc5efcd4118d1367"
+    }
+  },
+  "environment": {
+    "carrier": "EXISTING_INDEPENDENT_RUNNING_SPRITE",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "package_install_performed": false,
+    "exact_branch_bytes_replayed": true,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "tests_run": 6,
+    "failures": 0,
+    "errors": 0,
+    "resource_only_fails_closed": true,
+    "carrier_only_fails_closed": true,
+    "target_only_fails_closed": true,
+    "public_calibration_fails_closed": true,
+    "fallback_mismatch_fails_closed": true,
+    "exact_conjunction_can_pass": true,
+    "protocol_equivalence_currently_proved": false,
+    "terminal_credit_delta": 0
+  },
+  "truth_boundary": {
+    "terminal_cases_executed": 0,
+    "task_instructions_read": 0,
+    "solution_files_read": 0,
+    "test_payload_files_read": 0,
+    "fresh_target_outcomes_observed": 0
+  },
+  "deduction": "TB4_PROTOCOL_EQUIVALENCE_IS_A_CONJUNCTION_OF_CARRIER_RUNTIME_COMPATIBILITY__EXACT_CARRIER_INVARIANCE__AND_EXACT_FROZEN_TARGET_HARNESS_IDENTITY__THE_CURRENT_BUILDKITE_RECEIPT_DISCHARGES_ONLY_RUNTIME_SUBPREMISES",
+  "hard_nonclaims": [
+    "NO_TB4_PROTOCOL_EQUIVALENCE_PROVED",
+    "NO_ANTHROPIC_PRIVATE_HARNESS_IDENTITY_INFERRED",
+    "NO_TERMINAL_BENCHMARK_CASE_EXECUTED",
+    "NO_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
