@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_V22_SCORE_TARGET_TUPLE_EQUIVALENCE_SATURATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__14_SCORE_BINDINGS__13_EXACT_TARGET_TUPLES__ONLY_AA_BRIEFCASE_DUPLICATES__ZERO_CREDIT",
+  "exact_inputs": {
+    "target_tuple_bindings": {
+      "path": "canonical/governance/OPUS55_SCORE_TARGET_TUPLE_BINDINGS_20261005_V1.json",
+      "git_blob_sha": "9bbd45f066ab94fa3f5110b9cc5efcd4118d1367"
+    },
+    "acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    }
+  },
+  "equivalence_key": [
+    "benchmark",
+    "benchmark_version",
+    "model",
+    "effort",
+    "evaluator",
+    "harness",
+    "fallback_policy",
+    "unit",
+    "score"
+  ],
+  "recomputation": {
+    "score_binding_count": 14,
+    "exact_target_tuple_class_count": 13,
+    "duplicate_tuple_class_count": 1,
+    "duplicate": {
+      "predicates": [
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "benchmark": "AA-Briefcase",
+      "benchmark_version": "1.1",
+      "score": 1822,
+      "unit": "Elo",
+      "existing_bridge": "canonical/runtime/aa_briefcase_dual_predicate_result_bridge_v1.py"
+    },
+    "singleton_predicates": [
+      "CODING_TB4_GE_66_4",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "HLE_TOOLS_GE_67_7",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "PROWORK_GDPVAL_GE_1846",
+      "AUTOMATIONBENCH_GE_40",
+      "MYSTERYMECHANISM_GE_49_55",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "CODING_CURSORBENCH_GE_57_8",
+      "TB_SCIENCE_GE_58_7"
+    ]
+  },
+  "deduction": "AA_BRIEFCASE_IS_THE_ONLY_CURRENT_EXACT_SCORE_TUPLE_RESULT_REUSE_OPPORTUNITY__REPEATING_TUPLE_EQUIVALENCE_SEARCH_ON_UNCHANGED_BINDINGS_HAS_ZERO_INFORMATION_GAIN",
+  "scheduler_delta": {
+    "delete": [
+      "REPEAT_SCORE_TARGET_TUPLE_DUPLICATE_SEARCH_WITH_UNCHANGED_BINDINGS"
+    ],
+    "preserve": [
+      "ONE_AA_BRIEFCASE_RESULT_FOR_TWO_ATOMS"
+    ],
+    "wake_conditions": [
+      "OPUS55_SCORE_TARGET_TUPLE_BINDINGS_GIT_BLOB_CHANGES",
+      "A_NEW_SCORE_PREDICATE_IS_ADDED",
+      "AN_EXISTING_SCORE_PREDICATE_TARGET_TUPLE_IS_REBOUND"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SINGLETON_SCORE_ATOMS_REQUIRE_SEPARATE_PHYSICAL_EXECUTIONS_IF_A_STRONGER_PROOF_CAN_DISCHARGE_THEM",
+    "NO_CLAIM_ANY_EXTERNAL_RESULT_RECEIPT_EXISTS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
