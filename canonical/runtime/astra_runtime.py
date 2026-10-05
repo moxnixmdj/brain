@@ -6409,6 +6409,58 @@ def run_goal(step, mission):
     return _stamp_cognition_provenance(_run_goal_unstamped(step, mission))
 
 
+
+def _activate_root3_subprocess_boundary():
+    """Install or verify the exact current fail-closed Root3 subprocess boundary."""
+    from canonical.runtime import root3_subprocess_mediator_v2 as mediator
+    from canonical.runtime import root3_strict_current_bootstrap_v2 as bootstrap
+    from canonical.runtime import root3_two_class_attempt_authorizer_v1 as authorizer
+
+    expected_bound=set(bootstrap.BOUND_EFFECT_CLASSES)
+    expected_denied=set(bootstrap.DENIED_EFFECT_CLASSES)
+    status=mediator.status()
+    if status.get("installed"):
+        bound=set(status.get("bound_effect_class_executors") or [])
+        denied=set(status.get("unbound_effect_classes") or [])
+        if (
+            status.get("authority_id")!=authorizer.AUTHORITY_ID
+            or bound!=expected_bound
+            or denied!=expected_denied
+            or status.get("run_guard_active") is not True
+            or status.get("popen_guard_active") is not True
+        ):
+            raise Blocker(
+                "ROOT3_PREEXISTING_SUBPROCESS_BOUNDARY_MISMATCH:"
+                +json.dumps({
+                    "authority_id":status.get("authority_id"),
+                    "bound_effect_classes":sorted(bound),
+                    "denied_effect_classes":sorted(denied),
+                    "run_guard_active":status.get("run_guard_active"),
+                    "popen_guard_active":status.get("popen_guard_active"),
+                },sort_keys=True)
+            )
+        return {
+            "status":"REUSED_EXACT_CURRENT_ROOT3_BOUNDARY",
+            "authority_id":authorizer.AUTHORITY_ID,
+            "bound_effect_classes":sorted(bound),
+            "denied_effect_classes":sorted(denied),
+        }
+
+    installed=bootstrap.install_current(
+        authorizer.authorize,
+        authority_id=authorizer.AUTHORITY_ID,
+    )
+    bound=set(installed.get("bound_effect_classes") or [])
+    denied=set(installed.get("denied_effect_classes") or [])
+    if bound!=expected_bound or denied!=expected_denied:
+        raise Blocker("ROOT3_BOOTSTRAP_INSTALL_POSTCONDITION_MISMATCH")
+    return {
+        "status":"INSTALLED_EXACT_CURRENT_ROOT3_BOUNDARY",
+        "authority_id":authorizer.AUTHORITY_ID,
+        "bound_effect_classes":sorted(bound),
+        "denied_effect_classes":sorted(denied),
+    }
+
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
     mission=mission or {}
@@ -6462,6 +6514,7 @@ def main():
     mid=mission["mission_id"]
     mission_sha256=sha_file(mission_path)
     mission["_runtime_mission_path"]=mission_rel
+    _activate_root3_subprocess_boundary()
 
     # Continuous OBS is an execution invariant, not an external monitor.
     # Every material step revalidates canonical state and all declared volatile
