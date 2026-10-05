@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__MINIMUM_EXISTING_FAMILY_BASIS_REPAIR__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V1.json",
+    "git_blob_sha": "7c7a91cc8c8aab079b6f95a36930c97902f0c9d3"
+  },
+  "checks": {
+    "exactly_two_contracts": true,
+    "families_unchanged": true,
+    "atomic_registry_unchanged": true,
+    "mappings_exact": true,
+    "root1_not_reopened": true,
+    "zero_credit": true,
+    "no_authority": true,
+    "still_open": true
+  },
+  "deduction": [
+    "CREATIVE_AND_DIAGRAM_SURFACES_CAN_BE_EXPRESSED_AS_TWO_EXPLICIT_BEHAVIORAL_ACCEPTANCE_OBLIGATIONS_WITHIN_EXISTING_COMMUNICATION_AND_SYNTHESIS_AND_ARTIFACT_CREATION_FAMILIES",
+    "NO_20TH_FAMILY_IS_REQUIRED_BY_THE_CURRENT_ANALYSIS",
+    "NO_39TH_OR_40TH_ATOMIC_PREDICATE_IS_ADDED_BY_THIS_BASIS_REPAIR",
+    "ACTUAL_CREATIVE_AND_DIAGRAM_EQUAL_OR_BETTER_RESULTS_REMAIN_OPEN_AND_MUST_BE_PROVED_SEPARATELY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
