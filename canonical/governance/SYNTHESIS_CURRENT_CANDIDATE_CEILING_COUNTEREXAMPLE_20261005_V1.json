@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_CURRENT_CANDIDATE_CEILING_COUNTEREXAMPLE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_P3_V3_GLOBAL_MATCHED_QUALITY_CEILING_1_FALSIFIED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "active_v16_group": "F_SYNTHESIS_COMPARATOR_CAPACITY_OR_STRONGER_PROOF",
+  "objective": "Replace the vague current-candidate universal-ceiling search with a constructive counterexample: the current P3 v3 candidate can select a material threshold claim from two provenance-distinct scalar evidence units even in an admissible authority world where the selected claim is unsupported; the frozen matched-quality aggregator then hard-zeros the case.",
+  "pinned_authorities": {
+    "current_candidate": {
+      "path": "canonical/runtime/p3_information_safe_candidate_v3.py",
+      "git_blob_sha": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a"
+    },
+    "typed_countermodel_partition": {
+      "path": "canonical/governance/SYNTHESIS_P3_TYPED_INPUT_DOMAIN_COUNTERMODEL_PARTITION_20261005_V1.json",
+      "git_blob_sha": "4150a16f4c20bf0bfcaa23d31b0b03af69417b2b",
+      "residual": "SYNTHESIS_SCOPE_R6_PROVENANCE_AND_UNIT_SENSITIVE_SUPPORT"
+    },
+    "matched_quality_aggregator": {
+      "path": "canonical/runtime/synthesis_matched_quality_metric_v1.py",
+      "git_blob_sha": "116b7394f4b0a6845056c798e966f4cc26f294bf"
+    },
+    "active_truth_repair": {
+      "path": "canonical/governance/SYNTHESIS_HIDDEN_EVALUATOR_ROUTE_TRUTH_REPAIR_ACTIVATION_V1.json",
+      "git_blob_sha": "ac12d96b7d060ba996f1f2672d66f05da628dd93"
+    }
+  },
+  "constructive_witness": {
+    "claim": {
+      "claim_id": "C",
+      "metric": "M",
+      "relation": "at_least",
+      "threshold": 50,
+      "kind": "risk"
+    },
+    "evidence": [
+      {
+        "metric": "M",
+        "value": 60,
+        "unit": "index_point",
+        "provenance": ["SRC_A"]
+      },
+      {
+        "metric": "M",
+        "value": 40,
+        "unit": "index_point",
+        "provenance": ["SRC_B"]
+      }
+    ],
+    "candidate_observable_behavior": "GROUPS_BOTH_ROWS_ONLY_BY_METRIC__VOTES_TRUE_FALSE__TIE_COUNTS_AS_SUPPORTED__SELECTS_REQUIRED_CLAIM_C",
+    "admissible_authority_world": "SRC_A_INADMISSIBLE__SRC_B_ADMISSIBLE",
+    "correct_claim_status_in_that_world": "UNSUPPORTED",
+    "frozen_metric_consequence": "UNSUPPORTED_MATERIAL_CLAIM_COUNT_GE_1__MATCHED_QUALITY_EQUALS_0_EVEN_IF_ALL_FIVE_COMPONENT_INPUTS_ARE_1"
+  },
+  "theorem": {
+    "name": "CURRENT_P3_V3_NOT_GLOBAL_MATCHED_QUALITY_ONE",
+    "statement": "There exists an admissible provenance/source-authority-sensitive synthesis input in the already-localized R6 residual for which current P3 v3 selects a material claim that is unsupported under the admissible authority relation; therefore the frozen matched-quality aggregate is 0 on that witness. Hence current P3 v3 cannot have matched_quality=1 for all admissible frozen synthesis inputs.",
+    "result": "CURRENT_CANDIDATE_UNIVERSAL_CEILING_1_ROUTE_FALSIFIED"
+  },
+  "scheduler_effect_if_independently_verified": {
+    "delete": [
+      "PROVE_GLOBAL_MATCHED_QUALITY_1_FOR_CURRENT_P3_V3_WITHOUT_CHANGING_ITS_R6_BEHAVIOR",
+      "REPEAT_CURRENT_CANDIDATE_UNIVERSAL_CEILING_SEARCH_WITH_UNCHANGED_PROVENANCE_UNIT_SEMANTICS"
+    ],
+    "preserve": [
+      "GENERALIZE_OR_FAIL_CLOSE_CURRENT_CANDIDATE_ON_R6_AND_OTHER_ADMITTED_RESIDUALS_THEN_REEVALUATE_A_UNIVERSAL_CEILING",
+      "BIND_AUTHENTICATED_ZERO_INCREMENTAL_OPUS55_COMPARATOR_CAPACITY_OR_TARGET_OUTCOME_BOUND"
+    ],
+    "probability_effect": "CURRENT_P3_V3_UNIVERSAL_CEILING_1_ROUTE_P0_UNTIL_LOAD_BEARING_IMPLEMENTATION_OR_ADMITTED_DOMAIN_CHANGE"
+  },
+  "hard_nonclaims": [
+    "DOES_NOT_PROVE_ALL_COMPARATOR_FREE_STRONGER_PROOFS_IMPOSSIBLE",
+    "DOES_NOT_PROVE_A_FUTURE_GENERALIZED_SYNTHESIS_ROUTE_CANNOT_REACH_GLOBAL_CEILING_1",
+    "DOES_NOT_PROVE_OPUS55_SUPERIORITY_OR_BRAIN_INFERIORITY",
+    "NO_TARGET_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
