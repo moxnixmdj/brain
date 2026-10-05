@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_SCOPED_ACCEPTANCE_ADMISSIBILITY_SEMANTIC_GATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__GLOBAL_FAIL_CLOSED_GATE__SCOPE_ONLY_RECEIPTS_NOT_ADMISSIBLE_UNTIL_ACCEPTANCE_SCOPED_SEMANTICS_DISCHARGED__ZERO_CREDIT",
+  "objective": "Resolve once, globally, the ambiguity behind SCOPED_ACCEPTANCE_PROOF so component-specific scope certificates cannot silently promote into Composition credit without the acceptance-grade premise required by current authority.",
+  "authority": {
+    "frozen_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "current_composition_authority": {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
+      "git_blob_sha": "5bb089582a5bc2ee4a44143c8d3a11e919fecdff"
+    },
+    "current_slice": {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V6.json",
+      "git_blob_sha": "cb15018cd7a913bdf250d1cef884d4b1005d3d67"
+    },
+    "acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "synthesis_scope_verification": {
+      "path": "canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "1852516f725f5b72badfc2f65be22e542ed83623"
+    },
+    "artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    }
+  },
+  "canonical_literals": {
+    "composition_acceptance": "Every isolated component used in the claim has its own scoped proof; on the frozen mixed-capability portfolio Brain conservative terminal-success bound >= Opus matched bound and no critical composition invariant fails.",
+    "manifest_next": "BIND_ONLY_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_RECEIPTS_TO_THE_12_LITERAL_INTERFACES__RERUN_COMPONENT_PROOF_SLICER__NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_REPRESENTATION_ALONE",
+    "current_authority_rule": "ONLY_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_CURRENT_SOURCE_RECEIPTS_GRANT_COMPONENT_CREDIT"
+  },
+  "current_admissible_pattern": {
+    "scoped_proved_components": [
+      "memory",
+      "recovery",
+      "delegation",
+      "tool discovery"
+    ],
+    "count": 4,
+    "rule": "Existing admitted receipts are acceptance-scoped current-source receipts. The three scope-complete bridge receipts carry explicit source acceptance receipts; memory carries a direct owned-family witness."
+  },
+  "semantic_gate": {
+    "question": "Does a scope-complete certificate with explicitly open source performance/acceptance qualify by itself as the required SCOPED_ACCEPTANCE_PROOF?",
+    "current_answer": "UNRESOLVED__FAIL_CLOSED_NO",
+    "admissible_if_any": [
+      "VERIFIED_CURRENT_SOURCE_ACCEPTANCE_CLOSURE_PLUS_SCOPE_COMPLETE_BINDING",
+      "DIRECT_CURRENT_OWNED_FAMILY_WITNESS_THAT_COVERS_THE_LITERAL_COMPONENT_ACCEPTANCE",
+      "INDEPENDENT_SEMANTIC_THEOREM_PROVING_SCOPE_ONLY_IS_SUFFICIENT_UNDER_THE_FROZEN_COMPOSITION_ACCEPTANCE_LITERAL_AND_CURRENT_AUTHORITY_RULE"
+    ],
+    "forbidden": "SELF_ASSERTED_ACCEPTANCE_SCOPED_LABEL_OR_SCOPE_COMPLETENESS_ALONE"
+  },
+  "current_counterexamples": {
+    "evidence_synthesis": {
+      "scope_complete": true,
+      "independent_scope_verification": true,
+      "source_acceptance_closed": false,
+      "consequence": "NO_COMPONENT_ADMISSION_UNTIL_GLOBAL_SEMANTIC_GATE_OR_SOURCE_ACCEPTANCE_CLOSES"
+    },
+    "artifact_creation": {
+      "scope_complete_partition": true,
+      "performance_credit": "ZERO__AA_BRIEFCASE_GE_1822_REMAINS_REQUIRED",
+      "source_acceptance_closed": false,
+      "consequence": "NO_COMPONENT_ADMISSION_UNTIL_GLOBAL_SEMANTIC_GATE_OR_SOURCE_ACCEPTANCE_CLOSES"
+    }
+  },
+  "projection": {
+    "current_scoped_proved": 4,
+    "current_open": 8,
+    "safe_projection_without_semantic_discharge": 4,
+    "artifact_only_5_of_12_authorized": false,
+    "artifact_plus_synthesis_6_of_12_authorized": false,
+    "parent_component_dependency_closed": false,
+    "strict_opus55_acceptance_delta": 0
+  },
+  "optimization": {
+    "breakthrough": "ONE_GLOBAL_SEMANTIC_GATE_REPLACES_REPEATED_COMPONENT_BY_COMPONENT_SCOPE_ONLY_ARGUMENTS",
+    "scheduler_effect": "PAUSE_SCOPE_ONLY_COMPOSITION_PROMOTIONS; LISTEN_FOR_ACCEPTANCE_GRADE_UPSTREAM_RECEIPTS OR ONE GLOBAL SEMANTIC THEOREM",
+    "duplicate_work_deleted": [
+      "REPEATED_SCOPE_ONLY_BRIDGE_PROMOTIONS",
+      "REPEATED_SLICER_RUNS_WITH_NO_ADMISSIBLE_RECEIPT_DELTA"
+    ]
+  },
+  "hard_rules": [
+    "FAIL_CLOSED_ON_SCOPED_ACCEPTANCE_SEMANTIC_AMBIGUITY",
+    "NO_COMPONENT_CREDIT_FROM_SCOPE_COMPLETENESS_ALONE_WHILE_SOURCE_ACCEPTANCE_IS_EXPLICITLY_OPEN",
+    "NO_SELF_CERTIFIED_ACCEPTANCE_SCOPED_LABEL_AS_PROOF",
+    "NO_PARENT_COMPOSITION_OR_STRICT_OPUS55_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "next": "INDEPENDENTLY_RESOLVE_THIS_ONE_GLOBAL_SEMANTIC_GATE__IF_SCOPE_ONLY_IS_PROVED_SUFFICIENT_REEVALUATE_ALL_PENDING_SCOPE_BRIDGES_IN_ONE_BATCH__OTHERWISE_REQUIRE_ACCEPTANCE_GRADE_UPSTREAM_RECEIPTS_AND DEMOTE COMPOSITION H TO EVENT_DRIVEN_RECOMPUTE ONLY",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
