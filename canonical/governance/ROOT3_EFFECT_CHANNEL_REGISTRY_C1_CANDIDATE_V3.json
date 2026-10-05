@@ -120,7 +120,7 @@
     "canonical/runtime/cli_contract_inference.py": "009c3c45040178844d84eaa15b0d47ca2e1f259f",
     "canonical/runtime/continuous_obs_runtime.py": "e2533a0335c4f6824b9542944d4682aeefb36b2b",
     "canonical/runtime/npm_package_utils.py": "05fd0591083034df48c3ee426d6b3e11e0183555",
-    "canonical/runtime/bound_capabilities/archive_tarfile.py": "2ae62c04ef495d855ca8d46263b4cf05110ce9",
+    "canonical/runtime/bound_capabilities/archive_tarfile.py": "2ae62c04ef495d855ca8d46263b4cf05110b5648",
     "canonical/runtime/bound_capabilities/browser_chromedriver.py": "6edaad1d9d23700a55d988c891d4ef41b8191c4b",
     "canonical/runtime/bound_capabilities/cli_command.py": "6782773801cd8f2258e4368a4debbe6e66c4a393",
     "canonical/runtime/bound_capabilities/docx_report_from_json.py": "9667232f07cd1d285ecd598d85d8cdcf3f990701",
