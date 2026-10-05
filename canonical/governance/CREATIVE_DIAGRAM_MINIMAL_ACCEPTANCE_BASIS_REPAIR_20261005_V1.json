@@ -1,9 +1,15 @@
 {
-  "schema": "PROJECT_BRAIN_CREATIVE_DIAGRAM_MINIMAL_ACCEPTANCE_BASIS_REPAIR_V1",
+  "schema": "PROJECT_BRAIN_CREATIVE_DIAGRAM_MINIMAL_ACCEPTANCE_BASIS_REPAIR_V2",
   "date": "2026-10-05",
-  "status": "CANDIDATE__ONE_SHARED_BEHAVIORAL_LEAF__TWO_MANDATORY_STRATA__NO_NEW_FAMILY__ZERO_CREDIT",
-  "objective": "Repair the verified creative-task and diagram-output terminal proof-basis gap with the smallest measurable behavioral obligation that is lossless for the currently observed first-party Opus 5.5 surface.",
+  "status": "CANDIDATE__ONE_SHARED_BEHAVIORAL_LEAF__TWO_INDEPENDENTLY_FALSIFIABLE_ACCEPTANCE_STRATA__NO_FAKE_ATOMIC_COMPRESSION__NO_NEW_FAMILY__ZERO_CREDIT",
+  "objective": "Repair the verified creative-task and diagram-output terminal proof-basis gap with the smallest lossless behavioral model while preserving every independently falsifiable acceptance obligation.",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes_same_path_v1_commit": "f97b6aaacaa5bffd03dbe6c5c9314a99a947f3c9",
+  "truth_repair": {
+    "retracted_v1_claim": "ONE_SHARED_BEHAVIORAL_LEAF_IMPLIES_ONE_NEW_ATOMIC_PREDICATE_AND_38_TO_39_BASIS_COUNT",
+    "reason": "CREATIVE_TEXT_AND_TEXT_BASED_DIAGRAM ARE INDEPENDENTLY_FALSIFIABLE. WRITING A_CONJUNCTION_AS_ONE_REGISTRY_ROW DOES_NOT_REDUCE_THE_PROOF_BURDEN_AND_IS_NOT_A_SOUND_ATOMIC_COMPRESSION.",
+    "preserved_breakthrough": "THE TWO SURFACES SHARE_ONE_CAUSAL_BEHAVIORAL_LEAF_AND_DO_NOT_REQUIRE_A_NEW_CAPABILITY_FAMILY; IMPLEMENTATION_MECHANISM_AND_CONTROL_RESEARCH_MAY_BE_SHARED EVEN THOUGH ACCEPTANCE_MUST_RETAIN_BOTH_STRATA."
+  },
   "source_bindings": {
     "verified_gap": {
       "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
@@ -22,68 +28,32 @@
       "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
     }
   },
-  "external_first_party_confirmation": {
-    "checked_2026_10_05": true,
-    "source": "https://www.anthropic.com/transparency",
-    "observed_opus55_modalities": [
-      "CREATIVE_TASKS",
-      "TEXT_BASED_ARTIFACT_OUTPUT",
-      "DIAGRAM_OUTPUT"
-    ],
-    "role": "CONFIRM_EXISTING_BOUND_SURFACE_ONLY__NOT_ACCEPTANCE_EVIDENCE"
-  },
   "lossless_reuse_falsification": [
     {
       "existing_leaf": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
       "cannot_cover_whole_creative_surface": true,
-      "reason": "ITS INPUT CONTRACT REQUIRES VERIFIED_EVIDENCE_UNITS_AND_REQUIRED_CLAIMS; AN OPEN_ENDED FICTION_IDEATION_OR_STYLE_TASK MAY HAVE NO EVIDENCE_UNITS OR FACTUAL CLAIM SET, YET STILL REQUIRES QUALITY_BEARING GENERATION."
+      "reason": "ITS INPUT CONTRACT REQUIRES VERIFIED_EVIDENCE_UNITS_AND_REQUIRED_CLAIMS; OPEN_ENDED_CREATIVE_GENERATION_NEED_NOT_HAVE_EITHER."
     },
     {
       "existing_leaf": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
       "cannot_cover_whole_diagram_surface": true,
-      "reason": "ITS REQUIRED_OUTPUT_IS A CONTENT_ANALYSIS_LAYOUT_REVISION_PLAN_AND_CONCRETE_EDITS; A CONTRACT_CAN PASS WHILE NO FINAL_RENDERABLE_DIAGRAM_IS REALIZED, SO PLAN_QUALITY_DOES_NOT LOGICALLY_IMPLY DIAGRAM_REALIZATION."
+      "reason": "ITS REQUIRED_OUTPUT_CAN_BE_A_PLAN_AND_CONCRETE_EDITS_WITHOUT_REQUIRING_A_FINISHED_RENDERABLE_DIAGRAM."
     },
     {
       "existing_leaf": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
       "cannot_cover_whole_diagram_surface": true,
-      "reason": "ITS SCOPE IS NATIVE_DOCX_XLSX_PPTX_PDF_STRUCTURED_EDIT_PRESERVATION; IT DOES NOT REQUIRE GENERATION_OF_A_NEW_TEXT_BASED_DIAGRAM_FROM AN OBJECTIVE_OR_RELATIONSHIP SPECIFICATION."
+      "reason": "ITS SCOPE_IS_NATIVE_DOCX_XLSX_PPTX_PDF_EDIT_PRESERVATION_NOT_NEW_TEXT_DIAGRAM_REALIZATION."
     }
   ],
   "minimal_common_residual": {
     "behavior_id": "CONSTRAINT_TO_CREATIVE_TEXT_OR_TEXT_DIAGRAM_REALIZATION_001",
-    "why_shared": "BOTH OBSERVED SURFACES REQUIRE THE SAME HIGH_LEVEL TRANSFORM: OBJECTIVE_PLUS_CONSTRAINTS_PLUS_TARGET_MEDIUM_TO_FINISHED_QUALITY_BEARING_OUTPUT. THE OUTPUT_MEDIUM CHANGES THE STRATUM-SPECIFIC ORACLES, NOT THE CAUSAL CONTRACT.",
+    "why_shared": "BOTH SURFACES REQUIRE_OBJECTIVE_PLUS_CONSTRAINTS_PLUS_TARGET_MEDIUM_TO_FINISHED_QUALITY_BEARING_OUTPUT; MEDIUM_SPECIFIC_ORACLES_REMAIN_SEPARATE.",
     "inputs": "User objective; explicit constraints; audience/style/tone when relevant; target_medium in {CREATIVE_TEXT,TEXT_BASED_DIAGRAM}; optional factual evidence, data, entities, or relationships.",
-    "environment_state": "Output construction environment with text generation and, for diagram stratum, an admissible text-diagram grammar and renderer/parser.",
-    "allowed_information": "Task-visible prompt/evidence plus JIT public knowledge when requested; no hidden target answer or task-specific evaluator leakage.",
     "required_output_or_action": "Produce the finished creative text or finished renderable text-based diagram itself, not merely a plan, outline, critique, or summary.",
     "common_success_conditions": [
       "EXPLICIT_USER_CONSTRAINTS_SATISFIED",
-      "OUTPUT_IS_COMPLETE_FOR_REQUESTED_MEDIUM",
+      "OUTPUT_COMPLETE_FOR_REQUESTED_MEDIUM",
       "NO_UNSUPPORTED_MATERIAL_FACTUAL_CLAIM_WHEN_FACTUAL_CONTENT_IS_LOAD_BEARING"
-    ],
-    "strata": [
-      {
-        "id": "CREATIVE_TEXT",
-        "additional_success": [
-          "INDEPENDENT_FROZEN_RUBRIC_QUALITY_NONINFERIOR_TO_OPUS55",
-          "COHERENCE_STYLE_AND_REQUESTED_FORM_CONSTRAINTS_PASS"
-        ]
-      },
-      {
-        "id": "TEXT_BASED_DIAGRAM",
-        "additional_success": [
-          "PARSER_OR_RENDERER_VALIDITY_PASS",
-          "REQUIRED_ENTITIES_RELATIONSHIPS_LABELS_AND_DIRECTIONALITY_SEMANTIC_CHECKS_PASS_WHERE OBJECTIVELY_SPECIFIED",
-          "INDEPENDENT_FROZEN_PRESENTATION_AND_READABILITY_RUBRIC_QUALITY_NONINFERIOR_TO_OPUS55"
-        ]
-      }
-    ],
-    "failure_conditions": [
-      "PLAN_ONLY_WITHOUT_FINAL_OUTPUT",
-      "CREATIVE_OUTPUT_MISSES_EXPLICIT_STYLE_OR_FORM_CONSTRAINT",
-      "DIAGRAM_FAILS_TO_PARSE_OR_RENDER",
-      "DIAGRAM_OMITS_OR_INVERTS_REQUIRED_RELATIONSHIP",
-      "QUALITY_NONINFERIORITY_NOT_ESTABLISHED_FOR_EITHER_MANDATORY_STRATUM"
     ],
     "scope": "OPEN_ENDED_CREATIVE_TEXT_AND_TEXT_BASED_DIAGRAM_OUTPUT_ONLY",
     "scope_exclusions": [
@@ -94,60 +64,76 @@
       "DIAGRAM_UNDERSTANDING_AS_INPUT"
     ]
   },
+  "acceptance_strata": [
+    {
+      "candidate_predicate_id": "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "success": [
+        "INDEPENDENT_FROZEN_RUBRIC_QUALITY_NONINFERIOR_TO_OPUS55",
+        "COHERENCE_STYLE_AND_REQUESTED_FORM_CONSTRAINTS_PASS"
+      ],
+      "independently_falsifiable": true
+    },
+    {
+      "candidate_predicate_id": "TEXT_BASED_DIAGRAM_REALIZATION_NONINFERIOR",
+      "family": "ARTIFACT_CREATION",
+      "success": [
+        "PARSER_OR_RENDERER_VALIDITY_PASS",
+        "REQUIRED_ENTITIES_RELATIONSHIPS_LABELS_AND_DIRECTIONALITY_SEMANTIC_CHECKS_PASS_WHERE_OBJECTIVELY_SPECIFIED",
+        "INDEPENDENT_FROZEN_PRESENTATION_AND_READABILITY_RUBRIC_QUALITY_NONINFERIOR_TO_OPUS55"
+      ],
+      "independently_falsifiable": true
+    }
+  ],
+  "acceptance_basis_effect": {
+    "current_declared_atomic_basis": 38,
+    "minimal_new_independently_falsifiable_obligations": 2,
+    "candidate_basis_if_both_are_frozen_as_separate_atomic_predicates": 40,
+    "joint_discharge_allowed": "YES_ONLY_IF_A_SINGLE_SCOPE_COMPLETE_STRONGER_PROOF_LOGICALLY_IMPLIES_BOTH_PREDICATES; THE_REGISTRY_MAY_STILL_RETAIN_TWO_ATOMIC_CLAIMS_WITH_ONE_SHARED_RECEIPT.",
+    "forbidden_compression": "DO_NOT_RENAME_A_AND_B_AS_ONE_ATOMIC_ROW_MERELY_TO_REPORT_39_INSTEAD_OF_40."
+  },
   "family_mapping": {
     "new_family_required": false,
-    "reason": "THE NEW LEAF IS AN OUTPUT_REALIZATION RESIDUAL INSIDE TWO EXISTING USEFUL_BEHAVIOR FAMILIES RATHER THAN A DISTINCT DOMAIN_OR_AGENTIC CAPABILITY CLASS.",
     "load_bearing_families": [
-      {
-        "family": "COMMUNICATION_AND_SYNTHESIS",
-        "stratum": "CREATIVE_TEXT"
-      },
-      {
-        "family": "ARTIFACT_CREATION",
-        "stratum": "TEXT_BASED_DIAGRAM"
-      }
+      "COMMUNICATION_AND_SYNTHESIS",
+      "ARTIFACT_CREATION"
     ],
-    "twentieth_family_open_condition": "ONLY_IF_INDEPENDENT_CONSTRUCTIVE_ANALYSIS_PROVES A USEFUL_FIRST_PARTY CREATIVE_OR_DIAGRAM BEHAVIOR CANNOT BE REPRESENTED BY THIS LEAF PLUS THE EXISTING FAMILY UNION."
+    "twentieth_family_open_condition": "ONLY_IF_CONSTRUCTIVE_ANALYSIS_PROVES_A_USEFUL_FIRST_PARTY_CREATIVE_OR_DIAGRAM_BEHAVIOR_CANNOT_BE_REPRESENTED_BY_THIS_LEAF_PLUS_THE_EXISTING_FAMILY_UNION."
   },
-  "minimal_acceptance_basis_repair": {
-    "candidate_atomic_predicate": "CREATIVE_DIAGRAM_REALIZATION_NONINFERIOR",
-    "predicate_form": "CREATIVE_TEXT_NONINFERIOR AND TEXT_BASED_DIAGRAM_NONINFERIOR",
-    "single_predicate_reason": "THE ATOMIC CLAIM IS CONJUNCTIVE OVER TWO PREDECLARED STRATA OF ONE SHARED BEHAVIORAL TRANSFORM; NEITHER STRATUM MAY COMPENSATE_FOR_OR_HIDE FAILURE_IN_THE_OTHER.",
-    "admissible_proof_modes": [
+  "proof_strategy": {
+    "shared_mechanism_research": true,
+    "shared_candidate_runtime_allowed": true,
+    "separate_acceptance_bounds_required": true,
+    "admissible_modes": [
       "SCOPE_COMPLETE_STRONGER_PROOF",
-      "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_AGAINST_OPUS55_WITH_SEPARATE_STRATUM_BOUNDS"
+      "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_AGAINST_OPUS55"
     ],
-    "matched_promotion_rule": "PROMOTE_ONLY_IF BRAIN_CONSERVATIVE_LOWER_BOUND_GE_OPUS55_CONSERVATIVE_UPPER_BOUND SEPARATELY_FOR_CREATIVE_TEXT_AND_TEXT_BASED_DIAGRAM.",
-    "basis_count_effect_if_independently_verified_and_frozen": {
-      "current_declared_atomic_basis": 38,
-      "minimal_repaired_atomic_basis": 39,
-      "new_atomic_obligations": 1
-    },
-    "split_into_two_predicates_only_if": "INDEPENDENT_VERIFICATION FALSIFIES THE SHARED_CAUSAL_CONTRACT_OR REQUIRES INCOMMENSURATE PROMOTION_AUTHORITY THAT CANNOT BE SAFELY CONJOINED."
+    "promotion_rule": "EACH_STRATUM_MUST_PASS_ITS_OWN_PREDECLARED_BOUND; ONE_STRATUM_CANNOT_COMPENSATE_FOR_THE_OTHER."
   },
   "root_effect": {
     "root1_positive_capability_gap_delta": 0,
     "root2_threshold_predicate_delta_now": 0,
     "root3_scope_predicate_delta_now": 0,
-    "terminal_finality_effect": "REPAIRS_THE_SHAPE_OF_THE_ACCEPTANCE_BASIS_ONLY_AFTER_INDEPENDENT_VERIFICATION_AND_FREEZE; DOES_NOT_PROVE THE NEW PREDICATE."
+    "terminal_finality_effect": "BASIS_SHAPE_REPAIR_ONLY_PENDING_INDEPENDENT_VERIFICATION_AND_REGISTRY_FREEZE."
   },
   "scheduler_delta": {
     "delete_if_verified": [
-      "TWO_INDEPENDENT_PROVISIONAL_CREATIVE_AND_DIAGRAM_PREDICATE_DESIGNS",
-      "GENERIC_SEARCH_FOR_A_20TH_CREATIVE_OR_DIAGRAM_FAMILY"
+      "GENERIC_SEARCH_FOR_A_20TH_CREATIVE_OR_DIAGRAM_FAMILY",
+      "DUPLICATE_MECHANISM_RESEARCH_FOR_CREATIVE_TEXT_AND_TEXT_DIAGRAM_WHERE_THE_SHARED_TRANSFORM_IS_LOAD_BEARING",
+      "FAKE_ATOMIC_COUNT_COMPRESSION"
     ],
     "activate_if_verified": [
-      "ONE_SHARED_LEAF_TWO_STRATA_ACCEPTANCE_PROTOCOL_DESIGN",
-      "SEARCH_REUSE_OR_STRONGER_PROOF_BEFORE_ANY_FRESH_MATCHED_COMPARATOR_EXECUTION"
+      "ONE_SHARED_BEHAVIORAL_MECHANISM_LANE",
+      "TWO_SEPARATE_ACCEPTANCE_STRATA",
+      "SEARCH_FOR_ONE_SCOPE_COMPLETE_STRONGER_PROOF_CAPABLE_OF_DISCHARGING_BOTH_BEFORE_ANY_FRESH_MATCHED_COMPARATOR_EXECUTION"
     ]
   },
   "hard_nonclaims": [
-    "NO CLAIM BRAIN CURRENTLY PASSES CREATIVE_TEXT_NONINFERIORITY",
-    "NO CLAIM BRAIN CURRENTLY PASSES_TEXT_BASED_DIAGRAM_NONINFERIORITY",
-    "NO ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
-    "NO FRESH_REALITY AUTHORITY",
-    "NO TERMINAL CLAIM",
-    "NO CLAIM 39_IS CANONICAL UNTIL INDEPENDENT VERIFICATION_AND_EXPLICIT_REGISTRY_FREEZE"
+    "NO_CLAIM_BRAIN_CURRENTLY_PASSES_EITHER_NEW_STRATUM",
+    "NO_CLAIM_40_IS_CANONICAL_UNTIL_EXPLICIT_REGISTRY_FREEZE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_CLAIM"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
