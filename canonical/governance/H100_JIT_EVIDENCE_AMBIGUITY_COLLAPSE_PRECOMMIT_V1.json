@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_H100_JIT_EVIDENCE_AMBIGUITY_COLLAPSE_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__LEXICAL_TWO_WORLD_JIT_EVIDENCE_SUBSTITUTION__ZERO_TERMINAL_CREDIT",
+  "objective": "Execute the conditional information-state theorem on an existing zero-learned lexical capability: verify that absent evidence leaves two opposite semantic worlds indistinguishable at <=0.5 exact-role accuracy, while world-specific JIT relation evidence splits them into singleton classes and permits exact resolution with zero learned bytes.",
+  "frozen_worlds": [
+    {
+      "id": "WORLD_INPUT",
+      "truth_role": "INPUT",
+      "cue": "novelcue",
+      "graph_path": [
+        "novelcue",
+        "predictor",
+        "input"
+      ]
+    },
+    {
+      "id": "WORLD_TARGET",
+      "truth_role": "TARGET",
+      "cue": "novelcue",
+      "graph_path": [
+        "novelcue",
+        "response",
+        "output"
+      ]
+    }
+  ],
+  "frozen_runtime": "canonical/runtime/h100_jit_lexical_role_v1.py",
+  "frozen_information_bound_runtime": "canonical/runtime/h100_conditional_information_state_bound_v1.py",
+  "gates": {
+    "no_evidence_zero_bit_upper_bound": 0.5,
+    "jit_evidence_partition": [
+      1,
+      1
+    ],
+    "jit_evidence_zero_bit_upper_bound": 1,
+    "required_exact_world_role_recovery": "2_OF_2",
+    "persistent_learned_bytes": 0
+  },
+  "hard_nonclaims": [
+    "SYNTHETIC_TWO_WORLD_EVIDENCE_DOES_NOT_PROVE_OPEN_WORLD_SOURCE_AVAILABILITY",
+    "DOES_NOT_PROVE_ALL_SEMANTIC_TASKS_CAN_BE_DISAMBIGUATED_JIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
