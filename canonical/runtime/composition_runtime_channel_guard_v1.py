@@ -368,7 +368,6 @@ class Capture:
             "mutations": mutations,
             "forbidden_events": list(self.forbidden_events),
         }
-        body["channel_manifest_sha256"] = _sha256_value(body)
         body["file_and_ambient_inputs_content_bound"] = not self.forbidden_events
         body["network_response_evidence_complete"] = not any(
             str(x.get("event", "")).startswith("network.")
@@ -386,6 +385,7 @@ class Capture:
         )
         body["status"] = "PASS" if body["closed_world_observed_subset"] else "FAIL_CLOSED"
         body["acceptance_credit_delta"] = 0
+        body["channel_manifest_sha256"] = _sha256_value(body)
         self._finished = True
         self._receipt = body
         return body
