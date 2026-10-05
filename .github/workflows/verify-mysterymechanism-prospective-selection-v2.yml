@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          python -m pytest -q canonical/tests/test_mysterymechanism_separable_transform_v2.py > prospective-selection-v2-pytest.log 2>&1
+          python -m unittest -v canonical.tests.test_mysterymechanism_separable_transform_v2 > prospective-selection-v2-pytest.log 2>&1
           code=$?
           cat prospective-selection-v2-pytest.log
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
