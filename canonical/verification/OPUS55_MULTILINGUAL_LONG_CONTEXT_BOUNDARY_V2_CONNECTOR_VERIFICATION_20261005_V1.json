@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__CODING_ADDED_TO_MULTILINGUAL_AND_LONG_CONTEXT_CONDITIONS__CURRENT_38_HAS_NO_EXPLICIT_CONDITION_PREDICATES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+    "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+  },
+  "sources": {
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "checks": {
+    "multilingual_includes_advanced_coding": true,
+    "long_context_includes_advanced_coding": true,
+    "current_38_has_no_explicit_multilingual_predicate": true,
+    "current_38_has_no_explicit_long_context_predicate": true,
+    "all_referenced_families_exist": true
+  },
+  "errors": [],
+  "consequence": "TREAT_MULTILINGUAL_AND_LONG_CONTEXT_AS_CROSS_CUTTING_ACCEPTANCE_BASIS_GAPS_UNLESS_STRONGER_SCOPE_COMPLETE_IMPLICATION_IS_PROVED",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
