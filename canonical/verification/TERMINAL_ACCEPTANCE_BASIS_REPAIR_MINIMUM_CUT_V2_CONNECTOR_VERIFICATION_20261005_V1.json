@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_V2_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__V1_SEVEN_GROUP_CUT_INCOMPLETE_AFTER_SIX_FAMILY_SCOPE_GUARD__V2_EIGHT_GROUP_CUT_SET_EQUALITY_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V2.json",
+    "git_blob_sha": "d2867bdcb4e2a721c2dbcde59100627508a7866a"
+  },
+  "recomputed_sources": {
+    "v1_cut": {
+      "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V1.json",
+      "git_blob_sha": "a44e8ae18c9fef6efa9b01ecb9b3d6592bf3c274"
+    },
+    "scope_guard_v2": {
+      "path": "canonical/governance/BENCHMARK_PROXY_SCOPE_COMPLETENESS_QUARANTINE_V2_20261005.json",
+      "git_blob_sha": "c62b7c1f8e838a1a37d8b5513953191f717b40e8"
+    },
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "surface_mapping": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+    }
+  },
+  "recomputation": {
+    "scope_guard_v2_affected_family_count": 6,
+    "scope_guard_v2_affected_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "COMPUTER_AND_BROWSER_USE"
+    ],
+    "v1_benchmark_scope_partition_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ],
+    "v1_missing_against_v2_scope_guard": [
+      "COMPUTER_AND_BROWSER_USE"
+    ],
+    "v2_benchmark_scope_partition_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "COMPUTER_AND_BROWSER_USE"
+    ],
+    "set_equality_scope_guard_vs_v2_partitions": true,
+    "duplicate_benchmark_scope_partition_family_count": 0,
+    "v2_total_action_group_count": 8,
+    "non_benchmark_structural_groups": [
+      "F_CREATIVE_AND_DIAGRAM_ACCEPTANCE_BASIS_REPAIR",
+      "G_CROSS_CUTTING_CONDITION_MATRIX"
+    ],
+    "computer_browser_group": "H_COMPUTER_BROWSER_UNCOVERED_SCOPE_PARTITION",
+    "computer_browser_preserved_atomic_bar": "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "computer_browser_envelope_cells_present": [
+      "MULTI_STEP_BROWSER_WORKFLOWS",
+      "ARBITRARY_APPLICATION_WORKFLOWS",
+      "PLANNING",
+      "VISUAL_GROUNDING",
+      "JUDGMENT_UNDER_UI_AMBIGUITY"
+    ],
+    "cybersecurity_mapping_requires_computer_browser_accounting": true,
+    "cybersecurity_computer_browser_cell_present": true
+  },
+  "verified_consequence": [
+    "V1_SEVEN_ACTION_GROUP_CUT_IS_NOT_CURRENTLY_SUFFICIENT_FOR_LITERAL_TERMINAL_PROOF_BASIS_REPAIR",
+    "V2_CLOSES_THE_SPECIFIC_COMPUTER_AND_BROWSER_USE_STRUCTURAL_OMISSION_INTRODUCED_WHEN_SCOPE_GUARD_V2_EXPANDED_FROM_FIVE_TO_SIX_BENCHMARK_PROXY_FAMILIES",
+    "SIX_AFFECTED_BENCHMARK_PROXY_FAMILIES_NOW_HAVE_EXACTLY_SIX_CORRESPONDING_SCOPE_PARTITION_GROUPS",
+    "CREATIVE_DIAGRAM_AND_MULTILINGUAL_LONG_CONTEXT_OBLIGATIONS_REMAIN_SEPARATE_AND_PRESERVED",
+    "CURRENT_14_OF_38_ATOMIC_ACCEPTANCE_COUNTS_ARE_UNCHANGED",
+    "ROOT1_POSITIVE_GAP_REMAINS_ZERO"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_V2_PROVES_ANY_SCOPE_PARTITION_CLOSED",
+    "NO_CLAIM_OSWORLD_IS_SCOPE_EQUIVALENT_TO_ARBITRARY_COMPUTER_AND_BROWSER_USE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CLAIM_THIS_CONNECTOR_RECOMPUTATION_IS_AN_INDEPENDENT_PUBLIC_RUNNER_RECEIPT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
