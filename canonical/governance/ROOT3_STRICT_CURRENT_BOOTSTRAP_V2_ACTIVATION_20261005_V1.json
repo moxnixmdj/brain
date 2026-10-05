@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_STRICT_CURRENT_BOOTSTRAP_V2_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_CANDIDATE__18_SITE_UNIVERSE__READ_ONLY_PLUS_TEMP_BOUND__OTHER_FIVE_FAIL_CLOSED__SCHEDULING_ONLY__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/root3_strict_current_bootstrap_v2.py",
+    "git_blob_sha": "d814aa51c0e60f9d16fb4af5d26251cd6582e4d8"
+  },
+  "tests": {
+    "path": "canonical/tests/test_root3_strict_current_bootstrap_v2.py",
+    "git_blob_sha": "2455f8d5fc5e5f39c192cb43f1f36e1ab2a80557"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT3_STRICT_CURRENT_BOOTSTRAP_V2_SPRITE_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "83395bf950a75627bc82c2cfe76ab1e88f43ff39"
+  },
+  "exact_state": {
+    "process_site_count": 18,
+    "bound_effect_classes": [
+      "READ_ONLY_DECLARED_QUERY",
+      "TEMPORARY_FILESYSTEM_TRANSFORM"
+    ],
+    "denied_effect_classes": [
+      "ARBITRARY_COMMAND_EXECUTION",
+      "BOUND_CHILD_CODE_EXECUTION",
+      "DECLARED_ARTIFACT_PRODUCTION",
+      "LOCAL_LOOPBACK_SERVICE",
+      "PACKAGE_ENV_MUTATION"
+    ]
+  },
+  "effects": [
+    "GLOBAL_SUBPROCESS_GUARD_CAN_BIND_BOTH_CURRENT_VERIFIED_EXECUTORS_IN_ONE_INSTALL",
+    "TEMP_EXECUTOR_COMPLETENESS_IS_NO_LONGER_STRANDED_OUTSIDE_STRICT_BOOTSTRAP",
+    "OTHER_FIVE_CLASSES_REMAIN_DEFAULT_DENY_WITH_NO_EXECUTOR",
+    "SEMANTIC_AUTHORIZER_REMAINS_SEPARATE_AND_REQUIRED"
+  ],
+  "next": [
+    "BIND_PRODUCTION_SEMANTIC_AUTHORIZER_FOR_CURRENT_EXECUTOR_CLASSES_OR_KEEP_DENIED",
+    "CLOSE_NEXT_EFFECT_CLASS_ONLY_IF_ITS_EXECUTOR_AND_SEMANTIC_POSTCONDITION_ARE_CONTENT_ADDRESSED",
+    "RECOMPUTE_ROOT3_C1_C2_C3_AFTER_EACH_VERIFIED_BINDING_DELTA"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PRODUCTION_ENTRYPOINT_AUTO_INSTALLS_THIS_BOOTSTRAP",
+    "NO_CLAIM_ANY_BOUND_CLASS_IS_SEMANTICALLY_ALLOWED_WITHOUT_AUTHORIZER",
+    "NO_OTHER_EFFECT_CLASS_CLOSED",
+    "NO_ROOT3_C1_C2_C3_TERMINAL_ACCEPTANCE",
+    "NO_OPUS55_ATOMIC_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
