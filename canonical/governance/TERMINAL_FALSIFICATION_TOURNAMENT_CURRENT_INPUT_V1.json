@@ -49,7 +49,11 @@
           "kind": "PUBLIC_EQUIVALENCE",
           "cost_units": 2,
           "decisive": true,
-          "status": "PENDING"
+          "status": "PASS_NO_COUNTEREXAMPLE",
+          "receipt": {
+            "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_PUBLIC_EQUIVALENCE_SEARCH_20261005_V1.json",
+            "git_blob_sha": "9323630534093e265b7baa19b896975473b4a889"
+          }
         },
         {
           "id": "F_DECOMPOSITION_ENTAILMENT",
