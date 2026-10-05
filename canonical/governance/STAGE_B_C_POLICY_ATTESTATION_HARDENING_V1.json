@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_STAGE_B_C_POLICY_ATTESTATION_HARDENING_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_FAIL_CLOSED_CONTROL_PLANE_HARDENING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": {
+    "stage_b": "CURRENT_EXECUTION_AUTHORITY_V3_ACCEPTS_ANY_NONEMPTY_STAGED_B_PASS_EVIDENCE_AND_DOES_NOT_VERIFY_ALL_25_LIVE_STAGE_B_POLICY_REQUIREMENTS",
+    "stage_c": "CURRENT_LEASE_ISSUE_PATH_DOES_NOT_CONTENT_BIND_THE_EXACT_10_ITEM_LIVE_STAGE_C_POLICY_OR_IMMUTABLE_CANDIDATE_AND_PLAN_HASHES",
+    "test_visibility": "CURRENT_EXECUTION_AUTHORITY_TEST_FILE_USES_MODULE_LEVEL_TEST_FUNCTIONS_AND_CAN_COLLECT_ZERO_TESTS_UNDER_UNITTEST_BASED_CI"
+  },
+  "subject": {
+    "base_commit": "4114e2471c01b67aeeba0cfafc86889e3eb5267d",
+    "current_v3_runtime": "canonical/runtime/execution_authority_reducer.py",
+    "current_v3_git_blob_sha": "d49deb24be6a0ac268c700f788777c39fe33086d",
+    "policy": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+    "stage_b_required_item_count": 25,
+    "stage_c_required_item_count": 10
+  },
+  "candidate": {
+    "attestation_kernel": "canonical/runtime/staged_policy_attestation_v1.py",
+    "execution_authority_wrapper": "canonical/runtime/execution_authority_reducer_v4_policy_attested.py",
+    "tests": "canonical/tests/test_execution_authority_v4_policy_attested.py",
+    "stage_b_rule": "EVERY_LIVE_STAGE_B_REQUIRED_ITEM_MUST_BE_LISTED_AS_PASSED_AND_HAVE_A_CONTENT_ADDRESSED_SOURCE_RECEIPT__EXACT_REQUIRED_ITEM_DIGEST_MUST_MATCH",
+    "stage_c_rule": "LEASE_MUST_BIND_EXACT_LIVE_STAGE_C_REQUIRED_ITEM_DIGEST_PLUS_64_HEX_CANDIDATE_AND_PLAN_HASHES",
+    "policy_growth_rule": "ANY_STAGE_B_OR_STAGE_C_REQUIRED_LIST_DRIFT_FAILS_CLOSED_UNTIL_KERNEL_UPDATE_AND_INDEPENDENT_REVERIFICATION"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_AUTHORITY_FROM_THIS_CANDIDATE",
+    "NO_CLAIM_THAT_STAGE_C_ITEM_LEVEL_RUNTIME_ENFORCEMENT_IS_COMPLETE_BEYOND_EXISTING_V3_TRANSITION_CHECKS_AND_NEW_POLICY_BINDING",
+    "NO_MERGE_OR_CURRENT_AUTHORITY_PROMOTION_BEFORE_INDEPENDENT_VERIFICATION"
+  ],
+  "next": [
+    "RUN_COLLECTIBLE_UNITTEST_SUITE_ON_EXACT_CANDIDATE_BYTES",
+    "INDEPENDENTLY_VERIFY_POLICY_LIST_COUNTS_AND_EXACT_ORDER_AGAINST_CURRENT_POLICY",
+    "FALSIFY_WITH_MISSING_DUPLICATE_EXTRA_UNPINNED_AND_POLICY_GROWTH_MUTATIONS",
+    "ONLY_AFTER_PASS_CONSIDER_SEPARATE_CURRENT_AUTHORITY_PROMOTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
