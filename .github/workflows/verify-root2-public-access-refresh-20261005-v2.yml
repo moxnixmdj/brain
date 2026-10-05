@@ -1,0 +1,51 @@
+name: Verify Root2 public access refresh 20261005 V2
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/ROOT2_PUBLIC_ACCESS_REFRESH_20261005_V2.json'
+      - '.github/workflows/verify-root2-public-access-refresh-20261005-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-live-primary-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify HLE public load surface
+        run: |
+          curl -fsSL https://huggingface.co/datasets/cais/hle/raw/main/README.md > /tmp/hle.md
+          grep -F 'load_dataset("cais/hle", split="test")' /tmp/hle.md
+          grep -F '2,500 questions' /tmp/hle.md
+      - name: Verify OSWorld self-service gated access wording
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/xlang-ai/OSWorld-V2/main/README.md > /tmp/osw.md
+          grep -F 'your request will automatically be approved' /tmp/osw.md
+          grep -F 'xlangai/osworld_v2_assets_gated@osworld-v2.1' /tmp/osw.md
+      - name: Verify Buildkite trial and large shape
+        run: |
+          curl -fsSL https://buildkite.com/pricing/ > /tmp/bk-pricing.html
+          grep -Eiq '30[- ]day.*all[- ]access trial' /tmp/bk-pricing.html
+          grep -Eiq 'no credit card' /tmp/bk-pricing.html
+          curl -fsSL https://buildkite.com/docs/agent/buildkite-hosted/linux > /tmp/bk-linux.html
+          grep -F 'LINUX_AMD64_8X32' /tmp/bk-linux.html
+      - name: Verify Vals approval gate
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/vals-ai/finance-agent-v2/main/README.md > /tmp/vals.md
+          grep -F 'Access to the Vals platform is gated and requires approval' /tmp/vals.md
+      - name: Validate governance is zero-credit
+        run: |
+          python - <<'PY'
+          import json
+          p='canonical/governance/ROOT2_PUBLIC_ACCESS_REFRESH_20261005_V2.json'
+          d=json.load(open(p))
+          assert d['accounting']['incremental_spend_usd']==0
+          assert d['accounting']['new_reality_units_consumed']==0
+          assert d['accounting']['acceptance_credit_delta']==0
+          assert 'NO_ACCOUNT_SPECIFIC_QUOTA_OR_RESOURCE_AVAILABILITY_PROVED' in d['hard_nonclaims']
+          print('PASS')
+          PY
