@@ -472,6 +472,34 @@
       "unverified_log1p_abs_fail_closed": true,
       "persistent_learned_bytes": 0,
       "deduction": "THE_FULL_REGISTRY_MISS_TO_BROADER_EXPRESSION_SEARCH_TO_STRUCTURE_TRANSFER_TO_COMPILE_TO_ZERO_RAW_SEARCH_REUSE_LOOP_IS PUBLIC_RUNNER_VERIFIED_FOR_THE_RATIONAL_STRUCTURE"
+    },
+    "jit_primitive_acquisition": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__FIXED_OPERATOR_SET_MISS_REPAIRED_BY_VERIFIED_STDLIB_ERF__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_JIT_PRIMITIVE_ACQUISITION_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_JIT_PRIMITIVE_ACQUISITION_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "runtime": "canonical/runtime/h100_jit_primitive_acquisition_v1.py",
+      "fixed_expression_best_nrmse": 0.008119519407921813,
+      "fixed_expression_best_validation_nrmse": 0.010365620607280312,
+      "primitive": "math.erf",
+      "seed_gamma": 0.8,
+      "seed_holdout_nrmse": 1.735343664012497e-14,
+      "transfer_gamma": 1.6,
+      "transfer_holdout_nrmse": 3.755029542851899e-14,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE_CURRENT_FIXED_OPERATOR_SET_FAILED_CONSTRUCTIVELY_WHILE_A_VERIFIED_DETERMINISTIC_STDLIB_PRIMITIVE_REPAIRED_AND_TRANSFERRED_THE_FAMILY_WITH_ZERO_LEARNED_STATE"
+    },
+    "verified_capability_registry_v5": {
+      "status": "PUBLIC_GITHUB_HOSTED_RUNNER_PASS__FOURTEEN_VERIFIED_ENTRIES__JIT_PRIMITIVE_RATCHET_CLOSED__ZERO_CREDIT",
+      "runtime": "canonical/runtime/h100_verified_capability_registry_v5.py",
+      "second_carrier_verification": "canonical/verification/H100_REGISTRY_V5_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "public_verification": "canonical/verification/H100_REGISTRY_V5_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "entry_count": 14,
+      "added_capability": "CAP_AFFINE_ERF_V1",
+      "erf_raw_synthesis_attempts_before_hit": 0,
+      "legacy_rational_still_hits": true,
+      "unverified_cosh_fail_closed": true,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE_JIT_OPERATOR_ACQUISITION_TO_TRANSFER_TO_COMPILE_TO_ZERO_RAW_SEARCH_REUSE_LOOP_IS NOW PUBLIC_RUNNER_VERIFIED FOR_ERF"
     }
   },
   "next_structural_residuals_ranked": [
@@ -482,8 +510,8 @@
     },
     {
       "rank": 2,
-      "residual": "PRACTICAL_OPEN_WORLD_SEARCH_BEYOND_FROZEN_DEPTH_AND_OPERATOR_SET",
-      "reason": "REGISTRY_V4 PUBLIC RUNNER VERIFIES ESCAPE FROM THE FINITE PATCH GRAMMAR INTO A BROADER EXPRESSION_TREE SEARCH AND SUCCESSFUL COMPILE_REUSE__THE REMAINING INTERNAL A LIMIT IS PRACTICAL SEARCH WHEN THE NEEDED STRUCTURE LIES OUTSIDE THE CURRENT FROZEN DEPTH_OPERATOR_SET OR HAS LARGE_DESCRIPTION_LENGTH"
+      "residual": "SAFE_GENERAL_OPERATOR_AND_EXECUTABLE_CAPABILITY_ACQUISITION_BEYOND_FROZEN_STDLIB_ERF",
+      "reason": "REGISTRY_V5 PUBLIC RUNNER CLOSES A CONSTRUCTIVE FIXED_OPERATOR_SET FAILURE VIA JIT VERIFIED MATH_ERF ACQUISITION AND COMPILE_REUSE__THE NEXT INTERNAL A LIMIT IS A GENERAL SAFE CONTENT_ADDRESSED ACQUISITION CONTRACT FOR NEW EXECUTABLE PRIMITIVES AND TOOLS WITHOUT GRANTING ARBITRARY CODE_EXECUTION OR LEARNED_PROVIDER SUBSTITUTION"
     },
     {
       "rank": 3,
@@ -570,7 +598,7 @@
     "library_first_measured_wall_clock_speedup_verified": true,
     "library_first_measured_speedup_scope": "THREE_ALREADY_VERIFIED_SYNTHETIC_TRANSFER_TASKS__MEDIAN_9_2745X_ON_SECOND_SPRITE",
     "default_verified_capability_registry_first_router_implemented": true,
-    "verified_capability_registry_seed_entries": 13,
+    "verified_capability_registry_seed_entries": 14,
     "verified_capability_registry_out_of_family_fail_closed": true,
     "non_synthetic_real_world_capability_verifier_cost_distribution_measured": true,
     "non_synthetic_real_world_capability_verifier_cost_scope": "FOUR_PRIOR_INDEPENDENTLY_VERIFIED_CLASSES__TEST_SUITE_PROXY__MEDIANS_APPROX_0_078_TO_0_084_SECONDS",
@@ -601,7 +629,11 @@
     "registry_v4_expression_escape_public_runner_verified": true,
     "finite_patch_grammar_escape_to_expression_search_verified": true,
     "broader_search_compile_reuse_loop_verified": true,
-    "learned_byte_rung_still_zero_after_registry_v4": true
+    "learned_byte_rung_still_zero_after_registry_v4": true,
+    "jit_verified_operator_acquisition_demonstrated": true,
+    "jit_verified_operator_scope": "ONE_PYTHON_STDLIB_ERF_PRIMITIVE_WITH_FROZEN_PROBES_AND_TRANSFER",
+    "registry_v5_jit_primitive_public_runner_verified": true,
+    "learned_byte_rung_still_zero_after_registry_v5": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
