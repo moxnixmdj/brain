@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_DUAL_SCOPE_BRIDGE_BATCH_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__JOINT_ZERO_REALITY_TWO_COMPONENT_SCOPE_BATCH__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_PARENT_OR_PERFORMANCE_CREDIT",
+  "objective": "Verify the artifact-creation and evidence-synthesis scope bridges in one content-addressed transaction and, only if both pass against the same frozen 4-of-12 base, admit both receipts simultaneously for a deterministic 6-of-12 scoped-proof projection.",
+  "base": {
+    "main_commit": "e057a7f756cbe93cdb277ad5ecb800103977c4f1",
+    "current_composition_authority": {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
+      "git_blob_sha": "5bb089582a5bc2ee4a44143c8d3a11e919fecdff",
+      "required_scoped_proved": [
+        "memory",
+        "recovery",
+        "delegation",
+        "tool discovery"
+      ],
+      "required_count": 4
+    }
+  },
+  "candidate_bridges": [
+    {
+      "path": "canonical/governance/COMPOSITION_ARTIFACT_CREATION_SCOPE_COMPLETE_BRIDGE_V1.json",
+      "git_blob_sha": "f400756e84284c5a6ce4971af61e544e9b2f94eb",
+      "component": "artifact creation",
+      "source_worker_pr": 2117
+    },
+    {
+      "path": "canonical/governance/COMPOSITION_EVIDENCE_SYNTHESIS_SCOPE_COMPLETE_BRIDGE_V1.json",
+      "git_blob_sha": "000de52136566e33531e28d17973f0ced56f92aa",
+      "component": "evidence synthesis",
+      "source_worker_pr": 2105
+    }
+  ],
+  "shared_source_bindings": {
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "composition_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "synthesis_scope_verification": {
+      "path": "canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "1852516f725f5b72badfc2f65be22e542ed83623"
+    }
+  },
+  "joint_derivation": {
+    "existing_components": [
+      "memory",
+      "recovery",
+      "delegation",
+      "tool discovery"
+    ],
+    "newly_proposed_components": [
+      "artifact creation",
+      "evidence synthesis"
+    ],
+    "pairwise_distinct": true,
+    "shared_base_required": true,
+    "scoped_proved_before": 4,
+    "scoped_proved_after_if_both_independently_verified": 6,
+    "open_after_if_both_independently_verified": 6,
+    "parent_component_dependency_predicate_closed": false,
+    "parent_composition_predicate_closed": false,
+    "strict_opus55_acceptance_delta": 0
+  },
+  "verification_collapse": {
+    "serial_candidate_verifications_avoided": 1,
+    "required_independent_transactions": 1,
+    "rule": "ONE_INDEPENDENT_REPLAY_MUST_VERIFY_BOTH_FULL_SOURCE_CHAINS_AND_THE_JOINT_NONOVERLAP_PROJECTION__PARTIAL_PASS_ADMITS_ONLY_THE_INDIVIDUALLY_VERIFIED_RECEIPT_AND_MUST_NOT_CLAIM_6_OF_12"
+  },
+  "hard_rules": [
+    "FAIL_CLOSED_IF_CURRENT_COMPOSITION_BASE_IS_NOT_EXACTLY_4_OF_12_WITH_MEMORY_RECOVERY_DELEGATION_TOOL_DISCOVERY",
+    "FAIL_CLOSED_IF_EITHER_BRIDGE_SOURCE_BLOB_OR_ANY_LOAD_BEARING_SOURCE_BLOB_DRIFTS",
+    "NO_SYNONYM_TRANSPORT_TO_ARTIFACT_PRODUCTION",
+    "NO_SYNTHESIS_MATCHED_QUALITY_OR_NONINFERIORITY_CREDIT",
+    "NO_AA_BRIEFCASE_PERFORMANCE_CREDIT",
+    "NO_PARENT_COMPOSITION_TERMINAL_SUCCESS_OR_INVARIANT_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "next": "INDEPENDENTLY_REPLAY_THE_SINGLE_JOINT_TEST_TRANSACTION__IF_BOTH_CHAINS_PASS_MATERIALIZE_A_SIX_RECEIPT_COMPOSITION_SLICE_AND_RERUN_THE_EXISTING_EXACT_SLICER__OTHERWISE_ADMIT_ONLY_ANY_INDIVIDUALLY_VERIFIED_BRIDGE",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
