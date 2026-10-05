@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_TOURNAMENT_POST_ACTIVATION_ENFORCEMENT_QUARANTINE_20261005_V1",
   "date": "2026-10-05",
-  "status": "ACTIVE_CANDIDATE__POST_ACTIVATION_OFF_FRONTIER_H100_WRITES_OBSERVED__QUARANTINE_FROM_TERMINAL_SCHEDULING_UNTIL_CONTENT_ADDRESSED_WAKE__ZERO_CREDIT",
+  "status": "ACTIVE_CANDIDATE__11_POST_ACTIVATION_OFF_FRONTIER_H100_WRITES_OBSERVED__QUARANTINE_FROM_TERMINAL_SCHEDULING_UNTIL_CONTENT_ADDRESSED_WAKE__ZERO_CREDIT",
   "authority": {
     "tournament_activation": {
       "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_ACTIVATION_20261005_V1.json",
@@ -33,6 +33,41 @@
       "commit": "8cdaf83ad2e8a41d873c144542b8cd7d3b22003e",
       "message": "Test complete H100 depth4 unary-chain search and transfer",
       "wake_receipt_observed": false
+    },
+    {
+      "commit": "023363329deb5daad5ba3252a24bd18cd9232bc5",
+      "message": "Verify complete H100 depth4 unary-chain search on second carrier",
+      "wake_receipt_observed": false
+    },
+    {
+      "commit": "6a2761fce756f771e58c65c5fbd08a4b9d45e247",
+      "message": "Freeze H100 Registry V8 depth4 chain compile contract",
+      "wake_receipt_observed": false
+    },
+    {
+      "commit": "cb0d098c5c61f3f401336d897ee7012c891b11ad",
+      "message": "Add H100 Registry V8 verified depth4 chain ratchet",
+      "wake_receipt_observed": false
+    },
+    {
+      "commit": "604171f7bd854d733b83cc5ce3885df4c3caf2f4",
+      "message": "Test H100 Registry V8 depth4 chain ratchet",
+      "wake_receipt_observed": false
+    },
+    {
+      "commit": "01fe55ace2c58564bfd1feca584ad8724e43d41a",
+      "message": "Verify H100 Registry V8 depth4 chain ratchet",
+      "wake_receipt_observed": false
+    },
+    {
+      "commit": "ee3da3b8bcaf60414e7c69c5730904a0dc0f24ec",
+      "message": "Reconcile H100 frontier with complete depth4 search and Registry V8",
+      "wake_receipt_observed": false
+    },
+    {
+      "commit": "fbb178748858c608744d24202ae15cdbd8bd96cb",
+      "message": "Record H100 UniChart V2 GitHub attempt1 verifier infrastructure failure",
+      "wake_receipt_observed": false
     }
   ],
   "adjudication": {
@@ -41,13 +76,20 @@
     "source_preservation": "PRESERVE_FILES_AND_RESULTS_AS_DORMANT_RESEARCH__DO_NOT_DELETE_USEFUL_WORK",
     "reentry_rule": "H100_MAY_REENTER_ONLY_WITH_A_CONTENT_ADDRESSED_WAKE_RECEIPT_THAT_MATERIALLY_CHANGES_THE_CURRENT_TERMINAL_FRONTIER"
   },
-  "enforcement_counterexample": "REPOSITORY_WIDE_PREWRITE_ENFORCEMENT_IS_NOT_CLOSED__FOUR_OFF_FRONTIER_H100_COMMITS_LANDED_AFTER_TOURNAMENT_ACTIVATION_ON_MAIN",
+  "enforcement_counterexample": "REPOSITORY_WIDE_PREWRITE_ENFORCEMENT_IS_NOT_CLOSED__ELEVEN_OFF_FRONTIER_H100_COMMITS_LANDED_AFTER_TOURNAMENT_ACTIVATION_ON_MAIN",
   "scheduler_effect": {
     "quarantine_commits": [
       "5fc6925ffe91946cfd8c2d240d91ecc8a36b4fa3",
       "c49c078501c22cb1c6105d5bfc80a2628ddd79d2",
       "dfb3992d68fbdc2ea4dcc8fb7efc9471a09306e8",
-      "8cdaf83ad2e8a41d873c144542b8cd7d3b22003e"
+      "8cdaf83ad2e8a41d873c144542b8cd7d3b22003e",
+      "023363329deb5daad5ba3252a24bd18cd9232bc5",
+      "6a2761fce756f771e58c65c5fbd08a4b9d45e247",
+      "cb0d098c5c61f3f401336d897ee7012c891b11ad",
+      "604171f7bd854d733b83cc5ce3885df4c3caf2f4",
+      "01fe55ace2c58564bfd1feca584ad8724e43d41a",
+      "ee3da3b8bcaf60414e7c69c5730904a0dc0f24ec",
+      "fbb178748858c608744d24202ae15cdbd8bd96cb"
     ],
     "forbid_descendant_h100_terminal_scheduling_without_wake": true,
     "preserve_current_selected_interface": "EXTERNAL_RESULT_OR_ACCESS"
