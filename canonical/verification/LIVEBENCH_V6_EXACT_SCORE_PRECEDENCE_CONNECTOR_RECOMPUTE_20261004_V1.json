@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V6_EXACT_SCORE_PRECEDENCE_CONNECTOR_RECOMPUTE_V1",
+  "date": "2026-10-04",
+  "status": "PASS__CONNECTOR_INDEPENDENT_RECOMPUTE__PUBLIC_RUNNER_STILL_REQUIRED_FOR_PROMOTION",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "commit": "f3c439f329c7b481a8448a0619e7696111e05ecc",
+    "blobs": {
+      "execution_log": "6c9c89cd2f7e977405017cb5ddfa8033126f4bf2",
+      "reconciliation": "b1e14f11d97673a499f2d9a5e2c708d9aba969fb",
+      "exit_code": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56"
+    }
+  },
+  "recomputed": {
+    "case_count": 72,
+    "unique_question_ids": 72,
+    "actual_score_exact_zero_all": true,
+    "scoring_error_null_all": true,
+    "empty_response_hash_all": true,
+    "policy_blocked_post_prompt_capability_acquisition": 43,
+    "inference_exit_1": 29,
+    "observed_score_mass": 0,
+    "remaining_unseen": 128,
+    "conservative_full_population_upper_percent": 64,
+    "strict_opus_mean_percent": 65.73775,
+    "frozen_v6_predicate_pass_possible": false,
+    "case_73_plus_needed_for_v6_decision": false
+  },
+  "theorem": [
+    "THE_BOUND_72_CASE_RECEIPTS_ARE_COMPLETED_SCORER_OUTPUTS_NOT_LOWER_BOUND_ONLY_ABSTRACTIONS",
+    "EACH_BOUND_CASE_SCORE_INTERVAL_IS_EXACTLY_[0,0]",
+    "MAXIMUM_REMAINING_SCORE_MASS_IS_128",
+    "MAXIMUM_FULL_POPULATION_PERCENT_IS_64_0",
+    "64_0_IS_STRICTLY_BELOW_65_73775",
+    "THE_FROZEN_V6_CANDIDATE_IS_FORCED_FALSE_WITHOUT_CASE_73_PLUS"
+  ],
+  "consequence": {
+    "engineering_priority": "CHANGE_RESPONSE_PRODUCTION_PATH__DO_NOT_SPEND_MORE_REALITY_ON_V6_MEASUREMENT",
+    "next_candidate_requirement": "NONEMPTY_CHECKER_VALID_VISIBLE_PROMPT_LEGACY_IFEVAL_SUCCESSOR",
+    "replay_scope": "ONLY_ALREADY_EXPOSED_72_AFTER_PRECOMMIT_AND_AUTHORITY"
+  },
+  "hard_nonclaims": [
+    "NO_SUCCESSOR_PASS_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_NEW_TERMINAL_CASE_CONTENT",
+    "PUBLIC_RUNNER_META_VERIFICATION_PR_1980_REMAINS_QUEUED_AND_IS_STILL_REQUIRED_BY_EXISTING_PROMOTION_POLICY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
