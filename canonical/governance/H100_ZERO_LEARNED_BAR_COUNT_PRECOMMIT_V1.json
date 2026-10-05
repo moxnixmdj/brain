@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_BAR_COUNT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__DEVELOPMENT_ONLY_V2H_640_CONSUMED__FRESH_HOLDOUT_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "objective": "Test whether a deterministic pixel-geometry decoder can count visible chart bars without learned visual state.",
+  "development_case": {
+    "id": "V2H_640",
+    "query": "How many bars are shown in the charts ?",
+    "known_label": "10",
+    "source_status": "ALREADY_CONSUMED_DEVELOPMENT_ONLY",
+    "observed_geometry": "ONE_DOMINANT_SATURATED_COLOR_FORMED_TEN_REPEATED_HORIZONTAL_OCCUPANCY_BANDS"
+  },
+  "frozen_algorithm": {
+    "rgb_quantization_step": 16,
+    "minimum_color_chroma": 32,
+    "maximum_candidate_mean_brightness": 235,
+    "minimum_candidate_pixel_fraction": 0.001,
+    "orthogonal_occupancy_threshold_fraction": 0.02,
+    "orthogonal_occupancy_threshold_min_pixels": 8,
+    "band_thickness_min_pixels": 2,
+    "band_thickness_max_fraction": 0.2,
+    "candidate_band_count_range": [
+      2,
+      50
+    ],
+    "candidate_score": "BAND_COUNT_TIMES_ONE_OVER_ONE_PLUS_THICKNESS_CV_TIMES_BAND_PIXEL_COVERAGE",
+    "select_orientation": "MAX_SINGLE_CANDIDATE_SCORE",
+    "aggregate_colors": "SAME_ORIENTATION_CANDIDATES_WITH_SCORE_AT_LEAST_MAX_1_5_AND_0_30_TIMES_BEST_SCORE",
+    "merge_duplicate_bands": "OVERLAPPING_BANDS_OR_CENTERS_WITHIN_HALF_THE_SMALLER_BAND_THICKNESS",
+    "minimum_best_score": 1.5,
+    "output": "MERGED_BAND_COUNT_OR_ABSTAIN"
+  },
+  "dependencies": [
+    "PILLOW",
+    "NUMPY"
+  ],
+  "learned_state": {
+    "persistent_learned_bytes": 0,
+    "external_learned_capability_calls": 0,
+    "pretrained_vision_models": 0,
+    "ocr_models": 0
+  },
+  "holdout_rule": "SELECT_PUBLIC_CHARTQA_VALIDATION_CASES_BY_QUERY_TEXT_AND_CONTENT_HASH_ONLY__EXCLUDE_ALL_PRIOR_V1_V2_CASES__DO_NOT_READ_LABELS_OR_IMAGES_BEFORE_THIS_RUNTIME_IS_FROZEN",
+  "hard_nonclaims": [
+    "ONE_CONSUMED_DEVELOPMENT_CASE_IS_NOT_CAPABILITY_EVIDENCE",
+    "NO_OCR_OR_VALUE_READING_CLAIM",
+    "NO_GENERAL_CHART_UNDERSTANDING_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
