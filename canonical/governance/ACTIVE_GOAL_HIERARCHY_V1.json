@@ -6,8 +6,8 @@
   "active_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "active_probe": null,
   "probe_state": "TERMINAL_V3_ONE_SHOT_CONSUMED__3352_OF_3352_PASS__12_OF_12_BEHAVIORAL_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_FROZEN_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS_PASS__14_OPEN",
-  "current_parent_blocker": "TERMINAL_FALSE__14_OF_19_FAMILIES_OPEN__26_OF_38_ATOMIC_PREDICATES_UNRESOLVED__TOOL_DISCOVERY_ACCEPTANCE_CLOSED__ROOT_CLASSIFICATION_AND_FIXED_POINT_RECOMPILE_NEXT",
-  "next_required_action_class": "ZERO_REALITY_EXISTING_RECEIPT_SATURATION_ON_CURRENT_12_OF_38_STATE__NO_FRESH_REALITY__THEN_FIXED_POINT_RECOMPILE",
+  "current_parent_blocker": "TERMINAL_FALSE__14_OF_19_FAMILIES_OPEN__24_OF_38_ATOMIC_PREDICATES_UNRESOLVED__14_OF_38_PROVED__CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_ACTIVE__ROOT1_POSITIVE_GAP_ZERO__META_ENVELOPE_AND_ACCEPTANCE_CLOSURE_REMAIN_OPEN",
+  "next_required_action_class": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V12__EXECUTE_ONLY_INFORMATION_POSITIVE_ZERO_REALITY_GROUPS_WITH_AVAILABLE_ACCESS__NO_FRESH_REALITY__RECOMPUTE_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY__TERMINAL_V3_REPLAY__NAMED_BENCHMARK_SCORE_INHERITANCE__PROVISIONAL_BEHAVIORAL_PASS_PROMOTED_AS_OPUS55_OWNERSHIP__HIDDEN_EXTERNAL_TARGET_CAPABILITY_PROVIDER_PROMOTED_AS_BRAIN_OWNERSHIP__CLEAN_ACCEPTANCE_CASE_SPEND_BEFORE_SOURCE_GATE_V2_PASS",
   "progress_level_minimum": "PERMANENT_VERIFIED_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "probe_budget": {
@@ -200,7 +200,7 @@
     "parent_capability_promoted": false,
     "whole_envelope_complete": false
   },
-  "next_progress_event_target": "EXISTING_RECEIPT_SATURATION_PASS_OR_FALSIFICATION__THEN_CURRENT_FIXED_POINT_RECOMPILE",
+  "next_progress_event_target": "FIRST_VERIFIED_DELTA_OR_FALSIFICATION_FROM_CURRENT_ZERO_REALITY_MINIMUM_CUT_V12__THEN_IMMEDIATE_FIXED_POINT_RECOMPILE_AND_DOMINATED_WORK_DELETION",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -1009,18 +1009,189 @@
   },
   "terminal_authority_projection": {
     "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-    "source_commit_sha": "7e039460c7a2ee2fa465ea53a9a500fd145a89ca",
-    "rule": "NEXT_AND_ACCEPTANCE_COUNTS_DERIVED_FROM_CURRENT_TERMINAL_AUTHORITY__RECOVERY_V2_PROMOTION_RECONCILED"
+    "authority_git_blob_sha": "b1870974faf1579ea2da3b7000070b3d715fb8e2",
+    "source_commit_sha": "548061bf91476f381e58766e3e363aefb0a6882a",
+    "projected_atomic_acceptance": "14_OF_38_PROVED__24_OF_38_OPEN",
+    "projected_family_acceptance": "5_OF_19_PASS__14_OF_19_OPEN",
+    "rule": "NEXT_AND_ACCEPTANCE_COUNTS_DERIVED_FROM_CURRENT_TERMINAL_AUTHORITY__FAIL_CLOSED_ON_BLOB_OR_COUNT_DRIFT"
   },
   "current_acceptance_reconciliation": {
-    "status": "TOOL_DISCOVERY_PROMOTED__5_OF_19__12_OF_38",
-    "activation": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_ACTIVATION_V1.json",
-    "root_state": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "status": "CURRENT_TERMINAL_AUTHORITY_RECONCILED__5_OF_19_ACCEPTANCE_PASS__14_OF_38_ATOMIC_PROVED__24_OPEN",
+    "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "authority_git_blob_sha": "b1870974faf1579ea2da3b7000070b3d715fb8e2",
+    "zero_reality_cut_activation": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_ACTIVATION_V1.json",
+    "zero_reality_cut_git_blob_sha": "c36ba3a9b49f54ebe8a3ebcb435cf3d4798c2398",
     "ownership_credit_delta": 0,
-    "residual_v4": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "authorized_actions": [
-      "ACTION::SATURATE_EXISTING_RECEIPTS"
+    "acceptance_credit_delta": 0,
+    "fresh_reality_authorized": false,
+    "authorized_action_groups": [
+      "A_TB4_ZERO_COST_CARRIER_RACE",
+      "B_AUTHENTICATED_SELF_SERVICE_ACCESS_SWEEP",
+      "C_VALS_FINANCE_AGENT_PREFLIGHT",
+      "D_OWNER_OR_PLATFORM_RESULT_BATCH",
+      "E_FINANCE_INDEX_COMPONENT_BOUND_COMPILATION",
+      "F_SYNTHESIS_COMPARATOR_CERTIFICATE",
+      "G_ROOT3_SCOPE_CERTIFICATE_RACE",
+      "H_COMPOSITION_UPSTREAM_RECEIPT_RECOMPUTE",
+      "I_FINANCE_DIRECT_ORACLE_HOLD"
     ]
   },
-  "current_acceptance_scoreboard_overlay_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_CURRENT_ACCEPTANCE_OVERLAY_V1.json"
+  "current_acceptance_scoreboard_overlay_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_CURRENT_ACCEPTANCE_OVERLAY_V1.json",
+  "current_authority_reconciliation_20261005": {
+    "schema": "PROJECT_BRAIN_ACTIVE_GOAL_HIERARCHY_CURRENT_AUTHORITY_RECONCILIATION_V1",
+    "status": "ACTIVE_TRUTH_REPAIR__STALE_12_OF_38_PROJECTION_DELETED__14_OF_38_AUTHORITY_BOUND__ZERO_CREDIT",
+    "date": "2026-10-05",
+    "canonical_base_commit": "2b68ed8fa4ad32393ccea092278b3d78f255082a",
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "source_bindings": {
+      "current_terminal_authority": {
+        "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+        "git_blob_sha": "b1870974faf1579ea2da3b7000070b3d715fb8e2"
+      },
+      "current_zero_reality_cut_activation": {
+        "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_ACTIVATION_V1.json",
+        "git_blob_sha": "c36ba3a9b49f54ebe8a3ebcb435cf3d4798c2398"
+      }
+    },
+    "action_intent_v11": {
+      "action_id": "ACTIVE_GOAL_HIERARCHY_14_38_RECONCILIATION_20261005_V1",
+      "status": "EXECUTED_CONTROL_PLANE_TRUTH_REPAIR__POSTCOMMIT_REVALIDATION_REQUIRED",
+      "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+      "action_kind": "CONTROL_PLANE_TRUTH_RECONCILIATION__NO_FRESH_REALITY",
+      "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::STALE_ACTIVE_GOAL_HIERARCHY_ATOMIC_ACCEPTANCE_PROJECTION",
+      "expected_parent_frontier_change": "DELETE_STALE_12_OF_38_SCHEDULER_PROJECTION__BIND_14_OF_38_24_OPEN_AUTHORITY_AND_V12_ZERO_REALITY_CUT",
+      "theory_invariants": {
+        "knowledge_policy": "EXTERNAL_JIT",
+        "capability_policy": "DURABLE_BRAIN_OWNED_AND_VERIFIED_GE_OPUS55",
+        "capability_invention": false,
+        "incremental_spend_usd": 0
+      },
+      "ownership_tests": {
+        "applies": false,
+        "reason": "NO_CAPABILITY_OR_OWNERSHIP_PROMOTION"
+      },
+      "reasoning_durability": {
+        "real_objective": "PREVENT_ALL_WORKERS_FROM_SCHEDULING_AGAINST_SUPERSEDED_ACCEPTANCE_TRUTH",
+        "material_premises": [
+          "ACTIVE_GOAL_HIERARCHY a917b1024ac6dda683db1a16114a5141394d875c scheduled 12/38",
+          "CURRENT_TERMINAL_AUTHORITY b1870974faf1579ea2da3b7000070b3d715fb8e2 proves 14/38 and 24 open",
+          "V12 cut c36ba3a9b49f54ebe8a3ebcb435cf3d4798c2398 binds nine zero-reality action groups"
+        ],
+        "conclusion": "STALE_DERIVED_HIERARCHY_MUST_BE_REBOUND_BEFORE_FURTHER_CONSEQUENTIAL_SCHEDULING",
+        "selected_route": "DELETE_STALE_PROJECTION__REUSE_HIGHER_AUTHORITY_TERMINAL_STATE_AND_CURRENT_CUT",
+        "rejected_material_alternatives": [
+          "EXECUTE_FROM_12_OF_38__STALE",
+          "RECOMPUTE_ACCEPTANCE_FROM_SCRATCH__DUPLICATE",
+          "SPEND_FRESH_TERMINAL_EVIDENCE__UNAUTHORIZED_AND_UNNECESSARY"
+        ],
+        "uncertainties": [
+          "CONCURRENT_MAIN_ADVANCE_CAN_CHANGE_PARENT_COMMIT__POSTCOMMIT_PARENT_AND_SOURCE_REVALIDATION_REQUIRED"
+        ],
+        "non_goals": [
+          "NO_ACCEPTANCE_PROMOTION",
+          "NO_CAPABILITY_PROMOTION",
+          "NO_BENCHMARK_EXECUTION"
+        ],
+        "next_action": "REREAD_COMMIT_PARENT_HIERARCHY_AUTHORITY_AND_CUT__FAIL_CLOSED_ON_ANY_MISMATCH",
+        "supersession_conditions": [
+          "CURRENT_TERMINAL_AUTHORITY_CHANGES",
+          "V12_CUT_SUPERSEDED"
+        ]
+      },
+      "recursive_obs": {
+        "goal": "REMOVE_STALE_DERIVED_SCHEDULER_STATE_WITHOUT_CHANGING_TERMINAL_GOAL",
+        "capability": "NO_NEW_CAPABILITY_NEEDED",
+        "blocker": "STALE_12_OF_38_CURRENT_PROJECTION",
+        "solution": "DELETE_STALE_FIELDS__REUSE_CURRENT_AUTHORITY_AND_CUT",
+        "verification": "CONTENT_ADDRESSED_POSTCOMMIT_EQUALITY",
+        "inherited_system": "NO_NEW_INFRASTRUCTURE",
+        "obs": "STOP_AFTER_DETERMINISTIC_RECONCILIATION",
+        "exact_base_binding": "2b68ed8fa4ad32393ccea092278b3d78f255082a"
+      },
+      "behavioral_contract": {
+        "behavior_id": "CANONICAL_AUTHORITY_EPOCH_RECONCILIATION_001",
+        "inputs": "Current terminal authority, active goal hierarchy, current zero-reality cut at one observed main head",
+        "environment_state": "Canonical control plane after verified acceptance deltas advanced authority beyond derived scheduler state",
+        "allowed_information": "Current canonical repository artifacts only; no untouched terminal cases",
+        "required_output_or_action": "Make current hierarchy projection equal current terminal authority and current zero-reality cut while preserving historical records",
+        "success_condition": "Current projection is 14/38 proved, 24 open, 5/19 accepted, schedules exactly nine V12 groups, and grants zero credit/fresh reality",
+        "failure_condition": "Any current 12/38 projection survives, counts differ, cut groups differ, or credit/fresh-reality authority increases",
+        "terminal_consequence": "Prevents stale scheduling and duplicate evidence/work; no acceptance credit itself",
+        "verification_route": "Postcommit exact reread against bound blobs",
+        "dependency_boundary": "Pure control-plane metadata projection",
+        "scope": "Current scheduling projection only"
+      },
+      "prequalification_controls": {
+        "applies": false,
+        "reason": "NO_QUALIFICATION_EXPOSURE_OR_PROMOTION"
+      },
+      "qualification_stage": "NOT_APPLICABLE__CONTROL_PLANE_TRUTH_REPAIR",
+      "terminal_proof_control": {
+        "proof_obligation": "CURRENT_SCHEDULING_PROJECTION_EQUALS_CURRENT_TERMINAL_AUTHORITY_AND_V12_CUT",
+        "hole_type": "STALE_DERIVED_AUTHORITY",
+        "validator": "CONTENT_ADDRESSED_FIELD_EQUALITY",
+        "maximum_cheap_test_cost": 0,
+        "contamination_risk": "NONE",
+        "reversibility": "REVERSIBLE_METADATA_PATCH",
+        "falsification_condition": "POSTCOMMIT_EQUALITY_OR_SOURCE_BINDING_FAILS",
+        "critical_path_relation": "SHARED_SCHEDULER_TRUTH"
+      },
+      "continuous_obs": {
+        "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+        "canonical_state_dependencies": [
+          "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+          "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+          "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_ACTIVATION_V1.json"
+        ],
+        "dependency_inventory_complete": true,
+        "material_world_state_dependencies_complete": true,
+        "unknown_material_dependencies": [],
+        "obs_layers_current": true,
+        "stale_authority_absent": false,
+        "valid_proof_action_priority": true,
+        "information_boundary_complete": true,
+        "information_policy": "NO_NEW_REALITY"
+      },
+      "reality_query_admission": {
+        "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+        "reason": "EXISTING_CANONICAL_TRUTH_DETERMINISTICALLY_SETTLES_THE_CONTROL_PLANE_MISMATCH"
+      },
+      "global_terminal_proof_cut": {
+        "applies": false,
+        "reason": "NO_NEW_TERMINAL_RELEVANT_OBSERVATION"
+      }
+    },
+    "deleted_stale_projection": {
+      "atomic_state": "12_OF_38_PROVED__26_OPEN"
+    },
+    "installed_projection": {
+      "atomic_state": "14_OF_38_PROVED__24_OPEN",
+      "family_state": "5_OF_19_PASS__14_OPEN",
+      "action_groups": [
+        "A_TB4_ZERO_COST_CARRIER_RACE",
+        "B_AUTHENTICATED_SELF_SERVICE_ACCESS_SWEEP",
+        "C_VALS_FINANCE_AGENT_PREFLIGHT",
+        "D_OWNER_OR_PLATFORM_RESULT_BATCH",
+        "E_FINANCE_INDEX_COMPONENT_BOUND_COMPILATION",
+        "F_SYNTHESIS_COMPARATOR_CERTIFICATE",
+        "G_ROOT3_SCOPE_CERTIFICATE_RACE",
+        "H_COMPOSITION_UPSTREAM_RECEIPT_RECOMPUTE",
+        "I_FINANCE_DIRECT_ORACLE_HOLD"
+      ]
+    },
+    "accounting": {
+      "incremental_spend_usd": 0,
+      "new_reality_units_consumed": 0,
+      "terminal_cases_consumed": 0,
+      "acceptance_credit_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
+    },
+    "hard_nonclaims": [
+      "NO_TERMINAL_GOAL_ACHIEVED_CLAIM",
+      "NO_NEW_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+      "NO_FRESH_REALITY_AUTHORITY"
+    ]
+  }
 }
