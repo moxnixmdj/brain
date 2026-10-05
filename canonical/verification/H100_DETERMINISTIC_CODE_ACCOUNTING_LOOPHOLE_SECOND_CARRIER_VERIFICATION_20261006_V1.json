@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DETERMINISTIC_CODE_ACCOUNTING_LOOPHOLE_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__5_OF_5__REPRESENTATION_DEPENDENCE_CONFIRMED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_DETERMINISTIC_CODE_ACCOUNTING_LOOPHOLE_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_deterministic_code_accounting_loophole_v1.py",
+    "tests": "canonical/tests/test_h100_deterministic_code_accounting_loophole_v1.py"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "verified": {
+    "tests_passed": 5,
+    "tests_total": 5,
+    "finite_lookup_training_accuracy": 1,
+    "finite_lookup_runtime_learned_bytes": 0,
+    "unseen_input_abstains": true,
+    "equal_total_persistent_bytes_can_have_different_learned_byte_counts_under_syntax_only_accounting": true,
+    "conflicting_lookup_rows_fail_closed": true
+  },
+  "deduction": "LEARNED_BYTE_COUNT_ALONE_IS_NOT_REPRESENTATION_INVARIANT_WHEN_CAPABILITY_BEARING_DETERMINISTIC_CODE_IS_UNCOUNTED__FRESH_HOLDOUTS_BLOCK_TRIVIAL_LOOKUP_BUT_RESIDENT_DETERMINISTIC_CAPABILITY_SIZE_MUST_BE_REPORTED_TO_INTERPRET_ZERO_LEARNED_RESULTS",
+  "hard_nonclaims": [
+    "DOES_NOT_CHANGE_THE_USER_DEFINED_LEARNED_BYTE_METRIC",
+    "DOES_NOT_INVALIDATE_FRESH_GENERALIZATION_RESULTS",
+    "DOES_NOT_RECLASSIFY_HAND_DESIGNED_DETERMINISTIC_PROGRAMS_AS_LEARNED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
