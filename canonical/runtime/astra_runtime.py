@@ -4270,12 +4270,47 @@ def _run_model_independent_goal(step, mission, goal):
     }
     checkpoint_path,checkpoint,resumed=_load_controller_checkpoint(step,mission,actions)
     trace=list(checkpoint.get("completed_actions") or [])
+
+    composition_enabled=any(
+        isinstance(action,dict) and action.get("_brain_composition_contract") is not None
+        for action in actions
+    )
+    composition_adapter=None
+    composition_capsule=None
+    if composition_enabled:
+        composition_adapter=_load_runtime_helper("composition_state_capsule_adapter_v1")
+        try:
+            composition_capsule=composition_adapter.bind_checkpoint(
+                actions,checkpoint,trace
+            )
+        except Exception as exc:
+            raise Blocker(
+                "COMPOSITION_CAPSULE_BINDING_FAILED:"
+                +type(exc).__name__+":"+str(exc)
+            ) from exc
+        checkpoint["composition_state_capsule"]=composition_capsule
+        writej(checkpoint_path,checkpoint)
+
     start_cycle=len(trace)
     for cycle in range(start_cycle,len(actions)):
         raw_action=actions[cycle]
         if not isinstance(raw_action,dict):
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_NOT_OBJECT")
-        action=_resolve_result_refs(dict(raw_action),trace)
+        if (
+            composition_enabled
+            and raw_action.get("_brain_composition_contract") is not None
+        ):
+            try:
+                action=composition_adapter.resolve_action(
+                    dict(raw_action),trace,composition_capsule
+                )
+            except Exception as exc:
+                raise Blocker(
+                    "COMPOSITION_CAPSULE_RESOLUTION_FAILED:"
+                    +type(exc).__name__+":"+str(exc)
+                ) from exc
+        else:
+            action=_resolve_result_refs(dict(raw_action),trace)
         typ=action.get("type")
         if typ not in allowed_types:
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:"+str(typ))
@@ -4286,7 +4321,23 @@ def _run_model_independent_goal(step, mission, goal):
         if isinstance(result,dict) and result.get("error"):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         _verify_action_expectation(action,result)
-        trace.append({"cycle":cycle,"plan":action,"result":result})
+        trace_record={"cycle":cycle,"plan":action,"result":result}
+        if (
+            composition_enabled
+            and action.get("_brain_composition_contract") is not None
+        ):
+            try:
+                composition_capsule=composition_adapter.commit_result(
+                    composition_capsule,action,result
+                )
+            except Exception as exc:
+                raise Blocker(
+                    "COMPOSITION_CAPSULE_COMMIT_FAILED:"
+                    +type(exc).__name__+":"+str(exc)
+                ) from exc
+            trace_record["composition_capsule_head_hash"]=composition_capsule["head_hash"]
+            checkpoint["composition_state_capsule"]=composition_capsule
+        trace.append(trace_record)
         checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
         interrupt_after=step.get("interrupt_after_controller_actions_once")
         if interrupt_after is not None:
@@ -4319,6 +4370,18 @@ def _run_model_independent_goal(step, mission, goal):
                 "resumed_from_action_index":start_cycle,
                 "rewind_count":int(checkpoint.get("rewind_count") or 0),
                 "last_rewound_from_action_index":checkpoint.get("last_rewound_from_action_index"),
+              },
+              "composition_state_capsule":{
+                "enabled":bool(composition_enabled),
+                "head_hash":(
+                    composition_capsule.get("head_hash")
+                    if isinstance(composition_capsule,dict) else None
+                ),
+                "record_count":(
+                    len(composition_capsule.get("records") or [])
+                    if isinstance(composition_capsule,dict) else 0
+                ),
+                "authority":"CAPSULE_FOR_CONTRACTED_CAPABILITY_CROSS_STEP_STATE_ONLY",
               }
             }
     raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH")
