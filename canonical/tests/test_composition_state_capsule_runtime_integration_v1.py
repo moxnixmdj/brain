@@ -102,9 +102,9 @@ class CompositionStateCapsuleRuntimeIntegrationTests(unittest.TestCase):
         self.assertEqual(capsule["status"], "PASS")
         self.assertEqual(capsule["record_count"], 2)
         self.assertTrue(capsule["head_hash"])
-        self.assertEqual(
+        self.assertNotEqual(
             result["trace"][0]["composition_capsule_head_hash"],
-            result["trace"][0]["composition_capsule_head_hash"],
+            result["trace"][1]["composition_capsule_head_hash"],
         )
 
     def test_unbound_raw_result_reference_fails_closed(self):
