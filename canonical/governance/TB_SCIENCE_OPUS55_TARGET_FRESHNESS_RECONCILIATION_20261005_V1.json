@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ACTIVE_ROOT2_TB_SCIENCE_TARGET_FRESHNESS_RESOLVED_TO_HARNESS_CONDITIONAL_COMPARATOR__ZERO_CREDIT",
+  "objective": "Resolve the active Root2 route requirement TARGET_FRESHNESS_MUST_BE_RESOLVED_BEFORE_ACCEPTANCE for TB_SCIENCE_GE_58_7 without consuming fresh terminal reality and without weakening the terminal objective.",
+  "active_route": {
+    "predicate_id": "TB_SCIENCE_GE_58_7",
+    "route_authority": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V3.json",
+    "current_route": "VERIFIER_SUCCESS_MASS_WITH_EARLY_STOP_CERTIFICATE__TARGET_FRESHNESS_MUST_BE_RESOLVED_BEFORE_ACCEPTANCE"
+  },
+  "primary_public_observations": [
+    {
+      "source": "Anthropic Claude Opus 5.5 launch page",
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "published": "2026-09-22",
+      "reported_score_percent": 58.7,
+      "benchmark": "Terminal-Bench-Science 0.1",
+      "setup_note": "Anthropic release evaluation; page states standard error approximately +/-3.5 to 5 points per model and separately references the public leaderboard."
+    },
+    {
+      "source": "Terminal-Bench-Science official leaderboard",
+      "url": "https://www.terminal-bench-science.ai/",
+      "observed_date": "2026-10-05",
+      "reported_score_percent": 63.3,
+      "reported_uncertainty_percent": 3.3,
+      "benchmark": "Terminal-Bench-Science 0.1",
+      "model": "Opus 5.5(max)",
+      "agent": "Claude Code",
+      "task_count": 70
+    }
+  ],
+  "truth_reconciliation": {
+    "classification": "NOT_A_SINGLE_UNCONDITIONAL_THRESHOLD",
+    "reason": "Two primary sources report different Opus 5.5 scores for the same benchmark label under non-identical reported evaluation contexts. The canonical same-scope rule forbids transplanting the weaker score across harness/setup boundaries.",
+    "legacy_predicate_id_policy": "PRESERVE_ID_AS_STABLE_LEGACY_IDENTIFIER_ONLY__DO_NOT_INTERPRET_SUFFIX_58_7_AS_UNIVERSAL_CURRENT_TARGET",
+    "same_harness_branches": [
+      {
+        "branch": "PUBLIC_TB_SCIENCE_0_1_CURRENT_LEADERBOARD_ROUTE",
+        "required_opus_floor_percent": 63.3,
+        "condition": "Brain evaluation is run on the same frozen public task population and materially comparable public benchmark harness/tool authority.",
+        "preferred": true,
+        "reason": "Current benchmark-owner result and publicly reproducible route."
+      },
+      {
+        "branch": "ANTHROPIC_RELEASE_20260922_ROUTE",
+        "required_opus_floor_percent": 58.7,
+        "condition": "The exact Anthropic release evaluation setup producing 58.7 is independently shown to be materially identical to the Brain evaluation setup.",
+        "preferred": false,
+        "reason": "Valid only for that exact setup; may not be transferred to the current public leaderboard route."
+      },
+      {
+        "branch": "OTHER_OR_UNRESOLVED_ROUTE",
+        "required_opus_floor_percent": null,
+        "condition": "Harness/setup identity to either published branch is not proved.",
+        "fallback": "MATCHED_OPUS55_SAME_HARNESS_COMPARATOR_OR_FAIL_CLOSED_NOT_PROVEN"
+      }
+    ]
+  },
+  "scheduler_effect": {
+    "delete": [
+      "UNCONDITIONAL_USE_OF_58_7_AS_TB_SCIENCE_OPUS55_TARGET",
+      "CROSS_HARNESS_TARGET_TRANSPLANT",
+      "POST_RESULT_TARGET_SELECTION"
+    ],
+    "activate": [
+      "FREEZE_TB_SCIENCE_HARNESS_IDENTITY_BEFORE_ANY_BRAIN_RESULT",
+      "PREFER_CURRENT_PUBLIC_63_3_ROUTE_WHEN_PUBLIC_HARNESS_IDENTITY_IS_PROVED",
+      "USE_58_7_ONLY_IF_EXACT_ANTHROPIC_RELEASE_SETUP_IDENTITY_IS_PROVED",
+      "OTHERWISE_REQUIRE_MATCHED_SAME_HARNESS_OPUS55_COMPARATOR_OR_FAIL_CLOSED"
+    ],
+    "root2_predicate_count_delta": 0,
+    "acceptance_credit_delta": 0
+  },
+  "hard_rules": [
+    "NO_TARGET_REBASE_AFTER_BRAIN_RESULTS",
+    "NO_WEAKER_58_7_TARGET_ON_CURRENT_PUBLIC_63_3_ROUTE",
+    "NO_MIXING_SCORE_FROM_ONE_SETUP_WITH_SUCCESS_MASS_FROM_ANOTHER",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_TARGET_RECONCILIATION",
+    "NO_FRESH_REALITY_AUTHORITY_FROM_THIS_RECONCILIATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
