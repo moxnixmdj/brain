@@ -140,3 +140,14 @@ def test_git_blob_sha_uses_real_nul_separator(tmp_path):
     (tmp_path / "x").write_bytes(payload)
     expected = hashlib.sha1(b"blob 3\0abc").hexdigest()
     assert git_blob_sha("x", tmp_path) == expected
+
+
+def test_terminal_frontier_governance_artifact_is_strict_json():
+    with open(
+        "canonical/governance/TERMINAL_FRONTIER_COMPILER_V1.json",
+        "r",
+        encoding="utf-8",
+    ) as fh:
+        artifact = json.load(fh)
+    assert artifact["schema"] == "PROJECT_BRAIN_TERMINAL_FRONTIER_COMPILER_V1"
+    assert artifact["independent_verification_required"] is True
