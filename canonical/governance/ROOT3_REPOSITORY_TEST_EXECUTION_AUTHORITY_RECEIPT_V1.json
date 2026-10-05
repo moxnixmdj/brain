@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_REPOSITORY_TEST_EXECUTION_AUTHORITY_RECEIPT_V1",
+  "policy_id": "ROOT3_REPOSITORY_TEST_EXECUTION_V1",
+  "effect_kind": "EXTERNAL_MUTATION",
+  "operation": "invoke_repository_test",
+  "resource": "python:subprocess.run:BOUND_CHILD_CODE_EXECUTION:REPOSITORY_TEST_EXECUTION",
+  "profile": "REPOSITORY_TEST_EXECUTION",
+  "material_child_commit": "DENY",
+  "network": "PRIVATE_NAMESPACE_ONLY",
+  "scope_complete": true,
+  "allow_implies_zero_critical_authority_violation": true,
+  "independent_or_objective": true
+}
