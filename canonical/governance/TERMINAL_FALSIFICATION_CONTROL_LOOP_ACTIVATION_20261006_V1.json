@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FALSIFICATION_CONTROL_LOOP_ACTIVATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "ACTIVE_IF_MERGED__AUTHORITATIVE_SCHEDULING_CONTROL_ONLY__LOCAL_REPLAY_10_OF_10__INDEPENDENT_REPLAY_OPEN__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subjects": {
+    "action_intent": {
+      "path": "canonical/action_intents/2026-10-06_ACTIVATE_TERMINAL_FALSIFICATION_CONTROL_LOOP_V1.json",
+      "git_blob_sha": "e129e58551055becc148876def67a5d5d56bf29a"
+    },
+    "governance": {
+      "path": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V1.json",
+      "git_blob_sha": "89babb15eee427ed96a885ab96fd7bab5e8de362"
+    },
+    "runtime": {
+      "path": "canonical/runtime/terminal_falsification_control_loop_v1.py",
+      "git_blob_sha": "32645e84a2ff9261883fce8a33f221898242d0c4"
+    },
+    "tests": {
+      "path": "canonical/tests/test_terminal_falsification_control_loop_v1.py",
+      "git_blob_sha": "c88c6af47798de823c1ff0a8351afa026d1ccd2d"
+    },
+    "verification": {
+      "path": "canonical/verification/TERMINAL_FALSIFICATION_CONTROL_LOOP_LOCAL_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "de434e13de96ee1d0d46dec379c464d853dfaa9b"
+    }
+  },
+  "composes_with": {
+    "v22_active_pointer_before_activation": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+      "git_blob_sha": "0f2afe854b2126360f4b4b68227d89baf940c699"
+    },
+    "current_tournament_input": {
+      "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_CURRENT_INPUT_V1.json",
+      "git_blob_sha": "e35096d20a2a1b2c9bf03ab1624916feef46b058"
+    },
+    "benchmark_witness_v2": {
+      "path": "canonical/governance/BENCHMARK_WITNESS_EVALUATOR_RELATION_V2_ACTIVATION_20261006_V1.json",
+      "git_blob_sha": "bdf989ef3d2bc3a77606ab5d680bbacd1fa04fe1"
+    }
+  },
+  "activation_effects": [
+    "FALSIFIED_ROUTE_IS_DEAD_UNTIL_LIVE_REPAIRED_SUCCESSOR_EXISTS",
+    "UNREPAIRED_FALSIFIED_NECESSITY_REMAINS_TERMINAL_BLOCKER",
+    "FALSIFIER_SURVIVAL_GRANTS_ZERO_PROOF_CREDIT_WITHOUT_SEPARATE_CONTENT_ADDRESSED_PROOF_PROMOTION",
+    "TARGET_UNIVERSE_COMPLETENESS_OR_STRONGER_SCOPE_SUPERSET_IS_THE_AUTHORITY_LANE_FOR_LITERAL_TERMINAL_FINALITY",
+    "NONUNIVERSE_WORK_RANKS_BY_DETERMINISTIC_TARGET_TRUTH_REACHABILITY_PER_COST",
+    "RECOMPUTE_CONTROL_GRAPH_AFTER_EVERY_VERIFIED_DELTA_OR_WAKE",
+    "CURRENT_V22_TRUTH_ACCOUNTING_REMAINS_UNCHANGED"
+  ],
+  "independent_verification": {
+    "status": "OPEN",
+    "reason": "REMOTE_SPRITE_EXECUTION_ATTEMPT_WAS_BLOCKED_BY_TOOL_SAFETY_BOUNDARY",
+    "rule": "NO_INDEPENDENT_REPLAY_CREDIT_UNTIL_A_SEPARATE_CARRIER_OR_TRUSTED_REPOSITORY_VALIDATOR_REPLAYS_THE_EXACT_MERGED_BYTES"
+  },
+  "hard_nonclaims": [
+    "NO_ATOMIC_OR_META_TRUTH_OBLIGATION_CLOSED",
+    "NO_TARGET_UNIVERSE_COMPLETENESS_PROVED",
+    "NO_TERMINAL_FINALITY_PROVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
