@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_MULTIDISCIPLINARY_REASONING_HLE_TARGET_SCOPE_COLLAPSE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__FROZEN_TARGET_OBSERVABLE_BASIS_MATCHES_HLE_WITH_TOOLS__THREE_REGISTRY_MECHANISM_EDGES_NOT_MANDATORY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/MULTIDISCIPLINARY_REASONING_HLE_TARGET_SCOPE_COLLAPSE_20261005_V1.json",
+    "git_blob_sha": "d101d656cbadd588a08e7e98aee3fd9d27a5a074"
+  },
+  "recomputed_sources": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "target_mechanism_subject": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_20261005_V1.json",
+      "git_blob_sha": "251cac9c9f7892e26ca90f2f5118f31e1df02099"
+    },
+    "target_mechanism_activation": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "hle_protocol_receipt": {
+      "path": "canonical/verification/HLE_OPUS55_ROUTE_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "2d4c75810e7de516019b4cd6553514c52fb9af09"
+    },
+    "hle_public_definition": {
+      "repository": "centerforaisafety/hle",
+      "path": "README.md",
+      "git_blob_sha": "a948c9512541fff702aaf5e0c8bc371fded3689c"
+    }
+  },
+  "recomputation": {
+    "frozen_useful_behavior_exact": "Solve difficult expert-level questions across domains with search/code/tools.",
+    "frozen_public_bar_exact": "Humanity's Last Exam with tools >= 67.7%",
+    "registered_predicate_exact": "HLE_TOOLS_GE_67_7",
+    "target_observable_atoms": [
+      "DIFFICULT_EXPERT_QUESTION_SOLVING",
+      "CROSS_DOMAIN_COVERAGE",
+      "SEARCH_CODE_TOOL_AUGMENTED_ENVIRONMENT",
+      "QUESTION_SOLUTION_OUTCOME"
+    ],
+    "hle_witnesses": {
+      "question_population": "2500 questions",
+      "breadth": "broad subject coverage across dozens of subjects including mathematics, humanities and natural sciences",
+      "expertise": "developed globally by subject-matter experts",
+      "output_form": "multiple-choice and short-answer suitable for automated grading",
+      "opus55_tool_protocol": "web search + fetch + programmatic tools + code execution"
+    },
+    "registry_edges_for_family": [
+      {
+        "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "mandatory_from_registry_incidence": false
+      },
+      {
+        "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "mandatory_from_registry_incidence": false
+      },
+      {
+        "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "mandatory_from_registry_incidence": false
+      }
+    ],
+    "unstated_basis_dimensions_removed": [
+      "OPEN_ENDED_SYNTHESIS_AND_ARGUMENT_AS_SEPARATE_REQUIREMENT",
+      "ITERATIVE_TOOL_PLANNING_AND_REVISION_AS_SEPARATE_REQUIREMENT",
+      "CALIBRATED_UNCERTAINTY_AND_ABSTENTION_AS_SEPARATE_REQUIREMENT"
+    ],
+    "removal_reason": "These dimensions are useful capabilities elsewhere but are not explicit observable conjuncts of the frozen MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING sentence. Keeping them here would expand, not conservatively interpret, the target.",
+    "family_scope_residual_after_target_semantic_reduction": 0,
+    "family_performance_residual_after_target_semantic_reduction": [
+      "HLE_TOOLS_GE_67_7"
+    ]
+  },
+  "verified_logic": [
+    "THE_FROZEN_TARGET_IS_QUESTION_SOLVING_NOT_A_SPECIFIC_RESEARCH_SYNTHESIS_OR_ACCEPTANCE_MODEL_IMPLEMENTATION",
+    "HLE_DIRECTLY_EXERCISES_BROAD_EXPERT_AUTHORED_QUESTION_SOLVING",
+    "THE_VERIFIED_OPUS55_HLE_PROTOCOL_DIRECTLY_SUPPLIES_SEARCH_AND_CODE_CLASS_TOOLS",
+    "THE_EXISTING_HLE_TOOLS_PUBLIC_PREDICATE_IS_ALREADY_THE_FROZEN_NUMERIC_ACCEPTANCE_BAR_FOR_THIS_EXACT_FAMILY",
+    "THEREFORE_NO_ADDITIONAL_MECHANISM_SCOPE_PREDICATE_IS_REQUIRED_FOR_THIS_FAMILY_UNLESS_THE_FROZEN_TARGET_WORDING_CHANGES"
+  ],
+  "consequence": [
+    "DELETE_THE_THREE_QUARANTINED_REGISTRY_MECHANISM_EDGES_FROM_MULTIDISCIPLINARY_FAMILY_SCOPE_REPAIR_SCHEDULING",
+    "DELETE_UNSTATED_OPEN_ENDED_SYNTHESIS_ITERATIVE_CONTROLLER_AND_ABSTENTION_DIMENSIONS_FROM_THIS_FAMILY_SCOPE_BASIS",
+    "KEEP_ONLY_HLE_TOOLS_GE_67_7_AND_ITS_EXISTING_COMPARABILITY_PREREQUISITES_AS_THIS_FAMILYS_OPEN_ACCEPTANCE_WORK"
+  ],
+  "hard_nonclaims": [
+    "THIS_CONNECTOR_RECOMPUTATION_IS_NOT_AN_INDEPENDENT_PUBLIC_RUNNER_RECEIPT",
+    "NO_HLE_TOOLS_BRAIN_SCORE_CREDIT",
+    "NO_CLAIM_HLE_PROVES_OTHER_FAMILIES_SUCH_AS_COMMUNICATION_AGENTIC_RESEARCH_OR_LONG_HORIZON_AGENCY",
+    "NO_REINTERPRETATION_OF_HLE_DIAMOND_AS_THE_FULL_HLE_TOOLS_67_7_RECEIPT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_PROMOTION",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
