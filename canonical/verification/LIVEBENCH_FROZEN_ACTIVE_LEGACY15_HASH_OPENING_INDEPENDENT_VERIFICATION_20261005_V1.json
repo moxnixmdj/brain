@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_FROZEN_ACTIVE_LEGACY15_HASH_OPENING_INDEPENDENT_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__PREEXISTING_TERMINAL_COMMITMENT_INDEPENDENTLY_OPENS_TO_EXACT_15_LEGACY_IDS__SCOPE_TRUTH_ONLY__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "commitment_provenance": {
+    "receipt_path": "canonical/verification/LIVEBENCH_FIRST_DIRECT_ATTEMPT_TRUTH_RECEIPT_20261004_V1.json",
+    "receipt_git_blob_sha": "0ddffd52cd05b880964cf034527aabddb255baef",
+    "receipt_creation_commit": "68a74270a688d40386797c92a9bdc6d97191f94f",
+    "receipt_creation_time_utc": "2026-10-04T08:18:38Z",
+    "committed_sha256": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d",
+    "committed_field": "observed.unmatched_instruction_id_set_sha256",
+    "commitment_created_before_opening": true
+  },
+  "proposed_opening": {
+    "path": "canonical/governance/LIVEBENCH_FROZEN_ACTIVE_LEGACY15_HASH_OPENING_V1.json",
+    "creation_commit": "09d742d83f6f2878ad07bff2454cef554c9589e4",
+    "creation_time_utc": "2026-10-04T11:56:54Z",
+    "lag_after_commitment_seconds": 13096,
+    "active_id_count": 15,
+    "excluded_legacy_id_count": 10
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1993,
+    "head_sha": "a3b9fa88c67427c200b396cd291839176fb2867f",
+    "workflow_run_id": 37200499676,
+    "workflow_job_id": 111431026378,
+    "workflow_name": "Verify LiveBench frozen active legacy15 hash opening",
+    "conclusion": "success",
+    "printed_receipt": {
+      "schema": "LIVEBENCH_FROZEN_ACTIVE_LEGACY15_HASH_OPENING_PUBLIC_VERIFIER_V1",
+      "status": "PASS",
+      "active_id_count": 15,
+      "excluded_legacy_id_count": 10,
+      "commitment_sha256": "af4eeddebf27394eb689d2049f2f8104ae081ebafe237258bdc1a992e96f598d",
+      "terminal_dataset_read": false,
+      "new_terminal_cases_exposed": 0
+    }
+  },
+  "exact_active_legacy_ids": [
+    "keywords:existence",
+    "keywords:forbidden_words",
+    "length_constraints:number_paragraphs",
+    "length_constraints:number_words",
+    "length_constraints:number_sentences",
+    "length_constraints:nth_paragraph_first_word",
+    "detectable_content:postscript",
+    "detectable_format:number_bullet_lists",
+    "detectable_format:title",
+    "detectable_format:multiple_sections",
+    "detectable_format:json_format",
+    "combination:repeat_prompt",
+    "combination:two_responses",
+    "startend:end_checker",
+    "startend:quotation"
+  ],
+  "exact_excluded_legacy_ids": [
+    "keywords:frequency",
+    "keywords:letter_frequency",
+    "language:response_language",
+    "detectable_content:number_placeholders",
+    "detectable_format:constrained_response",
+    "detectable_format:number_highlighted_sections",
+    "change_case:english_capital",
+    "change_case:english_lowercase",
+    "change_case:capital_word_frequency",
+    "punctuation:no_comma"
+  ],
+  "deduction": [
+    "THE_FROZEN_200_ROW_POPULATION_IS_INDEPENDENTLY_BOUND_TO_THE_LEGACY_IFEVAL_ROUTE",
+    "THE_PINNED_LEGACY_AND_MODERN_INSTRUCTION_ID_NAMESPACES_HAVE_ZERO_INTERSECTION_FOR_THE_RELEVANT_LEGACY25_IDS",
+    "THEREFORE_THE_FIRST_DIRECT_ATTEMPTS_UNKNOWN_INSTRUCTION_ID_SET_EQUALS_THE_DISTINCT_ACTIVE_LEGACY_ID_UNION",
+    "THAT_SET_WAS_COMMITTED_BY_SHA256_MORE_THAN_THREE_HOURS_BEFORE_THE_15_ID_OPENING_WAS_PROPOSED",
+    "THE_INDEPENDENT_PUBLIC_VERIFIER_RECOMPUTED_THE_EXACT_SERIALIZATION_HASH_FOR_THE_15_ID_OPENING_AND_MATCHED_THE_PREEXISTING_COMMITMENT",
+    "UNDER_SHA256_COLLISION_RESISTANCE_THE_FROZEN_ACTIVE_IDENTITY_SURFACE_IS_THE_EXACT_15_ID_SET_ABOVE",
+    "THE_OTHER_10_LEGACY25_IDS_ARE_NON_LOAD_BEARING_FOR_THIS_EXACT_FROZEN_PREDICATE"
+  ],
+  "scheduler_consequence": {
+    "frozen_legacy_registry_count": 25,
+    "frozen_active_identity_count": 15,
+    "registry_ids_deleted_from_exact_target_critical_path": 10,
+    "union25_extra_work_load_bearing": false,
+    "active15_only_identity_surface": true,
+    "next": "REUSE_ALREADY_VERIFIED_ACTIVE15_CONSTRUCTIVE_AND_POINTWISE_PROOFS__DO_NOT_SPEND_CRITICAL_PATH_WORK_ON_THE_EXCLUDED_10_IDS_UNLESS_THE_COMMITMENT_OR_FROZEN_POPULATION_IDENTITY_IS_FALSIFIED"
+  },
+  "hard_nonclaims": [
+    "THIS_SCOPE_OPENING_DOES_NOT_BY_ITSELF_PROVE_CASE_FREQUENCIES_OR_CASE_LEVEL_COMBINATIONS",
+    "THIS_SCOPE_OPENING_DOES_NOT_BY_ITSELF_PROVE_THE_LIVEBENCH_SCORE_THRESHOLD",
+    "NO_NEW_TERMINAL_ROWS_PROMPTS_KWARGS_RESPONSES_OR_SCORES_WERE_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_SCOPE_TRUTH_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "new_terminal_case_metadata_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
