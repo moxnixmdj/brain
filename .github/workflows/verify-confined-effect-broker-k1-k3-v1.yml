@@ -1,0 +1,37 @@
+name: Verify confined effect broker K1-K3
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/confined_effect_broker_v1.py
+      - canonical/tests/confined_effect_escape_probe_v1.py
+      - canonical/tests/test_confined_effect_broker_v1.py
+      - canonical/governance/ROOT3_CONFINED_EFFECT_BROKER_K1_K3_IMPLEMENTATION_20261005_V1.json
+      - .github/workflows/verify-confined-effect-broker-k1-k3-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Unit tests
+        run: python -m unittest canonical.tests.test_confined_effect_broker_v1 -v
+      - name: Pull verification image explicitly
+        run: docker pull python:3.12-slim
+      - name: Resolve and record immutable image ID
+        run: |
+          echo "PROJECT_BRAIN_CONFINED_IMAGE=python:3.12-slim" >> "$GITHUB_ENV"
+          docker image inspect python:3.12-slim --format '{{.Id}}'
+      - name: Run real confinement escape probes
+        env:
+          PROJECT_BRAIN_RUN_DOCKER_ESCAPE_TEST: "1"
+        run: python -m unittest canonical.tests.test_confined_effect_broker_v1.DockerEscapeTests -v
