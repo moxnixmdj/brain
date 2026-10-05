@@ -4268,13 +4268,61 @@ def _run_model_independent_goal(step, mission, goal):
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
       "finish"
     }
+
+    composition_guard=None
+    composition_contract=None
+    composition_initial_facts=None
+    composition_capsule=None
+    if step.get("_composition_capsule_enforced") is True:
+        composition_guard=_load_composition_state_capsule_guard()
+        composition_contract=step.get("_composition_contract")
+        composition_initial_facts=step.get("_composition_initial_facts")
+        try:
+            composition_guard.validate_plan(
+                actions,composition_contract,composition_initial_facts
+            )
+        except Exception as exc:
+            raise Blocker(
+                "COMPOSITION_STATE_CONTRACT_INVALID:"
+                +type(exc).__name__+":"+str(exc)
+            ) from exc
+
     checkpoint_path,checkpoint,resumed=_load_controller_checkpoint(step,mission,actions)
     trace=list(checkpoint.get("completed_actions") or [])
     start_cycle=len(trace)
+
+    if composition_guard is not None:
+        try:
+            composition_capsule=composition_guard.rebuild_from_trace(
+                actions,composition_contract,composition_initial_facts,trace
+            )
+        except Exception as exc:
+            raise Blocker(
+                "COMPOSITION_STATE_REBUILD_FAILED:"
+                +type(exc).__name__+":"+str(exc)
+            ) from exc
+
     for cycle in range(start_cycle,len(actions)):
         raw_action=actions[cycle]
         if not isinstance(raw_action,dict):
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_NOT_OBJECT")
+
+        composition_row=None
+        if composition_guard is not None:
+            if cycle < len(composition_contract):
+                composition_row=composition_contract[cycle]
+                try:
+                    composition_guard.assert_action_ready(
+                        composition_capsule,composition_row
+                    )
+                except Exception as exc:
+                    raise Blocker(
+                        "COMPOSITION_STATE_REQUIRED_EFFECT_UNAVAILABLE:"
+                        +type(exc).__name__+":"+str(exc)
+                    ) from exc
+            elif cycle!=len(composition_contract) or raw_action.get("type")!="finish":
+                raise Blocker("COMPOSITION_STATE_UNDECLARED_ACTION_BYPASS:"+str(cycle))
+
         action=_resolve_result_refs(dict(raw_action),trace)
         typ=action.get("type")
         if typ not in allowed_types:
@@ -4286,7 +4334,34 @@ def _run_model_independent_goal(step, mission, goal):
         if isinstance(result,dict) and result.get("error"):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         _verify_action_expectation(action,result)
-        trace.append({"cycle":cycle,"plan":action,"result":result})
+
+        composition_head=None
+        if composition_guard is not None and composition_row is not None:
+            try:
+                composition_capsule=composition_guard.append_action_result(
+                    composition_capsule,composition_row,result
+                )
+                composition_verdict=composition_guard.verify_capsule(
+                    composition_capsule
+                )
+                if composition_verdict.get("status")!="PASS":
+                    raise Blocker(
+                        "COMPOSITION_STATE_CAPSULE_POST_ACTION_INVALID:"
+                        +str(composition_verdict.get("reason"))
+                    )
+                composition_head=composition_capsule.get("head_hash")
+            except Blocker:
+                raise
+            except Exception as exc:
+                raise Blocker(
+                    "COMPOSITION_STATE_COMMIT_FAILED:"
+                    +type(exc).__name__+":"+str(exc)
+                ) from exc
+
+        record={"cycle":cycle,"plan":action,"result":result}
+        if composition_head is not None:
+            record["composition_capsule_head_hash"]=composition_head
+        trace.append(record)
         checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
         interrupt_after=step.get("interrupt_after_controller_actions_once")
         if interrupt_after is not None:
@@ -4302,7 +4377,33 @@ def _run_model_independent_goal(step, mission, goal):
             if not summary.strip():
                 raise Blocker("MODEL_INDEPENDENT_CONTROLLER_EMPTY_FINISH")
             checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace,status="COMPLETE")
-            return {
+
+            composition_summary=None
+            if composition_guard is not None:
+                verdict=composition_guard.verify_capsule(composition_capsule)
+                if verdict.get("status")!="PASS":
+                    raise Blocker(
+                        "COMPOSITION_STATE_CAPSULE_TERMINAL_INVALID:"
+                        +str(verdict.get("reason"))
+                    )
+                capsule_path=EVID_DIR/(
+                    checkpoint_path.stem+"__COMPOSITION_STATE_CAPSULE.json"
+                )
+                writej(capsule_path,composition_capsule)
+                composition_summary={
+                  "schema":"PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_RUNTIME_BINDING_V1",
+                  "status":"PASS",
+                  "scope":"DETERMINISTIC_CAPABILITY_GRAPH_DECLARED_CROSS_CAPABILITY_STATE",
+                  "declared_cross_capability_state_no_bypass":True,
+                  "semantic_declaration_completeness":"UNVERIFIED",
+                  "external_evidence_channel_completeness":"UNVERIFIED",
+                  "head_hash":composition_capsule.get("head_hash"),
+                  "record_count":verdict.get("record_count"),
+                  "latest_key_count":verdict.get("latest_key_count"),
+                  "evidence_path":str(capsule_path.relative_to(ROOT)).replace("\\","/"),
+                  "acceptance_credit_delta":0,
+                }
+            output={
               "adapter":"goal","returncode":0,
               "stdout":summary,
               "controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN",
@@ -4321,6 +4422,9 @@ def _run_model_independent_goal(step, mission, goal):
                 "last_rewound_from_action_index":checkpoint.get("last_rewound_from_action_index"),
               }
             }
+            if composition_summary is not None:
+                output["composition_state_capsule"]=composition_summary
+            return output
     raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH")
 
 def _capability_problem(step, mission):
@@ -4852,6 +4956,18 @@ def _load_capability_planner():
     spec.loader.exec_module(module)
     return module
 
+def _load_composition_state_capsule_guard():
+    path=pathlib.Path(__file__).resolve().with_name("composition_state_capsule_guard_v1.py")
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_composition_state_capsule_guard",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("COMPOSITION_STATE_CAPSULE_GUARD_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
 def _external_package_name_searcher(effect,ecosystem,tokens,limit,timeout_s):
     bridged=_external_tool_bridge("package_name_search",{
       "effect":str(effect),"ecosystem":str(ecosystem),
@@ -5304,6 +5420,9 @@ def _run_capability_planned_goal(step, mission, goal):
     derived.pop("capability_problem",None)
     derived.pop("capability_problem_ref",None)
     derived["controller_actions"]=planned["actions"]
+    derived["_composition_capsule_enforced"]=True
+    derived["_composition_contract"]=planned["composition_contract"]
+    derived["_composition_initial_facts"]=planned["planning"].get("initial_facts",[])
     derived["max_controller_actions"]=max(
         int(step.get("max_controller_actions",16)),
         len(planned["actions"])
@@ -5313,6 +5432,7 @@ def _run_capability_planned_goal(step, mission, goal):
         raise Blocker("CAPABILITY_PLAN_EXECUTION_MISSING")
     result["planning_mode"]="DETERMINISTIC_CAPABILITY_GRAPH"
     result["capability_plan"]=planned["planning"]
+    result["composition_contract"]=planned["composition_contract"]
     result["inherited_bound_capabilities"]=problem.get("_inherited_bound_capabilities",[])
     return result
 
