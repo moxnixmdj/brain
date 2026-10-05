@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_RESIDUAL_MINIMAL_FACTORIZATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FULL_SUBSUMPTION_FALSIFIED__SCIENTIFIC_RESIDUAL_REDUCED_TO_CANDIDATE_GENERATION_AND_PRIORITIZATION_ONLY__ZERO_CREDIT",
+  "objective": "Minimize the sole new scientific-research residual discovered by public-bar scope deduplication without deleting behavior that the preexisting generic research-intervention candidate does not actually provide.",
+  "authorities": {
+    "public_bar_scope_gap_deduplication": {
+      "path": "canonical/governance/PUBLIC_BAR_SCOPE_GAP_DEDUPLICATION_20261005_V1.json",
+      "git_blob_sha": "c52e499b54dd9f5eaed80647dd855615448752b0"
+    },
+    "first_party_behavioral_decomposition": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1.json",
+      "git_blob_sha": "c0069cbcbc26aaf663f48c0068f64969564afe10"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "compared_behaviors": {
+    "proposed_scientific_residual": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "preexisting_generic_candidate": "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001",
+    "active_retrieval_control": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
+  },
+  "exact_falsification": {
+    "claim_tested": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_IS_FULLY_SUBSUMED_BY_HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001",
+    "verdict": "FALSIFIED",
+    "decisive_counterexample_boundary": {
+      "scientific_input_state": "Next useful research question or falsifiable hypothesis is not already supplied.",
+      "generic_candidate_input_requirement": "Candidate hypotheses/interventions are already among the inputs.",
+      "consequence": "The generic candidate can select/test/update among supplied candidates but does not establish the upstream capability to generate the candidate hypothesis/question set from evidence."
+    },
+    "fieldwise_relation": [
+      {
+        "field": "inputs",
+        "relation": "NOT_SUBSUMED",
+        "reason": "Scientific residual starts before candidates exist; generic behavior explicitly receives candidate hypotheses/interventions."
+      },
+      {
+        "field": "environment_state",
+        "relation": "CONDITIONALLY_SUBSUMED_AFTER_CANDIDATE_GENERATION",
+        "reason": "Scientific inquiry becomes an ordinary iterative intervention state only after candidate questions/hypotheses exist."
+      },
+      {
+        "field": "allowed_information",
+        "relation": "COMPATIBLE",
+        "reason": "Both admit JIT literature/data/task-visible evidence and tool constraints without hidden target answers."
+      },
+      {
+        "field": "required_output_or_action",
+        "relation": "PARTIAL_SUBSUMPTION",
+        "reused_by_generic": [
+          "SELECT_A_FALSIFIABLE_NEXT_HYPOTHESIS_OR_INTERVENTION_FROM_CANDIDATES",
+          "SPECIFY_OR_EXECUTE_A_DISCRIMINATING_TEST_OR_EXPERIMENT",
+          "UPDATE_BELIEF_OR_PRIORITY_FROM_RESULTING_EVIDENCE"
+        ],
+        "not_provided_by_generic": [
+          "GENERATE_NONTRIVIAL_FALSIFIABLE_CANDIDATE_QUESTIONS_OR_HYPOTHESES_FROM_EVIDENCE_WHEN_NONE_ARE_SUPPLIED",
+          "PRIORITIZE_GENERATED_CANDIDATES_BY_EXPECTED_INFORMATION_VALUE_AND_FEASIBILITY"
+        ]
+      },
+      {
+        "field": "success_condition",
+        "relation": "PARTIAL_SUBSUMPTION",
+        "reason": "Generic behavior scores relevance/discrimination and evidence updates, but does not by itself score whether the generated hypothesis set is nontrivial, grounded, falsifiable, or priority-useful before selection."
+      },
+      {
+        "field": "failure_condition",
+        "relation": "PARTIAL_SUBSUMPTION",
+        "reason": "Both reject non-falsifiable/irrelevant choices, but only the scientific residual explicitly rejects fact restatement, failure to form a research question, and dominated candidate generation."
+      }
+    ]
+  },
+  "second_reuse_check": {
+    "candidate": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+    "verdict": "NOT_FULLY_SUBSUMING",
+    "reason": "The active retrieval-control contract chooses the next query/source/tool action to close an already identified unresolved evidence requirement. It does not create the research question or candidate explanatory hypotheses that define that unresolved requirement."
+  },
+  "minimal_factorization": {
+    "delete": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_AS_ONE_MONOLITHIC_NEW_BEHAVIOR",
+    "reuse": [
+      "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001_FOR_DOWNSTREAM_SELECTION_TEST_AND_EVIDENCE_UPDATE",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001_FOR_RETRIEVAL_ACTIONS_AFTER_AN_EVIDENCE_REQUIREMENT_EXISTS"
+    ],
+    "irreducible_candidate": {
+      "behavior_id": "EVIDENCE_STATE_TO_FALSIFIABLE_HYPOTHESIS_CANDIDATES_001",
+      "inputs": "Observed phenomenon, current evidence/provenance, domain constraints, unresolved anomalies and resource/tool constraints; no candidate hypothesis set is assumed.",
+      "environment_state": "Scientific or engineering inquiry state in which the next useful research question or explanatory hypothesis is not supplied.",
+      "allowed_information": "JIT literature/data, current evidence graph and allowed tools; no hidden target answer or post-outcome information.",
+      "required_output_or_action": "Generate a finite set of distinct, decision-relevant, falsifiable candidate questions or hypotheses grounded in the evidence, and attach enough priority information about discrimination value and feasibility for the downstream intervention selector.",
+      "success_condition": "On a frozen held-out inquiry portfolio, candidates are grounded, nontrivial, falsifiable, scientifically coherent and materially useful for discriminating live explanations; prioritization avoids clearly dominated candidates; Brain conservative matched quality/usefulness bound is at least the Opus 5.5 bound or a stronger objective ceiling is proved.",
+      "failure_condition": "Only restates supplied facts, emits tautological or non-falsifiable candidates, ignores decisive supplied evidence, produces no materially discriminating candidate, or prioritizes a clearly dominated candidate when a higher-information feasible candidate is available.",
+      "terminal_consequence": "This is the smallest behavior not supplied by the generic intervention/update candidate that is still required for scientific question/hypothesis formation.",
+      "verification_route": "Frozen held-out inquiry states with independent grounding/falsifiability/discrimination/priority scoring; downstream experiment execution and evidence update are scored under the reused generic behavior rather than duplicated here.",
+      "dependency_boundary": "Search/retrieval mechanics are separate; downstream experiment selection/execution and evidence-conditioned update are delegated to HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001.",
+      "scope": "Candidate research-question and falsifiable-hypothesis generation plus priority metadata from an evidence state."
+    }
+  },
+  "leverage": {
+    "prior_new_unique_residuals_from_public_bar_scope_dedupe": 1,
+    "prior_new_residual_scope": "QUESTION_OR_HYPOTHESIS_FORMATION_PLUS_RANKING_PLUS_TEST_PLAN",
+    "after_factorization_new_unique_residuals": 1,
+    "after_factorization_new_residual_scope": "CANDIDATE_GENERATION_PLUS_PRIORITY_METADATA_ONLY",
+    "downstream_selection_test_update_reused": true,
+    "new_terminal_portfolio_required": false,
+    "explanation": "This does not pretend the missing behavior vanished. It removes the already-covered downstream half, leaving only the true upstream generative gap."
+  },
+  "scheduler_effect": {
+    "delete": [
+      "FREEZE_SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_AS_A_MONOLITHIC_NEW_CONTRACT",
+      "CREATE_A_SECOND_EXPERIMENT_SELECTION_OR_EVIDENCE_UPDATE_PROOF_PROGRAM_FOR_THE_SCIENTIFIC_FAMILY"
+    ],
+    "activate": [
+      "INDEPENDENTLY_VERIFY_THIS_FIELDWISE_FACTORIZATION",
+      "SEARCH_REUSE_WHITE_BOX_BEFORE_INVENTION_FOR_EVIDENCE_STATE_TO_FALSIFIABLE_HYPOTHESIS_CANDIDATES_001",
+      "IF_NO_STRONGER_EXISTING_CONTRACT_IS_FOUND_FREEZE_ONLY_THE_MINIMAL_CANDIDATE_GENERATION_CONTRACT"
+    ],
+    "preserve": [
+      "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001_AS_SHARED_DOWNSTREAM_CANDIDATE",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "TB_SCIENCE_PUBLIC_BAR_AND_HARNESS_IDENTITY_REQUIREMENTS",
+      "ZERO_FRESH_REALITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_MINIMAL_HYPOTHESIS_GENERATION_BEHAVIOR_IS_ALREADY_OWNED",
+    "NO_CLAIM_THE_GENERIC_HYPOTHESIS_INTERVENTION_CANDIDATE_IS_ALREADY_ACCEPTED",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_AGENTIC_SCIENTIFIC_RESEARCH_FAMILY_CREDIT",
+    "NO_ROOT1_POSITIVE_GAP_FROM_THIS_FACTORIZATION",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "INDEPENDENT_RECOMPUTATION__THEN_REUSE_OR_WHITE_BOX_HARVEST_SEARCH_FOR_ONLY_EVIDENCE_STATE_TO_FALSIFIABLE_HYPOTHESIS_CANDIDATES_001"
+}
