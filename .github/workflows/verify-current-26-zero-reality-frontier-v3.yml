@@ -6,9 +6,22 @@ on:
       - "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V3.json"
       - "canonical/runtime/current_26_zero_reality_frontier_v3.py"
       - "canonical/tests/test_current_26_zero_reality_frontier_v3.py"
+      - "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V2.json"
+      - "canonical/governance/EXTERNAL_BENCHMARK_DOMINANCE_GATE_V1.json"
+      - "canonical/verification/EXTERNAL_BENCHMARK_DOMINANCE_V1_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - "canonical/governance/LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2.json"
       - ".github/workflows/verify-current-26-zero-reality-frontier-v3.yml"
   pull_request:
     branches: [main]
+    paths:
+      - "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V3.json"
+      - "canonical/runtime/current_26_zero_reality_frontier_v3.py"
+      - "canonical/tests/test_current_26_zero_reality_frontier_v3.py"
+      - "canonical/governance/CURRENT_26_ZERO_REALITY_FRONTIER_V2.json"
+      - "canonical/governance/EXTERNAL_BENCHMARK_DOMINANCE_GATE_V1.json"
+      - "canonical/verification/EXTERNAL_BENCHMARK_DOMINANCE_V1_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      - "canonical/governance/LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2.json"
+      - ".github/workflows/verify-current-26-zero-reality-frontier-v3.yml"
 permissions:
   contents: read
 jobs:
