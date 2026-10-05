@@ -9,18 +9,25 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         return docs,shas
     def evaluate(self,docs,shas):
         return evaluate_documents(docs["authority"],docs["closure"],docs["matrix"],docs["atomic_bindings"],
-                                  docs["predicate_registry"],docs["target_envelope"],shas)
+                                  docs["predicate_registry"],docs["target_envelope"],shas,
+                                  docs["material_condition_registry"],docs["material_condition_evidence"])
 
     def test_live_projection_is_count_generic_and_consistent(self):
         docs,shas=self.live(); out=self.evaluate(docs,shas)
         self.assertTrue(out["pass"],out)
-        self.assertEqual(out["acceptance_closed_families"],4)
-        self.assertEqual(out["acceptance_open_families"],15)
-        self.assertEqual(out["atomic_predicates_proved"],11)
-        self.assertEqual(out["atomic_predicates_unresolved"],27)
-        self.assertEqual(set(out["baseline_families"]),{"EXACT_SYMBOLIC_COMPUTATION","LONG_HORIZON_MEMORY_AND_CONTINUITY"})
-        self.assertIn("SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",out["accepted_families"])
-        self.assertIn("SUBAGENT_DELEGATION_AND_COORDINATION",out["accepted_families"])
+        self.assertEqual(out["acceptance_closed_families"]+out["acceptance_open_families"],len(docs["target_envelope"]["families"]))
+        total=len(docs["predicate_registry"]["predicates"])
+        proved=sum(
+            1 for p in docs["predicate_registry"]["predicates"]
+            if next((x for x in docs["atomic_bindings"]["claims"]
+                     if x["predicate_id"]==p["id"] and x.get("state")=="PROVED"
+                     and x.get("scope_complete") is True),None)
+        )
+        self.assertEqual(out["atomic_predicates_proved"],proved)
+        self.assertEqual(out["atomic_predicates_unresolved"],total-proved)
+        self.assertGreater(out["material_conditions_total"],0)
+        self.assertFalse(out["material_condition_gate_pass"])
+        self.assertFalse(out["terminal_finality_eligible"])
 
     def test_next_residual_family_closure_is_derived_without_code_change(self):
         docs,shas=self.live(); docs=copy.deepcopy(docs)
@@ -37,7 +44,7 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         # recompute exact counts after mutation
         proved=sum(1 for p in reg["predicates"] if next((x for x in atom["claims"] if x["predicate_id"]==p["id"] and x.get("state")=="PROVED" and x.get("scope_complete") is True),None))
         atom["saturation"]["proved_predicate_count"]=proved
-        atom["saturation"]["unresolved_predicate_count"]=38-proved
+        atom["saturation"]["unresolved_predicate_count"]=len(reg["predicates"])-proved
         # leave projections stale: generic reducer must detect mismatch, proving the new closure was derived
         out=self.evaluate(docs,shas)
         self.assertFalse(out["pass"])
@@ -53,8 +60,15 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         docs,shas=self.live(); docs=copy.deepcopy(docs)
         row=next(x for x in docs["atomic_bindings"]["claims"] if x["predicate_id"]=="RECOVERY_TERMINAL_NONINFERIOR")
         row["scope_complete"]=False
-        docs["atomic_bindings"]["saturation"]["proved_predicate_count"]=10
-        docs["atomic_bindings"]["saturation"]["unresolved_predicate_count"]=28
+        reg=docs["predicate_registry"]; atom=docs["atomic_bindings"]
+        proved=sum(
+            1 for p in reg["predicates"]
+            if next((x for x in atom["claims"]
+                     if x["predicate_id"]==p["id"] and x.get("state")=="PROVED"
+                     and x.get("scope_complete") is True),None)
+        )
+        atom["saturation"]["proved_predicate_count"]=proved
+        atom["saturation"]["unresolved_predicate_count"]=len(reg["predicates"])-proved
         out=self.evaluate(docs,shas); self.assertFalse(out["pass"])
         self.assertIn("AUTHORITY_ACCEPTANCE_MISMATCH",out["errors"])
         self.assertIn("CLOSURE_ACCEPTED_FAMILY_SET_MISMATCH",out["errors"])
@@ -77,6 +91,12 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         docs["authority"]["sources"]["terminal_closure_manifest"]["git_blob_sha"]="0"*40
         out=self.evaluate(docs,shas); self.assertFalse(out["pass"])
         self.assertIn("AUTHORITY_SOURCE_BLOB_MISMATCH:terminal_closure_manifest",out["errors"])
+
+    def test_terminal_true_is_rejected_while_material_condition_gate_open(self):
+        docs,shas=self.live(); docs=copy.deepcopy(docs)
+        docs["authority"]["truth"]["achieved"]=True
+        out=self.evaluate(docs,shas); self.assertFalse(out["pass"])
+        self.assertIn("AUTHORITY_TERMINAL_TRUE_WITH_OPEN_MATERIAL_CONDITION_GATE",out["errors"])
 
     def test_registry_predicate_outside_residual_family_fails_closed(self):
         docs,shas=self.live(); docs=copy.deepcopy(docs)
