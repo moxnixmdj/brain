@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_VISION_NONCHART_EXISTING_RECEIPT_REUSE_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FOUR_LEAF_EXISTING_RECEIPT_AUDIT__ZERO_DIRECT_CLOSURES__ZERO_CREDIT",
+  "target_predicate": "VISION_DENSE_NONCHART_SCOPE",
+  "partition": {
+    "path": "canonical/governance/VISION_NONCHART_FOUR_LEAF_PARTITION_20261005_V1.json",
+    "git_blob_sha": "a95f412b365c8927547477232e8516c81e16abaf"
+  },
+  "leaves": [
+    {
+      "leaf": "dense documents",
+      "candidate_evidence": [
+        {
+          "path": "canonical/verification/verify_image_ocr_tesseract_reuse.py",
+          "git_blob_sha": "03bf7c17b88ba1ac4f9c23c9e73b4ee1b0212142"
+        }
+      ],
+      "closure": false,
+      "reason": "OCR_REUSE_VERIFIES_COMMAND_AND_DEPENDENCY_EQUIVALENCE_AND_EXPLICITLY_HAS_TERMINAL_SEMANTIC_AUTHORITY_FALSE__TEXT_EXTRACTION_DOES_NOT_PROVE_SCOPE_COMPLETE_DENSE_DOCUMENT_READING_AND_REASONING_NONINFERIORITY"
+    },
+    {
+      "leaf": "screenshots",
+      "candidate_evidence": [
+        {
+          "path": "canonical/runtime/browser_state_information_safe_proof.py",
+          "git_blob_sha": "3723d3233d6058f0a43491e4654a21490f992d1e"
+        }
+      ],
+      "closure": false,
+      "reason": "BROWSER_STATE_PROOF_IS_EXPLICITLY_PREFLIGHT_ONLY_NOT_WHOLE_BROWSER_OR_COMPUTER_SCOPE_AND_EXERCISES_RENDERED_ELEMENT_ACTION_GROUNDING__IT_DOES_NOT_PROVE_GENERAL_SCREENSHOT_READING_AND_REASONING_NONINFERIORITY"
+    },
+    {
+      "leaf": "diagrams",
+      "candidate_evidence": [
+        {
+          "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ROUTE_V1.json",
+          "git_blob_sha": "2c682676f05ef6b7568a9bc79530be4d1b352aff"
+        }
+      ],
+      "closure": false,
+      "reason": "QWEN_ROUTE_PROVES_ONLY_EXISTENCE_OF_A_PUBLIC_NATIVE_IMAGE_TEXT_SUBJECT__LOCAL_FIT_SCOPE_RELEVANT_REASONING_AND_PERFORMANCE_REMAIN_UNPROVED"
+    },
+    {
+      "leaf": "complex real-world imagery",
+      "candidate_evidence": [
+        {
+          "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ROUTE_V1.json",
+          "git_blob_sha": "2c682676f05ef6b7568a9bc79530be4d1b352aff"
+        }
+      ],
+      "closure": false,
+      "reason": "GENERAL_MULTIMODAL_MODEL_AVAILABILITY_DOES_NOT_PROVE_BRAIN_OWNED_SCOPE_COMPLETE_COMPLEX_REAL_WORLD_IMAGE_REASONING_OR_OPUS_NONINFERIORITY"
+    }
+  ],
+  "meta_mapping_evidence": {
+    "path": "canonical/verification/OPUS55_IMAGE_INPUT_MAPPING_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "dc099b80e811d841a153aa0cf01ffae6c0464172",
+    "consequence": "IMAGE_INPUT_IS_MAPPED_TO_EXISTING_FAMILIES_BUT_ACCEPTANCE_REMAINS_OPEN"
+  },
+  "result": {
+    "leaf_count": 4,
+    "direct_closure_count": 0,
+    "residual_leaf_count": 4,
+    "generic_existing_receipt_reuse_fixed_point": true
+  },
+  "next": [
+    "SEEK_ONE_SCOPE_COMPLETE_MULTIMODAL_SUPERSET_PROOF_COVERING_ALL_FOUR_LEAVES",
+    "IF_NO_SUPERSET_PROOF_EXISTS__COMPILE_MINIMUM_MATCHED_OR_OBJECTIVE_PROOF_PER_LEAF",
+    "DO_NOT_REPEAT_OCR_BROWSER_PREFLIGHT_OR_GENERIC_QWEN_AVAILABILITY_AS_ACCEPTANCE_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_NO_STRONGER_BRIDGE_THEOREM_CAN_BE_INVENTED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
