@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_B2_CREATIVE_DIAGRAM_MINIMUM_SEMANTIC_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__MINIMUM_SEMANTIC_REPAIR__KEEP_19_FAMILIES__ONE_NEW_ATOMIC_OBLIGATION__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Repair the newly isolated B2 general-analysis/creative semantic-totality residual and the creative/diagram terminal proof-basis gap with the smallest sound change surface, without inventing a 20th family or silently widening already-proved evidence.",
+  "base": {
+    "commit": "48de624a2e7ea6e542e8f7e849bccdef2269baf6",
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "creative_diagram_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    },
+    "functional_basis_candidate": {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V1.json",
+      "git_blob_sha": "62c0e207ce935a02611700a69e0917f938792b11"
+    }
+  },
+  "first_party_surface_evidence": [
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "observed": "Claude Opus 5.5 supports conversation, analysis, coding, creative tasks, text artifacts and diagram output.",
+      "observed_on": "2026-10-05"
+    },
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "observed": "Claude Opus 5.5 is presented as a general model for complex work; production benchmark evaluation also explicitly treats biology and frontier-LLM-development tasks as part of the evaluated product surface through safeguard fallbacks.",
+      "observed_on": "2026-10-05"
+    }
+  ],
+  "derived_problem": {
+    "b2_residual": "B2_GENERAL_ANALYSIS_CREATIVE_NON_SPECIALIZED_REGION",
+    "b2_reason": "The current COMMUNICATION_AND_SYNTHESIS family covers output/synthesis but does not explicitly contain general non-specialized analysis or original creative generation, while MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING is textually restricted to difficult expert-level questions across domains with search/code/tools.",
+    "creative_text_basis_gap": true,
+    "diagram_basis_gap": true,
+    "root1_positive_capability_gap_proved": false,
+    "new_20th_family_required_proved": false
+  },
+  "breakthrough": {
+    "name": "PRE_EXPOSURE_SEMANTIC_WIDENING_PLUS_SINGLE_ATOM_DIAGRAM_REPAIR",
+    "claim": "The B2 general-analysis/creative-text gap can be absorbed into the already-open COMMUNICATION_AND_SYNTHESIS family and its already-unresolved matched-quality predicate before any matched case population is frozen or exposed; diagram output cannot be silently absorbed into the already-proved artifact-scope evidence, so exactly one fresh diagram acceptance atom is the minimum non-revoking repair.",
+    "why_this_dominates_a_20th_family": [
+      "GENERAL_ANALYSIS_AND_CREATIVE_TEXT_USE_THE_EXISTING_B2_PLUS_B7_CAUSAL_ROLES_AND_REQUIRE_NO_NEW_OBSERVABLE_MODALITY_OR_ACTUATOR.",
+      "COMMUNICATION_AND_SYNTHESIS_IS_NOT_CURRENTLY_ACCEPTED; ITS_MATCHED_QUALITY_PREDICATE_REMAINS_UNRESOLVED, SO TARGET-SCOPE REPAIR CAN OCCUR BEFORE RESULT-BEARING EXECUTION.",
+      "A_NEW_FAMILY_WOULD_DUPLICATE_THE_EXISTING_B2_TO_B7_TEXT_TRAJECTORY_AND_ADD EXTRA FAMILY_PROMOTION_SURFACE_WITHOUT ADDING A DISTINCT CAUSAL ROLE.",
+      "THE DIAGRAM GAP IS DIFFERENT: CURRENT ARTIFACT SCOPE EVIDENCE EXPRESSLY DOES NOT AUTOMATICALLY COVER UNCONTRACTED VISUAL_OR_FORMAT FEATURES, SO DIAGRAM PARITY MUST RECEIVE ITS OWN LOAD-BEARING ACCEPTANCE ATOM OR THE OLD PROOF MUST BE REVOKED."
+    ]
+  },
+  "proposed_family_delta": {
+    "family": "COMMUNICATION_AND_SYNTHESIS",
+    "old_useful_behavior": "Communicate clearly, prioritize what matters, follow writing rules and synthesize complex work over long sessions.",
+    "new_useful_behavior": "Perform general non-specialized analysis and creative ideation or generation under user constraints; communicate clearly, prioritize what matters, follow writing rules and synthesize complex work over long sessions.",
+    "family_count_before": 19,
+    "family_count_after": 19,
+    "semantic_effect": "CLOSES_THE_B2_GENERAL_ANALYSIS_CREATIVE_NON_SPECIALIZED_FAMILY_MAPPING_RESIDUAL_IF_INDEPENDENT_SEMANTIC_REVIEW_ACCEPTS_THE_NEW_CONTRACT"
+  },
+  "pre_exposure_reuse": {
+    "existing_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "existing_state": "UNRESOLVED",
+    "required_portfolio_delta_before_freeze": [
+      "MANDATORY_GENERAL_NON_SPECIALIZED_ANALYSIS_STRATUM",
+      "MANDATORY_OPEN_ENDED_CREATIVE_TEXT_STRATUM"
+    ],
+    "required_quality_dimensions": [
+      "TASK_CORRECTNESS_OR_REASONING_VALIDITY_WHERE_OBJECTIVE",
+      "RELEVANCE_AND_CONSTRAINT_ADHERENCE",
+      "COHERENCE_AND_CLARITY",
+      "CREATIVE_QUALITY_OR_NOVELTY_WHERE_APPLICABLE",
+      "COVERAGE_OF_MATERIAL_USER_REQUIREMENTS"
+    ],
+    "guard": "DO_NOT_REUSE_PRIOR SYNTHESIS SCORER OR SCOPE RECEIPTS BEYOND THEIR EXACT BOUND CLAIMS; VERSION THE PREEXPOSURE SCORER_OR_GENERATOR IF THE NEW STRATA REQUIRE NEW DIMENSIONS.",
+    "fresh_reality": false,
+    "acceptance_credit": 0
+  },
+  "single_new_atomic_obligation": {
+    "id": "DIAGRAM_OUTPUT_SCOPE_QUALITY_NONINFERIOR",
+    "family": "ARTIFACT_CREATION",
+    "kind": "MATCHED_NONINFERIORITY",
+    "acceptance": "Brain conservative correctness, structure and presentation quality bound must equal or exceed Opus 5.5 on a predeclared diagram-output portfolio whose claimed diagram scope is independently certified; no automatic inheritance from AA-Briefcase or generic artifact mechanical gates.",
+    "root_classification_if_added_unproved": "ROOT2_AND_ROOT3",
+    "reason_new_atom_is_required": "The current proved artifact uncovered-scope evidence was explicitly bounded away from arbitrary uncontracted visual_or_format features. Reinterpreting that proved predicate to include diagrams would mutate the claim after proof and is forbidden; a new atom preserves historical proof identity.",
+    "atomic_count_before": 38,
+    "atomic_count_after_if_integrated": 39,
+    "proved_atomic_before": 14,
+    "proved_atomic_after_if_integrated": 14,
+    "unresolved_atomic_before": 24,
+    "unresolved_atomic_after_if_integrated": 25
+  },
+  "minimality_argument": {
+    "zero_new_family_lower_bound": "A 20th family is not logically forced because the residual requires no new causal role, modality or actuator; expanding one existing open family can represent it without semantic contradiction.",
+    "zero_new_atomic_lower_bound_for_diagrams": "Zero new diagram atoms is unsound unless a previously proved artifact predicate is revoked and reproved over the wider diagram scope. A fresh atom is strictly less destructive because it preserves all exact prior proof claims.",
+    "b2_new_atomic_lower_bound": "Zero new B2 atoms is possible only while the existing synthesis matched-quality predicate remains unresolved and no result-bearing matched case population has been frozen or exposed. If that precondition is false, this route fails closed and a separate B2 atom is required.",
+    "dominance": "UNDER_THE_BOUND_BASE_STATE, ONE_FAMILY_CONTRACT_EDIT_PLUS_ONE_PREEXPOSURE_PORTFOLIO_VERSION_PLUS_ONE_NEW_DIAGRAM_ATOM_HAS_LOWER PROOF_INVALIDATION AND LOWER CONTROL_PLANE CHURN THAN EITHER ADDING A 20TH FAMILY OR REVOKING AN ALREADY_PROVED ARTIFACT ATOM."
+  },
+  "required_independent_checks": [
+    "VERIFY_THE_BOUND_BASE_BLOBS_AND_CURRENT_SYNTHESIS_UNRESOLVED_STATE.",
+    "VERIFY_NO_RESULT_BEARING_SYNTHESIS_MATCHED_CASE_POPULATION_HAS_BEEN_FROZEN_OR_EXPOSED.",
+    "VERIFY_THE_NEW_COMMUNICATION_AND_SYNTHESIS_WORDING_IS_A_TRUE SEMANTIC SUPERSET OF THE B2 GENERAL_ANALYSIS_CREATIVE_NON_SPECIALIZED_REGION WITHOUT WEAKENING ANY EXISTING REQUIREMENT.",
+    "VERIFY_THE_SYNTHESIS_MATCHED_QUALITY_METRIC_CAN_BE VERSIONED TO SCORE THE TWO NEW STRATA WITHOUT REUSING OUT_OF_SCOPE PRIOR RECEIPTS.",
+    "VERIFY_DIAGRAM_OUTPUT_IS_NOT ALREADY LOAD_BEARINGLY COVERED BY AN EXISTING UNPROVED ATOM; IF IT IS, DELETE THE PROPOSED NEW ATOM RATHER THAN DUPLICATE IT.",
+    "VERIFY_ALL CURRENT PROVED PREDICATE CLAIMS RETAIN EXACT SEMANTICS AND EVIDENCE BINDINGS.",
+    "FALSIFY_WITH A CONSTRUCTIVE OPUS55 TEXT BEHAVIOR THAT STILL FALLS OUTSIDE THE 19 FAMILY UNION AFTER THE PROPOSED FAMILY EDIT."
+  ],
+  "promotion_plan_if_verified": [
+    "CREATE_A_VERSIONED_TARGET_ENVELOPE_SUCCESSOR_WITH_ONLY_THE COMMUNICATION_AND_SYNTHESIS SEMANTIC DELTA.",
+    "VERSION_THE_SYNTHESIS PREEXPOSURE PORTFOLIO_OR_SCORER CONTRACT TO INCLUDE GENERAL_ANALYSIS_AND_CREATIVE_TEXT.",
+    "CREATE_A_VERSIONED ACCEPTANCE REGISTRY SUCCESSOR THAT ADDS ONLY DIAGRAM_OUTPUT_SCOPE_QUALITY_NONINFERIOR.",
+    "RECOMPUTE THE EXACT ROOT PARTITION FROM REGISTRY_MINUS_PROVED EVIDENCE; DO NOT HAND EDIT ROOT COUNTS.",
+    "RECOMPUTE THE TERMINAL META ENVELOPE AND DELETE THE B2_GENERAL_ANALYSIS_CREATIVE_NON_SPECIALIZED AND CREATIVE_TEXT_BASIS RESIDUALS ONLY IF THE NEW BINDINGS PASS.",
+    "KEEP DIAGRAM_OUTPUT_SCOPE_QUALITY_NONINFERIOR OPEN UNTIL ITS OWN SOUND PROOF PASSES."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TERMINAL_GOAL_IS_REACHED.",
+    "NO_CLAIM_THE_B2_OR_CREATIVE_TEXT RESIDUAL IS CLOSED BEFORE INDEPENDENT VERIFICATION AND ACTIVATION.",
+    "NO_CLAIM_DIAGRAM PARITY IS PROVED.",
+    "NO_NEW_FAMILY_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT.",
+    "NO_FRESH_REALITY_AUTHORITY.",
+    "NO_TARGET_WEAKENING.",
+    "NO_SILENT_REUSE_OF_PROOF_RECEIPTS_ACROSS_WIDENED_SEMANTICS."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
