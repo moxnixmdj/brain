@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_DIAGRAM_SCORE_IMPLICATION_GATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FAIL_CLOSED_DIAGRAM_SCORE_MULTIPLEX_GATE__PUBLIC_DEMONSTRATIVE_DIAGRAM_TASK_IS_NOT_OFFICIAL_SCORE_SCOPE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Prevent an AA-Briefcase >=1822 score receipt from being reused as proof of the Opus 5.5 diagram-output child obligation unless benchmark-owner evidence establishes that the official scored scope actually exercises the claimed diagram behavior.",
+  "current_authorities": {
+    "terminal_basis_cut": {
+      "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V2.json",
+      "git_blob_sha": "d2867bdcb4e2a721c2dbcde59100627508a7866a",
+      "diagram_child": "DIAGRAM_OUTPUT_SEMANTIC_CORRECTNESS_STRUCTURE_PRESENTATION_NONINFERIOR"
+    },
+    "aa_multiplex_activation": {
+      "path": "canonical/governance/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_ACTIVATION_V1.json",
+      "effect": "ONE_FUTURE_COMPARABLE_AA_BRIEFCASE_V1_1_GE_1822_RECEIPT_FOR_TWO_ATOMIC_PREDICATES_PLUS_EXACT_PROFESSIONAL_QUALITY_LEAF"
+    },
+    "task_union_candidate": {
+      "path": "canonical/governance/PUBLIC_BAR_TASK_UNION_SCOPE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2295a03fe9090e6842c6bd850b7bca67d1f71131",
+      "candidate_leaf": "DOCUMENT_SPREADSHEET_SLIDE_DIAGRAM_DELIVERABLE_PRODUCTION",
+      "candidate_coverage": "DIRECT_PUBLIC_TASK_UNION_PLUS_ARTIFACT_DEPENDENCIES"
+    },
+    "artifact_scope_map": {
+      "path": "canonical/governance/AA_BRIEFCASE_ARTIFACT_SCOPE_COVERAGE_MAP_V1.json",
+      "git_blob_sha": "87c362eee0b012baa3f89890b4f7d78a6f23684a"
+    }
+  },
+  "benchmark_owner_public_evidence": [
+    {
+      "url": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "establishes": [
+        "AA_BRIEFCASE_V1_1_HAS_91_OFFICIAL_PRIVATE_TASKS_ACROSS_FOUR_PROJECTS",
+        "DELIVERABLE_FILE_TYPES_INCLUDE_EXCEL_POWERPOINT_PDF_WORD_AND_OTHER",
+        "PRESENTATION_IS_A_PAIRWISE_GRADED_DIMENSION",
+        "PUBLIC_FIFTH_SCENARIO_IS_REPRESENTATIVE_ONLY_AND_DOES_NOT_CONTRIBUTE_TO_OFFICIAL_AA_BRIEFCASE_RESULTS"
+      ]
+    },
+    {
+      "url": "https://artificialanalysis.ai/articles/aa-briefcase/",
+      "establishes": [
+        "PUBLIC_DUE_DILIGENCE_SCENARIO_IS_EXPLICITLY_UNSCORED",
+        "PUBLIC_SCENARIO_INCLUDES_MARKET_STRUCTURE_MAP_AND_LATEX_PDF_STYLE_DELIVERABLES",
+        "PUBLIC_EXAMPLE_OUTPUTS_AND_GRADING_ILLUSTRATE_THE_EVALUATION_BUT_DO_NOT_ENTER_OFFICIAL_ELO"
+      ]
+    }
+  ],
+  "recomputation": {
+    "official_score_scope_contains_professional_deliverable_quality": true,
+    "official_score_scope_contains_presentation_grading": true,
+    "publicly_visible_diagram_or_map_example_exists": true,
+    "publicly_visible_diagram_or_map_example_contributes_to_official_score": false,
+    "public_evidence_proves_private_scored_91_task_set_contains_diagram_generation": false,
+    "therefore_aa_briefcase_score_alone_implies_diagram_child": false
+  },
+  "fail_closed_implication_gate": {
+    "target_child": "DIAGRAM_OUTPUT_SEMANTIC_CORRECTNESS_STRUCTURE_PRESENTATION_NONINFERIOR",
+    "allow_same_aa_briefcase_receipt_to_discharge_child_only_if_all": [
+      "BENCHMARK_OWNER_OR_EQUIVALENT_PRIMARY_EVIDENCE_PROVES_OFFICIAL_SCORED_SCOPE_EXERCISES_DIAGRAM_GENERATION_AS_CLAIMED",
+      "THE_EXERCISED_DIAGRAM_SCOPE_COVERS_SEMANTIC_CORRECTNESS_STRUCTURE_AND_PRESENTATION_NOT_MERELY_FILE_CONTAINER_OR_GENERIC_PRESENTATION",
+      "THE_BRAIN_RECEIPT_IS_ON_THE_FROZEN_COMPARABLE_AA_BRIEFCASE_V1_1_PROTOCOL_AND_MEETS_THE_REQUIRED_1822_THRESHOLD",
+      "NO_DIAGRAM_SUBSCOPE_MATERIAL_TO_THE_OPUS55_CLAIM_REMAINS_OUTSIDE_THE_SCORED_SCOPE_OR_ANY_REMAINDER_IS_CLOSED_SEPARATELY"
+    ],
+    "otherwise": "KEEP_DIAGRAM_CHILD_OPEN_AND_USE_THE_SMALLEST_SCOPE_COMPLETE_DIAGRAM_SPECIFIC_PROOF_OR_STRONGER_EXISTING_PREDICATE_IMPLICATION"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "UNCONDITIONAL_AA_BRIEFCASE_SCORE_TO_DIAGRAM_CHILD_MULTIPLEXING",
+      "TREAT_PUBLIC_UNSCORED_MARKET_STRUCTURE_MAP_EXAMPLE_AS_PROOF_OF_PRIVATE_SCORED_DIAGRAM_SCOPE"
+    ],
+    "preserve": [
+      "ONE_AA_BRIEFCASE_RECEIPT_MULTIPLEX_FOR_PROWORK_AA_BRIEFCASE_GE_1822",
+      "ONE_AA_BRIEFCASE_RECEIPT_MULTIPLEX_FOR_ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "CONDITIONAL_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_DISCHARGE",
+      "F_CREATIVE_AND_DIAGRAM_ACCEPTANCE_BASIS_REPAIR",
+      "CURRENT_DECLARED_14_OF_38_ACCOUNTING_UNCHANGED_PENDING_SEPARATE_CANONICAL_RECONCILIATION"
+    ],
+    "next_zero_reality_action": "SEARCH_ONLY_FOR_PRIMARY_EVIDENCE_OF_OFFICIAL_SCORED_DIAGRAM_EXERCISE_OR_PROVE_A_SCOPE_SAFE_EXISTING_PREDICATE_IMPLICATION__DO_NOT_RUN_NEW_DIAGRAM_CASES_FIRST"
+  },
+  "relationship_to_artifact_scope_reopen_candidate": {
+    "prior_pr": 2066,
+    "prior_candidate": "canonical/governance/ARTIFACT_DIAGRAM_SCOPE_REOPEN_CANDIDATE_20261005_V1.json",
+    "disposition": "SUPERSEDE_THE_UNCONDITIONAL_13_OF_38_REOPEN_PROPOSAL_WITH_THIS_NARROW_DECISION_GATE",
+    "reason": "CURRENT_ACTIVE_AUTHORITY_TREATS_THE_38_PREDICATE_COUNT_AS_DECLARED_REGISTRY_ACCOUNTING_WHILE_CREATIVE_DIAGRAM_IS_A_SEPARATE_STRUCTURAL_REPAIR_GROUP; THE_IMMEDIATE_SOUND_MOVE_IS_TO_BLOCK_UNPROVED_SCORE_IMPLICATION_AND_RESOLVE_SCOPE_IDENTITY_BEFORE_CHANGING_ATOMIC_ACCOUNTING"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_AA_BRIEFCASE_PRIVATE_SCORED_TASKS_DO_NOT_CONTAIN_DIAGRAMS",
+    "NO_CLAIM_THEY_DO_CONTAIN_DIAGRAMS",
+    "NO_DIAGRAM_PARITY_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ATOMIC_COUNT_CHANGE",
+    "NO_TERMINAL_SEAL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
