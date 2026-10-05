@@ -77,7 +77,17 @@
         "CODING_CURSORBENCH_GE_57_8",
         "EXACT_BENCHMARK_AND_AGENT_CONFIGURATION_IDENTITY_FOR_EACH_BAR"
       ],
-      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_OPEN"
+      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_OPEN",
+      "audit_basis_leaf_ids": [
+        "UNFAMILIAR_REPOSITORY_INTENT_AND_CODEBASE_UNDERSTANDING",
+        "FEATURE_IMPLEMENTATION_AND_MULTI_FILE_EDIT",
+        "BUG_FINDING_DEBUGGING_AND_ROOT_CAUSE_LOCALIZATION",
+        "REFACTORING_WITH_BEHAVIOR_PRESERVATION",
+        "PLANNING_REVIEW_AND_DESIGN_ADHERENCE",
+        "TERMINAL_BUILD_TEST_JOB_AND_OPERATION_EXECUTION",
+        "LONG_HORIZON_AMBIGUITY_AND_STATE_RETENTION",
+        "SELF_CHECK_AND_RECOVERY_AFTER_FAILED_CHANGE"
+      ]
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
@@ -122,7 +132,17 @@
         "GDPVAL_AA_TARGET_EPOCH_IDENTITY",
         "AA_BRIEFCASE_TARGET_EPOCH_IDENTITY"
       ],
-      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_AND_TARGET_EPOCH_OPEN"
+      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_AND_TARGET_EPOCH_OPEN",
+      "audit_basis_leaf_ids": [
+        "MULTI_SOURCE_PROFESSIONAL_RESEARCH_AND_FACT_EXTRACTION",
+        "ANALYTICAL_REASONING_AND_DECISION_SUPPORT",
+        "DOCUMENT_SPREADSHEET_SLIDE_DIAGRAM_DELIVERABLE_PRODUCTION",
+        "MULTI_STAGE_TASK_DEPENDENCY_AND_STATE_RETENTION",
+        "CONFLICT_RESOLUTION_AND_SOURCE_FIDELITY",
+        "PROFESSIONAL_PRESENTATION_AND_RUBRIC_COMPLIANCE",
+        "CROSS_OCCUPATION_AND_CROSS_INDUSTRY_TRANSFER",
+        "TOOL_USING_OFFICE_WORKFLOW_COMPLETION"
+      ]
     },
     {
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
@@ -164,6 +184,16 @@
       "reusable_already_proved_strengtheners": [
         "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001_VIA_ACCEPTED_TOOL_DISCOVERY_FAMILY",
         "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_VIA_ACCEPTED_RECOVERY_FAMILY"
+      ],
+      "audit_basis_leaf_ids": [
+        "CROSS_APPLICATION_ORCHESTRATION",
+        "API_OR_TOOL_DISCOVERY",
+        "BUSINESS_POLICY_AND_GUARDRAIL_COMPLIANCE",
+        "IRRELEVANT_OR_MISLEADING_RECORD_FILTERING",
+        "CORRECT_END_STATE_WRITES",
+        "MULTI_DOMAIN_BUSINESS_TRANSFER",
+        "FAILURE_RECOVERY_AND_PARTIAL_PROGRESS_INTEGRITY",
+        "NON_REST_OR_UI_MEDIATED_WORKFLOW_WHERE_CLAIMED"
       ]
     },
     {
@@ -196,7 +226,17 @@
         "GATED_POPULATION_ACCESS_OR_SCOPE_SAFE_EQUIVALENT",
         "BRAIN_TOOL_ADAPTER_AND_SCORE"
       ],
-      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__HLE_PERFORMANCE_AND_TARGET_SETUP_IDENTITY_OPEN"
+      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__HLE_PERFORMANCE_AND_TARGET_SETUP_IDENTITY_OPEN",
+      "audit_basis_leaf_ids": [
+        "EXPERT_LEVEL_CLOSED_ENDED_REASONING",
+        "MULTIDOMAIN_TRANSFER",
+        "SEARCH_AUGMENTED_EVIDENCE_GATHERING",
+        "CODE_OR_COMPUTATION_TOOL_USE",
+        "MULTIMODAL_OR_NON_TEXT_INPUT_WHERE_PRESENT",
+        "OPEN_ENDED_SYNTHESIS_AND_ARGUMENT",
+        "ITERATIVE_TOOL_PLANNING_AND_REVISION",
+        "CALIBRATED_UNCERTAINTY_AND_ABSTENTION"
+      ]
     },
     {
       "family": "AGENTIC_SCIENTIFIC_RESEARCH",
@@ -225,7 +265,17 @@
         "EXACT_TB_SCIENCE_VERSION_HARNESS_AGENT_AND_TARGET_CONFIGURATION_IDENTITY",
         "BRAIN_VERIFIER_SUCCESS_MASS_AND_SCORE"
       ],
-      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_AND_TARGET_FRESHNESS_OPEN"
+      "result": "STRUCTURAL_SCOPE_CLOSED_CANDIDATE__PERFORMANCE_AND_TARGET_FRESHNESS_OPEN",
+      "audit_basis_leaf_ids": [
+        "SCIENTIFIC_DATA_ANALYSIS_AND_STATISTICAL_INFERENCE",
+        "SIMULATION_OPTIMIZATION_AND_MODEL_FITTING",
+        "THEOREM_PROVING_AND_MATHEMATICAL_WORKFLOW",
+        "SIGNAL_IMAGE_INVERSE_AND_SENSOR_WORKFLOWS",
+        "SCIENTIFIC_CODE_SOFTWARE_AND_ARTIFACT_EXECUTION",
+        "ITERATIVE_LONG_HORIZON_WORKFLOW_CONTROL",
+        "HYPOTHESIS_OR_RESEARCH_QUESTION_FORMATION_WHERE_CLAIMED",
+        "RESULT_INTERPRETATION_VALIDATION_AND_SCIENTIFIC_COMMUNICATION_WHERE_CLAIMED"
+      ]
     }
   ],
   "aggregate": {
@@ -300,5 +350,19 @@
   "promotion_authority": false,
   "fresh_reality_authority": false,
   "independent_verification_required": true,
-  "revision_note": "V1 corrected in-place before verification: Business tool-route and trajectory-localization are already-proved reusable strengtheners, not target-entailment-quarantined mechanism debts. Only browser visual grounding is nonmandatory for BUSINESS_WORKFLOW_AUTOMATION under the active target-behavior guard."
+  "revision_note": "V1 corrected in-place before verification: Business tool-route and trajectory-localization are already-proved reusable strengtheners, not target-entailment-quarantined mechanism debts. Only browser visual grounding is nonmandatory for BUSINESS_WORKFLOW_AUTOMATION under the active target-behavior guard.",
+  "machine_check_contract": {
+    "exact_family_set": true,
+    "exact_frozen_useful_behavior_strings": true,
+    "audit_basis_leaf_ids_must_equal_current_task_union_audit": true,
+    "stronger_receipts_must_be_PROVED_and_scope_complete": true,
+    "nonmandatory_mechanisms_must_match_active_guard_edges_with_mandatory_false": true,
+    "target_conditioned_mandatory_new_residual_count_must_equal_zero": true,
+    "structural_scope_residual_arrays_must_be_empty": true,
+    "negative_literal_checks": [
+      "MULTIDISCIPLINARY_FROZEN_SENTENCE_DOES_NOT_DECLARE_A_GENERAL_MULTIMODAL_CAPABILITY",
+      "SCIENTIFIC_FROZEN_SENTENCE_DOES_NOT_DECLARE_HYPOTHESIS_OR_QUESTION_FORMATION",
+      "BUSINESS_FROZEN_SENTENCE_DOES_NOT_DECLARE_VISUAL_BROWSER_GROUNDING"
+    ]
+  }
 }
