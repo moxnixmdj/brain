@@ -39,60 +39,78 @@ exec(compile(raw,logical,"exec"),g,g)
 """
 
 _WRAPPER = r"""
-import base64,hashlib,json,os,pathlib,subprocess,sys
-spec=json.loads(base64.urlsafe_b64decode(sys.argv[1].encode("ascii")).decode("utf-8"))
-broker_fd=int(os.environ.pop("PROJECT_BRAIN_BROKER_FD"))
-os.set_inheritable(broker_fd,False)
-src=pathlib.Path(spec["source_path"])
-raw=src.read_bytes()
-observed=hashlib.sha256(raw).hexdigest()
-if observed!=spec["test_sha256"]:
+import base64,hashlib,json,os,pathlib,subprocess,sys,traceback
+broker_fd=int(os.environ.get("PROJECT_BRAIN_BROKER_FD","-1"))
+try:
+    spec=json.loads(base64.urlsafe_b64decode(sys.argv[1].encode("ascii")).decode("utf-8"))
+    if broker_fd<0:
+        raise RuntimeError("BROKER_FD_MISSING")
+    os.environ.pop("PROJECT_BRAIN_BROKER_FD",None)
+    os.set_inheritable(broker_fd,False)
+    src=pathlib.Path(spec["source_path"])
+    raw=src.read_bytes()
+    observed=hashlib.sha256(raw).hexdigest()
+    if observed!=spec["test_sha256"]:
+        out={
+          "wrapper_error":None,
+          "binding_error":"TEST_PROGRAM_SHA256_MISMATCH",
+          "timed_out":False,
+          "returncode":None,
+          "stdout_b64":"",
+          "stderr_b64":"",
+          "test_sha256_observed":observed,
+        }
+    else:
+        snap=pathlib.Path("/work/test_snapshot.py")
+        snap.write_bytes(raw)
+        nested_env={
+          "PATH":"/usr/bin:/bin",
+          "HOME":"/tmp",
+          "PYTHONDONTWRITEBYTECODE":"1",
+        }
+        try:
+            p=subprocess.run(
+                [spec["python"],"-I","-c",spec["runner"],str(snap),spec["logical_path"]],
+                cwd=spec["cwd"],
+                env=nested_env,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=spec["timeout"],
+                check=False,
+                close_fds=True,
+            )
+            out={
+              "wrapper_error":None,
+              "binding_error":None,
+              "timed_out":False,
+              "returncode":int(p.returncode),
+              "stdout_b64":base64.b64encode(p.stdout or b"").decode("ascii"),
+              "stderr_b64":base64.b64encode(p.stderr or b"").decode("ascii"),
+              "test_sha256_observed":observed,
+            }
+        except subprocess.TimeoutExpired as exc:
+            out={
+              "wrapper_error":None,
+              "binding_error":None,
+              "timed_out":True,
+              "returncode":None,
+              "stdout_b64":base64.b64encode(exc.output or b"").decode("ascii"),
+              "stderr_b64":base64.b64encode(exc.stderr or b"").decode("ascii"),
+              "test_sha256_observed":observed,
+            }
+except Exception as exc:
     out={
-      "binding_error":"TEST_PROGRAM_SHA256_MISMATCH",
+      "wrapper_error":type(exc).__name__+":"+str(exc),
+      "binding_error":None,
       "timed_out":False,
       "returncode":None,
       "stdout_b64":"",
-      "stderr_b64":"",
-      "test_sha256_observed":observed,
+      "stderr_b64":base64.b64encode(traceback.format_exc().encode("utf-8")).decode("ascii"),
+      "test_sha256_observed":None,
     }
-else:
-    snap=pathlib.Path("/work/test_snapshot.py")
-    snap.write_bytes(raw)
-    nested_env={
-      "PATH":"/usr/bin:/bin",
-      "HOME":"/tmp",
-      "PYTHONDONTWRITEBYTECODE":"1",
-    }
-    try:
-        p=subprocess.run(
-            [spec["python"],"-I","-c",spec["runner"],str(snap),spec["logical_path"]],
-            cwd=spec["cwd"],
-            env=nested_env,
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            timeout=spec["timeout"],
-            check=False,
-            close_fds=True,
-        )
-        out={
-          "binding_error":None,
-          "timed_out":False,
-          "returncode":int(p.returncode),
-          "stdout_b64":base64.b64encode(p.stdout or b"").decode("ascii"),
-          "stderr_b64":base64.b64encode(p.stderr or b"").decode("ascii"),
-          "test_sha256_observed":observed,
-        }
-    except subprocess.TimeoutExpired as exc:
-        out={
-          "binding_error":None,
-          "timed_out":True,
-          "returncode":None,
-          "stdout_b64":base64.b64encode(exc.output or b"").decode("ascii"),
-          "stderr_b64":base64.b64encode(exc.stderr or b"").decode("ascii"),
-          "test_sha256_observed":observed,
-        }
-os.write(broker_fd,(json.dumps(out,sort_keys=True,separators=(",",":"))+"\n").encode("utf-8"))
+if broker_fd>=0:
+    os.write(broker_fd,(json.dumps(out,sort_keys=True,separators=(",",":"))+"\n").encode("utf-8"))
 """
 
 
@@ -229,6 +247,8 @@ def _prepare(context: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def _decode_result(result: Mapping[str, Any], prepared: Mapping[str, Any]) -> subprocess.CompletedProcess:
+    if result.get("wrapper_error"):
+        raise RepositoryTestDenied("WRAPPER_ERROR:" + str(result["wrapper_error"]))
     if result.get("binding_error"):
         raise RepositoryTestDenied(str(result["binding_error"]))
     if result.get("test_sha256_observed") != prepared["test_sha256"]:
