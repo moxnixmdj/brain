@@ -4606,19 +4606,25 @@ def _run_model_independent_goal(step, mission, goal):
                   "runtime_channel_receipts_complete":channel_receipts_complete,
                   "observed_file_ambient_channel_subset_closed":observed_subset_closed,
                   "semantic_declaration_completeness":(
-                      True if composition_c1_strict and observed_subset_closed
+                      "UNVERIFIED__RUNTIME_OBSERVATION_IS_NOT_A_SEMANTIC_SCOPE_PROOF"
+                      if composition_c1_strict and observed_subset_closed
                       else "UNVERIFIED"
                   ),
                   "external_evidence_channel_completeness":(
-                      True if composition_c1_strict and observed_subset_closed
+                      "UNVERIFIED__EXTERNAL_RUNTIME_CHANNELS_FORBIDDEN_BUT_REPO_EVIDENCE_PROVENANCE_NOT_SCOPE_COMPLETE"
+                      if composition_c1_strict and observed_subset_closed
                       else "UNVERIFIED"
                   ),
                   "broader_runtime_channel_totality":(
-                      True if composition_c1_strict and observed_subset_closed
+                      "CANDIDATE__STRICT_AUDITED_ACTION_SUBSET_ONLY"
+                      if composition_c1_strict and observed_subset_closed
                       else "UNVERIFIED"
                   ),
                   "rollback_scope_complete":(
                       True if composition_c1_strict else "UNVERIFIED"
+                  ),
+                  "strict_runtime_channel_candidate_pass":(
+                      bool(composition_c1_strict and observed_subset_closed)
                   ),
                   "rollback_policy":(
                       "FAIL_CLOSED_ON_INVALID_PREFIX"
