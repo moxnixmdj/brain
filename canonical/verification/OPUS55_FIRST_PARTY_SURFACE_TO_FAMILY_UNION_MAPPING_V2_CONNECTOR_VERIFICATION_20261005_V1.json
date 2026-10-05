@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__ACCOUNTING_DESTINATIONS_COMPLETE_FOR_V5_FRONTIER__LOSSLESS_SCOPE_AND_PARITY_NOT_PROVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+    "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+  },
+  "inputs": {
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "v5_frontier": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "first_party_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    }
+  },
+  "checks": {
+    "mapping_row_count": 8,
+    "every_referenced_family_exists": true,
+    "every_v5_mapping_condition_or_basis_surface_has_accounting_destination": true,
+    "primitive_family_gap_claimed": false,
+    "parity_proved": false,
+    "creative_diagram_basis_repaired": false,
+    "errors": []
+  },
+  "verified_consequence": [
+    "DELETE_NEW_ACCOUNTING_FAMILY_INVENTION_FOR_CURRENTLY_ENUMERATED_SURFACE_LABELS_AS_A_SCHEDULING_DEFAULT",
+    "PRESERVE_ALL_DOMAIN_LANGUAGE_CONTEXT_MATH_AND_CREATIVE_PARITY_OR_UNCOVERED_SCOPE_OBLIGATIONS",
+    "PRESERVE_GLOBAL_SOURCE_UNIVERSE_EXHAUSTIVENESS_AS_SEPARATE_OPEN_BOUNDARY",
+    "NO_LOSSLESS_SCOPE_EQUIVALENCE_IS_GRANTED_BY_THIS_CONNECTOR_RECOMPUTATION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_FIRST_PARTY_SOURCE_UNIVERSE_IS_EXHAUSTIVE",
+    "NO_CLAIM_FAMILY_UNION_SEMANTIC_MAPPING_PROVES_EQUAL_OR_BETTER",
+    "NO_CLAIM_UNCOVERED_BEHAVIOR_LEAVES_ARE_ALREADY_ACCEPTED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
