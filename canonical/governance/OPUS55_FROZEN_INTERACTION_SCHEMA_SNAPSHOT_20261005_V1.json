@@ -83,7 +83,7 @@
       "WebFetchTool20260309Param",
       "WebSearchTool20260318Param",
       "WebFetchTool20260318Param",
-      "ToolSearchToolBm2520251119Param",
+      "ToolSearchToolBm25_20251119Param",
       "ToolSearchToolRegex20251119Param"
     ],
     "tool_union_count": 21,
@@ -217,7 +217,7 @@
       "BetaWebSearchTool20260318Param",
       "BetaWebFetchTool20260318Param",
       "BetaAdvisorTool20260301Param",
-      "BetaToolSearchToolBm2520251119Param",
+      "BetaToolSearchToolBm25_20251119Param",
       "BetaToolSearchToolRegex20251119Param",
       "BetaMCPToolsetParam"
     ],
