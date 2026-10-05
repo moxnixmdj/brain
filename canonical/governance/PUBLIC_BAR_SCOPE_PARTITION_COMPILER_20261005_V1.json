@@ -1,0 +1,177 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_SCOPE_PARTITION_COMPILER_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FINITE_SCOPE_BASIS_FOR_FIVE_PUBLIC_BAR_ONLY_FAMILIES__ZERO_CREDIT",
+  "objective": "Replace impossible whole-family benchmark proxying with a finite constructive coverage decomposition: public bars prove only exercised leaves; uncovered leaves become explicit minimum obligations.",
+  "formal_rule": {
+    "family_scope": "F",
+    "benchmark_exercised_scope": "C subseteq F",
+    "uncovered_scope": "U = F \\ C",
+    "whole_family_acceptance": "ACCEPT(F) iff ACCEPT_PUBLIC_BARS(C) AND ACCEPT_EACH_LOAD_BEARING_LEAF(U)",
+    "no_proxy_rule": "CANNOT_INFER_ACCEPT(F)_FROM_ACCEPT(C)_WHEN_U_IS_NONEMPTY",
+    "compression_rule": "Merge leaves only when one stronger observable contract logically implies the merged leaves under frozen tool and environment authority."
+  },
+  "compiler_algorithm": [
+    "PARSE_DECLARED_FAMILY_USEFUL_BEHAVIOR_INTO_OBSERVABLE_VERBS_OBJECTS_ENVIRONMENTS_AND_FAILURE_MODES",
+    "MAP_EACH_PUBLIC_BENCHMARK_TO_ONLY_THE_DIMENSIONS_ITS_OWNER_OR_IMPLEMENTATION_EXPLICITLY_EXERCISES",
+    "COMPUTE_UNCOVERED_DIMENSIONS_FAIL_CLOSED",
+    "DEDUPE_UNCOVERED_DIMENSIONS_AGAINST_EXISTING_ACCEPTANCE_PREDICATES_AND_BEHAVIORAL_CONTRACTS",
+    "FOR_EACH_TRUE_RESIDUAL_CHOOSE_STRONGEST_ZERO_OR_MINIMUM_REALITY_PROOF_MODE",
+    "WHOLE_FAMILY_PROMOTES_ONLY_AFTER_PUBLIC_BARS_AND_TRUE_RESIDUALS_CLOSE"
+  ],
+  "family_bases": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "declared_behavior": "Long-running work in unfamiliar/large codebases: feature implementation, debugging, refactoring, review, terminal operation, ambiguous multi-file changes, root-cause analysis and self-checking.",
+      "public_scope_authorities": [
+        "https://artificialanalysis.ai/evaluations/terminalbench-4-0",
+        "https://cognition.com/blog/frontier-code-1-1",
+        "https://prod.cursor.com/evals"
+      ],
+      "observable_basis": [
+        "UNFAMILIAR_REPOSITORY_INTENT_AND_CODEBASE_UNDERSTANDING",
+        "FEATURE_IMPLEMENTATION_AND_MULTI_FILE_EDIT",
+        "BUG_FINDING_DEBUGGING_AND_ROOT_CAUSE_LOCALIZATION",
+        "REFACTORING_WITH_BEHAVIOR_PRESERVATION",
+        "PLANNING_REVIEW_AND_DESIGN_ADHERENCE",
+        "TERMINAL_BUILD_TEST_JOB_AND_OPERATION_EXECUTION",
+        "LONG_HORIZON_AMBIGUITY_AND_STATE_RETENTION",
+        "SELF_CHECK_AND_RECOVERY_AFTER_FAILED_CHANGE"
+      ],
+      "known_public_coverage": [
+        "Terminal-Bench 4.0: terminal-based complex tasks with per-task tests across software and adjacent technical domains",
+        "CursorBench 4.0: ambiguous multi-file real-session tasks; edit, refactor, investigation, intent understanding, job management, design adherence",
+        "FrontierCode 1.1: code correctness plus code quality"
+      ],
+      "residual_rule": "ONLY_BASIS_LEAVES_NOT_EXPLICITLY_EXERCISED_BY_THE_FROZEN_PUBLIC_TASK_UNION_REMAIN_DIRECT_SCOPE_OBLIGATIONS"
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "declared_behavior": "Produce high-quality professional work products and complete multi-hour/multi-stage office tasks.",
+      "public_scope_authorities": [
+        "https://artificialanalysis.ai/evaluations/gdpval-aa",
+        "https://artificialanalysis.ai/evaluations/aa-briefcase"
+      ],
+      "observable_basis": [
+        "MULTI_SOURCE_PROFESSIONAL_RESEARCH_AND_FACT_EXTRACTION",
+        "ANALYTICAL_REASONING_AND_DECISION_SUPPORT",
+        "DOCUMENT_SPREADSHEET_SLIDE_DIAGRAM_DELIVERABLE_PRODUCTION",
+        "MULTI_STAGE_TASK_DEPENDENCY_AND_STATE_RETENTION",
+        "CONFLICT_RESOLUTION_AND_SOURCE_FIDELITY",
+        "PROFESSIONAL_PRESENTATION_AND_RUBRIC_COMPLIANCE",
+        "CROSS_OCCUPATION_AND_CROSS_INDUSTRY_TRANSFER",
+        "TOOL_USING_OFFICE_WORKFLOW_COMPLETION"
+      ],
+      "known_public_coverage": [
+        "GDPval-AA v2.1: 220 real-world tasks across 44 occupations and 9 industries with shell/web and diverse professional deliverables",
+        "AA-Briefcase v1.1: 91 tasks across four multi-week knowledge-work projects with thousands of input files and deliverables including spreadsheets, presentations and memos"
+      ],
+      "residual_rule": "DO_NOT_GENERALIZE_FROM_BENCHMARK_OCCUPATIONS_PROJECTS_OR_FILE_TYPES_TO_UNEXERCISED_PROFESSIONAL_WORK_WITHOUT_AN_EXPLICIT_TRANSFER_OR_SCOPE_AUDIT"
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "declared_behavior": "Execute real multi-application business workflows accurately end-to-end.",
+      "public_scope_authorities": [
+        "https://arxiv.org/abs/2604.18934",
+        "https://github.com/zapier/AutomationBench",
+        "https://artificialanalysis.ai/evaluations/automationbench-aa"
+      ],
+      "observable_basis": [
+        "CROSS_APPLICATION_ORCHESTRATION",
+        "API_OR_TOOL_DISCOVERY",
+        "BUSINESS_POLICY_AND_GUARDRAIL_COMPLIANCE",
+        "IRRELEVANT_OR_MISLEADING_RECORD_FILTERING",
+        "CORRECT_END_STATE_WRITES",
+        "MULTI_DOMAIN_BUSINESS_TRANSFER",
+        "FAILURE_RECOVERY_AND_PARTIAL_PROGRESS_INTEGRITY",
+        "NON_REST_OR_UI_MEDIATED_WORKFLOW_WHERE_CLAIMED"
+      ],
+      "known_public_coverage": [
+        "AutomationBench spans Sales, Marketing, Operations, Support, Finance and HR across simulated SaaS environments",
+        "Tasks require endpoint discovery, layered business rules and correct end-state writes while handling irrelevant/misleading records"
+      ],
+      "residual_rule": "SIMULATED_REST_WORKFLOWS_DO_NOT_AUTOMATICALLY_PROVE_NON_REST_UI_OR_UNREPRESENTED_APP_AUTHORITY; KEEP_THOSE_LEAVES_EXPLICIT_IF_INCLUDED_IN_FAMILY_SCOPE"
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "declared_behavior": "Solve difficult expert-level questions across domains with search/code/tools.",
+      "public_scope_authorities": [
+        "https://www.lastexam.ai/"
+      ],
+      "observable_basis": [
+        "EXPERT_LEVEL_CLOSED_ENDED_REASONING",
+        "MULTIDOMAIN_TRANSFER",
+        "SEARCH_AUGMENTED_EVIDENCE_GATHERING",
+        "CODE_OR_COMPUTATION_TOOL_USE",
+        "MULTIMODAL_OR_NON_TEXT_INPUT_WHERE_PRESENT",
+        "OPEN_ENDED_SYNTHESIS_AND_ARGUMENT",
+        "ITERATIVE_TOOL_PLANNING_AND_REVISION",
+        "CALIBRATED_UNCERTAINTY_AND_ABSTENTION"
+      ],
+      "known_public_coverage": [
+        "Humanity's Last Exam contains roughly 2,500 difficult questions across more than 100 subjects and is designed around frontier expert knowledge",
+        "The with-tools condition adds search/code access but remains primarily an exam-style question-answer benchmark"
+      ],
+      "residual_rule": "HLE_WITH_TOOLS_DOES_NOT_BY_NAME_PROVE_OPEN_ENDED_SYNTHESIS_LONG_HORIZON_TOOL_PLANNING_OR_CALIBRATION_UNLESS_THE_FROZEN_EVALUATION_SCOPE_EXERCISES_THEM"
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "declared_behavior": "Use scientific software, tools, analysis and iterative reasoning to solve long-horizon research/technical tasks.",
+      "public_scope_authorities": [
+        "https://www.terminal-bench-science.ai/",
+        "https://www.terminal-bench-science.ai/announcement"
+      ],
+      "observable_basis": [
+        "SCIENTIFIC_DATA_ANALYSIS_AND_STATISTICAL_INFERENCE",
+        "SIMULATION_OPTIMIZATION_AND_MODEL_FITTING",
+        "THEOREM_PROVING_AND_MATHEMATICAL_WORKFLOW",
+        "SIGNAL_IMAGE_INVERSE_AND_SENSOR_WORKFLOWS",
+        "SCIENTIFIC_CODE_SOFTWARE_AND_ARTIFACT_EXECUTION",
+        "ITERATIVE_LONG_HORIZON_WORKFLOW_CONTROL",
+        "HYPOTHESIS_OR_RESEARCH_QUESTION_FORMATION_WHERE_CLAIMED",
+        "RESULT_INTERPRETATION_VALIDATION_AND_SCIENTIFIC_COMMUNICATION_WHERE_CLAIMED"
+      ],
+      "known_public_coverage": [
+        "Terminal-Bench-Science 0.1 has 70 expert-curated tasks across life, physical, earth, mathematical and engineering sciences",
+        "Task types include data analysis, statistical inference, simulation, optimization, theorem proving, image reconstruction, signal processing, inverse problems, sensor calibration, model fitting, classification and scientific machine learning",
+        "Benchmark documentation explicitly distinguishes execution workflows from human-judgment activities such as defining research questions, forming hypotheses, interpreting/validating results and communicating findings"
+      ],
+      "residual_rule": "DO_NOT_INHERIT_HYPOTHESIS_FORMATION_RESEARCH_QUESTION_DEFINITION_INTERPRETATION_VALIDATION_OR_COMMUNICATION_CREDIT_FROM_WORKFLOW_EXECUTION_TASKS_UNLESS_EXPLICITLY_EXERCISED"
+    }
+  ],
+  "cross_family_dedupe_rule": [
+    "IF_A_RESIDUAL_IS_ALREADY_LOAD_BEARING_AND_SCOPE_COMPLETE_IN_ANOTHER_FAMILY_PREDICATE,_REFERENCE_THAT_PREDICATE_AS_A_DEPENDENCY_RATHER_THAN_CREATE_A_DUPLICATE_REALITY_CASE",
+    "DEPENDENCY_REUSE_COUNTS_ONLY_WHEN_INPUT_ENVIRONMENT_TOOL_AUTHORITY_AND_ACCEPTANCE_METRIC_ARE_AT_LEAST_AS_STRONG_AS_THE_RESIDUAL_CLAIM"
+  ],
+  "expected_leverage": {
+    "before": "FIVE_BROAD_WHOLE_FAMILY_SCOPE_GAPS_WITH_UNBOUNDED_PROSE",
+    "after": "FINITE_DIMENSION_BASES_PLUS_ONLY_TRUE_RESIDUAL_LEAVES",
+    "mathematical_effect": "CONVERTS_UNSTRUCTURED_SCOPE_COMPLETENESS_PROBLEM_INTO_SET_DIFFERENCE_AND_SET_COVER_OVER_FROZEN_OBSERVABLE_DIMENSIONS"
+  },
+  "scheduler_effect": {
+    "activate": [
+      "COMPUTE_PUBLIC_TASK_UNION_COVERAGE_FOR_EACH_BASIS",
+      "DEDUPE_TRUE_RESIDUALS_AGAINST_EXISTING_38_PREDICATES_AND_12_ACTIVE_BEHAVIORAL_CONTRACTS",
+      "ADD_ONLY_NONEMPTY_TRUE_RESIDUALS_TO_ACCEPTANCE_BASIS"
+    ],
+    "block": [
+      "WHOLE_FAMILY_PROMOTION_FROM_BENCHMARK_SCORE_ALONE",
+      "INVENT_NEW_FAMILY_FOR_A_RESIDUAL_ALREADY_EXPRESSIBLE_AS_EXISTING_FAMILY_LEAF",
+      "DUPLICATE_REALITY_CASES_FOR_SCOPE_ALREADY_PROVED_BY_STRONGER_DEPENDENCY"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
