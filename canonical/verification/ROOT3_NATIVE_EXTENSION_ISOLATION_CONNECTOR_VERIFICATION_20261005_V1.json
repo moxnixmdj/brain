@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_NATIVE_EXTENSION_ISOLATION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__FOUR_NATIVE_RISK_ADAPTERS_PARENT_IMPORT_BYPASS_REMOVED__ZERO_CREDIT",
+  "subject": {
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "791f5aa072dd2a1c72eaf5957529516b9d8e023b"
+    },
+    "isolated_runner": {
+      "path": "canonical/runtime/bound_capability_isolated_runner_v1.py",
+      "git_blob_sha": "e1f1252eea4039496b3279c351d54451404c6b49"
+    },
+    "tests": {
+      "path": "canonical/tests/test_bound_capability_native_isolation_v1.py",
+      "git_blob_sha": "5f76871a96b345440d7943703b0ff9a498da6b72"
+    },
+    "isolation_candidate": {
+      "path": "canonical/governance/ROOT3_NATIVE_EXTENSION_ISOLATION_C1_CANDIDATE_V1.json",
+      "git_blob_sha": "858d7f04cbd9cdeb88c412d88458eba47718239a"
+    },
+    "surface_candidate": {
+      "path": "canonical/governance/ROOT3_NATIVE_EXTENSION_SURFACE_C1_CANDIDATE_V1.json",
+      "git_blob_sha": "c62e1562a534f4f8dde0bb75f4e14c4f75c81212"
+    },
+    "registry": {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+    }
+  },
+  "recomputed_checks": {
+    "exact_four_module_parent_allowlist": true,
+    "risky_dispatch_precedes_direct_adapter_import": true,
+    "risky_parent_direct_import_path_not_used": true,
+    "child_runner_exact_allowlist": true,
+    "child_runner_rejects_nonallowlisted_module": true,
+    "bounded_json_input_and_output": true,
+    "result_file_restricted_to_dedicated_temp_directory": true,
+    "legacy_adapter_result_schema_not_augmented": true,
+    "child_process_explicitly_not_claimed_as_sandbox": true
+  },
+  "reduction": {
+    "established": "THE_FOUR_CLASSIFIED_NATIVE_RISK_ADAPTER_MODULES_ARE_ROUTED_TO_A_CHILD_PROCESS_BEFORE_ADAPTER_IMPORT_IN_PARENT",
+    "reclassified_residual": "NATIVE_EXTENSION_INTERNAL_EFFECTS_FOR_THESE_ROUTES_MOVE_TO_CHILD_PROCESS_INTERNAL_EFFECTS",
+    "still_open": [
+      "EXECUTED_REGRESSION_CONFIRMATION_ON_WORKING_RUNNER",
+      "PACKAGING_PURE_DEPENDENCY_SOURCE_AUDIT_FOR_DYNAMIC_NATIVE_LOADERS",
+      "NONREGISTRY_NATIVE_EXTENSION_ROUTES_IN_OTHER_RUNTIME_HELPERS",
+      "CHILD_PROCESS_INTERNAL_EFFECT_TOTALITY_AND_MEDIATION",
+      "FULL_C1_SCOPE_COMPLETENESS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CHILD_PROCESS_IS_SANDBOXED",
+    "NO_CLAIM_CHILD_EFFECTS_ARE_SAFE_OR_MEDIATED",
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
