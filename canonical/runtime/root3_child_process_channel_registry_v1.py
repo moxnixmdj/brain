@@ -184,7 +184,9 @@ def compile_registry(root: Path = ROOT) -> dict[str, Any]:
             "astra_runtime_git_blob_sha": EXPECTED_ASTRA_BLOB,
             "c1_verification_path": C1_VERIFY_REL,
             "c1_verification_git_blob_sha": EXPECTED_C1_VERIFY_BLOB,
-            "content_addressed_repo_module_count": 47,\n            "additional_static_process_scan_helper": SNAPSHOT_REL,\n            "additional_static_process_scan_helper_git_blob_sha": EXPECTED_SNAPSHOT_BLOB,
+            "content_addressed_repo_module_count": 47,
+            "additional_static_process_scan_helper": SNAPSHOT_REL,
+            "additional_static_process_scan_helper_git_blob_sha": EXPECTED_SNAPSHOT_BLOB,
         },
         "whole_runtime": {
             "scanned_python_file_count": len(paths),
