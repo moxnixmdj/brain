@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_H100_BINARY_COMPOSITION_TRANSIENT_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__FIVE_OF_FIVE_FRESH_BINARY_COMPOSITIONS__ZERO_PERSISTENT_M_fit",
+  "branch": "research/h100-representation-invariant-accounting-v1",
+  "precommit": {
+    "path": "canonical/governance/H100_BINARY_COMPOSITION_TRANSIENT_PRECOMMIT_V1.json",
+    "git_blob_sha": "ffca1b8e6d8cdc9324c4a5c740a6331bbc027203"
+  },
+  "runtime": {
+    "path": "canonical/runtime/h100_binary_composition_transient_v1.py",
+    "git_blob_sha": "deb6e2155294946308e81883f72bb8ee933a2dcf"
+  },
+  "tests": {
+    "path": "canonical/tests/test_h100_binary_composition_transient_v1.py",
+    "git_blob_sha": "1f9f29f05ac163edc8ffe809d41ea805787eaaa1"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "observed": {
+    "tests_passed": 4,
+    "tests_total": 4,
+    "unary_class_count": 288,
+    "raw_binary_proposal_count": 207792,
+    "terminal_residual_key_count": 154868,
+    "unary_basis_generation_seconds": 0.02517537699895911,
+    "binary_index_build_seconds": 9.77439306800079,
+    "median_lookup_plus_verification_seconds": 0.0002122879959642887,
+    "all_sign_orientation_audits_pass": true,
+    "all_five_seed_verify": true,
+    "all_five_transfer": true,
+    "persistent_m_fit_bytes": 0,
+    "persistent_binary_index": 0,
+    "persistent_selected_binary_structures": 0
+  },
+  "deduction": "ZERO_PERSISTENT_M_fit_EXTENDS_BEYOND_UNARY_CHAINS_TO_A_FROZEN_BINARY_COMPOSITION_GRAMMAR__SIGN_QUOTIENT_CHILD_CLASSES_CAN_BE_COMPOSED_COMPLETELY_FOR_ADD_SUB_MUL_STABLE_DIV_WHEN_RELATIVE_SIGN_IS_HANDLED_BY_ADD_SUB_DUALITY_AND_TERMINAL_GLOBAL_SIGN_IS_ABSORBED_BY_THE_FREE_COEFFICIENT",
+  "hard_nonclaims": [
+    "THIS_IS_ONE_BINARY_NODE_OVER_TWO_UNARY_FEATURES_NOT_ARBITRARY_RECURSIVE_BINARY_TREES",
+    "EXACT_HASHING_DOES_NOT_SOLVE_NOISY_TARGETS",
+    "BINARY_INDEX_BUILD_COST_IS_ABOUT_9_8_SECONDS_ON_THIS_CARRIER",
+    "M_cap_AND_M_dev_ARE_SEPARATE_FROM_M_fit"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
