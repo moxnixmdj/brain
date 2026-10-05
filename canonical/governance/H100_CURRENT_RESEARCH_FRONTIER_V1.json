@@ -531,6 +531,39 @@
       "unverified_cosh_fail_closed": true,
       "persistent_learned_bytes": 0,
       "deduction": "THE VERIFIED CAPABILITY LIBRARY NOW COMPILES TWO GENERICALLY ACQUIRED STDLIB OPERATORS WITH ZERO RAW SEARCH ON THEIR TRANSFER TASKS AND PRESERVES FAIL_CLOSED BEHAVIOR FOR AN UNVERIFIED OPERATOR FAMILY"
+    },
+    "declarative_operator_pack_acquisition": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__TWO_NON_STDLIB_CONTENT_ADDRESSED_PACKS__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_DECLARATIVE_OPERATOR_PACK_ACQUISITION_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_DECLARATIVE_OPERATOR_PACK_ACQUISITION_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "runtime": "canonical/runtime/h100_declarative_operator_pack_acquisition_v1.py",
+      "packs": [
+        "ASYM_CLAMP_V1",
+        "TRIANGLE_V1"
+      ],
+      "arbitrary_code_execution": 0,
+      "arbitrary_imports": 0,
+      "subprocess_calls": 0,
+      "network_calls": 0,
+      "external_learned_capability_calls": 0,
+      "persistent_learned_bytes": 0,
+      "deduction": "NON_STDLIB_EXECUTABLE_CAPABILITY_PACKS CAN BE ACQUIRED AS CONTENT_ADDRESSED DECLARATIVE DATA THROUGH A BOUNDED INTERPRETER__TWO DISTINCT PRECOMMITTED PACKS TRANSFERRED AFTER REGISTRY_V6 AND FIXED_EXPRESSION_GRAMMAR MISSES WITHOUT ARBITRARY CODE AUTHORITY"
+    },
+    "verified_capability_registry_v7": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__EIGHTEEN_ENTRIES__DECLARATIVE_PACK_RATCHET_CLOSED__ZERO_CREDIT",
+      "runtime": "canonical/runtime/h100_verified_capability_registry_v7.py",
+      "verification": "canonical/verification/H100_REGISTRY_V7_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "entry_count": 18,
+      "added_capabilities": [
+        "CAP_AFFINE_ASYM_CLAMP_V1",
+        "CAP_AFFINE_TRIANGLE_V1"
+      ],
+      "asym_clamp_transfer_library_hit": true,
+      "triangle_transfer_library_hit": true,
+      "legacy_atan_library_hit": true,
+      "unverified_floor_family_fail_closed": true,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE CONTENT_ADDRESSED DECLARATIVE CAPABILITY PACK ACQUISITION TO COMPILE_RATCHET LOOP IS CLOSED FOR TWO NON_STDLIB FAMILIES WHILE FAIL_CLOSED CONTROL IS PRESERVED"
     }
   },
   "next_structural_residuals_ranked": [
@@ -541,8 +574,8 @@
     },
     {
       "rank": 2,
-      "residual": "SAFE_CONTENT_ADDRESSED_NON_STDLIB_EXECUTABLE_OR_TOOL_ACQUISITION_WITHOUT_ARBITRARY_CODE_AUTHORITY",
-      "reason": "GENERIC STDLIB MATH OPERATOR ACQUISITION IS NOW SECOND_CARRIER VERIFIED ACROSS ERF ATAN AND TANH AND REGISTRY_V6 COMPILES ALL THREE FAMILIES__THE NEXT INTERNAL A BOUNDARY IS ACQUIRING NON_STDLIB EXECUTABLE CAPABILITIES OR TOOLS THROUGH A CONTENT_ADDRESSED TYPED CONTRACT WITHOUT GRANTING ARBITRARY CODE_EXECUTION NETWORK OR LEARNED_PROVIDER SUBSTITUTION"
+      "residual": "SAFE_TYPED_EFFECTFUL_EXTERNAL_TOOL_ACQUISITION_WITHOUT_SHELL_NETWORK_OR_ARBITRARY_CODE_AUTHORITY",
+      "reason": "CONTENT_ADDRESSED NON_STDLIB DECLARATIVE EXECUTABLE CAPABILITY PACKS ARE NOW SECOND_CARRIER VERIFIED AND REGISTRY_V7 COMPILES BOTH WITH ZERO RAW SEARCH__THE NEXT INTERNAL A BOUNDARY IS EFFECTFUL TOOL ACQUISITION THROUGH A TYPED CAPABILITY CONTRACT THAT EXPOSES ONLY PREDECLARED INPUT_OUTPUT EFFECTS AND CANNOT ESCALATE TO SHELL NETWORK ARBITRARY CODE OR LEARNED_PROVIDER SUBSTITUTION"
     },
     {
       "rank": 3,
@@ -669,7 +702,11 @@
     "safe_stdlib_operator_acquisition_scope": "PYTHON_STDLIB_MATH_UNARY_FLOAT__ERF_ATAN_TANH",
     "registry_v6_operator_ratchet_verified": true,
     "registry_v6_entry_count": 16,
-    "safe_nonstdlib_executable_acquisition_verified": false
+    "safe_nonstdlib_executable_acquisition_verified": true,
+    "safe_nonstdlib_executable_acquisition_scope": "CONTENT_ADDRESSED_DECLARATIVE_OPERATOR_PACKS__ASYM_CLAMP_V1__TRIANGLE_V1",
+    "registry_v7_declarative_pack_ratchet_verified": true,
+    "registry_v7_entry_count": 18,
+    "safe_typed_effectful_external_tool_acquisition_verified": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
