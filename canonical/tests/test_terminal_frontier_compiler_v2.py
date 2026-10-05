@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 
 import pytest
@@ -137,6 +138,12 @@ def test_target_discovery_certificate_requires_explicit_positive_witness_class()
             "witness_class": "UNBOUND_OR_INVENTED_WITNESS",
         }
     ) is False
+    assert target_discovery_completeness(
+        {
+            "target_discovery_complete": True,
+            "witness_class": "W4_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE",
+        }
+    ) is True
     assert target_discovery_completeness(
         {
             "target_discovery_complete": False,
