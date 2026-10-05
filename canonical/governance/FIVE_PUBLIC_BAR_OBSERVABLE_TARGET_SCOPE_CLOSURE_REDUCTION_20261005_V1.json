@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_FIVE_PUBLIC_BAR_OBSERVABLE_TARGET_SCOPE_CLOSURE_REDUCTION_20261005_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__FIVE_PUBLIC_BAR_FAMILY_STRUCTURAL_SCOPE_REDUCED_TO_PUBLIC_PERFORMANCE_AND_TARGET_IDENTITY_ONLY__ZERO_CREDIT",
+  "status": "TRUTH_REPAIR__DEFAULT_PUBLIC_BENCHMARK_PROFILE_STRUCTURAL_SCOPE_ONLY__U_STAR_PROFILE_UNION_NOT_CLOSED__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "objective": "Recompute the five public-bar-only family scope gaps after the active target-behavior/mechanism separation. Preserve every frozen observable family behavior and every public performance predicate, but remove mechanism-shaped dependencies that are neither explicit target behavior nor needed to cover an observable family dimension.",
+  "objective": "Recompute the five public-bar family scope gaps for the exact public benchmark/default-profile target conditions represented by the frozen benchmark observations. Preserve every frozen observable family behavior and every public performance predicate, remove only mechanism-shaped dependencies that are not target-entailed, and explicitly refuse to generalize this reduction to the newly exposed union of authorized Opus 5.5 profiles.",
   "authorities": {
     "capability_envelope": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
@@ -291,22 +291,25 @@
     "acceptance_credit_delta": 0,
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
-    "ownership_credit_delta": 0
+    "ownership_credit_delta": 0,
+    "global_profile_union_structural_scope_closed": false,
+    "default_public_benchmark_profile_structural_scope_closed_candidate": true
   },
   "scheduler_effect_if_verified": {
     "delete": [
-      "GENERIC_SCOPE_EQUIVALENCE_SEARCH_FOR_THE_FIVE_PUBLIC_BAR_FAMILIES",
-      "MANDATORY_PARITY_PROGRAMS_FOR_MECHANISMS_NOT_TARGET_ENTAILED",
-      "HLE_MULTIMODAL_CONFIGURATION_AS_A_SEPARATE_BEHAVIORAL_SCOPE_RESIDUAL",
+      "GENERIC_MECHANISM_PARITY_SEARCH_FOR_THE_FIVE_PUBLIC_BAR_FAMILIES_WITHIN_THE_EXACT_BOUND_PUBLIC_BENCHMARK_PROFILE_CONDITIONS",
+      "MANDATORY_PARITY_PROGRAMS_FOR_MECHANISMS_NOT_TARGET_ENTAILED_WITHIN_THOSE_BOUND_CONDITIONS",
+      "HLE_MULTIMODAL_CONFIGURATION_AS_A_SEPARATE_BEHAVIORAL_SCOPE_RESIDUAL_WITHIN_THE_BOUND_HLE_TARGET_SETUP",
       "UNCONDITIONAL_SCIENTIFIC_HYPOTHESIS_FORMATION_PARITY_PROGRAM"
     ],
     "activate": [
-      "EXECUTE_OR_FORMALLY_DISCHARGE_ONLY_THE_FROZEN_PUBLIC_PERFORMANCE_PREDICATES",
+      "EXECUTE_OR_FORMALLY_DISCHARGE_THE_FROZEN_PUBLIC_PERFORMANCE_PREDICATES",
       "FREEZE_EXACT_TARGET_OBSERVATION_TUPLES_BEFORE_SCORE_CREDIT",
+      "RECONCILE_PROFILE_SPECIFIC_CAPABILITY_DELTAS_BEFORE_ANY_GLOBAL_U_STAR_FAMILY_PROMOTION",
+      "ADD_PROFILE_BOUND_SECURITY_RELIABILITY_ACCEPTANCE_WHERE_FIRST_PARTY_TARGET EVIDENCE_REQUIRES_IT",
       "PRESERVE_CURRENT_TB_SCIENCE_63_3_PUBLIC_ROUTE_OVERLAY",
       "PRESERVE_GDPVAL_AA_AND_AA_BRIEFCASE_EPOCH_RECONCILIATION",
-      "PRESERVE_AUTOMATIONBENCH_METRIC_IDENTITY_SPLIT",
-      "WAKE_CONDITIONAL_TARGET_BEHAVIORS_ONLY_ON_NEW_VERIFIED_TARGET_SCOPE_EVIDENCE"
+      "PRESERVE_AUTOMATIONBENCH_METRIC_IDENTITY_SPLIT"
     ]
   },
   "public_scope_sources": [
@@ -334,7 +337,9 @@
     "NO_CLAIM_HLE_HARNESS_IDENTITY_IS_ALREADY_RESOLVED",
     "NO_CLAIM_SCIENTIFIC_HYPOTHESIS_FORMATION_IS_ABSENT_FROM_OPUS55",
     "NO_FRESH_REALITY_AUTHORITY",
-    "NO_TERMINAL_FINALITY_CLAIM"
+    "NO_TERMINAL_FINALITY_CLAIM",
+    "NO_U_STAR_PROFILE_UNION_SCOPE_CLOSURE",
+    "NO_GENERALIZATION_FROM_DEFAULT_PUBLIC_BENCHMARK_PROFILE_TO_VERIFIED_CYBER_OR_LIFE_SCIENCES_PROFILES"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -350,7 +355,7 @@
   "promotion_authority": false,
   "fresh_reality_authority": false,
   "independent_verification_required": true,
-  "revision_note": "V1 corrected in-place before verification: Business tool-route and trajectory-localization are already-proved reusable strengtheners, not target-entailment-quarantined mechanism debts. Only browser visual grounding is nonmandatory for BUSINESS_WORKFLOW_AUTOMATION under the active target-behavior guard.",
+  "revision_note": "V1 corrected in-place before verification: Business tool-route and trajectory-localization are already-proved reusable strengtheners, not target-entailment-quarantined mechanism debts. Only browser visual grounding is nonmandatory for BUSINESS_WORKFLOW_AUTOMATION under the active target-behavior guard. Truth repair after concurrent discovery of OPUS55_TARGET_PROFILE_UNION_BOUNDARY: scope closure is profile-conditioned, not global.",
   "machine_check_contract": {
     "exact_family_set": true,
     "exact_frozen_useful_behavior_strings": true,
@@ -363,6 +368,23 @@
       "MULTIDISCIPLINARY_FROZEN_SENTENCE_DOES_NOT_DECLARE_A_GENERAL_MULTIMODAL_CAPABILITY",
       "SCIENTIFIC_FROZEN_SENTENCE_DOES_NOT_DECLARE_HYPOTHESIS_OR_QUESTION_FORMATION",
       "BUSINESS_FROZEN_SENTENCE_DOES_NOT_DECLARE_VISUAL_BROWSER_GROUNDING"
+    ]
+  },
+  "profile_union_reconciliation": {
+    "observed_after_original_candidate": true,
+    "authority_candidate": {
+      "path": "canonical/governance/OPUS55_TARGET_PROFILE_UNION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "b8cfc03751ef1df11df5f94516e8fe6a1fc5a4c8"
+    },
+    "cross_cutting_security_candidate": {
+      "path": "canonical/governance/OPUS55_SECURITY_RELIABILITY_CROSS_CUTTING_ACCEPTANCE_DIMENSION_20261005_V1.json",
+      "git_blob_sha": "6b3a71f506d7656e152c87f3cbbdc61f1991102b"
+    },
+    "consequence": "THIS_FILE_CAN_CLOSE_ONLY_THE_STRUCTURAL_SCOPE_OF_THE_BOUND_PUBLIC_BENCHMARK_PROFILE CONDITIONS. IT CANNOT CERTIFY U_STAR ACROSS VERIFIED_CYBER_LIFE_SCIENCES_OR_OTHER_AUTHORIZED_PROFILE_DELTAS.",
+    "newly_open_global_scope_classes": [
+      "PROFILE_SPECIFIC_CAPABILITY_DELTAS_NOT_EXERCISED_BY_DEFAULT_PROFILE_PUBLIC_BARS",
+      "CROSS_CUTTING_SECURITY_RELIABILITY_NONINFERIORITY_BOUND_TO_TARGET_PROFILE",
+      "PROFILE_METADATA_AND_FALLBACK_POLICY_IDENTITY"
     ]
   }
 }
