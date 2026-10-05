@@ -1,7 +1,7 @@
 """Fail-closed structural verifier for opaque-state observational quotienting.
 
 This module proves only alpha-equivalence of traces after opaque carrier bytes/IDs
-are quotiented while preserving carrier kind, actor, identity, order and lineage.
+are quotiented while preserving carrier kind, actor, identity, order and emit/echo linkage.
 It does not prove that a carrier is semantically opaque or that any Brain route
 implements the resulting abstract transition relation.
 """
@@ -56,7 +56,7 @@ def project_trace(trace: Any) -> list[dict[str, Any]]:
 
     for i, event in enumerate(_events(trace)):
         typ = _token(event.get("type"), f"EVENT_{i}_TYPE")
-        actor = _token(event.get("actor", "UNSPECIFIED"), f"EVENT_{i}_ACTOR")
+        actor = _token(event.get("actor"), f"EVENT_{i}_ACTOR")
 
         if typ in SEMANTIC_TYPES:
             if "payload" not in event:
@@ -110,7 +110,7 @@ def verify_observational_equivalence(left: Any, right: Any) -> dict[str, Any]:
             "status": "EQUIVALENT",
             "projection": lp,
             "opaque_bytes_or_ids_required_to_match": False,
-            "opaque_identity_order_lineage_preserved": True,
+            "opaque_identity_order_linkage_preserved": True,
             "capability_credit_delta": 0,
         }
     except Exception as exc:
