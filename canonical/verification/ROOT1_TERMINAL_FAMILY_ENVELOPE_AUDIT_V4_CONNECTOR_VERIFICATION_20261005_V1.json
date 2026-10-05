@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V4_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__THREE_MAPPING_GROUPS_PLUS_ONE_PROOF_BASIS_REPAIR__ROOT1_POSITIVE_ZERO__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V4.json",
+    "git_blob_sha": "f004248ddf87f94fdc8e85e6fa95a7dda8af28b9"
+  },
+  "checks": {
+    "three_mapping_groups": true,
+    "one_classified_basis_repair": true,
+    "root1_positive_zero": true,
+    "two_previously_closed_meta_groups": true,
+    "global_finality_still_blocked": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
