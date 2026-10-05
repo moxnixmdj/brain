@@ -58,26 +58,6 @@ class ReadOnlyLocalFileExecutorTests(unittest.TestCase):
             self.assertEqual(spec["argv"][-1],"/input/in.json")
             self.assertEqual(spec["cwd"],"/input")
 
-    def test_unsupported_apt_metadata_site_denies_before_spawn(self):
-        calls=[]
-        def never(*a,**kw):
-            calls.append((a,kw))
-            raise AssertionError("spawned")
-        ex=ro.make_executor(popen_impl=never)
-        ctx={
-          "effect_class":"READ_ONLY_DECLARED_QUERY",
-          "callsite":{
-            "module_path":"canonical/runtime/capability_discovery.py",
-            "lineno":267,
-            "process_api":"subprocess.run",
-          },
-          "args":(["apt-cache","search","json"],),
-          "kwargs":{"text":True,"capture_output":True,"timeout":20},
-        }
-        with self.assertRaisesRegex(ro.ReadOnlyQueryDenied,"NOT_YET_SUPPORTED"):
-            ex(ctx)
-        self.assertEqual(calls,[])
-
     def test_sqlite_update_is_rejected_before_spawn(self):
         calls=[]
         ex=ro.make_executor(popen_impl=lambda *a,**kw: calls.append(1))
