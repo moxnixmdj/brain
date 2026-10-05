@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OPEN24_TARGET_INFORMATION_MINCUT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__OPEN24_PARTITIONED_BY_FRESH_TARGET_INFORMATION_REQUIREMENT__18_TARGET_OUTPUT_INDEPENDENT__6_TARGET_RELATIVE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Minimize the target-specific information cut over the exact current 24 open atomic acceptance predicates. Distinguish predicates whose frozen acceptance semantics can be proved without any fresh Opus output from predicates whose current definition is explicitly relative to matched Opus behavior unless a stronger target-free proof is found.",
+  "authorities": {
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "acceptance_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "task_acceptance_quotient_normal_form": {
+      "path": "canonical/governance/OPUS55_PROTOCOL_TO_TASK_ACCEPTANCE_QUOTIENT_NORMAL_FORM_V1.json",
+      "git_blob_sha": "6a77270660e66958c01bfef010714357f88c8c65"
+    }
+  },
+  "exact_open24_partition": {
+    "frozen_public_threshold_no_fresh_target_output": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "MYSTERYMECHANISM_GE_49_55"
+    ],
+    "target_free_structural_acceptance": [
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+    ],
+    "target_relative_or_matched_unless_stronger_proof": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "VISION_DENSE_NONCHART_SCOPE",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+    ]
+  },
+  "counts": {
+    "open_atomic_total": 24,
+    "frozen_public_threshold_no_fresh_target_output": 14,
+    "target_free_structural_acceptance": 4,
+    "target_relative_or_matched_unless_stronger_proof": 6,
+    "no_fresh_target_output_required_given_frozen_registry": 18,
+    "candidate_target_specific_information_remainder": 6,
+    "candidate_target_specific_fraction": "6/24",
+    "fresh_target_information_search_space_reduction": "18/24"
+  },
+  "classification_semantics": {
+    "FROZEN_PUBLIC_THRESHOLD": "The Opus-derived numeric bar is already frozen in the registry. Proving the Brain value meets that bar requires a comparable score or stronger proof, but does not require any additional Opus response, trajectory, or matched case output.",
+    "TARGET_FREE_STRUCTURAL": "The acceptance relation itself is stated as an objective zero-violation, independent-scope, or dependency condition. A scope-complete structural proof may close it without fresh Opus behavior.",
+    "TARGET_RELATIVE_OR_MATCHED": "The current predicate definition compares Brain against matched Opus behavior or requires matched direct scope evidence. Fresh target information may be required unless a stronger target-free universal, ceiling, top-support, equivalence, or scope-complete proof implies the same acceptance relation."
+  },
+  "task_acceptance_quotient_mapping": {
+    "frozen_public_threshold_no_fresh_target_output": "OTHER_EXPLICIT_THRESHOLD__DIRECT_SCORE_OR_STRONGER_BOUND",
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS": "M_RESTRICTED_TOP_CLASS_CANDIDATE__ZERO_CRITICAL_IS_OBJECTIVE_CEILING",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES": "M_RESTRICTED_TOP_CLASS_CANDIDATE__ZERO_CRITICAL_IS_OBJECTIVE_CEILING",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT": "OTHER_TARGET_FREE_DIRECT_SCOPE",
+    "COMPOSITION_COMPONENT_SCOPED_PROOFS": "OTHER_TARGET_FREE_DEPENDENCY",
+    "target_relative_or_matched_unless_stronger_proof": "H_SEPARATING_CANDIDATE__MINIMIZE_WITH_STRONGER_TARGET_FREE_PROOF_BEFORE_COMPARATOR"
+  },
+  "breakthrough": {
+    "old_apparent_information_problem": "24_OPEN_ATOMIC_PREDICATES_COULD_BE_MISTAKEN_AS_24_TARGET_INFORMATION_DEBTS",
+    "new_exact_information_cut": "18_OF_24_HAVE_FROZEN_ACCEPTANCE_SEMANTICS_THAT_DO_NOT_REQUIRE_FRESH_TARGET_OUTPUT__ONLY_6_REMAIN_TARGET_RELATIVE_OR_MATCHED_UNLESS_STRONGER_PROOF",
+    "consequence": "Do not spend comparator access, terminal cases, or target-query effort on the 18 target-output-independent predicates merely because they are open. Reserve target-specific information acquisition for the six relative/matched predicates after target-free proof attempts are exhausted.",
+    "leverage": "TARGET_SPECIFIC_INFORMATION_SEARCH_SPACE_COMPRESSED_FROM_24_TO_AT_MOST_6_ATOMIC_PREDICATES_WITHOUT_WEAKENING_ANY_ACCEPTANCE_THRESHOLD"
+  },
+  "minimum_action_policy": [
+    "ROUTE_14_PUBLIC_FIXED_BARS_ONLY_TO_COMPARABLE_BRAIN_SCORE_RECEIPTS_OR_STRONGER_THRESHOLD_PROOFS__NO_FRESH_OPUS_OUTPUT",
+    "ROUTE_IF_ZERO_AND_COMPOSITION_ZERO_FIRST_TO_COMPLETE_MEDIATION_CHANNEL_DOMINANCE_AND_GUARD_SOUNDNESS__NO_MATCHED_OPUS_CASES_WHILE_A_SCOPE_COMPLETE_TOP_CLASS_PROOF_REMAINS_POSSIBLE",
+    "ROUTE_FINANCE_UNCOVERED_SCOPE_ONLY_TO_THE_ALREADY_FROZEN_TWO_DIRECT_ORACLE_LEAVES_OR_A_STRONGER_SCOPE_CERTIFICATE",
+    "ROUTE_COMPOSITION_COMPONENT_SCOPED_PROOFS_ONLY_TO_NEW_SCOPE_COMPLETE_UPSTREAM_COMPONENT_RECEIPTS",
+    "FOR_THE_SIX_TARGET_RELATIVE_PREDICATES_FIRST_SEARCH_FOR_ONE_SCOPE_COMPLETE_TARGET_FREE_CERTIFICATE_THAT_ENTAILS_NONINFERIORITY__ONLY_THEN_ACQUIRE_THE_MINIMUM_RESULT_BEARING_TARGET_INFORMATION_NEEDED"
+  ],
+  "verification": {
+    "wolfram_partition_check": {
+      "raw_result": "{14, 6, 4, 24, 24, {}, {}, {}, {4, 6, 14}, 18}",
+      "meaning": "The three classes have sizes 14, 6, and 4; their concatenation has 24 elements and 24 unique elements; all pairwise intersections are empty; 24 minus the target-relative class equals 18."
+    },
+    "semantic_assignment_basis": "DIRECT_FROZEN_REGISTRY_ACCEPTANCE_TEXT_AND_KIND__WOLFRAM_ONLY_VERIFIES_PARTITION_ARITHMETIC_NOT_THE_DOMAIN_SEMANTICS"
+  },
+  "falsifiers": [
+    "THE_FROZEN_ACCEPTANCE_REGISTRY_CHANGES_A_THRESHOLD_OR_PREDICATE_SEMANTIC",
+    "A_PREDICATE_CLASSIFIED_TARGET_OUTPUT_INDEPENDENT_IS_SHOWN_TO_REQUIRE_AN_UNBOUND_TARGET_DISTRIBUTION_OR_MATCHED_OPUS_BASELINE_BY_ITS_LOAD_BEARING_ACCEPTANCE_SEMANTICS",
+    "A_TARGET_RELATIVE_PREDICATE_RECEIVES_A_SCOPE_COMPLETE_STRONGER_TARGET_FREE_PROOF__IT_MUST_MOVE_OUT_OF_THE_TARGET_INFORMATION_REMAINDER",
+    "THE_CURRENT_OPEN24_IDENTITY_CHANGES_AFTER_A_VERIFIED_ACCEPTANCE_PROMOTION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_OF_THE_24_OPEN_PREDICATES_IS_CLOSED",
+    "NO_CLAIM_THE_SIX_TARGET_RELATIVE_PREDICATES_IRREDUCIBLY_REQUIRE_OPUS_OUTPUT__STRONGER_TARGET_FREE_PROOFS_REMAIN_ALLOWED_AND_PREFERRED",
+    "NO_CLAIM_PUBLIC_FIXED_BAR_EXECUTION_IS_CURRENTLY_READY_OR_ZERO_COST",
+    "NO_CLAIM_THE_CURRENT_19_FAMILY_ONTOLOGY_IS_LITERAL_SEMANTICALLY_COMPLETE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

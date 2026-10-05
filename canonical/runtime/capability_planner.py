@@ -184,7 +184,7 @@ def _resolve_effect_bindings(value, consumer, providers):
 
 def plan_actions(problem):
     result = plan_capabilities(problem)
-    _, _, caps = _normalize(problem)
+    initial, _, caps = _normalize(problem)
     cap_by_id = {c.capability_id: c for c in caps}
     actions = []
     providers = {}
@@ -196,15 +196,28 @@ def plan_actions(problem):
         action["capability_id"] = cid
         cycle = len(actions)
         provider_bindings = {}
+        requirement_bindings = {}
         for effect in sorted(cap.requires):
             provider = providers.get(effect)
-            if provider is None:
+            if provider is not None:
+                provider_cycle, producer = provider
+                provider_bindings[effect] = {
+                    "cycle": provider_cycle,
+                    "capability_id": producer.capability_id,
+                }
+                requirement_bindings[effect] = {
+                    "source": "capability",
+                    "cycle": provider_cycle,
+                    "capability_id": producer.capability_id,
+                }
                 continue
-            provider_cycle, producer = provider
-            provider_bindings[effect] = {
-                "cycle": provider_cycle,
-                "capability_id": producer.capability_id,
-            }
+            if effect in initial:
+                requirement_bindings[effect] = {"source": "initial_fact"}
+                continue
+            raise PlanningFailure(
+                "COMPOSITION_REQUIREMENT_SOURCE_MISSING",
+                f"{cid}:{effect}",
+            )
         composition_contract.append({
             "cycle": cycle,
             "capability_id": cid,
@@ -212,6 +225,7 @@ def plan_actions(problem):
             "provides": sorted(cap.provides),
             "result_fields": sorted(cap.result_fields),
             "provider_bindings": provider_bindings,
+            "requirement_bindings": requirement_bindings,
         })
         actions.append(action)
         for effect in cap.provides:
