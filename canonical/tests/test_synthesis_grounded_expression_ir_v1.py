@@ -38,13 +38,19 @@ def base_task(*, output_format="BULLETS"):
                 "output_format": output_format,
                 "citation_mode": "INLINE_SOURCE_IDS",
                 "item_order": "INPUT",
-                "required_sections": ["Findings", "Risks"] if output_format == "SECTIONED_MARKDOWN" else [],
-                "allowed_sections": ["Findings", "Risks"],
                 "max_items": 3,
                 "max_chars": 5000,
-                "heading_level": 2,
                 "require_title": True,
                 "style": "VERBATIM_GROUNDED",
+                **(
+                    {
+                        "required_sections": ["Findings", "Risks"],
+                        "allowed_sections": ["Findings", "Risks"],
+                        "heading_level": 2,
+                    }
+                    if output_format == "SECTIONED_MARKDOWN"
+                    else {}
+                ),
             },
         },
     }
@@ -114,6 +120,58 @@ class GroundedExpressionIRTests(unittest.TestCase):
         self.assertEqual(out["rendered_text"].count("## Findings"), 2)
         self.assertLess(out["rendered_text"].index("Revenue increased"), out["rendered_text"].index("The forecast range"))
         self.assertLess(out["rendered_text"].index("The forecast range"), out["rendered_text"].index("Two sources disagree"))
+
+    def test_section_constraints_cannot_be_silently_ignored_by_flat_formats(self):
+        task = base_task(output_format="BULLETS")
+        task["task"]["constraints"]["required_sections"] = ["Findings"]
+        out = solve(task)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertEqual(out["reason"], "SECTION_CONSTRAINTS_REQUIRE_SECTIONED_MARKDOWN")
+
+    def test_heading_constraint_cannot_be_silently_ignored_by_paragraphs(self):
+        task = base_task(output_format="PARAGRAPHS")
+        task["task"]["constraints"]["heading_level"] = 2
+        out = solve(task)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertEqual(out["reason"], "SECTION_CONSTRAINTS_REQUIRE_SECTIONED_MARKDOWN")
+
+    def test_numeric_constraints_reject_lossy_or_boolean_coercion(self):
+        for key, bad_value, expected in [
+            ("max_items", 3.9, "MAX_ITEMS_INVALID"),
+            ("max_items", True, "MAX_ITEMS_INVALID"),
+            ("max_chars", 5000.5, "MAX_CHARS_INVALID"),
+        ]:
+            task = base_task()
+            task["task"]["constraints"][key] = bad_value
+            out = solve(task)
+            self.assertEqual(out["status"], "FAIL_CLOSED", (key, bad_value, out))
+            self.assertEqual(out["reason"], expected)
+
+        task = base_task(output_format="SECTIONED_MARKDOWN")
+        task["task"]["constraints"]["heading_level"] = 2.5
+        out = solve(task)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertEqual(out["reason"], "HEADING_LEVEL_INVALID")
+
+        task = base_task()
+        task["task"]["constraints"]["require_title"] = 1
+        out = solve(task)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertEqual(out["reason"], "REQUIRE_TITLE_INVALID")
+
+    def test_reserved_citation_marker_in_material_text_fails_closed(self):
+        task = base_task()
+        task["task"]["items"][0]["text"] = "Revenue increased. [src:FAKE@p9]"
+        out = solve(task)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertEqual(out["reason"], "TEXT_RESERVED_CITATION_MARKER")
+
+    def test_reserved_citation_marker_in_title_fails_closed(self):
+        task = base_task()
+        task["task"]["title"] = "Decision brief [src:FAKE]"
+        out = solve(task)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertEqual(out["reason"], "TITLE_RESERVED_CITATION_MARKER")
 
     def test_unknown_writing_constraint_is_not_silently_ignored(self):
         task = base_task()
