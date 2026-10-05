@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_CURRENT_UPSTREAM_BRIDGE_FIXED_POINT_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_CANDIDATE_FROM_CONNECTOR_RECOMPUTATION_PASS__SCHEDULING_ONLY__4_OF_12_FIXED_POINT__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/COMPOSITION_CURRENT_UPSTREAM_BRIDGE_FIXED_POINT_V1.json",
+    "git_blob_sha": "b97f35d5ab0ee22d5f59c866ace8477ac2f9a900"
+  },
+  "verification": {
+    "path": "canonical/verification/COMPOSITION_CURRENT_UPSTREAM_BRIDGE_FIXED_POINT_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "71de296f456dfb3e5740f60946da9aa2c8506582"
+  },
+  "effect": [
+    "DELETE_REPEAT_GENERIC_SEARCH_FOR_ADDITIONAL_COMPOSITION_COMPONENT_BRIDGES_FROM_CURRENT_FIVE_VERIFIED_OWNED_FAMILIES",
+    "KEEP_COMPOSITION_COMPONENT_SCOPED_PROOFS_OPEN_AT_4_OF_12",
+    "RESUME_ONLY_ON_NEW_SOURCE_FAMILY_ACCEPTANCE_EXACT_NEW_COMPONENT_MAPPING_VALID_BRIDGE_SCOPE_SUPERSESSION_OR_PROTOCOL_DRIFT"
+  ],
+  "current_state": {
+    "scoped_proved": 4,
+    "open": 8,
+    "parent_composition_closed": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

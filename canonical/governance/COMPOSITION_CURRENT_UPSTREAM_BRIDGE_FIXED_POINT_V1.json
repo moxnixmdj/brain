@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_CURRENT_UPSTREAM_BRIDGE_FIXED_POINT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_VERIFIED_OWNED_SOURCE_SET_SATURATED_AT_4_OF_12__8_OPEN__SCHEDULING_ONLY__ZERO_CREDIT",
+  "objective": "Prove that no additional frozen Composition component can be discharged from the current five verified-owned families under the already-active exact-binding and no-analogy bridge rules.",
+  "authority": {
+    "composition_current_authority": {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
+      "git_blob_sha": "5bb089582a5bc2ee4a44143c8d3a11e919fecdff"
+    },
+    "frozen_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "01abb91c114576ac340816b052724150258726ff"
+    },
+    "memory_bridge": {
+      "path": "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2.json",
+      "git_blob_sha": "6ed8434359c784634aa76a000ae61a024ce7ae64"
+    },
+    "recovery_bridge": {
+      "path": "canonical/governance/COMPOSITION_RECOVERY_SCOPE_COMPLETE_BRIDGE_V1.json",
+      "git_blob_sha": "05f68ee39ebef0a9a1fe1cb0ac2df0cede0725f9"
+    },
+    "delegation_bridge": {
+      "path": "canonical/governance/COMPOSITION_DELEGATION_SCOPE_COMPLETE_BRIDGE_V1.json",
+      "git_blob_sha": "2b5887a7a49ff934d90a46eea349f2da31183a8c"
+    },
+    "tool_discovery_bridge": {
+      "path": "canonical/governance/COMPOSITION_TOOL_DISCOVERY_SCOPE_COMPLETE_BRIDGE_V1.json",
+      "git_blob_sha": "89d2ec6b677c211ecaf5372d8c68dae6881b1bc5"
+    }
+  },
+  "current_verified_owned_families": [
+    "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "EXACT_SYMBOLIC_COMPUTATION"
+  ],
+  "current_admissible_component_bridges": [
+    {
+      "source_family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "component": "memory",
+      "state": "SCOPED_PROVED",
+      "excluded_neighbors": [
+        "browser/computer action",
+        "recovery"
+      ]
+    },
+    {
+      "source_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "component": "delegation",
+      "state": "SCOPED_PROVED",
+      "excluded_neighbors": [
+        "evidence synthesis",
+        "artifact production"
+      ]
+    },
+    {
+      "source_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "component": "recovery",
+      "state": "SCOPED_PROVED",
+      "excluded_neighbors": [
+        "browser/computer action",
+        "memory",
+        "debugging"
+      ]
+    },
+    {
+      "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "component": "tool discovery",
+      "state": "SCOPED_PROVED",
+      "excluded_neighbors": [
+        "coding",
+        "debugging"
+      ]
+    }
+  ],
+  "unmatched_verified_owned_family": {
+    "source_family": "EXACT_SYMBOLIC_COMPUTATION",
+    "reason": "NO_LITERAL_EXACT_SYMBOLIC_COMPUTATION_COMPONENT_EXISTS_IN_THE_FROZEN_12_COMPONENT_MANIFEST__MANIFEST_FORBIDS_FAMILY_MAPPING_BY_NAME_ANALOGY_OR_UNVERIFIED_SEMANTIC_EQUIVALENCE",
+    "component_credit": 0
+  },
+  "fixed_point": {
+    "frozen_component_count": 12,
+    "scoped_proved_count": 4,
+    "open_count": 8,
+    "scoped_proved": [
+      "memory",
+      "recovery",
+      "delegation",
+      "tool discovery"
+    ],
+    "open": [
+      "research",
+      "tool use",
+      "artifact creation",
+      "browser/computer action",
+      "coding",
+      "debugging",
+      "evidence synthesis",
+      "artifact production"
+    ],
+    "additional_component_credit_from_current_verified_owned_family_set": 0,
+    "generic_current_owned_family_bridge_search_saturated": true
+  },
+  "wake_conditions": [
+    "A_CURRENTLY_OPEN_SOURCE_FAMILY_GAINS_STRICT_ACCEPTANCE_AND_SCOPE_COMPLETE_CURRENT_EVIDENCE",
+    "AN_INDEPENDENT_CONTENT_ADDRESSED_EXACT_COMPONENT_MAPPING_IS_PROVED_WITHOUT_NAME_OR_ANALOGY_INFERENCE",
+    "A_CURRENT_BRIDGE_SCOPE_GUARD_IS_VALIDLY_SUPERSEDED_BY_STRONGER_EXACT_EVIDENCE",
+    "FROZEN_COMPOSITION_PROTOCOL_OR_COMPONENT_MANIFEST_CHANGES"
+  ],
+  "scheduler_effect_if_verified": [
+    "DELETE_REPEAT_GENERIC_SEARCH_FOR_ADDITIONAL_COMPOSITION_COMPONENT_BRIDGES_FROM_THE_CURRENT_FIVE_VERIFIED_OWNED_FAMILIES",
+    "KEEP_COMPOSITION_COMPONENT_SCOPED_PROOFS_OPEN_AT_4_OF_12",
+    "RESUME_COMPONENT_RECOMPUTE_ONLY_ON_A_DECLARED_WAKE_CONDITION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_EIGHT_OPEN_COMPONENTS_ARE_UNSOLVABLE",
+    "NO_CLAIM_EXACT_SYMBOLIC_COMPUTATION_CANNOT_SUPPORT_A_FUTURE_EXPLICITLY_PROVED_COMPONENT_MAPPING",
+    "NO_PARENT_COMPOSITION_ACCEPTANCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "connector_recomputation_required": true
+}

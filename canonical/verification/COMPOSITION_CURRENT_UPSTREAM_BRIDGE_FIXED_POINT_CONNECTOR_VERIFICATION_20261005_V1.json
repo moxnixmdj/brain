@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_CURRENT_UPSTREAM_BRIDGE_FIXED_POINT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__CURRENT_VERIFIED_OWNED_SOURCE_SET_SATURATED_AT_4_OF_12__8_OPEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/COMPOSITION_CURRENT_UPSTREAM_BRIDGE_FIXED_POINT_V1.json",
+    "git_blob_sha": "b97f35d5ab0ee22d5f59c866ace8477ac2f9a900"
+  },
+  "source_blobs": {
+    "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json": "5bb089582a5bc2ee4a44143c8d3a11e919fecdff",
+    "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d",
+    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json": "01abb91c114576ac340816b052724150258726ff",
+    "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2.json": "6ed8434359c784634aa76a000ae61a024ce7ae64",
+    "canonical/governance/COMPOSITION_RECOVERY_SCOPE_COMPLETE_BRIDGE_V1.json": "05f68ee39ebef0a9a1fe1cb0ac2df0cede0725f9",
+    "canonical/governance/COMPOSITION_DELEGATION_SCOPE_COMPLETE_BRIDGE_V1.json": "2b5887a7a49ff934d90a46eea349f2da31183a8c",
+    "canonical/governance/COMPOSITION_TOOL_DISCOVERY_SCOPE_COMPLETE_BRIDGE_V1.json": "89d2ec6b677c211ecaf5372d8c68dae6881b1bc5"
+  },
+  "recomputed": {
+    "verified_owned_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "existing_exact_component_bindings": {
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY": "memory",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY": "recovery",
+      "SUBAGENT_DELEGATION_AND_COORDINATION": "delegation",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING": "tool discovery"
+    },
+    "unmatched_verified_owned_family": "EXACT_SYMBOLIC_COMPUTATION",
+    "current_scoped_proved": [
+      "delegation",
+      "memory",
+      "recovery",
+      "tool discovery"
+    ],
+    "current_open": [
+      "artifact creation",
+      "artifact production",
+      "browser/computer action",
+      "coding",
+      "debugging",
+      "evidence synthesis",
+      "research",
+      "tool use"
+    ],
+    "scoped_proved_count": 4,
+    "open_count": 8,
+    "additional_component_credit_from_current_verified_owned_family_set": 0
+  },
+  "checks": {
+    "current_verified_owned_set_exact": true,
+    "current_composition_authority_4_of_12": true,
+    "frozen_manifest_12_literal_components": true,
+    "exact_symbolic_has_no_literal_component": true,
+    "no_family_mapping_by_name_or_analogy": true,
+    "no_semantic_equivalence_inference": true,
+    "four_existing_bridges_exact_and_narrow": true,
+    "eight_open_set_exact": true,
+    "zero_credit": true,
+    "no_fresh_reality_authority": true
+  },
+  "consequence": "DELETE_REPEAT_GENERIC_SEARCH_FOR_ADDITIONAL_COMPOSITION_COMPONENT_BRIDGES_FROM_CURRENT_FIVE_VERIFIED_OWNED_FAMILIES__RESUME_ONLY_ON_DECLARED_WAKE_EVENT",
+  "hard_nonclaims": [
+    "NO_PARENT_COMPOSITION_ACCEPTANCE",
+    "NO_CLAIM_OPEN_COMPONENTS_UNSOLVABLE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
