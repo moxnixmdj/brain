@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__FAIL_CLOSED_TRUTH_REPAIR__SIX_ACTIVE_REGISTRY_SCOPE_ROOTS__STRUCTURED_METHOD_SCOPE_CLOSED__SYNTHESIS_WHOLE_LEAF_REOPENED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3.json",
+    "git_blob_sha": "2442af340f6445c1c8fbba7d770461a4e20a0378"
+  },
+  "verification": {
+    "path": "canonical/verification/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "5bfbc532ad75b5d34b5776b078e29f150a3a2592"
+  },
+  "supersedes_for_scope_repair_scheduling": {
+    "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2_ACTIVATION_V1.json",
+    "reason": "V2_WHOLE_LEAF_SYNTHESIS_SCOPE_CLOSURE_INFERENCE_IS_NOT_PROVED"
+  },
+  "effects": [
+    "REOPEN_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_WHOLE_LEAF_SCOPE_AS_ONE_SHARED_TYPED_INPUT_DOMAIN_ROOT",
+    "PRESERVE_VALID_SYNTHESIS_ACCEPTANCE_PREDICATE_SCOPE_CERTIFICATE",
+    "KEEP_STRUCTURED_METHOD_SCOPE_CLOSED_AND_ROUTE_ONLY_TO_PERFORMANCE_ACCEPTANCE",
+    "USE_SIX_ACTIVE_REGISTRY_SCOPE_REPAIR_ROOTS_NOT_FIVE",
+    "DO_NOT_DUPLICATE_SYNTHESIS_SCOPE_WORK_ACROSS_THREE_FAMILIES",
+    "PRESERVE_SCIENTIFIC_HYPOTHESIS_CANDIDATE_QUARANTINE"
+  ],
+  "hard_rules": [
+    "FAIL_CLOSED_ON_SCOPE_SUBSET_TO_WHOLE_DOMAIN_INFERENCE",
+    "NO_ACCEPTANCE_PERFORMANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
