@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIXED_INTERFACE_THINKING_CHANNEL_COUNTEREXAMPLE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_FAIL_CLOSED__FIXED_INTERFACE_ALPHABET_INCOMPLETE__THINKING_BLOCK_AND_SIGNATURE_STATE_CHANNEL_OMITTED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Falsify only the interface-completeness premise of the current fixed-interface target-superset candidate where first-party Opus 5.5 documentation exposes a load-bearing thinking-block/signature channel omitted from the candidate model-emission alphabet; preserve the target-superset strategy after repair.",
+  "subject": {
+    "path": "canonical/governance/OPUS55_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_CERTIFICATE_20261005_V1.json",
+    "git_blob_sha": "146b237515ba8867acd6778b291e340e5e9138fc"
+  },
+  "first_party_evidence": [
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed_2026_10_05": [
+        "OPUS_5_5_ADAPTIVE_THINKING_IS_ALWAYS_ON",
+        "TEXT_BETWEEN_TOOL_CALLS_CAN_BE_RETURNED_IN_THINKING_BLOCKS",
+        "THINKING_BLOCKS_ARE_TIED_TO_THE_MODEL_AND_CONVERSATION"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/thinking",
+      "observed_2026_10_05": [
+        "THINKING_CONTENT_BLOCKS_ARE_GENERATED_MODEL_OUTPUT_SEPARATE_FROM_TEXT_BLOCKS",
+        "EACH_THINKING_BLOCK_CARRIES_A_SIGNATURE_CONTAINING_AN_ENCRYPTED_COPY_OF_FULL_REASONING",
+        "WITH_DISPLAY_OMITTED_THE_THINKING_TEXT_CAN_BE_EMPTY_WHILE_SIGNATURE_REMAINS",
+        "THINKING_BLOCKS_MUST_BE_PASSED_BACK_COMPLETE_AND_UNMODIFIED_IN_MULTI_TURN_AND_TOOL_USE_CONVERSATIONS",
+        "THE_SERVER_DECRYPTS_THE_SIGNATURE_TO_RECONSTRUCT_ORIGINAL_THINKING_FOR_PROMPT_CONSTRUCTION",
+        "THINKING_CAN_APPEAR_BETWEEN_TOOL_CALLS"
+      ]
+    }
+  ],
+  "falsification": {
+    "current_model_emissions": [
+      "TEXT",
+      "STRUCTURED_TOOL_USE_OR_SERVER_TOOL_USE_REQUEST"
+    ],
+    "omitted_documented_emission_or_state_carrier": [
+      "THINKING_CONTENT_BLOCK",
+      "THINKING_SIGNATURE_STATE"
+    ],
+    "load_bearing_reason": "The signature is not merely display metadata: first-party documentation requires round-tripping the thinking block unchanged during tool-use and multi-turn conversations and states that the server uses the signature to reconstruct the original thinking for later prompt construction. Therefore the state-transition trace can depend on a documented model-emitted block absent from the candidate alphabet.",
+    "counterexample_shape": "An Opus 5.5 tool-use trajectory emits THINKING(signature=s) before or between tool calls; the application returns that block unchanged with a tool result; the next model transition is conditioned on the reconstructed thinking state. This finite documented trajectory is not representable by an alphabet whose model emissions are only TEXT and STRUCTURED_TOOL_USE.",
+    "failed_premise": "THE_BOUND_PUBLIC_INTERFACE_EVIDENCE_IS_COMPLETE_FOR_THE_MODEL_SIDE_INPUT_OUTPUT_AND_TOOL_INTERACTION_CHANNEL_TYPES_OF_THE_FROZEN_OPUS55_TARGET",
+    "current_u_subset_a_claim_admissible": false,
+    "current_fixed_interface_coverage_certificate_promotable": false
+  },
+  "minimum_repair": {
+    "alphabet_additions": {
+      "model_emissions": [
+        "THINKING_CONTENT_BLOCK_WITH_SIGNATURE"
+      ],
+      "state_carry_forward_inputs": [
+        "PRIOR_ASSISTANT_THINKING_BLOCK_PASSED_BACK_UNCHANGED"
+      ]
+    },
+    "semantic_rule": "VISIBLE_OR_SUMMARIZED_THINKING_TEXT_IS_NOT_REQUIRED_FOR THE TRACE DOMAIN; THE SIGNED/ENCRYPTED STATE CARRIER MUST BE REPRESENTED BECAUSE IT CAN AFFECT LATER MODEL TRANSITIONS.",
+    "do_not_overclaim": [
+      "DO_NOT_TREAT_THINKING_SUMMARY_TEXT_AS_RAW_CHAIN_OF_THOUGHT",
+      "DO_NOT_REQUIRE_BRAIN_TO_REPRODUCE_OPUS_INTERNAL_REASONING_TEXT_OR_SIGNATURE_BYTES",
+      "REQUIRE_ONLY_A SOUND BEHAVIORAL/STATE ABSTRACTION SUFFICIENT FOR TARGET-DOMAIN COVERAGE AND LATER NONINFERIORITY PROOF",
+      "RECHECK OTHER DOCUMENTED CONTENT BLOCK TYPES BEFORE REFREEZING INTERFACE COMPLETENESS"
+    ]
+  },
+  "critical_path_effect_if_verified": [
+    "FAIL_CLOSE_CURRENT_FIXED_INTERFACE_U_SUBSET_D_COVERAGE_CANDIDATE",
+    "PRESERVE_TARGET_SUPERSET_COVERAGE_PLUS_DOMINANCE_NORMAL_FORM",
+    "REPAIR_INTERFACE_ALPHABET_BEFORE_ANY TARGET_DISCOVERY_COMPLETENESS PROMOTION",
+    "SEPARATE_TRACE_DOMAIN_COVERAGE_FROM_19_FAMILY_ROLE_TOTALITY__THE LATTER IS A DOMAIN-DOMINANCE/FACTORIZATION OBLIGATION NOT REQUIRED TO STATE THE INTERFACE TRACE SUPERSET"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TARGET_SUPERSET_STRATEGY_IS_FALSE",
+    "NO_CLAIM_THINKING_IS_A NEW CAPABILITY FAMILY",
+    "NO_CLAIM_RAW_CHAIN_OF_THOUGHT_IS PUBLICLY AVAILABLE",
+    "NO_TARGET_DISCOVERY_COMPLETENESS_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
