@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_ANTHROPIC_PROTOCOL_OUTREACH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "AUTHENTICATED_OUTBOUND_PROTOCOL_REQUEST_SENT__PASSIVE_RESUME_EVENT_ONLY__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "recipient": "eval-initiative@anthropic.com",
+  "gmail_thread_id": "1a1098c840bc2c3a",
+  "sent_message_id": "1a1098c840bc2c3a",
+  "request_scope": [
+    "EXACT_OPUS55_HLE_WITH_TOOLS_DATASET_REVISION_OR_POPULATION",
+    "GRADING_MODEL_VERSION_AND_JUDGE_PROMPT_OR_SCORER_IMPLEMENTATION",
+    "CONTAMINATION_BLOCKLIST_AND_TRANSCRIPT_REVIEW_PROCEDURE",
+    "WHETHER_PUBLIC_CAIS_HLE_JUDGE_IS_SCORE_COMPARABLE_TO_THE_REPORTED_67_7_SETUP",
+    "IF_EXACT_JUDGE_UNAVAILABLE__WHETHER_ANY_DETERMINISTIC_RULE_IS_GUARANTEED_CONSERVATIVE"
+  ],
+  "information_boundary": {
+    "public_cais_base_scorer_known": true,
+    "exact_anthropic_opus55_protocol_publicly_bound": false,
+    "benchmark_answers_or_private_task_content_requested": false
+  },
+  "scheduler_effect": {
+    "active_attention_required": false,
+    "resume_event": "NEW_AUTHENTICATED_INBOUND_MESSAGE_IN_THIS_THREAD_OR_NEW_PRIMARY_PUBLIC_PROTOCOL_DISCLOSURE",
+    "rule": "NO_DUPLICATE_OUTREACH__CONTINUE_ORTHOGONAL_ZERO_REALITY_WORK"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANTHROPIC_WILL_REPLY",
+    "NO_CLAIM_MESSAGE_HAS_BEEN_HUMAN_REVIEWED",
+    "NO_HLE_SCORE_OR_PROTOCOL_EQUIVALENCE_CREDIT",
+    "NO_DATASET_CASES_EXPOSED",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "observed_brain_head_before_write": "986aa71515b7e757e43667d80e927978f00a5a96"
+}
