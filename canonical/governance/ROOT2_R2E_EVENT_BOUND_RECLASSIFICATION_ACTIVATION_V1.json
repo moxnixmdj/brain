@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_CANDIDATE__CONNECTOR_RECOMPUTATION_PASS__ROOT2_ACTIVE_GROUPS_6_TO_5__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "path": "canonical/governance/ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_20261005_V1.json",
+    "git_blob_sha": "4bcd638848a5d7d87eec77cb98364b3650ff9a49"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "49b9b99d7d4f7a024c2fba3d1bc00b4dd6ff2317"
+  },
+  "parent": {
+    "path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V4_ACTIVATION_V1.json",
+    "git_blob_sha": "ce39a0e558c4a75a3b36d49442985332147df5b1"
+  },
+  "scheduler_effect": {
+    "active_group_count_before": 6,
+    "active_group_count_after": 5,
+    "active_information_positive_atoms_before": 14,
+    "active_information_positive_atoms_after": 10,
+    "sleep_group": "R2E_NON_OWNER_CERTIFICATE_AND_BRIDGE_LANE",
+    "active_groups": [
+      "R2A_SHARED_TB4_CHARTOGRAPHY_PREFLIGHT",
+      "R2B_SELF_SERVICE_ACCESS_FACTS",
+      "R2D_FINANCE_AGENT_PREFLIGHT",
+      "R2F_SYNTHESIS_MATCHED_PERFORMANCE_ONLY",
+      "R2G_STRONGER_SCOPE_COMPLETE_PROOF_LANE"
+    ],
+    "event_or_stronger_proof_bound": [
+      "CODING_FRONTIERCODE_GE_54_4",
+      "PROWORK_GDPVAL_GE_1846",
+      "AUTOMATIONBENCH_GE_40",
+      "MYSTERYMECHANISM_GE_49_55"
+    ],
+    "accounting_partition": "10_ACTIVE + 2_AA_EVENT + 1_FINANCE_FIXED_POINT + 1_TB_SCIENCE_FRESH_REALITY + 4_R2E_EVENT = 18"
+  },
+  "next": "EXECUTE_ONLY_THE_FIVE_CURRENT_INFORMATION_POSITIVE_ZERO_REALITY_GROUPS__WAKE_R2E_ONLY_ON_DECLARED_CONTENT_ADDRESSED_EVENT_OR_STRONGER_PROOF__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA",
+  "hard_rules": [
+    "SLEEPING_OPEN_PREDICATES_REMAIN_OPEN",
+    "NO_ACCEPTANCE_CREDIT_FROM_SCHEDULING",
+    "NO_REPEATED_GENERIC_SEARCH_UNDER_UNCHANGED_BOUND_SOURCES",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY",
+    "RECOMPUTE_IF_ANY_BOUND_BLOB_CHANGES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
