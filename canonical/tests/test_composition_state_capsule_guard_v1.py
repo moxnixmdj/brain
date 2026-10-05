@@ -76,5 +76,115 @@ class Tests(unittest.TestCase):
         self.assertIn("record.path", latest)
         self.assertNotIn("record.verified", latest)
 
+    def test_requirement_binding_drift_fails_closed(self):
+        p = planner.plan_actions(fixture())
+        bad = copy.deepcopy(p["composition_contract"])
+        bad[0]["requirement_bindings"]["repo.available"] = {
+            "source": "capability",
+            "cycle": 99,
+            "capability_id": "ghost",
+        }
+        with self.assertRaisesRegex(
+            guard.CompositionGuardError,
+            "REQUIREMENT_BINDING_MISMATCH",
+        ):
+            guard.validate_plan(
+                p["actions"], bad, p["planning"]["initial_facts"]
+            )
+
+    def test_capsule_is_authority_for_result_reference_resolution(self):
+        p = planner.plan_actions(fixture())
+        cap = guard.seed_capsule(p["planning"]["initial_facts"])
+        provider_result = {
+            "path": "canonical/runtime/EXECUTOR_POLICY_V1.json"
+        }
+        cap = guard.append_action_result(
+            cap, p["composition_contract"][0], provider_result
+        )
+        action = guard.resolve_action_from_capsule(
+            cap, p["composition_contract"][1], p["actions"][1]
+        )
+        self.assertEqual(
+            action["args"]["path"],
+            "canonical/runtime/EXECUTOR_POLICY_V1.json",
+        )
+
+    def test_existing_trace_without_checkpoint_capsule_fails_closed(self):
+        p = planner.plan_actions(fixture())
+        trace = [{
+            "cycle": 0,
+            "plan": p["actions"][0],
+            "result": {"path": "tampered.json"},
+        }]
+        with self.assertRaisesRegex(
+            guard.CompositionGuardError,
+            "CHECKPOINT_CAPSULE_MISSING_FOR_EXISTING_TRACE",
+        ):
+            guard.bind_checkpoint(
+                p["actions"],
+                p["composition_contract"],
+                p["planning"]["initial_facts"],
+                {},
+                trace,
+            )
+
+    def test_tampered_trace_cannot_redefine_checkpoint_capsule(self):
+        p = planner.plan_actions(fixture())
+        cap = guard.seed_capsule(p["planning"]["initial_facts"])
+        provider_result = {
+            "path": "canonical/runtime/EXECUTOR_POLICY_V1.json"
+        }
+        cap = guard.append_action_result(
+            cap, p["composition_contract"][0], provider_result
+        )
+        trace = [{
+            "cycle": 0,
+            "plan": p["actions"][0],
+            "result": {"path": "evil.json"},
+            "composition_capsule_head_hash": cap["head_hash"],
+        }]
+        with self.assertRaisesRegex(
+            guard.CompositionGuardError,
+            "TRACE_CAPSULE_RESULT_MISMATCH",
+        ):
+            guard.bind_checkpoint(
+                p["actions"],
+                p["composition_contract"],
+                p["planning"]["initial_facts"],
+                {"composition_state_capsule": cap},
+                trace,
+            )
+
+    def test_checkpoint_rewind_rolls_capsule_to_authenticated_prefix(self):
+        p = planner.plan_actions(fixture())
+        cap = guard.seed_capsule(p["planning"]["initial_facts"])
+        provider_result = {
+            "path": "canonical/runtime/EXECUTOR_POLICY_V1.json"
+        }
+        cap = guard.append_action_result(
+            cap, p["composition_contract"][0], provider_result
+        )
+        first_head = cap["head_hash"]
+        trace = [{
+            "cycle": 0,
+            "plan": p["actions"][0],
+            "result": provider_result,
+            "composition_capsule_head_hash": first_head,
+        }]
+        cap = guard.append_action_result(
+            cap, p["composition_contract"][1], {"verified": True}
+        )
+        rebound = guard.bind_checkpoint(
+            p["actions"],
+            p["composition_contract"],
+            p["planning"]["initial_facts"],
+            {"composition_state_capsule": cap},
+            trace,
+        )
+        verdict = guard.verify_capsule(rebound)
+        self.assertEqual(rebound["head_hash"], first_head)
+        self.assertIn("record.path", verdict["latest"])
+        self.assertNotIn("record.verified", verdict["latest"])
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
