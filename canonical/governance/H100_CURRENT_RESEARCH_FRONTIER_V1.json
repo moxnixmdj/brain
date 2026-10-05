@@ -409,6 +409,24 @@
       "valid_route": "EVENT_DRIVEN_JIT_SOURCE_ACQUISITION_PLUS_PROVENANCE_PLUS_QUERY_COMPLETENESS_PLUS_CONFLICT_ABSTENTION",
       "persistent_learned_bytes": 0,
       "deduction": "OPEN_WORLD_LEXICAL_COMPLETENESS_CANNOT_BE_SUPPLIED_BY_FIXED_FINITE_PERSISTENT_STATE__THE_REMAINING_REAL_RESIDUAL_IS_SOURCE_AVAILABILITY_COMPLETENESS_TRUST_CONFLICT_AND_ROLE_BRIDGE_COVERAGE"
+    },
+    "jit_lexical_orchestrator": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__4_OF_4_ROUTING_CHECKS__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_JIT_LEXICAL_ORCHESTRATOR_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_JIT_LEXICAL_ORCHESTRATOR_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "runtime": "canonical/runtime/h100_jit_lexical_orchestrator_v1.py",
+      "routes": [
+        "OEWN_REAL_LEXICAL",
+        "LEXICAL_SOURCE_FALLBACK"
+      ],
+      "verified_checks": [
+        "OEWN_DIRECT_HIT",
+        "OEWN_MISS_SOURCE_FALLBACK_HIT",
+        "CROSS_SOURCE_ROLE_CONFLICT_ABSTAINS",
+        "NO_EVIDENCE_ABSTAINS"
+      ],
+      "persistent_learned_bytes": 0,
+      "deduction": "AVAILABLE_VERIFIED_LEXICAL_SOURCES_CAN_BE_AUTOMATICALLY_ROUTED_WITH_ZERO_LEARNED_STATE__THE_REMAINING_LEXICAL_UNKNOWN_IS_EXTERNAL_SOURCE_EXISTENCE_COMPLETENESS_TRUST_AND_ROLE_BRIDGE_COVERAGE"
     }
   },
   "next_structural_residuals_ranked": [
@@ -424,8 +442,8 @@
     },
     {
       "rank": 3,
-      "residual": "RUNTIME_LEXICAL_SOURCE_AVAILABILITY_COMPLETENESS_TRUST_AND_ROLE_BRIDGE_COVERAGE",
-      "reason": "FORMAL_SEPARATE_RUNTIME_PROOF_DELETES_FIXED_FINITE_OPEN_WORLD_LEXICAL_COMPLETENESS_AS_AN_IMPOSSIBLE_TARGET__OBSERVED_MISSES_ALREADY_HAVE_EVENT_DRIVEN_ZERO_LEARNED_FALLBACKS__THE_REMAINING_REAL_UNKNOWN_IS_WHETHER_A_GIVEN_TERM_HAS_COMPLETE_TRUSTWORTHY_NONCONFLICTING_SOURCE_RELATIONS_MAPPABLE_BY_THE_VERIFIED_ROLE_BRIDGE"
+      "residual": "RUNTIME_SOURCE_EXISTENCE_COMPLETENESS_TRUST_AND_ROLE_BRIDGE_COVERAGE",
+      "reason": "FINITE_LEXICON_COMPLETENESS_IS_FORMALLY_IMPOSSIBLE_AND_THE_JIT_LEXICAL_ORCHESTRATOR_NOW_SECOND_CARRIER_VERIFIES_AUTOMATIC_ROUTING_ACROSS_OEWN_AND_GENERIC_SOURCE_RELATION_FALLBACK__THE_REMAINING_REAL RESIDUAL IS WHETHER A GIVEN TERM HAS COMPLETE TRUSTWORTHY NONCONFLICTING SOURCE EVIDENCE THAT MAPS TO THE VERIFIED ROLE ONTOLOGY"
     }
   ],
   "decision_policy": [
@@ -525,7 +543,9 @@
     "fixed_finite_lexicon_open_world_completeness_possible": false,
     "fixed_finite_lexicon_open_world_completeness_impossibility_proved": true,
     "jit_lexical_source_conditional_contract_proved": true,
-    "arbitrary_term_source_availability_not_claimed": true
+    "arbitrary_term_source_availability_not_claimed": true,
+    "jit_lexical_orchestrator_second_carrier_verified": true,
+    "manual_lexical_route_selection_required": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
