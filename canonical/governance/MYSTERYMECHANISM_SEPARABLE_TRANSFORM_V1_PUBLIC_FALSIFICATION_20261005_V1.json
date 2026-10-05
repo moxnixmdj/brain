@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_SEPARABLE_TRANSFORM_V1_PUBLIC_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PUBLIC_DEVELOPMENT_FALSIFICATION__ZERO_PRIVATE_CASES__ZERO_CREDIT",
+  "subject": {
+    "design": "canonical/governance/MYSTERYMECHANISM_SEPARABLE_TRANSFORM_PREEXPOSURE_V1.json",
+    "runtime": "canonical/runtime/mysterymechanism_separable_transform_v1.py",
+    "selector": "LEAVE_ONE_OUT_NRMSE_THEN_ALL_ROW_NRMSE_THEN_COMPLEXITY"
+  },
+  "public_evidence": {
+    "source": "https://www.vals.ai/benchmarks/mysterymechanism",
+    "mechanism": "PUBLIC_EXAMPLE_1_ONLY",
+    "observations": 7,
+    "private_cases_consumed": 0,
+    "selected_candidate": {
+      "left": "BOUNDARY_DISTANCE_X1_ANCHOR_0_POWER_2_3",
+      "right": "BOUNDARY_RATIO_X2_ANCHOR_0_POWER_2_2",
+      "loo_nrmse": 0.01075665,
+      "all_row_nrmse": 0.00531619
+    },
+    "public_structural_probe_check": {
+      "grid": "41x41_IN_DECLARED_PUBLIC_BOUNDS",
+      "normalized_mse": 0.10632843,
+      "published_public_threshold": 0.000697,
+      "verdict": "FAIL"
+    }
+  },
+  "root_cause": {
+    "statement": "WITH_ONLY_7_OBSERVATIONS_AND_APPROXIMATELY_1E5_TRANSFORM_PAIRS__MINIMUM_LOO_IS_STRONGLY_SELECTION_BIASED_AND_CAN_REWARD_INTERPOLATING_MISSPECIFICATION",
+    "not_root_cause": "INSUFFICIENT_RAW_TRANSFORM_COUNT",
+    "required_repair": [
+      "REMOVE_AFFINELY_EQUIVALENT_DUPLICATE_HYPOTHESES",
+      "USE_STRONGER_SPARSE_DATA_RISK_ESTIMATION_THAN_SINGLE_DELETE_LOO_FOR_MODEL_SELECTION",
+      "PRESERVE_FAIL_CLOSED_ZERO_CREDIT_BOUNDARY"
+    ]
+  },
+  "conclusion": "V1_SELECTION_RULE_FALSIFIED_FOR_SPARSE_HIGH_MULTIPLICITY_MODEL_SELECTION",
+  "hard_nonclaims": [
+    "NO_MYSTERYMECHANISM_PRIVATE_222_CASE_SCORE_CLAIM",
+    "NO_MYSTERYMECHANISM_GE_49_55_ACCEPTANCE_CREDIT",
+    "NO_UNKNOWN_DOMAIN_FAMILY_PROMOTION",
+    "NO_TERMINAL_TRUE_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
