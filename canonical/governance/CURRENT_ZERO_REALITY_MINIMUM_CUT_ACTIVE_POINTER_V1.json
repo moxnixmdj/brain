@@ -42,7 +42,6 @@
     "total_open_truth_obligations": 32
   },
   "current_information_positive_action_groups": [
-    "TARGET_TUPLE_BINDING",
     "EXTERNAL_RESULT_OR_ACCESS",
     "UNIVERSAL_SCOPE_AND_COMPOSITION",
     "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
@@ -88,7 +87,7 @@
     "NO_CROSS_EFFORT_EVALUATOR_HARNESS_FALLBACK_OR_VERSION_SCORE_MERGE",
     "V22_FACTORIZATION_IS_SCHEDULING_ONLY__ZERO_TRUTH_OBLIGATION_DELETION__ZERO_CREDIT"
   ],
-  "next": "EXECUTE_V22_IN_ORDER__TARGET_TUPLE_BINDING__RECOMPUTE_32__RUN_SCOPE_AND_QUOTIENT_IN_PARALLEL__ONE_BATCHED_EXTERNAL_RESULT_WAVE_FOR_IRREDUCIBLE_RESIDUALS__NO_FRESH_REALITY_WITHOUT_EXPLICIT_AUTHORITY",
+  "next": "RUN_V22_REMAINING_THREE_INTERFACES__SCOPE_AND_QUOTIENT_IN_PARALLEL__BATCH_EXTERNAL_RESULT_OR_ACCESS_BY_EVALUATOR_OR_SHARED_HARNESS__RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA__NO_FRESH_REALITY_WITHOUT_EXPLICIT_AUTHORITY",
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
   "incremental_spend_usd": 0,
@@ -120,7 +119,12 @@
     "identical_internal_context_window_requirement_deleted": true,
     "shared_causal_interface_count": 4,
     "v21_live_program_count": 7,
-    "target_tuple_binding_active": true
+    "target_tuple_binding_active": true,
+    "v22_base_interface_count": 4,
+    "active_remaining_interface_count": 3,
+    "target_tuple_binding_complete": true,
+    "target_tuple_binding_predicates": 14,
+    "target_tuple_unique_count": 13
   },
   "scheduling_policy": {
     "objective": "MINIMIZE_EXPECTED_TERMINAL_CRITICAL_PATH_SECONDS_SUBJECT_TO_EXACT_TARGET_IDENTITY_AND_TRUTH_TOTALITY",
@@ -140,12 +144,30 @@
     "shared_kernel_rule": "PROVE_GENERIC_PREMISE_ONCE__PRESERVE_TARGET_SPECIFIC_BINDING_CERTIFICATE_PER_OBLIGATION",
     "fixed_point_rule": "AFTER_EVERY_VERIFIED_DELTA_OR_WAKE_EVENT__RECOMPUTE_ALL_FOUR_PARTITIONS_AND_DELETE_INFORMATION_FIXED_POINT_WORK",
     "v22_totality_invariant": "ALL_32_OPEN_TRUTH_OBLIGATIONS_MUST_APPEAR_IN_AT_LEAST_ONE_OF_FOUR_SHARED_CAUSAL_INTERFACES__ZERO_DELETION",
-    "target_identity_rule": "SCORE_BASED_ATOM_MUST_BIND_BENCHMARK_VERSION_MODEL_EFFORT_EVALUATOR_HARNESS_FALLBACK_POLICY_AND_UNIT_BEFORE_EXECUTION_OR_COMPARISON"
+    "target_identity_rule": "SCORE_BASED_ATOM_MUST_BIND_BENCHMARK_VERSION_MODEL_EFFORT_EVALUATOR_HARNESS_FALLBACK_POLICY_AND_UNIT_BEFORE_EXECUTION_OR_COMPARISON",
+    "completed_interfaces": [
+      "TARGET_TUPLE_BINDING"
+    ],
+    "active_interfaces": [
+      "EXTERNAL_RESULT_OR_ACCESS",
+      "UNIVERSAL_SCOPE_AND_COMPOSITION",
+      "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
+    ]
   },
   "current_shared_causal_interfaces": [
-    "TARGET_TUPLE_BINDING",
     "EXTERNAL_RESULT_OR_ACCESS",
     "UNIVERSAL_SCOPE_AND_COMPOSITION",
     "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
-  ]
+  ],
+  "target_tuple_binding": {
+    "status": "COMPLETE__14_OF_14_SCORE_ATOMS_BOUND__13_UNIQUE_TARGET_TUPLES__ZERO_CREDIT",
+    "path": "canonical/governance/OPUS55_SCORE_TARGET_TUPLE_BINDINGS_20261005_V1.json",
+    "git_blob_sha": "9bbd45f066ab94fa3f5110b9cc5efcd4118d1367",
+    "activation": "canonical/governance/V22_TARGET_TUPLE_BINDING_ACTIVATION_20261005_V1.json",
+    "activation_git_blob_sha": "5521c880509daca1cb9c3f860237f1e127d29697",
+    "verification": "canonical/verification/OPUS55_SCORE_TARGET_TUPLE_BINDINGS_SPRITE_VERIFICATION_20261005_V1.json",
+    "verification_git_blob_sha": "c8323ee404041f1d061145b98bdd8d6987f66af8",
+    "binding_count": 14,
+    "unique_target_tuple_count": 13
+  }
 }
