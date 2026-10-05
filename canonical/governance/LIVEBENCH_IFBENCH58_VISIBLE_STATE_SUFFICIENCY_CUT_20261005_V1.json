@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IFBENCH58_VISIBLE_STATE_SUFFICIENCY_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SOURCE_DERIVED_56_OF_58_CLOSED__2_HIDDEN_STATE_RESIDUALS__ZERO_TERMINAL_CONTENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "pinned_runtime": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_path": "livebench/if_runner/ifbench/instructions.py",
+    "instructions_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "registry_path": "livebench/if_runner/ifbench/instructions_registry.py",
+    "registry_git_blob_sha": "adfed4832877566e62970257b50c6fa32c302fb2",
+    "evaluation_path": "livebench/if_runner/ifbench/evaluation_lib.py"
+  },
+  "static_source_result": {
+    "registered_families": 58,
+    "zero_argument_families": 39,
+    "parameterized_families": 19,
+    "parameterized_families_with_all_checker_args_rendered_into_visible_description": 17,
+    "families_with_nonrendered_score_relevant_checker_state": 2
+  },
+  "residuals": [
+    {
+      "instruction_id": "ratio:overlap",
+      "class": "NGramOverlapChecker",
+      "all_checker_args": ["reference_text", "percentage"],
+      "visible_description_args": ["percentage"],
+      "hidden_score_relevant_args": ["reference_text"],
+      "pinned_livebench_semantics": "CHARACTER_TRIGRAM_SET_OVERLAP__NOT_CURRENT_UPSTREAM_WORD_TOKEN_TRIGRAM_SEMANTICS",
+      "public_diagnostic": {
+        "source": "allenai/IFBench@1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d:data/IFBench_test.jsonl",
+        "rows_with_family": 12,
+        "normalized_reference_visible_in_prompt": 12,
+        "raw_reference_visible_in_prompt": 5
+      },
+      "closure_obligation": "PROVE_FROM_THE_EXACT_LIVEBENCH_2026_06_25_GENERATOR_PROVENANCE_THAT_THE_SCORE_RELEVANT_REFERENCE_TEXT_IS_RECOVERABLE_FROM_VISIBLE_PROMPT_TEXT_OR_DERIVE_A_POINTWISE_MAXIMAL_RESPONSE_WITHOUT_RECOVERING_IT"
+    },
+    {
+      "instruction_id": "repeat:repeat_span",
+      "class": "RepeatSpanChecker",
+      "all_checker_args": ["n_start", "n_end", "prompt_to_repeat"],
+      "visible_description_args": ["n_start", "n_end"],
+      "hidden_score_relevant_args": ["prompt_to_repeat"],
+      "pinned_livebench_semantics": "DESCRIPTION_SAYS_CHARACTER_INDICES_BUT_CHECKER_SLICES_WHITESPACE_SEPARATED_WORDS_WITH_PYTHON_END_EXCLUSIVE_SLICE",
+      "public_diagnostic": {
+        "source": "allenai/IFBench@1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d:data/IFBench_test.jsonl",
+        "rows_with_family": 4,
+        "score_relevant_slice_equal_after_visible_prompt_reconstruction": 4
+      },
+      "closure_obligation": "PROVE_FROM_THE_EXACT_LIVEBENCH_2026_06_25_GENERATOR_PROVENANCE_THAT_THE_SCORE_RELEVANT_SOURCE_SPAN_IS_RECOVERABLE_FROM_VISIBLE_PROMPT_TEXT_OR_DERIVE_A_POINTWISE_MAXIMAL_RESPONSE_WITHOUT_RECOVERING_IT"
+    }
+  ],
+  "scorer_drift_breakthrough": {
+    "fact": "THE_PINNED_LIVEBENCH_IFBENCH58_IMPLEMENTATION_IS_NOT_SEMANTICALLY_IDENTICAL_TO_CURRENT_OR_PINNED_UPSTREAM_ALLENAI_IFBENCH_DIAGNOSTIC_SOURCE",
+    "examples": [
+      "PINNED_LIVEBENCH_RATIO_OVERLAP_APPLIES_NLTK_NGRAMS_DIRECTLY_TO_STRINGS_AND_THEREFORE_USES_CHARACTER_TRIGRAMS",
+      "UPSTREAM_IFBENCH_CURRENT_SOURCE_TOKENIZES_BEFORE_TRIGRAM_CONSTRUCTION",
+      "PINNED_LIVEBENCH_REPEAT_SPAN_DESCRIPTION_SAYS_CHARACTER_INDICES_WHILE_THE_CHECKER_SPLITS_ON_WHITESPACE",
+      "UPSTREAM_PUBLIC_IFBENCH_CORPUS_USES_WORD_INDEX_WORDING"
+    ],
+    "scheduler_rule": "ANY_PUBLIC_300_ROW_SOLVER_RESULT_IS_DIAGNOSTIC_ONLY_UNLESS_POSTVALIDATED_AGAINST_THE_EXACT_PINNED_LIVEBENCH_CHECKER_BYTES_AND_EXACT_RELEASE_PROMPT_GRAMMAR"
+  },
+  "distribution_free_consequence": {
+    "before": "VISIBLE_STATE_SUFFICIENCY_WAS_AN_UNSCOPED_58_FAMILY_OBLIGATION",
+    "after": "56_OF_58_FAMILIES_ARE_SOURCE_CLOSED_WITHOUT_TERMINAL_DATA__ONLY_TWO_HIDDEN_STATE_SHAPES_REMAIN",
+    "next_gate": "CLOSE_THE_TWO_RESIDUAL_PROVENANCE_THEOREMS__THEN_BUILD_EXACT_POINTWISE_MAXIMAL_PLANNER_OVER_THE_PINNED_LIVEBENCH_RUNTIME"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TWO_HIDDEN_STATE_RESIDUALS_ARE_CLOSED_FOR_THE_2026_06_25_TERMINAL_POPULATION",
+    "NO_CLAIM_PUBLIC_ALLENAI_IFBENCH_PROMPT_GRAMMAR_EQUALS_THE_LIVEBENCH_2026_06_25_PROMPT_GRAMMAR",
+    "NO_TERMINAL_PROMPTS_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_read": 0,
+    "terminal_kwargs_read": 0,
+    "terminal_instruction_lists_read": 0,
+    "acceptance_credit_delta": 0
+  }
+}
