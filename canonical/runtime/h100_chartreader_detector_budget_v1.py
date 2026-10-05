@@ -88,10 +88,10 @@ RESULT={
  "first":FIRST.__dict__,
  "full":FULL.__dict__,
  "group":GROUP.__dict__,
- "first_int8_bytes":storage(FIRST,8),
+ "first_q4_bytes":storage(FIRST,4),\n "first_int8_bytes":storage(FIRST,8),
  "full_q4_bytes":storage(FULL,4),
  "group_q4_bytes":storage(GROUP,4),
- "first_int8_headroom":BUDGET-storage(FIRST,8),
+ "first_q4_headroom":BUDGET-storage(FIRST,4),\n "first_int8_headroom":BUDGET-storage(FIRST,8),
  "full_q4_headroom":BUDGET-storage(FULL,4),
  "group_q4_over":storage(GROUP,4)-BUDGET,
 }
