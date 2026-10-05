@@ -147,6 +147,31 @@ class ControllerCompositionCapsuleAdapterTests(unittest.TestCase):
         self.assertEqual(verdict["status"], "FAIL_CLOSED")
         self.assertIn("CAPSULE_VERIFY", verdict["reason"])
 
+    def test_runtime_code_drift_invalidates_resumable_capsule(self):
+        capsule = adapter.empty_capsule(ROOT)
+        raw = {"type": "synthetic", "args": {"seed": "alpha"}}
+        result = {"value": "alpha"}
+        capsule = adapter.append_cycle(
+            capsule,
+            cycle=0,
+            raw_action=raw,
+            resolved_action=raw,
+            result=result,
+            root=ROOT,
+        )
+        trace = [{"cycle": 0, "plan": raw, "result": result}]
+        real_sha_file = adapter._sha_file
+
+        def drifted_sha(path):
+            if pathlib.Path(path).resolve() == RUNTIME_PATH.resolve():
+                return "0" * 64
+            return real_sha_file(path)
+
+        with mock.patch.object(adapter, "_sha_file", side_effect=drifted_sha):
+            verdict = adapter.verify_controller_state(capsule, trace, ROOT)
+        self.assertEqual(verdict["status"], "FAIL_CLOSED")
+        self.assertIn("PRODUCER_RUNTIME_DRIFT", verdict["reason"])
+
     def test_future_result_reference_is_rejected(self):
         capsule = adapter.empty_capsule(ROOT)
         raw = {
