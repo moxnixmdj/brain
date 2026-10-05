@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LANGDETECT_FAILOPEN_REVOCATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "REVOKED__SOURCE_LEVEL_COUNTEREXAMPLE",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "falsified_claim": "LangDetectException is caught and counted as followed by the pinned legacy LiveBench language/case checker.",
+  "counterexample": {
+    "pinned_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "source_fact": "instructions.py comments out '# from absl import logging' and has no other logging import; each LangDetectException handler executes logging.error(...) before return True, so the exception path raises NameError instead of returning True.",
+    "affected_checkers": [
+      "language:response_language",
+      "change_case:english_capital",
+      "change_case:english_lowercase"
+    ]
+  },
+  "revoked_brain_subjects": [
+    "canonical/runtime/livebench_langdetect_failopen_reduction_v1.py",
+    "canonical/runtime/livebench_langdetect_prefix_shield_reduction_v2.py"
+  ],
+  "revoked_commits": [
+    "c15626176d9cce5320e6012032385e7147bbf277",
+    "d3206f2e0fbed37c12df1a9934e5aacbf895f3b9"
+  ],
+  "consequence": "DO_NOT_USE_LANGDETECT_EXCEPTION_AS_A_SUCCESS_WITNESS. THE FROZEN_SCHEMA19 ENVELOPE EXCLUDES language:response_language, SO THE 30-LANGUAGE BRANCH REMAINS OFF THE TERMINAL CRITICAL PATH. ENGLISH CASE EXTRAS STILL REQUIRE A NORMAL NON-EXCEPTION ENGLISH DETECTION WITNESS OR ANOTHER VALID CONSTRUCTION.",
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "incremental_spend_usd": 0
+  }
+}\n
