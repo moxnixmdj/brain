@@ -278,6 +278,24 @@
       "out_of_family_fail_closed": true,
       "persistent_learned_bytes": 0,
       "deduction": "THE_VERIFIED_LIBRARY_FIRST_ROUTER_IS NOW EXECUTABLE__KNOWN_VERIFIED FAMILIES RESOLVE BEFORE RAW SYNTHESIS AND UNKNOWN INPUTS FAIL CLOSED TO THE RAW SEARCH STAGE"
+    },
+    "non_synthetic_verifier_cost": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__FOUR_CAPABILITY_CLASSES__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_NON_SYNTHETIC_VERIFIER_COST_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_NON_SYNTHETIC_VERIFIER_COST_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "classes": [
+        "OEWN_REAL_LEXICAL",
+        "LEXICAL_SOURCE_FALLBACK",
+        "COMPOSITIONAL_LANGUAGE",
+        "TOOL_TRACE_NORMALIZER"
+      ],
+      "median_verifier_seconds_range": [
+        0.07755760300005932,
+        0.08382214500034024
+      ],
+      "median_of_subject_medians_seconds": 0.08226454750047196,
+      "persistent_learned_bytes": 0,
+      "deduction": "NON_SYNTHETIC_REAL_SOURCE_LANGUAGE_AND_TOOL_CAPABILITY_VERIFICATION_IS_CHEAP_ON_THE_MEASURED_COHORT__THE_MAJOR_REMAINING_PRACTICAL_UNKNOWN_FOR_THESE_CLASSES_IS_INCREMENTAL_DESCRIPTION_LENGTH_AND_ROUTING_COMPOSITION_NOT_VERIFIER_WALL_CLOCK"
     }
   },
   "next_structural_residuals_ranked": [
@@ -288,8 +306,8 @@
     },
     {
       "rank": 2,
-      "residual": "BROADEN_INCREMENTAL_DESCRIPTION_LENGTH_AND_VERIFIER_COST_TO_NON_SYNTHETIC_REAL_WORLD_CAPABILITY_CLASSES",
-      "reason": "THREE_INDEPENDENTLY_VERIFIED_REUSABLE_STRUCTURAL_FAMILIES_NOW_HAVE_FROZEN_L_AND_T_MEASUREMENTS__THE_NEXT_PRACTICAL_UNKNOWN_IS WHETHER_SHORT_INCREMENTAL_DESCRIPTORS_AND_CHEAP_VERIFIERS_PERSIST_ACROSS NON_SYNTHETIC_LANGUAGE_TOOL_VISION_AND_WORKFLOW_CAPABILITIES"
+      "residual": "NON_SYNTHETIC_INCREMENTAL_DESCRIPTION_LENGTH_AND_MULTI_DOMAIN_REGISTRY_ROUTING",
+      "reason": "FOUR_NON_SYNTHETIC_CAPABILITY_CLASSES_NOW_HAVE_CHEAP_SECOND_CARRIER_VERIFIER_COST_MEASUREMENTS__DESCRIPTION_LENGTH_AND_EXECUTABLE_MULTI_DOMAIN_REGISTRY_ROUTING_REMAIN_TO_BE_BOUND"
     },
     {
       "rank": 3,
@@ -376,7 +394,9 @@
     "library_first_measured_speedup_scope": "THREE_ALREADY_VERIFIED_SYNTHETIC_TRANSFER_TASKS__MEDIAN_9_2745X_ON_SECOND_SPRITE",
     "default_verified_capability_registry_first_router_implemented": true,
     "verified_capability_registry_seed_entries": 3,
-    "verified_capability_registry_out_of_family_fail_closed": true
+    "verified_capability_registry_out_of_family_fail_closed": true,
+    "non_synthetic_real_world_capability_verifier_cost_distribution_measured": true,
+    "non_synthetic_real_world_capability_verifier_cost_scope": "FOUR_PRIOR_INDEPENDENTLY_VERIFIED_CLASSES__TEST_SUITE_PROXY__MEDIANS_APPROX_0_078_TO_0_084_SECONDS"
   },
   "accounting": {
     "incremental_spend_usd": 0,
