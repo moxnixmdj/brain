@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CLEAN_SCOPE_COMPLETE_POINTWISE_DOMINANCE_FORCES_LIVEBENCH_IF_GE_65_7__ZERO_TARGET_ROWS",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "precommit": {
+    "path": "canonical/governance/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_PRECOMMIT_20261005_V1.json",
+    "git_blob_sha": "e0c84402955425aca64b20562f3400287e8792fc",
+    "status": "FROZEN_COMPOSITION_GATE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_PENDING"
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "public": true,
+    "checkout_sha": "ab7825a72bade9c61fd3f1142b1caecb192bc645",
+    "verifier_path": "verify_livebench_clean_active15_promotion_v1.py",
+    "verifier_git_blob_sha": "3280203b47d61434ca89d70f56d4935ef1b29060",
+    "workflow_path": ".github/workflows/verify-livebench-clean-active15-promotion-v1-macos.yml",
+    "workflow_git_blob_sha": "4811c234e73d73b14ea00ef4787a86b1502712b8",
+    "workflow_run_id": 37246829228,
+    "workflow_job_id": 111566258419,
+    "conclusion": "success",
+    "artifact_id": 11319227929,
+    "artifact_name": "livebench-clean-active15-promotion-v1-macos",
+    "artifact_digest_sha256": "49b5da7e401373d93cccfe6b33c6b03e6147b8b35a8bdf6cb7c48ba51d011df5"
+  },
+  "recomputed_proof": {
+    "exact_frozen_population_count": 200,
+    "active_instruction_identity_count": 15,
+    "excluded_non_load_bearing_registry_ids": 10,
+    "minimum_cut_exact_classification_cases": 356352,
+    "minimum_cut_mandatory_loss_coordinates": [
+      "sentence_zero",
+      "forbidden_collision_cluster"
+    ],
+    "full_cross_exact_pointwise_matches": 712704,
+    "full_cross_total_cases": 712704,
+    "punkt_satisfiable_exact_all_pass": 121368,
+    "punkt_strict_lt_one_exact_single_loss": 3112,
+    "public_opus55_raw_if_mean_percent": 65.73775,
+    "required_threshold_percent": 65.7,
+    "brain_mean_lower_bound_percent": 65.73775,
+    "forced_margin_percentage_points": 0.03775,
+    "deduction": "FOR_EVERY_FROZEN_ACTIVE15_CASE_BRAIN_ATTAINS_TRUE_STRICT_CHECKER_MAXIMUM__ANY_OPUS_RESPONSE_SCORE_IS_LE_THIS_MAXIMUM__THEREFORE_MEAN_BRAIN_GE_MEAN_OPUS_65_73775_GE_65_7"
+  },
+  "exact_subject_blobs": {
+    "composition_archetypes": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
+    "slot_feasibility": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+    "composer_v2": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+    "pointwise_planner": "71e637c70edf1c582e28ea38b3b798965c803a06",
+    "lexical_slot_quotient": "09a5d7810fd46713aaf06cf1d204fe140d1d8045",
+    "pointwise_minimum_cut": "3552ceb0c9bdf80e8666460931f20f06f580a0f2",
+    "post_sacrifice_parametric_reduction": "fd1ad043fb9fe461b6593f5b8130093be0028c22"
+  },
+  "contamination_firewall": {
+    "dirty_84_40416666666667_replay_used": false,
+    "terminal_rows_read": 0,
+    "terminal_kwargs_read": 0,
+    "target_responses_read": 0,
+    "target_scores_read": 0
+  },
+  "promotion_consequence": {
+    "predicate_state": "PROVED__CLEAN_CASE_INDEPENDENT_FORMAL_POINTWISE_DOMINANCE",
+    "acceptance_credit_delta": 1,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "dirty_replay_remains_quarantined": true
+  },
+  "hard_nonclaims": [
+    "THIS_PROVES_ONLY_LIVEBENCH_IF_GE_65_7",
+    "NO_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ATOMIC_PREDICATE_ALONE",
+    "NO_TERMINAL_GOAL_COMPLETION_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0
+  }
+}
