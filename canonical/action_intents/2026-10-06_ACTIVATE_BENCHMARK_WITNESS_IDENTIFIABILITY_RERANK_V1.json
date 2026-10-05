@@ -1,0 +1,171 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "ACTIVATE-BENCHMARK-WITNESS-IDENTIFIABILITY-RERANK-20261006-SOL",
+  "status": "CANDIDATE__CURRENT_BASE_BOUND__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "15b9b78a4708e49260e241f50cbfc13da42aac9d",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "MERGED_IDENTIFIABILITY_RERANK_NOT_BOUND_IN_ACTIVE_V22_POINTER_OR_WITNESS_RUNTIME_OVERLAY",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::MERGED_IDENTIFIABILITY_RERANK_NOT_BOUND_IN_ACTIVE_V22_POINTER_OR_WITNESS_RUNTIME_OVERLAY",
+  "expected_parent_frontier_change": "Bind the independently V22-admitted identifiability rerank into both the active V22 pointer and current witness runtime overlay so AutomationBench scope falsification is truly rank-1, Finance Agent v2 is secondary, and unrestricted MysteryMechanism is wake-only.",
+  "highest_leverage_now": true,
+  "stop_condition": "Active pointer and witness runtime overlay content-address the rerank and its verification; exact truth counts remain unchanged; V22 admission passes; no terminal credit.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "4b53c382945552583a6279550594a1f0f890c11f",
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_GE_49_55"
+    ],
+    "proof_state_reachability": "ACTIVATES_ALREADY_VERIFIED_IDENTIFIABILITY_ORDERING_WITHOUT_CHANGING_ANY_TRUTH_OBLIGATION",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 24,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 18,
+      "root3_touching_count": 9,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 32,
+      "terminal": false
+    },
+    "tournament": {
+      "proposal_id": "P_IDENTIFIABILITY_RERANK_SHOULD_CONTROL_ACTIVE_WITNESS_SCHEDULING",
+      "falsifier_id": "F_RERANK_ARTIFACT_MERGED_BUT_NOT_REFERENCED_BY_ACTIVE_POINTER_OR_OVERLAY",
+      "decisive_question": "Does the current authoritative scheduler actually content-address and execute the merged identifiability rerank rather than merely storing it?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_TARGET_RERANK_20261006_V1.json",
+          "git_blob_sha": "03c53ddfd81655f41a2d9e4a082c970e981b4dbb"
+        },
+        {
+          "path": "canonical/verification/BENCHMARK_WITNESS_IDENTIFIABILITY_RERANK_V3_ADMISSION_VERIFICATION_20261006_V1.json",
+          "git_blob_sha": "ae4718d39924320c702afaabddc49c02713b5edb"
+        }
+      ]
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "15b9b78a4708e49260e241f50cbfc13da42aac9d",
+    "real_outcome": "Make the verified witness target order authoritative rather than archival.",
+    "required_capability": "CURRENT_POINTER_AND_OVERLAY_BINDING_OF_VERIFIED_SCHEDULER_DELTA",
+    "obs_goal": {
+      "real_outcome": "Ensure actual scheduling follows the highest-information certificate target.",
+      "proxy_goals_deleted": [
+        "MERGED_JSON_AS_IF_IT_WERE_ACTIVATION",
+        "DUPLICATE_RERANK_RESEARCH"
+      ],
+      "surviving_necessity": "Content-address the verified rerank in both current scheduling surfaces."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current V22 pointer",
+        "current witness runtime overlay",
+        "merged rerank",
+        "rerank V22 verification"
+      ],
+      "external_existing_routes_checked": [
+        "not required"
+      ],
+      "capability_work_deleted": [
+        "new rerank invention",
+        "new benchmark execution"
+      ],
+      "surviving_gap": "Current scheduling surfaces do not bind the merged rerank."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "INTEGRATION_POINTER_GAP",
+      "delete_bypass_substitute_options": [
+        "reuse merged rerank and verification",
+        "update only current scheduling surfaces"
+      ],
+      "surviving_causal_blocker": "AUTHORITATIVE_POINTERS_STILL_ENCODE_PRE_RERANK_ORDER"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "BIND_EXISTING_RERANK",
+        "RECOMPUTE_RERANK",
+        "IGNORE_POINTER_GAP"
+      ],
+      "losing_routes_reason": "The rerank is already verified; recomputation duplicates work and ignoring the gap leaves scheduling stale.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Current-pointer and overlay exact bindings can be checked deterministically with zero terminal exposure."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PRE_RERANK_UNORDERED_PRIVATE_SCOPE_SYNTHESIS"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "V3 witness compiler",
+        "falsification tournament",
+        "identifiability rerank"
+      ],
+      "fresh_reuse_plan": "Activate exact existing blobs; do not reinterpret their claims."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused merged rerank verification",
+        "reused current truth counts",
+        "reused content-addressed evidence"
+      ],
+      "search_stop_decision": "No new research until activation gap is closed.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "BIND_RERANK",
+      "REBUILD_RERANK",
+      "PROCEED_WITHOUT_ACTIVATION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REBUILD_RERANK",
+      "PROCEED_WITHOUT_ACTIVATION"
+    ],
+    "selected_surviving_route": "BIND_RERANK",
+    "why_selected_route_is_fastest_sufficient": "Two current-surface bindings make the already-verified ranking operational with zero new truth claims.",
+    "expected_parent_level_state_change": "Active witness scheduling order becomes AutomationBench, Finance Agent v2, then MysteryMechanism wake-only.",
+    "stop_condition": "Both current surfaces bind exact rerank/verification blobs and V22 admission passes.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Integration-only reconciliation."
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
