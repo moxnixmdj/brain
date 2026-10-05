@@ -1,0 +1,235 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SIX_BENCHMARK_PROXY_FAMILIES_COMPRESSED_TO_SEVEN_UNIQUE_SURVIVING_BEHAVIORAL_LEAVES__COMPUTER_BROWSER_ADDS_ZERO_NEW_UNIQUE_LEAF__ZERO_CREDIT",
+  "objective": "Supersede the five-family scope partition after BENCHMARK_PROXY_SCOPE_COMPLETENESS_QUARANTINE_V2 adds COMPUTER_AND_BROWSER_USE, while minimizing repair complexity by exact behavioral-contract identity and already scope-complete receipt reuse.",
+  "authorities": {
+    "quarantine_v2": {
+      "path": "canonical/governance/BENCHMARK_PROXY_SCOPE_COMPLETENESS_QUARANTINE_V2_20261005.json",
+      "git_blob_sha": "c62b7c1f8e838a1a37d8b5513953191f717b40e8"
+    },
+    "predecessor_partition": {
+      "path": "canonical/governance/FIVE_PUBLIC_BAR_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "8f74ca3d9609737913714844a793b8566028a0aa"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    }
+  },
+  "reusable_scope_complete_receipts": {
+    "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001": {
+      "supporting_predicates": [
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+      ],
+      "proof_kind": "SCOPE_COMPLETE_STRONGER_PROOF",
+      "receipt": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "reuse_rule": "IDENTICAL_FROZEN_RECOVERY_BEHAVIORAL_LEAF_ONLY"
+    },
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001": {
+      "supporting_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+      "receipt": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "reuse_rule": "IDENTICAL_FROZEN_TOOL_DISCOVERY_SELECTION_LEAF_ONLY"
+    },
+    "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001": {
+      "supporting_predicate": "ARTIFACT_MECHANICAL_GATES_CEILING",
+      "proof_kind": "ABSOLUTE_CEILING",
+      "supporting_scope_partition": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "reuse_rule": "NATIVE_STRUCTURED_EDIT_PRESERVATION_ONLY__NO_PROFESSIONAL_QUALITY_CREDIT"
+    }
+  },
+  "family_partitions": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "original_behavioral_leaves": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ],
+      "discharged_by_existing_scope_complete_receipts": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "surviving_scope_leaves": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ]
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "original_behavioral_leaves": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "discharged_by_existing_scope_complete_receipts": [
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001"
+      ],
+      "surviving_scope_leaves": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ]
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "original_behavioral_leaves": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "discharged_by_existing_scope_complete_receipts": [
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "surviving_scope_leaves": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+      ]
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "original_behavioral_leaves": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ],
+      "discharged_by_existing_scope_complete_receipts": [],
+      "surviving_scope_leaves": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ]
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "original_behavioral_leaves": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "discharged_by_existing_scope_complete_receipts": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "surviving_scope_leaves": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ]
+    },
+    {
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "original_behavioral_leaves": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "discharged_by_existing_scope_complete_receipts": [
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "surviving_scope_leaves": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+      ],
+      "exact_structural_relation_to_business_workflow_automation": "IDENTICAL_RESIDUAL_CONTRACT_SET__IDENTICAL_DISCHARGED_PAIR__IDENTICAL_SINGLE_SURVIVOR"
+    }
+  ],
+  "deduplicated_surviving_leaf_hypergraph": [
+    {
+      "leaf": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "fanout": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ]
+    },
+    {
+      "leaf": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+      ]
+    },
+    {
+      "leaf": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "fanout": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ]
+    },
+    {
+      "leaf": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "fanout": [
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE"
+      ]
+    },
+    {
+      "leaf": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING"
+      ]
+    },
+    {
+      "leaf": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING"
+      ]
+    },
+    {
+      "leaf": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "fanout": [
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ]
+    }
+  ],
+  "fixed_point_breakthrough": {
+    "predecessor_affected_families": 5,
+    "current_affected_families": 6,
+    "predecessor_unique_surviving_leaves": 7,
+    "current_unique_surviving_leaves": 7,
+    "unique_leaf_delta": 0,
+    "reason": "COMPUTER_AND_BROWSER_USE_HAS_THE_SAME_REGISTERED_RESIDUAL_CONTRACT_SET_AS_BUSINESS_WORKFLOW_AUTOMATION_AND_THE_SAME_TWO_SCOPE_COMPLETE_RECEIPTS_DISCHARGE_TOOL_SELECTION_AND_RECOVERY",
+    "scheduling_consequence": "DO_NOT_OPEN_AN_EIGHTH_SCOPE_REPAIR_LEAF_FOR_COMPUTER_AND_BROWSER_USE__REUSE_BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+  },
+  "counts": {
+    "original_leaf_occurrences": 19,
+    "discharged_occurrences_by_existing_receipts": 7,
+    "surviving_leaf_occurrences": 12,
+    "unique_surviving_behavioral_leaves": 7,
+    "maximum_cross_family_fanout": 3
+  },
+  "priority": [
+    "FIRST_TEST_EXISTING_BENCHMARK_SCOPE_COVERAGE_AGAINST_THE_SEVEN_SHARED_SURVIVING_LEAVES",
+    "REUSE_SCOPE_COMPLETE_RECEIPTS_BY_EXACT_BEHAVIORAL_IDENTITY_ONLY",
+    "CREATE_NO_NEW_SCOPE_REPAIR_LEAF_FOR_COMPUTER_AND_BROWSER_USE",
+    "ONLY_CREATE_NEW_UNCOVERED_SCOPE_OBLIGATION_IF_A_SURVIVING_LEAF_CANNOT_BE_LOSSLESSLY_BOUND_TO_EXISTING_BENCHMARK_OR_STRONGER_PROOF_SCOPE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_OSWORLD_OR_ANY_PUBLIC_BAR_COVERS_BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001_YET",
+    "NO_CLAIM_ANY_SURVIVING_LEAF_IS_ACCEPTED",
+    "NO_NEW_ACCEPTANCE_PREDICATE_CREATED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT1_POSITIVE_GAP",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
