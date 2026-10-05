@@ -168,10 +168,20 @@
     ]
   },
   "inference_contract": {
+    "source_repository": "vis-nlp/UniChart",
+    "source_readme_path": "README.md",
+    "source_readme_git_blob_sha": "96bc9ef8fbb84058a4d0e6d07d3500341bfc81ff",
     "transformers_version": "4.28.1",
     "processor": "DonutProcessor",
     "model": "VisionEncoderDecoderModel",
-    "prompt": "RAW_QUESTION_AS_DOCUMENTED_BY_UNICHART",
+    "prompt_template": "<chartqa> {question} <s_answer>",
+    "output_postprocess": [
+      "DECODE_FIRST_GENERATED_SEQUENCE",
+      "REMOVE_TOKENIZER_EOS_TOKEN",
+      "REMOVE_TOKENIZER_PAD_TOKEN",
+      "SPLIT_ON_<s_answer>",
+      "TAKE_SUFFIX_AND_STRIP"
+    ],
     "num_beams": 4,
     "use_cache": true,
     "bad_words": "TOKENIZER_UNK_TOKEN",
