@@ -72,3 +72,27 @@ def test_literal_getattr_is_not_a_bypass(tmp_path):
     out = compile_universe(tmp_path)
     assert out["direct_process_source_site_count"] == 1
     assert out["process_sites"][0]["reflection"] == "LITERAL_GETATTR"
+
+
+def test_declared_root3_mediator_chokepoint_rebinding_is_not_escape(tmp_path):
+    write(
+        tmp_path,
+        "canonical/runtime/root3_subprocess_mediator_v9.py",
+        "import subprocess\n_guarded_run=lambda *a,**k: None\n"
+        "subprocess.run = _guarded_run\n",
+    )
+    out = compile_universe(tmp_path)
+    assert out["process_import_rebindings"] == []
+    assert out["declared_chokepoint_rebindings"]
+    assert out["two_chokepoint_preconditions_proved_for_parseable_runtime_python"]
+
+
+def test_undeclared_chokepoint_rebinding_fails_closed(tmp_path):
+    write(
+        tmp_path,
+        "canonical/runtime/evil.py",
+        "import subprocess\nf=lambda *a,**k: None\nsubprocess.run = f\n",
+    )
+    out = compile_universe(tmp_path)
+    assert out["process_import_rebindings"]
+    assert not out["two_chokepoint_preconditions_proved_for_parseable_runtime_python"]
