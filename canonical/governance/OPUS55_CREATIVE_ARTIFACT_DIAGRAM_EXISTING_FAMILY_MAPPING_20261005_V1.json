@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_CREATIVE_ARTIFACT_DIAGRAM_EXISTING_FAMILY_MAPPING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__LOSSLESS_OBSERVABLE_OUTPUT_MAPPING__NO_NEW_FAMILY__ZERO_CREDIT__INDEPENDENT_FALSIFICATION_REQUIRED",
+  "objective": "Resolve whether the first-party Opus 5.5 creative-task, text-artifact, and diagram-output surfaces require a new terminal family or are contained by the declared Communication/Synthesis and Artifact Creation family semantics.",
+  "source_bindings": {
+    "envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    }
+  },
+  "first_party_surfaces": [
+    "CREATIVE_TASKS",
+    "TEXT_BASED_ARTIFACT_OUTPUT",
+    "DIAGRAM_OUTPUT"
+  ],
+  "formal_observable_partition": [
+    {
+      "class": "TEXT_COMMUNICATION_SYNTHESIS_OR_CONSTRAINT_FOLLOWING_OUTPUT",
+      "mapped_family": "COMMUNICATION_AND_SYNTHESIS",
+      "literal_family_scope": "Communicate clearly, prioritize what matters, follow writing rules and synthesize complex work over long sessions."
+    },
+    {
+      "class": "REUSABLE_TEXT_OR_STRUCTURED_WORK_PRODUCT",
+      "mapped_family": "ARTIFACT_CREATION",
+      "literal_family_scope": "Create professional spreadsheets, slides, documents, reports, code and other immediately usable artifacts."
+    },
+    {
+      "class": "DIAGRAM_OR_OTHER_IMMEDIATELY_USABLE_NONCODE_ARTIFACT",
+      "mapped_family": "ARTIFACT_CREATION",
+      "literal_family_scope": "Create professional spreadsheets, slides, documents, reports, code and other immediately usable artifacts."
+    }
+  ],
+  "coverage_rule": "FOR_THE_OBSERVABLE_OUTPUT_SURFACES_ASSERTED_BY_THE_FIRST_PARTY_MODALITY_DESCRIPTION, A_LOAD_BEARING_CREATIVE_TASK_RESULT_MUST_MANIFEST_AS TEXT_COMMUNICATION_OR_AN_OUTPUT_ARTIFACT; TEXT_COMMUNICATION_IS_LITERAL_COMMUNICATION_AND_SYNTHESIS_SCOPE, WHILE TEXT_BASED_ARTIFACTS_AND_DIAGRAMS_ARE OUTPUT_ARTIFACTS AND THEREFORE SUBSETS_OF_ARTIFACT_CREATION.",
+  "boundary": {
+    "covered": "OBSERVABLE_MODEL_OUTPUT_BEHAVIOR_FOR_CREATIVE_TEXT_TEXT_BASED_ARTIFACTS_AND_DIAGRAMS",
+    "not_claimed": [
+      "UNOBSERVABLE_INTERNAL_CREATIVITY_AS_A_SEPARATE_CAPABILITY",
+      "IMAGE_UNDERSTANDING_FROM_DIAGRAMS",
+      "GENERAL_VISION_INPUT",
+      "ANY_NEW_OUTPUT_MODALITY_NOT_NAMED_BY_THE_FIRST_PARTY_SURFACE"
+    ]
+  },
+  "acceptance_consequence": {
+    "envelope_mapping_obligation_candidate_closed": true,
+    "acceptance_not_closed": true,
+    "existing_family_predicates_remain_load_bearing": true,
+    "new_family_required": false
+  },
+  "falsifiers": [
+    "A_FIRST_PARTY_OPUS55_CREATIVE_USEFUL_BEHAVIOR_WITH_OBSERVABLE_OUTPUT_NOT_REPRESENTABLE_AS_TEXT_COMMUNICATION_OR_AN_IMMEDIATELY_USABLE_ARTIFACT",
+    "A_FIRST_PARTY_DIAGRAM_OUTPUT_BEHAVIOR_THAT_IS_NOT_AN_OUTPUT_ARTIFACT",
+    "A_CURRENT_FAMILY_DEFINITION_THAT_EXCLUDES_CREATIVE_TEXT_OR_DIAGRAM_ARTIFACTS_FROM_THE_ABOVE_LITERAL_SCOPE"
+  ],
+  "root1_effect_if_verified": {
+    "positive_new_gap_count_delta": 0,
+    "global_envelope_sealed": false,
+    "remaining_meta_surface_groups": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_COMMUNICATION_OR_ARTIFACT_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_ALL_POSSIBLE_CREATIVE_BEHAVIOR_IS_EXHAUSTED_BEYOND_THE_FIRST_PARTY_OBSERVABLE_SURFACE",
+    "NO_CLAIM_DIAGRAM_READING_IS_CLOSED",
+    "NO_NEW_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
