@@ -73,7 +73,7 @@ try:
                 [spec["python"],"-I","-c",spec["runner"],str(snap),spec["logical_path"]],
                 cwd=spec["cwd"],
                 env=nested_env,
-                stdin=subprocess.DEVNULL,
+                stdin=None,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 timeout=spec["timeout"],
