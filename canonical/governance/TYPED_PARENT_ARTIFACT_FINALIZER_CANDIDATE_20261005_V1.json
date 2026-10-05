@@ -1,0 +1,32 @@
+{
+  "schema":"PROJECT_BRAIN_TYPED_PARENT_ARTIFACT_FINALIZER_CANDIDATE_20261005_V1",
+  "date":"2026-10-05",
+  "status":"CANDIDATE__STREAMING_TYPED_PARENT_FINALIZATION__LOCAL_6_OF_6_PASS__ZERO_CREDIT__INDEPENDENT_REPLAY_REQUIRED",
+  "subject":{
+    "runtime":{"path":"canonical/runtime/typed_parent_artifact_finalizer_v1.py","git_blob_sha":"8ba2f1ee118acf875de0ffff20b25b3cc97d0d77"},
+    "tests":{"path":"canonical/tests/test_typed_parent_artifact_finalizer_v1.py","git_blob_sha":"724c2a40668dc429c90200da498225f460bad857"}
+  },
+  "properties":[
+    "CHILD_CANNOT_CHOOSE_DURABLE_DESTINATION",
+    "DESTINATION_IS_PREDECLARED_BY_PARENT",
+    "PAYLOAD_STREAMS_WITH_BOUNDED_MEMORY",
+    "SIZE_MEDIA_TYPE_AND_SHA256_ARE_VERIFIED",
+    "FINAL_AUTHORIZATION_MUST_MATCH_EFFECT_REQUEST_SHA256",
+    "TRAILING_BYTES_FAIL_CLOSED",
+    "COMMIT_IS_ATOMIC_RENAME_AFTER_VALIDATION",
+    "TEMPORARY_FILE_IS_REMOVED_ON_FAILURE"
+  ],
+  "local_tests":{"ran":6,"failures":0,"errors":0},
+  "remaining":[
+    "INDEPENDENT_EXACT_BYTE_REPLAY",
+    "BIND_FINAL_AUTHORIZATION_OBJECT_TO_CANONICAL_EFFECT_BROKER_OUTPUT",
+    "BIND_FINALIZER_TO_NAMESPACE_MEMBRANE_BROKER_PROTOCOL",
+    "WHOLE_RUNTIME_ENTRY_DOMINANCE_AND_C3_NO_BYPASS"
+  ],
+  "hard_nonclaims":[
+    "NO_EXECUTION_AUTHORITY_CREATED",
+    "NO_C1_C2_C3_CLOSURE",
+    "NO_ROOT3_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0}
+}
