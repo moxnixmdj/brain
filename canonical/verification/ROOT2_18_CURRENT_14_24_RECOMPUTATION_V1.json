@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_CURRENT_14_24_RECOMPUTATION_V1",
+  "date": "2026-10-05",
+  "status": "PASS__EXACT_18_SET_AND_ROUTE_REUSE_RECOMPUTED__ZERO_CREDIT",
+  "subject_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V3.json",
+  "subject_git_blob_sha": "82612b803c1d47eeb8888cf99a00c14a1bea54e1",
+  "source_root_git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860",
+  "source_ledger_git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+  "source_epoch_git_blob_sha": "583a5a0ab99f4560cba8167a64920cc207c690c1",
+  "checks": {
+    "proved_atomic_14": true,
+    "unresolved_atomic_24": true,
+    "partition_15_6_3": true,
+    "root2_touching_18": true,
+    "exact_set_equal": true,
+    "livebench_absent": true,
+    "surviving_routes_equal_prior_verified_policy": true,
+    "missing_routes_0": true,
+    "extra_routes_0": true
+  },
+  "scope": "SCHEDULING_CURRENTNESS_ONLY",
+  "acceptance_credit_delta": 0
+}
