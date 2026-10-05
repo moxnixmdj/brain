@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_TRAJECTORY_CRITICAL_FAILURE_EXACT_REUSE_BINDING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__DEDUCTIVE_EXACT_CONTRACT_REUSE_BINDING__ONE_ACCEPTED_ROUTE_DISCHARGES_THREE_FAMILY_RESIDUAL_SLOTS_IF_INDEPENDENT_RECOMPUTATION_PASSES__ZERO_NEW_REALITY__ZERO_CREDIT",
+  "objective": "Prove or falsify the first critical-path reuse candidate in FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_20261005_V1 without new reality spend.",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "shared_residual_cut": {
+      "path": "canonical/governance/FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_20261005_V1.json"
+    },
+    "recovery_acceptance_receipt": {
+      "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+    },
+    "ownership_promotion": {
+      "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+      "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+    },
+    "p1_universal_transport": {
+      "path": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "95422fdb13ada158930486442c9441c9c5cd9852"
+    },
+    "p1_scope_reduction": {
+      "path": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_SCOPE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f327bfdb5d52bb9551b52f67da14a4cd425533a3"
+    },
+    "p1_whole_scope_restoration": {
+      "path": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "2c6bb594d353e4c6a169821da5f84a91be212ca7"
+    },
+    "operative_artifact": {
+      "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+      "git_blob_sha": "28940387bd6c11671035ad9201e37bba13fd9bc9"
+    }
+  },
+  "exact_reuse_obligations": {
+    "frozen_behavior_id": {
+      "required": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "evidence": [
+        "BEHAVIORAL_CONTRACT_REGISTRY_V1 defines the residual under this exact id.",
+        "P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1 is explicitly bound to the same behavior_id.",
+        "Recovery zero-reality reduction uses source_behavior_id TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001."
+      ],
+      "candidate_verdict": "PASS"
+    },
+    "scope_and_semantics": {
+      "required": "Exact global contract scope, success/failure semantics, and intervention/rescue meaning must be the same object rather than family-local analogues.",
+      "evidence": [
+        "The registry stores one global contract object whose scope is failed agent trajectory to causal repair target.",
+        "The recovery family maps to exactly this one residual contract and no adjacent contract.",
+        "The recovery stronger-proof reducer requires whole P1 scope restoration and exact target-dimension mapping to the contract's causal localization, falsifiable repair, rescue, fail-closed and nonidentifiability checks.",
+        "P1 scope reduction independently verifies the exact frozen selection domain is covered by the exhaustive generator quotient with remaining failure-semantics information residual 0.",
+        "P1 whole-scope restoration independently verifies whole_p1_contract_restored=true and whole_scope_quarantined_contract_count=0."
+      ],
+      "candidate_verdict": "PASS"
+    },
+    "operative_route_identity": {
+      "required": "Identical operative Brain-owned route bytes or formally equivalent route.",
+      "evidence": [
+        "Accepted ownership promotion binds SELF_VERIFICATION_DEBUGGING_AND_RECOVERY to canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py blob 28940387bd6c11671035ad9201e37bba13fd9bc9.",
+        "P1 universal transport independently verifies candidate_v7_blob 28940387bd6c11671035ad9201e37bba13fd9bc9.",
+        "Accepted ownership promotion reports exact_receipt_binding=true, external_target_capability_provider=false and no forbidden provider/escape hits."
+      ],
+      "candidate_verdict": "PASS"
+    },
+    "allowed_authority": {
+      "required": "No extra family-specific hidden authority or opaque target-capability provider may be required.",
+      "evidence": [
+        "The contract allows execution receipts, tool outputs, declared constraints and admissible task evidence.",
+        "The frozen P1 binding prohibits hidden cause labels, gold repair targets, hidden intervention results and post-freeze selection information.",
+        "Accepted ownership promotion reports no external target capability provider."
+      ],
+      "candidate_verdict": "PASS"
+    },
+    "proof_scope": {
+      "required": "The accepted proof must establish the residual behavior itself, not merely a family-label proxy.",
+      "evidence": [
+        "Recovery acceptance candidate states SELF_VERIFICATION_DEBUGGING_AND_RECOVERY has exactly one active residual behavioral contract.",
+        "Its independently verified reducer proves scope_complete=true at objective ceiling/floor using the P1 universal theorem plus whole-scope restoration, not the historical narrow family run.",
+        "P1 whole-scope restoration reports 12/12 whole-scope contracts, zero quarantined contracts and 19/19 provisional behavioral rows."
+      ],
+      "candidate_verdict": "PASS"
+    }
+  },
+  "theorem": {
+    "premise": "Family-to-residual accounting references the same global behavior_id, not family-parameterized copies. The accepted Recovery route is independently bound to the exact behavior_id, exact V7 bytes, whole-scope P1 restoration, objective ceiling/floor causal and rescue semantics, and Brain ownership.",
+    "conclusion": "The existing accepted TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001 proof is eligible for exact contract-level reuse wherever that identical residual contract appears, without new terminal cases or new target-model access.",
+    "affected_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "BUSINESS_WORKFLOW_AUTOMATION"
+    ],
+    "discharged_family_local_slots_if_verified": 3,
+    "discharged_unique_contracts_if_verified": 1,
+    "remaining_unique_contracts_in_five_family_cut_if_verified": 9
+  },
+  "fail_closed_checks": [
+    "Recompute every cited blob on current main.",
+    "Verify current family-to-residual mappings still contain this exact behavior_id for the three affected families.",
+    "Verify no newer quarantine or superseding receipt invalidates any cited acceptance, scope, or ownership proof.",
+    "Verify operative V7 artifact blob still equals 28940387bd6c11671035ad9201e37bba13fd9bc9.",
+    "Do not grant family acceptance or public-bar credit from this contract reuse alone."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "INDEPENDENTLY_RECOMPUTE_EXACT_SOURCE_BLOBS_AND_CURRENT_FAMILY_MAPPINGS__IF_PASS_ACTIVATE_CONTRACT_REUSE_AND_RECOMPUTE_FIVE_FAMILY_SCOPE_CLOSURE"
+}
