@@ -1,0 +1,190 @@
+{
+  "schema": "PROJECT_BRAIN_H100_BINARY_COMPOSITION_TRANSIENT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_BINARY_TASK_OUTCOMES__RESEARCH_BRANCH_ONLY",
+  "objective": "Test zero-persistent-M_fit binary composition by combining transient unary sign-quotient features and indexing terminal binary behaviors without learned macros.",
+  "accounting_target": {
+    "persistent_M_fit_bytes": 0,
+    "persistent_selected_binary_structures": 0,
+    "persistent_binary_index": 0
+  },
+  "unary_basis": {
+    "source": "H100_SIGN_QUOTIENT_DEPTH8_V1",
+    "max_unary_depth_used": 4,
+    "operator_order": [
+      "neg",
+      "abs",
+      "square",
+      "sqrt_abs",
+      "log1p_abs",
+      "sat"
+    ],
+    "target_values_used": false
+  },
+  "binary_operators": [
+    "add",
+    "sub",
+    "mul",
+    "stable_div"
+  ],
+  "sign_orientation_completeness": {
+    "add": "add(s1*a,s2*b)=s1*(add(a,b)_if_r=+1_else_sub(a,b)) where r=s1*s2",
+    "sub": "sub(s1*a,s2*b)=s1*(sub(a,b)_if_r=+1_else_add(a,b))",
+    "mul": "mul(s1*a,s2*b)=s1*s2*mul(a,b)",
+    "stable_div": "stable_div(s1*a,s2*b)=s1*stable_div(a,b) because denominator uses abs",
+    "terminal_global_sign": "ABSORBED_BY_FREE_FEATURE_COEFFICIENT"
+  },
+  "enumeration_contract": [
+    "USE_CANONICAL_SIGN_REPRESENTATIVE_FOR_EACH_TRANSIENT_UNARY_CLASS",
+    "GENERATE_ADD_SUB_MUL_ON_UNORDERED_CHILD_PAIRS",
+    "GENERATE_STABLE_DIV_ON_ORDERED_CHILD_PAIRS",
+    "BUILD_TERMINAL_RESIDUAL_DIRECTION_INDEX_USING_TRAIN_X_ONLY",
+    "USE_NO_TARGET_Y_DURING_UNARY_OR_BINARY_INDEX_CONSTRUCTION",
+    "HASH_LOOKUP_IS_PROPOSAL_ONLY__TRAIN_AND_HOLDOUT_VERIFICATION_REQUIRED",
+    "DO_NOT_PERSIST_UNARY_BASIS_BINARY_INDEX_OR_SELECTED_STRUCTURE"
+  ],
+  "fresh_tasks": [
+    {
+      "id": "BIN_A",
+      "op": "add",
+      "left": [
+        "log1p_abs",
+        "sat",
+        "sqrt_abs"
+      ],
+      "right": [
+        "square",
+        "sat",
+        "log1p_abs"
+      ],
+      "seed": [
+        0.23,
+        -0.13,
+        0.87
+      ],
+      "transfer": [
+        -0.39,
+        0.24,
+        -1.02
+      ]
+    },
+    {
+      "id": "BIN_B",
+      "op": "sub",
+      "left": [
+        "sqrt_abs",
+        "log1p_abs",
+        "sat"
+      ],
+      "right": [
+        "sat",
+        "square",
+        "log1p_abs"
+      ],
+      "seed": [
+        -0.28,
+        0.16,
+        1.06
+      ],
+      "transfer": [
+        0.57,
+        -0.23,
+        0.78
+      ]
+    },
+    {
+      "id": "BIN_C",
+      "op": "mul",
+      "left": [
+        "square",
+        "log1p_abs",
+        "sqrt_abs"
+      ],
+      "right": [
+        "sat",
+        "sqrt_abs",
+        "log1p_abs"
+      ],
+      "seed": [
+        0.12,
+        0.3,
+        -0.83
+      ],
+      "transfer": [
+        -0.47,
+        -0.16,
+        1.21
+      ]
+    },
+    {
+      "id": "BIN_D",
+      "op": "stable_div",
+      "left": [
+        "log1p_abs",
+        "square",
+        "sat"
+      ],
+      "right": [
+        "sqrt_abs",
+        "sat",
+        "log1p_abs"
+      ],
+      "seed": [
+        0.41,
+        -0.09,
+        0.75
+      ],
+      "transfer": [
+        -0.2,
+        0.22,
+        -1.26
+      ]
+    },
+    {
+      "id": "BIN_E",
+      "op": "stable_div",
+      "left": [
+        "sat",
+        "log1p_abs",
+        "square"
+      ],
+      "right": [
+        "log1p_abs",
+        "sqrt_abs",
+        "sat"
+      ],
+      "seed": [
+        -0.14,
+        0.26,
+        0.99
+      ],
+      "transfer": [
+        0.33,
+        -0.19,
+        -0.68
+      ]
+    }
+  ],
+  "pass_gate": [
+    "ALL_SIGN_ORIENTATION_COMPLETENESS_AUDITS_PASS",
+    "ALL_FIVE_TARGETS_HASH_TO_NONEMPTY_BINARY_BUCKETS",
+    "ALL_FIVE_SEED_HOLDOUT_NRMSE_LE_1E-8",
+    "ALL_FIVE_TRANSFER_HOLDOUT_NRMSE_LE_1E-8",
+    "INDEX_CONSTRUCTION_USES_ZERO_TARGET_VALUES",
+    "PERSISTENT_M_fit_BYTES_ZERO",
+    "NO_BINARY_INDEX_OR_SELECTION_PERSISTED"
+  ],
+  "measurements": [
+    "UNARY_CLASS_COUNT",
+    "RAW_BINARY_PROPOSAL_COUNT",
+    "TERMINAL_BINARY_RESIDUAL_KEY_COUNT",
+    "BINARY_INDEX_BUILD_SECONDS",
+    "HASH_BUCKET_SIZE_PER_TASK",
+    "LOOKUP_PLUS_VERIFICATION_SECONDS"
+  ],
+  "hard_nonclaims": [
+    "THIS_GRAMMAR_IS_BINARY_COMPOSITION_OF_TWO_UNARY_FEATURES_NOT_ARBITRARY_RECURSIVE_BINARY_TREES",
+    "EXACT_HASHING_DOES_NOT_SOLVE_NOISY_TARGETS",
+    "M_cap_AND_M_dev_ARE_SEPARATE_FROM_M_fit"
+  ]
+}
