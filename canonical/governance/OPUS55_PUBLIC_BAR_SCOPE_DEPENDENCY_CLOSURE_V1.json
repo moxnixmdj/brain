@@ -1,0 +1,313 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PUBLIC_BAR_SCOPE_DEPENDENCY_CLOSURE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_PUBLIC_BAR_SCOPE_GAPS_REDUCED_TO_ZERO_REALITY_CLAUSE_COVERAGE_PLUS_EXISTING_FAMILY_DEPENDENCIES__NO_ACCEPTANCE_CREDIT",
+  "objective": "Repair the five public-bar-only family proof-basis gaps without inventing five duplicate empirical programs. A broad family may close by exact clause coverage: benchmark-owner-described public core plus already-declared family proofs plus the existing composition proof for cross-family interaction.",
+  "authority": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "quarantine": {
+      "path": "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "fa4cddb4af4fb29c7e19e004774b11d6b874359a"
+    }
+  },
+  "theorem": {
+    "name": "CLAUSEWISE_DEPENDENCY_CLOSURE",
+    "statement": "Let the declared useful behavior of family F be partitioned into explicit semantic clauses. Each clause must be bound to exactly one admissible authority class: PUBLIC_CORE, EXISTING_FAMILY_PROOF, or INTERACTION_PROOF. PUBLIC_CORE covers only behavior explicitly supported by benchmark-owner/target documentation. EXISTING_FAMILY_PROOF closes only when that family's scoped proof closes. INTERACTION_PROOF closes only when MULTI_CAPABILITY_COMPOSITION closes for the relevant interaction. If every declared clause is covered and every bound authority passes, no additional family-specific empirical scope audit is logically required.",
+    "non_weakening": [
+      "ALL_EXISTING_PUBLIC_FIXED_BARS_REMAIN_NECESSARY_WHERE_CURRENTLY_LOAD_BEARING",
+      "NO_BENCHMARK_NAME_TO_UNMEASURED_SCOPE_INFERENCE",
+      "NO_DEPENDENCY_INHERITANCE_BEFORE_THE_DEPENDENCY_HAS_SCOPED_PROOF",
+      "NO_COMPONENT_PROOFS_TO_INTERACTION_INFERENCE_WITHOUT_MULTI_CAPABILITY_COMPOSITION",
+      "UNASSIGNED_OR_AMBIGUOUS_CLAUSE_FAILS_CLOSED"
+    ]
+  },
+  "current_external_scope_evidence": [
+    {
+      "surface": "Terminal-Bench 4.0",
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "observed_scope": "complex multi-step professional tasks within a command-line interface"
+    },
+    {
+      "surface": "FrontierCode v1.1 Main",
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "observed_scope": "whether an agent's code changes would be merged"
+    },
+    {
+      "surface": "CursorBench 4.0",
+      "source": "https://cursor.com/evals",
+      "observed_scope": "long-horizon edit, refactor, investigation, intent understanding, managing jobs, and design adherence; earlier carried codebase understanding, bugfinding, planning, and code review"
+    },
+    {
+      "surface": "GDPval-AA",
+      "source": "https://openai.com/index/gdpval/",
+      "observed_scope": "hundreds of knowledge-work tasks across 44 occupations with reference files and professional deliverables; published limitation says one-shot evaluation does not capture iterative context building/multiple drafts"
+    },
+    {
+      "surface": "AA-Briefcase v1.1",
+      "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "observed_scope": "91 realistic knowledge-work tasks across four multi-week projects, thousands of source files, professional deliverables; tasks are currently executed independently rather than carrying prior submissions forward"
+    },
+    {
+      "surface": "AutomationBench",
+      "source": "https://zapier.com/benchmarks",
+      "observed_scope": "600+ held-out end-to-end workflows across 47 tools and six business functions with ambiguity and deterministic end-state scoring; app state is simulated for reproducibility"
+    },
+    {
+      "surface": "Humanity's Last Exam",
+      "source": "https://www.nature.com/articles/s41586-025-09962-4",
+      "observed_scope": "expert-level closed-ended academic questions with broad subject coverage"
+    },
+    {
+      "surface": "Terminal-Bench-Science 0.1",
+      "source": "https://www.terminal-bench-science.ai/announcement",
+      "observed_scope": "70 expert-curated real scientific workflow tasks across life, physical, earth, mathematical and engineering sciences; concrete artifacts and reproducible task tests"
+    },
+    {
+      "surface": "Terminal-Bench-Science scope boundary",
+      "source": "https://www.terminal-bench-science.ai/contribute",
+      "observed_scope": "open-ended work such as hypothesis generation or literature review is explicitly out of scope"
+    }
+  ],
+  "family_reductions": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "declared_behavior": "Long-running work in unfamiliar/large codebases: feature implementation, debugging, refactoring, review, terminal operation, ambiguous multi-file changes, root-cause analysis and self-checking.",
+      "public_core": [
+        "CODING_TB4_GE_66_4",
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8"
+      ],
+      "residual_dependency_cover": [
+        {
+          "clauses": [
+            "long-running state continuity beyond the measured benchmark horizon"
+          ],
+          "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+        },
+        {
+          "clauses": [
+            "unfamiliar toolchain/tool discovery"
+          ],
+          "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+        },
+        {
+          "clauses": [
+            "debugging",
+            "root-cause analysis",
+            "self-checking"
+          ],
+          "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+        },
+        {
+          "clauses": [
+            "scope/intent ambiguity outside the exact CursorBench population"
+          ],
+          "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+        },
+        {
+          "clauses": [
+            "general computer/terminal operation outside the exact benchmark environments"
+          ],
+          "family": "COMPUTER_AND_BROWSER_USE"
+        },
+        {
+          "clauses": [
+            "interaction among coding, tools, continuity, recovery and execution"
+          ],
+          "family": "MULTI_CAPABILITY_COMPOSITION"
+        }
+      ],
+      "remaining_zero_reality_obligation": "EXACT_CLAUSE_TO_PUBLIC_CORE_OR_DEPENDENCY_ASSIGNMENT_CERTIFICATE__NO_NEW_TASK_EXECUTION_REQUIRED_FOR_THE_SCOPE_BASIS_REPAIR_ITSELF"
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "declared_behavior": "Produce high-quality professional work products and complete multi-hour/multi-stage office tasks.",
+      "public_core": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822"
+      ],
+      "residual_dependency_cover": [
+        {
+          "clauses": [
+            "cross-task continuity and iterative context building not demonstrated by one-shot/independent task execution"
+          ],
+          "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+        },
+        {
+          "clauses": [
+            "professional deliverable file correctness and format quality outside the exact benchmark scope"
+          ],
+          "family": "ARTIFACT_CREATION"
+        },
+        {
+          "clauses": [
+            "multi-stage tool/action execution"
+          ],
+          "family": "COMPLEX_MULTI_TOOL_AGENCY"
+        },
+        {
+          "clauses": [
+            "grounded synthesis and communication quality outside the exact benchmark population"
+          ],
+          "family": "COMMUNICATION_AND_SYNTHESIS"
+        },
+        {
+          "clauses": [
+            "interaction among tools, files, continuity, synthesis and execution"
+          ],
+          "family": "MULTI_CAPABILITY_COMPOSITION"
+        }
+      ],
+      "remaining_zero_reality_obligation": "EXACT_CLAUSE_COVERAGE_CERTIFICATE_BOUND_TO_GDPVAL_AND_AA_BRIEFCASE_OWNER_DESCRIPTIONS"
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "declared_behavior": "Execute real multi-application business workflows accurately end-to-end.",
+      "public_core": [
+        "AUTOMATIONBENCH_GE_40"
+      ],
+      "residual_dependency_cover": [
+        {
+          "clauses": [
+            "real GUI/browser/application interaction if claimed beyond AutomationBench's simulated API environment"
+          ],
+          "family": "COMPUTER_AND_BROWSER_USE"
+        },
+        {
+          "clauses": [
+            "workflow recovery after tool/action failure outside the benchmark's measured population"
+          ],
+          "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+        },
+        {
+          "clauses": [
+            "interaction among workflow planning, tools, state and recovery"
+          ],
+          "family": "MULTI_CAPABILITY_COMPOSITION"
+        }
+      ],
+      "strongest_reduction": "AUTOMATIONBENCH_ALREADY_MATCHES_THE_DECLARED_TASK_KIND_VERY_CLOSELY__THE_ONLY_MATERIAL_SCOPE QUESTION IS ENVIRONMENT_GENERALITY_AND_ANY_UNMEASURED_RECOVERY/INTERACTION LEAVES",
+      "remaining_zero_reality_obligation": "DECIDE_EXACT_ENVIRONMENT_SEMANTICS__THEN_BIND_ONLY_TRUE_RESIDUALS_TO_EXISTING_FAMILY_PROOFS"
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "declared_behavior": "Solve difficult expert-level questions across domains with search/code/tools.",
+      "public_core": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "residual_dependency_cover": [
+        {
+          "clauses": [
+            "tool discovery/selection beyond the exact HLE tool setup"
+          ],
+          "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+        },
+        {
+          "clauses": [
+            "multi-step search/code/tool execution and replanning"
+          ],
+          "family": "COMPLEX_MULTI_TOOL_AGENCY"
+        },
+        {
+          "clauses": [
+            "grounded evidence synthesis when the task is not closed-ended Q&A"
+          ],
+          "family": "COMMUNICATION_AND_SYNTHESIS"
+        },
+        {
+          "clauses": [
+            "interaction among reasoning, tools, code and synthesis"
+          ],
+          "family": "MULTI_CAPABILITY_COMPOSITION"
+        }
+      ],
+      "remaining_zero_reality_obligation": "EXACTLY_SEPARATE_HLE_CLOSED_ENDED_ACADEMIC_SCOPE_FROM_THE_DECLARED_OPEN_TOOL_AUGMENTED_RESIDUALS"
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "declared_behavior": "Use scientific software, tools, analysis and iterative reasoning to solve long-horizon research/technical tasks.",
+      "public_core": [
+        "TB_SCIENCE_GE_58_7"
+      ],
+      "residual_dependency_cover": [
+        {
+          "clauses": [
+            "open-ended hypothesis generation and literature review explicitly excluded from TB-Science"
+          ],
+          "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+        },
+        {
+          "clauses": [
+            "scientific evidence synthesis/communication outside concrete task artifacts"
+          ],
+          "family": "COMMUNICATION_AND_SYNTHESIS"
+        },
+        {
+          "clauses": [
+            "long-horizon continuity outside the exact 70-task execution horizon"
+          ],
+          "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+        },
+        {
+          "clauses": [
+            "unfamiliar scientific software/tool acquisition"
+          ],
+          "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+        },
+        {
+          "clauses": [
+            "iterative falsification, diagnosis and recovery"
+          ],
+          "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+        },
+        {
+          "clauses": [
+            "interaction among scientific reasoning, software, continuity and verification"
+          ],
+          "family": "MULTI_CAPABILITY_COMPOSITION"
+        }
+      ],
+      "remaining_zero_reality_obligation": "BIND_TB_SCIENCE_MEASURED_COMPUTING_WORKFLOW_CORE_AND_ROUTE_EXPLICITLY_EXCLUDED_OPEN_ENDED_RESEARCH_LEAVES_TO_EXISTING_FAMILIES"
+    }
+  ],
+  "leverage": {
+    "before": "FIVE_SEPARATE_SCOPE_EQUIVALENCE_OR_UNCOVERED_SCOPE_PROGRAMS",
+    "after": "FIVE_DETERMINISTIC_CLAUSE_COVERAGE_CERTIFICATES_REUSING_ALREADY_REQUIRED_FAMILY_PROOFS",
+    "new_empirical_predicates_required_by_this_repair": 0,
+    "new_terminal_cases_required_by_this_repair": 0,
+    "duplicated_capability_tests_added": 0,
+    "critical_path_effect": "SCOPE_BASIS_REPAIR_CAN_RUN_IN_PARALLEL_AS_ZERO_REALITY_GOVERNANCE_WORK_AND_NEED_NOT_ADD_FRESH_EVALUATION POPULATIONS"
+  },
+  "hard_nonclaims": [
+    "NO_FAMILY_IS_PROMOTED_BY_THIS_ARTIFACT",
+    "NO_EXISTING_OPEN_PREDICATE_IS_MARKED_PASS",
+    "NO_CLAUSE_IS_CLOSED_UNTIL_ITS_BOUND_AUTHORITY_IS_ACTUALLY_PROVEN",
+    "NO_CLAIM_THAT_ANY_PUBLIC_BAR_ALONE_PROVES_AN_ENTIRE_BROAD_FAMILY",
+    "NO_TERMINAL_GOAL_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
