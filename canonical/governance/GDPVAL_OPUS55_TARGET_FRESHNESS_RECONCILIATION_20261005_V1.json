@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__GDPVAL_AA_V2_1_OPUS55_TARGET_EPOCH_REPAIR__CURRENT_OWNER_SCORE_1867__HISTORICAL_1846_ONLY_UNDER_EXACT_HISTORICAL_SETUP_IDENTITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Prevent PROWORK_GDPVAL_GE_1846 from granting a false positive when Brain is evaluated on a newer GDPval-AA v2.1 scoring epoch whose current owner-published Claude Opus 5.5 Max reference is 1867 Elo.",
+  "canonical_inputs": {
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+      "stored_target": "GDPval-AA v2.1 >= 1846 Elo"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+      "predicate_id": "PROWORK_GDPVAL_GE_1846",
+      "stored_target": "1846 Elo"
+    },
+    "score_readiness": {
+      "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+      "git_blob_sha": "4e59e30461c9ff1bee1a9474627d5fb4074844b2",
+      "current_state": "NO_COMPARABLE_FINAL_SCORE_RECEIPT"
+    }
+  },
+  "public_owner_observation": {
+    "source": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "benchmark": "GDPval-AA v2.1",
+    "observed_model": "Claude Opus 5.5 (Max, Default Fallback)",
+    "observed_elo": 1867,
+    "observed_methodology": "Crowd-BT fitted Elo anchored to DeepSeek V4.1 Flash (max) at 1600",
+    "observation_date": "2026-10-05",
+    "source_role": "CURRENT_BENCHMARK_OWNER_PUBLISHED_REFERENCE"
+  },
+  "target_epoch_rule": {
+    "current_owner_methodology_route": {
+      "condition": "BRAIN_RESULT_IS_PRODUCED_ON_THE_CURRENT_GDPVAL_AA_V2_1_OWNER_SCORER_HARNESS_AND_RATING_EPOCH",
+      "minimum_opus55_target_elo": 1867,
+      "reason": "EQUAL_OR_BETTER_MUST_COMPARE_WITH_THE_OPUS55_REFERENCE_FROM_THE_SAME_SCORE_EPOCH"
+    },
+    "historical_1846_route": {
+      "condition": "INDEPENDENT_EVIDENCE_BINDS_BRAIN_RESULT_TO_THE_EXACT_HISTORICAL_GDPVAL_AA_V2_1_DATASET_HARNESS_SCORER_RATING_EPOCH_AND_OPUS55_CONFIGURATION_THAT_PRODUCED_1846",
+      "minimum_opus55_target_elo": 1846,
+      "reason": "HISTORICAL_THRESHOLD_REMAINS_VALID_ONLY_INSIDE_ITS_EXACT_COMPARISON_EPOCH"
+    },
+    "otherwise": "FAIL_CLOSED__REQUIRE_MATCHED_SAME_HARNESS_OPUS55_REFERENCE_OR_SCOPE_SAFE_STRONGER_PROOF"
+  },
+  "false_positive_counterexample": {
+    "brain_score_elo": 1850,
+    "legacy_predicate_result": "PASS_IF_1846_IS_APPLIED",
+    "current_owner_target_result": "FAIL_IF_1867_CURRENT_EPOCH_APPLIES",
+    "conclusion": "UNCONDITIONED_1846_TARGET_CAN_CHANGE_TERMINAL_TRUTH_AND_IS_NOT_SAFE_AS_A_CROSS_EPOCH_CONSTANT"
+  },
+  "scheduler_effect_if_verified": [
+    "DO_NOT_TREAT_PROWORK_GDPVAL_GE_1846_AS_AN_UNCONDITIONAL_NUMERIC_GATE",
+    "FOR_CURRENT_GDPVAL_AA_V2_1_OWNER_EPOCH_USE_PROWORK_GDPVAL_GE_1867_EQUIVALENT_TARGET_SEMANTICS",
+    "ALLOW_1846_ONLY_AFTER_EXACT_HISTORICAL_TARGET_EPOCH_IDENTITY_IS_BOUND",
+    "FREEZE_TARGET_EPOCH_BEFORE_ANY_BRAIN_GDPVAL_RESULT_IS_EXPOSED",
+    "KEEP_PROFESSIONAL_KNOWLEDGE_WORK_OPEN_AND_RECOMPUTE_ANY_ROUTE_OR_EARLY_STOP_CERTIFICATE_AGAINST_THE_SELECTED_TARGET"
+  ],
+  "generalizable_breakthrough": {
+    "rule": "PUBLIC_REFERENCE_TARGETS_ARE_FUNCTIONS_OF_BENCHMARK_VERSION_PLUS_DATASET_PLUS_HARNESS_PLUS_SCORER_PLUS_RATING_OR_AGGREGATION_EPOCH_PLUS_TARGET_MODEL_CONFIGURATION__NOT_TIMELESS_SCALARS",
+    "next_reuse": "APPLY_THE_SAME_TARGET_EPOCH_FIREWALL_TO_OTHER_MUTABLE_PUBLIC_BARS_ONLY_WHEN_A_CONCRETE_CROSS_EPOCH_TRUTH_DIFFERENCE_OR_SCORER_DRIFT_IS_OBSERVED"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_1867_APPLIES_TO_A_HISTORICAL_NONIDENTICAL_GDPVAL_SETUP",
+    "NO_CLAIM_1846_WAS_INCORRECT_IN_ITS_ORIGINAL_EPOCH",
+    "NO_PROFESSIONAL_KNOWLEDGE_WORK_ACCEPTANCE",
+    "NO_ATOMIC_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
