@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TERMINAL_META_ENVELOPE_JOINT_CERTIFICATE_V1",
+  "date": "2026-10-05",
+  "status": "PARTIAL_ZERO_REALITY_REDUCTION__NINE_META_SLOTS_TO_EIGHT_SUBSTANTIVE_RESIDUALS__ZERO_CREDIT",
+  "objective": "Resolve the new Opus 5.5 terminal-envelope scheduling obligations with one lossless joint certificate, preserving each semantic slot while coalescing only obligations that are demonstrably the same behavioral leaf.",
+  "source_bindings": {
+    "root1_envelope_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "first_party_behavioral_decomposition": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1.json",
+      "git_blob_sha": "c0069cbcbc26aaf663f48c0068f64969564afe10"
+    },
+    "creative_diagram_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    },
+    "multilingual_long_context_boundary": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V1.json",
+      "git_blob_sha": "31a148ac13966ff6199b63c63ecd0a42fa506da9"
+    }
+  },
+  "semantic_slots": [
+    {
+      "id": "CYBERSECURITY",
+      "classification": "EXPLICIT_BEHAVIORAL_LEAF_REQUIRED__NO_POSITIVE_ROOT1_GAP",
+      "leaf": "AUTHORIZED_SECURITY_STATE_TO_VERIFIED_FINDING_AND_REMEDIATION_001",
+      "substantive_state": "OPEN__CONTRACT_ROUTE_AND_EQUAL_OR_BETTER_PROOF_REQUIRED"
+    },
+    {
+      "id": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "classification": "SHARED_CROSS_DOMAIN_BEHAVIORAL_LEAF_REQUIRED__NO_POSITIVE_ROOT1_GAP",
+      "leaf": "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001",
+      "substantive_state": "OPEN__CONTRACT_ROUTE_AND_EQUAL_OR_BETTER_PROOF_REQUIRED"
+    },
+    {
+      "id": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "classification": "SHARED_CROSS_DOMAIN_BEHAVIORAL_LEAF_REQUIRED__NO_POSITIVE_ROOT1_GAP",
+      "leaf": "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001",
+      "substantive_state": "OPEN__SAME_BEHAVIORAL_LEAF_AS_BIOLOGY_WITH_DOMAIN_SAFE_SCOPE_CONDITIONS"
+    },
+    {
+      "id": "HEALTHCARE",
+      "classification": "MAPPING_UNRESOLVED__UNKNOWN_NOT_MISSING",
+      "substantive_state": "OPEN__LOSSLESS_EXISTING_FAMILY_MAPPING_OR_EXPLICIT_BEHAVIORAL_LEAF_REQUIRED"
+    },
+    {
+      "id": "MATHEMATICAL_REASONING_ARXIVMATH",
+      "classification": "MAPPING_UNRESOLVED__UNKNOWN_NOT_MISSING",
+      "substantive_state": "OPEN__LOSSLESS_EXISTING_FAMILY_MAPPING_OR_EXPLICIT_BEHAVIORAL_LEAF_REQUIRED"
+    },
+    {
+      "id": "MULTILINGUAL_PERFORMANCE",
+      "classification": "CROSS_CUTTING_CONDITION_AXIS__NOT_NEW_FAMILY",
+      "substantive_state": "OPEN__APPLICABLE_SCOPE_PARITY_OR_STRONGER_UNIVERSAL_PROOF_REQUIRED"
+    },
+    {
+      "id": "LONG_CONTEXT",
+      "classification": "CROSS_CUTTING_CONTEXT_HORIZON_AXIS__NOT_NEW_FAMILY",
+      "substantive_state": "OPEN__APPLICABLE_SCOPE_PARITY_OR_STRONGER_UNIVERSAL_PROOF_REQUIRED"
+    },
+    {
+      "id": "CREATIVE_TEXT_GENERATION",
+      "classification": "EXPLICIT_TERMINAL_META_ACCEPTANCE_OBLIGATION_REQUIRED",
+      "leaf": "CREATIVE_CONSTRAINT_TO_NOVEL_CONTENT_001",
+      "meta_acceptance_id": "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+      "substantive_state": "OPEN__QUALITY_AND_SCOPE_PROOF_REQUIRED"
+    },
+    {
+      "id": "DIAGRAM_OUTPUT",
+      "classification": "EXPLICIT_TERMINAL_META_ACCEPTANCE_OBLIGATION_REQUIRED",
+      "leaf": "SEMANTIC_RELATION_GRAPH_TO_DIAGRAM_ARTIFACT_001",
+      "meta_acceptance_id": "DIAGRAM_OUTPUT_SCOPE_QUALITY_NONINFERIOR",
+      "substantive_state": "OPEN__SEMANTIC_GRAPH_SCOPE_AND_QUALITY_PROOF_REQUIRED"
+    }
+  ],
+  "lossless_compression": {
+    "input_semantic_slots": 9,
+    "substantive_residuals": 8,
+    "only_coalescence": "BIOLOGY_RESEARCH_AND_DEVELOPMENT_PLUS_AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT_TO_ONE_SHARED_HYPOTHESIS_INTERVENTION_EVIDENCE_UPDATE_BEHAVIORAL_LEAF",
+    "residuals": [
+      "AUTHORIZED_SECURITY_STATE_TO_VERIFIED_FINDING_AND_REMEDIATION_001",
+      "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001",
+      "HEALTHCARE_LOSSLESS_MAPPING_OR_EXPLICIT_LEAF",
+      "MATHEMATICAL_REASONING_ARXIVMATH_LOSSLESS_MAPPING_OR_EXPLICIT_LEAF",
+      "MULTILINGUAL_APPLICABLE_SCOPE_PARITY",
+      "LONG_CONTEXT_APPLICABLE_SCOPE_PARITY",
+      "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+      "DIAGRAM_OUTPUT_SCOPE_QUALITY_NONINFERIOR"
+    ]
+  },
+  "scheduler_breakthrough": {
+    "prior_v5_scheduled_checks": 8,
+    "joint_zero_reality_compile_actions": 1,
+    "rule": "ONE_SHARED_SOURCE_PASS_AND_ONE_JOINT_CERTIFICATE_MAY_DISCHARGE_CLASSIFICATION_AND_PROOF_BASIS_ACCOUNTING_FOR_ALL_NINE_SLOTS__EACH_SUBSTANTIVE_RESIDUAL_REMAINS_EXPLICIT_AND_FAILS_CLOSED",
+    "fresh_reality_required_for_this_reduction": false
+  },
+  "hard_rules": [
+    "NO_CLAIM_THAT_CLASSIFICATION_EQUALS_CAPABILITY_PARITY",
+    "NO_ROOT1_REOPEN_FROM_UNKNOWN_OR_UNCONTRACTED_STATUS",
+    "NO_NEW_ACCOUNTING_FAMILY_UNLESS_LOSSLESS_MAPPING_TO_EXISTING_FAMILIES_IS_CONSTRUCTIVELY_FALSIFIED",
+    "NO_CREATIVE_OR_DIAGRAM_TERMINAL_FINALITY_FROM_THE_OLD_38_ATOMS_ALONE",
+    "NO_MULTILINGUAL_OR_LONG_CONTEXT_FINALITY_FROM_FAMILY_LABEL_COVERAGE_ALONE",
+    "NO_UNSAFE_OR_UNAUTHORIZED_SECURITY_BIOLOGY_OR_HEALTHCARE_EXECUTION",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_THIS_CERTIFICATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "terminal": false
+}
