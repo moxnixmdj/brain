@@ -31,7 +31,7 @@ def _make_torch_like_checkpoint(path: Path, *, conflict_alias: bool = False):
     LongStorage.__module__ = "torch"
 
     def rebuild(storage, offset, size, stride, requires_grad, hooks):
-        return ("tensor", storage, offset, size, stride)
+        return ("tensor", storage, offset, size, stride, requires_grad, hooks)
     rebuild.__module__ = "torch._utils"
     rebuild.__name__ = "_rebuild_tensor_v2"
     rebuild.__qualname__ = "_rebuild_tensor_v2"
