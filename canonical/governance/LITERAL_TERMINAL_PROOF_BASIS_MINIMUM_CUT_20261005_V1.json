@@ -1,0 +1,149 @@
+{
+  "schema": "PROJECT_BRAIN_LITERAL_TERMINAL_PROOF_BASIS_MINIMUM_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__COUNT_FREE_META_PROOF_BASIS_CUT__CURRENT_LIVE_14_OF_38_UNCHANGED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Represent the smallest currently verified classes of proof-basis work that must close in addition to the current live 38-predicate ledger before literal terminal finality can be claimed, without prematurely freezing a new atomic predicate count.",
+  "current_live_truth": {
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+      "atomic_total": 38
+    },
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "accepted_families": 5,
+    "open_families": 14,
+    "terminal": false,
+    "root1_positive_gap_count": 0
+  },
+  "active_meta_authority": {
+    "root1_envelope_v5_activation": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5_ACTIVATION_V1.json",
+      "git_blob_sha": "72281405d99d0004cf2fa1ed9080d7cdafc2f70c"
+    },
+    "five_family_scope_guard": {
+      "path": "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_ACTIVATION_V1.json",
+      "git_blob_sha": "5a056885f929b06d6bacef1745c7bcff8e89e728"
+    }
+  },
+  "verified_basis_gap_authorities": {
+    "creative_diagram_gap": {
+      "subject_path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "subject_git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354",
+      "verification_path": "canonical/verification/CREATIVE_DIAGRAM_PROOF_BASIS_GAP_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "verification_git_blob_sha": "0c52d00a458efa72da541ac221c09fd5a249479e"
+    },
+    "multilingual_long_context_boundary": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V1.json",
+      "git_blob_sha": "31a148ac13966ff6199b63c63ecd0a42fa506da9",
+      "role": "BOUND_IN_ACTIVE_V5_SCHEDULING_FRONTIER__CONDITION_PARITY_STILL_OPEN"
+    }
+  },
+  "minimum_cut_classes": [
+    {
+      "id": "M1_CURRENT_38_ATOMIC_ACCEPTANCE",
+      "type": "EXISTING_LIVE_ACCEPTANCE_BASIS",
+      "obligations": 24,
+      "closure": "PROVE_OR_OTHERWISE_SOUNDLY_DISCHARGE_EACH_CURRENTLY_UNRESOLVED_V2_ATOMIC_PREDICATE_UNDER_CURRENT_FAIL_CLOSED_RULES",
+      "counting_rule": "KEEP_LIVE_38_ACCOUNTING_UNCHANGED_UNTIL_SEPARATE_CONTENT_ADDRESSED_BASIS_MIGRATION"
+    },
+    {
+      "id": "M2_FIVE_PUBLIC_BAR_WHOLE_FAMILY_SCOPE_REPAIRS",
+      "type": "SCOPE_COMPLETENESS",
+      "families": [
+        "ADVANCED_AGENTIC_CODING",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "closure_per_family": "EITHER_PROVE_LOSSLESS_EQUIVALENCE_FROM_CURRENT_PUBLIC_BENCHMARK_SCOPE_UNION_TO_FULL_DECLARED_FAMILY_SCOPE_OR_CLOSE_EXPLICIT_UNCOVERED_SCOPE_OBLIGATIONS",
+      "fresh_reality_default": false
+    },
+    {
+      "id": "M3_CREATIVE_TEXT_ACCEPTANCE_BASIS_REPAIR",
+      "type": "MISSING_LOAD_BEARING_ACCEPTANCE_OBLIGATION",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "provisional_obligation": "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+      "closure": "FREEZE_AND_PROVE_EQUAL_OR_BETTER_OPEN_ENDED_CREATIVE_TEXT_QUALITY_OVER_DECLARED_SCOPE_OR_SCOPE_COMPLETE_STRONGER_PROOF",
+      "new_family_required": false
+    },
+    {
+      "id": "M4_DIAGRAM_OUTPUT_ACCEPTANCE_BASIS_REPAIR",
+      "type": "MISSING_LOAD_BEARING_ACCEPTANCE_OBLIGATION",
+      "family": "ARTIFACT_CREATION",
+      "provisional_obligation": "DIAGRAM_OUTPUT_SCOPE_QUALITY_NONINFERIOR",
+      "closure": "FREEZE_AND_PROVE_EQUAL_OR_BETTER_DIAGRAM_SEMANTIC_STRUCTURE_RENDERING_AND_PRESENTATION_QUALITY_OVER_DECLARED_SCOPE_OR_SCOPE_COMPLETE_STRONGER_PROOF",
+      "new_family_required": false
+    },
+    {
+      "id": "M5_MULTILINGUAL_CROSS_CUTTING_COVERAGE",
+      "type": "CROSS_CUTTING_CONDITION",
+      "closure": "PROVE_EQUAL_OR_BETTER_BEHAVIOR_ON_MATERIAL_SUPPORTED_LANGUAGE_CONDITIONS_ACROSS_THE_AFFECTED_FAMILY_UNION_OR_SCOPE_SAFE_STRONGER_CERTIFICATE",
+      "automatic_transfer_from_english_forbidden": true
+    },
+    {
+      "id": "M6_LONG_CONTEXT_CROSS_CUTTING_COVERAGE",
+      "type": "CROSS_CUTTING_CONDITION",
+      "closure": "PROVE_EQUAL_OR_BETTER_TERMINAL_OUTCOMES_ON_MATERIAL_LONG_CONTEXT_CONDITIONS_ACROSS_THE_AFFECTED_FAMILY_UNION_OR_SCOPE_SAFE_STRONGER_CERTIFICATE",
+      "identical_internal_context_window_required": false,
+      "automatic_transfer_from_short_context_forbidden": true
+    },
+    {
+      "id": "M7_FIRST_PARTY_SURFACE_UNION_MAPPING_FINALIZATION",
+      "type": "META_ENVELOPE_MAPPING",
+      "current_candidate": {
+        "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+        "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142",
+        "independent_verification_pending": true
+      },
+      "surfaces": [
+        "CYBERSECURITY",
+        "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+        "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+        "HEALTHCARE",
+        "MATHEMATICAL_REASONING_ARXIVMATH"
+      ],
+      "closure": "INDEPENDENTLY_VERIFY_LOSSLESS_EXISTING_FAMILY_UNION_MAPPING_OR_PRODUCE_A_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE",
+      "new_family_from_domain_label_forbidden": true
+    }
+  ],
+  "dependency_and_reuse": {
+    "M7_before_new_family_decision": true,
+    "M2_can_share_scope_partitions_with_M5_M6_M7": true,
+    "M3_M4_can_be_integrated_into_future_registry_migration_after_scope_protocols_are_frozen": true,
+    "full_registry_count_should_not_be_frozen_until_M2_M3_M4_M5_M6_M7_schema_roles_are_resolved": true,
+    "reason": "SCOPE_CONDITIONS_MAY_BE_BOUND_AS_PROTOCOL_SCOPE_CLAUSES_OR_AS_SEPARATE_ATOMIC_PREDICATES__COUNTING_BEFORE_THAT_DECISION_CREATES_VERSION_CHURN_WITH_ZERO_INFORMATION_GAIN"
+  },
+  "scheduling_priority": [
+    "VERIFY_OR_FALSIFY_M7_EXISTING_FAMILY_UNION_MAPPING",
+    "COMPILE_SHARED_SCOPE_PARTITION_SCHEMA_FOR_M2_M5_M6",
+    "FREEZE_M3_M4_EXACT_ACCEPTANCE_PROTOCOLS_WITHOUT_CASE_EXPOSURE",
+    "ONLY_THEN_COMPILE_CONTENT_ADDRESSED_SUCCESSOR_ACCEPTANCE_BASIS_AND_MIGRATION"
+  ],
+  "hard_rules": [
+    "NO_LITERAL_TERMINAL_FINALITY_FROM_38_OF_38_ALONE",
+    "NO_PREMATURE_40_OR_OTHER_NEW_TOTAL_AS_CURRENT_AUTHORITY",
+    "NO_BENCHMARK_PROXY_TO_WHOLE_FAMILY_SCOPE_WITHOUT_LOSSLESS_PROOF",
+    "NO_LANGUAGE_OR_CONTEXT_CONDITION_INHERITANCE_WITHOUT_SCOPE_PROOF",
+    "NO_DOMAIN_LABEL_TO_NEW_FAMILY_INFERENCE",
+    "NO_ROOT1_REOPEN_FROM_PROOF_BASIS_UNCERTAINTY",
+    "NO_TERMINAL_CASE_EXPOSURE_FROM_THIS_CUT",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_CUT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
