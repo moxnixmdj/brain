@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V16_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__CONNECTOR_RECOMPUTATION_PASS__SIX_INFORMATION_POSITIVE_GROUPS__HLE_GRADER_RELATION_EVENT_BOUND__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V16.json",
+    "git_blob_sha": "8e4b396f75ace1c546b79700db9715c0d0e814e8"
+  },
+  "verification": {
+    "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V16_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "39df3c73ff174df947309cef0a703cc571bebccc"
+  },
+  "supersedes": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15_ACTIVATION_V1.json"
+  },
+  "effects": [
+    "ACTIVATE_EXACT_SIX_INFORMATION_POSITIVE_ZERO_REALITY_GROUPS_FOR_CURRENT_14_24_EPOCH",
+    "MOVE_HLE_GRADER_RELATION_TO_EVENT_BOUND_SLEEP_UNTIL_NEW_OWNER_REPLY_PROTOCOL_BINDING_OR_SCOPE_COMPLETE_DIRECTIONAL_RELATION",
+    "REFINE_SYNTHESIS_TO_SCOPE_COMPLETE_FIVE_COMPONENT_CEILING_OR_TARGET_PERFORMANCE_CAPACITY",
+    "REFINE_VISION_NONCHART_SCOPE_TO_EXACT_FOUR_LEAF_OR_ONE_SCOPE_COMPLETE_SUPERSET_PROOF",
+    "PRESERVE_ALL_ACCEPTANCE_THRESHOLDS_AND_NO_FRESH_REALITY"
+  ],
+  "current_action_groups": [
+    "A_SHARED_BUILDKITE_TB4_CHARTOGRAPHY_PREFLIGHT",
+    "B_SELF_SERVICE_AND_ACCOUNT_FACT_SWEEP",
+    "D_VALS_FINANCE_AGENT_PREFLIGHT",
+    "E_OWNER_OR_PLATFORM_RESULT_BATCH",
+    "F_SYNTHESIS_COMPARATOR_CAPACITY_OR_STRONGER_PROOF",
+    "G_ROOT3_SCOPE_CERTIFICATE_RACE"
+  ],
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_TERMINAL_CASE_EXPOSURE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_DORMANT_NODE_AS_CURRENT_ACTION",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
