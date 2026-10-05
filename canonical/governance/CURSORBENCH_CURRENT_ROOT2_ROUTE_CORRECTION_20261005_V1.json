@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_CURRENT_ROOT2_ROUTE_CORRECTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECONFIRMED_OWNER_BOUNDARY__DELETE_CURRENT_OWNER_RESULT_WAIT__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "authority": {
+    "owner_boundary": {
+      "path": "canonical/governance/CURSORBENCH_OWNER_ACCESS_BOUNDARY_V1.json",
+      "git_blob_sha": "d58c41a8e93fc95df6667e955e291b3f36c8942f"
+    },
+    "independent_prior_boundary_verification": {
+      "path": "canonical/verification/FRONTIERCODE_CURSORBENCH_OWNER_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "26c1f813503c156e818499b2e6fe4fdb00d40c05"
+    },
+    "current_root2_subject": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V3.json",
+      "git_blob_sha": "82612b803c1d47eeb8888cf99a00c14a1bea54e1"
+    },
+    "current_cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V13.json",
+      "git_blob_sha": "13f22a51407199628aab2138e1e3ed0f32a99b41"
+    }
+  },
+  "connector_reconfirmation": {
+    "gmail_thread_id": "1a103dde59e2a653",
+    "reply_sender_domain": "cursor.com",
+    "ticket": "T-G59465",
+    "owner_facts_reobserved": [
+      "CURSORBENCH_4_0_IS_INTERNAL",
+      "NO_OWNER_RUN_EVALUATION_OF_EXTERNAL_SYSTEMS",
+      "NO_PUBLIC_THIRD_PARTY_SUBMISSION_INTERFACE",
+      "REVERSE_DIRECTION_CURSOR_AGENT_EVAL_IS_SEPARATE_AND_API_KEY_BILLED"
+    ]
+  },
+  "correction": {
+    "stale_route_in_v3": "OWNER_SCORE_RECEIPT_OR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF__NO_GENERIC_PUBLIC_DATASET_HUNT",
+    "corrected_current_route": "SEPARATELY_ADMISSIBLE_STRONGER_SCOPE_COMPLETE_PROOF_OR_FUTURE_MATERIAL_OWNER_POLICY_OR_INTERFACE_CHANGE",
+    "delete_from_active_zero_reality_work": "CURSOR_OWNER_OR_PLATFORM_RESULT_WAIT",
+    "acceptance_predicate_remains_open": true,
+    "root2_membership_unchanged": true
+  },
+  "hard_nonclaims": [
+    "NO_CURSORBENCH_SCORE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_STRONGER_PROOF_IMPOSSIBLE",
+    "REOPEN_OWNER_ROUTE_ONLY_ON_MATERIAL_CURSOR_POLICY_OR_INTERFACE_CHANGE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
