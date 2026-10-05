@@ -1,0 +1,24 @@
+name: Verify Root3 native extension surface V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/root3_native_extension_surface_v1.py'
+      - 'canonical/tests/test_root3_native_extension_surface_v1.py'
+      - 'canonical/governance/ROOT3_NATIVE_EXTENSION_SURFACE_C1_CANDIDATE_V1.json'
+      - '.github/workflows/verify-root3-native-extension-surface-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pytest canonical/tests/test_root3_native_extension_surface_v1.py -q
+      - run: python canonical/runtime/root3_native_extension_surface_v1.py
