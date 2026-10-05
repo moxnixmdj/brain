@@ -1,0 +1,56 @@
+name: Verify SVG diagram mechanics V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/html_svg_diagram_mechanics_v1.py'
+      - 'canonical/tests/test_html_svg_diagram_mechanics_v1.py'
+      - 'canonical/runtime/svg_diagram_render_oracle_v1.py'
+      - 'canonical/tests/test_svg_diagram_render_oracle_v1.py'
+      - '.github/workflows/verify-svg-diagram-mechanics-v1.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Bind exact candidate blobs
+        run: |
+          test "$(git hash-object canonical/runtime/html_svg_diagram_mechanics_v1.py)" = "9476c34e34f64f0e5babd00fa2e5967f41b4f5bb"
+          test "$(git hash-object canonical/tests/test_html_svg_diagram_mechanics_v1.py)" = "30fd4a3a1d9d57b97168d68c6100558b6c6cd84c"
+          test "$(git hash-object canonical/runtime/svg_diagram_render_oracle_v1.py)" = "9a66f7d915fa6d510c9cda50b569f6e4ddd8eb25"
+          test "$(git hash-object canonical/tests/test_svg_diagram_render_oracle_v1.py)" = "9c5385c81ef6f78dd5b53feb4aafc98e42caf2ad"
+      - name: Install verifier dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq librsvg2-bin
+      - name: Run independent falsification suites
+        run: |
+          PYTHONPATH=. pytest -q canonical/tests/test_html_svg_diagram_mechanics_v1.py canonical/tests/test_svg_diagram_render_oracle_v1.py
+      - name: Run real renderer receipt
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          import json
+          from canonical.runtime import html_svg_diagram_mechanics_v1 as m
+          from canonical.runtime import svg_diagram_render_oracle_v1 as r
+          spec = {
+              "schema": m.SCHEMA,
+              "canvas": {"width": 640, "height": 360},
+              "nodes": [
+                  {"id": "source", "label": "Source", "shape": "rect", "x": 20, "y": 120, "width": 140, "height": 70},
+                  {"id": "sink", "label": "Sink", "shape": "ellipse", "x": 460, "y": 120, "width": 140, "height": 70}
+              ],
+              "edges": [{"id": "e1", "source": "source", "target": "sink", "label": "verified"}]
+          }
+          out = r.verify(spec)
+          print(json.dumps(out, sort_keys=True))
+          assert out["pass"] is True
+          assert out["render"]["renderer"] == "rsvg-convert"
+          assert out["render"]["render_dimensions"][0] >= 640
+          assert out["render"]["render_dimensions"][1] >= 360
+          PY
