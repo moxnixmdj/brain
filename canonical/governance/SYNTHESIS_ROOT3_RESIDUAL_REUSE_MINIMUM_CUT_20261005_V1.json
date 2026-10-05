@@ -1,0 +1,215 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_ROOT3_RESIDUAL_REUSE_MINIMUM_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__SEVEN_P3_IMPLEMENTATION_RESIDUALS_COMPRESSED_BY_EXISTING_VERIFIED_REUSE_AND_FAIL_CLOSED_PLUMBING__THREE_SYSTEM_LEVEL_MECHANISM_GROUPS_REMAIN__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Reduce the active synthesis Root3 typed-input-domain problem without inventing a monolithic P3 replacement: distinguish defects of p3_information_safe_candidate_v3 from true system-level capability gaps, reuse already verified Brain-owned evidence/claim mechanisms where their exact scopes apply, add a deterministic fail-closed required-support/provenance transport guard, and leave only the genuinely semantic or generative mechanism groups open.",
+  "authorities": {
+    "active_p3_countermodel_partition": {
+      "path": "canonical/governance/SYNTHESIS_P3_TYPED_INPUT_DOMAIN_COUNTERMODEL_PARTITION_20261005_V1.json",
+      "git_blob_sha": "4150a16f4c20bf0bfcaa23d31b0b03af69417b2b"
+    },
+    "shared_synthesis_root_truth": {
+      "path": "canonical/governance/SHARED_SYNTHESIS_ROOT2_ROUTING_REDUCTION_V1.json",
+      "git_blob_sha": "95efa03aff783b9a8fa0236d5fcc46c5bf007f6e"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    },
+    "verified_bound_capability_registry": {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+    },
+    "verified_generic_evidence_relation": {
+      "path": "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py",
+      "git_blob_sha": "d66a7eb30774f66160b698d8082947776888293d",
+      "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
+      "receipt_git_blob_sha": "f588fe912149d8fcea1628718337acc9e707d04b",
+      "verified_scope": [
+        "EXACT_NORMALIZED_SUBSTRING_SUPPORT",
+        "EXPLICIT_DECIMAL_LT_LTE_GT_GTE_EQ_NE_ABS_DIFF_LTE",
+        "EXACT_UNIT_SURFACE_MATCHING",
+        "EVIDENCE_UNIT_INTEGRITY_BINDING"
+      ]
+    },
+    "verified_objective_claim_operand_binding": {
+      "path": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+      "git_blob_sha": "48fd058430d8d361fc75beced567c7b6d1166531",
+      "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+      "verification": {
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_pr": 166,
+        "public_run_id": 36685279194,
+        "public_job_id": 109789596373,
+        "artifact_id": 11083292341,
+        "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+        "status": "INDEPENDENT_FULL_SURFACE_CROSS_DOMAIN_PASS"
+      }
+    },
+    "new_bound_claim_guard_candidate": {
+      "path": "canonical/runtime/synthesis_bound_claim_guard_v1.py",
+      "git_blob_sha": "bd631efbfd76787e9dc1d4f9e276c195d1142790",
+      "tests_path": "canonical/tests/test_synthesis_bound_claim_guard_v1.py",
+      "tests_git_blob_sha": "4fbe63bd742e8a18c652fc7efd6e4b141649ba7a",
+      "local_precommit_tests": {
+        "count": 8,
+        "passed": 8,
+        "independent": false
+      }
+    },
+    "existing_structural_constraint_compiler_candidate": {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+      "status_for_this_cut": "REUSE_CANDIDATE_ONLY__NO_VERIFIED_BOUND_CAPABILITY_CREDIT_ASSERTED"
+    }
+  },
+  "breakthrough": {
+    "statement": "THE_SEVEN_CONSTRUCTIVE_CLASSES_IN_THE_CURRENT_P3_V3_COUNTERMODEL_ARE_SEVEN_WAYS_THAT_ONE_NARROW_IMPLEMENTATION_FAILS__THEY_ARE_NOT_SEVEN_INDEPENDENT_SYSTEM_LEVEL_CAPABILITY_GAPS.",
+    "consequence": "DO_NOT_BUILD_A_SEVEN_FEATURE_OR_MONOLITHIC_P3_V4_REPLACEMENT. COMPOSE_EXISTING_VERIFIED_BOUND_CAPABILITIES_WITH_SMALL_FAIL_CLOSED_TYPED_CONTROL_PLANES, THEN WORK_ONLY_THE_RESIDUAL_SEMANTIC_OR_GENERATIVE_MECHANISMS.",
+    "fresh_reality_required_to_make_this_reduction": false
+  },
+  "residual_class_reduction": [
+    {
+      "p3_class": "SYNTHESIS_SCOPE_R1_OPEN_AUDIENCE_ADAPTATION",
+      "system_route": "G2_GOAL_AUDIENCE_RELEVANCE_POLICY_UNDER_BUDGET",
+      "state": "OPEN_SYSTEM_MECHANISM"
+    },
+    {
+      "p3_class": "SYNTHESIS_SCOPE_R2_NONNUMERIC_OR_STRUCTURED_EVIDENCE",
+      "system_route": "REUSE_VERIFIED_EXACT_QUOTED_TEXT_SUPPORT_WHERE_APPLICABLE__OTHERWISE_G1_GENERAL_SEMANTIC_SUPPORT_BINDING",
+      "state": "PARTITIONED__VERIFIED_SUBDOMAIN_PLUS_OPEN_RESIDUAL"
+    },
+    {
+      "p3_class": "SYNTHESIS_SCOPE_R3_GENERAL_CLAIM_SEMANTICS",
+      "system_route": "REUSE_VERIFIED_EXPLICIT_NUMERIC_RELATIONS_AND_EXACT_QUOTED_CLAIMS_WHERE_APPLICABLE__OTHERWISE_G1_GENERAL_SEMANTIC_SUPPORT_BINDING",
+      "state": "PARTITIONED__VERIFIED_SUBDOMAIN_PLUS_OPEN_RESIDUAL"
+    },
+    {
+      "p3_class": "SYNTHESIS_SCOPE_R4_GENERAL_OUTPUT_CONSTRAINTS",
+      "system_route": "REUSE_EXISTING_STRUCTURAL_CONSTRAINT_COMPILER_AS_UNVERIFIED_CANDIDATE_FOR_ITS_EXACT_FORMAL_SUBDOMAIN__OTHERWISE_G2_AND_G3",
+      "state": "PARTITIONED__CANDIDATE_DETERMINISTIC_SUBDOMAIN_PLUS_OPEN_RESIDUAL"
+    },
+    {
+      "p3_class": "SYNTHESIS_SCOPE_R5_INSUFFICIENT_EVIDENCE_FOR_REQUIRED_CLAIM",
+      "system_route": "SYNTHESIS_BOUND_CLAIM_GUARD_V1",
+      "state": "DETERMINISTIC_FAIL_CLOSED_CONTROL_SLICE_IMPLEMENTED__PENDING_INDEPENDENT_VERIFICATION",
+      "rule": "MISSING_UNSUPPORTED_OR_INSUFFICIENT_REQUIRED_BINDING_MUST_NEVER_SILENTLY_DISAPPEAR"
+    },
+    {
+      "p3_class": "SYNTHESIS_SCOPE_R6_PROVENANCE_AND_UNIT_SENSITIVE_SUPPORT",
+      "system_route": "VERIFIED_EXACT_UNIT_SENSITIVE_NUMERIC_BINDING_WHERE_APPLICABLE__PLUS_SYNTHESIS_BOUND_CLAIM_GUARD_V1_FOR_POST_BINDING_EVIDENCE_AND_PROVENANCE_TRANSPORT__OTHERWISE_G1",
+      "state": "PARTITIONED__VERIFIED_AND_DETERMINISTIC_SLICES_PLUS_OPEN_SEMANTIC_RESIDUAL"
+    },
+    {
+      "p3_class": "SYNTHESIS_SCOPE_R7_REALIZED_SYNTHESIS_EXPRESSION",
+      "system_route": "G3_REALIZED_GROUNDED_EXPRESSION_UNDER_GENERAL_CONSTRAINTS",
+      "state": "OPEN_SYSTEM_MECHANISM"
+    }
+  ],
+  "remaining_system_mechanism_groups": [
+    {
+      "id": "G1_GENERAL_SEMANTIC_SUPPORT_BINDING",
+      "covers": [
+        "NONNUMERIC_STRUCTURED_EVIDENCE_BEYOND_EXACT_QUOTED_SUPPORT",
+        "CLAIM_SEMANTICS_BEYOND_VERIFIED_EXPLICIT_NUMERIC_AND_EXACT_QUOTED_GRAMMARS",
+        "UNIT_CONVERSION_OR_SEMANTIC_ROLE_INFERENCE_WHEN_REQUIRED",
+        "SUPPORT_OR_ENTAILMENT_BINDING_NOT_ALREADY_VERIFIED"
+      ],
+      "type": "SEMANTIC"
+    },
+    {
+      "id": "G2_GOAL_AUDIENCE_RELEVANCE_POLICY_UNDER_BUDGET",
+      "covers": [
+        "OPEN_AUDIENCE_ADAPTATION",
+        "OBJECTIVE_CONDITIONED_RELEVANCE",
+        "DECISION_RELEVANCE_UNDER_BINDING_OUTPUT_BUDGET",
+        "NONSTRUCTURAL_OUTPUT_REQUIREMENT_SELECTION"
+      ],
+      "type": "SEMANTIC_CONTROL_POLICY"
+    },
+    {
+      "id": "G3_REALIZED_GROUNDED_EXPRESSION_UNDER_GENERAL_CONSTRAINTS",
+      "covers": [
+        "PROVENANCE_BEARING_REALIZED_PROSE_OR_ARTIFACT_CONTENT",
+        "GENERAL_FORMAT_STYLE_STRUCTURE_REALIZATION",
+        "PRESERVE_MATERIAL_UNCERTAINTY_IN_REALIZED_OUTPUT"
+      ],
+      "type": "GENERATION_AND_VALIDATION"
+    }
+  ],
+  "cut_accounting": {
+    "p3_constructive_residual_class_count_before": 7,
+    "system_level_mechanism_group_count_after_reuse_candidate": 3,
+    "new_runtime_control_slices": 1,
+    "existing_verified_bound_capabilities_reused": 2,
+    "existing_unverified_structural_candidate_reused_without_credit": 1,
+    "claimed_gap_reduction_ratio": null,
+    "reason_no_numeric_gap_credit": "RESIDUAL_CLASSES_AND_MECHANISM_GROUPS_ARE_NOT_ASSUMED_EQUAL_WEIGHT_OR_INDEPENDENT"
+  },
+  "new_guard_contract": {
+    "input_boundary": "NORMALIZED_CLAIMS_WITH_REQUIRED_BOOLEAN__NORMALIZED_EVIDENCE_WITH_NONEMPTY_PROVENANCE__EXTERNAL_SUPPORT_BINDINGS_WITH_SUPPORTED_conflicted_unsupported_insufficient_STATUS_AND_EVIDENCE_IDS",
+    "does": [
+      "FAIL_CLOSED_WHEN_ANY_REQUIRED_CLAIM_LACKS_SUPPORTED_OR_conflicted_BOUND_SUPPORT",
+      "PRESERVE_EXACT_CLAIM_TO_EVIDENCE_BINDINGS",
+      "PRESERVE_AND_DEDUPLICATE_CLAIM_TO_PROVENANCE_BINDINGS",
+      "PRESERVE_CONFLICTED_CLAIMS_AS_UNCERTAINTY",
+      "REJECT_UNKNOWN_EVIDENCE_REFERENCES_DUPLICATE_IDS_AND_EMPTY_PROVENANCE"
+    ],
+    "does_not": [
+      "INFER_SUPPORT",
+      "INFER_RELEVANCE",
+      "INFER_AUDIENCE_SALIENCE",
+      "GENERATE_PROSE",
+      "PROVE_SOURCE_QUALITY_OR_INDEPENDENCE",
+      "GRANT_TERMINAL_AUTHORITY"
+    ]
+  },
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "BUILD_SEVEN_SEPARATE_REPAIRS_FOR_THE_SEVEN_P3_V3_COUNTERMODEL_CLASSES",
+      "BUILD_ONE_UNIVERSAL_P3_V4_INTERPRETER_BEFORE_REUSING_EXISTING_BOUND_CAPABILITIES",
+      "REIMPLEMENT_EXPLICIT_NUMERIC_RELATION_SUPPORT_ALREADY_OWNED_BY_THE_BRAIN",
+      "REIMPLEMENT_EXACT_QUOTED_CLAIM_SUPPORT_ALREADY_OWNED_BY_THE_BRAIN",
+      "TREAT_REQUIRED_CLAIM_ABSTENTION_AND_PROVENANCE_TRANSPORT_AS_A_NEW_SEMANTIC_REASONING_CAPABILITY"
+    ],
+    "activate": [
+      "INDEPENDENTLY_VERIFY_SYNTHESIS_BOUND_CLAIM_GUARD_V1",
+      "ROUTE_EXACT_QUOTED_AND_EXPLICIT_NUMERIC_SUBDOMAINS_THROUGH_EXISTING_VERIFIED_BOUND_CAPABILITIES",
+      "VERIFY_OR_REJECT_REUSE_OF_INSTRUCTION_CONSTRAINT_COMPILER_FOR_THE_EXACT_STRUCTURAL_R4_SUBDOMAIN",
+      "ATTACK_ONLY_G1_G2_G3_AS_THE_SURVIVING_SYNTHESIS_ROOT3_SYSTEM_MECHANISM_GROUPS"
+    ],
+    "root2_preserved_separate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+  },
+  "falsifiers": [
+    "A_P3_RESIDUAL_CLASS_IS_SHOWN_TO_REQUIRE_A_FOURTH_SYSTEM_LEVEL_MECHANISM_NOT_COVERED_BY_G1_G2_G3_OR_THE_DETERMINISTIC_CONTROL_SLICES",
+    "THE_VERIFIED_BOUND_CAPABILITY_SCOPES_DO_NOT_ACTUALLY_MATCH_THE_SUBDOMAINS_ASSIGNED_HERE",
+    "THE_BOUND_CLAIM_GUARD_FAILS_A_REQUIRED_SUPPORT_OR_PROVENANCE_INVARIANT",
+    "R5_REQUIRES_SEMANTIC_INFERENCE_BEYOND_THE_EXTERNALLY_SUPPLIED_SUPPORT_BINDING_TO_FAIL_CLOSED_CORRECTLY",
+    "THE_STRUCTURAL_CONSTRAINT_COMPILER_IS_USED_OUTSIDE_ITS_VERIFIED_OR_INDEPENDENTLY_PROVED_SCOPE"
+  ],
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_ROOT3_CLOSURE_CLAIM",
+    "NO_SYNTHESIS_MATCHED_QUALITY_PASS",
+    "NO_CLAIM_G1_G2_G3_ARE_PROVED_MINIMAL_IN_A_FORMAL_LOWER_BOUND_SENSE",
+    "NO_CLAIM_THE_INSTRUCTION_CONSTRAINT_COMPILER_IS_A_VERIFIED_BOUND_CAPABILITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
