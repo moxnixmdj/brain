@@ -80,6 +80,16 @@
       "total_persistent_bytes": 101403784,
       "h100_over_budget_bytes": 1403784,
       "fits_100000000": false
+    },
+    "first_stack_detector_q4_shared_budget_candidate": {
+      "multidimensional_q4_bitpacked_bytes": 48572864,
+      "one_dimensional_fp32_bytes": 242728,
+      "batchnorm_buffer_bytes": 239248,
+      "fp32_per_channel_scale_bytes": 123432,
+      "int32_per_channel_zero_point_bytes": 123432,
+      "total_persistent_bytes": 49301704,
+      "h100_headroom_bytes": 50698296,
+      "fits_100000000": true
     }
   },
   "decomposition_breakthrough": {
@@ -99,6 +109,13 @@
     "significance": "A_PUBLISHED_CHART_DERENDERING_FRONTEND_CAN_BE_REPRESENTED_INSIDE_H100_WITH_CONVENTIONAL_INT8_OR_Q4_STORAGE_AFTER_FUNCTIONAL_DECOMPOSITION__NO_NEAR_1_BIT_WHOLE_VLM_REQUIRED"
   },
   "route_race": [
+    {
+      "id": "C_FIRST_STACK_Q4_SHARED_BUDGET_CONTINGENCY",
+      "advantage": "LEAVES_50_698_296_BYTES_FOR_ALL_OTHER_FUTURE_LEARNED_RESIDUALS__FIRST_STACK_DIRECTLY_SUPERVISED",
+      "new_risk": "BOTH_SECOND_STACK_TRUNCATION_AND_Q4_QUANTIZATION_FIDELITY",
+      "static_fit_bytes": 49301704,
+      "preferred_for_whole_system_budget_if_and_only_if_a_learned_rung_is_later_justified": true
+    },
     {
       "id": "A_FULL_DETECTOR_Q4",
       "advantage": "PRESERVES_BOTH_PUBLISHED_HOURGLASS_STACKS",
@@ -134,7 +151,9 @@
     "NO_CLAIM_FIRST_STACK_EQUALS_TWO_STACK_PERFORMANCE",
     "NO_CLAIM_BAR_LINE_PIE_TRAINING_SCOPE_COVERS_PROFESSIONAL_CHARTOGRAPHY",
     "NO_CLAIM_DETERMINISTIC_GROUPING_ALREADY_REPLACES_THE_GROUPING_TRANSFORMER",
-    "NO_CHARTOGRAPHY_THRESHOLD_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_H100_TERMINAL_CREDIT"
+    "NO_CHARTOGRAPHY_THRESHOLD_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_H100_TERMINAL_CREDIT",
+    "NO_LEARNED_BYTE_RUNG_ADVANCE__CURRENT_H100_RUNG_REMAINS_ZERO",
+    "NO_WHOLE_SYSTEM_100MB_FIT_FROM_A_SINGLE_COMPONENT_FIT"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -149,5 +168,12 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "h100_shared_budget_guard": {
+    "current_canonical_learned_rung_bytes": 0,
+    "canonical_advance_rule": "ADVANCE_ONLY_AFTER_CONTENT_ADDRESSED_CONSTRUCTIVE_EVIDENCE_THAT_ZERO_LEARNED_AND_ALL_LOWER_RUNGS_CANNOT_REPAIR_THE_CURRENT_RESIDUAL_WITHIN_THE_FROZEN_VIABILITY_BOUND",
+    "component_fit_is_not_whole_system_fit": true,
+    "no_rung_advance_from_this_discovery": true,
+    "preferred_candidate_reason": "49_301_704_BYTE_VISUAL_CONTINGENCY_LEAVES_50_698_296_BYTES_HEADROOM_WHEREAS_97_TO_99MB_OPTIONS_CONSUME_NEARLY_THE_WHOLE_GLOBAL_BUDGET"
+  }
 }
