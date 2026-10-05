@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY25_VISIBLE_PARAMETER_RECOVERY_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__25_OF_25_LEGACY_CONTRACTS_PROMPT_RECOVERABLE__PUBLIC_REPEAT_SOURCE_41_OF_41_REDUCTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Delete hidden-kwargs dependence from the exact legacy-25 constructive successor surface without reading any new terminal case.",
+  "pinned_public_sources": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "legacy_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "google_ifeval_repository": "google-research/google-research",
+    "google_ifeval_commit": "e49bbfe381c9c0e564b937f1c4e163a2273c65cc",
+    "google_ifeval_input_data_blob": "cbe52f6eecf3986fdac745b4acba4da1408eb146"
+  },
+  "registry_surface": {
+    "registered_legacy_types": 25,
+    "parser_recognized_types_in_synthetic_public_grammar_fixture": 25,
+    "directly_rendered_or_public_static_parameter_types": 24,
+    "nonrendered_parameter_type": "combination:repeat_prompt"
+  },
+  "repeat_prompt_public_population_reduction": {
+    "source_rows_total": 541,
+    "repeat_prompt_rows": 41,
+    "prompt_to_repeat_is_exact_visible_prompt_substring": "41_OF_41",
+    "prompt_to_repeat_at_prompt_start": 33,
+    "prompt_to_repeat_at_prompt_end": 8,
+    "other_positions": 0,
+    "boundary_rule_exact": "41_OF_41",
+    "boundary_rule": "IF_REPEAT_META_IS_FIRST_LINE_OR_BLOCK__SOURCE_IS_FINAL_BLANKLINE_BLOCK__ELSE_IF_REPEAT_META_IS_IN_TAIL__SOURCE_IS_FIRST_LINE__OTHERWISE_FAIL_CLOSED",
+    "terminal_population_rows_read": 0
+  },
+  "implementation": {
+    "parser_path": "canonical/runtime/livebench_legacy25_prompt_contract_parser_v1.py",
+    "parser_git_blob_sha": "5e0bf6ef4fb503b95084c05c336d01c3ca1b2a70",
+    "tests_path": "canonical/tests/test_livebench_legacy25_prompt_contract_parser_v1.py",
+    "tests_git_blob_sha": "dd28ad463dce224772e0121c3e108c0ee69254c8",
+    "parser_network_used": false,
+    "parser_model_dependency_count": 0
+  },
+  "semantic_effect": [
+    "REMOVES_HIDDEN_PARAMETER_ACQUISITION_AS_A NECESSARY_ROOT1_SUBPROBLEM_FOR_THE_PUBLIC_LEGACY25_DESCRIPTION_GRAMMAR",
+    "REDUCES_SUCCESSOR_WORK_TO_CONSTRUCTIVE_WITNESS_SYNTHESIS_AND_EXACT_PUBLIC_CHECKER_VALIDATION_OVER_RECOVERED_CONTRACTS",
+    "REPEAT_PROMPT_NO_LONGER_REQUIRES_HIDDEN_KWARGS_ON_THE_PINNED_PUBLIC_SOURCE_POPULATION"
+  ],
+  "hard_rules": [
+    "NO_TERMINAL_CASE_73_OR_LATER_READ",
+    "NO_TERMINAL_PROMPT_RESPONSE_OR_HIDDEN_KWARGS_READ",
+    "FAIL_CLOSED_ON_UNRECOGNIZED_OR_NONPUBLIC_REPEAT_LAYOUT",
+    "NO_ACCEPTANCE_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_PARSER_ALONE_PRODUCES_A_CHECKER_PASSING_RESPONSE",
+    "NO_GENERAL_SEMANTIC_INSTRUCTION_FOLLOWING_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "next": "BUILD_A_COMPOSITION_SAFE_LEGACY25_WITNESS_SYNTHESIZER_OVER_THE_RECOVERED_CONTRACTS_AND_VERIFY_IT_AGAINST_THE_EXACT_PINNED_PUBLIC_LEGACY_CHECKERS_BEFORE_ANY_NEW_TERMINAL_EXECUTION"
+}
