@@ -1,0 +1,154 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V4",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__RECURSIVE_CURRENT_BYTE_CARRIER_AUDITOR__AUDIT_EMITS_EXACT_BLOBS__ZERO_CREDIT",
+  "objective": "Recursively scan every repo-local module reachable from the credited V2 runtime roots on the exact current checkout; classify observed material-effect carriers; emit exact current Git blob identities in the audit receipt; fail closed on any observed carrier not declared by path/type. Remove manual per-file hash rebinding from the classification manifest.",
+  "parent": {
+    "path": "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json",
+    "git_blob_sha": "7e2a232d8c7c66d711e858cc75c647c5690a43eb"
+  },
+  "bound_registry": {
+    "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+  },
+  "declared": {
+    "network_modules": [
+      "canonical/runtime/astra_runtime.py",
+      "canonical/runtime/auto_npm_library_acquisition.py",
+      "canonical/runtime/auto_pypi_library_acquisition.py",
+      "canonical/runtime/bound_capabilities/browser_chromedriver.py",
+      "canonical/runtime/bound_capabilities/http_json_fetch.py",
+      "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py",
+      "canonical/runtime/bound_capabilities/pypi_provenance_audit.py",
+      "canonical/runtime/bound_capabilities/source_authority_binding_ror.py",
+      "canonical/runtime/bound_capabilities/web_release_verify.py",
+      "canonical/runtime/capability_discovery.py",
+      "canonical/runtime/npm_package_utils.py"
+    ],
+    "child_process_modules": [
+      "canonical/runtime/apt_cli_probe.py",
+      "canonical/runtime/astra_runtime.py",
+      "canonical/runtime/auto_npm_library_acquisition.py",
+      "canonical/runtime/auto_pypi_library_acquisition.py",
+      "canonical/runtime/auto_python_source_codec_acquisition.py",
+      "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
+      "canonical/runtime/bound_capabilities/browser_chromedriver.py",
+      "canonical/runtime/bound_capabilities/cli_command.py",
+      "canonical/runtime/bound_capabilities/jq_query.py",
+      "canonical/runtime/bound_capabilities/node_library_codec.py",
+      "canonical/runtime/bound_capabilities/pandoc_weasyprint.py",
+      "canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py",
+      "canonical/runtime/bound_capabilities/python_test_audit.py",
+      "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
+      "canonical/runtime/bound_capabilities/yq_yaml_json.py",
+      "canonical/runtime/capability_discovery.py",
+      "canonical/runtime/independent_npm_codec_verifier.py",
+      "canonical/runtime/independent_pypi_codec_verifier.py"
+    ],
+    "local_filesystem_write_modules": [
+      "canonical/runtime/apt_cli_probe.py",
+      "canonical/runtime/astra_runtime.py",
+      "canonical/runtime/auto_apt_cli_acquisition.py",
+      "canonical/runtime/auto_npm_library_acquisition.py",
+      "canonical/runtime/auto_pypi_library_acquisition.py",
+      "canonical/runtime/auto_python_source_codec_acquisition.py",
+      "canonical/runtime/bound_capabilities/archive_tarfile.py",
+      "canonical/runtime/bound_capabilities/browser_chromedriver.py",
+      "canonical/runtime/bound_capabilities/cli_command.py",
+      "canonical/runtime/bound_capabilities/docx_report_from_json.py",
+      "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py",
+      "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py",
+      "canonical/runtime/bound_capabilities/http_json_fetch.py",
+      "canonical/runtime/bound_capabilities/jq_query.py",
+      "canonical/runtime/bound_capabilities/node_library_codec.py",
+      "canonical/runtime/bound_capabilities/numeric_expression_sympy.py",
+      "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+      "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py",
+      "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
+      "canonical/runtime/bound_capabilities/pandoc_weasyprint.py",
+      "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+      "canonical/runtime/bound_capabilities/pypi_provenance_audit.py",
+      "canonical/runtime/bound_capabilities/python_document_builder.py",
+      "canonical/runtime/bound_capabilities/python_library_codec.py",
+      "canonical/runtime/bound_capabilities/python_source_audit.py",
+      "canonical/runtime/bound_capabilities/python_test_audit.py",
+      "canonical/runtime/bound_capabilities/source_authority_binding_ror.py",
+      "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py",
+      "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py",
+      "canonical/runtime/bound_capabilities/yq_yaml_json.py",
+      "canonical/runtime/cli_contract_inference.py",
+      "canonical/runtime/continuous_obs_runtime.py",
+      "canonical/runtime/independent_npm_codec_verifier.py",
+      "canonical/runtime/independent_pypi_codec_verifier.py",
+      "canonical/runtime/npm_package_utils.py"
+    ],
+    "inprocess_third_party_imports": {
+      "canonical/runtime/capability_discovery.py": [
+        "xapian"
+      ],
+      "canonical/runtime/bound_capabilities/numeric_expression_sympy.py": [
+        "sympy"
+      ],
+      "canonical/runtime/bound_capabilities/pdf_pypdf.py": [
+        "pypdf"
+      ],
+      "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py": [
+        "xlsxwriter"
+      ],
+      "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py": [
+        "openpyxl"
+      ]
+    },
+    "registry_constrained_dynamic_imports": {
+      "canonical/runtime/bound_capabilities/python_document_builder.py": [
+        {
+          "adapter_module": "python_document_builder",
+          "module": "docx",
+          "factory": "Document",
+          "source_type": "apt",
+          "package": "python3-docx"
+        }
+      ]
+    },
+    "untrusted_dynamic_import_modules": {
+      "canonical/runtime/independent_pypi_codec_verifier.py": {
+        "git_blob_sha": "7c8f68ac1dd8d7760794198f9ac0d8fb542be7e9",
+        "call": "importlib.import_module(module_name)",
+        "module_name_source": "TOP_LEVEL_MODULE_CANDIDATES_EXTRACTED_FROM_CONTENT_ADDRESSED_DOWNLOADED_WHEEL",
+        "execution_boundary": "TEMP_TARGET_SITE_INSERTED_AT_SYS_PATH_ZERO__IMPORT_EXECUTES_IN_CURRENT_PROCESS",
+        "classification": "UNTRUSTED_INPROCESS_DYNAMIC_CODE_EXECUTION",
+        "c1_disposition": "CLASSIFIED_BUT_NOT_MEDIATED__REQUIRES_C2_SANDBOX_OR_MEDIATOR_BOUNDARY"
+      }
+    }
+  },
+  "recursive_repo_import_closure": {
+    "enabled": true,
+    "root": "canonical/runtime",
+    "rule": "FOLLOW_STATIC_REPO_LOCAL_IMPORTS_RECURSIVELY_FROM_PARENT_V2_CREDITED_RUNTIME_ROOTS__AUDIT_CURRENT_BYTES__EMIT_CONTENT_ADDRESSING_IN_RECEIPT"
+  },
+  "hard_rules": [
+    "ANY_NEW_UNDECLARED_NETWORK_EDGE_FAILS_CLOSED",
+    "ANY_NEW_UNDECLARED_CHILD_PROCESS_EDGE_FAILS_CLOSED",
+    "ANY_NEW_UNDECLARED_LOCAL_FILESYSTEM_MUTATION_FAILS_CLOSED",
+    "ANY_NONSTDLIB_IMPORT_SET_MISMATCH_FAILS_CLOSED",
+    "ANY_UNCLASSIFIED_DYNAMIC_IMPORT_FAILS_CLOSED",
+    "DECLARED_EFFECT_PATH_WITH_NO_CORRESPONDING_CURRENT_OBSERVED_EFFECT_FAILS_CLOSED_AS_STALE_OVERDECLARATION",
+    "AUDIT_RECEIPT_MUST_EMIT_EXACT_GIT_BLOB_FOR_EVERY_REACHABLE_REPO_LOCAL_MODULE",
+    "CLASSIFICATION_IS_NOT_MEDIATION",
+    "NO_C1_SCOPE_COMPLETE_CREDIT_FROM_THIS_AUDITOR"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
