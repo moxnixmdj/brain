@@ -141,6 +141,13 @@ def parse_header_blob(blob: bytes, *, expected_file_size: int | None = None) -> 
         if r["dtype"].startswith("F") or r["dtype"] == "BF16"
     )
     nonfloating_elements = total_elements - floating_elements
+    tensor_manifest = sorted(rows, key=lambda r: r["name"])
+    manifest_bytes = json.dumps(
+        tensor_manifest,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    tensor_manifest_sha256 = hashlib.sha256(manifest_bytes).hexdigest()
 
     return {
         "schema": SCHEMA,
@@ -156,8 +163,10 @@ def parse_header_blob(blob: bytes, *, expected_file_size: int | None = None) -> 
         "dtype_elements": dict(sorted(dtype_elements.items())),
         "dtype_payload_bytes": dict(sorted(dtype_payload_bytes.items())),
         "metadata": header.get("__metadata__", {}),
-        "first_tensor_name": min(r["name"] for r in rows),
-        "last_tensor_name": max(r["name"] for r in rows),
+        "tensor_manifest_sha256": tensor_manifest_sha256,
+        "tensors": tensor_manifest,
+        "first_tensor_name": tensor_manifest[0]["name"],
+        "last_tensor_name": tensor_manifest[-1]["name"],
         "hard_nonclaims": [
             "NO_CLAIM_SAFETENSORS_VALUES_WERE_DOWNLOADED_OR_COMPARED_TO_PYTORCH_BIN",
             "NO_CLAIM_LOW_BIT_CAPABILITY_PRESERVATION",
