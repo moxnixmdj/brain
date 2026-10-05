@@ -3,7 +3,7 @@
 The current Root3 universe is already frozen as 19 exact Python process-creation
 sites keyed by (repository-relative module path, source line, process API).
 This module turns that static proof artifact into a runtime guard without
-modifying the 29 callers: an interceptor walks the live Python frame chain and
+modifying the 19 callers: an interceptor walks the live Python frame chain and
 requires exactly one exact registry key match. Unknown, shifted, outside-repo,
 or ambiguous callers fail closed.
 """
@@ -46,7 +46,7 @@ def classify_frame_chain(
     api = str(api)
     if api not in SUPPORTED_APIS:
         raise RuntimeCallsiteClassificationError("PROCESS_API_UNSUPPORTED:" + api)
-    if len(EXPECTED) != 22 or set(EXPECTED.values()) - CLASSES:
+    if len(EXPECTED) != 19 or set(EXPECTED.values()) - CLASSES:
         raise RuntimeCallsiteClassificationError("EFFECT_CLASS_REGISTRY_INVARIANT_FAILED")
 
     matches: list[dict[str, Any]] = []
