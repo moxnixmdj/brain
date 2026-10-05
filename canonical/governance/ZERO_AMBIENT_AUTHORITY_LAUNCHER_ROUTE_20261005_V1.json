@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_ZERO_AMBIENT_AUTHORITY_LAUNCHER_ROUTE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_IMPLEMENTED__MECHANICAL_LAUNCH_POLICY_AND_TYPED_REQUEST_CHANNEL__INDEPENDENT_ESCAPE_TESTS_REQUIRED__ZERO_CREDIT",
+  "objective": "Implement the smallest reusable zero-ambient-authority launch boundary needed by the Root3 confined-effect-broker route without modifying the 297KB credited runtime.",
+  "target_predicates": [
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+  ],
+  "parent_breakthrough": {
+    "path": "canonical/governance/ROOT3_ZERO_AMBIENT_AUTHORITY_EFFECT_BROKER_BREAKTHROUGH_20261005_V1.json"
+  },
+  "implementation": {
+    "launcher": "canonical/runtime/zero_ambient_authority_launcher_v1.py",
+    "tests": "canonical/tests/test_zero_ambient_authority_launcher_v1.py",
+    "confinement": [
+      "CONTENT_ADDRESSED_CONTAINER_IMAGE_REQUIRED",
+      "NETWORK_NONE",
+      "READ_ONLY_CONTAINER_ROOT",
+      "DROP_ALL_LINUX_CAPABILITIES",
+      "NO_NEW_PRIVILEGES",
+      "NON_ROOT_UID_GID_65534",
+      "PRIVATE_IPC",
+      "ONLY_ONE_READ_ONLY_INPUT_BIND",
+      "PRIVATE_TMPFS_TMP_AND_WORK",
+      "POSITIVE_ENV_ALLOWLIST_WITH_NO_CREDENTIAL_FIELDS",
+      "HARD_PIDS_MEMORY_CPU_WALLCLOCK_AND_SCRATCH_LIMITS"
+    ],
+    "effect_protocol": "ONLY_LINES_PREFIXED_PROJECT_BRAIN_EFFECT_REQUEST_V1_ARE_PARSED_AS_TYPED_REQUESTS__ORDINARY_STDOUT_HAS_ZERO_EFFECT_AUTHORITY__THIS_V1_COMMITS_ZERO_MATERIAL_EFFECTS"
+  },
+  "proved_if_tests_pass": [
+    "LAUNCH_PLAN_COMPILER_FAILS_CLOSED_ON_UNPINNED_IMAGE",
+    "LAUNCH_PLAN_GRANTS_NO_EXPLICIT_NETWORK_OR_LINUX_CAPABILITIES",
+    "LAUNCH_PLAN_EXPOSES_ONLY_ONE_READ_ONLY_INPUT_BIND_AND_PRIVATE_TMPFS_MUTABILITY",
+    "HOST_CREDENTIAL_ENVIRONMENT_IS_NOT_FORWARDED_BY_DEFAULT",
+    "CHILD_OUTPUT_CANNOT_CAUSE_A_MATERIAL_EFFECT_IN_THIS_V1_BECAUSE_EFFECT_REQUESTS_ARE_ONLY_PARSED_AND_NEVER_COMMITTED"
+  ],
+  "not_yet_proved": [
+    "THE_SELECTED_CONTAINER_RUNTIME_ITSELF_ENFORCES_ALL_DECLARED_CONFINEMENT_PROPERTIES",
+    "NO_KERNEL_OR_CONTAINER_ESCAPE_ON_THE_EVENTUAL_CARRIER",
+    "DESCENDANT_AUTHORITY_CANNOT_WIDEN_ON_THE_EVENTUAL_CARRIER",
+    "A_TYPED_EFFECT_BROKER_CAN_SAFELY_COMMIT_ALL_REQUIRED_REAL_EFFECT_CLASSES",
+    "ASTRA_RUNTIME_IS_ALREADY_INTEGRATED_BEHIND_THIS_LAUNCHER",
+    "PREDICATE_SPECIFIC_GUARD_SEMANTICS",
+    "ANY_ROOT3_PREDICATE_CLOSURE"
+  ],
+  "next": [
+    "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_AND_TEST_BLOBS",
+    "RUN_ESCAPE_CANARIES_ON_A_ZERO_COST_LINUX_DOCKER_CARRIER",
+    "ONLY_AFTER_CONFINEMENT_PASS_ADD_THE_MINIMUM_PARENT_SIDE_EFFECT_COMMIT_BROKER_REQUIRED_BY_TARGET BEHAVIOR",
+    "INTEGRATE_ASTRA_RUNTIME_ONLY_AFTER_BROKER_AND_CONFINEMENT_BOUNDARY_ARE_VERIFIED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
