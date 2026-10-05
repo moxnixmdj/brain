@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__R2E_EVENT_BOUND_SLEEP_LANE__FOUR_PREDICATES_REMAIN_OPEN__FIVE_INFORMATION_POSITIVE_ROOT2_GROUPS_REMAIN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_20261005_V1.json",
+    "git_blob_sha": "4bcd638848a5d7d87eec77cb98364b3650ff9a49"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "49b9b99d7d4f7a024c2fba3d1bc00b4dd6ff2317"
+  },
+  "effects": {
+    "sleep_group": "R2E_NON_OWNER_CERTIFICATE_AND_BRIDGE_LANE",
+    "preserve_open_predicates": [
+      "CODING_FRONTIERCODE_GE_54_4",
+      "PROWORK_GDPVAL_GE_1846",
+      "AUTOMATIONBENCH_GE_40",
+      "MYSTERYMECHANISM_GE_49_55"
+    ],
+    "active_information_positive_groups": [
+      "R2A_SHARED_TB4_CHARTOGRAPHY_PREFLIGHT",
+      "R2B_SELF_SERVICE_ACCESS_FACTS",
+      "R2D_FINANCE_AGENT_PREFLIGHT",
+      "R2F_SYNTHESIS_MATCHED_PERFORMANCE_ONLY",
+      "R2G_STRONGER_SCOPE_COMPLETE_PROOF_LANE"
+    ],
+    "delete_repeated_zero_information_search": true
+  },
+  "wake_rule": "WAKE_ONLY_ON_BOUND_OWNER_RESULT_SCOPE_RELATION_STRONGER_PROOF_OR_MATERIAL_BENCHMARK_POLICY_CHANGE",
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
