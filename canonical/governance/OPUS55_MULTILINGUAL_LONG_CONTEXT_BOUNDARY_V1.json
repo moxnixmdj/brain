@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CROSS_CUTTING_CONDITIONS_NOT_NEW_PRIMITIVE_FAMILIES__CONDITION_COVERAGE_OPEN__ZERO_CREDIT",
+  "sources": {
+    "model_overview": "https://platform.claude.com/docs/en/models/overview",
+    "opus55_overview": "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+  },
+  "observed": {
+    "multilingual_capability": true,
+    "context_window_tokens": 1000000,
+    "input_output": "TEXT_AND_IMAGES_TO_TEXT"
+  },
+  "classifications": [
+    {
+      "surface": "MULTILINGUAL_PERFORMANCE",
+      "kind": "CROSS_CUTTING_LANGUAGE_CONDITION",
+      "existing_family_union": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ],
+      "new_family_required": false,
+      "reason": "LANGUAGE_CHOICE_CHANGES_THE_CONDITION_UNDER_WHICH_EXISTING_TEXT_REASONING_AND_COMMUNICATION_BEHAVIORS_ARE_PERFORMED__IT_DOES_NOT_BY_ITSELF_DEFINE_A_NEW_TASK_KIND",
+      "remaining": "PROVE_EQUAL_OR_BETTER_BEHAVIOR_ON_MATERIAL_SUPPORTED_LANGUAGE_CONDITIONS_OR_A_SCOPE_SAFE_STRONGER_CERTIFICATE"
+    },
+    {
+      "surface": "LONG_CONTEXT",
+      "kind": "CROSS_CUTTING_CONTEXT_HORIZON_CONDITION",
+      "existing_family_union": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      ],
+      "new_family_required": false,
+      "reason": "CONTEXT_LENGTH_IS_AN_INPUT_HORIZON_CONDITION_ON_EXISTING_SYNTHESIS_KNOWLEDGE_WORK_INSTRUCTION_AND_CONTINUITY_BEHAVIORS__TERMINAL_OBJECTIVE_REQUIRES_OUTCOME_PARITY_NOT_IDENTICAL_INTERNAL_CONTEXT_WINDOW",
+      "remaining": "PROVE_EQUAL_OR_BETTER_OUTCOMES_ON_MATERIAL_LONG_CONTEXT_CONDITIONS_OR_A_SCOPE_SAFE_STRONGER_CERTIFICATE"
+    }
+  ],
+  "root1_effect": {
+    "positive_gap_delta": 0,
+    "root1_reopened": false
+  },
+  "scheduler_delta": {
+    "delete": [
+      "OPEN_NEW_MULTILINGUAL_FAMILY_FROM_LANGUAGE_LABEL_ALONE",
+      "OPEN_NEW_LONG_CONTEXT_FAMILY_FROM_CONTEXT_SIZE_ALONE"
+    ],
+    "add": [
+      "MULTILINGUAL_CONDITION_COVERAGE_PROOF",
+      "LONG_CONTEXT_CONDITION_COVERAGE_PROOF"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_MULTILINGUAL_PARITY_CLAIM",
+    "NO_LONG_CONTEXT_PARITY_CLAIM",
+    "NO_AUTOMATIC_TRANSFER_FROM_ENGLISH_OR_SHORT_CONTEXT_EVIDENCE",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
