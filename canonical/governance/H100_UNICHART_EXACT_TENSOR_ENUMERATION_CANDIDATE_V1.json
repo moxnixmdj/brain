@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_EXACT_TENSOR_ENUMERATION_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__LIVE_PUBLIC_HEADER_ENUMERATION__ZERO_CREDIT__NO_WEIGHT_PAYLOAD_DOWNLOAD",
+  "objective": "Close the exact UniChart state-dict tensor/dtype/shape enumeration residual by reading only the safetensors header from the same preserved checkpoint lineage.",
+  "lineage": {
+    "original_revision": "e145bd54ec4efbb6f944df5aef605450887f9280",
+    "conversion_revision": "baa206a05372f8c49778313abb7091e1d0c8e474",
+    "original_pytorch_bin": {
+      "blob_id": "1b9577b9f0ec249a6487d465e570fe30fb98b2d0",
+      "sha256": "d238d25a8f1aef1fb4670145854354090e72ec68cca6d526b963e7184b8f0ceb",
+      "bytes": 809199995,
+      "preserved_at_conversion_revision": true
+    },
+    "safetensors": {
+      "blob_id": "9c9438ef6f01105bb3b0a348e5dada60fbf07d00",
+      "sha256": "2faf9ef1ac62a290ea58c80e9e2454db4e3613579e7cb6167cb934a03c09664e",
+      "bytes": 809095376
+    }
+  },
+  "method": [
+    "FETCH_HUGGINGFACE_REVISION_METADATA_AND_ASSERT_ORIGINAL_BIN_LFS_IDENTITY",
+    "HTTP_RANGE_FETCH_ONLY_FIRST_8_BYTES_OF_SAFETENSORS",
+    "DECODE_LITTLE_ENDIAN_HEADER_LENGTH",
+    "HTTP_RANGE_FETCH_ONLY_8_PLUS_HEADER_LENGTH_BYTES_WITH_HARD_MAX_FILE_SIZE",
+    "ENUMERATE_EVERY_TENSOR_DTYPE_SHAPE_OFFSET_AND_ELEMENT_COUNT",
+    "VERIFY_CONTIGUOUS_PAYLOAD_AND_EXACT_TOTAL_FILE_SIZE_FROM_HEADER"
+  ],
+  "boundary": "This closes structural enumeration only. It does not claim value-equivalence between BIN and safetensors, capability preservation after quantization, or any H100/Chartography credit.",
+  "required_next_actions_after_pass": [
+    "FREEZE_EXACT_LOW_BIT_TRANSFORMATION_FORMAT_FROM_ENUMERATED_TENSOR_CLASSES",
+    "PRODUCE_REAL_PACKED_CHECKPOINT_LE_100000000_BYTES",
+    "RUN_PUBLIC_OR_NONTERMINAL_CHART_REASONING_CAPABILITY_PRESERVATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
