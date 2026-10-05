@@ -1,0 +1,210 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_FIVE_MAPPING_BEHAVIORAL_UNION_REDUCTION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_FIRST_PARTY_MAPPING_GROUPS_REDUCED_TO_EXISTING_19_FAMILY_UNION__ACCOUNTING_CLOSURE_ONLY__ZERO_CREDIT",
+  "objective": "Close the five remaining first-party family-mapping obligations by reducing each source-bounded useful behavior to the existing 19-family capability union, without granting behavioral parity, acceptance, capability, family, ownership, or terminal credit.",
+  "authority": {
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "prior_surface_decomposition": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1.json",
+      "git_blob_sha": "c0069cbcbc26aaf663f48c0068f64969564afe10"
+    },
+    "surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    },
+    "envelope_frontier_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    }
+  },
+  "first_party_sources": [
+    "https://www.anthropic.com/claude-opus-5-5",
+    "https://www.anthropic.com/claude-opus-5-5-system-card",
+    "https://www.anthropic.com/transparency",
+    "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+  ],
+  "reduction_rule": "A_FIRST_PARTY_DOMAIN_OR_BENCHMARK_SECTION_REQUIRES_A_NEW_ACCOUNTING_FAMILY_ONLY_IF_AT_LEAST_ONE_SOURCE_BOUNDED_USEFUL_BEHAVIOR_CANNOT_BE_EXPRESSED_AS_A_COMPOSITION_OR_CONDITIONED_INSTANCE_OF_EXISTING_CANONICAL_FAMILY_BEHAVIORS__DOMAIN_KNOWLEDGE_REMAINS_EXTERNAL_JIT_AND_DOES_NOT_CREATE_A_NEW_CAPABILITY_FAMILY_BY_ITSELF",
+  "mappings": [
+    {
+      "surface_group": "CYBERSECURITY",
+      "source_bounded_behavior": "AUTHORIZED_SECURITY_STATE_TO_VERIFIED_FINDING_AND_REMEDIATION_001",
+      "behavior_source": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1.json",
+      "existing_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "lossless_mapping_basis": [
+        "SOFTWARE_AND_SYSTEM_ANALYSIS_REMEDIATION_IS_WITHIN_ADVANCED_AGENTIC_CODING",
+        "MULTI_STEP_AUTHORIZED_TOOL_EXECUTION_IS_WITHIN_COMPLEX_MULTI_TOOL_AGENCY",
+        "SECURITY_DOMAIN_REASONING_WITH_TOOLS_IS_A_CONDITIONED_INSTANCE_OF_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "UNFAMILIAR_SECURITY_TOOL_SELECTION_IS_WITHIN_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "AUTHORIZATION_AND_SCOPE_INVARIANTS_ARE_WITHIN_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "INDEPENDENT_FINDING_AND_REMEDIATION_VALIDATION_IS_WITHIN_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "NEW_SECURITY_ONTOLOGY_OR_TOOLING_CAN_USE_UNKNOWN_DOMAIN_ADAPTATION_WITH_DOMAIN_KNOWLEDGE_EXTERNAL_JIT"
+      ],
+      "mapping_closed_for_accounting": true,
+      "behavioral_parity_closed": false
+    },
+    {
+      "surface_group": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "source_bounded_behavior": "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001",
+      "behavior_source": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1.json",
+      "existing_family_union": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "lossless_mapping_basis": [
+        "HYPOTHESIS_EXPERIMENT_SELECTION_AND_EVIDENCE_UPDATE_IS_WITHIN_AGENTIC_SCIENTIFIC_RESEARCH",
+        "EXPERT_BIOLOGY_REASONING_WITH_SEARCH_CODE_AND_TOOLS_IS_A_CONDITIONED_INSTANCE_OF_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "SPECIALIZED_ANALYSIS_TOOL_SELECTION_IS_WITHIN_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "FALSIFICATION_AND_RESULT_CHECKING_IS_WITHIN_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "UNFAMILIAR_BIOLOGY_ONTOLOGY_CAN_USE_UNKNOWN_DOMAIN_ADAPTATION_WITH_DOMAIN_KNOWLEDGE_EXTERNAL_JIT",
+        "EVIDENCE_REPORTING_IS_WITHIN_COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "mapping_closed_for_accounting": true,
+      "behavioral_parity_closed": false
+    },
+    {
+      "surface_group": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "source_bounded_behavior": "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001",
+      "behavior_source": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1.json",
+      "existing_family_union": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "lossless_mapping_basis": [
+        "FALSIFIABLE_AI_RESEARCH_EXPERIMENT_SELECTION_AND_EVIDENCE_UPDATE_IS_WITHIN_AGENTIC_SCIENTIFIC_RESEARCH",
+        "MODEL_SYSTEM_IMPLEMENTATION_DEBUGGING_AND_REFACTORING_IS_WITHIN_ADVANCED_AGENTIC_CODING",
+        "LONG_RUNNING_TOOL_AND_EXPERIMENT_ORCHESTRATION_IS_WITHIN_COMPLEX_MULTI_TOOL_AGENCY",
+        "NEW_FRAMEWORK_OR_EVALUATION_TOOL_SELECTION_IS_WITHIN_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "ABLATION_FALSIFICATION_AND_RECOVERY_IS_WITHIN_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "NOVEL_AI_SUBDOMAINS_CAN_USE_UNKNOWN_DOMAIN_ADAPTATION",
+        "END_TO_END_RESEARCH_CODE_TOOLS_MEMORY_AND_VERIFICATION_COMPOSITION_IS_WITHIN_MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "mapping_closed_for_accounting": true,
+      "behavioral_parity_closed": false
+    },
+    {
+      "surface_group": "HEALTHCARE",
+      "source_bounded_behavior": "HEALTHCARE_EVIDENCE_TO_SAFE_CLINICAL_WORK_PRODUCT_001",
+      "source_bounded_leaf": {
+        "inputs": "Patient or clinician-visible evidence, healthcare task objective, scope constraints, and allowed JIT authoritative knowledge",
+        "required_output_or_action": "Produce a task-responsive clinical consult, documentation, research support, or patient-facing communication while preserving safety, factual accuracy, uncertainty, and scope",
+        "success_condition": "Independent healthcare rubric verifies material factual accuracy, safety, communication quality, instruction adherence, and appropriate uncertainty for the declared task scope",
+        "failure_condition": "Material unsafe or unsupported clinical claim, omitted critical uncertainty, documentation error, or scope violation"
+      },
+      "existing_family_union": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "lossless_mapping_basis": [
+        "CLINICAL_CONSULT_DOCUMENTATION_AND_RESEARCH_WORK_PRODUCTS_ARE_CONDITIONED_PROFESSIONAL_KNOWLEDGE_WORK",
+        "DIFFICULT_HEALTHCARE_REASONING_WITH_SEARCH_CODE_OR_TOOLS_IS_A_CONDITIONED_INSTANCE_OF_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "PATIENT_AND_CLINICIAN_COMMUNICATION_IS_WITHIN_COMMUNICATION_AND_SYNTHESIS",
+        "SCOPE_AUTHORITY_AND_INSTRUCTION_COMPLIANCE_IS_WITHIN_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "FACT_CHECKING_UNCERTAINTY_CHECKING_AND_RECOVERY_IS_WITHIN_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "HEALTHCARE_RESEARCH_TASKS_CAN_USE_AGENTIC_SCIENTIFIC_RESEARCH",
+        "MEDICAL_FACTUAL_KNOWLEDGE_REMAINS_EXTERNAL_JIT_PER_TERMINAL_KNOWLEDGE_RULE"
+      ],
+      "mapping_closed_for_accounting": true,
+      "behavioral_parity_closed": false
+    },
+    {
+      "surface_group": "MATHEMATICAL_REASONING_ARXIVMATH",
+      "source_bounded_behavior": "RESEARCH_MATH_PROBLEM_TO_VERIFIED_DERIVATION_AND_FINAL_ANSWER_001",
+      "source_bounded_leaf": {
+        "inputs": "Self-contained research-level mathematics problem, task-visible definitions, and allowed code or symbolic tools",
+        "required_output_or_action": "Derive and return a mathematically justified final answer, using tools for admissible substeps when useful",
+        "success_condition": "Independent mathematical evaluator verifies the final answer and required derivation or proof obligations under the declared benchmark protocol",
+        "failure_condition": "Incorrect final answer, invalid derivation, unsupported proof step, or tool result used outside its verified scope"
+      },
+      "existing_family_union": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "EXACT_SYMBOLIC_COMPUTATION",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "lossless_mapping_basis": [
+        "DIFFICULT_EXPERT_LEVEL_MATHEMATICAL_PROBLEM_SOLVING_WITH_SEARCH_CODE_OR_TOOLS_IS_WITHIN_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "CODE_SANDBOX_OR_SPECIALIZED_SOLVER_SELECTION_IS_WITHIN_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "DERIVATION_CHECKING_COUNTEREXAMPLE_SEARCH_AND_ERROR_RECOVERY_IS_WITHIN_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "BOUNDED_DETERMINISTIC_SYMBOLIC_SUBSTEPS_MAY_USE_EXACT_SYMBOLIC_COMPUTATION_WITHOUT_EXPANDING_ITS_SCOPE_TO_GENERAL_MATH",
+        "RESEARCH_STYLE_ITERATIVE_HYPOTHESIS_AND_VERIFICATION_CAN_USE_AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "mapping_closed_for_accounting": true,
+      "behavioral_parity_closed": false
+    }
+  ],
+  "exact_result": {
+    "input_mapping_group_count": 5,
+    "accounting_mapping_groups_closed": 5,
+    "constructive_unmapped_behavior_counterexamples_found": 0,
+    "new_family_required_by_current_source_bounded_surfaces": false,
+    "root1_positive_gap_delta": 0,
+    "root1_reopened": false
+  },
+  "exhaustiveness_boundary": "THIS_CERTIFICATE_CLOSES_ONLY_THE_FIVE_EXPLICIT_V5_MAPPING_GROUPS_OVER_THE_CURRENT_FIRST_PARTY_SOURCE_BOUNDED_BEHAVIORS__IT_DOES_NOT_ASSERT_THAT_ALL_IMAGINABLE_CYBERSECURITY_BIOLOGY_AI_R_AND_D_HEALTHCARE_OR_MATHEMATICS_TASKS_ARE_TERMINAL_ACCEPTED__NEW_FIRST_PARTY_BEHAVIORAL_SURFACES_MUST_REOPEN_MAPPING_IF_NOT_REDUCIBLE",
+  "remaining_terminal_obligations_after_mapping_if_verified": [
+    "CURRENT_ATOMIC_ACCEPTANCE_CLOSURE",
+    "MULTILINGUAL_CONDITION_COVERAGE_PROOF",
+    "LONG_CONTEXT_CONDITION_COVERAGE_PROOF",
+    "CREATIVE_TEXT_AND_DIAGRAM_ACCEPTANCE_BASIS_REPAIR"
+  ],
+  "scheduler_effect": {
+    "delete_if_verified": [
+      "FIVE_EXACT_FAMILY_MAPPING_OR_COUNTEREXAMPLE_CHECKS"
+    ],
+    "preserve": [
+      "CURRENT_ROOT1_POSITIVE_GAP_ZERO",
+      "CURRENT_24_ATOMIC_ACCEPTANCE_FRONTIER",
+      "MULTILINGUAL_CONDITION_COVERAGE_PROOF",
+      "LONG_CONTEXT_CONDITION_COVERAGE_PROOF",
+      "MINIMUM_CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_BEHAVIORAL_PARITY_CLAIM",
+    "NO_PUBLIC_BENCHMARK_SCORE_CLAIM",
+    "NO_NEW_FAMILY_CREDIT",
+    "NO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
