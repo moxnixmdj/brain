@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_BROWSER_LEAF_SCOPE_REUSE_BINDING_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXISTING_INDEPENDENTLY_VERIFIED_BROWSER_TERMINAL_ROUTE_REUSED_FOR_SCOPE_BASIS__PERFORMANCE_AND_TERMINAL_RESULTS_OPEN__ZERO_CREDIT",
+  "objective": "Delete redundant uncovered-scope construction for BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001 in the six benchmark-proxy family scope repair by reusing the already frozen and independently verified behavior-specific terminal route, without inferring terminal performance.",
+  "authorities": {
+    "scope_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "browser_terminal_binding": {
+      "path": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "28e955d5d593d1de9cfab0f9cdcdae732fd315f1"
+    },
+    "browser_binding_verification": {
+      "path": "canonical/verification/BROWSER_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "cf9edfa3203e25d9f46bb2847ec57b9fd8dd7b7d"
+    },
+    "browser_package_verification": {
+      "path": "canonical/verification/BROWSER_T2_OBJECTIVE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "e9913dfb0f4fb3d9256f619c85e5ab072c7109c9"
+    }
+  },
+  "exact_behavioral_identity": {
+    "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "contract_scope": "Interactive computer/browser state to next grounded action",
+    "contract_required_behavior": [
+      "SELECT_VALID_ACTION_TARGET_AND_ARGUMENTS",
+      "CONDITION_ON_CURRENT_NOT_STALE_STATE",
+      "ADVANCE_DECLARED_GOAL_STATE",
+      "BIND_ACTION_RESULT_TO_UPDATED_OBSERVATION",
+      "RECOVER_AFTER_OBSERVABLE_STATE_MISMATCH",
+      "REJECT_UNOBSERVED_SIDE_EFFECTS",
+      "SUPPRESS_REPEATED_NO_PROGRESS_LOOPS",
+      "AVOID_OPAQUE_TARGET_CAPABILITY_PROVIDER_DEPENDENCE"
+    ],
+    "frozen_route_objective_dimensions": [
+      "ACTION_TARGET_AND_ARGUMENT_ADMISSIBILITY",
+      "FRESH_STATE_CONDITIONING",
+      "DECLARED_GOAL_STATE_ADVANCEMENT",
+      "OBSERVABLE_MISMATCH_RECOVERY",
+      "UNOBSERVED_SIDE_EFFECT_REJECTION",
+      "NO_PROGRESS_LOOP_SUPPRESSION",
+      "OPAQUE_TARGET_PROVIDER_NONDEPENDENCE"
+    ],
+    "observation_binding_covered_by_route": true,
+    "hidden_oracle_boundary_independently_verified": true,
+    "route_population_frozen": true,
+    "route_selection_frozen": true,
+    "terminal_route_admissibility_previously_promoted": true
+  },
+  "deduction": {
+    "scope_basis_result": "NO_NEW_BEHAVIOR_DEFINITION_OR_UNCOVERED_SCOPE_POPULATION_IS_REQUIRED_FOR_THIS_LEAF_BEFORE_USING_THE_EXISTING_BOUND_BROWSER_ROUTE",
+    "why": "THE_ACTIVE_BEHAVIOR_ID_HAS_A FROZEN BEHAVIOR-SPECIFIC TERMINAL ROUTE WHOSE OBJECTIVE DIMENSIONS EXPLICITLY COVER THE CONTRACT SUCCESS_AND_FAILURE CONDITIONS AND WHOSE INFORMATION_BOUNDARY_AND_SELECTION_MECHANICS WERE INDEPENDENTLY VERIFIED.",
+    "does_not_imply": "NO_TERMINAL_PERFORMANCE_RESULT__NO_AUTOMATIONBENCH_PASS__NO_OSWORLD_PASS__NO_FAMILY_ACCEPTANCE"
+  },
+  "fanout": [
+    "BUSINESS_WORKFLOW_AUTOMATION",
+    "COMPUTER_AND_BROWSER_USE"
+  ],
+  "compression_effect": {
+    "prior_unique_surviving_behavioral_leaves": 7,
+    "behavioral_leaves_removed_from_performance_accounting": 0,
+    "leaves_requiring_new_scope_basis_construction_after_this_binding": 6,
+    "deleted_duplicate_scope_programs": [
+      "NEW_BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_SCOPE_DEFINITION_FOR_BUSINESS_WORKFLOW_AUTOMATION",
+      "NEW_BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_SCOPE_DEFINITION_FOR_COMPUTER_AND_BROWSER_USE"
+    ],
+    "preserved_work": [
+      "EXISTING_BROWSER_T2_TERMINAL_ROUTE",
+      "AUTOMATIONBENCH_GE_40",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "ANY_TERMINAL_BROWSER_RESULT_REQUIRED_BY_CURRENT_ACCEPTANCE_AUTHORITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_PROVED",
+    "NO_FAMILY_PROMOTION",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_BROWSER_RESULT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CLAIM_THE_FIVE_CLASS_PREWAVE_DIAGNOSTIC_IS_TERMINAL_PERFORMANCE_EVIDENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
