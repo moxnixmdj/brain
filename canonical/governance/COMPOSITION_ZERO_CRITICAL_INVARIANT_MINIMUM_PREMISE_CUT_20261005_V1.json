@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_ZERO_CRITICAL_INVARIANT_MINIMUM_PREMISE_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ZERO_REALITY_RESIDUAL_LOCALIZED__STRUCTURAL_COMPOSITION_NOT_INVARIANT_PROOF__ZERO_CREDIT",
+  "target_predicate": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+  "objective": "Reduce the live composition invariant predicate to the smallest currently unproved semantic premises, while deleting unsound reuse of the grounded structural composition verifier as if it established runtime state/provenance invariants.",
+  "target_semantics": {
+    "normalization_path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+    "normalization_git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226",
+    "required_atoms": [
+      "invariant:zero_critical_composition_failures",
+      "invariant:cross_component_state_loss_zero_or_noncritical",
+      "invariant:evidence_provenance_complete"
+    ],
+    "metric": {
+      "id": "critical_composition_invariant_failures",
+      "direction": "lower",
+      "threshold": 0
+    }
+  },
+  "current_stronger_proof_route": {
+    "reducer_path": "canonical/governance/OPUS55_COMPOSITIONAL_TRACE_REFINEMENT_TERMINAL_REDUCER_20261005_V1.json",
+    "reducer_git_blob_sha": "741c354c705a77972ba051dcc62917bfc53fa941",
+    "verification_path": "canonical/verification/OPUS55_COMPOSITIONAL_TRACE_REFINEMENT_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "verification_git_blob_sha": "69baf09701eaeb59e105d0f95310d97023a25ef1",
+    "activation_path": "canonical/governance/OPUS55_COMPOSITIONAL_TRACE_REFINEMENT_TERMINAL_REDUCER_ACTIVATION_20261005_V1.json",
+    "activation_git_blob_sha": "1a1ebae614ddf65bb18c9316aa19a6a8c765da6a",
+    "consequence": "FORWARD_SIMULATION_IS_SOUND_ONLY_IF_SCOPE_AUTHORITY_AND_NO_HIDDEN_COMPOSITION_DEBT_STATE_INVARIANTS_ARE_SEPARATELY_PROVED"
+  },
+  "structural_runtime_audit": {
+    "composer_path": "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+    "composer_git_blob_sha": "8328e12804f64cab1c0d9509966cb1d2d8fb1f82",
+    "verifier_path": "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
+    "verifier_git_blob_sha": "ab9f6fc19937d23edb24dc26a2affed96cea0a9a",
+    "proved_or_checked": [
+      "GROUNDING_AND_GOAL_IDENTITY",
+      "VERIFIED_BOUND_CAPABILITY_SOURCE_STATUS",
+      "ZERO_INCREMENTAL_SOURCE_SPEND",
+      "ACTION_TEMPLATE_AND_RENDER_BINDING",
+      "REQUIRES_PROVIDES_AND_PROVIDER_SLOT_WIRING",
+      "EFFECT_RESULT_PROVIDER_AND_FIELD_BINDINGS",
+      "VERIFIED_EXTERNAL_INITIAL_FACT_REQUIREMENTS",
+      "AMBIGUOUS_ALTERNATIVE_COMMON_EFFECT_COMPATIBILITY"
+    ],
+    "not_proved": [
+      "EXECUTED_CROSS_ROLE_STATE_IS_PRESERVED_ACROSS_EVERY_MACROSTEP",
+      "ROLLBACK_RESTORES_ALL_LOAD_BEARING_CROSS_COMPONENT_STATE",
+      "EVIDENCE_PROVENANCE_IS_COMPLETE_FOR_EVERY_LOAD_BEARING_RUNTIME_TRANSITION",
+      "ZERO_CRITICAL_INVARIANT_FAILURES_OVER_THE_FROZEN_COMPOSITION_PORTFOLIO"
+    ]
+  },
+  "minimum_unproved_premises": [
+    {
+      "id": "P1_CROSS_ROLE_STATE_PRESERVATION",
+      "statement": "FOR_EVERY_ADMISSIBLE_COMPOSITION_MACROSTEP__ALL_LOAD_BEARING_STATE_REQUIRED_BY_LATER_ROLES_IS_PRESERVED_OR_A_VERIFIED_ROLLBACK_REESTABLISHES_THE_PREDECLARED_STATE_RELATION",
+      "closes": [
+        "invariant:cross_component_state_loss_zero_or_noncritical"
+      ]
+    },
+    {
+      "id": "P2_LOAD_BEARING_PROVENANCE_COMPLETENESS",
+      "statement": "FOR_EVERY_LOAD_BEARING_COMPOSITION_TRANSITION_AND_OUTPUT__THE_EVIDENCE_OR_STATE_LINEAGE_REQUIRED_BY_ACCEPTANCE_IS_CONTENT_BOUND_AND_COMPLETE",
+      "closes": [
+        "invariant:evidence_provenance_complete"
+      ]
+    },
+    {
+      "id": "P3_CRITICAL_FAILURE_AGGREGATION",
+      "statement": "P1_AND_P2_PLUS_THE_OTHER_FROZEN_CRITICAL_COMPOSITION_INVARIANTS_IMPLY_CRITICAL_COMPOSITION_INVARIANT_FAILURE_COUNT_EQUALS_ZERO",
+      "closes": [
+        "invariant:zero_critical_composition_failures",
+        "critical_composition_invariant_failures<=0"
+      ]
+    }
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "TREAT_GROUNDED_EXECUTABLE_COMPOSITION_STRUCTURAL_VERIFICATION_AS_DIRECT_PROOF_OF_COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "REPEAT_GENERIC_SEARCH_FOR_COMPOSITION_WIRING_OR_PROVIDER_BINDING_PROOFS",
+      "ENUMERATE_PAIRWISE_CAPABILITY_COMBINATIONS_FOR_THE_SOLE_PURPOSE_OF_PROVING_THE_THREE_INVARIANT_ATOMS"
+    ],
+    "activate": [
+      "SEARCH_OR_COMPILE_ONLY_A_CONTENT_ADDRESSED_P1_STATE_PRESERVATION_THEOREM",
+      "SEARCH_OR_COMPILE_ONLY_A_CONTENT_ADDRESSED_P2_RUNTIME_PROVENANCE_COMPLETENESS_THEOREM",
+      "AFTER_P1_AND_P2_RECOMPUTE_P3_ZERO_FAILURE_AGGREGATION_AND_PARENT_FORWARD_SIMULATION"
+    ]
+  },
+  "wake_conditions": [
+    "NEW_RUNTIME_STATE_HANDOFF_OR_ROLLBACK_RECEIPT_WITH_SCOPE_COMPLETE_SEMANTICS",
+    "NEW_RUNTIME_PROVENANCE_COMPLETENESS_RECEIPT_WITH_SCOPE_COMPLETE_SEMANTICS",
+    "NEW_FORMAL_THEOREM_BINDING_EXISTING_RUNTIME_MECHANICS_TO_P1_OR_P2"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_P1_OR_P2_IS_IMPOSSIBLE",
+    "NO_CLAIM_CURRENT_STRUCTURAL_COMPOSITION_RUNTIME_IS_INCORRECT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
