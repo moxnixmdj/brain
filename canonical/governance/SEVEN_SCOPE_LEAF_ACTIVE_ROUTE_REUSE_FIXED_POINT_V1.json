@@ -137,5 +137,13 @@
   "promotion_authority": false,
   "fresh_reality_authority": false,
   "independent_verification_required": true,
-  "verifier": "canonical/runtime/verify_seven_scope_leaf_route_reuse_v1.py"
+  "verifier": "canonical/runtime/verify_seven_scope_leaf_route_reuse_v1.py",
+  "revalidation_after_global_v3_quarantine": {
+    "stale_v3_gate_merge_commit": "f47df7aa20e4f6b493956999947965abdf80717c",
+    "current_partition_blob": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f",
+    "current_active_basis_blob": "9c60356ab509a16df5104777f360b9fb18255842",
+    "current_behavioral_registry_blob": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "historical_registry_blob": "afa00109031d638fef32cc3fe10be18786605c39",
+    "live_recomputation": "7_OF_7_CONTRACT_CORES_IDENTICAL__7_OF_7_FROZEN_ADMISSIBLE__BLOCKERS_EMPTY__PREWAVE_TRUE__ZERO_TERMINAL_RESULTS"
+  }
 }
