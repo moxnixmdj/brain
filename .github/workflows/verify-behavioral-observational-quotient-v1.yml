@@ -1,0 +1,50 @@
+name: Verify behavioral observational quotient V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/OPUS55_BEHAVIORAL_OBSERVATIONAL_QUOTIENT_BREAKTHROUGH_20261005_V1.json"
+      - "canonical/runtime/behavioral_observational_quotient_v1.py"
+      - "canonical/tests/test_behavioral_observational_quotient_v1.py"
+      - ".github/workflows/verify-behavioral-observational-quotient-v1.yml"
+  push:
+    branches:
+      - "breakthrough/behavioral-observational-quotient-v1"
+    paths:
+      - "canonical/governance/OPUS55_BEHAVIORAL_OBSERVATIONAL_QUOTIENT_BREAKTHROUGH_20261005_V1.json"
+      - "canonical/runtime/behavioral_observational_quotient_v1.py"
+      - "canonical/tests/test_behavioral_observational_quotient_v1.py"
+      - ".github/workflows/verify-behavioral-observational-quotient-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify exact frozen subject blobs
+        shell: python
+        run: |
+          import hashlib
+          from pathlib import Path
+          expected = {
+              "canonical/governance/OPUS55_BEHAVIORAL_OBSERVATIONAL_QUOTIENT_BREAKTHROUGH_20261005_V1.json": "f1524749949a1a3c9ce7c42af0a5a38d76a39cc7",
+              "canonical/runtime/behavioral_observational_quotient_v1.py": "a8fc6bd3d9f536ac6a7d027d3f3712e27e7e4eb9",
+              "canonical/tests/test_behavioral_observational_quotient_v1.py": "37e727a0d7c0cfe5843d7f6ca05885da517d6f86",
+          }
+          for path, want in expected.items():
+              data = Path(path).read_bytes()
+              got = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+              if got != want:
+                  raise SystemExit(f"BLOB_DRIFT {path} {got} != {want}")
+          print("EXACT_BLOBS_PASS")
+      - name: Run adversarial quotient tests
+        run: python -m unittest -v canonical.tests.test_behavioral_observational_quotient_v1
