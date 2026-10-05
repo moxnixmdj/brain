@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_EXPLICIT_CONFLICT_TO_SCIENTIFIC_QUESTION_EXACT_SUBTRACTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXPLICIT_TYPED_TWO_CLAIM_CONFLICT_PLUS_EXPLICIT_TEST_MODELS_COMPILES_TO_FALSIFIABLE_RESEARCH_QUESTION_AND_EXACT_MAX_INFORMATION_TEST_WITHOUT_LEARNED_SEMANTICS__ZERO_CREDIT",
+  "parent_residual": "SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001",
+  "objective": "Subtract the question-phrasing and test-selection burden for the bounded region where a scientific tension is already normalized as two incompatible provenance-bound claims over one claim slot and feasible observation models are explicit.",
+  "brain_authorities": {
+    "epistemic_conflict_receipt": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001__RECEIPT.json",
+    "epistemic_conflict_mission": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_KNOWLEDGE_CONFLICT_001.json",
+    "exact_information_gain_kernel": "canonical/runtime/exact_information_gain.py",
+    "hypothesis_subtraction_activation": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_ACTIVATION_V1.json"
+  },
+  "external_structural_evidence": {
+    "scientific_question_discovery_repo": "https://github.com/nonameisready/scientific-question-discovery",
+    "license": "MIT",
+    "relevant_observation": "UPSTREAM_ARCHITECTURE_DETERMINISTICALLY_ASSEMBLES_HUMAN_CONFIRMED_TENSION_SIGNALS_AND_USES_AN_LLM_ONLY_FOR_NATURAL_LANGUAGE_QUESTION_PHRASING; THIS_CANDIDATE_GOES_FURTHER_BY_REQUIRING_EXPLICIT_TYPED_CONFLICT_AND_TEST_MODELS_AND_COMPILING_A_CANONICAL_QUESTION_WITHOUT_LLM_PHRASING",
+    "hard_boundary": "UPSTREAM_STILL_USES_HUMAN_REVIEW_AND_MODEL_BASED_CLAIM_EXTRACTION_PHRASING_RANKING; NO_UPSTREAM_PERFORMANCE_CREDIT_IMPORTED"
+  },
+  "input_preconditions": [
+    "SIGNAL_TYPE_IS_DIRECT_CONFLICT",
+    "SUBJECT_CLAIM_SLOT_AND_SCOPE_ARE_EXPLICIT",
+    "EXACTLY_TWO_DISTINCT_CLAIMS_ARE_DECLARED",
+    "BOTH_CLAIMS_CARRY_NONEMPTY_PROVENANCE_EVIDENCE_IDS",
+    "THE_TWO_CLAIMS_ARE_ALREADY_CERTIFIED_INCOMPATIBLE_OVER_THE_SAME_NORMALIZED_CLAIM_SLOT",
+    "PRIOR_OVER_THE_TWO_DECLARED_HYPOTHESES_IS_EXPLICIT_AND_EXACT",
+    "AT_LEAST_ONE_TEST_IS_EXPLICITLY_FEASIBLE",
+    "EACH_FEASIBLE_TEST_HAS_A_COMPLETE_EXPLICIT_LIKELIHOOD_MODEL_OVER_BOTH_HYPOTHESES",
+    "AT_LEAST_ONE_FEASIBLE_TEST_HAS_STRICTLY_POSITIVE_EXPECTED_INFORMATION_GAIN"
+  ],
+  "exact_transform": {
+    "hypothesis_construction": "USE_THE_TWO_CONFLICTING_CLAIMS_THEMSELVES_AS_THE_TWO_DECLARED_HYPOTHESES__NO_NEW_SEMANTIC_HYPOTHESIS_INVENTION",
+    "question_construction": "CANONICAL_TEMPLATE__UNDER_SCOPE_WHICH_OF_THE_TWO_CONFLICTING_CLAIMS_ABOUT_CLAIM_SLOT_FOR_SUBJECT_IS_BETTER_SUPPORTED_CLAIM_A_OR_CLAIM_B",
+    "test_selection": "RANK_ONLY_EXPLICITLY_FEASIBLE_TESTS_BY_CANONICAL_EXACT_EXPECTED_INFORMATION_GAIN_KERNEL_AND_SELECT_THE_MAXIMUM",
+    "falsifiability_gate": "FAIL_CLOSED_IF_THE_MAXIMUM_FEASIBLE_TEST_HAS_ZERO_INFORMATION_GAIN_OR_IF_ANY_PROBABILITY_MODEL_IS_INCOMPLETE_INVALID_OR_INEXACT",
+    "provenance_rule": "PRESERVE_BOTH_CLAIM_EVIDENCE_ID_SETS_AND_THE_SELECTED_TEST_MODEL_IN_THE_OUTPUT_CERTIFICATE"
+  },
+  "factorization_theorem": "WHEN_ALL_PRECONDITIONS_HOLD, RESEARCH_QUESTION_FORMATION_FOR_THIS DIRECT_CONFLICT SUBREGION REQUIRES NO LEARNED SEMANTIC_GENERATION: THE CONFLICT ITSELF SUPPLIES THE HYPOTHESIS PAIR, A CANONICAL LOSSLESS QUESTION IS MECHANICALLY DERIVED, AND TEST_CHOICE_IS EXACTLY COMPUTED. THEREFORE ANY FUTURE MATCHED_OPUS_PROOF_FOR_THE_PARENT_RESIDUAL_MUST_NOT REPAY SEMANTIC_QUESTION_FORMATION_OR_TEST_SELECTION_COST ON THIS SUBREGION.",
+  "remaining_open_semantics_after_subtraction": [
+    "DISCOVERING_OR_NORMALIZING_SCIENTIFIC_CLAIMS_FROM_RAW_EVIDENCE_WHEN_NOT_EXPLICIT",
+    "DISCOVERING_THAT_TWO_CLAIMS_ARE_A_GENUINE_SCIENTIFIC_CONFLICT_WHEN_NOT_ALREADY_TYPED",
+    "INVENTING_NONTRIVIAL_HYPOTHESES_WHEN_THE_EVIDENCE_DOES_NOT_PRESENT_AN_EXPLICIT_CONFLICT_PAIR",
+    "FORMING_PRIORS_LIKELIHOODS_OR_OBSERVATION_MODELS_WHEN_NOT_EXPLICIT",
+    "SCIENTIFIC_FEASIBILITY_JUDGMENT_WHEN_NOT_FORMALIZED",
+    "OPEN_WORLD_EXPLANATION_COMPLETENESS"
+  ],
+  "test_vectors": [
+    {
+      "id": "PERFECT_TEST_BEATS_NOISY_TEST",
+      "prior": {"h_a": "1/2", "h_b": "1/2"},
+      "tests": {
+        "noisy": {
+          "h_a": {"positive": "3/4", "negative": "1/4"},
+          "h_b": {"positive": "1/4", "negative": "3/4"}
+        },
+        "perfect": {
+          "h_a": {"positive": 1, "negative": 0},
+          "h_b": {"positive": 0, "negative": 1}
+        }
+      },
+      "expected_selected_test": "perfect"
+    },
+    {
+      "id": "NONDISCRIMINATING_TEST_FAILS_CLOSED",
+      "prior": {"h_a": "1/2", "h_b": "1/2"},
+      "tests": {
+        "useless": {
+          "h_a": {"x": "1/2", "y": "1/2"},
+          "h_b": {"x": "1/2", "y": "1/2"}
+        }
+      },
+      "expected": "REFUSE__NO_FEASIBLE_DISCRIMINATING_TEST"
+    },
+    {
+      "id": "FLOAT_PRIOR_FAILS_CLOSED",
+      "prior": {"h_a": 0.5, "h_b": 0.5},
+      "expected": "REFUSE__EXACT_PROBABILITY_REQUIRED"
+    }
+  ],
+  "implementation_note": {
+    "local_candidate_runtime_was_syntax_checked": true,
+    "canonical_runtime_write_attempt": "BLOCKED_BY_CONNECTOR_SAFETY_GATE",
+    "canonical_runtime_implementation_present": false,
+    "therefore_no_execution_or_ownership_credit": true
+  },
+  "scheduler_effect_if_independently_verified": [
+    "SUBTRACT_EXPLICIT_TYPED_DIRECT_CONFLICT_QUESTION_FORMATION_FROM_THE_OPEN_SCIENTIFIC_SEMANTIC_RESIDUAL",
+    "SUBTRACT_TEST_SELECTION_FOR_EXPLICIT_EXACT_OBSERVATION_MODELS_USING_THE_EXISTING_INFORMATION_GAIN_KERNEL",
+    "FOCUS_LEARNED_DONOR_SEARCH_ON_TENSION_GAP_DISCOVERY_HYPOTHESIS_INVENTION_AND_MODEL_FORMATION_WHEN_EXPLICIT_STRUCTURE_IS_MISSING",
+    "DO_NOT_SCHEDULE_MATCHED_OPUS_COMPARISON_FOR_THIS_EXACT_SUBREGION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_RAW_PAPER_TO_CONFLICT_DISCOVERY_IS_SOLVED",
+    "NO_CLAIM_GENERAL_RESEARCH_QUESTION_FORMATION_IS_SOLVED",
+    "NO_CLAIM_OPEN_ENDED_HYPOTHESIS_INVENTION_IS_SOLVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
