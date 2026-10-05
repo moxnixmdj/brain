@@ -1,0 +1,961 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_DESCRIPTION_ANCHOR_REGISTRY_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__MECHANICALLY_DERIVED_FROM_PINNED_PUBLIC_BUILD_DESCRIPTION_PATTERNS__ZERO_CREDIT",
+  "source": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "modern_instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "derivation": {
+    "active_checker_count": 83,
+    "checkers_with_pattern_assignment": 83,
+    "assignment_count_distribution": {
+      "1": 82,
+      "4": 1
+    },
+    "total_render_pattern_count": 86,
+    "extraction_rule": "PARSE_EACH_REGISTERED_CLASS_BLOCK__EXTRACT_EVERY_LITERAL_ONLY_SELF_DESCRIPTION_PATTERN_ASSIGNMENT__CONCATENATE_LITERAL_TOKENS__SPLIT_FORMAT_PLACEHOLDERS__SELECT_LONGEST_NONEMPTY_LITERAL_SEGMENT_AS_GUARANTEED_RENDER_SUBSTRING",
+    "all_assignment_rhs_literal_only": true,
+    "minimum_anchor_length": 11,
+    "minimum_anchor_checker": "NumberOfWords",
+    "duplicate_anchor_groups": [
+      {
+        "anchor": "Answer with one of the following options:",
+        "checkers": [
+          "ConstrainedResponseChecker",
+          "OptionsResponseChecker"
+        ]
+      }
+    ]
+  },
+  "entries": [
+    {
+      "family": "legacy",
+      "id": "keywords:existence",
+      "checker": "KeywordChecker",
+      "patterns": [
+        "Include keywords {keywords} in the response."
+      ],
+      "anchors": [
+        "Include keywords"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "keywords:frequency",
+      "checker": "KeywordFrequencyChecker",
+      "patterns": [
+        "In your response, the word {keyword} should appear {relation} {frequency} times."
+      ],
+      "anchors": [
+        "In your response, the word"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "keywords:forbidden_words",
+      "checker": "ForbiddenWords",
+      "patterns": [
+        "Do not include keywords {forbidden_words} in the response."
+      ],
+      "anchors": [
+        "Do not include keywords"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "keywords:letter_frequency",
+      "checker": "LetterFrequencyChecker",
+      "patterns": [
+        "In your response, the letter {letter} should appear {let_relation} {let_frequency} times."
+      ],
+      "anchors": [
+        "In your response, the letter"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "language:response_language",
+      "checker": "ResponseLanguageChecker",
+      "patterns": [
+        "Your ENTIRE response should be in {language} language, no other language is allowed."
+      ],
+      "anchors": [
+        "language, no other language is allowed."
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "length_constraints:number_sentences",
+      "checker": "NumberOfSentences",
+      "patterns": [
+        "Your response should contain {relation} {num_sentences} sentences."
+      ],
+      "anchors": [
+        "Your response should contain"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "length_constraints:number_paragraphs",
+      "checker": "ParagraphChecker",
+      "patterns": [
+        "There should be {num_paragraphs} paragraphs. Paragraphs are separated with the markdown divider: ***"
+      ],
+      "anchors": [
+        "paragraphs. Paragraphs are separated with the markdown divider: ***"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "length_constraints:number_words",
+      "checker": "NumberOfWords",
+      "patterns": [
+        "Answer with {relation} {num_words} words."
+      ],
+      "anchors": [
+        "Answer with"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "length_constraints:nth_paragraph_first_word",
+      "checker": "ParagraphFirstWordCheck",
+      "patterns": [
+        "There should be {num_paragraphs} paragraphs. Paragraphs and only paragraphs are separated with each other by two new lines as if it was '\\\n\\\n' in python. Paragraph {nth_paragraph} must start with word {first_word}."
+      ],
+      "anchors": [
+        "paragraphs. Paragraphs and only paragraphs are separated with each other by two new lines as if it was '\\\n\\\n' in python. Paragraph"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "detectable_content:number_placeholders",
+      "checker": "PlaceholderChecker",
+      "patterns": [
+        "The response must contain at least {num_placeholders} placeholders represented by square brackets, such as [address]."
+      ],
+      "anchors": [
+        "placeholders represented by square brackets, such as [address]."
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "detectable_content:postscript",
+      "checker": "PostscriptChecker",
+      "patterns": [
+        "At the end of your response, please explicitly add a postscript starting with {postscript}"
+      ],
+      "anchors": [
+        "At the end of your response, please explicitly add a postscript starting with"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "detectable_format:number_bullet_lists",
+      "checker": "BulletListChecker",
+      "patterns": [
+        "Your answer must contain exactly {num_bullets} bullet points. Use the markdown bullet points such as:\n* This is point 1. \n* This is point 2"
+      ],
+      "anchors": [
+        "bullet points. Use the markdown bullet points such as:\n* This is point 1. \n* This is point 2"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "detectable_format:constrained_response",
+      "checker": "ConstrainedResponseChecker",
+      "patterns": [
+        "Answer with one of the following options: {response_options}"
+      ],
+      "anchors": [
+        "Answer with one of the following options:"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "detectable_format:number_highlighted_sections",
+      "checker": "HighlightSectionChecker",
+      "patterns": [
+        "Highlight at least {num_highlights} sections in your answer with markdown, i.e. *highlighted section*."
+      ],
+      "anchors": [
+        "sections in your answer with markdown, i.e. *highlighted section*."
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "detectable_format:multiple_sections",
+      "checker": "SectionChecker",
+      "patterns": [
+        "Your response must have {num_sections} sections. Mark the beginning of each section with {section_spliter} X, such as:\n{section_spliter} 1\n[content of section 1]\n{section_spliter} 2\n[content of section 2]"
+      ],
+      "anchors": [
+        "sections. Mark the beginning of each section with"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "detectable_format:json_format",
+      "checker": "JsonFormat",
+      "patterns": [
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as ```."
+      ],
+      "anchors": [
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as ```."
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "detectable_format:title",
+      "checker": "TitleChecker",
+      "patterns": [
+        "Your answer must contain a title, wrapped in double angular brackets, such as <<poem of joy>>."
+      ],
+      "anchors": [
+        "Your answer must contain a title, wrapped in double angular brackets, such as <<poem of joy>>."
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "combination:two_responses",
+      "checker": "TwoResponsesChecker",
+      "patterns": [
+        "Give two different responses. Responses and only responses should be separated by 6 asterisk symbols: ******."
+      ],
+      "anchors": [
+        "Give two different responses. Responses and only responses should be separated by 6 asterisk symbols: ******."
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "combination:repeat_prompt",
+      "checker": "RepeatPromptThenAnswer",
+      "patterns": [
+        "First repeat the request word for word without change, then give your answer (1. do not say any words or characters before repeating the request; 2. the request you need to repeat does not include this sentence)"
+      ],
+      "anchors": [
+        "First repeat the request word for word without change, then give your answer (1. do not say any words or characters before repeating the request; 2. the request you need to repeat does not include this sentence)"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "startend:end_checker",
+      "checker": "EndChecker",
+      "patterns": [
+        "Finish your response with this exact phrase {ender}. No other words should follow this phrase."
+      ],
+      "anchors": [
+        "Finish your response with this exact phrase"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "change_case:capital_word_frequency",
+      "checker": "CapitalWordFrequencyChecker",
+      "patterns": [
+        "In your response, words with all capital letters should appear {relation} {frequency} times."
+      ],
+      "anchors": [
+        "In your response, words with all capital letters should appear"
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "change_case:english_capital",
+      "checker": "CapitalLettersEnglishChecker",
+      "patterns": [
+        "Your entire response should be in English, and in all capital letters."
+      ],
+      "anchors": [
+        "Your entire response should be in English, and in all capital letters."
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "change_case:english_lowercase",
+      "checker": "LowercaseLettersEnglishChecker",
+      "patterns": [
+        "Your entire response should be in English, and in all lowercase letters. No capital letters are allowed."
+      ],
+      "anchors": [
+        "Your entire response should be in English, and in all lowercase letters. No capital letters are allowed."
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "punctuation:no_comma",
+      "checker": "CommaChecker",
+      "patterns": [
+        "In your entire response, refrain from the use of any commas."
+      ],
+      "anchors": [
+        "In your entire response, refrain from the use of any commas."
+      ]
+    },
+    {
+      "family": "legacy",
+      "id": "startend:quotation",
+      "checker": "QuotationChecker",
+      "patterns": [
+        "Wrap your entire response with double quotation marks."
+      ],
+      "anchors": [
+        "Wrap your entire response with double quotation marks."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "count:word_count_range",
+      "checker": "WordCountRangeChecker",
+      "patterns": [
+        "The response must contain between {min_words} and {max_words} words."
+      ],
+      "anchors": [
+        "The response must contain between"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "count:unique_word_count",
+      "checker": "UniqueWordCountChecker",
+      "patterns": [
+        "Use at least {N} unique words in the response."
+      ],
+      "anchors": [
+        "unique words in the response."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "ratio:stop_words",
+      "checker": "StopWordPercentageChecker",
+      "patterns": [
+        "Ensure that stop words constitute no more than {percentage}% of the total words in your response."
+      ],
+      "anchors": [
+        "Ensure that stop words constitute no more than"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "ratio:sentence_type",
+      "checker": "SentTypeRatioChecker",
+      "patterns": [
+        "Maintain a 2:1 ratio of declarative to interrogative sentences."
+      ],
+      "anchors": [
+        "Maintain a 2:1 ratio of declarative to interrogative sentences."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "ratio:sentence_balance",
+      "checker": "SentBalanceChecker",
+      "patterns": [
+        "Ensure that the ratio of sentence types (declarative, interrogative, exclamatory) is balanced."
+      ],
+      "anchors": [
+        "Ensure that the ratio of sentence types (declarative, interrogative, exclamatory) is balanced."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "count:conjunctions",
+      "checker": "ConjunctionCountChecker",
+      "patterns": [
+        "Use at least {small_n} different coordinating conjunctions in the response."
+      ],
+      "anchors": [
+        "different coordinating conjunctions in the response."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "count:person_names",
+      "checker": "PersonNameCountChecker",
+      "patterns": [
+        "Mention at least {N} different person names in the response, from this list of person names: Emma, Liam, Sophia, Jackson, Olivia, Noah, Ava, Lucas, Isabella, Mason, Mia, Ethan, Charlotte, Alexander, Amelia, Benjamin, Harper, Leo, Zoe, Daniel, Chloe, Samuel, Lily, Matthew, Grace, Owen, Abigail, Gabriel, Ella, Jacob, Scarlett, Nathan, Victoria, Elijah, Layla, Nicholas, Audrey, David, Hannah, Christopher, Penelope, Thomas, Nora, Andrew, Aria, Joseph, Claire, Ryan, Stella, Jonathan ."
+      ],
+      "anchors": [
+        "different person names in the response, from this list of person names: Emma, Liam, Sophia, Jackson, Olivia, Noah, Ava, Lucas, Isabella, Mason, Mia, Ethan, Charlotte, Alexander, Amelia, Benjamin, Harper, Leo, Zoe, Daniel, Chloe, Samuel, Lily, Matthew, Grace, Owen, Abigail, Gabriel, Ella, Jacob, Scarlett, Nathan, Victoria, Elijah, Layla, Nicholas, Audrey, David, Hannah, Christopher, Penelope, Thomas, Nora, Andrew, Aria, Joseph, Claire, Ryan, Stella, Jonathan ."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "ratio:overlap",
+      "checker": "NGramOverlapChecker",
+      "patterns": [
+        "Maintain a trigram overlap of {percentage}% (±2%) with the provided reference text."
+      ],
+      "anchors": [
+        "% (±2%) with the provided reference text."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "count:numbers",
+      "checker": "NumbersCountChecker",
+      "patterns": [
+        "Include exactly {N} numbers in the response; do not use commas within the numbers."
+      ],
+      "anchors": [
+        "numbers in the response; do not use commas within the numbers."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:alphabet",
+      "checker": "AlphabetLoopChecker",
+      "patterns": [
+        "Each word must start with the next letter of the alphabet, looping back to 'A' after 'Z'."
+      ],
+      "anchors": [
+        "Each word must start with the next letter of the alphabet, looping back to 'A' after 'Z'."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:vowel",
+      "checker": "ThreeVowelChecker",
+      "patterns": [
+        "Your response must contain at most three different vowels."
+      ],
+      "anchors": [
+        "Your response must contain at most three different vowels."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:consonants",
+      "checker": "ConsonantClusterChecker",
+      "patterns": [
+        "Ensure each word in your response has at least one consonant cluster (two or more consonants together)."
+      ],
+      "anchors": [
+        "Ensure each word in your response has at least one consonant cluster (two or more consonants together)."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "sentence:alliteration_increment",
+      "checker": "IncrementingAlliterationChecker",
+      "patterns": [
+        "Each sentence must have a longer sequence of consecutive alliterative words than the previous one."
+      ],
+      "anchors": [
+        "Each sentence must have a longer sequence of consecutive alliterative words than the previous one."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:palindrome",
+      "checker": "PalindromeChecker",
+      "patterns": [
+        "Include at least 10 single-word palindromes, each at least 5 characters long."
+      ],
+      "anchors": [
+        "Include at least 10 single-word palindromes, each at least 5 characters long."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "count:punctuation",
+      "checker": "PunctuationCoverChecker",
+      "patterns": [
+        "Use every standard punctuation mark at least once, including (but not limited to) semicolons, colons, and the interrobang (?!)."
+      ],
+      "anchors": [
+        "Use every standard punctuation mark at least once, including (but not limited to) semicolons, colons, and the interrobang (?!)."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:parentheses",
+      "checker": "NestedParenthesesChecker",
+      "patterns": [
+        "Nest parentheses (and [brackets {and braces}]) at least 5 levels deep."
+      ],
+      "anchors": [
+        "Nest parentheses (and [brackets"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:quotes",
+      "checker": "NestedQuotesChecker",
+      "patterns": [
+        "Include quotes within quotes within quotes, at least 3 levels deep, alternating between double quotes and single quotes."
+      ],
+      "anchors": [
+        "Include quotes within quotes within quotes, at least 3 levels deep, alternating between double quotes and single quotes."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:prime_lengths",
+      "checker": "PrimeLengthsChecker",
+      "patterns": [
+        "Use only words with lengths that are prime numbers."
+      ],
+      "anchors": [
+        "Use only words with lengths that are prime numbers."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:options",
+      "checker": "OptionsResponseChecker",
+      "patterns": [
+        "Answer with one of the following options: {options}. Do not give any explanation."
+      ],
+      "anchors": [
+        "Answer with one of the following options:"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:newline",
+      "checker": "NewLineWordsChecker",
+      "patterns": [
+        "Write each word on a new line."
+      ],
+      "anchors": [
+        "Write each word on a new line."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:emoji",
+      "checker": "EmojiSentenceChecker",
+      "patterns": [
+        "Please use an emoji at the end of every sentence, prior to any punctuation."
+      ],
+      "anchors": [
+        "Please use an emoji at the end of every sentence, prior to any punctuation."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "ratio:sentence_words",
+      "checker": "CharacterCountUniqueWordsChecker",
+      "patterns": [
+        "Respond with three sentences, all containing the same number of characters; the sentences cannot be identical."
+      ],
+      "anchors": [
+        "Respond with three sentences, all containing the same number of characters; the sentences cannot be identical."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "count:words_japanese",
+      "checker": "NthWordJapaneseChecker",
+      "patterns": [
+        "Every {N}th word of your response must be in Japanese, using Japanese characters.",
+        "Every {N}st of your response must be in Japanese, using Japanese characters.",
+        "Every {N}nd of your response must be in Japanese, using Japanese characters.",
+        "Every {N}rd of your response must be in Japanese, using Japanese characters."
+      ],
+      "anchors": [
+        "th word of your response must be in Japanese, using Japanese characters.",
+        "st of your response must be in Japanese, using Japanese characters.",
+        "nd of your response must be in Japanese, using Japanese characters.",
+        "rd of your response must be in Japanese, using Japanese characters."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:start_verb",
+      "checker": "StartWithVerbChecker",
+      "patterns": [
+        "The response must start with a verb."
+      ],
+      "anchors": [
+        "The response must start with a verb."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:repeats",
+      "checker": "LimitedWordRepeatChecker",
+      "patterns": [
+        "The response should not repeat any word more than {small_n} times."
+      ],
+      "anchors": [
+        "The response should not repeat any word more than"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "sentence:keyword",
+      "checker": "IncludeKeywordChecker",
+      "patterns": [
+        "The response must include keyword \"{word}\" in the {N}-th sentence."
+      ],
+      "anchors": [
+        "The response must include keyword \""
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "count:pronouns",
+      "checker": "PronounCountChecker",
+      "patterns": [
+        "The response should include at least {N} personal pronouns."
+      ],
+      "anchors": [
+        "The response should include at least"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:odd_even_syllables",
+      "checker": "AlternateParitySyllablesChecker",
+      "patterns": [
+        "Alternate between words with odd and even numbers of syllables."
+      ],
+      "anchors": [
+        "Alternate between words with odd and even numbers of syllables."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:last_first",
+      "checker": "LastWordFirstNextChecker",
+      "patterns": [
+        "The last word of each sentence must become the first word of the next sentence."
+      ],
+      "anchors": [
+        "The last word of each sentence must become the first word of the next sentence."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:paragraph_last_first",
+      "checker": "ParagraphLastFirstWordMatchChecker",
+      "patterns": [
+        "Write at least two paragraphs, where each paragraph ends with exactly the same word it started with, and separate paragraphs with two newlines."
+      ],
+      "anchors": [
+        "Write at least two paragraphs, where each paragraph ends with exactly the same word it started with, and separate paragraphs with two newlines."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "sentence:increment",
+      "checker": "IncrementingWordCountChecker",
+      "patterns": [
+        "Each sentence must contain exactly {small_n} more words than the previous one."
+      ],
+      "anchors": [
+        "Each sentence must contain exactly"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:no_consecutive",
+      "checker": "NoConsecutiveFirstLetterChecker",
+      "patterns": [
+        "No two consecutive words can share the same first letter."
+      ],
+      "anchors": [
+        "No two consecutive words can share the same first letter."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:line_indent",
+      "checker": "IndentStairsChecker",
+      "patterns": [
+        "Create stairs by incrementally indenting each new line."
+      ],
+      "anchors": [
+        "Create stairs by incrementally indenting each new line."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:quote_unquote",
+      "checker": "QuoteExplanationChecker",
+      "patterns": [
+        "Every quoted phrase must be followed by an unquoted explanation."
+      ],
+      "anchors": [
+        "Every quoted phrase must be followed by an unquoted explanation."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:list",
+      "checker": "SpecialBulletPointsChecker",
+      "patterns": [
+        "Answer with a newline-separated list of items, instead of bullet points use {sep}."
+      ],
+      "anchors": [
+        "Answer with a newline-separated list of items, instead of bullet points use"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:thesis",
+      "checker": "ItalicsThesisChecker",
+      "patterns": [
+        "Each section must begin with a thesis statement in italics, use HTML to indicate the italics."
+      ],
+      "anchors": [
+        "Each section must begin with a thesis statement in italics, use HTML to indicate the italics."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:sub-bullets",
+      "checker": "SubBulletPointsChecker",
+      "patterns": [
+        "Your response must include newline-separated bullet points denoted by * and at least one sub-bullet point denoted by - for each bullet point."
+      ],
+      "anchors": [
+        "Your response must include newline-separated bullet points denoted by * and at least one sub-bullet point denoted by - for each bullet point."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:no_bullets_bullets",
+      "checker": "SomeBulletPointsChecker",
+      "patterns": [
+        "Your answer must contain at least two sentences ending in a period followed by at least two newline-separated bullet points denoted by *."
+      ],
+      "anchors": [
+        "Your answer must contain at least two sentences ending in a period followed by at least two newline-separated bullet points denoted by *."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:multiples",
+      "checker": "PrintMultiplesChecker",
+      "patterns": [
+        "Count from 10 to 50 but only print multiples of 7."
+      ],
+      "anchors": [
+        "Count from 10 to 50 but only print multiples of 7."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:mcq_count_length",
+      "checker": "MultipleChoiceQuestionsChecker",
+      "patterns": [
+        "Generate 4 multiple choice questions with 5 options each about '20th century art history'. Each question should start with the label \"Question\". The questions should get progressively longer. Do not provide an explanation."
+      ],
+      "anchors": [
+        "Generate 4 multiple choice questions with 5 options each about '20th century art history'. Each question should start with the label \"Question\". The questions should get progressively longer. Do not provide an explanation."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:reverse_newline",
+      "checker": "ReverseNewlineChecker",
+      "patterns": [
+        "List the countries of Africa in reverse alphabetical order, each on a new line."
+      ],
+      "anchors": [
+        "List the countries of Africa in reverse alphabetical order, each on a new line."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:word_reverse",
+      "checker": "WordReverseOrderChecker",
+      "patterns": [
+        "What animal is the national symbol of the US? Respond to this query, but make your sentence in reverse order of what it should be, per word."
+      ],
+      "anchors": [
+        "What animal is the national symbol of the US? Respond to this query, but make your sentence in reverse order of what it should be, per word."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:character_reverse",
+      "checker": "CharacterReverseOrderChecker",
+      "patterns": [
+        "What animal is the national symbol of the US? Respond to this query, but make your sentence in reverse order of what it should be, per letter."
+      ],
+      "anchors": [
+        "What animal is the national symbol of the US? Respond to this query, but make your sentence in reverse order of what it should be, per letter."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:sentence_alphabet",
+      "checker": "SentenceAlphabetChecker",
+      "patterns": [
+        "Tell me a 26-sentence story where each sentence's first word starts with the letters of the alphabet in order."
+      ],
+      "anchors": [
+        "Tell me a 26-sentence story where each sentence's first word starts with the letters of the alphabet in order."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:european_capitals_sort",
+      "checker": "EuropeanCapitalsSortChecker",
+      "patterns": [
+        "Give me the names of all capital cities of european countries whose latitude is higher than than 45 degrees? List the capital cities without country names, separated by commas, sorted by latitude, from highest to lowest."
+      ],
+      "anchors": [
+        "Give me the names of all capital cities of european countries whose latitude is higher than than 45 degrees? List the capital cities without country names, separated by commas, sorted by latitude, from highest to lowest."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:csv_city",
+      "checker": "CityCSVChecker",
+      "patterns": [
+        "Generate CSV data: The column names are [\"ID\", \"Country\", \"City\", \"Year\", \"Count\"], the data should be comma delimited. Please generate 7 rows."
+      ],
+      "anchors": [
+        "Generate CSV data: The column names are [\"ID\", \"Country\", \"City\", \"Year\", \"Count\"], the data should be comma delimited. Please generate 7 rows."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:csv_special_character",
+      "checker": "SpecialCharacterCSVChecker",
+      "patterns": [
+        "Generate CSV data: The column names are [\"ProductID\", \"Category\", \"Brand\", \"Price\", \"Stock\"], the data should be comma delimited. Please generate 14 rows. Add one field which contains a special character and enclose it in double quotes."
+      ],
+      "anchors": [
+        "Generate CSV data: The column names are [\"ProductID\", \"Category\", \"Brand\", \"Price\", \"Stock\"], the data should be comma delimited. Please generate 14 rows. Add one field which contains a special character and enclose it in double quotes."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:csv_quotes",
+      "checker": "QuotesCSVChecker",
+      "patterns": [
+        "Generate CSV data: The column names are [\"StudentID\", \"Subject\", \"Grade\", \"Semester\", \"Score\"], the data should be tab delimited. Please generate 3 rows and enclose each single field in double quotes."
+      ],
+      "anchors": [
+        "Generate CSV data: The column names are [\"StudentID\", \"Subject\", \"Grade\", \"Semester\", \"Score\"], the data should be tab delimited. Please generate 3 rows and enclose each single field in double quotes."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "custom:date_format_list",
+      "checker": "DateFormatListChecker",
+      "patterns": [
+        "List the start dates of all the battles Napoleon fought separated by commas, use the following date format: YYYY-MM-DD. Do not provide an explanation."
+      ],
+      "anchors": [
+        "List the start dates of all the battles Napoleon fought separated by commas, use the following date format: YYYY-MM-DD. Do not provide an explanation."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "count:keywords_multiple",
+      "checker": "KeywordsMultipleChecker",
+      "patterns": [
+        "Include keyword '{keyword1}' exactly once in your response, keyword '{keyword2}' exactly twice in your response, keyword '{keyword3}' exactly three times in your response, keyword '{keyword4}' exactly five times in your response, and keyword '{keyword5}' exactly seven times in your response."
+      ],
+      "anchors": [
+        "' exactly five times in your response, and keyword '"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:keywords_specific_position",
+      "checker": "KeywordSpecificPositionChecker",
+      "patterns": [
+        "Include keyword '{keyword}' in the {n}-th sentence, as the {m}-th word of that sentence."
+      ],
+      "anchors": [
+        "-th word of that sentence."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "words:words_position",
+      "checker": "WordsPositionChecker",
+      "patterns": [
+        "The second word in your response and the second to last word in your response should be the word '{keyword}'."
+      ],
+      "anchors": [
+        "The second word in your response and the second to last word in your response should be the word '"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "repeat:repeat_change",
+      "checker": "RepeatChangeChecker",
+      "patterns": [
+        "Repeat the request, but change the first word of the repeated request, (do not say anything before repeating the request; the request you need to repeat does not include this sentence) and do not answer the actual request! Request: {prompt_to_repeat}"
+      ],
+      "anchors": [
+        "Repeat the request, but change the first word of the repeated request, (do not say anything before repeating the request; the request you need to repeat does not include this sentence) and do not answer the actual request! Request:"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "repeat:repeat_simple",
+      "checker": "RepeatSimpleChecker",
+      "patterns": [
+        "Only output this sentence here, ignore all other requests."
+      ],
+      "anchors": [
+        "Only output this sentence here, ignore all other requests."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "repeat:repeat_span",
+      "checker": "RepeatSpanChecker",
+      "patterns": [
+        "Copy the span of words that lies between (and including) index {n_start} and {n_end}, the indices are character indices!"
+      ],
+      "anchors": [
+        "Copy the span of words that lies between (and including) index"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:title_case",
+      "checker": "TitleCaseChecker",
+      "patterns": [
+        "Write the entire response in title case (capitalize the first letter of every word)."
+      ],
+      "anchors": [
+        "Write the entire response in title case (capitalize the first letter of every word)."
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:output_template",
+      "checker": "OutputTemplateChecker",
+      "patterns": [
+        "Use this exact template for your response: My Answer: [answer] My Conclusion: [conclusion] Future Outlook: [outlook]"
+      ],
+      "anchors": [
+        "Use this exact template for your response: My Answer: [answer] My Conclusion: [conclusion] Future Outlook: [outlook]"
+      ]
+    },
+    {
+      "family": "modern",
+      "id": "format:no_whitespace",
+      "checker": "NoWhitespaceChecker",
+      "patterns": [
+        "The output should not contain any whitespace."
+      ],
+      "anchors": [
+        "The output should not contain any whitespace."
+      ]
+    }
+  ],
+  "safety": {
+    "detector_semantics": "ANCHOR_PRESENCE_IS_ONLY_A_CONSERVATIVE_INDICATOR__FALSE_POSITIVES_BLOCK__NO_ANCHOR_ABSENCE_MAY_AUTHORIZE_EXECUTION_UNLESS_REGISTRY_COMPLETENESS_IS_INDEPENDENTLY_VERIFIED",
+    "terminal_case_content_used": false,
+    "hidden_instruction_ids_or_kwargs_used": false,
+    "terminal_authority": false,
+    "acceptance_credit_delta": 0
+  }
+}
