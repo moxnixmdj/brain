@@ -1,0 +1,127 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_IDENTICAL_RESIDUAL_REUSE_FIXED_POINT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__THREE_SINGLETON_OWNED_BEHAVIORS__17_TOTAL_OCCURRENCES__14_DUPLICATE_TARGET_INCIDENCES_DELETED_FROM_NEW_PROOF_WORK__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/GLOBAL_IDENTICAL_RESIDUAL_REUSE_FIXED_POINT_20261005_V1.json",
+    "git_blob_sha": "7190a464dc863884af8441cfdc48487b4253df5a"
+  },
+  "inputs": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "01abb91c114576ac340816b052724150258726ff"
+    },
+    "accepted_ownership_promotion": {
+      "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+      "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+    },
+    "recovery_scope_complete_receipt": {
+      "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+    },
+    "tool_discovery_scope_complete_receipt": {
+      "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+    },
+    "delegation_scope_complete_receipt": {
+      "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+    }
+  },
+  "recomputed": {
+    "behavior_checks": {
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001": {
+        "source_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "source_mapping_exact_singleton": true,
+        "source_current_owned": true,
+        "source_acceptance_status_matches": true,
+        "candidate_occurrence_set_matches": true
+      },
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001": {
+        "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "source_mapping_exact_singleton": true,
+        "source_current_owned": true,
+        "source_acceptance_status_matches": true,
+        "candidate_occurrence_set_matches": true
+      },
+      "TASK_TO_DELEGATION_GRAPH_001": {
+        "source_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "source_mapping_exact_singleton": true,
+        "source_current_owned": true,
+        "source_acceptance_status_matches": true,
+        "candidate_occurrence_set_matches": true
+      }
+    },
+    "exact_occurrences": {
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "COMPUTER_AND_BROWSER_USE",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "TASK_TO_DELEGATION_GRAPH_001": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ]
+    },
+    "counts": {
+      "registry_family_residual_incidences": 44,
+      "registry_unique_behavior_ids": 12,
+      "reusable_occurrences_including_sources": 17,
+      "duplicate_target_incidences": 14,
+      "incidences_not_discharged_by_theorem": 27,
+      "unique_behavior_ids_not_discharged_by_theorem": 9
+    },
+    "candidate_counts_match": true,
+    "receipt_checks": {
+      "accepted_ownership_promotion_pass": true,
+      "recovery_public_runner_pass": true,
+      "tool_scope_public_runner_pass": true,
+      "delegation_public_runner_pass": true
+    }
+  },
+  "verdict": "PASS",
+  "consequence": [
+    "DELETE_NEW_PROOF_WORK_FOR_14_TARGET_FAMILY_RESIDUAL_INCIDENCES_BY_EXACT_BEHAVIOR_ID_REUSE",
+    "PRESERVE_ALL_OTHER_TARGET_FAMILY_BARS_RESIDUALS_AND_SCOPE_GATES",
+    "RECOMPUTE_EIGHT_AFFECTED_TARGET_FAMILIES_BEFORE_ANY_NEW_REALITY",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT_FROM_THIS_DEDUPLICATION"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
+    "NO_ATOMIC_ACCEPTANCE_PREDICATE_PROVED",
+    "NO_WHOLE_TARGET_FAMILY_ACCEPTANCE",
+    "NO_TARGET_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
