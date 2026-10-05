@@ -564,6 +564,36 @@
       "unverified_floor_family_fail_closed": true,
       "persistent_learned_bytes": 0,
       "deduction": "THE CONTENT_ADDRESSED DECLARATIVE CAPABILITY PACK ACQUISITION TO COMPILE_RATCHET LOOP IS CLOSED FOR TWO NON_STDLIB FAMILIES WHILE FAIL_CLOSED CONTROL IS PRESERVED"
+    },
+    "typed_effect_tool_acquisition": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__TWO_CONTENT_ADDRESSED_EFFECT_TOOLS__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_TYPED_EFFECT_TOOL_ACQUISITION_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_TYPED_EFFECT_TOOL_ACQUISITION_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "runtime": "canonical/runtime/h100_typed_effect_tool_acquisition_v1.py",
+      "tools": [
+        "JSON_RECEIPT_WRITER_V1",
+        "JSONL_LEDGER_APPEND_V1"
+      ],
+      "arbitrary_code_execution": 0,
+      "shell_calls": 0,
+      "subprocess_calls": 0,
+      "network_calls": 0,
+      "persistent_learned_bytes": 0,
+      "deduction": "CONTENT_ADDRESSED TYPED TOOL PACKS CAN EXECUTE REAL FILESYSTEM EFFECTS THROUGH A SANDBOXED BROKER WITH DETERMINISTIC CONTENT_HASH RECEIPTS WHILE PATH ESCAPE UNKNOWN EFFECT SHELL NETWORK SUBPROCESS AND ARBITRARY_CODE AUTHORITY REMAIN CLOSED"
+    },
+    "verified_effect_tool_registry_v1": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__TWO_VERIFIED_EFFECT_TOOLS__ZERO_CREDIT",
+      "runtime": "canonical/runtime/h100_verified_effect_tool_registry_v1.py",
+      "verification": "canonical/verification/H100_EFFECT_TOOL_REGISTRY_V1_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "entry_count": 2,
+      "tools": [
+        "JSON_RECEIPT_WRITER_V1",
+        "JSONL_LEDGER_APPEND_V1"
+      ],
+      "raw_tool_acquisition_attempts_before_verified_hit": 0,
+      "unknown_tool_id_fail_closed": true,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE TYPED_EFFECT TOOL ACQUISITION TO COMPILE_REUSE LOOP IS CLOSED FOR TWO REAL FILESYSTEM EFFECT TOOLS"
     }
   },
   "next_structural_residuals_ranked": [
@@ -574,8 +604,8 @@
     },
     {
       "rank": 2,
-      "residual": "SAFE_TYPED_EFFECTFUL_EXTERNAL_TOOL_ACQUISITION_WITHOUT_SHELL_NETWORK_OR_ARBITRARY_CODE_AUTHORITY",
-      "reason": "CONTENT_ADDRESSED NON_STDLIB DECLARATIVE EXECUTABLE CAPABILITY PACKS ARE NOW SECOND_CARRIER VERIFIED AND REGISTRY_V7 COMPILES BOTH WITH ZERO RAW SEARCH__THE NEXT INTERNAL A BOUNDARY IS EFFECTFUL TOOL ACQUISITION THROUGH A TYPED CAPABILITY CONTRACT THAT EXPOSES ONLY PREDECLARED INPUT_OUTPUT EFFECTS AND CANNOT ESCALATE TO SHELL NETWORK ARBITRARY CODE OR LEARNED_PROVIDER SUBSTITUTION"
+      "residual": "SAFE_TYPED_NETWORK_OR_EXTERNAL_SERVICE_ACQUISITION_WITHOUT_ARBITRARY_ENDPOINT_AUTHORITY",
+      "reason": "CONTENT_ADDRESSED NON_STDLIB COMPUTE PACKS AND SANDBOXED FILESYSTEM EFFECT_TOOLS ARE NOW SECOND_CARRIER VERIFIED AND COMPILED__THE NEXT INTERNAL A BOUNDARY IS READ_ONLY OR EFFECTFUL NETWORK_EXTERNAL_SERVICE ACQUISITION THROUGH A TYPED CONTENT_BOUND CONTRACT THAT CANNOT ESCALATE TO USER_SUPPLIED ENDPOINTS CREDENTIALS SHELL OR LEARNED_PROVIDER SUBSTITUTION"
     },
     {
       "rank": 3,
@@ -706,7 +736,10 @@
     "safe_nonstdlib_executable_acquisition_scope": "CONTENT_ADDRESSED_DECLARATIVE_OPERATOR_PACKS__ASYM_CLAMP_V1__TRIANGLE_V1",
     "registry_v7_declarative_pack_ratchet_verified": true,
     "registry_v7_entry_count": 18,
-    "safe_typed_effectful_external_tool_acquisition_verified": false
+    "safe_typed_effectful_external_tool_acquisition_verified": true,
+    "safe_typed_effectful_external_tool_scope": "CONTENT_ADDRESSED_FILESYSTEM_WRITE_AND_APPEND_TO_CALLER_SUPPLIED_SANDBOX_ROOT",
+    "verified_effect_tool_registry_v1": true,
+    "safe_typed_network_external_service_acquisition_verified": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
