@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_FIVE_PUBLIC_BAR_ONLY_SCOPE_GAPS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_20261005_V1.json",
+    "git_blob_sha": "fa4cddb4af4fb29c7e19e004774b11d6b874359a"
+  },
+  "inputs": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "recomputed": {
+    "universal_no_proxy_rule": "A benchmark can prove only the behavioral scope it actually exercises. Additional leaves remain separate obligations.",
+    "exact_affected_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "PROFESSIONAL_KNOWLEDGE_WORK"
+    ],
+    "exact_set_match": true,
+    "each_has_broad_declared_family_behavior": true,
+    "each_lacks_task_dimensions_in_current_protocol": true,
+    "each_lacks_explicit_uncovered_scope_audit_in_current_proof_mode": true,
+    "all_five_already_acceptance_open": true,
+    "accepted_family_revocation_required": false,
+    "root1_positive_gap_delta": 0
+  },
+  "consequence": [
+    "PUBLIC_BARS_REMAIN_NECESSARY_WHERE_LOAD_BEARING",
+    "PUBLIC_BARS_ALONE_MUST_NOT_PROMOTE_THE_WHOLE_AFFECTED_FAMILY_WITHOUT_LOSSLESS_SCOPE_EQUIVALENCE_OR_UNCOVERED_SCOPE_CLOSURE",
+    "CURRENT_14_OF_38_REGISTRY_ACCOUNTING_REMAINS_UNCHANGED",
+    "LITERAL_TERMINAL_FINALITY_REMAINS_BLOCKED_BY_SCOPE_BASIS_REPAIR"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_A_PUBLIC_RUNNER_RECEIPT",
+    "NO_CAPABILITY_FAILURE_PROVED",
+    "NO_NEW_FAMILY_REQUIRED",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
