@@ -1,0 +1,353 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EIGHT_ACTION_GROUP_MINIMUM_STRUCTURAL_REPAIR__SCIENTIFIC_HYPOTHESIS_FORMATION_EXPLICIT__CREATIVE_DIAGRAM_DECOMPOSED__FOUR_OUTER_PORTFOLIOS_PRESERVED__ZERO_CREDIT",
+  "objective": "Repair literal all-useful Opus 5.5 terminal acceptance coverage with the smallest current nonduplicative structural action set, explicitly covering scientific hypothesis/question formation and decomposing diagram output into existing conditioned behaviors plus deterministic HTML/SVG mechanics without creating a ninth action group or fifth outer portfolio.",
+  "supersedes": {
+    "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V2.json",
+    "git_blob_sha": "d2867bdcb4e2a721c2dbcde59100627508a7866a",
+    "reason": "V2 correctly added Computer and Browser Use but its scientific group named hypothesis/intervention selection without explicit hypothesis/question formation, while its creative/diagram group predated the smaller first-party HTML/SVG decomposition."
+  },
+  "authorities": {
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "benchmark_proxy_scope_quarantine": {
+      "path": "canonical/governance/BENCHMARK_PROXY_SCOPE_COMPLETENESS_QUARANTINE_V2_20261005.json",
+      "git_blob_sha": "c62b7c1f8e838a1a37d8b5513953191f717b40e8"
+    },
+    "surface_mapping": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+    },
+    "root1_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "creative_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    },
+    "multilingual_long_context_v2": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json"
+    },
+    "scientific_hypothesis_gap": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "f0c6e15e6af698a80895eedf2c39bb874b4697b8"
+    },
+    "creative_diagram_repair_v2": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V2_20261005.json",
+      "git_blob_sha": "02ee9918fc38f3bdee96f847d04e7fd1337b9e46"
+    },
+    "seven_leaf_existing_route_reuse": {
+      "path": "canonical/governance/SEVEN_LEAF_EXISTING_ROUTE_REUSE_COMPRESSION_V1.json",
+      "git_blob_sha": "326a4baedb2a04b7d29e4a55a7f1bca2a695ce7a"
+    },
+    "outer_terminal_portfolios": {
+      "path": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
+      "git_blob_sha": "7c49e3a44dc9a827e84a12b572ea6b8e9b2fa1f5"
+    }
+  },
+  "compression_rule": "DO_NOT_CREATE_ONE_TERMINAL_FAMILY_OR_PREDICATE_PER_BENCHMARK_OR_DOMAIN_LABEL__PAY_EACH_DISTINCT_BROAD_FAMILY_SCOPE_GAP_ONCE__BIND_DOMAIN_AND_CONDITION_SURFACES_AS_REQUIRED_CELLS_WITHIN_THE_SMALLEST_EXISTING_FAMILY_SCOPE_OR_CROSS_CUTTING_OBLIGATION_THAT_LOSSLESSLY_COVERS_THEM.",
+  "action_groups": [
+    {
+      "id": "A_CODING_UNCOVERED_SCOPE_PARTITION",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "preserve_public_bars": [
+        "CODING_TB4_GE_66_4",
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8"
+      ],
+      "must_cover": [
+        "FEATURE_IMPLEMENTATION",
+        "DEBUGGING",
+        "REFACTORING",
+        "CODE_REVIEW",
+        "TERMINAL_OPERATION",
+        "AMBIGUOUS_MULTI_FILE_CHANGE",
+        "ROOT_CAUSE_ANALYSIS",
+        "SELF_CHECKING",
+        "LONG_CONTEXT_CODING_CONDITION",
+        "MULTILINGUAL_CODING_CONDITION",
+        "CYBERSECURITY_CODING_OR_SECURITY_ENGINEERING_CONDITION_WHERE_IN_SCOPE",
+        "AUTOMATED_AI_R_AND_D_CODING_OR_ENGINEERING_CONDITION_WHERE_IN_SCOPE"
+      ],
+      "closure": "LOSSLESS_UNION_EQUIVALENCE_FROM_CURRENT_PUBLIC_BAR_SCOPES_TO_ALL_REQUIRED_CELLS_OR_EXPLICIT_UNCOVERED_SCOPE_PROOF_FOR_EACH_RESIDUAL_CELL",
+      "fresh_reality": false
+    },
+    {
+      "id": "B_PROFESSIONAL_WORK_UNCOVERED_SCOPE_PARTITION",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "preserve_public_bars": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822"
+      ],
+      "must_cover": [
+        "HIGH_QUALITY_PROFESSIONAL_WORK_PRODUCT",
+        "MULTI_HOUR_OR_MULTI_STAGE_OFFICE_TASK",
+        "HEALTHCARE_PROFESSIONAL_REASONING_DOCUMENTATION_OR_RESEARCH_CONDITION",
+        "MULTILINGUAL_PROFESSIONAL_WORK_CONDITION",
+        "LONG_CONTEXT_PROFESSIONAL_WORK_CONDITION"
+      ],
+      "closure": "LOSSLESS_UNION_EQUIVALENCE_FROM_GDPVAL_AA_AND_AA_BRIEFCASE_TO_ALL_REQUIRED_CELLS_OR_EXPLICIT_UNCOVERED_SCOPE_PROOF_FOR_EACH_RESIDUAL_CELL",
+      "fresh_reality": false
+    },
+    {
+      "id": "C_BUSINESS_AUTOMATION_UNCOVERED_SCOPE_PARTITION",
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "preserve_public_bars": [
+        "AUTOMATIONBENCH_GE_40"
+      ],
+      "must_cover": [
+        "MULTI_APPLICATION_BUSINESS_WORKFLOW",
+        "SEQUENTIAL_INTERDEPENDENT_ACTIONS",
+        "LAYERED_POLICY_OBEDIENCE",
+        "DISTRACTION_REJECTION",
+        "END_TO_END_FINAL_STATE_CORRECTNESS",
+        "MATERIAL_WORKFLOW_CLASSES_OUTSIDE_AUTOMATIONBENCH_HELDOUT_SCOPE"
+      ],
+      "closure": "PROVE_AUTOMATIONBENCH_LOSSLESS_SCOPE_EQUIVALENCE_OR_CLOSE_EACH_MATERIAL_UNCOVERED_WORKFLOW_CLASS_SEPARATELY",
+      "fresh_reality": false
+    },
+    {
+      "id": "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION",
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "preserve_public_bars": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "must_cover": [
+        "DIFFICULT_EXPERT_LEVEL_QUESTIONS_ACROSS_DOMAINS_WITH_SEARCH_CODE_TOOLS",
+        "RESEARCH_LEVEL_MATHEMATICAL_REASONING_ARXIVMATH_CONDITION",
+        "HEALTHCARE_REASONING_CONDITION",
+        "CYBERSECURITY_REASONING_CONDITION_WITHIN_AUTHORIZED_SAFE_SCOPE",
+        "BIOLOGY_REASONING_CONDITION_WITHIN_SAFE_BENEFICIAL_SCOPE",
+        "MULTILINGUAL_EXPERT_REASONING_CONDITION"
+      ],
+      "closure": "PROVE_HLE_WITH_TOOLS_SCOPE_IS_LOSSLESS_FOR_REQUIRED_CELLS_OR_CLOSE_RESIDUAL_CELLS_WITH_SCOPE_SAFE_STRONGER_PROOFS_OR_MATCHED_FIXED_BAR_EVIDENCE",
+      "fresh_reality": false
+    },
+    {
+      "id": "E_SCIENTIFIC_RESEARCH_UNCOVERED_SCOPE_PARTITION",
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "preserve_public_bars": [
+        "TB_SCIENCE_GE_58_7"
+      ],
+      "must_cover": [
+        "SCIENTIFIC_SOFTWARE_AND_TOOL_USE",
+        "ITERATIVE_ANALYSIS_AND_REASONING",
+        "LONG_HORIZON_RESEARCH_TASKS",
+        "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION",
+        "HYPOTHESIS_OR_INTERVENTION_SELECTION_AND_EVIDENCE_UPDATE",
+        "DISCRIMINATING_TEST_OR_OBSERVATION_PLAN",
+        "BIOLOGY_R_AND_D_CONDITION",
+        "AUTOMATED_AI_R_AND_D_CONDITION"
+      ],
+      "closure": "PROVE_TB_SCIENCE_LOSSLESS_SCOPE_EQUIVALENCE OR CLOSE EACH UNCOVERED RESEARCH CELL WITH SCOPE_COMPLETE PROOF; HYPOTHESIS/QUESTION FORMATION MUST NOT INHERIT CREDIT FROM RESEARCH CONTROL THAT ASSUMES A PRE-SUPPLIED QUESTION.",
+      "fresh_reality": false,
+      "existing_route_reuse": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001_REUSED_FOR_EXECUTION_CONTROL_ONLY__SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_REMAINS_DISTINCT_UNLESS_STRONGER_IMPLICATION_IS_PROVED"
+    },
+    {
+      "id": "F_CREATIVE_AND_DIAGRAM_ACCEPTANCE_BASIS_REPAIR",
+      "families": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION"
+      ],
+      "child_obligations": [
+        "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001__DIAGRAM_CONDITION",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001__VISUAL_ENCODING_CONDITION_WHERE_APPLICABLE",
+        "HTML_SVG_RENDER_STRUCTURE_MECHANICS_CEILING"
+      ],
+      "closure": "KEEP ONE OPEN-ENDED CREATIVE-TEXT QUALITY OBLIGATION; FOR DIAGRAM OUTPUT CONDITION EXISTING ARTIFACT-JUDGMENT AND GROUNDED-SYNTHESIS BEHAVIORS ON THE FIRST-PARTY HTML/SVG DIAGRAM SCOPE AND ADD ONLY THE DETERMINISTIC RENDER/STRUCTURE CEILING. NO NEW BROAD LEARNED DIAGRAM CONTRACT UNLESS THIS DECOMPOSITION IS FALSIFIED.",
+      "fresh_reality": false,
+      "first_party_scope_boundary": "TEXT_BASED_HTML_SVG_DIAGRAMS_FLOWCHARTS_CHARTS_INTERACTIVE_VISUALS__NOT_ARBITRARY_PHOTOREALISTIC_OR_RASTER_IMAGE_GENERATION"
+    },
+    {
+      "id": "G_CROSS_CUTTING_CONDITION_MATRIX",
+      "conditions": [
+        "MULTILINGUAL_PERFORMANCE",
+        "LONG_CONTEXT"
+      ],
+      "relevant_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      ],
+      "closure": "FOR_EACH_MATERIAL_FAMILY_CONDITION_CELL_PROVE_EQUAL_OR_BETTER_OUTCOME_OR_SCOPE_SAFE_STRONGER_CERTIFICATE__ALLOW_CELL_DEDUPLICATION_WHEN_ACTION_GROUP_A_B_OR_D_ALREADY_PROVES_THE_SAME_CONTENT_ADDRESSED_CONDITION",
+      "fresh_reality": false
+    },
+    {
+      "id": "H_COMPUTER_BROWSER_UNCOVERED_SCOPE_PARTITION",
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "preserve_public_bars": [
+        "OSWORLD_2_1_PARTIAL_GE_81_8"
+      ],
+      "must_cover": [
+        "MULTI_STEP_BROWSER_WORKFLOWS",
+        "ARBITRARY_APPLICATION_WORKFLOWS",
+        "PLANNING",
+        "VISUAL_GROUNDING",
+        "JUDGMENT_UNDER_UI_AMBIGUITY",
+        "CYBERSECURITY_BROWSER_OR_COMPUTER_USE_CONDITION_WHERE_IN_SCOPE"
+      ],
+      "closure": "PROVE_OSWORLD_2_1_PARTIAL_OR_THE_FROZEN_OSWORLD_COMPATIBLE_PORTFOLIO_IS_LOSSLESS_FOR_ALL_REQUIRED_COMPUTER_AND_BROWSER_USE_CELLS_OR_CLOSE_EACH_MATERIAL_UNCOVERED_APPLICATION_BROWSER_OR_JUDGMENT_CELL_WITH_SCOPE_COMPLETE_PROOF",
+      "fresh_reality": false
+    }
+  ],
+  "benchmark_proxy_partition_invariant": {
+    "quarantine_affected_family_count": 6,
+    "required_scope_partition_group_count": 6,
+    "required_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "COMPUTER_AND_BROWSER_USE"
+    ],
+    "corresponding_groups": [
+      "A_CODING_UNCOVERED_SCOPE_PARTITION",
+      "B_PROFESSIONAL_WORK_UNCOVERED_SCOPE_PARTITION",
+      "C_BUSINESS_AUTOMATION_UNCOVERED_SCOPE_PARTITION",
+      "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION",
+      "E_SCIENTIFIC_RESEARCH_UNCOVERED_SCOPE_PARTITION",
+      "H_COMPUTER_BROWSER_UNCOVERED_SCOPE_PARTITION"
+    ],
+    "set_equality_required": true
+  },
+  "meta_surface_accounting": {
+    "cybersecurity": [
+      "A_CODING_UNCOVERED_SCOPE_PARTITION",
+      "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION",
+      "H_COMPUTER_BROWSER_UNCOVERED_SCOPE_PARTITION"
+    ],
+    "biology_r_and_d": [
+      "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION",
+      "E_SCIENTIFIC_RESEARCH_UNCOVERED_SCOPE_PARTITION"
+    ],
+    "automated_ai_r_and_d": [
+      "A_CODING_UNCOVERED_SCOPE_PARTITION",
+      "E_SCIENTIFIC_RESEARCH_UNCOVERED_SCOPE_PARTITION"
+    ],
+    "healthcare": [
+      "B_PROFESSIONAL_WORK_UNCOVERED_SCOPE_PARTITION",
+      "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION"
+    ],
+    "mathematical_reasoning_arxivmath": [
+      "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION"
+    ],
+    "creative_diagram": [
+      "F_CREATIVE_AND_DIAGRAM_ACCEPTANCE_BASIS_REPAIR"
+    ],
+    "multilingual": [
+      "G_CROSS_CUTTING_CONDITION_MATRIX",
+      "A_CODING_UNCOVERED_SCOPE_PARTITION",
+      "B_PROFESSIONAL_WORK_UNCOVERED_SCOPE_PARTITION",
+      "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION"
+    ],
+    "long_context": [
+      "G_CROSS_CUTTING_CONDITION_MATRIX",
+      "A_CODING_UNCOVERED_SCOPE_PARTITION",
+      "B_PROFESSIONAL_WORK_UNCOVERED_SCOPE_PARTITION"
+    ]
+  },
+  "finality_effect": {
+    "current_38_registry_count_changed": false,
+    "current_14_of_38_changed": false,
+    "root1_positive_gap_changed": false,
+    "literal_terminal_claim_requires_repair": true,
+    "registry_extension_or_scope_implication_required_before_final_seal": true,
+    "v2_eight_group_cut_sufficient": false,
+    "v3_eight_group_cut_structurally_complete_against_current_known_gaps": true,
+    "outer_portfolio_count_increased": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_EIGHT_GROUPS_ARE_EIGHT_NEW_ATOMIC_PREDICATES",
+    "NO_CLAIM_ANY_CHILD_REQUIRES_NEW_REALITY_BEFORE_ZERO_REALITY_SCOPE_SATURATION",
+    "NO_NEW_FAMILY_FROM_THIS_COMPRESSION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_CURRENT_FIRST_PARTY_SURFACE_ENUMERATION_CAN_NEVER_CHANGE",
+    "NO_CLAIM_OSWORLD_SCOPE_IS_ALREADY_EQUIVALENT_TO_ARBITRARY_COMPUTER_AND_BROWSER_USE",
+    "NO_CLAIM_SCIENTIFIC_HYPOTHESIS_FORMATION_IS_ALREADY_PROVED",
+    "NO_CLAIM_CREATIVE_TEXT_OR_DIAGRAM_PARITY_IS_ALREADY_PROVED",
+    "NO_CLAIM_CURRENT_T0_T3_CASES_ALREADY_EXERCISE_ALL_NEW_V3_SLICES",
+    "NO_EXECUTION_AUTHORITY_FROM_V3",
+    "NO_FRESH_REALITY_AUTHORITY_FROM_V3"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "action_group_count": 8,
+  "outer_wave_embedding": {
+    "status": "CANDIDATE__ZERO_NEW_OUTER_PORTFOLIOS_IF_REFROZEN_BEFORE_TERMINAL_RESULTS",
+    "group_to_existing_portfolio": {
+      "A_CODING_UNCOVERED_SCOPE_PARTITION": [
+        "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO"
+      ],
+      "B_PROFESSIONAL_WORK_UNCOVERED_SCOPE_PARTITION": [
+        "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO"
+      ],
+      "C_BUSINESS_AUTOMATION_UNCOVERED_SCOPE_PARTITION": [
+        "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO"
+      ],
+      "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION": [
+        "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO"
+      ],
+      "E_SCIENTIFIC_RESEARCH_UNCOVERED_SCOPE_PARTITION": [
+        "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO"
+      ],
+      "F_CREATIVE_AND_DIAGRAM_ACCEPTANCE_BASIS_REPAIR": [
+        "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO"
+      ],
+      "G_CROSS_CUTTING_CONDITION_MATRIX": [
+        "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO",
+        "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO",
+        "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO",
+        "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO"
+      ],
+      "H_COMPUTER_BROWSER_UNCOVERED_SCOPE_PARTITION": [
+        "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO"
+      ]
+    },
+    "scientific_hypothesis_formation_embedding": "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO__ADD_PREDECLARED_HYPOTHESIS_FORMATION_AND_DISCRIMINATION_SLICE__DO_NOT_CREATE_NEW_PORTFOLIO",
+    "diagram_embedding": "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO__ADD_DIAGRAM_CONDITION_SCORING_AND_HTML_SVG_MECHANICAL_GATE",
+    "required_new_outer_portfolio_count": 0,
+    "preserved_outer_portfolio_count": 4,
+    "preconditions": [
+      "ADDED_TASK_TAGS_SCORERS_STOP_RULES_AND_SCOPE_BINDINGS_FROZEN_BEFORE_TERMINAL_OUTPUTS",
+      "ANY_NEW_HELDOUT_CASES_CLEANLY_REFROZEN_WITH_CONTAMINATION_ACCOUNTING",
+      "EXISTING_PREQUALIFICATION_EXECUTION_GATE_REMAINS_LOAD_BEARING",
+      "IF_A_GROUP_CANNOT_BE_MEASURED_LOSSLESSLY_INSIDE_ITS_ASSIGNED_PORTFOLIO_ONLY_THAT_GROUP_MAY_REOPEN_THE_OUTER_CUT"
+    ]
+  },
+  "route_reuse_compression": {
+    "seven_proxy_scope_leaves_have_existing_frozen_admissible_routes": true,
+    "new_behavior_scope_definitions_for_those_seven": 0,
+    "new_terminal_route_inventions_for_those_seven": 0,
+    "performance_parity_still_open": true,
+    "rule": "REUSE_SCOPE_AND_ROUTE_IDENTITY; DO_NOT INFER OPUS55 PARITY FROM INTERNAL WHOLE-SCOPE PASS."
+  }
+}
