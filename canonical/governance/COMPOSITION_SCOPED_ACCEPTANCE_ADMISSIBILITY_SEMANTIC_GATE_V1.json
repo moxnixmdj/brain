@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COMPOSITION_SCOPED_ACCEPTANCE_ADMISSIBILITY_SEMANTIC_GATE_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__GLOBAL_FAIL_CLOSED_GATE__SCOPE_ONLY_RECEIPTS_NOT_ADMISSIBLE_UNTIL_ACCEPTANCE_SCOPED_SEMANTICS_DISCHARGED__ZERO_CREDIT",
+  "status": "CANDIDATE__GLOBAL_SCOPE_ONLY_SUFFICIENCY_FALSIFIED_BY_CANONICAL_COUNTEREXAMPLE__ACCEPTANCE_GRADE_RECEIPT_REQUIRED_UNDER_CURRENT_AUTHORITY__ZERO_CREDIT",
   "objective": "Resolve once, globally, the ambiguity behind SCOPED_ACCEPTANCE_PROOF so component-specific scope certificates cannot silently promote into Composition credit without the acceptance-grade premise required by current authority.",
   "authority": {
     "frozen_manifest": {
@@ -46,13 +46,13 @@
   },
   "semantic_gate": {
     "question": "Does a scope-complete certificate with explicitly open source performance/acceptance qualify by itself as the required SCOPED_ACCEPTANCE_PROOF?",
-    "current_answer": "UNRESOLVED__FAIL_CLOSED_NO",
+    "current_answer": "PROVED_FAIL_CLOSED__SCOPE_COMPLETENESS_ALONE_IS_INSUFFICIENT_UNDER_CURRENT_AUTHORITY",
     "admissible_if_any": [
       "VERIFIED_CURRENT_SOURCE_ACCEPTANCE_CLOSURE_PLUS_SCOPE_COMPLETE_BINDING",
       "DIRECT_CURRENT_OWNED_FAMILY_WITNESS_THAT_COVERS_THE_LITERAL_COMPONENT_ACCEPTANCE",
-      "INDEPENDENT_SEMANTIC_THEOREM_PROVING_SCOPE_ONLY_IS_SUFFICIENT_UNDER_THE_FROZEN_COMPOSITION_ACCEPTANCE_LITERAL_AND_CURRENT_AUTHORITY_RULE"
+      "FUTURE_EXPLICIT_CANONICAL_AUTHORITY_REVISION_THAT_CHANGES_THE_FROZEN_ADMISSIBILITY_SEMANTICS"
     ],
-    "forbidden": "SELF_ASSERTED_ACCEPTANCE_SCOPED_LABEL_OR_SCOPE_COMPLETENESS_ALONE"
+    "forbidden": "SCOPE_COMPLETENESS_ALONE__SELF_ASSERTED_ACCEPTANCE_SCOPED_LABEL__OR_ANY RECEIPT WITH SOURCE ACCEPTANCE EXPLICITLY OPEN"
   },
   "current_counterexamples": {
     "evidence_synthesis": {
@@ -78,8 +78,8 @@
     "strict_opus55_acceptance_delta": 0
   },
   "optimization": {
-    "breakthrough": "ONE_GLOBAL_SEMANTIC_GATE_REPLACES_REPEATED_COMPONENT_BY_COMPONENT_SCOPE_ONLY_ARGUMENTS",
-    "scheduler_effect": "PAUSE_SCOPE_ONLY_COMPOSITION_PROMOTIONS; LISTEN_FOR_ACCEPTANCE_GRADE_UPSTREAM_RECEIPTS OR ONE GLOBAL SEMANTIC THEOREM",
+    "breakthrough": "ONE_GLOBAL_COUNTEREXAMPLE THEOREM DELETES ALL SCOPE_ONLY COMPOSITION PROMOTION ROUTES UNDER CURRENT AUTHORITY",
+    "scheduler_effect": "COMPOSITION_COMPONENT_RECOMPUTE BECOMES EVENT_DRIVEN ON ACCEPTANCE_GRADE UPSTREAM RECEIPTS; DO NOT SPEND WORK ON SCOPE-ONLY BRIDGES",
     "duplicate_work_deleted": [
       "REPEATED_SCOPE_ONLY_BRIDGE_PROMOTIONS",
       "REPEATED_SLICER_RUNS_WITH_NO_ADMISSIBLE_RECEIPT_DELTA"
@@ -93,7 +93,7 @@
     "NO_FRESH_REALITY",
     "ZERO_INCREMENTAL_SPEND"
   ],
-  "next": "INDEPENDENTLY_RESOLVE_THIS_ONE_GLOBAL_SEMANTIC_GATE__IF_SCOPE_ONLY_IS_PROVED_SUFFICIENT_REEVALUATE_ALL_PENDING_SCOPE_BRIDGES_IN_ONE_BATCH__OTHERWISE_REQUIRE_ACCEPTANCE_GRADE_UPSTREAM_RECEIPTS_AND DEMOTE COMPOSITION H TO EVENT_DRIVEN_RECOMPUTE ONLY",
+  "next": "REQUIRE ACCEPTANCE_GRADE CURRENT_SOURCE RECEIPTS OR DIRECT OWNED-FAMILY WITNESSES FOR OPEN COMPONENTS__DEMOTE COMPOSITION H TO EVENT_DRIVEN RECOMPUTE__REOPEN SCOPE-ONLY ADMISSION ONLY AFTER EXPLICIT CANONICAL AUTHORITY REVISION",
   "new_reality_units_consumed": 0,
   "terminal_results_replayed": 0,
   "incremental_spend_usd": 0,
@@ -104,5 +104,29 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "formal_falsification": {
+    "proposition": "SCOPE_COMPLETE_IMPLIES_COMPONENT_ACCEPTANCE",
+    "result": "FALSE",
+    "canonical_counterexample": {
+      "source": "canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "scope_complete": true,
+      "coverage_relation": "EXACT_UNION",
+      "scope_relation": "PROVEN_STRONGER",
+      "acceptance_closed": false,
+      "implication_evaluation": false
+    },
+    "second_counterexample": {
+      "source": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json::ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT",
+      "scope_complete": true,
+      "performance_credit": "ZERO__AA_BRIEFCASE_GE_1822_REMAINS_REQUIRED"
+    },
+    "independent_logic_check": {
+      "engine": "Wolfram Language kernel",
+      "tautology_q_scope_implies_acceptance": false,
+      "countermodel_exists_for_scope_true_acceptance_false": true,
+      "implication_at_scope_true_acceptance_false": false,
+      "note": "This verifies the logical non-implication. Canonical content-addressed sources instantiate the countermodel."
+    }
+  }
 }
