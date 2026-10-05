@@ -217,6 +217,30 @@
       "persistent_learned_bytes_added": 0,
       "architecture_rule": "SEARCH_VERIFIED_LIBRARY_REFERENCES_PATCHES_AND_PARAMETERS_BEFORE_RAW_PROGRAMS",
       "deduction": "DETERMINISTIC_CAPABILITY_COMPILATION_CAN_EXPONENTIALLY_REDUCE_GENERIC_SEARCH_COST_WITH_ZERO_LEARNED_BYTE_GROWTH__THE_NEXT_EMPIRICAL_UNKNOWN_IS_EFFECTIVE_DESCRIPTION_LENGTH_AND_VERIFIER_COST_ON_REAL_REUSABLE_CAPABILITIES"
+    },
+    "empirical_incremental_description_length_and_verifier_cost": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__THREE_REUSABLE_FAMILIES_MEASURED__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_EMPIRICAL_DESCRIPTION_LENGTH_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_EMPIRICAL_DESCRIPTION_LENGTH_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "cohort": [
+        "linear_trend_sinusoid",
+        "exp_abs",
+        "threshold_step"
+      ],
+      "compiled_reference_bits": {
+        "min": 70,
+        "median": 102,
+        "max": 326
+      },
+      "description_bit_reduction": {
+        "min": 29,
+        "median": 29,
+        "max": 153
+      },
+      "discovery_median_seconds_across_families": 0.14623197100036123,
+      "verification_median_seconds_across_families": 0.00001766400009728386,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE_FIRST_MEASURED_REUSABLE_CAPABILITY_COHORT_HAS_SHORT_COMPILED_DESCRIPTORS_AND_CHEAP_VERIFICATION_UNDER_THE_FROZEN_CANONICAL_DSL__THIS_SUPPORTS_LIBRARY_FIRST_SEARCH_BUT_DOES_NOT_ESTABLISH_A_GENERAL_REAL_WORLD_DESCRIPTION_LENGTH_DISTRIBUTION"
     }
   },
   "next_structural_residuals_ranked": [
@@ -227,8 +251,8 @@
     },
     {
       "rank": 2,
-      "residual": "EMPIRICAL_INCREMENTAL_DESCRIPTION_LENGTH_AND_VERIFIER_COST_ON_REAL_REUSABLE_CAPABILITIES",
-      "reason": "UNIVERSAL_PREFIX_SEARCH_AND_CAPABILITY_RATCHET_BOUNDS_ARE FORMALLY VERIFIED__PRACTICAL_WALL_CLOCK NOW DEPENDS ON THE EFFECTIVE INCREMENTAL DESCRIPTION LENGTH OF REAL VERIFIED CAPABILITY PATCHES REFERENCES AND PARAMETERS PLUS THEIR VERIFIER COST"
+      "residual": "BROADEN_INCREMENTAL_DESCRIPTION_LENGTH_AND_VERIFIER_COST_TO_NON_SYNTHETIC_REAL_WORLD_CAPABILITY_CLASSES",
+      "reason": "THREE_INDEPENDENTLY_VERIFIED_REUSABLE_STRUCTURAL_FAMILIES_NOW_HAVE_FROZEN_L_AND_T_MEASUREMENTS__THE_NEXT_PRACTICAL_UNKNOWN_IS WHETHER_SHORT_INCREMENTAL_DESCRIPTORS_AND_CHEAP_VERIFIERS_PERSIST_ACROSS NON_SYNTHETIC_LANGUAGE_TOOL_VISION_AND_WORKFLOW_CAPABILITIES"
     },
     {
       "rank": 3,
@@ -247,7 +271,8 @@
     "DO_NOT_REQUIRE_OR_CLAIM_A_UNIFORM_POSITIVE_PROPOSAL_MASS_LOWER_BOUND_ACROSS_AN_UNBOUNDED_FAMILY_UNIVERSE__THIS_IS_MATHEMATICALLY_IMPOSSIBLE",
     "FOR_OPEN_WORLD_SEARCH_REPORT_COMPLEXITY_CONDITIONED_BOUNDS_IN_TERMS_OF_PREFIX_DESCRIPTION_LENGTH_L_AND_VERIFIER_COST_T__DISTINGUISH_EXISTENCE_COMPLETENESS_FROM_PRACTICAL_WALL_CLOCK",
     "SEARCH_EXISTING_VERIFIED_CAPABILITY_REFERENCES_AND_MINIMAL_PATCHES_BEFORE RAW_PROGRAM SYNTHESIS__EVERY_SAVED_DESCRIPTION_BIT HALVES THE GENERIC DOVETAIL BOUND",
-    "MEASURE_INCREMENTAL_DESCRIPTION_LENGTH RELATIVE_TO_THE_CURRENT_VERIFIED_LIBRARY__DO_NOT_USE_RAW_SOURCE_FILE_SIZE_AS A SUBSTITUTE FOR A FROZEN CANONICAL PROGRAM CODE"
+    "MEASURE_INCREMENTAL_DESCRIPTION_LENGTH RELATIVE_TO_THE_CURRENT_VERIFIED_LIBRARY__DO_NOT_USE_RAW_SOURCE_FILE_SIZE_AS A SUBSTITUTE FOR A FROZEN CANONICAL PROGRAM CODE",
+    "USE_THE_FROZEN_CAPABILITY_REGISTRY_AND_CANONICAL_DESCRIPTOR_CODE_TO_MEASURE_NON_SYNTHETIC_CAPABILITIES__DO_NOT_GENERALIZE_THE_THREE_FAMILY_L_AND_T_DISTRIBUTION"
   ],
   "learned_byte_ladder": {
     "current_rung_bytes": 0,
@@ -304,8 +329,10 @@
     "complexity_conditioned_deterministic_dovetail_bound_proved": true,
     "real_target_description_length_and_verifier_cost_sufficiently_small_not_claimed": true,
     "capability_ratcheted_search_bound_proved": true,
-    "real_reusable_capability_incremental_description_length_distribution_measured": false,
-    "real_reusable_capability_verifier_cost_distribution_measured": false
+    "real_reusable_capability_incremental_description_length_distribution_measured": true,
+    "real_reusable_capability_verifier_cost_distribution_measured": true,
+    "description_length_measurement_scope": "THREE_ALREADY_VERIFIED_SYNTHETIC_REUSABLE_STRUCTURAL_FAMILIES_ONLY",
+    "non_synthetic_real_world_capability_description_length_distribution_measured": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
