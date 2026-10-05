@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_P3_CONTRACT_SEMANTIC_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__P3_REQUIRED_CHECK_SET_SEMANTICALLY_SUBSUMES_EVIDENCE_TO_AUDIENCE_SYNTHESIS_CONTRACT__ONLY_TYPED_INPUT_DOMAIN_COMPLETENESS_REMAINS__ZERO_CREDIT",
+  "objective": "Remove evaluator-contract mismatch as a blocker for EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 and compress its remaining proof burden to scope completeness over the frozen typed contract boundary.",
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "p3_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+    },
+    "terminal_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    "seven_leaf_saturation": {
+      "path": "canonical/governance/SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_20261005_V1.json",
+      "git_blob_sha": "2ad6f6e4d367b0b73e019f677e3c7a0bb1ed815a"
+    }
+  },
+  "subject_behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+  "contract_boundary": {
+    "inputs": "Verified evidence units with provenance, user objective/audience, output constraints and required claims",
+    "allowed_information": "Verified evidence and explicit user/rubric constraints",
+    "required_output_or_action": "Select, organize and express the necessary evidence so required claims are supported, material uncertainty/disagreement is preserved and irrelevant detail is omitted",
+    "success_condition": "Independent claim-support audit has no unsupported material claims, required coverage is complete, audience/format constraints pass, and compression does not delete decision-relevant evidence"
+  },
+  "p3_required_checks": [
+    "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+    "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED",
+    "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS",
+    "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED",
+    "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION",
+    "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
+    "IRRELEVANT_EVIDENCE_EXCLUDED_WITHOUT_DELETING_REQUIRED_SUPPORT"
+  ],
+  "clause_mapping": [
+    {
+      "contract_clause": "required claims are supported and no unsupported material claims",
+      "discharged_by": [
+        "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+        "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED",
+        "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS"
+      ]
+    },
+    {
+      "contract_clause": "material uncertainty and disagreement are preserved",
+      "discharged_by": [
+        "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED"
+      ]
+    },
+    {
+      "contract_clause": "irrelevant detail is omitted without losing required support",
+      "discharged_by": [
+        "IRRELEVANT_EVIDENCE_EXCLUDED_WITHOUT_DELETING_REQUIRED_SUPPORT"
+      ]
+    },
+    {
+      "contract_clause": "audience and format constraints pass",
+      "discharged_by": [
+        "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS"
+      ]
+    },
+    {
+      "contract_clause": "compression does not delete decision-relevant evidence",
+      "discharged_by": [
+        "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION"
+      ]
+    }
+  ],
+  "semantic_implication": {
+    "statement": "UNDER_THE_FROZEN_P3_INPUT_BOUNDARY__CONJUNCTION_OF_ALL_P3_REQUIRED_CHECKS_IMPLIES_THE_REGISTRY_REQUIRED_OUTPUT_AND_SUCCESS_CONDITION_FOR_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "direction": "P3_REQUIRED_CHECKS => SYNTHESIS_CONTRACT_SUCCESS",
+    "strictness": "P3_IS_STRONGER_THAN_THE_MINIMUM_REGISTRY_SUCCESS_CONDITION_BECAUSE_IT_ADDITIONALLY_REQUIRES_PROVENANCE_PRESERVATION_AND_EXPLICIT_CONFLICT_UNCERTAINTY_PRESERVATION",
+    "domain_labels_needed_for_this_implication": false
+  },
+  "existing_terminal_evidence": {
+    "T1": "LOAD_BEARING_DIRECT_INSTRUMENTATION_PASS_AND_PARENT_TERMINAL_ACCEPTANCE_PASS",
+    "T3": "LOAD_BEARING_DIRECT_INSTRUMENTATION_PASS_AND_PARENT_TERMINAL_ACCEPTANCE_PASS",
+    "credit_effect": "NONE_UNTIL_SCOPE_COMPLETENESS_IS_INDEPENDENTLY_PROVED"
+  },
+  "remaining_single_root": {
+    "id": "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS",
+    "statement": "Prove that the frozen P3 contract/evaluator route is total and scope-complete over every admissible normalized evidence/audience/constraint input in the claimed EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 contract domain, or explicitly partition the residual input classes it does not cover.",
+    "not_required_first": [
+      "NEW_SYNTHESIS_MECHANISM",
+      "NEW_TERMINAL_CASES",
+      "FAMILY_SPECIFIC_DUPLICATE_SYNTHESIS_PROOFS"
+    ],
+    "fanout_if_closed": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ]
+  },
+  "scheduler_effect": {
+    "priority": "PROVE_TYPED_INPUT_DOMAIN_TOTALITY_OR_PARTITION_THE_TRUE_RESIDUAL",
+    "block": "DO_NOT_REOPEN_SEMANTIC_EVALUATOR_ADEQUACY_UNLESS_A_CONTRACT_CLAUSE_NOT_IMPLIED_BY_THE_FROZEN_REQUIRED_CHECK_SET_IS_EXHIBITED"
+  },
+  "hard_nonclaims": [
+    "NO_SCOPE_COMPLETENESS_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_FINITE_T1_T3_TERMINAL_PASSES_ESTABLISH_UNIVERSALITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
