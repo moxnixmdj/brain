@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IFBENCH58_SCORER_ABI_PATH_CLOSURE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PINNED_HF_TO_SCORER_CALL_CHAIN_CLOSED__NO_OUT_OF_BAND_KWARGS_INJECTION__REPEAT_SPAN_PYTHON_RNG_UNSEEDED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "depends_on": "canonical/governance/LIVEBENCH_IFBENCH58_FROZEN_DATASET_SCHEMA_ABI_CUT_20261005_V1.json",
+  "pinned_runtime_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+  "call_chain": [
+    {
+      "path": "livebench/common.py",
+      "blob": "95373cc6a82bc935013e2c23d2a183022f802f5c",
+      "fact": "get_hf_dataset loads livebench/instruction_following directly and load_questions performs date normalization plus release/removal filtering without rewriting kwargs"
+    },
+    {
+      "path": "livebench/gen_api_answer.py",
+      "blob": "a9186172abfa62ef087a16dfec0cb57013ff84b5",
+      "fact": "HF questions are passed through inference scheduling; this file contains no reference_text, n_start, or percentage symbol and no assignment to question['kwargs']"
+    },
+    {
+      "path": "livebench/gen_ground_truth_judgment.py",
+      "blob": "b36561da5b54380c724c507462d0ee65feefeac8",
+      "fact": "post-cutoff instruction_following calls ifbench_process_results(question, llm_answer, debug) on the question object; no kwargs rewrite or missing-field injection occurs"
+    },
+    {
+      "path": "livebench/incremental_judge.py",
+      "blob": "40e352e3cf440c9643e44f3ad11d3b2ffb999ccf",
+      "fact": "post-cutoff instruction_following is routed to normal grading; the incremental lane passes MatchSingle(dict(question),...) to play_a_match_gt and does not rewrite kwargs"
+    },
+    {
+      "path": "livebench/process_results/instruction_following/utils.py",
+      "blob": "8ce01747887ec0792c8f024e1972e34ece781676",
+      "fact": "InputExample.kwargs is assigned directly from question['kwargs']; no synthesized checker state is inserted"
+    },
+    {
+      "path": "livebench/if_runner/ifbench/evaluation_lib.py",
+      "blob": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+      "fact": "strict evaluation only removes None-valued entries and calls build_description(**row_kwargs)"
+    },
+    {
+      "path": "livebench/if_runner/ifbench/instructions.py",
+      "blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+      "fact": "NGramOverlapChecker and RepeatSpanChecker consume exactly the missing fields or Python-random defaults described by the ABI cut"
+    }
+  ],
+  "negative_static_search_on_pinned_scoring_path": {
+    "reference_text_occurs_outside_instructions_py": false,
+    "n_start_occurs_outside_instructions_py": false,
+    "percentage_occurs_outside_ifbench_checker_implementation_or_utilities": false,
+    "question_kwargs_assignment_on_loader_inference_or_grader_path": false,
+    "consequence": "NO_PINNED_FIRST_PARTY_OUT_OF_BAND_TRANSFORM_ON_THE_BOUND_HF_TO_SCORER_PATH_CAN_SUPPLY_reference_text_percentage_n_start_OR_n_end"
+  },
+  "rng_result": {
+    "repeat_span_rng": "PYTHON_RANDOM_MODULE",
+    "repeat_span_default_start": "random.randint(0, len(prompt_to_repeat.split()) - 2)",
+    "repeat_span_default_end": "random.randint(start + 1, len(prompt_to_repeat.split()) - 1)",
+    "python_random_seed_bound_on_scoring_path": false,
+    "numpy_shuffle_seed_is_not_a_python_random_seed": true,
+    "deduction": "IF_repeat:repeat_span_OCCURS_IN_THE_BOUND_POPULATION_WITH_NONEMPTY_prompt_to_repeat__ITS_SCORE_RELEVANT_SPAN_STATE_IS_NOT_A_FIXED_HIDDEN_TERMINAL_PARAMETER_AND_IS_NOT_DETERMINISTICALLY_BOUND_BY_THE_PINNED_SCORING_PATH"
+  },
+  "row_class_consequences": {
+    "ratio_overlap_if_present": "reference_text_CANNOT_ARRIVE_FROM_THE_FROZEN_ROW_ABI_AND_no_transform_exists__NGramOverlapChecker_REACHES_A_TYPE_ERROR_ON_None_REFERENCE_AND_ifbench_process_results_RETURNS_ZERO__THEREFORE_THIS_ROW_CLASS_IS_RESPONSE_INVARIANT_ZERO_UNDER_THE_PINNED_ROUTE",
+    "repeat_span_if_present": "prompt_to_repeat_MAY_ARRIVE_BUT_n_start_AND_n_end_CANNOT__THE_SCORER_SELECTS_THEM_WITH_UNSEEDED_PYTHON_RANDOM__THEREFORE_THIS_ROW_CLASS_IS_STOCHASTIC_UNLESS_AN_EXTERNAL_PROCESS_LEVEL_RNG_STATE_IS_SEPARATELY_BOUND",
+    "all_other_families": "UNCHANGED_BY_THIS_CLOSURE"
+  },
+  "critical_path_change": {
+    "closed": [
+      "OUT_OF_BAND_KWARGS_INJECTION_SEARCH",
+      "ratio:overlap_REFERENCE_TEXT_PROVENANCE_AS_A_FIXED_HIDDEN_STATE_OBLIGATION"
+    ],
+    "reclassified": [
+      "ratio:overlap_TO_RESPONSE_INVARIANT_ZERO_IF_PRESENT",
+      "repeat:repeat_span_TO_ACTIVE_PRESENCE_PLUS_RNG_SEMANTICS_GATE"
+    ],
+    "next": [
+      "DETERMINE_repeat:repeat_span_ACTIVE_PRESENCE_WITHOUT_TERMINAL_CONTENT_READ_OR_FIND_A_SCOPE_PROOF_THAT_MAKES_PRESENCE_IRRELEVANT",
+      "IF_PRESENT__DERIVE_A_ROBUST_OR_EXPECTED_OPTIMUM_UNDER_THE_EXACT_RNG_PROTOCOL_AND_RECONCILE_THAT_WITH_THE_FIXED_PUBLISHED_COMPARATOR_SCORE",
+      "ONLY_THEN_RECOMPILE_IFBENCH58_POINTWISE_DOMINANCE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_repeat:repeat_span_IS_PRESENT_OR_ABSENT_IN_THE_ACTIVE_200",
+    "NO_CLAIM_THE_PUBLISHED_COMPARATOR_SCORE_IS_DETERMINISTIC_IF_repeat:repeat_span_IS_PRESENT",
+    "NO_TERMINAL_ROWS_INSTRUCTION_IDS_KWARGS_VALUES_PROMPTS_OR_TURNS_READ",
+    "NO_BRAIN_SCORE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_read": 0,
+    "terminal_instruction_lists_read": 0,
+    "terminal_kwargs_values_read": 0,
+    "prompt_or_turn_text_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
