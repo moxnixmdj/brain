@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_THREE_DOMAIN_INSTANCE_EXISTING_FAMILY_MAPPING_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__CURRENTLY_OBSERVED_CYBER_BIOLOGY_AI_R_AND_D_BEHAVIORS_FACTOR_THROUGH_EXISTING_FUNCTIONAL_FAMILIES__NO_NEW_FAMILY_COUNTEREXAMPLE_FOUND__ZERO_CREDIT",
+  "status": "CANDIDATE__CONTENT_ADDRESSED_OBSERVED_DOMAIN_OPERATIONS_FACTOR_THROUGH_EXISTING_FUNCTIONAL_FAMILIES__NO_NEW_FAMILY_COUNTEREXAMPLE_FOUND__ZERO_CREDIT",
   "objective": "Resolve the three remaining domain-labeled Root1 meta-mapping groups by erasing domain nouns and mapping each currently evidenced useful operation to the existing functional capability envelope; keep open-world target discovery separate.",
   "source_bindings": {
     "first_party_surface_audit": {
@@ -18,6 +18,10 @@
     },
     "open_world_boundary": {
       "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json"
+    },
+    "first_party_domain_operation_facts": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_DOMAIN_OPERATION_FACTS_20261005_V1.json",
+      "git_blob_sha": "c50e3a3f3c67b098148fcf4ca3128cc72122b31b"
     }
   },
   "first_party_public_observations": {
