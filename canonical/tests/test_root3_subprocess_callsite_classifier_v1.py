@@ -34,10 +34,10 @@ class _FakePopen:
 
 
 class RuntimeCallsiteClassifierTests(unittest.TestCase):
-    def test_registry_is_exact_22_site_universe(self):
-        self.assertEqual(len(EXPECTED), 22)
+    def test_registry_is_exact_19_site_universe(self):
+        self.assertEqual(len(EXPECTED), 19)
         self.assertEqual(
-            sum(1 for k in EXPECTED if k[2] == "subprocess.run"), 21
+            sum(1 for k in EXPECTED if k[2] == "subprocess.run"), 18
         )
         self.assertEqual(
             sum(1 for k in EXPECTED if k[2] == "subprocess.Popen"), 1
@@ -46,7 +46,7 @@ class RuntimeCallsiteClassifierTests(unittest.TestCase):
     def test_direct_unregistered_test_call_fails_closed(self):
         with self.assertRaises(
             RuntimeCallsiteClassificationError,
-            msg="a caller outside the frozen 22-site map must never inherit a class",
+            msg="a caller outside the frozen 19-site map must never inherit a class",
         ):
             detect_effect_class("subprocess.run")
 
@@ -87,7 +87,7 @@ class RuntimeCallsiteClassifierTests(unittest.TestCase):
                 "process_api": "subprocess.run",
                 "function": "run",
                 "effect_class": "READ_ONLY_DECLARED_QUERY",
-                "registry_site_count": 22,
+                "registry_site_count": 19,
                 "runtime_join": "EXACT_PATH_LINE_API",
             },
         )
