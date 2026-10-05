@@ -1,0 +1,178 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V5",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SEVEN_ACTION_GROUP_CURRENT_KNOWN_STRUCTURAL_REPAIR__V4_PLUS_TARGET_SCOPE_DEDUP__ALL_SYSTEM_CARD_AND_ROOT1_CONDITIONS_PRESERVED__ZERO_CREDIT",
+  "objective": "Apply the active target/mechanism guard and HLE primitive-family scope collapse to V4 without losing any first-party System Card, Root1 domain, multilingual, long-context, abstract-generalization, scientific-hypothesis, creative-diagram, or open-world completeness obligation.",
+  "base": {
+    "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V4.json",
+    "git_blob_sha": "bb8e994b631034f85ca8edc39a9993b4cc5d75f8"
+  },
+  "new_authorities": {
+    "multidisciplinary_hle_scope_activation": {
+      "path": "canonical/governance/MULTIDISCIPLINARY_REASONING_HLE_TARGET_SCOPE_COLLAPSE_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "8bcce14802a05c8c4279d1e9473740300fa3274d"
+    },
+    "multidisciplinary_root1_correction": {
+      "path": "canonical/governance/MULTIDISCIPLINARY_HLE_SCOPE_COLLAPSE_ROOT1_CONDITION_CORRECTION_20261005_V1.json",
+      "git_blob_sha": "a00ad8e5f2f68dcc87c12102badb0a07d0ad93ce"
+    },
+    "system_card_matrix": {
+      "path": "canonical/governance/OPUS55_SYSTEM_CARD_CAPABILITY_CHAPTER_COVERAGE_MATRIX_20261005_V1.json",
+      "git_blob_sha": "f4fda4e06a20e70e37610f664f9287fb49866c37"
+    },
+    "target_mechanism_guard": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json"
+    }
+  },
+  "exact_delta": {
+    "delete_action_group": "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION",
+    "delete_reason": "The primitive multidisciplinary family target is directly represented by HLE_TOOLS_GE_67_7; D's remaining cells are separately terminal-required domain/language conditions and can be paid once in the shared condition matrix instead of duplicating a family scope program.",
+    "primitive_cell_replacement": {
+      "old": "DIFFICULT_EXPERT_LEVEL_QUESTIONS_ACROSS_DOMAINS_WITH_SEARCH_CODE_TOOLS",
+      "new": "HLE_TOOLS_GE_67_7 plus its existing full-2500 population, tool-protocol, grader-comparability and Brain-score prerequisites"
+    },
+    "move_without_deletion": {
+      "RESEARCH_LEVEL_MATHEMATICAL_REASONING_ARXIVMATH_CONDITION": "G_SHARED_TERMINAL_CONDITION_MATRIX::MATHEMATICAL_REASONING_ARXIVMATH",
+      "HEALTHCARE_REASONING_CONDITION": "G_SHARED_TERMINAL_CONDITION_MATRIX::HEALTHCARE",
+      "CYBERSECURITY_REASONING_CONDITION_WITHIN_AUTHORIZED_SAFE_SCOPE": "G_SHARED_TERMINAL_CONDITION_MATRIX::CYBERSECURITY",
+      "BIOLOGY_REASONING_CONDITION_WITHIN_SAFE_BENEFICIAL_SCOPE": "G_SHARED_TERMINAL_CONDITION_MATRIX::LIFE_SCIENCES_CAPABILITIES",
+      "MULTILINGUAL_EXPERT_REASONING_CONDITION": "G_SHARED_TERMINAL_CONDITION_MATRIX::MULTILINGUAL_PERFORMANCE"
+    },
+    "expand_group_G": {
+      "prior_conditions": [
+        "MULTILINGUAL_PERFORMANCE",
+        "LONG_CONTEXT",
+        "ABSTRACT_GENERALIZATION_ARC_AGI"
+      ],
+      "added_conditions": [
+        "MATHEMATICAL_REASONING_ARXIVMATH",
+        "HEALTHCARE",
+        "CYBERSECURITY",
+        "LIFE_SCIENCES_CAPABILITIES"
+      ],
+      "effective_conditions": [
+        "MULTILINGUAL_PERFORMANCE",
+        "LONG_CONTEXT",
+        "ABSTRACT_GENERALIZATION_ARC_AGI",
+        "MATHEMATICAL_REASONING_ARXIVMATH",
+        "HEALTHCARE",
+        "CYBERSECURITY",
+        "LIFE_SCIENCES_CAPABILITIES"
+      ],
+      "closure": "For each material condition, prove equal-or-better outcome over the mapped family union or a scope-safe stronger certificate. A condition may reuse A/B/C/E/H or existing family receipts. No specific internal mechanism or multidisciplinary-family execution is required unless independently entailed."
+    }
+  },
+  "first_party_system_card_rebinding": {
+    "affected_rows_exactly": 3,
+    "rows": [
+      {
+        "section": "8.9",
+        "surface": "ARXIVMATH",
+        "replace_destination": "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION",
+        "with": "G_SHARED_TERMINAL_CONDITION_MATRIX::MATHEMATICAL_REASONING_ARXIVMATH"
+      },
+      {
+        "section": "8.15",
+        "surface": "HEALTHCARE",
+        "replace_destination": "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION",
+        "with": "G_SHARED_TERMINAL_CONDITION_MATRIX::HEALTHCARE"
+      },
+      {
+        "section": "8.17",
+        "surface": "LIFE_SCIENCES_CAPABILITIES",
+        "replace_destination": "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION",
+        "with": "G_SHARED_TERMINAL_CONDITION_MATRIX::LIFE_SCIENCES_CAPABILITIES"
+      }
+    ],
+    "all_16_system_card_subsections_remain_accounted": true
+  },
+  "root1_preservation": {
+    "family_mapping_frontier": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "HEALTHCARE",
+      "MATHEMATICAL_REASONING_ARXIVMATH"
+    ],
+    "cross_cutting_conditions": [
+      "MULTILINGUAL_PERFORMANCE",
+      "LONG_CONTEXT"
+    ],
+    "creative_diagram_basis_repair": true,
+    "abstract_generalization_arc_agi": true,
+    "open_world_target_discovery_boundary": true,
+    "note": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT remains carried by V4 groups A/E and is not moved from D because V4 D did not carry it."
+  },
+  "effective_action_groups": [
+    "A_CODING_UNCOVERED_SCOPE_PARTITION",
+    "B_PROFESSIONAL_WORK_UNCOVERED_SCOPE_PARTITION",
+    "C_BUSINESS_AUTOMATION_UNCOVERED_SCOPE_PARTITION",
+    "E_SCIENTIFIC_RESEARCH_UNCOVERED_SCOPE_PARTITION",
+    "F_CREATIVE_AND_DIAGRAM_ACCEPTANCE_BASIS_REPAIR",
+    "G_SHARED_TERMINAL_CONDITION_MATRIX",
+    "H_COMPUTER_BROWSER_UNCOVERED_SCOPE_PARTITION"
+  ],
+  "outer_portfolio_embedding": {
+    "preserved_outer_portfolio_count": 4,
+    "removed_standalone_embedding": "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION -> T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO",
+    "condition_matrix_G_still_spans": [
+      "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO",
+      "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO",
+      "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO",
+      "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO"
+    ],
+    "new_outer_portfolios_required": 0
+  },
+  "compression_accounting": {
+    "v4_action_group_count": 8,
+    "v5_action_group_count": 7,
+    "action_groups_removed": 1,
+    "first_party_system_card_rows_lost": 0,
+    "root1_condition_surfaces_lost": 0,
+    "atomic_predicates_changed": 0,
+    "outer_portfolios_changed": 0,
+    "target_weakened": false
+  },
+  "scheduler_delta_if_verified": {
+    "delete": [
+      "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION",
+      "DUPLICATE_MULTILINGUAL_CONDITION_PAYMENT_IN_D_AND_G",
+      "MULTIDISCIPLINARY_REGISTRY_MECHANISM_SCOPE_WORK_NOT_ENTAILED_BY_TARGET"
+    ],
+    "activate": [
+      "G_SHARED_TERMINAL_CONDITION_MATRIX_WITH_7_EXPLICIT_CONDITIONS",
+      "HLE_TOOLS_GE_67_7_AS_PRIMITIVE_MULTIDISCIPLINARY_FAMILY_ACCEPTANCE_LINE"
+    ],
+    "preserve": [
+      "ALL_V4_A_B_C_E_F_H_CONTENT",
+      "V4_SCIENTIFIC_HYPOTHESIS_FORMATION_AND_DETERMINISTIC_SUBTRACTION_CANDIDATE",
+      "V4_CREATIVE_DIAGRAM_DECOMPOSITION",
+      "V4_ABSTRACT_GENERALIZATION_CONDITION",
+      "V4_OPEN_WORLD_TARGET_DISCOVERY_COMPLETENESS_BOUNDARY",
+      "ALL_38_CURRENT_ATOMIC_PREDICATES"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SEVEN_ACTION_GROUPS_ARE_A_GLOBAL_MINIMUM_UNDER_ARBITRARY_GROUP_MERGING",
+    "NO_DOMAIN_LANGUAGE_CONTEXT_ARC_AGI_OR_LIFE_SCIENCE_PARITY_CREDIT",
+    "NO_HLE_SCORE_CREDIT",
+    "NO_TARGET_DISCOVERY_COMPLETENESS_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "action_group_count": 7
+}
