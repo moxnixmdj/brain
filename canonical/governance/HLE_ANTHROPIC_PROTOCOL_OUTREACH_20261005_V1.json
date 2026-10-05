@@ -1,32 +1,55 @@
 {
   "schema": "PROJECT_BRAIN_HLE_ANTHROPIC_PROTOCOL_OUTREACH_20261005_V1",
   "date": "2026-10-05",
-  "status": "AUTHENTICATED_OUTBOUND_PROTOCOL_REQUEST_SENT__PASSIVE_RESUME_EVENT_ONLY__ZERO_CREDIT",
+  "status": "AUTHENTICATED_OUTBOUND_PROTOCOL_CLARIFICATION_REQUEST_SENT__PASSIVE_RESUME_EVENT_ONLY__PRECEDENCE_REPAIRED__ZERO_CREDIT",
   "target_predicate": "HLE_TOOLS_GE_67_7",
   "recipient": "eval-initiative@anthropic.com",
   "gmail_thread_id": "1a1098c840bc2c3a",
   "sent_message_id": "1a1098c840bc2c3a",
-  "request_scope": [
+  "request_scope_as_sent": [
     "EXACT_OPUS55_HLE_WITH_TOOLS_DATASET_REVISION_OR_POPULATION",
     "GRADING_MODEL_VERSION_AND_JUDGE_PROMPT_OR_SCORER_IMPLEMENTATION",
     "CONTAMINATION_BLOCKLIST_AND_TRANSCRIPT_REVIEW_PROCEDURE",
     "WHETHER_PUBLIC_CAIS_HLE_JUDGE_IS_SCORE_COMPARABLE_TO_THE_REPORTED_67_7_SETUP",
     "IF_EXACT_JUDGE_UNAVAILABLE__WHETHER_ANY_DETERMINISTIC_RULE_IS_GUARANTEED_CONSERVATIVE"
   ],
+  "precedence_repair": {
+    "stronger_existing_authority": "canonical/governance/HLE_OPUS55_PUBLIC_PROTOCOL_REGRESSION_RECONCILIATION_ACTIVATION_V1.json",
+    "verified_primary_receipt": "canonical/verification/HLE_OPUS55_ROUTE_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "publicly_bound_protocol_facts": [
+      "FULL_HLE_2500",
+      "WEB_SEARCH",
+      "WEB_FETCH",
+      "PROGRAMMATIC_TOOL_CALLING",
+      "CODE_EXECUTION",
+      "TOTAL_TOKEN_CAP_1000000",
+      "NO_CONTEXT_COMPACTION",
+      "CLAUDE_OPUS_4_6_GRADER",
+      "HLE_SOURCE_BLOCKLIST_AND_CONTAMINATION_REVIEW"
+    ],
+    "outreach_narrowed_post_send_to": [
+      "EXACT_DATASET_REVISION_OR_POPULATION_IDENTITY_IF_MORE_PRECISE_THAN_ALREADY_BOUND_FULL_HLE_2500",
+      "CLAUDE_OPUS_4_6_GRADER_PROMPT_OR_REPRODUCIBLE_IMPLEMENTATION_DETAILS",
+      "WHETHER_PUBLIC_CAIS_SCORER_HAS_ANY_VERIFIED_SCORE_RELATION_TO_ANTHROPIC_PROTOCOL",
+      "WHETHER_ANY_DETERMINISTIC_SCORER_IS_GUARANTEED_CONSERVATIVE"
+    ]
+  },
   "information_boundary": {
     "public_cais_base_scorer_known": true,
-    "exact_anthropic_opus55_protocol_publicly_bound": false,
+    "anthropic_opus55_high_level_protocol_publicly_bound": true,
+    "zero_cost_reproducible_opus46_comparable_grader_bound": false,
     "benchmark_answers_or_private_task_content_requested": false
   },
   "scheduler_effect": {
     "active_attention_required": false,
-    "resume_event": "NEW_AUTHENTICATED_INBOUND_MESSAGE_IN_THIS_THREAD_OR_NEW_PRIMARY_PUBLIC_PROTOCOL_DISCLOSURE",
-    "rule": "NO_DUPLICATE_OUTREACH__CONTINUE_ORTHOGONAL_ZERO_REALITY_WORK"
+    "resume_event": "NEW_AUTHENTICATED_INBOUND_MESSAGE_IN_THIS_THREAD_WITH_NEW_GRADER_OR_CONSERVATIVE_RELATION_INFORMATION",
+    "rule": "NO_DUPLICATE_OUTREACH__DO_NOT_REOPEN_ALREADY_VERIFIED_TOOL_PROTOCOL_OR_CONTAMINATION_SEARCH__CONTINUE_ORTHOGONAL_ZERO_REALITY_WORK"
   },
   "hard_nonclaims": [
     "NO_CLAIM_ANTHROPIC_WILL_REPLY",
     "NO_CLAIM_MESSAGE_HAS_BEEN_HUMAN_REVIEWED",
-    "NO_HLE_SCORE_OR_PROTOCOL_EQUIVALENCE_CREDIT",
+    "NO_CLAIM_ALREADY_BOUND_HLE_TOOL_PROTOCOL_IS_UNKNOWN",
+    "NO_HLE_SCORE_OR_GRADER_EQUIVALENCE_CREDIT",
     "NO_DATASET_CASES_EXPOSED",
     "NO_FRESH_REALITY_AUTHORITY"
   ],
@@ -41,6 +64,5 @@
   },
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false,
-  "observed_brain_head_before_write": "986aa71515b7e757e43667d80e927978f00a5a96"
+  "fresh_reality_authority": false
 }
