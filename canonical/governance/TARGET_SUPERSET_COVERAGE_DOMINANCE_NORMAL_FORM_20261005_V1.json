@@ -7,16 +7,16 @@
   "authorities": {
     "open_world_boundary_verification": {
       "path": "canonical/verification/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_CONNECTOR_VERIFICATION_20261005_V1.json",
-      "git_blob_sha": "unknown_at_write__bind_by_path_and_reverify",
+      "git_blob_sha": "407ad9567364338d9523a8996d4aa21273a4dd0c",
       "verified_semantic": "FINITE_NONEXHAUSTIVE_OBSERVATION_CANNOT_PROVE_LITERAL_ALL_TARGET"
     },
     "minimum_information_cut": {
       "path": "canonical/governance/OPUS55_TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT_20261005_V1.json",
-      "git_blob_sha": "unknown_at_write__bind_by_path_and_reverify"
+      "git_blob_sha": "644550da2fe9637fc760ea82bf4f34f6892a8c5a"
     },
     "literal_all_exhaustiveness_theorem": {
       "path": "canonical/governance/LITERAL_ALL_CAPABILITY_UNIVERSE_EXHAUSTIVENESS_THEOREM_V1.json",
-      "git_blob_sha": "unknown_at_write__bind_by_path_and_reverify"
+      "git_blob_sha": "2ee40ca11e58f19b34fc8cd1bb849a4b4cf08ec1"
     }
   },
   "definitions": {
