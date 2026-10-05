@@ -1,0 +1,222 @@
+{
+  "schema": "PROJECT_BRAIN_H100_SIGN_QUOTIENT_DEPTH8_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_DEPTH8_TASK_OUTCOMES__RESEARCH_BRANCH_ONLY",
+  "objective": "Test target-independent congruence quotienting as a zero-persistent-M_fit way to reduce complete unary-chain search through depth 8.",
+  "accounting_target": {
+    "persistent_M_fit_bytes": 0,
+    "persistent_learned_macros": 0,
+    "quotient_basis_lifetime": "TRANSIENT_PROCESS_MEMORY_ONLY"
+  },
+  "operator_order": [
+    "neg",
+    "abs",
+    "square",
+    "sqrt_abs",
+    "log1p_abs",
+    "sat"
+  ],
+  "max_depth": 8,
+  "equivalence": {
+    "relation": "FEATURE_VECTOR_EQUAL_UP_TO_GLOBAL_SIGN_ON_THE_FROZEN_X_POPULATION",
+    "key": "EXACT_FLOAT_HEX_VECTOR_AFTER_CANONICAL_SIGN_AND_ZERO_NORMALIZATION",
+    "final_model": "INTERCEPT_PLUS_X_PLUS_ONE_QUOTIENT_FEATURE",
+    "soundness": "GLOBAL_SIGN_IS_ABSORBED_BY_THE_FITTED_FEATURE_COEFFICIENT"
+  },
+  "congruence_proof_obligations": [
+    "NEG_PRESERVES_SIGN_EQUIVALENCE",
+    "ABS_COLLAPSES_SIGN_EQUIVALENCE_TO_EQUALITY",
+    "SQUARE_COLLAPSES_SIGN_EQUIVALENCE_TO_EQUALITY",
+    "SQRT_ABS_COLLAPSES_SIGN_EQUIVALENCE_TO_EQUALITY",
+    "LOG1P_ABS_COLLAPSES_SIGN_EQUIVALENCE_TO_EQUALITY",
+    "SAT_PRESERVES_SIGN_EQUIVALENCE"
+  ],
+  "search_contract": [
+    "BREADTH_FIRST_BY_MINIMUM_DEPTH",
+    "GLOBAL_DEDUP_BY_SIGN_EQUIVALENCE_CLASS",
+    "NO_TARGET_Y_IS_USED_DURING_BASIS_GENERATION",
+    "A_CLASS_FIRST_SEEN_AT_SMALLER_DEPTH_DOMINATES_LATER_REAPPEARANCES_BECAUSE_IT_HAS_AT_LEAST_AS_MUCH_REMAINING_DEPTH_BUDGET",
+    "FIT_TARGETS_ONLY_AFTER_THE_TRANSIENT_QUOTIENT_BASIS_IS_COMPLETE",
+    "NO_SELECTED_STRUCTURE_OR_QUOTIENT_BASIS_IS_PERSISTED"
+  ],
+  "train_x": [
+    -4,
+    -3.5,
+    -3,
+    -2.5,
+    -2,
+    -1.5,
+    -1,
+    -0.6,
+    -0.2,
+    0,
+    0.4,
+    0.8,
+    1,
+    1.5,
+    2,
+    2.5,
+    3,
+    3.5,
+    4
+  ],
+  "holdout_x": [
+    -3.8,
+    -3.2,
+    -2.8,
+    -2.2,
+    -1.8,
+    -1.2,
+    -0.8,
+    -0.4,
+    0.2,
+    0.6,
+    1.2,
+    1.8,
+    2.2,
+    2.8,
+    3.2,
+    3.8
+  ],
+  "fresh_tasks": [
+    {
+      "id": "Q8_A",
+      "sequence": [
+        "sqrt_abs",
+        "sat",
+        "log1p_abs",
+        "square",
+        "sat",
+        "sqrt_abs",
+        "log1p_abs",
+        "sat"
+      ],
+      "seed": [
+        0.21,
+        -0.14,
+        0.93
+      ],
+      "transfer": [
+        -0.37,
+        0.26,
+        -1.11
+      ]
+    },
+    {
+      "id": "Q8_B",
+      "sequence": [
+        "log1p_abs",
+        "square",
+        "sat",
+        "sqrt_abs",
+        "log1p_abs",
+        "sat",
+        "square",
+        "sqrt_abs"
+      ],
+      "seed": [
+        -0.29,
+        0.18,
+        1.07
+      ],
+      "transfer": [
+        0.58,
+        -0.24,
+        0.81
+      ]
+    },
+    {
+      "id": "Q8_C",
+      "sequence": [
+        "sat",
+        "sqrt_abs",
+        "log1p_abs",
+        "sat",
+        "square",
+        "log1p_abs",
+        "sqrt_abs",
+        "sat"
+      ],
+      "seed": [
+        0.11,
+        0.31,
+        -0.84
+      ],
+      "transfer": [
+        -0.48,
+        -0.17,
+        1.22
+      ]
+    },
+    {
+      "id": "Q8_D",
+      "sequence": [
+        "square",
+        "sat",
+        "log1p_abs",
+        "sqrt_abs",
+        "sat",
+        "log1p_abs",
+        "square",
+        "sat"
+      ],
+      "seed": [
+        0.43,
+        -0.08,
+        0.76
+      ],
+      "transfer": [
+        -0.19,
+        0.23,
+        -1.28
+      ]
+    },
+    {
+      "id": "Q8_E",
+      "sequence": [
+        "sqrt_abs",
+        "log1p_abs",
+        "sat",
+        "square",
+        "log1p_abs",
+        "sqrt_abs",
+        "sat",
+        "log1p_abs"
+      ],
+      "seed": [
+        -0.16,
+        0.27,
+        1.01
+      ],
+      "transfer": [
+        0.34,
+        -0.2,
+        -0.71
+      ]
+    }
+  ],
+  "pass_gate": [
+    "ALL_CONGRUENCE_TESTS_PASS",
+    "ALL_FIVE_FRESH_TASKS_HAVE_AN_EXACT_QUOTIENT_REPRESENTATIVE",
+    "ALL_FIVE_TRANSFER_HOLDOUT_NRMSE_LE_1E-8",
+    "AT_LEAST_THREE_OF_FIVE_FIRST_EXACT_DEPTH_GE_7",
+    "QUOTIENT_GLOBAL_CLASS_COUNT_IS_LESS_THAN_RAW_CUMULATIVE_SEQUENCE_COUNT",
+    "PERSISTENT_M_fit_BYTES_ZERO",
+    "NO_QUOTIENT_CLASS_OR_SELECTED_STRUCTURE_PERSISTED"
+  ],
+  "measurements": [
+    "RAW_CUMULATIVE_SEQUENCE_COUNT_THROUGH_DEPTH8",
+    "UNIQUE_SIGN_QUOTIENT_CLASSES_BY_DEPTH",
+    "GLOBAL_UNIQUE_CLASS_COUNT",
+    "REDUCTION_FACTOR",
+    "BASIS_GENERATION_SECONDS",
+    "PER_TASK_FIRST_EXACT_DEPTH",
+    "PER_TASK_HOLDOUT_NRMSE",
+    "PER_TASK_TRANSFER_HOLDOUT_NRMSE"
+  ],
+  "hard_nonclaims": [
+    "SIGN_QUOTIENTING_DOES_NOT_COLLAPSE_ARBITRARY_AFFINE_EQUIVALENCE_DURING_NONLINEAR_PREFIX_EXPANSION",
+    "FINITE_UNARY_DEPTH8_SEARCH_IS_NOT_GENERAL_PROGRAM_SEARCH",
+    "M_cap_AND_M_dev_ARE_SEPARATE_FROM_M_fit"
+  ]
+}
