@@ -1,0 +1,26 @@
+name: Verify Opus 5.5 content-addressed typed protocol manifest V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/OPUS55_CONTENT_ADDRESSED_TYPED_PROTOCOL_MANIFEST_20261005_V1.json
+      - canonical/runtime/verify_opus55_content_addressed_typed_protocol_manifest_v1.py
+      - canonical/verification/OPUS55_CONTENT_ADDRESSED_TYPED_PROTOCOL_MANIFEST_CONNECTOR_VERIFICATION_20261005_V1.json
+      - .github/workflows/verify-opus55-content-addressed-typed-protocol-manifest-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify pinned Anthropic SDK snapshot
+        run: python canonical/runtime/verify_opus55_content_addressed_typed_protocol_manifest_v1.py
