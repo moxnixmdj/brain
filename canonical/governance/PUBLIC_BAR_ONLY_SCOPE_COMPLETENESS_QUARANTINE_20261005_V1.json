@@ -1,0 +1,151 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_PUBLIC_BAR_ONLY_FAMILY_PROTOCOLS_FAIL_WHOLE_FAMILY_SCOPE_SUFFICIENCY_WITHOUT_SEPARATE_SCOPE_EQUIVALENCE_OR_UNCOVERED_SCOPE_PROOF__CURRENT_ACCEPTANCE_COUNTS_UNCHANGED__ZERO_CREDIT",
+  "objective": "Enforce OPUS55_TERMINAL_PROOF_PROTOCOLS_V1 universal no-proxy-substitution rule against broad family protocols that currently contain only fixed benchmark bars and no explicit scope-completeness bridge.",
+  "authority": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    }
+  },
+  "universal_rule": "A benchmark can prove only the behavioral scope it actually exercises. Additional leaves remain separate obligations.",
+  "affected_families": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "current_proof_mode": "PUBLIC_FIXED_BARS_CONJUNCTION",
+      "current_bars": [
+        "Terminal-Bench 4.0 >= 66.4%",
+        "FrontierCode v1.1 Main >= 54.4%",
+        "CursorBench 4.0 >= 57.8%"
+      ],
+      "broad_family_scope": "Long-running work in unfamiliar/large codebases: feature implementation, debugging, refactoring, review, terminal operation, ambiguous multi-file changes, root-cause analysis and self-checking.",
+      "current_explicit_uncovered_scope_audit": false,
+      "current_task_dimensions_declared": false,
+      "minimum_repair": "PROVE_LOSSLESS_UNION_EQUIVALENCE_FROM_THE_THREE_BENCHMARK_SCOPES_TO_THE_FULL_DECLARED_FAMILY_SCOPE_OR_ADD_EXPLICIT_UNCOVERED_SCOPE_OBLIGATIONS"
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "current_proof_mode": "PUBLIC_FIXED_BARS_CONJUNCTION",
+      "current_bars": [
+        "GDPval-AA v2.1 >= 1846 Elo",
+        "AA-Briefcase v1.1 >= 1822 Elo"
+      ],
+      "broad_family_scope": "Produce high-quality professional work products and complete multi-hour/multi-stage office tasks.",
+      "current_explicit_uncovered_scope_audit": false,
+      "current_task_dimensions_declared": false,
+      "minimum_repair": "PROVE_LOSSLESS_UNION_EQUIVALENCE_FROM_GDPVAL_AA_AND_AA_BRIEFCASE_TO_FULL_PROFESSIONAL_SCOPE_OR_ADD_UNCOVERED_SCOPE_OBLIGATIONS"
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "current_proof_mode": "PUBLIC_FIXED_BAR",
+      "current_bars": [
+        "AutomationBench >= 40.0%"
+      ],
+      "broad_family_scope": "Execute real multi-application business workflows accurately end-to-end.",
+      "current_explicit_uncovered_scope_audit": false,
+      "current_task_dimensions_declared": false,
+      "minimum_repair": "PROVE_AUTOMATIONBENCH_SCOPE_EQUIVALENCE_TO_FULL_DECLARED_BUSINESS_WORKFLOW_SCOPE_OR_ADD_UNCOVERED_SCOPE_OBLIGATIONS"
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "current_proof_mode": "PUBLIC_FIXED_BAR",
+      "current_bars": [
+        "Humanity's Last Exam with tools >= 67.7%"
+      ],
+      "broad_family_scope": "Solve difficult expert-level questions across domains with search/code/tools.",
+      "current_explicit_uncovered_scope_audit": false,
+      "current_task_dimensions_declared": false,
+      "minimum_repair": "PROVE_HLE_WITH_TOOLS_SCOPE_EQUIVALENCE_TO_FULL_DECLARED_REASONING_SCOPE_OR_ADD_UNCOVERED_SCOPE_OBLIGATIONS"
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "current_proof_mode": "PUBLIC_FIXED_BAR",
+      "current_bars": [
+        "Terminal-Bench-Science 0.1 >= 58.7%"
+      ],
+      "broad_family_scope": "Use scientific software, tools, analysis and iterative reasoning to solve long-horizon research/technical tasks.",
+      "current_explicit_uncovered_scope_audit": false,
+      "current_task_dimensions_declared": false,
+      "minimum_repair": "PROVE_TB_SCIENCE_SCOPE_EQUIVALENCE_TO_FULL_DECLARED_SCIENTIFIC_RESEARCH_SCOPE_OR_ADD_UNCOVERED_SCOPE_OBLIGATIONS"
+    }
+  ],
+  "unaffected_examples": [
+    {
+      "family": "FINANCIAL_ANALYSIS",
+      "reason": "PROTOCOL_EXPLICITLY_INCLUDES_UNCOVERED_SCOPE_AUDIT"
+    },
+    {
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "reason": "PROTOCOL_EXPLICITLY_INCLUDES_DENSE_NONCHART_SCOPE_AUDIT"
+    },
+    {
+      "family": "ARTIFACT_CREATION",
+      "reason": "PROTOCOL_EXPLICITLY_INCLUDES_UNCOVERED_FORMAT_SCOPE_AUDIT"
+    },
+    {
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "reason": "PROTOCOL_EXPLICITLY_INCLUDES_MATCHED_SCOPE_BOUNDARY_AUDIT"
+    },
+    {
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "reason": "PROTOCOL_EXPLICITLY_INCLUDES_UNCOVERED_TRANSFER_AUDIT"
+    }
+  ],
+  "classification": {
+    "current_accepted_family_revocation": 0,
+    "reason": "ALL_FIVE_AFFECTED_FAMILIES_ARE_ALREADY_ACCEPTANCE_OPEN",
+    "current_14_of_38_registry_state_preserved": true,
+    "current_38_predicate_basis_sufficient_for_literal_terminal_finality": false,
+    "root1_positive_gap_delta": 0,
+    "root1_reopened": false,
+    "issue_class": "TERMINAL_ACCEPTANCE_PROOF_BASIS_SCOPE_COMPLETENESS_GAP__NOT_POSITIVE_CAPABILITY_GAP"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "WHOLE_FAMILY_PROMOTION_FROM_AFFECTED_PUBLIC_BARS_ALONE",
+      "ASSUME_BENCHMARK_NAME_OR_SCORE_IMPLIES_UNMEASURED_FAMILY_LEAVES"
+    ],
+    "activate": [
+      "ADVANCED_AGENTIC_CODING_SCOPE_PARTITION_OR_EQUIVALENCE_PROOF",
+      "PROFESSIONAL_KNOWLEDGE_WORK_SCOPE_PARTITION_OR_EQUIVALENCE_PROOF",
+      "BUSINESS_WORKFLOW_AUTOMATION_SCOPE_PARTITION_OR_EQUIVALENCE_PROOF",
+      "MULTIDISCIPLINARY_REASONING_SCOPE_PARTITION_OR_EQUIVALENCE_PROOF",
+      "AGENTIC_SCIENTIFIC_RESEARCH_SCOPE_PARTITION_OR_EQUIVALENCE_PROOF"
+    ],
+    "preserve": [
+      "ALL_EXISTING_FIXED_BAR_PREDICATES_AS_NECESSARY_WHERE_CURRENTLY_LOAD_BEARING",
+      "CURRENT_24_OPEN_ATOMIC_REGISTRY_STATE_AS_DECLARED_REGISTRY_ACCOUNTING_ONLY",
+      "ZERO_FRESH_REALITY"
+    ]
+  },
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT1_REOPEN_FROM_PROOF_BASIS_INCOMPLETENESS",
+    "NO_NEW_FAMILY_REQUIRED_BY_THIS_QUARANTINE",
+    "NO_BENCHMARK_PROXY_TO_WHOLE_SCOPE_INFERENCE_WITHOUT_LOSSLESS_SCOPE_PROOF",
+    "REPAIR_SCOPE_BASIS_BEFORE_LITERAL_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
