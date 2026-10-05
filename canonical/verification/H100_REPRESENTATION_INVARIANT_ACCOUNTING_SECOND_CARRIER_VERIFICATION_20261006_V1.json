@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REPRESENTATION_INVARIANT_ACCOUNTING_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__6_OF_6_TESTS__LEGACY_CATEGORICAL_PROGRAM_EXEMPTION_FALSIFIED",
+  "branch": "research/h100-representation-invariant-accounting-v1",
+  "precommit": "canonical/governance/H100_REPRESENTATION_INVARIANT_ACCOUNTING_PRECOMMIT_V1.json",
+  "runtime": "canonical/runtime/h100_representation_invariant_accounting_v1.py",
+  "runtime_git_blob_sha": "cf7df09d174429ef79510b3ab2ad98817be43470",
+  "tests": "canonical/tests/test_h100_representation_invariant_accounting_v1.py",
+  "tests_git_blob_sha": "f2ab645e7528b0706535fb8c2347cf9a5370d2c3",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "independence_scope": "DISTINCT_ISOLATED_CARRIER_FROM_PRIMARY_RESEARCHER__SAME_PROVIDER"
+  },
+  "verified": {
+    "tests_passed": 6,
+    "tests_total": 6,
+    "arbitrary_payload_lossless_source_roundtrip": true,
+    "legacy_program_exemption_can_hide_arbitrary_payload": true,
+    "provenance_survives_lossless_reencoding": true,
+    "uniform_three_way_selection_information_bits": 1.584962500721156,
+    "preexposure_fixed_algorithm_postexposure_selection_information_bits": 0,
+    "selection_information_invariant_under_lossless_reencoding": true
+  },
+  "scientific_conclusion": "LEARNED_STATE_ACCOUNTING_CANNOT_BE_DEFINED_BY_CONTAINER_TYPE_OR_EXECUTABILITY__A_LOSSLESS_REENCODING_OF_LEARNED_INFORMATION_AS_DETERMINISTIC_SOURCE_MUST_RETAIN_LEARNED_CLASSIFICATION__ZERO_LEARNED_CLAIMS_REQUIRE_PROVENANCE_SENSITIVE_ACCOUNTING",
+  "implications": [
+    "REAUDIT_ALL_POST_EXPOSURE_COMPILED_CAPABILITY_REGISTRIES",
+    "DISTINGUISH_PREEXPOSURE_GENERIC_ALGORITHMS_FROM_POST_EXPOSURE_SELECTED_CAPABILITY_CONSTANTS",
+    "REPORT_SELECTION_INFORMATION_BITS_SEPARATELY_FROM_PHYSICAL_PERSISTENT_BYTES",
+    "DO_NOT_CALL_POST_DATA_SELECTED_OPCODE_ZERO_LEARNED_MERELY_BECAUSE_IT_IS_SOURCE_CODE"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_YET_RESTATE_TOTAL_CURRENT_H100_LEARNED_BYTES",
+    "DOES_NOT_ASSERT_ALL_DETERMINISTIC_CODE_IS_LEARNED",
+    "DOES_NOT_PROVE_NONZERO_LEARNED_STATE_IS FUNDAMENTALLY NECESSARY",
+    "DOES_NOT COMPUTE KOLMOGOROV_COMPLEXITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
