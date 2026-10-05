@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
-from typing import Any, Dict, Iterable, List, Mapping, Sequence
+from typing import Any, Dict, List, Mapping, Sequence
 
 LANE_ORDER = {
     "UNIVERSE_AUTHORITY": 0,
@@ -16,14 +16,6 @@ LIVE_STATUSES = {
     "SURVIVED_NONEXHAUSTIVE",
     "SURVIVED_EXHAUSTIVE",
     "PROVED",
-}
-
-NO_PROOF_CREDIT_STATUSES = {
-    "ACTIVE",
-    "SURVIVED_NONEXHAUSTIVE",
-    "SURVIVED_EXHAUSTIVE",
-    "FALSIFIED",
-    "BLOCKED",
 }
 
 @dataclass(frozen=True)
@@ -42,8 +34,24 @@ class ControlLoopResult:
     proof_credit_delta: int
     ordered_claim_ids: Sequence[str]
     dead_claim_ids: Sequence[str]
+    unrepaired_dead_claim_ids: Sequence[str]
     blocked_claim_ids: Sequence[str]
     verdicts: Sequence[Dict[str, Any]]
+
+def _sha1(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 40
+        and all(c in "0123456789abcdef" for c in value)
+    )
+
+def _binding(value: Any) -> bool:
+    return (
+        isinstance(value, Mapping)
+        and isinstance(value.get("path"), str)
+        and bool(value["path"].strip())
+        and _sha1(value.get("git_blob_sha"))
+    )
 
 def _validate_claim(claim: Mapping[str, Any]) -> None:
     required = ("id", "lane", "status", "cost_units", "target_truth_obligations")
@@ -58,6 +66,12 @@ def _validate_claim(claim: Mapping[str, Any]) -> None:
         raise ValueError("cost_units must be a positive integer")
     if not isinstance(claim["target_truth_obligations"], list):
         raise ValueError("target_truth_obligations must be a list")
+    count = claim.get(
+        "target_truth_obligation_count",
+        len(set(claim["target_truth_obligations"])),
+    )
+    if not isinstance(count, int) or count < len(set(claim["target_truth_obligations"])) or count <= 0:
+        raise ValueError("target_truth_obligation_count must be a positive integer not smaller than the explicit unique target list")
 
 def _successors(claims: Sequence[Mapping[str, Any]]) -> Dict[str, List[Mapping[str, Any]]]:
     out: Dict[str, List[Mapping[str, Any]]] = {}
@@ -89,22 +103,29 @@ def _dependency_blockers(
     return blockers
 
 def _proof_credit(claim: Mapping[str, Any]) -> int:
-    # Surviving a falsifier is not proof unless the claim has separately been
-    # promoted to PROVED with content-addressed proof receipts.
+    # Falsifier survival is not proof. Proof credit requires explicit PROVED
+    # promotion plus one or more content-addressed proof receipts.
     if claim.get("status") != "PROVED":
         return 0
     receipts = claim.get("proof_receipts")
-    if not isinstance(receipts, list) or not receipts:
+    if not isinstance(receipts, list) or not receipts or not all(_binding(x) for x in receipts):
         return 0
     return 1
 
+def _target_count(claim: Mapping[str, Any]) -> int:
+    return claim.get(
+        "target_truth_obligation_count",
+        len(set(claim.get("target_truth_obligations", []))),
+    )
+
 def _priority_key(claim: Mapping[str, Any]) -> tuple:
-    lane_rank = LANE_ORDER[claim["lane"]]
-    # Deterministic information-leverage proxy, not a probability estimate.
-    target_count = len(set(claim.get("target_truth_obligations", [])))
+    # Universe authority has strict logical precedence. All remaining lanes are
+    # compared by deterministic proof-state reachability per unit cost. Lane
+    # order is only a deterministic tie-breaker, not a claim of higher value.
+    authority_rank = 0 if claim["lane"] == "UNIVERSE_AUTHORITY" else 1
     cost = claim["cost_units"]
-    leverage = target_count / cost
-    return (lane_rank, -leverage, cost, claim["id"])
+    leverage = _target_count(claim) / cost
+    return (authority_rank, -leverage, LANE_ORDER[claim["lane"]], cost, claim["id"])
 
 def compile_control_loop(state: Mapping[str, Any]) -> ControlLoopResult:
     claims = list(state.get("claims", []))
@@ -118,29 +139,34 @@ def compile_control_loop(state: Mapping[str, Any]) -> ControlLoopResult:
         raise ValueError("claim ids must be unique")
 
     successor_map = _successors(claims)
-    universe_ids = [
-        c["id"] for c in claims
-        if c["lane"] == "UNIVERSE_AUTHORITY"
-    ]
+    universe_ids = [c["id"] for c in claims if c["lane"] == "UNIVERSE_AUTHORITY"]
     if not universe_ids:
         raise ValueError("at least one UNIVERSE_AUTHORITY claim is required")
 
     verdicts: List[ClaimVerdict] = []
     schedulable: List[Mapping[str, Any]] = []
     dead: List[str] = []
+    unrepaired_dead: List[str] = []
     blocked: List[str] = []
 
     for claim in claims:
         cid = claim["id"]
         if claim["status"] == "FALSIFIED":
             dead.append(cid)
+            repaired = _live_successor_exists(cid, successor_map)
+            if not repaired:
+                unrepaired_dead.append(cid)
             verdicts.append(ClaimVerdict(
                 claim_id=cid,
                 lane=claim["lane"],
-                effective_status="DEAD_UNTIL_REPAIRED_SUCCESSOR",
+                effective_status="DEAD_REPAIRED_BY_SUCCESSOR" if repaired else "DEAD_UNREPAIRED",
                 proof_credit=0,
                 blocked_by=(),
-                reason="FALSIFIED_ROUTE_HAS_ZERO_SCHEDULING_AND_PROOF_VALUE_UNTIL_A_REPAIRED_SUCCESSOR_EXISTS",
+                reason=(
+                    "FALSIFIED_ROUTE_REPLACED_BY_LIVE_SUCCESSOR"
+                    if repaired
+                    else "FALSIFIED_ROUTE_HAS_NO_LIVE_REPAIRED_SUCCESSOR_AND_REMAINS_A_TERMINAL_BLOCKER"
+                ),
             ))
             continue
 
@@ -161,7 +187,7 @@ def compile_control_loop(state: Mapping[str, Any]) -> ControlLoopResult:
         if claim["status"] in {"SURVIVED_NONEXHAUSTIVE", "SURVIVED_EXHAUSTIVE"}:
             reason = "NO_COUNTEREXAMPLE_SURVIVAL_IS_ZERO_PROOF_CREDIT_UNTIL_SEPARATE_PROOF_PROMOTION"
         elif claim["status"] == "PROVED" and credit == 0:
-            reason = "PROVED_LABEL_WITHOUT_CONTENT_ADDRESSED_PROOF_RECEIPTS_IS_ZERO_CREDIT"
+            reason = "PROVED_LABEL_WITHOUT_VALID_CONTENT_ADDRESSED_PROOF_RECEIPTS_IS_ZERO_CREDIT"
         else:
             reason = "LIVE_CLAIM"
 
@@ -189,15 +215,17 @@ def compile_control_loop(state: Mapping[str, Any]) -> ControlLoopResult:
         raise ValueError("known_open_truth_obligations must be a nonnegative integer")
 
     unresolved_nonuniverse = any(
-        v.effective_status not in {"PROVED", "DEAD_UNTIL_REPAIRED_SUCCESSOR"}
+        v.effective_status not in {"PROVED", "DEAD_REPAIRED_BY_SUCCESSOR"}
         and v.lane != "UNIVERSE_AUTHORITY"
         for v in verdicts
     )
+
     terminal_ready = (
         universe_complete
         and known_open == 0
         and not unresolved_nonuniverse
         and not blocked
+        and not unrepaired_dead
     )
 
     return ControlLoopResult(
@@ -206,6 +234,7 @@ def compile_control_loop(state: Mapping[str, Any]) -> ControlLoopResult:
         proof_credit_delta=0,
         ordered_claim_ids=tuple(c["id"] for c in schedulable),
         dead_claim_ids=tuple(dead),
+        unrepaired_dead_claim_ids=tuple(unrepaired_dead),
         blocked_claim_ids=tuple(blocked),
         verdicts=tuple(asdict(v) for v in verdicts),
     )
