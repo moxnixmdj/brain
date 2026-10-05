@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_DISCOVERY_CANDIDATE_AUTHORITY_QUARANTINE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__CANDIDATE_AUTHORITY_FLAGS_NONAUTHORITATIVE__GLOBAL_FRESH_REALITY_FALSE_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TARGET_DISCOVERY_CANDIDATE_AUTHORITY_QUARANTINE_20261005_V1.json",
+    "git_blob_sha": "8ef63fb98e4dcdf12e0bc37ec07b30494daddc98"
+  },
+  "inputs": [
+    {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee"
+    },
+    {
+      "path": "canonical/governance/OPUS55_SECURITY_RELIABILITY_CROSS_CUTTING_ACCEPTANCE_DIMENSION_20261005_V1.json",
+      "git_blob_sha": "6b3a71f506d7656e152c87f3cbbdc61f1991102b"
+    },
+    {
+      "path": "canonical/governance/OPUS55_TARGET_PROFILE_UNION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "b8cfc03751ef1df11df5f94516e8fe6a1fc5a4c8"
+    }
+  ],
+  "recomputation": {
+    "current_terminal_authority_fresh_reality_false": true,
+    "current_terminal_authority_execution_false": true,
+    "current_terminal_authority_promotion_false": true,
+    "candidate_security_status_requires_independent_verification": true,
+    "candidate_profile_union_status_requires_independent_verification": true,
+    "candidate_true_fresh_reality_flags_conflict_with_current_effective_authority": true,
+    "candidate_flags_can_override_current_authority": false,
+    "public_first_party_profile_and_security_discovery_preserved": true,
+    "target_object_model_vs_deployed_system_ambiguity_real": true,
+    "errors": []
+  },
+  "consequence": [
+    "KEEP_FRESH_REALITY_FALSE",
+    "KEEP_EXECUTION_FALSE",
+    "KEEP_PROMOTION_FALSE",
+    "PRESERVE_DISCOVERY_AS_ZERO_CREDIT_INPUT_ONLY",
+    "REQUIRE_EXPLICIT_TARGET_OBJECT_SEMANTICS_BEFORE_PROFILE_UNION_ACTIVATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
