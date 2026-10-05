@@ -1,0 +1,159 @@
+{
+  "schema": "PROJECT_BRAIN_SEVEN_LEAF_EXISTING_ROUTE_REUSE_COMPRESSION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SEVEN_OF_SEVEN_PROXY_SCOPE_LEAVES_ALREADY_HAVE_FROZEN_ADMISSIBLE_BEHAVIOR_ROUTES_AND_WHOLE_SCOPE_CONTRACT_PROOF__NEW_SCOPE_CONSTRUCTION_ZERO__OPUS55_PERFORMANCE_BINDING_OPEN__ZERO_CREDIT",
+  "objective": "Compress the six-family benchmark-proxy scope repair by separating behavioral-scope construction from strict Opus-5.5 performance acceptance. Reuse existing whole-scope behavioral proofs and frozen admissible routes for all seven surviving leaves; do not create duplicate scope populations or routes.",
+  "authorities": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "ce04ca62612681d3d3493bf8a664f066e0b61b98",
+      "relevant_truth": "12/12_WHOLE_SCOPE_PASS__P1_SCOPE_RESTORED_BY_INDEPENDENT_ZERO_REALITY_UNIVERSAL_PROOF"
+    },
+    "universal_scope_restoration": {
+      "path": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "2c6bb594d353e4c6a169821da5f84a91be212ca7",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__P1_WHOLE_SCOPE_RESTORABLE__12_OF_12_CONTRACTS__19_OF_19_PROVISIONAL_BEHAVIORAL_ROWS__ZERO_REALITY__ZERO_OPUS55_CREDIT"
+    },
+    "active_terminal_proof_basis": {
+      "path": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+      "git_blob_sha": "9c60356ab509a16df5104777f360b9fb18255842"
+    },
+    "proxy_scope_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "exact_route_reuse": [
+    {
+      "leaf": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "route": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "route_git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+      "independent_preflight": "canonical/verification/P3_SYNTHESIS_T1_T3_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight_git_blob_sha": "597854ad2cfffe6b943c8c0c3990071a5d5e5a44",
+      "frozen_admissible": true,
+      "synthetic_whole_domain_scope_gate_required": false,
+      "terminal_results_observed": 0
+    },
+    {
+      "leaf": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "route": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "route_git_blob_sha": "28e955d5d593d1de9cfab0f9cdcdae732fd315f1",
+      "independent_preflight": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight_git_blob_sha": "8787ab9a0486fa3f9be0034c1a8e0275e36cc6d5",
+      "frozen_admissible": true,
+      "synthetic_whole_domain_scope_gate_required": false,
+      "terminal_results_observed": 0
+    },
+    {
+      "leaf": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "route": "canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "route_git_blob_sha": "d34a284f7c1f99fd93d420f3a5aba93851b29ef6",
+      "independent_preflight": "canonical/verification/M0_PORTFOLIO_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight_git_blob_sha": "e41f7afbeaeefa5e6bf132ad7e7b8fc3b3bfb918",
+      "frozen_admissible": true,
+      "synthetic_whole_domain_scope_gate_required": false,
+      "terminal_results_observed": 0
+    },
+    {
+      "leaf": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "route": "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "route_git_blob_sha": "a7015b12f55fc971233f9fdddf59d50cfc43892b",
+      "independent_preflight": "canonical/verification/RESEARCH_T3_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight_git_blob_sha": "9b5f008ff2fd6f77fcce5131072efca548ceb590",
+      "frozen_admissible": true,
+      "synthetic_whole_domain_scope_gate_required": false,
+      "terminal_results_observed": 0
+    },
+    {
+      "leaf": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "route": "canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "route_git_blob_sha": "6d2e9adbd45af41c26c543f69769a6f9c69d52ac",
+      "independent_preflight": "canonical/verification/STRUCTURED_METHOD_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight_git_blob_sha": "f222c4e5c0457c1d75f6ba5d68316e92fbf2d7f0",
+      "frozen_admissible": true,
+      "explicit_scope_gate": "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+      "terminal_results_observed": 0
+    },
+    {
+      "leaf": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "route": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json",
+      "route_git_blob_sha": "a636d1292e6f92d240fab420a9ee75ced7a05104",
+      "frozen_admissible": true,
+      "synthetic_whole_domain_scope_gate_required": false,
+      "terminal_results_observed": 0,
+      "note": "CURRENT_TERMINAL_EXECUTOR_HAS_SEPARATE_VERIFICATION_STATE__THIS_COMPRESSION_REUSES_SCOPE_AND_ROUTE_IDENTITY_ONLY__NO_EXECUTION_OR_PERFORMANCE_CLAIM"
+    },
+    {
+      "leaf": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "route": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "route_git_blob_sha": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d",
+      "independent_preflight": "canonical/verification/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight_git_blob_sha": "4384f66eec3b0a455290472e12ea4a03d8741b33",
+      "frozen_admissible": true,
+      "synthetic_whole_domain_scope_gate_required": false,
+      "terminal_results_observed": 0
+    }
+  ],
+  "theorem": {
+    "name": "SCOPE_CONSTRUCTION_REUSE_WITH_STRICT_PERFORMANCE_SEPARATION",
+    "statement": "If a surviving proxy-scope leaf is an exact active behavioral-contract ID, that contract is covered by the independently verified 12/12 whole-scope restoration, and the active proof basis already binds a frozen admissible behavior-specific terminal route, then benchmark-proxy repair must not invent a second behavioral scope definition, route, or synthetic whole-domain scope gate for that leaf. Strict Opus-5.5 equal-or-better performance remains a separate acceptance obligation and receives zero credit from scope reuse alone.",
+    "verified_premises_from_current_authority": [
+      "ALL_SEVEN_LEAVES_ARE_ACTIVE_BEHAVIOR_IDS",
+      "12_OF_12_BEHAVIORAL_CONTRACTS_HAVE_WHOLE_SCOPE_RESTORATION",
+      "ALL_SEVEN_HAVE_TERMINAL_ROUTE_FROZEN_ADMISSIBLE_IN_ACTIVE_PROOF_BASIS",
+      "NO_TERMINAL_PERFORMANCE_RESULT_IS_INFERRED"
+    ]
+  },
+  "compression_effect": {
+    "proxy_partition_unique_surviving_leaves": 7,
+    "new_behavioral_scope_definitions_required": 0,
+    "new_terminal_route_inventions_required": 0,
+    "new_synthetic_whole_domain_scope_gates_required_from_proxy_repair": 0,
+    "remaining_zero_reality_work": [
+      "BIND_EACH_FAMILY_TO_THE_EXISTING_LEAF_ROUTE_AND_EXISTING_OPUS55_ACCEPTANCE_PREDICATE_IF_SCOPE_SAFE",
+      "WHERE_NO_EXISTING_PREDICATE_PROVES_EQUAL_OR_BETTER_PERFORMANCE_ON_THE_LEAF_ROUTE__ADD_ONLY_THE_MINIMUM_PERFORMANCE_BINDING_OR_SCOPE_SAFE_STRONGER_IMPLICATION",
+      "REUSE_IDENTICAL_LEAF_BINDINGS_ACROSS_FAMILIES_WITHOUT_DUPLICATE_EVALUATION"
+    ],
+    "fresh_reality_required_by_this_compression": 0
+  },
+  "scheduler_delta": {
+    "delete": [
+      "NEW_SCOPE_POPULATION_FOR_ANY_OF_THE_SEVEN_LEAVES",
+      "NEW_BEHAVIOR_ROUTE_FOR_ANY_OF_THE_SEVEN_LEAVES",
+      "DUPLICATE_PER_FAMILY_SCOPE_DEFINITION_FOR_SHARED_LEAVES"
+    ],
+    "preserve": [
+      "ALL_CURRENT_OPUS55_PERFORMANCE_THRESHOLDS",
+      "ALL_CURRENT_ROOT2_AND_ROOT3_ACCEPTANCE_WORK",
+      "FAMILY_TO_LEAF_LOSSLESS_BINDING",
+      "STRICT_EQUAL_OR_BETTER_PERFORMANCE_PROOF_ON_UNCOVERED_SCOPE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_OPUS55_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_FAMILY_PROMOTION",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_12_OF_12_INTERNAL_WHOLE_SCOPE_PASS_EQUALS_OPUS55_PARITY",
+    "NO_TERMINAL_PERFORMANCE_RESULT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CLAIM_PROXY_BENCHMARK_BARS_ALONE_COVER_BROAD_FAMILY_SCOPE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
