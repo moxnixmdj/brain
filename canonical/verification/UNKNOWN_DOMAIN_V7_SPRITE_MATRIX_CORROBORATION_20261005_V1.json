@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_SPRITE_MATRIX_CORROBORATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__EXACT_FROZEN_V7_VERIFIER_REPLAY_ON_3_12_10_AND_3_13_7__CORROBORATION_ONLY__GITHUB_GATE_STILL_PENDING",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "frozen_gate": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_V7_REACHABLE_DOMAIN_ROOT3_REPROMOTION_GATE_20261005_V1.json",
+    "git_blob_sha": "83025b73e6cb807fc85bef188ff381daa7e611ad"
+  },
+  "exact_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2207,
+    "head_sha": "afd2b8990ac969bfd08bfe8ab52975507788028b",
+    "verifier_blob": "ac23654421582be75d7ae934f83a8d4e77725413",
+    "workflow_blob": "47ced0ce9ccfd2500cd1017783d9d2f7460f94b9"
+  },
+  "isolated_remote_replay": {
+    "carrier": "EXISTING_COLD_SPRITE__REMOTE__NO_USER_LAPTOP",
+    "python_matrix": [
+      {
+        "python": "3.12.10",
+        "verifier": "PASS",
+        "regression": "7_OF_7_PASS",
+        "receipt_sha256": "8c8cf017241252701e12e4d2bb8595d839f14b92aa5cb5a01423cc7bb23d8489"
+      },
+      {
+        "python": "3.13.7",
+        "verifier": "PASS",
+        "regression": "7_OF_7_PASS",
+        "receipt_sha256": "8c8cf017241252701e12e4d2bb8595d839f14b92aa5cb5a01423cc7bb23d8489"
+      }
+    ],
+    "receipts_byte_identical": true,
+    "receipt_schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_REACHABLE_DOMAIN_INDEPENDENT_VERIFICATION_V1",
+    "receipt_status": "PASS__CONTENT_BOUND_FROZEN_LAUNCHER_REACHABLE_TYPE_DOMAIN__CLASS_SPOOF_REJECTED__54_NONPRODUCTION_CASES__ZERO_TERMINAL_REALITY",
+    "nonproduction_exact_scorer_cases_each": 54,
+    "surrogate_codepoints_exhausted_each": 2048,
+    "fake_class_proxies_rejected": true,
+    "real_subclass_widening_rejected": true,
+    "forced_total_token_collision_retested": true,
+    "production_or_terminal_cases_actually_generated": 0
+  },
+  "frozen_github_gate_state": {
+    "workflow_run_id": 37245427311,
+    "required_jobs": [
+      "3.12.10",
+      "3.13"
+    ],
+    "state_at_recording": "QUEUED",
+    "promotion_authorized": false,
+    "reason": "FROZEN_V7_GATE_REQUIRES_GITHUB_WORKFLOW_SUCCESS_AND_ARTIFACT_BINDING__SPRITE_REPLAY_IS_CORROBORATION_NOT_SUBSTITUTE"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
