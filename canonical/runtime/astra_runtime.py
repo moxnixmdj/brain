@@ -4323,7 +4323,24 @@ def _run_model_independent_goal(step, mission, goal):
             elif cycle!=len(composition_contract) or raw_action.get("type")!="finish":
                 raise Blocker("COMPOSITION_STATE_UNDECLARED_ACTION_BYPASS:"+str(cycle))
 
-        action=_resolve_result_refs(dict(raw_action),trace)
+        if composition_guard is not None:
+            if composition_row is not None:
+                try:
+                    action=composition_guard.resolve_action_from_capsule(
+                        composition_capsule,composition_row,dict(raw_action)
+                    )
+                except Exception as exc:
+                    raise Blocker(
+                        "COMPOSITION_STATE_INPUT_RESOLUTION_FAILED:"
+                        +type(exc).__name__+":"+str(exc)
+                    ) from exc
+            else:
+                # The only action outside the composition contract is the
+                # already-validated terminal finish action; it cannot consume
+                # cross-capability result references.
+                action=dict(raw_action)
+        else:
+            action=_resolve_result_refs(dict(raw_action),trace)
         typ=action.get("type")
         if typ not in allowed_types:
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:"+str(typ))
