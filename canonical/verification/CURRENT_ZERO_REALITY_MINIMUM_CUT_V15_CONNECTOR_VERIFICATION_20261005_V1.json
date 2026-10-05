@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V15_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__SEVEN_INFORMATION_POSITIVE_GROUPS__FINANCE_COMPOSITION_ORACLE_DORMANCY_EXACT__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15.json",
+    "git_blob_sha": "37c58301f1e002a200dc93a2e7d771cd1ffc5dcb"
+  },
+  "sources": {
+    "v14": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json",
+      "git_blob_sha": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
+    },
+    "finance_fixed_point": {
+      "path": "canonical/governance/FINANCE_INDEX_DETERMINISTIC_ZERO_REALITY_FIXED_POINT_20261005_V1.json",
+      "git_blob_sha": "18c3a5343079ea3efbd692bb4e72c53e0ae4838d"
+    },
+    "comparator_access": {
+      "path": "canonical/governance/OPUS55_ZERO_INCREMENTAL_EXACT_COMPARATOR_ACCESS_RECONCILIATION_20261005_V1.json",
+      "git_blob_sha": "3b0b1e6d0034b8e5fdc19ce1fc758f8610803d03"
+    }
+  },
+  "checks": {
+    "current_epoch_14_24": true,
+    "v14_group_count_is_9": true,
+    "v15_live_group_count_is_7": true,
+    "live_group_ids_unique": true,
+    "composition_recompute_removed_from_live": true,
+    "finance_direct_oracle_removed_from_live": true,
+    "finance_index_predicate_removed_from_live": true,
+    "synthesis_predicate_preserved_live": true,
+    "finance_source_is_information_fixed_point": true,
+    "finance_source_scheduling_authority": true,
+    "comparator_requires_capacity_snapshot": true,
+    "comparator_execution_currently_forbidden": true,
+    "composition_dormant_present": true,
+    "finance_oracle_dormant_present": true,
+    "zero_credit": true,
+    "no_execution_or_fresh_reality": true
+  },
+  "errors": [],
+  "consequence": [
+    "ACTIVATE_ONLY_SEVEN_INFORMATION_POSITIVE_GROUPS",
+    "SLEEP_FINANCE_INDEX_COMPILATION_UNTIL_BOUND_PREMISE_CHANGES",
+    "SLEEP_COMPOSITION_RECOMPUTE_UNTIL_NEW_UPSTREAM_RECEIPT",
+    "HOLD_FINANCE_DIRECT_ORACLE_UNTIL_FRESH_REALITY_OR_STRONGER_PROOF",
+    "PRESERVE_SYNTHESIS_COMPARATOR_CAPACITY_OR_STRONGER_PROOF_LANE"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "CONNECTOR_RECOMPUTATION_IS_SCHEDULING_VERIFICATION_NOT_TERMINAL_PERFORMANCE_EVIDENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
