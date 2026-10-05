@@ -1,32 +1,33 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1",
-  "date": "2026-10-03",
-  "status": "ACTIVE__V11_INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_CREDIT",
+  "date": "2026-10-05",
+  "status": "ACTIVE__V14_CONNECTOR_RECOMPUTATION_PASS__CURRENT_14_24__ZERO_CREDIT",
   "active_cut": {
-    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V11.json",
-    "git_blob_sha": "452c6f2231fbe93fd54e3299eb54d7103567a08a"
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json",
+    "git_blob_sha": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
   },
   "verification": {
-    "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V11_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "git_blob_sha": "171bd694a56277ae466801d2d260268d43176e91",
-    "conclusion": "success",
-    "verifier_pr": 1423,
-    "workflow_run_id": 37156487192,
-    "workflow_job_id": 111300808147
+    "path": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "c72193a6d03ac1f27db2f68d1f6e7b8c962fe395",
+    "conclusion": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS"
   },
   "supersedes": {
-    "cut": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8.json",
-    "verification": "canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V8_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json"
+    "cut": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V11.json",
+    "git_blob_sha": "452c6f2231fbe93fd54e3299eb54d7103567a08a",
+    "reason": "V11_POINTER_WAS_STALE_AFTER_LIVEBENCH_AND_UNKNOWN_DOMAIN_ACCEPTANCE_DELTAS_AND_V14_ACTIVE_CUT_RECOMPUTATION"
   },
   "exact_state": {
     "accepted_families": 5,
     "open_families": 14,
-    "proved_atomic": 12,
-    "unresolved_atomic": 26,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "root1_positive_gap_count": 0,
+    "root2_touching_count": 18,
+    "root3_touching_count": 9,
     "terminal": false
   },
-  "current_delta": "V10_ROUTE_AND_FINANCE_COMPRESSION__OSWORLD_VM_BOOT_DISCHARGED__HLE_STRICT_SCORER_SHORTCUT_QUARANTINED",
-  "next": "OSWORLD_GATED_ACCESS_SELF_HOST_PROTOCOL_EQUIVALENCE__CHARTOGRAPHY_ACCOUNT_QUOTA__HLE_COMPARABLE_JUDGE_ADAPTER__FINANCE_SIX_COMPONENT_PREMISES__ROOT3_SCOPE_CERTIFICATES__NO_FRESH_REALITY",
+  "current_delta": "REBIND_ACTIVE_POINTER_TO_ALREADY_ACTIVATED_V14__CURSORBENCH_DORMANT__LIVEBENCH_AND_UNKNOWN_DOMAIN_CLOSED__NO_NEW_ACCEPTANCE_CREDIT",
+  "next": "EXECUTE_ONLY_V14_INFORMATION_POSITIVE_ZERO_REALITY_GROUPS__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA__NO_FRESH_REALITY_UNTIL_EXPLICIT_AUTHORITY",
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
   "incremental_spend_usd": 0,
@@ -36,5 +37,10 @@
   "ownership_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "activation": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_ACTIVATION_V1.json",
+    "git_blob_sha": "343be0d774f96ed851d668ad29045a12195f12ce",
+    "scheduling_authority": true
+  }
 }

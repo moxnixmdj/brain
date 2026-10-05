@@ -1,6 +1,6 @@
 from __future__ import annotations
-import copy, unittest
-from canonical.runtime.terminal_projection_consistency_v1 import PATHS,_git_blob_sha,_load,evaluate_documents
+import copy, json, re, unittest
+from canonical.runtime.terminal_projection_consistency_v1 import ROOT,PATHS,_git_blob_sha,_load,evaluate_documents
 
 class TerminalProjectionConsistencyTests(unittest.TestCase):
     def live(self):
@@ -14,13 +14,65 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
     def test_live_projection_is_count_generic_and_consistent(self):
         docs,shas=self.live(); out=self.evaluate(docs,shas)
         self.assertTrue(out["pass"],out)
-        self.assertEqual(out["acceptance_closed_families"],4)
-        self.assertEqual(out["acceptance_open_families"],15)
-        self.assertEqual(out["atomic_predicates_proved"],11)
-        self.assertEqual(out["atomic_predicates_unresolved"],27)
+        root=docs["authority"]["current_root_partition_override"]
+        self.assertEqual(out["acceptance_closed_families"],root["accepted_families"])
+        self.assertEqual(out["acceptance_open_families"],root["open_families"])
+        self.assertEqual(out["atomic_predicates_proved"],root["proved_atomic"])
+        self.assertEqual(out["atomic_predicates_unresolved"],root["unresolved_atomic"])
         self.assertEqual(set(out["baseline_families"]),{"EXACT_SYMBOLIC_COMPUTATION","LONG_HORIZON_MEMORY_AND_CONTINUITY"})
         self.assertIn("SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",out["accepted_families"])
         self.assertIn("SUBAGENT_DELEGATION_AND_COORDINATION",out["accepted_families"])
+
+
+    def test_canonical_pointer_tracks_current_terminal_authority(self):
+        docs,shas=self.live()
+        pointer=_load("canonical/CANONICAL_POINTER.json")
+        root=docs["authority"]["current_root_partition_override"]
+        family_total=len(docs["target_envelope"]["families"])
+        predicate_total=len(docs["predicate_registry"]["predicates"])
+        expected=(
+            f"TERMINAL_FALSE__{root['open_families']}_OF_{family_total}_FAMILIES_OPEN__"
+            f"{root['unresolved_atomic']}_OF_{predicate_total}_ATOMIC_PREDICATES_UNRESOLVED__"
+            "SEE_CURRENT_TERMINAL_AUTHORITY_NEXT_FOR_EXACT_ACTIVE_ROUTE"
+        )
+        current=pointer["current_frontier"]
+        self.assertEqual(current["critical_blocker"],expected)
+        self.assertEqual(current["highest_leverage_capability_gap"],expected)
+        self.assertEqual(current["next_step"],docs["authority"]["next_terminal_action"])
+
+    def test_zero_reality_pointer_tracks_highest_active_cut(self):
+        docs,shas=self.live()
+        gov=ROOT/"canonical/governance"
+        rx=re.compile(r"^CURRENT_ZERO_REALITY_MINIMUM_CUT_V(\d+)_ACTIVATION_V1\.json$")
+        active=[]
+        for path in gov.glob("CURRENT_ZERO_REALITY_MINIMUM_CUT_V*_ACTIVATION_V1.json"):
+            m=rx.match(path.name)
+            if not m:
+                continue
+            obj=json.loads(path.read_text(encoding="utf-8"))
+            if obj.get("scheduling_authority") is True and str(obj.get("status","")).startswith("ACTIVE"):
+                active.append((int(m.group(1)),path,obj))
+        self.assertTrue(active)
+        version,activation_path,activation=max(active,key=lambda row: row[0])
+        pointer=_load("canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json")
+        expected_subject=f"canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V{version}.json"
+        expected_activation=f"canonical/governance/{activation_path.name}"
+        self.assertEqual(pointer["active_cut"]["path"],expected_subject)
+        self.assertEqual(pointer["active_cut"]["git_blob_sha"],_git_blob_sha(expected_subject))
+        self.assertEqual(pointer["activation"]["path"],expected_activation)
+        self.assertEqual(pointer["activation"]["git_blob_sha"],_git_blob_sha(expected_activation))
+        verification=activation["verification"]
+        self.assertEqual(pointer["verification"]["path"],verification["path"])
+        self.assertEqual(pointer["verification"]["git_blob_sha"],verification["git_blob_sha"])
+        root=docs["authority"]["current_root_partition_override"]
+        state=pointer["exact_state"]
+        self.assertEqual(state["accepted_families"],root["accepted_families"])
+        self.assertEqual(state["open_families"],root["open_families"])
+        self.assertEqual(state["proved_atomic"],root["proved_atomic"])
+        self.assertEqual(state["unresolved_atomic"],root["unresolved_atomic"])
+        self.assertEqual(state["root2_touching_count"],root["root2_touching"])
+        self.assertEqual(state["root3_touching_count"],root["root3_only"]+root["root2_and_root3"])
+        self.assertFalse(state["terminal"])
 
     def test_next_residual_family_closure_is_derived_without_code_change(self):
         docs,shas=self.live(); docs=copy.deepcopy(docs)
@@ -37,7 +89,7 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         # recompute exact counts after mutation
         proved=sum(1 for p in reg["predicates"] if next((x for x in atom["claims"] if x["predicate_id"]==p["id"] and x.get("state")=="PROVED" and x.get("scope_complete") is True),None))
         atom["saturation"]["proved_predicate_count"]=proved
-        atom["saturation"]["unresolved_predicate_count"]=38-proved
+        atom["saturation"]["unresolved_predicate_count"]=len(reg["predicates"])-proved
         # leave projections stale: generic reducer must detect mismatch, proving the new closure was derived
         out=self.evaluate(docs,shas)
         self.assertFalse(out["pass"])
@@ -53,8 +105,15 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         docs,shas=self.live(); docs=copy.deepcopy(docs)
         row=next(x for x in docs["atomic_bindings"]["claims"] if x["predicate_id"]=="RECOVERY_TERMINAL_NONINFERIOR")
         row["scope_complete"]=False
-        docs["atomic_bindings"]["saturation"]["proved_predicate_count"]=10
-        docs["atomic_bindings"]["saturation"]["unresolved_predicate_count"]=28
+        reg=docs["predicate_registry"]; atom=docs["atomic_bindings"]
+        proved=sum(
+            1 for p in reg["predicates"]
+            if next((x for x in atom["claims"]
+                     if x["predicate_id"]==p["id"] and x.get("state")=="PROVED"
+                     and x.get("scope_complete") is True),None)
+        )
+        atom["saturation"]["proved_predicate_count"]=proved
+        atom["saturation"]["unresolved_predicate_count"]=len(reg["predicates"])-proved
         out=self.evaluate(docs,shas); self.assertFalse(out["pass"])
         self.assertIn("AUTHORITY_ACCEPTANCE_MISMATCH",out["errors"])
         self.assertIn("CLOSURE_ACCEPTED_FAMILY_SET_MISMATCH",out["errors"])

@@ -16,13 +16,13 @@
   "sources": {
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-      "git_blob_sha": "fae1bc5338993911f1078680996aa48e677d7a15",
-      "status": "CURRENT_SCOPE_RECONCILED__5_OF_19_ACCEPTANCE_PASS__5_OF_19_VERIFIED_OWNED__14_OPEN__TERMINAL_FALSE"
+      "git_blob_sha": "bcf12c8845e90e6bfdd689458586bdebd59824a3",
+      "status": "CURRENT_SCOPE_RECONCILED__P1_SCOPE_RESTORED__5_OF_19_OPUS55_ACCEPTANCE_PASS__5_OF_19_VERIFIED_OWNED__14_OPEN__TERMINAL_FALSE"
     },
     "ownership_matrix": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "git_blob_sha": "11498bd194c8018617767918edec020268239bc1",
-      "status": "CURRENT_RECONCILED__5_OF_19_ACCEPTANCE__5_VERIFIED_OWNED__14_ACCEPTANCE_OPEN"
+      "git_blob_sha": "01abb91c114576ac340816b052724150258726ff",
+      "status": "CURRENT_RECONCILED__5_OF_19_ACCEPTANCE__5_VERIFIED_OWNED__14_ACCEPTANCE_OPEN__THREE_ZERO_REALITY_OWNERSHIP_PROMOTIONS"
     },
     "acceptance_calibration": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
@@ -299,8 +299,8 @@
     },
     "acceptance_predicate_evidence_bindings_reconciled": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "25d3408c7ee746f0f853d718ffa1af1ecff14596",
-      "status": "CURRENT_13_PROVED__25_UNRESOLVED__LIVEBENCH_CLEAN_POINTWISE_DOMINANCE_PROVED__UNKNOWN_DOMAIN_V6_REVOKED"
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+      "status": "AUTHORITY_RECONCILED__14_PROVED__24_UNRESOLVED__LIVEBENCH_CLEAN_POINTWISE_DOMINANCE_CLOSED__UNKNOWN_DOMAIN_V7_V8_INDEPENDENTLY_PROVED__ROOT1_INACTIVE"
     },
     "protocol_implication_batch_scope_v2": {
       "path": "canonical/verification/PROTOCOL_IMPLICATION_BATCH_SCOPE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -1756,7 +1756,7 @@
     "current_effective_canonical_leaf_atoms": 39
   },
   "last_reconciled_control_plane_head": "b17ab8de42a11b48360b772d47814a6f9564c475",
-  "last_reconciled_reason": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_PROVED_BY_INDEPENDENT_V8_VERIFICATION_AND_REBASED_ACCEPTANCE_REDUCTION__CURRENT_14_OF_38__24_UNRESOLVED",
+  "last_reconciled_reason": "LIVE_14_24_CONTENT_ADDRESS_POINTER_REPAIR__CANONICAL_AND_ZERO_REALITY_CONTROL_PLANE_CONSISTENCY",
   "execution_carrier_state": {
     "sealed_proof_atom_snapshot_private_actions": {
       "status": "QUARANTINED__CARRIER_FAILED_BEFORE_USER_CODE__DO_NOT_TREAT_AS_PROOF_FAILURE",
