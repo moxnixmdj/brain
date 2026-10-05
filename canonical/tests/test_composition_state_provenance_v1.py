@@ -109,7 +109,7 @@ class CompositionStateProvenanceTests(unittest.TestCase):
             mock.patch.object(
                 astra,
                 "_load_controller_checkpoint",
-                return_value=(Path("canonical/astra_runtime/state/TEST.json"), checkpoint, False),
+                return_value=(astra.ROOT / "canonical/astra_runtime/state/TEST.json", checkpoint, False),
             ),
             mock.patch.object(astra, "_write_controller_checkpoint", side_effect=fake_write),
             mock.patch.object(astra, "_goal_action", return_value={"summary": "OK"}),
