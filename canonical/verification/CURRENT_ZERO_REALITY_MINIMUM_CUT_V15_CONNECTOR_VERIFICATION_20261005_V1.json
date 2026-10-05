@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V15_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__V14_PRESERVED__META_ENVELOPE_LOSSLESSLY_ADDED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15.json",
+    "git_blob_sha": "47f0d48c9106e3e5dbe9e3b5d43a76ab019aff51"
+  },
+  "recomputed_sources": {
+    "v14": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json",
+      "git_blob_sha": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
+    },
+    "v14_activation": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_ACTIVATION_V1.json",
+      "git_blob_sha": "343be0d774f96ed851d668ad29045a12195f12ce"
+    },
+    "root1_envelope_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "joint_meta_certificate": {
+      "path": "canonical/governance/OPUS55_TERMINAL_META_ENVELOPE_JOINT_CERTIFICATE_V1.json",
+      "git_blob_sha": "e56d367766c9a425e6277d5502c0ec2f6d5ec597"
+    }
+  },
+  "checks": {
+    "v14_atomic_action_groups_preserved_9_of_9": true,
+    "cursorbench_dormant_boundary_preserved": true,
+    "current_atomic_state_preserved_14_proved_24_unresolved": true,
+    "root1_positive_gap_count_preserved_zero": true,
+    "root1_v5_meta_scheduled_checks_accounted_8_of_8": true,
+    "meta_semantic_slots_preserved_9_of_9": true,
+    "meta_substantive_residuals_explicit_8": true,
+    "only_meta_coalescence_is_biology_plus_automated_ai_rd_shared_leaf": true,
+    "creative_and_diagram_old_38_finality_block_preserved": true,
+    "multilingual_and_long_context_classified_as_conditions_not_families": true,
+    "healthcare_and_arxivmath_unknown_mapping_fail_closed": true,
+    "combined_action_group_count_10": true,
+    "fresh_reality_authority_false": true,
+    "execution_authority_false": true,
+    "promotion_authority_false": true,
+    "acceptance_credit_delta_zero": true,
+    "family_capability_ownership_credit_delta_zero": true,
+    "terminal_remains_false": true
+  },
+  "arithmetic": [
+    "9_V14_GROUPS_PLUS_1_META_GROUP_EQUALS_10",
+    "5_DOMAIN_MAPPING_SLOTS_PLUS_2_CONDITION_SLOTS_PLUS_2_CREATIVE_DIAGRAM_SLOTS_EQUALS_9_META_SEMANTIC_SLOTS",
+    "9_META_SLOTS_MINUS_1_VERIFIED_SHARED_BEHAVIOR_COALESCENCE_EQUALS_8_SUBSTANTIVE_RESIDUALS"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_PUBLIC_RUNNER_ACCEPTANCE",
+    "NO_META_RESIDUAL_IS_CLAIMED_CAPABILITY_CLOSED_BY_THIS_VERIFICATION",
+    "NO_NEW_ACCOUNTING_FAMILY_IS_CLAIMED",
+    "NO_TERMINAL_ENVELOPE_SEAL",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
