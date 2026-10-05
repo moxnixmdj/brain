@@ -1,0 +1,225 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V12",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_14_24_EPOCH__ROOT2_18_ACTIVE__ROOT3_9_VERIFIED_SHAPE__LIVEBENCH_AND_UNKNOWN_DOMAIN_CLOSED__NO_FRESH_REALITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "total_families": 19,
+    "total_atomic": 38,
+    "terminal": false,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 15,
+    "root3_only_count": 6,
+    "root2_and_root3_count": 3,
+    "root2_touching_count": 18,
+    "root3_touching_count": 9
+  },
+  "authority": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "ce04ca62612681d3d3493bf8a664f066e0b61b98"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860"
+    },
+    "evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "root2_activation": {
+      "path": "canonical/governance/ROOT2_18_CURRENT_14_24_SCHEDULING_ACTIVATION_V1.json",
+      "git_blob_sha": "7d0dd1a755d5e278897791e11884d4a4287ef58d"
+    },
+    "root2_recomputation": {
+      "path": "canonical/verification/ROOT2_18_CURRENT_14_24_RECOMPUTATION_V1.json",
+      "git_blob_sha": "e26b2ec473f457660fad73721052720a39c0090f"
+    },
+    "root3_cut": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V5.json",
+      "git_blob_sha": "8397c1341b48947727c070f37a184580ca32c844"
+    },
+    "root3_connector_verification": {
+      "path": "canonical/verification/ROOT3_MINIMUM_ACTION_CUT_V5_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "97be006819ca29f1f1298c5185d3eea5604baa7f"
+    },
+    "osworld_self_service_reconciliation": {
+      "path": "canonical/governance/OSWORLD_V21_GATED_ACCESS_SELF_SERVICE_RECONCILIATION_20261005_V1.json",
+      "git_blob_sha": "6fbd0d5e4aa776e79db8783101801688febb0566"
+    },
+    "predecessor": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V11.json",
+      "git_blob_sha": "452c6f2231fbe93fd54e3299eb54d7103567a08a"
+    }
+  },
+  "deletions_since_v11": [
+    {
+      "predicate": "LIVEBENCH_IF_GE_65_7",
+      "reason": "CLEAN_CASE_INDEPENDENT_FORMAL_POINTWISE_DOMINANCE_PROMOTED",
+      "delete": [
+        "LIVEBENCH_SCORE_EXECUTION",
+        "LIVEBENCH_RUNTIME_REPLAY",
+        "LIVEBENCH_ROOT2_ROUTE_WORK"
+      ]
+    },
+    {
+      "predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "reason": "CURRENT_V8_SCOPE_COMPLETE_SUCCESSOR_PROOF_PROMOTED",
+      "delete": [
+        "UNKNOWN_DOMAIN_DIRECT_ORACLE_RESIDUAL",
+        "UNKNOWN_DOMAIN_ROOT3_EVENT_WORK"
+      ]
+    },
+    {
+      "surface": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "reason": "PRIMARY_SOURCE_DOCUMENTS_AUTOMATIC_GATED_TASK_APPROVAL_AND_PINNED_V2_1_COMPONENTS",
+      "delete": [
+        "OWNER_APPROVAL_WAIT_AS_DISTINCT_DEPENDENCY"
+      ],
+      "preserve": [
+        "AUTHENTICATED_HF_TERMS_ACCEPTANCE",
+        "PINNED_TASK_ASSET_DOWNLOAD",
+        "SELF_HOST_PROTOCOL_EQUIVALENCE",
+        "BRAIN_THRESHOLD_CERTIFICATE"
+      ]
+    }
+  ],
+  "minimum_zero_reality_action_groups": [
+    {
+      "id": "A_TB4_ZERO_COST_CARRIER_RACE",
+      "predicates": [
+        "CODING_TB4_GE_66_4"
+      ],
+      "action": "PARALLEL_ACCOUNT_RUNTIME_PREFLIGHT_ON_ONLY_CURRENT_ADMISSIBLE_ZERO_SPEND_CARRIER_CANDIDATES__STOP_ON_FIRST_FULLY_ADMISSIBLE_ROUTE",
+      "current_candidates": [
+        "BUILDKITE",
+        "OMC_CLOUD"
+      ],
+      "fresh_reality": false
+    },
+    {
+      "id": "B_AUTHENTICATED_SELF_SERVICE_ACCESS_SWEEP",
+      "predicates": [
+        "HLE_TOOLS_GE_67_7",
+        "CHARTOGRAPHY_TOOLS_GE_89",
+        "OSWORLD_2_1_PARTIAL_GE_81_8"
+      ],
+      "action": "IN_ONE_AUTHENTICATED_SWEEP_BIND_ONLY_ACCOUNT_SPECIFIC_ACCESS_OR_QUOTA_FACTS__HLE_POPULATION_AND_COMPARABLE_JUDGE_ROUTE__CHARTOGRAPHY_PROJECT_FREE_CAPACITY__OSWORLD_HF_TERMS_AND_PINNED_RELEASE_ACCESS",
+      "note": "ORTHOGONAL_FACTS_MAY_RUN_IN_PARALLEL__NO_SCORE_CASES",
+      "fresh_reality": false
+    },
+    {
+      "id": "C_VALS_FINANCE_AGENT_PREFLIGHT",
+      "predicates": [
+        "FINANCE_AGENT_V2_GE_58_59"
+      ],
+      "action": "BIND_VALS_APPROVAL_EXACT_SUITE_ID_FREE_ONLY_PROVIDER_ACCOUNT_SNAPSHOTS_AND_ZERO_COST_OUTCOME_TELEMETRY__NO_1350_SCORE_EXECUTIONS",
+      "fresh_reality": false
+    },
+    {
+      "id": "D_OWNER_OR_PLATFORM_RESULT_BATCH",
+      "predicates": [
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8",
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822",
+        "AUTOMATIONBENCH_GE_40",
+        "MYSTERYMECHANISM_GE_49_55"
+      ],
+      "action": "ACQUIRE_ONLY_RESULT_BEARING_AUTHENTICATED_THRESHOLD_OR_RELATIVE_SCORE_RECEIPTS_OR_EXACT_OWNER_EVALUATION ACCESS__NO_GENERIC SUPPORT OR FREE_TRIAL QUERIES",
+      "cross_predicate_reuse": "ONE_EXACT_AA_BRIEFCASE_RELATIVE_RECEIPT_MAY_FEED_TWO_PREDICATES_AFTER_SEPARATE_SCOPE_BINDINGS",
+      "fresh_reality": false
+    },
+    {
+      "id": "E_FINANCE_INDEX_COMPONENT_BOUND_COMPILATION",
+      "predicates": [
+        "FINANCE_ACCOUNTING_INDEX_GE_61"
+      ],
+      "action": "BIND_VERIFIED_COMPONENT_LOWER_BOUNDS_AND_COMPILE_WEIGHTED_LOWER_BOUND__NO_SEPARATE_INDEX_RUN_IF_SUM_WI_LI_GE_61",
+      "fresh_reality": false
+    },
+    {
+      "id": "F_SYNTHESIS_COMPARATOR_CERTIFICATE",
+      "predicates": [
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ],
+      "action": "BIND_EXACT_OPUS55_COMPARATOR_OR_SEPARATELY_VERIFIED_STRONGER_PROOF__SCORERS_AND_SCOPE_SIDE_ALREADY_CLOSED__NO_MATCHED CASE EXECUTION",
+      "fresh_reality": false
+    },
+    {
+      "id": "G_ROOT3_SCOPE_CERTIFICATE_RACE",
+      "predicates": [
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "VISION_DENSE_NONCHART_SCOPE",
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "action": "SEARCH_ONLY_NEW_LOAD_BEARING LOSSLESS_EXHAUSTIVE OR UNIVERSAL CERTIFICATES__NO REPEAT GENERIC ROOT3 SEARCH__NO CASE GENERATION",
+      "fresh_reality": false
+    },
+    {
+      "id": "H_COMPOSITION_UPSTREAM_RECEIPT_RECOMPUTE",
+      "predicates": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
+      "action": "RECOMPUTE_EIGHT_OPEN_COMPONENT_INTERFACES_ONLY_WHEN_NEW_SCOPE_COMPLETE_UPSTREAM_RECEIPTS ARRIVE__NO DIRECT COMPOSITION REALITY",
+      "fresh_reality": false
+    },
+    {
+      "id": "I_FINANCE_DIRECT_ORACLE_HOLD",
+      "predicates": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
+      ],
+      "action": "PRESERVE_EXACT_TWO_FROZEN_DIRECT_ORACLE_LEAVES__DO_NOT_EXECUTE BEFORE EXPLICIT FRESH REALITY AUTHORITY",
+      "fresh_reality": false
+    }
+  ],
+  "score_only_after_zero_reality": [
+    "TB_SCIENCE_GE_58_7",
+    "ANY_FIXED_BAR_PREDICATE_WHOSE_ROUTE_PREREQUISITES_CLOSE_WITHOUT_STRONGER_CERTIFICATE",
+    "MATCHED_SUPERPORTFOLIO_ONLY_IF_STRONGER_SCOPE_CERTIFICATES_FAIL",
+    "FINANCE_TWO_DIRECT_ORACLE_LEAVES_ONLY_IF_STILL_IRREDUCIBLE"
+  ],
+  "scheduling_policy": {
+    "objective": "MINIMIZE_EXPECTED_TERMINAL_CRITICAL_PATH_SECONDS",
+    "probability_rule": "NO_UNCALIBRATED_POINT_PROBABILITIES__P_EQUALS_1_ONLY_FOR_VERIFIED_LOGICAL_IMPLICATION__P_EQUALS_0_FOR_FALSIFIED_ROUTE_UNTIL_REOPEN CONDITION__OTHERWISE UNKNOWN_OR INTERVAL",
+    "parallelism_rule": "RUN_ORTHOGONAL_ZERO_COST_ZERO_REALITY ACTION GROUPS IN PARALLEL__DO NOT DOUBLE COUNT CORRELATED ROUTES",
+    "update_rule": "RECOMPUTE FIXED POINT AND DELETE DOMINATED ACTIONS AFTER EVERY VERIFIED DELTA",
+    "priority_formula": "priority(a)=P(useful_delta|evidence)*terminal_fanout*information_gain*downstream_action_deletion/(critical_path_time+epsilon)"
+  },
+  "current_consequence": "THE CURRENT ZERO_REALITY FRONTIER IS NINE SHARED ACTION GROUPS; TWO CLOSED ATOMS ARE DELETED; NO FRESH REALITY OR ACCEPTANCE PROMOTION IS AUTHORIZED BY THIS CUT",
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_FRESH_REALITY_FROM_THIS CUT",
+    "NO_LIVEBENCH_IF_GE_65_7_WORK",
+    "NO_UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_WORK",
+    "NO_PUBLIC_PRIVATE_SUBSTITUTION_WITHOUT EXACT OR SCOPE SAFE STRONGER PROOF",
+    "NO_RELATIVE_RATING INFERENCE FROM ABSOLUTE BEHAVIOR",
+    "NO_GENERIC SUPPORT TRIAL OR QUOTA OUTREACH",
+    "NO_FULL BENCHMARK WHEN A SOUND SMALLER DECISION CERTIFICATE SETTLES THE PREDICATE",
+    "RECOMPUTE AFTER EVERY VERIFIED DELTA",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM SCHEDULING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
