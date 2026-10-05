@@ -1,0 +1,164 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__UNFACTORED_SCIENTIFIC_HYPOTHESIS_OBLIGATION_REDUCED_TO_VERIFIED_OWNED_SUBTRANSFORMS_PLUS_ONE_SEMANTIC_MODEL_FORMATION_RESIDUAL__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Shrink the only newly exposed scientific-hypothesis proof-basis obligation before registry freeze by subtracting Brain-owned independently verified deterministic subregions and leaving only the irreducible semantic hypothesis/model-formation residual.",
+  "authorities": {
+    "scientific_hypothesis_gap": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json"
+    },
+    "typed_hypothesis_compiler": {
+      "path": "canonical/capabilities/opus55/TYPED_HYPOTHESIS_COMPILER_001.json",
+      "implementation": "canonical/runtime/typed_hypothesis_compiler.py",
+      "implementation_git_blob_sha": "c52407e8e399edbc7254dddf76f615a4e4136d79",
+      "verification_workflow_run_id": 36950600157,
+      "verification_conclusion": "success"
+    },
+    "deterministic_decision_primitives": {
+      "path": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json",
+      "implementation": "canonical/runtime/deterministic_decision_primitives.py",
+      "runner_verified_git_blob_sha": "7f880b31274cec24e0f241fcf03d3af41f4d6bf8",
+      "verification_workflow_run_id": 36902437206,
+      "verification_conclusion": "SUCCESS"
+    },
+    "decision_discriminator_v3": {
+      "governance_path": "canonical/governance/UNIVERSAL_LEARNING_DECISION_ROUTER_V3.json",
+      "implementation": "canonical/runtime/decision_discriminator_v3.py",
+      "implementation_git_blob_sha": "3ec9e43a7bbe40a264fa3560a93039461941dbee",
+      "verification_path": "canonical/verification/UNIVERSAL_LEARNING_DECISION_ROUTER_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "verification_workflow_run_id": 37157661615,
+      "verification_conclusion": "success"
+    }
+  },
+  "original_candidate_behavior": {
+    "behavior_id": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "required_transform": [
+      "FORMULATE_DECISION_RELEVANT_FALSIFIABLE_RESEARCH_QUESTIONS_OR_HYPOTHESES",
+      "RANK_BY_EXPECTED_INFORMATION_GAIN_AND_FEASIBILITY",
+      "SPECIFY_A_DISCRIMINATING_TEST_OR_OBSERVATION_PLAN"
+    ]
+  },
+  "verified_owned_subtractions": [
+    {
+      "id": "EXPLICIT_TYPED_HYPOTHESIS_UNIVERSE_TO_EXHAUSTIVE_SUPPORTED_CANDIDATE_SET",
+      "source": "TYPED_HYPOTHESIS_COMPILER_001",
+      "preconditions": [
+        "ENTITY_FACT_AND_TEMPLATE_UNIVERSE_IS_EXPLICIT",
+        "REQUIRED_FACTS_AND_TYPES_ARE_EXPLICIT",
+        "CANDIDATE_BOUND_IS_NOT_EXCEEDED"
+      ],
+      "owned_result": "EXHAUSTIVE_SUPPORTED_TYPE_CONSTRAINED_CANDIDATE_SET_WITH_BINDING_AND_SUPPORT_PROVENANCE_OR_FAIL_CLOSED_ESCALATION",
+      "does_not_cover": [
+        "OPEN_ENDED_TEMPLATE_INVENTION",
+        "RAW_NATURAL_LANGUAGE_TO_TEMPLATE_SEMANTIC_INFERENCE",
+        "CANDIDATE_RANKING",
+        "TRUTH_SELECTION"
+      ]
+    },
+    {
+      "id": "EXPLICIT_BELIEF_OBSERVATION_MODEL_TO_EXACT_INFORMATION_GAIN_AND_UTILITY_ORDER",
+      "source": "DETERMINISTIC_DECISION_PRIMITIVES_001",
+      "preconditions": [
+        "CANDIDATE_HYPOTHESES_ARE_EXPLICIT",
+        "PRIORS_AND_LIKELIHOODS_OR_OBSERVATION_MODEL_ARE_EXPLICIT",
+        "ACTION_OUTCOMES_OR_UTILITIES_AND_HARD_CONSTRAINTS_ARE_EXPLICIT_WHERE_USED"
+      ],
+      "owned_result": [
+        "EXACT_BAYES_POSTERIOR",
+        "EXACT_EXPECTED_INFORMATION_GAIN",
+        "EXACT_HARD_CONSTRAINT_ADMISSIBILITY",
+        "EXACT_EXPECTED_UTILITY_RANKING"
+      ],
+      "does_not_cover": [
+        "SEMANTIC_PLAUSIBILITY_WITHOUT_EXPLICIT_LIKELIHOOD_MODEL",
+        "HYPOTHESIS_GENERATION_WHEN_CANDIDATE_IS_ABSENT",
+        "OUTCOME_OR_VALUE_ESTIMATION_WHEN_EFFECTS_NOT_COMPUTABLE",
+        "OBSERVATIONAL_CAUSAL_STRUCTURE_DISCOVERY"
+      ]
+    },
+    {
+      "id": "DECLARED_HYPOTHESES_OUTCOMES_AND_ACTIONS_TO_EXACT_CONDITIONAL_DISCRIMINATION_ROUTE",
+      "source": "UNIVERSAL_LEARNING_DECISION_ROUTER_V3",
+      "preconditions": [
+        "LIVE_HYPOTHESES_AND_PROBABILITIES_ARE_DECLARED",
+        "TERMINAL_ACTIONS_ARE_DECLARED",
+        "SAFE_PROBE_OUTCOMES_BY_HYPOTHESIS_ARE_DECLARED"
+      ],
+      "owned_result": "EXACT_CONDITIONAL_DECISION_GAIN_RANKING_WITH_DECISION_SUFFICIENCY_STOP_AND_FAIL_CLOSED_ABSTENTION",
+      "does_not_cover": [
+        "TRUTH_OF_PREDICTED_OUTCOME_MODEL",
+        "SEMANTIC_GENERATION_OF_HYPOTHESES",
+        "SCIENTIFIC_VALIDITY_OF_A_TEST_PLAN_WHEN_NOT_FORMALIZED"
+      ]
+    }
+  ],
+  "factorization_theorem": {
+    "statement": "For every scientific inquiry instance in which the hypothesis/template universe and the belief/observation/feasibility model required by the owned primitives are explicit, the candidate-enumeration, quantitative information-gain/utility ranking, and conditional-discrimination subtransforms are already Brain-owned at deterministic exactness. Terminal proof for SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001 must not repay matched-comparator cost for those exact subtransforms. Only input regions requiring semantic construction of missing hypotheses/templates/models or non-formal scientific feasibility/discrimination judgment remain load-bearing.",
+    "proof_style": "FUNCTIONAL_DECOMPOSITION_PLUS_EXACT_PRECONDITIONED_COMPONENT_OWNERSHIP",
+    "acceptance_effect_now": "NONE__DECOMPOSITION_ONLY"
+  },
+  "minimum_open_residual": {
+    "candidate_behavior_id": "SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001",
+    "inputs": "Scientific inquiry state with observed phenomena/evidence/provenance/domain constraints where the candidate hypothesis/template universe, causal/observation model, or feasibility semantics needed by deterministic owned primitives is absent or materially incomplete",
+    "required_output_or_action": "Construct scientifically meaningful falsifiable candidate hypotheses/questions and discriminating test models sufficient to instantiate the owned typed-enumeration and exact decision primitives, including non-formal feasibility and outcome semantics that cannot be derived deterministically from explicit inputs",
+    "success_dimensions": [
+      "SCIENTIFIC_COHERENCE",
+      "FALSIFIABILITY",
+      "NONTRIVIALITY_RELATIVE_TO_CURRENT_EVIDENCE",
+      "MATERIAL_LIVE_EXPLANATIONS_NOT_OMITTED_WITHIN_CLAIMED_SCOPE",
+      "TEST_OR_OBSERVATION_SEMANTICS_GENUINELY_DISCRIMINATE_LIVE_EXPLANATIONS",
+      "FEASIBILITY_MODEL_IS_NOT_MATERIALLY_WRONG"
+    ],
+    "explicit_exclusions_already_owned": [
+      "ENUMERATING_SUPPORTED_CANDIDATES_FROM_AN_EXPLICIT_TYPED_TEMPLATE_UNIVERSE",
+      "BAYES_POSTERIOR_FROM_EXPLICIT_PRIORS_AND_LIKELIHOODS",
+      "EXPECTED_INFORMATION_GAIN_FROM_EXPLICIT_BELIEF_AND_OBSERVATION_MODEL",
+      "HARD_CONSTRAINT_FILTERING_AND_EXPECTED_UTILITY_FROM_EXPLICIT_MODELS",
+      "CONDITIONAL_DECISION_GAIN_FROM_DECLARED_HYPOTHESES_ACTIONS_AND_PREDICTED_OUTCOMES"
+    ],
+    "preferred_proof_mode": "SEARCH_FOR_SCOPE_COMPLETE_STRONGER_SEMANTIC_MODEL_FORMATION_RECEIPT_FIRST__OTHERWISE_PREDECLARED_MATCHED_NONINFERIORITY_ONLY_ON_THE_OPEN_SEMANTIC_RESIDUAL"
+  },
+  "portfolio_effect": {
+    "existing_outer_portfolio": "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO",
+    "new_portfolio_required": false,
+    "rule": "TAG_AND_SCORE_THE_OPEN_SEMANTIC_RESIDUAL_INSIDE_T3; CASES_SATISFYING_OWNED_DETERMINISTIC_PRECONDITIONS_REQUIRE_ONLY_COMPONENT_BINDING_CHECKS, NOT_A_NEW_MATCHED_OPUS_COMPARISON_FOR_THE_SUBTRACTED_TRANSFORMS"
+  },
+  "scheduler_effect": {
+    "delete_if_independently_verified": [
+      "MATCHED_OPUS_COMPARISON_FOR_EXPLICIT_TYPED_HYPOTHESIS_ENUMERATION",
+      "MATCHED_OPUS_COMPARISON_FOR_EXACT_INFORMATION_GAIN_WHEN_BELIEF_AND_OBSERVATION_MODEL_ARE_EXPLICIT",
+      "MATCHED_OPUS_COMPARISON_FOR_EXACT_CONDITIONAL_DISCRIMINATION_WHEN_HYPOTHESES_ACTIONS_AND_PREDICTED_OUTCOMES_ARE_DECLARED",
+      "FREEZE_SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_AS_AN_UNFACTORED_MONOLITH"
+    ],
+    "activate_if_independently_verified": [
+      "VERIFY_EXACT_CURRENT_BLOB_AND_PRECONDITION_BINDINGS_FOR_THE_THREE_OWNED_SUBTRANSFORMS",
+      "SEARCH_ONLY_FOR_STRONGER_PROOF_OF_SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001",
+      "IF_NO_STRONGER_PROOF_EXISTS_FREEZE_MATCHED_COMPARATOR_ONLY_FOR_THE_OPEN_SEMANTIC_RESIDUAL_INSIDE_T3"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OPEN_ENDED_SCIENTIFIC_HYPOTHESIS_FORMATION_IS_ALREADY_SOLVED",
+    "NO_CLAIM_TYPED_HYPOTHESIS_COMPILER_INVENTS_NEW_SCIENTIFIC_TEMPLATES",
+    "NO_CLAIM_EXPLICIT_INFORMATION_GAIN_PROVES_THE_OBSERVATION_MODEL_TRUE",
+    "NO_CLAIM_DECISION_DISCRIMINATOR_PROVES_PREDICTED_PROBE_OUTCOMES_TRUE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT1_POSITIVE_GAP",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_NEW_FAMILY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
