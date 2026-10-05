@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V2",
   "date": "2026-10-05",
-  "status": "CANDIDATE__CLEAN_LIVEBENCH_PROMOTION_REBOUND__OUTPUT_ONLY_THRESHOLD_PROOF_DAG__18_ROOT2_TOUCHING_PREDICATES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
-  "objective": "Rebind the independently verified output-only threshold proof policy to the exact current 18 Root2-touching predicates after clean proof of LIVEBENCH_IF_GE_65_7, preserving all remaining route semantics byte-for-byte from the prior verified 19-predicate subject.",
+  "status": "CANDIDATE__POST_UNKNOWN_DOMAIN_REBOUND__OUTPUT_ONLY_THRESHOLD_PROOF_DAG__18_ROOT2_TOUCHING_PREDICATES__14_PROVED__24_UNRESOLVED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Preserve the exact 18 Root2-touching route semantics after LiveBench closure while rebinding global acceptance/root metadata to the subsequent independently verified Unknown-Domain atomic closure.",
   "source_bindings": {
     "predicate_registry": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
@@ -10,11 +10,11 @@
     },
     "evidence_ledger": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "25d3408c7ee746f0f853d718ffa1af1ecff14596"
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
     },
     "root_state": {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "1a94fa8f0961edc420a56f6e7c2ca8764be67373"
+      "git_blob_sha": "daccbdcd0b5a0eac527ec8728cc50157edde4b92"
     },
     "clean_livebench_reduction": {
       "path": "canonical/governance/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_ACCEPTANCE_REDUCTION_20261005_V1.json",
@@ -35,6 +35,10 @@
     "prior_verified_19_public_verification": {
       "path": "canonical/verification/ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
       "git_blob_sha": "553602570334f39003708e52d781b8c59f27eb7c"
+    },
+    "unknown_domain_v8_reduction": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "commit": "4f8f8df1ef2ca463953148e361048edeeee3dc98"
     }
   },
   "runtime": {
@@ -44,11 +48,11 @@
   "exact_state": {
     "accepted_families": 5,
     "open_families": 14,
-    "proved_atomic": 13,
-    "unresolved_atomic": 25,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
     "root1_only": 0,
     "root2_only": 15,
-    "root3_only": 7,
+    "root3_only": 6,
     "root2_and_root3": 3,
     "root2_touching": 18
   },
@@ -57,7 +61,8 @@
     "prior_root2_touching": 19,
     "current_root2_touching": 18,
     "set_rule": "CURRENT_18_EQUALS_PRIOR_VERIFIED_19_MINUS_EXACTLY_LIVEBENCH_IF_GE_65_7",
-    "route_mutations_for_remaining_predicates": 0
+    "route_mutations_for_remaining_predicates": 0,
+    "post_unknown_domain_rule": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_WAS_ROOT3_ONLY__ITS_CLOSURE_CHANGES_GLOBAL_COUNTS_AND_ROOT3_COUNT_BUT_NOT_THE_EXACT_18_ROOT2_TOUCHING_SET__ROUTE_MUTATIONS_ZERO"
   },
   "predicates": [
     {
@@ -179,7 +184,7 @@
     "RECOMPUTE_MINIMUM_CUT_AFTER_EVERY_VERIFIED_DELTA",
     "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT_FROM_THIS_COMPILER_OR_MANIFEST",
     "NO_LIVEBENCH_IF_GE_65_7_ROOT2_WORK_AFTER_CLEAN_ATOMIC_PROMOTION",
-    "FAIL_CLOSED_IF_CURRENT_ROOT_PARTITION_DIFFERS_FROM_0_ROOT1_15_ROOT2_ONLY_7_ROOT3_ONLY_3_MIXED_OR_IF_CURRENT_ROOT2_TOUCHING_SET_DIFFERS_FROM_THE_BOUND_18"
+    "FAIL_CLOSED_IF_CURRENT_ROOT_PARTITION_DIFFERS_FROM_0_ROOT1_15_ROOT2_ONLY_6_ROOT3_ONLY_3_MIXED_OR_IF_CURRENT_ROOT2_TOUCHING_SET_DIFFERS_FROM_THE_BOUND_18"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
