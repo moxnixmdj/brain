@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V4_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_14_PLUS_2_PLUS_1_PLUS_1__ALL_INPUTS_CONTENT_ADDRESSED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V4.json",
+    "git_blob_sha": "ddebb1ff75f65ee67d444d6f524f3342eecbb519"
+  },
+  "checks": {
+    "v4_blob": "ddebb1ff75f65ee67d444d6f524f3342eecbb519",
+    "exact_root2_18": true,
+    "info_positive_14": true,
+    "event_only_2": true,
+    "finance_sleep_1": true,
+    "tb_deferred_1": true,
+    "exact_partition": true,
+    "active_groups_6": true,
+    "all_bindings_hashed": true,
+    "zero_accounting": true,
+    "no_authority": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
