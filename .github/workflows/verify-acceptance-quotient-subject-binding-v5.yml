@@ -1,0 +1,23 @@
+name: Verify acceptance quotient subject binding V5
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/ACCEPTANCE_QUOTIENT_SUBJECT_BINDING_REPAIR_20261005_V5.json
+      - canonical/runtime/acceptance_quotient_simulation_v5.py
+      - canonical/tests/test_acceptance_quotient_simulation_v5.py
+      - .github/workflows/verify-acceptance-quotient-subject-binding-v5.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Run V5 subject-binding falsification tests
+        run: python -m unittest -v canonical.tests.test_acceptance_quotient_simulation_v5
