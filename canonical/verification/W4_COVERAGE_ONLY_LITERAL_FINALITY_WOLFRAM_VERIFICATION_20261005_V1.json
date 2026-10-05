@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_W4_COVERAGE_ONLY_LITERAL_FINALITY_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_SYMBOLIC_KERNEL_PASS__COVERAGE_DOES_NOT_IMPLY_DOMINANCE__ZERO_CREDIT",
+  "independent_kernel": "WOLFRAM_LANGUAGE",
+  "checks": [
+    {
+      "expression": "TautologyQ[Implies[coverage, dominance], {coverage, dominance}]",
+      "result": false,
+      "meaning": "COVERAGE_ALONE_DOES_NOT_LOGICALLY_ENTAIL_DOMINANCE."
+    },
+    {
+      "expression": "FindInstance[coverage && ! dominance, {coverage, dominance}, Booleans]",
+      "result": "{{coverage -> True, dominance -> False}}",
+      "meaning": "AN_EXPLICIT_BOOLEAN_COUNTERMODEL_EXISTS."
+    },
+    {
+      "expression": "SubsetQ[{a}, {a,b}]",
+      "result": true,
+      "meaning": "A_STRICT_TARGET_SET_CAN_BE_COVERED_BY_A_LARGER_SUPERDOMAIN."
+    },
+    {
+      "expression": "And[1 >= 0, 0 >= 1]",
+      "result": false,
+      "meaning": "ONE_TARGET_RELEVANT_ELEMENT_CAN_BE_NONINFERIOR_WHILE_ANOTHER_SUPERDOMAIN_ELEMENT_IS_NOT, SO SUPERDOMAIN_COVERAGE_DOES_NOT SUPPLY SUPERDOMAIN_DOMINANCE."
+    }
+  ],
+  "verified_result": {
+    "coverage_implies_dominance": false,
+    "W4_coverage_only_sufficient_for_literal_finality": false,
+    "W4_may_serve_as_W3_domain_premise": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ]
+}
