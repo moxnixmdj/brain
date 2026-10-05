@@ -337,6 +337,14 @@ def verify_controller_state(
             "reason": "CAPSULE_TRACE_LENGTH_MISMATCH",
         }
 
+    runtime_path = root / "canonical" / "runtime" / "astra_runtime.py"
+    if not runtime_path.is_file():
+        return {
+            "status": "FAIL_CLOSED",
+            "reason": "ASTRA_RUNTIME_MISSING",
+        }
+    current_runtime_sha256 = _sha_file(runtime_path)
+
     for cycle, (record, trace_record) in enumerate(zip(records, trace)):
         if not isinstance(record, Mapping) or not isinstance(trace_record, Mapping):
             return {
@@ -348,6 +356,30 @@ def verify_controller_state(
                 "status": "FAIL_CLOSED",
                 "reason": "TRACE_CYCLE_MISMATCH:" + str(cycle),
             }
+        producer_descriptor = record.get("producer_descriptor")
+        if not isinstance(producer_descriptor, Mapping):
+            return {
+                "status": "FAIL_CLOSED",
+                "reason": "PRODUCER_DESCRIPTOR_INVALID:" + str(cycle),
+            }
+        if producer_descriptor.get("runtime_sha256") != current_runtime_sha256:
+            return {
+                "status": "FAIL_CLOSED",
+                "reason": "PRODUCER_RUNTIME_DRIFT:" + str(cycle),
+            }
+        if (
+            producer_descriptor.get("component")
+            != "canonical/runtime/astra_runtime.py"
+            or producer_descriptor.get("controller_mode")
+            != "MODEL_INDEPENDENT_ACTION_PLAN"
+            or producer_descriptor.get("composition_scope")
+            != "DETERMINISTIC_CAPABILITY_GRAPH"
+        ):
+            return {
+                "status": "FAIL_CLOSED",
+                "reason": "PRODUCER_DESCRIPTOR_SCOPE_MISMATCH:" + str(cycle),
+            }
+
         action_descriptor = record.get("action_descriptor")
         if not isinstance(action_descriptor, Mapping):
             return {
