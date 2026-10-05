@@ -1,0 +1,30 @@
+name: Verify creative diagram one atom repair v3
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/CREATIVE_DIAGRAM_ONE_ATOM_ACCEPTANCE_REPAIR_20261005_V3.json
+      - canonical/runtime/verify_creative_diagram_one_atom_acceptance_repair_v3.py
+      - canonical/tests/test_creative_diagram_one_atom_acceptance_repair_v3.py
+      - canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json
+      - canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json
+      - canonical/governance/SYNTHESIS_EXPLICIT_EVALUATOR_ROUTE_TRUTH_REPAIR_ACTIVATION_20261005_V1.json
+      - canonical/governance/SYNTHESIS_HIDDEN_EVALUATOR_ROUTE_TRUTH_REPAIR_ACTIVATION_V1.json
+      - canonical/governance/OPUS55_TARGET_COVERAGE_DOMAIN_FACTORIZATION_20261005_V1.json
+      - canonical/runtime/html_svg_diagram_mechanics_v1.py
+      - canonical/runtime/svg_diagram_render_oracle_v1.py
+      - .github/workflows/verify-creative-diagram-one-atom-repair-v3.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python canonical/runtime/verify_creative_diagram_one_atom_acceptance_repair_v3.py
+      - run: python -m unittest -v canonical.tests.test_creative_diagram_one_atom_acceptance_repair_v3
