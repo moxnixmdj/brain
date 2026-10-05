@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
   "date": "2026-10-05",
-  "status": "ACTIVE_FAIL_CLOSED__UNKNOWN_DOMAIN_V6_PROMOTION_REVOKED_ON_NEW_COUNTEREVIDENCE",
+  "status": "ACTIVE_FAIL_CLOSED__UNKNOWN_DOMAIN_V6_PROMOTION_REVOKED__REPAIR_SCOPE_QUANTIFIER_HOLE_DISCOVERED",
   "real_objective": "Prevent false terminal progress and restore the fastest valid zero-reality route for UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT under the Opus 5.5 capability-ownership terminal objective.",
   "governing_invariants": [
     "CORRECTNESS_FIRST",
@@ -16,7 +16,8 @@
     "A str subclass can override strip or encode to raise while still satisfying isinstance(x,str).",
     "The independent V6 verifier exhausted surrogate code points and 432 nonproduction cases but did not cover adversarial str subclass method overrides.",
     "Therefore the load-bearing universal totality claim and derived atomic promotion are invalid at their declared scope.",
-    "A narrow deterministic repair exists using str.strip(value), str.encode(value,...), and memoryview(bytes_subclass).tobytes(), with adversarial subclass regression."
+    "A narrow deterministic genuine-subclass repair exists using str.strip(value), str.encode(value,...), and bytes.__getitem__(bytes_subclass, slice(None)); however the new actual-type gate rejects some non-str objects accepted by the literal pre-repair isinstance-based path.",
+    "Concrete scope counterexample: an object with __class__ returning str plus working strip()/encode() satisfies isinstance(value,str), passes the pre-repair V5 gate/canonicalization, yet fails the repaired issubclass(type(value),str) gate."
   ],
   "evidence_refs": [
     "canonical/verification/UNKNOWN_DOMAIN_V6_TOTAL_EXACT_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
@@ -27,8 +28,8 @@
     "canonical/tests/test_unknown_domain_direct_v5.py",
     "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py"
   ],
-  "conclusion": "Revoke the V6 atomic predicate promotion now, restore 12 proved / 26 unresolved, repair the exact route without narrowing the domain, then independently reverify before any re-promotion.",
-  "selected_route": "REVOKE_FALSE_CREDIT__PATCH_SUBCLASS_PARTIALITY__ADD_ADVERSARIAL_REGRESSION__REBIND_UNIVERSAL_PROOF__INDEPENDENTLY_REVERIFY__RUN_SEPARATE_ACCEPTANCE_REDUCTION",
+  "conclusion": "Keep V6 atomic credit revoked. Genuine subclass hook bypass is promising, but the current repair mutates the literal pre-repair accepted-input domain. Freeze the authoritative quantifier first, then independently verify an exact-domain-preserving repair before any re-promotion.",
+  "selected_route": "REVOKE_FALSE_CREDIT__REFRESH_CONTENT_BINDINGS__FREEZE_AUTHORITATIVE_INPUT_QUANTIFIER__FORBID_SILENT_NARROWING__INDEPENDENTLY_REVERIFY__RUN_SEPARATE_ACCEPTANCE_REDUCTION",
   "rejected_material_alternatives": [
     {
       "route": "KEEP_PROMOTION_AND_TREAT_SUBCLASSES_AS_OUT_OF_SCOPE",
@@ -45,18 +46,19 @@
   ],
   "uncertainties": [
     "The repaired route has not yet received independent content-bound verification.",
-    "Unknown-Domain family remains open on other predicates even after this atom is eventually restored."
+    "Unknown-Domain family remains open on other predicates even after this atom is eventually restored.",
+    "Whether the authoritative frozen Unknown-Domain contract intentionally excludes non-genuine objects that satisfy isinstance(..., str/bytes) through __class__ spoofing."
   ],
   "assumptions": [
     "Built-in str descriptors operate on the inherited immutable str value of subclasses without invoking overridden instance methods.",
-    "memoryview on bytes subclasses exposes the inherited immutable byte buffer."
+    "bytes.__getitem__(value, slice(None)) on a genuine bytes subclass reads the inherited immutable payload without invoking the subclass instance __getitem__ override; this still requires independent environment-bound verification."
   ],
   "non_goals": [
     "No open-world unknown-domain claim.",
     "No family, capability, ownership, or terminal completion claim.",
     "No fresh terminal or production evidence."
   ],
-  "next_action": "Open a PR from breakthrough/unknown-domain-v6-subclass-revocation-20261005 and require independent checks on the repaired exact blobs before merge/re-promotion.",
+  "next_action": "Freeze the authoritative accepted-input quantifier and create a new outcome-blind precommit bound to the current blobs; only then run an independent verifier. No acceptance credit before both scope and content binding pass.",
   "supersession_conditions": [
     "A stronger independently verified canonical repair lands first.",
     "Any adversarial subclass counterexample survives the repair.",
