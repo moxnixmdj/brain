@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_PUBLIC_ACCESS_REFRESH_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__LIVE_FIRST_PARTY_PUBLIC_SOURCE_REFRESH__SCHEDULING_ONLY__ZERO_CREDIT__NO_ACCOUNT_ASSUMPTIONS",
+  "objective": "Delete stale access blockers and reclassify self-service versus approval-gated routes without consuming benchmark cases or assuming account-specific capacity.",
+  "observations": [
+    {
+      "target": "HLE_TOOLS_GE_67_7",
+      "fact": "HLE_2500_TEST_SPLIT_IS_PUBLICLY_LOADABLE_FROM_CAIS_HLE",
+      "source": "https://huggingface.co/datasets/cais/hle/raw/main/README.md",
+      "effect": "DELETE_HLE_DATASET_ACCOUNT_ACCESS_AS_A_BLOCKER__KEEP_GRADER_COMPARABILITY_AND_BRAIN_SCORE_OPEN"
+    },
+    {
+      "target": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "fact": "OSWORLD_V2_1_TASK_AND_COMPLETE_ASSET_DATASETS_ARE_GATED_SELF_SERVICE_AND_TASK_REQUEST_IS_AUTOMATICALLY_APPROVED",
+      "source": "https://raw.githubusercontent.com/xlang-ai/OSWorld-V2/main/README.md",
+      "effect": "RECLASSIFY_HUGGINGFACE_OSWORLD_GATED_ACCESS_FROM_OWNER_WAIT_TO_SELF_SERVICE_LOGIN_ACCEPT_DOWNLOAD_ACTION__KEEP_EXACT_RELEASE_PROTOCOL_AND_SCORE_OPEN"
+    },
+    {
+      "target": "CODING_TB4_GE_66_4",
+      "fact": "BUILDKITE_NORMAL_FREE_PLAN_IS_SMALL_ONLY_BUT_NEW_SIGNUPS_CAN_USE_NO_CARD_30_DAY_ALL_ACCESS_TRIAL_AND_LINUX_AMD64_8X32_IS_AN_OFFICIAL_8_VCPU_32GB_158GB_SHAPE",
+      "sources": [
+        "https://buildkite.com/pricing/",
+        "https://buildkite.com/docs/agent/buildkite-hosted/linux"
+      ],
+      "effect": "KEEP_BUILDKITE_AS_SELF_SERVICE_TRIAL_PREFLIGHT_ROUTE__DO_NOT_TREAT_NORMAL_FREE_PLAN_AS_LARGE_SHAPE_ROUTE__ACTUAL_ACCOUNT_ACCESS_RUNTIME_DOCKER_AND_HARD_STOP_PREFLIGHT_REMAIN_OPEN"
+    },
+    {
+      "target": "FINANCE_AGENT_V2_GE_58_59",
+      "fact": "VALS_FINANCE_AGENT_V2_PLATFORM_ACCESS_REMAINS_GATED_AND_REQUIRES_APPROVAL",
+      "source": "https://raw.githubusercontent.com/vals-ai/finance-agent-v2/main/README.md",
+      "effect": "KEEP_VALS_PLATFORM_APPROVAL_AND_EXACT_SUITE_ID_AS_EXTERNAL_ACCESS_FACT"
+    },
+    {
+      "target": "CHARTOGRAPHY_TOOLS_GE_89",
+      "fact": "GEMINI_3_5_FLASH_HAS_ZERO_PRICE_FREE_TIER_BUT_PROJECT_SPECIFIC_CALL_CAPACITY_IS_NOT_PROVED_BY_PRICING_ALONE",
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "effect": "PRESERVE_PROJECT_SPECIFIC_QUOTA_OBSERVATION__DO_NOT_INFER_1000_PLUS RETRY CAPACITY_FROM_ZERO_PRICE"
+    }
+  ],
+  "hard_nonclaims": [
+    "NO_ACCOUNT_CREATED_OR_LOGGED_IN",
+    "NO_ACCOUNT_SPECIFIC_QUOTA_OR_RESOURCE_AVAILABILITY_PROVED",
+    "NO_BENCHMARK_CASES_EXPOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY_GRANTED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
