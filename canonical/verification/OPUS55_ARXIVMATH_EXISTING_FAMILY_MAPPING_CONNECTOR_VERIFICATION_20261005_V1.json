@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ARXIVMATH_EXISTING_FAMILY_MAPPING_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__ARXIVMATH_EXISTING_FAMILY_MAPPING__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_ARXIVMATH_EXISTING_FAMILY_MAPPING_V1.json",
+    "git_blob_sha": "5fd5fbae571ae78bdd37b61dd05c3147fc8de753"
+  },
+  "checks": {
+    "schema": true,
+    "primary_family": true,
+    "no_new_family": true,
+    "mapping_only": true,
+    "parity_open": true,
+    "root1_not_reopened": true,
+    "zero_credit": true,
+    "no_authority": true
+  },
+  "deduction": [
+    "ARXIVMATH_IS_A_RESEARCH_MATHEMATICS_CONDITION_ON_EXISTING_REASONING_BEHAVIOR_RATHER_THAN_A_SEPARATE_PRIMITIVE_FAMILY",
+    "OPTIONAL_CODE_SANDBOX_CHANGES_TOOL_AVAILABILITY_NOT_THE_PRIMITIVE_SUCCESS_CONDITION",
+    "META_MAPPING_CAN_CLOSE_WITHOUT_CAPABILITY_PARITY_CREDIT",
+    "ACTUAL_EQUAL_OR_BETTER_ARXIVMATH_PERFORMANCE_REMAINS_OPEN"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
