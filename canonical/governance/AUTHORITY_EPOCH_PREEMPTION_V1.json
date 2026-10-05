@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_AUTHORITY_EPOCH_PREEMPTION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FAIL_CLOSED_STALE_WORK_PREEMPTION__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Make stale scheduled work fail closed when live authority, root state, acceptance evidence, or the active zero-reality cut changes.",
+  "start_authority_epoch_sha256": "62c3abf5c9382fd04fbd1d79f84399832e5a429ce6647187c5a51f625e854183",
+  "start_brain_head": "df65aa24e5ba474221bd7fe795bd326be2491dd9",
+  "epoch_components": {
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "ce04ca62612681d3d3493bf8a664f066e0b61b98",
+    "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_ACTIVATION_V1.json": "c36ba3a9b49f54ebe8a3ebcb435cf3d4798c2398",
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json": "2628f99626ca64f4d57920f732b19021f8cc34c2"
+  },
+  "semantics": [
+    "FREEZE_EPOCH_BEFORE_EXPENSIVE_OR_IRREVERSIBLE_WORK",
+    "RECHECK_EPOCH_BEFORE_EXECUTION_EVIDENCE_CONSUMPTION_OR_MERGE",
+    "ANY_MISMATCH_FAILS_CLOSED_AND_REQUIRES_REPLAN",
+    "HIGHEST_VERSION_ACTIVE_ZERO_REALITY_ACTIVATION_DEFINES_SCHEDULING_COMPONENT"
+  ],
+  "hard_rules": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY",
+    "NO_AUTOMATIC_REBASE_OF_STALE_WORK",
+    "INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_ACTIVATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
