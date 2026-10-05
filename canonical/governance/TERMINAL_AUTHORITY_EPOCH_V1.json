@@ -1,25 +1,25 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_AUTHORITY_EPOCH_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__CURRENT_13_25_FAIL_CLOSED_STALE_WORK_PREEMPTION__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "status": "CANDIDATE__CURRENT_14_24_FAIL_CLOSED_STALE_WORK_PREEMPTION__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
   "objective": "Prevent workers, branches, benchmark runs, and verification jobs from continuing load-bearing work after the terminal authority or critical-path evidence has changed.",
   "epoch_algorithm": {
     "canonical_payload": "JSON_SORT_KEYS_COMPACT_OF_VERSION_AND_ORDERED_SOURCE_BINDINGS",
     "version": 1,
-    "sha256": "abce9e033864ac065be5322ee2c2fb423f0122a4a5319742c4a08a4229fb07ab"
+    "sha256": "ea4992d97b90a350ba2579285d3e766d2418cc4be5a1ca083174a4c96326dd45"
   },
   "source_bindings": [
     {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-      "git_blob_sha": "18a6ee53b05b08af8dcde7fce0fa433e48522d23"
+      "git_blob_sha": "50b1ffb416450faf5473234571dabf2c242088a2"
     },
     {
       "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
-      "git_blob_sha": "1a94fa8f0961edc420a56f6e7c2ca8764be67373"
+      "git_blob_sha": "daccbdcd0b5a0eac527ec8728cc50157edde4b92"
     },
     {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "25d3408c7ee746f0f853d718ffa1af1ecff14596"
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
     },
     {
       "path": "canonical/governance/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_PRECOMMIT_20261005_V1.json",
@@ -36,11 +36,12 @@
   ],
   "worker_contract": {
     "required_field": "authority_epoch_id",
-    "required_value": "abce9e033864ac065be5322ee2c2fb423f0122a4a5319742c4a08a4229fb07ab",
+    "required_value": "ea4992d97b90a350ba2579285d3e766d2418cc4be5a1ca083174a4c96326dd45",
     "on_mismatch": "ABORT_BEFORE_COMPUTE_CASE_EXPOSURE_OR_LOAD_BEARING_COMMIT__RELOAD_CURRENT_AUTHORITY__RECOMPUTE_PRIORITY",
     "on_source_blob_change": "CURRENT_EPOCH_INVALID__NEW_EPOCH_REQUIRED",
     "historical_receipts": "PRESERVED_AS_EVIDENCE_BUT_MAY_NOT_SCHEDULE_NEW_WORK_WITHOUT_CURRENT_EPOCH",
-    "current_acceptance": "13_PROVED__25_UNRESOLVED__5_OF_19_FAMILIES"
+    "current_acceptance": "14_PROVED__24_UNRESOLVED__5_OF_19_FAMILIES",
+    "current_root_partition": "0_ROOT1__15_ROOT2_ONLY__6_ROOT3_ONLY__3_MIXED__18_ROOT2_TOUCHING__9_ROOT3_TOUCHING"
   },
   "observed_motivation": [
     "LIVEBENCH_UNION25_WORK_CONTINUED_AFTER_VERIFIED_ACTIVE15_SCOPE_DELETED_TEN_IDS_FROM_THE_EXACT_FROZEN_PREDICATE_CRITICAL_PATH",
