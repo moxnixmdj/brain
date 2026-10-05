@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_STRUCTURAL_SAFEGUARD_PRECOMMIT_V1",
+  "date": "2026-10-05",
+  "status": "POST_DEVELOPMENT_POLICY_FROZEN_BEFORE_NEW_HOLDOUT__ZERO_CREDIT",
+  "objective": "Test whether a structurally protected sub-100MB UniChart representation can preserve chart QA after coarse W4/W3 and source-SSE-only knapsack failed on the original 20-case development set.",
+  "development_history": {
+    "prior_public_set": "H100_UNICHART_CHARTQA_PRESERVATION_PREEXPOSURE_V1",
+    "role_now": "DEVELOPMENT_ONLY__NO_FUTURE_PROOF_CREDIT",
+    "observed_failure_summary": [
+      "COARSE_W4_W3_FAILED_17_OF_20_EXACT_AGREEMENT_GATE_BY_FOUR_MISMATCH_FAILFAST",
+      "SOURCE_SSE_KNAPSACK_FAILED_17_OF_20_EXACT_AGREEMENT_GATE_BY_SIX_CASE_FAILFAST"
+    ]
+  },
+  "transform_policy": {
+    "group_size": 256,
+    "norm_and_bias": "FP16",
+    "tied_token_embedding_and_lm_head": "FORCED_W4",
+    "positional_embedding": "FORCED_W4",
+    "relative_position_bias_tables": "FORCED_W4",
+    "remaining_f32": "W3_BASE_WITH_W4_PREFIX_RANKED_BY_SOURCE_ONLY_SSE3_MINUS_SSE4",
+    "i64": "LOSSLESS",
+    "complete_bundle_budget_bytes": 100000000,
+    "benchmark_outputs_used_in_precision_assignment": false
+  },
+  "untouched_holdout_precommit": {
+    "repository": "vis-nlp/ChartQA",
+    "split": "validation",
+    "human_annotation_file": "ChartQA Dataset/val/val_human.json",
+    "human_git_blob_sha": "983dacfcb6aabc8598031c07eeba7747f9884c4a",
+    "human_selection": "ANNOTATION_INDICES_10_THROUGH_19_IN_FROZEN_FILE_ORDER",
+    "augmented_annotation_file": "ChartQA Dataset/val/val_augmented.json",
+    "augmented_git_blob_sha": "131068b504407d9cdd8413fe5c574772bb241613",
+    "augmented_selection": "ANNOTATION_INDICES_10_THROUGH_19_IN_FROZEN_FILE_ORDER",
+    "total_cases": 20,
+    "labels_and_images_not_used_to_choose_precision_policy": true,
+    "no_case_deletion_after_outcomes": true
+  },
+  "pass_gate": {
+    "minimum_fp32_relaxed_accuracy": 0.5,
+    "packed_noninferiority_margin_absolute": 0.05,
+    "packed_vs_fp32_answer_agreement_minimum": 0.85,
+    "complete_bundle_bytes_lte": 100000000,
+    "conjunctive": true
+  },
+  "hard_nonclaims": [
+    "THIS_POLICY_IS_INFORMED_BY_FAILURES_ON_THE_PRIOR_20_CASE_DEVELOPMENT_SET",
+    "PRIOR_20_CASE_RESULTS_CANNOT_BE_USED_AS_HOLDOUT_PROOF",
+    "NO_NEW_HOLDOUT_OUTPUT_HAS_BEEN_OBSERVED_AT_FREEZE_TIME",
+    "NO_CHARTOGRAPHY_THRESHOLD_CREDIT",
+    "NO_FULL_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "h100_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}
