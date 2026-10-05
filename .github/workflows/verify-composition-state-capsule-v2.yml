@@ -1,0 +1,51 @@
+name: Verify composition state capsule V2
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/COMPOSITION_STATE_CAPSULE_CONTENT_BINDING_TRUTH_REPAIR_20261005_V2.json"
+      - "canonical/runtime/composition_state_capsule_v2.py"
+      - "canonical/tests/test_composition_state_capsule_v2.py"
+      - ".github/workflows/verify-composition-state-capsule-v2.yml"
+  push:
+    branches: [main]
+    paths:
+      - "canonical/governance/COMPOSITION_STATE_CAPSULE_CONTENT_BINDING_TRUTH_REPAIR_20261005_V2.json"
+      - "canonical/runtime/composition_state_capsule_v2.py"
+      - "canonical/tests/test_composition_state_capsule_v2.py"
+      - ".github/workflows/verify-composition-state-capsule-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify exact frozen subject blobs
+        shell: python
+        run: |
+          import hashlib
+          from pathlib import Path
+
+          expected = {
+              "canonical/governance/COMPOSITION_STATE_CAPSULE_CONTENT_BINDING_TRUTH_REPAIR_20261005_V2.json": "0e2c321c8caa9c86b399a9f86c9c098d5f599b72",
+              "canonical/runtime/composition_state_capsule_v2.py": "93470a2e079e875cbf8e13c80dd934ecacd32469",
+              "canonical/tests/test_composition_state_capsule_v2.py": "948eda7b6120a19128bbf429569d1735a1155f98",
+          }
+          for path, want in expected.items():
+              data = Path(path).read_bytes()
+              got = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+              if got != want:
+                  raise SystemExit(f"BLOB_DRIFT {path} {got} != {want}")
+          print("EXACT_BLOBS_PASS")
+      - name: Validate governance JSON
+        run: python -m json.tool canonical/governance/COMPOSITION_STATE_CAPSULE_CONTENT_BINDING_TRUTH_REPAIR_20261005_V2.json >/dev/null
+      - name: Run V2 adversarial tests
+        run: python -m unittest -v canonical.tests.test_composition_state_capsule_v2
