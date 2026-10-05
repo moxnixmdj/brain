@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_IDENTICAL_RESIDUAL_CONTRACT_LEAF_REUSE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TWO_VERIFIED_SINGLETON_FAMILY_CLOSURES_DISCHARGE_SEVEN_IDENTICAL_TARGET_LEAF_INCIDENCES__ZERO_ATOM_FAMILY_CREDIT",
+  "objective": "Exploit semantic identity in the existing behavioral-contract registry: when a fully and independently closed source family is exactly one residual behavior_id, reuse that full-scope proof for the identical behavior_id leaf wherever it appears, without inferring whole-target-family acceptance.",
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "scope_completion_bridge": {
+      "path": "canonical/governance/PUBLIC_BAR_SCOPE_COMPLETION_RESIDUAL_CONTRACT_BRIDGE_20261005_V1.json",
+      "git_blob_sha": "d4a7251f650dda101c88cef6c90051333881cf41"
+    },
+    "tool_discovery_witness": {
+      "path": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "git_blob_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7"
+    },
+    "tool_discovery_independent_verification": {
+      "path": "canonical/verification/TERMINAL_CEILING_WITNESS_LIFTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "a1c702c79d2b29bfc9c4d5a238f9c260bc204770"
+    },
+    "tool_discovery_family_closure": {
+      "path": "canonical/verification/TOOL_DISCOVERY_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "521d4c665fcb5bf1147ce0fe65ea62c0a1429bdf"
+    },
+    "delegation_family_closure": {
+      "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+    }
+  },
+  "theorem": {
+    "name": "IDENTICAL_BEHAVIOR_ID_FULL_SCOPE_LEAF_REUSE",
+    "rule": "Let B be one content-addressed behavior_id in the same behavioral-contract registry blob. If source family S maps exactly to [B] and S has an independently verified full-protocol closure whose scope proof covers the whole residual behavior represented by B, then B is discharged as the same residual leaf in every target family T whose mapping contains that exact B. This is identity-level leaf reuse, not a semantic implication from S to the rest of T.",
+    "required_gates": [
+      "SAME_BEHAVIOR_ID_AND_SAME_REGISTRY_BLOB",
+      "SOURCE_FAMILY_MAPPING_EXACTLY_SINGLETON_B",
+      "SOURCE_FULL_PROTOCOL_CLOSURE_INDEPENDENTLY_VERIFIED",
+      "SOURCE_SCOPE_RELATION_FULL_OR_PROVEN_STRONGER_FOR_B",
+      "TARGET_MAPPING_CONTAINS_EXACT_B",
+      "NO_TARGET_WHOLE_FAMILY_OR_ATOMIC_PREDICATE_CREDIT_FROM_LEAF_REUSE"
+    ]
+  },
+  "applications": [
+    {
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "source_family_mapping_exact_singleton": true,
+      "source_proof": {
+        "verified": true,
+        "independent": true,
+        "scope_relation": "PROVEN_STRONGER",
+        "closes_entire_protocol": true,
+        "theoretical_ceiling": true,
+        "terminal_population": "180_OF_180"
+      },
+      "target_leaf_discharges": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "target_leaf_discharge_count": 5
+    },
+    {
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "source_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "source_family_mapping_exact_singleton": true,
+      "source_proof": {
+        "verified": true,
+        "independent": true,
+        "closure_mode": "ABSOLUTE_DOMINANCE",
+        "witness_reason": "THEORETICAL_CEILING_DOMINANCE",
+        "scope_completeness_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF"
+      },
+      "target_leaf_discharges": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "target_leaf_discharge_count": 2
+    }
+  ],
+  "reduction": {
+    "reusable_proved_behavior_ids": 2,
+    "newly_discharged_target_leaf_incidences": 7,
+    "residual_contract_types_in_registry_map": 12,
+    "residual_contract_types_still_requiring_nonreused_full_scope_proof": 10,
+    "public_bar_five_family_bridge_effect": {
+      "prior_family_contract_incidences": 16,
+      "prior_unique_contract_types": 10,
+      "discharged_incidence": "BUSINESS_WORKFLOW_AUTOMATION::TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "remaining_family_contract_incidences_requiring_other_proof": 15,
+      "remaining_unique_contract_types_requiring_other_proof": 9
+    }
+  },
+  "relation_to_prior_direct_reuse_audits": "This theorem does not close any matched whole-family target from an unrelated witness. Prior direct-reuse quarantines remain intact. The only reused proposition is the exact same residual behavior_id B already used by multiple families in the same registry.",
+  "scheduler_effect": {
+    "delete": [
+      "NEW_EVIDENCE_GENERATION_FOR_TOOL_ROUTE_DISCOVERY_AND_SELECTION_001_AS_A_RESIDUAL_LEAF_IN_THE_FIVE_TARGET_FAMILIES",
+      "NEW_EVIDENCE_GENERATION_FOR_TASK_TO_DELEGATION_GRAPH_001_AS_A_RESIDUAL_LEAF_IN_THE_TWO_TARGET_FAMILIES"
+    ],
+    "preserve": [
+      "ALL_OTHER_RESIDUAL_CONTRACT_OBLIGATIONS",
+      "ALL_PUBLIC_FIXED_BARS_AND_MATCHED_FAMILY_PREDICATES",
+      "ALL_PRIOR_NO_DIRECT_WHOLE_TARGET_REUSE_QUARANTINES",
+      "ZERO_FRESH_REALITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_WHOLE_TARGET_FAMILY_ACCEPTANCE",
+    "NO_ATOMIC_PREDICATE_CREDIT",
+    "NO_PARTIAL_ATOM_CREDIT",
+    "NO_NEW_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_SOURCE_WITNESS_IMPLIES_UNRELATED_TARGET_BEHAVIOR",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
