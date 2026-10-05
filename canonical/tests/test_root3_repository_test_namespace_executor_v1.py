@@ -183,10 +183,14 @@ class RepositoryTestNamespaceExecutorTests(unittest.TestCase):
                 },
                 repo,
             )
-            self.assertEqual(out["totals"]["files"], 1)
-            self.assertEqual(out["totals"]["failed"], 0)
-            self.assertEqual(out["totals"]["errors"], 0)
-            self.assertTrue((repo / "audit.json").is_file())
+            self.assertEqual(out["file_count"], 1)
+            self.assertEqual(out["failed_count"], 0)
+            self.assertEqual(out["error_count"], 0)
+            self.assertTrue(out["output_verified"])
+            audit = json.loads((repo / "audit.json").read_text(encoding="utf-8"))
+            self.assertEqual(audit["totals"]["files"], 1)
+            self.assertEqual(audit["totals"]["failed"], 0)
+            self.assertEqual(audit["totals"]["errors"], 0)
 
     def test_wrong_effect_class_and_popen_are_denied(self):
         with tempfile.TemporaryDirectory() as td:
