@@ -1,0 +1,31 @@
+name: Verify composition artifact-creation scope bridge independently
+
+on:
+  pull_request:
+    branches:
+      - breakthrough/composition-artifact-creation-scope-bridge-20261005-sol
+    paths:
+      - canonical/governance/COMPOSITION_ARTIFACT_CREATION_SCOPE_COMPLETE_BRIDGE_V1.json
+      - canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json
+      - canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json
+      - canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json
+      - canonical/tests/test_composition_artifact_creation_scope_bridge_independent_v1.py
+      - .github/workflows/verify-composition-artifact-creation-scope-bridge-independent-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Independently recompute exact identity and scope chain
+        run: python canonical/tests/test_composition_artifact_creation_scope_bridge_independent_v1.py
