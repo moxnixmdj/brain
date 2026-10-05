@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_DECLARED_ARTIFACT_TYPED_PARENT_FINALIZATION_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "EXACT_SOURCE_BLOB_LOCAL_ADVERSARIAL_PASS__REAL_PANDOC_STDOUT_PROXY_TRANSPORT_PASS__BOUND_DEPENDENCY_EXACT_VERSION_REPLAY_STILL_OPEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "branch": "root3/typed-artifact-parent-finalizer-20261005",
+  "target_effect_class": "DECLARED_ARTIFACT_PRODUCTION",
+  "exact_current_site": {
+    "path": "canonical/runtime/bound_capabilities/pandoc_weasyprint.py",
+    "prior_effect_class_registry_site_count": 1,
+    "prior_direct_child_durable_output_shape": "PANDOC_RECEIVED_DECLARED_REPOSITORY_PDF_PATH",
+    "candidate_shape": "PANDOC_RECEIVES_EPHEMERAL_DOT_PDF_SYMLINK_TO_PROC_SELF_FD_1__PDF_BYTES_CAPTURED_ON_STDOUT__TYPED_PARENT_FINALIZER_IS_ONLY_DECLARED_DURABLE_ARTIFACT_COMMIT"
+  },
+  "exact_subject": {
+    "finalizer": {
+      "path": "canonical/runtime/root3_typed_artifact_finalizer_v1.py",
+      "git_blob_sha": "ba5f8de4b3fc4991dc1c5d00e1e56f5614fb4bdd"
+    },
+    "adapter": {
+      "path": "canonical/runtime/bound_capabilities/pandoc_weasyprint.py",
+      "git_blob_sha": "e42ecd20d6180d7a822e196045097305247bb8c4"
+    },
+    "capability_registry": {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+    }
+  },
+  "typed_finalizer_properties": [
+    "DECLARED_PDF_ARTIFACT_ONLY",
+    "PRODUCER_ID_BOUND_TO_document.convert.markdown_pdf.pandoc_weasyprint",
+    "INPUT_SHA256_BOUND",
+    "FROZEN_TOOLCHAIN_SOURCE_RECORD_BINDING_SHA256",
+    "OUTPUT_PATH_REPOSITORY_LOCAL_AND_PDF_SUFFIX_REQUIRED",
+    "CONTROL_PLANE_PATHS_PROTECTED",
+    "PAYLOAD_SHA256_AND_LENGTH_BOUND",
+    "PDF_MAGIC_AND_TRAILING_EOF_REQUIRED",
+    "EXPECTED_PRESTATE_SHA256_OR_ABSENT_BOUND",
+    "PLAN_SHA256_CONTENT_ADDRESSED",
+    "DIRFD_NOFOLLOW_PARENT_TRAVERSAL",
+    "TARGET_NOFOLLOW",
+    "EXCLUSIVE_TARGET_LOCK",
+    "SAME_DIRECTORY_ATOMIC_REPLACE",
+    "POSTSTATE_BYTE_AND_SHA256_REREAD"
+  ],
+  "stdout_proxy_transport": {
+    "reason": "PANDOC_INFERS_PDF_PRODUCTION_FROM_DOT_PDF_OUTPUT_FILENAME__DIRECT_MINUS_O_MINUS_DEFAULTS_TO_HTML_WHEN_OUTPUT_FORMAT_IS_NOT_OTHERWISE_INFERRED",
+    "mechanism": "EPHEMERAL_OUTPUT_DOT_PDF_SYMLINK_TO_/proc/self/fd/1",
+    "proxy_postcondition": "SYMLINK_TARGET_RECHECKED_AFTER_CHILD_EXIT",
+    "child_receives_declared_durable_output_path": false,
+    "child_pdf_bytes_channel": "CAPTURED_STDOUT",
+    "parent_commit": "TYPED_FINALIZER_ONLY"
+  },
+  "local_exact_blob_suite": {
+    "tests_run": 16,
+    "failures": 0,
+    "errors": 0,
+    "verified_cases": [
+      "MISSING_PARENT_CREATION_AND_ATOMIC_COMMIT",
+      "PROTECTED_PATH_AND_TRAVERSAL_DENIAL",
+      "INVALID_PDF_MAGIC_OR_EOF_DENIAL",
+      "PAYLOAD_AND_PLAN_TAMPER_DENIAL",
+      "STALE_PRESTATE_DENIAL",
+      "EXACT_PRESTATE_REPLACEMENT",
+      "TARGET_SYMLINK_DENIAL",
+      "PARENT_SYMLINK_DENIAL",
+      "CONCURRENT_LOCK_DENIAL",
+      "PRESTATE_OBSERVATION_IS_NONMUTATING",
+      "ADAPTER_CHILD_ARGV_EXCLUDES_DECLARED_DURABLE_OUTPUT_PATH",
+      "STDOUT_PROXY_MUTATION_DENIAL",
+      "PANDOC_PROCESS_FAILURE_DENIAL",
+      "TOOLCHAIN_SOURCE_RECORD_DRIFT_DENIAL",
+      "OBSERVE_TO_COMMIT_RACE_DENIAL",
+      "REAL_PANDOC_WEASYPRINT_PDF_TRANSPORT_AND_TYPED_FINALIZATION"
+    ]
+  },
+  "real_transport_check": {
+    "environment": "OPENAI_LOCAL_ISOLATED_EXECUTION_CONTAINER",
+    "observed_pandoc_version": "3.1.11.1",
+    "observed_weasyprint_version": "68.0",
+    "result": "PASS__REAL_PDF_BYTES_BEGIN_PERCENT_PDF_AND_END_WITH_EOF__SHA256_PRESERVED_AFTER_TYPED_FINALIZATION",
+    "exact_bound_dependency_match": false,
+    "interpretation": "TRANSPORT_AND_FINALIZATION_CORROBORATION_ONLY__NOT_EXACT_FROZEN_APT_DEPENDENCY_REPLAY"
+  },
+  "falsified_route": {
+    "route": "pandoc <input> -o - --pdf-engine=weasyprint",
+    "observed_result": "HTML_NOT_PDF",
+    "status": "REJECTED",
+    "repair": "DOT_PDF_EPHEMERAL_SYMLINK_TO_CHILD_STDOUT_FD1"
+  },
+  "root3_delta_if_merged": [
+    "REMOVE_DIRECT_DECLARED_DURABLE_OUTPUT_PATH_FROM_THE_ONLY_CURRENT_DECLARED_ARTIFACT_PRODUCTION_SUBPROCESS_SITE",
+    "IMPLEMENT_THE_TYPED_PARENT_FINALIZER_REQUIRED_BY_ROOT3_SEVEN_CLASS_ONE_SUBSTRATE_POLICY",
+    "REDUCE_DECLARED_ARTIFACT_PRODUCTION_DURABLE_COMMIT_PROOF_TO_PARENT_FINALIZER_SOUNDNESS_PLUS_CHILD_CONFINEMENT"
+  ],
+  "remaining": [
+    "EXACT_FROZEN_PANDOC_AND_WEASYPRINT_DEPENDENCY_REPLAY_ON_ADMISSIBLE_ZERO_COST_CARRIER",
+    "SHARED_ZERO_AMBIENT_CHILD_CONFINEMENT_AND_CARRIER_ESCAPE_PROOF",
+    "GLOBAL_SUBPROCESS_MEDIATOR_PLUS_FINAL_AUTHORIZER_PRODUCTION_INSTALL",
+    "CONCRETE_SEMANTIC_RECEIPT_REGISTRY",
+    "FINAL_C1_C2_C3_NO_BYPASS_PROOF",
+    "INDEPENDENT_ACCEPTANCE_PROMOTION_REDUCER"
+  ],
+  "hard_nonclaims": [
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_CLAIM_THE_CHILD_HAS_ZERO_NONARTIFACT_EFFECT_POWER_OUTSIDE_THE_SEPARATE_CONFINEMENT_ROUTE",
+    "NO_CLAIM_LOCAL_REAL_PANDOC_VERSION_EQUALS_THE_FROZEN_BOUND_DEPENDENCY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
