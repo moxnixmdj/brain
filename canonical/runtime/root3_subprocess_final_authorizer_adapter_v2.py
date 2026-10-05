@@ -85,7 +85,7 @@ def verify_mediator_request(value: Mapping[str, Any]) -> dict[str, Any]:
         raise AdapterError("CALLSITE_API_MISMATCH")
     if effect_class not in CLASSES:
         raise AdapterError("CALLSITE_EFFECT_CLASS_UNKNOWN")
-    if int(callsite.get("registry_site_count", -1)) != 29:
+    if int(callsite.get("registry_site_count", -1)) != 22:
         raise AdapterError("CALLSITE_REGISTRY_CARDINALITY_INVALID")
     if callsite.get("runtime_join") != "EXACT_PATH_LINE_API":
         raise AdapterError("CALLSITE_JOIN_KIND_INVALID")
