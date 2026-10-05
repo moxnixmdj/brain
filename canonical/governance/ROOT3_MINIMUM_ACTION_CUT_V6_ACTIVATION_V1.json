@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_MINIMUM_ACTION_CUT_V6_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__V6_EXACT_9_ROOT3_SCHEDULING_FRONTIER__SEPARATE_CONNECTOR_RECOMPUTATION_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V6.json",
+    "git_blob_sha": "1f0a57cee47a7c58aae2732802cdde1571977f52"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT3_MINIMUM_ACTION_CUT_V6_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "e9f985d98c4ae2f0d6bfb6a6a25237493199d8bc"
+  },
+  "effects": [
+    "SUPERSEDE_ROOT3_V5_AS_CURRENT_ROOT3_SCHEDULING_FRONTIER",
+    "DELETE_RECOMPUTE_ROOT3_9_AS_AN_OPEN_ACTION_FOR_UNCHANGED_COMPILER_INPUT_EPOCH",
+    "SCHEDULE_NEW_SCOPE_CERTIFICATE_EVENT_AND_UPSTREAM_SCOPE_RECEIPT_EVENT_ONLY",
+    "KEEP_ROOT3_FRESH_REALITY_EVENT_DORMANT_UNTIL_SEPARATE_EXPLICIT_AUTHORITY",
+    "PRESERVE_EXACT_SEVEN_SHARED_MATCHED_TARGETS_PLUS_FINANCE_DIRECT_ORACLE_PLUS_COMPOSITION_SCOPE_DEPENDENCY"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "next": "WAIT_ONLY_FOR_NEW_LOAD_BEARING_SCOPE_CERTIFICATE_OR_UPSTREAM_SCOPE_COMPLETE_RECEIPT__NO_GENERIC_ROOT3_RECOMPUTE__NO_FRESH_REALITY"
+}

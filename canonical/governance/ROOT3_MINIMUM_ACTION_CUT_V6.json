@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_MINIMUM_ACTION_CUT_V6",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_CURRENT_14_24_COMPILER_REBIND__9_ROOT3_TOUCHING__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Exact-current Root3 rebind after terminal-frontier compiler activation and CURRENT_TERMINAL_AUTHORITY advancement; preserve only the nine live Root3-touching predicates and the minimum three event classes that can change them.",
+  "source_bindings": {
+    "terminal_frontier_compiler_activation": {
+      "path": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V1_ACTIVATION_V1.json",
+      "git_blob_sha": "c7974959ee4ae21f398d3b1a431ba86d5b504e18"
+    },
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860"
+    },
+    "acceptance_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "matched_superportfolio_v2": {
+      "path": "canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V2.json",
+      "git_blob_sha": "e886f262aa4b4946b290d636d336bf857afa946c"
+    },
+    "predecessor_v5": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V5.json",
+      "git_blob_sha": "8397c1341b48947727c070f37a184580ca32c844"
+    },
+    "predecessor_v5_verification": {
+      "path": "canonical/verification/ROOT3_MINIMUM_ACTION_CUT_V5_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "97be006819ca29f1f1298c5185d3eea5604baa7f"
+    }
+  },
+  "exact_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "root1_positive_gap_count": 0,
+    "root2_only_count": 15,
+    "root3_only_count": 6,
+    "root2_and_root3_count": 3,
+    "root2_touching_count": 18,
+    "root3_touching_count": 9
+  },
+  "live_root3_predicates": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "VISION_DENSE_NONCHART_SCOPE"
+  ],
+  "shared_matched_scope_targets": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "VISION_DENSE_NONCHART_SCOPE"
+  ],
+  "exact_decomposition": {
+    "shared_matched_scope_target_count": 7,
+    "finance_direct_oracle_predicate_count": 1,
+    "composition_scope_dependency_predicate_count": 1,
+    "arithmetic_identity": "9 = 7 + 1 + 1",
+    "finance_direct_oracle_predicate": "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "finance_direct_oracle_residual": "TWO_FROZEN_FINANCE_DIRECT_ORACLE_LEAVES__OPERATIVE_SOURCE_ALREADY_ADMITTED",
+    "composition_scope_dependency": "COMPOSITION_COMPONENT_SCOPED_PROOFS__4_OF_12_SCOPED_PROVED__8_OPEN__EVENT_DRIVEN_FROM_UPSTREAM_SCOPE_COMPLETE_RECEIPTS"
+  },
+  "minimum_event_classes": [
+    {
+      "id": "NEW_SCOPE_CERTIFICATE_EVENT",
+      "effect": "Apply a new independently verified lossless/exhaustive/universal scope certificate to exact named predicate(s); recompute the compiler frontier immediately."
+    },
+    {
+      "id": "UPSTREAM_SCOPE_RECEIPT_EVENT",
+      "effect": "Recompute the eight open composition component interfaces from newly accepted scope-complete upstream receipts; no direct composition reality."
+    },
+    {
+      "id": "ROOT3_FRESH_REALITY_EVENT",
+      "effect": "Only with separate explicit authority and exact comparator admissibility, execute one shared seven-target matched superportfolio wave plus the two frozen finance direct-oracle leaves in parallel."
+    }
+  ],
+  "current_consequence": "ROOT3_RECOMPUTATION_IS_COMPLETE_AT_CURRENT_14_24_EPOCH__ZERO_CURRENT_ROOT3_FRESH_REALITY_AUTHORITY__SCHEDULE_ONLY_NEW_LOAD_BEARING_SCOPE_CERTIFICATES_OR_UPSTREAM_SCOPE_RECEIPTS_UNTIL_SEPARATE_EXPLICIT_AUTHORITY",
+  "hard_rules": [
+    "NO_GENERIC_RECOMPUTE_ROOT3_9_WITH_UNCHANGED_COMPILER_INPUT_EPOCH",
+    "NO_RESCHEDULING_UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "NO_DIRECT_COMPOSITION_REALITY",
+    "NO_FINANCE_SOURCE_REINTERNALIZATION__OPERATIVE_SOURCE_ALREADY_ADMITTED",
+    "NO_MATCHED_CASE_GENERATION_BEFORE_EXACT_COMPARATOR_ADMISSIBILITY_AND_APPLICABLE_ZERO_REALITY_FIXED_POINT",
+    "NO_DIRECT_ORACLE_EXECUTION_BEFORE_EXPLICIT_FRESH_REALITY_AUTHORIZATION",
+    "SEVEN_SHARED_MATCHED_SCOPE_TARGETS_REMAIN_EXPLICIT_UNLESS_A_NAMED_PREDICATE_IS_PROVED_OR_SCOPE_COLLAPSE_IS_INDEPENDENTLY_VERIFIED",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING_OR_COMPRESSION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "supersedes": {
+    "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V5.json",
+    "git_blob_sha": "8397c1341b48947727c070f37a184580ca32c844",
+    "reason": "V5_SHAPE_REMAINS_CORRECT_BUT_CURRENT_TERMINAL_AUTHORITY_BLOB_ADVANCED__V6_REBINDS_EXACT_SAME_NINE_TO_CURRENT_COMPILER_EPOCH"
+  }
+}
