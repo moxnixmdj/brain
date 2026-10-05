@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT3_ARBITRARY_COMMAND_EFFECT_CLASS_FIREWALL_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__DELETE_ARBITRARY_COMMAND_CLASS_FROM_CREDITED_RUNTIME__ZERO_CREDIT__LOCAL_VERIFICATION_REQUIRED",
+  "status": "CANDIDATE__DELETE_ARBITRARY_COMMAND_CLASS_FROM_CREDITED_RUNTIME__LOCAL_BEHAVIOR_PASS__ZERO_CREDIT__INDEPENDENT_VERIFICATION_OPEN",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective": "Reduce the seven Root3 subprocess semantic proof classes to six live proof classes by fail-closed exclusion of the two generic arbitrary-command escape hatches before canonical grant lookup.",
   "authority_inputs": {
@@ -79,5 +79,33 @@
   },
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
-}\n
+  "fresh_reality_authority": false,
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/root3_subprocess_effect_class_firewall_v1.py",
+      "git_blob_sha": "73d3e4fd98ecfa6e7c1ae356cfc85850894c18fb"
+    },
+    "tests": {
+      "path": "canonical/tests/test_root3_subprocess_effect_class_firewall_v1.py",
+      "git_blob_sha": "681d2f0ba0220a5c98f1ee9c783513be7c0b7df8"
+    }
+  },
+  "verification_boundary": {
+    "local_behavioral_validation": [
+      "PURE_EFFECT_SITE_RESOLUTION_TESTS_PASS",
+      "ARBITRARY_CLASS_DENIES_BEFORE_DOWNSTREAM_LOOKUP",
+      "KNOWN_NONARBITRARY_CLASS_DELEGATES",
+      "UNKNOWN_UNSUPPORTED_AND_AMBIGUOUS_SITES_FAIL_CLOSED",
+      "LIVE_STACK_EXACT_LINE_RESOLUTION_PASS_FOR_SYNTHETIC_REPO_PATHS"
+    ],
+    "exact_branch_blob_ids_bound": true,
+    "independent_execution": false,
+    "activation_verified": false
+  },
+  "required_next_actions": [
+    "INDEPENDENTLY_EXECUTE_EXACT_RUNTIME_AND_TEST_BLOBS_ON_A_PROVED_ZERO_COST_CARRIER",
+    "IF_PASS_INSTALL_FIREWALL_AROUND_CANONICAL_FINAL_AUTHORIZER_BEFORE_GLOBAL_SUBPROCESS_MEDIATOR",
+    "RECOMPUTE_ROOT3_EFFECT_CLASS_PROOF_SURFACE_FROM_SEVEN_TO_SIX_LIVE_CLASSES",
+    "KEEP_OTHER_SIX_CLASSES_FAIL_CLOSED_UNTIL_SEMANTIC_PROOFS_CLOSE"
+  ]
+}
