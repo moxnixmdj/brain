@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_BUILDKITE_SHARED_TB4_CHARTOGRAPHY_ZERO_CASE_PREFLIGHT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SHARED_ZERO_CASE_CARRIER_COALESCENCE__TB4_PLUS_CHARTOGRAPHY__ZERO_CREDIT__NO_FRESH_REALITY",
+  "objective": "Use one authenticated Buildkite All Access Trial organization and one large Linux zero-case job to bind load-bearing carrier/runtime facts for both CODING_TB4_GE_66_4 and CHARTOGRAPHY_TOOLS_GE_89, deleting duplicated account/runtime preflight work if the joint preflight passes.",
+  "canonical_inputs": {
+    "buildkite_owner_confirmation": {
+      "path": "canonical/governance/BUILDKITE_TRIAL_OWNER_CONFIRMATION_20261005_V1.json",
+      "git_blob_sha": "931806f3051f4476babf7e6af97dd04d1d400242"
+    },
+    "chartography_route_activation": {
+      "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ACTIVATION_V1.json",
+      "git_blob_sha": "d5b46fc2f784a206cda9bb7c6f1ee951300eccc0"
+    },
+    "chartography_exact_artifact_manifest": {
+      "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_EXACT_ARTIFACT_MANIFEST_20261005_V1.json",
+      "git_blob_sha": "fc60bd458243e9ce721ca29fb986f067c0b70417"
+    },
+    "zero_reality_cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json",
+      "git_blob_sha": "2628f99626ca64f4d57920f732b19021f8cc34c2"
+    }
+  },
+  "current_public_provider_facts": {
+    "buildkite_linux_large": {
+      "shape": "LINUX_AMD64_8X32",
+      "vcpu": 8,
+      "memory_gb": 32,
+      "disk_gb": 158,
+      "source": "https://buildkite.com/docs/agent/buildkite-hosted/linux"
+    },
+    "all_access_trial": {
+      "no_credit_card_required": true,
+      "linux_vcpu_concurrency": 24,
+      "linux_vcpu_minutes_included": 4000,
+      "source": "https://buildkite.com/docs/platform/limits",
+      "pricing_source": "https://www.buildkite.com/pricing/"
+    }
+  },
+  "shared_preflight": {
+    "phase_0": "CREATE_OR_ACCESS_ONE_ALL_ACCESS_TRIAL_ORGANIZATION__NO_CARD__ZERO_INCREMENTAL_SPEND",
+    "phase_1_tb4": [
+      "SELECT_LINUX_AMD64_8X32_OR_STRONGER",
+      "CAPTURE_NPROC",
+      "CAPTURE_USABLE_MEMORY",
+      "CAPTURE_FREE_DISK",
+      "VERIFY_DOCKER_RUN",
+      "VERIFY_DOCKER_COMPOSE",
+      "VERIFY_NO_PAID_OVERAGE_OR_AUTOMATIC_BILLING_PATH"
+    ],
+    "phase_2_chartography_same_job": [
+      "VERIFY_EXACT_PINNED_QWEN3_VL4B_PACKAGE_CAN_BE_MATERIALIZED_WITHIN_DISK_ENVELOPE_WITHOUT_READING_CHARTOGRAPHY_TERMINAL_CASES",
+      "VERIFY_PROCESSOR_AND_MODEL_LOAD_ON_CPU_OR_OTHER_INCLUDED_ZERO_COST_RUNTIME",
+      "RUN_ONLY_NONTERMINAL_SYNTHETIC_IMAGE_TEXT_SMOKE_INPUT",
+      "CAPTURE_PEAK_RAM_RUNTIME_SUCCESS_OR_FAIL",
+      "NO_QUANTIZATION_OR_TRANSFORMED_VARIANT_SUBSTITUTION_UNLESS SEPARATELY TREATED AS A NEW EXECUTION SUBJECT"
+    ]
+  },
+  "logical_effect": {
+    "if_joint_preflight_passes": [
+      "TB4_BUILD_KITE_CARRIER_RUNTIME_PREREQUISITE_CLOSED_TO_SCORE_ROUTE",
+      "CHARTOGRAPHY_EXACT_EXECUTION_SUBJECT_FIT_AND_RESOURCE_PREFLIGHT_CLOSED",
+      "ONE_ACCOUNT_TRANSACTION_REPLACES_TWO_SEPARATE_RUNTIME_PREFLIGHTS"
+    ],
+    "if_tb4_pass_chartography_fail": [
+      "TB4_CARRIER_ROUTE_ADVANCES",
+      "CHARTOGRAPHY_FAILURE_BECOMES_EXACT_RESOURCE_OR_RUNTIME_GAP__NO FALSE CAPABILITY FAILURE"
+    ],
+    "if_trial_shape_unavailable": [
+      "BUILDKITE_ROUTE_FAILS_CLOSED_FOR_CURRENT_ACCOUNT__OMC_OR_OTHER VERIFIED ZERO_COST CARRIER RACE REMAINS"
+    ]
+  },
+  "static_nonclaims": [
+    "32_GB_RAM_GREATER_THAN_8_875_631_616_WEIGHT_BYTES_DOES_NOT_PROVE_RUNTIME_PEAK_MEMORY_FIT",
+    "PUBLIC_MODEL_ROUTE_EXISTENCE_DOES_NOT_PROVE_CHARTOGRAPHY_GE_89",
+    "A_SYNTHETIC_SMOKE_TEST_IS_NOT A TERMINAL BENCHMARK CASE",
+    "NO_BENCHMARK_SCORE OR ACCEPTANCE CREDIT IS PRODUCED BY THIS PREFLIGHT"
+  ],
+  "scheduler_delta": {
+    "coalesce": [
+      "TB4_ZERO_COST_CARRIER_RUNTIME_PREFLIGHT",
+      "CHARTOGRAPHY_QWEN3_VL4B_ZERO_COST_RESOURCE_AND_LOAD_PREFLIGHT"
+    ],
+    "preserve": [
+      "CHARTOGRAPHY_PROJECT_SPECIFIC_GEMINI_3_5_FLASH_JUDGE_CAPACITY_RECEIPT",
+      "CHARTOGRAPHY_NONTERMINAL_SCOPE_RELEVANT_QUALIFICATION",
+      "CHARTOGRAPHY_THRESHOLD_CERTIFICATE_GE_89",
+      "TB4_THRESHOLD_CERTIFICATE_GE_66_4"
+    ],
+    "delete_if_pass": [
+      "DUPLICATE_SECOND_ACCOUNT_OR_CARRIER_PREFLIGHT_FOR_CHARTOGRAPHY_EXECUTION_FIT",
+      "BUILDKITE_DOCUMENTARY_SUPPORT_WAIT"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
