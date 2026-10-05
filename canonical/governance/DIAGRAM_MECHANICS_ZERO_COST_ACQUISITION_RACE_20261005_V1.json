@@ -1,0 +1,152 @@
+{
+  "schema": "PROJECT_BRAIN_DIAGRAM_MECHANICS_ZERO_COST_ACQUISITION_RACE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXISTING_OPEN_DETERMINISTIC_MECHANISMS_FOUND__MERMAID_PLUS_RESVG_PRIMARY_RACE__ZERO_CREDIT",
+  "objective": "Eliminate the deterministic HTML/SVG diagram mechanics residual identified by CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V2 without inventing a new capability or using an opaque provider.",
+  "authority": {
+    "acquisition_law": {
+      "path": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
+      "git_blob_sha": "601036beff236e7a889cd95202db3fcd3acfabfe"
+    },
+    "arbitrage_strategy": {
+      "path": "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
+      "git_blob_sha": "c417a09de3bd1ce20dbc96a0e8ac0ebdb31f5879"
+    },
+    "creative_diagram_repair": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V2_20261005.json",
+      "git_blob_sha": "02ee9918fc38f3bdee96f847d04e7fd1337b9e46"
+    }
+  },
+  "acquisition_rule": "ALREADY_OWNED_THEN_DELETE_DEMAND_THEN_DETERMINISTIC_SOFTWARE_SUBSTITUTE_BEFORE_LEARNED_OR_WHITE_BOX_HARVEST",
+  "candidate_mechanisms": [
+    {
+      "id": "MERMAID_12",
+      "upstream": "https://github.com/mermaid-js/mermaid",
+      "version_observed": "12.0.0",
+      "license": "MIT",
+      "role": "STRUCTURED_DIAGRAM_DSL_TO_RENDERABLE_DIAGRAM",
+      "public_scope": "20+ diagram types including flowchart, sequence, class, state, ER, Gantt, pie, git graph, mindmap, timeline, Sankey and more.",
+      "output_relation": "Mermaid diagrams can be rendered to SVG through the official toolchain.",
+      "classification": "EXISTING_DETERMINISTIC_SOFTWARE_SUBSTITUTE",
+      "credit": 0
+    },
+    {
+      "id": "MERMAID_CLI_12_0_0",
+      "upstream": "https://github.com/mermaid-js/mermaid-cli",
+      "version_observed": "12.0.0",
+      "release_observed": "2026-09-24",
+      "license": "MIT",
+      "role": "MERMAID_FILE_TO_SVG_PNG_PDF_RENDERING",
+      "runtime_dependencies": [
+        "Node.js >=22.13.0",
+        "Puppeteer >=25",
+        "Chromium_or_compatible_browser"
+      ],
+      "strength": "BROAD_DIAGRAM_SURFACE_AND_DIRECT_SVG_OUTPUT",
+      "weakness": "HEAVIER_RUNTIME_DEPENDENCY_FOOTPRINT_THAN_THE_MECHANICAL_VERIFIER",
+      "classification": "PRIMARY_BROAD_GENERATOR_CANDIDATE",
+      "credit": 0
+    },
+    {
+      "id": "RESVG_0_48_1",
+      "upstream": "https://github.com/linebender/resvg",
+      "version_observed": "0.48.1",
+      "release_observed": "2026-08-02",
+      "license": "MIT_OR_APACHE_2_0",
+      "role": "INDEPENDENT_STATIC_SVG_PARSE_AND_RENDER_ORACLE",
+      "public_properties": [
+        "STATIC_SVG_RENDERER",
+        "AROUND_1600_PUBLIC_SVG_TO_PNG_REGRESSION_TESTS",
+        "CLI_LESS_THAN_5_MB_REPORTED",
+        "NO_EXTERNAL_RUNTIME_DEPENDENCIES_REPORTED_FOR_CLI",
+        "REPRODUCIBLE_PIXEL_OUTPUT_ACROSS_SUPPORTED_PLATFORMS_REPORTED"
+      ],
+      "limitations": [
+        "NO_ANIMATIONS",
+        "NO_SCRIPTING_OR_DYNAMIC_SVG"
+      ],
+      "classification": "PRIMARY_INDEPENDENT_MECHANICAL_VERIFIER_CANDIDATE",
+      "credit": 0
+    },
+    {
+      "id": "GRAPHVIZ_DOT",
+      "upstream": "https://graphviz.org/",
+      "role": "LEAN_DIRECTED_GRAPH_AND_FLOW_LAYOUT_TO_SVG",
+      "public_properties": [
+        "DOT_LANGUAGE_WITH_NODES_EDGES_SUBGRAPHS_CLUSTERS",
+        "DOT_LAYOUT_FOR_HIERARCHICAL_DIRECTED_GRAPHS",
+        "DIRECT_SVG_AND_INLINE_SVG_OUTPUT"
+      ],
+      "strength": "LEANER_SPECIALIZED_ROUTE_FOR_GRAPH_FLOW_DIAGRAMS",
+      "weakness": "NARROWER_THAN_MERMAID_FOR_THE_FULL_DIAGRAM_TYPE_SURFACE",
+      "classification": "SPECIALIZED_FALLBACK_OR_SCOPE_SPECIFIC_WINNER",
+      "credit": 0
+    }
+  ],
+  "race_decision": {
+    "primary_candidate": "MERMAID_12_PLUS_MERMAID_CLI_12_0_0_PLUS_RESVG_0_48_1",
+    "why": [
+      "MERMAID_COVERS_A_BROAD_DIAGRAM_TYPE_SURFACE_WITH_A_TEXTUAL_VERSIONABLE_IR",
+      "MERMAID_CLI_PRODUCES_SVG_DIRECTLY",
+      "RESVG_GIVES_AN_INDEPENDENT_STATIC_SVG_PARSE_RENDER_PATH_WITH_A_SMALL_PORTABLE_RUNTIME",
+      "THE_GENERATOR_AND_VERIFIER_ARE_DIFFERENT_CODEBASES_AND_RENDER_PATHS",
+      "ALL_IDENTIFIED_COMPONENTS_ARE_ZERO_INCREMENTAL_COST_OPEN_SOFTWARE"
+    ],
+    "specialized_fast_path": "USE_GRAPHVIZ_DOT_PLUS_RESVG_WHEN_THE_DECLARED_TASK_SCOPE_IS_ONLY_DIRECTED_GRAPH_FLOW_OR_CLUSTER_LAYOUT",
+    "no_whole_browser_claim": "CHROMIUM_IS_A_DISCLOSED_RENDER_DEPENDENCY_FOR_THE_PRIMARY_GENERATOR_ROUTE, NOT_A_HIDDEN_TARGET_CAPABILITY_PROVIDER"
+  },
+  "brain_owned_configuration_candidate": {
+    "input_ir": "TYPED_DIAGRAM_SPEC_WITH_NODES_EDGES_GROUPS_LABELS_RELATIONSHIPS_LAYOUT_INTENT_AND_PRESENTATION_CONSTRAINTS",
+    "compiler_route": [
+      "VALIDATE_TYPED_DIAGRAM_SPEC",
+      "COMPILE_TO_MERMAID_DSL_OR_SCOPE_SPECIFIC_DOT",
+      "RENDER_TO_SVG",
+      "PARSE_AND_INDEPENDENTLY_RENDER_SVG_WITH_RESVG",
+      "CHECK_REQUIRED_NODE_EDGE_GROUP_LABEL_RELATIONS_AGAINST_TYPED_SPEC",
+      "CHECK_NO_BROKEN_REFERENCES_AND_VALID_STATIC_SVG",
+      "CHECK_VISUAL_BOUNDS_OVERLAP_CLIPPING_AND_TEXT_VISIBILITY_WITH_FROZEN_MECHANICAL_RULES",
+      "EMIT_SVG_AND_RECEIPT"
+    ],
+    "mechanical_ceiling_acceptance": [
+      "100_PERCENT_WELL_FORMED_STATIC_SVG_ON_FROZEN_SUPPORTED_SCOPE",
+      "100_PERCENT_REQUIRED_TYPED_RELATIONS_PRESERVED",
+      "100_PERCENT_RESVG_RENDER_SUCCESS",
+      "ZERO_BROKEN_REFERENCES",
+      "ZERO_CLIPPED_REQUIRED_ELEMENTS_UNDER_FROZEN_VIEWPORT_RULE",
+      "DETERMINISTIC_REPEAT_RENDER_HASH_OR_PIXEL_EQUIVALENCE_WHERE_SUPPORTED"
+    ],
+    "explicit_nonmechanical_boundary": "CONTENT_SELECTION_LAYOUT_TASTE_AND_HIGH_LEVEL_PRESENTATION_JUDGMENT_REMAIN_WITH_EXISTING_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_AND_RELEVANT_SYNTHESIS_CONTRACTS; THIS_MECHANICAL_ROUTE_RECEIVES_NO_CREDIT_FOR_THOSE."
+  },
+  "next_zero_reality_actions": [
+    "PIN_EXACT_UPSTREAM_COMMITS_OR_RELEASE_ARTIFACT_HASHES_AND_LICENSES",
+    "SEARCH_CURRENT_BRAIN_RUNTIME_FOR_EXISTING_NODE_CHROMIUM_OR_BROWSER_DEPENDENCIES_BEFORE_ADDING_DUPLICATES",
+    "BUILD_A_SMALL_NONTERMINAL_MECHANICAL_CONFORMANCE_CORPUS_COVERING_EACH_CLAIMED_DIAGRAM_TYPE",
+    "MUTATION_TEST_REQUIRED_NODE_EDGE_LABEL_GROUP_AND_CLIPPING_CHECKS",
+    "RUN_GENERATOR_AND_INDEPENDENT_RESVG_VERIFIER_ON_THE_CONFORMANCE_CORPUS",
+    "ONLY_AFTER_PASS_PACKAGE_THE_CONFIGURATION_AS_A_DURABLE_BRAIN_CAPABILITY_MECHANISM",
+    "DO_NOT_SPEND_OPUS_OR_UNTOUCHED_TERMINAL_CASES_TO_VALIDATE_MECHANICS"
+  ],
+  "hard_nonclaims": [
+    "NO_DIAGRAM_QUALITY_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_MERMAID_OR_GRAPHVIZ_SELECTS_CORRECT_CONTENT",
+    "NO_CLAIM_MECHANICAL_VALIDITY_IMPLIES_PROFESSIONAL_PRESENTATION_QUALITY",
+    "NO_CLAIM_DYNAMIC_INTERACTIVE_VISUALS_ARE_CLOSED_BY_RESVG",
+    "NO_NEW_LEARNED_DIAGRAM_PRIMITIVE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_CASE_CONSUMPTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
