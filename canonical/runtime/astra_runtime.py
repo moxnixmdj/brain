@@ -129,16 +129,68 @@ def _resolve_bash_executable():
             return str(candidate)
     raise Blocker("BASH_EXECUTABLE_UNAVAILABLE")
 
+_SHELL_PRIOR_RESULT_FIELD_ENV_SUFFIX = {
+    "result_json": "RESULT_JSON",
+    "body_excerpt": "BODY",
+    "stdout": "STDOUT",
+}
+
+def _shell_prior_result_env(step, prior_results=None):
+    """Project only explicitly declared prior-result fields into shell env.
+
+    Cross-step data is deny-by-default. Each shell step must declare
+    prior_result_bindings as [{"step_index": N, "fields": [...]}].
+    The mission file is already content-addressed by the runtime, so this
+    declaration becomes part of the frozen execution contract.
+    """
+    bindings=step.get("prior_result_bindings",[])
+    if bindings is None:
+        bindings=[]
+    if not isinstance(bindings,list):
+        raise Blocker("SHELL_PRIOR_RESULT_BINDINGS_INVALID")
+    prior=list(prior_results or [])
+    env={}
+    seen=set()
+    for binding in bindings:
+        if not isinstance(binding,dict):
+            raise Blocker("SHELL_PRIOR_RESULT_BINDING_INVALID")
+        if set(binding) != {"step_index","fields"}:
+            raise Blocker("SHELL_PRIOR_RESULT_BINDING_KEYS_INVALID")
+        index=binding.get("step_index")
+        fields=binding.get("fields")
+        if not isinstance(index,int) or isinstance(index,bool) or index<0:
+            raise Blocker("SHELL_PRIOR_RESULT_STEP_INDEX_INVALID")
+        if index>=len(prior):
+            raise Blocker("SHELL_PRIOR_RESULT_STEP_INDEX_UNAVAILABLE:"+str(index))
+        if not isinstance(fields,list) or not fields:
+            raise Blocker("SHELL_PRIOR_RESULT_FIELDS_INVALID:"+str(index))
+        if len(fields)!=len(set(fields)):
+            raise Blocker("SHELL_PRIOR_RESULT_FIELDS_DUPLICATE:"+str(index))
+        if index in seen:
+            raise Blocker("SHELL_PRIOR_RESULT_STEP_DUPLICATE:"+str(index))
+        seen.add(index)
+        result=prior[index]
+        if not isinstance(result,dict):
+            raise Blocker("SHELL_PRIOR_RESULT_NOT_OBJECT:"+str(index))
+        prefix=f"ASTRA_STEP_{index}_"
+        for field in fields:
+            if field not in _SHELL_PRIOR_RESULT_FIELD_ENV_SUFFIX:
+                raise Blocker("SHELL_PRIOR_RESULT_FIELD_FORBIDDEN:"+str(field))
+            if field=="result_json":
+                value=json.dumps(result,sort_keys=True)
+            else:
+                if field not in result:
+                    raise Blocker("SHELL_PRIOR_RESULT_FIELD_MISSING:"+str(index)+":"+field)
+                value=result[field]
+                if not isinstance(value,str):
+                    raise Blocker("SHELL_PRIOR_RESULT_FIELD_NOT_STRING:"+str(index)+":"+field)
+            env[prefix+_SHELL_PRIOR_RESULT_FIELD_ENV_SUFFIX[field]]=value
+    return env
+
 def run_shell(step, prior_results=None):
     cmd=step["command"]
     env=os.environ.copy()
-    for i, result in enumerate(prior_results or []):
-        prefix=f"ASTRA_STEP_{i}_"
-        env[prefix+"RESULT_JSON"]=json.dumps(result, sort_keys=True)
-        if "body_excerpt" in result:
-            env[prefix+"BODY"]=result["body_excerpt"]
-        if "stdout" in result:
-            env[prefix+"STDOUT"]=result["stdout"]
+    env.update(_shell_prior_result_env(step,prior_results))
     t=time.monotonic()
     p=subprocess.run([_resolve_bash_executable(),"-lc",cmd],cwd=ROOT,text=True,capture_output=True,env=env)
     return {
