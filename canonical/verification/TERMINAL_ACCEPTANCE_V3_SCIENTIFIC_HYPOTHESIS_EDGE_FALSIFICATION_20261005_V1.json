@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACCEPTANCE_V3_SCIENTIFIC_HYPOTHESIS_EDGE_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FAIL__V3_SCIENTIFIC_HYPOTHESIS_EDGE_NOT_TARGET_JUSTIFIED__V3_NOT_ADMISSIBLE_AS_MINIMUM_STRUCTURAL_REPAIR_UNTIL_EDGE_IS_CONDITIONED_OR_TARGET_REQUIREMENT_PROVED__ZERO_CREDIT",
+  "objective": "Independently fail-close the scientific-hypothesis/question-formation edge in TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V3 without disturbing its other action groups.",
+  "subject": {
+    "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V3.json",
+    "git_blob_sha": "09503a3485a101b45f29c17d6af4f8c488351aad"
+  },
+  "authorities": {
+    "target_scope_quarantine": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_TARGET_SCOPE_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "de091bdc3c1e3bb4ec793afa44cf2b2caf51bae7"
+    },
+    "public_task_union_audit": {
+      "path": "canonical/governance/PUBLIC_BAR_TASK_UNION_SCOPE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2295a03fe9090e6842c6bd850b7bca67d1f71131"
+    },
+    "first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    },
+    "proposed_hypothesis_gap": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "f0c6e15e6af698a80895eedf2c39bb874b4697b8"
+    }
+  },
+  "failed_edge": {
+    "action_group": "E_SCIENTIFIC_RESEARCH_UNCOVERED_SCOPE_PARTITION",
+    "unconditional_v3_must_cover_cells": [
+      "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION",
+      "DISCRIMINATING_TEST_OR_OBSERVATION_PLAN"
+    ],
+    "failure_class": "TARGET_REQUIREMENT_NOT_ESTABLISHED",
+    "evidence": [
+      "Terminal-Bench-Science owner scope explicitly distinguishes its execution workflows from defining research questions and forming hypotheses, so the public fixed-bar surface cannot justify these cells.",
+      "The current first-party surface audit observes broad biology R&D and automated AI R&D capability surfaces but does not observe or prove the exact hypothesis/question-formation transform.",
+      "The proposed scientific-hypothesis gap artifact itself states that its first-party relation supports materiality of scientific inquiry/research capability but does not prove this exact leaf."
+    ]
+  },
+  "logical_result": {
+    "brain_registry_noncoverage_established": true,
+    "target_scope_requirement_established": false,
+    "mandatory_acceptance_obligation_established": false,
+    "v3_false_positive_acceptance_risk": false,
+    "v3_overconstraint_risk": true,
+    "v3_minimum_cut_claim_falsified_for_this_edge": true,
+    "unaffected_v3_groups_may_be_reused": true
+  },
+  "repair": {
+    "minimal_change": "Replace unconditional hypothesis/question-formation and discriminating-test cells with a conditional target-scope gate: require them only if first-party or scope-safe stronger evidence proves that the useful Opus 5.5 target envelope contains that transform.",
+    "scheduler_order": [
+      "RESOLVE_TARGET_SCOPE_REQUIREMENT",
+      "IF_NEGATIVE_OR_UNPROVED__DO_NOT_SCHEDULE_HYPOTHESIS_FORMATION_PARITY_WORK",
+      "IF_POSITIVE__DECOMPOSE_AGAINST_EXISTING_BRAIN_OWNED_COMPONENTS_AND_EMBED_ONLY_THE_IRREDUCIBLE_RESIDUAL_IN_T3"
+    ],
+    "no_new_portfolio_required": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OPUS_5_5_LACKS_SCIENTIFIC_HYPOTHESIS_FORMATION",
+    "NO_CLAIM_OPUS_5_5_HAS_SCIENTIFIC_HYPOTHESIS_FORMATION_AS_A_REQUIRED_USEFUL_TARGET_BEHAVIOR",
+    "NO_CLAIM_OTHER_V3_ACTION_GROUPS_ARE_INVALID",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": false
+}
