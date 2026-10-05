@@ -261,18 +261,15 @@ def run_shell(step, prior_results=None):
                 env[prefix+"STDOUT"]=result["stdout"]
     t=time.monotonic()
     p=subprocess.run([_resolve_bash_executable(),"-lc",cmd],cwd=ROOT,text=True,capture_output=True,env=env)
-    return {
+    out={
       "adapter":"shell","command":cmd,"returncode":p.returncode,
       "stdout":p.stdout[-12000:],"stderr":p.stderr[-12000:],
       "duration_s":round(time.monotonic()-t,3),
-      "cross_step_context_mode":(
-          DECLARED_CROSS_STEP_CONTEXT_MODE
-          if isinstance(prior_results,dict)
-          and prior_results.get("mode")==DECLARED_CROSS_STEP_CONTEXT_MODE
-          else "LEGACY_ALL_PRIOR_RESULTS"
-      ),
-      "cross_step_bindings":cross_step_bindings,
     }
+    if isinstance(prior_results,dict) and prior_results.get("mode")==DECLARED_CROSS_STEP_CONTEXT_MODE:
+        out["cross_step_context_mode"]=DECLARED_CROSS_STEP_CONTEXT_MODE
+        out["cross_step_bindings"]=cross_step_bindings
+    return out
 
 def _external_tool_bridge(kind,payload):
     _authorize_external_information(kind,payload)
