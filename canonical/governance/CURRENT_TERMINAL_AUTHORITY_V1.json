@@ -2013,6 +2013,24 @@
       "rule": "FREEZE_HARNESS_IDENTITY_BEFORE_BRAIN_RESULT__PUBLIC_CURRENT_ROUTE_USES_63_3__58_7_ONLY_FOR_PROVED_IDENTICAL_ANTHROPIC_RELEASE_SETUP__ELSE_MATCHED_SAME_HARNESS_OR_FAIL_CLOSED",
       "predicate_proved": false,
       "acceptance_credit_delta": 0
+    },
+    "mechanism_entailment_reduction_overlay": {
+      "status": "ACTIVE__FIVE_PRIOR_STANDALONE_SPECIFIC_MECHANISM_PROGRAMS_TO_ONE_MANDATORY_PLUS_FOUR_QUARANTINED_OPTIONAL_ROUTES__ZERO_CREDIT",
+      "activation_path": "canonical/governance/FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_ACTIVATION_20261005_V1.json",
+      "activation_commit": "a4cfdd0c1d75e3407f43e8f6f587ba4acb4c5395",
+      "verification_path": "canonical/verification/FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "mandatory_specific_mechanism_programs": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+      ],
+      "quarantined_optional_evidence_routes": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ],
+      "rule": "NO_SPECIFIC_MECHANISM_IS_MANDATORY_WITHOUT_VERIFIED_TARGET_ENTAILMENT__PRESERVE_ALL_OBSERVABLE_TARGETS_AND_THRESHOLDS",
+      "acceptance_credit_delta": 0,
+      "fresh_reality_authority": false
     }
   },
   "promotion_accounting_invariant": {
