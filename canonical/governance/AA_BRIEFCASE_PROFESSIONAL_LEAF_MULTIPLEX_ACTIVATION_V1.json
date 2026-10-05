@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__SCHEDULING_ONLY__ONE_FUTURE_AA_BRIEFCASE_RECEIPT_FOR_TWO_ATOMIC_PREDICATES_PLUS_EXACT_PROFESSIONAL_QUALITY_LEAF__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_BINDING_V1.json",
+    "git_blob_sha": "65512b512ebe44eea63fb849293e07be87e0b7fa"
+  },
+  "verification": {
+    "path": "canonical/verification/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "f1bb206fc419dd8c3017b15026085b57ed78b3c5"
+  },
+  "effects": [
+    "DELETE_SECOND_AA_BRIEFCASE_SCORE_EXECUTION_FOR_THE_SECOND_CONSUMER_FAMILY",
+    "DELETE_SEPARATE_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_PERFORMANCE_PORTFOLIO",
+    "BIND_ONE_FUTURE_COMPARABLE_AA_BRIEFCASE_V1_1_GE_1822_RECEIPT_TO_PROWORK_AA_BRIEFCASE_GE_1822",
+    "BIND_THE_SAME_FUTURE_RECEIPT_TO_ARTIFACT_AA_BRIEFCASE_GE_1822",
+    "CONDITIONALLY_DISCHARGE_THE_EXACT_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_LEAF_ONLY_WHEN_THAT_RECEIPT_PASSES",
+    "PRESERVE_SEVEN_LEAF_ACCOUNTING_ID_SET_UNTIL_SCORE_PROVES__REDUCE_INDEPENDENT_NONPUBLIC_LEAF_EVIDENCE_PROGRAMS_TO_SIX"
+  ],
+  "current_state": {
+    "aa_briefcase_score_route_ready": false,
+    "score_credit": 0,
+    "family_credit": 0,
+    "separate_duplicate_execution_scheduled": false
+  },
+  "hard_rules": [
+    "ONE_RECEIPT_MUST_BE_EXACTLY_COMPARABLE_TO_THE_FROZEN_1822_PROTOCOL",
+    "NO_1808_LIVE_REFERENCE_SUBSTITUTION_WITHOUT_EXPLICIT_REBASE",
+    "NO_LEAF_PERFORMANCE_CREDIT_BEFORE_SCORE_PASS",
+    "NO_TRANSFER_OUTSIDE_THE_INDEPENDENTLY_PROVED_AA_BRIEFCASE_EXERCISED_SCOPE",
+    "NO_EXECUTION_AUTHORITY_FROM_THIS_ACTIVATION",
+    "NO_PROMOTION_AUTHORITY_FROM_THIS_ACTIVATION",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
